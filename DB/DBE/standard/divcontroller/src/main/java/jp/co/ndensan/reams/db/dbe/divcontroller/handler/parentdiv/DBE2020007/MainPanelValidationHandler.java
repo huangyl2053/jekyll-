@@ -8,7 +8,7 @@ package jp.co.ndensan.reams.db.dbe.divcontroller.handler.parentdiv.DBE2020007;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbe.business.core.chosachikuchichoson.ChosaChikuChichosonBusiness;
 import jp.co.ndensan.reams.db.dbe.business.core.chosachikuchichoson.UzT0007CodeBusiness;
-import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2020007.MainPanelDiv;
+import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2020007.NinteiChosaSchedule7MainDiv;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2020007.dgChosaChikuChichosonList_Row;
 import jp.co.ndensan.reams.db.dbe.service.core.chosachikuchichoson.ChosaChikuFinder;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
@@ -29,14 +29,14 @@ public class MainPanelValidationHandler {
     private static final RString 状態_追加 = new RString("追加");
     private static final RString 状態_修正 = new RString("修正");
     private static final RString 状態_削除 = new RString("削除");
-    private final MainPanelDiv div;
+    private final NinteiChosaSchedule7MainDiv div;
 
     /**
      * コンストラクタです。
      *
      * @param div 画面情報
      */
-    public MainPanelValidationHandler(MainPanelDiv div) {
+    public MainPanelValidationHandler(NinteiChosaSchedule7MainDiv div) {
         this.div = div;
     }
 

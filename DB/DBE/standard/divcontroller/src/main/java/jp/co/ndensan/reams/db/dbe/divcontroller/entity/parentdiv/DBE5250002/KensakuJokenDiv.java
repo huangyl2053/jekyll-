@@ -25,12 +25,10 @@ public class KensakuJokenDiv extends Panel {
      */
     @JsonProperty("txtNijihanteDateRange")
     private TextBoxDateRange txtNijihanteDateRange;
-    @JsonProperty("txtHokenshaNo")
-    private TextBoxCode txtHokenshaNo;
-    @JsonProperty("txtHokenshaName")
-    private TextBox txtHokenshaName;
     @JsonProperty("radDataShutsuryokuUmu")
     private RadioButton radDataShutsuryokuUmu;
+    @JsonProperty("txtHyojiDataLimit")
+    private TextBox txtHyojiDataLimit;
     @JsonProperty("btnHyoji")
     private Button btnHyoji;
     @JsonProperty("ccdShinseishaFinder")
@@ -61,42 +59,6 @@ public class KensakuJokenDiv extends Panel {
     }
 
     /*
-     * gettxtHokenshaNo
-     * @return txtHokenshaNo
-     */
-    @JsonProperty("txtHokenshaNo")
-    public TextBoxCode getTxtHokenshaNo() {
-        return txtHokenshaNo;
-    }
-
-    /*
-     * settxtHokenshaNo
-     * @param txtHokenshaNo txtHokenshaNo
-     */
-    @JsonProperty("txtHokenshaNo")
-    public void setTxtHokenshaNo(TextBoxCode txtHokenshaNo) {
-        this.txtHokenshaNo = txtHokenshaNo;
-    }
-
-    /*
-     * gettxtHokenshaName
-     * @return txtHokenshaName
-     */
-    @JsonProperty("txtHokenshaName")
-    public TextBox getTxtHokenshaName() {
-        return txtHokenshaName;
-    }
-
-    /*
-     * settxtHokenshaName
-     * @param txtHokenshaName txtHokenshaName
-     */
-    @JsonProperty("txtHokenshaName")
-    public void setTxtHokenshaName(TextBox txtHokenshaName) {
-        this.txtHokenshaName = txtHokenshaName;
-    }
-
-    /*
      * getradDataShutsuryokuUmu
      * @return radDataShutsuryokuUmu
      */
@@ -112,6 +74,24 @@ public class KensakuJokenDiv extends Panel {
     @JsonProperty("radDataShutsuryokuUmu")
     public void setRadDataShutsuryokuUmu(RadioButton radDataShutsuryokuUmu) {
         this.radDataShutsuryokuUmu = radDataShutsuryokuUmu;
+    }
+
+    /*
+     * gettxtHyojiDataLimit
+     * @return txtHyojiDataLimit
+     */
+    @JsonProperty("txtHyojiDataLimit")
+    public TextBox getTxtHyojiDataLimit() {
+        return txtHyojiDataLimit;
+    }
+
+    /*
+     * settxtHyojiDataLimit
+     * @param txtHyojiDataLimit txtHyojiDataLimit
+     */
+    @JsonProperty("txtHyojiDataLimit")
+    public void setTxtHyojiDataLimit(TextBox txtHyojiDataLimit) {
+        this.txtHyojiDataLimit = txtHyojiDataLimit;
     }
 
     /*

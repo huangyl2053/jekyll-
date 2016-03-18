@@ -10,7 +10,11 @@ import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3104KokuhorenInterfaceKanri
 import jp.co.ndensan.reams.db.dbc.persistence.db.basic.DbT3104KokuhorenInterfaceKanriDac;
 import jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.kagoketteikohifutanshain.IKagoKetteiKohishaMapper;
 import jp.co.ndensan.reams.db.dbx.persistence.db.mapper.util.MapperProvider;
+import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
+import jp.co.ndensan.reams.uz.uza.exclusion.LockingKey;
+import jp.co.ndensan.reams.uz.uza.exclusion.RealInitialLocker;
+import jp.co.ndensan.reams.uz.uza.lang.ApplicationException;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
@@ -61,11 +65,18 @@ public class KagoKetteiTsuchishoJohoTorikomiKohiFutanshabun {
      * @param 処理年月 処理年月
      * @param csvFileNameList Csvファイル名
      */
+    @Transaction
     public void updateKagoKetteiTsuchishoJohoFutanshabun(
             FlexibleYearMonth 処理年月,
             List<RString> csvFileNameList) {
         insert過誤決定データ();
-        国保連インターフェース管理更新処理(処理年月, csvFileNameList);
+        LockingKey lockingKey = new LockingKey(処理年月, KOKANSHIBETSUNO);
+        if (RealInitialLocker.tryGetLock(lockingKey)) {
+            国保連インターフェース管理更新処理(処理年月, csvFileNameList);
+            RealInitialLocker.release(lockingKey);
+        } else {
+            throw new ApplicationException(UrErrorMessages.排他_バッチ実行中で更新不可.getMessage());
+        }
     }
 
     @Transaction

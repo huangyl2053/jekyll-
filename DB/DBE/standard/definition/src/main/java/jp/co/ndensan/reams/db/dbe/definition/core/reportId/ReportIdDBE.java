@@ -117,6 +117,10 @@ public enum ReportIdDBE {
      */
     DBE234001(new ReportId("DBE234001_ShujiiIkenshoSakuseiRyoSeikyusho"), new RString("主治医意見書作成料請求書")),
     /**
+     * 介護認定審査会スケジュール表かがみの帳票ID。
+     */
+    DBE514002(new ReportId("DBE514002_Shinsaschedulekagami"), new RString("介護認定審査会スケジュール表かがみ")),
+    /**
      * 要介護認定調査票（概況調査）の帳票ＩＤです。
      */
     DBE221011(new ReportId("DBE221011_chosahyoGaikyochosa"), new RString("要介護認定調査票（概況調査）")),
@@ -131,7 +135,11 @@ public enum ReportIdDBE {
     /**
      * 要介護認定調査票（基本調査）の帳票ＩＤです。
      */
-    DBE221012(new ReportId("DBE221012_chosahyoKihonchosa"), new RString("要介護認定調査票（基本調査）"));
+    DBE221012(new ReportId("DBE221012_chosahyoKihonchosa"), new RString("要介護認定調査票（基本調査）")),
+    /**
+     * 前回認定調査結果との比較表の帳票ＩＤです。
+     */
+    DBE293001(new ReportId("DBE293001_ChosahyoSaiCheckhyo"), new RString("前回認定調査結果との比較表"));
 
     private final ReportId reportId;
     private final RString reportName;

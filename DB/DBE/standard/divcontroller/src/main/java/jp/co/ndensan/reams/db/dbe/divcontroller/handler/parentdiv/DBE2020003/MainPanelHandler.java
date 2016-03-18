@@ -11,7 +11,7 @@ import jp.co.ndensan.reams.db.dbe.business.core.ininteichosaschebusiness.Ninteic
 import jp.co.ndensan.reams.db.dbe.definition.core.ninteichosaschedule.INinteiKanryoJohoMybatisParameter;
 import jp.co.ndensan.reams.db.dbe.definition.core.ninteichosaschedule.INinteichosaScheduleMybatisParameter;
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.chosa.YoyakuJokyo;
-import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2020003.MainPanelDiv;
+import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2020003.NinteiChosaSchedule3MainDiv;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2020003.dgResultList_Row;
 import jp.co.ndensan.reams.db.dbe.service.core.basic.ninteichosaschedule.NinteichosaScheduleFinder;
 import jp.co.ndensan.reams.db.dbz.definition.core.configkeys.ConfigNameDBU;
@@ -37,11 +37,12 @@ import jp.co.ndensan.reams.uz.uza.util.config.BusinessConfig;
  */
 public class MainPanelHandler {
 
-    private final MainPanelDiv div;
+    private final NinteiChosaSchedule3MainDiv div;
 
     private static final RString 検索対象未定者 = new RString("1");
     private static final RString 検索対象申請者 = new RString("2");
     private static final RString 検索対象みなし2号 = new RString("3");
+    private static final RString 対象 = new RString("0");
     private static final RString 性別_男 = new RString("男");
     private static final RString 性別_女 = new RString("女");
     private static final RString 男 = new RString("1");
@@ -54,7 +55,7 @@ public class MainPanelHandler {
      *
      * @param div MainPanelDiv
      */
-    public MainPanelHandler(MainPanelDiv div) {
+    public MainPanelHandler(NinteiChosaSchedule3MainDiv div) {
         this.div = div;
     }
 
@@ -67,7 +68,7 @@ public class MainPanelHandler {
         div.getSearchConditionPanel().getDdlTaishoChiku()
                 .setSelectedKey(ViewStateHolder.get(ViewStateKeys.認定調査スケジュール登録_地区コード, RString.class));
         div.getTxtMaxRow().setValue(new RString(BusinessConfig.
-                get(ConfigNameDBU.検索制御_最大取得件数上限, SubGyomuCode.DBU介護統計報告).toString()));
+                get(ConfigNameDBU.検索制御_最大取得件数, SubGyomuCode.DBU介護統計報告).toString()));
         set保険者DDL();
         set認定調査委託先コード();
         //TODO 内部QA748　識別コード　余分とう思います。
@@ -173,10 +174,10 @@ public class MainPanelHandler {
             row.setNinteiChosaJikanWaku(entity.get認定調査時間枠());
             rowList.add(row);
         }
+         div.getResultListPanel().getDgResultList().setDataSource(rowList);
         if (div.getResultListPanel().getDgResultList().getDataSource() == null || div.getResultListPanel().getDgResultList().getDataSource().isEmpty()) {
             throw new ApplicationException(UrErrorMessages.該当データなし.getMessage());
         }
-        div.getResultListPanel().getDgResultList().setDataSource(rowList);
     }
 
     /**
@@ -344,10 +345,10 @@ public class MainPanelHandler {
                 row.setNinteiChosaJikanWaku(entity.get認定調査時間枠());
                 rowList.add(row);
             }
+             div.getResultListPanel().getDgResultList().setDataSource(rowList);
             if (div.getResultListPanel().getDgResultList().getDataSource() == null || div.getResultListPanel().getDgResultList().getDataSource().isEmpty()) {
                 throw new ApplicationException(UrErrorMessages.該当データなし.getMessage());
             }
-            div.getResultListPanel().getDgResultList().setDataSource(rowList);
         }
     }
 
@@ -401,10 +402,10 @@ public class MainPanelHandler {
                 row.setNinteiChosaJikanWaku(entity.get認定調査時間枠());
                 rowList.add(row);
             }
+            div.getResultListPanel().getDgResultList().setDataSource(rowList);
             if (div.getResultListPanel().getDgResultList().getDataSource() == null || div.getResultListPanel().getDgResultList().getDataSource().isEmpty()) {
                 throw new ApplicationException(UrErrorMessages.該当データなし.getMessage());
             }
-            div.getResultListPanel().getDgResultList().setDataSource(rowList);
         }
     }
 
@@ -458,6 +459,7 @@ public class MainPanelHandler {
                 row.setNinteiChosaJikanWaku(entity.get認定調査時間枠());
                 rowList.add(row);
             }
+            div.getResultListPanel().getDgResultList().setDataSource(rowList);
             if (div.getResultListPanel().getDgResultList().getDataSource() == null || div.getResultListPanel().getDgResultList().getDataSource().isEmpty()) {
                 throw new ApplicationException(UrErrorMessages.該当データなし.getMessage());
             }
@@ -515,6 +517,7 @@ public class MainPanelHandler {
                 row.setNinteiChosaJikanWaku(entity.get認定調査時間枠());
                 rowList.add(row);
             }
+            div.getResultListPanel().getDgResultList().setDataSource(rowList);
             if (div.getResultListPanel().getDgResultList().getDataSource() == null || div.getResultListPanel().getDgResultList().getDataSource().isEmpty()) {
                 throw new ApplicationException(UrErrorMessages.該当データなし.getMessage());
             }
@@ -574,10 +577,10 @@ public class MainPanelHandler {
                 row.setNinteiChosaJikanWaku(entity.get認定調査時間枠());
                 rowList.add(row);
             }
+            div.getResultListPanel().getDgResultList().setDataSource(rowList);
             if (div.getResultListPanel().getDgResultList().getDataSource() == null || div.getResultListPanel().getDgResultList().getDataSource().isEmpty()) {
                 throw new ApplicationException(UrErrorMessages.該当データなし.getMessage());
             }
-            div.getResultListPanel().getDgResultList().setDataSource(rowList);
         }
     }
 }

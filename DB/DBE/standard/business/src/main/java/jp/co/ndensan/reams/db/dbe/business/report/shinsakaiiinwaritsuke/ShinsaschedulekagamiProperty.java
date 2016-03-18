@@ -5,9 +5,8 @@
  */
 package jp.co.ndensan.reams.db.dbe.business.report.shinsakaiiinwaritsuke;
 
-import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.itakusakichosainzichiran.ItakusakiChosainIchiranReportId;
+import jp.co.ndensan.reams.db.dbe.definition.core.reportId.ReportIdDBE;
 import jp.co.ndensan.reams.db.dbe.entity.report.source.shinsakaiiinwaritsuke.ShinsaschedulekagamiReportSource;
-import jp.co.ndensan.reams.uz.uza.biz.ReportId;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.report.ReportPropertyBase;
 
@@ -20,6 +19,6 @@ public class ShinsaschedulekagamiProperty extends ReportPropertyBase<Shinsasched
      * インスタンスを生成します。
      */
     public ShinsaschedulekagamiProperty() {
-        super(SubGyomuCode.DBE認定支援, new ReportId(ItakusakiChosainIchiranReportId.REPORTID_DBE514002.getCode()));
+        super(SubGyomuCode.DBE認定支援, ReportIdDBE.DBE514002.getReportId());
     }
 }

@@ -6,20 +6,13 @@
 package jp.co.ndensan.reams.db.dbe.divcontroller.handler.parentdiv.DBE2020010;
 
 import java.util.List;
-import jp.co.ndensan.reams.db.dbe.definition.message.DbeErrorMessages;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2020010.NinteiChosaScheduleInputDiv;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.NinteichosaSchedule;
 import jp.co.ndensan.reams.db.dbz.definition.core.configkeys.ConfigNameDBE;
 import jp.co.ndensan.reams.db.dbz.divcontroller.viewbox.ViewStateKeys;
-import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.message.IMessageGettable;
-import jp.co.ndensan.reams.uz.uza.message.IValidationMessage;
-import jp.co.ndensan.reams.uz.uza.message.Message;
-import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPair;
-import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 import jp.co.ndensan.reams.uz.uza.util.config.BusinessConfig;
 
@@ -104,9 +97,10 @@ public class NinteiChosaScheduleInputHandler {
         認定調査員コード = ViewStateHolder.get(ViewStateKeys.認定調査スケジュール登録_認定調査員コード, RString.class);
         認定調査委託先コード = ViewStateHolder.get(ViewStateKeys.認定調査スケジュール登録_認定調査委託先コード, RString.class);
         時間枠 = ViewStateHolder.get(ViewStateKeys.認定調査スケジュール登録_時間枠, RString.class);
-        設定日 = new FlexibleDate(ViewStateHolder.get(ViewStateKeys.認定調査スケジュール登録_設定日, RString.class).toString());
+        設定日 = ViewStateHolder.get(ViewStateKeys.認定調査スケジュール登録_設定日, FlexibleDate.class);
         if (モード_1.equals(モード)) {
             if (予約不可.equals(予約可否)) {
+                set割当状況Grid値(temp_認定調査員名称, temp_認定調査委託先名称, temp_予約可否, temp_備考, temp_予約状況);
                 div.getTxtNinteiChosainCode().setDisabled(true);
                 div.getTxtNinteiChosainName().setDisabled(true);
                 div.getTxtNinteiChosaItakusakiCode().setDisabled(true);
@@ -119,11 +113,11 @@ public class NinteiChosaScheduleInputHandler {
                 div.getRadYoyakuJokyo().setDisabled(true);
                 div.getBtnSearchTaishosha().setDisabled(true);
                 div.getBtnDisplayLatestInformation().setDisabled(true);
-                set割当状況Grid値(temp_認定調査員名称, temp_認定調査委託先名称, temp_予約可否, temp_備考, temp_予約状況);
                 div.getTaishoshaShosai().setDisabled(true);
                 div.getBtnClear().setDisabled(true);
             }
             if (予約可.equals(予約可否) && 予約状況_未定.equals(予約状況)) {
+                set割当状況Grid値(temp_認定調査員名称, temp_認定調査委託先名称, temp_予約可否, temp_備考, temp_予約状況);
                 div.getTxtNinteiChosainCode().setDisabled(true);
                 div.getTxtNinteiChosainName().setDisabled(true);
                 div.getTxtNinteiChosaItakusakiCode().setDisabled(true);
@@ -136,10 +130,10 @@ public class NinteiChosaScheduleInputHandler {
                 div.getRadYoyakuJokyo().setDisabled(false);
                 div.getBtnSearchTaishosha().setDisabled(false);
                 div.getBtnDisplayLatestInformation().setDisabled(true);
-                set割当状況Grid値(temp_認定調査員名称, temp_認定調査委託先名称, temp_予約可否, temp_備考, temp_予約状況);
-                get対象者詳細Grid状態();
+                set対象者詳細Grid状態();
             }
             if (予約可.equals(予約可否) && (予約状況_仮予約.equals(予約状況) || 予約状況_確定.equals(予約状況))) {
+                set割当状況Grid値(temp_認定調査員名称, temp_認定調査委託先名称, temp_予約可否, temp_備考, temp_予約状況);
                 div.getTxtNinteiChosainCode().setDisabled(true);
                 div.getTxtNinteiChosainName().setDisabled(true);
                 div.getTxtNinteiChosaItakusakiCode().setDisabled(true);
@@ -151,20 +145,21 @@ public class NinteiChosaScheduleInputHandler {
                 div.getTxtNinteiChosaBiko().setDisabled(true);
                 div.getRadYoyakuJokyo().setDisabled(false);
                 div.getBtnSearchTaishosha().setDisabled(false);
-                div.getBtnDisplayLatestInformation().setDisabled(true);
-                set割当状況Grid値(temp_認定調査員名称, temp_認定調査委託先名称, temp_予約可否, temp_備考, temp_予約状況);
-                get対象者詳細Grid状態();
+                div.getBtnDisplayLatestInformation().setDisabled(false);
                 set対象者詳細Grid値(temp_被保番号, temp_被保険者区分コード, temp_保険者, temp_認定申請日, temp_申請区分_申請時, temp_氏名,
                         temp_カナ氏名, temp_場所, temp_駐車場, temp_立会人1, temp_連絡先1, temp_立会人2, temp_連絡先2, temp_対象者メモ);
+                set対象者詳細Grid状態();
             }
         }
         onLoad_モード_2_3(temp_認定調査員名称, temp_認定調査委託先名称, temp_予約可否, temp_備考, temp_予約状況,
                 temp_被保番号, temp_被保険者区分コード, temp_保険者, temp_認定申請日, temp_申請区分_申請時, temp_氏名, temp_カナ氏名,
                 temp_場所, temp_駐車場, temp_立会人1, temp_連絡先1, temp_立会人2, temp_連絡先2, temp_対象者メモ);
-        if (RString.isNullOrEmpty(temp_申請者管理番号3) && div.getBtnSearchTaishosha().isVisible()) {
-            div.getBtnDisplayLatestInformation().setDisabled(true);
-        } else {
-            div.getBtnDisplayLatestInformation().setDisabled(false);
+        if (div.getBtnSearchTaishosha().isVisible()) {
+            if (!RString.isNullOrEmpty(temp_申請者管理番号3)) {
+                div.getBtnDisplayLatestInformation().setDisabled(false);
+            } else {
+                div.getBtnDisplayLatestInformation().setDisabled(true);
+            }
         }
     }
 
@@ -173,6 +168,7 @@ public class NinteiChosaScheduleInputHandler {
             FlexibleDate temp_認定申請日, RString temp_申請区分_申請時, RString temp_氏名, RString temp_カナ氏名, RString temp_場所,
             RString temp_駐車場, RString temp_立会人1, RString temp_連絡先1, RString temp_立会人2, RString temp_連絡先2, RString temp_対象者メモ) {
         if (モード_2.equals(モード)) {
+            set割当状況Grid値(temp_認定調査員名称, temp_認定調査委託先名称, temp_予約可否, temp_備考, temp_予約状況);
             div.getTxtNinteiChosainCode().setDisabled(true);
             div.getTxtNinteiChosainName().setDisabled(true);
             div.getTxtNinteiChosaItakusakiCode().setDisabled(true);
@@ -183,9 +179,10 @@ public class NinteiChosaScheduleInputHandler {
             div.getRadYoyakuKahi().setDisabled(false);
             div.getTxtNinteiChosaBiko().setDisabled(true);
             div.getRadYoyakuJokyo().setDisabled(false);
-            div.getBtnSearchTaishosha().setDisabled(false);
-            div.getBtnDisplayLatestInformation().setDisabled(true);
-            set割当状況Grid値(temp_認定調査員名称, temp_認定調査委託先名称, temp_予約可否, temp_備考, temp_予約状況);
+            div.getBtnSearchTaishosha().setVisible(false);
+            div.getBtnDisplayLatestInformation().setVisible(false);
+            set対象者詳細Grid値(temp_被保番号, temp_被保険者区分コード, temp_保険者, temp_認定申請日, temp_申請区分_申請時, temp_氏名,
+                    temp_カナ氏名, temp_場所, temp_駐車場, temp_立会人1, temp_連絡先1, temp_立会人2, temp_連絡先2, temp_対象者メモ);
             div.getTxtHihoBangoNumber().setDisabled(true);
             div.getTxtHihoBangoGosu().setDisabled(true);
             div.getTxtHokenshaName().setDisabled(true);
@@ -200,12 +197,11 @@ public class NinteiChosaScheduleInputHandler {
             div.getTxtTachiainin2().setDisabled(true);
             div.getTxtRenrakusaki2().setDisabled(true);
             div.getTxtTaishoshaShosaiMemo().setDisabled(true);
-            div.getBtnClear().setVisible(true);
-            set対象者詳細Grid値(temp_被保番号, temp_被保険者区分コード, temp_保険者, temp_認定申請日, temp_申請区分_申請時, temp_氏名,
-                    temp_カナ氏名, temp_場所, temp_駐車場, temp_立会人1, temp_連絡先1, temp_立会人2, temp_連絡先2, temp_対象者メモ);
+            div.getBtnClear().setVisible(false);
         }
         if (モード_3.equals(モード)) {
             if (予約可.equals(予約可否) && 予約状況_未定.equals(予約状況)) {
+                set割当状況Grid値(temp_認定調査員名称, temp_認定調査委託先名称, temp_予約可否, temp_備考, temp_予約状況);
                 div.getTxtNinteiChosainCode().setDisabled(true);
                 div.getTxtNinteiChosainName().setDisabled(true);
                 div.getTxtNinteiChosaItakusakiCode().setDisabled(true);
@@ -216,15 +212,15 @@ public class NinteiChosaScheduleInputHandler {
                 div.getRadYoyakuKahi().setDisabled(false);
                 div.getTxtNinteiChosaBiko().setDisabled(false);
                 div.getRadYoyakuJokyo().setDisabled(false);
-                div.getBtnSearchTaishosha().setVisible(true);
-                div.getBtnDisplayLatestInformation().setDisabled(true);
-                set割当状況Grid値(temp_認定調査員名称, temp_認定調査委託先名称, temp_予約可否, temp_備考, temp_予約状況);
-                get対象者詳細Grid状態();
+                div.getBtnSearchTaishosha().setVisible(false);
+                div.getBtnDisplayLatestInformation().setDisabled(false);
                 set対象者詳細Grid値(temp_被保番号, temp_被保険者区分コード, temp_保険者, temp_認定申請日, temp_申請区分_申請時, temp_氏名,
                         temp_カナ氏名, temp_場所, temp_駐車場, temp_立会人1, temp_連絡先1, temp_立会人2, temp_連絡先2, temp_対象者メモ);
-                div.getBtnClear().setVisible(true);
+                set対象者詳細Grid状態();
+                div.getBtnClear().setVisible(false);
             }
             if (予約不可.equals(予約可否) && (予約状況_仮予約.equals(予約状況) || 予約状況_確定.equals(予約状況))) {
+                set割当状況Grid値(temp_認定調査員名称, temp_認定調査委託先名称, temp_予約可否, temp_備考, temp_予約状況);
                 div.getTxtNinteiChosainCode().setDisabled(true);
                 div.getTxtNinteiChosainName().setDisabled(true);
                 div.getTxtNinteiChosaItakusakiCode().setDisabled(true);
@@ -235,9 +231,10 @@ public class NinteiChosaScheduleInputHandler {
                 div.getRadYoyakuKahi().setDisabled(true);
                 div.getTxtNinteiChosaBiko().setDisabled(true);
                 div.getRadYoyakuJokyo().setDisabled(true);
-                div.getBtnSearchTaishosha().setVisible(true);
-                div.getBtnDisplayLatestInformation().setVisible(true);
-                set割当状況Grid値(temp_認定調査員名称, temp_認定調査委託先名称, temp_予約可否, temp_備考, temp_予約状況);
+                div.getBtnSearchTaishosha().setVisible(false);
+                div.getBtnDisplayLatestInformation().setVisible(false);
+                set対象者詳細Grid値(temp_被保番号, temp_被保険者区分コード, temp_保険者, temp_認定申請日, temp_申請区分_申請時, temp_氏名,
+                        temp_カナ氏名, temp_場所, temp_駐車場, temp_立会人1, temp_連絡先1, temp_立会人2, temp_連絡先2, temp_対象者メモ);
                 div.getTxtHihoBangoNumber().setDisabled(true);
                 div.getTxtHihoBangoGosu().setDisabled(true);
                 div.getTxtHokenshaName().setDisabled(true);
@@ -252,14 +249,12 @@ public class NinteiChosaScheduleInputHandler {
                 div.getTxtTachiainin2().setDisabled(true);
                 div.getTxtRenrakusaki2().setDisabled(true);
                 div.getTxtTaishoshaShosaiMemo().setDisabled(true);
-                div.getBtnClear().setVisible(true);
-                set対象者詳細Grid値(temp_被保番号, temp_被保険者区分コード, temp_保険者, temp_認定申請日, temp_申請区分_申請時, temp_氏名,
-                        temp_カナ氏名, temp_場所, temp_駐車場, temp_立会人1, temp_連絡先1, temp_立会人2, temp_連絡先2, temp_対象者メモ);
+                div.getBtnClear().setVisible(false);
             }
         }
     }
 
-    private void get対象者詳細Grid状態() {
+    private void set対象者詳細Grid状態() {
         div.getTxtHihoBangoNumber().setDisabled(true);
         div.getTxtHihoBangoGosu().setDisabled(true);
         div.getTxtHokenshaName().setDisabled(true);
@@ -369,169 +364,5 @@ public class NinteiChosaScheduleInputHandler {
         div.getTxtTachiainin2().setValue(list.get(0).get立会人２());
         div.getTxtRenrakusaki2().setValue(list.get(0).get連絡先２().value());
         div.getTxtTaishoshaShosaiMemo().setValue(list.get(0).get対象者メモ());
-    }
-
-    /**
-     * 前回履歴の存在しないチェックです。
-     *
-     * @return ValidationMessageControlPairs
-     */
-    public static ValidationMessageControlPairs 前回履歴の存在しないチェック() {
-
-        ValidationMessageControlPairs validationMessages = new ValidationMessageControlPairs();
-        validationMessages.add(new ValidationMessageControlPair(RRVMessages.Validate前回履歴));
-        return validationMessages;
-    }
-
-    /**
-     * スケジュール照会のため保存できませんチェックです。
-     *
-     * @return ValidationMessageControlPairs
-     */
-    public ValidationMessageControlPairs スケジュール照会のため保存できませんチェック() {
-
-        ValidationMessageControlPairs validationMessages = new ValidationMessageControlPairs();
-        validationMessages.add(new ValidationMessageControlPair(RRVMessages.Validateスケジュール照会のため保存できません));
-        return validationMessages;
-    }
-
-    /**
-     * 備考必須入力項目チェックです。
-     *
-     * @param validationMessages ValidationMessageControlPairs
-     * @return ValidationMessageControlPairs
-     */
-    public ValidationMessageControlPairs 備考必須入力項目チェック(ValidationMessageControlPairs validationMessages) {
-
-        validationMessages.add(new ValidationMessageControlPair(RRVMessages.Validate必須入力項目, div.getTxtNinteiChosaBiko()));
-        return validationMessages;
-    }
-
-    /**
-     * 申請者予約があるのチェックです。
-     *
-     * @param validationMessages ValidationMessageControlPairs
-     * @return ValidationMessageControlPairs
-     */
-    public ValidationMessageControlPairs 申請者予約があるのチェック(ValidationMessageControlPairs validationMessages) {
-
-        validationMessages.add(new ValidationMessageControlPair(RRVMessages.Validate予約状況は仮予約または確定, div.getRadYoyakuJokyo()));
-        return validationMessages;
-    }
-
-    /**
-     * 申請者未指定なので予約状況は未定申請者を指定のチェックです。
-     *
-     * @param validationMessages ValidationMessageControlPairs
-     * @return ValidationMessageControlPairs
-     */
-    public ValidationMessageControlPairs 申請者未指定なので予約状況は未定申請者を指定のチェック(ValidationMessageControlPairs validationMessages) {
-
-        validationMessages.add(new ValidationMessageControlPair(
-                RRVMessages.Validate申請者未指定なので予約状況は未定申請者を指定, div.getRadYoyakuJokyo()));
-        return validationMessages;
-    }
-
-//    /**
-//     * 調査員は予約不可なので該当申請が解除のチェックです。
-//     *
-//     * @param validationMessages ValidationMessageControlPairs
-//     * @return ValidationMessageControlPairs
-//     */
-//    public ValidationMessageControlPairs 調査員は予約不可なので該当申請が解除(ValidationMessageControlPairs validationMessages) {
-//
-//        validationMessages.add(new ValidationMessageControlPair(RRVMessages.Validate調査員は予約不可なので該当申請が解除));
-//        return validationMessages;
-//    }
-//
-//    /**
-//     * 調査員は予約不可ですのチェックです。
-//     *
-//     * @param validationMessages ValidationMessageControlPairs
-//     * @return ValidationMessageControlPairs
-//     */
-//    public ValidationMessageControlPairs 調査員は予約不可です(ValidationMessageControlPairs validationMessages) {
-//
-//        validationMessages.add(new ValidationMessageControlPair(RRVMessages.Validate調査員は予約不可です));
-//        return validationMessages;
-//    }
-//
-//    /**
-//     * 申請者予約状況は仮予約ですのチェックです。
-//     *
-//     * @param validationMessages ValidationMessageControlPairs
-//     * @return ValidationMessageControlPairs
-//     */
-//    public ValidationMessageControlPairs 申請者予約状況は仮予約です(ValidationMessageControlPairs validationMessages) {
-//
-//        validationMessages.add(new ValidationMessageControlPair(RRVMessages.Validate申請者予約状況は仮予約です));
-//        return validationMessages;
-//    }
-//
-//    /**
-//     * 申請者予約状況は確定ですのチェックです。
-//     *
-//     * @param validationMessages ValidationMessageControlPairs
-//     * @return ValidationMessageControlPairs
-//     */
-//    public ValidationMessageControlPairs 申請者予約状況は確定です(ValidationMessageControlPairs validationMessages) {
-//
-//        validationMessages.add(new ValidationMessageControlPair(RRVMessages.Validate申請者予約状況は確定です));
-//        return validationMessages;
-//    }
-//
-//    /**
-//     * 予約未定かつ申請者が未指定ですのチェックです。
-//     *
-//     * @param validationMessages ValidationMessageControlPairs
-//     * @return ValidationMessageControlPairs
-//     */
-//    public ValidationMessageControlPairs 予約未定かつ申請者が未指定です(ValidationMessageControlPairs validationMessages) {
-//
-//        validationMessages.add(new ValidationMessageControlPair(RRVMessages.Validate予約未定かつ申請者が未指定です));
-//        return validationMessages;
-//    }
-//
-//    /**
-//     * すでに予約済みです_上書保存のチェックです。
-//     *
-//     * @param validationMessages ValidationMessageControlPairs
-//     * @return ValidationMessageControlPairs
-//     */
-//    public ValidationMessageControlPairs すでに予約済みです_上書保存(ValidationMessageControlPairs validationMessages) {
-//
-//        validationMessages.add(new ValidationMessageControlPair(RRVMessages.Validateすでに予約済みです_上書保存));
-//        return validationMessages;
-//    }
-//
-//    /**
-//     * 予約を上書保存のチェックです。
-//     *
-//     * @param validationMessages ValidationMessageControlPairs
-//     * @return ValidationMessageControlPairs
-//     */
-//    public ValidationMessageControlPairs 予約を上書保存(ValidationMessageControlPairs validationMessages) {
-//
-//        validationMessages.add(new ValidationMessageControlPair(RRVMessages.Validate予約を上書保存));
-//        return validationMessages;
-//    }
-    private static enum RRVMessages implements IValidationMessage {
-
-        Validate前回履歴(UrErrorMessages.存在しない, "前回履歴"),
-        Validate必須入力項目(UrErrorMessages.必須, "備考"),
-        Validate予約状況は仮予約または確定(DbeErrorMessages.予約状況は仮予約または確定),
-        Validate申請者未指定なので予約状況は未定申請者を指定(DbeErrorMessages.申請者未指定なので予約状況は未定申請者を指定),
-        Validateスケジュール照会のため保存できません(DbeErrorMessages.スケジュール照会のため保存不可);
-
-        private final Message message;
-
-        private RRVMessages(IMessageGettable message, String... replacements) {
-            this.message = message.getMessage().replace(replacements);
-        }
-
-        @Override
-        public Message getMessage() {
-            return message;
-        }
     }
 }

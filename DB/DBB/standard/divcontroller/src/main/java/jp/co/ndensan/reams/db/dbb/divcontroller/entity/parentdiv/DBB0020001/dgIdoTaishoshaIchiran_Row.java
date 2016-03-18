@@ -1,17 +1,15 @@
 package jp.co.ndensan.reams.db.dbb.divcontroller.entity.parentdiv.DBB0020001;
-/**
+/*
  * このコードはツールによって生成されました。
  * このファイルへの変更は、以下の状況下で不正な動作の原因になったり、
  * コードが再生成されるときに損失したりします。
- * Sat Jun 21 15:39:13 JST 2014 
+ * Mon Mar 14 15:46:33 CST 2016 
  */
 
 
 
-import jp.co.ndensan.reams.uz.uza.ui.binding.DataGridSetting;
 import jp.co.ndensan.reams.uz.uza.ui.binding.DataRow;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.ui.binding.DropDownList;
 
 
 /**
@@ -21,6 +19,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.DropDownList;
  */
 
 public class dgIdoTaishoshaIchiran_Row extends DataRow {
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-01-15_09-59-03">
 
     private RString txtGaitoRenban;
     private RString txtHihoNo;
@@ -28,8 +27,8 @@ public class dgIdoTaishoshaIchiran_Row extends DataRow {
     private RString txtTsuchishoNo;
     private RString txtShimei;
     private RString txtIdoYMD;
-    private RString txtIdoZiyu;
-    private DropDownList ddlNextSagyo;
+    private RString txtIdoNaiyo;
+    private RString texYSeireki;
 
     public dgIdoTaishoshaIchiran_Row() {
         super();
@@ -39,11 +38,19 @@ public class dgIdoTaishoshaIchiran_Row extends DataRow {
         this.txtTsuchishoNo = RString.EMPTY;
         this.txtShimei = RString.EMPTY;
         this.txtIdoYMD = RString.EMPTY;
-        this.txtIdoZiyu = RString.EMPTY;
-        this.ddlNextSagyo = new DropDownList();
+        this.txtIdoNaiyo = RString.EMPTY;
+        this.texYSeireki = RString.EMPTY;
+        this.setOriginalData("txtGaitoRenban", txtGaitoRenban);
+        this.setOriginalData("txtHihoNo", txtHihoNo);
+        this.setOriginalData("txtShikibetsuCode", txtShikibetsuCode);
+        this.setOriginalData("txtTsuchishoNo", txtTsuchishoNo);
+        this.setOriginalData("txtShimei", txtShimei);
+        this.setOriginalData("txtIdoYMD", txtIdoYMD);
+        this.setOriginalData("txtIdoNaiyo", txtIdoNaiyo);
+        this.setOriginalData("texYSeireki", texYSeireki);
     }
 
-    public dgIdoTaishoshaIchiran_Row(RString txtGaitoRenban, RString txtHihoNo, RString txtShikibetsuCode, RString txtTsuchishoNo, RString txtShimei, RString txtIdoYMD, RString txtIdoZiyu, DropDownList ddlNextSagyo) {
+    public dgIdoTaishoshaIchiran_Row(RString txtGaitoRenban, RString txtHihoNo, RString txtShikibetsuCode, RString txtTsuchishoNo, RString txtShimei, RString txtIdoYMD, RString txtIdoNaiyo, RString texYSeireki) {
         super();
         this.setOriginalData("txtGaitoRenban", txtGaitoRenban);
         this.setOriginalData("txtHihoNo", txtHihoNo);
@@ -51,30 +58,17 @@ public class dgIdoTaishoshaIchiran_Row extends DataRow {
         this.setOriginalData("txtTsuchishoNo", txtTsuchishoNo);
         this.setOriginalData("txtShimei", txtShimei);
         this.setOriginalData("txtIdoYMD", txtIdoYMD);
-        this.setOriginalData("txtIdoZiyu", txtIdoZiyu);
-        this.setOriginalData("ddlNextSagyo", ddlNextSagyo);
+        this.setOriginalData("txtIdoNaiyo", txtIdoNaiyo);
+        this.setOriginalData("texYSeireki", texYSeireki);
         this.txtGaitoRenban = txtGaitoRenban;
         this.txtHihoNo = txtHihoNo;
         this.txtShikibetsuCode = txtShikibetsuCode;
         this.txtTsuchishoNo = txtTsuchishoNo;
         this.txtShimei = txtShimei;
         this.txtIdoYMD = txtIdoYMD;
-        this.txtIdoZiyu = txtIdoZiyu;
-        this.ddlNextSagyo = ddlNextSagyo;
+        this.txtIdoNaiyo = txtIdoNaiyo;
+        this.texYSeireki = texYSeireki;
     }
-
-//    public dgIdoTaishoshaIchiran_Row(DataGridSetting gridSetting) {
-//        super();
-//        this.txtGaitoRenban = RString.EMPTY;
-//        this.txtHihoNo = RString.EMPTY;
-//        this.txtShikibetsuCode = RString.EMPTY;
-//        this.txtTsuchishoNo = RString.EMPTY;
-//        this.txtShimei = RString.EMPTY;
-//        this.txtIdoYMD = RString.EMPTY;
-//        this.txtIdoZiyu = RString.EMPTY;
-//        this.ddlNextSagyo = DropDownList.createInstance(gridSetting.getColumn("ddlNextSagyo").getCellDetails());
-//        this.setOriginalData("ddlNextSagyo", ddlNextSagyo);
-//    }
 
     public RString getTxtGaitoRenban() {
         return txtGaitoRenban;
@@ -100,12 +94,12 @@ public class dgIdoTaishoshaIchiran_Row extends DataRow {
         return txtIdoYMD;
     }
 
-    public RString getTxtIdoZiyu() {
-        return txtIdoZiyu;
+    public RString getTxtIdoNaiyo() {
+        return txtIdoNaiyo;
     }
 
-    public DropDownList getDdlNextSagyo() {
-        return ddlNextSagyo;
+    public RString getTexYSeireki() {
+        return texYSeireki;
     }
 
     public void setTxtGaitoRenban(RString txtGaitoRenban) {
@@ -138,14 +132,15 @@ public class dgIdoTaishoshaIchiran_Row extends DataRow {
         this.txtIdoYMD = txtIdoYMD;
     }
 
-    public void setTxtIdoZiyu(RString txtIdoZiyu) {
-        this.setOriginalData("txtIdoZiyu", txtIdoZiyu);
-        this.txtIdoZiyu = txtIdoZiyu;
+    public void setTxtIdoNaiyo(RString txtIdoNaiyo) {
+        this.setOriginalData("txtIdoNaiyo", txtIdoNaiyo);
+        this.txtIdoNaiyo = txtIdoNaiyo;
     }
 
-    public void setDdlNextSagyo(DropDownList ddlNextSagyo) {
-        this.setOriginalData("ddlNextSagyo", ddlNextSagyo);
-        this.ddlNextSagyo = ddlNextSagyo;
+    public void setTexYSeireki(RString texYSeireki) {
+        this.setOriginalData("texYSeireki", texYSeireki);
+        this.texYSeireki = texYSeireki;
     }
 
+    // </editor-fold>
 }

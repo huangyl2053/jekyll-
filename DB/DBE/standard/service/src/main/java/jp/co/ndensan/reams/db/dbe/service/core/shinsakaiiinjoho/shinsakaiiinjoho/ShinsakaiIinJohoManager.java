@@ -78,7 +78,7 @@ public class ShinsakaiIinJohoManager {
         資格コード.add(new KeyValueDataSource(Sikaku.薬剤師.getコード(), Sikaku.薬剤師.get名称()));
         資格コード.add(new KeyValueDataSource(Sikaku.保健師.getコード(), Sikaku.保健師.get名称()));
         資格コード.add(new KeyValueDataSource(Sikaku.助産師.getコード(), Sikaku.助産師.get名称()));
-        資格コード.add(new KeyValueDataSource(Sikaku._洵_看護師.getコード(), Sikaku._洵_看護師.get名称()));
+        資格コード.add(new KeyValueDataSource(Sikaku._准_看護師.getコード(), Sikaku._准_看護師.get名称()));
         資格コード.add(new KeyValueDataSource(Sikaku.理学療法士.getコード(), Sikaku.理学療法士.get名称()));
         資格コード.add(new KeyValueDataSource(Sikaku.作業療法士.getコード(), Sikaku.作業療法士.get名称()));
         資格コード.add(new KeyValueDataSource(Sikaku.社会福祉士.getコード(), Sikaku.社会福祉士.get名称()));

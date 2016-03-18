@@ -75,16 +75,16 @@
         AND 
         DbT5105."ninteiShinsakaiKanryoYMD" IS NOT NULL
         WHERE
-        DbT5101."shoriJotaiKubun"  IN ('01','04')
+        DbT5101."shoriJotaiKubun"  IN ('0','3')
         AND
         DbT5101."logicalDeletedFlag" = False
         <if test="二次判定日Fromフラグ">
             AND
-            DbT5102."nijiHanteiNinteiYukoKaishiYMD" <![CDATA[>=]]> #{二次判定日From}
+            DbT5102."nijiHanteiYMD" <![CDATA[>=]]> #{二次判定日From}
         </if>
         <if test="二次判定日Toフラグ">
             AND 
-            DbT5102."nijiHanteiNinteiYukoShuryoYMD" <![CDATA[<=]]> #{二次判定日To} 
+            DbT5102."nijiHanteiYMD" <![CDATA[<=]]> #{二次判定日To} 
         </if>
         <if test="未出力のみフラグ">
             AND

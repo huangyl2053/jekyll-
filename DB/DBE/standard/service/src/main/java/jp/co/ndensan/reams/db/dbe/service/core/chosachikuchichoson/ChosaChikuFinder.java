@@ -34,7 +34,7 @@ import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
 
 /**
- * 調査地区市町村情報を管理クラスです。
+ * 認定調査スケジュール登録7を管理クラスです。
  */
 public class ChosaChikuFinder {
 
@@ -106,14 +106,14 @@ public class ChosaChikuFinder {
     /**
      * 調査地区市町村一覧情報を取得します。
      *
-     * @param paramer ChosaChikuChichosonParameter
+     * @param parameter ChosaChikuChichosonParameter
      * @return SearchResult<ChosaChikuChichosonBusiness>
      */
     @Transaction
-    public SearchResult<ChosaChikuChichosonBusiness> getChosaChikuChichosonList(ChosaChikuChichosonParameter paramer) {
+    public SearchResult<ChosaChikuChichosonBusiness> getChosaChikuChichosonList(ChosaChikuChichosonParameter parameter) {
         List<ChosaChikuChichosonBusiness> resultList = new ArrayList<>();
         List<ChosaChikuChichosonRelateEntity> relateList
-                = mapperProvider.create(IChosaChikuChichosonMapper.class).select調査地区市町村一覧(paramer);
+                = mapperProvider.create(IChosaChikuChichosonMapper.class).select調査地区市町村一覧(parameter);
         if (relateList == null || relateList.isEmpty()) {
             return SearchResult.of(Collections.<ChosaChikuChichosonBusiness>emptyList(), 0, false);
         }
@@ -133,7 +133,7 @@ public class ChosaChikuFinder {
     public SearchResult<ChikuShichoson> get地区市町村情報(Code 調査地区コード) {
 
         List<ChikuShichoson> resultList = new ArrayList<>();
-        List<DbT5224ChikuShichosonEntity> chikuShichosonList = dbt5224dac.selec地区市町村(調査地区コード);
+        List<DbT5224ChikuShichosonEntity> chikuShichosonList = dbt5224dac.select地区市町村(調査地区コード);
         if (chikuShichosonList == null || chikuShichosonList.isEmpty()) {
             return SearchResult.of(Collections.<ChikuShichoson>emptyList(), 0, false);
         }
@@ -202,11 +202,11 @@ public class ChosaChikuFinder {
     /**
      * 地区市町村情報の削除処理する。
      *
-     * @param paramer paramer
+     * @param parameter parameter
      * @return int
      */
     @Transaction
-    public int delete(ChosaChikuChichosonParameter paramer) {
-        return mapperProvider.create(IChosaChikuChichosonMapper.class).delete地区市町村情報(paramer);
+    public int delete(ChosaChikuChichosonParameter parameter) {
+        return mapperProvider.create(IChosaChikuChichosonMapper.class).delete地区市町村情報(parameter);
     }
 }

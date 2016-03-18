@@ -4,19 +4,32 @@ package jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE9040001;
  * このファイルへの変更は、再生成時には損失するため
  * 不正な動作の原因になります。
  */
+
 import com.fasterxml.jackson.annotation.JsonProperty;
+import jp.co.ndensan.reams.ur.urz.divcontroller.entity.commonchilddiv.CodeInput.CodeInputDiv;
+import jp.co.ndensan.reams.ur.urz.divcontroller.entity.commonchilddiv.CodeInput.ICodeInputDiv;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.ui.binding.*;
+import jp.co.ndensan.reams.uz.uza.ui.binding.Button;
+import jp.co.ndensan.reams.uz.uza.ui.binding.ButtonDialog;
+import jp.co.ndensan.reams.uz.uza.ui.binding.DropDownList;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
-import jp.co.ndensan.reams.uz.uza.ui.binding.domain.*;
+import jp.co.ndensan.reams.uz.uza.ui.binding.RadioButton;
+import jp.co.ndensan.reams.uz.uza.ui.binding.TextBox;
+import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxCode;
+import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxKana;
+import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxNum;
+import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxYubinNo;
+import jp.co.ndensan.reams.uz.uza.ui.binding.domain.TextBoxJusho;
+import jp.co.ndensan.reams.uz.uza.ui.binding.domain.TextBoxTelNo;
 
 /**
- * ChosainJohoInput のクラスファイル 
- * 
+ * ChosainJohoInput のクラスファイル
+ *
  * @author 自動生成
  */
 public class ChosainJohoInputDiv extends Panel {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：バージョン情報無し">
+
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-01-15_09-59-03">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -43,12 +56,6 @@ public class ChosainJohoInputDiv extends Panel {
     private TextBoxKana txtChosainKanaShimei;
     @JsonProperty("radSeibetsu")
     private RadioButton radSeibetsu;
-    @JsonProperty("txtChiku")
-    private TextBoxCode txtChiku;
-    @JsonProperty("btnToSearchChiku")
-    private ButtonDialog btnToSearchChiku;
-    @JsonProperty("txtChikuMei")
-    private TextBox txtChikuMei;
     @JsonProperty("ddlChosainShikaku")
     private DropDownList ddlChosainShikaku;
     @JsonProperty("txtChosaKanoNinzu")
@@ -69,6 +76,8 @@ public class ChosainJohoInputDiv extends Panel {
     private Button btnKakutei;
     @JsonProperty("btnTorikeshi")
     private Button btnTorikeshi;
+    @JsonProperty("ccdChiku")
+    private CodeInputDiv ccdChiku;
     @JsonProperty("state")
     private RString state;
     @JsonProperty("hiddenInputDiv")
@@ -261,60 +270,6 @@ public class ChosainJohoInputDiv extends Panel {
     }
 
     /*
-     * gettxtChiku
-     * @return txtChiku
-     */
-    @JsonProperty("txtChiku")
-    public TextBoxCode getTxtChiku() {
-        return txtChiku;
-    }
-
-    /*
-     * settxtChiku
-     * @param txtChiku txtChiku
-     */
-    @JsonProperty("txtChiku")
-    public void setTxtChiku(TextBoxCode txtChiku) {
-        this.txtChiku = txtChiku;
-    }
-
-    /*
-     * getbtnToSearchChiku
-     * @return btnToSearchChiku
-     */
-    @JsonProperty("btnToSearchChiku")
-    public ButtonDialog getBtnToSearchChiku() {
-        return btnToSearchChiku;
-    }
-
-    /*
-     * setbtnToSearchChiku
-     * @param btnToSearchChiku btnToSearchChiku
-     */
-    @JsonProperty("btnToSearchChiku")
-    public void setBtnToSearchChiku(ButtonDialog btnToSearchChiku) {
-        this.btnToSearchChiku = btnToSearchChiku;
-    }
-
-    /*
-     * gettxtChikuMei
-     * @return txtChikuMei
-     */
-    @JsonProperty("txtChikuMei")
-    public TextBox getTxtChikuMei() {
-        return txtChikuMei;
-    }
-
-    /*
-     * settxtChikuMei
-     * @param txtChikuMei txtChikuMei
-     */
-    @JsonProperty("txtChikuMei")
-    public void setTxtChikuMei(TextBox txtChikuMei) {
-        this.txtChikuMei = txtChikuMei;
-    }
-
-    /*
      * getddlChosainShikaku
      * @return ddlChosainShikaku
      */
@@ -492,6 +447,15 @@ public class ChosainJohoInputDiv extends Panel {
     @JsonProperty("btnTorikeshi")
     public void setBtnTorikeshi(Button btnTorikeshi) {
         this.btnTorikeshi = btnTorikeshi;
+    }
+
+    /*
+     * getccdChiku
+     * @return ccdChiku
+     */
+    @JsonProperty("ccdChiku")
+    public ICodeInputDiv getCcdChiku() {
+        return ccdChiku;
     }
 
     /*

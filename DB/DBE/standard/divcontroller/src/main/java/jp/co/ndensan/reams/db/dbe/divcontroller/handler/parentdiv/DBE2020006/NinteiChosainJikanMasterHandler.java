@@ -178,16 +178,6 @@ public class NinteiChosainJikanMasterHandler {
         List<dgTimeScheduleList_Row> rowList = div.getDgTimeScheduleList().getDataSource();
         Models<NinteichosaScheduleIdentifier, NinteichosaSchedule> ninteichosaModels
                 = ViewStateHolder.get(ViewStateKeys.認定調査スケジュール登録6_認定調査スケジュール情報, Models.class);
-        List<NinteichosaSchedule> ninteichosaList = new ArrayList<>();
-        for (NinteichosaSchedule gaitosha : ninteichosaModels) {
-            ninteichosaList.add(gaitosha);
-        }
-        for (NinteichosaSchedule ninteichosa : ninteichosaList) {
-            if (ninteichosa.get認定調査予定年月日().compareTo(予定年月日) == 0
-                    && 時間枠.equals(ninteichosa.get認定調査時間枠().getColumnValue())) {
-                ninteichosa.createBuilderForEdit().set予約可能フラグ(true).set備考(時間枠).build();
-            }
-        }
         Seireki date2 = div.getTxtSettingMonth().getValue().seireki();
         for (int i = 1; i < (div.getTxtSettingMonth().getValue().getLastDay() + 1); i++) {
             FlexibleDate 予定日 = new FlexibleDate(

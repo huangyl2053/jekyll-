@@ -861,7 +861,8 @@ public class SyokanbaraihiShikyuShinseiKetteManager {
             for (ShokanKinkyuShisetsuRyoyo 緊急時施設療養費 : 緊急時施設療養費List) {
                 if (!EntityDataState.Deleted.equals(緊急時施設療養費.toEntity().getState())) {
                     金額合計 = 金額合計 + 緊急時施設療養費.get緊急時施設療養費合計単位数();
-                } else if (EntityDataState.Deleted.equals(緊急時施設療養費.toEntity().getState())) {
+                }
+                if (EntityDataState.Deleted.equals(緊急時施設療養費.toEntity().getState())) {
                     変更区分 = true;
                     償還払請求緊急時施設療養Dac.delete(緊急時施設療養費.toEntity());
                 } else if (!EntityDataState.Unchanged.equals(緊急時施設療養費.toEntity().getState())) {
@@ -898,7 +899,8 @@ public class SyokanbaraihiShikyuShinseiKetteManager {
                 if (!EntityDataState.Deleted.equals(shukei.toEntity().getState())) {
                     請求額合計 = 請求額合計.add(shukei.get請求額());
                     利用者負担額合計 = 利用者負担額合計 + shukei.get利用者負担額();
-                } else if (EntityDataState.Deleted.equals(shukei.toEntity().getState())) {
+                }
+                if (EntityDataState.Deleted.equals(shukei.toEntity().getState())) {
                     変更区分 = true;
                     償還払請求集計Dac.delete(shukei.toEntity());
                 } else if (!EntityDataState.Unchanged.equals(shukei.toEntity().getState())) {

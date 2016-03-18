@@ -283,43 +283,59 @@ public class ShinsakaiKaisaiYoteiTorokuValidationHandler {
         int index = -1;
         for (dgKaisaiYoteiNyuryokuran_Row row : div.getDgKaisaiYoteiNyuryokuran().getDataSource()) {
             index = index + 1;
-            if (!row.getKaisaiGogitai4().isDisabled() && !row.getKaisaiGogitai4().getValue().isEmpty()
-                    && (row.getKaisaiGogitai4().getValue().equals(row.getKaisaiGogitai1().getValue())
-                    || row.getKaisaiGogitai4().getValue().equals(row.getKaisaiGogitai2().getValue())
-                    || row.getKaisaiGogitai4().getValue().equals(row.getKaisaiGogitai3().getValue()))) {
+            if (重複チェック4(row)) {
                 // TODO  内部QA：864 Redmine：#78578  (重複の合議体が入力messageの引数がありません)
                 validationMessages.add(new ValidationMessageControlPair(
                         new ShinsakaiKaisaiYoteiTorokuValidationHandler.ValidationMessage(DbeErrorMessages.重複の合議体が入力),
                         div.getDgKaisaiYoteiNyuryokuran()));
                 continue;
             }
-            if (!row.getKaisaiGogitai3().isDisabled() && !row.getKaisaiGogitai3().getValue().isEmpty()
-                    && (row.getKaisaiGogitai3().getValue().equals(row.getKaisaiGogitai1().getValue())
-                    || row.getKaisaiGogitai3().getValue().equals(row.getKaisaiGogitai2().getValue())
-                    || row.getKaisaiGogitai3().getValue().equals(row.getKaisaiGogitai4().getValue()))) {
+            if (重複チェック3(row)) {
                 validationMessages.add(new ValidationMessageControlPair(
                         new ShinsakaiKaisaiYoteiTorokuValidationHandler.ValidationMessage(DbeErrorMessages.重複の合議体が入力),
                         div.getDgKaisaiYoteiNyuryokuran()));
                 continue;
             }
-            if (!row.getKaisaiGogitai2().isDisabled() && !row.getKaisaiGogitai2().getValue().isEmpty()
-                    && (row.getKaisaiGogitai2().getValue().equals(row.getKaisaiGogitai1().getValue())
-                    || row.getKaisaiGogitai2().getValue().equals(row.getKaisaiGogitai3().getValue())
-                    || row.getKaisaiGogitai2().getValue().equals(row.getKaisaiGogitai4().getValue()))) {
+            if (重複チェック2(row)) {
                 validationMessages.add(new ValidationMessageControlPair(
                         new ShinsakaiKaisaiYoteiTorokuValidationHandler.ValidationMessage(
                                 DbeErrorMessages.重複の合議体が入力), div.getDgKaisaiYoteiNyuryokuran()));
                 continue;
             }
-            if (!row.getKaisaiGogitai1().isDisabled() && !row.getKaisaiGogitai1().getValue().isEmpty()
-                    && (row.getKaisaiGogitai1().getValue().equals(row.getKaisaiGogitai2().getValue())
-                    || row.getKaisaiGogitai1().getValue().equals(row.getKaisaiGogitai3().getValue())
-                    || row.getKaisaiGogitai1().getValue().equals(row.getKaisaiGogitai4().getValue()))) {
+            if (重複チェック1(row)) {
                 validationMessages.add(new ValidationMessageControlPair(
                         new ShinsakaiKaisaiYoteiTorokuValidationHandler.ValidationMessage(
                                 DbeErrorMessages.重複の合議体が入力), div.getDgKaisaiYoteiNyuryokuran()));
             }
         }
+    }
+
+    private boolean 重複チェック4(dgKaisaiYoteiNyuryokuran_Row row) {
+        return !row.getKaisaiGogitai4().isDisabled() && !row.getKaisaiGogitai4().getValue().isEmpty()
+                && (row.getKaisaiGogitai4().getValue().equals(row.getKaisaiGogitai1().getValue())
+                || row.getKaisaiGogitai4().getValue().equals(row.getKaisaiGogitai2().getValue())
+                || row.getKaisaiGogitai4().getValue().equals(row.getKaisaiGogitai3().getValue()));
+    }
+
+    private boolean 重複チェック3(dgKaisaiYoteiNyuryokuran_Row row) {
+        return !row.getKaisaiGogitai3().isDisabled() && !row.getKaisaiGogitai3().getValue().isEmpty()
+                && (row.getKaisaiGogitai3().getValue().equals(row.getKaisaiGogitai1().getValue())
+                || row.getKaisaiGogitai3().getValue().equals(row.getKaisaiGogitai2().getValue())
+                || row.getKaisaiGogitai3().getValue().equals(row.getKaisaiGogitai4().getValue()));
+    }
+
+    private boolean 重複チェック2(dgKaisaiYoteiNyuryokuran_Row row) {
+        return !row.getKaisaiGogitai2().isDisabled() && !row.getKaisaiGogitai2().getValue().isEmpty()
+                && (row.getKaisaiGogitai2().getValue().equals(row.getKaisaiGogitai1().getValue())
+                || row.getKaisaiGogitai2().getValue().equals(row.getKaisaiGogitai3().getValue())
+                || row.getKaisaiGogitai2().getValue().equals(row.getKaisaiGogitai4().getValue()));
+    }
+
+    private boolean 重複チェック1(dgKaisaiYoteiNyuryokuran_Row row) {
+        return !row.getKaisaiGogitai1().isDisabled() && !row.getKaisaiGogitai1().getValue().isEmpty()
+                && (row.getKaisaiGogitai1().getValue().equals(row.getKaisaiGogitai2().getValue())
+                || row.getKaisaiGogitai1().getValue().equals(row.getKaisaiGogitai3().getValue())
+                || row.getKaisaiGogitai1().getValue().equals(row.getKaisaiGogitai4().getValue()));
     }
 
     private void set予定進捗状況Message(ValidationMessageControlPairs validationMessages, RString 開催合議体,

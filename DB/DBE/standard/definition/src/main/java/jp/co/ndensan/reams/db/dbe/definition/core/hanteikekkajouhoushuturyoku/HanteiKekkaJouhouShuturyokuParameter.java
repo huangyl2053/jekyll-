@@ -195,11 +195,11 @@ public final class HanteiKekkaJouhouShuturyokuParameter {
             二次判定日Toフラグ = true;
         }
 
-        if (new RString("1").equals(未出力のみ)) {
+        if (new RString("key0").equals(未出力のみ)) {
             未出力のみフラグ = true;
         }
 
-        if (new RString("2").equals(出力済み)) {
+        if (new RString("key1").equals(出力済み)) {
             出力済みフラグ = true;
         }
 

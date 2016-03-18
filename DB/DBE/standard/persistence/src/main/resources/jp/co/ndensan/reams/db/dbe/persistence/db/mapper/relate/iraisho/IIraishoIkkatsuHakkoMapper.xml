@@ -24,10 +24,18 @@
             AND "DbT5913ChosainJoho"."ninteiChosaItakusakiCode" = "DbT5201NinteichosaIraiJoho"."ninteichosaItakusakiCode"                  
             AND "DbT5913ChosainJoho"."ninteiChosainCode" = "DbT5201NinteichosaIraiJoho"."ninteiChosainCode"                  
             AND "DbT5201NinteichosaIraiJoho"."shinseishoKanriNo" = "DbT5105NinteiKanryoJoho"."shinseishoKanriNo"                  
-            AND "DbT5201NinteichosaIraiJoho"."ninteichosaIraiRirekiNo" = (SELECT MAX("DbT5201NinteichosaIraiJoho"."ninteichosaIraiRirekiNo") FROM rgdb."DbT5201NinteichosaIraiJoho")                  
+            AND "DbT5201NinteichosaIraiJoho"."ninteichosaIraiRirekiNo" = 
+            (SELECT 
+                MAX("ninteichosaIraiRirekiNo") 
+             FROM 
+                rgdb."DbT5201NinteichosaIraiJoho"
+            WHERE
+                "shinseishoKanriNo" = "DbT5105NinteiKanryoJoho"."shinseishoKanriNo"
+            AND "logicalDeletedFlag" = false
+            )                  
             AND "DbT5201NinteichosaIraiJoho"."logicalDeletedFlag" = false                  
             AND "DbT5101NinteiShinseiJoho"."shinseishoKanriNo" = "DbT5105NinteiKanryoJoho"."shinseishoKanriNo"                  
-            AND "DbT5101NinteiShinseiJoho"."shoriJotaiKubun" IN ('01','04')                  
+            AND "DbT5101NinteiShinseiJoho"."shoriJotaiKubun" IN ('0','3')                  
             AND "DbT5101NinteiShinseiJoho"."logicalDeletedFlag" = false                  
             AND "DbT5105NinteiKanryoJoho"."ninteiShinseiJohoTorokuKanryoYMD" IS NOT NULL                  
             AND "DbT5105NinteiKanryoJoho"."ninteiShinsakaiWariateKanryoYMD" IS NULL                  
@@ -102,10 +110,18 @@
             AND "DbT5912ShujiiJoho"."shujiiIryokikanCode" = "DbT5301ShujiiIkenshoIraiJoho"."shujiiIryokikanCode"										
             AND "DbT5912ShujiiJoho"."shujiiCode" = "DbT5301ShujiiIkenshoIraiJoho"."shujiiCode"										
             AND "DbT5301ShujiiIkenshoIraiJoho"."shinseishoKanriNo" = "DbT5105NinteiKanryoJoho"."shinseishoKanriNo"										
-            AND "DbT5301ShujiiIkenshoIraiJoho"."ikenshoIraiRirekiNo" = (SELECT MAX("DbT5301ShujiiIkenshoIraiJoho"."ikenshoIraiRirekiNo") FROM rgdb."DbT5301ShujiiIkenshoIraiJoho")										
+            AND "DbT5301ShujiiIkenshoIraiJoho"."ikenshoIraiRirekiNo" = 
+            (SELECT 
+                MAX("ikenshoIraiRirekiNo") 
+            FROM 
+                rgdb."DbT5301ShujiiIkenshoIraiJoho"
+            WHERE
+                "shinseishoKanriNo" = "DbT5105NinteiKanryoJoho"."shinseishoKanriNo"
+            AND "logicalDeletedFlag" = false
+            )										
             AND "DbT5301ShujiiIkenshoIraiJoho"."logicalDeletedFlag"=false										
             AND "DbT5101NinteiShinseiJoho"."shinseishoKanriNo" = "DbT5105NinteiKanryoJoho"."shinseishoKanriNo"										
-            AND "DbT5101NinteiShinseiJoho"."shoriJotaiKubun" IN ('01','04')										
+            AND "DbT5101NinteiShinseiJoho"."shoriJotaiKubun" IN ('0','3')										
             AND "DbT5101NinteiShinseiJoho"."logicalDeletedFlag" = false									
             AND "DbT5105NinteiKanryoJoho"."ninteiShinseiJohoTorokuKanryoYMD" IS NOT NULL                  
             AND "DbT5105NinteiKanryoJoho"."ninteiShinsakaiWariateKanryoYMD" IS NULL                  

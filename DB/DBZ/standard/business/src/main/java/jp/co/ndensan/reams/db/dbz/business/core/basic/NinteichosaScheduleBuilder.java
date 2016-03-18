@@ -44,7 +44,6 @@ public class NinteichosaScheduleBuilder {
      * @return {@link NinteichosaScheduleBuilder}
      */
     public NinteichosaScheduleBuilder set申請書管理番号(ShinseishoKanriNo 申請書管理番号) {
-        requireNonNull(申請書管理番号, UrSystemErrorMessages.値がnull.getReplacedMessage("申請書管理番号"));
         entity.setShinseishoKanriNo(申請書管理番号);
         return this;
     }

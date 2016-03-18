@@ -8,9 +8,9 @@ package jp.co.ndensan.reams.db.dbe.divcontroller.controller.dbe9040001;
 import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbe.business.core.csv.ninteichosainmaster.NinteiChosainMasterCsvBusiness;
+import jp.co.ndensan.reams.db.dbe.business.core.ninnteichousairai.ShichosonMeishoBusiness;
 import jp.co.ndensan.reams.db.dbe.business.core.tyousai.chosainjoho.ChosainJoho;
 import jp.co.ndensan.reams.db.dbe.business.core.tyousai.chosainjoho.ChosainJohoIdentifier;
-import jp.co.ndensan.reams.db.dbe.definition.core.ViewStateKeys;
 import jp.co.ndensan.reams.db.dbe.definition.mybatis.param.ninteichosainmaster.NinteiChosainMasterMapperParameter;
 import jp.co.ndensan.reams.db.dbe.definition.mybatis.param.ninteichosainmaster.NinteiChosainMasterSearchParameter;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE9040001.DBE9040001StateName;
@@ -22,13 +22,18 @@ import jp.co.ndensan.reams.db.dbe.divcontroller.handler.parentdiv.dbe9040001.Nin
 import jp.co.ndensan.reams.db.dbe.service.core.ninteichosainmaster.NinteiChosainMasterFinder;
 import jp.co.ndensan.reams.db.dbe.service.core.ninteichosainmaster.NinteiChosainMasterManager;
 import jp.co.ndensan.reams.db.dbe.service.core.tyousai.chosainjoho.ChosainJohoManager;
+import jp.co.ndensan.reams.db.dbz.business.core.inkijuntsukishichosonjoho.KijuntsukiShichosonjohoiDataPassModel;
+import jp.co.ndensan.reams.db.dbz.definition.core.koseishichosonselector.KoseiShiChosonSelectorModel;
 import jp.co.ndensan.reams.db.dbz.definition.core.valueobject.ninteishinsei.ChosaItakusakiCode;
 import jp.co.ndensan.reams.db.dbz.definition.core.valueobject.ninteishinsei.ChosainCode;
 import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.kyotsu.SaibanHanyokeyName;
+import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.ChosaItakusakiAndChosainGuide.ChosaItakusakiAndChosainGuide.ChosaItakusakiAndChosainGuideDiv.TaishoMode;
+import jp.co.ndensan.reams.db.dbz.divcontroller.viewbox.ViewStateKeys;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrInformationMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrQuestionMessages;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
+import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.ApplicationException;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -39,6 +44,7 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.ResponseHolder;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 import jp.co.ndensan.reams.uz.uza.util.Models;
+import jp.co.ndensan.reams.uz.uza.util.serialization.DataPassingConverter;
 
 /**
  * 認定調査員マスタ処理のクラスです。
@@ -412,7 +418,17 @@ public class NinteiChosainMaster {
      * @return ResponseData<NinteiChosainMasterDiv>
      */
     public ResponseData<NinteiChosainMasterDiv> onBlur_txtShichoson(NinteiChosainMasterDiv div) {
-        getHandler(div).setTxtShichosonmei();
+        RString shichoson = div.getChosainJohoInput().getTxtShichoson().getValue();
+        if (RString.isNullOrEmpty(shichoson)) {
+            div.getChosainJohoInput().getTxtShichosonmei().setValue(RString.EMPTY);
+        } else {
+            List<ShichosonMeishoBusiness> list = NinteiChosainMasterFinder.createInstance().getShichosonMeisho(new LasdecCode(shichoson)).records();
+            if (!list.isEmpty()) {
+                div.getChosainJohoInput().getTxtShichosonmei().setValue(list.get(0).getShichosonMeisho());
+            } else {
+                div.getChosainJohoInput().getTxtShichosonmei().setValue(RString.EMPTY);
+            }
+        }
         return ResponseData.of(div).respond();
     }
 
@@ -423,11 +439,21 @@ public class NinteiChosainMaster {
      * @return ResponseData<NinteiChosainMasterDiv>
      */
     public ResponseData<NinteiChosainMasterDiv> onBlur_txtChosaItakusaki(NinteiChosainMasterDiv div) {
-        RString ninteichosaItakusakiMeisho = NinteiChosainMasterFinder.createInstance().getNinteichosaItakusakiMeisho(NinteiChosainMasterSearchParameter.createParamForSelectChosainJoho(
-                new LasdecCode(div.getChosainJohoInput().getTxtShichoson().getValue()),
-                new ChosaItakusakiCode(div.getChosainJohoInput().getTxtChosaItakusaki().getValue()),
-                new ChosainCode(div.getChosainJohoInput().getTxtChosainCode().getValue())));
-        div.getChosainJohoInput().getTxtChosaItakusakiMeisho().setValue(ninteichosaItakusakiMeisho);
+        RString txtChosaItakusaki = div.getChosainJohoInput().getTxtChosaItakusaki().getValue();
+        if (!RString.isNullOrEmpty(txtChosaItakusaki)) {
+            RString ninteichosaItakusakiMeisho = NinteiChosainMasterFinder.createInstance().getNinteichosaItakusakiMeisho(NinteiChosainMasterSearchParameter.createParamForSelectChosainJoho(
+                    new LasdecCode(div.getChosainJohoInput().getTxtShichoson().getValue()),
+                    new ChosaItakusakiCode(div.getChosainJohoInput().getTxtChosaItakusaki().getValue()),
+                    new ChosainCode(div.getChosainJohoInput().getTxtChosainCode().getValue())));
+            if (!RString.isNullOrEmpty(ninteichosaItakusakiMeisho)) {
+                div.getChosainJohoInput().getTxtChosaItakusakiMeisho().setValue(ninteichosaItakusakiMeisho);
+            } else {
+                div.getChosainJohoInput().getTxtChosaItakusakiMeisho().setValue(RString.EMPTY);
+            }
+        } else {
+            div.getChosainJohoInput().getTxtChosaItakusakiMeisho().setValue(RString.EMPTY);
+        }
+
         return ResponseData.of(div).respond();
     }
 
@@ -437,8 +463,10 @@ public class NinteiChosainMaster {
      * @param div NinteiChosainMasterDiv
      * @return ResponseData<NinteiChosainMasterDiv>
      */
-    public ResponseData<NinteiChosainMasterDiv> onBlur_txtChiku(NinteiChosainMasterDiv div) {
-        getHandler(div).setTxtChikuMei();
+    public ResponseData<NinteiChosainMasterDiv> onOkClose_btnToSearchShichoson(NinteiChosainMasterDiv div) {
+        KoseiShiChosonSelectorModel model = ViewStateHolder.get(ViewStateKeys.構成市町村選択_引き継ぎデータ, KoseiShiChosonSelectorModel.class);
+        div.getChosainJohoInput().getTxtShichoson().setValue(model.get市町村コード());
+        div.getChosainJohoInput().getTxtShichosonmei().setValue(model.get市町村名称());
         return ResponseData.of(div).respond();
     }
 
@@ -600,6 +628,36 @@ public class NinteiChosainMaster {
     public ResponseData<NinteiChosainMasterDiv> onClick_btnBackIchiran_Itakusaki(NinteiChosainMasterDiv div) {
         div.getChosainIchiran().setDisabled(false);
         return ResponseData.of(div).setState(DBE9040001StateName.一覧_認定調査委託先マスタから遷移);
+    }
+
+    /**
+     * 認定調査委託先の検索処理です。
+     *
+     * @param div NinteiChosainMasterDiv
+     * @return ResponseData
+     */
+    public ResponseData<NinteiChosainMasterDiv> onClick_btnToSearchChosaItakusaki(NinteiChosainMasterDiv div) {
+        KijuntsukiShichosonjohoiDataPassModel dataPassModel = new KijuntsukiShichosonjohoiDataPassModel();
+        dataPassModel.setサブ業務コード(SubGyomuCode.DBE認定支援.value());
+        dataPassModel.set市町村コード(div.getChosainJohoInput().getTxtShichoson().getValue());
+        dataPassModel.set対象モード(new RString(TaishoMode.Itakusaki.toString()));
+
+        div.setHdnDataPass(DataPassingConverter.serialize(dataPassModel));
+        return ResponseData.of(div).respond();
+    }
+
+    /**
+     * 認定調査委託先の設定処理です。
+     *
+     * @param div NinteiChosainMasterDiv
+     * @return ResponseData
+     */
+    public ResponseData<NinteiChosainMasterDiv> onOkClose_btnToSearchChosaItakusaki(NinteiChosainMasterDiv div) {
+        KijuntsukiShichosonjohoiDataPassModel dataPassModel = DataPassingConverter.deserialize(
+                div.getHdnDataPass(), KijuntsukiShichosonjohoiDataPassModel.class);
+        div.getChosainJohoInput().getTxtChosaItakusaki().setValue(dataPassModel.get委託先コード());
+        div.getChosainJohoInput().getTxtChosaItakusakiMeisho().setValue(dataPassModel.get委託先名());
+        return ResponseData.of(div).respond();
     }
 
     private NinteiChosainMasterHandler getHandler(NinteiChosainMasterDiv div) {

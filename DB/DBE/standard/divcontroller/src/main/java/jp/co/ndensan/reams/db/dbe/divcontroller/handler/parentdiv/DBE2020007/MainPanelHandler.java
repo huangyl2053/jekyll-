@@ -10,7 +10,7 @@ import java.util.List;
 import jp.co.ndensan.reams.db.dbe.business.core.chosachikuchichoson.ChosaChikuChichosonBusiness;
 import jp.co.ndensan.reams.db.dbe.business.core.chosachikuchichoson.UzT0007CodeBusiness;
 import jp.co.ndensan.reams.db.dbe.definition.mybatis.param.chosachikuchichoson.ChosaChikuChichosonParameter;
-import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2020007.MainPanelDiv;
+import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2020007.NinteiChosaSchedule7MainDiv;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2020007.dgChosaChikuChichosonList_Row;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2020007.dgChosaChikuList_Row;
 import jp.co.ndensan.reams.db.dbe.service.core.chosachikuchichoson.ChosaChikuFinder;
@@ -31,25 +31,23 @@ import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 import jp.co.ndensan.reams.uz.uza.util.serialization.DataPassingConverter;
 
 /**
- * 調査地区市町村情報のHandlerクラスです。
+ * 認定調査スケジュール登録7のHandlerクラスです。
  */
 public class MainPanelHandler {
 
-    private static final boolean 属性_TRUE = true;
-    private static final boolean 属性_FALSE = false;
     private static final RString 状態_追加 = new RString("追加");
     private static final RString 状態_修正 = new RString("修正");
     private static final RString 状態_削除 = new RString("削除");
     private static final RString SELECT_KEY_1 = new RString("key0");
     private static final RString SELECT_KEY_2 = new RString("key1");
-    private final MainPanelDiv div;
+    private final NinteiChosaSchedule7MainDiv div;
 
     /**
      * コンストラクタです。
      *
      * @param div div
      */
-    public MainPanelHandler(MainPanelDiv div) {
+    public MainPanelHandler(NinteiChosaSchedule7MainDiv div) {
         this.div = div;
     }
 
@@ -59,9 +57,9 @@ public class MainPanelHandler {
      * @param businessList 調査地区情報
      */
     public void onLoad(List<UzT0007CodeBusiness> businessList) {
-        div.getCcdKanryoMessage().setVisible(属性_TRUE);
-        div.getChosaChikuShichosonPanel().setVisible(属性_TRUE);
-        div.getChosaChikuShichosoInput().setVisible(属性_TRUE);
+        div.getCcdKanryoMessage().setVisible(true);
+        div.getChosaChikuShichosonPanel().setVisible(true);
+        div.getChosaChikuShichosoInput().setVisible(true);
         List<dgChosaChikuList_Row> rowList = new ArrayList<>();
         int index = 1;
         for (UzT0007CodeBusiness business : businessList) {
@@ -85,12 +83,12 @@ public class MainPanelHandler {
     public void onClik_SelectBtn(List<ChosaChikuChichosonBusiness> businessList, dgChosaChikuList_Row dgRow) {
         List<dgChosaChikuChichosonList_Row> rowList = new ArrayList<>();
         if (!businessList.isEmpty()) {
-            div.getCcdKanryoMessage().setVisible(属性_TRUE);
-            div.getChosaChikuPanel().setVisible(属性_TRUE);
-            div.getChosaChikuShichosoInput().setVisible(属性_TRUE);
+            div.getCcdKanryoMessage().setVisible(true);
+            div.getChosaChikuPanel().setVisible(true);
+            div.getChosaChikuShichosoInput().setVisible(true);
             for (ChosaChikuChichosonBusiness business : businessList) {
                 dgChosaChikuChichosonList_Row row = new dgChosaChikuChichosonList_Row();
-                row.setJotai(nullToEmpty(RString.EMPTY));
+                row.setJotai(RString.EMPTY);
                 row.setYusenNo(nullToEmpty(new RString(String.valueOf(business.get優先番号()))));
                 row.setCityCode(nullToEmpty(business.get市町村コード()));
                 row.setCityName(nullToEmpty(business.get市町村名()));
@@ -99,8 +97,8 @@ public class MainPanelHandler {
             }
             div.getChosaChikuShichosonPanel().getTxtChosaChikuCode().setValue(dgRow.getChosaChikuCode());
             div.getChosaChikuShichosonPanel().getTxtChosaChikuName().setValue(dgRow.getChosaChikuName());
-            div.getChosaChikuShichosonPanel().getTxtChosaChikuCode().setReadOnly(属性_TRUE);
-            div.getChosaChikuShichosonPanel().getTxtChosaChikuName().setReadOnly(属性_TRUE);
+            div.getChosaChikuShichosonPanel().getTxtChosaChikuCode().setReadOnly(true);
+            div.getChosaChikuShichosonPanel().getTxtChosaChikuName().setReadOnly(true);
         }
         div.getChosaChikuShichosonPanel().getDgChosaChikuChichosonList().setDataSource(rowList);
     }
@@ -109,10 +107,10 @@ public class MainPanelHandler {
      * 調査地区市町村を追加します。
      */
     public void onClick_AddBtn() {
-        div.getCcdKanryoMessage().setVisible(属性_TRUE);
-        div.getChosaChikuPanel().setVisible(属性_TRUE);
-        div.getChosaChikuShichosonPanel().setVisible(属性_TRUE);
-        div.getChosaChikuShichosoInput().getTxtShichoSonMeisho().setDisabled(属性_TRUE);
+        div.getCcdKanryoMessage().setVisible(true);
+        div.getChosaChikuPanel().setVisible(true);
+        div.getChosaChikuShichosonPanel().setVisible(true);
+        div.getChosaChikuShichosoInput().getTxtShichoSonMeisho().setDisabled(true);
         div.getChosaChikuShichosoInput().setTxtJotai(状態_追加);
         div.getChosaChikuShichosoInput().getRadJiChikuFlag().setSelectedKey(SELECT_KEY_1);
     }
@@ -121,12 +119,12 @@ public class MainPanelHandler {
      * 修正ボタンを押下します。
      */
     public void onClick_ModifyBtn() {
-        div.getCcdKanryoMessage().setVisible(属性_TRUE);
-        div.getChosaChikuPanel().setVisible(属性_TRUE);
-        div.getChosaChikuShichosonPanel().setVisible(属性_TRUE);
-        div.getChosaChikuShichosoInput().getTxtShichoSonCode().setDisabled(属性_TRUE);
-        div.getChosaChikuShichosoInput().getTxtShichoSonMeisho().setDisabled(属性_TRUE);
-        div.getChosaChikuShichosoInput().getBtnToSearchShichoson().setDisabled(属性_TRUE);
+        div.getCcdKanryoMessage().setVisible(true);
+        div.getChosaChikuPanel().setVisible(true);
+        div.getChosaChikuShichosonPanel().setVisible(true);
+        div.getChosaChikuShichosoInput().getTxtShichoSonCode().setDisabled(true);
+        div.getChosaChikuShichosoInput().getTxtShichoSonMeisho().setDisabled(true);
+        div.getChosaChikuShichosoInput().getBtnToSearchShichoson().setDisabled(true);
         dgChosaChikuChichosonList_Row dgRow = div.getChosaChikuShichosonPanel().getDgChosaChikuChichosonList().getSelectedItems().get(0);
         div.getChosaChikuShichosoInput().getTxtShichoSonCode().setValue(dgRow.getCityCode());
         div.getChosaChikuShichosoInput().getTxtYusenNo().setValue(new Decimal(dgRow.getYusenNo().toString()));
@@ -146,14 +144,14 @@ public class MainPanelHandler {
      * 削除ボタンを押下します。
      */
     public void onClick_DeleteBtn() {
-        div.getCcdKanryoMessage().setVisible(属性_TRUE);
-        div.getChosaChikuPanel().setVisible(属性_TRUE);
-        div.getChosaChikuShichosonPanel().setVisible(属性_TRUE);
-        div.getChosaChikuShichosoInput().getTxtShichoSonCode().setDisabled(属性_TRUE);
-        div.getChosaChikuShichosoInput().getTxtYusenNo().setDisabled(属性_TRUE);
-        div.getChosaChikuShichosoInput().getTxtShichoSonMeisho().setDisabled(属性_TRUE);
-        div.getChosaChikuShichosoInput().getBtnToSearchShichoson().setDisabled(属性_TRUE);
-        div.getChosaChikuShichosoInput().getRadJiChikuFlag().setDisabled(属性_TRUE);
+        div.getCcdKanryoMessage().setVisible(true);
+        div.getChosaChikuPanel().setVisible(true);
+        div.getChosaChikuShichosonPanel().setVisible(true);
+        div.getChosaChikuShichosoInput().getTxtShichoSonCode().setDisabled(true);
+        div.getChosaChikuShichosoInput().getTxtYusenNo().setDisabled(true);
+        div.getChosaChikuShichosoInput().getTxtShichoSonMeisho().setDisabled(true);
+        div.getChosaChikuShichosoInput().getBtnToSearchShichoson().setDisabled(true);
+        div.getChosaChikuShichosoInput().getRadJiChikuFlag().setDisabled(true);
         dgChosaChikuChichosonList_Row dgRow = div.getChosaChikuShichosonPanel().getDgChosaChikuChichosonList().getSelectedItems().get(0);
         div.getChosaChikuShichosoInput().getTxtYusenNo().setValue(new Decimal(dgRow.getYusenNo().toString()));
         div.getChosaChikuShichosoInput().getTxtShichoSonCode().setValue(dgRow.getCityCode());
@@ -170,9 +168,9 @@ public class MainPanelHandler {
         div.getCcdKanryoMessage().setVisible(true);
         div.getChosaChikuPanel().setVisible(true);
         div.getChosaChikuShichosonPanel().setVisible(true);
-        div.getChosaChikuShichosoInput().getTxtYusenNo().setDisabled(属性_TRUE);
-        div.getChosaChikuShichosoInput().getTxtShichoSonCode().setDisabled(属性_TRUE);
-        div.getChosaChikuShichosoInput().getTxtShichoSonMeisho().setDisabled(属性_TRUE);
+        div.getChosaChikuShichosoInput().getTxtYusenNo().setDisabled(true);
+        div.getChosaChikuShichosoInput().getTxtShichoSonCode().setDisabled(true);
+        div.getChosaChikuShichosoInput().getTxtShichoSonMeisho().setDisabled(true);
         dgChosaChikuChichosonList_Row dgRow = div.getChosaChikuShichosonPanel().getDgChosaChikuChichosonList().getSelectedItems().get(0);
         div.getChosaChikuShichosoInput().getTxtYusenNo().setValue(new Decimal(dgRow.getYusenNo().toString()));
         div.getChosaChikuShichosoInput().getTxtShichoSonCode().setValue(dgRow.getCityCode());
@@ -189,15 +187,15 @@ public class MainPanelHandler {
     }
 
     private void 明細照会状態() {
-        div.getCcdKanryoMessage().setVisible(属性_TRUE);
-        div.getChosaChikuPanel().setVisible(属性_TRUE);
-        div.getChosaChikuShichosonPanel().setVisible(属性_TRUE);
-        div.getChosaChikuShichosoInput().getTxtYusenNo().setDisabled(属性_TRUE);
-        div.getChosaChikuShichosoInput().getTxtShichoSonCode().setDisabled(属性_TRUE);
-        div.getChosaChikuShichosoInput().getBtnToSearchShichoson().setDisabled(属性_TRUE);
-        div.getChosaChikuShichosoInput().getTxtShichoSonMeisho().setDisabled(属性_TRUE);
-        div.getChosaChikuShichosoInput().getRadJiChikuFlag().setDisabled(属性_TRUE);
-        div.getChosaChikuShichosoInput().getBtnKakutei().setDisabled(属性_TRUE);
+        div.getCcdKanryoMessage().setVisible(true);
+        div.getChosaChikuPanel().setVisible(true);
+        div.getChosaChikuShichosonPanel().setVisible(true);
+        div.getChosaChikuShichosoInput().getTxtYusenNo().setDisabled(true);
+        div.getChosaChikuShichosoInput().getTxtShichoSonCode().setDisabled(true);
+        div.getChosaChikuShichosoInput().getBtnToSearchShichoson().setDisabled(true);
+        div.getChosaChikuShichosoInput().getTxtShichoSonMeisho().setDisabled(true);
+        div.getChosaChikuShichosoInput().getRadJiChikuFlag().setDisabled(true);
+        div.getChosaChikuShichosoInput().getBtnKakutei().setDisabled(true);
         dgChosaChikuChichosonList_Row dgRow = div.getChosaChikuShichosonPanel().getDgChosaChikuChichosonList().getSelectedItems().get(0);
         div.getChosaChikuShichosoInput().getTxtYusenNo().setValue(new Decimal(dgRow.getYusenNo().toString()));
         div.getChosaChikuShichosoInput().getTxtShichoSonCode().setValue(dgRow.getCityCode());
@@ -229,18 +227,6 @@ public class MainPanelHandler {
         }
     }
 
-//    /**
-//     * 市町村検索ボタンを押下します。
-//     */
-//    public void onOpen_Dialog() {
-//        KoseiShiChosonSelectorModel model = new KoseiShiChosonSelectorModel();
-////        model.set市町村コード(div.getNinteiChosainPanel().getShichosonCode());
-////        model.set委託先コード(RString.EMPTY);
-////        model.set委託先名(RString.EMPTY);
-////        model.set調査員コード(div.getNinteiChosainInput().getTxtNinteiChosainCode().getValue());
-////        model.set調査員名(RString.EMPTY);
-//        div.setHdnDataPass(DataPassingConverter.serialize(model));
-//    }
     /**
      * 市町村検索が戻します。
      */
@@ -273,9 +259,9 @@ public class MainPanelHandler {
      * 確定するボタンが押下します。
      */
     public void onClick_KakuteiBtn() {
-        div.getCcdKanryoMessage().setVisible(属性_TRUE);
-        div.getChosaChikuPanel().setVisible(属性_TRUE);
-        div.getChosaChikuShichosoInput().setVisible(属性_TRUE);
+        div.getCcdKanryoMessage().setVisible(true);
+        div.getChosaChikuPanel().setVisible(true);
+        div.getChosaChikuShichosoInput().setVisible(true);
         List<dgChosaChikuChichosonList_Row> rowList = div.getChosaChikuShichosonPanel().getDgChosaChikuChichosonList().getDataSource();
         int rowCount = 0;
         if (!状態_追加.equals(div.getChosaChikuShichosoInput().getTxtJotai())) {
@@ -288,7 +274,7 @@ public class MainPanelHandler {
             row.setYusenNo(new RString(div.getChosaChikuShichosoInput().getTxtYusenNo().getValue().toString()));
             row.setCityCode(div.getChosaChikuShichosoInput().getTxtShichoSonCode().getValue());
             row.setCityName(div.getChosaChikuShichosoInput().getTxtShichoSonMeisho().getValue());
-            row.setJichiku(SELECT_KEY_1.equals(div.getChosaChikuShichosoInput().getRadJiChikuFlag().getSelectedKey()) ? 属性_TRUE : 属性_FALSE);
+            row.setJichiku(SELECT_KEY_1.equals(div.getChosaChikuShichosoInput().getRadJiChikuFlag().getSelectedKey()));
             rowList.add(row);
             clearValue();
         }
@@ -297,7 +283,7 @@ public class MainPanelHandler {
             row.setYusenNo(new RString(div.getChosaChikuShichosoInput().getTxtYusenNo().getValue().toString()));
             row.setCityCode(div.getChosaChikuShichosoInput().getTxtShichoSonCode().getValue());
             row.setCityName(div.getChosaChikuShichosoInput().getTxtShichoSonMeisho().getValue());
-            row.setJichiku(SELECT_KEY_1.equals(div.getChosaChikuShichosoInput().getRadJiChikuFlag().getSelectedKey()) ? 属性_TRUE : 属性_FALSE);
+            row.setJichiku(SELECT_KEY_1.equals(div.getChosaChikuShichosoInput().getRadJiChikuFlag().getSelectedKey()));
             if (状態_追加.equals(row.getJotai())) {
                 row.setJotai(状態_追加);
             } else {
@@ -350,16 +336,15 @@ public class MainPanelHandler {
                 ChosaChikuFinder.createInstance().insertOrUpdate(builder.build());
             }
             if (状態_削除.equals(listRow.getJotai())) {
-                ChosaChikuChichosonParameter paramer = new ChosaChikuChichosonParameter();
-                paramer.setChosaChikuCode(div.getChosaChikuShichosonPanel().getTxtChosaChikuCode().getValue());
-                paramer.setShichosonCode(listRow.getCityCode());
-                ChosaChikuFinder.createInstance().delete(paramer);
+                ChosaChikuFinder.createInstance().delete(ChosaChikuChichosonParameter.createParameter(
+                        div.getChosaChikuShichosonPanel().getTxtChosaChikuCode().getValue(),
+                        listRow.getCityCode()));
             }
         }
         前排他解除処理();
-        div.getChosaChikuPanel().setVisible(属性_TRUE);
-        div.getChosaChikuShichosonPanel().setVisible(属性_TRUE);
-        div.getChosaChikuShichosoInput().setVisible(属性_TRUE);
+        div.getChosaChikuPanel().setVisible(true);
+        div.getChosaChikuShichosonPanel().setVisible(true);
+        div.getChosaChikuShichosoInput().setVisible(true);
     }
 
     private void 前排他制御処理() {
@@ -393,14 +378,14 @@ public class MainPanelHandler {
         div.getChosaChikuShichosoInput().setHdnYusenNo(RString.EMPTY);
         div.getChosaChikuShichosoInput().setHdnJichiku(RString.EMPTY);
         div.getChosaChikuShichosoInput().setTxtJotai(RString.EMPTY);
-        div.getChosaChikuShichosoInput().setDisabled(属性_FALSE);
-        div.getChosaChikuShichosoInput().getTxtYusenNo().setDisabled(属性_FALSE);
-        div.getChosaChikuShichosoInput().getTxtShichoSonCode().setDisabled(属性_FALSE);
-        div.getChosaChikuShichosoInput().getBtnToSearchShichoson().setDisabled(属性_FALSE);
-        div.getChosaChikuShichosoInput().getBtnTorikeshi().setDisabled(属性_FALSE);
-        div.getChosaChikuShichosoInput().getBtnKakutei().setDisabled(属性_FALSE);
-        div.getChosaChikuShichosoInput().getTxtShichoSonMeisho().setDisabled(属性_FALSE);
-        div.getChosaChikuShichosoInput().getRadJiChikuFlag().setDisabled(属性_FALSE);
+        div.getChosaChikuShichosoInput().setDisabled(false);
+        div.getChosaChikuShichosoInput().getTxtYusenNo().setDisabled(false);
+        div.getChosaChikuShichosoInput().getTxtShichoSonCode().setDisabled(false);
+        div.getChosaChikuShichosoInput().getBtnToSearchShichoson().setDisabled(false);
+        div.getChosaChikuShichosoInput().getBtnTorikeshi().setDisabled(false);
+        div.getChosaChikuShichosoInput().getBtnKakutei().setDisabled(false);
+        div.getChosaChikuShichosoInput().getTxtShichoSonMeisho().setDisabled(false);
+        div.getChosaChikuShichosoInput().getRadJiChikuFlag().setDisabled(false);
         div.getChosaChikuShichosoInput().getRadJiChikuFlag().setSelectedKey(SELECT_KEY_1);
     }
 

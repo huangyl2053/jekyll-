@@ -48,7 +48,6 @@
         <dependency>
             <groupId>jp.co.ndensan.reams.db.dbx</groupId>
             <artifactId>DbxPersistence</artifactId>
-            <scope>runtime</scope>
         </dependency>
         <!-- 公開系 -->
         <dependency>

@@ -23,6 +23,7 @@ import jp.co.ndensan.reams.ur.urz.business.UrControlDataFactory;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.report.SourceDataCollection;
+import jp.co.ndensan.reams.uz.uza.ui.servlets.CommonButtonHolder;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 
@@ -35,6 +36,7 @@ public class ShinseiKensaku {
     private static final RString MENUID_DBEMN11003 = new RString("DBEMN11003");
     private static final RString MENUID_DBEMN14001 = new RString("DBEMN14001");
     private static final RString MENUID_DBEMN32002 = new RString("DBEMN14001");
+    private static final RString BUTTON_BTNITIRANPRINT = new RString("btnitiranprint");
 
     /**
      * 画面初期化処理です。
@@ -45,6 +47,15 @@ public class ShinseiKensaku {
     public ResponseData<ShinseiKensakuDiv> onLoad(ShinseiKensakuDiv div) {
         div.getCcdNinteishinseishaFinder().initialize();
         getHandler(div).load();
+        IUrControlData controlData = UrControlDataFactory.createInstance();
+        RString menuID = controlData.getMenuID();
+        if (MENUID_DBEMN11001.equals(menuID)) {
+            return ResponseData.of(div).setState(DBE0100001StateName.申請検索);
+        } else if (MENUID_DBEMN11003.equals(menuID)) {
+            return ResponseData.of(div).setState(DBE0100001StateName.個人照会);
+        } else if (MENUID_DBEMN14001.equals(menuID) || MENUID_DBEMN32002.equals(menuID)) {
+            return ResponseData.of(div).setState(DBE0100001StateName.情報提供);
+        }
         return ResponseData.of(div).respond();
     }
 
@@ -79,7 +90,11 @@ public class ShinseiKensaku {
             div.getTxtMaxDisp().setDisabled(true);
             div.getBtnKensaku().setDisabled(true);
             div.getBtnModoru().setDisabled(false);
-            return ResponseData.of(div).setState(DBE0100001StateName.申請検索);
+            IUrControlData controlData = UrControlDataFactory.createInstance();
+            RString menuID = controlData.getMenuID();
+            if (MENUID_DBEMN11001.equals(menuID)) {
+                CommonButtonHolder.setDisabledByCommonButtonFieldName(BUTTON_BTNITIRANPRINT, false);
+            }
         }
 
         return ResponseData.of(div).respond();

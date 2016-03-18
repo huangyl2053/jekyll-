@@ -14,7 +14,9 @@ import static jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3017KyufujissekiKiho
 import static jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3017KyufujissekiKihon.kyufuJissekiKubunCode;
 import static jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3017KyufujissekiKihon.kyufuSakuseiKubunCode;
 import static jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3017KyufujissekiKihon.recodeShubetsuCode;
+import static jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3017KyufujissekiKihon.seiriNo;
 import static jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3017KyufujissekiKihon.serviceTeikyoYM;
+import static jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3017KyufujissekiKihon.shinsaYM;
 import static jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3017KyufujissekiKihon.shokisaiHokenshaNo;
 import static jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3017KyufujissekiKihon.toshiNo;
 import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3017KyufujissekiKihonEntity;
@@ -29,7 +31,9 @@ import jp.co.ndensan.reams.uz.uza.core.mybatis.SqlSession;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.util.db.DbAccessorNormalType;
+import static jp.co.ndensan.reams.uz.uza.util.db.Order.DESC;
 import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.and;
+import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.by;
 import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.eq;
 import jp.co.ndensan.reams.uz.uza.util.db.util.DbAccessors;
 import jp.co.ndensan.reams.uz.uza.util.di.InjectSession;
@@ -127,5 +131,40 @@ public class DbT3017KyufujissekiKihonDac implements ISaveable<DbT3017Kyufujissek
         // TODO 物理削除であるかは業務ごとに検討してください。
         //return DbAccessorMethodSelector.saveByForDeletePhysical(new DbAccessorNormalType(session), entity);
         return DbAccessors.saveBy(new DbAccessorNormalType(session), entity);
+    }
+
+    /**
+     * 給付実績基本情報リスト取得
+     *
+     * @param 様式番号 InputShikibetsuNo
+     * @param 証記載保険者番号 HokenshaNo
+     * @param 被保険者番号 HiHokenshaNo
+     * @param サービス提供年月 ServiceTeikyoYM
+     * @param 給付実績区分コード KyufuJissekiKubunCode
+     * @param 整理番号 seiriNo
+     * @return List<DbT3017KyufujissekiKihonEntity>
+     */
+    @Transaction
+    public List<DbT3017KyufujissekiKihonEntity> select給付実績基本情報(
+            RString 様式番号,
+            HokenshaNo 証記載保険者番号,
+            HihokenshaNo 被保険者番号,
+            FlexibleYearMonth サービス提供年月,
+            RString 給付実績区分コード,
+            RString 整理番号) {
+
+        DbAccessorNormalType accessor = new DbAccessorNormalType(session);
+
+        return accessor.select().
+                table(DbT3017KyufujissekiKihon.class).
+                where(and(
+                                eq(inputShikibetsuNo, 様式番号),
+                                eq(shokisaiHokenshaNo, 証記載保険者番号),
+                                eq(hiHokenshaNo, 被保険者番号),
+                                eq(serviceTeikyoYM, サービス提供年月),
+                                eq(kyufuJissekiKubunCode, 給付実績区分コード),
+                                eq(seiriNo, 整理番号))).
+                order(by(shinsaYM, DESC)).
+                toList(DbT3017KyufujissekiKihonEntity.class);
     }
 }

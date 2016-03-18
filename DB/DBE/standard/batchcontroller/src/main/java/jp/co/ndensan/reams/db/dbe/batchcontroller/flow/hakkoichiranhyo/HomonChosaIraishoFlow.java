@@ -5,8 +5,12 @@
  */
 package jp.co.ndensan.reams.db.dbe.batchcontroller.flow.hakkoichiranhyo;
 
+import jp.co.ndensan.reams.db.dbe.batchcontroller.step.homonchosairaisho.IchiranhyoReportProcess;
+import jp.co.ndensan.reams.db.dbe.batchcontroller.step.homonchosairaisho.IraishoReportProcess;
 import jp.co.ndensan.reams.db.dbe.definition.batchprm.iraisho.IraishoIkkatsuHakkoBatchParamter;
+import jp.co.ndensan.reams.uz.uza.batch.Step;
 import jp.co.ndensan.reams.uz.uza.batch.flow.BatchFlowBase;
+import jp.co.ndensan.reams.uz.uza.batch.flow.IBatchFlowCommand;
 
 /**
  *
@@ -19,10 +23,10 @@ public class HomonChosaIraishoFlow extends BatchFlowBase<IraishoIkkatsuHakkoBatc
 
     @Override
     protected void defineFlow() {
-
-        if (getParameter().isNinteiChosaIraiChohyo()) {
-            executeStep(CHOSAIRAISHOREPORT_PROCESS);
-        }
+//  TODO　仕様変更未対応
+//        if (getParameter().isNinteiChosaIraiChohyo()) {
+//            executeStep(CHOSAIRAISHOREPORT_PROCESS);
+//        }
         if (getParameter().isNinteiChosaIraisyo()) {
             executeStep(ICHIRANHYOREPORT_PROCESS);
         }
@@ -33,20 +37,20 @@ public class HomonChosaIraishoFlow extends BatchFlowBase<IraishoIkkatsuHakkoBatc
      *
      * @return IraishoReportProcess
      */
-//    @Step(CHOSAIRAISHOREPORT_PROCESS)
-//    protected IBatchFlowCommand ichiranhyoReportProcess() {
-//        return loopBatch(IchiranhyoReportProcess.class)
-//                .arguments(getParameter().toHomonChosaIraishoProcessParamter()).define();
-//    }
-//
-//    /**
-//     * 認定調査依頼書のReportProcessです。
-//     *
-//     * @return IraishoReportProcess
-//     */
-//    @Step(ICHIRANHYOREPORT_PROCESS)
-//    protected IBatchFlowCommand iraishoReportProcess() {
-//        return loopBatch(IraishoReportProcess.class)
-//                .arguments(getParameter().toHomonChosaIraishoProcessParamter()).define();
-//    }
+    @Step(CHOSAIRAISHOREPORT_PROCESS)
+    protected IBatchFlowCommand ichiranhyoReportProcess() {
+        return loopBatch(IchiranhyoReportProcess.class)
+                .arguments(getParameter().toHomonChosaIraishoProcessParamter()).define();
+    }
+
+    /**
+     * 認定調査依頼書のReportProcessです。
+     *
+     * @return IraishoReportProcess
+     */
+    @Step(ICHIRANHYOREPORT_PROCESS)
+    protected IBatchFlowCommand iraishoReportProcess() {
+        return loopBatch(IraishoReportProcess.class)
+                .arguments(getParameter().toHomonChosaIraishoProcessParamter()).define();
+    }
 }

@@ -9,10 +9,10 @@ import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbc.business.core.kagoketteikohifutanshain.KagoKetteiTsuchishoJohoTorikomiIchiranhyoKouhiFutanshabun;
 import jp.co.ndensan.reams.db.dbc.business.report.kagoketteikohifutanshain.KagoKetteiKohifutanshaInItem;
-import jp.co.ndensan.reams.db.dbc.business.report.kagoketteikohifutanshain.KagoKetteitsuchishoTorikomiIchiranKohifutanshaBunReport;
+import jp.co.ndensan.reams.db.dbc.business.report.kagoketteikohifutanshain.KagoKetteiKohifutanshaInReport;
 import jp.co.ndensan.reams.db.dbc.definition.reportid.ReportIdDBC;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.kagoketteikohifutanshain.KagoKetteiKohifutanshaInEntity;
-import jp.co.ndensan.reams.db.dbc.entity.report.source.kagoketteitsuchishotorikomiichirankohifutanshabun.KagoKetteitsuchishoTorikomiIchiranKohifutanshaBunSource;
+import jp.co.ndensan.reams.db.dbc.entity.report.source.kagoketteikohifutanshain.KagoKetteiKohifutanshaInSource;
 import jp.co.ndensan.reams.ur.urz.business.core.reportoutputorder.IOutputOrder;
 import jp.co.ndensan.reams.ur.urz.service.core.reportoutputorder.ChohyoShutsuryokujunFinderFactory;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchDbReader;
@@ -53,8 +53,8 @@ public class KohifutanshaWriteReportProcess extends BatchKeyBreakBase<KagoKettei
     private static final RString KAI_PAGE_HIHOKENSHA = new RString("listLower_2");
 
     @BatchWriter
-    private BatchReportWriter<KagoKetteitsuchishoTorikomiIchiranKohifutanshaBunSource> batchReportWriter;
-    private ReportSourceWriter<KagoKetteitsuchishoTorikomiIchiranKohifutanshaBunSource> reportSourceWriter;
+    private BatchReportWriter<KagoKetteiKohifutanshaInSource> batchReportWriter;
+    private ReportSourceWriter<KagoKetteiKohifutanshaInSource> reportSourceWriter;
 
     List<KagoKetteiKohifutanshaInEntity> entityList;
 
@@ -83,7 +83,7 @@ public class KohifutanshaWriteReportProcess extends BatchKeyBreakBase<KagoKettei
         }
         batchReportWriter = BatchReportFactory.createBatchReportWriter(
                 ReportIdDBC.DBC200051.getReportId().value(), SubGyomuCode.DBC介護給付)
-                .addBreak(new BreakerCatalog<KagoKetteitsuchishoTorikomiIchiranKohifutanshaBunSource>()
+                .addBreak(new BreakerCatalog<KagoKetteiKohifutanshaInSource>()
                         .simplePageBreaker(改頁項目リスト)).create();
         this.reportSourceWriter = new ReportSourceWriter<>(batchReportWriter);
     }
@@ -112,8 +112,8 @@ public class KohifutanshaWriteReportProcess extends BatchKeyBreakBase<KagoKettei
         List<KagoKetteiKohifutanshaInItem> targetList
                 = business.createKagoKetteiTsuchishoJohoTorikomiIchiranhyoKouhiFutanshabun(
                         shoriYM.getValue(), 並び順, entityList);
-        KagoKetteitsuchishoTorikomiIchiranKohifutanshaBunReport report
-                = KagoKetteitsuchishoTorikomiIchiranKohifutanshaBunReport.createForm(targetList);
+        KagoKetteiKohifutanshaInReport report
+                = KagoKetteiKohifutanshaInReport.createForm(targetList);
         report.writeBy(reportSourceWriter);
     }
 

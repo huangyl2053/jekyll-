@@ -70,11 +70,10 @@ public class NinteiChosainMasterValidationHandler {
             if (状態_修正.equals(状態) && !isUpdate()) {
                 validPairs.add(new ValidationMessageControlPair(new IdocheckMessages(UrErrorMessages.編集なしで更新不可)));
             }
-            if (!RString.isNullOrEmpty(div.getChosainJohoInput().getTxtChiku().getValue())
-                    && RString.isNullOrEmpty(div.getChosainJohoInput().getTxtChikuMei().getValue())) {
+            if (!RString.isNullOrEmpty(div.getChosainJohoInput().getCcdChiku().getCode().value())
+                    && RString.isNullOrEmpty(div.getChosainJohoInput().getCcdChiku().getCodeMeisho())) {
                 validPairs.add(new ValidationMessageControlPair(
-                        new IdocheckMessages(UrErrorMessages.入力値が不正_追加メッセージあり, "地区コード"),
-                        div.getChosainJohoInput().getTxtChiku()));
+                        new IdocheckMessages(UrErrorMessages.入力値が不正_追加メッセージあり, "地区コード")));
             }
         }
         if (状態_追加.equals(状態)) {

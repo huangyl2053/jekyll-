@@ -3,7 +3,7 @@ package jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE5110001;
  * このコードはツールによって生成されました。
  * このファイルへの変更は、以下の状況下で不正な動作の原因になったり、
  * コードが再生成されるときに損失したりします。
- * Mon Feb 15 15:34:50 CST 2016 
+ * Thu Mar 17 16:36:42 CST 2016 
  */
 
 
@@ -19,25 +19,30 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
  */
 
 public class dgHoketsuShinsainList_Row extends DataRow {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2015-11-30_08-54-50">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-01-15_09-59-03">
 
     private RString hoketsuShinsakaiIinCode;
     private RString hoketsuShinsakaiIinShimei;
+    private RString state;
 
     public dgHoketsuShinsainList_Row() {
         super();
         this.hoketsuShinsakaiIinCode = RString.EMPTY;
         this.hoketsuShinsakaiIinShimei = RString.EMPTY;
+        this.state = RString.EMPTY;
         this.setOriginalData("hoketsuShinsakaiIinCode", hoketsuShinsakaiIinCode);
         this.setOriginalData("hoketsuShinsakaiIinShimei", hoketsuShinsakaiIinShimei);
+        this.setOriginalData("state", state);
     }
 
-    public dgHoketsuShinsainList_Row(RString hoketsuShinsakaiIinCode, RString hoketsuShinsakaiIinShimei) {
+    public dgHoketsuShinsainList_Row(RString hoketsuShinsakaiIinCode, RString hoketsuShinsakaiIinShimei, RString state) {
         super();
         this.setOriginalData("hoketsuShinsakaiIinCode", hoketsuShinsakaiIinCode);
         this.setOriginalData("hoketsuShinsakaiIinShimei", hoketsuShinsakaiIinShimei);
+        this.setOriginalData("state", state);
         this.hoketsuShinsakaiIinCode = hoketsuShinsakaiIinCode;
         this.hoketsuShinsakaiIinShimei = hoketsuShinsakaiIinShimei;
+        this.state = state;
     }
 
     public RString getHoketsuShinsakaiIinCode() {
@@ -48,6 +53,10 @@ public class dgHoketsuShinsainList_Row extends DataRow {
         return hoketsuShinsakaiIinShimei;
     }
 
+    public RString getState() {
+        return state;
+    }
+
     public void setHoketsuShinsakaiIinCode(RString hoketsuShinsakaiIinCode) {
         this.setOriginalData("hoketsuShinsakaiIinCode", hoketsuShinsakaiIinCode);
         this.hoketsuShinsakaiIinCode = hoketsuShinsakaiIinCode;
@@ -56,6 +65,11 @@ public class dgHoketsuShinsainList_Row extends DataRow {
     public void setHoketsuShinsakaiIinShimei(RString hoketsuShinsakaiIinShimei) {
         this.setOriginalData("hoketsuShinsakaiIinShimei", hoketsuShinsakaiIinShimei);
         this.hoketsuShinsakaiIinShimei = hoketsuShinsakaiIinShimei;
+    }
+
+    public void setState(RString state) {
+        this.setOriginalData("state", state);
+        this.state = state;
     }
 
     // </editor-fold>

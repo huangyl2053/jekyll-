@@ -5,13 +5,14 @@
  */
 package jp.co.ndensan.reams.db.dbc.business.report.kagoketteikohifutanshain;
 
-import jp.co.ndensan.reams.db.dbc.entity.report.source.kagoketteitsuchishotorikomiichirankohifutanshabun.KagoKetteitsuchishoTorikomiIchiranKohifutanshaBunSource;
+import jp.co.ndensan.reams.db.dbc.entity.report.source.kagoketteikohifutanshain
+        .KagoKetteiKohifutanshaInSource;
 
 /**
  *
  * 誤決定通知書情報取込一覧表（公費負担者分）帳票HeaderEditor
  */
-public class HeaderEditor implements IKagoKetteitsuchishoTorikomiIchiranKohifutanshaBunEditor {
+public class HeaderEditor implements IKagoKetteiKohifutanshaInEditor {
 
     private final KagoKetteiKohifutanshaInItem item;
 
@@ -25,7 +26,7 @@ public class HeaderEditor implements IKagoKetteitsuchishoTorikomiIchiranKohifuta
     }
 
     @Override
-    public KagoKetteitsuchishoTorikomiIchiranKohifutanshaBunSource edit(KagoKetteitsuchishoTorikomiIchiranKohifutanshaBunSource source) {
+    public KagoKetteiKohifutanshaInSource edit(KagoKetteiKohifutanshaInSource source) {
         source.printTimeStamp = item.get印刷日時();
         source.torikomiYM = item.get処理年月();
         return source;

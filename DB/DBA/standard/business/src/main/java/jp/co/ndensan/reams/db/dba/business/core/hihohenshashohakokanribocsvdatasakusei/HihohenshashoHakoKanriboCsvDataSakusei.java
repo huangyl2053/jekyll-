@@ -77,8 +77,6 @@ public final class HihohenshashoHakoKanriboCsvDataSakusei {
     /**
      * 証発行管理CSVデータリスト作成(連番有)します。
      *
-     * // TODO 張国朋 QA 499 回復から提供されたら対応可能。2016/01/20 まで
-     *
      * @param entityList 証発行管理リストEntity
      * @param koumukumeyifukaflg 項目名付加フラグ
      * @param hizikehensyuuflg 日付'/'編集フラグ

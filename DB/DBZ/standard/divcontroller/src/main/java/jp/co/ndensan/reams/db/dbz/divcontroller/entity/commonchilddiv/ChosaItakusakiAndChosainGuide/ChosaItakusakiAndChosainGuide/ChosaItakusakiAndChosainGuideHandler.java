@@ -38,7 +38,7 @@ public class ChosaItakusakiAndChosainGuideHandler {
      */
     public void intialize() {
         div.getTxtMaxKensu().setValue(new Decimal(BusinessConfig.
-                get(ConfigNameDBU.検索制御_最大取得件数上限, SubGyomuCode.DBU介護統計報告).toString()));
+                get(ConfigNameDBU.検索制御_最大取得件数, SubGyomuCode.DBU介護統計報告).toString()));
         KijuntsukiShichosonjohoiDataPassModel dataPassModel = DataPassingConverter.deserialize(
                 div.getHdnDataPass(), KijuntsukiShichosonjohoiDataPassModel.class);
         if (dataPassModel != null) {

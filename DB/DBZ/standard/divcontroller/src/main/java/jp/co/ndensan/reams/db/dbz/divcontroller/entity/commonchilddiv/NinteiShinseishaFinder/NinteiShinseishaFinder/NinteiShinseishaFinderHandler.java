@@ -349,6 +349,7 @@ public class NinteiShinseishaFinderHandler {
         div.getDdlNowPhase().setDataSource(ddlNowPhase);
         div.getDdlNowPhase().setSelectedIndex(0);
         List<RString> keys = new ArrayList<>();
+        div.getChkShoriJotai().setDisabled(true);
         div.getChkShoriJotai().setSelectedItemsByKey(keys);
         div.getChkKoshinTaishoChushutsu().setSelectedItemsByKey(keys);
         div.getChkIchijiHantei().setSelectedItemsByKey(keys);

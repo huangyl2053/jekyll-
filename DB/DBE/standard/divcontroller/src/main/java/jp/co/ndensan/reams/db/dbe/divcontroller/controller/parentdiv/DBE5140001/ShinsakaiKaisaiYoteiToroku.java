@@ -193,6 +193,10 @@ public class ShinsakaiKaisaiYoteiToroku {
                 .equals(ResponseHolder.getMessageCode())
                 && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
             setOnselect();
+        } else {
+            RString nichi = div.getDgShinsakaiKaisaiYoteiIchiran().getSelectedItems().get(0).getKaisaiYoteibi();
+            div.getDgShinsakaiKaisaiYoteiIchiran().getDataSource().get(Integer.valueOf(nichi.toString()) - 1).setSelected(false);
+            div.getDgShinsakaiKaisaiYoteiIchiran().getDataSource().get(div.getTxtSeteibi().getValue().getDayValue() - 1).setSelected(true);
         }
         return ResponseData.of(div).respond();
     }
@@ -698,7 +702,7 @@ public class ShinsakaiKaisaiYoteiToroku {
             div.getBtnDayAfter().setDisabled(true);
         }
         div.getTxtSeteibi().setDisabled(true);
-        set開催予定入力欄(date.toDateString());
+        set開催予定入力欄(date);
     }
 
     private void setMonthBefore() {
@@ -718,7 +722,7 @@ public class ShinsakaiKaisaiYoteiToroku {
     private void setMonthAfter() {
         Seireki date1 = new FlexibleDate(getLblMonth(div.getLblMonth().getText())).seireki();
         FlexibleDate date2;
-        if (Integer.parseInt(date1.getMonth().toString()) == 1) {
+        if (Integer.parseInt(date1.getMonth().toString()) == 月_12) {
             date2 = new FlexibleDate(Integer.parseInt(date1.getYear().toString()) + 1, 1, 1);
         } else {
             date2 = new FlexibleDate(Integer.parseInt(date1.getYear().toString()), Integer.parseInt(date1.getMonth().toString()) + 1, 1);
@@ -734,7 +738,7 @@ public class ShinsakaiKaisaiYoteiToroku {
         FlexibleDate seteibi = new FlexibleDate(getLblMonth(div.getLblMonth().getText()));
         RDate setibichi = new RDate(seteibi.getYearValue(), seteibi.getMonthValue(), Integer.valueOf(dgYoteiRow.getKaisaiYoteibi().toString()));
         div.getTxtSeteibi().setValue(setibichi);
-        set開催予定入力欄(setibichi.toDateString());
+        set開催予定入力欄(setibichi);
     }
 
     private void set中止(TextBox kaisaiGogitai) {
@@ -763,7 +767,8 @@ public class ShinsakaiKaisaiYoteiToroku {
     private void set介護認定審査会開催予定一覧(RString 年月) {
         List<dgShinsakaiKaisaiYoteiIchiran_Row> dgShinsakaRowList = new ArrayList<>();
         getConfig時間枠();
-        FlexibleDate zenbuDate = new FlexibleDate(Integer.parseInt(年月.substring(0, 4).toString()), Integer.parseInt(年月.substring(4).toString()), 1);
+        FlexibleDate zenbuDate = new FlexibleDate(Integer.parseInt(年月.substring(0, INDEX_4).toString()),
+                Integer.parseInt(年月.substring(INDEX_4).toString()), 1);
         List<UzV0002HolidayListEntity> holiDay = HolidayAccessor.getHolidayList();
         int dayCount = zenbuDate.getLastDay();
         if (モード.equals(モード_月) || モード.equals(モード_初期化)) {
@@ -949,22 +954,26 @@ public class ShinsakaiKaisaiYoteiToroku {
         gogitaiJohoRowList.add(gogitaiJohoRow);
     }
 
-    private void set開催予定入力欄(RString 指定日) {
+    private void set開催予定入力欄(RDate 指定日) {
         SearchResult<ShinsakaiKaisaiYoteiJohoBusiness> yoteiJohoNichiBusinessList = yoteiJohoManager.search審査会開催予定情報Of指定日(
-                指定日);
+                指定日.toDateString());
         List<dgKaisaiYoteiNyuryokuran_Row> nyuryokuranRowList = new ArrayList<>();
         for (RString 開催時間 : 時間枠) {
-            dgKaisaiYoteiNyuryokuran_Row nyuryokuranRow = new dgKaisaiYoteiNyuryokuran_Row();
             if (!開催時間.isEmpty()) {
-                setNyuryokuran(yoteiJohoNichiBusinessList, 開催時間, nyuryokuranRow, 指定日);
+                dgKaisaiYoteiNyuryokuran_Row nyuryokuranRow = new dgKaisaiYoteiNyuryokuran_Row();
+                setNyuryokuran(yoteiJohoNichiBusinessList, 開催時間, nyuryokuranRow, 指定日.toDateString());
                 nyuryokuranRow.getKaisaiTime().setDisabled(true);
-                nyuryokuranRowList.add(nyuryokuranRow);
-            } else {
-                setZenbuDisabled(nyuryokuranRow);
                 nyuryokuranRowList.add(nyuryokuranRow);
             }
         }
-
+        if (指定日.getYearMonth().getLastDay() == 指定日.getDayValue()) {
+            div.getBtnDayAfter().setDisabled(true);
+        } else if (指定日.getDayValue() == 1) {
+            div.getBtnDayBefore().setDisabled(true);
+        } else {
+            div.getBtnDayBefore().setDisabled(false);
+            div.getBtnDayAfter().setDisabled(false);
+        }
         div.getDgKaisaiYoteiNyuryokuran().setDataSource(nyuryokuranRowList);
     }
 
@@ -973,19 +982,18 @@ public class ShinsakaiKaisaiYoteiToroku {
         int no = 1;
         for (ShinsakaiKaisaiYoteiJohoBusiness business : yoteiJohoNichiBusinessList.records()) {
             if (開催時間.equals(get検索時間枠(business.get予定開始時間(), business.get予定終了時間()))) {
-                set開催合議体(nyuryokuranRow, no, new RString(String.valueOf(business.get合議体番号())));
+                set開催合議体(true, nyuryokuranRow, no, new RString(String.valueOf(business.get合議体番号())));
                 no = no + 1;
             }
         }
         for (ShinsakaiKaisaiYoteiJohoParameter parameter : yoteiJohoEntityList2) {
             if (new RString(parameter.get日付().toString()).equals(指定日)
                     && 開催時間.equals(get検索時間枠(parameter.get開始予定時刻(), parameter.get終了予定時刻())) && !parameter.is存在()) {
-                set開催合議体(nyuryokuranRow, no, new RString(String.valueOf(parameter.get合議体番号())));
+                set開催合議体(false, nyuryokuranRow, no, new RString(String.valueOf(parameter.get合議体番号())));
                 no = no + 1;
             }
         }
         RString format = 開催時間.insert(INDEX_2, FUNN.toString()).insert(INDEX_5, 分割.toString()).insert(INDEX_8, FUNN.toString());
-        nyuryokuranRow.getKaisaiTime().setValue(format);
         if (no == INDEX_1) {
             nyuryokuranRow.getKaisaiGogitai1().setDisabled(false);
             nyuryokuranRow.getKaisaiGogitai2().setDisabled(false);
@@ -996,7 +1004,6 @@ public class ShinsakaiKaisaiYoteiToroku {
             nyuryokuranRow.getBtnCencel3().setDisabled(true);
             nyuryokuranRow.getBtnCencel4().setDisabled(true);
         } else if (no == INDEX_2) {
-            nyuryokuranRow.getKaisaiGogitai1().setDisabled(true);
             nyuryokuranRow.getKaisaiGogitai2().setDisabled(false);
             nyuryokuranRow.getKaisaiGogitai3().setDisabled(false);
             nyuryokuranRow.getKaisaiGogitai4().setDisabled(false);
@@ -1004,28 +1011,15 @@ public class ShinsakaiKaisaiYoteiToroku {
             nyuryokuranRow.getBtnCencel3().setDisabled(true);
             nyuryokuranRow.getBtnCencel4().setDisabled(true);
         } else if (no == INDEX_3) {
-            nyuryokuranRow.getKaisaiGogitai1().setDisabled(true);
-            nyuryokuranRow.getKaisaiGogitai2().setDisabled(true);
             nyuryokuranRow.getKaisaiGogitai3().setDisabled(false);
             nyuryokuranRow.getKaisaiGogitai4().setDisabled(false);
             nyuryokuranRow.getBtnCencel3().setDisabled(true);
             nyuryokuranRow.getBtnCencel4().setDisabled(true);
         } else if (no == INDEX_4) {
-            nyuryokuranRow.getKaisaiGogitai1().setDisabled(true);
-            nyuryokuranRow.getKaisaiGogitai2().setDisabled(true);
-            nyuryokuranRow.getKaisaiGogitai3().setDisabled(true);
             nyuryokuranRow.getKaisaiGogitai4().setDisabled(false);
             nyuryokuranRow.getBtnCencel4().setDisabled(true);
-        } else if (no == INDEX_5) {
-            setZenbuDisabled(nyuryokuranRow);
         }
-    }
-
-    private void setZenbuDisabled(dgKaisaiYoteiNyuryokuran_Row nyuryokuranRow) {
-        nyuryokuranRow.getBtnCencel1().setDisabled(true);
-        nyuryokuranRow.getBtnCencel().setDisabled(true);
-        nyuryokuranRow.getBtnCencel3().setDisabled(true);
-        nyuryokuranRow.getBtnCencel4().setDisabled(true);
+        nyuryokuranRow.getKaisaiTime().setValue(format);
     }
 
     private void setDayBefore() {
@@ -1035,7 +1029,7 @@ public class ShinsakaiKaisaiYoteiToroku {
             div.getBtnDayBefore().setDisabled(true);
         }
         div.getTxtSeteibi().setValue(seteiDay);
-        set開催予定入力欄(seteiDay.toDateString());
+        set開催予定入力欄(seteiDay);
         div.getDgShinsakaiKaisaiYoteiIchiran().getDataSource().get(seteiDay.getDayValue()).setSelected(false);
         div.getDgShinsakaiKaisaiYoteiIchiran().getDataSource().get(seteiDay.getDayValue() - 1).setSelected(true);
     }
@@ -1047,7 +1041,7 @@ public class ShinsakaiKaisaiYoteiToroku {
             div.getBtnDayAfter().setDisabled(true);
         }
         div.getTxtSeteibi().setValue(seteiDay);
-        set開催予定入力欄(seteiDay.toDateString());
+        set開催予定入力欄(seteiDay);
         div.getDgShinsakaiKaisaiYoteiIchiran().getDataSource().get(seteiDay.getDayValue() - 2).setSelected(false);
         div.getDgShinsakaiKaisaiYoteiIchiran().getDataSource().get(seteiDay.getDayValue() - 1).setSelected(true);
     }
@@ -1124,19 +1118,47 @@ public class ShinsakaiKaisaiYoteiToroku {
         }
     }
 
-    private void set開催合議体(dgKaisaiYoteiNyuryokuran_Row dgNyuryokuranRow, int j, RString 開催合議体) {
+    private void set開催合議体(boolean isKizon, dgKaisaiYoteiNyuryokuran_Row dgNyuryokuranRow, int j, RString 開催合議体) {
         switch (j) {
             case INDEX_1:
                 dgNyuryokuranRow.getKaisaiGogitai1().setValue(開催合議体);
+                if (isKizon) {
+                    dgNyuryokuranRow.getKaisaiGogitai1().setDisabled(true);
+                    dgNyuryokuranRow.getBtnCencel1().setDisabled(false);
+                } else {
+                    dgNyuryokuranRow.getKaisaiGogitai1().setDisabled(false);
+                    dgNyuryokuranRow.getBtnCencel1().setDisabled(true);
+                }
                 break;
             case INDEX_2:
                 dgNyuryokuranRow.getKaisaiGogitai2().setValue(開催合議体);
+                if (isKizon) {
+                    dgNyuryokuranRow.getKaisaiGogitai2().setDisabled(true);
+                    dgNyuryokuranRow.getBtnCencel().setDisabled(false);
+                } else {
+                    dgNyuryokuranRow.getKaisaiGogitai2().setDisabled(false);
+                    dgNyuryokuranRow.getBtnCencel().setDisabled(true);
+                }
                 break;
             case INDEX_3:
                 dgNyuryokuranRow.getKaisaiGogitai3().setValue(開催合議体);
+                if (isKizon) {
+                    dgNyuryokuranRow.getKaisaiGogitai3().setDisabled(true);
+                    dgNyuryokuranRow.getBtnCencel3().setDisabled(false);
+                } else {
+                    dgNyuryokuranRow.getKaisaiGogitai3().setDisabled(false);
+                    dgNyuryokuranRow.getBtnCencel3().setDisabled(true);
+                }
                 break;
             case INDEX_4:
                 dgNyuryokuranRow.getKaisaiGogitai4().setValue(開催合議体);
+                if (isKizon) {
+                    dgNyuryokuranRow.getKaisaiGogitai4().setDisabled(true);
+                    dgNyuryokuranRow.getBtnCencel4().setDisabled(false);
+                } else {
+                    dgNyuryokuranRow.getKaisaiGogitai4().setDisabled(false);
+                    dgNyuryokuranRow.getBtnCencel4().setDisabled(true);
+                }
                 break;
             default:
                 break;

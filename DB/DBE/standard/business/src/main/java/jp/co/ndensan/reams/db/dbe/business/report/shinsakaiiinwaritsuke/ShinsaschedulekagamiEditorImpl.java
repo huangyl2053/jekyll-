@@ -41,14 +41,24 @@ public class ShinsaschedulekagamiEditorImpl implements IShinsaschedulekagamiEdit
     }
 
     private ShinsaschedulekagamiReportSource editSource(ShinsaschedulekagamiReportSource source) {
-        source.hakkoYMD = item.getHakkoYMD() == null
-                ? RString.EMPTY : 和暦年月日Fomart(new FlexibleDate(item.getHakkoYMD()));
-        source.ninshoshaYakushokuMei = item.getNinshoshaYakushokuMei();
-        source.koinShoryaku = item.getKoinShoryaku();
+        source.hakkoYMD = item.getHakkoYMD();
         source.denshiKoin = item.getDenshiKoin();
+        source.ninshoshaYakushokuMei = item.getNinshoshaYakushokuMei();
+        source.ninshoshaYakushokuMei2 = item.getNinshoshaYakushokuMei2();
+        source.ninshoshaYakushokuMei1 = item.getNinshoshaYakushokuMei1();
+        source.ninshoshaShimeiKakeru = item.getNinshoshaShimeiKakeru();
+        source.ninshoshaShimeiKakenai = item.getNinshoshaShimeiKakenai();
+        source.koinMojiretsu = item.getKoinMojiretsu();
+        source.koinShoryaku = item.getKoinShoryaku();
+        source.yubinNo = item.getYubinNo();
+        source.jushoText = item.getJushoText();
+        source.kikanNameText = item.getKikanNameText();
+        source.shimeiText = item.getShimeiText();
+        source.meishoFuyo = item.getMeishoFuyo();
+        source.customerBarCode = item.getCustomerBarCode();
+        source.atenaRenban = item.getAtenaRenban();
         source.title = item.getTitle();
         source.tsuchibun1 = item.getTsuchibun1();
-        // TODO 内部QA:772 Redmine# (QA未回答、パターン12で設定します。)
         source.shoriMikomiKaishiYMD = item.getShoriMikomiKaishiYMD() == null
                 ? RString.EMPTY : 和暦年月日Fomart(new FlexibleDate(item.getShoriMikomiKaishiYMD()));
         source.shoriMikomiShuryoYMD = item.getShoriMikomiShuryoYMD() == null
@@ -58,7 +68,6 @@ public class ShinsaschedulekagamiEditorImpl implements IShinsaschedulekagamiEdit
     }
 
     private RString 和暦年月日Fomart(FlexibleDate date) {
-
         return (date.wareki().eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN).separator(Separator.JAPANESE)
                 .fillType(FillType.BLANK).toDateString());
     }

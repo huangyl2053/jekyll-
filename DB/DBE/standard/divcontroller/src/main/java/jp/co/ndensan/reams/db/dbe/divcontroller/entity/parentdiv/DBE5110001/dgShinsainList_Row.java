@@ -3,7 +3,7 @@ package jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE5110001;
  * このコードはツールによって生成されました。
  * このファイルへの変更は、以下の状況下で不正な動作の原因になったり、
  * コードが再生成されるときに損失したりします。
- * Mon Feb 15 15:34:50 CST 2016 
+ * Thu Mar 17 16:36:42 CST 2016 
  */
 
 
@@ -19,12 +19,13 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
  */
 
 public class dgShinsainList_Row extends DataRow {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2015-11-30_08-54-50">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-01-15_09-59-03">
 
     private Boolean gogitaicho;
     private Boolean fukuGogitaicho;
     private RString shinsakaiIinCode;
     private RString shinsakaiIinShimei;
+    private RString state;
 
     public dgShinsainList_Row() {
         super();
@@ -32,22 +33,26 @@ public class dgShinsainList_Row extends DataRow {
         this.fukuGogitaicho = false;
         this.shinsakaiIinCode = RString.EMPTY;
         this.shinsakaiIinShimei = RString.EMPTY;
+        this.state = RString.EMPTY;
         this.setOriginalData("gogitaicho", gogitaicho);
         this.setOriginalData("fukuGogitaicho", fukuGogitaicho);
         this.setOriginalData("shinsakaiIinCode", shinsakaiIinCode);
         this.setOriginalData("shinsakaiIinShimei", shinsakaiIinShimei);
+        this.setOriginalData("state", state);
     }
 
-    public dgShinsainList_Row(Boolean gogitaicho, Boolean fukuGogitaicho, RString shinsakaiIinCode, RString shinsakaiIinShimei) {
+    public dgShinsainList_Row(Boolean gogitaicho, Boolean fukuGogitaicho, RString shinsakaiIinCode, RString shinsakaiIinShimei, RString state) {
         super();
         this.setOriginalData("gogitaicho", gogitaicho);
         this.setOriginalData("fukuGogitaicho", fukuGogitaicho);
         this.setOriginalData("shinsakaiIinCode", shinsakaiIinCode);
         this.setOriginalData("shinsakaiIinShimei", shinsakaiIinShimei);
+        this.setOriginalData("state", state);
         this.gogitaicho = gogitaicho;
         this.fukuGogitaicho = fukuGogitaicho;
         this.shinsakaiIinCode = shinsakaiIinCode;
         this.shinsakaiIinShimei = shinsakaiIinShimei;
+        this.state = state;
     }
 
     public Boolean getGogitaicho() {
@@ -64,6 +69,10 @@ public class dgShinsainList_Row extends DataRow {
 
     public RString getShinsakaiIinShimei() {
         return shinsakaiIinShimei;
+    }
+
+    public RString getState() {
+        return state;
     }
 
     public void setGogitaicho(Boolean gogitaicho) {
@@ -84,6 +93,11 @@ public class dgShinsainList_Row extends DataRow {
     public void setShinsakaiIinShimei(RString shinsakaiIinShimei) {
         this.setOriginalData("shinsakaiIinShimei", shinsakaiIinShimei);
         this.shinsakaiIinShimei = shinsakaiIinShimei;
+    }
+
+    public void setState(RString state) {
+        this.setOriginalData("state", state);
+        this.state = state;
     }
 
     // </editor-fold>

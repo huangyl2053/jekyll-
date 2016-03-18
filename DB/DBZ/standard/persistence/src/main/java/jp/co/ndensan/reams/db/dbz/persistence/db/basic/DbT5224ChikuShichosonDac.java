@@ -126,7 +126,7 @@ public class DbT5224ChikuShichosonDac implements ISaveable<DbT5224ChikuShichoson
      * @throws NullPointerException 引数のいずれかがnullの場合
      */
     @Transaction
-    public List<DbT5224ChikuShichosonEntity> selec地区市町村(Code 調査地区コード) throws NullPointerException {
+    public List<DbT5224ChikuShichosonEntity> select地区市町村(Code 調査地区コード) throws NullPointerException {
         requireNonNull(調査地区コード, UrSystemErrorMessages.値がnull.getReplacedMessage("調査地区コード"));
         DbAccessorNormalType accessor = new DbAccessorNormalType(session);
 

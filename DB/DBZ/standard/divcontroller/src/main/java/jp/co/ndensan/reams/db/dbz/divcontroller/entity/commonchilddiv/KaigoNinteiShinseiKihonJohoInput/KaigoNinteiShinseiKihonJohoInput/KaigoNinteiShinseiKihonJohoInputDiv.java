@@ -14,7 +14,6 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 import java.util.HashSet;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ICommonChildDivMode;
 import jp.co.ndensan.reams.uz.uza.ui.servlets._CommonChildDivModeUtil;
-import jp.co.ndensan.reams.db.dbz.divcontroller.handler.commonchilddiv.KaigoNinteiShinseiKihonJohoInput.KaigoNinteiShinseiKihonJohoInput.KaigoNinteiShinseiKihonJohoInputHandler;
 
 /**
  * KaigoNinteiShinseiKihonJohoInput のクラスファイル
@@ -60,12 +59,12 @@ public class KaigoNinteiShinseiKihonJohoInputDiv extends Panel implements IKaigo
     private RString hdnServiceSakujoTeikeibunKey;
     @JsonProperty("hdnNinteiRiyuTeikeibunKey")
     private RString hdnNinteiRiyuTeikeibunKey;
-    @JsonProperty("hdnSubGyomuCode")
-    private RString hdnSubGyomuCode;
     @JsonProperty("hdnServiceSakujoTeikeibun")
     private RString hdnServiceSakujoTeikeibun;
-    @JsonProperty("hdnNinteiShinseiRiyuTeikeibun")
-    private RString hdnNinteiShinseiRiyuTeikeibun;
+    @JsonProperty("hdnNinteiRiyuTeikeibun")
+    private RString hdnNinteiRiyuTeikeibun;
+    @JsonProperty("hdnSubGyomuCode")
+    private RString hdnSubGyomuCode;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -344,24 +343,6 @@ public class KaigoNinteiShinseiKihonJohoInputDiv extends Panel implements IKaigo
     }
 
     /*
-     * gethdnSubGyomuCode
-     * @return hdnSubGyomuCode
-     */
-    @JsonProperty("hdnSubGyomuCode")
-    public RString getHdnSubGyomuCode() {
-        return hdnSubGyomuCode;
-    }
-
-    /*
-     * sethdnSubGyomuCode
-     * @param hdnSubGyomuCode hdnSubGyomuCode
-     */
-    @JsonProperty("hdnSubGyomuCode")
-    public void setHdnSubGyomuCode(RString hdnSubGyomuCode) {
-        this.hdnSubGyomuCode = hdnSubGyomuCode;
-    }
-
-    /*
      * gethdnServiceSakujoTeikeibun
      * @return hdnServiceSakujoTeikeibun
      */
@@ -380,21 +361,39 @@ public class KaigoNinteiShinseiKihonJohoInputDiv extends Panel implements IKaigo
     }
 
     /*
-     * gethdnNinteiShinseiRiyuTeikeibun
-     * @return hdnNinteiShinseiRiyuTeikeibun
+     * gethdnNinteiRiyuTeikeibun
+     * @return hdnNinteiRiyuTeikeibun
      */
-    @JsonProperty("hdnNinteiShinseiRiyuTeikeibun")
-    public RString getHdnNinteiShinseiRiyuTeikeibun() {
-        return hdnNinteiShinseiRiyuTeikeibun;
+    @JsonProperty("hdnNinteiRiyuTeikeibun")
+    public RString getHdnNinteiRiyuTeikeibun() {
+        return hdnNinteiRiyuTeikeibun;
     }
 
     /*
-     * sethdnNinteiShinseiRiyuTeikeibun
-     * @param hdnNinteiShinseiRiyuTeikeibun hdnNinteiShinseiRiyuTeikeibun
+     * sethdnNinteiRiyuTeikeibun
+     * @param hdnNinteiRiyuTeikeibun hdnNinteiRiyuTeikeibun
      */
-    @JsonProperty("hdnNinteiShinseiRiyuTeikeibun")
-    public void setHdnNinteiShinseiRiyuTeikeibun(RString hdnNinteiShinseiRiyuTeikeibun) {
-        this.hdnNinteiShinseiRiyuTeikeibun = hdnNinteiShinseiRiyuTeikeibun;
+    @JsonProperty("hdnNinteiRiyuTeikeibun")
+    public void setHdnNinteiRiyuTeikeibun(RString hdnNinteiRiyuTeikeibun) {
+        this.hdnNinteiRiyuTeikeibun = hdnNinteiRiyuTeikeibun;
+    }
+
+    /*
+     * gethdnSubGyomuCode
+     * @return hdnSubGyomuCode
+     */
+    @JsonProperty("hdnSubGyomuCode")
+    public RString getHdnSubGyomuCode() {
+        return hdnSubGyomuCode;
+    }
+
+    /*
+     * sethdnSubGyomuCode
+     * @param hdnSubGyomuCode hdnSubGyomuCode
+     */
+    @JsonProperty("hdnSubGyomuCode")
+    public void setHdnSubGyomuCode(RString hdnSubGyomuCode) {
+        this.hdnSubGyomuCode = hdnSubGyomuCode;
     }
 
     /*

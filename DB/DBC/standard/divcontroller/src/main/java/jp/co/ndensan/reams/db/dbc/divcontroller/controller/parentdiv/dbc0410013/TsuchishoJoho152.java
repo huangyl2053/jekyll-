@@ -8,7 +8,6 @@ package jp.co.ndensan.reams.db.dbc.divcontroller.controller.parentdiv.dbc0410013
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0410013.TsuchishoJoho152Div;
 import jp.co.ndensan.reams.db.dbc.divcontroller.viewbox.kaigokyufukokuhorenjohotorikomi.KokuhorenDataTorikomiViewStateClass;
 import jp.co.ndensan.reams.db.dbz.definition.core.enumeratedtype.ViewStateHolderName;
-import jp.co.ndensan.reams.ur.urz.definition.message.UrQuestionMessages;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -43,7 +42,11 @@ public class TsuchishoJoho152 {
      */
     public ResponseData<TsuchishoJoho152Div> onImplement(TsuchishoJoho152Div div) {
         //TODO
-        ResponseData.of(div).addMessage(UrQuestionMessages.処理実行の確認.getMessage());
+//        KokuhorenDataTorikomiBatchParameter  parameter =new KokuhorenDataTorikomiBatchParameter();
+
+        div.getCcdKokurenJohoTorikomi().get再処理区分();
+        div.getCcdKokurenJohoTorikomi().get処理対象情報();
+        div.getCcdKokurenJohoTorikomi().get処理年月();
 
         return ResponseData.of(div).respond();
 

@@ -13,11 +13,13 @@ import jp.co.ndensan.reams.db.dbe.definition.message.DbeQuestionMessages;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2020010.DBE2020010TransitionEventName;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2020010.NinteiChosaScheduleInputDiv;
 import jp.co.ndensan.reams.db.dbe.divcontroller.handler.parentdiv.DBE2020010.NinteiChosaScheduleInputHandler;
+import jp.co.ndensan.reams.db.dbe.divcontroller.handler.parentdiv.DBE2020010.NinteiChosaScheduleInputValidationHandler;
 import jp.co.ndensan.reams.db.dbe.service.core.basic.ninteichosascheduleinput.NinteiChosaScheduleInputManager;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.NinteichosaSchedule;
 import jp.co.ndensan.reams.db.dbz.divcontroller.viewbox.ViewStateKeys;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
+import jp.co.ndensan.reams.ur.urz.definition.message.UrInformationMessages;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.TelNo;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
@@ -39,8 +41,10 @@ public class NinteiChosaScheduleInput {
     private static final RString 画面ステート_1 = new RString("1");
     private static final RString 画面ステート_2 = new RString("2");
     private static final RString 画面ステート_3 = new RString("3");
-    private static final RString 予約可 = new RString("key0");
-    private static final RString 予約不可 = new RString("key1");
+    private static final RString 予約可_key = new RString("key0");
+    private static final RString 予約不可_key = new RString("key1");
+    private static final RString 予約可 = new RString("0");
+    private static final RString 予約不可 = new RString("1");
     private static final RString 予約状況_仮予約 = new RString("key0");
     private static final RString 予約状況_確定 = new RString("key1");
     private static final RString 予約状況_未定 = new RString("key2");
@@ -48,9 +52,9 @@ public class NinteiChosaScheduleInput {
     private static final RString 対象者区分_未定者 = new RString("1");
     private static final RString 遷移元画面番号_2 = new RString("2");
     private static final RString 遷移元画面番号_3 = new RString("3");
+    private final RString 保存 = new RString("保存");
 
     private RString 画面ステート;
-
     private RString temp_画面ステート;
     private RString temp_地区コード;
     private RString temp_市町村コード;
@@ -59,8 +63,6 @@ public class NinteiChosaScheduleInput {
     private RString temp_認定調査員コード;
     private RString temp_認定調査員名称;
     private RString temp_設定日;
-//    private RString temp_認定調査予定開始時間;
-//    private RString temp_認定調査予定終了時間;
     private RString temp_時間枠;
     private RString temp_予約可否;
     private RString temp_予約状況;
@@ -83,8 +85,11 @@ public class NinteiChosaScheduleInput {
     private static RString temp_申請者管理番号2;
     private static RString temp_申請者管理番号3;
     private static RString temp_対象者区分;
+    //この仕様書のtemp_変量使用しない
+//    private RString temp_認定調査予定開始時間;
+//    private RString temp_認定調査予定終了時間;
 //    private RString temp_編集状態;
-    private RString temp_遷移元画面番号;
+    private static RString temp_遷移元画面番号;
     private RString temp_調査員状況02;
 
     /**
@@ -95,23 +100,23 @@ public class NinteiChosaScheduleInput {
      */
     public ResponseData<NinteiChosaScheduleInputDiv> onLoad(NinteiChosaScheduleInputDiv div) {
 
-        setTempHensuSyokikaTi();
-        setTempHensuSyori();
+        initializeTemp変数();
+        setTemp変数();
         getHandler(div).onLoad(temp_申請者管理番号3, temp_認定調査員名称, temp_認定調査委託先名称, temp_予約可否, temp_備考, temp_予約状況,
                 temp_被保番号, temp_被保険者区分コード, temp_保険者, temp_認定申請日, temp_申請区分_申請時, temp_氏名, temp_カナ氏名,
                 temp_場所, temp_駐車場, temp_立会人1, temp_連絡先1, temp_立会人2, temp_連絡先2, temp_対象者メモ);
         return ResponseData.of(div).respond();
     }
 
-    /**
-     * Temp変数の初期化値設定です。
-     */
-    private void setTempHensuSyokikaTi() {
+    private void initializeTemp変数() {
         temp_地区コード = ViewStateHolder.get(ViewStateKeys.認定調査スケジュール登録_地区コード, RString.class);
         temp_市町村コード = ViewStateHolder.get(ViewStateKeys.認定調査スケジュール登録_市町村コード, RString.class);
         temp_認定調査委託先コード = ViewStateHolder.get(ViewStateKeys.認定調査スケジュール登録_認定調査委託先コード, RString.class);
         temp_認定調査員コード = ViewStateHolder.get(ViewStateKeys.認定調査スケジュール登録_認定調査員コード, RString.class);
-        temp_設定日 = ViewStateHolder.get(ViewStateKeys.認定調査スケジュール登録_設定日, RString.class);
+        FlexibleDate 設定日 = ViewStateHolder.get(ViewStateKeys.認定調査スケジュール登録_設定日, FlexibleDate.class);
+        if (設定日 != null && !設定日.isEmpty()) {
+            temp_設定日 = new RString(設定日.toString());
+        }
         temp_時間枠 = ViewStateHolder.get(ViewStateKeys.認定調査スケジュール登録_時間枠, RString.class);
         temp_予約可否 = ViewStateHolder.get(ViewStateKeys.認定調査スケジュール登録_予約可否, RString.class);
         temp_予約状況 = ViewStateHolder.get(ViewStateKeys.認定調査スケジュール登録_予約状況, RString.class);
@@ -122,10 +127,7 @@ public class NinteiChosaScheduleInput {
 //        temp_編集状態 = new RString("0");
     }
 
-    /**
-     * Temp変数のデータ処理設定です。
-     */
-    private void setTempHensuSyori() {
+    private void setTemp変数() {
         temp_画面ステート = ViewStateHolder.get(ViewStateKeys.認定調査スケジュール登録_モード, RString.class);
         temp_遷移元画面番号 = ViewStateHolder.get(ViewStateKeys.認定調査スケジュール登録_画面番号, RString.class);
         if (画面ステート_1.equals(temp_画面ステート) && 遷移元画面番号_2.equals(temp_遷移元画面番号)) {
@@ -145,8 +147,8 @@ public class NinteiChosaScheduleInput {
         }
         if (画面ステート_2.equals(temp_画面ステート)) {
             temp_申請者管理番号1 = ViewStateHolder.get(ViewStateKeys.認定調査スケジュール登録_申請書管理番号3, RString.class);
-            temp_申請者管理番号2 = ViewStateHolder.get(ViewStateKeys.認定調査スケジュール登録_申請書管理番号3, RString.class);
-            temp_申請者管理番号3 = ViewStateHolder.get(ViewStateKeys.認定調査スケジュール登録_申請書管理番号3, RString.class);
+            temp_申請者管理番号2 = temp_申請者管理番号1;
+            temp_申請者管理番号3 = temp_申請者管理番号1;
             temp_対象者区分 = new RString("0");
             set調査員情報Temp変数();
             set対象者調査基本情報Temp変数();
@@ -155,7 +157,7 @@ public class NinteiChosaScheduleInput {
         if (画面ステート_3.equals(temp_画面ステート)) {
             temp_申請者管理番号1 = ViewStateHolder.get(ViewStateKeys.認定調査スケジュール登録_申請書管理番号2, RString.class);
             temp_申請者管理番号2 = temp_申請者管理番号1;
-            temp_申請者管理番号3 = ViewStateHolder.get(ViewStateKeys.認定調査スケジュール登録_申請書管理番号2, RString.class);
+            temp_申請者管理番号3 = ViewStateHolder.get(ViewStateKeys.認定調査スケジュール登録_申請書管理番号3, RString.class);
             set調査員情報Temp変数();
             set対象者調査基本情報Temp変数();
             set対象者個人基本情報Temp変数();
@@ -255,6 +257,22 @@ public class NinteiChosaScheduleInput {
     }
 
     /**
+     * 予約可に変更するの場合の処理です。
+     *
+     * @param div NinteiChosaScheduleShosaiDiv
+     * @return ResponseData<NinteiChosaScheduleShosaiDiv>
+     */
+    public ResponseData<NinteiChosaScheduleInputDiv> onClick_RDOFuka_Ka(NinteiChosaScheduleInputDiv div) {
+        temp_予約可否 = div.getRadYoyakuKahi().getSelectedKey();
+        temp_画面ステート = ViewStateHolder.get(ViewStateKeys.認定調査スケジュール登録_モード, RString.class);
+        if (画面ステート_1.equals(temp_画面ステート) && 予約可_key.equals(temp_予約可否)) {
+            div.getRadYoyakuJokyo().setDisabled(false);
+            div.getRadYoyakuJokyo().setSelectedKey(予約状況_未定);
+        }
+        return ResponseData.of(div).respond();
+    }
+
+    /**
      * 対象者をクリアするボタンOnclickの処理です。
      *
      * @param div NinteiChosaScheduleShosaiDiv
@@ -269,13 +287,13 @@ public class NinteiChosaScheduleInput {
         }
         if (new RString(DbeQuestionMessages.クリア確認.getMessage().getCode()).equals(ResponseHolder.getMessageCode())
                 && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
-            div.getBtnSearchTaishosha().setDisabled(true);
             set対象者詳細Grid値Clear(div);
-            setTempHensuSyokikaTi();
-            setTempHensuSyori();
+            initializeTemp変数();
+            setTemp変数();
             getHandler(div).onLoad(temp_申請者管理番号3, temp_認定調査員名称, temp_認定調査委託先名称, temp_予約可否, temp_備考, temp_予約状況,
                     temp_被保番号, temp_被保険者区分コード, temp_保険者, temp_認定申請日, temp_申請区分_申請時, temp_氏名, temp_カナ氏名,
                     temp_場所, temp_駐車場, temp_立会人1, temp_連絡先1, temp_立会人2, temp_連絡先2, temp_対象者メモ);
+            div.getBtnSearchTaishosha().setDisabled(true);
         }
         return ResponseData.of(div).respond();
     }
@@ -306,9 +324,8 @@ public class NinteiChosaScheduleInput {
     public ResponseData<NinteiChosaScheduleInputDiv> onClick_BtnHozon(NinteiChosaScheduleInputDiv div) {
         ValidationMessageControlPairs validationMessages = new ValidationMessageControlPairs();
         画面ステート = ViewStateHolder.get(ViewStateKeys.認定調査スケジュール登録_モード, RString.class);
-        temp_対象者区分 = ViewStateHolder.get(ViewStateKeys.認定調査スケジュール登録_対象者区分, RString.class);
         if (画面ステート_2.equals(画面ステート)) {
-            validationMessages = getHandler(div).スケジュール照会のため保存できませんチェック();
+            validationMessages = getValidationHandler(div).スケジュール照会のため保存できませんチェック();
             return ResponseData.of(div).addValidationMessages(validationMessages).respond();
         }
         temp_予約可否 = div.getRadYoyakuKahi().getSelectedKey();
@@ -318,125 +335,85 @@ public class NinteiChosaScheduleInput {
         if (validationMessages.iterator().hasNext()) {
             return ResponseData.of(div).addValidationMessages(validationMessages).respond();
         }
-        if (予約不可.equals(temp_予約可否) && !RString.isNullOrEmpty(temp_備考) && !RString.isNullOrEmpty(temp_申請者管理番号3)
-                && !ResponseHolder.isReRequest()) {
-            QuestionMessage message = new QuestionMessage(DbeQuestionMessages.調査員は予約不可なので該当申請が解除.getMessage().getCode(),
-                    DbeQuestionMessages.調査員は予約不可なので該当申請が解除.getMessage().evaluate());
-            return ResponseData.of(div).addMessage(message).respond();
+        if (!ResponseHolder.isReRequest()) {
+            if (予約不可_key.equals(temp_予約可否)) {
+                if (!RString.isNullOrEmpty(temp_備考) && !RString.isNullOrEmpty(temp_申請者管理番号3)) {
+                    QuestionMessage message = new QuestionMessage(DbeQuestionMessages.調査員は予約不可なので該当申請が解除.getMessage().getCode(),
+                            DbeQuestionMessages.調査員は予約不可なので該当申請が解除.getMessage().evaluate());
+                    return ResponseData.of(div).addMessage(message).respond();
+                } else if (!RString.isNullOrEmpty(temp_備考) && RString.isNullOrEmpty(temp_申請者管理番号3)) {
+                    QuestionMessage message = new QuestionMessage(DbeQuestionMessages.調査員は予約不可です.getMessage().getCode(),
+                            DbeQuestionMessages.調査員は予約不可です.getMessage().evaluate());
+                    return ResponseData.of(div).addMessage(message).respond();
+                }
+            } else {
+                if (予約状況_仮予約.equals(temp_予約状況) && !RString.isNullOrEmpty(temp_申請者管理番号3)) {
+                    QuestionMessage message = new QuestionMessage(DbeQuestionMessages.申請者予約状況は仮予約です.getMessage().getCode(),
+                            DbeQuestionMessages.申請者予約状況は仮予約です.getMessage().evaluate());
+                    return ResponseData.of(div).addMessage(message).respond();
+                } else if (予約状況_確定.equals(temp_予約状況) && !RString.isNullOrEmpty(temp_申請者管理番号3)) {
+                    QuestionMessage message = new QuestionMessage(DbeQuestionMessages.申請者予約状況は確定です.getMessage().getCode(),
+                            DbeQuestionMessages.申請者予約状況は確定です.getMessage().evaluate());
+                    return ResponseData.of(div).addMessage(message).respond();
+                } else if (予約状況_未定.equals(temp_予約状況) && RString.isNullOrEmpty(temp_申請者管理番号3)) {
+                    QuestionMessage message = new QuestionMessage(DbeQuestionMessages.予約未定かつ申請者が未指定です.getMessage().getCode(),
+                            DbeQuestionMessages.予約未定かつ申請者が未指定です.getMessage().evaluate());
+                    return ResponseData.of(div).addMessage(message).respond();
+                }
+            }
         }
-        boolean flg1 = false;
-        if (!(予約不可.equals(temp_予約可否) && !RString.isNullOrEmpty(temp_備考) && !RString.isNullOrEmpty(temp_申請者管理番号3))
-                || (new RString(DbeQuestionMessages.調査員は予約不可なので該当申請が解除.getMessage().getCode())
-                .equals(ResponseHolder.getMessageCode()) && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes)) {
-            flg1 = true;
-        }
-        if (flg1 && 予約不可.equals(temp_予約可否) && !RString.isNullOrEmpty(temp_備考) && RString.isNullOrEmpty(temp_申請者管理番号3)
-                && !ResponseHolder.isReRequest()) {
-            QuestionMessage message = new QuestionMessage(DbeQuestionMessages.調査員は予約不可です.getMessage().getCode(),
-                    DbeQuestionMessages.調査員は予約不可です.getMessage().evaluate());
-            return ResponseData.of(div).addMessage(message).respond();
-        }
-        boolean flg2 = false;
-        if (!(予約不可.equals(temp_予約可否) && !RString.isNullOrEmpty(temp_備考) && RString.isNullOrEmpty(temp_申請者管理番号3))
-                || (new RString(DbeQuestionMessages.調査員は予約不可です.getMessage().getCode())
-                .equals(ResponseHolder.getMessageCode()) && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes)) {
-            flg2 = true;
-        }
-        if (flg2 && 予約可.equals(temp_予約可否) && 予約状況_仮予約.equals(temp_予約状況) && !RString.isNullOrEmpty(temp_申請者管理番号3)
-                && !ResponseHolder.isReRequest()) {
-            QuestionMessage message = new QuestionMessage(DbeQuestionMessages.申請者予約状況は仮予約です.getMessage().getCode(),
-                    DbeQuestionMessages.申請者予約状況は仮予約です.getMessage().evaluate());
-            return ResponseData.of(div).addMessage(message).respond();
-        }
-        boolean flg3 = false;
-        if (!(予約可.equals(temp_予約可否) && 予約状況_仮予約.equals(temp_予約状況) && !RString.isNullOrEmpty(temp_申請者管理番号3))
-                || (new RString(DbeQuestionMessages.申請者予約状況は仮予約です.getMessage().getCode())
-                .equals(ResponseHolder.getMessageCode()) && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes)) {
-            flg3 = true;
-        }
-        if (flg3 && 予約可.equals(temp_予約可否) && 予約状況_確定.equals(temp_予約状況) && !RString.isNullOrEmpty(temp_申請者管理番号3)
-                && !ResponseHolder.isReRequest()) {
-            QuestionMessage message = new QuestionMessage(DbeQuestionMessages.申請者予約状況は確定です.getMessage().getCode(),
-                    DbeQuestionMessages.申請者予約状況は確定です.getMessage().evaluate());
-            return ResponseData.of(div).addMessage(message).respond();
-        }
-        boolean flg4 = false;
-        if (!(予約可.equals(temp_予約可否) && 予約状況_確定.equals(temp_予約状況) && !RString.isNullOrEmpty(temp_申請者管理番号3))
-                || (new RString(DbeQuestionMessages.申請者予約状況は確定です.getMessage().getCode())
-                .equals(ResponseHolder.getMessageCode()) && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes)) {
-            flg4 = true;
-        }
-        if (flg4 && 予約可.equals(temp_予約可否) && 予約状況_確定.equals(temp_予約状況) && RString.isNullOrEmpty(temp_申請者管理番号3)
-                && !ResponseHolder.isReRequest()) {
-            QuestionMessage message = new QuestionMessage(DbeQuestionMessages.予約未定かつ申請者が未指定です.getMessage().getCode(),
-                    DbeQuestionMessages.予約未定かつ申請者が未指定です.getMessage().evaluate());
-            return ResponseData.of(div).addMessage(message).respond();
-        }
-        boolean flg5 = false;
-        if (!(予約可.equals(temp_予約可否) && 予約状況_確定.equals(temp_予約状況) && RString.isNullOrEmpty(temp_申請者管理番号3))
-                || (new RString(DbeQuestionMessages.予約未定かつ申請者が未指定です.getMessage().getCode())
-                .equals(ResponseHolder.getMessageCode()) && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes)) {
-            flg5 = true;
-        }
-        if (flg5 && !RString.isNullOrEmpty(temp_申請者管理番号2) && 対象者区分_申請者.equals(temp_対象者区分) && !ResponseHolder.isReRequest()) {
-            QuestionMessage message = new QuestionMessage(DbeQuestionMessages.すでに予約済みです_上書保存.getMessage().getCode(),
-                    DbeQuestionMessages.すでに予約済みです_上書保存.getMessage().evaluate());
-            return ResponseData.of(div).addMessage(message).respond();
-        }
-        boolean flg6 = false;
-        if (!(RString.isNullOrEmpty(temp_申請者管理番号2) && 対象者区分_申請者.equals(temp_対象者区分))
-                || (new RString(DbeQuestionMessages.すでに予約済みです_上書保存.getMessage().getCode())
-                .equals(ResponseHolder.getMessageCode()) && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes)) {
-            flg6 = true;
-        }
-        if (flg6 && !RString.isNullOrEmpty(temp_申請者管理番号2) && 対象者区分_未定者.equals(temp_対象者区分)
-                && !ResponseHolder.isReRequest()) {
-            QuestionMessage message = new QuestionMessage(DbeQuestionMessages.すでに予約済みです_上書保存.getMessage().getCode(),
-                    DbeQuestionMessages.すでに予約済みです_上書保存.getMessage().evaluate());
-            return ResponseData.of(div).addMessage(message).respond();
-        }
-        boolean flg7 = false;
-        if (!(!RString.isNullOrEmpty(temp_申請者管理番号2) && 対象者区分_未定者.equals(temp_対象者区分))
-                || (new RString(DbeQuestionMessages.すでに予約済みです_上書保存.getMessage().getCode())
-                .equals(ResponseHolder.getMessageCode()) && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes)) {
-            flg7 = true;
-        }
-        if (flg7 && RString.isNullOrEmpty(temp_申請者管理番号2) && 対象者区分_申請者.equals(temp_対象者区分)
-                && !ResponseHolder.isReRequest()) {
-            QuestionMessage message = new QuestionMessage(DbeQuestionMessages.予約を上書保存.getMessage().getCode(),
-                    DbeQuestionMessages.予約を上書保存.getMessage().evaluate());
-            return ResponseData.of(div).addMessage(message).respond();
-        }
-        boolean flg8 = false;
-        if (!(RString.isNullOrEmpty(temp_申請者管理番号2) && 対象者区分_申請者.equals(temp_対象者区分))
-                || (new RString(DbeQuestionMessages.予約を上書保存.getMessage().getCode())
-                .equals(ResponseHolder.getMessageCode()) && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes)) {
-            flg8 = true;
-        }
-        if (flg8 && RString.isNullOrEmpty(temp_申請者管理番号2) && 対象者区分_未定者.equals(temp_対象者区分)
-                && !ResponseHolder.isReRequest()) {
-            QuestionMessage message = new QuestionMessage(DbeQuestionMessages.予約を上書保存.getMessage().getCode(),
-                    DbeQuestionMessages.予約を上書保存.getMessage().evaluate());
-            return ResponseData.of(div).addMessage(message).respond();
+        if ((ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes
+                && !new RString(DbeQuestionMessages.すでに予約済みです_上書保存.getMessage().getCode())
+                .equals(ResponseHolder.getMessageCode())
+                && !new RString(DbeQuestionMessages.予約を上書保存.getMessage().getCode())
+                .equals(ResponseHolder.getMessageCode())) || !ResponseHolder.isReRequest()) {
+            if (!(RString.isNullOrEmpty(temp_申請者管理番号2))) {
+                if (対象者区分_申請者.equals(temp_対象者区分)) {
+                    QuestionMessage message = new QuestionMessage(DbeQuestionMessages.すでに予約済みです_上書保存.getMessage().getCode(),
+                            DbeQuestionMessages.すでに予約済みです_上書保存.getMessage().evaluate());
+                    return ResponseData.of(div).addMessage(message).respond();
+                } else if (対象者区分_未定者.equals(temp_対象者区分)) {
+                    QuestionMessage message = new QuestionMessage(DbeQuestionMessages.すでに予約済みです_上書保存.getMessage().getCode(),
+                            DbeQuestionMessages.すでに予約済みです_上書保存.getMessage().evaluate());
+                    return ResponseData.of(div).addMessage(message).respond();
+                }
+            } else {
+                if (対象者区分_申請者.equals(temp_対象者区分)) {
+                    QuestionMessage message = new QuestionMessage(DbeQuestionMessages.予約を上書保存.getMessage().getCode(),
+                            DbeQuestionMessages.予約を上書保存.getMessage().evaluate());
+                    return ResponseData.of(div).addMessage(message).respond();
+                } else if (対象者区分_未定者.equals(temp_対象者区分)) {
+                    QuestionMessage message = new QuestionMessage(DbeQuestionMessages.予約を上書保存.getMessage().getCode(),
+                            DbeQuestionMessages.予約を上書保存.getMessage().evaluate());
+                    return ResponseData.of(div).addMessage(message).respond();
+                }
+            }
         }
         if (ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
-            saveスケジュール情報(div);
-            ViewStateHolder.put(ViewStateKeys.認定調査スケジュール登録_設定日, temp_設定日);
-            ViewStateHolder.put(ViewStateKeys.認定調査スケジュール登録_保険者, temp_保険者);
-            ViewStateHolder.put(ViewStateKeys.認定調査スケジュール登録_調査員状況02, temp_調査員状況02);
-            ViewStateHolder.put(ViewStateKeys.認定調査スケジュール登録_認定調査委託先コード, temp_認定調査委託先コード);
-            ViewStateHolder.put(ViewStateKeys.認定調査スケジュール登録_地区コード, temp_地区コード);
-            if (遷移元画面番号_2.equals(temp_遷移元画面番号) || 画面ステート_3.equals(画面ステート)) {
-                return ResponseData.of(div).forwardWithEventName(DBE2020010TransitionEventName.未定者_スケジュール詳細に戻る).respond();
-            } else if (遷移元画面番号_2.equals(temp_遷移元画面番号) || 画面ステート_1.equals(画面ステート)) {
-                return ResponseData.of(div).forwardWithEventName(DBE2020010TransitionEventName.未定者_スケジュール詳細に戻る).respond();
+            if (saveスケジュール情報(div) == 1) {
+                ViewStateHolder.put(ViewStateKeys.認定調査スケジュール登録_設定日, temp_設定日);
+                ViewStateHolder.put(ViewStateKeys.認定調査スケジュール登録_保険者, temp_保険者);
+                ViewStateHolder.put(ViewStateKeys.認定調査スケジュール登録_調査員状況02, temp_調査員状況02);
+                ViewStateHolder.put(ViewStateKeys.認定調査スケジュール登録_認定調査委託先コード, temp_認定調査委託先コード);
+                ViewStateHolder.put(ViewStateKeys.認定調査スケジュール登録_地区コード, temp_地区コード);
+                QuestionMessage message = new QuestionMessage(UrInformationMessages.保存終了.getMessage().getCode(),
+                        UrInformationMessages.保存終了.getMessage().evaluate());
+                ResponseData.of(div).addMessage(message);
+                if (遷移元画面番号_2.equals(temp_遷移元画面番号) && 画面ステート_3.equals(画面ステート)) {
+                    return ResponseData.of(div).forwardWithEventName(DBE2020010TransitionEventName.未定者_スケジュール詳細に戻る).respond();
+                } else if (遷移元画面番号_2.equals(temp_遷移元画面番号) && 画面ステート_1.equals(画面ステート)) {
+                    return ResponseData.of(div).forwardWithEventName(DBE2020010TransitionEventName.更新_スケジュール詳細に戻る).respond();
+                } else if (遷移元画面番号_3.equals(temp_遷移元画面番号)
+                        && (画面ステート_1.equals(画面ステート) || 画面ステート_3.equals(画面ステート))) {
+                    return ResponseData.of(div).forwardWithEventName(DBE2020010TransitionEventName.照会_該当者一覧に戻る).respond();
+                }
             }
         }
         return ResponseData.of(div).respond();
     }
 
-    private void saveスケジュール情報(NinteiChosaScheduleInputDiv div) {
-        //TODO: 前排他制限の排他Keyがありません。QA865
+    private int saveスケジュール情報(NinteiChosaScheduleInputDiv div) {
+        //TODO: 前排他制限の排他Keyがありません。QA898
 //            if (true) {
 //                throw new ApplicationException(UrErrorMessages.排他_バッチ実行中で更新不可.getMessage());
 //            }
@@ -449,76 +426,60 @@ public class NinteiChosaScheduleInput {
         } else {
             予約状況 = new Code("0");
         }
-        ninteichosa = ninteichosa.createBuilderForEdit().set予約可能フラグ(予約可.equals(temp_予約可否))
-                .set予約状況(予約状況)
-                .set備考(div.getTxtNinteiChosaBiko().getValue())
-                .set場所(div.getTxtBasho().getValue())
-                .set駐車場(div.getTxtChushajo().getValue())
-                .set立会人１(div.getTxtTachiainin1().getValue())
-                .set連絡先１(new TelNo(div.getTxtRenrakusaki1().getValue()))
-                .set立会人２(div.getTxtTachiainin2().getValue())
-                .set連絡先２(new TelNo(div.getTxtRenrakusaki2().getValue()))
-                .set対象者メモ(div.getTxtTaishoshaShosaiMemo().getValue())
-                //                    .set申請書管理番号(ShinseishoKanriNo.EMPTY)
-                .build();
-        NinteiChosaScheduleInputManager.createInstance().saveスケジュール情報(ninteichosa);
-        //TODO: DbzInformationMessagesに更新正常終了Messageがありません。 QA865
-        //        if (NinteiChosaScheduleInputManager.createInstance().saveスケジュール情報(ninteichosa) == 1) {
-        //            if (!ResponseHolder.isReRequest()) {
-        //                QuestionMessage message = new QuestionMessage(DbzInformationMessages.更新正常終了.getMessage().getCode(),
-        //                        DbeQuestionMessages.予約を上書保存.getMessage().evaluate());
-        //                return ResponseData.of(div).addMessage(message).respond();
-        //            }
-        //        }
+        ShinseishoKanriNo 申請者管理番号3;
+        if (予約不可_key.equals(div.getRadYoyakuKahi().getSelectedKey()) && !RString.isNullOrEmpty(temp_申請者管理番号3)) {
+            申請者管理番号3 = null;
+        } else {
+            申請者管理番号3 = new ShinseishoKanriNo(temp_申請者管理番号3);
+        }
+        if (ninteichosa != null) {
+            ninteichosa = ninteichosa.createBuilderForEdit().set予約可能フラグ(予約可_key.equals(temp_予約可否))
+                    .set予約状況(予約状況)
+                    .set備考(div.getTxtNinteiChosaBiko().getValue())
+                    .set場所(div.getTxtBasho().getValue())
+                    .set駐車場(div.getTxtChushajo().getValue())
+                    .set立会人１(div.getTxtTachiainin1().getValue())
+                    .set連絡先１(new TelNo(div.getTxtRenrakusaki1().getValue()))
+                    .set立会人２(div.getTxtTachiainin2().getValue())
+                    .set連絡先２(new TelNo(div.getTxtRenrakusaki2().getValue()))
+                    .set対象者メモ(div.getTxtTaishoshaShosaiMemo().getValue())
+                    .set申請書管理番号(申請者管理番号3)
+                    .build();
+            return NinteiChosaScheduleInputManager.createInstance().saveスケジュール情報(ninteichosa);
+        }
+        return 0;
+        //TODO: 保存終了panelがありません。 QA865
+//                if (NinteiChosaScheduleInputManager.createInstance().saveスケジュール情報(ninteichosa) == 1) {
+//                    if (!ResponseHolder.isReRequest()) {
+//                        QuestionMessage message = new QuestionMessage(UrInformationMessages.保存終了.getMessage().getCode(),
+//                                UrInformationMessages.保存終了.getMessage().evaluate());
+//                        return ResponseData.of(div).addMessage(message).respond();
+//                    }
+//                }
     }
 
     private ValidationMessageControlPairs getMessage(NinteiChosaScheduleInputDiv div, ValidationMessageControlPairs validationMessages) {
 
-        if (予約不可.equals(temp_予約可否) && RString.isNullOrEmpty(temp_備考)) {
-            getHandler(div).備考必須入力項目チェック(validationMessages);
+        if (予約不可_key.equals(temp_予約可否) && RString.isNullOrEmpty(temp_備考)) {
+            getValidationHandler(div).備考必須入力項目チェック(validationMessages);
         }
-        if (予約可.equals(temp_予約可否) && 予約状況_未定.equals(temp_予約状況) && !RString.isNullOrEmpty(temp_申請者管理番号3)) {
-            getHandler(div).申請者予約があるのチェック(validationMessages);
+        if (予約可_key.equals(temp_予約可否) && 予約状況_未定.equals(temp_予約状況) && !RString.isNullOrEmpty(temp_申請者管理番号3)) {
+            getValidationHandler(div).申請者予約があるのチェック(validationMessages);
         }
-        if (予約可.equals(temp_予約可否) && 予約状況_仮予約.equals(temp_予約状況) && RString.isNullOrEmpty(temp_申請者管理番号3)) {
-            getHandler(div).申請者未指定なので予約状況は未定申請者を指定のチェック(validationMessages);
+        if (予約可_key.equals(temp_予約可否) && 予約状況_仮予約.equals(temp_予約状況) && RString.isNullOrEmpty(temp_申請者管理番号3)) {
+            getValidationHandler(div).申請者未指定なので予約状況は未定申請者を指定のチェック(validationMessages);
         }
-        if (予約可.equals(temp_予約可否) && 予約状況_確定.equals(temp_予約状況) && RString.isNullOrEmpty(temp_申請者管理番号3)) {
-            getHandler(div).申請者未指定なので予約状況は未定申請者を指定のチェック(validationMessages);
+        if (予約可_key.equals(temp_予約可否) && 予約状況_確定.equals(temp_予約状況) && RString.isNullOrEmpty(temp_申請者管理番号3)) {
+            getValidationHandler(div).申請者未指定なので予約状況は未定申請者を指定のチェック(validationMessages);
         }
-//        if (予約不可.equals(temp_予約可否) && !RString.isNullOrEmpty(temp_備考) && !RString.isNullOrEmpty(temp_申請者管理番号3)) {
-//            getHandler(div).調査員は予約不可なので該当申請が解除(validationMessages);
-//        }
-//        if (予約不可.equals(temp_予約可否) && !RString.isNullOrEmpty(temp_備考) && RString.isNullOrEmpty(temp_申請者管理番号3)) {
-//            getHandler(div).調査員は予約不可です(validationMessages);
-//        }
-//        if (予約可.equals(temp_予約可否) && 予約状況_仮予約.equals(temp_予約状況) && !RString.isNullOrEmpty(temp_申請者管理番号3)) {
-//            getHandler(div).申請者予約状況は仮予約です(validationMessages);
-//        }
-//        if (予約可.equals(temp_予約可否) && 予約状況_確定.equals(temp_予約状況) && !RString.isNullOrEmpty(temp_申請者管理番号3)) {
-//            getHandler(div).申請者予約状況は確定です(validationMessages);
-//        }
-//        if (予約可.equals(temp_予約可否) && 予約状況_確定.equals(temp_予約状況) && RString.isNullOrEmpty(temp_申請者管理番号3)) {
-//            getHandler(div).予約未定かつ申請者が未指定です(validationMessages);
-//        }
-//
-//        if (!RString.isNullOrEmpty(temp_申請者管理番号2) && 対象者区分_申請者.equals(temp_対象者区分)) {
-//            getHandler(div).すでに予約済みです_上書保存(validationMessages);
-//        }
-//        if (!RString.isNullOrEmpty(temp_申請者管理番号2) && 対象者区分_未定者.equals(temp_対象者区分)) {
-//            getHandler(div).すでに予約済みです_上書保存(validationMessages);
-//        }
-//        if (RString.isNullOrEmpty(temp_申請者管理番号2) && 対象者区分_申請者.equals(temp_対象者区分)) {
-//            getHandler(div).予約を上書保存(validationMessages);
-//        }
-//        if (RString.isNullOrEmpty(temp_申請者管理番号2) && 対象者区分_未定者.equals(temp_対象者区分)) {
-//            getHandler(div).予約を上書保存(validationMessages);
-//        }
-
         return validationMessages;
     }
 
     private NinteiChosaScheduleInputHandler getHandler(NinteiChosaScheduleInputDiv div) {
         return new NinteiChosaScheduleInputHandler(div);
+    }
+
+    private NinteiChosaScheduleInputValidationHandler getValidationHandler(NinteiChosaScheduleInputDiv div) {
+        return new NinteiChosaScheduleInputValidationHandler(div);
     }
 }

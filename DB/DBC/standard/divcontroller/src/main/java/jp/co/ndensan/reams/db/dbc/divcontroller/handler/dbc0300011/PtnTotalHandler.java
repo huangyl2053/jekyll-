@@ -57,14 +57,18 @@ public final class PtnTotalHandler {
 
     /**
      * 初期化設定
+     *
+     * @param 初期フラグ
      */
-    public void set初期化状態() {
+    public void set初期化状態(boolean 初期フラグ) {
         RString 状態 = ViewStateHolder.get(ViewStateKeys.状態, RString.class);
         if (参照.equals(状態)) {
             div.getPnlData().getDgKeiyakuJigyosya().getGridSetting().setIsShowModifyButtonColumn(false);
             div.getPnlData().getDgKeiyakuJigyosya().getGridSetting().setIsShowDeleteButtonColumn(false);
         }
-        div.getPnlCondition().getRdoBango().setSelectedKey(new RString("1"));
+        if (初期フラグ) {
+            div.getPnlCondition().getRdoBango().setSelectedKey(new RString("1"));
+        }
         div.getPnlCondition().getTxtJigyosyakeyakuNo().clearValue();
         div.getPnlCondition().getTxtJigyosyakeyakuNo().setDisabled(false);
 
@@ -98,9 +102,15 @@ public final class PtnTotalHandler {
         div.getPnlCondition().getTxtJyusyoKanji().setDisabled(true);
         div.getPnlCondition().getChkJyusyoKanji().setSelectedItemsByKey(new ArrayList<RString>());
         div.getPnlCondition().getChkJyusyoKanji().setDisabled(true);
-        div.getPnlCondition().getTxtMaxCount().setValue(new Decimal(DbBusinessConifg.
-                get(ConfigNameDBU.検索制御_最大取得件数, RDate.getNowDate(),
-                        SubGyomuCode.DBU介護統計報告).toString()));
+        if (初期フラグ) {
+            div.getPnlCondition().getTxtMaxCount().setValue(new Decimal(DbBusinessConifg.
+                    get(ConfigNameDBU.検索制御_最大取得件数, RDate.getNowDate(),
+                            SubGyomuCode.DBU介護統計報告).toString()));
+        } else {
+            Decimal 最大取得件数 = ViewStateHolder
+                    .get(ViewStateKeys.受領委任契約事業者検索最大件数, Decimal.class);
+            div.getPnlCondition().getTxtMaxCount().setValue(最大取得件数);
+        }
         div.getPnlData().setDisplayNone(true);
     }
 
@@ -249,6 +259,8 @@ public final class PtnTotalHandler {
                 keiyakuJigyoshaYubinNo,
                 keiyakuJigyoshaJusho,
                 sameJusho);
+
+        ViewStateHolder.put(ViewStateKeys.受領委任契約事業者検索キー, parameter);
         List<JuryoininKeiyakuJigyosha> dataList = JuryoininKeiyakuJigyoshaManager.createInstance()
                 .getJuryoininKeiyakuJigyoshaList(parameter);
         List<dgKeiyakuJigyosya_Row> data = new ArrayList<>();
@@ -264,6 +276,7 @@ public final class PtnTotalHandler {
             count = dataList.size();
         }
         ViewStateHolder.put(ViewStateKeys.受領委任契約事業者一覧データ, (ArrayList<JuryoininKeiyakuJigyosha>) dataList);
+        ViewStateHolder.put(ViewStateKeys.受領委任契約事業者検索最大件数, div.getPnlCondition().getTxtMaxCount().getValue());
 
         for (int i = 0; i < count; i++) {
             dgKeiyakuJigyosya_Row row = new dgKeiyakuJigyosya_Row();

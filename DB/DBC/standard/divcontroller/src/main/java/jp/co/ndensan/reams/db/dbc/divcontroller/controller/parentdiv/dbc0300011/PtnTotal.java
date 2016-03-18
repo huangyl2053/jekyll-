@@ -1,5 +1,8 @@
 package jp.co.ndensan.reams.db.dbc.divcontroller.controller.parentdiv.dbc0300011;
 
+import java.util.ArrayList;
+import java.util.List;
+import jp.co.ndensan.reams.db.dbc.definition.mybatisprm.juryoininkeiyakujigyosha.JuryoininKeiyakuJigyoshaParameter;
 import static jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0300011.DBC0300011TransitionEventName.事業者選択;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0300011.PtnTotalDiv;
 import jp.co.ndensan.reams.db.dbc.divcontroller.handler.dbc0300011.PtnTotalHandler;
@@ -8,6 +11,7 @@ import jp.co.ndensan.reams.ur.urz.definition.message.UrWarningMessages;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.ApplicationException;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 
 /**
@@ -24,8 +28,58 @@ public class PtnTotal {
     public ResponseData<PtnTotalDiv> onLoad(PtnTotalDiv div) {
         ResponseData<PtnTotalDiv> responseData = new ResponseData<>();
         PtnTotalHandler handler = getHandler(div);
-        handler.set初期化状態();
+        JuryoininKeiyakuJigyoshaParameter searchKey = ViewStateHolder
+                .get(ViewStateKeys.受領委任契約事業者検索キー, JuryoininKeiyakuJigyoshaParameter.class);
+        if (searchKey == null) {
+            handler.set初期化状態(true);
+            responseData.data = div;
+            return responseData;
+        }
 
+        handler.set初期化状態(false);
+        if (searchKey.isSelectedBango()) {
+            handler.click契約事業者番号();
+            div.getPnlCondition().getRdoBango().setSelectedKey(new RString("1"));
+            div.getPnlCondition().getTxtJigyosyakeyakuNo()
+                    .setValue(new Decimal(searchKey.getKeiyakuJigyoshaNo().toString()));
+        }
+        if (searchKey.isSelectedName()) {
+            handler.click契約事業者名称();
+            div.getPnlCondition().getRdoMeisyo().setSelectedKey(new RString("2"));
+            if (searchKey.getKeiyakuJigyoshaKanaName() != null) {
+                div.getPnlCondition().getTxtMeisyoKana().setValue(searchKey.getKeiyakuJigyoshaKanaName().value());
+            }
+            List<RString> list = new ArrayList<>();
+            list.add(new RString("1"));
+            if (searchKey.isSameKanaName()) {
+                div.getPnlCondition().getChkJyusyoKanji().setSelectedItemsByKey(list);
+            }
+            if (searchKey.getKeiyakuJigyoshaName() != null) {
+                div.getPnlCondition().getTxtMeisyoKanji().setValue(searchKey.getKeiyakuJigyoshaName().value());
+            }
+            if (searchKey.isSameJigyoshaName()) {
+                div.getPnlCondition().getChkMeisyoKanji().setSelectedItemsByKey(list);
+            }
+            if (searchKey.getKeiyakuShurui() != null) {
+                div.getPnlCondition().getDdlKeiyakuSyurui().setSelectedKey(searchKey.getKeiyakuShurui());
+            }
+        }
+        if (searchKey.isSelectedJusho()) {
+            handler.click契約事業者住所();
+            div.getPnlCondition().getRdoJyusyo().setSelectedKey(new RString("3"));
+            if (searchKey.getKeiyakuJigyoshaYubinNo() != null) {
+                div.getPnlCondition().getTxtYubin().setValue(searchKey.getKeiyakuJigyoshaYubinNo());
+            }
+            List<RString> list = new ArrayList<>();
+            list.add(new RString("1"));
+            if (searchKey.getKeiyakuJigyoshaJusho() != null) {
+                div.getPnlCondition().getTxtJyusyoKanji().setValue(searchKey.getKeiyakuJigyoshaJusho().value());
+            }
+            if (searchKey.isSameJusho()) {
+                div.getPnlCondition().getChkJyusyoKanji().setSelectedItemsByKey(list);
+            }
+        }
+        handler.click検索();
         responseData.data = div;
         return responseData;
     }
@@ -84,7 +138,7 @@ public class PtnTotal {
     public ResponseData<PtnTotalDiv> onClick_btnClear(PtnTotalDiv div) {
         ResponseData<PtnTotalDiv> responseData = new ResponseData<>();
         PtnTotalHandler handler = getHandler(div);
-        handler.set初期化状態();
+        handler.set初期化状態(true);
 
         responseData.data = div;
         return responseData;

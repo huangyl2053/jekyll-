@@ -6,9 +6,10 @@
 package jp.co.ndensan.reams.db.dba.service.core.checknyutaisyokikanby;
 
 import java.util.List;
-import jp.co.ndensan.reams.db.dba.business.core.tekiyojogaikaijo.ShisetsuJouHou;
 import jp.co.ndensan.reams.db.dba.business.core.tekiyojogaikaijo.TekiyoJogaiKaijo;
-import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT1002TekiyoJogaishaDac;
+import jp.co.ndensan.reams.db.dba.definition.mybatisprm.checknyutaisyokikanby.ShisetsuJouHouParamer;
+import jp.co.ndensan.reams.db.dba.persistence.db.mapper.basic.checknyutaisyokikanby.ITekiyoJogaishaKanriMapper;
+import jp.co.ndensan.reams.db.dbz.service.core.MapperProvider;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
@@ -19,22 +20,31 @@ import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
  */
 public class TekiyoJogaishaKanriFinder {
 
-    private final DbT1002TekiyoJogaishaDac dac;
+    private final MapperProvider mapperProvider;
 
     /**
      * コンストラクタです。
      */
     public TekiyoJogaishaKanriFinder() {
-        dac = InstanceProvider.create(DbT1002TekiyoJogaishaDac.class);
+        mapperProvider = InstanceProvider.create(MapperProvider.class);
     }
 
     /**
      * 単体テスト用のコンストラクタです。
      *
-     * @param DbT1002TekiyoJogaishaDac dac
+     * @param MapperProvider mapperProvider
      */
-    TekiyoJogaishaKanriFinder(DbT1002TekiyoJogaishaDac dac) {
-        this.dac = dac;
+    TekiyoJogaishaKanriFinder(MapperProvider mapperProvider) {
+        this.mapperProvider = mapperProvider;
+    }
+
+    /**
+     * {@link InstanceProvider#create}にて生成した{@link TekiyoJogaishaKanriFinder}のインスタンスを返します。
+     *
+     * @return {@link InstanceProvider#create}にて生成した{@link TekiyoJogaishaKanriFinder}のインスタンス
+     */
+    public static TekiyoJogaishaKanriFinder createInstance() {
+        return InstanceProvider.create(TekiyoJogaishaKanriFinder.class);
     }
 
     /**
@@ -117,24 +127,24 @@ public class TekiyoJogaishaKanriFinder {
     /**
      * 変更状態の施設入退所情報を取得です。
      *
-     * @param 施設入退所情報リスト ShisetsuJouHou
+     * @param 施設入退所情報リスト List<ShisetsuJouHouParamer>
      * @return 結果フラグ
      */
     @Transaction
-    public boolean checkNyuTaiSyoKikanByHenkoMode(List<ShisetsuJouHou> 施設入退所情報リスト) {
+    public boolean checkNyuTaiSyoKikanByHenkoMode(List<ShisetsuJouHouParamer> 施設入退所情報リスト) {
         return select適用除外者情報(施設入退所情報リスト);
     }
 
-    private boolean select適用除外者情報(List<ShisetsuJouHou> 施設入退所情報リスト) {
+    private boolean select適用除外者情報(List<ShisetsuJouHouParamer> 施設入退所情報リスト) {
         if (施設入退所情報リスト == null || 施設入退所情報リスト.isEmpty()) {
             return false;
         }
-        for (ShisetsuJouHou shisetsuJouHouList : 施設入退所情報リスト) {
+        for (ShisetsuJouHouParamer shisetsuJouHouList : 施設入退所情報リスト) {
             if (shisetsuJouHouList.getState() != null && !shisetsuJouHouList.getState().isEmpty()
                     && shisetsuJouHouList.getState().equals(new RString("削除"))) {
                 continue;
             }
-            int count = dac.getCount(shisetsuJouHouList.getNyushoTsuchiHakkoYMD(), shisetsuJouHouList.getTaishoTsuchiHakkoYMD());
+            int count = mapperProvider.create(ITekiyoJogaishaKanriMapper.class).get被保険者資格不整合一覧(shisetsuJouHouList);
             if (count > 1 || count == 0) {
                 return false;
             }

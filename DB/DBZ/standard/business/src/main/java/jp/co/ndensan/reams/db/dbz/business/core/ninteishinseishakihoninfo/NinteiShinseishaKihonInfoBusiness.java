@@ -5,8 +5,10 @@
  */
 package jp.co.ndensan.reams.db.dbz.business.core.ninteishinseishakihoninfo;
 
+import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo;
 import jp.co.ndensan.reams.db.dbz.entity.db.relate.shisetsunyushoinfo.ninteishinseishakihoninfo.NinteiShinseishaKihonInfoRelateEntity;
+import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaJusho;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaKanaMeisho;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaMeisho;
@@ -30,7 +32,7 @@ public class NinteiShinseishaKihonInfoBusiness {
      * @param relateEntity NinteiShinseishaKihonInfoRelateEntity
      */
     public NinteiShinseishaKihonInfoBusiness(NinteiShinseishaKihonInfoRelateEntity relateEntity) {
-        this.relateEntity = relateEntity;
+        this.relateEntity = requireNonNull(relateEntity, UrSystemErrorMessages.値がnull.getReplacedMessage("認定申請者基本情報"));
     }
 
     /**

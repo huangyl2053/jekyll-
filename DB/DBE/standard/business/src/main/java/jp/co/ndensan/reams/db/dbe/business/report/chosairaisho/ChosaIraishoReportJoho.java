@@ -5,6 +5,8 @@
  */
 package jp.co.ndensan.reams.db.dbe.business.report.chosairaisho;
 
+import java.util.List;
+
 /**
  *
  * 要介護認定調査依頼書作成_帳票パラメータクラスです。
@@ -13,16 +15,15 @@ package jp.co.ndensan.reams.db.dbe.business.report.chosairaisho;
 @SuppressWarnings("PMD.UnusedPrivateField")
 public class ChosaIraishoReportJoho {
 
-    private final ChosaIraishoHeadItem headItem;
+    private final List<ChosaIraishoHeadItem> headItemList;
 
     /**
      * コンストラクタを作成します。
      *
-     * @param headItem 要介護認定調査依頼書ヘッダ
+     * @param headItemList 要介護認定調査依頼書ヘッダ
      */
-    public ChosaIraishoReportJoho(
-            ChosaIraishoHeadItem headItem) {
+    public ChosaIraishoReportJoho(List<ChosaIraishoHeadItem> headItemList) {
 
-        this.headItem = headItem;
+        this.headItemList = headItemList;
     }
 }

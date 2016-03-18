@@ -61,7 +61,7 @@ public class NinteiChosainMasterHandler {
     public void load() {
 
         div.getHokenshaList().loadHokenshaList();
-        List<UzT0007CodeEntity> codeList = CodeMaster.getCodeRireki(SubGyomuCode.DBE認定支援, CHIKU_CODE_SHUBETSU);
+        List<UzT0007CodeEntity> codeList = CodeMaster.getCode(SubGyomuCode.DBE認定支援, CHIKU_CODE_SHUBETSU);
         List<KeyValueDataSource> chikuDataSource = new ArrayList<>();
         chikuDataSource.add(new KeyValueDataSource(RString.EMPTY, RString.EMPTY));
         for (UzT0007CodeEntity codeEntity : codeList) {
@@ -99,6 +99,7 @@ public class NinteiChosainMasterHandler {
             dataGridList.add(createDgChosainIchiranRow(
                     RString.EMPTY,
                     ninteiChosainMaster.get市町村コード(),
+                    ninteiChosainMaster.get市町村名称(),
                     ninteiChosainMaster.get認定調査員コード(),
                     ninteiChosainMaster.get調査員氏名(),
                     ninteiChosainMaster.get調査員氏名カナ(),
@@ -121,6 +122,7 @@ public class NinteiChosainMasterHandler {
     private dgChosainIchiran_Row createDgChosainIchiranRow(
             RString jotai,
             LasdecCode shichoson,
+            RString shichosonMeisho,
             RString ninteiChosainNo,
             RString chosainShimei,
             RString chosainKanaShimei,
@@ -138,8 +140,7 @@ public class NinteiChosainMasterHandler {
             RString shozokuKikanName) {
         dgChosainIchiran_Row row = new dgChosainIchiran_Row();
         row.setJotai(jotai);
-        // TODO　共通部品
-        row.setShichoson(new RString("市町村名"));
+        row.setShichoson(nullToEmpty(shichosonMeisho));
         row.setShichosonCode(nullToEmpty(shichoson.value()));
         TextBoxCode chosainCode = new TextBoxCode();
         chosainCode.setValue(nullToEmpty(ninteiChosainNo));
@@ -187,8 +188,7 @@ public class NinteiChosainMasterHandler {
         div.getChosainJohoInput().getTxtChosainCode().setValue(nullToEmpty(row.getChosainCode().getValue()));
         div.getChosainJohoInput().getTxtChosainShimei().setValue(nullToEmpty(row.getChosainShimei()));
         div.getChosainJohoInput().getTxtChosainKanaShimei().setValue(nullToEmpty(row.getChosainKanaShimei()));
-        div.getChosainJohoInput().getTxtChiku().setValue(nullToEmpty(row.getChikuCode()));
-        div.getChosainJohoInput().getTxtChikuMei().setValue(nullToEmpty(row.getChiku()));
+        div.getChosainJohoInput().getCcdChiku().applyNoOptionCodeMaster().load(SubGyomuCode.DBE認定支援, CHIKU_CODE_SHUBETSU, new Code(row.getChikuCode()));
         setDdlChosainShikaku();
         if (!row.getChosainShikakuCode().isEmpty()) {
             div.getChosainJohoInput().getDdlChosainShikaku().setSelectedKey(row.getChosainShikakuCode());
@@ -250,8 +250,8 @@ public class NinteiChosainMasterHandler {
         } else if (WOMAN.equals(seibetsu)) {
             row.setSeibetsu(表示値_女);
         }
-        row.setChikuCode(nullToEmpty(div.getChosainJohoInput().getTxtChiku().getValue()));
-        row.setChiku(nullToEmpty(div.getChosainJohoInput().getTxtChikuMei().getValue()));
+        row.setChikuCode(nullToEmpty(div.getChosainJohoInput().getCcdChiku().getCode().value()));
+        row.setChiku(nullToEmpty(div.getChosainJohoInput().getCcdChiku().getCodeMeisho()));
         row.setChosainShikakuCode(nullToEmpty(div.getChosainJohoInput().getDdlChosainShikaku().getSelectedKey()));
         row.setChosainShikaku(nullToEmpty(div.getChosainJohoInput().getDdlChosainShikaku().getSelectedValue()));
         row.setChosaKanoNinzu(div.getChosainJohoInput().getTxtChosaKanoNinzu());
@@ -315,7 +315,7 @@ public class NinteiChosainMasterHandler {
                 .set調査員氏名カナ(div.getChosainJohoInput().getTxtChosainKanaShimei().getValue())
                 .set性別(div.getChosainJohoInput().getRadSeibetsu().getSelectedKey())
                 .set調査員資格(div.getChosainJohoInput().getDdlChosainShikaku().getSelectedKey())
-                .set地区コード(div.getChosainJohoInput().getTxtChiku().getValue())
+                .set地区コード(div.getChosainJohoInput().getCcdChiku().getCode().value())
                 .set調査可能人数_月(調査可能人数_月)
                 .set郵便番号(div.getChosainJohoInput().getTxtYubinNo().getValue())
                 .set住所(div.getChosainJohoInput().getTxtJusho().getDomain())
@@ -323,48 +323,6 @@ public class NinteiChosainMasterHandler {
                 .setFAX番号(div.getChosainJohoInput().getTxtFaxNo().getDomain())
                 .set所属機関名称(div.getChosainJohoInput().getTextBoxShozokuKikan().getDomain().value())
                 .set状況フラグ(CODE_有効.equals(div.getChosainJohoInput().getRadChosainJokyo().getSelectedKey())).build();
-    }
-
-    /**
-     * 市町村名を設定します。
-     */
-    public void setTxtShichosonmei() {
-        // TODO QA253　共通部品
-//        UzT0007CodeEntity code = CodeMaster.getCode(
-//                SubGyomuCode.DBE認定支援, CHIKU_CODE_SHUBETSU, new Code(div.getChosainJohoInput().getTxtShichoson().getValue()));
-//        if (code != null) {
-//            div.getChosainJohoInput().getTxtShichosonmei().setValue(code.getコード名称());
-//        }
-        RString shichoson = div.getChosainJohoInput().getTxtShichoson().getValue();
-        if (new RString("000001").equals(shichoson)) {
-            div.getChosainJohoInput().getTxtShichosonmei().setValue(new RString("市町村一"));
-        } else if (new RString("000002").equals(shichoson)) {
-            div.getChosainJohoInput().getTxtShichosonmei().setValue(new RString("市町村二"));
-        } else if (new RString("000003").equals(shichoson)) {
-            div.getChosainJohoInput().getTxtShichosonmei().setValue(new RString("市町村三"));
-        } else if (new RString("000004").equals(shichoson)) {
-            div.getChosainJohoInput().getTxtShichosonmei().setValue(new RString("市町村四"));
-        } else {
-            div.getChosainJohoInput().getTxtShichosonmei().setValue(RString.EMPTY);
-        }
-    }
-
-    /**
-     * 地区名を設定します。
-     */
-    public void setTxtChikuMei() {
-        List<UzT0007CodeEntity> codeList = CodeMaster.getCodeRireki(SubGyomuCode.DBE認定支援, CHIKU_CODE_SHUBETSU);
-        boolean isEmpty = true;
-        for (UzT0007CodeEntity uzT0007CodeEntity : codeList) {
-            if (uzT0007CodeEntity.getコード().value().equals(div.getChosainJohoInput().getTxtChiku().getValue())) {
-                div.getChosainJohoInput().getTxtChikuMei().setValue(uzT0007CodeEntity.getコード名称());
-                isEmpty = false;
-                break;
-            }
-        }
-        if (isEmpty) {
-            div.getChosainJohoInput().getTxtChikuMei().setValue(RString.EMPTY);
-        }
     }
 
     /**
@@ -377,7 +335,7 @@ public class NinteiChosainMasterHandler {
         div.getChosainJohoInput().getTxtChosainShimei().setDisabled(true);
         div.getChosainJohoInput().getTxtChosainKanaShimei().setDisabled(true);
         div.getChosainJohoInput().getRadSeibetsu().setDisabled(true);
-        div.getChosainJohoInput().getTxtChiku().setDisabled(true);
+        div.getChosainJohoInput().getCcdChiku().setDisabled(true);
         div.getChosainJohoInput().getDdlChosainShikaku().setDisabled(true);
         div.getChosainJohoInput().getTxtChosaKanoNinzu().setDisabled(true);
         div.getChosainJohoInput().getTxtYubinNo().setDisabled(true);
@@ -388,7 +346,6 @@ public class NinteiChosainMasterHandler {
         div.getChosainJohoInput().getRadChosainJokyo().setDisabled(true);
         div.getChosainJohoInput().getBtnToSearchShichoson().setDisabled(true);
         div.getChosainJohoInput().getBtnToSearchChosaItakusaki().setDisabled(true);
-        div.getChosainJohoInput().getBtnToSearchChiku().setDisabled(true);
     }
 
     /**
@@ -401,7 +358,7 @@ public class NinteiChosainMasterHandler {
         div.getChosainJohoInput().getTxtChosainShimei().setDisabled(false);
         div.getChosainJohoInput().getTxtChosainKanaShimei().setDisabled(false);
         div.getChosainJohoInput().getRadSeibetsu().setDisabled(false);
-        div.getChosainJohoInput().getTxtChiku().setDisabled(false);
+        div.getChosainJohoInput().getCcdChiku().setDisabled(false);
         div.getChosainJohoInput().getDdlChosainShikaku().setDisabled(false);
         div.getChosainJohoInput().getTxtChosaKanoNinzu().setDisabled(false);
         div.getChosainJohoInput().getTxtYubinNo().setDisabled(false);
@@ -414,7 +371,6 @@ public class NinteiChosainMasterHandler {
         div.getChosainJohoInput().getBtnTorikeshi().setDisabled(false);
         div.getChosainJohoInput().getBtnToSearchShichoson().setDisabled(false);
         div.getChosainJohoInput().getBtnToSearchChosaItakusaki().setDisabled(false);
-        div.getChosainJohoInput().getBtnToSearchChiku().setDisabled(false);
     }
 
     /**
@@ -429,8 +385,7 @@ public class NinteiChosainMasterHandler {
         div.getChosainJohoInput().getTxtChosainShimei().clearValue();
         div.getChosainJohoInput().getTxtChosainKanaShimei().clearValue();
         div.getChosainJohoInput().getRadSeibetsu().setSelectedIndex(0);
-        div.getChosainJohoInput().getTxtChiku().clearValue();
-        div.getChosainJohoInput().getTxtChikuMei().clearValue();
+        div.getChosainJohoInput().getCcdChiku().clearDisplayedValues();
         setDdlChosainShikaku();
         div.getChosainJohoInput().getDdlChosainShikaku().setSelectedIndex(0);
         div.getChosainJohoInput().getTxtChosaKanoNinzu().clearValue();
@@ -440,6 +395,7 @@ public class NinteiChosainMasterHandler {
         div.getChosainJohoInput().getTxtFaxNo().clearDomain();
         div.getChosainJohoInput().getTextBoxShozokuKikan().clearDomain();
         div.getChosainJohoInput().getRadChosainJokyo().setSelectedIndex(0);
+        div.getChosainJohoInput().getCcdChiku().applyNoOptionCodeMaster().load(SubGyomuCode.DBE認定支援, CHIKU_CODE_SHUBETSU);
     }
 
     /**
@@ -458,7 +414,7 @@ public class NinteiChosainMasterHandler {
         inputDiv.append(chosainJohoInputDiv.getTxtChosainShimei().getValue());
         inputDiv.append(chosainJohoInputDiv.getTxtChosainKanaShimei().getValue());
         inputDiv.append(chosainJohoInputDiv.getRadSeibetsu().getSelectedKey());
-        inputDiv.append(chosainJohoInputDiv.getTxtChiku().getValue());
+        inputDiv.append(div.getChosainJohoInput().getCcdChiku().getCode().value());
         inputDiv.append(chosainJohoInputDiv.getDdlChosainShikaku().getSelectedKey());
         Decimal chosaKanoNinzu = chosainJohoInputDiv.getTxtChosaKanoNinzu().getValue();
         inputDiv.append(chosaKanoNinzu == null ? RString.EMPTY : chosaKanoNinzu);

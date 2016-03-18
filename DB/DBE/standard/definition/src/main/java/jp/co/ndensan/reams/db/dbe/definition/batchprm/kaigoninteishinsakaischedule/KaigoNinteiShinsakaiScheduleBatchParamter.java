@@ -7,6 +7,7 @@ package jp.co.ndensan.reams.db.dbe.definition.batchprm.kaigoninteishinsakaisched
 
 import java.util.List;
 import jp.co.ndensan.reams.db.dbe.definition.processprm.kaigoninteishinsakaischedule.KaigoNinteiShinsakaiScheduleProcessParamter;
+import jp.co.ndensan.reams.db.dbe.definition.processprm.kaigoninteishinsakaischedulekagami.KaigoNinteiShinsakaiScheduleKagamiProcessParamter;
 import jp.co.ndensan.reams.uz.uza.batch.BatchParameter;
 import jp.co.ndensan.reams.uz.uza.batch.flow.BatchParameterBase;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -56,6 +57,17 @@ public class KaigoNinteiShinsakaiScheduleBatchParamter extends BatchParameterBas
      */
     public KaigoNinteiShinsakaiScheduleProcessParamter toKaigoNinteiShinsakaiScheduleProcessParamter() {
         return new KaigoNinteiShinsakaiScheduleProcessParamter(shinsakaiKaisaiKikanFrom,
+                shinsakaiKaisaiKikanTo,
+                shinsakaiIinCodeList);
+    }
+
+    /**
+     * processのパラメータを生成します。
+     *
+     * @return KaigoNinteiShinsakaiScheduleKagamiProcessParamter
+     */
+    public KaigoNinteiShinsakaiScheduleKagamiProcessParamter toKaigoNinteiShinsakaiScheduleKagamiProcessParamter() {
+        return new KaigoNinteiShinsakaiScheduleKagamiProcessParamter(shinsakaiKaisaiKikanFrom,
                 shinsakaiKaisaiKikanTo,
                 shinsakaiIinCodeList);
     }

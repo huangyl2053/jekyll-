@@ -34,6 +34,7 @@ import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.exclusion.LockingKey;
 import jp.co.ndensan.reams.uz.uza.exclusion.RealInitialLocker;
+import jp.co.ndensan.reams.uz.uza.lang.ApplicationException;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -102,7 +103,7 @@ public class NinteiChosainJikanMaster {
         if (!gotLock) {
             ErrorMessage message = new ErrorMessage(UrErrorMessages.排他_バッチ実行中で更新不可.getMessage().getCode(),
                     UrErrorMessages.排他_バッチ実行中で更新不可.getMessage().evaluate());
-            return ResponseData.of(div).addMessage(message).respond();
+            throw new ApplicationException(message);
         }
         return ResponseData.of(div).setState(DBE2020006StateName.編集);
     }
@@ -585,6 +586,10 @@ public class NinteiChosainJikanMaster {
             QuestionMessage message = new QuestionMessage(UrQuestionMessages.入力内容の破棄.getMessage().getCode(),
                     UrQuestionMessages.入力内容の破棄.getMessage().evaluate());
             return ResponseData.of(div).addMessage(message).respond();
+        } else {
+            NinteiChosaIkkatsuInputModel model = new NinteiChosaIkkatsuInputModel();
+            model.set設定年月(new FlexibleDate(div.getTxtSettingMonth().getValue().getYearMonth().toDateString()));
+            div.setNinteiChosaIkkatsuInputModel(DataPassingConverter.serialize(model));
         }
         if (new RString(UrQuestionMessages.入力内容の破棄.getMessage().getCode())
                 .equals(ResponseHolder.getMessageCode())
@@ -632,7 +637,7 @@ public class NinteiChosainJikanMaster {
             if (!gotLock) {
                 ErrorMessage message = new ErrorMessage(UrErrorMessages.排他_バッチ実行中で更新不可.getMessage().getCode(),
                         UrErrorMessages.排他_バッチ実行中で更新不可.getMessage().evaluate());
-                return ResponseData.of(div).addMessage(message).respond();
+                throw new ApplicationException(message);
             }
             Models<NinteichosaScheduleIdentifier, NinteichosaSchedule> ninteichosaModels
                     = ViewStateHolder.get(ViewStateKeys.認定調査スケジュール登録6_認定調査スケジュール情報, Models.class);
@@ -826,7 +831,6 @@ public class NinteiChosainJikanMaster {
                     認定調査委託先コード,
                     認定調査員コード,
                     市町村コード);
-            ninteichosaModels.deleteOrRemove(情報PK);
             NinteichosaScheduleIdentifier 登録情報PK = new NinteichosaScheduleIdentifier(
                     予定年月日,
                     変更後認定調査予定開始時間,
@@ -836,10 +840,10 @@ public class NinteiChosainJikanMaster {
                     認定調査委託先コード,
                     認定調査員コード,
                     市町村コード);
-            DbT5221NinteichosaScheduleEntity 変更前データ = new DbT5221NinteichosaScheduleEntity();
-            if (ninteichosaModels.get(情報PK) != null) {
-                変更前データ = ninteichosaModels.get(情報PK).toEntity();
+            if (!EntityDataState.Added.equals(ninteichosaModels.get(情報PK).toEntity().getState())) {
+                ninteichosaModels.deleteOrRemove(情報PK);
             }
+            DbT5221NinteichosaScheduleEntity 変更前データ = ninteichosaModels.get(情報PK).createBuilderForEdit().set予約状況(new Code(予約状況)).build().toEntity();
             DbT5221NinteichosaScheduleEntity 変更後データ
                     = ninteichosaModels.get(登録情報PK).createBuilderForEdit().set予約状況(new Code(予約状況)).build().toEntity();
             変更後データ.setState(EntityDataState.Added);

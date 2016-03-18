@@ -68,7 +68,7 @@
                 MAX("ninteichosaIraiRirekiNo")
             FROM
             rgdb."DbT5201NinteichosaIraiJoho")
-        AND dbT5101."shoriJotaiKubun" IN ('01','04')
+        AND dbT5101."shoriJotaiKubun" IN ('0','3')
         AND dbT5101."logicalDeletedFlag" = false
         AND dbT5105."ninteiShinseiJohoTorokuKanryoYMD" IS NOT NULL
         AND dbT5105."ninteiShinsakaiWariateKanryoYMD" IS NULL
