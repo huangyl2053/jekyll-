@@ -6,6 +6,7 @@
 package jp.co.ndensan.reams.db.dbe.divcontroller.controller.parentdiv.DBE9030001;
 
 import java.util.List;
+import jp.co.ndensan.reams.db.dbe.business.core.ninnteichousairai.ShichosonMeishoBusiness;
 import jp.co.ndensan.reams.db.dbe.business.core.tyousai.koseishichosonmaster.KoseiShichosonMaster;
 import jp.co.ndensan.reams.db.dbe.definition.message.DbeErrorMessages;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE9030001.DBE9030001StateName;
@@ -15,7 +16,12 @@ import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE9030001.Nint
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE9030001.NinteichosaItakusakiMasterDivSpec;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE9030001.dgChosainIchiran_Row;
 import jp.co.ndensan.reams.db.dbe.divcontroller.handler.parentdiv.DBE9030001.NinteichosaItakusakiMasterHandler;
+import jp.co.ndensan.reams.db.dbe.service.core.ninteichosainmaster.NinteiChosainMasterFinder;
+import jp.co.ndensan.reams.db.dbx.definition.core.enumeratedtype.ShisetsuType;
+import jp.co.ndensan.reams.db.dbz.business.core.jigyosha.JigyoshaMode;
+import jp.co.ndensan.reams.db.dbz.definition.core.koseishichosonselector.KoseiShiChosonSelectorModel;
 import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.kyotsu.SaibanHanyokeyName;
+import jp.co.ndensan.reams.db.dbz.divcontroller.viewbox.ViewStateKeys;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrInformationMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrQuestionMessages;
@@ -33,6 +39,7 @@ import jp.co.ndensan.reams.uz.uza.io.Encode;
 import jp.co.ndensan.reams.uz.uza.io.NewLine;
 import jp.co.ndensan.reams.uz.uza.io.Path;
 import jp.co.ndensan.reams.uz.uza.io.csv.CsvWriter;
+import jp.co.ndensan.reams.uz.uza.io.csv.auth.DecimalConverter;
 import jp.co.ndensan.reams.uz.uza.lang.ApplicationException;
 import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -45,6 +52,7 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.IDownLoadServletResponse;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ResponseHolder;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
+import jp.co.ndensan.reams.uz.uza.util.serialization.DataPassingConverter;
 
 /**
  * 認定調査委託先マスタのクラスです
@@ -190,44 +198,16 @@ public class NinteichosaItakusakiMaster {
 //        }
     }
 
-//TODO DBZ.JigyoshaInputGuideが未作成
-//    public ResponseData<NinteichosaItakusakiMasterDiv> onBeforeClick_btnToSearchjigyosha(NinteichosaItakusakiMasterDiv div) {
-//        return ResponseData.of(div).respond();
-//    }
-    /**
-     * 割付地区選択ダイアログを表示する。
-     *
-     * @param div 画面情報
-     * @return ResponseData<ShinsakaiIinWaritsukeDiv>
-     */
-    public ResponseData<NinteichosaItakusakiMasterDiv> onBeforeClick_btnToSearchchiku(NinteichosaItakusakiMasterDiv div) {
-        div.setHdnCodeShubetsu(割付地区名称コード種別);
-        div.setHdnTxtCode(div.getChosaitakusakiJohoInput().getTxtChiku().getValue());
-        div.setHdnSubGyomuCode(SubGyomuCode.DBE認定支援.getColumnValue());
-        div.getChosaitakusakiJohoInput().getTxtChikuMei().clearValue();
-        return ResponseData.of(div).respond();
-    }
-
-    /**
-     * 割付地区選択ダイアログを表示する。
-     *
-     * @param div 画面情報
-     * @return ResponseData<ShinsakaiIinWaritsukeDiv>
-     */
-    public ResponseData<NinteichosaItakusakiMasterDiv> onOkClose_btnToSearchchiku(NinteichosaItakusakiMasterDiv div) {
-        div.getChosaitakusakiJohoInput().getTxtChikuMei().setValue(div.getHdnTxtCodeMeisho());
-        return ResponseData.of(div).respond();
-    }
-
     /**
      * 口座情報画面へ遷移する。
      *
      * @param div 画面情報
      * @return ResponseData<ShinsakaiIinWaritsukeDiv>
      */
-    public ResponseData<NinteichosaItakusakiMasterDiv> onClick_btnKoza(NinteichosaItakusakiMasterDiv div) {
-        //TODO 口座情報画面?
-        return ResponseData.of(div).forwardWithEventName(null).respond();
+    public ResponseData<NinteichosaItakusakiMasterDiv> onBeforeOpenDialog_btnKoza(NinteichosaItakusakiMasterDiv div) {
+        div.setHdnShikibetsuCode(div.getChosaitakusakiJohoInput().getTxtChosaItakusaki().getValue());
+        div.setHdnSubGyomuCode(SubGyomuCode.DBE認定支援.getColumnValue());
+        return ResponseData.of(div).respond();
     }
 
     /**
@@ -395,6 +375,63 @@ public class NinteichosaItakusakiMaster {
      */
     public ResponseData<NinteichosaItakusakiMasterDiv> onClick_btnComplete(NinteichosaItakusakiMasterDiv div) {
         return ResponseData.of(div).forwardWithEventName(DBE9030001TransitionEventName.処理完了).respond();
+    }
+
+    /**
+     *
+     * @param div 画面情報
+     * @return ResponseData<ShinsakaiIinWaritsukeDiv>
+     */
+    public ResponseData<NinteichosaItakusakiMasterDiv> onOkClose_btnToSearchShichoson(NinteichosaItakusakiMasterDiv div) {
+        KoseiShiChosonSelectorModel 構成市町村データ
+                = ViewStateHolder.get(ViewStateKeys.構成市町村選択_引き継ぎデータ, KoseiShiChosonSelectorModel.class);
+        div.getChosaitakusakiJohoInput().getTxtShichoson().setValue(構成市町村データ.get市町村コード());
+        div.getChosaitakusakiJohoInput().getTxtShichosonmei().setValue(構成市町村データ.get市町村名称());
+        return ResponseData.of(div).respond();
+    }
+
+    /**
+     *
+     * @param div 画面情報
+     * @return ResponseData<ShinsakaiIinWaritsukeDiv>
+     */
+    public ResponseData<NinteichosaItakusakiMasterDiv> onBeforeOpenDialog_btnToSearchjigyosha(NinteichosaItakusakiMasterDiv div) {
+        JigyoshaMode mode = new JigyoshaMode();
+        mode.setJigyoshaShubetsu(ShisetsuType.介護保険施設.code());
+        div.setHdnJigyoshaMode(DataPassingConverter.serialize(mode));
+        return ResponseData.of(div).respond();
+    }
+
+    /**
+     *
+     * @param div 画面情報
+     * @return ResponseData<ShinsakaiIinWaritsukeDiv>
+     */
+    public ResponseData<NinteichosaItakusakiMasterDiv> onOkClose_btnToSearchjigyosha(NinteichosaItakusakiMasterDiv div) {
+        JigyoshaMode mode = DataPassingConverter.deserialize(div.getHdnJigyoshaMode(), JigyoshaMode.class);
+        div.getChosaitakusakiJohoInput().getTxtjigyoshano().setValue(new DecimalConverter().toObjectForCsv(mode.getJigyoshaNo().getColumnValue()));
+        return ResponseData.of(div).respond();
+    }
+
+    /**
+     * 市町村名を取得します。
+     *
+     * @param div NinteiChosainMasterDiv
+     * @return ResponseData<NinteiChosainMasterDiv>
+     */
+    public ResponseData<NinteichosaItakusakiMasterDiv> onBlur_txtShichoson(NinteichosaItakusakiMasterDiv div) {
+        RString shichoson = div.getChosaitakusakiJohoInput().getTxtShichoson().getValue();
+        if (RString.isNullOrEmpty(shichoson)) {
+            div.getChosaitakusakiJohoInput().getTxtShichosonmei().setValue(RString.EMPTY);
+        } else {
+            List<ShichosonMeishoBusiness> list = NinteiChosainMasterFinder.createInstance().getShichosonMeisho(new LasdecCode(shichoson)).records();
+            if (!list.isEmpty()) {
+                div.getChosaitakusakiJohoInput().getTxtShichosonmei().setValue(list.get(0).getShichosonMeisho());
+            } else {
+                div.getChosaitakusakiJohoInput().getTxtShichosonmei().setValue(RString.EMPTY);
+            }
+        }
+        return ResponseData.of(div).respond();
     }
 
     private NinteichosaItakusakiMasterHandler getHandler(NinteichosaItakusakiMasterDiv div) {

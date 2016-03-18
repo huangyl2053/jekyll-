@@ -618,7 +618,7 @@ public class KyuhuhiMeisaiJutokuPanelHandler {
      * putViewState
      */
     public void putViewState() {
-        ViewStateHolder.put(ViewStateKeys.処理モード, "");
+        ViewStateHolder.put(ViewStateKeys.処理モード, RString.EMPTY);
         ViewStateHolder.put(ViewStateKeys.申請日, div.getPnlBtnDetail().getTxtShinseibi().getValue());
         SyokanbaraihishikyushinseiketteParameter paramter = new SyokanbaraihishikyushinseiketteParameter(
                 ViewStateHolder.get(ViewStateKeys.被保険者番号, HihokenshaNo.class),

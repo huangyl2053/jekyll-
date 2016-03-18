@@ -6,17 +6,19 @@
 package jp.co.ndensan.reams.db.dbz.divcontroller.controller.commonchilddiv.shujiiIryokikanandshujiiinput;
 
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo;
+import jp.co.ndensan.reams.db.dbz.business.core.servicetype.ninteishinsei.NinteiShinseiCodeModel;
 import jp.co.ndensan.reams.db.dbz.business.core.shujiiiryokikanandshujiiinput.ShujiiIryokikanAndShujiiInputResult;
 import jp.co.ndensan.reams.db.dbz.business.core.shujiiiryokikanandshujiiinput.ShujiiIryokikanandshujiiDataPassModel;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.ShujiiIryokikanAndShujiiGuide.ShujiiIryokikanAndShujiiGuide.ShujiiIryokikanAndShujiiGuideDiv.TaishoMode;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.shujiiIryokikanandshujiiinput.ShujiiIryokikanAndShujiiInput.ShujiiIryokikanAndShujiiInputDiv;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.shujiiIryokikanandshujiiinput.ShujiiIryokikanAndShujiiInput.ShujiiIryokikanAndShujiiInputHandler;
+import jp.co.ndensan.reams.db.dbz.divcontroller.viewbox.ViewStateKeys;
 import jp.co.ndensan.reams.db.dbz.service.core.shujiiiryokikanandshujiiinput.ShujiiIryokikanAndShujiiInputFinder;
-import jp.co.ndensan.reams.uz.uza.biz.AtenaMeisho;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 import jp.co.ndensan.reams.uz.uza.util.serialization.DataPassingConverter;
 
 /**
@@ -54,7 +56,7 @@ public class ShujiiIryokikanAndShujiiInput {
      * @return ResponseData<ShujiiIryokikanAndShujiiInputDiv>
      */
     public ResponseData<ShujiiIryokikanAndShujiiInputDiv> onBlur_txtShujiiCode(ShujiiIryokikanAndShujiiInputDiv div) {
-        AtenaMeisho 主治医氏名 = servie.getShujiiName(new LasdecCode(div.getHdnShichosonCode()),
+        RString 主治医氏名 = servie.getShujiiName(new LasdecCode(div.getHdnShichosonCode()),
                 div.getTxtIryoKikanCode().getValue(),
                 div.getTxtShujiiCode().getValue());
         createHandler(div).setShujiiName(主治医氏名);
@@ -142,6 +144,35 @@ public class ShujiiIryokikanAndShujiiInput {
         ShujiiIryokikanandshujiiDataPassModel modle = DataPassingConverter.deserialize(div.getHdnDataPass(), ShujiiIryokikanandshujiiDataPassModel.class);
         div.getTxtIryoKikanCode().setValue(modle.get主治医医療機関コード());
         div.getTxtIryoKikanName().setValue(modle.get主治医医療機関名称());
+        return ResponseData.of(div).respond();
+    }
+
+    /**
+     * 主治医への連絡事項のデータを設定します。
+     *
+     * @param div 治医医療機関&主治医入力Div
+     * @return ResponseData<ShujiiIryokikanAndShujiiInputDiv>
+     */
+    public ResponseData<ShujiiIryokikanAndShujiiInputDiv> onBefore_btnShujiiRenrakuJiko(ShujiiIryokikanAndShujiiInputDiv div) {
+        NinteiShinseiCodeModel shinseiCodeModel = new NinteiShinseiCodeModel();
+        if (!RString.isNullOrEmpty(div.getHdnShujiiRenrakuJiko())) {
+            shinseiCodeModel.set連絡事項(div.getHdnShujiiRenrakuJiko());
+        }
+        shinseiCodeModel.set表示モード(new RString("InputMode"));
+        ViewStateHolder.put(ViewStateKeys.モード, shinseiCodeModel);
+
+        return ResponseData.of(div).respond();
+    }
+
+    /**
+     * 主治医への連絡事項のデータを設定します。
+     *
+     * @param div 治医医療機関&主治医入力Div
+     * @return ResponseData<ShujiiIryokikanAndShujiiInputDiv>
+     */
+    public ResponseData<ShujiiIryokikanAndShujiiInputDiv> onOKClose_btnShujiiRenrakuJiko(ShujiiIryokikanAndShujiiInputDiv div) {
+        NinteiShinseiCodeModel shinseiCodeModel = ViewStateHolder.get(ViewStateKeys.モード, NinteiShinseiCodeModel.class);
+        div.setHdnShujiiRenrakuJiko(shinseiCodeModel.get連絡事項());
         return ResponseData.of(div).respond();
     }
 

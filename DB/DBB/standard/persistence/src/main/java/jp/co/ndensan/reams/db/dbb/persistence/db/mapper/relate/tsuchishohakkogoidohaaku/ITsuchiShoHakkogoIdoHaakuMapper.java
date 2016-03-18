@@ -6,10 +6,10 @@
 package jp.co.ndensan.reams.db.dbb.persistence.db.mapper.relate.tsuchishohakkogoidohaaku;
 
 import java.util.List;
-import jp.co.ndensan.reams.db.dbb.definition.tsuchishohakkogoidosha.IdoshaParamter;
-import jp.co.ndensan.reams.db.dbb.definition.tsuchishohakkogoidosha.QualificationsParamter;
-import jp.co.ndensan.reams.db.dbb.entity.euc.tsuchishohakkogoidosha.Dbv2001EntityResult;
-import jp.co.ndensan.reams.db.dbb.entity.euc.tsuchishohakkogoidosha.DbT2017Uaft200EntityResult;
+import jp.co.ndensan.reams.db.dbb.definition.mybatisprm.tsuchishohakkogoidosha.IdoshaParamter;
+import jp.co.ndensan.reams.db.dbb.definition.mybatisprm.tsuchishohakkogoidosha.QualificationsParamter;
+import jp.co.ndensan.reams.db.dbb.entity.db.relate.tsuchishohakkogoidosha.Dbv2001EntityResult;
+import jp.co.ndensan.reams.db.dbb.entity.db.relate.tsuchishohakkogoidosha.DbT2017Uaft200EntityResult;
 
 /**
  * 通知書発行後異動把握のMapperクラスです。

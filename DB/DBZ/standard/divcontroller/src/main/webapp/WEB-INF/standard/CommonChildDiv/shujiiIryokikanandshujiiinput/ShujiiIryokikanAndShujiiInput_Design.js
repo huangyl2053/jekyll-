@@ -16,6 +16,14 @@ var DBZ;
                 return "onClick_btnIryokikanGuide";
             };
 
+            Events.onOKClose_btnShujiiRenrakuJiko = function () {
+                return "onOKClose_btnShujiiRenrakuJiko";
+            };
+
+            Events.onBefore_btnShujiiRenrakuJiko = function () {
+                return "onBefore_btnShujiiRenrakuJiko";
+            };
+
             Events.onClick_btnZankaiFukusha = function () {
                 return "onClick_btnZankaiFukusha";
             };

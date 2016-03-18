@@ -5,6 +5,8 @@ package jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE9030001;
  * 不正な動作の原因になります。
  */
 import com.fasterxml.jackson.annotation.JsonProperty;
+import jp.co.ndensan.reams.ur.urz.divcontroller.entity.commonchilddiv.CodeInput.CodeInputDiv;
+import jp.co.ndensan.reams.ur.urz.divcontroller.entity.commonchilddiv.CodeInput.ICodeInputDiv;
 import jp.co.ndensan.reams.uz.uza.ui.binding.*;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 import jp.co.ndensan.reams.uz.uza.ui.binding.domain.*;
@@ -56,12 +58,6 @@ public class ChosaitakusakiJohoInputDiv extends Panel {
     private DropDownList ddltokuteichosain;
     @JsonProperty("txtTeiin")
     private TextBoxNum txtTeiin;
-    @JsonProperty("txtChiku")
-    private TextBoxCode txtChiku;
-    @JsonProperty("btnToSearchchiku")
-    private ButtonDialog btnToSearchchiku;
-    @JsonProperty("txtChikuMei")
-    private TextBox txtChikuMei;
     @JsonProperty("radautowatitsuke")
     private RadioButton radautowatitsuke;
     @JsonProperty("ddlKikankubun")
@@ -76,6 +72,8 @@ public class ChosaitakusakiJohoInputDiv extends Panel {
     private Button btnTorikeshi;
     @JsonProperty("btnchosaininsert")
     private Button btnchosaininsert;
+    @JsonProperty("ccdChiku")
+    private CodeInputDiv ccdChiku;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -390,60 +388,6 @@ public class ChosaitakusakiJohoInputDiv extends Panel {
     }
 
     /*
-     * gettxtChiku
-     * @return txtChiku
-     */
-    @JsonProperty("txtChiku")
-    public TextBoxCode getTxtChiku() {
-        return txtChiku;
-    }
-
-    /*
-     * settxtChiku
-     * @param txtChiku txtChiku
-     */
-    @JsonProperty("txtChiku")
-    public void setTxtChiku(TextBoxCode txtChiku) {
-        this.txtChiku = txtChiku;
-    }
-
-    /*
-     * getbtnToSearchchiku
-     * @return btnToSearchchiku
-     */
-    @JsonProperty("btnToSearchchiku")
-    public ButtonDialog getBtnToSearchchiku() {
-        return btnToSearchchiku;
-    }
-
-    /*
-     * setbtnToSearchchiku
-     * @param btnToSearchchiku btnToSearchchiku
-     */
-    @JsonProperty("btnToSearchchiku")
-    public void setBtnToSearchchiku(ButtonDialog btnToSearchchiku) {
-        this.btnToSearchchiku = btnToSearchchiku;
-    }
-
-    /*
-     * gettxtChikuMei
-     * @return txtChikuMei
-     */
-    @JsonProperty("txtChikuMei")
-    public TextBox getTxtChikuMei() {
-        return txtChikuMei;
-    }
-
-    /*
-     * settxtChikuMei
-     * @param txtChikuMei txtChikuMei
-     */
-    @JsonProperty("txtChikuMei")
-    public void setTxtChikuMei(TextBox txtChikuMei) {
-        this.txtChikuMei = txtChikuMei;
-    }
-
-    /*
      * getradautowatitsuke
      * @return radautowatitsuke
      */
@@ -567,6 +511,15 @@ public class ChosaitakusakiJohoInputDiv extends Panel {
     @JsonProperty("btnchosaininsert")
     public void setBtnchosaininsert(Button btnchosaininsert) {
         this.btnchosaininsert = btnchosaininsert;
+    }
+
+    /*
+     * getccdChiku
+     * @return ccdChiku
+     */
+    @JsonProperty("ccdChiku")
+    public ICodeInputDiv getCcdChiku() {
+        return ccdChiku;
     }
 
     // </editor-fold>

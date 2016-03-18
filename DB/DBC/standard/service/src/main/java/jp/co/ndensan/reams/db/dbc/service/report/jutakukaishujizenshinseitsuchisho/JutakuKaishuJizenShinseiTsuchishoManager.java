@@ -112,17 +112,17 @@ public class JutakuKaishuJizenShinseiTsuchishoManager {
             koumokuNo = teikeibun.get更新用_パターン番号();
         }
         if (koumokuNo == 1) {
-            TsuchishoTeikeibunInfo tsuchishoTeikeibunInfo1 = manager.get通知書定形文検索(SubGyomuCode.DBC介護給付,
+            TsuchishoTeikeibunInfo tsuchishoTeikeibunInfo = manager.get通知書定形文検索(SubGyomuCode.DBC介護給付,
                     ReportIdDBC.DBC100001.getReportId(), KamokuCode.EMPTY, koumokuNo, 1,
                     new FlexibleDate(RDate.getNowDate().toDateString()));
-            if (tsuchishoTeikeibunInfo1 != null) {
-                通知文 = tsuchishoTeikeibunInfo1.getUrT0126TsuchishoTeikeibunEntity().getSentence();
+            if (tsuchishoTeikeibunInfo != null) {
+                通知文 = tsuchishoTeikeibunInfo.getUrT0126TsuchishoTeikeibunEntity().getSentence();
             }
-            TsuchishoTeikeibunInfo tsuchishoTeikeibunInfo2 = manager.get通知書定形文検索(SubGyomuCode.DBC介護給付,
+            tsuchishoTeikeibunInfo = manager.get通知書定形文検索(SubGyomuCode.DBC介護給付,
                     ReportIdDBC.DBC100001.getReportId(), KamokuCode.EMPTY, koumokuNo, 2,
                     new FlexibleDate(RDate.getNowDate().toDateString()));
-            if (tsuchishoTeikeibunInfo2 != null) {
-                注意文 = tsuchishoTeikeibunInfo2.getUrT0126TsuchishoTeikeibunEntity().getSentence();
+            if (tsuchishoTeikeibunInfo != null) {
+                注意文 = tsuchishoTeikeibunInfo.getUrT0126TsuchishoTeikeibunEntity().getSentence();
             }
         }
         GyomuKoyuKeyRiyoKubun 業務固有キー利用区分 = GyomuKoyuKeyRiyoKubun.利用しない;
@@ -154,12 +154,12 @@ public class JutakuKaishuJizenShinseiTsuchishoManager {
                 (parameter.get被保険者番号() == null || parameter.get被保険者番号().isEmpty())
                 ? RString.EMPTY : new RString(parameter.get被保険者番号().value().toString()),
                 (parameter.get受付日() == null || parameter.get受付日().isEmpty())
-                ? RString.EMPTY : new RString(parameter.get受付日().wareki().eraType(EraType.KANJI).firstYear(FirstYear.ICHI_NEN).
-                        separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString().toString()),
+                ? RString.EMPTY : new RString(parameter.get受付日().wareki().eraType(EraType.KANJI).firstYear(FirstYear.ICHI_NEN)
+                        .separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString().toString()),
                 nullTOEmpty(parameter.get判定区分()),
                 (parameter.get承認年月日() == null || parameter.get承認年月日().isEmpty())
-                ? RString.EMPTY : new RString(parameter.get承認年月日().wareki().eraType(EraType.KANJI).firstYear(FirstYear.ICHI_NEN).
-                        separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString().toString()),
+                ? RString.EMPTY : new RString(parameter.get承認年月日().wareki().eraType(EraType.KANJI).firstYear(FirstYear.ICHI_NEN)
+                        .separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString().toString()),
                 new RString("不承認").equals(parameter.get不承認理由()) ? parameter.get不承認理由() : RString.EMPTY,
                 nullTOEmpty(parameter.get給付の種類()),
                 nullTOEmpty(parameter.get事業者名()),
