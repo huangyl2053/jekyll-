@@ -441,7 +441,8 @@ public class TokuteiNyushoshaHiyoPanelHandler {
                 cancel特定入所者費登録エリア();
             } else {
                 dgdRow.setRowState(RowState.Deleted);
-                setDgdTokuteiYichiran_Row(dgdRow);
+                cancel特定入所者費登録エリア();
+                set特定入所者費用一覧の合計エリア();
             }
         } else if (登録.equals(state)) {
             dgdRow.setRowState(RowState.Added);
@@ -502,35 +503,23 @@ public class TokuteiNyushoshaHiyoPanelHandler {
         if (div.getPanelTokutei().getPanelMeisai().getTxtHyojyuntanka().getValue() != null) {
             dgdRow.getDefaultDataName2().setValue(div.getPanelTokutei().getPanelMeisai()
                     .getTxtHyojyuntanka().getValue());
-        } else {
-            dgdRow.getDefaultDataName2().setValue(Decimal.ZERO);
         }
         if (div.getPanelTokutei().getPanelMeisai().getTxtFutangenndogaku().getValue() != null) {
             dgdRow.getDefaultDataName3().setValue(div.getPanelTokutei().getPanelMeisai()
                     .getTxtFutangenndogaku().getValue());
-        } else {
-            dgdRow.getDefaultDataName3().setValue(Decimal.ZERO);
         }
         if (div.getPanelTokutei().getPanelMeisai().getTxtNisu().getValue() != null) {
             dgdRow.getDefaultDataName4().setValue(div.getPanelTokutei().getPanelMeisai().getTxtNisu().getValue());
-        } else {
-            dgdRow.getDefaultDataName4().setValue(Decimal.ZERO);
         }
         if (div.getPanelTokutei().getPanelMeisai().getTxtHiyogaku().getValue() != null) {
             dgdRow.getDefaultDataName5().setValue(div.getPanelTokutei().getPanelMeisai().getTxtHiyogaku().getValue());
-        } else {
-            dgdRow.getDefaultDataName5().setValue(Decimal.ZERO);
         }
         if (div.getPanelTokutei().getPanelMeisai().getTxtHokenbun().getValue() != null) {
             dgdRow.getDefaultDataName6().setValue(div.getPanelTokutei().getPanelMeisai().getTxtHokenbun().getValue());
-        } else {
-            dgdRow.getDefaultDataName6().setValue(Decimal.ZERO);
         }
         if (div.getPanelTokutei().getPanelMeisai().getTxtRiyoshafutangaku().getValue() != null) {
             dgdRow.getDefaultDataName7().setValue(div.getPanelTokutei().getPanelMeisai()
                     .getTxtRiyoshafutangaku().getValue());
-        } else {
-            dgdRow.getDefaultDataName7().setValue(Decimal.ZERO);
         }
         if (登録.equals(ViewStateHolder.get(ViewStateKeys.状態, RString.class))) {
             List<dgdTokuteiYichiran_Row> list = div.getPanelTokutei().getDgdTokuteiYichiran().getDataSource();
