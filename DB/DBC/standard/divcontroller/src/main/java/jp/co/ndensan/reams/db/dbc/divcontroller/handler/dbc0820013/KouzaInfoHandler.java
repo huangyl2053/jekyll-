@@ -6,7 +6,9 @@
 package jp.co.ndensan.reams.db.dbc.divcontroller.handler.dbc0820013;
 
 import java.util.List;
+import jp.co.ndensan.reams.db.dbc.business.core.basic.ShokanHanteiKekka;
 import jp.co.ndensan.reams.db.dbc.business.core.basic.ShokanShinsei;
+import jp.co.ndensan.reams.db.dbc.definition.enumeratedtype.config.ConfigNameDBC;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0820013.KouzaInfoPanelDiv;
 import jp.co.ndensan.reams.db.dbc.divcontroller.viewbox.ViewStateKeys;
 import jp.co.ndensan.reams.db.dbc.divcontroller.viewbox.dbc0810014.ServiceTeiKyoShomeishoParameter;
@@ -16,12 +18,14 @@ import jp.co.ndensan.reams.db.dbc.service.core.syokanbaraihishikyushinseikette.S
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
+import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.ApplicationException;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
+import jp.co.ndensan.reams.uz.uza.util.config.BusinessConfig;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 
 /**
@@ -30,6 +34,8 @@ import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 public class KouzaInfoHandler {
 
     private final KouzaInfoPanelDiv div;
+    private static final RString 受託なし = new RString("1");
+    private static final RString 受託あり = new RString("2");
     private static final long 口座ID = 11111;
 
     /**
@@ -70,20 +76,25 @@ public class KouzaInfoHandler {
     }
 
     /**
-     * 償還払支給申請詳細データ取得
+     * 登録モードの初期化。
      *
      * @param 被保険者番号 HihokenshaNo
      * @param サービス年月 FlexibleYearMonth
      * @param 整理番号 RString
-     * @return 償還払支給申請 ShokanShinsei
+     * @param 国保連送付フラグ Boolean
      */
-    public ShokanShinsei get償還払支給申請(HihokenshaNo 被保険者番号, FlexibleYearMonth サービス年月, RString 整理番号) {
-        List<ShokanShinsei> 支給申請一覧情報リスト = InstanceProvider.create(ShokanbaraiJyokyoShokai.class)
-                .getShokanbaraiShinseiJyohoDetail(被保険者番号, サービス年月, 整理番号);
-        if (支給申請一覧情報リスト.isEmpty()) {
-            return null;
+    public void load登録(HihokenshaNo 被保険者番号,
+            FlexibleYearMonth サービス年月,
+            RString 整理番号,
+            Boolean 国保連送付フラグ) {
+        RString config = BusinessConfig.get(ConfigNameDBC.国保連共同処理受託区分_償還, SubGyomuCode.DBC介護給付);
+        if (受託なし.equals(config)) {
+            div.getPanelTwo().getBtnShokanbaraiKeiteInfo().setDisabled(false);
+        } else if (受託あり.equals(config) && 国保連送付フラグ) {
+            ShokanHanteiKekka shokanHanteiKekka = SyokanbaraihiShikyuShinseiKetteManager
+                    .createInstance().getSyokanbaraiketteKekka(被保険者番号, サービス年月, 整理番号);
+            償還払決定情報visible(shokanHanteiKekka);
         }
-        return 支給申請一覧情報リスト.get(0);
     }
 
     /**
@@ -92,7 +103,7 @@ public class KouzaInfoHandler {
     public void onClick_btnShinseiInfo() {
         RString 処理モード = ViewStateHolder.get(ViewStateKeys.処理モード, RString.class);
         setViewState(処理モード);
-        // TODO 償還払支給申請_支給申請画面へ遷移する。 画面モード：当画面モード =登録モードの場合、修正　画面へ遷移。
+        // TODO QA252　画面モード：当画面モード =登録モードの場合、修正　画面へ遷移。
 //        RString 状態 = ViewStateHolder.get(ViewStateKeys.状態, RString.class);
 //        if (登録.equals(状態)) {
 //            setViewState(処理モード, 修正);
@@ -105,14 +116,14 @@ public class KouzaInfoHandler {
      * 「申請情報」ボタン Handler処理
      */
     public void onClick_btnKouzaInfo() {
-        // TODO QA
+        // TODO QA252
     }
 
     /**
      * 「サービス提供証明書」ボタン Handler処理
      */
     public void onClick_btnServiceTeikyoShomeisyo() {
-        // TODO 画面モードの用处　画面へ遷移。
+        // TODO　QA252 画面モードの用处　
 //        RString 画面モード = ViewStateHolder.get(ViewStateKeys.状態, RString.class);
         RString 処理モード = ViewStateHolder.get(ViewStateKeys.処理モード, RString.class);
         setViewState(処理モード);
@@ -122,7 +133,7 @@ public class KouzaInfoHandler {
      * 「償還払決定情報」ボタン Handler処理
      */
     public void onClick_btnShokanbaraiKeiteInfo() {
-        // TODO 画面モードの用处 画面へ遷移。
+        // TODO　QA252 画面モードの用处
 //        RString 画面モード = ViewStateHolder.get(ViewStateKeys.状態, RString.class);
         RString 処理モード = ViewStateHolder.get(ViewStateKeys.処理モード, RString.class);
         setViewState(処理モード);
@@ -158,7 +169,7 @@ public class KouzaInfoHandler {
      * 「申請を保存する」ボタン 登録、修正の場合
      */
     public void 保存_修正() {
-        List<ShokanShinsei> entityListView = (List<ShokanShinsei>) ViewStateHolder.get(ViewStateKeys.償還払い費支給申請決定_口座情報, List.class);
+        ShokanShinsei entityView = ViewStateHolder.get(ViewStateKeys.償還払い費支給申請決定_口座情報, ShokanShinsei.class);
         ServiceTeiKyoShomeishoParameter parameter = ViewStateHolder.get(
                 ViewStateKeys.基本情報パラメータ, ServiceTeiKyoShomeishoParameter.class);
         RString 支払場所 = new RString("償還払費");
@@ -171,9 +182,8 @@ public class KouzaInfoHandler {
         RString 支払窓口開始時間 = new RString("02");
         RString 支払窓口終了時間 = new RString("01");
         long 口座Id = 口座ID;
-        ShokanShinsei entity = entityListView.get(0);
 //        ShokanShinsei entity = new ShokanShinsei(被保険者番号, サービス年月, new RString("0011"));
-        entity = entity.createBuilderForEdit()
+        entityView = entityView.createBuilderForEdit()
                 .set支払場所(支払場所)
                 .set被保険者番号(被保険者番号)
                 .setサービス提供年月(サービス年月)
@@ -185,7 +195,7 @@ public class KouzaInfoHandler {
                 .set支払窓口終了時間(支払窓口終了時間)
                 .set口座ID(口座Id)
                 .set受領委任契約番号(整理番号).build();
-        SyokanbaraihiShikyuShinseiKetteManager.createInstance().updDbT3034ShokanShinsei(entity);
+        SyokanbaraihiShikyuShinseiKetteManager.createInstance().updDbT3034ShokanShinsei(entityView);
     }
 
     /**
@@ -201,6 +211,35 @@ public class KouzaInfoHandler {
         SyokanbaraihiShikyuShinseiKetteManager.createInstance().delDbT3034ShokanShinsei(被保険者番号, サービス年月, 整理番号, 識別コード);
     }
 
+    /**
+     * 償還払支給申請詳細データ取得
+     *
+     * @param 被保険者番号 HihokenshaNo
+     * @param サービス年月 FlexibleYearMonth
+     * @param 整理番号 RString
+     * @return 償還払支給申請
+     */
+    public ShokanShinsei get償還払支給申請(
+            HihokenshaNo 被保険者番号,
+            FlexibleYearMonth サービス年月,
+            RString 整理番号) {
+        List<ShokanShinsei> 支給申請一覧情報リスト = InstanceProvider.create(ShokanbaraiJyokyoShokai.class)
+                .getShokanbaraiShinseiJyohoDetail(被保険者番号, サービス年月, 整理番号);
+        if (支給申請一覧情報リスト.isEmpty()) {
+            return new ShokanShinsei(被保険者番号, サービス年月, 整理番号);
+        }
+        ViewStateHolder.put(ViewStateKeys.償還払支給申請詳細データ, 支給申請一覧情報リスト.get(0));
+        return 支給申請一覧情報リスト.get(0);
+    }
+
+    private void 償還払決定情報visible(ShokanHanteiKekka shokanHanteiKekka) {
+        if (shokanHanteiKekka != null) {
+            div.getPanelTwo().getBtnShokanbaraiKeiteInfo().setDisabled(false);
+        } else {
+            div.getPanelTwo().getBtnShokanbaraiKeiteInfo().setDisabled(true);
+        }
+    }
+
     private void setViewState(RString 処理モード) {
         HihokenshaNo 被保険者番号 = ViewStateHolder.get(ViewStateKeys.被保険者番号, HihokenshaNo.class);
         FlexibleYearMonth サービス年月 = null;
@@ -208,9 +247,9 @@ public class KouzaInfoHandler {
             サービス年月 = new FlexibleYearMonth(div.getPanelTwo().getTxtServiceTeikyoYM().getValue().toString());
         }
         RString 整理番号 = div.getPanelTwo().getTxtSeiriBango().getValue();
-        SyokanbaraihishikyushinseiketteParameter paramter = new SyokanbaraihishikyushinseiketteParameter(
+        SyokanbaraihishikyushinseiketteParameter parameter = new SyokanbaraihishikyushinseiketteParameter(
                 被保険者番号, サービス年月, 整理番号, null, null, null, null);
-        ViewStateHolder.put(ViewStateKeys.償還払費申請検索キー, paramter);
+        ViewStateHolder.put(ViewStateKeys.償還払費申請検索キー, parameter);
         ViewStateHolder.put(ViewStateKeys.処理モード, 処理モード);
     }
 }
