@@ -8,7 +8,7 @@ package jp.co.ndensan.reams.db.dbc.divcontroller.controller.parentdiv.dbc0310012
 import java.util.ArrayList;
 import jp.co.ndensan.reams.db.dbc.business.core.basic.JuryoininKeiyakuJigyosha;
 import jp.co.ndensan.reams.db.dbc.business.core.basic.ShokanJuryoininKeiyakusha;
-import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0300011.DBC0300011TransitionEventName;
+import jp.co.ndensan.reams.db.dbc.definition.core.shoninkubun.ShoninKubun;
 import static jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0300012.DBC0300012StateName.saved;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0310012.DBC0310012TransitionEventName;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0310012.PnlTotalPanelDiv;
@@ -41,8 +41,6 @@ public class PnlTotalPanel {
     private static final RString 削除 = new RString("削除");
     private static final RString 修正 = new RString("修正");
     private static final RString 登録 = new RString("登録");
-    private static final RString KEY_0 = new RString("key0");
-    private static final RString KEY_1 = new RString("key1");
     private static final Decimal 九割 = new Decimal(0.1);
 
     /**
@@ -144,7 +142,8 @@ public class PnlTotalPanel {
         if (参照.equals(状態)) {
             return ResponseData.of(div).respond();
         } else {
-            return ResponseData.of(div).forwardWithEventName(DBC0300011TransitionEventName.事業者選択).respond();
+            // TODO QA No.473
+            return ResponseData.of(div).respond();
         }
     }
 
@@ -155,7 +154,7 @@ public class PnlTotalPanel {
      * @return ResponseData<PnlTotalPanelDiv>
      */
     public ResponseData<PnlTotalPanelDiv> onChange_ddlKeiyakuServiceType(PnlTotalPanelDiv div) {
-        // TODO QA No.417
+        // TODO QA No.417(Redmine#:79199)
         div.getPnlCommon().getPnlDetail().getPnlHidari().getTxtBango1().setValue(new Decimal(1));
         return ResponseData.of(div).respond();
     }
@@ -168,7 +167,7 @@ public class PnlTotalPanel {
      */
     public ResponseData<PnlTotalPanelDiv> onBlur_txtKeyakukettebi(PnlTotalPanelDiv div) {
         if (div.getPnlCommon().getPnlDetail().getTxtKeyakukettebi().getValue() != null) {
-            div.getPnlCommon().getPnlDetail().getRdoKettekubun().setSelectedKey(KEY_0);
+            div.getPnlCommon().getPnlDetail().getRdoKettekubun().setSelectedKey(ShoninKubun.承認する.getコード());
             div.getPnlCommon().getPnlDetail().getRdoKettekubun().setDisabled(false);
             div.getPnlCommon().getPnlDetail().getTxtFusyoninriyu().setDisabled(false);
             div.getPnlCommon().getPnlDetail().getPnlHidari().getDdlYear().setDisabled(false);
@@ -212,7 +211,8 @@ public class PnlTotalPanel {
      * @return ResponseData<PnlTotalPanelDiv>
      */
     public ResponseData<PnlTotalPanelDiv> onClick_rdoKettekubun(PnlTotalPanelDiv div) {
-        if (KEY_0.equals(div.getPnlCommon().getPnlDetail().getRdoKettekubun().getSelectedKey())) {
+        if (ShoninKubun.承認する.getコード().equals(div.getPnlCommon().getPnlDetail()
+                .getRdoKettekubun().getSelectedKey())) {
             div.getPnlCommon().getPnlDetail().getPnlHidari().getDdlYear().setDisabled(false);
             div.getPnlCommon().getPnlDetail().getPnlHidari().getTxtBango2().setDisabled(false);
             div.getPnlCommon().getPnlDetail().getPnlHidari().getTxtSyoninkikan().setDisabled(false);
@@ -221,7 +221,8 @@ public class PnlTotalPanel {
             div.getPnlCommon().getPnlDetail().getPnlKyufuhi().getTxtRiyosyajikofutangaku().setDisabled(false);
             div.getPnlCommon().getPnlDetail().getPnlKyufuhi().getTxtHokentaisyohiyogaku().setDisabled(false);
             div.getPnlCommon().getPnlDetail().getPnlKyufuhi().getTxtHokenkyufuhiyogaku().setDisabled(false);
-        } else if (KEY_1.equals(div.getPnlCommon().getPnlDetail().getRdoKettekubun().getSelectedKey())) {
+        } else if (ShoninKubun.承認しない.getコード().equals(div.getPnlCommon().getPnlDetail()
+                .getRdoKettekubun().getSelectedKey())) {
             div.getPnlCommon().getPnlDetail().getPnlHidari().getDdlYear().setDisabled(true);
             div.getPnlCommon().getPnlDetail().getPnlHidari().getTxtBango2().setDisabled(true);
             div.getPnlCommon().getPnlDetail().getPnlHidari().getTxtSyoninkikan().setDisabled(true);
@@ -270,7 +271,6 @@ public class PnlTotalPanel {
      * @return ResponseData<PnlTotalPanelDiv>
      */
     public ResponseData<PnlTotalPanelDiv> onClick_btnCancel(PnlTotalPanelDiv div) {
-        RString 状態 = ViewStateHolder.get(ViewStateKeys.処理モード, RString.class);
         if (!ResponseHolder.isReRequest()) {
             QuestionMessage message = new QuestionMessage(UrQuestionMessages.入力内容の破棄.getMessage().getCode(),
                     UrQuestionMessages.入力内容の破棄.getMessage().evaluate());
@@ -279,26 +279,6 @@ public class PnlTotalPanel {
         if (new RString(UrQuestionMessages.入力内容の破棄.getMessage().getCode())
                 .equals(ResponseHolder.getMessageCode())
                 && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
-
-            if (修正.equals(状態)) {
-                div.getPnlCommon().getPnlDetail().getTxtKeyakushinseuketukebi().clearValue();
-                div.getPnlCommon().getPnlDetail().getTxtKeyakushinseibi().clearValue();
-                div.getPnlCommon().getPnlDetail().getTxtKeyakujigyosyaNo().clearValue();
-                div.getPnlCommon().getPnlDetail().getDdlKeiyakuServiceType().setSelectedKey(RString.EMPTY);
-                div.getPnlCommon().getPnlDetail().getTxtKeyakukettebi().clearValue();
-                // TODO QA No.430 RadioButtonの値がクリアできない
-                div.getPnlCommon().getPnlDetail().getTxtFusyoninriyu().clearValue();
-                div.getPnlCommon().getPnlDetail().getPnlHidari().getDdlYear().setSelectedKey(RString.EMPTY);
-                div.getPnlCommon().getPnlDetail().getPnlHidari().getTxtBango2().clearValue();
-                div.getPnlCommon().getPnlDetail().getPnlHidari().getTxtSyoninkikan().clearFromValue();
-                div.getPnlCommon().getPnlDetail().getPnlHidari().getTxtSyoninkikan().clearToValue();
-                div.getPnlCommon().getPnlDetail().getPnlHidari().getChkSaihakoukubun()
-                        .setSelectedItemsByKey(new ArrayList<RString>());
-                div.getPnlCommon().getPnlDetail().getPnlKyufuhi().getTxtHiyogakugokei().clearValue();
-                div.getPnlCommon().getPnlDetail().getPnlKyufuhi().getTxtRiyosyajikofutangaku().clearValue();
-                div.getPnlCommon().getPnlDetail().getPnlKyufuhi().getTxtHokentaisyohiyogaku().clearValue();
-                div.getPnlCommon().getPnlDetail().getPnlKyufuhi().getTxtHokenkyufuhiyogaku().clearValue();
-            }
             return ResponseData.of(div).forwardWithEventName(DBC0310012TransitionEventName.検索に戻る).respond();
         }
         return ResponseData.of(div).respond();
@@ -356,7 +336,7 @@ public class PnlTotalPanel {
      * @return ResponseData<PnlTotalPanelDiv>
      */
     public ResponseData<PnlTotalPanelDiv> onClick_btnPublish(PnlTotalPanelDiv div) {
-        // TODO　QA No.
+        // TODO　QA No.474
         return ResponseData.of(div).respond();
     }
 }

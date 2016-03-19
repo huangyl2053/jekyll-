@@ -512,38 +512,24 @@ public class TokuteiShinryohiPanelHandler {
         ddgRow.setShobyouName(div.getTxtShobyoMei().getValue());
         if (div.getTxtShidouKanri().getValue() != null) {
             ddgRow.getShidouKanri().setValue(div.getTxtShidouKanri().getValue());
-        } else {
-            ddgRow.getShidouKanri().setValue(Decimal.ZERO);
         }
         if (div.getTxtRibabiriteishon().getValue() != null) {
             ddgRow.getRihabiri().setValue(div.getTxtRibabiriteishon().getValue());
-        } else {
-            ddgRow.getRihabiri().setValue(Decimal.ZERO);
         }
         if (div.getTxtSeishinkaSenmon().getValue() != null) {
             ddgRow.getSeishinka().setValue(div.getTxtSeishinkaSenmon().getValue());
-        } else {
-            ddgRow.getSeishinka().setValue(Decimal.ZERO);
         }
         if (div.getTxtTanjyunXline().getValue() != null) {
             ddgRow.getEkusuLine().setValue(div.getTxtTanjyunXline().getValue());
-        } else {
-            ddgRow.getEkusuLine().setValue(Decimal.ZERO);
         }
         if (div.getTxtSochi().getValue() != null) {
             ddgRow.getSochi().setValue(div.getTxtSochi().getValue());
-        } else {
-            ddgRow.getSochi().setValue(Decimal.ZERO);
         }
         if (div.getTxtTejyutsu().getValue() != null) {
             ddgRow.getTejyutsu().setValue(div.getTxtTejyutsu().getValue());
-        } else {
-            ddgRow.getTejyutsu().setValue(Decimal.ZERO);
         }
         if (div.getTxtGoukei().getValue() != null) {
             ddgRow.getGoukeyiTanyi().setValue(div.getTxtGoukei().getValue());
-        } else {
-            ddgRow.getGoukeyiTanyi().setValue(Decimal.ZERO);
         }
         ddgRow.setMutiTekiyo(div.getTxtMutiTekiyo().getValue());
         if (登録.equals(ViewStateHolder.get(ViewStateKeys.状態, RString.class))) {
@@ -741,18 +727,12 @@ public class TokuteiShinryohiPanelHandler {
         row.setDefaultDataName2(div.getTxtShikibetsuCode().getValue());
         if (!div.getTxtTanyi().getValue().isEmpty()) {
             row.getDefaultDataName3().setValue(new Decimal(div.getTxtTanyi().getValue().toString()));
-        } else {
-            row.getDefaultDataName3().setValue(Decimal.ZERO);
         }
         if (div.getTxtKaiyisuNisu().getValue() != null) {
             row.getDefaultDataName4().setValue(div.getTxtKaiyisuNisu().getValue());
-        } else {
-            row.getDefaultDataName4().setValue(Decimal.ZERO);
         }
         if (div.getTxtGoukeiTanyi().getValue() != null) {
             row.getDefaultDataName5().setValue(div.getTxtGoukeiTanyi().getValue());
-        } else {
-            row.getDefaultDataName5().setValue(Decimal.ZERO);
         }
         row.setDefaultDataName6(div.getTxtTekiyoDown().getValue());
         if (登録.equals(ViewStateHolder.get(ViewStateKeys.状態, RString.class))) {

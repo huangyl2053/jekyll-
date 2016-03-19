@@ -110,7 +110,7 @@ public class PnlTotalSearchHandler {
         } else {
             div.getPnlSearch().getDdlKeiyakuServiceShurui().setSelectedKey(RString.EMPTY);
             div.getPnlSearch().getTxtMaxCount().setValue(new Decimal(DbBusinessConifg.
-                    get(ConfigNameDBU.検索制御_最大取得件数上限, RDate.getNowDate(),
+                    get(ConfigNameDBU.検索制御_最大取得件数, RDate.getNowDate(),
                             SubGyomuCode.DBU介護統計報告).toString()));
         }
         div.getPnlKeiyakusyaList().getBtnSearchAgain().setDisabled(true);
@@ -167,7 +167,7 @@ public class PnlTotalSearchHandler {
             row.getTxtKeiyakuShenseibi().setValue(new RDate(list.get申請年月日().toString()));
             row.getTxtKeiyakuKeteibi().setValue(new RDate(list.get決定年月日().toString()));
             row.setTxtKeiyakuJigyoshaNo(list.get契約事業者番号());
-            // TODO QA.378(Redmine#:78539)
+            // TODO QA.375(Redmine#:78535)
             row.setTxtKeiyakuJigyoshamei(new RString("届出者事業者名称"));
             rowList.add(row);
             count = count + 1;
@@ -198,7 +198,6 @@ public class PnlTotalSearchHandler {
                 row.getTxtKeiyakuJigyoshaNo(),
                 row.getTxtKeiyakuJigyoshamei());
         ViewStateHolder.put(ViewStateKeys.契約者一覧情報, pnlTotalParameter);
-        ViewStateHolder.put(ViewStateKeys.契約者一覧検索キー, createParameter());
         ViewStateHolder.put(ViewStateKeys.受領委任契約事業者検索最大件数, div.getPnlSearch().getTxtMaxCount().getValue());
         ViewStateHolder.put(ViewStateKeys.処理モード, 状態);
     }
