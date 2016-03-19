@@ -35,8 +35,7 @@ public class KagoKetteiTsuchishoJohoTorikomiIchiranhyoKouhiFutanshabun {
     private static final RString TITLE_SERVICEHI = new RString("高額介護サービス費");
     private static final RString TITLE_SHOKUJIHI = new RString("特定入所者介護等費");
     private static final RString STRING_BUN = new RString("分");
-    private static final RString STRING_SAKUSEI = new RString("　作成");
-    private static final RString STRING_BLANK_HANKAKU = new RString(" ");
+    private static final RString STRING_SAKUSEI = new RString("作成");
 
     private RString 印刷日時;
     private RString 処理年月分;
@@ -101,7 +100,7 @@ public class KagoKetteiTsuchishoJohoTorikomiIchiranhyoKouhiFutanshabun {
                 .separator(Separator.JAPANESE)
                 .fillType(FillType.BLANK)
                 .toDateString());
-        builder.append(STRING_BLANK_HANKAKU);
+        builder.append(RString.HALF_SPACE);
         処理年月分 = builder.append(STRING_BUN).toRString();
     }
 
@@ -114,9 +113,9 @@ public class KagoKetteiTsuchishoJohoTorikomiIchiranhyoKouhiFutanshabun {
                 .separator(Separator.JAPANESE)
                 .fillType(FillType.BLANK)
                 .toDateString());
-        builder.append(STRING_BLANK_HANKAKU);
+        builder.append(RString.HALF_SPACE);
         builder.append(now.getTime().toFormattedTimeString(DisplayTimeFormat.HH時mm分ss秒));
-        印刷日時 = builder.append(STRING_SAKUSEI).toRString();
+        印刷日時 = builder.append(RString.FULL_SPACE).append(STRING_SAKUSEI).toRString();
     }
 
     private KagoKetteiKohifutanshaInItem createItem(KagoKetteiKohifutanshaInEntity entity, int no,
