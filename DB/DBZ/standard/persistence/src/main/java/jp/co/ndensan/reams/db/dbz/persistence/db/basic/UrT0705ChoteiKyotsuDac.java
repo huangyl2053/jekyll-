@@ -5,17 +5,18 @@
 package jp.co.ndensan.reams.db.dbz.persistence.db.basic;
 
 import java.util.List;
+import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.UrT0705ChoteiKyotsu;
+import static jp.co.ndensan.reams.db.dbz.entity.db.basic.UrT0705ChoteiKyotsu.choteiId;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.UrT0705ChoteiKyotsuEntity;
 import jp.co.ndensan.reams.db.dbz.persistence.IPersistable;
+import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.core.mybatis.SqlSession;
 import jp.co.ndensan.reams.uz.uza.util.db.DbAccessorNormalType;
+import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.eq;
+import jp.co.ndensan.reams.uz.uza.util.db.util.DbAccessors;
 import jp.co.ndensan.reams.uz.uza.util.di.InjectSession;
 import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
-import static java.util.Objects.requireNonNull;
-import static jp.co.ndensan.reams.db.dbz.entity.db.basic.UrT0705ChoteiKyotsu.*;
-import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
-import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.eq;
 
 /**
  * 調定共通のデータアクセスクラスです。
@@ -81,5 +82,17 @@ public class UrT0705ChoteiKyotsuDac implements IPersistable<UrT0705ChoteiKyotsuE
     public int delete(UrT0705ChoteiKyotsuEntity entity) {
         DbAccessorNormalType accessor = new DbAccessorNormalType(session);
         return accessor.delete(entity).execute();
+    }
+
+    /**
+     * UrT0705ChoteiKyotsuEntityを削除します。状態によってdelete処理に振り分けられます。
+     *
+     * @param entity entity
+     * @return 削除件数
+     */
+    @Transaction
+    public int deletePhysicalBy(UrT0705ChoteiKyotsuEntity entity) {
+        requireNonNull(entity, UrSystemErrorMessages.値がnull.getReplacedMessage("調定共通（介護継承）エンティティ"));
+        return DbAccessors.saveOrDeletePhysicalBy(new DbAccessorNormalType(session), entity);
     }
 }

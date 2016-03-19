@@ -34,6 +34,7 @@ public class DbT2017TsuchishoHakkogoIdoshaDac implements ISaveable<DbT2017Tsuchi
 
     @InjectSession
     private SqlSession session;
+    private static final int One = 1;
 
     /**
      * 主キーで通知書発行後異動者を取得します。
@@ -102,7 +103,7 @@ public class DbT2017TsuchishoHakkogoIdoshaDac implements ISaveable<DbT2017Tsuchi
     public List<DbT2017TsuchishoHakkogoIdoshaEntity> select発行帳票情報() {
         DbAccessorNormalType accessor = new DbAccessorNormalType(session);
         YMDHMS システム日付 = YMDHMS.now();
-        YMDHMS システム日付の1ヶ月前の日付 = システム日付.minusMonth(3);
+        YMDHMS システム日付の1ヶ月前の日付 = システム日付.minusMonth(One);
 
         return accessor.select().
                 table(DbT2017TsuchishoHakkogoIdosha.class).
@@ -118,7 +119,7 @@ public class DbT2017TsuchishoHakkogoIdoshaDac implements ISaveable<DbT2017Tsuchi
      * @param 帳票ID 帳票ID
      * @param 帳票作成日時 帳票作成日時
      * @return MAX計算処理日時
-     * @throws NullPointerException
+     * @throws NullPointerException NullPointerException
      */
     @Transaction
     public DbT2017TsuchishoHakkogoIdoshaEntity getMAX計算処理日時(
@@ -134,5 +135,30 @@ public class DbT2017TsuchishoHakkogoIdoshaDac implements ISaveable<DbT2017Tsuchi
                 where(and(eq(reportID, 帳票ID),
                                 eq(chohyosakuseiTimestamp, 帳票作成日時))).
                 toObject(DbT2017TsuchishoHakkogoIdoshaEntity.class);
+    }
+
+    /**
+     * selectByTwoPar
+     *
+     * @param 帳票ID 帳票ID
+     * @param 帳票作成日時 帳票作成日時
+     * @return selectByTwoPar
+     * @throws NullPointerException NullPointerException
+     */
+    @Transaction
+    public List<DbT2017TsuchishoHakkogoIdoshaEntity> selectByTwoPar(
+            ReportId 帳票ID,
+            YMDHMS 帳票作成日時) throws NullPointerException {
+        requireNonNull(帳票ID, UrSystemErrorMessages.値がnull.getReplacedMessage("帳票ID"));
+        requireNonNull(帳票作成日時, UrSystemErrorMessages.値がnull.getReplacedMessage("帳票作成日時"));
+
+        DbAccessorNormalType accessor = new DbAccessorNormalType(session);
+
+        return accessor.select().
+                table(DbT2017TsuchishoHakkogoIdosha.class).
+                where(and(
+                                eq(reportID, 帳票ID),
+                                eq(chohyosakuseiTimestamp, 帳票作成日時))).
+                toList(DbT2017TsuchishoHakkogoIdoshaEntity.class);
     }
 }

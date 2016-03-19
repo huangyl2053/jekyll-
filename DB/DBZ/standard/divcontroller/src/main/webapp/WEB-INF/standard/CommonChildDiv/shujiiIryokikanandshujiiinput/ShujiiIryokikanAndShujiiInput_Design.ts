@@ -20,6 +20,14 @@ module DBZ {
                 return "onClick_btnIryokikanGuide";
             }
 
+            public static onOKClose_btnShujiiRenrakuJiko(): string {
+                return "onOKClose_btnShujiiRenrakuJiko";
+            }
+
+            public static onBefore_btnShujiiRenrakuJiko(): string {
+                return "onBefore_btnShujiiRenrakuJiko";
+            }
+
             public static onClick_btnZankaiFukusha(): string {
                 return "onClick_btnZankaiFukusha";
             }

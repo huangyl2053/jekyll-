@@ -14,13 +14,20 @@ public class HeaderEditor implements IHakkogoIdoTaishoshaIchiranEditor {
 
     private final HakkogoIdoTaishoshaIchiranItem item;
 
-    protected HeaderEditor(HakkogoIdoTaishoshaIchiranItem item) {
+    /**
+     * コンストラクタです
+     *
+     * @param item HakkogoIdoTaishoshaIchiranItem
+     */
+    public HeaderEditor(HakkogoIdoTaishoshaIchiranItem item) {
         this.item = item;
     }
 
     @Override
     public HakkogoIdoTaishoshaIchiranSource edit(HakkogoIdoTaishoshaIchiranSource source) {
         source.title = item.getTitle();
+        source.hokenshaNo = item.getHokenshaNo();
+        source.hokenshaName = item.getHokenshaName();
         source.printTimeStamp = item.getPrintTimeStamp();
         source.fukaNendo = item.getFukaNendo();
         source.tsuchishoName = item.getTsuchishoName();

@@ -136,6 +136,8 @@ public class ShujiiIkenshoSakuseiIraiHandler {
                 row.setShujiiIryoKikan(iryokikanAndShujiiInputDiv.getIryoKikanName());
                 row.getShujiiIkenshoSakuseiIraiDay().setValue(div.getTxtShujiiIkensahoSakuseiIraiDay().getValue());
                 row.setShujii(iryokikanAndShujiiInputDiv.getShujiiName());
+                row.setShujiiIryoKikanCode(iryokikanAndShujiiInputDiv.getIryoKikanCode());
+                row.setShujiiCode(iryokikanAndShujiiInputDiv.getShujiiCode());
                 if (RString.isNullOrEmpty(row.getIraiKubun())) {
                     row.setStatus(新規);
                 } else {

@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- どのマッパーインターフェースと対応するかを指定する -->
+<mapper namespace="jp.co.ndensan.reams.db.dbe.persistence.db.mapper.ichijihanteikekkajohosearch.IchijiHanteiKekkaJohoSearchMapper">
+    <select id="get厚労省IF識別コード"
+            resultType="jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5101NinteiShinseiJohoEntity"
+            parameterType="jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo">
+        SELECT A."koroshoIfShikibetsuCode"
+        FROM rgdb."DbT5101NinteiShinseiJoho" AS A
+        WHERE A."shinseishoKanriNo" = #{申請書管理番号}
+              AND A."logicalDeletedFlag" = FALSE
+    </select>
+    <select id="get基本調査項目"
+            resultType="jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5211NinteichosahyoChosaItemEntity"
+            parameterType="jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo" fetchSize="500">
+        SELECT A."researchItem"
+        FROM rgdb."DbT5211NinteichosahyoChosaItem" AS A
+        WHERE A."shinseishoKanriNo" = #{申請書管理番号}
+              AND NOT EXISTS(SELECT 'x'
+                             FROM rgdb."DbT5211NinteichosahyoChosaItem" AS A1
+                             WHERE A."shinseishoKanriNo" = A1."shinseishoKanriNo"
+                                   AND A."ninteichosaRirekiNo" <![CDATA[<]]> A1."ninteichosaRirekiNo"
+                            )
+              AND (A."koroshoIfShikibetsuCode" = '09A' OR A."koroshoIfShikibetsuCode" = '09B')
+        ORDER BY A."remban" ASC
+    </select>
+    <select id="get主治医意見書項目"
+            resultType="jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT4304ShujiiIkenshoIkenItemEntity"
+            parameterType="jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo" fetchSize="500">
+        SELECT A."ikenItem"
+        FROM rgdb."DbT4304ShujiiIkenshoIkenItem" AS A
+        WHERE A."shinseishoKanriNo" = #{申請書管理番号}
+              AND NOT EXISTS(SELECT 'x'
+                             FROM rgdb."DbT4304ShujiiIkenshoIkenItem" AS A1
+                             WHERE A."shinseishoKanriNo" = A1."shinseishoKanriNo"
+                                   AND A."ikenshoIraiRirekiNo" <![CDATA[<]]> A1."ikenshoIraiRirekiNo"
+                            )
+              AND (A."koroshoIfShikibetsuCode" = '09A' OR A."koroshoIfShikibetsuCode" = '09B')
+              AND A."remban" IN(15,16,17,69)
+        ORDER BY A."remban" ASC
+    </select>
+    <select id="get認定調査票_基本調査"
+            resultType="jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT4203NinteichosahyoKihonChosaEntity"
+            parameterType="jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo" fetchSize="500">
+        SELECT A."shogaiNichijoSeikatsuJiritsudoCode",
+               A."ninchishoNichijoSeikatsuJiritsudoCode"
+        FROM rgdb."DbT4203NinteichosahyoKihonChosa" AS A
+        WHERE A."shinseishoKanriNo" = #{申請書管理番号}
+              AND NOT EXISTS(SELECT 'x'
+                             FROM rgdb."DbT4203NinteichosahyoKihonChosa" AS A1
+                             WHERE A."shinseishoKanriNo" = A1."shinseishoKanriNo"
+                                   AND A."ninteichosaRirekiNo" <![CDATA[<]]> A1."ninteichosaRirekiNo"
+                            )
+              AND (A."koroshoIfShikibetsuCode" = '09A' OR A."koroshoIfShikibetsuCode" = '09B')
+    </select>
+    <select id="get認知症高齢者自立度_主治医意見書"
+            resultType="jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT4304ShujiiIkenshoIkenItemEntity"
+            parameterType="jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo" fetchSize="500">
+        SELECT A."ikenItem"
+        FROM rgdb."DbT4304ShujiiIkenshoIkenItem" AS A
+        WHERE A."shinseishoKanriNo" = #{申請書管理番号}
+              AND NOT EXISTS(SELECT 'x'
+                             FROM rgdb."DbT4304ShujiiIkenshoIkenItem" AS A1
+                             WHERE A."shinseishoKanriNo" = A1."shinseishoKanriNo"
+                                   AND A."ikenshoIraiRirekiNo" <![CDATA[<]]> A1."ikenshoIraiRirekiNo"
+                            )
+              AND (A."koroshoIfShikibetsuCode" = '09A' OR A."koroshoIfShikibetsuCode" = '09B')
+              AND A."remban" = 14
+    </select>
+    <select id="get認定調査票_基本調査件数"
+            resultType="java.lang.Integer"
+            parameterType="jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo">
+        SELECT COUNT(1)
+        FROM rgdb."DbT4203NinteichosahyoKihonChosa" AS A
+        WHERE A."shinseishoKanriNo" = #{申請書管理番号}
+    </select>
+    <select id="get要介護認定主治医意見書情報件数"
+            resultType="java.lang.Integer"
+            parameterType="jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo">
+        SELECT COUNT(1)
+        FROM rgdb."DbT4302ShujiiIkenshoJoho" AS A
+        WHERE A."shinseishoKanriNo" = #{申請書管理番号}
+    </select>
+</mapper>

@@ -33,43 +33,54 @@ public class JohoTeikyoShiryoEditor implements IJohoTeikyoShiryoEditor {
     }
 
     private JohoTeikyoShiryoReportSource editSource(JohoTeikyoShiryoReportSource source) {
-        source.hakkoYMD = item.getHakkoYMD().wareki()
-                .eraType(EraType.KANJI)
-                .firstYear(FirstYear.GAN_NEN)
-                .separator(Separator.JAPANESE)
-                .fillType(FillType.BLANK).toDateString();
-        source.hokenshaName1 = item.getHokenshaName1();
-        source.hokenshaName2 = item.getHokenshaName2();
-        source.title = item.getTitle();
-        source.tsuchibun1 = item.getTsuchibun1();
-        source.hihokenshaName = item.getHihokenshaName();
-        source.Jusho = item.getJusho();
-        source.infoNijiDate = item.getInfoNijiDate().wareki()
-                .eraType(EraType.KANJI)
-                .firstYear(FirstYear.GAN_NEN)
-                .separator(Separator.JAPANESE)
-                .fillType(FillType.BLANK).toDateString();
-        source.ninteiKekka = item.getNinteiKekka();
-        source.yokaigoNiteiKaishoYMD = item.getYokaigoNiteiKaishoYMD().wareki()
-                .eraType(EraType.KANJI)
-                .firstYear(FirstYear.GAN_NEN)
-                .separator(Separator.JAPANESE)
-                .fillType(FillType.BLANK).toDateString();
-        source.yokaigoNinteiShuryoYMD = item.getYokaigoNinteiShuryoYMD().wareki()
-                .eraType(EraType.KANJI)
-                .firstYear(FirstYear.GAN_NEN)
-                .separator(Separator.JAPANESE)
-                .fillType(FillType.BLANK).toDateString();
-        source.shinsakaiIken = item.getShinsakaiIken();
-        source.tsuchibun2 = item.getTsuchibun2();
-        source.tsuchibun3 = item.getTsuchibun3();
-        source.tsuchibun4 = item.getTsuchibun4();
-        source.tsuchibun5 = item.getTsuchibun5();
-        source.tsuchibun6 = item.getTsuchibun6();
-        source.tsuchibun7 = item.getTsuchibun7();
-        source.tsuchibun8 = item.getTsuchibun8();
-        source.tsuchibun9 = item.getTsuchibun9();
-        source.tsuchibun10 = item.getTsuchibun10();
+        if (item != null) {
+            if (item.getHakkoYMD() != null) {
+                source.hakkoYMD = item.getHakkoYMD().wareki()
+                        .eraType(EraType.KANJI)
+                        .firstYear(FirstYear.GAN_NEN)
+                        .separator(Separator.JAPANESE)
+                        .fillType(FillType.BLANK).toDateString();
+            }
+            source.hokenshaName1 = item.getHokenshaName1();
+            source.hokenshaName2 = item.getHokenshaName2();
+            source.title = item.getTitle();
+            source.tsuchibun1 = item.getTsuchibun1();
+            source.hihokenshaName = item.getHihokenshaName();
+            source.Jusho = item.getJusho();
+            if (item.getInfoNijiDate() != null) {
+                source.infoNijiDate = item.getInfoNijiDate().wareki()
+                        .eraType(EraType.KANJI)
+                        .firstYear(FirstYear.GAN_NEN)
+                        .separator(Separator.JAPANESE)
+                        .fillType(FillType.BLANK).toDateString();
+                source.ninteiKekka = item.getNinteiKekka();
+            }
+            if (item.getYokaigoNiteiKaishoYMD() != null) {
+                source.yokaigoNiteiKaishoYMD = item.getYokaigoNiteiKaishoYMD().wareki()
+                        .eraType(EraType.KANJI)
+                        .firstYear(FirstYear.GAN_NEN)
+                        .separator(Separator.JAPANESE)
+                        .fillType(FillType.BLANK).toDateString();
+
+            }
+            if (item.getYokaigoNinteiShuryoYMD() != null) {
+                source.yokaigoNinteiShuryoYMD = item.getYokaigoNinteiShuryoYMD().wareki()
+                        .eraType(EraType.KANJI)
+                        .firstYear(FirstYear.GAN_NEN)
+                        .separator(Separator.JAPANESE)
+                        .fillType(FillType.BLANK).toDateString();
+            }
+            source.shinsakaiIken = item.getShinsakaiIken();
+            source.tsuchibun2 = item.getTsuchibun2();
+            source.tsuchibun3 = item.getTsuchibun3();
+            source.tsuchibun4 = item.getTsuchibun4();
+            source.tsuchibun5 = item.getTsuchibun5();
+            source.tsuchibun6 = item.getTsuchibun6();
+            source.tsuchibun7 = item.getTsuchibun7();
+            source.tsuchibun8 = item.getTsuchibun8();
+            source.tsuchibun9 = item.getTsuchibun9();
+            source.tsuchibun10 = item.getTsuchibun10();
+        }
         return source;
     }
 }

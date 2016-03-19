@@ -32,6 +32,7 @@ public class ShujiiIkenshoSakuseiIraiValidationHandler {
     private static final RString 期間指定_期間指定 = new RString("key1");
     private static final RString 受診日 = new RString("受診日を");
     private static final RString 受診時分 = new RString("受診時分を");
+    private static final RString SELECTED_KEY3 = new RString("key3");
 
     /**
      * コンストラクタです。
@@ -56,19 +57,20 @@ public class ShujiiIkenshoSakuseiIraiValidationHandler {
         return validationMessages;
     }
 
-//    /**
-//     * 保存のチェックを処理します。
-//     *
-//     * @return ValidationMessageControlPairs
-//     */
-//    public ValidationMessageControlPairs 保存チェック() {
-//        ValidationMessageControlPairs validationMessages = new ValidationMessageControlPairs();
+    /**
+     * 保存のチェックを処理します。
+     *
+     * @return ValidationMessageControlPairs
+     */
+    public ValidationMessageControlPairs 保存チェック() {
+        ValidationMessageControlPairs validationMessages = new ValidationMessageControlPairs();
 //        validationMessages.add(申請者一覧未選択チェック());
 //        validationMessages.add(主治医意見書作成依頼日チェック());
 //        validationMessages.add(主治医医療機関チェック());
 //        validationMessages.add(主治医チェック());
-//        return validationMessages;
-//    }
+        return validationMessages;
+    }
+
     /**
      * 発行のチェックを処理します。
      *
@@ -79,8 +81,10 @@ public class ShujiiIkenshoSakuseiIraiValidationHandler {
         validationMessages.add(申請者一覧未選択チェック());
         validationMessages.add(選択された申請者チェック());
         validationMessages.add(印刷書類チェック());
-        validationMessages.add(期間チェック());
-        validationMessages.add(受診日が未入力チェック());
+        if (div.getChkprint().getSelectedKeys().contains(SELECTED_KEY3)) {
+            validationMessages.add(期間チェック());
+            validationMessages.add(受診日が未入力チェック());
+        }
         return validationMessages;
     }
 
@@ -135,7 +139,7 @@ public class ShujiiIkenshoSakuseiIraiValidationHandler {
         ValidationMessageControlPairs validationMessages = new ValidationMessageControlPairs();
         for (dgShinseishaIchiran_Row row : div.getDgShinseishaIchiran().getDataSource()) {
             if (row.getSelected() && (RString.isNullOrEmpty(row.getShujiiIryoKikan())
-                    || RString.isNullOrEmpty(row.getShujii()) || row.getIraishoShutsuryokuDay().getValue() == null)) {
+                    || RString.isNullOrEmpty(row.getShujii()) || row.getShujiiIkenshoSakuseiIraiDay().getValue() == null)) {
                 validationMessages.add(new ValidationMessageControlPair(
                         new ShujiiIkenshoSakuseiIraiValidationHandler.ShujiiIkenshoSakuseiIraiMessages(
                                 UrErrorMessages.実行不可, 依頼情報未指定.toString())));

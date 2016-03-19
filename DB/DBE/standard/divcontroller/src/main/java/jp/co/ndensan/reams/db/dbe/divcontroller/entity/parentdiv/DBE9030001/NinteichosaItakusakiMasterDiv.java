@@ -8,11 +8,17 @@ package jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE9030001;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.KaigoKanryoMessage.KaigoKanryoMessage.IKaigoKanryoMessageDiv;
-import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.hokenshalist.HokenshaList.IHokenshaListDiv;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.KaigoKanryoMessage.KaigoKanryoMessage.KaigoKanryoMessageDiv;
+import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.hokenshalist.HokenshaList.IHokenshaListDiv;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.ui.binding.*;
+import jp.co.ndensan.reams.uz.uza.ui.binding.Button;
+import jp.co.ndensan.reams.uz.uza.ui.binding.DropDownList;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
+import jp.co.ndensan.reams.uz.uza.ui.binding.RadioButton;
+import jp.co.ndensan.reams.uz.uza.ui.binding.TextBox;
+import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxCode;
+import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxKana;
+import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxNum;
 
 /**
  * NinteichosaItakusakiMaster のクラスファイル
@@ -52,6 +58,12 @@ public class NinteichosaItakusakiMasterDiv extends Panel {
     private RString hdnSubGyomuCode;
     @JsonProperty("hdnCodeShubetsu")
     private RString hdnCodeShubetsu;
+    @JsonProperty("hdnJigyoshaMode")
+    private RString hdnJigyoshaMode;
+    @JsonProperty("hdnSchemaName")
+    private RString hdnSchemaName;
+    @JsonProperty("hdnShikibetsuCode")
+    private RString hdnShikibetsuCode;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -264,6 +276,60 @@ public class NinteichosaItakusakiMasterDiv extends Panel {
     @JsonProperty("hdnCodeShubetsu")
     public void setHdnCodeShubetsu(RString hdnCodeShubetsu) {
         this.hdnCodeShubetsu = hdnCodeShubetsu;
+    }
+
+    /*
+     * gethdnJigyoshaMode
+     * @return hdnJigyoshaMode
+     */
+    @JsonProperty("hdnJigyoshaMode")
+    public RString getHdnJigyoshaMode() {
+        return hdnJigyoshaMode;
+    }
+
+    /*
+     * sethdnJigyoshaMode
+     * @param hdnJigyoshaMode hdnJigyoshaMode
+     */
+    @JsonProperty("hdnJigyoshaMode")
+    public void setHdnJigyoshaMode(RString hdnJigyoshaMode) {
+        this.hdnJigyoshaMode = hdnJigyoshaMode;
+    }
+
+    /*
+     * gethdnSchemaName
+     * @return hdnSchemaName
+     */
+    @JsonProperty("hdnSchemaName")
+    public RString getHdnSchemaName() {
+        return hdnSchemaName;
+    }
+
+    /*
+     * sethdnSchemaName
+     * @param hdnSchemaName hdnSchemaName
+     */
+    @JsonProperty("hdnSchemaName")
+    public void setHdnSchemaName(RString hdnSchemaName) {
+        this.hdnSchemaName = hdnSchemaName;
+    }
+
+    /*
+     * gethdnShikibetsuCode
+     * @return hdnShikibetsuCode
+     */
+    @JsonProperty("hdnShikibetsuCode")
+    public RString getHdnShikibetsuCode() {
+        return hdnShikibetsuCode;
+    }
+
+    /*
+     * sethdnShikibetsuCode
+     * @param hdnShikibetsuCode hdnShikibetsuCode
+     */
+    @JsonProperty("hdnShikibetsuCode")
+    public void setHdnShikibetsuCode(RString hdnShikibetsuCode) {
+        this.hdnShikibetsuCode = hdnShikibetsuCode;
     }
 
     /*

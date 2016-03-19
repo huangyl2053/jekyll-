@@ -333,45 +333,52 @@ public class KyufuShiharayiMeisaiPanelHandler {
             }
             for (dgdKyufuhiMeisai_Row row : dgrow) {
                 if (RowState.Modified.equals(row.getRowState())) {
-                    RString serviceCodeShuruyi = new RString(row.getDefaultDataName1().substring(0, 2).toString());
-                    RString serviceCodeKoumoku = new RString(row.getDefaultDataName1().substring(2, NUM).toString());
                     ShokanMeisai entityModified = mapList.get(row.getDefaultDataName6());
-                    ShokanMeisai shokanMeisai = entityModified.createBuilderForEdit()
-                            .setサービス種類コード(new ServiceShuruiCode(serviceCodeShuruyi))
-                            .setサービス項目コード(new ServiceKomokuCode(serviceCodeKoumoku))
-                            .set単位数(Integer.parseInt(row.getDefaultDataName2().toString()))
-                            .set日数_回数(Integer.parseInt(row.getDefaultDataName3().toString()))
-                            .setサービス単位数(Integer.parseInt(row.getDefaultDataName4().toString()))
-                            .set摘要(row.getDefaultDataName5())
-                            .build();
-                    entityList.add(shokanMeisai.modified());
+                    entityModified = buildshokanMeisai(entityModified, row);
+                    entityList.add(entityModified.modified());
                 } else if (RowState.Deleted.equals(row.getRowState())) {
                     entityList.add(mapList.get(row.getDefaultDataName6()).deleted());
                 } else if (RowState.Added.equals(row.getRowState())) {
                     max連番 = max連番 + 1;
-                    ShokanMeisai shokanMeisai = new ShokanMeisai(
+                    ShokanMeisai entityAdded = new ShokanMeisai(
                             被保険者番号,
                             サービス年月,
                             整理番号,
                             事業者番号,
                             様式番号,
                             明細番号,
-                            new RString(String.valueOf(max連番))).createBuilderForEdit()
-                            .setサービス種類コード(new ServiceShuruiCode(
-                                            row.getDefaultDataName1().substring(0, 2).toString()))
-                            .setサービス項目コード(new ServiceKomokuCode(
-                                            row.getDefaultDataName1().substring(2, NUM).toString()))
-                            .set単位数(Integer.parseInt(row.getDefaultDataName2().toString()))
-                            .set日数_回数(Integer.parseInt(row.getDefaultDataName3().toString()))
-                            .setサービス単位数(Integer.parseInt(row.getDefaultDataName4().toString()))
-                            .set摘要(row.getDefaultDataName5())
-                            .build();
-                    entityList.add(shokanMeisai);
+                            new RString(String.valueOf(max連番))).createBuilderForEdit().build();
+                    entityAdded = buildshokanMeisai(entityAdded, row);
+                    entityList.add(entityAdded.added());
                 }
 
             }
         }
         SyokanbaraihiShikyuShinseiKetteManager.createInstance().updShokanMeisai(entityList);
+
+    }
+
+    private ShokanMeisai buildshokanMeisai(ShokanMeisai entity, dgdKyufuhiMeisai_Row row) {
+        RString serviceCodeShuruyi = new RString(row.getDefaultDataName1().substring(0, 2).toString());
+        RString serviceCodeKoumoku = new RString(row.getDefaultDataName1().substring(2, NUM).toString());
+        entity = entity.createBuilderForEdit().setサービス種類コード(
+                new ServiceShuruiCode(serviceCodeShuruyi)).build();
+        entity = entity.createBuilderForEdit().setサービス項目コード(
+                new ServiceKomokuCode(serviceCodeKoumoku)).build();
+        if (row.getDefaultDataName2() != null) {
+            entity = entity.createBuilderForEdit().set単位数(Integer.parseInt(row.getDefaultDataName2().toString())).build();
+        }
+        if (row.getDefaultDataName3() != null) {
+            entity = entity.createBuilderForEdit().set日数_回数(Integer.parseInt(row.getDefaultDataName3().toString())).build();
+        }
+        if (row.getDefaultDataName4() != null) {
+            entity = entity.createBuilderForEdit().setサービス単位数(Integer.parseInt(row.getDefaultDataName4().toString())).build();
+        }
+        if (row.getDefaultDataName5() != null) {
+            entity = entity.createBuilderForEdit().set摘要(row.getDefaultDataName5()).build();
+        }
+
+        return entity;
 
     }
 

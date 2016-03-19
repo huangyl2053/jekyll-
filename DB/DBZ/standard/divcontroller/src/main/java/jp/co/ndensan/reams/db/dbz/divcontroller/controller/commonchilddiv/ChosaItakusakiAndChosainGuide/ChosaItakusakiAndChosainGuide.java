@@ -13,7 +13,7 @@ import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.ChosaItaku
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.ChosaItakusakiAndChosainGuide.ChosaItakusakiAndChosainGuide.ChosaItakusakiAndChosainGuideHandler;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.ChosaItakusakiAndChosainGuide.ChosaItakusakiAndChosainGuide.ChosaItakusakiAndChosainGuideValidationHandler;
 import jp.co.ndensan.reams.db.dbz.service.core.iknijuntsukishichosonjoho.KijuntsukiShichosonjohoFinder;
-import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
+import jp.co.ndensan.reams.uz.uza.ControlDataHolder;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
@@ -115,7 +115,9 @@ public class ChosaItakusakiAndChosainGuide {
                 div.getTxtChosainKanaShimei().getValue(),
                 div.getTxtMaxKensu().getValue(),
                 市町村コード,
-                SubGyomuCode.DBD介護受給.value().equals(div.getHdnDatabaseSubGyomuCode()));
+                ControlDataHolder.getSubGyomuCD().value(),
+                div.getDdlChosaItakusakiKubun().getSelectedKey(),
+                div.getTxtChikuCode().getDomain().value());
     }
 
     private ChosaItakusakiAndChosainGuideValidationHandler getValidationHandler(ChosaItakusakiAndChosainGuideDiv div) {

@@ -431,7 +431,8 @@ public class GogitaiJohoSakuseiHandler {
         gogitaiJohoBuilder.set合議体有効期間終了年月日(new FlexibleDate(div.getTxtYukoShuryoYMD().getValue().toDateString()));
         gogitaiJohoBuilder.set介護認定審査会開催場所コード(div.getDdlkaisaibasho().getSelectedKey());
         gogitaiJohoBuilder.set介護認定審査会予定定員(div.getTxtYoteiTeiin().getValue().intValue());
-        gogitaiJohoBuilder.set介護認定審査会自動割当定員(div.getTxtJidoWariateTeiin().getValue().intValue());
+        gogitaiJohoBuilder.set介護認定審査会自動割当定員(div.getTxtJidoWariateTeiin().getValue() == null
+                ? 0 : div.getTxtJidoWariateTeiin().getValue().intValue());
         gogitaiJohoBuilder.set介護認定審査会委員定員(div.getTxtIinTeiin().getValue().intValue());
         return gogitaiJohoBuilder;
     }

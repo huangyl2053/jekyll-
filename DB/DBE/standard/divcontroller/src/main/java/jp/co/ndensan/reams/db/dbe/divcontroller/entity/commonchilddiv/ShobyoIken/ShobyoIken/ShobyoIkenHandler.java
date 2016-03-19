@@ -240,6 +240,21 @@ public class ShobyoIkenHandler {
         div.getRadIsShutaruGeninShikkan().setRequired(true);
         div.getBtnNo().setDisabled(true);
         div.getBtnOK().setDisabled(true);
+        dgGenyin_Row row = div.getDgGenyin().getClickedItem();
+        div.getTxtGeninShikkanCode().setValue(row.getGeninShikkanCode());
+        div.getTxtMeisho().setValue(row.getMeiSho());
+        if (row.getIsShutaruGeninShikkan()) {
+            div.getRadIsShutaruGeninShikkan().setSelectedKey(安定性_True);
+        } else {
+            div.getRadIsShutaruGeninShikkan().setSelectedKey(安定性_False);
+        }
+        div.getGeninShikkanPanel().getGeninShikkanShosai().setShikkanCode(row.getGeninShikkanCode());
+        div.getGeninShikkanPanel().getGeninShikkanShosai().setMeisho(row.getMeiSho());
+        if (row.getIsShutaruGeninShikkan()) {
+            div.getGeninShikkanPanel().getGeninShikkanShosai().setIsShutaru(安定性_True);
+        } else {
+            div.getGeninShikkanPanel().getGeninShikkanShosai().setIsShutaru(安定性_False);
+        }
         div.getGeninShikkanPanel().getGeninShikkanShosai().setJotai(RString.EMPTY);
     }
 

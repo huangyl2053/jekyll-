@@ -274,6 +274,20 @@ public class ShokanMeisai extends ModelBase<ShokanMeisaiIdentifier, DbT3039Shoka
     }
 
     /**
+     * add ShokanMeisai
+     *
+     * @return ShokanMeisai {@link ShokanMeisai}のクローン
+     */
+    public ShokanMeisai added() {
+        DbT3039ShokanMeisaiEntity addedEntity = this.toEntity();
+
+        addedEntity.setState(EntityDataState.Added);
+
+        //TODO メッセージの検討
+        return new ShokanMeisai(addedEntity, id);
+    }
+
+    /**
      * {@link ShokanMeisai}のシリアライズ形式を提供します。
      *
      * @return {@link ShokanMeisai}のシリアライズ形式

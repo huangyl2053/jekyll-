@@ -68,15 +68,14 @@ public class SeikatsuServiceIken {
      * @return ResponseData<SeikatsuServiceIkenDiv>
      */
     public ResponseData<SeikatsuServiceIkenDiv> onChange_chkJotaiSonota(SeikatsuServiceIkenDiv div) {
-        if (KEY0.equals(div.getChkJotaiSonota().getSelectedKeys().get(0))) {
-            div.getTxtSonotaJotaiShosai().setReadOnly(false);
-            div.getTxtSonotaJotaiShosai().setValue(div.getHiddenTxtSonotaJotaiShosai());
-            div.getTxtTaishoHoushin().setDisplayNone(false);
-
-        } else {
+        if (div.getChkJotaiSonota().getSelectedKeys().isEmpty()) {
             div.getTxtSonotaJotaiShosai().setReadOnly(true);
             div.getTxtSonotaJotaiShosai().clearValue();
             div.getTxtTaishoHoushin().setDisplayNone(true);
+        } else {
+            div.getTxtSonotaJotaiShosai().setReadOnly(false);
+            div.getTxtSonotaJotaiShosai().setValue(div.getHiddenTxtSonotaJotaiShosai());
+            div.getTxtTaishoHoushin().setDisplayNone(false);
         }
         return ResponseData.of(div).respond();
     }
@@ -88,12 +87,12 @@ public class SeikatsuServiceIken {
      * @return ResponseData<SeikatsuServiceIkenDiv>
      */
     public ResponseData<SeikatsuServiceIkenDiv> onChange_chkSonotaIryoService(SeikatsuServiceIkenDiv div) {
-        if (KEY0.equals(div.getChkSonotaIryoService().getSelectedKeys().get(0))) {
-            div.getTxtShonotaIryoServiceShosai().setReadOnly(false);
-            div.getTxtShonotaIryoServiceShosai().setValue(div.getHiddenTxtShonotaIryoServiceShosai());
+        if (div.getChkSonotaIryoService().getSelectedKeys().isEmpty()) {
+             div.getTxtShonotaIryoServiceShosai().setReadOnly(true);
+             div.getTxtShonotaIryoServiceShosai().clearValue();
         } else {
-            div.getTxtShonotaIryoServiceShosai().setReadOnly(true);
-            div.getTxtShonotaIryoServiceShosai().clearValue();
+             div.getTxtShonotaIryoServiceShosai().setReadOnly(false);
+             div.getTxtShonotaIryoServiceShosai().setValue(div.getHiddenTxtShonotaIryoServiceShosai());
         }
         return ResponseData.of(div).respond();
     }
@@ -209,13 +208,14 @@ public class SeikatsuServiceIken {
     public ResponseData<SeikatsuServiceIkenDiv> onClick_btnKakutei(SeikatsuServiceIkenDiv div) {
         if (hasChange(div)) {
             if (!ResponseHolder.isReRequest()) {
-                QuestionMessage message = new QuestionMessage(UrQuestionMessages.処理実行の確認.getMessage().getCode(),
-                        UrQuestionMessages.処理実行の確認.getMessage().evaluate());
+                QuestionMessage message = new QuestionMessage(UrQuestionMessages.確定の確認.getMessage().getCode(),
+                        UrQuestionMessages.確定の確認.getMessage().evaluate());
                 return ResponseData.of(div).addMessage(message).respond();
             }
-            if (new RString(UrQuestionMessages.処理実行の確認.getMessage().getCode()).equals(ResponseHolder.getMessageCode())
+            if (new RString(UrQuestionMessages.確定の確認.getMessage().getCode()).equals(ResponseHolder.getMessageCode())
                     && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
                     getHandler(div).editShujiiIkenshoJoho();
+                    return ResponseData.of(div).dialogOKClose();
             }
         }
         return ResponseData.of(div).respond();
@@ -230,20 +230,20 @@ public class SeikatsuServiceIken {
     public ResponseData<SeikatsuServiceIkenDiv> onClick_btnCancel(SeikatsuServiceIkenDiv div) {
         if (hasChange(div)) {
             if (!ResponseHolder.isReRequest()) {
-                QuestionMessage message = new QuestionMessage(UrQuestionMessages.処理実行の確認.getMessage().getCode(),
-                        UrQuestionMessages.処理実行の確認.getMessage().evaluate());
+                QuestionMessage message = new QuestionMessage(UrQuestionMessages.画面遷移の確認.getMessage().getCode(),
+                        UrQuestionMessages.画面遷移の確認.getMessage().evaluate());
                 return ResponseData.of(div).addMessage(message).respond();
             }
-            if (new RString(UrQuestionMessages.処理実行の確認.getMessage().getCode()).equals(ResponseHolder.getMessageCode())
+            if (new RString(UrQuestionMessages.画面遷移の確認.getMessage().getCode()).equals(ResponseHolder.getMessageCode())
                     && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
-                return ResponseData.of(div).respond();
+                return ResponseData.of(div).dialogOKClose();
             }
         }
         return ResponseData.of(div).respond();
     }
 
     private boolean hasChange(SeikatsuServiceIkenDiv div) {
-        return getAllData(div).equals(div.getHiddenData());
+        return !getAllData(div).equals(div.getHiddenData());
     }
 
     private RString getAllData(SeikatsuServiceIkenDiv div) {
@@ -253,13 +253,13 @@ public class SeikatsuServiceIken {
                 .append(div.getRadShokujiKoi().getSelectedKey())
                 .append(div.getRadGenzaiEiyoJotai().getSelectedKey())
                 .append(div.getTxtEiyoShokuseikatsuRyuiten().getValue())
-                .append(div.getChkJotaiSonota().getSelectedKeys().get(0))
+                .append(div.getChkJotaiSonota().getSelectedKeys())
                 .append(div.getTxtSonotaJotaiShosai().getValue())
                 .append(div.getTxtTaishoHoushin().getValue())
                 .append(div.getRadSeikatsuKinoMitoshi().getSelectedKey())
-                .append(div.getChkSonotaIryoService().getSelectedKeys().get(0))
+                .append(div.getChkSonotaIryoService().getSelectedKeys())
                 .append(div.getTxtShonotaIryoServiceShosai().getValue())
-                .append(div.getChkSonotaIryoServiceHitsuyoSei().getSelectedKeys().get(0))
+                .append(div.getChkSonotaIryoServiceHitsuyoSei().getSelectedKeys())
                 .append(div.getRadKetsuatsu().getSelectedKey())
                 .append(div.getTxtKetsuatsu().getValue())
                 .append(div.getRadIdo().getSelectedKey())

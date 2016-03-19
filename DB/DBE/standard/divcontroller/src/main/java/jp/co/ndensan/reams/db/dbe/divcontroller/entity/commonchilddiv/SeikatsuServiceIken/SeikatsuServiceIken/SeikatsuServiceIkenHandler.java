@@ -54,34 +54,13 @@ public class SeikatsuServiceIkenHandler {
     private static final RString KEY17 = new RString("key17");
     private static final RString KEY18 = new RString("key18");
     private static final RString KEY19 = new RString("key19");
-    private static final String STR_KEY0 = "key0";
-    private static final String STR_KEY1 = "key1";
-    private static final String STR_KEY2 = "key2";
-    private static final String STR_KEY3 = "key3";
-    private static final String STR_KEY4 = "key4";
-    private static final String STR_KEY5 = "key5";
-    private static final String STR_KEY6 = "key6";
-    private static final String STR_KEY7 = "key7";
-    private static final String STR_KEY8 = "key8";
-    private static final String STR_KEY9 = "key9";
-    private static final String STR_KEY10 = "key10";
-    private static final String STR_KEY11 = "key11";
-    private static final String STR_KEY12 = "key12";
-    private static final String STR_KEY13 = "key13";
-    private static final String STR_KEY14 = "key14";
-    private static final String STR_KEY15 = "key15";
-    private static final String STR_KEY16 = "key16";
-    private static final String STR_KEY17 = "key17";
-    private static final String STR_KEY18 = "key18";
-    private static final String STR_KEY19 = "key19";
-
-    private static final String STR_1 = "1";
-    private static final String STR_2 = "2";
-    private static final String STR_3 = "3";
     private static final RString RSTR_1 = new RString("1");
     private static final RString RSTR_2 = new RString("2");
     private static final RString RSTR_3 = new RString("3");
-    private static final String STR_9 = "9";
+    private static final RString RSTR_9 = new RString("9");
+    private static final String STR_KEY0 = "key0";
+    private static final String STR_KEY1 = "key1";
+    private static final String STR_KEY2 = "key2";
     private static final int INDEX_0 = 0;
     private static final List<Integer> 連番_意見項目リスト = new ArrayList();
     private static final List<Integer> 連番_記入項目リスト = new ArrayList();
@@ -102,11 +81,11 @@ public class SeikatsuServiceIkenHandler {
      */
     public void onLoad() {
         NinteiShinseiJoho ninteiShinseiJohoBusiness = ViewStateHolder.get(ViewStateKeys.主治医意見書登録_意見書情報, NinteiShinseiJoho.class);
-        ShinseishoKanriNo 管理番号 = ViewStateHolder.get(ViewStateKeys.要介護認定申請検索_申請書管理番号, ShinseishoKanriNo.class);
+        ShinseishoKanriNo 管理番号 = new ShinseishoKanriNo(ViewStateHolder.get(ViewStateKeys.要介護認定申請検索_申請書管理番号, RString.class));
         RString 履歴番号STR = ViewStateHolder.get(ViewStateKeys.要介護認定申請検索_主治医意見書作成依頼履歴番号, RString.class);
         int 履歴番号 = Integer.valueOf(履歴番号STR.toString());
-        ShujiiIkenshoIraiJohoIdentifier shujiiIkenshoIraiJohoIdentifier = new ShujiiIkenshoIraiJohoIdentifier(管理番号, 履歴番号);
-        ShujiiIkenshoIraiJoho shujiiIkenshoIraiJoho = ninteiShinseiJohoBusiness.getShujiiIkenshoIraiJoho(shujiiIkenshoIraiJohoIdentifier);
+        ShujiiIkenshoIraiJohoIdentifier shujiiIkenshoIraiIdentifier = new ShujiiIkenshoIraiJohoIdentifier(管理番号, 履歴番号);
+        ShujiiIkenshoIraiJoho shujiiIkenshoIraiJoho = ninteiShinseiJohoBusiness.getShujiiIkenshoIraiJoho(shujiiIkenshoIraiIdentifier);
         ShujiiIkenshoJohoIdentifier shujiiIkenshoJohoIdentifier = new ShujiiIkenshoJohoIdentifier(管理番号, 履歴番号);
         ShujiiIkenshoJoho shujiiIkenshoJoho = shujiiIkenshoIraiJoho.getSeishinTechoNini(shujiiIkenshoJohoIdentifier);
 
@@ -131,7 +110,7 @@ public class SeikatsuServiceIkenHandler {
      *
      */
     public void 初期化状態定義() {
-        div.getRadGenzaiEiyoJotai().setReadOnly(true);
+        div.getTxtEiyoShokuseikatsuRyuiten().setReadOnly(true);
         div.getTxtSonotaJotaiShosai().setReadOnly(true);
         div.getTxtShonotaIryoServiceShosai().setReadOnly(true);
         div.getTxtKetsuatsu().setReadOnly(true);
@@ -141,12 +120,12 @@ public class SeikatsuServiceIkenHandler {
         div.getTxtEnka().setReadOnly(true);
         div.getTxtKansenshoShosai().setReadOnly(true);
         if (KEY1.equals(div.getRadGenzaiEiyoJotai().getSelectedKey())) {
-            div.getRadGenzaiEiyoJotai().setReadOnly(false);
+            div.getTxtEiyoShokuseikatsuRyuiten().setReadOnly(false);
         }
-        if (KEY0.equals(div.getChkJotaiSonota().getSelectedKeys().get(INDEX_0))) {
+        if (!div.getChkJotaiSonota().getSelectedKeys().isEmpty()) {
             div.getTxtSonotaJotaiShosai().setReadOnly(false);
         }
-        if (KEY0.equals(div.getChkSonotaIryoService().getSelectedKeys().get(INDEX_0))) {
+        if (!div.getChkSonotaIryoService().getSelectedKeys().isEmpty()) {
             div.getTxtShonotaIryoServiceShosai().setReadOnly(false);
         }
         if (KEY1.equals(div.getRadKetsuatsu().getSelectedKey())) {
@@ -176,24 +155,27 @@ public class SeikatsuServiceIkenHandler {
      */
     public void editShujiiIkenshoJoho() {
         NinteiShinseiJoho ninteiShinseiJohoBusiness = ViewStateHolder.get(ViewStateKeys.主治医意見書登録_意見書情報, NinteiShinseiJoho.class);
-        ShinseishoKanriNo 管理番号 = ViewStateHolder.get(ViewStateKeys.要介護認定申請検索_申請書管理番号, ShinseishoKanriNo.class);
-        int 履歴番号 = ViewStateHolder.get(ViewStateKeys.要介護認定申請検索_主治医意見書作成依頼履歴番号, Integer.class);
+        ShinseishoKanriNo 管理番号 = new ShinseishoKanriNo(ViewStateHolder.get(ViewStateKeys.要介護認定申請検索_申請書管理番号, RString.class));
+        RString 履歴番号STR = ViewStateHolder.get(ViewStateKeys.要介護認定申請検索_主治医意見書作成依頼履歴番号, RString.class);
+        int 履歴番号 = Integer.valueOf(履歴番号STR.toString());
 
-        ShujiiIkenshoIraiJohoIdentifier shujiiIkenshoIraiJohoIdentifier = new ShujiiIkenshoIraiJohoIdentifier(管理番号, 履歴番号);
-        ShujiiIkenshoIraiJoho shujiiIkenshoIraiJoho = ninteiShinseiJohoBusiness.getShujiiIkenshoIraiJoho(shujiiIkenshoIraiJohoIdentifier);
+        ShujiiIkenshoIraiJohoIdentifier shujiiIkenshoIraiIdentifier = new ShujiiIkenshoIraiJohoIdentifier(管理番号, 履歴番号);
+        ShujiiIkenshoIraiJoho shujiiIkenshoIraiJoho = ninteiShinseiJohoBusiness.getShujiiIkenshoIraiJoho(shujiiIkenshoIraiIdentifier);
         ShujiiIkenshoJohoIdentifier shujiiIkenshoJohoIdentifier = new ShujiiIkenshoJohoIdentifier(管理番号, 履歴番号);
         ShujiiIkenshoJoho shujiiIkenshoJoho = shujiiIkenshoIraiJoho.getSeishinTechoNini(shujiiIkenshoJohoIdentifier);
         List<ShujiiIkenshoIkenItem> 要介護認定主治医意見書意見項目リスト = shujiiIkenshoJoho.getShujiiIkenshoIkenItemList();
         List<ShujiiIkenshoKinyuItem> 要介護認定主治医意見書記入項目リスト = shujiiIkenshoJoho.getShujiiIkenshoKinyuItemList();
         連番リスト初期化処理();
-        edit意見項目(要介護認定主治医意見書意見項目リスト, 管理番号, 履歴番号);
-        edit記入項目(要介護認定主治医意見書記入項目リスト, 管理番号, 履歴番号);
+        edit意見項目(要介護認定主治医意見書意見項目リスト);
+        edit記入項目(要介護認定主治医意見書記入項目リスト);
         viewStateSave(ninteiShinseiJohoBusiness,
                 shujiiIkenshoIraiJoho, shujiiIkenshoJoho,
                 要介護認定主治医意見書意見項目リスト, 要介護認定主治医意見書記入項目リスト);
     }
 
-    private void viewStateSave(NinteiShinseiJoho ninteiShinseiJohoBusiness, ShujiiIkenshoIraiJoho shujiiIkenshoIraiJoho, ShujiiIkenshoJoho shujiiIkenshoJoho, List<ShujiiIkenshoIkenItem> 要介護認定主治医意見書意見項目リスト, List<ShujiiIkenshoKinyuItem> 要介護認定主治医意見書記入項目リスト) {
+    private void viewStateSave(NinteiShinseiJoho ninteiShinseiJohoBusiness, ShujiiIkenshoIraiJoho shujiiIkenshoIraiJoho
+            , ShujiiIkenshoJoho shujiiIkenshoJoho, List<ShujiiIkenshoIkenItem> 要介護認定主治医意見書意見項目リスト
+            , List<ShujiiIkenshoKinyuItem> 要介護認定主治医意見書記入項目リスト) {
         for (ShujiiIkenshoIkenItem item : 要介護認定主治医意見書意見項目リスト) {
             shujiiIkenshoJoho.createBuilderForEdit().setShujiiIkenshoIkenItem(item);
         }
@@ -205,15 +187,24 @@ public class SeikatsuServiceIkenHandler {
         ViewStateHolder.put(ViewStateKeys.主治医意見書登録_意見書情報, ninteiShinseiJohoBusiness);
     }
 
-    private void edit意見項目(List<ShujiiIkenshoIkenItem> 要介護認定主治医意見書意見項目リスト, ShinseishoKanriNo 管理番号, int 履歴番号) {
+    private void edit意見項目(List<ShujiiIkenshoIkenItem> 要介護認定主治医意見書意見項目リスト) {
         for (ShujiiIkenshoIkenItem item : 要介護認定主治医意見書意見項目リスト) {
-
+            edit移動エリアの意見項目(item);
+            edit栄養_食生活エリアの意見項目編集(item);
+            edit現在あるかまたは今後発生する可能性の高い状態とその対処方針エリアの意見項目編集(item);
+            editサービス利用による生活機能の維持_改善の見通しエリアの意見項目編集(item);
+            edit医学的管理の必要性エリアの意見項目編集_1(item);
+            editサービス提供時における医学的観点からの留意点エリアの意見項目編集(item);
+            edit感染症の有無エリアの意見項目編集(item);
         }
     }
 
-    private void edit記入項目(List<ShujiiIkenshoKinyuItem> 要介護認定主治医意見書記入項目リスト, ShinseishoKanriNo 管理番号, int 履歴番号) {
+    private void edit記入項目(List<ShujiiIkenshoKinyuItem> 要介護認定主治医意見書記入項目リスト) {
         for (ShujiiIkenshoKinyuItem item : 要介護認定主治医意見書記入項目リスト) {
-
+            edit現在あるかまたは今後発生する可能性の高い状態とその対処方針エリアの記入項目編集(item);
+            edit医学的管理の必要性エリアの記入項目編集(item);
+            editサービス提供時における医学的観点からの留意点エリアの記入項目編集(item);
+            edit感染症の有無エリアの記入項目編集(item);
         }
     }
 
@@ -641,7 +632,8 @@ public class SeikatsuServiceIkenHandler {
         }
     }
 
-    private List<ShujiiIkenshoIkenItem> 意見項目初期化編集(List<ShujiiIkenshoIkenItem> 要介護認定主治医意見書意見項目リスト, ShinseishoKanriNo 管理番号, int 履歴番号) {
+    private List<ShujiiIkenshoIkenItem> 意見項目初期化編集(List<ShujiiIkenshoIkenItem> 要介護認定主治医意見書意見項目リスト
+            , ShinseishoKanriNo 管理番号, int 履歴番号) {
         List<ShujiiIkenshoIkenItem> result = new ArrayList();
         boolean isNotExits = false;
         ShujiiIkenshoIkenItem itemTemp;
@@ -655,7 +647,7 @@ public class SeikatsuServiceIkenHandler {
                 }
             }
             if (isNotExits && !itemTemp.isAdded()) {
-                itemTemp.modifiedModel();
+                itemTemp = itemTemp.modifiedModel();
             }
             if (isNotExits) {
                 result.add(itemTemp);
@@ -671,7 +663,8 @@ public class SeikatsuServiceIkenHandler {
         return result;
     }
 
-    private List<ShujiiIkenshoKinyuItem> 記入項目初期化編集(List<ShujiiIkenshoKinyuItem> 要介護認定主治医意見書記入項目リスト, ShinseishoKanriNo 管理番号, int 履歴番号) {
+    private List<ShujiiIkenshoKinyuItem> 記入項目初期化編集(List<ShujiiIkenshoKinyuItem> 要介護認定主治医意見書記入項目リスト
+            , ShinseishoKanriNo 管理番号, int 履歴番号) {
         List<ShujiiIkenshoKinyuItem> result = new ArrayList();
         boolean isNotExits = false;
         ShujiiIkenshoKinyuItem itemTemp;
@@ -685,7 +678,7 @@ public class SeikatsuServiceIkenHandler {
                 }
             }
             if (isNotExits && !itemTemp.isAdded()) {
-                itemTemp.modifiedModel();
+                itemTemp = itemTemp.modifiedModel();
             }
             if (!isNotExits) {
                 result.add(itemTemp);
@@ -701,87 +694,62 @@ public class SeikatsuServiceIkenHandler {
 
     private void 移動エリアの意見項目初期化編集(ShujiiIkenshoIkenItem item) {
         if (64 == item.get連番()) {
-            switch (item.get意見項目().toString()) {
-                case STR_1:
-                    div.getRadOkugaiHokou().setSelectedKey(KEY0);
-                    break;
-                case STR_2:
-                    div.getRadOkugaiHokou().setSelectedKey(KEY1);
-                    break;
-                case STR_3:
-                    div.getRadOkugaiHokou().setSelectedKey(KEY2);
-                    break;
-                default:
-                    div.getRadOkugaiHokou().setSelectedKey(KEY0);
-                    break;
+            if (RString.isNullOrEmpty(item.get意見項目())) {
+                div.getRadOkugaiHokou().setSelectedKey(KEY0);
+            } else if (RSTR_1.equals(item.get意見項目())) {
+                div.getRadOkugaiHokou().setSelectedKey(KEY0);
+            } else if (RSTR_2.equals(item.get意見項目())) {
+                div.getRadOkugaiHokou().setSelectedKey(KEY1);
+            } else if (RSTR_3.equals(item.get意見項目())) {
+                div.getRadOkugaiHokou().setSelectedKey(KEY2);
             }
         }
         if (65 == item.get連番()) {
-            switch (item.get意見項目().toString()) {
-                case STR_1:
-                    div.getRadKurumaisuShiyo().setSelectedKey(KEY0);
-                    break;
-                case STR_2:
-                    div.getRadKurumaisuShiyo().setSelectedKey(KEY1);
-                    break;
-                case STR_3:
-                    div.getRadKurumaisuShiyo().setSelectedKey(KEY2);
-                    break;
-                default:
-                    div.getRadKurumaisuShiyo().setSelectedKey(KEY0);
-                    break;
+            if (RString.isNullOrEmpty(item.get意見項目())) {
+                div.getRadKurumaisuShiyo().setSelectedKey(KEY0);
+            } else if (RSTR_1.equals(item.get意見項目())) {
+                div.getRadKurumaisuShiyo().setSelectedKey(KEY0);
+            } else if (RSTR_2.equals(item.get意見項目())) {
+                div.getRadKurumaisuShiyo().setSelectedKey(KEY1);
+            } else if (RSTR_3.equals(item.get意見項目())) {
+                div.getRadKurumaisuShiyo().setSelectedKey(KEY2);
             }
         }
+
         List<RString> keys = new ArrayList();
-        if (66 == item.get連番()) {
-            if (IkenKomoku13.チェック有.getコード().equals(item.get意見項目())) {
-                keys.add(KEY0);
-            }
+        if (66 == item.get連番() && IkenKomoku13.チェック有.getコード().equals(item.get意見項目())) {
+            keys.add(KEY0);
         }
-        if (67 == item.get連番()) {
-            if (IkenKomoku13.チェック有.getコード().equals(item.get意見項目())) {
-                keys.add(KEY1);
-            }
+        if (67 == item.get連番() && IkenKomoku13.チェック有.getコード().equals(item.get意見項目())) {
+            keys.add(KEY1);
         }
-        if (68 == item.get連番()) {
-            if (IkenKomoku13.チェック有.getコード().equals(item.get意見項目())) {
-                keys.add(KEY2);
-            }
+        if (68 == item.get連番() && IkenKomoku13.チェック有.getコード().equals(item.get意見項目())) {
+            keys.add(KEY2);
         }
         div.getChkHokohojoShiyo().setSelectedItemsByKey(keys);
     }
 
     private void 栄養_食生活エリアの意見項目初期化編集(ShujiiIkenshoIkenItem item) {
         if (69 == item.get連番()) {
-            switch (item.get意見項目().toString()) {
-                case STR_1:
-                    div.getRadShokujiKoi().setSelectedKey(KEY0);
-                    break;
-                case STR_2:
-                    div.getRadShokujiKoi().setSelectedKey(KEY1);
-                    break;
-                case STR_9:
-                    div.getRadShokujiKoi().setSelectedKey(KEY2);
-                    break;
-                default:
-                    div.getRadShokujiKoi().setSelectedKey(KEY2);
-                    break;
+            if (RString.isNullOrEmpty(item.get意見項目())) {
+                div.getRadShokujiKoi().setSelectedKey(KEY0);
+            } else if (RSTR_1.equals(item.get意見項目())) {
+                div.getRadShokujiKoi().setSelectedKey(KEY0);
+            } else if (RSTR_2.equals(item.get意見項目())) {
+                div.getRadShokujiKoi().setSelectedKey(KEY1);
+            } else if (RSTR_9.equals(item.get意見項目())) {
+                div.getRadShokujiKoi().setSelectedKey(KEY2);
             }
         }
         if (70 == item.get連番()) {
-            switch (item.get意見項目().toString()) {
-                case STR_1:
-                    div.getRadGenzaiEiyoJotai().setSelectedKey(KEY0);
-                    break;
-                case STR_2:
-                    div.getRadGenzaiEiyoJotai().setSelectedKey(KEY1);
-                    break;
-                default:
-                    div.getRadGenzaiEiyoJotai().setSelectedKey(KEY0);
-                    break;
+            if (RString.isNullOrEmpty(item.get意見項目())) {
+                div.getRadGenzaiEiyoJotai().setSelectedKey(KEY0);
+            } else if (RSTR_1.equals(item.get意見項目())) {
+                div.getRadGenzaiEiyoJotai().setSelectedKey(KEY0);
+            } else if (RSTR_2.equals(item.get意見項目())) {
+                div.getRadGenzaiEiyoJotai().setSelectedKey(KEY1);
             }
         }
-
     }
 
     private void 栄養_食生活エリアの記入項目初期化編集(ShujiiIkenshoKinyuItem item) {
@@ -793,77 +761,49 @@ public class SeikatsuServiceIkenHandler {
 
     private void 現在あるかまたは今後発生する可能性の高い状態とその対処方針エリアの意見項目初期化編集(ShujiiIkenshoIkenItem item) {
         List<RString> keys = new ArrayList();
-        if (71 == item.get連番()) {
-            if (IkenKomoku13.チェック有.getコード().equals(item.get意見項目())) {
-                keys.add(KEY0);
-            }
+        if (71 == item.get連番() && IkenKomoku13.チェック有.getコード().equals(item.get意見項目())) {
+            keys.add(KEY0);
         }
-        if (72 == item.get連番()) {
-            if (IkenKomoku13.チェック有.getコード().equals(item.get意見項目())) {
-                keys.add(KEY1);
-            }
+        if (72 == item.get連番() && IkenKomoku13.チェック有.getコード().equals(item.get意見項目())) {
+            keys.add(KEY1);
         }
-        if (73 == item.get連番()) {
-            if (IkenKomoku13.チェック有.getコード().equals(item.get意見項目())) {
-                keys.add(KEY2);
-            }
+        if (73 == item.get連番() && IkenKomoku13.チェック有.getコード().equals(item.get意見項目())) {
+            keys.add(KEY2);
         }
-        if (74 == item.get連番()) {
-            if (IkenKomoku13.チェック有.getコード().equals(item.get意見項目())) {
-                keys.add(KEY3);
-            }
+        if (74 == item.get連番() && IkenKomoku13.チェック有.getコード().equals(item.get意見項目())) {
+            keys.add(KEY3);
         }
-        if (75 == item.get連番()) {
-            if (IkenKomoku13.チェック有.getコード().equals(item.get意見項目())) {
-                keys.add(KEY4);
-            }
+        if (75 == item.get連番() && IkenKomoku13.チェック有.getコード().equals(item.get意見項目())) {
+            keys.add(KEY4);
         }
-        if (76 == item.get連番()) {
-            if (IkenKomoku13.チェック有.getコード().equals(item.get意見項目())) {
-                keys.add(KEY5);
-            }
+        if (76 == item.get連番() && IkenKomoku13.チェック有.getコード().equals(item.get意見項目())) {
+            keys.add(KEY5);
         }
-        if (77 == item.get連番()) {
-            if (IkenKomoku13.チェック有.getコード().equals(item.get意見項目())) {
-                keys.add(KEY6);
-            }
+        if (77 == item.get連番() && IkenKomoku13.チェック有.getコード().equals(item.get意見項目())) {
+            keys.add(KEY6);
         }
-        if (78 == item.get連番()) {
-            if (IkenKomoku13.チェック有.getコード().equals(item.get意見項目())) {
-                keys.add(KEY7);
-            }
+        if (78 == item.get連番() && IkenKomoku13.チェック有.getコード().equals(item.get意見項目())) {
+            keys.add(KEY7);
         }
-        if (79 == item.get連番()) {
-            if (IkenKomoku13.チェック有.getコード().equals(item.get意見項目())) {
-                keys.add(KEY8);
-            }
+        if (79 == item.get連番() && IkenKomoku13.チェック有.getコード().equals(item.get意見項目())) {
+            keys.add(KEY8);
         }
-        if (80 == item.get連番()) {
-            if (IkenKomoku13.チェック有.getコード().equals(item.get意見項目())) {
-                keys.add(KEY9);
-            }
+        if (80 == item.get連番() && IkenKomoku13.チェック有.getコード().equals(item.get意見項目())) {
+            keys.add(KEY9);
         }
-        if (81 == item.get連番()) {
-            if (IkenKomoku13.チェック有.getコード().equals(item.get意見項目())) {
-                keys.add(KEY10);
-            }
+        if (81 == item.get連番() && IkenKomoku13.チェック有.getコード().equals(item.get意見項目())) {
+            keys.add(KEY10);
         }
-        if (82 == item.get連番()) {
-            if (IkenKomoku13.チェック有.getコード().equals(item.get意見項目())) {
-                keys.add(KEY11);
-            }
+        if (82 == item.get連番() && IkenKomoku13.チェック有.getコード().equals(item.get意見項目())) {
+            keys.add(KEY11);
         }
-        if (83 == item.get連番()) {
-            if (IkenKomoku13.チェック有.getコード().equals(item.get意見項目())) {
-                keys.add(KEY12);
-            }
+        if (83 == item.get連番() && IkenKomoku13.チェック有.getコード().equals(item.get意見項目())) {
+            keys.add(KEY12);
         }
         div.getChkHasseiShojo().setSelectedItemsByKey(keys);
         List<RString> keys1 = new ArrayList();
-        if (84 == item.get連番()) {
-            if (IkenKomoku13.チェック有.getコード().equals(item.get意見項目())) {
-                keys1.add(KEY0);
-            }
+        if (84 == item.get連番() && IkenKomoku13.チェック有.getコード().equals(item.get意見項目())) {
+            keys1.add(KEY0);
         }
         div.getChkJotaiSonota().setSelectedItemsByKey(keys1);
     }
@@ -880,142 +820,93 @@ public class SeikatsuServiceIkenHandler {
 
     private void サービス利用による生活機能の維持_改善の見通しエリアの意見項目初期化編集(ShujiiIkenshoIkenItem item) {
         if (85 == item.get連番()) {
-            switch (item.get意見項目().toString()) {
-                case STR_1:
-                    div.getRadSeikatsuKinoMitoshi().setSelectedKey(KEY0);
-                    break;
-                case STR_2:
-                    div.getRadSeikatsuKinoMitoshi().setSelectedKey(KEY1);
-                    break;
-                case STR_3:
-                    div.getRadSeikatsuKinoMitoshi().setSelectedKey(KEY2);
-                    break;
-                default:
-                    div.getRadSeikatsuKinoMitoshi().setSelectedKey(KEY0);
-                    break;
+            if (RString.isNullOrEmpty(item.get意見項目())) {
+                div.getRadSeikatsuKinoMitoshi().setSelectedKey(KEY0);
+            } else if (RSTR_1.equals(item.get意見項目())) {
+                div.getRadSeikatsuKinoMitoshi().setSelectedKey(KEY0);
+            } else if (RSTR_2.equals(item.get意見項目())) {
+                div.getRadSeikatsuKinoMitoshi().setSelectedKey(KEY1);
+            } else if (RSTR_3.equals(item.get意見項目())) {
+                div.getRadSeikatsuKinoMitoshi().setSelectedKey(KEY2);
             }
         }
     }
 
     private void 医学的管理の必要性エリアの意見項目初期化編集_1(ShujiiIkenshoIkenItem item) {
         List<RString> keys = new ArrayList();
-        if (86 == item.get連番()) {
-            if (IkenKomoku13.チェック有.getコード().equals(item.get意見項目())) {
-                keys.add(KEY0);
-            }
+        if (86 == item.get連番() && IkenKomoku13.チェック有.getコード().equals(item.get意見項目())) {
+            keys.add(KEY0);
         }
-        if (87 == item.get連番()) {
-            if (IkenKomoku13.チェック有.getコード().equals(item.get意見項目())) {
-                keys.add(KEY1);
-            }
+        if (87 == item.get連番() && IkenKomoku13.チェック有.getコード().equals(item.get意見項目())) {
+            keys.add(KEY1);
         }
-        if (88 == item.get連番()) {
-            if (IkenKomoku13.チェック有.getコード().equals(item.get意見項目())) {
-                keys.add(KEY2);
-            }
+        if (88 == item.get連番() && IkenKomoku13.チェック有.getコード().equals(item.get意見項目())) {
+            keys.add(KEY2);
         }
-        if (89 == item.get連番()) {
-            if (IkenKomoku13.チェック有.getコード().equals(item.get意見項目())) {
-                keys.add(KEY3);
-            }
+        if (89 == item.get連番() && IkenKomoku13.チェック有.getコード().equals(item.get意見項目())) {
+            keys.add(KEY3);
         }
-        if (90 == item.get連番()) {
-            if (IkenKomoku13.チェック有.getコード().equals(item.get意見項目())) {
-                keys.add(KEY4);
-            }
+        if (90 == item.get連番() && IkenKomoku13.チェック有.getコード().equals(item.get意見項目())) {
+            keys.add(KEY4);
         }
-        if (91 == item.get連番()) {
-            if (IkenKomoku13.チェック有.getコード().equals(item.get意見項目())) {
-                keys.add(KEY5);
-            }
+        if (91 == item.get連番() && IkenKomoku13.チェック有.getコード().equals(item.get意見項目())) {
+            keys.add(KEY5);
         }
-        if (92 == item.get連番()) {
-            if (IkenKomoku13.チェック有.getコード().equals(item.get意見項目())) {
-                keys.add(KEY6);
-            }
+        if (92 == item.get連番() && IkenKomoku13.チェック有.getコード().equals(item.get意見項目())) {
+            keys.add(KEY6);
         }
-        if (93 == item.get連番()) {
-            if (IkenKomoku13.チェック有.getコード().equals(item.get意見項目())) {
-                keys.add(KEY7);
-            }
+        if (93 == item.get連番() && IkenKomoku13.チェック有.getコード().equals(item.get意見項目())) {
+            keys.add(KEY7);
         }
-        if (94 == item.get連番()) {
-            if (IkenKomoku13.チェック有.getコード().equals(item.get意見項目())) {
-                keys.add(KEY8);
-            }
+        if (94 == item.get連番() && IkenKomoku13.チェック有.getコード().equals(item.get意見項目())) {
+            keys.add(KEY8);
         }
-        if (95 == item.get連番()) {
-            if (IkenKomoku13.チェック有.getコード().equals(item.get意見項目())) {
-                keys.add(KEY9);
-            }
+        if (95 == item.get連番() && IkenKomoku13.チェック有.getコード().equals(item.get意見項目())) {
+            keys.add(KEY9);
         }
-        if (96 == item.get連番()) {
-            if (IkenKomoku13.チェック有.getコード().equals(item.get意見項目())) {
-                keys.add(KEY10);
-            }
+        if (96 == item.get連番() && IkenKomoku13.チェック有.getコード().equals(item.get意見項目())) {
+            keys.add(KEY10);
         }
-        if (97 == item.get連番()) {
-            if (IkenKomoku13.チェック有.getコード().equals(item.get意見項目())) {
-                keys.add(KEY11);
-            }
+        if (97 == item.get連番() && IkenKomoku13.チェック有.getコード().equals(item.get意見項目())) {
+            keys.add(KEY11);
         }
-        if (98 == item.get連番()) {
-            if (IkenKomoku13.チェック有.getコード().equals(item.get意見項目())) {
-                keys.add(KEY12);
-            }
+        if (98 == item.get連番() && IkenKomoku13.チェック有.getコード().equals(item.get意見項目())) {
+            keys.add(KEY12);
         }
         医学的管理の必要性エリアの意見項目初期化編集_2(keys, item);
     }
 
     private void 医学的管理の必要性エリアの意見項目初期化編集_2(List<RString> keys, ShujiiIkenshoIkenItem item) {
-        if (99 == item.get連番()) {
-            if (IkenKomoku13.チェック有.getコード().equals(item.get意見項目())) {
-                keys.add(KEY13);
-            }
+        if (99 == item.get連番() && IkenKomoku13.チェック有.getコード().equals(item.get意見項目())) {
+            keys.add(KEY13);
         }
-        if (100 == item.get連番()) {
-            if (IkenKomoku13.チェック有.getコード().equals(item.get意見項目())) {
-                keys.add(KEY14);
-            }
+        if (100 == item.get連番() && IkenKomoku13.チェック有.getコード().equals(item.get意見項目())) {
+            keys.add(KEY14);
         }
-        if (101 == item.get連番()) {
-            if (IkenKomoku13.チェック有.getコード().equals(item.get意見項目())) {
-                keys.add(KEY15);
-            }
+        if (101 == item.get連番() && IkenKomoku13.チェック有.getコード().equals(item.get意見項目())) {
+            keys.add(KEY15);
         }
-        if (102 == item.get連番()) {
-            if (IkenKomoku13.チェック有.getコード().equals(item.get意見項目())) {
-                keys.add(KEY16);
-            }
+        if (102 == item.get連番() && IkenKomoku13.チェック有.getコード().equals(item.get意見項目())) {
+            keys.add(KEY16);
         }
-        if (103 == item.get連番()) {
-            if (IkenKomoku13.チェック有.getコード().equals(item.get意見項目())) {
-                keys.add(KEY17);
-            }
+        if (103 == item.get連番() && IkenKomoku13.チェック有.getコード().equals(item.get意見項目())) {
+            keys.add(KEY17);
         }
-        if (104 == item.get連番()) {
-            if (IkenKomoku13.チェック有.getコード().equals(item.get意見項目())) {
-                keys.add(KEY18);
-            }
+        if (104 == item.get連番() && IkenKomoku13.チェック有.getコード().equals(item.get意見項目())) {
+            keys.add(KEY18);
         }
-        if (105 == item.get連番()) {
-            if (IkenKomoku13.チェック有.getコード().equals(item.get意見項目())) {
-                keys.add(KEY19);
-            }
+        if (105 == item.get連番() && IkenKomoku13.チェック有.getコード().equals(item.get意見項目())) {
+            keys.add(KEY19);
         }
         div.getChkIgakutekiKanri().setSelectedItemsByKey(keys);
         List<RString> keys1 = new ArrayList();
-        if (106 == item.get連番()) {
-            if (IkenKomoku13.チェック有.getコード().equals(item.get意見項目())) {
-                keys1.add(KEY0);
-            }
+        if (106 == item.get連番() && IkenKomoku13.チェック有.getコード().equals(item.get意見項目())) {
+            keys1.add(KEY0);
         }
         div.getChkSonotaIryoService().setSelectedItemsByKey(keys1);
         List<RString> keys2 = new ArrayList();
-        if (107 == item.get連番()) {
-            if (IkenKomoku13.チェック有.getコード().equals(item.get意見項目())) {
-                keys2.add(KEY0);
-            }
+        if (107 == item.get連番() && IkenKomoku13.チェック有.getコード().equals(item.get意見項目())) {
+            keys2.add(KEY0);
         }
         div.getChkSonotaIryoServiceHitsuyoSei().setSelectedItemsByKey(keys2);
     }
@@ -1029,83 +920,58 @@ public class SeikatsuServiceIkenHandler {
 
     private void サービス提供時における医学的観点からの留意点エリアの意見項目初期化編集(ShujiiIkenshoIkenItem item) {
         if (108 == item.get連番()) {
-            switch (item.get意見項目().toString()) {
-                case STR_1:
-                    div.getRadKetsuatsu().setSelectedKey(KEY0);
-                    break;
-                case STR_2:
-                    div.getRadKetsuatsu().setSelectedKey(KEY1);
-                    break;
-                case STR_3:
-                    div.getRadKetsuatsu().setSelectedKey(KEY2);
-                    break;
-                default:
-                    div.getRadKetsuatsu().setSelectedKey(KEY0);
-                    break;
+            if (RString.isNullOrEmpty(item.get意見項目())) {
+                div.getRadKetsuatsu().setSelectedKey(KEY0);
+            } else if (RSTR_1.equals(item.get意見項目())) {
+                div.getRadKetsuatsu().setSelectedKey(KEY0);
+            } else if (RSTR_2.equals(item.get意見項目())) {
+                div.getRadKetsuatsu().setSelectedKey(KEY1);
+            } else if (RSTR_3.equals(item.get意見項目())) {
+                div.getRadKetsuatsu().setSelectedKey(KEY2);
             }
         }
         if (109 == item.get連番()) {
-            switch (item.get意見項目().toString()) {
-                case STR_1:
-                    div.getRadIdo().setSelectedKey(KEY0);
-                    break;
-                case STR_2:
-                    div.getRadIdo().setSelectedKey(KEY1);
-                    break;
-                case STR_3:
-                    div.getRadIdo().setSelectedKey(KEY2);
-                    break;
-                default:
-                    div.getRadIdo().setSelectedKey(KEY0);
-                    break;
+            if (RString.isNullOrEmpty(item.get意見項目())) {
+                div.getRadIdo().setSelectedKey(KEY0);
+            } else if (RSTR_1.equals(item.get意見項目())) {
+                div.getRadIdo().setSelectedKey(KEY0);
+            } else if (RSTR_2.equals(item.get意見項目())) {
+                div.getRadIdo().setSelectedKey(KEY1);
+            } else if (RSTR_3.equals(item.get意見項目())) {
+                div.getRadIdo().setSelectedKey(KEY2);
             }
         }
         if (110 == item.get連番()) {
-            switch (item.get意見項目().toString()) {
-                case STR_1:
-                    div.getRadSesshoku().setSelectedKey(KEY0);
-                    break;
-                case STR_2:
-                    div.getRadSesshoku().setSelectedKey(KEY1);
-                    break;
-                case STR_3:
-                    div.getRadSesshoku().setSelectedKey(KEY2);
-                    break;
-                default:
-                    div.getRadSesshoku().setSelectedKey(KEY0);
-                    break;
+            if (RString.isNullOrEmpty(item.get意見項目())) {
+                div.getRadSesshoku().setSelectedKey(KEY0);
+            } else if (RSTR_1.equals(item.get意見項目())) {
+                div.getRadSesshoku().setSelectedKey(KEY0);
+            } else if (RSTR_2.equals(item.get意見項目())) {
+                div.getRadSesshoku().setSelectedKey(KEY1);
+            } else if (RSTR_3.equals(item.get意見項目())) {
+                div.getRadSesshoku().setSelectedKey(KEY2);
             }
         }
         if (111 == item.get連番()) {
-            switch (item.get意見項目().toString()) {
-                case STR_1:
-                    div.getRadUndo().setSelectedKey(KEY0);
-                    break;
-                case STR_2:
-                    div.getRadUndo().setSelectedKey(KEY1);
-                    break;
-                case STR_3:
-                    div.getRadUndo().setSelectedKey(KEY2);
-                    break;
-                default:
-                    div.getRadUndo().setSelectedKey(KEY0);
-                    break;
+            if (RString.isNullOrEmpty(item.get意見項目())) {
+                div.getRadUndo().setSelectedKey(KEY0);
+            } else if (RSTR_1.equals(item.get意見項目())) {
+                div.getRadUndo().setSelectedKey(KEY0);
+            } else if (RSTR_2.equals(item.get意見項目())) {
+                div.getRadUndo().setSelectedKey(KEY1);
+            } else if (RSTR_3.equals(item.get意見項目())) {
+                div.getRadUndo().setSelectedKey(KEY2);
             }
         }
         if (112 == item.get連番()) {
-            switch (item.get意見項目().toString()) {
-                case STR_1:
-                    div.getRadEnka().setSelectedKey(KEY0);
-                    break;
-                case STR_2:
-                    div.getRadEnka().setSelectedKey(KEY1);
-                    break;
-                case STR_3:
-                    div.getRadEnka().setSelectedKey(KEY2);
-                    break;
-                default:
-                    div.getRadEnka().setSelectedKey(KEY0);
-                    break;
+            if (RString.isNullOrEmpty(item.get意見項目())) {
+                div.getRadEnka().setSelectedKey(KEY0);
+            } else if (RSTR_1.equals(item.get意見項目())) {
+                div.getRadEnka().setSelectedKey(KEY0);
+            } else if (RSTR_2.equals(item.get意見項目())) {
+                div.getRadEnka().setSelectedKey(KEY1);
+            } else if (RSTR_3.equals(item.get意見項目())) {
+                div.getRadEnka().setSelectedKey(KEY2);
             }
         }
     }
@@ -1139,19 +1005,14 @@ public class SeikatsuServiceIkenHandler {
 
     private void 感染症の有無エリアの意見項目初期化編集(ShujiiIkenshoIkenItem item) {
         if (113 == item.get連番()) {
-            switch (item.get意見項目().toString()) {
-                case STR_1:
-                    div.getRadKansenshoUmu().setSelectedKey(KEY0);
-                    break;
-                case STR_2:
-                    div.getRadKansenshoUmu().setSelectedKey(KEY1);
-                    break;
-                case STR_3:
-                    div.getRadKansenshoUmu().setSelectedKey(KEY2);
-                    break;
-                default:
-                    div.getRadKansenshoUmu().setSelectedKey(KEY0);
-                    break;
+            if (RString.isNullOrEmpty(item.get意見項目())) {
+                div.getRadKansenshoUmu().setSelectedKey(KEY0);
+            } else if (RSTR_1.equals(item.get意見項目())) {
+                div.getRadKansenshoUmu().setSelectedKey(KEY0);
+            } else if (RSTR_2.equals(item.get意見項目())) {
+                div.getRadKansenshoUmu().setSelectedKey(KEY1);
+            } else if (RSTR_3.equals(item.get意見項目())) {
+                div.getRadKansenshoUmu().setSelectedKey(KEY2);
             }
         }
     }
@@ -1227,5 +1088,4 @@ public class SeikatsuServiceIkenHandler {
         連番_記入項目リスト.add(22);
         連番_記入項目リスト.add(23);
     }
-
 }

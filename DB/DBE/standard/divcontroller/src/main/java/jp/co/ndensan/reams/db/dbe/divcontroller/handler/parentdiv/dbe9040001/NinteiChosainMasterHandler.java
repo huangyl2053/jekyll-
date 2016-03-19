@@ -352,7 +352,6 @@ public class NinteiChosainMasterHandler {
      * 調査員情報登録エリアが活性に設定します。
      */
     public void setDisabledFalseToChosainJohoToMeisai() {
-        div.getChosainJohoInput().getCcdChiku().applyNoOptionCodeMaster().load(SubGyomuCode.DBE認定支援, CHIKU_CODE_SHUBETSU);
         div.getChosainJohoInput().getTxtShichoson().setDisabled(false);
         div.getChosainJohoInput().getTxtChosaItakusaki().setDisabled(false);
         div.getChosainJohoInput().getTxtChosainCode().setDisabled(false);
@@ -386,7 +385,7 @@ public class NinteiChosainMasterHandler {
         div.getChosainJohoInput().getTxtChosainShimei().clearValue();
         div.getChosainJohoInput().getTxtChosainKanaShimei().clearValue();
         div.getChosainJohoInput().getRadSeibetsu().setSelectedIndex(0);
-        div.getChosainJohoInput().getCcdChiku().clear();
+        div.getChosainJohoInput().getCcdChiku().clearDisplayedValues();
         setDdlChosainShikaku();
         div.getChosainJohoInput().getDdlChosainShikaku().setSelectedIndex(0);
         div.getChosainJohoInput().getTxtChosaKanoNinzu().clearValue();
@@ -396,6 +395,7 @@ public class NinteiChosainMasterHandler {
         div.getChosainJohoInput().getTxtFaxNo().clearDomain();
         div.getChosainJohoInput().getTextBoxShozokuKikan().clearDomain();
         div.getChosainJohoInput().getRadChosainJokyo().setSelectedIndex(0);
+        div.getChosainJohoInput().getCcdChiku().applyNoOptionCodeMaster().load(SubGyomuCode.DBE認定支援, CHIKU_CODE_SHUBETSU);
     }
 
     /**

@@ -258,6 +258,50 @@ public class ShokanShinseiBuilder {
     }
 
     /**
+     * 住宅住所変更を設定します。
+     *
+     * @param 住宅住所変更 住宅住所変更
+     * @return {@link ShokanShinseiBuilder}
+     */
+    public ShokanShinseiBuilder set住宅住所変更(boolean 住宅住所変更) {
+        entity.setJutakuJushoHenko(住宅住所変更);
+        return this;
+    }
+    
+    /**
+     * 要介護状態３段階変更を設定します。
+     *
+     * @param 要介護状態３段階変更 要介護状態３段階変更
+     * @return {@link ShokanShinseiBuilder}
+     */
+    public ShokanShinseiBuilder set要介護状態３段階変更(boolean 要介護状態３段階変更) {
+        entity.setYokaigo3DankaiHenko(要介護状態３段階変更);
+        return this;
+    }
+    
+    /**
+     * 審査結果を設定します。
+     *
+     * @param 審査結果 審査結果
+     * @return {@link ShokanShinseiBuilder}
+     */
+    public ShokanShinseiBuilder set審査結果(RString 審査結果) {
+        entity.setShinsaKekka(審査結果);
+        return this;
+    }
+    
+    /**
+     * 審査年月日を設定します。
+     *
+     * @param 審査年月日 審査年月日
+     * @return {@link ShokanShinseiBuilder}
+     */
+    public ShokanShinseiBuilder set審査年月日(FlexibleDate 審査年月日) {
+        entity.setShinsaYMD(審査年月日);
+        return this;
+    }
+    
+    /**
      * 審査方法区分を設定します。
      *
      * @param 審査方法区分 審査方法区分

@@ -105,4 +105,38 @@ public class ChohyoSeigyoHanyoManager {
         }
         return 1 == dac.save(帳票制御汎用.toEntity());
     }
+
+    /**
+     * 主キーに合致する表示制御に必要な情報を返します。
+     *
+     * @param サブ業務コード SubGyomuCode
+     * @param 帳票分類IDList ChohyoBunruiIDList
+     * @param 管理年度 kanriNendo
+     * @param 項目名 KomokuName
+     * @return List<ChohyoSeigyoHanyo>
+     */
+    @Transaction
+    public List<ChohyoSeigyoHanyo> get表示制御に必要な情報(
+            SubGyomuCode サブ業務コード,
+            List<ReportId> 帳票分類IDList,
+            FlexibleYear 管理年度,
+            RString 項目名) {
+        requireNonNull(サブ業務コード, UrSystemErrorMessages.値がnull.getReplacedMessage("サブ業務コード"));
+        requireNonNull(帳票分類IDList, UrSystemErrorMessages.値がnull.getReplacedMessage("帳票分類IDList"));
+        requireNonNull(管理年度, UrSystemErrorMessages.値がnull.getReplacedMessage("管理年度"));
+        requireNonNull(項目名, UrSystemErrorMessages.値がnull.getReplacedMessage("項目名"));
+
+        List<DbT7067ChohyoSeigyoHanyoEntity> entityList = dac.get表示制御に必要な情報(
+                サブ業務コード,
+                帳票分類IDList,
+                管理年度,
+                項目名);
+        List<ChohyoSeigyoHanyo> businessList = new ArrayList<>();
+
+        for (DbT7067ChohyoSeigyoHanyoEntity entity : entityList) {
+            entity.initializeMd5();
+            businessList.add(new ChohyoSeigyoHanyo(entity));
+        }
+        return businessList;
+    }
 }

@@ -17,7 +17,8 @@ public enum DBE2020010StateName implements IStateEnumerations {
     NoChange(""),
     更新("更新"),
     照会("照会"),
-    未定者("未定者");
+    未定者("未定者"),
+    完了("完了");
 
     private final RString name;
 
