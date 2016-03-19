@@ -13,6 +13,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
  */
 public enum ReportIdDBC {
 
+    DBC200014(new ReportId("DBC200014_KogakuKyufuTaishoshaIchiran"), new RString("高額介護サービス費給付対象者取込み")),
     DBC200051(new ReportId("DBC200051_KagoKetteitsuchishoTorikomiIchiranKohifutanshaBun"), new RString("過誤決定通知書情報取込一覧表【公費負担者分】")),
     /**
      * 住宅改修事前申請承認結果通知書の帳票ＩＤです。
