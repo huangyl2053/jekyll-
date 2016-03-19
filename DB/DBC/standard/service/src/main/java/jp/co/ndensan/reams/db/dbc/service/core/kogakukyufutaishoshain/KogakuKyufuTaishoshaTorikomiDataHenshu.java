@@ -28,6 +28,7 @@ public class KogakuKyufuTaishoshaTorikomiDataHenshu {
     private final DbT3104KokuhorenInterfaceKanriDac 国保連インターフェース管理Dac;
     private static final RString INDEX_2 = new RString("2");
     private static final RString INDEX_331 = new RString("331");
+    private static final Decimal Decimal_INDEX_1 = new Decimal("1");
     private static final int LIST_INDEX_1 = 1;
     private static final int LIST_INDEX_2 = 2;
     private static final int LIST_INDEX_3 = 3;
@@ -74,8 +75,11 @@ public class KogakuKyufuTaishoshaTorikomiDataHenshu {
         dbt3104entity.setShoriJotaiKubun(ShoriJotaiKubun.終了.getコード());
         dbt3104entity.setShoriJisshiTimestamp(YMDHMS.now());
         dbt3104entity.setSaiShoriKanoKubun(false);
-        // TODO 履歴番号
-        dbt3104entity.setShoriJikkoKaisu(Decimal.ZERO);
+        if (dbt3104entity.getShoriJikkoKaisu() != null) {
+            dbt3104entity.setShoriJikkoKaisu(dbt3104entity.getShoriJikkoKaisu().add(LIST_INDEX_1));
+        } else {
+            dbt3104entity.setShoriJikkoKaisu(Decimal_INDEX_1);
+        }
         dbt3104entity.setFileName1(fileNameList == null || fileNameList.isEmpty()
                 || fileNameList.get(0) == null ? RString.EMPTY : fileNameList.get(0));
         dbt3104entity.setFileName2(fileNameList == null || fileNameList.size() <= LIST_INDEX_1
