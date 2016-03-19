@@ -14,7 +14,7 @@
     <select id="selectChosyuHoho" parameterType="jp.co.ndensan.reams.db.dbb.definition.mybatisprm.kanri.ChosyuHohoHenkoMapperParameter" 
      resultMap="ChoshuHohoEntity"  fetchSize="500" >
           SELECT
-             <include refid="jp.co.ndensan.reams.db.dbb.persistence.db.mapper.basic.IDbT2001ChoshuHohoMapper.allColumns_DbT2001ChoshuHoho"/>,
+             T1.*,
              T2."choshuHoho3gat" AS "choshuHoho3gat"
         FROM
             (   SELECT
@@ -23,8 +23,8 @@
                 WHERE
                     rgdb."DbT2001ChoshuHoho"."fukaNendo" = #{fukaNendo}
                 AND rgdb."DbT2001ChoshuHoho"."hihokenshaNo" = #{hihokenshaNo}
-                ORDER BY rgdb."DbT2001ChoshuHoho"."rirekiNo" DESC
-            ) AS "DbT2001ChoshuHoho"
+                ORDER BY rgdb."DbT2001ChoshuHoho"."rirekiNo" DESC Limit 1
+            ) AS T1
         LEFT OUTER JOIN
             ( SELECT
                     "fukaNendo"         AS "fukaNendo" ,
@@ -35,8 +35,8 @@
               WHERE
                 "fukaNendo" = #{fukaNendoBak}
                 AND "hihokenshaNo" = #{hihokenshaNo}
-                ORDER BY "rirekiNo" DESC
+                ORDER BY "rirekiNo" DESC Limit 1
             )AS T2
-        ON "DbT2001ChoshuHoho"."hihokenshaNo" = T2."hihokenshaNo"
+        ON T1."hihokenshaNo" = T2."hihokenshaNo"
     </select>
 </mapper>
