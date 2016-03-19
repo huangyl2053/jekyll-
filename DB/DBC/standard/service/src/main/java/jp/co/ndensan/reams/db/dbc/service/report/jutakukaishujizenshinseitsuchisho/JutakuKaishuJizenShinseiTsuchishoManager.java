@@ -55,7 +55,9 @@ import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 public class JutakuKaishuJizenShinseiTsuchishoManager {
 
     private final MapperProvider mapperProvider;
-    private RString 汎用キー_文書番号;
+    private final RString 汎用キー_文書番号 = new RString("文書番号");
+
+    ;
 
     /**
      * コンストラクタです。
@@ -134,9 +136,12 @@ public class JutakuKaishuJizenShinseiTsuchishoManager {
                 .set業務固有キー利用区分(業務固有キー利用区分)
                 .set送付先利用区分(送付先利用区分)
                 .build();
+        SofubutsuAtesakiSource 送付物宛先 = null;
         List<IAtesaki> 宛先s = ShikibetsuTaishoService.getAtesakiFinder().get宛先s(searchKey);
-        ReportAtesakiEditor reportAtesakiEditor = new SofubutsuAtesakiEditorBuilder(宛先s.get(0)).build();
-        SofubutsuAtesakiSource 送付物宛先 = new SofubutsuAtesakiSourceBuilder(reportAtesakiEditor).buildSource();
+        if (宛先s != null && !宛先s.isEmpty()) {
+            ReportAtesakiEditor reportAtesakiEditor = new SofubutsuAtesakiEditorBuilder(宛先s.get(0)).build();
+            送付物宛先 = new SofubutsuAtesakiSourceBuilder(reportAtesakiEditor).buildSource();
+        }
 
         IJutakuKaishuJizenShinseiTsuchishoMapper mapper
                 = mapperProvider.create(IJutakuKaishuJizenShinseiTsuchishoMapper.class);
@@ -160,7 +165,8 @@ public class JutakuKaishuJizenShinseiTsuchishoManager {
                 (parameter.get承認年月日() == null || parameter.get承認年月日().isEmpty())
                 ? RString.EMPTY : new RString(parameter.get承認年月日().wareki().eraType(EraType.KANJI).firstYear(FirstYear.ICHI_NEN)
                         .separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString().toString()),
-                new RString("不承認").equals(parameter.get不承認理由()) ? parameter.get不承認理由() : RString.EMPTY,
+                (parameter.get不承認理由() == null || parameter.get不承認理由().isEmpty())
+                ? RString.EMPTY : parameter.get不承認理由(),
                 nullTOEmpty(parameter.get給付の種類()),
                 nullTOEmpty(parameter.get事業者名()),
                 (entity == null || entity.getKeiyakuJigyoshaYubinNo().isEmpty())
