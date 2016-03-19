@@ -5,18 +5,16 @@
  */
 package jp.co.ndensan.reams.db.dbc.divcontroller.controller.parentdiv.dbc0410023;
 
-import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0410023.DBC0410023TransitionEventName;
+import jp.co.ndensan.reams.db.dbc.definition.batchprm.kagoketteikohifutanshain.DBC120170_KagoKetteiKohifutanshaInBatchParameter;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0410023.TsuchishoJoho651Div;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.ChohyoBunruiKanri;
 import jp.co.ndensan.reams.db.dbz.service.core.basic.ChohyoBunruiKanriManager;
-import jp.co.ndensan.reams.ur.urz.definition.message.UrQuestionMessages;
 import jp.co.ndensan.reams.uz.uza.biz.ReportId;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
+import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.message.MessageDialogSelectedResult;
-import jp.co.ndensan.reams.uz.uza.message.QuestionMessage;
-import jp.co.ndensan.reams.uz.uza.ui.servlets.ResponseHolder;
 
 /**
  * 国保連情報受取データ取込_[651]介護給付費過誤決定通知書（公費）情報のクラスです
@@ -42,19 +40,12 @@ public class TsuchishoJoho651 {
      * @param div TsuchishoJoho651Div
      * @return ResponseData
      */
-    public ResponseData<TsuchishoJoho651Div> onClick_btnExcute(TsuchishoJoho651Div div) {
-
-        if (!ResponseHolder.isReRequest()) {
-            QuestionMessage message = new QuestionMessage(UrQuestionMessages.処理実行の確認.getMessage().getCode(),
-                    UrQuestionMessages.処理実行の確認.getMessage().evaluate());
-            return ResponseData.of(div).addMessage(message).respond();
-        }
-        if (new RString(UrQuestionMessages.処理実行の確認.getMessage().getCode())
-                .equals(ResponseHolder.getMessageCode())
-                && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
-            return ResponseData.of(div).forwardWithEventName(DBC0410023TransitionEventName.実行する).respond();
-        } else {
-            return ResponseData.of(div).respond();
-        }
+    public ResponseData<DBC120170_KagoKetteiKohifutanshaInBatchParameter> onClick_btnExcute(TsuchishoJoho651Div div) {
+        DBC120170_KagoKetteiKohifutanshaInBatchParameter parameter = new DBC120170_KagoKetteiKohifutanshaInBatchParameter();
+        RDate 処理年月 = div.getCcdKokurenJohoTorikomi().get処理年月();
+        long 出力順ID = div.getCcdKokurenJohoTorikomi().get出力順ID();
+        parameter.setShoriYM(new FlexibleYearMonth(処理年月.getYearMonth().toString()));
+        parameter.setShutsuryokujunId(出力順ID);
+        return ResponseData.of(parameter).respond();
     }
 }
