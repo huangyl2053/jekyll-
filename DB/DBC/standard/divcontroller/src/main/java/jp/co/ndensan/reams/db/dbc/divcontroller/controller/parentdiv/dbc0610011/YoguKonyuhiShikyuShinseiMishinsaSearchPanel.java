@@ -20,7 +20,7 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.ResponseHolder;
 
 /**
  * 福祉用具購入費支給申請審査 未審査支給申請一覧のパネルです。
- * 
+ *
  */
 public class YoguKonyuhiShikyuShinseiMishinsaSearchPanel {
 
@@ -28,7 +28,7 @@ public class YoguKonyuhiShikyuShinseiMishinsaSearchPanel {
 
     /**
      * 画面初期化onLoad
-     * 
+     *
      * @param div YoguKonyuhiShikyuShinseiMishinsaSearchPanelDiv
      * @return 福祉用具購入費支給申請審査画面
      */
@@ -38,7 +38,7 @@ public class YoguKonyuhiShikyuShinseiMishinsaSearchPanel {
 
     /**
      * 「未審査分を検索する」ボタンを押下した際に実行します。
-     * 
+     *
      * @param div YoguKonyuhiShikyuShinseiMishinsaSearchPanelDiv
      * @return 福祉用具購入費支給申請審査画面
      */
@@ -52,7 +52,7 @@ public class YoguKonyuhiShikyuShinseiMishinsaSearchPanel {
 
     /**
      * 支給申請内容を一括審査・決定するボタンを押下した際に実行します。
-     * 
+     *
      * @param div YoguKonyuhiShikyuShinseiMishinsaSearchPanelDiv
      * @return 福祉用具購入費支給申請審査画面
      */
@@ -65,7 +65,7 @@ public class YoguKonyuhiShikyuShinseiMishinsaSearchPanel {
 
     /**
      * 申請グリッドの修正ボタンを押下した際に実行します。
-     * 
+     *
      * @param div YoguKonyuhiShikyuShinseiMishinsaSearchPanelDiv
      * @return 福祉用具購入費支給申請審査画面
      */
@@ -78,7 +78,7 @@ public class YoguKonyuhiShikyuShinseiMishinsaSearchPanel {
 
     /**
      * 保存ボタンを押下した際に実行します。
-     * 
+     *
      * @param div YoguKonyuhiShikyuShinseiMishinsaSearchPanelDiv
      * @return 福祉用具購入費支給申請審査画面
      */
@@ -89,20 +89,20 @@ public class YoguKonyuhiShikyuShinseiMishinsaSearchPanel {
         FlexibleDate 決定日 = new FlexibleDate(決定日R.toString());
         getHandler(div).選択チェック();
         if (!ResponseHolder.isReRequest()) {
-        QuestionMessage message = new QuestionMessage(UrQuestionMessages.保存の確認.getMessage().getCode(),
-                UrQuestionMessages.保存の確認.getMessage().evaluate());
+            QuestionMessage message = new QuestionMessage(UrQuestionMessages.保存の確認.getMessage().getCode(),
+                    UrQuestionMessages.保存の確認.getMessage().evaluate());
             return ResponseData.of(div).addMessage(message).respond();
         }
         if (new RString(UrQuestionMessages.保存の確認.getMessage().getCode())
-                    .equals(ResponseHolder.getMessageCode())
-                    && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
+                .equals(ResponseHolder.getMessageCode())
+                && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
             getHandler(div).保存処理(決定日);
         }
         div.getYoguKonyuhiShikyuShinseiMishinsaSearchCondition().setVisible(false);
         div.getYoguKonyuhiShikyuShinseiMishinsaResultList().setVisible(false);
         CommonButtonHolder.setVisibleByCommonButtonFieldName(保存, false);
         return ResponseData.of(div).respond();
-        }
+    }
 
     private YoguKonyuhiShikyuShinseiMishinsaSearchHandler getHandler(YoguKonyuhiShikyuShinseiMishinsaSearchPanelDiv div) {
         return new YoguKonyuhiShikyuShinseiMishinsaSearchHandler(div);
