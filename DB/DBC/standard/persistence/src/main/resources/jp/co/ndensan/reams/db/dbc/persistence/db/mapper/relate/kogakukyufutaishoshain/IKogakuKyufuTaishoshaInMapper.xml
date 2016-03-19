@@ -11,7 +11,7 @@
         <result property="hihokenshaName" column="hihokenshaName" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="sakuseiYMD" column="sakuseiYMD;" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
         <result property="kokukoRengoukaiNa" column="kokukoRengoukaiNa" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
-        <result property="No" column="No" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="no" column="no" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="hihokenshaNo" column="hihokenshaNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.HihokenshaNoTypeHandler"/>
         <result property="hiHokenshaSimei" column="hiHokenshaSimei;" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="serviceTeikyoYM" column="serviceTeikyoYM;" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleYearMonthTypeHandler"/>
@@ -40,7 +40,7 @@
         一時テーブル."hihokenshaName",
         一時テーブル."sakuseiYMD",
         一時テーブル."kokukoRengoukaiNa",
-        一時テーブル."No",
+        一時テーブル."no",
         一時テーブル."hihokenshaNo",
         一時テーブル."hiHokenshaSimei",
         一時テーブル."serviceTeikyoYM",
