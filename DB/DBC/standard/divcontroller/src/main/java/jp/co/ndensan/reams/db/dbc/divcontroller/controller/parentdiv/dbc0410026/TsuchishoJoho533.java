@@ -5,18 +5,13 @@
  */
 package jp.co.ndensan.reams.db.dbc.divcontroller.controller.parentdiv.dbc0410026;
 
-import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0410026.DBC0410026TransitionEventName;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0410026.TsuchishoJoho533Div;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.ChohyoBunruiKanri;
 import jp.co.ndensan.reams.db.dbz.service.core.basic.ChohyoBunruiKanriManager;
-import jp.co.ndensan.reams.ur.urz.definition.message.UrQuestionMessages;
 import jp.co.ndensan.reams.uz.uza.biz.ReportId;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.message.MessageDialogSelectedResult;
-import jp.co.ndensan.reams.uz.uza.message.QuestionMessage;
-import jp.co.ndensan.reams.uz.uza.ui.servlets.ResponseHolder;
 
 /**
  * 国保連情報受取データ取込_[533]受給者情報更新結果情報のクラスです
@@ -43,18 +38,7 @@ public class TsuchishoJoho533 {
      * @return ResponseData
      */
     public ResponseData<TsuchishoJoho533Div> onClick_btnExcute(TsuchishoJoho533Div div) {
-
-        if (!ResponseHolder.isReRequest()) {
-            QuestionMessage message = new QuestionMessage(UrQuestionMessages.処理実行の確認.getMessage().getCode(),
-                    UrQuestionMessages.処理実行の確認.getMessage().evaluate());
-            return ResponseData.of(div).addMessage(message).respond();
-        }
-        if (new RString(UrQuestionMessages.処理実行の確認.getMessage().getCode())
-                .equals(ResponseHolder.getMessageCode())
-                && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
-            return ResponseData.of(div).forwardWithEventName(DBC0410026TransitionEventName.実行する).respond();
-        } else {
-            return ResponseData.of(div).respond();
-        }
+        // TODO QA471 パラメータ作成ビジネスを呼び出して、バッチを起動する
+        return ResponseData.of(div).respond();
     }
 }
