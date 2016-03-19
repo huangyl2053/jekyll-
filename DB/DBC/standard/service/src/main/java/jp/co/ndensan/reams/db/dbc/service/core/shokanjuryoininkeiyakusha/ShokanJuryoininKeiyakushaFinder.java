@@ -67,6 +67,16 @@ public class ShokanJuryoininKeiyakushaFinder {
     }
 
     /**
+     * {@link InstanceProvider#create}にて生成した{@link ShokanJuryoininKeiyakushaFinder}のインスタンスを返します。
+     *
+     * @return {@link InstanceProvider#create}にて生成した{@link ShokanJuryoininKeiyakushaFinder}のインスタンス
+     */
+    public static ShokanJuryoininKeiyakushaFinder createInstance() {
+
+        return InstanceProvider.create(ShokanJuryoininKeiyakushaFinder.class);
+    }
+
+    /**
      * 契約者一覧取得
      *
      * @param parameter parameter
