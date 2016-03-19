@@ -22,7 +22,7 @@ public class DbT3054CSVDataMeisaiEntity {
     @CsvField(order = 20, name = "帳票レコード種別")
     private RString chouhyouCodeShubetsu;
     @CsvField(order = 30, name = "No")
-    private RString No;
+    private RString no;
     @CsvField(order = 40, name = "被保険者番号")
     private RString hihokenshaNo;
     @CsvField(order = 50, name = "被保険者氏名")

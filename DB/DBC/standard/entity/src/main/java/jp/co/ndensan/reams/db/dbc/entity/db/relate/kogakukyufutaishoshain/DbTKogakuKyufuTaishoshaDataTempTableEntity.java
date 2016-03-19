@@ -14,8 +14,8 @@ import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
+import jp.co.ndensan.reams.uz.uza.util.db.DbTableEntityBase;
 import jp.co.ndensan.reams.uz.uza.util.db.IDbAccessable;
-import jp.co.ndensan.reams.uz.uza.util.db.TableName;
 import jp.co.ndensan.reams.uz.uza.util.db.annotation.TempTableColumnOrder;
 
 /**
@@ -25,10 +25,9 @@ import jp.co.ndensan.reams.uz.uza.util.db.annotation.TempTableColumnOrder;
 @lombok.Setter
 @lombok.Getter
 @SuppressWarnings("PMD.UnusedPrivateField")
-public class DbTKogakuKyufuTaishoshaDataTempTableEntity implements IDbAccessable {
+public class DbTKogakuKyufuTaishoshaDataTempTableEntity
+        extends DbTableEntityBase<DbTKogakuKyufuTaishoshaDataTempTableEntity> implements IDbAccessable {
 
-    @TableName
-    public static final RString TABLE_NAME = new RString("DbTKogakuKyufuTaishoshaDataTempTable");
     @TempTableColumnOrder(1)
     private RString kokanShikibetsuNo;
     @TempTableColumnOrder(2)
@@ -42,7 +41,7 @@ public class DbTKogakuKyufuTaishoshaDataTempTableEntity implements IDbAccessable
     @TempTableColumnOrder(6)
     private RString kokukoRengoukaiNa;
     @TempTableColumnOrder(7)
-    private RString No;
+    private RString no;
     @TempTableColumnOrder(8)
     private HihokenshaNo hihokenshaNo;
     @TempTableColumnOrder(9)

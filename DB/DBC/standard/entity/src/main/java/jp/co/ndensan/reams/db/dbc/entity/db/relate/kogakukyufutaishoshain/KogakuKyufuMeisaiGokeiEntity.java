@@ -25,6 +25,13 @@ public class KogakuKyufuMeisaiGokeiEntity {
     private final DbT3055CSVDataGokeiEntity 集計Entity;
     private final FlexibleDate 資格喪失日;
 
+    /**
+     * コンストラクタです。
+     *
+     * @param 明細Entity DbT3054CSVDataMeisaiEntity
+     * @param 集計Entity DbT3055CSVDataGokeiEntity
+     * @param 資格喪失日 FlexibleDate
+     */
     public KogakuKyufuMeisaiGokeiEntity(
             @NonNull DbT3054CSVDataMeisaiEntity 明細Entity,
             @NonNull DbT3055CSVDataGokeiEntity 集計Entity,
