@@ -5,18 +5,18 @@
  */
 package jp.co.ndensan.reams.db.dbc.divcontroller.controller.parentdiv.dbc0410031;
 
-import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0410031.DBC0410031TransitionEventName;
+import jp.co.ndensan.reams.db.dbc.definition.batchprm.ｋogakuｋyufuｋetteiIn.KogakuKyufuKetteiInBatchParameter;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0410031.TsuchishoJoho351Div;
+import jp.co.ndensan.reams.db.dbc.divcontroller.viewbox.kaigokyufukokuhorenjohotorikomi.KokuhorenDataTorikomiViewStateClass;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.ChohyoBunruiKanri;
+import jp.co.ndensan.reams.db.dbz.definition.core.enumeratedtype.ViewStateHolderName;
 import jp.co.ndensan.reams.db.dbz.service.core.basic.ChohyoBunruiKanriManager;
-import jp.co.ndensan.reams.ur.urz.definition.message.UrQuestionMessages;
 import jp.co.ndensan.reams.uz.uza.biz.ReportId;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
+import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.message.MessageDialogSelectedResult;
-import jp.co.ndensan.reams.uz.uza.message.QuestionMessage;
-import jp.co.ndensan.reams.uz.uza.ui.servlets.ResponseHolder;
+import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 
 /**
  * 国保連情報受取データ取込_[351]高額介護サービス費支給（不支給）決定者一覧表情報のクラスです
@@ -30,6 +30,9 @@ public class TsuchishoJoho351 {
      * @return ResponseData
      */
     public ResponseData<TsuchishoJoho351Div> onLoad(TsuchishoJoho351Div div) {
+        KokuhorenDataTorikomiViewStateClass parmater = new KokuhorenDataTorikomiViewStateClass(
+                RDate.getNowDate().getYearMonth(), new RString("1"));
+        ViewStateHolder.put(ViewStateHolderName.国保連取込情報, parmater);
         ChohyoBunruiKanri code = ChohyoBunruiKanriManager.createInstance().get帳票分類管理(SubGyomuCode.DBC介護給付,
                 new ReportId(new RString("DBC200015_KogakuShikyuFushikyuKetteishaIchiran")));
         div.getCcdKokurenJohoTorikomi().onLoadModeShutsuryokujunJoken2(SubGyomuCode.DBC介護給付, code.get帳票分類ID());
@@ -42,19 +45,12 @@ public class TsuchishoJoho351 {
      * @param div TsuchishoJoho351Div
      * @return ResponseData
      */
-    public ResponseData<TsuchishoJoho351Div> onClick_btnExcute(TsuchishoJoho351Div div) {
-
-        if (!ResponseHolder.isReRequest()) {
-            QuestionMessage message = new QuestionMessage(UrQuestionMessages.処理実行の確認.getMessage().getCode(),
-                    UrQuestionMessages.処理実行の確認.getMessage().evaluate());
-            return ResponseData.of(div).addMessage(message).respond();
-        }
-        if (new RString(UrQuestionMessages.処理実行の確認.getMessage().getCode())
-                .equals(ResponseHolder.getMessageCode())
-                && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
-            return ResponseData.of(div).forwardWithEventName(DBC0410031TransitionEventName.実行する).respond();
-        } else {
-            return ResponseData.of(div).respond();
-        }
+    public ResponseData<KogakuKyufuKetteiInBatchParameter> onClick_btnExcute(TsuchishoJoho351Div div) {
+        KogakuKyufuKetteiInBatchParameter parameter = new KogakuKyufuKetteiInBatchParameter();
+        RDate 処理年月 = div.getCcdKokurenJohoTorikomi().get処理年月();
+        long 出力順ID = div.getCcdKokurenJohoTorikomi().get出力順ID();
+        parameter.setShoriYM(処理年月.getYearMonth().toDateString());
+        parameter.setShutsuryokujun(出力順ID);
+        return ResponseData.of(parameter).respond();
     }
 }
