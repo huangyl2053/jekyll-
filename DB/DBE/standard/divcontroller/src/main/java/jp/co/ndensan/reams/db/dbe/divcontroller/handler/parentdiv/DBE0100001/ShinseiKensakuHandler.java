@@ -696,7 +696,7 @@ public class ShinseiKensakuHandler {
             if (申請書管理番号 != null) {
                 row.setShinseishoKanriNo(申請書管理番号.value());
             }
-            row.setShinseishoKanriNo(nullToEmpty(business.get証記載保険者番号()));
+            row.setShoKisaiHokenshaNo(nullToEmpty(business.get証記載保険者番号()));
             row.setIkenshoIraiRirekiNo(new RString(String.valueOf(business.get主治医意見書作成依頼履歴番号())));
             dataSource.add(row);
         }
