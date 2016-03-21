@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 概要： 審査会自動割付のマッピング用XMLです。 --> 
+
+<!-- どのマッパーインターフェースと対応するかを指定する -->
+<mapper namespace="jp.co.ndensan.reams.db.dbe.persistence.db.mapper.relate.shinsakayijidouwaritsuke.IShinsaKayiJidouWaritsukeMapper">
+    <resultMap id="resultMap_ShinsaKayiJidouWaritsukeRelateEntity" type="jp.co.ndensan.reams.db.dbe.entity.db.relate.shinsakayijidouwaritsuke.ShinsaKayiJidouWaritsukeRelateEntity" autoMapping="true">
+        <result property="shinsakaiKaisaiNo" column="DbT5501_shinsakaiKaisaiNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="審査会名称" column="審査会名称" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="gogitaiSeishinkaSonzaiFlag" column="種類"/>
+        <result property="gogitaiMei" column="DbT5591_gogitaiMei" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="shinsakaiKaisaiBashoName" column="DbT5592_shinsakaiKaisaiBashoName" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="shinsakaiKaisaiYoteiYMD" column="DbT5501_shinsakaiKaisaiYoteiYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="shinsakaiKaishiYoteiTime" column="DbT5501_shinsakaiKaishiYoteiTime" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="shinsakaiShuryoYoteiTime" column="DbT5501_shinsakaiShuryoYoteiTime" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="shinsakaiJidoWariateTeiin" column="DbT5501_shinsakaiJidoWariateTeiin" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="shinsakaiWariateZumiNinzu" column="DbT5501_shinsakaiWariateZumiNinzu" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="ShinsakaiShinchokuJokyo" column="DbT5501_ShinsakaiShinchokuJokyo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="gogitaiDummyFlag" column="DbT5591_gogitaiDummyFlag"/>
+    </resultMap>
+    <select id="getShinsaKayiJidouWaritsukeList"
+                resultMap="resultMap_ShinsaKayiJidouWaritsukeRelateEntity" 
+                parameterType="jp.co.ndensan.reams.db.dbe.definition.kaigoninteishinsakai.KaigoNinteiShinsakaiParameter" fetchSize="500">
+        SELECT 
+         DbT5501."shinsakaiKaisaiNo" as "DbT5501_shinsakaiKaisaiNo"
+        ,'第'||DbT5501."shinsakaiKaisaiNo"||'回審査会' as "審査会名称"
+        ,DbT5591."gogitaiMei" as "DbT5591_gogitaiMei"
+        ,DbT5591."gogitaiSeishinkaSonzaiFlag"
+        ,DbT5592."shinsakaiKaisaiBashoName" as "DbT5592_shinsakaiKaisaiBashoName"
+        ,DbT5501."shinsakaiKaisaiYoteiYMD" as "DbT5501_shinsakaiKaisaiYoteiYMD"
+        ,DbT5501."shinsakaiKaishiYoteiTime" as "DbT5501_shinsakaiKaishiYoteiTime"
+        ,DbT5501."shinsakaiShuryoYoteiTime" as "DbT5501_shinsakaiShuryoYoteiTime"
+        ,DbT5501."shinsakaiJidoWariateTeiin" as "DbT5501_shinsakaiJidoWariateTeiin"
+        ,DbT5501."shinsakaiWariateZumiNinzu" as "DbT5501_shinsakaiWariateZumiNinzu"
+        ,DbT5501."ShinsakaiShinchokuJokyo" as "DbT5501_ShinsakaiShinchokuJokyo"
+        ,DbT5591."gogitaiDummyFlag" as "DbT5591_gogitaiDummyFlag"
+        FROM
+        rgdb."DbT5501ShinsakaiKaisaiYoteiJoho" as DbT5501
+        INNER JOIN
+        rgdb."DbT5591GogitaiJoho" as DbT5591
+        ON DbT5591."gogitaiNo" = DbT5501."gogitaiNo"
+        LEFT JOIN
+        rgdb."DbT5592ShinsakaiKaisaiBashoJoho" as DbT5592
+        ON DbT5592."shinsakaiKaisaiBashoCode" = DbT5501."shinsakaiKaisaiYoteiBashoCode"
+        WHERE
+        DbT5501."shinsakaiKaisaiNo" IN
+        <foreach
+             collection="kaisaiNoList"
+             item="item"
+             open="("
+             separator=","
+             close=")">
+             #{item}
+        </foreach>
+        ORDER BY
+        DbT5501."shinsakaiKaisaiNo" ASC
+    </select>
+</mapper>
