@@ -12,20 +12,18 @@ import jp.co.ndensan.reams.db.dba.definition.batchprm.hihokenshashohakkokanribo.
 import jp.co.ndensan.reams.db.dba.divcontroller.entity.parentdiv.DBA1110011.BatchPanelDiv;
 import jp.co.ndensan.reams.db.dba.divcontroller.handler.parentdiv.dba1110011.BatchPanelHandler;
 import jp.co.ndensan.reams.db.dba.service.core.hihokenshashohakkokanribo.HihokenshashoHakkoKanriboFinder;
-import jp.co.ndensan.reams.db.dbz.definition.message.DbzErrorMessages;
 import jp.co.ndensan.reams.ur.urz.business.IUrControlData;
 import jp.co.ndensan.reams.ur.urz.business.UrControlDataFactory;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
-import jp.co.ndensan.reams.ur.urz.definition.message.UrQuestionMessages;
-import jp.co.ndensan.reams.uz.uza.biz.ReportId;
-import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.ApplicationException;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.message.MessageDialogSelectedResult;
-import jp.co.ndensan.reams.uz.uza.message.QuestionMessage;
-import jp.co.ndensan.reams.uz.uza.ui.servlets.ResponseHolder;
+import jp.co.ndensan.reams.uz.uza.message.IMessageGettable;
+import jp.co.ndensan.reams.uz.uza.message.IValidationMessage;
+import jp.co.ndensan.reams.uz.uza.message.Message;
+import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPair;
+import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
 
 /**
  *
@@ -34,6 +32,7 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.ResponseHolder;
 public class BatchPanel {
 
     private static final RString 未回収者リスト = new RString("key1");
+    private static final RString 開始日と終了日両方 = new RString("開始日と終了日両方");
 
     /**
      * 被保険者証発行管理簿を画面初期化処理しました。
@@ -42,8 +41,11 @@ public class BatchPanel {
      * @return 被保険者証発行管理簿Divを持つResponseData
      */
     public ResponseData<BatchPanelDiv> onLoad(BatchPanelDiv div) {
+
         IUrControlData controlData = UrControlDataFactory.createInstance();
-        RString menuID = controlData.getMenuID();
+//        RString menuID = controlData.getMenuID();
+        RString menuID = new RString("DBAMN72001");
+//        RString menuID = new RString("DBAMN72002");
         List<KouFuJiyuu> kouFuJiyuuList = HihokenshashoHakkoKanriboFinder.createInstance().getKofuJiyuInitialData(menuID).records();
         List<KayiSyuuJiyuu> kayiSyuuJiyuuList = HihokenshashoHakkoKanriboFinder.createInstance().getKaishuJiyuInitialData(menuID).records();
         if ((kouFuJiyuuList == null || kouFuJiyuuList.isEmpty())
@@ -51,9 +53,30 @@ public class BatchPanel {
             throw new ApplicationException(UrErrorMessages.コードマスタなし.getMessage());
         }
         getHandler(div).initialize(kouFuJiyuuList, kayiSyuuJiyuuList);
-        SubGyomuCode subGyomuCode = div.getCcdChohyoShutsuryokujun().getサブ業務コード();
-        ReportId reportId = div.getCcdChohyoShutsuryokujun().get帳票ID();
-        div.getCcdChohyoShutsuryokujun().load(subGyomuCode, reportId);
+        return ResponseData.of(div).respond();
+    }
+
+    /**
+     * 「実行する」を押下場合、入力チェックを実行します。
+     *
+     * @param div {@link BatchPanelDiv 被保険者証発行管理簿Div}
+     * @return ResponseData<BatchPanelDiv>
+     */
+    public ResponseData<BatchPanelDiv> onClick_btnCheck(BatchPanelDiv div) {
+
+        RDate koufubiFrom = div.getTxtKoufubiRange().getFromValue();
+        RDate koufubiTo = div.getTxtKoufubiRange().getToValue();
+        RDate kaishubiFrom = div.getTxtKaishubiRange().getFromValue();
+        RDate kaishubiTo = div.getTxtKaishubiRange().getToValue();
+        boolean flg = HihokenshashoHakkoKanriboFinder.createInstance().checkInput(
+                koufubiFrom, koufubiTo, kaishubiFrom, kaishubiTo);
+        // TODO  内部QA:924 Redmine： (必須チェックの処理は回答待ち)
+        if (!flg) {
+            ValidationMessageControlPairs validationMessages = new ValidationMessageControlPairs();
+            validationMessages.add(new ValidationMessageControlPair(
+                    new BatchPanel.BatchPanelMessages(UrErrorMessages.必須, 開始日と終了日両方.toString())));
+            return ResponseData.of(div).addValidationMessages(validationMessages).respond();
+        }
         return ResponseData.of(div).respond();
     }
 
@@ -66,37 +89,13 @@ public class BatchPanel {
     public ResponseData onClick_btnJikko(BatchPanelDiv div) {
 
         ResponseData<HihokenshashoHakkoKanriboBatchParameter> response = new ResponseData<>();
-        RDate koufubiFrom = div.getTxtKoufubiRange().getFromValue();
-        RDate koufubiTo = div.getTxtKoufubiRange().getToValue();
-        RDate kaishubiFrom = div.getTxtKaishubiRange().getFromValue();
-        RDate kaishubiTo = div.getTxtKaishubiRange().getToValue();
-        if (!ResponseHolder.isReRequest()) {
-            QuestionMessage message = new QuestionMessage(UrQuestionMessages.処理実行の確認.getMessage().getCode(),
-                    UrQuestionMessages.処理実行の確認.getMessage().evaluate());
-            return ResponseData.of(div).addMessage(message).respond();
-        }
-        if (new RString(UrQuestionMessages.処理実行の確認.getMessage().getCode()).equals(ResponseHolder.getMessageCode())
-                && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
-            if ((koufubiFrom != null && koufubiTo != null) && koufubiTo.isBefore(koufubiFrom)) {
-                throw new ApplicationException(
-                        DbzErrorMessages.期間が不正_未来日付不可.getMessage().replace(koufubiFrom.toString(), koufubiTo.toString()));
-            }
-            if ((kaishubiFrom != null && kaishubiTo != null) && kaishubiTo.isBefore(kaishubiFrom)) {
-                throw new ApplicationException(
-                        DbzErrorMessages.期間が不正_未来日付不可.getMessage().replace(kaishubiFrom.toString(), kaishubiTo.toString()));
-            }
-            boolean flg = HihokenshashoHakkoKanriboFinder.createInstance().checkInput(
-                    koufubiFrom, koufubiTo, kaishubiFrom, kaishubiTo);
-            if (!flg) {
-                throw new IllegalStateException(UrErrorMessages.必須.toString());
-            } else {
-                IUrControlData controlData = UrControlDataFactory.createInstance();
-                RString menuID = controlData.getMenuID();
-                List<KouFuJiyuu> kouFuJiyuuList = HihokenshashoHakkoKanriboFinder.createInstance().getKofuJiyuInitialData(new RString("DBAMN72001")).records();
-                List<KayiSyuuJiyuu> kayiSyuuJiyuuList = HihokenshashoHakkoKanriboFinder.createInstance().getKaishuJiyuInitialData(new RString("DBAMN72001")).records();
-                response.data = getHandler(div).batchParameter(kouFuJiyuuList, kayiSyuuJiyuuList, menuID);
-            }
-        }
+        IUrControlData controlData = UrControlDataFactory.createInstance();
+//        RString menuID = controlData.getMenuID();
+        RString menuID = new RString("DBAMN72001");
+//        RString menuID = new RString("DBAMN72002");
+        List<KouFuJiyuu> kouFuJiyuuList = HihokenshashoHakkoKanriboFinder.createInstance().getKofuJiyuInitialData(menuID).records();
+        List<KayiSyuuJiyuu> kayiSyuuJiyuuList = HihokenshashoHakkoKanriboFinder.createInstance().getKaishuJiyuInitialData(menuID).records();
+        response.data = getHandler(div).batchParameter(kouFuJiyuuList, kayiSyuuJiyuuList, menuID);
         return response;
     }
 
@@ -126,5 +125,19 @@ public class BatchPanel {
 
     private BatchPanelHandler getHandler(BatchPanelDiv div) {
         return new BatchPanelHandler(div);
+    }
+
+    private static final class BatchPanelMessages implements IValidationMessage {
+
+        private final Message message;
+
+        private BatchPanelMessages(IMessageGettable message, String... replaceParam) {
+            this.message = message.getMessage().replace(replaceParam);
+        }
+
+        @Override
+        public Message getMessage() {
+            return message;
+        }
     }
 }

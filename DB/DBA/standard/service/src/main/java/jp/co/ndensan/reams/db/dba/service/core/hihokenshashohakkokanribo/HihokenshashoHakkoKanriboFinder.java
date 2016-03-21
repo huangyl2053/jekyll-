@@ -66,6 +66,10 @@ public class HihokenshashoHakkoKanriboFinder {
                 || (kaishubiFrom != null && kaishubiTo != null)) {
             return true;
         }
+        if (koufubiFrom == null && koufubiTo == null
+                && kaishubiFrom == null && kaishubiTo != null) {
+            return false;
+        }
         return checkDate(koufubiTo, koufubiTo)
                 || checkDate(kaishubiFrom, kaishubiTo);
     }
