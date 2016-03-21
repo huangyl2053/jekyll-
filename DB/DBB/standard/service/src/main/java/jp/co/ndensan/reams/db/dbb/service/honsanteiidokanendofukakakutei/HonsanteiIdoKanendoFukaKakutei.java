@@ -209,28 +209,28 @@ public class HonsanteiIdoKanendoFukaKakutei {
 
     private void set更正前項目(List<DbT2002FukaEntity> dbtFukaList, KanendoIdoFukaKakutei idofukaKakutei) {
         DbT2002FukaEntity dbtFukaEntity;
-        for (int i = 0; i < dbtFukaList.size(); i++) {
+        for (int i = 0; i < dbtFukaList.size() - 1; i++) {
             dbtFukaEntity = dbtFukaList.get(i);
-            if (dbtFukaEntity.getChoteiNendo() != null && dbtFukaEntity.getFukaNendo() != null && dbtFukaEntity.
-                    getTsuchishoNo() != null) {
-                if (dbtFukaEntity.getChoteiNendo().equals(idofukaKakutei.getFukaKakuteiEntity().get調定年度())
-                        && dbtFukaEntity.getFukaNendo().equals(idofukaKakutei.getFukaKakuteiEntity().get賦課年度())
-                        && dbtFukaEntity.getTsuchishoNo().equals(idofukaKakutei.getFukaKakuteiEntity().get通知書番号())
-                        && dbtFukaEntity.getRirekiNo() == idofukaKakutei.getFukaKakuteiEntity().get履歴番号()) {
-                    dbtFukaEntity = dbtFukaList.get(i + 1);
-                    idofukaKakutei.getFukaKakuteiEntity().set更正前調定年度(dbtFukaEntity.getChoteiNendo());
-                    idofukaKakutei.getFukaKakuteiEntity().set更正前賦課年度(dbtFukaEntity.getFukaNendo());
+            if (dbtFukaEntity.getChoteiNendo().equals(idofukaKakutei.getFukaKakuteiEntity().get調定年度())
+                    && dbtFukaEntity.getFukaNendo().equals(idofukaKakutei.getFukaKakuteiEntity().get賦課年度())
+                    && dbtFukaEntity.getTsuchishoNo().equals(idofukaKakutei.getFukaKakuteiEntity().get通知書番号())) {
+                dbtFukaEntity = dbtFukaList.get(i + 1);
+                idofukaKakutei.getFukaKakuteiEntity().set更正前調定年度(dbtFukaEntity.getChoteiNendo());
+                idofukaKakutei.getFukaKakuteiEntity().set更正前賦課年度(dbtFukaEntity.getFukaNendo());
+                if (dbtFukaEntity.getHokenryoDankai1() != null) {
                     idofukaKakutei.getFukaKakuteiEntity().set更正前保険料算定段階１(dbtFukaEntity.getHokenryoDankai1());
-                    idofukaKakutei.getFukaKakuteiEntity().set更正前算定年額保険料１(dbtFukaEntity.
-                            getNengakuHokenryo1());
+                }
+                idofukaKakutei.getFukaKakuteiEntity().set更正前算定年額保険料１(dbtFukaEntity.
+                        getNengakuHokenryo1());
+                if (dbtFukaEntity.getHokenryoDankai2() != null) {
                     idofukaKakutei.getFukaKakuteiEntity().set更正前保険料算定段階２(dbtFukaEntity.
                             getHokenryoDankai2());
-                    idofukaKakutei.getFukaKakuteiEntity().set更正前算定年額保険料２(dbtFukaEntity.
-                            getNengakuHokenryo2());
-                    idofukaKakutei.getFukaKakuteiEntity().set更正前減免額(dbtFukaEntity.
-                            getNengakuHokenryo2());
-                    idofukaKakutei.getFukaKakuteiEntity().set更正前確定介護保険料(dbtFukaEntity.getKakuteiHokenryo());
                 }
+                idofukaKakutei.getFukaKakuteiEntity().set更正前算定年額保険料２(dbtFukaEntity.
+                        getNengakuHokenryo2());
+                idofukaKakutei.getFukaKakuteiEntity().set更正前減免額(dbtFukaEntity.
+                        getNengakuHokenryo2());
+                idofukaKakutei.getFukaKakuteiEntity().set更正前確定介護保険料(dbtFukaEntity.getKakuteiHokenryo());
             }
         }
     }
