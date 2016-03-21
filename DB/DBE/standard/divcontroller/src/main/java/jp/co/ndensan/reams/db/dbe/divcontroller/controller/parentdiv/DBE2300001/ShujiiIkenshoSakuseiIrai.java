@@ -459,7 +459,7 @@ public class ShujiiIkenshoSakuseiIrai {
         iraishoItem.setJusho(row.getJusho());
         iraishoItem.setBirthYMD(new RString(row.getBirthYMD().toString()));
         iraishoItem.setYubinNo(getEditedYubinNo(row.getYubinNo()));
-        RString hokenshaNo = row.getHokenshaNo().padRight(RString.EMPTY, 数字_5);
+        RString hokenshaNo = row.getHokenshaNo().padRight(RString.HALF_SPACE, 数字_5);
         iraishoItem.setHokenshaNo1(hokenshaNo.substring(数字_0, 数字_1));
         iraishoItem.setHokenshaNo2(hokenshaNo.substring(数字_1, 数字_2));
         iraishoItem.setHokenshaNo3(hokenshaNo.substring(数字_2, 数字_3));
