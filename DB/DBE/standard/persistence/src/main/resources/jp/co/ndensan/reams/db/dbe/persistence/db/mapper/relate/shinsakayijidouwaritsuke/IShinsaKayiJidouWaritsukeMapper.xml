@@ -15,7 +15,7 @@
         <result property="shinsakaiShuryoYoteiTime" column="DbT5501_shinsakaiShuryoYoteiTime" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
         <result property="shinsakaiJidoWariateTeiin" column="DbT5501_shinsakaiJidoWariateTeiin" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
         <result property="shinsakaiWariateZumiNinzu" column="DbT5501_shinsakaiWariateZumiNinzu" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
-        <result property="ShinsakaiShinchokuJokyo" column="DbT5501_ShinsakaiShinchokuJokyo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="shinsakaiShinchokuJokyo" column="DbT5501_shinsakaiShinchokuJokyo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
         <result property="gogitaiDummyFlag" column="DbT5591_gogitaiDummyFlag"/>
     </resultMap>
     <select id="getShinsaKayiJidouWaritsukeList"
@@ -32,7 +32,7 @@
         ,DbT5501."shinsakaiShuryoYoteiTime" as "DbT5501_shinsakaiShuryoYoteiTime"
         ,DbT5501."shinsakaiJidoWariateTeiin" as "DbT5501_shinsakaiJidoWariateTeiin"
         ,DbT5501."shinsakaiWariateZumiNinzu" as "DbT5501_shinsakaiWariateZumiNinzu"
-        ,DbT5501."ShinsakaiShinchokuJokyo" as "DbT5501_ShinsakaiShinchokuJokyo"
+        ,DbT5501."ShinsakaiShinchokuJokyo" as "DbT5501_shinsakaiShinchokuJokyo"
         ,DbT5591."gogitaiDummyFlag" as "DbT5591_gogitaiDummyFlag"
         FROM
         rgdb."DbT5501ShinsakaiKaisaiYoteiJoho" as DbT5501

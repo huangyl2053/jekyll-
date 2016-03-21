@@ -27,6 +27,6 @@ public class ShinsaKayiJidouWaritsukeRelateEntity {
     private RString shinsakaiShuryoYoteiTime;
     private RString shinsakaiJidoWariateTeiin;
     private RString shinsakaiWariateZumiNinzu;
-    private RString ShinsakaiShinchokuJokyo;
+    private RString shinsakaiShinchokuJokyo;
     private boolean gogitaiDummyFlag;
 }
