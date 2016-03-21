@@ -273,7 +273,7 @@ public class HonsanteiIdoKanendoFukaKakutei {
             List<UrT0705ChoteiKyotsuEntity> choteiKyotsuList = mapper.select調定共通(parameter);
             for (UrT0705ChoteiKyotsuEntity choteiKyotsuEntity : choteiKyotsuList) {
                 choteiKyotsuEntity.setState(EntityDataState.Deleted);
-                choteiKyotsuDac.delete(choteiKyotsuEntity);
+                choteiKyotsuDac.deletePhysicalBy(choteiKyotsuEntity);
             }
             DbT2002FukaEntity fukaEntity = fukaDac.selectByKey(
                     fukaKakutei.getFukaKakuteiEntity().get調定年度(),

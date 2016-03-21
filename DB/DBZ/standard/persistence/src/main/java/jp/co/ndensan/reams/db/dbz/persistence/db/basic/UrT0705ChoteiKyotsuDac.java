@@ -91,7 +91,7 @@ public class UrT0705ChoteiKyotsuDac implements IPersistable<UrT0705ChoteiKyotsuE
      * @return 削除件数
      */
     @Transaction
-    public int delete(UrT0705ChoteiKyotsuEntity entity) {
+    public int deletePhysicalBy(UrT0705ChoteiKyotsuEntity entity) {
         requireNonNull(entity, UrSystemErrorMessages.値がnull.getReplacedMessage("調定共通（介護継承）エンティティ"));
         return DbAccessors.saveOrDeletePhysicalBy(new DbAccessorNormalType(session), entity);
     }
