@@ -151,7 +151,7 @@ public class NinteiShinseishaFinderValidationHandler {
         ValidationMessageControlPairs validPairs = new ValidationMessageControlPairs();
         if (isKanryo(div.getChkShinseiUketsuke().getSelectedItems())
                 && isMiKanryo(div.getChkIkenshoIrai().getSelectedItems())
-                && (isKanryo(div.getChkChosaNyushu().getSelectedItems())
+                && (isKanryo(div.getChkIkenshoNyushu().getSelectedItems())
                 || isKanryo(div.getChkIchijiHantei().getSelectedItems())
                 || isKanryo(div.getChkMasking().getSelectedItems())
                 || isKanryo(div.getChkShinsakaiToroku().getSelectedItems())

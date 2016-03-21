@@ -250,4 +250,28 @@ public class ShinseiKensakuMapperParameter {
     private boolean useZenkaiYukoKikanStartTo;
     private int limitCount;
 
+    // 画面詳細条件の認定調査の調査実施場所～調査実施日を入力する場合
+    private boolean useNinteichosahyoGaikyoChosa;
+    // 画面詳細条件の認定調査の寝きたり度～認知度を入力する場合
+    private boolean useNinteichosahyoKihonChosa;
+    // 画面詳細条件の主治医情報の主治医区分を入力する場合
+    private boolean useShujiiIkenshoIraiJoho;
+    // 画面詳細条件の主治医情報の意見書受領日を入力する場合
+    private boolean useShujiiIkenshoJoho;
+    // 画面詳細条件の主治医情報の寝きたり度～認知度を入力する場合
+    private boolean useShujiiIkenshoIkenItem;
+    // 画面詳細条件の一次判定を入力する場合
+    private boolean useIchijiHanteiKekkaJoho;
+    // 画面詳細条件の1.5次判定を入力する場合
+    private boolean useIchiGojiHanteiKekkaJoho;
+    // 画面詳細条件の介護認定審査会を入力する場合
+    private boolean useNinteiKekkaJoho;
+    // 画面詳細条件の介護認定審査会の開催日/開催番号を入力する場合
+    private boolean useShinsakaiKaisaiKekkaJoho;
+    // 画面詳細条件の前回情報を入力する場合
+    private boolean useZenkaiNinteiShinseiJoho;
+    // 画面詳細条件のその他情報の原因疾患を入力する場合
+    private boolean useGeninShikkan;
+    // 画面詳細条件の完了情報を入力する場合
+    private boolean useNinteiKanryoJoho;
 }
