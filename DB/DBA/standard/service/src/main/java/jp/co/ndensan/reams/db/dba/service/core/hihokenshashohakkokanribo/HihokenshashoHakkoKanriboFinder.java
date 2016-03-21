@@ -67,11 +67,16 @@ public class HihokenshashoHakkoKanriboFinder {
             return true;
         }
         if (koufubiFrom == null && koufubiTo == null
-                && kaishubiFrom == null && kaishubiTo != null) {
+                && kaishubiFrom == null && kaishubiTo == null) {
             return false;
         }
-        return checkDate(koufubiTo, koufubiTo)
-                || checkDate(kaishubiFrom, kaishubiTo);
+        if (checkDate(koufubiFrom, koufubiTo)) {
+            return false;
+        }
+        if (checkDate(kaishubiFrom, kaishubiTo)) {
+            return false;
+        }
+        return true;
     }
 
     /**
@@ -129,7 +134,7 @@ public class HihokenshashoHakkoKanriboFinder {
     }
 
     private boolean checkDate(RDate 開始日, RDate 終了日) {
-        return !((開始日 != null && 終了日 == null)
-                || (終了日 != null && 開始日 == null));
+        return (開始日 != null && 終了日 == null)
+                || (終了日 != null && 開始日 == null);
     }
 }
