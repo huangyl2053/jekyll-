@@ -57,6 +57,10 @@ public class HonsanteiIdoKanendoFukaKakutei {
     DbT2002FukaDac fukaDac;
     DbT2003KibetsuDac kibetsuDac;
     UrT0705ChoteiKyotsuDac choteiKyotsuDac;
+    private static final RString 連番 = new RString("0001");
+    private static final RString 処理枝番 = new RString("0001");
+    private static final RString FORMAT = new RString("%04d");
+    private static final SubGyomuCode サブ業務コード = new SubGyomuCode("DBB");
 
     /**
      * HonsanteiIdoKanendoFukaKakutei
@@ -201,9 +205,15 @@ public class HonsanteiIdoKanendoFukaKakutei {
                     YMDHMS.now());
             UrT0705ChoteiKyotsuEntity choteiKyotsuEntity = mapper.select納付額と納期限(parameter);
             if (choteiKyotsuEntity != null) {
-                idofukaKakutei.getFukaKakuteiEntity().set調定額(choteiKyotsuEntity.getChoteigaku());
-                idofukaKakutei.getFukaKakuteiEntity().set納期限(choteiKyotsuEntity.getNokigenYMD());
+                set納付額と納期限(choteiKyotsuEntity, idofukaKakutei);
             }
+        }
+    }
+
+    private void set納付額と納期限(UrT0705ChoteiKyotsuEntity choteiKyotsuEntity, KanendoIdoFukaKakutei idofukaKakutei) {
+        idofukaKakutei.getFukaKakuteiEntity().set調定額(choteiKyotsuEntity.getChoteigaku());
+        if (choteiKyotsuEntity.getNokigenYMD() != null) {
+            idofukaKakutei.getFukaKakuteiEntity().set納期限(choteiKyotsuEntity.getNokigenYMD());
         }
     }
 
@@ -213,7 +223,8 @@ public class HonsanteiIdoKanendoFukaKakutei {
             dbtFukaEntity = dbtFukaList.get(i);
             if (dbtFukaEntity.getChoteiNendo().equals(idofukaKakutei.getFukaKakuteiEntity().get調定年度())
                     && dbtFukaEntity.getFukaNendo().equals(idofukaKakutei.getFukaKakuteiEntity().get賦課年度())
-                    && dbtFukaEntity.getTsuchishoNo().equals(idofukaKakutei.getFukaKakuteiEntity().get通知書番号())) {
+                    && dbtFukaEntity.getTsuchishoNo().equals(idofukaKakutei.getFukaKakuteiEntity().get通知書番号())
+                    && dbtFukaEntity.getRirekiNo() == idofukaKakutei.getFukaKakuteiEntity().get履歴番号()) {
                 dbtFukaEntity = dbtFukaList.get(i + 1);
                 idofukaKakutei.getFukaKakuteiEntity().set更正前調定年度(dbtFukaEntity.getChoteiNendo());
                 idofukaKakutei.getFukaKakuteiEntity().set更正前賦課年度(dbtFukaEntity.getFukaNendo());
@@ -255,26 +266,37 @@ public class HonsanteiIdoKanendoFukaKakutei {
                     null);
             Map<String, Object> deleteParameter = new HashMap<>();
             List<UrT0700ShunoKanriEntity> shunoKanriList = mapper.select収納管理マスタ(parameter);
-            for (UrT0700ShunoKanriEntity shunoKanriEntity : shunoKanriList) {
-                deleteParameter.put("shunoId", shunoKanriEntity.getShunoId());
-                mapper.delete収納管理マスタ(deleteParameter);
+            if (shunoKanriList != null) {
+                for (UrT0700ShunoKanriEntity shunoKanriEntity : shunoKanriList) {
+                    deleteParameter.put("shunoId", shunoKanriEntity.getShunoId());
+                    mapper.delete収納管理マスタ(deleteParameter);
+                }
             }
 
             List<UrT0707ChoteiJokyoEntity> choteiJokyoList = mapper.select調定状況(parameter);
-            for (UrT0707ChoteiJokyoEntity choteiJokyoEntity : choteiJokyoList) {
-                deleteParameter.put("choteiJokyoId", choteiJokyoEntity.getChoteiJokyoId());
-                mapper.delete調定状況(deleteParameter);
+            if (choteiJokyoList != null) {
+                for (UrT0707ChoteiJokyoEntity choteiJokyoEntity : choteiJokyoList) {
+                    deleteParameter.put("choteiJokyoId", choteiJokyoEntity.getChoteiJokyoId());
+                    mapper.delete調定状況(deleteParameter);
+                }
             }
+
             List<UrT0706ChoteigakuUchiwakeEntity> choteigakuUchiwakeList = mapper.select調定額内訳(parameter);
-            for (UrT0706ChoteigakuUchiwakeEntity choteigakuUchiwakeEntity : choteigakuUchiwakeList) {
-                deleteParameter.put("choteiId", choteigakuUchiwakeEntity.getChoteiId());
-                mapper.delete調定額内訳(deleteParameter);
+            if (choteigakuUchiwakeList != null) {
+                for (UrT0706ChoteigakuUchiwakeEntity choteigakuUchiwakeEntity : choteigakuUchiwakeList) {
+                    deleteParameter.put("choteiId", choteigakuUchiwakeEntity.getChoteiId());
+                    mapper.delete調定額内訳(deleteParameter);
+                }
             }
+
             List<UrT0705ChoteiKyotsuEntity> choteiKyotsuList = mapper.select調定共通(parameter);
-            for (UrT0705ChoteiKyotsuEntity choteiKyotsuEntity : choteiKyotsuList) {
-                choteiKyotsuEntity.setState(EntityDataState.Deleted);
-                choteiKyotsuDac.deletePhysicalBy(choteiKyotsuEntity);
+            if (choteiKyotsuList != null) {
+                for (UrT0705ChoteiKyotsuEntity choteiKyotsuEntity : choteiKyotsuList) {
+                    choteiKyotsuEntity.setState(EntityDataState.Deleted);
+                    choteiKyotsuDac.deletePhysicalBy(choteiKyotsuEntity);
+                }
             }
+
             DbT2002FukaEntity fukaEntity = fukaDac.selectByKey(
                     fukaKakutei.getFukaKakuteiEntity().get調定年度(),
                     fukaKakutei.getFukaKakuteiEntity().get賦課年度(),
@@ -284,14 +306,17 @@ public class HonsanteiIdoKanendoFukaKakutei {
                 fukaEntity.setState(EntityDataState.Deleted);
                 fukaDac.delete(fukaEntity);
             }
+
             List<DbT2003KibetsuEntity> kibetsuList = kibetsuDac.select介護期別(
                     fukaKakutei.getFukaKakuteiEntity().get調定年度(),
                     fukaKakutei.getFukaKakuteiEntity().get賦課年度(),
                     fukaKakutei.getFukaKakuteiEntity().get通知書番号(),
                     fukaKakutei.getFukaKakuteiEntity().get履歴番号());
-            for (DbT2003KibetsuEntity kibetsuEntity : kibetsuList) {
-                kibetsuEntity.setState(EntityDataState.Deleted);
-                kibetsuDac.delete(kibetsuEntity);
+            if (kibetsuList != null) {
+                for (DbT2003KibetsuEntity kibetsuEntity : kibetsuList) {
+                    kibetsuEntity.setState(EntityDataState.Deleted);
+                    kibetsuDac.delete(kibetsuEntity);
+                }
             }
         }
         if (deleteFlag) {
@@ -334,17 +359,17 @@ public class HonsanteiIdoKanendoFukaKakutei {
 
         DbT7022ShoriDateKanriEntity shoriDateKanriEntity = shoriDateKanriDac.select最大年度内連番(
                 new FlexibleYear(choteiNendo.toString()));
-        RString 最大年度内連番 = new RString("0001");
+        RString 最大年度内連番 = 連番;
         if (shoriDateKanriEntity != null) {
-            最大年度内連番 = new RString(String.format("%04d", new Integer(Integer.parseInt(shoriDateKanriEntity.
+            最大年度内連番 = new RString(String.format(FORMAT.toString(), new Integer(Integer.parseInt(shoriDateKanriEntity.
                     getNendoNaiRenban().toString()) + 1)));
         }
         DbT7022ShoriDateKanriEntity entity = new DbT7022ShoriDateKanriEntity();
-        entity.setSubGyomuCode(new SubGyomuCode("DBB"));
+        entity.setSubGyomuCode(サブ業務コード);
         Association 導入団体クラス = AssociationFinderFactory.createInstance().getAssociation();
         entity.setShichosonCode(導入団体クラス.getLasdecCode_());
         entity.setShoriName(ShoriName.過年度賦課確定.get名称());
-        entity.setShoriEdaban(new RString("0001"));
+        entity.setShoriEdaban(処理枝番);
         entity.setNendo(調定年度);
         entity.setNendoNaiRenban(最大年度内連番);
         entity.setKijunYMD(FlexibleDate.getNowDate());

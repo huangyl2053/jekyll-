@@ -159,16 +159,23 @@ public class KanendoFukaKakuteiHandler {
             if (entity.getFukaKakuteiEntity().get識別コード() != null) {
                 row.getTxtShikibetsuCode().setValue(entity.getFukaKakuteiEntity().get識別コード().value());
             }
-            row.getTxtChoteiNendo().setValue(entity.getFukaKakuteiEntity().get更正前調定年度().wareki().toDateString()
+            RString 更正前調定年度 = RString.EMPTY;
+            if (entity.getFukaKakuteiEntity().get更正前調定年度() != null) {
+                更正前調定年度 = entity.getFukaKakuteiEntity().get更正前調定年度().wareki().toDateString();
+                row.getTxtChoteiNendoMae().setValue(new RDate(entity.getFukaKakuteiEntity().get更正前調定年度().toString()));
+            }
+            row.getTxtChoteiNendo().setValue(更正前調定年度
                     .concat(改行).concat(entity.getFukaKakuteiEntity().get調定年度().wareki().toDateString()));
             row.getTxtChoteiNendoAto().setValue(new RDate(entity.getFukaKakuteiEntity().get調定年度().toString()));
-            row.getTxtChoteiNendoMae().setValue(new RDate(entity.getFukaKakuteiEntity().get更正前調定年度().toString()));
             row.getTxtChoteiNendo().setToolTip(new RString("上段：賦課更正前、下段：賦課更正後"));
             // TODO QA418    賦課年度
 //            row.getTxtFukaNendo().setValue(entity.getFukaKakuteiEntity().get更正前賦課年度().wareki().toDateString()
 //                    .concat(new RString("<br>"))
 //                    .concat(entity.getFukaKakuteiEntity().get賦課年度().wareki().toDateString()));
-            row.getTxtFukaNendo().setValue(new RDate(entity.getFukaKakuteiEntity().get更正前賦課年度().toString()));
+            RString 更正前賦課年度 = RString.EMPTY;
+            if (entity.getFukaKakuteiEntity().get更正前賦課年度() != null) {
+                row.getTxtFukaNendo().setValue(new RDate(entity.getFukaKakuteiEntity().get更正前賦課年度().toString()));
+            }
             row.getTxtFukaNendo().setValue(new RDate(entity.getFukaKakuteiEntity().get賦課年度().toString()));
             RString 更正前確定介護保険料 = RString.EMPTY;
             RString 確定介護保険料 = RString.EMPTY;
@@ -298,17 +305,6 @@ public class KanendoFukaKakuteiHandler {
                 fukaKakuteiEntity.set賦課年度(new FlexibleYear(row.getTxtFukaNendo().getValue().getYear().
                         toString()));
             }
-            fukaKakuteiEntity.set更正前確定介護保険料(row.getTxtKakuteiHokenryoMae().getValue());
-            fukaKakuteiEntity.set確定介護保険料(row.getTxtKakuteiHokenryoAto().getValue());
-            fukaKakuteiEntity.set更正前算定年額保険料２(row.getTxtNengakuHokenryoMae().getValue());
-            fukaKakuteiEntity.set算定年額保険料２(row.getTxtNengakuHokenryoAto().getValue());
-            fukaKakuteiEntity.set更正前減免額(row.getTxtGenmenGakuMae().getValue());
-            fukaKakuteiEntity.set減免額(row.getTxtGenmenGakuAto().getValue());
-            fukaKakuteiEntity.set更正前保険料算定段階２(row.getTxtShotokuDankaiMae().getValue());
-            fukaKakuteiEntity.set保険料算定段階２(row.getTxtShotokuDankaiAto().getValue());
-            fukaKakuteiEntity.set調定額(row.getTxtKanendoGaku().getValue());
-            fukaKakuteiEntity.set納期限(row.getTxtKanendoNokiGen().getValue());
-            fukaKakuteiList.add(new KanendoIdoFukaKakutei(fukaKakuteiEntity));
         }
         HonsanteiIdoKanendoFukaKakutei fukaKakutei = InstanceProvider.create(HonsanteiIdoKanendoFukaKakutei.class);
         if (div.getKaNendoIdoFukaIchiran().getDgKanendoFukaIchiran().getTotalRecords() == div.
