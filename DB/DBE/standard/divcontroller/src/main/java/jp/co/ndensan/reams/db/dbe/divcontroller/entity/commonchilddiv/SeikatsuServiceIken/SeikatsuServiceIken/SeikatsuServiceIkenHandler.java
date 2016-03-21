@@ -652,6 +652,9 @@ public class SeikatsuServiceIkenHandler {
             if (isNotExits) {
                 result.add(itemTemp);
             }
+            if (RString.isNullOrEmpty(itemTemp.get意見項目())) {
+                itemTemp = itemTemp.createBuilderForEdit().set意見項目(RString.EMPTY).build();
+            }
             移動エリアの意見項目初期化編集(itemTemp);
             栄養_食生活エリアの意見項目初期化編集(itemTemp);
             現在あるかまたは今後発生する可能性の高い状態とその対処方針エリアの意見項目初期化編集(itemTemp);
@@ -682,6 +685,9 @@ public class SeikatsuServiceIkenHandler {
             }
             if (!isNotExits) {
                 result.add(itemTemp);
+            }
+            if (RString.isNullOrEmpty(itemTemp.get記入項目())) {
+                itemTemp = itemTemp.createBuilderForEdit().set記入項目(RString.EMPTY).build();
             }
             栄養_食生活エリアの記入項目初期化編集(itemTemp);
             現在あるかまたは今後発生する可能性の高い状態とその対処方針エリアの記入項目初期化編集(itemTemp);
