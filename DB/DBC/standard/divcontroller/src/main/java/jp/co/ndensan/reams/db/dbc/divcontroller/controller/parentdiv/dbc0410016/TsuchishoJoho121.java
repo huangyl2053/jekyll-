@@ -6,12 +6,7 @@
 package jp.co.ndensan.reams.db.dbc.divcontroller.controller.parentdiv.dbc0410016;
 
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0410016.TsuchishoJoho121Div;
-import jp.co.ndensan.reams.db.dbc.divcontroller.viewbox.kaigokyufukokuhorenjohotorikomi.KokuhorenDataTorikomiViewStateClass;
-import jp.co.ndensan.reams.db.dbz.definition.core.enumeratedtype.ViewStateHolderName;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
-import jp.co.ndensan.reams.uz.uza.lang.RDate;
-import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 
 /**
  * 国保連情報受取データ取込_[121]資格照合表情報のクラスです。
@@ -26,9 +21,6 @@ public class TsuchishoJoho121 {
      */
     public ResponseData<TsuchishoJoho121Div> onLoad(TsuchishoJoho121Div div) {
 
-        KokuhorenDataTorikomiViewStateClass parmater = new KokuhorenDataTorikomiViewStateClass(
-                RDate.getNowDate().getYearMonth(), new RString("1"));
-        ViewStateHolder.put(ViewStateHolderName.国保連取込情報, parmater);
         div.getCcdKokurenJohoTorikomi().onLoadMode1();
         return ResponseData.of(div).respond();
     }
