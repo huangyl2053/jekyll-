@@ -113,12 +113,12 @@ public class HihokenshashoHakkoKanriboProcess extends SimpleBatchProcessBase {
                 new RString(uaFt200Psm.getParameterMap().get("psmShikibetsuTaisho").toString()));
         List<AkasiHakouKanriEntity> akaEntityList = mapper.get証発行管理リスト情報(mybatisParameter);
         List<AkasiHakouKanriEntity> akaEntityList1 = new ArrayList<>();
-        AkasiHakouKanriEntity akasiEntity = new AkasiHakouKanriEntity();
-        int akaEntityListSize = akaEntityList.size();
+        int akaEntityListSize = akaEntityList == null ? 0 : akaEntityList.size();
         if (akaEntityListSize != 0 && 発行管理リスト.equals(processParameter.getSiyuturiyokudaysyou()) && processParameter.isSeyisinjyohoflg()) {
             akaEntityListSize = 1;
         }
         for (int i = 0; i < akaEntityListSize; i++) {
+            AkasiHakouKanriEntity akasiEntity = new AkasiHakouKanriEntity();
             akasiEntity.setRenban(i);
             akasiEntity.setHihokenshaNo(akaEntityList.get(i).getHihokenshaNo());
             akasiEntity.setShikibetsuCode(akaEntityList.get(i).getShikibetsuCode());
@@ -185,7 +185,6 @@ public class HihokenshashoHakkoKanriboProcess extends SimpleBatchProcessBase {
         HihokenshashoHakkoKanriIchiranhyoReport report = HihokenshashoHakkoKanriIchiranhyoReport.createFrom(headItem, bodyItemList);
         report.writeBy(reportSourceWriter);
         batchReportWriter.close();
-
     }
 
     @Override
