@@ -13,6 +13,8 @@ import jp.co.ndensan.reams.db.dba.definition.batchprm.hihokenshashohakkokanribo.
 import jp.co.ndensan.reams.db.dba.divcontroller.entity.parentdiv.DBA1110011.BatchPanelDiv;
 import jp.co.ndensan.reams.db.dba.divcontroller.entity.parentdiv.DBA1110011.dgKaishuJiyu_Row;
 import jp.co.ndensan.reams.db.dba.divcontroller.entity.parentdiv.DBA1110011.dgKoufuJiyu_Row;
+import jp.co.ndensan.reams.uz.uza.biz.ReportId;
+import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.util.code.entity.UzT0007CodeEntity;
@@ -34,6 +36,7 @@ public class BatchPanelHandler {
     private static final RString 証発行モード_002 = new RString("002");
     private static final RString 発行管理リスト = new RString("1");
     private static final RString 未回収者リスト = new RString("2");
+    private static final RString REPORT_ID_DBA200004 = new RString("DBA200004");
 
     /**
      * コンストラクタです。
@@ -68,11 +71,7 @@ public class BatchPanelHandler {
         }
         div.getDgKaishuJiyu().setDataSource(dgKaishuJiyuRowList);
         div.getDgKoufuJiyu().setDataSource(dgKoufuJiyuRowList);
-        div.getCcdChohyoShutsuryokujun().setVisible(true);
-        div.getCcdChohyoShutsuryokujun().load(
-                div.getCcdChohyoShutsuryokujun().getサブ業務コード(),
-                div.getCcdChohyoShutsuryokujun().get帳票ID());
-
+        div.getCcdChohyoShutsuryokujun().load(SubGyomuCode.DBA介護資格, new ReportId(REPORT_ID_DBA200004));
     }
 
     /**
