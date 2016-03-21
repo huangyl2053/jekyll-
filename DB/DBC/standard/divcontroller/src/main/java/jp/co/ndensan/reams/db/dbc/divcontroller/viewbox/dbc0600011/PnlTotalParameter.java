@@ -10,7 +10,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 import lombok.Getter;
 
 /**
- *
+ * 福祉用具購入費支給申請_検索のParameterです
  */
 @SuppressWarnings("PMD.UnusedPrivateField")
 @Getter

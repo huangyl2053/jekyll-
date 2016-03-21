@@ -16,7 +16,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 
 /**
- *
+ * 福祉用具購入費支給申請_検索のHandlerです
  */
 public final class PnlTotalHandler {
 
@@ -27,6 +27,7 @@ public final class PnlTotalHandler {
     }
 
     /**
+     * 生成されたインタフェースを返します
      *
      * @param div 画面DIV
      * @return PnlTotalHandler
@@ -80,7 +81,7 @@ public final class PnlTotalHandler {
     }
 
     /**
-     * ヘッダ_エリア
+     * putViewStateHolder
      *
      * @param 状態 状態
      * @param 被保険者番号 被保険者番号
@@ -92,7 +93,6 @@ public final class PnlTotalHandler {
         ViewStateHolder.put(ViewStateKeys.支給申請情報検索キー, parameter);
         ViewStateHolder.put(ViewStateKeys.状態, 状態);
         ViewStateHolder.put(ViewStateKeys.被保険者番号, 被保険者番号);
-//div.getKaigoCommonPanel().getCcdShikakuKihon().get被保険者番号()
     }
 
 }
