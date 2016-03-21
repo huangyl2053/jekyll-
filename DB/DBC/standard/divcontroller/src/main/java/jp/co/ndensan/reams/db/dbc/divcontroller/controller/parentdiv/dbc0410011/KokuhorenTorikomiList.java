@@ -69,7 +69,6 @@ public class KokuhorenTorikomiList {
      */
     public ResponseData<KokuhorenTorikomiListDiv> onSelect_dgKokuhorenTorikomiList_Row(
             KokuhorenTorikomiListDiv div) {
-
         dgKokuhorenTorikomiList_Row row = div.getDgKokuhorenTorikomiList().getClickedItem();
         KokuhorenDataTorikomiViewStateClass parmater = new KokuhorenDataTorikomiViewStateClass(
                 div.getTxtShoriYM().getValue().getYearMonth(),
@@ -89,7 +88,7 @@ public class KokuhorenTorikomiList {
      */
     public ResponseData<KokuhorenTorikomiListDiv> onClick_btnScheduleSetting(KokuhorenTorikomiListDiv div) {
         ViewStateHolder.put(ViewStateKeys.処理年月, div.getTxtShoriYM().getValue());
-        return ResponseData.of(div).respond();
+        return ResponseData.of(div).forwardWithEventName(DBC0410011TransitionEventName.スケジュール設定へ).respond();
     }
 
     private KokuhorenTorikomiListHandler getHandler(KokuhorenTorikomiListDiv div) {

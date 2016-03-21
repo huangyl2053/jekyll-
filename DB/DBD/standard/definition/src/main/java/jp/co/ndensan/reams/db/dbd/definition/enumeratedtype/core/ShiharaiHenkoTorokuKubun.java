@@ -11,6 +11,10 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 public enum ShiharaiHenkoTorokuKubun {
 
     /**
+     * コード:00 名称:空 略称:定義なし
+     */
+    _空("00", "空"),
+    /**
      * コード:01 名称:２号予告登録者 略称:定義なし
      */
     _２号予告登録者("01", "２号予告登録者"),
