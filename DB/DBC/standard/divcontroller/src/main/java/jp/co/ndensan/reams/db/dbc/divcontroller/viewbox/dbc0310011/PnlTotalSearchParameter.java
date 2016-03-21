@@ -15,7 +15,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
  */
 @lombok.Getter
 @SuppressWarnings("PMD.UnusedPrivateField")
-public class PnlTotalParameter implements Serializable {
+public class PnlTotalSearchParameter implements Serializable {
 
     private static final long serialVersionUID = -6680438140785085186L;
 
@@ -39,7 +39,7 @@ public class PnlTotalParameter implements Serializable {
      * @param 契約事業者番号 契約事業者番号
      * @param 契約事業者名 契約事業者名
      */
-    public PnlTotalParameter(RString 契約番号,
+    public PnlTotalSearchParameter(RString 契約番号,
             RString 契約サービス種類,
             RString 被保番号,
             RString 氏名,
