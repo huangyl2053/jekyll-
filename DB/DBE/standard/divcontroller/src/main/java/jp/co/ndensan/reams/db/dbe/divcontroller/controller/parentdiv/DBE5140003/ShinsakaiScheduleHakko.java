@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbe.divcontroller.controller.parentdiv.DBE5410003;
+package jp.co.ndensan.reams.db.dbe.divcontroller.controller.parentdiv.DBE5140003;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -28,7 +28,6 @@ public class ShinsakaiScheduleHakko {
 
     private static final RString 介護認定審査会スケジュール表鑑 = new RString("key0");
     private static final RString JIKO_BTTON = new RString("btnHakko");
-    private static final RString JIKOJIN_BTTON = new RString("btnHakkoJin");
 
     /**
      * 画面初期化処理です。
@@ -42,7 +41,6 @@ public class ShinsakaiScheduleHakko {
         div.getShinsakaiScheduleSrch().getTxtShinsakaiKaisaiYoteiKikan().clearFromValue();
         div.getShinsakaiScheduleSrch().getTxtShinsakaiKaisaiYoteiKikan().clearToValue();
         CommonButtonHolder.setVisibleByCommonButtonFieldName(JIKO_BTTON, false);
-        CommonButtonHolder.setVisibleByCommonButtonFieldName(JIKOJIN_BTTON, false);
         return ResponseData.of(div).respond();
     }
 
@@ -97,16 +95,6 @@ public class ShinsakaiScheduleHakko {
      * @return ResponseData<KaigoNinteiShinsakaiScheduleBatchParamter>
      */
     public ResponseData<KaigoNinteiShinsakaiScheduleBatchParamter> onClick_btnHakko(ShinsakaiScheduleHakkoDiv div) {
-        return ResponseData.of(getParamter(div)).respond();
-    }
-
-    /**
-     * 介護認定審査会スケジュール表鑑バッチを実行します。
-     *
-     * @param div 護認定審査会開催予定登録3div
-     * @return ResponseData<KaigoNinteiShinsakaiScheduleBatchParamter>
-     */
-    public ResponseData<KaigoNinteiShinsakaiScheduleBatchParamter> onClick_btnHakkoJin(ShinsakaiScheduleHakkoDiv div) {
         return ResponseData.of(getParamter(div)).respond();
     }
 
