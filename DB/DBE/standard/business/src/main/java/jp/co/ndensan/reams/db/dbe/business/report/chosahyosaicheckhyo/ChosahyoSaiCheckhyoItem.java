@@ -21,7 +21,7 @@ public class ChosahyoSaiCheckhyoItem {
     private RString title;
     private RString hihokenshaNo;
     private RString hihokenshaName;
-    private RString PageCount;
+    private RString pageCount;
     private RString printTimeStamp;
     private RString zenkaiIchijihanteikekka;
     private RString konkaiIchijihanteikekka;

@@ -13,7 +13,7 @@ import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
 /**
  * 前回認定調査結果との比較表のReportです。
  */
-public class ChosahyoSaiCheckhyoReport extends Report<ChosahyoSaiCheckhyoReportSource> {
+public final class ChosahyoSaiCheckhyoReport extends Report<ChosahyoSaiCheckhyoReportSource> {
 
     private final List<ChosahyoSaiCheckhyoItem> itemList;
 
