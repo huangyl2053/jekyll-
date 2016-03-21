@@ -3,6 +3,7 @@ package jp.co.ndensan.reams.db.dbu.service.core.jigyohokokunenpo;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import jp.co.ndensan.reams.db.dba.definition.message.DbaErrorMessages;
 import jp.co.ndensan.reams.db.dbu.business.core.basic.JigyoHokokuTokeiData;
 import jp.co.ndensan.reams.db.dbu.business.jigyohokokunenpo.JigyoHokokuNenpoResult;
 import jp.co.ndensan.reams.db.dbu.business.jigyohokokunenpo.ShichosonCodeNameResult;
@@ -149,22 +150,18 @@ public class JigyoHokokuNenpoHoseiHakoManager {
     }
 
     private SearchResult<ShichosonCodeNameResult> get市町村情報リストBy合併情報区分は合併ありの場合(IShichosonJoho 市町村情報) {
-        if (市町村識別ID_00.equals(市町村情報.get市町村識別ID())) {
+        if (市町村識別ID_00.equals(市町村情報.get市町村識別ID().value())) {
             return get市町村情報リストBy合併ありと市町村識別IDは00の場合(市町村情報);
         } else {
-            //TODO エラーマッセージが存在しない。QA:401 2016/01/04
-//            throw new ApplicationException(DbaErrorMessages);
-            return SearchResult.of(Collections.<ShichosonCodeNameResult>emptyList(), 0, false);
+            throw new ApplicationException(DbaErrorMessages.広域構成市町村からの補正処理.getMessage());
         }
     }
 
     private SearchResult<ShichosonCodeNameResult> get市町村情報リストBy合併情報区分は合併なしの場合(IShichosonJoho 市町村情報) {
-        if (市町村識別ID_00.equals(市町村情報.get市町村識別ID())) {
+        if (市町村識別ID_00.equals(市町村情報.get市町村識別ID().value())) {
             return get市町村情報リストBy合併なしと市町村識別IDは00の場合(市町村情報);
         } else {
-            //TODO エラーマッセージが存在しない。QA:401 2016/01/04
-//            throw new ApplicationException(DbaErrorMessages.補正処理は行えません.getMessage());
-            return SearchResult.of(Collections.<ShichosonCodeNameResult>emptyList(), 0, false);
+            throw new ApplicationException(DbaErrorMessages.広域構成市町村からの補正処理.getMessage());
         }
     }
 
@@ -284,7 +281,7 @@ public class JigyoHokokuNenpoHoseiHakoManager {
     @Transaction
     public SearchResult<JigyoHokokuTokeiData> getJigyoHokokuNenpoDetal(SearchJigyoHokokuNenpo jigyoHokokuNenpoSearch) {
         List<JigyoHokokuTokeiData> 事業報告集計一覧データリスト = new ArrayList<>();
-        List<DbT7021JigyoHokokuTokeiDataEntity> 事業報告集計一覧データEntityリスト = new ArrayList<>();
+        List<DbT7021JigyoHokokuTokeiDataEntity> 事業報告集計一覧データEntityリスト;
         JigyoHokokuNenpoDetalParameter parameter = getJigyoHokokuNenpoParameter(jigyoHokokuNenpoSearch);
         if (!jigyoHokokuNenpoSearch.get集計番号().isEmpty()) {
             事業報告集計一覧データEntityリスト = dac.selectJigyoHokokuNenpoDetal1(jigyoHokokuNenpoSearch.get報告年(),
