@@ -48,5 +48,17 @@
             <version>1.0-SNAPSHOT</version>
             <type>jar</type>
         </dependency>
+        <dependency>
+            <groupId>jp.co.ndensan.reams.db.dbb</groupId>
+            <artifactId>DbbBusiness</artifactId>
+            <version>1.0-SNAPSHOT</version>
+            <type>jar</type>
+        </dependency>
+        <dependency>
+            <groupId>jp.co.ndensan.reams.db.dbc</groupId>
+            <artifactId>DbcBusiness</artifactId>
+            <version>1.0-SNAPSHOT</version>
+            <type>jar</type>
+        </dependency>
     </dependencies>
 </project>
