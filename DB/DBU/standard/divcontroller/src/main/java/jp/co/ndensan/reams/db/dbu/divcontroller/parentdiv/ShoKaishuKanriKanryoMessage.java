@@ -5,8 +5,8 @@
  */
 package jp.co.ndensan.reams.db.dbu.divcontroller.parentdiv;
 
-import jp.co.ndensan.reams.db.dbu.divcontroller.entity.parentdiv.dbu0500011.KanryoMessagePnlDiv;
-import jp.co.ndensan.reams.db.dbu.divcontroller.entity.parentdiv.dbu0500011.ShoKaishuKanriTaishoshaJohoDiv;
+import jp.co.ndensan.reams.db.dbu.divcontroller.entity.parentdiv.DBU0500011.KanryoMessagePnlDiv;
+import jp.co.ndensan.reams.db.dbu.divcontroller.entity.parentdiv.DBU0500011.ShoKaishuKanriTaishoshaJohoDiv;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 
 /**

@@ -6,8 +6,8 @@
 package jp.co.ndensan.reams.db.dbu.divcontroller.parentdiv;
 
 import java.util.HashMap;
-import jp.co.ndensan.reams.db.dbu.divcontroller.entity.parentdiv.dbu0500011.SearchShoKaishuKanriDiv;
-import jp.co.ndensan.reams.db.dbu.divcontroller.entity.parentdiv.dbu0500011.ShoKaishuKanriTaishoshaJohoDiv;
+import jp.co.ndensan.reams.db.dbu.divcontroller.entity.parentdiv.DBU0500011.SearchShoKaishuKanriDiv;
+import jp.co.ndensan.reams.db.dbu.divcontroller.entity.parentdiv.DBU0500011.ShoKaishuKanriTaishoshaJohoDiv;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.parentdiv.kaigoshikakukihon.KaigoShikakuKihonDiv;
 import jp.co.ndensan.reams.db.dbz.divcontroller.helper.ControlGenerator;
 import jp.co.ndensan.reams.db.dbz.divcontroller.helper.YamlLoader;
