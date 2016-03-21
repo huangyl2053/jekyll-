@@ -20,7 +20,7 @@ import jp.co.ndensan.reams.ur.urc.entity.db.basic.shuno.shunokanri.UrT0700ShunoK
 public interface IFukaKakuteiMapper {
 
     /**
-     * select更新後の賦課内容
+     * 更新後の賦課内容を取得する。
      *
      * @param fukaKakuteiParameter　FukaKakuteiParameter
      * @return List<KanendoIdoFukaKakuteiEntity>
@@ -28,7 +28,7 @@ public interface IFukaKakuteiMapper {
     List<KanendoIdoFukaKakuteiEntity> select更新後の賦課内容(FukaKakuteiParameter fukaKakuteiParameter);
 
     /**
-     * select納付額と納期限
+     * 対応行の納付額と納期限へ設定する。
      *
      * @param fukaKakuteiParameter　FukaKakuteiParameter
      * @return UrT0705ChoteiKyotsuEntity
@@ -36,7 +36,7 @@ public interface IFukaKakuteiMapper {
     UrT0705ChoteiKyotsuEntity select納付額と納期限(FukaKakuteiParameter fukaKakuteiParameter);
 
     /**
-     * select収納管理マスタ
+     * 収納管理マスタ（介護継承）のデータを取得する。
      *
      * @param fukaKakuteiParameter　FukaKakuteiParameter
      * @return List<UrT0700ShunoKanriEntity>
@@ -44,7 +44,7 @@ public interface IFukaKakuteiMapper {
     List<UrT0700ShunoKanriEntity> select収納管理マスタ(FukaKakuteiParameter fukaKakuteiParameter);
 
     /**
-     * select調定額内訳
+     * 調定額内訳（介護継承）のデータを取得する。
      *
      * @param fukaKakuteiParameter　FukaKakuteiParameter
      * @return List<UrT0706ChoteigakuUchiwakeEntity>
@@ -52,7 +52,7 @@ public interface IFukaKakuteiMapper {
     List<UrT0706ChoteigakuUchiwakeEntity> select調定額内訳(FukaKakuteiParameter fukaKakuteiParameter);
 
     /**
-     * select調定共通
+     * 調定共通（介護継承）のデータを取得する。
      *
      * @param fukaKakuteiParameter　FukaKakuteiParameter
      * @return List<UrT0705ChoteiKyotsuEntity>
@@ -60,7 +60,7 @@ public interface IFukaKakuteiMapper {
     List<UrT0705ChoteiKyotsuEntity> select調定共通(FukaKakuteiParameter fukaKakuteiParameter);
 
     /**
-     * select調定状況
+     * 調定状況（介護継承）のデータを取得する。
      *
      * @param fukaKakuteiParameter　FukaKakuteiParameter
      * @return List<UrT0707ChoteiJokyoEntity>
@@ -68,7 +68,7 @@ public interface IFukaKakuteiMapper {
     List<UrT0707ChoteiJokyoEntity> select調定状況(FukaKakuteiParameter fukaKakuteiParameter);
 
     /**
-     * select調定共通ForUpdate
+     * 調定共通（介護継承）のデータを取得する。
      *
      * @param fukaKakuteiParameter　FukaKakuteiParameter
      * @return List<UrT0705ChoteiKyotsuEntity>
@@ -76,21 +76,21 @@ public interface IFukaKakuteiMapper {
     List<UrT0705ChoteiKyotsuEntity> select調定共通ForUpdate(FukaKakuteiParameter fukaKakuteiParameter);
 
     /**
-     * delete調定額内訳
+     * 調定額内訳（介護継承）のデータを削除する。
      *
      * @param parameter　Map<String, Object>
      */
     void delete調定額内訳(Map<String, Object> parameter);
 
     /**
-     * delete調定状況
+     * 調定状況（介護継承）のデータを削除する。
      *
      * @param parameter　Map<String, Object>
      */
     void delete調定状況(Map<String, Object> parameter);
 
     /**
-     * delete収納管理マスタ
+     * 収納管理マスタ（介護継承）のデータを削除する。
      *
      * @param parameter　Map<String, Object>
      */

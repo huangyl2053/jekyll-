@@ -136,4 +136,16 @@ public class DbT2003KibetsuDac implements ISaveable<DbT2003KibetsuEntity> {
                                 eq(rirekiNo, 履歴番号))).
                 toList(DbT2003KibetsuEntity.class);
     }
+
+    /**
+     * DbT2003KibetsuEntityを削除します。状態によってdelete処理に振り分けられます。
+     *
+     * @param entity entity
+     * @return 削除件数
+     */
+    @Transaction
+    public int delete(DbT2003KibetsuEntity entity) {
+        requireNonNull(entity, UrSystemErrorMessages.値がnull.getReplacedMessage("介護期別エンティティ"));
+        return DbAccessors.saveOrDeletePhysicalBy(new DbAccessorNormalType(session), entity);
+    }
 }
