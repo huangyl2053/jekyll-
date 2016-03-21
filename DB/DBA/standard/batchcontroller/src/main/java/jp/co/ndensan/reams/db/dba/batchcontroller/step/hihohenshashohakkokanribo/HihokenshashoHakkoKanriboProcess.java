@@ -164,8 +164,8 @@ public class HihokenshashoHakkoKanriboProcess extends SimpleBatchProcessBase {
         }
         HihokenshashoHakkoKanriIchiranhyoHeadItem headItem = new HihokenshashoHakkoKanriIchiranhyoHeadItem(
                 chohyoDataSakuseiEntityList.get(0).get印刷日時(),
-                chohyoDataSakuseiEntityList.get(0).get帳票タイトル(),
                 RString.EMPTY,
+                chohyoDataSakuseiEntityList.get(0).get帳票タイトル(),
                 chohyoDataSakuseiEntityList.get(0).get市町村コード(),
                 chohyoDataSakuseiEntityList.get(0).get市町村名(),
                 chohyoDataSakuseiEntityList.get(0).getソート順１(),
