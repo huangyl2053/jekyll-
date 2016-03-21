@@ -70,9 +70,11 @@ public class JutakuKaishuhiShikyuShinseiPanel {
             RDate 支給申請日開始 = ViewStateHolder.get(JutakuKaishuhiShikyuShinseiKeys.支給申請日From, RDate.class);
             RDate 支給申請日終了 = ViewStateHolder.get(JutakuKaishuhiShikyuShinseiKeys.支給申請日To, RDate.class);
             JutakukaishuSikyuShinseiIkkatuShinsaManager manager = JutakukaishuSikyuShinseiIkkatuShinsaManager.createInstance();
-            List<MiShinsaSikyuShinsei> resultList = manager.getMiShinasaShikyuShinseiList(new FlexibleDate(支給申請日開始.toDateString()),
+            List<MiShinsaSikyuShinsei> resultList = manager.getMiShinasaShikyuShinseiList(
+                    new FlexibleDate(支給申請日開始.toDateString()),
                     new FlexibleDate(支給申請日終了.toDateString()));
-            List<MiShinsaSikyuShinsei> viewStateList = ViewStateHolder.get(JutakuKaishuhiShikyuShinseiKeys.申請一覧GridEntity, List.class);
+            List<MiShinsaSikyuShinsei> viewStateList = ViewStateHolder.get(JutakuKaishuhiShikyuShinseiKeys
+                    .申請一覧GridEntity, List.class);
             if (!resultList.isEmpty() && !viewStateList.isEmpty()) {
                 審査結果の再設定(viewStateList, resultList);
             }
@@ -181,7 +183,8 @@ public class JutakuKaishuhiShikyuShinseiPanel {
         for (dgMishinsaShikyuShinsei_Row row : list) {
             if (row.getTxtShinsaResult().isEmpty()) {
                 HihokenshaNo 被保険者番号 = new HihokenshaNo(row.getTxtHihoNo());
-                FlexibleYearMonth サービス提供年月 = new FlexibleYearMonth(row.getTxtTeikyoYM().getValue().toDateString().substring(0, LENGTH));
+                FlexibleYearMonth サービス提供年月 = new FlexibleYearMonth(row.getTxtTeikyoYM().getValue()
+                        .toDateString().substring(0, LENGTH));
                 RString 整理番号 = row.getTxtSeiriNo().getValue();
                 boolean 限度リセットフラグ = false;
                 if (row.getTxtTenkyoReset() && row.getTxt3DankaiReset()) {
@@ -220,7 +223,8 @@ public class JutakuKaishuhiShikyuShinseiPanel {
         List<dgMishinsaShikyuShinsei_Row> list = div.getMishinsaShikyuShinseiListPanel().getDgMishinsaShikyuShinsei().getDataSource();
         dgMishinsaShikyuShinsei_Row row = div.getMishinsaShikyuShinseiListPanel().getDgMishinsaShikyuShinsei().getClickedItem();
         HihokenshaNo 被保険者番号 = new HihokenshaNo(row.getTxtHihoNo());
-        FlexibleYearMonth サービス提供年月 = new FlexibleYearMonth(row.getTxtTeikyoYM().getValue().toDateString().substring(0, LENGTH));
+        FlexibleYearMonth サービス提供年月 = new FlexibleYearMonth(row.getTxtTeikyoYM().getValue().toDateString()
+                .substring(0, LENGTH));
         RString 整理番号 = row.getTxtSeiriNo().getValue();
         ViewStateHolder.put(JutakuKaishuhiShikyuShinseiKeys.支給申請日From, 支給申請日開始);
         ViewStateHolder.put(JutakuKaishuhiShikyuShinseiKeys.支給申請日To, 支給申請日終了);
@@ -238,7 +242,8 @@ public class JutakuKaishuhiShikyuShinseiPanel {
      * @return ResponseData<JutakuKaishuhiShikyuShinseiPanelDiv>
      */
     public ResponseData<JutakuKaishuhiShikyuShinseiPanelDiv> onClick_btnSave(JutakuKaishuhiShikyuShinseiPanelDiv div) {
-        ValidationMessageControlPairs validationMessages = new JutakuKaishuhiShikyuShinseiPanelVlaidationHandler(div).volidateデータ選択と未審査();
+        ValidationMessageControlPairs validationMessages = new JutakuKaishuhiShikyuShinseiPanelVlaidationHandler(div)
+                .volidateデータ選択と未審査();
         if (validationMessages.iterator().hasNext()) {
             return ResponseData.of(div).addValidationMessages(validationMessages).respond();
         }
@@ -251,13 +256,17 @@ public class JutakuKaishuhiShikyuShinseiPanel {
             CommonButtonHolder.setDisabledByCommonButtonFieldName(保存パターン, Boolean.FALSE);
             return ResponseData.of(div).respond();
         }
-        FlexibleDate 決定年月日 = new FlexibleDate(div.getMishinsaShikyuShinseiListPanel().getTxtKetteiYMD().getValue().toDateString());
+        FlexibleDate 決定年月日 = new FlexibleDate(div.getMishinsaShikyuShinseiListPanel().getTxtKetteiYMD()
+                .getValue().toDateString());
         JutakukaishuSikyuShinseiIkkatuShinsaManager manager = JutakukaishuSikyuShinseiIkkatuShinsaManager.createInstance();
-        boolean is正常終了 = manager.saveDBDate(データ保存(div.getMishinsaShikyuShinseiListPanel().getDgMishinsaShikyuShinsei().getSelectedItems(), 決定年月日));
+        boolean is正常終了 = manager.saveDBDate(データ保存(div.getMishinsaShikyuShinseiListPanel()
+                .getDgMishinsaShikyuShinsei().getSelectedItems(), 決定年月日));
         if (is正常終了) {
-            div.getKansyoMessagePanel().getCcdKansyoMessage().setMessage(UrInformationMessages.保存終了, RString.EMPTY, RString.EMPTY, is正常終了);
+            div.getKansyoMessagePanel().getCcdKansyoMessage()
+                    .setMessage(UrInformationMessages.保存終了, RString.EMPTY, RString.EMPTY, is正常終了);
         } else {
-            div.getKansyoMessagePanel().getCcdKansyoMessage().setMessage(UrErrorMessages.異常終了, RString.EMPTY, RString.EMPTY, is正常終了);
+            div.getKansyoMessagePanel().getCcdKansyoMessage()
+                    .setMessage(UrErrorMessages.異常終了, RString.EMPTY, RString.EMPTY, is正常終了);
         }
         CommonButtonHolder.setDisabledByCommonButtonFieldName(保存パターン, Boolean.FALSE);
         return ResponseData.of(div).setState(DBC0720011StateName.完了);
@@ -278,7 +287,8 @@ public class JutakuKaishuhiShikyuShinseiPanel {
         if (!住宅改修List.isEmpty()) {
             for (ShokanJutakuKaishu shokanJutakuKaishu : 住宅改修List) {
                 JutakuKaishuJyusyoChofukuHanntei chofukuHanntei = JutakuKaishuJyusyoChofukuHanntei.createInstance();
-                改修住所重複判定 = chofukuHanntei.checkKaishuJyusyoChofukuToroku(被保険者番号, サービス提供年月, shokanJutakuKaishu.get住宅改修住宅住所());
+                改修住所重複判定 = chofukuHanntei
+                        .checkKaishuJyusyoChofukuToroku(被保険者番号, サービス提供年月, shokanJutakuKaishu.get住宅改修住宅住所());
             }
         }
         return 改修住所重複判定;
@@ -292,7 +302,8 @@ public class JutakuKaishuhiShikyuShinseiPanel {
      * @return boolean
      */
     private boolean 要介護状態３段階変更チェック(HihokenshaNo 被保険者番号, FlexibleYearMonth サービス提供年月) {
-        JutakuKaishuYaokaigoJyotaiSandannkaiHanteiManager hanteiManager = JutakuKaishuYaokaigoJyotaiSandannkaiHanteiManager.createInstance();
+        JutakuKaishuYaokaigoJyotaiSandannkaiHanteiManager hanteiManager = 
+                JutakuKaishuYaokaigoJyotaiSandannkaiHanteiManager.createInstance();
         return hanteiManager.checkYaokaigoJyotaiSandannkai(被保険者番号, サービス提供年月);
     }
 
@@ -308,8 +319,10 @@ public class JutakuKaishuhiShikyuShinseiPanel {
      */
     private boolean 限度額チェック(HihokenshaNo 被保険者番号, FlexibleYearMonth サービス提供年月, RString 整理番号,
             boolean 限度リセットフラグ, Decimal 保険対象費用額) {
-        JutakuKaishuShikyuGendogakuHantei gendogakuHantei = new JutakuKaishuShikyuGendogakuHantei(JutakuKaishuJizenShinsei.createInstance());
-        return gendogakuHantei.checkJutakukaishuShikyuGendogaku(被保険者番号, サービス提供年月, 整理番号, 限度リセットフラグ, 保険対象費用額);
+        JutakuKaishuShikyuGendogakuHantei gendogakuHantei = new JutakuKaishuShikyuGendogakuHantei(
+                JutakuKaishuJizenShinsei.createInstance());
+        return gendogakuHantei.checkJutakukaishuShikyuGendogaku(被保険者番号, サービス提供年月, 
+                整理番号, 限度リセットフラグ, 保険対象費用額);
     }
 
     /**
@@ -320,11 +333,14 @@ public class JutakuKaishuhiShikyuShinseiPanel {
      * @return List<SaveIkkatuShinsaDate>
      */
     private List<SaveIkkatuShinsaDate> データ保存(List<dgMishinsaShikyuShinsei_Row> list, FlexibleDate 決定年月日) {
-        List<MiShinsaSikyuShinsei> viewStateList = ViewStateHolder.get(JutakuKaishuhiShikyuShinseiKeys.未審査支給申請一覧, List.class);
+        List<MiShinsaSikyuShinsei> viewStateList = ViewStateHolder.get(
+                JutakuKaishuhiShikyuShinseiKeys.未審査支給申請一覧, 
+                List.class);
         List<SaveIkkatuShinsaDate> parameterList = new ArrayList<>();
         for (dgMishinsaShikyuShinsei_Row row : list) {
             HihokenshaNo 被保険者番号 = new HihokenshaNo(row.getTxtHihoNo());
-            FlexibleYearMonth サービス提供年月 = new FlexibleYearMonth(row.getTxtTeikyoYM().getValue().toDateString().substring(0, LENGTH));
+            FlexibleYearMonth サービス提供年月 = new FlexibleYearMonth(row.getTxtTeikyoYM()
+                    .getValue().toDateString().substring(0, LENGTH));
             RString 整理番号 = row.getTxtSeiriNo().getValue();
             HokenshaNo 証記載保険者番号 = new HokenshaNo(row.getTxtShokisaiHokenshaNo());
             RString 支給決定区分 = RString.EMPTY;

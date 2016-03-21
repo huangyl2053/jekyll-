@@ -49,7 +49,8 @@ public class JutakuKaishuhiShikyuShinseiPanelDiv extends Panel {
      * @param SearchConditionToMishinsaShikyuShinseiPanel SearchConditionToMishinsaShikyuShinseiPanel
      */
     @JsonProperty("SearchConditionToMishinsaShikyuShinseiPanel")
-    public void setSearchConditionToMishinsaShikyuShinseiPanel(SearchConditionToMishinsaShikyuShinseiPanelDiv SearchConditionToMishinsaShikyuShinseiPanel) {
+    public void setSearchConditionToMishinsaShikyuShinseiPanel(
+            SearchConditionToMishinsaShikyuShinseiPanelDiv SearchConditionToMishinsaShikyuShinseiPanel) {
         this.SearchConditionToMishinsaShikyuShinseiPanel = SearchConditionToMishinsaShikyuShinseiPanel;
     }
 

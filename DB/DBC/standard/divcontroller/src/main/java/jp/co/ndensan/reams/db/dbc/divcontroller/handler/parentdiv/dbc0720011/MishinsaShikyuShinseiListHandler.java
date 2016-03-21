@@ -49,7 +49,7 @@ public final class MishinsaShikyuShinseiListHandler {
      * @param dateSource List<MiShinsaSikyuShinsei>
      */
     public void initializeDropDownList(List<MiShinsaSikyuShinsei> dateSource) {
-        List<dgMishinsaShikyuShinsei_Row> lists = new ArrayList<dgMishinsaShikyuShinsei_Row>();
+        List<dgMishinsaShikyuShinsei_Row> lists = new ArrayList<>();
         for (MiShinsaSikyuShinsei result : dateSource) {
             dgMishinsaShikyuShinsei_Row row = new dgMishinsaShikyuShinsei_Row();
             row.setSelected(Boolean.TRUE);
@@ -81,14 +81,15 @@ public final class MishinsaShikyuShinseiListHandler {
 
     /**
      * 支給申請日有効チェック
-     * 
+     *
      * @param div JutakuKaishuhiShikyuShinseiPanelDiv
      * @return boolean
      */
     public static boolean is支給申請日有効(JutakuKaishuhiShikyuShinseiPanelDiv div) {
         if (is支給申請日入力(div)) {
             return div.getSearchConditionToMishinsaShikyuShinseiPanel().getTxtShikyuShinseiDate().getFromValue()
-                    .isBeforeOrEquals(div.getSearchConditionToMishinsaShikyuShinseiPanel().getTxtShikyuShinseiDate().getToValue());
+                    .isBeforeOrEquals(div.getSearchConditionToMishinsaShikyuShinseiPanel()
+                            .getTxtShikyuShinseiDate().getToValue());
 
         } else {
             return true;
@@ -126,7 +127,8 @@ public final class MishinsaShikyuShinseiListHandler {
     public static boolean is未審査(JutakuKaishuhiShikyuShinseiPanelDiv div) {
         if (isデータ選択(div)) {
             boolean flag = true;
-            List<dgMishinsaShikyuShinsei_Row> list = div.getMishinsaShikyuShinseiListPanel().getDgMishinsaShikyuShinsei().getSelectedItems();
+            List<dgMishinsaShikyuShinsei_Row> list = div.getMishinsaShikyuShinseiListPanel()
+                    .getDgMishinsaShikyuShinsei().getSelectedItems();
             for (dgMishinsaShikyuShinsei_Row row : list) {
                 if (row.getTxtShinsaResult().isEmpty()) {
                     flag = false;
