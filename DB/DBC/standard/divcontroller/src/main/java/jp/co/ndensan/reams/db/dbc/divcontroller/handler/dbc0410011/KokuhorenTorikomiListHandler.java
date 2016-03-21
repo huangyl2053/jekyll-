@@ -7,7 +7,7 @@ package jp.co.ndensan.reams.db.dbc.divcontroller.handler.dbc0410011;
 
 import java.util.ArrayList;
 import java.util.List;
-import jp.co.ndensan.reams.db.dbc.business.core.KokuhorenTorikomiJohoModel;
+import jp.co.ndensan.reams.db.dbc.business.core.KokuhorenTorikomiJohoInfo;
 import jp.co.ndensan.reams.db.dbc.business.core.view.KokuhorenTorikomiJoho;
 import jp.co.ndensan.reams.db.dbc.definition.core.configkeys.ConfigKeysFuSikyuKetteishaIchiran;
 import jp.co.ndensan.reams.db.dbc.definition.core.configkeys.ConfigKeysHenreiIchiranhyo;
@@ -63,6 +63,14 @@ public class KokuhorenTorikomiListHandler {
     private final KokuhorenTorikomiListDiv div;
     private static final RString グリッドソート条件１ = new RString("ichiranHyojijun");
     private static final int NUM = 8;
+    private static final RString 再処理可能 = new RString("再処理可能");
+    private static final RString 再処理不可 = new RString("再処理不可");
+    private static final RString 処理前 = new RString("処理前");
+    private static final RString アンダーライン = new RString("_");
+    private static final RString アステリスク = new RString("*");
+    private static final RString 処理状態区分_フォーク = new RString("×");
+    private static final RString 処理状態区分_丸い = new RString("○");
+    private static final RString 処理状態区分_横線 = new RString("-");
 
     /**
      * コンストラクタです。
@@ -76,45 +84,41 @@ public class KokuhorenTorikomiListHandler {
     /**
      * 処理年月テキストボックス変更時にリストを更新します。
      *
-     * @param panel 国保連取込情報リストDiv
-     * @param 処理年月 処理年月
+     * @param 処理年月 RYearMonth
      */
-    public void load(KokuhorenTorikomiListDiv panel, RYearMonth 処理年月) {
-
-        List<KokuhorenTorikomiJohoModel> kokuhorenTorikomiJohoList = new ArrayList<>();
+    public void load(RYearMonth 処理年月) {
+        List<KokuhorenTorikomiJohoInfo> kokuhorenTorikomiJohoList = new ArrayList<>();
         for (ConfigKeysKokuhorenTorikomi 交換識別番号 : ConfigKeysKokuhorenTorikomi.values()) {
-            KokuhorenTorikomiJohoModel result = new KokuhorenTorikomiJohoModel();
+            KokuhorenTorikomiJohoInfo result = new KokuhorenTorikomiJohoInfo();
             KokuhorenTorikomiJoho kokuhorenTorikomiJoho = IryoHokenRirekiManager.createInstance()
                     .getKokuhorenTorikomiJoho(new FlexibleYearMonth(処理年月.toDateString()), 交換識別番号.getコード());
             if (kokuhorenTorikomiJoho != null) {
                 result.set国保連取込管理エンティティ(kokuhorenTorikomiJoho.toEntity());
-                result = kokuhorenTorikomiConfigKeysFactory(result, 交換識別番号.getコード());
+                result = set隠し項目(result, 交換識別番号.getコード());
                 result.set交換識別番号(交換識別番号.getコード());
                 kokuhorenTorikomiJohoList.add(result);
             }
         }
         List<dgKokuhorenTorikomiList_Row> kokuhorenTorikomiListDataSource = new ArrayList<>();
-        for (KokuhorenTorikomiJohoModel model : kokuhorenTorikomiJohoList) {
+        for (KokuhorenTorikomiJohoInfo model : kokuhorenTorikomiJohoList) {
             kokuhorenTorikomiListDataSource.add(createKokuhorenTorikomiRow(model, 処理年月));
         }
-        panel.getDgKokuhorenTorikomiList().setDataSource(kokuhorenTorikomiListDataSource);
-
-        panel.getDgKokuhorenTorikomiList().setSortOrder(グリッドソート条件１);
-
+        div.getDgKokuhorenTorikomiList().setDataSource(kokuhorenTorikomiListDataSource);
+        div.getDgKokuhorenTorikomiList().setSortOrder(グリッドソート条件１);
     }
 
     private dgKokuhorenTorikomiList_Row createKokuhorenTorikomiRow(
-            KokuhorenTorikomiJohoModel model,
+            KokuhorenTorikomiJohoInfo model,
             RYearMonth 処理年月) {
         dgKokuhorenTorikomiList_Row row = new dgKokuhorenTorikomiList_Row();
         RStringBuilder rsb = new RStringBuilder();
         rsb.append(処理年月);
-        rsb.append("_");
+        rsb.append(アンダーライン);
         rsb.append(model.get交換識別番号());
         if (SharedFile.searchSharedFile(rsb.toRString()).isEmpty()) {
-            row.setTorikomiFlag(new RString("*"));
+            row.setTorikomiFlag(アステリスク);
         } else {
-            row.setTorikomiFlag(new RString(" "));
+            row.setTorikomiFlag(RString.FULL_SPACE);
         }
         row.setTxtTorikomiJoho(model.get処理名());
         row.setTxtZenZengetsu(get処理状態(model.get前々月処理状態()));
@@ -131,7 +135,8 @@ public class KokuhorenTorikomiListHandler {
         row.setBatchID(model.getバッチID());
         row.setKokanShikibetsuNo(model.get交換識別番号());
         row.getShoriYM().setValue(new RDate(処理年月.getYearValue(), 処理年月.getMonthValue()));
-        if (row.getTorikomiFlag().compareTo(" ") == 0 && (row.getTxtTogetsuJotai().compareTo("処理前") == 0)) {
+        if (row.getTorikomiFlag().compareTo(RString.HALF_SPACE) == 0
+                && (row.getTxtTogetsuJotai().compareTo(処理前) == 0)) {
             row.setSelectButtonState(DataGridButtonState.Enabled);
         } else {
             row.setSelectButtonState(DataGridButtonState.Disabled);
@@ -141,32 +146,32 @@ public class KokuhorenTorikomiListHandler {
 
     private RString get再処理可否区分(boolean 再処理可否) {
         if (再処理可否) {
-            return new RString("再処理可能");
+            return 再処理可能;
         } else {
-            return new RString("再処理不可");
+            return 再処理不可;
         }
     }
 
     private RString get処理状態(RString 処理状態区分) {
 
         if (処理状態区分 == null) {
-            return new RString("");
+            return RString.EMPTY;
         }
 
         switch (処理状態区分.toString()) {
             case "1":
-                return new RString("×");
+                return 処理状態区分_フォーク;
             case "3":
-                return new RString("○");
+                return 処理状態区分_丸い;
             case "9":
-                return new RString("-");
+                return 処理状態区分_横線;
             default:
-                return new RString("");
+                return RString.EMPTY;
         }
     }
 
-    private KokuhorenTorikomiJohoModel kokuhorenTorikomiConfigKeysFactory(
-            KokuhorenTorikomiJohoModel result,
+    private KokuhorenTorikomiJohoInfo set隠し項目(
+            KokuhorenTorikomiJohoInfo result,
             RString 交換情報識別番号) {
         RDate date = RDate.getNowDate();
         switch (交換情報識別番号.toString()) {
@@ -245,11 +250,11 @@ public class KokuhorenTorikomiListHandler {
                         ConfigKeysKagoKetteiTuchi.国保連取込_介護給付費過誤決定通知書情報_処理名称, date));
                 return result;
             default:
-                return kokuhorenTorikomiConfig1(result, 交換情報識別番号, date);
+                return set隠し項目For介護給付費再審査決定通知書情報(result, 交換情報識別番号, date);
         }
     }
 
-    private KokuhorenTorikomiJohoModel kokuhorenTorikomiConfig1(KokuhorenTorikomiJohoModel result,
+    private KokuhorenTorikomiJohoInfo set隠し項目For介護給付費再審査決定通知書情報(KokuhorenTorikomiJohoInfo result,
             RString 交換情報識別番号, RDate date) {
         switch (交換情報識別番号.toString()) {
             case "172":
@@ -326,11 +331,11 @@ public class KokuhorenTorikomiListHandler {
                         ConfigKeysJukyushaKoshinKekka.国保連取込_受給者情報更新結果情報_処理名称, date));
                 return result;
             default:
-                return kokuhorenTorikomiConfig2(result, 交換情報識別番号, date);
+                return set隠し項目For受給者台帳情報一覧(result, 交換情報識別番号, date);
         }
     }
 
-    private KokuhorenTorikomiJohoModel kokuhorenTorikomiConfig2(KokuhorenTorikomiJohoModel result,
+    private KokuhorenTorikomiJohoInfo set隠し項目For受給者台帳情報一覧(KokuhorenTorikomiJohoInfo result,
             RString 交換情報識別番号, RDate date) {
         switch (交換情報識別番号.toString()) {
             case "534":
@@ -450,77 +455,77 @@ public class KokuhorenTorikomiListHandler {
      */
     public RString getParamter(RString 交換情報識別番号) {
         switch (交換情報識別番号.toString()) {
-            case "111": // 給付実績情報("111"),
+            case "111":
                 return new RString("39");
-            case "112": // 給付管理票情報("112"),
+            case "112":
                 return new RString("19");
-            case "114": // 給付実績更新結果情報("114"),
+            case "114":
                 return new RString("27");
-            case "121": // 資格照合表情報("121"),
+            case "121":
                 return new RString("16");
-            case "122": // 総合事業費資格照合表情報("122"),
+            case "122":
                 return new RString("17");
-            case "151": // 介護給付費等請求額通知書情報("151"),
+            case "151":
                 return new RString("12");
-            case "152": // 総合事業費請求額通知書情報("152"),
+            case "152":
                 return new RString("13");
-            case "161": // 介護給付費等審査決定請求明細表情報("161"),
+            case "161":
                 return new RString("20");
-            case "162": // 総合事業費審査決定請求明細表情報("162"),
+            case "162":
                 return new RString("38");
-            case "171": // 介護給付費過誤決定通知書情報("171"),
+            case "171":
                 return new RString("21");
-            case "172": // 介護給付費再審査決定通知書情報("172"),
+            case "172":
                 return new RString("22");
-            case "175": // 総合事業費過誤決定通知書情報("175"),
+            case "175":
                 return new RString("37");
-            case "221": // 償還払支給決定者一覧情報("221"),
+            case "221":
                 return new RString("28");
-            case "222": // 償還払不支給決定者一覧情報("222"),
+            case "222":
                 return new RString("29");
-            case "331": // 高額介護サービス費給付対象者一覧表情報("331"),
+            case "331":
                 return new RString("30");
-            case "351": // 高額介護サービス費支給不支給決定者一覧表情報("351"),
+            case "351":
                 return new RString("31");
-            case "386": // 高額合算支給額計算結果連絡票情報("386"),
+            case "386":
                 return new RString("34");
-            case "533": // 受給者情報更新結果情報("533"),
+            case "533":
                 return new RString("26");
             default:
-                return getParamter2(交換情報識別番号);
+                return getParamterForOthers(交換情報識別番号);
         }
     }
 
-    private RString getParamter2(RString 交換情報識別番号) {
+    private RString getParamterForOthers(RString 交換情報識別番号) {
         switch (交換情報識別番号.toString()) {
-            case "534": // 受給者台帳情報一覧("534"), 現時点画面がない
+            case "534": // TODO 受給者台帳情報一覧("534"), 現時点画面がない
+                return RString.EMPTY;
+            case "537": // TODO 受給者台帳突合結果情報随時("537"), 現時点画面がない
                 return new RString("");
-            case "537": // 受給者台帳突合結果情報随時("537"), 現時点画面がない
-                return new RString("");
-            case "631": // 介護給付費等請求額通知書公費情報("631"),
+            case "631":
                 return new RString("14");
-            case "641": // 介護給付費公費受給者別一覧表情報("641"),
+            case "641":
                 return new RString("25");
-            case "651": // 介護給付費過誤決定通知書公費情報("651"),
+            case "651":
                 return new RString("23");
-            case "652": // 介護給付費再審査決定通知書公費情報("652"),
+            case "652":
                 return new RString("24");
-            case "741": // 請求明細給付管理票返戻保留一覧表情報("741");
+            case "741":
                 return new RString("15");
-            case "37H": // 高額合算自己負担額証明書情報("37H"),
+            case "37H":
                 return new RString("33");
-            case "37J": // 高額合算自己負担額確認情報("37J"),
+            case "37J":
                 return new RString("32");
-            case "38B": // 高額合算支給不支給決定通知書情報("38B"),
+            case "38B":
                 return new RString("35");
-            case "38P": // 高額合算給付実績情報("38P"),
+            case "38P":
                 return new RString("36");
-            case "5C3": // 共同処理用受給者情報更新結果("5C3"),
+            case "5C3":
                 return new RString("18");
-            case "5C4": // 共同処理用受給者情報一覧("5C4"), 現時点画面がない
-                return new RString("");
+            case "5C4": // TODO 共同処理用受給者情報一覧("5C4"), 現時点画面がない
+                return RString.EMPTY;
             default:
-                return new RString("");
+                return RString.EMPTY;
         }
     }
 }

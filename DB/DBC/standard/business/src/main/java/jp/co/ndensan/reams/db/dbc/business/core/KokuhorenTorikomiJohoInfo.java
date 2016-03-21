@@ -12,7 +12,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 /**
  * 国保連取込情報を管理するクラスです。
  */
-public class KokuhorenTorikomiJohoModel {
+public class KokuhorenTorikomiJohoInfo {
 
     private DbV3104KokuhorenTorikomiJohoEntity entity;
     private RString 処理名;
@@ -23,7 +23,7 @@ public class KokuhorenTorikomiJohoModel {
     /**
      * デフォルトコンストラクタです。
      */
-    public KokuhorenTorikomiJohoModel() {
+    public KokuhorenTorikomiJohoInfo() {
         this.entity = new DbV3104KokuhorenTorikomiJohoEntity();
         処理名 = RString.EMPTY;
         バッチID = RString.EMPTY;
@@ -36,7 +36,7 @@ public class KokuhorenTorikomiJohoModel {
      *
      * @param 国保連取込管理エンティティ KokuhorenInterfaceKanriEntity
      */
-    public KokuhorenTorikomiJohoModel(DbV3104KokuhorenTorikomiJohoEntity 国保連取込管理エンティティ) {
+    public KokuhorenTorikomiJohoInfo(DbV3104KokuhorenTorikomiJohoEntity 国保連取込管理エンティティ) {
         this.entity = 国保連取込管理エンティティ;
         処理名 = RString.EMPTY;
         バッチID = RString.EMPTY;

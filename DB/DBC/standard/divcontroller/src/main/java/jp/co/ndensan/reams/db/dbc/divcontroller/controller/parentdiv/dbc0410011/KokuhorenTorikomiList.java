@@ -40,7 +40,7 @@ public class KokuhorenTorikomiList {
             max処理年月 = new FlexibleYearMonth(RDate.getNowDate().getYearMonth().toDateString());
         }
         div.getTxtShoriYM().setValue(new RDate(max処理年月.getYearValue(), max処理年月.getMonthValue()));
-        getHandler(div).load(div, new RYearMonth(max処理年月.toDateString()));
+        getHandler(div).load(new RYearMonth(max処理年月.toDateString()));
         return ResponseData.of(div).respond();
     }
 
@@ -57,7 +57,7 @@ public class KokuhorenTorikomiList {
                 return ResponseData.of(div).addValidationMessages(valid).respond();
             }
         }
-        getHandler(div).load(div, div.getTxtShoriYM().getValue().getYearMonth());
+        getHandler(div).load(div.getTxtShoriYM().getValue().getYearMonth());
         return ResponseData.of(div).respond();
     }
 
