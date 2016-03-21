@@ -48,6 +48,10 @@ module DBE {
                 return "changeChkHidariKashiMahi";
             }
 
+            public static changeChkSonotaMahi(): string {
+                return "changeChkSonotaMahi";
+            }
+
             public static changeChkKinryokuTeika(): string {
                 return "changeChkKinryokuTeika";
             }
@@ -241,6 +245,10 @@ module DBE {
                 return new UZA.CheckBoxList(this.convFiledName("chkHidariKashiMahiTeido"));
             }
 
+            public chkSonotaMahi(): UZA.CheckBoxList {
+                return new UZA.CheckBoxList(this.convFiledName("chkSonotaMahi"));
+            }
+
             public txtSonotaMahiBui(): UZA.TextBox {
                 return new UZA.TextBox(this.convFiledName("txtSonotaMahiBui"));
             }
@@ -251,10 +259,6 @@ module DBE {
 
             public linHorizon2(): UZA.HorizontalLine {
                 return new UZA.HorizontalLine(this.convFiledName("linHorizon2"));
-            }
-
-            public chkSonotaMahi(): UZA.CheckBoxList {
-                return new UZA.CheckBoxList(this.convFiledName("chkSonotaMahi"));
             }
 
             public chkKinryokuTeika(): UZA.CheckBoxList {

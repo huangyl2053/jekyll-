@@ -19,7 +19,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.DataGridButtonState;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 
 /**
- *
+ * 福祉用具購入費支給申請_検索
  */
 public class PnlTotal {
 
@@ -28,10 +28,10 @@ public class PnlTotal {
     private static final RString 修正 = new RString("修正");
     private static final RString 削除 = new RString("削除");
     private static final RString 参照 = new RString("参照");
-    private static final RString 被保険者番号 = new RString("1");
+    private static final RString 被保険者番号 = new RString("000000003");
 
     /**
-     * 福祉用具購入費支給申請の検索
+     * 画面初期化
      *
      * @param div 画面DIV
      * @return 福祉用具購入費支給申請
@@ -63,7 +63,6 @@ public class PnlTotal {
     public ResponseData<PnlTotalDiv> onClick_btnAddShikyuShinsei(PnlTotalDiv div) {
         ViewStateHolder.put(ViewStateKeys.状態, 登録);
         ViewStateHolder.put(ViewStateKeys.被保険者番号, 被保険者番号);
-        // ViewStateHolder.put(ViewStateKeys.被保険者番号, div.getKaigoCommonPanel().getCcdShikakuKihon().get被保険者番号());
         return ResponseData.of(div).respond();
     }
 
@@ -85,7 +84,6 @@ public class PnlTotal {
      * @return 福祉用具購入費支給申請_登録画面へ遷移
      */
     public ResponseData<PnlTotalDiv> onClick_dgShikyuShinseiList_modify(PnlTotalDiv div) {
-        //差額登録
         RString 登録状態 = 修正;
         if (登録状態.equals(修正)) {
             getHandler(div).putViewStateHolder(修正, 被保険者番号);

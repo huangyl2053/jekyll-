@@ -83,116 +83,142 @@ public class ShinseiKensakuHandler {
     }
 
     private void editShinsakaiJohoForParameter(NinteiShinseishaFinderDiv finderDiv, ShinseiKensakuMapperParameter parameter) {
+        boolean useNinteiKekkaJoho = false;
         RString 二次判定要介護状態区分コード = finderDiv.getDdlNijiHanteiKekka().getSelectedKey();
         if (!RString.isNullOrEmpty(二次判定要介護状態区分コード)) {
             parameter.setNijiHanteiYokaigoJotaiKubun(二次判定要介護状態区分コード);
             parameter.setUseNijiHanteiYokaigoJotaiKubun(true);
+            useNinteiKekkaJoho = true;
         }
         RString 認定有効期間 = finderDiv.getTxtNinteiYukoKikan().getValue();
         if (!RString.isNullOrEmpty(認定有効期間)) {
             parameter.setNijiHanteiNinteiYukoKikan(Integer.parseInt(認定有効期間.toString()));
             parameter.setUseNijiHanteiNinteiYukoKikan(true);
+            useNinteiKekkaJoho = true;
         }
         RString 認定有効な申請時点 = finderDiv.getTxtCheckDay().getValue();
         if (!RString.isNullOrEmpty(認定有効な申請時点)) {
             parameter.setYokaiYMD(認定有効期間);
             parameter.setUseYokaiYMD(true);
+            useNinteiKekkaJoho = true;
         }
         FlexibleDate 認定有効開始日FROM = finderDiv.getTxtNinteiYukoKaishiDateFrom().getValue();
         if (認定有効開始日FROM != null && !FlexibleDate.EMPTY.equals(認定有効開始日FROM)) {
             parameter.setNinteiYukoKaishiYMDFrom(認定有効開始日FROM);
             parameter.setUseNinteiYukoKaishiYMDFrom(true);
+            useNinteiKekkaJoho = true;
         }
         FlexibleDate 認定有効開始日To = finderDiv.getTxtNinteiYukoKaishiDateTo().getValue();
         if (認定有効開始日To != null && !FlexibleDate.EMPTY.equals(認定有効開始日To)) {
             parameter.setNinteiYukoKaishiYMDTo(認定有効開始日To);
             parameter.setUseNinteiYukoKaishiYMDTo(true);
+            useNinteiKekkaJoho = true;
         }
 
         FlexibleDate 認定有効終了日FROM = finderDiv.getTxtNinteiYukoShuryoDateFrom().getValue();
         if (認定有効終了日FROM != null && !FlexibleDate.EMPTY.equals(認定有効終了日FROM)) {
             parameter.setNinteiYukoShuryoYMDFrom(認定有効終了日FROM);
             parameter.setUseNinteiYukoShuryoYMDFrom(true);
+            useNinteiKekkaJoho = true;
         }
         FlexibleDate 認定有効終了日To = finderDiv.getTxtNinteiYukoShuryoDate().getValue();
         if (認定有効終了日To != null && !FlexibleDate.EMPTY.equals(認定有効終了日To)) {
             parameter.setNinteiYukoShuryoYMDTo(認定有効終了日To);
             parameter.setUseNinteiYukoShuryoYMDTo(true);
+            useNinteiKekkaJoho = true;
         }
         FlexibleDate 二次判定日FROM = finderDiv.getTxtNijiHanteiDateFrom().getValue();
         if (二次判定日FROM != null && !FlexibleDate.EMPTY.equals(二次判定日FROM)) {
             parameter.setNijiHanteiYMDFrom(二次判定日FROM);
             parameter.setUseNijiHanteiYMDFrom(true);
+            useNinteiKekkaJoho = true;
         }
         FlexibleDate 二次判定日To = finderDiv.getTxtNijiHnateiDateTo().getValue();
         if (二次判定日To != null && !FlexibleDate.EMPTY.equals(二次判定日To)) {
             parameter.setNijiHanteiYMDTo(二次判定日To);
             parameter.setUseNijiHanteiYMDTo(true);
+            useNinteiKekkaJoho = true;
         }
+        parameter.setUseNinteiKekkaJoho(useNinteiKekkaJoho);
         editKaisaiDateForParameter(finderDiv, parameter);
     }
 
     private void editKaisaiDateForParameter(NinteiShinseishaFinderDiv finderDiv, ShinseiKensakuMapperParameter parameter) {
+        boolean useShinsakaiKaisaiKekkaJoho = false;
         FlexibleDate 開催日FROM = finderDiv.getTxtKaisaiDateFrom().getValue();
         if (開催日FROM != null && !FlexibleDate.EMPTY.equals(開催日FROM)) {
             parameter.setShinsakaiKaisaiYMDFrom(開催日FROM);
             parameter.setUseShinsakaiKaisaiYMDFrom(true);
+            useShinsakaiKaisaiKekkaJoho = true;
         }
         FlexibleDate 開催日To = finderDiv.getTxtKaisaiDateTo().getValue();
         if (開催日To != null && !FlexibleDate.EMPTY.equals(開催日To)) {
             parameter.setShinsakaiKaisaiYMDTo(開催日To);
             parameter.setUseShinsakaiKaisaiYMDTo(true);
+            useShinsakaiKaisaiKekkaJoho = true;
         }
         RString 開催番号FROM = finderDiv.getTxtKaisaiNumberStart().getValue();
         if (!RString.isNullOrEmpty(開催番号FROM)) {
             parameter.setShinsakaiKaisaiNoFrom(開催番号FROM);
             parameter.setUseShinsakaiKaisaiNoFrom(true);
+            useShinsakaiKaisaiKekkaJoho = true;
         }
         RString 開催番号To = finderDiv.getTxtKaisaiNumberEnd().getValue();
         if (!RString.isNullOrEmpty(開催番号To)) {
             parameter.setShinsakaiKaisaiNoTo(開催番号To);
             parameter.setUseShinsakaiKaisaiNoTo(true);
+            useShinsakaiKaisaiKekkaJoho = true;
         }
+        parameter.setUseShinsakaiKaisaiKekkaJoho(useShinsakaiKaisaiKekkaJoho);
     }
 
     private void editZenkaiJohoForParameter(NinteiShinseishaFinderDiv finderDiv, ShinseiKensakuMapperParameter parameter) {
+        boolean useZenkaiNinteiShinseiJoho = false;
         RString 前回認定調査委託先 = finderDiv.getTxtZenkaiNinteiChosaItakusakiName().getValue();
         if (!RString.isNullOrEmpty(前回認定調査委託先)) {
             parameter.setZenkaiNinteiChosaItakusaki(finderDiv.getHdnZenkaiChosaItakusakiCode());
             parameter.setUseZenkaiNinteiChosaItakusaki(true);
+            useZenkaiNinteiShinseiJoho = true;
         }
         RString 前回主治医医療機関 = finderDiv.getTxtZenkaiShujiiIryokikanName().getValue();
         if (!RString.isNullOrEmpty(前回主治医医療機関)) {
             parameter.setZenkaiShujiiIryokikanCode(finderDiv.getHdnZenkaiShujiiIryokikanCode());
             parameter.setUseZenkaiShujiiIryokikanCode(true);
+            useZenkaiNinteiShinseiJoho = true;
         }
 
         RString 前回二次判定結果コード = finderDiv.getDdlZenkaiNijiHanteiKekka().getSelectedKey();
         if (!RString.isNullOrEmpty(前回二次判定結果コード)) {
             parameter.setZenkaiJotaiKubunCode(前回二次判定結果コード);
             parameter.setUseZenkaiJotaiKubunCode(true);
+            useZenkaiNinteiShinseiJoho = true;
         }
 
         RString 前回認定有効期間 = finderDiv.getTxtZenkaiNinteiYukoKikan().getValue();
         if (!RString.isNullOrEmpty(前回認定有効期間)) {
             parameter.setZenkaiYukoKikan(Integer.parseInt(前回認定有効期間.toString()));
             parameter.setUseZenkaiYukoKikan(true);
+            useZenkaiNinteiShinseiJoho = true;
         }
 
         FlexibleDate 設定有効開始日FROM = finderDiv.getTxtZenkaiYukoKaishiDateFrom().getValue();
         if (設定有効開始日FROM != null && !FlexibleDate.EMPTY.equals(設定有効開始日FROM)) {
             parameter.setZenkaiYukoKikanStartFrom(設定有効開始日FROM);
             parameter.setUseZenkaiYukoKikanStartFrom(true);
+            useZenkaiNinteiShinseiJoho = true;
         }
         FlexibleDate 設定有効開始日To = finderDiv.getTxtZenkaiYukoKaishiDateTo().getValue();
         if (設定有効開始日To != null && !FlexibleDate.EMPTY.equals(設定有効開始日To)) {
             parameter.setZenkaiYukoKikanStartTo(設定有効開始日To);
             parameter.setUseZenkaiYukoKikanStartTo(true);
+            useZenkaiNinteiShinseiJoho = true;
         }
+        parameter.setUseZenkaiNinteiShinseiJoho(useZenkaiNinteiShinseiJoho);
         RString 原因疾患 = finderDiv.getTxtGeninShikkanCode().getValue();
         if (!RString.isNullOrEmpty(原因疾患)) {
             parameter.setGeninShikkanCode(原因疾患);
             parameter.setUseGeninShikkanCode(true);
+            parameter.setUseGeninShikkan(true);
         }
         Decimal 申請経過日数FROM = finderDiv.getTxtShinseiKeikaNissu().getFromValue();
         FlexibleDate nowDate = FlexibleDate.getNowDate();
@@ -223,65 +249,79 @@ public class ShinseiKensakuHandler {
         if (!RString.isNullOrEmpty(医師区分コード)) {
             parameter.setIshiKubunCode(医師区分コード);
             parameter.setUseIshiKubunCode(true);
+            parameter.setUseShujiiIkenshoIraiJoho(true);
         }
-
+        boolean useShujiiIkenshoJoho = false;
         FlexibleDate 意見書受領日FROM = finderDiv.getTxtIkenshoKinyuDateFrom().getValue();
         if (意見書受領日FROM != null && !FlexibleDate.EMPTY.equals(意見書受領日FROM)) {
             parameter.setIkenshoJuryoYMDFrom(意見書受領日FROM);
             parameter.setUseIkenshoJuryoYMDFrom(true);
+            useShujiiIkenshoJoho = true;
         }
         FlexibleDate 意見書受領日To = finderDiv.getTxtIkenshoKinyuDateTo().getValue();
         if (意見書受領日To != null && !FlexibleDate.EMPTY.equals(意見書受領日To)) {
             parameter.setIkenshoJuryoYMDTo(意見書受領日To);
-            parameter.setUseIkenshoJuryoYMDTo(true);
+            useShujiiIkenshoJoho = true;
         }
-
+        parameter.setUseShujiiIkenshoJoho(useShujiiIkenshoJoho);
+        boolean useShujiiIkenshoIkenItem = false;
         RString 意見項目13 = finderDiv.getDdlShujiJohoNetakirido().getSelectedKey();
         if (!RString.isNullOrEmpty(意見項目13)) {
             parameter.setIkenItem13(意見項目13);
             parameter.setUseIkenItem13(true);
+            useShujiiIkenshoIkenItem = true;
         }
         RString 意見項目14 = finderDiv.getDdlShujiJohoNinchido().getSelectedKey();
         if (!RString.isNullOrEmpty(意見項目14)) {
             parameter.setIkenItem14(意見項目14);
             parameter.setUseIkenItem14(true);
+            useShujiiIkenshoIkenItem = true;
         }
-
+        parameter.setUseShujiiIkenshoIkenItem(useShujiiIkenshoIkenItem);
+        boolean useIchijiHanteiKekkaJoho = false;
         FlexibleDate 一次判定日FROM = finderDiv.getTxtIchijiHanteiDateFrom().getValue();
         if (一次判定日FROM != null && !FlexibleDate.EMPTY.equals(一次判定日FROM)) {
             parameter.setIchijiHanteiYMDFrom(一次判定日FROM);
             parameter.setUseIchijiHanteiYMDFrom(true);
+            useIchijiHanteiKekkaJoho = true;
         }
         FlexibleDate 一次判定日To = finderDiv.getTxtIchijiHanteiDateTo().getValue();
         if (一次判定日To != null && !FlexibleDate.EMPTY.equals(一次判定日To)) {
             parameter.setIchijiHanteiYMDTo(一次判定日To);
             parameter.setUseIchijiHanteiYMDTo(true);
+            useIchijiHanteiKekkaJoho = true;
         }
         RString 一次判定結果コード = finderDiv.getDdlIchijiHanteiKekka().getSelectedKey();
         if (!RString.isNullOrEmpty(一次判定結果コード)) {
             parameter.setIchijiHanteiKekkaCode(一次判定結果コード);
             parameter.setUseIchijiHanteiKekkaCode(true);
+            useIchijiHanteiKekkaJoho = true;
         }
+        parameter.setUseIchijiHanteiKekkaJoho(useIchijiHanteiKekkaJoho);
         editIchiGohanteiForParameter(finderDiv, parameter);
     }
 
     private void editIchiGohanteiForParameter(NinteiShinseishaFinderDiv finderDiv, ShinseiKensakuMapperParameter parameter) {
-
+        boolean useIchiGojiHanteiKekkaJoho = false;
         FlexibleDate ichiGoHanteiDateFrom = finderDiv.getTxtIchiGoHanteiDateFrom().getValue();
         if (ichiGoHanteiDateFrom != null && !FlexibleDate.EMPTY.equals(ichiGoHanteiDateFrom)) {
             parameter.setIchiGojiHanteiYMDFrom(ichiGoHanteiDateFrom);
             parameter.setUseIchiGojiHanteiYMDFrom(true);
+            useIchiGojiHanteiKekkaJoho = true;
         }
         FlexibleDate ichiGoHanteiDateTo = finderDiv.getTxtIchiGoHanteiDateTo().getValue();
         if (ichiGoHanteiDateTo != null && !FlexibleDate.EMPTY.equals(ichiGoHanteiDateTo)) {
             parameter.setIchiGojiHanteiYMDTo(ichiGoHanteiDateTo);
             parameter.setUseIchiGojiHanteiYMDTo(true);
+            useIchiGojiHanteiKekkaJoho = true;
         }
         RString ichiGohanteiKekka = finderDiv.getDdlIchiGohanteiKekka().getSelectedKey();
         if (!RString.isNullOrEmpty(ichiGohanteiKekka)) {
             parameter.setIchiGojiHanteiKekkaCode(ichiGohanteiKekka);
             parameter.setUseIchiGojiHanteiKekkaCode(true);
+            useIchiGojiHanteiKekkaJoho = true;
         }
+        parameter.setUseIchiGojiHanteiKekkaJoho(useIchiGojiHanteiKekkaJoho);
     }
 
     private void editNinteiChosaForParameter(NinteiShinseishaFinderDiv finderDiv, ShinseiKensakuMapperParameter parameter) {
@@ -334,36 +374,46 @@ public class ShinseiKensakuHandler {
             parameter.setNinteiChosainCode(finderDiv.getHdnChosainCode());
             parameter.setUseNinteiChosainCode(true);
         }
+        boolean useNinteichosahyoGaikyoChosa = false;
         RString 認定調査実施場所コード = finderDiv.getDdlChosaJisshiBasho().getSelectedKey();
         if (!RString.isNullOrEmpty(認定調査実施場所コード)) {
             parameter.setChosaJisshiBashoCode(認定調査実施場所コード);
             parameter.setUseChosaJisshiBashoCode(true);
+            useNinteichosahyoGaikyoChosa = true;
         }
         RString 認定調査区分コード = finderDiv.getDdlChosaKubun().getSelectedKey();
         if (!RString.isNullOrEmpty(認定調査区分コード)) {
             parameter.setNinteiChosaKubunCode(認定調査区分コード);
             parameter.setUseNinteiChosaKubunCode(true);
+            useNinteichosahyoGaikyoChosa = true;
         }
         FlexibleDate 調査実施日FROM = finderDiv.getTxtChosaJisshiDateFrom().getValue();
         if (調査実施日FROM != null && !FlexibleDate.EMPTY.equals(調査実施日FROM)) {
             parameter.setNinteichosaJisshiYMDFrom(調査実施日FROM);
             parameter.setUseNinteichosaJisshiYMDFrom(true);
+            useNinteichosahyoGaikyoChosa = true;
         }
         FlexibleDate 調査実施日TO = finderDiv.getTxtChosaJisshiDateTo().getValue();
         if (調査実施日TO != null && !FlexibleDate.EMPTY.equals(調査実施日TO)) {
             parameter.setNinteichosaJisshiYMDTo(調査実施日TO);
             parameter.setUseNinteichosaJisshiYMDTo(true);
+            useNinteichosahyoGaikyoChosa = true;
         }
+        parameter.setUseNinteichosahyoGaikyoChosa(useNinteichosahyoGaikyoChosa);
+        boolean useNinteichosahyoKihonChosa = false;
         RString 寝きたり度 = finderDiv.getDdlNinteiChosaNetakirido().getSelectedKey();
         if (!RString.isNullOrEmpty(寝きたり度)) {
             parameter.setNichijoSeikatsuJiritsudoCode(寝きたり度);
             parameter.setUseNichijoSeikatsuJiritsudoCd(true);
+            useNinteichosahyoKihonChosa = true;
         }
         RString 認知度 = finderDiv.getDdlNinteiChosaNinchido().getSelectedKey();
         if (!RString.isNullOrEmpty(認知度)) {
             parameter.setNichijoSeikatsuJiritsudo(認知度);
             parameter.setUseNichijoSeikatsuJiritsudo(true);
+            useNinteichosahyoKihonChosa = true;
         }
+        parameter.setUseNinteichosahyoKihonChosa(useNinteichosahyoKihonChosa);
     }
 
     private void editShosaiJokenForParameter(NinteiShinseishaFinderDiv finderDiv, ShinseiKensakuMapperParameter parameter) {
@@ -447,13 +497,16 @@ public class ShinseiKensakuHandler {
     }
 
     private void editChkForParameter(NinteiShinseishaFinderDiv finderDiv, ShinseiKensakuMapperParameter parameter) {
+        boolean useNinteiKanryoJoho = false;
         List<KeyValueDataSource> 申請受付処理状態CHK = finderDiv.getChkShoriJotai().getSelectedItems();
         for (KeyValueDataSource keyValueDataSource : 申請受付処理状態CHK) {
             if (KEY0.equals(keyValueDataSource.getKey())) {
                 parameter.setShinseiUketsukeKanryo(true);
+                useNinteiKanryoJoho = true;
             }
             if (KEY1.equals(keyValueDataSource.getKey())) {
                 parameter.setShinseiUketsukeMiKanryo(true);
+                useNinteiKanryoJoho = true;
             }
         }
 
@@ -461,87 +514,108 @@ public class ShinseiKensakuHandler {
         for (KeyValueDataSource keyValueDataSource : 調査依頼処理状態CHK) {
             if (KEY0.equals(keyValueDataSource.getKey())) {
                 parameter.setChosaIraiKanryo(true);
+                useNinteiKanryoJoho = true;
             }
             if (KEY1.equals(keyValueDataSource.getKey())) {
                 parameter.setChosaIraiMiKanryo(true);
+                useNinteiKanryoJoho = true;
             }
         }
         List<KeyValueDataSource> 意見書依頼処理状態CHK = finderDiv.getChkIkenshoIrai().getSelectedItems();
         for (KeyValueDataSource keyValueDataSource : 意見書依頼処理状態CHK) {
             if (KEY0.equals(keyValueDataSource.getKey())) {
                 parameter.setIkenshoIraiKanryo(true);
+                useNinteiKanryoJoho = true;
             }
             if (KEY1.equals(keyValueDataSource.getKey())) {
                 parameter.setIkenshoIraiMiKanryo(true);
+                useNinteiKanryoJoho = true;
             }
         }
         List<KeyValueDataSource> 調査入手処理状態CHK = finderDiv.getChkChosaNyushu().getSelectedItems();
         for (KeyValueDataSource keyValueDataSource : 調査入手処理状態CHK) {
             if (KEY0.equals(keyValueDataSource.getKey())) {
                 parameter.setChosaNyushuKanryo(true);
+                useNinteiKanryoJoho = true;
             }
             if (KEY1.equals(keyValueDataSource.getKey())) {
                 parameter.setChosaNyushuMiKanryo(true);
+                useNinteiKanryoJoho = true;
             }
         }
         List<KeyValueDataSource> 意見書入手処理状態CHK = finderDiv.getChkIkenshoNyushu().getSelectedItems();
         for (KeyValueDataSource keyValueDataSource : 意見書入手処理状態CHK) {
             if (KEY0.equals(keyValueDataSource.getKey())) {
                 parameter.setIkenshoNyushuKanryo(true);
+                useNinteiKanryoJoho = true;
             }
             if (KEY1.equals(keyValueDataSource.getKey())) {
                 parameter.setIkenshoNyushuMiKanryo(true);
+                useNinteiKanryoJoho = true;
             }
         }
         List<KeyValueDataSource> 一次判定処理状態CHK = finderDiv.getChkIchijiHantei().getSelectedItems();
         for (KeyValueDataSource keyValueDataSource : 一次判定処理状態CHK) {
             if (KEY0.equals(keyValueDataSource.getKey())) {
                 parameter.setIchijiHanteiKanryo(true);
+                useNinteiKanryoJoho = true;
             }
             if (KEY1.equals(keyValueDataSource.getKey())) {
                 parameter.setIchijiHanteiMiKanryo(true);
+                useNinteiKanryoJoho = true;
             }
         }
+        parameter.setUseNinteiKanryoJoho(useNinteiKanryoJoho);
         editChkForParameter2(finderDiv, parameter);
     }
 
     private void editChkForParameter2(NinteiShinseishaFinderDiv finderDiv, ShinseiKensakuMapperParameter parameter) {
+        boolean useNinteiKanryoJoho = parameter.isUseNinteiKanryoJoho();
         List<KeyValueDataSource> マスキング処理状態CHK = finderDiv.getChkMasking().getSelectedItems();
         for (KeyValueDataSource keyValueDataSource : マスキング処理状態CHK) {
             if (KEY0.equals(keyValueDataSource.getKey())) {
                 parameter.setMaskingKanryo(true);
+                useNinteiKanryoJoho = true;
             }
             if (KEY1.equals(keyValueDataSource.getKey())) {
                 parameter.setMaskingMiKanryo(true);
+                useNinteiKanryoJoho = true;
             }
         }
         List<KeyValueDataSource> 審査会登録処理状態CHK = finderDiv.getChkShinsakaiToroku().getSelectedItems();
         for (KeyValueDataSource keyValueDataSource : 審査会登録処理状態CHK) {
             if (KEY0.equals(keyValueDataSource.getKey())) {
                 parameter.setShinsakaiTorokuKanryo(true);
+                useNinteiKanryoJoho = true;
             }
             if (KEY1.equals(keyValueDataSource.getKey())) {
                 parameter.setShinsakaiTorokuMiKanryo(true);
+                useNinteiKanryoJoho = true;
             }
         }
         List<KeyValueDataSource> 二次判定処理状態CHK = finderDiv.getChkNijiHantei().getSelectedItems();
         for (KeyValueDataSource keyValueDataSource : 二次判定処理状態CHK) {
             if (KEY0.equals(keyValueDataSource.getKey())) {
                 parameter.setNijiHanteiKanryo(true);
+                useNinteiKanryoJoho = true;
             }
             if (KEY1.equals(keyValueDataSource.getKey())) {
                 parameter.setNijiHanteiMiKanryo(true);
+                useNinteiKanryoJoho = true;
             }
         }
         List<KeyValueDataSource> 月例処理処理状態CHK = finderDiv.getChkGetsureiShori().getSelectedItems();
         for (KeyValueDataSource keyValueDataSource : 月例処理処理状態CHK) {
             if (KEY0.equals(keyValueDataSource.getKey())) {
                 parameter.setGetsureiShoriKanryo(true);
+                useNinteiKanryoJoho = true;
             }
             if (KEY1.equals(keyValueDataSource.getKey())) {
                 parameter.setGetsureiShoriMiKanryo(true);
+                useNinteiKanryoJoho = true;
             }
         }
+        parameter.setUseNinteiKanryoJoho(useNinteiKanryoJoho);
     }
 
     private void editNowPhaseForParameter(NinteiShinseishaFinderDiv finderDiv, ShinseiKensakuMapperParameter parameter) {

@@ -489,6 +489,16 @@ public class ShinshinIkenDiv extends Panel implements IShinshinIkenDiv {
     }
 
     @JsonIgnore
+    public CheckBoxList getChkSonotaMahi() {
+        return this.getKaradaJotai().getChkSonotaMahi();
+    }
+
+    @JsonIgnore
+    public void  setChkSonotaMahi(CheckBoxList chkSonotaMahi) {
+        this.getKaradaJotai().setChkSonotaMahi(chkSonotaMahi);
+    }
+
+    @JsonIgnore
     public TextBox getTxtSonotaMahiBui() {
         return this.getKaradaJotai().getTxtSonotaMahiBui();
     }
@@ -516,16 +526,6 @@ public class ShinshinIkenDiv extends Panel implements IShinshinIkenDiv {
     @JsonIgnore
     public void  setLinHorizon2(HorizontalLine linHorizon2) {
         this.getKaradaJotai().setLinHorizon2(linHorizon2);
-    }
-
-    @JsonIgnore
-    public CheckBoxList getChkSonotaMahi() {
-        return this.getKaradaJotai().getChkSonotaMahi();
-    }
-
-    @JsonIgnore
-    public void  setChkSonotaMahi(CheckBoxList chkSonotaMahi) {
-        this.getKaradaJotai().setChkSonotaMahi(chkSonotaMahi);
     }
 
     @JsonIgnore

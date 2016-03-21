@@ -108,7 +108,7 @@ public class NinteiChosaScheduleHandler {
                     if (jigyoshaInput.get全午後件数() != 0) {
                         dgJigyoshaItiran.setAkiPM(new RString("●"));
                     }
-                    dgJigyoshaItiran.setAkiPMCount(new RString(String.valueOf(jigyoshaInput.get全午後件数())));
+                    dgJigyoshaItiran.setAkiPMCount(new RString(String.valueOf(jigyoshaInput.get全午後件数() - jigyoshaInput.get午後の仮予約件数() - jigyoshaInput.get午後の確定件数())));
                     if (jigyoshaInput.get午前の仮予約件数() != 0) {
                         dgJigyoshaItiran.setKariYoyakuAM(new RString("△"));
                     }

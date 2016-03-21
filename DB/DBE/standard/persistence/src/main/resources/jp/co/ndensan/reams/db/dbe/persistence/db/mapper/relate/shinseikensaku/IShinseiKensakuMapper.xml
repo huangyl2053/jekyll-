@@ -49,23 +49,30 @@
            ,DbT5101NinteiShinseiJoho."koroshoIfShikibetsuCode"
            ,DbT5101NinteiShinseiJoho."zenkaiYukoKikanStart"
            ,DbT5101NinteiShinseiJoho."zenkaiYukoKikanEnd"
-           ,zenkaiNinteiShinseiJoho."nijiHanteiYokaigoJotaiKubunCode"
-           ,zenkaiNinteiShinseiJoho."nijiHanteiNinteiYukoKikan"
+            <if test="useZenkaiNinteiShinseiJoho">
+                ,zenkaiNinteiShinseiJoho."nijiHanteiYokaigoJotaiKubunCode"
+                ,zenkaiNinteiShinseiJoho."nijiHanteiNinteiYukoKikan"
+            </if>
            ,DbT7051KoseiShichosonMaster."shichosonMeisho"
            ,DbT5910NinteichosaItakusakiJoho."jigyoshaMeisho"
            ,DbT5913ChosainJoho."chosainShimei"
            ,DbT5911ShujiiIryoKikanJoho."iryoKikanMeisho"
            ,DbT5912ShujiiJoho."shujiiName"
-           ,DbT5301ShujiiIkenshoIraiJoho."ikenshoIraiRirekiNo"
+            <if test="useShujiiIkenshoIraiJoho">
+                ,DbT5301ShujiiIkenshoIraiJoho."ikenshoIraiRirekiNo"
+            </if>
         FROM 
             rgdb."DbT5101NinteiShinseiJoho"  DbT5101NinteiShinseiJoho
-        LEFT JOIN 
+        <if test="useNinteichosahyoGaikyoChosa">
+           LEFT JOIN 
             rgdb."DbT5202NinteichosahyoGaikyoChosa" DbT5202NinteichosahyoGaikyoChosa
             ON DbT5101NinteiShinseiJoho."shinseishoKanriNo" = DbT5202NinteichosahyoGaikyoChosa."shinseishoKanriNo"
             AND DbT5202NinteichosahyoGaikyoChosa."ninteichosaRirekiNo" = 
                 (SELECT MAX(NinteichosahyoGaikyoChosa."ninteichosaRirekiNo") 
                 FROM rgdb."DbT5202NinteichosahyoGaikyoChosa" NinteichosahyoGaikyoChosa 
                 WHERE DbT5101NinteiShinseiJoho."shinseishoKanriNo" = NinteichosahyoGaikyoChosa."shinseishoKanriNo")
+        </if>
+        <if test="useNinteichosahyoKihonChosa">
         LEFT JOIN 
             rgdb."DbT5203NinteichosahyoKihonChosa" DbT5203NinteichosahyoKihonChosa
             ON DbT5101NinteiShinseiJoho."shinseishoKanriNo" = DbT5203NinteichosahyoKihonChosa."shinseishoKanriNo"
@@ -73,14 +80,19 @@
                 (SELECT MAX(NinteichosahyoKihonChosa."ninteichosaRirekiNo") 
                 FROM rgdb."DbT5203NinteichosahyoKihonChosa" NinteichosahyoKihonChosa 
                 WHERE NinteichosahyoKihonChosa."shinseishoKanriNo" = DbT5101NinteiShinseiJoho."shinseishoKanriNo")
+        </if>
+        <if test="useShujiiIkenshoIraiJoho">
         LEFT JOIN 
             rgdb."DbT5301ShujiiIkenshoIraiJoho" DbT5301ShujiiIkenshoIraiJoho
             ON DbT5101NinteiShinseiJoho."shinseishoKanriNo" = DbT5301ShujiiIkenshoIraiJoho."shinseishoKanriNo"
             AND DbT5301ShujiiIkenshoIraiJoho."ikenshoIraiRirekiNo" = 
                 (SELECT MAX(ShujiiIkenshoIraiJoho."ikenshoIraiRirekiNo") 
                 FROM rgdb."DbT5301ShujiiIkenshoIraiJoho" ShujiiIkenshoIraiJoho 
-                WHERE ShujiiIkenshoIraiJoho."shinseishoKanriNo" = DbT5101NinteiShinseiJoho."shinseishoKanriNo")
+                WHERE ShujiiIkenshoIraiJoho."shinseishoKanriNo" = DbT5101NinteiShinseiJoho."shinseishoKanriNo"
+                AND ShujiiIkenshoIraiJoho."logicalDeletedFlag" = FALSE)
                 AND DbT5301ShujiiIkenshoIraiJoho."logicalDeletedFlag" = FALSE
+        </if>       
+       <if test="useShujiiIkenshoJoho">
         LEFT JOIN 
             rgdb."DbT5302ShujiiIkenshoJoho" DbT5302ShujiiIkenshoJoho
             ON DbT5101NinteiShinseiJoho."shinseishoKanriNo" = DbT5302ShujiiIkenshoJoho."shinseishoKanriNo"
@@ -88,26 +100,38 @@
                 (SELECT MAX(ShujiiIkenshoJoho."ikenshoIraiRirekiNo") 
                 FROM rgdb."DbT5302ShujiiIkenshoJoho" ShujiiIkenshoJoho 
                 WHERE ShujiiIkenshoJoho."shinseishoKanriNo" = DbT5101NinteiShinseiJoho."shinseishoKanriNo")
-        LEFT JOIN 
-            rgdb."DbT5304ShujiiIkenshoIkenItem" DbT5304ShujiiIkenshoIkenItem
-            ON DbT5101NinteiShinseiJoho."shinseishoKanriNo" = DbT5304ShujiiIkenshoIkenItem."shinseishoKanriNo"
-            AND DbT5304ShujiiIkenshoIkenItem."ikenshoIraiRirekiNo" = 
-                (SELECT MAX(ShujiiIkenshoIkenItem."ikenshoIraiRirekiNo") 
-                FROM rgdb."DbT5304ShujiiIkenshoIkenItem" ShujiiIkenshoIkenItem 
-                WHERE ShujiiIkenshoIkenItem."shinseishoKanriNo" = DbT5101NinteiShinseiJoho."shinseishoKanriNo")
-        LEFT JOIN 
+        </if>
+        <if test="useShujiiIkenshoIkenItem">
+             LEFT JOIN 
+                rgdb."DbT5304ShujiiIkenshoIkenItem" DbT5304ShujiiIkenshoIkenItem
+                ON DbT5101NinteiShinseiJoho."shinseishoKanriNo" = DbT5304ShujiiIkenshoIkenItem."shinseishoKanriNo"
+                AND DbT5304ShujiiIkenshoIkenItem."ikenshoIraiRirekiNo" = 
+                    (SELECT MAX(ShujiiIkenshoIkenItem."ikenshoIraiRirekiNo") 
+                    FROM rgdb."DbT5304ShujiiIkenshoIkenItem" ShujiiIkenshoIkenItem 
+                    WHERE ShujiiIkenshoIkenItem."shinseishoKanriNo" = DbT5101NinteiShinseiJoho."shinseishoKanriNo")
+        </if>       
+        <if test="useIchijiHanteiKekkaJoho">
+         LEFT JOIN 
             rgdb."DbT5116IchijiHanteiKekkaJoho" DbT5116IchijiHanteiKekkaJoho
             ON DbT5101NinteiShinseiJoho."shinseishoKanriNo" = DbT5116IchijiHanteiKekkaJoho."shinseishoKanriNo"
-        LEFT JOIN 
+        </if>
+        <if test="useIchiGojiHanteiKekkaJoho">
+         LEFT JOIN 
             rgdb."DbT5510IchiGojiHanteiKekkaJoho" DbT5510IchiGojiHanteiKekkaJoho
             ON DbT5101NinteiShinseiJoho."shinseishoKanriNo" = DbT5510IchiGojiHanteiKekkaJoho."shinseishoKanriNo"
-        LEFT JOIN 
-            rgdb."DbT5102NinteiKekkaJoho" DbT5102NinteiKekkaJoho
-            ON DbT5101NinteiShinseiJoho."shinseishoKanriNo" = DbT5102NinteiKekkaJoho."shinseishoKanriNo"
-        LEFT JOIN 
+        </if>       
+        <if test="useNinteiKekkaJoho">
+            LEFT JOIN 
+                rgdb."DbT5102NinteiKekkaJoho" DbT5102NinteiKekkaJoho
+                ON DbT5101NinteiShinseiJoho."shinseishoKanriNo" = DbT5102NinteiKekkaJoho."shinseishoKanriNo"
+        </if>
+        <if test="useShinsakaiKaisaiKekkaJoho">
+         LEFT JOIN 
             rgdb."DbT5511ShinsakaiKaisaiKekkaJoho" DbT5511ShinsakaiKaisaiKekkaJoho
             ON DbT5101NinteiShinseiJoho."shinseishoKanriNo" = DbT5511ShinsakaiKaisaiKekkaJoho."shinsakaiKaisaiNo"
-        LEFT JOIN 
+        </if>
+       <if test="useZenkaiNinteiShinseiJoho">
+          LEFT JOIN 
             (
             SELECT 
                 DbT5101."shinseishoKanriNo" AS "shinseishoKanriNo"
@@ -122,12 +146,21 @@
                 ON DbT5101."shinseishoKanriNo" = DbT5102."shinseishoKanriNo"
             ) AS zenkaiNinteiShinseiJoho
             ON DbT5101NinteiShinseiJoho."shinseishoKanriNo" = zenkaiNinteiShinseiJoho."shinseishoKanriNo"
+        </if>
+        <if test="useGeninShikkan">
+            LEFT JOIN 
+                rgdb."DbT5300GeninShikkan" DbT5300GeninShikkan
+                ON DbT5101NinteiShinseiJoho."shinseishoKanriNo" = DbT5300GeninShikkan."shinseishoKanriNo"
+        </if>       
         LEFT JOIN 
             rgdb."DbT5300GeninShikkan" DbT5300GeninShikkan
             ON DbT5101NinteiShinseiJoho."shinseishoKanriNo" = DbT5300GeninShikkan."shinseishoKanriNo"
-        LEFT JOIN 
-            rgdb."DbT5105NinteiKanryoJoho" DbT5105NinteiKanryoJoho
-            ON DbT5101NinteiShinseiJoho."shinseishoKanriNo" = DbT5105NinteiKanryoJoho."shinseishoKanriNo"
+        <if test="useNinteiKanryoJoho">
+            LEFT JOIN 
+                rgdb."DbT5105NinteiKanryoJoho" DbT5105NinteiKanryoJoho
+                ON DbT5101NinteiShinseiJoho."shinseishoKanriNo" = DbT5105NinteiKanryoJoho."shinseishoKanriNo"
+        </if>       
+       
         LEFT JOIN 
             rgdb."DbT7051KoseiShichosonMaster" DbT7051KoseiShichosonMaster
             ON DbT5101NinteiShinseiJoho."shoKisaiHokenshaNo" = DbT7051KoseiShichosonMaster."shoKisaiHokenshaNo"
@@ -321,10 +354,10 @@
                      AND DbT5511ShinsakaiKaisaiKekkaJoho."shinsakaiKaisaiYMD" <![CDATA[<=]]> #{shinsakaiKaisaiYMDTo}
                 </if>
                 <if test="useShinsakaiKaisaiNoFrom">
-                     AND DbT5511ShinsakaiKaisaiKekkaJoho."shinsakaiKaisaiNo" <![CDATA[>=]]> #{shinsakaiKaisaiNoFrom}
+                     AND DbT5102NinteiKekkaJoho."shinsakaiKaisaiNo" <![CDATA[>=]]> #{shinsakaiKaisaiNoFrom}
                 </if>
                 <if test="useShinsakaiKaisaiNoTo">
-                     AND DbT5511ShinsakaiKaisaiKekkaJoho."shinsakaiKaisaiNo" <![CDATA[<=]]> #{shinsakaiKaisaiNoTo}
+                     AND DbT5102NinteiKekkaJoho."shinsakaiKaisaiNo" <![CDATA[<=]]> #{shinsakaiKaisaiNoTo}
                 </if>
                 
                 <if test="useZenkaiNinteiChosaItakusaki">

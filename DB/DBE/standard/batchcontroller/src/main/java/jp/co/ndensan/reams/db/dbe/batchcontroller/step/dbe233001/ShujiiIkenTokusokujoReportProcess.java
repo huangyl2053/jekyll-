@@ -55,7 +55,8 @@ public class ShujiiIkenTokusokujoReportProcess extends BatchProcessBase<ShujiiIk
     private BatchReportWriter<ShujiiIkenshoSakuseiTokusokujoReportSource> batchWrite;
     private ReportSourceWriter<ShujiiIkenshoSakuseiTokusokujoReportSource> reportSourceWriter;
     private ShuturyokuJyoukenProcessParamter processPrm;
-    private ShujiiIkenshoSakuseiTokusokujoItem bodyItem;
+    ShujiiIkenshoSakuseiTokusokujoItem bodyItem;
+    private List<ShujiiIkenshoSakuseiTokusokujoItem> bodyItemList;
 
     private static final RString 星アイコン = new RString("＊");
     private static final RString 明 = new RString("明");
@@ -94,13 +95,14 @@ public class ShujiiIkenTokusokujoReportProcess extends BatchProcessBase<ShujiiIk
     protected void process(ShujiiIkenTokusokujoRelateEntity entity) {
         shinseishoKanriNoList.add(entity.getTemp_申請書管理番号().getColumnValue());
         bodyItem = setBodyItem(entity);
+        bodyItemList.add(bodyItem);
     }
 
     @Override
     protected void afterExecute() {
         set出力条件表();
-        if (bodyItem != null) {
-            ShujiiIkenshoSakuseiTokusokujoReport report = ShujiiIkenshoSakuseiTokusokujoReport.createFrom(bodyItem);
+        if (bodyItemList != null) {
+            ShujiiIkenshoSakuseiTokusokujoReport report = ShujiiIkenshoSakuseiTokusokujoReport.createFrom(bodyItemList);
             report.writeBy(reportSourceWriter);
         }
         outShinseishoKanriNoList.setValue(shinseishoKanriNoList);

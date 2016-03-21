@@ -43,7 +43,7 @@ public class NinteiShinseiShichosonHandler {
             div.getTxtRenrakujiko().setDisabled(false);
         } else if (ShokaiMode.equals(shinseiCodeModel.get表示モード())) {
             div.getTxtRenrakujiko().setValue(shinseiCodeModel.get連絡事項());
-            div.getBtnModoru().setDisabled(true);
+            div.getBtnModoru().setDisabled(false);
             div.getBtnToroku().setDisabled(true);
             div.getTxtRenrakujiko().setDisabled(true);
         }

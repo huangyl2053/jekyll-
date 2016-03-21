@@ -86,6 +86,7 @@ public class ShinseiKensaku {
         ViewStateHolder.put(ViewStateKeys.検索結果_認定申請情報, new ShinseiKensakuInfoBusiness(list));
         if (!list.isEmpty()) {
             getHandler(div).setShinseiJohoIchiran(list);
+            div.getCcdNinteishinseishaFinder().getNinteiShinseishaFinderDiv().setIsOpen(false);
             div.getBtnClear().setDisabled(true);
             div.getTxtMaxDisp().setDisabled(true);
             div.getBtnKensaku().setDisabled(true);
@@ -145,6 +146,15 @@ public class ShinseiKensaku {
         div.getTxtMaxDisp().setDisabled(false);
         div.getBtnKensaku().setDisabled(false);
         div.getBtnModoru().setDisabled(true);
+        IUrControlData controlData = UrControlDataFactory.createInstance();
+        RString menuID = controlData.getMenuID();
+        if (MENUID_DBEMN11001.equals(menuID)) {
+            return ResponseData.of(div).setState(DBE0100001StateName.申請検索);
+        } else if (MENUID_DBEMN11003.equals(menuID)) {
+            return ResponseData.of(div).setState(DBE0100001StateName.個人照会);
+        } else if (MENUID_DBEMN14001.equals(menuID) || MENUID_DBEMN32002.equals(menuID)) {
+            return ResponseData.of(div).setState(DBE0100001StateName.情報提供);
+        }
         return ResponseData.of(div).setState(DBE0100001StateName.Default);
     }
 

@@ -539,6 +539,10 @@ public class ShinsakaiKaisaiYoteiToroku {
             row.getKaisaiGogitai2().setValue(RString.EMPTY);
             row.getKaisaiGogitai3().setValue(RString.EMPTY);
             row.getKaisaiGogitai4().setValue(RString.EMPTY);
+            row.getKaisaiGogitai1().setDisabled(false);
+            row.getKaisaiGogitai2().setDisabled(false);
+            row.getKaisaiGogitai3().setDisabled(false);
+            row.getKaisaiGogitai4().setDisabled(false);
             row.getBtnCencel1().setDisabled(true);
             row.getBtnCencel().setDisabled(true);
             row.getBtnCencel3().setDisabled(true);
@@ -575,7 +579,7 @@ public class ShinsakaiKaisaiYoteiToroku {
     private void set内部番号(List<ShinsakaiKaisaiYoteiJohoParameter> shinkiList, ShinsakaiKaisaiYoteiJohoParameter entity) {
         for (ShinsakaiKaisaiYoteiJohoParameter shinkiEntity : shinkiList) {
             if (entity.get日付().equals(shinkiEntity.get日付()) && entity.get開始予定時刻().equals(shinkiEntity.get開始予定時刻())
-                    && entity.get終了予定時刻().equals(shinkiEntity.get終了予定時刻())) {
+                    && entity.get終了予定時刻().equals(shinkiEntity.get終了予定時刻()) && entity.get合議体番号() == shinkiEntity.get合議体番号()) {
                 entity.set開催番号(shinkiEntity.get開催番号());
                 entity.set審査会名称(shinkiEntity.get審査会名称());
             }
