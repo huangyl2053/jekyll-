@@ -73,12 +73,16 @@ import jp.co.ndensan.reams.db.dbc.persistence.db.basic.DbT3052ShokanShoteiShikka
 import jp.co.ndensan.reams.db.dbc.persistence.db.basic.DbT3053ShokanShukeiDac;
 import jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.shokanbaraijyokyoshokai.IShokanbaraiJyokyoShokaiMapper;
 import jp.co.ndensan.reams.db.dbc.service.core.MapperProvider;
+import jp.co.ndensan.reams.db.dbx.business.core.kaigoserviceshurui.kaigoservicenaiyou.KaigoServiceNaiyou;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ServiceKomokuCode;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ServiceShuruiCode;
 import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT7060KaigoJigyoshaEntity;
+import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT7131KaigoServiceNaiyouEntity;
+import jp.co.ndensan.reams.db.dbx.persistence.db.basic.DbT7131KaigoServiceNaiyouDac;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
+import jp.co.ndensan.reams.uz.uza.biz.KaigoServiceShuruiCode;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -102,6 +106,7 @@ public class ShokanbaraiJyokyoShokai {
     private final DbT3052ShokanShoteiShikkanShisetsuRyoyoDac dbT3052Dac;
     private final DbT3043ShokanShokujiHiyoDac dbT3043Dac;
     private final DbT3039ShokanMeisaiDac dbT3039Dac;
+    private final DbT7131KaigoServiceNaiyouDac dbT7131Dac;
 
     private static final RString 定数_被保険者番号 = new RString("被保険者番号");
     private static final RString 定数_サービス提供年月 = new RString("サービス提供年月");
@@ -126,6 +131,7 @@ public class ShokanbaraiJyokyoShokai {
         this.dbT3052Dac = InstanceProvider.create(DbT3052ShokanShoteiShikkanShisetsuRyoyoDac.class);
         this.dbT3043Dac = InstanceProvider.create(DbT3043ShokanShokujiHiyoDac.class);
         this.dbT3039Dac = InstanceProvider.create(DbT3039ShokanMeisaiDac.class);
+        this.dbT7131Dac = InstanceProvider.create(DbT7131KaigoServiceNaiyouDac.class);
     }
 
     /**
@@ -153,7 +159,8 @@ public class ShokanbaraiJyokyoShokai {
             DbT3040ShokanKinkyuShisetsuRyoyoDac dbT3040Dac,
             DbT3052ShokanShoteiShikkanShisetsuRyoyoDac dbT3052Dac,
             DbT3043ShokanShokujiHiyoDac dbT3043Dac,
-            DbT3039ShokanMeisaiDac dbT3039Dac) {
+            DbT3039ShokanMeisaiDac dbT3039Dac,
+            DbT7131KaigoServiceNaiyouDac dbT7131Dac) {
         this.mapperProvider = mapperProvider;
         this.dbT3034Dac = dbT3034Dac;
         this.dbT3053Dac = dbT3053Dac;
@@ -165,7 +172,7 @@ public class ShokanbaraiJyokyoShokai {
         this.dbT3052Dac = dbT3052Dac;
         this.dbT3043Dac = dbT3043Dac;
         this.dbT3039Dac = dbT3039Dac;
-
+        this.dbT7131Dac = dbT7131Dac;
     }
 
     /**
@@ -1028,5 +1035,31 @@ public class ShokanbaraiJyokyoShokai {
         TokuteiShinryoServiceCode result = new TokuteiShinryoServiceCode(entityList.get(0));
 
         return result;
+    }
+
+    /**
+     * サービスコード情報取得
+     *
+     * @param サービス種類コード KaigoServiceShuruiCode
+     * @param サービス項目コード RString
+     * @param サービス年月 FlexibleYearMonth
+     * @return List<KaigoServiceNaiyou>
+     */
+    public List<KaigoServiceNaiyou> getServiceCodeInfo(
+            KaigoServiceShuruiCode サービス種類コード,
+            RString サービス項目コード,
+            FlexibleYearMonth 基準年月) {
+
+        List<DbT7131KaigoServiceNaiyouEntity> entityList = dbT7131Dac
+                .selectサービスコード情報(サービス種類コード, サービス項目コード, 基準年月);
+        if (entityList == null || entityList.isEmpty()) {
+            return null;
+        }
+
+        List<KaigoServiceNaiyou> resultList = new ArrayList<>();
+        for (DbT7131KaigoServiceNaiyouEntity tmp : entityList) {
+            resultList.add(new KaigoServiceNaiyou(tmp));
+        }
+        return resultList;
     }
 }
