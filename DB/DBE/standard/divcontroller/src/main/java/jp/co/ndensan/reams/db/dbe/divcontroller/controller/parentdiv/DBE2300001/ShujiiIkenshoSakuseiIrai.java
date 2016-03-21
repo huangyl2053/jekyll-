@@ -132,6 +132,7 @@ public class ShujiiIkenshoSakuseiIrai {
                 ShinseishoKanriNo.EMPTY, SubGyomuCode.DBE認定支援);
         div.getDgShinseishaIchiran().setDataSource(Collections.<dgShinseishaIchiran_Row>emptyList());
         div.getMeireisho().getRadjyushin().setSelectedKey(SELECTED_KEY1);
+        div.getMeireisho().setDisplayNone(true);
         return ResponseData.of(div).respond();
     }
 
@@ -143,9 +144,9 @@ public class ShujiiIkenshoSakuseiIrai {
      */
     public ResponseData<ShujiiIkenshoSakuseiIraiDiv> onClick_Chkprint(ShujiiIkenshoSakuseiIraiDiv div) {
         if (div.getChkprint().getSelectedKeys().contains(SELECTED_KEY3)) {
-            div.getMeireisho().setVisible(true);
+            div.getMeireisho().setDisplayNone(false);
         } else {
-            div.getMeireisho().setVisible(false);
+            div.getMeireisho().setDisplayNone(true);
         }
         return ResponseData.of(div).respond();
     }
