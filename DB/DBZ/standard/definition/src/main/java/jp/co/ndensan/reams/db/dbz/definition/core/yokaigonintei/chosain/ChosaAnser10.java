@@ -64,7 +64,7 @@ public enum ChosaAnser10 {
      */
     public static ChosaAnser10 toValue(Code code) {
         for (ChosaAnser10 anser01 : ChosaAnser10.values()) {
-            if (anser01.code == code) {
+            if (anser01.code.equals(code)) {
                 return anser01;
             }
         }
