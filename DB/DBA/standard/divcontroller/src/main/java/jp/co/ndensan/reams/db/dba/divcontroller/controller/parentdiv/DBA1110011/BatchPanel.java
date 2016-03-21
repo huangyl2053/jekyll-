@@ -43,9 +43,7 @@ public class BatchPanel {
     public ResponseData<BatchPanelDiv> onLoad(BatchPanelDiv div) {
 
         IUrControlData controlData = UrControlDataFactory.createInstance();
-//        RString menuID = controlData.getMenuID();
-        RString menuID = new RString("DBAMN72001");
-//        RString menuID = new RString("DBAMN72002");
+        RString menuID = controlData.getMenuID();
         List<KouFuJiyuu> kouFuJiyuuList = HihokenshashoHakkoKanriboFinder.createInstance().getKofuJiyuInitialData(menuID).records();
         List<KayiSyuuJiyuu> kayiSyuuJiyuuList = HihokenshashoHakkoKanriboFinder.createInstance().getKaishuJiyuInitialData(menuID).records();
         if ((kouFuJiyuuList == null || kouFuJiyuuList.isEmpty())
@@ -90,9 +88,7 @@ public class BatchPanel {
 
         ResponseData<HihokenshashoHakkoKanriboBatchParameter> response = new ResponseData<>();
         IUrControlData controlData = UrControlDataFactory.createInstance();
-//        RString menuID = controlData.getMenuID();
-        RString menuID = new RString("DBAMN72001");
-//        RString menuID = new RString("DBAMN72002");
+        RString menuID = controlData.getMenuID();
         List<KouFuJiyuu> kouFuJiyuuList = HihokenshashoHakkoKanriboFinder.createInstance().getKofuJiyuInitialData(menuID).records();
         List<KayiSyuuJiyuu> kayiSyuuJiyuuList = HihokenshashoHakkoKanriboFinder.createInstance().getKaishuJiyuInitialData(menuID).records();
         response.data = getHandler(div).batchParameter(kouFuJiyuuList, kayiSyuuJiyuuList, menuID);
