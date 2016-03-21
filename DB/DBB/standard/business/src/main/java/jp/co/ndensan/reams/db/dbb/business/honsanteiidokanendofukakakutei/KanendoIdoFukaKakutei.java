@@ -13,6 +13,7 @@ import jp.co.ndensan.reams.db.dbb.entity.db.relate.kanendoidofukakakutei.Kanendo
  */
 @lombok.Getter
 @lombok.Setter
+@SuppressWarnings("PMD.UnusedPrivateField")
 public class KanendoIdoFukaKakutei {
 
     KanendoIdoFukaKakuteiEntity fukaKakuteiEntity;
