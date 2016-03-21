@@ -7,11 +7,13 @@ package jp.co.ndensan.reams.db.dbb.service.report.hakkogoidotaishoshaichiran;
 
 import java.util.ArrayList;
 import java.util.List;
+import javax.validation.constraints.NotNull;
 import jp.co.ndensan.reams.db.dbb.business.core.tsuchishohakkogoidosha.TsuchiShoHakkoGoIdosha;
 import jp.co.ndensan.reams.db.dbb.business.core.tsuchishohakkogoidosha.TsuchiShoHakkogoIdoshaListJoho;
 import jp.co.ndensan.reams.db.dbb.business.report.hakkogoidotaishoshaichiran.HakkogoIdoTaishoshaIchiranItem;
 import jp.co.ndensan.reams.db.dbb.business.report.hakkogoidotaishoshaichiran.HakkogoIdoTaishoshaIchiranProperty;
 import jp.co.ndensan.reams.db.dbb.business.report.hakkogoidotaishoshaichiran.HakkogoIdoTaishoshaIchiranReport;
+import jp.co.ndensan.reams.db.dbb.definition.reportId.ReportIdDBB;
 import jp.co.ndensan.reams.db.dbb.entity.report.hakkogoidotaishoshaichiran.HakkogoIdoTaishoshaIchiranSource;
 import jp.co.ndensan.reams.ur.urz.business.core.association.Association;
 import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
@@ -29,8 +31,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.propertyenum.DisplayTimeFormat;
  */
 public class HakkogoIdoTaishoshaIchiranPrintService {
 
-    private static final RString TITLE = new RString("通知書発行後異動対象者一覧");
-    private static final RString 年度 = new RString("年度");
+    private static final RString NENDO = new RString("年度");
     
     /**
      * printメソッド
@@ -41,9 +42,9 @@ public class HakkogoIdoTaishoshaIchiranPrintService {
      * @return SourceDataCollection
      */
     public SourceDataCollection print(
-            TsuchiShoHakkogoIdoshaListJoho 発行後異動者一覧情報,
-            Association 導入団体クラス,
-            YMDHMS 帳票作成日時) {
+            @NotNull TsuchiShoHakkogoIdoshaListJoho 発行後異動者一覧情報,
+            @NotNull Association 導入団体クラス,
+            @NotNull YMDHMS 帳票作成日時) {
         HakkogoIdoTaishoshaIchiranProperty property = new HakkogoIdoTaishoshaIchiranProperty();
         List<HakkogoIdoTaishoshaIchiranItem> targets = setItems(発行後異動者一覧情報, 導入団体クラス, 帳票作成日時);
         return new Printer<HakkogoIdoTaishoshaIchiranSource>().spool(property, toReports(targets));
@@ -85,7 +86,7 @@ public class HakkogoIdoTaishoshaIchiranPrintService {
                 RString 帳票作成時 = 帳票作成日時.getRDateTime().getTime().toFormattedTimeString(DisplayTimeFormat.HH時mm分ss秒);
                 item.setPrintTimeStamp(帳票作成日.concat(" " + 帳票作成時));
                 item.setFukaNendo(発行後異動者一覧情報.get異動者リスト().get(0).get賦課年度().wareki().eraType(EraType.KANJI)
-                        .firstYear(FirstYear.GAN_NEN).toDateString().concat(年度));
+                        .firstYear(FirstYear.GAN_NEN).toDateString().concat(NENDO));
                 RString 通知書発行日 = 発行後異動者一覧情報.get通知書発行日時().getDate().wareki().eraType(EraType.KANJI)
                         .firstYear(FirstYear.GAN_NEN).separator(Separator.JAPANESE).fillType(FillType.ZERO).toDateString();
                 RString 通知書発行時 = 発行後異動者一覧情報.get通知書発行日時().getRDateTime().getTime()
@@ -104,7 +105,7 @@ public class HakkogoIdoTaishoshaIchiranPrintService {
                 item.setListIdosha_6(tsuchiShoHakkoGoIdosha.get異動日().wareki().eraType(EraType.ALPHABET).firstYear(FirstYear.GAN_NEN)
                     .separator(Separator.PERIOD).fillType(FillType.ZERO).toDateString());
                 item.setListIdosha_7(tsuchiShoHakkoGoIdosha.get異動内容().get名称());
-                item.setTitle(TITLE);
+                item.setTitle(ReportIdDBB.DBB200028.getReportName());
                 targets.add(item);
             }
         }
