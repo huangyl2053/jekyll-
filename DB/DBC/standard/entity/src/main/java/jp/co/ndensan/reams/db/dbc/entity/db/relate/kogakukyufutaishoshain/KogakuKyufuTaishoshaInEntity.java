@@ -19,6 +19,12 @@ public class KogakuKyufuTaishoshaInEntity {
     private DbTKogakuKyufuCSVDataHeadEntity headEntity;
     private List<KogakuKyufuMeisaiGokeiEntity> 明細集計List;
 
+    /**
+     * コンストラクタです。
+     *
+     * @param headEntity DbTKogakuKyufuCSVDataHeadEntity
+     * @param 明細集計List List<KogakuKyufuMeisaiGokeiEntity>
+     */
     public KogakuKyufuTaishoshaInEntity(DbTKogakuKyufuCSVDataHeadEntity headEntity,
             List<KogakuKyufuMeisaiGokeiEntity> 明細集計List) {
         this.headEntity = headEntity;

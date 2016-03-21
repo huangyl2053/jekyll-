@@ -1,17 +1,21 @@
-package jp.co.ndensan.reams.db.dbu.divcontroller.entity.parentdiv.dbu0500011;
-/**
- * このコードはツールによって生成されました。
- * このファイルへの変更は、再生成時には損失するため
- * 不正な動作の原因になります。
- */
-import com.fasterxml.jackson.annotation.JsonProperty;
-import jp.co.ndensan.reams.uz.uza.ui.binding.*;
-import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
-import jp.co.ndensan.reams.uz.uza.ui.binding.domain.*;
+package jp.co.ndensan.reams.db.dbu.divcontroller.entity.parentdiv.DBU0500011;
 
 /**
- * SearchShoKaishuKanri のクラスファイル 
- * 
+ * このコードはツールによって生成されました。 このファイルへの変更は、再生成時には損失するため 不正な動作の原因になります。
+ */
+import com.fasterxml.jackson.annotation.JsonProperty;
+import jp.co.ndensan.reams.uz.uza.ui.binding.Button;
+import jp.co.ndensan.reams.uz.uza.ui.binding.ButtonDialog;
+import jp.co.ndensan.reams.uz.uza.ui.binding.CheckBoxList;
+import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
+import jp.co.ndensan.reams.uz.uza.ui.binding.RadioButton;
+import jp.co.ndensan.reams.uz.uza.ui.binding.TextBox;
+import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxCode;
+import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxDateRange;
+
+/**
+ * SearchShoKaishuKanri のクラスファイル
+ *
  * @author 自動生成
  */
 public class SearchShoKaishuKanriDiv extends Panel {
@@ -21,6 +25,7 @@ public class SearchShoKaishuKanriDiv extends Panel {
      * コントロール名とフィールド名を取得する
      * private + コントロール名 + フィールド名 の文字列を作成
      */
+
     @JsonProperty("txtSearchHihokenshaNo")
     private TextBoxCode txtSearchHihokenshaNo;
     @JsonProperty("btnHihokenshaInputGuide")
@@ -49,7 +54,7 @@ public class SearchShoKaishuKanriDiv extends Panel {
 
     @JsonProperty("txtSearchHihokenshaNo")
     public void setTxtSearchHihokenshaNo(TextBoxCode txtSearchHihokenshaNo) {
-        this.txtSearchHihokenshaNo=txtSearchHihokenshaNo;
+        this.txtSearchHihokenshaNo = txtSearchHihokenshaNo;
     }
 
     @JsonProperty("btnHihokenshaInputGuide")
@@ -59,7 +64,7 @@ public class SearchShoKaishuKanriDiv extends Panel {
 
     @JsonProperty("btnHihokenshaInputGuide")
     public void setBtnHihokenshaInputGuide(ButtonDialog btnHihokenshaInputGuide) {
-        this.btnHihokenshaInputGuide=btnHihokenshaInputGuide;
+        this.btnHihokenshaInputGuide = btnHihokenshaInputGuide;
     }
 
     @JsonProperty("txtSearchHihokenshaMeisho")
@@ -69,7 +74,7 @@ public class SearchShoKaishuKanriDiv extends Panel {
 
     @JsonProperty("txtSearchHihokenshaMeisho")
     public void setTxtSearchHihokenshaMeisho(TextBox txtSearchHihokenshaMeisho) {
-        this.txtSearchHihokenshaMeisho=txtSearchHihokenshaMeisho;
+        this.txtSearchHihokenshaMeisho = txtSearchHihokenshaMeisho;
     }
 
     @JsonProperty("radSearchKohushoShurui")
@@ -79,7 +84,7 @@ public class SearchShoKaishuKanriDiv extends Panel {
 
     @JsonProperty("radSearchKohushoShurui")
     public void setRadSearchKohushoShurui(RadioButton radSearchKohushoShurui) {
-        this.radSearchKohushoShurui=radSearchKohushoShurui;
+        this.radSearchKohushoShurui = radSearchKohushoShurui;
     }
 
     @JsonProperty("txtSearchKofuKikan")
@@ -89,7 +94,7 @@ public class SearchShoKaishuKanriDiv extends Panel {
 
     @JsonProperty("txtSearchKofuKikan")
     public void setTxtSearchKofuKikan(TextBoxDateRange txtSearchKofuKikan) {
-        this.txtSearchKofuKikan=txtSearchKofuKikan;
+        this.txtSearchKofuKikan = txtSearchKofuKikan;
     }
 
     @JsonProperty("chkKaishuKirokuZumi")
@@ -99,7 +104,7 @@ public class SearchShoKaishuKanriDiv extends Panel {
 
     @JsonProperty("chkKaishuKirokuZumi")
     public void setChkKaishuKirokuZumi(CheckBoxList chkKaishuKirokuZumi) {
-        this.chkKaishuKirokuZumi=chkKaishuKirokuZumi;
+        this.chkKaishuKirokuZumi = chkKaishuKirokuZumi;
     }
 
     @JsonProperty("btnSearchShoKaishuKanri")
@@ -109,7 +114,7 @@ public class SearchShoKaishuKanriDiv extends Panel {
 
     @JsonProperty("btnSearchShoKaishuKanri")
     public void setBtnSearchShoKaishuKanri(Button btnSearchShoKaishuKanri) {
-        this.btnSearchShoKaishuKanri=btnSearchShoKaishuKanri;
+        this.btnSearchShoKaishuKanri = btnSearchShoKaishuKanri;
     }
 
 }

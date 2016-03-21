@@ -7,7 +7,7 @@ package jp.co.ndensan.reams.db.dbu.divcontroller.parentdiv;
 
 import java.util.HashMap;
 import java.util.List;
-import jp.co.ndensan.reams.db.dbu.divcontroller.entity.parentdiv.dbu0500011.SearchShoKaishuKanriDiv;
+import jp.co.ndensan.reams.db.dbu.divcontroller.entity.parentdiv.DBU0500011.SearchShoKaishuKanriDiv;
 import jp.co.ndensan.reams.db.dbz.divcontroller.helper.ControlGenerator;
 import jp.co.ndensan.reams.db.dbz.divcontroller.helper.YamlLoader;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;

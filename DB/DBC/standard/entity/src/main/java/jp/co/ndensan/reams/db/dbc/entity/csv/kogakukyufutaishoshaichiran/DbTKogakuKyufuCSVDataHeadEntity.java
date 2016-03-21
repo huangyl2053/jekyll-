@@ -33,7 +33,13 @@ public class DbTKogakuKyufuCSVDataHeadEntity {
     @CsvField(order = 70, name = "国保連合会名")
     private RString kokukoRengoukaiNa;
 
-    public boolean equals(DbTKogakuKyufuCSVDataHeadEntity entity) {
+    /**
+     * DbTKogakuKyufuCSVDataHeadEntity equalsToEntity
+     *
+     * @param entity DbTKogakuKyufuCSVDataHeadEntity
+     * @return boolean
+     */
+    public boolean equalsToEntity(DbTKogakuKyufuCSVDataHeadEntity entity) {
         return this.toERString().equals(entity.toERString());
     }
 

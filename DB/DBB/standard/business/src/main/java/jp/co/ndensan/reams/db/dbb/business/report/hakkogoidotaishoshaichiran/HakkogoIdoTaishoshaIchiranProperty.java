@@ -7,7 +7,6 @@ package jp.co.ndensan.reams.db.dbb.business.report.hakkogoidotaishoshaichiran;
 
 import jp.co.ndensan.reams.db.dbb.definition.reportId.ReportIdDBB;
 import jp.co.ndensan.reams.db.dbb.entity.report.hakkogoidotaishoshaichiran.HakkogoIdoTaishoshaIchiranSource;
-import jp.co.ndensan.reams.uz.uza.biz.ReportId;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.report.BreakerCatalog;
 import jp.co.ndensan.reams.uz.uza.report.Breakers;
@@ -18,13 +17,11 @@ import jp.co.ndensan.reams.uz.uza.report.ReportPropertyBase;
  */
 public class HakkogoIdoTaishoshaIchiranProperty extends ReportPropertyBase<HakkogoIdoTaishoshaIchiranSource> {
 
-    private static final ReportId ID = ReportIdDBB.DBB200028.getReportId();
-
     /**
      * コンストラクタです。
      */
     public HakkogoIdoTaishoshaIchiranProperty() {
-        super(SubGyomuCode.DBB介護賦課, ID);
+        super(SubGyomuCode.DBB介護賦課,  ReportIdDBB.DBB200028.getReportId());
     }
 
     /**

@@ -55,8 +55,11 @@ public enum ReportIdDBC {
      * 償還払支給（不支給）決定通知一覧表の帳票ＩＤです。
      */
     DBC200023(
-            new ReportId("DBC200023_ShokanbaraiShikyuFushikyuKetteiTsuchiIchiran"), new RString("償還払支給（不支給）決定通知一覧表"));
-
+            new ReportId("DBC200023_ShokanbaraiShikyuFushikyuKetteiTsuchiIchiran"), new RString("償還払支給（不支給）決定通知一覧表")),
+    /**
+     * 過誤決定通知書情報取込一覧表（保険者分）の帳票ＩＤです。
+     */
+    DBC200050(new ReportId("DBC200050_KagoKetteitsuchishoTorikomiIchiranHokenshaBun"), new RString("過誤決定通知書情報取込一覧表（保険者分）"));
     private final ReportId reportId;
     private final RString reportName;
 

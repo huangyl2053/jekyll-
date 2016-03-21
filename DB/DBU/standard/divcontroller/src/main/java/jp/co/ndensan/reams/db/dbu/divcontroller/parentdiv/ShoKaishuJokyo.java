@@ -5,8 +5,8 @@
  */
 package jp.co.ndensan.reams.db.dbu.divcontroller.parentdiv;
 
-import jp.co.ndensan.reams.db.dbu.divcontroller.entity.parentdiv.dbu0500011.SearchResultShoKaishuKanriDiv;
-import jp.co.ndensan.reams.db.dbu.divcontroller.entity.parentdiv.dbu0500011.ShoKaishuJokyoDiv;
+import jp.co.ndensan.reams.db.dbu.divcontroller.entity.parentdiv.DBU0500011.SearchResultShoKaishuKanriDiv;
+import jp.co.ndensan.reams.db.dbu.divcontroller.entity.parentdiv.DBU0500011.ShoKaishuJokyoDiv;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.parentdiv.shokaishujokyolist.dgShoKaishuJokyo_Row;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.parentdiv.shokaishujokyoshosai.ShoKaishuJokyoShosaiDiv;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;

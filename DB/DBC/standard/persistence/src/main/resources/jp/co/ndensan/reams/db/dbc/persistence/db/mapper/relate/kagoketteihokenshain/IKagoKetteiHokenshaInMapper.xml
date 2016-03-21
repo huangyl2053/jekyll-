@@ -324,9 +324,31 @@
     </select>
     
     <update id="update保険者分情報_明細">
-        UPDATA "TEMP_TABLE_KagoKetteiTsuchishoJyohoHokenshabunMeisai" A
-        SET A."hihokenshaNo"=B."shinNo" 
-        FROM "TEMP_TABLE_Shihihokenshabango" B
-        WHERE A."hihokenshaNo"=B."kyuNo"
+        UPDATE "TEMP_TABLE_KagoKetteiTsuchishoJyohoHokenshabunMeisai"
+        SET "hiHokenshaNo"=B."shinNo" 
+        FROM "TEMP_TABLE_Shihihokenshabango" AS B,
+        "TEMP_TABLE_KagoKetteiTsuchishoJyohoHokenshabunMeisai" AS A
+        WHERE A."hiHokenshaNo"=B."kyuNo"
     </update>
+    
+    <insert id="create新被保険者番号">
+        CREATE TEMP TABLE "TEMP_TABLE_Shihihokenshabango"
+        (
+        "shichosonCode" rshare."UDD023LasdecCode",
+        "shinNo" character(20),
+        "kyuNo" character(20)) 
+    </insert>
+    
+    <insert id="insert新被保険者番号" parameterType="jp.co.ndensan.reams.db.dbc.entity.db.relate.kagoketteihokenshain.ShihihokenshabangoTempTableEntity">
+        INSERT INTO "TEMP_TABLE_Shihihokenshabango"
+        (
+        "shichosonCode",
+        "shinNo",
+        "kyuNo") 
+        VALUES 
+        (
+        #{shichosonCode},
+        #{shinNo},
+        #{kyuNo})
+    </insert>
 </mapper>

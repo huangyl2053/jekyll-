@@ -18,7 +18,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
  * 被保険者台帳管理（資格取得）情報です。
  *
  */
-public class HihokenshaShutokuJyoho {
+public class HihokenshaShutokuJyoho implements Comparable<HihokenshaShutokuJyoho> {
 
     private final DbT1001HihokenshaDaichoEntity entity;
 
@@ -295,5 +295,10 @@ public class HihokenshaShutokuJyoho {
      */
     public boolean is論理削除フラグ() {
         return entity.getLogicalDeletedFlag();
+    }
+
+    @Override
+    public int compareTo(HihokenshaShutokuJyoho entity) {
+        return this.get異動日().compareTo(entity.get異動日());
     }
 }
