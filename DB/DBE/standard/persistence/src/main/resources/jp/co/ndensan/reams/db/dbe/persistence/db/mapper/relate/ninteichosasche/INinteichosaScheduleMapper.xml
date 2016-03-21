@@ -33,35 +33,35 @@
         FROM
          (SELECT
           "DbT5221NinteichosaSchedule"."ninteiChosaYoteiYMD",
-         CASE  WHEN "DbT5221NinteichosaSchedule"."ninteiChosaYoteiShuryoTime" <![CDATA[<=]]> '12:00'
+         CASE  WHEN "DbT5221NinteichosaSchedule"."ninteiChosaYoteiShuryoTime" <![CDATA[<=]]> '1200'
         THEN
         '1'
         ELSE                
          '0'      END     AS "午前",
-         CASE  WHEN "DbT5221NinteichosaSchedule"."ninteiChosaYoteiKaishiTime" <![CDATA[>=]]> '12:00'
+         CASE  WHEN "DbT5221NinteichosaSchedule"."ninteiChosaYoteiKaishiTime" <![CDATA[>=]]> '1200'
         THEN
         '1'
         ELSE                
          '0'      END     AS "午後",
-         CASE  WHEN "DbT5221NinteichosaSchedule"."ninteiChosaYoteiShuryoTime" <![CDATA[<=]]> '12:00'
+         CASE  WHEN "DbT5221NinteichosaSchedule"."ninteiChosaYoteiShuryoTime" <![CDATA[<=]]> '1200'
          AND "DbT5221NinteichosaSchedule"."yoyakuJokyo"='1'
         THEN
         '1'
         ELSE                
          '0'      END     AS "午前の仮予約",
-         CASE  WHEN "DbT5221NinteichosaSchedule"."ninteiChosaYoteiKaishiTime" <![CDATA[>=]]> '12:00'
+         CASE  WHEN "DbT5221NinteichosaSchedule"."ninteiChosaYoteiKaishiTime" <![CDATA[>=]]> '1200'
          AND "DbT5221NinteichosaSchedule"."yoyakuJokyo"='1'
         THEN
         '1'
         ELSE                
          '0'      END     AS "午後の仮予約",
-         CASE  WHEN "DbT5221NinteichosaSchedule"."ninteiChosaYoteiShuryoTime" <![CDATA[<=]]> '12:00'
+         CASE  WHEN "DbT5221NinteichosaSchedule"."ninteiChosaYoteiShuryoTime" <![CDATA[<=]]> '1200'
          AND "DbT5221NinteichosaSchedule"."yoyakuJokyo"='2'
         THEN
         '1'
         ELSE                
          '0'      END     AS "午前の確定",
-         CASE WHEN "DbT5221NinteichosaSchedule"."ninteiChosaYoteiKaishiTime" <![CDATA[>=]]> '12:00'
+         CASE WHEN "DbT5221NinteichosaSchedule"."ninteiChosaYoteiKaishiTime" <![CDATA[>=]]> '1200'
          AND "DbT5221NinteichosaSchedule"."yoyakuJokyo"='2'
         THEN
         '1'
