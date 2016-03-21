@@ -314,6 +314,9 @@ public class ShujiiIkenshoToroku {
         if (ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
             setShujiiIkenshoJoho(state, 管理番号, 履歴番号, div);
         }
+        if (ResponseHolder.getButtonType() == MessageDialogSelectedResult.No) {
+            return ResponseData.of(div).respond();
+        }
         return onLoad(div);
     }
 
@@ -368,7 +371,7 @@ public class ShujiiIkenshoToroku {
         shujiiIkenshoBuilder.set意見書作成回数区分(SELECT_KEY0.equals(div.getRadIkenshoSakuseiKaisu().getSelectedKey())
                 ? new Code(IkenshoSakuseiKaisuKubun.初回.getコード())
                 : new Code(IkenshoSakuseiKaisuKubun._2回目以降.getコード()));
-        shujiiIkenshoBuilder.set意見書同意フラグ(SELECT_KEY0.equals(div.getRadDoi().getSelectedValue()));
+        shujiiIkenshoBuilder.set意見書同意フラグ(SELECT_KEY0.equals(div.getRadDoi().getSelectedKey()));
         shujiiIkenshoBuilder.set最終診療日(rdateToFlex(div.getTxtSaishuShinryoYMD().getValue()));
         shujiiIkenshoBuilder.set他科受診の有無(SELECT_KEY0.equals(div.getRadTakaShinryo().getSelectedKey()));
         shujiiIkenshoBuilder.set内科受診の有無(div.getChkTakaJushinSelect().getSelectedKeys().contains(SELECT_KEY0));
