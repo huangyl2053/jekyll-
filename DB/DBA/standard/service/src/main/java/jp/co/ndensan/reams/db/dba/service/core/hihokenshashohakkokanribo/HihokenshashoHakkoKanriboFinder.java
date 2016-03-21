@@ -62,11 +62,12 @@ public class HihokenshashoHakkoKanriboFinder {
             RDate koufubiTo,
             RDate kaishubiFrom,
             RDate kaishubiTo) {
-        if (koufubiFrom != null && koufubiTo != null) {
+        if ((koufubiFrom != null && koufubiTo != null)
+                || (kaishubiFrom != null && kaishubiTo != null)) {
             return true;
         }
-        return koufubiFrom == null && koufubiTo == null
-                && kaishubiFrom != null && kaishubiTo != null;
+        return checkDate(koufubiTo, koufubiTo)
+                || checkDate(kaishubiFrom, kaishubiTo);
     }
 
     /**
@@ -121,5 +122,10 @@ public class HihokenshashoHakkoKanriboFinder {
             kayiSyuuJiyuuList.add(new KayiSyuuJiyuu(entity));
         }
         return SearchResult.of(kayiSyuuJiyuuList, 0, false);
+    }
+
+    private boolean checkDate(RDate 開始日, RDate 終了日) {
+        return !((開始日 != null && 終了日 == null)
+                || (終了日 != null && 開始日 == null));
     }
 }
