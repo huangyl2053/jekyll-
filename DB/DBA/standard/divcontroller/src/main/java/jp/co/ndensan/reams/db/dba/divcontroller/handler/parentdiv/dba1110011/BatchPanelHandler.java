@@ -99,10 +99,14 @@ public class BatchPanelHandler {
             parameter.setSeyisinjyohoflg(false);
         } else {
             parameter.setSiyuturiyokudaysyou(発行管理リスト);
-            parameter.setKoufukayisihi(new FlexibleDate(div.getTxtKoufubiRange().getFromValue().toDateString()));
-            parameter.setKoufusiuryouhi(new FlexibleDate(div.getTxtKoufubiRange().getToValue().toDateString()));
-            parameter.setKasyuukayisihi(new FlexibleDate(div.getTxtKaishubiRange().getFromValue().toDateString()));
-            parameter.setKasyuusiuryouhi(new FlexibleDate(div.getTxtKaishubiRange().getToValue().toDateString()));
+            parameter.setKoufukayisihi(div.getTxtKoufubiRange().getFromValue() == null
+                    ? FlexibleDate.EMPTY : new FlexibleDate(div.getTxtKoufubiRange().getFromValue().toDateString()));
+            parameter.setKoufusiuryouhi(div.getTxtKoufubiRange().getToValue() == null
+                    ? FlexibleDate.EMPTY : new FlexibleDate(div.getTxtKoufubiRange().getToValue().toDateString()));
+            parameter.setKasyuukayisihi(div.getTxtKaishubiRange().getFromValue() == null
+                    ? FlexibleDate.EMPTY : new FlexibleDate(div.getTxtKaishubiRange().getFromValue().toDateString()));
+            parameter.setKasyuusiuryouhi(div.getTxtKaishubiRange().getToValue() == null
+                    ? FlexibleDate.EMPTY : new FlexibleDate(div.getTxtKaishubiRange().getToValue().toDateString()));
             if (div.getChkSaishinJoho().getSelectedItems().size() > 0) {
                 parameter.setSeyisinjyohoflg(true);
             } else {
