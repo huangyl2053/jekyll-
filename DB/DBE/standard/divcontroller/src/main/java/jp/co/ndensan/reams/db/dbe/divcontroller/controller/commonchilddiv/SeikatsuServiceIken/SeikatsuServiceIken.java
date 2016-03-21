@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbe.divcontroller.controller.parentdiv.SeikatsuServiceIken;
+package jp.co.ndensan.reams.db.dbe.divcontroller.controller.commonchilddiv.SeikatsuServiceIken;
 
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.commonchilddiv.SeikatsuServiceIken.SeikatsuServiceIken.SeikatsuServiceIkenDiv;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.commonchilddiv.SeikatsuServiceIken.SeikatsuServiceIken.SeikatsuServiceIkenHandler;
