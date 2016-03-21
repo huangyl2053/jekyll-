@@ -5,6 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbe.batchcontroller.step.dbe090001;
 
+import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbe.business.report.johoteikyoshiryo.JohoTeikyoShiryoItem;
 import jp.co.ndensan.reams.db.dbe.business.report.johoteikyoshiryo.JohoTeikyoShiryoReport;
@@ -29,6 +30,7 @@ import jp.co.ndensan.reams.uz.uza.batch.process.BatchReportFactory;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchReportWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.IBatchReader;
+import jp.co.ndensan.reams.uz.uza.batch.process.OutputParameter;
 import jp.co.ndensan.reams.uz.uza.biz.GyomuCode;
 import jp.co.ndensan.reams.uz.uza.biz.ReportId;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
@@ -44,6 +46,11 @@ import jp.co.ndensan.reams.uz.uza.util.config.BusinessConfig;
  */
 public class YouKaiGoNinTeiKekTesuChiProcess extends BatchProcessBase<YouKaiGoNinTeiKekTesuChiRelateEntity> {
 
+    
+   /**
+    * OutputParameter用キー outDataList
+    */
+    public static final RString OUT_DATA_LIST;
     private static final RString MYBATIS_SELECT_ID
             = new RString("jp.co.ndensan.reams.db.dbe.persistence.db.mapper.basic.youkaigoninteikekktesuchi"
                     + ".IYouKaiGoNinTeiKekTesuChiMapper.getCyouHyouSyuTsuRyoKu");
@@ -63,15 +70,24 @@ public class YouKaiGoNinTeiKekTesuChiProcess extends BatchProcessBase<YouKaiGoNi
     private JohoTeikyoShiryoItem headItem;
     private IYouKaiGoNinTeiKekTesuChiMapper mapper;
     private YouKaiGoNinTeiKekTesuChiMybitisParamter mybatisPrm;
-
+    private List<JohoTeikyoShiryoItem> itemList;
+    private OutputParameter<List<JohoTeikyoShiryoItem>> outDataList;
+     
+    static {
+        OUT_DATA_LIST = new RString("outDataList");
+    }
+    
     @BatchWriter
     private BatchReportWriter<JohoTeikyoShiryoReportSource> batchWrite;
     private ReportSourceWriter<JohoTeikyoShiryoReportSource> retortWrite;
 
     @Override
     protected void initialize() {
+        itemList = new ArrayList();
+        outDataList = new OutputParameter<>();
         mybatisPrm = paramter.toMybitisParameter();
         mapper = getMapper(IYouKaiGoNinTeiKekTesuChiMapper.class);
+        super.initialize();
     }
 
     @Override
@@ -97,8 +113,9 @@ public class YouKaiGoNinTeiKekTesuChiProcess extends BatchProcessBase<YouKaiGoNi
 
     @Override
     protected void afterExecute() {
-        JohoTeikyoShiryoReport report = JohoTeikyoShiryoReport.createFrom(headItem);
+        JohoTeikyoShiryoReport report = JohoTeikyoShiryoReport.createFrom(itemList);
         report.writeBy(retortWrite);
+        outDataList.setValue(itemList);
     }
 
     private void eidtItem(YouKaiGoNinTeiKekTesuChiRelateEntity entity) {
@@ -118,6 +135,7 @@ public class YouKaiGoNinTeiKekTesuChiProcess extends BatchProcessBase<YouKaiGoNi
                 , new RDate(entity.getNijiHanteiNinteiYukoShuryoYMD().toString()), entity.getShinsakaiIken(), get通知文(tempList, 通知文2)
                 , get通知文(tempList, 通知文3), get通知文(tempList, 通知文4), get通知文(tempList, 通知文5), get通知文(tempList, 通知文6)
                 , get通知文(tempList, 通知文7), get通知文(tempList, 通知文8), get通知文(tempList, 通知文9), get通知文(tempList, 通知文10));
+        itemList.add(headItem);
     }
 
     private RString get通知文(List<TsuchishoTeikeibunEntity> tempList, int index) {
