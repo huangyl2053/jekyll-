@@ -65,16 +65,16 @@
         </if>
         AND
             ShoKofuKaishu."kofuShoShurui" = #{akasihakouMod}
-        <if test="isKoufukayisihi">
+        <if test="iskoufukayisihi">
             AND ShoKofuKaishu."kofuYMD" <![CDATA[>=]]> #{koufukayisihi}
         </if>
-        <if test="isKoufuSiuryouhi">
+        <if test="iskoufuShuryouhi">
             AND ShoKofuKaishu."kofuYMD" <![CDATA[<=]]> #{koufusiuryouhi}
         </if>
-        <if test="isKasyuuKayisihi">
+        <if test="iskaisyuKayisihi">
             AND ShoKofuKaishu."kaishuYMD" <![CDATA[>=]]> #{kasyuukayisihi}
         </if>
-        <if test="isKasyuuSiuryouhi">
+        <if test="iskaisyuShuryouhi">
             AND ShoKofuKaishu."kaishuYMD" <![CDATA[<=]]> #{kasyuusiuryouhi}
         </if>							
 	ORDER BY ShoKofuKaishu."hihokenshaNo"			
