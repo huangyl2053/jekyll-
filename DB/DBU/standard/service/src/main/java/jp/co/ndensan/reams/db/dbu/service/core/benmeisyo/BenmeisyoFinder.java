@@ -13,11 +13,15 @@ import jp.co.ndensan.reams.db.dbu.entity.db.benmeisyo.BenmeiJohoEntity;
 import jp.co.ndensan.reams.db.dbu.entity.db.benmeisyo.BenmeiJohoResultEntity;
 import jp.co.ndensan.reams.db.dbu.entity.db.benmeisyo.BenmeisyoTyohyoDataEntity;
 import jp.co.ndensan.reams.db.dbu.entity.db.benmeisyo.HihokenshaDateEntity;
+import jp.co.ndensan.reams.db.dbu.entity.db.benmeisyo.NinshoshaDenshiKoinDataEntity;
 import jp.co.ndensan.reams.db.dbu.persistence.benmeisyo.BenmeisyoMapper;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.service.core.MapperProvider;
 import jp.co.ndensan.reams.db.dbz.definition.core.configkeys.ConfigNameDBU;
+import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.kyotsu.NinshoshaDenshikoinshubetsuCode;
 import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.kyotsu.ShobunShuruiCode;
+import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7065ChohyoSeigyoKyotsuEntity;
+import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT7065ChohyoSeigyoKyotsuDac;
 import jp.co.ndensan.reams.ua.uax.business.core.psm.UaFt200FindShikibetsuTaishoFunction;
 import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.ShikibetsuTaishoFactory;
 import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.search.ShikibetsuTaishoGyomuHanteiKeyFactory;
@@ -25,17 +29,28 @@ import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.search.Shikibet
 import jp.co.ndensan.reams.ua.uax.definition.core.enumeratedtype.shikibetsutaisho.KensakuYusenKubun;
 import jp.co.ndensan.reams.ua.uax.definition.core.enumeratedtype.shikibetsutaisho.psm.DataShutokuKubun;
 import jp.co.ndensan.reams.ua.uax.entity.db.basic.UaFt200FindShikibetsuTaishoEntity;
+import jp.co.ndensan.reams.ur.urz.business.core.association.Association;
+import jp.co.ndensan.reams.ur.urz.business.core.ninshosha.Ninshosha;
+import jp.co.ndensan.reams.ur.urz.business.report.parts.ninshosha.NinshoshaSourceBuilderFactory;
+import jp.co.ndensan.reams.ur.urz.definition.core.ninshosha.KenmeiFuyoKubunType;
 import jp.co.ndensan.reams.ur.urz.definition.core.shikibetsutaisho.JuminJotai;
 import jp.co.ndensan.reams.ur.urz.definition.core.shikibetsutaisho.JuminShubetsu;
+import jp.co.ndensan.reams.ur.urz.entity.report.parts.ninshosha.NinshoshaSource;
+import jp.co.ndensan.reams.ur.urz.service.core.association.AssociationFinderFactory;
+import jp.co.ndensan.reams.ur.urz.service.core.ninshosha.INinshoshaManager;
+import jp.co.ndensan.reams.ur.urz.service.core.ninshosha.NinshoshaFinderFactory;
 import jp.co.ndensan.reams.uz.uza.biz.GyomuCode;
+import jp.co.ndensan.reams.uz.uza.biz.ReportId;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.EraType;
 import jp.co.ndensan.reams.uz.uza.lang.FillType;
 import jp.co.ndensan.reams.uz.uza.lang.FirstYear;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
+import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.Separator;
+import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
 import jp.co.ndensan.reams.uz.uza.util.config.BusinessConfig;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 
@@ -46,14 +61,17 @@ import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 public class BenmeisyoFinder {
 
     private static final RString 文言_部分 = new RString("@@@@");
+    private static final ReportId 帳票分類ID = new ReportId("DBU100001_Bemmeisyo");
     private static final int 長_4 = 4;
     private final MapperProvider mapperProvider;
+    private final DbT7065ChohyoSeigyoKyotsuDac dac;
 
     /**
      * コンストラクタです。
      */
     public BenmeisyoFinder() {
         this.mapperProvider = InstanceProvider.create(MapperProvider.class);
+        this.dac = InstanceProvider.create(DbT7065ChohyoSeigyoKyotsuDac.class);
     }
 
     /**
@@ -62,8 +80,9 @@ public class BenmeisyoFinder {
      * @param mapperProvider
      * @param iReportWriter
      */
-    BenmeisyoFinder(MapperProvider mapperProvider) {
+    BenmeisyoFinder(MapperProvider mapperProvider, DbT7065ChohyoSeigyoKyotsuDac dac) {
         this.mapperProvider = mapperProvider;
+        this.dac = dac;
     }
 
     /**
@@ -81,23 +100,33 @@ public class BenmeisyoFinder {
      * @param 識別コード 識別コード
      * @param 被保険者番号 被保険者番号
      * @param 審査請求届出日 審査請求届出日
+     * @param reportSourceWriter ReportSourceWriter
      * @return benmeisyoTyohyoDataEntity 弁明書の帳票出力用データEntity
      */
-    public BenmeisyoTyohyoDataEntity setBenmeisyoTyohyoData(ShikibetsuCode 識別コード, HihokenshaNo 被保険者番号, FlexibleDate 審査請求届出日) {
+    public BenmeisyoTyohyoDataEntity setBenmeisyoTyohyoData(ShikibetsuCode 識別コード, HihokenshaNo 被保険者番号, FlexibleDate 審査請求届出日,
+            ReportSourceWriter reportSourceWriter) {
         BenmeisyoTyohyoDataEntity benmeisyoTyohyoDataEntity = new BenmeisyoTyohyoDataEntity();
         benmeisyoTyohyoDataEntity.set送付先郵便番号(BusinessConfig.get(ConfigNameDBU.不服申し立て弁明書_送付先情報_郵便番号,
                 SubGyomuCode.DBU介護統計報告));
-        benmeisyoTyohyoDataEntity.set送付先住所(this.get送付先住所());
-        benmeisyoTyohyoDataEntity.set送付先名称(this.get送付先名称());
-        BenmeiJohoEntity benmeiJohoEntity = this.getBenmeiJohoData(識別コード, 被保険者番号, 審査請求届出日);
+        benmeisyoTyohyoDataEntity.set送付先住所(get送付先住所());
+        benmeisyoTyohyoDataEntity.set送付先名称(get送付先名称());
+        BenmeiJohoEntity benmeiJohoEntity = getBenmeiJohoData(識別コード, 被保険者番号, 審査請求届出日);
         if (benmeiJohoEntity != null) {
             benmeisyoTyohyoDataEntity.set弁明書作成日(benmeiJohoEntity.get弁明書作成日());
             benmeisyoTyohyoDataEntity.set弁明の件名(benmeiJohoEntity.get弁明の件名());
             benmeisyoTyohyoDataEntity.set弁明の内容(benmeiJohoEntity.get弁明の内容());
+            if (benmeiJohoEntity.get弁明書作成日() != null && !benmeiJohoEntity.get弁明書作成日().isEmpty()) {
+                NinshoshaDenshiKoinDataEntity 認証者 = getNinshoshaDenshiKoinData(benmeiJohoEntity.get弁明書作成日(), reportSourceWriter);
+                benmeisyoTyohyoDataEntity.set認証者役職名(認証者.get認証者役職名());
+                benmeisyoTyohyoDataEntity.set認職者氏名(認証者.get認職者氏名());
+                benmeisyoTyohyoDataEntity.set電子公印(認証者.get電子公印());
+                benmeisyoTyohyoDataEntity.set公印省略(認証者.get公印省略());
+                benmeisyoTyohyoDataEntity.set公印文字列(認証者.get公印文字列());
+            }
         }
-        benmeisyoTyohyoDataEntity.set文言(this.get文言(審査請求届出日));
+        benmeisyoTyohyoDataEntity.set文言(get文言(審査請求届出日));
         benmeisyoTyohyoDataEntity.set被保険者番号(被保険者番号);
-        HihokenshaDateEntity hihokenshaDateEntity = this.getHihokenshaDate(識別コード);
+        HihokenshaDateEntity hihokenshaDateEntity = getHihokenshaDate(識別コード);
         benmeisyoTyohyoDataEntity.set被保険者氏名(hihokenshaDateEntity.get氏名());
         benmeisyoTyohyoDataEntity.set被保険者郵便番号(hihokenshaDateEntity.get郵便番号());
         benmeisyoTyohyoDataEntity.set被保険者住所(hihokenshaDateEntity.get住所());
@@ -226,5 +255,31 @@ public class BenmeisyoFinder {
         key.set住民状態(juminJotaiList);
         UaFt200FindShikibetsuTaishoFunction uaFt200Psm = new UaFt200FindShikibetsuTaishoFunction(key.getPSM検索キー());
         return new RString(uaFt200Psm.getParameterMap().get("psmShikibetsuTaisho").toString());
+    }
+
+    private NinshoshaDenshiKoinDataEntity getNinshoshaDenshiKoinData(FlexibleDate 弁明書作成日, ReportSourceWriter reportSourceWriter) {
+        NinshoshaDenshiKoinDataEntity entity = new NinshoshaDenshiKoinDataEntity();
+        DbT7065ChohyoSeigyoKyotsuEntity 帳票制御情報 = dac.selectByKey(SubGyomuCode.DBU介護統計報告, 帳票分類ID);
+        INinshoshaManager iNinshoshaManager = NinshoshaFinderFactory.createInstance();
+        Ninshosha 帳票認証者情報 = iNinshoshaManager.get帳票認証者(GyomuCode.DB介護保険,
+                NinshoshaDenshikoinshubetsuCode.保険者印.getコード(), 弁明書作成日);
+        Association 地方公共団体 = AssociationFinderFactory.createInstance().getAssociation();
+        boolean is公印に掛ける = 帳票認証者情報.is公印掛ける有無();
+        boolean is公印を省略 = 帳票認証者情報.is公印省略有無();
+        if (new RString("1").equals(帳票制御情報.getShuchoMeiInjiIchi())) {
+            is公印に掛ける = true;
+        }
+        if (!帳票制御情報.getDenshiKoinInjiUmu()) {
+            is公印を省略 = true;
+        }
+        NinshoshaSource ninshoshaSource = NinshoshaSourceBuilderFactory.createInstance(帳票認証者情報, 地方公共団体,
+                reportSourceWriter.getImageFolderPath(), new RDate(弁明書作成日.toString()),
+                is公印に掛ける, is公印を省略, KenmeiFuyoKubunType.付与なし).buildSource();
+        entity.set認証者役職名(ninshoshaSource.ninshoshaYakushokuMei);
+        entity.set認職者氏名(ninshoshaSource.ninshoshaShimeiKakeru);
+        entity.set電子公印(ninshoshaSource.denshiKoin);
+        entity.set公印省略(ninshoshaSource.koinShoryaku);
+        entity.set公印文字列(ninshoshaSource.koinMojiretsu);
+        return entity;
     }
 }
