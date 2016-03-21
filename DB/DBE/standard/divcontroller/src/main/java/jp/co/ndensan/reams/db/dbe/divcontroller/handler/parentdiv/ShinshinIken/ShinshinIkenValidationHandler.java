@@ -57,7 +57,7 @@ public class ShinshinIkenValidationHandler {
                 && div.getTxtShosaiTokkiJiko().getValue().isEmpty()) {
             addMessage(validPairs, "専門医受診詳細事項");
         }
-        if (div.getChkShishiKesson().getSelectedKeys().contains(チェックボックス_2)
+        if (div.getChkShishiKesson().getSelectedKeys().contains(チェックボックス_1)
                 && div.getTxtShishiKessonBui().getValue().isEmpty()) {
             addMessage(validPairs, "四肢欠損部位");
         }
@@ -67,7 +67,7 @@ public class ShinshinIkenValidationHandler {
     }
     
     private void checkKakutei_二(ValidationMessageControlPairs validPairs) {
-        if (div.getChkMahi().getSelectedKeys().contains(チェックボックス_2)
+        if (div.getChkMahi().getSelectedKeys().contains(チェックボックス_1)
                 && div.getChkMigiJoshiMahi().getSelectedKeys().isEmpty()
                 && div.getChkHidariJoshiMahi().getSelectedKeys().isEmpty()
                 && div.getChkMigiKashiMahi().getSelectedKeys().isEmpty()
@@ -75,7 +75,7 @@ public class ShinshinIkenValidationHandler {
                 && div.getChkSonotaMahi().getSelectedKeys().isEmpty()) {
             addMessage(validPairs, "麻痺部位");
         }
-        if (div.getChkMahi().getSelectedKeys().contains(チェックボックス_2)
+        if (div.getChkMahi().getSelectedKeys().contains(チェックボックス_1)
                 && div.getChkMigiJoshiMahiTeido().getSelectedKeys().isEmpty()
                 && div.getChkHidariJoshiMahiTeido().getSelectedKeys().isEmpty()
                 && div.getChkMigiKashiMahiTeido().getSelectedKeys().isEmpty()

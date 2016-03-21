@@ -44,6 +44,10 @@ var DBE;
                 return "changeChkHidariKashiMahi";
             };
 
+            Events.changeChkSonotaMahi = function () {
+                return "changeChkSonotaMahi";
+            };
+
             Events.changeChkKinryokuTeika = function () {
                 return "changeChkKinryokuTeika";
             };
@@ -235,6 +239,10 @@ var DBE;
                 return new UZA.CheckBoxList(this.convFiledName("chkHidariKashiMahiTeido"));
             };
 
+            Controls.prototype.chkSonotaMahi = function () {
+                return new UZA.CheckBoxList(this.convFiledName("chkSonotaMahi"));
+            };
+
             Controls.prototype.txtSonotaMahiBui = function () {
                 return new UZA.TextBox(this.convFiledName("txtSonotaMahiBui"));
             };
@@ -245,10 +253,6 @@ var DBE;
 
             Controls.prototype.linHorizon2 = function () {
                 return new UZA.HorizontalLine(this.convFiledName("linHorizon2"));
-            };
-
-            Controls.prototype.chkSonotaMahi = function () {
-                return new UZA.CheckBoxList(this.convFiledName("chkSonotaMahi"));
             };
 
             Controls.prototype.chkKinryokuTeika = function () {
