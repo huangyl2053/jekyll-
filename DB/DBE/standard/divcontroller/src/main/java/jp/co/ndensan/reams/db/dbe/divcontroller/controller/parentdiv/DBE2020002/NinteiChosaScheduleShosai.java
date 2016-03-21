@@ -242,7 +242,7 @@ public class NinteiChosaScheduleShosai {
     public ResponseData<NinteiChosaScheduleShosaiDiv> onSelect_BtnMemoHyouji(NinteiChosaScheduleShosaiDiv div) {
         地区コード = new Code(div.getDdlTaishoChiku().getSelectedKey());
         設定日 = div.getTxtSetteiDate().getValue();
-        ViewStateHolder.put(ViewStateKeys.認定調査スケジュール登録_地区コード, new RString(地区コード.toString()));
+        ViewStateHolder.put(ViewStateKeys.認定調査スケジュール登録_地区コード, 地区コード);
         ViewStateHolder.put(ViewStateKeys.認定調査スケジュール登録_設定日, 設定日);
         return ResponseData.of(div).forwardWithEventName(DBE2020002TransitionEventName.メモ入力).respond();
     }
