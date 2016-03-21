@@ -39,34 +39,34 @@ public final class HihohenshashoHakoKanriboCsvDataSakusei {
         if (!entityList.isEmpty()) {
             for (int i = 0; i < entityList.size(); i++) {
                 HihohenshashoHakoKanriboCsvDataSakuseiEntity csvEntity = new HihohenshashoHakoKanriboCsvDataSakuseiEntity();
-                csvEntity.setHihokenshaNo(entityList.get(0).get被保険者番号());
-                csvEntity.setShikibetsuCode(entityList.get(0).get識別コード());
-                csvEntity.setShichosonCode(entityList.get(0).get市町村コード());
-                csvEntity.setYubinNo(entityList.get(0).get郵便番号());
-                csvEntity.setJusho(entityList.get(0).get住所());
-                csvEntity.setMeisho(entityList.get(0).get氏名());
-                csvEntity.setKofuJiyuCode(entityList.get(0).get回収事由コード());
-                csvEntity.setKofuJiyuRyakusho(entityList.get(0).get交付事由略称());
-                csvEntity.setKofuJiyu(entityList.get(0).get交付事由名称());
-                csvEntity.setKaishuJiyuCode(entityList.get(0).get回収事由コード());
-                csvEntity.setKaishuJiyu(entityList.get(0).get回収事由名称());
+                csvEntity.setHihokenshaNo(entityList.get(i).get被保険者番号());
+                csvEntity.setShikibetsuCode(entityList.get(i).get識別コード());
+                csvEntity.setShichosonCode(entityList.get(i).get市町村コード());
+                csvEntity.setYubinNo(entityList.get(i).get郵便番号());
+                csvEntity.setJusho(entityList.get(i).get住所());
+                csvEntity.setMeisho(entityList.get(i).get氏名());
+                csvEntity.setKofuJiyuCode(entityList.get(i).get回収事由コード());
+                csvEntity.setKofuJiyuRyakusho(entityList.get(i).get交付事由略称());
+                csvEntity.setKofuJiyu(entityList.get(i).get交付事由名称());
+                csvEntity.setKaishuJiyuCode(entityList.get(i).get回収事由コード());
+                csvEntity.setKaishuJiyu(entityList.get(i).get回収事由名称());
 
                 if (hizikehensyuuflg) {
                     csvEntity.setKofuYMD(new RDate(
-                            entityList.get(0).get交付年月日().toString()).toFlexibleDate().seireki()
+                            entityList.get(i).get交付年月日().toString()).seireki()
                             .separator(Separator.SLASH).fillType(FillType.ZERO).toDateString());
                     csvEntity.setKaishuYMD(new RDate(
-                            entityList.get(0).get回収年月日().toString()).toFlexibleDate().seireki()
+                            entityList.get(i).get回収年月日().toString()).seireki()
                             .separator(Separator.SLASH).fillType(FillType.ZERO).toDateString());
                     csvEntity.setYukoKigenYMD(new RDate(
-                            entityList.get(0).get有効期限().toString()).toFlexibleDate().seireki()
+                            entityList.get(i).get有効期限().toString()).seireki()
                             .separator(Separator.SLASH).fillType(FillType.ZERO).toDateString());
                 } else {
-                    csvEntity.setKofuYMD(new RString(entityList.get(0).get交付年月日().toString()));
-                    csvEntity.setKaishuYMD(new RString(entityList.get(0).get回収年月日().toString()));
-                    csvEntity.setYukoKigenYMD(new RString(entityList.get(0).get有効期限().toString()));
+                    csvEntity.setKofuYMD(new RString(entityList.get(i).get交付年月日().toString()));
+                    csvEntity.setKaishuYMD(new RString(entityList.get(i).get回収年月日().toString()));
+                    csvEntity.setYukoKigenYMD(new RString(entityList.get(i).get有効期限().toString()));
                 }
-                csvEntity.setShoYoshikiKubunCode(entityList.get(0).get様式());
+                csvEntity.setShoYoshikiKubunCode(entityList.get(i).get様式());
                 csvDataList.add(csvEntity);
             }
         }
@@ -91,34 +91,34 @@ public final class HihohenshashoHakoKanriboCsvDataSakusei {
         if (!entityList.isEmpty()) {
             for (int i = 0; i < entityList.size(); i++) {
                 HihohenshashoHakoKanriboCsvDataSakuseiEntity csvEntity = new HihohenshashoHakoKanriboCsvDataSakuseiEntity();
-                csvEntity.setHihokenshaNo(entityList.get(0).get被保険者番号());
-                csvEntity.setShikibetsuCode(entityList.get(0).get識別コード());
-                csvEntity.setShichosonCode(entityList.get(0).get市町村コード());
-                csvEntity.setYubinNo(entityList.get(0).get郵便番号());
-                csvEntity.setJusho(entityList.get(0).get住所());
-                csvEntity.setMeisho(entityList.get(0).get氏名());
-                csvEntity.setKofuJiyuCode(entityList.get(0).get回収事由コード());
-                csvEntity.setKofuJiyuRyakusho(entityList.get(0).get交付事由略称());
-                csvEntity.setKofuJiyu(entityList.get(0).get交付事由名称());
-                csvEntity.setKaishuJiyuCode(entityList.get(0).get回収事由コード());
-                csvEntity.setKaishuJiyu(entityList.get(0).get回収事由名称());
+                csvEntity.setHihokenshaNo(entityList.get(i).get被保険者番号());
+                csvEntity.setShikibetsuCode(entityList.get(i).get識別コード());
+                csvEntity.setShichosonCode(entityList.get(i).get市町村コード());
+                csvEntity.setYubinNo(entityList.get(i).get郵便番号());
+                csvEntity.setJusho(entityList.get(i).get住所());
+                csvEntity.setMeisho(entityList.get(i).get氏名());
+                csvEntity.setKofuJiyuCode(entityList.get(i).get回収事由コード());
+                csvEntity.setKofuJiyuRyakusho(entityList.get(i).get交付事由略称());
+                csvEntity.setKofuJiyu(entityList.get(i).get交付事由名称());
+                csvEntity.setKaishuJiyuCode(entityList.get(i).get回収事由コード());
+                csvEntity.setKaishuJiyu(entityList.get(i).get回収事由名称());
 
                 if (hizikehensyuuflg) {
                     csvEntity.setKofuYMD(new RDate(
-                            entityList.get(0).get交付年月日().toString()).toFlexibleDate().seireki()
+                            entityList.get(i).get交付年月日().toString()).seireki()
                             .separator(Separator.SLASH).fillType(FillType.ZERO).toDateString());
                     csvEntity.setKaishuYMD(new RDate(
-                            entityList.get(0).get回収年月日().toString()).toFlexibleDate().seireki()
+                            entityList.get(i).get回収年月日().toString()).seireki()
                             .separator(Separator.SLASH).fillType(FillType.ZERO).toDateString());
                     csvEntity.setYukoKigenYMD(new RDate(
-                            entityList.get(0).get有効期限().toString()).toFlexibleDate().seireki()
+                            entityList.get(i).get有効期限().toString()).seireki()
                             .separator(Separator.SLASH).fillType(FillType.ZERO).toDateString());
                 } else {
-                    csvEntity.setKofuYMD(new RString(entityList.get(0).get交付年月日().toString()));
-                    csvEntity.setKaishuYMD(new RString(entityList.get(0).get回収年月日().toString()));
-                    csvEntity.setYukoKigenYMD(new RString(entityList.get(0).get有効期限().toString()));
+                    csvEntity.setKofuYMD(new RString(entityList.get(i).get交付年月日().toString()));
+                    csvEntity.setKaishuYMD(new RString(entityList.get(i).get回収年月日().toString()));
+                    csvEntity.setYukoKigenYMD(new RString(entityList.get(i).get有効期限().toString()));
                 }
-                csvEntity.setShoYoshikiKubunCode(entityList.get(0).get様式());
+                csvEntity.setShoYoshikiKubunCode(entityList.get(i).get様式());
                 csvEntity.setRenban(renban);
                 renban++;
                 csvDataList.add(csvEntity);
