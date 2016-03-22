@@ -14,7 +14,7 @@ import jp.co.ndensan.reams.uz.uza.core.ui.response.IContainerEvents;
 public enum DBC0820027TransitionEventName implements IContainerEvents {
 // <editor-fold defaultstate="collapsed" desc="Created By UI Designer ver 1.0.0">
 
-    サービス提供証明書へ戻る("サービス提供証明書へ戻る"),
+    一覧に戻る("一覧に戻る"),
     基本情報("基本情報"),
     給付費明細("給付費明細"),
     特定診療費("特定診療費"),
