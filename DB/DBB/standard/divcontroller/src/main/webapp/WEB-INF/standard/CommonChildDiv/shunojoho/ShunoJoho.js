@@ -1,31 +1,32 @@
 var DBB;
 (function (DBB) {
-    (function (RentaiNofuGimusha) {
+    (function (ShunoJoho) {
         var ModeController = (function () {
             function ModeController(fieldName) {
                 this.fieldName = fieldName;
-                this.controls = new RentaiNofuGimusha.Controls(fieldName);
+                this.controls = new ShunoJoho.Controls(fieldName);
             }
-            ModeController.prototype.priorities = function () {
-                return [];
-            };
-
             ModeController.prototype.Properties = function () {
                 return new UZA.CommonChildDiv(this.fieldName);
             };
+
+            ModeController.prototype.PublicProperties = function () {
+                return new ShunoJoho.PublicProperties(this.fieldName);
+            };
             return ModeController;
         })();
-        RentaiNofuGimusha.ModeController = ModeController;
-    })(DBB.RentaiNofuGimusha || (DBB.RentaiNofuGimusha = {}));
-    var RentaiNofuGimusha = DBB.RentaiNofuGimusha;
+        ShunoJoho.ModeController = ModeController;
+    })(DBB.ShunoJoho || (DBB.ShunoJoho = {}));
+    var ShunoJoho = DBB.ShunoJoho;
 })(DBB || (DBB = {}));
 
 var DBB;
 (function (DBB) {
-    (function (RentaiNofuGimusha) {
+    (function (ShunoJoho) {
         var PublicProperties = (function () {
             function PublicProperties(fieldName) {
-                this.controls = new RentaiNofuGimusha.Controls(fieldName);
+                this.fieldName = fieldName;
+                this.controls = new ShunoJoho.Controls(fieldName);
             }
             PublicProperties.prototype.getEditTypes = function () {
                 var editTypes = new UZA.EditTypeForPublicProperty();
@@ -34,7 +35,7 @@ var DBB;
             };
             return PublicProperties;
         })();
-        RentaiNofuGimusha.PublicProperties = PublicProperties;
-    })(DBB.RentaiNofuGimusha || (DBB.RentaiNofuGimusha = {}));
-    var RentaiNofuGimusha = DBB.RentaiNofuGimusha;
+        ShunoJoho.PublicProperties = PublicProperties;
+    })(DBB.ShunoJoho || (DBB.ShunoJoho = {}));
+    var ShunoJoho = DBB.ShunoJoho;
 })(DBB || (DBB = {}));
