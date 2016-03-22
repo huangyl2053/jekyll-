@@ -9,10 +9,10 @@ import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.gogitaijohosakusei.G
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.hoshu.GogitaichoKubunCode;
 import jp.co.ndensan.reams.db.dbe.definition.mybatis.param.gogitaijohosakusei.GogitaiJohoSakuseiParameter;
 import jp.co.ndensan.reams.db.dbe.definition.processprm.gogitaijohosakusei.GogitaiJohoSakuseiProcessParamter;
-import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5591GogitaiJohoEntity;
-import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5593GogitaiWariateIinJohoEntity;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.gogitaijohosakusei.GogitaiJohoSakuseiCSVEntity;
 import jp.co.ndensan.reams.db.dbe.persistence.db.mapper.relate.gogitaijohosakusei.IGogitaiJohoSakuseiMapper;
+import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5591GogitaiJohoEntity;
+import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5593GogitaiWariateIinJohoEntity;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchCsvReader;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchPermanentTableWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchProcessBase;
@@ -46,8 +46,8 @@ public class GogitaiJohoIkkatuSakuseiProcess extends BatchProcessBase<GogitaiJoh
     private static final int TEIIN_LENGTH_4 = 4;
     private static final RString SLASH = new RString("/");
     private static final RString POSITIVE_INTEGERS_REGEX = new RString("^[1-9]\\d*$");
-    private static final RString FLAG_TRUE = new RString("true");
-    private static final RString FLAG_FALSE = new RString("false");
+    private static final RString FLAG_TRUE = new RString("0");
+    private static final RString FLAG_FALSE = new RString("1");
     private GogitaiJohoSakuseiProcessParamter parameter;
     private RString errorMsg;
     private int errorNo;
