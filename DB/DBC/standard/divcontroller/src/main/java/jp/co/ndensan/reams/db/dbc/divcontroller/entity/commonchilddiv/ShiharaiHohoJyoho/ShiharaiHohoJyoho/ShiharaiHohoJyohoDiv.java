@@ -5,21 +5,35 @@ package jp.co.ndensan.reams.db.dbc.divcontroller.entity.commonchilddiv.ShiharaiH
  * 不正な動作の原因になります。
  */
 import com.fasterxml.jackson.annotation.JsonProperty;
-import jp.co.ndensan.reams.uz.uza.ui.binding.*;
-import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
-import jp.co.ndensan.reams.uz.uza.ui.binding.domain.*;
-
 import java.util.HashSet;
+import jp.co.ndensan.reams.db.dbc.definition.mybatisprm.shiharaihohojyoho.SikyuSinseiJyohoParameter;
+import jp.co.ndensan.reams.db.dbc.divcontroller.controller.handler.commonchilddiv.ShiharaiHohoJyoho.ShiharaiHohoJyohoHandler;
+import jp.co.ndensan.reams.uz.uza.biz.KamokuCode;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.ui.binding.ButtonDialog;
+import jp.co.ndensan.reams.uz.uza.ui.binding.DropDownList;
+import jp.co.ndensan.reams.uz.uza.ui.binding.HorizontalLine;
+import jp.co.ndensan.reams.uz.uza.ui.binding.Mode;
+import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
+import jp.co.ndensan.reams.uz.uza.ui.binding.RadioButton;
+import jp.co.ndensan.reams.uz.uza.ui.binding.TextBox;
+import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxCode;
+import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxDate;
+import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxTime;
+import jp.co.ndensan.reams.uz.uza.ui.binding.domain.TextBoxAtenaKanaMeisho;
+import jp.co.ndensan.reams.uz.uza.ui.binding.domain.TextBoxAtenaMeisho;
+import jp.co.ndensan.reams.uz.uza.ui.binding.domain.TextBoxKinyuKikanCode;
+import jp.co.ndensan.reams.uz.uza.ui.binding.domain.TextBoxKinyuKikanShitenCode;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ICommonChildDivMode;
 import jp.co.ndensan.reams.uz.uza.ui.servlets._CommonChildDivModeUtil;
 
 /**
- * ShiharaiHohoJyoho のクラスファイル 
- * 
+ * ShiharaiHohoJyoho のクラスファイル
+ *
  * @author 自動生成
  */
 public class ShiharaiHohoJyohoDiv extends Panel implements IShiharaiHohoJyohoDiv {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：バージョン情報無し">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-01-15_09-59-03">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -54,6 +68,8 @@ public class ShiharaiHohoJyohoDiv extends Panel implements IShiharaiHohoJyohoDiv
     private TextBoxKinyuKikanCode txtKinyuKikanCode;
     @JsonProperty("txtKinyuKikanShitenCode")
     private TextBoxKinyuKikanShitenCode txtKinyuKikanShitenCode;
+    @JsonProperty("txtTenban")
+    private TextBoxCode txtTenban;
     @JsonProperty("txtYokinShubetsu")
     private TextBox txtYokinShubetsu;
     @JsonProperty("txtKozaNo")
@@ -80,6 +96,8 @@ public class ShiharaiHohoJyohoDiv extends Panel implements IShiharaiHohoJyohoDiv
     private TextBoxKinyuKikanCode txtKinyuKikanCode1;
     @JsonProperty("txtKinyuKikanShitenCode1")
     private TextBoxKinyuKikanShitenCode txtKinyuKikanShitenCode1;
+    @JsonProperty("txtTenban1")
+    private TextBoxCode txtTenban1;
     @JsonProperty("txtYokinShubetsu1")
     private TextBox txtYokinShubetsu1;
     @JsonProperty("txtKozaNo1")
@@ -350,6 +368,24 @@ public class ShiharaiHohoJyohoDiv extends Panel implements IShiharaiHohoJyohoDiv
     }
 
     /*
+     * gettxtTenban
+     * @return txtTenban
+     */
+    @JsonProperty("txtTenban")
+    public TextBoxCode getTxtTenban() {
+        return txtTenban;
+    }
+
+    /*
+     * settxtTenban
+     * @param txtTenban txtTenban
+     */
+    @JsonProperty("txtTenban")
+    public void setTxtTenban(TextBoxCode txtTenban) {
+        this.txtTenban = txtTenban;
+    }
+
+    /*
      * gettxtYokinShubetsu
      * @return txtYokinShubetsu
      */
@@ -584,6 +620,24 @@ public class ShiharaiHohoJyohoDiv extends Panel implements IShiharaiHohoJyohoDiv
     }
 
     /*
+     * gettxtTenban1
+     * @return txtTenban1
+     */
+    @JsonProperty("txtTenban1")
+    public TextBoxCode getTxtTenban1() {
+        return txtTenban1;
+    }
+
+    /*
+     * settxtTenban1
+     * @param txtTenban1 txtTenban1
+     */
+    @JsonProperty("txtTenban1")
+    public void setTxtTenban1(TextBoxCode txtTenban1) {
+        this.txtTenban1 = txtTenban1;
+    }
+
+    /*
      * gettxtYokinShubetsu1
      * @return txtYokinShubetsu1
      */
@@ -758,5 +812,20 @@ public class ShiharaiHohoJyohoDiv extends Panel implements IShiharaiHohoJyohoDiv
 
     // </editor-fold>
     //--------------- この行より下にコードを追加してください -------------------
+    private ShiharaiHohoJyohoHandler getHandler() {
+        return new ShiharaiHohoJyohoHandler(this);
+    }
 
+    /**
+     * 共通子DIVの初期化処理です。
+     *
+     *
+     * @param 支給申請情報
+     * @param 業務内区分コード
+     * @param 状態
+     */
+    @Override
+    public void initialize(SikyuSinseiJyohoParameter 支給申請情報, KamokuCode 業務内区分コード, RString 状態) {
+        getHandler().initialize(支給申請情報, 業務内区分コード, 状態);
+    }
 }

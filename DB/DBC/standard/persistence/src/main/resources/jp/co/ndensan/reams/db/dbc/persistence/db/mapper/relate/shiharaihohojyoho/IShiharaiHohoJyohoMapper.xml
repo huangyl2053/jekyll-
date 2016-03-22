@@ -4,8 +4,7 @@
 
 <!-- どのマッパーインターフェースと対応するかを指定する -->
 <mapper namespace="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.shiharaihohojyoho.IShiharaiHohoJyohoMapper">
-
-    <select id="get口座IDリストByKozaParameter"
+    <!--<select id="get口座IDリストByKozaParameter"
             resultMap="shiharaiHohoJyoho_kozaId"
             parameterType="jp.co.ndensan.reams.db.dbc.definition.mybatisprm.shiharaihohojyoho.KozaParameter" fetchSize="500">
         SELECT "kozaId"
@@ -14,22 +13,61 @@
         AND koza."gyomuCode" = 'DB'
         AND koza."subGyomuCode" = 'DBC'
         AND koza."kamokuCode" = #{kamokuCode}
+        ORDER BY
+        koza."kaishiYMD" DESC
     </select>
-
-    <select id="get口座情報ByKey"
+    
+     <select id="get口座情報ByKey"
             resultType="jp.co.ndensan.reams.db.dbz.entity.db.basic.UrT0715KozaEntity"
             parameterType="jp.co.ndensan.reams.db.dbc.definition.mybatisprm.shiharaihohojyoho.KozaParameter" fetchSize="500">
-        SELECT "gyomuCode"
+        SELECT 
+         "gyomuCode"
         ,"subGyomuCode"
         ,"kamokuCode"
         ,"gyomuKoyuKey"
         ,"yotoKubun"
-        FROM rgur."UrT0715Koza" koza
+         FROM rgur."UrT0715Koza" UrT0715
+         INNER JOIN <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IKozaRelateMapper.kozaSearch" /> AS Koza
         WHERE koza."kozaId" = #{kozaId}
+        ORDER BY
+        koza."kaishiYMD" DESC
+    </select>-->
+    
+     <select id="get契約事業者情報" resultMap="resultMap_DbT3077JuryoininKeiyakuJigyoshaEntity"
+            parameterType="jp.co.ndensan.reams.db.dbc.definition.mybatisprm.shiharaihohojyoho.KeiyakushaParameter" fetchSize="500">
+        SELECT 
+         DbT3077."keiyakuJigyoshaNo" AS "DbT3077_keiyakuJigyoshaNo"
+        ,DbT3077."keiyakuJigyoshaName" AS "DbT3077_keiyakuJigyoshaName"
+        ,DbT3077."keiyakuJigyoshaKanaName" AS "DbT3077_keiyakuJigyoshaKanaName"
+        ,DbT3077."kinyuKikanCode" AS "DbT3077_kinyuKikanCode"
+        ,DbT3077."shitenCode" AS "DbT3077_shitenCode"
+        ,DbT3077."kozaShubetsu" AS "DbT3077_kozaShubetsu"
+        ,DbT3077."kozaNo" AS "DbT3077_kozaNo"
+        ,DbT3077."kozaMeigininKana" AS "DbT3077_kozaMeigininKana"
+        ,DbT3077."kozaMeiginin" AS "DbT3077_kozaMeiginin"
+        FROM rgdb."DbT3077JuryoininKeiyakuJigyosha" DbT3077
+        INNER JOIN rgdb."DbT3078ShokanJuryoininKeiyakusha" DbT3078
+        ON DbT3078."keiyakuJigyoshaNo" = DbT3077."keiyakuJigyoshaNo"
+        AND DbT3078."hihokenshaNo" = #{hihokenshaNo}
+        AND DbT3078."shikyushinseiServiceYM" = #{shikyushinseiServiceYM}
+        AND DbT3078."shikyushinseiSeiriNo" = #{shikyushinseiSeiriNo}
+        AND DbT3078."keiyakuNo" = #{keiyakuNo}
+        LIMIT 1
     </select>
-
-    <resultMap id="shiharaiHohoJyoho_kozaId" type="jp.co.ndensan.reams.db.dbz.entity.db.basic.UrT0715KozaEntity" autoMapping="true">
-        <id property="kozaId" column="kozaId" />
+    
+    <resultMap id="shiharaiHohoJyoho_kozaId" type="jp.co.ndensan.reams.db.dbc.entity.db.relate.shiharaihohojyoho.KozaJohoPSMEntity" autoMapping="true">
+        <id property="kozaId" column="kozaId"/>
+    </resultMap>
+    
+     <resultMap id="resultMap_DbT3077JuryoininKeiyakuJigyoshaEntity" type="jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3077JuryoininKeiyakuJigyoshaEntity" autoMapping="true">
+        <id property="keiyakuJigyoshaNo" column="DbT3077_keiyakuJigyoshaNo"  typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="keiyakuJigyoshaName" column="DbT3077_keiyakuJigyoshaName" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.AtenaMeishoTypeHandler"/>
+        <result property="keiyakuJigyoshaKanaName" column="DbT3077_keiyakuJigyoshaKanaName" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.AtenaKanaMeishoTypeHandler"/>
+        <result property="shitenCode" column="DbT3077_shitenCode"  typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.KinyuKikanShitenCodeTypeHandler"/>
+        <result property="kozaShubetsu" column="DbT3077_kozaShubetsu" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="kozaNo" column="DbT3077_kozaNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="kozaMeiginin" column="DbT3077_kozaMeiginin" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.AtenaMeishoTypeHandler"/>
+        <result property="kozaMeigininKana" column="DbT3077_kozaMeigininKana" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.AtenaKanaMeishoTypeHandler"/>
     </resultMap>
 
 </mapper>
