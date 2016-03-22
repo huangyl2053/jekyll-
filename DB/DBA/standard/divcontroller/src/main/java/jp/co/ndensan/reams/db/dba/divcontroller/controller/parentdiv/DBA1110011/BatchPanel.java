@@ -69,7 +69,7 @@ public class BatchPanel {
         boolean flg = HihokenshashoHakkoKanriboFinder.createInstance().checkInput(
                 koufubiFrom, koufubiTo, kaishubiFrom, kaishubiTo);
         // TODO  内部QA:924 Redmine： (必須チェックの処理は回答待ち)
-        if (!flg) {
+        if (flg) {
             ValidationMessageControlPairs validationMessages = new ValidationMessageControlPairs();
             validationMessages.add(new ValidationMessageControlPair(
                     new BatchPanel.BatchPanelMessages(UrErrorMessages.必須, 開始日と終了日両方.toString())));

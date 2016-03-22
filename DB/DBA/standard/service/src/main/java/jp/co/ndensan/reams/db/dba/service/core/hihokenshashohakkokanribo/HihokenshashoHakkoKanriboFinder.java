@@ -62,21 +62,18 @@ public class HihokenshashoHakkoKanriboFinder {
             RDate koufubiTo,
             RDate kaishubiFrom,
             RDate kaishubiTo) {
-        if ((koufubiFrom != null && koufubiTo != null)
-                || (kaishubiFrom != null && kaishubiTo != null)) {
-            return true;
+        if (koufubiFrom != null && koufubiTo != null
+                && kaishubiFrom != null && kaishubiTo != null) {
+            return false;
         }
         if (koufubiFrom == null && koufubiTo == null
                 && kaishubiFrom == null && kaishubiTo == null) {
-            return false;
+            return true;
         }
         if (checkDate(koufubiFrom, koufubiTo)) {
-            return false;
+            return true;
         }
-        if (checkDate(kaishubiFrom, kaishubiTo)) {
-            return false;
-        }
-        return true;
+        return checkDate(kaishubiFrom, kaishubiTo);
     }
 
     /**
