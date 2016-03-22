@@ -142,15 +142,15 @@ public final class PnlTotalRegisterHandler {
     /**
      * 画面データの保存
      */
-    public void save画面データ() {
+    public int save画面データ() {
         RString states = ViewStateHolder.get(ViewStateKeys.処理モード, RString.class);
         JuryoininKeiyakuJigyosha data = ViewStateHolder
                 .get(ViewStateKeys.受領委任契約事業者詳細データ, JuryoininKeiyakuJigyosha.class);
         if (修正.equals(states)) {
             data = get画面データ(data);
-            JuryoininKeiyakuJigyoshaManager.createInstance().updJuryoininKeiyakuJigyosha(data);
+            return JuryoininKeiyakuJigyoshaManager.createInstance().updJuryoininKeiyakuJigyosha(data);
         } else if (削除.equals(states)) {
-            JuryoininKeiyakuJigyoshaManager.createInstance().delJuryoininKeiyakuJigyosha(data);
+            return JuryoininKeiyakuJigyoshaManager.createInstance().delJuryoininKeiyakuJigyosha(data);
         } else {
             JuryoininKeiyakuJigyosha insertData = new JuryoininKeiyakuJigyosha(
                     RString.EMPTY,
@@ -176,20 +176,23 @@ public final class PnlTotalRegisterHandler {
             builder.set口座名義人(div.getPnlKeyakuJigyosya().getTxtSofusakiKouzaMeiginin().getDomain());
             builder.set口座名義人(div.getPnlKeyakuJigyosya().getTxtSofusakiKouzaMeigininKana().getDomain());
             insertData = builder.build();
-            JuryoininKeiyakuJigyoshaManager.createInstance().insJuryoininKeiyakuJigyosha(insertData);
+            return JuryoininKeiyakuJigyoshaManager.createInstance().insJuryoininKeiyakuJigyosha(insertData);
         }
     }
 
     /**
      * 保存完了画面の入替
      */
-    public void set保存完了() {
+    public void set保存完了(int result) {
         RString states = ViewStateHolder.get(ViewStateKeys.処理モード, RString.class);
         if (削除.equals(states)) {
             div.getPnlHakoubi().setDisplayNone(true);
         }
-        div.getCcdKaigoKanryoMessage().setSuccessMessage(
-                new RString(UrInformationMessages.保存終了.getMessage().evaluate()));
+        if (result > 0) {
+            div.getCcdKaigoKanryoMessage().setMessage(UrInformationMessages.保存終了, RString.EMPTY, RString.EMPTY, true);
+        } else {
+            div.getCcdKaigoKanryoMessage().setMessage(UrInformationMessages.保存終了, RString.EMPTY, RString.EMPTY, false);
+        }
     }
 
     /**
