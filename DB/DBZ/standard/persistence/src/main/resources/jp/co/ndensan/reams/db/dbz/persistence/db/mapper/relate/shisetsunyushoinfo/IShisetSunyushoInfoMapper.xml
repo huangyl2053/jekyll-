@@ -28,7 +28,7 @@ SELECT
             max("yukoKaishiYMD")
             from rgdb."DbT7060KaigoJigyosha"
     )
-    WHERE A."daichoShubetsu" = '1'
+    WHERE A."daichoShubetsu" = #{daichoShubetsu}
     AND A."taishoYMD" <![CDATA[>]]> A."nyushoYMD"
     AND A."shikibetsuCode" = #{shikibetsuCode}
     order by A."rirekiNo" Desc

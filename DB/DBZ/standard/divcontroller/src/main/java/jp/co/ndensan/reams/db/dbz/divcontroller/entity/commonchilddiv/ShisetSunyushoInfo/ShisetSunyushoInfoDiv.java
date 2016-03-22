@@ -7,7 +7,7 @@ package jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.ShisetSun
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jp.co.ndensan.reams.uz.uza.ui.binding.*;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
-import jp.co.ndensan.reams.db.dbz.divcontroller.handler.commonchilddiv.shisetsunyushoinfo.ShisetSunyushoInfoHandler;
+import jp.co.ndensan.reams.db.dbz.divcontroller.handler.parentdiv.ShisetSunyushoInfo.ShisetSunyushoInfoHandler;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TextBox;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxCode;
