@@ -23,6 +23,12 @@ class TashichosonJushochitokureishaRenrakuhyoEditor implements ITashichosonJusho
         this.item = item;
     }
 
+    /**
+     * 介護保険他市町村住所地特例者連絡票Editorです。
+     *
+     * @param source 介護保険他市町村住所地特例者連絡票Source
+     * @return 介護保険他市町村住所地特例者連絡票
+     */
     @Override
     public TashichosonJushochitokureishaRenrakuhyoReportSource edit(TashichosonJushochitokureishaRenrakuhyoReportSource source) {
         source.hokenshaYubinNo = item.getHokenshaYubinNo();

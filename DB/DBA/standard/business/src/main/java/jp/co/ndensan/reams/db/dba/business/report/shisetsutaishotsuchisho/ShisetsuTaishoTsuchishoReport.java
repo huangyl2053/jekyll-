@@ -37,9 +37,14 @@ public class ShisetsuTaishoTsuchishoReport extends Report<ShisetsuTaishoTsuchish
         this.item = item;
     }
 
+    /**
+     * 介護保険住所地特例施設退所通知書writeByです。
+     *
+     * @param reportSourceWriter 介護保険住所地特例施設退所通知書のreportSourceWriter
+     */
     @Override
     public void writeBy(ReportSourceWriter<ShisetsuTaishoTsuchishoReportSource> reportSourceWriter) {
-        ShisetsuTaishoTsuchishoEditor editor = new ShisetsuTaishoTsuchishoEditor(item);
+        IShisetsuTaishoTsuchishoEditor editor = new ShisetsuTaishoTsuchishoEditor(item);
         IShisetsuTaishoTsuchishoBuilder builder = new ShisetsuTaishoTsuchishoBuilderImpl(editor);
         reportSourceWriter.writeLine(builder);
     }

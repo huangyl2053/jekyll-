@@ -23,6 +23,12 @@ class ShisetsuHenkoTsuchishoEditor implements IShisetsuHenkoTsuchishoEditor {
         this.item = item;
     }
 
+    /**
+     * 介護保険住所地特例施設変更通知書Editorです。
+     *
+     * @param source 介護保険住所地特例施設変更通知書Source
+     * @return 介護保険住所地特例施設変更通知書
+     */
     @Override
     public ShisetsuHenkoTsuchishoReportSource edit(ShisetsuHenkoTsuchishoReportSource source) {
         source.hokenshaYubinNo = item.getHokenshaYubinNo();

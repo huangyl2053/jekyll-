@@ -39,7 +39,7 @@ public final class ChosahyoSaiCheckhyoReport extends Report<ChosahyoSaiCheckhyoR
     @Override
     public void writeBy(ReportSourceWriter<ChosahyoSaiCheckhyoReportSource> reportSourceWriter) {
         for (ChosahyoSaiCheckhyoItem item : itemList) {
-            ChosahyoSaiCheckhyoEditor editor = new ChosahyoSaiCheckhyoEditor(item);
+            IChosahyoSaiCheckhyoEditor editor = new ChosahyoSaiCheckhyoEditor(item);
             IChosahyoSaiCheckhyoBuilder builder = new ChosahyoSaiCheckhyoBuilderImpl(editor);
             reportSourceWriter.writeLine(builder);
         }
