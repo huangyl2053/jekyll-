@@ -194,7 +194,7 @@ public class ShujiiIkenshoTorokuHandler {
 
     private RDate flexToRdate(FlexibleDate fromDate) {
         if (fromDate == null || fromDate.isEmpty()) {
-            return RDate.MIN;
+            return null;
         }
         return new RDate(fromDate.getYearValue(), fromDate.getMonthValue(), fromDate.getDayValue());
     }
