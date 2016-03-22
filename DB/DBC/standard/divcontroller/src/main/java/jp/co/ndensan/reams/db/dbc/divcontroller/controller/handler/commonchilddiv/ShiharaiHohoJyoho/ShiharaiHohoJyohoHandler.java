@@ -572,7 +572,7 @@ public class ShiharaiHohoJyohoHandler {
         div.getRadJyryoinin().setSelectedKey(new RString("3"));
         div.getTxtKeiyakuNo().setDisabled(false);
         div.getBtnSelect().setDisabled(false);
-        div.getTxtKeiyakuCode().setValue(nullToEmpty(受領委任契約事業者.get事業者契約番号()));
+        div.getTxtKeiyakuCode().setValue(nullToEmpty(受領委任契約事業者.get契約事業者番号()));
         div.getTxtKeiyakuName().setDomain(受領委任契約事業者.get契約事業者名称() == null
                 ? AtenaMeisho.EMPTY : 受領委任契約事業者.get契約事業者名称());
         div.getTxtKinyuKikanCode1().setDomain(受領委任契約事業者.get金融機関コード() == null
