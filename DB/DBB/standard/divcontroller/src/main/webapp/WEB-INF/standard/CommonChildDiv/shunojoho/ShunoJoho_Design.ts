@@ -1,6 +1,6 @@
-/// <reference path="../d.ts/jquery.d.ts" />
-/// <reference path="../d.ts/UzViewControls.d.ts" />
-/// <reference path="../d.ts/UzaConverter.d.ts" />
+/// <reference path="../../d.ts/jquery.d.ts" />
+/// <reference path="../../d.ts/UzViewControls.d.ts" />
+/// <reference path="../../d.ts/UzaConverter.d.ts" />
 
 module DBB {
 
@@ -69,8 +69,8 @@ module DBB {
                 return new UZA.TextBoxNum(this.convFiledName("txtTokuChoteiGeoukei"));
             }
 
-            public txtTokuShunyuGeoukei(): UZA.TextBoxNum {
-                return new UZA.TextBoxNum(this.convFiledName("txtTokuShunyuGeoukei"));
+            public txtTokuShunyuGokei(): UZA.TextBoxNum {
+                return new UZA.TextBoxNum(this.convFiledName("txtTokuShunyuGokei"));
             }
 
             public ShunoJohoFucho(): UZA.Panel {
@@ -81,12 +81,12 @@ module DBB {
                 return new UZA.DataGrid(this.convFiledName("dgFucho"));
             }
 
-            public txtFuChoteiGeoukei(): UZA.TextBoxNum {
-                return new UZA.TextBoxNum(this.convFiledName("txtFuChoteiGeoukei"));
+            public txtFuChoteiGokei(): UZA.TextBoxNum {
+                return new UZA.TextBoxNum(this.convFiledName("txtFuChoteiGokei"));
             }
 
-            public txtFuShunyuGeoukei(): UZA.TextBoxNum {
-                return new UZA.TextBoxNum(this.convFiledName("txtFuShunyuGeoukei"));
+            public txtFuShunyuGokei(): UZA.TextBoxNum {
+                return new UZA.TextBoxNum(this.convFiledName("txtFuShunyuGokei"));
             }
 
         }

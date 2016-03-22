@@ -64,8 +64,8 @@ var DBB;
                 return new UZA.TextBoxNum(this.convFiledName("txtTokuChoteiGeoukei"));
             };
 
-            Controls.prototype.txtTokuShunyuGeoukei = function () {
-                return new UZA.TextBoxNum(this.convFiledName("txtTokuShunyuGeoukei"));
+            Controls.prototype.txtTokuShunyuGokei = function () {
+                return new UZA.TextBoxNum(this.convFiledName("txtTokuShunyuGokei"));
             };
 
             Controls.prototype.ShunoJohoFucho = function () {
@@ -76,12 +76,12 @@ var DBB;
                 return new UZA.DataGrid(this.convFiledName("dgFucho"));
             };
 
-            Controls.prototype.txtFuChoteiGeoukei = function () {
-                return new UZA.TextBoxNum(this.convFiledName("txtFuChoteiGeoukei"));
+            Controls.prototype.txtFuChoteiGokei = function () {
+                return new UZA.TextBoxNum(this.convFiledName("txtFuChoteiGokei"));
             };
 
-            Controls.prototype.txtFuShunyuGeoukei = function () {
-                return new UZA.TextBoxNum(this.convFiledName("txtFuShunyuGeoukei"));
+            Controls.prototype.txtFuShunyuGokei = function () {
+                return new UZA.TextBoxNum(this.convFiledName("txtFuShunyuGokei"));
             };
             return Controls;
         })();

@@ -1,31 +1,32 @@
 var DBB;
 (function (DBB) {
-    (function (ShunoJoho) {
+    (function (RentaiNofuGimusha) {
         var ModeController = (function () {
             function ModeController(fieldName) {
                 this.fieldName = fieldName;
-                this.controls = new ShunoJoho.Controls(fieldName);
+                this.controls = new RentaiNofuGimusha.Controls(fieldName);
             }
-            ModeController.prototype.priorities = function () {
-                return [];
-            };
-
             ModeController.prototype.Properties = function () {
                 return new UZA.CommonChildDiv(this.fieldName);
             };
+
+            ModeController.prototype.PublicProperties = function () {
+                return new RentaiNofuGimusha.PublicProperties(this.fieldName);
+            };
             return ModeController;
         })();
-        ShunoJoho.ModeController = ModeController;
-    })(DBB.ShunoJoho || (DBB.ShunoJoho = {}));
-    var ShunoJoho = DBB.ShunoJoho;
+        RentaiNofuGimusha.ModeController = ModeController;
+    })(DBB.RentaiNofuGimusha || (DBB.RentaiNofuGimusha = {}));
+    var RentaiNofuGimusha = DBB.RentaiNofuGimusha;
 })(DBB || (DBB = {}));
 
 var DBB;
 (function (DBB) {
-    (function (ShunoJoho) {
+    (function (RentaiNofuGimusha) {
         var PublicProperties = (function () {
             function PublicProperties(fieldName) {
-                this.controls = new ShunoJoho.Controls(fieldName);
+                this.fieldName = fieldName;
+                this.controls = new RentaiNofuGimusha.Controls(fieldName);
             }
             PublicProperties.prototype.getEditTypes = function () {
                 var editTypes = new UZA.EditTypeForPublicProperty();
@@ -34,7 +35,7 @@ var DBB;
             };
             return PublicProperties;
         })();
-        ShunoJoho.PublicProperties = PublicProperties;
-    })(DBB.ShunoJoho || (DBB.ShunoJoho = {}));
-    var ShunoJoho = DBB.ShunoJoho;
+        RentaiNofuGimusha.PublicProperties = PublicProperties;
+    })(DBB.RentaiNofuGimusha || (DBB.RentaiNofuGimusha = {}));
+    var RentaiNofuGimusha = DBB.RentaiNofuGimusha;
 })(DBB || (DBB = {}));

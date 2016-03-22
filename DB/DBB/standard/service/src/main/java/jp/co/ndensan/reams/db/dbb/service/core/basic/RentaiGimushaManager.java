@@ -95,4 +95,25 @@ public class RentaiGimushaManager {
         }
         return 1 == dac.save(連帯納付義務者.toEntity());
     }
+
+    /**
+     * 被保険者番号に合致する最新の連帯納付義務者を返します。
+     *
+     * @param 被保険者番号 HihokenshaNo
+     * @return RentaiGimusha
+     */
+    @Transaction
+    public RentaiGimusha get最新連帯納付義務者(
+            HihokenshaNo 被保険者番号) {
+        requireNonNull(被保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage("被保険者番号"));
+
+        DbT2009RentaiGimushaEntity entity = dac.selectBy最新連帯納付義務者(
+                被保険者番号);
+        if (entity == null) {
+            return null;
+        }
+        entity.initializeMd5();
+        return new RentaiGimusha(entity);
+    }
+
 }
