@@ -7,16 +7,13 @@ package jp.co.ndensan.reams.db.dbc.divcontroller.controller.parentdiv.dbc0410031
 
 import jp.co.ndensan.reams.db.dbc.definition.batchprm.ｋogakuｋyufuｋetteiIn.KogakuKyufuKetteiInBatchParameter;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0410031.TsuchishoJoho351Div;
-import jp.co.ndensan.reams.db.dbc.divcontroller.viewbox.kaigokyufukokuhorenjohotorikomi.KokuhorenDataTorikomiViewStateClass;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.ChohyoBunruiKanri;
-import jp.co.ndensan.reams.db.dbz.definition.core.enumeratedtype.ViewStateHolderName;
 import jp.co.ndensan.reams.db.dbz.service.core.basic.ChohyoBunruiKanriManager;
 import jp.co.ndensan.reams.uz.uza.biz.ReportId;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 
 /**
  * 国保連情報受取データ取込_[351]高額介護サービス費支給（不支給）決定者一覧表情報のクラスです
@@ -30,9 +27,6 @@ public class TsuchishoJoho351 {
      * @return ResponseData
      */
     public ResponseData<TsuchishoJoho351Div> onLoad(TsuchishoJoho351Div div) {
-        KokuhorenDataTorikomiViewStateClass parmater = new KokuhorenDataTorikomiViewStateClass(
-                RDate.getNowDate().getYearMonth(), new RString("1"));
-        ViewStateHolder.put(ViewStateHolderName.国保連取込情報, parmater);
         ChohyoBunruiKanri code = ChohyoBunruiKanriManager.createInstance().get帳票分類管理(SubGyomuCode.DBC介護給付,
                 new ReportId(new RString("DBC200015_KogakuShikyuFushikyuKetteishaIchiran")));
         div.getCcdKokurenJohoTorikomi().onLoadModeShutsuryokujunJoken2(SubGyomuCode.DBC介護給付, code.get帳票分類ID());
