@@ -22,14 +22,13 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 public class InsuranceInformation implements Serializable {
 
     private final InsuranceInformationEntity insuranceInformationEntity;
+    private static final long serialVersionUID = 1;
 
     /**
      * コンストラクタです。<br/>
      *
      * @param insuranceInformationEntity 遷移先渡す項目
      * @link InsuranceInformationEntity}より{@link InsuranceInformation}を生成します。
-     *
-     * @param insuranceInformationEntity {@link InsuranceInformationEntity}
      */
     public InsuranceInformation(InsuranceInformationEntity insuranceInformationEntity) {
         this.insuranceInformationEntity = requireNonNull(insuranceInformationEntity,

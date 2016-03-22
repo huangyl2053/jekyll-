@@ -5,7 +5,6 @@
  */
 package jp.co.ndensan.reams.db.dbu.divcontroller.controller.parentdiv.dbu0050021;
 
-import java.io.Serializable;
 import jp.co.ndensan.reams.db.dbu.business.kaigohokentokubetukaikeikeirijyokyoregist.KaigoHokenJigyoHokokuNenpo;
 import jp.co.ndensan.reams.db.dbu.business.kaigohokentokubetukaikeikeirijyokyoregist.KaigoHokenShoriDateKanri;
 import jp.co.ndensan.reams.db.dbu.divcontroller.controller.parentdiv.dbu0050011.TaishokensakuJyouken;
@@ -89,8 +88,10 @@ public class KaigoHokenTokubetuKaikeiKeiriJyokyoRegist1 {
         }
         if (responseDate != null) {
             return responseDate;
+        } else if (内部処理モード_修正追加.equals(getHandler(div).get画面表示()) || RString.isNullOrEmpty(getHandler(div).get画面表示())) {
+            return ResponseData.of(div).forwardWithEventName(様式４の２).parameter(内部処理モード_修正);
         } else {
-            return ResponseData.of(div).forwardWithEventName(様式４の２).respond();
+            return ResponseData.of(div).forwardWithEventName(様式４の２).parameter(getHandler(div).get画面表示());
         }
     }
 
@@ -125,8 +126,12 @@ public class KaigoHokenTokubetuKaikeiKeiriJyokyoRegist1 {
             return responseDate;
         }
         KaigoHokenShoriDateKanri 処理日付管理マスタ = getHandler(div).get処理日付管理マスタ();
-        ViewStateHolder.put(TaishokensakuJyouken.ViewStateKey.様式４の３, (Serializable) 処理日付管理マスタ);
-        return ResponseData.of(div).forwardWithEventName(DBU0050021TransitionEventName.様式４の３).respond();
+        ViewStateHolder.put(TaishokensakuJyouken.ViewStateKey.様式４の３, 処理日付管理マスタ);
+        if (内部処理モード_修正追加.equals(getHandler(div).get画面表示()) || RString.isNullOrEmpty(getHandler(div).get画面表示())) {
+            return ResponseData.of(div).forwardWithEventName(DBU0050021TransitionEventName.様式４の３).parameter(内部処理モード_修正);
+        } else {
+            return ResponseData.of(div).forwardWithEventName(DBU0050021TransitionEventName.様式４の３).parameter(getHandler(div).get画面表示());
+        }
     }
 
     private ResponseData<KaigoHokenTokubetuKaikeiKeiriJyokyoRegist1Div>

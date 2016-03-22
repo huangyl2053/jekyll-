@@ -14,9 +14,10 @@ import jp.co.ndensan.reams.db.dbu.business.kaigohokentokubetukaikeikeirijyokyore
 import jp.co.ndensan.reams.db.dbu.business.kaigohokentokubetukaikeikeirijyokyoregist.KaigoHokenJigyoHokokuNenpo;
 import jp.co.ndensan.reams.db.dbu.business.kaigohokentokubetukaikeikeirijyokyoregist.Shichoson;
 import jp.co.ndensan.reams.db.dbu.divcontroller.controller.parentdiv.dbu0050011.TaishokensakuJyouken.ViewStateKey;
+import jp.co.ndensan.reams.db.dbu.divcontroller.entity.parentdiv.DBU0050031.DBU0050031StateName;
 import jp.co.ndensan.reams.db.dbu.divcontroller.entity.parentdiv.DBU0050031.DBU0050031TransitionEventName;
-import jp.co.ndensan.reams.db.dbu.divcontroller.entity.parentdiv.DBU0050031.KaigoHokenTokubetuKaikeiKeiriJyokyoRegist2Div;
 import jp.co.ndensan.reams.db.dbu.divcontroller.entity.parentdiv.DBU0050031.ValidationHandler;
+import jp.co.ndensan.reams.db.dbu.divcontroller.entity.parentdiv.DBU0050031.YoshikiYonnoniDiv;
 import jp.co.ndensan.reams.db.dbu.service.core.kaigohokentokubetukaikeikeirijyokyoregist.KaigoHokenTokubetuKaikeiKeiriJyokyoRegistManager;
 import jp.co.ndensan.reams.db.dbx.definition.core.hokensha.TokeiTaishoKubun;
 import jp.co.ndensan.reams.db.dbz.definition.message.DbzInformationMessages;
@@ -47,7 +48,7 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
  *
  * 介護保険特別会計経理状況登録_様式４の２情報Divを制御します。
  */
-public class KaigoHokenTokubetuKaikeiKeiriJyokyoRegist2 {
+public class YoshikiYonnoni {
 
     private RString 内部処理モード;
     private static final RString UPDATE = new RString("modify");
@@ -61,6 +62,9 @@ public class KaigoHokenTokubetuKaikeiKeiriJyokyoRegist2 {
     private static final RString 追加をやめる = new RString("btnAddCancel");
     private static final RString 修正をやめる = new RString("btnModCancel");
     private static final RString 削除をやめる = new RString("btnDelCancel");
+    private static final RString 削除する = new RString("btnDelUpdate");
+    private static final RString 更新する = new RString("btnModUpdate");
+    private static final RString 追加する = new RString("btnAddUpdate");
     private static final RString 保存する = new RString("btnSaveCancel");
     private static final RString 該当一覧へ戻る = new RString("btnBackGaitoIchiran");
     private static final RString 完了する = new RString("btnEnd");
@@ -106,9 +110,9 @@ public class KaigoHokenTokubetuKaikeiKeiriJyokyoRegist2 {
      * 画面初期化処理です。
      *
      * @param div 画面情報
-     * @return ResponseData<KaigoHokenTokubetuKaikeiKeiriJyokyoRegist2Div>
+     * @return ResponseData<YoshikiYonnoniDiv>
      */
-    public ResponseData<KaigoHokenTokubetuKaikeiKeiriJyokyoRegist2Div> onload(KaigoHokenTokubetuKaikeiKeiriJyokyoRegist2Div div) {
+    public ResponseData<YoshikiYonnoniDiv> onload(YoshikiYonnoniDiv div) {
 
         InsuranceInformation insuranceInf = get引き継ぎデータ();
         KaigoHokenTokubetuKaikeiKeiriJyokyoRegistManager manager = new KaigoHokenTokubetuKaikeiKeiriJyokyoRegistManager();
@@ -127,32 +131,32 @@ public class KaigoHokenTokubetuKaikeiKeiriJyokyoRegist2 {
 
                 TextBoxFlexibleDate hokokuYM = new TextBoxFlexibleDate();
                 hokokuYM.setValue(new FlexibleDate(insuranceInf.get報告年().toString()));
-                div.getYoshikiyonMeisai().setTxthokokuYM(hokokuYM);
-                div.getYoshikiyonMeisai().getTxthokokuYM().setDisabled(true);
+                div.getYoshikiYonnoniMeisai().setTxtHokokuYM(hokokuYM);
+                div.getYoshikiYonnoniMeisai().getTxtHokokuYM().setDisabled(true);
                 TextBoxCode txtHihokenshabango = new TextBoxCode();
                 TextBox txthihokenshamei = new TextBox();
                 txthihokenshamei.setValue(insuranceInf.get市町村名称());
                 txtHihokenshabango.setValue(insuranceInf.get保険者コード().getColumnValue());
-                div.getYoshikiyonMeisai().setTxtHihokenshabango(txtHihokenshabango);
-                div.getYoshikiyonMeisai().getTxtHihokenshabango().setDisabled(true);
-                div.getYoshikiyonMeisai().setTxthihokenshamei(txthihokenshamei);
-                div.getYoshikiyonMeisai().getTxthihokenshamei().setDisabled(true);
+                div.getYoshikiYonnoniMeisai().setTxtHihokenshaNo(txtHihokenshabango);
+                div.getYoshikiYonnoniMeisai().getTxtHihokenshaNo().setDisabled(true);
+                div.getYoshikiYonnoniMeisai().setTxtHihokenshaName(txthihokenshamei);
+                div.getYoshikiYonnoniMeisai().getTxtHihokenshaName().setDisabled(true);
 
             } else {
                 if (UPDATE.equals(insuranceInf.get処理フラグ())) {
 
                     div.getKanryoMessage().setVisible(false);
 
-                    div.getHihokenshabango().getBtnYoshikiyon().setDisabled(false);
-                    div.getHihokenshabango().getBnYoshikiyonnoni().setDisabled(true);
-                    div.getHihokenshabango().getBtnYoskiyonosan().setDisabled(false);
+                    div.getYoshikiButtonArea().getBtnYoshikiyon().setDisabled(false);
+                    div.getYoshikiButtonArea().getBtnYoshikiyonnoni().setDisabled(true);
+                    div.getYoshikiButtonArea().getBtnYoskiyonosan().setDisabled(false);
 
-                    div.getYoshikiyonMeisai().getTxthokokuYM().setDisabled(true);
-                    div.getYoshikiyonMeisai().getTxtShukeiY().setDisabled(true);
-                    div.getYoshikiyonMeisai().getTxtHihokenshabango().setDisabled(true);
-                    div.getYoshikiyonMeisai().getTxthihokenshamei().setDisabled(true);
-                    div.getYoshikiyonMeisai().getDdlShicyoson().setVisible(false);
-                    div.getYoshikiyonMeisai().getBtnKakutei().setVisible(false);
+                    div.getYoshikiYonnoniMeisai().getTxtHokokuYM().setDisabled(true);
+                    div.getYoshikiYonnoniMeisai().getTxtShukeiYM().setDisabled(true);
+                    div.getYoshikiYonnoniMeisai().getTxtHihokenshaNo().setDisabled(true);
+                    div.getYoshikiYonnoniMeisai().getTxtHihokenshaName().setDisabled(true);
+                    div.getYoshikiYonnoniMeisai().getDdlShicyoson().setVisible(false);
+                    div.getYoshikiYonnoniMeisai().getBtnKakutei().setVisible(false);
 
                     CommonButtonHolder.setVisibleByCommonButtonFieldName(追加をやめる, false);
                     CommonButtonHolder.setVisibleByCommonButtonFieldName(修正をやめる, false);
@@ -167,14 +171,12 @@ public class KaigoHokenTokubetuKaikeiKeiriJyokyoRegist2 {
 
                     this.btnDisabled(div, insuranceInf);
 
-                    div.getYoshikiyonMeisai().getTxthokokuYM().setDisabled(true);
-                    div.getYoshikiyonMeisai().getTxtShukeiY().setDisabled(true);
-                    div.getYoshikiyonMeisai().getTxtHihokenshabango().setDisabled(true);
-                    div.getYoshikiyonMeisai().getTxthihokenshamei().setDisabled(true);
-                    div.getYoshikiyonMeisai().getDdlShicyoson().setVisible(false);
-                    div.getYoshikiyonMeisai().getBtnKakutei().setVisible(false);
-
-                    div.getYoshikiyonMeisai().getTblTokukaikeijokyo().setDisabled(true);
+                    div.getYoshikiYonnoniMeisai().getTxtHokokuYM().setDisabled(true);
+                    div.getYoshikiYonnoniMeisai().getTxtShukeiYM().setDisabled(true);
+                    div.getYoshikiYonnoniMeisai().getTxtHihokenshaNo().setDisabled(true);
+                    div.getYoshikiYonnoniMeisai().getTxtHihokenshaName().setDisabled(true);
+                    div.getYoshikiYonnoniMeisai().getDdlShicyoson().setVisible(false);
+                    div.getYoshikiYonnoniMeisai().getBtnKakutei().setVisible(false);
 
                     CommonButtonHolder.setVisibleByCommonButtonFieldName(追加をやめる, false);
                     CommonButtonHolder.setVisibleByCommonButtonFieldName(修正をやめる, false);
@@ -202,52 +204,60 @@ public class KaigoHokenTokubetuKaikeiKeiriJyokyoRegist2 {
                     市町村list.add(keyValueDataSource);
                 }
 
-                div.getYoshikiyonMeisai().getDdlShicyoson().setDataSource(市町村list);
+                div.getYoshikiYonnoniMeisai().getDdlShicyoson().setDataSource(市町村list);
             }
 
             if (RDate.getNowDate().getMonthValue() < MONTH_6) {
                 TextBoxFlexibleDate hokokuYM = new TextBoxFlexibleDate();
                 int 報告年度 = RDate.getNowDate().getYearValue() - 2;
-                hokokuYM.setValue(new FlexibleDate(String.valueOf(報告年度)));
-                div.getYoshikiyonMeisai().setTxthokokuYM(hokokuYM);
+                hokokuYM.setValue(new FlexibleDate(報告年度, 1, 1));
+                div.getYoshikiYonnoniMeisai().setTxtHokokuYM(hokokuYM);
 
                 TextBoxFlexibleDate shukeiY = new TextBoxFlexibleDate();
                 int 集計年度 = RDate.getNowDate().getYearValue() - 1;
-                shukeiY.setValue(new FlexibleDate(String.valueOf(集計年度)));
-                div.getYoshikiyonMeisai().setTxtShukeiY(shukeiY);
+                shukeiY.setValue(new FlexibleDate(集計年度, 1, 1));
+                div.getYoshikiYonnoniMeisai().setTxtShukeiYM(shukeiY);
 
             } else {
 
                 TextBoxFlexibleDate hokokuYM = new TextBoxFlexibleDate();
                 int 報告年度 = RDate.getNowDate().getYearValue();
-                hokokuYM.setValue(new FlexibleDate(String.valueOf(報告年度)));
-                div.getYoshikiyonMeisai().setTxthokokuYM(hokokuYM);
+                hokokuYM.setValue(new FlexibleDate(報告年度, 1, 1));
+                div.getYoshikiYonnoniMeisai().setTxtHokokuYM(hokokuYM);
 
                 TextBoxFlexibleDate shukeiY = new TextBoxFlexibleDate();
                 int 集計年度 = RDate.getNowDate().getYearValue() - 2;
-                shukeiY.setValue(new FlexibleDate(String.valueOf(集計年度)));
-                div.getYoshikiyonMeisai().setTxtShukeiY(shukeiY);
+                shukeiY.setValue(new FlexibleDate(集計年度, 1, 1));
+                div.getYoshikiYonnoniMeisai().setTxtShukeiYM(shukeiY);
             }
 
             div.getKanryoMessage().setVisible(false);
 
-            div.getHihokenshabango().getBtnYoshikiyon().setDisabled(false);
-            div.getHihokenshabango().getBnYoshikiyonnoni().setDisabled(true);
-            div.getHihokenshabango().getBtnYoskiyonosan().setDisabled(false);
+            div.getYoshikiButtonArea().getBtnYoshikiyon().setDisabled(false);
+            div.getYoshikiButtonArea().getBtnYoshikiyonnoni().setDisabled(true);
+            div.getYoshikiButtonArea().getBtnYoskiyonosan().setDisabled(false);
 
-            div.getYoshikiyonMeisai().getTxthokokuYM().setDisabled(false);
-            div.getYoshikiyonMeisai().getTxtShukeiY().setDisabled(true);
-            div.getYoshikiyonMeisai().getTxtHihokenshabango().setVisible(false);
-            div.getYoshikiyonMeisai().getTxthihokenshamei().setVisible(false);
-            div.getYoshikiyonMeisai().getDdlShicyoson().setDisabled(false);
-            div.getYoshikiyonMeisai().getBtnKakutei().setDisabled(false);
-
-            CommonButtonHolder.setDisabledByCommonButtonFieldName(追加をやめる, false);
-            CommonButtonHolder.setVisibleByCommonButtonFieldName(修正をやめる, false);
-            CommonButtonHolder.setVisibleByCommonButtonFieldName(削除をやめる, false);
-            CommonButtonHolder.setDisabledByCommonButtonFieldName(保存する, true);
-            CommonButtonHolder.setVisibleByCommonButtonFieldName(該当一覧へ戻る, true);
-
+            div.getYoshikiYonnoniMeisai().getTxtHokokuYM().setDisabled(false);
+            div.getYoshikiYonnoniMeisai().getTxtShukeiYM().setDisabled(true);
+            div.getYoshikiYonnoniMeisai().getTxtHihokenshaNo().setVisible(false);
+            div.getYoshikiYonnoniMeisai().getTxtHihokenshaName().setVisible(false);
+            div.getYoshikiYonnoniMeisai().getDdlShicyoson().setDisabled(false);
+            div.getYoshikiYonnoniMeisai().getBtnKakutei().setDisabled(false);
+            if (DBU0050031StateName.追加状態.getName().equals(ResponseHolder.getState())) {
+                CommonButtonHolder.setDisabledByCommonButtonFieldName(追加する, true);
+                CommonButtonHolder.setDisabledByCommonButtonFieldName(追加をやめる, false);
+            }
+            if (DBU0050031StateName.修正状態.getName().equals(ResponseHolder.getState())) {
+                CommonButtonHolder.setDisabledByCommonButtonFieldName(修正をやめる, false);
+                CommonButtonHolder.setDisabledByCommonButtonFieldName(更新する, false);
+            }
+            if (DBU0050031StateName.削除状態.getName().equals(ResponseHolder.getState())) {
+                CommonButtonHolder.setDisabledByCommonButtonFieldName(削除をやめる, false);
+                CommonButtonHolder.setDisabledByCommonButtonFieldName(削除する, false);
+            }
+            if (DBU0050031StateName.完了状態.getName().equals(ResponseHolder.getState())) {
+                CommonButtonHolder.setDisabledByCommonButtonFieldName(完了する, false);
+            }
             内部処理モード = 内部処理モード_追加;
         }
 
@@ -258,25 +268,24 @@ public class KaigoHokenTokubetuKaikeiKeiriJyokyoRegist2 {
      * 様式４ボタンを押す。
      *
      * @param div 画面情報
-     * @return ResponseData<KaigoHokenTokubetuKaikeiKeiriJyokyoRegist2Div>
+     * @return ResponseData<YoshikiYonnoniDiv>
      */
-    public ResponseData<KaigoHokenTokubetuKaikeiKeiriJyokyoRegist2Div> onClick_btnYoshikiyon(
-            KaigoHokenTokubetuKaikeiKeiriJyokyoRegist2Div div) {
-
-        if (内部処理モード_修正.equals(内部処理モード)) {
+    public ResponseData<YoshikiYonnoniDiv> onClick_btnYoshikiyon(
+            YoshikiYonnoniDiv div) {
+        内部処理モード = ResponseHolder.getState();
+        if (DBU0050031StateName.修正状態.getName().equals(内部処理モード)) {
             KaigoHokenJigyoHokokuNenpo 修正データ = this.修正データの取得(div);
-            if (修正データ.get詳細データエリア().isEmpty()) {
-                return ResponseData.of(div).forwardWithEventName(DBU0050031TransitionEventName.様式４).respond();
+            if (修正データ.get詳細データエリア() == null || 修正データ.get詳細データエリア().isEmpty()) {
+                return ResponseData.of(div).forwardWithEventName(DBU0050031TransitionEventName.様式４).parameter(内部処理モード_修正);
             } else {
                 this.messageAndGoto(DBU0050031TransitionEventName.様式４, div);
             }
 
-        } else if ((内部処理モード_修正追加.equals(内部処理モード)
-                || 内部処理モード_追加.equals(内部処理モード))
+        } else if (DBU0050031StateName.追加状態.getName().equals(内部処理モード)
                 && this.入力項目いずれか空白ではない(div)) {
             this.messageAndGoto(DBU0050031TransitionEventName.様式４, div);
-        } else if (内部処理モード_削除.equals(内部処理モード)) {
-            return ResponseData.of(div).forwardWithEventName(DBU0050031TransitionEventName.様式４).respond();
+        } else if (DBU0050031StateName.削除状態.getName().equals(内部処理モード)) {
+            return ResponseData.of(div).forwardWithEventName(DBU0050031TransitionEventName.様式４).parameter(内部処理モード_削除);
         }
 
         return ResponseData.of(div).respond();
@@ -286,25 +295,23 @@ public class KaigoHokenTokubetuKaikeiKeiriJyokyoRegist2 {
      * 様式４の３ボタンを押す。
      *
      * @param div 画面情報
-     * @return ResponseData<KaigoHokenTokubetuKaikeiKeiriJyokyoRegist2Div>
+     * @return ResponseData<YoshikiYonnoniDiv>
      */
-    public ResponseData<KaigoHokenTokubetuKaikeiKeiriJyokyoRegist2Div> onClick_btnYoskiyonosan(KaigoHokenTokubetuKaikeiKeiriJyokyoRegist2Div div) {
-
-        if (内部処理モード_修正.equals(内部処理モード)) {
-
+    public ResponseData<YoshikiYonnoniDiv> onClick_btnYoskiyonosan(YoshikiYonnoniDiv div) {
+        内部処理モード = ResponseHolder.getState();
+        if (DBU0050031StateName.修正状態.getName().equals(内部処理モード)) {
             KaigoHokenJigyoHokokuNenpo 修正データ = this.修正データの取得(div);
-            if (修正データ.get詳細データエリア().isEmpty()) {
-                return ResponseData.of(div).forwardWithEventName(DBU0050031TransitionEventName.様式４の３).respond();
+            if (修正データ.get詳細データエリア() == null || 修正データ.get詳細データエリア().isEmpty()) {
+                return ResponseData.of(div).forwardWithEventName(DBU0050031TransitionEventName.様式４の３).parameter(内部処理モード_修正);
             } else {
 
                 this.messageAndGoto(DBU0050031TransitionEventName.様式４の３, div);
             }
-        } else if ((内部処理モード_修正追加.equals(内部処理モード)
-                || 内部処理モード_追加.equals(内部処理モード))
+        } else if (DBU0050031StateName.追加状態.getName().equals(内部処理モード)
                 && this.入力項目いずれか空白ではない(div)) {
             this.messageAndGoto(DBU0050031TransitionEventName.様式４の３, div);
-        } else if (内部処理モード_削除.equals(内部処理モード)) {
-            return ResponseData.of(div).forwardWithEventName(DBU0050031TransitionEventName.様式４の３).respond();
+        } else if (DBU0050031StateName.削除状態.getName().equals(内部処理モード)) {
+            return ResponseData.of(div).forwardWithEventName(DBU0050031TransitionEventName.様式４の３).parameter(内部処理モード_削除);
         }
         return ResponseData.of(div).respond();
     }
@@ -313,9 +320,9 @@ public class KaigoHokenTokubetuKaikeiKeiriJyokyoRegist2 {
      * 報告年度を確定するボタンを押す。
      *
      * @param div 画面情報
-     * @return ResponseData<KaigoHokenTokubetuKaikeiKeiriJyokyoRegist2Div>
+     * @return ResponseData<YoshikiYonnoniDiv>
      */
-    public ResponseData<KaigoHokenTokubetuKaikeiKeiriJyokyoRegist2Div> onClick_btnKakutei(KaigoHokenTokubetuKaikeiKeiriJyokyoRegist2Div div) {
+    public ResponseData<YoshikiYonnoniDiv> onClick_btnKakutei(YoshikiYonnoniDiv div) {
 
         KaigoHokenTokubetuKaikeiKeiriJyokyoRegistManager manager = new KaigoHokenTokubetuKaikeiKeiriJyokyoRegistManager();
 
@@ -328,22 +335,22 @@ public class KaigoHokenTokubetuKaikeiKeiriJyokyoRegist2 {
         if (!shichosonList.isEmpty()) {
 
             for (int i = 0; i < shichosonList.size(); i++) {
-                if (div.getYoshikiyonMeisai().getDdlShicyoson().getSelectedKey().equals(shichosonList.get(i).get市町村コード().value())) {
+                if (div.getYoshikiYonnoniMeisai().getDdlShicyoson().getSelectedKey().equals(shichosonList.get(i).get市町村コード().value())) {
 
                     tokeiTaishoKubun = shichosonList.get(i).get保険者区分();
                 }
             }
 
             List<KaigoHokenJigyoHokokuNenpo> list = manager.getJigyoHokokuNenpoList(
-                    div.getYoshikiyonMeisai().getTxthokokuYM().getValue().getYear(),
-                    new LasdecCode(div.getYoshikiyonMeisai().getDdlShicyoson().getSelectedKey().toString()),
+                    div.getYoshikiYonnoniMeisai().getTxtHokokuYM().getValue().getYear(),
+                    new LasdecCode(div.getYoshikiYonnoniMeisai().getDdlShicyoson().getSelectedKey().toString()),
                     tokeiTaishoKubun);
 
             if (list.isEmpty()) {
-                div.getYoshikiyonMeisai().getTxthokokuYM().setDisabled(true);
-                div.getYoshikiyonMeisai().getDdlShicyoson().setDisabled(true);
-                div.getYoshikiyonMeisai().getBtnKakutei().setDisabled(true);
-                div.getYoshikiyonMeisai().setDisabled(true);
+                div.getYoshikiYonnoniMeisai().getTxtHokokuYM().setDisabled(true);
+                div.getYoshikiYonnoniMeisai().getDdlShicyoson().setDisabled(true);
+                div.getYoshikiYonnoniMeisai().getBtnKakutei().setDisabled(true);
+                div.getYoshikiYonnoniMeisai().setDisabled(true);
                 CommonButtonHolder.setDisabledByCommonButtonFieldName(保存する, false);
 
             } else {
@@ -359,9 +366,9 @@ public class KaigoHokenTokubetuKaikeiKeiriJyokyoRegist2 {
      * 追加をやめるボタンを押す。
      *
      * @param div 画面情報
-     * @return ResponseData<KaigoHokenTokubetuKaikeiKeiriJyokyoRegist2Div>
+     * @return ResponseData<YoshikiYonnoniDiv>
      */
-    public ResponseData<KaigoHokenTokubetuKaikeiKeiriJyokyoRegist2Div> onClick_btnAdd(KaigoHokenTokubetuKaikeiKeiriJyokyoRegist2Div div) {
+    public ResponseData<YoshikiYonnoniDiv> onClick_btnAdd(YoshikiYonnoniDiv div) {
 
         if (this.入力項目いずれか空白ではない(div)) {
             this.messageAndGoto(DBU0050031TransitionEventName.検索に戻る, div);
@@ -373,9 +380,9 @@ public class KaigoHokenTokubetuKaikeiKeiriJyokyoRegist2 {
      * 修正をやめるボタンを押す。
      *
      * @param div 画面情報
-     * @return ResponseData<KaigoHokenTokubetuKaikeiKeiriJyokyoRegist2Div>
+     * @return ResponseData<YoshikiYonnoniDiv>
      */
-    public ResponseData<KaigoHokenTokubetuKaikeiKeiriJyokyoRegist2Div> onClick_btnUpdate(KaigoHokenTokubetuKaikeiKeiriJyokyoRegist2Div div) {
+    public ResponseData<YoshikiYonnoniDiv> onClick_btnUpdate(YoshikiYonnoniDiv div) {
 
         if (内部処理モード_修正.equals(内部処理モード)) {
 
@@ -397,9 +404,9 @@ public class KaigoHokenTokubetuKaikeiKeiriJyokyoRegist2 {
      * 削除をやめるボタンを押す。
      *
      * @param div 画面情報
-     * @return ResponseData<KaigoHokenTokubetuKaikeiKeiriJyokyoRegist2Div>
+     * @return ResponseData<YoshikiYonnoniDiv>
      */
-    public ResponseData<KaigoHokenTokubetuKaikeiKeiriJyokyoRegist2Div> onClick_btnDelete(KaigoHokenTokubetuKaikeiKeiriJyokyoRegist2Div div) {
+    public ResponseData<YoshikiYonnoniDiv> onClick_btnDelete(YoshikiYonnoniDiv div) {
 
         return ResponseData.of(div).forwardWithEventName(DBU0050031TransitionEventName.検索に戻る).respond();
     }
@@ -408,9 +415,9 @@ public class KaigoHokenTokubetuKaikeiKeiriJyokyoRegist2 {
      * 保存するボタンを押す。
      *
      * @param div 画面情報
-     * @return ResponseData<KaigoHokenTokubetuKaikeiKeiriJyokyoRegist2Div>
+     * @return ResponseData<YoshikiYonnoniDiv>
      */
-    public ResponseData<KaigoHokenTokubetuKaikeiKeiriJyokyoRegist2Div> onClick_btnSave(KaigoHokenTokubetuKaikeiKeiriJyokyoRegist2Div div) {
+    public ResponseData<YoshikiYonnoniDiv> onClick_btnSave(YoshikiYonnoniDiv div) {
 
         InsuranceInformation insuranceInf = get引き継ぎデータ();
         KaigoHokenTokubetuKaikeiKeiriJyokyoRegistManager manager = new KaigoHokenTokubetuKaikeiKeiriJyokyoRegistManager();
@@ -425,13 +432,13 @@ public class KaigoHokenTokubetuKaikeiKeiriJyokyoRegist2 {
                 this.put詳細データエリア(詳細データエリア, div);
 
                 KaigoHokenJigyoHokokuNenpo kaigoHokenJigyoHokokuNenpo = new KaigoHokenJigyoHokokuNenpo(
-                        new FlexibleYear(div.getYoshikiyonMeisai().getTxthokokuYM().toString()),
+                        new FlexibleYear(div.getYoshikiYonnoniMeisai().getTxtHokokuYM().toString()),
                         new RString("00"),
-                        new FlexibleYear(div.getYoshikiyonMeisai().getTxtShukeiY().getText()),
+                        new FlexibleYear(div.getYoshikiYonnoniMeisai().getTxtShukeiYM().getText()),
                         new RString("00"),
                         // TODOset統計対象区分
                         new RString("統計対象区分"),
-                        new LasdecCode(div.getYoshikiyonMeisai().getDdlShicyoson().getSelectedKey().toString()),
+                        new LasdecCode(div.getYoshikiYonnoniMeisai().getDdlShicyoson().getSelectedKey().toString()),
                         new Code("09"),
                         CODE_0200,
                         new Code("1"),
@@ -461,13 +468,13 @@ public class KaigoHokenTokubetuKaikeiKeiriJyokyoRegist2 {
                 this.put詳細データエリア(詳細データエリア, div);
 
                 KaigoHokenJigyoHokokuNenpo kaigoHokenJigyoHokokuNenpo = new KaigoHokenJigyoHokokuNenpo(
-                        new FlexibleYear(div.getYoshikiyonMeisai().getTxthokokuYM().toString()),
+                        new FlexibleYear(div.getYoshikiYonnoniMeisai().getTxtHokokuYM().toString()),
                         new RString("00"),
-                        new FlexibleYear(div.getYoshikiyonMeisai().getTxtShukeiY().getText()),
+                        new FlexibleYear(div.getYoshikiYonnoniMeisai().getTxtShukeiYM().getText()),
                         new RString("00"),
                         // TODOset統計対象区分
                         new RString("統計対象区分"),
-                        new LasdecCode(div.getYoshikiyonMeisai().getDdlShicyoson().getSelectedKey().toString()),
+                        new LasdecCode(div.getYoshikiYonnoniMeisai().getDdlShicyoson().getSelectedKey().toString()),
                         new Code("09"),
                         CODE_0200,
                         new Code("1"),
@@ -500,8 +507,8 @@ public class KaigoHokenTokubetuKaikeiKeiriJyokyoRegist2 {
         }
 
         div.getKanryoMessage().setVisible(true);
-        div.getHihokenshabango().setVisible(false);
-        div.getYoshikiyonMeisai().setVisible(false);
+        div.getYoshikiButtonArea().setVisible(false);
+        div.getYoshikiYonnoniMeisai().setVisible(false);
 
         CommonButtonHolder.setVisibleByCommonButtonFieldName(追加をやめる, false);
         CommonButtonHolder.setVisibleByCommonButtonFieldName(修正をやめる, false);
@@ -527,9 +534,9 @@ public class KaigoHokenTokubetuKaikeiKeiriJyokyoRegist2 {
      * 完了するボタンを押す。
      *
      * @param div 画面情報
-     * @return ResponseData<KaigoHokenTokubetuKaikeiKeiriJyokyoRegist2Div>
+     * @return ResponseData<YoshikiYonnoniDiv>
      */
-    public ResponseData<KaigoHokenTokubetuKaikeiKeiriJyokyoRegist2Div> onClick_btnEnd(KaigoHokenTokubetuKaikeiKeiriJyokyoRegist2Div div) {
+    public ResponseData<YoshikiYonnoniDiv> onClick_btnEnd(YoshikiYonnoniDiv div) {
 
         return ResponseData.of(div).respond();
     }
@@ -540,7 +547,7 @@ public class KaigoHokenTokubetuKaikeiKeiriJyokyoRegist2 {
      * @param div 画面情報
      * @return 入力項目いずれか空白ではない
      */
-    public boolean 入力項目いずれか空白ではない(KaigoHokenTokubetuKaikeiKeiriJyokyoRegist2Div div) {
+    public boolean 入力項目いずれか空白ではない(YoshikiYonnoniDiv div) {
 
         boolean 空白_前 = this.入力項目いずれか空白ではない_前(div);
         boolean 空白_後 = this.入力項目いずれか空白ではない_後(div);
@@ -554,27 +561,27 @@ public class KaigoHokenTokubetuKaikeiKeiriJyokyoRegist2 {
      * @param div ShujiiMasterDiv
      * @return ResponseData<ShujiiMasterDiv>
      */
-    public ResponseData<KaigoHokenTokubetuKaikeiKeiriJyokyoRegist2Div> onBlur_txthokokuYM(KaigoHokenTokubetuKaikeiKeiriJyokyoRegist2Div div) {
-        if (RDate.getNowDate().getYear().toDateString().equals(div.getYoshikiyonMeisai().getTxthokokuYM().getText())) {
+    public ResponseData<YoshikiYonnoniDiv> onBlur_txthokokuYM(YoshikiYonnoniDiv div) {
+        if (RDate.getNowDate().getYear().toDateString().equals(div.getYoshikiYonnoniMeisai().getTxtHokokuYM().getText())) {
             if (RDate.getNowDate().getMonthValue() >= MONTH_6) {
 
                 TextBoxFlexibleDate shukeiY = new TextBoxFlexibleDate();
                 int 集計年度 = RDate.getNowDate().getYearValue() - 2;
                 shukeiY.setValue(new FlexibleDate(String.valueOf(集計年度)));
-                div.getYoshikiyonMeisai().setTxtShukeiY(shukeiY);
+                div.getYoshikiYonnoniMeisai().setTxtShukeiYM(shukeiY);
             } else {
                 TextBoxFlexibleDate shukeiY = new TextBoxFlexibleDate();
                 int 集計年度 = RDate.getNowDate().getYearValue() - 1;
                 shukeiY.setValue(new FlexibleDate(String.valueOf(集計年度)));
-                div.getYoshikiyonMeisai().setTxtShukeiY(shukeiY);
+                div.getYoshikiYonnoniMeisai().setTxtShukeiYM(shukeiY);
             }
 
-        } else if (!div.getYoshikiyonMeisai().getTxthokokuYM().getValue().isEmpty()) {
+        } else if (!div.getYoshikiYonnoniMeisai().getTxtHokokuYM().getValue().isEmpty()) {
 
             TextBoxFlexibleDate shukeiY = new TextBoxFlexibleDate();
-            int 集計年度 = div.getYoshikiyonMeisai().getTxthokokuYM().getValue().getYearValue() - 2;
+            int 集計年度 = div.getYoshikiYonnoniMeisai().getTxtHokokuYM().getValue().getYearValue() - 2;
             shukeiY.setValue(new FlexibleDate(String.valueOf(集計年度)));
-            div.getYoshikiyonMeisai().setTxtShukeiY(shukeiY);
+            div.getYoshikiYonnoniMeisai().setTxtShukeiYM(shukeiY);
         }
 
         return ResponseData.of(div).respond();
@@ -583,10 +590,10 @@ public class KaigoHokenTokubetuKaikeiKeiriJyokyoRegist2 {
     /**
      * 修正データを取得します。
      *
-     * @param div KaigoHokenTokubetuKaikeiKeiriJyokyoRegist2Div
+     * @param div YoshikiYonnoniDiv
      * @return KaigoHokenJigyoHokokuNenpo
      */
-    public KaigoHokenJigyoHokokuNenpo 修正データの取得(KaigoHokenTokubetuKaikeiKeiriJyokyoRegist2Div div) {
+    public KaigoHokenJigyoHokokuNenpo 修正データの取得(YoshikiYonnoniDiv div) {
         InsuranceInformation insuranceInf = get引き継ぎデータ();
         KaigoHokenTokubetuKaikeiKeiriJyokyoRegistManager manager = new KaigoHokenTokubetuKaikeiKeiriJyokyoRegistManager();
 
@@ -624,13 +631,13 @@ public class KaigoHokenTokubetuKaikeiKeiriJyokyoRegist2 {
      * BtnYoshikiyonとBtnYoskiyonosanはDisabledになります。
      *
      */
-    private void btnDisabled(KaigoHokenTokubetuKaikeiKeiriJyokyoRegist2Div div, InsuranceInformation insuranceInf) {
+    private void btnDisabled(YoshikiYonnoniDiv div, InsuranceInformation insuranceInf) {
         if (new RString("入力未").equals(insuranceInf.get様式４入力状況())) {
-            div.getHihokenshabango().getBtnYoshikiyon().setDisabled(true);
+            div.getYoshikiButtonArea().getBtnYoshikiyon().setDisabled(true);
         }
-        div.getHihokenshabango().getBnYoshikiyonnoni().setDisabled(true);
+        div.getYoshikiButtonArea().getBtnYoshikiyonnoni().setDisabled(true);
         if (new RString("入力未").equals(insuranceInf.get様式４の３入力状況())) {
-            div.getHihokenshabango().getBtnYoskiyonosan().setDisabled(true);
+            div.getYoshikiButtonArea().getBtnYoskiyonosan().setDisabled(true);
         }
     }
 
@@ -638,8 +645,8 @@ public class KaigoHokenTokubetuKaikeiKeiriJyokyoRegist2 {
      * メッセージ出力、且つ画面遷移する。
      *
      */
-    private ResponseData<KaigoHokenTokubetuKaikeiKeiriJyokyoRegist2Div> messageAndGoto(
-            IContainerEvents events, KaigoHokenTokubetuKaikeiKeiriJyokyoRegist2Div div) {
+    private ResponseData<YoshikiYonnoniDiv> messageAndGoto(
+            IContainerEvents events, YoshikiYonnoniDiv div) {
 
         if (!ResponseHolder.isReRequest()) {
             QuestionMessage message = new QuestionMessage(UrQuestionMessages.入力内容の破棄.getMessage().getCode(),
@@ -649,7 +656,13 @@ public class KaigoHokenTokubetuKaikeiKeiriJyokyoRegist2 {
         if (new RString(UrQuestionMessages.入力内容の破棄.getMessage().getCode())
                 .equals(ResponseHolder.getMessageCode())
                 && MessageDialogSelectedResult.Yes.equals(ResponseHolder.getButtonType())) {
-            return ResponseData.of(div).forwardWithEventName(events).respond();
+            if (DBU0050031TransitionEventName.検索に戻る.equals(events) || DBU0050031TransitionEventName.処理完了.equals(events)) {
+                return ResponseData.of(div).forwardWithEventName(events).respond();
+            } else if (内部処理モード_修正追加.equals(内部処理モード) || RString.isNullOrEmpty(内部処理モード)) {
+                return ResponseData.of(div).forwardWithEventName(events).parameter(内部処理モード_修正);
+            } else {
+                return ResponseData.of(div).forwardWithEventName(events).parameter(内部処理モード);
+            }
         }
         return ResponseData.of(div).respond();
     }
@@ -662,60 +675,60 @@ public class KaigoHokenTokubetuKaikeiKeiriJyokyoRegist2 {
             KaigoHokenJigyoHokokuNenpo 修正データ,
             List<KaigoHokenJigyoHokokuNenpo> list,
             int i,
-            KaigoHokenTokubetuKaikeiKeiriJyokyoRegist2Div div) {
-        if (!list.get(i).get詳細データエリア().get(座標1_1).equals(div.getYoshikiyonMeisai().getTxtkaigoshunyu().getValue())) {
-            修正データ.get詳細データエリア().put(座標1_1, div.getYoshikiyonMeisai().getTxtkaigoshunyu().getValue());
+            YoshikiYonnoniDiv div) {
+        if (!list.get(i).get詳細データエリア().get(座標1_1).equals(div.getYoshikiYonnoniMeisai().getTxtkaigoshunyu().getValue())) {
+            修正データ.get詳細データエリア().put(座標1_1, div.getYoshikiYonnoniMeisai().getTxtkaigoshunyu().getValue());
         }
-        if (!list.get(i).get詳細データエリア().get(座標1_2).equals(div.getYoshikiyonMeisai().getTxtsomu().getValue())) {
-            修正データ.get詳細データエリア().put(座標1_2, div.getYoshikiyonMeisai().getTxtsomu().getValue());
+        if (!list.get(i).get詳細データエリア().get(座標1_2).equals(div.getYoshikiYonnoniMeisai().getTxtsomu().getValue())) {
+            修正データ.get詳細データエリア().put(座標1_2, div.getYoshikiYonnoniMeisai().getTxtsomu().getValue());
         }
-        if (!list.get(i).get詳細データエリア().get(座標2_1).equals(div.getYoshikiyonMeisai().getTxtyoboshunyu().getValue())) {
-            修正データ.get詳細データエリア().put(座標2_1, div.getYoshikiyonMeisai().getTxtyoboshunyu().getValue());
+        if (!list.get(i).get詳細データエリア().get(座標2_1).equals(div.getYoshikiYonnoniMeisai().getTxtyoboshunyu().getValue())) {
+            修正データ.get詳細データエリア().put(座標2_1, div.getYoshikiYonnoniMeisai().getTxtyoboshunyu().getValue());
         }
-        if (!list.get(i).get詳細データエリア().get(座標2_2).equals(div.getYoshikiyonMeisai().getTxtitakusabisu().getValue())) {
-            修正データ.get詳細データエリア().put(座標2_2, div.getYoshikiyonMeisai().getTxtitakusabisu().getValue());
+        if (!list.get(i).get詳細データエリア().get(座標2_2).equals(div.getYoshikiYonnoniMeisai().getTxtitakusabisu().getValue())) {
+            修正データ.get詳細データエリア().put(座標2_2, div.getYoshikiYonnoniMeisai().getTxtitakusabisu().getValue());
         }
-        if (!list.get(i).get詳細データエリア().get(座標3_1).equals(div.getYoshikiyonMeisai().getTxttokuteinyushoshunyu().getValue())) {
-            修正データ.get詳細データエリア().put(座標3_1, div.getYoshikiyonMeisai().getTxttokuteinyushoshunyu().getValue());
+        if (!list.get(i).get詳細データエリア().get(座標3_1).equals(div.getYoshikiYonnoniMeisai().getTxttokuteinyushoshunyu().getValue())) {
+            修正データ.get詳細データエリア().put(座標3_1, div.getYoshikiYonnoniMeisai().getTxttokuteinyushoshunyu().getValue());
         }
-        if (!list.get(i).get詳細データエリア().get(座標3_2).equals(div.getYoshikiyonMeisai().getTxtmitchaku().getValue())) {
-            修正データ.get詳細データエリア().put(座標3_2, div.getYoshikiyonMeisai().getTxtmitchaku().getValue());
+        if (!list.get(i).get詳細データエリア().get(座標3_2).equals(div.getYoshikiYonnoniMeisai().getTxtmitchaku().getValue())) {
+            修正データ.get詳細データエリア().put(座標3_2, div.getYoshikiYonnoniMeisai().getTxtmitchaku().getValue());
         }
-        if (!list.get(i).get詳細データエリア().get(座標4_1).equals(div.getYoshikiyonMeisai().getTxtjiki().getValue())) {
-            修正データ.get詳細データエリア().put(座標4_1, div.getYoshikiyonMeisai().getTxtjiki().getValue());
+        if (!list.get(i).get詳細データエリア().get(座標4_1).equals(div.getYoshikiYonnoniMeisai().getTxtjiki().getValue())) {
+            修正データ.get詳細データエリア().put(座標4_1, div.getYoshikiYonnoniMeisai().getTxtjiki().getValue());
         }
-        if (!list.get(i).get詳細データエリア().get(座標4_2).equals(div.getYoshikiyonMeisai().getTxtitakugaigoshien().getValue())) {
-            修正データ.get詳細データエリア().put(座標4_2, div.getYoshikiyonMeisai().getTxtitakugaigoshien().getValue());
+        if (!list.get(i).get詳細データエリア().get(座標4_2).equals(div.getYoshikiYonnoniMeisai().getTxtitakugaigoshien().getValue())) {
+            修正データ.get詳細データエリア().put(座標4_2, div.getYoshikiYonnoniMeisai().getTxtitakugaigoshien().getValue());
         }
-        if (!list.get(i).get詳細データエリア().get(座標5_1).equals(div.getYoshikiyonMeisai().getTxtsotashunyu().getValue())) {
-            修正データ.get詳細データエリア().put(座標5_1, div.getYoshikiyonMeisai().getTxtsotashunyu().getValue());
+        if (!list.get(i).get詳細データエリア().get(座標5_1).equals(div.getYoshikiYonnoniMeisai().getTxtsotashunyu().getValue())) {
+            修正データ.get詳細データエリア().put(座標5_1, div.getYoshikiYonnoniMeisai().getTxtsotashunyu().getValue());
         }
-        if (!list.get(i).get詳細データエリア().get(座標5_2).equals(div.getYoshikiyonMeisai().getTxtjigyosota().getValue())) {
-            修正データ.get詳細データエリア().put(座標5_2, div.getYoshikiyonMeisai().getTxtjigyosota().getValue());
+        if (!list.get(i).get詳細データエリア().get(座標5_2).equals(div.getYoshikiYonnoniMeisai().getTxtjigyosota().getValue())) {
+            修正データ.get詳細データエリア().put(座標5_2, div.getYoshikiYonnoniMeisai().getTxtjigyosota().getValue());
         }
-        if (!list.get(i).get詳細データエリア().get(座標6_1).equals(div.getYoshikiyonMeisai().getTxtbuntankin().getValue())) {
-            修正データ.get詳細データエリア().put(座標6_1, div.getYoshikiyonMeisai().getTxtbuntankin().getValue());
+        if (!list.get(i).get詳細データエリア().get(座標6_1).equals(div.getYoshikiYonnoniMeisai().getTxtbuntankin().getValue())) {
+            修正データ.get詳細データエリア().put(座標6_1, div.getYoshikiYonnoniMeisai().getTxtbuntankin().getValue());
         }
-        if (!list.get(i).get詳細データエリア().get(座標6_2).equals(div.getYoshikiyonMeisai().getTxtshisetsuseibi().getValue())) {
-            修正データ.get詳細データエリア().put(座標6_2, div.getYoshikiyonMeisai().getTxtshisetsuseibi().getValue());
+        if (!list.get(i).get詳細データエリア().get(座標6_2).equals(div.getYoshikiYonnoniMeisai().getTxtshisetsuseibi().getValue())) {
+            修正データ.get詳細データエリア().put(座標6_2, div.getYoshikiYonnoniMeisai().getTxtshisetsuseibi().getValue());
         }
-        if (!list.get(i).get詳細データエリア().get(座標7_1).equals(div.getYoshikiyonMeisai().getTxtfutankin().getValue())) {
-            修正データ.get詳細データエリア().put(座標7_1, div.getYoshikiyonMeisai().getTxtfutankin().getValue());
+        if (!list.get(i).get詳細データエリア().get(座標7_1).equals(div.getYoshikiYonnoniMeisai().getTxtfutankin().getValue())) {
+            修正データ.get詳細データエリア().put(座標7_1, div.getYoshikiYonnoniMeisai().getTxtfutankin().getValue());
         }
-        if (!list.get(i).get詳細データエリア().get(座標7_2).equals(div.getYoshikiyonMeisai().getTxtkikinsekin().getValue())) {
-            修正データ.get詳細データエリア().put(座標7_2, div.getYoshikiyonMeisai().getTxtkikinsekin().getValue());
+        if (!list.get(i).get詳細データエリア().get(座標7_2).equals(div.getYoshikiYonnoniMeisai().getTxtkikinsekin().getValue())) {
+            修正データ.get詳細データエリア().put(座標7_2, div.getYoshikiYonnoniMeisai().getTxtkikinsekin().getValue());
         }
-        if (!list.get(i).get詳細データエリア().get(座標8_1).equals(div.getYoshikiyonMeisai().getTxtshiyohi().getValue())) {
-            修正データ.get詳細データエリア().put(座標8_1, div.getYoshikiyonMeisai().getTxtshiyohi().getValue());
+        if (!list.get(i).get詳細データエリア().get(座標8_1).equals(div.getYoshikiYonnoniMeisai().getTxtshiyohi().getValue())) {
+            修正データ.get詳細データエリア().put(座標8_1, div.getYoshikiYonnoniMeisai().getTxtshiyohi().getValue());
         }
-        if (!list.get(i).get詳細データエリア().get(座標8_2).equals(div.getYoshikiyonMeisai().getTxtkosai().getValue())) {
-            修正データ.get詳細データエリア().put(座標8_2, div.getYoshikiyonMeisai().getTxtkosai().getValue());
+        if (!list.get(i).get詳細データエリア().get(座標8_2).equals(div.getYoshikiYonnoniMeisai().getTxtkosai().getValue())) {
+            修正データ.get詳細データエリア().put(座標8_2, div.getYoshikiYonnoniMeisai().getTxtkosai().getValue());
         }
-        if (!list.get(i).get詳細データエリア().get(座標9_1).equals(div.getYoshikiyonMeisai().getTxttesuryo().getValue())) {
-            修正データ.get詳細データエリア().put(座標9_1, div.getYoshikiyonMeisai().getTxttesuryo().getValue());
+        if (!list.get(i).get詳細データエリア().get(座標9_1).equals(div.getYoshikiYonnoniMeisai().getTxttesuryo().getValue())) {
+            修正データ.get詳細データエリア().put(座標9_1, div.getYoshikiYonnoniMeisai().getTxttesuryo().getValue());
         }
-        if (!list.get(i).get詳細データエリア().get(座標9_2).equals(div.getYoshikiyonMeisai().getTxtyobih().getValue())) {
-            修正データ.get詳細データエリア().put(座標9_2, div.getYoshikiyonMeisai().getTxtyobih().getValue());
+        if (!list.get(i).get詳細データエリア().get(座標9_2).equals(div.getYoshikiYonnoniMeisai().getTxtyobih().getValue())) {
+            修正データ.get詳細データエリア().put(座標9_2, div.getYoshikiYonnoniMeisai().getTxtyobih().getValue());
         }
     }
 
@@ -727,58 +740,58 @@ public class KaigoHokenTokubetuKaikeiKeiriJyokyoRegist2 {
             KaigoHokenJigyoHokokuNenpo 修正データ,
             List<KaigoHokenJigyoHokokuNenpo> list,
             int i,
-            KaigoHokenTokubetuKaikeiKeiriJyokyoRegist2Div div) {
+            YoshikiYonnoniDiv div) {
 
-        if (!list.get(i).get詳細データエリア().get(座標10_1).equals(div.getYoshikiyonMeisai().getTxtkokko().getValue())) {
-            修正データ.get詳細データエリア().put(座標10_1, div.getYoshikiyonMeisai().getTxtkokko().getValue());
+        if (!list.get(i).get詳細データエリア().get(座標10_1).equals(div.getYoshikiYonnoniMeisai().getTxtkokko().getValue())) {
+            修正データ.get詳細データエリア().put(座標10_1, div.getYoshikiYonnoniMeisai().getTxtkokko().getValue());
         }
-        if (!list.get(i).get詳細データエリア().get(座標10_2).equals(div.getYoshikiyonMeisai().getTxtshoshishutsu().getValue())) {
-            修正データ.get詳細データエリア().put(座標10_2, div.getYoshikiyonMeisai().getTxtshoshishutsu().getValue());
+        if (!list.get(i).get詳細データエリア().get(座標10_2).equals(div.getYoshikiYonnoniMeisai().getTxtshoshishutsu().getValue())) {
+            修正データ.get詳細データエリア().put(座標10_2, div.getYoshikiYonnoniMeisai().getTxtshoshishutsu().getValue());
         }
-        if (!list.get(i).get詳細データエリア().get(座標11_1).equals(div.getYoshikiyonMeisai().getTxttodofuken().getValue())) {
-            修正データ.get詳細データエリア().put(座標11_1, div.getYoshikiyonMeisai().getTxttodofuken().getValue());
+        if (!list.get(i).get詳細データエリア().get(座標11_1).equals(div.getYoshikiYonnoniMeisai().getTxttodofuken().getValue())) {
+            修正データ.get詳細データエリア().put(座標11_1, div.getYoshikiYonnoniMeisai().getTxttodofuken().getValue());
         }
-        if (!list.get(i).get詳細データエリア().get(座標11_2).equals(div.getYoshikiyonMeisai().getTxthokenkanjokuridasu().getValue())) {
-            修正データ.get詳細データエリア().put(座標11_2, div.getYoshikiyonMeisai().getTxthokenkanjokuridasu().getValue());
+        if (!list.get(i).get詳細データエリア().get(座標11_2).equals(div.getYoshikiYonnoniMeisai().getTxthokenkanjokuridasu().getValue())) {
+            修正データ.get詳細データエリア().put(座標11_2, div.getYoshikiYonnoniMeisai().getTxthokenkanjokuridasu().getValue());
         }
-        if (!list.get(i).get詳細データエリア().get(座標12_1).equals(div.getYoshikiyonMeisai().getTxtzaisannyu().getValue())) {
-            修正データ.get詳細データエリア().put(座標12_1, div.getYoshikiyonMeisai().getTxtzaisannyu().getValue());
+        if (!list.get(i).get詳細データエリア().get(座標12_1).equals(div.getYoshikiYonnoniMeisai().getTxtzaisannyu().getValue())) {
+            修正データ.get詳細データエリア().put(座標12_1, div.getYoshikiYonnoniMeisai().getTxtzaisannyu().getValue());
         }
-        if (!list.get(i).get詳細データエリア().get(座標12_2).equals(div.getYoshikiyonMeisai().getTxtshosonota().getValue())) {
-            修正データ.get詳細データエリア().put(座標12_2, div.getYoshikiyonMeisai().getTxtshosonota().getValue());
+        if (!list.get(i).get詳細データエリア().get(座標12_2).equals(div.getYoshikiYonnoniMeisai().getTxtshosonota().getValue())) {
+            修正データ.get詳細データエリア().put(座標12_2, div.getYoshikiYonnoniMeisai().getTxtshosonota().getValue());
         }
-        if (!list.get(i).get詳細データエリア().get(座標13_1).equals(div.getYoshikiyonMeisai().getTxtkifukin().getValue())) {
-            修正データ.get詳細データエリア().put(座標13_1, div.getYoshikiyonMeisai().getTxtkifukin().getValue());
+        if (!list.get(i).get詳細データエリア().get(座標13_1).equals(div.getYoshikiYonnoniMeisai().getTxtkifukin().getValue())) {
+            修正データ.get詳細データエリア().put(座標13_1, div.getYoshikiYonnoniMeisai().getTxtkifukin().getValue());
         }
-        if (!list.get(i).get詳細データエリア().get(座標13_2).equals(div.getYoshikiyonMeisai().getTxtshohi().getValue())) {
-            修正データ.get詳細データエリア().put(座標13_2, div.getYoshikiyonMeisai().getTxtshohi().getValue());
+        if (!list.get(i).get詳細データエリア().get(座標13_2).equals(div.getYoshikiYonnoniMeisai().getTxtshohi().getValue())) {
+            修正データ.get詳細データエリア().put(座標13_2, div.getYoshikiYonnoniMeisai().getTxtshohi().getValue());
         }
-        if (!list.get(i).get詳細データエリア().get(座標14_1).equals(div.getYoshikiyonMeisai().getTxthokenkanjokirijigyo().getValue())) {
-            修正データ.get詳細データエリア().put(座標14_1, div.getYoshikiyonMeisai().getTxthokenkanjokirijigyo().getValue());
+        if (!list.get(i).get詳細データエリア().get(座標14_1).equals(div.getYoshikiYonnoniMeisai().getTxthokenkanjokirijigyo().getValue())) {
+            修正データ.get詳細データエリア().put(座標14_1, div.getYoshikiYonnoniMeisai().getTxthokenkanjokirijigyo().getValue());
         }
-        if (!list.get(i).get詳細データエリア().get(座標15_1).equals(div.getYoshikiyonMeisai().getTxtchiikishienyobo().getValue())) {
-            修正データ.get詳細データエリア().put(座標15_1, div.getYoshikiyonMeisai().getTxtchiikishienyobo().getValue());
+        if (!list.get(i).get詳細データエリア().get(座標15_1).equals(div.getYoshikiYonnoniMeisai().getTxtchiikishienyobo().getValue())) {
+            修正データ.get詳細データエリア().put(座標15_1, div.getYoshikiYonnoniMeisai().getTxtchiikishienyobo().getValue());
         }
-        if (!list.get(i).get詳細データエリア().get(座標16_1).equals(div.getYoshikiyonMeisai().getTxtkurikosu().getValue())) {
-            修正データ.get詳細データエリア().put(座標16_1, div.getYoshikiyonMeisai().getTxtkurikosu().getValue());
+        if (!list.get(i).get詳細データエリア().get(座標16_1).equals(div.getYoshikiYonnoniMeisai().getTxtkurikosu().getValue())) {
+            修正データ.get詳細データエリア().put(座標16_1, div.getYoshikiYonnoniMeisai().getTxtkurikosu().getValue());
         }
-        if (!list.get(i).get詳細データエリア().get(座標17_1).equals(div.getYoshikiyonMeisai().getTxtshichoson().getValue())) {
-            修正データ.get詳細データエリア().put(座標17_1, div.getYoshikiyonMeisai().getTxtshichoson().getValue());
+        if (!list.get(i).get詳細データエリア().get(座標17_1).equals(div.getYoshikiYonnoniMeisai().getTxtshichoson().getValue())) {
+            修正データ.get詳細データエリア().put(座標17_1, div.getYoshikiYonnoniMeisai().getTxtshichoson().getValue());
         }
-        if (!list.get(i).get詳細データエリア().get(座標18_1).equals(div.getYoshikiyonMeisai().getTxtshonyu().getValue())) {
-            修正データ.get詳細データエリア().put(座標18_1, div.getYoshikiyonMeisai().getTxtshonyu().getValue());
+        if (!list.get(i).get詳細データエリア().get(座標18_1).equals(div.getYoshikiYonnoniMeisai().getTxtshonyu().getValue())) {
+            修正データ.get詳細データエリア().put(座標18_1, div.getYoshikiYonnoniMeisai().getTxtshonyu().getValue());
         }
-        if (!list.get(i).get詳細データエリア().get(座標19_1).equals(div.getYoshikiyonMeisai().getTxtsainyugokei().getValue())) {
-            修正データ.get詳細データエリア().put(座標19_1, div.getYoshikiyonMeisai().getTxtsainyugokei().getValue());
+        if (!list.get(i).get詳細データエリア().get(座標19_1).equals(div.getYoshikiYonnoniMeisai().getTxtsainyugokei().getValue())) {
+            修正データ.get詳細データエリア().put(座標19_1, div.getYoshikiYonnoniMeisai().getTxtsainyugokei().getValue());
         }
-        if (!list.get(i).get詳細データエリア().get(座標19_2).equals(div.getYoshikiyonMeisai().getTxtsaishutsugokei().getValue())) {
-            修正データ.get詳細データエリア().put(座標19_2, div.getYoshikiyonMeisai().getTxtsaishutsugokei().getValue());
+        if (!list.get(i).get詳細データエリア().get(座標19_2).equals(div.getYoshikiYonnoniMeisai().getTxtsaishutsugokei().getValue())) {
+            修正データ.get詳細データエリア().put(座標19_2, div.getYoshikiYonnoniMeisai().getTxtsaishutsugokei().getValue());
         }
-        if (!list.get(i).get詳細データエリア().get(座標20_1).equals(div.getYoshikiyonMeisai().getTxtsainyushutsusa().getValue())) {
-            修正データ.get詳細データエリア().put(座標20_1, div.getYoshikiyonMeisai().getTxtsainyushutsusa().getValue());
+        if (!list.get(i).get詳細データエリア().get(座標20_1).equals(div.getYoshikiYonnoniMeisai().getTxtsainyushutsusa().getValue())) {
+            修正データ.get詳細データエリア().put(座標20_1, div.getYoshikiYonnoniMeisai().getTxtsainyushutsusa().getValue());
         }
-        if (!list.get(i).get詳細データエリア().get(座標21_1).equals(div.getYoshikiyonMeisai().getTxtuchikikinkurigaku().getValue())) {
-            修正データ.get詳細データエリア().put(座標21_1, div.getYoshikiyonMeisai().getTxtuchikikinkurigaku().getValue());
+        if (!list.get(i).get詳細データエリア().get(座標21_1).equals(div.getYoshikiYonnoniMeisai().getTxtuchikikinkurigaku().getValue())) {
+            修正データ.get詳細データエリア().put(座標21_1, div.getYoshikiYonnoniMeisai().getTxtuchikikinkurigaku().getValue());
         }
     }
 
@@ -786,60 +799,60 @@ public class KaigoHokenTokubetuKaikeiKeiriJyokyoRegist2 {
      * 入力項目いずれか空白ではない_前の判断。
      *
      */
-    private boolean 入力項目いずれか空白ではない_前(KaigoHokenTokubetuKaikeiKeiriJyokyoRegist2Div div) {
+    private boolean 入力項目いずれか空白ではない_前(YoshikiYonnoniDiv div) {
 
-        if (!RString.isNullOrEmpty(new RString(div.getYoshikiyonMeisai().getTxtkaigoshunyu().getValue().toString()))) {
-
-            return true;
-        } else if (!RString.isNullOrEmpty(new RString(div.getYoshikiyonMeisai().getTxtyoboshunyu().getValue().toString()))) {
+        if (div.getYoshikiYonnoniMeisai().getTxtkaigoshunyu().getValue() != null) {
 
             return true;
-        } else if (!RString.isNullOrEmpty(new RString(div.getYoshikiyonMeisai().getTxttokuteinyushoshunyu().getValue().toString()))) {
+        } else if (div.getYoshikiYonnoniMeisai().getTxtyoboshunyu().getValue() != null) {
 
             return true;
-        } else if (!RString.isNullOrEmpty(new RString(div.getYoshikiyonMeisai().getTxtjiki().getValue().toString()))) {
+        } else if (div.getYoshikiYonnoniMeisai().getTxttokuteinyushoshunyu().getValue() != null) {
 
             return true;
-        } else if (!RString.isNullOrEmpty(new RString(div.getYoshikiyonMeisai().getTxtsotashunyu().getValue().toString()))) {
+        } else if (div.getYoshikiYonnoniMeisai().getTxtjiki().getValue() != null) {
 
             return true;
-        } else if (!RString.isNullOrEmpty(new RString(div.getYoshikiyonMeisai().getTxtyoboshunyu().getValue().toString()))) {
+        } else if (div.getYoshikiYonnoniMeisai().getTxtsotashunyu().getValue() != null) {
 
             return true;
-        } else if (!RString.isNullOrEmpty(new RString(div.getYoshikiyonMeisai().getTxtfutankin().getValue().toString()))) {
+        } else if (div.getYoshikiYonnoniMeisai().getTxtyoboshunyu().getValue() != null) {
 
             return true;
-        } else if (!RString.isNullOrEmpty(new RString(div.getYoshikiyonMeisai().getTxtshiyohi().getValue().toString()))) {
+        } else if (div.getYoshikiYonnoniMeisai().getTxtfutankin().getValue() != null) {
 
             return true;
-        } else if (!RString.isNullOrEmpty(new RString(div.getYoshikiyonMeisai().getTxttesuryo().getValue().toString()))) {
+        } else if (div.getYoshikiYonnoniMeisai().getTxtshiyohi().getValue() != null) {
 
             return true;
-        } else if (!RString.isNullOrEmpty(new RString(div.getYoshikiyonMeisai().getTxtkokko().getValue().toString()))) {
+        } else if (div.getYoshikiYonnoniMeisai().getTxttesuryo().getValue() != null) {
 
             return true;
-        } else if (!RString.isNullOrEmpty(new RString(div.getYoshikiyonMeisai().getTxttodofuken().getValue().toString()))) {
+        } else if (div.getYoshikiYonnoniMeisai().getTxtkokko().getValue() != null) {
 
             return true;
-        } else if (!RString.isNullOrEmpty(new RString(div.getYoshikiyonMeisai().getTxtzaisannyu().getValue().toString()))) {
+        } else if (div.getYoshikiYonnoniMeisai().getTxttodofuken().getValue() != null) {
 
             return true;
-        } else if (!RString.isNullOrEmpty(new RString(div.getYoshikiyonMeisai().getTxtkifukin().getValue().toString()))) {
+        } else if (div.getYoshikiYonnoniMeisai().getTxtzaisannyu().getValue() != null) {
 
             return true;
-        } else if (!RString.isNullOrEmpty(new RString(div.getYoshikiyonMeisai().getTxthokenkanjokirijigyo().getValue().toString()))) {
+        } else if (div.getYoshikiYonnoniMeisai().getTxtkifukin().getValue() != null) {
 
             return true;
-        } else if (!RString.isNullOrEmpty(new RString(div.getYoshikiyonMeisai().getTxthokenkanjokirijigyo().getValue().toString()))) {
+        } else if (div.getYoshikiYonnoniMeisai().getTxthokenkanjokirijigyo().getValue() != null) {
 
             return true;
-        } else if (!RString.isNullOrEmpty(new RString(div.getYoshikiyonMeisai().getTxtchiikishienyobo().getValue().toString()))) {
+        } else if (div.getYoshikiYonnoniMeisai().getTxthokenkanjokirijigyo().getValue() != null) {
 
             return true;
-        } else if (!RString.isNullOrEmpty(new RString(div.getYoshikiyonMeisai().getTxtkurikosu().getValue().toString()))) {
+        } else if (div.getYoshikiYonnoniMeisai().getTxtchiikishienyobo().getValue() != null) {
 
             return true;
-        } else if (!RString.isNullOrEmpty(new RString(div.getYoshikiyonMeisai().getTxtshichoson().getValue().toString()))) {
+        } else if (div.getYoshikiYonnoniMeisai().getTxtkurikosu().getValue() != null) {
+
+            return true;
+        } else if (div.getYoshikiYonnoniMeisai().getTxtshichoson().getValue() != null) {
 
             return true;
         }
@@ -850,54 +863,54 @@ public class KaigoHokenTokubetuKaikeiKeiriJyokyoRegist2 {
      * 入力項目いずれか空白ではない_後の判断。
      *
      */
-    private boolean 入力項目いずれか空白ではない_後(KaigoHokenTokubetuKaikeiKeiriJyokyoRegist2Div div) {
+    private boolean 入力項目いずれか空白ではない_後(YoshikiYonnoniDiv div) {
 
-        if (!RString.isNullOrEmpty(new RString(div.getYoshikiyonMeisai().getTxtshonyu().getValue().toString()))) {
-
-            return true;
-        } else if (!RString.isNullOrEmpty(new RString(div.getYoshikiyonMeisai().getTxtsainyugokei().getValue().toString()))) {
+        if (div.getYoshikiYonnoniMeisai().getTxtshonyu().getValue() != null) {
 
             return true;
-        } else if (!RString.isNullOrEmpty(new RString(div.getYoshikiyonMeisai().getTxtsomu().getValue().toString()))) {
+        } else if (div.getYoshikiYonnoniMeisai().getTxtsainyugokei().getValue() != null) {
 
             return true;
-        } else if (!RString.isNullOrEmpty(new RString(div.getYoshikiyonMeisai().getTxtitakusabisu().getValue().toString()))) {
+        } else if (div.getYoshikiYonnoniMeisai().getTxtsomu().getValue() != null) {
 
             return true;
-        } else if (!RString.isNullOrEmpty(new RString(div.getYoshikiyonMeisai().getTxtmitchaku().getValue().toString()))) {
+        } else if (div.getYoshikiYonnoniMeisai().getTxtitakusabisu().getValue() != null) {
 
             return true;
-        } else if (!RString.isNullOrEmpty(new RString(div.getYoshikiyonMeisai().getTxtitakugaigoshien().getValue().toString()))) {
+        } else if (div.getYoshikiYonnoniMeisai().getTxtmitchaku().getValue() != null) {
 
             return true;
-        } else if (!RString.isNullOrEmpty(new RString(div.getYoshikiyonMeisai().getTxtjigyosota().getValue().toString()))) {
+        } else if (div.getYoshikiYonnoniMeisai().getTxtitakugaigoshien().getValue() != null) {
 
             return true;
-        } else if (!RString.isNullOrEmpty(new RString(div.getYoshikiyonMeisai().getTxtshisetsuseibi().getValue().toString()))) {
+        } else if (div.getYoshikiYonnoniMeisai().getTxtjigyosota().getValue() != null) {
 
             return true;
-        } else if (!RString.isNullOrEmpty(new RString(div.getYoshikiyonMeisai().getTxtkikinsekin().getValue().toString()))) {
+        } else if (div.getYoshikiYonnoniMeisai().getTxtshisetsuseibi().getValue() != null) {
 
             return true;
-        } else if (!RString.isNullOrEmpty(new RString(div.getYoshikiyonMeisai().getTxtkosai().getValue().toString()))) {
+        } else if (div.getYoshikiYonnoniMeisai().getTxtkikinsekin().getValue() != null) {
 
             return true;
-        } else if (!RString.isNullOrEmpty(new RString(div.getYoshikiyonMeisai().getTxtyobih().getValue().toString()))) {
+        } else if (div.getYoshikiYonnoniMeisai().getTxtkosai().getValue() != null) {
 
             return true;
-        } else if (!RString.isNullOrEmpty(new RString(div.getYoshikiyonMeisai().getTxtshoshishutsu().getValue().toString()))) {
+        } else if (div.getYoshikiYonnoniMeisai().getTxtyobih().getValue() != null) {
 
             return true;
-        } else if (!RString.isNullOrEmpty(new RString(div.getYoshikiyonMeisai().getTxthokenkanjokuridasu().getValue().toString()))) {
+        } else if (div.getYoshikiYonnoniMeisai().getTxtshoshishutsu().getValue() != null) {
 
             return true;
-        } else if (!RString.isNullOrEmpty(new RString(div.getYoshikiyonMeisai().getTxtshosonota().getValue().toString()))) {
+        } else if (div.getYoshikiYonnoniMeisai().getTxthokenkanjokuridasu().getValue() != null) {
 
             return true;
-        } else if (!RString.isNullOrEmpty(new RString(div.getYoshikiyonMeisai().getTxtshohi().getValue().toString()))) {
+        } else if (div.getYoshikiYonnoniMeisai().getTxtshosonota().getValue() != null) {
 
             return true;
-        } else if (!RString.isNullOrEmpty(new RString(div.getYoshikiyonMeisai().getTxtsaishutsugokei().getValue().toString()))) {
+        } else if (div.getYoshikiYonnoniMeisai().getTxtshohi().getValue() != null) {
+
+            return true;
+        } else if (div.getYoshikiYonnoniMeisai().getTxtsaishutsugokei().getValue() != null) {
 
             return true;
         }
@@ -908,10 +921,10 @@ public class KaigoHokenTokubetuKaikeiKeiriJyokyoRegist2 {
      * 介護保険特別会計経理状況詳細データの新規。
      *
      */
-    private ResponseData<KaigoHokenTokubetuKaikeiKeiriJyokyoRegist2Div> regKaigoHokenTokubetuKaikeiKeiriJyokyo(
+    private ResponseData<YoshikiYonnoniDiv> regKaigoHokenTokubetuKaikeiKeiriJyokyo(
             KaigoHokenJigyoHokokuNenpo kaigoHokenJigyoHokokuNenpo,
             KaigoHokenTokubetuKaikeiKeiriJyokyoRegistManager manager,
-            KaigoHokenTokubetuKaikeiKeiriJyokyoRegist2Div div) {
+            YoshikiYonnoniDiv div) {
 
         if (!ResponseHolder.isReRequest()) {
             QuestionMessage message = new QuestionMessage(UrQuestionMessages.処理実行の確認.getMessage().getCode(),
@@ -933,10 +946,10 @@ public class KaigoHokenTokubetuKaikeiKeiriJyokyoRegist2 {
      * 介護保険特別会計経理状況詳細データの修正新規。
      *
      */
-    private ResponseData<KaigoHokenTokubetuKaikeiKeiriJyokyoRegist2Div> regUpdKaigoHokenTokubetuKaikeiKeiriJyokyo(
+    private ResponseData<YoshikiYonnoniDiv> regUpdKaigoHokenTokubetuKaikeiKeiriJyokyo(
             KaigoHokenJigyoHokokuNenpo kaigoHokenJigyoHokokuNenpo,
             KaigoHokenTokubetuKaikeiKeiriJyokyoRegistManager manager,
-            KaigoHokenTokubetuKaikeiKeiriJyokyoRegist2Div div) {
+            YoshikiYonnoniDiv div) {
 
         if (!ResponseHolder.isReRequest()) {
             QuestionMessage message = new QuestionMessage(UrQuestionMessages.処理実行の確認.getMessage().getCode(),
@@ -958,10 +971,10 @@ public class KaigoHokenTokubetuKaikeiKeiriJyokyoRegist2 {
      * 介護保険特別会計経理状況詳細データの更新。
      *
      */
-    private ResponseData<KaigoHokenTokubetuKaikeiKeiriJyokyoRegist2Div> updKaigoHokenTokubetuKaikeiKeiriJyokyo(
+    private ResponseData<YoshikiYonnoniDiv> updKaigoHokenTokubetuKaikeiKeiriJyokyo(
             KaigoHokenJigyoHokokuNenpo kaigoHokenJigyoHokokuNenpo,
             KaigoHokenTokubetuKaikeiKeiriJyokyoRegistManager manager,
-            KaigoHokenTokubetuKaikeiKeiriJyokyoRegist2Div div) {
+            YoshikiYonnoniDiv div) {
 
         if (!ResponseHolder.isReRequest()) {
             QuestionMessage message = new QuestionMessage(UrQuestionMessages.処理実行の確認.getMessage().getCode(),
@@ -985,42 +998,42 @@ public class KaigoHokenTokubetuKaikeiKeiriJyokyoRegist2 {
      */
     private void put詳細データエリア(
             Map<RString, Decimal> 詳細データエリア,
-            KaigoHokenTokubetuKaikeiKeiriJyokyoRegist2Div div) {
+            YoshikiYonnoniDiv div) {
 
-        詳細データエリア.put(座標1_1, div.getYoshikiyonMeisai().getTxtkaigoshunyu().getValue());
-        詳細データエリア.put(座標1_2, div.getYoshikiyonMeisai().getTxtsomu().getValue());
-        詳細データエリア.put(座標2_1, div.getYoshikiyonMeisai().getTxtyoboshunyu().getValue());
-        詳細データエリア.put(座標2_2, div.getYoshikiyonMeisai().getTxtitakusabisu().getValue());
-        詳細データエリア.put(座標3_1, div.getYoshikiyonMeisai().getTxttokuteinyushoshunyu().getValue());
-        詳細データエリア.put(座標3_2, div.getYoshikiyonMeisai().getTxtmitchaku().getValue());
-        詳細データエリア.put(座標4_1, div.getYoshikiyonMeisai().getTxtjiki().getValue());
-        詳細データエリア.put(座標4_2, div.getYoshikiyonMeisai().getTxtitakugaigoshien().getValue());
-        詳細データエリア.put(座標5_1, div.getYoshikiyonMeisai().getTxtsotashunyu().getValue());
-        詳細データエリア.put(座標5_2, div.getYoshikiyonMeisai().getTxtjigyosota().getValue());
-        詳細データエリア.put(座標6_1, div.getYoshikiyonMeisai().getTxtbuntankin().getValue());
-        詳細データエリア.put(座標6_2, div.getYoshikiyonMeisai().getTxtshisetsuseibi().getValue());
-        詳細データエリア.put(座標7_1, div.getYoshikiyonMeisai().getTxtfutankin().getValue());
-        詳細データエリア.put(座標7_2, div.getYoshikiyonMeisai().getTxtkikinsekin().getValue());
-        詳細データエリア.put(座標8_1, div.getYoshikiyonMeisai().getTxtshiyohi().getValue());
-        詳細データエリア.put(座標8_2, div.getYoshikiyonMeisai().getTxtkosai().getValue());
-        詳細データエリア.put(座標9_1, div.getYoshikiyonMeisai().getTxttesuryo().getValue());
-        詳細データエリア.put(座標9_2, div.getYoshikiyonMeisai().getTxtyobih().getValue());
-        詳細データエリア.put(座標10_1, div.getYoshikiyonMeisai().getTxtkokko().getValue());
-        詳細データエリア.put(座標10_2, div.getYoshikiyonMeisai().getTxtshoshishutsu().getValue());
-        詳細データエリア.put(座標11_1, div.getYoshikiyonMeisai().getTxttodofuken().getValue());
-        詳細データエリア.put(座標11_2, div.getYoshikiyonMeisai().getTxthokenkanjokuridasu().getValue());
-        詳細データエリア.put(座標12_1, div.getYoshikiyonMeisai().getTxtzaisannyu().getValue());
-        詳細データエリア.put(座標12_2, div.getYoshikiyonMeisai().getTxtshosonota().getValue());
-        詳細データエリア.put(座標13_1, div.getYoshikiyonMeisai().getTxtkifukin().getValue());
-        詳細データエリア.put(座標13_2, div.getYoshikiyonMeisai().getTxtshohi().getValue());
-        詳細データエリア.put(座標14_1, div.getYoshikiyonMeisai().getTxthokenkanjokirijigyo().getValue());
-        詳細データエリア.put(座標15_1, div.getYoshikiyonMeisai().getTxtchiikishienyobo().getValue());
-        詳細データエリア.put(座標16_1, div.getYoshikiyonMeisai().getTxtkurikosu().getValue());
-        詳細データエリア.put(座標17_1, div.getYoshikiyonMeisai().getTxtshichoson().getValue());
-        詳細データエリア.put(座標18_1, div.getYoshikiyonMeisai().getTxtshonyu().getValue());
-        詳細データエリア.put(座標19_1, div.getYoshikiyonMeisai().getTxtsainyugokei().getValue());
-        詳細データエリア.put(座標19_2, div.getYoshikiyonMeisai().getTxtsaishutsugokei().getValue());
-        詳細データエリア.put(座標20_1, div.getYoshikiyonMeisai().getTxtsainyushutsusa().getValue());
-        詳細データエリア.put(座標21_1, div.getYoshikiyonMeisai().getTxtuchikikinkurigaku().getValue());
+        詳細データエリア.put(座標1_1, div.getYoshikiYonnoniMeisai().getTxtkaigoshunyu().getValue());
+        詳細データエリア.put(座標1_2, div.getYoshikiYonnoniMeisai().getTxtsomu().getValue());
+        詳細データエリア.put(座標2_1, div.getYoshikiYonnoniMeisai().getTxtyoboshunyu().getValue());
+        詳細データエリア.put(座標2_2, div.getYoshikiYonnoniMeisai().getTxtitakusabisu().getValue());
+        詳細データエリア.put(座標3_1, div.getYoshikiYonnoniMeisai().getTxttokuteinyushoshunyu().getValue());
+        詳細データエリア.put(座標3_2, div.getYoshikiYonnoniMeisai().getTxtmitchaku().getValue());
+        詳細データエリア.put(座標4_1, div.getYoshikiYonnoniMeisai().getTxtjiki().getValue());
+        詳細データエリア.put(座標4_2, div.getYoshikiYonnoniMeisai().getTxtitakugaigoshien().getValue());
+        詳細データエリア.put(座標5_1, div.getYoshikiYonnoniMeisai().getTxtsotashunyu().getValue());
+        詳細データエリア.put(座標5_2, div.getYoshikiYonnoniMeisai().getTxtjigyosota().getValue());
+        詳細データエリア.put(座標6_1, div.getYoshikiYonnoniMeisai().getTxtbuntankin().getValue());
+        詳細データエリア.put(座標6_2, div.getYoshikiYonnoniMeisai().getTxtshisetsuseibi().getValue());
+        詳細データエリア.put(座標7_1, div.getYoshikiYonnoniMeisai().getTxtfutankin().getValue());
+        詳細データエリア.put(座標7_2, div.getYoshikiYonnoniMeisai().getTxtkikinsekin().getValue());
+        詳細データエリア.put(座標8_1, div.getYoshikiYonnoniMeisai().getTxtshiyohi().getValue());
+        詳細データエリア.put(座標8_2, div.getYoshikiYonnoniMeisai().getTxtkosai().getValue());
+        詳細データエリア.put(座標9_1, div.getYoshikiYonnoniMeisai().getTxttesuryo().getValue());
+        詳細データエリア.put(座標9_2, div.getYoshikiYonnoniMeisai().getTxtyobih().getValue());
+        詳細データエリア.put(座標10_1, div.getYoshikiYonnoniMeisai().getTxtkokko().getValue());
+        詳細データエリア.put(座標10_2, div.getYoshikiYonnoniMeisai().getTxtshoshishutsu().getValue());
+        詳細データエリア.put(座標11_1, div.getYoshikiYonnoniMeisai().getTxttodofuken().getValue());
+        詳細データエリア.put(座標11_2, div.getYoshikiYonnoniMeisai().getTxthokenkanjokuridasu().getValue());
+        詳細データエリア.put(座標12_1, div.getYoshikiYonnoniMeisai().getTxtzaisannyu().getValue());
+        詳細データエリア.put(座標12_2, div.getYoshikiYonnoniMeisai().getTxtshosonota().getValue());
+        詳細データエリア.put(座標13_1, div.getYoshikiYonnoniMeisai().getTxtkifukin().getValue());
+        詳細データエリア.put(座標13_2, div.getYoshikiYonnoniMeisai().getTxtshohi().getValue());
+        詳細データエリア.put(座標14_1, div.getYoshikiYonnoniMeisai().getTxthokenkanjokirijigyo().getValue());
+        詳細データエリア.put(座標15_1, div.getYoshikiYonnoniMeisai().getTxtchiikishienyobo().getValue());
+        詳細データエリア.put(座標16_1, div.getYoshikiYonnoniMeisai().getTxtkurikosu().getValue());
+        詳細データエリア.put(座標17_1, div.getYoshikiYonnoniMeisai().getTxtshichoson().getValue());
+        詳細データエリア.put(座標18_1, div.getYoshikiYonnoniMeisai().getTxtshonyu().getValue());
+        詳細データエリア.put(座標19_1, div.getYoshikiYonnoniMeisai().getTxtsainyugokei().getValue());
+        詳細データエリア.put(座標19_2, div.getYoshikiYonnoniMeisai().getTxtsaishutsugokei().getValue());
+        詳細データエリア.put(座標20_1, div.getYoshikiYonnoniMeisai().getTxtsainyushutsusa().getValue());
+        詳細データエリア.put(座標21_1, div.getYoshikiYonnoniMeisai().getTxtuchikikinkurigaku().getValue());
     }
 }

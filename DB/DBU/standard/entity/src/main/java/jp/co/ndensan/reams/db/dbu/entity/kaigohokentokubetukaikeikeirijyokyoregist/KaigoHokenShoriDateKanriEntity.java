@@ -5,6 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbu.entity.kaigohokentokubetukaikeikeirijyokyoregist;
 
+import java.io.Serializable;
 import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.kyotsu.JigyoHokokuNenpoShoriName;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
@@ -21,8 +22,9 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 @lombok.Getter
 @lombok.Setter
 @SuppressWarnings("PMD.UnusedPrivateField")
-public class KaigoHokenShoriDateKanriEntity {
+public class KaigoHokenShoriDateKanriEntity implements Serializable {
 
+    private static final long serialVersionUID = 1L;
     private SubGyomuCode サブ業務コード;
     private LasdecCode 市町村コード;
     private JigyoHokokuNenpoShoriName 処理名;

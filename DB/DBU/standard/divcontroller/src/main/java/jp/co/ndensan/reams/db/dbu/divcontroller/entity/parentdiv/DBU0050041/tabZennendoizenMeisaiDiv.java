@@ -15,15 +15,15 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.TabPanel;
  * @author 自動生成
  */
 public class tabZennendoizenMeisaiDiv extends TabPanel {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2015-11-30_08-54-50">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-01-15_09-59-03">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
      * コントロール名とフィールド名を取得する
      * private + コントロール名 + フィールド名 の文字列を作成
      */
-    @JsonProperty("tblZennendoizen")
-    private tblZennendoizenDiv tblZennendoizen;
+    @JsonProperty("tplZennendoizen")
+    private tplZennendoizenDiv tplZennendoizen;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -32,21 +32,21 @@ public class tabZennendoizenMeisaiDiv extends TabPanel {
      * フィールド名のGetterとSetter を作成
      */
     /*
-     * gettblZennendoizen
-     * @return tblZennendoizen
+     * gettplZennendoizen
+     * @return tplZennendoizen
      */
-    @JsonProperty("tblZennendoizen")
-    public tblZennendoizenDiv getTblZennendoizen() {
-        return tblZennendoizen;
+    @JsonProperty("tplZennendoizen")
+    public tplZennendoizenDiv getTplZennendoizen() {
+        return tplZennendoizen;
     }
 
     /*
-     * settblZennendoizen
-     * @param tblZennendoizen tblZennendoizen
+     * settplZennendoizen
+     * @param tplZennendoizen tplZennendoizen
      */
-    @JsonProperty("tblZennendoizen")
-    public void setTblZennendoizen(tblZennendoizenDiv tblZennendoizen) {
-        this.tblZennendoizen = tblZennendoizen;
+    @JsonProperty("tplZennendoizen")
+    public void setTplZennendoizen(tplZennendoizenDiv tplZennendoizen) {
+        this.tplZennendoizen = tplZennendoizen;
     }
 
     /*
@@ -54,177 +54,177 @@ public class tabZennendoizenMeisaiDiv extends TabPanel {
      */
     @JsonIgnore
     public Label getLblsainyu() {
-        return this.getTblZennendoizen().getLblsainyu();
+        return this.getTplZennendoizen().getLblsainyu();
     }
 
     @JsonIgnore
     public Label getLblsainyuseisan() {
-        return this.getTblZennendoizen().getLblsainyuseisan();
+        return this.getTplZennendoizen().getLblsainyuseisan();
     }
 
     @JsonIgnore
     public Label getSpc1() {
-        return this.getTblZennendoizen().getSpc1();
+        return this.getTplZennendoizen().getSpc1();
     }
 
     @JsonIgnore
     public Label getLblsaishutsu() {
-        return this.getTblZennendoizen().getLblsaishutsu();
+        return this.getTplZennendoizen().getLblsaishutsu();
     }
 
     @JsonIgnore
     public Label getLblkamoku() {
-        return this.getTblZennendoizen().getLblkamoku();
+        return this.getTplZennendoizen().getLblkamoku();
     }
 
     @JsonIgnore
     public Label getLblsainkakyufuhifukin() {
-        return this.getTblZennendoizen().getLblsainkakyufuhifukin();
+        return this.getTplZennendoizen().getLblsainkakyufuhifukin();
     }
 
     @JsonIgnore
     public TextBoxNum getTxtsainkakyufuhifukin() {
-        return this.getTblZennendoizen().getTxtsainkakyufuhifukin();
+        return this.getTplZennendoizen().getTxtsainkakyufuhifukin();
     }
 
     @JsonIgnore
     public TextBoxNum getTxtsaitkakyufuhifukin() {
-        return this.getTblZennendoizen().getTxtsaitkakyufuhifukin();
+        return this.getTplZennendoizen().getTxtsaitkakyufuhifukin();
     }
 
     @JsonIgnore
     public Label getLblkaigohokenryo() {
-        return this.getTblZennendoizen().getLblkaigohokenryo();
+        return this.getTplZennendoizen().getLblkaigohokenryo();
     }
 
     @JsonIgnore
     public TextBoxNum getTxtsainchoseikofukin() {
-        return this.getTblZennendoizen().getTxtsainchoseikofukin();
+        return this.getTplZennendoizen().getTxtsainchoseikofukin();
     }
 
     @JsonIgnore
     public TextBoxNum getTxtsaitchoseikofukin() {
-        return this.getTblZennendoizen().getTxtsaitchoseikofukin();
+        return this.getTplZennendoizen().getTxtsaitchoseikofukin();
     }
 
     @JsonIgnore
     public Label getLblfuntannintei() {
-        return this.getTblZennendoizen().getLblfuntannintei();
+        return this.getTplZennendoizen().getLblfuntannintei();
     }
 
     @JsonIgnore
     public TextBoxNum getTxtsainchiikishienkin() {
-        return this.getTblZennendoizen().getTxtsainchiikishienkin();
+        return this.getTplZennendoizen().getTxtsainchiikishienkin();
     }
 
     @JsonIgnore
     public TextBoxNum getTxtsaitchiikishienkin() {
-        return this.getTblZennendoizen().getTxtsaitchiikishienkin();
+        return this.getTplZennendoizen().getTxtsaitchiikishienkin();
     }
 
     @JsonIgnore
     public Label getLblshiharaikikinkofuki() {
-        return this.getTblZennendoizen().getLblshiharaikikinkofuki();
+        return this.getTplZennendoizen().getLblshiharaikikinkofuki();
     }
 
     @JsonIgnore
     public Label getLblfuntansonota() {
-        return this.getTblZennendoizen().getLblfuntansonota();
+        return this.getTplZennendoizen().getLblfuntansonota();
     }
 
     @JsonIgnore
     public TextBoxNum getTxtsainkaigokyufuhikokin() {
-        return this.getTblZennendoizen().getTxtsainkaigokyufuhikokin();
+        return this.getTplZennendoizen().getTxtsainkaigokyufuhikokin();
     }
 
     @JsonIgnore
     public TextBoxNum getTxtsaitkaigokyufuhikokin() {
-        return this.getTblZennendoizen().getTxtsaitkaigokyufuhikokin();
+        return this.getTplZennendoizen().getTxtsaitkaigokyufuhikokin();
     }
 
     @JsonIgnore
     public Label getLblsainchiikishienkofukin() {
-        return this.getTblZennendoizen().getLblsainchiikishienkofukin();
+        return this.getTplZennendoizen().getLblsainchiikishienkofukin();
     }
 
     @JsonIgnore
     public TextBoxNum getTxtsainchiikishienkofukin() {
-        return this.getTblZennendoizen().getTxtsainchiikishienkofukin();
+        return this.getTplZennendoizen().getTxtsainchiikishienkofukin();
     }
 
     @JsonIgnore
     public TextBoxNum getTxtsaitchiikishienkofukin() {
-        return this.getTblZennendoizen().getTxtsaitchiikishienkofukin();
+        return this.getTplZennendoizen().getTxtsaitchiikishienkofukin();
     }
 
     @JsonIgnore
     public Label getLbltodofukenkin() {
-        return this.getTblZennendoizen().getLbltodofukenkin();
+        return this.getTplZennendoizen().getLbltodofukenkin();
     }
 
     @JsonIgnore
     public Label getLbltodofukenki() {
-        return this.getTblZennendoizen().getLbltodofukenki();
+        return this.getTplZennendoizen().getLbltodofukenki();
     }
 
     @JsonIgnore
     public TextBoxNum getTxtsaintodofukenfutankin() {
-        return this.getTblZennendoizen().getTxtsaintodofukenfutankin();
+        return this.getTplZennendoizen().getTxtsaintodofukenfutankin();
     }
 
     @JsonIgnore
     public TextBoxNum getTxtsaittodofukenfutankin() {
-        return this.getTblZennendoizen().getTxtsaittodofukenfutankin();
+        return this.getTplZennendoizen().getTxtsaittodofukenfutankin();
     }
 
     @JsonIgnore
     public Label getLblchiikishienjigyokofukin() {
-        return this.getTblZennendoizen().getLblchiikishienjigyokofukin();
+        return this.getTplZennendoizen().getLblchiikishienjigyokofukin();
     }
 
     @JsonIgnore
     public TextBoxNum getTxtsainchiikishienjkin() {
-        return this.getTblZennendoizen().getTxtsainchiikishienjkin();
+        return this.getTplZennendoizen().getTxtsainchiikishienjkin();
     }
 
     @JsonIgnore
     public TextBoxNum getTxtsaitchiikishienjkin() {
-        return this.getTblZennendoizen().getTxtsaitchiikishienjkin();
+        return this.getTplZennendoizen().getTxtsaitchiikishienjkin();
     }
 
     @JsonIgnore
     public Label getLblsainyukin() {
-        return this.getTblZennendoizen().getLblsainyukin();
+        return this.getTplZennendoizen().getLblsainyukin();
     }
 
     @JsonIgnore
     public Label getLblsainippankaiekikin() {
-        return this.getTblZennendoizen().getLblsainippankaiekikin();
+        return this.getTplZennendoizen().getLblsainippankaiekikin();
     }
 
     @JsonIgnore
     public TextBoxNum getTxtsainippankaiekikin() {
-        return this.getTblZennendoizen().getTxtsainippankaiekikin();
+        return this.getTplZennendoizen().getTxtsainippankaiekikin();
     }
 
     @JsonIgnore
     public TextBoxNum getTxtsaitippankaiekikin() {
-        return this.getTblZennendoizen().getTxtsaitippankaiekikin();
+        return this.getTplZennendoizen().getTxtsaitippankaiekikin();
     }
 
     @JsonIgnore
     public Label getLblshiryooyobitesuryo() {
-        return this.getTblZennendoizen().getLblshiryooyobitesuryo();
+        return this.getTplZennendoizen().getLblshiryooyobitesuryo();
     }
 
     @JsonIgnore
     public TextBoxNum getTxtshiyohigokei() {
-        return this.getTblZennendoizen().getTxtshiyohigokei();
+        return this.getTplZennendoizen().getTxtshiyohigokei();
     }
 
     @JsonIgnore
     public TextBoxNum getTxtsaishutsugokei() {
-        return this.getTblZennendoizen().getTxtsaishutsugokei();
+        return this.getTplZennendoizen().getTxtsaishutsugokei();
     }
 
     // </editor-fold>

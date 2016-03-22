@@ -5,11 +5,12 @@
  */
 package jp.co.ndensan.reams.db.dbu.divcontroller.controller.parentdiv.dbu0050041;
 
-import static jp.co.ndensan.reams.db.dbu.divcontroller.entity.parentdiv.DBU0050021.DBU0050021TransitionEventName.様式４の２;
+import jp.co.ndensan.reams.db.dbu.divcontroller.entity.parentdiv.DBU0050031.DBU0050031StateName;
 import jp.co.ndensan.reams.db.dbu.divcontroller.entity.parentdiv.DBU0050031.DBU0050031TransitionEventName;
 import static jp.co.ndensan.reams.db.dbu.divcontroller.entity.parentdiv.DBU0050031.DBU0050031TransitionEventName.検索に戻る;
 import jp.co.ndensan.reams.db.dbu.divcontroller.entity.parentdiv.DBU0050041.DBU0050041StateName;
-import jp.co.ndensan.reams.db.dbu.divcontroller.entity.parentdiv.DBU0050041.KaigoHokenTokubetuKaikeiKeiriJyokyoRegist3Div;
+import jp.co.ndensan.reams.db.dbu.divcontroller.entity.parentdiv.DBU0050041.DBU0050041TransitionEventName;
+import jp.co.ndensan.reams.db.dbu.divcontroller.entity.parentdiv.DBU0050041.YoshikiYonnosanDiv;
 import jp.co.ndensan.reams.db.dbu.divcontroller.handler.parentdiv.dbu0050041.KaigoHokenTokubetuKaikeiKeiriJyokyoRegist3Handler;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrQuestionMessages;
@@ -23,11 +24,12 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.ResponseHolder;
  *
  * 介護保険特別会計経理状況登録_様式４の３情報Divを制御します。
  */
-public class KaigoHokenTokubetuKaikeiKeiriJyokyoRegist3 {
+public class YoshikiYonnosan {
 
     private static final RString 内部処理モード_修正新規 = new RString("修正新規");
     private static final RString 内部処理モード_修正 = new RString("修正");
     private static final RString 内部処理モード_追加 = new RString("追加");
+    private static final RString 内部処理モード_削除 = new RString("削除");
     private static final RString 画面表示_修正 = new RString("修正");
     private static final RString 画面表示_追加 = new RString("追加");
     private static final RString 前年度以前データ = new RString("前年度以前データ");
@@ -37,41 +39,50 @@ public class KaigoHokenTokubetuKaikeiKeiriJyokyoRegist3 {
     /**
      * 介護保険特別会計経理状況登録_様式４の３を画面初期化処理しました。
      *
-     * @param div {@link KaigoHokenTokubetuKaikeiKeiriJyokyoRegist3Div 介護保険特別会計経理状況登録_様式４の３情報Div}
+     * @param div {@link YoshikiYonnosanDiv 介護保険特別会計経理状況登録_様式４の３情報Div}
      * @return 介護保険特別会計経理状況登録_様式４の３情報Divを持つResponseData
      */
-    public ResponseData<KaigoHokenTokubetuKaikeiKeiriJyokyoRegist3Div> onload(KaigoHokenTokubetuKaikeiKeiriJyokyoRegist3Div div) {
+    public ResponseData<YoshikiYonnosanDiv> onload(YoshikiYonnosanDiv div) {
         KaigoHokenTokubetuKaikeiKeiriJyokyoRegist3Handler handler = getHandler(div);
         handler.onload();
         if (画面表示_追加.equals(handler.get画面表示())) {
-            return ResponseData.of(div).setState(DBU0050041StateName.add);
+            return ResponseData.of(div).setState(DBU0050041StateName.追加状態);
         } else if (画面表示_修正.equals(handler.get画面表示())) {
-            return ResponseData.of(div).setState(DBU0050041StateName.mod);
+            return ResponseData.of(div).setState(DBU0050041StateName.修正状態);
         } else {
-            return ResponseData.of(div).setState(DBU0050041StateName.del);
+            return ResponseData.of(div).setState(DBU0050041StateName.削除状態);
         }
     }
 
     /**
      * 「様式４」ボタンを押下する。<br/>
      *
-     * @param div {@link KaigoHokenTokubetuKaikeiKeiriJyokyoRegist3Div 介護保険特別会計経理状況登録_様式４の３情報Div}
+     * @param div {@link YoshikiYonnosanDiv 介護保険特別会計経理状況登録_様式４の３情報Div}
      * @return 介護保険特別会計経理状況登録_様式４の３情報Divを持つResponseData
      */
-    public ResponseData<KaigoHokenTokubetuKaikeiKeiriJyokyoRegist3Div> onClick_btnYoshikiyonno(
-            KaigoHokenTokubetuKaikeiKeiriJyokyoRegist3Div div) {
-        ResponseData<KaigoHokenTokubetuKaikeiKeiriJyokyoRegist3Div> responseData = null;
+    public ResponseData<YoshikiYonnosanDiv> onClick_btnYoshikiyonno(YoshikiYonnosanDiv div) {
+        ResponseData<YoshikiYonnosanDiv> responseData = null;
         if (!ResponseHolder.isReRequest()) {
             responseData = getResponseData_btnYoshikiyonno(div);
         }
         if (responseData != null) {
             return responseData;
         }
-        return ResponseData.of(div).forwardWithEventName(DBU0050031TransitionEventName.様式４).respond();
+        RString state = ResponseHolder.getState();
+        if (DBU0050031StateName.追加状態.getName().equals(state)) {
+            return ResponseData.of(div).forwardWithEventName(DBU0050041TransitionEventName.様式４).parameter(内部処理モード_追加);
+        }
+        if (DBU0050031StateName.修正状態.getName().equals(state)) {
+            return ResponseData.of(div).forwardWithEventName(DBU0050041TransitionEventName.様式４).parameter(内部処理モード_修正);
+        }
+        if (DBU0050031StateName.削除状態.getName().equals(state)) {
+            return ResponseData.of(div).forwardWithEventName(DBU0050041TransitionEventName.様式４).parameter(内部処理モード_削除);
+        }
+        return ResponseData.of(div).respond();
     }
 
-    private ResponseData<KaigoHokenTokubetuKaikeiKeiriJyokyoRegist3Div> getResponseData_btnYoshikiyonno(
-            KaigoHokenTokubetuKaikeiKeiriJyokyoRegist3Div div) {
+    private ResponseData<YoshikiYonnosanDiv> getResponseData_btnYoshikiyonno(
+            YoshikiYonnosanDiv div) {
         KaigoHokenTokubetuKaikeiKeiriJyokyoRegist3Handler handler = getHandler(div);
         RString 内部処理モード = handler.get内部処理モード();
         QuestionMessage message = new QuestionMessage(
@@ -92,23 +103,33 @@ public class KaigoHokenTokubetuKaikeiKeiriJyokyoRegist3 {
     /**
      * 「様式４の２」ボタンを押下する。<br/>
      *
-     * @param div {@link KaigoHokenTokubetuKaikeiKeiriJyokyoRegist3Div 介護保険特別会計経理状況登録_様式４の３情報Div}
+     * @param div {@link YoshikiYonnosanDiv 介護保険特別会計経理状況登録_様式４の３情報Div}
      * @return 介護保険特別会計経理状況登録_様式４の３情報Divを持つResponseData
      */
-    public ResponseData<KaigoHokenTokubetuKaikeiKeiriJyokyoRegist3Div> onClick_btnYoshikiyonnoni(
-            KaigoHokenTokubetuKaikeiKeiriJyokyoRegist3Div div) {
-        ResponseData<KaigoHokenTokubetuKaikeiKeiriJyokyoRegist3Div> responseData = null;
+    public ResponseData<YoshikiYonnosanDiv> onClick_btnYoshikiyonnoni(
+            YoshikiYonnosanDiv div) {
+        ResponseData<YoshikiYonnosanDiv> responseData = null;
         if (!ResponseHolder.isReRequest()) {
             responseData = getResponseData_btnYoshikiyonnoni(div);
         }
         if (responseData != null) {
             return responseData;
         }
-        return ResponseData.of(div).forwardWithEventName(様式４の２).respond();
+        RString state = ResponseHolder.getState();
+        if (DBU0050031StateName.追加状態.getName().equals(state)) {
+            return ResponseData.of(div).forwardWithEventName(DBU0050041TransitionEventName.様式４の２).parameter(内部処理モード_追加);
+        }
+        if (DBU0050031StateName.修正状態.getName().equals(state)) {
+            return ResponseData.of(div).forwardWithEventName(DBU0050041TransitionEventName.様式４の２).parameter(内部処理モード_修正);
+        }
+        if (DBU0050031StateName.削除状態.getName().equals(state)) {
+            return ResponseData.of(div).forwardWithEventName(DBU0050041TransitionEventName.様式４の２).parameter(内部処理モード_削除);
+        }
+        return ResponseData.of(div).respond();
     }
 
-    private ResponseData<KaigoHokenTokubetuKaikeiKeiriJyokyoRegist3Div> getResponseData_btnYoshikiyonnoni(
-            KaigoHokenTokubetuKaikeiKeiriJyokyoRegist3Div div) {
+    private ResponseData<YoshikiYonnosanDiv> getResponseData_btnYoshikiyonnoni(
+            YoshikiYonnosanDiv div) {
         KaigoHokenTokubetuKaikeiKeiriJyokyoRegist3Handler handler = getHandler(div);
         RString 内部処理モード = handler.get内部処理モード();
         QuestionMessage message = new QuestionMessage(
@@ -130,10 +151,10 @@ public class KaigoHokenTokubetuKaikeiKeiriJyokyoRegist3 {
     /**
      * 「報告年度」フォーカスロスト処理する。<br/>
      *
-     * @param div {@link KaigoHokenTokubetuKaikeiKeiriJyokyoRegist3Div 介護保険特別会計経理状況登録_様式４の３情報Div}
+     * @param div {@link YoshikiYonnosanDiv 介護保険特別会計経理状況登録_様式４の３情報Div}
      * @return 介護保険特別会計経理状況登録_様式４の３情報Divを持つResponseData
      */
-    public ResponseData<KaigoHokenTokubetuKaikeiKeiriJyokyoRegist3Div> lostFocus(KaigoHokenTokubetuKaikeiKeiriJyokyoRegist3Div div) {
+    public ResponseData<YoshikiYonnosanDiv> lostFocus(YoshikiYonnosanDiv div) {
         getHandler(div).lostFocus();
         return ResponseData.of(div).respond();
     }
@@ -141,10 +162,10 @@ public class KaigoHokenTokubetuKaikeiKeiriJyokyoRegist3 {
     /**
      * 「報告年度を確定する」ボタンを押下する。<br/>
      *
-     * @param div {@link KaigoHokenTokubetuKaikeiKeiriJyokyoRegist3Div 介護保険特別会計経理状況登録_様式４の３情報Div}
+     * @param div {@link YoshikiYonnosanDiv 介護保険特別会計経理状況登録_様式４の３情報Div}
      * @return 介護保険特別会計経理状況登録_様式４の３情報Divを持つResponseData
      */
-    public ResponseData<KaigoHokenTokubetuKaikeiKeiriJyokyoRegist3Div> onClick_btnConfirm(KaigoHokenTokubetuKaikeiKeiriJyokyoRegist3Div div) {
+    public ResponseData<YoshikiYonnosanDiv> onClick_btnConfirm(YoshikiYonnosanDiv div) {
         getHandler(div).onClick_btnConfirm();
         return ResponseData.of(div).respond();
     }
@@ -152,11 +173,11 @@ public class KaigoHokenTokubetuKaikeiKeiriJyokyoRegist3 {
     /**
      * 「追加をやめる」ボタンを押下する。<br/>
      *
-     * @param div {@link KaigoHokenTokubetuKaikeiKeiriJyokyoRegist3Div 介護保険特別会計経理状況登録_様式４の３情報Div}
+     * @param div {@link YoshikiYonnosanDiv 介護保険特別会計経理状況登録_様式４の３情報Div}
      * @return 介護保険特別会計経理状況登録_様式４の３情報Divを持つResponseData
      */
-    public ResponseData<KaigoHokenTokubetuKaikeiKeiriJyokyoRegist3Div> onClick_btnAddUpdate(KaigoHokenTokubetuKaikeiKeiriJyokyoRegist3Div div) {
-        ResponseData<KaigoHokenTokubetuKaikeiKeiriJyokyoRegist3Div> responseData = null;
+    public ResponseData<YoshikiYonnosanDiv> onClick_btnAddUpdate(YoshikiYonnosanDiv div) {
+        ResponseData<YoshikiYonnosanDiv> responseData = null;
         if (!ResponseHolder.isReRequest()) {
             KaigoHokenTokubetuKaikeiKeiriJyokyoRegist3Handler handler = getHandler(div);
             QuestionMessage message = new QuestionMessage(
@@ -176,11 +197,11 @@ public class KaigoHokenTokubetuKaikeiKeiriJyokyoRegist3 {
     /**
      * 「修正をやめる」ボタンを押下する。<br/>
      *
-     * @param div {@link KaigoHokenTokubetuKaikeiKeiriJyokyoRegist3Div 介護保険特別会計経理状況登録_様式４の３情報Div}
+     * @param div {@link YoshikiYonnosanDiv 介護保険特別会計経理状況登録_様式４の３情報Div}
      * @return 介護保険特別会計経理状況登録_様式４の３情報Divを持つResponseData
      */
-    public ResponseData<KaigoHokenTokubetuKaikeiKeiriJyokyoRegist3Div> onClick_btnModUpdate(KaigoHokenTokubetuKaikeiKeiriJyokyoRegist3Div div) {
-        ResponseData<KaigoHokenTokubetuKaikeiKeiriJyokyoRegist3Div> responseData = null;
+    public ResponseData<YoshikiYonnosanDiv> onClick_btnModUpdate(YoshikiYonnosanDiv div) {
+        ResponseData<YoshikiYonnosanDiv> responseData = null;
         if (!ResponseHolder.isReRequest()) {
             responseData = getResponseData_btnModUpdate(div);
         }
@@ -190,8 +211,8 @@ public class KaigoHokenTokubetuKaikeiKeiriJyokyoRegist3 {
         return ResponseData.of(div).forwardWithEventName(検索に戻る).respond();
     }
 
-    private ResponseData<KaigoHokenTokubetuKaikeiKeiriJyokyoRegist3Div> getResponseData_btnModUpdate(
-            KaigoHokenTokubetuKaikeiKeiriJyokyoRegist3Div div) {
+    private ResponseData<YoshikiYonnosanDiv> getResponseData_btnModUpdate(
+            YoshikiYonnosanDiv div) {
         KaigoHokenTokubetuKaikeiKeiriJyokyoRegist3Handler handler = getHandler(div);
         RString 内部処理モード = handler.get内部処理モード();
         QuestionMessage message = new QuestionMessage(
@@ -211,21 +232,21 @@ public class KaigoHokenTokubetuKaikeiKeiriJyokyoRegist3 {
     /**
      * 「削除をやめる」ボタンを押下する。<br/>
      *
-     * @param div {@link KaigoHokenTokubetuKaikeiKeiriJyokyoRegist3Div 介護保険特別会計経理状況登録_様式４の３情報Div}
+     * @param div {@link YoshikiYonnosanDiv 介護保険特別会計経理状況登録_様式４の３情報Div}
      * @return 介護保険特別会計経理状況登録_様式４の３情報Divを持つResponseData
      */
-    public ResponseData<KaigoHokenTokubetuKaikeiKeiriJyokyoRegist3Div> onClick_btnDelUpdate(KaigoHokenTokubetuKaikeiKeiriJyokyoRegist3Div div) {
+    public ResponseData<YoshikiYonnosanDiv> onClick_btnDelUpdate(YoshikiYonnosanDiv div) {
         return ResponseData.of(div).forwardWithEventName(検索に戻る).respond();
     }
 
     /**
      * 「保存する」ボタンを押下する。<br/>
      *
-     * @param div {@link KaigoHokenTokubetuKaikeiKeiriJyokyoRegist3Div 介護保険特別会計経理状況登録_様式４の３情報Div}
+     * @param div {@link YoshikiYonnosanDiv 介護保険特別会計経理状況登録_様式４の３情報Div}
      * @return 介護保険特別会計経理状況登録_様式４の３情報Divを持つResponseData
      */
-    public ResponseData<KaigoHokenTokubetuKaikeiKeiriJyokyoRegist3Div> onClick_btnSave(KaigoHokenTokubetuKaikeiKeiriJyokyoRegist3Div div) {
-        ResponseData<KaigoHokenTokubetuKaikeiKeiriJyokyoRegist3Div> responseData = null;
+    public ResponseData<YoshikiYonnosanDiv> onClick_btnSave(YoshikiYonnosanDiv div) {
+        ResponseData<YoshikiYonnosanDiv> responseData = null;
         if (!ResponseHolder.isReRequest()) {
             responseData = throwException_btnSave(div);
         }
@@ -233,10 +254,10 @@ public class KaigoHokenTokubetuKaikeiKeiriJyokyoRegist3 {
             return responseData;
         }
         getHandler(div).onClick_btnSave();
-        return ResponseData.of(div).setState(DBU0050041StateName.com);
+        return ResponseData.of(div).setState(DBU0050041StateName.完了状態);
     }
 
-    private ResponseData<KaigoHokenTokubetuKaikeiKeiriJyokyoRegist3Div> throwException_btnSave(KaigoHokenTokubetuKaikeiKeiriJyokyoRegist3Div div) {
+    private ResponseData<YoshikiYonnosanDiv> throwException_btnSave(YoshikiYonnosanDiv div) {
         KaigoHokenTokubetuKaikeiKeiriJyokyoRegist3Handler handler = getHandler(div);
         RString 内部処理モード = handler.get内部処理モード();
         ApplicationException exception = null;
@@ -262,14 +283,14 @@ public class KaigoHokenTokubetuKaikeiKeiriJyokyoRegist3 {
     /**
      * 「完了する」ボタンを押下する。<br/>
      *
-     * @param div {@link KaigoHokenTokubetuKaikeiKeiriJyokyoRegist3Div 介護保険特別会計経理状況登録_様式４の３情報Div}
+     * @param div {@link YoshikiYonnosanDiv 介護保険特別会計経理状況登録_様式４の３情報Div}
      * @return 介護保険特別会計経理状況登録_様式４の３情報Divを持つResponseData
      */
-    public ResponseData<KaigoHokenTokubetuKaikeiKeiriJyokyoRegist3Div> onClick_btnComplete(KaigoHokenTokubetuKaikeiKeiriJyokyoRegist3Div div) {
+    public ResponseData<YoshikiYonnosanDiv> onClick_btnComplete(YoshikiYonnosanDiv div) {
         return ResponseData.of(div).forwardWithEventName(DBU0050031TransitionEventName.処理完了).respond();
     }
 
-    private KaigoHokenTokubetuKaikeiKeiriJyokyoRegist3Handler getHandler(KaigoHokenTokubetuKaikeiKeiriJyokyoRegist3Div div) {
+    private KaigoHokenTokubetuKaikeiKeiriJyokyoRegist3Handler getHandler(YoshikiYonnosanDiv div) {
         return new KaigoHokenTokubetuKaikeiKeiriJyokyoRegist3Handler(div);
     }
 

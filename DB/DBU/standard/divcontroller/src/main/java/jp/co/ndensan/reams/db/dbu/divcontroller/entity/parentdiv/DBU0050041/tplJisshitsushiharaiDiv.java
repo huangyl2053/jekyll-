@@ -11,12 +11,12 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.TableCell;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TablePanel;
 
 /**
- * tabJisshitsushiharai のクラスファイル 
+ * tplJisshitsushiharai のクラスファイル 
  * 
  * @author 自動生成
  */
-public class tabJisshitsushiharaiDiv extends TablePanel {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2015-11-30_08-54-50">
+public class tplJisshitsushiharaiDiv extends TablePanel {
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-01-15_09-59-03">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -24,21 +24,21 @@ public class tabJisshitsushiharaiDiv extends TablePanel {
      * private + コントロール名 + フィールド名 の文字列を作成
      */
     @JsonProperty("cell600")
-    private cell600AttabJisshitsushiharai cell600;
+    private cell600AttplJisshitsushiharai cell600;
     @JsonProperty("cell601")
-    private cell601AttabJisshitsushiharai cell601;
+    private cell601AttplJisshitsushiharai cell601;
     @JsonProperty("cell603")
-    private cell603AttabJisshitsushiharai cell603;
+    private cell603AttplJisshitsushiharai cell603;
     @JsonProperty("cell604")
-    private cell604AttabJisshitsushiharai cell604;
+    private cell604AttplJisshitsushiharai cell604;
     @JsonProperty("cell605")
-    private cell605AttabJisshitsushiharai cell605;
+    private cell605AttplJisshitsushiharai cell605;
     @JsonProperty("cell606")
-    private cell606AttabJisshitsushiharai cell606;
+    private cell606AttplJisshitsushiharai cell606;
     @JsonProperty("cell607")
-    private cell607AttabJisshitsushiharai cell607;
+    private cell607AttplJisshitsushiharai cell607;
     @JsonProperty("cell608")
-    private cell608AttabJisshitsushiharai cell608;
+    private cell608AttplJisshitsushiharai cell608;
 
     /*
      * [ Helperの作成 ]
@@ -95,7 +95,7 @@ public class tabJisshitsushiharaiDiv extends TablePanel {
      * @return cell600
      */
     @JsonProperty("cell600")
-    private cell600AttabJisshitsushiharai getCell600() {
+    private cell600AttplJisshitsushiharai getCell600() {
         return cell600;
     }
 
@@ -104,7 +104,7 @@ public class tabJisshitsushiharaiDiv extends TablePanel {
      * @param cell600 cell600
      */
     @JsonProperty("cell600")
-    private void setCell600(cell600AttabJisshitsushiharai cell600) {
+    private void setCell600(cell600AttplJisshitsushiharai cell600) {
         this.cell600 = cell600;
     }
 
@@ -113,7 +113,7 @@ public class tabJisshitsushiharaiDiv extends TablePanel {
      * @return cell601
      */
     @JsonProperty("cell601")
-    private cell601AttabJisshitsushiharai getCell601() {
+    private cell601AttplJisshitsushiharai getCell601() {
         return cell601;
     }
 
@@ -122,7 +122,7 @@ public class tabJisshitsushiharaiDiv extends TablePanel {
      * @param cell601 cell601
      */
     @JsonProperty("cell601")
-    private void setCell601(cell601AttabJisshitsushiharai cell601) {
+    private void setCell601(cell601AttplJisshitsushiharai cell601) {
         this.cell601 = cell601;
     }
 
@@ -131,7 +131,7 @@ public class tabJisshitsushiharaiDiv extends TablePanel {
      * @return cell603
      */
     @JsonProperty("cell603")
-    private cell603AttabJisshitsushiharai getCell603() {
+    private cell603AttplJisshitsushiharai getCell603() {
         return cell603;
     }
 
@@ -140,7 +140,7 @@ public class tabJisshitsushiharaiDiv extends TablePanel {
      * @param cell603 cell603
      */
     @JsonProperty("cell603")
-    private void setCell603(cell603AttabJisshitsushiharai cell603) {
+    private void setCell603(cell603AttplJisshitsushiharai cell603) {
         this.cell603 = cell603;
     }
 
@@ -149,7 +149,7 @@ public class tabJisshitsushiharaiDiv extends TablePanel {
      * @return cell604
      */
     @JsonProperty("cell604")
-    private cell604AttabJisshitsushiharai getCell604() {
+    private cell604AttplJisshitsushiharai getCell604() {
         return cell604;
     }
 
@@ -158,7 +158,7 @@ public class tabJisshitsushiharaiDiv extends TablePanel {
      * @param cell604 cell604
      */
     @JsonProperty("cell604")
-    private void setCell604(cell604AttabJisshitsushiharai cell604) {
+    private void setCell604(cell604AttplJisshitsushiharai cell604) {
         this.cell604 = cell604;
     }
 
@@ -167,7 +167,7 @@ public class tabJisshitsushiharaiDiv extends TablePanel {
      * @return cell605
      */
     @JsonProperty("cell605")
-    private cell605AttabJisshitsushiharai getCell605() {
+    private cell605AttplJisshitsushiharai getCell605() {
         return cell605;
     }
 
@@ -176,7 +176,7 @@ public class tabJisshitsushiharaiDiv extends TablePanel {
      * @param cell605 cell605
      */
     @JsonProperty("cell605")
-    private void setCell605(cell605AttabJisshitsushiharai cell605) {
+    private void setCell605(cell605AttplJisshitsushiharai cell605) {
         this.cell605 = cell605;
     }
 
@@ -185,7 +185,7 @@ public class tabJisshitsushiharaiDiv extends TablePanel {
      * @return cell606
      */
     @JsonProperty("cell606")
-    private cell606AttabJisshitsushiharai getCell606() {
+    private cell606AttplJisshitsushiharai getCell606() {
         return cell606;
     }
 
@@ -194,7 +194,7 @@ public class tabJisshitsushiharaiDiv extends TablePanel {
      * @param cell606 cell606
      */
     @JsonProperty("cell606")
-    private void setCell606(cell606AttabJisshitsushiharai cell606) {
+    private void setCell606(cell606AttplJisshitsushiharai cell606) {
         this.cell606 = cell606;
     }
 
@@ -203,7 +203,7 @@ public class tabJisshitsushiharaiDiv extends TablePanel {
      * @return cell607
      */
     @JsonProperty("cell607")
-    private cell607AttabJisshitsushiharai getCell607() {
+    private cell607AttplJisshitsushiharai getCell607() {
         return cell607;
     }
 
@@ -212,7 +212,7 @@ public class tabJisshitsushiharaiDiv extends TablePanel {
      * @param cell607 cell607
      */
     @JsonProperty("cell607")
-    private void setCell607(cell607AttabJisshitsushiharai cell607) {
+    private void setCell607(cell607AttplJisshitsushiharai cell607) {
         this.cell607 = cell607;
     }
 
@@ -221,7 +221,7 @@ public class tabJisshitsushiharaiDiv extends TablePanel {
      * @return cell608
      */
     @JsonProperty("cell608")
-    private cell608AttabJisshitsushiharai getCell608() {
+    private cell608AttplJisshitsushiharai getCell608() {
         return cell608;
     }
 
@@ -230,7 +230,7 @@ public class tabJisshitsushiharaiDiv extends TablePanel {
      * @param cell608 cell608
      */
     @JsonProperty("cell608")
-    private void setCell608(cell608AttabJisshitsushiharai cell608) {
+    private void setCell608(cell608AttplJisshitsushiharai cell608) {
         this.cell608 = cell608;
     }
 
@@ -241,8 +241,8 @@ public class tabJisshitsushiharaiDiv extends TablePanel {
  * 
  * @author 自動生成
  */
-class cell600AttabJisshitsushiharai extends TableCell {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2015-11-30_08-54-50">
+class cell600AttplJisshitsushiharai extends TableCell {
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-01-15_09-59-03">
     @JsonProperty("lblshitsusainyugokei")
     private Label lblshitsusainyugokei;
 
@@ -271,8 +271,8 @@ class cell600AttabJisshitsushiharai extends TableCell {
  * 
  * @author 自動生成
  */
-class cell601AttabJisshitsushiharai extends TableCell {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2015-11-30_08-54-50">
+class cell601AttplJisshitsushiharai extends TableCell {
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-01-15_09-59-03">
     @JsonProperty("txtshitsusainyugokei")
     private TextBoxNum txtshitsusainyugokei;
 
@@ -301,8 +301,8 @@ class cell601AttabJisshitsushiharai extends TableCell {
  * 
  * @author 自動生成
  */
-class cell603AttabJisshitsushiharai extends TableCell {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2015-11-30_08-54-50">
+class cell603AttplJisshitsushiharai extends TableCell {
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-01-15_09-59-03">
     @JsonProperty("lblshitsusaishutsugokei")
     private Label lblshitsusaishutsugokei;
 
@@ -331,8 +331,8 @@ class cell603AttabJisshitsushiharai extends TableCell {
  * 
  * @author 自動生成
  */
-class cell604AttabJisshitsushiharai extends TableCell {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2015-11-30_08-54-50">
+class cell604AttplJisshitsushiharai extends TableCell {
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-01-15_09-59-03">
     @JsonProperty("txtshitsusaishutsugokei")
     private TextBoxNum txtshitsusaishutsugokei;
 
@@ -361,8 +361,8 @@ class cell604AttabJisshitsushiharai extends TableCell {
  * 
  * @author 自動生成
  */
-class cell605AttabJisshitsushiharai extends TableCell {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2015-11-30_08-54-50">
+class cell605AttplJisshitsushiharai extends TableCell {
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-01-15_09-59-03">
     @JsonProperty("lblshitsusainyusaishutsusa")
     private Label lblshitsusainyusaishutsusa;
 
@@ -391,8 +391,8 @@ class cell605AttabJisshitsushiharai extends TableCell {
  * 
  * @author 自動生成
  */
-class cell606AttabJisshitsushiharai extends TableCell {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2015-11-30_08-54-50">
+class cell606AttplJisshitsushiharai extends TableCell {
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-01-15_09-59-03">
     @JsonProperty("txtshitsusainyusaishutsusa")
     private TextBoxNum txtshitsusainyusaishutsusa;
 
@@ -421,8 +421,8 @@ class cell606AttabJisshitsushiharai extends TableCell {
  * 
  * @author 自動生成
  */
-class cell607AttabJisshitsushiharai extends TableCell {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2015-11-30_08-54-50">
+class cell607AttplJisshitsushiharai extends TableCell {
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-01-15_09-59-03">
     @JsonProperty("lblshitsuseisangozangaku")
     private Label lblshitsuseisangozangaku;
 
@@ -451,8 +451,8 @@ class cell607AttabJisshitsushiharai extends TableCell {
  * 
  * @author 自動生成
  */
-class cell608AttabJisshitsushiharai extends TableCell {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2015-11-30_08-54-50">
+class cell608AttplJisshitsushiharai extends TableCell {
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-01-15_09-59-03">
     @JsonProperty("txtshitsuseisangozangaku")
     private TextBoxNum txtshitsuseisangozangaku;
 
