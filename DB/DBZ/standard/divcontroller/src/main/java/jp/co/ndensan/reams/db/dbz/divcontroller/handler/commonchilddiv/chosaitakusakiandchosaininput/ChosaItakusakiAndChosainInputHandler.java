@@ -44,26 +44,30 @@ public class ChosaItakusakiAndChosainInputHandler {
     public void initialize(RString モード) {
         if (照会状態.equals(モード)) {
             div.getTxtChosaItakusakiCode().setDisabled(true);
-            div.getTxtChosainCode().setDisabled(true);
+            div.getBtnChosaItakusakiGuide().setDisabled(true);
             div.getBtnChosainRenrakuJiko().setDisabled(true);
             div.getBtnZenkaiFukusha().setDisabled(true);
+            div.getTxtChosainCode().setDisabled(true);
+            div.getBtnChosainGuide().setDisabled(true);
             div.getBtnClear().setDisabled(true);
         }
         if (単純入力状態.equals(モード)) {
             div.getTxtChosaItakusakiCode().setDisabled(false);
+            div.getBtnChosaItakusakiGuide().setDisabled(false);
+            div.getBtnChosainRenrakuJiko().setVisible(true);
+            div.getBtnZenkaiFukusha().setVisible(true);
             div.getTxtChosainCode().setDisabled(false);
-            div.getBtnChosainRenrakuJiko().setVisible(false);
-            div.getBtnZenkaiFukusha().setVisible(false);
-            div.getBtnClear().setVisible(false);
+            div.getBtnChosainGuide().setDisabled(false);
+            div.getBtnClear().setVisible(true);
         }
         if (単純照会状態.equals(モード)) {
             div.getTxtChosaItakusakiCode().setDisabled(true);
+            div.getBtnChosaItakusakiGuide().setVisible(true);
+            div.getBtnChosainRenrakuJiko().setVisible(true);
+            div.getBtnZenkaiFukusha().setVisible(true);
             div.getTxtChosainCode().setDisabled(true);
-            div.getBtnChosaItakusakiGuide().setVisible(false);
-            div.getBtnChosainGuide().setVisible(false);
-            div.getBtnChosainRenrakuJiko().setVisible(false);
-            div.getBtnZenkaiFukusha().setVisible(false);
-            div.getBtnClear().setVisible(false);
+            div.getBtnChosainGuide().setVisible(true);
+            div.getBtnClear().setVisible(true);
         }
 
     }
@@ -75,7 +79,6 @@ public class ChosaItakusakiAndChosainInputHandler {
         ChosaItakusakiAndChosainInputFinder finder = ChosaItakusakiAndChosainInputFinder.createInstance();
         NinteichosaItakusakiJoho ninteichosaItakusakiJoho
                 = finder.onBlurTxtChosaItakusakiCode(new LasdecCode(div.getHdnShichosonCode()), div.getTxtChosaItakusakiCode().getText());
-        // TODO 調査委託先名称設定待ち　QA:839回答待ち　　2016/03/07
         div.getTxtChosaItakusakiName().setValue(ninteichosaItakusakiJoho == null ? RString.EMPTY
                 : ninteichosaItakusakiJoho.get事業者名称() == null ? RString.EMPTY
                 : ninteichosaItakusakiJoho.get事業者名称());
