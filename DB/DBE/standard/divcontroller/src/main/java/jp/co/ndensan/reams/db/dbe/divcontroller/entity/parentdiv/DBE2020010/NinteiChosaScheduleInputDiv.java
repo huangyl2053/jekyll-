@@ -4,9 +4,7 @@ package jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2020010;
  * このファイルへの変更は、再生成時には損失するため
  * 不正な動作の原因になります。
  */
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import jp.co.ndensan.reams.uz.uza.ui.binding.*;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 
 /**
@@ -24,12 +22,12 @@ public class NinteiChosaScheduleInputDiv extends Panel {
      */
     @JsonProperty("WariateJokyo")
     private WariateJokyoDiv WariateJokyo;
-    @JsonProperty("btnSearchTaishosha")
-    private Button btnSearchTaishosha;
-    @JsonProperty("btnDisplayLatestInformation")
-    private Button btnDisplayLatestInformation;
+    @JsonProperty("ButtonArea")
+    private ButtonAreaDiv ButtonArea;
     @JsonProperty("TaishoshaShosai")
     private TaishoshaShosaiDiv TaishoshaShosai;
+    @JsonProperty("KaigoKanryoMessage")
+    private KaigoKanryoMessageDiv KaigoKanryoMessage;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -56,39 +54,21 @@ public class NinteiChosaScheduleInputDiv extends Panel {
     }
 
     /*
-     * getbtnSearchTaishosha
-     * @return btnSearchTaishosha
+     * getButtonArea
+     * @return ButtonArea
      */
-    @JsonProperty("btnSearchTaishosha")
-    public Button getBtnSearchTaishosha() {
-        return btnSearchTaishosha;
+    @JsonProperty("ButtonArea")
+    public ButtonAreaDiv getButtonArea() {
+        return ButtonArea;
     }
 
     /*
-     * setbtnSearchTaishosha
-     * @param btnSearchTaishosha btnSearchTaishosha
+     * setButtonArea
+     * @param ButtonArea ButtonArea
      */
-    @JsonProperty("btnSearchTaishosha")
-    public void setBtnSearchTaishosha(Button btnSearchTaishosha) {
-        this.btnSearchTaishosha = btnSearchTaishosha;
-    }
-
-    /*
-     * getbtnDisplayLatestInformation
-     * @return btnDisplayLatestInformation
-     */
-    @JsonProperty("btnDisplayLatestInformation")
-    public Button getBtnDisplayLatestInformation() {
-        return btnDisplayLatestInformation;
-    }
-
-    /*
-     * setbtnDisplayLatestInformation
-     * @param btnDisplayLatestInformation btnDisplayLatestInformation
-     */
-    @JsonProperty("btnDisplayLatestInformation")
-    public void setBtnDisplayLatestInformation(Button btnDisplayLatestInformation) {
-        this.btnDisplayLatestInformation = btnDisplayLatestInformation;
+    @JsonProperty("ButtonArea")
+    public void setButtonArea(ButtonAreaDiv ButtonArea) {
+        this.ButtonArea = ButtonArea;
     }
 
     /*
@@ -110,256 +90,21 @@ public class NinteiChosaScheduleInputDiv extends Panel {
     }
 
     /*
-     * [ ショートカットの作成 ]
+     * getKaigoKanryoMessage
+     * @return KaigoKanryoMessage
      */
-    @JsonIgnore
-    public TextBoxCode getTxtNinteiChosainCode() {
-        return this.getWariateJokyo().getTxtNinteiChosainCode();
+    @JsonProperty("KaigoKanryoMessage")
+    public KaigoKanryoMessageDiv getKaigoKanryoMessage() {
+        return KaigoKanryoMessage;
     }
 
-    @JsonIgnore
-    public void  setTxtNinteiChosainCode(TextBoxCode txtNinteiChosainCode) {
-        this.getWariateJokyo().setTxtNinteiChosainCode(txtNinteiChosainCode);
-    }
-
-    @JsonIgnore
-    public TextBox getTxtNinteiChosainName() {
-        return this.getWariateJokyo().getTxtNinteiChosainName();
-    }
-
-    @JsonIgnore
-    public void  setTxtNinteiChosainName(TextBox txtNinteiChosainName) {
-        this.getWariateJokyo().setTxtNinteiChosainName(txtNinteiChosainName);
-    }
-
-    @JsonIgnore
-    public TextBoxCode getTxtNinteiChosaItakusakiCode() {
-        return this.getWariateJokyo().getTxtNinteiChosaItakusakiCode();
-    }
-
-    @JsonIgnore
-    public void  setTxtNinteiChosaItakusakiCode(TextBoxCode txtNinteiChosaItakusakiCode) {
-        this.getWariateJokyo().setTxtNinteiChosaItakusakiCode(txtNinteiChosaItakusakiCode);
-    }
-
-    @JsonIgnore
-    public TextBox getTxtNinteiChosaItakusakiName() {
-        return this.getWariateJokyo().getTxtNinteiChosaItakusakiName();
-    }
-
-    @JsonIgnore
-    public void  setTxtNinteiChosaItakusakiName(TextBox txtNinteiChosaItakusakiName) {
-        this.getWariateJokyo().setTxtNinteiChosaItakusakiName(txtNinteiChosaItakusakiName);
-    }
-
-    @JsonIgnore
-    public TextBoxFlexibleDate getTxtNinteiChosaDate() {
-        return this.getWariateJokyo().getTxtNinteiChosaDate();
-    }
-
-    @JsonIgnore
-    public void  setTxtNinteiChosaDate(TextBoxFlexibleDate txtNinteiChosaDate) {
-        this.getWariateJokyo().setTxtNinteiChosaDate(txtNinteiChosaDate);
-    }
-
-    @JsonIgnore
-    public TextBox getTxtNinteiChosaTime() {
-        return this.getWariateJokyo().getTxtNinteiChosaTime();
-    }
-
-    @JsonIgnore
-    public void  setTxtNinteiChosaTime(TextBox txtNinteiChosaTime) {
-        this.getWariateJokyo().setTxtNinteiChosaTime(txtNinteiChosaTime);
-    }
-
-    @JsonIgnore
-    public TextBox getTxtNinteiChosaTimeFrame() {
-        return this.getWariateJokyo().getTxtNinteiChosaTimeFrame();
-    }
-
-    @JsonIgnore
-    public void  setTxtNinteiChosaTimeFrame(TextBox txtNinteiChosaTimeFrame) {
-        this.getWariateJokyo().setTxtNinteiChosaTimeFrame(txtNinteiChosaTimeFrame);
-    }
-
-    @JsonIgnore
-    public RadioButton getRadYoyakuKahi() {
-        return this.getWariateJokyo().getRadYoyakuKahi();
-    }
-
-    @JsonIgnore
-    public void  setRadYoyakuKahi(RadioButton radYoyakuKahi) {
-        this.getWariateJokyo().setRadYoyakuKahi(radYoyakuKahi);
-    }
-
-    @JsonIgnore
-    public TextBox getTxtNinteiChosaBiko() {
-        return this.getWariateJokyo().getTxtNinteiChosaBiko();
-    }
-
-    @JsonIgnore
-    public void  setTxtNinteiChosaBiko(TextBox txtNinteiChosaBiko) {
-        this.getWariateJokyo().setTxtNinteiChosaBiko(txtNinteiChosaBiko);
-    }
-
-    @JsonIgnore
-    public RadioButton getRadYoyakuJokyo() {
-        return this.getWariateJokyo().getRadYoyakuJokyo();
-    }
-
-    @JsonIgnore
-    public void  setRadYoyakuJokyo(RadioButton radYoyakuJokyo) {
-        this.getWariateJokyo().setRadYoyakuJokyo(radYoyakuJokyo);
-    }
-
-    @JsonIgnore
-    public TextBox getTxtHihoBangoNumber() {
-        return this.getTaishoshaShosai().getTxtHihoBangoNumber();
-    }
-
-    @JsonIgnore
-    public void  setTxtHihoBangoNumber(TextBox txtHihoBangoNumber) {
-        this.getTaishoshaShosai().setTxtHihoBangoNumber(txtHihoBangoNumber);
-    }
-
-    @JsonIgnore
-    public TextBox getTxtHihoBangoGosu() {
-        return this.getTaishoshaShosai().getTxtHihoBangoGosu();
-    }
-
-    @JsonIgnore
-    public void  setTxtHihoBangoGosu(TextBox txtHihoBangoGosu) {
-        this.getTaishoshaShosai().setTxtHihoBangoGosu(txtHihoBangoGosu);
-    }
-
-    @JsonIgnore
-    public TextBox getTxtHokenshaName() {
-        return this.getTaishoshaShosai().getTxtHokenshaName();
-    }
-
-    @JsonIgnore
-    public void  setTxtHokenshaName(TextBox txtHokenshaName) {
-        this.getTaishoshaShosai().setTxtHokenshaName(txtHokenshaName);
-    }
-
-    @JsonIgnore
-    public TextBoxFlexibleDate getTxtNinteiShinseiDate() {
-        return this.getTaishoshaShosai().getTxtNinteiShinseiDate();
-    }
-
-    @JsonIgnore
-    public void  setTxtNinteiShinseiDate(TextBoxFlexibleDate txtNinteiShinseiDate) {
-        this.getTaishoshaShosai().setTxtNinteiShinseiDate(txtNinteiShinseiDate);
-    }
-
-    @JsonIgnore
-    public TextBox getTxtNinteiShinseiKubun() {
-        return this.getTaishoshaShosai().getTxtNinteiShinseiKubun();
-    }
-
-    @JsonIgnore
-    public void  setTxtNinteiShinseiKubun(TextBox txtNinteiShinseiKubun) {
-        this.getTaishoshaShosai().setTxtNinteiShinseiKubun(txtNinteiShinseiKubun);
-    }
-
-    @JsonIgnore
-    public TextBox getTxtTaishoshaName() {
-        return this.getTaishoshaShosai().getTxtTaishoshaName();
-    }
-
-    @JsonIgnore
-    public void  setTxtTaishoshaName(TextBox txtTaishoshaName) {
-        this.getTaishoshaShosai().setTxtTaishoshaName(txtTaishoshaName);
-    }
-
-    @JsonIgnore
-    public TextBox getTxtTaishoshaNameKana() {
-        return this.getTaishoshaShosai().getTxtTaishoshaNameKana();
-    }
-
-    @JsonIgnore
-    public void  setTxtTaishoshaNameKana(TextBox txtTaishoshaNameKana) {
-        this.getTaishoshaShosai().setTxtTaishoshaNameKana(txtTaishoshaNameKana);
-    }
-
-    @JsonIgnore
-    public TextBox getTxtBasho() {
-        return this.getTaishoshaShosai().getTxtBasho();
-    }
-
-    @JsonIgnore
-    public void  setTxtBasho(TextBox txtBasho) {
-        this.getTaishoshaShosai().setTxtBasho(txtBasho);
-    }
-
-    @JsonIgnore
-    public TextBox getTxtChushajo() {
-        return this.getTaishoshaShosai().getTxtChushajo();
-    }
-
-    @JsonIgnore
-    public void  setTxtChushajo(TextBox txtChushajo) {
-        this.getTaishoshaShosai().setTxtChushajo(txtChushajo);
-    }
-
-    @JsonIgnore
-    public TextBox getTxtTachiainin1() {
-        return this.getTaishoshaShosai().getTxtTachiainin1();
-    }
-
-    @JsonIgnore
-    public void  setTxtTachiainin1(TextBox txtTachiainin1) {
-        this.getTaishoshaShosai().setTxtTachiainin1(txtTachiainin1);
-    }
-
-    @JsonIgnore
-    public TextBox getTxtRenrakusaki1() {
-        return this.getTaishoshaShosai().getTxtRenrakusaki1();
-    }
-
-    @JsonIgnore
-    public void  setTxtRenrakusaki1(TextBox txtRenrakusaki1) {
-        this.getTaishoshaShosai().setTxtRenrakusaki1(txtRenrakusaki1);
-    }
-
-    @JsonIgnore
-    public TextBox getTxtTachiainin2() {
-        return this.getTaishoshaShosai().getTxtTachiainin2();
-    }
-
-    @JsonIgnore
-    public void  setTxtTachiainin2(TextBox txtTachiainin2) {
-        this.getTaishoshaShosai().setTxtTachiainin2(txtTachiainin2);
-    }
-
-    @JsonIgnore
-    public TextBox getTxtRenrakusaki2() {
-        return this.getTaishoshaShosai().getTxtRenrakusaki2();
-    }
-
-    @JsonIgnore
-    public void  setTxtRenrakusaki2(TextBox txtRenrakusaki2) {
-        this.getTaishoshaShosai().setTxtRenrakusaki2(txtRenrakusaki2);
-    }
-
-    @JsonIgnore
-    public TextBoxMultiLine getTxtTaishoshaShosaiMemo() {
-        return this.getTaishoshaShosai().getTxtTaishoshaShosaiMemo();
-    }
-
-    @JsonIgnore
-    public void  setTxtTaishoshaShosaiMemo(TextBoxMultiLine txtTaishoshaShosaiMemo) {
-        this.getTaishoshaShosai().setTxtTaishoshaShosaiMemo(txtTaishoshaShosaiMemo);
-    }
-
-    @JsonIgnore
-    public Button getBtnClear() {
-        return this.getTaishoshaShosai().getBtnClear();
-    }
-
-    @JsonIgnore
-    public void  setBtnClear(Button btnClear) {
-        this.getTaishoshaShosai().setBtnClear(btnClear);
+    /*
+     * setKaigoKanryoMessage
+     * @param KaigoKanryoMessage KaigoKanryoMessage
+     */
+    @JsonProperty("KaigoKanryoMessage")
+    public void setKaigoKanryoMessage(KaigoKanryoMessageDiv KaigoKanryoMessage) {
+        this.KaigoKanryoMessage = KaigoKanryoMessage;
     }
 
     // </editor-fold>

@@ -86,11 +86,11 @@ public class TokkiJiko {
         int 履歴番号 = Integer.valueOf(ViewStateHolder.get(ViewStateKeys.要介護認定申請検索_主治医意見書作成依頼履歴番号, RString.class).toString());
 
         if (!div.getHdnTokkiJiko().equals(div.getTxtTokki().getValue()) && !ResponseHolder.isReRequest()) {
-            QuestionMessage message = new QuestionMessage(UrQuestionMessages.画面遷移の確認.getMessage().getCode(),
-                    UrQuestionMessages.画面遷移の確認.getMessage().evaluate());
+            QuestionMessage message = new QuestionMessage(UrQuestionMessages.確定の確認.getMessage().getCode(),
+                    UrQuestionMessages.確定の確認.getMessage().evaluate());
             return ResponseData.of(div).addMessage(message).respond();
         }
-        if ((new RString(UrQuestionMessages.画面遷移の確認.getMessage().getCode())
+        if ((new RString(UrQuestionMessages.確定の確認.getMessage().getCode())
                 .equals(ResponseHolder.getMessageCode()) && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes)
                 || div.getHdnTokkiJiko().equals(div.getTxtTokki().getValue())) {
             if (意見書情報.getShujiiIkenshoIraiJoho(new ShujiiIkenshoIraiJohoIdentifier(管理番号, 履歴番号)).getShujiiIkenshoJohoList().isEmpty()) {
@@ -117,11 +117,11 @@ public class TokkiJiko {
     public ResponseData<TokkiJikoDiv> onClick_ToriKesi(TokkiJikoDiv div) {
 
         if (!div.getHdnTokkiJiko().equals(div.getTxtTokki().getValue()) && !ResponseHolder.isReRequest()) {
-            QuestionMessage message = new QuestionMessage(UrQuestionMessages.画面遷移の確認.getMessage().getCode(),
-                    UrQuestionMessages.画面遷移の確認.getMessage().evaluate());
+            QuestionMessage message = new QuestionMessage(UrQuestionMessages.確定の確認.getMessage().getCode(),
+                    UrQuestionMessages.確定の確認.getMessage().evaluate());
             return ResponseData.of(div).addMessage(message).respond();
         }
-        if ((new RString(UrQuestionMessages.画面遷移の確認.getMessage().getCode())
+        if ((new RString(UrQuestionMessages.確定の確認.getMessage().getCode())
                 .equals(ResponseHolder.getMessageCode()) && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes)
                 || div.getHdnTokkiJiko().equals(div.getTxtTokki().getValue())) {
             return ResponseData.of(div).dialogOKClose();
