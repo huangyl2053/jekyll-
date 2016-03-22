@@ -102,7 +102,7 @@ public class KaigoNinteiShinsakaiScheduleKagamiProcess extends BatchProcessBase<
                 compNinshosha.hakkoYMD, compNinshosha.koinMojiretsu, compNinshosha.koinShoryaku, compNinshosha.ninshoshaShimeiKakeru,
                 compNinshosha.ninshoshaShimeiKakenai, compNinshosha.ninshoshaYakushokuMei, compNinshosha.ninshoshaYakushokuMei1,
                 compNinshosha.ninshoshaYakushokuMei2, 宛名連番, customerBarCode, entity.getYubinNo(), entity.getJushoText(), 宛名機関名,
-                entity.getKikanNameText(), ChohyoAtesakiKeisho.toValue(BusinessConfig.get(
+                entity.getShimeiText(), ChohyoAtesakiKeisho.toValue(BusinessConfig.get(
                                 ConfigNameDBE.介護認定審査会スケジュール表鏡_宛先敬称, SubGyomuCode.DBE認定支援)).get名称(),
                 通知文Map.get(1), 通知文Map.get(KEY));
     }
