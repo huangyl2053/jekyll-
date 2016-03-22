@@ -89,9 +89,8 @@ public class BatchPanel {
         ResponseData<HihokenshashoHakkoKanriboBatchParameter> response = new ResponseData<>();
         IUrControlData controlData = UrControlDataFactory.createInstance();
         RString menuID = controlData.getMenuID();
-        List<KouFuJiyuu> kouFuJiyuuList = HihokenshashoHakkoKanriboFinder.createInstance().getKofuJiyuInitialData(menuID).records();
-        List<KayiSyuuJiyuu> kayiSyuuJiyuuList = HihokenshashoHakkoKanriboFinder.createInstance().getKaishuJiyuInitialData(menuID).records();
-        response.data = getHandler(div).batchParameter(kouFuJiyuuList, kayiSyuuJiyuuList, menuID);
+        response.data = getHandler(div).batchParameter(div.getDgKoufuJiyu().getSelectedItems(),
+                div.getDgKaishuJiyu().getSelectedItems(), menuID);
         return response;
     }
 
