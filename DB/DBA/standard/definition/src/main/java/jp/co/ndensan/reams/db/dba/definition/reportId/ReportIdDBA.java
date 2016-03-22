@@ -202,7 +202,11 @@ public enum ReportIdDBA {
     /**
      * 訪問介護利用者負担額減額申請書の帳票ＩＤです。
      */
-    DBD800005(new ReportId("DBD800005_HomonKaigoRiyoshaFutangakuGengakuShinseisho"), new RString("訪問介護利用者負担額減額申請書"));
+    DBD800005(new ReportId("DBD800005_HomonKaigoRiyoshaFutangakuGengakuShinseisho"), new RString("訪問介護利用者負担額減額申請書")),
+    /**
+     * 年齢到達予定者一覧表の帳票ＩＤです。
+     */
+    DBA200001(new ReportId("DBA200001_NenreitotatsuYoteishaIchiranhyo"), new RString("年齢到達予定者一覧表"));
 
     private final ReportId reportId;
     private final RString reportName;
