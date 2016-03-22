@@ -49,7 +49,8 @@ public class IchijiHanteiKekkaJohoSearchManager {
      * @return IchijiHanteiKekkaJohoSearchManager
      */
     public static IchijiHanteiKekkaJohoSearchManager createIntance() {
-        return new IchijiHanteiKekkaJohoSearchManager();
+        return InstanceProvider.create(IchijiHanteiKekkaJohoSearchManager.class);
+        //return new IchijiHanteiKekkaJohoSearchManager();
     }
 
     /**

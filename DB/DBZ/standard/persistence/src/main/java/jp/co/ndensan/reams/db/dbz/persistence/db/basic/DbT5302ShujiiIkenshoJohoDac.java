@@ -68,6 +68,23 @@ public class DbT5302ShujiiIkenshoJohoDac implements ISaveable<DbT5302ShujiiIkens
     }
 
     /**
+     * 要介護認定主治医意見書情報を検索By申請書管理番号。
+     *
+     * @param 申請書管理番号 申請書管理番号
+     * @return DbT5302ShujiiIkenshoJohoEntityの{@code list}
+     */
+    @Transaction
+    public List<DbT5302ShujiiIkenshoJohoEntity> selectBy申請書管理番号(ShinseishoKanriNo 申請書管理番号) {
+        DbAccessorNormalType accessor = new DbAccessorNormalType(session);
+
+        return accessor.select().
+                table(DbT5302ShujiiIkenshoJoho.class).
+                where(
+                        eq(shinseishoKanriNo, 申請書管理番号)).
+                toList(DbT5302ShujiiIkenshoJohoEntity.class);
+    }
+
+    /**
      * DbT5302ShujiiIkenshoJohoEntityを登録します。状態によってinsert/update/delete処理に振り分けられます。
      *
      * @param entity entity

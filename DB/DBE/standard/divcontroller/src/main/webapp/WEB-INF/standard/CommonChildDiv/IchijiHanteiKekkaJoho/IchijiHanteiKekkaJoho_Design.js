@@ -4,6 +4,13 @@ var DBE;
         var Events = (function () {
             function Events() {
             }
+            Events.onClick_btnBack = function () {
+                return "onClick_btnBack";
+            };
+
+            Events.onClick_btnKakutei = function () {
+                return "onClick_btnKakutei";
+            };
             return Events;
         })();
         IchijiHanteiKekkaJoho.Events = Events;
