@@ -5,6 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbb.business.core;
 
+import jp.co.ndensan.reams.db.dbb.business.core.hokenryodankai.core.HokenryoDankai;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
@@ -18,10 +19,16 @@ import jp.co.ndensan.reams.uz.uza.math.Decimal;
  */
 public class NengakuKeisan {
 
-    private List<NengakuHokenryoHoji> nengakuHokenryoHojiList = new ArrayList<>();
+    private final List<NengakuHokenryoHoji> nengakuHokenryoHojiList = new ArrayList<>();
     private static final int TAISHOTSUKI = 3;
     private static final Decimal NENTSUKISU = new Decimal(12);
 
+    /**
+     * 年額計算
+     *
+     * @param input
+     * @return
+     */
     public 年額計算Output calc年額保険料(保険料段階判定input input) {
 
         年額計算Output output;
