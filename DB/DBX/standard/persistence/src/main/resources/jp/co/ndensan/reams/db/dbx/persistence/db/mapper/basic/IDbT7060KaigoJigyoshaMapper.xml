@@ -112,8 +112,8 @@
         rgdb."DbT7060KaigoJigyosha"
         WHERE
         rgdb."DbT7060KaigoJigyosha"."jigyoshaNo" = #{jigyoshaNo}
-        AND rgdb."DbT7060KaigoJigyosha"."yukoKaishiYMD" <= #{yukoKaishiYMD}
-        AND rgdb."DbT7060KaigoJigyosha"."yukoShuryoYMD" > #{yukoKaishiYMD}
+        AND rgdb."DbT7060KaigoJigyosha"."yukoKaishiYMD" <![CDATA[<=]]> #{yukoKaishiYMD}
+        AND rgdb."DbT7060KaigoJigyosha"."yukoShuryoYMD" <![CDATA[>]]> #{yukoKaishiYMD}
         )tbl
         WHERE tbl."rownum" = 1
     </select>
