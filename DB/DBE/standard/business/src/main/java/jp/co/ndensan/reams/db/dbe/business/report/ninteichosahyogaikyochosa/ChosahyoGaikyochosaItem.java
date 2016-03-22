@@ -89,7 +89,6 @@ public class ChosahyoGaikyochosaItem {
     private final RString yoshiendo;
     private final RString yokaigo;
     private final RString yokaigodo;
-    private final RString shinseishoKanriNo;
 
     /**
      * コンストラクタです。
@@ -168,7 +167,6 @@ public class ChosahyoGaikyochosaItem {
      * @param yoshiendo 要支援詳細
      * @param yokaigo 要介護
      * @param yokaigodo 要介護詳細
-     * @param shinseishoKanriNo 申請書管理番号
      */
     public ChosahyoGaikyochosaItem(
             RString hokenshaNo1,
@@ -244,8 +242,7 @@ public class ChosahyoGaikyochosaItem {
             RString yoshien,
             RString yoshiendo,
             RString yokaigo,
-            RString yokaigodo,
-            RString shinseishoKanriNo) {
+            RString yokaigodo) {
         this.hokenshaNo1 = hokenshaNo1;
         this.hokenshaNo2 = hokenshaNo2;
         this.hokenshaNo3 = hokenshaNo3;
@@ -320,6 +317,5 @@ public class ChosahyoGaikyochosaItem {
         this.yoshiendo = yoshiendo;
         this.yokaigo = yokaigo;
         this.yokaigodo = yokaigodo;
-        this.shinseishoKanriNo = shinseishoKanriNo;
     }
 }
