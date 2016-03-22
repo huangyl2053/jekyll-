@@ -6,6 +6,8 @@
 package jp.co.ndensan.reams.db.dbb.business.honsanteiidokanendofukakakutei;
 
 import jp.co.ndensan.reams.db.dbb.entity.db.relate.kanendoidofukakakutei.KanendoIdoFukaKakuteiEntity;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.TsuchishoNo;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 
 /**
  *
@@ -16,15 +18,24 @@ import jp.co.ndensan.reams.db.dbb.entity.db.relate.kanendoidofukakakutei.Kanendo
 @SuppressWarnings("PMD.UnusedPrivateField")
 public class KanendoIdoFukaKakutei {
 
-    KanendoIdoFukaKakuteiEntity fukaKakuteiEntity;
+    private KanendoIdoFukaKakuteiEntity fukaKakuteiEntity;
+    private FlexibleYear 調定年度;
+    private FlexibleYear 賦課年度;
+    private TsuchishoNo 通知書番号;
+    private int 履歴番号;
+
+    /**
+     * 異動賦課対象取得用ビジネスです
+     */
+    public KanendoIdoFukaKakutei() {
+    }
 
     /**
      * 異動賦課対象取得用ビジネスです
      *
-     * @param fukaKakuteiEntity fukaKakuteiEntity
+     * @param entity KanendoIdoFukaKakuteiEntity
      */
-    public KanendoIdoFukaKakutei(KanendoIdoFukaKakuteiEntity fukaKakuteiEntity) {
-        this.fukaKakuteiEntity = fukaKakuteiEntity;
+    public KanendoIdoFukaKakutei(KanendoIdoFukaKakuteiEntity entity) {
+        this.fukaKakuteiEntity = entity;
     }
-
 }

@@ -12,18 +12,14 @@ import jp.co.ndensan.reams.db.dbb.divcontroller.entity.parentdiv.DBB0550002.Kane
 import jp.co.ndensan.reams.db.dbb.divcontroller.entity.parentdiv.DBB0550002.dgKanendoFukaIchiran_Row;
 import jp.co.ndensan.reams.db.dbb.divcontroller.entity.parentdiv.DBB0550002.dgShoriNichiji_Row;
 import jp.co.ndensan.reams.db.dbb.divcontroller.viewbox.ViewStateKeys;
-import jp.co.ndensan.reams.db.dbb.entity.db.relate.kanendoidofukakakutei.KanendoIdoFukaKakuteiEntity;
 import jp.co.ndensan.reams.db.dbb.service.honsanteiidokanendofukakakutei.HonsanteiIdoKanendoFukaKakutei;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.TsuchishoNo;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.ShoriDateKanri;
-import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
-import jp.co.ndensan.reams.uz.uza.lang.FillType;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RTime;
-import jp.co.ndensan.reams.uz.uza.lang.Separator;
 import jp.co.ndensan.reams.uz.uza.ui.binding.propertyenum.DisplayTimeFormat;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.CommonButtonHolder;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
@@ -38,7 +34,8 @@ public class KanendoFukaKakuteiHandler {
     private static final RString 確定処理 = new RString("btnKakutei");
     private static final RString 賦課対象外を削除 = new RString("btnDeleteTaishoGai");
     private static final RString 改行 = new RString("<br>");
-    private static final RString スペース = new RString(" ");
+    private static final RString スペース = RString.HALF_SPACE;
+    private static final RString ゼロ = new RString("0");
 
     private final KanendoFukaKakuteiDiv div;
 
@@ -135,11 +132,11 @@ public class KanendoFukaKakuteiHandler {
                     div.getTxtShoriTsuki().setValue(new RString("翌年度5月分"));
                     break;
                 default:
-                    div.getTxtShoriTsuki().setValue(new RString(""));
+                    div.getTxtShoriTsuki().setValue(RString.EMPTY);
                     break;
             }
         }
-        div.setDeleteDataCount(new RString("0"));
+        div.setDeleteDataCount(ゼロ);
     }
 
     /**
@@ -172,7 +169,6 @@ public class KanendoFukaKakuteiHandler {
 //            row.getTxtFukaNendo().setValue(entity.getFukaKakuteiEntity().get更正前賦課年度().wareki().toDateString()
 //                    .concat(new RString("<br>"))
 //                    .concat(entity.getFukaKakuteiEntity().get賦課年度().wareki().toDateString()));
-            RString 更正前賦課年度 = RString.EMPTY;
             if (entity.getFukaKakuteiEntity().get更正前賦課年度() != null) {
                 row.getTxtFukaNendo().setValue(new RDate(entity.getFukaKakuteiEntity().get更正前賦課年度().toString()));
             }
@@ -251,9 +247,7 @@ public class KanendoFukaKakuteiHandler {
         HonsanteiIdoKanendoFukaKakutei fukaKakutei = InstanceProvider.create(HonsanteiIdoKanendoFukaKakutei.class);
         RDate 年月日 = div.getDgShoriNichiji().getDataSource().get(0).getTxtShoriYMD().getValue();
         RTime 時刻 = div.getDgShoriNichiji().getDataSource().get(0).getTxtShoriTime().getValue();
-        fukaKakutei.confirmFuka(new YMDHMS(年月日.seireki().separator(Separator.NONE).fillType(FillType.ZERO)
-                .toDateString().toString().concat(Integer.toString(時刻.getHour())
-                        .concat(Integer.toString(時刻.getMinute())).concat(Integer.toString(時刻.getSecond())))));
+        fukaKakutei.confirmFuka(new YMDHMS(年月日, 時刻));
         div.getKaNendoIdoFukaIchiran().getDgKanendoFukaIchiran().getDataSource().removeAll(
                 div.getKaNendoIdoFukaIchiran().getDgKanendoFukaIchiran().getDataSource());
         CommonButtonHolder.setDisabledByCommonButtonFieldName(確定処理, true);
@@ -280,31 +274,27 @@ public class KanendoFukaKakuteiHandler {
      */
     public void deleteTaishoGai() {
         List<KanendoIdoFukaKakutei> fukaKakuteiList = new ArrayList<>();
-        KanendoIdoFukaKakuteiEntity fukaKakuteiEntity;
+        KanendoIdoFukaKakutei fukaKakuteiEntity;
         for (dgKanendoFukaIchiran_Row row : div.getKaNendoIdoFukaIchiran().getDgKanendoFukaIchiran().getSelectedItems()) {
-            fukaKakuteiEntity = new KanendoIdoFukaKakuteiEntity();
-            fukaKakuteiEntity.set履歴番号(Integer.valueOf(row.getTxtHihokenshaNo().getValue().toString()).intValue());
-            fukaKakuteiEntity.set通知書番号(new TsuchishoNo(row.getTxtTuchishoNo().getValue()));
-            if (row.getTxtShikibetsuCode().getValue() != null) {
-                fukaKakuteiEntity.set識別コード(new ShikibetsuCode(row.getTxtShikibetsuCode().getValue()));
+            fukaKakuteiEntity = new KanendoIdoFukaKakutei();
+            if (row.getTxtHihokenshaNo().getValue() != null) {
+                fukaKakuteiEntity.setFukaKakuteiEntity(null);
+                fukaKakuteiEntity.set履歴番号(
+                        Integer.valueOf(row.getTxtHihokenshaNo().getValue().toString()).intValue());
             }
-            if (row.getTxtChoteiNendoMae().getValue() != null) {
-                fukaKakuteiEntity.set更正前調定年度(new FlexibleYear(row.getTxtChoteiNendoMae().getValue().getYear().
-                        toString()));
+            if (row.getTxtTuchishoNo().getValue() != null) {
+                fukaKakuteiEntity.set通知書番号(new TsuchishoNo(row.getTxtTuchishoNo().getValue()));
             }
             if (row.getTxtChoteiNendoAto().getValue() != null) {
-                fukaKakuteiEntity.set調定年度(new FlexibleYear(row.getTxtChoteiNendoAto().getValue().getYear().
-                        toString()));
+                fukaKakuteiEntity.set調定年度(
+                        new FlexibleYear(row.getTxtChoteiNendoAto().getValue().getYear().toString()));
             }
             // TODO QA418    賦課年度
             if (row.getTxtFukaNendo().getValue() != null) {
-                fukaKakuteiEntity.set更正前賦課年度(new FlexibleYear(row.getTxtFukaNendo().getValue().getYear().
-                        toString()));
+                fukaKakuteiEntity.set賦課年度(
+                        new FlexibleYear(row.getTxtFukaNendo().getValue().getYear().toString()));
             }
-            if (row.getTxtFukaNendo().getValue() != null) {
-                fukaKakuteiEntity.set賦課年度(new FlexibleYear(row.getTxtFukaNendo().getValue().getYear().
-                        toString()));
-            }
+            fukaKakuteiList.add(fukaKakuteiEntity);
         }
         HonsanteiIdoKanendoFukaKakutei fukaKakutei = InstanceProvider.create(HonsanteiIdoKanendoFukaKakutei.class);
         if (div.getKaNendoIdoFukaIchiran().getDgKanendoFukaIchiran().getTotalRecords() == div.

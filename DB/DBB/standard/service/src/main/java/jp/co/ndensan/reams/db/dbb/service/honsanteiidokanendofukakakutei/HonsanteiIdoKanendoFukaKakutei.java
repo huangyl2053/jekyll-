@@ -257,10 +257,10 @@ public class HonsanteiIdoKanendoFukaKakutei {
         IFukaKakuteiMapper mapper = mapperProvider.create(IFukaKakuteiMapper.class);
         for (KanendoIdoFukaKakutei fukaKakutei : fukaKakuteiList) {
             FukaKakuteiParameter parameter = new FukaKakuteiParameter(
-                    fukaKakutei.getFukaKakuteiEntity().get調定年度(),
-                    fukaKakutei.getFukaKakuteiEntity().get賦課年度(),
-                    fukaKakutei.getFukaKakuteiEntity().get通知書番号(),
-                    fukaKakutei.getFukaKakuteiEntity().get履歴番号(),
+                    fukaKakutei.get調定年度(),
+                    fukaKakutei.get賦課年度(),
+                    fukaKakutei.get通知書番号(),
+                    fukaKakutei.get履歴番号(),
                     0,
                     null,
                     null);
@@ -298,20 +298,20 @@ public class HonsanteiIdoKanendoFukaKakutei {
             }
 
             DbT2002FukaEntity fukaEntity = fukaDac.selectByKey(
-                    fukaKakutei.getFukaKakuteiEntity().get調定年度(),
-                    fukaKakutei.getFukaKakuteiEntity().get賦課年度(),
-                    fukaKakutei.getFukaKakuteiEntity().get通知書番号(),
-                    fukaKakutei.getFukaKakuteiEntity().get履歴番号());
+                    fukaKakutei.get調定年度(),
+                    fukaKakutei.get賦課年度(),
+                    fukaKakutei.get通知書番号(),
+                    fukaKakutei.get履歴番号());
             if (fukaEntity != null) {
                 fukaEntity.setState(EntityDataState.Deleted);
                 fukaDac.delete(fukaEntity);
             }
 
             List<DbT2003KibetsuEntity> kibetsuList = kibetsuDac.select介護期別(
-                    fukaKakutei.getFukaKakuteiEntity().get調定年度(),
-                    fukaKakutei.getFukaKakuteiEntity().get賦課年度(),
-                    fukaKakutei.getFukaKakuteiEntity().get通知書番号(),
-                    fukaKakutei.getFukaKakuteiEntity().get履歴番号());
+                    fukaKakutei.get調定年度(),
+                    fukaKakutei.get賦課年度(),
+                    fukaKakutei.get通知書番号(),
+                    fukaKakutei.get履歴番号());
             if (kibetsuList != null) {
                 for (DbT2003KibetsuEntity kibetsuEntity : kibetsuList) {
                     kibetsuEntity.setState(EntityDataState.Deleted);
