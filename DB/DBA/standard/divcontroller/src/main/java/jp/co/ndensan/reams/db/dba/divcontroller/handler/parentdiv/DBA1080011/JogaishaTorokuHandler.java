@@ -305,7 +305,6 @@ public class JogaishaTorokuHandler {
     private RString get市町村名(LasdecCode 市町村コード) {
         SearchResult<ShichosonCodeYoriShichoson> 市町村情報
                 = KoikiShichosonJohoFinder.createInstance().shichosonCodeYoriShichosonJoho(市町村コード);
-        // TODO 市町村コードにより、市町村名を取得する場合、取得データを複数件です、設定不明、QA742回答まち、
         if (市町村情報.records() != null && !市町村情報.records().isEmpty()) {
             return 市町村情報.records().get(0).get市町村名称();
         }

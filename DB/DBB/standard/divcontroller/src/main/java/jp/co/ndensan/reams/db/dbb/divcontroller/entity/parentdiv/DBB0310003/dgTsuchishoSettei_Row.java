@@ -1,9 +1,9 @@
 package jp.co.ndensan.reams.db.dbb.divcontroller.entity.parentdiv.DBB0310003;
-/**
+/*
  * このコードはツールによって生成されました。
  * このファイルへの変更は、以下の状況下で不正な動作の原因になったり、
  * コードが再生成されるときに損失したりします。
- * Mon Jun 23 11:19:58 JST 2014 
+ * Mon Mar 21 18:26:06 CST 2016 
  */
 
 
@@ -22,6 +22,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.TextBox;
  */
 
 public class dgTsuchishoSettei_Row extends DataRow {
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-01-15_09-59-03">
 
     private RString txtChosyuHoho;
     private RString txtJotai;
@@ -36,6 +37,11 @@ public class dgTsuchishoSettei_Row extends DataRow {
         this.txtTsuchisyoShitei = new DropDownList();
         this.txtGenkinKozaShitei = new DropDownList();
         this.txtHakkojiGroup = new TextBox();
+        this.setOriginalData("txtChosyuHoho", txtChosyuHoho);
+        this.setOriginalData("txtJotai", txtJotai);
+        this.setOriginalData("txtTsuchisyoShitei", txtTsuchisyoShitei);
+        this.setOriginalData("txtGenkinKozaShitei", txtGenkinKozaShitei);
+        this.setOriginalData("txtHakkojiGroup", txtHakkojiGroup);
     }
 
     public dgTsuchishoSettei_Row(RString txtChosyuHoho, RString txtJotai, DropDownList txtTsuchisyoShitei, DropDownList txtGenkinKozaShitei, TextBox txtHakkojiGroup) {
@@ -57,10 +63,13 @@ public class dgTsuchishoSettei_Row extends DataRow {
         this.txtChosyuHoho = RString.EMPTY;
         this.txtJotai = RString.EMPTY;
         this.txtTsuchisyoShitei = DropDownList.createInstance(gridSetting.getColumn("txtTsuchisyoShitei").getCellDetails());
-        this.setOriginalData("txtTsuchisyoShitei", txtTsuchisyoShitei);
         this.txtGenkinKozaShitei = DropDownList.createInstance(gridSetting.getColumn("txtGenkinKozaShitei").getCellDetails());
-        this.setOriginalData("txtGenkinKozaShitei", txtGenkinKozaShitei);
         this.txtHakkojiGroup = new TextBox();
+        this.setOriginalData("txtChosyuHoho", txtChosyuHoho);
+        this.setOriginalData("txtJotai", txtJotai);
+        this.setOriginalData("txtTsuchisyoShitei", txtTsuchisyoShitei);
+        this.setOriginalData("txtGenkinKozaShitei", txtGenkinKozaShitei);
+        this.setOriginalData("txtHakkojiGroup", txtHakkojiGroup);
     }
 
     public RString getTxtChosyuHoho() {
@@ -108,4 +117,5 @@ public class dgTsuchishoSettei_Row extends DataRow {
         this.txtHakkojiGroup = txtHakkojiGroup;
     }
 
+    // </editor-fold>
 }
