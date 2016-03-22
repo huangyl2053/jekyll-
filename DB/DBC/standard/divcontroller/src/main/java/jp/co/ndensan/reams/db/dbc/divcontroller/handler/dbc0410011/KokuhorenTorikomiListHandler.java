@@ -118,7 +118,7 @@ public class KokuhorenTorikomiListHandler {
         if (SharedFile.searchSharedFile(rsb.toRString()).isEmpty()) {
             row.setTorikomiFlag(アステリスク);
         } else {
-            row.setTorikomiFlag(RString.FULL_SPACE);
+            row.setTorikomiFlag(RString.HALF_SPACE);
         }
         row.setTxtTorikomiJoho(model.get処理名());
         row.setTxtZenZengetsu(get処理状態(model.get前々月処理状態()));
@@ -127,7 +127,7 @@ public class KokuhorenTorikomiListHandler {
             row.setTxtTogetsuJotai(ShoriJotaiKubun.toValue(model.get当月処理状態()).get名称());
         }
         row.setTxtShoriNichiji(model.get当月処理日時() != null ? model.get当月処理日時().getDate()
-                .wareki().toDateString().concat(RString.FULL_SPACE)
+                .wareki().toDateString().concat(RString.HALF_SPACE)
                 .concat(model.get当月処理日時().getRDateTime().getTime().toString().substring(0, NUM)) : RString.EMPTY);
         row.setSaishoriFlag(get再処理可否区分(model.get再処理可否区分()));
         row.getIchiranHyojijun().setValue(model.get一覧表示順() != null ? new Decimal(model.get一覧表示順().toString())
@@ -135,8 +135,7 @@ public class KokuhorenTorikomiListHandler {
         row.setBatchID(model.getバッチID());
         row.setKokanShikibetsuNo(model.get交換識別番号());
         row.getShoriYM().setValue(new RDate(処理年月.getYearValue(), 処理年月.getMonthValue()));
-        if (row.getTorikomiFlag().compareTo(RString.HALF_SPACE) == 0
-                && (row.getTxtTogetsuJotai().compareTo(処理前) == 0)) {
+        if (row.getTorikomiFlag().equals(RString.HALF_SPACE) && row.getTxtTogetsuJotai().equals(処理前)) {
             row.setSelectButtonState(DataGridButtonState.Enabled);
         } else {
             row.setSelectButtonState(DataGridButtonState.Disabled);
