@@ -13,14 +13,14 @@ import jp.co.ndensan.reams.uz.uza.report.ReportEditorJoiner;
  */
 class ShisetsuHenkoTsuchishoBuilderImpl implements IShisetsuHenkoTsuchishoBuilder {
 
-    private final ShisetsuHenkoTsuchishoEditor editor;
+    private final IShisetsuHenkoTsuchishoEditor editor;
 
     /**
      * インスタンスを生成します。
      *
      * @param Editor {@link ShisetsuHenkoTsuchishoEditor}
      */
-    public ShisetsuHenkoTsuchishoBuilderImpl(ShisetsuHenkoTsuchishoEditor editor) {
+    public ShisetsuHenkoTsuchishoBuilderImpl(IShisetsuHenkoTsuchishoEditor editor) {
         this.editor = editor;
     }
 

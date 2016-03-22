@@ -7,9 +7,9 @@ package jp.co.ndensan.reams.db.dba.service.report.tashichosonjushochitokureishar
 
 import java.util.ArrayList;
 import java.util.List;
+import jp.co.ndensan.reams.db.dba.business.report.tashichosonjushochitokureisharenrakuhyo.TashichosonJushochitokureishaRenrakuhyoItem;
 import jp.co.ndensan.reams.db.dba.business.report.tashichosonjushochitokureisharenrakuhyo.TashichosonJushochitokureishaRenrakuhyoProperty;
 import jp.co.ndensan.reams.db.dba.business.report.tashichosonjushochitokureisharenrakuhyo.TashichosonJushochitokureishaRenrakuhyoReport;
-import jp.co.ndensan.reams.db.dba.business.report.tashichosonjushochitokureisharenrakuhyo.TashichosonJushochitokureishaRenrakuhyoReportJoho;
 import jp.co.ndensan.reams.db.dba.entity.report.source.tashichosonjushochitokureisharenrakuhyo.TashichosonJushochitokureishaRenrakuhyoReportSource;
 import jp.co.ndensan.reams.uz.uza.report.Printer;
 import jp.co.ndensan.reams.uz.uza.report.SourceDataCollection;
@@ -22,17 +22,17 @@ public class TashichosonJushochitokureishaRenrakuhyoPrintService {
     /**
      * 介護保険他市町村住所地特例者連絡票を印刷します。
      *
-     * @param joho 介護保険他市町村住所地特例者連絡票_帳票クラスパラメータクラス
+     * @param item 介護保険他市町村住所地特例者連絡票_帳票クラスパラメータクラス
      * @return {@link SourceDataCollection}
      */
-    public SourceDataCollection print(TashichosonJushochitokureishaRenrakuhyoReportJoho joho) {
+    public SourceDataCollection print(TashichosonJushochitokureishaRenrakuhyoItem item) {
         TashichosonJushochitokureishaRenrakuhyoProperty property = new TashichosonJushochitokureishaRenrakuhyoProperty();
-        return new Printer<TashichosonJushochitokureishaRenrakuhyoReportSource>().spool(property, toReports(joho));
+        return new Printer<TashichosonJushochitokureishaRenrakuhyoReportSource>().spool(property, toReports(item));
     }
 
-    private static List<TashichosonJushochitokureishaRenrakuhyoReport> toReports(TashichosonJushochitokureishaRenrakuhyoReportJoho joho) {
+    private static List<TashichosonJushochitokureishaRenrakuhyoReport> toReports(TashichosonJushochitokureishaRenrakuhyoItem item) {
         List<TashichosonJushochitokureishaRenrakuhyoReport> list = new ArrayList<>();
-        list.add(TashichosonJushochitokureishaRenrakuhyoReport.createFrom(joho.getItem()));
+        list.add(TashichosonJushochitokureishaRenrakuhyoReport.createFrom(item));
         return list;
     }
 }

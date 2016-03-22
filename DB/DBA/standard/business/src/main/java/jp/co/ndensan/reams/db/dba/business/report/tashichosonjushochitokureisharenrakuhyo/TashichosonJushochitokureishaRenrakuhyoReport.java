@@ -37,9 +37,14 @@ public class TashichosonJushochitokureishaRenrakuhyoReport extends Report<Tashic
         this.item = item;
     }
 
+    /**
+     * 介護保険他市町村住所地特例者連絡票writeByです。
+     *
+     * @param reportSourceWriter 介護保険他市町村住所地特例者連絡票のreportSourceWriter
+     */
     @Override
     public void writeBy(ReportSourceWriter<TashichosonJushochitokureishaRenrakuhyoReportSource> reportSourceWriter) {
-        TashichosonJushochitokureishaRenrakuhyoEditor editor = new TashichosonJushochitokureishaRenrakuhyoEditor(item);
+        ITashichosonJushochitokureishaRenrakuhyoEditor editor = new TashichosonJushochitokureishaRenrakuhyoEditor(item);
         ITashichosonJushochitokureishaRenrakuhyoBuilder builder = new TashichosonJushochitokureishaRenrakuhyoBuilderImpl(editor);
         reportSourceWriter.writeLine(builder);
     }

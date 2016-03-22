@@ -13,14 +13,14 @@ import jp.co.ndensan.reams.uz.uza.report.ReportEditorJoiner;
  */
 class TashichosonJushochitokureishaRenrakuhyoBuilderImpl implements ITashichosonJushochitokureishaRenrakuhyoBuilder {
 
-    private final TashichosonJushochitokureishaRenrakuhyoEditor editor;
+    private final ITashichosonJushochitokureishaRenrakuhyoEditor editor;
 
     /**
      * インスタンスを生成します。
      *
-     * @param Editor {@link TashichosonJushochitokureishaRenrakuhyoEditor}
+     * @param Editor {@link ITashichosonJushochitokureishaRenrakuhyoEditor}
      */
-    public TashichosonJushochitokureishaRenrakuhyoBuilderImpl(TashichosonJushochitokureishaRenrakuhyoEditor editor) {
+    public TashichosonJushochitokureishaRenrakuhyoBuilderImpl(ITashichosonJushochitokureishaRenrakuhyoEditor editor) {
         this.editor = editor;
     }
 
