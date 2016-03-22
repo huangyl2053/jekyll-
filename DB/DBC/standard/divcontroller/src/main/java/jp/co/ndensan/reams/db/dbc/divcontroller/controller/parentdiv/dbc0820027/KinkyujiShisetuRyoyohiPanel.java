@@ -304,8 +304,8 @@ public class KinkyujiShisetuRyoyohiPanel {
      */
     public ResponseData<KinkyujiShisetuRyoyohiPanelDiv> onClick_btnFree(KinkyujiShisetuRyoyohiPanelDiv div) {
         if (削除.equals(ViewStateHolder.get(ViewStateKeys.処理モード, RString.class))) {
-            return ResponseData.of(div).forwardWithEventName(DBC0820027TransitionEventName.サービス提供証明書へ戻る)
-                    .parameter(new RString("サービス提供証明書へ戻る"));
+            return ResponseData.of(div).forwardWithEventName(DBC0820027TransitionEventName.一覧に戻る)
+                    .parameter(new RString("一覧に戻る"));
         }
         boolean flag = getHandler(div).get内容変更状態();
         if (flag) {
@@ -317,14 +317,14 @@ public class KinkyujiShisetuRyoyohiPanel {
             if (new RString(UrQuestionMessages.入力内容の破棄.getMessage().getCode())
                     .equals(ResponseHolder.getMessageCode())
                     && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
-                return ResponseData.of(div).forwardWithEventName(DBC0820027TransitionEventName.サービス提供証明書へ戻る)
-                        .parameter(new RString("サービス提供証明書へ戻る"));
+                return ResponseData.of(div).forwardWithEventName(DBC0820027TransitionEventName.一覧に戻る)
+                        .parameter(new RString("一覧に戻る"));
             } else {
                 ResponseData.of(div).respond();
             }
         } else {
-            return ResponseData.of(div).forwardWithEventName(DBC0820027TransitionEventName.サービス提供証明書へ戻る)
-                    .parameter(new RString("サービス提供証明書へ戻る"));
+            return ResponseData.of(div).forwardWithEventName(DBC0820027TransitionEventName.一覧に戻る)
+                    .parameter(new RString("一覧に戻る"));
         }
         return ResponseData.of(div).respond();
     }
