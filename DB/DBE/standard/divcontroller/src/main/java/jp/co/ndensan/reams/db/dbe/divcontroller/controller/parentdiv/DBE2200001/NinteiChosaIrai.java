@@ -110,6 +110,7 @@ public class NinteiChosaIrai {
         getHandler(div).set調査員情報一覧(調査員情報一覧, row);
         setData(div, null);
         getHandler(div).init印刷条件DIV();
+        div.getChoisaItakusakiIchiran().setIsOpen(false);
         return ResponseData.of(div).respond();
     }
 
@@ -128,6 +129,8 @@ public class NinteiChosaIrai {
 
         setData(div, chosainCode);
         getHandler(div).init印刷条件DIV();
+        div.getChoisaItakusakiIchiran().setIsOpen(false);
+        div.getChosainIchiran().setIsOpen(false);
         return ResponseData.of(div).respond();
     }
 
