@@ -48,8 +48,8 @@ public class PnlTotalRegister {
         PnlTotalRegisterHandler handler = getHandler(div);
         RString states = ViewStateHolder.get(ViewStateKeys.処理モード, RString.class);
         if (削除.equals(states) || 登録.equals(states)) {
-            handler.save画面データ();
-            handler.set保存完了();
+            int result = handler.save画面データ();
+            handler.set保存完了(result);
             return ResponseData.of(div).setState(saved);
         }
         boolean changeFlg = false;
@@ -65,8 +65,8 @@ public class PnlTotalRegister {
             }
             return ResponseData.of(div).respond();
         } else {
-            handler.save画面データ();
-            handler.set保存完了();
+            int result = handler.save画面データ();
+            handler.set保存完了(result);
             return ResponseData.of(div).setState(saved);
         }
     }
