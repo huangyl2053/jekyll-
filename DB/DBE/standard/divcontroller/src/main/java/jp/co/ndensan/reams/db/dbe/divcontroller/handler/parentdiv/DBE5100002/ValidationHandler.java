@@ -9,9 +9,9 @@ import jp.co.ndensan.reams.db.dbe.definition.message.DbeErrorMessages;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE5100002.ShinsakaiAutoDiv;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE5100002.dgShinsakaiIchiran_Row;
 import jp.co.ndensan.reams.db.dbz.definition.core.shinsakai.IsGogitaiDummy;
-import jp.co.ndensan.reams.db.dbz.definition.core.shinsakai.ShinsakaiShinchokuJokyo;
 import jp.co.ndensan.reams.db.dbz.definition.message.DbzErrorMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.message.IMessageGettable;
 import jp.co.ndensan.reams.uz.uza.message.IValidationMessage;
 import jp.co.ndensan.reams.uz.uza.message.Message;
@@ -24,6 +24,7 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
 public class ValidationHandler {
 
     private final ShinsakaiAutoDiv shinDiv;
+    private final RString 未開催 = new RString("未開催");
 
     /**
      * コンストラクタです。
@@ -35,7 +36,7 @@ public class ValidationHandler {
     }
 
     /**
-     * 審査会データ空チェック。
+     * 審査会データ空チェックします。
      *
      * @param validPairs ValidationMessageControlPairs
      * @return ValidationMessageControlPairs
@@ -49,7 +50,7 @@ public class ValidationHandler {
     }
 
     /**
-     * 審査会未選択チェック。
+     * 審査会未選択チェックします。
      *
      * @param validPairs ValidationMessageControlPairs
      * @return ValidationMessageControlPairs
@@ -63,14 +64,14 @@ public class ValidationHandler {
     }
 
     /**
-     * 審査会開催チェック。
+     * 審査会開催チェックします。
      *
      * @param validPairs ValidationMessageControlPairs
      * @return ValidationMessageControlPairs
      */
     public ValidationMessageControlPairs 審査会開催チェック(ValidationMessageControlPairs validPairs) {
         for (dgShinsakaiIchiran_Row row : shinDiv.getDgShinsakaiIchiran().getSelectedItems()) {
-            if (!ShinsakaiShinchokuJokyo.未開催.equals(row.getShinchokuJokyo())) {
+            if (!未開催.equals(row.getShinchokuJokyo())) {
                 validPairs.add(new ValidationMessageControlPair(RRVMessages.Validate未開催以外の場合,
                         shinDiv.getDgShinsakaiIchiran()));
                 break;
@@ -81,14 +82,14 @@ public class ValidationHandler {
     }
 
     /**
-     * ダミー審査会選択不可チェック。
+     * ダミー審査会選択不可チェックします。
      *
      * @param validPairs ValidationMessageControlPairs
      * @return ValidationMessageControlPairs
      */
     public ValidationMessageControlPairs ダミー審査会選択不可(ValidationMessageControlPairs validPairs) {
         for (dgShinsakaiIchiran_Row row : shinDiv.getDgShinsakaiIchiran().getSelectedItems()) {
-            if (IsGogitaiDummy.ダミー.equals(row.getShinchokuJokyo())) {
+            if (IsGogitaiDummy.toValue(true).get名称().equals(row.getShinchokuJokyo())) {
                 validPairs.add(new ValidationMessageControlPair(RRVMessages.Validateダミーフラグがチェックされた場合,
                         shinDiv.getDgShinsakaiIchiran()));
                 break;

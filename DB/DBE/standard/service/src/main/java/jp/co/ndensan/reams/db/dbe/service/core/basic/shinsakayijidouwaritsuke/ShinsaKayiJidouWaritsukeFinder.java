@@ -43,15 +43,14 @@ public class ShinsaKayiJidouWaritsukeFinder {
     /**
      * {@link InstanceProvider#create}にて生成した{@link ShinsaKayiJidouWaritsukeFinder}のインスタンスを返します。
      *
-     * @return
-     * {@link InstanceProvider#create}にて生成した{@link ShinsaKayiJidouWaritsukeFinder}のインスタンス
+     * @return {@link InstanceProvider#create}にて生成した{@link ShinsaKayiJidouWaritsukeFinder}のインスタンス
      */
     public static ShinsaKayiJidouWaritsukeFinder createInstance() {
         return InstanceProvider.create(ShinsaKayiJidouWaritsukeFinder.class);
     }
 
     /**
-     * 審査会自動割付を検索する。
+     * 審査会自動割付を検索します。
      *
      * @param parametere KaigoNinteiShinsakaiParameter
      * @return 審査会自動割付出力リスト

@@ -21,25 +21,26 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 
 /**
- * 審査会自動割付取得処理。
+ * 審査会自動割付取得処理です。
  */
 public class ShinsakaiAuto {
 
     /**
-     * 審査会自動割付。<br/>
+     * 審査会自動割付します。<br/>
      *
      * @param shinDiv ShinsakaiAutoDiv
      * @return ResponseData<ShinsakaiAutoDiv>
      */
     public ResponseData<ShinsakaiAutoDiv> onLoad(ShinsakaiAutoDiv shinDiv) {
         List<ShinsaKayiJidouWaritsukeBusiness> shinsaKayiList
-                = ShinsaKayiJidouWaritsukeFinder.createInstance().getHanteiKekka(ViewStateHolder.get(ViewStateKeys.審査会一覧_開催番号, KaigoNinteiShinsakaiParameter.class)).records();
+                = ShinsaKayiJidouWaritsukeFinder.createInstance().getHanteiKekka(ViewStateHolder.get(ViewStateKeys.審査会一覧_開催番号,
+                                KaigoNinteiShinsakaiParameter.class)).records();
         getHandler(shinDiv).onLoad(shinsaKayiList);
         return createResponse(shinDiv);
     }
 
     /**
-     * 「自動割付を実行する」ボタン押下、バッチパラメータを引き渡し、バッチを起動する。
+     * 「自動割付を実行する」ボタン押下、バッチパラメータを引き渡し、バッチを起動します。
      *
      * @param shinDiv ShinsakaiAutoDiv
      * @return ResponseData<ShinsakaiAutoDiv>
@@ -59,7 +60,7 @@ public class ShinsakaiAuto {
     }
 
     /**
-     * 入力チェック。<br/>
+     * 入力チェックします。<br/>
      *
      * @param shinDiv ShinsakaiAutoDiv
      * @return ResponseData<ShinsakaiAutoDiv>
@@ -75,7 +76,7 @@ public class ShinsakaiAuto {
     }
 
 //    /**
-//     * 「審査会一覧へ戻る」ボタン。<br/>
+//     * 「審査会一覧へ戻る」ボタンを遷移処理します。<br/>
 //     *
 //     * @param shinDiv ShinsakaiAutoDiv
 //     * @return ResponseData<ShinsakaiAutoDiv>

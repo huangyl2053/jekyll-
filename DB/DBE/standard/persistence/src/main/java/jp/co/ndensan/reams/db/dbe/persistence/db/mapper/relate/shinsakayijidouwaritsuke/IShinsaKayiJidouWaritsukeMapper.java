@@ -18,7 +18,7 @@ public interface IShinsaKayiJidouWaritsukeMapper {
      * 審査会自動割付のリストを取得します。
      *
      * @param 審査会自動割付_審査会自動割付検索条件 審査会自動割付_審査会自動割付検索条件
-     * @return ShinsaKayiJidouWaritsukeRelateEntity
+     * @return List<ShinsaKayiJidouWaritsukeRelateEntity>
      */
     List<ShinsaKayiJidouWaritsukeRelateEntity> getShinsaKayiJidouWaritsukeList(KaigoNinteiShinsakaiParameter 審査会自動割付_審査会自動割付検索条件);
 
