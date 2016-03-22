@@ -594,20 +594,31 @@ public class TokuteiShinryohiPanelHandler {
             if (serviceCode.toEntity().getTaniSu() != null) {
                 div.getTxtTanyi().setValue(new RString(serviceCode.toEntity().getTaniSu().toString()));
             }
-            UzT0007CodeEntity code1 = CodeMaster.getCode(SubGyomuCode.DBC介護給付, new CodeShubetsu(new RString("0025")),
-                    new Code(serviceCode.toEntity().getSanteiTani()), date);
-            RStringBuilder builder1 = new RStringBuilder();
-            builder1.append(code1.getコード名称());
-            builder1.append(serviceCode.toEntity().getTaniSu());
-            builder1.append(単位);
-            div.getLblComment1().setText(builder1.toRString());
-            UzT0007CodeEntity code2 = CodeMaster.getCode(SubGyomuCode.DBC介護給付, new CodeShubetsu(new RString("0026")),
-                    new Code(serviceCode.toEntity().getSanteiSeiyakuKikan()), date);
-            RStringBuilder builder2 = new RStringBuilder();
-            builder2.append(code2.getコード名称());
-            builder2.append(serviceCode.toEntity().getSanteiSeiyakuKaisu());
-            builder2.append(回まで);
-            div.getLblComment2().setText(builder2.toRString());
+            if (serviceCode.toEntity().getSanteiTani() != null) {
+                UzT0007CodeEntity code1 = CodeMaster.getCode(SubGyomuCode.DBC介護給付, new CodeShubetsu(new RString("0025")),
+                        new Code(serviceCode.toEntity().getSanteiTani()), date);
+                RStringBuilder builder1 = new RStringBuilder();
+                builder1.append(code1.getコード名称());
+                builder1.append(serviceCode.toEntity().getTaniSu());
+                builder1.append(単位);
+                div.getLblComment1().setText(builder1.toRString());
+            } else {
+                div.getLblComment1().setText(RString.EMPTY);
+            }
+            if (serviceCode.toEntity().getSanteiSeiyakuKikan() != null) {
+                UzT0007CodeEntity code2 = CodeMaster.getCode(SubGyomuCode.DBC介護給付, new CodeShubetsu(new RString("0026")),
+                        new Code(serviceCode.toEntity().getSanteiSeiyakuKikan()), date);
+                RStringBuilder builder2 = new RStringBuilder();
+                builder2.append(code2.getコード名称());
+                builder2.append(serviceCode.toEntity().getSanteiSeiyakuKaisu());
+                builder2.append(回まで);
+                div.getLblComment2().setText(builder2.toRString());
+            } else {
+                div.getLblComment2().setText(RString.EMPTY);
+            }
+        } else {
+            div.getLblComment1().setText(RString.EMPTY);
+            div.getLblComment2().setText(RString.EMPTY);
         }
     }
 
@@ -854,7 +865,7 @@ public class TokuteiShinryohiPanelHandler {
                         事業者番号,
                         様式番号,
                         明細番号,
-                        new RString(String.valueOf(max連番))).createBuilderForEdit().build();
+                        new RString(String.format("%02d", max連番))).createBuilderForEdit().build();
                 entityAdded = buildShokanTokuteiShinryohi(entityAdded, ddg);
                 entityList1.add(entityAdded);
             } else {
@@ -903,7 +914,7 @@ public class TokuteiShinryohiPanelHandler {
                         事業者番号,
                         様式番号,
                         明細番号,
-                        new RString(String.valueOf(max連番))).createBuilderForEdit().build();
+                        new RString(String.format("%02d", max連番))).createBuilderForEdit().build();
                 entityAdded = buildShokanTokuteiShinryoTokubetsuRyoyo(entityAdded, dgdRow);
                 entityList2.add(entityAdded);
             } else {
