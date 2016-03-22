@@ -185,23 +185,31 @@ public class TokuteiShinryohiHandler {
         if (serviceCode != null && serviceCode.toEntity().getServiceMeisho() != null) {
             FlexibleDate date = new FlexibleDate(RDate.getNowDate().toDateString());
             div.getPanelThree().getPanelFive().getTxtName().setValue(serviceCode.toEntity().getServiceMeisho());
-            UzT0007CodeEntity code1 = CodeMaster.getCode(SubGyomuCode.DBC介護給付, new CodeShubetsu(new RString("0025")),
-                    new Code(serviceCode.toEntity().getSanteiTani()), date);
-            RStringBuilder builder1 = new RStringBuilder();
-            builder1.append(code1.getコード名称());
-            builder1.append(serviceCode.toEntity().getTaniSu());
-            builder1.append(単位);
-            div.getPanelThree().getPanelFive().getLblComment1().setText(builder1.toRString());
-            UzT0007CodeEntity code2 = CodeMaster.getCode(SubGyomuCode.DBC介護給付, new CodeShubetsu(new RString("0026")),
-                    new Code(serviceCode.toEntity().getSanteiSeiyakuKikan()), date);
-            RStringBuilder builder2 = new RStringBuilder();
-            builder2.append(code2.getコード名称());
-            builder2.append(serviceCode.toEntity().getSanteiSeiyakuKaisu());
-            builder2.append(回まで);
-            div.getPanelThree().getPanelFive().getLblComment2().setText(builder2.toRString());
+            if (serviceCode.toEntity().getSanteiTani() != null) {
+                UzT0007CodeEntity code1 = CodeMaster.getCode(SubGyomuCode.DBC介護給付, new CodeShubetsu(new RString("0025")),
+                        new Code(serviceCode.toEntity().getSanteiTani()), date);
+                RStringBuilder builder1 = new RStringBuilder();
+                builder1.append(code1.getコード名称());
+                builder1.append(serviceCode.toEntity().getTaniSu());
+                builder1.append(単位);
+                div.getPanelThree().getPanelFive().getLblComment1().setText(builder1.toRString());
+            } else {
+                div.getPanelThree().getPanelFive().getLblComment1().setText(RString.EMPTY);
+            }
+            if (serviceCode.toEntity().getSanteiSeiyakuKikan() != null) {
+                UzT0007CodeEntity code2 = CodeMaster.getCode(SubGyomuCode.DBC介護給付, new CodeShubetsu(new RString("0026")),
+                        new Code(serviceCode.toEntity().getSanteiSeiyakuKikan()), date);
+                RStringBuilder builder2 = new RStringBuilder();
+                builder2.append(code2.getコード名称());
+                builder2.append(serviceCode.toEntity().getSanteiSeiyakuKaisu());
+                builder2.append(回まで);
+                div.getPanelThree().getPanelFive().getLblComment2().setText(builder2.toRString());
+            } else {
+                div.getPanelThree().getPanelFive().getLblComment2().setText(RString.EMPTY);
+            }
         } else {
-            div.getPanelThree().getPanelFive().getLblComment1().setText(new RString(""));
-            div.getPanelThree().getPanelFive().getLblComment2().setText(new RString(""));
+            div.getPanelThree().getPanelFive().getLblComment1().setText(RString.EMPTY);
+            div.getPanelThree().getPanelFive().getLblComment2().setText(RString.EMPTY);
         }
         div.getPanelThree().getPanelFive().getTxtTanyi().setValue(DecimalFormatter.toコンマ区切りRString(new Decimal(entity.get単位数()), 0));
         div.getPanelThree().getPanelFive().getTxtKaiyisuNisu().setValue(new Decimal(entity.get回数()));
