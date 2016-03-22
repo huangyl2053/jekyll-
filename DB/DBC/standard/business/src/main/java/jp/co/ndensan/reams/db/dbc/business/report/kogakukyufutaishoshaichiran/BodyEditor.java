@@ -25,7 +25,6 @@ public class BodyEditor implements IKogakuKyufuTaishoshaIchiranEditor {
 
     @Override
     public KogakuKyufuTaishoshaIchiranSource edit(KogakuKyufuTaishoshaIchiranSource source) {
-        source.kokuhorenName = item.get送付元団体名();
         source.hokenshaNo = item.get保険者番号();
         source.hokenshaName = item.get保険者名称();
         source.shutsuryokujun1 = item.get並び順１();

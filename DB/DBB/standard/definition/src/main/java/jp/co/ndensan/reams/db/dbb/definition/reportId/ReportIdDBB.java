@@ -27,9 +27,9 @@ public enum ReportIdDBB {
      */
     DBB300002(new ReportId("DBB300002_TsukibetsuSuiihyo"), new RString("月別推移表")),
     /**
-     * 通知書発行後異動把握の帳票ID
+     * 通知書発行後異動対象者一覧の帳票ID
      */
-    DBB200028(new ReportId("DBB200028_HakkogoIdoTaishoshaIchiran"), new RString("通知書発行後異動把握.")),
+    DBB200028(new ReportId("DBB200028_HakkogoIdoTaishoshaIchiran"), new RString("通知書発行後異動対象者一覧")),
     /**
      * 介護保険料減免決定通知書A4縦タイプ帳票
      */
