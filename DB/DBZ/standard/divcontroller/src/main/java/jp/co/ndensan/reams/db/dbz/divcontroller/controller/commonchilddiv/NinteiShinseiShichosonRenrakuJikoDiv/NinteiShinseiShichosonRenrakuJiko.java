@@ -9,7 +9,12 @@ import jp.co.ndensan.reams.db.dbz.business.core.servicetype.ninteishinsei.Nintei
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.NinteiShinseiShichosonRenrakuJiko.NinteiShinseiShichosonRenrakuJiko.NinteiShinseiShichosonRenrakuJikoDiv;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.NinteiShinseiShichosonRenrakuJiko.NinteiShinseiShichosonRenrakuJiko.NinteiShinseiShichosonHandler;
 import jp.co.ndensan.reams.db.dbz.divcontroller.viewbox.ViewStateKeys;
+import jp.co.ndensan.reams.ur.urz.definition.message.UrQuestionMessages;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.message.MessageDialogSelectedResult;
+import jp.co.ndensan.reams.uz.uza.message.QuestionMessage;
+import jp.co.ndensan.reams.uz.uza.ui.servlets.ResponseHolder;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 
 /**
@@ -48,7 +53,20 @@ public class NinteiShinseiShichosonRenrakuJiko {
      * @return ResponseData<NinteiShinseiShichosonRenrakuJikoDiv>
      */
     public ResponseData<NinteiShinseiShichosonRenrakuJikoDiv> onClick_btnTorikeshi(NinteiShinseiShichosonRenrakuJikoDiv requestDiv) {
-        return ResponseData.of(requestDiv).respond();
+        NinteiShinseiCodeModel shinseiCodeModel = ViewStateHolder.get(ViewStateKeys.モード, NinteiShinseiCodeModel.class);
+        if (!shinseiCodeModel.get連絡事項().equals(requestDiv.getTxtRenrakujiko().getValue()) && !ResponseHolder.isReRequest()) {
+            QuestionMessage message = new QuestionMessage(UrQuestionMessages.入力内容の破棄.getMessage().getCode(),
+                    UrQuestionMessages.入力内容の破棄.getMessage().evaluate());
+            return ResponseData.of(requestDiv).addMessage(message).respond();
+        }
+        if ((new RString(UrQuestionMessages.入力内容の破棄.getMessage().getCode())
+                .equals(ResponseHolder.getMessageCode()) && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes)) {
+            return ResponseData.of(requestDiv).dialogOKClose();
+        } else if ((new RString(UrQuestionMessages.入力内容の破棄.getMessage().getCode())
+                .equals(ResponseHolder.getMessageCode()) && ResponseHolder.getButtonType() == MessageDialogSelectedResult.No)) {
+            return ResponseData.of(requestDiv).respond();
+        }
+        return ResponseData.of(requestDiv).dialogOKClose();
     }
 
     private NinteiShinseiShichosonHandler getHandler(NinteiShinseiShichosonRenrakuJikoDiv requestDiv) {

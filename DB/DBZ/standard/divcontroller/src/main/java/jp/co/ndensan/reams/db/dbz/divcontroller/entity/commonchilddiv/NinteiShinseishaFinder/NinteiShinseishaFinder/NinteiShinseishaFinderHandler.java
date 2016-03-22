@@ -255,8 +255,8 @@ public class NinteiShinseishaFinderHandler {
         }
         div.getDdlNinteiChosaNetakirido().setDataSource(ddlNinteiChosaNetakirido);
 
-        div.getTxtShujiiIryokikanName().clearValue();
-        div.getTxtShujiiName().clearValue();
+        div.getTxtNinteiChosaItakusakiName().clearValue();
+        div.getTxtNinteiChosainName().clearValue();
         div.getDdlChosaJisshiBasho().setSelectedIndex(0);
         div.getDdlChosaKubun().setSelectedIndex(0);
         div.getTxtChosaJisshiDateFrom().clearValue();

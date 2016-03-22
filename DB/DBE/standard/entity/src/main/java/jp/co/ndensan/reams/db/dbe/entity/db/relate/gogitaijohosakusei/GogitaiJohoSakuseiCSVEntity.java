@@ -95,7 +95,7 @@ public class GogitaiJohoSakuseiCSVEntity {
     }
 
     private boolean strToBoolean(RString str) {
-        return Boolean.parseBoolean(str.toString());
+        return new RString("0").equals(str);
     }
 
     private FlexibleDate strToFlex(RString str) {

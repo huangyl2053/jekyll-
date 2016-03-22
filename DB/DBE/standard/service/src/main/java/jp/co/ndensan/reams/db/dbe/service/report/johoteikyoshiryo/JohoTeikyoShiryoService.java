@@ -22,17 +22,17 @@ public class JohoTeikyoShiryoService {
     /**
      * 医療機関・主治医一覧表を印刷します。
      *
-     * @param item 医療機関・主治医一覧表作成_帳票クラスパラメータクラス
+     * @param itemlist 医療機関・主治医一覧表作成_帳票クラスパラメータクラス
      * @return {@link SourceDataCollection}
      */
-    public SourceDataCollection print(JohoTeikyoShiryoItem item) {
+    public SourceDataCollection print(List<JohoTeikyoShiryoItem> itemlist) {
         JohoTeikyoShiryoProperty property = new JohoTeikyoShiryoProperty();
-        return new Printer<JohoTeikyoShiryoReportSource>().spool(property, toReports(item));
+        return new Printer<JohoTeikyoShiryoReportSource>().spool(property, toReports(itemlist));
     }
 
-    private static List<JohoTeikyoShiryoReport> toReports(JohoTeikyoShiryoItem item) {
+    private static List<JohoTeikyoShiryoReport> toReports(List<JohoTeikyoShiryoItem> itemlist) {
         List<JohoTeikyoShiryoReport> list = new ArrayList<>();
-        list.add(JohoTeikyoShiryoReport.createFrom(item));
+        list.add(JohoTeikyoShiryoReport.createFrom(itemlist));
         return list;
     }
 }

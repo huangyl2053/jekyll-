@@ -11,8 +11,8 @@ import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 /**
  * 徴収方法変更のMyBatis用パラメータクラスです
  */
-@SuppressWarnings("PMD.UnusedPrivateField")
 @lombok.Getter
+@SuppressWarnings("PMD.UnusedPrivateField")
 public final class ChosyuHohoHenkoMapperParameter {
 
     private final FlexibleYear fukaNendo;

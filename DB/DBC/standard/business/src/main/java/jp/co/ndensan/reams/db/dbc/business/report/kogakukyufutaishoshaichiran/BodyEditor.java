@@ -25,34 +25,33 @@ public class BodyEditor implements IKogakuKyufuTaishoshaIchiranEditor {
 
     @Override
     public KogakuKyufuTaishoshaIchiranSource edit(KogakuKyufuTaishoshaIchiranSource source) {
-        source.kokuhorenName = item.getKokuhorenName();
-        source.hokenshaNo = item.getHokenshaNo();
-        source.hokenshaName = item.getHokenshaName();
-        source.shutsuryokujun1 = item.getShutsuryokujun1();
-        source.shutsuryokujun2 = item.getShutsuryokujun2();
-        source.shutsuryokujun3 = item.getShutsuryokujun3();
-        source.shutsuryokujun4 = item.getShutsuryokujun4();
-        source.shutsuryokujun5 = item.getShutsuryokujun5();
-        source.kaipage1 = item.getKaipage1();
-        source.kaipage2 = item.getKaipage2();
-        source.kaipage3 = item.getKaipage3();
-        source.kaipage4 = item.getKaipage4();
-        source.kaipage5 = item.getKaipage5();
-        source.listUpper_1 = item.getListUpper_1();
-        source.listUpper_2 = item.getListUpper_2();
-        source.listUpper_3 = item.getListUpper_3();
-        source.listUpper_4 = item.getListUpper_4();
-        source.listUpper_5 = item.getListUpper_5();
-        source.listUpper_6 = item.getListUpper_6();
-        source.listUpper_7 = item.getListUpper_7();
-        source.listUpper_8 = item.getListUpper_8();
-        source.listUpper_9 = item.getListUpper_9();
-        source.listUpper_10 = item.getListUpper_10();
-        source.listLower_1 = item.getListLower_1();
-        source.listLower_2 = item.getListLower_2();
-        source.listLower_3 = item.getListLower_3();
-        source.listLower_4 = item.getListLower_4();
-        source.listLower_5 = item.getListLower_5();
+        source.hokenshaNo = item.get保険者番号();
+        source.hokenshaName = item.get保険者名称();
+        source.shutsuryokujun1 = item.get並び順１();
+        source.shutsuryokujun2 = item.get並び順２();
+        source.shutsuryokujun3 = item.get並び順３();
+        source.shutsuryokujun4 = item.get並び順４();
+        source.shutsuryokujun5 = item.get並び順５();
+        source.kaipage1 = item.get改頁１();
+        source.kaipage2 = item.get改頁２();
+        source.kaipage3 = item.get改頁３();
+        source.kaipage4 = item.get改頁４();
+        source.kaipage5 = item.get改頁５();
+        source.listUpper_1 = item.get通知書番号();
+        source.listUpper_2 = item.get被保険者番号();
+        source.listUpper_3 = item.getサービス提供年月();
+        source.listUpper_4 = item.get事業者番号();
+        source.listUpper_5 = item.getサービス種類コード();
+        source.listUpper_6 = item.getサービス費用合計額();
+        source.listUpper_7 = item.get算定基準額();
+        source.listUpper_8 = item.get高額支給額();
+        source.listUpper_9 = item.get資格喪失日();
+        source.listUpper_10 = item.get備考();
+        source.listLower_1 = item.get被保険者氏名();
+        source.listLower_2 = item.get事業者名();
+        source.listLower_3 = item.getサービス種類名称();
+        source.listLower_4 = item.get利用者負担額();
+        source.listLower_5 = item.get支払済金額();
         return source;
     }
 

@@ -6,6 +6,7 @@
 package jp.co.ndensan.reams.db.dbc.divcontroller.handler.dbc0310012;
 
 import jp.co.ndensan.reams.db.dbc.business.core.basic.ShokanJuryoininKeiyakusha;
+import jp.co.ndensan.reams.db.dbc.definition.core.shoninkubun.ShoninKubun;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0310012.PnlTotalPanelDiv;
 import jp.co.ndensan.reams.db.dbc.divcontroller.viewbox.ViewStateKeys;
 import jp.co.ndensan.reams.db.dbc.service.core.shokanjuryoininkeiyakusha.ShokanJuryoininKeiyakushaFinder;
@@ -125,8 +126,6 @@ public enum PnlTotalPanelSpec implements IPredicate<PnlTotalPanelDiv> {
 
     private static class SpecHelper {
 
-        private static final RString KEY_0 = new RString("key0");
-        private static final RString KEY_1 = new RString("key1");
         private static final RString 登録 = new RString("登録");
 
         public static boolean is契約申請受付日(PnlTotalPanelDiv div) {
@@ -149,28 +148,32 @@ public enum PnlTotalPanelSpec implements IPredicate<PnlTotalPanelDiv> {
         }
 
         public static boolean is不承認理由(PnlTotalPanelDiv div) {
-            if (KEY_1.equals(div.getPnlCommon().getPnlDetail().getRdoKettekubun().getSelectedKey())) {
+            if (ShoninKubun.承認しない.getコード().equals(div.getPnlCommon().getPnlDetail()
+                    .getRdoKettekubun().getSelectedKey())) {
                 return !div.getPnlCommon().getPnlDetail().getTxtFusyoninriyu().getValue().isEmpty();
             }
             return true;
         }
 
         public static boolean is年度(PnlTotalPanelDiv div) {
-            if (KEY_0.equals(div.getPnlCommon().getPnlDetail().getRdoKettekubun().getSelectedKey())) {
+            if (ShoninKubun.承認する.getコード().equals(div.getPnlCommon().getPnlDetail()
+                    .getRdoKettekubun().getSelectedKey())) {
                 return !div.getPnlCommon().getPnlDetail().getPnlHidari().getDdlYear().getSelectedKey().isEmpty();
             }
             return true;
         }
 
         public static boolean is番号1(PnlTotalPanelDiv div) {
-            if (KEY_0.equals(div.getPnlCommon().getPnlDetail().getRdoKettekubun().getSelectedKey())) {
+            if (ShoninKubun.承認する.getコード().equals(div.getPnlCommon().getPnlDetail()
+                    .getRdoKettekubun().getSelectedKey())) {
                 return !div.getPnlCommon().getPnlDetail().getPnlHidari().getTxtBango1().getValue().toString().isEmpty();
             }
             return true;
         }
 
         public static boolean is番号2(PnlTotalPanelDiv div) {
-            if (KEY_0.equals(div.getPnlCommon().getPnlDetail().getRdoKettekubun().getSelectedKey())) {
+            if (ShoninKubun.承認する.getコード().equals(div.getPnlCommon().getPnlDetail()
+                    .getRdoKettekubun().getSelectedKey())) {
                 return !div.getPnlCommon().getPnlDetail().getPnlHidari().getTxtBango2().getValue().toString().isEmpty();
             }
             return true;

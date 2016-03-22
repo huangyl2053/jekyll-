@@ -13,9 +13,10 @@ import jp.co.ndensan.reams.db.dba.definition.batchprm.hihokenshashohakkokanribo.
 import jp.co.ndensan.reams.db.dba.divcontroller.entity.parentdiv.DBA1110011.BatchPanelDiv;
 import jp.co.ndensan.reams.db.dba.divcontroller.entity.parentdiv.DBA1110011.dgKaishuJiyu_Row;
 import jp.co.ndensan.reams.db.dba.divcontroller.entity.parentdiv.DBA1110011.dgKoufuJiyu_Row;
+import jp.co.ndensan.reams.uz.uza.biz.ReportId;
+import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.util.code.entity.UzT0007CodeEntity;
 
 /**
  *
@@ -25,15 +26,17 @@ public class BatchPanelHandler {
 
     private final BatchPanelDiv div;
     private static final RString 未回収者リストボタン = new RString("key1");
-    private static final RString 項目名付加 = new RString("項目名付加");
-    private static final RString 連番付加 = new RString("連番付加");
-    private static final RString 日付編集 = new RString("日付'/'編集");
     private static final RString 被保険者証発行管理 = new RString("DBAMN72001");
     private static final RString 資格者証発行管理 = new RString("DBAMN72002");
     private static final RString 証発行モード_001 = new RString("001");
     private static final RString 証発行モード_002 = new RString("002");
     private static final RString 発行管理リスト = new RString("1");
     private static final RString 未回収者リスト = new RString("2");
+    private static final RString 項目名付加キー = new RString("key1");
+    private static final RString 連番付加キー = new RString("key2");
+    private static final RString 日付編集キー = new RString("key3");
+
+    private static final RString REPORT_ID_DBA200004 = new RString("DBA200004");
 
     /**
      * コンストラクタです。
@@ -47,20 +50,20 @@ public class BatchPanelHandler {
     /**
      * 画面初期化処理します。
      *
-     * @param kouFuJiyuuList 交付事由リスト
-     * @param kayiSyuuJiyuuList 回収事由リスト
+     * @param koufuJiyuList 交付事由リスト
+     * @param kaishuJiyuList 回収事由リスト
      */
-    public void initialize(List<KouFuJiyuu> kouFuJiyuuList, List<KayiSyuuJiyuu> kayiSyuuJiyuuList) {
+    public void initialize(List<KouFuJiyuu> koufuJiyuList, List<KayiSyuuJiyuu> kaishuJiyuList) {
         List<dgKaishuJiyu_Row> dgKaishuJiyuRowList = new ArrayList<>();
         List<dgKoufuJiyu_Row> dgKoufuJiyuRowList = new ArrayList<>();
-        for (KouFuJiyuu kouFuJiyuu : kouFuJiyuuList) {
+        for (KouFuJiyuu kouFuJiyuu : koufuJiyuList) {
             dgKoufuJiyu_Row dgKoufuJiyuRow = new dgKoufuJiyu_Row();
             dgKoufuJiyuRow.setTxtKofuJiyuCode(new RString(kouFuJiyuu.getコード().toString()));
             dgKoufuJiyuRow.setTxtKofuJiyu(kouFuJiyuu.getコード名称());
             dgKoufuJiyuRowList.add(dgKoufuJiyuRow);
 
         }
-        for (KayiSyuuJiyuu kayiSyuuJiyuu : kayiSyuuJiyuuList) {
+        for (KayiSyuuJiyuu kayiSyuuJiyuu : kaishuJiyuList) {
             dgKaishuJiyu_Row dgKaishuJiyuRow = new dgKaishuJiyu_Row();
             dgKaishuJiyuRow.setTxtKaishuJiyuCode(new RString(kayiSyuuJiyuu.getコード().toString()));
             dgKaishuJiyuRow.setTxtKaishuJiyu(kayiSyuuJiyuu.getコード名称());
@@ -68,23 +71,19 @@ public class BatchPanelHandler {
         }
         div.getDgKaishuJiyu().setDataSource(dgKaishuJiyuRowList);
         div.getDgKoufuJiyu().setDataSource(dgKoufuJiyuRowList);
-        div.getCcdChohyoShutsuryokujun().setVisible(true);
-        div.getCcdChohyoShutsuryokujun().load(
-                div.getCcdChohyoShutsuryokujun().getサブ業務コード(),
-                div.getCcdChohyoShutsuryokujun().get帳票ID());
-
+        div.getCcdChohyoShutsuryokujun().load(SubGyomuCode.DBA介護資格, new ReportId(REPORT_ID_DBA200004));
     }
 
     /**
      * バッチパラメータを作成します
      *
-     * @param kouFuJiyuuList 交付事由リスト
-     * @param kayiSyuuJiyuuList 回収事由リスト
+     * @param koufuJiyuList 交付事由リスト
+     * @param kaishuJiyuList 回収事由リスト
      * @param menuID 処理メニューID
      * @return HihokenshashoHakkoKanriboBatchParameter 被保険者証発行管理簿_バッチ用のパラメータ
      */
-    public HihokenshashoHakkoKanriboBatchParameter batchParameter(List<KouFuJiyuu> kouFuJiyuuList,
-            List<KayiSyuuJiyuu> kayiSyuuJiyuuList, RString menuID) {
+    public HihokenshashoHakkoKanriboBatchParameter batchParameter(List<dgKoufuJiyu_Row> koufuJiyuList,
+            List<dgKaishuJiyu_Row> kaishuJiyuList, RString menuID) {
         HihokenshashoHakkoKanriboBatchParameter parameter = new HihokenshashoHakkoKanriboBatchParameter();
         if (被保険者証発行管理.equals(menuID)) {
             parameter.setAkasihakoumod(証発行モード_001);
@@ -100,54 +99,48 @@ public class BatchPanelHandler {
             parameter.setSeyisinjyohoflg(false);
         } else {
             parameter.setSiyuturiyokudaysyou(発行管理リスト);
-            parameter.setKoufukayisihi(new FlexibleDate(div.getTxtKoufubiRange().getFromValue().toDateString()));
-            parameter.setKoufusiuryouhi(new FlexibleDate(div.getTxtKoufubiRange().getToValue().toDateString()));
-            parameter.setKasyuukayisihi(new FlexibleDate(div.getTxtKaishubiRange().getFromValue().toDateString()));
-            parameter.setKasyuusiuryouhi(new FlexibleDate(div.getTxtKaishubiRange().getToValue().toDateString()));
+            parameter.setKoufukayisihi(div.getTxtKoufubiRange().getFromValue() == null
+                    ? FlexibleDate.EMPTY : new FlexibleDate(div.getTxtKoufubiRange().getFromValue().toDateString()));
+            parameter.setKoufusiuryouhi(div.getTxtKoufubiRange().getToValue() == null
+                    ? FlexibleDate.EMPTY : new FlexibleDate(div.getTxtKoufubiRange().getToValue().toDateString()));
+            parameter.setKasyuukayisihi(div.getTxtKaishubiRange().getFromValue() == null
+                    ? FlexibleDate.EMPTY : new FlexibleDate(div.getTxtKaishubiRange().getFromValue().toDateString()));
+            parameter.setKasyuusiuryouhi(div.getTxtKaishubiRange().getToValue() == null
+                    ? FlexibleDate.EMPTY : new FlexibleDate(div.getTxtKaishubiRange().getToValue().toDateString()));
             if (div.getChkSaishinJoho().getSelectedItems().size() > 0) {
                 parameter.setSeyisinjyohoflg(true);
             } else {
                 parameter.setSeyisinjyohoflg(false);
             }
         }
-        if (div.getChkHenshuHoho().getSelectedItems().size() > 0) {
+        List<RString> henshuHoho = div.getChkHenshuHoho().getSelectedKeys();
+        if (henshuHoho.contains(項目名付加キー)) {
             parameter.setKoumukumeyifukaflg(true);
+        } else {
+            parameter.setKoumukumeyifukaflg(false);
+        }
+        if (henshuHoho.contains(連番付加キー)) {
             parameter.setRenbanfukaflg(true);
+        } else {
+            parameter.setRenbanfukaflg(false);
+        }
+        if (henshuHoho.contains(日付編集キー)) {
             parameter.setHizikehensyuuflg(true);
         } else {
-            if (項目名付加.equals(div.getChkHenshuHoho().getSelectedItems().get(0).getValue())) {
-                parameter.setKoumukumeyifukaflg(true);
-            } else {
-                parameter.setKoumukumeyifukaflg(false);
-            }
-            if (連番付加.equals(div.getChkHenshuHoho().getSelectedItems().get(1).getValue())) {
-                parameter.setRenbanfukaflg(true);
-            } else {
-                parameter.setRenbanfukaflg(false);
-            }
-            if (日付編集.equals(div.getChkHenshuHoho().getSelectedItems().get(2).getValue())) {
-                parameter.setHizikehensyuuflg(true);
-            } else {
-                parameter.setHizikehensyuuflg(false);
-            }
+            parameter.setHizikehensyuuflg(false);
         }
-        UzT0007CodeEntity entity1 = new UzT0007CodeEntity();
-        List<RString> entityList1 = new ArrayList<>();
-        for (KouFuJiyuu kouFuJiyuu : kouFuJiyuuList) {
-            entity1.setコード(kouFuJiyuu.getコード());
-            entityList1.add(entity1.getコード().value());
+        List<RString> 交付事由コード = new ArrayList<>();
+        for (dgKoufuJiyu_Row koufuJiyu : koufuJiyuList) {
+            交付事由コード.add(koufuJiyu.getTxtKofuJiyuCode());
         }
-        parameter.setKayuujiyuulist(entityList1);
-        UzT0007CodeEntity entity2 = new UzT0007CodeEntity();
-        List<RString> entityList2 = new ArrayList<>();
-        for (KayiSyuuJiyuu kayiSyuuJiyuu : kayiSyuuJiyuuList) {
-            entity2.setコード(kayiSyuuJiyuu.getコード());
-            entityList2.add(entity2.getコード().value());
+        parameter.setKayuujiyuulist(交付事由コード);
+        List<RString> 回収事由コード = new ArrayList<>();
+        for (dgKaishuJiyu_Row kaishuJiyu : kaishuJiyuList) {
+            回収事由コード.add(kaishuJiyu.getTxtKaishuJiyuCode());
         }
-        parameter.setKasyuujiyuulist(entityList2);
+        parameter.setKasyuujiyuulist(回収事由コード);
         parameter.setSyuturyokujunid(div.getCcdChohyoShutsuryokujun().getFocusPositionID());
 
         return parameter;
-
     }
 }

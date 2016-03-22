@@ -18,12 +18,14 @@ import jp.co.ndensan.reams.db.dbe.divcontroller.handler.parentdiv.DBE2020008.Nin
 import jp.co.ndensan.reams.db.dbe.divcontroller.handler.parentdiv.DBE2020008.NinteiChosaSchedule8MainValidatisonHandler;
 import jp.co.ndensan.reams.db.dbe.service.core.chosachikugroup.ChosaChikuGroupFinder;
 import jp.co.ndensan.reams.db.dbe.service.core.ninteischedule.chosachikugroup.ChosaChikuGroupManager;
+import jp.co.ndensan.reams.db.dbz.definition.core.koseishichosonselector.KoseiShiChosonSelectorModel;
 import jp.co.ndensan.reams.db.dbz.divcontroller.viewbox.ViewStateKeys;
-import jp.co.ndensan.reams.ur.urz.definition.message.UrInformationMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrQuestionMessages;
+import jp.co.ndensan.reams.ur.urz.divcontroller.entity.commonchilddiv.CodeInput.CodeInputHandler;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.message.MessageDialogSelectedResult;
 import jp.co.ndensan.reams.uz.uza.message.QuestionMessage;
@@ -41,6 +43,7 @@ public class NinteiChosaSchedule8Main {
     private static final RString 状態_追加 = new RString("追加");
     private static final RString 状態_修正 = new RString("修正");
     private static final RString 状態_削除 = new RString("削除");
+    private static final RString ROOTTITLE = new RString("調査地区グループマスタの保存処理が完了しました。");
 
     /**
      * onLoadの処理を行います。
@@ -206,7 +209,7 @@ public class NinteiChosaSchedule8Main {
         }
         return ResponseData.of(div).respond();
     }
-
+   
     /**
      * 調査地区検索ボタンを押下します。
      *
@@ -214,7 +217,24 @@ public class NinteiChosaSchedule8Main {
      * @return ResponseData<NinteiChosaSchedule8MainDiv>
      */
     public ResponseData<NinteiChosaSchedule8MainDiv> onClick_btnToSearchChosaChiku(NinteiChosaSchedule8MainDiv div) {
-       // TODO  内部QA：863 Redmine：78577       (仕様書とRAMLファイルを変更,現時点対応不可)
+        div.getChosaChikuGroupChosaChikuInput().getTxtChosaChikuCode1().setValue(div.getHdnTxtCode());
+        div.getChosaChikuGroupChosaChikuInput().getTxtChosaChikuMeisho1().setValue(div.getHdnTxtCodeMeisho());
+        return ResponseData.of(div).respond();
+    }
+
+    /**
+     * 調査地区検索ボタンを押下します。
+     *
+     * @param div NinteiChosaSchedule8MainDiv
+     * @return ResponseData<NinteiChosaSchedule8MainDiv>
+     */
+    public ResponseData<NinteiChosaSchedule8MainDiv> onClick_SearchChosaChikuOpen(NinteiChosaSchedule8MainDiv div) {
+        div.setHdnTxtSchemaName(new RString("rgdb"));
+        div.setHdnTxtSubGyomuCode(new RString("DBE"));
+        div.setHdnTxtCodeShubetsu(new RString("5002"));
+        div.setHdnTxtCode(div.getChosaChikuGroupChosaChikuInput().getTxtChosaChikuCode1().getValue());
+        div.setHdnTxtKijunYmd(new RString(FlexibleDate.getNowDate().toString()));
+        div.setHdnTxtCodeMasterKind(CodeInputHandler.CodeMasterKind.NoOption.toRString());
         return ResponseData.of(div).respond();
     }
 
@@ -225,7 +245,19 @@ public class NinteiChosaSchedule8Main {
      * @return ResponseData<NinteiChosaSchedule8MainDiv>
      */
     public ResponseData<NinteiChosaSchedule8MainDiv> onClick_btnToSearchShichoson(NinteiChosaSchedule8MainDiv div) {
-        // TODO  内部QA：863 Redmine：78577       (仕様書とRAMLファイルを変更,現時点対応不可)
+        KoseiShiChosonSelectorModel model = ViewStateHolder.get(ViewStateKeys.構成市町村選択_引き継ぎデータ, KoseiShiChosonSelectorModel.class);
+        div.getChosaChikuGroupChosaChikuInput().getTxtShichosonCode().setValue(model.get市町村コード());
+        div.getChosaChikuGroupChosaChikuInput().getTxtShichosonMeisho().setValue(model.get市町村名称());
+        return ResponseData.of(div).respond();
+    }
+
+    /**
+     * 市町村検索ボタンを押下します。
+     *
+     * @param div NinteiChosaSchedule8MainDiv
+     * @return ResponseData<NinteiChosaSchedule8MainDiv>
+     */
+    public ResponseData<NinteiChosaSchedule8MainDiv> onClick_ShichosonOpen(NinteiChosaSchedule8MainDiv div) {
         return ResponseData.of(div).respond();
     }
 
@@ -389,8 +421,7 @@ public class NinteiChosaSchedule8Main {
             for (ChosaChikuGroup chosaChikuGroup : models) {
                 chosaChikuGroupManager.saveOrDelete調査地区グループマスタ(chosaChikuGroup);
             }
-            div.getCcdKanryoMessage().setSuccessMessage(
-                    new RString(UrInformationMessages.保存終了.getMessage().evaluate()), RString.EMPTY, RString.EMPTY);
+            div.getCcdKanryoMessage().setMessage(ROOTTITLE, RString.EMPTY, RString.EMPTY, RString.EMPTY, true);
             return ResponseData.of(div).setState(DBE2020008StateName.完了);
         }
         return ResponseData.of(div).respond();
@@ -429,6 +460,7 @@ public class NinteiChosaSchedule8Main {
     public ResponseData<NinteiChosaSchedule8MainDiv> onClick_btnChosaChikuGroupIchiran(NinteiChosaSchedule8MainDiv div) {
         if ((状態_追加.equals(div.getChosaChikuGroupChosaChikuInput().getState()) && getValidationHandler(div).isUpdate())
                 || (状態_修正.equals(div.getChosaChikuGroupChosaChikuInput().getState()) && getValidationHandler(div).isUpdate())
+                || (状態_削除.equals(div.getChosaChikuGroupChosaChikuInput().getState()) && getValidationHandler(div).isUpdate())
                 ) {
             if (!ResponseHolder.isReRequest()) {
                 QuestionMessage message = new QuestionMessage(UrQuestionMessages.画面遷移の確認.getMessage().getCode(),
@@ -478,16 +510,6 @@ public class NinteiChosaSchedule8Main {
         return ResponseData.of(div).setState(DBE2020008StateName.調査地区グループ調査地区一覧);
     }
     
-     /**
-     * 画面を閉じて、メニューに戻る。
-     *
-     * @param div NinteiChosaSchedule8MainDiv
-     * @return ResponseData<NinteiChosaSchedule8MainDiv>
-     */
-    public ResponseData<NinteiChosaSchedule8MainDiv> onClick_complete(NinteiChosaSchedule8MainDiv div) {
-         return ResponseData.of(div).setState(DBE2020008StateName.調査地区グループ一覧);
-    }
-
     private NinteiChosaSchedule8MainHandler getHandler(NinteiChosaSchedule8MainDiv div) {
         return new NinteiChosaSchedule8MainHandler(div);
     }

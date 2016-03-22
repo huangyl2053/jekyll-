@@ -18,6 +18,7 @@ import lombok.Setter;
 public class KogakuShikyuFushikyuKetteishaIchiranItem {
 
     private RString 印刷日時;
+    private RString ページ数;
     private RString 国保連合会名;
     private RString 保険者番号;
     private RString 保険者名称;

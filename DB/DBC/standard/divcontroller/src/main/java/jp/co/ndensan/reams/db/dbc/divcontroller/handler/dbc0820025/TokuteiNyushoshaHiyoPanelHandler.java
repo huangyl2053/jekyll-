@@ -441,7 +441,8 @@ public class TokuteiNyushoshaHiyoPanelHandler {
                 cancel特定入所者費登録エリア();
             } else {
                 dgdRow.setRowState(RowState.Deleted);
-                setDgdTokuteiYichiran_Row(dgdRow);
+                cancel特定入所者費登録エリア();
+                set特定入所者費用一覧の合計エリア();
             }
         } else if (登録.equals(state)) {
             dgdRow.setRowState(RowState.Added);
@@ -502,35 +503,23 @@ public class TokuteiNyushoshaHiyoPanelHandler {
         if (div.getPanelTokutei().getPanelMeisai().getTxtHyojyuntanka().getValue() != null) {
             dgdRow.getDefaultDataName2().setValue(div.getPanelTokutei().getPanelMeisai()
                     .getTxtHyojyuntanka().getValue());
-        } else {
-            dgdRow.getDefaultDataName2().setValue(Decimal.ZERO);
         }
         if (div.getPanelTokutei().getPanelMeisai().getTxtFutangenndogaku().getValue() != null) {
             dgdRow.getDefaultDataName3().setValue(div.getPanelTokutei().getPanelMeisai()
                     .getTxtFutangenndogaku().getValue());
-        } else {
-            dgdRow.getDefaultDataName3().setValue(Decimal.ZERO);
         }
         if (div.getPanelTokutei().getPanelMeisai().getTxtNisu().getValue() != null) {
             dgdRow.getDefaultDataName4().setValue(div.getPanelTokutei().getPanelMeisai().getTxtNisu().getValue());
-        } else {
-            dgdRow.getDefaultDataName4().setValue(Decimal.ZERO);
         }
         if (div.getPanelTokutei().getPanelMeisai().getTxtHiyogaku().getValue() != null) {
             dgdRow.getDefaultDataName5().setValue(div.getPanelTokutei().getPanelMeisai().getTxtHiyogaku().getValue());
-        } else {
-            dgdRow.getDefaultDataName5().setValue(Decimal.ZERO);
         }
         if (div.getPanelTokutei().getPanelMeisai().getTxtHokenbun().getValue() != null) {
             dgdRow.getDefaultDataName6().setValue(div.getPanelTokutei().getPanelMeisai().getTxtHokenbun().getValue());
-        } else {
-            dgdRow.getDefaultDataName6().setValue(Decimal.ZERO);
         }
         if (div.getPanelTokutei().getPanelMeisai().getTxtRiyoshafutangaku().getValue() != null) {
             dgdRow.getDefaultDataName7().setValue(div.getPanelTokutei().getPanelMeisai()
                     .getTxtRiyoshafutangaku().getValue());
-        } else {
-            dgdRow.getDefaultDataName7().setValue(Decimal.ZERO);
         }
         if (登録.equals(ViewStateHolder.get(ViewStateKeys.状態, RString.class))) {
             List<dgdTokuteiYichiran_Row> list = div.getPanelTokutei().getDgdTokuteiYichiran().getDataSource();
@@ -622,7 +611,7 @@ public class TokuteiNyushoshaHiyoPanelHandler {
                         事業者番号,
                         様式番号,
                         明細番号,
-                        new RString(String.valueOf(連番))).createBuilderForEdit().build();
+                        new RString(String.format("%02d", 連番))).createBuilderForEdit().build();
                 entityAdded = buildShokanTokuteiNyushoshaKaigoServiceHiyo(entityAdded, dgdRow);
                 特定入所者費用List.add(entityAdded);
             }
@@ -642,36 +631,24 @@ public class TokuteiNyushoshaHiyoPanelHandler {
         if (dgdRow.getDefaultDataName2().getValue() != null) {
             entity = entity.createBuilderForEdit().set費用単価(dgdRow.getDefaultDataName2()
                     .getValue().intValue()).build();
-        } else {
-            entity = entity.createBuilderForEdit().set費用単価(0).build();
         }
         if (dgdRow.getDefaultDataName3().getValue() != null) {
             entity = entity.createBuilderForEdit().set負担限度額(dgdRow.getDefaultDataName3()
                     .getValue().intValue()).build();
-        } else {
-            entity = entity.createBuilderForEdit().set負担限度額(0).build();
         }
         if (dgdRow.getDefaultDataName4().getValue() != null) {
             entity = entity.createBuilderForEdit().set日数(dgdRow.getDefaultDataName4().getValue().intValue()).build();
-        } else {
-            entity = entity.createBuilderForEdit().set日数(0).build();
         }
         if (dgdRow.getDefaultDataName5().getValue() != null) {
             entity = entity.createBuilderForEdit().set費用額(dgdRow.getDefaultDataName5().getValue().intValue()).build();
-        } else {
-            entity = entity.createBuilderForEdit().set費用額(0).build();
         }
         if (dgdRow.getDefaultDataName6().getValue() != null) {
             entity = entity.createBuilderForEdit().set保険分請求額(dgdRow.getDefaultDataName6()
                     .getValue().intValue()).build();
-        } else {
-            entity = entity.createBuilderForEdit().set保険分請求額(0).build();
         }
         if (dgdRow.getDefaultDataName7().getValue() != null) {
             entity = entity.createBuilderForEdit().set利用者負担額(dgdRow.getDefaultDataName7()
                     .getValue().intValue()).build();
-        } else {
-            entity = entity.createBuilderForEdit().set利用者負担額(0).build();
         }
         if (div.getPanelTokutei().getTxtHiyogakuTotal().getValue() != null) {
             entity = entity.createBuilderForEdit().set費用額合計(div.getPanelTokutei().getTxtHiyogakuTotal().getValue()

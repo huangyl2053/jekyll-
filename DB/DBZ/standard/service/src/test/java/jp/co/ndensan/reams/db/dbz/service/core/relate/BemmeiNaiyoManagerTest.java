@@ -20,7 +20,7 @@ import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7002BemmeiNaiyoEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7003BemmeishaJohoEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.relate.BemmeiNaiyoEntity;
 import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT7002BemmeiNaiyoDac;
-import jp.co.ndensan.reams.db.dbz.persistence.db.mapper.relate.IBemmeiNaiyoMapper;
+import jp.co.ndensan.reams.db.dbz.persistence.db.mapper.relate.bemmeinaiyo.IBemmeiNaiyoMapper;
 import jp.co.ndensan.reams.db.dbz.service.core.MapperProvider;
 import jp.co.ndensan.reams.db.dbz.service.core.basic.BemmeishaJohoManager;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbzTestBase;

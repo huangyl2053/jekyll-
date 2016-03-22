@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbc.business.core.basic.ShokanJuryoininKeiyakusha;
 import jp.co.ndensan.reams.db.dbc.definition.core.keiyakuservice.KeiyakuServiceShurui;
+import jp.co.ndensan.reams.db.dbc.definition.core.shikyushinseishoumu.ShikyushinseishoUmuKubun;
 import jp.co.ndensan.reams.db.dbc.definition.core.shoninkubun.ShoninKubun;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0310012.PnlTotalPanelDiv;
 import jp.co.ndensan.reams.db.dbc.divcontroller.viewbox.ViewStateKeys;
@@ -39,8 +40,6 @@ public class PnlTotalPanelHandler {
     private static final RString 登録 = new RString("登録");
     private static final RString 保存する = new RString("btnUpdate");
     private static final RYear 過年度 = new RYear(2000);
-    private static final RString KEY_0 = new RString("key0");
-    private static final RString KEY_1 = new RString("key1");
     private static final int 四 = 4;
     private static final int 五 = 5;
     private static final int 八 = 8;
@@ -127,17 +126,17 @@ public class PnlTotalPanelHandler {
         // TODO QA.378(Redmine#:78539)
         div.getPnlCommon().getPnlDetail().getTxtKeyakujigyosyaName().setValue(new RString("契約事業者名称"));
         div.getPnlCommon().getPnlDetail().getDdlKeiyakuServiceType().setSelectedKey(shokanData.get契約サービス種類());
-        if (shokanData.get決定年月日() != null && shokanData.get決定年月日().isEmpty()) {
+        if (shokanData.get決定年月日() != null && !shokanData.get決定年月日().isEmpty()) {
             div.getPnlCommon().getPnlDetail().getTxtKeyakukettebi()
                     .setValue(new RDate(shokanData.get決定年月日().toString()));
         }
         if (ShoninKubun.承認する.getコード().equals(shokanData.get承認結果区分())) {
-            div.getPnlCommon().getPnlDetail().getRdoKettekubun().setSelectedKey(KEY_0);
+            div.getPnlCommon().getPnlDetail().getRdoKettekubun().setSelectedKey(ShoninKubun.承認する.getコード());
         } else if (ShoninKubun.承認しない.getコード().equals(shokanData.get承認結果区分())) {
-            div.getPnlCommon().getPnlDetail().getRdoKettekubun().setSelectedKey(KEY_1);
+            div.getPnlCommon().getPnlDetail().getRdoKettekubun().setSelectedKey(ShoninKubun.承認しない.getコード());
         }
         div.getPnlCommon().getPnlDetail().getTxtFusyoninriyu().setValue(shokanData.get不承認理由());
-        if (shokanData.get契約番号() != null && !shokanData.get契約番号().isEmpty()) {
+        if (!shokanData.get契約番号().isNullOrEmpty()) {
             div.getPnlCommon().getPnlDetail().getPnlHidari()
                     .getDdlYear().setSelectedKey(shokanData.get契約番号().substring(0, 四));
             div.getPnlCommon().getPnlDetail().getPnlHidari()
@@ -159,14 +158,19 @@ public class PnlTotalPanelHandler {
         }
         if (new RString("1").equals(shokanData.get承認結果通知書再発行区分())) {
             List<RString> list = new ArrayList<>();
-            list.add(KEY_0);
+            list.add(new RString("1"));
             div.getPnlCommon().getPnlDetail().getPnlHidari().getChkSaihakoukubun().setSelectedItemsByKey(list);
         } else if (new RString("0").equals(shokanData.get承認結果通知書再発行区分())) {
             div.getPnlCommon().getPnlDetail().getPnlHidari().getChkSaihakoukubun()
                     .setSelectedItemsByKey(new ArrayList<RString>());
         }
-        div.getPnlCommon().getPnlDetail().getPnlFoot()
-                .getTxtShikyuumukubun().setValue(shokanData.get支給申請書有無区分());
+        if (ShikyushinseishoUmuKubun.申請有り.getコード().equals(shokanData.get支給申請書有無区分())) {
+            div.getPnlCommon().getPnlDetail().getPnlFoot()
+                    .getTxtShikyuumukubun().setValue(ShikyushinseishoUmuKubun.申請有り.get名称());
+        } else if (ShikyushinseishoUmuKubun.申請無し.getコード().equals(shokanData.get支給申請書有無区分())) {
+            div.getPnlCommon().getPnlDetail().getPnlFoot()
+                    .getTxtShikyuumukubun().setValue(ShikyushinseishoUmuKubun.申請無し.get名称());
+        }
         div.getPnlCommon().getPnlDetail().getPnlFoot().getTxtShikyuumukubun().setDisabled(true);
         if (shokanData.get支給申請サービス提供年月() != null && !shokanData.get支給申請サービス提供年月().isEmpty()) {
             div.getPnlCommon().getPnlDetail().getPnlFoot().getTxtServiceYM()
@@ -207,6 +211,11 @@ public class PnlTotalPanelHandler {
                 KeiyakuServiceShurui.高額給付支給.getコード(), KeiyakuServiceShurui.高額給付支給.get名称()));
         div.getPnlCommon().getPnlDetail().getDdlKeiyakuServiceType().setDataSource(keiyakuServiceTypeList);
 
+        List<KeyValueDataSource> rdoList = new ArrayList<>();
+        rdoList.add(new KeyValueDataSource(ShoninKubun.承認する.getコード(), ShoninKubun.承認する.get名称()));
+        rdoList.add(new KeyValueDataSource(ShoninKubun.承認しない.getコード(), ShoninKubun.承認しない.get名称()));
+        div.getPnlCommon().getPnlDetail().getRdoKettekubun().setDataSource(rdoList);
+
         List<KeyValueDataSource> yearList = new ArrayList<>();
         yearList.add(new KeyValueDataSource(RString.EMPTY, RString.EMPTY));
         RYear 現年度 = RDate.getNowDate().getYear();
@@ -216,6 +225,10 @@ public class PnlTotalPanelHandler {
             現年度 = 現年度.minusYear(1);
         }
         div.getPnlCommon().getPnlDetail().getPnlHidari().getDdlYear().setDataSource(yearList);
+
+        List<KeyValueDataSource> checkBoxList = new ArrayList<>();
+        checkBoxList.add(new KeyValueDataSource(new RString("1"), new RString("承認通知書再発行区分")));
+        div.getPnlCommon().getPnlDetail().getPnlHidari().getChkSaihakoukubun().setDataSource(checkBoxList);
     }
 
     /**
@@ -265,9 +278,11 @@ public class PnlTotalPanelHandler {
             shokan = shokan.createBuilderForEdit().set決定年月日(new FlexibleDate(div.getPnlCommon().getPnlDetail()
                     .getTxtKeyakukettebi().getValue().toDateString())).build();
         }
-        if (KEY_0.equals(div.getPnlCommon().getPnlDetail().getRdoKettekubun().getSelectedKey())) {
+        if (ShoninKubun.承認する.getコード().equals(div.getPnlCommon().getPnlDetail()
+                .getRdoKettekubun().getSelectedKey())) {
             shokan = shokan.createBuilderForEdit().set承認結果区分(ShoninKubun.承認する.getコード()).build();
-        } else if (KEY_1.equals(div.getPnlCommon().getPnlDetail().getRdoKettekubun().getSelectedKey())) {
+        } else if (ShoninKubun.承認しない.getコード().equals(div.getPnlCommon().getPnlDetail()
+                .getRdoKettekubun().getSelectedKey())) {
             shokan = shokan.createBuilderForEdit().set承認結果区分(ShoninKubun.承認しない.getコード()).build();
         }
         if (div.getPnlCommon().getPnlDetail().getPnlHidari().getTxtSyoninkikan().getFromValue() != null) {

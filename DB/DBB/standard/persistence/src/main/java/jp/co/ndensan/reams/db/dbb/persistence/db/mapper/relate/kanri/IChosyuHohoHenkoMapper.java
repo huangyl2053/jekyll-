@@ -5,7 +5,6 @@
  */
 package jp.co.ndensan.reams.db.dbb.persistence.db.mapper.relate.kanri;
 
-import java.util.List;
 import jp.co.ndensan.reams.db.dbb.definition.mybatisprm.kanri.ChosyuHohoHenkoMapperParameter;
 import jp.co.ndensan.reams.db.dbb.entity.db.relate.choshuhoho.ChoshuHohoEntity;
 
@@ -18,8 +17,8 @@ public interface IChosyuHohoHenkoMapper {
      * 徴収方法変更、徴収方法取得します。
      *
      * @param parameter ChosyuHohoHenkoMapperParameter
-     * @return DbT2001ChoshuHohoEntity
+     * @return ChoshuHohoEntity
      */
-    List<ChoshuHohoEntity> selectChosyuHoho(ChosyuHohoHenkoMapperParameter parameter);
+    ChoshuHohoEntity selectChosyuHoho(ChosyuHohoHenkoMapperParameter parameter);
 
 }

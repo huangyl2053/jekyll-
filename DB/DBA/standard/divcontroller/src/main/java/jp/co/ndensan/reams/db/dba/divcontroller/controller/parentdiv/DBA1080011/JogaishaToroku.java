@@ -44,9 +44,6 @@ public class JogaishaToroku {
         if (ViewStateHolder.get(資格取得除外者登録キー, RString.class) == null || ViewStateHolder.get(資格取得除外者登録キー, RString.class).isEmpty()) {
             SearchResult<ShikakuShutokuJogaishaKanri> 資格取得除外者情報
                     = ShikakuShutokuJogaishaKanriManager.createInstance().getTennyuHoryuTokuteiJushoIchiran();
-            if (資格取得除外者情報.records() == null || 資格取得除外者情報.records().isEmpty()) {
-                return ResponseData.of(requestDiv).respond();
-            }
             getHandler(requestDiv).onLoad(資格取得除外者情報.records());
         } else {
             getHandler(requestDiv).onLoadKen();

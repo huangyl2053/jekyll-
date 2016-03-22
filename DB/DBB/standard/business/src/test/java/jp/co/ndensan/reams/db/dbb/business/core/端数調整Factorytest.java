@@ -5,6 +5,9 @@
  */
 package jp.co.ndensan.reams.db.dbb.business.core;
 
+import java.util.List;
+import jp.co.ndensan.reams.db.dbb.business.core.hokenryodankai.core.HokenryoDankai;
+import jp.co.ndensan.reams.db.dbb.business.core.hokenryodankai.core.HokenryoDankaiTest;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
@@ -21,19 +24,6 @@ import org.junit.Test;
  * @author n3336
  */
 public class 端数調整Factorytest {
-
-    HokenryoDankai dankai4 = new HokenryoDankai();
-    HokenryoDankai dankai5 = new HokenryoDankai();
-    HokenryoDankai dankai6 = new HokenryoDankai();
-    HokenryoDankai dankai7 = new HokenryoDankai();
-    HokenryoDankai dankai8 = new HokenryoDankai();
-    HokenryoDankai dankai9 = new HokenryoDankai();
-    HokenryoDankai dankai10 = new HokenryoDankai();
-    HokenryoDankai dankai11 = new HokenryoDankai();
-    HokenryoDankai dankai12 = new HokenryoDankai();
-    HokenryoDankai dankai1 = new HokenryoDankai();
-    HokenryoDankai dankai2 = new HokenryoDankai();
-    HokenryoDankai dankai3 = new HokenryoDankai();
 
     public 端数調整Factorytest() {
     }
@@ -82,31 +72,20 @@ public class 端数調整Factorytest {
         fukakonkyo.setランク_2月(new RString("4"));
         fukakonkyo.setランク_3月(new RString("4"));
 
-        dankai4.setSystemDankai(new RString("4"));
-        dankai5.setSystemDankai(new RString("4"));
-        dankai6.setSystemDankai(new RString("4"));
-        dankai7.setSystemDankai(new RString("4"));
-        dankai8.setSystemDankai(new RString("4"));
-        dankai9.setSystemDankai(new RString("4"));
-        dankai10.setSystemDankai(new RString("4"));
-        dankai11.setSystemDankai(new RString("4"));
-        dankai12.setSystemDankai(new RString("4"));
-        dankai1.setSystemDankai(new RString("4"));
-        dankai2.setSystemDankai(new RString("4"));
-        dankai3.setSystemDankai(new RString("4"));
+        List<HokenryoDankai> hokenryoDankaiList = HokenryoDankaiTest.set段階が4月_翌3月までに変更無いか();
 
-        fukakonkyo.set保険料段階_4月(dankai4);
-        fukakonkyo.set保険料段階_5月(dankai5);
-        fukakonkyo.set保険料段階_6月(dankai6);
-        fukakonkyo.set保険料段階_7月(dankai7);
-        fukakonkyo.set保険料段階_8月(dankai8);
-        fukakonkyo.set保険料段階_9月(dankai9);
-        fukakonkyo.set保険料段階_10月(dankai10);
-        fukakonkyo.set保険料段階_11月(dankai11);
-        fukakonkyo.set保険料段階_12月(dankai12);
-        fukakonkyo.set保険料段階_1月(dankai1);
-        fukakonkyo.set保険料段階_2月(dankai2);
-        fukakonkyo.set保険料段階_3月(dankai3);
+        fukakonkyo.set保険料段階_4月(hokenryoDankaiList.get(0));
+        fukakonkyo.set保険料段階_5月(hokenryoDankaiList.get(1));
+        fukakonkyo.set保険料段階_6月(hokenryoDankaiList.get(2));
+        fukakonkyo.set保険料段階_7月(hokenryoDankaiList.get(3));
+        fukakonkyo.set保険料段階_8月(hokenryoDankaiList.get(4));
+        fukakonkyo.set保険料段階_9月(hokenryoDankaiList.get(5));
+        fukakonkyo.set保険料段階_10月(hokenryoDankaiList.get(6));
+        fukakonkyo.set保険料段階_11月(hokenryoDankaiList.get(7));
+        fukakonkyo.set保険料段階_12月(hokenryoDankaiList.get(8));
+        fukakonkyo.set保険料段階_1月(hokenryoDankaiList.get(9));
+        fukakonkyo.set保険料段階_2月(hokenryoDankaiList.get(10));
+        fukakonkyo.set保険料段階_3月(hokenryoDankaiList.get(11));
 
         NengakuSeigyoJoho seigyo = new NengakuSeigyoJoho();
         seigyo.set端数単位(new Decimal("10"));
@@ -145,32 +124,20 @@ public class 端数調整Factorytest {
         fukakonkyo.setランク_2月(new RString("4"));
         fukakonkyo.setランク_3月(new RString("4"));
 
-        dankai4.setSystemDankai(new RString("5"));
-        dankai5.setSystemDankai(new RString("4"));
-        dankai6.setSystemDankai(new RString("4"));
-        dankai7.setSystemDankai(new RString("4"));
-        dankai8.setSystemDankai(new RString("4"));
-        dankai9.setSystemDankai(new RString("4"));
-        dankai10.setSystemDankai(new RString("4"));
-        dankai11.setSystemDankai(new RString("4"));
-        dankai12.setSystemDankai(new RString("4"));
-        dankai1.setSystemDankai(new RString("4"));
-        dankai2.setSystemDankai(new RString("4"));
-        dankai3.setSystemDankai(new RString("4"));
+        List<HokenryoDankai> hokenryoDankaiList = HokenryoDankaiTest.set段階が4月_翌3月までに変更無いか();
 
-        fukakonkyo.set保険料段階_4月(dankai4);
-        fukakonkyo.set保険料段階_5月(dankai5);
-        fukakonkyo.set保険料段階_6月(dankai6);
-        fukakonkyo.set保険料段階_7月(dankai7);
-        fukakonkyo.set保険料段階_8月(dankai8);
-        fukakonkyo.set保険料段階_9月(dankai9);
-        fukakonkyo.set保険料段階_10月(dankai10);
-        fukakonkyo.set保険料段階_11月(dankai11);
-        fukakonkyo.set保険料段階_12月(dankai12);
-        fukakonkyo.set保険料段階_1月(dankai1);
-        fukakonkyo.set保険料段階_2月(dankai2);
-        fukakonkyo.set保険料段階_3月(dankai3);
-
+        fukakonkyo.set保険料段階_4月(hokenryoDankaiList.get(0));
+        fukakonkyo.set保険料段階_5月(hokenryoDankaiList.get(1));
+        fukakonkyo.set保険料段階_6月(hokenryoDankaiList.get(2));
+        fukakonkyo.set保険料段階_7月(hokenryoDankaiList.get(3));
+        fukakonkyo.set保険料段階_8月(hokenryoDankaiList.get(4));
+        fukakonkyo.set保険料段階_9月(hokenryoDankaiList.get(5));
+        fukakonkyo.set保険料段階_10月(hokenryoDankaiList.get(6));
+        fukakonkyo.set保険料段階_11月(hokenryoDankaiList.get(7));
+        fukakonkyo.set保険料段階_12月(hokenryoDankaiList.get(8));
+        fukakonkyo.set保険料段階_1月(hokenryoDankaiList.get(9));
+        fukakonkyo.set保険料段階_2月(hokenryoDankaiList.get(10));
+        fukakonkyo.set保険料段階_3月(hokenryoDankaiList.get(11));
         NengakuSeigyoJoho seigyo = new NengakuSeigyoJoho();
         seigyo.set端数単位(new Decimal("10"));
         seigyo.set端数調整方法(new RString("切り上げ"));
@@ -208,31 +175,20 @@ public class 端数調整Factorytest {
         fukakonkyo.setランク_2月(new RString("4"));
         fukakonkyo.setランク_3月(new RString("4"));
 
-        dankai4.setSystemDankai(new RString("4"));
-        dankai5.setSystemDankai(new RString("4"));
-        dankai6.setSystemDankai(new RString("4"));
-        dankai7.setSystemDankai(new RString("4"));
-        dankai8.setSystemDankai(new RString("4"));
-        dankai9.setSystemDankai(new RString("4"));
-        dankai10.setSystemDankai(new RString("4"));
-        dankai11.setSystemDankai(new RString("4"));
-        dankai12.setSystemDankai(new RString("4"));
-        dankai1.setSystemDankai(new RString("4"));
-        dankai2.setSystemDankai(new RString("4"));
-        dankai3.setSystemDankai(new RString("4"));
+        List<HokenryoDankai> hokenryoDankaiList = HokenryoDankaiTest.set段階が4月_翌3月までに変更無いか();
 
-        fukakonkyo.set保険料段階_4月(dankai4);
-        fukakonkyo.set保険料段階_5月(dankai5);
-        fukakonkyo.set保険料段階_6月(dankai6);
-        fukakonkyo.set保険料段階_7月(dankai7);
-        fukakonkyo.set保険料段階_8月(dankai8);
-        fukakonkyo.set保険料段階_9月(dankai9);
-        fukakonkyo.set保険料段階_10月(dankai10);
-        fukakonkyo.set保険料段階_11月(dankai11);
-        fukakonkyo.set保険料段階_12月(dankai12);
-        fukakonkyo.set保険料段階_1月(dankai1);
-        fukakonkyo.set保険料段階_2月(dankai2);
-        fukakonkyo.set保険料段階_3月(dankai3);
+        fukakonkyo.set保険料段階_4月(hokenryoDankaiList.get(0));
+        fukakonkyo.set保険料段階_5月(hokenryoDankaiList.get(1));
+        fukakonkyo.set保険料段階_6月(hokenryoDankaiList.get(2));
+        fukakonkyo.set保険料段階_7月(hokenryoDankaiList.get(3));
+        fukakonkyo.set保険料段階_8月(hokenryoDankaiList.get(4));
+        fukakonkyo.set保険料段階_9月(hokenryoDankaiList.get(5));
+        fukakonkyo.set保険料段階_10月(hokenryoDankaiList.get(6));
+        fukakonkyo.set保険料段階_11月(hokenryoDankaiList.get(7));
+        fukakonkyo.set保険料段階_12月(hokenryoDankaiList.get(8));
+        fukakonkyo.set保険料段階_1月(hokenryoDankaiList.get(9));
+        fukakonkyo.set保険料段階_2月(hokenryoDankaiList.get(10));
+        fukakonkyo.set保険料段階_3月(hokenryoDankaiList.get(11));
 
         NengakuSeigyoJoho seigyo = new NengakuSeigyoJoho();
         seigyo.set端数単位(new Decimal("10"));
@@ -271,31 +227,20 @@ public class 端数調整Factorytest {
         fukakonkyo.setランク_2月(new RString("4"));
         fukakonkyo.setランク_3月(new RString("4"));
 
-        dankai4.setSystemDankai(new RString("4"));
-        dankai5.setSystemDankai(new RString("4"));
-        dankai6.setSystemDankai(new RString("4"));
-        dankai7.setSystemDankai(new RString("4"));
-        dankai8.setSystemDankai(new RString("4"));
-        dankai9.setSystemDankai(new RString("4"));
-        dankai10.setSystemDankai(new RString("4"));
-        dankai11.setSystemDankai(new RString("4"));
-        dankai12.setSystemDankai(new RString("4"));
-        dankai1.setSystemDankai(new RString("4"));
-        dankai2.setSystemDankai(new RString("4"));
-        dankai3.setSystemDankai(new RString("4"));
+        List<HokenryoDankai> hokenryoDankaiList = HokenryoDankaiTest.set段階が4月_翌3月までに変更無いか();
 
-        fukakonkyo.set保険料段階_4月(dankai4);
-        fukakonkyo.set保険料段階_5月(dankai5);
-        fukakonkyo.set保険料段階_6月(dankai6);
-        fukakonkyo.set保険料段階_7月(dankai7);
-        fukakonkyo.set保険料段階_8月(dankai8);
-        fukakonkyo.set保険料段階_9月(dankai9);
-        fukakonkyo.set保険料段階_10月(dankai10);
-        fukakonkyo.set保険料段階_11月(dankai11);
-        fukakonkyo.set保険料段階_12月(dankai12);
-        fukakonkyo.set保険料段階_1月(dankai1);
-        fukakonkyo.set保険料段階_2月(dankai2);
-        fukakonkyo.set保険料段階_3月(dankai3);
+        fukakonkyo.set保険料段階_4月(hokenryoDankaiList.get(0));
+        fukakonkyo.set保険料段階_5月(hokenryoDankaiList.get(1));
+        fukakonkyo.set保険料段階_6月(hokenryoDankaiList.get(2));
+        fukakonkyo.set保険料段階_7月(hokenryoDankaiList.get(3));
+        fukakonkyo.set保険料段階_8月(hokenryoDankaiList.get(4));
+        fukakonkyo.set保険料段階_9月(hokenryoDankaiList.get(5));
+        fukakonkyo.set保険料段階_10月(hokenryoDankaiList.get(6));
+        fukakonkyo.set保険料段階_11月(hokenryoDankaiList.get(7));
+        fukakonkyo.set保険料段階_12月(hokenryoDankaiList.get(8));
+        fukakonkyo.set保険料段階_1月(hokenryoDankaiList.get(9));
+        fukakonkyo.set保険料段階_2月(hokenryoDankaiList.get(10));
+        fukakonkyo.set保険料段階_3月(hokenryoDankaiList.get(11));
 
         NengakuSeigyoJoho seigyo = new NengakuSeigyoJoho();
         seigyo.set端数単位(new Decimal("10"));

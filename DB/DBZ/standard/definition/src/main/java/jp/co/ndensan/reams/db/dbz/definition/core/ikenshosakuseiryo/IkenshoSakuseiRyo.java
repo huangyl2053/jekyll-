@@ -65,7 +65,7 @@ public enum IkenshoSakuseiRyo {
      */
     public static IkenshoSakuseiRyo toValue(RString code) {
         for (IkenshoSakuseiRyo ikenshoSakuseiRyo : IkenshoSakuseiRyo.values()) {
-            if (ikenshoSakuseiRyo.code == code) {
+            if (ikenshoSakuseiRyo.code.equals(code)) {
                 return ikenshoSakuseiRyo;
             }
         }

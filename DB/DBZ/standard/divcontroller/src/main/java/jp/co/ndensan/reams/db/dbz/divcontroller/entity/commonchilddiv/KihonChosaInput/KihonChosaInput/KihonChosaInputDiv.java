@@ -7,6 +7,7 @@ package jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.KihonChos
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.binding.*;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 
@@ -15,7 +16,6 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.ICommonChildDivMode;
 import jp.co.ndensan.reams.uz.uza.ui.servlets._CommonChildDivModeUtil;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo;
 import jp.co.ndensan.reams.db.dbz.divcontroller.handler.commonchilddiv.kihonchosainput.KihonChosaInputHandler;
-import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.binding.ButtonDialog;
 import jp.co.ndensan.reams.uz.uza.ui.binding.CheckBoxList;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Label;
@@ -51,6 +51,8 @@ public class KihonChosaInputDiv extends Panel implements IKihonChosaInputDiv {
     private TokubetsuIryoDiv TokubetsuIryo;
     @JsonProperty("Jiritsudo")
     private JiritsudoDiv Jiritsudo;
+    @JsonProperty("モード")
+    private RString モード;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -200,6 +202,24 @@ public class KihonChosaInputDiv extends Panel implements IKihonChosaInputDiv {
     @JsonProperty("Jiritsudo")
     public void setJiritsudo(JiritsudoDiv Jiritsudo) {
         this.Jiritsudo = Jiritsudo;
+    }
+
+    /*
+     * getモード
+     * @return モード
+     */
+    @JsonProperty("モード")
+    public RString getモード() {
+        return モード;
+    }
+
+    /*
+     * setモード
+     * @param モード モード
+     */
+    @JsonProperty("モード")
+    public void setモード(RString モード) {
+        this.モード = モード;
     }
 
     /*

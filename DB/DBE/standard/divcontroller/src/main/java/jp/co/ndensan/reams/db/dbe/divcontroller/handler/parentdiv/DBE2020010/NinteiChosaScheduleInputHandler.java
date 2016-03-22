@@ -101,51 +101,51 @@ public class NinteiChosaScheduleInputHandler {
         if (モード_1.equals(モード)) {
             if (予約不可.equals(予約可否)) {
                 set割当状況Grid値(temp_認定調査員名称, temp_認定調査委託先名称, temp_予約可否, temp_備考, temp_予約状況);
-                div.getTxtNinteiChosainCode().setDisabled(true);
-                div.getTxtNinteiChosainName().setDisabled(true);
-                div.getTxtNinteiChosaItakusakiCode().setDisabled(true);
-                div.getTxtNinteiChosaItakusakiName().setDisabled(true);
-                div.getTxtNinteiChosaDate().setDisabled(true);
-                div.getTxtNinteiChosaTime().setDisabled(true);
-                div.getTxtNinteiChosaTimeFrame().setDisabled(true);
-                div.getRadYoyakuKahi().setDisabled(false);
-                div.getTxtNinteiChosaBiko().setDisabled(false);
-                div.getRadYoyakuJokyo().setDisabled(true);
-                div.getBtnSearchTaishosha().setDisabled(true);
-                div.getBtnDisplayLatestInformation().setDisabled(true);
+                div.getWariateJokyo().getTxtNinteiChosainCode().setDisabled(true);
+                div.getWariateJokyo().getTxtNinteiChosainName().setDisabled(true);
+                div.getWariateJokyo().getTxtNinteiChosaItakusakiCode().setDisabled(true);
+                div.getWariateJokyo().getTxtNinteiChosaItakusakiName().setDisabled(true);
+                div.getWariateJokyo().getTxtNinteiChosaDate().setDisabled(true);
+                div.getWariateJokyo().getTxtNinteiChosaTime().setDisabled(true);
+                div.getWariateJokyo().getTxtNinteiChosaTimeFrame().setDisabled(true);
+                div.getWariateJokyo().getRadYoyakuKahi().setDisabled(false);
+                div.getWariateJokyo().getTxtNinteiChosaBiko().setDisabled(false);
+                div.getWariateJokyo().getRadYoyakuJokyo().setDisabled(true);
+                div.getButtonArea().getBtnSearchTaishosha().setDisabled(true);
+                div.getButtonArea().getBtnDisplayLatestInformation().setDisabled(true);
                 div.getTaishoshaShosai().setDisabled(true);
-                div.getBtnClear().setDisabled(true);
+                div.getTaishoshaShosai().getBtnClear().setDisabled(true);
             }
             if (予約可.equals(予約可否) && 予約状況_未定.equals(予約状況)) {
                 set割当状況Grid値(temp_認定調査員名称, temp_認定調査委託先名称, temp_予約可否, temp_備考, temp_予約状況);
-                div.getTxtNinteiChosainCode().setDisabled(true);
-                div.getTxtNinteiChosainName().setDisabled(true);
-                div.getTxtNinteiChosaItakusakiCode().setDisabled(true);
-                div.getTxtNinteiChosaItakusakiName().setDisabled(true);
-                div.getTxtNinteiChosaDate().setDisabled(true);
-                div.getTxtNinteiChosaTime().setDisabled(true);
-                div.getTxtNinteiChosaTimeFrame().setDisabled(true);
-                div.getRadYoyakuKahi().setDisabled(false);
-                div.getTxtNinteiChosaBiko().setDisabled(false);
-                div.getRadYoyakuJokyo().setDisabled(false);
-                div.getBtnSearchTaishosha().setDisabled(false);
-                div.getBtnDisplayLatestInformation().setDisabled(true);
+                div.getWariateJokyo().getTxtNinteiChosainCode().setDisabled(true);
+                div.getWariateJokyo().getTxtNinteiChosainName().setDisabled(true);
+                div.getWariateJokyo().getTxtNinteiChosaItakusakiCode().setDisabled(true);
+                div.getWariateJokyo().getTxtNinteiChosaItakusakiName().setDisabled(true);
+                div.getWariateJokyo().getTxtNinteiChosaDate().setDisabled(true);
+                div.getWariateJokyo().getTxtNinteiChosaTime().setDisabled(true);
+                div.getWariateJokyo().getTxtNinteiChosaTimeFrame().setDisabled(true);
+                div.getWariateJokyo().getRadYoyakuKahi().setDisabled(false);
+                div.getWariateJokyo().getTxtNinteiChosaBiko().setDisabled(false);
+                div.getWariateJokyo().getRadYoyakuJokyo().setDisabled(false);
+                div.getButtonArea().getBtnSearchTaishosha().setDisabled(false);
+                div.getButtonArea().getBtnDisplayLatestInformation().setDisabled(true);
                 set対象者詳細Grid状態();
             }
             if (予約可.equals(予約可否) && (予約状況_仮予約.equals(予約状況) || 予約状況_確定.equals(予約状況))) {
                 set割当状況Grid値(temp_認定調査員名称, temp_認定調査委託先名称, temp_予約可否, temp_備考, temp_予約状況);
-                div.getTxtNinteiChosainCode().setDisabled(true);
-                div.getTxtNinteiChosainName().setDisabled(true);
-                div.getTxtNinteiChosaItakusakiCode().setDisabled(true);
-                div.getTxtNinteiChosaItakusakiName().setDisabled(true);
-                div.getTxtNinteiChosaDate().setDisabled(true);
-                div.getTxtNinteiChosaTime().setDisabled(true);
-                div.getTxtNinteiChosaTimeFrame().setDisabled(true);
-                div.getRadYoyakuKahi().setDisabled(false);
-                div.getTxtNinteiChosaBiko().setDisabled(true);
-                div.getRadYoyakuJokyo().setDisabled(false);
-                div.getBtnSearchTaishosha().setDisabled(false);
-                div.getBtnDisplayLatestInformation().setDisabled(false);
+                div.getWariateJokyo().getTxtNinteiChosainCode().setDisabled(true);
+                div.getWariateJokyo().getTxtNinteiChosainName().setDisabled(true);
+                div.getWariateJokyo().getTxtNinteiChosaItakusakiCode().setDisabled(true);
+                div.getWariateJokyo().getTxtNinteiChosaItakusakiName().setDisabled(true);
+                div.getWariateJokyo().getTxtNinteiChosaDate().setDisabled(true);
+                div.getWariateJokyo().getTxtNinteiChosaTime().setDisabled(true);
+                div.getWariateJokyo().getTxtNinteiChosaTimeFrame().setDisabled(true);
+                div.getWariateJokyo().getRadYoyakuKahi().setDisabled(false);
+                div.getWariateJokyo().getTxtNinteiChosaBiko().setDisabled(true);
+                div.getWariateJokyo().getRadYoyakuJokyo().setDisabled(false);
+                div.getButtonArea().getBtnSearchTaishosha().setDisabled(false);
+                div.getButtonArea().getBtnDisplayLatestInformation().setDisabled(false);
                 set対象者詳細Grid値(temp_被保番号, temp_被保険者区分コード, temp_保険者, temp_認定申請日, temp_申請区分_申請時, temp_氏名,
                         temp_カナ氏名, temp_場所, temp_駐車場, temp_立会人1, temp_連絡先1, temp_立会人2, temp_連絡先2, temp_対象者メモ);
                 set対象者詳細Grid状態();
@@ -154,11 +154,11 @@ public class NinteiChosaScheduleInputHandler {
         onLoad_モード_2_3(temp_認定調査員名称, temp_認定調査委託先名称, temp_予約可否, temp_備考, temp_予約状況,
                 temp_被保番号, temp_被保険者区分コード, temp_保険者, temp_認定申請日, temp_申請区分_申請時, temp_氏名, temp_カナ氏名,
                 temp_場所, temp_駐車場, temp_立会人1, temp_連絡先1, temp_立会人2, temp_連絡先2, temp_対象者メモ);
-        if (div.getBtnSearchTaishosha().isVisible()) {
+        if (div.getButtonArea().getBtnSearchTaishosha().isVisible()) {
             if (!RString.isNullOrEmpty(temp_申請者管理番号3)) {
-                div.getBtnDisplayLatestInformation().setDisabled(false);
+                div.getButtonArea().getBtnDisplayLatestInformation().setDisabled(false);
             } else {
-                div.getBtnDisplayLatestInformation().setDisabled(true);
+                div.getButtonArea().getBtnDisplayLatestInformation().setDisabled(true);
             }
         }
     }
@@ -169,150 +169,150 @@ public class NinteiChosaScheduleInputHandler {
             RString temp_駐車場, RString temp_立会人1, RString temp_連絡先1, RString temp_立会人2, RString temp_連絡先2, RString temp_対象者メモ) {
         if (モード_2.equals(モード)) {
             set割当状況Grid値(temp_認定調査員名称, temp_認定調査委託先名称, temp_予約可否, temp_備考, temp_予約状況);
-            div.getTxtNinteiChosainCode().setDisabled(true);
-            div.getTxtNinteiChosainName().setDisabled(true);
-            div.getTxtNinteiChosaItakusakiCode().setDisabled(true);
-            div.getTxtNinteiChosaItakusakiName().setDisabled(true);
-            div.getTxtNinteiChosaDate().setDisabled(true);
-            div.getTxtNinteiChosaTime().setDisabled(true);
-            div.getTxtNinteiChosaTimeFrame().setDisabled(true);
-            div.getRadYoyakuKahi().setDisabled(false);
-            div.getTxtNinteiChosaBiko().setDisabled(true);
-            div.getRadYoyakuJokyo().setDisabled(false);
-            div.getBtnSearchTaishosha().setVisible(false);
-            div.getBtnDisplayLatestInformation().setVisible(false);
+            div.getWariateJokyo().getTxtNinteiChosainCode().setDisabled(true);
+            div.getWariateJokyo().getTxtNinteiChosainName().setDisabled(true);
+            div.getWariateJokyo().getTxtNinteiChosaItakusakiCode().setDisabled(true);
+            div.getWariateJokyo().getTxtNinteiChosaItakusakiName().setDisabled(true);
+            div.getWariateJokyo().getTxtNinteiChosaDate().setDisabled(true);
+            div.getWariateJokyo().getTxtNinteiChosaTime().setDisabled(true);
+            div.getWariateJokyo().getTxtNinteiChosaTimeFrame().setDisabled(true);
+            div.getWariateJokyo().getRadYoyakuKahi().setDisabled(false);
+            div.getWariateJokyo().getTxtNinteiChosaBiko().setDisabled(true);
+            div.getWariateJokyo().getRadYoyakuJokyo().setDisabled(false);
+            div.getButtonArea().getBtnSearchTaishosha().setVisible(false);
+            div.getButtonArea().getBtnDisplayLatestInformation().setVisible(false);
             set対象者詳細Grid値(temp_被保番号, temp_被保険者区分コード, temp_保険者, temp_認定申請日, temp_申請区分_申請時, temp_氏名,
                     temp_カナ氏名, temp_場所, temp_駐車場, temp_立会人1, temp_連絡先1, temp_立会人2, temp_連絡先2, temp_対象者メモ);
-            div.getTxtHihoBangoNumber().setDisabled(true);
-            div.getTxtHihoBangoGosu().setDisabled(true);
-            div.getTxtHokenshaName().setDisabled(true);
-            div.getTxtNinteiShinseiDate().setDisabled(true);
-            div.getTxtNinteiShinseiKubun().setDisabled(true);
-            div.getTxtTaishoshaName().setDisabled(true);
-            div.getTxtTaishoshaNameKana().setDisabled(true);
-            div.getTxtBasho().setDisabled(true);
-            div.getTxtChushajo().setDisabled(true);
-            div.getTxtTachiainin1().setDisabled(true);
-            div.getTxtRenrakusaki1().setDisabled(true);
-            div.getTxtTachiainin2().setDisabled(true);
-            div.getTxtRenrakusaki2().setDisabled(true);
-            div.getTxtTaishoshaShosaiMemo().setDisabled(true);
-            div.getBtnClear().setVisible(false);
+            div.getTaishoshaShosai().getTxtHihoBangoNumber().setDisabled(true);
+            div.getTaishoshaShosai().getTxtHihoBangoGosu().setDisabled(true);
+            div.getTaishoshaShosai().getTxtHokenshaName().setDisabled(true);
+            div.getTaishoshaShosai().getTxtNinteiShinseiDate().setDisabled(true);
+            div.getTaishoshaShosai().getTxtNinteiShinseiKubun().setDisabled(true);
+            div.getTaishoshaShosai().getTxtTaishoshaName().setDisabled(true);
+            div.getTaishoshaShosai().getTxtTaishoshaNameKana().setDisabled(true);
+            div.getTaishoshaShosai().getTxtBasho().setDisabled(true);
+            div.getTaishoshaShosai().getTxtChushajo().setDisabled(true);
+            div.getTaishoshaShosai().getTxtTachiainin1().setDisabled(true);
+            div.getTaishoshaShosai().getTxtRenrakusaki1().setDisabled(true);
+            div.getTaishoshaShosai().getTxtTachiainin2().setDisabled(true);
+            div.getTaishoshaShosai().getTxtRenrakusaki2().setDisabled(true);
+            div.getTaishoshaShosai().getTxtTaishoshaShosaiMemo().setDisabled(true);
+            div.getTaishoshaShosai().getBtnClear().setVisible(false);
         }
         if (モード_3.equals(モード)) {
             if (予約可.equals(予約可否) && 予約状況_未定.equals(予約状況)) {
                 set割当状況Grid値(temp_認定調査員名称, temp_認定調査委託先名称, temp_予約可否, temp_備考, temp_予約状況);
-                div.getTxtNinteiChosainCode().setDisabled(true);
-                div.getTxtNinteiChosainName().setDisabled(true);
-                div.getTxtNinteiChosaItakusakiCode().setDisabled(true);
-                div.getTxtNinteiChosaItakusakiName().setDisabled(true);
-                div.getTxtNinteiChosaDate().setDisabled(true);
-                div.getTxtNinteiChosaTime().setDisabled(true);
-                div.getTxtNinteiChosaTimeFrame().setDisabled(true);
-                div.getRadYoyakuKahi().setDisabled(false);
-                div.getTxtNinteiChosaBiko().setDisabled(false);
-                div.getRadYoyakuJokyo().setDisabled(false);
-                div.getBtnSearchTaishosha().setVisible(false);
-                div.getBtnDisplayLatestInformation().setDisabled(false);
+                div.getWariateJokyo().getTxtNinteiChosainCode().setDisabled(true);
+                div.getWariateJokyo().getTxtNinteiChosainName().setDisabled(true);
+                div.getWariateJokyo().getTxtNinteiChosaItakusakiCode().setDisabled(true);
+                div.getWariateJokyo().getTxtNinteiChosaItakusakiName().setDisabled(true);
+                div.getWariateJokyo().getTxtNinteiChosaDate().setDisabled(true);
+                div.getWariateJokyo().getTxtNinteiChosaTime().setDisabled(true);
+                div.getWariateJokyo().getTxtNinteiChosaTimeFrame().setDisabled(true);
+                div.getWariateJokyo().getRadYoyakuKahi().setDisabled(false);
+                div.getWariateJokyo().getTxtNinteiChosaBiko().setDisabled(false);
+                div.getWariateJokyo().getRadYoyakuJokyo().setDisabled(false);
+                div.getButtonArea().getBtnSearchTaishosha().setVisible(false);
+                div.getButtonArea().getBtnDisplayLatestInformation().setDisabled(false);
                 set対象者詳細Grid値(temp_被保番号, temp_被保険者区分コード, temp_保険者, temp_認定申請日, temp_申請区分_申請時, temp_氏名,
                         temp_カナ氏名, temp_場所, temp_駐車場, temp_立会人1, temp_連絡先1, temp_立会人2, temp_連絡先2, temp_対象者メモ);
                 set対象者詳細Grid状態();
-                div.getBtnClear().setVisible(false);
+                div.getTaishoshaShosai().getBtnClear().setVisible(false);
             }
             if (予約不可.equals(予約可否) && (予約状況_仮予約.equals(予約状況) || 予約状況_確定.equals(予約状況))) {
                 set割当状況Grid値(temp_認定調査員名称, temp_認定調査委託先名称, temp_予約可否, temp_備考, temp_予約状況);
-                div.getTxtNinteiChosainCode().setDisabled(true);
-                div.getTxtNinteiChosainName().setDisabled(true);
-                div.getTxtNinteiChosaItakusakiCode().setDisabled(true);
-                div.getTxtNinteiChosaItakusakiName().setDisabled(true);
-                div.getTxtNinteiChosaDate().setDisabled(true);
-                div.getTxtNinteiChosaTime().setDisabled(true);
-                div.getTxtNinteiChosaTimeFrame().setDisabled(true);
-                div.getRadYoyakuKahi().setDisabled(true);
-                div.getTxtNinteiChosaBiko().setDisabled(true);
-                div.getRadYoyakuJokyo().setDisabled(true);
-                div.getBtnSearchTaishosha().setVisible(false);
-                div.getBtnDisplayLatestInformation().setVisible(false);
+                div.getWariateJokyo().getTxtNinteiChosainCode().setDisabled(true);
+                div.getWariateJokyo().getTxtNinteiChosainName().setDisabled(true);
+                div.getWariateJokyo().getTxtNinteiChosaItakusakiCode().setDisabled(true);
+                div.getWariateJokyo().getTxtNinteiChosaItakusakiName().setDisabled(true);
+                div.getWariateJokyo().getTxtNinteiChosaDate().setDisabled(true);
+                div.getWariateJokyo().getTxtNinteiChosaTime().setDisabled(true);
+                div.getWariateJokyo().getTxtNinteiChosaTimeFrame().setDisabled(true);
+                div.getWariateJokyo().getRadYoyakuKahi().setDisabled(true);
+                div.getWariateJokyo().getTxtNinteiChosaBiko().setDisabled(true);
+                div.getWariateJokyo().getRadYoyakuJokyo().setDisabled(true);
+                div.getButtonArea().getBtnSearchTaishosha().setVisible(false);
+                div.getButtonArea().getBtnDisplayLatestInformation().setVisible(false);
                 set対象者詳細Grid値(temp_被保番号, temp_被保険者区分コード, temp_保険者, temp_認定申請日, temp_申請区分_申請時, temp_氏名,
                         temp_カナ氏名, temp_場所, temp_駐車場, temp_立会人1, temp_連絡先1, temp_立会人2, temp_連絡先2, temp_対象者メモ);
-                div.getTxtHihoBangoNumber().setDisabled(true);
-                div.getTxtHihoBangoGosu().setDisabled(true);
-                div.getTxtHokenshaName().setDisabled(true);
-                div.getTxtNinteiShinseiDate().setDisabled(true);
-                div.getTxtNinteiShinseiKubun().setDisabled(true);
-                div.getTxtTaishoshaName().setDisabled(true);
-                div.getTxtTaishoshaNameKana().setDisabled(true);
-                div.getTxtBasho().setDisabled(true);
-                div.getTxtChushajo().setDisabled(true);
-                div.getTxtTachiainin1().setDisabled(true);
-                div.getTxtRenrakusaki1().setDisabled(true);
-                div.getTxtTachiainin2().setDisabled(true);
-                div.getTxtRenrakusaki2().setDisabled(true);
-                div.getTxtTaishoshaShosaiMemo().setDisabled(true);
-                div.getBtnClear().setVisible(false);
+                div.getTaishoshaShosai().getTxtHihoBangoNumber().setDisabled(true);
+                div.getTaishoshaShosai().getTxtHihoBangoGosu().setDisabled(true);
+                div.getTaishoshaShosai().getTxtHokenshaName().setDisabled(true);
+                div.getTaishoshaShosai().getTxtNinteiShinseiDate().setDisabled(true);
+                div.getTaishoshaShosai().getTxtNinteiShinseiKubun().setDisabled(true);
+                div.getTaishoshaShosai().getTxtTaishoshaName().setDisabled(true);
+                div.getTaishoshaShosai().getTxtTaishoshaNameKana().setDisabled(true);
+                div.getTaishoshaShosai().getTxtBasho().setDisabled(true);
+                div.getTaishoshaShosai().getTxtChushajo().setDisabled(true);
+                div.getTaishoshaShosai().getTxtTachiainin1().setDisabled(true);
+                div.getTaishoshaShosai().getTxtRenrakusaki1().setDisabled(true);
+                div.getTaishoshaShosai().getTxtTachiainin2().setDisabled(true);
+                div.getTaishoshaShosai().getTxtRenrakusaki2().setDisabled(true);
+                div.getTaishoshaShosai().getTxtTaishoshaShosaiMemo().setDisabled(true);
+                div.getTaishoshaShosai().getBtnClear().setVisible(false);
             }
         }
     }
 
     private void set対象者詳細Grid状態() {
-        div.getTxtHihoBangoNumber().setDisabled(true);
-        div.getTxtHihoBangoGosu().setDisabled(true);
-        div.getTxtHokenshaName().setDisabled(true);
-        div.getTxtNinteiShinseiDate().setDisabled(true);
-        div.getTxtNinteiShinseiKubun().setDisabled(true);
-        div.getTxtTaishoshaName().setDisabled(true);
-        div.getTxtTaishoshaNameKana().setDisabled(true);
-        div.getTxtBasho().setDisabled(false);
-        div.getTxtChushajo().setDisabled(false);
-        div.getTxtTachiainin1().setDisabled(false);
-        div.getTxtRenrakusaki1().setDisabled(false);
-        div.getTxtTachiainin2().setDisabled(false);
-        div.getTxtRenrakusaki2().setDisabled(false);
-        div.getTxtTaishoshaShosaiMemo().setDisabled(false);
-        div.getBtnClear().setDisabled(false);
+        div.getTaishoshaShosai().getTxtHihoBangoNumber().setDisabled(true);
+        div.getTaishoshaShosai().getTxtHihoBangoGosu().setDisabled(true);
+        div.getTaishoshaShosai().getTxtHokenshaName().setDisabled(true);
+        div.getTaishoshaShosai().getTxtNinteiShinseiDate().setDisabled(true);
+        div.getTaishoshaShosai().getTxtNinteiShinseiKubun().setDisabled(true);
+        div.getTaishoshaShosai().getTxtTaishoshaName().setDisabled(true);
+        div.getTaishoshaShosai().getTxtTaishoshaNameKana().setDisabled(true);
+        div.getTaishoshaShosai().getTxtBasho().setDisabled(false);
+        div.getTaishoshaShosai().getTxtChushajo().setDisabled(false);
+        div.getTaishoshaShosai().getTxtTachiainin1().setDisabled(false);
+        div.getTaishoshaShosai().getTxtRenrakusaki1().setDisabled(false);
+        div.getTaishoshaShosai().getTxtTachiainin2().setDisabled(false);
+        div.getTaishoshaShosai().getTxtRenrakusaki2().setDisabled(false);
+        div.getTaishoshaShosai().getTxtTaishoshaShosaiMemo().setDisabled(false);
+        div.getTaishoshaShosai().getBtnClear().setDisabled(false);
     }
 
     private void set割当状況Grid値(RString temp_認定調査員名称, RString temp_認定調査委託先名称,
             RString temp_予約可否, RString temp_備考, RString temp_予約状況) {
-        div.getTxtNinteiChosainCode().setValue(認定調査員コード == null ? RString.EMPTY : 認定調査員コード);
-        div.getTxtNinteiChosainName().setValue(temp_認定調査員名称 == null ? RString.EMPTY : temp_認定調査員名称);
-        div.getTxtNinteiChosaItakusakiCode().setValue(認定調査委託先コード == null ? RString.EMPTY : 認定調査委託先コード);
-        div.getTxtNinteiChosaItakusakiName().setValue(temp_認定調査委託先名称 == null ? RString.EMPTY : temp_認定調査委託先名称);
-        div.getTxtNinteiChosaDate().setValue(設定日 == null ? FlexibleDate.EMPTY : 設定日);
-        div.getTxtNinteiChosaTime().setValue(get調査日時(時間枠));
-        div.getTxtNinteiChosaTimeFrame().setValue(時間枠 == null ? RString.EMPTY : 時間枠);
+        div.getWariateJokyo().getTxtNinteiChosainCode().setValue(認定調査員コード == null ? RString.EMPTY : 認定調査員コード);
+        div.getWariateJokyo().getTxtNinteiChosainName().setValue(temp_認定調査員名称 == null ? RString.EMPTY : temp_認定調査員名称);
+        div.getWariateJokyo().getTxtNinteiChosaItakusakiCode().setValue(認定調査委託先コード == null ? RString.EMPTY : 認定調査委託先コード);
+        div.getWariateJokyo().getTxtNinteiChosaItakusakiName().setValue(temp_認定調査委託先名称 == null ? RString.EMPTY : temp_認定調査委託先名称);
+        div.getWariateJokyo().getTxtNinteiChosaDate().setValue(設定日 == null ? FlexibleDate.EMPTY : 設定日);
+        div.getWariateJokyo().getTxtNinteiChosaTime().setValue(get調査日時(時間枠));
+        div.getWariateJokyo().getTxtNinteiChosaTimeFrame().setValue(時間枠 == null ? RString.EMPTY : 時間枠);
         if (予約可.equals(temp_予約可否)) {
-            div.getRadYoyakuKahi().setSelectedKey(予約可_KEY);
+            div.getWariateJokyo().getRadYoyakuKahi().setSelectedKey(予約可_KEY);
         } else {
-            div.getRadYoyakuKahi().setSelectedKey(予約不可_KEY);
+            div.getWariateJokyo().getRadYoyakuKahi().setSelectedKey(予約不可_KEY);
         }
-        div.getTxtNinteiChosaBiko().setValue(temp_備考 == null ? RString.EMPTY : temp_備考);
+        div.getWariateJokyo().getTxtNinteiChosaBiko().setValue(temp_備考 == null ? RString.EMPTY : temp_備考);
         if (予約状況_未定.equals(temp_予約状況)) {
-            div.getRadYoyakuJokyo().setSelectedKey(予約状況_未定_KEY);
+            div.getWariateJokyo().getRadYoyakuJokyo().setSelectedKey(予約状況_未定_KEY);
         } else if (予約状況_仮予約.equals(temp_予約状況)) {
-            div.getRadYoyakuJokyo().setSelectedKey(予約状況_仮予約_KEY);
+            div.getWariateJokyo().getRadYoyakuJokyo().setSelectedKey(予約状況_仮予約_KEY);
         } else {
-            div.getRadYoyakuJokyo().setSelectedKey(予約状況_確定_KEY);
+            div.getWariateJokyo().getRadYoyakuJokyo().setSelectedKey(予約状況_確定_KEY);
         }
     }
 
     private void set対象者詳細Grid値(RString temp_被保番号, RString temp_被保険者区分コード, RString temp_保険者, FlexibleDate temp_認定申請日,
             RString temp_申請区分_申請時, RString temp_氏名, RString temp_カナ氏名, RString temp_場所, RString temp_駐車場, RString temp_立会人1,
             RString temp_連絡先1, RString temp_立会人2, RString temp_連絡先2, RString temp_対象者メモ) {
-        div.getTxtHihoBangoNumber().setValue(temp_被保番号 == null ? RString.EMPTY : temp_被保番号);
-        div.getTxtHihoBangoGosu().setValue(temp_被保険者区分コード == null ? RString.EMPTY : temp_被保険者区分コード);
-        div.getTxtHokenshaName().setValue(temp_保険者 == null ? RString.EMPTY : temp_保険者);
-        div.getTxtNinteiShinseiDate().setValue(temp_認定申請日 == null ? FlexibleDate.EMPTY : temp_認定申請日);
-        div.getTxtNinteiShinseiKubun().setValue(temp_申請区分_申請時 == null ? RString.EMPTY : temp_申請区分_申請時);
-        div.getTxtTaishoshaName().setValue(temp_氏名 == null ? RString.EMPTY : temp_氏名);
-        div.getTxtTaishoshaNameKana().setValue(temp_カナ氏名 == null ? RString.EMPTY : temp_カナ氏名);
-        div.getTxtBasho().setValue(temp_場所 == null ? RString.EMPTY : temp_場所);
-        div.getTxtChushajo().setValue(temp_駐車場 == null ? RString.EMPTY : temp_駐車場);
-        div.getTxtTachiainin1().setValue(temp_立会人1 == null ? RString.EMPTY : temp_立会人1);
-        div.getTxtRenrakusaki1().setValue(temp_連絡先1 == null ? RString.EMPTY : temp_連絡先1);
-        div.getTxtTachiainin2().setValue(temp_立会人2 == null ? RString.EMPTY : temp_立会人2);
-        div.getTxtRenrakusaki2().setValue(temp_連絡先2 == null ? RString.EMPTY : temp_連絡先2);
-        div.getTxtTaishoshaShosaiMemo().setValue(temp_対象者メモ == null ? RString.EMPTY : temp_対象者メモ);
+        div.getTaishoshaShosai().getTxtHihoBangoNumber().setValue(temp_被保番号 == null ? RString.EMPTY : temp_被保番号);
+        div.getTaishoshaShosai().getTxtHihoBangoGosu().setValue(temp_被保険者区分コード == null ? RString.EMPTY : temp_被保険者区分コード);
+        div.getTaishoshaShosai().getTxtHokenshaName().setValue(temp_保険者 == null ? RString.EMPTY : temp_保険者);
+        div.getTaishoshaShosai().getTxtNinteiShinseiDate().setValue(temp_認定申請日 == null ? FlexibleDate.EMPTY : temp_認定申請日);
+        div.getTaishoshaShosai().getTxtNinteiShinseiKubun().setValue(temp_申請区分_申請時 == null ? RString.EMPTY : temp_申請区分_申請時);
+        div.getTaishoshaShosai().getTxtTaishoshaName().setValue(temp_氏名 == null ? RString.EMPTY : temp_氏名);
+        div.getTaishoshaShosai().getTxtTaishoshaNameKana().setValue(temp_カナ氏名 == null ? RString.EMPTY : temp_カナ氏名);
+        div.getTaishoshaShosai().getTxtBasho().setValue(temp_場所 == null ? RString.EMPTY : temp_場所);
+        div.getTaishoshaShosai().getTxtChushajo().setValue(temp_駐車場 == null ? RString.EMPTY : temp_駐車場);
+        div.getTaishoshaShosai().getTxtTachiainin1().setValue(temp_立会人1 == null ? RString.EMPTY : temp_立会人1);
+        div.getTaishoshaShosai().getTxtRenrakusaki1().setValue(temp_連絡先1 == null ? RString.EMPTY : temp_連絡先1);
+        div.getTaishoshaShosai().getTxtTachiainin2().setValue(temp_立会人2 == null ? RString.EMPTY : temp_立会人2);
+        div.getTaishoshaShosai().getTxtRenrakusaki2().setValue(temp_連絡先2 == null ? RString.EMPTY : temp_連絡先2);
+        div.getTaishoshaShosai().getTxtTaishoshaShosaiMemo().setValue(temp_対象者メモ == null ? RString.EMPTY : temp_対象者メモ);
     }
 
     private RString get調査日時(RString 時間枠) {
@@ -357,12 +357,12 @@ public class NinteiChosaScheduleInputHandler {
      */
     public void btnZenkayiJyoho(List<NinteichosaSchedule> list) {
 
-        div.getTxtBasho().setValue(list.get(0).get場所());
-        div.getTxtChushajo().setValue(list.get(0).get駐車場());
-        div.getTxtTachiainin1().setValue(list.get(0).get立会人１());
-        div.getTxtRenrakusaki1().setValue(list.get(0).get連絡先１().value());
-        div.getTxtTachiainin2().setValue(list.get(0).get立会人２());
-        div.getTxtRenrakusaki2().setValue(list.get(0).get連絡先２().value());
-        div.getTxtTaishoshaShosaiMemo().setValue(list.get(0).get対象者メモ());
+        div.getTaishoshaShosai().getTxtBasho().setValue(list.get(0).get場所());
+        div.getTaishoshaShosai().getTxtChushajo().setValue(list.get(0).get駐車場());
+        div.getTaishoshaShosai().getTxtTachiainin1().setValue(list.get(0).get立会人１());
+        div.getTaishoshaShosai().getTxtRenrakusaki1().setValue(list.get(0).get連絡先１().value());
+        div.getTaishoshaShosai().getTxtTachiainin2().setValue(list.get(0).get立会人２());
+        div.getTaishoshaShosai().getTxtRenrakusaki2().setValue(list.get(0).get連絡先２().value());
+        div.getTaishoshaShosai().getTxtTaishoshaShosaiMemo().setValue(list.get(0).get対象者メモ());
     }
 }

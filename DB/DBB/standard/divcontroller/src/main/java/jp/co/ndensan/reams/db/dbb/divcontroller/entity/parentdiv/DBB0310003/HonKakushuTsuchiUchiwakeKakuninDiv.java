@@ -1,15 +1,12 @@
 package jp.co.ndensan.reams.db.dbb.divcontroller.entity.parentdiv.DBB0310003;
-/**
+/*
  * このコードはツールによって生成されました。
  * このファイルへの変更は、再生成時には損失するため
  * 不正な動作の原因になります。
  */
 import com.fasterxml.jackson.annotation.JsonProperty;
-import jp.co.ndensan.reams.db.dbb.divcontroller.entity.parentdiv.DBB0310003.HonKakushuTsuchiUchiwakeSentakuDiv;
-import jp.co.ndensan.reams.db.dbb.divcontroller.entity.parentdiv.DBB0310003.dgTsuchishoSettei_Row;
 import jp.co.ndensan.reams.uz.uza.ui.binding.*;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
-import jp.co.ndensan.reams.uz.uza.ui.binding.domain.*;
 
 /**
  * HonKakushuTsuchiUchiwakeKakunin のクラスファイル 
@@ -17,6 +14,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.domain.*;
  * @author 自動生成
  */
 public class HonKakushuTsuchiUchiwakeKakuninDiv extends Panel {
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-01-15_09-59-03">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -31,10 +29,8 @@ public class HonKakushuTsuchiUchiwakeKakuninDiv extends Panel {
     private TextBox txtTsuchishoSetteiHozonMeisho;
     @JsonProperty("btnTsuchishoSetteiHozon")
     private Button btnTsuchishoSetteiHozon;
-    @JsonProperty("btnTsuchishoSetteiKakutei")
-    private Button btnTsuchishoSetteiKakutei;
-    @JsonProperty("btnTsuchishoSetteiModoru")
-    private Button btnTsuchishoSetteiModoru;
+    @JsonProperty("test001")
+    private Button test001;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -42,64 +38,95 @@ public class HonKakushuTsuchiUchiwakeKakuninDiv extends Panel {
      * コントロール名とフィールド名を取得する
      * フィールド名のGetterとSetter を作成
      */
+    /*
+     * getHonKakushuTsuchiUchiwakeSentaku
+     * @return HonKakushuTsuchiUchiwakeSentaku
+     */
     @JsonProperty("HonKakushuTsuchiUchiwakeSentaku")
     public HonKakushuTsuchiUchiwakeSentakuDiv getHonKakushuTsuchiUchiwakeSentaku() {
         return HonKakushuTsuchiUchiwakeSentaku;
     }
 
+    /*
+     * setHonKakushuTsuchiUchiwakeSentaku
+     * @param HonKakushuTsuchiUchiwakeSentaku HonKakushuTsuchiUchiwakeSentaku
+     */
     @JsonProperty("HonKakushuTsuchiUchiwakeSentaku")
     public void setHonKakushuTsuchiUchiwakeSentaku(HonKakushuTsuchiUchiwakeSentakuDiv HonKakushuTsuchiUchiwakeSentaku) {
-        this.HonKakushuTsuchiUchiwakeSentaku=HonKakushuTsuchiUchiwakeSentaku;
+        this.HonKakushuTsuchiUchiwakeSentaku = HonKakushuTsuchiUchiwakeSentaku;
     }
 
+    /*
+     * getdgTsuchishoSettei
+     * @return dgTsuchishoSettei
+     */
     @JsonProperty("dgTsuchishoSettei")
     public DataGrid<dgTsuchishoSettei_Row> getDgTsuchishoSettei() {
         return dgTsuchishoSettei;
     }
 
+    /*
+     * setdgTsuchishoSettei
+     * @param dgTsuchishoSettei dgTsuchishoSettei
+     */
     @JsonProperty("dgTsuchishoSettei")
     public void setDgTsuchishoSettei(DataGrid<dgTsuchishoSettei_Row> dgTsuchishoSettei) {
-        this.dgTsuchishoSettei=dgTsuchishoSettei;
+        this.dgTsuchishoSettei = dgTsuchishoSettei;
     }
 
+    /*
+     * gettxtTsuchishoSetteiHozonMeisho
+     * @return txtTsuchishoSetteiHozonMeisho
+     */
     @JsonProperty("txtTsuchishoSetteiHozonMeisho")
     public TextBox getTxtTsuchishoSetteiHozonMeisho() {
         return txtTsuchishoSetteiHozonMeisho;
     }
 
+    /*
+     * settxtTsuchishoSetteiHozonMeisho
+     * @param txtTsuchishoSetteiHozonMeisho txtTsuchishoSetteiHozonMeisho
+     */
     @JsonProperty("txtTsuchishoSetteiHozonMeisho")
     public void setTxtTsuchishoSetteiHozonMeisho(TextBox txtTsuchishoSetteiHozonMeisho) {
-        this.txtTsuchishoSetteiHozonMeisho=txtTsuchishoSetteiHozonMeisho;
+        this.txtTsuchishoSetteiHozonMeisho = txtTsuchishoSetteiHozonMeisho;
     }
 
+    /*
+     * getbtnTsuchishoSetteiHozon
+     * @return btnTsuchishoSetteiHozon
+     */
     @JsonProperty("btnTsuchishoSetteiHozon")
     public Button getBtnTsuchishoSetteiHozon() {
         return btnTsuchishoSetteiHozon;
     }
 
+    /*
+     * setbtnTsuchishoSetteiHozon
+     * @param btnTsuchishoSetteiHozon btnTsuchishoSetteiHozon
+     */
     @JsonProperty("btnTsuchishoSetteiHozon")
     public void setBtnTsuchishoSetteiHozon(Button btnTsuchishoSetteiHozon) {
-        this.btnTsuchishoSetteiHozon=btnTsuchishoSetteiHozon;
+        this.btnTsuchishoSetteiHozon = btnTsuchishoSetteiHozon;
     }
 
-    @JsonProperty("btnTsuchishoSetteiKakutei")
-    public Button getBtnTsuchishoSetteiKakutei() {
-        return btnTsuchishoSetteiKakutei;
+    /*
+     * gettest001
+     * @return test001
+     */
+    @JsonProperty("test001")
+    public Button getTest001() {
+        return test001;
     }
 
-    @JsonProperty("btnTsuchishoSetteiKakutei")
-    public void setBtnTsuchishoSetteiKakutei(Button btnTsuchishoSetteiKakutei) {
-        this.btnTsuchishoSetteiKakutei=btnTsuchishoSetteiKakutei;
+    /*
+     * settest001
+     * @param test001 test001
+     */
+    @JsonProperty("test001")
+    public void setTest001(Button test001) {
+        this.test001 = test001;
     }
 
-    @JsonProperty("btnTsuchishoSetteiModoru")
-    public Button getBtnTsuchishoSetteiModoru() {
-        return btnTsuchishoSetteiModoru;
-    }
-
-    @JsonProperty("btnTsuchishoSetteiModoru")
-    public void setBtnTsuchishoSetteiModoru(Button btnTsuchishoSetteiModoru) {
-        this.btnTsuchishoSetteiModoru=btnTsuchishoSetteiModoru;
-    }
-
+    // </editor-fold>
 }

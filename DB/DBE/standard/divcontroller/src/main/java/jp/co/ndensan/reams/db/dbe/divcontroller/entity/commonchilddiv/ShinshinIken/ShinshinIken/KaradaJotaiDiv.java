@@ -53,14 +53,14 @@ public class KaradaJotaiDiv extends Panel {
     private CheckBoxList chkHidariKashiMahi;
     @JsonProperty("chkHidariKashiMahiTeido")
     private CheckBoxList chkHidariKashiMahiTeido;
+    @JsonProperty("chkSonotaMahi")
+    private CheckBoxList chkSonotaMahi;
     @JsonProperty("txtSonotaMahiBui")
     private TextBox txtSonotaMahiBui;
     @JsonProperty("SonotaMahiTeido")
     private CheckBoxList SonotaMahiTeido;
     @JsonProperty("linHorizon2")
     private HorizontalLine linHorizon2;
-    @JsonProperty("chkSonotaMahi")
-    private CheckBoxList chkSonotaMahi;
     @JsonProperty("chkKinryokuTeika")
     private CheckBoxList chkKinryokuTeika;
     @JsonProperty("txtKinryokuTeikaBui")
@@ -405,6 +405,24 @@ public class KaradaJotaiDiv extends Panel {
     }
 
     /*
+     * getchkSonotaMahi
+     * @return chkSonotaMahi
+     */
+    @JsonProperty("chkSonotaMahi")
+    public CheckBoxList getChkSonotaMahi() {
+        return chkSonotaMahi;
+    }
+
+    /*
+     * setchkSonotaMahi
+     * @param chkSonotaMahi chkSonotaMahi
+     */
+    @JsonProperty("chkSonotaMahi")
+    public void setChkSonotaMahi(CheckBoxList chkSonotaMahi) {
+        this.chkSonotaMahi = chkSonotaMahi;
+    }
+
+    /*
      * gettxtSonotaMahiBui
      * @return txtSonotaMahiBui
      */
@@ -456,24 +474,6 @@ public class KaradaJotaiDiv extends Panel {
     @JsonProperty("linHorizon2")
     public void setLinHorizon2(HorizontalLine linHorizon2) {
         this.linHorizon2 = linHorizon2;
-    }
-
-    /*
-     * getchkSonotaMahi
-     * @return chkSonotaMahi
-     */
-    @JsonProperty("chkSonotaMahi")
-    public CheckBoxList getChkSonotaMahi() {
-        return chkSonotaMahi;
-    }
-
-    /*
-     * setchkSonotaMahi
-     * @param chkSonotaMahi chkSonotaMahi
-     */
-    @JsonProperty("chkSonotaMahi")
-    public void setChkSonotaMahi(CheckBoxList chkSonotaMahi) {
-        this.chkSonotaMahi = chkSonotaMahi;
     }
 
     /*

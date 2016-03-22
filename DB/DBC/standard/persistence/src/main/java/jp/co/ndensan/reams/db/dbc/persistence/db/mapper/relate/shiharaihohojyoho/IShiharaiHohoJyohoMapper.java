@@ -6,7 +6,10 @@
 package jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.shiharaihohojyoho;
 
 import java.util.List;
+import jp.co.ndensan.reams.db.dbc.definition.mybatisprm.shiharaihohojyoho.KeiyakushaParameter;
 import jp.co.ndensan.reams.db.dbc.definition.mybatisprm.shiharaihohojyoho.KozaParameter;
+import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3077JuryoininKeiyakuJigyoshaEntity;
+import jp.co.ndensan.reams.db.dbc.entity.db.relate.shiharaihohojyoho.KozaJohoPSMEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.UrT0715KozaEntity;
 
 /**
@@ -20,7 +23,7 @@ public interface IShiharaiHohoJyohoMapper {
      * @param parameter 支払方法情報Parameter
      * @return List<UrT0715KozaEntity>
      */
-    List<UrT0715KozaEntity> get口座IDリストByKozaParameter(KozaParameter parameter);
+    List<KozaJohoPSMEntity> get口座IDリストByKozaParameter(KozaParameter parameter);
 
     /**
      * 口座IDで口座情報を取得します。
@@ -29,4 +32,20 @@ public interface IShiharaiHohoJyohoMapper {
      * @return UrT0715KozaEntity
      */
     UrT0715KozaEntity get口座情報ByKey(KozaParameter parameter);
+
+    /**
+     * 口座IDで口座情報を取得します。
+     *
+     * @param parameter 支払方法情報Parameter
+     * @return UrT0715KozaEntity
+     */
+    DbT3077JuryoininKeiyakuJigyoshaEntity get契約事業者情報(KeiyakushaParameter parameter);
+
+    /**
+     * 口座IDで口座情報を取得します。
+     *
+     * @param parameter 支払方法情報Parameter
+     * @return List<KozaJohoPSMEntity>
+     */
+//    List<KozaJohoPSMEntity> get口座情報取得PSM(RString parameter);
 }

@@ -10,7 +10,6 @@ import jp.co.ndensan.reams.uz.uza.lang.EraType;
 import jp.co.ndensan.reams.uz.uza.lang.FillType;
 import jp.co.ndensan.reams.uz.uza.lang.FirstYear;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
-import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.Separator;
 
 /**
@@ -20,16 +19,17 @@ import jp.co.ndensan.reams.uz.uza.lang.Separator;
 public class ShujiiIkenshoSakuseiTokusokujoHeadEditor implements IShujiiIkenshoSakuseiTokusokujoEditor {
 
     private final ShujiiIkenshoSakuseiTokusokujoItem headitem;
-
-    private static final RString 改行 = new RString("\\n");
+    private final int index;
 
     /**
      * インスタンスを生成します。
      *
      * @param headitem {@link ShujiiIkenshoSakuseiTokusokujoItem}
+     * @param index int
      */
-    protected ShujiiIkenshoSakuseiTokusokujoHeadEditor(ShujiiIkenshoSakuseiTokusokujoItem headitem) {
+    protected ShujiiIkenshoSakuseiTokusokujoHeadEditor(ShujiiIkenshoSakuseiTokusokujoItem headitem, int index) {
         this.headitem = headitem;
+        this.index = index;
     }
 
     @Override

@@ -51,4 +51,8 @@ public interface IKagoKetteiHokenshaInMapper {
 
     void update保険者分情報_明細();
 
+    void create新被保険者番号();
+
+    void insert新被保険者番号(ShihihokenshabangoTempTableEntity entity);
+
 }

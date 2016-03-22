@@ -101,7 +101,7 @@ public class PnlTotalDiv extends Panel {
      */
     @JsonProperty("ccdMessage")
     public IKaigoKanryoMessageDiv getCcdMessage() {
-        return (IKaigoKanryoMessageDiv) ccdMessage;
+        return ccdMessage;
     }
 
     /*

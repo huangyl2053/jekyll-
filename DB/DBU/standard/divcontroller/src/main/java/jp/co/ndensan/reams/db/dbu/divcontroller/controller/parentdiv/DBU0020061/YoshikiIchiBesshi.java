@@ -95,7 +95,7 @@ public class YoshikiIchiBesshi {
             return ResponseData.of(div).addMessage(message).respond();
         }
 
-        if (更新.equals(ViewStateHolder.get(ViewStateKeys.状態, RString.class)) && !ResponseHolder.isReRequest()) {
+        if (更新.equals(ViewStateHolder.get(ViewStateKeys.状態, RString.class))) {
             List<JigyoHokokuTokeiData> 修正データ = handler.get修正データ();
             if (修正データ.isEmpty() && !ResponseHolder.isReRequest()) {
                 throw new ApplicationException(UrErrorMessages.編集なしで更新不可.getMessage());
@@ -109,8 +109,7 @@ public class YoshikiIchiBesshi {
             }
             if (new RString(UrQuestionMessages.処理実行の確認.getMessage().getCode()).equals(ResponseHolder.getMessageCode())
                     && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
-                JigyoHokokuGeppoHoseiHako.createInstance().updateJigyoHokokuGeppoData(
-                        修正データ);
+                handler.update(修正データ);
                 InformationMessage message = new InformationMessage(
                         UrInformationMessages.正常終了.getMessage().getCode(),
                         UrInformationMessages.正常終了.getMessage().replace("更新").evaluate());

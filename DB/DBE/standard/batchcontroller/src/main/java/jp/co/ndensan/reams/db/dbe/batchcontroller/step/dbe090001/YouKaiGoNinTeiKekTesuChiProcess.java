@@ -5,7 +5,9 @@
  */
 package jp.co.ndensan.reams.db.dbe.batchcontroller.step.dbe090001;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import jp.co.ndensan.reams.db.dbe.business.report.johoteikyoshiryo.JohoTeikyoShiryoItem;
 import jp.co.ndensan.reams.db.dbe.business.report.johoteikyoshiryo.JohoTeikyoShiryoReport;
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.itakusakichosainzichiran.ItakusakiChosainIchiranReportId;
@@ -16,20 +18,16 @@ import jp.co.ndensan.reams.db.dbe.entity.report.johoteikyoshiryo.JohoTeikyoShiry
 import jp.co.ndensan.reams.db.dbe.persistence.db.mapper.basic.youkaigoninteikekktesuchi.IYouKaiGoNinTeiKekTesuChiMapper;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigojotaikubun.YokaigoJotaiKubun09;
-import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.kyotsu.NinshoshaDenshikoinshubetsuCode;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5301ShujiiIkenshoIraiJohoEntity;
-import jp.co.ndensan.reams.ur.urz.business.report.parts.ninshosha.INinshoshaSourceBuilder;
-import jp.co.ndensan.reams.ur.urz.service.report.parts.ninshosha.INinshoshaSourceBuilderCreator;
-import jp.co.ndensan.reams.ur.urz.service.report.sourcebuilder.ReportSourceBuilders;
-import jp.co.ndensan.reams.ux.uxx.entity.db.relate.tsuchishoteikeibun.TsuchishoTeikeibunEntity;
-import jp.co.ndensan.reams.ux.uxx.service.core.tsuchishoteikeibun.TsuchishoTeikeibunManager;
+import jp.co.ndensan.reams.db.dbz.service.util.report.ReportUtil;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchDbReader;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchProcessBase;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchReportFactory;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchReportWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.IBatchReader;
-import jp.co.ndensan.reams.uz.uza.biz.GyomuCode;
+import jp.co.ndensan.reams.uz.uza.batch.process.OutputParameter;
+import jp.co.ndensan.reams.uz.uza.biz.KamokuCode;
 import jp.co.ndensan.reams.uz.uza.biz.ReportId;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
@@ -44,6 +42,10 @@ import jp.co.ndensan.reams.uz.uza.util.config.BusinessConfig;
  */
 public class YouKaiGoNinTeiKekTesuChiProcess extends BatchProcessBase<YouKaiGoNinTeiKekTesuChiRelateEntity> {
 
+    /**
+     * OutputParameter用キー outDataList
+     */
+    public static final RString OUT_DATA_LIST;
     private static final RString MYBATIS_SELECT_ID
             = new RString("jp.co.ndensan.reams.db.dbe.persistence.db.mapper.basic.youkaigoninteikekktesuchi"
                     + ".IYouKaiGoNinTeiKekTesuChiMapper.getCyouHyouSyuTsuRyoKu");
@@ -63,6 +65,12 @@ public class YouKaiGoNinTeiKekTesuChiProcess extends BatchProcessBase<YouKaiGoNi
     private JohoTeikyoShiryoItem headItem;
     private IYouKaiGoNinTeiKekTesuChiMapper mapper;
     private YouKaiGoNinTeiKekTesuChiMybitisParamter mybatisPrm;
+    private List<JohoTeikyoShiryoItem> itemList;
+    private OutputParameter<List<JohoTeikyoShiryoItem>> outDataList;
+
+    static {
+        OUT_DATA_LIST = new RString("outDataList");
+    }
 
     @BatchWriter
     private BatchReportWriter<JohoTeikyoShiryoReportSource> batchWrite;
@@ -70,8 +78,11 @@ public class YouKaiGoNinTeiKekTesuChiProcess extends BatchProcessBase<YouKaiGoNi
 
     @Override
     protected void initialize() {
+        itemList = new ArrayList();
+        outDataList = new OutputParameter<>();
         mybatisPrm = paramter.toMybitisParameter();
         mapper = getMapper(IYouKaiGoNinTeiKekTesuChiMapper.class);
+        super.initialize();
     }
 
     @Override
@@ -97,37 +108,37 @@ public class YouKaiGoNinTeiKekTesuChiProcess extends BatchProcessBase<YouKaiGoNi
 
     @Override
     protected void afterExecute() {
-        JohoTeikyoShiryoReport report = JohoTeikyoShiryoReport.createFrom(headItem);
+        JohoTeikyoShiryoReport report = JohoTeikyoShiryoReport.createFrom(itemList);
         report.writeBy(retortWrite);
+        outDataList.setValue(itemList);
     }
 
     private void eidtItem(YouKaiGoNinTeiKekTesuChiRelateEntity entity) {
-        INinshoshaSourceBuilderCreator ninshoshaSourceBuilderCreator = ReportSourceBuilders.ninshoshaSourceBuilder();
-        INinshoshaSourceBuilder ninshoshaSourceBuilder = ninshoshaSourceBuilderCreator.create(GyomuCode.DB介護保険,
-                NinshoshaDenshikoinshubetsuCode.保険者印.getコード(), null, RString.EMPTY);
-        RString 認証者氏名 = ninshoshaSourceBuilder.buildSource().ninshoshaYakushokuMei;
-
+        RString 認証者氏名 = ReportUtil.get認証者情報(SubGyomuCode.DBE認定支援, REPORT_ID, FlexibleDate.getNowDate(), retortWrite).ninshoshaYakushokuMei;
         RString 帳票名 = BusinessConfig.get(ItakusakiChosainIchiranReportId.REPORTID_DBE090001, SubGyomuCode.DBE認定支援);
         RString 認定結果 = YokaigoJotaiKubun09.toValue(entity.getNijiHanteiYokaigoJotaiKubunCod()).get名称();
-
-        TsuchishoTeikeibunManager manager = new TsuchishoTeikeibunManager();
-        List<TsuchishoTeikeibunEntity> tempList = manager.get通知書定型文パターン(REPORT_ID, SubGyomuCode.DBE認定支援).get通知書定型文List();
+        Map<Integer, RString> 通知文 = ReportUtil.get通知文(SubGyomuCode.DBE認定支援, REPORT_ID, KamokuCode.EMPTY, 通知文1);
         headItem = new JohoTeikyoShiryoItem(RDate.getNowDate(),
-                entity.getShichosonMeisho(), 認証者氏名, 帳票名, get通知文(tempList, 通知文1), entity.getHihokenshaName(), entity.getJusho()
-                , new RDate(entity.getNijiHanteiYMD().toString()), 認定結果, new RDate(entity.getNijiHanteiNinteiYukoKaishiYMD().toString())
-                , new RDate(entity.getNijiHanteiNinteiYukoShuryoYMD().toString()), entity.getShinsakaiIken(), get通知文(tempList, 通知文2)
-                , get通知文(tempList, 通知文3), get通知文(tempList, 通知文4), get通知文(tempList, 通知文5), get通知文(tempList, 通知文6)
-                , get通知文(tempList, 通知文7), get通知文(tempList, 通知文8), get通知文(tempList, 通知文9), get通知文(tempList, 通知文10));
-    }
-
-    private RString get通知文(List<TsuchishoTeikeibunEntity> tempList, int index) {
-        RString 通知文 = RString.EMPTY;
-        for (TsuchishoTeikeibunEntity entity : tempList) {
-            if (index == entity.getTsuchishoTeikeibunEntity().getSentenceNo()) {
-                通知文 = entity.getTsuchishoTeikeibunEntity().getSentence();
-                break;
-            }
-        }
-        return 通知文;
+                entity.getShichosonMeisho(),
+                認証者氏名,
+                帳票名,
+                通知文.get(通知文1),
+                entity.getHihokenshaName(),
+                entity.getJusho(),
+                new RDate(entity.getNijiHanteiYMD().toString()),
+                認定結果,
+                new RDate(entity.getNijiHanteiNinteiYukoKaishiYMD().toString()),
+                new RDate(entity.getNijiHanteiNinteiYukoShuryoYMD().toString()),
+                entity.getShinsakaiIken(),
+                通知文.get(通知文2),
+                通知文.get(通知文3),
+                通知文.get(通知文4),
+                通知文.get(通知文5),
+                通知文.get(通知文6),
+                通知文.get(通知文7),
+                通知文.get(通知文8),
+                通知文.get(通知文9),
+                通知文.get(通知文10));
+        itemList.add(headItem);
     }
 }

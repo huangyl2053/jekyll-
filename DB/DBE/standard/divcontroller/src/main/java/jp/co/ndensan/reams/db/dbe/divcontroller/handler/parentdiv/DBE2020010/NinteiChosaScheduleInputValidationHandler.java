@@ -63,7 +63,7 @@ public class NinteiChosaScheduleInputValidationHandler {
      */
     public ValidationMessageControlPairs 備考必須入力項目チェック(ValidationMessageControlPairs validationMessages) {
 
-        validationMessages.add(new ValidationMessageControlPair(RRVMessages.Validate必須入力項目, div.getTxtNinteiChosaBiko()));
+        validationMessages.add(new ValidationMessageControlPair(RRVMessages.Validate必須入力項目, div.getWariateJokyo().getTxtNinteiChosaBiko()));
         return validationMessages;
     }
 
@@ -75,7 +75,7 @@ public class NinteiChosaScheduleInputValidationHandler {
      */
     public ValidationMessageControlPairs 申請者予約があるのチェック(ValidationMessageControlPairs validationMessages) {
 
-        validationMessages.add(new ValidationMessageControlPair(RRVMessages.Validate予約状況は仮予約または確定, div.getRadYoyakuJokyo()));
+        validationMessages.add(new ValidationMessageControlPair(RRVMessages.Validate予約状況は仮予約または確定, div.getWariateJokyo().getRadYoyakuJokyo()));
         return validationMessages;
     }
 
@@ -88,7 +88,7 @@ public class NinteiChosaScheduleInputValidationHandler {
     public ValidationMessageControlPairs 申請者未指定なので予約状況は未定申請者を指定のチェック(ValidationMessageControlPairs validationMessages) {
 
         validationMessages.add(new ValidationMessageControlPair(
-                RRVMessages.Validate申請者未指定なので予約状況は未定申請者を指定, div.getRadYoyakuJokyo()));
+                RRVMessages.Validate申請者未指定なので予約状況は未定申請者を指定, div.getWariateJokyo().getRadYoyakuJokyo()));
         return validationMessages;
     }
 

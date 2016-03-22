@@ -13,14 +13,14 @@ import jp.co.ndensan.reams.uz.uza.report.ReportEditorJoiner;
  */
 class ChosahyoSaiCheckhyoBuilderImpl implements IChosahyoSaiCheckhyoBuilder {
 
-    private final ChosahyoSaiCheckhyoEditor editor;
+    private final IChosahyoSaiCheckhyoEditor editor;
 
     /**
      * インスタンスを生成します。
      *
-     * @param Editor {@link ChosahyoSaiCheckhyoEditor}
+     * @param Editor {@link IChosahyoSaiCheckhyoEditor}
      */
-    public ChosahyoSaiCheckhyoBuilderImpl(ChosahyoSaiCheckhyoEditor editor) {
+    public ChosahyoSaiCheckhyoBuilderImpl(IChosahyoSaiCheckhyoEditor editor) {
         this.editor = editor;
     }
 

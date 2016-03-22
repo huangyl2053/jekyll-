@@ -1,0 +1,160 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- どのマッパーインターフェースと対応するかを指定する -->
+<mapper namespace="jp.co.ndensan.reams.db.dbd.persistence.db.mapper.common.IGemmenJokyoMapper">
+    <resultMap id="resultMap_NursingCareInformationCodeEntity" type="jp.co.ndensan.reams.db.dbd.entity.common.NursingCareInformationCodeEntity" autoMapping="true">
+        <result property="申請状況区分" column="申請状況区分" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="受給申請年月日" column="受給申請年月日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler" />
+        <result property="受給申請事由" column="受給申請事由" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.CodeTypeHandler" />
+        <result property="旧措置者フラグ" column="旧措置者フラグ" typeHandler="org.apache.ibatis.type.BooleanTypeHandler" />
+        <result property="認定有効期間開始年月日" column="認定有効期間開始年月日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler" />
+        <result property="認定有効期間終了年月日" column="認定有効期間終了年月日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler" />
+        <result property="認定年月日" column="認定年月日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler" />
+        <result property="厚労省IF識別コード" column="厚労省IF識別コード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.CodeTypeHandler" />
+        <result property="要介護認定状態区分コード" column="要介護認定状態区分コード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.CodeTypeHandler" />
+    </resultMap>
+    <select id="get要介護認定情報"
+            resultMap="resultMap_NursingCareInformationCodeEntity"
+            parameterType="jp.co.ndensan.reams.db.dbd.definition.common.GemmenJokyoParameter"  fetchSize="500">
+        SELECT A."shinseiJokyoKubun" AS "申請状況区分",
+               A."jukyuShinseiYMD" AS "受給申請年月日",
+               A."jukyuShinseiJiyu" AS "受給申請事由",
+               A."kyuSochishaFlag" AS "旧措置者フラグ",
+               A."ninteiYukoKikanKaishiYMD" AS "認定有効期間開始年月日",
+               A."ninteiYukoKikanShuryoYMD" AS "認定有効期間終了年月日",
+               A."ninteiYMD" AS "認定年月日",
+               B."koroshoIfShikibetsuCode" AS "厚労省IF識別コード",
+               A."yokaigoJotaiKubunCode" AS "要介護認定状態区分コード"
+        FROM rgdb."DbV4001JukyushaDaicho" A
+        INNER JOIN  rgdb."DbT4101NinteiShinseiJoho" B
+        ON A."shinseishoKanriNo" = B."shinseishoKanriNo"
+        WHERE A."hihokenshaNo" = #{被保険者番号}
+    </select>
+<!--    <select id="get介護保険負担限度額認定の情報"
+            resultMap="resultMap_NursingCareInformationCodeEntity"
+            parameterType="jp.co.ndensan.reams.db.dbd.definition.common.GemmenJokyoParameter"  fetchSize="500">
+        SELECT *
+        FROM rgdb."DbT4018KaigoHokenFutanGendogakuNintei" AS A
+        LEFT JOIN (SELECT *
+                   FROM rgdb."DbT4010GemmenGengakuShinsei" AS B
+                   WHERE B."gemmenGengakuShurui" = #{減免減額種類コード}) AS C
+             ON A."hihokenshaNo" = C."hihokenshaNo"
+                AND A."rirekiNo" = C."shinseiRirekiNo"
+        WHERE A."hihokenshaNo" = #{被保険者番号}
+        ORDER BY A."rirekiNo" DESC
+        LIMIT 1
+    </select>
+    <select id="get利用者負担額減額の情報"
+            resultMap="resultMap_NursingCareInformationCodeEntity"
+            parameterType="jp.co.ndensan.reams.db.dbd.definition.common.GemmenJokyoParameter"  fetchSize="500">
+        SELECT *
+        FROM rgdb."DbT4014RiyoshaFutangakuGengaku" AS A
+        LEFT JOIN (SELECT *
+                   FROM rgdb."DbT4010GemmenGengakuShinsei" AS B
+                   WHERE B."gemmenGengakuShurui" = #{減免減額種類コード}) AS C
+             ON A."hihokenshaNo" = C."hihokenshaNo"
+                AND A."rirekiNo" = C."shinseiRirekiNo"
+        WHERE A."hihokenshaNo" = #{被保険者番号}
+        ORDER BY A."rirekiNo" DESC
+        LIMIT 1
+    </select>
+    <select id="get訪問介護利用者負担額減額の情報"
+            resultMap="resultMap_NursingCareInformationCodeEntity"
+            parameterType="jp.co.ndensan.reams.db.dbd.definition.common.GemmenJokyoParameter"  fetchSize="500">
+        SELECT *
+        FROM rgdb."DbT4016HomonKaigoRiyoshaFutangakuGengaku" AS A
+        LEFT JOIN (SELECT *
+                   FROM rgdb."DbT4010GemmenGengakuShinsei" AS B
+                   WHERE B."gemmenGengakuShurui" = #{減免減額種類コード}) AS C
+             ON A."hihokenshaNo" = C."hihokenshaNo"
+                AND A."rirekiNo" = C."shinseiRirekiNo"
+        WHERE A."hihokenshaNo" = #{被保険者番号}
+        ORDER BY A."rirekiNo" DESC
+        LIMIT 1
+    </select>
+    <select id="get社会福祉法人等利用者負担軽減の情報"
+            resultMap="resultMap_NursingCareInformationCodeEntity"
+            parameterType="jp.co.ndensan.reams.db.dbd.definition.common.GemmenJokyoParameter"  fetchSize="500">
+        SELECT *
+        FROM rgdb."DbT4017ShakaiFukushiHojinRiyoshaFutanKeigen" AS A
+        LEFT JOIN (SELECT *
+                   FROM rgdb."DbT4010GemmenGengakuShinsei" AS B
+                   WHERE B."gemmenGengakuShurui" = #{減免減額種類コード}) AS C
+             ON A."hihokenshaNo" = C."hihokenshaNo"
+                AND A."rirekiNo" = C."shinseiRirekiNo"
+        WHERE A."hihokenshaNo" = #{被保険者番号}
+        ORDER BY A."rirekiNo" DESC
+        LIMIT 1
+    </select>
+    <select id="get特別地域加算減免の情報"
+            resultMap="resultMap_NursingCareInformationCodeEntity"
+            parameterType="jp.co.ndensan.reams.db.dbd.definition.common.GemmenJokyoParameter"  fetchSize="500">
+        SELECT *
+        FROM rgdb."DbT4020TokubetsuchiikiKasanGemmen" AS A
+        LEFT JOIN (SELECT *
+                   FROM rgdb."DbT4010GemmenGengakuShinsei" AS B
+                   WHERE B."gemmenGengakuShurui" = #{減免減額種類コード}) AS C
+             ON A."hihokenshaNo" = C."hihokenshaNo"
+                AND A."rirekiNo" = C."shinseiRirekiNo"
+        WHERE A."hihokenshaNo" = #{被保険者番号}
+        ORDER BY A."rirekiNo" DESC
+        LIMIT 1
+    </select>-->
+    <select id="get申請中情報"
+            resultType="jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT4001JukyushaDaichoEntity"
+            parameterType="jp.co.ndensan.reams.db.dbd.definition.common.GemmenJokyoParameter"  fetchSize="500">
+        SELECT *
+        FROM rgdb."DbT4001JukyushaDaicho" A
+        WHERE A."hihokenshaNo" = #{被保険者番号}
+              AND A."rirekiNo" = '0'
+        ORDER BY A."jukyuShinseiYMD" DESC
+        LIMIT 1
+    </select>
+    <select id="get老齢年金情報"
+            resultType="jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7006RoreiFukushiNenkinJukyushaEntity"
+            parameterType="jp.co.ndensan.reams.db.dbd.definition.common.GemmenJokyoParameter"  fetchSize="500">
+        SELECT *
+        FROM rgdb."DbT7006RoreiFukushiNenkinJukyusha" A
+        WHERE A."shikibetsuCode" = #{識別コード}
+              AND A."jukyuKaishiYMD" <![CDATA[<=]]> #{システム日付}
+              AND #{システム日付} <![CDATA[<=]]> (CASE WHEN A."jukyuHaishiYMD" IN(NULL,'') THEN '99999999'
+                                                   ELSE A."jukyuHaishiYMD" END)
+        ORDER BY A."jukyuKaishiYMD" DESC
+        LIMIT 1
+    </select>
+    <select id="get支払方法変更情報"
+            resultType="jp.co.ndensan.reams.db.dbd.entity.db.basic.DbT4021ShiharaiHohoHenkoEntity"
+            parameterType="jp.co.ndensan.reams.db.dbd.definition.common.GemmenJokyoParameter"  fetchSize="500">
+        SELECT *
+        FROM rgdb."DbT4021ShiharaiHohoHenko" A
+        WHERE A."hihokenshaNo" = #{被保険者番号}
+              AND NOT EXISTS(SELECT 1 FROM rgdb."DbT4021ShiharaiHohoHenko" B
+                             WHERE A."hihokenshaNo" = B."hihokenshaNo"
+                                   AND A."kanriKubun" = B."kanriKubun"
+                                   AND A."rirekiNo" = B."rirekiNo"
+                            )
+    </select>
+    <select id="get識別コード"
+            resultType="jp.co.ndensan.reams.db.dbx.entity.db.basic.DbV1001HihokenshaDaichoEntity"
+            parameterType="jp.co.ndensan.reams.db.dbd.definition.common.GemmenJokyoParameter"  fetchSize="500">
+        SELECT A."shikibetsuCode"
+        FROM rgdb."DbV1001HihokenshaDaicho" A
+        WHERE A."hihokenshaNo" = #{被保険者番号}
+    </select>
+    <select id="get利用者負担割合明細"
+            resultType="jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3114RiyoshaFutanWariaiMeisaiEntity"
+            parameterType="jp.co.ndensan.reams.db.dbd.definition.common.GemmenJokyoParameter"  fetchSize="500">
+        SELECT *
+        FROM rgdb."DbT3114RiyoshaFutanWariaiMeisai" A
+        WHERE A."hihokenshaNo" = #{被保険者番号}
+              AND NOT EXISTS(SELECT 1
+                             FROM rgdb."DbT3114RiyoshaFutanWariaiMeisai" B
+                             WHERE A."hihokenshaNo" = B."hihokenshaNo"
+                                   AND A."nendo" = B."nendo"
+                                   AND A."rirekiNo" <![CDATA[<]]> B."rirekiNo")
+              AND A."yukoKaishiYMD" <![CDATA[<=]]> #{システム日付}
+              AND A."yukoShuryoYMD" <![CDATA[>=]]> #{システム日付}
+              AND A."logicalDeletedFlag" = FALSE
+    </select>
+</mapper>

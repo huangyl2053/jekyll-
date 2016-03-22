@@ -192,17 +192,21 @@ public enum ReportIdDBA {
      */
     DBA100005(new ReportId("DBA100005_JushochitokureiShisetsuTaishoTsuchisho"), new RString("介護保険住所地特例施設退所通知書")),
     /**
-     * 介護保険住所地特例施設退所通知書の帳票ＩＤです。
+     * 介護保険住所地特例施設変更通知書の帳票ＩＤです。
      */
     DBA100006(new ReportId("DBA100006_JushochitokureiShisetsuHenkoTsuchisho"), new RString("介護保険住所地特例施設変更通知書")),
     /**
-     * 介護保険住所地特例施設退所通知書の帳票ＩＤです。
+     * 介護保険他市町村住所地特例者連絡票の帳票ＩＤです。
      */
     DBA100007(new ReportId("DBA100007_TashichosonJushochitokureishaRenrakuhyo"), new RString("介護保険他市町村住所地特例者連絡票")),
     /**
      * 訪問介護利用者負担額減額申請書の帳票ＩＤです。
      */
-    DBD800005(new ReportId("DBD800005_HomonKaigoRiyoshaFutangakuGengakuShinseisho"), new RString("訪問介護利用者負担額減額申請書"));
+    DBD800005(new ReportId("DBD800005_HomonKaigoRiyoshaFutangakuGengakuShinseisho"), new RString("訪問介護利用者負担額減額申請書")),
+    /**
+     * 年齢到達予定者一覧表の帳票ＩＤです。
+     */
+    DBA200001(new ReportId("DBA200001_NenreitotatsuYoteishaIchiranhyo"), new RString("年齢到達予定者一覧表"));
 
     private final ReportId reportId;
     private final RString reportName;

@@ -7,6 +7,7 @@ package jp.co.ndensan.reams.db.dbc.service.core.fukushiyogukonyuhishikyushisei;
 
 import java.util.ArrayList;
 import java.util.List;
+import jp.co.ndensan.reams.db.dbc.business.core.basic.KyufujissekiKihon;
 import jp.co.ndensan.reams.db.dbc.business.core.basic.ShokanFukushiYoguHanbaihi;
 import jp.co.ndensan.reams.db.dbc.business.core.basic.ShokanHanteiKekka;
 import jp.co.ndensan.reams.db.dbc.business.core.basic.ShokanKihon;
@@ -43,12 +44,14 @@ import jp.co.ndensan.reams.db.dbc.persistence.db.basic.DbT3053ShokanShukeiDac;
 import jp.co.ndensan.reams.db.dbc.persistence.db.basic.DbT3118ShikibetsuNoKanriDac;
 import jp.co.ndensan.reams.db.dbc.persistence.db.basic.DbT7112ShokanShuruiShikyuGendoGakuDac;
 import jp.co.ndensan.reams.db.dbc.persistence.db.basic.DbT7115UwanoseShokanShuruiShikyuGendoGakuDac;
-import jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.fukushiyogukonyuhishikyushisei.IFukushiyoguKonyuhiShikyuGendogakuMapper;
+import jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.konyuhishikyushisei.IFukushiyoguKonyuhiShikyuGendogakuMapper;
 import jp.co.ndensan.reams.db.dbc.service.core.MapperProvider;
+import jp.co.ndensan.reams.db.dbc.service.core.jutakukaishusikyushinsei.JutakukaishuSikyuShinseiManager;
 import jp.co.ndensan.reams.db.dbx.business.core.shichosonsecurity.ShichosonSecurityJoho;
 import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.DonyuKeitaiCode;
 import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.GyomuBunrui;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ServiceShuruiCode;
 import jp.co.ndensan.reams.db.dbx.service.core.shichosonsecurity.ShichosonSecurityJohoFinder;
@@ -470,7 +473,7 @@ public class FukushiyoguKonyuhiShikyuShinsei {
                 : 福祉用具購入費支給申請明細登録画面.get登録福祉用具販売費リスト()) {
             DbT3048ShokanFukushiYoguHanbaihiEntity dbT3048Entity
                     = 登録福祉用具販売費.createBuilderForEdit().set連番(
-                            new RString(String.valueOf(最大枝番 + 登録数))).build().toEntity();
+                            new RString(String.format("%02d", 最大枝番 + 登録数))).build().toEntity();
             dbT3048Entity.setState(EntityDataState.Added);
             dbT3048EntityList.add(dbT3048Entity);
             償還払請求福祉用具販売費Dac.save(dbT3048Entity);
@@ -613,7 +616,7 @@ public class FukushiyoguKonyuhiShikyuShinsei {
                 : 福祉用具購入費支給申請明細登録画面.get登録福祉用具販売費リスト()) {
             DbT3048ShokanFukushiYoguHanbaihiEntity dbT3048Entity
                     = 登録福祉用具販売費.createBuilderForEdit().set連番(
-                            new RString(String.valueOf(最大枝番 + 登録数))).build().toEntity();
+                            new RString(String.format("%02d", 最大枝番 + 登録数))).build().toEntity();
             dbT3048Entity.setState(EntityDataState.Added);
             dbT3048EntityList.add(dbT3048Entity);
             償還払請求福祉用具販売費Dac.save(dbT3048Entity);
@@ -867,13 +870,14 @@ public class FukushiyoguKonyuhiShikyuShinsei {
         ShichosonSecurityJoho 市町村セキュリティ情報
                 = 基準月市町村情報Finder.getShichosonSecurityJoho(GyomuBunrui.介護事務);
         List<ShichosonResult> resultList = new ArrayList<>();
-        if (DonyuKeitaiCode.事務単一.equals(市町村セキュリティ情報.get導入形態コード())) {
+        if (null != 市町村セキュリティ情報 && DonyuKeitaiCode.事務単一.equals(市町村セキュリティ情報.get導入形態コード())) {
             ShichosonEntity entity = new ShichosonEntity();
             entity.set証記載保険者番号(市町村セキュリティ情報.get市町村情報().get証記載保険者番号());
             entity.set市町村名称(市町村セキュリティ情報.get市町村情報().get市町村名());
             resultList.add(new ShichosonResult(entity));
-        } else if (DonyuKeitaiCode.事務広域.equals(市町村セキュリティ情報.get導入形態コード())
-                || DonyuKeitaiCode.事務構成市町村.equals(市町村セキュリティ情報.get導入形態コード())) {
+        } else if (null != 市町村セキュリティ情報
+                && (DonyuKeitaiCode.事務広域.equals(市町村セキュリティ情報.get導入形態コード())
+                || DonyuKeitaiCode.事務構成市町村.equals(市町村セキュリティ情報.get導入形態コード()))) {
             IFukushiyoguKonyuhiShikyuGendogakuMapper mapper
                     = mapperProvider.create(IFukushiyoguKonyuhiShikyuGendogakuMapper.class);
             ServiceShuruiCodeParameter parameter
@@ -910,5 +914,22 @@ public class FukushiyoguKonyuhiShikyuShinsei {
             return RString.EMPTY;
         }
         return dbT3118Entity.getRyakusho();
+    }
+
+    /**
+     * 給付実績基本情報リスト取得
+     *
+     * @param 様式番号 様式番号
+     * @param 保険者番号 保険者番号
+     * @param 被保険者番号 被保険者番号
+     * @param サービス提供年月 サービス提供年月
+     * @param 整理番号 整理番号
+     * @param 給付実績区分コード 給付実績区分コード
+     * @return List<KyufujissekiKihon>
+     */
+    public List<KyufujissekiKihon> getKyufuJissekiKihonList(RString 様式番号, HokenshaNo 保険者番号,
+            HihokenshaNo 被保険者番号, FlexibleYearMonth サービス提供年月, RString 整理番号, RString 給付実績区分コード) {
+        return JutakukaishuSikyuShinseiManager.createInstance().getKyufuJissekiKihonList(
+                様式番号, 保険者番号, 被保険者番号, サービス提供年月, 整理番号, 給付実績区分コード);
     }
 }

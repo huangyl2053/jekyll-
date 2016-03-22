@@ -299,7 +299,11 @@ public class KeisangoJohoSakuseiProcess extends BatchProcessBase<KeisangoJohoSak
         } else {
             dbT2015.setKoseiZengoKubun(更正前後区分_更正後);
         }
-        dbT2015.setSakuseiShoriName(processParamter.getSakuseiShoriName());
+        if (saishinFlag5) {
+            dbT2015.setSakuseiShoriName(RString.EMPTY);
+        } else {
+            dbT2015.setSakuseiShoriName(processParamter.getSakuseiShoriName());
+        }
         dbT2015.setFukaRirekiNo(entity.getRirekiNo());
         dbT2015.setHihokenshaNo(entity.getHihokenshaNo());
         ShikibetsuCode shikibetsuCode = entity.getShikibetsuCode();

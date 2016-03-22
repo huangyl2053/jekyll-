@@ -8,6 +8,14 @@ module DBE {
 
         export class Events {
 
+            public static onClick_btnBack(): string {
+                return "onClick_btnBack";
+            }
+
+            public static onClick_btnKakutei(): string {
+                return "onClick_btnKakutei";
+            }
+
         }
 
         export class Controls {

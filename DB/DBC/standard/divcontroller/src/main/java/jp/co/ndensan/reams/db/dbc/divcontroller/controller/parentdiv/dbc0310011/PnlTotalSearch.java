@@ -13,10 +13,14 @@ import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0310011.DBC0
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0310011.PnlTotalSearchDiv;
 import jp.co.ndensan.reams.db.dbc.divcontroller.handler.dbc0310011.PnlTotalSearchHandler;
 import jp.co.ndensan.reams.db.dbc.divcontroller.viewbox.ViewStateKeys;
+import jp.co.ndensan.reams.db.dbx.service.core.dbbusinessconfig.DbBusinessConifg;
+import jp.co.ndensan.reams.db.dbz.definition.core.configkeys.ConfigNameDBU;
 import jp.co.ndensan.reams.db.dbz.definition.message.DbzQuestionMessages;
-import jp.co.ndensan.reams.db.dbz.divcontroller.entity.parentdiv.DBZU020001.DBZU020001TransitionEventName;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrWarningMessages;
+import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
+import jp.co.ndensan.reams.uz.uza.lang.ApplicationException;
+import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.message.MessageDialogSelectedResult;
@@ -49,12 +53,10 @@ public class PnlTotalSearch {
      * @return ResponseData<PnlTotalSearchDiv>
      */
     public ResponseData<PnlTotalSearchDiv> onLoad(PnlTotalSearchDiv div) {
-//        ViewStateHolder.put(ViewStateKeys.処理モード, 参照);
         ShokanJuryoininKeiyakushaParameter parameter = ViewStateHolder
                 .get(ViewStateKeys.契約者一覧検索キー, ShokanJuryoininKeiyakushaParameter.class);
         if (parameter != null) {
             List<ShokanJuryoininKeiyakusha> shokanList = getHandler(div).get契約者一覧(parameter);
-
             if (shokanList == null || shokanList.isEmpty()) {
                 return ResponseData.of(div).respond();
             }
@@ -62,9 +64,8 @@ public class PnlTotalSearch {
                     .get(ViewStateKeys.受領委任契約事業者検索最大件数, Decimal.class);
             div.getPnlSearch().getTxtMaxCount().setValue(最大取得件数);
             return set契約者一覧(div, shokanList);
-        } else {
-            getHandler(div).set初期化状態();
         }
+        getHandler(div).set初期化状態();
         return ResponseData.of(div).respond();
     }
 
@@ -75,7 +76,8 @@ public class PnlTotalSearch {
      * @return ResponseData<PnlTotalSearchDiv>
      */
     public ResponseData<PnlTotalSearchDiv> onClick_btnHihokensyaSearch(PnlTotalSearchDiv div) {
-        return ResponseData.of(div).forwardWithEventName(DBZU020001TransitionEventName.対象者特定).respond();
+        // TODO QA No.473
+        return ResponseData.of(div).respond();
     }
 
     /**
@@ -85,6 +87,7 @@ public class PnlTotalSearch {
      * @return ResponseData<PnlTotalSearchDiv>
      */
     public ResponseData<PnlTotalSearchDiv> onBlur_txtHihokenshaNo(PnlTotalSearchDiv div) {
+        // TODO QA No.473
         RString 被保険者番号 = ViewStateHolder.get(ViewStateKeys.被保険者番号, RString.class);
         RString 被保険者名 = ViewStateHolder.get(ViewStateKeys.被保険者名, RString.class);
         if (被保険者番号 != null) {
@@ -108,6 +111,7 @@ public class PnlTotalSearch {
         ViewStateHolder.put(ViewStateKeys.被保険者名, div.getPnlSearch().getTxtName().getValue());
         ViewStateHolder.put(ViewStateKeys.契約事業者名, div.getPnlSearch().getTxtJigyoshakeiyakuName().getValue());
         ViewStateHolder.put(ViewStateKeys.受領委任契約事業者検索最大件数, div.getPnlSearch().getTxtMaxCount().getValue());
+        // TODO QA No.473
         return ResponseData.of(div).forwardWithEventName(DBC0300011TransitionEventName.事業者選択).respond();
     }
 
@@ -118,6 +122,7 @@ public class PnlTotalSearch {
      * @return ResponseData<PnlTotalSearchDiv>
      */
     public ResponseData<PnlTotalSearchDiv> onBlur_txtJigyoshakeiyakuNo(PnlTotalSearchDiv div) {
+        // TODO QA No.473
         RString 契約事業者番号 = ViewStateHolder.get(ViewStateKeys.契約事業者番号, RString.class);
         RString 契約事業者名 = ViewStateHolder.get(ViewStateKeys.契約事業者名, RString.class);
         if (契約事業者番号 != null) {
@@ -148,6 +153,9 @@ public class PnlTotalSearch {
         div.getPnlSearch().getDdlKeiyakuServiceShurui().setSelectedKey(RString.EMPTY);
         div.getPnlSearch().getTxtYear().clearDomain();
         div.getPnlSearch().getTxtKeiyakuNo().clearValue();
+        div.getPnlSearch().getTxtMaxCount().setValue(new Decimal(DbBusinessConifg.
+                get(ConfigNameDBU.検索制御_最大取得件数, RDate.getNowDate(),
+                        SubGyomuCode.DBU介護統計報告).toString()));
         return ResponseData.of(div).respond();
     }
 
@@ -168,16 +176,18 @@ public class PnlTotalSearch {
                 && div.getPnlSearch().getTxtYear().getDomain() == null
                 && div.getPnlSearch().getTxtKeiyakuNo().getValue().isEmpty()) {
             if (!ResponseHolder.isReRequest()) {
-                return ResponseData.of(div).addMessage(UrWarningMessages.未入力.getMessage()
-                        .replace("検索条件の項目いずれも")).respond();
+                // TODO QA No.472
+                throw new ApplicationException(UrWarningMessages.未入力.getMessage()
+                        .replace("検索条件の項目いずれも"));
             }
             return ResponseData.of(div).respond();
         }
         ShokanJuryoininKeiyakushaParameter parameter = getHandler(div).createParameter();
+        ViewStateHolder.put(ViewStateKeys.契約者一覧検索キー, parameter);
+        ViewStateHolder.put(ViewStateKeys.被保険者名, div.getPnlSearch().getTxtName().getValue());
+        ViewStateHolder.put(ViewStateKeys.契約事業者名, div.getPnlSearch().getTxtJigyoshakeiyakuName().getValue());
+        ViewStateHolder.put(ViewStateKeys.受領委任契約事業者検索最大件数, div.getPnlSearch().getTxtMaxCount().getValue());
         List<ShokanJuryoininKeiyakusha> shokanList = getHandler(div).get契約者一覧(parameter);
-        if (shokanList == null || shokanList.isEmpty()) {
-            return ResponseData.of(div).respond();
-        }
         return set契約者一覧(div, shokanList);
     }
 
@@ -225,6 +235,11 @@ public class PnlTotalSearch {
         div.getPnlSearch().setDisplayNone(false);
         div.getPnlKeiyakusyaList().setDisplayNone(true);
         div.getBtnSearchAgain().setDisabled(true);
+        ShokanJuryoininKeiyakushaParameter parameter = ViewStateHolder
+                .get(ViewStateKeys.契約者一覧検索キー, ShokanJuryoininKeiyakushaParameter.class);
+        if (parameter != null) {
+            getHandler(div).set基本情報パラメータ(parameter);
+        }
         return ResponseData.of(div).respond();
     }
 
@@ -239,7 +254,7 @@ public class PnlTotalSearch {
             List<ShokanJuryoininKeiyakusha> shokanList) {
         int maxCount = div.getPnlSearch().getTxtMaxCount().getValue().intValue();
 
-        if (shokanList.size() > maxCount) {
+        if (shokanList != null && shokanList.size() > maxCount) {
             if (!ResponseHolder.isReRequest()) {
                 QuestionMessage message = new QuestionMessage(
                         DbzQuestionMessages.最大表示件数超過確認.getMessage().getCode(),

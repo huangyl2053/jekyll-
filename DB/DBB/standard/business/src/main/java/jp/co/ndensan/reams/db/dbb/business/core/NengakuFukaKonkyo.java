@@ -5,6 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbb.business.core;
 
+import jp.co.ndensan.reams.db.dbb.business.core.hokenryodankai.core.HokenryoDankai;
 import java.util.HashMap;
 import java.util.Map;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;

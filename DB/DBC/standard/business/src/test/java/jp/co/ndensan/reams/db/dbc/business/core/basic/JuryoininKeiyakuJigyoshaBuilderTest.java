@@ -54,8 +54,8 @@ public class JuryoininKeiyakuJigyoshaBuilderTest extends DbcTestBase {
 //TODO Key項目のテストメソッドは削除して下さい。
 
         @Test
-        public void 戻り値の事業者契約番号は_設定した値と同じ事業者契約番号を返す() {
-            business = sut.set事業者契約番号(DbT3077JuryoininKeiyakuJigyoshaEntityGenerator.DEFAULT_契約事業者番号).build();
+        public void 戻り値の契約事業者番号は_設定した値と同じ契約事業者番号を返す() {
+            business = sut.set契約事業者番号(DbT3077JuryoininKeiyakuJigyoshaEntityGenerator.DEFAULT_契約事業者番号).build();
             assertThat(business.get契約事業者番号(), is(DbT3077JuryoininKeiyakuJigyoshaEntityGenerator.DEFAULT_契約事業者番号));
         }
 

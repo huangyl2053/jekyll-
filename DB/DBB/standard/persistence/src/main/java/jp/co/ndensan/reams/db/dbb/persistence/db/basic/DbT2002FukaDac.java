@@ -171,4 +171,16 @@ public class DbT2002FukaDac implements ISaveable<DbT2002FukaEntity> {
                 order(by(DbT2002Fuka.choteiNendo, Order.DESC), by(DbT2002Fuka.rirekiNo, Order.DESC)).
                 toList(DbT2002FukaEntity.class);
     }
+
+    /**
+     * DbT2002FukaEntityを削除します。状態によってdelete処理に振り分けられます。
+     *
+     * @param entity entity
+     * @return 削除件数
+     */
+    @Transaction
+    public int delete(DbT2002FukaEntity entity) {
+        requireNonNull(entity, UrSystemErrorMessages.値がnull.getReplacedMessage("介護賦課エンティティ"));
+        return DbAccessors.saveOrDeletePhysicalBy(new DbAccessorNormalType(session), entity);
+    }
 }

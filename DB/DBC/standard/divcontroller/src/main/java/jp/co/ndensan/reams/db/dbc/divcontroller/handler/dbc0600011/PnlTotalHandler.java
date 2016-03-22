@@ -8,6 +8,7 @@ package jp.co.ndensan.reams.db.dbc.divcontroller.handler.dbc0600011;
 import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbc.business.core.fukushiyogukonyuhishikyushisei.FukushiyouguKonyuhiShikyuShinseiResult;
+import jp.co.ndensan.reams.db.dbc.definition.core.shikyufushikyukubun.ShikyuFushikyuKubun;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0600011.PnlTotalDiv;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0600011.dgShikyuShinseiList_Row;
 import jp.co.ndensan.reams.db.dbc.divcontroller.viewbox.ViewStateKeys;
@@ -16,7 +17,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 
 /**
- *
+ * 福祉用具購入費支給申請_検索のHandlerです
  */
 public final class PnlTotalHandler {
 
@@ -27,6 +28,7 @@ public final class PnlTotalHandler {
     }
 
     /**
+     * 生成されたインタフェースを返します
      *
      * @param div 画面DIV
      * @return PnlTotalHandler
@@ -51,7 +53,7 @@ public final class PnlTotalHandler {
                 row.setTxtShinseiYMD(new RString(shinsei.get申請年月日().toString()));
             }
             if (shinsei.get支給_不支給決定区分() != null) {
-                row.setTxtShikyuKubun(new RString(shinsei.get支給_不支給決定区分().toString()));
+                row.setTxtShikyuKubun(ShikyuFushikyuKubun.toValue(new RString(shinsei.get支給_不支給決定区分().toString())).get名称());
             }
             if (shinsei.get決定日() != null) {
                 row.setTxtKetteiYMD(new RString(shinsei.get決定日().toString()));
@@ -80,7 +82,7 @@ public final class PnlTotalHandler {
     }
 
     /**
-     * ヘッダ_エリア
+     * putViewStateHolder
      *
      * @param 状態 状態
      * @param 被保険者番号 被保険者番号
@@ -92,7 +94,6 @@ public final class PnlTotalHandler {
         ViewStateHolder.put(ViewStateKeys.支給申請情報検索キー, parameter);
         ViewStateHolder.put(ViewStateKeys.状態, 状態);
         ViewStateHolder.put(ViewStateKeys.被保険者番号, 被保険者番号);
-//div.getKaigoCommonPanel().getCcdShikakuKihon().get被保険者番号()
     }
 
 }

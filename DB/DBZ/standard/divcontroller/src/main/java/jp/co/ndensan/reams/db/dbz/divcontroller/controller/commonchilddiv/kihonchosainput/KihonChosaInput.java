@@ -5,6 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbz.divcontroller.controller.commonchilddiv.kihonchosainput;
 
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.KihonChosaInput.KihonChosaInput.KihonChosaInputDiv;
 import jp.co.ndensan.reams.db.dbz.divcontroller.handler.commonchilddiv.kihonchosainput.KihonChosaInputHandler;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrQuestionMessages;
@@ -13,11 +14,27 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.message.Message;
 import jp.co.ndensan.reams.uz.uza.message.MessageDialogSelectedResult;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ResponseHolder;
+import jp.co.ndensan.reams.uz.uza.util.serialization.DataPassingConverter;
 
 /**
  * 認定基本調査入力のDivControllerです。
  */
 public class KihonChosaInput {
+
+    /**
+     * 画面初期化
+     *
+     * @param div KihonChosaInput
+     * @return ResponseData<KihonChosaInput>
+     */
+    public ResponseData<KihonChosaInputDiv> onLoad(KihonChosaInputDiv div) {
+        ShinseishoKanriNo 申請書管理番号
+                = DataPassingConverter.deserialize(div.getDaiichigunShintaiKino().getShinseishoKanriNo(), ShinseishoKanriNo.class);
+        RString 認定調査依頼履歴番号 = div.getDaiichigunShintaiKino().getRecordNumber();
+        RString 初期状態モード = div.getモード();
+        div.onLoad(申請書管理番号, 認定調査依頼履歴番号, 初期状態モード);
+        return ResponseData.of(div).respond();
+    }
 
     /**
      * 認定基本調査入力をを処置内容特記事項を押下する。

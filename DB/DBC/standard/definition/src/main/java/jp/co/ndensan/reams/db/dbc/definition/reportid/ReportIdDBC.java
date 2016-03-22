@@ -13,6 +13,17 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
  */
 public enum ReportIdDBC {
 
+    /**
+     * 高額介護サービス費給付対象者取込み
+     */
+    DBC200014(new ReportId("DBC200014_KogakuKyufuTaishoshaIchiran"), new RString("高額介護サービス費給付対象者取込み")),
+    /**
+     * 高額サービス費決定情報取込みの帳票ＩＤです。
+     */
+    DBC200015(new ReportId("DBC200015_KogakuShikyuFushikyuKetteishaIchiran"), new RString("高額サービス費決定情報取込み")),
+    /**
+     * 過誤決定通知書情報取込一覧表【公費負担者分】の帳票ＩＤです。
+     */
     DBC200051(new ReportId("DBC200051_KagoKetteitsuchishoTorikomiIchiranKohifutanshaBun"), new RString("過誤決定通知書情報取込一覧表【公費負担者分】")),
     /**
      * 住宅改修事前申請承認結果通知書の帳票ＩＤです。
@@ -44,8 +55,11 @@ public enum ReportIdDBC {
      * 償還払支給（不支給）決定通知一覧表の帳票ＩＤです。
      */
     DBC200023(
-            new ReportId("DBC200023_ShokanbaraiShikyuFushikyuKetteiTsuchiIchiran"), new RString("償還払支給（不支給）決定通知一覧表"));
-
+            new ReportId("DBC200023_ShokanbaraiShikyuFushikyuKetteiTsuchiIchiran"), new RString("償還払支給（不支給）決定通知一覧表")),
+    /**
+     * 過誤決定通知書情報取込一覧表（保険者分）の帳票ＩＤです。
+     */
+    DBC200050(new ReportId("DBC200050_KagoKetteitsuchishoTorikomiIchiranHokenshaBun"), new RString("過誤決定通知書情報取込一覧表（保険者分）"));
     private final ReportId reportId;
     private final RString reportName;
 

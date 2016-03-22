@@ -61,9 +61,11 @@ public class ShujiiIkenshoTorokuHandler {
         div.getTxtShujiiIryoKikanTelNumber().setDomain(result.get電話番号() == null ? TelNo.EMPTY : result.get電話番号());
         div.getTxtShujiiIryoKikanFaxNumber().setDomain(result.getFAX番号() == null ? TelNo.EMPTY : result.getFAX番号());
         div.getTxtSaishuShinryoYMD().setValue(flexToRdate(result.get最終診察日()));
-        div.getRadIkenshoSakuseiKaisu().setSelectedKey(
-                IkenshoSakuseiKaisuKubun._2回目以降.getコード().equals(result.get意見書作成回数区分().value())
-                ? SELECT_KEY1 : SELECT_KEY0);
+        if (result.get意見書作成回数区分() != null) {
+            div.getRadIkenshoSakuseiKaisu().setSelectedKey(
+                    IkenshoSakuseiKaisuKubun._2回目以降.getコード().equals(result.get意見書作成回数区分().value())
+                    ? SELECT_KEY1 : SELECT_KEY0);
+        }
         div.getRadTakaShinryo().setSelectedKey(result.is他科受診の有無() ? SELECT_KEY0 : SELECT_KEY1);
         setChkTakaJushin(result);
         List<RString> selKeysList = new ArrayList<>();
@@ -192,7 +194,7 @@ public class ShujiiIkenshoTorokuHandler {
 
     private RDate flexToRdate(FlexibleDate fromDate) {
         if (fromDate == null || fromDate.isEmpty()) {
-            return RDate.MIN;
+            return null;
         }
         return new RDate(fromDate.getYearValue(), fromDate.getMonthValue(), fromDate.getDayValue());
     }

@@ -4,6 +4,17 @@ var DBD;
         var Events = (function () {
             function Events() {
             }
+            Events.onclick_txtCopyHonnin = function () {
+                return "onclick_txtCopyHonnin";
+            };
+
+            Events.onOkClose_btnOpenJigyoshaGuide = function () {
+                return "onOkClose_btnOpenJigyoshaGuide";
+            };
+
+            Events.onBeforeOpenDialog_btnOpenJigyoshaGuide = function () {
+                return "onBeforeOpenDialog_btnOpenJigyoshaGuide";
+            };
             return Events;
         })();
         GemmenGengakuShinsei.Events = Events;

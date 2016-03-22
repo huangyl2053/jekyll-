@@ -48,32 +48,19 @@ public class JuryoininKeiyakuJigyoshaTest extends DbcTestBase {
         public void setUp() {
             JuryoininKeiyakuJigyoshaEntity = DbT3077JuryoininKeiyakuJigyoshaEntityGenerator.createDbT3077JuryoininKeiyakuJigyoshaEntity();
             JuryoininKeiyakuJigyoshaEntity.setKeiyakuJigyoshaNo(主キー名1);
-            JuryoininKeiyakuJigyoshaEntity.setKaishiYMD(主キー名2);
         }
 
 //TODO 主キー名を置換してください
         @Test(expected = NullPointerException.class)
         public void 主キー名1がnullである場合に_NullPointerExceptionが発生する() {
-            sut = new JuryoininKeiyakuJigyosha(null, 主キー名2);
-        }
-
-        @Test(expected = NullPointerException.class)
-        public void 主キー名2がnullである場合に_NullPointerExceptionが発生する() {
-            sut = new JuryoininKeiyakuJigyosha(主キー名1, null);
+            DbT3077JuryoininKeiyakuJigyoshaEntity entity = null;
+            sut = new JuryoininKeiyakuJigyosha(entity);
         }
 
         @Test
         public void 指定したキーが保持するDbT3077JuryoininKeiyakuJigyoshaEntityにセットされている() {
-            sut = new JuryoininKeiyakuJigyosha(主キー名1, 主キー名2);
+            sut = new JuryoininKeiyakuJigyosha(主キー名1);
             assertThat(sut.get契約事業者番号(), is(主キー名1));
-            assertThat(sut.get開始年月日(), is(主キー名2));
-        }
-
-        @Test
-        public void 指定したキーが保持するJuryoininKeiyakuJigyoshaIdentifierにセットされている() {
-            sut = new JuryoininKeiyakuJigyosha(主キー名1, 主キー名2);
-            assertThat(sut.identifier().get事業者契約番号(), is(主キー名1));
-            assertThat(sut.identifier().get開始年月日(), is(主キー名2));
         }
     }
 
@@ -90,7 +77,8 @@ public class JuryoininKeiyakuJigyoshaTest extends DbcTestBase {
 
         @Test(expected = NullPointerException.class)
         public void 指定したEntityがnullである場合_NullPointerExceptionとなる() {
-            sut = new JuryoininKeiyakuJigyosha(null);
+            DbT3077JuryoininKeiyakuJigyoshaEntity entity = null;
+            sut = new JuryoininKeiyakuJigyosha(entity);
         }
 
         @Test
@@ -98,8 +86,7 @@ public class JuryoininKeiyakuJigyoshaTest extends DbcTestBase {
 
             sut = new JuryoininKeiyakuJigyosha(JuryoininKeiyakuJigyoshaEntity);
 
-            assertThat(sut.identifier().get事業者契約番号(), is(主キー名1));
-            assertThat(sut.identifier().get開始年月日(), is(主キー名2));
+            assertThat(sut.identifier().get契約事業者番号(), is(主キー名1));
         }
     }
 

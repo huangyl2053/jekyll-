@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 概要： 施設入所情報取得のマッピング用XMLです。 -->
+
+<!-- どのマッパーインターフェースと対応するかを指定する -->
+<mapper namespace = "jp.co.ndensan.reams.db.dbz.persistence.db.mapper.relate.shisetsunyushoinfo.IShisetSunyushoInfoMapper">
+<resultMap id = "ShisetSunyushoInfoRelateEntity" type="jp.co.ndensan.reams.db.dbz.entity.db.relate.shisetsunyushoinfo.ShisetSunyushoInfoRelateEntity">
+<result property="shikibetsuCode" column="shikibetsuCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.ShikibetsuCodeTypeHandler"/>
+<result property="nyushoShisetsuCode" column="nyushoShisetsuCode" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.JigyoshaNoTypeHandler"/>
+</resultMap>
+
+<select id = "getSelect"
+    resultMap="ShisetSunyushoInfoRelateEntity"
+    parameterType="jp.co.ndensan.reams.db.dbz.definition.param.shisetsunyushoinfo.ShisetSunyushoInfoParameter" fetchSize="500">
+SELECT
+    A."shikibetsuCode",
+    A."rirekiNo",
+    A."daichoShubetsu",
+    A."nyushoShisetsuCode",
+    A."nyushoYMD",
+    A."taishoYMD",
+    B."jigyoshaName"
+    FROM rgdb."DbT1004ShisetsuNyutaisho" AS A
+    LEFT JOIN rgdb."DbT7060KaigoJigyosha" AS B
+    ON A."nyushoShisetsuCode" = B."jigyoshaNo"
+    AND B."yukoKaishiYMD" = (
+        select 
+            max("yukoKaishiYMD")
+            from rgdb."DbT7060KaigoJigyosha"
+    )
+    WHERE A."daichoShubetsu" = #{daichoShubetsu}
+    AND A."taishoYMD" <![CDATA[>]]> A."nyushoYMD"
+    AND A."shikibetsuCode" = #{shikibetsuCode}
+    order by A."rirekiNo" Desc
+    limit 1
+</select>
+</mapper>

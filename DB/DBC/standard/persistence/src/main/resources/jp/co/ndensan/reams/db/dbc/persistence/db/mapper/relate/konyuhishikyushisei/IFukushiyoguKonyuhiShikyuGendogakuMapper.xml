@@ -1,0 +1,166 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!--  -->
+
+<mapper namespace="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.konyuhishikyushisei.IFukushiyoguKonyuhiShikyuGendogakuMapper">
+    <select id="select支給申請一覧"
+            resultMap="Result_ShikyuShinseiList"
+            parameterType="jp.co.ndensan.reams.db.dbc.definition.mybatisprm.fukushiyogukonyuhishikyushisei.ShokanShikyuShinseiParameter" fetchSize="500">
+        SELECT
+        ShokanKihon."hiHokenshaNo" AS "hiHokenshaNo",
+        ShokanKihon."serviceTeikyoYM" AS "serviceTeikyoYM",
+        ShokanKihon."seiriNp" AS "seiriNo",
+        ShokanKihon."jigyoshaNo" AS "jigyoshaNo",
+        ShokanKihon."yoshikiNo" AS "yoshikiNo",
+        ShokanKihon."meisaiNo" AS "meisaiNo",
+        ShokanShinsei."shinseiYMD" AS "shinseiYMD",
+        ShokanHanteiKekka."ketteiYMD" AS "ketteiYMD",
+        ShokanHanteiKekka."shikyuHushikyuKetteiKubun" AS "shikyuHushikyuKetteiKubun",
+        ShokanKihon."serviceTanisu" AS "konyukingakugoke",
+        DbT3048TEMP."fukushiYoguShohinName" AS "fukushiYoguShohinName"
+        FROM
+        rgdb."DbT3038ShokanKihon" AS ShokanKihon,
+        rgdb."DbT3034ShokanShinsei" AS ShokanShinsei,
+        rgdb."DbT3036ShokanHanteiKekka" AS ShokanHanteiKekka,
+        (
+        SELECT
+        ShokanFukushiYoguHanbaihi."hiHokenshaNo",
+        ShokanFukushiYoguHanbaihi."serviceTeikyoYM",
+        ShokanFukushiYoguHanbaihi."seiriNo",
+        ShokanFukushiYoguHanbaihi."jigyoshaNo",
+        ShokanFukushiYoguHanbaihi."yoshikiNo",
+        MIN(ShokanFukushiYoguHanbaihi."meisaiNo") AS "meisaiNo",
+        SUM(ShokanFukushiYoguHanbaihi."kounyuKingaku") AS "konyukingakugoke",
+        ShokanFukushiYoguHanbaihi."fukushiYoguShohinName"
+        FROM
+        rgdb."DbT3048ShokanFukushiYoguHanbaihi" AS ShokanFukushiYoguHanbaihi
+        WHERE
+        ShokanFukushiYoguHanbaihi."hiHokenshaNo" = #{被保険者番号}
+        GROUP BY
+        ShokanFukushiYoguHanbaihi."hiHokenshaNo",
+        ShokanFukushiYoguHanbaihi."serviceTeikyoYM",
+        ShokanFukushiYoguHanbaihi."seiriNo",
+        ShokanFukushiYoguHanbaihi."jigyoshaNo",
+        ShokanFukushiYoguHanbaihi."yoshikiNo",
+        ShokanFukushiYoguHanbaihi."fukushiYoguShohinName"
+        ) AS DbT3048TEMP
+        WHERE
+        ShokanKihon."hiHokenshaNo" = #{被保険者番号}
+        AND SUBSTR(ShokanKihon."yoshikiNo", 1, 3) = #{福祉用具販売費}
+        AND ShokanKihon."hiHokenshaNo" = ShokanShinsei."hiHokenshaNo"
+        AND ShokanKihon."serviceTeikyoYM" = ShokanShinsei."serviceTeikyoYM"
+        AND ShokanKihon."seiriNp" = ShokanShinsei."seiriNo"
+        AND ShokanKihon."hiHokenshaNo" = ShokanHanteiKekka."hiHokenshaNo"
+        AND ShokanKihon."serviceTeikyoYM" = ShokanHanteiKekka."serviceTeikyoYM"
+        AND ShokanKihon."seiriNp" = ShokanHanteiKekka."seiriNo"
+        AND ShokanKihon."hiHokenshaNo" = DbT3048TEMP."hiHokenshaNo"
+        AND ShokanKihon."serviceTeikyoYM" = DbT3048TEMP."serviceTeikyoYM"
+        AND ShokanKihon."seiriNp" = DbT3048TEMP."seiriNo"
+        AND ShokanKihon."jigyoshaNo" = DbT3048TEMP."jigyoshaNo"
+        AND ShokanKihon."yoshikiNo" = DbT3048TEMP."yoshikiNo"
+        AND ShokanKihon."meisaiNo" = DbT3048TEMP."meisaiNo"
+        ORDER BY
+        "serviceTeikyoYM" ASC,"seiriNo" ASC,"yoshikiNo"ASC
+    </select>
+        
+    <resultMap id="Result_ShikyuShinseiList" type="jp.co.ndensan.reams.db.dbc.entity.db.relate.fukushiyogukonyuhishikyushisei.FukushiyouguKonyuhiShikyuShinsei" autoMapping="true">
+        <result property="被保険者番号" column="hiHokenshaNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.HihokenshaNoTypeHandler"/>
+        <result property="サービス提供年月" column="serviceTeikyoYM" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleYearMonthTypeHandler"/>
+        <result property="整理番号" column="seiriNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="事業者番号" column="jigyoshaNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.JigyoshaNoTypeHandler"/>
+        <result property="様式番号" column="yoshikiNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="明細番号" column="meisaiNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="申請年月日" column="shinseiYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="支給_不支給決定区分" column="shikyuHushikyuKetteiKubun" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="決定日" column="ketteiYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="商品名" column="fukushiYoguShohinName" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="購入金額合計" column="konyukingakugoke" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+    </resultMap>
+    
+    <select id="select要介護認定状態区分コード"
+            resultType="jp.co.ndensan.reams.uz.uza.biz.Code"
+            parameterType="jp.co.ndensan.reams.db.dbc.definition.mybatisprm.fukushiyogukonyuhishikyushisei.ServiceShuruiCodeParameter" fetchSize="500">
+        SELECT
+        JukyushaDaicho."yokaigoJotaiKubunCode" AS "yokaigoJotaiKubunCode"
+        FROM
+        rgdb."DbT4001JukyushaDaicho" AS JukyushaDaicho
+        WHERE
+        JukyushaDaicho."hihokenshaNo" = #{被保険者番号}
+        AND
+        JukyushaDaicho."ninteiYukoKikanKaishiYMD" <![CDATA[<=]]> #{サービス提供年月}
+        AND
+        JukyushaDaicho."ninteiYukoKikanShuryoYMD" <![CDATA[>=]]> #{サービス提供年月}
+        AND
+        JukyushaDaicho."logicalDeletedFlag" <![CDATA[<>]]> true
+        ORDER BY
+        JukyushaDaicho."ninteiYukoKikanKaishiYMD" DESC
+        LIMIT 1
+    </select>
+    
+    <select id="select措置元市町村データ"
+            resultMap="Result_Shichoson"
+            parameterType="jp.co.ndensan.reams.db.dbc.definition.mybatisprm.fukushiyogukonyuhishikyushisei.ServiceShuruiCodeParameter" fetchSize="500">
+        SELECT
+        KoseiShichosonMaster."shoKisaiHokenshaNo",
+        KoseiShichosonMaster."shichosonMeisho"
+        FROM
+        rgdb."DbT1001HihokenshaDaicho" AS HihokenshaDaicho
+        LEFT JOIN 
+        rgdb."DbT5051KoseiShichosonMaster" AS KoseiShichosonMaster
+        ON
+        HihokenshaDaicho."koikinaiTokureiSochimotoShichosonCode" = KoseiShichosonMaster."shichosonCode"
+        AND
+        KoseiShichosonMaster."gappeiKyuShichosonKubun" = '0'
+        WHERE
+        HihokenshaDaicho."hihokenshaNo" = #{被保険者番号}
+        AND
+        HihokenshaDaicho."idoYMD" <![CDATA[<=]]> #{サービス提供年月}
+        AND
+        HihokenshaDaicho."logicalDeletedFlag" <![CDATA[<>]]> true
+        AND
+        KoseiShichosonMaster."isDeleted" <![CDATA[<>]]> true
+        ORDER BY
+        HihokenshaDaicho."idoYMD" DESC
+    </select>
+    <resultMap id="Result_Shichoson" type="jp.co.ndensan.reams.db.dbc.entity.db.relate.fukushiyogukonyuhishikyushisei.ShichosonEntity" autoMapping="true">
+        <result property="証記載保険者番号" column="hiHokenshaNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.ShoKisaiHokenshaNoTypeHandler"/>
+        <result property="市町村名称" column="jigyoshaNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+    </resultMap>
+    
+    <select id="select支払結果情報"
+            resultMap="Result_ShibaraiKekka"
+            parameterType="jp.co.ndensan.reams.db.dbc.definition.mybatisprm.fukushiyogukonyuhishikyushisei.ShibaraiKekkaParameter" fetchSize="500">
+        SELECT
+        SUM(ShokanShinsei."shiharaiKingakuTotal") AS "shiharaiKingakuTotal",
+        SUM(ShokanShinsei."hokenTaishoHiyogaku") AS "hokenTaishoHiyogaku",
+        SUM(ShokanShinsei."hokenKyufugaku") AS "hokenKyufugaku",
+        SUM(ShokanShinsei."riyoshaFutangaku") AS "riyoshaFutangaku"
+        FROM
+        rgdb."DbT3034ShokanShinsei" AS ShokanShinsei,
+        (
+        SELECT
+        ShokanKihon."hiHokenshaNo",
+        ShokanKihon."serviceTeikyoYM",
+        ShokanKihon."seiriNp"
+        FROM
+        rgdb."DbT3038ShokanKihon" AS ShokanKihon
+        WHERE
+        ShokanKihon."hiHokenshaNo" = #{被保険者番号}
+        AND
+        SUBSTR(ShokanKihon."serviceTeikyoYM", 1, 4) = #{サービス提供年月の年度}
+        AND
+        SUBSTR(ShokanKihon."yoshikiNo", 1, 3) = #{福祉用具販売費}
+        ) AS TEMPA
+        WHERE
+        ShokanShinsei."hiHokenshaNo" = TEMPA."hiHokenshaNo"
+        AND ShokanShinsei."serviceTeikyoYM" = TEMPA."serviceTeikyoYM"
+        AND ShokanShinsei."seiriNo" = TEMPA."seiriNp"
+    </select>
+        
+    <resultMap id="Result_ShibaraiKekka" type="jp.co.ndensan.reams.db.dbc.entity.db.relate.fukushiyogukonyuhishikyushisei.SokanbaraiShiharaiKekka" autoMapping="true">
+        <result property="費用額合計" column="shiharaiKingakuTotal" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="保険対象費用額" column="hokenTaishoHiyogaku" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="保険給付額" column="hokenKyufugaku"/>
+        <result property="利用者負担額" column="riyoshaFutangaku"/>
+    </resultMap>
+</mapper>

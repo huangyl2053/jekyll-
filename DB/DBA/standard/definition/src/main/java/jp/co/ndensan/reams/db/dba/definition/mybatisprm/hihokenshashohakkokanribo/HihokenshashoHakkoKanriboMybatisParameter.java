@@ -23,10 +23,10 @@ public final class HihokenshashoHakkoKanriboMybatisParameter implements IMyBatis
     private final FlexibleDate koufusiuryouhi;
     private final FlexibleDate kasyuukayisihi;
     private final FlexibleDate kasyuusiuryouhi;
-    private final boolean 交付開始日あり;
-    private final boolean 交付終了日あり;
-    private final boolean 回収開始日あり;
-    private final boolean 回収終了日あり;
+    private final boolean iskoufukayisihi;
+    private final boolean iskoufuShuryouhi;
+    private final boolean iskaisyuKayisihi;
+    private final boolean iskaisyuShuryouhi;
     private final List<RString> kofuJiyulist;
     private final List<RString> kaishuJiyulist;
     private final RString psmShikibetsuTaisho;
@@ -64,10 +64,10 @@ public final class HihokenshashoHakkoKanriboMybatisParameter implements IMyBatis
         this.koufusiuryouhi = 交付終了日;
         this.kasyuukayisihi = 回収開始日;
         this.kasyuusiuryouhi = 回収終了日;
-        this.交付開始日あり = 交付開始日あり;
-        this.交付終了日あり = 交付終了日あり;
-        this.回収開始日あり = 回収開始日あり;
-        this.回収終了日あり = 回収終了日あり;
+        this.iskoufukayisihi = 交付開始日あり;
+        this.iskoufuShuryouhi = 交付終了日あり;
+        this.iskaisyuKayisihi = 回収開始日あり;
+        this.iskaisyuShuryouhi = 回収終了日あり;
         this.kofuJiyulist = 交付事由;
         this.kaishuJiyulist = 回収事由;
         this.psmShikibetsuTaisho = psmShikibetsuTaisho;
@@ -105,7 +105,7 @@ public final class HihokenshashoHakkoKanriboMybatisParameter implements IMyBatis
         if (交付終了日 != null && !交付終了日.isEmpty()) {
             交付終了日あり = true;
         }
-        if (交付終了日 != null && !回収開始日.isEmpty()) {
+        if (回収開始日 != null && !回収開始日.isEmpty()) {
             回収開始日あり = true;
         }
         if (回収終了日 != null && !回収終了日.isEmpty()) {

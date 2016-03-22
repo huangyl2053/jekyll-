@@ -40,8 +40,8 @@ and open the template in the editor.
         Fuka."choteiNichiji"=#{choteiNichiji}
         ORDER BY
         Fuka."tsuchishoNo" ASC,
-        Fuka."choteiNendo" ASC,
-        Fuka."fukaNendo" DESC   
+        Fuka."choteiNendo" DESC,
+        Fuka."fukaNendo" DESC
     </select>  
     
     <select id="select納付額と納期限" resultType="jp.co.ndensan.reams.db.dbz.entity.db.basic.UrT0705ChoteiKyotsuEntity" parameterType="jp.co.ndensan.reams.db.dbb.definition.mybatisprm.honsanteiidokanendofukakakutei.FukaKakuteiParameter" fetchSize="500">

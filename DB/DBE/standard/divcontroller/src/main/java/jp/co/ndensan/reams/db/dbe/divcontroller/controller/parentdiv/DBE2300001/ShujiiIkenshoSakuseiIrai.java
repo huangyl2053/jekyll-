@@ -132,6 +132,7 @@ public class ShujiiIkenshoSakuseiIrai {
                 ShinseishoKanriNo.EMPTY, SubGyomuCode.DBE認定支援);
         div.getDgShinseishaIchiran().setDataSource(Collections.<dgShinseishaIchiran_Row>emptyList());
         div.getMeireisho().getRadjyushin().setSelectedKey(SELECTED_KEY1);
+        div.getMeireisho().setDisplayNone(true);
         return ResponseData.of(div).respond();
     }
 
@@ -143,9 +144,9 @@ public class ShujiiIkenshoSakuseiIrai {
      */
     public ResponseData<ShujiiIkenshoSakuseiIraiDiv> onClick_Chkprint(ShujiiIkenshoSakuseiIraiDiv div) {
         if (div.getChkprint().getSelectedKeys().contains(SELECTED_KEY3)) {
-            div.getMeireisho().setVisible(true);
+            div.getMeireisho().setDisplayNone(false);
         } else {
-            div.getMeireisho().setVisible(false);
+            div.getMeireisho().setDisplayNone(true);
         }
         return ResponseData.of(div).respond();
     }
@@ -458,7 +459,7 @@ public class ShujiiIkenshoSakuseiIrai {
         iraishoItem.setJusho(row.getJusho());
         iraishoItem.setBirthYMD(new RString(row.getBirthYMD().toString()));
         iraishoItem.setYubinNo(getEditedYubinNo(row.getYubinNo()));
-        RString hokenshaNo = row.getHokenshaNo().padRight(RString.EMPTY, 数字_5);
+        RString hokenshaNo = row.getHokenshaNo().padRight(RString.HALF_SPACE, 数字_5);
         iraishoItem.setHokenshaNo1(hokenshaNo.substring(数字_0, 数字_1));
         iraishoItem.setHokenshaNo2(hokenshaNo.substring(数字_1, 数字_2));
         iraishoItem.setHokenshaNo3(hokenshaNo.substring(数字_2, 数字_3));

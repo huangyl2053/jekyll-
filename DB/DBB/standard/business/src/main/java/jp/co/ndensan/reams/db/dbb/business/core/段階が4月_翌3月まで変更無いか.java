@@ -5,6 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbb.business.core;
 
+import jp.co.ndensan.reams.db.dbb.business.core.hokenryodankai.core.HokenryoDankai;
 import java.util.HashSet;
 import java.util.Map;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -24,10 +25,12 @@ public class 段階が4月_翌3月まで変更無いか implements 端数調整�
         for (Map.Entry<RString, HokenryoDankai> e : map.entrySet()) {
             set.add(e.getValue().getSystemDankai());
         }
+
+        boolean 段階が4月_翌3月まで変更無いか = false;
         if (set.size() > 1) {
-            return true;
+            段階が4月_翌3月まで変更無いか = true;
         }
-        return false;
+        return 段階が4月_翌3月まで変更無いか;
     }
 
 }

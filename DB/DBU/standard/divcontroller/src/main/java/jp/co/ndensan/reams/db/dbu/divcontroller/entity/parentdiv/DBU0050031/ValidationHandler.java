@@ -17,19 +17,20 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
  */
 public class ValidationHandler {
 
-    private final KaigoHokenTokubetuKaikeiKeiriJyokyoRegist2Div div;
+    private final YoshikiYonnoniDiv div;
 
     /**
      * コンストラクタです。
      *
      * @param div 介護保険特別会計経理状況登録_様式４の２入力ガイド
      */
-    public ValidationHandler(KaigoHokenTokubetuKaikeiKeiriJyokyoRegist2Div div) {
+    public ValidationHandler(YoshikiYonnoniDiv div) {
         this.div = div;
     }
 
     public void 報告年度の必須チェック(ValidationMessageControlPairs validPairs) {
-        if (div.getYoshikiyonMeisai().getTxthokokuYM().getValue() == null || div.getYoshikiyonMeisai().getTxthokokuYM().getValue().isEmpty()) {
+        if (div.getYoshikiYonnoniMeisai().getTxtHokokuYM().getValue() == null
+                || div.getYoshikiYonnoniMeisai().getTxtHokokuYM().getValue().isEmpty()) {
             validPairs.add(new ValidationMessageControlPair(RRVMessages.Validate報告年度必須));
         }
     }

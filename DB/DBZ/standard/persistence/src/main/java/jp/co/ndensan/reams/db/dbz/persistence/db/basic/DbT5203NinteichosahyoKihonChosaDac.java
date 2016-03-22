@@ -104,4 +104,21 @@ public class DbT5203NinteichosahyoKihonChosaDac implements ISaveable<DbT5203Nint
         //return DbAccessorMethodSelector.saveByForDeletePhysical(new DbAccessorNormalType(session), entity);
         return DbAccessors.saveBy(new DbAccessorNormalType(session), entity);
     }
+
+    /**
+     * 認定調査票（基本調査）を検索By申請書管理番号。
+     *
+     * @param 申請書管理番号 申請書管理番号
+     * @return DbT5203NinteichosahyoKihonChosaEntityの{@code list}
+     */
+    @Transaction
+    public List<DbT5203NinteichosahyoKihonChosaEntity> selectBy申請書管理番号(ShinseishoKanriNo 申請書管理番号) {
+        DbAccessorNormalType accessor = new DbAccessorNormalType(session);
+
+        return accessor.select().
+                table(DbT5203NinteichosahyoKihonChosa.class).
+                where(
+                        eq(shinseishoKanriNo, 申請書管理番号)).
+                toList(DbT5203NinteichosahyoKihonChosaEntity.class);
+    }
 }

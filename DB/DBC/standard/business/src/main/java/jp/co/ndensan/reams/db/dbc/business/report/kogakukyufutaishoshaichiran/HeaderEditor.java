@@ -25,8 +25,8 @@ public class HeaderEditor implements IKogakuKyufuTaishoshaIchiranEditor {
 
     @Override
     public KogakuKyufuTaishoshaIchiranSource edit(KogakuKyufuTaishoshaIchiranSource source) {
-        source.printTimeStamp = item.getPrintTimeStamp();
-        source.kokuhorenName = item.getKokuhorenName();
+        source.printTimeStamp = item.get作成日時();
+        source.kokuhorenName = item.get送付元団体名();
         return source;
     }
 

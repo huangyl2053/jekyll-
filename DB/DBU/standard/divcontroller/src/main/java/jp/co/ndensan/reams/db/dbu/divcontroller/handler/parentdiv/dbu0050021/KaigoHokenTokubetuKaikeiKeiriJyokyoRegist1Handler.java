@@ -19,6 +19,7 @@ import jp.co.ndensan.reams.db.dbu.divcontroller.entity.parentdiv.DBU0050021.Kaig
 import jp.co.ndensan.reams.db.dbu.divcontroller.entity.parentdiv.DBU0050021.YoshikiyonMeisaiDiv;
 import jp.co.ndensan.reams.db.dbu.service.core.kaigohokentokubetukaikeikeirijyokyoregist.KaigoHokenTokubetuKaikeiKeiriJyokyoRegistManager;
 import jp.co.ndensan.reams.db.dbx.definition.core.hokensha.TokeiTaishoKubun;
+import jp.co.ndensan.reams.db.dbx.definition.core.util.ObjectUtil;
 import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.kyotsu.JigyoHokokuNenpoShoriName;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
@@ -402,124 +403,13 @@ public class KaigoHokenTokubetuKaikeiKeiriJyokyoRegist1Handler {
      * @param 状態 状態
      */
     private void 詳細データエリ表示(KaigoHokenJigyoHokokuNenpo 詳細データ, RString 状態) {
-        if (!詳細データ.get詳細データエリア().isEmpty() && (状態2.equals(状態) || 状態3.equals(状態))) {
-            保険料.setValue(new Decimal(詳細データ.get詳細データエリア().get(保険料横縦番号).toString()));
-            総務費.setValue(new Decimal(詳細データ.get詳細データエリア().get(総務費横縦番号).toString()));
-            認定負担金.setValue(new Decimal(詳細データ.get詳細データエリア().get(認定負担金横縦番号).toString()));
-            介護サービス等諸費.setValue(new Decimal(詳細データ.get詳細データエリア().get(介護サービス等諸費横縦番号).toString()));
-            その他.setValue(new Decimal(詳細データ.get詳細データエリア().get(その他横縦番号).toString()));
-            介護予防サービス等諸費.setValue(new Decimal(詳細データ.get詳細データエリア().get(介護予防サービス等諸費横縦番号).toString()));
-            使用料.setValue(new Decimal(詳細データ.get詳細データエリア().get(使用料横縦番号).toString()));
-            高額介護サービス等費.setValue(new Decimal(詳細データ.get詳細データエリア().get(高額介護サービス等費横縦番号).toString()));
-            手数料.setValue(new Decimal(詳細データ.get詳細データエリア().get(手数料横縦番号).toString()));
-            高額医療合算介護サービス等費.setValue(new Decimal(詳細データ.get詳細データエリア().get(高額医療合算介護サービス等費横縦番号).toString()));
-            介護給付費負担金.setValue(new Decimal(詳細データ.get詳細データエリア().get(介護給付費負担金横縦番号).toString()));
-            特定入所者介護サービス等費.setValue(new Decimal(詳細データ.get詳細データエリア().get(特定入所者介護サービス等費横縦番号).toString()));
-            調整交付金.setValue(new Decimal(詳細データ.get詳細データエリア().get(調整交付金横縦番号).toString()));
-            審査支払手数料.setValue(new Decimal(詳細データ.get詳細データエリア().get(審査支払手数料横縦番号).toString()));
-            地域支援事業交付金_介護予防事業.setValue(new Decimal(詳細データ.get詳細データエリア().get(地域支援事業交付金_介護予防事業横縦番号).toString()));
-            市町村特別給付費.setValue(new Decimal(詳細データ.get詳細データエリア().get(市町村特別給付費横縦番号).toString()));
-            地域支援事業交付金_包括的支援事業.setValue(new Decimal(詳細データ.get詳細データエリア().get(地域支援事業交付金_包括的支援事業横縦番号).toString()));
-            その他_保険給付費.setValue(new Decimal(詳細データ.get詳細データエリア().get(その他_保険給付費横縦番号).toString()));
-            その他_国庫支出金.setValue(new Decimal(詳細データ.get詳細データエリア().get(その他_国庫支出金横縦番号).toString()));
-            介護予防事業費.setValue(new Decimal(詳細データ.get詳細データエリア().get(介護予防事業費横縦番号).toString()));
-            介護給付費交付金.setValue(new Decimal(詳細データ.get詳細データエリア().get(介護給付費交付金横縦番号).toString()));
-            包括的支援事業_任意事業_地域支援事業.setValue(new Decimal(詳細データ.get詳細データエリア().get(包括的支援事業_任意事業_地域支援事業横縦番号).toString()));
-            地域支援事業支援交付金.setValue(new Decimal(詳細データ.get詳細データエリア().get(地域支援事業支援交付金横縦番号).toString()));
-            財政安定化基金拠出金.setValue(new Decimal(詳細データ.get詳細データエリア().get(保険料横縦番号).toString()));
-            都道府県負担金.setValue(new Decimal(詳細データ.get詳細データエリア().get(財政安定化基金拠出金横縦番号).toString()));
-            相互財政安定化事業負担金.setValue(new Decimal(詳細データ.get詳細データエリア().get(相互財政安定化事業負担金横縦番号).toString()));
-            財政安定化基金支出金.setValue(new Decimal(詳細データ.get詳細データエリア().get(財政安定化基金支出金横縦番号).toString()));
-            保健福祉事業費.setValue(new Decimal(詳細データ.get詳細データエリア().get(保健福祉事業費横縦番号).toString()));
-            都道府県支出金_地域支援事業交付金.setValue(new Decimal(詳細データ.get詳細データエリア().get(都道府県支出金_地域支援事業交付金横縦番号).toString()));
-            基金積立金.setValue(new Decimal(詳細データ.get詳細データエリア().get(基金積立金横縦番号).toString()));
-            地域支援事業交付金_任意事業.setValue(new Decimal(詳細データ.get詳細データエリア().get(地域支援事業交付金_任意事業横縦番号).toString()));
-            財政安定化基金償還金.setValue(new Decimal(詳細データ.get詳細データエリア().get(財政安定化基金償還金横縦番号).toString()));
-            その他_都道府県支出金.setValue(new Decimal(詳細データ.get詳細データエリア().get(その他_都道府県支出金横縦番号).toString()));
-            その他_公債費.setValue(new Decimal(詳細データ.get詳細データエリア().get(その他_公債費横縦番号).toString()));
-            相互財政安定化事業交付金.setValue(new Decimal(詳細データ.get詳細データエリア().get(相互財政安定化事業交付金横縦番号).toString()));
-            予備費.setValue(new Decimal(詳細データ.get詳細データエリア().get(予備費横縦番号).toString()));
-            財産収入.setValue(new Decimal(詳細データ.get詳細データエリア().get(財産収入横縦番号).toString()));
-            介護サービス事業勘定繰出金.setValue(new Decimal(詳細データ.get詳細データエリア().get(介護サービス事業勘定繰出金横縦番号).toString()));
-            寄附金.setValue(new Decimal(詳細データ.get詳細データエリア().get(寄附金横縦番号).toString()));
-            他会計繰出金.setValue(new Decimal(詳細データ.get詳細データエリア().get(他会計繰出金横縦番号).toString()));
-            一般会計繰入金.setValue(new Decimal(詳細データ.get詳細データエリア().get(一般会計繰入金横縦番号).toString()));
-            その他_諸支出金.setValue(new Decimal(詳細データ.get詳細データエリア().get(その他_諸支出金横縦番号).toString()));
-            総務費に係る一般会計繰入金.setValue(new Decimal(詳細データ.get詳細データエリア().get(総務費に係る一般会計繰入金横縦番号).toString()));
-            介護給付費準備基金繰入金.setValue(new Decimal(詳細データ.get詳細データエリア().get(介護給付費準備基金繰入金横縦番号).toString()));
-            介護サービス事業勘定繰入金.setValue(new Decimal(詳細データ.get詳細データエリア().get(介護サービス事業勘定繰入金横縦番号).toString()));
-            地域支援事業繰入金_介護予防事業.setValue(new Decimal(詳細データ.get詳細データエリア().get(地域支援事業繰入金_介護予防事業横縦番号).toString()));
-            地域支援事業繰入金_任意事業.setValue(new Decimal(詳細データ.get詳細データエリア().get(地域支援事業繰入金_任意事業横縦番号).toString()));
-            その他_繰入金.setValue(new Decimal(詳細データ.get詳細データエリア().get(その他_繰入金横縦番号).toString()));
-            繰越金.setValue(new Decimal(詳細データ.get詳細データエリア().get(繰越金横縦番号).toString()));
-            財政安定化基金貸付金.setValue(new Decimal(詳細データ.get詳細データエリア().get(財政安定化基金貸付金横縦番号).toString()));
-            その他_市町村債.setValue(new Decimal(詳細データ.get詳細データエリア().get(その他_市町村債横縦番号).toString()));
-            諸収入.setValue(new Decimal(詳細データ.get詳細データエリア().get(諸収入横縦番号).toString()));
-            合計１.setValue(new Decimal(詳細データ.get詳細データエリア().get(合計１横縦番号).toString()));
-            合計２.setValue(new Decimal(詳細データ.get詳細データエリア().get(合計２横縦番号).toString()));
-            歳入歳出差引残額.setValue(new Decimal(詳細データ.get詳細データエリア().get(歳入歳出差引残額横縦番号).toString()));
-            うち基金繰入額.setValue(new Decimal(詳細データ.get詳細データエリア().get(うち基金繰入額横縦番号).toString()));
-            介護給付費準備基金保有額.setValue(new Decimal(詳細データ.get詳細データエリア().get(介護給付費準備基金保有額横縦番号).toString()));
+        if (詳細データ != null && 詳細データ.get詳細データエリア() != null && !詳細データ.get詳細データエリア().isEmpty()
+                && (状態2.equals(状態) || 状態3.equals(状態))) {
+            set詳細データエリア(詳細データ);
         }
         if (状態2.equals(状態) || 状態3.equals(状態) || 状態1.equals(状態) || 状態1_確定.equals(状態)) {
-            Boolean readOnly = 状態3.equals(状態) || 状態1.equals(状態);
-            保険料.setReadOnly(readOnly);
-            総務費.setReadOnly(readOnly);
-            認定負担金.setReadOnly(readOnly);
-            介護サービス等諸費.setReadOnly(readOnly);
-            その他.setReadOnly(readOnly);
-            介護予防サービス等諸費.setReadOnly(readOnly);
-            使用料.setReadOnly(readOnly);
-            高額介護サービス等費.setReadOnly(readOnly);
-            手数料.setReadOnly(readOnly);
-            高額医療合算介護サービス等費.setReadOnly(readOnly);
-            介護給付費負担金.setReadOnly(readOnly);
-            特定入所者介護サービス等費.setReadOnly(readOnly);
-            調整交付金.setReadOnly(readOnly);
-            審査支払手数料.setReadOnly(readOnly);
-            地域支援事業交付金_介護予防事業.setReadOnly(readOnly);
-            市町村特別給付費.setReadOnly(readOnly);
-            地域支援事業交付金_包括的支援事業.setReadOnly(readOnly);
-            その他_保険給付費.setReadOnly(readOnly);
-            その他_国庫支出金.setReadOnly(readOnly);
-            介護予防事業費.setReadOnly(readOnly);
-            介護給付費交付金.setReadOnly(readOnly);
-            包括的支援事業_任意事業_地域支援事業.setReadOnly(readOnly);
-            地域支援事業支援交付金.setReadOnly(readOnly);
-            財政安定化基金拠出金.setReadOnly(readOnly);
-            都道府県負担金.setReadOnly(readOnly);
-            相互財政安定化事業負担金.setReadOnly(readOnly);
-            財政安定化基金支出金.setReadOnly(readOnly);
-            保健福祉事業費.setReadOnly(readOnly);
-            都道府県支出金_地域支援事業交付金.setReadOnly(readOnly);
-            基金積立金.setReadOnly(readOnly);
-            地域支援事業交付金_任意事業.setReadOnly(readOnly);
-            財政安定化基金償還金.setReadOnly(readOnly);
-            その他_都道府県支出金.setReadOnly(readOnly);
-            その他_公債費.setReadOnly(readOnly);
-            相互財政安定化事業交付金.setReadOnly(readOnly);
-            予備費.setReadOnly(readOnly);
-            財産収入.setReadOnly(readOnly);
-            介護サービス事業勘定繰出金.setReadOnly(readOnly);
-            寄附金.setReadOnly(readOnly);
-            他会計繰出金.setReadOnly(readOnly);
-            一般会計繰入金.setReadOnly(readOnly);
-            その他_諸支出金.setReadOnly(readOnly);
-            総務費に係る一般会計繰入金.setReadOnly(readOnly);
-            介護給付費準備基金繰入金.setReadOnly(readOnly);
-            介護サービス事業勘定繰入金.setReadOnly(readOnly);
-            地域支援事業繰入金_介護予防事業.setReadOnly(readOnly);
-            地域支援事業繰入金_任意事業.setReadOnly(readOnly);
-            その他_繰入金.setReadOnly(readOnly);
-            繰越金.setReadOnly(readOnly);
-            財政安定化基金貸付金.setReadOnly(readOnly);
-            その他_市町村債.setReadOnly(readOnly);
-            諸収入.setReadOnly(readOnly);
-            合計１.setReadOnly(readOnly);
-            合計２.setReadOnly(readOnly);
-            歳入歳出差引残額.setReadOnly(readOnly);
-            うち基金繰入額.setReadOnly(readOnly);
-            介護給付費準備基金保有額.setReadOnly(readOnly);
+            Boolean isReadOnly = 状態3.equals(状態) || 状態1.equals(状態);
+            is詳細データエリアReadOnly(isReadOnly);
         }
     }
 
@@ -642,9 +532,11 @@ public class KaigoHokenTokubetuKaikeiKeiriJyokyoRegist1Handler {
         KaigoHokenJigyoHokokuNenpo 詳細データ = 詳細データLst.get(0);
         KaigoHokenJigyoHokokuNenpo 画面入力データ = get画面入力データ();
         Map<RString, Decimal> 修正データエリア = new HashMap<>();
-        for (Map.Entry<RString, Decimal> 詳細データentry : 詳細データ.get詳細データエリア().entrySet()) {
-            if (!詳細データentry.getValue().equals(画面入力データ.get詳細データエリア().get(詳細データentry.getKey()))) {
-                修正データエリア.put(詳細データentry.getKey(), 画面入力データ.get詳細データエリア().get(詳細データentry.getKey()));
+        if (詳細データ != null) {
+            for (Map.Entry<RString, Decimal> 詳細データentry : 詳細データ.get詳細データエリア().entrySet()) {
+                if (!詳細データentry.getValue().equals(画面入力データ.get詳細データエリア().get(詳細データentry.getKey()))) {
+                    修正データエリア.put(詳細データentry.getKey(), 画面入力データ.get詳細データエリア().get(詳細データentry.getKey()));
+                }
             }
         }
         KaigoHokenJigyoHokokuNenpo 修正データ = new KaigoHokenJigyoHokokuNenpo(画面入力データ.get報告年(), 画面入力データ.get報告月(),
@@ -850,11 +742,187 @@ public class KaigoHokenTokubetuKaikeiKeiriJyokyoRegist1Handler {
      */
     private InsuranceInformation get引き継ぎデータ() {
         InsuranceInformation 引き継ぎデータ
-                = (InsuranceInformation) ViewStateHolder.get(TaishokensakuJyouken.ViewStateKey.様式４, InsuranceInformation.class);
+                = ViewStateHolder.get(TaishokensakuJyouken.ViewStateKey.様式４, InsuranceInformation.class);
         if (null == 引き継ぎデータ) {
             引き継ぎデータ = new InsuranceInformation(ADD);
         }
         return 引き継ぎデータ;
     }
 
+    private void set詳細データエリア(KaigoHokenJigyoHokokuNenpo 詳細データ) {
+        保険料.setValue(
+                new Decimal(ObjectUtil.defaultIfNull(詳細データ.get詳細データエリア().get(保険料横縦番号), new RString("0")).toString()));
+        総務費.setValue(
+                new Decimal(ObjectUtil.defaultIfNull(詳細データ.get詳細データエリア().get(総務費横縦番号), new RString("0")).toString()));
+        認定負担金.setValue(new Decimal(ObjectUtil.defaultIfNull(
+                詳細データ.get詳細データエリア().get(認定負担金横縦番号), new RString("0")).toString()));
+        介護サービス等諸費.setValue(new Decimal(ObjectUtil.defaultIfNull(
+                詳細データ.get詳細データエリア().get(介護サービス等諸費横縦番号), new RString("0")).toString()));
+        その他.setValue(new Decimal(ObjectUtil.defaultIfNull(
+                詳細データ.get詳細データエリア().get(その他横縦番号), new RString("0")).toString()));
+        介護予防サービス等諸費.setValue(new Decimal(ObjectUtil.defaultIfNull(
+                詳細データ.get詳細データエリア().get(介護予防サービス等諸費横縦番号), new RString("0")).toString()));
+        使用料.setValue(new Decimal(ObjectUtil.defaultIfNull(
+                詳細データ.get詳細データエリア().get(使用料横縦番号), new RString("0")).toString()));
+        高額介護サービス等費.setValue(new Decimal(ObjectUtil.defaultIfNull(
+                詳細データ.get詳細データエリア().get(高額介護サービス等費横縦番号), new RString("0")).toString()));
+        手数料.setValue(new Decimal(ObjectUtil.defaultIfNull(
+                詳細データ.get詳細データエリア().get(手数料横縦番号), new RString("0")).toString()));
+        高額医療合算介護サービス等費.setValue(new Decimal(ObjectUtil.defaultIfNull(
+                詳細データ.get詳細データエリア().get(高額医療合算介護サービス等費横縦番号), new RString("0")).toString()));
+        介護給付費負担金.setValue(new Decimal(ObjectUtil.defaultIfNull(
+                詳細データ.get詳細データエリア().get(介護給付費負担金横縦番号), new RString("0")).toString()));
+        特定入所者介護サービス等費.setValue(new Decimal(ObjectUtil.defaultIfNull(
+                詳細データ.get詳細データエリア().get(特定入所者介護サービス等費横縦番号), new RString("0")).toString()));
+        調整交付金.setValue(new Decimal(ObjectUtil.defaultIfNull(
+                詳細データ.get詳細データエリア().get(調整交付金横縦番号), new RString("0")).toString()));
+        審査支払手数料.setValue(new Decimal(ObjectUtil.defaultIfNull(
+                詳細データ.get詳細データエリア().get(審査支払手数料横縦番号), new RString("0")).toString()));
+        地域支援事業交付金_介護予防事業.setValue(new Decimal(ObjectUtil.defaultIfNull(
+                詳細データ.get詳細データエリア().get(地域支援事業交付金_介護予防事業横縦番号), new RString("0")).toString()));
+        市町村特別給付費.setValue(new Decimal(ObjectUtil.defaultIfNull(
+                詳細データ.get詳細データエリア().get(市町村特別給付費横縦番号), new RString("0")).toString()));
+        地域支援事業交付金_包括的支援事業.setValue(new Decimal(ObjectUtil.defaultIfNull(
+                詳細データ.get詳細データエリア().get(地域支援事業交付金_包括的支援事業横縦番号), new RString("0")).toString()));
+        その他_保険給付費.setValue(new Decimal(ObjectUtil.defaultIfNull(
+                詳細データ.get詳細データエリア().get(その他_保険給付費横縦番号), new RString("0")).toString()));
+        その他_国庫支出金.setValue(new Decimal(ObjectUtil.defaultIfNull(
+                詳細データ.get詳細データエリア().get(その他_国庫支出金横縦番号), new RString("0")).toString()));
+        介護予防事業費.setValue(new Decimal(ObjectUtil.defaultIfNull(
+                詳細データ.get詳細データエリア().get(介護予防事業費横縦番号), new RString("0")).toString()));
+        介護給付費交付金.setValue(new Decimal(ObjectUtil.defaultIfNull(
+                詳細データ.get詳細データエリア().get(介護給付費交付金横縦番号), new RString("0")).toString()));
+        包括的支援事業_任意事業_地域支援事業.setValue(new Decimal(ObjectUtil.defaultIfNull(
+                詳細データ.get詳細データエリア().get(包括的支援事業_任意事業_地域支援事業横縦番号), new RString("0")).toString()));
+        地域支援事業支援交付金.setValue(new Decimal(ObjectUtil.defaultIfNull(
+                詳細データ.get詳細データエリア().get(地域支援事業支援交付金横縦番号), new RString("0")).toString()));
+        財政安定化基金拠出金.setValue(new Decimal(ObjectUtil.defaultIfNull(
+                詳細データ.get詳細データエリア().get(保険料横縦番号), new RString("0")).toString()));
+        都道府県負担金.setValue(new Decimal(ObjectUtil.defaultIfNull(
+                詳細データ.get詳細データエリア().get(財政安定化基金拠出金横縦番号), new RString("0")).toString()));
+        相互財政安定化事業負担金.setValue(new Decimal(ObjectUtil.defaultIfNull(
+                詳細データ.get詳細データエリア().get(相互財政安定化事業負担金横縦番号), new RString("0")).toString()));
+        財政安定化基金支出金.setValue(new Decimal(ObjectUtil.defaultIfNull(
+                詳細データ.get詳細データエリア().get(財政安定化基金支出金横縦番号), new RString("0")).toString()));
+        保健福祉事業費.setValue(new Decimal(ObjectUtil.defaultIfNull(
+                詳細データ.get詳細データエリア().get(保健福祉事業費横縦番号), new RString("0")).toString()));
+        都道府県支出金_地域支援事業交付金.setValue(new Decimal(ObjectUtil.defaultIfNull(
+                詳細データ.get詳細データエリア().get(都道府県支出金_地域支援事業交付金横縦番号), new RString("0")).toString()));
+        基金積立金.setValue(new Decimal(ObjectUtil.defaultIfNull(
+                詳細データ.get詳細データエリア().get(基金積立金横縦番号), new RString("0")).toString()));
+        地域支援事業交付金_任意事業.setValue(new Decimal(ObjectUtil.defaultIfNull(
+                詳細データ.get詳細データエリア().get(地域支援事業交付金_任意事業横縦番号), new RString("0")).toString()));
+        財政安定化基金償還金.setValue(new Decimal(ObjectUtil.defaultIfNull(
+                詳細データ.get詳細データエリア().get(財政安定化基金償還金横縦番号), new RString("0")).toString()));
+        その他_都道府県支出金.setValue(new Decimal(ObjectUtil.defaultIfNull(
+                詳細データ.get詳細データエリア().get(その他_都道府県支出金横縦番号), new RString("0")).toString()));
+        その他_公債費.setValue(new Decimal(ObjectUtil.defaultIfNull(
+                詳細データ.get詳細データエリア().get(その他_公債費横縦番号), new RString("0")).toString()));
+        相互財政安定化事業交付金.setValue(new Decimal(ObjectUtil.defaultIfNull(
+                詳細データ.get詳細データエリア().get(相互財政安定化事業交付金横縦番号), new RString("0")).toString()));
+        予備費.setValue(new Decimal(ObjectUtil.defaultIfNull(
+                詳細データ.get詳細データエリア().get(予備費横縦番号), new RString("0")).toString()));
+        財産収入.setValue(new Decimal(ObjectUtil.defaultIfNull(
+                詳細データ.get詳細データエリア().get(財産収入横縦番号), new RString("0")).toString()));
+        介護サービス事業勘定繰出金.setValue(new Decimal(ObjectUtil.defaultIfNull(
+                詳細データ.get詳細データエリア().get(介護サービス事業勘定繰出金横縦番号), new RString("0")).toString()));
+        寄附金.setValue(new Decimal(ObjectUtil.defaultIfNull(
+                詳細データ.get詳細データエリア().get(寄附金横縦番号), new RString("0")).toString()));
+        他会計繰出金.setValue(new Decimal(ObjectUtil.defaultIfNull(
+                詳細データ.get詳細データエリア().get(他会計繰出金横縦番号), new RString("0")).toString()));
+        一般会計繰入金.setValue(new Decimal(ObjectUtil.defaultIfNull(
+                詳細データ.get詳細データエリア().get(一般会計繰入金横縦番号), new RString("0")).toString()));
+        その他_諸支出金.setValue(new Decimal(ObjectUtil.defaultIfNull(
+                詳細データ.get詳細データエリア().get(その他_諸支出金横縦番号), new RString("0")).toString()));
+        総務費に係る一般会計繰入金.setValue(new Decimal(ObjectUtil.defaultIfNull(
+                詳細データ.get詳細データエリア().get(総務費に係る一般会計繰入金横縦番号), new RString("0")).toString()));
+        介護給付費準備基金繰入金.setValue(new Decimal(ObjectUtil.defaultIfNull(
+                詳細データ.get詳細データエリア().get(介護給付費準備基金繰入金横縦番号), new RString("0")).toString()));
+        介護サービス事業勘定繰入金.setValue(new Decimal(ObjectUtil.defaultIfNull(
+                詳細データ.get詳細データエリア().get(介護サービス事業勘定繰入金横縦番号), new RString("0")).toString()));
+        地域支援事業繰入金_介護予防事業.setValue(new Decimal(ObjectUtil.defaultIfNull(
+                詳細データ.get詳細データエリア().get(地域支援事業繰入金_介護予防事業横縦番号), new RString("0")).toString()));
+        地域支援事業繰入金_任意事業.setValue(new Decimal(ObjectUtil.defaultIfNull(
+                詳細データ.get詳細データエリア().get(地域支援事業繰入金_任意事業横縦番号), new RString("0")).toString()));
+        その他_繰入金.setValue(new Decimal(ObjectUtil.defaultIfNull(
+                詳細データ.get詳細データエリア().get(その他_繰入金横縦番号), new RString("0")).toString()));
+        繰越金.setValue(new Decimal(ObjectUtil.defaultIfNull(
+                詳細データ.get詳細データエリア().get(繰越金横縦番号), new RString("0")).toString()));
+        財政安定化基金貸付金.setValue(new Decimal(ObjectUtil.defaultIfNull(
+                詳細データ.get詳細データエリア().get(財政安定化基金貸付金横縦番号), new RString("0")).toString()));
+        その他_市町村債.setValue(new Decimal(ObjectUtil.defaultIfNull(
+                詳細データ.get詳細データエリア().get(その他_市町村債横縦番号), new RString("0")).toString()));
+        諸収入.setValue(new Decimal(ObjectUtil.defaultIfNull(
+                詳細データ.get詳細データエリア().get(諸収入横縦番号), new RString("0")).toString()));
+        合計１.setValue(new Decimal(ObjectUtil.defaultIfNull(
+                詳細データ.get詳細データエリア().get(合計１横縦番号), new RString("0")).toString()));
+        合計２.setValue(new Decimal(ObjectUtil.defaultIfNull(
+                詳細データ.get詳細データエリア().get(合計２横縦番号), new RString("0")).toString()));
+        歳入歳出差引残額.setValue(new Decimal(ObjectUtil.defaultIfNull(
+                詳細データ.get詳細データエリア().get(歳入歳出差引残額横縦番号), new RString("0")).toString()));
+        うち基金繰入額.setValue(new Decimal(ObjectUtil.defaultIfNull(
+                詳細データ.get詳細データエリア().get(うち基金繰入額横縦番号), new RString("0")).toString()));
+        介護給付費準備基金保有額.setValue(new Decimal(ObjectUtil.defaultIfNull(
+                詳細データ.get詳細データエリア().get(介護給付費準備基金保有額横縦番号), new RString("0")).toString()));
+    }
+
+    private void is詳細データエリアReadOnly(Boolean isReadOnly) {
+        保険料.setReadOnly(isReadOnly);
+        総務費.setReadOnly(isReadOnly);
+        認定負担金.setReadOnly(isReadOnly);
+        介護サービス等諸費.setReadOnly(isReadOnly);
+        その他.setReadOnly(isReadOnly);
+        介護予防サービス等諸費.setReadOnly(isReadOnly);
+        使用料.setReadOnly(isReadOnly);
+        高額介護サービス等費.setReadOnly(isReadOnly);
+        手数料.setReadOnly(isReadOnly);
+        高額医療合算介護サービス等費.setReadOnly(isReadOnly);
+        介護給付費負担金.setReadOnly(isReadOnly);
+        特定入所者介護サービス等費.setReadOnly(isReadOnly);
+        調整交付金.setReadOnly(isReadOnly);
+        審査支払手数料.setReadOnly(isReadOnly);
+        地域支援事業交付金_介護予防事業.setReadOnly(isReadOnly);
+        市町村特別給付費.setReadOnly(isReadOnly);
+        地域支援事業交付金_包括的支援事業.setReadOnly(isReadOnly);
+        その他_保険給付費.setReadOnly(isReadOnly);
+        その他_国庫支出金.setReadOnly(isReadOnly);
+        介護予防事業費.setReadOnly(isReadOnly);
+        介護給付費交付金.setReadOnly(isReadOnly);
+        包括的支援事業_任意事業_地域支援事業.setReadOnly(isReadOnly);
+        地域支援事業支援交付金.setReadOnly(isReadOnly);
+        財政安定化基金拠出金.setReadOnly(isReadOnly);
+        都道府県負担金.setReadOnly(isReadOnly);
+        相互財政安定化事業負担金.setReadOnly(isReadOnly);
+        財政安定化基金支出金.setReadOnly(isReadOnly);
+        保健福祉事業費.setReadOnly(isReadOnly);
+        都道府県支出金_地域支援事業交付金.setReadOnly(isReadOnly);
+        基金積立金.setReadOnly(isReadOnly);
+        地域支援事業交付金_任意事業.setReadOnly(isReadOnly);
+        財政安定化基金償還金.setReadOnly(isReadOnly);
+        その他_都道府県支出金.setReadOnly(isReadOnly);
+        その他_公債費.setReadOnly(isReadOnly);
+        相互財政安定化事業交付金.setReadOnly(isReadOnly);
+        予備費.setReadOnly(isReadOnly);
+        財産収入.setReadOnly(isReadOnly);
+        介護サービス事業勘定繰出金.setReadOnly(isReadOnly);
+        寄附金.setReadOnly(isReadOnly);
+        他会計繰出金.setReadOnly(isReadOnly);
+        一般会計繰入金.setReadOnly(isReadOnly);
+        その他_諸支出金.setReadOnly(isReadOnly);
+        総務費に係る一般会計繰入金.setReadOnly(isReadOnly);
+        介護給付費準備基金繰入金.setReadOnly(isReadOnly);
+        介護サービス事業勘定繰入金.setReadOnly(isReadOnly);
+        地域支援事業繰入金_介護予防事業.setReadOnly(isReadOnly);
+        地域支援事業繰入金_任意事業.setReadOnly(isReadOnly);
+        その他_繰入金.setReadOnly(isReadOnly);
+        繰越金.setReadOnly(isReadOnly);
+        財政安定化基金貸付金.setReadOnly(isReadOnly);
+        その他_市町村債.setReadOnly(isReadOnly);
+        諸収入.setReadOnly(isReadOnly);
+        合計１.setReadOnly(isReadOnly);
+        合計２.setReadOnly(isReadOnly);
+        歳入歳出差引残額.setReadOnly(isReadOnly);
+        うち基金繰入額.setReadOnly(isReadOnly);
+        介護給付費準備基金保有額.setReadOnly(isReadOnly);
+    }
 }

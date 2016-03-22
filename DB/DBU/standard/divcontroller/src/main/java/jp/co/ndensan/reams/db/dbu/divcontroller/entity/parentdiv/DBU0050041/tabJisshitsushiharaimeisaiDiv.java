@@ -15,15 +15,15 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.TabPanel;
  * @author 自動生成
  */
 public class tabJisshitsushiharaimeisaiDiv extends TabPanel {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2015-11-30_08-54-50">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-01-15_09-59-03">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
      * コントロール名とフィールド名を取得する
      * private + コントロール名 + フィールド名 の文字列を作成
      */
-    @JsonProperty("tabJisshitsushiharai")
-    private tabJisshitsushiharaiDiv tabJisshitsushiharai;
+    @JsonProperty("tplJisshitsushiharai")
+    private tplJisshitsushiharaiDiv tplJisshitsushiharai;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -32,21 +32,21 @@ public class tabJisshitsushiharaimeisaiDiv extends TabPanel {
      * フィールド名のGetterとSetter を作成
      */
     /*
-     * gettabJisshitsushiharai
-     * @return tabJisshitsushiharai
+     * gettplJisshitsushiharai
+     * @return tplJisshitsushiharai
      */
-    @JsonProperty("tabJisshitsushiharai")
-    public tabJisshitsushiharaiDiv getTabJisshitsushiharai() {
-        return tabJisshitsushiharai;
+    @JsonProperty("tplJisshitsushiharai")
+    public tplJisshitsushiharaiDiv getTplJisshitsushiharai() {
+        return tplJisshitsushiharai;
     }
 
     /*
-     * settabJisshitsushiharai
-     * @param tabJisshitsushiharai tabJisshitsushiharai
+     * settplJisshitsushiharai
+     * @param tplJisshitsushiharai tplJisshitsushiharai
      */
-    @JsonProperty("tabJisshitsushiharai")
-    public void setTabJisshitsushiharai(tabJisshitsushiharaiDiv tabJisshitsushiharai) {
-        this.tabJisshitsushiharai = tabJisshitsushiharai;
+    @JsonProperty("tplJisshitsushiharai")
+    public void setTplJisshitsushiharai(tplJisshitsushiharaiDiv tplJisshitsushiharai) {
+        this.tplJisshitsushiharai = tplJisshitsushiharai;
     }
 
     /*
@@ -54,42 +54,42 @@ public class tabJisshitsushiharaimeisaiDiv extends TabPanel {
      */
     @JsonIgnore
     public Label getLblshitsusainyugokei() {
-        return this.getTabJisshitsushiharai().getLblshitsusainyugokei();
+        return this.getTplJisshitsushiharai().getLblshitsusainyugokei();
     }
 
     @JsonIgnore
     public TextBoxNum getTxtshitsusainyugokei() {
-        return this.getTabJisshitsushiharai().getTxtshitsusainyugokei();
+        return this.getTplJisshitsushiharai().getTxtshitsusainyugokei();
     }
 
     @JsonIgnore
     public Label getLblshitsusaishutsugokei() {
-        return this.getTabJisshitsushiharai().getLblshitsusaishutsugokei();
+        return this.getTplJisshitsushiharai().getLblshitsusaishutsugokei();
     }
 
     @JsonIgnore
     public TextBoxNum getTxtshitsusaishutsugokei() {
-        return this.getTabJisshitsushiharai().getTxtshitsusaishutsugokei();
+        return this.getTplJisshitsushiharai().getTxtshitsusaishutsugokei();
     }
 
     @JsonIgnore
     public Label getLblshitsusainyusaishutsusa() {
-        return this.getTabJisshitsushiharai().getLblshitsusainyusaishutsusa();
+        return this.getTplJisshitsushiharai().getLblshitsusainyusaishutsusa();
     }
 
     @JsonIgnore
     public TextBoxNum getTxtshitsusainyusaishutsusa() {
-        return this.getTabJisshitsushiharai().getTxtshitsusainyusaishutsusa();
+        return this.getTplJisshitsushiharai().getTxtshitsusainyusaishutsusa();
     }
 
     @JsonIgnore
     public Label getLblshitsuseisangozangaku() {
-        return this.getTabJisshitsushiharai().getLblshitsuseisangozangaku();
+        return this.getTplJisshitsushiharai().getLblshitsuseisangozangaku();
     }
 
     @JsonIgnore
     public TextBoxNum getTxtshitsuseisangozangaku() {
-        return this.getTabJisshitsushiharai().getTxtshitsuseisangozangaku();
+        return this.getTplJisshitsushiharai().getTxtshitsuseisangozangaku();
     }
 
     // </editor-fold>

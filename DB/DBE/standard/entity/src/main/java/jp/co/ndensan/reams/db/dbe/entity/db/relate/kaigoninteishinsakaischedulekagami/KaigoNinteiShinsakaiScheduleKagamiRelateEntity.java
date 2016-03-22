@@ -17,7 +17,7 @@ public class KaigoNinteiShinsakaiScheduleKagamiRelateEntity {
 
     private RString yubinNo;
     private RString jushoText;
-    private RString kikanNameText;
+    private RString shimeiText;
     private RString shujiiIryokikanCode;
     private RString ninteichosaItakusakiCode;
     private RString sonotaKikanCode;

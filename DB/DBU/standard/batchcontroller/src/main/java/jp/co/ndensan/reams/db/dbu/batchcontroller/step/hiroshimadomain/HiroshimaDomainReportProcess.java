@@ -21,7 +21,6 @@ import jp.co.ndensan.reams.db.dbu.entity.kouikitenkyoresultlist.KoikinaiTenkyoCS
 import jp.co.ndensan.reams.db.dbu.entity.kouikitenkyoresultlist.KoikinaiTenkyoEntity;
 import jp.co.ndensan.reams.db.dbu.entity.kouikitenkyoresultlist.KoikinaiTenkyoListEntity;
 import jp.co.ndensan.reams.db.dbu.entity.kouikitenkyoresultlist.KoikinaiTenkyoResultEntity;
-import jp.co.ndensan.reams.db.dbu.persistence.db.mapper.relate.hiroshimadomain.IHiroshimaDomainMapper;
 import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.search.ShikibetsuTaishoPSMSearchKeyBuilder;
 import jp.co.ndensan.reams.ua.uax.definition.core.enumeratedtype.shikibetsutaisho.KensakuYusenKubun;
 import jp.co.ndensan.reams.ua.uax.definition.core.enumeratedtype.shikibetsutaisho.psm.DataShutokuKubun;
@@ -41,16 +40,20 @@ import jp.co.ndensan.reams.uz.uza.biz.AtenaMeisho;
 import jp.co.ndensan.reams.uz.uza.biz.GyomuCode;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.ReportId;
-import jp.co.ndensan.reams.uz.uza.euc.definition.UzUDE0831EucAccesslogFileType;
 import jp.co.ndensan.reams.uz.uza.euc.io.EucCsvWriter;
 import jp.co.ndensan.reams.uz.uza.euc.io.EucEntityId;
 import jp.co.ndensan.reams.uz.uza.io.Encode;
 import jp.co.ndensan.reams.uz.uza.io.NewLine;
 import jp.co.ndensan.reams.uz.uza.io.Path;
+import jp.co.ndensan.reams.uz.uza.lang.EraType;
+import jp.co.ndensan.reams.uz.uza.lang.FillType;
+import jp.co.ndensan.reams.uz.uza.lang.FirstYear;
+import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
+import jp.co.ndensan.reams.uz.uza.lang.Separator;
 import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
-import jp.co.ndensan.reams.uz.uza.spool.FileSpoolManager;
-import jp.co.ndensan.reams.uz.uza.spool.entities.UzUDE0835SpoolOutputType;
+import jp.co.ndensan.reams.uz.uza.ui.binding.propertyenum.DisplayTimeFormat;
 
 /**
  * 広域内転居結果一覧表_バッチフ処理クラスです
@@ -65,10 +68,9 @@ public class HiroshimaDomainReportProcess extends BatchProcessBase<HiroshimaDoma
     private static final ReportId DBA200011 = new ReportId("DBA200011_KoikinaiTenkyoKekkaIchiranhyo");
     private static final RString EUC_WRITER_DELIMITER = new RString(",");
     private static final RString EUC_WRITER_ENCLOSURE = new RString("\"");
+    private static final RString STRING_SAKUSEI = new RString("作成");
     private LasdecCode 市町村コード;
     private RString 市町村名称;
-    private FileSpoolManager manager;
-    private IHiroshimaDomainMapper mapper;
     private RString eucFilePath;
     @BatchWriter
     private BatchReportWriter<KoikinaiTenkyoKekkaIchiranhyoReportSource> batchReportWriter;
@@ -81,7 +83,6 @@ public class HiroshimaDomainReportProcess extends BatchProcessBase<HiroshimaDoma
     @Override
     protected void beforeExecute() {
         super.beforeExecute();
-        mapper = getMapper(IHiroshimaDomainMapper.class);
     }
 
     @Override
@@ -114,8 +115,6 @@ public class HiroshimaDomainReportProcess extends BatchProcessBase<HiroshimaDoma
     protected void createWriter() {
         batchReportWriter = BatchReportFactory.createBatchReportWriter(DBA200011.value()).create();
         reportSourceWriter = new ReportSourceWriter<>(batchReportWriter);
-        manager = new FileSpoolManager(UzUDE0835SpoolOutputType.EucOther, EUC_ENTITY_ID,
-                UzUDE0831EucAccesslogFileType.Csv);
         RString spoolWorkPath = Path.getTmpDirectoryPath();
         eucFilePath = Path.combinePath(spoolWorkPath, new RString("DBA200011_KoikinaiTenkyoKekkaIchiranhyo.csv"));
         eucCsvWriter = new EucCsvWriter.InstanceBuilder(eucFilePath, EUC_ENTITY_ID).
@@ -172,8 +171,8 @@ public class HiroshimaDomainReportProcess extends BatchProcessBase<HiroshimaDoma
         }
         List<KoikinaiTenkyoResultEntity> 広域内転居結果帳票List = get帳票リスト(list);
         List<KoikinaiTenkyoKekkaIchiranhyoBodyItem> itemList = get広域内転居結果一覧表ボディのITEM(広域内転居結果帳票List);
-        KoikinaiTenkyoKekkaIchiranhyoHeadItem headItem = new KoikinaiTenkyoKekkaIchiranhyoHeadItem(null,
-                市町村コード.getColumnValue(),
+        KoikinaiTenkyoKekkaIchiranhyoHeadItem headItem = new KoikinaiTenkyoKekkaIchiranhyoHeadItem(印刷日時表示作成(),
+                市町村コード.value(),
                 市町村名称);
         KoikinaiTenkyoKekkaIchiranhyoReport report = KoikinaiTenkyoKekkaIchiranhyoReport.createFrom(headItem, itemList);
         report.writeBy(reportSourceWriter);
@@ -288,6 +287,22 @@ public class HiroshimaDomainReportProcess extends BatchProcessBase<HiroshimaDoma
         }
 
         return itemList;
+    }
+
+    private RString 印刷日時表示作成() {
+        RString 印刷日時 = RString.EMPTY;
+        RStringBuilder builder = new RStringBuilder();
+        RDateTime now = RDateTime.now();
+        builder.append(now.getDate().wareki()
+                .eraType(EraType.KANJI)
+                .firstYear(FirstYear.GAN_NEN)
+                .separator(Separator.JAPANESE)
+                .fillType(FillType.BLANK)
+                .toDateString());
+        builder.append(RString.HALF_SPACE);
+        builder.append(now.getTime().toFormattedTimeString(DisplayTimeFormat.HH時mm分ss秒));
+        印刷日時 = builder.append(RString.FULL_SPACE).append(STRING_SAKUSEI).toRString();
+        return 印刷日時;
     }
 
 }

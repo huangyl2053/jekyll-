@@ -5,8 +5,6 @@
  */
 package jp.co.ndensan.reams.db.dbb.service.core.kanri;
 
-import java.util.ArrayList;
-import java.util.List;
 import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dbb.business.core.basic.ChoshuHoho;
 import jp.co.ndensan.reams.db.dbb.business.core.choshuhoho.ChoshuHohoResult;
@@ -60,26 +58,22 @@ public class ChosyuHohoHenko {
      * @param 被保険者番号 被保険者番号
      * @return 該当賦課年度の徴収方法
      */
-    public List<ChoshuHohoResult> getChosyuHoho(FlexibleYear 賦課年度, HihokenshaNo 被保険者番号) {
+    public ChoshuHohoResult getChosyuHoho(FlexibleYear 賦課年度, HihokenshaNo 被保険者番号) {
         requireNonNull(賦課年度, UrSystemErrorMessages.値がnull.getReplacedMessage("賦課年度"));
         requireNonNull(被保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage("被保険者番号"));
         IChosyuHohoHenkoMapper mapper = mapperProvider.create(IChosyuHohoHenkoMapper.class);
         ChosyuHohoHenkoMapperParameter parameter = ChosyuHohoHenkoMapperParameter
                 .createSelectByKeyParam(賦課年度, 被保険者番号);
-        List<ChoshuHohoEntity> entityList = mapper.selectChosyuHoho(parameter);
-        if (null == entityList || entityList.isEmpty()) {
+        ChoshuHohoEntity entity = mapper.selectChosyuHoho(parameter);
+        if (null == entity) {
             return null;
         }
 
-        List<ChoshuHohoResult> result = new ArrayList<>();
-        for (ChoshuHohoEntity entity : entityList) {
-            DbT2001ChoshuHohoEntity dbT2001ChoshuHohoEntity = entity.getEntity().clone();
-            dbT2001ChoshuHohoEntity.setState(EntityDataState.Unchanged);
-            ChoshuHohoResult choshuHohoResult = new ChoshuHohoResult(
-                    new ChoshuHoho(dbT2001ChoshuHohoEntity), entity.getChoshuHoho3gat());
-            result.add(choshuHohoResult);
-        }
-        return result;
+        DbT2001ChoshuHohoEntity dbT2001ChoshuHohoEntity = entity.getEntity().clone();
+        dbT2001ChoshuHohoEntity.setState(EntityDataState.Unchanged);
+        ChoshuHohoResult choshuHohoResult = new ChoshuHohoResult(
+                new ChoshuHoho(dbT2001ChoshuHohoEntity), entity.getChoshuHoho3gat());
+        return choshuHohoResult;
     }
 
 }

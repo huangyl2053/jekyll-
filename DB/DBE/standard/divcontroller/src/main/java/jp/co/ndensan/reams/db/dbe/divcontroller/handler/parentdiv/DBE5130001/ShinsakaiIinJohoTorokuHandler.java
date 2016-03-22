@@ -189,7 +189,7 @@ public class ShinsakaiIinJohoTorokuHandler {
         div.getDdlShikakuCode().setDisabled(false);
         div.getCcdshinsakaiChikuCode().setDisabled(false);
         div.getTxtBiko().setDisabled(false);
-        div.getBtnShozokuKikanAdd().setDisabled(false);
+        set所属機関追加ボタンBy一覧();
         div.getDgShozokuKikanIchiran().setDisabled(false);
         div.getTxtYubinNo().setDisabled(false);
         div.getDdlYusoKubun().setDisabled(false);
@@ -216,7 +216,7 @@ public class ShinsakaiIinJohoTorokuHandler {
         div.getDdlShikakuCode().setDisabled(false);
         div.getCcdshinsakaiChikuCode().setDisabled(false);
         div.getTxtBiko().setDisabled(false);
-        set所属機関追加ボタンBy一覧();
+        div.getBtnShozokuKikanAdd().setDisabled(false);
         div.getDgShozokuKikanIchiran().setDisabled(false);
         div.getTxtYubinNo().setDisabled(false);
         div.getDdlYusoKubun().setDisabled(false);
