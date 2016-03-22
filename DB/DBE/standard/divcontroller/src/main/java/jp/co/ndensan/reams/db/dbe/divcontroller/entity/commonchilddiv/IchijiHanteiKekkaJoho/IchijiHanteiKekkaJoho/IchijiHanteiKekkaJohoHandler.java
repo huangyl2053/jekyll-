@@ -8,8 +8,10 @@ package jp.co.ndensan.reams.db.dbe.divcontroller.entity.commonchilddiv.IchijiHan
 import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbe.business.core.ichijihanteikekkajohosearch.IchijiHanteiKekkaJohoSearchBusiness;
+import jp.co.ndensan.reams.db.dbe.business.core.ikensho.ninteishinseijoho.NinteiShinseiJoho;
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.core.KoroshoIfShikibetsuCode;
 import jp.co.ndensan.reams.db.dbe.service.core.ichijihanteikekkajohosearch.IchijiHanteiKekkaJohoSearchManager;
+import jp.co.ndensan.reams.db.dbe.service.core.ikensho.ninteishinseijoho.NinteiShinseiJohoManager;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.IchijiHanteiKekkaJoho;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.NinteichosahyoKihonChosa;
