@@ -48,7 +48,7 @@ public class ShisetSunyushoInfoFinder {
      * 施設入所情報Divの初期化時intializeメッソドの検索処理します。
      *
      * @param 識別コード 識別コード
-     * @return ShisetSunyushoInfoBusiness
+     * @return SearchResult<ShisetSunyushoInfoBusiness>
      */
     public SearchResult<ShisetSunyushoInfoBusiness> onLoad(ShikibetsuCode 識別コード) {
         requireNonNull(識別コード, UrSystemErrorMessages.値がnull.getReplacedMessage("識別コード"));
