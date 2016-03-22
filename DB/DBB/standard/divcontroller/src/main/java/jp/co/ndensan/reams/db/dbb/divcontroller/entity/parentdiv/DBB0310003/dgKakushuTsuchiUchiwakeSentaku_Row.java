@@ -1,9 +1,9 @@
 package jp.co.ndensan.reams.db.dbb.divcontroller.entity.parentdiv.DBB0310003;
-/**
+/*
  * このコードはツールによって生成されました。
  * このファイルへの変更は、以下の状況下で不正な動作の原因になったり、
  * コードが再生成されるときに損失したりします。
- * Mon Jun 23 11:19:58 JST 2014 
+ * Mon Mar 21 18:26:06 CST 2016 
  */
 
 
@@ -20,6 +20,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
  */
 
 public class dgKakushuTsuchiUchiwakeSentaku_Row extends DataRow {
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-01-15_09-59-03">
 
     private Button btnSentaku;
     private RString txtJokenMeisho;
@@ -30,6 +31,9 @@ public class dgKakushuTsuchiUchiwakeSentaku_Row extends DataRow {
         this.btnSentaku = new Button();
         this.txtJokenMeisho = RString.EMPTY;
         this.txtUchiwake = RString.EMPTY;
+        this.setOriginalData("btnSentaku", btnSentaku);
+        this.setOriginalData("txtJokenMeisho", txtJokenMeisho);
+        this.setOriginalData("txtUchiwake", txtUchiwake);
     }
 
     public dgKakushuTsuchiUchiwakeSentaku_Row(Button btnSentaku, RString txtJokenMeisho, RString txtUchiwake) {
@@ -69,4 +73,5 @@ public class dgKakushuTsuchiUchiwakeSentaku_Row extends DataRow {
         this.txtUchiwake = txtUchiwake;
     }
 
+    // </editor-fold>
 }
