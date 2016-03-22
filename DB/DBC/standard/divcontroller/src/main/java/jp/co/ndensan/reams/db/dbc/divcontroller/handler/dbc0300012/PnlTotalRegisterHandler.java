@@ -103,10 +103,10 @@ public final class PnlTotalRegisterHandler {
         div.getPnlKeyakuJigyosya().getDdlKeyakusyurui().setDataSource(keiyakuSyuruList);
         div.getPnlKeyakuJigyosya().getDdlKeyakusyurui().setSelectedKey(recode.get契約種類());
         div.getPnlKeyakuJigyosya().getTxtKeyakuJigyosyaMeisyo().setDomain(recode.get契約事業者名称());
-        div.getPnlKeyakuJigyosya().getTxtKeyakuJigyosyaMeisyoKana().setDomain(recode.get契約事業者名称カナ());
+        div.getPnlKeyakuJigyosya().getTxtKeyakuJigyosyaMeisyoKana().setDomain(recode.get契約事業者カナ名称());
         div.getPnlKeyakuJigyosya().getTxtJigyosyaYubinNo().setValue(recode.get契約事業者郵便番号());
         div.getPnlKeyakuJigyosya().getTxtJigyosyaTel().setDomain(recode.get契約事業者電話番号());
-        div.getPnlKeyakuJigyosya().getTxtJigyosyaFax().setDomain(recode.get事業者FAX番号());
+        div.getPnlKeyakuJigyosya().getTxtJigyosyaFax().setDomain(recode.get契約事業者FAX番号());
         div.getPnlKeyakuJigyosya().getTxtJigyosyaJyusyo().setDomain(recode.get契約事業者住所());
         div.getPnlKeyakuJigyosya().getTxtSofusakiYubin().setValue(recode.get送付先郵便番号());
         div.getPnlKeyakuJigyosya().getTxtSofusakiJigyosya().setDomain(recode.get送付先事業者名称());
@@ -129,7 +129,7 @@ public final class PnlTotalRegisterHandler {
             div.getPnlKeyakuJigyosya().getDdlSofusakiKouzasyubetu().setVisible(false);
         }
         div.getPnlKeyakuJigyosya().getTxtSofusakiKouzabango().setValue(recode.get口座番号());
-        div.getPnlKeyakuJigyosya().getTxtSofusakiKouzaMeiginin().setDomain(recode.get口座名義人漢字());
+        div.getPnlKeyakuJigyosya().getTxtSofusakiKouzaMeiginin().setDomain(recode.get口座名義人());
         div.getPnlKeyakuJigyosya().getTxtSofusakiKouzaMeigininKana().setDomain(recode.get口座名義人カナ());
         if (参照.equals(states)) {
             set項目非活性();
@@ -152,9 +152,7 @@ public final class PnlTotalRegisterHandler {
         } else if (削除.equals(states)) {
             return JuryoininKeiyakuJigyoshaManager.createInstance().delJuryoininKeiyakuJigyosha(data);
         } else {
-            JuryoininKeiyakuJigyosha insertData = new JuryoininKeiyakuJigyosha(
-                    RString.EMPTY,
-                    new FlexibleDate(div.getPnlKeyakuJigyosya().getTxtKeyakubi().getFromValue().toDateString()));
+            JuryoininKeiyakuJigyosha insertData = new JuryoininKeiyakuJigyosha(RString.EMPTY);
             JuryoininKeiyakuJigyoshaBuilder builder = insertData.createBuilderForEdit();
             builder.set終了年月日(new FlexibleDate(div.getPnlKeyakuJigyosya().getTxtKeyakubi().getToValue().toDateString()));
             builder.set契約種類(div.getPnlKeyakuJigyosya().getDdlKeyakusyurui().getSelectedKey());
@@ -174,7 +172,7 @@ public final class PnlTotalRegisterHandler {
             builder.set口座種別(div.getPnlKeyakuJigyosya().getDdlSofusakiKouzasyubetu().getSelectedKey());
             builder.set口座番号(div.getPnlKeyakuJigyosya().getTxtSofusakiKouzabango().getValue());
             builder.set口座名義人(div.getPnlKeyakuJigyosya().getTxtSofusakiKouzaMeiginin().getDomain());
-            builder.set口座名義人(div.getPnlKeyakuJigyosya().getTxtSofusakiKouzaMeigininKana().getDomain());
+            builder.set口座名義人カナ(div.getPnlKeyakuJigyosya().getTxtSofusakiKouzaMeigininKana().getDomain());
             insertData = builder.build();
             return JuryoininKeiyakuJigyoshaManager.createInstance().insJuryoininKeiyakuJigyosha(insertData);
         }
@@ -238,10 +236,10 @@ public final class PnlTotalRegisterHandler {
                 || !param.get終了年月日().equals(txtKeyakubiTo)
                 || !param.get契約種類().equals(keyakusyurui)
                 || !param.get契約事業者名称().equals(keyakuJigyosyaMeisyo)
-                || !param.get契約事業者名称カナ().equals(keyakuJigyosyaMeisyoKana)
+                || !param.get契約事業者カナ名称().equals(keyakuJigyosyaMeisyoKana)
                 || !param.get契約事業者郵便番号().equals(txtJigyosyaYubinNo)
                 || !param.get契約事業者電話番号().equals(txtJigyosyaTel)
-                || !param.get事業者FAX番号().equals(txtJigyosyaFax)
+                || !param.get契約事業者FAX番号().equals(txtJigyosyaFax)
                 || !param.get契約事業者住所().equals(txtJigyosyaJyusyo);
     }
 
@@ -272,7 +270,7 @@ public final class PnlTotalRegisterHandler {
                 || !param.get支店コード().equals(kinyuKikanShitenCode)
                 || !param.get口座種別().equals(sofusakiKouzasyubetu)
                 || !param.get口座番号().equals(txtSofusakiKouzabango)
-                || !param.get口座名義人漢字().equals(txtSofusakiKouzaMeiginin)
+                || !param.get口座名義人().equals(txtSofusakiKouzaMeiginin)
                 || !param.get口座名義人カナ().equals(txtSofusakiKouzaMeigininKana);
     }
 
@@ -284,7 +282,7 @@ public final class PnlTotalRegisterHandler {
      */
     private JuryoininKeiyakuJigyosha get画面データ(JuryoininKeiyakuJigyosha param) {
         param = param.createBuilderForEdit()
-                .set事業者契約番号(div.getPnlKeyakuJigyosya().getTxtJigyosyakeiyakuNo().getValue())
+                .set契約事業者番号(div.getPnlKeyakuJigyosya().getTxtJigyosyakeiyakuNo().getValue())
                 .set開始年月日(
                         new FlexibleDate(div.getPnlKeyakuJigyosya().getTxtKeyakubi().getFromValue().toDateString()))
                 .set終了年月日(
@@ -306,7 +304,7 @@ public final class PnlTotalRegisterHandler {
                 .set口座種別(div.getPnlKeyakuJigyosya().getDdlSofusakiKouzasyubetu().getSelectedKey())
                 .set口座番号(div.getPnlKeyakuJigyosya().getTxtSofusakiKouzabango().getValue())
                 .set口座名義人(div.getPnlKeyakuJigyosya().getTxtSofusakiKouzaMeiginin().getDomain())
-                .set口座名義人(div.getPnlKeyakuJigyosya().getTxtSofusakiKouzaMeigininKana().getDomain()).build();
+                .set口座名義人カナ(div.getPnlKeyakuJigyosya().getTxtSofusakiKouzaMeigininKana().getDomain()).build();
         return param;
     }
 
