@@ -5,6 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbz.persistence.db.mapper.relate.shisetsunyushoinfo;
 
+import java.util.List;
 import jp.co.ndensan.reams.db.dbz.definition.param.shisetsunyushoinfo.ShisetSunyushoInfoParameter;
 import jp.co.ndensan.reams.db.dbz.entity.db.relate.shisetsunyushoinfo.ShisetSunyushoInfoRelateEntity;
 
@@ -20,6 +21,5 @@ public interface IShisetSunyushoInfoMapper {
      * @param params ShisetSunyushoInfoParameter
      * @return ShisetSunyushoInfoRelateEntity
      */
-    // ShisetSunyushoInfoRelateEntity getSelect(ShisetSunyushoInfoParameter params);
-    ShisetSunyushoInfoRelateEntity getSelect(ShisetSunyushoInfoParameter params);
+    List<ShisetSunyushoInfoRelateEntity> getSelect(ShisetSunyushoInfoParameter params);
 }

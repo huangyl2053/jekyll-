@@ -5,7 +5,9 @@
  */
 package jp.co.ndensan.reams.db.dbz.definition.param.shisetsunyushoinfo;
 
+import jp.co.ndensan.reams.db.dbz.definition.core.enumeratedtype.DaichoType;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
  * 施設入所情報を取得するのParameterクラスです。
@@ -16,9 +18,11 @@ import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 public final class ShisetSunyushoInfoParameter {
 
     private final ShikibetsuCode shikibetsuCode;
+    private final RString daichoShubetsu;
 
-    private ShisetSunyushoInfoParameter(ShikibetsuCode shikibetsuCode) {
+    private ShisetSunyushoInfoParameter(ShikibetsuCode shikibetsuCode, RString daichoShubetsu) {
         this.shikibetsuCode = shikibetsuCode;
+        this.daichoShubetsu = daichoShubetsu;
     }
 
     /**
@@ -28,6 +32,6 @@ public final class ShisetSunyushoInfoParameter {
      * @return ShisetSunyushoInfoParameter ShisetSunyushoInfoParameter
      */
     public static ShisetSunyushoInfoParameter createParam(ShikibetsuCode shikibetsuCode) {
-        return new ShisetSunyushoInfoParameter(shikibetsuCode);
+        return new ShisetSunyushoInfoParameter(shikibetsuCode, DaichoType.被保険者.getCode());
     }
 }
