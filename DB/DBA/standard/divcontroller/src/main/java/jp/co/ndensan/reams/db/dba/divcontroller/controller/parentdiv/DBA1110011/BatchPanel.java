@@ -5,6 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dba.divcontroller.controller.parentdiv.DBA1110011;
 
+import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dba.business.core.hihokenshashohakkokanribo.KayiSyuuJiyuu;
 import jp.co.ndensan.reams.db.dba.business.core.hihokenshashohakkokanribo.KouFuJiyuu;
@@ -103,6 +104,12 @@ public class BatchPanel {
     public ResponseData<BatchPanelDiv> onClick_btnChange(BatchPanelDiv div) {
 
         if (未回収者リスト.equals(div.getRadShutsuTaisho().getSelectedKey())) {
+            div.getTxtKoufubiRange().clearFromValue();
+            div.getTxtKoufubiRange().clearToValue();
+            div.getTxtKaishubiRange().clearFromValue();
+            div.getTxtKaishubiRange().clearToValue();
+            List<RString> selectedKey = new ArrayList<>();
+            div.getChkSaishinJoho().setSelectedItemsByKey(selectedKey);
             div.getTxtKaishubiRange().setReadOnly(true);
             div.getChkSaishinJoho().setReadOnly(true);
             div.getDgKaishuJiyu().setDisabled(true);
