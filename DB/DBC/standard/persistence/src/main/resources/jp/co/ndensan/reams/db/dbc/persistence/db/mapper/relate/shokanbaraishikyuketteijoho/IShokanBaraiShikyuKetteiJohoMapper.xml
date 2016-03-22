@@ -136,7 +136,7 @@
         <result property="サービス種類コード" column="serviceShuruiCode" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.ServiceShuruiCodeTypeHandler"/>
         <result property="単位数_金額" column="tanisuKingaku" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="支払金額" column="shikyuKingakuShuukei" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
-        <result property="増減単位数;" column="zougenTanisu"/>
+        <result property="増減点" column="zougenTanisu"/>
         <result property="増減理由" column="biko" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
     </resultMap>
     
@@ -214,23 +214,6 @@
         FROM "TABLE_SHOKANBARAISHIKYUKETTEIJOHO" AS SHOKAN
     </select>
 
-    <!-- 被保険者台帳管理から市町村コード取得 -->
-    <select id="select被保険者台帳管理"
-            resultMap="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT1001HihokenshaDaichoMapper.ResultMap_DbT1001HihokenshaDaichoEntity"
-            parameterType="jp.co.ndensan.reams.db.dbc.definition.mybatisprm.shokanshikyukettriin.ShokanShikyuKetteiInMybatisParameter">
-     SELECT
-         <include refid="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT1001HihokenshaDaichoMapper.allColumns_DbT1001HihokenshaDaicho" />
-     FROM
-         rgdb."DbT1001HihokenshaDaicho"
-     WHERE
-         rgdb."DbT1001HihokenshaDaicho"."hihokenshaNo" = #{被保険者番号}
-     AND rgdb."DbT1001HihokenshaDaicho"."isDeleted" <![CDATA[<>]]> TRUE
-     ORDER BY rgdb."DbT1001HihokenshaDaicho"."hihokenshaNo" DESC,
-              rgdb."DbT1001HihokenshaDaicho"."idoYMD" DESC,
-              rgdb."DbT1001HihokenshaDaicho"."edaNo" DESC
-     LIMIT(1)
-    </select>
-
     <resultMap id="resultMap_SinHihokenshaBangoIchijiEntity" 
                type="jp.co.ndensan.reams.db.dbc.entity.db.relate.shokanbaraishikyuketteijoho.SinHiBokenIchijiEntity"
                autoMapping="true">
@@ -238,21 +221,6 @@
         <result property="新番号" column="shinNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="旧番号" column="kyuNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
     </resultMap>
-
-    <!-- 被保険者台帳管理から市町村コード取得 -->
-    <select id="select新被保険者番号"
-            resultMap="resultMap_SinHihokenshaBangoIchijiEntity"
-            parameterType="jp.co.ndensan.reams.db.dbc.definition.mybatisprm.shokanshikyuketteiin.ShichosonHihokenshaParameter">
-     SELECT
-         DbT7026."shichosonCode",
-         DbT7026."shinNo",
-         DbT7026."kyuNo"
-     FROM
-         rgdb."DbT7026ShinKyuHihokenshaNoHenkan" AS DbT7026
-     WHERE
-         DbT7026."shichosonCode" = #{市町村コード}
-     AND DbT7026."kyuNo" = #{被保険者番号}
-    </select>
 
     <!-- 新旧被保険者番号を変換する -->
     <update id="update償還払支給決定情報一時TBL">
@@ -275,7 +243,7 @@
     <resultMap id="resultMap_ShikibetsuCode"
                type="jp.co.ndensan.reams.db.dbc.entity.db.relate.shokanbaraishikyuketteijoho.ShokanBaraiShikyuKetteiJohoItijiEntity"
                autoMapping="true">
-        <result property="識別コード" column="shikibetsuCode" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.ShikibetsuCodeTypeHandler"/>
+        <result property="識別コード" column="shikibetsuCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.ShikibetsuCodeTypeHandler"/>
     </resultMap>
 
     <!-- 一時テーブルの被保険者番号の取得 -->
@@ -289,24 +257,11 @@
                type="jp.co.ndensan.reams.db.dbc.entity.db.relate.shokanbaraishikyuketteijoho.IShikibetsuTaishoPSMEntity"
                autoMapping="true">
         <result property="識別コード" column="shikibetsuCode" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.ShikibetsuCodeTypeHandler"/>
-        <result property="全国住所コード" column="zenkokuJushoCode" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.ZenkokuJushoCodeTypeHandler"/>
+        <result property="全国住所コード" column="zenkokuJushoCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.ZenkokuJushoCodeTypeHandler"/>
         <result property="住所" column="jusho" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
-        <result property="行政区コード" column="gyoseikuCode" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.GyoseikuCodeTypehandler"/>
+        <result property="行政区コード" column="gyoseikuCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.GyoseikuCodeTypehandler"/>
         <result property="行政区名" column="gyoseikuName" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
     </resultMap>
-
-    <!-- 宛名情報Entityの取得。 -->
-    <select id="select宛名情報Entity"
-            resultMap="resultMap_PSM"
-            parameterType="jp.co.ndensan.reams.db.dbc.definition.mybatisprm.shokanshikyukettriin.ShokanShikyuKetteiInMybatisParameter">
-        SELECT ShikibetsuTaisho."shikibetsuCode",
-               ShikibetsuTaisho."zenkokuJushoCode",
-               ShikibetsuTaisho."jusho",
-               ShikibetsuTaisho."gyoseikuCode",
-               ShikibetsuTaisho."gyoseikuName"
-        FROM <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.tableName_PsmParamClassShikibetsuTaisho" />
-        AS ShikibetsuTaisho
-    </select>
 
     <!-- 償還払支給決定情報一時TBLの宛名情報更新。 -->
     <update id="update償還払支給決定情報一時TBL_宛名"
