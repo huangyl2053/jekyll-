@@ -611,7 +611,7 @@ public class TokuteiNyushoshaHiyoPanelHandler {
                         事業者番号,
                         様式番号,
                         明細番号,
-                        new RString(String.valueOf(連番))).createBuilderForEdit().build();
+                        new RString(String.format("%02d", 連番))).createBuilderForEdit().build();
                 entityAdded = buildShokanTokuteiNyushoshaKaigoServiceHiyo(entityAdded, dgdRow);
                 特定入所者費用List.add(entityAdded);
             }
@@ -631,36 +631,24 @@ public class TokuteiNyushoshaHiyoPanelHandler {
         if (dgdRow.getDefaultDataName2().getValue() != null) {
             entity = entity.createBuilderForEdit().set費用単価(dgdRow.getDefaultDataName2()
                     .getValue().intValue()).build();
-        } else {
-            entity = entity.createBuilderForEdit().set費用単価(0).build();
         }
         if (dgdRow.getDefaultDataName3().getValue() != null) {
             entity = entity.createBuilderForEdit().set負担限度額(dgdRow.getDefaultDataName3()
                     .getValue().intValue()).build();
-        } else {
-            entity = entity.createBuilderForEdit().set負担限度額(0).build();
         }
         if (dgdRow.getDefaultDataName4().getValue() != null) {
             entity = entity.createBuilderForEdit().set日数(dgdRow.getDefaultDataName4().getValue().intValue()).build();
-        } else {
-            entity = entity.createBuilderForEdit().set日数(0).build();
         }
         if (dgdRow.getDefaultDataName5().getValue() != null) {
             entity = entity.createBuilderForEdit().set費用額(dgdRow.getDefaultDataName5().getValue().intValue()).build();
-        } else {
-            entity = entity.createBuilderForEdit().set費用額(0).build();
         }
         if (dgdRow.getDefaultDataName6().getValue() != null) {
             entity = entity.createBuilderForEdit().set保険分請求額(dgdRow.getDefaultDataName6()
                     .getValue().intValue()).build();
-        } else {
-            entity = entity.createBuilderForEdit().set保険分請求額(0).build();
         }
         if (dgdRow.getDefaultDataName7().getValue() != null) {
             entity = entity.createBuilderForEdit().set利用者負担額(dgdRow.getDefaultDataName7()
                     .getValue().intValue()).build();
-        } else {
-            entity = entity.createBuilderForEdit().set利用者負担額(0).build();
         }
         if (div.getPanelTokutei().getTxtHiyogakuTotal().getValue() != null) {
             entity = entity.createBuilderForEdit().set費用額合計(div.getPanelTokutei().getTxtHiyogakuTotal().getValue()
