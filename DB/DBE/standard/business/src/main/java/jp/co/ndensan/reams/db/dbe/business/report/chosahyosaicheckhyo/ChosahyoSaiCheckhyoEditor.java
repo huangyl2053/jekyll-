@@ -66,6 +66,8 @@ class ChosahyoSaiCheckhyoEditor implements IChosahyoSaiCheckhyoEditor {
         } else {
             source.shinsakaiYMD = RString.EMPTY;
         }
+        source.gogitaiNo = item.getGogitaiNo();
+        source.zenkaiNijihanteikekka = item.getZenkaiNijihanteikekka();
         setZenkaiChosakekkaNo(source);
         setKonkaiChosakekkaNo(source);
         setTokkiFuraguNo(source);
