@@ -35,7 +35,7 @@ public class ChosahyoGaikyochosaEditorImpl implements IChosahyoGaikyochosaEditor
     }
 
     private ChosahyoGaikyochosaReportSource editSource(ChosahyoGaikyochosaReportSource source) {
-        // TODO 内部QA:663 Redmine#75721 (パラメータの整合性が取れてないので、一時item値を設定する。)
+        // TODO 内部QA:834 Redmine#78247 (複数のフォームを組み合わせて印刷することがわからません。)
         source.hokenshaNo1 = item.getHokenshaNo1();
         source.hokenshaNo2 = item.getHokenshaNo2();
         source.hokenshaNo3 = item.getHokenshaNo3();
@@ -79,7 +79,7 @@ public class ChosahyoGaikyochosaEditorImpl implements IChosahyoGaikyochosaEditor
         source.homonChosasakiNo10 = item.getHomonChosasakiNo10();
         source.homonChosasakiNo11 = item.getHomonChosasakiNo11();
         source.homonChosasakiNo12 = item.getHomonChosasakiNo12();
-        // TODO 内部QA:823   所属機関名不存在。
+        source.homonChosasakiName = item.getJigyoshaMeisho();
         source.shinseishaNameKana = item.getShinseishaNameKana();
         source.shinseishaName = item.getShinseishaName();
         source.seibetsuMan = item.getSeibetsuMan();
@@ -99,7 +99,6 @@ public class ChosahyoGaikyochosaEditorImpl implements IChosahyoGaikyochosaEditor
         source.kazokuRenrakusakiTel1 = item.getKazokuRenrakusakiTel1();
         source.kazokuRenrakusakiTel2 = item.getKazokuRenrakusakiTel2();
         source.kazokuRenrakusakiName = item.getKazokuRenrakusakiName();
-        // TODO 内部QA:834   Enum（DBD：連絡先続柄コード）不存在。
         source.shinseishatonoKankei = item.getShinseishatonoKankei();
         source.shokai = item.getShokai();
         source.nikaime = item.getNikaime();

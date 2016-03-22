@@ -8,8 +8,8 @@ package jp.co.ndensan.reams.db.dbz.service.core.basic;
 import java.util.ArrayList;
 import java.util.List;
 import static java.util.Objects.requireNonNull;
-import jp.co.ndensan.reams.db.dbz.business.core.basic.NinteichosahyoKihonChosa;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo;
+import jp.co.ndensan.reams.db.dbz.business.core.basic.NinteichosahyoKihonChosa;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5203NinteichosahyoKihonChosaEntity;
 import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT5203NinteichosahyoKihonChosaDac;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
@@ -74,6 +74,24 @@ public class NinteichosahyoKihonChosaManager {
         List<NinteichosahyoKihonChosa> businessList = new ArrayList<>();
 
         for (DbT5203NinteichosahyoKihonChosaEntity entity : dac.selectAll()) {
+            entity.initializeMd5();
+            businessList.add(new NinteichosahyoKihonChosa(entity));
+        }
+
+        return businessList;
+    }
+
+    /**
+     * 認定調査票_基本調査を検索By申請書管理番号。
+     *
+     * @return NinteichosahyoKihonChosaの{@code list}
+     */
+    @Transaction
+    public List<NinteichosahyoKihonChosa> get認定調査票_基本調査By申請書管理番号(ShinseishoKanriNo 申請書管理番号) {
+        List<NinteichosahyoKihonChosa> businessList = new ArrayList<>();
+
+        List<DbT5203NinteichosahyoKihonChosaEntity> resultList = dac.selectBy申請書管理番号(申請書管理番号);
+        for (DbT5203NinteichosahyoKihonChosaEntity entity : resultList) {
             entity.initializeMd5();
             businessList.add(new NinteichosahyoKihonChosa(entity));
         }

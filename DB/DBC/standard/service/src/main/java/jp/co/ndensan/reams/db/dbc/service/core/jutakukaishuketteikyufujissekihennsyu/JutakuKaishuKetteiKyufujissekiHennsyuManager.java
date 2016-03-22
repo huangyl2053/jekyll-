@@ -184,7 +184,8 @@ public class JutakuKaishuKetteiKyufujissekiHennsyuManager {
             給付実績住宅改修費entity.setServiceTeikyoYM(給付実績基本entity.getServiceTeikyoYM());
             給付実績住宅改修費entity.setJigyoshoNo(給付実績基本entity.getJigyoshoNo());
             給付実績住宅改修費entity.setToshiNo(給付実績基本entity.getToshiNo());
-            給付実績住宅改修費entity.setMeisaiNo(new RString("000" + (i + 1)));
+            RString meisaiNo = new RString(String.format("%04d", i + 1));
+            給付実績住宅改修費entity.setMeisaiNo(meisaiNo);
             ServiceCode サービスコード = 償還払請求住宅改修リスト.get(i).getServiceCode();
             if (サービスコード != null) {
                 給付実績住宅改修費entity.setServiceCode(サービスコード);

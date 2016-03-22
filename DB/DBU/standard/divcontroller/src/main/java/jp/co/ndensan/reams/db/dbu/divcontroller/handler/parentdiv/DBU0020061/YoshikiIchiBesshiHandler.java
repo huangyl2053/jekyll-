@@ -21,6 +21,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
+import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 
 /**
  * 事業報告（月報）補正発行_様式１(別紙)のクラス
@@ -71,6 +72,17 @@ public final class YoshikiIchiBesshiHandler {
             div.setDisabled(true);
         }
         initializeKihoneria(引き継ぎデータ);
+    }
+
+    /**
+     * 画面から修正データリストをDBに更新する。
+     *
+     * @param 修正データリスト List<JigyoHokokuNenpoUpdateParameter>
+     * @return boolean
+     */
+    public boolean update(List<JigyoHokokuTokeiData> 修正データリスト) {
+        JigyoHokokuGeppoHoseiHako finder = InstanceProvider.create(JigyoHokokuGeppoHoseiHako.class);
+        return 修正データリスト.size() == finder.updateJigyoHokokuGeppoData(修正データリスト);
     }
 
     /**

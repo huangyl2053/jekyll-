@@ -8,6 +8,18 @@ module DBD {
 
         export class Events {
 
+            public static onclick_txtCopyHonnin(): string {
+                return "onclick_txtCopyHonnin";
+            }
+
+            public static onOkClose_btnOpenJigyoshaGuide(): string {
+                return "onOkClose_btnOpenJigyoshaGuide";
+            }
+
+            public static onBeforeOpenDialog_btnOpenJigyoshaGuide(): string {
+                return "onBeforeOpenDialog_btnOpenJigyoshaGuide";
+            }
+
         }
 
         export class Controls {
