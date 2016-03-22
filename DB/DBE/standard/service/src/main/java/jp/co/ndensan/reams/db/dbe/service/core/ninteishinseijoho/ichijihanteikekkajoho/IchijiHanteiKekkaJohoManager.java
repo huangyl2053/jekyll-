@@ -7,6 +7,8 @@ package jp.co.ndensan.reams.db.dbe.service.core.ninteishinseijoho.ichijihanteike
 
 import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dbe.business.core.ninteishinseijoho.ichijihanteikekkajoho.IchijiHanteiKekkaJoho;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo;
+import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5116IchijiHanteiKekkaJohoEntity;
 import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT5116IchijiHanteiKekkaJohoDac;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
@@ -33,6 +35,26 @@ public class IchijiHanteiKekkaJohoManager {
      */
     IchijiHanteiKekkaJohoManager(DbT5116IchijiHanteiKekkaJohoDac dac) {
         this.dac = dac;
+    }
+
+    /**
+     * 主キーに合致する要介護認定一次判定結果情報を返します。
+     *
+     * @param 申請書管理番号 申請書管理番号
+     * @return IchijiHanteiKekkaJoho
+     */
+    @Transaction
+    public IchijiHanteiKekkaJoho get要介護認定一次判定結果情報(
+            ShinseishoKanriNo 申請書管理番号) {
+        requireNonNull(申請書管理番号, UrSystemErrorMessages.値がnull.getReplacedMessage("申請書管理番号"));
+
+        DbT5116IchijiHanteiKekkaJohoEntity entity = dac.selectByKey(
+                申請書管理番号);
+        if (entity == null) {
+            return null;
+        }
+        entity.initializeMd5();
+        return new IchijiHanteiKekkaJoho(entity);
     }
 
     /**
