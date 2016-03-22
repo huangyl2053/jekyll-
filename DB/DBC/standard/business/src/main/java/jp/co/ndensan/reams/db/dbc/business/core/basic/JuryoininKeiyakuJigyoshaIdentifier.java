@@ -15,14 +15,14 @@ import lombok.Value;
 @Value
 public class JuryoininKeiyakuJigyoshaIdentifier implements Serializable {
 
-    private final RString 事業者契約番号;
+    private final RString 契約事業者番号;
 
     /**
      * コンストラクタです。
      *
-     * @param 事業者契約番号 事業者契約番号
+     * @param 契約事業者番号 契約事業者番号
      */
-    public JuryoininKeiyakuJigyoshaIdentifier(RString 事業者契約番号) {
-        this.事業者契約番号 = 事業者契約番号;
+    public JuryoininKeiyakuJigyoshaIdentifier(RString 契約事業者番号) {
+        this.契約事業者番号 = 契約事業者番号;
     }
 }

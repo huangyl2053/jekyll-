@@ -36,13 +36,13 @@ public class JuryoininKeiyakuJigyosha
      * コンストラクタです。<br/>
      * 受領委任契約事業者の新規作成時に使用します。
      *
-     * @param 事業者契約番号 事業者契約番号
+     * @param 契約事業者番号 契約事業者番号
      */
-    public JuryoininKeiyakuJigyosha(RString 事業者契約番号) {
-        requireNonNull(事業者契約番号, UrSystemErrorMessages.値がnull.getReplacedMessage("契約事業者番号"));
+    public JuryoininKeiyakuJigyosha(RString 契約事業者番号) {
+        requireNonNull(契約事業者番号, UrSystemErrorMessages.値がnull.getReplacedMessage("契約事業者番号"));
         this.entity = new DbT3077JuryoininKeiyakuJigyoshaEntity();
-        this.entity.setKeiyakuJigyoshaNo(事業者契約番号);
-        this.id = new JuryoininKeiyakuJigyoshaIdentifier(事業者契約番号);
+        this.entity.setKeiyakuJigyoshaNo(契約事業者番号);
+        this.id = new JuryoininKeiyakuJigyoshaIdentifier(契約事業者番号);
     }
 
     /**
@@ -73,11 +73,11 @@ public class JuryoininKeiyakuJigyosha
 
 //TODO getterを見直してください。意味のある単位でValueObjectを作成して公開してください。
     /**
-     * 事業者契約番号を返します。
+     * 契約事業者番号を返します。
      *
-     * @return 事業者契約番号
+     * @return 契約事業者番号
      */
-    public RString get事業者契約番号() {
+    public RString get契約事業者番号() {
         return entity.getKeiyakuJigyoshaNo();
     }
 
@@ -291,8 +291,7 @@ public class JuryoininKeiyakuJigyosha
     }
 
     /**
-     * 保持する受領委任契約事業者を削除対象とします。<br/>
-     * {@link DbT3077JuryoininKeiyakuJigyoshaEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば削除状態にします。
+     * 保持する受領委任契約事業者を削除対象とします。<br/> {@link DbT3077JuryoininKeiyakuJigyoshaEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば削除状態にします。
      *
      * @return 削除対象処理実施後の{@link JuryoininKeiyakuJigyosha}
      */

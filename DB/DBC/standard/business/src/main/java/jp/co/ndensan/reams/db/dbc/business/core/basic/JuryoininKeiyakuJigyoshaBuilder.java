@@ -45,14 +45,14 @@ public class JuryoininKeiyakuJigyoshaBuilder {
 //TODO Key項目のsetterメソッドは削除してください。
 //TODO 一緒に置換される値のまとまりで不変なクラスを作成し、その単位でsetterを作る様に見直してください。
     /**
-     * 事業者契約番号を設定します。
+     * 契約事業者番号を設定します。
      *
-     * @param 事業者契約番号 事業者契約番号
+     * @param 契約事業者番号 契約事業者番号
      * @return {@link JuryoininKeiyakuJigyoshaBuilder}
      */
-    public JuryoininKeiyakuJigyoshaBuilder set事業者契約番号(RString 事業者契約番号) {
-        requireNonNull(事業者契約番号, UrSystemErrorMessages.値がnull.getReplacedMessage("事業者契約番号"));
-        entity.setKeiyakuJigyoshaNo(事業者契約番号);
+    public JuryoininKeiyakuJigyoshaBuilder set契約事業者番号(RString 契約事業者番号) {
+        requireNonNull(契約事業者番号, UrSystemErrorMessages.値がnull.getReplacedMessage("契約事業者番号"));
+        entity.setKeiyakuJigyoshaNo(契約事業者番号);
         return this;
     }
 
@@ -111,7 +111,7 @@ public class JuryoininKeiyakuJigyoshaBuilder {
      * @return {@link JuryoininKeiyakuJigyoshaBuilder}
      */
     public JuryoininKeiyakuJigyoshaBuilder set契約事業者カナ名称(AtenaKanaMeisho 契約事業者カナ名称) {
-        requireNonNull(契約事業者カナ名称, UrSystemErrorMessages.値がnull.getReplacedMessage("届出者事業者名称"));
+        requireNonNull(契約事業者カナ名称, UrSystemErrorMessages.値がnull.getReplacedMessage("契約事業者カナ名称"));
         entity.setKeiyakuJigyoshaKanaName(契約事業者カナ名称);
         return this;
     }
@@ -305,6 +305,42 @@ public class JuryoininKeiyakuJigyoshaBuilder {
     public JuryoininKeiyakuJigyoshaBuilder set口座名義人カナ(AtenaKanaMeisho 口座名義人カナ) {
         requireNonNull(口座名義人カナ, UrSystemErrorMessages.値がnull.getReplacedMessage("口座名義人カナ"));
         entity.setKozaMeigininKana(口座名義人カナ);
+        return this;
+    }
+
+    /**
+     * 契約事業者郵便番号を設定します。
+     *
+     * @param 契約事業者郵便番号 契約事業者郵便番号
+     * @return {@link JuryoininKeiyakuJigyoshaBuilder}
+     */
+    public JuryoininKeiyakuJigyoshaBuilder set契約事業者郵便番号(YubinNo 契約事業者郵便番号) {
+        requireNonNull(契約事業者郵便番号, UrSystemErrorMessages.値がnull.getReplacedMessage("契約事業者郵便番号"));
+        entity.setKeiyakuJigyoshaYubinNo(契約事業者郵便番号);
+        return this;
+    }
+
+    /**
+     * 契約事業者電話番号を設定します。
+     *
+     * @param 契約事業者電話番号 契約事業者電話番号
+     * @return {@link JuryoininKeiyakuJigyoshaBuilder}
+     */
+    public JuryoininKeiyakuJigyoshaBuilder set契約事業者電話番号(TelNo 契約事業者電話番号) {
+        requireNonNull(契約事業者電話番号, UrSystemErrorMessages.値がnull.getReplacedMessage("契約事業者電話番号"));
+        entity.setKeiyakuJigyoshaTelNo(契約事業者電話番号);
+        return this;
+    }
+
+    /**
+     * 送付先郵便番号を設定します。
+     *
+     * @param 送付先郵便番号 送付先郵便番号
+     * @return {@link JuryoininKeiyakuJigyoshaBuilder}
+     */
+    public JuryoininKeiyakuJigyoshaBuilder set送付先郵便番号(YubinNo 送付先郵便番号) {
+        requireNonNull(送付先郵便番号, UrSystemErrorMessages.値がnull.getReplacedMessage("送付先郵便番号"));
+        entity.setSofusakiYubinNo(送付先郵便番号);
         return this;
     }
 
