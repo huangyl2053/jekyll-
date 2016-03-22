@@ -74,6 +74,16 @@ public class Honsanteifuka {
     }
 
     /**
+     * {@link InstanceProvider#create}にて生成した{@link Honsanteifuka}のインスタンスを返します。
+     *
+     *
+     * @return Honsanteifuka
+     */
+    public static Honsanteifuka createInstance() {
+        return InstanceProvider.create(Honsanteifuka.class);
+    }
+
+    /**
      * 処理状況取得
      *
      * @param 遷移元区分 遷移元区分
