@@ -4,7 +4,7 @@
  */
 package jp.co.ndensan.reams.db.dbz.persistence.db.mapper.relate;
 
-import jp.co.ndensan.reams.db.dbz.persistence.db.mapper.relate.IKyotakuKeikakuTodokedeMapper;
+import jp.co.ndensan.reams.db.dbz.persistence.db.mapper.relate.kyotakukeikaku.IKyotakuKeikakuTodokedeMapper;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbz.definition.mybatisprm.relate.KyotakuKeikakuTodokedeMapperParameter;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
