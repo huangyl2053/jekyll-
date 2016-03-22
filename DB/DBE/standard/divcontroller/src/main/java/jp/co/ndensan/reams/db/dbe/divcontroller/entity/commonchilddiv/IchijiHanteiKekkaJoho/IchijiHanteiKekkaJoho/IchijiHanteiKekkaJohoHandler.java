@@ -9,11 +9,12 @@ import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbe.business.core.Shinsakai.ninteishinseijoho.NinteiShinseiJoho;
 import jp.co.ndensan.reams.db.dbe.business.core.ichijihanteikekkajohosearch.IchijiHanteiKekkaJohoSearchBusiness;
+import jp.co.ndensan.reams.db.dbe.business.core.ninteishinseijoho.ichijihanteikekkajoho.IchijiHanteiKekkaJoho;
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.core.KoroshoIfShikibetsuCode;
 import jp.co.ndensan.reams.db.dbe.service.core.ichijihanteikekkajohosearch.IchijiHanteiKekkaJohoSearchManager;
+import jp.co.ndensan.reams.db.dbe.service.core.ninteishinseijoho.ichijihanteikekkajoho.IchijiHanteiKekkaJohoManager;
 import jp.co.ndensan.reams.db.dbe.service.core.shinsakai.ninteishinseijoho.NinteiShinseiJohoManager;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo;
-import jp.co.ndensan.reams.db.dbz.business.core.basic.IchijiHanteiKekkaJoho;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.NinteichosahyoKihonChosa;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.ShujiiIkenshoJoho;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.ichijihantei.IchijiHanteiKeikoku;
@@ -25,7 +26,6 @@ import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.ichijihantei.Jot
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.ichijihantei.SuiteiKyufuKubunCode;
 import jp.co.ndensan.reams.db.dbz.divcontroller.helper.ModeType;
 import jp.co.ndensan.reams.db.dbz.divcontroller.viewbox.ViewStateKeys;
-import jp.co.ndensan.reams.db.dbz.service.core.basic.IchijiHanteiKekkaJohoManager;
 import jp.co.ndensan.reams.db.dbz.service.core.basic.NinteichosahyoKihonChosaManager;
 import jp.co.ndensan.reams.db.dbz.service.core.basic.ShujiiIkenshoJohoManager;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
@@ -73,9 +73,9 @@ public class IchijiHanteiKekkaJohoHandler {
             IchijiHanteiKekkaJoho ichijiHanteiKekkaJoho = ichijiHanteiKekkaJohoManager.
                     get要介護認定一次判定結果情報(shinseishoKanriNo);
 
-            NinteichosahyoKihonChosaManager ninteichosahyoKihonChosaManager = new NinteichosahyoKihonChosaManager();
+            NinteichosahyoKihonChosaManager ninteichosaKihonChosaManager = new NinteichosahyoKihonChosaManager();
             List<NinteichosahyoKihonChosa> returnListDbt5203
-                    = ninteichosahyoKihonChosaManager.get認定調査票_基本調査By申請書管理番号(shinseishoKanriNo);
+                    = ninteichosaKihonChosaManager.get認定調査票_基本調査By申請書管理番号(shinseishoKanriNo);
             if (returnListDbt5203.isEmpty()) {
                 div.getTxtJiritsudoChosa().setValue(未);
             } else {
@@ -92,26 +92,26 @@ public class IchijiHanteiKekkaJohoHandler {
             }
 
             if (ichijiHanteiKekkaJoho != null) {
-                div.getTxtIchijiHanteibi().setValue(ichijiHanteiKekkaJoho.get要介護認定一次判定年月日());
+                div.getTxtIchijiHanteibi().setValue(ichijiHanteiKekkaJoho.toEntity().getIchijiHanteiYMD());
 
                 if (KoroshoIfShikibetsuCode.認定ｿﾌﾄ99.getコード().equals(
                         ninteiShinseiJoho.get厚労省IF識別コード().value())) {
                     div.getTxtIchijiHanteiKekka().setValue(
-                            IchijiHanteiKekkaCode99.toValue(ichijiHanteiKekkaJoho.get要介護認定一次判定結果コード().value()).get名称());
+                            IchijiHanteiKekkaCode99.toValue(ichijiHanteiKekkaJoho.toEntity().getIchijiHanteiKekkaCode().value()).get名称());
                 } else if (KoroshoIfShikibetsuCode.認定ｿﾌﾄ2002.getコード().equals(
                         ninteiShinseiJoho.get厚労省IF識別コード().value())) {
                     div.getTxtIchijiHanteiKekka().setValue(
-                            IchijiHanteiKekkaCode02.toValue(ichijiHanteiKekkaJoho.get要介護認定一次判定結果コード().value()).get名称());
+                            IchijiHanteiKekkaCode02.toValue(ichijiHanteiKekkaJoho.toEntity().getIchijiHanteiKekkaCode().value()).get名称());
                 } else if (KoroshoIfShikibetsuCode.認定ｿﾌﾄ2006_新要介護認定適用区分が未適用.getコード().equals(
                         ninteiShinseiJoho.get厚労省IF識別コード().value())) {
                     div.getTxtIchijiHanteiKekka().setValue(
-                            IchijiHanteiKekkaCode06.toValue(ichijiHanteiKekkaJoho.get要介護認定一次判定結果コード().value()).get名称());
+                            IchijiHanteiKekkaCode06.toValue(ichijiHanteiKekkaJoho.toEntity().getIchijiHanteiKekkaCode().value()).get名称());
                 } else if (KoroshoIfShikibetsuCode.認定ｿﾌﾄ2009.getコード().equals(
                         ninteiShinseiJoho.get厚労省IF識別コード().value())
                         || KoroshoIfShikibetsuCode.認定ｿﾌﾄ2009_SP3.getコード().equals(
                                 ninteiShinseiJoho.get厚労省IF識別コード().value())) {
                     div.getTxtIchijiHanteiKekka().setValue(
-                            IchijiHanteiKekkaCode09.toValue(ichijiHanteiKekkaJoho.get要介護認定一次判定結果コード().value()).get名称());
+                            IchijiHanteiKekkaCode09.toValue(ichijiHanteiKekkaJoho.toEntity().getIchijiHanteiKekkaCode().value()).get名称());
                 }
 
                 div.getTxtKijunJikan().setValue(new RString(String.valueOf(ichijiHanteiKekkaJoho.toEntity().getKijunJikan())));
@@ -132,13 +132,21 @@ public class IchijiHanteiKekkaJohoHandler {
                 div.getTxtDai6gun().setValue(new Decimal(ichijiHanteiKekkaJoho.toEntity().getChukanHyokaKomoku6gun()));
                 div.getTxtDai7gun().setValue(new Decimal(ichijiHanteiKekkaJoho.toEntity().getChukanHyokaKomoku7gun()));
                 div.getTxtGaizensei().setValue(ichijiHanteiKekkaJoho.toEntity().getNinchishoJiritsudoIIijoNoGaizensei());
-                if (ichijiHanteiKekkaJoho.toEntity().getJotaiAnteiseiCode() != null) {
+
+                Code jotaiAnteiseiCode = ichijiHanteiKekkaJoho.toEntity().getJotaiAnteiseiCode();
+                RString jotaiAnteiseiCodeValue = jotaiAnteiseiCode == null ? RString.EMPTY : jotaiAnteiseiCode.value();
+                if (jotaiAnteiseiCode != null
+                        && jotaiAnteiseiCodeValue != null) {
                     div.getTxtJyotaiAnteisei().setValue(
-                            JotaiAnteiseiCode.toValue(ichijiHanteiKekkaJoho.toEntity().getJotaiAnteiseiCode().value()).get名称());
+                            JotaiAnteiseiCode.toValue(jotaiAnteiseiCodeValue).get名称());
                 }
-                if (ichijiHanteiKekkaJoho.toEntity().getSuiteiKyufuKubunCode() != null) {
+
+                Code suiteiKyufuKubunCode = ichijiHanteiKekkaJoho.toEntity().getSuiteiKyufuKubunCode();
+                RString suiteiKyufuKubunCodeValue = suiteiKyufuKubunCode == null ? RString.EMPTY : suiteiKyufuKubunCode.value();
+                if (suiteiKyufuKubunCode != null
+                        && suiteiKyufuKubunCodeValue != null) {
                     div.getTxtKyufuKbn().setValue(
-                            SuiteiKyufuKubunCode.toValue(ichijiHanteiKekkaJoho.toEntity().getSuiteiKyufuKubunCode().value()).get名称());
+                            SuiteiKyufuKubunCode.toValue(suiteiKyufuKubunCodeValue).get名称());
                 }
                 List<dgIchijiHanteiKeikokuCode_Row> rowList = new ArrayList<>();
                 List<RString> codeList = new ArrayList<>();
@@ -146,13 +154,13 @@ public class IchijiHanteiKekkaJohoHandler {
                 RString 一次判定警告コード = ichijiHanteiKekkaJoho.toEntity().getIchijiHnateiKeikokuCode();
                 if (一次判定警告コード != null) {
                     List<RString> 一次判定警告コードList = 一次判定警告コード.toRStringList();
-                    for (int i = 0; i < 一次判定警告コードList.size(); i++) {
+                    for (int i = 0, j = 一次判定警告コードList.size(); i < j; i++) {
                         if (new RString("1").equals(一次判定警告コードList.get(i))) {
                             codeList.add(new RString(String.format("%02d", i + 1)));
                         }
                     }
 
-                    for (int i = 0; i < codeList.size(); i++) {
+                    for (int i = 0, j = codeList.size(); i < j; i++) {
                         dgIchijiHanteiKeikokuCode_Row row = new dgIchijiHanteiKeikokuCode_Row();
                         row.setNo(new RString(String.valueOf(i + 1)));
                         row.setCode(codeList.get(i));
@@ -221,13 +229,13 @@ public class IchijiHanteiKekkaJohoHandler {
                 RString 一次判定警告コード = business.get一次判定警告コード();
                 if (一次判定警告コード != null) {
                     List<RString> 一次判定警告コードList = 一次判定警告コード.toRStringList();
-                    for (int i = 0; i < 一次判定警告コードList.size(); i++) {
+                    for (int i = 0, j = 一次判定警告コードList.size(); i < j; i++) {
                         if (new RString("1").equals(一次判定警告コードList.get(i))) {
                             codeList.add(new RString(String.format("%02d", i + 1)));
                         }
                     }
 
-                    for (int i = 0; i < codeList.size(); i++) {
+                    for (int i = 0, j = codeList.size(); i < j; i++) {
                         dgIchijiHanteiKeikokuCode_Row row = new dgIchijiHanteiKeikokuCode_Row();
                         row.setNo(new RString(String.valueOf(i + 1)));
                         row.setCode(codeList.get(i));
