@@ -15,15 +15,15 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.TabPanel;
  * @author 自動生成
  */
 public class tabKonnemeisaiDiv extends TabPanel {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2015-11-30_08-54-50">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-01-15_09-59-03">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
      * コントロール名とフィールド名を取得する
      * private + コントロール名 + フィールド名 の文字列を作成
      */
-    @JsonProperty("tabKonnedo")
-    private tabKonnedoDiv tabKonnedo;
+    @JsonProperty("tplKonnedo")
+    private tplKonnedoDiv tplKonnedo;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -32,21 +32,21 @@ public class tabKonnemeisaiDiv extends TabPanel {
      * フィールド名のGetterとSetter を作成
      */
     /*
-     * gettabKonnedo
-     * @return tabKonnedo
+     * gettplKonnedo
+     * @return tplKonnedo
      */
-    @JsonProperty("tabKonnedo")
-    public tabKonnedoDiv getTabKonnedo() {
-        return tabKonnedo;
+    @JsonProperty("tplKonnedo")
+    public tplKonnedoDiv getTplKonnedo() {
+        return tplKonnedo;
     }
 
     /*
-     * settabKonnedo
-     * @param tabKonnedo tabKonnedo
+     * settplKonnedo
+     * @param tplKonnedo tplKonnedo
      */
-    @JsonProperty("tabKonnedo")
-    public void setTabKonnedo(tabKonnedoDiv tabKonnedo) {
-        this.tabKonnedo = tabKonnedo;
+    @JsonProperty("tplKonnedo")
+    public void setTplKonnedo(tplKonnedoDiv tplKonnedo) {
+        this.tplKonnedo = tplKonnedo;
     }
 
     /*
@@ -54,177 +54,177 @@ public class tabKonnemeisaiDiv extends TabPanel {
      */
     @JsonIgnore
     public Label getLblkosaishu() {
-        return this.getTabKonnedo().getLblkosaishu();
+        return this.getTplKonnedo().getLblkosaishu();
     }
 
     @JsonIgnore
     public Label getLblkosainyuseisan() {
-        return this.getTabKonnedo().getLblkosainyuseisan();
+        return this.getTplKonnedo().getLblkosainyuseisan();
     }
 
     @JsonIgnore
     public Label getSpc11() {
-        return this.getTabKonnedo().getSpc11();
+        return this.getTplKonnedo().getSpc11();
     }
 
     @JsonIgnore
     public Label getLblkosaishutsu() {
-        return this.getTabKonnedo().getLblkosaishutsu();
+        return this.getTplKonnedo().getLblkosaishutsu();
     }
 
     @JsonIgnore
     public Label getLblkokamoku() {
-        return this.getTabKonnedo().getLblkokamoku();
+        return this.getTplKonnedo().getLblkokamoku();
     }
 
     @JsonIgnore
     public Label getLblkosainkakyufuhifukin() {
-        return this.getTabKonnedo().getLblkosainkakyufuhifukin();
+        return this.getTplKonnedo().getLblkosainkakyufuhifukin();
     }
 
     @JsonIgnore
     public TextBoxNum getTxtsainkkakyufuhifukin() {
-        return this.getTabKonnedo().getTxtsainkkakyufuhifukin();
+        return this.getTplKonnedo().getTxtsainkkakyufuhifukin();
     }
 
     @JsonIgnore
     public TextBoxNum getTxtsaitkkakyufuhifukin() {
-        return this.getTabKonnedo().getTxtsaitkkakyufuhifukin();
+        return this.getTplKonnedo().getTxtsaitkkakyufuhifukin();
     }
 
     @JsonIgnore
     public Label getLblkokaigohokenryo() {
-        return this.getTabKonnedo().getLblkokaigohokenryo();
+        return this.getTplKonnedo().getLblkokaigohokenryo();
     }
 
     @JsonIgnore
     public TextBoxNum getTxtsainkchoseikofukin() {
-        return this.getTabKonnedo().getTxtsainkchoseikofukin();
+        return this.getTplKonnedo().getTxtsainkchoseikofukin();
     }
 
     @JsonIgnore
     public TextBoxNum getTxtsaitkchoseikofukin() {
-        return this.getTabKonnedo().getTxtsaitkchoseikofukin();
+        return this.getTplKonnedo().getTxtsaitkchoseikofukin();
     }
 
     @JsonIgnore
     public Label getLblkofuntannintei() {
-        return this.getTabKonnedo().getLblkofuntannintei();
+        return this.getTplKonnedo().getLblkofuntannintei();
     }
 
     @JsonIgnore
     public TextBoxNum getTxtsainkchiikishienkin() {
-        return this.getTabKonnedo().getTxtsainkchiikishienkin();
+        return this.getTplKonnedo().getTxtsainkchiikishienkin();
     }
 
     @JsonIgnore
     public TextBoxNum getTxtsaitkchiikishienkin() {
-        return this.getTabKonnedo().getTxtsaitkchiikishienkin();
+        return this.getTplKonnedo().getTxtsaitkchiikishienkin();
     }
 
     @JsonIgnore
     public Label getLblshiharaikikinkofukin() {
-        return this.getTabKonnedo().getLblshiharaikikinkofukin();
+        return this.getTplKonnedo().getLblshiharaikikinkofukin();
     }
 
     @JsonIgnore
     public Label getLblfkountansonota() {
-        return this.getTabKonnedo().getLblfkountansonota();
+        return this.getTplKonnedo().getLblfkountansonota();
     }
 
     @JsonIgnore
     public TextBoxNum getTxtsainkkaigokyufuhikokin() {
-        return this.getTabKonnedo().getTxtsainkkaigokyufuhikokin();
+        return this.getTplKonnedo().getTxtsainkkaigokyufuhikokin();
     }
 
     @JsonIgnore
     public TextBoxNum getTxtsaitkkaigokyufuhikokin() {
-        return this.getTabKonnedo().getTxtsaitkkaigokyufuhikokin();
+        return this.getTplKonnedo().getTxtsaitkkaigokyufuhikokin();
     }
 
     @JsonIgnore
     public Label getLblkosainchiikishienkofukin() {
-        return this.getTabKonnedo().getLblkosainchiikishienkofukin();
+        return this.getTplKonnedo().getLblkosainchiikishienkofukin();
     }
 
     @JsonIgnore
     public TextBoxNum getTxtsainkchiikishienkofukin() {
-        return this.getTabKonnedo().getTxtsainkchiikishienkofukin();
+        return this.getTplKonnedo().getTxtsainkchiikishienkofukin();
     }
 
     @JsonIgnore
     public TextBoxNum getTxtsaitkchiikishienkofukin() {
-        return this.getTabKonnedo().getTxtsaitkchiikishienkofukin();
+        return this.getTplKonnedo().getTxtsaitkchiikishienkofukin();
     }
 
     @JsonIgnore
     public Label getLblkotodofukenkin() {
-        return this.getTabKonnedo().getLblkotodofukenkin();
+        return this.getTplKonnedo().getLblkotodofukenkin();
     }
 
     @JsonIgnore
     public Label getLbltodofutankenkin() {
-        return this.getTabKonnedo().getLbltodofutankenkin();
+        return this.getTplKonnedo().getLbltodofutankenkin();
     }
 
     @JsonIgnore
     public TextBoxNum getTxtsainktodofukenfutankin() {
-        return this.getTabKonnedo().getTxtsainktodofukenfutankin();
+        return this.getTplKonnedo().getTxtsainktodofukenfutankin();
     }
 
     @JsonIgnore
     public TextBoxNum getTxtsaitktodofukenfutankin() {
-        return this.getTabKonnedo().getTxtsaitktodofukenfutankin();
+        return this.getTplKonnedo().getTxtsaitktodofukenfutankin();
     }
 
     @JsonIgnore
     public Label getLblkochiikishienjigyokofukin() {
-        return this.getTabKonnedo().getLblkochiikishienjigyokofukin();
+        return this.getTplKonnedo().getLblkochiikishienjigyokofukin();
     }
 
     @JsonIgnore
     public TextBoxNum getTxtsainkchiikishienjkin() {
-        return this.getTabKonnedo().getTxtsainkchiikishienjkin();
+        return this.getTplKonnedo().getTxtsainkchiikishienjkin();
     }
 
     @JsonIgnore
     public TextBoxNum getTxtsaitkchiikishienjkin() {
-        return this.getTabKonnedo().getTxtsaitkchiikishienjkin();
+        return this.getTplKonnedo().getTxtsaitkchiikishienjkin();
     }
 
     @JsonIgnore
     public Label getLblkosainyukin() {
-        return this.getTabKonnedo().getLblkosainyukin();
+        return this.getTplKonnedo().getLblkosainyukin();
     }
 
     @JsonIgnore
     public Label getLblkosainippankaiekikin() {
-        return this.getTabKonnedo().getLblkosainippankaiekikin();
+        return this.getTplKonnedo().getLblkosainippankaiekikin();
     }
 
     @JsonIgnore
     public TextBoxNum getTxtsainkippankaiekikin() {
-        return this.getTabKonnedo().getTxtsainkippankaiekikin();
+        return this.getTplKonnedo().getTxtsainkippankaiekikin();
     }
 
     @JsonIgnore
     public TextBoxNum getTxtsaitkippankaiekikin() {
-        return this.getTabKonnedo().getTxtsaitkippankaiekikin();
+        return this.getTplKonnedo().getTxtsaitkippankaiekikin();
     }
 
     @JsonIgnore
     public Label getLblkoshiryooyobitesuryo() {
-        return this.getTabKonnedo().getLblkoshiryooyobitesuryo();
+        return this.getTplKonnedo().getLblkoshiryooyobitesuryo();
     }
 
     @JsonIgnore
     public TextBoxNum getTxtkoshiyohigokei() {
-        return this.getTabKonnedo().getTxtkoshiyohigokei();
+        return this.getTplKonnedo().getTxtkoshiyohigokei();
     }
 
     @JsonIgnore
     public TextBoxNum getTxtkosaishutsugokei() {
-        return this.getTabKonnedo().getTxtkosaishutsugokei();
+        return this.getTplKonnedo().getTxtkosaishutsugokei();
     }
 
     // </editor-fold>

@@ -16,7 +16,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.TabContainer;
  * @author 自動生成
  */
 public class tblYoshikiyonnosanDiv extends TabContainer {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2015-11-30_08-54-50">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-01-15_09-59-03">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -94,423 +94,423 @@ public class tblYoshikiyonnosanDiv extends TabContainer {
      * [ ショートカットの作成 ]
      */
     @JsonIgnore
-    public tblZennendoizenDiv getTblZennendoizen() {
-        return this.getTabZennendoizenMeisai().getTblZennendoizen();
+    public tplZennendoizenDiv getTplZennendoizen() {
+        return this.getTabZennendoizenMeisai().getTplZennendoizen();
     }
 
     @JsonIgnore
-    public void  setTblZennendoizen(tblZennendoizenDiv tblZennendoizen) {
-        this.getTabZennendoizenMeisai().setTblZennendoizen(tblZennendoizen);
+    public void  setTplZennendoizen(tplZennendoizenDiv tplZennendoizen) {
+        this.getTabZennendoizenMeisai().setTplZennendoizen(tplZennendoizen);
     }
 
     @JsonIgnore
     public Label getLblsainyu() {
-        return this.getTabZennendoizenMeisai().getTblZennendoizen().getLblsainyu();
+        return this.getTabZennendoizenMeisai().getTplZennendoizen().getLblsainyu();
     }
 
     @JsonIgnore
     public Label getLblsainyuseisan() {
-        return this.getTabZennendoizenMeisai().getTblZennendoizen().getLblsainyuseisan();
+        return this.getTabZennendoizenMeisai().getTplZennendoizen().getLblsainyuseisan();
     }
 
     @JsonIgnore
     public Label getSpc1() {
-        return this.getTabZennendoizenMeisai().getTblZennendoizen().getSpc1();
+        return this.getTabZennendoizenMeisai().getTplZennendoizen().getSpc1();
     }
 
     @JsonIgnore
     public Label getLblsaishutsu() {
-        return this.getTabZennendoizenMeisai().getTblZennendoizen().getLblsaishutsu();
+        return this.getTabZennendoizenMeisai().getTplZennendoizen().getLblsaishutsu();
     }
 
     @JsonIgnore
     public Label getLblkamoku() {
-        return this.getTabZennendoizenMeisai().getTblZennendoizen().getLblkamoku();
+        return this.getTabZennendoizenMeisai().getTplZennendoizen().getLblkamoku();
     }
 
     @JsonIgnore
     public Label getLblsainkakyufuhifukin() {
-        return this.getTabZennendoizenMeisai().getTblZennendoizen().getLblsainkakyufuhifukin();
+        return this.getTabZennendoizenMeisai().getTplZennendoizen().getLblsainkakyufuhifukin();
     }
 
     @JsonIgnore
     public TextBoxNum getTxtsainkakyufuhifukin() {
-        return this.getTabZennendoizenMeisai().getTblZennendoizen().getTxtsainkakyufuhifukin();
+        return this.getTabZennendoizenMeisai().getTplZennendoizen().getTxtsainkakyufuhifukin();
     }
 
     @JsonIgnore
     public TextBoxNum getTxtsaitkakyufuhifukin() {
-        return this.getTabZennendoizenMeisai().getTblZennendoizen().getTxtsaitkakyufuhifukin();
+        return this.getTabZennendoizenMeisai().getTplZennendoizen().getTxtsaitkakyufuhifukin();
     }
 
     @JsonIgnore
     public Label getLblkaigohokenryo() {
-        return this.getTabZennendoizenMeisai().getTblZennendoizen().getLblkaigohokenryo();
+        return this.getTabZennendoizenMeisai().getTplZennendoizen().getLblkaigohokenryo();
     }
 
     @JsonIgnore
     public TextBoxNum getTxtsainchoseikofukin() {
-        return this.getTabZennendoizenMeisai().getTblZennendoizen().getTxtsainchoseikofukin();
+        return this.getTabZennendoizenMeisai().getTplZennendoizen().getTxtsainchoseikofukin();
     }
 
     @JsonIgnore
     public TextBoxNum getTxtsaitchoseikofukin() {
-        return this.getTabZennendoizenMeisai().getTblZennendoizen().getTxtsaitchoseikofukin();
+        return this.getTabZennendoizenMeisai().getTplZennendoizen().getTxtsaitchoseikofukin();
     }
 
     @JsonIgnore
     public Label getLblfuntannintei() {
-        return this.getTabZennendoizenMeisai().getTblZennendoizen().getLblfuntannintei();
+        return this.getTabZennendoizenMeisai().getTplZennendoizen().getLblfuntannintei();
     }
 
     @JsonIgnore
     public TextBoxNum getTxtsainchiikishienkin() {
-        return this.getTabZennendoizenMeisai().getTblZennendoizen().getTxtsainchiikishienkin();
+        return this.getTabZennendoizenMeisai().getTplZennendoizen().getTxtsainchiikishienkin();
     }
 
     @JsonIgnore
     public TextBoxNum getTxtsaitchiikishienkin() {
-        return this.getTabZennendoizenMeisai().getTblZennendoizen().getTxtsaitchiikishienkin();
+        return this.getTabZennendoizenMeisai().getTplZennendoizen().getTxtsaitchiikishienkin();
     }
 
     @JsonIgnore
     public Label getLblshiharaikikinkofuki() {
-        return this.getTabZennendoizenMeisai().getTblZennendoizen().getLblshiharaikikinkofuki();
+        return this.getTabZennendoizenMeisai().getTplZennendoizen().getLblshiharaikikinkofuki();
     }
 
     @JsonIgnore
     public Label getLblfuntansonota() {
-        return this.getTabZennendoizenMeisai().getTblZennendoizen().getLblfuntansonota();
+        return this.getTabZennendoizenMeisai().getTplZennendoizen().getLblfuntansonota();
     }
 
     @JsonIgnore
     public TextBoxNum getTxtsainkaigokyufuhikokin() {
-        return this.getTabZennendoizenMeisai().getTblZennendoizen().getTxtsainkaigokyufuhikokin();
+        return this.getTabZennendoizenMeisai().getTplZennendoizen().getTxtsainkaigokyufuhikokin();
     }
 
     @JsonIgnore
     public TextBoxNum getTxtsaitkaigokyufuhikokin() {
-        return this.getTabZennendoizenMeisai().getTblZennendoizen().getTxtsaitkaigokyufuhikokin();
+        return this.getTabZennendoizenMeisai().getTplZennendoizen().getTxtsaitkaigokyufuhikokin();
     }
 
     @JsonIgnore
     public Label getLblsainchiikishienkofukin() {
-        return this.getTabZennendoizenMeisai().getTblZennendoizen().getLblsainchiikishienkofukin();
+        return this.getTabZennendoizenMeisai().getTplZennendoizen().getLblsainchiikishienkofukin();
     }
 
     @JsonIgnore
     public TextBoxNum getTxtsainchiikishienkofukin() {
-        return this.getTabZennendoizenMeisai().getTblZennendoizen().getTxtsainchiikishienkofukin();
+        return this.getTabZennendoizenMeisai().getTplZennendoizen().getTxtsainchiikishienkofukin();
     }
 
     @JsonIgnore
     public TextBoxNum getTxtsaitchiikishienkofukin() {
-        return this.getTabZennendoizenMeisai().getTblZennendoizen().getTxtsaitchiikishienkofukin();
+        return this.getTabZennendoizenMeisai().getTplZennendoizen().getTxtsaitchiikishienkofukin();
     }
 
     @JsonIgnore
     public Label getLbltodofukenkin() {
-        return this.getTabZennendoizenMeisai().getTblZennendoizen().getLbltodofukenkin();
+        return this.getTabZennendoizenMeisai().getTplZennendoizen().getLbltodofukenkin();
     }
 
     @JsonIgnore
     public Label getLbltodofukenki() {
-        return this.getTabZennendoizenMeisai().getTblZennendoizen().getLbltodofukenki();
+        return this.getTabZennendoizenMeisai().getTplZennendoizen().getLbltodofukenki();
     }
 
     @JsonIgnore
     public TextBoxNum getTxtsaintodofukenfutankin() {
-        return this.getTabZennendoizenMeisai().getTblZennendoizen().getTxtsaintodofukenfutankin();
+        return this.getTabZennendoizenMeisai().getTplZennendoizen().getTxtsaintodofukenfutankin();
     }
 
     @JsonIgnore
     public TextBoxNum getTxtsaittodofukenfutankin() {
-        return this.getTabZennendoizenMeisai().getTblZennendoizen().getTxtsaittodofukenfutankin();
+        return this.getTabZennendoizenMeisai().getTplZennendoizen().getTxtsaittodofukenfutankin();
     }
 
     @JsonIgnore
     public Label getLblchiikishienjigyokofukin() {
-        return this.getTabZennendoizenMeisai().getTblZennendoizen().getLblchiikishienjigyokofukin();
+        return this.getTabZennendoizenMeisai().getTplZennendoizen().getLblchiikishienjigyokofukin();
     }
 
     @JsonIgnore
     public TextBoxNum getTxtsainchiikishienjkin() {
-        return this.getTabZennendoizenMeisai().getTblZennendoizen().getTxtsainchiikishienjkin();
+        return this.getTabZennendoizenMeisai().getTplZennendoizen().getTxtsainchiikishienjkin();
     }
 
     @JsonIgnore
     public TextBoxNum getTxtsaitchiikishienjkin() {
-        return this.getTabZennendoizenMeisai().getTblZennendoizen().getTxtsaitchiikishienjkin();
+        return this.getTabZennendoizenMeisai().getTplZennendoizen().getTxtsaitchiikishienjkin();
     }
 
     @JsonIgnore
     public Label getLblsainyukin() {
-        return this.getTabZennendoizenMeisai().getTblZennendoizen().getLblsainyukin();
+        return this.getTabZennendoizenMeisai().getTplZennendoizen().getLblsainyukin();
     }
 
     @JsonIgnore
     public Label getLblsainippankaiekikin() {
-        return this.getTabZennendoizenMeisai().getTblZennendoizen().getLblsainippankaiekikin();
+        return this.getTabZennendoizenMeisai().getTplZennendoizen().getLblsainippankaiekikin();
     }
 
     @JsonIgnore
     public TextBoxNum getTxtsainippankaiekikin() {
-        return this.getTabZennendoizenMeisai().getTblZennendoizen().getTxtsainippankaiekikin();
+        return this.getTabZennendoizenMeisai().getTplZennendoizen().getTxtsainippankaiekikin();
     }
 
     @JsonIgnore
     public TextBoxNum getTxtsaitippankaiekikin() {
-        return this.getTabZennendoizenMeisai().getTblZennendoizen().getTxtsaitippankaiekikin();
+        return this.getTabZennendoizenMeisai().getTplZennendoizen().getTxtsaitippankaiekikin();
     }
 
     @JsonIgnore
     public Label getLblshiryooyobitesuryo() {
-        return this.getTabZennendoizenMeisai().getTblZennendoizen().getLblshiryooyobitesuryo();
+        return this.getTabZennendoizenMeisai().getTplZennendoizen().getLblshiryooyobitesuryo();
     }
 
     @JsonIgnore
     public TextBoxNum getTxtshiyohigokei() {
-        return this.getTabZennendoizenMeisai().getTblZennendoizen().getTxtshiyohigokei();
+        return this.getTabZennendoizenMeisai().getTplZennendoizen().getTxtshiyohigokei();
     }
 
     @JsonIgnore
     public TextBoxNum getTxtsaishutsugokei() {
-        return this.getTabZennendoizenMeisai().getTblZennendoizen().getTxtsaishutsugokei();
+        return this.getTabZennendoizenMeisai().getTplZennendoizen().getTxtsaishutsugokei();
     }
 
     @JsonIgnore
-    public tabKonnedoDiv getTabKonnedo() {
-        return this.getTabKonnemeisai().getTabKonnedo();
+    public tplKonnedoDiv getTplKonnedo() {
+        return this.getTabKonnemeisai().getTplKonnedo();
     }
 
     @JsonIgnore
-    public void  setTabKonnedo(tabKonnedoDiv tabKonnedo) {
-        this.getTabKonnemeisai().setTabKonnedo(tabKonnedo);
+    public void  setTplKonnedo(tplKonnedoDiv tplKonnedo) {
+        this.getTabKonnemeisai().setTplKonnedo(tplKonnedo);
     }
 
     @JsonIgnore
     public Label getLblkosaishu() {
-        return this.getTabKonnemeisai().getTabKonnedo().getLblkosaishu();
+        return this.getTabKonnemeisai().getTplKonnedo().getLblkosaishu();
     }
 
     @JsonIgnore
     public Label getLblkosainyuseisan() {
-        return this.getTabKonnemeisai().getTabKonnedo().getLblkosainyuseisan();
+        return this.getTabKonnemeisai().getTplKonnedo().getLblkosainyuseisan();
     }
 
     @JsonIgnore
     public Label getSpc11() {
-        return this.getTabKonnemeisai().getTabKonnedo().getSpc11();
+        return this.getTabKonnemeisai().getTplKonnedo().getSpc11();
     }
 
     @JsonIgnore
     public Label getLblkosaishutsu() {
-        return this.getTabKonnemeisai().getTabKonnedo().getLblkosaishutsu();
+        return this.getTabKonnemeisai().getTplKonnedo().getLblkosaishutsu();
     }
 
     @JsonIgnore
     public Label getLblkokamoku() {
-        return this.getTabKonnemeisai().getTabKonnedo().getLblkokamoku();
+        return this.getTabKonnemeisai().getTplKonnedo().getLblkokamoku();
     }
 
     @JsonIgnore
     public Label getLblkosainkakyufuhifukin() {
-        return this.getTabKonnemeisai().getTabKonnedo().getLblkosainkakyufuhifukin();
+        return this.getTabKonnemeisai().getTplKonnedo().getLblkosainkakyufuhifukin();
     }
 
     @JsonIgnore
     public TextBoxNum getTxtsainkkakyufuhifukin() {
-        return this.getTabKonnemeisai().getTabKonnedo().getTxtsainkkakyufuhifukin();
+        return this.getTabKonnemeisai().getTplKonnedo().getTxtsainkkakyufuhifukin();
     }
 
     @JsonIgnore
     public TextBoxNum getTxtsaitkkakyufuhifukin() {
-        return this.getTabKonnemeisai().getTabKonnedo().getTxtsaitkkakyufuhifukin();
+        return this.getTabKonnemeisai().getTplKonnedo().getTxtsaitkkakyufuhifukin();
     }
 
     @JsonIgnore
     public Label getLblkokaigohokenryo() {
-        return this.getTabKonnemeisai().getTabKonnedo().getLblkokaigohokenryo();
+        return this.getTabKonnemeisai().getTplKonnedo().getLblkokaigohokenryo();
     }
 
     @JsonIgnore
     public TextBoxNum getTxtsainkchoseikofukin() {
-        return this.getTabKonnemeisai().getTabKonnedo().getTxtsainkchoseikofukin();
+        return this.getTabKonnemeisai().getTplKonnedo().getTxtsainkchoseikofukin();
     }
 
     @JsonIgnore
     public TextBoxNum getTxtsaitkchoseikofukin() {
-        return this.getTabKonnemeisai().getTabKonnedo().getTxtsaitkchoseikofukin();
+        return this.getTabKonnemeisai().getTplKonnedo().getTxtsaitkchoseikofukin();
     }
 
     @JsonIgnore
     public Label getLblkofuntannintei() {
-        return this.getTabKonnemeisai().getTabKonnedo().getLblkofuntannintei();
+        return this.getTabKonnemeisai().getTplKonnedo().getLblkofuntannintei();
     }
 
     @JsonIgnore
     public TextBoxNum getTxtsainkchiikishienkin() {
-        return this.getTabKonnemeisai().getTabKonnedo().getTxtsainkchiikishienkin();
+        return this.getTabKonnemeisai().getTplKonnedo().getTxtsainkchiikishienkin();
     }
 
     @JsonIgnore
     public TextBoxNum getTxtsaitkchiikishienkin() {
-        return this.getTabKonnemeisai().getTabKonnedo().getTxtsaitkchiikishienkin();
+        return this.getTabKonnemeisai().getTplKonnedo().getTxtsaitkchiikishienkin();
     }
 
     @JsonIgnore
     public Label getLblshiharaikikinkofukin() {
-        return this.getTabKonnemeisai().getTabKonnedo().getLblshiharaikikinkofukin();
+        return this.getTabKonnemeisai().getTplKonnedo().getLblshiharaikikinkofukin();
     }
 
     @JsonIgnore
     public Label getLblfkountansonota() {
-        return this.getTabKonnemeisai().getTabKonnedo().getLblfkountansonota();
+        return this.getTabKonnemeisai().getTplKonnedo().getLblfkountansonota();
     }
 
     @JsonIgnore
     public TextBoxNum getTxtsainkkaigokyufuhikokin() {
-        return this.getTabKonnemeisai().getTabKonnedo().getTxtsainkkaigokyufuhikokin();
+        return this.getTabKonnemeisai().getTplKonnedo().getTxtsainkkaigokyufuhikokin();
     }
 
     @JsonIgnore
     public TextBoxNum getTxtsaitkkaigokyufuhikokin() {
-        return this.getTabKonnemeisai().getTabKonnedo().getTxtsaitkkaigokyufuhikokin();
+        return this.getTabKonnemeisai().getTplKonnedo().getTxtsaitkkaigokyufuhikokin();
     }
 
     @JsonIgnore
     public Label getLblkosainchiikishienkofukin() {
-        return this.getTabKonnemeisai().getTabKonnedo().getLblkosainchiikishienkofukin();
+        return this.getTabKonnemeisai().getTplKonnedo().getLblkosainchiikishienkofukin();
     }
 
     @JsonIgnore
     public TextBoxNum getTxtsainkchiikishienkofukin() {
-        return this.getTabKonnemeisai().getTabKonnedo().getTxtsainkchiikishienkofukin();
+        return this.getTabKonnemeisai().getTplKonnedo().getTxtsainkchiikishienkofukin();
     }
 
     @JsonIgnore
     public TextBoxNum getTxtsaitkchiikishienkofukin() {
-        return this.getTabKonnemeisai().getTabKonnedo().getTxtsaitkchiikishienkofukin();
+        return this.getTabKonnemeisai().getTplKonnedo().getTxtsaitkchiikishienkofukin();
     }
 
     @JsonIgnore
     public Label getLblkotodofukenkin() {
-        return this.getTabKonnemeisai().getTabKonnedo().getLblkotodofukenkin();
+        return this.getTabKonnemeisai().getTplKonnedo().getLblkotodofukenkin();
     }
 
     @JsonIgnore
     public Label getLbltodofutankenkin() {
-        return this.getTabKonnemeisai().getTabKonnedo().getLbltodofutankenkin();
+        return this.getTabKonnemeisai().getTplKonnedo().getLbltodofutankenkin();
     }
 
     @JsonIgnore
     public TextBoxNum getTxtsainktodofukenfutankin() {
-        return this.getTabKonnemeisai().getTabKonnedo().getTxtsainktodofukenfutankin();
+        return this.getTabKonnemeisai().getTplKonnedo().getTxtsainktodofukenfutankin();
     }
 
     @JsonIgnore
     public TextBoxNum getTxtsaitktodofukenfutankin() {
-        return this.getTabKonnemeisai().getTabKonnedo().getTxtsaitktodofukenfutankin();
+        return this.getTabKonnemeisai().getTplKonnedo().getTxtsaitktodofukenfutankin();
     }
 
     @JsonIgnore
     public Label getLblkochiikishienjigyokofukin() {
-        return this.getTabKonnemeisai().getTabKonnedo().getLblkochiikishienjigyokofukin();
+        return this.getTabKonnemeisai().getTplKonnedo().getLblkochiikishienjigyokofukin();
     }
 
     @JsonIgnore
     public TextBoxNum getTxtsainkchiikishienjkin() {
-        return this.getTabKonnemeisai().getTabKonnedo().getTxtsainkchiikishienjkin();
+        return this.getTabKonnemeisai().getTplKonnedo().getTxtsainkchiikishienjkin();
     }
 
     @JsonIgnore
     public TextBoxNum getTxtsaitkchiikishienjkin() {
-        return this.getTabKonnemeisai().getTabKonnedo().getTxtsaitkchiikishienjkin();
+        return this.getTabKonnemeisai().getTplKonnedo().getTxtsaitkchiikishienjkin();
     }
 
     @JsonIgnore
     public Label getLblkosainyukin() {
-        return this.getTabKonnemeisai().getTabKonnedo().getLblkosainyukin();
+        return this.getTabKonnemeisai().getTplKonnedo().getLblkosainyukin();
     }
 
     @JsonIgnore
     public Label getLblkosainippankaiekikin() {
-        return this.getTabKonnemeisai().getTabKonnedo().getLblkosainippankaiekikin();
+        return this.getTabKonnemeisai().getTplKonnedo().getLblkosainippankaiekikin();
     }
 
     @JsonIgnore
     public TextBoxNum getTxtsainkippankaiekikin() {
-        return this.getTabKonnemeisai().getTabKonnedo().getTxtsainkippankaiekikin();
+        return this.getTabKonnemeisai().getTplKonnedo().getTxtsainkippankaiekikin();
     }
 
     @JsonIgnore
     public TextBoxNum getTxtsaitkippankaiekikin() {
-        return this.getTabKonnemeisai().getTabKonnedo().getTxtsaitkippankaiekikin();
+        return this.getTabKonnemeisai().getTplKonnedo().getTxtsaitkippankaiekikin();
     }
 
     @JsonIgnore
     public Label getLblkoshiryooyobitesuryo() {
-        return this.getTabKonnemeisai().getTabKonnedo().getLblkoshiryooyobitesuryo();
+        return this.getTabKonnemeisai().getTplKonnedo().getLblkoshiryooyobitesuryo();
     }
 
     @JsonIgnore
     public TextBoxNum getTxtkoshiyohigokei() {
-        return this.getTabKonnemeisai().getTabKonnedo().getTxtkoshiyohigokei();
+        return this.getTabKonnemeisai().getTplKonnedo().getTxtkoshiyohigokei();
     }
 
     @JsonIgnore
     public TextBoxNum getTxtkosaishutsugokei() {
-        return this.getTabKonnemeisai().getTabKonnedo().getTxtkosaishutsugokei();
+        return this.getTabKonnemeisai().getTplKonnedo().getTxtkosaishutsugokei();
     }
 
     @JsonIgnore
-    public tabJisshitsushiharaiDiv getTabJisshitsushiharai() {
-        return this.getTabJisshitsushiharaimeisai().getTabJisshitsushiharai();
+    public tplJisshitsushiharaiDiv getTplJisshitsushiharai() {
+        return this.getTabJisshitsushiharaimeisai().getTplJisshitsushiharai();
     }
 
     @JsonIgnore
-    public void  setTabJisshitsushiharai(tabJisshitsushiharaiDiv tabJisshitsushiharai) {
-        this.getTabJisshitsushiharaimeisai().setTabJisshitsushiharai(tabJisshitsushiharai);
+    public void  setTplJisshitsushiharai(tplJisshitsushiharaiDiv tplJisshitsushiharai) {
+        this.getTabJisshitsushiharaimeisai().setTplJisshitsushiharai(tplJisshitsushiharai);
     }
 
     @JsonIgnore
     public Label getLblshitsusainyugokei() {
-        return this.getTabJisshitsushiharaimeisai().getTabJisshitsushiharai().getLblshitsusainyugokei();
+        return this.getTabJisshitsushiharaimeisai().getTplJisshitsushiharai().getLblshitsusainyugokei();
     }
 
     @JsonIgnore
     public TextBoxNum getTxtshitsusainyugokei() {
-        return this.getTabJisshitsushiharaimeisai().getTabJisshitsushiharai().getTxtshitsusainyugokei();
+        return this.getTabJisshitsushiharaimeisai().getTplJisshitsushiharai().getTxtshitsusainyugokei();
     }
 
     @JsonIgnore
     public Label getLblshitsusaishutsugokei() {
-        return this.getTabJisshitsushiharaimeisai().getTabJisshitsushiharai().getLblshitsusaishutsugokei();
+        return this.getTabJisshitsushiharaimeisai().getTplJisshitsushiharai().getLblshitsusaishutsugokei();
     }
 
     @JsonIgnore
     public TextBoxNum getTxtshitsusaishutsugokei() {
-        return this.getTabJisshitsushiharaimeisai().getTabJisshitsushiharai().getTxtshitsusaishutsugokei();
+        return this.getTabJisshitsushiharaimeisai().getTplJisshitsushiharai().getTxtshitsusaishutsugokei();
     }
 
     @JsonIgnore
     public Label getLblshitsusainyusaishutsusa() {
-        return this.getTabJisshitsushiharaimeisai().getTabJisshitsushiharai().getLblshitsusainyusaishutsusa();
+        return this.getTabJisshitsushiharaimeisai().getTplJisshitsushiharai().getLblshitsusainyusaishutsusa();
     }
 
     @JsonIgnore
     public TextBoxNum getTxtshitsusainyusaishutsusa() {
-        return this.getTabJisshitsushiharaimeisai().getTabJisshitsushiharai().getTxtshitsusainyusaishutsusa();
+        return this.getTabJisshitsushiharaimeisai().getTplJisshitsushiharai().getTxtshitsusainyusaishutsusa();
     }
 
     @JsonIgnore
     public Label getLblshitsuseisangozangaku() {
-        return this.getTabJisshitsushiharaimeisai().getTabJisshitsushiharai().getLblshitsuseisangozangaku();
+        return this.getTabJisshitsushiharaimeisai().getTplJisshitsushiharai().getLblshitsuseisangozangaku();
     }
 
     @JsonIgnore
     public TextBoxNum getTxtshitsuseisangozangaku() {
-        return this.getTabJisshitsushiharaimeisai().getTabJisshitsushiharai().getTxtshitsuseisangozangaku();
+        return this.getTabJisshitsushiharaimeisai().getTplJisshitsushiharai().getTxtshitsuseisangozangaku();
     }
 
     // </editor-fold>

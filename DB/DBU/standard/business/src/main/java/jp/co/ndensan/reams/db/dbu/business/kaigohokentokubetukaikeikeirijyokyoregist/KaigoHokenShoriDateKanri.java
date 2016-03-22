@@ -5,6 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbu.business.kaigohokentokubetukaikeikeirijyokyoregist;
 
+import java.io.Serializable;
 import jp.co.ndensan.reams.db.dbu.entity.kaigohokentokubetukaikeikeirijyokyoregist.KaigoHokenShoriDateKanriEntity;
 import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.kyotsu.JigyoHokokuNenpoShoriName;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
@@ -19,7 +20,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
  *
  * 処理日付管理マスタを管理するビジネスです。
  */
-public class KaigoHokenShoriDateKanri {
+public class KaigoHokenShoriDateKanri implements Serializable {
 
     private final KaigoHokenShoriDateKanriEntity 処理日付管理マスタ;
 
@@ -185,4 +186,30 @@ public class KaigoHokenShoriDateKanri {
     public LasdecCode get市町村コード() {
         return 処理日付管理マスタ.get市町村コード();
     }
+
+    /**
+     * {@link JigyoHokokuTokeiData}のシリアライズ形式を提供します。
+     *
+     * @return {@link JigyoHokokuTokeiData}のシリアライズ形式
+     */
+    protected Object writeReplace() {
+        return new _SerializationProxy(処理日付管理マスタ);
+
+    }
+
+    private static final class _SerializationProxy implements Serializable {
+
+        // TODO serialVersionUIDを生成してください
+        private static final long serialVersionUID = 1;
+        private final KaigoHokenShoriDateKanriEntity entity;
+
+        private _SerializationProxy(KaigoHokenShoriDateKanriEntity entity) {
+            this.entity = entity;
+        }
+
+        private Object readResolve() {
+            return new KaigoHokenShoriDateKanri(this.entity);
+        }
+    }
+
 }
