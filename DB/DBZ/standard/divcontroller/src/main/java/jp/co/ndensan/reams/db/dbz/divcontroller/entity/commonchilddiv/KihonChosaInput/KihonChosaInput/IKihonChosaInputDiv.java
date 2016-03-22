@@ -4,11 +4,12 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.binding.ICommonChildDivBaseProperties;
+import jp.co.ndensan.reams.uz.uza.ui.binding.IDialogDiv;
 
 /*
  * このコードはツールによって生成されました。
  */
-public interface IKihonChosaInputDiv extends ICommonChildDivBaseProperties {
+public interface IKihonChosaInputDiv extends ICommonChildDivBaseProperties, IDialogDiv {
 
     /**
      * 共有子Divの状態を初期化します。
