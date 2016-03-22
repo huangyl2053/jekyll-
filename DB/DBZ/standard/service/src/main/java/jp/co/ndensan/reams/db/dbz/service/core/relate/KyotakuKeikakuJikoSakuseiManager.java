@@ -13,7 +13,7 @@ import jp.co.ndensan.reams.db.dbz.business.core.basic.YoboKeikakuJikoSakuseiMeis
 import jp.co.ndensan.reams.db.dbz.definition.mybatisprm.relate.KyotakuKeikakuJikoSakuseiMapperParameter;
 import jp.co.ndensan.reams.db.dbz.entity.db.relate.KyotakuKeikakuJikoSakuseiEntity;
 import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT3007KyotakuKeikakuJikoSakuseiDac;
-import jp.co.ndensan.reams.db.dbz.persistence.db.mapper.relate.IKyotakuKeikakuJikoSakuseiMapper;
+import jp.co.ndensan.reams.db.dbz.persistence.db.mapper.relate.kyotakukeikaku.IKyotakuKeikakuJikoSakuseiMapper;
 import jp.co.ndensan.reams.db.dbz.service.core.MapperProvider;
 import jp.co.ndensan.reams.db.dbz.service.core.basic.KyotakuKeikakuJikosakuseiMeisaiManager;
 import jp.co.ndensan.reams.db.dbz.service.core.basic.YoboKeikakuJikoSakuseiMeisaiManager;

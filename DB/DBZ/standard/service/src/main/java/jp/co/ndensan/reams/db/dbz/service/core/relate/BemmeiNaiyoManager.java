@@ -12,7 +12,7 @@ import jp.co.ndensan.reams.db.dbz.business.core.basic.BemmeishaJoho;
 import jp.co.ndensan.reams.db.dbz.definition.mybatisprm.relate.BemmeiNaiyoMapperParameter;
 import jp.co.ndensan.reams.db.dbz.entity.db.relate.BemmeiNaiyoEntity;
 import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT7002BemmeiNaiyoDac;
-import jp.co.ndensan.reams.db.dbz.persistence.db.mapper.relate.IBemmeiNaiyoMapper;
+import jp.co.ndensan.reams.db.dbz.persistence.db.mapper.relate.bemmeinaiyo.IBemmeiNaiyoMapper;
 import jp.co.ndensan.reams.db.dbz.service.core.MapperProvider;
 import jp.co.ndensan.reams.db.dbz.service.core.basic.BemmeishaJohoManager;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
