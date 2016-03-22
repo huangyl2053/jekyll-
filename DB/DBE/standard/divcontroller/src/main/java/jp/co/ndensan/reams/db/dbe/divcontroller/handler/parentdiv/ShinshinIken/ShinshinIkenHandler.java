@@ -916,7 +916,7 @@ public class ShinshinIkenHandler {
                     モード判断_意見項目(item);
                     break;
                 case 性的問題行動:
-                    幻視幻聴flag = true;
+                    性的問題行動flag = true;
                     selectKey.addAll(setCheckBox(item, チェックボックス_11));
                     モード判断_意見項目(item);
                     break;
@@ -1926,8 +1926,10 @@ public class ShinshinIkenHandler {
             return IkenKomoku02.C1.getコード();
         } else if (チェックボックス_9.equals(key)) {
             return IkenKomoku02.C2.getコード();
-        } else {
+        } else if (チェックボックス_10.equals(key)) {
             return IkenKomoku02.未記入.getコード();
+        } else {
+            return IkenKomoku01.無.getコード();
         }
     }
 
