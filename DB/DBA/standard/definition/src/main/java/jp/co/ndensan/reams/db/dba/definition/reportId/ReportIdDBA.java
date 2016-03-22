@@ -192,11 +192,11 @@ public enum ReportIdDBA {
      */
     DBA100005(new ReportId("DBA100005_JushochitokureiShisetsuTaishoTsuchisho"), new RString("介護保険住所地特例施設退所通知書")),
     /**
-     * 介護保険住所地特例施設退所通知書の帳票ＩＤです。
+     * 介護保険住所地特例施設変更通知書の帳票ＩＤです。
      */
     DBA100006(new ReportId("DBA100006_JushochitokureiShisetsuHenkoTsuchisho"), new RString("介護保険住所地特例施設変更通知書")),
     /**
-     * 介護保険住所地特例施設退所通知書の帳票ＩＤです。
+     * 介護保険他市町村住所地特例者連絡票の帳票ＩＤです。
      */
     DBA100007(new ReportId("DBA100007_TashichosonJushochitokureishaRenrakuhyo"), new RString("介護保険他市町村住所地特例者連絡票")),
     /**
