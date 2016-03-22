@@ -41,7 +41,7 @@ public class ShisetSunyushoInfoHandler {
             div.getTxtNyushoShisetsuCode().setValue(
                     shinsakaij.get入所施設コード() == null ? RString.EMPTY : shinsakaij.get入所施設コード().value());
             div.getTxtNyushoShisetsuName().setValue(
-                    shinsakaij.get事業者名称() == null ? RString.EMPTY : new RString(shinsakaij.get事業者名称().toString()));
+                    shinsakaij.get事業者名称() == null ? RString.EMPTY : shinsakaij.get事業者名称().value());
             div.getTxtShisetsunyuShoDay().setValue(shinsakaij.get入所年月日());
             div.getTxtShisetsuTaishoDay().setValue(shinsakaij.get退所年月日());
         }
