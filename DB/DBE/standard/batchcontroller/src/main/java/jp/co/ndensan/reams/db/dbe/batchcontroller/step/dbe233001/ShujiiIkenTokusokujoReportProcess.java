@@ -75,6 +75,7 @@ public class ShujiiIkenTokusokujoReportProcess extends BatchProcessBase<ShujiiIk
 
     @Override
     protected void initialize() {
+        bodyItemList = new ArrayList();
         shinseishoKanriNoList = new ArrayList<>();
         outShinseishoKanriNoList = new OutputParameter<>();
         super.initialize();
