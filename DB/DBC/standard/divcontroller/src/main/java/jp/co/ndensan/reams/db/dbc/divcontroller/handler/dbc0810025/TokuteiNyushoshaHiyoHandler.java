@@ -6,6 +6,8 @@
 package jp.co.ndensan.reams.db.dbc.divcontroller.handler.dbc0810025;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbc.business.core.basic.ShikibetsuNoKanri;
 import jp.co.ndensan.reams.db.dbc.business.core.basic.ShokanTokuteiNyushoshaKaigoServiceHiyo;
@@ -163,12 +165,21 @@ public class TokuteiNyushoshaHiyoHandler {
         RString serviceCodeKoumoku = new RString(row.getDefaultDataName1().subSequence(2, SIX).toString());
         div.getPanelTokutei().getPanelMeisai().getTxtServiceCodeShuruyi().setValue(serviceCodeShuruyi);
         div.getPanelTokutei().getPanelMeisai().getTxtServiceCodeKoumoku().setValue(serviceCodeKoumoku);
-        List<KaigoServiceNaiyou> serviceCode = ShokanbaraiJyokyoShokai.createInstance().getServiceCodeInfo(
+        List<KaigoServiceNaiyou> serviceCodeList = ShokanbaraiJyokyoShokai.createInstance().getServiceCodeInfo(
                 new KaigoServiceShuruiCode(serviceCodeShuruyi),
                 serviceCodeKoumoku,
                 ViewStateHolder.get(ViewStateKeys.サービス年月, FlexibleYearMonth.class));
-        if (serviceCode != null && serviceCode.get(0).getサービス名称() != null) {
-            div.getPanelTokutei().getPanelMeisai().getTxtServiceName().setValue(serviceCode.get(0).getサービス名称());
+        if (serviceCodeList != null) {
+            Collections.sort(serviceCodeList, new Comparator<KaigoServiceNaiyou>() {
+                @Override
+                public int compare(KaigoServiceNaiyou o1, KaigoServiceNaiyou o2) {
+                    return o2.get提供開始年月().compareTo(o1.get提供開始年月());
+                }
+            });
+            if (serviceCodeList.get(0).getサービス名称() != null) {
+                div.getPanelTokutei().getPanelMeisai().getTxtServiceName().setValue(
+                        serviceCodeList.get(0).getサービス名称());
+            }
         }
         div.getPanelTokutei().getPanelMeisai().getTxtHyojyuntanka().setValue(row.getDefaultDataName2().getValue());
         div.getPanelTokutei().getPanelMeisai().getTxtFutangenndogaku().setValue(row.getDefaultDataName3().getValue());
