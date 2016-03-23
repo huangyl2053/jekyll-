@@ -203,43 +203,6 @@ public class BenmeiTorokuManager {
     }
 
     /**
-     * 弁明登録情報の修正処理を行うです 。
-     *
-     * @param fufukuMoshitate 不服審査申立情報
-     * @param bemmeiNaiyo 弁明内容
-     * @param bemmeishaJoho 弁明者情報
-     * @return boolean
-     */
-    @Transaction
-    public boolean updBenmeiTorokuJoho(FufukuMoshitate fufukuMoshitate, BemmeiNaiyo bemmeiNaiyo, BemmeishaJoho bemmeishaJoho) {
-        boolean blnDbT7001 = getFufukuMoshitateUPD(fufukuMoshitate);
-        boolean blnDbT7002 = getBemmeiNaiyoUPD(bemmeiNaiyo);
-        boolean blnDbT7003 = getBemmeishaJohoUPD(bemmeishaJoho);
-        return blnDbT7001 && blnDbT7002 && blnDbT7003;
-    }
-
-    private boolean getFufukuMoshitateUPD(FufukuMoshitate fufukuMoshitate) {
-        DbT7001FufukuMoshitateEntity dbT7001FufukuMoshitateEntity = fufukuMoshitate.toEntity();
-        dbT7001FufukuMoshitateEntity.setState(EntityDataState.Modified);
-        int 戻る値 = dbT7001FufukuMoshitateDac.save(dbT7001FufukuMoshitateEntity);
-        return 戻る値 == 1;
-    }
-
-    private boolean getBemmeiNaiyoUPD(BemmeiNaiyo bemmeiNaiyo) {
-        DbT7002BemmeiNaiyoEntity bemmeiNaiyoEntity = bemmeiNaiyo.toEntity();
-        bemmeiNaiyoEntity.setState(EntityDataState.Modified);
-        int 戻る値 = dbT7002BemmeiNaiyoDac.saveOrDelete(bemmeiNaiyoEntity);
-        return 戻る値 == 1;
-    }
-
-    private boolean getBemmeishaJohoUPD(BemmeishaJoho bemmeishaJoho) {
-        DbT7003BemmeishaJohoEntity bemmeishaJohoEntity = bemmeishaJoho.toEntity();
-        bemmeishaJohoEntity.setState(EntityDataState.Modified);
-        int 戻る値 = dbT7003BemmeishaJohoDac.saveOrDelete(bemmeishaJohoEntity);
-        return 戻る値 == 1;
-    }
-
-    /**
      * 弁明登録情報の削除処理を行うです 。
      *
      * @param fufukuMoshitate 不服審査申立情報
@@ -257,8 +220,8 @@ public class BenmeiTorokuManager {
 
     private boolean getFufukuMoshitateDEL(FufukuMoshitate fufukuMoshitate) {
         DbT7001FufukuMoshitateEntity dbT7001FufukuMoshitateEntity = fufukuMoshitate.toEntity();
-        dbT7001FufukuMoshitateEntity.setState(EntityDataState.Modified);
-        int 戻る値 = dbT7001FufukuMoshitateDac.save(dbT7001FufukuMoshitateEntity);
+        dbT7001FufukuMoshitateEntity.setState(EntityDataState.Deleted);
+        int 戻る値 = dbT7001FufukuMoshitateDac.saveOrDelete(dbT7001FufukuMoshitateEntity);
         return 戻る値 == 1;
     }
 

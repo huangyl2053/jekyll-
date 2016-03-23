@@ -126,4 +126,17 @@ public class DbT7001FufukuMoshitateDac implements ISaveable<DbT7001FufukuMoshita
                 order(by(DbT7001FufukuMoshitate.shinsaSeikyuTodokedeYMD, Order.DESC)).
                 toList(DbT7001FufukuMoshitateEntity.class);
     }
+
+    /**
+     * DbT7001FufukuMoshitateEntityを登録します。状態によってinsert/update/delete処理に振り分けられます。
+     *
+     * @param entity entity
+     * @return 件数
+     */
+    @Transaction
+    public int saveOrDelete(DbT7001FufukuMoshitateEntity entity) {
+        requireNonNull(entity, UrSystemErrorMessages.値がnull.getReplacedMessage("不服審査申立情報エンティティ"));
+
+        return DbAccessors.saveOrDeletePhysicalBy(new DbAccessorNormalType(session), entity);
+    }
 }
