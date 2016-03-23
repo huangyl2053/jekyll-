@@ -7,6 +7,7 @@ import jp.co.ndensan.reams.db.dba.business.report.nenreitotatsuyoteishaichiranhy
 import jp.co.ndensan.reams.db.dba.business.report.nenreitotatsuyoteishaichiranhyo.NenreitotatsuYoteishaIchiranhyoItem;
 import jp.co.ndensan.reams.db.dba.entity.db.nenreitoutatsuyoteishachecklist.NenreiToutatsuYoteishaCheckListEntity;
 import jp.co.ndensan.reams.db.dba.entity.db.nenreitoutatsuyoteishachecklist.NenreiToutatsuYoteishaCheckListJyohoEntity;
+import jp.co.ndensan.reams.db.dbz.definition.core.seibetsu.Seibetsu;
 import jp.co.ndensan.reams.ur.urz.definition.core.shikibetsutaisho.JuminShubetsu;
 import jp.co.ndensan.reams.uz.uza.lang.EraType;
 import jp.co.ndensan.reams.uz.uza.lang.FillType;
@@ -23,10 +24,6 @@ import jp.co.ndensan.reams.uz.uza.lang.Separator;
  */
 public class NenreiTotatsuYoteishaCheckListChohyo {
 
-    private static final RString 性別コード1 = new RString("1");
-    private static final RString 性別コード2 = new RString("2");
-    private static final RString SEX_MAN = new RString("男");
-    private static final RString SEX_WOMAN = new RString("女");
     private static NenreitotatsuYoteishaIchiranhyoItem item;
     private static NenreitotatsuYoteishaIchiranhyoHeadItem headItem;
     private final List<NenreitotatsuYoteishaIchiranhyoBodyItem> bodyItemList = new ArrayList<>();
@@ -87,10 +84,10 @@ public class NenreiTotatsuYoteishaCheckListChohyo {
             RString カナ氏名 = checkList.getKanaMeisho();
             RString 氏名 = checkList.getMeisho();
             RString 性別 = RString.EMPTY;
-            if (性別コード1.equals(checkList.getSeibetsuCode())) {
-                性別 = SEX_MAN;
-            } else if (性別コード2.equals(checkList.getSeibetsuCode())) {
-                性別 = SEX_WOMAN;
+            if (Seibetsu.男.getコード().equals(checkList.getSeibetsuCode())) {
+                性別 = Seibetsu.男.get名称();
+            } else if (Seibetsu.女.getコード().equals(checkList.getSeibetsuCode())) {
+                性別 = Seibetsu.女.get名称();
             }
             RString 生年月日 = checkList.getSeinengappiYMD() == null || checkList.getSeinengappiYMD().isEmpty() ? RString.EMPTY
                     : checkList.getSeinengappiYMD().wareki().eraType(EraType.KANJI_RYAKU).firstYear(
