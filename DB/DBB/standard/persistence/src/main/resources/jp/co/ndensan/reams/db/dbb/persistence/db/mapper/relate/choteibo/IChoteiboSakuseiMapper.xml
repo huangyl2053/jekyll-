@@ -69,16 +69,6 @@
         AND A."fukaNendo" = #{fukaNendo}
         AND #{chushutsuStYMD} <![CDATA[<=]]> A."choteiNichiji"
         AND A."choteiNichiji" <![CDATA[<]]> #{chushutsuEdYMD}
-        GROUP BY
-        A."choteiNendo",
-        A."fukaNendo",
-        A."tsuchishoNo",
-        A."rirekiNo",
-        A."hihokenshaNo",
-        B."choshuHouhou",
-        B."ki",
-        B."choteiId",
-        C."choteigaku"
     </select>
 
     <!--期別情報一時テーブルを作成します -->
@@ -211,15 +201,6 @@
         AND A."fukaNendo" = #{fukaNendo}
         AND #{chushutsuStYMD} <![CDATA[<=]]> A."choteiNichiji"
         AND A."choteiNichiji" <![CDATA[<]]> #{chushutsuEdYMD}
-        GROUP BY
-        A."choteiNendo",
-        A."fukaNendo",
-        A."tsuchishoNo",
-        A."rirekiNo",
-        A."hihokenshaNo",
-        B."choshuHouhou",
-        B."choteiId",
-        C."choteigaku"
     </select>
 
     <!-- 前月末の段階データをキー検索で取得します。 -->
@@ -281,15 +262,6 @@
         A."choteiNendo" = #{choteiNendo}
         AND A."fukaNendo" = #{fukaNendo}
         AND A."choteiNichiji" <![CDATA[<=]]> #{chushutsuStYMD}
-        GROUP BY
-        A."choteiNendo",
-        A."fukaNendo",
-        A."tsuchishoNo",
-        A."rirekiNo",
-        A."hihokenshaNo",
-        B."choshuHouhou",
-        B."choteiId",
-        C."choteigaku"
     </select>
 
     <!--段階情報一時テーブルを作成します -->
@@ -414,6 +386,7 @@
     <resultMap id="resultMap_NaiheisyaKensuEntity" type="jp.co.ndensan.reams.db.dbb.entity.db.relate.choteibo.NaiheisyaKensuEntity" autoMapping="true">
         <id property="choteiNendo" column="choteiNendo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleYearTypeHandler"/>
         <id property="fukaNendo" column="fukaNendo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleYearTypeHandler"/>
+        <id property="choshuHouhou" column="choshuHouhou" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <id property="dankai" column="dankai" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="naiheisyaKensu" column="naiheisyaKensu" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
     </resultMap>
@@ -423,6 +396,7 @@
         COUNT(T."hihokenshaNo") AS "naiheisyaKensu",
         T."choteiNendo",
         T."fukaNendo",
+        T."choshuHouhou",
         T."dankai"
         FROM
         (SELECT
@@ -436,17 +410,13 @@
         WHERE
         A."choteiNendo" = #{choteiNendo}
         AND A."fukaNendo" = #{fukaNendo}
-        GROUP BY
-        A."hihokenshaNo",
-        A."choteiNendo",
-        A."fukaNendo",
-        A."dankai",
-        A."choshuHouhou"
-        HAVING COUNT(A."choshuHouhou") <![CDATA[>]]> 1
+        AND A."choshuHouhou" = '2'
+        AND A."dogetsuFlag" = 1
         )AS T
         GROUP BY
         T."choteiNendo",
         T."fukaNendo",
+        T."choshuHouhou",
         T."dankai"
     </select>
 
@@ -950,8 +920,7 @@
         )
         GROUP BY
         A."choteiNendo",
-        A."fukaNendo",
-        A."tsuchishoNo"
+        A."fukaNendo"
     </select>
 
     <!-- 期別合計一時テーブルに減免の件数と減免額の更新します。-->
@@ -991,7 +960,6 @@
         GROUP BY
         A."choteiNendo",
         A."fukaNendo"
-
     </select>
     <!-- 期別合計一時テーブルに特徴歳出還付の件数と特徴歳出還付の調定額の更新します。-->
     <update id="update特徴歳出還付" parameterType="jp.co.ndensan.reams.db.dbb.entity.db.relate.choteibo.SaishutsuKampuEntity">
@@ -1248,7 +1216,6 @@
         )
         AND A."dogetsuFlag" = #{dogetsuFlag}
         GROUP BY
-        A."choteiNendo",
         A."choshuHouhou",
         A."dankai",
         A."dogetsuFlag"
@@ -1298,7 +1265,6 @@
         )
         AND A."dogetsuFlag" = #{dogetsuFlag}
         GROUP BY
-        A."choteiNendo",
         A."choshuHouhou",
         A."dankai",
         A."dogetsuFlag"
@@ -1344,7 +1310,6 @@
         (A."fukaNendo" = #{zenzenNendo})
         )
         GROUP BY
-        A."choteiNendo",
         A."choshuHouhou",
         A."dankai"
     </select>
