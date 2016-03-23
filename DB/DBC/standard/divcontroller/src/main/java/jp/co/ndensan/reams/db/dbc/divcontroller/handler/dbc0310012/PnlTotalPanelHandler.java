@@ -8,6 +8,7 @@ package jp.co.ndensan.reams.db.dbc.divcontroller.handler.dbc0310012;
 import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbc.business.core.basic.ShokanJuryoininKeiyakusha;
+import jp.co.ndensan.reams.db.dbc.business.core.basic.ShokanJuryoininKeiyakushaBuilder;
 import jp.co.ndensan.reams.db.dbc.definition.core.keiyakuservice.KeiyakuServiceShurui;
 import jp.co.ndensan.reams.db.dbc.definition.core.shikyushinseishoumu.ShikyushinseishoUmuKubun;
 import jp.co.ndensan.reams.db.dbc.definition.core.shoninkubun.ShoninKubun;
@@ -113,10 +114,8 @@ public class PnlTotalPanelHandler {
      * @param shokanData ShokanJuryoininKeiyakusha
      */
     public void set初期データ(ShokanJuryoininKeiyakusha shokanData) {
-        if (shokanData.get受付年月日() != null && !shokanData.get受付年月日().isEmpty()) {
-            div.getPnlCommon().getPnlDetail().getTxtKeyakushinseuketukebi()
-                    .setValue(new RDate(shokanData.get受付年月日().toString()));
-        }
+        div.getPnlCommon().getPnlDetail().getTxtKeyakushinseuketukebi()
+                .setValue(new RDate(shokanData.get受付年月日().toString()));
         div.getPnlCommon().getPnlDetail().getTxtKeyakushinseibi()
                 .setValue(new RDate(shokanData.get申請年月日().toString()));
         div.getPnlCommon().getPnlDetail().getTxtKeyakujigyosyaNo()
@@ -266,26 +265,27 @@ public class PnlTotalPanelHandler {
      * @return ShokanJuryoininKeiyakusha
      */
     private ShokanJuryoininKeiyakusha build契約者情報(ShokanJuryoininKeiyakusha shokan) {
-        shokan = shokan.createBuilderForEdit().set受付年月日(new FlexibleDate(div.getPnlCommon().getPnlDetail()
-                .getTxtKeyakushinseuketukebi().getValue().toDateString())).build();
+        ShokanJuryoininKeiyakushaBuilder builder = shokan.createBuilderForEdit();
+        builder.set受付年月日(new FlexibleDate(div.getPnlCommon().getPnlDetail().getTxtKeyakushinseuketukebi()
+                .getValue().toDateString()));
         if (div.getPnlCommon().getPnlDetail().getTxtKeyakukettebi().getValue() != null) {
-            shokan = shokan.createBuilderForEdit().set決定年月日(new FlexibleDate(div.getPnlCommon().getPnlDetail()
-                    .getTxtKeyakukettebi().getValue().toDateString())).build();
+            builder.set決定年月日(new FlexibleDate(div.getPnlCommon().getPnlDetail()
+                    .getTxtKeyakukettebi().getValue().toDateString()));
         }
         if (ShoninKubun.承認する.getコード().equals(div.getPnlCommon().getPnlDetail()
                 .getRdoKettekubun().getSelectedKey())) {
-            shokan = shokan.createBuilderForEdit().set承認結果区分(ShoninKubun.承認する.getコード()).build();
+            builder.set承認結果区分(ShoninKubun.承認する.getコード());
         } else if (ShoninKubun.承認しない.getコード().equals(div.getPnlCommon().getPnlDetail()
                 .getRdoKettekubun().getSelectedKey())) {
-            shokan = shokan.createBuilderForEdit().set承認結果区分(ShoninKubun.承認しない.getコード()).build();
+            builder.set承認結果区分(ShoninKubun.承認しない.getコード());
         }
         if (div.getPnlCommon().getPnlDetail().getPnlHidari().getTxtSyoninkikan().getFromValue() != null) {
-            shokan = shokan.createBuilderForEdit().set受領委任払適用開始年月日(new FlexibleDate(div.getPnlCommon()
-                    .getPnlDetail().getPnlHidari().getTxtSyoninkikan().getFromValue().toDateString())).build();
+            builder.set受領委任払適用開始年月日(new FlexibleDate(div.getPnlCommon().getPnlDetail().getPnlHidari()
+                    .getTxtSyoninkikan().getFromValue().toDateString()));
         }
         if (div.getPnlCommon().getPnlDetail().getPnlHidari().getTxtSyoninkikan().getToValue() != null) {
-            shokan = shokan.createBuilderForEdit().set受領委任払適用終了年月日(new FlexibleDate(div.getPnlCommon()
-                    .getPnlDetail().getPnlHidari().getTxtSyoninkikan().getToValue().toDateString())).build();
+            builder.set受領委任払適用終了年月日(new FlexibleDate(div.getPnlCommon().getPnlDetail().getPnlHidari()
+                    .getTxtSyoninkikan().getToValue().toDateString()));
         }
         if (ShoninKubun.承認する.getコード().equals(div.getPnlCommon().getPnlDetail()
                 .getRdoKettekubun().getSelectedKey())) {
@@ -293,29 +293,27 @@ public class PnlTotalPanelHandler {
             rsb.append(div.getPnlCommon().getPnlDetail().getPnlHidari().getDdlYear().getSelectedValue());
             rsb.append(div.getPnlCommon().getPnlDetail().getPnlHidari().getTxtBango1().getValue());
             rsb.append(div.getPnlCommon().getPnlDetail().getPnlHidari().getTxtBango2().getValue());
-            shokan = shokan.createBuilderForEdit().set契約番号(rsb.toRString()).build();
+            builder.set契約番号(rsb.toRString());
         }
-        shokan = shokan.createBuilderForEdit().set不承認理由(div.getPnlCommon().getPnlDetail()
-                .getTxtFusyoninriyu().getValue()).build();
-        shokan = shokan.createBuilderForEdit().set費用額合計(div.getPnlCommon().getPnlDetail().getPnlKyufuhi()
+        builder.set不承認理由(div.getPnlCommon().getPnlDetail().getTxtFusyoninriyu().getValue());
+        builder.set費用額合計(div.getPnlCommon().getPnlDetail().getPnlKyufuhi()
                 .getTxtHiyogakugokei().getValue() == null ? Decimal.ZERO : div.getPnlCommon().getPnlDetail()
-                .getPnlKyufuhi().getTxtHiyogakugokei().getValue()).build();
-        shokan = shokan.createBuilderForEdit().set保険対象費用額(div.getPnlCommon().getPnlDetail().getPnlKyufuhi()
+                .getPnlKyufuhi().getTxtHiyogakugokei().getValue());
+        builder.set保険対象費用額(div.getPnlCommon().getPnlDetail().getPnlKyufuhi()
                 .getTxtHokentaisyohiyogaku().getValue() == null ? Decimal.ZERO : div.getPnlCommon().getPnlDetail()
-                .getPnlKyufuhi().getTxtHokentaisyohiyogaku().getValue()).build();
-        shokan = shokan.createBuilderForEdit().set利用者自己負担額(div.getPnlCommon().getPnlDetail().getPnlKyufuhi()
+                .getPnlKyufuhi().getTxtHokentaisyohiyogaku().getValue());
+        builder.set利用者自己負担額(div.getPnlCommon().getPnlDetail().getPnlKyufuhi()
                 .getTxtRiyosyajikofutangaku().getValue() == null ? Decimal.ZERO : div.getPnlCommon().getPnlDetail()
-                .getPnlKyufuhi().getTxtRiyosyajikofutangaku().getValue()).build();
-        shokan = shokan.createBuilderForEdit().set保険給付費額(div.getPnlCommon().getPnlDetail().getPnlKyufuhi()
+                .getPnlKyufuhi().getTxtRiyosyajikofutangaku().getValue());
+        builder.set保険給付費額(div.getPnlCommon().getPnlDetail().getPnlKyufuhi()
                 .getTxtHokenkyufuhiyogaku().getValue() == null ? Decimal.ZERO : div.getPnlCommon().getPnlDetail()
-                .getPnlKyufuhi().getTxtHokenkyufuhiyogaku().getValue()).build();
+                .getPnlKyufuhi().getTxtHokenkyufuhiyogaku().getValue());
         if (div.getPnlCommon().getPnlDetail().getPnlHidari().getChkSaihakoukubun().isAllSelected()) {
-            shokan = shokan.createBuilderForEdit().set承認結果通知書再発行区分(new RString("1")).build();
+            builder.set承認結果通知書再発行区分(new RString("1"));
         } else {
-            shokan = shokan.createBuilderForEdit().set承認結果通知書再発行区分(new RString("0")).build();
+            builder.set承認結果通知書再発行区分(new RString("0"));
         }
-        shokan = shokan.createBuilderForEdit().set備考(div.getPnlCommon().getPnlDetail().getPnlFoot()
-                .getTxtBikou().getValue()).build();
-        return shokan;
+        builder.set備考(div.getPnlCommon().getPnlDetail().getPnlFoot().getTxtBikou().getValue());
+        return builder.build();
     }
 }
