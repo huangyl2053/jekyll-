@@ -15,7 +15,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
  */
 public class ZenkaiNinteiKekkaJohoRelate {
     
-    private ZenkaiNinteiKekkaJohoRelateEntity entity;
+    private final ZenkaiNinteiKekkaJohoRelateEntity entity;
     
     /**
      * コンストラクタです。

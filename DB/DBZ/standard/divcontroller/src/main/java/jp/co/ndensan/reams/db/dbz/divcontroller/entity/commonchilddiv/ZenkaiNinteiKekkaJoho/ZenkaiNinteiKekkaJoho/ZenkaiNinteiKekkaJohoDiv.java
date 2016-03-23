@@ -8,7 +8,6 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import java.util.HashSet;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
-import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Button;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Mode;
@@ -286,14 +285,12 @@ public class ZenkaiNinteiKekkaJohoDiv extends Panel implements IZenkaiNinteiKekk
      * @param subGyomuCode 画面モード
      * @param shinseishoKanriNo 申請書管理番号
      * @param 参照結果 参照結果
-     * @return ResponseData<ZenkaiNinteiKekkaJohoDiv>
      */
     @Override
-    public ResponseData<ZenkaiNinteiKekkaJohoDiv> onLoad(SubGyomuCode subGyomuCode,
+    public void onLoad(SubGyomuCode subGyomuCode,
             ShinseishoKanriNo shinseishoKanriNo,
             RString 参照結果) {
         getHandler().onLoad(subGyomuCode, shinseishoKanriNo, 参照結果);
-        return ResponseData.of(this).respond();
     }
     
     
