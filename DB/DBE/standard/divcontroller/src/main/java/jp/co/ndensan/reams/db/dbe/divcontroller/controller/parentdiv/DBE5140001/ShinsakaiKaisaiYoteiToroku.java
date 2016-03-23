@@ -344,9 +344,9 @@ public class ShinsakaiKaisaiYoteiToroku {
         this.div = div;
         List<ShinsakaiKaisaiYoteiJohoParameter> removeList = new ArrayList<>();
         for (ShinsakaiKaisaiYoteiJohoParameter entity2 : yoteiJohoEntityList2) {
-            if (!entity2.is存在()) {
+            if (!entity2.is存在() && div.getTxtSeteibi().getText().equals(new RString(entity2.get日付().toString()))) {
                 removeList.add(entity2);
-            } else {
+            } else if (entity2.is存在() && div.getTxtSeteibi().getText().equals(new RString(entity2.get日付().toString()))) {
                 setClear(entity2);
             }
         }
