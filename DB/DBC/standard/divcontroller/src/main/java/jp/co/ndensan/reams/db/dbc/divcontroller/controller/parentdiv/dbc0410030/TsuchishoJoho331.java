@@ -5,12 +5,14 @@
  */
 package jp.co.ndensan.reams.db.dbc.divcontroller.controller.parentdiv.dbc0410030;
 
+import jp.co.ndensan.reams.db.dbc.definition.batchprm.kogakukyufutaishoshain.KogakuKyufuTaishoshaInBatchParameter;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0410030.TsuchishoJoho331Div;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.ChohyoBunruiKanri;
 import jp.co.ndensan.reams.db.dbz.service.core.basic.ChohyoBunruiKanriManager;
 import jp.co.ndensan.reams.uz.uza.biz.ReportId;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
@@ -37,17 +39,15 @@ public class TsuchishoJoho331 {
      * @param div TsuchishoJoho331Div
      * @return ResponseData
      */
-    public ResponseData<TsuchishoJoho331Div> onClick_btnExcute(TsuchishoJoho331Div div) {
-        // TODO
-//            RDate 処理年月 = div.getCcdKokurenJohoTorikomi().get処理年月();
-//            RString 再処理区分 = div.getCcdKokurenJohoTorikomi().get再処理区分();
-//            long 出力順ID = div.getCcdKokurenJohoTorikomi().get出力順ID();
-//            ShokanShikyuKetteiInBacthParameter parameter = new ShokanShikyuKetteiInBacthParameter();
-//            parameter.set処理年月(処理年月  );
-//            parameter.set再処理区分(再処理区分);
-//            parameter.set出力順ID(出力順ID);
-//            return ResponseData.of(parameter).respond();
-        return ResponseData.of(div).respond();
+    public ResponseData<KogakuKyufuTaishoshaInBatchParameter> onClick_btnExcute(TsuchishoJoho331Div div) {
+        FlexibleYearMonth 処理年月 = new FlexibleYearMonth(div.getCcdKokurenJohoTorikomi().get処理年月().toString());
+        RString 再処理区分 = div.getCcdKokurenJohoTorikomi().get再処理区分();
+        Long 出力順ID = div.getCcdKokurenJohoTorikomi().get出力順ID();
+        KogakuKyufuTaishoshaInBatchParameter parameter = new KogakuKyufuTaishoshaInBatchParameter();
+        parameter.set処理年月(処理年月);
+        parameter.set再処理区分(再処理区分);
+        parameter.set出力順ID(出力順ID);
+        return ResponseData.of(parameter).respond();
     }
 
 }
