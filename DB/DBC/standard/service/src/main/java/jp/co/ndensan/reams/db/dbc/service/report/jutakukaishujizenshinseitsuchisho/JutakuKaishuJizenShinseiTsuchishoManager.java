@@ -57,8 +57,6 @@ public class JutakuKaishuJizenShinseiTsuchishoManager {
     private final MapperProvider mapperProvider;
     private final RString 汎用キー_文書番号 = new RString("文書番号");
 
-    ;
-
     /**
      * コンストラクタです。
      */
@@ -136,7 +134,7 @@ public class JutakuKaishuJizenShinseiTsuchishoManager {
                 .set業務固有キー利用区分(業務固有キー利用区分)
                 .set送付先利用区分(送付先利用区分)
                 .build();
-        SofubutsuAtesakiSource 送付物宛先 = null;
+        SofubutsuAtesakiSource 送付物宛先 = new SofubutsuAtesakiSource();
         List<IAtesaki> 宛先s = ShikibetsuTaishoService.getAtesakiFinder().get宛先s(searchKey);
         if (宛先s != null && !宛先s.isEmpty()) {
             ReportAtesakiEditor reportAtesakiEditor = new SofubutsuAtesakiEditorBuilder(宛先s.get(0)).build();
