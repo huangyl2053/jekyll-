@@ -553,8 +553,6 @@ public final class ShafukuKeigenGakuPanelHandler {
                 SyokanbaraihishikyushinseiketteParameter.class);
         HihokenshaNo 被保険者番号 = paramter.getHiHokenshaNo();
         FlexibleYearMonth サービス年月 = paramter.getServiceTeikyoYM();
-//        RString 整理番号 = paramter.getSeiriNp();
-        RString 整理番号 = Saiban.get(SubGyomuCode.DBC介護給付, SaibanHanyokeyName.償還整理番号.getコード()).nextString();
         JigyoshaNo 事業者番号 = paramter.getJigyoshaNo();
         RString 様式番号 = paramter.getYoshikiNo();
         RString 明細番号 = paramter.getMeisaiNo();
@@ -582,6 +580,8 @@ public final class ShafukuKeigenGakuPanelHandler {
                 entityList1.add(entityDeleted);
             } else if (RowState.Added.equals(row.getRowState())) {
                 max連番 = max連番 + 1;
+                RString 整理番号 = Saiban.get(SubGyomuCode.DBC介護給付, SaibanHanyokeyName.償還整理番号.getコード()).
+                        nextString();
                 ShokanShakaiFukushiHojinKeigengaku entityAdded = new ShokanShakaiFukushiHojinKeigengaku(
                         被保険者番号,
                         サービス年月,
@@ -589,7 +589,7 @@ public final class ShafukuKeigenGakuPanelHandler {
                         事業者番号,
                         様式番号,
                         明細番号,
-                        new RString(String.valueOf(max連番))).createBuilderForEdit().build();
+                        new RString(String.valueOf(max連番)).padZeroToLeft(2)).createBuilderForEdit().build();
                 entityAdded = buildAdded(entityAdded, row);
                 entityList1.add(entityAdded);
             }
