@@ -42,6 +42,10 @@ public class JukyuNinteirirekiInfoHandler {
      * @param ninteiChosaList 受給者台帳情報
      */
     public void onLoad(List<NinteiRirekiIchiranBusiness> ninteiChosaList) {
+        set受給者台帳情報(ninteiChosaList);
+    }
+
+    private void set受給者台帳情報(List<NinteiRirekiIchiranBusiness> ninteiChosaList) {
         List<dgNinteiRireki_Row> rireki_Row = new ArrayList<>();
         for (NinteiRirekiIchiranBusiness list : ninteiChosaList) {
             dgNinteiRireki_Row row = new dgNinteiRireki_Row();
@@ -67,7 +71,7 @@ public class JukyuNinteirirekiInfoHandler {
             row.getNinteiYukoShuryoYMD().setValue(list.get認定有効終了日());
             row.getNinteiYMD().setValue(list.get認定年月日());
             // QA958 旧措置者区分 KyusochishaKubun
-//            row.setKyusotuSya(list.get旧措置者フラグ());
+            // row.setKyusotuSya(list.get旧措置者フラグ());
             row.setTokuteiShippei(TokuteiShippei.toValue(list.get２号特定疾病コード().getKey()).get名称());
             row.setMinashiKubun(MinashiCode.toValue(list.getみなし区分().getKey()).get名称());
             rireki_Row.add(row);
