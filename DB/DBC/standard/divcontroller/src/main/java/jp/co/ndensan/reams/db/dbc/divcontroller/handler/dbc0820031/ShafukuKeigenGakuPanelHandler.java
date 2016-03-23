@@ -290,6 +290,7 @@ public final class ShafukuKeigenGakuPanelHandler {
     public void initializeByModify() {
         dgdShafukukeigenngaku_Row row = div.getPanelShafukukenngengaku().getDgdShafukukeigenngaku().getClickedItem();
         set選択行(row);
+        setNotReadOnly();
     }
 
     private void set選択行(dgdShafukukeigenngaku_Row row) {
@@ -321,14 +322,15 @@ public final class ShafukuKeigenGakuPanelHandler {
      * initializeByCalculation
      */
     public void initializeByCalculation() {
-        Decimal kengengakuData = new Decimal(div.getPanelShafukukenngengaku().getPanelShakaiFukushiShokai()
+        Decimal kengengakuData = new Decimal(new Decimal(div.getPanelShafukukenngengaku().getPanelShakaiFukushiShokai()
                 .getDdlKengenritsu().getSelectedValue().toString())
                 .multiply(div.getPanelShafukukenngengaku().getPanelShakaiFukushiShokai().getTxtRiyoshaFutangakuTotal()
-                        .getValue());
+                        .getValue()).intValue());
         div.getPanelShafukukenngengaku().getPanelShakaiFukushiShokai().getTxtKengengaku().setValue(kengengakuData);
-        Decimal keigengoRiyoshaFutangakuData = (div.getPanelShafukukenngengaku().getPanelShakaiFukushiShokai()
+        Decimal keigengoRiyoshaFutangakuData = new Decimal(((div.getPanelShafukukenngengaku().getPanelShakaiFukushiShokai()
                 .getTxtRiyoshaFutangakuTotal().getValue())
-                .subtract(div.getPanelShafukukenngengaku().getPanelShakaiFukushiShokai().getTxtKengengaku().getValue());
+                .subtract(div.getPanelShafukukenngengaku().getPanelShakaiFukushiShokai().getTxtKengengaku().getValue()))
+                .intValue());
         div.getPanelShafukukenngengaku().getPanelShakaiFukushiShokai().getTxtKeigengoRiyoshaFutangaku()
                 .setValue(keigengoRiyoshaFutangakuData);
     }
@@ -670,5 +672,14 @@ public final class ShafukuKeigenGakuPanelHandler {
         div.getTxtKengengaku().setReadOnly(true);
         div.getTxtKeigengoRiyoshaFutangaku().setReadOnly(true);
         div.getTxtBikou().setReadOnly(true);
+    }
+
+    private void setNotReadOnly() {
+        div.getDdlServiceShurui().setReadOnly(false);
+        div.getDdlKengenritsu().setReadOnly(false);
+        div.getTxtRiyoshaFutangakuTotal().setReadOnly(false);
+        div.getTxtKengengaku().setReadOnly(false);
+        div.getTxtKeigengoRiyoshaFutangaku().setReadOnly(false);
+        div.getTxtBikou().setReadOnly(false);
     }
 }
