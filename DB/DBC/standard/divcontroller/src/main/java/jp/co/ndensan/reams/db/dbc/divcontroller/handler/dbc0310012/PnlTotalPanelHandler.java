@@ -15,7 +15,6 @@ import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0310012.PnlT
 import jp.co.ndensan.reams.db.dbc.divcontroller.viewbox.ViewStateKeys;
 import jp.co.ndensan.reams.db.dbc.service.core.shokanjuryoininkeiyakusha.ShokanJuryoininKeiyakushaFinder;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
-import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.kaigoshikakukihon.KaigoShikakuKihon.KaigoShikakuKihonDiv;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -26,7 +25,6 @@ import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.ui.binding.KeyValueDataSource;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.CommonButtonHolder;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
-import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 
 /**
  * 受領委任契約（福祉用具購入費・住宅改修費）登録・追加・修正・照会_登録画面のHandlerクラス
@@ -237,13 +235,18 @@ public class PnlTotalPanelHandler {
      * @param 状態 状態
      */
     public void 保存処理(RString 状態) {
-        ShokanJuryoininKeiyakushaFinder finder = InstanceProvider.create(ShokanJuryoininKeiyakushaFinder.class);
+        ShokanJuryoininKeiyakushaFinder finder = ShokanJuryoininKeiyakushaFinder.createInstance();
         ShokanJuryoininKeiyakusha shokan;
         if (登録.equals(状態)) {
-            shokan = InstanceProvider.create(ShokanJuryoininKeiyakusha.class);
+//            KaigoShikakuKihonDiv kaigoDiv = (KaigoShikakuKihonDiv) div.getPnlCommon().getCcdKaigoShikakuKihon();
+            shokan = new ShokanJuryoininKeiyakusha(
+                    // TODO QA No.431
+                    // new HihokenshaNo(kaigoDiv.getTxtHihokenshaNo().getValue()),
+                    new HihokenshaNo("000000003"),
+                    new FlexibleDate(div.getPnlCommon().getPnlDetail().getTxtKeyakushinseibi().getValue().toDateString()),
+                    div.getPnlCommon().getPnlDetail().getTxtKeyakujigyosyaNo().getValue(),
+                    div.getPnlCommon().getPnlDetail().getDdlKeiyakuServiceType().getSelectedKey());
             shokan = build契約者情報(shokan);
-            // TODO QA No.431
-            shokan = shokan.createBuilderForEdit().set被保険者番号(new HihokenshaNo("000000003")).build();
             finder.insShokanJuryoininKeiyakusha(shokan);
         } else {
             shokan = ViewStateHolder.
@@ -263,17 +266,8 @@ public class PnlTotalPanelHandler {
      * @return ShokanJuryoininKeiyakusha
      */
     private ShokanJuryoininKeiyakusha build契約者情報(ShokanJuryoininKeiyakusha shokan) {
-        KaigoShikakuKihonDiv kaigoDiv = (KaigoShikakuKihonDiv) div.getPnlCommon().getCcdKaigoShikakuKihon();
-        shokan = shokan.createBuilderForEdit().set被保険者番号(new HihokenshaNo(kaigoDiv
-                .getTxtHihokenshaNo().getValue())).build();
         shokan = shokan.createBuilderForEdit().set受付年月日(new FlexibleDate(div.getPnlCommon().getPnlDetail()
                 .getTxtKeyakushinseuketukebi().getValue().toDateString())).build();
-        shokan = shokan.createBuilderForEdit().set申請年月日(new FlexibleDate(div.getPnlCommon().getPnlDetail()
-                .getTxtKeyakushinseibi().getValue().toDateString())).build();
-        shokan = shokan.createBuilderForEdit().set契約事業者番号(div.getPnlCommon().getPnlDetail()
-                .getTxtKeyakujigyosyaNo().getValue()).build();
-        shokan = shokan.createBuilderForEdit().set契約サービス種類(div.getPnlCommon().getPnlDetail()
-                .getDdlKeiyakuServiceType().getSelectedKey()).build();
         if (div.getPnlCommon().getPnlDetail().getTxtKeyakukettebi().getValue() != null) {
             shokan = shokan.createBuilderForEdit().set決定年月日(new FlexibleDate(div.getPnlCommon().getPnlDetail()
                     .getTxtKeyakukettebi().getValue().toDateString())).build();
@@ -293,20 +287,27 @@ public class PnlTotalPanelHandler {
             shokan = shokan.createBuilderForEdit().set受領委任払適用終了年月日(new FlexibleDate(div.getPnlCommon()
                     .getPnlDetail().getPnlHidari().getTxtSyoninkikan().getToValue().toDateString())).build();
         }
-        RStringBuilder rsb = new RStringBuilder();
-        rsb.append(div.getPnlCommon().getPnlDetail().getPnlHidari().getDdlYear().getSelectedValue());
-        rsb.append(div.getPnlCommon().getPnlDetail().getPnlHidari().getTxtBango1().getValue());
-        rsb.append(div.getPnlCommon().getPnlDetail().getPnlHidari().getTxtBango2().getValue());
-        shokan = shokan.createBuilderForEdit().set契約番号(rsb.toRString()).build();
+        if (ShoninKubun.承認する.getコード().equals(div.getPnlCommon().getPnlDetail()
+                .getRdoKettekubun().getSelectedKey())) {
+            RStringBuilder rsb = new RStringBuilder();
+            rsb.append(div.getPnlCommon().getPnlDetail().getPnlHidari().getDdlYear().getSelectedValue());
+            rsb.append(div.getPnlCommon().getPnlDetail().getPnlHidari().getTxtBango1().getValue());
+            rsb.append(div.getPnlCommon().getPnlDetail().getPnlHidari().getTxtBango2().getValue());
+            shokan = shokan.createBuilderForEdit().set契約番号(rsb.toRString()).build();
+        }
         shokan = shokan.createBuilderForEdit().set不承認理由(div.getPnlCommon().getPnlDetail()
                 .getTxtFusyoninriyu().getValue()).build();
-        shokan = shokan.createBuilderForEdit().set費用額合計(div.getPnlCommon().getPnlDetail()
+        shokan = shokan.createBuilderForEdit().set費用額合計(div.getPnlCommon().getPnlDetail().getPnlKyufuhi()
+                .getTxtHiyogakugokei().getValue() == null ? Decimal.ZERO : div.getPnlCommon().getPnlDetail()
                 .getPnlKyufuhi().getTxtHiyogakugokei().getValue()).build();
-        shokan = shokan.createBuilderForEdit().set保険対象費用額(div.getPnlCommon().getPnlDetail()
+        shokan = shokan.createBuilderForEdit().set保険対象費用額(div.getPnlCommon().getPnlDetail().getPnlKyufuhi()
+                .getTxtHokentaisyohiyogaku().getValue() == null ? Decimal.ZERO : div.getPnlCommon().getPnlDetail()
                 .getPnlKyufuhi().getTxtHokentaisyohiyogaku().getValue()).build();
-        shokan = shokan.createBuilderForEdit().set利用者自己負担額(div.getPnlCommon().getPnlDetail()
+        shokan = shokan.createBuilderForEdit().set利用者自己負担額(div.getPnlCommon().getPnlDetail().getPnlKyufuhi()
+                .getTxtRiyosyajikofutangaku().getValue() == null ? Decimal.ZERO : div.getPnlCommon().getPnlDetail()
                 .getPnlKyufuhi().getTxtRiyosyajikofutangaku().getValue()).build();
-        shokan = shokan.createBuilderForEdit().set保険給付費額(div.getPnlCommon().getPnlDetail()
+        shokan = shokan.createBuilderForEdit().set保険給付費額(div.getPnlCommon().getPnlDetail().getPnlKyufuhi()
+                .getTxtHokenkyufuhiyogaku().getValue() == null ? Decimal.ZERO : div.getPnlCommon().getPnlDetail()
                 .getPnlKyufuhi().getTxtHokenkyufuhiyogaku().getValue()).build();
         if (div.getPnlCommon().getPnlDetail().getPnlHidari().getChkSaihakoukubun().isAllSelected()) {
             shokan = shokan.createBuilderForEdit().set承認結果通知書再発行区分(new RString("1")).build();
