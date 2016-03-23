@@ -6,6 +6,8 @@
 package jp.co.ndensan.reams.db.dbc.divcontroller.handler.dbc0810029;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbc.business.core.basic.ShikibetsuNoKanri;
 import jp.co.ndensan.reams.db.dbc.business.core.basic.ShokanMeisai;
@@ -187,16 +189,25 @@ public class ShokujiHiyoHandler {
         div.getPanelShokuji().getPanelDetail2().getTxtServiceCodeShurui().setValue(serviceCodeShuruyi);
         RString serviceCodeKoumoku = row.getDefaultDataName2().substring(2, SIX);
         div.getPanelShokuji().getPanelDetail2().getTxtServiceItemCode().setValue(serviceCodeKoumoku);
-        List<KaigoServiceNaiyou> serviceCode = ShokanbaraiJyokyoShokai.createInstance().getServiceCodeInfo(
+        List<KaigoServiceNaiyou> list = ShokanbaraiJyokyoShokai.createInstance().getServiceCodeInfo(
                 new KaigoServiceShuruiCode(serviceCodeShuruyi),
                 serviceCodeKoumoku,
                 ViewStateHolder.get(ViewStateKeys.サービス年月, FlexibleYearMonth.class));
-        if (serviceCode != null && serviceCode.get(0).getサービス名称() != null) {
-            div.getPanelShokuji().getPanelDetail2().getTxtServiceName().setValue(serviceCode.get(0).getサービス名称());
+        if (list != null) {
+            Collections.sort(list, new Comparator<KaigoServiceNaiyou>() {
+                @Override
+                public int compare(KaigoServiceNaiyou o1, KaigoServiceNaiyou o2) {
+                    return o2.get提供開始年月().compareTo(o1.get提供開始年月());
+                }
+            });
+            if (list.get(0).getサービス名称() != null) {
+                div.getPanelShokuji().getPanelDetail2().getTxtServiceName().setValue(list.get(0).getサービス名称());
+            }
         }
         div.getPanelShokuji().getPanelDetail2().getTxtTanyi().setValue(row.getDefaultDataName3().getValue());
         if (!row.getDefaultDataName4().isEmpty()) {
-            div.getPanelShokuji().getPanelDetail2().getTxtKaisuuNisuu().setValue(new Decimal(row.getDefaultDataName4().toString()));
+            div.getPanelShokuji().getPanelDetail2().getTxtKaisuuNisuu().setValue(
+                    new Decimal(row.getDefaultDataName4().toString()));
         }
         div.getPanelShokuji().getPanelDetail2().getBtnKinngaku().setValue(row.getDefaultDataName5().getValue());
         div.getPanelShokuji().getPanelDetail2().setVisible(true);
