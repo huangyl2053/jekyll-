@@ -152,7 +152,7 @@
         WHERE
         1=1
         <if test="temp_hokennshaCode_isNotEmpty">
-            AND TB2."ninteichosaIraiRirekiNo" = #{temp_hokennshaCode}
+            AND TB2."shoKisaiHokenshaNo" = #{temp_hokennshaCode}
         </if>
 
         <if test="temp_itakusakiCode_isNotEmpty">
