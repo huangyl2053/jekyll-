@@ -132,16 +132,17 @@ public class KyotakuServiceKeikakuInfoDiv extends Panel implements IKyotakuServi
     // </editor-fold>
     //--------------- この行より下にコードを追加してください -------------------
 
- /**
+    /**
      * 居宅サービス計画情報を初期化します。
+     *
      * @param hihokenshano 被保険者番号
      */
     @Override
     public void initialize(HihokenshaNo hihokenshano) {
         createHandler().initialize(hihokenshano);
     }
-    
-     private KyotakuServiceKeikakuInfoHandler createHandler() {
+
+    private KyotakuServiceKeikakuInfoHandler createHandler() {
         return new KyotakuServiceKeikakuInfoHandler(this);
-    }    
+    }
 }
