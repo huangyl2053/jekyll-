@@ -8,7 +8,7 @@ package jp.co.ndensan.reams.db.dbz.divcontroller.controller.commonchilddiv.Shika
 import java.util.List;
 import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.GyomuBunrui;
 import jp.co.ndensan.reams.db.dbx.service.ShichosonSecurityJoho;
-import jp.co.ndensan.reams.db.dbz.business.core.niteirirekiichiran.ShikakuRirekiInfoDataPassModel;
+import jp.co.ndensan.reams.db.dbz.business.core.shikakutokusojouho.ShikakuRirekiInfoDataPassModel;
 import jp.co.ndensan.reams.db.dbz.business.core.shikakutokusojouho.ShikakuTokusoJouho;
 import jp.co.ndensan.reams.db.dbz.definition.shikakutokusojouho.ShikakuTokusoJouhoParameter;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.ShikakuRirekiInfo.ShikakuRirekiInfo.ShikakuRirekiInfoDiv;
