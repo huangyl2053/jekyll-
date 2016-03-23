@@ -1,0 +1,70 @@
+﻿{
+ "uiContainerName": "DBCUC60000",
+ "displayWizard": false,
+ "subGyomuCode": "DBC",
+ "steps": [
+  {
+   "id": 1,
+   "name": "スケジュール設定",
+   "transitionList": [
+    {
+     "id": "1",
+     "type": "start",
+     "condition": "",
+     "toLayoutSubGyomuCode": "DBC",
+     "toLayoutName": "DBC6000011",
+     "toLayoutTitle": "スケジュール設定",
+     "toState": "処理"
+    },
+    {
+     "id": "2",
+     "type": "ordinal",
+     "layoutSubGyomuCode": "DBC",
+     "layoutName": "DBC6000011",
+     "layoutTitle": "スケジュール設定",
+     "eventName": "保険者情報送付へ戻る",
+     "destroy": false,
+     "condition": "",
+     "toLayoutSubGyomuCode": "DBC",
+     "toLayoutName": "DBC3510011",
+     "toLayoutTitle": "保険者情報送付",
+     "toState": "照会"
+    },
+    {
+     "id": "3",
+     "type": "ordinal",
+     "layoutSubGyomuCode": "DBC",
+     "layoutName": "DBC6000011",
+     "layoutTitle": "スケジュール設定",
+     "eventName": "国保連情報取込へ戻る",
+     "destroy": false,
+     "condition": "",
+     "toLayoutSubGyomuCode": "DBC",
+     "toLayoutName": "DBC3500011",
+     "toLayoutTitle": "国保連情報取込",
+     "toState": "照会"
+    },
+    {
+     "id": "4",
+     "type": "end",
+     "layoutSubGyomuCode": "DBC",
+     "layoutName": "DBC3510011",
+     "layoutTitle": "保険者情報送付",
+     "eventName": "完了状態",
+     "destroy": false,
+     "condition": ""
+    },
+    {
+     "id": "5",
+     "type": "end",
+     "layoutSubGyomuCode": "DBC",
+     "layoutName": "DBC3500011",
+     "layoutTitle": "国保連情報取込",
+     "eventName": "完了状態",
+     "destroy": false,
+     "condition": ""
+    }
+   ]
+  }
+ ]
+}
