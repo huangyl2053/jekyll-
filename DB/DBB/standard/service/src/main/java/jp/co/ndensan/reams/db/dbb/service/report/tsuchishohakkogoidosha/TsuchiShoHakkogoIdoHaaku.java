@@ -32,9 +32,9 @@ import jp.co.ndensan.reams.ur.urz.definition.core.shikibetsutaisho.IName;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaKanaMeisho;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaMeisho;
 import jp.co.ndensan.reams.uz.uza.biz.ReportId;
-import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RYear;
@@ -176,35 +176,28 @@ public class TsuchiShoHakkogoIdoHaaku {
             }
         }
 
-        List<ShikibetsuCode> codeList = new ArrayList<>();
+        List<DbT2017TsuchishoHakkogoIdoshaEntity> updateEntityList = new ArrayList<>();
         for (DbT2017EntityResult entity : entityResultList) {
-            if (!codeList.contains(entity.getDbT2017Entity().getShikibetsuCode())) {
-                codeList.add(entity.getDbT2017Entity().getShikibetsuCode());
+            if (!updateEntityList.contains(entity.getDbT2017Entity())) {
+                updateEntityList.add(entity.getDbT2017Entity());
             }
         }
 
-        for (ShikibetsuCode shikibetsuCode : codeList) {
+        for (DbT2017TsuchishoHakkogoIdoshaEntity updateEntity : updateEntityList) {
             UaFt001FindIdoEntity uaftentity = new UaFt001FindIdoEntity();
             ShikibetsuTaishoIdoJoho 異動前PSM結果 = new ShikibetsuTaishoIdoJoho(uaftentity);
             ShikibetsuTaishoIdoJoho 異動後PSM結果 = new ShikibetsuTaishoIdoJoho(uaftentity);
-            DbT2017TsuchishoHakkogoIdoshaEntity dbt2017Entity = new DbT2017TsuchishoHakkogoIdoshaEntity();
             for (DbT2017EntityResult entity : entityResultList) {
-                if (shikibetsuCode.equals(entity.getUaFt001Entity().get識別コード())
+                if (entity.getDbT2017Entity().equals(updateEntity)
                         && entity.getUaFt001Entity().get異動前後区分().equals(new RString("1"))) {
                     異動前PSM結果 = entity.getUaFt001Entity();
                 }
-                if (shikibetsuCode.equals(entity.getUaFt001Entity().get識別コード())
+                if (entity.getDbT2017Entity().equals(updateEntity)
                         && entity.getUaFt001Entity().get異動前後区分().equals(new RString("2"))) {
-                    dbt2017Entity = entity.getDbT2017Entity();
                     異動後PSM結果 = entity.getUaFt001Entity();
                 }
             }
-            boolean 住所変更flag = get住所変更(異動前PSM結果, 異動後PSM結果);
-            boolean 氏名変更flag = get氏名変更(異動前PSM結果, 異動後PSM結果);
-            if (住所変更flag || 氏名変更flag) {
-                dbt2017Entity = set住基異動(dbt2017Entity, 異動後PSM結果, 住所変更flag, 氏名変更flag);
-                dac.save(dbt2017Entity);
-            }
+            update住基異動(異動前PSM結果, 異動後PSM結果, updateEntity);
         }
 
         YMDHMS 最大計算処理日時 = get計算処理日時(帳票ID, 帳票作成日時);
@@ -407,15 +400,13 @@ public class TsuchiShoHakkogoIdoHaaku {
 
     private DbT2017TsuchishoHakkogoIdoshaEntity set住基異動(
             DbT2017TsuchishoHakkogoIdoshaEntity dbt2017Entity, ShikibetsuTaishoIdoJoho 異動後PSM結果,
-            boolean 住所変更flag, boolean 氏名変更flag) {
-//        dbt2017Entity.setIdoYMD(異動後PSM結果.get異動処理日時());
-//        // TODO QA340(Redmine#78346)
-//        if (氏名変更flag) {
-//            dbt2017Entity.setIdoNaiyo(RString.EMPTY);
-//        }
-//        if (住所変更flag) {
-//            dbt2017Entity.setIdoNaiyo(RString.EMPTY);
-//        }
+            boolean 氏名変更flag) {
+        dbt2017Entity.setIdoYMD(new FlexibleDate(異動後PSM結果.get異動処理日時().getDate().toString()));
+        if (氏名変更flag) {
+            dbt2017Entity.setIdoNaiyo(IdoNaiyo.氏名の変更.getコード());
+        } else {
+            dbt2017Entity.setIdoNaiyo(IdoNaiyo.本人住所の変更.getコード());
+        }
         dbt2017Entity.setIdoAriFlag(true);
         dbt2017Entity.setState(EntityDataState.Modified);
         return dbt2017Entity;
@@ -423,11 +414,23 @@ public class TsuchiShoHakkogoIdoHaaku {
 
     private DbT2017TsuchishoHakkogoIdoshaEntity set資格異動(
             DbT2017TsuchishoHakkogoIdoshaEntity dbt2017Entity, DbV2001ChoshuHohoEntity dbv2001Entity) {
-//        dbt2017Entity.setIdoYMD(dbv2001Entity.);
-//        // TODO QA340(Redmine#78346)
-//        dbt2017Entity.setIdoNaiyo(RString.EMPTY);
+        // TODO QA340(Redmine#78346)
+        dbt2017Entity.setIdoNaiyo(IdoNaiyo.資格の異動.getコード());
         dbt2017Entity.setIdoAriFlag(true);
         dbt2017Entity.setState(EntityDataState.Modified);
         return dbt2017Entity;
+    }
+
+    private void update住基異動(ShikibetsuTaishoIdoJoho 異動前PSM, ShikibetsuTaishoIdoJoho 異動後PSM,
+            DbT2017TsuchishoHakkogoIdoshaEntity updateEntity) {
+        ShikibetsuTaishoIdoJoho 異動前PSM結果 = 異動前PSM;
+        ShikibetsuTaishoIdoJoho 異動後PSM結果 = 異動後PSM;
+        boolean 住所変更flag = get住所変更(異動前PSM結果, 異動後PSM結果);
+        boolean 氏名変更flag = get氏名変更(異動前PSM結果, 異動後PSM結果);
+        if (住所変更flag || 氏名変更flag) {
+            DbT2017TsuchishoHakkogoIdoshaEntity dbt2017EntityNew = set住基異動(updateEntity,
+                    異動後PSM結果, 氏名変更flag);
+            dac.save(dbt2017EntityNew);
+        }
     }
 }
