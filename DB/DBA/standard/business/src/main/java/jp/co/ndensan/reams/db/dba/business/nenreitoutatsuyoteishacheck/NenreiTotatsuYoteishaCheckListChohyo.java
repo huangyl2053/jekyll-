@@ -86,8 +86,9 @@ public class NenreiTotatsuYoteishaCheckListChohyo {
             NenreiToutatsuYoteishaCheckListJyohoEntity nenreiCheckListJyohoEntity) {
         List<NenreiToutatsuYoteishaCheckListEntity> 年齢到達予定者チェックリスト = nenreiCheckListJyohoEntity.get年齢到達予定者チェックリスト();
         for (NenreiToutatsuYoteishaCheckListEntity checkList : 年齢到達予定者チェックリスト) {
-            RString 被保険者番号 = new RString(checkList.getHihokenshaNo().value().toString());
-            RString 識別コード = new RString(checkList.getShikibetsuCode().value().toString());
+            RString 被保険者番号 = checkList.getHihokenshaNo() == null || checkList.getHihokenshaNo().isEmpty()
+                    ? RString.EMPTY : checkList.getHihokenshaNo().value();
+            RString 識別コード = checkList.getShikibetsuCode().value();
             RString カナ氏名 = checkList.getKanaMeisho();
             RString 氏名 = checkList.getMeisho();
             RString 性別 = null;
@@ -96,10 +97,12 @@ public class NenreiTotatsuYoteishaCheckListChohyo {
             } else if (性別コード2.equals(checkList.getSeibetsuCode())) {
                 性別 = SEX_WOMAN;
             }
-            RString 生年月日 = new RString(checkList.getSeinengappiYMD().wareki().eraType(EraType.KANJI_RYAKU).firstYear(
-                    FirstYear.GAN_NEN).separator(Separator.PERIOD).fillType(FillType.NONE).toDateString().toString());
-            RString 年齢到達日 = new RString(checkList.getNenreiyotainichi().wareki().eraType(EraType.KANJI_RYAKU).firstYear(
-                    FirstYear.GAN_NEN).separator(Separator.PERIOD).fillType(FillType.NONE).toDateString().toString());
+            RString 生年月日 = checkList.getSeinengappiYMD() == null || checkList.getSeinengappiYMD().isEmpty() ? RString.EMPTY
+                    : checkList.getSeinengappiYMD().wareki().eraType(EraType.KANJI_RYAKU).firstYear(
+                            FirstYear.GAN_NEN).separator(Separator.PERIOD).fillType(FillType.NONE).toDateString();
+            RString 年齢到達日 = checkList.getNenreiyotainichi() == null || checkList.getNenreiyotainichi().isEmpty() ? RString.EMPTY
+                    : checkList.getNenreiyotainichi().wareki().eraType(EraType.KANJI_RYAKU).firstYear(
+                            FirstYear.GAN_NEN).separator(Separator.PERIOD).fillType(FillType.NONE).toDateString();
             RString 資格区分 = checkList.getShigekubun();
             RString 住特者区分 = checkList.getJutosyakubun();
             RString 住所コード = checkList.getZenkokuJushoCode();
