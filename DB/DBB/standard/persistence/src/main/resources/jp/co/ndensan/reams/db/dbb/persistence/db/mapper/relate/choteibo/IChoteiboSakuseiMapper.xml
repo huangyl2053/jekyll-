@@ -414,8 +414,8 @@
     <resultMap id="resultMap_NaiheisyaKensuEntity" type="jp.co.ndensan.reams.db.dbb.entity.db.relate.choteibo.NaiheisyaKensuEntity" autoMapping="true">
         <id property="choteiNendo" column="choteiNendo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleYearTypeHandler"/>
         <id property="fukaNendo" column="fukaNendo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleYearTypeHandler"/>
+        <id property="dankai" column="dankai" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="naiheisyaKensu" column="naiheisyaKensu" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
-        <result property="dankai" column="dankai" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
     </resultMap>
     <!-- 内併徴者数をします。 -->
     <select id="select内併徴者数" resultMap="resultMap_NaiheisyaKensuEntity" parameterType="java.util.Map" fetchSize="500">
@@ -459,7 +459,9 @@
         WHERE
         "choteiNendo" = #{choteiNendo}
         AND "fukaNendo" = #{fukaNendo}
+        AND "choshuHouhou" = #{choshuHouhou}
         AND "dankai" = #{dankai}
+        AND "dogetsuFlag" = 1
     </update>
 
     <resultMap id="resultMap_DankaiShokeiEntity_Fue" type="jp.co.ndensan.reams.db.dbb.entity.db.relate.choteibo.DankaiShokeiEntity" autoMapping="true">
@@ -920,7 +922,8 @@
         WHERE
         "choteiNendo" = #{choteiNendo}
         AND "fukaNendo" = #{fukaNendo}
-        AMD "choshuHouhou" = #{choshuHouhou}
+        AND "choshuHouhou" = #{choshuHouhou}
+        AND "dogetsuFlag" = 1
     </update>
 
     <resultMap id="resultMap_GenmenEntity" type="jp.co.ndensan.reams.db.dbb.entity.db.relate.choteibo.GenmenEntity" autoMapping="true">
@@ -1210,10 +1213,9 @@
     </select>
 
     <resultMap id="resultMap_DangatsuDankaiDataEntity" type="jp.co.ndensan.reams.db.dbb.entity.db.relate.choteibo.DangatsuDankaiDataEntity" autoMapping="true">
-        <id property="choteiNendo" column="choteiNendo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleYearTypeHandler"/>
         <id property="choshuHouhou" column="choshuHouhou" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
-        <result property="dankai" column="dankai" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
-        <result property="dogetsuFlag" column="dogetsuFlag"/>
+        <id property="dankai" column="dankai" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <id property="dogetsuFlag" column="dogetsuFlag"/>
         <result property="dogetsusueKensuCount" column="dogetsusueKensuCount" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
         <result property="dogetsusueChoteigakuCount" column="dogetsusueChoteigakuCount" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
         <result property="fueKensuCount" column="fueKensuCount" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
@@ -1226,7 +1228,6 @@
     <!-- 当月末のデータの取得 -->
     <select id="select当月末の段階のデータ" resultMap="resultMap_DangatsuDankaiDataEntity" parameterType="java.util.Map" fetchSize="500">
         SELECT
-        A."choteiNendo",
         A."choshuHouhou",
         A."dankai",
         A."dogetsuFlag",
@@ -1271,10 +1272,9 @@
     </update>
 
     <resultMap id="resultMap_ZengatsuDankaiDataEntity" type="jp.co.ndensan.reams.db.dbb.entity.db.relate.choteibo.ZengatsuDankaiDataEntity" autoMapping="true">
-        <id property="choteiNendo" column="choteiNendo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleYearTypeHandler"/>
         <id property="choshuHouhou" column="choshuHouhou" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
-        <result property="dankai" column="dankai" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
-        <result property="dogetsuFlag" column="dogetsuFlag"/>
+        <id property="dankai" column="dankai" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <id property="dogetsuFlag" column="dogetsuFlag"/>
         <result property="zengetsusueKensuCount" column="zengetsusueKensuCount" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
         <result property="zengetsusueChoteigakuCount" column="zengetsusueChoteigakuCount" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
     </resultMap>
@@ -1282,7 +1282,6 @@
     <!-- 前月末の段階のデータの取得 -->
     <select id="select前月末の段階のデータ" resultMap="resultMap_ZengatsuDankaiDataEntity" parameterType="java.util.Map" fetchSize="500">
         SELECT
-        A."choteiNendo",
         A."choshuHouhou",
         A."dankai",
         A."dogetsuFlag",
@@ -1319,9 +1318,8 @@
     </update>
 
     <resultMap id="resultMap_DankaiTksaiToFusaiKensuEntity" type="jp.co.ndensan.reams.db.dbb.entity.db.relate.choteibo.DankaiTksaiToFusaiKensuEntity" autoMapping="true">
-        <id property="choteiNendo" column="choteiNendo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleYearTypeHandler"/>
         <id property="choshuHouhou" column="choshuHouhou" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
-        <result property="dankai" column="dankai" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <id property="dankai" column="dankai" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="tokuchosyaKensuCount" column="tokuchosyaKensuCount" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
         <result property="fuchosyaKensuCount" column="fuchosyaKensuCount" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
         <result property="naiheisyaKensuCount" column="naiheisyaKensuCount" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
@@ -1330,7 +1328,6 @@
     <!-- 所得段階の特徴/普徴者数の集計 -->
     <select id="select段階の特徴と普徴者数" resultMap="resultMap_DankaiTksaiToFusaiKensuEntity" parameterType="java.util.Map" fetchSize="500">
         SELECT
-        A."choteiNendo",
         A."choshuHouhou",
         A."dankai",
         SUM(A."tokuchosyaKensu") AS "tokuchosyaKensuCount",
@@ -1361,8 +1358,8 @@
         "fuchosyaKensuCount" = #{fuchosyaKensuCount},
         "naiheisyaKensuCount" = #{naiheisyaKensuCount}
         WHERE
-        "choshuHouhou" = #{choshuHouhou}
-        AND "dankai" = #{dankai}
+        "dankai" = #{dankai}
+        AND "dogetsuFlag" = 1
     </update>
 
     <resultMap id="resultMap_KibetsuBubunDataEntity" type="jp.co.ndensan.reams.db.dbb.entity.db.relate.choteibo.KibetsuBubunDataEntity" autoMapping="true">
@@ -1522,7 +1519,6 @@
         UPDATE
         "TmpGokeiBubunSoukei"
         SET
-        "dogetsuFlag" = #{dogetsuFlag},
         "zengetsusueKensuSoukei" = #{zengetsusueKensuSoukei},
         "zengetsusueChoteigakuSoukei" = #{zengetsusueChoteigakuSoukei},
         "fueZennbuKennsuuSoukei" = #{fueZennbuKennsuuSoukei},
@@ -1536,6 +1532,7 @@
         "naiheisyaKensuSoukei" = #{naiheisyaKensuSoukei}
         WHERE
         "choshuHouhou" = #{choshuHouhou}
+        AND "dogetsuFlag" = #{dogetsuFlag}
     </update>
 
     <resultMap id="resultMap_KibetsuGokeiEntity" type="jp.co.ndensan.reams.db.dbb.entity.db.relate.choteibo.KibetsuGokeiEntity" autoMapping="true">
@@ -1656,7 +1653,19 @@
     <select id="selectAll合計部分総計情報" resultMap="resultMap_GokeiBubunSoukeiEntity" fetchSize="500">
         SELECT "TmpGokeiBubunSoukei".* FROM "TmpGokeiBubunSoukei"
     </select>
-
+    
+    <select id="select処理日付" 
+            resultMap="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT7022ShoriDateKanriMapper.ResultMap_DbT7022ShoriDateKanriEntity"
+            fetchSize="500">
+        SELECT
+        <include refid="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT7022ShoriDateKanriMapper.allColumns_DbT7022ShoriDateKanri" />
+        FROM
+        rgdb."DbT7022ShoriDateKanri" AS "DbT7022ShoriDateKanri"
+        WHERE
+            "DbT7022ShoriDateKanri"."subGyomuCode" = #{subGyomuCode}
+        AND "DbT7022ShoriDateKanri"."shoriName" = #{shoriName}
+        AND "DbT7022ShoriDateKanri"."nendo" = #{nendo}
+    </select>
     <!-- 期別情報一時テーブルを削除します。-->
     <delete id="dropTmpKibetsu">
         DROP TABLE "TmpKibetsu"

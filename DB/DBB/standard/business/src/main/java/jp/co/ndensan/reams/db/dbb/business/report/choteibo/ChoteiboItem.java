@@ -15,14 +15,29 @@ import lombok.Getter;
 @SuppressWarnings("PMD.UnusedPrivateField")
 public final class ChoteiboItem {
 
+    /**
+     * 帳票のヘッダ
+     */
+    private final ChoteiboHeaderItem headerItem;
+    /**
+     * 帳票の期月データ
+     */
     private final ChoteiboKitsukiItem kitsukiItem;
+    /**
+     * 帳票の段階明細データリスト
+     */
     private final List<ChoteiboDankaiItem> dankaiItemList;
+    /**
+     * 帳票の段階合計データ
+     */
     private final ChoteiboDankaiGokeiItem dankaiGokeiItem;
 
     private ChoteiboItem(
+            ChoteiboHeaderItem headerItem,
             ChoteiboKitsukiItem kitsukiItem,
             List<ChoteiboDankaiItem> dankaiItemList,
             ChoteiboDankaiGokeiItem dankaiGokeiItem) {
+        this.headerItem = headerItem;
         this.kitsukiItem = kitsukiItem;
         this.dankaiItemList = dankaiItemList;
         this.dankaiGokeiItem = dankaiGokeiItem;
@@ -31,16 +46,18 @@ public final class ChoteiboItem {
     /**
      * 調定簿作成帳票内容作成
      *
+     * @param headerItem headerItem
+     * @param nendoTitle nendoTitle
      * @param kitsukiItem kitsukiItem
      * @param dankaiItemList dankaiItemList
      * @param dankaiGokeiItem dankaiGokeiItem
      * @return ChoteiboItem
      */
     public static ChoteiboItem createChoteiboItem(
+            ChoteiboHeaderItem headerItem,
             ChoteiboKitsukiItem kitsukiItem,
             List<ChoteiboDankaiItem> dankaiItemList,
             ChoteiboDankaiGokeiItem dankaiGokeiItem) {
-        return new ChoteiboItem(kitsukiItem, dankaiItemList, dankaiGokeiItem);
+        return new ChoteiboItem(headerItem, kitsukiItem, dankaiItemList, dankaiGokeiItem);
     }
-
 }
