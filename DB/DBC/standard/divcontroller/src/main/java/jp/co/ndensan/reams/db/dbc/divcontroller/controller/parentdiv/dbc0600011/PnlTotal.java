@@ -41,9 +41,9 @@ public class PnlTotal {
         div.getKaigoCommonPanel().getCcdAtenaInfo().onLoad(ViewStateHolder.get(ViewStateKeys.識別コード, ShikibetsuCode.class));
         div.getKaigoCommonPanel().getCcdShikakuKihon().onLoad(ViewStateHolder.get(ViewStateKeys.被保険者番号, HihokenshaNo.class));
         PnlTotalHandler handler = getHandler(div);
-        List<FukushiyouguKonyuhiShikyuShinseiResult> list = FukushiyoguKonyuhiShikyuShinsei.createInstance().getShokanShikyuShinseiList(new HihokenshaNo("0000031"));
+        List<FukushiyouguKonyuhiShikyuShinseiResult> list = FukushiyoguKonyuhiShikyuShinsei.createInstance().
+                getShokanShikyuShinseiList(ViewStateHolder.get(ViewStateKeys.被保険者番号, HihokenshaNo.class));
         handler.initializedgShikyuShinseiList(list);
-        ViewStateHolder.put(ViewStateKeys.状態, 差額登録);
         if (差額登録.equals(ViewStateHolder.get(ViewStateKeys.状態, RString.class))) {
             div.getYoguKonyuhiShikyuShinseiList().getBtnAddShikyuShinsei().setDisabled(true);
             div.getYoguKonyuhiShikyuShinseiList().getDgShikyuShinseiList().getGridSetting().setIsShowSelectButtonColumn(false);
