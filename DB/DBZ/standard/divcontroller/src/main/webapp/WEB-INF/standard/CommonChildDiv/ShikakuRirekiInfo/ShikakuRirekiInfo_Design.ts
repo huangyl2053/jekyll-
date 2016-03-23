@@ -1,6 +1,6 @@
-/// <reference path="../d.ts/jquery.d.ts" />
-/// <reference path="../d.ts/UzViewControls.d.ts" />
-/// <reference path="../d.ts/UzaConverter.d.ts" />
+/// <reference path="../../d.ts/jquery.d.ts" />
+/// <reference path="../../d.ts/UzViewControls.d.ts" />
+/// <reference path="../../d.ts/UzaConverter.d.ts" />
 
 module DBZ {
 
@@ -22,6 +22,10 @@ module DBZ {
 
             public static onSelectByDeleteButton_dgShikakuShutokuRireki(): string {
                 return "onSelectByDeleteButton_dgShikakuShutokuRireki";
+            }
+
+            public static onClick_BtnClose(): string {
+                return "onClick_BtnClose";
             }
 
         }
