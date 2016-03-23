@@ -616,8 +616,8 @@ public class ChoteiboSakuseiReportProcess extends BatchProcessBase<DbT7022ShoriD
         Kitsuki 期月 = 期月リスト_普徴.get最終法定納期();
         for (Kitsuki kitsuki : 期月リスト_普徴.get期の月(期)) {
             if (期 != kitsuki.get期AsInt()
-                    || Tsuki.翌年度4月.equals(kitsuki.get月())
-                    || Tsuki.翌年度5月.equals(kitsuki.get月())) {
+                    || !Tsuki.翌年度4月.equals(kitsuki.get月())
+                    || !Tsuki.翌年度5月.equals(kitsuki.get月())) {
                 continue;
             }
             if (kitsuki.get月().getコード().compareTo(期月.get月().getコード()) > 0) {
