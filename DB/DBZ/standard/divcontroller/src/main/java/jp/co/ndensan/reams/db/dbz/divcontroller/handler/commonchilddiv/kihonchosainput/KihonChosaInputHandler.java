@@ -198,31 +198,49 @@ public class KihonChosaInputHandler {
     }
 
     public void onClick_btnConfirm() {
-        ArrayList<KihonChosaInput> 認定調査基本情報リスト = ViewStateHolder.get(ViewStateKey.認定調査基本情報リスト, ArrayList.class);
-        if (null == 認定調査基本情報リスト) {
-            認定調査基本情報リスト = new ArrayList<>();
+        RString 初期状態モード = div.getモード();
+        ArrayList<KihonChosaInput> 認定調査基本情報リスト = new ArrayList<>();
+        if (モードDAIGUN.equals(初期状態モード)) {
+            認定調査基本情報リスト = ViewStateHolder.get(ViewStateKey.第一群認定調査基本情報リスト, ArrayList.class);
+        } else if (モードDA2GUN.equals(初期状態モード)) {
+            認定調査基本情報リスト = ViewStateHolder.get(ViewStateKey.第二群認定調査基本情報リスト, ArrayList.class);
+        } else if (モードDA3GUN.equals(初期状態モード)) {
+            認定調査基本情報リスト = ViewStateHolder.get(ViewStateKey.第三群認定調査基本情報リスト, ArrayList.class);
+        } else if (モードDA4GUN.equals(初期状態モード)) {
+            認定調査基本情報リスト = ViewStateHolder.get(ViewStateKey.第四群認定調査基本情報リスト, ArrayList.class);
+        } else if (モードDA5GUN.equals(初期状態モード)) {
+            認定調査基本情報リスト = ViewStateHolder.get(ViewStateKey.第五群認定調査基本情報リスト, ArrayList.class);
+        } else if (モードDA6GUN.equals(初期状態モード)) {
+            認定調査基本情報リスト = ViewStateHolder.get(ViewStateKey.第六群認定調査基本情報リスト, ArrayList.class);
+        } else if (モードDA7GUN.equals(初期状態モード)) {
+            認定調査基本情報リスト = ViewStateHolder.get(ViewStateKey.第七群認定調査基本情報リスト, ArrayList.class);
         }
         Boolean is前回値をコピ = ViewStateHolder.get(ViewStateKey.is前回値をコピ, Boolean.class);
         if (is前回値をコピ != null && is前回値をコピ == true) {
             前回値をコピ(認定調査基本情報リスト);
         }
-        RString 初期状態モード = div.getモード();
         if (モードDAIGUN.equals(初期状態モード)) {
             第一群身体機能Confirm(認定調査基本情報リスト);
+            ViewStateHolder.put(ViewStateKey.第一群認定調査基本情報リスト, 認定調査基本情報リスト);
         } else if (モードDA2GUN.equals(初期状態モード)) {
             第二群生活機能Confirm(認定調査基本情報リスト);
+            ViewStateHolder.put(ViewStateKey.第二群認定調査基本情報リスト, 認定調査基本情報リスト);
         } else if (モードDA3GUN.equals(初期状態モード)) {
             第三群認知機能Confirm(認定調査基本情報リスト);
+            ViewStateHolder.put(ViewStateKey.第三群認定調査基本情報リスト, 認定調査基本情報リスト);
         } else if (モードDA4GUN.equals(初期状態モード)) {
             第四群精神_行動障害Confirm(認定調査基本情報リスト);
+            ViewStateHolder.put(ViewStateKey.第四群認定調査基本情報リスト, 認定調査基本情報リスト);
         } else if (モードDA5GUN.equals(初期状態モード)) {
             第五群社会生活への適用Confirm(認定調査基本情報リスト);
+            ViewStateHolder.put(ViewStateKey.第五群認定調査基本情報リスト, 認定調査基本情報リスト);
         } else if (モードDA6GUN.equals(初期状態モード)) {
             第六群特別な医療Confirm(認定調査基本情報リスト);
+            ViewStateHolder.put(ViewStateKey.第六群認定調査基本情報リスト, 認定調査基本情報リスト);
         } else if (モードDA7GUN.equals(初期状態モード)) {
             第七群自立度Confirm(認定調査基本情報リスト);
+            ViewStateHolder.put(ViewStateKey.第七群認定調査基本情報リスト, 認定調査基本情報リスト);
         }
-        ViewStateHolder.put(ViewStateKey.認定調査基本情報リスト, 認定調査基本情報リスト);
     }
 
     /**
@@ -238,9 +256,21 @@ public class KihonChosaInputHandler {
         }
         div.getDaiichigunShintaiKino().setRecordNumber(認定調査依頼履歴番号);
         Boolean is前回値をコピ = ViewStateHolder.get(ViewStateKey.is前回値をコピ, Boolean.class);
-        ArrayList<KihonChosaInput> 認定調査基本情報リスト = ViewStateHolder.get(ViewStateKey.認定調査基本情報リスト, ArrayList.class);
-        if (null == 認定調査基本情報リスト) {
-            認定調査基本情報リスト = new ArrayList<>();
+        ArrayList<KihonChosaInput> 認定調査基本情報リスト = new ArrayList<>();
+        if (モードDAIGUN.equals(初期状態モード)) {
+            認定調査基本情報リスト = ViewStateHolder.get(ViewStateKey.第一群認定調査基本情報リスト, ArrayList.class);
+        } else if (モードDA2GUN.equals(初期状態モード)) {
+            認定調査基本情報リスト = ViewStateHolder.get(ViewStateKey.第二群認定調査基本情報リスト, ArrayList.class);
+        } else if (モードDA3GUN.equals(初期状態モード)) {
+            認定調査基本情報リスト = ViewStateHolder.get(ViewStateKey.第三群認定調査基本情報リスト, ArrayList.class);
+        } else if (モードDA4GUN.equals(初期状態モード)) {
+            認定調査基本情報リスト = ViewStateHolder.get(ViewStateKey.第四群認定調査基本情報リスト, ArrayList.class);
+        } else if (モードDA5GUN.equals(初期状態モード)) {
+            認定調査基本情報リスト = ViewStateHolder.get(ViewStateKey.第五群認定調査基本情報リスト, ArrayList.class);
+        } else if (モードDA6GUN.equals(初期状態モード)) {
+            認定調査基本情報リスト = ViewStateHolder.get(ViewStateKey.第六群認定調査基本情報リスト, ArrayList.class);
+        } else if (モードDA7GUN.equals(初期状態モード)) {
+            認定調査基本情報リスト = ViewStateHolder.get(ViewStateKey.第七群認定調査基本情報リスト, ArrayList.class);
         }
         if (is前回値をコピ != null && is前回値をコピ == true) {
             前回値をコピ(認定調査基本情報リスト);
@@ -3064,7 +3094,31 @@ public class KihonChosaInputHandler {
         /**
          * 認定調査基本情報リストです。
          */
-        認定調査基本情報リスト;
+        第五群認定調査基本情報リスト,
+        /**
+         * 認定調査基本情報リストです。
+         */
+        第一群認定調査基本情報リスト,
+        /**
+         * 認定調査基本情報リストです。
+         */
+        第二群認定調査基本情報リスト,
+        /**
+         * 認定調査基本情報リストです。
+         */
+        第三群認定調査基本情報リスト,
+        /**
+         * 認定調査基本情報リストです。
+         */
+        第四群認定調査基本情報リスト,
+        /**
+         * 認定調査基本情報リストです。
+         */
+        第六群認定調査基本情報リスト,
+        /**
+         * 認定調査基本情報リストです。
+         */
+        第七群認定調査基本情報リスト;
     }
 
 }
