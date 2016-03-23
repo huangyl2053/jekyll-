@@ -27,12 +27,8 @@ import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoK
 import jp.co.ndensan.reams.db.dbx.service.core.dbbusinessconfig.DbBusinessConifg;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.NinteichosaIraiJoho;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.NinteichosaIraiJohoBuilder;
-import jp.co.ndensan.reams.db.dbz.business.core.basic.NinteichosahyoChosaItem;
-import jp.co.ndensan.reams.db.dbz.business.core.basic.NinteichosahyoChosaItemBuilder;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.NinteichosahyoGaikyoChosa;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.NinteichosahyoGaikyoChosaBuilder;
-import jp.co.ndensan.reams.db.dbz.business.core.basic.NinteichosahyoKihonChosa;
-import jp.co.ndensan.reams.db.dbz.business.core.basic.NinteichosahyoKihonChosaBuilder;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.NinteichosahyoKinyuItem;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.NinteichosahyoKinyuItemBuilder;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.NinteichosahyoServiceJokyo;
@@ -45,9 +41,7 @@ import jp.co.ndensan.reams.db.dbz.definition.core.configkeys.ConfigNameDBE;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.chosain.ServiceKubunCode;
 import jp.co.ndensan.reams.db.dbz.definition.message.DbzErrorMessages;
 import jp.co.ndensan.reams.db.dbz.service.core.basic.NinteichosaIraiJohoManager;
-import jp.co.ndensan.reams.db.dbz.service.core.basic.NinteichosahyoChosaItemManager;
 import jp.co.ndensan.reams.db.dbz.service.core.basic.NinteichosahyoGaikyoChosaManager;
-import jp.co.ndensan.reams.db.dbz.service.core.basic.NinteichosahyoKihonChosaManager;
 import jp.co.ndensan.reams.db.dbz.service.core.basic.NinteichosahyoKinyuItemManager;
 import jp.co.ndensan.reams.db.dbz.service.core.basic.NinteichosahyoServiceJokyoFlagManager;
 import jp.co.ndensan.reams.db.dbz.service.core.basic.NinteichosahyoServiceJokyoManager;
@@ -69,7 +63,6 @@ import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.message.MessageDialogSelectedResult;
 import jp.co.ndensan.reams.uz.uza.message.QuestionMessage;
 import jp.co.ndensan.reams.uz.uza.message.WarningMessage;
-import jp.co.ndensan.reams.uz.uza.ui.binding.KeyValueDataSource;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ResponseHolder;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
@@ -98,6 +91,13 @@ public class NinnteiChousaKekkaTouroku1 {
     private static final RString 厚労省IF識別コード_09A = new RString("09A");
     private static final RString 厚労省IF識別コード_09B = new RString("09B");
     private static final RString 厚労省IF識別コード_99A = new RString("99A");
+    private static final RString モードDAIGUN = new RString("Dai1gun");
+    private static final RString モードDA2GUN = new RString("Dai2gun");
+    private static final RString モードDA3GUN = new RString("Dai3gun");
+    private static final RString モードDA4GUN = new RString("Dai4gun");
+    private static final RString モードDA5GUN = new RString("Dai5gun");
+    private static final RString モードDA6GUN = new RString("Dai6gun");
+    private static final RString モードDA7GUN = new RString("Dai7gun");
     private static final int データベース内連番_1 = 1;
     private static final int データベース内連番_2 = 2;
     private static final int データベース内連番_3 = 3;
@@ -118,52 +118,59 @@ public class NinnteiChousaKekkaTouroku1 {
     private static final int データベース内連番_18 = 18;
     private static final int データベース内連番_19 = 19;
     private static final int データベース内連番_20 = 20;
-    private static final int データベース内連番_21 = 21;
-    private static final int データベース内連番_22 = 22;
-    private static final int データベース内連番_23 = 23;
-    private static final int データベース内連番_24 = 24;
-    private static final int データベース内連番_25 = 25;
-    private static final int データベース内連番_26 = 26;
-    private static final int データベース内連番_27 = 27;
-    private static final int データベース内連番_28 = 28;
-    private static final int データベース内連番_29 = 29;
-    private static final int データベース内連番_30 = 30;
-    private static final int データベース内連番_31 = 31;
-    private static final int データベース内連番_32 = 32;
-    private static final int データベース内連番_33 = 33;
-    private static final int データベース内連番_34 = 34;
-    private static final int データベース内連番_35 = 35;
-    private static final int データベース内連番_36 = 36;
-    private static final int データベース内連番_37 = 37;
-    private static final int データベース内連番_38 = 38;
-    private static final int データベース内連番_39 = 39;
-    private static final int データベース内連番_40 = 40;
-    private static final int データベース内連番_41 = 41;
-    private static final int データベース内連番_42 = 42;
-    private static final int データベース内連番_43 = 43;
-    private static final int データベース内連番_44 = 44;
-    private static final int データベース内連番_45 = 45;
-    private static final int データベース内連番_46 = 46;
-    private static final int データベース内連番_47 = 47;
-    private static final int データベース内連番_48 = 48;
-    private static final int データベース内連番_49 = 49;
-    private static final int データベース内連番_50 = 50;
-    private static final int データベース内連番_51 = 51;
-    private static final int データベース内連番_52 = 52;
-    private static final int データベース内連番_53 = 53;
-    private static final int データベース内連番_54 = 54;
-    private static final int データベース内連番_55 = 55;
-    private static final int データベース内連番_56 = 56;
-    private static final int データベース内連番_57 = 57;
-    private static final int データベース内連番_58 = 58;
-    private static final int データベース内連番_59 = 59;
-    private static final int データベース内連番_60 = 60;
-    private static final int データベース内連番_61 = 61;
-    private static final int データベース内連番_62 = 62;
-    private static final int INDEX_3 = 3;
-    private static final int INDEX_5 = 5;
-    private static final int INDEX_63 = 63;
-    private static final int INDEX_72 = 72;
+//    private static final int データベース内連番_21 = 21;
+//    private static final int データベース内連番_22 = 22;
+//    private static final int データベース内連番_23 = 23;
+//    private static final int データベース内連番_24 = 24;
+//    private static final int データベース内連番_25 = 25;
+//    private static final int データベース内連番_26 = 26;
+//    private static final int データベース内連番_27 = 27;
+//    private static final int データベース内連番_28 = 28;
+//    private static final int データベース内連番_29 = 29;
+//    private static final int データベース内連番_30 = 30;
+//    private static final int データベース内連番_31 = 31;
+//    private static final int データベース内連番_32 = 32;
+//    private static final int データベース内連番_33 = 33;
+//    private static final int データベース内連番_34 = 34;
+//    private static final int データベース内連番_35 = 35;
+//    private static final int データベース内連番_36 = 36;
+//    private static final int データベース内連番_37 = 37;
+//    private static final int データベース内連番_38 = 38;
+//    private static final int データベース内連番_39 = 39;
+//    private static final int データベース内連番_40 = 40;
+//    private static final int データベース内連番_41 = 41;
+//    private static final int データベース内連番_42 = 42;
+//    private static final int データベース内連番_43 = 43;
+//    private static final int データベース内連番_44 = 44;
+//    private static final int データベース内連番_45 = 45;
+//    private static final int データベース内連番_46 = 46;
+//    private static final int データベース内連番_47 = 47;
+//    private static final int データベース内連番_48 = 48;
+//    private static final int データベース内連番_49 = 49;
+//    private static final int データベース内連番_50 = 50;
+//    private static final int データベース内連番_51 = 51;
+//    private static final int データベース内連番_52 = 52;
+//    private static final int データベース内連番_53 = 53;
+//    private static final int データベース内連番_54 = 54;
+//    private static final int データベース内連番_55 = 55;
+//    private static final int データベース内連番_56 = 56;
+//    private static final int データベース内連番_57 = 57;
+//    private static final int データベース内連番_58 = 58;
+//    private static final int データベース内連番_59 = 59;
+//    private static final int データベース内連番_60 = 60;
+//    private static final int データベース内連番_61 = 61;
+//    private static final int データベース内連番_62 = 62;
+//    private static final int INDEX_3 = 3;
+//    private static final int INDEX_5 = 5;
+//    private static final int INDEX_63 = 63;
+//    private static final int INDEX_72 = 72;
+    private static final RString 第１群 = new RString("btnKihonchosa1");
+    private static final RString 第２群 = new RString("btnKihonchosa2");
+    private static final RString 第３群 = new RString("btnKihonchosa3");
+    private static final RString 第４群 = new RString("btnKihonchosa4");
+    private static final RString 第５群 = new RString("btnKihonchosa5");
+    private static final RString 特別な医療 = new RString("btnKihonchosa6");
+    private static final RString 生活自立度 = new RString("btnKihonchosa7");
 
     /**
      * 認定調査結果登録1の初期化。(オンロード)<br/>
@@ -213,7 +220,7 @@ public class NinnteiChousaKekkaTouroku1 {
             return ResponseData.of(div).respond();
         } else if (new RString(UrQuestionMessages.入力内容の破棄.getMessage().getCode())
                 .equals(ResponseHolder.getMessageCode()) && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
-            getHandler(div).利用サービス前半or後半の切り替え(現在の選択, 元の選択);
+            getHandler(div).利用サービス前半or後半の切り替え(現在の選択);
             return ResponseData.of(div).respond();
         }
 
@@ -254,7 +261,7 @@ public class NinnteiChousaKekkaTouroku1 {
                     UrQuestionMessages.入力内容の破棄.getMessage().evaluate());
             return ResponseData.of(div).addMessage(message).respond();
         } else if (!変更あり) {
-            getHandler(div).利用サービス前半or後半の切り替え(現在の選択, 元の選択);
+            getHandler(div).利用サービス前半or後半の切り替え(現在の選択);
         }
 
         ViewStateHolder.put(Dbe2210001Keys.現在のサービス区分, 現在の選択);
@@ -417,6 +424,49 @@ public class NinnteiChousaKekkaTouroku1 {
     }
 
     /**
+     * 「基本調査選択欄」の各ボタンを押下する処理です。
+     *
+     * @param div コントロールdiv
+     * @return レスポンスデータ
+     */
+    public ResponseData<NinnteiChousaKekkaTouroku1Div> onBeforeOpenDialog_btnKihonChosa(NinnteiChousaKekkaTouroku1Div div) {
+
+        ShinseishoKanriNo temp_申請書管理番号 = ViewStateHolder.get(ViewStateKeys.申請書管理番号, ShinseishoKanriNo.class);
+        Integer temp_認定調査履歴番号 = ViewStateHolder.get(ViewStateKeys.認定調査履歴番号, Integer.class);
+
+        div.setShinseishoKanriNo(temp_申請書管理番号.getColumnValue());
+        div.setRecordNumber(new RString(String.valueOf(temp_認定調査履歴番号)));
+
+        RString focusPositionID = div.getFocusPositionID();
+        if (第１群.equals(focusPositionID)) {
+            div.setモード(モードDAIGUN);
+        } else if (第２群.equals(focusPositionID)) {
+            div.setモード(モードDA2GUN);
+        } else if (第３群.equals(focusPositionID)) {
+            div.setモード(モードDA3GUN);
+        } else if (第４群.equals(focusPositionID)) {
+            div.setモード(モードDA4GUN);
+        } else if (第５群.equals(focusPositionID)) {
+            div.setモード(モードDA5GUN);
+        } else if (特別な医療.equals(focusPositionID)) {
+            div.setモード(モードDA6GUN);
+        } else if (生活自立度.equals(focusPositionID)) {
+            div.setモード(モードDA7GUN);
+        }
+        return ResponseData.of(div).respond();
+    }
+
+    /**
+     * ダイアログで選択された基本調査情報を本画面に保存します。
+     *
+     * @param div コントロールdiv
+     * @return スポンスデータ
+     */
+    public ResponseData<NinnteiChousaKekkaTouroku1Div> onOkClose_btnKihonChosa(NinnteiChousaKekkaTouroku1Div div) {
+        return ResponseData.of(div).respond();
+    }
+
+    /**
      * ボタン「前回値をコピーする」を押下する処理です。
      *
      * @param div コントロールdiv
@@ -535,12 +585,12 @@ public class NinnteiChousaKekkaTouroku1 {
         getValidationHandler().validateFor実施場所の必須入力(pairs, div);
         getValidationHandler().validateFor所属機関の必須入力(pairs, div);
         getValidationHandler().validateFor記入者の必須入力(pairs, div);
-        getValidationHandler().validateFor第1群の必須入力(pairs, div);
-        getValidationHandler().validateFor第2群の必須入力(pairs, div);
-        getValidationHandler().validateFor第3群の必須入力(pairs, div);
-        getValidationHandler().validateFor第4群の必須入力(pairs, div);
-        getValidationHandler().validateFor第5群の必須入力(pairs, div);
-        getValidationHandler().validateFor生活自立度の必須入力(pairs, div);
+//        getValidationHandler().validateFor第1群の必須入力(pairs, div);
+//        getValidationHandler().validateFor第2群の必須入力(pairs, div);
+//        getValidationHandler().validateFor第3群の必須入力(pairs, div);
+//        getValidationHandler().validateFor第4群の必須入力(pairs, div);
+//        getValidationHandler().validateFor第5群の必須入力(pairs, div);
+//        getValidationHandler().validateFor生活自立度の必須入力(pairs, div);
         if (pairs.iterator().hasNext()) {
             return ResponseData.of(div).addValidationMessages(pairs).respond();
         }
@@ -876,246 +926,238 @@ public class NinnteiChousaKekkaTouroku1 {
 
     private void 基本調査第1群更新(NinnteiChousaKekkaTouroku1Div div) {
 
-        ShinseishoKanriNo temp_申請書管理番号 = ViewStateHolder.get(ViewStateKeys.申請書管理番号, ShinseishoKanriNo.class);
-        int temp_認定調査履歴番号 = ViewStateHolder.get(ViewStateKeys.認定調査履歴番号, Integer.class);
-
-        List<RString> 麻痺List = div.getCcdIchigunKihonChosa().getDaiichigunShintaiKino().getChkMahi().getSelectedKeys();
-        for (RString key : 麻痺List) {
-            key = key.substring(INDEX_3);
-            if (!ない.equals(key)) {
-                調査項目の保存(temp_申請書管理番号, temp_認定調査履歴番号, Integer.valueOf(key.toString()), RString.EMPTY);
-            }
-        }
-        List<RString> 拘縮List = div.getCcdIchigunKihonChosa().getDaiichigunShintaiKino().getChkKoshuku().getSelectedKeys();
-        for (RString key : 拘縮List) {
-            key = key.substring(INDEX_3);
-            if (!ない.equals(key)) {
-                調査項目の保存(temp_申請書管理番号, temp_認定調査履歴番号, Integer.valueOf(key.toString()) + INDEX_5, RString.EMPTY);
-            }
-        }
-
-        RString 寝返り = div.getCcdIchigunKihonChosa().getDaiichigunShintaiKino().getRadNeKaeri().getSelectedKey();
-        RString 起き上がり = div.getCcdIchigunKihonChosa().getDaiichigunShintaiKino().getRadOkiAgari().getSelectedKey();
-        RString 座位保持 = div.getCcdIchigunKihonChosa().getDaiichigunShintaiKino().getRadZai().getSelectedKey();
-        RString 両足での立位保持 = div.getCcdIchigunKihonChosa().getDaiichigunShintaiKino().getRadRyoAshi().getSelectedKey();
-        RString 歩行 = div.getCcdIchigunKihonChosa().getDaiichigunShintaiKino().getRadBuko().getSelectedKey();
-        RString 立ち上がり = div.getCcdIchigunKihonChosa().getDaiichigunShintaiKino().getRadTachiAgari().getSelectedKey();
-        RString 片足での立位 = div.getCcdIchigunKihonChosa().getDaiichigunShintaiKino().getRadKataAshi().getSelectedKey();
-        RString 洗身 = div.getCcdIchigunKihonChosa().getDaiichigunShintaiKino().getRadSenshin().getSelectedKey();
-        RString つめ切り = div.getCcdIchigunKihonChosa().getDaiichigunShintaiKino().getRadTumeKiri().getSelectedKey();
-        RString 視力 = div.getCcdIchigunKihonChosa().getDaiichigunShintaiKino().getRadShiryoku().getSelectedKey();
-        RString 聴力 = div.getCcdIchigunKihonChosa().getDaiichigunShintaiKino().getRadChoryoku().getSelectedKey();
-
-        調査項目の保存(temp_申請書管理番号, temp_認定調査履歴番号, データベース内連番_10, 寝返り);
-        調査項目の保存(temp_申請書管理番号, temp_認定調査履歴番号, データベース内連番_11, 起き上がり);
-        調査項目の保存(temp_申請書管理番号, temp_認定調査履歴番号, データベース内連番_12, 座位保持);
-        調査項目の保存(temp_申請書管理番号, temp_認定調査履歴番号, データベース内連番_13, 両足での立位保持);
-        調査項目の保存(temp_申請書管理番号, temp_認定調査履歴番号, データベース内連番_14, 歩行);
-        調査項目の保存(temp_申請書管理番号, temp_認定調査履歴番号, データベース内連番_15, 立ち上がり);
-        調査項目の保存(temp_申請書管理番号, temp_認定調査履歴番号, データベース内連番_16, 片足での立位);
-        調査項目の保存(temp_申請書管理番号, temp_認定調査履歴番号, データベース内連番_17, 洗身);
-        調査項目の保存(temp_申請書管理番号, temp_認定調査履歴番号, データベース内連番_18, つめ切り);
-        調査項目の保存(temp_申請書管理番号, temp_認定調査履歴番号, データベース内連番_19, 視力);
-        調査項目の保存(temp_申請書管理番号, temp_認定調査履歴番号, データベース内連番_20, 聴力);
+//        ShinseishoKanriNo temp_申請書管理番号 = ViewStateHolder.get(ViewStateKeys.申請書管理番号, ShinseishoKanriNo.class);
+//        int temp_認定調査履歴番号 = ViewStateHolder.get(ViewStateKeys.認定調査履歴番号, Integer.class);
+//
+//        List<RString> 麻痺List = div.getCcdIchigunKihonChosa().getDaiichigunShintaiKino().getChkMahi().getSelectedKeys();
+//        for (RString key : 麻痺List) {
+//            key = key.substring(INDEX_3);
+//            if (!ない.equals(key)) {
+//                調査項目の保存(temp_申請書管理番号, temp_認定調査履歴番号, Integer.valueOf(key.toString()), RString.EMPTY);
+//            }
+//        }
+//        List<RString> 拘縮List = div.getCcdIchigunKihonChosa().getDaiichigunShintaiKino().getChkKoshuku().getSelectedKeys();
+//        for (RString key : 拘縮List) {
+//            key = key.substring(INDEX_3);
+//            if (!ない.equals(key)) {
+//                調査項目の保存(temp_申請書管理番号, temp_認定調査履歴番号, Integer.valueOf(key.toString()) + INDEX_5, RString.EMPTY);
+//            }
+//        }
+//
+//        RString 寝返り = div.getCcdIchigunKihonChosa().getDaiichigunShintaiKino().getRadNeKaeri().getSelectedKey();
+//        RString 起き上がり = div.getCcdIchigunKihonChosa().getDaiichigunShintaiKino().getRadOkiAgari().getSelectedKey();
+//        RString 座位保持 = div.getCcdIchigunKihonChosa().getDaiichigunShintaiKino().getRadZai().getSelectedKey();
+//        RString 両足での立位保持 = div.getCcdIchigunKihonChosa().getDaiichigunShintaiKino().getRadRyoAshi().getSelectedKey();
+//        RString 歩行 = div.getCcdIchigunKihonChosa().getDaiichigunShintaiKino().getRadBuko().getSelectedKey();
+//        RString 立ち上がり = div.getCcdIchigunKihonChosa().getDaiichigunShintaiKino().getRadTachiAgari().getSelectedKey();
+//        RString 片足での立位 = div.getCcdIchigunKihonChosa().getDaiichigunShintaiKino().getRadKataAshi().getSelectedKey();
+//        RString 洗身 = div.getCcdIchigunKihonChosa().getDaiichigunShintaiKino().getRadSenshin().getSelectedKey();
+//        RString つめ切り = div.getCcdIchigunKihonChosa().getDaiichigunShintaiKino().getRadTumeKiri().getSelectedKey();
+//        RString 視力 = div.getCcdIchigunKihonChosa().getDaiichigunShintaiKino().getRadShiryoku().getSelectedKey();
+//        RString 聴力 = div.getCcdIchigunKihonChosa().getDaiichigunShintaiKino().getRadChoryoku().getSelectedKey();
+//
+//        調査項目の保存(temp_申請書管理番号, temp_認定調査履歴番号, データベース内連番_10, 寝返り);
+//        調査項目の保存(temp_申請書管理番号, temp_認定調査履歴番号, データベース内連番_11, 起き上がり);
+//        調査項目の保存(temp_申請書管理番号, temp_認定調査履歴番号, データベース内連番_12, 座位保持);
+//        調査項目の保存(temp_申請書管理番号, temp_認定調査履歴番号, データベース内連番_13, 両足での立位保持);
+//        調査項目の保存(temp_申請書管理番号, temp_認定調査履歴番号, データベース内連番_14, 歩行);
+//        調査項目の保存(temp_申請書管理番号, temp_認定調査履歴番号, データベース内連番_15, 立ち上がり);
+//        調査項目の保存(temp_申請書管理番号, temp_認定調査履歴番号, データベース内連番_16, 片足での立位);
+//        調査項目の保存(temp_申請書管理番号, temp_認定調査履歴番号, データベース内連番_17, 洗身);
+//        調査項目の保存(temp_申請書管理番号, temp_認定調査履歴番号, データベース内連番_18, つめ切り);
+//        調査項目の保存(temp_申請書管理番号, temp_認定調査履歴番号, データベース内連番_19, 視力);
+//        調査項目の保存(temp_申請書管理番号, temp_認定調査履歴番号, データベース内連番_20, 聴力);
     }
 
     private void 基本調査第2群更新(NinnteiChousaKekkaTouroku1Div div) {
 
-        ShinseishoKanriNo temp_申請書管理番号 = ViewStateHolder.get(ViewStateKeys.申請書管理番号, ShinseishoKanriNo.class);
-        int temp_認定調査履歴番号 = ViewStateHolder.get(ViewStateKeys.認定調査履歴番号, Integer.class);
-
-        RString 移乗 = div.getCcdNigunKihonChosa().getSeikatsuKinou().getRadIjyo().getSelectedKey();
-        RString 移動 = div.getCcdNigunKihonChosa().getSeikatsuKinou().getRadIdou().getSelectedKey();
-        RString えん下 = div.getCcdNigunKihonChosa().getSeikatsuKinou().getRadEnka().getSelectedKey();
-        RString 食事摂取 = div.getCcdNigunKihonChosa().getSeikatsuKinou().getRadShokuji().getSelectedKey();
-        RString 排尿 = div.getCcdNigunKihonChosa().getSeikatsuKinou().getRadHainyo().getSelectedKey();
-        RString 排便 = div.getCcdNigunKihonChosa().getSeikatsuKinou().getRadHaiben().getSelectedKey();
-        RString 口腔清潔 = div.getCcdNigunKihonChosa().getSeikatsuKinou().getRadKokou().getSelectedKey();
-        RString 洗顔 = div.getCcdNigunKihonChosa().getSeikatsuKinou().getRadSengan().getSelectedKey();
-        RString 整髪 = div.getCcdNigunKihonChosa().getSeikatsuKinou().getRadSeihatsu().getSelectedKey();
-        RString 上衣の着脱 = div.getCcdNigunKihonChosa().getSeikatsuKinou().getRadUwagi().getSelectedKey();
-        RString ズボンの着脱 = div.getCcdNigunKihonChosa().getSeikatsuKinou().getRadZubon().getSelectedKey();
-        RString 外出頻度 = div.getCcdNigunKihonChosa().getSeikatsuKinou().getRadHindo().getSelectedKey();
-
-        調査項目の保存(temp_申請書管理番号, temp_認定調査履歴番号, データベース内連番_21, 移乗);
-        調査項目の保存(temp_申請書管理番号, temp_認定調査履歴番号, データベース内連番_22, 移動);
-        調査項目の保存(temp_申請書管理番号, temp_認定調査履歴番号, データベース内連番_23, えん下);
-        調査項目の保存(temp_申請書管理番号, temp_認定調査履歴番号, データベース内連番_24, 食事摂取);
-        調査項目の保存(temp_申請書管理番号, temp_認定調査履歴番号, データベース内連番_25, 排尿);
-        調査項目の保存(temp_申請書管理番号, temp_認定調査履歴番号, データベース内連番_26, 排便);
-        調査項目の保存(temp_申請書管理番号, temp_認定調査履歴番号, データベース内連番_27, 口腔清潔);
-        調査項目の保存(temp_申請書管理番号, temp_認定調査履歴番号, データベース内連番_28, 洗顔);
-        調査項目の保存(temp_申請書管理番号, temp_認定調査履歴番号, データベース内連番_29, 整髪);
-        調査項目の保存(temp_申請書管理番号, temp_認定調査履歴番号, データベース内連番_30, 上衣の着脱);
-        調査項目の保存(temp_申請書管理番号, temp_認定調査履歴番号, データベース内連番_31, ズボンの着脱);
-        調査項目の保存(temp_申請書管理番号, temp_認定調査履歴番号, データベース内連番_32, 外出頻度);
+//        ShinseishoKanriNo temp_申請書管理番号 = ViewStateHolder.get(ViewStateKeys.申請書管理番号, ShinseishoKanriNo.class);
+//        int temp_認定調査履歴番号 = ViewStateHolder.get(ViewStateKeys.認定調査履歴番号, Integer.class);
+//        RString 移乗 = div.getCcdNigunKihonChosa().getSeikatsuKinou().getRadIjyo().getSelectedKey();
+//        RString 移動 = div.getCcdNigunKihonChosa().getSeikatsuKinou().getRadIdou().getSelectedKey();
+//        RString えん下 = div.getCcdNigunKihonChosa().getSeikatsuKinou().getRadEnka().getSelectedKey();
+//        RString 食事摂取 = div.getCcdNigunKihonChosa().getSeikatsuKinou().getRadShokuji().getSelectedKey();
+//        RString 排尿 = div.getCcdNigunKihonChosa().getSeikatsuKinou().getRadHainyo().getSelectedKey();
+//        RString 排便 = div.getCcdNigunKihonChosa().getSeikatsuKinou().getRadHaiben().getSelectedKey();
+//        RString 口腔清潔 = div.getCcdNigunKihonChosa().getSeikatsuKinou().getRadKokou().getSelectedKey();
+//        RString 洗顔 = div.getCcdNigunKihonChosa().getSeikatsuKinou().getRadSengan().getSelectedKey();
+//        RString 整髪 = div.getCcdNigunKihonChosa().getSeikatsuKinou().getRadSeihatsu().getSelectedKey();
+//        RString 上衣の着脱 = div.getCcdNigunKihonChosa().getSeikatsuKinou().getRadUwagi().getSelectedKey();
+//        RString ズボンの着脱 = div.getCcdNigunKihonChosa().getSeikatsuKinou().getRadZubon().getSelectedKey();
+//        RString 外出頻度 = div.getCcdNigunKihonChosa().getSeikatsuKinou().getRadHindo().getSelectedKey();
+//
+//        調査項目の保存(temp_申請書管理番号, temp_認定調査履歴番号, データベース内連番_21, 移乗);
+//        調査項目の保存(temp_申請書管理番号, temp_認定調査履歴番号, データベース内連番_22, 移動);
+//        調査項目の保存(temp_申請書管理番号, temp_認定調査履歴番号, データベース内連番_23, えん下);
+//        調査項目の保存(temp_申請書管理番号, temp_認定調査履歴番号, データベース内連番_24, 食事摂取);
+//        調査項目の保存(temp_申請書管理番号, temp_認定調査履歴番号, データベース内連番_25, 排尿);
+//        調査項目の保存(temp_申請書管理番号, temp_認定調査履歴番号, データベース内連番_26, 排便);
+//        調査項目の保存(temp_申請書管理番号, temp_認定調査履歴番号, データベース内連番_27, 口腔清潔);
+//        調査項目の保存(temp_申請書管理番号, temp_認定調査履歴番号, データベース内連番_28, 洗顔);
+//        調査項目の保存(temp_申請書管理番号, temp_認定調査履歴番号, データベース内連番_29, 整髪);
+//        調査項目の保存(temp_申請書管理番号, temp_認定調査履歴番号, データベース内連番_30, 上衣の着脱);
+//        調査項目の保存(temp_申請書管理番号, temp_認定調査履歴番号, データベース内連番_31, ズボンの着脱);
+//        調査項目の保存(temp_申請書管理番号, temp_認定調査履歴番号, データベース内連番_32, 外出頻度);
     }
 
     private void 基本調査第3群更新(NinnteiChousaKekkaTouroku1Div div) {
 
-        ShinseishoKanriNo temp_申請書管理番号 = ViewStateHolder.get(ViewStateKeys.申請書管理番号, ShinseishoKanriNo.class);
-        int temp_認定調査履歴番号 = ViewStateHolder.get(ViewStateKeys.認定調査履歴番号, Integer.class);
-
-        RString 意思の伝達 = div.getCcdSangunKihonChosa().getNinchiKinou().getRadIshiDentatsu().getSelectedKey();
-        RString 毎日の日課を理解 = div.getCcdSangunKihonChosa().getNinchiKinou().getRadNikka().getSelectedKey();
-        RString 生年月日や年齢を言う = div.getCcdSangunKihonChosa().getNinchiKinou().getRadInfo().getSelectedKey();
-        RString 短期記憶 = div.getCcdSangunKihonChosa().getNinchiKinou().getRadDankiKioku().getSelectedKey();
-        RString 自分の名前を言う = div.getCcdSangunKihonChosa().getNinchiKinou().getRadNameInfo().getSelectedKey();
-        RString 今の季節を理解する = div.getCcdSangunKihonChosa().getNinchiKinou().getRadKisetsu().getSelectedKey();
-        RString 場所の理解 = div.getCcdSangunKihonChosa().getNinchiKinou().getRadBasho().getSelectedKey();
-        RString 徘徊 = div.getCcdSangunKihonChosa().getNinchiKinou().getRadHaikai().getSelectedKey();
-        RString 外出すると戻れない = div.getCcdSangunKihonChosa().getNinchiKinou().getRadModoru().getSelectedKey();
-
-        調査項目の保存(temp_申請書管理番号, temp_認定調査履歴番号, データベース内連番_33, 意思の伝達);
-        調査項目の保存(temp_申請書管理番号, temp_認定調査履歴番号, データベース内連番_34, 毎日の日課を理解);
-        調査項目の保存(temp_申請書管理番号, temp_認定調査履歴番号, データベース内連番_35, 生年月日や年齢を言う);
-        調査項目の保存(temp_申請書管理番号, temp_認定調査履歴番号, データベース内連番_36, 短期記憶);
-        調査項目の保存(temp_申請書管理番号, temp_認定調査履歴番号, データベース内連番_37, 自分の名前を言う);
-        調査項目の保存(temp_申請書管理番号, temp_認定調査履歴番号, データベース内連番_38, 今の季節を理解する);
-        調査項目の保存(temp_申請書管理番号, temp_認定調査履歴番号, データベース内連番_39, 場所の理解);
-        調査項目の保存(temp_申請書管理番号, temp_認定調査履歴番号, データベース内連番_40, 徘徊);
-        調査項目の保存(temp_申請書管理番号, temp_認定調査履歴番号, データベース内連番_41, 外出すると戻れない);
+//        ShinseishoKanriNo temp_申請書管理番号 = ViewStateHolder.get(ViewStateKeys.申請書管理番号, ShinseishoKanriNo.class);
+//        int temp_認定調査履歴番号 = ViewStateHolder.get(ViewStateKeys.認定調査履歴番号, Integer.class);
+//        RString 意思の伝達 = div.getCcdSangunKihonChosa().getNinchiKinou().getRadIshiDentatsu().getSelectedKey();
+//        RString 毎日の日課を理解 = div.getCcdSangunKihonChosa().getNinchiKinou().getRadNikka().getSelectedKey();
+//        RString 生年月日や年齢を言う = div.getCcdSangunKihonChosa().getNinchiKinou().getRadInfo().getSelectedKey();
+//        RString 短期記憶 = div.getCcdSangunKihonChosa().getNinchiKinou().getRadDankiKioku().getSelectedKey();
+//        RString 自分の名前を言う = div.getCcdSangunKihonChosa().getNinchiKinou().getRadNameInfo().getSelectedKey();
+//        RString 今の季節を理解する = div.getCcdSangunKihonChosa().getNinchiKinou().getRadKisetsu().getSelectedKey();
+//        RString 場所の理解 = div.getCcdSangunKihonChosa().getNinchiKinou().getRadBasho().getSelectedKey();
+//        RString 徘徊 = div.getCcdSangunKihonChosa().getNinchiKinou().getRadHaikai().getSelectedKey();
+//        RString 外出すると戻れない = div.getCcdSangunKihonChosa().getNinchiKinou().getRadModoru().getSelectedKey();
+//
+//        調査項目の保存(temp_申請書管理番号, temp_認定調査履歴番号, データベース内連番_33, 意思の伝達);
+//        調査項目の保存(temp_申請書管理番号, temp_認定調査履歴番号, データベース内連番_34, 毎日の日課を理解);
+//        調査項目の保存(temp_申請書管理番号, temp_認定調査履歴番号, データベース内連番_35, 生年月日や年齢を言う);
+//        調査項目の保存(temp_申請書管理番号, temp_認定調査履歴番号, データベース内連番_36, 短期記憶);
+//        調査項目の保存(temp_申請書管理番号, temp_認定調査履歴番号, データベース内連番_37, 自分の名前を言う);
+//        調査項目の保存(temp_申請書管理番号, temp_認定調査履歴番号, データベース内連番_38, 今の季節を理解する);
+//        調査項目の保存(temp_申請書管理番号, temp_認定調査履歴番号, データベース内連番_39, 場所の理解);
+//        調査項目の保存(temp_申請書管理番号, temp_認定調査履歴番号, データベース内連番_40, 徘徊);
+//        調査項目の保存(temp_申請書管理番号, temp_認定調査履歴番号, データベース内連番_41, 外出すると戻れない);
     }
 
     private void 基本調査第4群更新(NinnteiChousaKekkaTouroku1Div div) {
 
-        ShinseishoKanriNo temp_申請書管理番号 = ViewStateHolder.get(ViewStateKeys.申請書管理番号, ShinseishoKanriNo.class);
-        int temp_認定調査履歴番号 = ViewStateHolder.get(ViewStateKeys.認定調査履歴番号, Integer.class);
-
-        RString 被虐的 = div.getCcdYongunKihonChosa().getKoudoShogai().getRadbtnHiryaku().getSelectedKey();
-        RString 作話 = div.getCcdYongunKihonChosa().getKoudoShogai().getRadTukuriHanashi().getSelectedKey();
-        RString 感情が不安定 = div.getCcdYongunKihonChosa().getKoudoShogai().getRadKanjyo().getSelectedKey();
-        RString 昼夜逆転 = div.getCcdYongunKihonChosa().getKoudoShogai().getRadChuyaku().getSelectedKey();
-        RString 同じ話をする = div.getCcdYongunKihonChosa().getKoudoShogai().getRadOnajiHanashi().getSelectedKey();
-        RString 大声をだす = div.getCcdYongunKihonChosa().getKoudoShogai().getRadBigVoice().getSelectedKey();
-        RString 介護に抵抗 = div.getCcdYongunKihonChosa().getKoudoShogai().getRadTeikou().getSelectedKey();
-        RString 落ち着きなし = div.getCcdYongunKihonChosa().getKoudoShogai().getRadOchituki().getSelectedKey();
-        RString 一人で出たがる = div.getCcdYongunKihonChosa().getKoudoShogai().getRadOutLonly().getSelectedKey();
-        RString 収集癖 = div.getCcdYongunKihonChosa().getKoudoShogai().getRadShushu().getSelectedKey();
-        RString 物や衣類を壊す = div.getCcdYongunKihonChosa().getKoudoShogai().getRadKowasu().getSelectedKey();
-        RString ひどい物忘れ = div.getCcdYongunKihonChosa().getKoudoShogai().getRadMonoWasure().getSelectedKey();
-        RString 独り言 = div.getCcdYongunKihonChosa().getKoudoShogai().getRadHitoriWarai().getSelectedKey();
-        RString 自分勝手に行動する = div.getCcdYongunKihonChosa().getKoudoShogai().getRadKateKodo().getSelectedKey();
-        RString 話がまとまらない = div.getCcdYongunKihonChosa().getKoudoShogai().getRadMatomeNai().getSelectedKey();
-
-        調査項目の保存(temp_申請書管理番号, temp_認定調査履歴番号, データベース内連番_42, 被虐的);
-        調査項目の保存(temp_申請書管理番号, temp_認定調査履歴番号, データベース内連番_43, 作話);
-        調査項目の保存(temp_申請書管理番号, temp_認定調査履歴番号, データベース内連番_44, 感情が不安定);
-        調査項目の保存(temp_申請書管理番号, temp_認定調査履歴番号, データベース内連番_45, 昼夜逆転);
-        調査項目の保存(temp_申請書管理番号, temp_認定調査履歴番号, データベース内連番_46, 同じ話をする);
-        調査項目の保存(temp_申請書管理番号, temp_認定調査履歴番号, データベース内連番_47, 大声をだす);
-        調査項目の保存(temp_申請書管理番号, temp_認定調査履歴番号, データベース内連番_48, 介護に抵抗);
-        調査項目の保存(temp_申請書管理番号, temp_認定調査履歴番号, データベース内連番_49, 落ち着きなし);
-        調査項目の保存(temp_申請書管理番号, temp_認定調査履歴番号, データベース内連番_50, 一人で出たがる);
-        調査項目の保存(temp_申請書管理番号, temp_認定調査履歴番号, データベース内連番_51, 収集癖);
-        調査項目の保存(temp_申請書管理番号, temp_認定調査履歴番号, データベース内連番_52, 物や衣類を壊す);
-        調査項目の保存(temp_申請書管理番号, temp_認定調査履歴番号, データベース内連番_53, ひどい物忘れ);
-        調査項目の保存(temp_申請書管理番号, temp_認定調査履歴番号, データベース内連番_54, 独り言);
-        調査項目の保存(temp_申請書管理番号, temp_認定調査履歴番号, データベース内連番_55, 自分勝手に行動する);
-        調査項目の保存(temp_申請書管理番号, temp_認定調査履歴番号, データベース内連番_56, 話がまとまらない);
+//        ShinseishoKanriNo temp_申請書管理番号 = ViewStateHolder.get(ViewStateKeys.申請書管理番号, ShinseishoKanriNo.class);
+//        int temp_認定調査履歴番号 = ViewStateHolder.get(ViewStateKeys.認定調査履歴番号, Integer.class);
+//        RString 被虐的 = div.getCcdYongunKihonChosa().getKoudoShogai().getRadbtnHiryaku().getSelectedKey();
+//        RString 作話 = div.getCcdYongunKihonChosa().getKoudoShogai().getRadTukuriHanashi().getSelectedKey();
+//        RString 感情が不安定 = div.getCcdYongunKihonChosa().getKoudoShogai().getRadKanjyo().getSelectedKey();
+//        RString 昼夜逆転 = div.getCcdYongunKihonChosa().getKoudoShogai().getRadChuyaku().getSelectedKey();
+//        RString 同じ話をする = div.getCcdYongunKihonChosa().getKoudoShogai().getRadOnajiHanashi().getSelectedKey();
+//        RString 大声をだす = div.getCcdYongunKihonChosa().getKoudoShogai().getRadBigVoice().getSelectedKey();
+//        RString 介護に抵抗 = div.getCcdYongunKihonChosa().getKoudoShogai().getRadTeikou().getSelectedKey();
+//        RString 落ち着きなし = div.getCcdYongunKihonChosa().getKoudoShogai().getRadOchituki().getSelectedKey();
+//        RString 一人で出たがる = div.getCcdYongunKihonChosa().getKoudoShogai().getRadOutLonly().getSelectedKey();
+//        RString 収集癖 = div.getCcdYongunKihonChosa().getKoudoShogai().getRadShushu().getSelectedKey();
+//        RString 物や衣類を壊す = div.getCcdYongunKihonChosa().getKoudoShogai().getRadKowasu().getSelectedKey();
+//        RString ひどい物忘れ = div.getCcdYongunKihonChosa().getKoudoShogai().getRadMonoWasure().getSelectedKey();
+//        RString 独り言 = div.getCcdYongunKihonChosa().getKoudoShogai().getRadHitoriWarai().getSelectedKey();
+//        RString 自分勝手に行動する = div.getCcdYongunKihonChosa().getKoudoShogai().getRadKateKodo().getSelectedKey();
+//        RString 話がまとまらない = div.getCcdYongunKihonChosa().getKoudoShogai().getRadMatomeNai().getSelectedKey();
+//
+//        調査項目の保存(temp_申請書管理番号, temp_認定調査履歴番号, データベース内連番_42, 被虐的);
+//        調査項目の保存(temp_申請書管理番号, temp_認定調査履歴番号, データベース内連番_43, 作話);
+//        調査項目の保存(temp_申請書管理番号, temp_認定調査履歴番号, データベース内連番_44, 感情が不安定);
+//        調査項目の保存(temp_申請書管理番号, temp_認定調査履歴番号, データベース内連番_45, 昼夜逆転);
+//        調査項目の保存(temp_申請書管理番号, temp_認定調査履歴番号, データベース内連番_46, 同じ話をする);
+//        調査項目の保存(temp_申請書管理番号, temp_認定調査履歴番号, データベース内連番_47, 大声をだす);
+//        調査項目の保存(temp_申請書管理番号, temp_認定調査履歴番号, データベース内連番_48, 介護に抵抗);
+//        調査項目の保存(temp_申請書管理番号, temp_認定調査履歴番号, データベース内連番_49, 落ち着きなし);
+//        調査項目の保存(temp_申請書管理番号, temp_認定調査履歴番号, データベース内連番_50, 一人で出たがる);
+//        調査項目の保存(temp_申請書管理番号, temp_認定調査履歴番号, データベース内連番_51, 収集癖);
+//        調査項目の保存(temp_申請書管理番号, temp_認定調査履歴番号, データベース内連番_52, 物や衣類を壊す);
+//        調査項目の保存(temp_申請書管理番号, temp_認定調査履歴番号, データベース内連番_53, ひどい物忘れ);
+//        調査項目の保存(temp_申請書管理番号, temp_認定調査履歴番号, データベース内連番_54, 独り言);
+//        調査項目の保存(temp_申請書管理番号, temp_認定調査履歴番号, データベース内連番_55, 自分勝手に行動する);
+//        調査項目の保存(temp_申請書管理番号, temp_認定調査履歴番号, データベース内連番_56, 話がまとまらない);
     }
 
     private void 基本調査第5群更新(NinnteiChousaKekkaTouroku1Div div) {
 
-        ShinseishoKanriNo temp_申請書管理番号 = ViewStateHolder.get(ViewStateKeys.申請書管理番号, ShinseishoKanriNo.class);
-        int temp_認定調査履歴番号 = ViewStateHolder.get(ViewStateKeys.認定調査履歴番号, Integer.class);
-
-        RString 薬の内服 = div.getCcdGogun().getShakaiSekatsu().getRadKusuri().getSelectedKey();
-        RString 金銭の管理 = div.getCcdGogun().getShakaiSekatsu().getRadKingakuKanri().getSelectedKey();
-        RString 日常の意思決定 = div.getCcdGogun().getShakaiSekatsu().getRadIshiKetei().getSelectedKey();
-        RString 集団への不適用 = div.getCcdGogun().getShakaiSekatsu().getRadShudan().getSelectedKey();
-        RString 買い物 = div.getCcdGogun().getShakaiSekatsu().getRadKaiMono().getSelectedKey();
-        RString 簡単な調理 = div.getCcdGogun().getShakaiSekatsu().getRadKantanChori().getSelectedKey();
-
-        調査項目の保存(temp_申請書管理番号, temp_認定調査履歴番号, データベース内連番_57, 薬の内服);
-        調査項目の保存(temp_申請書管理番号, temp_認定調査履歴番号, データベース内連番_58, 金銭の管理);
-        調査項目の保存(temp_申請書管理番号, temp_認定調査履歴番号, データベース内連番_59, 日常の意思決定);
-        調査項目の保存(temp_申請書管理番号, temp_認定調査履歴番号, データベース内連番_60, 集団への不適用);
-        調査項目の保存(temp_申請書管理番号, temp_認定調査履歴番号, データベース内連番_61, 買い物);
-        調査項目の保存(temp_申請書管理番号, temp_認定調査履歴番号, データベース内連番_62, 簡単な調理);
+//        ShinseishoKanriNo temp_申請書管理番号 = ViewStateHolder.get(ViewStateKeys.申請書管理番号, ShinseishoKanriNo.class);
+//        int temp_認定調査履歴番号 = ViewStateHolder.get(ViewStateKeys.認定調査履歴番号, Integer.class);
+//        RString 薬の内服 = div.getCcdGogun().getShakaiSekatsu().getRadKusuri().getSelectedKey();
+//        RString 金銭の管理 = div.getCcdGogun().getShakaiSekatsu().getRadKingakuKanri().getSelectedKey();
+//        RString 日常の意思決定 = div.getCcdGogun().getShakaiSekatsu().getRadIshiKetei().getSelectedKey();
+//        RString 集団への不適用 = div.getCcdGogun().getShakaiSekatsu().getRadShudan().getSelectedKey();
+//        RString 買い物 = div.getCcdGogun().getShakaiSekatsu().getRadKaiMono().getSelectedKey();
+//        RString 簡単な調理 = div.getCcdGogun().getShakaiSekatsu().getRadKantanChori().getSelectedKey();
+//
+//        調査項目の保存(temp_申請書管理番号, temp_認定調査履歴番号, データベース内連番_57, 薬の内服);
+//        調査項目の保存(temp_申請書管理番号, temp_認定調査履歴番号, データベース内連番_58, 金銭の管理);
+//        調査項目の保存(temp_申請書管理番号, temp_認定調査履歴番号, データベース内連番_59, 日常の意思決定);
+//        調査項目の保存(temp_申請書管理番号, temp_認定調査履歴番号, データベース内連番_60, 集団への不適用);
+//        調査項目の保存(temp_申請書管理番号, temp_認定調査履歴番号, データベース内連番_61, 買い物);
+//        調査項目の保存(temp_申請書管理番号, temp_認定調査履歴番号, データベース内連番_62, 簡単な調理);
     }
 
     private void 基本調査第6群更新(NinnteiChousaKekkaTouroku1Div div) {
 
-        ShinseishoKanriNo temp_申請書管理番号 = ViewStateHolder.get(ViewStateKeys.申請書管理番号, ShinseishoKanriNo.class);
-        int temp_認定調査履歴番号 = ViewStateHolder.get(ViewStateKeys.認定調査履歴番号, Integer.class);
-
-        List<RString> 処置内容List = div.getCcdTokubetsuIryoKihonChosa().getTokubetsuIryo().getChkShochiNaiyo().getSelectedKeys();
-        List<RString> 処置内容選択List = new ArrayList<>();
-        for (RString key : 処置内容List) {
-            調査項目の保存(temp_申請書管理番号, temp_認定調査履歴番号, Integer.valueOf(key.substring(INDEX_3).toString()) + INDEX_63, RString.EMPTY);
-            処置内容選択List.add(key);
-        }
-        List<KeyValueDataSource> all処置内容List = div.getCcdTokubetsuIryoKihonChosa().getTokubetsuIryo().getChkShochiNaiyo().getDataSource();
-        for (KeyValueDataSource ketData : all処置内容List) {
-            if (!処置内容選択List.contains(ketData.getKey())) {
-                調査項目の削除(temp_申請書管理番号, temp_認定調査履歴番号,
-                        Integer.valueOf(ketData.getKey().substring(INDEX_3).toString()) + INDEX_63);
-            }
-        }
-
-        List<RString> 特別な対応List = div.getCcdTokubetsuIryoKihonChosa().getTokubetsuIryo().getChkTokiTaiou().getSelectedKeys();
-        List<RString> 特別な対応選択List = new ArrayList<>();
-        for (RString key : 特別な対応List) {
-            調査項目の保存(temp_申請書管理番号, temp_認定調査履歴番号, Integer.valueOf(key.substring(INDEX_3).toString()) + INDEX_72, RString.EMPTY);
-            特別な対応選択List.add(key);
-        }
-        List<KeyValueDataSource> all特別な対応List = div.getCcdTokubetsuIryoKihonChosa().getTokubetsuIryo().getChkTokiTaiou().getDataSource();
-        for (KeyValueDataSource ketData : all特別な対応List) {
-            if (!特別な対応選択List.contains(ketData.getKey())) {
-                調査項目の削除(temp_申請書管理番号, temp_認定調査履歴番号,
-                        Integer.valueOf(ketData.getKey().substring(INDEX_3).toString()) + INDEX_63);
-            }
-        }
+//        ShinseishoKanriNo temp_申請書管理番号 = ViewStateHolder.get(ViewStateKeys.申請書管理番号, ShinseishoKanriNo.class);
+//        int temp_認定調査履歴番号 = ViewStateHolder.get(ViewStateKeys.認定調査履歴番号, Integer.class);
+//        List<RString> 処置内容List = div.getCcdTokubetsuIryoKihonChosa().getTokubetsuIryo().getChkShochiNaiyo().getSelectedKeys();
+//        List<RString> 処置内容選択List = new ArrayList<>();
+//        for (RString key : 処置内容List) {
+//            調査項目の保存(temp_申請書管理番号, temp_認定調査履歴番号, Integer.valueOf(key.substring(INDEX_3).toString()) + INDEX_63, RString.EMPTY);
+//            処置内容選択List.add(key);
+//        }
+//        List<KeyValueDataSource> all処置内容List = div.getCcdTokubetsuIryoKihonChosa().getTokubetsuIryo().getChkShochiNaiyo().getDataSource();
+//        for (KeyValueDataSource ketData : all処置内容List) {
+//            if (!処置内容選択List.contains(ketData.getKey())) {
+//                調査項目の削除(temp_申請書管理番号, temp_認定調査履歴番号,
+//                        Integer.valueOf(ketData.getKey().substring(INDEX_3).toString()) + INDEX_63);
+//            }
+//        }
+//
+//        List<RString> 特別な対応List = div.getCcdTokubetsuIryoKihonChosa().getTokubetsuIryo().getChkTokiTaiou().getSelectedKeys();
+//        List<RString> 特別な対応選択List = new ArrayList<>();
+//        for (RString key : 特別な対応List) {
+//            調査項目の保存(temp_申請書管理番号, temp_認定調査履歴番号, Integer.valueOf(key.substring(INDEX_3).toString()) + INDEX_72, RString.EMPTY);
+//            特別な対応選択List.add(key);
+//        }
+//        List<KeyValueDataSource> all特別な対応List = div.getCcdTokubetsuIryoKihonChosa().getTokubetsuIryo().getChkTokiTaiou().getDataSource();
+//        for (KeyValueDataSource ketData : all特別な対応List) {
+//            if (!特別な対応選択List.contains(ketData.getKey())) {
+//                調査項目の削除(temp_申請書管理番号, temp_認定調査履歴番号,
+//                        Integer.valueOf(ketData.getKey().substring(INDEX_3).toString()) + INDEX_63);
+//            }
+//        }
     }
 
     private void 基本調査第7群更新(NinnteiChousaKekkaTouroku1Div div) {
 
-        ShinseishoKanriNo temp_申請書管理番号 = ViewStateHolder.get(ViewStateKeys.申請書管理番号, ShinseishoKanriNo.class);
-        int temp_認定調査履歴番号 = ViewStateHolder.get(ViewStateKeys.認定調査履歴番号, Integer.class);
-        RString temp_厚労省IF識別コード = ViewStateHolder.get(NinnteiChousaKekkaTouroku1Handler.Dbe2210001Keys.厚労省IF識別コード, RString.class);
-
-        NinteichosahyoKihonChosaManager manager = new NinteichosahyoKihonChosaManager();
-        RString 認知症高齢者の日常生活自立度コード = div.getCcdSeikatsuJiritsudoKihonchosa().getJiritsudo().getRadShogaiKoreisha().getSelectedKey();
-        NinteichosahyoKihonChosa dbt5203 = new NinteichosahyoKihonChosa(temp_申請書管理番号, temp_認定調査履歴番号);
-        NinteichosahyoKihonChosaBuilder builder = dbt5203.createBuilderForEdit();
-        builder.set厚労省IF識別コード(new Code(temp_厚労省IF識別コード));
-        builder.set認定調査_認知症高齢者の日常生活自立度コード(new Code(new RString(
-                Integer.valueOf(Integer.valueOf(認知症高齢者の日常生活自立度コード.substring(INDEX_3).toString()) + 1).toString())));
-        manager.save認定調査票_基本調査(builder.build());
-
-        RString 障害高齢者の日常生活自立度コード = div.getCcdSeikatsuJiritsudoKihonchosa().getJiritsudo().getRadNinchishaJiritsudo().getSelectedKey();
-        dbt5203 = new NinteichosahyoKihonChosa(temp_申請書管理番号, temp_認定調査履歴番号);
-        builder = dbt5203.createBuilderForEdit();
-        builder.set厚労省IF識別コード(new Code(temp_厚労省IF識別コード));
-        builder.set認定調査_障害高齢者の日常生活自立度コード(new Code(new RString(
-                Integer.valueOf(Integer.valueOf(障害高齢者の日常生活自立度コード.substring(INDEX_3).toString()) + 1).toString())));
-        manager.save認定調査票_基本調査(builder.build());
+//        ShinseishoKanriNo temp_申請書管理番号 = ViewStateHolder.get(ViewStateKeys.申請書管理番号, ShinseishoKanriNo.class);
+//        int temp_認定調査履歴番号 = ViewStateHolder.get(ViewStateKeys.認定調査履歴番号, Integer.class);
+//        RString temp_厚労省IF識別コード = ViewStateHolder.get(NinnteiChousaKekkaTouroku1Handler.Dbe2210001Keys.厚労省IF識別コード, RString.class);
+//        NinteichosahyoKihonChosaManager manager = new NinteichosahyoKihonChosaManager();
+//        RString 認知症高齢者の日常生活自立度コード = div.getCcdSeikatsuJiritsudoKihonchosa().getJiritsudo().getRadShogaiKoreisha().getSelectedKey();
+//        NinteichosahyoKihonChosa dbt5203 = new NinteichosahyoKihonChosa(temp_申請書管理番号, temp_認定調査履歴番号);
+//        NinteichosahyoKihonChosaBuilder builder = dbt5203.createBuilderForEdit();
+//        builder.set厚労省IF識別コード(new Code(temp_厚労省IF識別コード));
+//        builder.set認定調査_認知症高齢者の日常生活自立度コード(new Code(new RString(
+//                Integer.valueOf(Integer.valueOf(認知症高齢者の日常生活自立度コード.substring(INDEX_3).toString()) + 1).toString())));
+//        manager.save認定調査票_基本調査(builder.build());
+//
+//        RString 障害高齢者の日常生活自立度コード = div.getCcdSeikatsuJiritsudoKihonchosa().getJiritsudo().getRadNinchishaJiritsudo().getSelectedKey();
+//        dbt5203 = new NinteichosahyoKihonChosa(temp_申請書管理番号, temp_認定調査履歴番号);
+//        builder = dbt5203.createBuilderForEdit();
+//        builder.set厚労省IF識別コード(new Code(temp_厚労省IF識別コード));
+//        builder.set認定調査_障害高齢者の日常生活自立度コード(new Code(new RString(
+//                Integer.valueOf(Integer.valueOf(障害高齢者の日常生活自立度コード.substring(INDEX_3).toString()) + 1).toString())));
+//        manager.save認定調査票_基本調査(builder.build());
     }
 
-    private void 調査項目の保存(ShinseishoKanriNo temp_申請書管理番号, int temp_認定調査履歴番号, int 連番, RString selectKey) {
-        NinteichosahyoChosaItemManager manager = new NinteichosahyoChosaItemManager();
-        NinteichosahyoChosaItem dbt5211 = manager.get認定調査票_基本調査_調査項目(temp_申請書管理番号, temp_認定調査履歴番号, 連番);
-        if (dbt5211 == null) {
-            dbt5211 = new NinteichosahyoChosaItem(temp_申請書管理番号, temp_認定調査履歴番号, 連番);
-        }
-        NinteichosahyoChosaItemBuilder builder = dbt5211.createBuilderForEdit();
-        if (!selectKey.isEmpty()) {
-            builder.set調査項目(new RString(Integer.valueOf(Integer.valueOf(selectKey.substring(INDEX_3).toString()) + 1).toString()));
-        }
-
-        manager.save認定調査票_基本調査_調査項目(builder.build());
-    }
-
-    private void 調査項目の削除(ShinseishoKanriNo temp_申請書管理番号, int temp_認定調査履歴番号, int 連番) {
-        NinteichosahyoChosaItemManager manager = new NinteichosahyoChosaItemManager();
-        NinteichosahyoChosaItem dbt5211 = manager.get認定調査票_基本調査_調査項目(temp_申請書管理番号, temp_認定調査履歴番号, 連番);
-        if (dbt5211 != null) {
-            NinteichosahyoChosaItemBuilder builder = dbt5211.createBuilderForEdit();
-            manager.delete認定調査票_基本調査_調査項目(builder.build());
-        }
-    }
-
+//    private void 調査項目の保存(ShinseishoKanriNo temp_申請書管理番号, int temp_認定調査履歴番号, int 連番, RString selectKey) {
+//        NinteichosahyoChosaItemManager manager = new NinteichosahyoChosaItemManager();
+//        NinteichosahyoChosaItem dbt5211 = manager.get認定調査票_基本調査_調査項目(temp_申請書管理番号, temp_認定調査履歴番号, 連番);
+//        if (dbt5211 == null) {
+//            dbt5211 = new NinteichosahyoChosaItem(temp_申請書管理番号, temp_認定調査履歴番号, 連番);
+//        }
+//        NinteichosahyoChosaItemBuilder builder = dbt5211.createBuilderForEdit();
+//        if (!selectKey.isEmpty()) {
+//            builder.set調査項目(new RString(Integer.valueOf(Integer.valueOf(selectKey.substring(INDEX_3).toString()) + 1).toString()));
+//        }
+//
+//        manager.save認定調査票_基本調査_調査項目(builder.build());
+//    }
+//    private void 調査項目の削除(ShinseishoKanriNo temp_申請書管理番号, int temp_認定調査履歴番号, int 連番) {
+//        NinteichosahyoChosaItemManager manager = new NinteichosahyoChosaItemManager();
+//        NinteichosahyoChosaItem dbt5211 = manager.get認定調査票_基本調査_調査項目(temp_申請書管理番号, temp_認定調査履歴番号, 連番);
+//        if (dbt5211 != null) {
+//            NinteichosahyoChosaItemBuilder builder = dbt5211.createBuilderForEdit();
+//            manager.delete認定調査票_基本調査_調査項目(builder.build());
+//        }
+//    }
     private void 予防給付サービス状況の更新(NinnteiChousaKekkaTouroku1Div div) {
 
         ShinseishoKanriNo temp_申請書管理番号 = ViewStateHolder.get(ViewStateKeys.申請書管理番号, ShinseishoKanriNo.class);
@@ -1149,14 +1191,20 @@ public class NinnteiChousaKekkaTouroku1 {
         int index = 0;
         int 連番;
         for (dgRiyoSerViceFirstHalf_Row firstRow : firstHalf) {
-            利用状況 = firstRow.getServiceJokyo().getValue();
+            if (firstRow.getServiceJokyo() != null) {
+                利用状況 = firstRow.getServiceJokyo().getValue();
+            } else {
+                利用状況 = null;
+            }
             連番 = 連番List.get(index++);
             NinteichosahyoServiceJokyo dbt5207 = dbt5207Manager.get認定調査票_概況調査_サービスの状況(temp_申請書管理番号, temp_認定調査履歴番号, 連番);
             if (dbt5207 == null) {
                 dbt5207 = new NinteichosahyoServiceJokyo(temp_申請書管理番号, temp_認定調査履歴番号, 連番);
             }
             NinteichosahyoServiceJokyoBuilder dbt5207Builder = dbt5207.createBuilderForEdit();
-            dbt5207Builder.setサービスの状況(利用状況.intValue());
+            if (利用状況 != null && !"".equals(利用状況.toString())) {
+                dbt5207Builder.setサービスの状況(利用状況.intValue());
+            }
             dbt5207Manager.save認定調査票_概況調査_サービスの状況(dbt5207Builder.build());
         }
     }
@@ -1239,14 +1287,20 @@ public class NinnteiChousaKekkaTouroku1 {
         int index = 0;
         int 連番;
         for (dgRiyoSerViceSecondHalf_Row row : secondHalf) {
-            利用状況 = row.getServiceJokyo().getValue();
+            if (row.getServiceJokyo() != null) {
+                利用状況 = row.getServiceJokyo().getValue();
+            } else {
+                利用状況 = null;
+            }
             連番 = 連番List.get(index++);
             NinteichosahyoServiceJokyo dbt5207 = dbt5207Manager.get認定調査票_概況調査_サービスの状況(temp_申請書管理番号, temp_認定調査履歴番号, 連番);
             if (dbt5207 == null) {
                 dbt5207 = new NinteichosahyoServiceJokyo(temp_申請書管理番号, temp_認定調査履歴番号, 連番);
             }
             NinteichosahyoServiceJokyoBuilder dbt5207Builder = dbt5207.createBuilderForEdit();
-            dbt5207Builder.setサービスの状況(利用状況.intValue());
+            if (利用状況 != null && !"".equals(利用状況.toString())) {
+                dbt5207Builder.setサービスの状況(利用状況.intValue());
+            }
             dbt5207Manager.save認定調査票_概況調査_サービスの状況(dbt5207Builder.build());
         }
     }
