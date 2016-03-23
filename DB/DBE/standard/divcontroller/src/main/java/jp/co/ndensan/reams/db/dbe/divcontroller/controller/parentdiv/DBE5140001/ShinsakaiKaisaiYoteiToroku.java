@@ -87,6 +87,7 @@ public class ShinsakaiKaisaiYoteiToroku {
     private static final int 月_12 = 12;
     private static final RString モード_月 = new RString("月切");
     private static final RString モード_初期化 = new RString("初期化");
+    private static final RString モード_クリア = new RString("クリア");
     private static final QuestionMessage HAKIMESSAGE = new QuestionMessage(UrQuestionMessages.入力内容の破棄.getMessage().getCode(),
             UrQuestionMessages.入力内容の破棄.getMessage().evaluate());
     private static final QuestionMessage SYORIMESSAGE = new QuestionMessage(UrQuestionMessages.処理実行の確認.getMessage().getCode(),
@@ -349,9 +350,10 @@ public class ShinsakaiKaisaiYoteiToroku {
                 setClear(entity2);
             }
         }
+        モード = モード_クリア;
         yoteiJohoEntityList2.removeAll(removeList);
         set介護認定審査会開催予定一覧(div.getTxtSeteibi().getValue().getYearMonth().toDateString());
-        clear入力();
+        set開催予定入力欄(div.getTxtSeteibi().getValue());
         return ResponseData.of(div).respond();
     }
 
@@ -819,6 +821,7 @@ public class ShinsakaiKaisaiYoteiToroku {
         } else {
             for (int i = 0; i < dayCount; i++) {
                 dgShinsakaiKaisaiYoteiIchiran_Row dgShinsakaRow = new dgShinsakaiKaisaiYoteiIchiran_Row();
+                setClearSelected(zenbuDate, dgShinsakaRow);
                 dgShinsakaRow.setKaisaiYoteibi(new RString(String.valueOf(i + 1)));
                 setHoliday(zenbuDate, holiDay, dgShinsakaRow);
                 set内部審査会名称用(dgShinsakaRow, zenbuDate);
@@ -827,6 +830,14 @@ public class ShinsakaiKaisaiYoteiToroku {
             }
         }
         div.getDgShinsakaiKaisaiYoteiIchiran().setDataSource(dgShinsakaRowList);
+    }
+
+    private void setClearSelected(FlexibleDate zenbuDate, dgShinsakaiKaisaiYoteiIchiran_Row dgShinsakaRow) {
+        if (モード.equals(モード_クリア) && div.getTxtSeteibi().getText().equals(new RString(zenbuDate.toString()))) {
+            dgShinsakaRow.setSelected(true);
+        } else {
+            dgShinsakaRow.setSelected(false);
+        }
     }
 
     private void setSelected(FlexibleDate zenbuDate, dgShinsakaiKaisaiYoteiIchiran_Row dgShinsakaRow) {
