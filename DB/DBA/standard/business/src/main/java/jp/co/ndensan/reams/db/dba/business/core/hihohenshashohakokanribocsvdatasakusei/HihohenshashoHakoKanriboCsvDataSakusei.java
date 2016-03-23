@@ -35,7 +35,9 @@ public final class HihohenshashoHakoKanriboCsvDataSakusei {
             boolean koumukumeyifukaflg,
             boolean hizikehensyuuflg) {
         List<HihohenshashoHakoKanriboCsvDataSakuseiEntity> csvDataList = new ArrayList<>();
-        if (!entityList.isEmpty()) {
+        if (!entityList.isEmpty() && entityList.size() == 1
+                && !(entityList.get(0).get被保険者番号() == null
+                || entityList.get(0).get被保険者番号().isEmpty())) {
             for (int i = 0; i < entityList.size(); i++) {
                 HihohenshashoHakoKanriboCsvDataSakuseiEntity csvEntity = new HihohenshashoHakoKanriboCsvDataSakuseiEntity();
                 csvEntity.setHihokenshaNo(entityList.get(i).get被保険者番号());
@@ -93,7 +95,9 @@ public final class HihohenshashoHakoKanriboCsvDataSakusei {
             boolean hizikehensyuuflg) {
         List<HihohenshashoHakoKanriboCsvDataSakuseiEntity> csvDataList = new ArrayList<>();
         int renban = 1;
-        if (!entityList.isEmpty()) {
+        if (!entityList.isEmpty() && entityList.size() == 1
+                && !(entityList.get(0).get被保険者番号() == null
+                || entityList.get(0).get被保険者番号().isEmpty())) {
             for (int i = 0; i < entityList.size(); i++) {
                 HihohenshashoHakoKanriboCsvDataSakuseiEntity csvEntity = new HihohenshashoHakoKanriboCsvDataSakuseiEntity();
                 csvEntity.setHihokenshaNo(entityList.get(i).get被保険者番号());
