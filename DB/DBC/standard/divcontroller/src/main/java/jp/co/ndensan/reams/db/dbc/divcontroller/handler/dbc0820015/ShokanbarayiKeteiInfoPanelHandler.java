@@ -160,15 +160,15 @@ public class ShokanbarayiKeteiInfoPanelHandler {
                 getShokanbaraiketteiJohoDiv().getDgSyokanbaraikete().getDataSource();
         List<SyokanbaraihiShikyuShinseiKetteEntity> 決定情報一覧List = new ArrayList<>();
         for (dgSyokanbaraikete_Row row : entityList) {
-            JigyoshaNo 事業者番 = new JigyoshaNo(row.getJigyoshaNo());
-            RString 証明書コード = row.getShurui();
+//            JigyoshaNo 事業者番 = new JigyoshaNo(row.getJigyoshaNo());
+//            RString 証明書コード = row.getShurui();
             RString 明細番号Grid = row.getMeisaiNo();
             RString 連番 = row.getRenban();
-            int 差額金額Grid = row.getSagakuKingaku().getValue().intValue();
-            RString テーブル区分 = row.getTableKubun();
-            SyokanbaraihiShikyuShinseiKetteEntity entity = SyokanbaraihiShikyuShinseiKetteEntity.
-                    createSelectByKeyParam(事業者番, 証明書コード, 明細番号Grid, 連番, 差額金額Grid, テーブル区分);
-            決定情報一覧List.add(entity);
+//            int 差額金額Grid = row.getSagakuKingaku().getValue().intValue();
+//            RString テーブル区分 = row.getTableKubun();
+//            SyokanbaraihiShikyuShinseiKetteEntity entity = SyokanbaraihiShikyuShinseiKetteEntity.
+//                    createSelectByKeyParam(事業者番, 証明書コード, 明細番号Grid, 連番, 差額金額Grid, テーブル区分);
+//            決定情報一覧List.add(entity);
         }
         boolean 差額金額登録フラグ = true;
         RString 証明書コード = new RString("000000001");
