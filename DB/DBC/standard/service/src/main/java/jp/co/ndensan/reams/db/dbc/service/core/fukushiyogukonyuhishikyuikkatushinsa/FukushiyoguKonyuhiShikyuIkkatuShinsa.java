@@ -6,7 +6,9 @@
 package jp.co.ndensan.reams.db.dbc.service.core.fukushiyogukonyuhishikyuikkatushinsa;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import jp.co.ndensan.reams.db.dbc.business.core.basic.ShokanFukushiYoguHanbaihi;
 import jp.co.ndensan.reams.db.dbc.business.core.basic.ShokanHanteiKekka;
 import jp.co.ndensan.reams.db.dbc.business.core.basic.ShokanKihon;
@@ -29,11 +31,11 @@ import jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.fukushiyogukonyuh
 import jp.co.ndensan.reams.db.dbc.service.core.MapperProvider;
 import jp.co.ndensan.reams.db.dbc.service.core.fukushiyogukonyuhishikyushisei.FukushiyoguKonyuhiShikyuKetteiKyufuJissekiHenshu;
 import jp.co.ndensan.reams.db.dbc.service.core.fukushiyogukonyuhishikyushisei.FukushiyoguKonyuhiShikyuShinsei;
+import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT1001HihokenshaDaichoEntity;
 import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.search.ShikibetsuTaishoPSMSearchKeyBuilder;
 import jp.co.ndensan.reams.ua.uax.definition.core.enumeratedtype.shikibetsutaisho.KensakuYusenKubun;
 import jp.co.ndensan.reams.ua.uax.definition.mybatisprm.shikibetsutaisho.IShikibetsuTaishoPSMSearchKey;
 import jp.co.ndensan.reams.uz.uza.biz.GyomuCode;
-import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
@@ -141,6 +143,13 @@ public class FukushiyoguKonyuhiShikyuIkkatuShinsa {
     public void updShikyuShinsei(FlexibleDate 決定日, List<ShokanShinseiEntityResult> 支給申請一括審査List) {
         if (支給申請一括審査List != null && !支給申請一括審査List.isEmpty()) {
             for (ShokanShinseiEntityResult result : 支給申請一括審査List) {
+                IFukushiyoguKonyuhiShikyuIkkatuShinsaMapper mapper
+                        = mapperProvider.create(IFukushiyoguKonyuhiShikyuIkkatuShinsaMapper.class);
+                Map<String, Object> parameter = new HashMap<>();
+                parameter.put("hiHokenshaNo", result.getEntity().
+                        get償還払支給申請Entity().getHiHokenshaNo());
+                DbT1001HihokenshaDaichoEntity dbt1001entity = mapper.get識別コード(parameter);
+
                 DbT3034ShokanShinseiEntity dbT3034entity = result.getEntity().get償還払支給申請Entity();
                 dbT3034entity.setShikyuShinseiShinsaKubun(ShikyushinseiShinsaKubun.審査済.getコード());
                 dbT3034entity.setShinsaYMD(FlexibleDate.getNowDate());
@@ -215,8 +224,9 @@ public class FukushiyoguKonyuhiShikyuIkkatuShinsa {
                         result.getEntity().get償還払請求基本Entity().getHiHokenshaNo(),
                         result.getEntity().get償還払請求基本Entity().getServiceTeikyoYM(),
                         result.getEntity().get償還払請求基本Entity().getSeiriNp());
-                // TODO 識別コード未指定
-                manager.dealKyufujisseki(モード_審査, new ShikibetsuCode("000000000000010"),
+
+                manager.dealKyufujisseki(モード_審査,
+                        dbt1001entity.getShikibetsuCode(),
                         償還払請求基本情報entity.toEntity(),
                         dbT3048EntityList,
                         償還払支給申請情報entity.toEntity(),
