@@ -335,6 +335,7 @@ public class HonKakushuTsuchiUchiwakeKakuninHandler {
         TsuchishoUchiwakeJoken 変更打分け方法 = get確認画面の打分け方法(true);
         RString 打ち分け条件 = ViewStateHolder.get(ViewStateKeys.打分け方法情報キー, RString.class);
         変更打分け方法 = 変更打分け方法.createBuilderForEdit().set打ち分け条件(打ち分け条件).build();
+        // TODO QA482 どの方法ですが？
         本算定賦課計算.regutiwakehouhoujyoho2(変更打分け方法, new RString(String.valueOf(変更区分_0)));
     }
 

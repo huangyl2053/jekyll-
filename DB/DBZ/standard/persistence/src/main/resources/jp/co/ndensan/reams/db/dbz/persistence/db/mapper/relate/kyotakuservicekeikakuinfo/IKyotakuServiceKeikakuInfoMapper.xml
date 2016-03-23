@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- どのマッパーインターフェースと対応するかを指定する -->
+<mapper namespace="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.relate.kyotakuservicekeikakuinfo.IKyotakuServiceKeikakuInfoMapper">
+
+    <resultMap id="result_KyotakuServiceKeikakuRelateEntity" type="jp.co.ndensan.reams.db.dbz.entity.db.relate.kyotakuservicekeikakuinfo.KyotakuServiceKeikakuInfoRelateEntity" autoMapping="true">
+        <result column="A_hihokenshaNo" property="hihokenshano" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.HihokenshaNoTypeHandler" />
+        <result column="A_taishoYM" property="taishoYM" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleYearMonthTypeHandler" />
+        <result column="A_rirekiNo" property="rirekiNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result column="A_tekiyoKaishiYMD" property="tekiyoKaishiYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler" />
+        <result column="A_tekiyoShuryoYMD" property="tekiyoShuryoYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler" />
+        <result column="A_sakuseiKubunCode" property="sakuseiKubunCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result column="A_keikakuJigyoshaNo" property="keikakuJigyoshaNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.JigyoshaNoTypeHandler" />
+        <result column="A_itakusakiJigyoshaNo" property="itakusakiJigyoshaNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.JigyoshaNoTypeHandler" />
+        <result column="B_jigyoshaName" property="jigyoshaName" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+    </resultMap>
+
+    <select id="getKyotakuServiceKeikaku" resultMap="result_KyotakuServiceKeikakuRelateEntity" 
+            parameterType="jp.co.ndensan.reams.db.dbz.definition.core.kyotakuservicekeikakuinfo.KyotakuServiceKeikakuInfoRelateParameter" fetchSize="500">
+        SELECT
+        A."hihokenshaNo" AS "A_hihokenshaNo",                           
+        A."taishoYM" AS "A_taishoYM",             
+        A."rirekiNo" AS "A_rirekiNo",               
+        A."tekiyoKaishiYMD" AS "A_tekiyoKaishiYMD",               
+        A."tekiyoShuryoYMD" AS "A_tekiyoShuryoYMD",               
+        A."sakuseiKubunCode"  AS "A_sakuseiKubunCode",             
+        A."keikakuJigyoshaNo" AS "A_keikakuJigyoshaNo",               
+        A."itakusakiJigyoshaNo" AS "A_itakusakiJigyoshaNo",               
+        B."jigyoshaName" AS "B_jigyoshaName"                
+        FROM                 
+        rgdb."DbT3006KyotakuKeikakuJigyoshaSakusei" AS A                
+        LEFT JOIN rgdb."DbT7060KaigoJigyosha" AS B                 
+        ON  B."jigyoshaNo" = (
+        SELECT 
+        coalesce(DbT3006Kyotaku."itakusakiJigyoshaNo",DbT3006Kyotaku."keikakuJigyoshaNo")
+        FROM 
+        rgdb."DbT3006KyotakuKeikakuJigyoshaSakusei" AS DbT3006Kyotaku
+        )                               
+        AND B."yukoKaishiYMD"= (SELECT 
+        MAX(DbT7060Kaigo."yukoKaishiYMD")
+        FROM rgdb."DbT7060KaigoJigyosha" AS DbT7060Kaigo )
+        WHERE A."taishoYM" = #{taishoYM}            
+        AND  A."hihokenshaNo" = #{hihokenshaNo}             
+        AND  A."rirekiNo" = (SELECT
+        MAX(dbT3006Kyotaku."rirekiNo")
+        FROM rgdb."DbT3006KyotakuKeikakuJigyoshaSakusei" AS dbT3006Kyotaku
+        WHERE dbT3006Kyotaku."hihokenshaNo" = #{hihokenshaNo}
+        AND dbT3006Kyotaku."taishoYM" = #{taishoYM}
+        )               
+    </select>
+</mapper>
