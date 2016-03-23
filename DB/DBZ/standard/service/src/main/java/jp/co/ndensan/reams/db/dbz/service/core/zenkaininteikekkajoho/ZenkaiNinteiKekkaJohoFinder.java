@@ -109,7 +109,7 @@ public class ZenkaiNinteiKekkaJohoFinder {
     
     /**
      * 受給の前回申請管理番号を取得します。
-     * @param 申請書管理番号
+     * @param 申請書管理番号 申請書管理番号
      * @return 前回申請管理番号
      */
     public RString get前回申請管理番号_受給(ShinseishoKanriNo 申請書管理番号) {
@@ -119,7 +119,7 @@ public class ZenkaiNinteiKekkaJohoFinder {
     
     /**
      * 認定の前回申請管理番号を取得します。
-     * @param 申請書管理番号
+     * @param 申請書管理番号 申請書管理番号
      * @return 前回申請管理番号
      */
     public RString get前回申請管理番号_認定(ShinseishoKanriNo 申請書管理番号) {

@@ -293,8 +293,6 @@ public class ZenkaiNinteiKekkaJohoDiv extends Panel implements IZenkaiNinteiKekk
         getHandler().onLoad(subGyomuCode, shinseishoKanriNo, 参照結果);
     }
     
-    
-    
     private ZenkaiNinteiKekkaJohoHandler getHandler() {
         return new ZenkaiNinteiKekkaJohoHandler(this);
     }
