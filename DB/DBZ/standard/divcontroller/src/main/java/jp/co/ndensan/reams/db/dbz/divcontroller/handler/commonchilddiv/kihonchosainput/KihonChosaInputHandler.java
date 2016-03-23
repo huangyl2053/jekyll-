@@ -13,12 +13,13 @@ import jp.co.ndensan.reams.db.dbz.definition.core.configkeys.ConfigNameDBE;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.chosain.NinchishoNichijoSeikatsuJiritsudoCode;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.chosain.ShogaiNichijoSeikatsuJiritsudoCode;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.KihonChosaInput.KihonChosaInput.KihonChosaInputDiv;
-import jp.co.ndensan.reams.db.dbz.service.core.kihonchosainput.KihonChosaInputFinder;
+import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.binding.IconType;
 import jp.co.ndensan.reams.uz.uza.ui.binding.ListControlTextIcon;
+import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 import jp.co.ndensan.reams.uz.uza.util.config.BusinessConfig;
 import jp.co.ndensan.reams.uz.uza.util.serialization.DataPassingConverter;
 
@@ -196,6 +197,34 @@ public class KihonChosaInputHandler {
         }
     }
 
+    public void onClick_btnConfirm() {
+        ArrayList<KihonChosaInput> 認定調査基本情報リスト = ViewStateHolder.get(ViewStateKey.認定調査基本情報リスト, ArrayList.class);
+        if (null == 認定調査基本情報リスト) {
+            認定調査基本情報リスト = new ArrayList<>();
+        }
+        Boolean is前回値をコピ = ViewStateHolder.get(ViewStateKey.is前回値をコピ, Boolean.class);
+        if (is前回値をコピ != null && is前回値をコピ == true) {
+            前回値をコピ(認定調査基本情報リスト);
+        }
+        RString 初期状態モード = div.getモード();
+        if (モードDAIGUN.equals(初期状態モード)) {
+            第一群身体機能Confirm(認定調査基本情報リスト);
+        } else if (モードDA2GUN.equals(初期状態モード)) {
+            第二群生活機能Confirm(認定調査基本情報リスト);
+        } else if (モードDA3GUN.equals(初期状態モード)) {
+            第三群認知機能Confirm(認定調査基本情報リスト);
+        } else if (モードDA4GUN.equals(初期状態モード)) {
+            第四群精神_行動障害Confirm(認定調査基本情報リスト);
+        } else if (モードDA5GUN.equals(初期状態モード)) {
+            第五群社会生活への適用Confirm(認定調査基本情報リスト);
+        } else if (モードDA6GUN.equals(初期状態モード)) {
+            第六群特別な医療Confirm(認定調査基本情報リスト);
+        } else if (モードDA7GUN.equals(初期状態モード)) {
+            第七群自立度Confirm(認定調査基本情報リスト);
+        }
+        ViewStateHolder.put(ViewStateKey.認定調査基本情報リスト, 認定調査基本情報リスト);
+    }
+
     /**
      * 共有子Divの状態を初期化します。
      *
@@ -204,12 +233,18 @@ public class KihonChosaInputHandler {
      * @param 初期状態モード 初期状態モード
      */
     public void onLoad(ShinseishoKanriNo 申請書管理番号, RString 認定調査依頼履歴番号, RString 初期状態モード) {
-        KihonChosaInputFinder findler = KihonChosaInputFinder.createInstance();
         if (申請書管理番号 != null) {
             div.getDaiichigunShintaiKino().setShinseishoKanriNo(申請書管理番号.getColumnValue());
         }
         div.getDaiichigunShintaiKino().setRecordNumber(認定調査依頼履歴番号);
-        List<KihonChosaInput> 認定調査基本情報リスト = findler.get認定調査基本情報(申請書管理番号);
+        Boolean is前回値をコピ = ViewStateHolder.get(ViewStateKey.is前回値をコピ, Boolean.class);
+        ArrayList<KihonChosaInput> 認定調査基本情報リスト = ViewStateHolder.get(ViewStateKey.認定調査基本情報リスト, ArrayList.class);
+        if (null == 認定調査基本情報リスト) {
+            認定調査基本情報リスト = new ArrayList<>();
+        }
+        if (is前回値をコピ != null && is前回値をコピ == true) {
+            前回値をコピ(認定調査基本情報リスト);
+        }
         RString 認定調査前回結果表示 = BusinessConfig.get(ConfigNameDBE.認定調査前回結果表示, RDate.getNowDate(), SubGyomuCode.DBE認定支援);
         if (!this.認定調査前回結果表示.equals(認定調査前回結果表示)) {
             div.getZenkaiHyojiTeiji().setDisplayNone(true);
@@ -270,6 +305,16 @@ public class KihonChosaInputHandler {
             div.getKoudoShogai().setDisplayNone(true);
             div.getShakaiSekatsu().setDisplayNone(true);
             div.getTokubetsuIryo().setDisplayNone(true);
+        }
+    }
+
+    private void 前回値をコピ(List<KihonChosaInput> 認定調査基本情報リスト) {
+        for (KihonChosaInput 認定調査基本情報 : 認定調査基本情報リスト) {
+            認定調査基本情報 = new KihonChosaInput(認定調査基本情報.get前回認知症高齢者自立度(),
+                    認定調査基本情報.get前回障害高齢者自立度(), 認定調査基本情報.get前回調査連番(), 認定調査基本情報.get前回調査項目(),
+                    認定調査基本情報.get前回認知症高齢者自立度(), 認定調査基本情報.get前回障害高齢者自立度(), 認定調査基本情報.get前回調査連番(),
+                    認定調査基本情報.get前回調査項目(), 認定調査基本情報.get認定調査特記事項番号(), 認定調査基本情報.get認定調査特記事項連番(),
+                    認定調査基本情報.get原本マスク区分(), 認定調査基本情報.get特記事項());
         }
     }
 
@@ -2673,6 +2718,353 @@ public class KihonChosaInputHandler {
             }
         }
         return iconList;
+    }
+
+    private void 第七群自立度Confirm(List<KihonChosaInput> 認定調査基本情報リスト) {
+        RString 障害高齢者の日常生活自立度_寝たきり度Key = div.getRadShogaiKoreisha().getSelectedKey();
+        RString 認知症高齢者の日常生活自立度Key = div.getRadNinchishaJiritsudo().getSelectedKey();
+        KihonChosaInput 認定調査基本情報 = 認定調査基本情報リスト.get(0);
+        認定調査基本情報 = new KihonChosaInput(get日常生活自立度(認知症高齢者の日常生活自立度Key),
+                get日常生活自立度(障害高齢者の日常生活自立度_寝たきり度Key), 認定調査基本情報.get調査連番(), 認定調査基本情報.get調査項目(),
+                認定調査基本情報.get前回認知症高齢者自立度(), 認定調査基本情報.get前回障害高齢者自立度(), 認定調査基本情報.get前回調査連番(),
+                認定調査基本情報.get前回調査項目(), 認定調査基本情報.get認定調査特記事項番号(), 認定調査基本情報.get認定調査特記事項連番(),
+                認定調査基本情報.get原本マスク区分(), 認定調査基本情報.get特記事項());
+        認定調査基本情報リスト = new ArrayList<>();
+        認定調査基本情報リスト.add(認定調査基本情報);
+    }
+
+    private Code get日常生活自立度(RString key) {
+        if (key.isNullOrEmpty()) {
+            return Code.EMPTY;
+        } else if (KEY0.equals(key)) {
+            return new Code(ShogaiNichijoSeikatsuJiritsudoCode.自立.getコード());
+        } else if (KEY1.equals(key)) {
+            return new Code(ShogaiNichijoSeikatsuJiritsudoCode.J1.getコード());
+        } else if (KEY2.equals(key)) {
+            return new Code(ShogaiNichijoSeikatsuJiritsudoCode.J2.getコード());
+        } else if (KEY3.equals(key)) {
+            return new Code(ShogaiNichijoSeikatsuJiritsudoCode.A1.getコード());
+        } else if (KEY4.equals(key)) {
+            return new Code(ShogaiNichijoSeikatsuJiritsudoCode.A2.getコード());
+        } else if (KEY5.equals(key)) {
+            return new Code(ShogaiNichijoSeikatsuJiritsudoCode.B1.getコード());
+        } else if (KEY6.equals(key)) {
+            return new Code(ShogaiNichijoSeikatsuJiritsudoCode.B2.getコード());
+        } else if (KEY7.equals(key)) {
+            return new Code(ShogaiNichijoSeikatsuJiritsudoCode.C1.getコード());
+        } else if (KEY8.equals(key)) {
+            return new Code(ShogaiNichijoSeikatsuJiritsudoCode.C2.getコード());
+        }
+        return Code.EMPTY;
+    }
+
+    private void 第六群特別な医療Confirm(List<KihonChosaInput> 認定調査基本情報リスト) {
+        List<RString> 処置内容Keys = new ArrayList<>();
+        List<RString> 特別な対応Keys = new ArrayList<>();
+        List<Integer> 処置内容と特別な対応連番List = new ArrayList<>();
+        add連番ListBy処置内容Keys(処置内容と特別な対応連番List, 処置内容Keys);
+        add連番ListBy特別な対応Keys(処置内容と特別な対応連番List, 特別な対応Keys);
+        checkListBoxConfirm(認定調査基本情報リスト, 処置内容と特別な対応連番List);
+    }
+
+    private void add連番ListBy処置内容Keys(List<Integer> 連番List, List<RString> 処置内容Keys) {
+        if (処置内容Keys.isEmpty()) {
+            return;
+        }
+        for (RString key : 処置内容Keys) {
+            if (KEY0.equals(key)) {
+                連番List.add(整数63);
+            } else if (KEY1.equals(key)) {
+                連番List.add(整数64);
+            } else if (KEY2.equals(key)) {
+                連番List.add(整数65);
+            } else if (KEY3.equals(key)) {
+                連番List.add(整数66);
+            } else if (KEY4.equals(key)) {
+                連番List.add(整数67);
+            } else if (KEY5.equals(key)) {
+                連番List.add(整数68);
+            } else if (KEY6.equals(key)) {
+                連番List.add(整数68);
+            } else if (KEY7.equals(key)) {
+                連番List.add(整数70);
+            } else if (KEY8.equals(key)) {
+                連番List.add(整数71);
+            }
+        }
+    }
+
+    private void add連番ListBy特別な対応Keys(List<Integer> 連番List, List<RString> 特別な対応Keys) {
+        if (特別な対応Keys.isEmpty()) {
+            return;
+        }
+        for (RString key : 特別な対応Keys) {
+            if (KEY0.equals(key)) {
+                連番List.add(整数72);
+            } else if (KEY1.equals(key)) {
+                連番List.add(整数73);
+            } else if (KEY2.equals(key)) {
+                連番List.add(整数74);
+            }
+        }
+    }
+
+    private void 第五群社会生活への適用Confirm(List<KihonChosaInput> 認定調査基本情報リスト) {
+        RString 薬の内服Keys = div.getRadKusuri().getSelectedKey();
+        RString 金銭の管理Keys = div.getRadKingakuKanri().getSelectedKey();
+        RString 日常の意思決定Keys = div.getRadIshiKetei().getSelectedKey();
+        RString 集団への不適用Keys = div.getRadShudan().getSelectedKey();
+        RString 買い物Keys = div.getRadKaiMono().getSelectedKey();
+        RString 簡単な調理Keys = div.getRadKantanChori().getSelectedKey();
+        単項Confirm(認定調査基本情報リスト, 整数42, 薬の内服Keys);
+        単項Confirm(認定調査基本情報リスト, 整数43, 金銭の管理Keys);
+        単項Confirm(認定調査基本情報リスト, 整数44, 日常の意思決定Keys);
+        単項Confirm(認定調査基本情報リスト, 整数45, 集団への不適用Keys);
+        単項Confirm(認定調査基本情報リスト, 整数46, 買い物Keys);
+        単項Confirm(認定調査基本情報リスト, 整数47, 簡単な調理Keys);
+    }
+
+    private void 第四群精神_行動障害Confirm(List<KihonChosaInput> 認定調査基本情報リスト) {
+        RString 被虐的Keys = div.getRadbtnHiryaku().getSelectedKey();
+        RString 作話Keys = div.getRadTukuriHanashi().getSelectedKey();
+        RString 感情が不安定Keys = div.getRadKanjyo().getSelectedKey();
+        RString 昼夜逆転Keys = div.getRadChuyaku().getSelectedKey();
+        RString 同じ話をするKeys = div.getRadOnajiHanashi().getSelectedKey();
+        RString 大声をだすKeys = div.getRadBigVoice().getSelectedKey();
+        RString 介護に抵抗Keys = div.getRadTeikou().getSelectedKey();
+        RString 落ち着きなしKeys = div.getRadOchituki().getSelectedKey();
+        RString 一人で出たがるKeys = div.getRadOutLonly().getSelectedKey();
+        RString 収集癖Keys = div.getRadShushu().getSelectedKey();
+        RString 物や衣類を壊すKeys = div.getRadKowasu().getSelectedKey();
+        RString ひどい物忘れKeys = div.getRadMonoWasure().getSelectedKey();
+        RString 独り言_独り笑いKeys = div.getRadHitoriWarai().getSelectedKey();
+        RString 自分勝手に行動するKeys = div.getRadKateKodo().getSelectedKey();
+        RString 話がまとまらないKeys = div.getRadMatomeNai().getSelectedKey();
+        単項Confirm(認定調査基本情報リスト, 整数42, 被虐的Keys);
+        単項Confirm(認定調査基本情報リスト, 整数43, 作話Keys);
+        単項Confirm(認定調査基本情報リスト, 整数44, 感情が不安定Keys);
+        単項Confirm(認定調査基本情報リスト, 整数45, 昼夜逆転Keys);
+        単項Confirm(認定調査基本情報リスト, 整数46, 同じ話をするKeys);
+        単項Confirm(認定調査基本情報リスト, 整数47, 大声をだすKeys);
+        単項Confirm(認定調査基本情報リスト, 整数48, 介護に抵抗Keys);
+        単項Confirm(認定調査基本情報リスト, 整数49, 落ち着きなしKeys);
+        単項Confirm(認定調査基本情報リスト, 整数50, 一人で出たがるKeys);
+        単項Confirm(認定調査基本情報リスト, 整数51, 収集癖Keys);
+        単項Confirm(認定調査基本情報リスト, 整数52, 物や衣類を壊すKeys);
+        単項Confirm(認定調査基本情報リスト, 整数53, ひどい物忘れKeys);
+        単項Confirm(認定調査基本情報リスト, 整数54, 独り言_独り笑いKeys);
+        単項Confirm(認定調査基本情報リスト, 整数55, 自分勝手に行動するKeys);
+        単項Confirm(認定調査基本情報リスト, 整数56, 話がまとまらないKeys);
+    }
+
+    private void 第三群認知機能Confirm(List<KihonChosaInput> 認定調査基本情報リスト) {
+        RString 意思の伝達Keys = div.getRadIshiDentatsu().getSelectedKey();
+        RString 毎日の日課を理解Keys = div.getRadNikka().getSelectedKey();
+        RString 生年月日や年齢を言うKeys = div.getRadInfo().getSelectedKey();
+        RString 短期記憶Keys = div.getRadDankiKioku().getSelectedKey();
+        RString 自分の名前を言うKeys = div.getRadNameInfo().getSelectedKey();
+        RString 今の季節を理解するKeys = div.getRadKisetsu().getSelectedKey();
+        RString 場所の理解Keys = div.getRadBasho().getSelectedKey();
+        RString 徘徊Keys = div.getRadHaikai().getSelectedKey();
+        RString 外出すると戻れないKeys = div.getRadModoru().getSelectedKey();
+        単項Confirm(認定調査基本情報リスト, 整数33, 意思の伝達Keys);
+        単項Confirm(認定調査基本情報リスト, 整数34, 毎日の日課を理解Keys);
+        単項Confirm(認定調査基本情報リスト, 整数35, 生年月日や年齢を言うKeys);
+        単項Confirm(認定調査基本情報リスト, 整数36, 短期記憶Keys);
+        単項Confirm(認定調査基本情報リスト, 整数37, 自分の名前を言うKeys);
+        単項Confirm(認定調査基本情報リスト, 整数38, 今の季節を理解するKeys);
+        単項Confirm(認定調査基本情報リスト, 整数39, 場所の理解Keys);
+        単項Confirm(認定調査基本情報リスト, 整数40, 徘徊Keys);
+        単項Confirm(認定調査基本情報リスト, 整数41, 外出すると戻れないKeys);
+    }
+
+    private void 第二群生活機能Confirm(List<KihonChosaInput> 認定調査基本情報リスト) {
+        RString 移乗Keys = div.getRadIjyo().getSelectedKey();
+        RString 移動Keys = div.getRadIdou().getSelectedKey();
+        RString えん下Keys = div.getRadEnka().getSelectedKey();
+        RString 食事摂取Keys = div.getRadShokuji().getSelectedKey();
+        RString 排尿Keys = div.getRadHainyo().getSelectedKey();
+        RString 排便Keys = div.getRadHaiben().getSelectedKey();
+        RString 口腔清潔Keys = div.getRadKokou().getSelectedKey();
+        RString 洗顔Keys = div.getRadSengan().getSelectedKey();
+        RString 整髪Keys = div.getRadSeihatsu().getSelectedKey();
+        RString 上衣の着脱Keys = div.getRadUwagi().getSelectedKey();
+        RString ズボン等の着脱Keys = div.getRadZubon().getSelectedKey();
+        RString 外出頻度Keys = div.getRadHindo().getSelectedKey();
+        単項Confirm(認定調査基本情報リスト, 整数21, 移乗Keys);
+        単項Confirm(認定調査基本情報リスト, 整数22, 移動Keys);
+        単項Confirm(認定調査基本情報リスト, 整数23, えん下Keys);
+        単項Confirm(認定調査基本情報リスト, 整数24, 食事摂取Keys);
+        単項Confirm(認定調査基本情報リスト, 整数25, 排尿Keys);
+        単項Confirm(認定調査基本情報リスト, 整数26, 排便Keys);
+        単項Confirm(認定調査基本情報リスト, 整数27, 口腔清潔Keys);
+        単項Confirm(認定調査基本情報リスト, 整数28, 洗顔Keys);
+        単項Confirm(認定調査基本情報リスト, 整数29, 整髪Keys);
+        単項Confirm(認定調査基本情報リスト, 整数30, 上衣の着脱Keys);
+        単項Confirm(認定調査基本情報リスト, 整数31, ズボン等の着脱Keys);
+        単項Confirm(認定調査基本情報リスト, 整数32, 外出頻度Keys);
+    }
+
+    private void 第一群身体機能Confirm(List<KihonChosaInput> 認定調査基本情報リスト) {
+        List<RString> 麻痺等の有無Keys = div.getChkMahi().getSelectedKeys();
+        List<RString> 拘縮の有無Keys = div.getChkKoshuku().getSelectedKeys();
+        RString 寝返りKey = div.getRadNeKaeri().getSelectedKey();
+        RString 起き上がりKey = div.getRadNeKaeri().getSelectedKey();
+        RString 座位保持Key = div.getRadNeKaeri().getSelectedKey();
+        RString 両足での立位保持Key = div.getRadNeKaeri().getSelectedKey();
+        RString 歩行Key = div.getRadNeKaeri().getSelectedKey();
+        RString 立ち上がりKey = div.getRadNeKaeri().getSelectedKey();
+        RString 片足での立位Key = div.getRadNeKaeri().getSelectedKey();
+        RString 洗身Key = div.getRadNeKaeri().getSelectedKey();
+        RString つめ切りKey = div.getRadNeKaeri().getSelectedKey();
+        RString 視力Key = div.getRadNeKaeri().getSelectedKey();
+        RString 聴力Key = div.getRadNeKaeri().getSelectedKey();
+        単項Confirm(認定調査基本情報リスト, 整数10, 寝返りKey);
+        単項Confirm(認定調査基本情報リスト, 整数11, 起き上がりKey);
+        単項Confirm(認定調査基本情報リスト, 整数12, 座位保持Key);
+        単項Confirm(認定調査基本情報リスト, 整数13, 両足での立位保持Key);
+        単項Confirm(認定調査基本情報リスト, 整数14, 歩行Key);
+        単項Confirm(認定調査基本情報リスト, 整数15, 立ち上がりKey);
+        単項Confirm(認定調査基本情報リスト, 整数16, 片足での立位Key);
+        単項Confirm(認定調査基本情報リスト, 整数17, 洗身Key);
+        単項Confirm(認定調査基本情報リスト, 整数18, つめ切りKey);
+        単項Confirm(認定調査基本情報リスト, 整数19, 視力Key);
+        単項Confirm(認定調査基本情報リスト, 整数20, 聴力Key);
+        List<Integer> 麻痺拘縮連番List = new ArrayList<>();
+        add連番ListBy麻痺等の有無Keys(麻痺拘縮連番List, 麻痺等の有無Keys);
+        add連番ListBy拘縮の有無Keys(麻痺拘縮連番List, 拘縮の有無Keys);
+        checkListBoxConfirm(認定調査基本情報リスト, 麻痺拘縮連番List);
+    }
+
+    private void add連番ListBy麻痺等の有無Keys(List<Integer> 連番List, List<RString> 麻痺等の有無keys) {
+        if (麻痺等の有無keys.isEmpty()) {
+            return;
+        }
+        if (KEY0.equals(麻痺等の有無keys.get(0))) {
+            return;
+        }
+        for (RString key : 麻痺等の有無keys) {
+            if (KEY1.equals(key)) {
+                連番List.add(1);
+            } else if (KEY2.equals(key)) {
+                連番List.add(2);
+            } else if (KEY3.equals(key)) {
+                連番List.add(整数3);
+            } else if (KEY4.equals(key)) {
+                連番List.add(整数4);
+            } else if (KEY5.equals(key)) {
+                連番List.add(整数5);
+            }
+        }
+    }
+
+    private void add連番ListBy拘縮の有無Keys(List<Integer> 連番List, List<RString> 拘縮の有無keys) {
+        if (拘縮の有無keys.isEmpty()) {
+            return;
+        }
+        if (KEY0.equals(拘縮の有無keys.get(0))) {
+            return;
+        }
+        for (RString key : 拘縮の有無keys) {
+            if (KEY1.equals(key)) {
+                連番List.add(1);
+            } else if (KEY2.equals(key)) {
+                連番List.add(2);
+            } else if (KEY3.equals(key)) {
+                連番List.add(整数3);
+            } else if (KEY4.equals(key)) {
+                連番List.add(整数4);
+            }
+        }
+    }
+
+    private void checkListBoxConfirm(List<KihonChosaInput> 認定調査基本情報リスト, List<Integer> 連番List) {
+        for (KihonChosaInput 認定調査基本情報 : 認定調査基本情報リスト) {
+            int 認定調査基本情報_連番 = 認定調査基本情報.get調査連番();
+            if ((認定調査基本情報_連番 <= 整数9 && 認定調査基本情報_連番 > 1) || (認定調査基本情報_連番 >= 整数63 && 認定調査基本情報_連番 <= 整数74)) {
+                if (!is認定調査基本情報_連番が連番Listに存在(連番List, 認定調査基本情報_連番)) {
+                    認定調査基本情報リスト.remove(認定調査基本情報);
+                }
+            }
+        }
+        for (int 連番 : 連番List) {
+            if (!is認定調査基本情報リストに連番存在(認定調査基本情報リスト, 連番)) {
+                認定調査基本情報リスト.add(new KihonChosaInput(Code.EMPTY, Code.EMPTY, 連番, RString.EMPTY, Code.EMPTY, Code.EMPTY,
+                        0, RString.EMPTY, RString.EMPTY, 0, Code.EMPTY, RString.EMPTY));
+            }
+        }
+    }
+
+    private boolean is認定調査基本情報リストに連番存在(List<KihonChosaInput> 認定調査基本情報リスト, int 連番) {
+        for (KihonChosaInput 認定調査基本情報 : 認定調査基本情報リスト) {
+            if (連番 == 認定調査基本情報.get調査連番()) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    private boolean is認定調査基本情報_連番が連番Listに存在(List<Integer> 連番List, int 認定調査基本情報_連番) {
+        for (int 連番 : 連番List) {
+            if (連番 == 認定調査基本情報_連番) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    private void 単項Confirm(List<KihonChosaInput> 認定調査基本情報リスト, int 連番, RString 単項Key) {
+        if (単項Key.isNullOrEmpty()) {
+            return;
+        }
+        boolean is連番対応認定調査基本情報なし = true;
+        for (KihonChosaInput 認定調査基本情報 : 認定調査基本情報リスト) {
+            if (連番 == 認定調査基本情報.get調査連番()) {
+                if (!get調査項目By単項Key(単項Key).equals(認定調査基本情報.get調査項目())) {
+                    認定調査基本情報 = new KihonChosaInput(認定調査基本情報.get認知症高齢者自立度(), 認定調査基本情報.get障害高齢者自立度(),
+                            認定調査基本情報.get調査連番(), get調査項目By単項Key(単項Key), 認定調査基本情報.get前回認知症高齢者自立度(),
+                            認定調査基本情報.get前回障害高齢者自立度(), 認定調査基本情報.get前回調査連番(), 認定調査基本情報.get前回調査項目(),
+                            認定調査基本情報.get認定調査特記事項番号(), 認定調査基本情報.get認定調査特記事項連番(), 認定調査基本情報.get原本マスク区分(),
+                            認定調査基本情報.get特記事項());
+                    is連番対応認定調査基本情報なし = false;
+                }
+            }
+        }
+        if (is連番対応認定調査基本情報なし) {
+            認定調査基本情報リスト.add(new KihonChosaInput(Code.EMPTY, Code.EMPTY, 連番, get調査項目By単項Key(単項Key), Code.EMPTY, Code.EMPTY,
+                    0, RString.EMPTY, RString.EMPTY, 0, Code.EMPTY, RString.EMPTY));
+        }
+    }
+
+    private RString get調査項目By単項Key(RString 単項Key) {
+        if (KEY0.equals(単項Key)) {
+            return 調査項目1;
+        } else if (KEY0.equals(単項Key)) {
+            return 調査項目2;
+        } else if (KEY0.equals(単項Key)) {
+            return 調査項目3;
+        } else if (KEY0.equals(単項Key)) {
+            return 調査項目4;
+        } else if (KEY0.equals(単項Key)) {
+            return 調査項目5;
+        }
+        return RString.EMPTY;
+    }
+
+    /**
+     * 引数定義<br/>
+     *
+     */
+    public enum ViewStateKey {
+
+        /**
+         * 前回値をコピフラグです。
+         */
+        is前回値をコピ,
+        /**
+         * 認定調査基本情報リストです。
+         */
+        認定調査基本情報リスト;
     }
 
 }
