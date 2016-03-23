@@ -24,11 +24,7 @@ import jp.co.ndensan.reams.uz.uza.lang.ApplicationException;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.message.IMessageGettable;
-import jp.co.ndensan.reams.uz.uza.message.IValidationMessage;
-import jp.co.ndensan.reams.uz.uza.message.Message;
 import jp.co.ndensan.reams.uz.uza.ui.binding.RowState;
-import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPair;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 import jp.co.ndensan.reams.uz.uza.util.db.SearchResult;
@@ -53,7 +49,7 @@ public class JogaishaTorokuHandler {
     }
 
     /**
-     * メニューから遷移する。
+     * メニューから遷移します。
      *
      * @param 資格取得除外者情報 資格取得除外者情報
      */
@@ -93,7 +89,7 @@ public class JogaishaTorokuHandler {
     }
 
     /**
-     * 対象者検索画面から遷移する。
+     * 対象者検索画面から遷移します。
      *
      */
     public void onLoadKen() {
@@ -171,7 +167,7 @@ public class JogaishaTorokuHandler {
     }
 
     /**
-     * 識別コードLostFocusする。
+     * 識別コードLostFocusします。
      *
      */
     public void onFocus_shikibetsuCode() {
@@ -224,15 +220,21 @@ public class JogaishaTorokuHandler {
     }
 
     /**
-     * 保存するボタン押下の場合、重複チェック実行します。
+     * 確定するボタン押下の場合、入力チェック実行します。
      *
      * @return ValidationMessageControlPairs
      */
     public ValidationMessageControlPairs validateCheck() {
-        ValidationMessageControlPairs validationMessages = new ValidationMessageControlPairs();
-        validationMessages.add(new ValidationMessageControlPair(
-                JogaishaTorokuMessages.前後関係逆転));
-        return validationMessages;
+        return createValidationHandler(div).validateCheck();
+    }
+
+    /**
+     * 保存するボタン押下の場合、重複チェック実行します。
+     *
+     * @return ValidationMessageControlPairs
+     */
+    public ValidationMessageControlPairs juufukuCheck() {
+        return createValidationHandler(div).juufukuCheck();
     }
 
     private void アクセスログ() {
@@ -311,20 +313,8 @@ public class JogaishaTorokuHandler {
         return RString.EMPTY;
     }
 
-    private static enum JogaishaTorokuMessages implements IValidationMessage {
-
-        前後関係逆転(UrErrorMessages.前後関係逆転, "資格除外解除年月日", "資格除外適用年月日");
-
-        private final Message message;
-
-        private JogaishaTorokuMessages(IMessageGettable message, String... replacements) {
-            this.message = message.getMessage().replace(replacements);
-        }
-
-        @Override
-        public Message getMessage() {
-            return message;
-        }
+    private JogaishaValidationHandler createValidationHandler(JogaishaTorokuDiv div) {
+        return new JogaishaValidationHandler(div);
     }
 
     private RString nullToEmpty(RString obj) {
