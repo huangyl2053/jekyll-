@@ -6,15 +6,19 @@
 package jp.co.ndensan.reams.db.dbc.divcontroller.handler.dbc0310012;
 
 import jp.co.ndensan.reams.db.dbc.business.core.basic.ShokanJuryoininKeiyakusha;
+import jp.co.ndensan.reams.db.dbc.business.core.shokanjuryoininkeiyakusha.ChkKeiyakuNoParameter;
+import jp.co.ndensan.reams.db.dbc.business.core.shokanjuryoininkeiyakusha.ChkTorokuzumiParameter;
 import jp.co.ndensan.reams.db.dbc.definition.core.shoninkubun.ShoninKubun;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0310012.PnlTotalPanelDiv;
 import jp.co.ndensan.reams.db.dbc.divcontroller.viewbox.ViewStateKeys;
 import jp.co.ndensan.reams.db.dbc.service.core.shokanjuryoininkeiyakusha.ShokanJuryoininKeiyakushaFinder;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
+import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.kaigoshikakukihon.KaigoShikakuKihon.KaigoShikakuKihonDiv;
 import jp.co.ndensan.reams.uz.uza.core.validation.IPredicate;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
+import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 
@@ -180,40 +184,61 @@ public enum PnlTotalPanelSpec implements IPredicate<PnlTotalPanelDiv> {
         }
 
         public static boolean is金額不整合(PnlTotalPanelDiv div) {
-            if (div.getPnlCommon().getPnlDetail().getPnlKyufuhi().getTxtHokentaisyohiyogaku().getValue() != null) {
+            Decimal 保険対象費用額 = div.getPnlCommon().getPnlDetail().getPnlKyufuhi().getTxtHokentaisyohiyogaku()
+                    .getValue() == null ? Decimal.ZERO : div.getPnlCommon().getPnlDetail().getPnlKyufuhi()
+                    .getTxtHokentaisyohiyogaku().getValue();
+            Decimal 利用者自己負担額 = div.getPnlCommon().getPnlDetail().getPnlKyufuhi().getTxtRiyosyajikofutangaku()
+                    .getValue() == null ? Decimal.ZERO : div.getPnlCommon().getPnlDetail().getPnlKyufuhi()
+                    .getTxtRiyosyajikofutangaku().getValue();
+            Decimal 保険給付費用額 = div.getPnlCommon().getPnlDetail().getPnlKyufuhi().getTxtHokenkyufuhiyogaku()
+                    .getValue() == null ? Decimal.ZERO : div.getPnlCommon().getPnlDetail().getPnlKyufuhi()
+                    .getTxtHokenkyufuhiyogaku().getValue();
+            if (利用者自己負担額.add(保険給付費用額).compareTo(保険対象費用額) > 0) {
                 // TODO QA No.432
-                return true;
+                return false;
             }
             return true;
         }
 
         public static boolean is受領委任契約番号重複(PnlTotalPanelDiv div) {
-            RStringBuilder rsb = new RStringBuilder();
-            rsb.append(div.getPnlCommon().getPnlDetail().getPnlHidari().getDdlYear().getSelectedValue());
-            rsb.append(div.getPnlCommon().getPnlDetail().getPnlHidari().getTxtBango1().getValue());
-            rsb.append(div.getPnlCommon().getPnlDetail().getPnlHidari().getTxtBango2().getValue());
-            // TODO QA No.432
+            if (ShoninKubun.承認する.getコード().equals(div.getPnlCommon().getPnlDetail()
+                    .getRdoKettekubun().getSelectedKey())) {
+                RString 状態 = ViewStateHolder.get(ViewStateKeys.処理モード, RString.class);
+                KaigoShikakuKihonDiv kaigoDiv = (KaigoShikakuKihonDiv) div.getPnlCommon().getCcdKaigoShikakuKihon();
+                ShokanJuryoininKeiyakushaFinder finder = InstanceProvider.create(ShokanJuryoininKeiyakushaFinder.class);
+                ChkKeiyakuNoParameter parameter = new ChkKeiyakuNoParameter(
+                        // TODO QA No.431
+                        登録.equals(状態) ? new HihokenshaNo("000000003")
+                        : new HihokenshaNo(kaigoDiv.getTxtHihokenshaNo().getValue()),
+                        new FlexibleDate(div.getPnlCommon().getPnlDetail()
+                                .getTxtKeyakushinseibi().getValue().toDateString()),
+                        div.getPnlCommon().getPnlDetail().getTxtKeyakujigyosyaNo().getValue(),
+                        div.getPnlCommon().getPnlDetail().getDdlKeiyakuServiceType().getSelectedKey(),
+                        new FlexibleYear(div.getPnlCommon().getPnlDetail().getPnlHidari().getDdlYear().getSelectedValue()),
+                        new RString(div.getPnlCommon().getPnlDetail().getPnlHidari().getTxtBango1().getValue().toString()),
+                        div.getPnlCommon().getPnlDetail().getPnlHidari().getTxtBango2().getValue(),
+                        状態);
+                return finder.chkKeiyakuNo(parameter);
+            }
             return true;
         }
 
         public static boolean is存在(PnlTotalPanelDiv div) {
             RString 状態 = ViewStateHolder.get(ViewStateKeys.処理モード, RString.class);
-            // TODO QA No.431
-//                KaigoShikakuKihonDiv kaigoDiv = (KaigoShikakuKihonDiv) div.getPnlCommon().getCcdKaigoShikakuKihon();
-            if (登録.equals(状態)
-                    && div.getPnlCommon().getPnlDetail().getTxtKeyakushinseibi().getValue() != null
-                    && !div.getPnlCommon().getPnlDetail().getTxtKeyakujigyosyaNo().getValue().isEmpty()
-                    && !div.getPnlCommon().getPnlDetail().getDdlKeiyakuServiceType().getSelectedKey().isEmpty()) {
-                ShokanJuryoininKeiyakushaFinder finder = InstanceProvider.create(ShokanJuryoininKeiyakushaFinder.class);
-                ShokanJuryoininKeiyakusha shokanData = finder.getShokanJuryoininKeiyakusha(
-                        new HihokenshaNo("000000003"),
-                        new FlexibleDate(div.getPnlCommon().getPnlDetail()
-                                .getTxtKeyakushinseibi().getValue().toDateString()),
-                        div.getPnlCommon().getPnlDetail().getTxtKeyakujigyosyaNo().getValue(),
-                        div.getPnlCommon().getPnlDetail().getDdlKeiyakuServiceType().getSelectedKey());
-                return shokanData != null;
-            }
-            return true;
+            ShokanJuryoininKeiyakusha shokan = ViewStateHolder
+                    .get(ViewStateKeys.契約者一覧情報, ShokanJuryoininKeiyakusha.class);
+            ShokanJuryoininKeiyakushaFinder finder = InstanceProvider.create(ShokanJuryoininKeiyakushaFinder.class);
+            ChkTorokuzumiParameter parameter = new ChkTorokuzumiParameter(
+                    // TODO QA No.431
+                    登録.equals(状態) ? new HihokenshaNo("000000003") : shokan.get被保険者番号(),
+                    登録.equals(状態) ? null : shokan.get申請年月日(),
+                    登録.equals(状態) ? null : shokan.get契約事業者番号(),
+                    登録.equals(状態) ? null : shokan.get契約サービス種類(),
+                    new FlexibleDate(div.getPnlCommon().getPnlDetail().getTxtKeyakushinseibi().getValue().toDateString()),
+                    div.getPnlCommon().getPnlDetail().getTxtKeyakujigyosyaNo().getValue(),
+                    div.getPnlCommon().getPnlDetail().getDdlKeiyakuServiceType().getSelectedKey(),
+                    状態);
+            return finder.chkTorokuzumi(parameter);
         }
     }
 }

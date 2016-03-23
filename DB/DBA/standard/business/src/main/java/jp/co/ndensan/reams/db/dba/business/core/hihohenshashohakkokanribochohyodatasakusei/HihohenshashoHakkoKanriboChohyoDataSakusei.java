@@ -53,7 +53,7 @@ public final class HihohenshashoHakkoKanriboChohyoDataSakusei {
      */
     public List<HihohenshashoHakkoKanriboChohyoDataSakuseiEntity> getShohakkoKanriChohyoDataList(AkasiHakouKanriRelateEntity relateEntityList) {
         List<HihohenshashoHakkoKanriboChohyoDataSakuseiEntity> chohyoDataEntityList = new ArrayList<>();
-        if (relateEntityList.getAkasiHakouKanriEntityList().isEmpty()) {
+        if (!relateEntityList.getAkasiHakouKanriEntityList().isEmpty()) {
             for (AkasiHakouKanriEntity entity : relateEntityList.getAkasiHakouKanriEntityList()) {
                 HihohenshashoHakkoKanriboChohyoDataSakuseiEntity chohyoDataEntity = new HihohenshashoHakkoKanriboChohyoDataSakuseiEntity();
                 chohyoDataEntity.set印刷日時(get印刷日時());

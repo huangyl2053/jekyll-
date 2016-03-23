@@ -8,6 +8,10 @@ module DBD {
 
         export class Events {
 
+            public static onClick_BtnClose(): string {
+                return "onClick_BtnClose";
+            }
+
         }
 
         export class Controls {
@@ -315,6 +319,10 @@ module DBD {
 
             public txtFutanWariaiShuryoYMD(): UZA.TextBoxFlexibleDate {
                 return new UZA.TextBoxFlexibleDate(this.convFiledName("txtFutanWariaiShuryoYMD"));
+            }
+
+            public btnClose(): UZA.Button {
+                return new UZA.Button(this.convFiledName("btnClose"));
             }
 
         }

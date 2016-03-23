@@ -76,7 +76,7 @@ public class PnlTotalSearch {
      * @return ResponseData<PnlTotalSearchDiv>
      */
     public ResponseData<PnlTotalSearchDiv> onClick_btnHihokensyaSearch(PnlTotalSearchDiv div) {
-        // TODO QA No.473
+        // TODO QA No.473(Redmine#:79880)
         return ResponseData.of(div).respond();
     }
 
@@ -87,7 +87,7 @@ public class PnlTotalSearch {
      * @return ResponseData<PnlTotalSearchDiv>
      */
     public ResponseData<PnlTotalSearchDiv> onBlur_txtHihokenshaNo(PnlTotalSearchDiv div) {
-        // TODO QA No.473
+        // TODO QA No.473(Redmine#:79880)
         RString 被保険者番号 = ViewStateHolder.get(ViewStateKeys.被保険者番号, RString.class);
         RString 被保険者名 = ViewStateHolder.get(ViewStateKeys.被保険者名, RString.class);
         if (被保険者番号 != null) {
@@ -111,7 +111,7 @@ public class PnlTotalSearch {
         ViewStateHolder.put(ViewStateKeys.被保険者名, div.getPnlSearch().getTxtName().getValue());
         ViewStateHolder.put(ViewStateKeys.契約事業者名, div.getPnlSearch().getTxtJigyoshakeiyakuName().getValue());
         ViewStateHolder.put(ViewStateKeys.受領委任契約事業者検索最大件数, div.getPnlSearch().getTxtMaxCount().getValue());
-        // TODO QA No.473
+        // TODO QA No.473(Redmine#:79880)
         return ResponseData.of(div).forwardWithEventName(DBC0300011TransitionEventName.事業者選択).respond();
     }
 
@@ -122,7 +122,7 @@ public class PnlTotalSearch {
      * @return ResponseData<PnlTotalSearchDiv>
      */
     public ResponseData<PnlTotalSearchDiv> onBlur_txtJigyoshakeiyakuNo(PnlTotalSearchDiv div) {
-        // TODO QA No.473
+        // TODO QA No.473(Redmine#:79880)
         RString 契約事業者番号 = ViewStateHolder.get(ViewStateKeys.契約事業者番号, RString.class);
         RString 契約事業者名 = ViewStateHolder.get(ViewStateKeys.契約事業者名, RString.class);
         if (契約事業者番号 != null) {
@@ -176,7 +176,7 @@ public class PnlTotalSearch {
                 && div.getPnlSearch().getTxtYear().getDomain() == null
                 && div.getPnlSearch().getTxtKeiyakuNo().getValue().isEmpty()) {
             if (!ResponseHolder.isReRequest()) {
-                // TODO QA No.472
+                // TODO QA No.472(Redmine#:79879)
                 throw new ApplicationException(UrWarningMessages.未入力.getMessage()
                         .replace("検索条件の項目いずれも"));
             }
@@ -235,6 +235,7 @@ public class PnlTotalSearch {
         div.getPnlSearch().setDisplayNone(false);
         div.getPnlKeiyakusyaList().setDisplayNone(true);
         div.getBtnSearchAgain().setDisabled(true);
+        div.getPnlSearch().getDdlKeiyakuServiceShurui().setDataSource(getHandler(div).createDropDownList());
         ShokanJuryoininKeiyakushaParameter parameter = ViewStateHolder
                 .get(ViewStateKeys.契約者一覧検索キー, ShokanJuryoininKeiyakushaParameter.class);
         if (parameter != null) {
