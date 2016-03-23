@@ -53,7 +53,65 @@ public final class HihohenshashoHakkoKanriboChohyoDataSakusei {
      */
     public List<HihohenshashoHakkoKanriboChohyoDataSakuseiEntity> getShohakkoKanriChohyoDataList(AkasiHakouKanriRelateEntity relateEntityList) {
         List<HihohenshashoHakkoKanriboChohyoDataSakuseiEntity> chohyoDataEntityList = new ArrayList<>();
-        for (AkasiHakouKanriEntity entity : relateEntityList.getAkasiHakouKanriEntityList()) {
+        if (relateEntityList.getAkasiHakouKanriEntityList().isEmpty()) {
+            for (AkasiHakouKanriEntity entity : relateEntityList.getAkasiHakouKanriEntityList()) {
+                HihohenshashoHakkoKanriboChohyoDataSakuseiEntity chohyoDataEntity = new HihohenshashoHakkoKanriboChohyoDataSakuseiEntity();
+                chohyoDataEntity.set印刷日時(get印刷日時());
+                chohyoDataEntity.set帳票タイトル(relateEntityList.getChouhouTitle());
+                chohyoDataEntity.set市町村コード(relateEntityList.getShichosonCode().value());
+                chohyoDataEntity.set市町村名(relateEntityList.getShichosonMeisho());
+                // TODO ソート順/改頁　技術点問題あり。   2016/01/20まで。
+                //chohyoDataEntity.setソート順１(NarabiJunType.toValue(relateEntityList.getSortJun()).toRString());
+                chohyoDataEntity.setソート順２(RString.EMPTY);
+                chohyoDataEntity.setソート順３(RString.EMPTY);
+                chohyoDataEntity.setソート順４(RString.EMPTY);
+                chohyoDataEntity.setソート順５(RString.EMPTY);
+                //            if (NextPageType.委託先コード.code().equals(relateEntityList.getKayiPeji())) {
+                //                chohyoDataEntity.set改頁１(改頁);
+                //            } else {
+                //                chohyoDataEntity.set改頁１(RString.EMPTY);
+                //            }
+                chohyoDataEntity.set改頁２(RString.EMPTY);
+                chohyoDataEntity.set改頁３(RString.EMPTY);
+                chohyoDataEntity.set改頁４(RString.EMPTY);
+                chohyoDataEntity.set改頁５(RString.EMPTY);
+                int ページ数 = 1;
+                chohyoDataEntity.setページ数(ページ数);
+                chohyoDataEntity.set被保険者番号(entity.getHihokenshaNo());
+                chohyoDataEntity.set識別コード(entity.getShikibetsuCode().value());
+                chohyoDataEntity.set郵便番号(entity.getYubinNo());
+                chohyoDataEntity.set氏名(entity.getMeisho());
+                chohyoDataEntity.set住所(entity.getJusho());
+                chohyoDataEntity.set市町村コードListYou(entity.getShichosonCode().value());
+                chohyoDataEntity.set交付年月日(entity.getKofuYMD().wareki()
+                        .eraType(EraType.KANJI_RYAKU).firstYear(FirstYear.GAN_NEN).
+                        separator(Separator.PERIOD).fillType(FillType.BLANK).toDateString());
+                chohyoDataEntity.set交付事由コード(entity.getKofuJiyu());
+                if (被保険者証発行.equals(relateEntityList.getChouhouTitle())) {
+                    chohyoDataEntity.set交付事由略称(CodeMaster.getCodeRyakusho(
+                            SubGyomuCode.DBA介護資格, コード種別_0002, new Code(entity.getKofuJiyu())));
+                    chohyoDataEntity.set交付事由名称(CodeMaster.getCodeMeisho(
+                            SubGyomuCode.DBA介護資格, コード種別_0002, new Code(entity.getKofuJiyu())));
+                    chohyoDataEntity.set回収事由名称(
+                            CodeMaster.getCodeMeisho(SubGyomuCode.DBA介護資格, コード種別_0003, new Code(entity.getKofuJiyu())));
+                } else if (資格者証発行.equals(relateEntityList.getChouhouTitle())) {
+                    chohyoDataEntity.set交付事由略称(CodeMaster.getCodeRyakusho(
+                            SubGyomuCode.DBA介護資格, コード種別_0004, new Code(entity.getKofuJiyu())));
+                    chohyoDataEntity.set交付事由名称(CodeMaster.getCodeMeisho(
+                            SubGyomuCode.DBA介護資格, コード種別_0004, new Code(entity.getKofuJiyu())));
+                    chohyoDataEntity.set回収事由名称(CodeMaster.getCodeMeisho(
+                            SubGyomuCode.DBA介護資格, コード種別_0005, new Code(entity.getKofuJiyu())));
+                }
+                chohyoDataEntity.set回収年月日(entity.getKaishuYMD().wareki()
+                        .eraType(EraType.KANJI_RYAKU).firstYear(FirstYear.GAN_NEN).
+                        separator(Separator.PERIOD).fillType(FillType.BLANK).toDateString());
+                chohyoDataEntity.set回収事由コード(entity.getKofuJiyu());
+
+                chohyoDataEntity.set有効期限((new RString(entity.getYukoKigenYMD().toString())));
+                chohyoDataEntity.set様式(ShoYoshikiKubun.toValue(entity.getShoYoshikiKubunCode()).get名称());
+                chohyoDataEntityList.add(chohyoDataEntity);
+            }
+        } else {
             HihohenshashoHakkoKanriboChohyoDataSakuseiEntity chohyoDataEntity = new HihohenshashoHakkoKanriboChohyoDataSakuseiEntity();
             chohyoDataEntity.set印刷日時(get印刷日時());
             chohyoDataEntity.set帳票タイトル(relateEntityList.getChouhouTitle());
@@ -74,40 +132,7 @@ public final class HihohenshashoHakkoKanriboChohyoDataSakusei {
             chohyoDataEntity.set改頁３(RString.EMPTY);
             chohyoDataEntity.set改頁４(RString.EMPTY);
             chohyoDataEntity.set改頁５(RString.EMPTY);
-            int ページ数 = 1;
-            chohyoDataEntity.setページ数(ページ数);
-            chohyoDataEntity.set被保険者番号(entity.getHihokenshaNo());
-            chohyoDataEntity.set識別コード(entity.getShikibetsuCode().value());
-            chohyoDataEntity.set郵便番号(entity.getYubinNo());
-            chohyoDataEntity.set氏名(entity.getMeisho());
-            chohyoDataEntity.set住所(entity.getJusho());
-            chohyoDataEntity.set市町村コードListYou(entity.getShichosonCode().value());
-            chohyoDataEntity.set交付年月日(entity.getKofuYMD().wareki()
-                    .eraType(EraType.KANJI_RYAKU).firstYear(FirstYear.GAN_NEN).
-                    separator(Separator.PERIOD).fillType(FillType.BLANK).toDateString());
-            chohyoDataEntity.set交付事由コード(entity.getKofuJiyu());
-            if (被保険者証発行.equals(relateEntityList.getChouhouTitle())) {
-                chohyoDataEntity.set交付事由略称(CodeMaster.getCodeRyakusho(
-                        SubGyomuCode.DBA介護資格, コード種別_0002, new Code(entity.getKofuJiyu())));
-                chohyoDataEntity.set交付事由名称(CodeMaster.getCodeMeisho(
-                        SubGyomuCode.DBA介護資格, コード種別_0002, new Code(entity.getKofuJiyu())));
-                chohyoDataEntity.set回収事由名称(
-                        CodeMaster.getCodeMeisho(SubGyomuCode.DBA介護資格, コード種別_0003, new Code(entity.getKofuJiyu())));
-            } else if (資格者証発行.equals(relateEntityList.getChouhouTitle())) {
-                chohyoDataEntity.set交付事由略称(CodeMaster.getCodeRyakusho(
-                        SubGyomuCode.DBA介護資格, コード種別_0004, new Code(entity.getKofuJiyu())));
-                chohyoDataEntity.set交付事由名称(CodeMaster.getCodeMeisho(
-                        SubGyomuCode.DBA介護資格, コード種別_0004, new Code(entity.getKofuJiyu())));
-                chohyoDataEntity.set回収事由名称(CodeMaster.getCodeMeisho(
-                        SubGyomuCode.DBA介護資格, コード種別_0005, new Code(entity.getKofuJiyu())));
-            }
-            chohyoDataEntity.set回収年月日(entity.getKaishuYMD().wareki()
-                    .eraType(EraType.KANJI_RYAKU).firstYear(FirstYear.GAN_NEN).
-                    separator(Separator.PERIOD).fillType(FillType.BLANK).toDateString());
-            chohyoDataEntity.set回収事由コード(entity.getKofuJiyu());
-
-            chohyoDataEntity.set有効期限((new RString(entity.getYukoKigenYMD().toString())));
-            chohyoDataEntity.set様式(ShoYoshikiKubun.toValue(entity.getShoYoshikiKubunCode()).get名称());
+            chohyoDataEntity.setページ数(1);
             chohyoDataEntityList.add(chohyoDataEntity);
         }
         return chohyoDataEntityList;
