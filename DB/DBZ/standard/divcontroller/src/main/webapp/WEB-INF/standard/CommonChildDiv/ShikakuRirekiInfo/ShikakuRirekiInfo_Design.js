@@ -19,6 +19,10 @@ var DBZ;
             Events.onSelectByDeleteButton_dgShikakuShutokuRireki = function () {
                 return "onSelectByDeleteButton_dgShikakuShutokuRireki";
             };
+
+            Events.onClick_BtnClose = function () {
+                return "onClick_BtnClose";
+            };
             return Events;
         })();
         ShikakuRirekiInfo.Events = Events;
