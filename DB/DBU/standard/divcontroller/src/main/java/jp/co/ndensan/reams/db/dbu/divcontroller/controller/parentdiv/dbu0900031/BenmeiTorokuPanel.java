@@ -45,10 +45,6 @@ public class BenmeiTorokuPanel {
     private static final RString 状態_更新 = new RString("更新");
     private static final RString 状態_削除 = new RString("削除");
     private static final RString BUTTON_COMMONBUTTONCOMPLETE = new RString("CommonButtonComplete");
-    private static final RString BUTTON_COMMONBUTTONUPDATE = new RString("CommonButtonUpdate");
-    private static final RString BUTTON_COMMONBUTTONFREE = new RString("CommonButtonFree");
-    private static final RString BUTTON_SUSPENDBUTTONHIDDEN = new RString("SuspendButtonHidden");
-    private static final RString BUTTON_FINISHBUTTONHIDDEN = new RString("FinishButtonHidden");
 
     private BenmeiTorokuMeisaiJoho benmeiTorokuMeisaiJoho;
     private ShikibetsuCode 識別コード;
@@ -63,11 +59,6 @@ public class BenmeiTorokuPanel {
      * @return ResponseData<ShikakukihonPanelDiv>
      */
     public ResponseData<BenmeiTorokuPanelDiv> onLoad(BenmeiTorokuPanelDiv panelDiv) {
-        ViewStateHolder.put(BenmeiTorokuViewStateKeys.識別コード, new ShikibetsuCode("523555"));
-        ViewStateHolder.put(BenmeiTorokuViewStateKeys.被保険者番号, new HihokenshaNo("555123"));
-        ViewStateHolder.put(BenmeiTorokuViewStateKeys.審査請求届出日, new FlexibleDate("20160323"));
-        ViewStateHolder.put(BenmeiTorokuViewStateKeys.弁明書作成日, new FlexibleDate("20160323"));
-        ViewStateHolder.put(BenmeiTorokuViewStateKeys.モード, new RString("更新"));
         //TODO ViewStateより弁明登録一覧画面からの引き継ぎ情報を取得する。
         識別コード = ViewStateHolder.get(BenmeiTorokuViewStateKeys.識別コード, ShikibetsuCode.class);
         被保険者番号 = ViewStateHolder.get(BenmeiTorokuViewStateKeys.被保険者番号, HihokenshaNo.class);
@@ -75,8 +66,8 @@ public class BenmeiTorokuPanel {
         弁明書作成日 = ViewStateHolder.get(BenmeiTorokuViewStateKeys.弁明書作成日, FlexibleDate.class);
         RString 初期_状態 = ViewStateHolder.get(BenmeiTorokuViewStateKeys.モード, RString.class);
         //TODO 共通Div（AtenaCommonChildDiv）を呼び出しの場合、異常を発生する。
-        //panelDiv.getAtenaPanel().getAtenaCommonChildDiv().load(識別コード);
-        //panelDiv.getShikakuKihonCommonChildDiv().initialize(被保険者番号);
+        panelDiv.getAtenaPanel().getAtenaCommonChildDiv().load(識別コード);
+        panelDiv.getShikakuKihonCommonChildDiv().initialize(被保険者番号);
         CommonButtonHolder.setVisibleByCommonButtonFieldName(BUTTON_COMMONBUTTONCOMPLETE, false);
         get保存情報の取得(識別コード, 被保険者番号, 審査請求届出日, 弁明書作成日);
         if (初期_状態.equals(状態_更新)) {
@@ -84,7 +75,6 @@ public class BenmeiTorokuPanel {
             ViewStateHolder.put(BenmeiTorokuViewStateKeys.弁明登録情報, benmeiTorokuMeisaiJoho);
             getHandler(panelDiv).initialize(benmeiTorokuMeisaiJoho, 初期_状態);
         } else if (初期_状態.equals(状態_削除)) {
-            CommonButtonHolder.setAdditionalTextByCommonButtonFieldName(BUTTON_COMMONBUTTONUPDATE, "削除する");
             benmeiTorokuMeisaiJoho = get弁明登録明細情報の取得(識別コード, 被保険者番号, 審査請求届出日);
             if (benmeiTorokuMeisaiJoho != null) {
                 getHandler(panelDiv).initialize(benmeiTorokuMeisaiJoho, 初期_状態);
