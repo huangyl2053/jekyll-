@@ -16,7 +16,10 @@ public enum DBC0710011TransitionEventName implements IContainerEvents {
 
     修正("修正"),
     検索条件("検索条件"),
-    該当者一覧("該当者一覧");
+    該当者一覧("該当者一覧"),
+    申請を追加("申請を追加"),
+    削除("削除"),
+    取消("取消");
 
     private final RString name;
 
