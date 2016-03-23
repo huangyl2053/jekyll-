@@ -221,7 +221,7 @@ public class BenmeiTorokuManager {
     private boolean getFufukuMoshitateDEL(FufukuMoshitate fufukuMoshitate) {
         DbT7001FufukuMoshitateEntity dbT7001FufukuMoshitateEntity = fufukuMoshitate.toEntity();
         dbT7001FufukuMoshitateEntity.setState(EntityDataState.Deleted);
-        int 戻る値 = dbT7001FufukuMoshitateDac.saveOrDelete(dbT7001FufukuMoshitateEntity);
+        int 戻る値 = dbT7001FufukuMoshitateDac.saveOrDeletePhysicalBy(dbT7001FufukuMoshitateEntity);
         return 戻る値 == 1;
     }
 
