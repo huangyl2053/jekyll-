@@ -473,36 +473,58 @@ public class ShinshinIkenHandler {
         }
         if (div.getChkNinchishoShuhenShojo().getSelectedKeys().contains(チェックボックス_1)) {
             set意見項目(要介護認定主治医意見書情報_TMP, 幻視幻聴, チェックボックス_2);
+        } else {
+            set意見項目(要介護認定主治医意見書情報_TMP, 幻視幻聴, チェックボックス_1);
         }
         if (div.getChkNinchishoShuhenShojo().getSelectedKeys().contains(チェックボックス_2)) {
             set意見項目(要介護認定主治医意見書情報_TMP, 妄想, チェックボックス_2);
+        } else {
+            set意見項目(要介護認定主治医意見書情報_TMP, 妄想, チェックボックス_1);
         }
         if (div.getChkNinchishoShuhenShojo().getSelectedKeys().contains(チェックボックス_3)) {
             set意見項目(要介護認定主治医意見書情報_TMP, 昼夜逆転, チェックボックス_2);
+        } else {
+            set意見項目(要介護認定主治医意見書情報_TMP, 昼夜逆転, チェックボックス_1);
         }
         if (div.getChkNinchishoShuhenShojo().getSelectedKeys().contains(チェックボックス_4)) {
             set意見項目(要介護認定主治医意見書情報_TMP, 暴言, チェックボックス_2);
+        } else {
+            set意見項目(要介護認定主治医意見書情報_TMP, 暴言, チェックボックス_1);
         }
         if (div.getChkNinchishoShuhenShojo().getSelectedKeys().contains(チェックボックス_5)) {
             set意見項目(要介護認定主治医意見書情報_TMP, 暴行, チェックボックス_2);
+        } else {
+            set意見項目(要介護認定主治医意見書情報_TMP, 暴行, チェックボックス_1);
         }
         if (div.getChkNinchishoShuhenShojo().getSelectedKeys().contains(チェックボックス_6)) {
             set意見項目(要介護認定主治医意見書情報_TMP, 介護への抵抗, チェックボックス_2);
+        } else {
+            set意見項目(要介護認定主治医意見書情報_TMP, 介護への抵抗, チェックボックス_1);
         }
         if (div.getChkNinchishoShuhenShojo().getSelectedKeys().contains(チェックボックス_7)) {
             set意見項目(要介護認定主治医意見書情報_TMP, 徘徊, チェックボックス_2);
+        } else {
+            set意見項目(要介護認定主治医意見書情報_TMP, 徘徊, チェックボックス_1);
         }
         if (div.getChkNinchishoShuhenShojo().getSelectedKeys().contains(チェックボックス_8)) {
             set意見項目(要介護認定主治医意見書情報_TMP, 火の不始末, チェックボックス_2);
+        } else {
+            set意見項目(要介護認定主治医意見書情報_TMP, 火の不始末, チェックボックス_1);
         }
         if (div.getChkNinchishoShuhenShojo().getSelectedKeys().contains(チェックボックス_9)) {
             set意見項目(要介護認定主治医意見書情報_TMP, 不潔行為, チェックボックス_2);
+        } else {
+            set意見項目(要介護認定主治医意見書情報_TMP, 不潔行為, チェックボックス_1);
         }
         if (div.getChkNinchishoShuhenShojo().getSelectedKeys().contains(チェックボックス_10)) {
             set意見項目(要介護認定主治医意見書情報_TMP, 異食行動, チェックボックス_2);
+        } else {
+            set意見項目(要介護認定主治医意見書情報_TMP, 異食行動, チェックボックス_1);
         }
         if (div.getChkNinchishoShuhenShojo().getSelectedKeys().contains(チェックボックス_11)) {
             set意見項目(要介護認定主治医意見書情報_TMP, 性的問題行動, チェックボックス_2);
+        } else {
+            set意見項目(要介護認定主治医意見書情報_TMP, 性的問題行動, チェックボックス_1);
         }
         set意見項目(要介護認定主治医意見書情報_TMP, その他, keyToItemNasiari(div.getChkNinchishoShuhenShojoSonota().getSelectedKeys()));
         set記入項目(要介護認定主治医意見書情報_TMP, その他_記入項目, div.getTxtSonotaKinyu().getValue());
