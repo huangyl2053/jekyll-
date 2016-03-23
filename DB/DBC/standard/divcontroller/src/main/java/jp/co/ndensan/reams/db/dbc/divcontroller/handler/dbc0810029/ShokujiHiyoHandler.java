@@ -13,12 +13,17 @@ import jp.co.ndensan.reams.db.dbc.business.core.basic.ShokanShokujiHiyo;
 import jp.co.ndensan.reams.db.dbc.definition.core.shikyufushikyukubun.ShikyuFushikyuKubun;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0810029.ShokujiHiyoDiv;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0810029.dgdShokuji_Row;
+import jp.co.ndensan.reams.db.dbc.divcontroller.viewbox.ViewStateKeys;
+import jp.co.ndensan.reams.db.dbc.service.core.shokanbaraijyokyoshokai.ShokanbaraiJyokyoShokai;
+import jp.co.ndensan.reams.db.dbx.business.core.kaigoserviceshurui.kaigoservicenaiyou.KaigoServiceNaiyou;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
+import jp.co.ndensan.reams.uz.uza.biz.KaigoServiceShuruiCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
+import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 import jp.co.ndensan.reams.uz.uza.util.editor.DecimalFormatter;
 
 /**
@@ -178,12 +183,17 @@ public class ShokujiHiyoHandler {
      */
     public void set食事費用パネル２() {
         dgdShokuji_Row row = div.getPanelShokuji().getPanelShoikujiList().getDgdShokuji().getClickedItem();
-        div.getPanelShokuji().getPanelDetail2().getTxtServiceCodeShurui().setValue(row.getDefaultDataName2().substring(0, 2));
-        div.getPanelShokuji().getPanelDetail2().getTxtServiceItemCode().setValue(row.getDefaultDataName2().substring(2, SIX));
-        // TODO QAのNo.184(Redmine#75727) サービスコード取得できない。
-//        List<ServiceCode> serviceCode = ServiceCodeInput.getServiceCodeList(serviceCodeShuruyi, serviceCodeKoumoku,
-//        ViewStateHolder.get(ViewStateKeys.サービス年月, FlexibleYearMonth.class));
-        div.getPanelShokuji().getPanelDetail2().getTxtServiceName().setValue(new RString("サービス名称"));
+        RString serviceCodeShuruyi = row.getDefaultDataName2().substring(0, 2);
+        div.getPanelShokuji().getPanelDetail2().getTxtServiceCodeShurui().setValue(serviceCodeShuruyi);
+        RString serviceCodeKoumoku = row.getDefaultDataName2().substring(2, SIX);
+        div.getPanelShokuji().getPanelDetail2().getTxtServiceItemCode().setValue(serviceCodeKoumoku);
+        List<KaigoServiceNaiyou> serviceCode = ShokanbaraiJyokyoShokai.createInstance().getServiceCodeInfo(
+                new KaigoServiceShuruiCode(serviceCodeShuruyi),
+                serviceCodeKoumoku,
+                ViewStateHolder.get(ViewStateKeys.サービス年月, FlexibleYearMonth.class));
+        if (serviceCode != null && serviceCode.get(0).getサービス名称() != null) {
+            div.getPanelShokuji().getPanelDetail2().getTxtServiceName().setValue(serviceCode.get(0).getサービス名称());
+        }
         div.getPanelShokuji().getPanelDetail2().getTxtTanyi().setValue(row.getDefaultDataName3().getValue());
         if (!row.getDefaultDataName4().isEmpty()) {
             div.getPanelShokuji().getPanelDetail2().getTxtKaisuuNisuu().setValue(new Decimal(row.getDefaultDataName4().toString()));
