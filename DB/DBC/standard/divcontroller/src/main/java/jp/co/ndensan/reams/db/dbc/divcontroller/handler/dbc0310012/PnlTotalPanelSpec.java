@@ -193,7 +193,8 @@ public enum PnlTotalPanelSpec implements IPredicate<PnlTotalPanelDiv> {
             Decimal 保険給付費用額 = div.getPnlCommon().getPnlDetail().getPnlKyufuhi().getTxtHokenkyufuhiyogaku()
                     .getValue() == null ? Decimal.ZERO : div.getPnlCommon().getPnlDetail().getPnlKyufuhi()
                     .getTxtHokenkyufuhiyogaku().getValue();
-            if (利用者自己負担額.add(保険給付費用額).compareTo(保険対象費用額) > 0) {
+            Decimal 費用額 = 利用者自己負担額.add(保険給付費用額);
+            if (費用額.compareTo(保険対象費用額) > 0) {
                 // TODO QA No.432
                 return false;
             }

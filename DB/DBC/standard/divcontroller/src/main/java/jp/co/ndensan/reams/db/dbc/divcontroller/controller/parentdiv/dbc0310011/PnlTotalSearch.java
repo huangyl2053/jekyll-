@@ -253,8 +253,8 @@ public class PnlTotalSearch {
      */
     private ResponseData<PnlTotalSearchDiv> set契約者一覧(PnlTotalSearchDiv div,
             List<ShokanJuryoininKeiyakusha> shokanList) {
+        div.getPnlSearch().getDdlKeiyakuServiceShurui().setDataSource(getHandler(div).createDropDownList());
         int maxCount = div.getPnlSearch().getTxtMaxCount().getValue().intValue();
-
         if (shokanList != null && shokanList.size() > maxCount) {
             if (!ResponseHolder.isReRequest()) {
                 QuestionMessage message = new QuestionMessage(
