@@ -15,6 +15,7 @@ import jp.co.ndensan.reams.db.dbz.definition.core.yokaigojotaikubun.YokaigoJotai
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigojotaikubun.YokaigoJotaiKubun06;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigojotaikubun.YokaigoJotaiKubun09;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigojotaikubun.YokaigoJotaiKubun99;
+import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.KoroshoIfShikibetsuCode;
 import jp.co.ndensan.reams.db.dbz.service.core.zenkaininteikekkajoho.ZenkaiNinteiKekkaJohoFinder;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
@@ -113,13 +114,13 @@ public class ZenkaiNinteiKekkaJohoHandler {
     private RString set要介護度(RString 厚労省IF識別コード, Code 前回要介護状態区分コード) {
         RString 要介護度 = RString.EMPTY;
         if (前回要介護状態区分コード != null) {
-            if (new RString("99A").equals(厚労省IF識別コード)) {
+            if (KoroshoIfShikibetsuCode.認定ｿﾌﾄ99.getコード().equals(厚労省IF識別コード)) {
                 要介護度 = YokaigoJotaiKubun99.toValue(前回要介護状態区分コード.getColumnValue()).get名称();
-            } else if (new RString("02A").equals(厚労省IF識別コード)) {
+            } else if (KoroshoIfShikibetsuCode.認定ｿﾌﾄ2002.getコード().equals(厚労省IF識別コード)) {
                 要介護度 = YokaigoJotaiKubun02.toValue(前回要介護状態区分コード.getColumnValue()).get名称();
-            } else if (new RString("99A").equals(厚労省IF識別コード)) {
+            } else if (KoroshoIfShikibetsuCode.認定ｿﾌﾄ2006_新要介護認定適用区分が未適用.getコード().equals(厚労省IF識別コード)) {
                 要介護度 = YokaigoJotaiKubun06.toValue(前回要介護状態区分コード.getColumnValue()).get名称();
-            } else if (new RString("99A").equals(厚労省IF識別コード)) {
+            } else if (KoroshoIfShikibetsuCode.認定ｿﾌﾄ2009.getコード().equals(厚労省IF識別コード)) {
                 要介護度 = YokaigoJotaiKubun09.toValue(前回要介護状態区分コード.getColumnValue()).get名称();
             } 
         }

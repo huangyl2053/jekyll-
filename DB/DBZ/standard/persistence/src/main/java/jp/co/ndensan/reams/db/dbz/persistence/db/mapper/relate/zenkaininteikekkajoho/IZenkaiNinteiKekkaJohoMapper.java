@@ -23,40 +23,40 @@ public interface IZenkaiNinteiKekkaJohoMapper {
      * @param shinseishoKanriNo 申請書管理番号
      * @return DbT4101NinteiShinseiJohoEntity
      */
-    public DbT4101NinteiShinseiJohoEntity get要介護度_前回受給(ShinseishoKanriNo shinseishoKanriNo);
+    DbT4101NinteiShinseiJohoEntity get要介護度_前回受給(ShinseishoKanriNo shinseishoKanriNo);
     
     /**
      * 前回認定の要介護度を取得します。
      * @param shinseishoKanriNo 申請書管理番号
      * @return DbT5101NinteiShinseiJohoEntity
      */
-    public DbT5101NinteiShinseiJohoEntity get要介護度_前回認定(ShinseishoKanriNo shinseishoKanriNo);
+    DbT5101NinteiShinseiJohoEntity get要介護度_前回認定(ShinseishoKanriNo shinseishoKanriNo);
     
     /**
      * 今回受給の要介護度を取得します。
-     * @param shinseishoKanriNo
-     * @return 
+     * @param shinseishoKanriNo 申請管理番号
+     * @return ZenkaiNinteiKekkaJohoRelateEntity
      */
-    public ZenkaiNinteiKekkaJohoRelateEntity get要介護度_今回受給(ShinseishoKanriNo shinseishoKanriNo);
+    ZenkaiNinteiKekkaJohoRelateEntity get要介護度_今回受給(ShinseishoKanriNo shinseishoKanriNo);
     
     /**
      * 今回認定の要介護度を取得します。
-     * @param shinseishoKanriNo
-     * @return 
+     * @param shinseishoKanriNo 申請管理番号
+     * @return ZenkaiNinteiKekkaJohoRelateEntity
      */
-    public ZenkaiNinteiKekkaJohoRelateEntity get要介護度_今回認定(ShinseishoKanriNo shinseishoKanriNo);
+    ZenkaiNinteiKekkaJohoRelateEntity get要介護度_今回認定(ShinseishoKanriNo shinseishoKanriNo);
     
     /**
      * 受給の前回申請管理番号を取得します。
-     * @param shinseishoKanriNo
+     * @param shinseishoKanriNo 申請管理番号
      * @return 前回申請管理番号
      */
-    public RString get前回申請管理番号_受給(ShinseishoKanriNo shinseishoKanriNo);
+    RString get前回申請管理番号_受給(ShinseishoKanriNo shinseishoKanriNo);
     
     /**
      * 認定の前回申請管理番号を取得します。
-     * @param shinseishoKanriNo
+     * @param shinseishoKanriNo 申請管理番号
      * @return 前回申請管理番号
      */
-    public RString get前回申請管理番号_認定(ShinseishoKanriNo shinseishoKanriNo);
+    RString get前回申請管理番号_認定(ShinseishoKanriNo shinseishoKanriNo);
 }
