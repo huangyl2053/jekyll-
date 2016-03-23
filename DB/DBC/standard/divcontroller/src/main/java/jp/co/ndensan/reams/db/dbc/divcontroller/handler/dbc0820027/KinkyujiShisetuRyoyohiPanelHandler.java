@@ -374,17 +374,17 @@ public final class KinkyujiShisetuRyoyohiPanelHandler {
                     entity = entity.added();
                     entity = buildEntity(entity, row);
                     list.add(entity);
-                }
-                if (RowState.Modified == row.getRowState()) {
+                } else if (RowState.Modified == row.getRowState()) {
                     ShokanKinkyuShisetsuRyoyo entityModified = map.get(row.getDefaultDataName21());
                     entityModified = entityModified.modified();
                     entityModified = buildEntity(entityModified, row);
                     list.add(entityModified);
-                }
-                if (RowState.Deleted == row.getRowState()) {
+                } else if (RowState.Deleted == row.getRowState()) {
                     ShokanKinkyuShisetsuRyoyo entityDeleted = map.get(row.getDefaultDataName21());
                     entityDeleted = entityDeleted.deleted();
                     list.add(entityDeleted);
+                } else {
+                    list.add(map.get(row.getDefaultDataName21()));
                 }
             }
             RString 証明書コード = div.getPanelHead().getTxtShomeisho().getValue();
