@@ -151,7 +151,7 @@ public final class HihohenshashoHakkoKanriboChohyoDataSakusei {
                     entity.get交付事由名称(),
                     entity.get交付事由略称(),
                     entity.get有効期限(),
-                    entity.get市町村コード(),
+                    entity.get市町村コードListYou(),
                     entity.get郵便番号(),
                     entity.get住所(),
                     entity.get回収年月日(),
