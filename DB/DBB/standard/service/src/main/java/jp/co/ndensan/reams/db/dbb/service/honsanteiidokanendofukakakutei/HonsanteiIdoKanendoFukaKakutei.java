@@ -362,7 +362,7 @@ public class HonsanteiIdoKanendoFukaKakutei {
         DbT7022ShoriDateKanriEntity shoriDateKanriEntity = shoriDateKanriDac.select最大年度内連番(
                 new FlexibleYear(choteiNendo.toString()));
         RString 最大年度内連番 = 連番;
-        if (shoriDateKanriEntity != null) {
+        if (shoriDateKanriEntity != null && shoriDateKanriEntity.getNendoNaiRenban() != null) {
             最大年度内連番 = new RString(String.format(FORMAT.toString(), new Integer(Integer.parseInt(shoriDateKanriEntity.
                     getNendoNaiRenban().toString()) + 1)));
         }
