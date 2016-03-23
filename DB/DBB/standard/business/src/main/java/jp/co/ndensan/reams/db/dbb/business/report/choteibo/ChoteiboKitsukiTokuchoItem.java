@@ -40,7 +40,6 @@ public class ChoteiboKitsukiTokuchoItem {
     /**
      * コンストラクタです
      *
-     * @param nendoTitle nendoTitle
      * @param tokuchoNofuGokei tokuchoNofuGokei
      * @param tokuchoSaishutsuKanfuGaku tokuchoSaishutsuKanfuGaku
      * @param tokuchoSaishutsuKanpuSu tokuchoSaishutsuKanpuSu

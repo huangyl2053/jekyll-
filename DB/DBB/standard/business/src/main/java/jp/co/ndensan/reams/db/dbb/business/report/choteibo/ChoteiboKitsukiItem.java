@@ -25,11 +25,11 @@ public class ChoteiboKitsukiItem {
     /**
      * コンストラクタです
      *
-     * @param nendoTitle nendoTitle
      * @param tokuChoItem tokuChoItem
      * @param fuChoItem fuChoItem
      * @param genmenGaku genmenGaku
      * @param genmenSu genmenSu
+     * @param nofuGakuSokei nofuGakuSokei
      * @param nendoTitle nendoTitle
      */
     public ChoteiboKitsukiItem(
