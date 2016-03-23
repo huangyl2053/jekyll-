@@ -64,6 +64,7 @@ public class PnlTotalPanel {
      * @return ResponseData<PnlTotalPanelDiv>
      */
     public ResponseData<PnlTotalPanelDiv> onLoad(PnlTotalPanelDiv div) {
+        ViewStateHolder.put(ViewStateKeys.処理モード, 登録);
         RString 状態 = ViewStateHolder.get(ViewStateKeys.処理モード, RString.class);
         getHandler(div).createDropDownList();
         if (登録.equals(状態)) {

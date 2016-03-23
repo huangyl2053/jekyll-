@@ -226,19 +226,32 @@ public enum PnlTotalPanelSpec implements IPredicate<PnlTotalPanelDiv> {
 
         public static boolean is存在(PnlTotalPanelDiv div) {
             RString 状態 = ViewStateHolder.get(ViewStateKeys.処理モード, RString.class);
-            ShokanJuryoininKeiyakusha shokan = ViewStateHolder
-                    .get(ViewStateKeys.契約者一覧情報, ShokanJuryoininKeiyakusha.class);
+            ChkTorokuzumiParameter parameter;
+            if (登録.equals(状態)) {
+                parameter = new ChkTorokuzumiParameter(
+                        // TODO QA No.431
+                        new HihokenshaNo("000000003"),
+                        null,
+                        null,
+                        null,
+                        new FlexibleDate(div.getPnlCommon().getPnlDetail().getTxtKeyakushinseibi().getValue().toDateString()),
+                        div.getPnlCommon().getPnlDetail().getTxtKeyakujigyosyaNo().getValue(),
+                        div.getPnlCommon().getPnlDetail().getDdlKeiyakuServiceType().getSelectedKey(),
+                        状態);
+            } else {
+                ShokanJuryoininKeiyakusha shokan = ViewStateHolder
+                        .get(ViewStateKeys.契約者一覧情報, ShokanJuryoininKeiyakusha.class);
+                parameter = new ChkTorokuzumiParameter(
+                        shokan.get被保険者番号(),
+                        shokan.get申請年月日(),
+                        shokan.get契約事業者番号(),
+                        shokan.get契約サービス種類(),
+                        new FlexibleDate(div.getPnlCommon().getPnlDetail().getTxtKeyakushinseibi().getValue().toDateString()),
+                        div.getPnlCommon().getPnlDetail().getTxtKeyakujigyosyaNo().getValue(),
+                        div.getPnlCommon().getPnlDetail().getDdlKeiyakuServiceType().getSelectedKey(),
+                        状態);
+            }
             ShokanJuryoininKeiyakushaFinder finder = InstanceProvider.create(ShokanJuryoininKeiyakushaFinder.class);
-            ChkTorokuzumiParameter parameter = new ChkTorokuzumiParameter(
-                    // TODO QA No.431
-                    登録.equals(状態) ? new HihokenshaNo("000000003") : shokan.get被保険者番号(),
-                    登録.equals(状態) ? null : shokan.get申請年月日(),
-                    登録.equals(状態) ? null : shokan.get契約事業者番号(),
-                    登録.equals(状態) ? null : shokan.get契約サービス種類(),
-                    new FlexibleDate(div.getPnlCommon().getPnlDetail().getTxtKeyakushinseibi().getValue().toDateString()),
-                    div.getPnlCommon().getPnlDetail().getTxtKeyakujigyosyaNo().getValue(),
-                    div.getPnlCommon().getPnlDetail().getDdlKeiyakuServiceType().getSelectedKey(),
-                    状態);
             return finder.chkTorokuzumi(parameter);
         }
     }
