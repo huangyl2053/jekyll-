@@ -87,7 +87,7 @@ public class ShokanJuryoininKeiyakushaFinder {
         List<ShokanJuryoininKeiyakusha> kushaList = new ArrayList<>();
         ShokanJuryoininKeiyakushaListParameter param
                 = ShokanJuryoininKeiyakushaListParameter.createSelectByKeyParam(parameter.get被保険者番号(),
-                        parameter.get契約決定日FROM(), parameter.get契約申請日TO(), parameter.get契約決定日FROM(),
+                        parameter.get契約申請日FROM(), parameter.get契約申請日TO(), parameter.get契約決定日FROM(),
                         parameter.get契約決定日TO(), parameter.get契約事業者番号(), parameter.get契約サービス種類(),
                         parameter.get契約年度(), parameter.get契約番号());
         IShokanJuryoininKeiyakushaMapper mapper = mapperProvider.create(IShokanJuryoininKeiyakushaMapper.class);
