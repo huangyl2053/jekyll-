@@ -1,0 +1,60 @@
+﻿{
+ "uiContainerName": "DBCUC45211",
+ "displayWizard": false,
+ "subGyomuCode": "DBC",
+ "steps": [
+  {
+   "id": 1,
+   "name": "介護支援専門員登録",
+   "transitionList": [
+    {
+     "id": "1",
+     "type": "start",
+     "condition": "",
+     "toLayoutSubGyomuCode": "DBC",
+     "toLayoutName": "DBC4520011",
+     "toLayoutTitle": "介護支援専門員登録",
+     "toState": "default"
+    },
+    {
+     "id": "2",
+     "type": "ordinal",
+     "layoutSubGyomuCode": "DBC",
+     "layoutName": "DBC4520011",
+     "layoutTitle": "介護支援専門員登録",
+     "eventName": "登録画面へ遷移し",
+     "destroy": false,
+     "condition": "",
+     "toLayoutSubGyomuCode": "DBC",
+     "toLayoutName": "DBC4520012",
+     "toLayoutTitle": "介護支援専門員登録",
+     "toState": "登録"
+    },
+    {
+     "id": "3",
+     "type": "ordinal",
+     "layoutSubGyomuCode": "DBC",
+     "layoutName": "DBC4520012",
+     "layoutTitle": "介護支援専門員登録",
+     "eventName": "介護専門員へ戻る",
+     "destroy": false,
+     "condition": "",
+     "toLayoutSubGyomuCode": "DBC",
+     "toLayoutName": "DBC4520011",
+     "toLayoutTitle": "介護支援専門員登録",
+     "toState": "照会"
+    },
+    {
+     "id": "4",
+     "type": "end",
+     "layoutSubGyomuCode": "DBC",
+     "layoutName": "DBC4520011",
+     "layoutTitle": "介護支援専門員登録",
+     "eventName": "完了状態",
+     "destroy": false,
+     "condition": ""
+    }
+   ]
+  }
+ ]
+}
