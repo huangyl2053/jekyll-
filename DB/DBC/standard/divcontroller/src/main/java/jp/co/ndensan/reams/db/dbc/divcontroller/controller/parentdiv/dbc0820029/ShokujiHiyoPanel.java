@@ -46,8 +46,10 @@ public class ShokujiHiyoPanel {
     private static final RString 削除 = new RString("削除");
     private static final RString 登録 = new RString("登録");
     private static final RString 申請を保存する = new RString("btnUpdate");
+    private static final RString MESSAGE = new RString("標準負担額(日額)");
     private static final FlexibleYearMonth 平成１５年３月 = new FlexibleYearMonth("200303");
     private static final FlexibleYearMonth 平成17年９月 = new FlexibleYearMonth("200509");
+    private static final FlexibleYearMonth 平成17年１０月 = new FlexibleYearMonth("200510");
 
     /**
      * onLoad
@@ -59,12 +61,12 @@ public class ShokujiHiyoPanel {
 
         SyokanbaraihishikyushinseiketteParameter par = new SyokanbaraihishikyushinseiketteParameter(
                 new HihokenshaNo("000000004"),
-                new FlexibleYearMonth(new RString("200401")),
+                new FlexibleYearMonth(new RString("200501")),
                 new RString("0000000003"),
                 new JigyoshaNo("0000000003"),
                 new RString("0003"),
                 new RString("0003"),
-                new RString("10"));
+                new RString("4"));
         ViewStateHolder.put(ViewStateKeys.償還払費申請明細検索キー, par);
         SyokanbaraihishikyushinseiketteParameter parameter = ViewStateHolder.get(ViewStateKeys.償還払費申請明細検索キー,
                 SyokanbaraihishikyushinseiketteParameter.class);
@@ -91,15 +93,14 @@ public class ShokujiHiyoPanel {
         } else {
             div.getPanelCcd().getCcdKaigoShikakuKihon().setVisible(false);
         }
-        getHandler(div).setヘッダーエリア(サービス提供年月, 申請日, 事業者番号, 明細番号, 様式番号);
-
         Decimal 標準負担額_日額 = SyokanbaraihiShikyuShinseiKetteManager.createInstance()
                 .getHyojyunfutangaku(被保険者番号, サービス提供年月, 整理番号, 事業者番号, 様式番号, 明細番号);
         if (標準負担額_日額 == null) {
             throw new ApplicationException(UrErrorMessages.対象データなし_追加メッセージあり.getMessage()
-                    .replace("標準負担額(日額)"));
+                    .replace(MESSAGE.toString()));
         }
         ViewStateHolder.put(ViewStateKeys.償還払請求食事費用データ1, 標準負担額_日額);
+        getHandler(div).setヘッダーエリア(サービス提供年月, 申請日, 事業者番号, 明細番号, 様式番号);
 
         if (サービス提供年月.isBeforeOrEquals(平成１５年３月)) {
             div.getPanelShokuji().getPanelShoikujiList().setDisplayNone(true);
@@ -127,7 +128,7 @@ public class ShokujiHiyoPanel {
             getデータ(div, 被保険者番号, サービス提供年月, 整理番号, 事業者番号, 様式番号, 明細番号);
         }
 
-        if (平成17年９月.isBefore(サービス提供年月)) {
+        if (平成17年１０月.isBeforeOrEquals(サービス提供年月)) {
             div.getPanelShokuji().getPanelShoikujiList().setDisplayNone(true);
             div.getPanelShokuji().getPanelDetailGokei().setVisible(true);
             div.getPanelShokuji().getPanelDetailGokei().getTxtTeikyohiGokei().setReadOnly(false);
@@ -141,7 +142,9 @@ public class ShokujiHiyoPanel {
                             様式番号,
                             明細番号,
                             null);
-            getHandler(div).set食事費用合計設定(shokanShokujiHiyoList.get(0));
+            if (!shokanShokujiHiyoList.isEmpty()) {
+                getHandler(div).set食事費用合計設定(shokanShokujiHiyoList.get(0));
+            }
             ViewStateHolder.put(ViewStateKeys.償還払請求食事費用データ, (Serializable) shokanShokujiHiyoList);
         }
 
@@ -172,7 +175,7 @@ public class ShokujiHiyoPanel {
                 div.getPanelShokuji().getPanelDetail1().setVisible(false);
                 div.getPanelShokuji().getPanelDetail2().setVisible(false);
             }
-            if (平成17年９月.isBefore(サービス提供年月)) {
+            if (平成17年１０月.isBeforeOrEquals(サービス提供年月)) {
                 div.getPanelShokuji().getPanelShoikujiList().setVisible(false);
                 div.getPanelShokuji().getPanelDetailGokei().setVisible(true);
                 div.getPanelShokuji().getPanelDetailGokei().setReadOnly(true);
@@ -206,11 +209,9 @@ public class ShokujiHiyoPanel {
         div.getPanelShokuji().getPanelDetail1().setDisplayNone(true);
         div.getPanelShokuji().getPanelDetail2().setVisible(false);
 
-        // 明細一覧のデータを取得する。
         List<ShokanMeisai> shokanMeisaiList = ShokanbaraiJyokyoShokai.createInstance()
                 .getShokujiHiyoDataList(被保険者番号, サービス提供年月, 整理番号, 事業者番号, 様式番号, 明細番号, null);
         if (shokanMeisaiList != null) {
-            // 明細情報がある場合、合計情報の取得する
             List<ShokanShokujiHiyo> shokanShokujiHiyoList = ShokanbaraiJyokyoShokai.createInstance()
                     .getSeikyuShokujiHiyoTanjyunSearch(被保険者番号,
                             サービス提供年月,
@@ -221,9 +222,10 @@ public class ShokujiHiyoPanel {
                             null);
 
             getHandler(div).set食事費用一覧グリッド(shokanMeisaiList, shokanShokujiHiyoList);
-            ViewStateHolder.put(ViewStateKeys.償還払請求食事費用, (Serializable) shokanMeisaiList);
             ViewStateHolder.put(ViewStateKeys.償還払請求食事費用データ, (Serializable) shokanShokujiHiyoList);
         }
+        ViewStateHolder.put(ViewStateKeys.償還払請求食事費用, (Serializable) shokanMeisaiList);
+
     }
 
     /**
@@ -235,15 +237,13 @@ public class ShokujiHiyoPanel {
     public ResponseData<ShokujiHiyoPanelDiv> onClick_btnFree(ShokujiHiyoPanelDiv div) {
         FlexibleYearMonth サービス提供年月 = ViewStateHolder.get(ViewStateKeys.サービス年月, FlexibleYearMonth.class);
         if (削除.equals(ViewStateHolder.get(ViewStateKeys.処理モード, RString.class))) {
-            return ResponseData.of(div).forwardWithEventName(DBC0820029TransitionEventName.サービス提供証明書)
-                    .parameter(new RString("サービス提供証明書"));
+            return ResponseData.of(div).forwardWithEventName(DBC0820029TransitionEventName.一覧に戻る).respond();
         }
         Boolean flag = getHandler(div).get内容変更状態(サービス提供年月);
         if (flag) {
             return clear入力内容(div);
         } else {
-            return ResponseData.of(div).forwardWithEventName(DBC0820029TransitionEventName.サービス提供証明書)
-                    .parameter(new RString("サービス提供証明書"));
+            return ResponseData.of(div).forwardWithEventName(DBC0820029TransitionEventName.一覧に戻る).respond();
         }
     }
 
@@ -256,8 +256,7 @@ public class ShokujiHiyoPanel {
         if (new RString(UrQuestionMessages.入力内容の破棄.getMessage().getCode())
                 .equals(ResponseHolder.getMessageCode())
                 && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
-            return ResponseData.of(div).forwardWithEventName(DBC0820029TransitionEventName.サービス提供証明書)
-                    .parameter(new RString("サービス提供証明書"));
+            return ResponseData.of(div).forwardWithEventName(DBC0820029TransitionEventName.一覧に戻る).respond();
         } else {
             return ResponseData.of(div).respond();
         }
