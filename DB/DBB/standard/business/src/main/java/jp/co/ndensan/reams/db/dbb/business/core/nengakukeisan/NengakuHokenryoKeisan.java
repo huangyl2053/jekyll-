@@ -3,8 +3,13 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbb.business.core;
+package jp.co.ndensan.reams.db.dbb.business.core.nengakukeisan;
 
+import jp.co.ndensan.reams.db.dbb.business.core.nengakukeisan.param.NengakuHokenryoKeisanParameter;
+import jp.co.ndensan.reams.db.dbb.business.core.nengakukeisan.param.RankBetsuKijunKingaku;
+import jp.co.ndensan.reams.db.dbb.business.core.nengakukeisan.param.NengakuSeigyoJoho;
+import jp.co.ndensan.reams.db.dbb.business.core.nengakukeisan.hasuchosei.HasuChoseiFactory;
+import jp.co.ndensan.reams.db.dbb.business.core.nengakukeisan.hasuchosei.IHasuChosei;
 import jp.co.ndensan.reams.db.dbb.business.core.hokenryodankai.core.HokenryoDankai;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -14,56 +19,57 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 
 /**
+ * 年額計算
  *
  * @author N2810
  */
-public class NengakuKeisan {
+public class NengakuHokenryoKeisan {
 
-    private final List<NengakuHokenryoHoji> nengakuHokenryoHojiList = new ArrayList<>();
+    private final List<NengaokuHokenryoHoji> nengakuHokenryoHojiList = new ArrayList<>();
     private static final int TAISHOTSUKI = 3;
     private static final Decimal NENTSUKISU = new Decimal(12);
 
     /**
      * 年額計算
      *
-     * @param input
+     * @param nengakuHokenryoKeisanParameter 保険料段階判定パラメータ
      * @return
      */
-    public 年額計算Output calc年額保険料(保険料段階判定input input) {
+    public NengakuHokenryo calculate年額保険料(NengakuHokenryoKeisanParameter nengakuHokenryoKeisanParameter) {
 
-        年額計算Output output;
+        NengakuHokenryo nengakuHokenryo;
 
         // ①年額計算
         // ①-1 集計
         //List<NengakuHokenryoHoji> nengakuhokenryohoji = new ArrayList<>();
-        //NengakuHokenryoHoji nengakuhokenryohoji = new NengakuHokenryoHoji();
-        Map<RString, HokenryoDankai> hokenryoDankaiMap = input.get年額賦課根拠().createHokenryoDankaiMap();
-        Map<RString, RString> rankMap = input.get年額賦課根拠().createRankMap();
+        //NengakuHokenryoHoji nengakuhokenryohoji = new NengaokuHokenryoHoji();
+        Map<RString, HokenryoDankai> hokenryoDankaiMap = nengakuHokenryoKeisanParameter.get年額賦課根拠().get月別保険料段階().createHokenryoDankaiMap();
+        Map<RString, RString> rankMap = nengakuHokenryoKeisanParameter.get年額賦課根拠().createRankMap();
 
         for (RString tsuki : hokenryoDankaiMap.keySet()) {
-            if (kikannaiShikakuUmu(input, tsuki)) {
+            if (kikannaiShikakuUmu(nengakuHokenryoKeisanParameter, tsuki)) {
                 dankaiShukei(hokenryoDankaiMap.get(tsuki).getSystemDankai(), rankMap.get(tsuki));
             }
         }
 
         // ①-2 年額保険料算出
         Decimal hokenryoNengaku;
-        hokenryoNengaku = nengakuKeisan(input);
+        hokenryoNengaku = nengakuKeisan(nengakuHokenryoKeisanParameter);
 
         // ②端数処理
-        端数調整Factory 端数調整factory = new 端数調整Factory();
-        I端数調整 端数調整 = 端数調整factory.getIncetance(input);
+        HasuChoseiFactory 端数調整factory = new HasuChoseiFactory();
+        IHasuChosei 端数調整 = 端数調整factory.getIncetance(nengakuHokenryoKeisanParameter);
         hokenryoNengaku = 端数調整.calc端数(hokenryoNengaku);
 
         // ③出力データ作成
-        output = new 年額計算Output();
-        output.setFukaNendo(input.get賦課年度());
-        output.setHokenryoNengaku(hokenryoNengaku);
+        nengakuHokenryo = new NengakuHokenryo();
+        nengakuHokenryo.setFukaNendo(nengakuHokenryoKeisanParameter.get賦課年度());
+        nengakuHokenryo.setHokenryoNengaku(hokenryoNengaku);
 
-        return output;
+        return nengakuHokenryo;
     }
 
-    private boolean kikannaiShikakuUmu(保険料段階判定input input, RString taishotsuki) {
+    private boolean kikannaiShikakuUmu(NengakuHokenryoKeisanParameter nengakuHokenryoKeisanParameter, RString taishotsuki) {
 
         boolean result = false;
         Calendar taishoYMD = Calendar.getInstance();
@@ -71,18 +77,22 @@ public class NengakuKeisan {
         Calendar soshitsuYMD = Calendar.getInstance();
 
         if (Integer.parseInt(taishotsuki.toString()) > TAISHOTSUKI) {
-            taishoYMD.set(Integer.parseInt(String.valueOf(input.get賦課年度())), Integer.parseInt(taishotsuki.toString()), 1);
+            taishoYMD.set(Integer.parseInt(
+                    String.valueOf(nengakuHokenryoKeisanParameter.get賦課年度())), Integer.parseInt(taishotsuki.toString()), 1);
         } else {
-            taishoYMD.set(Integer.parseInt(String.valueOf(input.get賦課年度())) + 1, Integer.parseInt(taishotsuki.toString()), 1);
+            taishoYMD.set(Integer.parseInt(String.valueOf(
+                    nengakuHokenryoKeisanParameter.get賦課年度())) + 1, Integer.parseInt(taishotsuki.toString()), 1);
         }
 
         //shutokuYMD.setTime(input.get年額賦課根拠().get資格取得日());
-        shutokuYMD.set(input.get年額賦課根拠().get資格取得日().getYearValue(), input.get年額賦課根拠().get資格取得日().getMonthValue(), 1);
+        shutokuYMD.set(nengakuHokenryoKeisanParameter.get年額賦課根拠().get資格取得日().getYearValue(),
+                nengakuHokenryoKeisanParameter.get年額賦課根拠().get資格取得日().getMonthValue(), 1);
         //shutokuYMD.add(Calendar.MONTH, 1);
 
-        if (input.get年額賦課根拠().get資格喪失日() != null) {
+        if (nengakuHokenryoKeisanParameter.get年額賦課根拠().get資格喪失日() != null) {
             //soshitsuYMD.setTime(input.get年額賦課根拠().get資格喪失日());
-            soshitsuYMD.set(input.get年額賦課根拠().get資格喪失日().getYearValue(), input.get年額賦課根拠().get資格喪失日().getMonthValue(), 1);
+            soshitsuYMD.set(nengakuHokenryoKeisanParameter.get年額賦課根拠().get資格喪失日().getYearValue(),
+                    nengakuHokenryoKeisanParameter.get年額賦課根拠().get資格喪失日().getMonthValue(), 1);
             if (shutokuYMD.compareTo(taishoYMD) <= 0
                     && taishoYMD.compareTo(soshitsuYMD) < 0) {
                 result = true;
@@ -98,7 +108,7 @@ public class NengakuKeisan {
 
     private void dankaiShukei(RString hokenryoDankai, RString rank) {
 
-        NengakuHokenryoHoji nengakuhokenryohoji;
+        NengaokuHokenryoHoji nengakuhokenryohoji;
         int idx;
 
         boolean umuHantei = false;
@@ -123,7 +133,7 @@ public class NengakuKeisan {
             nengakuHokenryoHojiList.get(idx).setKosuu(nengakuHokenryoHojiList.get(idx).getKosuu() + 1);
 
         } else {
-            nengakuhokenryohoji = new NengakuHokenryoHoji();
+            nengakuhokenryohoji = new NengaokuHokenryoHoji();
             nengakuhokenryohoji.setDankai(hokenryoDankai);
             nengakuhokenryohoji.setRank(rank);
             nengakuhokenryohoji.setKosuu(1);
@@ -132,13 +142,13 @@ public class NengakuKeisan {
 
     }
 
-    private Decimal nengakuKeisan(保険料段階判定input input) {
+    private Decimal nengakuKeisan(NengakuHokenryoKeisanParameter input) {
 
         Decimal result = new Decimal(0);
         Decimal kosuu;
         Decimal wariai;
 
-        for (NengakuHokenryoHoji nengakuHokenryoHoji : nengakuHokenryoHojiList) {
+        for (NengaokuHokenryoHoji nengakuHokenryoHoji : nengakuHokenryoHojiList) {
             kosuu = new Decimal(nengakuHokenryoHoji.getKosuu());
             wariai = kosuu.divide(NENTSUKISU);
             result = result.add(kijunNengakuShutoku(input.get年額制御情報(), nengakuHokenryoHoji).multiply(wariai));
@@ -147,7 +157,7 @@ public class NengakuKeisan {
         return result;
     }
 
-    private Decimal kijunNengakuShutoku(NengakuSeigyoJoho seigyoJoho, NengakuHokenryoHoji nengakuHokenryoHoji) {
+    private Decimal kijunNengakuShutoku(NengakuSeigyoJoho seigyoJoho, NengaokuHokenryoHoji nengakuHokenryoHoji) {
 
         RString rank;
         if (nengakuHokenryoHoji.getRank() == null || nengakuHokenryoHoji.getRank().isEmpty()) {
@@ -156,7 +166,7 @@ public class NengakuKeisan {
             rank = nengakuHokenryoHoji.getRank();
         }
 
-        Rank別基準金額 rankbetsuSeigyoJoho = seigyoJoho.getランク別制御情報().get(rank);
+        RankBetsuKijunKingaku rankbetsuSeigyoJoho = seigyoJoho.getランク別制御情報().get(rank);
         Decimal result;
 
         switch (String.valueOf(nengakuHokenryoHoji.getDankai())) {

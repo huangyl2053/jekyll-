@@ -3,21 +3,21 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
+package jp.co.ndensan.reams.db.dbb.business.core.nengakukeisan.param;
 
-package jp.co.ndensan.reams.db.dbb.business.core;
-
-import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 
 /**
+ * 保険料段階判定パラメータというクラスです。
  *
- * @author n3336
  */
-public class 保険料段階判定input {
-    private RString 賦課年度;
+public class NengakuHokenryoKeisanParameter {
+
+    private FlexibleDate 賦課年度;
     private NengakuFukaKonkyo 年額賦課根拠;
     private NengakuSeigyoJoho 年額制御情報;
 
-    public RString get賦課年度() {
+    public FlexibleDate get賦課年度() {
         return 賦課年度;
     }
 
@@ -29,7 +29,7 @@ public class 保険料段階判定input {
         return 年額制御情報;
     }
 
-    public void set賦課年度(RString 賦課年度) {
+    public void set賦課年度(FlexibleDate 賦課年度) {
         this.賦課年度 = 賦課年度;
     }
 

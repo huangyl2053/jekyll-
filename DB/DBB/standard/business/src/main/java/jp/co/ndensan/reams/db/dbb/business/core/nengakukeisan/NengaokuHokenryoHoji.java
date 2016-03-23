@@ -3,8 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
-package jp.co.ndensan.reams.db.dbb.business.core;
+package jp.co.ndensan.reams.db.dbb.business.core.nengakukeisan;
 
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
@@ -12,7 +11,8 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
  *
  * @author N2810
  */
-public class NengakuHokenryoHoji {
+class NengaokuHokenryoHoji {
+
     private RString rank;
     private RString dankai;
     private int kosuu;

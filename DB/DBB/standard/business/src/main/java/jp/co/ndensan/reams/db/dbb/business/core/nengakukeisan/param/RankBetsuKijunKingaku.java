@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbb.business.core;
+package jp.co.ndensan.reams.db.dbb.business.core.nengakukeisan.param;
 
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 
@@ -11,7 +11,7 @@ import jp.co.ndensan.reams.uz.uza.math.Decimal;
  *
  * @author N2810
  */
-public class Rank別基準金額 {
+public class RankBetsuKijunKingaku {
 
     private Decimal ランク基準金額1;
     private Decimal ランク基準金額2;
@@ -34,7 +34,7 @@ public class Rank別基準金額 {
     private Decimal ランク基準金額19;
     private Decimal ランク基準金額20;
 
-    public void setランク基準金額18(Decimal ランク基準金額18) {
+    protected void setランク基準金額18(Decimal ランク基準金額18) {
         this.ランク基準金額18 = ランク基準金額18;
     }
 
@@ -46,7 +46,7 @@ public class Rank別基準金額 {
         return ランク基準金額1;
     }
 
-    public void setランク基準金額1(Decimal ランク基準金額1) {
+    protected void setランク基準金額1(Decimal ランク基準金額1) {
         this.ランク基準金額1 = ランク基準金額1;
     }
 
@@ -54,7 +54,7 @@ public class Rank別基準金額 {
         return ランク基準金額2;
     }
 
-    public void setランク基準金額2(Decimal ランク基準金額2) {
+    protected void setランク基準金額2(Decimal ランク基準金額2) {
         this.ランク基準金額2 = ランク基準金額2;
     }
 
@@ -62,7 +62,7 @@ public class Rank別基準金額 {
         return ランク基準金額3;
     }
 
-    public void setランク基準金額3(Decimal ランク基準金額3) {
+    protected void setランク基準金額3(Decimal ランク基準金額3) {
         this.ランク基準金額3 = ランク基準金額3;
     }
 
@@ -130,67 +130,67 @@ public class Rank別基準金額 {
         return ランク基準金額20;
     }
 
-    public void setランク基準金額10(Decimal ランク基準金額10) {
+    protected void setランク基準金額10(Decimal ランク基準金額10) {
         this.ランク基準金額10 = ランク基準金額10;
     }
 
-    public void setランク基準金額11(Decimal ランク基準金額11) {
+    protected void setランク基準金額11(Decimal ランク基準金額11) {
         this.ランク基準金額11 = ランク基準金額11;
     }
 
-    public void setランク基準金額13(Decimal ランク基準金額13) {
+    protected void setランク基準金額13(Decimal ランク基準金額13) {
         this.ランク基準金額13 = ランク基準金額13;
     }
 
-    public void setランク基準金額12(Decimal ランク基準金額12) {
+    protected void setランク基準金額12(Decimal ランク基準金額12) {
         this.ランク基準金額12 = ランク基準金額12;
     }
 
-    public void setランク基準金額14(Decimal ランク基準金額14) {
+    protected void setランク基準金額14(Decimal ランク基準金額14) {
         this.ランク基準金額14 = ランク基準金額14;
     }
 
-    public void setランク基準金額15(Decimal ランク基準金額15) {
+    protected void setランク基準金額15(Decimal ランク基準金額15) {
         this.ランク基準金額15 = ランク基準金額15;
     }
 
-    public void setランク基準金額16(Decimal ランク基準金額16) {
+    protected void setランク基準金額16(Decimal ランク基準金額16) {
         this.ランク基準金額16 = ランク基準金額16;
     }
 
-    public void setランク基準金額17(Decimal ランク基準金額17) {
+    protected void setランク基準金額17(Decimal ランク基準金額17) {
         this.ランク基準金額17 = ランク基準金額17;
     }
 
-    public void setランク基準金額19(Decimal ランク基準金額19) {
+    protected void setランク基準金額19(Decimal ランク基準金額19) {
         this.ランク基準金額19 = ランク基準金額19;
     }
 
-    public void setランク基準金額20(Decimal ランク基準金額20) {
+    protected void setランク基準金額20(Decimal ランク基準金額20) {
         this.ランク基準金額20 = ランク基準金額20;
     }
 
-    public void setランク基準金額4(Decimal ランク基準金額4) {
+    protected void setランク基準金額4(Decimal ランク基準金額4) {
         this.ランク基準金額4 = ランク基準金額4;
     }
 
-    public void setランク基準金額5(Decimal ランク基準金額5) {
+    protected void setランク基準金額5(Decimal ランク基準金額5) {
         this.ランク基準金額5 = ランク基準金額5;
     }
 
-    public void setランク基準金額6(Decimal ランク基準金額6) {
+    protected void setランク基準金額6(Decimal ランク基準金額6) {
         this.ランク基準金額6 = ランク基準金額6;
     }
 
-    public void setランク基準金額7(Decimal ランク基準金額7) {
+    protected void setランク基準金額7(Decimal ランク基準金額7) {
         this.ランク基準金額7 = ランク基準金額7;
     }
 
-    public void setランク基準金額8(Decimal ランク基準金額8) {
+    protected void setランク基準金額8(Decimal ランク基準金額8) {
         this.ランク基準金額8 = ランク基準金額8;
     }
 
-    public void setランク基準金額9(Decimal ランク基準金額9) {
+    protected void setランク基準金額9(Decimal ランク基準金額9) {
         this.ランク基準金額9 = ランク基準金額9;
     }
 }

@@ -3,32 +3,32 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
+package jp.co.ndensan.reams.db.dbb.business.core.nengakukeisan;
 
-package jp.co.ndensan.reams.db.dbb.business.core;
-
-import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 
 /**
+ * 年額計算の結果。賦課年度分の保険料額。
  *
  * @author N2810
  */
-public class 年額計算Output {
-    
-    private RString fukaNendo;
+public class NengakuHokenryo {
+
+    private FlexibleDate fukaNendo;
     private Decimal hokenryoNengaku;
 
     /**
      * @return the fukaNendo
      */
-    public RString getFukaNendo() {
+    public FlexibleDate getFukaNendo() {
         return fukaNendo;
     }
 
     /**
      * @param fukaNendo the fukaNendo to set
      */
-    public void setFukaNendo(RString fukaNendo) {
+    protected void setFukaNendo(FlexibleDate fukaNendo) {
         this.fukaNendo = fukaNendo;
     }
 
@@ -42,7 +42,7 @@ public class 年額計算Output {
     /**
      * @param hokenryoNengaku the hokenryoNengaku to set
      */
-    public void setHokenryoNengaku(Decimal hokenryoNengaku) {
+    protected void setHokenryoNengaku(Decimal hokenryoNengaku) {
         this.hokenryoNengaku = hokenryoNengaku;
     }
 }

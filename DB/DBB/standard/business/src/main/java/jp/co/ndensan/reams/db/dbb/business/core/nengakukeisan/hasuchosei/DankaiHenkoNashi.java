@@ -3,22 +3,24 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbb.business.core;
+package jp.co.ndensan.reams.db.dbb.business.core.nengakukeisan.hasuchosei;
 
 import jp.co.ndensan.reams.db.dbb.business.core.hokenryodankai.core.HokenryoDankai;
 import java.util.HashSet;
 import java.util.Map;
+import jp.co.ndensan.reams.db.dbb.business.core.nengakukeisan.param.NengakuHokenryoKeisanParameter;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
+ * 段階が4月_翌3月まで変更無いか
  *
  * @author n3336
  */
-public class 段階が4月_翌3月まで変更無いか implements 端数調整判定 {
+class DankaiHenkoNashi implements IHasuChoseiHantei {
 
     @Override
-    public boolean judgeHasuu(保険料段階判定input input) {
-        Map<RString, HokenryoDankai> map = input.get年額賦課根拠().createHokenryoDankaiMap();
+    public boolean judgeHasuu(NengakuHokenryoKeisanParameter nengakuHokenryoKeisanParameter) {
+        Map<RString, HokenryoDankai> map = nengakuHokenryoKeisanParameter.get年額賦課根拠().get月別保険料段階().createHokenryoDankaiMap();
 
         HashSet<RString> set = new HashSet<>();
 
