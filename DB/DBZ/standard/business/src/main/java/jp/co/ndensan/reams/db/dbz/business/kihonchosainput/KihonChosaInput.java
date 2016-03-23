@@ -5,6 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbz.business.kihonchosainput;
 
+import java.io.Serializable;
 import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dbz.entity.db.kihonchosainput.KihonChosaInputEntity;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
@@ -15,7 +16,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
  *
  * 認定調査基本情報を管理するビジネスです。
  */
-public class KihonChosaInput {
+public class KihonChosaInput implements Serializable {
 
     private final KihonChosaInputEntity 認定調査基本情報;
 

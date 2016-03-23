@@ -81,7 +81,17 @@ public class KihonChosaInput {
      */
     public ResponseData<KihonChosaInputDiv> onClick_btnConfirm(KihonChosaInputDiv div) {
         getHandler(div).onClick_btnConfirm();
-        return ResponseData.of(div).respond();
+        return ResponseData.of(div).dialogOKClose();
+    }
+
+    /**
+     * 認定基本調査入力を確認を押下する。
+     *
+     * @param div {@link KihonChosaInputDiv 認定基本調査入力Div}
+     * @return 認定基本調査入力Divを持つResponseData
+     */
+    public ResponseData<KihonChosaInputDiv> onClick_btnBack(KihonChosaInputDiv div) {
+        return ResponseData.of(div).dialogOKClose();
     }
 
     private KihonChosaInputHandler getHandler(KihonChosaInputDiv div) {
