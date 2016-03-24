@@ -14,7 +14,7 @@
      "toLayoutSubGyomuCode": "DBC",
      "toLayoutName": "DBC4520011",
      "toLayoutTitle": "介護支援専門員登録",
-     "toState": "default"
+     "toState": "検索"
     },
     {
      "id": "2",
@@ -36,16 +36,30 @@
      "layoutSubGyomuCode": "DBC",
      "layoutName": "DBC4520012",
      "layoutTitle": "介護支援専門員登録",
-     "eventName": "介護専門員へ戻る",
+     "eventName": "介護専門員検索へ戻る",
      "destroy": false,
      "condition": "",
      "toLayoutSubGyomuCode": "DBC",
      "toLayoutName": "DBC4520011",
      "toLayoutTitle": "介護支援専門員登録",
-     "toState": "照会"
+     "toState": "検索"
     },
     {
      "id": "4",
+     "type": "ordinal",
+     "layoutSubGyomuCode": "DBC",
+     "layoutName": "DBC4520012",
+     "layoutTitle": "介護支援専門員登録",
+     "eventName": "介護専門員一覧へ戻る",
+     "destroy": false,
+     "condition": "",
+     "toLayoutSubGyomuCode": "DBC",
+     "toLayoutName": "DBC4520011",
+     "toLayoutTitle": "介護支援専門員登録",
+     "toState": "一覧"
+    },
+    {
+     "id": "5",
      "type": "end",
      "layoutSubGyomuCode": "DBC",
      "layoutName": "DBC4520011",

@@ -14,7 +14,8 @@ import jp.co.ndensan.reams.uz.uza.core.ui.response.IContainerEvents;
 public enum DBC4520012TransitionEventName implements IContainerEvents {
 // <editor-fold defaultstate="collapsed" desc="Created By UI Designer ver 1.0.0">
 
-    介護専門員へ戻る("介護専門員へ戻る");
+    介護専門員一覧へ戻る("介護専門員一覧へ戻る"),
+    介護専門員検索へ戻る("介護専門員検索へ戻る");
 
     private final RString name;
 
