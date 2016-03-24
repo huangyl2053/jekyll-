@@ -52,7 +52,7 @@
      "layoutTitle": "介護保険特別会計経理状況登録",
      "eventName": "削除",
      "destroy": false,
-     "condition": "",
+     "condition": "様式４",
      "toLayoutSubGyomuCode": "DBU",
      "toLayoutName": "DBU0050021",
      "toLayoutTitle": "様式４",
@@ -381,6 +381,34 @@
      "eventName": "処理完了",
      "destroy": false,
      "condition": ""
+    },
+    {
+     "id": "29",
+     "type": "ordinal",
+     "layoutSubGyomuCode": "DBU",
+     "layoutName": "DBU0050011",
+     "layoutTitle": "介護保険特別会計経理状況登録",
+     "eventName": "削除",
+     "destroy": false,
+     "condition": "様式４の２",
+     "toLayoutSubGyomuCode": "DBU",
+     "toLayoutName": "DBU0050031",
+     "toLayoutTitle": "様式４の２",
+     "toState": "削除状態"
+    },
+    {
+     "id": "30",
+     "type": "ordinal",
+     "layoutSubGyomuCode": "DBU",
+     "layoutName": "DBU0050011",
+     "layoutTitle": "介護保険特別会計経理状況登録",
+     "eventName": "削除",
+     "destroy": false,
+     "condition": "様式４の３",
+     "toLayoutSubGyomuCode": "DBU",
+     "toLayoutName": "DBU0050041",
+     "toLayoutTitle": "様式４の３",
+     "toState": "削除状態"
     }
    ]
   }
