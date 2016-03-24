@@ -216,22 +216,24 @@ public class KyokaisoGaitoshaPanelValidationHandler {
         List<dgKyokaisouGaitouItran_Row> 境界層該当一覧情報 = div.getDgKyokaisouGaitouItran().getDataSource();
         Collections.sort(境界層該当一覧情報, new KyokaisoGaitoshaPanelValidationHandler.DateComparator());
         int 一覧終了日未設定件数 = 0;
-        for (int i = 0; i < 境界層該当一覧情報.size() - 1; i++) {
+        RString 適用終了日 = RString.EMPTY;
+        for (int i = 0; i < 境界層該当一覧情報.size(); i++) {
             if (状態_削除.equals(div.getKyokaisouGaitouItiran().getIranState())) {
                 continue;
-            }
-            if (境界層該当一覧情報.get(i).getShuryoDate() == null || 境界層該当一覧情報.get(i).getShuryoDate().isEmpty()) {
-                一覧終了日未設定件数 = 一覧終了日未設定件数 + 1;
-                期間が重複チェック(validPairs, 一覧終了日未設定件数);
             }
             if (境界層該当一覧情報.get(i).getShuryoDate() == null
                     || 境界層該当一覧情報.get(i).getShuryoDate().isEmpty()) {
                 validPairs.add(new ValidationMessageControlPair(RRVMessages.期間が重複チェック));
             } else {
-                if (!new RDate(境界層該当一覧情報.get(i).getShuryoDate().toString())
-                        .isBeforeOrEquals(new RDate(境界層該当一覧情報.get(i + 1).getKaishiDate().toString()))) {
+                if (!RString.isNullOrEmpty(適用終了日) && !new RDate(境界層該当一覧情報.get(i).getShuryoDate().toString())
+                        .isBeforeOrEquals(new RDate(境界層該当一覧情報.get(i).getKaishiDate().toString()))) {
                     validPairs.add(new ValidationMessageControlPair(RRVMessages.期間が重複チェック));
                 }
+            }
+            適用終了日 = 境界層該当一覧情報.get(i).getKaishiDate();
+            if (境界層該当一覧情報.get(i).getShuryoDate() == null || 境界層該当一覧情報.get(i).getShuryoDate().isEmpty()) {
+                一覧終了日未設定件数 = 一覧終了日未設定件数 + 1;
+                期間が重複チェック(validPairs, 一覧終了日未設定件数);
             }
         }
     }
@@ -240,22 +242,24 @@ public class KyokaisoGaitoshaPanelValidationHandler {
         List<dghokenryoNofu_Row> 境界層保険料段階情報 = div.getDghokenryoNofu().getDataSource();
         Collections.sort(境界層保険料段階情報, new KyokaisoGaitoshaPanelValidationHandler.KyokaisoHokenryoDateComparator());
         int 終了日未設定件数 = 0;
-        for (int i = 0; i < 境界層保険料段階情報.size() - 1; i++) {
+        RString 適用終了日 = RString.EMPTY;
+        for (int i = 0; i < 境界層保険料段階情報.size(); i++) {
             if (状態_削除.equals(境界層保険料段階情報.get(i).getState())) {
                 continue;
-            }
-            if (境界層保険料段階情報.get(i).getTekiyoShuryoDate().isEmpty()) {
-                終了日未設定件数 = 1 + 終了日未設定件数;
-                期間が重複チェック(validPairs, 終了日未設定件数);
             }
             if (境界層保険料段階情報.get(i).getTekiyoShuryoDate() == null
                     || 境界層保険料段階情報.get(i).getTekiyoShuryoDate().isEmpty()) {
                 validPairs.add(new ValidationMessageControlPair(RRVMessages.期間が重複チェック));
             } else {
-                if (!new RYearMonth(new RDate(境界層保険料段階情報.get(i).getTekiyoShuryoDate().toString()).getYearMonth().toDateString())
-                        .isBeforeOrEquals(new RYearMonth(new RDate(境界層保険料段階情報.get(i + 1).getTekiyoKaishiDate().toString()).getYearMonth().toDateString()))) {
+                if (!RString.isNullOrEmpty(適用終了日) && !new RYearMonth(new RDate(適用終了日.toString()).getYearMonth().toDateString())
+                        .isBeforeOrEquals(new RYearMonth(new RDate(境界層保険料段階情報.get(i).getTekiyoKaishiDate().toString()).getYearMonth().toDateString()))) {
                     validPairs.add(new ValidationMessageControlPair(RRVMessages.期間が重複チェック));
                 }
+            }
+            適用終了日 = 境界層保険料段階情報.get(i).getTekiyoShuryoDate();
+            if (境界層保険料段階情報.get(i).getTekiyoShuryoDate().isEmpty()) {
+                終了日未設定件数 = 1 + 終了日未設定件数;
+                期間が重複チェック(validPairs, 終了日未設定件数);
             }
         }
     }
