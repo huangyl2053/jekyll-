@@ -16,7 +16,8 @@ public enum DBC4520011StateName implements IStateEnumerations {
 
     NoChange(""),
     Default("default"),
-    照会("照会");
+    検索("検索"),
+    一覧("一覧");
 
     private final RString name;
 
