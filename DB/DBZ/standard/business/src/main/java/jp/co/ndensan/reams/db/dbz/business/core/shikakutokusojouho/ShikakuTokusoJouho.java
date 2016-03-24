@@ -14,7 +14,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
  *
- * 資格情報一覧ガイドにＤＢから検索するデータが表示するクラスです。
+ * 資格履歴情報にＤＢから検索するデータが表示するクラスです。
  */
 public class ShikakuTokusoJouho {
 
@@ -23,7 +23,7 @@ public class ShikakuTokusoJouho {
     /**
      * コンストラクタです.
      *
-     * @param entity 資格得喪Entity
+     * @param entity 資格履歴情報Entity
      */
     public ShikakuTokusoJouho(ShikakuTokusouJouhoRelateEntity entity) {
         this.entity = entity;
@@ -165,17 +165,18 @@ public class ShikakuTokusoJouho {
     }
 
     /**
-     * 旧市町村名称を取得します。
+     * 処理日時を取得します。
      *
-     * @return 旧市町村名称
+     * @return 処理日時
      */
     public RDateTime get処理日時() {
         return entity.getLastUpdateTimestamp();
     }
-     /**
-     * 旧市町村名称を取得します。
+
+    /**
+     * 単一広域区分を取得します。
      *
-     * @return 旧市町村名称
+     * @return 単一広域区分
      */
     public RString get単一広域区分() {
         return entity.getTanIchi();

@@ -10,6 +10,8 @@ import java.util.List;
 import jp.co.ndensan.reams.db.dbu.entity.db.relate.kyokaisogaitosha.KyokaisoKanriMasterListChohyoDataSakuseiEntity;
 import jp.co.ndensan.reams.db.dbu.entity.db.relate.kyokaisogaitosha.KyokaisogGaitoshaListEntity;
 import jp.co.ndensan.reams.db.dbu.entity.db.relate.kyokaisogaitosha.KyokaisogGaitoshaRelateEntity;
+import jp.co.ndensan.reams.ur.urz.definition.core.shikibetsutaisho.JuminJotai;
+import jp.co.ndensan.reams.ur.urz.definition.core.shikibetsutaisho.JuminShubetsu;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.CodeShubetsu;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
@@ -35,7 +37,7 @@ public class KyokaisoKanriMasterListChohyoDataSakusei {
     private static final RString 解除する = new RString("1");
     private static final RString 性別_男 = new RString("男");
     private static final RString 性別_女 = new RString("女");
-    private static final RString CodeShubetsu_0243 = new RString("0243");
+    private static final RString codeShubetsu_0243 = new RString("0243");
     private static final RString 給付額減額記載解除フラグ_解除する = new RString("解除する");
     private static final RString 改頁 = new RString("1");
 
@@ -50,7 +52,8 @@ public class KyokaisoKanriMasterListChohyoDataSakusei {
     public List<KyokaisoKanriMasterListChohyoDataSakuseiEntity> getcreateNenreiToutatsuYoteishaCheckListChohyo(
             KyokaisogGaitoshaListEntity kyokaisogGaitoshaListEntity) {
         List<KyokaisoKanriMasterListChohyoDataSakuseiEntity> 境界層管理マスタリスト帳票ソースデータリスト = new ArrayList<>();
-        if (kyokaisogGaitoshaListEntity.getKyokaisokanrimasterList() == null || 0 == kyokaisogGaitoshaListEntity.getKyokaisokanrimasterList().size()) {
+        if (kyokaisogGaitoshaListEntity.getKyokaisokanrimasterList() == null
+                || 0 == kyokaisogGaitoshaListEntity.getKyokaisokanrimasterList().size()) {
             KyokaisoKanriMasterListChohyoDataSakuseiEntity chohyoDataEntity = 帳票用データリスト(kyokaisogGaitoshaListEntity);
             境界層管理マスタリスト帳票ソースデータリスト.add(chohyoDataEntity);
         } else {
@@ -163,8 +166,10 @@ public class KyokaisoKanriMasterListChohyoDataSakusei {
                 性別.add(性別_女);
             }
             //TODO種別と状態　QA765　コードマストよりパラメータはない。
-            種別.add(new RString(entity.getJuminShubetsuCode().toString()));
-            状態.add(new RString(entity.getJuminJotaiCode().toString()));
+            種別.add(entity.getJuminShubetsuCode() == null
+                    ? RString.EMPTY : JuminShubetsu.toValue(entity.getJuminShubetsuCode()).toRString());
+            状態.add(entity.getJuminJotaiCode() == null
+                    ? RString.EMPTY : JuminJotai.toValue(entity.getJuminJotaiCode()).住民状態略称());
             世帯コード.add(new RString(entity.getSetaiCode().toString()));
             生年月日.add(共通ポリシfomart(entity.getSeinengappiYMD()));
             該当申請日.add(共通ポリシfomart(entity.getShinseiYMD()));
@@ -176,7 +181,7 @@ public class KyokaisoKanriMasterListChohyoDataSakusei {
                 給付額減額解除.add(RString.EMPTY);
             }
             標準負担減額後負担額.add(new RString(entity.getHyojunFutanKeigengoFutangaku().toString()));
-            居住費軽減後居室種類.add(new RString(CodeMaster.getCode(SubGyomuCode.DBZ介護共通, new CodeShubetsu(CodeShubetsu_0243),
+            居住費軽減後居室種類.add(new RString(CodeMaster.getCode(SubGyomuCode.DBZ介護共通, new CodeShubetsu(codeShubetsu_0243),
                     new Code(entity.getKyojuhiKeigengoKyoshitsuShuruiCode())).getコード名称().toString()));
             居住費軽減後負担額.add(new RString(entity.getKyojuhiKeigengoHutangaku().toString()));
             食費軽減後負担額.add(new RString(entity.getShokuhiKeigengoHutangaku().toString()));

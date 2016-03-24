@@ -9,21 +9,18 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.DonyuKeitaiCode;
-import jp.co.ndensan.reams.db.dbz.business.core.shikakutokuso.ShikakuTokuso;
 import jp.co.ndensan.reams.db.dbz.business.core.shikakutokusojouho.ShikakuTokusoJouho;
 import jp.co.ndensan.reams.db.dbz.definition.shikakutokusojouho.ShikakuTokusoJouhoParameter;
 import jp.co.ndensan.reams.db.dbz.entity.db.relate.shikakutokusojouho.ShikakuTokusouJouhoRelateEntity;
 import jp.co.ndensan.reams.db.dbz.persistence.db.basic.shikakutokusojouho.IShikakuTokusouJouhoMapper;
 import jp.co.ndensan.reams.db.dbz.service.core.MapperProvider;
-import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
-import jp.co.ndensan.reams.uz.uza.lang.ApplicationException;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.util.db.SearchResult;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 
 /**
  *
- * 資格得喪履歴クラスです。
+ * 資格履歴情報のクラスです。
  */
 public class ShikakuTokusoJouhoFinder {
 
@@ -58,29 +55,30 @@ public class ShikakuTokusoJouhoFinder {
     }
 
     /**
-     * 資格得喪履歴の一覧データ取得リストを取得する。
+     * 資格履歴情報の一覧データ取得リストを取得する。
      *
-     * @param params ShikakuTokusoInputGuideParameter
+     * @param params ShikakuTokusoJouhoParameter
      * @return 一覧データ取得取得リスト
      */
-    public SearchResult<ShikakuTokusoJouho> getShikakuTokuso(ShikakuTokusoJouhoParameter params) {
+    public SearchResult<ShikakuTokusoJouho> getShikakuJoho(ShikakuTokusoJouhoParameter params) {
         if ((params.getHihokenshaNo() == null || params.getHihokenshaNo().isEmpty())
                 && (params.getShikibetsuCode() == null || params.getShikibetsuCode().isEmpty())) {
-            throw new ApplicationException(UrErrorMessages.検索キーの誤り.getMessage());
+            return SearchResult.of(Collections.<ShikakuTokusoJouho>emptyList(), 0, false);
         }
-        IShikakuTokusouJouhoMapper shikakuTokusoMapper = this.mapperProvider.create(IShikakuTokusouJouhoMapper.class);
+        IShikakuTokusouJouhoMapper shikakuTokusoMapper = mapperProvider.create(IShikakuTokusouJouhoMapper.class);
         List<ShikakuTokusouJouhoRelateEntity> 一覧データ取得リスト = null;
         if (DonyuKeitaiCode.事務広域.getCode().equals(params.get単一広域区分())) {
             一覧データ取得リスト = shikakuTokusoMapper.getShikakuJoho(params);
-        } else if (params.get単一広域区分().equals(DonyuKeitaiCode.事務構成市町村.getCode())
+        }
+        if (DonyuKeitaiCode.事務構成市町村.getCode().equals(params.get単一広域区分())
                 || DonyuKeitaiCode.事務単一.getCode().equals(params.get単一広域区分())) {
             一覧データ取得リスト = shikakuTokusoMapper.getShikakuTosoJoho(params);
         }
         List<ShikakuTokusoJouho> serviceShuruiList = new ArrayList<>();
-        List<ShikakuTokusouJouhoRelateEntity> 取得日リスト = new ArrayList();
+        List<ShikakuTokusouJouhoRelateEntity> 取得日リスト = new ArrayList<>();
         FlexibleDate shikakuShutokuYMDFlag = FlexibleDate.EMPTY;
         if (一覧データ取得リスト == null || 一覧データ取得リスト.isEmpty()) {
-            return SearchResult.of(Collections.<ShikakuTokuso>emptyList(), 0, false);
+            return SearchResult.of(Collections.<ShikakuTokusoJouho>emptyList(), 0, false);
         }
         for (int i = 0; i < 一覧データ取得リスト.size(); i++) {
             if (!shikakuShutokuYMDFlag.equals(一覧データ取得リスト.get(i).getShikakuShutokuYMD())) {

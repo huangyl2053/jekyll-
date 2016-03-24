@@ -1,9 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<!-- どのマッパーインターフェースと対応するかを指定する -->
+<!-- ビジネス設計_DBZ-4560-020_ShikakuRirekiInfo_資格履歴情報 -->
 <mapper namespace="jp.co.ndensan.reams.db.dbz.persistence.db.basic.shikakutokusojouho.IShikakuTokusouJouhoMapper">
-
-    <!--テーブルDbT1001HihokenshaDaichoの項目をDbT1001HihokenshaDaichoEntityの項目にマッピングします。-->
     <resultMap id="resultMap_getShikakuJohoEntity" type="jp.co.ndensan.reams.db.dbz.entity.db.relate.shikakutokusojouho.ShikakuTokusouJouhoRelateEntity" autoMapping="true">
         <result property="shikibetsuCode" column="DbT1001Hiho_shikibetsuCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.ShikibetsuCodeTypeHandler" />
         <result property="shikakuShutokuYMD" column="DbT1001Hiho_shikakuShutokuYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler" />
@@ -56,6 +54,7 @@
         DbT1001Hiho. "koikinaiTokureiSochimotoShichosonCode" = DbT7051Kosei."shichosonCode"
         AND
         DbT7051Kosei."gappeiKyuShichosonKubun" = '0'
+        <!--//TODO QA947 -->
         LEFT JOIN
         rgdb."DbT7056GappeiShichoson" as  DbT7056Gappei
         ON
