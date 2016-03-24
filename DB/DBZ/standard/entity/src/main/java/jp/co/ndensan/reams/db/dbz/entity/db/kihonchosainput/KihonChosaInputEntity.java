@@ -5,6 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbz.entity.db.kihonchosainput;
 
+import java.io.Serializable;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
@@ -15,7 +16,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 @lombok.Getter
 @lombok.Setter
 @SuppressWarnings("PMD.UnusedPrivateField")
-public class KihonChosaInputEntity {
+public class KihonChosaInputEntity implements Serializable {
 
     private Code 認知症高齢者自立度;
     private Code 障害高齢者自立度;

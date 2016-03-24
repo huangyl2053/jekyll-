@@ -5,10 +5,11 @@
  */
 package jp.co.ndensan.reams.db.dbb.business.core.hokenryodankai.core;
 
+import java.util.List;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
- *
+ * 月別保険料段階のテストデータを作成するクラスです。
  *
  */
 public class TsukibetsuHokenryoDankaiTest {
@@ -196,4 +197,22 @@ public class TsukibetsuHokenryoDankaiTest {
         expResult.get保険料段階03月().setTokureiTaisho(false);
         return expResult;
     }
+
+    public static TsukibetsuHokenryoDankai set段階に変更無い場合は端数調整不要なのでfalseを返す(List<HokenryoDankai> hokenryoDankaiList) {
+        TsukibetsuHokenryoDankai tsukibetsuHokenryoDankai = new TsukibetsuHokenryoDankai();
+        tsukibetsuHokenryoDankai.set保険料段階04月(hokenryoDankaiList.get(0));
+        tsukibetsuHokenryoDankai.set保険料段階05月(hokenryoDankaiList.get(1));
+        tsukibetsuHokenryoDankai.set保険料段階06月(hokenryoDankaiList.get(2));
+        tsukibetsuHokenryoDankai.set保険料段階07月(hokenryoDankaiList.get(3));
+        tsukibetsuHokenryoDankai.set保険料段階08月(hokenryoDankaiList.get(4));
+        tsukibetsuHokenryoDankai.set保険料段階09月(hokenryoDankaiList.get(5));
+        tsukibetsuHokenryoDankai.set保険料段階10月(hokenryoDankaiList.get(6));
+        tsukibetsuHokenryoDankai.set保険料段階11月(hokenryoDankaiList.get(7));
+        tsukibetsuHokenryoDankai.set保険料段階12月(hokenryoDankaiList.get(8));
+        tsukibetsuHokenryoDankai.set保険料段階01月(hokenryoDankaiList.get(9));
+        tsukibetsuHokenryoDankai.set保険料段階02月(hokenryoDankaiList.get(10));
+        tsukibetsuHokenryoDankai.set保険料段階03月(hokenryoDankaiList.get(11));
+        return tsukibetsuHokenryoDankai;
+    }
+
 }

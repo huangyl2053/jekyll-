@@ -39,6 +39,13 @@ public class NenreitotatsuYoteishaIchiranhyoProperty extends ReportPropertyBase<
         super(SubGyomuCode.DBA介護資格, ReportIdDBA.DBA200001.getReportId());
     }
 
+    /**
+     * 分頁処理です。
+     *
+     * @param breakers breakers
+     * @param catalog catalog
+     * @return Breakers
+     */
     @Override
     public Breakers<NenreitotatsuYoteishaIchiranhyoReportSource> defineBreakers(
             Breakers<NenreitotatsuYoteishaIchiranhyoReportSource> breakers,

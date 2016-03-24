@@ -6,7 +6,6 @@ package jp.co.ndensan.reams.db.dba.divcontroller.entity.parentdiv.DBA1080011;
  * Sat Feb 20 14:48:27 CST 2016
  */
 
-import java.io.Serializable;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.binding.DataRow;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxDate;
@@ -17,7 +16,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxFlexibleDate;
  *
  * @author 自動生成
  */
-public class dgNenreiTotatshusha_Row extends DataRow implements Serializable {
+public class dgNenreiTotatshusha_Row extends DataRow {
     // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：バージョン情報無し">
 
     private RString lasdecCode;

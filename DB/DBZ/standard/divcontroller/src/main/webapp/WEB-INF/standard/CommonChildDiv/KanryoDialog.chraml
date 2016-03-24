@@ -1,4 +1,4 @@
-<div title="" class="JSControl UzCompositeControl  Width-XS FloatLeft" id="defaultLayout" style="margin: 0em;" data-control-type="CommonChildDiv" data-obj="{&quot;fieldName&quot;:&quot;defaultLayout&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;CommonChildDiv&quot;,&quot;width&quot;:&quot;XS&quot;,&quot;visible&quot;:true,&quot;displayNone&quot;:false,&quot;disabled&quot;:false,&quot;accessKey&quot;:&quot;&quot;,&quot;nextFocusFieldName&quot;:&quot;&quot;,&quot;wrap&quot;:false,&quot;float&quot;:0,&quot;toolTip&quot;:&quot;&quot;,&quot;authorityMode&quot;:0,&quot;marginLeft&quot;:&quot;0em&quot;,&quot;marginRight&quot;:&quot;0em&quot;,&quot;selectControlID&quot;:&quot;defaultLayout&quot;,&quot;helpMessageID&quot;:&quot;&quot;,&quot;jpControlName&quot;:&quot;&quot;,&quot;relation&quot;:[],&quot;packageName&quot;:&quot;&quot;,&quot;businessId&quot;:&quot;DBE&quot;,&quot;controlName&quot;:&quot;KanryoDialog&quot;,&quot;marginTop&quot;:&quot;0em&quot;,&quot;marginBottom&quot;:&quot;0em&quot;,&quot;dataPassingForDialog&quot;:[],&quot;dialogOkEventNameForDialog&quot;:&quot;&quot;,&quot;dialogCancelEventNameForDialog&quot;:&quot;onClick_btnClose&quot;,&quot;heightForDialog&quot;:&quot;M&quot;,&quot;firstFocusFieldName&quot;:&quot;&quot;,&quot;lastFocusFieldName&quot;:&quot;&quot;,&quot;modes&quot;:[],&quot;publicEvents&quot;:[],&quot;publicEventsAlias&quot;:[],&quot;EditTypes&quot;:{&quot;_editTypes&quot;:[{&quot;propertyName&quot;:&quot;KanryoDialog_width&quot;,&quot;editType&quot;:0}]},&quot;KanryoDialog_width&quot;:&quot;G4&quot;}" data-is-composite-control="true" data-control-name="DBE.KanryoDialog"><div title="" class="UzPanel Panel-Shadow FloatLeft JSControl Panel panelMarginTop-M panelMarginBottom-M StateChangable marginLeft-Default marginRight-Default marginTop-Default marginBottom-Default UzCommonChildDivPanel Width-G4 UzCompositeChild" id="KanryoDialog" style="margin-top: 0px; margin-bottom: 0px;" data-control-type="Panel" data-obj="{&quot;fieldName&quot;:&quot;KanryoDialog&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;Panel&quot;,&quot;width&quot;:&quot;G4&quot;,&quot;marginLeft&quot;:&quot;Default&quot;,&quot;marginRight&quot;:&quot;Default&quot;,&quot;selectControlID&quot;:&quot;KanryoDialog&quot;,&quot;title&quot;:&quot;&quot;,&quot;postParameterPanelNames&quot;:[{&quot;postParameterPanelNames&quot;:&quot;KanryoDialog&quot;}],&quot;requestSettings&quot;:[{&quot;eventName&quot;:&quot;onLoad&quot;,&quot;requestUrl&quot;:&quot;&quot;},{&quot;eventName&quot;:&quot;onClick_btnClose&quot;,&quot;requestUrl&quot;:&quot;dbe/db/dbe/KanryoDialog/onClick_btnClose&quot;}],&quot;hiddenInput&quot;:[],&quot;session&quot;:{},&quot;widthAuto&quot;:false,&quot;canPost&quot;:true}"><div class="UzPanelHeader" id="KanryoDialog_panel_header_area" style="width: auto; display: none;"><span class="closeIconSpan ui-icon ui-icon-circle-close" style="display: none;"></span><span class="iconSpan ui-icon ui-icon-circle-triangle-n" style="visibility: visible;"></span><span class="textSpan">タイトル</span><div class="groupBoxBorder" style="display: none;"></div></div><div class="UzPanelBody ui-widget-content panelPaddingDelete ui-droppable ui-sortable" id="KanryoDialog_panel_body_area"><div title="" class="UzPanel Panel-Shadow FloatLeft JSControl Panel panelMarginTop-M panelMarginBottom-M StateChangable marginLeft-XS marginRight-XS marginTop-Default marginBottom-Default UzCompositeChild" id="SuccessInfo" style="width: 346px; margin-top: 0px; margin-bottom: 0px;" data-control-type="Panel" data-obj="{&quot;fieldName&quot;:&quot;SuccessInfo&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;Panel&quot;,&quot;width&quot;:&quot;346px&quot;,&quot;selectControlID&quot;:&quot;SuccessInfo&quot;,&quot;title&quot;:&quot;&quot;,&quot;postParameterPanelNames&quot;:[{&quot;postParameterPanelNames&quot;:&quot;SuccessInfo&quot;}],&quot;requestSettings&quot;:[],&quot;hiddenInput&quot;:[],&quot;session&quot;:{},&quot;backgroundColor&quot;:4,&quot;widthAuto&quot;:false,&quot;canPost&quot;:true}"><div class="UzPanelHeader" id="SuccessInfo_panel_header_area" style="width: auto; display: none;"><span class="closeIconSpan ui-icon ui-icon-circle-close" style="display: none;"></span><span class="iconSpan ui-icon ui-icon-circle-triangle-n" style="visibility: visible;"></span><span class="textSpan">タイトル</span><div class="groupBoxBorder" style="display: none;"></div></div><div class="UzPanelBody ui-widget-content panelPaddingDelete BgSuccess ui-droppable ui-sortable" id="SuccessInfo_panel_body_area"><div title="" class="WithLabel StaticImageOuterDiv FloatLeft JSControl controlMargin-M marginLeft-XS marginRight-XS UzCompositeChild" id="imgSuccess" style="width: 36px; height: 30px;" data-control-type="StaticImage" data-obj="{&quot;fieldName&quot;:&quot;imgSuccess&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;StaticImage&quot;,&quot;selectControlID&quot;:&quot;imgSuccess&quot;,&quot;imageWidth&quot;:&quot;35px&quot;,&quot;src&quot;:&quot;/ur/urz/img/KanryoMessage.png&quot;}"><img class="UzStaticImage CoreElement" id="imgSuccess_core" style="width: 35px; height: 30px;" alt="image" src="/ur/urz/img/KanryoMessage.png"></div><div title="" class="UzPanel Panel-Shadow FloatLeft JSControl Panel panelMarginTop-M panelMarginBottom-M StateChangable marginLeft-XS marginRight-XS marginTop-Default marginBottom-Default Width-G2 UzCompositeChild" id="WrapMessageMain" style="width: auto; margin-top: 0px; margin-bottom: 0px;" data-control-type="Panel" data-obj="{&quot;fieldName&quot;:&quot;WrapMessageMain&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;Panel&quot;,&quot;width&quot;:&quot;G2&quot;,&quot;selectControlID&quot;:&quot;WrapMessageMain&quot;,&quot;title&quot;:&quot;&quot;,&quot;postParameterPanelNames&quot;:[{&quot;postParameterPanelNames&quot;:&quot;WrapMessageMain&quot;}],&quot;requestSettings&quot;:[],&quot;hiddenInput&quot;:[],&quot;session&quot;:{},&quot;backgroundColor&quot;:4,&quot;canPost&quot;:true}"><div class="UzPanelHeader" id="WrapMessageMain_panel_header_area" style="width: auto; display: none;"><span class="closeIconSpan ui-icon ui-icon-circle-close" style="display: none;"></span><span class="iconSpan ui-icon ui-icon-circle-triangle-n" style="visibility: visible;"></span><span class="textSpan">タイトル</span><div class="groupBoxBorder" style="display: none;"></div></div><div class="UzPanelBody ui-widget-content panelPaddingDelete BgSuccess ui-droppable ui-sortable" id="WrapMessageMain_panel_body_area"><span title="" class="UzLabel word-wrap-break-word FloatLeft JSControl controlMargin-M Width-M marginLeft-XS marginRight-XS text-align-left UzCompositeChild" id="lblMessageMain" data-control-type="Label" data-obj="{&quot;fieldName&quot;:&quot;lblMessageMain&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;Label&quot;,&quot;width&quot;:&quot;M&quot;,&quot;selectControlID&quot;:&quot;lblMessageMain&quot;,&quot;text&quot;:&quot;処理は正常に行われました。&quot;,&quot;align&quot;:0}"><span>処理は正常に行われました。</span></span></div></div></div></div><button title="" class="UzButton JSControl controlMargin-M ClearFloat FloatRight marginLeft-XS marginRight-XS Width-S UzCompositeChild" id="btnClose" type="button" data-control-type="Button" data-obj="{&quot;fieldName&quot;:&quot;btnClose&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;Button&quot;,&quot;width&quot;:&quot;S&quot;,&quot;wrap&quot;:true,&quot;float&quot;:2,&quot;selectControlID&quot;:&quot;btnClose&quot;,&quot;onClick&quot;:&quot;CloseOK&quot;,&quot;text&quot;:&quot;閉じる&quot;}"><span>閉じる</span></button></div></div> 
+<div title="" class="JSControl UzCompositeControl  Width-XS FloatLeft" id="defaultLayout" style="margin: 0em;" data-control-type="CommonChildDiv" data-obj="{&quot;fieldName&quot;:&quot;defaultLayout&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;CommonChildDiv&quot;,&quot;width&quot;:&quot;XS&quot;,&quot;visible&quot;:true,&quot;displayNone&quot;:false,&quot;disabled&quot;:false,&quot;accessKey&quot;:&quot;&quot;,&quot;nextFocusFieldName&quot;:&quot;&quot;,&quot;wrap&quot;:false,&quot;float&quot;:0,&quot;toolTip&quot;:&quot;&quot;,&quot;authorityMode&quot;:0,&quot;marginLeft&quot;:&quot;0em&quot;,&quot;marginRight&quot;:&quot;0em&quot;,&quot;selectControlID&quot;:&quot;defaultLayout&quot;,&quot;helpMessageID&quot;:&quot;&quot;,&quot;jpControlName&quot;:&quot;&quot;,&quot;authorityID&quot;:&quot;&quot;,&quot;relation&quot;:[],&quot;packageName&quot;:&quot;&quot;,&quot;businessId&quot;:&quot;DBZ&quot;,&quot;controlName&quot;:&quot;KanryoDialog&quot;,&quot;marginTop&quot;:&quot;0em&quot;,&quot;marginBottom&quot;:&quot;0em&quot;,&quot;dataPassingForDialog&quot;:[{&quot;key&quot;:&quot;kanryoMsg&quot;,&quot;controlName&quot;:&quot;KanryoDialog.hdnKanryoMsg&quot;}],&quot;dialogOkEventNameForDialog&quot;:&quot;&quot;,&quot;dialogCancelEventNameForDialog&quot;:&quot;onClick_btnClose&quot;,&quot;dialogCloseEventNameForDialog&quot;:&quot;&quot;,&quot;heightForDialog&quot;:&quot;M&quot;,&quot;firstFocusFieldName&quot;:&quot;&quot;,&quot;lastFocusFieldName&quot;:&quot;&quot;,&quot;modes&quot;:[],&quot;publicEvents&quot;:[],&quot;publicEventsAlias&quot;:[],&quot;responsiveType&quot;:0,&quot;minWidth&quot;:&quot;&quot;,&quot;minHeight&quot;:&quot;&quot;,&quot;widthPercent&quot;:&quot;&quot;,&quot;heightPercent&quot;:&quot;&quot;,&quot;enterKeyAssignedControl&quot;:&quot;&quot;}" data-is-composite-control="true" data-control-name="DBZ.KanryoDialog"><div title="" class="UzPanel Panel-Shadow FloatLeft JSControl Panel panelMarginTop-M panelMarginBottom-M StateChangable marginLeft-Default marginRight-Default marginTop-Default marginBottom-Default UzCommonChildDivPanel Width-G4 UzCompositeChild" id="KanryoDialog" style="margin-top: 0px; margin-bottom: 0px;" data-control-type="Panel" data-obj="{&quot;fieldName&quot;:&quot;KanryoDialog&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;Panel&quot;,&quot;width&quot;:&quot;G4&quot;,&quot;marginLeft&quot;:&quot;Default&quot;,&quot;marginRight&quot;:&quot;Default&quot;,&quot;selectControlID&quot;:&quot;KanryoDialog&quot;,&quot;title&quot;:&quot;&quot;,&quot;postParameterPanelNames&quot;:[{&quot;postParameterPanelNames&quot;:&quot;KanryoDialog&quot;}],&quot;requestSettings&quot;:[{&quot;eventName&quot;:&quot;onLoad&quot;,&quot;requestUrl&quot;:&quot;dbz/db/dbz/KanryoDialog/onLoad&quot;},{&quot;eventName&quot;:&quot;onActive&quot;,&quot;requestUrl&quot;:&quot;&quot;},{&quot;eventName&quot;:&quot;onClick_btnClose&quot;,&quot;requestUrl&quot;:&quot;dbz/db/dbz/KanryoDialog/onClick_btnClose&quot;}],&quot;hiddenInput&quot;:[{&quot;propertyName&quot;:&quot;hdnKanryoMsg&quot;,&quot;value&quot;:&quot;&quot;}],&quot;session&quot;:{},&quot;widthAuto&quot;:false,&quot;canPost&quot;:true}"><div class="UzPanelHeader" id="KanryoDialog_panel_header_area" style="width: auto; display: none;"><span class="closeIconSpan ui-icon ui-icon-circle-close" style="display: none;"></span><span class="iconSpan ui-icon ui-icon-circle-triangle-n" style="visibility: visible;"></span><span class="textSpan">タイトル</span><div class="groupBoxBorder" style="display: none;"></div></div><div class="UzPanelBody ui-widget-content panelPaddingDelete ui-droppable ui-sortable" id="KanryoDialog_panel_body_area"><div title="" class="UzPanel Panel-Shadow FloatLeft JSControl Panel panelMarginTop-M panelMarginBottom-M StateChangable marginLeft-XS marginRight-XS marginTop-Default marginBottom-Default UzCompositeChild" id="SuccessInfo" style="width: 346px; margin-top: 0px; margin-bottom: 0px;" data-control-type="Panel" data-obj="{&quot;fieldName&quot;:&quot;SuccessInfo&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;Panel&quot;,&quot;width&quot;:&quot;346px&quot;,&quot;selectControlID&quot;:&quot;SuccessInfo&quot;,&quot;title&quot;:&quot;&quot;,&quot;postParameterPanelNames&quot;:[],&quot;requestSettings&quot;:[],&quot;hiddenInput&quot;:[],&quot;session&quot;:{},&quot;backgroundColor&quot;:4,&quot;widthAuto&quot;:false,&quot;canPost&quot;:false}"><div class="UzPanelHeader" id="SuccessInfo_panel_header_area" style="width: auto; display: none;"><span class="closeIconSpan ui-icon ui-icon-circle-close" style="display: none;"></span><span class="iconSpan ui-icon ui-icon-circle-triangle-n" style="visibility: visible;"></span><span class="textSpan">タイトル</span><div class="groupBoxBorder" style="display: none;"></div></div><div class="UzPanelBody ui-widget-content panelPaddingDelete BgSuccess ui-droppable ui-sortable" id="SuccessInfo_panel_body_area"><div title="" class="WithLabel StaticImageOuterDiv FloatLeft JSControl controlMargin-M marginLeft-XS marginRight-XS UzCompositeChild" id="imgSuccess" style="width: 36px; height: 30px;" data-control-type="StaticImage" data-obj="{&quot;fieldName&quot;:&quot;imgSuccess&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;StaticImage&quot;,&quot;selectControlID&quot;:&quot;imgSuccess&quot;,&quot;imageWidth&quot;:&quot;35px&quot;,&quot;src&quot;:&quot;/ur/urz/img/KanryoMessage.png&quot;}"><img class="UzStaticImage CoreElement" id="imgSuccess_core" style="width: 35px; height: 30px;" alt="image" src="/ur/urz/img/KanryoMessage.png"></div><div title="" class="UzPanel Panel-Shadow FloatLeft JSControl Panel panelMarginTop-M panelMarginBottom-M StateChangable marginLeft-XS marginRight-XS marginTop-Default marginBottom-Default Width-G2 UzCompositeChild" id="WrapMessageMain" style="width: auto; margin-top: 0px; margin-bottom: 0px;" data-control-type="Panel" data-obj="{&quot;fieldName&quot;:&quot;WrapMessageMain&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;Panel&quot;,&quot;width&quot;:&quot;G2&quot;,&quot;selectControlID&quot;:&quot;WrapMessageMain&quot;,&quot;title&quot;:&quot;&quot;,&quot;postParameterPanelNames&quot;:[],&quot;requestSettings&quot;:[],&quot;hiddenInput&quot;:[],&quot;session&quot;:{},&quot;backgroundColor&quot;:4,&quot;canPost&quot;:false}"><div class="UzPanelHeader" id="WrapMessageMain_panel_header_area" style="width: auto; display: none;"><span class="closeIconSpan ui-icon ui-icon-circle-close" style="display: none;"></span><span class="iconSpan ui-icon ui-icon-circle-triangle-n" style="visibility: visible;"></span><span class="textSpan">タイトル</span><div class="groupBoxBorder" style="display: none;"></div></div><div class="UzPanelBody ui-widget-content panelPaddingDelete BgSuccess ui-droppable ui-sortable" id="WrapMessageMain_panel_body_area"><span title="" class="UzLabel word-wrap-break-word FloatLeft JSControl controlMargin-M Width-M marginLeft-XS marginRight-XS text-align-left UzCompositeChild" id="lblMessageMain" data-control-type="Label" data-obj="{&quot;fieldName&quot;:&quot;lblMessageMain&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;Label&quot;,&quot;width&quot;:&quot;M&quot;,&quot;selectControlID&quot;:&quot;lblMessageMain&quot;,&quot;text&quot;:&quot;処理は正常に行われました。&quot;,&quot;align&quot;:0}"><span>処理は正常に行われました。</span></span></div></div></div></div><button title="" class="UzButton JSControl controlMargin-M ClearFloat FloatRight marginLeft-XS marginRight-XS Width-S UzCompositeChild" id="btnClose" type="button" data-control-type="Button" data-obj="{&quot;fieldName&quot;:&quot;btnClose&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;Button&quot;,&quot;width&quot;:&quot;S&quot;,&quot;wrap&quot;:true,&quot;float&quot;:2,&quot;selectControlID&quot;:&quot;btnClose&quot;,&quot;onClick&quot;:&quot;onClick_btnClose&quot;,&quot;text&quot;:&quot;閉じる&quot;}"><span>閉じる</span></button></div></div> 
 <script type="text/javascript">var __extends = this.__extends || function (d, b) {
     for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
     function __() { this.constructor = d; }
@@ -427,29 +427,22 @@ var DBE;
     var KanryoDialog = DBE.KanryoDialog;
 })(DBE || (DBE = {}));
 </script>
-  <script class="RamlConvert" type="text/javascript">
-var DBE= DBE? DBE: {};
-DBE['KANRYODIALOG'] = {};
-DBE['KANRYODIALOG'].KanryoDialogRequest = function(parentFieldName){ 
+  
+         <script class="RamlConvert" type="text/javascript">
+var DBZ= DBZ? DBZ: {};
+DBZ['KANRYODIALOG'] = {};
+DBZ['KANRYODIALOG'].KanryoDialogRequest = function(parentFieldName){ 
 var paramArray = [];var parameter0 = Uz.JSControlUtil.getJSControl(parentFieldName + '_KanryoDialog').getProperty();parameter0.SuccessInfo = Uz.JSControlUtil.getJSControl(parentFieldName + '_SuccessInfo').getProperty();parameter0.SuccessInfo.imgSuccess = Uz.JSControlUtil.getJSControl(parentFieldName + '_imgSuccess').getProperty();parameter0.SuccessInfo.WrapMessageMain = Uz.JSControlUtil.getJSControl(parentFieldName + '_WrapMessageMain').getProperty();parameter0.SuccessInfo.WrapMessageMain.lblMessageMain = Uz.JSControlUtil.getJSControl(parentFieldName + '_lblMessageMain').getProperty();parameter0.btnClose = Uz.JSControlUtil.getJSControl(parentFieldName + '_btnClose').getProperty();paramArray.push(parameter0);
 return paramArray;
  };
-DBE['KANRYODIALOG'].SuccessInfoRequest = function(parentFieldName){ 
-var paramArray = [];var parameter0 = Uz.JSControlUtil.getJSControl(parentFieldName + '_SuccessInfo').getProperty();parameter0.imgSuccess = Uz.JSControlUtil.getJSControl(parentFieldName + '_imgSuccess').getProperty();parameter0.WrapMessageMain = Uz.JSControlUtil.getJSControl(parentFieldName + '_WrapMessageMain').getProperty();parameter0.WrapMessageMain.lblMessageMain = Uz.JSControlUtil.getJSControl(parentFieldName + '_lblMessageMain').getProperty();paramArray.push(parameter0);
-return paramArray;
- };
-DBE['KANRYODIALOG'].WrapMessageMainRequest = function(parentFieldName){ 
-var paramArray = [];var parameter0 = Uz.JSControlUtil.getJSControl(parentFieldName + '_WrapMessageMain').getProperty();parameter0.lblMessageMain = Uz.JSControlUtil.getJSControl(parentFieldName + '_lblMessageMain').getProperty();paramArray.push(parameter0);
-return paramArray;
- };
-</script><script>var DBE;
-(function (DBE) {
+</script><script>var DBZ;
+(function (DBZ) {
     (function (KanryoDialog) {
         var Events = (function () {
             function Events() {
             }
-            Events.CloseOK = function () {
-                return "CloseOK";
+            Events.onClick_btnClose = function () {
+                return "onClick_btnClose";
             };
             return Events;
         })();
@@ -464,11 +457,11 @@ return paramArray;
             };
 
             Controls.prototype.convFiledNameSelf = function () {
-                return this._myName + "_" + DBE.KanryoDialog.Controls.myType();
+                return this._myName + "_" + DBZ.KanryoDialog.Controls.myType();
             };
 
             Controls.prototype.convFiledName = function (fieldName) {
-                return this._myName + "_" + DBE.KanryoDialog.Controls.myType() + "_" + fieldName;
+                return this._myName + "_" + DBZ.KanryoDialog.Controls.myType() + "_" + fieldName;
             };
 
             Controls.prototype.KanryoDialog = function () {
@@ -484,7 +477,7 @@ return paramArray;
             };
 
             Controls.prototype.WrapMessageMain = function () {
-                return new UZA.Panel(this.convFiledName("SuccessInfo_WrapMessageMain"));
+                return new UZA.Panel(this.convFiledName("WrapMessageMain"));
             };
 
             Controls.prototype.lblMessageMain = function () {
@@ -497,11 +490,11 @@ return paramArray;
             return Controls;
         })();
         KanryoDialog.Controls = Controls;
-    })(DBE.KanryoDialog || (DBE.KanryoDialog = {}));
-    var KanryoDialog = DBE.KanryoDialog;
-})(DBE || (DBE = {}));
-var DBE;
-(function (DBE) {
+    })(DBZ.KanryoDialog || (DBZ.KanryoDialog = {}));
+    var KanryoDialog = DBZ.KanryoDialog;
+})(DBZ || (DBZ = {}));
+var DBZ;
+(function (DBZ) {
     (function (KanryoDialog) {
         var ModeController = (function () {
             function ModeController(fieldName) {
@@ -518,12 +511,12 @@ var DBE;
             return ModeController;
         })();
         KanryoDialog.ModeController = ModeController;
-    })(DBE.KanryoDialog || (DBE.KanryoDialog = {}));
-    var KanryoDialog = DBE.KanryoDialog;
-})(DBE || (DBE = {}));
+    })(DBZ.KanryoDialog || (DBZ.KanryoDialog = {}));
+    var KanryoDialog = DBZ.KanryoDialog;
+})(DBZ || (DBZ = {}));
 
-var DBE;
-(function (DBE) {
+var DBZ;
+(function (DBZ) {
     (function (KanryoDialog) {
         var PublicProperties = (function () {
             function PublicProperties(fieldName) {
@@ -546,7 +539,7 @@ var DBE;
             return PublicProperties;
         })();
         KanryoDialog.PublicProperties = PublicProperties;
-    })(DBE.KanryoDialog || (DBE.KanryoDialog = {}));
-    var KanryoDialog = DBE.KanryoDialog;
-})(DBE || (DBE = {}));
+    })(DBZ.KanryoDialog || (DBZ.KanryoDialog = {}));
+    var KanryoDialog = DBZ.KanryoDialog;
+})(DBZ || (DBZ = {}));
 </script></div>

@@ -22,7 +22,7 @@ import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
  */
 public class ShishoSecurityJoho {
 
-    private static final RString AUTHTYPE = new RString("koseiShichosonKengen");
+    private static final RString AUTHTYPE = new RString("shishoKengen");
 
     /**
      * コンストラクタです。
@@ -56,10 +56,6 @@ public class ShishoSecurityJoho {
         }
     }
 
-    /**
-     * @param ログインユーザID RString
-     * @return 支所コードの権限項目リストを取得する
-     */
     private List<AuthorityItem> getShichosonShikibetsuId(RString reamsLoginId) {
         if (RString.isNullOrEmpty(reamsLoginId)) {
             throw new ApplicationException(UrErrorMessages.存在しない.getMessage().replace("ログインユーザID"));

@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- どのマッパーインターフェースと対応するかを指定する -->
+<mapper namespace="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.relate.zenkaininteikekkajoho.IZenkaiNinteiKekkaJohoMapper">
+    <select id="get要介護度_前回受給" 
+            resultMap="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT4101NinteiShinseiJohoMapper.ResultMap_DbT4101NinteiShinseiJohoEntity"
+            fetchSize="500">
+        SELECT
+            A."koroshoIfShikibetsuCode",
+            A."zenYokaigoKubunCode",
+            A."zenkaiNinteiYMD",
+            A."zenkaiYukoKikanStart",
+            A."zenkaiYukoKikanEnd"
+        FROM               
+            rgdb."DbT4101NinteiShinseiJoho"  AS  A
+        WHERE
+            A."shinseishoKanriNo" = #{shinseishoKanriNo}
+    </select>
+    
+    <select id="get要介護度_前回認定" 
+            resultMap="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT5101NinteiShinseiJohoMapper.ResultMap_DbT5101NinteiShinseiJohoEntity"
+            fetchSize="500">
+        SELECT
+            A."koroshoIfShikibetsuCode",
+            A."zenYokaigoKubunCode",
+            A."zenkaiNinteiYMD",
+            A."zenkaiYukoKikanStart",
+            A."zenkaiYukoKikanEnd"
+        FROM               
+            rgdb."DbT5101NinteiShinseiJoho"  AS  A
+        WHERE
+            A."shinseishoKanriNo" = #{shinseishoKanriNo}
+    </select>
+    
+    <select id="get要介護度_今回受給" 
+            resultMap="resultMap_ZenkaiNinteiKekkaJohoRelateEntity"
+            fetchSize="500">
+        SELECT
+            A."koroshoIfShikibetsuCode",
+            B."nijiHanteiYokaigoJotaiKubunCode",
+            B."nijiHanteiYMD",
+            B."nijiHanteiNinteiYukoKaishiYMD",
+            B."nijiHanteiNinteiYukoShuryoYMD"
+        FROM
+            rgdb."DbT4101NinteiShinseiJoho"  AS  A
+        LEFT JOIN  rgdb."DbT4102NinteiKekkaJoho"  AS B
+            ON A."shinseishoKanriNo" = B."shinseishoKanriNo"
+        WHERE
+        A."shinseishoKanriNo" = #{shinseishoKanriNo}
+    </select>
+    
+    <select id="get要介護度_今回認定" 
+            resultMap="resultMap_ZenkaiNinteiKekkaJohoRelateEntity"
+            fetchSize="500">
+        SELECT
+            A."koroshoIfShikibetsuCode",
+            B."nijiHanteiYokaigoJotaiKubunCode",
+            B."nijiHanteiYMD",
+            B."nijiHanteiNinteiYukoKaishiYMD",
+            B."nijiHanteiNinteiYukoShuryoYMD"
+        FROM
+            rgdb."DbT5101NinteiShinseiJoho"  AS  A
+        LEFT JOIN  rgdb."DbT5102NinteiKekkaJoho"  AS B
+            ON A."shinseishoKanriNo" = B."shinseishoKanriNo"
+        WHERE
+        A."shinseishoKanriNo" = #{shinseishoKanriNo}
+    </select>
+    
+    <select id="get前回申請管理番号_受給" 
+            resultType="jp.co.ndensan.reams.uz.uza.lang.RString"
+            fetchSize="500">
+        SELECT 	
+            A."zenkaiShinseishoKanriNo"
+        FROM 	
+            rgdb."DbT5121ShinseiRirekiJoho" AS  A
+        WHERE	
+            A."shinseishoKanriNo" = #{shinseishoKanriNo}
+    </select>
+    
+    <select id="get前回申請管理番号_認定" 
+            resultType="jp.co.ndensan.reams.uz.uza.lang.RString"
+            fetchSize="500">
+        SELECT 	
+            A."zenkaiShinseishoKanriNo"
+        FROM 	
+            rgdb."DbT5121ShinseiRirekiJoho" AS  A
+        WHERE	
+            A."shinseishoKanriNo" = #{shinseishoKanriNo}
+    </select>
+    
+    <resultMap id="resultMap_ZenkaiNinteiKekkaJohoRelateEntity" type="jp.co.ndensan.reams.db.dbz.entity.db.relate.zenkaininteikekkajoho.ZenkaiNinteiKekkaJohoRelateEntity" autoMapping="true">
+        <result property="koroshoIfShikibetsuCode" column="koroshoIfShikibetsuCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="nijiHanteiYokaigoJotaiKubunCode" column="nijiHanteiYokaigoJotaiKubunCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="nijiHanteiYMD" column="nijiHanteiYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="nijiHanteiNinteiYukoKaishiYMD" column="nijiHanteiNinteiYukoKaishiYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="nijiHanteiNinteiYukoShuryoYMD" column="nijiHanteiNinteiYukoShuryoYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+    </resultMap> 
+    
+</mapper>

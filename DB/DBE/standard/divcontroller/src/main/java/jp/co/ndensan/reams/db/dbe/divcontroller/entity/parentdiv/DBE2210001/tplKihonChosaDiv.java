@@ -4,20 +4,17 @@ package jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2210001;
  * このファイルへの変更は、再生成時には損失するため
  * 不正な動作の原因になります。
  */
-
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.KihonChosaInput.KihonChosaInput.IKihonChosaInputDiv;
 import jp.co.ndensan.reams.uz.uza.ui.binding.*;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TabPanel;
 
 /**
- * tplKihonChosa のクラスファイル
- *
+ * tplKihonChosa のクラスファイル 
+ * 
  * @author 自動生成
  */
 public class tplKihonChosaDiv extends TabPanel {
-
     // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-01-15_09-59-03">
     /*
      * [ private の作成 ]
@@ -33,8 +30,8 @@ public class tplKihonChosaDiv extends TabPanel {
     private TextBox txtIchijiHanteiKekka;
     @JsonProperty("btnIchiHanteiJisshi")
     private ButtonDialog btnIchiHanteiJisshi;
-    @JsonProperty("tabKihonChosaShurui")
-    private tabKihonChosaShuruiDiv tabKihonChosaShurui;
+    @JsonProperty("kihonchosaSelect")
+    private kihonchosaSelectDiv kihonchosaSelect;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -115,129 +112,94 @@ public class tplKihonChosaDiv extends TabPanel {
     }
 
     /*
-     * gettabKihonChosaShurui
-     * @return tabKihonChosaShurui
+     * getkihonchosaSelect
+     * @return kihonchosaSelect
      */
-    @JsonProperty("tabKihonChosaShurui")
-    public tabKihonChosaShuruiDiv getTabKihonChosaShurui() {
-        return tabKihonChosaShurui;
+    @JsonProperty("kihonchosaSelect")
+    public kihonchosaSelectDiv getKihonchosaSelect() {
+        return kihonchosaSelect;
     }
 
     /*
-     * settabKihonChosaShurui
-     * @param tabKihonChosaShurui tabKihonChosaShurui
+     * setkihonchosaSelect
+     * @param kihonchosaSelect kihonchosaSelect
      */
-    @JsonProperty("tabKihonChosaShurui")
-    public void setTabKihonChosaShurui(tabKihonChosaShuruiDiv tabKihonChosaShurui) {
-        this.tabKihonChosaShurui = tabKihonChosaShurui;
+    @JsonProperty("kihonchosaSelect")
+    public void setKihonchosaSelect(kihonchosaSelectDiv kihonchosaSelect) {
+        this.kihonchosaSelect = kihonchosaSelect;
     }
 
     /*
      * [ ショートカットの作成 ]
      */
     @JsonIgnore
-    public tplIchigunDiv getTplIchigun() {
-        return this.getTabKihonChosaShurui().getTplIchigun();
+    public ButtonDialog getBtnKihonchosa1() {
+        return this.getKihonchosaSelect().getBtnKihonchosa1();
     }
 
     @JsonIgnore
-    public void setTplIchigun(tplIchigunDiv tplIchigun) {
-        this.getTabKihonChosaShurui().setTplIchigun(tplIchigun);
+    public void  setBtnKihonchosa1(ButtonDialog btnKihonchosa1) {
+        this.getKihonchosaSelect().setBtnKihonchosa1(btnKihonchosa1);
     }
 
     @JsonIgnore
-    public IKihonChosaInputDiv getCcdIchigunKihonChosa() {
-        return this.getTabKihonChosaShurui().getTplIchigun().getCcdIchigunKihonChosa();
+    public ButtonDialog getBtnKihonchosa2() {
+        return this.getKihonchosaSelect().getBtnKihonchosa2();
     }
 
     @JsonIgnore
-    public tplNigunDiv getTplNigun() {
-        return this.getTabKihonChosaShurui().getTplNigun();
+    public void  setBtnKihonchosa2(ButtonDialog btnKihonchosa2) {
+        this.getKihonchosaSelect().setBtnKihonchosa2(btnKihonchosa2);
     }
 
     @JsonIgnore
-    public void setTplNigun(tplNigunDiv tplNigun) {
-        this.getTabKihonChosaShurui().setTplNigun(tplNigun);
+    public ButtonDialog getBtnKihonchosa3() {
+        return this.getKihonchosaSelect().getBtnKihonchosa3();
     }
 
     @JsonIgnore
-    public IKihonChosaInputDiv getCcdNigunKihonChosa() {
-        return this.getTabKihonChosaShurui().getTplNigun().getCcdNigunKihonChosa();
+    public void  setBtnKihonchosa3(ButtonDialog btnKihonchosa3) {
+        this.getKihonchosaSelect().setBtnKihonchosa3(btnKihonchosa3);
     }
 
     @JsonIgnore
-    public tplSangunDiv getTplSangun() {
-        return this.getTabKihonChosaShurui().getTplSangun();
+    public ButtonDialog getBtnKihonchosa4() {
+        return this.getKihonchosaSelect().getBtnKihonchosa4();
     }
 
     @JsonIgnore
-    public void setTplSangun(tplSangunDiv tplSangun) {
-        this.getTabKihonChosaShurui().setTplSangun(tplSangun);
+    public void  setBtnKihonchosa4(ButtonDialog btnKihonchosa4) {
+        this.getKihonchosaSelect().setBtnKihonchosa4(btnKihonchosa4);
     }
 
     @JsonIgnore
-    public IKihonChosaInputDiv getCcdSangunKihonChosa() {
-        return this.getTabKihonChosaShurui().getTplSangun().getCcdSangunKihonChosa();
+    public ButtonDialog getBtnKihonchosa5() {
+        return this.getKihonchosaSelect().getBtnKihonchosa5();
     }
 
     @JsonIgnore
-    public tplYongunDiv getTplYongun() {
-        return this.getTabKihonChosaShurui().getTplYongun();
+    public void  setBtnKihonchosa5(ButtonDialog btnKihonchosa5) {
+        this.getKihonchosaSelect().setBtnKihonchosa5(btnKihonchosa5);
     }
 
     @JsonIgnore
-    public void setTplYongun(tplYongunDiv tplYongun) {
-        this.getTabKihonChosaShurui().setTplYongun(tplYongun);
+    public ButtonDialog getBtnKihonchosa6() {
+        return this.getKihonchosaSelect().getBtnKihonchosa6();
     }
 
     @JsonIgnore
-    public IKihonChosaInputDiv getCcdYongunKihonChosa() {
-        return this.getTabKihonChosaShurui().getTplYongun().getCcdYongunKihonChosa();
+    public void  setBtnKihonchosa6(ButtonDialog btnKihonchosa6) {
+        this.getKihonchosaSelect().setBtnKihonchosa6(btnKihonchosa6);
     }
 
     @JsonIgnore
-    public tplGogunDiv getTplGogun() {
-        return this.getTabKihonChosaShurui().getTplGogun();
+    public ButtonDialog getBtnKihonchosa7() {
+        return this.getKihonchosaSelect().getBtnKihonchosa7();
     }
 
     @JsonIgnore
-    public void setTplGogun(tplGogunDiv tplGogun) {
-        this.getTabKihonChosaShurui().setTplGogun(tplGogun);
-    }
-
-    @JsonIgnore
-    public IKihonChosaInputDiv getCcdGogun() {
-        return this.getTabKihonChosaShurui().getTplGogun().getCcdGogun();
-    }
-
-    @JsonIgnore
-    public tplTokubetsuIryoDiv getTplTokubetsuIryo() {
-        return this.getTabKihonChosaShurui().getTplTokubetsuIryo();
-    }
-
-    @JsonIgnore
-    public void setTplTokubetsuIryo(tplTokubetsuIryoDiv tplTokubetsuIryo) {
-        this.getTabKihonChosaShurui().setTplTokubetsuIryo(tplTokubetsuIryo);
-    }
-
-    @JsonIgnore
-    public IKihonChosaInputDiv getCcdTokubetsuIryoKihonChosa() {
-        return this.getTabKihonChosaShurui().getTplTokubetsuIryo().getCcdTokubetsuIryoKihonChosa();
-    }
-
-    @JsonIgnore
-    public tplSeikatsuJiritsudoDiv getTplSeikatsuJiritsudo() {
-        return this.getTabKihonChosaShurui().getTplSeikatsuJiritsudo();
-    }
-
-    @JsonIgnore
-    public void setTplSeikatsuJiritsudo(tplSeikatsuJiritsudoDiv tplSeikatsuJiritsudo) {
-        this.getTabKihonChosaShurui().setTplSeikatsuJiritsudo(tplSeikatsuJiritsudo);
-    }
-
-    @JsonIgnore
-    public IKihonChosaInputDiv getCcdSeikatsuJiritsudoKihonchosa() {
-        return this.getTabKihonChosaShurui().getTplSeikatsuJiritsudo().getCcdSeikatsuJiritsudoKihonchosa();
+    public void  setBtnKihonchosa7(ButtonDialog btnKihonchosa7) {
+        this.getKihonchosaSelect().setBtnKihonchosa7(btnKihonchosa7);
     }
 
     // </editor-fold>

@@ -106,9 +106,9 @@ public class NinnteiChousaKekkaTouroku1ValidationHandler {
         IValidationMessages messages = ValidationMessagesFactory.createInstance();
         messages.add(ValidateChain.validateStart(div).ifNot(NinnteiChousaKekkaTouroku1DivSpec.第1群の非空チェック)
                 .thenAdd(NoInputMessages.第1群の必須入力).messages());
-        pairs.add(new ValidationMessageControlDictionaryBuilder().add(
-                NoInputMessages.第1群の必須入力,
-                div.getCcdIchigunKihonChosa().getDaiichigunShintaiKino()).build().check(messages));
+//        pairs.add(new ValidationMessageControlDictionaryBuilder().add(
+//                NoInputMessages.第1群の必須入力,
+//                div.getCcdIchigunKihonChosa().getDaiichigunShintaiKino()).build().check(messages));
         return pairs;
     }
 
@@ -124,9 +124,9 @@ public class NinnteiChousaKekkaTouroku1ValidationHandler {
         IValidationMessages messages = ValidationMessagesFactory.createInstance();
         messages.add(ValidateChain.validateStart(div).ifNot(NinnteiChousaKekkaTouroku1DivSpec.第2群の非空チェック)
                 .thenAdd(NoInputMessages.第2群の必須入力).messages());
-        pairs.add(new ValidationMessageControlDictionaryBuilder().add(
-                NoInputMessages.第2群の必須入力,
-                div.getCcdNigunKihonChosa().getSeikatsuKinou()).build().check(messages));
+//        pairs.add(new ValidationMessageControlDictionaryBuilder().add(
+//                NoInputMessages.第2群の必須入力,
+//                div.getCcdNigunKihonChosa().getSeikatsuKinou()).build().check(messages));
         return pairs;
     }
 
@@ -142,9 +142,9 @@ public class NinnteiChousaKekkaTouroku1ValidationHandler {
         IValidationMessages messages = ValidationMessagesFactory.createInstance();
         messages.add(ValidateChain.validateStart(div).ifNot(NinnteiChousaKekkaTouroku1DivSpec.第3群の非空チェック)
                 .thenAdd(NoInputMessages.第3群の必須入力).messages());
-        pairs.add(new ValidationMessageControlDictionaryBuilder().add(
-                NoInputMessages.第3群の必須入力,
-                div.getCcdSangunKihonChosa().getNinchiKinou()).build().check(messages));
+//        pairs.add(new ValidationMessageControlDictionaryBuilder().add(
+//                NoInputMessages.第3群の必須入力,
+//                div.getCcdSangunKihonChosa().getNinchiKinou()).build().check(messages));
         return pairs;
     }
 
@@ -160,9 +160,9 @@ public class NinnteiChousaKekkaTouroku1ValidationHandler {
         IValidationMessages messages = ValidationMessagesFactory.createInstance();
         messages.add(ValidateChain.validateStart(div).ifNot(NinnteiChousaKekkaTouroku1DivSpec.第4群の非空チェック)
                 .thenAdd(NoInputMessages.第4群の必須入力).messages());
-        pairs.add(new ValidationMessageControlDictionaryBuilder().add(
-                NoInputMessages.第4群の必須入力,
-                div.getCcdYongunKihonChosa().getKoudoShogai()).build().check(messages));
+//        pairs.add(new ValidationMessageControlDictionaryBuilder().add(
+//                NoInputMessages.第4群の必須入力,
+//                div.getCcdYongunKihonChosa().getKoudoShogai()).build().check(messages));
         return pairs;
     }
 
@@ -178,9 +178,9 @@ public class NinnteiChousaKekkaTouroku1ValidationHandler {
         IValidationMessages messages = ValidationMessagesFactory.createInstance();
         messages.add(ValidateChain.validateStart(div).ifNot(NinnteiChousaKekkaTouroku1DivSpec.第5群の非空チェック)
                 .thenAdd(NoInputMessages.第5群の必須入力).messages());
-        pairs.add(new ValidationMessageControlDictionaryBuilder().add(
-                NoInputMessages.第5群の必須入力,
-                div.getCcdGogun().getShakaiSekatsu()).build().check(messages));
+//        pairs.add(new ValidationMessageControlDictionaryBuilder().add(
+//                NoInputMessages.第5群の必須入力,
+//                div.getCcdGogun().getShakaiSekatsu()).build().check(messages));
         return pairs;
     }
 
@@ -196,9 +196,9 @@ public class NinnteiChousaKekkaTouroku1ValidationHandler {
         IValidationMessages messages = ValidationMessagesFactory.createInstance();
         messages.add(ValidateChain.validateStart(div).ifNot(NinnteiChousaKekkaTouroku1DivSpec.生活自立度の非空チェック)
                 .thenAdd(NoInputMessages.生活自立度の必須入力).messages());
-        pairs.add(new ValidationMessageControlDictionaryBuilder().add(
-                NoInputMessages.生活自立度の必須入力,
-                div.getCcdSeikatsuJiritsudoKihonchosa().getJiritsudo()).build().check(messages));
+//        pairs.add(new ValidationMessageControlDictionaryBuilder().add(
+//                NoInputMessages.生活自立度の必須入力,
+//                div.getCcdSeikatsuJiritsudoKihonchosa().getJiritsudo()).build().check(messages));
         return pairs;
     }
 

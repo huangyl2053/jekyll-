@@ -50,7 +50,23 @@
         <id column="dbT3038ShokanKihon_meisaiNo"/>
         <result property="氏名" column="meisho"
             typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.AtenaMeishoTypeHandler"/>
-        <association property="償還払請求基本Entity" resultMap="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT3038ShokanKihonMapper.ResultMap_DbT3038ShokanKihonEntity"/>
-        <association property="償還払支給申請Entity" resultMap="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT3034ShokanShinseiMapper.ResultMap_DbT3034ShokanShinseiEntity"/>
+        <association property="償還払請求基本Entity" 
+                     resultMap="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT3038ShokanKihonMapper.ResultMap_DbT3038ShokanKihonEntity"/>
+        <association property="償還払支給申請Entity"
+                     resultMap="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT3034ShokanShinseiMapper.ResultMap_DbT3034ShokanShinseiEntity"/>
     </resultMap>  
+    
+    <resultMap id="resultMap_DbT1001HihokenshaDaichoEntity"
+               type="jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT1001HihokenshaDaichoEntity"
+               autoMapping="true">
+         <result property="shikibetsuCode" column="shikibetsuCode" 
+                typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.ShikibetsuCodeTypeHandler"/>
+    </resultMap>
+    <select id="get識別コード" resultMap="resultMap_DbT1001HihokenshaDaichoEntity" parameterType="java.util.Map" fetchSize="500">
+        select "shikibetsuCode"
+        from rgdb."DbT1001HihokenshaDaicho"
+        where "hihokenshaNo" = #{hihokenshaNo}
+        order by "idoYMD" DESC,"edaNo" DESC
+        LIMIT 1
+    </select>
 </mapper>

@@ -1,4 +1,4 @@
-<div title="" class="JSControl UzCompositeControl  Width-XS FloatLeft" id="defaultLayout" style="margin: 0em;" data-control-type="CommonChildDiv" data-obj="{&quot;fieldName&quot;:&quot;defaultLayout&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;CommonChildDiv&quot;,&quot;width&quot;:&quot;XS&quot;,&quot;visible&quot;:true,&quot;displayNone&quot;:false,&quot;disabled&quot;:false,&quot;accessKey&quot;:&quot;&quot;,&quot;nextFocusFieldName&quot;:&quot;&quot;,&quot;wrap&quot;:false,&quot;float&quot;:0,&quot;toolTip&quot;:&quot;&quot;,&quot;authorityMode&quot;:0,&quot;marginLeft&quot;:&quot;0em&quot;,&quot;marginRight&quot;:&quot;0em&quot;,&quot;selectControlID&quot;:&quot;defaultLayout&quot;,&quot;helpMessageID&quot;:&quot;&quot;,&quot;jpControlName&quot;:&quot;&quot;,&quot;relation&quot;:[],&quot;packageName&quot;:&quot;&quot;,&quot;businessId&quot;:&quot;DBE&quot;,&quot;controlName&quot;:&quot;DataOutputInfomation&quot;,&quot;marginTop&quot;:&quot;0em&quot;,&quot;marginBottom&quot;:&quot;0em&quot;,&quot;dataPassingForDialog&quot;:[],&quot;dialogOkEventNameForDialog&quot;:&quot;CloseOK&quot;,&quot;dialogCancelEventNameForDialog&quot;:&quot;&quot;,&quot;heightForDialog&quot;:&quot;M&quot;,&quot;firstFocusFieldName&quot;:&quot;&quot;,&quot;lastFocusFieldName&quot;:&quot;&quot;,&quot;modes&quot;:[],&quot;publicEvents&quot;:[],&quot;publicEventsAlias&quot;:[],&quot;EditTypes&quot;:{&quot;_editTypes&quot;:[]}}" data-is-composite-control="true" data-control-name="DBE.DataOutputInfomation"><div title="" class="UzPanel Panel-Shadow FloatLeft JSControl Panel UzPanelAndText panelMarginTop-M panelMarginBottom-M StateChangable ClearFloat marginLeft-XS marginRight-XS marginTop-Default marginBottom-Default UzCommonChildDivPanel Width-G4 UzCompositeChild" id="DataOutputInfomation" style="margin-top: 0px; margin-bottom: 0px;" data-control-type="Panel" data-obj="{&quot;fieldName&quot;:&quot;DataOutputInfomation&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;Panel&quot;,&quot;width&quot;:&quot;G4&quot;,&quot;wrap&quot;:true,&quot;selectControlID&quot;:&quot;DataOutputInfomation&quot;,&quot;title&quot;:&quot;完了メッセージ&quot;,&quot;postParameterPanelNames&quot;:[{&quot;postParameterPanelNames&quot;:&quot;DataOutputInfomation&quot;}],&quot;requestSettings&quot;:[],&quot;hiddenInput&quot;:[],&quot;session&quot;:{},&quot;widthAuto&quot;:false,&quot;canPost&quot;:true}"><div class="UzPanelHeader" id="DataOutputInfomation_panel_header_area" style="width: auto; display: block;"><span class="closeIconSpan ui-icon ui-icon-circle-close" style="display: none;"></span><span class="iconSpan ui-icon ui-icon-circle-triangle-n" style="visibility: visible;"></span><span class="textSpan">完了メッセージ</span><div class="groupBoxBorder" style="display: none;"></div></div><div class="UzPanelBody ui-widget-content panelPadding-M ui-droppable ui-sortable" id="DataOutputInfomation_panel_body_area"><img title="" class="UzIcon FloatLeft JSControl controlMargin-M Width-XS marginLeft-XS marginRight-XS IconSize-S UzCompositeChild" id="icnKanryo" alt="image" src="/uz/uza/image/UZ_Info.png" data-control-type="Icon" data-obj="{&quot;fieldName&quot;:&quot;icnKanryo&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;Icon&quot;,&quot;selectControlID&quot;:&quot;icnKanryo&quot;,&quot;iconSize&quot;:1}"><span title="" class="UzLabel word-wrap-break-word FloatLeft JSControl controlMargin-M marginLeft-XS marginRight-XS text-align-center UzCompositeChild" id="lblMessage" style="width: 300px;" data-control-type="Label" data-obj="{&quot;fieldName&quot;:&quot;lblMessage&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;Label&quot;,&quot;width&quot;:&quot;300px&quot;,&quot;selectControlID&quot;:&quot;lblMessage&quot;,&quot;text&quot;:&quot;データ出力が終了しました&quot;,&quot;align&quot;:1}"><span>データ出力が終了しました</span></span><button title="" class="UzButton JSControl controlMargin-M ClearFloat FloatCenter Width-S UzCompositeChild" id="btnKakunin" type="button" data-control-type="Button" data-obj="{&quot;fieldName&quot;:&quot;btnKakunin&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;Button&quot;,&quot;width&quot;:&quot;S&quot;,&quot;wrap&quot;:true,&quot;float&quot;:1,&quot;selectControlID&quot;:&quot;btnKakunin&quot;,&quot;onClick&quot;:&quot;CloseOK&quot;,&quot;text&quot;:&quot;確認&quot;}"><span>確認</span></button></div></div> 
+<div title="" class="JSControl UzCompositeControl  Width-XS FloatLeft" id="defaultLayout" style="margin: 0em;" data-control-type="CommonChildDiv" data-obj="{&quot;fieldName&quot;:&quot;defaultLayout&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;CommonChildDiv&quot;,&quot;width&quot;:&quot;XS&quot;,&quot;visible&quot;:true,&quot;displayNone&quot;:false,&quot;disabled&quot;:false,&quot;accessKey&quot;:&quot;&quot;,&quot;nextFocusFieldName&quot;:&quot;&quot;,&quot;wrap&quot;:false,&quot;float&quot;:0,&quot;toolTip&quot;:&quot;&quot;,&quot;authorityMode&quot;:0,&quot;marginLeft&quot;:&quot;0em&quot;,&quot;marginRight&quot;:&quot;0em&quot;,&quot;selectControlID&quot;:&quot;defaultLayout&quot;,&quot;helpMessageID&quot;:&quot;&quot;,&quot;jpControlName&quot;:&quot;&quot;,&quot;authorityID&quot;:&quot;&quot;,&quot;relation&quot;:[],&quot;packageName&quot;:&quot;&quot;,&quot;businessId&quot;:&quot;DBZ&quot;,&quot;controlName&quot;:&quot;DataOutputInfomation&quot;,&quot;marginTop&quot;:&quot;0em&quot;,&quot;marginBottom&quot;:&quot;0em&quot;,&quot;dataPassingForDialog&quot;:[{&quot;key&quot;:&quot;kanryoMsg&quot;,&quot;controlName&quot;:&quot;DataOutputInfomation.hdnKanryoMsg&quot;}],&quot;dialogOkEventNameForDialog&quot;:&quot;onClick_btnKakunin&quot;,&quot;dialogCancelEventNameForDialog&quot;:&quot;&quot;,&quot;dialogCloseEventNameForDialog&quot;:&quot;&quot;,&quot;heightForDialog&quot;:&quot;M&quot;,&quot;firstFocusFieldName&quot;:&quot;&quot;,&quot;lastFocusFieldName&quot;:&quot;&quot;,&quot;modes&quot;:[],&quot;publicEvents&quot;:[],&quot;publicEventsAlias&quot;:[],&quot;responsiveType&quot;:0,&quot;minWidth&quot;:&quot;&quot;,&quot;minHeight&quot;:&quot;&quot;,&quot;widthPercent&quot;:&quot;&quot;,&quot;heightPercent&quot;:&quot;&quot;,&quot;enterKeyAssignedControl&quot;:&quot;&quot;}" data-is-composite-control="true" data-control-name="DBZ.DataOutputInfomation"><div title="" class="UzPanel Panel-Shadow FloatLeft JSControl Panel UzPanelAndText panelMarginTop-M panelMarginBottom-M StateChangable marginLeft-XS marginRight-XS marginTop-Default marginBottom-Default UzCommonChildDivPanel Width-G4 UzCompositeChild" id="DataOutputInfomation" style="margin-top: 0px; margin-bottom: 0px;" data-control-type="Panel" data-obj="{&quot;fieldName&quot;:&quot;DataOutputInfomation&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;Panel&quot;,&quot;width&quot;:&quot;G4&quot;,&quot;selectControlID&quot;:&quot;DataOutputInfomation&quot;,&quot;title&quot;:&quot;完了メッセージ&quot;,&quot;postParameterPanelNames&quot;:[{&quot;postParameterPanelNames&quot;:&quot;DataOutputInfomation&quot;}],&quot;requestSettings&quot;:[{&quot;eventName&quot;:&quot;onLoad&quot;,&quot;requestUrl&quot;:&quot;dbz/db/dbz/DataOutputInfomation/onLoad&quot;},{&quot;eventName&quot;:&quot;onActive&quot;,&quot;requestUrl&quot;:&quot;&quot;},{&quot;eventName&quot;:&quot;onClick_btnKakunin&quot;,&quot;requestUrl&quot;:&quot;dbz/db/dbz/DataOutputInfomation/onClick_btnKakunin&quot;}],&quot;hiddenInput&quot;:[{&quot;propertyName&quot;:&quot;hdnKanryoMsg&quot;,&quot;value&quot;:&quot;&quot;}],&quot;session&quot;:{},&quot;widthAuto&quot;:false,&quot;canPost&quot;:true}"><div class="UzPanelHeader" id="DataOutputInfomation_panel_header_area" style="width: auto; display: block;"><span class="closeIconSpan ui-icon ui-icon-circle-close" style="display: none;"></span><span class="iconSpan ui-icon ui-icon-circle-triangle-n" style="visibility: visible;"></span><span class="textSpan">完了メッセージ</span><div class="groupBoxBorder" style="display: none;"></div></div><div class="UzPanelBody ui-widget-content panelPadding-M ui-droppable ui-sortable" id="DataOutputInfomation_panel_body_area"><img title="" class="UzIcon FloatLeft JSControl controlMargin-M Width-XS marginLeft-XS marginRight-XS IconSize-S UzCompositeChild" id="icnKanryo" alt="image" src="/uz/uza/image/UZ_Info.png" data-control-type="Icon" data-obj="{&quot;fieldName&quot;:&quot;icnKanryo&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;Icon&quot;,&quot;selectControlID&quot;:&quot;icnKanryo&quot;,&quot;iconSize&quot;:1}"><span title="" class="UzLabel word-wrap-break-word FloatLeft JSControl controlMargin-M marginLeft-XS marginRight-XS text-align-center UzCompositeChild" id="lblMessage" style="width: 300px;" data-control-type="Label" data-obj="{&quot;fieldName&quot;:&quot;lblMessage&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;Label&quot;,&quot;width&quot;:&quot;300px&quot;,&quot;selectControlID&quot;:&quot;lblMessage&quot;,&quot;text&quot;:&quot;データ出力が終了しました&quot;,&quot;align&quot;:1}"><span>データ出力が終了しました</span></span><button title="" class="UzButton JSControl controlMargin-M ClearFloat FloatCenter Width-S UzCompositeChild" id="btnKakunin" type="button" data-control-type="Button" data-obj="{&quot;fieldName&quot;:&quot;btnKakunin&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;Button&quot;,&quot;width&quot;:&quot;S&quot;,&quot;wrap&quot;:true,&quot;float&quot;:1,&quot;selectControlID&quot;:&quot;btnKakunin&quot;,&quot;onClick&quot;:&quot;onClick_btnKakunin&quot;,&quot;text&quot;:&quot;確認&quot;}"><span>確認</span></button></div></div> 
 <script type="text/javascript">var __extends = this.__extends || function (d, b) {
     for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
     function __() { this.constructor = d; }
@@ -267,21 +267,22 @@ var DBE;
     var DataOutputInfomation = DBE.DataOutputInfomation;
 })(DBE || (DBE = {}));
 </script>
-  <script class="RamlConvert" type="text/javascript">
-var DBE= DBE? DBE: {};
-DBE['DATAOUTPUTINFOMATION'] = {};
-DBE['DATAOUTPUTINFOMATION'].DataOutputInfomationRequest = function(parentFieldName){ 
+  
+         <script class="RamlConvert" type="text/javascript">
+var DBZ= DBZ? DBZ: {};
+DBZ['DATAOUTPUTINFOMATION'] = {};
+DBZ['DATAOUTPUTINFOMATION'].DataOutputInfomationRequest = function(parentFieldName){ 
 var paramArray = [];var parameter0 = Uz.JSControlUtil.getJSControl(parentFieldName + '_DataOutputInfomation').getProperty();parameter0.icnKanryo = Uz.JSControlUtil.getJSControl(parentFieldName + '_icnKanryo').getProperty();parameter0.lblMessage = Uz.JSControlUtil.getJSControl(parentFieldName + '_lblMessage').getProperty();parameter0.btnKakunin = Uz.JSControlUtil.getJSControl(parentFieldName + '_btnKakunin').getProperty();paramArray.push(parameter0);
 return paramArray;
  };
-</script><script>var DBE;
-(function (DBE) {
+</script><script>var DBZ;
+(function (DBZ) {
     (function (DataOutputInfomation) {
         var Events = (function () {
             function Events() {
             }
-            Events.CloseOK = function () {
-                return "CloseOK";
+            Events.onClick_btnKakunin = function () {
+                return "onClick_btnKakunin";
             };
             return Events;
         })();
@@ -296,11 +297,11 @@ return paramArray;
             };
 
             Controls.prototype.convFiledNameSelf = function () {
-                return this._myName + "_" + DBE.DataOutputInfomation.Controls.myType();
+                return this._myName + "_" + DBZ.DataOutputInfomation.Controls.myType();
             };
 
             Controls.prototype.convFiledName = function (fieldName) {
-                return this._myName + "_" + DBE.DataOutputInfomation.Controls.myType() + "_" + fieldName;
+                return this._myName + "_" + DBZ.DataOutputInfomation.Controls.myType() + "_" + fieldName;
             };
 
             Controls.prototype.DataOutputInfomation = function () {
@@ -321,11 +322,11 @@ return paramArray;
             return Controls;
         })();
         DataOutputInfomation.Controls = Controls;
-    })(DBE.DataOutputInfomation || (DBE.DataOutputInfomation = {}));
-    var DataOutputInfomation = DBE.DataOutputInfomation;
-})(DBE || (DBE = {}));
-var DBE;
-(function (DBE) {
+    })(DBZ.DataOutputInfomation || (DBZ.DataOutputInfomation = {}));
+    var DataOutputInfomation = DBZ.DataOutputInfomation;
+})(DBZ || (DBZ = {}));
+var DBZ;
+(function (DBZ) {
     (function (DataOutputInfomation) {
         var ModeController = (function () {
             function ModeController(fieldName) {
@@ -342,12 +343,12 @@ var DBE;
             return ModeController;
         })();
         DataOutputInfomation.ModeController = ModeController;
-    })(DBE.DataOutputInfomation || (DBE.DataOutputInfomation = {}));
-    var DataOutputInfomation = DBE.DataOutputInfomation;
-})(DBE || (DBE = {}));
+    })(DBZ.DataOutputInfomation || (DBZ.DataOutputInfomation = {}));
+    var DataOutputInfomation = DBZ.DataOutputInfomation;
+})(DBZ || (DBZ = {}));
 
-var DBE;
-(function (DBE) {
+var DBZ;
+(function (DBZ) {
     (function (DataOutputInfomation) {
         var PublicProperties = (function () {
             function PublicProperties(fieldName) {
@@ -361,7 +362,7 @@ var DBE;
             return PublicProperties;
         })();
         DataOutputInfomation.PublicProperties = PublicProperties;
-    })(DBE.DataOutputInfomation || (DBE.DataOutputInfomation = {}));
-    var DataOutputInfomation = DBE.DataOutputInfomation;
-})(DBE || (DBE = {}));
+    })(DBZ.DataOutputInfomation || (DBZ.DataOutputInfomation = {}));
+    var DataOutputInfomation = DBZ.DataOutputInfomation;
+})(DBZ || (DBZ = {}));
 </script></div>

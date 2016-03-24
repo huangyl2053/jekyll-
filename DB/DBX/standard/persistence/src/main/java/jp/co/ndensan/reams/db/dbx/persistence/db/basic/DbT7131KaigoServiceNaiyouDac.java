@@ -166,7 +166,7 @@ public class DbT7131KaigoServiceNaiyouDac {
                                 eq(serviceKoumokuCd, サービス項目コード),
                                 leq(teikyoKaishiYM, 基準年月),
                                 leq(基準年月, teikyoShuryoYM)))
-                .order(by(serviceShuruiCd, Order.DESC), by(serviceKoumokuCd, Order.DESC))
+                .order(by(serviceShuruiCd, Order.ASC), by(serviceKoumokuCd, Order.ASC))
                 .toList(DbT7131KaigoServiceNaiyouEntity.class);
     }
 }

@@ -72,11 +72,11 @@ public class ChoteiboDankaiGokeiEditor implements IChoteiboEditor {
     }
 
     private void editFuchoTogetsuGakuKome(ChoteiboSource source) {
-        source.fuchoTogetsuGakuKome = item.getFuchoTogetsuGakuKome();
+        source.fuchoTogetsuGakuKome = item.getDankaiGokeiFuchoItem().getFuchoTogetsuGakuKome();
     }
 
     private void editFuchoTogetsuSuKome(ChoteiboSource source) {
-        source.fuchoTogetsuSuKome = item.getFuchoTogetsuSuKome();
+        source.fuchoTogetsuSuKome = item.getDankaiGokeiFuchoItem().getFuchoTogetsuSuKome();
     }
 
     private void editListDankaiBetsuGokei_1(ChoteiboSource source) {
@@ -96,83 +96,83 @@ public class ChoteiboDankaiGokeiEditor implements IChoteiboEditor {
     }
 
     private void editListFuchoGokei_1(ChoteiboSource source) {
-        source.listFuchoGokei_1 = item.getListFuchoGokei_1();
+        source.listFuchoGokei_1 = item.getDankaiGokeiFuchoItem().getListFuchoGokei_1();
     }
 
     private void editListFuchoGokei_2(ChoteiboSource source) {
-        source.listFuchoGokei_2 = item.getListFuchoGokei_2();
+        source.listFuchoGokei_2 = item.getDankaiGokeiFuchoItem().getListFuchoGokei_2();
     }
 
     private void editListFuchoGokei_3(ChoteiboSource source) {
-        source.listFuchoGokei_3 = item.getListFuchoGokei_3();
+        source.listFuchoGokei_3 = item.getDankaiGokeiFuchoItem().getListFuchoGokei_3();
     }
 
     private void editListFuchoGokei_4(ChoteiboSource source) {
-        source.listFuchoGokei_4 = item.getListFuchoGokei_4();
+        source.listFuchoGokei_4 = item.getDankaiGokeiFuchoItem().getListFuchoGokei_4();
     }
 
     private void editListFuchoGokei_5(ChoteiboSource source) {
-        source.listFuchoGokei_5 = item.getListFuchoGokei_5();
+        source.listFuchoGokei_5 = item.getDankaiGokeiFuchoItem().getListFuchoGokei_5();
     }
 
     private void editListFuchoGokei_6(ChoteiboSource source) {
-        source.listFuchoGokei_6 = item.getListFuchoGokei_6();
+        source.listFuchoGokei_6 = item.getDankaiGokeiFuchoItem().getListFuchoGokei_6();
     }
 
     private void editListFuchoGokei_7(ChoteiboSource source) {
-        source.listFuchoGokei_7 = item.getListFuchoGokei_7();
+        source.listFuchoGokei_7 = item.getDankaiGokeiFuchoItem().getListFuchoGokei_7();
     }
 
     private void editListFuchoGokei_8(ChoteiboSource source) {
-        source.listFuchoGokei_8 = item.getListFuchoGokei_8();
+        source.listFuchoGokei_8 = item.getDankaiGokeiFuchoItem().getListFuchoGokei_8();
     }
 
     private void editListFuchoGokei_9(ChoteiboSource source) {
-        source.listFuchoGokei_9 = item.getListFuchoGokei_9();
+        source.listFuchoGokei_9 = item.getDankaiGokeiFuchoItem().getListFuchoGokei_9();
     }
 
     private void editListTokuchoGokei_1(ChoteiboSource source) {
-        source.listTokuchoGokei_1 = item.getListTokuchoGokei_1();
+        source.listTokuchoGokei_1 = item.getDankaiGokeiTokuchoItem().getListTokuchoGokei_1();
     }
 
     private void editListTokuchoGokei_2(ChoteiboSource source) {
-        source.listTokuchoGokei_2 = item.getListTokuchoGokei_2();
+        source.listTokuchoGokei_2 = item.getDankaiGokeiTokuchoItem().getListTokuchoGokei_2();
     }
 
     private void editListTokuchoGokei_3(ChoteiboSource source) {
-        source.listTokuchoGokei_3 = item.getListTokuchoGokei_3();
+        source.listTokuchoGokei_3 = item.getDankaiGokeiTokuchoItem().getListTokuchoGokei_3();
     }
 
     private void editListTokuchoGokei_4(ChoteiboSource source) {
-        source.listTokuchoGokei_4 = item.getListTokuchoGokei_4();
+        source.listTokuchoGokei_4 = item.getDankaiGokeiTokuchoItem().getListTokuchoGokei_4();
     }
 
     private void editListTokuchoGokei_5(ChoteiboSource source) {
-        source.listTokuchoGokei_5 = item.getListTokuchoGokei_5();
+        source.listTokuchoGokei_5 = item.getDankaiGokeiTokuchoItem().getListTokuchoGokei_5();
     }
 
     private void editListTokuchoGokei_6(ChoteiboSource source) {
-        source.listTokuchoGokei_6 = item.getListTokuchoGokei_6();
+        source.listTokuchoGokei_6 = item.getDankaiGokeiTokuchoItem().getListTokuchoGokei_6();
     }
 
     private void editListTokuchoGokei_7(ChoteiboSource source) {
-        source.listTokuchoGokei_7 = item.getListTokuchoGokei_7();
+        source.listTokuchoGokei_7 = item.getDankaiGokeiTokuchoItem().getListTokuchoGokei_7();
     }
 
     private void editListTokuchoGokei_8(ChoteiboSource source) {
-        source.listTokuchoGokei_8 = item.getListTokuchoGokei_8();
+        source.listTokuchoGokei_8 = item.getDankaiGokeiTokuchoItem().getListTokuchoGokei_8();
     }
 
     private void editListTokuchoGokei_9(ChoteiboSource source) {
-        source.listTokuchoGokei_9 = item.getListTokuchoGokei_9();
+        source.listTokuchoGokei_9 = item.getDankaiGokeiTokuchoItem().getListTokuchoGokei_9();
     }
 
     private void editTokuchoTogetsuGakuKome(ChoteiboSource source) {
-        source.tokuchoTogetsuGakuKome = item.getTokuchoTogetsuGakuKome();
+        source.tokuchoTogetsuGakuKome = item.getDankaiGokeiTokuchoItem().getTokuchoTogetsuGakuKome();
     }
 
     private void editTokuchoTogetsuSuKome(ChoteiboSource source) {
-        source.tokuchoTogetsuSuKome = item.getTokuchoTogetsuSuKome();
+        source.tokuchoTogetsuSuKome = item.getDankaiGokeiTokuchoItem().getTokuchoTogetsuSuKome();
     }
 
     private void editTokuchoshaShaSuKome(ChoteiboSource source) {

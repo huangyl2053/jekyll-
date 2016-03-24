@@ -6,12 +6,7 @@
 package jp.co.ndensan.reams.db.dba.business.report.jukyushikakushomeisho;
 
 import jp.co.ndensan.reams.db.dba.entity.report.jukyushikakushomeisho.JukyuShikakuShomeishoReportSource;
-import jp.co.ndensan.reams.uz.uza.lang.EraType;
-import jp.co.ndensan.reams.uz.uza.lang.FillType;
-import jp.co.ndensan.reams.uz.uza.lang.FirstYear;
-import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.lang.Separator;
 
 /**
  *
@@ -94,12 +89,9 @@ public class JukyuShikakuShomeishoBodyEditor implements IJukyuShikakuShomeishoEd
         }
         source.hihokenshaNameKana = item.getHihokenshaNameKana();
         source.hihokenshaName = item.getHihokenshaName();
-        // TODO QA728 生年月日の編集
-        RString birthYMD = new RDate(item.getBirthYMD().toString()).wareki().eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN)
-                .separator(Separator.JAPANESE).fillType(FillType.BLANK).getEra();
-        source.birthGengoMeiji = birthYMD == 元号_明治 ? RString.EMPTY : HOUSI;
-        source.birthGengoTaisho = birthYMD == 元号_大正 ? RString.EMPTY : HOUSI;
-        source.birthGengoShowa = birthYMD == 元号_昭和 ? RString.EMPTY : HOUSI;
+        source.birthGengoMeiji = item.getBirthGengoMeiji();
+        source.birthGengoTaisho = item.getBirthGengoTaisho();
+        source.birthGengoShowa = item.getBirthGengoShowa();
         source.birthYMD = item.getBirthYMD();
         RString seibetsu = item.getSeibetsu();
         source.seibetsuMan = seibetsu.equals(SHINSEICHU_1) ? RString.EMPTY : HOUSI;
@@ -129,7 +121,6 @@ public class JukyuShikakuShomeishoBodyEditor implements IJukyuShikakuShomeishoEd
                 }
             }
         }
-        source.kofuYmd = item.getDate();
         RString shinseichu = item.getShinseichu();
         source.ninteizumi = new RString("0").equals(shinseichu) ? HOUSI : RString.EMPTY;
         source.shinseichu = SHINSEICHU_1.equals(shinseichu) ? HOUSI : RString.EMPTY;
@@ -142,7 +133,7 @@ public class JukyuShikakuShomeishoBodyEditor implements IJukyuShikakuShomeishoEd
         source.biko = item.getBiko();
         source.remban = item.getRemban();
         source.denshiKoin = item.getDenshiKoin();
-        source.shomeiHakkoYMD = item.getDate();
+        source.shomeiHakkoYMD = item.getShomeiHakkoYMD();
         source.shichosonMei = item.getShichosonMei();
         source.shuchoMei = item.getShuchoMei();
         source.koinShoryaku = item.getKoinShoryaku();

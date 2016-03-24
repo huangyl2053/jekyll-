@@ -7,10 +7,11 @@ package jp.co.ndensan.reams.db.dbb.definition.mybatisprm.tsuchishohakkogoidosha;
 
 import jp.co.ndensan.reams.uz.uza.biz.ReportId;
 import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
+import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import lombok.Getter;
 
 /**
- *
+ * QualificationsParamter
  */
 @SuppressWarnings("PMD.UnusedPrivateField")
 @Getter
@@ -18,7 +19,8 @@ public final class QualificationsParamter {
 
     private final ReportId 帳票ID;
     private final YMDHMS 帳票作成日時;
-    private final YMDHMS 最大計算処理日時;
+    private final RDateTime 最大計算処理日時;
+    private final RDateTime システム日時;
 
     /**
      * TwoParamter
@@ -30,7 +32,8 @@ public final class QualificationsParamter {
     private QualificationsParamter(ReportId 帳票ID, YMDHMS 帳票作成日時, YMDHMS 最大計算処理日時) {
         this.帳票ID = 帳票ID;
         this.帳票作成日時 = 帳票作成日時;
-        this.最大計算処理日時 = 最大計算処理日時;
+        this.最大計算処理日時 = 最大計算処理日時.getRDateTime();
+        this.システム日時 = RDateTime.now();
     }
 
     /**

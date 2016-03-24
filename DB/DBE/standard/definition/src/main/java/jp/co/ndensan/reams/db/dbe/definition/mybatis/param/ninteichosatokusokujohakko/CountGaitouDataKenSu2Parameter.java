@@ -22,7 +22,7 @@ public final class CountGaitouDataKenSu2Parameter {
     private final boolean temp_kaishiNotNull_huryouNull;
     private final boolean temp_kaishiNull_huryouNotNull;
     private final boolean temp_hokennshaCode_isNotEmpty;
-    private final Integer temp_hokennshaCode;
+    private final RString temp_hokennshaCode;
     private final boolean temp_itakusakiCode_isNotEmpty;
     private final RString temp_ninteiChosaItakusakiCode;
     private final boolean temp_chosainCode_isNotEmpty;
@@ -38,7 +38,7 @@ public final class CountGaitouDataKenSu2Parameter {
         this.temp_kaishiNull_huryouNotNull = (null == tempData.getTemp_印刷期間開始日() && null != tempData.getTemp_印刷期間終了日());
         this.temp_hokennshaCode_isNotEmpty = !tempData.getTemp_保険者コード().isEmpty();
         if (temp_hokennshaCode_isNotEmpty) {
-            this.temp_hokennshaCode = Integer.parseInt(tempData.getTemp_保険者コード().toString());
+            this.temp_hokennshaCode = tempData.getTemp_保険者コード();
         } else {
             this.temp_hokennshaCode = null;
         }

@@ -51,6 +51,10 @@ public class KihonChosaInputDiv extends Panel implements IKihonChosaInputDiv {
     private TokubetsuIryoDiv TokubetsuIryo;
     @JsonProperty("Jiritsudo")
     private JiritsudoDiv Jiritsudo;
+    @JsonProperty("btnConfirm")
+    private Button btnConfirm;
+    @JsonProperty("btnBack")
+    private Button btnBack;
     @JsonProperty("モード")
     private RString モード;
 
@@ -202,6 +206,42 @@ public class KihonChosaInputDiv extends Panel implements IKihonChosaInputDiv {
     @JsonProperty("Jiritsudo")
     public void setJiritsudo(JiritsudoDiv Jiritsudo) {
         this.Jiritsudo = Jiritsudo;
+    }
+
+    /*
+     * getbtnConfirm
+     * @return btnConfirm
+     */
+    @JsonProperty("btnConfirm")
+    public Button getBtnConfirm() {
+        return btnConfirm;
+    }
+
+    /*
+     * setbtnConfirm
+     * @param btnConfirm btnConfirm
+     */
+    @JsonProperty("btnConfirm")
+    public void setBtnConfirm(Button btnConfirm) {
+        this.btnConfirm = btnConfirm;
+    }
+
+    /*
+     * getbtnBack
+     * @return btnBack
+     */
+    @JsonProperty("btnBack")
+    public Button getBtnBack() {
+        return btnBack;
+    }
+
+    /*
+     * setbtnBack
+     * @param btnBack btnBack
+     */
+    @JsonProperty("btnBack")
+    public void setBtnBack(Button btnBack) {
+        this.btnBack = btnBack;
     }
 
     /*

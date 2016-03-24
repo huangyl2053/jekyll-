@@ -23,6 +23,12 @@ class NenreitotatsuYoteishaIchiranhyoBodyEditor implements INenreitotatsuYoteish
         this.item = item;
     }
 
+    /**
+     * 年齢到達予定者一覧表editです。
+     *
+     * @param reportSourceWriter 年齢到達予定者一覧表Source
+     * @return NenreitotatsuYoteishaIchiranhyoReportSource
+     */
     @Override
     public NenreitotatsuYoteishaIchiranhyoReportSource edit(NenreitotatsuYoteishaIchiranhyoReportSource source) {
         return editBody(source);

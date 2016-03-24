@@ -111,6 +111,7 @@ public class ShafukuKeigenGakuPanel {
         }
         ViewStateHolder.put(ViewStateKeys.サービス種類集計情報, shokanShukeiList);
         List<KeyValueDataSource> サービス種類 = new ArrayList<>();
+        サービス種類.add(new KeyValueDataSource(new RString(""), new RString("")));
         for (ShafukukeigenServiceResult entity : shokanShukeiList) {
             サービス種類.add(new KeyValueDataSource(new RString(entity.getEntity().getServiceShuruiMeisho().toString()),
                     entity.getEntity().getServiceShuruiCode().getColumnValue()));
@@ -125,6 +126,7 @@ public class ShafukuKeigenGakuPanel {
                     .replace(軽減額meg.toString()));
         }
         List<KeyValueDataSource> 軽減率 = new ArrayList<>();
+        軽減率.add(new KeyValueDataSource(new RString(""), new RString("")));
         for (int i = 0; i < 軽減額List.size(); i++) {
             Decimal 軽減率分子 = 軽減額List.get(i).get軽減率分子();
             Decimal 軽減率分母 = 軽減額List.get(i).get軽減率分母();
@@ -132,6 +134,7 @@ public class ShafukuKeigenGakuPanel {
             if (軽減率分母 != Decimal.ZERO) {
                 軽減額 = 軽減率分子.divide(軽減率分母);
             }
+            軽減額 = 軽減額.roundHalfUpTo(1);
             軽減率.add(new KeyValueDataSource(new RString(Integer.toString(i)),
                     new RString(Float.toString(軽減額.floatValue()))));
         }

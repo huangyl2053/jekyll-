@@ -3,7 +3,7 @@ package jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.NinteiShi
  * このコードはツールによって生成されました。
  * このファイルへの変更は、以下の状況下で不正な動作の原因になったり、
  * コードが再生成されるときに損失したりします。
- * Wed Mar 09 16:35:40 CST 2016 
+ * Thu Mar 24 10:30:18 JST 2016 
  */
 
 
@@ -22,8 +22,12 @@ public class dgRenrakusakiIchiran_Row extends DataRow {
     // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-01-15_09-59-03">
 
     private RString renban;
+    private RString renrakusakiKubun;
+    private RString shisho;
     private RString shimei;
+    private RString kana;
     private RString tsuzukigara;
+    private RString yubinNo;
     private RString jusho;
     private RString telNo;
     private RString mobileNo;
@@ -32,33 +36,49 @@ public class dgRenrakusakiIchiran_Row extends DataRow {
     public dgRenrakusakiIchiran_Row() {
         super();
         this.renban = RString.EMPTY;
+        this.renrakusakiKubun = RString.EMPTY;
+        this.shisho = RString.EMPTY;
         this.shimei = RString.EMPTY;
+        this.kana = RString.EMPTY;
         this.tsuzukigara = RString.EMPTY;
+        this.yubinNo = RString.EMPTY;
         this.jusho = RString.EMPTY;
         this.telNo = RString.EMPTY;
         this.mobileNo = RString.EMPTY;
         this.yusenJuni = RString.EMPTY;
         this.setOriginalData("renban", renban);
+        this.setOriginalData("renrakusakiKubun", renrakusakiKubun);
+        this.setOriginalData("shisho", shisho);
         this.setOriginalData("shimei", shimei);
+        this.setOriginalData("kana", kana);
         this.setOriginalData("tsuzukigara", tsuzukigara);
+        this.setOriginalData("yubinNo", yubinNo);
         this.setOriginalData("jusho", jusho);
         this.setOriginalData("telNo", telNo);
         this.setOriginalData("mobileNo", mobileNo);
         this.setOriginalData("yusenJuni", yusenJuni);
     }
 
-    public dgRenrakusakiIchiran_Row(RString renban, RString shimei, RString tsuzukigara, RString jusho, RString telNo, RString mobileNo, RString yusenJuni) {
+    public dgRenrakusakiIchiran_Row(RString renban, RString renrakusakiKubun, RString shisho, RString shimei, RString kana, RString tsuzukigara, RString yubinNo, RString jusho, RString telNo, RString mobileNo, RString yusenJuni) {
         super();
         this.setOriginalData("renban", renban);
+        this.setOriginalData("renrakusakiKubun", renrakusakiKubun);
+        this.setOriginalData("shisho", shisho);
         this.setOriginalData("shimei", shimei);
+        this.setOriginalData("kana", kana);
         this.setOriginalData("tsuzukigara", tsuzukigara);
+        this.setOriginalData("yubinNo", yubinNo);
         this.setOriginalData("jusho", jusho);
         this.setOriginalData("telNo", telNo);
         this.setOriginalData("mobileNo", mobileNo);
         this.setOriginalData("yusenJuni", yusenJuni);
         this.renban = renban;
+        this.renrakusakiKubun = renrakusakiKubun;
+        this.shisho = shisho;
         this.shimei = shimei;
+        this.kana = kana;
         this.tsuzukigara = tsuzukigara;
+        this.yubinNo = yubinNo;
         this.jusho = jusho;
         this.telNo = telNo;
         this.mobileNo = mobileNo;
@@ -69,12 +89,28 @@ public class dgRenrakusakiIchiran_Row extends DataRow {
         return renban;
     }
 
+    public RString getRenrakusakiKubun() {
+        return renrakusakiKubun;
+    }
+
+    public RString getShisho() {
+        return shisho;
+    }
+
     public RString getShimei() {
         return shimei;
     }
 
+    public RString getKana() {
+        return kana;
+    }
+
     public RString getTsuzukigara() {
         return tsuzukigara;
+    }
+
+    public RString getYubinNo() {
+        return yubinNo;
     }
 
     public RString getJusho() {
@@ -98,14 +134,34 @@ public class dgRenrakusakiIchiran_Row extends DataRow {
         this.renban = renban;
     }
 
+    public void setRenrakusakiKubun(RString renrakusakiKubun) {
+        this.setOriginalData("renrakusakiKubun", renrakusakiKubun);
+        this.renrakusakiKubun = renrakusakiKubun;
+    }
+
+    public void setShisho(RString shisho) {
+        this.setOriginalData("shisho", shisho);
+        this.shisho = shisho;
+    }
+
     public void setShimei(RString shimei) {
         this.setOriginalData("shimei", shimei);
         this.shimei = shimei;
     }
 
+    public void setKana(RString kana) {
+        this.setOriginalData("kana", kana);
+        this.kana = kana;
+    }
+
     public void setTsuzukigara(RString tsuzukigara) {
         this.setOriginalData("tsuzukigara", tsuzukigara);
         this.tsuzukigara = tsuzukigara;
+    }
+
+    public void setYubinNo(RString yubinNo) {
+        this.setOriginalData("yubinNo", yubinNo);
+        this.yubinNo = yubinNo;
     }
 
     public void setJusho(RString jusho) {

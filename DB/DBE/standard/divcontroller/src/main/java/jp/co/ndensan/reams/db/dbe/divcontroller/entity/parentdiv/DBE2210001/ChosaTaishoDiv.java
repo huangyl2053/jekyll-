@@ -24,10 +24,10 @@ public class ChosaTaishoDiv extends Panel {
      * コントロール名とフィールド名を取得する
      * private + コントロール名 + フィールド名 の文字列を作成
      */
-    @JsonProperty("ccdNinteiShinseishaKihonInfo")
-    private NinteiShinseishaKihonInfoDiv ccdNinteiShinseishaKihonInfo;
     @JsonProperty("ccdNinteiShinseiRenrakusakiKihon")
     private NinteiShinseiRenrakusakiKihonDiv ccdNinteiShinseiRenrakusakiKihon;
+    @JsonProperty("ccdNinteiShinseishaKihonInfo")
+    private NinteiShinseishaKihonInfoDiv ccdNinteiShinseishaKihonInfo;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -36,21 +36,21 @@ public class ChosaTaishoDiv extends Panel {
      * フィールド名のGetterとSetter を作成
      */
     /*
-     * getccdNinteiShinseishaKihonInfo
-     * @return ccdNinteiShinseishaKihonInfo
-     */
-    @JsonProperty("ccdNinteiShinseishaKihonInfo")
-    public INinteiShinseishaKihonInfoDiv getCcdNinteiShinseishaKihonInfo() {
-        return ccdNinteiShinseishaKihonInfo;
-    }
-
-    /*
      * getccdNinteiShinseiRenrakusakiKihon
      * @return ccdNinteiShinseiRenrakusakiKihon
      */
     @JsonProperty("ccdNinteiShinseiRenrakusakiKihon")
     public INinteiShinseiRenrakusakiKihonDiv getCcdNinteiShinseiRenrakusakiKihon() {
         return ccdNinteiShinseiRenrakusakiKihon;
+    }
+
+    /*
+     * getccdNinteiShinseishaKihonInfo
+     * @return ccdNinteiShinseishaKihonInfo
+     */
+    @JsonProperty("ccdNinteiShinseishaKihonInfo")
+    public INinteiShinseishaKihonInfoDiv getCcdNinteiShinseishaKihonInfo() {
+        return ccdNinteiShinseishaKihonInfo;
     }
 
     // </editor-fold>

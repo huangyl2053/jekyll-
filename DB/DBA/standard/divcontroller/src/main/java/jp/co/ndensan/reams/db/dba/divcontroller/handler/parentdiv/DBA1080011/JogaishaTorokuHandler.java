@@ -8,6 +8,7 @@ package jp.co.ndensan.reams.db.dba.divcontroller.handler.parentdiv.DBA1080011;
 import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dba.business.core.shikakushutokujogaishakanri.ShikakuShutokuJogaishaKanri;
+import jp.co.ndensan.reams.db.dba.definition.core.jogaishatorokuparamter.JogaishaTorokuParamter;
 import static jp.co.ndensan.reams.db.dba.definition.enumeratedtype.config.ConfigKeysJukyuShikakuShomeishoHakko.資格取得除外者登録キー;
 import static jp.co.ndensan.reams.db.dba.definition.enumeratedtype.config.ConfigKeysJukyuShikakuShomeishoHakko.除外者データキー;
 import jp.co.ndensan.reams.db.dba.divcontroller.entity.parentdiv.DBA1080011.JogaishaTorokuDiv;
@@ -24,11 +25,7 @@ import jp.co.ndensan.reams.uz.uza.lang.ApplicationException;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.message.IMessageGettable;
-import jp.co.ndensan.reams.uz.uza.message.IValidationMessage;
-import jp.co.ndensan.reams.uz.uza.message.Message;
 import jp.co.ndensan.reams.uz.uza.ui.binding.RowState;
-import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPair;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 import jp.co.ndensan.reams.uz.uza.util.db.SearchResult;
@@ -53,7 +50,7 @@ public class JogaishaTorokuHandler {
     }
 
     /**
-     * メニューから遷移する。
+     * メニューから遷移します。
      *
      * @param 資格取得除外者情報 資格取得除外者情報
      */
@@ -93,7 +90,7 @@ public class JogaishaTorokuHandler {
     }
 
     /**
-     * 対象者検索画面から遷移する。
+     * 対象者検索画面から遷移します。
      *
      */
     public void onLoadKen() {
@@ -104,7 +101,25 @@ public class JogaishaTorokuHandler {
         div.getJogaishaTorokuIchiran().getJogaiTaishoIchiran().getTxtShikibetsuCode()
                 .setDomain(new ShikibetsuCode(jogaishaTorokuSetter.getShikibetsuCode()));
         div.getJogaishaTorokuIchiran().getJogaiTaishoIchiran().getTxtShikibetsuCodeName().setValue(jogaishaTorokuSetter.getShikibetsuCodeName());
-        div.getJogaishaTorokuIchiran().getNenreiTotatsh().getDgNenreiTotatshusha().setDataSource(jogaishaTorokuSetter.getViewState());
+        List<dgNenreiTotatshusha_Row> rowList = new ArrayList<>();
+        List<JogaishaTorokuParamter> params = jogaishaTorokuSetter.getViewState();
+        for (JogaishaTorokuParamter param : params) {
+            dgNenreiTotatshusha_Row row = new dgNenreiTotatshusha_Row();
+            row.setRowState(param.getRowState());
+            row.setLasdecCode(param.getLasdecCode());
+            row.setLasdecMei(param.getLasdecMei());
+            row.setShikibetsuCode(param.getShikibetsuCode());
+            row.setRirekiNo(param.getRirekiNo());
+            row.setShimei(param.getShimei());
+            row.getDateOfBirth().setValue(param.getDateOfBirth());
+            row.setGender(param.getGender());
+            row.setJuminJotai(param.getJuminJotai());
+            row.setJogaiRiyu(param.getJogaiRiyu());
+            row.getJogaiTekiyoDate().setValue(param.getJogaiTekiyoDate());
+            row.getJogaiKaijyoDate().setValue(param.getJogaiKaijyoDate());
+            rowList.add(row);
+        }
+        div.getJogaishaTorokuIchiran().getNenreiTotatsh().getDgNenreiTotatshusha().setDataSource(rowList);
     }
 
     /**
@@ -171,7 +186,7 @@ public class JogaishaTorokuHandler {
     }
 
     /**
-     * 識別コードLostFocusする。
+     * 識別コードLostFocusします。
      *
      */
     public void onFocus_shikibetsuCode() {
@@ -199,13 +214,30 @@ public class JogaishaTorokuHandler {
      */
     public void onClick_Search() {
         List<dgNenreiTotatshusha_Row> list = div.getJogaishaTorokuIchiran().getNenreiTotatsh().getDgNenreiTotatshusha().getDataSource();
+        List<JogaishaTorokuParamter> params = new ArrayList<>();
+        for (dgNenreiTotatshusha_Row param : list) {
+            JogaishaTorokuParamter paramter = new JogaishaTorokuParamter();
+            paramter.setRowState(param.getRowState());
+            paramter.setLasdecCode(param.getLasdecCode());
+            paramter.setLasdecMei(param.getLasdecMei());
+            paramter.setShikibetsuCode(param.getShikibetsuCode());
+            paramter.setRirekiNo(param.getRirekiNo());
+            paramter.setShimei(param.getShimei());
+            paramter.setDateOfBirth(param.getDateOfBirth().getValue());
+            paramter.setGender(param.getGender());
+            paramter.setJuminJotai(param.getJuminJotai());
+            paramter.setJogaiRiyu(param.getJogaiRiyu());
+            paramter.setJogaiTekiyoDate(param.getJogaiTekiyoDate().getValue());
+            paramter.setJogaiKaijyoDate(param.getJogaiKaijyoDate().getValue());
+            params.add(paramter);
+        }
         JogaishaTorokuSetter 除外者データ = new JogaishaTorokuSetter();
         除外者データ.setShikibetsuCode(div.getJogaishaTorokuIchiran().getJogaiTaishoIchiran().getTxtShikibetsuCode().getDomain().getColumnValue());
         除外者データ.setShikibetsuCodeName(div.getJogaishaTorokuIchiran().getJogaiTaishoIchiran().getTxtShikibetsuCodeName().getValue());
         除外者データ.setJogaiRiyu(div.getJogaishaTorokuIchiran().getJogaiTaishoIchiran().getTxtJogaiRiyu().getValue());
         除外者データ.setJogaiKaijyoYMD(div.getJogaishaTorokuIchiran().getJogaiTaishoIchiran().getTxtJogaiKaijyoYMD().getValue());
         除外者データ.setJogaiTekiyoYMD(div.getJogaishaTorokuIchiran().getJogaiTaishoIchiran().getTxtJogaiTekiyoYMD().getValue());
-        除外者データ.setViewState(list);
+        除外者データ.setViewState(params);
         ViewStateHolder.put(除外者データキー, 除外者データ);
         ViewStateHolder.put(資格取得除外者登録キー, new RString("DBA18001"));
     }
@@ -224,15 +256,21 @@ public class JogaishaTorokuHandler {
     }
 
     /**
-     * 保存するボタン押下の場合、重複チェック実行します。
+     * 確定するボタン押下の場合、入力チェック実行します。
      *
      * @return ValidationMessageControlPairs
      */
     public ValidationMessageControlPairs validateCheck() {
-        ValidationMessageControlPairs validationMessages = new ValidationMessageControlPairs();
-        validationMessages.add(new ValidationMessageControlPair(
-                JogaishaTorokuMessages.前後関係逆転));
-        return validationMessages;
+        return createValidationHandler(div).validateCheck();
+    }
+
+    /**
+     * 保存するボタン押下の場合、重複チェック実行します。
+     *
+     * @return ValidationMessageControlPairs
+     */
+    public ValidationMessageControlPairs juufukuCheck() {
+        return createValidationHandler(div).juufukuCheck();
     }
 
     private void アクセスログ() {
@@ -267,7 +305,11 @@ public class JogaishaTorokuHandler {
         dgNenreiTotatshusha_Row dgRow;
         if (div.getJogaishaTorokuIchiran().getStart().equals(修正)) {
             dgRow = dgRowList.get(rowcount);
-            dgRow.setRowState(RowState.Modified);
+            if (RowState.Added.equals(dgRow.getRowState())) {
+                dgRow.setRowState(RowState.Added);
+            } else {
+                dgRow.setRowState(RowState.Modified);
+            }
             dgRow.setShikibetsuCode(div.getJogaishaTorokuIchiran().getJogaiTaishoIchiran().getTxtShikibetsuCode().getDomain().getColumnValue());
             dgRow.setShimei(div.getJogaishaTorokuIchiran().getJogaiTaishoIchiran().getTxtShikibetsuCodeName().getValue());
             dgRow.setJogaiRiyu(div.getJogaishaTorokuIchiran().getJogaiTaishoIchiran().getTxtJogaiRiyu().getValue());
@@ -311,20 +353,8 @@ public class JogaishaTorokuHandler {
         return RString.EMPTY;
     }
 
-    private static enum JogaishaTorokuMessages implements IValidationMessage {
-
-        前後関係逆転(UrErrorMessages.前後関係逆転, "資格除外解除年月日", "資格除外適用年月日");
-
-        private final Message message;
-
-        private JogaishaTorokuMessages(IMessageGettable message, String... replacements) {
-            this.message = message.getMessage().replace(replacements);
-        }
-
-        @Override
-        public Message getMessage() {
-            return message;
-        }
+    private JogaishaValidationHandler createValidationHandler(JogaishaTorokuDiv div) {
+        return new JogaishaValidationHandler(div);
     }
 
     private RString nullToEmpty(RString obj) {

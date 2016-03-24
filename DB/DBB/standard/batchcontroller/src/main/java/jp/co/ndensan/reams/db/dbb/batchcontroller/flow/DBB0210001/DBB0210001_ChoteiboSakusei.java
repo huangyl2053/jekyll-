@@ -5,6 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbb.batchcontroller.flow.DBB0210001;
 
+import jp.co.ndensan.reams.db.dbb.batchcontroller.step.DBB0210001.ChoteiboSakuseiDataShoriProcess;
 import jp.co.ndensan.reams.db.dbb.batchcontroller.step.DBB0210001.ChoteiboSakuseiReportProcess;
 import jp.co.ndensan.reams.db.dbb.definition.batchprm.choteibo.ChoteiboBatchParameter;
 import jp.co.ndensan.reams.uz.uza.batch.Step;
@@ -18,7 +19,21 @@ public class DBB0210001_ChoteiboSakusei extends BatchFlowBase<ChoteiboBatchParam
 
     @Override
     protected void defineFlow() {
+        executeStep(CHOTEIBO_DATA_PROCESS);
         executeStep(CHOTEIBO_REPORT_PROCESS);
+    }
+
+    private static final String CHOTEIBO_DATA_PROCESS = "ChoteiboSakuseiDataShoriProcess";
+
+    /**
+     * 調定簿作成Processを呼び出し
+     *
+     * @return IBatchFlowCommand
+     */
+    @Step(CHOTEIBO_DATA_PROCESS)
+    protected IBatchFlowCommand createReport() {
+        return simpleBatch(ChoteiboSakuseiDataShoriProcess.class).
+                arguments(getParameter().toChoteiboBatchParameter()).define();
     }
 
     private static final String CHOTEIBO_REPORT_PROCESS = "ChoteiboReaportProcess";
@@ -29,9 +44,8 @@ public class DBB0210001_ChoteiboSakusei extends BatchFlowBase<ChoteiboBatchParam
      * @return IBatchFlowCommand
      */
     @Step(CHOTEIBO_REPORT_PROCESS)
-    protected IBatchFlowCommand createReport() {
-        return simpleBatch(ChoteiboSakuseiReportProcess.class).
+    protected IBatchFlowCommand createData() {
+        return loopBatch(ChoteiboSakuseiReportProcess.class).
                 arguments(getParameter().toChoteiboBatchParameter()).define();
     }
-
 }

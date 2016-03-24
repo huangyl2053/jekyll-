@@ -33,20 +33,20 @@ module DBZ {
                 return new UZA.Panel(this.convFiledNameSelf());
             }
 
-            public txtHokenshaNo(): UZA.TextBoxNum {
-                return new UZA.TextBoxNum(this.convFiledName("txtHokenshaNo"));
-            }
-
-            public txtHokenshaName(): UZA.TextBox {
-                return new UZA.TextBox(this.convFiledName("txtHokenshaName"));
-            }
-
             public txtHihokenshaNo(): UZA.TextBoxCode {
                 return new UZA.TextBoxCode(this.convFiledName("txtHihokenshaNo"));
             }
 
             public txtHihokenshaKubun(): UZA.TextBox {
                 return new UZA.TextBox(this.convFiledName("txtHihokenshaKubun"));
+            }
+
+            public txtHokenshaNo(): UZA.TextBoxNum {
+                return new UZA.TextBoxNum(this.convFiledName("txtHokenshaNo"));
+            }
+
+            public txtHokenshaName(): UZA.TextBox {
+                return new UZA.TextBox(this.convFiledName("txtHokenshaName"));
             }
 
             public txtHihokenshaName(): UZA.TextBox {
@@ -57,16 +57,16 @@ module DBZ {
                 return new UZA.TextBox(this.convFiledName("txtHihokenshaKana"));
             }
 
-            public txtSeibetsu(): UZA.TextBox {
-                return new UZA.TextBox(this.convFiledName("txtSeibetsu"));
-            }
-
             public txtSeinenYmd(): UZA.TextBoxDate {
                 return new UZA.TextBoxDate(this.convFiledName("txtSeinenYmd"));
             }
 
             public txtNenrei(): UZA.TextBoxNum {
                 return new UZA.TextBoxNum(this.convFiledName("txtNenrei"));
+            }
+
+            public txtSeibetsu(): UZA.TextBox {
+                return new UZA.TextBox(this.convFiledName("txtSeibetsu"));
             }
 
             public txtYubibNo(): UZA.TextBoxYubinNo {

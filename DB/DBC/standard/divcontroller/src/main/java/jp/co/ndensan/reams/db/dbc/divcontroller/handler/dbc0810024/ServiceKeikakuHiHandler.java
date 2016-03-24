@@ -206,6 +206,7 @@ public class ServiceKeikakuHiHandler {
         }
         div.getPanelServiceKeikakuhiUp1().getTxtTantoKaigoshien().setValue(entity200904.getEntity().get担当介護支援専門員番号());
         div.getPanelServiceKeikakuhiUp1().getTxtTanyiTanka().setValue(entity200904.getEntity().get単位数単価());
+        // TODO QA499 請求金額の設定
         div.getPanelServiceKeikakuhiUp1().getTxtGokeiTanyi().setValue(new Decimal(entity200904.getEntity().getサービス単位数合計()));
         div.getPanelServiceKeikakuhiUp1().getTxtSeikyugaku().setValue(new Decimal(entity200904.getEntity().get請求金額()));
     }

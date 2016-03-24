@@ -26,6 +26,10 @@ public class NaiheisyaKensuEntity {
      */
     private FlexibleYear fukaNendo;
     /**
+     * 徴収方法
+     */
+    private RString choshuHouhou;
+    /**
      * 段階
      */
     private RString dankai;

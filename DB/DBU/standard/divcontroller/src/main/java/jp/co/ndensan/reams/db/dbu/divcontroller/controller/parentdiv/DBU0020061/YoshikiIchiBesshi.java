@@ -38,6 +38,8 @@ public class YoshikiIchiBesshi {
 
     private static final RString 更新 = new RString("更新");
     private static final RString 削除 = new RString("削除");
+    private static final RString MSG_1 = new RString("当月末現在の世帯数");
+    private static final RString MSG_2 = new RString("前月末世帯数から増減した世帯数の計算結果");
 
     /**
      * 画面ロードメソッド
@@ -91,30 +93,39 @@ public class YoshikiIchiBesshi {
             JigyoHokokuGeppoHoseiHako.createInstance().deleteJigyoHokokuGeppoData(par);
             InformationMessage message = new InformationMessage(
                     UrInformationMessages.正常終了.getMessage().getCode(),
-                    UrInformationMessages.正常終了.getMessage().replace("削除").evaluate());
+                    UrInformationMessages.正常終了.getMessage().replace(削除.toString()).evaluate());
             return ResponseData.of(div).addMessage(message).respond();
         }
 
-        if (更新.equals(ViewStateHolder.get(ViewStateKeys.状態, RString.class))) {
-            List<JigyoHokokuTokeiData> 修正データ = handler.get修正データ();
-            if (修正データ.isEmpty() && !ResponseHolder.isReRequest()) {
-                throw new ApplicationException(UrErrorMessages.編集なしで更新不可.getMessage());
+        List<JigyoHokokuTokeiData> 修正データ = handler.get修正データ();
+        if (修正データ.isEmpty() && !ResponseHolder.isReRequest()) {
+            throw new ApplicationException(UrErrorMessages.編集なしで更新不可.getMessage());
+        }
+        if (handler.is世帯数整合性チェックNG()) {
+            if (!ResponseHolder.isReRequest()) {
+                QuestionMessage message = new QuestionMessage(UrWarningMessages.相違.getMessage().getCode(),
+                        UrWarningMessages.相違.getMessage().replace(
+                                MSG_1.toString(), MSG_2.toString()).evaluate());
+                return ResponseData.of(div).addMessage(message).respond();
             }
-            if (handler.is世帯数整合性チェックNG()) {
-                return get処理実行の確認(div);
-            } else if (!ResponseHolder.isReRequest()) {
+            if (new RString(UrWarningMessages.相違.getMessage().getCode()).equals(ResponseHolder.getMessageCode())
+                    && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
                 QuestionMessage message = new QuestionMessage(UrQuestionMessages.処理実行の確認.getMessage().getCode(),
                         UrQuestionMessages.処理実行の確認.getMessage().evaluate());
                 return ResponseData.of(div).addMessage(message).respond();
             }
-            if (new RString(UrQuestionMessages.処理実行の確認.getMessage().getCode()).equals(ResponseHolder.getMessageCode())
-                    && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
-                handler.update(修正データ);
-                InformationMessage message = new InformationMessage(
-                        UrInformationMessages.正常終了.getMessage().getCode(),
-                        UrInformationMessages.正常終了.getMessage().replace("更新").evaluate());
-                return ResponseData.of(div).addMessage(message).respond();
-            }
+        } else if (!ResponseHolder.isReRequest()) {
+            QuestionMessage message = new QuestionMessage(UrQuestionMessages.処理実行の確認.getMessage().getCode(),
+                    UrQuestionMessages.処理実行の確認.getMessage().evaluate());
+            return ResponseData.of(div).addMessage(message).respond();
+        }
+        if (new RString(UrQuestionMessages.処理実行の確認.getMessage().getCode()).equals(ResponseHolder.getMessageCode())
+                && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
+            handler.update(修正データ);
+            InformationMessage message = new InformationMessage(
+                    UrInformationMessages.正常終了.getMessage().getCode(),
+                    UrInformationMessages.正常終了.getMessage().replace(更新.toString()).evaluate());
+            return ResponseData.of(div).addMessage(message).respond();
         }
         if (new RString(UrInformationMessages.正常終了.getMessage().getCode()).equals(ResponseHolder.getMessageCode())
                 && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
@@ -127,28 +138,12 @@ public class YoshikiIchiBesshi {
     private void getMessage(YoshikiIchiBesshiDiv div) {
         if (削除.equals(ViewStateHolder.get(ViewStateKeys.状態, RString.class))) {
             div.getKanryoMessage().getCcdKanryoMessage().setSuccessMessage(new RString(
-                    UrInformationMessages.正常終了.getMessage().replace("削除").evaluate()));
+                    UrInformationMessages.正常終了.getMessage().replace(削除.toString()).evaluate()));
         }
         if (更新.equals(ViewStateHolder.get(ViewStateKeys.状態, RString.class))) {
             div.getKanryoMessage().getCcdKanryoMessage().setSuccessMessage(new RString(
-                    UrInformationMessages.正常終了.getMessage().replace("更新").evaluate()));
+                    UrInformationMessages.正常終了.getMessage().replace(更新.toString()).evaluate()));
         }
-    }
-
-    private ResponseData<YoshikiIchiBesshiDiv> get処理実行の確認(YoshikiIchiBesshiDiv div) {
-        if (!ResponseHolder.isReRequest()) {
-            QuestionMessage message = new QuestionMessage(UrWarningMessages.相違.getMessage().getCode(),
-                    UrWarningMessages.相違.getMessage().replace(
-                            "当月末現在の世帯数", "前月末世帯数から増減した世帯数の計算結果").evaluate());
-            return ResponseData.of(div).addMessage(message).respond();
-        }
-        if (new RString(UrWarningMessages.相違.getMessage().getCode()).equals(ResponseHolder.getMessageCode())
-                && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
-            QuestionMessage message = new QuestionMessage(UrQuestionMessages.処理実行の確認.getMessage().getCode(),
-                    UrQuestionMessages.処理実行の確認.getMessage().evaluate());
-            return ResponseData.of(div).addMessage(message).respond();
-        }
-        return ResponseData.of(div).respond();
     }
 
     /**

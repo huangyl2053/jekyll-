@@ -144,13 +144,6 @@ public class NinnteiChousaKekkaTouroku1Handler {
     private static final RString 在宅 = new RString("在宅");
     private static final RString 施設 = new RString("施設");
     private static final RString 介護予防 = new RString("（介護予防）");
-    private static final RString モードDAIGUN = new RString("Dai1gun");
-    private static final RString モードDA2GUN = new RString("Dai2gun");
-    private static final RString モードDA3GUN = new RString("Dai3gun");
-    private static final RString モードDA4GUN = new RString("Dai4gun");
-    private static final RString モードDA5GUN = new RString("Dai5gun");
-    private static final RString モードDA6GUN = new RString("Dai6gun");
-    private static final RString モードDA7GUN = new RString("Dai7gun");
     private static final RString カンマ = new RString(",");
     private static final int 住宅改修_連番 = 1;
     private static final int 市町村特別給付_連番 = 1;
@@ -206,13 +199,6 @@ public class NinnteiChousaKekkaTouroku1Handler {
         div.getCcdChosaJisshishaJoho().intialize(model);
         ViewStateHolder.put(Dbe2210001Keys.実施場所, div.getCcdChosaJisshishaJoho().getDdlChosaJisshiBasho().getSelectedKey());
 
-        div.getCcdIchigunKihonChosa().onLoad(temp_申請書管理番号, new RString(temp_認定調査履歴番号.toString()), モードDAIGUN);
-        div.getCcdNigunKihonChosa().onLoad(temp_申請書管理番号, new RString(temp_認定調査履歴番号.toString()), モードDA2GUN);
-        div.getCcdSangunKihonChosa().onLoad(temp_申請書管理番号, new RString(temp_認定調査履歴番号.toString()), モードDA3GUN);
-        div.getCcdYongunKihonChosa().onLoad(temp_申請書管理番号, new RString(temp_認定調査履歴番号.toString()), モードDA4GUN);
-        div.getCcdGogun().onLoad(temp_申請書管理番号, new RString(temp_認定調査履歴番号.toString()), モードDA5GUN);
-        div.getCcdTokubetsuIryoKihonChosa().onLoad(temp_申請書管理番号, new RString(temp_認定調査履歴番号.toString()), モードDA6GUN);
-        div.getCcdSeikatsuJiritsudoKihonchosa().onLoad(temp_申請書管理番号, new RString(temp_認定調査履歴番号.toString()), モードDA7GUN);
         初期の基本調査の保存();
 
         RString 認定調査委託先コード = div.getCcdChosaJisshishaJoho().getDdlShozokuKikan().getSelectedValue();
@@ -320,6 +306,7 @@ public class NinnteiChousaKekkaTouroku1Handler {
             ViewStateHolder.put(Dbe2210001Keys.初期の施設連絡先, 施設連絡先);
 
             div.getTabChosaBasho().setSelectedItem(new tplShisetsuDiv());
+            div.getRadGenzaiservis().setDisabled(Boolean.TRUE);
             ViewStateHolder.put(Dbe2210001Keys.現在の概況調査場所, 施設);
             ViewStateHolder.put(Dbe2210001Keys.初期の概況調査場所, 施設);
             div.getRadGenzaiservis().setSelectedKey(なし_選択);
@@ -881,9 +868,8 @@ public class NinnteiChousaKekkaTouroku1Handler {
      * 利用サービス前半or後半の切り替え処理です。
      *
      * @param 現在の選択 現在サービス区分の選択値
-     * @param 元の選択 元のサービス区分の選択値
      */
-    public void 利用サービス前半or後半の切り替え(RString 現在の選択, RString 元の選択) {
+    public void 利用サービス前半or後半の切り替え(RString 現在の選択) {
 
         if (予防給付サービス_選択.toString().equalsIgnoreCase(現在の選択.toString())) {
             利用サービス前半Grid表示();
@@ -1109,91 +1095,93 @@ public class NinnteiChousaKekkaTouroku1Handler {
     }
 
     private RString get基本調査() {
-        List<RString> 麻痺List = div.getCcdIchigunKihonChosa().getDaiichigunShintaiKino().getChkMahi().getSelectedKeys();
-        RString 麻痺 = RString.EMPTY;
-        for (RString val : 麻痺List) {
-            麻痺 = 麻痺.concat(val);
-        }
-        List<RString> 拘縮List = div.getCcdIchigunKihonChosa().getDaiichigunShintaiKino().getChkKoshuku().getSelectedKeys();
-        RString 拘縮 = RString.EMPTY;
-        for (RString val : 拘縮List) {
-            拘縮 = 拘縮.concat(val);
-        }
-        RString 第1群 = 麻痺.concat(拘縮)
-                .concat(div.getCcdIchigunKihonChosa().getDaiichigunShintaiKino().getRadNeKaeri().getSelectedKey())
-                .concat(div.getCcdIchigunKihonChosa().getDaiichigunShintaiKino().getRadOkiAgari().getSelectedKey())
-                .concat(div.getCcdIchigunKihonChosa().getDaiichigunShintaiKino().getRadZai().getSelectedKey())
-                .concat(div.getCcdIchigunKihonChosa().getDaiichigunShintaiKino().getRadRyoAshi().getSelectedKey())
-                .concat(div.getCcdIchigunKihonChosa().getDaiichigunShintaiKino().getRadBuko().getSelectedKey())
-                .concat(div.getCcdIchigunKihonChosa().getDaiichigunShintaiKino().getRadTachiAgari().getSelectedKey())
-                .concat(div.getCcdIchigunKihonChosa().getDaiichigunShintaiKino().getRadKataAshi().getSelectedKey())
-                .concat(div.getCcdIchigunKihonChosa().getDaiichigunShintaiKino().getRadSenshin().getSelectedKey())
-                .concat(div.getCcdIchigunKihonChosa().getDaiichigunShintaiKino().getRadTumeKiri().getSelectedKey())
-                .concat(div.getCcdIchigunKihonChosa().getDaiichigunShintaiKino().getRadShiryoku().getSelectedKey())
-                .concat(div.getCcdIchigunKihonChosa().getDaiichigunShintaiKino().getRadChoryoku().getSelectedKey());
 
-        RString 第2群 = div.getCcdNigunKihonChosa().getSeikatsuKinou().getRadIjyo().getSelectedKey()
-                .concat(div.getCcdNigunKihonChosa().getSeikatsuKinou().getRadIdou().getSelectedKey())
-                .concat(div.getCcdNigunKihonChosa().getSeikatsuKinou().getRadEnka().getSelectedKey())
-                .concat(div.getCcdNigunKihonChosa().getSeikatsuKinou().getRadShokuji().getSelectedKey())
-                .concat(div.getCcdNigunKihonChosa().getSeikatsuKinou().getRadHainyo().getSelectedKey())
-                .concat(div.getCcdNigunKihonChosa().getSeikatsuKinou().getRadHaiben().getSelectedKey())
-                .concat(div.getCcdNigunKihonChosa().getSeikatsuKinou().getRadKokou().getSelectedKey())
-                .concat(div.getCcdNigunKihonChosa().getSeikatsuKinou().getRadSengan().getSelectedKey())
-                .concat(div.getCcdNigunKihonChosa().getSeikatsuKinou().getRadSeihatsu().getSelectedKey())
-                .concat(div.getCcdNigunKihonChosa().getSeikatsuKinou().getRadUwagi().getSelectedKey())
-                .concat(div.getCcdNigunKihonChosa().getSeikatsuKinou().getRadZubon().getSelectedKey())
-                .concat(div.getCcdNigunKihonChosa().getSeikatsuKinou().getRadHindo().getSelectedKey());
-
-        RString 第3群 = div.getCcdSangunKihonChosa().getNinchiKinou().getRadIshiDentatsu().getSelectedKey()
-                .concat(div.getCcdSangunKihonChosa().getNinchiKinou().getRadNikka().getSelectedKey())
-                .concat(div.getCcdSangunKihonChosa().getNinchiKinou().getRadInfo().getSelectedKey())
-                .concat(div.getCcdSangunKihonChosa().getNinchiKinou().getRadDankiKioku().getSelectedKey())
-                .concat(div.getCcdSangunKihonChosa().getNinchiKinou().getRadNameInfo().getSelectedKey())
-                .concat(div.getCcdSangunKihonChosa().getNinchiKinou().getRadKisetsu().getSelectedKey())
-                .concat(div.getCcdSangunKihonChosa().getNinchiKinou().getRadBasho().getSelectedKey())
-                .concat(div.getCcdSangunKihonChosa().getNinchiKinou().getRadHaikai().getSelectedKey())
-                .concat(div.getCcdSangunKihonChosa().getNinchiKinou().getRadModoru().getSelectedKey());
-
-        RString 第4群 = div.getCcdYongunKihonChosa().getKoudoShogai().getRadbtnHiryaku().getSelectedKey()
-                .concat(div.getCcdYongunKihonChosa().getKoudoShogai().getRadTukuriHanashi().getSelectedKey())
-                .concat(div.getCcdYongunKihonChosa().getKoudoShogai().getRadKanjyo().getSelectedKey())
-                .concat(div.getCcdYongunKihonChosa().getKoudoShogai().getRadChuyaku().getSelectedKey())
-                .concat(div.getCcdYongunKihonChosa().getKoudoShogai().getRadOnajiHanashi().getSelectedKey())
-                .concat(div.getCcdYongunKihonChosa().getKoudoShogai().getRadBigVoice().getSelectedKey())
-                .concat(div.getCcdYongunKihonChosa().getKoudoShogai().getRadTeikou().getSelectedKey())
-                .concat(div.getCcdYongunKihonChosa().getKoudoShogai().getRadOchituki().getSelectedKey())
-                .concat(div.getCcdYongunKihonChosa().getKoudoShogai().getRadOutLonly().getSelectedKey())
-                .concat(div.getCcdYongunKihonChosa().getKoudoShogai().getRadShushu().getSelectedKey())
-                .concat(div.getCcdYongunKihonChosa().getKoudoShogai().getRadKowasu().getSelectedKey())
-                .concat(div.getCcdYongunKihonChosa().getKoudoShogai().getRadMonoWasure().getSelectedKey())
-                .concat(div.getCcdYongunKihonChosa().getKoudoShogai().getRadHitoriWarai().getSelectedKey())
-                .concat(div.getCcdYongunKihonChosa().getKoudoShogai().getRadKateKodo().getSelectedKey())
-                .concat(div.getCcdYongunKihonChosa().getKoudoShogai().getRadMatomeNai().getSelectedKey());
-
-        RString 第5群 = div.getCcdGogun().getShakaiSekatsu().getRadKusuri().getSelectedKey()
-                .concat(div.getCcdGogun().getShakaiSekatsu().getRadKingakuKanri().getSelectedKey())
-                .concat(div.getCcdGogun().getShakaiSekatsu().getRadIshiKetei().getSelectedKey())
-                .concat(div.getCcdGogun().getShakaiSekatsu().getRadShudan().getSelectedKey())
-                .concat(div.getCcdGogun().getShakaiSekatsu().getRadKaiMono().getSelectedKey())
-                .concat(div.getCcdGogun().getShakaiSekatsu().getRadKantanChori().getSelectedKey());
-
-        RString 処置内容 = RString.EMPTY;
-        RString 特別な対応 = RString.EMPTY;
-        List<RString> 処置内容List = div.getCcdTokubetsuIryoKihonChosa().getTokubetsuIryo().getChkShochiNaiyo().getSelectedKeys();
-        for (RString val : 処置内容List) {
-            処置内容 = 処置内容.concat(val);
-        }
-        List<RString> 特別な対応List = div.getCcdTokubetsuIryoKihonChosa().getTokubetsuIryo().getChkTokiTaiou().getSelectedKeys();
-        for (RString val : 特別な対応List) {
-            特別な対応 = 特別な対応.concat(val);
-        }
-        RString 特別な医療 = 処置内容.concat(特別な対応);
-
-        RString 生活自立度 = div.getCcdSeikatsuJiritsudoKihonchosa().getJiritsudo().getRadShogaiKoreisha().getSelectedKey()
-                .concat(div.getCcdSeikatsuJiritsudoKihonchosa().getJiritsudo().getRadNinchishaJiritsudo().getSelectedKey());
-
-        return 第1群.concat(第2群).concat(第3群).concat(第4群).concat(第5群).concat(特別な医療).concat(生活自立度);
+//        List<RString> 麻痺List = div.getCcdIchigunKihonChosa().getDaiichigunShintaiKino().getChkMahi().getSelectedKeys();
+//        RString 麻痺 = RString.EMPTY;
+//        for (RString val : 麻痺List) {
+//            麻痺 = 麻痺.concat(val);
+//        }
+//        List<RString> 拘縮List = div.getCcdIchigunKihonChosa().getDaiichigunShintaiKino().getChkKoshuku().getSelectedKeys();
+//        RString 拘縮 = RString.EMPTY;
+//        for (RString val : 拘縮List) {
+//            拘縮 = 拘縮.concat(val);
+//        }
+//        RString 第1群 = 麻痺.concat(拘縮)
+//                .concat(div.getCcdIchigunKihonChosa().getDaiichigunShintaiKino().getRadNeKaeri().getSelectedKey())
+//                .concat(div.getCcdIchigunKihonChosa().getDaiichigunShintaiKino().getRadOkiAgari().getSelectedKey())
+//                .concat(div.getCcdIchigunKihonChosa().getDaiichigunShintaiKino().getRadZai().getSelectedKey())
+//                .concat(div.getCcdIchigunKihonChosa().getDaiichigunShintaiKino().getRadRyoAshi().getSelectedKey())
+//                .concat(div.getCcdIchigunKihonChosa().getDaiichigunShintaiKino().getRadBuko().getSelectedKey())
+//                .concat(div.getCcdIchigunKihonChosa().getDaiichigunShintaiKino().getRadTachiAgari().getSelectedKey())
+//                .concat(div.getCcdIchigunKihonChosa().getDaiichigunShintaiKino().getRadKataAshi().getSelectedKey())
+//                .concat(div.getCcdIchigunKihonChosa().getDaiichigunShintaiKino().getRadSenshin().getSelectedKey())
+//                .concat(div.getCcdIchigunKihonChosa().getDaiichigunShintaiKino().getRadTumeKiri().getSelectedKey())
+//                .concat(div.getCcdIchigunKihonChosa().getDaiichigunShintaiKino().getRadShiryoku().getSelectedKey())
+//                .concat(div.getCcdIchigunKihonChosa().getDaiichigunShintaiKino().getRadChoryoku().getSelectedKey());
+//
+//        RString 第2群 = div.getCcdNigunKihonChosa().getSeikatsuKinou().getRadIjyo().getSelectedKey()
+//                .concat(div.getCcdNigunKihonChosa().getSeikatsuKinou().getRadIdou().getSelectedKey())
+//                .concat(div.getCcdNigunKihonChosa().getSeikatsuKinou().getRadEnka().getSelectedKey())
+//                .concat(div.getCcdNigunKihonChosa().getSeikatsuKinou().getRadShokuji().getSelectedKey())
+//                .concat(div.getCcdNigunKihonChosa().getSeikatsuKinou().getRadHainyo().getSelectedKey())
+//                .concat(div.getCcdNigunKihonChosa().getSeikatsuKinou().getRadHaiben().getSelectedKey())
+//                .concat(div.getCcdNigunKihonChosa().getSeikatsuKinou().getRadKokou().getSelectedKey())
+//                .concat(div.getCcdNigunKihonChosa().getSeikatsuKinou().getRadSengan().getSelectedKey())
+//                .concat(div.getCcdNigunKihonChosa().getSeikatsuKinou().getRadSeihatsu().getSelectedKey())
+//                .concat(div.getCcdNigunKihonChosa().getSeikatsuKinou().getRadUwagi().getSelectedKey())
+//                .concat(div.getCcdNigunKihonChosa().getSeikatsuKinou().getRadZubon().getSelectedKey())
+//                .concat(div.getCcdNigunKihonChosa().getSeikatsuKinou().getRadHindo().getSelectedKey());
+//
+//        RString 第3群 = div.getCcdSangunKihonChosa().getNinchiKinou().getRadIshiDentatsu().getSelectedKey()
+//                .concat(div.getCcdSangunKihonChosa().getNinchiKinou().getRadNikka().getSelectedKey())
+//                .concat(div.getCcdSangunKihonChosa().getNinchiKinou().getRadInfo().getSelectedKey())
+//                .concat(div.getCcdSangunKihonChosa().getNinchiKinou().getRadDankiKioku().getSelectedKey())
+//                .concat(div.getCcdSangunKihonChosa().getNinchiKinou().getRadNameInfo().getSelectedKey())
+//                .concat(div.getCcdSangunKihonChosa().getNinchiKinou().getRadKisetsu().getSelectedKey())
+//                .concat(div.getCcdSangunKihonChosa().getNinchiKinou().getRadBasho().getSelectedKey())
+//                .concat(div.getCcdSangunKihonChosa().getNinchiKinou().getRadHaikai().getSelectedKey())
+//                .concat(div.getCcdSangunKihonChosa().getNinchiKinou().getRadModoru().getSelectedKey());
+//
+//        RString 第4群 = div.getCcdYongunKihonChosa().getKoudoShogai().getRadbtnHiryaku().getSelectedKey()
+//                .concat(div.getCcdYongunKihonChosa().getKoudoShogai().getRadTukuriHanashi().getSelectedKey())
+//                .concat(div.getCcdYongunKihonChosa().getKoudoShogai().getRadKanjyo().getSelectedKey())
+//                .concat(div.getCcdYongunKihonChosa().getKoudoShogai().getRadChuyaku().getSelectedKey())
+//                .concat(div.getCcdYongunKihonChosa().getKoudoShogai().getRadOnajiHanashi().getSelectedKey())
+//                .concat(div.getCcdYongunKihonChosa().getKoudoShogai().getRadBigVoice().getSelectedKey())
+//                .concat(div.getCcdYongunKihonChosa().getKoudoShogai().getRadTeikou().getSelectedKey())
+//                .concat(div.getCcdYongunKihonChosa().getKoudoShogai().getRadOchituki().getSelectedKey())
+//                .concat(div.getCcdYongunKihonChosa().getKoudoShogai().getRadOutLonly().getSelectedKey())
+//                .concat(div.getCcdYongunKihonChosa().getKoudoShogai().getRadShushu().getSelectedKey())
+//                .concat(div.getCcdYongunKihonChosa().getKoudoShogai().getRadKowasu().getSelectedKey())
+//                .concat(div.getCcdYongunKihonChosa().getKoudoShogai().getRadMonoWasure().getSelectedKey())
+//                .concat(div.getCcdYongunKihonChosa().getKoudoShogai().getRadHitoriWarai().getSelectedKey())
+//                .concat(div.getCcdYongunKihonChosa().getKoudoShogai().getRadKateKodo().getSelectedKey())
+//                .concat(div.getCcdYongunKihonChosa().getKoudoShogai().getRadMatomeNai().getSelectedKey());
+//
+//        RString 第5群 = div.getCcdGogun().getShakaiSekatsu().getRadKusuri().getSelectedKey()
+//                .concat(div.getCcdGogun().getShakaiSekatsu().getRadKingakuKanri().getSelectedKey())
+//                .concat(div.getCcdGogun().getShakaiSekatsu().getRadIshiKetei().getSelectedKey())
+//                .concat(div.getCcdGogun().getShakaiSekatsu().getRadShudan().getSelectedKey())
+//                .concat(div.getCcdGogun().getShakaiSekatsu().getRadKaiMono().getSelectedKey())
+//                .concat(div.getCcdGogun().getShakaiSekatsu().getRadKantanChori().getSelectedKey());
+//
+//        RString 処置内容 = RString.EMPTY;
+//        RString 特別な対応 = RString.EMPTY;
+//        List<RString> 処置内容List = div.getCcdTokubetsuIryoKihonChosa().getTokubetsuIryo().getChkShochiNaiyo().getSelectedKeys();
+//        for (RString val : 処置内容List) {
+//            処置内容 = 処置内容.concat(val);
+//        }
+//        List<RString> 特別な対応List = div.getCcdTokubetsuIryoKihonChosa().getTokubetsuIryo().getChkTokiTaiou().getSelectedKeys();
+//        for (RString val : 特別な対応List) {
+//            特別な対応 = 特別な対応.concat(val);
+//        }
+//        RString 特別な医療 = 処置内容.concat(特別な対応);
+//
+//        RString 生活自立度 = div.getCcdSeikatsuJiritsudoKihonchosa().getJiritsudo().getRadShogaiKoreisha().getSelectedKey()
+//                .concat(div.getCcdSeikatsuJiritsudoKihonchosa().getJiritsudo().getRadNinchishaJiritsudo().getSelectedKey());
+//
+//        return 第1群.concat(第2群).concat(第3群).concat(第4群).concat(第5群).concat(特別な医療).concat(生活自立度);
+        return RString.EMPTY;
     }
 
     /**

@@ -111,7 +111,7 @@ public class TsukibetsuHokenryoDankai {
         }
     }
 
-    protected Map<RString, HokenryoDankai> createHokenryoDankaiMap() {
+    public Map<RString, HokenryoDankai> createHokenryoDankaiMap() {
         Map<RString, HokenryoDankai> hokenryoDankaiMap = new HashMap<>();
 
         hokenryoDankaiMap.put(new RString("1"), get保険料段階01月());

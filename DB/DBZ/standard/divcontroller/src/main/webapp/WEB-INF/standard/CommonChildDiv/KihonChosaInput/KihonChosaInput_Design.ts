@@ -20,6 +20,14 @@ module DBZ {
                 return "onClick_chkKoshukuChange";
             }
 
+            public static onClick_btnConfirm(): string {
+                return "onClick_btnConfirm";
+            }
+
+            public static onClick_btnBack(): string {
+                return "onClick_btnBack";
+            }
+
         }
 
         export class Controls {
@@ -783,6 +791,14 @@ module DBZ {
 
             public radNinchishaJiritsudo(): UZA.RadioButton {
                 return new UZA.RadioButton(this.convFiledName("radNinchishaJiritsudo"));
+            }
+
+            public btnConfirm(): UZA.Button {
+                return new UZA.Button(this.convFiledName("btnConfirm"));
+            }
+
+            public btnBack(): UZA.Button {
+                return new UZA.Button(this.convFiledName("btnBack"));
             }
 
         }

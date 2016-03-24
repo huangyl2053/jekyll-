@@ -371,15 +371,12 @@ public class NinteiChosaScheduleInput {
      */
     public ResponseData<NinteiChosaScheduleInputDiv> onClick_KanRyo(NinteiChosaScheduleInputDiv div) {
         FlexibleDate 設定日 = ViewStateHolder.get(ViewStateKeys.認定調査スケジュール登録_設定日, FlexibleDate.class);
-        if (設定日 != null && !設定日.isEmpty()) {
-            temp_設定日 = new RString(設定日.toString());
-        }
         temp_保険者 = ViewStateHolder.get(ViewStateKeys.認定調査スケジュール登録_保険者, RString.class);
         temp_調査員状況02 = ViewStateHolder.get(ViewStateKeys.認定調査スケジュール登録_調査員状況02, RString.class);
         temp_認定調査委託先コード = ViewStateHolder.get(ViewStateKeys.認定調査スケジュール登録_認定調査委託先コード, RString.class);
         temp_地区コード = ViewStateHolder.get(ViewStateKeys.認定調査スケジュール登録_地区コード, RString.class);
         画面ステート = ViewStateHolder.get(ViewStateKeys.認定調査スケジュール登録_モード, RString.class);
-        ViewStateHolder.put(ViewStateKeys.認定調査スケジュール登録_設定日, temp_設定日);
+        ViewStateHolder.put(ViewStateKeys.認定調査スケジュール登録_設定日, 設定日);
         ViewStateHolder.put(ViewStateKeys.認定調査スケジュール登録_保険者, temp_保険者);
         ViewStateHolder.put(ViewStateKeys.認定調査スケジュール登録_調査員状況02, temp_調査員状況02);
         ViewStateHolder.put(ViewStateKeys.認定調査スケジュール登録_認定調査委託先コード, temp_認定調査委託先コード);

@@ -27,10 +27,6 @@ var DBZ;
             Controls.prototype.KaigoKanryoMessage = function () {
                 return new UZA.Panel(this.convFiledNameSelf());
             };
-
-            Controls.prototype.ccdKanryoMessage = function () {
-                return new URZ.KanryoMessage.ModeController(this.convFiledName("ccdKanryoMessage"));
-            };
             return Controls;
         })();
         KaigoKanryoMessage.Controls = Controls;

@@ -48,10 +48,15 @@ public class NenreitotatsuYoteishaIchiranhyoReport extends Report<NenreitotatsuY
         this.bodyItemList = itemList;
     }
 
+    /**
+     * 年齢到達予定者一覧表writeです。
+     *
+     * @param reportSourceWriter 年齢到達予定者一覧表Source
+     */
     @Override
     public void writeBy(ReportSourceWriter<NenreitotatsuYoteishaIchiranhyoReportSource> reportSourceWriter) {
         for (NenreitotatsuYoteishaIchiranhyoBodyItem bodyItem : bodyItemList) {
-            NenreitotatsuYoteishaIchiranhyoHeaderEditor headerEditor = new NenreitotatsuYoteishaIchiranhyoHeaderEditor(headItem);
+            INenreitotatsuYoteishaIchiranhyoEditor headerEditor = new NenreitotatsuYoteishaIchiranhyoHeaderEditor(headItem);
             NenreitotatsuYoteishaIchiranhyoBodyEditor bodyEditor = new NenreitotatsuYoteishaIchiranhyoBodyEditor(bodyItem);
             INenreitotatsuYoteishaIchiranhyoBuilder builder = new NenreitotatsuYoteishaIchiranhyoBuilderImpl(headerEditor, bodyEditor);
             reportSourceWriter.writeLine(builder);

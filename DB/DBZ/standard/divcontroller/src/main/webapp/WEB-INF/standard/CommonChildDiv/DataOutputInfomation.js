@@ -1,5 +1,5 @@
-var DBE;
-(function (DBE) {
+var DBZ;
+(function (DBZ) {
     (function (DataOutputInfomation) {
         var ModeController = (function () {
             function ModeController(fieldName) {
@@ -16,12 +16,12 @@ var DBE;
             return ModeController;
         })();
         DataOutputInfomation.ModeController = ModeController;
-    })(DBE.DataOutputInfomation || (DBE.DataOutputInfomation = {}));
-    var DataOutputInfomation = DBE.DataOutputInfomation;
-})(DBE || (DBE = {}));
+    })(DBZ.DataOutputInfomation || (DBZ.DataOutputInfomation = {}));
+    var DataOutputInfomation = DBZ.DataOutputInfomation;
+})(DBZ || (DBZ = {}));
 
-var DBE;
-(function (DBE) {
+var DBZ;
+(function (DBZ) {
     (function (DataOutputInfomation) {
         var PublicProperties = (function () {
             function PublicProperties(fieldName) {
@@ -35,6 +35,6 @@ var DBE;
             return PublicProperties;
         })();
         DataOutputInfomation.PublicProperties = PublicProperties;
-    })(DBE.DataOutputInfomation || (DBE.DataOutputInfomation = {}));
-    var DataOutputInfomation = DBE.DataOutputInfomation;
-})(DBE || (DBE = {}));
+    })(DBZ.DataOutputInfomation || (DBZ.DataOutputInfomation = {}));
+    var DataOutputInfomation = DBZ.DataOutputInfomation;
+})(DBZ || (DBZ = {}));

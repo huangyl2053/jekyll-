@@ -4,6 +4,9 @@ var DBD;
         var Events = (function () {
             function Events() {
             }
+            Events.onClick_BtnClose = function () {
+                return "onClick_BtnClose";
+            };
             return Events;
         })();
         GemmenShokai.Events = Events;
@@ -310,6 +313,10 @@ var DBD;
 
             Controls.prototype.txtFutanWariaiShuryoYMD = function () {
                 return new UZA.TextBoxFlexibleDate(this.convFiledName("txtFutanWariaiShuryoYMD"));
+            };
+
+            Controls.prototype.btnClose = function () {
+                return new UZA.Button(this.convFiledName("btnClose"));
             };
             return Controls;
         })();

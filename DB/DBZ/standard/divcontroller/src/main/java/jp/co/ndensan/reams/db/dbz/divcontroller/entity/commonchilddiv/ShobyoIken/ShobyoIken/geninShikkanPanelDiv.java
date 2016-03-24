@@ -6,6 +6,8 @@ package jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.ShobyoIke
  */
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import jp.co.ndensan.reams.ur.urz.divcontroller.entity.commonchilddiv.CodeInput.CodeInputDiv;
+import jp.co.ndensan.reams.ur.urz.divcontroller.entity.commonchilddiv.CodeInput.ICodeInputDiv;
 import jp.co.ndensan.reams.uz.uza.ui.binding.*;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 
@@ -15,7 +17,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
  * @author 自動生成
  */
 public class geninShikkanPanelDiv extends Panel {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2015-11-30_08-54-50">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-01-15_09-59-03">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -23,7 +25,7 @@ public class geninShikkanPanelDiv extends Panel {
      * private + コントロール名 + フィールド名 の文字列を作成
      */
     @JsonProperty("btnAdd")
-    private ButtonDialog btnAdd;
+    private Button btnAdd;
     @JsonProperty("dgGenyin")
     private DataGrid<dgGenyin_Row> dgGenyin;
     @JsonProperty("geninShikkanShosai")
@@ -40,7 +42,7 @@ public class geninShikkanPanelDiv extends Panel {
      * @return btnAdd
      */
     @JsonProperty("btnAdd")
-    public ButtonDialog getBtnAdd() {
+    public Button getBtnAdd() {
         return btnAdd;
     }
 
@@ -49,7 +51,7 @@ public class geninShikkanPanelDiv extends Panel {
      * @param btnAdd btnAdd
      */
     @JsonProperty("btnAdd")
-    public void setBtnAdd(ButtonDialog btnAdd) {
+    public void setBtnAdd(Button btnAdd) {
         this.btnAdd = btnAdd;
     }
 
@@ -93,33 +95,8 @@ public class geninShikkanPanelDiv extends Panel {
      * [ ショートカットの作成 ]
      */
     @JsonIgnore
-    public TextBoxCode getTxtGeninShikkanCode() {
-        return this.getGeninShikkanShosai().getTxtGeninShikkanCode();
-    }
-
-    @JsonIgnore
-    public void  setTxtGeninShikkanCode(TextBoxCode txtGeninShikkanCode) {
-        this.getGeninShikkanShosai().setTxtGeninShikkanCode(txtGeninShikkanCode);
-    }
-
-    @JsonIgnore
-    public ButtonDialog getBtnToSearch() {
-        return this.getGeninShikkanShosai().getBtnToSearch();
-    }
-
-    @JsonIgnore
-    public void  setBtnToSearch(ButtonDialog btnToSearch) {
-        this.getGeninShikkanShosai().setBtnToSearch(btnToSearch);
-    }
-
-    @JsonIgnore
-    public TextBox getTxtMeisho() {
-        return this.getGeninShikkanShosai().getTxtMeisho();
-    }
-
-    @JsonIgnore
-    public void  setTxtMeisho(TextBox txtMeisho) {
-        this.getGeninShikkanShosai().setTxtMeisho(txtMeisho);
+    public ICodeInputDiv getCcdCodeInputGeninShikkan() {
+        return this.getGeninShikkanShosai().getCcdCodeInputGeninShikkan();
     }
 
     @JsonIgnore

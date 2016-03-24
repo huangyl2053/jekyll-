@@ -349,7 +349,9 @@ public class HonsanteiIdoKanendoFukaKakutei {
             }
         }
         // TODO QA310 調定年度
-        save処理日付管理(FlexibleYear.MAX);
+        RString choteiNendo = DbBusinessConifg.get(ConfigNameDBB.日付関連_調定年度, RDate.getNowDate(),
+                SubGyomuCode.DBB介護賦課);
+        save処理日付管理(new FlexibleYear(choteiNendo.toString()));
     }
 
     @Transaction
@@ -360,7 +362,7 @@ public class HonsanteiIdoKanendoFukaKakutei {
         DbT7022ShoriDateKanriEntity shoriDateKanriEntity = shoriDateKanriDac.select最大年度内連番(
                 new FlexibleYear(choteiNendo.toString()));
         RString 最大年度内連番 = 連番;
-        if (shoriDateKanriEntity != null) {
+        if (shoriDateKanriEntity != null && shoriDateKanriEntity.getNendoNaiRenban() != null) {
             最大年度内連番 = new RString(String.format(FORMAT.toString(), new Integer(Integer.parseInt(shoriDateKanriEntity.
                     getNendoNaiRenban().toString()) + 1)));
         }

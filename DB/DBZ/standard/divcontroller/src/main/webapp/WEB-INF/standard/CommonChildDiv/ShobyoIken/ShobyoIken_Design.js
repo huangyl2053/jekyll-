@@ -61,7 +61,7 @@ var DBZ;
             };
 
             Controls.prototype.btnAdd = function () {
-                return new UZA.ButtonDialog(this.convFiledName("btnAdd"));
+                return new UZA.Button(this.convFiledName("btnAdd"));
             };
 
             Controls.prototype.dgGenyin = function () {
@@ -72,16 +72,8 @@ var DBZ;
                 return new UZA.Panel(this.convFiledName("geninShikkanShosai"));
             };
 
-            Controls.prototype.txtGeninShikkanCode = function () {
-                return new UZA.TextBoxCode(this.convFiledName("txtGeninShikkanCode"));
-            };
-
-            Controls.prototype.btnToSearch = function () {
-                return new UZA.ButtonDialog(this.convFiledName("btnToSearch"));
-            };
-
-            Controls.prototype.txtMeisho = function () {
-                return new UZA.TextBox(this.convFiledName("txtMeisho"));
+            Controls.prototype.ccdCodeInputGeninShikkan = function () {
+                return new URZ.CodeInput.ModeController(this.convFiledName("ccdCodeInputGeninShikkan"));
             };
 
             Controls.prototype.radIsShutaruGeninShikkan = function () {

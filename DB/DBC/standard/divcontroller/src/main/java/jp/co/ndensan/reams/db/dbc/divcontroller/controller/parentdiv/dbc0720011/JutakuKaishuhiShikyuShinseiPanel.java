@@ -11,6 +11,7 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbc.business.core.basic.ShokanJutakuKaishu;
+import jp.co.ndensan.reams.db.dbc.business.core.basic.ShokanShinsei;
 import jp.co.ndensan.reams.db.dbc.business.core.jutakukaishusikyushinseiikkatushinsa.MiShinsaSikyuShinsei;
 import jp.co.ndensan.reams.db.dbc.business.core.jutakukaishusikyushinseiikkatushinsa.SaveIkkatuShinsaDate;
 import jp.co.ndensan.reams.db.dbc.definition.core.jutakukaishuhishikyushinsei.JutakuKaishuhiShikyuShinseiKeys;
@@ -73,8 +74,7 @@ public class JutakuKaishuhiShikyuShinseiPanel {
             List<MiShinsaSikyuShinsei> resultList = manager.getMiShinasaShikyuShinseiList(
                     new FlexibleDate(支給申請日開始.toDateString()),
                     new FlexibleDate(支給申請日終了.toDateString()));
-            List<MiShinsaSikyuShinsei> viewStateList = ViewStateHolder.get(JutakuKaishuhiShikyuShinseiKeys
-                    .申請一覧GridEntity, List.class);
+            List<MiShinsaSikyuShinsei> viewStateList = ViewStateHolder.get(JutakuKaishuhiShikyuShinseiKeys.申請一覧GridEntity, List.class);
             if (!resultList.isEmpty() && !viewStateList.isEmpty()) {
                 審査結果の再設定(viewStateList, resultList);
             }
@@ -127,9 +127,10 @@ public class JutakuKaishuhiShikyuShinseiPanel {
                 if (viewState.getEntity().get被保険者番号().equals(data.getEntity().get被保険者番号())
                         && viewState.getEntity().getサービス提供年月().equals(data.getEntity().getサービス提供年月())
                         && viewState.getEntity().get整理番号().equals(data.getEntity().get整理番号())) {
-                    viewState.getEntity().createBuilderForEdit().set住宅住所変更(data.getEntity().get住宅住所変更())
+                    ShokanShinsei entity = viewState.getEntity().createBuilderForEdit().set住宅住所変更(data.getEntity().get住宅住所変更())
                             .set要介護状態３段階変更(data.getEntity().get要介護状態３段階変更())
-                            .set審査結果(data.getEntity().get審査結果());
+                            .set審査結果(data.getEntity().get審査結果()).build();
+                    viewState.setEntity(entity);
                 }
             }
         }
@@ -302,8 +303,8 @@ public class JutakuKaishuhiShikyuShinseiPanel {
      * @return boolean
      */
     private boolean 要介護状態３段階変更チェック(HihokenshaNo 被保険者番号, FlexibleYearMonth サービス提供年月) {
-        JutakuKaishuYaokaigoJyotaiSandannkaiHanteiManager hanteiManager = 
-                JutakuKaishuYaokaigoJyotaiSandannkaiHanteiManager.createInstance();
+        JutakuKaishuYaokaigoJyotaiSandannkaiHanteiManager hanteiManager
+                = JutakuKaishuYaokaigoJyotaiSandannkaiHanteiManager.createInstance();
         return hanteiManager.checkYaokaigoJyotaiSandannkai(被保険者番号, サービス提供年月);
     }
 
@@ -321,7 +322,7 @@ public class JutakuKaishuhiShikyuShinseiPanel {
             boolean 限度リセットフラグ, Decimal 保険対象費用額) {
         JutakuKaishuShikyuGendogakuHantei gendogakuHantei = new JutakuKaishuShikyuGendogakuHantei(
                 JutakuKaishuJizenShinsei.createInstance());
-        return gendogakuHantei.checkJutakukaishuShikyuGendogaku(被保険者番号, サービス提供年月, 
+        return gendogakuHantei.checkJutakukaishuShikyuGendogaku(被保険者番号, サービス提供年月,
                 整理番号, 限度リセットフラグ, 保険対象費用額);
     }
 
@@ -334,7 +335,7 @@ public class JutakuKaishuhiShikyuShinseiPanel {
      */
     private List<SaveIkkatuShinsaDate> データ保存(List<dgMishinsaShikyuShinsei_Row> list, FlexibleDate 決定年月日) {
         List<MiShinsaSikyuShinsei> viewStateList = ViewStateHolder.get(
-                JutakuKaishuhiShikyuShinseiKeys.未審査支給申請一覧, 
+                JutakuKaishuhiShikyuShinseiKeys.未審査支給申請一覧,
                 List.class);
         List<SaveIkkatuShinsaDate> parameterList = new ArrayList<>();
         for (dgMishinsaShikyuShinsei_Row row : list) {
@@ -372,26 +373,16 @@ public class JutakuKaishuhiShikyuShinseiPanel {
                     } else if (承認する.equals(row.getTxtShinsaResult())) {
                         審査結果 = ShinsaNaiyoKubun.承認する.getコード();
                     }
-                    miShinsaSikyuShinsei.getEntity().createBuilderForEdit().set住宅住所変更(row.getTxtTenkyoReset())
-                            .set要介護状態３段階変更(row.getTxt3DankaiReset())
-                            .set審査結果(row.getTxtShinsaResult())
-                            .set支給申請審査区分(ShikyushinseiShinsaKubun.審査済.getコード())
-                            .set要介護状態３段階変更(要介護状態３段階変更)
-                            .set住宅住所変更(住宅住所変更)
-                            .set審査年月日(FlexibleDate.getNowDate())
-                            .set審査結果(審査結果);
+                    ShokanShinsei entity = miShinsaSikyuShinsei.getEntity().createBuilderForEdit()
+                            .set住宅住所変更(row.getTxtTenkyoReset()).set要介護状態３段階変更(row.getTxt3DankaiReset())
+                            .set審査結果(row.getTxtShinsaResult()).set支給申請審査区分(ShikyushinseiShinsaKubun.審査済.getコード())
+                            .set要介護状態３段階変更(要介護状態３段階変更).set住宅住所変更(住宅住所変更)
+                            .set審査年月日(FlexibleDate.getNowDate()).set審査結果(審査結果).build();
+                    SaveIkkatuShinsaDate date = new SaveIkkatuShinsaDate(entity, 被保険者番号, サービス提供年月,
+                            整理番号, 証記載保険者番号, 決定年月日, ShikibetsuCode.EMPTY, 支給決定区分, 支払金額);
+                    parameterList.add(date);
+                    break;
                 }
-                SaveIkkatuShinsaDate date = new SaveIkkatuShinsaDate(
-                        miShinsaSikyuShinsei.getEntity(),
-                        被保険者番号,
-                        サービス提供年月,
-                        整理番号,
-                        証記載保険者番号,
-                        決定年月日,
-                        ShikibetsuCode.EMPTY,
-                        支給決定区分,
-                        支払金額);
-                parameterList.add(date);
             }
         }
         return parameterList;

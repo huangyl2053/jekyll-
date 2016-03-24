@@ -347,7 +347,7 @@ public class KyufuShiharayiMeisaiPanelHandler {
                             事業者番号,
                             様式番号,
                             明細番号,
-                            new RString(String.valueOf(max連番))).createBuilderForEdit().build();
+                            new RString(String.format("%02d", max連番))).createBuilderForEdit().build();
                     entityAdded = buildshokanMeisai(entityAdded, row);
                     entityList.add(entityAdded.added());
                 }

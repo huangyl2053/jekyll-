@@ -305,9 +305,9 @@ public class KanendoFukaKakuteiHandler {
         }
         div.getKaNendoIdoFukaIchiran().getDgKanendoFukaIchiran().getDataSource().removeAll(
                 div.getKaNendoIdoFukaIchiran().getDgKanendoFukaIchiran().getSelectedItems());
-        CommonButtonHolder.setDisabledByCommonButtonFieldName(賦課対象外を削除, false);
+        CommonButtonHolder.setDisabledByCommonButtonFieldName(賦課対象外を削除, true);
         if (div.getKaNendoIdoFukaIchiran().getDgKanendoFukaIchiran().getTotalRecords() > 0) {
-            CommonButtonHolder.setDisabledByCommonButtonFieldName(確定処理, true);
+            CommonButtonHolder.setDisabledByCommonButtonFieldName(確定処理, false);
         }
     }
 

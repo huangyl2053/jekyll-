@@ -454,16 +454,6 @@ public class ServiceKeikakuHiDiv extends Panel {
     }
 
     @JsonIgnore
-    public TextBoxNum getTxtTanyisuTanka() {
-        return this.getPanelServiceKeikakuhiDown().getTxtTanyisuTanka();
-    }
-
-    @JsonIgnore
-    public void  setTxtTanyisuTanka(TextBoxNum txtTanyisuTanka) {
-        this.getPanelServiceKeikakuhiDown().setTxtTanyisuTanka(txtTanyisuTanka);
-    }
-
-    @JsonIgnore
     public TextBoxNum getTxtSeikyugakuDown() {
         return this.getPanelServiceKeikakuhiDown().getTxtSeikyugakuDown();
     }
@@ -471,6 +461,16 @@ public class ServiceKeikakuHiDiv extends Panel {
     @JsonIgnore
     public void  setTxtSeikyugakuDown(TextBoxNum txtSeikyugakuDown) {
         this.getPanelServiceKeikakuhiDown().setTxtSeikyugakuDown(txtSeikyugakuDown);
+    }
+
+    @JsonIgnore
+    public TextBoxNum getTxtTanyisuTanka() {
+        return this.getPanelServiceKeikakuhiDown().getTxtTanyisuTanka();
+    }
+
+    @JsonIgnore
+    public void  setTxtTanyisuTanka(TextBoxNum txtTanyisuTanka) {
+        this.getPanelServiceKeikakuhiDown().setTxtTanyisuTanka(txtTanyisuTanka);
     }
 
     @JsonIgnore

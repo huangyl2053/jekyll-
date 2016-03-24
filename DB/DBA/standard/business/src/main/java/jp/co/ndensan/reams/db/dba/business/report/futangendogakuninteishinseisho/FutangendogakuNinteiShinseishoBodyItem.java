@@ -25,10 +25,6 @@ public class FutangendogakuNinteiShinseishoBodyItem {
     private final RString hihokenshaTelNo;
     private final RString hihokenshaYubinNo;
     private final RString hihokenJusho;
-    private final RString shisetsuYubinNo;
-    private final RString shisetsuTelNo;
-    private final RString shisetsuJusho;
-    private final RString shisetsuMeisho;
     private final RString chuibun;
     private final RString ninshoshaYakushokuMei;
 
@@ -43,10 +39,6 @@ public class FutangendogakuNinteiShinseishoBodyItem {
      * @param seibetsu 被保険者性別
      * @param hihokenshaYubinNo 郵便番号
      * @param hihokenJusho 住所
-     * @param shisetsuYubinNo 入所（院）郵便番号
-     * @param shisetsuTelNo 入所（院）電話番号
-     * @param shisetsuJusho 入所（院）住所
-     * @param shisetsuMeisho 入所（院）名称
      * @param hihokenshaTelNo 電話番号
      * @param shiseibun 申請文
      * @param chuibun 注意文
@@ -61,10 +53,6 @@ public class FutangendogakuNinteiShinseishoBodyItem {
             RString hihokenshaTelNo,
             RString hihokenshaYubinNo,
             RString hihokenJusho,
-            RString shisetsuYubinNo,
-            RString shisetsuTelNo,
-            RString shisetsuJusho,
-            RString shisetsuMeisho,
             RString chuibun,
             RString ninshoshaYakushokuMei
     ) {
@@ -77,10 +65,6 @@ public class FutangendogakuNinteiShinseishoBodyItem {
         this.hihokenshaTelNo = hihokenshaTelNo;
         this.hihokenshaYubinNo = hihokenshaYubinNo;
         this.hihokenJusho = hihokenJusho;
-        this.shisetsuYubinNo = shisetsuYubinNo;
-        this.shisetsuTelNo = shisetsuTelNo;
-        this.shisetsuJusho = shisetsuJusho;
-        this.shisetsuMeisho = shisetsuMeisho;
         this.chuibun = chuibun;
         this.ninshoshaYakushokuMei = ninshoshaYakushokuMei;
     }
