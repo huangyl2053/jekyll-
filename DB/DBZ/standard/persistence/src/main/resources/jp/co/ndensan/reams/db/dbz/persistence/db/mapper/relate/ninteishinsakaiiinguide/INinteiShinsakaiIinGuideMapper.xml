@@ -17,16 +17,31 @@
             parameterType="jp.co.ndensan.reams.db.dbz.definition.mybatis.param.ninteishinsakaiiinguide.NinteiShinsakaiIinGuideMapperParameter">
         SELECT
         rgdb."DbT5594ShinsakaiIinJoho"."shinsakaiIinCode" AS "shinsakaiIinCode",
-        MAX(rgdb."DbT5594ShinsakaiIinJoho"."shinsakaiIinShimei") AS "shinsakaiIinShimei",
-        MAX(rgdb."DbT5594ShinsakaiIinJoho"."shinsakaiIinKanaShimei") AS "shinsakaiIinKanaShimei",
-        MAX(rgdb."DbT5594ShinsakaiIinJoho"."seibetsu") AS "seibetsu",
-        MAX(rgdb."DbT5594ShinsakaiIinJoho"."shinsakaiIinShikakuCode") AS "shinsakaiIinShikakuCode"        
+        rgdb."DbT5594ShinsakaiIinJoho"."shinsakaiIinShimei" AS "shinsakaiIinShimei",
+        rgdb."DbT5594ShinsakaiIinJoho"."shinsakaiIinKanaShimei" AS "shinsakaiIinKanaShimei",
+        rgdb."DbT5594ShinsakaiIinJoho"."seibetsu" AS "seibetsu",
+        rgdb."DbT5594ShinsakaiIinJoho"."shinsakaiIinShikakuCode" AS "shinsakaiIinShikakuCode" 
         FROM
         rgdb."DbT5594ShinsakaiIinJoho"
-        LEFT JOIN rgdb."DbT5595KaigoNinteiShinsakaiIinShozokuKikanJoho"
-        ON rgdb."DbT5594ShinsakaiIinJoho"."shinsakaiIinCode" = rgdb."DbT5595KaigoNinteiShinsakaiIinShozokuKikanJoho"."shinsakaiIinCode"
+        LEFT JOIN (
+        SELECT
+        rgdb."DbT5595KaigoNinteiShinsakaiIinShozokuKikanJoho"."shinsakaiIinCode" AS "shinsakaiIinCode",
+        rgdb."DbT5595KaigoNinteiShinsakaiIinShozokuKikanJoho"."remban" AS "remban",
+        rgdb."DbT5595KaigoNinteiShinsakaiIinShozokuKikanJoho"."shoKisaiHokenshaNo" AS "shoKisaiHokenshaNo",
+        rgdb."DbT5595KaigoNinteiShinsakaiIinShozokuKikanJoho"."shujiiIryokikanCode" AS "shujiiIryokikanCode",
+        rgdb."DbT5595KaigoNinteiShinsakaiIinShozokuKikanJoho"."shujiiCode" AS "shujiiCode",
+        rgdb."DbT5595KaigoNinteiShinsakaiIinShozokuKikanJoho"."ninteichosaItakusakiCode" AS "ninteichosaItakusakiCode",
+        rgdb."DbT5595KaigoNinteiShinsakaiIinShozokuKikanJoho"."ninteiChosainNo" AS "ninteiChosainNo",
+        rgdb."DbT5595KaigoNinteiShinsakaiIinShozokuKikanJoho"."sonotaKikanCode" AS "sonotaKikanCode",
+        row_number() 
+        OVER(PARTITION BY rgdb."DbT5595KaigoNinteiShinsakaiIinShozokuKikanJoho"."shinsakaiIinCode" 
+        ORDER BY rgdb."DbT5595KaigoNinteiShinsakaiIinShozokuKikanJoho"."remban" DESC) AS rnbn
+        FROM
+        rgdb."DbT5595KaigoNinteiShinsakaiIinShozokuKikanJoho"
+        ) AS DbT5595
+        ON rgdb."DbT5594ShinsakaiIinJoho"."shinsakaiIinCode" = DbT5595."shinsakaiIinCode"
         <where>
-            1=1
+            DbT5595.rnbn = 1
             <if test="isShinsakaiIinKaishiYMDFlag">
                 AND rgdb."DbT5594ShinsakaiIinJoho"."shinsakaiIinCode" <![CDATA[>=]]> #{shinsakaiIinCodeFrom}
             </if>
@@ -43,13 +58,13 @@
                 AND rgdb."DbT5594ShinsakaiIinJoho"."shinsakaiIinShikakuCode" = #{shinsakaiIinShikakuCode}
             </if>
             <if test="isShujiiIryokikanCodeFlag">
-                AND rgdb."DbT5595KaigoNinteiShinsakaiIinShozokuKikanJoho"."shujiiIryokikanCode" = #{shujiiIryokikanCode}
+                AND DbT5595."shujiiIryokikanCode" = #{shujiiIryokikanCode}
             </if>
             <if test="isNinteiChosainNoFlag">
-                AND rgdb."DbT5595KaigoNinteiShinsakaiIinShozokuKikanJoho"."ninteiChosainNo" = #{ninteiChosainNo}
+                AND DbT5595."ninteiChosainNo" = #{ninteiChosainNo}
             </if> 
             <if test="isSonotaKikanCodeFlag">
-                AND rgdb."DbT5595KaigoNinteiShinsakaiIinShozokuKikanJoho"."sonotaKikanCode" = #{sonotaKikanCode}
+                AND DbT5595."sonotaKikanCode" = #{sonotaKikanCode}
             </if>
             <if test="kikenFlag == '1'">
                 AND rgdb."DbT5594ShinsakaiIinJoho"."shinsakaiIinKaishiYMD" <![CDATA[<=]]> #{systemDate}
@@ -57,7 +72,7 @@
             </if>
             <if test="kikenFlag == '2'">
                 AND (rgdb."DbT5594ShinsakaiIinJoho"."shinsakaiIinKaishiYMD" <![CDATA[>=]]> #{systemDate}
-                    OR rgdb."DbT5594ShinsakaiIinJoho"."shinsakaiIinShuryoYMD" <![CDATA[<=]]> #{systemDate})
+                OR rgdb."DbT5594ShinsakaiIinJoho"."shinsakaiIinShuryoYMD" <![CDATA[<=]]> #{systemDate})
             </if>
             <if test="haishiFlag == '1'">
                 AND rgdb."DbT5594ShinsakaiIinJoho"."haishiFlag" = true
@@ -65,9 +80,10 @@
             <if test="haishiFlag == '2'">
                 AND rgdb."DbT5594ShinsakaiIinJoho"."haishiFlag" = false
             </if>
+            <if test="isShoKisaiHokenshaNoFlag">
+                AND DbT5595."shoKisaiHokenshaNo" = #{shoKisaiHokenshaNo}
+            </if>
         </where>
-        GROUP BY rgdb."DbT5594ShinsakaiIinJoho"."shinsakaiIinCode"
-        ORDER BY rgdb."DbT5594ShinsakaiIinJoho"."shinsakaiIinCode"
         LIMIT(#{maxKensu})
     </select>
 </mapper>
