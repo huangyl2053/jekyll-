@@ -333,9 +333,9 @@ public class NinteiChosaIrai {
                 && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
             inertNinteichosaIraiJoho(div);
             updateNinteichosaIraiJoho(div);
-            RString 調査員コード = ViewStateHolder.get(ViewStateKeys.調査員コード, RString.class);
-            setData(div, new ChosainCode(調査員コード));
-            return ResponseData.of(div).addMessage(UrInformationMessages.保存終了.getMessage()).respond();
+            div.getKanryoMessage().setSuccessMessage(
+                    new RString(UrInformationMessages.保存終了.getMessage().evaluate()), RString.EMPTY, RString.EMPTY);
+            return ResponseData.of(div).setState(DBE2200001StateName.保存完了);
         }
         return ResponseData.of(div).respond();
     }

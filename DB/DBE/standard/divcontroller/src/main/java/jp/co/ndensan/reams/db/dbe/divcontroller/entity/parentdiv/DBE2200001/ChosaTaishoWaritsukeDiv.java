@@ -15,7 +15,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
  * @author 自動生成
  */
 public class ChosaTaishoWaritsukeDiv extends Panel {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2015-11-30_08-54-50">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-01-15_09-59-03">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -32,12 +32,6 @@ public class ChosaTaishoWaritsukeDiv extends Panel {
     private Button btnKaijo;
     @JsonProperty("MiwaritsukeShinseisha")
     private MiwaritsukeShinseishaDiv MiwaritsukeShinseisha;
-    @JsonProperty("btnBackToChosaItakusakiSentaku")
-    private Button btnBackToChosaItakusakiSentaku;
-    @JsonProperty("btnBackToChosainSentaku")
-    private Button btnBackToChosainSentaku;
-    @JsonProperty("btnHozon")
-    private Button btnHozon;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -133,60 +127,6 @@ public class ChosaTaishoWaritsukeDiv extends Panel {
     @JsonProperty("MiwaritsukeShinseisha")
     public void setMiwaritsukeShinseisha(MiwaritsukeShinseishaDiv MiwaritsukeShinseisha) {
         this.MiwaritsukeShinseisha = MiwaritsukeShinseisha;
-    }
-
-    /*
-     * getbtnBackToChosaItakusakiSentaku
-     * @return btnBackToChosaItakusakiSentaku
-     */
-    @JsonProperty("btnBackToChosaItakusakiSentaku")
-    public Button getBtnBackToChosaItakusakiSentaku() {
-        return btnBackToChosaItakusakiSentaku;
-    }
-
-    /*
-     * setbtnBackToChosaItakusakiSentaku
-     * @param btnBackToChosaItakusakiSentaku btnBackToChosaItakusakiSentaku
-     */
-    @JsonProperty("btnBackToChosaItakusakiSentaku")
-    public void setBtnBackToChosaItakusakiSentaku(Button btnBackToChosaItakusakiSentaku) {
-        this.btnBackToChosaItakusakiSentaku = btnBackToChosaItakusakiSentaku;
-    }
-
-    /*
-     * getbtnBackToChosainSentaku
-     * @return btnBackToChosainSentaku
-     */
-    @JsonProperty("btnBackToChosainSentaku")
-    public Button getBtnBackToChosainSentaku() {
-        return btnBackToChosainSentaku;
-    }
-
-    /*
-     * setbtnBackToChosainSentaku
-     * @param btnBackToChosainSentaku btnBackToChosainSentaku
-     */
-    @JsonProperty("btnBackToChosainSentaku")
-    public void setBtnBackToChosainSentaku(Button btnBackToChosainSentaku) {
-        this.btnBackToChosainSentaku = btnBackToChosainSentaku;
-    }
-
-    /*
-     * getbtnHozon
-     * @return btnHozon
-     */
-    @JsonProperty("btnHozon")
-    public Button getBtnHozon() {
-        return btnHozon;
-    }
-
-    /*
-     * setbtnHozon
-     * @param btnHozon btnHozon
-     */
-    @JsonProperty("btnHozon")
-    public void setBtnHozon(Button btnHozon) {
-        this.btnHozon = btnHozon;
     }
 
     /*

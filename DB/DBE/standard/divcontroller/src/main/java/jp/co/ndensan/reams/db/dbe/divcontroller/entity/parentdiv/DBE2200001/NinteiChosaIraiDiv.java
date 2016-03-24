@@ -9,26 +9,18 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.KaigoKanryoMessage.KaigoKanryoMessage.IKaigoKanryoMessageDiv;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.KaigoKanryoMessage.KaigoKanryoMessage.KaigoKanryoMessageDiv;
+import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.hokenshalist.HokenshaList.HokenshaListDiv;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.hokenshalist.HokenshaList.IHokenshaListDiv;
-import jp.co.ndensan.reams.uz.uza.ui.binding.Button;
-import jp.co.ndensan.reams.uz.uza.ui.binding.ButtonPrint;
-import jp.co.ndensan.reams.uz.uza.ui.binding.CheckBoxList;
-import jp.co.ndensan.reams.uz.uza.ui.binding.DataGrid;
+import jp.co.ndensan.reams.uz.uza.ui.binding.*;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
-import jp.co.ndensan.reams.uz.uza.ui.binding.RadioButton;
-import jp.co.ndensan.reams.uz.uza.ui.binding.Space;
-import jp.co.ndensan.reams.uz.uza.ui.binding.TextBox;
-import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxCode;
-import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxDate;
 
 /**
- * NinteiChosaIrai のクラスファイル
- *
+ * NinteiChosaIrai のクラスファイル 
+ * 
  * @author 自動生成
  */
 public class NinteiChosaIraiDiv extends Panel {
-
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2015-11-30_08-54-50">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-01-15_09-59-03">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -162,7 +154,7 @@ public class NinteiChosaIraiDiv extends Panel {
     }
 
     @JsonIgnore
-    public void setTxtChosaItakusakiCode(TextBoxCode txtChosaItakusakiCode) {
+    public void  setTxtChosaItakusakiCode(TextBoxCode txtChosaItakusakiCode) {
         this.getChosaItakusakiAndChosainKihonJoho().setTxtChosaItakusakiCode(txtChosaItakusakiCode);
     }
 
@@ -172,7 +164,7 @@ public class NinteiChosaIraiDiv extends Panel {
     }
 
     @JsonIgnore
-    public void setTxtChosaItakusakiMeisho(TextBox txtChosaItakusakiMeisho) {
+    public void  setTxtChosaItakusakiMeisho(TextBox txtChosaItakusakiMeisho) {
         this.getChosaItakusakiAndChosainKihonJoho().setTxtChosaItakusakiMeisho(txtChosaItakusakiMeisho);
     }
 
@@ -182,7 +174,7 @@ public class NinteiChosaIraiDiv extends Panel {
     }
 
     @JsonIgnore
-    public void setTxtChosaItakusakiChiku(TextBox txtChosaItakusakiChiku) {
+    public void  setTxtChosaItakusakiChiku(TextBox txtChosaItakusakiChiku) {
         this.getChosaItakusakiAndChosainKihonJoho().setTxtChosaItakusakiChiku(txtChosaItakusakiChiku);
     }
 
@@ -192,7 +184,7 @@ public class NinteiChosaIraiDiv extends Panel {
     }
 
     @JsonIgnore
-    public void setTxtChosainCode(TextBoxCode txtChosainCode) {
+    public void  setTxtChosainCode(TextBoxCode txtChosainCode) {
         this.getChosaItakusakiAndChosainKihonJoho().setTxtChosainCode(txtChosainCode);
     }
 
@@ -202,7 +194,7 @@ public class NinteiChosaIraiDiv extends Panel {
     }
 
     @JsonIgnore
-    public void setTxtChosainShimei(TextBox txtChosainShimei) {
+    public void  setTxtChosainShimei(TextBox txtChosainShimei) {
         this.getChosaItakusakiAndChosainKihonJoho().setTxtChosainShimei(txtChosainShimei);
     }
 
@@ -212,7 +204,7 @@ public class NinteiChosaIraiDiv extends Panel {
     }
 
     @JsonIgnore
-    public void setTxtChosainChiku(TextBox txtChosainChiku) {
+    public void  setTxtChosainChiku(TextBox txtChosainChiku) {
         this.getChosaItakusakiAndChosainKihonJoho().setTxtChosainChiku(txtChosainChiku);
     }
 
@@ -227,7 +219,7 @@ public class NinteiChosaIraiDiv extends Panel {
     }
 
     @JsonIgnore
-    public void setDgChosaItakusakiIchiran(DataGrid<dgChosaItakusakiIchiran_Row> dgChosaItakusakiIchiran) {
+    public void  setDgChosaItakusakiIchiran(DataGrid<dgChosaItakusakiIchiran_Row> dgChosaItakusakiIchiran) {
         this.getChoisaItakusakiIchiran().setDgChosaItakusakiIchiran(dgChosaItakusakiIchiran);
     }
 
@@ -237,7 +229,7 @@ public class NinteiChosaIraiDiv extends Panel {
     }
 
     @JsonIgnore
-    public void setDgchosainIchiran(DataGrid<dgchosainIchiran_Row> dgchosainIchiran) {
+    public void  setDgchosainIchiran(DataGrid<dgchosainIchiran_Row> dgchosainIchiran) {
         this.getChosainIchiran().setDgchosainIchiran(dgchosainIchiran);
     }
 
@@ -247,7 +239,7 @@ public class NinteiChosaIraiDiv extends Panel {
     }
 
     @JsonIgnore
-    public void setWaritsukeZumiTaishosha(WaritsukeZumiTaishoshaDiv WaritsukeZumiTaishosha) {
+    public void  setWaritsukeZumiTaishosha(WaritsukeZumiTaishoshaDiv WaritsukeZumiTaishosha) {
         this.getChosaTaishoWaritsuke().setWaritsukeZumiTaishosha(WaritsukeZumiTaishosha);
     }
 
@@ -257,7 +249,7 @@ public class NinteiChosaIraiDiv extends Panel {
     }
 
     @JsonIgnore
-    public void setDgWaritsukeZumiShinseishaIchiran(DataGrid<dgWaritsukeZumiShinseishaIchiran_Row> dgWaritsukeZumiShinseishaIchiran) {
+    public void  setDgWaritsukeZumiShinseishaIchiran(DataGrid<dgWaritsukeZumiShinseishaIchiran_Row> dgWaritsukeZumiShinseishaIchiran) {
         this.getChosaTaishoWaritsuke().getWaritsukeZumiTaishosha().setDgWaritsukeZumiShinseishaIchiran(dgWaritsukeZumiShinseishaIchiran);
     }
 
@@ -267,7 +259,7 @@ public class NinteiChosaIraiDiv extends Panel {
     }
 
     @JsonIgnore
-    public void setTxtChosaIraiDay(TextBoxDate txtChosaIraiDay) {
+    public void  setTxtChosaIraiDay(TextBoxDate txtChosaIraiDay) {
         this.getChosaTaishoWaritsuke().setTxtChosaIraiDay(txtChosaIraiDay);
     }
 
@@ -277,7 +269,7 @@ public class NinteiChosaIraiDiv extends Panel {
     }
 
     @JsonIgnore
-    public void setBtnWaritsuke(Button btnWaritsuke) {
+    public void  setBtnWaritsuke(Button btnWaritsuke) {
         this.getChosaTaishoWaritsuke().setBtnWaritsuke(btnWaritsuke);
     }
 
@@ -287,7 +279,7 @@ public class NinteiChosaIraiDiv extends Panel {
     }
 
     @JsonIgnore
-    public void setBtnKaijo(Button btnKaijo) {
+    public void  setBtnKaijo(Button btnKaijo) {
         this.getChosaTaishoWaritsuke().setBtnKaijo(btnKaijo);
     }
 
@@ -297,7 +289,7 @@ public class NinteiChosaIraiDiv extends Panel {
     }
 
     @JsonIgnore
-    public void setMiwaritsukeShinseisha(MiwaritsukeShinseishaDiv MiwaritsukeShinseisha) {
+    public void  setMiwaritsukeShinseisha(MiwaritsukeShinseishaDiv MiwaritsukeShinseisha) {
         this.getChosaTaishoWaritsuke().setMiwaritsukeShinseisha(MiwaritsukeShinseisha);
     }
 
@@ -307,38 +299,8 @@ public class NinteiChosaIraiDiv extends Panel {
     }
 
     @JsonIgnore
-    public void setDgMiwaritsukeShinseishaIchiran(DataGrid<dgMiwaritsukeShinseishaIchiran_Row> dgMiwaritsukeShinseishaIchiran) {
+    public void  setDgMiwaritsukeShinseishaIchiran(DataGrid<dgMiwaritsukeShinseishaIchiran_Row> dgMiwaritsukeShinseishaIchiran) {
         this.getChosaTaishoWaritsuke().getMiwaritsukeShinseisha().setDgMiwaritsukeShinseishaIchiran(dgMiwaritsukeShinseishaIchiran);
-    }
-
-    @JsonIgnore
-    public Button getBtnBackToChosaItakusakiSentaku() {
-        return this.getChosaTaishoWaritsuke().getBtnBackToChosaItakusakiSentaku();
-    }
-
-    @JsonIgnore
-    public void setBtnBackToChosaItakusakiSentaku(Button btnBackToChosaItakusakiSentaku) {
-        this.getChosaTaishoWaritsuke().setBtnBackToChosaItakusakiSentaku(btnBackToChosaItakusakiSentaku);
-    }
-
-    @JsonIgnore
-    public Button getBtnBackToChosainSentaku() {
-        return this.getChosaTaishoWaritsuke().getBtnBackToChosainSentaku();
-    }
-
-    @JsonIgnore
-    public void setBtnBackToChosainSentaku(Button btnBackToChosainSentaku) {
-        this.getChosaTaishoWaritsuke().setBtnBackToChosainSentaku(btnBackToChosainSentaku);
-    }
-
-    @JsonIgnore
-    public Button getBtnHozon() {
-        return this.getChosaTaishoWaritsuke().getBtnHozon();
-    }
-
-    @JsonIgnore
-    public void setBtnHozon(Button btnHozon) {
-        this.getChosaTaishoWaritsuke().setBtnHozon(btnHozon);
     }
 
     @JsonIgnore
@@ -347,7 +309,7 @@ public class NinteiChosaIraiDiv extends Panel {
     }
 
     @JsonIgnore
-    public void setChkirai(CheckBoxList Chkirai) {
+    public void  setChkirai(CheckBoxList Chkirai) {
         this.getIraiprint().setChkirai(Chkirai);
     }
 
@@ -357,7 +319,7 @@ public class NinteiChosaIraiDiv extends Panel {
     }
 
     @JsonIgnore
-    public void setTxthokkoymd(TextBoxDate txthokkoymd) {
+    public void  setTxthokkoymd(TextBoxDate txthokkoymd) {
         this.getIraiprint().setTxthokkoymd(txthokkoymd);
     }
 
@@ -367,7 +329,7 @@ public class NinteiChosaIraiDiv extends Panel {
     }
 
     @JsonIgnore
-    public void setRadkigen(RadioButton radkigen) {
+    public void  setRadkigen(RadioButton radkigen) {
         this.getIraiprint().setRadkigen(radkigen);
     }
 
@@ -377,7 +339,7 @@ public class NinteiChosaIraiDiv extends Panel {
     }
 
     @JsonIgnore
-    public void setTxtkigenymd(TextBoxDate txtkigenymd) {
+    public void  setTxtkigenymd(TextBoxDate txtkigenymd) {
         this.getIraiprint().setTxtkigenymd(txtkigenymd);
     }
 
@@ -387,7 +349,7 @@ public class NinteiChosaIraiDiv extends Panel {
     }
 
     @JsonIgnore
-    public void setSP(Space SP) {
+    public void  setSP(Space SP) {
         this.getIraiprint().setSP(SP);
     }
 
@@ -397,7 +359,7 @@ public class NinteiChosaIraiDiv extends Panel {
     }
 
     @JsonIgnore
-    public void setChkchosa(CheckBoxList Chkchosa) {
+    public void  setChkchosa(CheckBoxList Chkchosa) {
         this.getIraiprint().setChkchosa(Chkchosa);
     }
 
@@ -407,7 +369,7 @@ public class NinteiChosaIraiDiv extends Panel {
     }
 
     @JsonIgnore
-    public void setChkchosaOcr(CheckBoxList ChkchosaOcr) {
+    public void  setChkchosaOcr(CheckBoxList ChkchosaOcr) {
         this.getIraiprint().setChkchosaOcr(ChkchosaOcr);
     }
 
@@ -417,18 +379,8 @@ public class NinteiChosaIraiDiv extends Panel {
     }
 
     @JsonIgnore
-    public void setChkchosaSonota(CheckBoxList ChkchosaSonota) {
+    public void  setChkchosaSonota(CheckBoxList ChkchosaSonota) {
         this.getIraiprint().setChkchosaSonota(ChkchosaSonota);
-    }
-
-    @JsonIgnore
-    public ButtonPrint getBtnPrint() {
-        return this.getIraiprint().getBtnPrint();
-    }
-
-    @JsonIgnore
-    public void setBtnPrint(ButtonPrint BtnPrint) {
-        this.getIraiprint().setBtnPrint(BtnPrint);
     }
 
     // </editor-fold>
