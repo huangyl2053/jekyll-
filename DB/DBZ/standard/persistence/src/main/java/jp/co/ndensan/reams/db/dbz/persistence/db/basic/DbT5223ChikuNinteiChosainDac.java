@@ -88,6 +88,7 @@ public class DbT5223ChikuNinteiChosainDac implements ISaveable<DbT5223ChikuNinte
      * @param 調査地区コード 調査地区コード
      * @param 市町村コード 市町村コード
      * @return DbT5223ChikuNinteiChosainEntityの{@code list}
+     * @throws NullPointerException 引数のいずれかがnullの場合
      */
     @Transaction
     public List<DbT5223ChikuNinteiChosainEntity> selec地区認定調査員(Code 調査地区コード,
