@@ -105,7 +105,7 @@ public class DbT2002FukaDac implements ISaveable<DbT2002FukaEntity> {
                 order(by(rirekiNo, Order.DESC)).
                 toList(DbT2002FukaEntity.class);
 
-        return list.size() > 0 ? list.get(0) : null;
+        return !list.isEmpty() ? list.get(0) : null;
     }
 
     /**

@@ -79,10 +79,10 @@ public class SoNoTaKikanGuideHandler {
      */
     public ValidationMessageControlPairs 大小関係チェック() {
         ValidationMessageControlPairs validPairs = new ValidationMessageControlPairs();
-        if (!div.getTxtSonotaKikanCodefrom().getValue().isEmpty() && !div.getTxtSonotaKikanCodeto().getValue().isEmpty()) {
-          if (div.getTxtSonotaKikanCodefrom().getValue().compareTo(div.getTxtSonotaKikanCodeto().getValue()) > 0) {
+        if (!div.getTxtSonotaKikanCodefrom().getValue().isEmpty() 
+                && !div.getTxtSonotaKikanCodeto().getValue().isEmpty()
+                && div.getTxtSonotaKikanCodefrom().getValue().compareTo(div.getTxtSonotaKikanCodeto().getValue()) > 0) {
               validPairs.add(new ValidationMessageControlPair(new IdocheckMessages(UrErrorMessages.大小関係が不正, "その他機関コード")));
-          }
         }
         return validPairs;
     }
