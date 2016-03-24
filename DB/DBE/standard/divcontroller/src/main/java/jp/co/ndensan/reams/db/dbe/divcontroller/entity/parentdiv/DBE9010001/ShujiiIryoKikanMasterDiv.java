@@ -12,6 +12,7 @@ import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.hokenshali
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Button;
 import jp.co.ndensan.reams.uz.uza.ui.binding.DataGrid;
+import jp.co.ndensan.reams.uz.uza.ui.binding.DropDownList;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 import jp.co.ndensan.reams.uz.uza.ui.binding.RadioButton;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TextBox;
@@ -214,16 +215,6 @@ public class ShujiiIryoKikanMasterDiv extends Panel {
      * [ ショートカットの作成 ]
      */
     @JsonIgnore
-    public RadioButton getRadSearchJokyoFlag() {
-        return this.getShujiiSearch().getRadSearchJokyoFlag();
-    }
-
-    @JsonIgnore
-    public void  setRadSearchJokyoFlag(RadioButton radSearchJokyoFlag) {
-        this.getShujiiSearch().setRadSearchJokyoFlag(radSearchJokyoFlag);
-    }
-
-    @JsonIgnore
     public TextBoxCode getTxtSearchShujiiIryokikanCodeFrom() {
         return this.getShujiiSearch().getTxtSearchShujiiIryokikanCodeFrom();
     }
@@ -254,6 +245,16 @@ public class ShujiiIryoKikanMasterDiv extends Panel {
     }
 
     @JsonIgnore
+    public DropDownList getDdlKikanMeisho() {
+        return this.getShujiiSearch().getDdlKikanMeisho();
+    }
+
+    @JsonIgnore
+    public void  setDdlKikanMeisho(DropDownList ddlKikanMeisho) {
+        this.getShujiiSearch().setDdlKikanMeisho(ddlKikanMeisho);
+    }
+
+    @JsonIgnore
     public TextBoxKana getTxtSearchShujiiIryokikanKanaMeisho() {
         return this.getShujiiSearch().getTxtSearchShujiiIryokikanKanaMeisho();
     }
@@ -261,6 +262,26 @@ public class ShujiiIryoKikanMasterDiv extends Panel {
     @JsonIgnore
     public void  setTxtSearchShujiiIryokikanKanaMeisho(TextBoxKana txtSearchShujiiIryokikanKanaMeisho) {
         this.getShujiiSearch().setTxtSearchShujiiIryokikanKanaMeisho(txtSearchShujiiIryokikanKanaMeisho);
+    }
+
+    @JsonIgnore
+    public DropDownList getDdlKikanKanaMeisho() {
+        return this.getShujiiSearch().getDdlKikanKanaMeisho();
+    }
+
+    @JsonIgnore
+    public void  setDdlKikanKanaMeisho(DropDownList ddlKikanKanaMeisho) {
+        this.getShujiiSearch().setDdlKikanKanaMeisho(ddlKikanKanaMeisho);
+    }
+
+    @JsonIgnore
+    public RadioButton getRadSearchJokyoFlag() {
+        return this.getShujiiSearch().getRadSearchJokyoFlag();
+    }
+
+    @JsonIgnore
+    public void  setRadSearchJokyoFlag(RadioButton radSearchJokyoFlag) {
+        this.getShujiiSearch().setRadSearchJokyoFlag(radSearchJokyoFlag);
     }
 
     @JsonIgnore
