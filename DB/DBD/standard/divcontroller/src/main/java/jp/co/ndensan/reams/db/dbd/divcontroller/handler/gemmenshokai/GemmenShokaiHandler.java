@@ -6,7 +6,6 @@
 package jp.co.ndensan.reams.db.dbd.divcontroller.handler.gemmenshokai;
 
 import java.util.List;
-import jp.co.ndensan.reams.db.dbc.business.core.basic.RiyoshaFutanWariaiMeisai;
 import jp.co.ndensan.reams.db.dbd.business.common.NursingCareInformationBusiness;
 import jp.co.ndensan.reams.db.dbd.business.common.ShiharaiHohoHenkoSummaryBusiness;
 import jp.co.ndensan.reams.db.dbd.business.core.basic.JukyushaDaicho;
@@ -31,10 +30,10 @@ public class GemmenShokaiHandler {
 
     private final GemmenShokaiDiv div;
     private final RString 旧措置者 = new RString("旧措置者");
-    private final RString 負担割合区分_１ = new RString("1");
-    private final RString 負担割合区分_２ = new RString("2");
-    private final RString 負担割合区分_１割 = new RString("10");
-    private final RString 負担割合区分_２割 = new RString("20");
+//    private final RString 負担割合区分_１ = new RString("1");
+//    private final RString 負担割合区分_２ = new RString("2");
+//    private final RString 負担割合区分_１割 = new RString("10");
+//    private final RString 負担割合区分_２割 = new RString("20");
 
     /**
      * コンストラクタです。
@@ -60,18 +59,19 @@ public class GemmenShokaiHandler {
     }
 
     private void onLoad利用者負担割合情報(HihokenshaNo 被保険者番号) {
-        GemmenJokyoFinder finder = GemmenJokyoFinder.createIntance();
-        List<RiyoshaFutanWariaiMeisai> 利用者負担割合明細List = finder.find利用者負担割合明細(被保険者番号);
-        if (!利用者負担割合明細List.isEmpty()) {
-            RiyoshaFutanWariaiMeisai 利用者負担割合明細 = 利用者負担割合明細List.get(0);
-            if (負担割合区分_１割.equals(利用者負担割合明細.get負担割合区分())) {
-                div.getTxtFutanWariai().setValue(負担割合区分_１);
-            } else if (負担割合区分_２割.equals(利用者負担割合明細.get負担割合区分())) {
-                div.getTxtFutanWariai().setValue(負担割合区分_２);
-            }
-            div.getTxtFutanWariaiKaishiYMD().setValue(利用者負担割合明細.get有効開始日());
-            div.getTxtFutanWariaiShuryoYMD().setValue(利用者負担割合明細.get有効終了日());
-        }
+        //TODO QA #80225
+//        GemmenJokyoFinder finder = GemmenJokyoFinder.createIntance();
+//        List<RiyoshaFutanWariaiMeisai> 利用者負担割合明細List = finder.find利用者負担割合明細(被保険者番号);
+//        if (!利用者負担割合明細List.isEmpty()) {
+//            RiyoshaFutanWariaiMeisai 利用者負担割合明細 = 利用者負担割合明細List.get(0);
+//            if (負担割合区分_１割.equals(利用者負担割合明細.get負担割合区分())) {
+//                div.getTxtFutanWariai().setValue(負担割合区分_１);
+//            } else if (負担割合区分_２割.equals(利用者負担割合明細.get負担割合区分())) {
+//                div.getTxtFutanWariai().setValue(負担割合区分_２);
+//            }
+//            div.getTxtFutanWariaiKaishiYMD().setValue(利用者負担割合明細.get有効開始日());
+//            div.getTxtFutanWariaiShuryoYMD().setValue(利用者負担割合明細.get有効終了日());
+//        }
     }
 
     private void onLoad給付制限情報(HihokenshaNo 被保険者番号) {
