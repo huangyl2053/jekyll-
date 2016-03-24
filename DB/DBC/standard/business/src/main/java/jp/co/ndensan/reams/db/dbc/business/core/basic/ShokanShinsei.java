@@ -171,6 +171,15 @@ public class ShokanShinsei extends ModelBase<ShokanShinseiIdentifier, DbT3034Sho
     }
 
     /**
+     * 領収年月日を返します。
+     *
+     * @return 領収年月日
+     */
+    public FlexibleDate get領収年月日() {
+        return entity.getRyoshuYMD();
+    }
+
+    /**
      * 申請理由を返します。
      *
      * @return 申請理由
@@ -205,7 +214,7 @@ public class ShokanShinsei extends ModelBase<ShokanShinseiIdentifier, DbT3034Sho
     public boolean get住宅住所変更() {
         return entity.getJutakuJushoHenko();
     }
-    
+
     /**
      * 要介護状態３段階変更を返します。
      *
@@ -214,7 +223,7 @@ public class ShokanShinsei extends ModelBase<ShokanShinseiIdentifier, DbT3034Sho
     public boolean get要介護状態３段階変更() {
         return entity.getYokaigo3DankaiHenko();
     }
-    
+
     /**
      * 審査結果を返します。
      *
@@ -223,7 +232,7 @@ public class ShokanShinsei extends ModelBase<ShokanShinseiIdentifier, DbT3034Sho
     public RString get審査結果() {
         return entity.getShinsaKekka();
     }
-    
+
     /**
      * 申請者氏名カナを返します。
      *
@@ -415,7 +424,8 @@ public class ShokanShinsei extends ModelBase<ShokanShinseiIdentifier, DbT3034Sho
     }
 
     /**
-     * 保持する償還払支給申請を削除対象とします。<br/> {@link DbT3034ShokanShinseiEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば削除状態にします。
+     * 保持する償還払支給申請を削除対象とします。<br/>
+     * {@link DbT3034ShokanShinseiEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば削除状態にします。
      *
      * @return 削除対象処理実施後の{@link ShokanShinsei}
      */
