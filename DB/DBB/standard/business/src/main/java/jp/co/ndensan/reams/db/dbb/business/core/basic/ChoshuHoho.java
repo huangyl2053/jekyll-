@@ -354,7 +354,7 @@ public class ChoshuHoho extends ModelBase<ChoshuHohoIdentifier, DbT2001ChoshuHoh
      *
      * @return 依頼情報送付済みフラグ
      */
-    public boolean get依頼情報送付済みフラグ() {
+    public boolean is依頼情報送付済みフラグ() {
         return entity.getIraiSohuzumiFlag();
     }
 
@@ -363,7 +363,7 @@ public class ChoshuHoho extends ModelBase<ChoshuHohoIdentifier, DbT2001ChoshuHoh
      *
      * @return 追加依頼情報送付済みフラグ
      */
-    public boolean get追加依頼情報送付済みフラグ() {
+    public boolean is追加依頼情報送付済みフラグ() {
         return entity.getTsuikaIraiSohuzumiFlag();
     }
 
