@@ -50,7 +50,8 @@ public class KojinJokyoShokaiHandler {
      */
     public void setKojinJokyoShokai(List<KojinJokyoShokai> kojinJokyoShokaiList, RString 申請書管理番号) {
         div.getCcdKaigoNinteiAtenInfo().initialize();
-        div.getCcdKaigoNinteiShikakuInfo();
+        // TODO  内部QA：886 Redmine：#79069(画面遷移の設定方式が知らない、現時対応不可)
+        //div.getCcdKaigoNinteiShikakuInfo().initialize(RString.EMPTY, RString.EMPTY, RString.EMPTY, RString.EMPTY);
         div.getCcdShujiiIryokikanAndShujiiInput().initialize(LasdecCode.EMPTY, new ShinseishoKanriNo(申請書管理番号), SubGyomuCode.DBE認定支援);
         div.getCcdChosaItakusakiAndChosainInput().initialize(RString.EMPTY);
         getKojinJokyoShokai1(kojinJokyoShokaiList);

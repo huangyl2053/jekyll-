@@ -32,7 +32,6 @@ import jp.co.ndensan.reams.uz.uza.util.serialization.DataPassingConverter;
 public class KojinJokyoShokai {
 
     private static final RString 照会モード = new RString("ShokaiMode");
-    RString 申請書管理番号 = ViewStateHolder.get(ViewStateKeys.要介護認定申請検索_申請書管理番号, RString.class);
     
     /**
      * 画面初期化処理です。
@@ -41,6 +40,7 @@ public class KojinJokyoShokai {
      * @return ResponseData<KojinJokyoShokaiDiv>
      */
     public ResponseData<KojinJokyoShokaiDiv> onLoad(KojinJokyoShokaiDiv div) {
+        RString 申請書管理番号 = ViewStateHolder.get(ViewStateKeys.要介護認定申請検索_申請書管理番号, RString.class);
         KojinJokyoShokaiParameter parameter = KojinJokyoShokaiParameter.createSelectByKeyParam(new ShinseishoKanriNo(申請書管理番号));
         KojinJokyoShokaiFinder kojinJokyoShokaiFinder = KojinJokyoShokaiFinder.createInstance();
         List<jp.co.ndensan.reams.db.dbe.business.core.kojinjokyoshokai.KojinJokyoShokai> kojinJokyoShokaiList
@@ -58,6 +58,7 @@ public class KojinJokyoShokai {
      * @return ResponseData<KojinJokyoShokaiDiv>
      */
     public ResponseData<KojinJokyoShokaiDiv> onClick_btnRenrakusaki(KojinJokyoShokaiDiv div) {
+        RString 申請書管理番号 = ViewStateHolder.get(ViewStateKeys.要介護認定申請検索_申請書管理番号, RString.class);
         NinteiShinseiBusinessCollection collection = new NinteiShinseiBusinessCollection();
         collection.setHdnDatabaseSubGyomuCode(SubGyomuCode.DBE認定支援);
         collection.setShinseishoKanriNo(new ShinseishoKanriNo(申請書管理番号));
@@ -72,6 +73,7 @@ public class KojinJokyoShokai {
      * @return ResponseData<KojinJokyoShokaiDiv>
      */
     public ResponseData<KojinJokyoShokaiDiv> onClick_btnShichosonRenrakuJiko(KojinJokyoShokaiDiv div) {
+        RString 申請書管理番号 = ViewStateHolder.get(ViewStateKeys.要介護認定申請検索_申請書管理番号, RString.class);
         NinteiShinseiCodeModel shinseiCodeModel = new NinteiShinseiCodeModel();
         shinseiCodeModel.set連絡事項(申請書管理番号);
         shinseiCodeModel.set表示モード(照会モード);
@@ -86,6 +88,7 @@ public class KojinJokyoShokai {
      * @return ResponseData<KojinJokyoShokaiDiv>
      */
     public ResponseData<KojinJokyoShokaiDiv> onClick_btnShinsakaiJoho(KojinJokyoShokaiDiv div) {
+        RString 申請書管理番号 = ViewStateHolder.get(ViewStateKeys.要介護認定申請検索_申請書管理番号, RString.class);
         div.setHdnShinseishoKanriNo(申請書管理番号);
         return ResponseData.of(div).respond();
     }
@@ -97,7 +100,6 @@ public class KojinJokyoShokai {
      * @return ResponseData<KojinJokyoShokaiDiv>
      */
     public ResponseData<KojinJokyoShokaiDiv> onClick_btnShujiiIkenshoSakuseiIraiShokai(KojinJokyoShokaiDiv div) {
-        ViewStateHolder.put(ViewStateKeys.被保険者番号, div.getCcdKaigoNinteiShikakuInfo().get被保険者番号());
         // TODO  内部QA：866 Redmine：#74276(画面遷移方式が知らない、現時点対応不可)
         return ResponseData.of(div).respond();
     }
@@ -109,7 +111,6 @@ public class KojinJokyoShokai {
      * @return ResponseData<KojinJokyoShokaiDiv>
      */
     public ResponseData<KojinJokyoShokaiDiv> onClick_btnNinteiChosaIraiShokai(KojinJokyoShokaiDiv div) {
-        ViewStateHolder.put(ViewStateKeys.被保険者番号, div.getCcdKaigoNinteiShikakuInfo().get被保険者番号());
         // TODO  内部QA：866 Redmine：#74276(画面遷移方式が知らない、現時点対応不可)
         return ResponseData.of(div).respond();
     }
@@ -121,6 +122,7 @@ public class KojinJokyoShokai {
      * @return ResponseData<KojinJokyoShokaiDiv>
      */
     public ResponseData<SourceDataCollection> onClick_btnprint(KojinJokyoShokaiDiv div) {
+        RString 申請書管理番号 = ViewStateHolder.get(ViewStateKeys.要介護認定申請検索_申請書管理番号, RString.class);
         KojinJokyoShokaiParameter parameter = KojinJokyoShokaiParameter.createSelectByKeyParam(new ShinseishoKanriNo(申請書管理番号));
         KojinJokyoShokaiFinder kojinJokyoShokaiFinder = KojinJokyoShokaiFinder.createInstance();
         List<jp.co.ndensan.reams.db.dbe.business.core.kojinjokyoshokai.KojinJokyoShokai> kojinJokyoShokaiList

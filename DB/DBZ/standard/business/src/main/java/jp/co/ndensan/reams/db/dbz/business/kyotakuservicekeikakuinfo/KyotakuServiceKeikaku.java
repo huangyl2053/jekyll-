@@ -8,7 +8,6 @@ package jp.co.ndensan.reams.db.dbz.business.kyotakuservicekeikakuinfo;
 import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
-import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5150RenrakusakiJohoEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.relate.kyotakuservicekeikakuinfo.KyotakuServiceKeikakuInfoRelateEntity;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
@@ -27,7 +26,7 @@ public class KyotakuServiceKeikaku {
      * コンストラクタです。<br/>
      * DBより取得した{@link KyotakuServiceKeikakuInfoRelateEntity}より{@link KyotakuServiceKeikaku}を生成します。
      *
-     * @param entity DBより取得した{@link DbT5150RenrakusakiJohoEntity}
+     * @param entity DBより取得した{@link KyotakuServiceKeikakuInfoRelateEntity}
      */
     public KyotakuServiceKeikaku(KyotakuServiceKeikakuInfoRelateEntity entity) {
         this.entity = requireNonNull(entity, UrSystemErrorMessages.値がnull.getReplacedMessage("居宅サービス計画情報"));
