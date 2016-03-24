@@ -8,8 +8,8 @@ package jp.co.ndensan.reams.db.dbb.persistence.db.mapper.relate.tsuchishohakkogo
 import java.util.List;
 import jp.co.ndensan.reams.db.dbb.definition.mybatisprm.tsuchishohakkogoidosha.IdoshaParamter;
 import jp.co.ndensan.reams.db.dbb.definition.mybatisprm.tsuchishohakkogoidosha.QualificationsParamter;
-import jp.co.ndensan.reams.db.dbb.entity.db.relate.tsuchishohakkogoidosha.Dbv2001EntityResult;
 import jp.co.ndensan.reams.db.dbb.entity.db.relate.tsuchishohakkogoidosha.DbT2017Uaft200EntityResult;
+import jp.co.ndensan.reams.db.dbb.entity.db.relate.tsuchishohakkogoidosha.Dbv2001EntityResult;
 
 /**
  * 通知書発行後異動把握のMapperクラスです。

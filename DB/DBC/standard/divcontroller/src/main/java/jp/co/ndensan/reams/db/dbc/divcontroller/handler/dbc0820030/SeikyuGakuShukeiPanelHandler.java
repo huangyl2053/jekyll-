@@ -401,12 +401,12 @@ public class SeikyuGakuShukeiPanelHandler {
             ddgRow.setDefaultDataName18(div.getPanelSeikyugakuShukei().
                     getPanelSeikyuShokai().getRdoShinsahouhou().getSelectedKey());
         }
+        if (sercode.getTxtServiceType() != null) {
+            ddgRow.setDefaultDataName19(sercode.getTxtServiceType().getValue());
+        }
         if (登録.equals(ViewStateHolder.get(ViewStateKeys.状態, RString.class))) {
             List<dgdSeikyugakushukei_Row> list = div.getPanelSeikyugakuShukei().getDgdSeikyugakushukei().getDataSource();
             list.add(ddgRow);
-        }
-        if (sercode.getTxtServiceType() != null) {
-            ddgRow.setDefaultDataName19(sercode.getTxtServiceType().getValue());
         }
 
         clear請求額集計登録();
@@ -434,37 +434,33 @@ public class SeikyuGakuShukeiPanelHandler {
         Decimal 保険分単位合計 = div.getPanelSeikyugakuShukei().getPanelSeikyuShokai().getTxtTanyigokeiHokenbun().getValue();
         ServiceShuruiCode サービス種類コード = new ServiceShuruiCode(sercode.getTxtServiceType().getValue());
         ShokanbaraiJutakuShikyuGendogakuHanteiCheck shcheck = new ShokanbaraiJutakuShikyuGendogakuHanteiCheck();
-        if (div.getPanelSeikyugakuShukei().getPanelSeikyuShokai().
+        boolean falg1 = div.getPanelSeikyugakuShukei().getPanelSeikyuShokai().
                 getTxtKeikakuTanyi().getValue() != null && div.getPanelSeikyugakuShukei().getPanelSeikyuShokai().
                 getTxtTaishoTanyi().getValue() != null && div.getPanelSeikyugakuShukei().getPanelSeikyuShokai().
-                getTxtTaishoGaiTanyi().getValue() != null) {
-            if (!div.getPanelSeikyugakuShukei().getPanelSeikyuShokai().
-                    getTxtKeikakuTanyi().getValue().equals(div.getPanelSeikyugakuShukei().getPanelSeikyuShokai().
-                            getTxtTaishoTanyi().getValue().add(div.getPanelSeikyugakuShukei().getPanelSeikyuShokai().
-                                    getTxtTaishoGaiTanyi().getValue()))) {
-                throw new ApplicationException("限度額対象単位および限度額対象外単位数が計画単位数を一致しません");
-
-            }
+                getTxtTaishoGaiTanyi().getValue() != null;
+        boolean falg2 = !div.getPanelSeikyugakuShukei().getPanelSeikyuShokai().
+                getTxtKeikakuTanyi().getValue().equals(div.getPanelSeikyugakuShukei().getPanelSeikyuShokai().
+                        getTxtTaishoTanyi().getValue().add(div.getPanelSeikyugakuShukei().getPanelSeikyuShokai().
+                                getTxtTaishoGaiTanyi().getValue()));
+        boolean falg3 = shcheck.chkShokanbaraiJutakuShikyuGendogakuTaishoTani(様式番号, 限度額対象単位, サービス種類コード);
+        boolean falg4 = shcheck.chkShokanbaraiJutakuShikyuGendogakuTaniGokei(
+                様式番号, 限度額対象外単位, 限度額対象単位, 保険分単位合計, サービス種類コード);
+        if (falg1 && falg2) {
+            throw new ApplicationException("限度額対象単位および限度額対象外単位数が計画単位数を一致しません");
         }
-
         for (ShokanShukeiResult shokanShukeiResult : shkonlist) {
             サービス種類コード = shokanShukeiResult.getShukei().getサービス種類コード();
             if (sercode.getTxtServiceType().getValue() == サービス種類コード.value()) {
                 throw new ApplicationException("サービス種類が登録されていますん");
             }
         }
-        if (限度額対象単位 != null) {
-            if (shcheck.chkShokanbaraiJutakuShikyuGendogakuTaishoTani(様式番号, 限度額対象単位, サービス種類コード)) {
-                validPairs.add(new ValidationMessageControlPair(new IdocheckMessages(
-                        UrErrorMessages.必須, 対象単位.toString())));
-            }
+        if (限度額対象単位 != null && falg3) {
+            validPairs.add(new ValidationMessageControlPair(new IdocheckMessages(
+                    UrErrorMessages.必須, 対象単位.toString())));
         }
-        if (限度額対象外単位 != null && 限度額対象単位 != null && 保険分単位合計 != null) {
-            if (shcheck.chkShokanbaraiJutakuShikyuGendogakuTaniGokei(
-                    様式番号, 限度額対象外単位, 限度額対象単位, 保険分単位合計, サービス種類コード)) {
-                validPairs.add(new ValidationMessageControlPair(new IdocheckMessages(
-                        UrErrorMessages.項目に対する制約, 単位合計.toString(), 対象単位合計.toString())));
-            }
+        if (限度額対象外単位 != null && 限度額対象単位 != null && 保険分単位合計 != null && falg4) {
+            validPairs.add(new ValidationMessageControlPair(new IdocheckMessages(
+                    UrErrorMessages.項目に対する制約, 単位合計.toString(), 対象単位合計.toString())));
         }
 
         return validPairs;
@@ -575,7 +571,7 @@ public class SeikyuGakuShukeiPanelHandler {
                             事業者番号,
                             様式番号,
                             明細番号,
-                            new RString(String.valueOf(max連番))).createBuilderForEdit().build();
+                            new RString(String.format("%02d", max連番))).createBuilderForEdit().build();
                     entityAdded = buildshokanShukei(entityAdded, row);
                     entityList.add(entityAdded.added());
 

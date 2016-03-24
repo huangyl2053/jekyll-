@@ -116,11 +116,6 @@ public class FutanGendogakuNinteiShinseisho {
                 business.get電話番号(),
                 郵便番号,
                 business.get住所(),
-                // TODO QA:756 入所（院）した介護保険施設の所在地及び名称（※）エリアの項目を記述されていない。
-                RString.EMPTY,
-                RString.EMPTY,
-                RString.EMPTY,
-                RString.EMPTY,
                 注意文,
                 ninshoshaYakushokuMei
         );

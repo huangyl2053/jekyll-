@@ -78,16 +78,12 @@ public class FukaListOfNendo {
      * @return 最新の賦課
      */
     public Fuka getSaishinFuka() {
-        Fuka fuka = null;
-        FlexibleYear 調定年度 = FlexibleYear.EMPTY;
+        Fuka fuka = fukaList.get(0);
+        FlexibleYear 調定年度 = fuka.get調定年度();
         for (int i = 0; i < fukaList.size(); i++) {
-            if (i == 0) {
+            if (調定年度.isBefore(fukaList.get(i).get調定年度())) {
                 fuka = fukaList.get(i);
-                調定年度 = fukaList.get(i).get調定年度();
-            } else {
-                if (調定年度.isBefore(fukaList.get(i).get調定年度())) {
-                    fuka = fukaList.get(i);
-                }
+                調定年度 = fuka.get調定年度();
             }
         }
         return fuka;
@@ -105,13 +101,14 @@ public class FukaListOfNendo {
                 return fuka;
             }
         }
-        throw new IllegalArgumentException(UrErrorMessages.存在しない.getMessage().replace("賦課の情報").evaluate());
+        throw new IllegalArgumentException(UrErrorMessages.存在しない.getMessage()
+                .replace(調定年度.toString() + "調定年度の賦課の情報").evaluate());
     }
 
     /**
      * 現年度の賦課の情報を返します。
      *
-     * @return 現年度の賦課の情報
+     * @return 現年度の賦課の情報、賦課年度＝調定年度の賦課の情報が存在しない場合、nullを返却します。
      */
     public Fuka getGenNendo() {
         for (Fuka fuka : fukaList) {

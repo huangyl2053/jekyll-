@@ -15,6 +15,14 @@ var DBZ;
             Events.onClick_chkKoshukuChange = function () {
                 return "onClick_chkKoshukuChange";
             };
+
+            Events.onClick_btnConfirm = function () {
+                return "onClick_btnConfirm";
+            };
+
+            Events.onClick_btnBack = function () {
+                return "onClick_btnBack";
+            };
             return Events;
         })();
         KihonChosaInput.Events = Events;
@@ -777,6 +785,14 @@ var DBZ;
 
             Controls.prototype.radNinchishaJiritsudo = function () {
                 return new UZA.RadioButton(this.convFiledName("radNinchishaJiritsudo"));
+            };
+
+            Controls.prototype.btnConfirm = function () {
+                return new UZA.Button(this.convFiledName("btnConfirm"));
+            };
+
+            Controls.prototype.btnBack = function () {
+                return new UZA.Button(this.convFiledName("btnBack"));
             };
             return Controls;
         })();

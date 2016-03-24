@@ -29,19 +29,11 @@ public class FutangendogakuNinteiShinseishoReportSource implements IReportSource
     public RString hihokenshaYubinNo;
     @ReportItem(name = "hihokenJusho", order = 9)
     public RString hihokenJusho;
-    @ReportItem(name = "shisetsuYubinNo", length = 8, order = 10)
-    public RString shisetsuYubinNo;
-    @ReportItem(name = "shisetsuTelNo", length = 20, order = 11)
-    public RString shisetsuTelNo;
-    @ReportItem(name = "shisetsuJusho", order = 12)
-    public RString shisetsuJusho;
-    @ReportItem(name = "shisetsuMeisho", order = 13)
-    public RString shisetsuMeisho;
-    @ReportItem(name = "chuibun", order = 14)
+    @ReportItem(name = "chuibun", order = 10)
     public RString chuibun;
-    @ReportItem(name = "remban", length = 4, order = 15)
+    @ReportItem(name = "remban", length = 4, order = 11)
     public RString remban;
-    @ReportItem(name = "ninshoshaYakushokuMei", length = 15, order = 16)
+    @ReportItem(name = "ninshoshaYakushokuMei", length = 15, order = 12)
     public RString ninshoshaYakushokuMei;
 // </editor-fold>
 // <editor-fold defaultstate="collapsed" desc="User Customize Area">

@@ -14,7 +14,6 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.message.Message;
 import jp.co.ndensan.reams.uz.uza.message.MessageDialogSelectedResult;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ResponseHolder;
-import jp.co.ndensan.reams.uz.uza.util.serialization.DataPassingConverter;
 
 /**
  * 認定基本調査入力のDivControllerです。
@@ -28,8 +27,7 @@ public class KihonChosaInput {
      * @return ResponseData<KihonChosaInput>
      */
     public ResponseData<KihonChosaInputDiv> onLoad(KihonChosaInputDiv div) {
-        ShinseishoKanriNo 申請書管理番号
-                = DataPassingConverter.deserialize(div.getDaiichigunShintaiKino().getShinseishoKanriNo(), ShinseishoKanriNo.class);
+        ShinseishoKanriNo 申請書管理番号 = new ShinseishoKanriNo(div.getDaiichigunShintaiKino().getShinseishoKanriNo());
         RString 認定調査依頼履歴番号 = div.getDaiichigunShintaiKino().getRecordNumber();
         RString 初期状態モード = div.getモード();
         div.onLoad(申請書管理番号, 認定調査依頼履歴番号, 初期状態モード);
@@ -54,7 +52,7 @@ public class KihonChosaInput {
     }
 
     /**
-     * 認定基本調査入力をを処置内容特記事項を押下する。
+     * 認定基本調査入力を麻痺等の有無特記事項を押下する。
      *
      * @param div {@link KihonChosaInputDiv 認定基本調査入力Div}
      * @return 認定基本調査入力Divを持つResponseData
@@ -65,7 +63,7 @@ public class KihonChosaInput {
     }
 
     /**
-     * 認定基本調査入力をを処置内容特記事項を押下する。
+     * 認定基本調査入力を拘縮の有無特記事項を押下する。
      *
      * @param div {@link KihonChosaInputDiv 認定基本調査入力Div}
      * @return 認定基本調査入力Divを持つResponseData
@@ -73,6 +71,27 @@ public class KihonChosaInput {
     public ResponseData<KihonChosaInputDiv> onClick_chkKoshukuChange(KihonChosaInputDiv div) {
         getHandler(div).拘縮の有無ないChange();
         return ResponseData.of(div).respond();
+    }
+
+    /**
+     * 認定基本調査入力を確認を押下する。
+     *
+     * @param div {@link KihonChosaInputDiv 認定基本調査入力Div}
+     * @return 認定基本調査入力Divを持つResponseData
+     */
+    public ResponseData<KihonChosaInputDiv> onClick_btnConfirm(KihonChosaInputDiv div) {
+        getHandler(div).onClick_btnConfirm();
+        return ResponseData.of(div).dialogOKClose();
+    }
+
+    /**
+     * 認定基本調査入力を確認を押下する。
+     *
+     * @param div {@link KihonChosaInputDiv 認定基本調査入力Div}
+     * @return 認定基本調査入力Divを持つResponseData
+     */
+    public ResponseData<KihonChosaInputDiv> onClick_btnBack(KihonChosaInputDiv div) {
+        return ResponseData.of(div).dialogOKClose();
     }
 
     private KihonChosaInputHandler getHandler(KihonChosaInputDiv div) {

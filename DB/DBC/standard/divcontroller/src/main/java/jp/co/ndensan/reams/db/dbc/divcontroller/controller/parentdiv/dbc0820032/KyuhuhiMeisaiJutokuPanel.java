@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbc.business.core.basic.ShikibetsuNoKanri;
 import jp.co.ndensan.reams.db.dbc.business.core.shokanbaraijyokyoshokai.ShokanMeisaiJushochiTokureiResult;
+import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0820032.DBC0820032TransitionEventName;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0820032.KyuhuhiMeisaiJutokuPanelDiv;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0820032.dgJushochiTokutei_Row;
 import jp.co.ndensan.reams.db.dbc.divcontroller.handler.dbc0820032.KyuhuhiMeisaiJutokuPanelHandler;
@@ -84,22 +85,22 @@ public class KyuhuhiMeisaiJutokuPanel {
             div.getPnlAtenaCommon().getCcdKaigoKihon().setVisible(false);
         }
         getHandler(div).set申請共通エリア(サービス年月, 事業者番号, 申請日, 明細番号, 様式番号);
-        ArrayList<ShokanMeisaiJushochiTokureiResult> entityList
-                = (ArrayList<ShokanMeisaiJushochiTokureiResult>) ShokanbaraiJyokyoShokai.createInstance().
-                getShokanbarayiSeikyuMeisayiJyutokuList(
-                        被保険者番号, サービス年月, 整理番号, 事業者番号, 様式番号, 明細番号, null);
+
         div.getPnlBtnDetail().getPnlKyufuhiMeisai().getPnlKyufuhiMeisaiTouroku().setVisible(false);
         if (明細番号 == null || 明細番号.isEmpty()) {
             List<ShokanMeisaiJushochiTokureiResult> emptyList = new ArrayList();
             getHandler(div).initialize(emptyList);
         } else {
+            ArrayList<ShokanMeisaiJushochiTokureiResult> entityList
+                    = (ArrayList<ShokanMeisaiJushochiTokureiResult>) ShokanbaraiJyokyoShokai.createInstance().
+                    getShokanbarayiSeikyuMeisayiJyutokuList(
+                            被保険者番号, サービス年月, 整理番号, 事業者番号, 様式番号, 明細番号, null);
+            ViewStateHolder.put(ViewStateKeys.給付費明細住特, entityList);
             if (entityList == null || entityList.isEmpty()) {
                 throw new ApplicationException(UrErrorMessages.該当データなし.getMessage());
             }
             getHandler(div).initialize(entityList);
         }
-
-        ViewStateHolder.put(ViewStateKeys.給付費明細住特, entityList);
         SikibetuNokennsakuki kennsakuki = ViewStateHolder.get(ViewStateKeys.識別番号検索キー, SikibetuNokennsakuki.class);
         ShikibetsuNoKanri shikibetsuNoKanri = SyokanbaraihiShikyuShinseiKetteManager.createInstance()
                 .getShikibetsuNoKanri(kennsakuki.getServiceTeikyoYM(), kennsakuki.getSikibetuNo());
@@ -200,9 +201,8 @@ public class KyuhuhiMeisaiJutokuPanel {
      */
     public ResponseData<KyuhuhiMeisaiJutokuPanelDiv> onClick_btnFree(KyuhuhiMeisaiJutokuPanelDiv div) {
         if (削除.equals(ViewStateHolder.get(ViewStateKeys.処理モード, RString.class))) {
-//            TODO  QA405
-//            return ResponseData.of(div).forwardWithEventName(DBC0820032TransitionEventName.サービス計画費)
-//                    .parameter(new RString("サービス計画費"));
+            return ResponseData.of(div).forwardWithEventName(DBC0820032TransitionEventName.一覧に戻る)
+                    .parameter(new RString("一覧に戻る"));
         }
         boolean flag = getHandler(div).is内容変更状態();
         if (flag) {
@@ -214,16 +214,14 @@ public class KyuhuhiMeisaiJutokuPanel {
             if (new RString(UrQuestionMessages.入力内容の破棄.getMessage().getCode())
                     .equals(ResponseHolder.getMessageCode())
                     && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
-                //TODO  QA405
-//                return ResponseData.of(div).forwardWithEventName(DBC0820022TransitionEventName.サービス計画費)
-//                        .parameter(new RString("サービス計画費"));
+                return ResponseData.of(div).forwardWithEventName(DBC0820032TransitionEventName.一覧に戻る)
+                        .parameter(new RString("一覧に戻る"));
             } else {
                 ResponseData.of(div).respond();
             }
         } else {
-            //TODO  QA405
-//            return ResponseData.of(div).forwardWithEventName(DBC0820022TransitionEventName.サービス計画費)
-//                    .parameter(new RString("サービス計画費"));
+            return ResponseData.of(div).forwardWithEventName(DBC0820032TransitionEventName.一覧に戻る)
+                    .parameter(new RString("一覧に戻る"));
         }
         return createResponse(div);
     }

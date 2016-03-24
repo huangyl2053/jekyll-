@@ -29,7 +29,9 @@
         AS B
         ON B."dbV2001ChoshuHoho_hihokenshaNo" = A."dbT2017TsuchishoHakkogoIdosha_shikibetsuCode"
         WHERE A."dbT2017TsuchishoHakkogoIdosha_reportID" = #{帳票ID}
-        AND A."dbT2017TsuchishoHakkogoIdosha_chohyosakuseiTimestamp" = #{帳票作成日時}	
+        AND A."dbT2017TsuchishoHakkogoIdosha_chohyosakuseiTimestamp" = #{帳票作成日時}
+        AND B."dbV2001ChoshuHoho_lastUpdateTimestamp" <![CDATA[>=]]> #{最大計算処理日時}
+        AND B."dbV2001ChoshuHoho_lastUpdateTimestamp" <![CDATA[<=]]> #{システム日時}
     </sql>
     
    <resultMap id="ResultMap_DbT2017Uaft200EntityResult" autoMapping="true"
@@ -61,4 +63,5 @@
         AND T1."dbT2017TsuchishoHakkogoIdosha_idoAriFlag"=true
         ORDER BY T1."dbT2017TsuchishoHakkogoIdosha_hihokenshaNo"
     </sql>
+    
 </mapper>

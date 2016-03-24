@@ -370,21 +370,21 @@ public final class KinkyujiShisetuRyoyohiPanelHandler {
                             getコード()).nextString();
                     ShokanKinkyuShisetsuRyoyo entity = new ShokanKinkyuShisetsuRyoyo(
                             被保険者番号, 提供購入年月, 新整理番号, 事業者番号, 様式番号, 明細番号,
-                            new RString(String.valueOf(max連番)));
+                            new RString(String.format("%02d", max連番)));
                     entity = entity.added();
                     entity = buildEntity(entity, row);
                     list.add(entity);
-                }
-                if (RowState.Modified == row.getRowState()) {
+                } else if (RowState.Modified == row.getRowState()) {
                     ShokanKinkyuShisetsuRyoyo entityModified = map.get(row.getDefaultDataName21());
                     entityModified = entityModified.modified();
                     entityModified = buildEntity(entityModified, row);
                     list.add(entityModified);
-                }
-                if (RowState.Deleted == row.getRowState()) {
+                } else if (RowState.Deleted == row.getRowState()) {
                     ShokanKinkyuShisetsuRyoyo entityDeleted = map.get(row.getDefaultDataName21());
                     entityDeleted = entityDeleted.deleted();
                     list.add(entityDeleted);
+                } else {
+                    list.add(map.get(row.getDefaultDataName21()));
                 }
             }
             RString 証明書コード = div.getPanelHead().getTxtShomeisho().getValue();

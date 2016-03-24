@@ -6,18 +6,25 @@
 package jp.co.ndensan.reams.db.dbc.divcontroller.handler.dbc0810025;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbc.business.core.basic.ShikibetsuNoKanri;
 import jp.co.ndensan.reams.db.dbc.business.core.basic.ShokanTokuteiNyushoshaKaigoServiceHiyo;
 import jp.co.ndensan.reams.db.dbc.definition.core.shikyufushikyukubun.ShikyuFushikyuKubun;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0810025.TokuteiNyushoshaHiyoDiv;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0810025.dgdTokuteiYichiran_Row;
+import jp.co.ndensan.reams.db.dbc.divcontroller.viewbox.ViewStateKeys;
+import jp.co.ndensan.reams.db.dbc.service.core.shokanbaraijyokyoshokai.ShokanbaraiJyokyoShokai;
+import jp.co.ndensan.reams.db.dbx.business.core.kaigoserviceshurui.kaigoservicenaiyou.KaigoServiceNaiyou;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
+import jp.co.ndensan.reams.uz.uza.biz.KaigoServiceShuruiCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
+import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 
 /**
  * 償還払い状況照会_特定入所者費用のハンドラクラスです。
@@ -158,10 +165,22 @@ public class TokuteiNyushoshaHiyoHandler {
         RString serviceCodeKoumoku = new RString(row.getDefaultDataName1().subSequence(2, SIX).toString());
         div.getPanelTokutei().getPanelMeisai().getTxtServiceCodeShuruyi().setValue(serviceCodeShuruyi);
         div.getPanelTokutei().getPanelMeisai().getTxtServiceCodeKoumoku().setValue(serviceCodeKoumoku);
-        // TODO QAのNo.184(Redmine#75727) サービスコード取得できない。
-//        List<ServiceCode> serviceCode = ServiceCodeInput.getServiceCodeList(serviceCodeShuruyi, serviceCodeKoumoku,
-//        ViewStateHolder.get(ViewStateKeys.サービス年月, FlexibleYearMonth.class));
-        div.getPanelTokutei().getPanelMeisai().getTxtServiceName().setValue(new RString("サービス名称"));
+        List<KaigoServiceNaiyou> serviceCodeList = ShokanbaraiJyokyoShokai.createInstance().getServiceCodeInfo(
+                new KaigoServiceShuruiCode(serviceCodeShuruyi),
+                serviceCodeKoumoku,
+                ViewStateHolder.get(ViewStateKeys.サービス年月, FlexibleYearMonth.class));
+        if (serviceCodeList != null) {
+            Collections.sort(serviceCodeList, new Comparator<KaigoServiceNaiyou>() {
+                @Override
+                public int compare(KaigoServiceNaiyou o1, KaigoServiceNaiyou o2) {
+                    return o2.get提供開始年月().compareTo(o1.get提供開始年月());
+                }
+            });
+            if (serviceCodeList.get(0).getサービス名称() != null) {
+                div.getPanelTokutei().getPanelMeisai().getTxtServiceName().setValue(
+                        serviceCodeList.get(0).getサービス名称());
+            }
+        }
         div.getPanelTokutei().getPanelMeisai().getTxtHyojyuntanka().setValue(row.getDefaultDataName2().getValue());
         div.getPanelTokutei().getPanelMeisai().getTxtFutangenndogaku().setValue(row.getDefaultDataName3().getValue());
         div.getPanelTokutei().getPanelMeisai().getTxtNisu().setValue(row.getDefaultDataName4().getValue());

@@ -35,10 +35,10 @@ public class panelServiceKeikakuhiDownDiv extends Panel {
     private TextBox txtServiceNamedown;
     @JsonProperty("txtTanyiDown")
     private TextBoxNum txtTanyiDown;
-    @JsonProperty("txtTanyisuTanka")
-    private TextBoxNum txtTanyisuTanka;
     @JsonProperty("txtSeikyugakuDown")
     private TextBoxNum txtSeikyugakuDown;
+    @JsonProperty("txtTanyisuTanka")
+    private TextBoxNum txtTanyisuTanka;
     @JsonProperty("txtTantoukayigoshien")
     private TextBoxCode txtTantoukayigoshien;
     @JsonProperty("txtTekiyo")
@@ -195,24 +195,6 @@ public class panelServiceKeikakuhiDownDiv extends Panel {
     }
 
     /*
-     * gettxtTanyisuTanka
-     * @return txtTanyisuTanka
-     */
-    @JsonProperty("txtTanyisuTanka")
-    public TextBoxNum getTxtTanyisuTanka() {
-        return txtTanyisuTanka;
-    }
-
-    /*
-     * settxtTanyisuTanka
-     * @param txtTanyisuTanka txtTanyisuTanka
-     */
-    @JsonProperty("txtTanyisuTanka")
-    public void setTxtTanyisuTanka(TextBoxNum txtTanyisuTanka) {
-        this.txtTanyisuTanka = txtTanyisuTanka;
-    }
-
-    /*
      * gettxtSeikyugakuDown
      * @return txtSeikyugakuDown
      */
@@ -228,6 +210,24 @@ public class panelServiceKeikakuhiDownDiv extends Panel {
     @JsonProperty("txtSeikyugakuDown")
     public void setTxtSeikyugakuDown(TextBoxNum txtSeikyugakuDown) {
         this.txtSeikyugakuDown = txtSeikyugakuDown;
+    }
+
+    /*
+     * gettxtTanyisuTanka
+     * @return txtTanyisuTanka
+     */
+    @JsonProperty("txtTanyisuTanka")
+    public TextBoxNum getTxtTanyisuTanka() {
+        return txtTanyisuTanka;
+    }
+
+    /*
+     * settxtTanyisuTanka
+     * @param txtTanyisuTanka txtTanyisuTanka
+     */
+    @JsonProperty("txtTanyisuTanka")
+    public void setTxtTanyisuTanka(TextBoxNum txtTanyisuTanka) {
+        this.txtTanyisuTanka = txtTanyisuTanka;
     }
 
     /*

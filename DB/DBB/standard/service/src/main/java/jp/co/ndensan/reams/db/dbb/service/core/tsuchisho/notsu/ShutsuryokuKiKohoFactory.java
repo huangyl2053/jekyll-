@@ -139,7 +139,7 @@ public class ShutsuryokuKiKohoFactory {
             Kitsuki kitsuki) {
         if (ToshoShutsuryokuHoho.前期_中期_後期を別々に出力 == 当初出力_出力方法) {
             出力期候補.set出力期リスト(Arrays.asList(kitsuki));
-        } else if (ToshoShutsuryokuHoho.前期_中期_後期を別々に出力 == 当初出力_出力方法) {
+        } else if (ToshoShutsuryokuHoho.前期_中期_後期を全件出力 == 当初出力_出力方法) {
             出力期候補.set出力期リスト(期月リスト.filteredLater期(kitsuki.get期AsInt()).toList());
         }
     }
@@ -147,11 +147,11 @@ public class ShutsuryokuKiKohoFactory {
     private RString get表示文字By期毎タイプ(ToshoShutsuryokuHoho 当初出力_出力方法, Kitsuki kitsuki) {
         if (ToshoShutsuryokuHoho.前期_中期_後期を別々に出力 == 当初出力_出力方法) {
             return new RStringBuilder().append(kitsuki.get期()).append(文字列_期)
-                    .append(kitsuki.get月().toString()).append(文字列_月分).toRString();
+                    .append(kitsuki.get月().getコード()).append(文字列_月分).toRString();
         }
         if (ToshoShutsuryokuHoho.前期_中期_後期を全件出力 == 当初出力_出力方法) {
             return new RStringBuilder().append(kitsuki.get期()).append(文字列_期)
-                    .append(kitsuki.get月().toString()).append(文字列_月全件).toRString();
+                    .append(kitsuki.get月().getコード()).append(文字列_月全件).toRString();
         }
         return RString.EMPTY;
     }
@@ -172,38 +172,38 @@ public class ShutsuryokuKiKohoFactory {
         if (納入通知書制御情報.get当初出力_中期開始期() == 設定なし
                 && 納入通知書制御情報.get当初出力_後期開始期() == 設定なし) {
             return new RStringBuilder().append(kitsuki.get期()).append(文字列_期)
-                    .append(kitsuki.get月().toString()).append(文字列_月分).toRString();
+                    .append(kitsuki.get月().getコード()).append(文字列_月分).toRString();
         }
         if (納入通知書制御情報.get当初出力_中期開始期() == 設定なし
                 && 納入通知書制御情報.get当初出力_後期開始期() != 設定なし
                 && kitsuki.get期AsInt() < 納入通知書制御情報.get当初出力_後期開始期()) {
             return new RStringBuilder().append(文字列_前期).append(kitsuki.get期()).append(文字列_期)
-                    .append(kitsuki.get月().toString()).append(文字列_月分).toRString();
+                    .append(kitsuki.get月().getコード()).append(文字列_月分).toRString();
         }
         if (納入通知書制御情報.get当初出力_中期開始期() == 設定なし
                 && 納入通知書制御情報.get当初出力_後期開始期() != 設定なし
                 && 納入通知書制御情報.get当初出力_後期開始期() <= kitsuki.get期AsInt()) {
             return new RStringBuilder().append(文字列_後期).append(kitsuki.get期()).append(文字列_期)
-                    .append(kitsuki.get月().toString()).append(文字列_月分).toRString();
+                    .append(kitsuki.get月().getコード()).append(文字列_月分).toRString();
         }
         if (納入通知書制御情報.get当初出力_中期開始期() != 設定なし
                 && 納入通知書制御情報.get当初出力_後期開始期() != 設定なし
                 && kitsuki.get期AsInt() < 納入通知書制御情報.get当初出力_中期開始期()) {
             return new RStringBuilder().append(文字列_前期).append(kitsuki.get期()).append(文字列_期)
-                    .append(kitsuki.get月().toString()).append(文字列_月分).toRString();
+                    .append(kitsuki.get月().getコード()).append(文字列_月分).toRString();
         }
         if (納入通知書制御情報.get当初出力_中期開始期() != 設定なし
                 && 納入通知書制御情報.get当初出力_後期開始期() != 設定なし
                 && 納入通知書制御情報.get当初出力_中期開始期() <= kitsuki.get期AsInt()
                 && kitsuki.get期AsInt() < 納入通知書制御情報.get当初出力_後期開始期()) {
             return new RStringBuilder().append(文字列_中期).append(kitsuki.get期()).append(文字列_期)
-                    .append(kitsuki.get月().toString()).append(文字列_月分).toRString();
+                    .append(kitsuki.get月().getコード()).append(文字列_月分).toRString();
         }
         if (納入通知書制御情報.get当初出力_中期開始期() != 設定なし
                 && 納入通知書制御情報.get当初出力_後期開始期() != 設定なし
                 && 納入通知書制御情報.get当初出力_後期開始期() <= kitsuki.get期AsInt()) {
             return new RStringBuilder().append(文字列_後期).append(kitsuki.get期()).append(文字列_期)
-                    .append(kitsuki.get月().toString()).append(文字列_月分).toRString();
+                    .append(kitsuki.get月().getコード()).append(文字列_月分).toRString();
         }
         return RString.EMPTY;
     }
@@ -212,38 +212,38 @@ public class ShutsuryokuKiKohoFactory {
         if (納入通知書制御情報.get当初出力_中期開始期() == 設定なし
                 && 納入通知書制御情報.get当初出力_後期開始期() == 設定なし) {
             return new RStringBuilder().append(kitsuki.get期()).append(文字列_期).
-                    append(kitsuki.get月().toString()).append(文字列_月全件).toRString();
+                    append(kitsuki.get月().getコード()).append(文字列_月全件).toRString();
         }
         if (納入通知書制御情報.get当初出力_中期開始期() == 設定なし
                 && 納入通知書制御情報.get当初出力_後期開始期() != 設定なし
                 && kitsuki.get期AsInt() < 納入通知書制御情報.get当初出力_後期開始期()) {
             return new RStringBuilder().append(文字列_前期).append(kitsuki.get期()).append(文字列_期)
-                    .append(kitsuki.get月().toString()).append(文字列_月全件).toRString();
+                    .append(kitsuki.get月().getコード()).append(文字列_月全件).toRString();
         }
         if (納入通知書制御情報.get当初出力_中期開始期() == 設定なし
                 && 納入通知書制御情報.get当初出力_後期開始期() != 設定なし
                 && 納入通知書制御情報.get当初出力_後期開始期() <= kitsuki.get期AsInt()) {
             return new RStringBuilder().append(文字列_後期).append(kitsuki.get期()).append(文字列_期)
-                    .append(kitsuki.get月().toString()).append(文字列_月全件).toRString();
+                    .append(kitsuki.get月().getコード()).append(文字列_月全件).toRString();
         }
         if (納入通知書制御情報.get当初出力_中期開始期() != 設定なし
                 && 納入通知書制御情報.get当初出力_後期開始期() != 設定なし
                 && kitsuki.get期AsInt() < 納入通知書制御情報.get当初出力_中期開始期()) {
             return new RStringBuilder().append(文字列_前期).append(kitsuki.get期()).append(文字列_期)
-                    .append(kitsuki.get月().toString()).append(文字列_月全件).toRString();
+                    .append(kitsuki.get月().getコード()).append(文字列_月全件).toRString();
         }
         if (納入通知書制御情報.get当初出力_中期開始期() != 設定なし
                 && 納入通知書制御情報.get当初出力_後期開始期() != 設定なし
                 && 納入通知書制御情報.get当初出力_中期開始期() <= kitsuki.get期AsInt()
                 && kitsuki.get期AsInt() < 納入通知書制御情報.get当初出力_後期開始期()) {
             return new RStringBuilder().append(文字列_中期).append(kitsuki.get期()).append(文字列_期)
-                    .append(kitsuki.get月().toString()).append(文字列_月全件).toRString();
+                    .append(kitsuki.get月().getコード()).append(文字列_月全件).toRString();
         }
         if (納入通知書制御情報.get当初出力_中期開始期() != 設定なし
                 && 納入通知書制御情報.get当初出力_後期開始期() != 設定なし
                 && 納入通知書制御情報.get当初出力_後期開始期() <= kitsuki.get期AsInt()) {
             return new RStringBuilder().append(文字列_後期).append(kitsuki.get期()).append(文字列_期)
-                    .append(kitsuki.get月().toString()).append(文字列_月全件).toRString();
+                    .append(kitsuki.get月().getコード()).append(文字列_月全件).toRString();
         }
         return RString.EMPTY;
     }

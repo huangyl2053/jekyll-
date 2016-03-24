@@ -45,8 +45,10 @@ public class GoukeiInfoHandler {
         div.getPanelGoukeiInfo().getTxtRiyoshafutangaku().setValue(new Decimal(shokanKihon.get利用者負担額()));
         div.getPanelGoukeiInfo().getTxtKinkyujiShisetsuRyoyo().setValue(shokanKihon.get緊急時施設療養費請求額());
         div.getPanelGoukeiInfo().getTxtTokuteiShinryo().setValue(shokanKihon.get特定診療費請求額());
-        div.getPanelGoukeiInfo().getTxtShokujiTeikyohi().setValue(
-                new Decimal(shokanShokujiHiyoList.get(0).get食事提供費請求額()));
+        if (shokanShokujiHiyoList != null && !shokanShokujiHiyoList.isEmpty()) {
+            div.getPanelGoukeiInfo().getTxtShokujiTeikyohi().setValue(
+                    new Decimal(shokanShokujiHiyoList.get(0).get食事提供費請求額()));
+        }
     }
 
     /**

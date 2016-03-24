@@ -36,6 +36,7 @@ import jp.co.ndensan.reams.ua.uax.definition.mybatisprm.shikibetsutaisho.IShikib
 import jp.co.ndensan.reams.uz.uza.biz.GyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
+import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
@@ -155,6 +156,7 @@ public class JutakukaishuSikyuShinseiIkkatuShinsaManager {
                         = 償還払請求集計Dac.select住宅改修費(parameter.get被保険者番号(),
                                 parameter.getサービス提供年月(), parameter.get整理番号());
                 DbT3053ShokanShukeiEntity dbt3053Entity = dbt3053EntityList.get(0);
+                dbt3053Entity.setShinsaYM(new FlexibleYearMonth(RDate.getNowDate().getYearMonth().toDateString().toString()));
                 dbt3053Entity.setShikyuKubunCode(parameter.get支給区分コード());
                 dbt3053Entity.setState(EntityDataState.Modified);
                 償還払請求集計Dac.save(dbt3053Entity);

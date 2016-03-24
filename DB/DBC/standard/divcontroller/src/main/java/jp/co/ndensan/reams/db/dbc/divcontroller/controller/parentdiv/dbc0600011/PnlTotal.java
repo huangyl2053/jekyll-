@@ -15,7 +15,6 @@ import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaN
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.ui.binding.DataGridButtonState;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 
 /**
@@ -37,18 +36,19 @@ public class PnlTotal {
      * @return 福祉用具購入費支給申請
      */
     public ResponseData<PnlTotalDiv> onLoad(PnlTotalDiv div) {
-        ViewStateHolder.put(ViewStateKeys.状態, 差額登録);
         ViewStateHolder.put(ViewStateKeys.識別コード, new ShikibetsuCode(new RString("000000000000010")));
         ViewStateHolder.put(ViewStateKeys.被保険者番号, new HihokenshaNo("000000003"));
         div.getKaigoCommonPanel().getCcdAtenaInfo().onLoad(ViewStateHolder.get(ViewStateKeys.識別コード, ShikibetsuCode.class));
         div.getKaigoCommonPanel().getCcdShikakuKihon().onLoad(ViewStateHolder.get(ViewStateKeys.被保険者番号, HihokenshaNo.class));
         PnlTotalHandler handler = getHandler(div);
-        List<FukushiyouguKonyuhiShikyuShinseiResult> list = FukushiyoguKonyuhiShikyuShinsei.createInstance().getShokanShikyuShinseiList(new HihokenshaNo("0000031"));
+        List<FukushiyouguKonyuhiShikyuShinseiResult> list = FukushiyoguKonyuhiShikyuShinsei.createInstance().
+                getShokanShikyuShinseiList(ViewStateHolder.get(ViewStateKeys.被保険者番号, HihokenshaNo.class));
         handler.initializedgShikyuShinseiList(list);
-        if (ViewStateHolder.get(ViewStateKeys.識別コード, RString.class) == 差額登録) {
+        if (差額登録.equals(ViewStateHolder.get(ViewStateKeys.状態, RString.class))) {
             div.getYoguKonyuhiShikyuShinseiList().getBtnAddShikyuShinsei().setDisabled(true);
-            div.getYoguKonyuhiShikyuShinseiList().getDgShikyuShinseiList().getClickedItem().setDeleteButtonState(DataGridButtonState.Disabled);
-            div.getYoguKonyuhiShikyuShinseiList().getDgShikyuShinseiList().getClickedItem().setSelectButtonState(DataGridButtonState.Disabled);
+            div.getYoguKonyuhiShikyuShinseiList().getDgShikyuShinseiList().getGridSetting().setIsShowSelectButtonColumn(false);
+            div.getYoguKonyuhiShikyuShinseiList().getDgShikyuShinseiList().getGridSetting().setIsShowDeleteButtonColumn(false);
+            div.getYoguKonyuhiShikyuShinseiList().getDgShikyuShinseiList().getGridSetting().setIsShowModifyButtonColumn(true);
         }
         return ResponseData.of(div).respond();
     }

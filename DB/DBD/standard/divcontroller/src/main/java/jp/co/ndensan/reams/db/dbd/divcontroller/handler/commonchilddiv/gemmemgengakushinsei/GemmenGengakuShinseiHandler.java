@@ -88,7 +88,17 @@ public class GemmenGengakuShinseiHandler {
             div.getTxtJigyoshaName().clearValue();
         }
         div.getDdlJigyoshaKubun().setDataSource(getDdlJigyoshaKubun());
-
+        if (減免減額申請情報.get申請届出代行区分() != null) {
+            div.getDdlShinseiDaikoKubun().setSelectedKey(減免減額申請情報.get申請届出代行区分().getCode());
+        }
+        if (減免減額申請情報.get申請届出者氏名カナ() != null) {
+            div.getTxtShinseishaShimeiKana().setValue(減免減額申請情報.get申請届出者氏名カナ().getColumnValue());
+        }
+        div.getTxtShinseishaShimei().setDomain(減免減額申請情報.get申請届出者氏名());
+        div.getTxtShinseishaTsuzukigara().setValue(減免減額申請情報.get申請届出者続柄());
+        div.getTxtShinseishaYubinNo().setValue(減免減額申請情報.get申請届出者郵便番号());
+        div.getTxtShinseishaTelNo().setDomain(減免減額申請情報.get申請届出者電話番号());
+        div.getTxtShinseishaJusho().setDomain(減免減額申請情報.get申請届出者住所());
     }
 
     /**

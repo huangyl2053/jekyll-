@@ -108,7 +108,7 @@ public final class YoshikiIchiBesshiHandler {
      * @param 引き継ぎデータ JigyoHokokuGeppoParameter
      */
     public void initializeKihoneria(JigyoHokokuGeppoParameter 引き継ぎデータ) {
-        FlexibleDate 報告年月 = new FlexibleDate(引き継ぎデータ.get報告年月());
+//        FlexibleDate 報告年月 = new FlexibleDate(引き継ぎデータ.get報告年月());
         FlexibleDate 集計年月 = new FlexibleDate(引き継ぎデータ.get集計年月());
         RString 保険者コード = 引き継ぎデータ.get保険者コード();
         RString 保険者名 = 引き継ぎデータ.get市町村名称();

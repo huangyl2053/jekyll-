@@ -20,7 +20,6 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 /**
  * 償還払い状況照会_償還払決定情報のクラスです。
  *
- * @author yebangqiang
  */
 public class ShokanbarayiKeteiInfo {
 
@@ -40,20 +39,24 @@ public class ShokanbarayiKeteiInfo {
         ServiceTeiKyoShomeishoParameter parameter = ViewStateHolder.get(
                 ViewStateKeys.基本情報パラメータ, ServiceTeiKyoShomeishoParameter.class);
         FlexibleYearMonth サービス年月 = parameter.getServiceTeikyoYM();
-//        HihokenshaNo 被保険者番号 = parameter.getHiHokenshaNo();
+        HihokenshaNo 被保険者番号 = parameter.getHiHokenshaNo();
         RString 整理番号 = parameter.getSeiriNp();
         ViewStateHolder.put(ViewStateKeys.識別コード, new ShikibetsuCode("123456"));
         ViewStateHolder.put(ViewStateKeys.様式番号, new RString("0003"));
         ViewStateHolder.put(ViewStateKeys.申請日, new RDate("20151120"));
-//        if (!被保険者番号.isEmpty()) {
-//            RString load = new RString("共有子Divの初期化");
-//            div.getPanelCcd().getCcdKaigoShikakuKihon().load(LasdecCode.EMPTY, 識別コード);
-//        } else {
-//            div.getPanelOne().getCcdKaigoShikakuKihon().setVisible(false);
-//        }
+        RString 業務区分 = new RString("03");
+        RString 画面モード = new RString("モード_登録");
+        ShikibetsuCode 識別コード = new ShikibetsuCode("000000000000010");
+        div.getPanelOne().getCcdKaigoAtenaInfo().onLoad(識別コード);
+        if (!被保険者番号.isEmpty()) {
+            div.getPanelOne().getCcdKaigoShikakuKihon().onLoad(被保険者番号);
+        } else {
+            div.getPanelOne().getCcdKaigoShikakuKihon().setVisible(false);
+        }
         div.getPanelTwo().getTxtServiceTeikyoYM().setValue(new RDate(サービス年月.wareki().toDateString().toString()));
         div.getPanelTwo().getTxtSeiriBango().setValue(整理番号);
-//        div.getCcdShokanbaraiketteiJoho().load(被保険者番号, サービス年月, 整理番号);
+        div.getPanelTwo().getCcdShokanbaraiketteiJoho().loadInitialize(
+                被保険者番号, サービス年月, 整理番号, 業務区分, 画面モード);
 //        int count = div.getCcdShokanbaraiketteiJoho().get件数();
 //        if(count == 0) {
 //            throw new ApplicationException(UrErrorMessages.該当データなし.getMessage());
@@ -62,44 +65,4 @@ public class ShokanbarayiKeteiInfo {
         return ResponseData.of(div).respond();
     }
 
-    /**
-     * 申請情報ボタンを押下した際に実行します.
-     *
-     * @param div 画面DIV
-     * @return 申請情報
-     */
-    public ResponseData<ShokanbarayiKeteiInfoDiv> onClick_btnShinsei(ShokanbarayiKeteiInfoDiv div) {
-        return ResponseData.of(div).respond();
-    }
-
-    /**
-     * 口座情報ボタンを押下した際に実行します.
-     *
-     * @param div 画面DIV
-     * @return 口座情報
-     */
-    public ResponseData<ShokanbarayiKeteiInfoDiv> onClick_btnKouza(ShokanbarayiKeteiInfoDiv div) {
-        return ResponseData.of(div).respond();
-    }
-
-    /**
-     * サービス提供証明書ボタンを押下した際に実行します.
-     *
-     * @param div 画面DIV
-     * @return サービス提供証明書
-     */
-    public ResponseData<ShokanbarayiKeteiInfoDiv> onClick_btnServiceTeikyoShomeisyo(ShokanbarayiKeteiInfoDiv div) {
-        return ResponseData.of(div).respond();
-    }
-
-    /**
-     * 申請情報検索へ戻るボタンを押下した際に実行します.
-     *
-     * @param div 画面DIV
-     * @return 申請情報検索
-     */
-    public ResponseData<ShokanbarayiKeteiInfoDiv> onClick_btnBack(ShokanbarayiKeteiInfoDiv div) {
-        //getHandler(div).btnKihonInfo();
-        return ResponseData.of(div).respond();
-    }
 }

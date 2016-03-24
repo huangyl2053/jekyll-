@@ -29,7 +29,7 @@ public class NinteiChosaSchedule3Main {
     private static final RString 編集モード = new RString("1");
     private static final RString 照会モード = new RString("2");
     private static final RString 未定者モード = new RString("3");
-    
+
     /**
      * onLoadの処理を行います。
      *
@@ -115,7 +115,7 @@ public class NinteiChosaSchedule3Main {
             ViewStateHolder.put(ViewStateKeys.認定調査スケジュール登録_対象者区分, 対象者区分);
             ViewStateHolder.put(ViewStateKeys.認定調査スケジュール登録_モード, 照会モード);
         }
-        if (未定者管理初期化.equals(ViewStateHolder.get(ViewStateKeys.認定調査スケジュール登録_モード, RString.class))) {
+        if (未定者管理初期化.equals(ViewStateHolder.get(ViewStateKeys.認定調査スケジュール登録_画面ステート, RString.class))) {
             ViewStateHolder.put(ViewStateKeys.認定調査スケジュール登録_対象者区分, div.getRadMiteishaKanri().getSelectedKey());
             ViewStateHolder.put(ViewStateKeys.認定調査スケジュール登録_設定日, ViewStateHolder.get(ViewStateKeys.認定調査スケジュール登録_設定日, FlexibleDate.class));
             ViewStateHolder.put(ViewStateKeys.認定調査スケジュール登録_申請書管理番号3, div.getDgResultList().getSelectedItems().get(0).getShinseishoKanriNo());

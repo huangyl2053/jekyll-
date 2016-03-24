@@ -472,37 +472,59 @@ public class ShinshinIkenHandler {
             set意見項目(要介護認定主治医意見書情報_TMP, 認知症の周辺症状, key);
         }
         if (div.getChkNinchishoShuhenShojo().getSelectedKeys().contains(チェックボックス_1)) {
-            set意見項目(要介護認定主治医意見書情報_TMP, 幻視幻聴, IkenKomoku01.有.getコード());
+            set意見項目(要介護認定主治医意見書情報_TMP, 幻視幻聴, チェックボックス_2);
+        } else {
+            set意見項目(要介護認定主治医意見書情報_TMP, 幻視幻聴, チェックボックス_1);
         }
         if (div.getChkNinchishoShuhenShojo().getSelectedKeys().contains(チェックボックス_2)) {
-            set意見項目(要介護認定主治医意見書情報_TMP, 妄想, IkenKomoku01.有.getコード());
+            set意見項目(要介護認定主治医意見書情報_TMP, 妄想, チェックボックス_2);
+        } else {
+            set意見項目(要介護認定主治医意見書情報_TMP, 妄想, チェックボックス_1);
         }
         if (div.getChkNinchishoShuhenShojo().getSelectedKeys().contains(チェックボックス_3)) {
-            set意見項目(要介護認定主治医意見書情報_TMP, 昼夜逆転, IkenKomoku01.有.getコード());
+            set意見項目(要介護認定主治医意見書情報_TMP, 昼夜逆転, チェックボックス_2);
+        } else {
+            set意見項目(要介護認定主治医意見書情報_TMP, 昼夜逆転, チェックボックス_1);
         }
         if (div.getChkNinchishoShuhenShojo().getSelectedKeys().contains(チェックボックス_4)) {
-            set意見項目(要介護認定主治医意見書情報_TMP, 暴言, IkenKomoku01.有.getコード());
+            set意見項目(要介護認定主治医意見書情報_TMP, 暴言, チェックボックス_2);
+        } else {
+            set意見項目(要介護認定主治医意見書情報_TMP, 暴言, チェックボックス_1);
         }
         if (div.getChkNinchishoShuhenShojo().getSelectedKeys().contains(チェックボックス_5)) {
-            set意見項目(要介護認定主治医意見書情報_TMP, 暴行, IkenKomoku01.有.getコード());
+            set意見項目(要介護認定主治医意見書情報_TMP, 暴行, チェックボックス_2);
+        } else {
+            set意見項目(要介護認定主治医意見書情報_TMP, 暴行, チェックボックス_1);
         }
         if (div.getChkNinchishoShuhenShojo().getSelectedKeys().contains(チェックボックス_6)) {
-            set意見項目(要介護認定主治医意見書情報_TMP, 介護への抵抗, IkenKomoku01.有.getコード());
+            set意見項目(要介護認定主治医意見書情報_TMP, 介護への抵抗, チェックボックス_2);
+        } else {
+            set意見項目(要介護認定主治医意見書情報_TMP, 介護への抵抗, チェックボックス_1);
         }
         if (div.getChkNinchishoShuhenShojo().getSelectedKeys().contains(チェックボックス_7)) {
-            set意見項目(要介護認定主治医意見書情報_TMP, 徘徊, IkenKomoku01.有.getコード());
+            set意見項目(要介護認定主治医意見書情報_TMP, 徘徊, チェックボックス_2);
+        } else {
+            set意見項目(要介護認定主治医意見書情報_TMP, 徘徊, チェックボックス_1);
         }
         if (div.getChkNinchishoShuhenShojo().getSelectedKeys().contains(チェックボックス_8)) {
-            set意見項目(要介護認定主治医意見書情報_TMP, 火の不始末, IkenKomoku01.有.getコード());
+            set意見項目(要介護認定主治医意見書情報_TMP, 火の不始末, チェックボックス_2);
+        } else {
+            set意見項目(要介護認定主治医意見書情報_TMP, 火の不始末, チェックボックス_1);
         }
         if (div.getChkNinchishoShuhenShojo().getSelectedKeys().contains(チェックボックス_9)) {
-            set意見項目(要介護認定主治医意見書情報_TMP, 不潔行為, IkenKomoku01.有.getコード());
+            set意見項目(要介護認定主治医意見書情報_TMP, 不潔行為, チェックボックス_2);
+        } else {
+            set意見項目(要介護認定主治医意見書情報_TMP, 不潔行為, チェックボックス_1);
         }
         if (div.getChkNinchishoShuhenShojo().getSelectedKeys().contains(チェックボックス_10)) {
-            set意見項目(要介護認定主治医意見書情報_TMP, 異食行動, IkenKomoku01.有.getコード());
+            set意見項目(要介護認定主治医意見書情報_TMP, 異食行動, チェックボックス_2);
+        } else {
+            set意見項目(要介護認定主治医意見書情報_TMP, 異食行動, チェックボックス_1);
         }
         if (div.getChkNinchishoShuhenShojo().getSelectedKeys().contains(チェックボックス_11)) {
-            set意見項目(要介護認定主治医意見書情報_TMP, 性的問題行動, IkenKomoku01.有.getコード());
+            set意見項目(要介護認定主治医意見書情報_TMP, 性的問題行動, チェックボックス_2);
+        } else {
+            set意見項目(要介護認定主治医意見書情報_TMP, 性的問題行動, チェックボックス_1);
         }
         set意見項目(要介護認定主治医意見書情報_TMP, その他, keyToItemNasiari(div.getChkNinchishoShuhenShojoSonota().getSelectedKeys()));
         set記入項目(要介護認定主治医意見書情報_TMP, その他_記入項目, div.getTxtSonotaKinyu().getValue());
@@ -520,7 +542,7 @@ public class ShinshinIkenHandler {
         set記入項目(要介護認定主治医意見書情報_TMP, 身長_記入項目, div.getTxtShincho().getValue());
         set記入項目(要介護認定主治医意見書情報_TMP, 体重_記入項目, div.getTxtTaiju().getValue());
         for (RString key : div.getChkKakoTaijuHenka().getSelectedKeys()) {
-            set意見項目(要介護認定主治医意見書情報_TMP, 過去6カ月の体重の変化, key);
+            set意見項目(要介護認定主治医意見書情報_TMP, 過去6カ月の体重の変化, set過去6カ月の体重(key));
         }
         set呼び出し元画面への戻り値_下();
     }
@@ -569,22 +591,22 @@ public class ShinshinIkenHandler {
         }
         set意見項目(要介護認定主治医意見書情報_TMP, 失調_不随意運動, keyToItemNasiari(div.getChkShicchoFuzuii().getSelectedKeys()));
         if (div.getChkFuzuiiJoshi().getSelectedKeys().contains(チェックボックス_1)) {
-            set意見項目(要介護認定主治医意見書情報_TMP, 失調_不随意運動_上肢_右, IkenKomoku01.有.getコード());
+            set意見項目(要介護認定主治医意見書情報_TMP, 失調_不随意運動_上肢_右, チェックボックス_2);
         }
         if (div.getChkFuzuiiJoshi().getSelectedKeys().contains(チェックボックス_2)) {
-            set意見項目(要介護認定主治医意見書情報_TMP, 失調_不随意運動_上肢_左, IkenKomoku01.有.getコード());
+            set意見項目(要介護認定主治医意見書情報_TMP, 失調_不随意運動_上肢_左, チェックボックス_2);
         }
         if (div.getChkFuzuiiKashi().getSelectedKeys().contains(チェックボックス_1)) {
-            set意見項目(要介護認定主治医意見書情報_TMP, 失調_不随意運動_下肢_右, IkenKomoku01.有.getコード());
+            set意見項目(要介護認定主治医意見書情報_TMP, 失調_不随意運動_下肢_右, チェックボックス_2);
         }
         if (div.getChkFuzuiiKashi().getSelectedKeys().contains(チェックボックス_2)) {
-            set意見項目(要介護認定主治医意見書情報_TMP, 失調_不随意運動_下肢_左, IkenKomoku01.有.getコード());
+            set意見項目(要介護認定主治医意見書情報_TMP, 失調_不随意運動_下肢_左, チェックボックス_2);
         }
         if (div.getChkTaikan().getSelectedKeys().contains(チェックボックス_1)) {
-            set意見項目(要介護認定主治医意見書情報_TMP, 失調_不随意運動_体幹_右, IkenKomoku01.有.getコード());
+            set意見項目(要介護認定主治医意見書情報_TMP, 失調_不随意運動_体幹_右, チェックボックス_2);
         }
         if (div.getChkTaikan().getSelectedKeys().contains(チェックボックス_2)) {
-            set意見項目(要介護認定主治医意見書情報_TMP, 失調_不随意運動_体幹_左, IkenKomoku01.有.getコード());
+            set意見項目(要介護認定主治医意見書情報_TMP, 失調_不随意運動_体幹_左, チェックボックス_2);
         }
         set意見項目(要介護認定主治医意見書情報_TMP, じょくそう, keyToItemNasiari(div.getChkJokuso().getSelectedKeys()));
         set記入項目(要介護認定主治医意見書情報_TMP, じょくそう_記入項目, div.getTxtJokusoBui().getValue());
@@ -1932,11 +1954,21 @@ public class ShinshinIkenHandler {
             return IkenKomoku01.無.getコード();
         }
     }
-
+    
     private RString keyToItemNasiari(List<RString> keys) {
         if (keys.contains(チェックボックス_1)) {
-            return IkenKomoku01.有.getコード();
+            return チェックボックス_2;
         }
-        return IkenKomoku01.無.getコード();
+        return チェックボックス_1;
+    }
+    
+    private RString set過去6カ月の体重(RString keys) {
+        if (keys.contains(チェックボックス_1)) {
+            return チェックボックス_1;
+        } else if (keys.contains(チェックボックス_2)) {
+            return チェックボックス_3;
+        } else {
+            return チェックボックス_2;
+        }
     }
 }

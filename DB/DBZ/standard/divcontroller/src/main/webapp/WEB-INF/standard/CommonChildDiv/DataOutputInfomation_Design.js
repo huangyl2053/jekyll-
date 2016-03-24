@@ -1,11 +1,11 @@
-var DBE;
-(function (DBE) {
+var DBZ;
+(function (DBZ) {
     (function (DataOutputInfomation) {
         var Events = (function () {
             function Events() {
             }
-            Events.CloseOK = function () {
-                return "CloseOK";
+            Events.onClick_btnKakunin = function () {
+                return "onClick_btnKakunin";
             };
             return Events;
         })();
@@ -20,11 +20,11 @@ var DBE;
             };
 
             Controls.prototype.convFiledNameSelf = function () {
-                return this._myName + "_" + DBE.DataOutputInfomation.Controls.myType();
+                return this._myName + "_" + DBZ.DataOutputInfomation.Controls.myType();
             };
 
             Controls.prototype.convFiledName = function (fieldName) {
-                return this._myName + "_" + DBE.DataOutputInfomation.Controls.myType() + "_" + fieldName;
+                return this._myName + "_" + DBZ.DataOutputInfomation.Controls.myType() + "_" + fieldName;
             };
 
             Controls.prototype.DataOutputInfomation = function () {
@@ -45,6 +45,6 @@ var DBE;
             return Controls;
         })();
         DataOutputInfomation.Controls = Controls;
-    })(DBE.DataOutputInfomation || (DBE.DataOutputInfomation = {}));
-    var DataOutputInfomation = DBE.DataOutputInfomation;
-})(DBE || (DBE = {}));
+    })(DBZ.DataOutputInfomation || (DBZ.DataOutputInfomation = {}));
+    var DataOutputInfomation = DBZ.DataOutputInfomation;
+})(DBZ || (DBZ = {}));
