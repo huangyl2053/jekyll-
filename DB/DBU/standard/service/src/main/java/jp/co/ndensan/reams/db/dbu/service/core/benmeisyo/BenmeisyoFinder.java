@@ -221,18 +221,20 @@ public class BenmeisyoFinder {
         UaFt200FindShikibetsuTaishoEntity 宛名情報 = benmeisyoMapper.selectAtena(BenmeiAtenaParameter.
                 createSelectByKeyParam(識別コード, this.getPsm()));
         HihokenshaDateEntity hihokenEntity = new HihokenshaDateEntity();
-        hihokenEntity.set氏名(ShikibetsuTaishoFactory.createShikibetsuTaisho(宛名情報).get名称());
-        hihokenEntity.set郵便番号(ShikibetsuTaishoFactory.createShikibetsuTaisho(宛名情報).get住所().get郵便番号());
-        StringBuilder 住所 = new StringBuilder();
-        住所.append(ShikibetsuTaishoFactory.createShikibetsuTaisho(宛名情報).get住所().get住所());
-        住所.append(ShikibetsuTaishoFactory.createShikibetsuTaisho(宛名情報).get住所().get番地());
-        住所.append("　");
-        住所.append(ShikibetsuTaishoFactory.createShikibetsuTaisho(宛名情報).get住所().get方書());
-        hihokenEntity.set住所(new RString(住所.toString()));
-        FlexibleDate 生年月日 = ShikibetsuTaishoFactory.createShikibetsuTaisho(宛名情報).to個人().get生年月日().toFlexibleDate();
-        hihokenEntity.set生年月日(生年月日.wareki().eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN).separator(Separator.JAPANESE).
-                fillType(FillType.BLANK).toDateString());
-        hihokenEntity.set性別(ShikibetsuTaishoFactory.createKojin(宛名情報).to個人().get性別().getCommonName());
+        if (宛名情報 != null) {
+            hihokenEntity.set氏名(ShikibetsuTaishoFactory.createShikibetsuTaisho(宛名情報).get名称());
+            hihokenEntity.set郵便番号(ShikibetsuTaishoFactory.createShikibetsuTaisho(宛名情報).get住所().get郵便番号());
+            StringBuilder 住所 = new StringBuilder();
+            住所.append(ShikibetsuTaishoFactory.createShikibetsuTaisho(宛名情報).get住所().get住所());
+            住所.append(ShikibetsuTaishoFactory.createShikibetsuTaisho(宛名情報).get住所().get番地());
+            住所.append("　");
+            住所.append(ShikibetsuTaishoFactory.createShikibetsuTaisho(宛名情報).get住所().get方書());
+            hihokenEntity.set住所(new RString(住所.toString()));
+            FlexibleDate 生年月日 = ShikibetsuTaishoFactory.createShikibetsuTaisho(宛名情報).to個人().get生年月日().toFlexibleDate();
+            hihokenEntity.set生年月日(生年月日.wareki().eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN).separator(Separator.JAPANESE).
+                    fillType(FillType.BLANK).toDateString());
+            hihokenEntity.set性別(ShikibetsuTaishoFactory.createKojin(宛名情報).to個人().get性別().getCommonName());
+        }
         return hihokenEntity;
     }
 
@@ -266,11 +268,13 @@ public class BenmeisyoFinder {
         Association 地方公共団体 = AssociationFinderFactory.createInstance().getAssociation();
         boolean is公印に掛ける = 帳票認証者情報.is公印掛ける有無();
         boolean is公印を省略 = 帳票認証者情報.is公印省略有無();
-        if (new RString("1").equals(帳票制御情報.getShuchoMeiInjiIchi())) {
-            is公印に掛ける = true;
-        }
-        if (!帳票制御情報.getDenshiKoinInjiUmu()) {
-            is公印を省略 = true;
+        if (帳票制御情報 != null) {
+            if (new RString("1").equals(帳票制御情報.getShuchoMeiInjiIchi())) {
+                is公印に掛ける = true;
+            }
+            if (!帳票制御情報.getDenshiKoinInjiUmu()) {
+                is公印を省略 = true;
+            }
         }
         NinshoshaSource ninshoshaSource = NinshoshaSourceBuilderFactory.createInstance(帳票認証者情報, 地方公共団体,
                 reportSourceWriter.getImageFolderPath(), new RDate(弁明書作成日.toString()),
