@@ -68,6 +68,9 @@ public class SeikatsuServiceIkenHandler {
     List<RString> chkHokohojoShiyokeys = new ArrayList();
     List<RString> chkHasseiShojokeys = new ArrayList();
     List<RString> chkIgakutekiKanrikeys = new ArrayList();
+    List<RString> chkJotaiSonotakeys = new ArrayList();
+    List<RString> chkSonotaIryoServicekeys = new ArrayList();
+    List<RString> chkSonotaIryoServiceHitsuyoSeikeys = new ArrayList();
     private final SeikatsuServiceIkenDiv div;
 
     /**
@@ -84,26 +87,29 @@ public class SeikatsuServiceIkenHandler {
      *
      */
     public void onLoad() {
+        連番リスト初期化処理();
         NinteiShinseiJoho ninteiShinseiJohoBusiness = ViewStateHolder.get(ViewStateKeys.主治医意見書登録_意見書情報, NinteiShinseiJoho.class);
         ShinseishoKanriNo 管理番号 = new ShinseishoKanriNo(ViewStateHolder.get(ViewStateKeys.要介護認定申請検索_申請書管理番号, RString.class));
         RString 履歴番号STR = ViewStateHolder.get(ViewStateKeys.要介護認定申請検索_主治医意見書作成依頼履歴番号, RString.class);
         int 履歴番号 = Integer.valueOf(履歴番号STR.toString());
         ShujiiIkenshoIraiJohoIdentifier shujiiIkenshoIraiIdentifier = new ShujiiIkenshoIraiJohoIdentifier(管理番号, 履歴番号);
-        ShujiiIkenshoIraiJoho shujiiIkenshoIraiJoho = ninteiShinseiJohoBusiness.getShujiiIkenshoIraiJoho(shujiiIkenshoIraiIdentifier);
         ShujiiIkenshoJohoIdentifier shujiiIkenshoJohoIdentifier = new ShujiiIkenshoJohoIdentifier(管理番号, 履歴番号);
+        ShujiiIkenshoIraiJoho shujiiIkenshoIraiJoho = ninteiShinseiJohoBusiness.getShujiiIkenshoIraiJoho(shujiiIkenshoIraiIdentifier);
+        if (shujiiIkenshoIraiJoho.getShujiiIkenshoJohoList().isEmpty()) {
+            shujiiIkenshoIraiJoho.createBuilderForEdit()
+                    .setShujiiIkenshoJoho(create要介護認定主治医意見書情報(管理番号, 履歴番号));
+        }
         ShujiiIkenshoJoho shujiiIkenshoJoho = shujiiIkenshoIraiJoho.getSeishinTechoNini(shujiiIkenshoJohoIdentifier);
-
+        if (shujiiIkenshoJoho.getShujiiIkenshoIkenItemList().isEmpty()) {
+            shujiiIkenshoJoho = create意見項目(shujiiIkenshoJoho, 管理番号, 履歴番号);
+        }
+        if (shujiiIkenshoJoho.getShujiiIkenshoKinyuItemList().isEmpty()) {
+            shujiiIkenshoJoho = create記入項目(shujiiIkenshoJoho, 管理番号, 履歴番号);
+        }
         List<ShujiiIkenshoIkenItem> 要介護認定主治医意見書意見項目リスト = shujiiIkenshoJoho.getShujiiIkenshoIkenItemList();
         List<ShujiiIkenshoKinyuItem> 要介護認定主治医意見書記入項目リスト = shujiiIkenshoJoho.getShujiiIkenshoKinyuItemList();
-        連番リスト初期化処理();
-        if (!要介護認定主治医意見書意見項目リスト.isEmpty()
-                && 厚労省IF識別コード.equals(要介護認定主治医意見書意見項目リスト.get(INDEX_0).get厚労省IF識別コード().getColumnValue())) {
-            要介護認定主治医意見書意見項目リスト = 意見項目初期化編集(要介護認定主治医意見書意見項目リスト, 管理番号, 履歴番号);
-        }
-        if (!要介護認定主治医意見書記入項目リスト.isEmpty()
-                && 厚労省IF識別コード.equals(要介護認定主治医意見書記入項目リスト.get(INDEX_0).get厚労省IF識別コード().getColumnValue())) {
-            要介護認定主治医意見書記入項目リスト = 記入項目初期化編集(要介護認定主治医意見書記入項目リスト, 管理番号, 履歴番号);
-        }
+        要介護認定主治医意見書意見項目リスト = 意見項目初期化編集(要介護認定主治医意見書意見項目リスト, 管理番号, 履歴番号);
+        要介護認定主治医意見書記入項目リスト = 記入項目初期化編集(要介護認定主治医意見書記入項目リスト, 管理番号, 履歴番号);
         viewStateSave(ninteiShinseiJohoBusiness,
                 shujiiIkenshoIraiJoho, shujiiIkenshoJoho,
                 要介護認定主治医意見書意見項目リスト, 要介護認定主治医意見書記入項目リスト);
@@ -174,7 +180,33 @@ public class SeikatsuServiceIkenHandler {
                 edit意見項目(要介護認定主治医意見書意見項目リスト), edit記入項目(要介護認定主治医意見書記入項目リスト));
     }
 
-    private void viewStateSave(NinteiShinseiJoho ninteiShinseiJohoBusiness, ShujiiIkenshoIraiJoho shujiiIkenshoIraiJoho, ShujiiIkenshoJoho shujiiIkenshoJoho, List<ShujiiIkenshoIkenItem> 要介護認定主治医意見書意見項目リスト, List<ShujiiIkenshoKinyuItem> 要介護認定主治医意見書記入項目リスト) {
+    private ShujiiIkenshoJoho create要介護認定主治医意見書情報(ShinseishoKanriNo 管理番号, int 履歴番号) {
+        ShujiiIkenshoJoho 要介護認定主治医意見書情報 = new ShujiiIkenshoJoho(管理番号, 履歴番号);
+        要介護認定主治医意見書情報 = create意見項目(要介護認定主治医意見書情報, 管理番号, 履歴番号);
+        return create記入項目(要介護認定主治医意見書情報, 管理番号, 履歴番号);
+    }
+
+    private ShujiiIkenshoJoho create意見項目(ShujiiIkenshoJoho 要介護認定主治医意見書情報, ShinseishoKanriNo 管理番号, int 履歴番号) {
+        for (int 意見項目_連番 : 連番_意見項目リスト) {
+            要介護認定主治医意見書情報.createBuilderForEdit().setShujiiIkenshoIkenItem(new ShujiiIkenshoIkenItem(管理番号, 履歴番号, 意見項目_連番)
+                    .createBuilderForEdit().set厚労省IF識別コード(new Code(厚労省IF識別コード)).build());
+
+        }
+        return 要介護認定主治医意見書情報;
+    }
+
+    private ShujiiIkenshoJoho create記入項目(ShujiiIkenshoJoho 要介護認定主治医意見書情報, ShinseishoKanriNo 管理番号, int 履歴番号) {
+        for (int 記入項目_連番 : 連番_記入項目リスト) {
+            要介護認定主治医意見書情報.createBuilderForEdit().setShujiiIkenshoIkenItem(new ShujiiIkenshoIkenItem(管理番号, 履歴番号, 記入項目_連番)
+                    .createBuilderForEdit().set厚労省IF識別コード(new Code(厚労省IF識別コード)).build());
+
+        }
+        return 要介護認定主治医意見書情報;
+    }
+
+    private void viewStateSave(NinteiShinseiJoho ninteiShinseiJohoBusiness, ShujiiIkenshoIraiJoho shujiiIkenshoIraiJoho,
+            ShujiiIkenshoJoho shujiiIkenshoJoho, List<ShujiiIkenshoIkenItem> 要介護認定主治医意見書意見項目リスト,
+            List<ShujiiIkenshoKinyuItem> 要介護認定主治医意見書記入項目リスト) {
         for (ShujiiIkenshoIkenItem item : 要介護認定主治医意見書意見項目リスト) {
             shujiiIkenshoJoho.createBuilderForEdit().setShujiiIkenshoIkenItem(item);
         }
@@ -227,30 +259,39 @@ public class SeikatsuServiceIkenHandler {
             }
         }
         if (65 == item.get連番()) {
-            switch (item.get意見項目().toString()) {
+            switch (div.getRadKurumaisuShiyo().getSelectedKey().toString()) {
                 case STR_KEY0:
-                     return item.createBuilderForEdit().set意見項目(IkenKomoku12.用いていない.getコード()).build();
+                    return item.createBuilderForEdit().set意見項目(IkenKomoku12.用いていない.getコード()).build();
                 case STR_KEY1:
-                     return item.createBuilderForEdit().set意見項目(IkenKomoku12.主に自分で操作している.getコード()).build();
+                    return item.createBuilderForEdit().set意見項目(IkenKomoku12.主に自分で操作している.getコード()).build();
                 case STR_KEY2:
-                     return item.createBuilderForEdit().set意見項目(IkenKomoku12.主に他人が操作している.getコード()).build();
+                    return item.createBuilderForEdit().set意見項目(IkenKomoku12.主に他人が操作している.getコード()).build();
                 default:
                     break;
             }
         }
-        List<RString> keys = div.getChkHokohojoShiyo().getSelectedKeys();
-        for (RString key : keys) {
-            if (66 == item.get連番() && KEY0.equals(key)) {
-                return item.createBuilderForEdit().set意見項目(IkenKomoku13.チェック有.getコード()).build();
-            }
-            if (67 == item.get連番() && KEY1.equals(key)) {
-                return item.createBuilderForEdit().set意見項目(IkenKomoku13.チェック有.getコード()).build();
-            }
-            if (68 == item.get連番() && KEY2.equals(key)) {
-                return item.createBuilderForEdit().set意見項目(IkenKomoku13.チェック有.getコード()).build();
-            }
+        if (66 == item.get連番()) {
+            return edit_チェック無とチェック有(div.getChkHokohojoShiyo().getSelectedKeys(), item, KEY0);
+        } else if (67 == item.get連番()) {
+            return edit_チェック無とチェック有(div.getChkHokohojoShiyo().getSelectedKeys(), item, KEY1);
+        } else if (68 == item.get連番()) {
+            return edit_チェック無とチェック有(div.getChkHokohojoShiyo().getSelectedKeys(), item, KEY2);
         }
         return item;
+    }
+
+    private ShujiiIkenshoIkenItem edit_チェック無とチェック有(List<RString> keys, ShujiiIkenshoIkenItem item, RString str) {
+        boolean isHas = false;
+        for (RString key : keys) {
+            if (str.equals(key)) {
+                isHas = true;
+            }
+        }
+        if (isHas) {
+            return item.createBuilderForEdit().set意見項目(IkenKomoku13.チェック有.getコード()).build();
+        } else {
+            return item.createBuilderForEdit().set意見項目(IkenKomoku13.チェック無.getコード()).build();
+        }
     }
 
     private ShujiiIkenshoIkenItem edit栄養_食生活エリアの意見項目編集(ShujiiIkenshoIkenItem item) {
@@ -282,52 +323,47 @@ public class SeikatsuServiceIkenHandler {
 
     private ShujiiIkenshoIkenItem edit現在あるかまたは今後発生する可能性の高い状態とその対処方針エリアの意見項目編集(ShujiiIkenshoIkenItem item) {
         List<RString> keys = div.getChkHasseiShojo().getSelectedKeys();
-        for (RString str : keys) {
-            if (71 == item.get連番() && KEY0.equals(str)) {
-                return item.createBuilderForEdit().set意見項目(IkenKomoku13.チェック有.getコード()).build();
-            }
-            if (72 == item.get連番() && KEY1.equals(str)) {
-                return item.createBuilderForEdit().set意見項目(IkenKomoku13.チェック有.getコード()).build();
-            }
-            if (73 == item.get連番() && KEY2.equals(str)) {
-                return item.createBuilderForEdit().set意見項目(IkenKomoku13.チェック有.getコード()).build();
-            }
-            if (74 == item.get連番() && KEY3.equals(str)) {
-                return item.createBuilderForEdit().set意見項目(IkenKomoku13.チェック有.getコード()).build();
-            }
-            if (75 == item.get連番() && KEY4.equals(str)) {
-                return item.createBuilderForEdit().set意見項目(IkenKomoku13.チェック有.getコード()).build();
-            }
-            if (76 == item.get連番() && KEY5.equals(str)) {
-                return item.createBuilderForEdit().set意見項目(IkenKomoku13.チェック有.getコード()).build();
-            }
-            if (77 == item.get連番() && KEY6.equals(str)) {
-                return item.createBuilderForEdit().set意見項目(IkenKomoku13.チェック有.getコード()).build();
-            }
-            if (78 == item.get連番() && KEY7.equals(str)) {
-                return item.createBuilderForEdit().set意見項目(IkenKomoku13.チェック有.getコード()).build();
-            }
-            if (79 == item.get連番() && KEY8.equals(str)) {
-                return item.createBuilderForEdit().set意見項目(IkenKomoku13.チェック有.getコード()).build();
-            }
-            if (80 == item.get連番() && KEY9.equals(str)) {
-                return item.createBuilderForEdit().set意見項目(IkenKomoku13.チェック有.getコード()).build();
-            }
-            if (81 == item.get連番() && KEY10.equals(str)) {
-                return item.createBuilderForEdit().set意見項目(IkenKomoku13.チェック有.getコード()).build();
-            }
-            if (82 == item.get連番() && KEY11.equals(str)) {
-                return item.createBuilderForEdit().set意見項目(IkenKomoku13.チェック有.getコード()).build();
-            }
-            if (83 == item.get連番() && KEY12.equals(str)) {
-                return item.createBuilderForEdit().set意見項目(IkenKomoku13.チェック有.getコード()).build();
-            }
+        if (71 == item.get連番()) {
+            return edit_チェック無とチェック有(keys, item, KEY0);
         }
-        List<RString> keys1 = div.getChkJotaiSonota().getSelectedKeys();
-        for (RString str1 : keys1) {
-            if (84 == item.get連番() && KEY0.equals(str1)) {
-                return item.createBuilderForEdit().set意見項目(IkenKomoku13.チェック有.getコード()).build();
-            }
+        if (72 == item.get連番()) {
+            return edit_チェック無とチェック有(keys, item, KEY1);
+        }
+        if (73 == item.get連番()) {
+            return edit_チェック無とチェック有(keys, item, KEY2);
+        }
+        if (74 == item.get連番()) {
+            return edit_チェック無とチェック有(keys, item, KEY3);
+        }
+        if (75 == item.get連番()) {
+            return edit_チェック無とチェック有(keys, item, KEY4);
+        }
+        if (76 == item.get連番()) {
+            return edit_チェック無とチェック有(keys, item, KEY5);
+        }
+        if (77 == item.get連番()) {
+            return edit_チェック無とチェック有(keys, item, KEY6);
+        }
+        if (78 == item.get連番()) {
+            return edit_チェック無とチェック有(keys, item, KEY7);
+        }
+        if (79 == item.get連番()) {
+            return edit_チェック無とチェック有(keys, item, KEY8);
+        }
+        if (80 == item.get連番()) {
+            return edit_チェック無とチェック有(keys, item, KEY9);
+        }
+        if (81 == item.get連番()) {
+            return edit_チェック無とチェック有(keys, item, KEY10);
+        }
+        if (82 == item.get連番()) {
+            return edit_チェック無とチェック有(keys, item, KEY11);
+        }
+        if (83 == item.get連番()) {
+            return edit_チェック無とチェック有(keys, item, KEY12);
+        }
+        if (84 == item.get連番()) {
+            return edit_チェック無とチェック有(div.getChkJotaiSonota().getSelectedKeys(), item, KEY0);
         }
         return item;
     }
@@ -361,79 +397,71 @@ public class SeikatsuServiceIkenHandler {
 
     private ShujiiIkenshoIkenItem edit医学的管理の必要性エリアの意見項目編集_1(ShujiiIkenshoIkenItem item) {
         List<RString> keys = div.getChkIgakutekiKanri().getSelectedKeys();
-        for (RString str : keys) {
-            if (86 == item.get連番() && KEY0.equals(str)) {
-                return item.createBuilderForEdit().set意見項目(IkenKomoku13.チェック有.getコード()).build();
-            }
-            if (87 == item.get連番() && KEY1.equals(str)) {
-                return item.createBuilderForEdit().set意見項目(IkenKomoku13.チェック有.getコード()).build();
-            }
-            if (88 == item.get連番() && KEY2.equals(str)) {
-                return item.createBuilderForEdit().set意見項目(IkenKomoku13.チェック有.getコード()).build();
-            }
-            if (89 == item.get連番() && KEY3.equals(str)) {
-                return item.createBuilderForEdit().set意見項目(IkenKomoku13.チェック有.getコード()).build();
-            }
-            if (90 == item.get連番() && KEY4.equals(str)) {
-                return item.createBuilderForEdit().set意見項目(IkenKomoku13.チェック有.getコード()).build();
-            }
-            if (91 == item.get連番() && KEY5.equals(str)) {
-                return item.createBuilderForEdit().set意見項目(IkenKomoku13.チェック有.getコード()).build();
-            }
-            if (92 == item.get連番() && KEY6.equals(str)) {
-                return item.createBuilderForEdit().set意見項目(IkenKomoku13.チェック有.getコード()).build();
-            }
-            if (93 == item.get連番() && KEY7.equals(str)) {
-                return item.createBuilderForEdit().set意見項目(IkenKomoku13.チェック有.getコード()).build();
-            }
-            if (94 == item.get連番() && KEY8.equals(str)) {
-                return item.createBuilderForEdit().set意見項目(IkenKomoku13.チェック有.getコード()).build();
-            }
-            if (95 == item.get連番() && KEY9.equals(str)) {
-                return item.createBuilderForEdit().set意見項目(IkenKomoku13.チェック有.getコード()).build();
-            }
-            if (96 == item.get連番() && KEY10.equals(str)) {
-                return item.createBuilderForEdit().set意見項目(IkenKomoku13.チェック有.getコード()).build();
-            }
-            if (97 == item.get連番() && KEY11.equals(str)) {
-                return item.createBuilderForEdit().set意見項目(IkenKomoku13.チェック有.getコード()).build();
-            }
-            if (98 == item.get連番() && KEY12.equals(str)) {
-                return item.createBuilderForEdit().set意見項目(IkenKomoku13.チェック有.getコード()).build();
-            }
-            edit医学的管理の必要性エリアの意見項目編集_2(str, item);
+        if (86 == item.get連番()) {
+            return edit_チェック無とチェック有(keys, item, KEY0);
         }
-        return item;
-
-    }
-
-    private ShujiiIkenshoIkenItem edit医学的管理の必要性エリアの意見項目編集_2(RString str, ShujiiIkenshoIkenItem item) {
-        if (99 == item.get連番() && KEY13.equals(str)) {
-            return item.createBuilderForEdit().set意見項目(IkenKomoku13.チェック有.getコード()).build();
+        if (87 == item.get連番()) {
+            return edit_チェック無とチェック有(keys, item, KEY1);
         }
-        if (100 == item.get連番() && KEY14.equals(str)) {
-            return item.createBuilderForEdit().set意見項目(IkenKomoku13.チェック有.getコード()).build();
+        if (88 == item.get連番()) {
+            return edit_チェック無とチェック有(keys, item, KEY2);
         }
-        if (101 == item.get連番() && KEY15.equals(str)) {
-            return item.createBuilderForEdit().set意見項目(IkenKomoku13.チェック有.getコード()).build();
+        if (89 == item.get連番()) {
+            return edit_チェック無とチェック有(keys, item, KEY3);
         }
-        if (102 == item.get連番() && KEY16.equals(str)) {
-            return item.createBuilderForEdit().set意見項目(IkenKomoku13.チェック有.getコード()).build();
+        if (90 == item.get連番()) {
+            return edit_チェック無とチェック有(keys, item, KEY4);
         }
-        if (103 == item.get連番() && KEY17.equals(str)) {
-            return item.createBuilderForEdit().set意見項目(IkenKomoku13.チェック有.getコード()).build();
+        if (91 == item.get連番()) {
+            return edit_チェック無とチェック有(keys, item, KEY5);
         }
-        if (104 == item.get連番() && KEY18.equals(str)) {
-            return item.createBuilderForEdit().set意見項目(IkenKomoku13.チェック有.getコード()).build();
+        if (92 == item.get連番()) {
+            return edit_チェック無とチェック有(keys, item, KEY6);
         }
-        if (105 == item.get連番() && KEY19.equals(str)) {
-            return item.createBuilderForEdit().set意見項目(IkenKomoku13.チェック有.getコード()).build();
+        if (93 == item.get連番()) {
+            return edit_チェック無とチェック有(keys, item, KEY7);
         }
-        if (106 == item.get連番() && !div.getChkIgakutekiKanri().getSelectedKeys().isEmpty()) {
-            return item.createBuilderForEdit().set意見項目(IkenKomoku13.チェック有.getコード()).build();
+        if (94 == item.get連番()) {
+            return edit_チェック無とチェック有(keys, item, KEY8);
         }
-        if (107 == item.get連番() && !div.getChkSonotaIryoService().getSelectedKeys().isEmpty()) {
-            return item.createBuilderForEdit().set意見項目(IkenKomoku13.チェック有.getコード()).build();
+        if (95 == item.get連番()) {
+            return edit_チェック無とチェック有(keys, item, KEY9);
+        }
+        if (96 == item.get連番()) {
+            return edit_チェック無とチェック有(keys, item, KEY10);
+        }
+        if (97 == item.get連番()) {
+            return edit_チェック無とチェック有(keys, item, KEY11);
+        }
+        if (98 == item.get連番()) {
+            return edit_チェック無とチェック有(keys, item, KEY12);
+        }
+        if (99 == item.get連番()) {
+            return edit_チェック無とチェック有(keys, item, KEY13);
+        }
+        if (100 == item.get連番()) {
+            return edit_チェック無とチェック有(keys, item, KEY14);
+        }
+        if (101 == item.get連番()) {
+            return edit_チェック無とチェック有(keys, item, KEY15);
+        }
+        if (102 == item.get連番()) {
+            return edit_チェック無とチェック有(keys, item, KEY16);
+        }
+        if (103 == item.get連番()) {
+            return edit_チェック無とチェック有(keys, item, KEY17);
+        }
+        if (104 == item.get連番()) {
+            return edit_チェック無とチェック有(keys, item, KEY18);
+        }
+        if (105 == item.get連番()) {
+            return edit_チェック無とチェック有(keys, item, KEY19);
+        }
+        if (106 == item.get連番()) {
+            return edit_チェック無とチェック有(div.getChkSonotaIryoService().getSelectedKeys(), item, KEY0);
+        }
+        if (107 == item.get連番()) {
+            return edit_チェック無とチェック有(div.getChkSonotaIryoServiceHitsuyoSei().getSelectedKeys(), item, KEY0);
         }
         return item;
     }
@@ -544,7 +572,8 @@ public class SeikatsuServiceIkenHandler {
         return item;
     }
 
-    private List<ShujiiIkenshoIkenItem> 意見項目初期化編集(List<ShujiiIkenshoIkenItem> 要介護認定主治医意見書意見項目リスト, ShinseishoKanriNo 管理番号, int 履歴番号) {
+    private List<ShujiiIkenshoIkenItem> 意見項目初期化編集(List<ShujiiIkenshoIkenItem> 要介護認定主治医意見書意見項目リスト
+            , ShinseishoKanriNo 管理番号, int 履歴番号) {
         List<ShujiiIkenshoIkenItem> result = new ArrayList();
         boolean isExits = false;
         ShujiiIkenshoIkenItem itemTemp;
@@ -552,7 +581,8 @@ public class SeikatsuServiceIkenHandler {
         chkHasseiShojokeys.clear();
         chkIgakutekiKanrikeys.clear();
         for (int 連番 : 連番_意見項目リスト) {
-            itemTemp = new ShujiiIkenshoIkenItem(管理番号, 履歴番号, 連番).createBuilderForEdit().set厚労省IF識別コード(new Code(厚労省IF識別コード)).build();
+            itemTemp = new ShujiiIkenshoIkenItem(管理番号, 履歴番号, 連番).createBuilderForEdit()
+                    .set厚労省IF識別コード(new Code(厚労省IF識別コード)).build();
             for (ShujiiIkenshoIkenItem item : 要介護認定主治医意見書意見項目リスト) {
                 if (連番 == item.get連番()) {
                     isExits = true;
@@ -566,9 +596,7 @@ public class SeikatsuServiceIkenHandler {
             if (RString.isNullOrEmpty(itemTemp.get意見項目())) {
                 itemTemp = itemTemp.createBuilderForEdit().set意見項目(RString.EMPTY).build();
             }
-            if (!isExits) {
-                result.add(itemTemp);
-            }
+            result.add(itemTemp);
             移動エリアの意見項目初期化編集(itemTemp);
             栄養_食生活エリアの意見項目初期化編集(itemTemp);
             現在あるかまたは今後発生する可能性の高い状態とその対処方針エリアの意見項目初期化編集(itemTemp);
@@ -580,12 +608,14 @@ public class SeikatsuServiceIkenHandler {
         return result;
     }
 
-    private List<ShujiiIkenshoKinyuItem> 記入項目初期化編集(List<ShujiiIkenshoKinyuItem> 要介護認定主治医意見書記入項目リスト, ShinseishoKanriNo 管理番号, int 履歴番号) {
+    private List<ShujiiIkenshoKinyuItem> 記入項目初期化編集(List<ShujiiIkenshoKinyuItem> 要介護認定主治医意見書記入項目リスト
+            , ShinseishoKanriNo 管理番号, int 履歴番号) {
         List<ShujiiIkenshoKinyuItem> result = new ArrayList();
         boolean isNotExits = false;
         ShujiiIkenshoKinyuItem itemTemp;
         for (int 連番 : 連番_記入項目リスト) {
-            itemTemp = new ShujiiIkenshoKinyuItem(管理番号, 履歴番号, 連番).createBuilderForEdit().set厚労省IF識別コード(new Code(厚労省IF識別コード)).build();
+            itemTemp = new ShujiiIkenshoKinyuItem(管理番号, 履歴番号, 連番).createBuilderForEdit()
+                    .set厚労省IF識別コード(new Code(厚労省IF識別コード)).build();
             for (ShujiiIkenshoKinyuItem item : 要介護認定主治医意見書記入項目リスト) {
                 if (連番 == item.get連番()) {
                     isNotExits = true;
@@ -599,9 +629,7 @@ public class SeikatsuServiceIkenHandler {
             if (RString.isNullOrEmpty(itemTemp.get記入項目())) {
                 itemTemp = itemTemp.createBuilderForEdit().set記入項目(RString.EMPTY).build();
             }
-            if (!isNotExits) {
-                result.add(itemTemp);
-            }
+            result.add(itemTemp);
             栄養_食生活エリアの記入項目初期化編集(itemTemp);
             現在あるかまたは今後発生する可能性の高い状態とその対処方針エリアの記入項目初期化編集(itemTemp);
             医学的管理の必要性エリアの記入項目初期化編集(itemTemp);
@@ -717,11 +745,10 @@ public class SeikatsuServiceIkenHandler {
             chkHasseiShojokeys.add(KEY12);
         }
         div.getChkHasseiShojo().setSelectedItemsByKey(chkHasseiShojokeys);
-        List<RString> keys1 = new ArrayList();
         if (84 == item.get連番() && IkenKomoku13.チェック有.getコード().equals(item.get意見項目())) {
-            keys1.add(KEY0);
+            chkJotaiSonotakeys.add(KEY0);
         }
-        div.getChkJotaiSonota().setSelectedItemsByKey(keys1);
+        div.getChkJotaiSonota().setSelectedItemsByKey(chkJotaiSonotakeys);
     }
 
     private void 現在あるかまたは今後発生する可能性の高い状態とその対処方針エリアの記入項目初期化編集(ShujiiIkenshoKinyuItem item) {
@@ -814,16 +841,14 @@ public class SeikatsuServiceIkenHandler {
             chkIgakutekiKanrikeys.add(KEY19);
         }
         div.getChkIgakutekiKanri().setSelectedItemsByKey(chkIgakutekiKanrikeys);
-        List<RString> keys1 = new ArrayList();
         if (106 == item.get連番() && IkenKomoku13.チェック有.getコード().equals(item.get意見項目())) {
-            keys1.add(KEY0);
+            chkSonotaIryoServicekeys.add(KEY0);
         }
-        div.getChkSonotaIryoService().setSelectedItemsByKey(keys1);
-        List<RString> keys2 = new ArrayList();
+        div.getChkSonotaIryoService().setSelectedItemsByKey(chkSonotaIryoServicekeys);
         if (107 == item.get連番() && IkenKomoku13.チェック有.getコード().equals(item.get意見項目())) {
-            keys2.add(KEY0);
+            chkSonotaIryoServiceHitsuyoSeikeys.add(KEY0);
         }
-        div.getChkSonotaIryoServiceHitsuyoSei().setSelectedItemsByKey(keys2);
+        div.getChkSonotaIryoServiceHitsuyoSei().setSelectedItemsByKey(chkSonotaIryoServiceHitsuyoSeikeys);
     }
 
     private void 医学的管理の必要性エリアの記入項目初期化編集(ShujiiIkenshoKinyuItem item) {
