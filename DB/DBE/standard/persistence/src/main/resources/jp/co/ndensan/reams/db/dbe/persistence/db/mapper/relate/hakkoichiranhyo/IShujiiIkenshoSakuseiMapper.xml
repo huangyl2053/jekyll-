@@ -67,7 +67,10 @@
             SELECT
                 MAX("ikenshoIraiRirekiNo")
             FROM
-            rgdb."DbT5301ShujiiIkenshoIraiJoho")
+                rgdb."DbT5301ShujiiIkenshoIraiJoho"
+            WHERE
+                "shinseishoKanriNo" = DbT5301."shinseishoKanriNo"
+            AND "logicalDeletedFlag" = false)
         AND Dbt5101."logicalDeletedFlag" = false
         AND Dbt5101."shoriJotaiKubun" IN ('0','3')
         AND Dbt5105."ninteiShinseiJohoTorokuKanryoYMD" IS NOT NULL

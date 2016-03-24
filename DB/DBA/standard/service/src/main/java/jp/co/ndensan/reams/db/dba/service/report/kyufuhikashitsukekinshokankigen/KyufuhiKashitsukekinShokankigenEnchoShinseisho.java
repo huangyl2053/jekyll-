@@ -26,12 +26,16 @@ import jp.co.ndensan.reams.ur.urz.service.report.sourcebuilder.ReportSourceBuild
 import jp.co.ndensan.reams.ux.uxx.business.core.tsuchishoteikeibun.TsuchishoTeikeibunInfo;
 import jp.co.ndensan.reams.ux.uxx.service.core.tsuchishoteikeibun.TsuchishoTeikeibunManager;
 import jp.co.ndensan.reams.uz.uza.biz.GyomuCode;
+import jp.co.ndensan.reams.uz.uza.biz.KamokuCode;
 import jp.co.ndensan.reams.uz.uza.biz.ReportId;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
+import jp.co.ndensan.reams.uz.uza.lang.EraType;
+import jp.co.ndensan.reams.uz.uza.lang.FirstYear;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.lang.Separator;
 import jp.co.ndensan.reams.uz.uza.report.IReportProperty;
 import jp.co.ndensan.reams.uz.uza.report.IReportSource;
 import jp.co.ndensan.reams.uz.uza.report.Report;
@@ -99,7 +103,7 @@ public class KyufuhiKashitsukekinShokankigenEnchoShinseisho {
         List<KyufuhiKashitsukekinShokankigenEnchoShinseishoReport> list = new ArrayList<>();
         KyufuhiKashitsukekinShokankigenEnchoShinseishoItem item
                 = new KyufuhiKashitsukekinShokankigenEnchoShinseishoItem(
-                        get帳票文言(),
+                        get帳票文言(被保険者番号),
                         entity.get被保険者番号().value(),
                         entity.getフリガナ(),
                         entity.get被保険者氏名(),
@@ -121,18 +125,21 @@ public class KyufuhiKashitsukekinShokankigenEnchoShinseisho {
         return builder.<T>create();
     }
 
-    private RString get帳票文言() {
+    private RString get帳票文言(HihokenshaNo 被保険者番号) {
         TsuchishoTeikeibunManager tsuchisho = new TsuchishoTeikeibunManager();
         TsuchishoTeikeibunInfo tsuchishoTeikeibunInfo = tsuchisho.get通知書定形文検索(
                 SubGyomuCode.DBC介護給付,
                 new ReportId("DBC800019_KyufuKashitsukekinShokanKigenEnchoShinseisho"),
-                null,
+                KamokuCode.EMPTY,
                 1,
                 1,
                 new FlexibleDate(RDate.getNowDate().toDateString()));
         if (tsuchishoTeikeibunInfo != null) {
             if (tsuchishoTeikeibunInfo.getUrT0126TsuchishoTeikeibunEntity() != null) {
-                return tsuchishoTeikeibunInfo.getUrT0126TsuchishoTeikeibunEntity().getSentence();
+                RString 帳票文言 = tsuchishoTeikeibunInfo.getUrT0126TsuchishoTeikeibunEntity().getSentence();
+                RString 借受年月日 = get借受年月日(被保険者番号).wareki().eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN)
+                        .separator(Separator.JAPANESE).toDateString();
+                return 帳票文言.replace(new RString("@@@@"), 借受年月日);
             }
         }
         return RString.EMPTY;

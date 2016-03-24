@@ -14,6 +14,7 @@ import jp.co.ndensan.reams.db.dbz.definition.core.yokaigojotaikubun.YokaigoJotai
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.YokaigodoGuide.YokaigodoGuide.YokaigodoGuideDiv;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.YokaigodoGuide.YokaigodoGuide.dgYokaigodoGuide_Row;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
 
 /**
@@ -23,7 +24,6 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
 public class YokaigodoGuideHandler {
 
     private final YokaigodoGuideDiv godoDiv;
-    private final int 桁数_6 = 6;
 
     /**
      * コンストラクタです。
@@ -39,9 +39,9 @@ public class YokaigodoGuideHandler {
      */
     public void initialize() {
         List<dgYokaigodoGuide_Row> dgYokaigodoGuideList = new ArrayList<>();
-        FlexibleDate kizyuniti = new FlexibleDate(godoDiv.getKijunYMD().substring(0, 桁数_6));
-        if (new FlexibleDate("200004").isBefore(kizyuniti)
-                && kizyuniti.isBefore(new FlexibleDate("200203"))) {
+        FlexibleYearMonth kizyuniti = new FlexibleDate(godoDiv.getKijunYMD()).getYearMonth();
+        if (new FlexibleYearMonth("200004").isBefore(kizyuniti)
+                && kizyuniti.isBefore(new FlexibleYearMonth("200203"))) {
             for (YokaigoJotaiKubun99 yokaigoJotaiKubun99 : YokaigoJotaiKubun99.values()) {
                 dgYokaigodoGuide_Row dgJigyoshaItiran = new dgYokaigodoGuide_Row();
                 dgJigyoshaItiran.setCode(yokaigoJotaiKubun99.getコード());
@@ -49,8 +49,8 @@ public class YokaigodoGuideHandler {
                 dgYokaigodoGuideList.add(dgJigyoshaItiran);
             }
         }
-        if (new FlexibleDate("200204").isBefore(kizyuniti)
-                && kizyuniti.isBefore(new FlexibleDate("200603"))) {
+        if (new FlexibleYearMonth("200204").isBefore(kizyuniti)
+                && kizyuniti.isBefore(new FlexibleYearMonth("200603"))) {
             for (YokaigoJotaiKubun02 yokaigoJotaiKubun02 : YokaigoJotaiKubun02.values()) {
                 dgYokaigodoGuide_Row dgJigyoshaItiran = new dgYokaigodoGuide_Row();
                 dgJigyoshaItiran.setCode(yokaigoJotaiKubun02.getコード());
@@ -58,8 +58,8 @@ public class YokaigodoGuideHandler {
                 dgYokaigodoGuideList.add(dgJigyoshaItiran);
             }
         }
-        if (new FlexibleDate("200604").isBefore(kizyuniti)
-                && kizyuniti.isBefore(new FlexibleDate("200903"))) {
+        if (new FlexibleYearMonth("200604").isBefore(kizyuniti)
+                && kizyuniti.isBefore(new FlexibleYearMonth("200903"))) {
             for (YokaigoJotaiKubun06 yokaigoJotaiKubun06 : YokaigoJotaiKubun06.values()) {
                 dgYokaigodoGuide_Row dgJigyoshaItiran = new dgYokaigodoGuide_Row();
                 dgJigyoshaItiran.setCode(yokaigoJotaiKubun06.getコード());
@@ -67,7 +67,7 @@ public class YokaigodoGuideHandler {
                 dgYokaigodoGuideList.add(dgJigyoshaItiran);
             }
         }
-        if (new FlexibleDate("200904").isBefore(kizyuniti)) {
+        if (new FlexibleYearMonth("200904").isBefore(kizyuniti)) {
             for (YokaigoJotaiKubun09 yokaigoJotaiKubun09 : YokaigoJotaiKubun09.values()) {
                 dgYokaigodoGuide_Row dgJigyoshaItiran = new dgYokaigodoGuide_Row();
                 dgJigyoshaItiran.setCode(yokaigoJotaiKubun09.getコード());

@@ -28,18 +28,7 @@ public class IraishoIkkatsuHakkoFlow extends BatchFlowBase<IraishoIkkatsuHakkoBa
 
     @Override
     protected void defineFlow() {
-        if (getParameter().isNinteiChosaIraisyo()
-                || getParameter().isNinteiChosaIraiChohyo()
-                || getParameter().isNinteiChosahyoKihon()
-                || getParameter().isNinteiChosahyoTokki()
-                || getParameter().isNinteiChosahyoGaikyou()
-                || getParameter().isNinteiChosahyoOCRKihon()
-                || getParameter().isNinteiChosahyoOCRTokki()
-                || getParameter().isNinteiChosahyoOCRGaikyou()
-                || getParameter().isNinteiChosaCheckHyo()
-                || getParameter().isZenkoNinteiChosahyo()) {
-            executeStep(CALL_HOMONCHOSAIRAISHOFLOW);
-        }
+        callHomonChosaIraisho();
         if (getParameter().isIkenshoSakuseiirai()
                 || getParameter().isIkenshoSakuseiSeikyuu()
                 || getParameter().isShujiiIkenshoSakuseiIraisho()
@@ -98,4 +87,18 @@ public class IraishoIkkatsuHakkoFlow extends BatchFlowBase<IraishoIkkatsuHakkoBa
         return otherBatchFlow(TEISHUTSUIRAISHOHAKKO_FLOWID, SubGyomuCode.DBE認定支援, getParameter()).define();
     }
 
+    private void callHomonChosaIraisho() {
+        if (getParameter().isNinteiChosaIraisyo()
+                || getParameter().isNinteiChosaIraiChohyo()
+                || getParameter().isNinteiChosahyoKihon()
+                || getParameter().isNinteiChosahyoTokki()
+                || getParameter().isNinteiChosahyoGaikyou()
+                || getParameter().isNinteiChosahyoOCRKihon()
+                || getParameter().isNinteiChosahyoOCRTokki()
+                || getParameter().isNinteiChosahyoOCRGaikyou()
+                || getParameter().isNinteiChosaCheckHyo()
+                || getParameter().isZenkoNinteiChosahyo()) {
+            executeStep(CALL_HOMONCHOSAIRAISHOFLOW);
+        }
+    }
 }

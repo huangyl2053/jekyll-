@@ -421,7 +421,6 @@
             ,NULL AS "tekiyoTodokedeYMD"
             ,NULL AS "kaijoYMD"
             ,NULL AS "kaijoTodokedeYMD"
-            ,B."isDeleted" AS "logicalDeletedFlag"
             ,B."lastUpdateTimestamp" AS "lastUpdateTimestamp"
             ,B."nyushoShisetsuCode" AS "nyushoShisetsuCode"
             ,B."nyushoYMD" AS "nyushoYMD"
@@ -432,7 +431,6 @@
             TO_TIMESTAMP(#{konkaikaishiYMDHMS},'YYYY-MM-DD HH24:MI:SS.FF3') <![CDATA[<=]]> B."lastUpdateTimestamp"
         AND B."lastUpdateTimestamp" <![CDATA[<=]]> TO_TIMESTAMP(#{konkaishuryoYMDHMS},'YYYY-MM-DD HH24:MI:SS.FF3')
         AND B."daichoShubetsu" = '2'
-        AND B."isDeleted" = FALSE
         AND B."insertReamsLoginId" = #{loginId}
         ORDER BY
             B."shikibetsuCode" DESC
@@ -523,7 +521,6 @@
             ,NULL AS "tekiyoTodokedeYMD"
             ,NULL AS "kaijoYMD"
             ,NULL AS "kaijoTodokedeYMD"
-            ,B."isDeleted" AS "logicalDeletedFlag"
             ,B."lastUpdateTimestamp" AS "lastUpdateTimestamp"
             ,B."nyushoShisetsuCode" AS "nyushoShisetsuCode"
             ,B."nyushoYMD" AS "nyushoYMD"
@@ -534,7 +531,6 @@
             TO_TIMESTAMP(#{konkaikaishiYMDHMS},'YYYY-MM-DD HH24:MI:SS.FF3') <![CDATA[<=]]> B."lastUpdateTimestamp"
         AND B."lastUpdateTimestamp" <![CDATA[<=]]> TO_TIMESTAMP(#{konkaishuryoYMDHMS},'YYYY-MM-DD HH24:MI:SS.FF3')
         AND B."daichoShubetsu" = '3'
-        AND B."isDeleted" = FALSE
         AND B."insertReamsLoginId" = #{loginId}
         ORDER BY
             B."shikibetsuCode"

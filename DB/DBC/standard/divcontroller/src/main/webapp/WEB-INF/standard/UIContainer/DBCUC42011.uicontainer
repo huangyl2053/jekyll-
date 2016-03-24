@@ -1,0 +1,32 @@
+﻿{
+ "uiContainerName": "DBCUC42011",
+ "displayWizard": false,
+ "subGyomuCode": "DBC",
+ "steps": [
+  {
+   "id": 1,
+   "name": "区分支給限度額登録",
+   "transitionList": [
+    {
+     "id": "1",
+     "type": "start",
+     "condition": "",
+     "toLayoutSubGyomuCode": "DBC",
+     "toLayoutName": "DBC4200011",
+     "toLayoutTitle": "区分支給限度額登録",
+     "toState": "照会"
+    },
+    {
+     "id": "2",
+     "type": "end",
+     "layoutSubGyomuCode": "DBC",
+     "layoutName": "DBC4200011",
+     "layoutTitle": "区分支給限度額登録",
+     "eventName": "完了状態",
+     "destroy": false,
+     "condition": ""
+    }
+   ]
+  }
+ ]
+}
