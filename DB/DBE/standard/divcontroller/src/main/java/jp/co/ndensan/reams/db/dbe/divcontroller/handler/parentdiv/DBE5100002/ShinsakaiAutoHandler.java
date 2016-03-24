@@ -55,7 +55,7 @@ public class ShinsakaiAutoHandler {
                 dgShinsakaiIchiran.getShinsakaiJidoWariateTeiin();
                 dgShinsakaiIchiran.setWaritsukeninzu(jigyoshaInput.get割付人数());
                 dgShinsakaiIchiran.setShinchokuJokyo(ShinsakaiShinchokuJokyo.toValue(jigyoshaInput.get進捗状況()).get名称());
-                dgShinsakaiIchiran.setDammyflag(IsGogitaiDummy.toValue(jigyoshaInput.getダミーフラグ()).getコード());
+                dgShinsakaiIchiran.setDammyflag(IsGogitaiDummy.toValue(jigyoshaInput.getダミーフラグ()).is合議体ダミーフラグTrue());
                 dgShinsakaiIchiranList.add(dgShinsakaiIchiran);
             }
         }

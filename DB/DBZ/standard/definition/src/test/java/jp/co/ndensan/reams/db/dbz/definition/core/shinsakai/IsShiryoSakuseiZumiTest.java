@@ -25,12 +25,12 @@ public class IsShiryoSakuseiZumiTest extends DbeTestBase {
 
     @Test
     public void 作成済を指定した場合_getコードは_Trueを返す() {
-        assertThat(IsShiryoSakuseiZumi.作成済.getコード(), is(true));
+        assertThat(IsShiryoSakuseiZumi.作成済.is作成済(), is(true));
     }
 
     @Test
     public void 未作成を指定した場合_getコードは_Falseを返す() {
-        assertThat(IsShiryoSakuseiZumi.未作成.getコード(), is(false));
+        assertThat(IsShiryoSakuseiZumi.未作成.is作成済(), is(false));
     }
 
     @Test

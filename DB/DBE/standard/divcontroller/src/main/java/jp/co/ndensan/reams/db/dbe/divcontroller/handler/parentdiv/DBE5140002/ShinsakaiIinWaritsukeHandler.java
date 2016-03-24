@@ -65,7 +65,7 @@ public class ShinsakaiIinWaritsukeHandler {
         div.getTxtKaigoNinteiShinsakai().setValue(builder.toRString());
         div.getTxtGogitai().setValue(nullToEmpty(business.get合議体()));
         div.getTxtKaishiYoteiTime().setValue(new RTime(nullToEmpty(business.get開始予定時間())));
-        if (IsGogitaiDummy.toValue(business.isダミー区分()).getコード()) {
+        if (IsGogitaiDummy.toValue(business.isダミー区分()).is合議体ダミーフラグTrue()) {
             chkDummyKubunlist.add(SELECTEDKEY);
         }
         div.getChkDummyKubun().setSelectedItemsByKey(chkDummyKubunlist);
