@@ -212,20 +212,6 @@ public class KyokaisoGaitoshaPanelValidationHandler {
         }
     }
 
-    private static class KyokaisoGaitoshaErrorMessage implements IMessageGettable, IValidationMessage {
-
-        private final Message message;
-
-        public KyokaisoGaitoshaErrorMessage(IMessageGettable message, String... replacements) {
-            this.message = message.getMessage().replace(replacements);
-        }
-
-        @Override
-        public Message getMessage() {
-            return message;
-        }
-    }
-
     private void 境界層該当一覧情報チェック(ValidationMessageControlPairs validPairs) {
         List<dgKyokaisouGaitouItran_Row> 境界層該当一覧情報 = div.getDgKyokaisouGaitouItran().getDataSource();
         Collections.sort(境界層該当一覧情報, new KyokaisoGaitoshaPanelValidationHandler.DateComparator());
@@ -241,10 +227,11 @@ public class KyokaisoGaitoshaPanelValidationHandler {
             if (境界層該当一覧情報.get(i).getShuryoDate() == null
                     || 境界層該当一覧情報.get(i).getShuryoDate().isEmpty()) {
                 validPairs.add(new ValidationMessageControlPair(RRVMessages.期間が重複チェック));
-            }
-            if (!new RDate(境界層該当一覧情報.get(i).getShuryoDate().toString())
-                    .isBeforeOrEquals(new RDate(境界層該当一覧情報.get(i + 1).getKaishiDate().toString()))) {
-                validPairs.add(new ValidationMessageControlPair(RRVMessages.期間が重複チェック));
+            } else {
+                if (!new RDate(境界層該当一覧情報.get(i).getShuryoDate().toString())
+                        .isBeforeOrEquals(new RDate(境界層該当一覧情報.get(i + 1).getKaishiDate().toString()))) {
+                    validPairs.add(new ValidationMessageControlPair(RRVMessages.期間が重複チェック));
+                }
             }
         }
     }
@@ -264,10 +251,11 @@ public class KyokaisoGaitoshaPanelValidationHandler {
             if (境界層保険料段階情報.get(i).getTekiyoShuryoDate() == null
                     || 境界層保険料段階情報.get(i).getTekiyoShuryoDate().isEmpty()) {
                 validPairs.add(new ValidationMessageControlPair(RRVMessages.期間が重複チェック));
-            }
-            if (!new RYearMonth(new RDate(境界層保険料段階情報.get(i).getTekiyoShuryoDate().toString()).getYearMonth().toDateString())
-                    .isBeforeOrEquals(new RYearMonth(new RDate(境界層保険料段階情報.get(i + 1).getTekiyoKaishiDate().toString()).getYearMonth().toDateString()))) {
-                validPairs.add(new ValidationMessageControlPair(RRVMessages.期間が重複チェック));
+            } else {
+                if (!new RYearMonth(new RDate(境界層保険料段階情報.get(i).getTekiyoShuryoDate().toString()).getYearMonth().toDateString())
+                        .isBeforeOrEquals(new RYearMonth(new RDate(境界層保険料段階情報.get(i + 1).getTekiyoKaishiDate().toString()).getYearMonth().toDateString()))) {
+                    validPairs.add(new ValidationMessageControlPair(RRVMessages.期間が重複チェック));
+                }
             }
         }
     }
