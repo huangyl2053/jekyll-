@@ -8,9 +8,9 @@
         <id column="dbT2017TsuchishoHakkogoIdosha_reportID"/>
         <id column="dbT2017TsuchishoHakkogoIdosha_chohyosakuseiTimestamp"/>
         <id column="dbT2017TsuchishoHakkogoIdosha_tsuchishoNo"/>
-        <id property="fukaNendo" column="dbV2001ChoshuHoho_fukaNendo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleYearTypeHandler"/>
-        <id property="hihokenshaNo" column="dbV2001ChoshuHoho_hihokenshaNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.HihokenshaNoTypeHandler"/>
-        <id property="rirekiNo" column="dbV2001ChoshuHoho_rirekiNo" />
+        <id column="dbV2001ChoshuHoho_fukaNendo"/>
+        <id column="dbV2001ChoshuHoho_hihokenshaNo"/>
+        <id column="dbV2001ChoshuHoho_rirekiNo" />
         <association property="dbT2017Entity" resultMap="jp.co.ndensan.reams.db.dbb.persistence.db.mapper.basic.IDbT2017TsuchishoHakkogoIdoshaMapper.ResultMap_DbT2017TsuchishoHakkogoIdoshaEntity"/>
         <association property="dbv2001Entity" resultMap="jp.co.ndensan.reams.db.dbb.persistence.db.mapper.basic.IDbV2001ChoshuHohoMapper.ResultMap_DbV2001ChoshuHohoEntity"/>
     </resultMap>
@@ -27,7 +27,7 @@
        INNER JOIN
         (<include refid="jp.co.ndensan.reams.db.dbb.persistence.db.mapper.basic.IDbV2001ChoshuHohoMapper.noDeleted_DbV2001ChoshuHoho" />)
         AS B
-        ON B."dbV2001ChoshuHoho_hihokenshaNo" = A."dbT2017TsuchishoHakkogoIdosha_shikibetsuCode"
+        ON B."dbV2001ChoshuHoho_hihokenshaNo" = A."dbT2017TsuchishoHakkogoIdosha_hihokenshaNo"
         WHERE A."dbT2017TsuchishoHakkogoIdosha_reportID" = #{帳票ID}
         AND A."dbT2017TsuchishoHakkogoIdosha_chohyosakuseiTimestamp" = #{帳票作成日時}
         AND B."dbV2001ChoshuHoho_lastUpdateTimestamp" <![CDATA[>=]]> #{最大計算処理日時}
