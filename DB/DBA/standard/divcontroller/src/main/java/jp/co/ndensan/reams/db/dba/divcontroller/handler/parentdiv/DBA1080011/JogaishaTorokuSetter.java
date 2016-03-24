@@ -6,7 +6,7 @@
 package jp.co.ndensan.reams.db.dba.divcontroller.handler.parentdiv.DBA1080011;
 
 import java.io.Serializable;
-import java.util.List;
+import java.util.ArrayList;
 import jp.co.ndensan.reams.db.dba.definition.core.jogaishatorokuparamter.JogaishaTorokuParamter;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -22,9 +22,9 @@ import lombok.Setter;
 @SuppressWarnings("PMD.UnusedPrivateField")
 public class JogaishaTorokuSetter implements Serializable {
 
-    private static final long serialVersionUID = 8024049592907641377L;
+    private static final long serialVersionUID = 6888196017186592267L;
 
-    private List<JogaishaTorokuParamter> viewState;
+    private ArrayList<JogaishaTorokuParamter> viewState;
     private RString shikibetsuCode;
     private RString shikibetsuCodeName;
     private RString jogaiRiyu;

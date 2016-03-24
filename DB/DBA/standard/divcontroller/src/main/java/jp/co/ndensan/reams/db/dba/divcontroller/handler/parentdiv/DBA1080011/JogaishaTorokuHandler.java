@@ -102,7 +102,7 @@ public class JogaishaTorokuHandler {
                 .setDomain(new ShikibetsuCode(jogaishaTorokuSetter.getShikibetsuCode()));
         div.getJogaishaTorokuIchiran().getJogaiTaishoIchiran().getTxtShikibetsuCodeName().setValue(jogaishaTorokuSetter.getShikibetsuCodeName());
         List<dgNenreiTotatshusha_Row> rowList = new ArrayList<>();
-        List<JogaishaTorokuParamter> params = jogaishaTorokuSetter.getViewState();
+        ArrayList<JogaishaTorokuParamter> params = jogaishaTorokuSetter.getViewState();
         for (JogaishaTorokuParamter param : params) {
             dgNenreiTotatshusha_Row row = new dgNenreiTotatshusha_Row();
             row.setRowState(param.getRowState());
@@ -152,7 +152,7 @@ public class JogaishaTorokuHandler {
         div.getJogaishaTorokuIchiran().getJogaiTaishoIchiran().getTxtJogaiRiyu().setDisabled(false);
         div.getJogaishaTorokuIchiran().getJogaiTaishoIchiran().getTxtJogaiKaijyoYMD().setDisabled(false);
         div.getJogaishaTorokuIchiran().getJogaiTaishoIchiran().getTxtJogaiTekiyoYMD().setDisabled(false);
-        div.getJogaishaTorokuIchiran().getJogaiTaishoIchiran().getBtnShikibetsuSearch().setDisabled(false);
+        div.getJogaishaTorokuIchiran().getJogaiTaishoIchiran().getBtnShikibetsuSearch().setDisabled(true);
         div.getJogaishaTorokuIchiran().getJogaiTaishoIchiran().getBtnCacel().setDisabled(false);
         div.getJogaishaTorokuIchiran().getJogaiTaishoIchiran().getBtnConfirm().setDisabled(false);
         div.getJogaishaTorokuIchiran().getJogaiTaishoIchiran().getTxtShikibetsuCodeName().setDisabled(true);
@@ -214,7 +214,7 @@ public class JogaishaTorokuHandler {
      */
     public void onClick_Search() {
         List<dgNenreiTotatshusha_Row> list = div.getJogaishaTorokuIchiran().getNenreiTotatsh().getDgNenreiTotatshusha().getDataSource();
-        List<JogaishaTorokuParamter> params = new ArrayList<>();
+        ArrayList<JogaishaTorokuParamter> params = new ArrayList<>();
         for (dgNenreiTotatshusha_Row param : list) {
             JogaishaTorokuParamter paramter = new JogaishaTorokuParamter();
             paramter.setRowState(param.getRowState());
