@@ -102,7 +102,7 @@ public class TaishouWaritsukeHandler {
             CommonButtonHolder.setDisabledByCommonButtonFieldName(審査会順番を確定する, true);
             CommonButtonHolder.setDisabledByCommonButtonFieldName(登録する, true);
         }
-        if (進捗状況.equals(ShinsakaiShinchokuJokyo.未開催.get名称())) {
+        if (!ShinsakaiShinchokuJokyo.未開催.get名称().equals(進捗状況)) {
             CommonButtonHolder.setDisabledByCommonButtonFieldName(審査会割付を完了する, true);
         }
     }
