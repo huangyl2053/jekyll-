@@ -34,7 +34,7 @@ public class DbT2017TsuchishoHakkogoIdoshaDac implements ISaveable<DbT2017Tsuchi
 
     @InjectSession
     private SqlSession session;
-    private static final int One = 1;
+    private static final int ONE = 1;
 
     /**
      * 主キーで通知書発行後異動者を取得します。
@@ -103,7 +103,7 @@ public class DbT2017TsuchishoHakkogoIdoshaDac implements ISaveable<DbT2017Tsuchi
     public List<DbT2017TsuchishoHakkogoIdoshaEntity> select発行帳票情報() {
         DbAccessorNormalType accessor = new DbAccessorNormalType(session);
         YMDHMS システム日付 = YMDHMS.now();
-        YMDHMS システム日付の1ヶ月前の日付 = システム日付.minusMonth(One);
+        YMDHMS システム日付の1ヶ月前の日付 = システム日付.minusMonth(ONE);
 
         return accessor.select().
                 table(DbT2017TsuchishoHakkogoIdosha.class).
