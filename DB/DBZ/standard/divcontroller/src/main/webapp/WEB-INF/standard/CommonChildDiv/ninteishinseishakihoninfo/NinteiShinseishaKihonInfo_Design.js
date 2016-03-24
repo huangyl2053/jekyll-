@@ -28,20 +28,20 @@ var DBZ;
                 return new UZA.Panel(this.convFiledNameSelf());
             };
 
-            Controls.prototype.txtHokenshaNo = function () {
-                return new UZA.TextBoxNum(this.convFiledName("txtHokenshaNo"));
-            };
-
-            Controls.prototype.txtHokenshaName = function () {
-                return new UZA.TextBox(this.convFiledName("txtHokenshaName"));
-            };
-
             Controls.prototype.txtHihokenshaNo = function () {
                 return new UZA.TextBoxCode(this.convFiledName("txtHihokenshaNo"));
             };
 
             Controls.prototype.txtHihokenshaKubun = function () {
                 return new UZA.TextBox(this.convFiledName("txtHihokenshaKubun"));
+            };
+
+            Controls.prototype.txtHokenshaNo = function () {
+                return new UZA.TextBoxNum(this.convFiledName("txtHokenshaNo"));
+            };
+
+            Controls.prototype.txtHokenshaName = function () {
+                return new UZA.TextBox(this.convFiledName("txtHokenshaName"));
             };
 
             Controls.prototype.txtHihokenshaName = function () {
@@ -52,16 +52,16 @@ var DBZ;
                 return new UZA.TextBox(this.convFiledName("txtHihokenshaKana"));
             };
 
-            Controls.prototype.txtSeibetsu = function () {
-                return new UZA.TextBox(this.convFiledName("txtSeibetsu"));
-            };
-
             Controls.prototype.txtSeinenYmd = function () {
                 return new UZA.TextBoxDate(this.convFiledName("txtSeinenYmd"));
             };
 
             Controls.prototype.txtNenrei = function () {
                 return new UZA.TextBoxNum(this.convFiledName("txtNenrei"));
+            };
+
+            Controls.prototype.txtSeibetsu = function () {
+                return new UZA.TextBox(this.convFiledName("txtSeibetsu"));
             };
 
             Controls.prototype.txtYubibNo = function () {

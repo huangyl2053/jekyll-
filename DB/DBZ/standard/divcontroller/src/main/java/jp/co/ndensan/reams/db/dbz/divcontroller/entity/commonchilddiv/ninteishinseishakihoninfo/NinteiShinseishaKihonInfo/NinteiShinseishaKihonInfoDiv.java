@@ -29,24 +29,24 @@ public class NinteiShinseishaKihonInfoDiv extends Panel implements INinteiShinse
      * コントロール名とフィールド名を取得する
      * private + コントロール名 + フィールド名 の文字列を作成
      */
-    @JsonProperty("txtHokenshaNo")
-    private TextBoxNum txtHokenshaNo;
-    @JsonProperty("txtHokenshaName")
-    private TextBox txtHokenshaName;
     @JsonProperty("txtHihokenshaNo")
     private TextBoxCode txtHihokenshaNo;
     @JsonProperty("txtHihokenshaKubun")
     private TextBox txtHihokenshaKubun;
+    @JsonProperty("txtHokenshaNo")
+    private TextBoxNum txtHokenshaNo;
+    @JsonProperty("txtHokenshaName")
+    private TextBox txtHokenshaName;
     @JsonProperty("txtHihokenshaName")
     private TextBox txtHihokenshaName;
     @JsonProperty("txtHihokenshaKana")
     private TextBox txtHihokenshaKana;
-    @JsonProperty("txtSeibetsu")
-    private TextBox txtSeibetsu;
     @JsonProperty("txtSeinenYmd")
     private TextBoxDate txtSeinenYmd;
     @JsonProperty("txtNenrei")
     private TextBoxNum txtNenrei;
+    @JsonProperty("txtSeibetsu")
+    private TextBox txtSeibetsu;
     @JsonProperty("txtYubibNo")
     private TextBoxYubinNo txtYubibNo;
     @JsonProperty("txtjusho")
@@ -60,42 +60,6 @@ public class NinteiShinseishaKihonInfoDiv extends Panel implements INinteiShinse
      * コントロール名とフィールド名を取得する
      * フィールド名のGetterとSetter を作成
      */
-    /*
-     * gettxtHokenshaNo
-     * @return txtHokenshaNo
-     */
-    @JsonProperty("txtHokenshaNo")
-    public TextBoxNum getTxtHokenshaNo() {
-        return txtHokenshaNo;
-    }
-
-    /*
-     * settxtHokenshaNo
-     * @param txtHokenshaNo txtHokenshaNo
-     */
-    @JsonProperty("txtHokenshaNo")
-    public void setTxtHokenshaNo(TextBoxNum txtHokenshaNo) {
-        this.txtHokenshaNo = txtHokenshaNo;
-    }
-
-    /*
-     * gettxtHokenshaName
-     * @return txtHokenshaName
-     */
-    @JsonProperty("txtHokenshaName")
-    public TextBox getTxtHokenshaName() {
-        return txtHokenshaName;
-    }
-
-    /*
-     * settxtHokenshaName
-     * @param txtHokenshaName txtHokenshaName
-     */
-    @JsonProperty("txtHokenshaName")
-    public void setTxtHokenshaName(TextBox txtHokenshaName) {
-        this.txtHokenshaName = txtHokenshaName;
-    }
-
     /*
      * gettxtHihokenshaNo
      * @return txtHihokenshaNo
@@ -130,6 +94,42 @@ public class NinteiShinseishaKihonInfoDiv extends Panel implements INinteiShinse
     @JsonProperty("txtHihokenshaKubun")
     public void setTxtHihokenshaKubun(TextBox txtHihokenshaKubun) {
         this.txtHihokenshaKubun = txtHihokenshaKubun;
+    }
+
+    /*
+     * gettxtHokenshaNo
+     * @return txtHokenshaNo
+     */
+    @JsonProperty("txtHokenshaNo")
+    public TextBoxNum getTxtHokenshaNo() {
+        return txtHokenshaNo;
+    }
+
+    /*
+     * settxtHokenshaNo
+     * @param txtHokenshaNo txtHokenshaNo
+     */
+    @JsonProperty("txtHokenshaNo")
+    public void setTxtHokenshaNo(TextBoxNum txtHokenshaNo) {
+        this.txtHokenshaNo = txtHokenshaNo;
+    }
+
+    /*
+     * gettxtHokenshaName
+     * @return txtHokenshaName
+     */
+    @JsonProperty("txtHokenshaName")
+    public TextBox getTxtHokenshaName() {
+        return txtHokenshaName;
+    }
+
+    /*
+     * settxtHokenshaName
+     * @param txtHokenshaName txtHokenshaName
+     */
+    @JsonProperty("txtHokenshaName")
+    public void setTxtHokenshaName(TextBox txtHokenshaName) {
+        this.txtHokenshaName = txtHokenshaName;
     }
 
     /*
@@ -169,24 +169,6 @@ public class NinteiShinseishaKihonInfoDiv extends Panel implements INinteiShinse
     }
 
     /*
-     * gettxtSeibetsu
-     * @return txtSeibetsu
-     */
-    @JsonProperty("txtSeibetsu")
-    public TextBox getTxtSeibetsu() {
-        return txtSeibetsu;
-    }
-
-    /*
-     * settxtSeibetsu
-     * @param txtSeibetsu txtSeibetsu
-     */
-    @JsonProperty("txtSeibetsu")
-    public void setTxtSeibetsu(TextBox txtSeibetsu) {
-        this.txtSeibetsu = txtSeibetsu;
-    }
-
-    /*
      * gettxtSeinenYmd
      * @return txtSeinenYmd
      */
@@ -220,6 +202,24 @@ public class NinteiShinseishaKihonInfoDiv extends Panel implements INinteiShinse
     @JsonProperty("txtNenrei")
     public void setTxtNenrei(TextBoxNum txtNenrei) {
         this.txtNenrei = txtNenrei;
+    }
+
+    /*
+     * gettxtSeibetsu
+     * @return txtSeibetsu
+     */
+    @JsonProperty("txtSeibetsu")
+    public TextBox getTxtSeibetsu() {
+        return txtSeibetsu;
+    }
+
+    /*
+     * settxtSeibetsu
+     * @param txtSeibetsu txtSeibetsu
+     */
+    @JsonProperty("txtSeibetsu")
+    public void setTxtSeibetsu(TextBox txtSeibetsu) {
+        this.txtSeibetsu = txtSeibetsu;
     }
 
     /*
