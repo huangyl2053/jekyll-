@@ -378,7 +378,7 @@ public class KyokaisoGaitoshaPanel {
             models.add(models.get(key).createBuilderForEdit().is論理削除フラグ(true).build());
         }
         ViewStateHolder.put(ViewStateKeys.境界層該当者台帳管理_境界層保険料段階情報, Models.create(models));
-        getHandler(div).onClick_btnKakutei(イベント状態);
+        getHandler(div).onClick_btnKakutei(イベント状態, 最新リンク番号, 最新履歴番号);
         return ResponseData.of(div).respond();
     }
 
