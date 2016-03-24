@@ -13,7 +13,7 @@ public enum ShiharaiHenkoTorokuKubun {
     /**
      * コード:00 名称:空 略称:定義なし
      */
-    _空("00", "空"),
+    _空(RString.EMPTY.toString(), RString.EMPTY.toString()),
     /**
      * コード:01 名称:２号予告登録者 略称:定義なし
      */

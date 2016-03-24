@@ -44,15 +44,12 @@ import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
 public class GemmenJokyoFinder {
 
     private final MapperProvider mapperProvider;
-    private final IGemmenJokyoMapper mapper;
-    private ShiharaiHenkoTorokuKubun ShiharaiHenkoTorokuKubun;
 
     /**
      * コンストラクタです。
      */
     GemmenJokyoFinder() {
         this.mapperProvider = InstanceProvider.create(MapperProvider.class);
-        this.mapper = mapperProvider.create(IGemmenJokyoMapper.class);
     }
 
     /**
@@ -61,7 +58,7 @@ public class GemmenJokyoFinder {
      * @return GemmenJokyoFinder
      */
     public static GemmenJokyoFinder createIntance() {
-        return new GemmenJokyoFinder();
+        return InstanceProvider.create(GemmenJokyoFinder.class);
     }
 
     /**
@@ -72,6 +69,7 @@ public class GemmenJokyoFinder {
      */
     @Transaction
     public List<NursingCareInformationBusiness> find要介護認定情報(HihokenshaNo 被保険者番号) {
+        IGemmenJokyoMapper mapper = mapperProvider.create(IGemmenJokyoMapper.class);
         GemmenJokyoParameter parameter = new GemmenJokyoParameter();
         parameter.set被保険者番号(被保険者番号);
         List<NursingCareInformationCodeEntity> codeEntityList = mapper.get要介護認定情報(parameter);
@@ -85,7 +83,6 @@ public class GemmenJokyoFinder {
             entity.set認定年月日(codeEntity.get認定年月日());
             entity.set旧措置者フラグ(codeEntity.is旧措置者フラグ());
             entity.set受給申請事由(JukyuShinseiJiyu.toValue(codeEntity.get受給申請事由().getColumnValue()));
-            //TODO 受給者台帳Newest.厚労省IF識別コード
             entity.set要介護度(YokaigoJotaiKubunSupport.toValue(KoroshoInterfaceShikibetsuCode.toValue(
                     codeEntity.get厚労省IF識別コード().getColumnValue()), codeEntity.get要介護認定状態区分コード().getColumnValue()));
             要介護認定情報List.add(new NursingCareInformationBusiness(entity));
@@ -101,6 +98,7 @@ public class GemmenJokyoFinder {
      */
     @Transaction
     public List<JukyushaDaicho> find申請中情報(HihokenshaNo 被保険者番号) {
+        IGemmenJokyoMapper mapper = mapperProvider.create(IGemmenJokyoMapper.class);
         GemmenJokyoParameter parameter = new GemmenJokyoParameter();
         parameter.set被保険者番号(被保険者番号);
         DbT4001JukyushaDaichoEntity entity = mapper.get申請中情報(parameter);
@@ -119,6 +117,7 @@ public class GemmenJokyoFinder {
      * @return 各種減免情報
      */
     public VariousReductionInformation find減免情報(HihokenshaNo 被保険者番号) {
+        //TODO QA #79662
         return null;
     }
 
@@ -130,7 +129,7 @@ public class GemmenJokyoFinder {
      */
     @Transaction
     public List<RoreiFukushiNenkinJukyusha> find老齢年金情報(ShikibetsuCode 識別コード) {
-        //TODO 老齢福祉年金受給者は　DbT7005RojinHokenJukyushaJohoEntity を保持するクラス
+        IGemmenJokyoMapper mapper = mapperProvider.create(IGemmenJokyoMapper.class);
         GemmenJokyoParameter parameter = new GemmenJokyoParameter();
         parameter.set識別コード(識別コード);
         parameter.setシステム日付(RDate.getNowDate());
@@ -150,6 +149,7 @@ public class GemmenJokyoFinder {
      */
     @Transaction
     public ShiharaiHohoHenkoSummaryBusiness find支払方法変更情報(HihokenshaNo 被保険者番号) {
+        IGemmenJokyoMapper mapper = mapperProvider.create(IGemmenJokyoMapper.class);
         GemmenJokyoParameter parameter = new GemmenJokyoParameter();
         parameter.set被保険者番号(被保険者番号);
         List<DbT4021ShiharaiHohoHenkoEntity> dbT4021EntityList = mapper.get支払方法変更情報(parameter);
@@ -165,22 +165,19 @@ public class GemmenJokyoFinder {
             給付制限情報 = new ShiharaiHohoHenkoSummaryBusiness(支払方法変更概況);
         } else {
             DbT4021ShiharaiHohoHenkoEntity 支払方法変更取得結果_１号償還払い化 = get取得結果(ShiharaiHenkoKanriKubun._１号償還払い化, dbT4021EntityList);
+            DbT4021ShiharaiHohoHenkoEntity 支払方法変更取得結果_２号差止 = get取得結果(ShiharaiHenkoKanriKubun._２号差止, dbT4021EntityList);
             if (支払方法変更取得結果_１号償還払い化 != null) {
                 支払方法変更概況.set支払方法変更_登録区分(ShiharaiHenkoTorokuKubun.toValue(支払方法変更取得結果_１号償還払い化.getKanriKubun()));
                 支払方法変更概況.set支払方法変更_開始日(支払方法変更取得結果_１号償還払い化.getTekiyoKaishiYMD());
                 支払方法変更概況.set支払方法変更_終了日(支払方法変更取得結果_１号償還払い化.getTekiyoShuryoYMD());
+            } else if (支払方法変更取得結果_２号差止 != null) {
+                支払方法変更概況.set支払方法変更_登録区分(ShiharaiHenkoTorokuKubun.toValue(支払方法変更取得結果_２号差止.getKanriKubun()));
+                支払方法変更概況.set支払方法変更_開始日(支払方法変更取得結果_２号差止.getTekiyoKaishiYMD());
+                支払方法変更概況.set支払方法変更_終了日(支払方法変更取得結果_２号差止.getTekiyoShuryoYMD());
             } else {
-                DbT4021ShiharaiHohoHenkoEntity 支払方法変更取得結果_２号差止 = get取得結果(ShiharaiHenkoKanriKubun._２号差止, dbT4021EntityList);
-                if (支払方法変更取得結果_２号差止 != null) {
-                    支払方法変更概況.set支払方法変更_登録区分(ShiharaiHenkoTorokuKubun.toValue(支払方法変更取得結果_２号差止.getKanriKubun()));
-                    支払方法変更概況.set支払方法変更_開始日(支払方法変更取得結果_２号差止.getTekiyoKaishiYMD());
-                    支払方法変更概況.set支払方法変更_終了日(支払方法変更取得結果_２号差止.getTekiyoShuryoYMD());
-                } else {
-                    //TODO DBD_Enum.支払方法変更登録区分．空
-                    支払方法変更概況.set支払方法変更_登録区分(ShiharaiHenkoTorokuKubun._空);
-                    支払方法変更概況.set支払方法変更_開始日(FlexibleDate.EMPTY);
-                    支払方法変更概況.set支払方法変更_終了日(FlexibleDate.EMPTY);
-                }
+                支払方法変更概況.set支払方法変更_登録区分(ShiharaiHenkoTorokuKubun._空);
+                支払方法変更概況.set支払方法変更_開始日(FlexibleDate.EMPTY);
+                支払方法変更概況.set支払方法変更_終了日(FlexibleDate.EMPTY);
             }
             DbT4021ShiharaiHohoHenkoEntity 支払方法変更取得結果_１号給付額減額 = get取得結果(ShiharaiHenkoKanriKubun._１号給付額減額, dbT4021EntityList);
             if (支払方法変更取得結果_１号給付額減額 != null) {
@@ -215,6 +212,7 @@ public class GemmenJokyoFinder {
      */
     @Transaction
     public ShikibetsuCode get識別コード(HihokenshaNo 被保険者番号) {
+        IGemmenJokyoMapper mapper = mapperProvider.create(IGemmenJokyoMapper.class);
         GemmenJokyoParameter parameter = new GemmenJokyoParameter();
         parameter.set被保険者番号(被保険者番号);
         List<DbV1001HihokenshaDaichoEntity> dbV1001EntityList = mapper.get識別コード(parameter);
@@ -232,6 +230,7 @@ public class GemmenJokyoFinder {
      */
     @Transaction
     public List<RiyoshaFutanWariaiMeisai> find利用者負担割合明細(HihokenshaNo 被保険者番号) {
+        IGemmenJokyoMapper mapper = mapperProvider.create(IGemmenJokyoMapper.class);
         GemmenJokyoParameter parameter = new GemmenJokyoParameter();
         parameter.set被保険者番号(被保険者番号);
         parameter.setシステム日付(RDate.getNowDate());
