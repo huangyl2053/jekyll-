@@ -159,7 +159,7 @@ public class KyokaisoGaitoshaPanelValidationHandler {
         開始日と終了日の順番の整合性チェック(DbzErrorMessages.期間が不正_未来日付不可, "開始日", "終了日"),
         境界層措置決定情報チェック(DbaErrorMessages.記載解除_減額_低減適用のいずれか1つ以上選択),
         期間が重複チェック(UrErrorMessages.期間が重複),
-        標準負担額該当の開始日チェック(DbaErrorMessages.開始日が制度改正後のため減額措置登録不可, "開始日"),
+        標準負担額該当の開始日チェック(DbaErrorMessages.開始日が制度改正後のため減額措置登録不可, "標準負担額の減額"),
         居住費等負担額減額該当の開始日チェック(DbaErrorMessages.開始日が制度改正前のため減額措置登録不可,
                 "特定介護サービス等に係る居住費等の負担額"),
         居住費軽減後居室種類チェック(DbaErrorMessages.適用する項目を設定, "居室の種類"),
