@@ -251,7 +251,7 @@ public class TaShichosonJushochiTokureiShisetsuHenkoTsuchishoFinder {
                     separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString());
             outEntity.set施設名称(getEntity.get事業者名称());
             outEntity.set施設電話番号(getEntity.get電話番号());
-            outEntity.set施設FAX番号(getEntity.getFAX番号());
+            outEntity.set施設FAX番号(getEntity.getFax番号());
             if (getEntity.get郵便番号() != null) {
                 outEntity.set施設郵便番号(getEntity.get郵便番号().getEditedYubinNo());
             }
