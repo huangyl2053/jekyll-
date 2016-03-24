@@ -19,6 +19,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
  * 減免減額申請情報エンティティです。
  */
 @lombok.Getter
+@SuppressWarnings("PMD.UnusedPrivateField")
 public class ShinseiJoho {
 
     private final ShinseiTodokedeDaikoKubunCode 申請届出代行区分;
