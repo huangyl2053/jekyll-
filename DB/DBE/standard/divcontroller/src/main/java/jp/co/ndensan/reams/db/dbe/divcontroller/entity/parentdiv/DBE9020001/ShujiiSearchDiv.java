@@ -27,22 +27,30 @@ public class ShujiiSearchDiv extends Panel {
     private TextBoxCode txtSearchShujiiIryokikanCodeFrom;
     @JsonProperty("txtSearchShujiiIryokikanCodeTo")
     private TextBoxCode txtSearchShujiiIryokikanCodeTo;
-    @JsonProperty("txtSearchShujiiIryokikanMeisho")
-    private TextBox txtSearchShujiiIryokikanMeisho;
-    @JsonProperty("txtSearchShujiiIryokikanKanaMeisho")
-    private TextBoxKana txtSearchShujiiIryokikanKanaMeisho;
     @JsonProperty("txtSearchShujiiCodeFrom")
     private TextBoxCode txtSearchShujiiCodeFrom;
     @JsonProperty("txtSearchShujiiCodeTo")
     private TextBoxCode txtSearchShujiiCodeTo;
+    @JsonProperty("txtSearchShujiiIryokikanMeisho")
+    private TextBox txtSearchShujiiIryokikanMeisho;
+    @JsonProperty("ddlKikanMeisho")
+    private DropDownList ddlKikanMeisho;
+    @JsonProperty("txtSearchShujiiIryokikanKanaMeisho")
+    private TextBoxKana txtSearchShujiiIryokikanKanaMeisho;
+    @JsonProperty("ddlKikanKanaMeisho")
+    private DropDownList ddlKikanKanaMeisho;
     @JsonProperty("txtSearchShujiiShimei")
     private TextBox txtSearchShujiiShimei;
+    @JsonProperty("ddlShujiiMeisho")
+    private DropDownList ddlShujiiMeisho;
     @JsonProperty("txtSearchShujiiKanaShimei")
     private TextBoxKana txtSearchShujiiKanaShimei;
-    @JsonProperty("txtSaidaiHyojiKensu")
-    private TextBoxNum txtSaidaiHyojiKensu;
+    @JsonProperty("ddlShujiiKanaMeisho")
+    private DropDownList ddlShujiiKanaMeisho;
     @JsonProperty("radSearchJokyoFlag")
     private RadioButton radSearchJokyoFlag;
+    @JsonProperty("txtSaidaiHyojiKensu")
+    private TextBoxNum txtSaidaiHyojiKensu;
     @JsonProperty("btnSearchShujii")
     private Button btnSearchShujii;
     @JsonProperty("btnClearKensakuJoken")
@@ -93,42 +101,6 @@ public class ShujiiSearchDiv extends Panel {
     }
 
     /*
-     * gettxtSearchShujiiIryokikanMeisho
-     * @return txtSearchShujiiIryokikanMeisho
-     */
-    @JsonProperty("txtSearchShujiiIryokikanMeisho")
-    public TextBox getTxtSearchShujiiIryokikanMeisho() {
-        return txtSearchShujiiIryokikanMeisho;
-    }
-
-    /*
-     * settxtSearchShujiiIryokikanMeisho
-     * @param txtSearchShujiiIryokikanMeisho txtSearchShujiiIryokikanMeisho
-     */
-    @JsonProperty("txtSearchShujiiIryokikanMeisho")
-    public void setTxtSearchShujiiIryokikanMeisho(TextBox txtSearchShujiiIryokikanMeisho) {
-        this.txtSearchShujiiIryokikanMeisho = txtSearchShujiiIryokikanMeisho;
-    }
-
-    /*
-     * gettxtSearchShujiiIryokikanKanaMeisho
-     * @return txtSearchShujiiIryokikanKanaMeisho
-     */
-    @JsonProperty("txtSearchShujiiIryokikanKanaMeisho")
-    public TextBoxKana getTxtSearchShujiiIryokikanKanaMeisho() {
-        return txtSearchShujiiIryokikanKanaMeisho;
-    }
-
-    /*
-     * settxtSearchShujiiIryokikanKanaMeisho
-     * @param txtSearchShujiiIryokikanKanaMeisho txtSearchShujiiIryokikanKanaMeisho
-     */
-    @JsonProperty("txtSearchShujiiIryokikanKanaMeisho")
-    public void setTxtSearchShujiiIryokikanKanaMeisho(TextBoxKana txtSearchShujiiIryokikanKanaMeisho) {
-        this.txtSearchShujiiIryokikanKanaMeisho = txtSearchShujiiIryokikanKanaMeisho;
-    }
-
-    /*
      * gettxtSearchShujiiCodeFrom
      * @return txtSearchShujiiCodeFrom
      */
@@ -165,6 +137,78 @@ public class ShujiiSearchDiv extends Panel {
     }
 
     /*
+     * gettxtSearchShujiiIryokikanMeisho
+     * @return txtSearchShujiiIryokikanMeisho
+     */
+    @JsonProperty("txtSearchShujiiIryokikanMeisho")
+    public TextBox getTxtSearchShujiiIryokikanMeisho() {
+        return txtSearchShujiiIryokikanMeisho;
+    }
+
+    /*
+     * settxtSearchShujiiIryokikanMeisho
+     * @param txtSearchShujiiIryokikanMeisho txtSearchShujiiIryokikanMeisho
+     */
+    @JsonProperty("txtSearchShujiiIryokikanMeisho")
+    public void setTxtSearchShujiiIryokikanMeisho(TextBox txtSearchShujiiIryokikanMeisho) {
+        this.txtSearchShujiiIryokikanMeisho = txtSearchShujiiIryokikanMeisho;
+    }
+
+    /*
+     * getddlKikanMeisho
+     * @return ddlKikanMeisho
+     */
+    @JsonProperty("ddlKikanMeisho")
+    public DropDownList getDdlKikanMeisho() {
+        return ddlKikanMeisho;
+    }
+
+    /*
+     * setddlKikanMeisho
+     * @param ddlKikanMeisho ddlKikanMeisho
+     */
+    @JsonProperty("ddlKikanMeisho")
+    public void setDdlKikanMeisho(DropDownList ddlKikanMeisho) {
+        this.ddlKikanMeisho = ddlKikanMeisho;
+    }
+
+    /*
+     * gettxtSearchShujiiIryokikanKanaMeisho
+     * @return txtSearchShujiiIryokikanKanaMeisho
+     */
+    @JsonProperty("txtSearchShujiiIryokikanKanaMeisho")
+    public TextBoxKana getTxtSearchShujiiIryokikanKanaMeisho() {
+        return txtSearchShujiiIryokikanKanaMeisho;
+    }
+
+    /*
+     * settxtSearchShujiiIryokikanKanaMeisho
+     * @param txtSearchShujiiIryokikanKanaMeisho txtSearchShujiiIryokikanKanaMeisho
+     */
+    @JsonProperty("txtSearchShujiiIryokikanKanaMeisho")
+    public void setTxtSearchShujiiIryokikanKanaMeisho(TextBoxKana txtSearchShujiiIryokikanKanaMeisho) {
+        this.txtSearchShujiiIryokikanKanaMeisho = txtSearchShujiiIryokikanKanaMeisho;
+    }
+
+    /*
+     * getddlKikanKanaMeisho
+     * @return ddlKikanKanaMeisho
+     */
+    @JsonProperty("ddlKikanKanaMeisho")
+    public DropDownList getDdlKikanKanaMeisho() {
+        return ddlKikanKanaMeisho;
+    }
+
+    /*
+     * setddlKikanKanaMeisho
+     * @param ddlKikanKanaMeisho ddlKikanKanaMeisho
+     */
+    @JsonProperty("ddlKikanKanaMeisho")
+    public void setDdlKikanKanaMeisho(DropDownList ddlKikanKanaMeisho) {
+        this.ddlKikanKanaMeisho = ddlKikanKanaMeisho;
+    }
+
+    /*
      * gettxtSearchShujiiShimei
      * @return txtSearchShujiiShimei
      */
@@ -180,6 +224,24 @@ public class ShujiiSearchDiv extends Panel {
     @JsonProperty("txtSearchShujiiShimei")
     public void setTxtSearchShujiiShimei(TextBox txtSearchShujiiShimei) {
         this.txtSearchShujiiShimei = txtSearchShujiiShimei;
+    }
+
+    /*
+     * getddlShujiiMeisho
+     * @return ddlShujiiMeisho
+     */
+    @JsonProperty("ddlShujiiMeisho")
+    public DropDownList getDdlShujiiMeisho() {
+        return ddlShujiiMeisho;
+    }
+
+    /*
+     * setddlShujiiMeisho
+     * @param ddlShujiiMeisho ddlShujiiMeisho
+     */
+    @JsonProperty("ddlShujiiMeisho")
+    public void setDdlShujiiMeisho(DropDownList ddlShujiiMeisho) {
+        this.ddlShujiiMeisho = ddlShujiiMeisho;
     }
 
     /*
@@ -201,21 +263,21 @@ public class ShujiiSearchDiv extends Panel {
     }
 
     /*
-     * gettxtSaidaiHyojiKensu
-     * @return txtSaidaiHyojiKensu
+     * getddlShujiiKanaMeisho
+     * @return ddlShujiiKanaMeisho
      */
-    @JsonProperty("txtSaidaiHyojiKensu")
-    public TextBoxNum getTxtSaidaiHyojiKensu() {
-        return txtSaidaiHyojiKensu;
+    @JsonProperty("ddlShujiiKanaMeisho")
+    public DropDownList getDdlShujiiKanaMeisho() {
+        return ddlShujiiKanaMeisho;
     }
 
     /*
-     * settxtSaidaiHyojiKensu
-     * @param txtSaidaiHyojiKensu txtSaidaiHyojiKensu
+     * setddlShujiiKanaMeisho
+     * @param ddlShujiiKanaMeisho ddlShujiiKanaMeisho
      */
-    @JsonProperty("txtSaidaiHyojiKensu")
-    public void setTxtSaidaiHyojiKensu(TextBoxNum txtSaidaiHyojiKensu) {
-        this.txtSaidaiHyojiKensu = txtSaidaiHyojiKensu;
+    @JsonProperty("ddlShujiiKanaMeisho")
+    public void setDdlShujiiKanaMeisho(DropDownList ddlShujiiKanaMeisho) {
+        this.ddlShujiiKanaMeisho = ddlShujiiKanaMeisho;
     }
 
     /*
@@ -234,6 +296,24 @@ public class ShujiiSearchDiv extends Panel {
     @JsonProperty("radSearchJokyoFlag")
     public void setRadSearchJokyoFlag(RadioButton radSearchJokyoFlag) {
         this.radSearchJokyoFlag = radSearchJokyoFlag;
+    }
+
+    /*
+     * gettxtSaidaiHyojiKensu
+     * @return txtSaidaiHyojiKensu
+     */
+    @JsonProperty("txtSaidaiHyojiKensu")
+    public TextBoxNum getTxtSaidaiHyojiKensu() {
+        return txtSaidaiHyojiKensu;
+    }
+
+    /*
+     * settxtSaidaiHyojiKensu
+     * @param txtSaidaiHyojiKensu txtSaidaiHyojiKensu
+     */
+    @JsonProperty("txtSaidaiHyojiKensu")
+    public void setTxtSaidaiHyojiKensu(TextBoxNum txtSaidaiHyojiKensu) {
+        this.txtSaidaiHyojiKensu = txtSaidaiHyojiKensu;
     }
 
     /*

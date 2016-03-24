@@ -8,6 +8,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.KaigoKanryoMessage.KaigoKanryoMessage.IKaigoKanryoMessageDiv;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.KaigoKanryoMessage.KaigoKanryoMessage.KaigoKanryoMessageDiv;
+import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.hokenshalist.HokenshaList.HokenshaListDiv;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.hokenshalist.HokenshaList.IHokenshaListDiv;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.binding.*;
@@ -168,26 +169,6 @@ public class ShujiiMasterDiv extends Panel {
     }
 
     @JsonIgnore
-    public TextBox getTxtSearchShujiiIryokikanMeisho() {
-        return this.getShujiiSearch().getTxtSearchShujiiIryokikanMeisho();
-    }
-
-    @JsonIgnore
-    public void  setTxtSearchShujiiIryokikanMeisho(TextBox txtSearchShujiiIryokikanMeisho) {
-        this.getShujiiSearch().setTxtSearchShujiiIryokikanMeisho(txtSearchShujiiIryokikanMeisho);
-    }
-
-    @JsonIgnore
-    public TextBoxKana getTxtSearchShujiiIryokikanKanaMeisho() {
-        return this.getShujiiSearch().getTxtSearchShujiiIryokikanKanaMeisho();
-    }
-
-    @JsonIgnore
-    public void  setTxtSearchShujiiIryokikanKanaMeisho(TextBoxKana txtSearchShujiiIryokikanKanaMeisho) {
-        this.getShujiiSearch().setTxtSearchShujiiIryokikanKanaMeisho(txtSearchShujiiIryokikanKanaMeisho);
-    }
-
-    @JsonIgnore
     public TextBoxCode getTxtSearchShujiiCodeFrom() {
         return this.getShujiiSearch().getTxtSearchShujiiCodeFrom();
     }
@@ -208,6 +189,46 @@ public class ShujiiMasterDiv extends Panel {
     }
 
     @JsonIgnore
+    public TextBox getTxtSearchShujiiIryokikanMeisho() {
+        return this.getShujiiSearch().getTxtSearchShujiiIryokikanMeisho();
+    }
+
+    @JsonIgnore
+    public void  setTxtSearchShujiiIryokikanMeisho(TextBox txtSearchShujiiIryokikanMeisho) {
+        this.getShujiiSearch().setTxtSearchShujiiIryokikanMeisho(txtSearchShujiiIryokikanMeisho);
+    }
+
+    @JsonIgnore
+    public DropDownList getDdlKikanMeisho() {
+        return this.getShujiiSearch().getDdlKikanMeisho();
+    }
+
+    @JsonIgnore
+    public void  setDdlKikanMeisho(DropDownList ddlKikanMeisho) {
+        this.getShujiiSearch().setDdlKikanMeisho(ddlKikanMeisho);
+    }
+
+    @JsonIgnore
+    public TextBoxKana getTxtSearchShujiiIryokikanKanaMeisho() {
+        return this.getShujiiSearch().getTxtSearchShujiiIryokikanKanaMeisho();
+    }
+
+    @JsonIgnore
+    public void  setTxtSearchShujiiIryokikanKanaMeisho(TextBoxKana txtSearchShujiiIryokikanKanaMeisho) {
+        this.getShujiiSearch().setTxtSearchShujiiIryokikanKanaMeisho(txtSearchShujiiIryokikanKanaMeisho);
+    }
+
+    @JsonIgnore
+    public DropDownList getDdlKikanKanaMeisho() {
+        return this.getShujiiSearch().getDdlKikanKanaMeisho();
+    }
+
+    @JsonIgnore
+    public void  setDdlKikanKanaMeisho(DropDownList ddlKikanKanaMeisho) {
+        this.getShujiiSearch().setDdlKikanKanaMeisho(ddlKikanKanaMeisho);
+    }
+
+    @JsonIgnore
     public TextBox getTxtSearchShujiiShimei() {
         return this.getShujiiSearch().getTxtSearchShujiiShimei();
     }
@@ -215,6 +236,16 @@ public class ShujiiMasterDiv extends Panel {
     @JsonIgnore
     public void  setTxtSearchShujiiShimei(TextBox txtSearchShujiiShimei) {
         this.getShujiiSearch().setTxtSearchShujiiShimei(txtSearchShujiiShimei);
+    }
+
+    @JsonIgnore
+    public DropDownList getDdlShujiiMeisho() {
+        return this.getShujiiSearch().getDdlShujiiMeisho();
+    }
+
+    @JsonIgnore
+    public void  setDdlShujiiMeisho(DropDownList ddlShujiiMeisho) {
+        this.getShujiiSearch().setDdlShujiiMeisho(ddlShujiiMeisho);
     }
 
     @JsonIgnore
@@ -228,13 +259,13 @@ public class ShujiiMasterDiv extends Panel {
     }
 
     @JsonIgnore
-    public TextBoxNum getTxtSaidaiHyojiKensu() {
-        return this.getShujiiSearch().getTxtSaidaiHyojiKensu();
+    public DropDownList getDdlShujiiKanaMeisho() {
+        return this.getShujiiSearch().getDdlShujiiKanaMeisho();
     }
 
     @JsonIgnore
-    public void  setTxtSaidaiHyojiKensu(TextBoxNum txtSaidaiHyojiKensu) {
-        this.getShujiiSearch().setTxtSaidaiHyojiKensu(txtSaidaiHyojiKensu);
+    public void  setDdlShujiiKanaMeisho(DropDownList ddlShujiiKanaMeisho) {
+        this.getShujiiSearch().setDdlShujiiKanaMeisho(ddlShujiiKanaMeisho);
     }
 
     @JsonIgnore
@@ -245,6 +276,16 @@ public class ShujiiMasterDiv extends Panel {
     @JsonIgnore
     public void  setRadSearchJokyoFlag(RadioButton radSearchJokyoFlag) {
         this.getShujiiSearch().setRadSearchJokyoFlag(radSearchJokyoFlag);
+    }
+
+    @JsonIgnore
+    public TextBoxNum getTxtSaidaiHyojiKensu() {
+        return this.getShujiiSearch().getTxtSaidaiHyojiKensu();
+    }
+
+    @JsonIgnore
+    public void  setTxtSaidaiHyojiKensu(TextBoxNum txtSaidaiHyojiKensu) {
+        this.getShujiiSearch().setTxtSaidaiHyojiKensu(txtSaidaiHyojiKensu);
     }
 
     @JsonIgnore

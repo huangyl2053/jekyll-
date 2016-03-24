@@ -80,7 +80,7 @@ public class KaigoNinteiShikakuInfoHandler {
             div.getTxtSoshitsuYmd().setValue(new FlexibleDate(ninteiShikakuInfoBusiness.get資格喪失年月日().toString()));
         }
         div.getTxtSoshitsuJiyu().setValue(ShikakuSoshitsuJiyu.toValue(ninteiShikakuInfoBusiness.get資格喪失事由コード()).getName());
-        if (ninteiShikakuInfoBusiness.get住所地特例フラグ().equals("1")) {
+        if (ninteiShikakuInfoBusiness.get住所地特例フラグ().equals(new RString("1"))) {
             div.getTxtJutokuKubun().setValue(JushochitokureishaKubun.toValue(ninteiShikakuInfoBusiness.get住所地特例フラグ()).get名称());
         } else {
             div.getTxtJutokuKubun().setValue(RString.EMPTY);
