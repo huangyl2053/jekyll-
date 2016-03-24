@@ -150,11 +150,15 @@ public class NinteiChosainMaster {
                 new ChosaItakusakiCode(div.getTxtSearchChosaItakusakiCodeFrom().getValue()),
                 new ChosaItakusakiCode(div.getTxtSearchChosaItakusakiCodeTo().getValue()),
                 div.getTxtSearchChosaItakusakiMeisho().getValue(),
+                div.getDdlItakusakiMeisho().getSelectedKey(),
                 div.getTxtSearchChosaItakusakiKanaMeisho().getValue(),
+                div.getDdlItakusakiKanaMeisho().getSelectedKey(),
                 new ChosainCode(div.getTxtSearchChosainCodeFrom().getValue()),
                 new ChosainCode(div.getTxtSearchChosainCodeTo().getValue()),
                 div.getTxtSearchChosainShimei().getValue(),
+                div.getDdlChosainMeisho().getSelectedKey(),
                 div.getTxtSearchChosainKanaShimei().getValue(),
+                div.getDdlChosainKanaMeisho().getSelectedKey(),
                 div.getDdlChikuCode().getSelectedKey(),
                 div.getTxtSaidaiHyojiKensu().getValue());
         NinteiChosainMasterFinder ninteiChosainMasterFinder = NinteiChosainMasterFinder.createInstance();

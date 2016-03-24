@@ -86,6 +86,10 @@ public class NinteiChosainMasterHandler {
         div.getDdlChikuCode().setSelectedIndex(0);
         div.getRadSearchChosainJokyo().setSelectedIndex(0);
         div.getTxtSaidaiHyojiKensu().clearValue();
+        div.getDdlItakusakiMeisho().setSelectedIndex(0);
+        div.getDdlItakusakiKanaMeisho().setSelectedIndex(0);
+        div.getDdlChosainMeisho().setSelectedIndex(0);
+        div.getDdlChosainKanaMeisho().setSelectedIndex(0);
     }
 
     /**
@@ -199,8 +203,8 @@ public class NinteiChosainMasterHandler {
         div.getChosainJohoInput().getTxtTelNo().setDomain(new TelNo(row.getTelNo()));
 
         div.getChosainJohoInput().getTxtFaxNo().setDomain(new TelNo(row.getFaxNo()));
-        div.getChosainJohoInput().getTextBoxShozokuKikan().setDomain(
-                new AtenaJusho(RString.isNullOrEmpty(row.getShozokuKikanName()) ? RString.EMPTY : row.getShozokuKikanName()));
+        div.getChosainJohoInput().getTextBoxShozokuKikan().setValue(
+                (RString.isNullOrEmpty(row.getShozokuKikanName()) ? RString.EMPTY : row.getShozokuKikanName()));
         div.getChosainJohoInput().getRadChosainJokyo().setSelectedKey(
                 表示値_有効.equals(row.getJokyoFlag()) ? CODE_有効 : CODE_無効);
         div.getChosainJohoInput().getRadSeibetsu().setSelectedKey(
@@ -261,7 +265,7 @@ public class NinteiChosainMasterHandler {
         row.setJusho(nullToEmpty(div.getChosainJohoInput().getTxtJusho().getDomain().value()));
         row.setTelNo(nullToEmpty(div.getChosainJohoInput().getTxtTelNo().getDomain().value()));
         row.setFaxNo(nullToEmpty(div.getChosainJohoInput().getTxtFaxNo().getDomain().value()));
-        row.setShozokuKikanName(nullToEmpty(div.getChosainJohoInput().getTextBoxShozokuKikan().getDomain().value()));
+        row.setShozokuKikanName(nullToEmpty(div.getChosainJohoInput().getTextBoxShozokuKikan().getValue()));
         int index = div.getChosainIchiran().getDgChosainIchiran().getClickedRowId();
         if (状態_追加.equals(eventJotai)) {
             row.setJotai(eventJotai);
@@ -321,7 +325,7 @@ public class NinteiChosainMasterHandler {
                 .set住所(div.getChosainJohoInput().getTxtJusho().getDomain())
                 .set電話番号(div.getChosainJohoInput().getTxtTelNo().getDomain())
                 .setFAX番号(div.getChosainJohoInput().getTxtFaxNo().getDomain())
-                .set所属機関名称(div.getChosainJohoInput().getTextBoxShozokuKikan().getDomain().value())
+                .set所属機関名称(div.getChosainJohoInput().getTextBoxShozokuKikan().getValue())
                 .set状況フラグ(CODE_有効.equals(div.getChosainJohoInput().getRadChosainJokyo().getSelectedKey())).build();
     }
 
@@ -393,7 +397,7 @@ public class NinteiChosainMasterHandler {
         div.getChosainJohoInput().getTxtJusho().clearDomain();
         div.getChosainJohoInput().getTxtTelNo().clearDomain();
         div.getChosainJohoInput().getTxtFaxNo().clearDomain();
-        div.getChosainJohoInput().getTextBoxShozokuKikan().clearDomain();
+        div.getChosainJohoInput().getTextBoxShozokuKikan().clearValue();
         div.getChosainJohoInput().getRadChosainJokyo().setSelectedIndex(0);
         div.getChosainJohoInput().getCcdChiku().applyNoOptionCodeMaster().load(SubGyomuCode.DBE認定支援, CHIKU_CODE_SHUBETSU);
     }
@@ -422,7 +426,7 @@ public class NinteiChosainMasterHandler {
         inputDiv.append(chosainJohoInputDiv.getTxtJusho().getDomain().value());
         inputDiv.append(chosainJohoInputDiv.getTxtTelNo().getDomain().value());
         inputDiv.append(chosainJohoInputDiv.getTxtFaxNo().getDomain().value());
-        inputDiv.append(chosainJohoInputDiv.getTextBoxShozokuKikan().getDomain().value());
+        inputDiv.append(chosainJohoInputDiv.getTextBoxShozokuKikan().getValue());
         inputDiv.append((chosainJohoInputDiv.getRadChosainJokyo().getSelectedKey()));
         return inputDiv.toRString();
     }

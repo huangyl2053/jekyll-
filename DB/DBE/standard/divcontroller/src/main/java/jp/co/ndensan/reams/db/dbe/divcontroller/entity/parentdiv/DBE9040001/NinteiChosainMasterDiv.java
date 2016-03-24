@@ -159,6 +159,16 @@ public class NinteiChosainMasterDiv extends Panel {
     }
 
     @JsonIgnore
+    public DropDownList getDdlItakusakiMeisho() {
+        return this.getChosainSearch().getDdlItakusakiMeisho();
+    }
+
+    @JsonIgnore
+    public void  setDdlItakusakiMeisho(DropDownList ddlItakusakiMeisho) {
+        this.getChosainSearch().setDdlItakusakiMeisho(ddlItakusakiMeisho);
+    }
+
+    @JsonIgnore
     public TextBoxKana getTxtSearchChosaItakusakiKanaMeisho() {
         return this.getChosainSearch().getTxtSearchChosaItakusakiKanaMeisho();
     }
@@ -166,6 +176,16 @@ public class NinteiChosainMasterDiv extends Panel {
     @JsonIgnore
     public void  setTxtSearchChosaItakusakiKanaMeisho(TextBoxKana txtSearchChosaItakusakiKanaMeisho) {
         this.getChosainSearch().setTxtSearchChosaItakusakiKanaMeisho(txtSearchChosaItakusakiKanaMeisho);
+    }
+
+    @JsonIgnore
+    public DropDownList getDdlItakusakiKanaMeisho() {
+        return this.getChosainSearch().getDdlItakusakiKanaMeisho();
+    }
+
+    @JsonIgnore
+    public void  setDdlItakusakiKanaMeisho(DropDownList ddlItakusakiKanaMeisho) {
+        this.getChosainSearch().setDdlItakusakiKanaMeisho(ddlItakusakiKanaMeisho);
     }
 
     @JsonIgnore
@@ -199,6 +219,16 @@ public class NinteiChosainMasterDiv extends Panel {
     }
 
     @JsonIgnore
+    public DropDownList getDdlChosainMeisho() {
+        return this.getChosainSearch().getDdlChosainMeisho();
+    }
+
+    @JsonIgnore
+    public void  setDdlChosainMeisho(DropDownList ddlChosainMeisho) {
+        this.getChosainSearch().setDdlChosainMeisho(ddlChosainMeisho);
+    }
+
+    @JsonIgnore
     public TextBoxKana getTxtSearchChosainKanaShimei() {
         return this.getChosainSearch().getTxtSearchChosainKanaShimei();
     }
@@ -206,6 +236,16 @@ public class NinteiChosainMasterDiv extends Panel {
     @JsonIgnore
     public void  setTxtSearchChosainKanaShimei(TextBoxKana txtSearchChosainKanaShimei) {
         this.getChosainSearch().setTxtSearchChosainKanaShimei(txtSearchChosainKanaShimei);
+    }
+
+    @JsonIgnore
+    public DropDownList getDdlChosainKanaMeisho() {
+        return this.getChosainSearch().getDdlChosainKanaMeisho();
+    }
+
+    @JsonIgnore
+    public void  setDdlChosainKanaMeisho(DropDownList ddlChosainKanaMeisho) {
+        this.getChosainSearch().setDdlChosainKanaMeisho(ddlChosainKanaMeisho);
     }
 
     @JsonIgnore
