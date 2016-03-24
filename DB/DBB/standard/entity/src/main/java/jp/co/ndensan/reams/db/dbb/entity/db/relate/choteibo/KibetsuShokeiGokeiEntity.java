@@ -16,6 +16,20 @@ import jp.co.ndensan.reams.uz.uza.math.Decimal;
 @lombok.Setter
 public class KibetsuShokeiGokeiEntity {
 
+    private static final int 第1期 = 1;
+    private static final int 第2期 = 2;
+    private static final int 第3期 = 3;
+    private static final int 第4期 = 4;
+    private static final int 第5期 = 5;
+    private static final int 第6期 = 6;
+    private static final int 第7期 = 7;
+    private static final int 第8期 = 8;
+    private static final int 第9期 = 9;
+    private static final int 第10期 = 10;
+    private static final int 第11期 = 11;
+    private static final int 第12期 = 12;
+    private static final int 第13期 = 13;
+    private static final int 第14期 = 14;
     /**
      * 調定年度
      */
@@ -88,38 +102,38 @@ public class KibetsuShokeiGokeiEntity {
     /**
      * 第○期の調定額の合計を取得する。
      *
-     * @param 期別
-     * @return Decimal
+     * @param 期別 期別
+     * @return Decimal Decimal
      */
     public Decimal get調定額の合計By期別(int 期別) {
         switch (期別) {
-            case 1:
+            case 第1期:
                 return dai1kiChoteigakuGokei;
-            case 2:
+            case 第2期:
                 return dai2kiChoteigakuGokei;
-            case 3:
+            case 第3期:
                 return dai3kiChoteigakuGokei;
-            case 4:
+            case 第4期:
                 return dai4kiChoteigakuGokei;
-            case 5:
+            case 第5期:
                 return dai5kiChoteigakuGokei;
-            case 6:
+            case 第6期:
                 return dai6kiChoteigakuGokei;
-            case 7:
+            case 第7期:
                 return dai7kiChoteigakuGokei;
-            case 8:
+            case 第8期:
                 return dai8kiChoteigakuGokei;
-            case 9:
+            case 第9期:
                 return dai9kiChoteigakuGokei;
-            case 10:
+            case 第10期:
                 return dai10kiChoteigakuGokei;
-            case 11:
+            case 第11期:
                 return dai11kiChoteigakuGokei;
-            case 12:
+            case 第12期:
                 return dai12kiChoteigakuGokei;
-            case 13:
+            case 第13期:
                 return dai13kiChoteigakuGokei;
-            case 14:
+            case 第14期:
                 return dai14kiChoteigakuGokei;
             default:
                 return null;
