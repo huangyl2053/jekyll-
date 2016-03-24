@@ -74,8 +74,8 @@ public class TokubetuChosyutaisyosyaTorokuManager {
     /**
      * 徴収方法情報取得
      *
-     * @param 賦課年度
-     * @param 被保険者番号
+     * @param 賦課年度 賦課年度
+     * @param 被保険者番号 被保険者番号
      * @return 徴収方法の情報 取得できない場合、NULLを返す
      */
     @Transaction
@@ -106,7 +106,7 @@ public class TokubetuChosyutaisyosyaTorokuManager {
     /**
      * 処理日付管理マスタデータリスト取得
      *
-     * @param 賦課年度
+     * @param 賦課年度 賦課年度
      * @return 処理日付管理マスタデータリスト
      */
     @Transaction
@@ -128,7 +128,7 @@ public class TokubetuChosyutaisyosyaTorokuManager {
     /**
      * 年度内処理済み連番取得
      *
-     * @param 賦課年度
+     * @param 賦課年度 賦課年度
      * @return 年度内処理済み連番
      */
     public RString getShorizumiRenban(FlexibleYear 賦課年度) {
@@ -323,7 +323,7 @@ public class TokubetuChosyutaisyosyaTorokuManager {
     /**
      * 特徴開始月取得
      *
-     * @param 捕捉月
+     * @param 捕捉月 捕捉月
      * @return 特徴開始月
      */
     public TokuchoStartMonth getTokuchoKaishibi(TokuchoHosokuMonth 捕捉月) {
@@ -364,8 +364,8 @@ public class TokubetuChosyutaisyosyaTorokuManager {
     /**
      * 資格喪失フラグ取得
      *
-     * @param 被保険者番号
-     * @return 資格喪失フラグ	true: 資格喪失している　false:　資格喪失してない	*
+     * @param 被保険者番号 被保険者番号
+     * @return 資格喪失フラグ
      */
     public boolean getHihokenshaFlag(HihokenshaNo 被保険者番号) {
         List<HihokenshaDaicho> 被保険者台帳情報データResult = getInsuredRegisterInformation(被保険者番号).records();
@@ -400,9 +400,9 @@ public class TokubetuChosyutaisyosyaTorokuManager {
     /**
      * 依頼金額計算基準日取得
      *
-     * @param 年度
-     * @param 処理名
-     * @param 年度内連番
+     * @param 年度 年度
+     * @param 処理名 処理名
+     * @param 年度内連番 年度内連番
      * @return 基準年月日 データがない場合、NULLを返却
      */
     public FlexibleDate getIraikinKijunbi(FlexibleYear 年度, ShoriName 処理名, RString 年度内連番) {
