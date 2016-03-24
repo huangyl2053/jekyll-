@@ -338,7 +338,7 @@ public class KyokaisoGaitoshaPanel {
                     最新履歴番号,
                     最新リンク番号,
                     new FlexibleYearMonth(div.getTxtHohenryoNofuFromDate().getValue().seireki().getYearMonth().replace(new RString("."), RString.EMPTY)));
-            hokenryoDankai = getHandler(div).editHokenryoDankai(hokenryoDankai, 最新履歴番号, 最新リンク番号);
+            hokenryoDankai = getHandler(div).editHokenryoDankai(hokenryoDankai);
             models.add(hokenryoDankai);
         } else if (状態_修正.equals(状態)) {
             if (状態_修正.equals(イベント状態)) {
@@ -356,9 +356,7 @@ public class KyokaisoGaitoshaPanel {
                     最新リンク番号,
                     new FlexibleYearMonth(修正前の適用開始年月.getYearMonth().toDateString()));
             KyokaisoHokenryoDankai hokenryoDan = getHandler(div).editHokenryoDankai(
-                    models.get(key).modifiedModel(),
-                    最新履歴番号,
-                    Integer.parseInt(row.getLinkNo().toString()));
+                    models.get(key).modifiedModel());
             models.add(hokenryoDan);
         } else if (状態_削除.equals(状態)) {
             if (状態_修正.equals(イベント状態)) {

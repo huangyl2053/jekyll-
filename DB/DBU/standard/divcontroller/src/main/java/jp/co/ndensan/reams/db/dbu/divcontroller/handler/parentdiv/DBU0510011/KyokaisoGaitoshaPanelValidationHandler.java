@@ -190,7 +190,7 @@ public class KyokaisoGaitoshaPanelValidationHandler {
         @Override
         public int compare(dgKyokaisouGaitouItran_Row o1, dgKyokaisouGaitouItran_Row o2) {
             int 境界層該当一覧情報 = o1.getKaishiDate().compareTo(o2.getKaishiDate());
-            if (境界層該当一覧情報 == 0) {
+            if (境界層該当一覧情報 == 0 && (o2.getShuryoDate() != null || !o2.getShuryoDate().isEmpty())) {
                 return o1.getShuryoDate().compareTo(o2.getShuryoDate());
             }
             return 境界層該当一覧情報;
@@ -205,7 +205,7 @@ public class KyokaisoGaitoshaPanelValidationHandler {
         public int compare(dghokenryoNofu_Row o1, dghokenryoNofu_Row o2) {
 
             int 境保険料段階情報 = new RDate(o1.getTekiyoKaishiDate().toString()).compareTo(new RDate(o2.getTekiyoKaishiDate().toString()));
-            if (境保険料段階情報 == 0) {
+            if (境保険料段階情報 == 0 && (o2.getTekiyoShuryoDate() != null || !o2.getTekiyoShuryoDate().isEmpty())) {
                 return new RDate(o1.getTekiyoShuryoDate().toString()).compareTo(new RDate(o2.getTekiyoShuryoDate().toString()));
             }
             return 境保険料段階情報;
@@ -243,7 +243,7 @@ public class KyokaisoGaitoshaPanelValidationHandler {
                 validPairs.add(new ValidationMessageControlPair(RRVMessages.期間が重複チェック));
             }
             if (!new RDate(境界層該当一覧情報.get(i).getShuryoDate().toString())
-                    .isBefore(new RDate(境界層該当一覧情報.get(i + 1).getKaishiDate().toString()))) {
+                    .isBeforeOrEquals(new RDate(境界層該当一覧情報.get(i + 1).getKaishiDate().toString()))) {
                 validPairs.add(new ValidationMessageControlPair(RRVMessages.期間が重複チェック));
             }
         }
@@ -266,7 +266,7 @@ public class KyokaisoGaitoshaPanelValidationHandler {
                 validPairs.add(new ValidationMessageControlPair(RRVMessages.期間が重複チェック));
             }
             if (!new RYearMonth(new RDate(境界層保険料段階情報.get(i).getTekiyoShuryoDate().toString()).getYearMonth().toDateString())
-                    .isBefore(new RYearMonth(new RDate(境界層保険料段階情報.get(i + 1).getTekiyoKaishiDate().toString()).getYearMonth().toDateString()))) {
+                    .isBeforeOrEquals(new RYearMonth(new RDate(境界層保険料段階情報.get(i + 1).getTekiyoKaishiDate().toString()).getYearMonth().toDateString()))) {
                 validPairs.add(new ValidationMessageControlPair(RRVMessages.期間が重複チェック));
             }
         }

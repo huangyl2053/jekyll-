@@ -246,10 +246,14 @@ public class KyokaisoGaitoshaPanelHandler {
                 && !div.getHokenryoNofuGengaku().getTekiyoState().isEmpty()) {
             row = div.getDghokenryoNofu().getActiveRow();
         }
-        row.setTekiyoKaishiDate(年月フォーマット(new FlexibleYearMonth(
-                div.getTxtHohenryoNofuFromDate().getValue().getYearMonth().toString().replace(new RString("."), RString.EMPTY))));
-        row.setTekiyoShuryoDate(年月フォーマット(new FlexibleYearMonth(
-                div.getTxtHohenryoNofuToDate().getValue().getYearMonth().toString().replace(new RString("."), RString.EMPTY))));
+        if (div.getTxtHohenryoNofuFromDate().getValue() != null) {
+            row.setTekiyoKaishiDate(年月フォーマット(new FlexibleYearMonth(
+                    div.getTxtHohenryoNofuFromDate().getValue().getYearMonth().toString().replace(new RString("."), RString.EMPTY))));
+        }
+        if (div.getTxtHohenryoNofuToDate().getValue() != null) {
+            row.setTekiyoShuryoDate(年月フォーマット(new FlexibleYearMonth(
+                    div.getTxtHohenryoNofuToDate().getValue().getYearMonth().toString().replace(new RString("."), RString.EMPTY))));
+        }
         row.setHokenryoDankai(div.getDdlTekiyouSuruShutokuDankai().getSelectedValue());
         row.setTekiyoLinkNo(new RString(Integer.toString(最新リンク番号)));
         row.setTekiyoRirekiNo(new RString(Integer.toString(最新履歴番号)));
@@ -280,17 +284,17 @@ public class KyokaisoGaitoshaPanelHandler {
      * 保険料納付情報を設定します。
      *
      * @param hokenryoDankai 保険料納付情報
-     * @param 履歴番号 履歴番号
-     * @param 最新リンク番号 最新リンク番号
      * @return KyokaisoHokenryoDankai 保険料納付情報
      */
     public KyokaisoHokenryoDankai editHokenryoDankai(
-            KyokaisoHokenryoDankai hokenryoDankai,
-            int 履歴番号,
-            int 最新リンク番号) {
+            KyokaisoHokenryoDankai hokenryoDankai) {
+        if (div.getTxtHohenryoNofuToDate().getValue() != null) {
+            hokenryoDankai.createBuilderForEdit()
+                    .set適用終了年月(new FlexibleYearMonth(div.getTxtHohenryoNofuToDate().getValue().seireki().getYearMonth().replace(new RString("."), RString.EMPTY)));
+        }
         return hokenryoDankai.createBuilderForEdit()
-                .set適用終了年月(new FlexibleYearMonth(div.getTxtHohenryoNofuToDate().getValue().seireki().getYearMonth().replace(new RString("."), RString.EMPTY)))
-                .set保険料納付減額後保険料段階(div.getDdlTekiyouSuruShutokuDankai().getSelectedKey())
+                .set保険料納付減額後保険料段階(div.getDdlTekiyouSuruShutokuDankai().getSelectedKey() == null
+                        ? RString.EMPTY : div.getDdlTekiyouSuruShutokuDankai().getSelectedKey())
                 .build();
     }
 
@@ -342,15 +346,12 @@ public class KyokaisoGaitoshaPanelHandler {
      * @return 境界層措置申請情報
      */
     public KyokaisoSochiShinsei editKyokaisoSochiShinsei(KyokaisoSochiShinsei kyokaisoSochiShinsei) {
-        if (状態_追加.equals(div.getKyokaisouGaitouItiran().getIranState())) {
-            kyokaisoSochiShinsei.createBuilderForEdit()
-                    .set申請_廃止区分(new RString("1"));
-        }
         return kyokaisoSochiShinsei.createBuilderForEdit()
                 .set申請年月日(new FlexibleDate(div.getTxtShiseibi().getValue().toDateString()))
                 .set受付年月日(new FlexibleDate(div.getTxtShiseibi().getValue().toDateString()))
                 .set申請_廃止年月日(new FlexibleDate(div.getTxtShiseiHaishibi().getValue().toDateString()))
                 .set保護不要根拠減額金額(div.getTxtHogoFuyoKonshoGengakuKingaku().getValue())
+                .set申請_廃止区分(new RString("1"))
                 .set境界層証明書交付年月日(new FlexibleDate(div.getTxtShomeishoKoufuDate().getValue().toDateString()))
                 .set給付額減額取消_減額自己負担月額(div.getTxtKyufugakuJikoFutanGetsugaku().getValue())
                 .set居住費軽減_減額自己負担月額(div.getTxtKyojuhiJikoFutanGetsugaku().getValue())
@@ -421,7 +422,7 @@ public class KyokaisoGaitoshaPanelHandler {
             row.setYomikaegoKogakuKaigoSetaiJogengaku(new RString(nullToZero(境界層該当一覧.get高額ｻｰﾋﾞｽ費減額後上限額()).toString()));
             row.setKaigoHokenryoTeigengoSyotokuDankai(
                     select所得段階(new RDate(境界層該当一覧.get申請年月日().toString()),
-                            境界層該当一覧.get保険料納付減額後保険料段階()));
+                            境界層該当一覧.get保険料納付減額後保険料段階() == null ? RString.EMPTY : 境界層該当一覧.get保険料納付減額後保険料段階()));
             row.setKyokaisoSochiKetteiDate(日付フォーマット(境界層該当一覧.get境界層措置決定年月日()));
             row.setKyuhugakuGengakuTorikeshiGengakuJikoFutanGetsugaku(new RString(
                     nullToZero(境界層該当一覧.get給付額減額取消_減額自己負担月額()).toString()));
