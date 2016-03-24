@@ -11,7 +11,6 @@ import static jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5593GogitaiWariateIi
 import static jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5593GogitaiWariateIinJoho.gogitaiYukoKikanKaishiYMD;
 import static jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5593GogitaiWariateIinJoho.shinsakaiIinCode;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5593GogitaiWariateIinJohoEntity;
-import jp.co.ndensan.reams.db.dbz.persistence.db.basic.ISaveable;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.core.mybatis.SqlSession;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
