@@ -24,7 +24,7 @@ import jp.co.ndensan.reams.db.dbb.business.report.choteibo.ChoteiboKitsukiTokuch
 import jp.co.ndensan.reams.db.dbb.business.report.choteibo.ChoteiboReport;
 import jp.co.ndensan.reams.db.dbb.definition.mybatisprm.choteibo.ChoteiboShoriHizukeMyBatisParameter;
 import jp.co.ndensan.reams.db.dbb.definition.processprm.choteibo.ChoteiboProcessParameter;
-import jp.co.ndensan.reams.db.dbb.definition.reportId.ReportIdDBB;
+import jp.co.ndensan.reams.db.dbb.definition.reportid.ReportIdDBB;
 import jp.co.ndensan.reams.db.dbb.entity.db.relate.choteibo.DankaiGokeiEntity;
 import jp.co.ndensan.reams.db.dbb.entity.db.relate.choteibo.DankaiShokeiEntity;
 import jp.co.ndensan.reams.db.dbb.entity.db.relate.choteibo.GokeiBubunEntity;
