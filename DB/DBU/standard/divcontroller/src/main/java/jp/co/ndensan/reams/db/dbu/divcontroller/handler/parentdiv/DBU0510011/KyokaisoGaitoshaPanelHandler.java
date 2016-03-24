@@ -257,10 +257,14 @@ public class KyokaisoGaitoshaPanelHandler {
         if (div.getTxtHohenryoNofuFromDate().getValue() != null) {
             row.setTekiyoKaishiDate(年月フォーマット(new FlexibleYearMonth(
                     div.getTxtHohenryoNofuFromDate().getValue().getYearMonth().toString().replace(new RString("."), RString.EMPTY))));
+        } else {
+            row.setTekiyoKaishiDate(RString.EMPTY);
         }
         if (div.getTxtHohenryoNofuToDate().getValue() != null) {
             row.setTekiyoShuryoDate(年月フォーマット(new FlexibleYearMonth(
                     div.getTxtHohenryoNofuToDate().getValue().getYearMonth().toString().replace(new RString("."), RString.EMPTY))));
+        } else {
+            row.setTekiyoShuryoDate(RString.EMPTY);
         }
         row.setHokenryoDankai(div.getDdlTekiyouSuruShutokuDankai().getSelectedValue());
         row.setTekiyoLinkNo(new RString(Integer.toString(最新リンク番号)));
