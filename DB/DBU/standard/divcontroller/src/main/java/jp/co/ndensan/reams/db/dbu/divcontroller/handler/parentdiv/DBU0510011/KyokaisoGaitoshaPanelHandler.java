@@ -236,8 +236,10 @@ public class KyokaisoGaitoshaPanelHandler {
      * 確認ボタンが押下された場合、保険料納付減額Grid一覧を表示します。
      *
      * @param イベント状態 イベント状態
+     * @param 最新リンク番号 最新リンク番号
+     * @param 最新履歴番号 最新履歴番号
      */
-    public void onClick_btnKakutei(RString イベント状態) {
+    public void onClick_btnKakutei(RString イベント状態, int 最新リンク番号, int 最新履歴番号) {
 
         dghokenryoNofu_Row row = new dghokenryoNofu_Row();
         if (!状態_追加.equals(div.getHokenryoNofuGengaku().getTekiyoState())
@@ -249,6 +251,8 @@ public class KyokaisoGaitoshaPanelHandler {
         row.setTekiyoShuryoDate(年月フォーマット(new FlexibleYearMonth(
                 div.getTxtHohenryoNofuToDate().getValue().getYearMonth().toString().replace(new RString("."), RString.EMPTY))));
         row.setHokenryoDankai(div.getDdlTekiyouSuruShutokuDankai().getSelectedValue());
+        row.setTekiyoLinkNo(new RString(Integer.toString(最新リンク番号)));
+        row.setTekiyoRirekiNo(new RString(Integer.toString(最新履歴番号)));
         int index = div.getDghokenryoNofu().getClickedRowId();
         if (状態_追加.equals(div.getHokenryoNofuGengaku().getTekiyoState())
                 || div.getHokenryoNofuGengaku().getTekiyoState().isEmpty()) {
@@ -484,7 +488,7 @@ public class KyokaisoGaitoshaPanelHandler {
         select居住費軽減負担限度額段階(row.getKyojuhiKeigenFutanGendogakuDankaiCode());
         div.getTxtKyojuhiJikoFutanGetsugaku().setValue(new Decimal(row.getKyojuhiKeigenGengakuJikofutanGetsugaku().toString()));
         div.getTxtShokuhiJikoFutanGetsugaku().setValue(new Decimal(row.getShokuhiKeigenGengakuJikofutanGetsugaku().toString()));
-        select居住費軽減負担限度額段階(row.getShokuhiKeigenFutanGendogakuDankaiCode());
+        select食費軽減負担限度額段階(row.getShokuhiKeigenFutanGendogakuDankaiCode());
         div.getTxtKaigoHokenryoJikoFutanGetsugaku().setValue(new Decimal(row.getKaigoHokenryoGengakuGengakuJikofutanGetsugaku().toString()));
         div.getTxtRiyoshaFutanSeidaiGokeigaku().setValue(new Decimal(row.getRiyoshaFutanSetaiGassangakuGengakuJikofutanGetsugaku().toString()));
         div.getTxtJikoFutanGetsugakuGokeigaku().setValue(new Decimal(row.getGengakuJikofutanGetsugakuGokeigaku().toString()));
@@ -603,6 +607,16 @@ public class KyokaisoGaitoshaPanelHandler {
         }
     }
 
+    private void select食費軽減負担限度額段階(RString 食費軽減負担限度額段階コード) {
+        List<KeyValueDataSource> 居住費軽減負担限度額段階List = 居住費軽減負担限度額段階ドロップダウンリスト();
+        for (KeyValueDataSource keyValue : 居住費軽減負担限度額段階List) {
+            if (食費軽減負担限度額段階コード.equals(keyValue.getKey())) {
+                div.getDdlShokuhiGakenFutanGendogakuDankai().setSelectedKey(食費軽減負担限度額段階コード);
+                div.getDdlShokuhiGakenFutanGendogakuDankai().setSelectedValue(keyValue.getValue());
+            }
+        }
+    }
+
     private List<KeyValueDataSource> 居住費軽減後居室種類ドロップダウンリスト() {
         List<KeyValueDataSource> dataSource = new ArrayList<>();
         List<UzT0007CodeEntity> dataSourceList = CodeMaster.getCode(SubGyomuCode.DBZ介護共通, new CodeShubetsu("0243"));
@@ -660,9 +674,13 @@ public class KyokaisoGaitoshaPanelHandler {
             KeyValueDataSource 第3段階 = new KeyValueDataSource();
             第3段階.setValue(ConfigNameDBC.第3段階_高額介護サービス費支給_201504以降_自己負担上限月額.get名称());
             第3段階.setKey(BusinessConfig.get(ConfigNameDBC.第3段階_高額介護サービス費支給_201504以降_自己負担上限月額, SubGyomuCode.DBC介護給付));
+            KeyValueDataSource 第4段階 = new KeyValueDataSource();
+            第4段階.setValue(ConfigNameDBC.第4段階_高額介護サービス費支給_201504以降_自己負担上限月額.get名称());
+            第4段階.setKey(BusinessConfig.get(ConfigNameDBC.第4段階_高額介護サービス費支給_201504以降_自己負担上限月額, SubGyomuCode.DBC介護給付));
             dataSourceList.add(第1段階);
             dataSourceList.add(第2段階);
             dataSourceList.add(第3段階);
+            dataSourceList.add(第4段階);
         }
         return dataSourceList;
     }
