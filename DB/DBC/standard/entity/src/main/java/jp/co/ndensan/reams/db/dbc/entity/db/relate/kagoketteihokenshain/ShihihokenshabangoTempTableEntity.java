@@ -5,10 +5,9 @@
  */
 package jp.co.ndensan.reams.db.dbc.entity.db.relate.kagoketteihokenshain;
 
+import java.io.Serializable;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.util.db.IDbAccessable;
-import jp.co.ndensan.reams.uz.uza.util.db.TableName;
 
 /**
  * 新被保険者番号一時テーブルEntity
@@ -16,10 +15,7 @@ import jp.co.ndensan.reams.uz.uza.util.db.TableName;
 @lombok.Setter
 @lombok.Getter
 @SuppressWarnings("PMD.UnusedPrivateField")
-public class ShihihokenshabangoTempTableEntity implements IDbAccessable {
-
-    @TableName
-    public static final RString TABLE_NAME = new RString("TEMP_TABLE_Shihihokenshabango");
+public class ShihihokenshabangoTempTableEntity implements Serializable {
 
     private LasdecCode shichosonCode;
     private RString shinNo;
