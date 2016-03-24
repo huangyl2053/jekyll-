@@ -64,7 +64,6 @@ public class PnlTotalPanel {
      * @return ResponseData<PnlTotalPanelDiv>
      */
     public ResponseData<PnlTotalPanelDiv> onLoad(PnlTotalPanelDiv div) {
-        ViewStateHolder.put(ViewStateKeys.処理モード, 登録);
         RString 状態 = ViewStateHolder.get(ViewStateKeys.処理モード, RString.class);
         getHandler(div).createDropDownList();
         if (登録.equals(状態)) {
@@ -121,7 +120,7 @@ public class PnlTotalPanel {
      * @return ResponseData<PnlTotalPanelDiv>
      */
     public ResponseData<PnlTotalPanelDiv> onBlur_txtKeyakujigyosyaNo(PnlTotalPanelDiv div) {
-        // TODO QA No.473
+        // TODO QA No.473(Redmine#:79880)
         RString 契約事業者番号 = ViewStateHolder.get(ViewStateKeys.契約事業者番号, RString.class);
         RString 契約事業者名 = ViewStateHolder.get(ViewStateKeys.契約事業者名, RString.class);
         if (契約事業者番号 != null) {
@@ -145,7 +144,7 @@ public class PnlTotalPanel {
         if (参照.equals(状態)) {
             return ResponseData.of(div).respond();
         } else {
-            // TODO QA No.473
+            // TODO QA No.473(Redmine#:79880)
             return ResponseData.of(div).forwardWithEventName(DBC0300011TransitionEventName.事業者選択).respond();
         }
     }
@@ -178,6 +177,8 @@ public class PnlTotalPanel {
     public ResponseData<PnlTotalPanelDiv> onBlur_txtKeyakukettebi(PnlTotalPanelDiv div) {
         if (div.getPnlCommon().getPnlDetail().getTxtKeyakukettebi().getValue() != null) {
             div.getPnlCommon().getPnlDetail().getRdoKettekubun().setSelectedKey(ShoninKubun.承認する.getコード());
+            div.getPnlCommon().getPnlDetail().getTxtFusyoninriyu().setDisabled(true);
+            div.getPnlCommon().getPnlDetail().getTxtFusyoninriyu().clearValue();
             div.getPnlCommon().getPnlDetail().getRdoKettekubun().setDisabled(false);
             div.getPnlCommon().getPnlDetail().getTxtFusyoninriyu().setDisabled(false);
             div.getPnlCommon().getPnlDetail().getPnlHidari().getDdlYear().setDisabled(false);
@@ -224,6 +225,7 @@ public class PnlTotalPanel {
         if (ShoninKubun.承認する.getコード().equals(div.getPnlCommon().getPnlDetail()
                 .getRdoKettekubun().getSelectedKey())) {
             div.getPnlCommon().getPnlDetail().getTxtFusyoninriyu().setDisabled(true);
+            div.getPnlCommon().getPnlDetail().getTxtFusyoninriyu().clearValue();
             div.getPnlCommon().getPnlDetail().getPnlHidari().getDdlYear().setDisabled(false);
             div.getPnlCommon().getPnlDetail().getPnlHidari().getTxtBango2().setDisabled(false);
             div.getPnlCommon().getPnlDetail().getPnlHidari().getTxtSyoninkikan().setDisabled(false);
@@ -235,13 +237,23 @@ public class PnlTotalPanel {
         } else if (ShoninKubun.承認しない.getコード().equals(div.getPnlCommon().getPnlDetail()
                 .getRdoKettekubun().getSelectedKey())) {
             div.getPnlCommon().getPnlDetail().getTxtFusyoninriyu().setDisabled(false);
+            div.getPnlCommon().getPnlDetail().getPnlHidari().getDdlYear().setSelectedKey(RString.EMPTY);
             div.getPnlCommon().getPnlDetail().getPnlHidari().getDdlYear().setDisabled(true);
+            div.getPnlCommon().getPnlDetail().getPnlHidari().getTxtBango2().clearValue();
             div.getPnlCommon().getPnlDetail().getPnlHidari().getTxtBango2().setDisabled(true);
+            div.getPnlCommon().getPnlDetail().getPnlHidari().getTxtSyoninkikan().clearFromValue();
+            div.getPnlCommon().getPnlDetail().getPnlHidari().getTxtSyoninkikan().clearToValue();
             div.getPnlCommon().getPnlDetail().getPnlHidari().getTxtSyoninkikan().setDisabled(true);
+            div.getPnlCommon().getPnlDetail().getPnlHidari().getChkSaihakoukubun()
+                    .setSelectedItemsByKey(new ArrayList<RString>());
             div.getPnlCommon().getPnlDetail().getPnlHidari().getChkSaihakoukubun().setDisabled(true);
+            div.getPnlCommon().getPnlDetail().getPnlKyufuhi().getTxtHiyogakugokei().clearValue();
             div.getPnlCommon().getPnlDetail().getPnlKyufuhi().getTxtHiyogakugokei().setDisabled(true);
+            div.getPnlCommon().getPnlDetail().getPnlKyufuhi().getTxtRiyosyajikofutangaku().clearValue();
             div.getPnlCommon().getPnlDetail().getPnlKyufuhi().getTxtRiyosyajikofutangaku().setDisabled(true);
+            div.getPnlCommon().getPnlDetail().getPnlKyufuhi().getTxtHokentaisyohiyogaku().clearValue();
             div.getPnlCommon().getPnlDetail().getPnlKyufuhi().getTxtHokentaisyohiyogaku().setDisabled(true);
+            div.getPnlCommon().getPnlDetail().getPnlKyufuhi().getTxtHokenkyufuhiyogaku().clearValue();
             div.getPnlCommon().getPnlDetail().getPnlKyufuhi().getTxtHokenkyufuhiyogaku().setDisabled(true);
         }
         return ResponseData.of(div).respond();

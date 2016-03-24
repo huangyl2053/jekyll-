@@ -239,7 +239,7 @@ public class PnlTotalPanelHandler {
         if (登録.equals(状態)) {
 //            KaigoShikakuKihonDiv kaigoDiv = (KaigoShikakuKihonDiv) div.getPnlCommon().getCcdKaigoShikakuKihon();
             shokan = new ShokanJuryoininKeiyakusha(
-                    // TODO QA No.431
+                    // TODO QA No.431(Redmine#:79680)
                     // new HihokenshaNo(kaigoDiv.getTxtHihokenshaNo().getValue()),
                     new HihokenshaNo("000000003"),
                     new FlexibleDate(div.getPnlCommon().getPnlDetail().getTxtKeyakushinseibi().getValue().toDateString()),
@@ -295,7 +295,9 @@ public class PnlTotalPanelHandler {
             rsb.append(div.getPnlCommon().getPnlDetail().getPnlHidari().getTxtBango2().getValue());
             builder.set契約番号(rsb.toRString());
         }
-        builder.set不承認理由(div.getPnlCommon().getPnlDetail().getTxtFusyoninriyu().getValue());
+        if (!div.getPnlCommon().getPnlDetail().getTxtFusyoninriyu().getValue().isNullOrEmpty()) {
+            builder.set不承認理由(div.getPnlCommon().getPnlDetail().getTxtFusyoninriyu().getValue());
+        }
         builder.set費用額合計(div.getPnlCommon().getPnlDetail().getPnlKyufuhi()
                 .getTxtHiyogakugokei().getValue() == null ? Decimal.ZERO : div.getPnlCommon().getPnlDetail()
                 .getPnlKyufuhi().getTxtHiyogakugokei().getValue());
@@ -313,7 +315,9 @@ public class PnlTotalPanelHandler {
         } else {
             builder.set承認結果通知書再発行区分(new RString("0"));
         }
-        builder.set備考(div.getPnlCommon().getPnlDetail().getPnlFoot().getTxtBikou().getValue());
+        if (!div.getPnlCommon().getPnlDetail().getPnlFoot().getTxtBikou().getValue().isNullOrEmpty()) {
+            builder.set備考(div.getPnlCommon().getPnlDetail().getPnlFoot().getTxtBikou().getValue());
+        }
         return builder.build();
     }
 }
