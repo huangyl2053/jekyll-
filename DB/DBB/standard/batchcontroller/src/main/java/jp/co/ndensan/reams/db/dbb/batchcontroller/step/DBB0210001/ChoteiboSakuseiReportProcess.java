@@ -284,18 +284,18 @@ public class ChoteiboSakuseiReportProcess extends BatchProcessBase<DbT7022ShoriD
                 RString.EMPTY, RString.EMPTY, RString.EMPTY, RString.EMPTY, RString.EMPTY,
                 RString.EMPTY, RString.EMPTY, RString.EMPTY, RString.EMPTY, RString.EMPTY,
                 RString.EMPTY, RString.EMPTY, RString.EMPTY, RString.EMPTY,
-                changeDecimalToRString(合計データ.get_4月の調定額の小計()),
-                changeDecimalToRString(合計データ.get_5月の調定額の小計()),
-                changeDecimalToRString(合計データ.get_6月の調定額の小計()),
-                changeDecimalToRString(合計データ.get_7月の調定額の小計()),
-                changeDecimalToRString(合計データ.get_8月の調定額の小計()),
-                changeDecimalToRString(合計データ.get_9月の調定額の小計()),
-                changeDecimalToRString(合計データ.get_10月の調定額の小計()),
-                changeDecimalToRString(合計データ.get_11月の調定額の小計()),
-                changeDecimalToRString(合計データ.get_12月の調定額の小計()),
-                changeDecimalToRString(合計データ.get_1月の調定額の小計()),
-                changeDecimalToRString(合計データ.get_2月の調定額の小計()),
-                changeDecimalToRString(合計データ.get_3月の調定額の小計()),
+                changeDecimalToRString(合計データ.get当_4月の調定額の小計()),
+                changeDecimalToRString(合計データ.get当_5月の調定額の小計()),
+                changeDecimalToRString(合計データ.get当_6月の調定額の小計()),
+                changeDecimalToRString(合計データ.get当_7月の調定額の小計()),
+                changeDecimalToRString(合計データ.get当_8月の調定額の小計()),
+                changeDecimalToRString(合計データ.get当_9月の調定額の小計()),
+                changeDecimalToRString(合計データ.get当_10月の調定額の小計()),
+                changeDecimalToRString(合計データ.get当_11月の調定額の小計()),
+                changeDecimalToRString(合計データ.get当_12月の調定額の小計()),
+                changeDecimalToRString(合計データ.get当_1月の調定額の小計()),
+                changeDecimalToRString(合計データ.get当_2月の調定額の小計()),
+                changeDecimalToRString(合計データ.get当_3月の調定額の小計()),
                 changeDecimalToRString(合計データ.get翌_4月の調定額の小計()),
                 changeDecimalToRString(合計データ.get翌_5月の調定額の小計()),
                 Tsuki._4月.get名称().replace(UNDERLINE, RString.EMPTY),
@@ -346,12 +346,12 @@ public class ChoteiboSakuseiReportProcess extends BatchProcessBase<DbT7022ShoriD
                 文字列_第.concat(String.valueOf(第4期)).concat(文字列_期),
                 文字列_第.concat(String.valueOf(第5期)).concat(文字列_期),
                 文字列_第.concat(String.valueOf(第6期)).concat(文字列_期),
-                changeDecimalToRString(合計データ.get_4月の調定額の小計()),
-                changeDecimalToRString(合計データ.get_6月の調定額の小計()),
-                changeDecimalToRString(合計データ.get_8月の調定額の小計()),
-                changeDecimalToRString(合計データ.get_10月の調定額の小計()),
-                changeDecimalToRString(合計データ.get_12月の調定額の小計()),
-                changeDecimalToRString(合計データ.get_2月の調定額の小計()),
+                changeDecimalToRString(合計データ.get当_4月の調定額の小計()),
+                changeDecimalToRString(合計データ.get当_6月の調定額の小計()),
+                changeDecimalToRString(合計データ.get当_8月の調定額の小計()),
+                changeDecimalToRString(合計データ.get当_10月の調定額の小計()),
+                changeDecimalToRString(合計データ.get当_12月の調定額の小計()),
+                changeDecimalToRString(合計データ.get当_2月の調定額の小計()),
                 Tsuki._4月.get名称().replace(UNDERLINE, RString.EMPTY),
                 Tsuki._6月.get名称().replace(UNDERLINE, RString.EMPTY),
                 Tsuki._8月.get名称().replace(UNDERLINE, RString.EMPTY),
@@ -1005,18 +1005,18 @@ public class ChoteiboSakuseiReportProcess extends BatchProcessBase<DbT7022ShoriD
                 }
                 if (合計データ.get徴収方法().equals(合計部分情報.getChoshuHouhou())
                         && 合計データ.get当月フラグ() == 合計部分情報.getDogetsuFlag()) {
-                    合計データ.set_10月の調定額の小計(合計部分情報.getChoteigaku10GatsuCount());
-                    合計データ.set_11月の調定額の小計(合計部分情報.getChoteigaku11GatsuCount());
-                    合計データ.set_12月の調定額の小計(合計部分情報.getChoteigaku12GatsuCount());
-                    合計データ.set_1月の調定額の小計(合計部分情報.getChoteigaku1GatsuCount());
-                    合計データ.set_2月の調定額の小計(合計部分情報.getChoteigaku2GatsuCount());
-                    合計データ.set_3月の調定額の小計(合計部分情報.getChoteigaku3GatsuCount());
-                    合計データ.set_4月の調定額の小計(合計部分情報.getChoteigaku4GatsuCount());
-                    合計データ.set_5月の調定額の小計(合計部分情報.getChoteigaku5GatsuCount());
-                    合計データ.set_6月の調定額の小計(合計部分情報.getChoteigaku6GatsuCount());
-                    合計データ.set_7月の調定額の小計(合計部分情報.getChoteigaku7GatsuCount());
-                    合計データ.set_8月の調定額の小計(合計部分情報.getChoteigaku8GatsuCount());
-                    合計データ.set_9月の調定額の小計(合計部分情報.getChoteigaku9GatsuCount());
+                    合計データ.set当_10月の調定額の小計(合計部分情報.getChoteigaku10GatsuCount());
+                    合計データ.set当_11月の調定額の小計(合計部分情報.getChoteigaku11GatsuCount());
+                    合計データ.set当_12月の調定額の小計(合計部分情報.getChoteigaku12GatsuCount());
+                    合計データ.set当_1月の調定額の小計(合計部分情報.getChoteigaku1GatsuCount());
+                    合計データ.set当_2月の調定額の小計(合計部分情報.getChoteigaku2GatsuCount());
+                    合計データ.set当_3月の調定額の小計(合計部分情報.getChoteigaku3GatsuCount());
+                    合計データ.set当_4月の調定額の小計(合計部分情報.getChoteigaku4GatsuCount());
+                    合計データ.set当_5月の調定額の小計(合計部分情報.getChoteigaku5GatsuCount());
+                    合計データ.set当_6月の調定額の小計(合計部分情報.getChoteigaku6GatsuCount());
+                    合計データ.set当_7月の調定額の小計(合計部分情報.getChoteigaku7GatsuCount());
+                    合計データ.set当_8月の調定額の小計(合計部分情報.getChoteigaku8GatsuCount());
+                    合計データ.set当_9月の調定額の小計(合計部分情報.getChoteigaku9GatsuCount());
                     合計データ.set翌_4月の調定額の小計(合計部分情報.getChoteigaku4GatsuCountYoku());
                     合計データ.set翌_5月の調定額の小計(合計部分情報.getChoteigaku5GatsuCountYoku());
                     DankaiShokeiEntity 合計の段階 = new DankaiShokeiEntity();
