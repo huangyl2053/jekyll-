@@ -58,6 +58,7 @@ public class KeisangoJohoSakuseiProcess extends BatchProcessBase<KeisangoJohoSak
             + "バッチパラメータに調定年度または賦課年度を設定してください。");
     private static final RString 更正前後区分_更正前 = new RString("1");
     private static final RString 更正前後区分_更正後 = new RString("2");
+    private static final RString TABLE_NAME = new RString("DbT2015KeisangoJohoTemp");
     private static final int 期3 = 3;
     private static final int 期4 = 4;
     private static final int 期5 = 5;
@@ -121,7 +122,7 @@ public class KeisangoJohoSakuseiProcess extends BatchProcessBase<KeisangoJohoSak
     @Override
     protected void createWriter() {
         dbT2015Writer = new BatchPermanentTableWriter(DbT2015KeisangoJohoEntity.class);
-        dbT2015KeisangoJohoTemp = new BatchEntityCreatedTempTableWriter(DbTKeisangoJohoTempTableEntity.TABLE_NAME,
+        dbT2015KeisangoJohoTemp = new BatchEntityCreatedTempTableWriter(TABLE_NAME,
                 DbTKeisangoJohoTempTableEntity.class);
     }
 
@@ -161,10 +162,10 @@ public class KeisangoJohoSakuseiProcess extends BatchProcessBase<KeisangoJohoSak
             }
         }
         計算後情報リスト.addAll(計算後情報履歴);
-        if (saishinFlag2 || saishinFlag4 || saishinFlag5) {
-            //TODO 内部QA：749　一時テーブル削除の確認
-            //iKeisangoJohoSakuseiMapper.dropDbT2015KeisangoJohoTemp();
-        }
+//        if (saishinFlag2 || saishinFlag4 || saishinFlag5) {
+//            //TODO 内部QA：749　一時テーブル削除の確認
+//            //iKeisangoJohoSakuseiMapper.dropDbT2015KeisangoJohoTemp();
+//        }
         for (DbT2015KeisangoJohoEntity dbT2015KeisangoJohoEntity : 計算後情報リスト) {
             if (saishinFlag2 || saishinFlag4 || saishinFlag5) {
                 iKeisangoJohoSakuseiMapper.insertDbT2015KeisangoJohoTemp(dbT2015KeisangoJohoEntity);
