@@ -36,6 +36,7 @@ import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.message.MessageDialogSelectedResult;
+import jp.co.ndensan.reams.uz.uza.ui.servlets.CommonButtonHolder;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ResponseHolder;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 import jp.co.ndensan.reams.uz.uza.util.db.SearchResult;
@@ -91,7 +92,7 @@ public class ShujiiIkenshoToroku {
         if (resultList.records().isEmpty()) {
             div.setHdnHasChanged(RString.EMPTY);
             ViewStateHolder.put(ViewStateKeys.状態, JYOTAI_CODE_ADD);
-            getHandler(div).setChosaTishoJohoDisable(true);
+            getHandler(div).setChosaTishoJohoDisable(false);
             getHandler(div).setGaibuSoftDisable(true);
             getHandler(div).setSonotaDisable(true);
         } else {
@@ -99,6 +100,8 @@ public class ShujiiIkenshoToroku {
             div.setHdnHasChanged(getHandler(div).getDataRString());
             ViewStateHolder.put(ViewStateKeys.状態, JYOTAI_CODE_UPD);
         }
+        // TODO Redmine#78229(再提出です、回答待ち)
+        CommonButtonHolder.setDisabledByCommonButtonFieldName(new RString("btnComplete"), true);
         ViewStateHolder.put(ViewStateKeys.主治医意見書登録_意見書情報, ninteiShinseiJoho);
         ViewStateHolder.put(ViewStateKeys.主治医意見書登録_イメージ情報, image);
         return ResponseData.of(div).respond();
@@ -346,11 +349,11 @@ public class ShujiiIkenshoToroku {
             shujiiIkenshoBuilder.set主治医コード(shujiiIkenshoIraiJoho.get主治医コード());
             shujiiIkenshoBuilder.set主治医医療機関コード(shujiiIkenshoIraiJoho.get主治医医療機関コード());
             shujiiIkenshoBuilder.set主治医意見書受領年月日(FlexibleDate.getNowDate());
-            shujiiIkenshoBuilder.set主治医意見書記入年月日(rdateToFlex(div.getTxtKinyuYMD().getValue()));
             shujiiIkenshoBuilder.set在宅_施設区分(new Code(ZaitakuShisetsuKubun.在宅.getコード()));
             if (ninteiShinseiJoho.get施設入所の有無()) {
                 shujiiIkenshoBuilder.set在宅_施設区分(new Code(ZaitakuShisetsuKubun.施設.getコード()));
             }
+            shujiiIkenshoBuilder.set主治医意見書記入年月日(rdateToFlex(div.getTxtKinyuYMD().getValue()));
             setShujiiIkenshoJohoCommon(shujiiIkenshoBuilder, div);
             shujiiIkenshoJoho = shujiiIkenshoBuilder.build();
         }
