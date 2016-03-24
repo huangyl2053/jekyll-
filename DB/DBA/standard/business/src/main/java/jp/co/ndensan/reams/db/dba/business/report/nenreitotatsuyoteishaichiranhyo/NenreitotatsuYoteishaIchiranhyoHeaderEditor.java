@@ -6,14 +6,6 @@
 package jp.co.ndensan.reams.db.dba.business.report.nenreitotatsuyoteishaichiranhyo;
 
 import jp.co.ndensan.reams.db.dba.entity.report.nenreitotatsuyoteishaichiranhyo.NenreitotatsuYoteishaIchiranhyoReportSource;
-import jp.co.ndensan.reams.uz.uza.lang.EraType;
-import jp.co.ndensan.reams.uz.uza.lang.FillType;
-import jp.co.ndensan.reams.uz.uza.lang.FirstYear;
-import jp.co.ndensan.reams.uz.uza.lang.RDate;
-import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
-import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
-import jp.co.ndensan.reams.uz.uza.lang.Separator;
 
 /**
  * 年齢到達予定者一覧表ヘッダEditorです。
@@ -31,29 +23,18 @@ class NenreitotatsuYoteishaIchiranhyoHeaderEditor implements INenreitotatsuYotei
         this.item = item;
     }
 
+    /**
+     * 年齢到達予定者一覧表editです。
+     *
+     * @param reportSourceWriter 年齢到達予定者一覧表Source
+     */
     @Override
     public NenreitotatsuYoteishaIchiranhyoReportSource edit(NenreitotatsuYoteishaIchiranhyoReportSource source) {
         return editHeader(source);
     }
 
     private NenreitotatsuYoteishaIchiranhyoReportSource editHeader(NenreitotatsuYoteishaIchiranhyoReportSource source) {
-
-        RStringBuilder systemDateTime = new RStringBuilder();
-        RDateTime datetime = RDate.getNowDateTime();
-        systemDateTime.append(datetime.getDate().wareki().eraType(EraType.KANJI).
-                firstYear(FirstYear.GAN_NEN).
-                separator(Separator.JAPANESE).
-                fillType(FillType.ZERO).toDateString());
-        systemDateTime.append(RString.HALF_SPACE);
-        systemDateTime.append(String.format("%02d", datetime.getHour()));
-        systemDateTime.append(new RString("時"));
-        systemDateTime.append(String.format("%02d", datetime.getMinute()));
-        systemDateTime.append(new RString("分"));
-        systemDateTime.append(String.format("%02d", datetime.getSecond()));
-        systemDateTime.append(new RString("秒"));
-        systemDateTime.append(RString.HALF_SPACE);
-        systemDateTime.append(new RString("作成"));
-        source.printTimeStamp = systemDateTime.toRString();
+        source.printTimeStamp = item.getPrintTimeStamp();
         source.shichosonCode = item.getShichosonCode();
         source.shichosonName = item.getShichosonName();
         source.shutsuryokujun1 = item.getShutsuryokujun1();
@@ -66,7 +47,6 @@ class NenreitotatsuYoteishaIchiranhyoHeaderEditor implements INenreitotatsuYotei
         source.kaipage3 = item.getKaipage3();
         source.kaipage4 = item.getKaipage4();
         source.kaipage5 = item.getKaipage5();
-
         return source;
     }
 }

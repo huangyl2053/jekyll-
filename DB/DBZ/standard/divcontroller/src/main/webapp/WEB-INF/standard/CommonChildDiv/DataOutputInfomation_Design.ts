@@ -2,14 +2,14 @@
 /// <reference path="../d.ts/UzViewControls.d.ts" />
 /// <reference path="../d.ts/UzaConverter.d.ts" />
 
-module DBE {
+module DBZ {
 
      export module DataOutputInfomation {
 
         export class Events {
 
-            public static CloseOK(): string {
-                return "CloseOK";
+            public static onClick_btnKakunin(): string {
+                return "onClick_btnKakunin";
             }
 
         }
@@ -26,11 +26,11 @@ module DBE {
             }
 
             public convFiledNameSelf(): string {
-                return this._myName + "_" + DBE.DataOutputInfomation.Controls.myType();
+                return this._myName + "_" + DBZ.DataOutputInfomation.Controls.myType();
             }
 
             public convFiledName(fieldName: string): string {
-                return this._myName + "_" + DBE.DataOutputInfomation.Controls.myType() + "_" + fieldName;
+                return this._myName + "_" + DBZ.DataOutputInfomation.Controls.myType() + "_" + fieldName;
             }
 
             public DataOutputInfomation(): UZA.Panel {

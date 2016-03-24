@@ -62,7 +62,8 @@ public class PnlTotalPanelValidationHandler {
                 .add(PnlTotalPanelValidationMessages.番号2未入力,
                         div.getPnlCommon().getPnlDetail().getPnlHidari().getTxtBango2())
                 .add(PnlTotalPanelValidationMessages.金額不整合チェック,
-                        div.getPnlCommon().getPnlDetail().getPnlKyufuhi().getTxtRiyosyajikofutangaku())
+                        div.getPnlCommon().getPnlDetail().getPnlKyufuhi().getTxtRiyosyajikofutangaku(),
+                        div.getPnlCommon().getPnlDetail().getPnlKyufuhi().getTxtHokenkyufuhiyogaku())
                 .add(PnlTotalPanelValidationMessages.受領委任契約番号重複チェック,
                         div.getPnlCommon().getPnlDetail().getPnlHidari().getLblKeyakuNo())
                 .add(PnlTotalPanelValidationMessages.存在チェック)

@@ -8,6 +8,7 @@ package jp.co.ndensan.reams.db.dbb.persistence.db.mapper.relate.choteibo;
 import java.util.List;
 import java.util.Map;
 import jp.co.ndensan.reams.db.dbb.definition.core.choteibo.DankaiChoteigakuShokei;
+import jp.co.ndensan.reams.db.dbb.definition.mybatisprm.choteibo.ChoteiboShoriHizukeMyBatisParameter;
 import jp.co.ndensan.reams.db.dbb.entity.db.relate.choteibo.DanKaiEntity;
 import jp.co.ndensan.reams.db.dbb.entity.db.relate.choteibo.DangatsuDankaiDataEntity;
 import jp.co.ndensan.reams.db.dbb.entity.db.relate.choteibo.DankaiDataEntity;
@@ -29,6 +30,7 @@ import jp.co.ndensan.reams.db.dbb.entity.db.relate.choteibo.SaishutsuKampuEntity
 import jp.co.ndensan.reams.db.dbb.entity.db.relate.choteibo.SonotaBubunDataEntity;
 import jp.co.ndensan.reams.db.dbb.entity.db.relate.choteibo.TokuchoKibetusDataEntity;
 import jp.co.ndensan.reams.db.dbb.entity.db.relate.choteibo.ZengatsuDankaiDataEntity;
+import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7022ShoriDateKanriEntity;
 
 /**
  * 調定簿作成のマッパーインタフェースです。
@@ -429,6 +431,14 @@ public interface IChoteiboSakuseiMapper {
      * @param entity entity
      */
     void update減の調定額の小計(DankaiShokeiEntity entity);
+
+    /**
+     * 処理日付管理マスタから処理日付を取得する。
+     *
+     * @param parameter 検索条件
+     * @return List<DbT7022ShoriDateKanriEntity>
+     */
+    List<DbT7022ShoriDateKanriEntity> select処理日付(ChoteiboShoriHizukeMyBatisParameter parameter);
 
     /**
      * 期別情報一時テーブルを削除します。

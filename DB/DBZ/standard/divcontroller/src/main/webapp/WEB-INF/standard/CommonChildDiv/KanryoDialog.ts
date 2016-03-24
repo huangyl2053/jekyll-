@@ -2,7 +2,7 @@
 
 // 共有子Divモード記述TypeScriptソースです。
 
-module DBE
+module DBZ
 {
     export module KanryoDialog {
 
@@ -29,7 +29,7 @@ module DBE
 
 
 
-module DBE {
+module DBZ {
 
     export module KanryoDialog {
 

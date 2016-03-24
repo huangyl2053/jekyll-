@@ -1,11 +1,11 @@
-var DBE;
-(function (DBE) {
+var DBZ;
+(function (DBZ) {
     (function (KanryoDialog) {
         var Events = (function () {
             function Events() {
             }
-            Events.CloseOK = function () {
-                return "CloseOK";
+            Events.onClick_btnClose = function () {
+                return "onClick_btnClose";
             };
             return Events;
         })();
@@ -20,11 +20,11 @@ var DBE;
             };
 
             Controls.prototype.convFiledNameSelf = function () {
-                return this._myName + "_" + DBE.KanryoDialog.Controls.myType();
+                return this._myName + "_" + DBZ.KanryoDialog.Controls.myType();
             };
 
             Controls.prototype.convFiledName = function (fieldName) {
-                return this._myName + "_" + DBE.KanryoDialog.Controls.myType() + "_" + fieldName;
+                return this._myName + "_" + DBZ.KanryoDialog.Controls.myType() + "_" + fieldName;
             };
 
             Controls.prototype.KanryoDialog = function () {
@@ -40,7 +40,7 @@ var DBE;
             };
 
             Controls.prototype.WrapMessageMain = function () {
-                return new UZA.Panel(this.convFiledName("SuccessInfo_WrapMessageMain"));
+                return new UZA.Panel(this.convFiledName("WrapMessageMain"));
             };
 
             Controls.prototype.lblMessageMain = function () {
@@ -53,6 +53,6 @@ var DBE;
             return Controls;
         })();
         KanryoDialog.Controls = Controls;
-    })(DBE.KanryoDialog || (DBE.KanryoDialog = {}));
-    var KanryoDialog = DBE.KanryoDialog;
-})(DBE || (DBE = {}));
+    })(DBZ.KanryoDialog || (DBZ.KanryoDialog = {}));
+    var KanryoDialog = DBZ.KanryoDialog;
+})(DBZ || (DBZ = {}));

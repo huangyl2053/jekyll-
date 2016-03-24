@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 概要： 受給者台帳情報取得のマッピング用XMLです。 -->
+
+<!-- どのマッパーインターフェースと対応するかを指定する -->
+<mapper namespace = "jp.co.ndensan.reams.db.dbz.persistence.db.mapper.relate.ninteirirekiichiran.INinteiRirekiIchiranMapper">
+    <resultMap id = "NinteiRirekiIchiranEntity" type="jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT4001JukyushaDaichoEntity">
+        <result property="jukyuShinseiYMD" column="dbt4001_jukyuShinseiYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="yokaigoJotaiKubunCode" column="dbt4001_yokaigoJotaiKubunCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.CodeTypeHandler"/>
+        <result property="ninteiYukoKikanKaishiYMD" column="dbt4001_ninteiYukoKikanKaishiYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="ninteiYukoKikanShuryoYMD" column="dbt4001_ninteiYukoKikanShuryoYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="jukyuShinseiJiyu" column="dbt4001_jukyuShinseiJiyu" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.CodeTypeHandler"/>
+        <result property="minashiCode" column="dbt4001_minashiCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.CodeTypeHandler"/>
+        <result property="kyuSochishaFlag" column="dbt4001_kyuSochishaFlag"/>
+        <result property="ninteiYMD" column="dbt4001_ninteiYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="nigoTokuteiShippeiCode" column="dbt4001_nigoTokuteiShippeiCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.CodeTypeHandler"/>
+    </resultMap>
+    <select id = "getJyukyuuSyaDaiTyouJyoho" resultMap = "NinteiRirekiIchiranEntity"
+            parameterType="jp.co.ndensan.reams.db.dbz.definition.param.ninteirirekiichiran.NinteiRirekiIchiranParameter" fetchSize="500">
+        SELECT    
+            dbt4001Jukyusha."jukyuShinseiYMD" AS dbt4001_jukyuShinseiYMD,
+            dbt4001Jukyusha."yokaigoJotaiKubunCode" AS dbt4001_yokaigoJotaiKubunCode,
+            dbt4001Jukyusha."ninteiYukoKikanKaishiYMD" AS dbt4001_ninteiYukoKikanKaishiYMD,
+            dbt4001Jukyusha."ninteiYukoKikanShuryoYMD" AS dbt4001_ninteiYukoKikanShuryoYMD,
+            dbt4001Jukyusha."jukyuShinseiJiyu" AS dbt4001_jukyuShinseiJiyu,
+            dbt4001Jukyusha."minashiCode" AS dbt4001_minashiCode,
+            dbt4001Jukyusha."kyuSochishaFlag" AS dbt4001_kyuSochishaFlag,
+            dbt4001Jukyusha."ninteiYMD" AS dbt4001_ninteiYMD,
+            dbt4001Jukyusha."nigoTokuteiShippeiCode" AS dbt4001_nigoTokuteiShippeiCode
+            FROM rgdb."DbT4001JukyushaDaicho" AS dbt4001Jukyusha
+            WHERE 
+            NOT EXISTS(
+            SELECT 'X' FROM rgdb."DbT4001JukyushaDaicho" AS dbt4001Jukyusha1
+            WHERE 
+                dbt4001Jukyusha."shichosonCode"=dbt4001Jukyusha1."shichosonCode"
+                AND dbt4001Jukyusha."hihokenshaNo"=dbt4001Jukyusha1."hihokenshaNo"
+                AND dbt4001Jukyusha."rirekiNo"=dbt4001Jukyusha1."rirekiNo"
+                AND dbt4001Jukyusha."jukyuShinseiJiyu"=dbt4001Jukyusha1."jukyuShinseiJiyu"
+                AND dbt4001Jukyusha."edaban" <![CDATA[<]]> dbt4001Jukyusha1."edaban"
+		)
+		AND dbt4001Jukyusha."hihokenshaNo"=#{hihokenshaNo}
+		AND (dbt4001Jukyusha."yukoMukoKubun"='0' 
+		OR dbt4001Jukyusha."yukoMukoKubun"='1')
+		AND dbt4001Jukyusha."logicalDeletedFlag"=FALSE
+		ORDER BY dbt4001Jukyusha."ninteiYukoKikanKaishiYMD" DESC
+    </select>
+</mapper>

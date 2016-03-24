@@ -173,7 +173,7 @@ public class KyuhuhiMeisaiJutokuPanelHandler {
      */
     public void click計算する() {
         if (div.getPnlBtnDetail().getPnlKyufuhiMeisai().getPnlKyufuhiMeisaiTouroku().getTxtTanyi().getValue() != null
-                || div.getPnlBtnDetail().getPnlKyufuhiMeisai().getPnlKyufuhiMeisaiTouroku().getTxtKaisu().
+                && div.getPnlBtnDetail().getPnlKyufuhiMeisai().getPnlKyufuhiMeisaiTouroku().getTxtKaisu().
                 getValue() != null) {
             Decimal data = div.getPnlBtnDetail().getPnlKyufuhiMeisai().getPnlKyufuhiMeisaiTouroku().getTxtTanyi().
                     getValue().multiply(div.getPnlBtnDetail().getPnlKyufuhiMeisai().
@@ -370,7 +370,7 @@ public class KyuhuhiMeisaiJutokuPanelHandler {
                             事業者番号,
                             様式番号,
                             明細番号,
-                            new RString(String.valueOf(max連番))).createBuilderForEdit().build();
+                            new RString(String.format("%02d", max連番))).createBuilderForEdit().build();
                     entityAdded = buildshokanMeisai(entityAdded, row);
                     entityList.add(entityAdded.added());
                 }
@@ -388,8 +388,8 @@ public class KyuhuhiMeisaiJutokuPanelHandler {
         entity = entity.createBuilderForEdit().setサービス項目コード(
                 new ServiceKomokuCode(serviceCodeKoumoku)).build();
         if (row.getDefaultDataName2().getValue() != null) {
-            entity = entity.createBuilderForEdit().set単位数(Integer.parseInt(
-                    row.getDefaultDataName2().toString())).build();
+            entity = entity.createBuilderForEdit().set単位数(
+                    row.getDefaultDataName2().getValue().intValue()).build();
         }
         if (row.getDefaultDataName3() != null) {
             entity = entity.createBuilderForEdit().set日数_回数(Integer.parseInt(

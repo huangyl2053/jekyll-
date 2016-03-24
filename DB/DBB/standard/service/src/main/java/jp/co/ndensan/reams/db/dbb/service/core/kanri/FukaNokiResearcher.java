@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package jp.co.ndensan.reams.db.dbb.service.core.kanri;
 
 import java.util.List;
@@ -34,7 +29,16 @@ public class FukaNokiResearcher {
      */
     public FukaNokiResearcher(RYear 調定年度) {
         this.nokiManager = InstanceProvider.create(NokiManager.class);
-        this.調定年度 = 調定年度;
+        this.調定年度 = 調定年度 != null ? 調定年度 : new RYear(BusinessConfig
+                .get(ConfigNameDBB.日付関連_調定年度, SubGyomuCode.DBB介護賦課));
+    }
+
+    /**
+     * コンストラクタです。
+     */
+    FukaNokiResearcher() {
+        this.nokiManager = InstanceProvider.create(NokiManager.class);
+        this.調定年度 = new RYear(BusinessConfig.get(ConfigNameDBB.日付関連_調定年度, SubGyomuCode.DBB介護賦課));
     }
 
     /**
@@ -70,7 +74,7 @@ public class FukaNokiResearcher {
             throw new IllegalArgumentException(UrErrorMessages.不正.getMessage().replace("期").toString());
         }
         Noki 特徴納期 = nokiManager.get納期(ShunoKamokuShubetsu.介護保険料_特別徴収,
-                get調定年度(this.調定年度), GennenKanen.現年度, 期);
+                this.調定年度, GennenKanen.現年度, 期);
         if (特徴納期 == null) {
             throw new ApplicationException(UrErrorMessages.データが存在しない.getMessage());
         } else {
@@ -91,7 +95,7 @@ public class FukaNokiResearcher {
             throw new IllegalArgumentException(UrErrorMessages.不正.getMessage().replace("期").toString());
         }
         Noki 普徴納期 = nokiManager.get納期(ShunoKamokuShubetsu.介護保険料_普通徴収,
-                get調定年度(this.調定年度), GennenKanen.現年度, 期);
+                this.調定年度, GennenKanen.現年度, 期);
         if (普徴納期 == null) {
             throw new ApplicationException(UrErrorMessages.データが存在しない.getMessage());
         } else {
@@ -108,7 +112,7 @@ public class FukaNokiResearcher {
     public List<Noki> get普徴納期ALL() {
 
         List<Noki> 普徴納期 = nokiManager.get納期(ShunoKamokuShubetsu.介護保険料_普通徴収,
-                get調定年度(this.調定年度), GennenKanen.現年度);
+                this.調定年度, GennenKanen.現年度);
         if (普徴納期 == null || 普徴納期.isEmpty()) {
             throw new ApplicationException(UrErrorMessages.データが存在しない.getMessage());
         } else {
@@ -129,16 +133,11 @@ public class FukaNokiResearcher {
             throw new IllegalArgumentException(UrErrorMessages.不正.getMessage().replace("期").toString());
         }
         Noki 過年度納期 = nokiManager.get納期(ShunoKamokuShubetsu.介護保険料_普通徴収,
-                get調定年度(this.調定年度), GennenKanen.過年度, 期);
+                this.調定年度, GennenKanen.過年度, 期);
         if (過年度納期 == null) {
             throw new ApplicationException(UrErrorMessages.データが存在しない.getMessage());
         } else {
             return 過年度納期;
         }
-    }
-
-    private RYear get調定年度(RYear 調定年度) {
-        return 調定年度 != null ? 調定年度 : new RYear(BusinessConfig.get(
-                ConfigNameDBB.日付関連_調定年度, SubGyomuCode.DBB介護賦課));
     }
 }

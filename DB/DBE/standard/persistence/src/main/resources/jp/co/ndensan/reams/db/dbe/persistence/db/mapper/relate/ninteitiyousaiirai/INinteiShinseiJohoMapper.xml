@@ -105,13 +105,21 @@
         SELECT
         COUNT(0)
         FROM
-        (rgdb."DbT5101NinteiShinseiJoho" AS DbT5101
+        (SELECT
+        T5201shinseishoKanriNo,
+        DbT5101."shinseishoKanriNo" AS DBT5101shinseishoKanriNo,
+        DbT5101."shoKisaiHokenshaNo" AS DBT5101shoKisaiHokenshaNo,
+        DbT5101."ninteiChosaItakusakiCode" AS DBT5101ninteiChosaItakusakiCode,
+        DbT5101."ninteiChosainCode" AS DBT5101ninteiChosainCode,
+        DbT5101."shoriJotaiKubun"  AS shoriJotaiKubun,
+        MAX FROM
+        rgdb."DbT5101NinteiShinseiJoho" AS DbT5101
         INNER JOIN rgdb."DbT7051KoseiShichosonMaster" AS DbT7051
         ON DbT7051."shoKisaiHokenshaNo" = DbT5101."shoKisaiHokenshaNo"
         INNER JOIN
         (
         SELECT
-        T5201."shinseishoKanriNo",
+        T5201."shinseishoKanriNo" AS T5201shinseishoKanriNo,
         MAX(T5201."ninteichosaIraiRirekiNo")
         FROM
         rgdb."DbT5201NinteichosaIraiJoho" AS T5201
@@ -119,7 +127,7 @@
         T5201."logicalDeletedFlag" = FALSE
         GROUP BY T5201."shinseishoKanriNo"
         )AS TB1
-        ON TB1."shinseishoKanriNo" = DbT5101."shinseishoKanriNo"
+        ON TB1.T5201shinseishoKanriNo = DbT5101."shinseishoKanriNo"
         INNER JOIN rgdb."DbT5201NinteichosaIraiJoho" AS DbT5201
         ON
         DbT5201."shinseishoKanriNo" = DbT5101."shinseishoKanriNo"
@@ -152,17 +160,17 @@
         WHERE
         1=1
         <if test="temp_hokennshaCode_isNotEmpty">
-            AND TB2."ninteichosaIraiRirekiNo" = #{temp_hokennshaCode}
+            AND TB2.DBT5101shoKisaiHokenshaNo = #{temp_hokennshaCode}
         </if>
 
         <if test="temp_itakusakiCode_isNotEmpty">
-            AND TB2."ninteiChosaItakusakiCode" = #{temp_ninteiChosaItakusakiCode}
+            AND TB2.DBT5101ninteiChosaItakusakiCode = #{temp_ninteiChosaItakusakiCode}
         </if>
 
         <if test="temp_chosainCode_isNotEmpty">
-            AND TB2."ninteiChosainCode" = #{temp_ninteiChosainCode}
+            AND TB2.DBT5101ninteiChosainCode = #{temp_ninteiChosainCode}
         </if>
-        AND TB2."shoriJotaiKubun" != '2'
-        AND TB2."shoriJotaiKubun" != '1'
+        AND TB2.shoriJotaiKubun != '2'
+        AND TB2.shoriJotaiKubun != '1'
     </select>
 </mapper>

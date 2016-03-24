@@ -42,7 +42,7 @@ public class GoukeiInfoPanel {
     public ResponseData<GoukeiInfoPanelDiv> onLoad(GoukeiInfoPanelDiv div) {
         SyokanbaraihishikyushinseiketteParameter par = new SyokanbaraihishikyushinseiketteParameter(
                 new HihokenshaNo("000000003"),
-                new FlexibleYearMonth(new RString("201601")),
+                new FlexibleYearMonth(new RString("201611")),
                 new RString("0000000003"),
                 new JigyoshaNo("0000000003"),
                 new RString("0003"),
@@ -55,8 +55,9 @@ public class GoukeiInfoPanel {
         FlexibleYearMonth サービス年月 = paramter.getServiceTeikyoYM();
         RString 整理番号 = paramter.getSeiriNp();
         JigyoshaNo 事業者番号 = paramter.getJigyoshaNo();
-        RString 様式番号 = paramter.getYoshikiNo();
         RString 明細番号 = paramter.getMeisaiNo();
+        ViewStateHolder.put(ViewStateKeys.様式番号, new RString("0003"));
+        RString 様式番号 = ViewStateHolder.get(ViewStateKeys.様式番号, RString.class);
         ViewStateHolder.put(ViewStateKeys.被保険者番号, 被保険者番号);
         ViewStateHolder.put(ViewStateKeys.整理番号, 整理番号);
         SikibetuNokennsakuki key = new SikibetuNokennsakuki(new RString("0004"),
@@ -73,11 +74,17 @@ public class GoukeiInfoPanel {
             div.getPanelCcd().getCcdKaigoShikakuKihon().setVisible(false);
         }
 
+        div.getPanelHead().getTxtServiceTeikyoYM().setValue(new RDate(サービス年月.wareki().toDateString().toString()));
+        div.getPanelHead().getTxtShinseiYMD().setValue(new RDate(申請日.wareki().toDateString().toString()));
+        div.getPanelHead().getTxtJigyoshaBango().setValue(事業者番号.getColumnValue());
+        div.getPanelHead().getTxtMeisaiBango().setValue(明細番号);
+        div.getPanelHead().getTxtShomeisho().setValue(様式番号);
         ShokanKihon shokanKihon = ShokanbaraiJyokyoShokai.createInstance().getShokanbarayiSeikyukihonDetail(
                 被保険者番号, サービス年月, 整理番号, 事業者番号, 様式番号, 明細番号);
         List<ShokanShokujiHiyo> shokanShokujiHiyoList = ShokanbaraiJyokyoShokai.createInstance().
                 getSeikyuShokujiHiyoTanjyunSearch(被保険者番号, サービス年月, 整理番号, 事業者番号, 様式番号, 明細番号, null);
-        getHandler(div).initialize(shokanKihon, shokanShokujiHiyoList, サービス年月, 申請日);
+        getHandler(div).initialize(shokanKihon, shokanShokujiHiyoList);
+
         SikibetuNokennsakuki kennsakuki = ViewStateHolder.get(ViewStateKeys.識別番号検索キー, SikibetuNokennsakuki.class);
         ShikibetsuNoKanri entity = SyokanbaraihiShikyuShinseiKetteManager.createInstance()
                 .getShikibetsuNoKanri(kennsakuki.getServiceTeikyoYM(), kennsakuki.getSikibetuNo());

@@ -610,7 +610,7 @@ public final class KinkyujiShoteiShikanPanelHandler {
                             getコード()).nextString();
                     ShokanShoteiShikkanShisetsuRyoyo entity = new ShokanShoteiShikkanShisetsuRyoyo(
                             被保険者番号, 提供購入年月, 新整理番号, 事業者番号, 様式番号, 明細番号,
-                            new RString(String.valueOf(max連番)));
+                            new RString(String.format("%02d", max連番)));
                     entity = entity.added();
                     entity = buildEntity(entity, row);
                     list.add(entity);

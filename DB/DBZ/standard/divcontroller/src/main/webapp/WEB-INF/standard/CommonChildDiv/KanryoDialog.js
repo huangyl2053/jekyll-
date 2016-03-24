@@ -1,5 +1,5 @@
-var DBE;
-(function (DBE) {
+var DBZ;
+(function (DBZ) {
     (function (KanryoDialog) {
         var ModeController = (function () {
             function ModeController(fieldName) {
@@ -16,12 +16,12 @@ var DBE;
             return ModeController;
         })();
         KanryoDialog.ModeController = ModeController;
-    })(DBE.KanryoDialog || (DBE.KanryoDialog = {}));
-    var KanryoDialog = DBE.KanryoDialog;
-})(DBE || (DBE = {}));
+    })(DBZ.KanryoDialog || (DBZ.KanryoDialog = {}));
+    var KanryoDialog = DBZ.KanryoDialog;
+})(DBZ || (DBZ = {}));
 
-var DBE;
-(function (DBE) {
+var DBZ;
+(function (DBZ) {
     (function (KanryoDialog) {
         var PublicProperties = (function () {
             function PublicProperties(fieldName) {
@@ -44,6 +44,6 @@ var DBE;
             return PublicProperties;
         })();
         KanryoDialog.PublicProperties = PublicProperties;
-    })(DBE.KanryoDialog || (DBE.KanryoDialog = {}));
-    var KanryoDialog = DBE.KanryoDialog;
-})(DBE || (DBE = {}));
+    })(DBZ.KanryoDialog || (DBZ.KanryoDialog = {}));
+    var KanryoDialog = DBZ.KanryoDialog;
+})(DBZ || (DBZ = {}));
