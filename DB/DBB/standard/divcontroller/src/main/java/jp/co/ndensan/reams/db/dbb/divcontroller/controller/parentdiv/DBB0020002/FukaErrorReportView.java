@@ -38,6 +38,7 @@ import jp.co.ndensan.reams.uz.uza.workflow.parameter.FlowParameterAccessor;
 /**
  * 賦課エラー修正画面の、エラー一覧を表示するパネルについての処理を行うクラスです。
  */
+@SuppressWarnings("checkstyle:illegaltoken")
 public class FukaErrorReportView {
 
     private static final RString BATCHID_FUKAERROR = new RString("FukaErrorBatchId");
@@ -104,9 +105,11 @@ public class FukaErrorReportView {
         IInternalReport internalReport = new FukaErrorListCsvReport(reportCommon, reportItem);
         IInternalReportCsvConverter converter = InternalReportConverterFactory.createCsvConvertor();
         List<Byte> csvByteData = converter.convertCsvByteData(internalReport);
-        for (Object obj : csvByteData.toArray()) {
-            response.writeData(((String) obj).getBytes());
+        byte[] bytes = new byte[csvByteData.size()];
+        for (int i = 0; i < csvByteData.size(); i++) {
+            bytes[i] = csvByteData.get(i);
         }
+        response.writeData(bytes);
         response.setFileName(converter.getFileName(internalReport));
         return response;
     }
