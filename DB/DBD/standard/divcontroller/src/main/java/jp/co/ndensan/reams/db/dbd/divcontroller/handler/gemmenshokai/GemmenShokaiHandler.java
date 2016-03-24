@@ -6,7 +6,7 @@
 package jp.co.ndensan.reams.db.dbd.divcontroller.handler.gemmenshokai;
 
 import java.util.List;
-import jp.co.ndensan.reams.db.dbc.business.core.basic.RiyoshaFutanWariaiMeisai;
+import jp.co.ndensan.reams.db.dbd.business.core.futanwariai.RiyoshaFutanWariaiMeisai;
 import jp.co.ndensan.reams.db.dbd.business.common.NursingCareInformationBusiness;
 import jp.co.ndensan.reams.db.dbd.business.common.ShiharaiHohoHenkoSummaryBusiness;
 import jp.co.ndensan.reams.db.dbd.business.core.basic.JukyushaDaicho;
