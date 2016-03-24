@@ -37,7 +37,7 @@ public class AtenaInfoHandler {
      * @param 被保険者番号 被保険者番号
      */
     public void setヘッダエリア(ShikibetsuCode 識別コード, HihokenshaNo 被保険者番号) {
-//        div.getKiagoAtenaInfo().onLoad(識別コード);
+        div.getKiagoAtenaInfo().onLoad(識別コード);
         // TODO QA
 //        div.getKaigoFukaKihon().load(被保険者番号);
         this.set共通エリア();
