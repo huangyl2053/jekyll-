@@ -33,6 +33,10 @@
             <artifactId>DbaService</artifactId>
         </dependency>
         <!-- DBB -->
+        <dependency>
+            <groupId>jp.co.ndensan.reams.db.dbb</groupId>
+            <artifactId>DbbService</artifactId>
+        </dependency>
         <!-- DBC -->
         <!-- DBD -->
         <!-- DBE -->
@@ -79,12 +83,6 @@
             <artifactId>DbuBatchController</artifactId>
             <version>${project.version}</version>
             <scope>runtime</scope>
-        </dependency>
-        <dependency>
-            <groupId>jp.co.ndensan.reams.db.dbb</groupId>
-            <artifactId>DbbService</artifactId>
-            <version>1.0-SNAPSHOT</version>
-            <type>runtime</type>
         </dependency>
     </dependencies>
     <build>
