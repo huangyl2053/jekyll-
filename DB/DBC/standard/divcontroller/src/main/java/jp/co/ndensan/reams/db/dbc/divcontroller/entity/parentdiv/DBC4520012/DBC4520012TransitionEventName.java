@@ -15,7 +15,8 @@ public enum DBC4520012TransitionEventName implements IContainerEvents {
 // <editor-fold defaultstate="collapsed" desc="Created By UI Designer ver 1.0.0">
 
     介護専門員一覧へ戻る("介護専門員一覧へ戻る"),
-    介護専門員検索へ戻る("介護専門員検索へ戻る");
+    介護専門員検索へ戻る("介護専門員検索へ戻る"),
+    完了状態("完了状態");
 
     private final RString name;
 
