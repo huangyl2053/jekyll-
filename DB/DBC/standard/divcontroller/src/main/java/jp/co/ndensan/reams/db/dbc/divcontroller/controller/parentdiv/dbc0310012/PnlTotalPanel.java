@@ -180,7 +180,6 @@ public class PnlTotalPanel {
             div.getPnlCommon().getPnlDetail().getTxtFusyoninriyu().setDisabled(true);
             div.getPnlCommon().getPnlDetail().getTxtFusyoninriyu().clearValue();
             div.getPnlCommon().getPnlDetail().getRdoKettekubun().setDisabled(false);
-            div.getPnlCommon().getPnlDetail().getTxtFusyoninriyu().setDisabled(false);
             div.getPnlCommon().getPnlDetail().getPnlHidari().getDdlYear().setDisabled(false);
             div.getPnlCommon().getPnlDetail().getPnlHidari().getTxtBango2().setDisabled(false);
             div.getPnlCommon().getPnlDetail().getPnlHidari().getTxtSyoninkikan().setDisabled(false);

@@ -298,18 +298,21 @@ public class PnlTotalPanelHandler {
         if (!div.getPnlCommon().getPnlDetail().getTxtFusyoninriyu().getValue().isNullOrEmpty()) {
             builder.set不承認理由(div.getPnlCommon().getPnlDetail().getTxtFusyoninriyu().getValue());
         }
-        builder.set費用額合計(div.getPnlCommon().getPnlDetail().getPnlKyufuhi()
-                .getTxtHiyogakugokei().getValue() == null ? Decimal.ZERO : div.getPnlCommon().getPnlDetail()
-                .getPnlKyufuhi().getTxtHiyogakugokei().getValue());
-        builder.set保険対象費用額(div.getPnlCommon().getPnlDetail().getPnlKyufuhi()
-                .getTxtHokentaisyohiyogaku().getValue() == null ? Decimal.ZERO : div.getPnlCommon().getPnlDetail()
-                .getPnlKyufuhi().getTxtHokentaisyohiyogaku().getValue());
-        builder.set利用者自己負担額(div.getPnlCommon().getPnlDetail().getPnlKyufuhi()
-                .getTxtRiyosyajikofutangaku().getValue() == null ? Decimal.ZERO : div.getPnlCommon().getPnlDetail()
-                .getPnlKyufuhi().getTxtRiyosyajikofutangaku().getValue());
-        builder.set保険給付費額(div.getPnlCommon().getPnlDetail().getPnlKyufuhi()
-                .getTxtHokenkyufuhiyogaku().getValue() == null ? Decimal.ZERO : div.getPnlCommon().getPnlDetail()
-                .getPnlKyufuhi().getTxtHokenkyufuhiyogaku().getValue());
+        if (div.getPnlCommon().getPnlDetail().getPnlKyufuhi().getTxtHiyogakugokei().getValue() != null) {
+            builder.set費用額合計(div.getPnlCommon().getPnlDetail().getPnlKyufuhi().getTxtHiyogakugokei().getValue());
+        }
+        if (div.getPnlCommon().getPnlDetail().getPnlKyufuhi().getTxtHokentaisyohiyogaku().getValue() != null) {
+            builder.set保険対象費用額(div.getPnlCommon().getPnlDetail().getPnlKyufuhi()
+                    .getTxtHokentaisyohiyogaku().getValue());
+        }
+        if (div.getPnlCommon().getPnlDetail().getPnlKyufuhi().getTxtRiyosyajikofutangaku().getValue() != null) {
+            builder.set利用者自己負担額(div.getPnlCommon().getPnlDetail().getPnlKyufuhi()
+                    .getTxtRiyosyajikofutangaku().getValue());
+        }
+        if (div.getPnlCommon().getPnlDetail().getPnlKyufuhi().getTxtHokenkyufuhiyogaku().getValue() != null) {
+            builder.set保険給付費額(div.getPnlCommon().getPnlDetail().getPnlKyufuhi()
+                    .getTxtHokenkyufuhiyogaku().getValue());
+        }
         if (div.getPnlCommon().getPnlDetail().getPnlHidari().getChkSaihakoukubun().isAllSelected()) {
             builder.set承認結果通知書再発行区分(new RString("1"));
         } else {
