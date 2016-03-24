@@ -451,7 +451,6 @@ public class KaigoHokenTokubetuKaikeiKeiriJyokyoRegist1Handler {
     public void onClick_btnConfirm() {
         List<Shichoson> 市町村Lst = get市町村Lst();
         TextBoxFlexibleDate 報告年度Box = div.getHihokenshabango().getYoshikiyonMeisai().getTxthokokuYM();
-        FlexibleDate 報告年度 = 報告年度Box.getValue();
         int choice = div.getHihokenshabango().getYoshikiyonMeisai().getDdlShicyoson().getSelectedIndex();
         Shichoson 市町村 = 市町村Lst.get(choice);
         TokeiTaishoKubun 保険者区分 = 市町村.get保険者区分();
