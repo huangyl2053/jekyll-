@@ -1,29 +1,26 @@
-package jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0710011;
+package jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC4520012;
 
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.core.ui.response.IContainerEvents;
+import jp.co.ndensan.reams.uz.uza.core.ui.response.IStateEnumerations;
 
 /**
  * このコードはツールによって生成されました。</br>
  * このファイルへの変更は、再生成時には損失するため</br>
  * 不正な動作の原因になります。</br>
- * DBC0710011のイベント名定義クラスです</br>
+ * DBC4520012の状態名定義クラスです
  *
  * @author 自動生成
  */
-public enum DBC0710011TransitionEventName implements IContainerEvents {
+public enum DBC4520012StateName implements IStateEnumerations {
 // <editor-fold defaultstate="collapsed" desc="Created By UI Designer ver 1.0.0">
 
-    修正("修正"),
-    検索条件("検索条件"),
-    該当者一覧("該当者一覧"),
-    申請を追加("申請を追加"),
-    削除("削除"),
-    取消("取消");
+    NoChange(""),
+    Default("default"),
+    登録("登録");
 
     private final RString name;
 
-    private DBC0710011TransitionEventName(String name) {
+    private DBC4520012StateName(String name) {
         this.name = new RString(name);
     }
 

@@ -244,4 +244,14 @@ public class ShisetsuJohoHandler {
     public RString getNyuryokuShisetsuMeisho() {
         return div.getTxtNyuryokuShisetsuMeisho().getValue();
     }
+
+    /**
+     * 入所施設コードを渡すと入所施設名称を取得して表示する。
+     *
+     * @param nyuryokuShisetsucode 入所施設コード
+     */
+    public void setNyuryokuShisetsuMeisho(RString nyuryokuShisetsucode) {
+        div.getTxtNyuryokuShisetsuKodo().setValue(nyuryokuShisetsucode);
+        this.selectShiSeTuMeiSyo();
+    }
 }

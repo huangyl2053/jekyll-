@@ -4,18 +4,18 @@ package jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.ShisetsuJ
  * このファイルへの変更は、再生成時には損失するため
  * 不正な動作の原因になります。
  */
-import com.fasterxml.jackson.annotation.JsonProperty;
-import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.ui.binding.*;
-import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import java.util.HashSet;
-import jp.co.ndensan.reams.uz.uza.ui.servlets.ICommonChildDivMode;
-import jp.co.ndensan.reams.uz.uza.ui.servlets._CommonChildDivModeUtil;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.binding.ButtonDialog;
 import jp.co.ndensan.reams.uz.uza.ui.binding.DropDownList;
+import jp.co.ndensan.reams.uz.uza.ui.binding.Mode;
+import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 import jp.co.ndensan.reams.uz.uza.ui.binding.RadioButton;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TextBox;
+import jp.co.ndensan.reams.uz.uza.ui.servlets.ICommonChildDivMode;
+import jp.co.ndensan.reams.uz.uza.ui.servlets._CommonChildDivModeUtil;
 
 /**
  * ShisetsuJohoCommonChildDiv のクラスファイル
@@ -23,6 +23,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.TextBox;
  * @author 自動生成
  */
 public class ShisetsuJohoCommonChildDivDiv extends Panel implements IShisetsuJohoCommonChildDiv {
+
     // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-02-19_14-33-39">
     /*
      * [ private の作成 ]
@@ -202,46 +203,46 @@ public class ShisetsuJohoCommonChildDivDiv extends Panel implements IShisetsuJoh
      */
     @JsonProperty("modes")
     private HashSet<Mode> modes;
-
+    
     public static enum State implements ICommonChildDivMode {
-
+        
         DaichoShubetsuAriMode("DaichoShubetsuAriMode"),
         DaichoShubetsuNashiMode("DaichoShubetsuNashiMode"),
         KaigoHokenMode("KaigoHokenMode"),
         OtherTokureiMode("OtherTokureiMode"),
         TekiyoJogaiMode("TekiyoJogaiMode"),
         JigyoshaInputGuideMode("JigyoshaInputGuideMode");
-
+        
         private final String name;
-
+        
         private State(final String name) {
             this.name = name;
         }
-
+        
         public static State getEnum(String str) {
             State[] enumArray = State.values();
-
+            
             for (State enumStr : enumArray) {
-                if (str.equals(enumStr.name.toString())) { 
+                if (str.equals(enumStr.name.toString())) {
                     return enumStr;
                 }
             }
             return null;
         }
-
+        
         @Override
         public String toString() {
             return this.name;
         }
-
+        
     }
-
+    
     public State getMode_State() {
-        return (State) _CommonChildDivModeUtil.getMode( this.modes, State.class );
+        return (State) _CommonChildDivModeUtil.getMode(this.modes, State.class);
     }
-
-    public void setMode_State( State value ) {
-        _CommonChildDivModeUtil.setMode( this.modes, State.class , value );
+    
+    public void setMode_State(State value) {
+        _CommonChildDivModeUtil.setMode(this.modes, State.class, value);
     }
 
     // </editor-fold>
@@ -278,5 +279,15 @@ public class ShisetsuJohoCommonChildDivDiv extends Panel implements IShisetsuJoh
     @Override
     public RString getNyuryokuShisetsuMeisho() {
         return getHandler().getNyuryokuShisetsuMeisho();
+    }
+
+    /**
+     * 共通子DIVの入所施設コードを渡すと入所施設名称を取得して表示するメソッドです。
+     *
+     * @param nyuryokuShisetsucode 入所施設コード
+     */
+    @Override
+    public void setNyuryokuShisetsuMeisho(RString nyuryokuShisetsucode) {
+        getHandler().setNyuryokuShisetsuMeisho(nyuryokuShisetsucode);
     }
 }
