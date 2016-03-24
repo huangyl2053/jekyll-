@@ -106,7 +106,6 @@ public class ShokanJuryoininKeiyakushaBuilder {
      * @return {@link ShokanJuryoininKeiyakushaBuilder}
      */
     public ShokanJuryoininKeiyakushaBuilder set決定年月日(FlexibleDate 決定年月日) {
-        requireNonNull(決定年月日, UrSystemErrorMessages.値がnull.getReplacedMessage("決定年月日"));
         entity.setKetteiYMD(決定年月日);
         return this;
     }
@@ -118,7 +117,6 @@ public class ShokanJuryoininKeiyakushaBuilder {
      * @return {@link ShokanJuryoininKeiyakushaBuilder}
      */
     public ShokanJuryoininKeiyakushaBuilder set承認結果区分(RString 承認結果区分) {
-        requireNonNull(承認結果区分, UrSystemErrorMessages.値がnull.getReplacedMessage("承認結果区分"));
         entity.setShoninKekkaKubun(承認結果区分);
         return this;
     }
@@ -130,7 +128,6 @@ public class ShokanJuryoininKeiyakushaBuilder {
      * @return {@link ShokanJuryoininKeiyakushaBuilder}
      */
     public ShokanJuryoininKeiyakushaBuilder set受領委任払適用開始年月日(FlexibleDate 受領委任払適用開始年月日) {
-        requireNonNull(受領委任払適用開始年月日, UrSystemErrorMessages.値がnull.getReplacedMessage("受領委任払適用開始年月日"));
         entity.setJuryoininKaishiYMD(受領委任払適用開始年月日);
         return this;
     }
@@ -142,7 +139,6 @@ public class ShokanJuryoininKeiyakushaBuilder {
      * @return {@link ShokanJuryoininKeiyakushaBuilder}
      */
     public ShokanJuryoininKeiyakushaBuilder set受領委任払適用終了年月日(FlexibleDate 受領委任払適用終了年月日) {
-        requireNonNull(受領委任払適用終了年月日, UrSystemErrorMessages.値がnull.getReplacedMessage("受領委任払適用終了年月日"));
         entity.setJuryoininShuryoYMD(受領委任払適用終了年月日);
         return this;
     }
@@ -154,7 +150,6 @@ public class ShokanJuryoininKeiyakushaBuilder {
      * @return {@link ShokanJuryoininKeiyakushaBuilder}
      */
     public ShokanJuryoininKeiyakushaBuilder set契約番号(RString 契約番号) {
-        requireNonNull(契約番号, UrSystemErrorMessages.値がnull.getReplacedMessage("契約番号"));
         entity.setKeiyakuNo(契約番号);
         return this;
     }
@@ -166,7 +161,6 @@ public class ShokanJuryoininKeiyakushaBuilder {
      * @return {@link ShokanJuryoininKeiyakushaBuilder}
      */
     public ShokanJuryoininKeiyakushaBuilder set不承認理由(RString 不承認理由) {
-        requireNonNull(不承認理由, UrSystemErrorMessages.値がnull.getReplacedMessage("不承認理由"));
         entity.setFuShoninRiyu(不承認理由);
         return this;
     }
@@ -178,7 +172,6 @@ public class ShokanJuryoininKeiyakushaBuilder {
      * @return {@link ShokanJuryoininKeiyakushaBuilder}
      */
     public ShokanJuryoininKeiyakushaBuilder set費用額合計(Decimal 費用額合計) {
-        requireNonNull(費用額合計, UrSystemErrorMessages.値がnull.getReplacedMessage("費用額合計"));
         entity.setHiyoGakuGokei(費用額合計);
         return this;
     }
@@ -190,7 +183,6 @@ public class ShokanJuryoininKeiyakushaBuilder {
      * @return {@link ShokanJuryoininKeiyakushaBuilder}
      */
     public ShokanJuryoininKeiyakushaBuilder set保険対象費用額(Decimal 保険対象費用額) {
-        requireNonNull(保険対象費用額, UrSystemErrorMessages.値がnull.getReplacedMessage("保険対象費用額"));
         entity.setHokenTaishoHiyoGaku(保険対象費用額);
         return this;
     }
@@ -202,7 +194,6 @@ public class ShokanJuryoininKeiyakushaBuilder {
      * @return {@link ShokanJuryoininKeiyakushaBuilder}
      */
     public ShokanJuryoininKeiyakushaBuilder set利用者自己負担額(Decimal 利用者自己負担額) {
-        requireNonNull(利用者自己負担額, UrSystemErrorMessages.値がnull.getReplacedMessage("利用者自己負担額"));
         entity.setRiyoshaJikoFutanGaku(利用者自己負担額);
         return this;
     }
@@ -214,7 +205,6 @@ public class ShokanJuryoininKeiyakushaBuilder {
      * @return {@link ShokanJuryoininKeiyakushaBuilder}
      */
     public ShokanJuryoininKeiyakushaBuilder set保険給付費額(Decimal 保険給付費額) {
-        requireNonNull(保険給付費額, UrSystemErrorMessages.値がnull.getReplacedMessage("保険給付費額"));
         entity.setHokenKyufuhiGaku(保険給付費額);
         return this;
     }
@@ -226,7 +216,6 @@ public class ShokanJuryoininKeiyakushaBuilder {
      * @return {@link ShokanJuryoininKeiyakushaBuilder}
      */
     public ShokanJuryoininKeiyakushaBuilder set承認結果通知書作成日(FlexibleDate 承認結果通知書作成日) {
-        requireNonNull(承認結果通知書作成日, UrSystemErrorMessages.値がnull.getReplacedMessage("承認結果通知書作成日"));
         entity.setShoninKekkaTsuchiSakuseiYMD(承認結果通知書作成日);
         return this;
     }
@@ -238,7 +227,6 @@ public class ShokanJuryoininKeiyakushaBuilder {
      * @return {@link ShokanJuryoininKeiyakushaBuilder}
      */
     public ShokanJuryoininKeiyakushaBuilder set承認結果通知書再発行区分(RString 承認結果通知書再発行区分) {
-        requireNonNull(承認結果通知書再発行区分, UrSystemErrorMessages.値がnull.getReplacedMessage("承認結果通知書再発行区分"));
         entity.setShoninKekkaTsuchiSaiHakkoKubun(承認結果通知書再発行区分);
         return this;
     }
@@ -250,7 +238,6 @@ public class ShokanJuryoininKeiyakushaBuilder {
      * @return {@link ShokanJuryoininKeiyakushaBuilder}
      */
     public ShokanJuryoininKeiyakushaBuilder set備考(RString 備考) {
-        requireNonNull(備考, UrSystemErrorMessages.値がnull.getReplacedMessage("備考"));
         entity.setBiko(備考);
         return this;
     }

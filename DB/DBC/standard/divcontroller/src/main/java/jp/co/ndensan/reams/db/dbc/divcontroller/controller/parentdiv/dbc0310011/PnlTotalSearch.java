@@ -53,6 +53,7 @@ public class PnlTotalSearch {
      * @return ResponseData<PnlTotalSearchDiv>
      */
     public ResponseData<PnlTotalSearchDiv> onLoad(PnlTotalSearchDiv div) {
+        getHandler(div).set初期化状態();
         ShokanJuryoininKeiyakushaParameter parameter = ViewStateHolder
                 .get(ViewStateKeys.契約者一覧検索キー, ShokanJuryoininKeiyakushaParameter.class);
         if (parameter != null) {
@@ -65,7 +66,6 @@ public class PnlTotalSearch {
             div.getPnlSearch().getTxtMaxCount().setValue(最大取得件数);
             return set契約者一覧(div, shokanList);
         }
-        getHandler(div).set初期化状態();
         return ResponseData.of(div).respond();
     }
 
