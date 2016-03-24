@@ -15,10 +15,10 @@ import jp.co.ndensan.reams.db.dbu.business.kyokaisogaitosha.KyokaisoHokenryo;
 import jp.co.ndensan.reams.db.dbu.divcontroller.entity.parentdiv.DBU0510011.KyokaisoGaitoshaPanelDiv;
 import jp.co.ndensan.reams.db.dbu.divcontroller.entity.parentdiv.DBU0510011.dgKyokaisouGaitouItran_Row;
 import jp.co.ndensan.reams.db.dbu.divcontroller.entity.parentdiv.DBU0510011.dghokenryoNofu_Row;
+import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBC;
 import jp.co.ndensan.reams.db.dbz.business.core.KyokaisoGaitosha;
 import jp.co.ndensan.reams.db.dbz.business.core.KyokaisoHokenryoDankai;
 import jp.co.ndensan.reams.db.dbz.business.core.KyokaisoSochiShinsei;
-import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBC;
 import jp.co.ndensan.reams.db.dbz.divcontroller.viewbox.ViewStateKeys;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.CodeShubetsu;
@@ -193,8 +193,12 @@ public class KyokaisoGaitoshaPanelHandler {
      * @param nofu_Row 保険料納付
      */
     public void onClick_ModifyButton(dghokenryoNofu_Row nofu_Row) {
-        div.getTxtHohenryoNofuFromDate().setValue(new RDate(nofu_Row.getTekiyoKaishiDate().toString()));
-        div.getTxtHohenryoNofuToDate().setValue(new RDate(nofu_Row.getTekiyoShuryoDate().toString()));
+        if (nofu_Row.getTekiyoKaishiDate() != null && !nofu_Row.getTekiyoKaishiDate().isEmpty()) {
+            div.getTxtHohenryoNofuFromDate().setValue(new RDate(nofu_Row.getTekiyoKaishiDate().toString()));
+        }
+        if (nofu_Row.getTekiyoShuryoDate() != null && !nofu_Row.getTekiyoShuryoDate().isEmpty()) {
+            div.getTxtHohenryoNofuToDate().setValue(new RDate(nofu_Row.getTekiyoShuryoDate().toString()));
+        }
         div.getDdlTekiyouSuruShutokuDankai().setSelectedValue(nofu_Row.getHokenryoDankai());
         div.getHokenryoNofuGengaku().getHohenryoNofuNyuryoku().setHiddenRirekiNo(nofu_Row.getTekiyoRirekiNo());
         div.getHokenryoNofuGengaku().getHohenryoNofuNyuryoku().setHiddenLinkNo(nofu_Row.getTekiyoRirekiNo());
@@ -211,8 +215,12 @@ public class KyokaisoGaitoshaPanelHandler {
      * @param nofu_Row 保険料納付
      */
     public void onClick_DeleteButton(dghokenryoNofu_Row nofu_Row) {
-        div.getTxtHohenryoNofuFromDate().setValue(new RDate(nofu_Row.getTekiyoKaishiDate().toString()));
-        div.getTxtHohenryoNofuToDate().setValue(new RDate(nofu_Row.getTekiyoShuryoDate().toString()));
+        if (nofu_Row.getTekiyoKaishiDate() != null && !nofu_Row.getTekiyoKaishiDate().isEmpty()) {
+            div.getTxtHohenryoNofuFromDate().setValue(new RDate(nofu_Row.getTekiyoKaishiDate().toString()));
+        }
+        if (nofu_Row.getTekiyoShuryoDate() != null && !nofu_Row.getTekiyoShuryoDate().isEmpty()) {
+            div.getTxtHohenryoNofuToDate().setValue(new RDate(nofu_Row.getTekiyoShuryoDate().toString()));
+        }
         div.getDdlTekiyouSuruShutokuDankai().setSelectedValue(nofu_Row.getHokenryoDankai());
         div.getHokenryoNofuGengaku().getHohenryoNofuNyuryoku().setHiddenRirekiNo(nofu_Row.getTekiyoRirekiNo());
         div.getHokenryoNofuGengaku().getHohenryoNofuNyuryoku().setHiddenLinkNo(nofu_Row.getTekiyoRirekiNo());
