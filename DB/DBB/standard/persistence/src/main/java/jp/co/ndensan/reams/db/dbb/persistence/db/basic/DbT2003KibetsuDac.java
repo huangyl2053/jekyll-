@@ -113,6 +113,7 @@ public class DbT2003KibetsuDac implements ISaveable<DbT2003KibetsuEntity> {
      * @param 履歴番号 履歴番号
      * @param 通知書番号 通知書番号
      * @return DbT2002FukaEntityの{@code list}
+     * @throws NullPointerException 引数のいずれかがnullの場合
      */
     @Transaction
     public List<DbT2003KibetsuEntity> select介護期別(

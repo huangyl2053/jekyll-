@@ -53,10 +53,10 @@ import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
 public class HonsanteiIdoKanendoFukaKakutei {
 
     private final MapperProvider mapperProvider;
-    DbT7022ShoriDateKanriDac shoriDateKanriDac;
-    DbT2002FukaDac fukaDac;
-    DbT2003KibetsuDac kibetsuDac;
-    UrT0705ChoteiKyotsuDac choteiKyotsuDac;
+    private final DbT7022ShoriDateKanriDac shoriDateKanriDac;
+    private final DbT2002FukaDac fukaDac;
+    private final DbT2003KibetsuDac kibetsuDac;
+    private final UrT0705ChoteiKyotsuDac choteiKyotsuDac;
     private static final RString 連番 = new RString("0001");
     private static final RString 処理枝番 = new RString("0001");
     private static final RString FORMAT = new RString("%04d");
@@ -132,53 +132,7 @@ public class HonsanteiIdoKanendoFukaKakutei {
         int koseiKi;
         for (KanendoIdoFukaKakutei idofukaKakutei : fukaKakuteiList) {
             if (idofukaKakutei.getFukaKakuteiEntity().get更正月() != null) {
-                switch (idofukaKakutei.getFukaKakuteiEntity().get更正月().toString()) {
-                    case "01":
-                        koseiKi = kanendoKiUtil.get期月リスト().get月の期(Tsuki._1月).get期AsInt();
-                        break;
-                    case "02":
-                        koseiKi = kanendoKiUtil.get期月リスト().get月の期(Tsuki._2月).get期AsInt();
-                        break;
-                    case "03":
-                        koseiKi = kanendoKiUtil.get期月リスト().get月の期(Tsuki._3月).get期AsInt();
-                        break;
-                    case "04":
-                        koseiKi = kanendoKiUtil.get期月リスト().get月の期(Tsuki._4月).get期AsInt();
-                        break;
-                    case "05":
-                        koseiKi = kanendoKiUtil.get期月リスト().get月の期(Tsuki._5月).get期AsInt();
-                        break;
-                    case "06":
-                        koseiKi = kanendoKiUtil.get期月リスト().get月の期(Tsuki._6月).get期AsInt();
-                        break;
-                    case "07":
-                        koseiKi = kanendoKiUtil.get期月リスト().get月の期(Tsuki._7月).get期AsInt();
-                        break;
-                    case "08":
-                        koseiKi = kanendoKiUtil.get期月リスト().get月の期(Tsuki._8月).get期AsInt();
-                        break;
-                    case "09":
-                        koseiKi = kanendoKiUtil.get期月リスト().get月の期(Tsuki._9月).get期AsInt();
-                        break;
-                    case "10":
-                        koseiKi = kanendoKiUtil.get期月リスト().get月の期(Tsuki._10月).get期AsInt();
-                        break;
-                    case "11":
-                        koseiKi = kanendoKiUtil.get期月リスト().get月の期(Tsuki._11月).get期AsInt();
-                        break;
-                    case "12":
-                        koseiKi = kanendoKiUtil.get期月リスト().get月の期(Tsuki._12月).get期AsInt();
-                        break;
-                    case "14":
-                        koseiKi = kanendoKiUtil.get期月リスト().get月の期(Tsuki.翌年度4月).get期AsInt();
-                        break;
-                    case "15":
-                        koseiKi = kanendoKiUtil.get期月リスト().get月の期(Tsuki.翌年度5月).get期AsInt();
-                        break;
-                    default:
-                        koseiKi = 0;
-                        break;
-                }
+                koseiKi = getKoseiKi(kanendoKiUtil, idofukaKakutei);
                 set納付額と納期限(parameter, idofukaKakutei, mapper, koseiKi);
             }
             List<DbT2002FukaEntity> dbtFukaList = fukaDac.select更正前のデータ(idofukaKakutei.getFukaKakuteiEntity().
@@ -188,6 +142,41 @@ public class HonsanteiIdoKanendoFukaKakutei {
             }
         }
         return fukaKakuteiList;
+    }
+
+    private int getKoseiKi(KanendoKiUtil kanendoKiUtil, KanendoIdoFukaKakutei idofukaKakutei) {
+        switch (idofukaKakutei.getFukaKakuteiEntity().get更正月().toString()) {
+            case "01":
+                return kanendoKiUtil.get期月リスト().get月の期(Tsuki._1月).get期AsInt();
+            case "02":
+                return kanendoKiUtil.get期月リスト().get月の期(Tsuki._2月).get期AsInt();
+            case "03":
+                return kanendoKiUtil.get期月リスト().get月の期(Tsuki._3月).get期AsInt();
+            case "04":
+                return kanendoKiUtil.get期月リスト().get月の期(Tsuki._4月).get期AsInt();
+            case "05":
+                return kanendoKiUtil.get期月リスト().get月の期(Tsuki._5月).get期AsInt();
+            case "06":
+                return kanendoKiUtil.get期月リスト().get月の期(Tsuki._6月).get期AsInt();
+            case "07":
+                return kanendoKiUtil.get期月リスト().get月の期(Tsuki._7月).get期AsInt();
+            case "08":
+                return kanendoKiUtil.get期月リスト().get月の期(Tsuki._8月).get期AsInt();
+            case "09":
+                return kanendoKiUtil.get期月リスト().get月の期(Tsuki._9月).get期AsInt();
+            case "10":
+                return kanendoKiUtil.get期月リスト().get月の期(Tsuki._10月).get期AsInt();
+            case "11":
+                return kanendoKiUtil.get期月リスト().get月の期(Tsuki._11月).get期AsInt();
+            case "12":
+                return kanendoKiUtil.get期月リスト().get月の期(Tsuki._12月).get期AsInt();
+            case "14":
+                return kanendoKiUtil.get期月リスト().get月の期(Tsuki.翌年度4月).get期AsInt();
+            case "15":
+                return kanendoKiUtil.get期月リスト().get月の期(Tsuki.翌年度5月).get期AsInt();
+            default:
+                return 0;
+        }
     }
 
     private void set納付額と納期限(FukaKakuteiParameter parameter,
@@ -363,7 +352,7 @@ public class HonsanteiIdoKanendoFukaKakutei {
                 new FlexibleYear(choteiNendo.toString()));
         RString 最大年度内連番 = 連番;
         if (shoriDateKanriEntity != null && shoriDateKanriEntity.getNendoNaiRenban() != null) {
-            最大年度内連番 = new RString(String.format(FORMAT.toString(), new Integer(Integer.parseInt(shoriDateKanriEntity.
+            最大年度内連番 = new RString(String.format(FORMAT.toString(), Integer.valueOf(Integer.parseInt(shoriDateKanriEntity.
                     getNendoNaiRenban().toString()) + 1)));
         }
         DbT7022ShoriDateKanriEntity entity = new DbT7022ShoriDateKanriEntity();

@@ -78,7 +78,7 @@ public class KanendoFukaKakutei {
             }
         }
         List<KanendoIdoFukaKakutei> 異動賦課対象List = fukaKakutei.getIdoFukaTaisho(異動処理日付.get基準日時());
-        if (!異動賦課対象List.isEmpty() && 異動賦課対象List.size() > 0) {
+        if (異動賦課対象List != null && !異動賦課対象List.isEmpty()) {
             getKanendoFukaKakuteiHandler(div).set処理対象(異動賦課対象List.get(0));
             getKanendoFukaKakuteiHandler(div).set過年度異動賦課対象一覧(異動賦課対象List);
             CommonButtonHolder.setDisabledByCommonButtonFieldName(賦課対象外を削除, true);
