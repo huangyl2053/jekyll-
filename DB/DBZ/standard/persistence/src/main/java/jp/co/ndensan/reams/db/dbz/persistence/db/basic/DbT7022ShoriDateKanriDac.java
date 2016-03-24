@@ -482,18 +482,18 @@ public class DbT7022ShoriDateKanriDac implements ISaveable<DbT7022ShoriDateKanri
      * @throws NullPointerException 引数のいずれかがnullの場合
      */
     @Transaction
-    public List<DbT7022ShoriDateKanriEntity> select処理状況(FlexibleYear 年度, List<RString> 処理名) throws NullPointerException {
+    public DbT7022ShoriDateKanriEntity select処理状況(FlexibleYear 年度, List<RString> 処理名) throws NullPointerException {
 
         DbAccessorNormalType accessor = new DbAccessorNormalType(session);
 
-        return accessor.select().
+        return accessor.selectSpecific(max(nendoNaiRenban)).
                 table(DbT7022ShoriDateKanri.class).
                 where(and(
                                 in(shoriName, 処理名),
                                 eq(subGyomuCode, SubGyomuCode.DBB介護賦課),
                                 eq(nendo, 年度)
                         )).
-                toList(DbT7022ShoriDateKanriEntity.class);
+                toObject(DbT7022ShoriDateKanriEntity.class);
     }
 
     /**

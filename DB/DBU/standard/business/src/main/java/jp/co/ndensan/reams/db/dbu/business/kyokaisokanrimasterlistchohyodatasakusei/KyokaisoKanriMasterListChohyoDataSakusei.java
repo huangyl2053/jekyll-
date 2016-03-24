@@ -37,7 +37,7 @@ public class KyokaisoKanriMasterListChohyoDataSakusei {
     private static final RString 解除する = new RString("1");
     private static final RString 性別_男 = new RString("男");
     private static final RString 性別_女 = new RString("女");
-    private static final RString codeShubetsu_0243 = new RString("0243");
+    private static final RString CODESHUBETSU_0243 = new RString("0243");
     private static final RString 給付額減額記載解除フラグ_解除する = new RString("解除する");
     private static final RString 改頁 = new RString("1");
 
@@ -181,7 +181,7 @@ public class KyokaisoKanriMasterListChohyoDataSakusei {
                 給付額減額解除.add(RString.EMPTY);
             }
             標準負担減額後負担額.add(new RString(entity.getHyojunFutanKeigengoFutangaku().toString()));
-            居住費軽減後居室種類.add(new RString(CodeMaster.getCode(SubGyomuCode.DBZ介護共通, new CodeShubetsu(codeShubetsu_0243),
+            居住費軽減後居室種類.add(new RString(CodeMaster.getCode(SubGyomuCode.DBZ介護共通, new CodeShubetsu(CODESHUBETSU_0243),
                     new Code(entity.getKyojuhiKeigengoKyoshitsuShuruiCode())).getコード名称().toString()));
             居住費軽減後負担額.add(new RString(entity.getKyojuhiKeigengoHutangaku().toString()));
             食費軽減後負担額.add(new RString(entity.getShokuhiKeigengoHutangaku().toString()));
