@@ -7,6 +7,7 @@ package jp.co.ndensan.reams.db.dbu.divcontroller.entity.parentdiv.DBU0020091;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import jp.co.ndensan.reams.uz.uza.ui.binding.*;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 
 /**
@@ -15,7 +16,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
  * @author 自動生成
  */
 public class pnlService2Div extends Panel {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：バージョン情報無し">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-01-15_09-59-03">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -143,6 +144,16 @@ public class pnlService2Div extends Panel {
     }
 
     @JsonIgnore
+    public TextBoxNum getTxtGenekiKensu() {
+        return this.getPnlA().getTbpA().getTxtGenekiKensu();
+    }
+
+    @JsonIgnore
+    public TextBoxNum getTxtGenekiKyufugaku() {
+        return this.getPnlA().getTbpA().getTxtGenekiKyufugaku();
+    }
+
+    @JsonIgnore
     public tbpIDiv getTbpI() {
         return this.getPnlI().getTbpI();
     }
@@ -150,6 +161,16 @@ public class pnlService2Div extends Panel {
     @JsonIgnore
     public void  setTbpI(tbpIDiv tbpI) {
         this.getPnlI().setTbpI(tbpI);
+    }
+
+    @JsonIgnore
+    public TextBoxNum getTxtIppanKensu() {
+        return this.getPnlI().getTbpI().getTxtIppanKensu();
+    }
+
+    @JsonIgnore
+    public TextBoxNum getTxtIppanKyufugaku() {
+        return this.getPnlI().getTbpI().getTxtIppanKyufugaku();
     }
 
     @JsonIgnore
@@ -163,6 +184,16 @@ public class pnlService2Div extends Panel {
     }
 
     @JsonIgnore
+    public TextBoxNum getTxtTeishotokushaIIKensu() {
+        return this.getPnlU().getTbpU().getTxtTeishotokushaIIKensu();
+    }
+
+    @JsonIgnore
+    public TextBoxNum getTxtTeishotokushaIIKyufugaku() {
+        return this.getPnlU().getTbpU().getTxtTeishotokushaIIKyufugaku();
+    }
+
+    @JsonIgnore
     public tbpEDiv getTbpE() {
         return this.getPnlE().getTbpE();
     }
@@ -173,6 +204,16 @@ public class pnlService2Div extends Panel {
     }
 
     @JsonIgnore
+    public TextBoxNum getTxtTeishotokushaIKensu() {
+        return this.getPnlE().getTbpE().getTxtTeishotokushaIKensu();
+    }
+
+    @JsonIgnore
+    public TextBoxNum getTxtTeishotokushaIKyufugaku() {
+        return this.getPnlE().getTbpE().getTxtTeishotokushaIKyufugaku();
+    }
+
+    @JsonIgnore
     public tbpODiv getTbpO() {
         return this.getPnlO().getTbpO();
     }
@@ -180,6 +221,16 @@ public class pnlService2Div extends Panel {
     @JsonIgnore
     public void  setTbpO(tbpODiv tbpO) {
         this.getPnlO().setTbpO(tbpO);
+    }
+
+    @JsonIgnore
+    public TextBoxNum getTxtGokeiKensu() {
+        return this.getPnlO().getTbpO().getTxtGokeiKensu();
+    }
+
+    @JsonIgnore
+    public TextBoxNum getTxtGokeiKyufugaku() {
+        return this.getPnlO().getTbpO().getTxtGokeiKyufugaku();
     }
 
     // </editor-fold>
