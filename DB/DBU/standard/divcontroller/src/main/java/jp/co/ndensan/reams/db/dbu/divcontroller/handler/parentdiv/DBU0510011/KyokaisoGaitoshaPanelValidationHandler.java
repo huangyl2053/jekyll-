@@ -13,6 +13,7 @@ import jp.co.ndensan.reams.db.dba.definition.message.DbaErrorMessages;
 import jp.co.ndensan.reams.db.dbu.divcontroller.entity.parentdiv.DBU0510011.KyokaisoGaitoshaPanelDiv;
 import jp.co.ndensan.reams.db.dbu.divcontroller.entity.parentdiv.DBU0510011.dgKyokaisouGaitouItran_Row;
 import jp.co.ndensan.reams.db.dbu.divcontroller.entity.parentdiv.DBU0510011.dghokenryoNofu_Row;
+import jp.co.ndensan.reams.db.dbz.definition.message.DbzErrorMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -33,7 +34,7 @@ public class KyokaisoGaitoshaPanelValidationHandler {
     private static final RString 該当フラグ = new RString("1");
     private static final RString 非該当フラグ = new RString("2");
     private static final RString 該当日 = new RString("平17.10.1");
-    private static final RString 保険料納付減 = new RString("適用する");
+    private static final RString 保険料納付減 = new RString("1");
 
     /**
      * コンストラクタです。
@@ -54,8 +55,10 @@ public class KyokaisoGaitoshaPanelValidationHandler {
 
         RDate 開始日 = div.getTxtKaishibi().getValue();
         RDate 終了日 = div.getTxtShuryobi().getValue();
-        if (!開始日.isBefore(終了日)) {
-            validPairs.add(new ValidationMessageControlPair(new KyokaisoGaitoshaErrorMessage(UrErrorMessages.終了日が開始日以前)));
+        if (開始日 != null && 終了日 != null) {
+            if (!開始日.isBefore(終了日)) {
+                validPairs.add(new ValidationMessageControlPair(RRVMessages.開始日と終了日の順番の整合性チェック));
+            }
         }
         境界層該当一覧情報チェック(validPairs);
         境界層保険料段階情報チェック(validPairs);
@@ -74,12 +77,14 @@ public class KyokaisoGaitoshaPanelValidationHandler {
             validPairs.add(new ValidationMessageControlPair(RRVMessages.境界層措置決定情報チェック));
         }
 
-        標準負担額該当の開始日チェック(validPairs);
-        居住費等負担額減額該当の開始日チェック(validPairs);
+        if (開始日 != null) {
+            標準負担額該当の開始日チェック(validPairs);
+            居住費等負担額減額該当の開始日チェック(validPairs);
+            食費負担額減額該当の開始日チェック(validPairs);
+            読替後高額介護世帯上限額該当の開始日チェック(validPairs);
+            組合せチェック(validPairs);
+        }
         居住費軽減後居室種類チェック(validPairs);
-        食費負担額減額該当の開始日チェック(validPairs);
-        読替後高額介護世帯上限額該当の開始日チェック(validPairs);
-        組合せチェック(validPairs);
         保険料納付減額存在チェック(validPairs);
         return validPairs;
     }
@@ -151,6 +156,7 @@ public class KyokaisoGaitoshaPanelValidationHandler {
 
     private static enum RRVMessages implements IValidationMessage {
 
+        開始日と終了日の順番の整合性チェック(DbzErrorMessages.期間が不正_未来日付不可, "開始日", "終了日"),
         境界層措置決定情報チェック(DbaErrorMessages.記載解除_減額_低減適用のいずれか1つ以上選択),
         期間が重複チェック(UrErrorMessages.期間が重複),
         標準負担額該当の開始日チェック(DbaErrorMessages.開始日が制度改正後のため減額措置登録不可, "開始日"),

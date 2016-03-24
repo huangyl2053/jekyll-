@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbb.business.core.kanri.HokenryoDankai;
 import jp.co.ndensan.reams.db.dbb.service.core.kanri.HokenryoDankaiSettings;
+import jp.co.ndensan.reams.db.dbd.definition.core.gemmengengaku.RiyoshaFutanDankai;
 import jp.co.ndensan.reams.db.dbu.business.kyokaisogaitosha.KyokaisoGaitoshaJoho;
 import jp.co.ndensan.reams.db.dbu.business.kyokaisogaitosha.KyokaisoHokenryo;
 import jp.co.ndensan.reams.db.dbu.divcontroller.entity.parentdiv.DBU0510011.KyokaisoGaitoshaPanelDiv;
@@ -78,6 +79,9 @@ public class KyokaisoGaitoshaPanelHandler {
      */
     public void onLoad(List<KyokaisoGaitoshaJoho> 境界層該当一覧情報) {
         RString 状態 = ViewStateHolder.get(ViewStateKeys.境界層該当者台帳管理_状態, RString.class);
+        div.getDdlKyojuhiGendogakuDankai().setDataSource(居住費軽減負担限度額段階ドロップダウンリスト());
+        div.getDdlKyoshituShurui().setDataSource(居住費軽減後居室種類ドロップダウンリスト());
+        div.getDdlShokuhiGakenFutanGendogakuDankai().setDataSource(居住費軽減負担限度額段階ドロップダウンリスト());
         if (照会.equals(状態)) {
             set境界層該当一覧(境界層該当一覧情報, 状態);
             div.getBtnTuika().setVisible(false);
@@ -86,9 +90,6 @@ public class KyokaisoGaitoshaPanelHandler {
             div.getDgKyokaisouGaitouItran().getGridSetting().setIsShowDeleteButtonColumn(false);
         }
         if (更新.equals(状態)) {
-            div.getDdlKyojuhiGendogakuDankai().setDataSource(居住費軽減負担限度額段階ドロップダウンリスト());
-            div.getDdlKyoshituShurui().setDataSource(居住費軽減後居室種類ドロップダウンリスト());
-            div.getDdlShokuhiGakenFutanGendogakuDankai().setDataSource(居住費軽減負担限度額段階ドロップダウンリスト());
             set境界層該当一覧(境界層該当一覧情報, 状態);
         }
     }
@@ -97,11 +98,10 @@ public class KyokaisoGaitoshaPanelHandler {
      * 追加ボタンが押下された場合、境界層該当一覧エリアを閉じて、明細エリアを空白で表示します。
      */
     public void onClick_btnTuika() {
-        // TODO 追加する場合、設定不明、QA:788回答まち、
-//                div.getDdlSeidaiJogengaku().setDataSource(
-//                読替後高額介護世帯上限額ドロップダウンリスト(new RDate(row.getShinseiDate().toString())));
-//                div.getDdlTekiyouSuruShutokuDankai().setDataSource(
-//                所得段階ドロップダウンリスト(new RDate(row.getShinseiDate().toString())));
+        div.getDdlSeidaiJogengaku().setDataSource(
+                読替後高額介護世帯上限額ドロップダウンリスト(RDate.getNowDate()));
+        div.getDdlTekiyouSuruShutokuDankai().setDataSource(
+                所得段階ドロップダウンリスト(RDate.getNowDate()));
         div.getKyokaisouGaitouItiran().setIranState(状態_追加);
         div.getDghokenryoNofu().getGridSetting().setIsShowSelectButtonColumn(true);
         div.getDghokenryoNofu().getGridSetting().setIsShowDeleteButtonColumn(true);
@@ -195,7 +195,7 @@ public class KyokaisoGaitoshaPanelHandler {
     public void onClick_ModifyButton(dghokenryoNofu_Row nofu_Row) {
         div.getTxtHohenryoNofuFromDate().setValue(new RDate(nofu_Row.getTekiyoKaishiDate().toString()));
         div.getTxtHohenryoNofuToDate().setValue(new RDate(nofu_Row.getTekiyoShuryoDate().toString()));
-        div.getDdlTekiyouSuruShutokuDankai().setSelectedKey(nofu_Row.getHokenryoDankai());
+        div.getDdlTekiyouSuruShutokuDankai().setSelectedValue(nofu_Row.getHokenryoDankai());
         div.getHokenryoNofuGengaku().getHohenryoNofuNyuryoku().setHiddenRirekiNo(nofu_Row.getTekiyoRirekiNo());
         div.getHokenryoNofuGengaku().getHohenryoNofuNyuryoku().setHiddenLinkNo(nofu_Row.getTekiyoRirekiNo());
         div.getTxtHohenryoNofuFromDate().setDisabled(false);
@@ -213,7 +213,7 @@ public class KyokaisoGaitoshaPanelHandler {
     public void onClick_DeleteButton(dghokenryoNofu_Row nofu_Row) {
         div.getTxtHohenryoNofuFromDate().setValue(new RDate(nofu_Row.getTekiyoKaishiDate().toString()));
         div.getTxtHohenryoNofuToDate().setValue(new RDate(nofu_Row.getTekiyoShuryoDate().toString()));
-        div.getDdlTekiyouSuruShutokuDankai().setSelectedKey(nofu_Row.getHokenryoDankai());
+        div.getDdlTekiyouSuruShutokuDankai().setSelectedValue(nofu_Row.getHokenryoDankai());
         div.getHokenryoNofuGengaku().getHohenryoNofuNyuryoku().setHiddenRirekiNo(nofu_Row.getTekiyoRirekiNo());
         div.getHokenryoNofuGengaku().getHohenryoNofuNyuryoku().setHiddenLinkNo(nofu_Row.getTekiyoRirekiNo());
         div.getTxtHohenryoNofuFromDate().setDisabled(true);
@@ -248,7 +248,7 @@ public class KyokaisoGaitoshaPanelHandler {
                 div.getTxtHohenryoNofuFromDate().getValue().getYearMonth().toString().replace(new RString("."), RString.EMPTY))));
         row.setTekiyoShuryoDate(年月フォーマット(new FlexibleYearMonth(
                 div.getTxtHohenryoNofuToDate().getValue().getYearMonth().toString().replace(new RString("."), RString.EMPTY))));
-        div.getDghokenryoNofu().getActiveRow().setTekiyoKaishiDate(div.getDdlTekiyouSuruShutokuDankai().getSelectedValue());
+        row.setHokenryoDankai(div.getDdlTekiyouSuruShutokuDankai().getSelectedValue());
         int index = div.getDghokenryoNofu().getClickedRowId();
         if (状態_追加.equals(div.getHokenryoNofuGengaku().getTekiyoState())
                 || div.getHokenryoNofuGengaku().getTekiyoState().isEmpty()) {
@@ -403,11 +403,6 @@ public class KyokaisoGaitoshaPanelHandler {
         List<dgKyokaisouGaitouItran_Row> rowList = new ArrayList<>();
         for (KyokaisoGaitoshaJoho 境界層該当一覧 : 境界層該当一覧情報) {
             dgKyokaisouGaitouItran_Row row = new dgKyokaisouGaitouItran_Row();
-            if (状態.isEmpty()) {
-                row.setSelectButtonState(DataGridButtonState.Disabled);
-                row.setModifyButtonState(DataGridButtonState.Disabled);
-                row.setDeleteButtonState(DataGridButtonState.Disabled);
-            }
             row.setShinseiDate(日付フォーマット(境界層該当一覧.get申請年月日()));
             row.setKetteiDate(日付フォーマット(境界層該当一覧.get境界層措置決定年月日()));
             row.setSochiGaitoHigaitoKubun(措置該当_非該当(境界層該当一覧.get措置該当_非該当区分()));
@@ -504,9 +499,15 @@ public class KyokaisoGaitoshaPanelHandler {
     }
 
     private void 境界層保険料段階一覧(List<KyokaisoHokenryo> 境界層保険料段階情報, RDate 申請年月日) {
+        RString 状態 = ViewStateHolder.get(ViewStateKeys.境界層該当者台帳管理_状態, RString.class);
         List<dghokenryoNofu_Row> nofu_rowList = new ArrayList<>();
         for (KyokaisoHokenryo 境界層保険料段階 : 境界層保険料段階情報) {
             dghokenryoNofu_Row nofu_row = new dghokenryoNofu_Row();
+            if (状態_削除.equals(div.getKyokaisouGaitouItiran().getIranState()) || 照会.equals(状態)) {
+                nofu_row.setSelectButtonState(DataGridButtonState.Disabled);
+                nofu_row.setModifyButtonState(DataGridButtonState.Disabled);
+                nofu_row.setDeleteButtonState(DataGridButtonState.Disabled);
+            }
             nofu_row.setState(RString.EMPTY);
             nofu_row.setTekiyoKaishiDate(年月フォーマット(境界層保険料段階.get適用開始年月()));
             nofu_row.setTekiyoShuryoDate(年月フォーマット(境界層保険料段階.get適用終了年月()));
@@ -583,14 +584,12 @@ public class KyokaisoGaitoshaPanelHandler {
 
     private List<KeyValueDataSource> 居住費軽減負担限度額段階ドロップダウンリスト() {
         List<KeyValueDataSource> dataSource = new ArrayList<>();
-        // DBAのEnum「利用者負担段階」の各項目をEnumに設定する。
-        // 但し、DBCに「RiyoshaFutanDankai」があり、DBAにが無し、QA：788　回答まち、
-//        for (RiyoshaFutanDankai riyoshaFutanDankai : RiyoshaFutanDankai.values()) {
-//            KeyValueDataSource keyValue = new KeyValueDataSource();
-//            keyValue.setKey(riyoshaFutanDankai.getコード());
-//            keyValue.setValue(riyoshaFutanDankai.get名称());
-//            dataSource.add(keyValue);
-//        }
+        for (RiyoshaFutanDankai riyoshaFutanDankai : RiyoshaFutanDankai.values()) {
+            KeyValueDataSource keyValue = new KeyValueDataSource();
+            keyValue.setKey(riyoshaFutanDankai.getコード());
+            keyValue.setValue(riyoshaFutanDankai.get名称());
+            dataSource.add(keyValue);
+        }
         return dataSource;
     }
 
@@ -670,7 +669,8 @@ public class KyokaisoGaitoshaPanelHandler {
 
     private List<KeyValueDataSource> 所得段階ドロップダウンリスト(RDate 申請日) {
         List<KeyValueDataSource> dataSourceList = new ArrayList<>();
-        List<HokenryoDankai> 所得段階 = HokenryoDankaiSettings.createInstance().get保険料段階ListIn(new FlexibleYear(申請日.toDateString())).asList();
+        List<HokenryoDankai> 所得段階 = HokenryoDankaiSettings.createInstance().
+                get保険料段階ListIn(new FlexibleYear(申請日.getYear().toDateString())).asList();
         for (HokenryoDankai hokenryo : 所得段階) {
             KeyValueDataSource keyValue = new KeyValueDataSource();
             keyValue.setKey(hokenryo.get段階Index());

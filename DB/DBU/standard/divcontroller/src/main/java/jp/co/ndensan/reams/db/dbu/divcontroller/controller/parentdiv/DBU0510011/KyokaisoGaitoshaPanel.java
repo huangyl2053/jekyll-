@@ -51,7 +51,7 @@ public class KyokaisoGaitoshaPanel {
     private static final RString 状態_追加 = new RString("追加");
     private static final RString 状態_修正 = new RString("修正");
     private static final RString 状態_削除 = new RString("削除");
-    private static final RString 更新 = new RString("更新");
+    private static final RString 保存 = new RString("保存");
 
     /**
      * 画面初期化処理です。
@@ -60,7 +60,6 @@ public class KyokaisoGaitoshaPanel {
      * @return ResponseData<KyokaisoGaitoshaPanelDiv>
      */
     public ResponseData<KyokaisoGaitoshaPanelDiv> onLoad(KyokaisoGaitoshaPanelDiv div) {
-
         RString 状態 = ViewStateHolder.get(ViewStateKeys.境界層該当者台帳管理_状態, RString.class);
         HihokenshaNo 被保険者番号 = ViewStateHolder.get(ViewStateKeys.境界層該当者台帳管理_被保険者番号, HihokenshaNo.class);
         div.getCcdKaigoAtena().onLoad(ViewStateHolder.get(ViewStateKeys.境界層該当者台帳管理_識別コード, ShikibetsuCode.class));
@@ -305,7 +304,7 @@ public class KyokaisoGaitoshaPanel {
                 manager.delKyokaisoGaitoshaJoho(kyokaisoGaito, 被保険者番号, new Decimal(最新履歴番号), new Decimal(最新履歴番号));
             }
             div.getCcdKanryoMessage().setSuccessMessage(new RString(
-                    UrInformationMessages.正常終了.getMessage().replace(更新.toString()).evaluate()), RString.EMPTY, RString.EMPTY);
+                    UrInformationMessages.正常終了.getMessage().replace(保存.toString()).evaluate()), RString.EMPTY, RString.EMPTY);
             return ResponseData.of(div).setState(DBU0510011StateName.AfterSave);
         }
 
