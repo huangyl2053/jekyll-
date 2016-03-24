@@ -10,7 +10,6 @@ import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5595KaigoNinteiShinsakaiIin
 import static jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5595KaigoNinteiShinsakaiIinShozokuKikanJoho.remban;
 import static jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5595KaigoNinteiShinsakaiIinShozokuKikanJoho.shinsakaiIinCode;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5595KaigoNinteiShinsakaiIinShozokuKikanJohoEntity;
-import jp.co.ndensan.reams.db.dbz.persistence.db.basic.ISaveable;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.core.mybatis.SqlSession;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -26,6 +25,7 @@ import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
  */
 public class DbT5595KaigoNinteiShinsakaiIinShozokuKikanJohoDac implements ISaveable<DbT5595KaigoNinteiShinsakaiIinShozokuKikanJohoEntity> {
 
+    private static final RString 所属機関情報 = new RString("介護認定審査会委員所属機関情報エンティティ");
     @InjectSession
     private SqlSession session;
 
@@ -77,7 +77,7 @@ public class DbT5595KaigoNinteiShinsakaiIinShozokuKikanJohoDac implements ISavea
     @Transaction
     @Override
     public int save(DbT5595KaigoNinteiShinsakaiIinShozokuKikanJohoEntity entity) {
-        requireNonNull(entity, UrSystemErrorMessages.値がnull.getReplacedMessage("介護認定審査会委員所属機関情報エンティティ"));
+        requireNonNull(entity, UrSystemErrorMessages.値がnull.getReplacedMessage(所属機関情報.toString()));
 
         return DbAccessors.saveBy(new DbAccessorNormalType(session), entity);
     }
@@ -90,7 +90,7 @@ public class DbT5595KaigoNinteiShinsakaiIinShozokuKikanJohoDac implements ISavea
      */
     @Transaction
     public int deletePhysical(DbT5595KaigoNinteiShinsakaiIinShozokuKikanJohoEntity entity) {
-        requireNonNull(entity, UrSystemErrorMessages.値がnull.getReplacedMessage("介護認定審査会委員所属機関情報エンティティ"));
+        requireNonNull(entity, UrSystemErrorMessages.値がnull.getReplacedMessage(所属機関情報.toString()));
         DbAccessorNormalType accessor = new DbAccessorNormalType(session);
 
         return accessor.deletePhysical(entity).execute();
