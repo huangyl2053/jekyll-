@@ -43,7 +43,6 @@ public class TokubetuChosyutaisyosyaTorokuManager {
     private final MapperProvider mapperProvider;
     private final TokubetuChosyutaisyosyaTorokusqlparamEntity sqlparams;
     private final RString 空白 = RString.EMPTY;
-    private final FlexibleDate 空白date = FlexibleDate.EMPTY;
     private final RString 連番_0001 = new RString("0001");
     private final RString 連番_0002 = new RString("0002");
     private final RString 連番_0003 = new RString("0003");
