@@ -162,7 +162,7 @@ public class KyokaisoGaitoshaPanelValidationHandler {
         標準負担額該当の開始日チェック(DbaErrorMessages.開始日が制度改正後のため減額措置登録不可, "開始日"),
         居住費等負担額減額該当の開始日チェック(DbaErrorMessages.開始日が制度改正前のため減額措置登録不可,
                 "特定介護サービス等に係る居住費等の負担額"),
-        居住費軽減後居室種類チェック(DbaErrorMessages.適用する項目を設定, "所得段階"),
+        居住費軽減後居室種類チェック(DbaErrorMessages.適用する項目を設定, "居室の種類"),
         食費負担額減額該当の開始日チェック(DbaErrorMessages.開始日が制度改正前のため減額措置登録不可,
                 "特定介護サービス等に係る食費の負担額"),
         読替後高額介護世帯上限額該当の開始日チェック(DbaErrorMessages.開始日が制度改正前のため減額措置登録不可,

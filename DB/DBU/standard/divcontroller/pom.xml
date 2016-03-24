@@ -36,6 +36,14 @@
         <dependency>
             <groupId>jp.co.ndensan.reams.db.dbb</groupId>
             <artifactId>DbbService</artifactId>
+            <version>1.0-SNAPSHOT</version>
+            <type>jar</type>
+        </dependency>
+        <dependency>
+            <groupId>jp.co.ndensan.reams.db.dbb</groupId>
+            <artifactId>DbbPersistence</artifactId>
+            <version>1.0-SNAPSHOT</version>
+            <scope>runtime</scope>
         </dependency>
         <!-- DBC -->
         <!-- DBD -->
