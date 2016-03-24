@@ -288,11 +288,12 @@ public class KyokaisoGaitoshaPanelHandler {
      */
     public KyokaisoHokenryoDankai editHokenryoDankai(
             KyokaisoHokenryoDankai hokenryoDankai) {
+        FlexibleYearMonth 適用終了年月 = FlexibleYearMonth.EMPTY;
         if (div.getTxtHohenryoNofuToDate().getValue() != null) {
-            hokenryoDankai.createBuilderForEdit()
-                    .set適用終了年月(new FlexibleYearMonth(div.getTxtHohenryoNofuToDate().getValue().seireki().getYearMonth().replace(new RString("."), RString.EMPTY)));
+            適用終了年月 = new FlexibleYearMonth(div.getTxtHohenryoNofuToDate().getValue().seireki().getYearMonth().replace(new RString("."), RString.EMPTY));
         }
         return hokenryoDankai.createBuilderForEdit()
+                .set適用終了年月(適用終了年月)
                 .set保険料納付減額後保険料段階(div.getDdlTekiyouSuruShutokuDankai().getSelectedKey() == null
                         ? RString.EMPTY : div.getDdlTekiyouSuruShutokuDankai().getSelectedKey())
                 .build();
