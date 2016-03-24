@@ -122,10 +122,10 @@ public class DbT5221NinteichosaScheduleDac implements ISaveable<DbT5221Ninteicho
     public int getcount(FlexibleDate 認定調査予定年月日, Code 調査地区コード, RString 認定調査委託先コード,
             RString 認定調査員コード, LasdecCode 市町村コード) {
         requireNonNull(認定調査予定年月日, UrSystemErrorMessages.値がnull.getReplacedMessage("認定調査予定年月日"));
-        requireNonNull(調査地区コード, UrSystemErrorMessages.値がnull.getReplacedMessage("調査地区コード"));
+        requireNonNull(調査地区コード, UrSystemErrorMessages.値がnull.getReplacedMessage("調査地区CODE"));
         requireNonNull(認定調査委託先コード, UrSystemErrorMessages.値がnull.getReplacedMessage("認定調査委託先コード"));
         requireNonNull(認定調査員コード, UrSystemErrorMessages.値がnull.getReplacedMessage("認定調査員コード"));
-        requireNonNull(市町村コード, UrSystemErrorMessages.値がnull.getReplacedMessage("市町村コード"));
+        requireNonNull(市町村コード, UrSystemErrorMessages.値がnull.getReplacedMessage("市町村CODE"));
 
         DbAccessorNormalType accessor = new DbAccessorNormalType(session);
 
