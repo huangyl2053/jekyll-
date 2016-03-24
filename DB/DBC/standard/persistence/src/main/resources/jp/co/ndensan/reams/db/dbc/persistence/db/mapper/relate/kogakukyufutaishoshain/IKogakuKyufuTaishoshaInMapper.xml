@@ -213,7 +213,7 @@
         一時テーブル."serviceHiyoGokeiGaku",
         一時テーブル."riyoshaFutanGaku",
         一時テーブル."bikou"
-        from "DbTKogakuKyufuTaishoshaDataTempTable" as 一時テーブル,
+        from "DbTKogakuKyufuTaishoshaDataTempTable" as 一時テーブル
         LEFT JOIN rgdb."DbT3054KogakuKyufuTaishoshaMeisai" as DbT3054
         ON 一時テーブル."hihokenshaNo" = DbT3054."hihokenshaNo"
         AND 一時テーブル."serviceTeikyoYM" = DbT3054."serviceTeikyoYM"

@@ -10,11 +10,11 @@ import java.util.List;
 import jp.co.ndensan.reams.db.dbc.business.report.kogakukyufutaishoshaichiran.KogakuKyufuTaishoshaIchiranItem;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.kogakukyufutaishoshain.KogakuKyufuMeisaiGokeiEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.kogakukyufutaishoshain.KogakuKyufuTaishoshaInEntity;
-import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
 import jp.co.ndensan.reams.uz.uza.lang.EraType;
 import jp.co.ndensan.reams.uz.uza.lang.FillType;
 import jp.co.ndensan.reams.uz.uza.lang.FirstYear;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
+import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
 import jp.co.ndensan.reams.uz.uza.lang.Separator;
@@ -56,16 +56,17 @@ public class KogakuKyufuTaishoshaIchiranhyo {
             RString 並び順4, RString 並び順5, RString 改頁,
             List<KogakuKyufuTaishoshaInEntity> 高額介護サービス費給付対象者一覧List) {
         List<KogakuKyufuTaishoshaIchiranItem> dataList = new ArrayList<>();
-        YMDHMS now = YMDHMS.now();
         RStringBuilder builder = new RStringBuilder();
-        builder.append(now.wareki()
-                .eraType(EraType.KANJI_RYAKU)
+        RDateTime now = RDateTime.now();
+        builder.append(now.getDate().wareki()
+                .eraType(EraType.KANJI)
                 .firstYear(FirstYear.GAN_NEN)
                 .separator(Separator.JAPANESE)
                 .fillType(FillType.BLANK)
                 .toDateString());
+        builder.append(RString.HALF_SPACE);
+        builder.append(now.getTime().toFormattedTimeString(DisplayTimeFormat.HH時mm分ss秒));
         builder.append(STRING_BLANK_HANKAKU);
-        builder.append(now.getRDateTime().getTime().toFormattedTimeString(DisplayTimeFormat.HH時mm分ss秒));
         builder.append(DATE_作成);
         作成日時 = builder.toRString();
         this.並び順の1件目 = 並び順1 == null ? RString.EMPTY : 並び順1;
