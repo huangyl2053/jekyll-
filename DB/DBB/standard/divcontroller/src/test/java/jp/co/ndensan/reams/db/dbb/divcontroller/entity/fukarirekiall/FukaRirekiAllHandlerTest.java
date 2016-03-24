@@ -15,7 +15,7 @@ import jp.co.ndensan.reams.db.dbb.business.core.basic.HokenryoDankai;
 import jp.co.ndensan.reams.db.dbb.business.core.basic.Kibetsu;
 import jp.co.ndensan.reams.db.dbb.business.core.basic.KibetsuChoteiKyotsu;
 import jp.co.ndensan.reams.db.dbb.business.core.basic.KiwarigakuMeisai;
-import jp.co.ndensan.reams.db.dbb.definition.enumeratedtype.fuka.ChoshuHohoKibetsu;
+import jp.co.ndensan.reams.db.dbb.definition.core.choshuhoho.ChoshuHohoKibetsu;
 import jp.co.ndensan.reams.db.dbb.divcontroller.entity.commonchilddiv.fukarirekiall.FukaRirekiAll.FukaRirekiAllDiv;
 import jp.co.ndensan.reams.db.dbb.divcontroller.entity.commonchilddiv.fukarirekiall.FukaRirekiAll.FukaRirekiAllHandler;
 import jp.co.ndensan.reams.db.dbb.divcontroller.entity.commonchilddiv.fukarirekiall.FukaRirekiAll.dgFukaRirekiAll_Row;
@@ -193,7 +193,7 @@ public class FukaRirekiAllHandlerTest extends DbzTestBase {
 
     private static KiwarigakuMeisai createKiwarigakuModel(ChoshuHohoKibetsu 徴収方法, int 調定額, int 収入額) {
         Kibetsu kibetsuModel = mock(Kibetsu.class);
-        when(kibetsuModel.get徴収方法()).thenReturn(徴収方法.code());
+        when(kibetsuModel.get徴収方法()).thenReturn(徴収方法.getコード());
 
         ChoteiKyotsu choteiKyotsuModel = mock(ChoteiKyotsu.class);
         when(choteiKyotsuModel.get調定額()).thenReturn(new Decimal(調定額));
