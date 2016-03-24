@@ -100,6 +100,7 @@ public class NinteiShinsakaiIinGuide {
         }
         RString shinsakaiIinName = div.getKensakuJoken().getTxtShinsakaiIinName().getValue();
         RString seibetsu = div.getKensakuJoken().getDdlSeibetsu().getSelectedKey();
+        ShoKisaiHokenshaNo hokensha = div.getKensakuJoken().getCcdHokensha().getSelectedItem().get証記載保険者番号();
         RString shinsainShikakuCode = div.getKensakuJoken().getDdlShinsainShikakuCode().getSelectedKey();
         RString iryoKikan = div.getKensakuJoken().getShosaiJoken().getDdlIryoKikan().getSelectedKey();
         RString kaigoJigyosha = div.getKensakuJoken().getShosaiJoken().getDdlKaigoJigyosha().getSelectedKey();
@@ -107,7 +108,8 @@ public class NinteiShinsakaiIinGuide {
         Decimal maxKensu = div.getKensakuJoken().getTxtMaxKensu().getValue();
         RString kikenFlag = getChkFlag(div.getKensakuJoken().getShosaiJoken().getChkKiken().getSelectedKeys());
         RString haishiFlag = getChkFlag(div.getKensakuJoken().getShosaiJoken().getChkHaishi().getSelectedKeys());
-        NinteiShinsakaiIinGuideMapperParameter parameter = NinteiShinsakaiIinGuideMapperParameter.createSelectByKeyParam(
+        NinteiShinsakaiIinGuideMapperParameter parameter;
+        parameter = NinteiShinsakaiIinGuideMapperParameter.createSelectByKeyParam(
                 shinsakaiIinCodeFrom,
                 shinsakaiIinCodeTo,
                 shinsakaiIinName == null ? AtenaMeisho.EMPTY : new AtenaMeisho(shinsakaiIinName),
@@ -119,6 +121,7 @@ public class NinteiShinsakaiIinGuide {
                 kikenFlag,
                 haishiFlag,
                 maxKensu,
+                hokensha,
                 new FlexibleDate(RDate.getNowDate().toDateString())
         );
         List<NinteiShinsakaiIinGuideResult> 審査会委員一覧リスト = NinteiShinsakaiIinGuideManager.createInstance().
@@ -227,5 +230,4 @@ public class NinteiShinsakaiIinGuide {
     private NinteiShinsakaiIinGuideHandler getHandler(NinteiShinsakaiIinGuideDiv div) {
         return new NinteiShinsakaiIinGuideHandler(div);
     }
-
 }

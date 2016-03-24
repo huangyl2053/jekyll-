@@ -5,6 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbz.definition.mybatis.param.ninteishinsakaiiinguide;
 
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShoKisaiHokenshaNo;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaMeisho;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
@@ -16,6 +17,7 @@ import jp.co.ndensan.reams.uz.uza.math.Decimal;
  *
  */
 @lombok.Getter
+@SuppressWarnings("PMD.UnusedPrivateField")
 public final class NinteiShinsakaiIinGuideMapperParameter {
 
     private final RString shinsakaiIinCodeFrom;
@@ -30,6 +32,7 @@ public final class NinteiShinsakaiIinGuideMapperParameter {
     private final RString haishiFlag;
     private final Decimal maxKensu;
     private final FlexibleDate systemDate;
+    private final ShoKisaiHokenshaNo shoKisaiHokenshaNo;
     private final boolean isShinsakaiIinKaishiYMDFlag;
     private final boolean isShinsakaiIinShuryoYMDFlag;
     private final boolean isShinsakaiIinShimeiFlag;
@@ -38,6 +41,7 @@ public final class NinteiShinsakaiIinGuideMapperParameter {
     private final boolean isShujiiIryokikanCodeFlag;
     private final boolean isNinteiChosainNoFlag;
     private final boolean isSonotaKikanCodeFlag;
+    private final boolean isShoKisaiHokenshaNoFlag;
 
     /**
      * コンストラクタです。
@@ -53,6 +57,8 @@ public final class NinteiShinsakaiIinGuideMapperParameter {
      * @param kikenFlag 期限
      * @param haishiFlag 廃止
      * @param maxKensu 最大取得件数上限
+     * @param systemDate SYSTEMDATE
+     * @param shoKisaiHokenshaNo 証記載保険者番号
      * @return 審査会委員一覧情報の検索パラメータ
      * @throws NullPointerException 引数のいずれかが{@code null}の場合
      */
@@ -69,6 +75,7 @@ public final class NinteiShinsakaiIinGuideMapperParameter {
             RString haishiFlag,
             Decimal maxKensu,
             FlexibleDate systemDate,
+            ShoKisaiHokenshaNo shoKisaiHokenshaNo,
             boolean isShinsakaiIinKaishiYMDFlag,
             boolean isShinsakaiIinShuryoYMDFlag,
             boolean isShinsakaiIinShimeiFlag,
@@ -76,7 +83,8 @@ public final class NinteiShinsakaiIinGuideMapperParameter {
             boolean isShinsakaiIinShikakuCodeFlag,
             boolean isShujiiIryokikanCodeFlag,
             boolean isNinteiChosainNoFlag,
-            boolean isSonotaKikanCodeFlag) {
+            boolean isSonotaKikanCodeFlag,
+            boolean isShoKisaiHokenshaNoFlag) {
         this.shinsakaiIinCodeFrom = shinsakaiIinCodeFrom;
         this.shinsakaiIinCodeTo = shinsakaiIinCodeTo;
         this.shinsakaiIinShimei = shinsakaiIinShimei;
@@ -89,6 +97,7 @@ public final class NinteiShinsakaiIinGuideMapperParameter {
         this.haishiFlag = haishiFlag;
         this.maxKensu = maxKensu;
         this.systemDate = systemDate;
+        this.shoKisaiHokenshaNo = shoKisaiHokenshaNo;
         this.isShinsakaiIinKaishiYMDFlag = isShinsakaiIinKaishiYMDFlag;
         this.isShinsakaiIinShuryoYMDFlag = isShinsakaiIinShuryoYMDFlag;
         this.isShinsakaiIinShimeiFlag = isShinsakaiIinShimeiFlag;
@@ -97,6 +106,7 @@ public final class NinteiShinsakaiIinGuideMapperParameter {
         this.isShujiiIryokikanCodeFlag = isShujiiIryokikanCodeFlag;
         this.isNinteiChosainNoFlag = isNinteiChosainNoFlag;
         this.isSonotaKikanCodeFlag = isSonotaKikanCodeFlag;
+        this.isShoKisaiHokenshaNoFlag = isShoKisaiHokenshaNoFlag;
 
     }
 
@@ -115,6 +125,7 @@ public final class NinteiShinsakaiIinGuideMapperParameter {
      * @param haishiFlag 廃止
      * @param maxKensu 最大取得件数上限
      * @param systemDate SYSTEMDATE
+     * @param shoKisaiHokenshaNo 証記載保険者番号
      * @return 審査会委員一覧情報の検索パラメータ
      */
     public static NinteiShinsakaiIinGuideMapperParameter createSelectByKeyParam(
@@ -129,8 +140,8 @@ public final class NinteiShinsakaiIinGuideMapperParameter {
             RString kikenFlag,
             RString haishiFlag,
             Decimal maxKensu,
+            ShoKisaiHokenshaNo shoKisaiHokenshaNo,
             FlexibleDate systemDate) {
-
         boolean isShinsakaiIinKaishiYMDFlag = false;
         boolean isShinsakaiIinShuryoYMDFlag = false;
         boolean isShinsakaiIinShimeiFlag = false;
@@ -139,6 +150,7 @@ public final class NinteiShinsakaiIinGuideMapperParameter {
         boolean isShujiiIryokikanCodeFlag = false;
         boolean isNinteiChosainNoFlag = false;
         boolean isSonotaKikanCodeFlag = false;
+        boolean isShoKisaiHokenshaNoFlag = false;
 
         if (shinsakaiIinKaishiYMD != null && !shinsakaiIinKaishiYMD.isEmpty()) {
             isShinsakaiIinKaishiYMDFlag = true;
@@ -164,6 +176,9 @@ public final class NinteiShinsakaiIinGuideMapperParameter {
         if (sonotaKikanCode != null && !sonotaKikanCode.isEmpty()) {
             isSonotaKikanCodeFlag = true;
         }
+        if (shoKisaiHokenshaNo != null && !shoKisaiHokenshaNo.isEmpty()) {
+            isShoKisaiHokenshaNoFlag = true;
+        }
         return new NinteiShinsakaiIinGuideMapperParameter(
                 shinsakaiIinKaishiYMD,
                 shinsakaiIinShuryoYMD,
@@ -177,6 +192,7 @@ public final class NinteiShinsakaiIinGuideMapperParameter {
                 haishiFlag,
                 maxKensu,
                 systemDate,
+                shoKisaiHokenshaNo,
                 isShinsakaiIinKaishiYMDFlag,
                 isShinsakaiIinShuryoYMDFlag,
                 isShinsakaiIinShimeiFlag,
@@ -184,7 +200,8 @@ public final class NinteiShinsakaiIinGuideMapperParameter {
                 isShinsakaiIinShikakuCodeFlag,
                 isShujiiIryokikanCodeFlag,
                 isNinteiChosainNoFlag,
-                isSonotaKikanCodeFlag);
+                isSonotaKikanCodeFlag,
+                isShoKisaiHokenshaNoFlag);
     }
 
 }
