@@ -5,9 +5,11 @@
  */
 package jp.co.ndensan.reams.db.dbb.business.core.hokenryodankai.core;
 
-import jp.co.ndensan.reams.db.dbb.business.core.hokenryodankai.param.HokenryoDankaiHanteiParameter;
 import java.util.Calendar;
+import java.util.Iterator;
 import java.util.Map;
+import java.util.Set;
+import jp.co.ndensan.reams.db.dbb.business.core.hokenryodankai.param.HokenryoDankaiHanteiParameter;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.Month;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -37,10 +39,8 @@ class DankaiHanteiSeikatsuHogo implements IDai1DankaiHantei {
             生活保護開始日 = getRealDateCalendar(hokenryoDankaiHanteiParameter.getFukaKonkyo().getSeihoStartYMD());
             if (hokenryoDankaiHanteiParameter.getFukaKonkyo().getSeihoEndYMD() != null) {
                 生活保護終了日 = getRealDateCalendar(hokenryoDankaiHanteiParameter.getFukaKonkyo().getSeihoEndYMD());
-                if (賦課年度開始日.compareTo(生活保護終了日) <= 0
-                        && 生活保護開始日.compareTo(賦課年度終了日) <= 0) {
-                    result = true;
-                }
+                this.getResult(賦課年度開始日, 賦課年度終了日, 生活保護開始日, 生活保護終了日);
+
             } else {
                 if (生活保護開始日.compareTo(賦課年度終了日) <= 0) {
                     result = true;
@@ -63,21 +63,25 @@ class DankaiHanteiSeikatsuHogo implements IDai1DankaiHantei {
         //hokenryoDankaiHanteiParameter.fukaKonkyo.SeihoStartYMD.getMonth(), 1);
 
         Map<RString, HokenryoDankai> hokenryoDankaiMap = tsukibetsuHokenryoDankai.createHokenryoDankaiMap();
+        Set<Map.Entry<RString, HokenryoDankai>> set = hokenryoDankaiMap.entrySet();
+        Iterator<Map.Entry<RString, HokenryoDankai>> it = set.iterator();
 
-        for (RString tsuki : hokenryoDankaiMap.keySet()) {
+        if (it.hasNext()) {
             判定年月.clear();
-            if (Integer.parseInt(tsuki.toString()) <= Month.MARCH.getValue()) {
+            Map.Entry<RString, HokenryoDankai> entry = it.next();
+            RString key = entry.getKey();
+            if (Integer.parseInt(key.toString()) <= Month.MARCH.getValue()) {
                 判定年月.set(Integer.parseInt(String.valueOf(hokenryoDankaiHanteiParameter.getFukaNendo())) + 1,
-                        Integer.parseInt(tsuki.toString()), 1);
+                        Integer.parseInt(key.toString()), 1);
 
             } else {
-                判定年月.set(Integer.parseInt(String.valueOf(hokenryoDankaiHanteiParameter.getFukaNendo())), Integer.parseInt(tsuki.toString()), 1);
+                判定年月.set(Integer.parseInt(String.valueOf(hokenryoDankaiHanteiParameter.getFukaNendo())), Integer.parseInt(key.toString()), 1);
             }
 
             if (dateHantei(生活保護開始月, 判定年月)) {
-                hokenryoDankaiMap.get(tsuki).setHokenryoDankai(new RString("1"));
-                hokenryoDankaiMap.get(tsuki).setSystemDankai(new RString("1"));
-                hokenryoDankaiMap.get(tsuki).setTokureiTaisho(false);
+                hokenryoDankaiMap.get(key).setHokenryoDankai(new RString("1"));
+                hokenryoDankaiMap.get(key).setSystemDankai(new RString("1"));
+                hokenryoDankaiMap.get(key).setTokureiTaisho(false);
             }
         }
 
@@ -97,5 +101,14 @@ class DankaiHanteiSeikatsuHogo implements IDai1DankaiHantei {
         calendar.set(Calendar.MONTH, roreiNenkinStartYMD.getMonthValue());
         calendar.set(Calendar.DATE, roreiNenkinStartYMD.getDayValue());
         return calendar;
+    }
+
+    private boolean getResult(Calendar 賦課年度開始日, Calendar 賦課年度終了日, Calendar 生活保護開始日, Calendar 生活保護終了日) {
+        boolean result = false;
+        if (賦課年度開始日.compareTo(生活保護終了日) <= 0
+                && 生活保護開始日.compareTo(賦課年度終了日) <= 0) {
+            result = true;
+        }
+        return result;
     }
 }

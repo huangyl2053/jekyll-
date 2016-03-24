@@ -19,6 +19,11 @@ public abstract class HokenryoDankaiHanteiHohoHozon {
 
     private final Map<RString, List<IHanteiHoho>> hanteiHoho = new HashMap<>();
 
+    /**
+     * 世帯非課税最大段階数取得
+     *
+     * @return RString
+     */
     protected RString 世帯非課税最大段階数取得() {
 
         RString result = null;
@@ -58,7 +63,6 @@ public abstract class HokenryoDankaiHanteiHohoHozon {
                         result = hanteiDankai;
                         atokagen = maekagen;
 
-                    } else {
                     }
                 }
             }
@@ -67,6 +71,11 @@ public abstract class HokenryoDankaiHanteiHohoHozon {
         return result;
     }
 
+    /**
+     * 本人非課税最大段階数取得
+     *
+     * @return RString
+     */
     protected RString 本人非課税最大段階数取得() {
 
         RString result = null;
@@ -104,7 +113,6 @@ public abstract class HokenryoDankaiHanteiHohoHozon {
                     if (atokagen.compareTo(maejogen) < 0 || maejogen.compareTo(new Decimal(-1)) == 0) {
                         result = hanteiDankai;
                         atokagen = maekagen;
-                    } else {
                     }
                 }
             }

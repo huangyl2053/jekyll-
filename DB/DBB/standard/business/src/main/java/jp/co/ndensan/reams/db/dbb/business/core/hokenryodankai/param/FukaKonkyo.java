@@ -153,7 +153,7 @@ public class FukaKonkyo {
     }
 
     /**
-     * @param honninKazeiKubun
+     * @param honninKazeiKubun honninKazeiKubun
      * @return 世帯課税
      */
     public boolean is世帯課税(KazeiKubun honninKazeiKubun) {

@@ -14,9 +14,26 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
  */
 public interface IKazeiHantei {
 
+    /**
+     * isMatchクラスです。
+     *
+     * @param hokenryoDankaiHanteiParameter hokenryoDankaiHanteiParameter
+     * @return boolean
+     */
     boolean isMatch(HokenryoDankaiHanteiParameter hokenryoDankaiHanteiParameter);
 
+    /**
+     * hokenryoDankaiShiyoクラスです。
+     *
+     * @param hokenryoDankaiHanteiParameter hokenryoDankaiHanteiParameter
+     * @return RString
+     */
     RString hokenryoDankaiShiyo(HokenryoDankaiHanteiParameter hokenryoDankaiHanteiParameter);
 
+    /**
+     * hokenryoDankaiShiyoShinaiクラスです。
+     *
+     * @param hokenryoDankaiHanteiParameter hokenryoDankaiHanteiParameter
+     */
     void hokenryoDankaiShiyoShinai(HokenryoDankaiHanteiParameter hokenryoDankaiHanteiParameter);
 }
