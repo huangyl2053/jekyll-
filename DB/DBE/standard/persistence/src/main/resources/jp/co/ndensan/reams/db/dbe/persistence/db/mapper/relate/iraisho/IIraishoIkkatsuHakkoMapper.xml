@@ -75,7 +75,8 @@
             MAX(sabuKueri."ninteichosaItakusakiCode") AS "ninteichosaItakusakiCode",							
             MAX(sabuKueri."jigyoshaMeisho") AS "jigyoshaMeisho",							
             MAX(sabuKueri."ninteiChosainCode") AS "ninteiChosainCode",								
-            MAX(sabuKueri."chosainShimei") AS "chosainShimei",							
+            MAX(sabuKueri."chosainShimei") AS "chosainShimei",
+            MAX(sabuKueri."shoKisaiHokenshaNo") AS "shoKisaiHokenshaNo",							
             COUNT(0) AS "shinseishaCount"														
         FROM
             (<include refid="selectNinteiChousaIrai" />) AS sabuKueri
@@ -161,7 +162,8 @@
             MAX(sabuKueri."shujiiIryokikanCode") AS "shujiiIryokikanCode",							
             MAX(sabuKueri."iryoKikanMeisho") AS "iryoKikanMeisho",							
             MAX(sabuKueri."shujiiCode") AS "shujiiCode",								
-            MAX(sabuKueri."shujiiName") AS "shujiiName",							
+            MAX(sabuKueri."shujiiName") AS "shujiiName",
+            MAX(sabuKueri."shoKisaiHokenshaNo") AS "shoKisaiHokenshaNo",							
             COUNT(0) AS "shinseishaCount"														
         FROM
             (<include refid="selectShuziiIkenshoIrai" />) AS sabuKueri

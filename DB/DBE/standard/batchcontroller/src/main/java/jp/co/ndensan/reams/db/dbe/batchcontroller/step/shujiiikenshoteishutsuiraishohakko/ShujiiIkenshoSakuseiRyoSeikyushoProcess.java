@@ -55,10 +55,10 @@ public class ShujiiIkenshoSakuseiRyoSeikyushoProcess extends BatchProcessBase<Sh
     private static final ReportId 帳票ID = ReportIdDBE.DBE234001.getReportId();
     private static final RString 記号 = new RString("✔");
     private static final RString 文字列1 = new RString("1");
-    private static final RString IkenshoSakuseiRyo_11 = new RString("11");
-    private static final RString IkenshoSakuseiRyo_12 = new RString("12");
-    private static final RString IkenshoSakuseiRyo_21 = new RString("21");
-    private static final RString IkenshoSakuseiRyo_22 = new RString("22");
+    private static final RString IKENSHOSAKUSEIRYO_11 = new RString("11");
+    private static final RString IKENSHOSAKUSEIRYO_12 = new RString("12");
+    private static final RString IKENSHOSAKUSEIRYO_21 = new RString("21");
+    private static final RString IKENSHOSAKUSEIRYO_22 = new RString("22");
     private static final int INT3 = 3;
     private static final int INT4 = 4;
     private static final int INT5 = 5;
@@ -130,10 +130,10 @@ public class ShujiiIkenshoSakuseiRyoSeikyushoProcess extends BatchProcessBase<Sh
         item.setGengo(RDate.getNowDate().toDateString());
         item.setAtesakiHokenshaName(entity.get保険者名());
         // TODO 内部QA894　Redmine#79148　意見書作成料の表示名がない
-        item.setShinkiZaitakuKingaku(IkenshoSakuseiRyo.toValue(IkenshoSakuseiRyo_11).get名称());
-        item.setShinkiShisetsuKingaku(IkenshoSakuseiRyo.toValue(IkenshoSakuseiRyo_12).get名称());
-        item.setKeizokuZaitakuKingaku(IkenshoSakuseiRyo.toValue(IkenshoSakuseiRyo_21).get名称());
-        item.setKeizokuShisetsuKingaku(IkenshoSakuseiRyo.toValue(IkenshoSakuseiRyo_22).get名称());
+        item.setShinkiZaitakuKingaku(IkenshoSakuseiRyo.toValue(IKENSHOSAKUSEIRYO_11).get名称());
+        item.setShinkiShisetsuKingaku(IkenshoSakuseiRyo.toValue(IKENSHOSAKUSEIRYO_12).get名称());
+        item.setKeizokuZaitakuKingaku(IkenshoSakuseiRyo.toValue(IKENSHOSAKUSEIRYO_21).get名称());
+        item.setKeizokuShisetsuKingaku(IkenshoSakuseiRyo.toValue(IKENSHOSAKUSEIRYO_22).get名称());
         RString hihokenshaNo = entity.get被保険者番号();
         if (!RString.isNullOrEmpty(hihokenshaNo) && INT10 <= hihokenshaNo.length()) {
             item.setHihokenshaNo1(entity.get被保険者番号().substring(0, 1));
