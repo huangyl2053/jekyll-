@@ -19,6 +19,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
 import jp.co.ndensan.reams.uz.uza.lang.Separator;
 import jp.co.ndensan.reams.uz.uza.ui.binding.propertyenum.DisplayTimeFormat;
+import jp.co.ndensan.reams.uz.uza.util.editor.DecimalFormatter;
 
 /**
  * 高額介護サービス費給付対象者一覧表帳票ソースデータ作成
@@ -144,11 +145,11 @@ public class KogakuKyufuTaishoshaIchiranhyo {
             item.set事業者名(RString.EMPTY);
             item.setサービス種類コード(RString.EMPTY);
             item.setサービス種類名称(RString.EMPTY);
-            item.setサービス費用合計額(entity.get集計Entity().getServiceHiyoGokeiGakuGokei());
-            item.set利用者負担額(entity.get集計Entity().getRiyoshaFutanGakuGokei());
-            item.set算定基準額(entity.get集計Entity().getSanteiKijunGaku());
-            item.set支払済金額(entity.get集計Entity().getShiharaiSumiKingakuGokei());
-            item.set高額支給額(entity.get集計Entity().getKogakuShikyuGaku());
+            item.setサービス費用合計額(DecimalFormatter.toコンマ区切りRString(entity.get集計Entity().getServiceHiyoGokeiGakuGokei(), 0));
+            item.set利用者負担額(DecimalFormatter.toコンマ区切りRString(entity.get集計Entity().getRiyoshaFutanGakuGokei(), 0));
+            item.set算定基準額(DecimalFormatter.toコンマ区切りRString(entity.get集計Entity().getSanteiKijunGaku(), 0));
+            item.set支払済金額(DecimalFormatter.toコンマ区切りRString(entity.get集計Entity().getShiharaiSumiKingakuGokei(), 0));
+            item.set高額支給額(DecimalFormatter.toコンマ区切りRString(entity.get集計Entity().getKogakuShikyuGaku(), 0));
             item.set資格喪失日(entity.get資格喪失日().wareki().eraType(EraType.KANJI_RYAKU).
                     firstYear(FirstYear.ICHI_NEN).separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString());
             item.set備考(RString.EMPTY);
@@ -177,8 +178,8 @@ public class KogakuKyufuTaishoshaIchiranhyo {
             item.set事業者名(entity.get明細Entity().getJigyoshaName());
             item.setサービス種類コード(entity.get明細Entity().getServiceShuruiCode());
             item.setサービス種類名称(entity.get明細Entity().getServiceShuruiName());
-            item.setサービス費用合計額(new RString(entity.get明細Entity().getServiceHiyoGokeiGaku().toString()));
-            item.set利用者負担額(entity.get明細Entity().getRiyoshaFutanGaku());
+            item.setサービス費用合計額(DecimalFormatter.toコンマ区切りRString(entity.get明細Entity().getServiceHiyoGokeiGaku(), 0));
+            item.set利用者負担額(DecimalFormatter.toコンマ区切りRString(entity.get明細Entity().getRiyoshaFutanGaku(), 0));
             item.set算定基準額(RString.EMPTY);
             item.set支払済金額(RString.EMPTY);
             item.set高額支給額(RString.EMPTY);

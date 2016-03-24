@@ -146,15 +146,13 @@ public class KogakuKyufuTaishoshaInInsertProcess extends BatchProcessBase<RStrin
         result.setServiceHiyoGokeiGaku(checkDecimal(meisaiEntity.getServiceHiyoGokeiGaku()));
         result.setRiyoshaFutanGaku(checkDecimal(meisaiEntity.getRiyoshaFutanGaku()));
         result.setBikou(trim囲み文字(meisaiEntity.getBikou()));
-        // TODO
         result.setShikakuSoshitsuYMD(FlexibleDate.EMPTY);
         result.setServiceHiyoGokeiGakuGokei(checkDecimal(gokeiEntity.getServiceHiyoGokeiGakuGokei()));
         result.setRiyoshaFutanGakuGokei(checkDecimal(gokeiEntity.getRiyoshaFutanGakuGokei()));
         result.setSanteiKijunGaku(checkDecimal(gokeiEntity.getSanteiKijunGaku()));
         result.setShiharaiSumiKingakuGokei(checkDecimal(gokeiEntity.getShiharaiSumiKingakuGokei()));
         result.setKogakuShikyuGaku(checkDecimal(gokeiEntity.getKogakuShikyuGaku()));
-        // TODO
-        result.setSetaiShuyakuNo(RString.EMPTY);
+        result.setSetaiShuyakuNo(HihokenshaNo.EMPTY);
 
         return result;
     }
@@ -183,12 +181,12 @@ public class KogakuKyufuTaishoshaInInsertProcess extends BatchProcessBase<RStrin
         return 対象文字列;
     }
 
-    private Decimal checkDecimal(RString 金額) {
-        if (金額 == null || 金額.isEmpty()) {
+    private Decimal checkDecimal(Decimal 金額) {
+        if (金額 == null) {
             return new Decimal(0);
         }
 
-        return new Decimal(金額.toString());
+        return 金額;
     }
 
 }

@@ -75,6 +75,6 @@ public class DbTKogakuKyufuTaishoshaDataTempTableEntity
     @TempTableColumnOrder(23)
     private Decimal kogakuShikyuGaku;
     @TempTableColumnOrder(24)
-    private RString setaiShuyakuNo;
+    private HihokenshaNo setaiShuyakuNo;
 
 }

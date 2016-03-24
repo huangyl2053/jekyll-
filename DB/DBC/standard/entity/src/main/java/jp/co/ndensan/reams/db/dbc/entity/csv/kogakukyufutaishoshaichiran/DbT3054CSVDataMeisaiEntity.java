@@ -7,6 +7,7 @@ package jp.co.ndensan.reams.db.dbc.entity.csv.kogakukyufutaishoshaichiran;
 
 import jp.co.ndensan.reams.uz.uza.io.csv.CsvField;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -38,9 +39,9 @@ public class DbT3054CSVDataMeisaiEntity {
     @CsvField(order = 100, name = "サービス種類名")
     private RString serviceShuruiName;
     @CsvField(order = 110, name = "サービス費用合計額")
-    private RString serviceHiyoGokeiGaku;
+    private Decimal serviceHiyoGokeiGaku;
     @CsvField(order = 120, name = "利用者負担額")
-    private RString riyoshaFutanGaku;
+    private Decimal riyoshaFutanGaku;
     @CsvField(order = 130, name = "備考")
     private RString bikou;
 }
