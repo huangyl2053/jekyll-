@@ -42,7 +42,7 @@ public class PnlTotalPanel {
     private static final RString 参照 = new RString("参照");
     private static final RString 削除 = new RString("削除");
     private static final RString 登録 = new RString("登録");
-    private static final Decimal 九割 = new Decimal(0.1);
+    private static final Decimal 九割 = new Decimal(0.9);
 
     /**
      * コンストラクタです。
