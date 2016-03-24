@@ -80,42 +80,51 @@ public class ServiceKeikakuHiPanel {
         RString 申請年月日 = new RString("20151124");
         RString 証明書 = new RString("証明書");
         ViewStateHolder.put(ViewStateKeys.画面モード, 登録モード);
-
+        ServiceKeikakuHiPanelHandler handler = getHandler(div);
         div.getPanelCcd().getCcdKaigoAtenaInfo().onLoad(識別コード);
         div.getPanelCcd().getCcdKaigoShikakuKihon().onLoad(被保険者番号);
         if (明細番号 == null || 明細番号.isEmpty()) {
             // TODO QA438 償還払支給申請_サービス提供証明書画面へ遷移する  TransitationEventName not have
             return createResponse(div);
         }
-        getHandler(div).set申請共通エリア(サービス年月, 申請年月日, 事業者番号, 明細番号, 証明書, 様式番号);
+        handler.set申請共通エリア(サービス年月, 申請年月日, 事業者番号, 明細番号, 証明書, 様式番号);
         div.getPanelServiceKeikakuhiUp().getPanelServiceKeikakuhiToroku().setIsOpen(false);
         if (サービス年月_200904.isBeforeOrEquals(サービス年月)) {
+            div.getPanelServiceKeikakuhiUp().getPanelServiceKeikakuhiToroku().setIsOpen(false);
+            div.getPanelServiceKeikakuhiDown().setDisplayNone(true);
             List<ShokanServicePlan200904Result> entity200904List
                     = ShokanbaraiJyokyoShokai.createInstance().getServiceKeikaku200904(
                             被保険者番号, サービス年月, 整理番号, 事業者番号, 様式番号, 明細番号, null);
-            checkNull(entity200904List);
+            if (checkNull(entity200904List)) {
+                handler.load事業者区分リスト200904();
+                return createResponse(div);
+            }
             ViewStateHolder.put(ViewStateKeys.償還払い費支給申請決定_サービス計画費, (Serializable) entity200904List);
-            getHandler(div).onLoad200904(entity200904List);
-            div.getPanelServiceKeikakuhiUp().getPanelServiceKeikakuhiToroku().setIsOpen(false);
-            div.getPanelServiceKeikakuhiDown().setDisplayNone(true);
+            handler.onLoad200904(entity200904List);
         } else if (サービス年月_200604.isBeforeOrEquals(サービス年月) && !サービス年月_200903.isBefore(サービス年月)) {
+            div.getPanelServiceKeikakuhiUp().setDisplayNone(true);
             List<ShokanServicePlan200604Result> entity200604
                     = ShokanbaraiJyokyoShokai.createInstance().getServiceKeikaku200604(
                             被保険者番号, サービス年月, 整理番号, 事業者番号, 様式番号, 明細番号, null);
-            checkNull(entity200604);
-            ViewStateHolder.put(ViewStateKeys.償還払い費支給申請決定_サービス計画費, (Serializable) entity200604);
-            getHandler(div).onLoad200604(entity200604.get(0));
-            div.getPanelServiceKeikakuhiUp().setDisplayNone(true);
+            if (checkNull(entity200604)) {
+                handler.load事業者区分リスト200904前();
+                return createResponse(div);
+            }
+            ViewStateHolder.put(ViewStateKeys.償還払い費支給申請決定_サービス計画費, entity200604.get(0));
+            handler.onLoad200604(entity200604.get(0));
         } else {
+            div.getPanelServiceKeikakuhiDown().getTxtTantoukayigoshien().setDisplayNone(true);
+            div.getPanelServiceKeikakuhiDown().getTxtTekiyo().setDisplayNone(true);
+            div.getPanelServiceKeikakuhiUp().setDisplayNone(true);
             List<ShokanServicePlan200004Result> entity200004
                     = ShokanbaraiJyokyoShokai.createInstance().getServiceKeikaku200004(
                             被保険者番号, サービス年月, 整理番号, 事業者番号, 様式番号, 明細番号, null);
-            checkNull(entity200004);
-            ViewStateHolder.put(ViewStateKeys.償還払い費支給申請決定_サービス計画費, (Serializable) entity200004);
-            div.getPanelServiceKeikakuhiDown().getTxtTantoukayigoshien().setDisplayNone(true);
-            div.getPanelServiceKeikakuhiDown().getTxtTekiyo().setDisplayNone(true);
-            getHandler(div).onLoad20004(entity200004.get(0));
-            div.getPanelServiceKeikakuhiUp().setDisplayNone(true);
+            if (checkNull(entity200004)) {
+                handler.load事業者区分リスト200904前();
+                return createResponse(div);
+            }
+            ViewStateHolder.put(ViewStateKeys.償還払い費支給申請決定_サービス計画費, entity200004.get(0));
+            handler.onLoad200004(entity200004.get(0));
         }
 
         SikibetuNokennsakuki kennsakuki = ViewStateHolder.get(ViewStateKeys.識別番号検索キー, SikibetuNokennsakuki.class);
@@ -124,7 +133,7 @@ public class ServiceKeikakuHiPanel {
         if (shikibetsuNoKanri == null) {
             throw new ApplicationException(UrErrorMessages.データが存在しない.getMessage());
         } else {
-            getHandler(div).getボタンを制御(shikibetsuNoKanri);
+            handler.getボタンを制御(shikibetsuNoKanri);
         }
         return createResponse(div);
     }
@@ -239,12 +248,23 @@ public class ServiceKeikakuHiPanel {
      * @return 償還払い費支給申請決定_サービス提供証明書(サービス計画費)画面
      */
     public ResponseData<ServiceKeikakuHiPanelDiv> onClick_btnTorikeshi(ServiceKeikakuHiPanelDiv div) {
+        ServiceKeikakuHiPanelHandler handler = getHandler(div);
         RString 画面モード = ViewStateHolder.get(ViewStateKeys.画面モード, RString.class);
         if (削除モード.equals(画面モード)) {
             // TODO QA438 償還払支給申請_サービス提供証明書画面へ遷移する。
             return createResponse(div);
         } else {
-            Boolean 変更 = getHandler(div).変更チェック処理(div);
+            boolean 変更 = false;
+            SyokanbaraihishikyushinseiketteParameter parameter = ViewStateHolder.get(ViewStateKeys.償還払費申請検索キー,
+                    SyokanbaraihishikyushinseiketteParameter.class);
+            FlexibleYearMonth サービス年月 = parameter.getServiceTeikyoYM();
+            if (サービス年月_200904.isBeforeOrEquals(サービス年月)) {
+                変更 = handler.変更チェック処理();
+            } else if (サービス年月_200604.isBeforeOrEquals(サービス年月) && !サービス年月_200903.isBefore(サービス年月)) {
+                変更 = handler.変更チェック処理200604();
+            } else {
+                変更 = handler.変更チェック処理200004();
+            }
             return 登録モード変更処理(変更, div);
         }
     }
@@ -256,11 +276,22 @@ public class ServiceKeikakuHiPanel {
      * @return 償還払い費支給申請決定_サービス提供証明書(サービス計画費)画面
      */
     public ResponseData<ServiceKeikakuHiPanelDiv> onClick_btnUpdate(ServiceKeikakuHiPanelDiv div) {
+        ServiceKeikakuHiPanelHandler handler = getHandler(div);
         RString 画面モード = ViewStateHolder.get(ViewStateKeys.画面モード, RString.class);
         if (削除モード.equals(画面モード)) {
-            getHandler(div).保存処理(削除モード);
+            handler.保存処理(削除モード);
         } else if (登録モード.equals(画面モード)) {
-            Boolean 変更 = getHandler(div).変更チェック処理(div);
+            boolean 変更 = false;
+            SyokanbaraihishikyushinseiketteParameter parameter = ViewStateHolder.get(ViewStateKeys.償還払費申請検索キー,
+                    SyokanbaraihishikyushinseiketteParameter.class);
+            FlexibleYearMonth サービス年月 = parameter.getServiceTeikyoYM();
+            if (サービス年月_200904.isBeforeOrEquals(サービス年月)) {
+                変更 = handler.変更チェック処理();
+            } else if (サービス年月_200604.isBeforeOrEquals(サービス年月) && !サービス年月_200903.isBefore(サービス年月)) {
+                変更 = handler.変更チェック処理200604();
+            } else {
+                変更 = handler.変更チェック処理200004();
+            }
             if (!変更) {
                 return saveOut(div);
             } else {
@@ -300,7 +331,7 @@ public class ServiceKeikakuHiPanel {
         return createResponse(div);
     }
 
-    private ResponseData<ServiceKeikakuHiPanelDiv> 登録モード変更処理(Boolean 変更, ServiceKeikakuHiPanelDiv div) {
+    private ResponseData<ServiceKeikakuHiPanelDiv> 登録モード変更処理(boolean 変更, ServiceKeikakuHiPanelDiv div) {
         if (!変更) {
             // TODO QA438 償還払支給申請_サービス提供証明書画面へ遷移する。
             return createResponse(div);
@@ -313,9 +344,12 @@ public class ServiceKeikakuHiPanel {
             if (new RString(UrQuestionMessages.入力内容の破棄.getMessage().getCode())
                     .equals(ResponseHolder.getMessageCode())
                     && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
+                SyokanbaraihishikyushinseiketteParameter parameter = ViewStateHolder.get(ViewStateKeys.償還払費申請検索キー,
+                        SyokanbaraihishikyushinseiketteParameter.class);
+                FlexibleYearMonth サービス年月 = parameter.getServiceTeikyoYM();
+                getHandler(div).登録モード変更処理(サービス年月);
                 return createResponse(div);
-                // TODO QA438 getHandler(div).内容の破棄();
-                // 償還払支給申請_サービス提供証明書画面へ遷移する。
+                // QA438 償還払支給申請_サービス提供証明書画面へ遷移する。
                 //                return ResponseData.of(div).forwardWithEventName(DBC0820024TransitionEventName.サービス提供証明書)
                 //                        .parameter(new RString("サービス提供証明書"));
             }
@@ -323,10 +357,129 @@ public class ServiceKeikakuHiPanel {
         return createResponse(div);
     }
 
-    private void checkNull(List list) {
-        if (list == null || list.isEmpty()) {
-            throw new ApplicationException(UrErrorMessages.該当データなし.getMessage());
-        }
+    /**
+     * 「基本情報」ボタン
+     *
+     * @param div ServiceKeikakuHiPanelDiv
+     * @return 償還払支給申請_サービス提供証明書（基本情報）画面
+     */
+    public ResponseData<ServiceKeikakuHiPanelDiv> onClick_btnKihonInfo(ServiceKeikakuHiPanelDiv div) {
+        getHandler(div).putViewState();
+        return createResponse(div);
+    }
+
+    /**
+     * 「給付費明細」ボタン
+     *
+     * @param div ServiceKeikakuHiPanelDiv
+     * @return 償還払支給申請_サービス提供証明書（給付費明細）画面
+     */
+    public ResponseData<ServiceKeikakuHiPanelDiv> onClick_btnKyufuhiMeisai(ServiceKeikakuHiPanelDiv div) {
+        getHandler(div).putViewState();
+        return createResponse(div);
+    }
+
+    /**
+     * 「特定診療費」ボタン
+     *
+     * @param div ServiceKeikakuHiPanelDiv
+     * @return 償還払支給申請_サービス提供証明書（特定診療費）画面
+     */
+    public ResponseData<ServiceKeikakuHiPanelDiv> onClick_btnTokuteiShinryo(ServiceKeikakuHiPanelDiv div) {
+        getHandler(div).putViewState();
+        return createResponse(div);
+    }
+
+    /**
+     * 「特定入所者費用」ボタン
+     *
+     * @param div ServiceKeikakuHiPanelDiv
+     * @return 償還払支給申請_サービス提供証明書（特定入所者費用）画面
+     */
+    public ResponseData<ServiceKeikakuHiPanelDiv> onClick_btnTokuteiNyushosha(ServiceKeikakuHiPanelDiv div) {
+        getHandler(div).putViewState();
+        return createResponse(div);
+    }
+
+    /**
+     * 「合計情報」ボタン
+     *
+     * @param div ServiceKeikakuHiPanelDiv
+     * @return 償還払支給申請_サービス提供証明書（合計情報）画面
+     */
+    public ResponseData<ServiceKeikakuHiPanelDiv> onClick_btnGokeiInfo(ServiceKeikakuHiPanelDiv div) {
+        getHandler(div).putViewState();
+        return createResponse(div);
+    }
+
+    /**
+     * 「給付費明細（住特）」ボタン
+     *
+     * @param div ServiceKeikakuHiPanelDiv
+     * @return 償還払支給申請_サービス提供証明書（給付費明細（住特）画面
+     */
+    public ResponseData<ServiceKeikakuHiPanelDiv> onClick_btnKyufuhiMeisaiJyuchi(ServiceKeikakuHiPanelDiv div) {
+        getHandler(div).putViewState();
+        return createResponse(div);
+    }
+
+    /**
+     * 「緊急時・所定疾患」ボタン
+     *
+     * @param div ServiceKeikakuHiPanelDiv
+     * @return 償還払支給申請_サービス提供証明書（緊急時・所定疾患）画面
+     */
+    public ResponseData<ServiceKeikakuHiPanelDiv> onClick_btnKinkyujiShoteiShikan(ServiceKeikakuHiPanelDiv div) {
+        getHandler(div).putViewState();
+        return createResponse(div);
+    }
+
+    /**
+     * 「緊急時施設療養費」ボタン
+     *
+     * @param div ServiceKeikakuHiPanelDiv
+     * @return 償還払支給申請_サービス提供証明書（緊急時施設療養費）画面
+     */
+    public ResponseData<ServiceKeikakuHiPanelDiv> onClick_btnKinkyujiShisetsu(ServiceKeikakuHiPanelDiv div) {
+        getHandler(div).putViewState();
+        return createResponse(div);
+    }
+
+    /**
+     * 「食事費用」ボタン
+     *
+     * @param div ServiceKeikakuHiPanelDiv
+     * @return 償還払支給申請_サービス提供証明書（食事費用）画面
+     */
+    public ResponseData<ServiceKeikakuHiPanelDiv> onClick_btnShokujiHiyo(ServiceKeikakuHiPanelDiv div) {
+        getHandler(div).putViewState();
+        return createResponse(div);
+    }
+
+    /**
+     * 「請求額集計」ボタン
+     *
+     * @param div ServiceKeikakuHiPanelDiv
+     * @return 償還払支給申請_サービス提供証明書（請求額集計）画面
+     */
+    public ResponseData<ServiceKeikakuHiPanelDiv> onClick_btnSeikyugakuShukei(ServiceKeikakuHiPanelDiv div) {
+        getHandler(div).putViewState();
+        return createResponse(div);
+    }
+
+    /**
+     * 「社福軽減額」ボタン
+     *
+     * @param div ServiceKeikakuHiPanelDiv
+     * @return 償還払支給申請_サービス提供証明書（社福軽減額）画面
+     */
+    public ResponseData<ServiceKeikakuHiPanelDiv> onClick_btnShafukukeigenGaku(ServiceKeikakuHiPanelDiv div) {
+        getHandler(div).putViewState();
+        return createResponse(div);
+    }
+
+    private boolean checkNull(List list) {
+        return list == null || list.isEmpty();
     }
 
     private ServiceKeikakuHiPanelHandler getHandler(ServiceKeikakuHiPanelDiv div) {

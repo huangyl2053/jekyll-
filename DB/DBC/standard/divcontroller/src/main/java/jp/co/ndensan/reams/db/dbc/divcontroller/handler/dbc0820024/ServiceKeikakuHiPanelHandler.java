@@ -24,9 +24,11 @@ import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaN
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ServiceCode;
 import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.kyotsu.JigyoshaKubun;
+import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.kyotsu.SaibanHanyokeyName;
 import jp.co.ndensan.reams.db.dbz.definition.message.DbzInformationMessages;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.ServiceCodeInputCommonChildDiv.ServiceCodeInputCommonChildDivDiv;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
+import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.ApplicationException;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
@@ -41,6 +43,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.RowState;
 import jp.co.ndensan.reams.uz.uza.ui.binding.propertyenum.IconName;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ResponseHolder;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
+import jp.co.ndensan.reams.uz.uza.util.Saiban;
 
 /**
  * 償還払い費支給申請決定_サービス提供証明書(サービス計画費)のハンドラクラスです。
@@ -48,6 +51,8 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 public class ServiceKeikakuHiPanelHandler {
 
     private final ServiceKeikakuHiPanelDiv div;
+    private static final int 連番LENGTH = 2;
+    private static final RString 事業者区分BLANK = new RString("0");
     private static final FlexibleYearMonth サービス年月_200904 = new FlexibleYearMonth("200904");
     private static final FlexibleYearMonth サービス年月_200903 = new FlexibleYearMonth("200903");
     private static final FlexibleYearMonth サービス年月_200604 = new FlexibleYearMonth("200604");
@@ -94,7 +99,7 @@ public class ServiceKeikakuHiPanelHandler {
      *
      * @param entity200004 ServiceKeikakuHiRealtEntity
      */
-    public void onLoad20004(ShokanServicePlan200004Result entity200004) {
+    public void onLoad200004(ShokanServicePlan200004Result entity200004) {
         setサービス計画費エリア200004(entity200004);
     }
 
@@ -247,7 +252,7 @@ public class ServiceKeikakuHiPanelHandler {
         // TODO QA454 共有子DIVの利用方法は合っていない
         ServiceCodeInputCommonChildDivDiv serviceCodeInputDiv = (ServiceCodeInputCommonChildDivDiv) div
                 .getPanelServiceKeikakuhiUp().getPanelServiceKeikakuhiToroku().getCcdServiceCodeInput();
-        // TODO QA312  ここは初期化です  入力してはいけません
+        // TODO QA506  ここは初期化です  入力してはいけません
         serviceCodeInputDiv.getTxtServiceCode1().setValue(サービスコード1);
     }
 
@@ -310,10 +315,9 @@ public class ServiceKeikakuHiPanelHandler {
     /**
      * 画面内容の変更有無チェック Handler処理
      *
-     * @param div ServiceKeikakuHiPanelDiv
-     * @return 画面内容の変更有無チェック Boolean
+     * @return 画面内容の変更有無 Boolean
      */
-    public Boolean 変更チェック処理(ServiceKeikakuHiPanelDiv div) {
+    public Boolean 変更チェック処理() {
         List<dgdYichiran_Row> rowList = div.getPanelServiceKeikakuhiUp().getDgdYichiran().getDataSource();
         for (dgdYichiran_Row row : rowList) {
             if (!row.getRowState().equals(RowState.Unchanged)) {
@@ -321,6 +325,76 @@ public class ServiceKeikakuHiPanelHandler {
             }
         }
         return false;
+    }
+
+    /**
+     *
+     * @return サービス年月が200604～200903の場合 画面内容の変更有無
+     */
+    public Boolean 変更チェック処理200604() {
+        int flag = 0;
+        ShokanServicePlan200604Result entity200604 = ViewStateHolder.get(
+                ViewStateKeys.償還払い費支給申請決定_サービス計画費, ShokanServicePlan200604Result.class);
+        RString 指定_基準該当事業者区分コード = div.getPanelServiceKeikakuhiDown().getDdlShiteiJigyoshaKubunCode().getSelectedKey();
+        RDate 届出日 = div.getPanelServiceKeikakuhiDown().getTxtTodokedeDate().getValue();
+        RString 審査方法区分コード = div.getPanelServiceKeikakuhiDown().getRdoShinsaHouhou().getSelectedKey();
+        RStringBuilder サービスコードBuilder = new RStringBuilder();
+        // TODO QA454 共有子DIVの利用方法は合っていない
+        ServiceCodeInputCommonChildDivDiv serviceCodeInputDiv = (ServiceCodeInputCommonChildDivDiv) div
+                .getPanelServiceKeikakuhiDown().getCcdServiceCodeInput2();
+        RString serviceCode1 = serviceCodeInputDiv.getTxtServiceCode1().getValue();
+        サービスコードBuilder.append(serviceCode1);
+        サービスコードBuilder.append(serviceCodeInputDiv.getTxtServiceCode2().getValue());
+        RString サービスコード名称 = serviceCodeInputDiv.getTxtServiceCodeName().getValue();
+        int 単位数 = div.getPanelServiceKeikakuhiDown().getTxtTanyiDown().getValue().intValue();
+        Decimal 単位数単価 = div.getPanelServiceKeikakuhiDown().getTxtTanyisuTanka().getValue();
+        int 請求金額 = div.getPanelServiceKeikakuhiDown().getTxtSeikyugakuDown().getValue().intValue();
+        RString 担当介護支援専門員番号 = div.getPanelServiceKeikakuhiDown().getTxtTantoukayigoshien().getValue();
+        RString 摘要 = div.getPanelServiceKeikakuhiDown().getTxtTekiyo().getValue();
+        flag = flag + check(指定_基準該当事業者区分コード, entity200604.getEntity().get指定_基準該当事業者区分コード());
+        flag = flag + check(届出日, new RDate(entity200604.getEntity().get居宅サービス計画作成依頼届出年月日().toString()));
+        flag = flag + check(審査方法区分コード, entity200604.getEntity().get審査方法区分コード());
+        flag = flag + check(サービスコードBuilder.toRString(), entity200604.getEntity().getサービスコード());
+        flag = flag + check(サービスコード名称, entity200604.getServiceName());
+        flag = flag + checkInt(単位数, entity200604.getEntity().get単位数());
+        flag = flag + checkDecimal(単位数単価, entity200604.getEntity().get単位数単価());
+        flag = flag + checkInt(請求金額, entity200604.getEntity().get請求金額());
+        flag = flag + check担当介護支援専門員番号(担当介護支援専門員番号, entity200604.getEntity().get担当介護支援専門員番号());
+        flag = flag + check(摘要, entity200604.getEntity().get摘要());
+        return flag != 0;
+    }
+
+    /**
+     *
+     * @return サービス年月が200603以前の場合 画面内容の変更有無
+     */
+    public Boolean 変更チェック処理200004() {
+        int flag = 0;
+        ShokanServicePlan200004Result entity200004 = ViewStateHolder.get(
+                ViewStateKeys.償還払い費支給申請決定_サービス計画費, ShokanServicePlan200004Result.class);
+        RString 指定_基準該当事業者区分コード = div.getPanelServiceKeikakuhiDown().getDdlShiteiJigyoshaKubunCode().getSelectedKey();
+        RDate 届出日 = div.getPanelServiceKeikakuhiDown().getTxtTodokedeDate().getValue();
+        RString 審査方法区分コード = div.getPanelServiceKeikakuhiDown().getRdoShinsaHouhou().getSelectedKey();
+        RStringBuilder サービスコードBuilder = new RStringBuilder();
+        // TODO QA454 共有子DIVの利用方法は合っていない
+        ServiceCodeInputCommonChildDivDiv serviceCodeInputDiv = (ServiceCodeInputCommonChildDivDiv) div
+                .getPanelServiceKeikakuhiDown().getCcdServiceCodeInput2();
+        RString serviceCode1 = serviceCodeInputDiv.getTxtServiceCode1().getValue();
+        サービスコードBuilder.append(serviceCode1);
+        サービスコードBuilder.append(serviceCodeInputDiv.getTxtServiceCode2().getValue());
+        RString サービスコード名称 = serviceCodeInputDiv.getTxtServiceCodeName().getValue();
+        int 単位数 = div.getPanelServiceKeikakuhiDown().getTxtTanyiDown().getValue().intValue();
+        Decimal 単位数単価 = div.getPanelServiceKeikakuhiDown().getTxtTanyisuTanka().getValue();
+        int 請求金額 = div.getPanelServiceKeikakuhiDown().getTxtSeikyugakuDown().getValue().intValue();
+        flag = flag + check(指定_基準該当事業者区分コード, entity200004.getEntity().get指定_基準該当事業者区分コード());
+        flag = flag + check(届出日, new RDate(entity200004.getEntity().get居宅サービス計画作成依頼届出年月日().toString()));
+        flag = flag + check(審査方法区分コード, entity200004.getEntity().get審査方法区分コード());
+        flag = flag + check(サービスコードBuilder.toRString(), entity200004.getEntity().getサービスコード());
+        flag = flag + check(サービスコード名称, entity200004.getServiceName());
+        flag = flag + checkInt(単位数, entity200004.getEntity().get単位数());
+        flag = flag + checkDecimal(単位数単価, entity200004.getEntity().get単位数単価());
+        flag = flag + checkInt(請求金額, entity200004.getEntity().get請求金額());
+        return flag != 0;
     }
 
     /**
@@ -349,10 +423,10 @@ public class ServiceKeikakuHiPanelHandler {
                 List<ShokanServicePlan200904Result> entity200904List = ViewStateHolder.get(
                         ViewStateKeys.償還払い費支給申請決定_サービス計画費, List.class);
                 entityList = 保存_データ_200904(rowList, entity200904List, entityList, 被保険者番号,
-                        サービス年月, 整理番号, 事業者番号, 様式番号, 明細番号);
+                        サービス年月, 事業者番号, 様式番号, 明細番号);
             } else if (サービス年月_200604.isBeforeOrEquals(サービス年月) && !サービス年月_200903.isBefore(サービス年月)) {
-                List<ShokanServicePlan200604Result> entity200604List = ViewStateHolder.get(
-                        ViewStateKeys.償還払い費支給申請決定_サービス計画費, List.class);
+                ShokanServicePlan200604Result entity200604Result = ViewStateHolder.get(
+                        ViewStateKeys.償還払い費支給申請決定_サービス計画費, ShokanServicePlan200604Result.class);
                 // TODO QA454 共有子DIVの利用方法は合っていない
                 ServiceCodeInputCommonChildDivDiv serviceCodeInputDiv = (ServiceCodeInputCommonChildDivDiv) div
                         .getPanelServiceKeikakuhiDown().getCcdServiceCodeInput2();
@@ -369,7 +443,7 @@ public class ServiceKeikakuHiPanelHandler {
                 RString serviceCode1 = serviceCodeInputDiv.getTxtServiceCode1().getValue();
                 サービスコードBuilder.append(serviceCode1);
                 サービスコードBuilder.append(serviceCodeInputDiv.getTxtServiceCode2().getValue());
-                ShokanServicePlan200604 entity = entity200604List.get(0).getEntity();
+                ShokanServicePlan200604 entity = entity200604Result.getEntity();
                 checkNull(entity);
                 entity200604 = entity.createBuilderForEdit()
                         .set指定_基準該当事業者区分コード(指定_基準該当事業者区分コード)
@@ -382,8 +456,8 @@ public class ServiceKeikakuHiPanelHandler {
                         .set摘要(摘要)
                         .setサービスコード(new ServiceCode(サービスコードBuilder.toRString())).build().modified();
             } else {
-                List<ShokanServicePlan200004Result> entity200004List = ViewStateHolder.get(
-                        ViewStateKeys.償還払い費支給申請決定_サービス計画費, List.class);
+                ShokanServicePlan200004Result entity200004Result = ViewStateHolder.get(
+                        ViewStateKeys.償還払い費支給申請決定_サービス計画費, ShokanServicePlan200004Result.class);
                 // TODO QA454 共有子DIVの利用方法は合っていない
                 ServiceCodeInputCommonChildDivDiv serviceCodeInputDiv = (ServiceCodeInputCommonChildDivDiv) div
                         .getPanelServiceKeikakuhiDown().getCcdServiceCodeInput2();
@@ -398,7 +472,7 @@ public class ServiceKeikakuHiPanelHandler {
                 RString serviceCode1 = serviceCodeInputDiv.getTxtServiceCode1().getValue();
                 サービスコードBuilder.append(serviceCode1);
                 サービスコードBuilder.append(serviceCodeInputDiv.getTxtServiceCode2().getValue());
-                ShokanServicePlan200004 entity = entity200004List.get(0).getEntity();
+                ShokanServicePlan200004 entity = entity200004Result.getEntity();
                 checkNull(entity);
                 entity200004 = entity.createBuilderForEdit()
                         .set指定_基準該当事業者区分コード(指定_基準該当事業者区分コード)
@@ -414,12 +488,44 @@ public class ServiceKeikakuHiPanelHandler {
         }
     }
 
+    /**
+     * 入力されたデータをクリアし 内容の破棄
+     *
+     * @param サービス年月 サービス年月
+     */
+    public void 登録モード変更処理(FlexibleYearMonth サービス年月) {
+        if (サービス年月_200904.isBeforeOrEquals(サービス年月)) {
+            List<ShokanServicePlan200904Result> entity200904List = ViewStateHolder.get(
+                    ViewStateKeys.償還払い費支給申請決定_サービス計画費, List.class);
+            if (entity200904List == null || entity200904List.isEmpty()) {
+                load事業者区分リスト200904();
+            } else {
+                onLoad200904(entity200904List);
+            }
+        } else if (サービス年月_200604.isBeforeOrEquals(サービス年月) && !サービス年月_200903.isBefore(サービス年月)) {
+            ShokanServicePlan200604Result entity200604 = ViewStateHolder.get(
+                    ViewStateKeys.償還払い費支給申請決定_サービス計画費, ShokanServicePlan200604Result.class);
+            if (entity200604 == null) {
+                load事業者区分リスト200904前();
+            } else {
+                onLoad200604(entity200604);
+            }
+        } else {
+            ShokanServicePlan200004Result entity200004Result = ViewStateHolder.get(
+                    ViewStateKeys.償還払い費支給申請決定_サービス計画費, ShokanServicePlan200004Result.class);
+            if (entity200004Result == null) {
+                load事業者区分リスト200904前();
+            } else {
+                onLoad200004(entity200004Result);
+            }
+        }
+    }
+
     private List<ShokanServicePlan200904> 保存_データ_200904(List<dgdYichiran_Row> rowList,
             List<ShokanServicePlan200904Result> entity200904List,
             List<ShokanServicePlan200904> entityList,
             HihokenshaNo 被保険者番号,
             FlexibleYearMonth サービス年月,
-            RString 整理番号,
             JigyoshaNo 事業者番号,
             RString 様式番号,
             RString 明細番号) {
@@ -434,15 +540,16 @@ public class ServiceKeikakuHiPanelHandler {
             } else if (RowState.Deleted.equals(row.getRowState())) {
                 entityList.add(entity200904List.get(Integer.valueOf(row.getRowNum().toString())).getEntity().deleted());
             } else if (RowState.Added.equals(row.getRowState())) {
+                RString 新整理番号 = Saiban.get(SubGyomuCode.DBC介護給付, SaibanHanyokeyName.償還整理番号.getコード()).nextString();
                 max連番 = max連番 + 1;
                 ShokanServicePlan200904 entity200904 = new ShokanServicePlan200904(
                         被保険者番号,
                         サービス年月,
-                        整理番号,
+                        新整理番号,
                         事業者番号,
                         様式番号,
                         明細番号,
-                        new RString(String.valueOf(max連番)));
+                        new RString(String.valueOf(max連番)).padZeroToLeft(連番LENGTH));
                 entity200904 = 保存_データ(row, entity200904);
                 entityList.add(entity200904);
             }
@@ -522,6 +629,7 @@ public class ServiceKeikakuHiPanelHandler {
         FlexibleDate 届出日 = get届出日(div.getPanelServiceKeikakuhiUp().getTxtTodokedeYMD().getValue());
         RString 担当介護支援専門員番号 = div.getPanelServiceKeikakuhiUp().getTxtTantoKaigoshien().getValue();
         Decimal 単位数単価 = div.getPanelServiceKeikakuhiUp().getTxtTanyiTanka().getValue();
+        // TODO QA506 INSERTサービス単位数合計の設定
         entity200904 = entity200904.createBuilderForEdit()
                 .setサービスコード(サービスコード)
                 .set単位数(単位数.intValue())
@@ -545,12 +653,7 @@ public class ServiceKeikakuHiPanelHandler {
 
     private void setサービス計画費共通エリア(ShokanServicePlan200904Result entity200904) {
         if (entity200904 == null) {
-            List<KeyValueDataSource> 事業者区分リスト = get事業者区分リスト();
-            div.getPanelServiceKeikakuhiUp().getDdlJigyoshaKubun().setDataSource(事業者区分リスト);
-            div.getPanelServiceKeikakuhiUp().getDdlJigyoshaKubun().setSelectedIndex(0);
-            List<KeyValueDataSource> 審査方法区分リスト = get審査方法リスト();
-            div.getPanelServiceKeikakuhiUp().getRdoShinsahouhou().setDataSource(審査方法区分リスト);
-            div.getPanelServiceKeikakuhiUp().getRdoShinsahouhou().setSelectedIndex(0);
+            load事業者区分リスト200904();
             div.getPanelServiceKeikakuhiUp().getTxtTodokedeYMD().clearValue();
             div.getPanelServiceKeikakuhiUp().getTxtTantoKaigoshien().clearValue();
             div.getPanelServiceKeikakuhiUp().getTxtTanyiTanka().clearValue();
@@ -611,6 +714,8 @@ public class ServiceKeikakuHiPanelHandler {
 
     private List<KeyValueDataSource> get事業者区分リスト() {
         List<KeyValueDataSource> dataSourceList = new ArrayList<>();
+        KeyValueDataSource dataSourceBlank = new KeyValueDataSource(事業者区分BLANK, RString.EMPTY);
+        dataSourceList.add(dataSourceBlank);
         for (JigyoshaKubun 事業者区分 : JigyoshaKubun.values()) {
             KeyValueDataSource dataSource = new KeyValueDataSource(事業者区分.getコード(), 事業者区分.get名称());
             dataSourceList.add(dataSource);
@@ -715,6 +820,7 @@ public class ServiceKeikakuHiPanelHandler {
             div.getPanelServiceKeikakuhiUp().getTxtTodokedeYMD().setDisabled(true);
             div.getPanelServiceKeikakuhiUp().getTxtTantoKaigoshien().setDisabled(true);
             div.getPanelServiceKeikakuhiUp().getTxtTanyiTanka().setDisabled(true);
+            div.getPanelServiceKeikakuhiUp().getBtnAdd().setDisabled(true);
         }
     }
 
@@ -744,7 +850,7 @@ public class ServiceKeikakuHiPanelHandler {
             i = i + 1;
             dataSource.add(row);
         }
-        // TODO QA312 グリッドの請求額の合計
+        // TODO QA506 グリッドの請求額の合計
         div.getPanelServiceKeikakuhiUp().getTxtGokeiTanyi().setValue(Decimal.ZERO);
         div.getPanelServiceKeikakuhiUp().getTxtSeikyugaku().setValue(Decimal.ZERO);
         div.getPanelServiceKeikakuhiUp().getDgdYichiran().setDataSource(dataSource);
@@ -755,10 +861,7 @@ public class ServiceKeikakuHiPanelHandler {
 
     private void setサービス計画費エリア200604(ShokanServicePlan200604Result entity200604) {
         RString 画面モード = ViewStateHolder.get(ViewStateKeys.画面モード, RString.class);
-        List<KeyValueDataSource> 事業者区分リスト = get事業者区分リスト();
-        div.getPanelServiceKeikakuhiDown().getDdlShiteiJigyoshaKubunCode().setDataSource(事業者区分リスト);
-        List<KeyValueDataSource> 審査方法区分リスト = get審査方法リスト();
-        div.getPanelServiceKeikakuhiDown().getRdoShinsaHouhou().setDataSource(審査方法区分リスト);
+        load事業者区分リスト200904前();
         if (!entity200604.getEntity().get指定_基準該当事業者区分コード().isNullOrEmpty()) {
             div.getPanelServiceKeikakuhiDown().getDdlShiteiJigyoshaKubunCode().setSelectedKey(
                     entity200604.getEntity().get指定_基準該当事業者区分コード());
@@ -779,6 +882,7 @@ public class ServiceKeikakuHiPanelHandler {
             serviceCodeInputDiv.getTxtServiceCode1().setValue(サービスコード.substring(0, 2));
             serviceCodeInputDiv.getTxtServiceCode2().setValue(サービスコード.substring(
                     サービスコード.length() - サービスコード2));
+            serviceCodeInputDiv.getTxtServiceCodeName().setValue(entity200604.getServiceName());
         }
         div.getPanelServiceKeikakuhiDown().getTxtTanyiDown().setValue(new Decimal(entity200604.getEntity().get単位数()));
         div.getPanelServiceKeikakuhiDown().getTxtTanyisuTanka().setValue(entity200604.getEntity().get単位数単価());
@@ -801,10 +905,7 @@ public class ServiceKeikakuHiPanelHandler {
 
     private void setサービス計画費エリア200004(ShokanServicePlan200004Result entity200004) {
         RString 画面モード = ViewStateHolder.get(ViewStateKeys.画面モード, RString.class);
-        List<KeyValueDataSource> 事業者区分リスト = get事業者区分リスト();
-        div.getPanelServiceKeikakuhiDown().getDdlShiteiJigyoshaKubunCode().setDataSource(事業者区分リスト);
-        List<KeyValueDataSource> 審査方法区分リスト = get審査方法リスト();
-        div.getPanelServiceKeikakuhiDown().getRdoShinsaHouhou().setDataSource(審査方法区分リスト);
+        load事業者区分リスト200904前();
         if (!entity200004.getEntity().get指定_基準該当事業者区分コード().isNullOrEmpty()) {
             div.getPanelServiceKeikakuhiDown().getDdlShiteiJigyoshaKubunCode().setSelectedKey(
                     entity200004.getEntity().get指定_基準該当事業者区分コード());
@@ -825,6 +926,7 @@ public class ServiceKeikakuHiPanelHandler {
             serviceCodeInputDiv.getTxtServiceCode1().setValue(サービスコード.substring(0, 2));
             serviceCodeInputDiv.getTxtServiceCode2().setValue(サービスコード.substring(
                     サービスコード.length() - サービスコード2));
+            serviceCodeInputDiv.getTxtServiceCodeName().setValue(entity200004.getServiceName());
         }
         div.getPanelServiceKeikakuhiDown().getTxtTanyiDown().setValue(new Decimal(entity200004.getEntity().get単位数()));
         div.getPanelServiceKeikakuhiDown().getTxtTanyisuTanka().setValue(entity200004.getEntity().get単位数単価());
@@ -849,7 +951,7 @@ public class ServiceKeikakuHiPanelHandler {
         RString serviceCode1 = serviceCodeInputDiv.getTxtServiceCode1().getValue();
         サービスコードBuilder.append(serviceCode1);
         サービスコードBuilder.append(serviceCodeInputDiv.getTxtServiceCode2().getValue());
-        RString serviceCodeName = serviceCodeInputDiv.getTxtServiceCodeName().getValue();
+        RString サービスコード名称 = serviceCodeInputDiv.getTxtServiceCodeName().getValue();
         Decimal 単位数 = div.getPanelServiceKeikakuhiUp().getPanelServiceKeikakuhiToroku().getTxtTanyiUp().getValue();
         Decimal 回数 = div.getPanelServiceKeikakuhiUp().getPanelServiceKeikakuhiToroku().getTxtKaisu().getValue();
         Decimal サービス単位数 = div.getPanelServiceKeikakuhiUp().getPanelServiceKeikakuhiToroku().getTxtServiceTanyiSu().getValue();
@@ -859,28 +961,17 @@ public class ServiceKeikakuHiPanelHandler {
         RDate 届出日 = div.getPanelServiceKeikakuhiUp().getTxtTodokedeYMD().getValue();
         RString 担当介護支援専門員番号 = div.getPanelServiceKeikakuhiUp().getTxtTantoKaigoshien().getValue();
         Decimal 単位数単価 = div.getPanelServiceKeikakuhiUp().getTxtTanyiTanka().getValue();
-        if (サービスコードBuilder.toRString() == null && row.getDefaultDataName1() != null) {
-            return true;
-        } else if (サービスコードBuilder.toRString() != null
-                && !サービスコードBuilder.toRString().equals(row.getDefaultDataName1())) {
-            return true;
-        }
-        flag = flag + check(serviceCodeName, row.getDefaultDataName6());
-        flag = flag + check(単位数, row.getDefaultDataName2().getValue());
-        flag = flag + check(回数, row.getDefaultDataName3().getValue());
-        flag = flag + check(サービス単位数, row.getDefaultDataName4().getValue());
+        flag = flag + check(サービスコードBuilder.toRString(), row.getDefaultDataName1());
+        flag = flag + check(サービスコード名称, row.getDefaultDataName6());
+        flag = flag + checkDecimal(単位数, row.getDefaultDataName2().getValue());
+        flag = flag + checkDecimal(回数, row.getDefaultDataName3().getValue());
+        flag = flag + checkDecimal(サービス単位数, row.getDefaultDataName4().getValue());
         flag = flag + check(摘要, row.getDefaultDataName5());
         flag = flag + check(指定_基準該当事業者区分コード, row.getDefaultDataName8());
         flag = flag + check(審査方法区分コード, row.getDefaultDataName9());
         flag = flag + check(届出日, row.getDefaultDataName10().getValue());
-        if (担当介護支援専門員番号 == null && row.getDefaultDataName11() != null) {
-            return true;
-        } else if (担当介護支援専門員番号 != null
-                && !担当介護支援専門員番号.padZeroToLeft(担当介護支援専門員番号LENGTH)
-                .equals(row.getDefaultDataName11().padZeroToLeft(担当介護支援専門員番号LENGTH))) {
-            return true;
-        }
-        flag = flag + check(単位数単価, row.getDefaultDataName12());
+        flag = flag + check担当介護支援専門員番号(担当介護支援専門員番号, row.getDefaultDataName11());
+        flag = flag + checkDecimal(単位数単価, row.getDefaultDataName12().getValue());
         return flag != 0;
     }
 
@@ -891,6 +982,74 @@ public class ServiceKeikakuHiPanelHandler {
             return 1;
         }
         return 0;
+    }
+
+    private int checkDecimal(Decimal dec1, Decimal dec2) {
+        if (dec1 == null && dec2 != null) {
+            return 1;
+        } else if (dec1 != null) {
+            return dec1.compareTo(dec2) == 0 ? 0 : 1;
+        }
+        return 0;
+    }
+
+    private int check担当介護支援専門員番号(RString 番号1, RString 番号2) {
+        if (番号1 == null && 番号2 == null) {
+            return 0;
+        } else if (番号1 != null && 番号2 != null
+                && 番号1.padZeroToLeft(担当介護支援専門員番号LENGTH)
+                .equals(番号2.padZeroToLeft(担当介護支援専門員番号LENGTH))) {
+            return 0;
+        }
+        return 1;
+    }
+
+    private int checkInt(int int1, int int2) {
+        return int1 == int2 ? 0 : 1;
+    }
+
+    /**
+     * 審査方法区分と事業者区分の初期化200904
+     */
+    public void load事業者区分リスト200904() {
+        List<KeyValueDataSource> 事業者区分リスト = get事業者区分リスト();
+        div.getPanelServiceKeikakuhiUp().getDdlJigyoshaKubun().setDataSource(事業者区分リスト);
+        div.getPanelServiceKeikakuhiUp().getDdlJigyoshaKubun().setSelectedIndex(0);
+        List<KeyValueDataSource> 審査方法区分リスト = get審査方法リスト();
+        div.getPanelServiceKeikakuhiUp().getRdoShinsahouhou().setDataSource(審査方法区分リスト);
+        div.getPanelServiceKeikakuhiUp().getRdoShinsahouhou().setSelectedIndex(0);
+    }
+
+    /**
+     * 審査方法区分と事業者区分の初期化200904前
+     */
+    public void load事業者区分リスト200904前() {
+        ServiceCodeInputCommonChildDivDiv serviceCodeInputDiv = (ServiceCodeInputCommonChildDivDiv) div
+                .getPanelServiceKeikakuhiDown().getCcdServiceCodeInput2();
+        serviceCodeInputDiv.getTxtServiceCode1().setValue(サービスコード1);
+        List<KeyValueDataSource> 事業者区分リスト = get事業者区分リスト();
+        div.getPanelServiceKeikakuhiDown().getDdlShiteiJigyoshaKubunCode().setDataSource(事業者区分リスト);
+        div.getPanelServiceKeikakuhiDown().getDdlShiteiJigyoshaKubunCode().setSelectedIndex(0);
+        List<KeyValueDataSource> 審査方法区分リスト = get審査方法リスト();
+        div.getPanelServiceKeikakuhiDown().getRdoShinsaHouhou().setDataSource(審査方法区分リスト);
+        div.getPanelServiceKeikakuhiDown().getRdoShinsaHouhou().setSelectedIndex(0);
+    }
+
+    /**
+     * パラメータ設定
+     */
+    public void putViewState() {
+        ViewStateHolder.put(ViewStateKeys.処理モード, ViewStateHolder.get(ViewStateKeys.処理モード, RString.class));
+        ViewStateHolder.put(ViewStateKeys.申請日, div.getPanelHead().getTxtShinseiYMD().getValue());
+        SyokanbaraihishikyushinseiketteParameter paramter = new SyokanbaraihishikyushinseiketteParameter(
+                ViewStateHolder.get(ViewStateKeys.被保険者番号, HihokenshaNo.class),
+                ViewStateHolder.get(ViewStateKeys.サービス年月, FlexibleYearMonth.class),
+                ViewStateHolder.get(ViewStateKeys.整理番号, RString.class),
+                new JigyoshaNo(div.getPanelHead().getTxtJigyoshaBango().getValue()),
+                div.getPanelHead().getTxtShomeisho().getValue(),
+                div.getPanelHead().getTxtMeisayiBango().getValue(),
+                null);
+        ViewStateHolder.put(ViewStateKeys.償還払費申請検索キー, paramter);
     }
 
     private void set基本情報ボタン制御(ShikibetsuNoKanri shikibetsuNoKanri, HihokenshaNo 被保険者番号,
@@ -932,7 +1091,7 @@ public class ServiceKeikakuHiPanelHandler {
         if (設定不可.equals(shikibetsuNoKanri.get特定診療費設定区分())) {
             div.getPanelHead().getBtnTokuteiShinryo().setDisabled(true);
         } else if (設定可必須.equals(shikibetsuNoKanri.get特定診療費設定区分())) {
-            int count2 = SyokanbaraihiShikyuShinseiKetteManager.createInstance().delShokanMeisaiCount(被保険者番号,
+            int count2 = SyokanbaraihiShikyuShinseiKetteManager.createInstance().updShokanTokuteiShinryohi(被保険者番号,
                     サービス年月, 整理番号, 事業者番号, 様式番号, 明細番号);
             if (count2 != 0) {
                 div.getPanelHead().getBtnTokuteiShinryo().setIconNameEnum(IconName.Incomplete);
