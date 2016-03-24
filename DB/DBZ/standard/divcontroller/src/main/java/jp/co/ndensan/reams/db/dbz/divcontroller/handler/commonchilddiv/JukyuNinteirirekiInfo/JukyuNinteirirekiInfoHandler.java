@@ -52,8 +52,8 @@ public class JukyuNinteirirekiInfoHandler {
             row.getShinseiYMD().setValue(list.get申請日());
             // QA958 申請種別
             row.setShiseiShubetsu(list.get申請種別().getColumnValue());
-            FlexibleYearMonth yokaigoJotai = list.get認定有効開始日().getYearMonth();
-            if (yokaigoJotai == null || yokaigoJotai.isEmpty()) {
+            FlexibleYearMonth yokaigoJotai = (list.get認定有効開始日() == null ? null : list.get認定有効開始日().getYearMonth());
+            if (yokaigoJotai == null) {
                 row.setYokaigoJotaiKubun(RString.EMPTY);
             } else if (new FlexibleYearMonth("200004").isBefore(yokaigoJotai)
                     && yokaigoJotai.isBefore(new FlexibleYearMonth("200203"))) {
