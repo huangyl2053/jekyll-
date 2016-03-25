@@ -4,6 +4,9 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.report.IReportSource;
 import jp.co.ndensan.reams.uz.uza.report.source.ReportItem;
 
+/**
+ * 居宅（介護予防）サービス計画作成依頼（変更）届出書のReportSourceです。
+ */
 public class ItakuServiceKeikaluSakuseiIraiTodokedeshoReportSource implements IReportSource {
 // <editor-fold defaultstate="collapsed" desc="Generated Code">
 
