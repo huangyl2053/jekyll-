@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbz.business.core.koseishichosonmaster;
+package jp.co.ndensan.reams.db.dbz.business.core.koseishichosonmaster.koseishichosonmaster;
 
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShoKisaiHokenshaNo;
 import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT7051KoseiShichosonMasterEntity;
@@ -15,7 +15,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
  */
 public class KoseiShichosonMaster {
 
-    private DbT7051KoseiShichosonMasterEntity koseiShichosonMaster;
+    private DbT7051KoseiShichosonMasterEntity koseiShichosonMasterEntity;
 
     /**
      * コンストラクタです。
@@ -29,7 +29,7 @@ public class KoseiShichosonMaster {
      * @param koseiShichosonMaster DbT7051KoseiShichosonMasterEntity
      */
     public KoseiShichosonMaster(DbT7051KoseiShichosonMasterEntity koseiShichosonMaster) {
-        this.koseiShichosonMaster = koseiShichosonMaster;
+        this.koseiShichosonMasterEntity = koseiShichosonMaster;
     }
 
     /**
@@ -38,7 +38,7 @@ public class KoseiShichosonMaster {
      * @return 市町村コード
      */
     public LasdecCode getShichosonCode() {
-        return koseiShichosonMaster.getShichosonCode();
+        return koseiShichosonMasterEntity.getShichosonCode();
     }
 
     /**
@@ -47,7 +47,7 @@ public class KoseiShichosonMaster {
      * @return 証記載保険者番号
      */
     public ShoKisaiHokenshaNo getShoKisaiHokenshaNo() {
-        return koseiShichosonMaster.getShoKisaiHokenshaNo();
+        return koseiShichosonMasterEntity.getShoKisaiHokenshaNo();
     }
 
     /**
@@ -56,6 +56,6 @@ public class KoseiShichosonMaster {
      * @return 市町村名称
      */
     public RString getShichosonMeisho() {
-        return koseiShichosonMaster.getShichosonMeisho();
+        return koseiShichosonMasterEntity.getShichosonMeisho();
     }
 }
