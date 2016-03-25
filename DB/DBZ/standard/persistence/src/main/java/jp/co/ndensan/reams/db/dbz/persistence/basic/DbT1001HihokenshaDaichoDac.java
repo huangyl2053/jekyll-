@@ -106,10 +106,11 @@ public class DbT1001HihokenshaDaichoDac implements ISaveable<DbT1001HihokenshaDa
      *
      * @param 市町村コード 市町村コード
      * @param 被保険者番号 被保険者番号
-     * @return
-     * @throws NullPointerException
+     * @return List<DbT1001HihokenshaDaichoEntity>
+     * @throws NullPointerException 引数のいずれかがnullの場合
      */
-    public List<DbT1001HihokenshaDaichoEntity> selectByHihokenshaNoAndShichosonCode(LasdecCode 市町村コード, HihokenshaNo 被保険者番号) throws NullPointerException {
+    public List<DbT1001HihokenshaDaichoEntity> selectByHihokenshaNoAndShichosonCode(LasdecCode 市町村コード,
+            HihokenshaNo 被保険者番号) throws NullPointerException {
         requireNonNull(市町村コード, UrSystemErrorMessages.値がnull.getReplacedMessage("市町村コード"));
         requireNonNull(被保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage("被保険者番号"));
 
@@ -176,9 +177,11 @@ public class DbT1001HihokenshaDaichoDac implements ISaveable<DbT1001HihokenshaDa
                 order(new OrderBy(idoYMD, Order.DESC, NullsOrder.LAST), new OrderBy(edaNo, Order.DESC, NullsOrder.LAST)).
                 toList(DbT1001HihokenshaDaichoEntity.class);
         for (DbT1001HihokenshaDaichoEntity entity : entityList) {
-            if (!entity.getShikakuSoshitsuYMD().isEmpty() && 基準年月日.isBefore(entity.getShikakuSoshitsuYMD())) {
+            FlexibleDate shikakuSoshitsuYMD = entity.getShikakuSoshitsuYMD();
+            FlexibleDate shikakuShutokuYMD = entity.getShikakuShutokuYMD();
+            if (shikakuSoshitsuYMD != null && !shikakuSoshitsuYMD.isEmpty() && 基準年月日.isBefore(shikakuSoshitsuYMD)) {
                 return entity;
-            } else if (!entity.getShikakuShutokuYMD().isEmpty() && entity.getShikakuShutokuYMD().isBeforeOrEquals(基準年月日)) {
+            } else if (shikakuShutokuYMD != null && !shikakuShutokuYMD.isEmpty() && shikakuShutokuYMD.isBeforeOrEquals(基準年月日)) {
                 return entity;
             }
         }
@@ -207,9 +210,11 @@ public class DbT1001HihokenshaDaichoDac implements ISaveable<DbT1001HihokenshaDa
                 order(new OrderBy(idoYMD, Order.DESC, NullsOrder.LAST), new OrderBy(edaNo, Order.DESC, NullsOrder.LAST)).
                 toList(DbT1001HihokenshaDaichoEntity.class);
         for (DbT1001HihokenshaDaichoEntity entity : entityList) {
-            if (!entity.getShikakuSoshitsuYMD().isEmpty() && 基準年月日.isBefore(entity.getShikakuSoshitsuYMD())) {
+            FlexibleDate shikakuSoshitsuYMD = entity.getShikakuSoshitsuYMD();
+            FlexibleDate shikakuShutokuYMD = entity.getShikakuShutokuYMD();
+            if (shikakuSoshitsuYMD != null && !shikakuSoshitsuYMD.isEmpty() && 基準年月日.isBefore(shikakuSoshitsuYMD)) {
                 return entity;
-            } else if (!entity.getShikakuShutokuYMD().isEmpty() && entity.getShikakuShutokuYMD().isBeforeOrEquals(基準年月日)) {
+            } else if (shikakuShutokuYMD != null && !shikakuShutokuYMD.isEmpty() && shikakuShutokuYMD.isBeforeOrEquals(基準年月日)) {
                 return entity;
             }
         }

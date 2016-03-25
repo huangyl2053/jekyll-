@@ -42,9 +42,12 @@ import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
  */
 public class DbT4001JukyushaDaichoDac implements ISaveable<DbT4001JukyushaDaichoEntity> {
 
+    private static final Code YUKOMUKOKUBUN_有効 = new Code("1");
+    private static final int INT_6 = 6;
+    private static final RString メッセージ_被保険者番号 = new RString("被保険者番号");
+    private static final RString メッセージ_市町村コード = new RString("市町村コード");
     @InjectSession
     private SqlSession session;
-    private final static Code YukoMukoKubun_有効 = new Code("1");
 
     /**
      * 主キーで受給者台帳を取得します。
@@ -64,8 +67,8 @@ public class DbT4001JukyushaDaichoDac implements ISaveable<DbT4001JukyushaDaicho
             RString 履歴番号,
             RString 枝番,
             Code 受給申請事由) throws NullPointerException {
-        requireNonNull(市町村コード, UrSystemErrorMessages.値がnull.getReplacedMessage("市町村コード"));
-        requireNonNull(被保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage("被保険者番号"));
+        requireNonNull(市町村コード, UrSystemErrorMessages.値がnull.getReplacedMessage(メッセージ_市町村コード.toString()));
+        requireNonNull(被保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage(メッセージ_被保険者番号.toString()));
         requireNonNull(履歴番号, UrSystemErrorMessages.値がnull.getReplacedMessage("履歴番号"));
         requireNonNull(枝番, UrSystemErrorMessages.値がnull.getReplacedMessage("枝番"));
         requireNonNull(受給申請事由, UrSystemErrorMessages.値がnull.getReplacedMessage("受給申請事由"));
@@ -117,11 +120,11 @@ public class DbT4001JukyushaDaichoDac implements ISaveable<DbT4001JukyushaDaicho
      *
      * @param 被保険者番号 被保険者番号
      * @return DbT4001JukyushaDaichoEntity 受給者台帳のデータ
-     * @throws NullPointerException
+     * @throws NullPointerException 引数のいずれかがnullの場合
      */
     @Transaction
     public DbT4001JukyushaDaichoEntity select受給者台帳(HihokenshaNo 被保険者番号) throws NullPointerException {
-        requireNonNull(被保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage("被保険者番号"));
+        requireNonNull(被保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage(メッセージ_被保険者番号.toString()));
 
         DbAccessorNormalType accessor = new DbAccessorNormalType(session);
 
@@ -140,13 +143,13 @@ public class DbT4001JukyushaDaichoDac implements ISaveable<DbT4001JukyushaDaicho
      * @param 市町村コード 市町村コード
      * @param 被保険者番号 被保険者番号
      * @return DbT4001JukyushaDaichoEntity 受給者台帳のデータ
-     * @throws NullPointerException
+     * @throws NullPointerException 引数のいずれかがnullの場合
      */
     @Transaction
     public DbT4001JukyushaDaichoEntity select受給者台帳情報(LasdecCode 市町村コード,
             HihokenshaNo 被保険者番号) throws NullPointerException {
-        requireNonNull(市町村コード, UrSystemErrorMessages.値がnull.getReplacedMessage("市町村コード"));
-        requireNonNull(被保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage("被保険者番号"));
+        requireNonNull(市町村コード, UrSystemErrorMessages.値がnull.getReplacedMessage(メッセージ_市町村コード.toString()));
+        requireNonNull(被保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage(メッセージ_被保険者番号.toString()));
 
         DbAccessorNormalType accessor = new DbAccessorNormalType(session);
 
@@ -167,14 +170,14 @@ public class DbT4001JukyushaDaichoDac implements ISaveable<DbT4001JukyushaDaicho
      * @param 被保険者番号 被保険者番号
      * @param 有効無効区分 有効無効区分
      * @return DbT4001JukyushaDaichoEntity 受給者台帳のデータ
-     * @throws NullPointerException
+     * @throws NullPointerException 引数のいずれかがnullの場合
      */
     @Transaction
     public DbT4001JukyushaDaichoEntity select受給者台帳情報(LasdecCode 市町村コード,
             HihokenshaNo 被保険者番号,
             Code 有効無効区分) throws NullPointerException {
-        requireNonNull(市町村コード, UrSystemErrorMessages.値がnull.getReplacedMessage("市町村コード"));
-        requireNonNull(被保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage("被保険者番号"));
+        requireNonNull(市町村コード, UrSystemErrorMessages.値がnull.getReplacedMessage(メッセージ_市町村コード.toString()));
+        requireNonNull(被保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage(メッセージ_被保険者番号.toString()));
         requireNonNull(有効無効区分, UrSystemErrorMessages.値がnull.getReplacedMessage("有効無効区分"));
 
         DbAccessorNormalType accessor = new DbAccessorNormalType(session);
@@ -193,14 +196,14 @@ public class DbT4001JukyushaDaichoDac implements ISaveable<DbT4001JukyushaDaicho
     /**
      * 受給者台帳情報取得
      *
-     * @param 被保険者番号
-     * @param サービス提供年月
+     * @param 被保険者番号 被保険者番号
+     * @param サービス提供年月 サービス提供年月
      * @return DbT4001JukyushaDaichoEntity
-     * @throws NullPointerException
+     * @throws NullPointerException 引数のいずれかがnullの場合
      */
     public DbT4001JukyushaDaichoEntity select受給者台帳情報(HihokenshaNo 被保険者番号,
             FlexibleYearMonth サービス提供年月) throws NullPointerException {
-        requireNonNull(被保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage("被保険者番号"));
+        requireNonNull(被保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage(メッセージ_被保険者番号.toString()));
         requireNonNull(サービス提供年月, UrSystemErrorMessages.値がnull.getReplacedMessage("サービス年月"));
         DbAccessorNormalType accessor = new DbAccessorNormalType(session);
         return accessor.select().
@@ -209,7 +212,7 @@ public class DbT4001JukyushaDaichoDac implements ISaveable<DbT4001JukyushaDaicho
                                 eq(hihokenshaNo, 被保険者番号),
                                 leq(ninteiYukoKikanKaishiYMD, サービス提供年月),
                                 leq(サービス提供年月, ninteiYukoKikanShuryoYMD),
-                                eq(yukoMukoKubun, YukoMukoKubun_有効),
+                                eq(yukoMukoKubun, YUKOMUKOKUBUN_有効),
                                 not(eq(logicalDeletedFlag, true)))).
                 order(by(rirekiNo, Order.DESC), by(edaban, Order.DESC)).limit(1).
                 toObject(DbT4001JukyushaDaichoEntity.class);
@@ -222,13 +225,13 @@ public class DbT4001JukyushaDaichoDac implements ISaveable<DbT4001JukyushaDaicho
      * @param 有効無効区分 有効無効区分
      * @param 申請状況区分 申請状況区分
      * @return DbT4001JukyushaDaichoEntity 受給者台帳のデータ
-     * @throws NullPointerException
+     * @throws NullPointerException 引数のいずれかがnullの場合
      */
     @Transaction
     public List<DbT4001JukyushaDaichoEntity> select受給者台帳情報(HihokenshaNo 被保険者番号,
             Code 有効無効区分,
             Code 申請状況区分) throws NullPointerException {
-        requireNonNull(被保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage("被保険者番号"));
+        requireNonNull(被保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage(メッセージ_被保険者番号.toString()));
         requireNonNull(有効無効区分, UrSystemErrorMessages.値がnull.getReplacedMessage("有効無効区分"));
         requireNonNull(申請状況区分, UrSystemErrorMessages.値がnull.getReplacedMessage("申請状況区分"));
 
@@ -248,12 +251,12 @@ public class DbT4001JukyushaDaichoDac implements ISaveable<DbT4001JukyushaDaicho
     /**
      * select認定有効期間
      *
-     * @param 被保険者番号
-     * @return
+     * @param 被保険者番号 被保険者番号
+     * @return DbT4001JukyushaDaichoEntity
      */
     @Transaction
     public DbT4001JukyushaDaichoEntity select認定有効期間(HihokenshaNo 被保険者番号) {
-        requireNonNull(被保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage("被保険者番号"));
+        requireNonNull(被保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage(メッセージ_被保険者番号.toString()));
 
         DbAccessorNormalType accessor = new DbAccessorNormalType(session);
 
@@ -269,9 +272,9 @@ public class DbT4001JukyushaDaichoDac implements ISaveable<DbT4001JukyushaDaicho
     /**
      * select認定有効期間
      *
-     * @param 被保険者番号
-     * @param サービス提供年月
-     * @return
+     * @param 被保険者番号 被保険者番号
+     * @param サービス提供年月 サービス提供年月
+     * @return DbT4001JukyushaDaichoEntity
      */
     @Transaction
     public DbT4001JukyushaDaichoEntity select要介護認定情報(HihokenshaNo 被保険者番号,
@@ -293,8 +296,8 @@ public class DbT4001JukyushaDaichoDac implements ISaveable<DbT4001JukyushaDaicho
     /**
      * get要介護認定情報
      *
-     * @param 被保険者番号
-     * @param サービス提供年月
+     * @param 被保険者番号 被保険者番号
+     * @param サービス提供年月 サービス提供年月
      * @return List<DbT4001JukyushaDaichoEntity>
      */
     @Transaction
@@ -305,9 +308,9 @@ public class DbT4001JukyushaDaichoDac implements ISaveable<DbT4001JukyushaDaicho
                 table(DbT4001JukyushaDaicho.class).
                 where(and(
                                 eq(hihokenshaNo, 被保険者番号),
-                                leq(substr(ninteiYukoKikanKaishiYMD, 1, 6), サービス提供年月),
-                                leq(サービス提供年月, substr(ninteiYukoKikanShuryoYMD, 1, 6)),
-                                eq(yukoMukoKubun, YukoMukoKubun_有効),
+                                leq(substr(ninteiYukoKikanKaishiYMD, 1, INT_6), サービス提供年月),
+                                leq(サービス提供年月, substr(ninteiYukoKikanShuryoYMD, 1, INT_6)),
+                                eq(yukoMukoKubun, YUKOMUKOKUBUN_有効),
                                 not(eq(logicalDeletedFlag, true)))).
                 order(by(rirekiNo, Order.DESC), by(edaban, Order.DESC)).
                 toList(DbT4001JukyushaDaichoEntity.class);
@@ -316,7 +319,7 @@ public class DbT4001JukyushaDaichoDac implements ISaveable<DbT4001JukyushaDaicho
     /**
      * 指定サービス種類の取得
      *
-     * @param 被保険者番号
+     * @param 被保険者番号 被保険者番号
      * @return DbT4001JukyushaDaichoEntity
      */
     @Transaction
@@ -326,8 +329,9 @@ public class DbT4001JukyushaDaichoDac implements ISaveable<DbT4001JukyushaDaicho
                 table(DbT4001JukyushaDaicho.class).
                 where(and(
                                 eq(DbT4001JukyushaDaicho.hihokenshaNo, 被保険者番号),
-                                eq(yukoMukoKubun, YukoMukoKubun_有効),
-                                eq(DbT4001JukyushaDaicho.logicalDeletedFlag, false))).order(by(rirekiNo, Order.DESC), by(edaban, Order.DESC)).limit(1).toObject(DbT4001JukyushaDaichoEntity.class);
+                                eq(yukoMukoKubun, YUKOMUKOKUBUN_有効),
+                                eq(DbT4001JukyushaDaicho.logicalDeletedFlag, false)))
+                .order(by(rirekiNo, Order.DESC), by(edaban, Order.DESC)).limit(1).toObject(DbT4001JukyushaDaichoEntity.class);
     }
 
     /**
@@ -341,8 +345,8 @@ public class DbT4001JukyushaDaichoDac implements ISaveable<DbT4001JukyushaDaicho
     @Transaction
     public DbT4001JukyushaDaichoEntity selectByHihokenshaNo(HihokenshaNo 被保険者番号, LasdecCode 市町村コード)
             throws NullPointerException {
-        requireNonNull(被保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage("被保険者番号"));
-        requireNonNull(市町村コード, UrSystemErrorMessages.値がnull.getReplacedMessage("市町村コード"));
+        requireNonNull(被保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage(メッセージ_被保険者番号.toString()));
+        requireNonNull(市町村コード, UrSystemErrorMessages.値がnull.getReplacedMessage(メッセージ_市町村コード.toString()));
         DbAccessorNormalType accessor = new DbAccessorNormalType(session);
         return accessor.select().
                 table(DbT4001JukyushaDaicho.class).
