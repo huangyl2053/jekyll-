@@ -17,7 +17,7 @@ public class ChosahyoSaiCheckhyoReportSource implements IReportSource {
     @ReportItem(name = "hihokenshaName", length = 20, order = 3)
     public RString hihokenshaName;
     @ReportItem(name = "PageCount", length = 10, order = 4)
-    public RString PageCount;
+    public RString pageCount;
     @ReportItem(name = "printTimeStamp", length = 34, order = 5)
     public RString printTimeStamp;
     @ReportItem(name = "zenkaiIchijihanteikekka", length = 10, order = 6)
