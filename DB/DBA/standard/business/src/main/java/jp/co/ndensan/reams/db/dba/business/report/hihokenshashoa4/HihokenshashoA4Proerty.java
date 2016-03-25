@@ -41,7 +41,7 @@ public class HihokenshashoA4Proerty extends ReportPropertyBase<HihokenshashoA4Re
         return breakers.add(catalog.new SimplePageBreaker(
 
 
-            PAGE_BREAK_KEYS){
+            PAGE_BREAK_KEYS) {
          @Override
             public ReportLineRecord<HihokenshashoA4ReportSource> occuredBreak(
                     ReportLineRecord<HihokenshashoA4ReportSource> currentRecord,
