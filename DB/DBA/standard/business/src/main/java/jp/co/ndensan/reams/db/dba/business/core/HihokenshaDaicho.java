@@ -409,11 +409,11 @@ public class HihokenshaDaicho {
     /**
      * 適用届出年月日を設定します。
      *
-     * @param jushochitokureiTekiyoTodokedeYMD 適用届出年月日
+     * @param tekiyoTodokedeYMD 適用届出年月日
      */
-    public void setJushochitokureiTekiyoTodokedeYMD(FlexibleDate jushochitokureiTekiyoTodokedeYMD) {
-        requireNonNull(jushochitokureiTekiyoTodokedeYMD, UrSystemErrorMessages.値がnull.getReplacedMessage("適用届出年月日"));
-        entity.setJushochitokureiTekiyoTodokedeYMD(jushochitokureiTekiyoTodokedeYMD);
+    public void setJushochitokureiTekiyoTodokedeYMD(FlexibleDate tekiyoTodokedeYMD) {
+        requireNonNull(tekiyoTodokedeYMD, UrSystemErrorMessages.値がnull.getReplacedMessage("適用届出年月日"));
+        entity.setJushochitokureiTekiyoTodokedeYMD(tekiyoTodokedeYMD);
     }
 
     /**
@@ -466,11 +466,11 @@ public class HihokenshaDaicho {
     /**
      * 解除届出年月日を設定します。
      *
-     * @param jushochitokureiKaijoTodokedeYMD 解除届出年月日
+     * @param kaijoTodokedeYMD 解除届出年月日
      */
-    public void setJushochitokureiKaijoTodokedeYMD(FlexibleDate jushochitokureiKaijoTodokedeYMD) {
-        requireNonNull(jushochitokureiKaijoTodokedeYMD, UrSystemErrorMessages.値がnull.getReplacedMessage("解除届出年月日"));
-        entity.setJushochitokureiKaijoTodokedeYMD(jushochitokureiKaijoTodokedeYMD);
+    public void setJushochitokureiKaijoTodokedeYMD(FlexibleDate kaijoTodokedeYMD) {
+        requireNonNull(kaijoTodokedeYMD, UrSystemErrorMessages.値がnull.getReplacedMessage("解除届出年月日"));
+        entity.setJushochitokureiKaijoTodokedeYMD(kaijoTodokedeYMD);
     }
 
     /**
@@ -523,11 +523,11 @@ public class HihokenshaDaicho {
     /**
      * 広住特措置元市町村コードを設定します。
      *
-     * @param koikinaiTokureiSochimotoShichosonCode 広住特措置元市町村コード
+     * @param koikinaiShichosonCode 広住特措置元市町村コード
      */
-    public void setKoikinaiTokureiSochimotoShichosonCode(LasdecCode koikinaiTokureiSochimotoShichosonCode) {
-        requireNonNull(koikinaiTokureiSochimotoShichosonCode, UrSystemErrorMessages.値がnull.getReplacedMessage("広住特措置元市町村コード"));
-        entity.setKoikinaiTokureiSochimotoShichosonCode(koikinaiTokureiSochimotoShichosonCode);
+    public void setKoikinaiTokureiSochimotoShichosonCode(LasdecCode koikinaiShichosonCode) {
+        requireNonNull(koikinaiShichosonCode, UrSystemErrorMessages.値がnull.getReplacedMessage("広住特措置元市町村コード"));
+        entity.setKoikinaiTokureiSochimotoShichosonCode(koikinaiShichosonCode);
     }
 
     /**

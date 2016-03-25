@@ -7,6 +7,7 @@ package jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.NinteiCho
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.parentdiv.kaigoshikakukihon.IKaigoShikakuKihonDiv;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.parentdiv.kaigoshikakukihon.KaigoShikakuKihonDiv;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.binding.*;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.NinteiChosaIraiShokai.INinteiChosaIraiShokaiDiv;
@@ -33,6 +34,8 @@ public class NinteiChosaIraiShokaiDiv extends Panel implements INinteiChosaIraiS
     private DataGrid<dgNinteiChosaIrai_Row> dgNinteiChosaIrai;
     @JsonProperty("btnClose")
     private Button btnClose;
+    @JsonProperty("hdnHihokenshaNo")
+    private RString hdnHihokenshaNo;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -83,6 +86,24 @@ public class NinteiChosaIraiShokaiDiv extends Panel implements INinteiChosaIraiS
     @JsonProperty("btnClose")
     public void setBtnClose(Button btnClose) {
         this.btnClose = btnClose;
+    }
+
+    /*
+     * gethdnHihokenshaNo
+     * @return hdnHihokenshaNo
+     */
+    @JsonProperty("hdnHihokenshaNo")
+    public RString getHdnHihokenshaNo() {
+        return hdnHihokenshaNo;
+    }
+
+    /*
+     * sethdnHihokenshaNo
+     * @param hdnHihokenshaNo hdnHihokenshaNo
+     */
+    @JsonProperty("hdnHihokenshaNo")
+    public void setHdnHihokenshaNo(RString hdnHihokenshaNo) {
+        this.hdnHihokenshaNo = hdnHihokenshaNo;
     }
 
     // </editor-fold>

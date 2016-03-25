@@ -51,7 +51,7 @@ public class JukyuShikakuShomeishoModel {
      * @return 要介護状態区分
      */
     public RString get要介護状態区分() {
-        if (jukyuShikakuShomeishoHakkoEntity.getYokaigoJotaiKubunCode()!=null 
+        if (jukyuShikakuShomeishoHakkoEntity.getYokaigoJotaiKubunCode() != null 
                 && !jukyuShikakuShomeishoHakkoEntity.getYokaigoJotaiKubunCode().isEmpty()) {
             return YokaigoJotaiKubun09.toValue(jukyuShikakuShomeishoHakkoEntity.getYokaigoJotaiKubunCode()).getName();
         } else {
@@ -82,7 +82,7 @@ public class JukyuShikakuShomeishoModel {
      * @return 受給申請年月日
      */
     public RString get受給申請年月日() {
-        if (jukyuShikakuShomeishoHakkoEntity.getJukyuShinseiYMD() !=null 
+        if (jukyuShikakuShomeishoHakkoEntity.getJukyuShinseiYMD() != null 
                 && !jukyuShikakuShomeishoHakkoEntity.getJukyuShinseiYMD().isEmpty()) {
             return new FlexibleDate(jukyuShikakuShomeishoHakkoEntity.getJukyuShinseiYMD()).wareki().toDateString();
         } else {

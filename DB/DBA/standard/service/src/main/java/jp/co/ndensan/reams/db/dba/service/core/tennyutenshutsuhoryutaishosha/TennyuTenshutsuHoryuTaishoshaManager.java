@@ -9,7 +9,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import jp.co.ndensan.reams.db.dba.business.core.shikakushutokujogaishakanri.ShikakuShutokuJogaishaKanri;
-import jp.co.ndensan.reams.db.dba.business.core.tennyutenshutsuhoryutaishosha.TennyuTenshutsuHoryuTaishosha;
+import jp.co.ndensan.reams.db.dba.business.core.tennyutenshutsuhoryutaishosha.ITennyuTenshutsuHoryuTaishosha;
 import jp.co.ndensan.reams.db.dba.business.core.tennyutenshutsuhoryutaishosha.TennyushutsuHoryuTaishoshaBusiness;
 import jp.co.ndensan.reams.db.dba.business.core.tennyutenshutsuhoryutaishosha.TenshutsuHoryuTaishoshaBusiness;
 import jp.co.ndensan.reams.db.dba.entity.db.tennyutenshutsuhoryutaishosha.TennyushutsuHoryuTaishoshaEntity;
@@ -30,16 +30,16 @@ import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
 
 /**
  *
- * 転入転出保留対象者管理のMapperクラスです。
+ * 転入転出保留対象者管理のmanagerクラスです。
  */
 public class TennyuTenshutsuHoryuTaishoshaManager {
 
-    private final MapperProvider mapperProvider;
-    private final DbT1011TenshutsuHoryuTaishoshaDac tenshutsuHoryuTaishoshaDac;
-    private final DbT1010TennyushutsuHoryuTaishoshaDac tennyushutsuHoryuTaishoshaDac;
     private static final RString 転出保留者 = new RString("転出保留者");
     private static final RString 転入保留者 = new RString("転入保留者");
     private static final RString 広域保留者 = new RString("広域保留者");
+    private final MapperProvider mapperProvider;
+    private final DbT1011TenshutsuHoryuTaishoshaDac tenshutsuHoryuTaishoshaDac;
+    private final DbT1010TennyushutsuHoryuTaishoshaDac tennyushutsuHoryuTaishoshaDac;
 
     /**
      * コンストラクタです。
@@ -72,16 +72,16 @@ public class TennyuTenshutsuHoryuTaishoshaManager {
     /**
      * 転出保留対象者情報の取得処理します。
      *
-     * @return SearchResult<TennyuTenshutsuHoryuTaishosha>
+     * @return SearchResult<ITennyuTenshutsuHoryuTaishosha>
      */
     @Transaction
-    public SearchResult<TennyuTenshutsuHoryuTaishosha> getTenshutsuHoryuTaishoshaList() {
+    public SearchResult<ITennyuTenshutsuHoryuTaishosha> getTenshutsuHoryuTaishoshaList() {
         ITennyuTenshutsuHoryuTaishoshaMapper mapper = mapperProvider.create(ITennyuTenshutsuHoryuTaishoshaMapper.class);
         List<TennyushutsuHoryuTaishoshaEntity> entityList = mapper.get転出保留対象者情報の取得処理();
         if (entityList.isEmpty()) {
             return SearchResult.of(Collections.<ShikakuShutokuJogaishaKanri>emptyList(), 0, false);
         }
-        List<TennyuTenshutsuHoryuTaishosha> businessList = new ArrayList<>();
+        List<ITennyuTenshutsuHoryuTaishosha> businessList = new ArrayList<>();
         for (TennyushutsuHoryuTaishoshaEntity entity : entityList) {
             businessList.add(new TennyushutsuHoryuTaishoshaBusiness(entity));
         }
@@ -91,16 +91,16 @@ public class TennyuTenshutsuHoryuTaishoshaManager {
     /**
      * 転入保留対象者情報の取得処理します。
      *
-     * @return SearchResult<TennyuTenshutsuHoryuTaishosha>
+     * @return SearchResult<ITennyuTenshutsuHoryuTaishosha>
      */
     @Transaction
-    public SearchResult<TennyuTenshutsuHoryuTaishosha> getTennyuHoryuTaishoshaList() {
+    public SearchResult<ITennyuTenshutsuHoryuTaishosha> getTennyuHoryuTaishoshaList() {
         ITennyuTenshutsuHoryuTaishoshaMapper mapper = mapperProvider.create(ITennyuTenshutsuHoryuTaishoshaMapper.class);
         List<TenshutsuHoryuTaishoshaEntity> entityList = mapper.get転入保留対象者情報の取得処理();
         if (entityList.isEmpty()) {
             return SearchResult.of(Collections.<ShikakuShutokuJogaishaKanri>emptyList(), 0, false);
         }
-        List<TennyuTenshutsuHoryuTaishosha> businessList = new ArrayList<>();
+        List<ITennyuTenshutsuHoryuTaishosha> businessList = new ArrayList<>();
         for (TenshutsuHoryuTaishoshaEntity entity : entityList) {
             businessList.add(new TenshutsuHoryuTaishoshaBusiness(entity));
         }
@@ -110,16 +110,16 @@ public class TennyuTenshutsuHoryuTaishoshaManager {
     /**
      * 広域保留対象者 情報の取得処理します。
      *
-     * @return SearchResult<TennyuTenshutsuHoryuTaishosha>
+     * @return SearchResult<ITennyuTenshutsuHoryuTaishosha>
      */
     @Transaction
-    public SearchResult<TennyuTenshutsuHoryuTaishosha> getKoikiHoryuTaishoshaList() {
+    public SearchResult<ITennyuTenshutsuHoryuTaishosha> getKoikiHoryuTaishoshaList() {
         ITennyuTenshutsuHoryuTaishoshaMapper mapper = mapperProvider.create(ITennyuTenshutsuHoryuTaishoshaMapper.class);
         List<TenshutsuHoryuTaishoshaEntity> entityList = mapper.get広域保留対象者情報の取得処理();
         if (entityList.isEmpty()) {
             return SearchResult.of(Collections.<ShikakuShutokuJogaishaKanri>emptyList(), 0, false);
         }
-        List<TennyuTenshutsuHoryuTaishosha> businessList = new ArrayList<>();
+        List<ITennyuTenshutsuHoryuTaishosha> businessList = new ArrayList<>();
         for (TenshutsuHoryuTaishoshaEntity entity : entityList) {
             businessList.add(new TenshutsuHoryuTaishoshaBusiness(entity));
         }
