@@ -85,15 +85,15 @@ public class ShisetsuJohoInputGuideFinder {
             RString 事業者種別,
             JigyoshaNo 事業者番号,
             FlexibleDate 有効開始年月日) {
-        List<KaigoJogaiTokureiTaishoShisetsuInputGuide> kaigoJogaiTokureiTaishoShisetsuList = new ArrayList<>();
+        List<KaigoJogaiTokureiTaishoShisetsuInputGuide> taishoShisetsuList = new ArrayList<>();
         List<DbT1005KaigoJogaiTokureiTaishoShisetsuEntity> dbT1005List = dbT1005Dac.
                 select介護除外住所地特例対象施設(事業者種別, 事業者番号, 有効開始年月日);
         if (dbT1005List == null || dbT1005List.isEmpty()) {
             return SearchResult.of(Collections.<KaigoJogaiTokureiTaishoShisetsuInputGuide>emptyList(), 0, false);
         }
         for (DbT1005KaigoJogaiTokureiTaishoShisetsuEntity entity : dbT1005List) {
-            kaigoJogaiTokureiTaishoShisetsuList.add(new KaigoJogaiTokureiTaishoShisetsuInputGuide(entity));
+            taishoShisetsuList.add(new KaigoJogaiTokureiTaishoShisetsuInputGuide(entity));
         }
-        return SearchResult.of(kaigoJogaiTokureiTaishoShisetsuList, 0, false);
+        return SearchResult.of(taishoShisetsuList, 0, false);
     }
 }
