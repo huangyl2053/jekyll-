@@ -109,13 +109,13 @@ public class ShokanKetteiTsuchiShoSealer2ReportSource implements IReportSource {
     @ReportItem(name = "kouzaShu", length = 30, order = 46)
     public RString kouzaShu;
     @ReportItem(name = "ShoHokenshaNo", length = 6, order = 47)
-    public RString ShoHokenshaNo;
+    public RString shoHokenshaNo;
     @ReportItem(name = "hihokenshaNo21", length = 10, order = 48)
     public RString hihokenshaNo21;
     @ReportItem(name = "ServiceYM", length = 6, order = 49)
-    public RString ServiceYM;
+    public RString serviceYM;
     @ReportItem(name = "Tsuban2", length = 4, order = 50)
-    public RString Tsuban2;
+    public RString tsuban2;
     @ReportItem(name = "bangoTitle", length = 8, order = 51)
     public RString bangoTitle;
     @ReportItem(name = "kouzaNo", length = 10, order = 52)

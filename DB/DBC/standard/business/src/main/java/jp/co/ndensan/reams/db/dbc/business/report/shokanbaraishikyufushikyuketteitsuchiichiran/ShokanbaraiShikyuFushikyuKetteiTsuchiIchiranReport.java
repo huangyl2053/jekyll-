@@ -6,14 +6,14 @@
 package jp.co.ndensan.reams.db.dbc.business.report.shokanbaraishikyufushikyuketteitsuchiichiran;
 
 import java.util.List;
-import jp.co.ndensan.reams.db.dbc.entity.report.source.shokanbaraishikyufushikyuketteitsuchiichiran.ShokanbaraiShikyuFushikyuKetteiTsuchiIchiranReportSource;
+import jp.co.ndensan.reams.db.dbc.entity.report.source.shokanbaraishikyufushikyuketteitsuchiichiran.ShokanbaraiShikyuFushikyuReportSource;
 import jp.co.ndensan.reams.uz.uza.report.Report;
 import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
 
 /**
  * 償還払支給（不支給）決定通知一覧表覧表のReportです。
  */
-public class ShokanbaraiShikyuFushikyuKetteiTsuchiIchiranReport extends Report<ShokanbaraiShikyuFushikyuKetteiTsuchiIchiranReportSource> {
+public class ShokanbaraiShikyuFushikyuKetteiTsuchiIchiranReport extends Report<ShokanbaraiShikyuFushikyuReportSource> {
 
     private final List<ShokanbaraiShikyuFushikyuKetteiTsuchiIchiranItem> itemList;
 
@@ -40,7 +40,7 @@ public class ShokanbaraiShikyuFushikyuKetteiTsuchiIchiranReport extends Report<S
     }
 
     @Override
-    public void writeBy(ReportSourceWriter<ShokanbaraiShikyuFushikyuKetteiTsuchiIchiranReportSource> reportSourceWriter) {
+    public void writeBy(ReportSourceWriter<ShokanbaraiShikyuFushikyuReportSource> reportSourceWriter) {
         for (ShokanbaraiShikyuFushikyuKetteiTsuchiIchiranItem item : itemList) {
             IShokanbaraiShikyuFushikyuKetteiTsuchiIchiranEditor editor = new ShokanbaraiShikyuFushikyuKetteiTsuchiIchiranEditor(item);
             IShokanbaraiShikyuFushikyuKetteiTsuchiIchiranBuilder builder = new ShokanbaraiShikyuFushikyuKetteiTsuchiIchiranBuilder(editor);

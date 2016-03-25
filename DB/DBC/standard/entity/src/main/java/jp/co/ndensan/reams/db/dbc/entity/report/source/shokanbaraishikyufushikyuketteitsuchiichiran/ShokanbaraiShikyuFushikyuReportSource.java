@@ -1,11 +1,19 @@
-// TODO: 業務に合わせてパスを変更してください
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
 package jp.co.ndensan.reams.db.dbc.entity.report.source.shokanbaraishikyufushikyuketteitsuchiichiran;
 
-import jp.co.ndensan.reams.uz.uza.report.IReportSource;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.report.IReportSource;
 import jp.co.ndensan.reams.uz.uza.report.source.ReportItem;
 
-public class ShokanbaraiShikyuFushikyuKetteiTsuchiIchiranReportSource implements IReportSource {
+/**
+ * 償還払支給（不支給）決定通知一覧表のReportSourceです。
+ *
+ */
+public class ShokanbaraiShikyuFushikyuReportSource implements IReportSource {
 // <editor-fold defaultstate="collapsed" desc="Generated Code">
 
     @ReportItem(name = "printTimeStamp", length = 34, order = 1)

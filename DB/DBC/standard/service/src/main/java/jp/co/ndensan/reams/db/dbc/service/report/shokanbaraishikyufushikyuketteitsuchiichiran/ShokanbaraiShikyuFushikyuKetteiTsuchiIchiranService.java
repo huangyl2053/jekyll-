@@ -10,7 +10,7 @@ import java.util.List;
 import jp.co.ndensan.reams.db.dbc.business.report.shokanbaraishikyufushikyuketteitsuchiichiran.ShokanbaraiShikyuFushikyuKetteiTsuchiIchiranItem;
 import jp.co.ndensan.reams.db.dbc.business.report.shokanbaraishikyufushikyuketteitsuchiichiran.ShokanbaraiShikyuFushikyuKetteiTsuchiIchiranProperty;
 import jp.co.ndensan.reams.db.dbc.business.report.shokanbaraishikyufushikyuketteitsuchiichiran.ShokanbaraiShikyuFushikyuKetteiTsuchiIchiranReport;
-import jp.co.ndensan.reams.db.dbc.entity.report.source.shokanbaraishikyufushikyuketteitsuchiichiran.ShokanbaraiShikyuFushikyuKetteiTsuchiIchiranReportSource;
+import jp.co.ndensan.reams.db.dbc.entity.report.source.shokanbaraishikyufushikyuketteitsuchiichiran.ShokanbaraiShikyuFushikyuReportSource;
 import jp.co.ndensan.reams.uz.uza.report.Printer;
 import jp.co.ndensan.reams.uz.uza.report.SourceDataCollection;
 
@@ -27,7 +27,7 @@ public class ShokanbaraiShikyuFushikyuKetteiTsuchiIchiranService {
      */
     public SourceDataCollection print(List<ShokanbaraiShikyuFushikyuKetteiTsuchiIchiranItem> item) {
         ShokanbaraiShikyuFushikyuKetteiTsuchiIchiranProperty property = new ShokanbaraiShikyuFushikyuKetteiTsuchiIchiranProperty();
-        return new Printer<ShokanbaraiShikyuFushikyuKetteiTsuchiIchiranReportSource>().spool(property, toReports(item));
+        return new Printer<ShokanbaraiShikyuFushikyuReportSource>().spool(property, toReports(item));
     }
 
     private static List<ShokanbaraiShikyuFushikyuKetteiTsuchiIchiranReport> toReports(List<ShokanbaraiShikyuFushikyuKetteiTsuchiIchiranItem> item) {
