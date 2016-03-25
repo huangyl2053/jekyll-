@@ -1,11 +1,13 @@
-// TODO: 業務に合わせてパスを変更してください
 package jp.co.ndensan.reams.db.dba.entity.report.nenreitotatsukakuninlist;
-
 
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.report.IReportSource;
 import jp.co.ndensan.reams.uz.uza.report.source.ReportItem;
 
+/**
+ *
+ * 年齢到達者登録リストヘッダエディターの帳票項目クラスです
+ */
 public class NenreitotatsuKakuninListReportSource implements IReportSource {
 // <editor-fold defaultstate="collapsed" desc="Generated Code">
 

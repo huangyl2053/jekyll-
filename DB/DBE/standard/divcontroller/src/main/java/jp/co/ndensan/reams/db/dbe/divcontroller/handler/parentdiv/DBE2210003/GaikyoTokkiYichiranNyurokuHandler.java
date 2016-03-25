@@ -287,7 +287,7 @@ public class GaikyoTokkiYichiranNyurokuHandler {
             Entry<RString, GaikyoTokkiYichiranNyurokuBusiness> entry = it.next();
             GaikyoTokkiYichiranNyurokuBusiness value = entry.getValue();
             if (div.getTokkiNyuryoku().getTxtFirstChosaKomokuNo().getValue().equals(value.getTemp_認定調査特記事項番号())
-                    && value.getTemp_特記事項().isEmpty()) {
+                    && (value.getTemp_特記事項() == null || value.getTemp_特記事項().isEmpty())) {
 
                 this.値回復(gaikyoTokkiNyurokuMap, key1, div.getTokkiNyuryoku().getTxtFirstChosaKomokuNo());
                 throw new ApplicationException(DbeErrorMessages.特記事項番号が追加不可.getMessage());
@@ -394,7 +394,7 @@ public class GaikyoTokkiYichiranNyurokuHandler {
             Entry<RString, GaikyoTokkiYichiranNyurokuBusiness> entry = it.next();
             GaikyoTokkiYichiranNyurokuBusiness value = entry.getValue();
             if (div.getTokkiNyuryoku().getTxtSecondChosaKomokuNo().getValue().equals(value.getTemp_認定調査特記事項番号())
-                    && value.getTemp_特記事項().isEmpty()) {
+                    && (value.getTemp_特記事項() == null || value.getTemp_特記事項().isEmpty())) {
                 this.値回復(gaikyoTokkiNyurokuMap, key2, div.getTokkiNyuryoku().getTxtSecondChosaKomokuNo());
                 throw new ApplicationException(DbeErrorMessages.特記事項番号が追加不可.getMessage());
             }
@@ -500,7 +500,7 @@ public class GaikyoTokkiYichiranNyurokuHandler {
             Entry<RString, GaikyoTokkiYichiranNyurokuBusiness> entry = it.next();
             GaikyoTokkiYichiranNyurokuBusiness value = entry.getValue();
             if (div.getTokkiNyuryoku().getTxtThirdChosaKomokuNo().getValue().equals(value.getTemp_認定調査特記事項番号())
-                    && value.getTemp_特記事項().isEmpty()) {
+                    && (value.getTemp_特記事項() == null || value.getTemp_特記事項().isEmpty())) {
 
                 this.値回復(gaikyoTokkiNyurokuMap, key3, div.getTokkiNyuryoku().getTxtThirdChosaKomokuNo());
                 throw new ApplicationException(DbeErrorMessages.特記事項番号が追加不可.getMessage());
@@ -607,7 +607,7 @@ public class GaikyoTokkiYichiranNyurokuHandler {
             Entry<RString, GaikyoTokkiYichiranNyurokuBusiness> entry = it.next();
             GaikyoTokkiYichiranNyurokuBusiness value = entry.getValue();
             if (div.getTokkiNyuryoku().getTxtFourthChosaKomokuNo().getValue().equals(value.getTemp_認定調査特記事項番号())
-                    && value.getTemp_特記事項().isEmpty()) {
+                    && (value.getTemp_特記事項() == null || value.getTemp_特記事項().isEmpty())) {
 
                 this.値回復(gaikyoTokkiNyurokuMap, key4, div.getTokkiNyuryoku().getTxtFourthChosaKomokuNo());
                 throw new ApplicationException(DbeErrorMessages.特記事項番号が追加不可.getMessage());
@@ -714,7 +714,7 @@ public class GaikyoTokkiYichiranNyurokuHandler {
             Entry<RString, GaikyoTokkiYichiranNyurokuBusiness> entry = it.next();
             GaikyoTokkiYichiranNyurokuBusiness value = entry.getValue();
             if (div.getTokkiNyuryoku().getTxtFifthChosaKomokuNo().getValue().equals(value.getTemp_認定調査特記事項番号())
-                    && value.getTemp_特記事項().isEmpty()) {
+                    && (value.getTemp_特記事項() == null || value.getTemp_特記事項().isEmpty())) {
 
                 this.値回復(gaikyoTokkiNyurokuMap, key5, div.getTokkiNyuryoku().getTxtFifthChosaKomokuNo());
                 throw new ApplicationException(DbeErrorMessages.特記事項番号が追加不可.getMessage());
