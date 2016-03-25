@@ -20,7 +20,7 @@ public class KojinShinchokuJokyohyoReport extends Report<KojinShinchokuJokyohyoR
     private final List<ChousaBodyItem> chousaItemList;
     private final List<ShuiBodyItem> shujiItemList;
     private final KojinShinchokuJokyohyoHeadItem headItem;
-    private final int 循環_回数 = 3;
+    private static final int 循環_回数 = 3;
 
     /**
      * インスタンスを生成します。

@@ -22,14 +22,14 @@ import jp.co.ndensan.reams.uz.uza.lang.Wareki;
 class KojinShinchokuJokyohyoHeadEditor implements IKojinShinchokuJokyohyoEditor {
 
     private final KojinShinchokuJokyohyoHeadItem item;
-    private final int 結束_位置3 = 3;
-    private final int 結束_位置4 = 4;
-    private final int 結束_位置5 = 5;
-    private final int 結束_位置6 = 6;
-    private final int 結束_位置7 = 7;
-    private final int 結束_位置8 = 8;
-    private final int 結束_位置9 = 9;
-    private final int 結束_位置10 = 10;
+    private static final int 結束_位置3 = 3;
+    private static final int 結束_位置4 = 4;
+    private static final int 結束_位置5 = 5;
+    private static final int 結束_位置6 = 6;
+    private static final int 結束_位置7 = 7;
+    private static final int 結束_位置8 = 8;
+    private static final int 結束_位置9 = 9;
+    private static final int 結束_位置10 = 10;
 
     /**
      * インスタンスを生成します。

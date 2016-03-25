@@ -10,7 +10,7 @@ import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaN
 import jp.co.ndensan.reams.db.dbz.business.core.ninteirirekiichiran.NinteiRirekiIchiranBusiness;
 import jp.co.ndensan.reams.db.dbz.definition.param.ninteirirekiichiran.NinteiRirekiIchiranParameter;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.JukyuNinteirirekiInfo.JukyuNinteirirekiInfoDiv;
-import jp.co.ndensan.reams.db.dbz.divcontroller.handler.commonchilddiv.JukyuNinteirirekiInfo.JukyuNinteirirekiInfoHandler;
+import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.JukyuNinteirirekiInfo.JukyuNinteirirekiInfoHandler;
 import jp.co.ndensan.reams.db.dbz.service.NinteiRirekiIchiran;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 
