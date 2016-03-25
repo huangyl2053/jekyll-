@@ -20,8 +20,8 @@ import jp.co.ndensan.reams.uz.uza.lang.Separator;
  */
 public class HihokenshashoB4Editor implements IHihokenshashoB4Editor {
     
-    private final static int 年月日の年_和暦_STR = 2;
-    private final static int 年月日の年_和暦_END = 4;
+    private static final int 年月日の年_和暦_STR = 2;
+    private static final int 年月日の年_和暦_END = 4;
     private final HihokenshashoB4BodyItem joho;
     
     /**
@@ -207,7 +207,7 @@ public class HihokenshashoB4Editor implements IHihokenshashoB4Editor {
         source.shurui32 = joho.getShurui32();
         source.hihokana2 = joho.getHihokana2();
         source.todokeYmd22 = joho.getTodokeYmd22();
-        source.todokeYmd2Asa2 =joho.getTodokeYmd22() == null ? RString.EMPTY : new RString("*");
+        source.todokeYmd2Asa2 = joho.getTodokeYmd22() == null ? RString.EMPTY : new RString("*");
         source.todokeYmd2Massho2 = joho.getTodokeYmd22();
         source.shuruigendo42 = joho.getShuruigendo42();
         source.ten42 = joho.getTen42();
@@ -268,7 +268,7 @@ public class HihokenshashoB4Editor implements IHihokenshashoB4Editor {
         source.taiinchk22 = joho.getTaiinchk22();
         source.itakuGyosha1 = joho.getItakuGyosha1();
         source.itakuGyosha2 = joho.getItakuGyosha2();
-        source.itakuGyosha2Asa = joho.getItakuGyosha2() == null ? RString.EMPTY :new RString("*");
+        source.itakuGyosha2Asa = joho.getItakuGyosha2() == null ? RString.EMPTY : new RString("*");
         source.itakuGyosha2Massho = joho.getItakuGyosha2();
         source.itakuGyosha3 = joho.getItakuGyosha3();
         source.itakuGyosha3Asa = joho.getItakuGyosha3() == null ? RString.EMPTY : new RString("*");
@@ -347,7 +347,4 @@ public class HihokenshashoB4Editor implements IHihokenshashoB4Editor {
         }
         return new RDate(date.toString()).seireki().getDay();
     }
-    
-    
-    
 }
