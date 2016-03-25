@@ -5,6 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dba.divcontroller.entity.commonchilddiv.TaJushochiTokureishaKanri;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
@@ -545,15 +546,7 @@ public class TaJushochiTokureishaKanriHandler {
         if (状態_適用.equals(親画面状態)) {
             UaFt200FindShikibetsuTaishoEntity 宛名情報 = get宛名情報();
             if (宛名情報 != null) {
-                if (転入.equals(宛名情報.getIdoJiyuCode())) {
-                    if (宛名情報.getIdoYMD() != null && !宛名情報.getIdoYMD().isEmpty()) {
-                        div.getTxtTekiyobi().setValue(new RDate(宛名情報.getIdoYMD().toString()));
-                    }
-                    if (宛名情報.getTodokedeYMD() != null && !宛名情報.getTodokedeYMD().isEmpty()) {
-                        div.getTxtTekiyoTodokedebi().setValue(new RDate(宛名情報.getTodokedeYMD().toString()));
-                    }
-                    div.getDdlTekiyoJiyo().setSelectedKey(除外者適用);
-                }
+                宛名情報の処理(宛名情報);
             }
             if (kanriMaster.getKaijoYMD() == null
                     || kanriMaster.getKaijoYMD().isEmpty()) {
@@ -583,6 +576,20 @@ public class TaJushochiTokureishaKanriHandler {
                 div.getBtnKakunin().setDisabled(true);
                 div.getTxtKaijyobi().setValue(new RDate(kanriMaster.getKaijoYMD().toString()));
             }
+        }
+    }
+
+    private void 宛名情報の処理(UaFt200FindShikibetsuTaishoEntity 宛名情報) {
+        if (転入.equals(宛名情報.getIdoJiyuCode())) {
+            FlexibleDate 異動日 = 宛名情報.getIdoYMD();
+            FlexibleDate 届出日 = 宛名情報.getTodokedeYMD();
+            if (異動日 != null && !異動日.isEmpty()) {
+                div.getTxtTekiyobi().setValue(new RDate(異動日.toString()));
+            }
+            if (届出日 != null && !届出日.isEmpty()) {
+                div.getTxtTekiyoTodokedebi().setValue(new RDate(届出日.toString()));
+            }
+            div.getDdlTekiyoJiyo().setSelectedKey(除外者適用);
         }
     }
 
@@ -814,7 +821,7 @@ public class TaJushochiTokureishaKanriHandler {
         return TaJushochiTokureisyaKanriManager.createInstance().select宛名情報PSM(識別コード);
     }
 
-    private static class DateComparator implements Comparator<dgJushochiTokureiRireki_Row> {
+    private static class DateComparator implements Comparator<dgJushochiTokureiRireki_Row>, Serializable {
 
         @Override
         public int compare(dgJushochiTokureiRireki_Row o1, dgJushochiTokureiRireki_Row o2) {

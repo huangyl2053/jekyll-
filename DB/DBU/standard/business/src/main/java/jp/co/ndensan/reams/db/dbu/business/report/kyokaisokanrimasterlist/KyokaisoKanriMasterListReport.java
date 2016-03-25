@@ -54,7 +54,7 @@ public class KyokaisoKanriMasterListReport extends Report<KyokaisoKanriMasterLis
      */
     @Override
     public void writeBy(ReportSourceWriter<KyokaisoKanriMasterListReportSource> reportSourceWriter) {
-        if (bodyItemList != null || !bodyItemList.isEmpty()) {
+        if (bodyItemList != null && !bodyItemList.isEmpty()) {
             for (KyokaisoKanriMasterListBodyItem item : bodyItemList) {
                 for (int i = 0; i < item.getListUpper_1().size(); i++) {
                     KyokaisoKanriMasterListBodyTempItem tempItem = new KyokaisoKanriMasterListBodyTempItem();

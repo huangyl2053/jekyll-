@@ -23,6 +23,7 @@ public class TaJushochiTokureishaKanriValidationHandler {
     private static final RString 状態_適用 = new RString("適用");
     private static final RString 状態_解除 = new RString("解除");
     private static final RString 状態_削除 = new RString("削除");
+    private static final RString メッセージ適用日 = new RString("適用日");
     private final TaJushochiTokureishaKanriDiv div;
 
     /**
@@ -172,14 +173,14 @@ public class TaJushochiTokureishaKanriValidationHandler {
 
     private static enum RRVMessages implements IValidationMessage {
 
-        適用日(UrErrorMessages.必須, "適用日"),
+        適用日(UrErrorMessages.必須, メッセージ適用日.toString()),
         解除日(UrErrorMessages.必須, "解除日"),
         適用事由(UrErrorMessages.必須, "適用事由"),
         解除事由(UrErrorMessages.必須, "解除事由"),
-        適用日と適用届出日の整合性チェック(DbzErrorMessages.期間が不正_未来日付不可, "適用届出日", "適用日"),
+        適用日と適用届出日の整合性チェック(DbzErrorMessages.期間が不正_未来日付不可, "適用届出日", メッセージ適用日.toString()),
         解除日と解除届出日の整合性チェック(DbzErrorMessages.期間が不正_未来日付不可, "解除届出日", "解除日"),
-        適用日と解除日の整合性チェック(DbzErrorMessages.期間が不正_未来日付不可, "解除日", "適用日"),
-        適用日と最新の適用情報の整合性チェック(DbzErrorMessages.期間が不正_未来日付不可, "適用日", "最新の適用情報"),
+        適用日と解除日の整合性チェック(DbzErrorMessages.期間が不正_未来日付不可, "解除日", メッセージ適用日.toString()),
+        適用日と最新の適用情報の整合性チェック(DbzErrorMessages.期間が不正_未来日付不可, メッセージ適用日.toString(), "最新の適用情報"),
         入所日の必須チェック(DbzErrorMessages.複数必須項目相関チェックエラー, "入所日", "入所施設"),
         入所施設の必須チェック(DbzErrorMessages.複数必須項目相関チェックエラー, "入所施設", "入所日"),
         期間が重複(UrErrorMessages.期間が重複),

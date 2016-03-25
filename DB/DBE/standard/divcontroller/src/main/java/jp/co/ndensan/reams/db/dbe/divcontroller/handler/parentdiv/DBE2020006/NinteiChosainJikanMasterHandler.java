@@ -11,10 +11,10 @@ import jp.co.ndensan.reams.db.dbe.business.core.ninteichosainjikan.NinteiChosain
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2020006.NinteiChosainJikanMasterDiv;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2020006.dgTimeScheduleList_Row;
 import jp.co.ndensan.reams.db.dbe.service.core.basic.ninteichosainjikan.NinteiChosainJikanMasterManager;
+import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBE;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.NinteichosaSchedule;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.NinteichosaScheduleIdentifier;
 import jp.co.ndensan.reams.db.dbz.business.core.ninteichosaikkatsuinput.NinteiChosaIkkatsuInputModel;
-import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBE;
 import jp.co.ndensan.reams.db.dbz.divcontroller.viewbox.ViewStateKeys;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5224ChikuShichosonEntity;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
@@ -176,8 +176,6 @@ public class NinteiChosainJikanMasterHandler {
      */
     public void btnCreate(FlexibleDate 予定年月日, RString 時間枠) {
         List<dgTimeScheduleList_Row> rowList = div.getDgTimeScheduleList().getDataSource();
-        Models<NinteichosaScheduleIdentifier, NinteichosaSchedule> ninteichosaModels
-                = ViewStateHolder.get(ViewStateKeys.認定調査スケジュール登録6_認定調査スケジュール情報, Models.class);
         Seireki date2 = div.getTxtSettingMonth().getValue().seireki();
         for (int i = 1; i < (div.getTxtSettingMonth().getValue().getLastDay() + 1); i++) {
             FlexibleDate 予定日 = new FlexibleDate(
