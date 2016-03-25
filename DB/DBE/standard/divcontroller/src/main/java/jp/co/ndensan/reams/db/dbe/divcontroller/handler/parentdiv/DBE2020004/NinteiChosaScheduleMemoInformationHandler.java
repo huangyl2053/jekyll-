@@ -67,8 +67,8 @@ public class NinteiChosaScheduleMemoInformationHandler {
         UzT0007CodeEntity uzT0007CodeEntity = CodeMaster.getCode(SubGyomuCode.DBE認定支援, コード種別, 地区コード);
         div.getTxtSetteiDate().setValue(メモ年月日);
         div.getTxtTaishoChiku().setValue(uzT0007CodeEntity == null ? RString.EMPTY : uzT0007CodeEntity.getコード名称());
-        div.getTxtNumberOfTsujoMemo().setValue(new RString(String.valueOf(重要件数)));
-        div.getTxtNumberOfJuyoMemo().setValue(new RString(String.valueOf(通常件数)));
+        div.getTxtNumberOfTsujoMemo().setValue(new RString(String.valueOf(通常件数)));
+        div.getTxtNumberOfJuyoMemo().setValue(new RString(String.valueOf(重要件数)));
 
         int 共通_NO = 0;
         int 地区のみ_NO = 0;
