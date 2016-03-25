@@ -189,7 +189,7 @@ public class IdoTaishoshaIchiran {
             異動者Entity.set該当連番(Integer.valueOf(row.getTxtGaitoRenban().toString()));
             RDate 異動日 = new RDate(row.getTxtIdoYMD().toString());
             異動者Entity.set異動日(new FlexibleDate(異動日.toString()));
-            異動者Entity.set異動内容(IdoNaiyo.toValue(row.getTxtIdoNaiyo()));
+            異動者Entity.set異動内容(IdoNaiyo.toIdoNaiyo(row.getTxtIdoNaiyo()));
             IName in = new IName() {
                 @Override
                 public AtenaMeisho getName() {
