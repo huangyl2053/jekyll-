@@ -89,6 +89,7 @@ public class ShinsakaiKaisaiYoteiToroku {
     private static final RString モード_月 = new RString("月切");
     private static final RString モード_初期化 = new RString("初期化");
     private static final RString モード_クリア = new RString("クリア");
+    private static final RString モード_登録 = new RString("登録");
     private static final QuestionMessage HAKIMESSAGE = new QuestionMessage(UrQuestionMessages.入力内容の破棄.getMessage().getCode(),
             UrQuestionMessages.入力内容の破棄.getMessage().evaluate());
     private static final QuestionMessage SYORIMESSAGE = new QuestionMessage(UrQuestionMessages.処理実行の確認.getMessage().getCode(),
@@ -372,8 +373,9 @@ public class ShinsakaiKaisaiYoteiToroku {
             return ResponseData.of(div).addValidationMessages(validPairs).respond();
         }
         setToroku();
+        モード = モード_登録;
         set介護認定審査会開催予定一覧(getLblMonth(div.getLblMonth().getText()));
-        clear入力();
+        set開催予定入力欄(div.getTxtSeteibi().getValue());
         return ResponseData.of(div).respond();
     }
 
@@ -507,7 +509,6 @@ public class ShinsakaiKaisaiYoteiToroku {
             }
             init();
         }
-
         return ResponseData.of(div).respond();
     }
 
@@ -835,7 +836,7 @@ public class ShinsakaiKaisaiYoteiToroku {
     }
 
     private void setClearSelected(FlexibleDate zenbuDate, dgShinsakaiKaisaiYoteiIchiran_Row dgShinsakaRow) {
-        if (モード.equals(モード_クリア) && div.getTxtSeteibi().getText().equals(new RString(zenbuDate.toString()))) {
+        if ((モード.equals(モード_登録) || モード.equals(モード_クリア)) && div.getTxtSeteibi().getText().equals(new RString(zenbuDate.toString()))) {
             dgShinsakaRow.setSelected(true);
         } else {
             dgShinsakaRow.setSelected(false);
