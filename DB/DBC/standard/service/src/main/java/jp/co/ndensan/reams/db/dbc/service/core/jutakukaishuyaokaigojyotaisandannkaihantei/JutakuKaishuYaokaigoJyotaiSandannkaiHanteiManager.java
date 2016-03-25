@@ -8,8 +8,7 @@ package jp.co.ndensan.reams.db.dbc.service.core.jutakukaishuyaokaigojyotaisandan
 import java.util.HashMap;
 import java.util.Map;
 import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3034ShokanShinseiEntity;
-import jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.jutakukaishuyaokaigojyotaisandannkaihantei
-        .IJutakuKaishuYaokaigoJyotaiSandannkaiHanteiMapper;
+import jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.jutakukaishuyaokaigojyotai.IJutakuKaishuYaokaigoJyotaiSandannkaiHanteiMapper;
 import jp.co.ndensan.reams.db.dbc.service.core.MapperProvider;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigojotaikubun.YokaigoJotaiKubun06;
@@ -48,8 +47,7 @@ public class JutakuKaishuYaokaigoJyotaiSandannkaiHanteiManager {
     /**
      * {@link InstanceProvider#create}にて生成した{@link JutakuKaishuYaokaigoJyotaiSandannkaiHanteiManager}のインスタンスを返します。
      *
-     * @return
-     * {@link InstanceProvider#create}にて生成した{@link JutakuKaishuYaokaigoJyotaiSandannkaiHanteiManager}のインスタンス
+     * @return {@link InstanceProvider#create}にて生成した{@link JutakuKaishuYaokaigoJyotaiSandannkaiHanteiManager}のインスタンス
      */
     public static JutakuKaishuYaokaigoJyotaiSandannkaiHanteiManager createInstance() {
         return InstanceProvider.create(JutakuKaishuYaokaigoJyotaiSandannkaiHanteiManager.class);
@@ -98,7 +96,7 @@ public class JutakuKaishuYaokaigoJyotaiSandannkaiHanteiManager {
         Code konnkaiYokaigoJotaiKubunCode = getYaokaigoJyotaiKubun(被保険者番号, サービス提供年月);
         if (konnkaiYokaigoJotaiKubunCode == null) {
             return false;
-        } 
+        }
         if (!konnkaiYokaigoJotaiKubunCode.value().startsWith(要支援, 0)
                 && !konnkaiYokaigoJotaiKubunCode.value().startsWith(要介護, 0)) {
             return false;
@@ -110,14 +108,14 @@ public class JutakuKaishuYaokaigoJyotaiSandannkaiHanteiManager {
         Code shokaiYokaigoJotaiKubunCode = getYaokaigoJyotaiKubun(被保険者番号, entity.getServiceTeikyoYM());
         if (shokaiYokaigoJotaiKubunCode == null) {
             return false;
-        } 
+        }
         if (!shokaiYokaigoJotaiKubunCode.value().startsWith(要支援, 0)
                 && !shokaiYokaigoJotaiKubunCode.value().startsWith(要介護, 0)) {
             return false;
         }
         return check(konnkaiYokaigoJotaiKubunCode, shokaiYokaigoJotaiKubunCode);
     }
-    
+
     private boolean check(Code konnkaiYokaigoJotaiKubunCode,
             Code shokaiYokaigoJotaiKubunCode) {
         boolean flag = false;
