@@ -22,7 +22,7 @@ public class TaShichosonJushochiTokureiShisetsuTaishoTsuchishoRelateEntity {
     private RString 他市町村住所地特例解除事由コード;
     private RString 事業者名称;
     private RString 電話番号;
-    private RString FAX番号;
+    private RString fax番号;
     private YubinNo 郵便番号;
     private RString 事業者住所;
 

@@ -135,7 +135,7 @@ public class TaShichosonJushochiTokureiShisetsuTaishoTsuchishoFinder {
             outEntity.set退所事由(CodeMaster.getCodeMeisho(new CodeShubetsu("0011"), new Code(getEntity.get他市町村住所地特例解除事由コード())));
             outEntity.set施設名称(getEntity.get事業者名称());
             outEntity.set施設電話番号(getEntity.get電話番号());
-            outEntity.set施設FAX番号(getEntity.getFAX番号());
+            outEntity.set施設FAX番号(getEntity.getFax番号());
             if (getEntity.get郵便番号() != null) {
                 outEntity.set施設郵便番号(getEntity.get郵便番号().getEditedYubinNo());
             }

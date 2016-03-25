@@ -58,7 +58,7 @@ public class OtherAddressLedgerEntity {
     private FlexibleDate 転入年月日;
     private RString 住所タイトル2;
     private FlexibleDate 転出年月日;
-    private RString NO;
+    private RString no;
     private FillTypeFormatted 適用年月日;
     private FillTypeFormatted 適用届出年月日;
     private RString 他市町村住所地特例適用事由コード;

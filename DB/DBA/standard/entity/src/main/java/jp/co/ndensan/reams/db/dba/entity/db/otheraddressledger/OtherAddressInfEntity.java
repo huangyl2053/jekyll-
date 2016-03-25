@@ -21,7 +21,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 @SuppressWarnings("PMD.UnusedPrivateField")
 public class OtherAddressInfEntity {
 
-    private RString NO;
+    private RString no;
     private FlexibleDate 適用年月日;
     private FlexibleDate 適用届出年月日;
     private RString 適用事由コード;
