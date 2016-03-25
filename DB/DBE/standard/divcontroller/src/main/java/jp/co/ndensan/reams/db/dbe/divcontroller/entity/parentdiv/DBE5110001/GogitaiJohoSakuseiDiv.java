@@ -464,5 +464,15 @@ public class GogitaiJohoSakuseiDiv extends Panel {
         this.getUploadFileToroku().setBtnRegistUploadFile(btnRegistUploadFile);
     }
 
+    @JsonIgnore
+    public Button getBtnKakunin() {
+        return this.getUploadFileToroku().getBtnKakunin();
+    }
+
+    @JsonIgnore
+    public void  setBtnKakunin(Button btnKakunin) {
+        this.getUploadFileToroku().setBtnKakunin(btnKakunin);
+    }
+
     // </editor-fold>
 }

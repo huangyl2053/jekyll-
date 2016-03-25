@@ -32,8 +32,8 @@ import jp.co.ndensan.reams.db.dbc.service.jutakukaishujizenshinsei.JutakuKaishuJ
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HokenshaNo;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
-import jp.co.ndensan.reams.ur.urz.definition.message.UrQuestionMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrInformationMessages;
+import jp.co.ndensan.reams.ur.urz.definition.message.UrQuestionMessages;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
@@ -127,8 +127,8 @@ public class JutakuKaishuhiShikyuShinseiPanel {
                 if (viewState.getEntity().get被保険者番号().equals(data.getEntity().get被保険者番号())
                         && viewState.getEntity().getサービス提供年月().equals(data.getEntity().getサービス提供年月())
                         && viewState.getEntity().get整理番号().equals(data.getEntity().get整理番号())) {
-                    ShokanShinsei entity = viewState.getEntity().createBuilderForEdit().set住宅住所変更(data.getEntity().get住宅住所変更())
-                            .set要介護状態３段階変更(data.getEntity().get要介護状態３段階変更())
+                    ShokanShinsei entity = viewState.getEntity().createBuilderForEdit().set住宅住所変更(data.getEntity().is住宅住所変更())
+                            .set要介護状態３段階変更(data.getEntity().is要介護状態３段階変更())
                             .set審査結果(data.getEntity().get審査結果()).build();
                     viewState.setEntity(entity);
                 }

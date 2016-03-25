@@ -5,6 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dba.definition.core.jogaishatorokuparamter;
 
+import java.io.Serializable;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -17,7 +18,9 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.RowState;
 @lombok.Getter
 @lombok.Setter
 @SuppressWarnings("PMD.UnusedPrivateField")
-public class JogaishaTorokuParamter {
+public class JogaishaTorokuParamter implements Serializable {
+
+    private static final long serialVersionUID = -7667515892539653512L;
 
     private RString lasdecCode;
     private RString lasdecMei;

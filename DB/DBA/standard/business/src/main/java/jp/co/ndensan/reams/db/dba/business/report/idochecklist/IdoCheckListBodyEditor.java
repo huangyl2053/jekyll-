@@ -9,7 +9,7 @@ import jp.co.ndensan.reams.db.dba.entity.report.idochecklist.IdoCheckListReportS
 
 /**
  *
- * @author yuyong3
+ * 住基連動登録リスト帳票IdoCheckListBodyEditorです。
  */
 class IdoCheckListBodyEditor implements IIdoCheckListEditor {
 
@@ -74,7 +74,7 @@ class IdoCheckListBodyEditor implements IIdoCheckListEditor {
         source.listLower_14 = item.getListLower_14();
         source.shuryoTitle = item.getShuryoTitle();
         source.shuryoYmdTitle = item.getShuryoYmdTitle();
-        source.kaishiTitle= item.getKaishiTitle();
+        source.kaishiTitle = item.getKaishiTitle();
         source.kaishiYmdTitle = item.getKaishiYmdTitle();
         source.kubunTitle = item.getKubunTitle();
         source.fuseigoCountTitle = item.getFuseigoCountTitle();

@@ -18,6 +18,13 @@ public final class HokenryoDankaiHosei {
 
     }
 
+    /**
+     * hokenryoDankaiHoseiクラスです。
+     *
+     * @param hokenryoDankaiHanteiParameter hokenryoDankaiHanteiParameter
+     * @param hokenryodankai hokenryodankai
+     * @return RString RString
+     */
     public static RString hokenryoDankaiHosei(HokenryoDankaiHanteiParameter hokenryoDankaiHanteiParameter, RString hokenryodankai) {
 
         RString hoseigoDankai = null;

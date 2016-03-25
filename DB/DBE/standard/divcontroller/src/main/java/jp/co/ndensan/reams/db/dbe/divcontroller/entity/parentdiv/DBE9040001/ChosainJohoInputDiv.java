@@ -69,7 +69,7 @@ public class ChosainJohoInputDiv extends Panel {
     @JsonProperty("txtFaxNo")
     private TextBoxTelNo txtFaxNo;
     @JsonProperty("TextBoxShozokuKikan")
-    private TextBoxJusho TextBoxShozokuKikan;
+    private TextBox TextBoxShozokuKikan;
     @JsonProperty("radChosainJokyo")
     private RadioButton radChosainJokyo;
     @JsonProperty("btnKakutei")
@@ -382,7 +382,7 @@ public class ChosainJohoInputDiv extends Panel {
      * @return TextBoxShozokuKikan
      */
     @JsonProperty("TextBoxShozokuKikan")
-    public TextBoxJusho getTextBoxShozokuKikan() {
+    public TextBox getTextBoxShozokuKikan() {
         return TextBoxShozokuKikan;
     }
 
@@ -391,7 +391,7 @@ public class ChosainJohoInputDiv extends Panel {
      * @param TextBoxShozokuKikan TextBoxShozokuKikan
      */
     @JsonProperty("TextBoxShozokuKikan")
-    public void setTextBoxShozokuKikan(TextBoxJusho TextBoxShozokuKikan) {
+    public void setTextBoxShozokuKikan(TextBox TextBoxShozokuKikan) {
         this.TextBoxShozokuKikan = TextBoxShozokuKikan;
     }
 

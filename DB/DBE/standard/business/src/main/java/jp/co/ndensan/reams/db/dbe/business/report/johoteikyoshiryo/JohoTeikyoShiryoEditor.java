@@ -46,7 +46,7 @@ public class JohoTeikyoShiryoEditor implements IJohoTeikyoShiryoEditor {
             source.title = item.getTitle();
             source.tsuchibun1 = item.getTsuchibun1();
             source.hihokenshaName = item.getHihokenshaName();
-            source.Jusho = item.getJusho();
+            source.jusho = item.getJusho();
             if (item.getInfoNijiDate() != null) {
                 source.infoNijiDate = item.getInfoNijiDate().wareki()
                         .eraType(EraType.KANJI)

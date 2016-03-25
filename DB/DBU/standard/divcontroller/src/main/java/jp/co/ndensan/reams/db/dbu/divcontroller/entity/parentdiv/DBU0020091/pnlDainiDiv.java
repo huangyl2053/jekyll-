@@ -4,7 +4,9 @@ package jp.co.ndensan.reams.db.dbu.divcontroller.entity.parentdiv.DBU0020091;
  * このファイルへの変更は、再生成時には損失するため
  * 不正な動作の原因になります。
  */
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import jp.co.ndensan.reams.uz.uza.ui.binding.*;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 
 /**
@@ -13,7 +15,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
  * @author 自動生成
  */
 public class pnlDainiDiv extends Panel {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：バージョン情報無し">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-01-15_09-59-03">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -45,6 +47,39 @@ public class pnlDainiDiv extends Panel {
     @JsonProperty("tbp3")
     public void setTbp3(tbp3Div tbp3) {
         this.tbp3 = tbp3;
+    }
+
+    /*
+     * [ ショートカットの作成 ]
+     */
+    @JsonIgnore
+    public TextBoxNum getTxtRiyoshaDainiKensu1() {
+        return this.getTbp3().getTxtRiyoshaDainiKensu1();
+    }
+
+    @JsonIgnore
+    public TextBoxNum getTxtRiyoshaDainiKensu2() {
+        return this.getTbp3().getTxtRiyoshaDainiKensu2();
+    }
+
+    @JsonIgnore
+    public TextBoxNum getTxtRiyoshaDainiKensu3() {
+        return this.getTbp3().getTxtRiyoshaDainiKensu3();
+    }
+
+    @JsonIgnore
+    public TextBoxNum getTxtRiyoshaDainiKyufugaku1() {
+        return this.getTbp3().getTxtRiyoshaDainiKyufugaku1();
+    }
+
+    @JsonIgnore
+    public TextBoxNum getTxtRiyoshaDainiKyufugaku2() {
+        return this.getTbp3().getTxtRiyoshaDainiKyufugaku2();
+    }
+
+    @JsonIgnore
+    public TextBoxNum getTxtRiyoshaDainiKyufugaku3() {
+        return this.getTbp3().getTxtRiyoshaDainiKyufugaku3();
     }
 
     // </editor-fold>

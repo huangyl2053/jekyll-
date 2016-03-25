@@ -5,7 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbc.business.report.shokanbaraishikyufushikyuketteitsuchiichiran;
 
-import jp.co.ndensan.reams.db.dbc.entity.report.source.shokanbaraishikyufushikyuketteitsuchiichiran.ShokanbaraiShikyuFushikyuKetteiTsuchiIchiranReportSource;
+import jp.co.ndensan.reams.db.dbc.entity.report.source.shokanbaraishikyufushikyuketteitsuchiichiran.ShokanbaraiShikyuFushikyuReportSource;
 
 /**
  * 償還払支給（不支給）決定通知一覧表覧表のEditorです。
@@ -24,11 +24,11 @@ public class ShokanbaraiShikyuFushikyuKetteiTsuchiIchiranEditor implements IShok
     }
 
     @Override
-    public ShokanbaraiShikyuFushikyuKetteiTsuchiIchiranReportSource edit(ShokanbaraiShikyuFushikyuKetteiTsuchiIchiranReportSource source) {
+    public ShokanbaraiShikyuFushikyuReportSource edit(ShokanbaraiShikyuFushikyuReportSource source) {
         return editSource(source);
     }
 
-    private ShokanbaraiShikyuFushikyuKetteiTsuchiIchiranReportSource editSource(ShokanbaraiShikyuFushikyuKetteiTsuchiIchiranReportSource source) {
+    private ShokanbaraiShikyuFushikyuReportSource editSource(ShokanbaraiShikyuFushikyuReportSource source) {
         source.printTimeStamp = item.getPrintTimeStamp();
         source.hokenshaNo = item.getHokenshaNo();
         source.hokenshaName = item.getHokenshaName();

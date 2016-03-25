@@ -15,6 +15,7 @@ import jp.co.ndensan.reams.db.dbe.business.core.basic.ShinsakaiKaisaiYoteiJohoId
 import jp.co.ndensan.reams.db.dbe.business.core.gogitaijohoshinsakai.GogitaiJohoShinsaRelateBusiness;
 import jp.co.ndensan.reams.db.dbe.business.core.shinsakaikaisaikekka.ShinsakaiKaisaiYoteiJohoBusiness;
 import jp.co.ndensan.reams.db.dbe.definition.processprm.dbe5140001.ShinsakaiKaisaiYoteiJohoParameter;
+import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE5140001.DBE5140001TransitionEventName;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE5140001.ShinsakaiKaisaiYoteiTorokuDiv;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE5140001.dgKaisaiYoteiNyuryokuran_Row;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE5140001.dgShinsakaiKaisaiGogitaiJoho_Row;
@@ -23,7 +24,7 @@ import jp.co.ndensan.reams.db.dbe.divcontroller.handler.parentdiv.DBE5140001.Shi
 import jp.co.ndensan.reams.db.dbe.service.core.shinsakaikaisaiyoteitoroku.ShinsakaiKaisaiYoteiTorokuManager;
 import jp.co.ndensan.reams.db.dbe.service.shinsakai.GogitaiManager;
 import jp.co.ndensan.reams.db.dbe.service.shinsakai.ShinsakaiKaisaiYoteiJohoManager;
-import jp.co.ndensan.reams.db.dbz.definition.core.configkeys.ConfigNameDBE;
+import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBE;
 import jp.co.ndensan.reams.db.dbz.divcontroller.viewbox.ViewStateKeys;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrQuestionMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrWarningMessages;
@@ -73,7 +74,7 @@ public class ShinsakaiKaisaiYoteiToroku {
     private static final int INDEX_9 = 9;
     private static final int INDEX_10 = 10;
     private static final RString MARU = new RString("○○");
-    private static final RString 審査会名称 = new RString("第○○審査会");
+    private static final RString 審査会名称 = new RString("第○○回審査会");
     private static final RString 汎用キー = new RString("審査会開催番号");
     private static final RString NENNDO = new RString("年");
     private static final RString GETSU = new RString("月");
@@ -88,6 +89,7 @@ public class ShinsakaiKaisaiYoteiToroku {
     private static final RString モード_月 = new RString("月切");
     private static final RString モード_初期化 = new RString("初期化");
     private static final RString モード_クリア = new RString("クリア");
+    private static final RString モード_登録 = new RString("登録");
     private static final QuestionMessage HAKIMESSAGE = new QuestionMessage(UrQuestionMessages.入力内容の破棄.getMessage().getCode(),
             UrQuestionMessages.入力内容の破棄.getMessage().evaluate());
     private static final QuestionMessage SYORIMESSAGE = new QuestionMessage(UrQuestionMessages.処理実行の確認.getMessage().getCode(),
@@ -371,8 +373,9 @@ public class ShinsakaiKaisaiYoteiToroku {
             return ResponseData.of(div).addValidationMessages(validPairs).respond();
         }
         setToroku();
+        モード = モード_登録;
         set介護認定審査会開催予定一覧(getLblMonth(div.getLblMonth().getText()));
-        clear入力();
+        set開催予定入力欄(div.getTxtSeteibi().getValue());
         return ResponseData.of(div).respond();
     }
 
@@ -452,7 +455,7 @@ public class ShinsakaiKaisaiYoteiToroku {
         if (new RString(UrWarningMessages.未保存情報の破棄確認.getMessage().getCode())
                 .equals(ResponseHolder.getMessageCode())
                 && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
-            return ResponseData.of(div).respond();
+            return ResponseData.of(div).forwardWithEventName(DBE5140001TransitionEventName.スケジュール表発行).respond();
         }
         return ResponseData.of(div).respond();
     }
@@ -504,8 +507,8 @@ public class ShinsakaiKaisaiYoteiToroku {
                     yoteiTorokuManager.insertOrUpdate(builder.build());
                 }
             }
+            init();
         }
-        init();
         return ResponseData.of(div).respond();
     }
 
@@ -529,7 +532,7 @@ public class ShinsakaiKaisaiYoteiToroku {
         if (count != 0) {
             return ResponseData.of(div).addMessage(操作可否).respond();
         } else {
-            return ResponseData.of(div).respond();
+            return ResponseData.of(div).forwardWithEventName(DBE5140001TransitionEventName.スケジュール表発行).respond();
         }
     }
 
@@ -672,7 +675,7 @@ public class ShinsakaiKaisaiYoteiToroku {
         entity.set自動割当定員(yoteiJohoBusiness.get自動割当定員());
         entity.set催予定場所コード(yoteiJohoBusiness.get催予定場所コード() == null ? RString.EMPTY : yoteiJohoBusiness.get催予定場所コード());
         entity.set開催番号(yoteiJohoBusiness.get開催番号());
-        entity.set審査会名称(yoteiJohoBusiness.get審査会名称());
+        entity.set審査会名称(審査会名称);
         yoteiJohoEntityList2.add(entity);
     }
 
@@ -833,7 +836,7 @@ public class ShinsakaiKaisaiYoteiToroku {
     }
 
     private void setClearSelected(FlexibleDate zenbuDate, dgShinsakaiKaisaiYoteiIchiran_Row dgShinsakaRow) {
-        if (モード.equals(モード_クリア) && div.getTxtSeteibi().getText().equals(new RString(zenbuDate.toString()))) {
+        if ((モード.equals(モード_登録) || モード.equals(モード_クリア)) && div.getTxtSeteibi().getText().equals(new RString(zenbuDate.toString()))) {
             dgShinsakaRow.setSelected(true);
         } else {
             dgShinsakaRow.setSelected(false);

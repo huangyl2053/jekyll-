@@ -309,8 +309,10 @@ public class Honsanteifuka {
         RString 項目名 = null;
         ChohyoSeigyoHanyo 帳票タイプ = getChohyoHanyoKey(SubGyomuCode.DBB介護賦課, parameter.get帳票分類ID(),
                 調定年度, 項目名);
-        BatchTyouhyouEntity entity = new BatchTyouhyouEntity(parameter.get帳票分類ID(), null, parameter.get出力順ID());
-        return entity;
+        if (帳票タイプ == null) {
+            return null;
+        }
+        return new BatchTyouhyouEntity(parameter.get帳票分類ID(), 算定期, parameter.get出力順ID());
     }
 
     /**

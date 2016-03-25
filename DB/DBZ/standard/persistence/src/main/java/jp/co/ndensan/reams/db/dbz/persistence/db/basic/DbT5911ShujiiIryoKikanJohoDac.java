@@ -27,6 +27,9 @@ import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
  */
 public class DbT5911ShujiiIryoKikanJohoDac implements ISaveable<DbT5911ShujiiIryoKikanJohoEntity> {
 
+    private static final RString 市町村コードMSG = new RString("市町村コード");
+    private static final RString 主治医医療機関コードMSG = new RString("主治医医療機関コード");
+    private static final RString 主治医医療機関情報エンティティMSG = new RString("主治医医療機関情報エンティティ");
     @InjectSession
     private SqlSession session;
 
@@ -42,8 +45,8 @@ public class DbT5911ShujiiIryoKikanJohoDac implements ISaveable<DbT5911ShujiiIry
     public DbT5911ShujiiIryoKikanJohoEntity selectByKey(
             LasdecCode 市町村コード,
             RString 主治医医療機関コード) throws NullPointerException {
-        requireNonNull(市町村コード, UrSystemErrorMessages.値がnull.getReplacedMessage("市町村コード"));
-        requireNonNull(主治医医療機関コード, UrSystemErrorMessages.値がnull.getReplacedMessage("主治医医療機関コード"));
+        requireNonNull(市町村コード, UrSystemErrorMessages.値がnull.getReplacedMessage(市町村コードMSG.toString()));
+        requireNonNull(主治医医療機関コード, UrSystemErrorMessages.値がnull.getReplacedMessage(主治医医療機関コードMSG.toString()));
 
         DbAccessorNormalType accessor = new DbAccessorNormalType(session);
 
@@ -78,7 +81,7 @@ public class DbT5911ShujiiIryoKikanJohoDac implements ISaveable<DbT5911ShujiiIry
     @Transaction
     @Override
     public int save(DbT5911ShujiiIryoKikanJohoEntity entity) {
-        requireNonNull(entity, UrSystemErrorMessages.値がnull.getReplacedMessage("主治医医療機関情報エンティティ"));
+        requireNonNull(entity, UrSystemErrorMessages.値がnull.getReplacedMessage(主治医医療機関情報エンティティMSG.toString()));
         // TODO 物理削除であるかは業務ごとに検討してください。
         //return DbAccessorMethodSelector.saveByForDeletePhysical(new DbAccessorNormalType(session), entity);
         return DbAccessors.saveBy(new DbAccessorNormalType(session), entity);
@@ -92,7 +95,7 @@ public class DbT5911ShujiiIryoKikanJohoDac implements ISaveable<DbT5911ShujiiIry
      */
     @Transaction
     public int saveOrDelete(DbT5911ShujiiIryoKikanJohoEntity entity) {
-        requireNonNull(entity, UrSystemErrorMessages.値がnull.getReplacedMessage("主治医医療機関情報エンティティ"));
+        requireNonNull(entity, UrSystemErrorMessages.値がnull.getReplacedMessage(主治医医療機関情報エンティティMSG.toString()));
 
         return DbAccessors.saveOrDeletePhysicalBy(new DbAccessorNormalType(session), entity);
     }
@@ -106,8 +109,8 @@ public class DbT5911ShujiiIryoKikanJohoDac implements ISaveable<DbT5911ShujiiIry
      */
     @Transaction
     public int countByShichosonCodeAndShujiiIryokikanCode(LasdecCode 市町村コード, RString 主治医医療機関コード) {
-        requireNonNull(市町村コード, UrSystemErrorMessages.値がnull.getReplacedMessage("市町村コード"));
-        requireNonNull(主治医医療機関コード, UrSystemErrorMessages.値がnull.getReplacedMessage("主治医医療機関コード"));
+        requireNonNull(市町村コード, UrSystemErrorMessages.値がnull.getReplacedMessage(市町村コードMSG.toString()));
+        requireNonNull(主治医医療機関コード, UrSystemErrorMessages.値がnull.getReplacedMessage(主治医医療機関コードMSG.toString()));
         DbAccessorNormalType accessor = new DbAccessorNormalType(session);
 
         return accessor.select().
@@ -130,8 +133,8 @@ public class DbT5911ShujiiIryoKikanJohoDac implements ISaveable<DbT5911ShujiiIry
     public DbT5911ShujiiIryoKikanJohoEntity selectByKeyAndJokyoFlg(
             LasdecCode 市町村コード,
             RString 主治医医療機関コード) throws NullPointerException {
-        requireNonNull(市町村コード, UrSystemErrorMessages.値がnull.getReplacedMessage("市町村コード"));
-        requireNonNull(主治医医療機関コード, UrSystemErrorMessages.値がnull.getReplacedMessage("主治医医療機関コード"));
+        requireNonNull(市町村コード, UrSystemErrorMessages.値がnull.getReplacedMessage(市町村コードMSG.toString()));
+        requireNonNull(主治医医療機関コード, UrSystemErrorMessages.値がnull.getReplacedMessage(主治医医療機関コードMSG.toString()));
 
         DbAccessorNormalType accessor = new DbAccessorNormalType(session);
 
@@ -152,7 +155,7 @@ public class DbT5911ShujiiIryoKikanJohoDac implements ISaveable<DbT5911ShujiiIry
      */
     @Transaction
     public List<DbT5911ShujiiIryoKikanJohoEntity> shichosonCodeAndJokyoFlag(LasdecCode 市町村コード) {
-        requireNonNull(市町村コード, UrSystemErrorMessages.値がnull.getReplacedMessage("市町村コード"));
+        requireNonNull(市町村コード, UrSystemErrorMessages.値がnull.getReplacedMessage(市町村コードMSG.toString()));
         DbAccessorNormalType accessor = new DbAccessorNormalType(session);
 
         return accessor.select().

@@ -5,12 +5,12 @@
  */
 package jp.co.ndensan.reams.db.dbb.business.core.hokenryodankai;
 
-import jp.co.ndensan.reams.db.dbb.business.core.hokenryodankai.kazeihantei.KazeiHantei;
 import jp.co.ndensan.reams.db.dbb.business.core.hokenryodankai.core.HokenryoDankaiHanteiCore;
-import jp.co.ndensan.reams.db.dbb.business.core.hokenryodankai.core.HokenryoDankaiHyokiSettei;
-import jp.co.ndensan.reams.db.dbb.business.core.hokenryodankai.core.HokenryoDankaiHanteiHohoHozonFactory;
 import jp.co.ndensan.reams.db.dbb.business.core.hokenryodankai.core.HokenryoDankaiHanteiHohoHozon;
+import jp.co.ndensan.reams.db.dbb.business.core.hokenryodankai.core.HokenryoDankaiHanteiHohoHozonFactory;
+import jp.co.ndensan.reams.db.dbb.business.core.hokenryodankai.core.HokenryoDankaiHyokiSettei;
 import jp.co.ndensan.reams.db.dbb.business.core.hokenryodankai.core.TsukibetsuHokenryoDankai;
+import jp.co.ndensan.reams.db.dbb.business.core.hokenryodankai.kazeihantei.KazeiHantei;
 import jp.co.ndensan.reams.db.dbb.business.core.hokenryodankai.param.HokenryoDankaiHanteiParameter;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
@@ -20,6 +20,12 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
  */
 public class HokenryoDankaiHantei {
 
+    /**
+     * determine月別保険料段階クラスです。
+     *
+     * @param hokenryoDankaiHanteiParameter hokenryoDankaiHanteiParameter
+     * @return TsukibetsuHokenryoDankai
+     */
     public TsukibetsuHokenryoDankai determine月別保険料段階(HokenryoDankaiHanteiParameter hokenryoDankaiHanteiParameter) {
 
         //課税判定

@@ -5,25 +5,28 @@
  */
 package jp.co.ndensan.reams.db.dba.divcontroller.controller.commonchilddiv.iryohokenrireki;
 
-import jp.co.ndensan.reams.db.dba.business.iryohokenkanyujokyo.IryohokenRirekiCommonChildDivDate;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
+import jp.co.ndensan.reams.db.dba.business.iryohokenkanyujokyo.IryohokenRirekiCommonChildDivDate;
 import jp.co.ndensan.reams.db.dba.divcontroller.entity.commonchilddiv.IryohokenRirekiCommonChildDiv.IryohokenRirekiCommonChildDivDiv;
 import jp.co.ndensan.reams.db.dba.divcontroller.entity.commonchilddiv.IryohokenRirekiCommonChildDiv.IryohokenRirekiHandler;
+import jp.co.ndensan.reams.db.dba.divcontroller.entity.commonchilddiv.IryohokenRirekiCommonChildDiv.IryohokenRirekiValidationHandler;
 import jp.co.ndensan.reams.db.dba.divcontroller.entity.commonchilddiv.IryohokenRirekiCommonChildDiv.dgIryohokenIchiran_Row;
 import jp.co.ndensan.reams.db.dba.divcontroller.entity.commonchilddiv.IryohokenRirekiCommonChildDiv.pnlIryohokenJohoDiv;
 import jp.co.ndensan.reams.db.dbz.definition.core.ViewStateKeys;
 import jp.co.ndensan.reams.db.dbz.definition.message.DbzErrorMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.uz.uza.biz.CodeShubetsu;
-
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.ApplicationException;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
 import jp.co.ndensan.reams.uz.uza.ui.binding.KeyValueDataSource;
+import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 import jp.co.ndensan.reams.uz.uza.util.code.CodeMaster;
 import jp.co.ndensan.reams.uz.uza.util.code.entity.UzT0007CodeEntity;
@@ -139,19 +142,62 @@ public class IryohokenRirekiCommonChildDiv {
      */
     public ResponseData<IryohokenRirekiCommonChildDivDiv> onClick_btnIryohokenKakute(IryohokenRirekiCommonChildDivDiv requestDiv) {
 
-        List<dgIryohokenIchiran_Row> list = requestDiv.getDgIryohokenIchiran().getDataSource();
+        ValidationMessageControlPairs validationMessage = createValidationHandlerOf(requestDiv).種別と保険者番号と保険者名と称記号番号の有効性チェック(requestDiv);
+        if (validationMessage.iterator().hasNext()) {
+            return ResponseData.of(requestDiv).addValidationMessages(validationMessage).respond();
+        }
 
+        if (requestDiv.getPnlIryohokenJoho().getStatus() != null && !requestDiv.getPnlIryohokenJoho().getStatus().equals(RString.EMPTY)) {
+            ifelse(requestDiv);
+        }
+        clear(requestDiv);
+
+        return ResponseData.of(requestDiv).respond();
+    }
+
+    private void ifelse(IryohokenRirekiCommonChildDivDiv requestDiv) {
+        List<dgIryohokenIchiran_Row> list = requestDiv.getDgIryohokenIchiran().getDataSource();
         dgIryohokenIchiran_Row ichiran_Row;
         int count = 0;
-        if (requestDiv.getPnlIryohokenJoho().getStatus() != null && !requestDiv.getPnlIryohokenJoho().getStatus().equals(RString.EMPTY)) {
-            if (new RString("追加").equals(requestDiv.getPnlIryohokenJoho().getStatus())) {
-                ichiran_Row = new dgIryohokenIchiran_Row();
+        if (new RString("追加").equals(requestDiv.getPnlIryohokenJoho().getStatus())) {
+            ichiran_Row = new dgIryohokenIchiran_Row();
+            ichiran_Row.setDefaultDataName3(requestDiv.getPnlIryohokenJoho().getTbdKanyubi().getValue().wareki().toDateString());
+            if (requestDiv.getPnlIryohokenJoho().getTbdDattabi().getValue() == null) {
+                ichiran_Row.setDefaultDataName4(RString.EMPTY);
+            } else {
+                ichiran_Row.setDefaultDataName4(requestDiv.getPnlIryohokenJoho().getTbdDattabi().getValue().wareki().toDateString());
+            }
+            ichiran_Row.setDefaultDataName5(requestDiv.getPnlIryohokenJoho().getDdlSyubetsu().getSelectedValue());
+            ichiran_Row.setDefaultDataName8(requestDiv.getPnlIryohokenJoho().getTxtHokensyaKodo().getValue());
+            ichiran_Row.setDefaultDataName6(requestDiv.getPnlIryohokenJoho().getTxtHokensyaMeisho().getValue());
+            ichiran_Row.setDefaultDataName7(requestDiv.getPnlIryohokenJoho().getTxtKigoBango().getValue());
+            RStringBuilder 保険者名 = new RStringBuilder();
+            保険者名.append(requestDiv.getPnlIryohokenJoho().getTxtHokensyaKodo().getValue());
+            保険者名.append(new RString(":"));
+            保険者名.append(requestDiv.getPnlIryohokenJoho().getTxtHokensyaMeisho().getValue());
+            ichiran_Row.setDefaultDataName10(保険者名.toRString());
+            ichiran_Row.setDefaultDataName0(医療保険情報_識別コード);
+            ichiran_Row.setDefaultDataName1(医療保険情報_市町村コード);
+            ichiran_Row.setDefaultDataName2(状態_追加);
+            list.add(count, ichiran_Row);
+            加入日と脱退日の有効性チェック(list, count);
+
+        } else {
+            requestDiv.getDgIryohokenIchiran().getGridSetting().selectedRowCount();
+            ichiran_Row = requestDiv.getDgIryohokenIchiran().getSelectedItems().get(0);
+            count = list.indexOf(ichiran_Row);
+
+            if (状態_修正.equals(requestDiv.getPnlIryohokenJoho().getStatus())
+                    && checkDataChangedError(ichiran_Row, requestDiv.getPnlIryohokenJoho())) {
+                throw new ApplicationException(UrErrorMessages.編集なしで更新不可.getMessage());
+            }
+
+            if (!状態_削除.equals(ichiran_Row.getDefaultDataName2())) {
+
                 ichiran_Row.setDefaultDataName3(requestDiv.getPnlIryohokenJoho().getTbdKanyubi().getValue().wareki().toDateString());
-                if (requestDiv.getPnlIryohokenJoho().getTbdDattabi().getValue() == null) {
-                    ichiran_Row.setDefaultDataName4(RString.EMPTY);
-                } else {
-                    ichiran_Row.setDefaultDataName4(requestDiv.getPnlIryohokenJoho().getTbdDattabi().getValue().wareki().toDateString());
-                }
+                ichiran_Row.setDefaultDataName4(requestDiv.getPnlIryohokenJoho().getTbdDattabi().getValue() == null
+                        ? RString.EMPTY : requestDiv.getPnlIryohokenJoho().getTbdDattabi().getValue().wareki().toDateString());
+
                 ichiran_Row.setDefaultDataName5(requestDiv.getPnlIryohokenJoho().getDdlSyubetsu().getSelectedValue());
                 ichiran_Row.setDefaultDataName8(requestDiv.getPnlIryohokenJoho().getTxtHokensyaKodo().getValue());
                 ichiran_Row.setDefaultDataName6(requestDiv.getPnlIryohokenJoho().getTxtHokensyaMeisho().getValue());
@@ -161,60 +207,28 @@ public class IryohokenRirekiCommonChildDiv {
                 保険者名.append(new RString(":"));
                 保険者名.append(requestDiv.getPnlIryohokenJoho().getTxtHokensyaMeisho().getValue());
                 ichiran_Row.setDefaultDataName10(保険者名.toRString());
-                ichiran_Row.setDefaultDataName0(医療保険情報_識別コード);
-                ichiran_Row.setDefaultDataName1(医療保険情報_市町村コード);
-                ichiran_Row.setDefaultDataName2(状態_追加);
-                list.add(count, ichiran_Row);
+                setState(ichiran_Row, requestDiv);
+            }
+            if (状態_削除.equals(requestDiv.getPnlIryohokenJoho().getStatus()) && 状態_追加.equals(ichiran_Row.getDefaultDataName2())) {
+                list.remove(count);
+            }
+            if (状態_追加.equals(requestDiv.getPnlIryohokenJoho().getStatus())
+                    || 状態_修正.equals(requestDiv.getPnlIryohokenJoho().getStatus())) {
+
                 加入日と脱退日の有効性チェック(list, count);
-
-            } else {
-                requestDiv.getDgIryohokenIchiran().getGridSetting().selectedRowCount();
-                ichiran_Row = requestDiv.getDgIryohokenIchiran().getSelectedItems().get(0);
-                count = list.indexOf(ichiran_Row);
-
-                if (状態_修正.equals(requestDiv.getPnlIryohokenJoho().getStatus())
-                        && checkDataChangedError(ichiran_Row, requestDiv.getPnlIryohokenJoho())) {
-                    throw new ApplicationException(UrErrorMessages.編集なしで更新不可.getMessage());
-                }
-
-                if (!状態_削除.equals(ichiran_Row.getDefaultDataName2())) {
-
-                    ichiran_Row.setDefaultDataName3(requestDiv.getPnlIryohokenJoho().getTbdKanyubi().getValue().wareki().toDateString());
-                    if (requestDiv.getPnlIryohokenJoho().getTbdDattabi().getValue() == null) {
-                        ichiran_Row.setDefaultDataName4(RString.EMPTY);
-                    } else {
-                        ichiran_Row.setDefaultDataName4(requestDiv.getPnlIryohokenJoho().getTbdDattabi().getValue().wareki().toDateString());
-                    }
-                    ichiran_Row.setDefaultDataName5(requestDiv.getPnlIryohokenJoho().getDdlSyubetsu().getSelectedValue());
-                    ichiran_Row.setDefaultDataName8(requestDiv.getPnlIryohokenJoho().getTxtHokensyaKodo().getValue());
-                    ichiran_Row.setDefaultDataName6(requestDiv.getPnlIryohokenJoho().getTxtHokensyaMeisho().getValue());
-                    ichiran_Row.setDefaultDataName7(requestDiv.getPnlIryohokenJoho().getTxtKigoBango().getValue());
-                    RStringBuilder 保険者名 = new RStringBuilder();
-                    保険者名.append(requestDiv.getPnlIryohokenJoho().getTxtHokensyaKodo().getValue());
-                    保険者名.append(new RString(":"));
-                    保険者名.append(requestDiv.getPnlIryohokenJoho().getTxtHokensyaMeisho().getValue());
-                    ichiran_Row.setDefaultDataName10(保険者名.toRString());
-
-                    if (状態_修正.equals(requestDiv.getPnlIryohokenJoho().getStatus()) && !状態_追加.equals(ichiran_Row.getDefaultDataName2())) {
-                        ichiran_Row.setDefaultDataName2(状態_修正);
-                    }
-
-                    if (状態_削除.equals(requestDiv.getPnlIryohokenJoho().getStatus()) && !状態_追加.equals(ichiran_Row.getDefaultDataName2())) {
-                        ichiran_Row.setDefaultDataName2(状態_削除);
-                    }
-                }
-                if (状態_削除.equals(requestDiv.getPnlIryohokenJoho().getStatus()) && 状態_追加.equals(ichiran_Row.getDefaultDataName2())) {
-                    list.remove(count);
-                }
-                if (状態_追加.equals(requestDiv.getPnlIryohokenJoho().getStatus())
-                        || 状態_修正.equals(requestDiv.getPnlIryohokenJoho().getStatus())) {
-
-                    加入日と脱退日の有効性チェック(list, count);
-                }
             }
         }
-        clear(requestDiv);
-        return ResponseData.of(requestDiv).respond();
+    }
+
+    private void setState(dgIryohokenIchiran_Row ichiran_Row, IryohokenRirekiCommonChildDivDiv requestDiv) {
+
+        if (状態_修正.equals(requestDiv.getPnlIryohokenJoho().getStatus()) && !状態_追加.equals(ichiran_Row.getDefaultDataName2())) {
+            ichiran_Row.setDefaultDataName2(状態_修正);
+        }
+
+        if (状態_削除.equals(requestDiv.getPnlIryohokenJoho().getStatus()) && !状態_追加.equals(ichiran_Row.getDefaultDataName2())) {
+            ichiran_Row.setDefaultDataName2(状態_削除);
+        }
     }
 
     /**
@@ -261,7 +275,7 @@ public class IryohokenRirekiCommonChildDiv {
             childDivDate.add(iryohokenRirekiDate);
         }
 
-        Collections.sort(childDivDate);
+        Collections.sort(childDivDate, new DateComparator());
         int sortIndex = childDivDate.indexOf(iryohokenRirekiDate);
 
         if (ichiran_Row.getDefaultDataName4().compareTo(ichiran_Row.getDefaultDataName3()) < 0) {
@@ -290,22 +304,27 @@ public class IryohokenRirekiCommonChildDiv {
                 throw new ApplicationException(
                         DbzErrorMessages.期間が不正_未来日付不可.getMessage().replace(
                                 preData.getDefaultDataName4().toString(), ichiran_Row.getDefaultDataName3().toString()));
-            } else {
-                IryohokenRirekiCommonChildDivDate nextData = childDivDate.get(sortIndex + 1);
-                if (nextData.getDefaultDataName3().compareTo(ichiran_Row.getDefaultDataName4()) < 0) {
-                    throw new ApplicationException(
-                            DbzErrorMessages.期間が不正_未来日付不可.getMessage().replace(
-                                    ichiran_Row.getDefaultDataName4().toString(), nextData.getDefaultDataName3().toString()));
-                }
+            } else if (childDivDate.get(sortIndex + 1).getDefaultDataName3().compareTo(ichiran_Row.getDefaultDataName4()) < 0) {
+                throw new ApplicationException(
+                        DbzErrorMessages.期間が不正_未来日付不可.getMessage().replace(
+                                ichiran_Row.getDefaultDataName4().toString(), childDivDate.get(sortIndex + 1).getDefaultDataName3().toString()));
             }
 
+        }
+    }
+
+    private static class DateComparator implements Comparator<IryohokenRirekiCommonChildDivDate>, Serializable {
+
+        @Override
+        public int compare(IryohokenRirekiCommonChildDivDate o1, IryohokenRirekiCommonChildDivDate o2) {
+            return o1.getDefaultDataName3().compareTo(o2.getDefaultDataName3());
         }
     }
 
     /**
      * 取消ボタンを押下の処理に実行されます。
      *
-     * @param requestDiv　IryohokenRirekiCommonChildDivDiv
+     * @param requestDiv IryohokenRirekiCommonChildDivDiv
      * @return ResponseData<IryohokenRirekiCommonChildDivDiv>
      */
     public ResponseData<IryohokenRirekiCommonChildDivDiv> onClick_btnCancel(IryohokenRirekiCommonChildDivDiv requestDiv) {
@@ -317,6 +336,10 @@ public class IryohokenRirekiCommonChildDiv {
 
     private IryohokenRirekiHandler createHandlerOf(IryohokenRirekiCommonChildDivDiv requestDiv) {
         return new IryohokenRirekiHandler(requestDiv);
+    }
+
+    private IryohokenRirekiValidationHandler createValidationHandlerOf(IryohokenRirekiCommonChildDivDiv requestDiv) {
+        return new IryohokenRirekiValidationHandler(requestDiv);
     }
 
     private ResponseData<IryohokenRirekiCommonChildDivDiv> createResponseData(IryohokenRirekiCommonChildDivDiv requestDiv) {

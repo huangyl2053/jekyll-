@@ -13,14 +13,13 @@ import jp.co.ndensan.reams.db.dbc.entity.csv.KagoKetteiHokenshaInCSVMeisaiEntity
 import jp.co.ndensan.reams.db.dbc.entity.csv.KagoKetteiHokenshaInCSVShukeiEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.kagoketteihokenshain.KagoKetteiHokenshaInMeisaiEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.kagoketteihokenshain.KagoKetteiHokenshaInShukeiEntity;
+import jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.kagoketteihokenshain.IKagoKetteiHokenshaInMapper;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ServiceShuruiCode;
-import jp.co.ndensan.reams.uz.uza.batch.process.BatchEntityCreatedTempTableWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchProcessBase;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchSimpleReader;
-import jp.co.ndensan.reams.uz.uza.batch.process.BatchWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.IBatchReader;
 import jp.co.ndensan.reams.uz.uza.batch.process.InputParameter;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
@@ -54,31 +53,24 @@ public class KagoKetteiHokenshaInTempSaveProcess extends BatchProcessBase<RStrin
     private final RString レコード種別_ヘッダ = new RString("H1");
     private final RString レコード種別_明細 = new RString("D1");
     private final RString レコード種別_集計 = new RString("T1");
-
-    @BatchWriter
-    BatchEntityCreatedTempTableWriter meisaiTempTableWriter;
-
-    @BatchWriter
-    BatchEntityCreatedTempTableWriter shukeiTempTableWriter;
+    private IKagoKetteiHokenshaInMapper mapper;
 
     @Override
     protected void initialize() {
         super.initialize();
+        mapper = getMapper(IKagoKetteiHokenshaInMapper.class);
         list = new ArrayList<>();
+    }
+
+    @Override
+    protected void beforeExecute() {
+        mapper.create保険者分情報_明細();
+        mapper.create保険者分情報_集計();
     }
 
     @Override
     protected IBatchReader createReader() {
         return new BatchSimpleReader(filePath.getValue());
-    }
-
-    @Override
-    protected void createWriter() {
-        meisaiTempTableWriter
-                = new BatchEntityCreatedTempTableWriter(KagoKetteiHokenshaInMeisaiEntity.TABLE_NAME, KagoKetteiHokenshaInMeisaiEntity.class);
-
-        shukeiTempTableWriter
-                = new BatchEntityCreatedTempTableWriter(KagoKetteiHokenshaInShukeiEntity.TABLE_NAME, KagoKetteiHokenshaInShukeiEntity.class);
     }
 
     @Override
@@ -100,9 +92,9 @@ public class KagoKetteiHokenshaInTempSaveProcess extends BatchProcessBase<RStrin
     @Override
     protected void afterExecute() {
         for (KagoKetteiHokenshaInCSVMeisaiEntity meisaiEntity : list) {
-            meisaiTempTableWriter.insert(createMeiseiRecord(header, meisaiEntity));
+            mapper.insert過誤決定明細(createMeiseiRecord(header, meisaiEntity));
         }
-        shukeiTempTableWriter.insert(createShukeiRecord(header, shukei));
+        mapper.insert過誤決定集計(createShukeiRecord(header, shukei));
     }
 
     private KagoKetteiHokenshaInMeisaiEntity createMeiseiRecord(
@@ -112,6 +104,7 @@ public class KagoKetteiHokenshaInTempSaveProcess extends BatchProcessBase<RStrin
         KagoKetteiHokenshaInMeisaiEntity entity
                 = new KagoKetteiHokenshaInMeisaiEntity();
 
+        entity.setKokanShikibetsuNo(trim囲み文字(csvHeader.getKokanShikibetsuNo()));
         entity.setToriatsukaiYM(new FlexibleYearMonth(trim囲み文字(csvHeader.getToriatsukaiYM())));
         entity.setShokisaiHokenshaNo(new HokenshaNo(trim囲み文字(csvHeader.getShokisaiHokenshaNo())));
         entity.setShokisaiHokenshaNa(trim囲み文字(csvHeader.getShokisaiHokenshaNa()));
@@ -133,13 +126,18 @@ public class KagoKetteiHokenshaInTempSaveProcess extends BatchProcessBase<RStrin
     }
 
     private KagoKetteiHokenshaInShukeiEntity createShukeiRecord(
-            KagoKetteiHokenshaInCSVHeaderEntity cSVHeader,
+            KagoKetteiHokenshaInCSVHeaderEntity csvHeader,
             KagoKetteiHokenshaInCSVShukeiEntity csvShukei) {
 
         KagoKetteiHokenshaInShukeiEntity entity
                 = new KagoKetteiHokenshaInShukeiEntity();
+        entity.setKokanShikibetsuNo(trim囲み文字(csvHeader.getKokanShikibetsuNo()));
+        entity.setToriatsukaiYM(new FlexibleYearMonth(trim囲み文字(csvHeader.getToriatsukaiYM())));
+        entity.setShokisaiHokenshaNo(new HokenshaNo(trim囲み文字(csvHeader.getShokisaiHokenshaNo())));
+        entity.setShokisaiHokenshaNa(trim囲み文字(csvHeader.getShokisaiHokenshaNa()));
+        entity.setSakuseiYMD(new FlexibleDate(trim囲み文字(csvHeader.getSakuseiYMD())));
+        entity.setKokukoRengoukaiNa(trim囲み文字(csvHeader.getKokukoRengoukaiNa()));
 
-        entity.setToriatsukaiYM(new FlexibleYearMonth(trim囲み文字(cSVHeader.getToriatsukaiYM())));
         entity.setKaigoKyufuhiKensu(Integer.parseInt(trim囲み文字(csvShukei.getKaigoKyufuhiKensu()).toString()));
         entity.setKaigoKyufuhiTanisu(new Decimal(trim囲み文字(csvShukei.getKaigoKyufuhiTanisu()).toString()));
         entity.setKaigoKyufuhiFutangaku(new Decimal(trim囲み文字(csvShukei.getKaigoKyufuhiFutangaku()).toString()));
@@ -150,7 +148,6 @@ public class KagoKetteiHokenshaInTempSaveProcess extends BatchProcessBase<RStrin
                 getTokuteiNyushoshaServicehiKensu()).toString()));
         entity.setTokuteiNyushoshaServicehiTanisu(new Decimal(trim囲み文字(csvShukei.getTokuteiNyushoshaServicehiTanisu()).toString()));
         entity.setTokuteiNyushoshaServicehiFutangaku(new Decimal(trim囲み文字(csvShukei.getTokuteiNyushoshaServicehiFutangaku()).toString()));
-        entity.setSakuseiYMD(new FlexibleDate(trim囲み文字(cSVHeader.getSakuseiYMD())));
 
         return entity;
     }

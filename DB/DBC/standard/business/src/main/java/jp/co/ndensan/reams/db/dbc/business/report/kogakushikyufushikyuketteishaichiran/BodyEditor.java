@@ -47,7 +47,7 @@ public class BodyEditor implements IKogakuShikyuFushikyuKetteishaIchiranEditor {
         source.listUpper_7 = item.get住所コード();
         source.listUpper_8 = item.get郵便番号();
         source.listUpper_9 = item.get住所();
-        if (item.get住所().length() > 文字15) {
+        if (item.get住所() != null && item.get住所().length() > 文字15) {
             source.listLower_8 = item.get住所().substring(文字15);
         }
         source.listUpper_10 = item.get行政区();

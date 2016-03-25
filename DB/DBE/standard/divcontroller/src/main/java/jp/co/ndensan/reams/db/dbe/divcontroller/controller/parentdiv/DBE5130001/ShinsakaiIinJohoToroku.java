@@ -447,6 +447,7 @@ public class ShinsakaiIinJohoToroku {
             return ResponseData.of(div).addMessage(UrQuestionMessages.入力内容の破棄.getMessage()).respond();
         }
         if ((更新モード.equals(ViewStateHolder.get(ViewStateKeys.モード, RString.class)) && !handler.hasChanged合議体詳細情報())
+                || (新規モード.equals(ViewStateHolder.get(ViewStateKeys.モード, RString.class)) && !handler.has審査会委員詳細情報入力())
                 || (new RString(UrQuestionMessages.入力内容の破棄.getMessage().getCode()).equals(ResponseHolder.getMessageCode())
                 && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes)) {
             div.getBtnShinsakaiIinAdd().setDisabled(false);

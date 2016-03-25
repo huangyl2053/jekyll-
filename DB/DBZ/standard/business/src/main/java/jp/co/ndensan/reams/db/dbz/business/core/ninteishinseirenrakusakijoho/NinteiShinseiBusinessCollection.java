@@ -21,11 +21,11 @@ import lombok.Setter;
 @Getter
 @Setter
 @SuppressWarnings("PMD.UnusedPrivateField")
-public class NinteiShinseiBusinessCollection implements Serializable{
+public class NinteiShinseiBusinessCollection implements Serializable {
     
-     SubGyomuCode hdnDatabaseSubGyomuCode;
-     ShinseishoKanriNo shinseishoKanriNo;
-     List<NinteiShinseiRenrakusakiKihon> dbeBusiness;
-     List<RenrakusakiJoho> dbdBusiness;
+     private SubGyomuCode hdnDatabaseSubGyomuCode;
+     private ShinseishoKanriNo shinseishoKanriNo;
+     private List<NinteiShinseiRenrakusakiKihon> dbeBusiness;
+     private List<RenrakusakiJoho> dbdBusiness;
     
 }

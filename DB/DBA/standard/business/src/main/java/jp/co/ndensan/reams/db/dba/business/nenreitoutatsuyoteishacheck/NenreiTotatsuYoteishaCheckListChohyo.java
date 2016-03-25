@@ -24,6 +24,10 @@ import jp.co.ndensan.reams.uz.uza.lang.Separator;
  */
 public class NenreiTotatsuYoteishaCheckListChohyo {
 
+    private static final int INDEX_1 = 1;
+    private static final int INDEX_2 = 2;
+    private static final int INDEX_3 = 3;
+    private static final int INDEX_4 = 4;
     private static NenreitotatsuYoteishaIchiranhyoItem item;
     private static NenreitotatsuYoteishaIchiranhyoHeadItem headItem;
     private final List<NenreitotatsuYoteishaIchiranhyoBodyItem> bodyItemList = new ArrayList<>();
@@ -36,10 +40,12 @@ public class NenreiTotatsuYoteishaCheckListChohyo {
      */
     public NenreitotatsuYoteishaIchiranhyoItem createNenreiToutatsuYoteishaCheckListChohyo(
             NenreiToutatsuYoteishaCheckListJyohoEntity nenreiCheckListJyohoEntity) {
+        List<RString> 並び順 = nenreiCheckListJyohoEntity.get並び順();
+        List<RString> 改頁 = nenreiCheckListJyohoEntity.get改頁();
         headItem = new NenreitotatsuYoteishaIchiranhyoHeadItem(
                 get印刷日時(), nenreiCheckListJyohoEntity.get市町村コード(), nenreiCheckListJyohoEntity.get市町村名(),
-                nenreiCheckListJyohoEntity.get並び順(), RString.EMPTY, RString.EMPTY, RString.EMPTY, RString.EMPTY,
-                nenreiCheckListJyohoEntity.get改頁(), RString.EMPTY, RString.EMPTY, RString.EMPTY, RString.EMPTY);
+                並び順.get(0), 並び順.get(INDEX_1), 並び順.get(INDEX_2), 並び順.get(INDEX_3), 並び順.get(INDEX_4),
+                改頁.get(0), 改頁.get(INDEX_1), 改頁.get(INDEX_2), 改頁.get(INDEX_3), 改頁.get(INDEX_4));
         if (nenreiCheckListJyohoEntity.get年齢到達予定者チェックリスト().isEmpty()) {
             NenreitotatsuYoteishaIchiranhyoBodyItem bodyItem = new NenreitotatsuYoteishaIchiranhyoBodyItem(
                     RString.EMPTY, RString.EMPTY, RString.EMPTY, RString.EMPTY, RString.EMPTY,

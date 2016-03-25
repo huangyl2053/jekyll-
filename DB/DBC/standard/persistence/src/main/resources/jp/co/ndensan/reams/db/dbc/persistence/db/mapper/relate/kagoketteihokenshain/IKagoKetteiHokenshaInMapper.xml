@@ -7,6 +7,7 @@
     <insert id="create保険者分情報_明細">
         CREATE TEMP TABLE "TEMP_TABLE_KagoKetteiTsuchishoJyohoHokenshabunMeisai"
         (
+        "kokanShikibetsuNo" character varying(4),
         "toriatsukaiYM" rshare."UDD014YM",
         "shokisaiHokenshaNo" rgdb."DbUDD003HokenshaNo",
         "shokisaiHokenshaNa" character(40),
@@ -25,16 +26,13 @@
         "hokenshaFutangaku" numeric(13,0)
         )
     </insert>
-    <!--過誤決定通知書（保険者分）情報（明細）一時テーブルを削除します-->
-    <delete id="delete保険者分情報_明細">
-        DROP TABLE "TEMP_TABLE_KagoKetteiTsuchishoJyohoHokenshabunMeisai"
-    </delete>
     
     <!--過誤決定通知書（保険者分）情報（明細）一時テーブルに登録します-->
     <insert id="insert保険者分情報_明細" parameterType="jp.co.ndensan.reams.db.dbc.entity.db.relate.kagoketteihokenshain.KagoKetteiHokenshaInMeisaiEntity">
         INSERT INTO "TEMP_TABLE_KagoKetteiTsuchishoJyohoHokenshabunMeisai" 
         VALUES 
         (
+        #{kokanShikibetsuNo},
         #{toriatsukaiYM},
         #{shokisaiHokenshaNo},
         #{shokisaiHokenshaNa},
@@ -124,6 +122,7 @@
     <insert id="create保険者分情報_集計">
         CREATE TEMP TABLE "TEMP_TABLE_KagoKetteiTsuchishoJyohoHokenshabunShukei"
         (
+        "kokanShikibetsuNo" character varying(4),
         "toriatsukaiYM" rshare."UDD014YM",
         "shokisaiHokenshaNo" rgdb."DbUDD003HokenshaNo",
         "shokisaiHokenshaNa" character(40),
@@ -139,16 +138,13 @@
         "tokuteiNyushoshaServicehiTanisu" numeric(13,0),
         "tokuteiNyushoshaServicehiFutangaku" numeric(13,0))
     </insert>
-    <!--過誤決定通知書（保険者分）情報（集計）一時テーブルを削除します-->
-    <delete id="delete保険者分情報_集計">
-        DROP TABLE "TEMP_TABLE_KagoKetteiTsuchishoJyohoHokenshabunShukei"
-    </delete>
     
     <!--過誤決定通知書（保険者分）情報（集計）一時テーブルに登録します-->
     <insert id="insert保険者分情報_集計" parameterType="jp.co.ndensan.reams.db.dbc.entity.db.relate.kagoketteihokenshain.KagoKetteiHokenshaInShukeiEntity">
         INSERT INTO "TEMP_TABLE_KagoKetteiTsuchishoJyohoHokenshabunShukei" 
         VALUES 
         (
+        #{kokanShikibetsuNo},
         #{toriatsukaiYM},
         #{shokisaiHokenshaNo},
         #{shokisaiHokenshaNa},
@@ -207,7 +203,7 @@
         '1',
         (SELECT CASE WHEN Max(A."rirekiNo") IS NULL THEN 1
         ELSE Max(A."rirekiNo")+1 END
-        FROM rgdb."DbT3061KagoKetteiMeisai" AS A
+        FROM rgdb."DbT3060KagoKetteiShukei" AS A
         WHERE "toriatsukaiYM"=#{toriatsukaiYM}
         and "hokenshaKubun"='1'),
         #{kaigoKyufuhiKensu},
@@ -223,70 +219,6 @@
         #{sakuseiYMD},
         (SELECT TO_CHAR(CURRENT_DATE,'yyyymm'))
         )
-    </insert>
-    
-    <select id="get国保連管理情報" parameterType="jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth" 
-            resultType="jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3104KokuhorenInterfaceKanriEntity" fetchSize="500">
-        SELECT 
-        "shoriYM",
-        "kokanShikibetsuNo" 
-        FROM rgdb."DbT3104KokuhorenInterfaceKanri" 
-        WHERE "shoriYM"=#{shoriYM} 
-        AND "kokanShikibetsuNo"='171'
-    </select>
-    
-    <update id="update国保連管理" parameterType="jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3104KokuhorenInterfaceKanriEntity">
-        UPDATE rgdb."DbT3104KokuhorenInterfaceKanri"
-        SET "sofuTorikomiKubun"='2',
-        "shoriJotaiKubun"='3',
-        "shoriJisshiTimestamp"=(
-        SELECT TO_CHAR(CURRENT_TIMESTAMP,'yyyymmddhh24miss')
-        ),
-        "saiShoriKanoKubun"=FALSE,
-        "shoriJikkoKaisu"=(
-        SELECT "shoriJikkoKaisu"+1 
-        FROM rgdb."DbT3104KokuhorenInterfaceKanri" kokuhorenInterfaceKanri
-        WHERE kokuhorenInterfaceKanri."shoriYM"=#{shoriYM}
-        AND kokuhorenInterfaceKanri."kokanShikibetsuNo"='171'),
-        "fileName1"=#{fileName1},
-        "fileName2"=#{fileName2},
-        "fileName3"=#{fileName3},
-        "fileName4"=#{fileName4},
-        "fileName5"=#{fileName5}
-        WHERE "shoriYM"=#{shoriYM}
-        AND "kokanShikibetsuNo"='171'
-    </update>
-    
-    <insert id="insert国保連管理" parameterType="jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3104KokuhorenInterfaceKanriEntity">
-        INSERT INTO rgdb."DbT3104KokuhorenInterfaceKanri"
-        (
-        "shoriYM",
-        "kokanShikibetsuNo",
-        "sofuTorikomiKubun",
-        "shoriJotaiKubun",
-        "shoriJisshiTimestamp",
-        "saiShoriKanoKubun",
-        "shoriJikkoKaisu",
-        "saiShoriFukaKubun",
-        "fileName1",
-        "fileName2",
-        "fileName3",
-        "fileName4",
-        "fileName5") 
-        VALUES (
-        #{shoriYM},
-        '171',
-        '2',
-        '3',
-        (SELECT TO_CHAR(CURRENT_TIMESTAMP,'yyyymmddhh24miss')),
-        FALSE,
-        '1',
-        FALSE,
-        #{fileName1},
-        #{fileName2},
-        #{fileName3},
-        #{fileName4},
-        #{fileName5})
     </insert>
     
     <select id="get市町村コード" resultType="jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT1001HihokenshaDaichoEntity">

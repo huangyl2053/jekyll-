@@ -75,12 +75,40 @@
                 DbT5912ShujiiJoho."dbT5912ShujiiJoho_shujiiIryokikanCode" <![CDATA[<=]]> #{主治医医療機関コードTo}
             </if>
             <if test="uses主治医医療機関名称">
-                AND
-                DbT5911ShujiiIryoKikanJoho."dbT5911ShujiiIryoKikanJoho_iryoKikanMeisho"  LIKE '%' || #{主治医医療機関名称} || '%'
+                <if test="uses0主治医医療機関名称">
+                    AND
+                    DbT5911ShujiiIryoKikanJoho."dbT5911ShujiiIryoKikanJoho_iryoKikanMeisho"  LIKE #{主治医医療機関名称} || '%'
+                </if>
+                <if test="uses1主治医医療機関名称">
+                    AND
+                    DbT5911ShujiiIryoKikanJoho."dbT5911ShujiiIryoKikanJoho_iryoKikanMeisho"  LIKE '%' || #{主治医医療機関名称}
+                </if>
+                <if test="uses2主治医医療機関名称">
+                    AND
+                    DbT5911ShujiiIryoKikanJoho."dbT5911ShujiiIryoKikanJoho_iryoKikanMeisho" = #{主治医医療機関名称}
+                </if>
+                <if test="uses3主治医医療機関名称">
+                    AND
+                    DbT5911ShujiiIryoKikanJoho."dbT5911ShujiiIryoKikanJoho_iryoKikanMeisho"  LIKE '%' || #{主治医医療機関名称} || '%'
+                </if>
             </if>
             <if test="uses主治医医療機関カナ名称">
-                AND
-                DbT5911ShujiiIryoKikanJoho."dbT5911ShujiiIryoKikanJoho_iryoKikanMeishoKana"  LIKE '%' || #{主治医医療機関カナ名称} || '%'
+                <if test="uses0主治医医療機関カナ名称">
+                    AND
+                    DbT5911ShujiiIryoKikanJoho."dbT5911ShujiiIryoKikanJoho_iryoKikanMeishoKana"  LIKE #{主治医医療機関カナ名称} || '%'
+                </if>
+                <if test="uses1主治医医療機関カナ名称">
+                    AND
+                    DbT5911ShujiiIryoKikanJoho."dbT5911ShujiiIryoKikanJoho_iryoKikanMeishoKana"  LIKE '%' || #{主治医医療機関カナ名称}
+                </if>
+                <if test="uses2主治医医療機関カナ名称">
+                    AND
+                    DbT5911ShujiiIryoKikanJoho."dbT5911ShujiiIryoKikanJoho_iryoKikanMeishoKana" = #{主治医医療機関カナ名称}
+                </if>
+                <if test="uses3主治医医療機関カナ名称">
+                    AND
+                    DbT5911ShujiiIryoKikanJoho."dbT5911ShujiiIryoKikanJoho_iryoKikanMeishoKana"  LIKE '%' || #{主治医医療機関カナ名称} || '%'
+                </if>
             </if>
 
             <if test="uses主治医コードFrom">
@@ -92,12 +120,40 @@
                 DbT5912ShujiiJoho."dbT5912ShujiiJoho_shujiiCode" <![CDATA[<=]]> #{主治医コードTo}
             </if>
             <if test="uses主治医氏名">
-                AND
-                DbT5912ShujiiJoho."dbT5912ShujiiJoho_shujiiName"  LIKE '%' || #{主治医氏名} || '%'
+                <if test="uses0主治医氏名">
+                    AND
+                    DbT5912ShujiiJoho."dbT5912ShujiiJoho_shujiiName"  LIKE #{主治医氏名} || '%'
+                </if>
+                <if test="uses1主治医氏名">
+                    AND
+                    DbT5912ShujiiJoho."dbT5912ShujiiJoho_shujiiName"  LIKE '%' || #{主治医氏名}
+                </if>
+                <if test="uses主治医氏名">
+                    AND
+                    DbT5912ShujiiJoho."dbT5912ShujiiJoho_shujiiName" = #{主治医氏名}
+                </if>
+                <if test="uses主治医氏名">
+                    AND
+                    DbT5912ShujiiJoho."dbT5912ShujiiJoho_shujiiName"  LIKE '%' || #{主治医氏名} || '%'
+                </if>
             </if>
             <if test="uses主治医カナ氏名">
-                AND
-                DbT5912ShujiiJoho."dbT5912ShujiiJoho_shujiiKana"  LIKE '%' || #{主治医カナ氏名} || '%'
+                <if test="uses0主治医カナ氏名">
+                    AND
+                    DbT5912ShujiiJoho."dbT5912ShujiiJoho_shujiiKana"  LIKE #{主治医カナ氏名} || '%'
+                </if>
+                <if test="uses主治医カナ氏名">
+                    AND
+                    DbT5912ShujiiJoho."dbT5912ShujiiJoho_shujiiKana"  LIKE '%' || #{主治医カナ氏名}
+                </if>
+                <if test="uses主治医カナ氏名">
+                    AND
+                    DbT5912ShujiiJoho."dbT5912ShujiiJoho_shujiiKana" = #{主治医カナ氏名}
+                </if>
+                <if test="uses主治医カナ氏名">
+                    AND
+                    DbT5912ShujiiJoho."dbT5912ShujiiJoho_shujiiKana"  LIKE '%' || #{主治医カナ氏名} || '%'
+                </if>
             </if>
         </where>
         ORDER BY

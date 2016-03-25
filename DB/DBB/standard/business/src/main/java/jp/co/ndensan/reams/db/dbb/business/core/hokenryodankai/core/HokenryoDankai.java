@@ -161,6 +161,11 @@ public class HokenryoDankai {
         throw new UnsupportedOperationException(""); //To change body of generated methods, choose Tools | Templates.
     }
 
+    /**
+     * SystemDankaiを返します。
+     *
+     * @return RString
+     */
     public RString getSystemDankai() {
         throw new UnsupportedOperationException(""); //To change body of generated methods, choose Tools | Templates.
     }
@@ -169,10 +174,20 @@ public class HokenryoDankai {
         throw new UnsupportedOperationException(""); //To change body of generated methods, choose Tools | Templates.
     }
 
+    /**
+     * HokenryoDankaiを返します。
+     *
+     * @return RString
+     */
     public RString getHokenryoDankai() {
         throw new UnsupportedOperationException(""); //To change body of generated methods, choose Tools | Templates.
     }
 
+    /**
+     * isTokureiTaishoを返します。
+     *
+     * @return boolean
+     */
     public boolean isTokureiTaisho() {
         throw new UnsupportedOperationException(""); //To change body of generated methods, choose Tools | Templates.
     }

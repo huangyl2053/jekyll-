@@ -1,7 +1,3 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package jp.co.ndensan.reams.db.dbz.persistence.db.basic;
 
 import java.util.List;
@@ -83,22 +79,4 @@ public class DbT7065ChohyoSeigyoKyotsuDac implements ISaveable<DbT7065ChohyoSeig
         return DbAccessors.saveBy(new DbAccessorNormalType(session), entity);
     }
 
-    /**
-     * 表示コードを取得する。
-     *
-     * @param 帳票分類ID ChohyoBunruiID
-     * @return List<DbT7065ChohyoSeigyoKyotsuEntity>
-     */
-    @Transaction
-    public DbT7065ChohyoSeigyoKyotsuEntity selectByHyoujiCode(ReportId 帳票分類ID) {
-        requireNonNull(帳票分類ID, UrSystemErrorMessages.値がnull.getReplacedMessage("帳票分類ID"));
-        DbAccessorNormalType accessor = new DbAccessorNormalType(session);
-
-        return accessor.select().
-                table(DbT7065ChohyoSeigyoKyotsu.class).
-                where(and(
-                                eq(subGyomuCode, "DBB"),
-                                eq(chohyoBunruiID, 帳票分類ID))).
-                toObject(DbT7065ChohyoSeigyoKyotsuEntity.class);
-    }
 }

@@ -10,11 +10,11 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC120010.SharedFileCopy;
-import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC120170.KohifutanshaTempTableInsertProcess;
-import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC120070.KogakuKyufuTaishoshaInUpdateProcess;
 import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC120070.KogakuKyufuTaishoshaInInsertProcess;
 import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC120070.KogakuKyufuTaishoshaInTempUpdateProcess;
+import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC120070.KogakuKyufuTaishoshaInUpdateProcess;
 import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC120070.KogakuKyufuTaishoshaInWriteReportProcess;
+import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC120170.KohifutanshaTempTableInsertProcess;
 import jp.co.ndensan.reams.db.dbc.definition.batchprm.kogakukyufutaishoshain.KogakuKyufuTaishoshaInBatchParameter;
 import jp.co.ndensan.reams.db.dbc.definition.core.enumeratedtype.IcchiJoken;
 import jp.co.ndensan.reams.uz.uza.batch.Step;
@@ -51,7 +51,7 @@ public class KogakuKyufuTaishoshaInFlow extends BatchFlowBase<KogakuKyufuTaishos
             runFilePath = filepath;
             executeStep(TEMP_TABLE_INSERT);
         }
-        //executeStep(TEMP_TABLE_UPDATE);
+        executeStep(TEMP_TABLE_UPDATE);
         executeStep(DB_UPDATE);
         executeStep(WRITE_REPORT);
     }
@@ -75,7 +75,7 @@ public class KogakuKyufuTaishoshaInFlow extends BatchFlowBase<KogakuKyufuTaishos
 
     @Step(TEMP_TABLE_UPDATE)
     IBatchFlowCommand tempTableUpdateProcess() {
-        return simpleBatch(KogakuKyufuTaishoshaInTempUpdateProcess.class).define();
+        return loopBatch(KogakuKyufuTaishoshaInTempUpdateProcess.class).define();
     }
 
     @Step(DB_UPDATE)

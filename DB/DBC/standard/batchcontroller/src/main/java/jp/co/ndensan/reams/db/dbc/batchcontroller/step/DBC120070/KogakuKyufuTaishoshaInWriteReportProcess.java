@@ -30,7 +30,6 @@ import jp.co.ndensan.reams.uz.uza.batch.process.InputParameter;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.report.BreakerCatalog;
 import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
 
@@ -99,24 +98,24 @@ public class KogakuKyufuTaishoshaInWriteReportProcess extends BatchProcessBase<D
                 ? RString.EMPTY : entity.getJigyoshaNo().value());
         meisaiEntity.setJigyoshaName(entity.getJigyoshaName());
 
-        meisaiEntity.setServiceShuruiCode(entity.getServiceShuruiCode() != null
+        meisaiEntity.setServiceShuruiCode(entity.getServiceShuruiCode() == null
                 ? RString.EMPTY : entity.getServiceShuruiCode().value());
         meisaiEntity.setServiceShuruiName(entity.getServiceShuruiName());
 
-        meisaiEntity.setServiceHiyoGokeiGaku(checkDecimal(entity.getServiceHiyoGokeiGaku()));
+        meisaiEntity.setServiceHiyoGokeiGaku(entity.getServiceHiyoGokeiGaku());
 
-        meisaiEntity.setRiyoshaFutanGaku(checkDecimal(entity.getRiyoshaFutanGaku()));
+        meisaiEntity.setRiyoshaFutanGaku(entity.getRiyoshaFutanGaku());
         meisaiEntity.setNo(entity.getNo());
         meisaiEntity.setBikou(entity.getBikou());
 
         DbT3055CSVDataGokeiEntity gokeiEntity = new DbT3055CSVDataGokeiEntity();
         gokeiEntity.setHihokenshaNo(entity.getHihokenshaNo() == null
                 ? RString.EMPTY : entity.getHihokenshaNo().value());
-        gokeiEntity.setKogakuShikyuGaku(checkDecimal(entity.getKogakuShikyuGaku()));
-        gokeiEntity.setRiyoshaFutanGakuGokei(checkDecimal(entity.getRiyoshaFutanGakuGokei()));
-        gokeiEntity.setSanteiKijunGaku(checkDecimal(entity.getSanteiKijunGaku()));
-        gokeiEntity.setServiceHiyoGokeiGakuGokei(checkDecimal(entity.getServiceHiyoGokeiGakuGokei()));
-        gokeiEntity.setShiharaiSumiKingakuGokei(checkDecimal(entity.getShiharaiSumiKingakuGokei()));
+        gokeiEntity.setKogakuShikyuGaku(entity.getKogakuShikyuGaku());
+        gokeiEntity.setRiyoshaFutanGakuGokei(entity.getRiyoshaFutanGakuGokei());
+        gokeiEntity.setSanteiKijunGaku(entity.getSanteiKijunGaku());
+        gokeiEntity.setServiceHiyoGokeiGakuGokei(entity.getServiceHiyoGokeiGakuGokei());
+        gokeiEntity.setShiharaiSumiKingakuGokei(entity.getShiharaiSumiKingakuGokei());
         DbTKogakuKyufuCSVDataHeadEntity headEntity = new DbTKogakuKyufuCSVDataHeadEntity();
         headEntity.setHihokenshaName(entity.getHihokenshaName());
         headEntity.setHokenshaNo(entity.getHokenshaNo() == null
@@ -160,24 +159,16 @@ public class KogakuKyufuTaishoshaInWriteReportProcess extends BatchProcessBase<D
     @Override
     protected void afterExecute() {
         KogakuKyufuTaishoshaIchiranhyo business = new KogakuKyufuTaishoshaIchiranhyo();
-        IOutputOrder 並び順1 = ChohyoShutsuryokujunFinderFactory.createInstance()
-                .get出力順(SubGyomuCode.DBC介護給付, ReportIdDBC.DBC200014.getReportId(),
-                        ReportIdDBC.DBC200014.getReportId().value(), 出力順ID.getValue());
-        RString 改頁 = (並び順1 == null ? RString.EMPTY : 並び順1.getFormated改頁項目());
+
+        IOutputOrder 並び順 = ChohyoShutsuryokujunFinderFactory.createInstance()
+                .get出力順(SubGyomuCode.DBC介護給付, ReportIdDBC.DBC200014.getReportId(), 出力順ID.getValue());
+        RString 改頁 = (並び順 == null ? RString.EMPTY : 並び順.getFormated改頁項目());
         List<KogakuKyufuTaishoshaIchiranItem> targetList
                 = business.getKogakuKyufuTaishoshaIchiranhyoData(RString.EMPTY, RString.EMPTY, RString.EMPTY,
                         RString.EMPTY, RString.EMPTY, 改頁, resultList);
         KogakuKyufuTaishoshaIchiranReport report
                 = KogakuKyufuTaishoshaIchiranReport.createForm(targetList);
         report.writeBy(reportSourceWriter);
-    }
-
-    private RString checkDecimal(Decimal 金額) {
-        if (金額 == null) {
-            return RString.EMPTY;
-        }
-
-        return new RString(金額.toString());
     }
 
 }

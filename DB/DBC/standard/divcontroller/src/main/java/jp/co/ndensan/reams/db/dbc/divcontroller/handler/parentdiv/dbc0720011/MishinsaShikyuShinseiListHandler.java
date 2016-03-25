@@ -71,8 +71,8 @@ public final class MishinsaShikyuShinseiListHandler {
             row.getTxtHokenKyufuAmount().setValue(new Decimal(result.getEntity().get保険給付額()));
             row.getTxtRiyoshaFutanAmount().setValue(new Decimal(result.getEntity().get利用者負担額()));
             row.getTxtHiyoTotalAmount().setValue(result.getEntity().get支払金額合計());
-            row.setTxtTenkyoReset(result.getEntity().get住宅住所変更());
-            row.setTxt3DankaiReset(result.getEntity().get要介護状態３段階変更());
+            row.setTxtTenkyoReset(result.getEntity().is住宅住所変更());
+            row.setTxt3DankaiReset(result.getEntity().is要介護状態３段階変更());
             row.getTxtSeiriNo().setValue(result.getEntity().get整理番号());
             lists.add(row);
         }

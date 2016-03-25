@@ -18,7 +18,6 @@ import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2020002.Nint
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2020002.dgNinteiChosaSchedule_Row;
 import jp.co.ndensan.reams.db.dbe.divcontroller.handler.parentdiv.DBE2020002.NinteiChosaScheduleShosaiHander;
 import jp.co.ndensan.reams.db.dbe.service.core.ninteishinseijoho.chikuninteichosainmapper.ChosainJohoFander;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo;
 import jp.co.ndensan.reams.db.dbz.divcontroller.viewbox.ViewStateKeys;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrInformationMessages;
@@ -56,7 +55,7 @@ public class NinteiChosaScheduleShosai {
     private static final RString モード_1 = new RString("1");
     private static final RString MESSAGE_保険者 = new RString("保険者");
     private static final RString MESSAGE_認定調査委託先 = new RString("認定調査委託先");
-    private static final RString 遷移元画面番号_2 = new RString("02");
+    private static final RString 遷移元画面番号_2 = new RString("2");
     private static final RString 遷移元画面番号_10 = new RString("10");
     private static final int INT_0 = 0;
     private static final int INT_4 = 4;
@@ -474,9 +473,9 @@ public class NinteiChosaScheduleShosai {
                 選択された時間枠);
         NinteichosaSchedule 申請書管理番号 = ChosainJohoFander.createInstance().get申請書管理番号(parameter);
         if (申請書管理番号 == null) {
-            ViewStateHolder.put(ViewStateKeys.認定調査スケジュール登録_申請書管理番号2, new ShinseishoKanriNo(""));
+            ViewStateHolder.put(ViewStateKeys.認定調査スケジュール登録_申請書管理番号2, RString.EMPTY);
         } else {
-            ViewStateHolder.put(ViewStateKeys.認定調査スケジュール登録_申請書管理番号2, 申請書管理番号.get申請書管理番号());
+            ViewStateHolder.put(ViewStateKeys.認定調査スケジュール登録_申請書管理番号2, 申請書管理番号.get申請書管理番号().value());
         }
         ViewStateHolder.put(ViewStateKeys.認定調査スケジュール登録_地区コード, 地区コード.value());
         ViewStateHolder.put(ViewStateKeys.認定調査スケジュール登録_設定日, 設定日);
@@ -489,7 +488,7 @@ public class NinteiChosaScheduleShosai {
         ViewStateHolder.put(ViewStateKeys.認定調査スケジュール登録_予約状況, row.getYoyakuJokyo());
         ViewStateHolder.put(ViewStateKeys.認定調査スケジュール登録_市町村コード, row.getShichosonCode());
         ViewStateHolder.put(ViewStateKeys.認定調査スケジュール登録_モード, モード);
-        ViewStateHolder.put(ViewStateKeys.認定調査スケジュール登録_遷移元画面番号, 遷移元画面番号_2);
+        ViewStateHolder.put(ViewStateKeys.認定調査スケジュール登録_画面番号, 遷移元画面番号_2);
 
         ViewStateHolder.put(ViewStateKeys.認定調査スケジュール登録_対象者区分, ViewStateHolder.get(ViewStateKeys.認定調査スケジュール登録_対象者区分, RString.class));
         RString 申請書管理番号3 = ViewStateHolder.get(ViewStateKeys.認定調査スケジュール登録3_申請書管理番号3, RString.class);

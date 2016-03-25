@@ -73,7 +73,7 @@ public class ShujiiMaster {
             return ResponseData.of(div).setState(DBE9020001StateName.主治医一覧_医療機関登録から遷移);
         }
 
-        return ResponseData.of(div).respond();
+        return ResponseData.of(div).setState(DBE9020001StateName.検索);
     }
 
     /**
@@ -152,11 +152,15 @@ public class ShujiiMaster {
                 div.getTxtSearchShujiiIryokikanCodeFrom().getValue(),
                 div.getTxtSearchShujiiIryokikanCodeTo().getValue(),
                 div.getTxtSearchShujiiIryokikanMeisho().getValue(),
+                div.getDdlKikanMeisho().getSelectedKey(),
                 div.getTxtSearchShujiiIryokikanKanaMeisho().getValue(),
+                div.getDdlKikanKanaMeisho().getSelectedKey(),
                 div.getTxtSearchShujiiCodeFrom().getValue(),
                 div.getTxtSearchShujiiCodeTo().getValue(),
                 div.getTxtSearchShujiiShimei().getValue(),
+                div.getDdlShujiiMeisho().getSelectedKey(),
                 new AtenaKanaMeisho(div.getTxtSearchShujiiKanaShimei().getValue()),
+                div.getDdlShujiiKanaMeisho().getSelectedKey(),
                 div.getTxtSaidaiHyojiKensu().getValue());
         ShujiiMasterFinder shujiiMasterFinder = ShujiiMasterFinder.createInstance();
         List<jp.co.ndensan.reams.db.dbe.business.core.basic.shujiijoho.ShujiiMaster> 主治医情報List
@@ -356,9 +360,13 @@ public class ShujiiMaster {
             div.getShujiiJohoInput().getTxtShujiiCode().setDisabled(true);
         } else if (状態_削除.equals(row.getJotai())) {
             getHandler(div).setDisabledTrueToShujiiJohoInputMeisai();
+            div.getShujiiJohoInput().getBtnToSearchShichoson().setDisabled(true);
+            div.getShujiiJohoInput().getBtnToSearchIryoKikan().setDisabled(true);
         } else if (RString.EMPTY.equals(row.getJotai())) {
             getHandler(div).setDisabledTrueToShujiiJohoInputMeisai();
             div.getShujiiJohoInput().getBtnKakutei().setDisabled(true);
+            div.getShujiiJohoInput().getBtnToSearchShichoson().setDisabled(true);
+            div.getShujiiJohoInput().getBtnToSearchIryoKikan().setDisabled(true);
         }
         div.getShujiiIchiran().setDisabled(true);
         RString 主治医医療機関コード = ViewStateHolder.get(SaibanHanyokeyName.医療機関コード, RString.class);

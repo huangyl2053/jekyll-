@@ -9,7 +9,7 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbc.definition.reportid.ReportIdDBC;
-import jp.co.ndensan.reams.db.dbc.entity.report.source.shokanbaraishikyufushikyuketteitsuchiichiran.ShokanbaraiShikyuFushikyuKetteiTsuchiIchiranReportSource;
+import jp.co.ndensan.reams.db.dbc.entity.report.source.shokanbaraishikyufushikyuketteitsuchiichiran.ShokanbaraiShikyuFushikyuReportSource;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.report.BreakerCatalog;
@@ -22,7 +22,7 @@ import jp.co.ndensan.reams.uz.uza.report.data.chart.ReportDynamicChart;
  * 償還払支給（不支給）決定通知一覧表覧表のプロパティです。
  */
 public class ShokanbaraiShikyuFushikyuKetteiTsuchiIchiranProperty
-        extends ReportPropertyBase<ShokanbaraiShikyuFushikyuKetteiTsuchiIchiranReportSource> {
+        extends ReportPropertyBase<ShokanbaraiShikyuFushikyuReportSource> {
 
     private static final List<RString> PAGE_BREAK_KEYS
             = Collections.unmodifiableList(Arrays.asList(
@@ -32,23 +32,29 @@ public class ShokanbaraiShikyuFushikyuKetteiTsuchiIchiranProperty
                             new RString("kaipage4"),
                             new RString("kaipage5")));
 
+    /**
+     * コンストラクタです。
+     */
     public ShokanbaraiShikyuFushikyuKetteiTsuchiIchiranProperty() {
         super(SubGyomuCode.DBC介護給付, ReportIdDBC.DBC200023.getReportId());
     }
 
     @Override
-    public Breakers<ShokanbaraiShikyuFushikyuKetteiTsuchiIchiranReportSource> defineBreakers(
-            Breakers<ShokanbaraiShikyuFushikyuKetteiTsuchiIchiranReportSource> breakers,
-            BreakerCatalog<ShokanbaraiShikyuFushikyuKetteiTsuchiIchiranReportSource> catalog) {
+    public Breakers<ShokanbaraiShikyuFushikyuReportSource> defineBreakers(
+            Breakers<ShokanbaraiShikyuFushikyuReportSource> breakers,
+            BreakerCatalog<ShokanbaraiShikyuFushikyuReportSource> catalog) {
         return breakers.add(catalog.new SimplePageBreaker(
+
+
+
 
 
 
             PAGE_BREAK_KEYS) {
             @Override
-            public ReportLineRecord<ShokanbaraiShikyuFushikyuKetteiTsuchiIchiranReportSource> occuredBreak(
-                    ReportLineRecord<ShokanbaraiShikyuFushikyuKetteiTsuchiIchiranReportSource> currentRecord,
-                    ReportLineRecord<ShokanbaraiShikyuFushikyuKetteiTsuchiIchiranReportSource> nextRecord,
+            public ReportLineRecord<ShokanbaraiShikyuFushikyuReportSource> occuredBreak(
+                    ReportLineRecord<ShokanbaraiShikyuFushikyuReportSource> currentRecord,
+                    ReportLineRecord<ShokanbaraiShikyuFushikyuReportSource> nextRecord,
                     ReportDynamicChart dynamicChart) {
                 if (nextRecord == ReportLineRecord.LAST_RECORD) {
                     return currentRecord;

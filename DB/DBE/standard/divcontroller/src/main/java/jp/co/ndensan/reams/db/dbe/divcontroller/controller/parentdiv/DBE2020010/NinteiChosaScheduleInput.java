@@ -121,7 +121,6 @@ public class NinteiChosaScheduleInput {
         temp_時間枠 = ViewStateHolder.get(ViewStateKeys.認定調査スケジュール登録_時間枠, RString.class);
         temp_予約可否 = ViewStateHolder.get(ViewStateKeys.認定調査スケジュール登録_予約可否, RString.class);
         temp_予約状況 = ViewStateHolder.get(ViewStateKeys.認定調査スケジュール登録_予約状況, RString.class);
-        temp_保険者 = ViewStateHolder.get(ViewStateKeys.認定調査スケジュール登録_保険者, RString.class);
         temp_調査員状況02 = ViewStateHolder.get(ViewStateKeys.認定調査スケジュール登録_調査員状況02, RString.class);
 //        temp_認定調査予定開始時間 = get調査日時(temp_時間枠).split("-").get(0);
 //        temp_認定調査予定終了時間 = get調査日時(temp_時間枠).split("-").get(1);

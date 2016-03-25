@@ -10,7 +10,7 @@ import java.util.List;
 import jp.co.ndensan.reams.db.dbe.business.report.shinsakaisukejuruhyo.ShinsakaisukejuruhyoBodyItem;
 import jp.co.ndensan.reams.db.dbe.business.report.shinsakaisukejuruhyo.ShinsakaisukejuruhyoHeadItem;
 import jp.co.ndensan.reams.db.dbe.business.report.shinsakaisukejuruhyo.ShinsakaisukejuruhyoReport;
-import jp.co.ndensan.reams.db.dbe.definition.core.reportId.ReportIdDBE;
+import jp.co.ndensan.reams.db.dbe.definition.core.reportid.ReportIdDBE;
 import jp.co.ndensan.reams.db.dbe.definition.processprm.kaigoninteishinsakaischedule.KaigoNinteiShinsakaiScheduleProcessParamter;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.kaigoninteishinsakaischedule.KaigoNinteiShinsakaiScheduleRelateEntity;
 import jp.co.ndensan.reams.db.dbe.entity.report.source.shinsakaisukejuruhyo.ShinsakaisukejuruhyoReportSource;

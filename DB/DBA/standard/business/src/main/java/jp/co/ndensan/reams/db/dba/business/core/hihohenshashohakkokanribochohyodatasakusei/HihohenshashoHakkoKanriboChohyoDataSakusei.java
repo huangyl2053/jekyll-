@@ -138,6 +138,13 @@ public final class HihohenshashoHakkoKanriboChohyoDataSakusei {
         return chohyoDataEntityList;
     }
 
+    /**
+     * 証発行管理帳票ボディデータリスト作成します。
+     *
+     * @param relateEntityList 証発行管理リスト情報EntityList
+     * @return List<HihokenshashoHakkoKanriIchiranhyoBodyItem>
+     * 証発行管理リスト帳票用ボディデータリスト
+     */
     public List<HihokenshashoHakkoKanriIchiranhyoBodyItem> setShohakkoKanriChohyoDataList(AkasiHakouKanriRelateEntity relateEntityList) {
         List<HihokenshashoHakkoKanriIchiranhyoBodyItem> list = new ArrayList();
         List<HihohenshashoHakkoKanriboChohyoDataSakuseiEntity> chohyoDataEntityList = getShohakkoKanriChohyoDataList(relateEntityList);

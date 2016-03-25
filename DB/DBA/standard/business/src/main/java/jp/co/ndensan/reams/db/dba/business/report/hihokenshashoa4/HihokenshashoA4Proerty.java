@@ -8,7 +8,7 @@ package jp.co.ndensan.reams.db.dba.business.report.hihokenshashoa4;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
-import jp.co.ndensan.reams.db.dba.definition.reportId.ReportIdDBA;
+import jp.co.ndensan.reams.db.dba.definition.reportid.ReportIdDBA;
 import jp.co.ndensan.reams.db.dba.entity.report.hihokenshashoa4.HihokenshashoA4ReportSource;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -41,7 +41,7 @@ public class HihokenshashoA4Proerty extends ReportPropertyBase<HihokenshashoA4Re
         return breakers.add(catalog.new SimplePageBreaker(
 
 
-            PAGE_BREAK_KEYS){
+            PAGE_BREAK_KEYS) {
          @Override
             public ReportLineRecord<HihokenshashoA4ReportSource> occuredBreak(
                     ReportLineRecord<HihokenshashoA4ReportSource> currentRecord,

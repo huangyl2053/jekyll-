@@ -116,7 +116,7 @@ public class ChosaJisshishaJohoFinder {
         requireNonNull(shinseishoKanriNo, UrSystemErrorMessages.値がnull.getReplacedMessage("申請書管理番号"));
         List<NinteiShinseiJoho> ninteiShinseiJohoList = new ArrayList<>();
         DbT5101NinteiShinseiJohoEntity kinyushaEmpty = dac.selectByKey(new ShinseishoKanriNo(shinseishoKanriNo));
-        if (kinyushaEmpty != null ) {
+        if (kinyushaEmpty != null) {
             ninteiShinseiJohoList.add(new NinteiShinseiJoho(kinyushaEmpty));
         }
         return SearchResult.of(ninteiShinseiJohoList, 0, false);

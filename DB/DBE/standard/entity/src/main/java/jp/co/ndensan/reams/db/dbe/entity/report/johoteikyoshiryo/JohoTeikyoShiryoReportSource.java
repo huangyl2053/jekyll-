@@ -32,7 +32,7 @@ public class JohoTeikyoShiryoReportSource implements IReportSource {
     @ReportItem(name = "hihokenshaName", order = 8)
     public RString hihokenshaName;
     @ReportItem(name = "Jusho", order = 9)
-    public RString Jusho;
+    public RString jusho;
     @ReportItem(name = "infoNijiDate", length = 11, order = 10)
     public RString infoNijiDate;
     @ReportItem(name = "ninteiKekka", length = 4, order = 11)

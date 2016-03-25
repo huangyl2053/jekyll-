@@ -1,11 +1,13 @@
-// TODO: 業務に合わせてパスを変更してください
 package jp.co.ndensan.reams.db.dba.entity.report.idochecklist;
-
 
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.report.IReportSource;
 import jp.co.ndensan.reams.uz.uza.report.source.ReportItem;
 
+/**
+ *
+ * 異動チェックリストの帳票項目クラスです
+ */
 public class IdoCheckListReportSource implements IReportSource {
 // <editor-fold defaultstate="collapsed" desc="Generated Code">
 

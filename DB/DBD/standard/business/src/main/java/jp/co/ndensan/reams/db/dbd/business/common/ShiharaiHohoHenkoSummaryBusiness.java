@@ -5,7 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbd.business.common;
 
-import jp.co.ndensan.reams.db.dbb.business.shiharaihohohenko.ShiharaiHohoHenkoSummary;
+import jp.co.ndensan.reams.db.dbd.business.shiharaihohohenko.ShiharaiHohoHenkoSummary;
 import jp.co.ndensan.reams.db.dbd.definition.enumeratedtype.core.ShiharaiHenkoTorokuKubun;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 

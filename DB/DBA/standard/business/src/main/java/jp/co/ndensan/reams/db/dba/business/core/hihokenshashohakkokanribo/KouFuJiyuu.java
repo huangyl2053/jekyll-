@@ -15,7 +15,7 @@ import jp.co.ndensan.reams.uz.uza.util.code.entity.UzT0007CodeEntity;
  *
  * 交付事由です。
  */
-public class KouFuJiyuu implements Comparable<KouFuJiyuu> {
+public class KouFuJiyuu {
 
     private final UzT0007CodeEntity entity;
 
@@ -49,10 +49,5 @@ public class KouFuJiyuu implements Comparable<KouFuJiyuu> {
      */
     public RString getコード名称() {
         return entity.getコード名称();
-    }
-
-    @Override
-    public int compareTo(KouFuJiyuu koufujiyuu) {
-        return this.getコード().compareTo(koufujiyuu.getコード());
     }
 }

@@ -32,7 +32,7 @@ public enum IsShiryoSakuseiZumi {
      *
      * @return 資料作成済区分のコード
      */
-    public boolean getコード() {
+    public boolean is作成済() {
         return code;
     }
 

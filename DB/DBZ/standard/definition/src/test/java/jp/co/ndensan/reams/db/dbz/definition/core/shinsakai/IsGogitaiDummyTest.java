@@ -25,12 +25,12 @@ public class IsGogitaiDummyTest extends DbeTestBase {
 
     @Test
     public void ダミーを指定した場合_getコードは_Trueを返す() {
-        assertThat(IsGogitaiDummy.ダミー.getコード(), is(true));
+        assertThat(IsGogitaiDummy.ダミー.is合議体ダミーフラグTrue(), is(true));
     }
 
     @Test
     public void 正規を指定した場合_getコードは_Falseを返す() {
-        assertThat(IsGogitaiDummy.正規.getコード(), is(false));
+        assertThat(IsGogitaiDummy.正規.is合議体ダミーフラグTrue(), is(false));
     }
 
     @Test

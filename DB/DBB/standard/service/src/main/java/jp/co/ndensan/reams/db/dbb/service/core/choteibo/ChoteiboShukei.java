@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+import jp.co.ndensan.reams.db.dbb.definition.core.choshuhoho.ChoshuHohoKibetsu;
 import jp.co.ndensan.reams.db.dbb.definition.core.choteibo.Choteigaku;
 import jp.co.ndensan.reams.db.dbb.definition.core.choteibo.ChoteigakuSyukei;
 import jp.co.ndensan.reams.db.dbb.definition.core.choteibo.DanKai;
@@ -22,7 +23,7 @@ import jp.co.ndensan.reams.db.dbb.definition.core.choteibo.Kibetsu;
 import jp.co.ndensan.reams.db.dbb.definition.core.choteibo.KibetsuGakuGokeigo;
 import jp.co.ndensan.reams.db.dbb.definition.core.choteibo.KibetsuGokeigo;
 import jp.co.ndensan.reams.db.dbb.definition.core.choteibo.KibetsuShokei;
-import jp.co.ndensan.reams.db.dbz.definition.core.enumeratedtype.ChoshuHohoKibetsu;
+
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
@@ -74,11 +75,11 @@ public final class ChoteiboShukei {
         FlexibleYear 調定年度 = FlexibleYear.EMPTY;
         FlexibleYear 賦課年度 = FlexibleYear.EMPTY;
         for (Kibetsu kibetsu : kiBetsuList) {
-            if (ChoshuHohoKibetsu.特別徴収.code().equals(kibetsu.getChoshuHouhou())) {
+            if (ChoshuHohoKibetsu.特別徴収.getコード().equals(kibetsu.getChoshuHouhou())) {
                 調定年度 = kibetsu.getChoteiNendo();
                 賦課年度 = kibetsu.getFukaNendo();
                 set特別徴収期の調定額(kibetsu, 特別徴収調定額);
-            } else if (ChoshuHohoKibetsu.普通徴収.code().equals(kibetsu.getChoshuHouhou())) {
+            } else if (ChoshuHohoKibetsu.普通徴収.getコード().equals(kibetsu.getChoshuHouhou())) {
                 調定年度 = kibetsu.getChoteiNendo();
                 賦課年度 = kibetsu.getFukaNendo();
                 set普通徴収期の調定額(kibetsu, 普通徴収調定額);
@@ -86,12 +87,12 @@ public final class ChoteiboShukei {
         }
         List<KibetsuShokei> kibetsuShokeiList = new ArrayList<>();
         KibetsuShokei 特別徴収 = KibetsuShokei.createParam(調定年度, 賦課年度,
-                ChoshuHohoKibetsu.特別徴収.code(), 特別徴収調定額.get第1期の調定額(),
+                ChoshuHohoKibetsu.特別徴収.getコード(), 特別徴収調定額.get第1期の調定額(),
                 特別徴収調定額.get第2期の調定額(), 特別徴収調定額.get第3期の調定額(),
                 特別徴収調定額.get第4期の調定額(), 特別徴収調定額.get第5期の調定額(),
                 特別徴収調定額.get第6期の調定額(), null, null, null, null, null, null, null, null);
         kibetsuShokeiList.add(特別徴収);
-        KibetsuShokei 普通徴収 = KibetsuShokei.createParam(調定年度, 賦課年度, ChoshuHohoKibetsu.普通徴収.code(),
+        KibetsuShokei 普通徴収 = KibetsuShokei.createParam(調定年度, 賦課年度, ChoshuHohoKibetsu.普通徴収.getコード(),
                 普通徴収調定額.get第1期の調定額(), 普通徴収調定額.get第2期の調定額(), 普通徴収調定額.get第3期の調定額(),
                 普通徴収調定額.get第4期の調定額(), 普通徴収調定額.get第5期の調定額(), 普通徴収調定額.get第6期の調定額(),
                 普通徴収調定額.get第7期の調定額(), 普通徴収調定額.get第8期の調定額(), 普通徴収調定額.get第9期の調定額(),
@@ -230,25 +231,25 @@ public final class ChoteiboShukei {
             }
             if (!Decimal.ZERO.equals(調定額集計.get特別徴収当月末の調定額集計())) {
                 resultList.add(DankaiChoteigakuShokei.createParam(調定額集計.get調定年度(), 調定額集計.get賦課年度(), 段階,
-                        ChoshuHohoKibetsu.特別徴収.code(), 1, null, 調定額集計.get特別徴収当月末の調定額集計()));
+                        ChoshuHohoKibetsu.特別徴収.getコード(), 1, null, 調定額集計.get特別徴収当月末の調定額集計()));
             }
             if (!Decimal.ZERO.equals(調定額集計.get特別徴収前月末の調定額集計())) {
                 resultList.add(DankaiChoteigakuShokei.createParam(調定額集計.get調定年度(), 調定額集計.get賦課年度(), 段階,
-                        ChoshuHohoKibetsu.特別徴収.code(), 0, 調定額集計.get特別徴収前月末の調定額集計(), null));
+                        ChoshuHohoKibetsu.特別徴収.getコード(), 0, 調定額集計.get特別徴収前月末の調定額集計(), null));
             }
             if (!Decimal.ZERO.equals(調定額集計.get普通徴収当月末の調定額集計())) {
                 resultList.add(DankaiChoteigakuShokei.createParam(調定額集計.get調定年度(), 調定額集計.get賦課年度(), 段階,
-                        ChoshuHohoKibetsu.普通徴収.code(), 1, null, 調定額集計.get普通徴収当月末の調定額集計()));
+                        ChoshuHohoKibetsu.普通徴収.getコード(), 1, null, 調定額集計.get普通徴収当月末の調定額集計()));
             }
             if (!Decimal.ZERO.equals(調定額集計.get普通徴収前月末の調定額集計())) {
                 resultList.add(DankaiChoteigakuShokei.createParam(調定額集計.get調定年度(), 調定額集計.get賦課年度(), 段階,
-                        ChoshuHohoKibetsu.普通徴収.code(), 0, 調定額集計.get普通徴収前月末の調定額集計(), null));
+                        ChoshuHohoKibetsu.普通徴収.getコード(), 0, 調定額集計.get普通徴収前月末の調定額集計(), null));
             }
         }
     }
 
     private static void set調定額集計(DanKai dankai, ChoteigakuSyukei 調定額集計, RString 段階) {
-        if (ChoshuHohoKibetsu.特別徴収.code().equals(dankai.getChoshuHouhou())) {
+        if (ChoshuHohoKibetsu.特別徴収.getコード().equals(dankai.getChoshuHouhou())) {
             if ((1 == dankai.getDogetsuFlag().intValue()) && 段階.equals(dankai.getDankaiField())) {
                 調定額集計.set調定年度(dankai.getChoteiNendo());
                 調定額集計.set賦課年度(dankai.getFukaNendo());
@@ -260,7 +261,7 @@ public final class ChoteiboShukei {
                 調定額集計.set特別徴収前月末の調定額集計(調定額集計.get特別徴収前月末の調定額集計().add(
                         dankai.getZengetsusueChoteigaku() == null ? Decimal.ZERO : dankai.getZengetsusueChoteigaku()));
             }
-        } else if (ChoshuHohoKibetsu.普通徴収.code().equals(dankai.getChoshuHouhou())) {
+        } else if (ChoshuHohoKibetsu.普通徴収.getコード().equals(dankai.getChoshuHouhou())) {
             if ((1 == dankai.getDogetsuFlag().intValue()) && 段階.equals(dankai.getDankaiField())) {
                 調定額集計.set調定年度(dankai.getChoteiNendo());
                 調定額集計.set賦課年度(dankai.getFukaNendo());
@@ -298,10 +299,10 @@ public final class ChoteiboShukei {
                 set期別合計後調定額合計(期別小計, 期別合計後調定額合計);
             }
             KibetsuGokeigo 特別期別合計後 = KibetsuGokeigo.createParam(期別合計後調定額合計.get調定年度(),
-                    期別合計後調定額合計.get賦課年度(), ChoshuHohoKibetsu.特別徴収.code(),
+                    期別合計後調定額合計.get賦課年度(), ChoshuHohoKibetsu.特別徴収.getコード(),
                     期別合計後調定額合計.get特別徴収調合計(), null, null);
             KibetsuGokeigo 普通期別合計後 = KibetsuGokeigo.createParam(期別合計後調定額合計.get調定年度(),
-                    期別合計後調定額合計.get賦課年度(), ChoshuHohoKibetsu.普通徴収.code(),
+                    期別合計後調定額合計.get賦課年度(), ChoshuHohoKibetsu.普通徴収.getコード(),
                     null, 期別合計後調定額合計.get普通徴収調合計(), null);
             KibetsuGokeigo 期別調定額総計 = KibetsuGokeigo.createParam(期別合計後調定額合計.get調定年度(),
                     期別合計後調定額合計.get賦課年度(), null,
@@ -317,19 +318,19 @@ public final class ChoteiboShukei {
                 set段階合計後調定額合計(段階小計, 段階合計後調定額合計);
             }
             DankaiGokeigo 特別徴収当月末段階合計後 = DankaiGokeigo.createParam(期別合計後調定額合計.get調定年度(),
-                    期別合計後調定額合計.get賦課年度(), ChoshuHohoKibetsu.特別徴収.code(),
+                    期別合計後調定額合計.get賦課年度(), ChoshuHohoKibetsu.特別徴収.getコード(),
                     1, null, null, 段階合計後調定額合計.get特別徴収当月末の全部件数の合計(),
                     段階合計後調定額合計.get特別徴収当月末の全部調定額の合計(), null, null, null);
             DankaiGokeigo 特別徴収前月末段階合計後 = DankaiGokeigo.createParam(期別合計後調定額合計.get調定年度(),
-                    期別合計後調定額合計.get賦課年度(), ChoshuHohoKibetsu.特別徴収.code(),
+                    期別合計後調定額合計.get賦課年度(), ChoshuHohoKibetsu.特別徴収.getコード(),
                     0, 段階合計後調定額合計.get特別徴収前月末の全部件数の合計(),
                     段階合計後調定額合計.get特別徴収前月末の全部調定額の合計(), null, null, null, null, null);
             DankaiGokeigo 普通徴収当月末段階合計後 = DankaiGokeigo.createParam(期別合計後調定額合計.get調定年度(),
-                    期別合計後調定額合計.get賦課年度(), ChoshuHohoKibetsu.普通徴収.code(),
+                    期別合計後調定額合計.get賦課年度(), ChoshuHohoKibetsu.普通徴収.getコード(),
                     1, null, null, 段階合計後調定額合計.get普通徴収当月末の全部件数の合計(),
                     段階合計後調定額合計.get普通徴収当月末の全部調定額の合計(), null, null, null);
             DankaiGokeigo 普通徴収前月末段階合計後 = DankaiGokeigo.createParam(期別合計後調定額合計.get調定年度(),
-                    期別合計後調定額合計.get賦課年度(), ChoshuHohoKibetsu.普通徴収.code(),
+                    期別合計後調定額合計.get賦課年度(), ChoshuHohoKibetsu.普通徴収.getコード(),
                     0, 段階合計後調定額合計.get普通徴収前月末の全部件数の合計(),
                     段階合計後調定額合計.get普通徴収前月末の全部調定額の合計(), null, null, null, null, null);
             DankaiGokeigo 所得段階別の特徴普徴者数の合計 = DankaiGokeigo.createParam(期別合計後調定額合計.get調定年度(),
@@ -349,9 +350,9 @@ public final class ChoteiboShukei {
     }
 
     private static void set段階合計後調定額合計(DankaiShokei 段階小計, DankaiGakuGokeigo 段階合計後調定額合計) {
-        if (ChoshuHohoKibetsu.特別徴収.code().equals(段階小計.getChoshuHouhou())) {
+        if (ChoshuHohoKibetsu.特別徴収.getコード().equals(段階小計.getChoshuHouhou())) {
             set特別段階合計後調定額合計(段階小計, 段階合計後調定額合計);
-        } else if (ChoshuHohoKibetsu.普通徴収.code().equals(段階小計.getChoshuHouhou())) {
+        } else if (ChoshuHohoKibetsu.普通徴収.getコード().equals(段階小計.getChoshuHouhou())) {
             set普通段階合計後調定額合計(段階小計, 段階合計後調定額合計);
         }
     }
@@ -417,14 +418,14 @@ public final class ChoteiboShukei {
     }
 
     private static void set期別合計後調定額合計(KibetsuShokei 期別小計, KibetsuGakuGokeigo 期別合計後調定額合計) {
-        if (ChoshuHohoKibetsu.特別徴収.code().equals(期別小計.getChoshuHouhou())) {
+        if (ChoshuHohoKibetsu.特別徴収.getコード().equals(期別小計.getChoshuHouhou())) {
             期別合計後調定額合計.set調定年度(期別小計.getChoteiNendo());
             期別合計後調定額合計.set賦課年度(期別小計.getFukaNendo());
             期別合計後調定額合計.set特別徴収調合計(期別合計後調定額合計.get特別徴収調合計().
                     add(期別小計.getDai1kiChoteiGakuCount()).add(期別小計.getDai2kiChoteiGakuCount()).
                     add(期別小計.getDai3kiChoteiGakuCount()).add(期別小計.getDai4kiChoteiGakuCount()).
                     add(期別小計.getDai5kiChoteiGakuCount()).add(期別小計.getDai6kiChoteiGakuCount()));
-        } else if (ChoshuHohoKibetsu.普通徴収.code().equals(期別小計.getChoshuHouhou())) {
+        } else if (ChoshuHohoKibetsu.普通徴収.getコード().equals(期別小計.getChoshuHouhou())) {
             期別合計後調定額合計.set調定年度(期別小計.getChoteiNendo());
             期別合計後調定額合計.set賦課年度(期別小計.getFukaNendo());
             期別合計後調定額合計.set普通徴収調合計(期別合計後調定額合計.get普通徴収調合計().

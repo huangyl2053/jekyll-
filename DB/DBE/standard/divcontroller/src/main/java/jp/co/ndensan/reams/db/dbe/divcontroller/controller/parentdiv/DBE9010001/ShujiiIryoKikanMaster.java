@@ -97,15 +97,16 @@ public class ShujiiIryoKikanMaster {
             jokyoFlag = true;
         }
         KoseiShujiiIryoKikanMasterMapperParameter parameter = KoseiShujiiIryoKikanMasterMapperParameter.
-                createParam_SelectShujiiIryoKikanJohoList(
-                jokyoFlag,
-                div.getCcdHokenshaList().getSelectedItem().get市町村コード(),
-                div.getTxtSearchShujiiIryokikanCodeFrom().getValue(),
-                div.getTxtSearchShujiiIryokikanCodeTo().getValue(),
-                div.getTxtSearchShujiiIryokikanMeisho().getValue(),
-                div.getTxtSearchShujiiIryokikanKanaMeisho().getValue(),
-                div.getTxtSaidaiHyojiKensu().getValue()
-        );
+                createParam_SelectShujiiIryoKikanJohoList(div.getDdlKikanMeisho().getSelectedKey(),
+                        div.getDdlKikanKanaMeisho().getSelectedKey(),
+                        jokyoFlag,
+                        div.getCcdHokenshaList().getSelectedItem().get市町村コード(),
+                        div.getTxtSearchShujiiIryokikanCodeFrom().getValue(),
+                        div.getTxtSearchShujiiIryokikanCodeTo().getValue(),
+                        div.getTxtSearchShujiiIryokikanMeisho().getValue(),
+                        div.getTxtSearchShujiiIryokikanKanaMeisho().getValue(),
+                        div.getTxtSaidaiHyojiKensu().getValue()
+                );
         List<jp.co.ndensan.reams.db.dbe.business.core.shujiiiryokikanjohomaster.KoseiShujiiIryoKikanMasterBusiness> 
                 主治医医療機関情報List
                 = KoseiShujiiIryoKikanMasterFinder.createInstance().getShujiKikanJohoIchiranList(parameter).records();

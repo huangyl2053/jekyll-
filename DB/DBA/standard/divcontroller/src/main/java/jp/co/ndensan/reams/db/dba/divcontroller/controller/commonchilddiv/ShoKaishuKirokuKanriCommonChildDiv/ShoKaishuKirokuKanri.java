@@ -233,36 +233,32 @@ public class ShoKaishuKirokuKanri {
     }
 
     private void 交付事由の必須チェック(ShoKaishuKirokuKanriDiv requestDiv, ValidationMessageControlPairs validationMessages) {
-        if (requestDiv.getPanelInput().getDdlKoufuJiyu().getSelectedValue() != null) {
-            if (RString.EMPTY.equals(requestDiv.getPanelInput().getDdlKoufuJiyu().getSelectedValue())) {
-                validationMessages.add(ValidationHandler.交付事由の必須チェック());
-            }
+        if (requestDiv.getPanelInput().getDdlKoufuJiyu().getSelectedValue() != null
+                && RString.EMPTY.equals(requestDiv.getPanelInput().getDdlKoufuJiyu().getSelectedValue())) {
+            validationMessages.add(ValidationHandler.交付事由の必須チェック());
         }
     }
 
     private void 交付理由の最大桁数(ShoKaishuKirokuKanriDiv requestDiv, ValidationMessageControlPairs validationMessages) {
-        if (requestDiv.getPanelInput().getTxaKoufuRiyu().getValue() != null) {
-            if (桁数_256 < requestDiv.getPanelInput().getTxaKoufuRiyu().getValue().length()) {
-                validationMessages.add(ValidationHandler.交付理由の最大桁数());
-            }
+        if (requestDiv.getPanelInput().getTxaKoufuRiyu().getValue() != null
+                && 桁数_256 < requestDiv.getPanelInput().getTxaKoufuRiyu().getValue().length()) {
+            validationMessages.add(ValidationHandler.交付理由の最大桁数());
         }
     }
 
     private void 回収理由のの最大桁数(ShoKaishuKirokuKanriDiv requestDiv, ValidationMessageControlPairs validationMessages) {
-        if (requestDiv.getPanelInput().getTxaKaishuRiyu().getValue() != null) {
-            if (桁数_256 < requestDiv.getPanelInput().getTxaKaishuRiyu().getValue().length()) {
-                validationMessages.add(ValidationHandler.回収理由のの最大桁数());
-            }
+        if (requestDiv.getPanelInput().getTxaKaishuRiyu().getValue() != null
+                && 桁数_256 < requestDiv.getPanelInput().getTxaKaishuRiyu().getValue().length()) {
+            validationMessages.add(ValidationHandler.回収理由のの最大桁数());
         }
     }
 
     private void 交付日と回収日の順番の整合性チェック(ShoKaishuKirokuKanriDiv requestDiv, ValidationMessageControlPairs validationMessages) {
         if (requestDiv.getPanelInput().getTxtKoufuDate().getValue() != null
-                && requestDiv.getPanelInput().getTxtKaisyuDate().getValue() != null) {
-            if (requestDiv.getPanelInput().getTxtKaisyuDate().getValue().
-                    isBefore(requestDiv.getPanelInput().getTxtKoufuDate().getValue())) {
-                validationMessages.add(ValidationHandler.交付日と回収日の順番の整合性チェック());
-            }
+                && requestDiv.getPanelInput().getTxtKaisyuDate().getValue() != null
+                && requestDiv.getPanelInput().getTxtKaisyuDate().getValue().
+                isBefore(requestDiv.getPanelInput().getTxtKoufuDate().getValue())) {
+            validationMessages.add(ValidationHandler.交付日と回収日の順番の整合性チェック());
         }
     }
 

@@ -19,6 +19,11 @@ public class IdoCheckListReport extends Report<IdoCheckListReportSource> {
 
     private final List<IdoCheckListItem> targets;
 
+    /**
+     * コンストラクタです。
+     *
+     * @param targets IdoCheckListItem
+     */
     protected IdoCheckListReport(List<IdoCheckListItem> targets) {
         this.targets = targets;
     }
@@ -26,17 +31,16 @@ public class IdoCheckListReport extends Report<IdoCheckListReportSource> {
     /**
      * インスタンスを生成します。
      *
-     * @param IdoCheckListItems 異動チェックリストのITEMリスト
+     * @param idoCheckListItems 異動チェックリストのITEMリスト
      * @return 異動チェックリストのReport
      */
-
-    public static IdoCheckListReport createFrom(@NonNull List<IdoCheckListItem> IdoCheckListItems) {
-        return new IdoCheckListReport(IdoCheckListItems);
+    public static IdoCheckListReport createFrom(@NonNull List<IdoCheckListItem> idoCheckListItems) {
+        return new IdoCheckListReport(idoCheckListItems);
     }
 
     /**
      *
-     * @param reportSourceWriter
+     * @param reportSourceWriter IdoCheckListReportSource
      */
     @Override
     public void writeBy(ReportSourceWriter<IdoCheckListReportSource> reportSourceWriter) {

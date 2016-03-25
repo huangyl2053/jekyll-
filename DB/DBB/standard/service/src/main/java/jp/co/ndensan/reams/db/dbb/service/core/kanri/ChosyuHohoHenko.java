@@ -66,7 +66,7 @@ public class ChosyuHohoHenko {
                 .createSelectByKeyParam(賦課年度, 被保険者番号);
         ChoshuHohoEntity entity = mapper.selectChosyuHoho(parameter);
         if (null == entity) {
-            return null;
+            return new ChoshuHohoResult(null, null);
         }
 
         DbT2001ChoshuHohoEntity dbT2001ChoshuHohoEntity = entity.getEntity().clone();

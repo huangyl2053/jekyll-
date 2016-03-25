@@ -20,6 +20,7 @@ import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoK
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.KoroshoIfShikibetsuCode;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.ikensho.IkenKomoku01;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.ikensho.IkenKomoku02;
+import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.ikensho.IkenKomoku03;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.ikensho.IkenKomoku07;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.ikensho.IkenKomoku08;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.ikensho.IkenKomoku09;
@@ -459,15 +460,18 @@ public class ShinshinIkenHandler {
     }
 
     private void set呼び出し元画面への戻り値() {
+        set意見項目Emtpy(要介護認定主治医意見書情報_TMP, 寝たきり度);
         for (RString key : div.getChkShogaiKoreishaNichijoSeikatsuJiritsudo().getSelectedKeys()) {
             set意見項目(要介護認定主治医意見書情報_TMP, 寝たきり度, key);
         }
+        set意見項目Emtpy(要介護認定主治医意見書情報_TMP, 認知症高齢者の日常生活自立度);
         for (RString key : div.getChkNinchishoKoreishaJiritsu().getSelectedKeys()) {
             set意見項目(要介護認定主治医意見書情報_TMP, 認知症高齢者の日常生活自立度, key);
         }
         set意見項目(要介護認定主治医意見書情報_TMP, 短期記憶, div.getRadTankiKioku().getSelectedKey());
         set意見項目(要介護認定主治医意見書情報_TMP, 認知能力, div.getRadNichijoNinchiNoryoku().getSelectedKey());
         set意見項目(要介護認定主治医意見書情報_TMP, 伝達能力, div.getRadIshiDentatsuNoryoku().getSelectedKey());
+        set意見項目Emtpy(要介護認定主治医意見書情報_TMP, 認知症の周辺症状);
         for (RString key : div.getChkNinchishoShuhenShojoUmu().getSelectedKeys()) {
             set意見項目(要介護認定主治医意見書情報_TMP, 認知症の周辺症状, key);
         }
@@ -528,19 +532,23 @@ public class ShinshinIkenHandler {
         }
         set意見項目(要介護認定主治医意見書情報_TMP, その他, keyToItemNasiari(div.getChkNinchishoShuhenShojoSonota().getSelectedKeys()));
         set記入項目(要介護認定主治医意見書情報_TMP, その他_記入項目, div.getTxtSonotaKinyu().getValue());
+        set意見項目Emtpy(要介護認定主治医意見書情報_TMP, その他の精神神経症状);
         for (RString key : div.getChkSonotaShojo().getSelectedKeys()) {
             set意見項目(要介護認定主治医意見書情報_TMP, その他の精神神経症状, key);
         }
         set記入項目(要介護認定主治医意見書情報_TMP, その他の精神神経症状_記入項目, div.getTxtShojomei().getValue());
+        set意見項目Emtpy(要介護認定主治医意見書情報_TMP, 専門医受診の有無);
         for (RString key : div.getChkSenmonJushin().getSelectedKeys()) {
             set意見項目(要介護認定主治医意見書情報_TMP, 専門医受診の有無, key);
         }
         set記入項目(要介護認定主治医意見書情報_TMP, 専門医受診の有無_記入項目, div.getTxtShosaiTokkiJiko().getValue());
+        set意見項目Emtpy(要介護認定主治医意見書情報_TMP, 利き腕);
         for (RString key : div.getChkKikiude().getSelectedKeys()) {
             set意見項目(要介護認定主治医意見書情報_TMP, 利き腕, key);
         }
         set記入項目(要介護認定主治医意見書情報_TMP, 身長_記入項目, div.getTxtShincho().getValue());
         set記入項目(要介護認定主治医意見書情報_TMP, 体重_記入項目, div.getTxtTaiju().getValue());
+        set意見項目Emtpy(要介護認定主治医意見書情報_TMP, 過去6カ月の体重の変化);
         for (RString key : div.getChkKakoTaijuHenka().getSelectedKeys()) {
             set意見項目(要介護認定主治医意見書情報_TMP, 過去6カ月の体重の変化, set過去6カ月の体重(key));
         }
@@ -548,44 +556,50 @@ public class ShinshinIkenHandler {
     }
 
     private void set呼び出し元画面への戻り値_下() {
-        for (RString key : div.getChkShishiKesson().getSelectedKeys()) {
-            set意見項目(要介護認定主治医意見書情報_TMP, 四肢欠損, key);
-        }
+        set意見項目(要介護認定主治医意見書情報_TMP, 四肢欠損, keyToItemNasiari(div.getChkShishiKesson().getSelectedKeys()));
         set記入項目(要介護認定主治医意見書情報_TMP, 四肢欠損_記入項目, div.getTxtShishiKessonBui().getValue());
         set意見項目(要介護認定主治医意見書情報_TMP, 麻痺, keyToItemNasiari(div.getChkMahi().getSelectedKeys()));
         set意見項目(要介護認定主治医意見書情報_TMP, 麻痺_右上肢, keyToItemNasiari(div.getChkMigiJoshiMahi().getSelectedKeys()));
+        set意見項目Emtpy(要介護認定主治医意見書情報_TMP, 麻痺_右上肢_程度);
         for (RString key : div.getChkMigiJoshiMahiTeido().getSelectedKeys()) {
             set意見項目(要介護認定主治医意見書情報_TMP, 麻痺_右上肢_程度, key);
         }
         set意見項目(要介護認定主治医意見書情報_TMP, 麻痺_左上肢, keyToItemNasiari(div.getChkHidariJoshiMahi().getSelectedKeys()));
+        set意見項目Emtpy(要介護認定主治医意見書情報_TMP, 麻痺_左上肢_程度);
         for (RString key : div.getChkHidariJoshiMahiTeido().getSelectedKeys()) {
             set意見項目(要介護認定主治医意見書情報_TMP, 麻痺_左上肢_程度, key);
         }
         set意見項目(要介護認定主治医意見書情報_TMP, 麻痺_右下肢, keyToItemNasiari(div.getChkMigiKashiMahi().getSelectedKeys()));
+        set意見項目Emtpy(要介護認定主治医意見書情報_TMP, 麻痺_右下肢_程度);
         for (RString key : div.getChkMigiKashiMahiTeido().getSelectedKeys()) {
             set意見項目(要介護認定主治医意見書情報_TMP, 麻痺_右下肢_程度, key);
         }
         set意見項目(要介護認定主治医意見書情報_TMP, 麻痺_左下肢, keyToItemNasiari(div.getChkHidariKashiMahi().getSelectedKeys()));
+        set意見項目Emtpy(要介護認定主治医意見書情報_TMP, 麻痺_左下肢_程度);
         for (RString key : div.getChkHidariKashiMahiTeido().getSelectedKeys()) {
             set意見項目(要介護認定主治医意見書情報_TMP, 麻痺_左下肢_程度, key);
         }
         set意見項目(要介護認定主治医意見書情報_TMP, 麻痺_その他, keyToItemNasiari(div.getChkSonotaMahi().getSelectedKeys()));
         set記入項目(要介護認定主治医意見書情報_TMP, 麻痺_その他_記入項目, div.getTxtSonotaMahiBui().getValue());
+        set意見項目Emtpy(要介護認定主治医意見書情報_TMP, 麻痺_その他_程度);
         for (RString key : div.getSonotaMahiTeido().getSelectedKeys()) {
             set意見項目(要介護認定主治医意見書情報_TMP, 麻痺_その他_程度, key);
         }
         set意見項目(要介護認定主治医意見書情報_TMP, 筋力の低下, keyToItemNasiari(div.getChkKinryokuTeika().getSelectedKeys()));
         set記入項目(要介護認定主治医意見書情報_TMP, 筋力の低下_記入項目, div.getTxtKinryokuTeikaBui().getValue());
+        set意見項目Emtpy(要介護認定主治医意見書情報_TMP, 筋力の低下_程度);
         for (RString key : div.getChkKinryokuTeikaTeido().getSelectedKeys()) {
             set意見項目(要介護認定主治医意見書情報_TMP, 筋力の低下_程度, key);
         }
         set意見項目(要介護認定主治医意見書情報_TMP, 関節の拘縮, keyToItemNasiari(div.getChkKansetsuKoshuku().getSelectedKeys()));
         set記入項目(要介護認定主治医意見書情報_TMP, 関節の拘縮_記入項目, div.getTxtKansetsuKoshukuBui().getValue());
+        set意見項目Emtpy(要介護認定主治医意見書情報_TMP, 関節の拘縮_程度);
         for (RString key : div.getChkKansetsuKoshukuTeido().getSelectedKeys()) {
             set意見項目(要介護認定主治医意見書情報_TMP, 関節の拘縮_程度, key);
         }
         set意見項目(要介護認定主治医意見書情報_TMP, 関節の痛み, keyToItemNasiari(div.getChkKansetsuItami().getSelectedKeys()));
         set記入項目(要介護認定主治医意見書情報_TMP, 関節の痛み_記入項目, div.getTxtKansetsuItamiBui().getValue());
+        set意見項目Emtpy(要介護認定主治医意見書情報_TMP, 関節の痛み_程度);
         for (RString key : div.getChkKansetsuItamiTeido().getSelectedKeys()) {
             set意見項目(要介護認定主治医意見書情報_TMP, 関節の痛み_程度, key);
         }
@@ -610,11 +624,13 @@ public class ShinshinIkenHandler {
         }
         set意見項目(要介護認定主治医意見書情報_TMP, じょくそう, keyToItemNasiari(div.getChkJokuso().getSelectedKeys()));
         set記入項目(要介護認定主治医意見書情報_TMP, じょくそう_記入項目, div.getTxtJokusoBui().getValue());
+        set意見項目Emtpy(要介護認定主治医意見書情報_TMP, じょくそう_程度);
         for (RString key : div.getChkJokusoTeido().getSelectedKeys()) {
             set意見項目(要介護認定主治医意見書情報_TMP, じょくそう_程度, key);
         }
         set意見項目(要介護認定主治医意見書情報_TMP, その他の皮膚疾患, keyToItemNasiari(div.getChkSonotaHifuShikkan().getSelectedKeys()));
         set記入項目(要介護認定主治医意見書情報_TMP, その他の皮膚疾患_記入項目, div.getTxtSonotaHifuShikkanBui().getValue());
+        set意見項目Emtpy(要介護認定主治医意見書情報_TMP, その他の皮膚疾患_程度);
         for (RString key : div.getChkSonotaHifuShikkanTeido().getSelectedKeys()) {
             set意見項目(要介護認定主治医意見書情報_TMP, その他の皮膚疾患_程度, key);
         }
@@ -623,6 +639,11 @@ public class ShinshinIkenHandler {
         要介護認定申請情報.createBuilderForEdit().setShujiiIkenshoIraiJoho(要介護認定申請情報.getShujiiIkenshoIraiJoho(主治医意見書作成依頼情報Key)
                 .createBuilderForEdit().setShujiiIkenshoJoho(要介護認定主治医意見書情報_TMP).build());
         ViewStateHolder.put(ViewStateKeys.主治医意見書登録_意見書情報, 要介護認定申請情報);
+    }
+    
+    private void set意見項目Emtpy(ShujiiIkenshoJoho 要介護認定主治医意見書情報_T, int 連番) {
+        要介護認定主治医意見書情報_T.createBuilderForEdit().setShujiiIkenshoIkenItem(要介護認定主治医意見書情報_TMP
+                .getShujiiIkenshoIkenItem(create意見項目の識別子(連番)).createBuilderForEdit().set意見項目(RString.EMPTY).build()).build();
     }
 
     private void set意見項目(ShujiiIkenshoJoho 要介護認定主治医意見書情報_T, int 連番, RString key) {
@@ -789,7 +810,7 @@ public class ShinshinIkenHandler {
         for (ShujiiIkenshoIkenItem item : 意見項目List) {
             if (認知症高齢者の日常生活自立度 == item.get連番()) {
                 flag = true;
-                selectKey.add(setRadioKey(item));
+                selectKey.add(set認知症高齢者の日常生活自立度Key(item));
                 モード判断_意見項目(item);
             }
         }
@@ -974,47 +995,58 @@ public class ShinshinIkenHandler {
             List<ShujiiIkenshoIkenItem> 意見項目List) {
         if (!幻視幻聴flag) {
             意見項目List.add(new ShujiiIkenshoIkenItem(new ShinseishoKanriNo(管理番号),
-                    Integer.valueOf(履歴番号.toString()), 幻視幻聴).createBuilderForEdit().set厚労省IF識別コード(new Code(KoroshoIfShikibetsuCode.認定ｿﾌﾄ2009_SP3.getコード())).build());
+                    Integer.valueOf(履歴番号.toString()), 幻視幻聴).createBuilderForEdit().set厚労省IF識別コード(
+                            new Code(KoroshoIfShikibetsuCode.認定ｿﾌﾄ2009_SP3.getコード())).build());
         }
         if (!妄想flag) {
             意見項目List.add(new ShujiiIkenshoIkenItem(new ShinseishoKanriNo(管理番号),
-                    Integer.valueOf(履歴番号.toString()), 妄想).createBuilderForEdit().set厚労省IF識別コード(new Code(KoroshoIfShikibetsuCode.認定ｿﾌﾄ2009_SP3.getコード())).build());
+                    Integer.valueOf(履歴番号.toString()), 妄想).createBuilderForEdit().set厚労省IF識別コード(
+                            new Code(KoroshoIfShikibetsuCode.認定ｿﾌﾄ2009_SP3.getコード())).build());
         }
         if (!昼夜逆転flag) {
             意見項目List.add(new ShujiiIkenshoIkenItem(new ShinseishoKanriNo(管理番号),
-                    Integer.valueOf(履歴番号.toString()), 昼夜逆転).createBuilderForEdit().set厚労省IF識別コード(new Code(KoroshoIfShikibetsuCode.認定ｿﾌﾄ2009_SP3.getコード())).build());
+                    Integer.valueOf(履歴番号.toString()), 昼夜逆転).createBuilderForEdit().set厚労省IF識別コード(
+                            new Code(KoroshoIfShikibetsuCode.認定ｿﾌﾄ2009_SP3.getコード())).build());
         }
         if (!暴言flag) {
             意見項目List.add(new ShujiiIkenshoIkenItem(new ShinseishoKanriNo(管理番号),
-                    Integer.valueOf(履歴番号.toString()), 暴言).createBuilderForEdit().set厚労省IF識別コード(new Code(KoroshoIfShikibetsuCode.認定ｿﾌﾄ2009_SP3.getコード())).build());
+                    Integer.valueOf(履歴番号.toString()), 暴言).createBuilderForEdit().set厚労省IF識別コード(
+                            new Code(KoroshoIfShikibetsuCode.認定ｿﾌﾄ2009_SP3.getコード())).build());
         }
         if (!暴行flag) {
             意見項目List.add(new ShujiiIkenshoIkenItem(new ShinseishoKanriNo(管理番号),
-                    Integer.valueOf(履歴番号.toString()), 暴行).createBuilderForEdit().set厚労省IF識別コード(new Code(KoroshoIfShikibetsuCode.認定ｿﾌﾄ2009_SP3.getコード())).build());
+                    Integer.valueOf(履歴番号.toString()), 暴行).createBuilderForEdit().set厚労省IF識別コード(
+                            new Code(KoroshoIfShikibetsuCode.認定ｿﾌﾄ2009_SP3.getコード())).build());
         }
         if (!介護への抵抗flag) {
             意見項目List.add(new ShujiiIkenshoIkenItem(new ShinseishoKanriNo(管理番号),
-                    Integer.valueOf(履歴番号.toString()), 介護への抵抗).createBuilderForEdit().set厚労省IF識別コード(new Code(KoroshoIfShikibetsuCode.認定ｿﾌﾄ2009_SP3.getコード())).build());
+                    Integer.valueOf(履歴番号.toString()), 介護への抵抗).createBuilderForEdit().set厚労省IF識別コード(
+                            new Code(KoroshoIfShikibetsuCode.認定ｿﾌﾄ2009_SP3.getコード())).build());
         }
         if (!徘徊flag) {
             意見項目List.add(new ShujiiIkenshoIkenItem(new ShinseishoKanriNo(管理番号),
-                    Integer.valueOf(履歴番号.toString()), 徘徊).createBuilderForEdit().set厚労省IF識別コード(new Code(KoroshoIfShikibetsuCode.認定ｿﾌﾄ2009_SP3.getコード())).build());
+                    Integer.valueOf(履歴番号.toString()), 徘徊).createBuilderForEdit().set厚労省IF識別コード(
+                            new Code(KoroshoIfShikibetsuCode.認定ｿﾌﾄ2009_SP3.getコード())).build());
         }
         if (!火の不始末flag) {
             意見項目List.add(new ShujiiIkenshoIkenItem(new ShinseishoKanriNo(管理番号),
-                    Integer.valueOf(履歴番号.toString()), 火の不始末).createBuilderForEdit().set厚労省IF識別コード(new Code(KoroshoIfShikibetsuCode.認定ｿﾌﾄ2009_SP3.getコード())).build());
+                    Integer.valueOf(履歴番号.toString()), 火の不始末).createBuilderForEdit().set厚労省IF識別コード(
+                            new Code(KoroshoIfShikibetsuCode.認定ｿﾌﾄ2009_SP3.getコード())).build());
         }
         if (!不潔行為flag) {
             意見項目List.add(new ShujiiIkenshoIkenItem(new ShinseishoKanriNo(管理番号),
-                    Integer.valueOf(履歴番号.toString()), 不潔行為).createBuilderForEdit().set厚労省IF識別コード(new Code(KoroshoIfShikibetsuCode.認定ｿﾌﾄ2009_SP3.getコード())).build());
+                    Integer.valueOf(履歴番号.toString()), 不潔行為).createBuilderForEdit().set厚労省IF識別コード(
+                            new Code(KoroshoIfShikibetsuCode.認定ｿﾌﾄ2009_SP3.getコード())).build());
         }
         if (!異食行動flag) {
             意見項目List.add(new ShujiiIkenshoIkenItem(new ShinseishoKanriNo(管理番号),
-                    Integer.valueOf(履歴番号.toString()), 異食行動).createBuilderForEdit().set厚労省IF識別コード(new Code(KoroshoIfShikibetsuCode.認定ｿﾌﾄ2009_SP3.getコード())).build());
+                    Integer.valueOf(履歴番号.toString()), 異食行動).createBuilderForEdit().set厚労省IF識別コード(
+                            new Code(KoroshoIfShikibetsuCode.認定ｿﾌﾄ2009_SP3.getコード())).build());
         }
         if (!性的問題行動flag) {
             意見項目List.add(new ShujiiIkenshoIkenItem(new ShinseishoKanriNo(管理番号),
-                    Integer.valueOf(履歴番号.toString()), 性的問題行動).createBuilderForEdit().set厚労省IF識別コード(new Code(KoroshoIfShikibetsuCode.認定ｿﾌﾄ2009_SP3.getコード())).build());
+                    Integer.valueOf(履歴番号.toString()), 性的問題行動).createBuilderForEdit().set厚労省IF識別コード(
+                            new Code(KoroshoIfShikibetsuCode.認定ｿﾌﾄ2009_SP3.getコード())).build());
         }
     }
 
@@ -1030,7 +1062,8 @@ public class ShinshinIkenHandler {
         }
         if (!flag) {
             意見項目List.add(new ShujiiIkenshoIkenItem(new ShinseishoKanriNo(管理番号),
-                    Integer.valueOf(履歴番号.toString()), その他).createBuilderForEdit().set厚労省IF識別コード(new Code(KoroshoIfShikibetsuCode.認定ｿﾌﾄ2009_SP3.getコード())).build());
+                    Integer.valueOf(履歴番号.toString()), その他).createBuilderForEdit().set厚労省IF識別コード(
+                            new Code(KoroshoIfShikibetsuCode.認定ｿﾌﾄ2009_SP3.getコード())).build());
         }
         div.getChkNinchishoShuhenShojoSonota().setSelectedItemsByKey(selectKey);
         if (div.getChkNinchishoShuhenShojoSonota().getSelectedKeys().contains(チェックボックス_1)) {
@@ -1049,7 +1082,8 @@ public class ShinshinIkenHandler {
         }
         if (!flag) {
             記入項目List.add(new ShujiiIkenshoKinyuItem(new ShinseishoKanriNo(管理番号),
-                    Integer.valueOf(履歴番号.toString()), その他_記入項目).createBuilderForEdit().set厚労省IF識別コード(new Code(KoroshoIfShikibetsuCode.認定ｿﾌﾄ2009_SP3.getコード())).build());
+                    Integer.valueOf(履歴番号.toString()), その他_記入項目).createBuilderForEdit().set厚労省IF識別コード(
+                            new Code(KoroshoIfShikibetsuCode.認定ｿﾌﾄ2009_SP3.getコード())).build());
         }
     }
 
@@ -1066,7 +1100,8 @@ public class ShinshinIkenHandler {
         if (!flag) {
             selectKey.add(チェックボックス_1);
             意見項目List.add(new ShujiiIkenshoIkenItem(new ShinseishoKanriNo(管理番号),
-                    Integer.valueOf(履歴番号.toString()), その他の精神神経症状).createBuilderForEdit().set厚労省IF識別コード(new Code(KoroshoIfShikibetsuCode.認定ｿﾌﾄ2009_SP3.getコード())).build());
+                    Integer.valueOf(履歴番号.toString()), その他の精神神経症状).createBuilderForEdit().set厚労省IF識別コード(
+                            new Code(KoroshoIfShikibetsuCode.認定ｿﾌﾄ2009_SP3.getコード())).build());
         }
         div.getChkSonotaShojo().setSelectedItemsByKey(selectKey);
         if (div.getChkSonotaShojo().getSelectedKeys().contains(チェックボックス_2)) {
@@ -1086,7 +1121,8 @@ public class ShinshinIkenHandler {
         }
         if (!flag) {
             記入項目List.add(new ShujiiIkenshoKinyuItem(new ShinseishoKanriNo(管理番号),
-                    Integer.valueOf(履歴番号.toString()), その他の精神神経症状_記入項目).createBuilderForEdit().set厚労省IF識別コード(new Code(KoroshoIfShikibetsuCode.認定ｿﾌﾄ2009_SP3.getコード())).build());
+                    Integer.valueOf(履歴番号.toString()), その他の精神神経症状_記入項目).createBuilderForEdit().set厚労省IF識別コード(
+                            new Code(KoroshoIfShikibetsuCode.認定ｿﾌﾄ2009_SP3.getコード())).build());
         }
     }
 
@@ -1103,7 +1139,8 @@ public class ShinshinIkenHandler {
         if (!flag) {
             selectKey.add(チェックボックス_1);
             意見項目List.add(new ShujiiIkenshoIkenItem(new ShinseishoKanriNo(管理番号),
-                    Integer.valueOf(履歴番号.toString()), 専門医受診の有無).createBuilderForEdit().set厚労省IF識別コード(new Code(KoroshoIfShikibetsuCode.認定ｿﾌﾄ2009_SP3.getコード())).build());
+                    Integer.valueOf(履歴番号.toString()), 専門医受診の有無).createBuilderForEdit().set厚労省IF識別コード(
+                            new Code(KoroshoIfShikibetsuCode.認定ｿﾌﾄ2009_SP3.getコード())).build());
         }
         div.getChkSenmonJushin().setSelectedItemsByKey(selectKey);
         if (div.getChkSenmonJushin().getSelectedKeys().contains(チェックボックス_2)) {
@@ -1116,13 +1153,14 @@ public class ShinshinIkenHandler {
         for (ShujiiIkenshoKinyuItem item : 記入項目List) {
             if (専門医受診の有無_記入項目 == item.get連番()) {
                 flag = true;
-                div.getTxtShojomei().setValue(get記入項目の値(item));
+                div.getTxtShosaiTokkiJiko().setValue(get記入項目の値(item));
                 モード判断_記入項目(item);
             }
         }
         if (!flag) {
             記入項目List.add(new ShujiiIkenshoKinyuItem(new ShinseishoKanriNo(管理番号),
-                    Integer.valueOf(履歴番号.toString()), 専門医受診の有無_記入項目).createBuilderForEdit().set厚労省IF識別コード(new Code(KoroshoIfShikibetsuCode.認定ｿﾌﾄ2009_SP3.getコード())).build());
+                    Integer.valueOf(履歴番号.toString()), 専門医受診の有無_記入項目).createBuilderForEdit().set厚労省IF識別コード(
+                            new Code(KoroshoIfShikibetsuCode.認定ｿﾌﾄ2009_SP3.getコード())).build());
         }
     }
 
@@ -1138,7 +1176,8 @@ public class ShinshinIkenHandler {
         }
         if (!flag) {
             意見項目List.add(new ShujiiIkenshoIkenItem(new ShinseishoKanriNo(管理番号),
-                    Integer.valueOf(履歴番号.toString()), 利き腕).createBuilderForEdit().set厚労省IF識別コード(new Code(KoroshoIfShikibetsuCode.認定ｿﾌﾄ2009_SP3.getコード())).build());
+                    Integer.valueOf(履歴番号.toString()), 利き腕).createBuilderForEdit().set厚労省IF識別コード(
+                            new Code(KoroshoIfShikibetsuCode.認定ｿﾌﾄ2009_SP3.getコード())).build());
         }
         div.getChkKikiude().setSelectedItemsByKey(selectKey);
     }
@@ -1154,7 +1193,8 @@ public class ShinshinIkenHandler {
         }
         if (!flag) {
             記入項目List.add(new ShujiiIkenshoKinyuItem(new ShinseishoKanriNo(管理番号),
-                    Integer.valueOf(履歴番号.toString()), 身長_記入項目).createBuilderForEdit().set厚労省IF識別コード(new Code(KoroshoIfShikibetsuCode.認定ｿﾌﾄ2009_SP3.getコード())).build());
+                    Integer.valueOf(履歴番号.toString()), 身長_記入項目).createBuilderForEdit().set厚労省IF識別コード(
+                            new Code(KoroshoIfShikibetsuCode.認定ｿﾌﾄ2009_SP3.getコード())).build());
         }
     }
 
@@ -1169,7 +1209,8 @@ public class ShinshinIkenHandler {
         }
         if (!flag) {
             記入項目List.add(new ShujiiIkenshoKinyuItem(new ShinseishoKanriNo(管理番号),
-                    Integer.valueOf(履歴番号.toString()), 体重_記入項目).createBuilderForEdit().set厚労省IF識別コード(new Code(KoroshoIfShikibetsuCode.認定ｿﾌﾄ2009_SP3.getコード())).build());
+                    Integer.valueOf(履歴番号.toString()), 体重_記入項目).createBuilderForEdit().set厚労省IF識別コード(
+                            new Code(KoroshoIfShikibetsuCode.認定ｿﾌﾄ2009_SP3.getコード())).build());
         }
     }
 
@@ -1185,7 +1226,8 @@ public class ShinshinIkenHandler {
         }
         if (!flag) {
             意見項目List.add(new ShujiiIkenshoIkenItem(new ShinseishoKanriNo(管理番号),
-                    Integer.valueOf(履歴番号.toString()), 過去6カ月の体重の変化).createBuilderForEdit().set厚労省IF識別コード(new Code(KoroshoIfShikibetsuCode.認定ｿﾌﾄ2009_SP3.getコード())).build());
+                    Integer.valueOf(履歴番号.toString()), 過去6カ月の体重の変化).createBuilderForEdit().set厚労省IF識別コード(
+                            new Code(KoroshoIfShikibetsuCode.認定ｿﾌﾄ2009_SP3.getコード())).build());
         }
         div.getChkKakoTaijuHenka().setSelectedItemsByKey(selectKey);
     }
@@ -1202,7 +1244,8 @@ public class ShinshinIkenHandler {
         }
         if (!flag) {
             意見項目List.add(new ShujiiIkenshoIkenItem(new ShinseishoKanriNo(管理番号),
-                    Integer.valueOf(履歴番号.toString()), 四肢欠損).createBuilderForEdit().set厚労省IF識別コード(new Code(KoroshoIfShikibetsuCode.認定ｿﾌﾄ2009_SP3.getコード())).build());
+                    Integer.valueOf(履歴番号.toString()), 四肢欠損).createBuilderForEdit().set厚労省IF識別コード(
+                            new Code(KoroshoIfShikibetsuCode.認定ｿﾌﾄ2009_SP3.getコード())).build());
         }
         div.getChkShishiKesson().setSelectedItemsByKey(selectKey);
         if (div.getChkShishiKesson().getSelectedKeys().contains(チェックボックス_1)) {
@@ -1221,7 +1264,8 @@ public class ShinshinIkenHandler {
         }
         if (!flag) {
             記入項目List.add(new ShujiiIkenshoKinyuItem(new ShinseishoKanriNo(管理番号),
-                    Integer.valueOf(履歴番号.toString()), 四肢欠損_記入項目).createBuilderForEdit().set厚労省IF識別コード(new Code(KoroshoIfShikibetsuCode.認定ｿﾌﾄ2009_SP3.getコード())).build());
+                    Integer.valueOf(履歴番号.toString()), 四肢欠損_記入項目).createBuilderForEdit().set厚労省IF識別コード(
+                            new Code(KoroshoIfShikibetsuCode.認定ｿﾌﾄ2009_SP3.getコード())).build());
         }
     }
 
@@ -1237,7 +1281,8 @@ public class ShinshinIkenHandler {
         }
         if (!flag) {
             意見項目List.add(new ShujiiIkenshoIkenItem(new ShinseishoKanriNo(管理番号),
-                    Integer.valueOf(履歴番号.toString()), 麻痺).createBuilderForEdit().set厚労省IF識別コード(new Code(KoroshoIfShikibetsuCode.認定ｿﾌﾄ2009_SP3.getコード())).build());
+                    Integer.valueOf(履歴番号.toString()), 麻痺).createBuilderForEdit().set厚労省IF識別コード(
+                            new Code(KoroshoIfShikibetsuCode.認定ｿﾌﾄ2009_SP3.getコード())).build());
         }
         div.getChkMahi().setSelectedItemsByKey(selectKey);
         if (div.getChkMahi().getSelectedKeys().contains(チェックボックス_1)) {
@@ -1261,7 +1306,8 @@ public class ShinshinIkenHandler {
         }
         if (!flag) {
             意見項目List.add(new ShujiiIkenshoIkenItem(new ShinseishoKanriNo(管理番号),
-                    Integer.valueOf(履歴番号.toString()), 麻痺_右上肢).createBuilderForEdit().set厚労省IF識別コード(new Code(KoroshoIfShikibetsuCode.認定ｿﾌﾄ2009_SP3.getコード())).build());
+                    Integer.valueOf(履歴番号.toString()), 麻痺_右上肢).createBuilderForEdit().set厚労省IF識別コード(
+                            new Code(KoroshoIfShikibetsuCode.認定ｿﾌﾄ2009_SP3.getコード())).build());
         }
         div.getChkMigiJoshiMahi().setSelectedItemsByKey(selectKey);
     }
@@ -1278,7 +1324,8 @@ public class ShinshinIkenHandler {
         }
         if (!flag) {
             意見項目List.add(new ShujiiIkenshoIkenItem(new ShinseishoKanriNo(管理番号),
-                    Integer.valueOf(履歴番号.toString()), 麻痺_右上肢_程度).createBuilderForEdit().set厚労省IF識別コード(new Code(KoroshoIfShikibetsuCode.認定ｿﾌﾄ2009_SP3.getコード())).build());
+                    Integer.valueOf(履歴番号.toString()), 麻痺_右上肢_程度).createBuilderForEdit().set厚労省IF識別コード(
+                            new Code(KoroshoIfShikibetsuCode.認定ｿﾌﾄ2009_SP3.getコード())).build());
         }
         div.getChkMigiJoshiMahiTeido().setSelectedItemsByKey(selectKey);
     }
@@ -1295,7 +1342,8 @@ public class ShinshinIkenHandler {
         }
         if (!flag) {
             意見項目List.add(new ShujiiIkenshoIkenItem(new ShinseishoKanriNo(管理番号),
-                    Integer.valueOf(履歴番号.toString()), 麻痺_左上肢).createBuilderForEdit().set厚労省IF識別コード(new Code(KoroshoIfShikibetsuCode.認定ｿﾌﾄ2009_SP3.getコード())).build());
+                    Integer.valueOf(履歴番号.toString()), 麻痺_左上肢).createBuilderForEdit().set厚労省IF識別コード(
+                            new Code(KoroshoIfShikibetsuCode.認定ｿﾌﾄ2009_SP3.getコード())).build());
         }
         div.getChkHidariJoshiMahi().setSelectedItemsByKey(selectKey);
         if (div.getChkHidariJoshiMahi().getSelectedKeys().contains(チェックボックス_1)) {
@@ -1315,7 +1363,8 @@ public class ShinshinIkenHandler {
         }
         if (!flag) {
             意見項目List.add(new ShujiiIkenshoIkenItem(new ShinseishoKanriNo(管理番号),
-                    Integer.valueOf(履歴番号.toString()), 麻痺_左上肢_程度).createBuilderForEdit().set厚労省IF識別コード(new Code(KoroshoIfShikibetsuCode.認定ｿﾌﾄ2009_SP3.getコード())).build());
+                    Integer.valueOf(履歴番号.toString()), 麻痺_左上肢_程度).createBuilderForEdit().set厚労省IF識別コード(
+                            new Code(KoroshoIfShikibetsuCode.認定ｿﾌﾄ2009_SP3.getコード())).build());
         }
         div.getChkHidariJoshiMahiTeido().setSelectedItemsByKey(selectKey);
     }
@@ -1332,7 +1381,8 @@ public class ShinshinIkenHandler {
         }
         if (!flag) {
             意見項目List.add(new ShujiiIkenshoIkenItem(new ShinseishoKanriNo(管理番号),
-                    Integer.valueOf(履歴番号.toString()), 麻痺_右下肢).createBuilderForEdit().set厚労省IF識別コード(new Code(KoroshoIfShikibetsuCode.認定ｿﾌﾄ2009_SP3.getコード())).build());
+                    Integer.valueOf(履歴番号.toString()), 麻痺_右下肢).createBuilderForEdit().set厚労省IF識別コード(
+                            new Code(KoroshoIfShikibetsuCode.認定ｿﾌﾄ2009_SP3.getコード())).build());
         }
         div.getChkMigiKashiMahi().setSelectedItemsByKey(selectKey);
         if (div.getChkMigiKashiMahi().getSelectedKeys().contains(チェックボックス_1)) {
@@ -1352,7 +1402,8 @@ public class ShinshinIkenHandler {
         }
         if (!flag) {
             意見項目List.add(new ShujiiIkenshoIkenItem(new ShinseishoKanriNo(管理番号),
-                    Integer.valueOf(履歴番号.toString()), 麻痺_右下肢_程度).createBuilderForEdit().set厚労省IF識別コード(new Code(KoroshoIfShikibetsuCode.認定ｿﾌﾄ2009_SP3.getコード())).build());
+                    Integer.valueOf(履歴番号.toString()), 麻痺_右下肢_程度).createBuilderForEdit().set厚労省IF識別コード(
+                            new Code(KoroshoIfShikibetsuCode.認定ｿﾌﾄ2009_SP3.getコード())).build());
         }
         div.getChkMigiKashiMahiTeido().setSelectedItemsByKey(selectKey);
     }
@@ -1369,7 +1420,8 @@ public class ShinshinIkenHandler {
         }
         if (!flag) {
             意見項目List.add(new ShujiiIkenshoIkenItem(new ShinseishoKanriNo(管理番号),
-                    Integer.valueOf(履歴番号.toString()), 麻痺_左下肢).createBuilderForEdit().set厚労省IF識別コード(new Code(KoroshoIfShikibetsuCode.認定ｿﾌﾄ2009_SP3.getコード())).build());
+                    Integer.valueOf(履歴番号.toString()), 麻痺_左下肢).createBuilderForEdit().set厚労省IF識別コード(
+                            new Code(KoroshoIfShikibetsuCode.認定ｿﾌﾄ2009_SP3.getコード())).build());
         }
         div.getChkHidariKashiMahi().setSelectedItemsByKey(selectKey);
         if (div.getChkHidariKashiMahi().getSelectedKeys().contains(チェックボックス_1)) {
@@ -1835,6 +1887,29 @@ public class ShinshinIkenHandler {
         return itemToKey(item.get意見項目());
     }
 
+    private RString set認知症高齢者の日常生活自立度Key(ShujiiIkenshoIkenItem item) {
+        if (IkenKomoku03.自立.getコード().equals(item.get意見項目())) {
+            return チェックボックス_1;
+        } else if (IkenKomoku03.Ⅰ.getコード().equals(item.get意見項目())) {
+            return チェックボックス_2;
+        } else if (IkenKomoku03.Ⅱa.getコード().equals(item.get意見項目())) {
+            return チェックボックス_3;
+        } else if (IkenKomoku03.Ⅱa.getコード().equals(item.get意見項目())) {
+            return チェックボックス_4;
+        } else if (IkenKomoku03.Ⅲa.getコード().equals(item.get意見項目())) {
+            return チェックボックス_5;
+        } else if (IkenKomoku03.Ⅲb.getコード().equals(item.get意見項目())) {
+            return チェックボックス_6;
+        } else if (IkenKomoku03.Ⅳ.getコード().equals(item.get意見項目())) {
+            return チェックボックス_7;
+        } else if (IkenKomoku03.M.getコード().equals(item.get意見項目())) {
+            return チェックボックス_8;
+        } else {
+            return チェックボックス_9;
+        }
+    }
+    
+    
     private List<RString> setCheckBoxNasiAri(ShujiiIkenshoIkenItem item) {
         List<RString> selectKey = new ArrayList<>();
         if (IkenKomoku07.有.getコード().equals(item.get意見項目())) {

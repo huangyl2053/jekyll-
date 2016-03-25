@@ -22,7 +22,7 @@ public class HasuChoseiFactory {
     /**
      * 端数調整
      *
-     * @param nengakuHokenryoKeisanParameter
+     * @param nengakuHokenryoKeisanParameter nengakuHokenryoKeisanParameter
      * @return IHasuChosei
      */
     public IHasuChosei getIncetance(NengakuHokenryoKeisanParameter nengakuHokenryoKeisanParameter) {

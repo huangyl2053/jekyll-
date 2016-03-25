@@ -37,7 +37,7 @@ public class NenreiToutatsuYoteishaCheckListBatchParameterSakusei {
      * @param 今回終了日 今回終了日
      * @param 編集方法 編集方法
      * @param 出力順ID 出力順ID
-     * @return　年齢到達予定者チェックリスト_バッチパラメータ
+     * @return INenreiToutatsuYoteishaCheckListBatchParameter
      */
     public INenreiToutatsuYoteishaCheckListBatchParameter getNenreiToutatsuYoteishaCheckListBatchParameter(
             RString 出力対象, RString 住民種別, FlexibleDate 今回開始日, FlexibleDate 今回終了日, List<RString> 編集方法,

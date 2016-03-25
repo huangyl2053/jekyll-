@@ -193,12 +193,7 @@ public enum PnlTotalPanelSpec implements IPredicate<PnlTotalPanelDiv> {
             Decimal 保険給付費用額 = div.getPnlCommon().getPnlDetail().getPnlKyufuhi().getTxtHokenkyufuhiyogaku()
                     .getValue() == null ? Decimal.ZERO : div.getPnlCommon().getPnlDetail().getPnlKyufuhi()
                     .getTxtHokenkyufuhiyogaku().getValue();
-            Decimal 費用額 = 利用者自己負担額.add(保険給付費用額);
-            if (費用額.compareTo(保険対象費用額) > 0) {
-                // TODO QA No.432
-                return false;
-            }
-            return true;
+            return 利用者自己負担額.add(保険給付費用額).compareTo(保険対象費用額) >= 0;
         }
 
         public static boolean is受領委任契約番号重複(PnlTotalPanelDiv div) {
@@ -208,7 +203,7 @@ public enum PnlTotalPanelSpec implements IPredicate<PnlTotalPanelDiv> {
                 KaigoShikakuKihonDiv kaigoDiv = (KaigoShikakuKihonDiv) div.getPnlCommon().getCcdKaigoShikakuKihon();
                 ShokanJuryoininKeiyakushaFinder finder = InstanceProvider.create(ShokanJuryoininKeiyakushaFinder.class);
                 ChkKeiyakuNoParameter parameter = new ChkKeiyakuNoParameter(
-                        // TODO QA No.431
+                        // TODO QA No.431(Redmine#:79680)
                         登録.equals(状態) ? new HihokenshaNo("000000003")
                         : new HihokenshaNo(kaigoDiv.getTxtHihokenshaNo().getValue()),
                         new FlexibleDate(div.getPnlCommon().getPnlDetail()
@@ -229,7 +224,7 @@ public enum PnlTotalPanelSpec implements IPredicate<PnlTotalPanelDiv> {
             ChkTorokuzumiParameter parameter;
             if (登録.equals(状態)) {
                 parameter = new ChkTorokuzumiParameter(
-                        // TODO QA No.431
+                        // TODO QA No.431(Redmine#:79680)
                         new HihokenshaNo("000000003"),
                         null,
                         null,

@@ -149,7 +149,7 @@ public class TashichosonJushochiTokureiDaicho {
         他市町村住所地特例者台帳情報.set前住所コード(宛名識別対象取得PSM.get前住所コード());
         他市町村住所地特例者台帳情報.set転入年月日(宛名識別対象取得PSM.get転入年月日());
         他市町村住所地特例者台帳情報.set転出年月日(宛名識別対象取得PSM.get転出年月日());
-        他市町村住所地特例者台帳情報.setNO(他市町村住所地特例者情報.getNO());
+        他市町村住所地特例者台帳情報.setNo(他市町村住所地特例者情報.getNo());
         他市町村住所地特例者台帳情報.set適用年月日(flexibleDateToFillTypeFormatted(他市町村住所地特例者情報.get適用年月日()));
         他市町村住所地特例者台帳情報.set適用届出年月日(flexibleDateToFillTypeFormatted(他市町村住所地特例者情報.get適用届出年月日()));
         他市町村住所地特例者台帳情報.set他市町村住所地特例適用事由コード(他市町村住所地特例者情報.get適用事由名称());
@@ -255,7 +255,7 @@ public class TashichosonJushochiTokureiDaicho {
      */
     private void set他市町村住所地特例者情報(OtherAddressInfEntity 他市町村住所地特例者情報, OtherAddressInfFromDBEntity otherAddressInfFromDBEntity,
             Integer no, RString 適用事由名称, RString 解除事由名称) {
-        他市町村住所地特例者情報.setNO(new RString(no.toString()));
+        他市町村住所地特例者情報.setNo(new RString(no.toString()));
         他市町村住所地特例者情報.set事業者住所(otherAddressInfFromDBEntity.get事業者住所());
         他市町村住所地特例者情報.set事業者名称(otherAddressInfFromDBEntity.get事業者名称());
         他市町村住所地特例者情報.set他被保番号(otherAddressInfFromDBEntity.get措置被保険者番号());

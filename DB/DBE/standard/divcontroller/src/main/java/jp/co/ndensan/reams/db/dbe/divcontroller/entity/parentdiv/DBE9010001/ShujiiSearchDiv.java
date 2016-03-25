@@ -23,16 +23,20 @@ public class ShujiiSearchDiv extends Panel {
      * コントロール名とフィールド名を取得する
      * private + コントロール名 + フィールド名 の文字列を作成
      */
-    @JsonProperty("radSearchJokyoFlag")
-    private RadioButton radSearchJokyoFlag;
     @JsonProperty("txtSearchShujiiIryokikanCodeFrom")
     private TextBoxCode txtSearchShujiiIryokikanCodeFrom;
     @JsonProperty("txtSearchShujiiIryokikanCodeTo")
     private TextBoxCode txtSearchShujiiIryokikanCodeTo;
     @JsonProperty("txtSearchShujiiIryokikanMeisho")
     private TextBox txtSearchShujiiIryokikanMeisho;
+    @JsonProperty("ddlKikanMeisho")
+    private DropDownList ddlKikanMeisho;
     @JsonProperty("txtSearchShujiiIryokikanKanaMeisho")
     private TextBoxKana txtSearchShujiiIryokikanKanaMeisho;
+    @JsonProperty("ddlKikanKanaMeisho")
+    private DropDownList ddlKikanKanaMeisho;
+    @JsonProperty("radSearchJokyoFlag")
+    private RadioButton radSearchJokyoFlag;
     @JsonProperty("txtSaidaiHyojiKensu")
     private TextBoxNum txtSaidaiHyojiKensu;
     @JsonProperty("btnSearchShujii")
@@ -48,24 +52,6 @@ public class ShujiiSearchDiv extends Panel {
      * コントロール名とフィールド名を取得する
      * フィールド名のGetterとSetter を作成
      */
-    /*
-     * getradSearchJokyoFlag
-     * @return radSearchJokyoFlag
-     */
-    @JsonProperty("radSearchJokyoFlag")
-    public RadioButton getRadSearchJokyoFlag() {
-        return radSearchJokyoFlag;
-    }
-
-    /*
-     * setradSearchJokyoFlag
-     * @param radSearchJokyoFlag radSearchJokyoFlag
-     */
-    @JsonProperty("radSearchJokyoFlag")
-    public void setRadSearchJokyoFlag(RadioButton radSearchJokyoFlag) {
-        this.radSearchJokyoFlag = radSearchJokyoFlag;
-    }
-
     /*
      * gettxtSearchShujiiIryokikanCodeFrom
      * @return txtSearchShujiiIryokikanCodeFrom
@@ -121,6 +107,24 @@ public class ShujiiSearchDiv extends Panel {
     }
 
     /*
+     * getddlKikanMeisho
+     * @return ddlKikanMeisho
+     */
+    @JsonProperty("ddlKikanMeisho")
+    public DropDownList getDdlKikanMeisho() {
+        return ddlKikanMeisho;
+    }
+
+    /*
+     * setddlKikanMeisho
+     * @param ddlKikanMeisho ddlKikanMeisho
+     */
+    @JsonProperty("ddlKikanMeisho")
+    public void setDdlKikanMeisho(DropDownList ddlKikanMeisho) {
+        this.ddlKikanMeisho = ddlKikanMeisho;
+    }
+
+    /*
      * gettxtSearchShujiiIryokikanKanaMeisho
      * @return txtSearchShujiiIryokikanKanaMeisho
      */
@@ -136,6 +140,42 @@ public class ShujiiSearchDiv extends Panel {
     @JsonProperty("txtSearchShujiiIryokikanKanaMeisho")
     public void setTxtSearchShujiiIryokikanKanaMeisho(TextBoxKana txtSearchShujiiIryokikanKanaMeisho) {
         this.txtSearchShujiiIryokikanKanaMeisho = txtSearchShujiiIryokikanKanaMeisho;
+    }
+
+    /*
+     * getddlKikanKanaMeisho
+     * @return ddlKikanKanaMeisho
+     */
+    @JsonProperty("ddlKikanKanaMeisho")
+    public DropDownList getDdlKikanKanaMeisho() {
+        return ddlKikanKanaMeisho;
+    }
+
+    /*
+     * setddlKikanKanaMeisho
+     * @param ddlKikanKanaMeisho ddlKikanKanaMeisho
+     */
+    @JsonProperty("ddlKikanKanaMeisho")
+    public void setDdlKikanKanaMeisho(DropDownList ddlKikanKanaMeisho) {
+        this.ddlKikanKanaMeisho = ddlKikanKanaMeisho;
+    }
+
+    /*
+     * getradSearchJokyoFlag
+     * @return radSearchJokyoFlag
+     */
+    @JsonProperty("radSearchJokyoFlag")
+    public RadioButton getRadSearchJokyoFlag() {
+        return radSearchJokyoFlag;
+    }
+
+    /*
+     * setradSearchJokyoFlag
+     * @param radSearchJokyoFlag radSearchJokyoFlag
+     */
+    @JsonProperty("radSearchJokyoFlag")
+    public void setRadSearchJokyoFlag(RadioButton radSearchJokyoFlag) {
+        this.radSearchJokyoFlag = radSearchJokyoFlag;
     }
 
     /*

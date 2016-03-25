@@ -244,7 +244,7 @@ public class HihokenshashoA4ReportSource implements IReportSource {
     @ReportItem(name = "kosekiSeibetsu12", length = 4, order = 116)
     public RString kosekiSeibetsu12;
     @ReportItem(name = "ImageField1", order = 117)
-    public RString ImageField1;
+    public RString imageField1;
 // </editor-fold>
 // <editor-fold defaultstate="collapsed" desc="User Customize Area">
     //追加コードは以下（「User Customize Area」内）に記述してください。

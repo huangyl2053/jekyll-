@@ -5,16 +5,9 @@
  */
 package jp.co.ndensan.reams.db.dbb.divcontroller.entity.parentdiv.kaigofukakihon;
 
-import jp.co.ndensan.reams.db.dbb.business.core.hokenryodankai.core.HokenryoDankai;
-import jp.co.ndensan.reams.db.dbb.business.core.basic.Fuka;
 import jp.co.ndensan.reams.db.dbb.service.core.basic.FukaManager;
 import jp.co.ndensan.reams.db.dbb.service.core.basic.HokenryoDankaiManager;
-//import jp.co.ndensan.reams.db.dbb.service.core.relate.FukaManager;
-//import jp.co.ndensan.reams.db.dbb.model.fuka.Fuka;
-//import jp.co.ndensan.reams.db.dbb.realservice.FukaManager;
-//import jp.co.ndensan.reams.db.dbb.realservice.HokenryoDankaiManager;
 import jp.co.ndensan.reams.db.dbz.business.searchkey.KaigoFukaKihonSearchKey;
-import jp.co.ndensan.reams.db.dbz.definition.core.util.optional.Optional;
 import jp.co.ndensan.reams.db.dbz.service.core.basic.HihokenshaDaichoManager;
 //import jp.co.ndensan.reams.db.dbz.realservice.HihokenshaDaichoManager;
 
@@ -26,9 +19,9 @@ import jp.co.ndensan.reams.db.dbz.service.core.basic.HihokenshaDaichoManager;
 public class KaigoFukaKihonHandler {
 
     private final KaigoFukaKihonDiv div;
-    private final HihokenshaDaichoManager hihokenshaDaichoManager;
-    private final FukaManager fukaManager;
-    private final HokenryoDankaiManager hokenryoDankaiManager;
+//    private final HihokenshaDaichoManager hihokenshaDaichoManager;
+//    private final FukaManager fukaManager;
+//    private final HokenryoDankaiManager hokenryoDankaiManager;
 
     /**
      * コンストラクタです。
@@ -37,9 +30,9 @@ public class KaigoFukaKihonHandler {
      */
     public KaigoFukaKihonHandler(KaigoFukaKihonDiv div) {
         this.div = div;
-        hihokenshaDaichoManager = new HihokenshaDaichoManager();
-        fukaManager = new FukaManager();
-        hokenryoDankaiManager = new HokenryoDankaiManager();
+//        hihokenshaDaichoManager = new HihokenshaDaichoManager();
+//        fukaManager = new FukaManager();
+//        hokenryoDankaiManager = new HokenryoDankaiManager();
     }
 
     /**
@@ -53,9 +46,9 @@ public class KaigoFukaKihonHandler {
     KaigoFukaKihonHandler(KaigoFukaKihonDiv div,
             HihokenshaDaichoManager hihokenshaDaichoManager, FukaManager fukaManager, HokenryoDankaiManager hokenryoDankaiManager) {
         this.div = div;
-        this.hihokenshaDaichoManager = hihokenshaDaichoManager;
-        this.fukaManager = fukaManager;
-        this.hokenryoDankaiManager = hokenryoDankaiManager;
+//        this.hihokenshaDaichoManager = hihokenshaDaichoManager;
+//        this.fukaManager = fukaManager;
+//        this.hokenryoDankaiManager = hokenryoDankaiManager;
     }
 
     /**

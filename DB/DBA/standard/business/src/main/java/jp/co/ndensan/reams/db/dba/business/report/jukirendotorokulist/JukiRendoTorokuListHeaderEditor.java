@@ -9,7 +9,7 @@ import jp.co.ndensan.reams.db.dba.entity.report.jukirendotorokulist.JukiRendoTor
 
 /**
  *
- * @author yuyong3
+ * 住基連動登録リスト帳票HeaderEditorです。
  */
 class JukiRendoTorokuListHeaderEditor implements IJukiRendoTorokuListEditor {
 
@@ -21,13 +21,13 @@ class JukiRendoTorokuListHeaderEditor implements IJukiRendoTorokuListEditor {
 
     @Override
     public JukiRendoTorokuListReportSource edit(JukiRendoTorokuListReportSource source) {
-        return editorHeader( source);
+        return editorHeader(source);
     }
 
     private JukiRendoTorokuListReportSource editorHeader(JukiRendoTorokuListReportSource source) {
-      source.printTimeStamp = item.getPrintTimeStamp();
-      source.taishoJohotitle=item.getTaishoJohotitle();
-      return source;
+        source.printTimeStamp = item.getPrintTimeStamp();
+        source.taishoJohotitle = item.getTaishoJohotitle();
+        return source;
     }
 
 }

@@ -80,6 +80,14 @@
         AND DbT5304_14."remban" = '14'
         INNER JOIN rgdb."DbT5105NinteiKanryoJoho" AS DbT5105
         ON DbT5105."shinseishoKanriNo"=DbT5101."shinseishoKanriNo"
+        AND DbT5105."ninteiShinseiJohoTorokuKanryoYMD" IS NOT NULL
+        AND DbT5105."ninteichosaIraiKanryoYMD" IS NOT NULL
+        AND DbT5105."ninteichosaKanryoYMD" IS NOT NULL
+        AND DbT5105."ikenshoSakuseiIraiKanryoYMD" IS NOT NULL
+        AND DbT5105."ikenshoTorokuKanryoYMD" IS NOT NULL
+        AND DbT5105."ichijiHanteiKanryoYMD" IS NOT NULL
+        AND DbT5105."ninteiShinsakaiKanryoYMD" IS NULL
+        AND DbT5105."centerSoshinYMD" IS NULL
         LEFT JOIN rgdb."DbT5910NinteichosaItakusakiJoho" AS DbT5910
         ON DbT5910."ninteichosaItakusakiCode"=DbT5101."ninteiChosaItakusakiCode"
         AND DbT5910."shichosonCode"=DbT7051."shichosonCode"

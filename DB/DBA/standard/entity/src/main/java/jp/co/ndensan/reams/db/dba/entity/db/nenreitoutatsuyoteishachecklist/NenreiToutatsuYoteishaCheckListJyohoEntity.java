@@ -19,8 +19,8 @@ public class NenreiToutatsuYoteishaCheckListJyohoEntity {
 
     private RString 市町村コード;
     private RString 市町村名;
-    private RString 並び順;
-    private RString 改頁;
+    private List<RString> 並び順;
+    private List<RString> 改頁;
     private boolean 項目名付加フラグ;
     private boolean 連番付加フラグ;
     private boolean 日付編集フラグ;

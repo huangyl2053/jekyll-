@@ -100,7 +100,6 @@
         DbT5913ChosainJoho."dbT5913ChosainJoho_shichosonCode" = DbT5910NinteichosaItakusakiJoho."dbT5910NinteichosaItakusakiJoho_shichosonCode" 
         AND DbT5913ChosainJoho."dbT5913ChosainJoho_ninteiChosaItakusakiCode" = DbT5910NinteichosaItakusakiJoho."dbT5910NinteichosaItakusakiJoho_ninteichosaItakusakiCode" 
         <where>
-            1 = 1
             <if test="状況フラグ">
                 AND DbT5913ChosainJoho."dbT5913ChosainJoho_jokyoFlag" = TRUE
             </if>
@@ -117,24 +116,69 @@
                 AND DbT5913ChosainJoho."dbT5913ChosainJoho_ninteiChosaItakusakiCode" <![CDATA[<=]]> #{調査委託先コードTo}
             </if>
             <if test="uses調査委託先名称">
-                AND DbT5910NinteichosaItakusakiJoho."dbT5910NinteichosaItakusakiJoho_jigyoshaMeisho" LIKE '%' || #{調査委託先名称} || '%'
+                <if test="uses委託先名称前方一致">
+                    AND DbT5910NinteichosaItakusakiJoho."dbT5910NinteichosaItakusakiJoho_jigyoshaMeisho" LIKE #{調査委託先名称} || '%'
+                </if>
+                <if test="uses委託先名称後方一致">
+                    AND DbT5910NinteichosaItakusakiJoho."dbT5910NinteichosaItakusakiJoho_jigyoshaMeisho" LIKE '%' || #{調査委託先名称}
+                </if>
+                <if test="uses委託先名称完全一致">
+                    AND DbT5910NinteichosaItakusakiJoho."dbT5910NinteichosaItakusakiJoho_jigyoshaMeisho" = #{調査委託先名称}
+                </if>
+                <if test="uses委託先名称部分一致">
+                    AND DbT5910NinteichosaItakusakiJoho."dbT5910NinteichosaItakusakiJoho_jigyoshaMeisho" LIKE '%' || #{調査委託先名称} || '%'
+                </if>
             </if>
             <if test="uses調査委託先カナ名称">
-                AND DbT5910NinteichosaItakusakiJoho."dbT5910NinteichosaItakusakiJoho_jigyoshaMeishoKana" LIKE '%' || #{調査委託先カナ名称} || '%'
+                <if test="uses委託先カナ名称前方一致">
+                    AND DbT5910NinteichosaItakusakiJoho."dbT5910NinteichosaItakusakiJoho_jigyoshaMeishoKana" LIKE  #{調査委託先カナ名称} || '%'
+                </if>
+                <if test="uses委託先カナ名称後方一致">
+                    AND DbT5910NinteichosaItakusakiJoho."dbT5910NinteichosaItakusakiJoho_jigyoshaMeishoKana" LIKE '%' || #{調査委託先カナ名称}
+                </if>
+                <if test="uses委託先カナ名称完全一致">
+                    AND DbT5910NinteichosaItakusakiJoho."dbT5910NinteichosaItakusakiJoho_jigyoshaMeishoKana" = #{調査委託先カナ名称}
+                </if>
+                <if test="uses委託先カナ名称部分一致">
+                    AND DbT5910NinteichosaItakusakiJoho."dbT5910NinteichosaItakusakiJoho_jigyoshaMeishoKana" LIKE '%' || #{調査委託先カナ名称} || '%'
+                </if>
+                
             </if>
-            <if test="uses調査員コードFrom">
+             <if test="uses調査員コードFrom">
                 AND DbT5913ChosainJoho."dbT5913ChosainJoho_ninteiChosainCode" <![CDATA[>=]]> #{調査員コードFrom}
             </if>
-            <if test="uses調査員コードTo">
+             <if test="uses調査員コードTo">
                 AND DbT5913ChosainJoho."dbT5913ChosainJoho_ninteiChosainCode" <![CDATA[<=]]> #{調査員コードTo}
             </if>
             <if test="uses調査員氏名">
-                AND DbT5913ChosainJoho."dbT5913ChosainJoho_chosainShimei" LIKE '%' || #{調査員氏名} || '%'
+                <if test="uses調査員氏名前方一致">
+                    AND DbT5913ChosainJoho."dbT5913ChosainJoho_chosainShimei" LIKE  #{調査員氏名} || '%'
+                </if>
+                <if test="uses調査員氏名後方一致">
+                    AND DbT5913ChosainJoho."dbT5913ChosainJoho_chosainShimei" LIKE '%' || #{調査員氏名}
+                </if>
+                <if test="uses調査員氏名完全一致">
+                    AND DbT5913ChosainJoho."dbT5913ChosainJoho_chosainShimei" = #{調査員氏名}
+                </if>
+                <if test="uses調査員氏名部分一致">
+                    AND DbT5913ChosainJoho."dbT5913ChosainJoho_chosainShimei" LIKE '%' || #{調査員氏名} || '%'
+                </if>
             </if>
             <if test="uses調査員カナ氏名">
-                AND DbT5913ChosainJoho."dbT5913ChosainJoho_chosainKanaShimei" LIKE '%' || #{調査員カナ氏名} || '%'
+                <if test="uses調査員カナ氏名前方一致">
+                    AND DbT5913ChosainJoho."dbT5913ChosainJoho_chosainKanaShimei" LIKE  #{調査員カナ氏名} || '%'
+                </if>
+                <if test="uses調査員カナ氏名後方一致">
+                    AND DbT5913ChosainJoho."dbT5913ChosainJoho_chosainKanaShimei" LIKE '%' || #{調査員カナ氏名}
+                </if>
+                <if test="uses調査員カナ氏名完全一致">
+                    AND DbT5913ChosainJoho."dbT5913ChosainJoho_chosainKanaShimei" = #{調査員カナ氏名}
+                </if>
+                <if test="uses調査員カナ氏名部分一致">
+                    AND DbT5913ChosainJoho."dbT5913ChosainJoho_chosainKanaShimei" LIKE '%' || #{調査員カナ氏名} || '%'
+                </if>
             </if>
-            <if test="uses地区コード">
+             <if test="uses地区コード">
                 AND DbT5913ChosainJoho."dbT5913ChosainJoho_chikuCode" = #{地区コード}
             </if>
         </where>
@@ -164,7 +208,6 @@
         DbT5913ChosainJoho."dbT5913ChosainJoho_shichosonCode" = DbT5910NinteichosaItakusakiJoho."dbT5910NinteichosaItakusakiJoho_shichosonCode" 
         AND DbT5913ChosainJoho."dbT5913ChosainJoho_ninteiChosaItakusakiCode" = DbT5910NinteichosaItakusakiJoho."dbT5910NinteichosaItakusakiJoho_ninteichosaItakusakiCode" 
         <where>
-            1 = 1
             <if test="状況フラグ">
                 AND DbT5913ChosainJoho."dbT5913ChosainJoho_jokyoFlag" = TRUE
             </if>
@@ -180,11 +223,34 @@
             <if test="uses調査委託先コードTo">
                 AND DbT5913ChosainJoho."dbT5913ChosainJoho_ninteiChosaItakusakiCode" <![CDATA[<=]]> #{調査委託先コードTo}
             </if>
-             <if test="uses調査委託先名称">
-                AND DbT5910NinteichosaItakusakiJoho."dbT5910NinteichosaItakusakiJoho_jigyoshaMeisho" LIKE '%' || #{調査委託先名称} || '%'
+            <if test="uses調査委託先名称">
+                <if test="uses委託先名称前方一致">
+                    AND DbT5910NinteichosaItakusakiJoho."dbT5910NinteichosaItakusakiJoho_jigyoshaMeisho" LIKE #{調査委託先名称} || '%'
+                </if>
+                <if test="uses委託先名称後方一致">
+                    AND DbT5910NinteichosaItakusakiJoho."dbT5910NinteichosaItakusakiJoho_jigyoshaMeisho" LIKE '%' || #{調査委託先名称}
+                </if>
+                <if test="uses委託先名称完全一致">
+                    AND DbT5910NinteichosaItakusakiJoho."dbT5910NinteichosaItakusakiJoho_jigyoshaMeisho" = #{調査委託先名称}
+                </if>
+                <if test="uses委託先名称部分一致">
+                    AND DbT5910NinteichosaItakusakiJoho."dbT5910NinteichosaItakusakiJoho_jigyoshaMeisho" LIKE '%' || #{調査委託先名称} || '%'
+                </if>
             </if>
-             <if test="uses調査委託先カナ名称">
-                AND DbT5910NinteichosaItakusakiJoho."dbT5910NinteichosaItakusakiJoho_jigyoshaMeishoKana" LIKE '%' || #{調査委託先カナ名称} || '%'
+            <if test="uses調査委託先カナ名称">
+                <if test="uses委託先カナ名称前方一致">
+                    AND DbT5910NinteichosaItakusakiJoho."dbT5910NinteichosaItakusakiJoho_jigyoshaMeishoKana" LIKE  #{調査委託先カナ名称} || '%'
+                </if>
+                <if test="uses委託先カナ名称後方一致">
+                    AND DbT5910NinteichosaItakusakiJoho."dbT5910NinteichosaItakusakiJoho_jigyoshaMeishoKana" LIKE '%' || #{調査委託先カナ名称}
+                </if>
+                <if test="uses委託先カナ名称完全一致">
+                    AND DbT5910NinteichosaItakusakiJoho."dbT5910NinteichosaItakusakiJoho_jigyoshaMeishoKana" = #{調査委託先カナ名称}
+                </if>
+                <if test="uses委託先カナ名称部分一致">
+                    AND DbT5910NinteichosaItakusakiJoho."dbT5910NinteichosaItakusakiJoho_jigyoshaMeishoKana" LIKE '%' || #{調査委託先カナ名称} || '%'
+                </if>
+                
             </if>
              <if test="uses調査員コードFrom">
                 AND DbT5913ChosainJoho."dbT5913ChosainJoho_ninteiChosainCode" <![CDATA[>=]]> #{調査員コードFrom}
@@ -193,12 +259,34 @@
                 AND DbT5913ChosainJoho."dbT5913ChosainJoho_ninteiChosainCode" <![CDATA[<=]]> #{調査員コードTo}
             </if>
             <if test="uses調査員氏名">
-                AND DbT5913ChosainJoho."dbT5913ChosainJoho_chosainShimei" LIKE '%' || #{調査員氏名} || '%'
+                <if test="uses調査員氏名前方一致">
+                    AND DbT5913ChosainJoho."dbT5913ChosainJoho_chosainShimei" LIKE  #{調査員氏名} || '%'
+                </if>
+                <if test="uses調査員氏名後方一致">
+                    AND DbT5913ChosainJoho."dbT5913ChosainJoho_chosainShimei" LIKE '%' || #{調査員氏名}
+                </if>
+                <if test="uses調査員氏名完全一致">
+                    AND DbT5913ChosainJoho."dbT5913ChosainJoho_chosainShimei" = #{調査員氏名}
+                </if>
+                <if test="uses調査員氏名部分一致">
+                    AND DbT5913ChosainJoho."dbT5913ChosainJoho_chosainShimei" LIKE '%' || #{調査員氏名} || '%'
+                </if>
             </if>
             <if test="uses調査員カナ氏名">
-                AND DbT5913ChosainJoho."dbT5913ChosainJoho_chosainKanaShimei" LIKE '%' || #{調査員カナ氏名} || '%'
+                <if test="uses調査員カナ氏名前方一致">
+                    AND DbT5913ChosainJoho."dbT5913ChosainJoho_chosainKanaShimei" LIKE  #{調査員カナ氏名} || '%'
+                </if>
+                <if test="uses調査員カナ氏名後方一致">
+                    AND DbT5913ChosainJoho."dbT5913ChosainJoho_chosainKanaShimei" LIKE '%' || #{調査員カナ氏名}
+                </if>
+                <if test="uses調査員カナ氏名完全一致">
+                    AND DbT5913ChosainJoho."dbT5913ChosainJoho_chosainKanaShimei" = #{調査員カナ氏名}
+                </if>
+                <if test="uses調査員カナ氏名部分一致">
+                    AND DbT5913ChosainJoho."dbT5913ChosainJoho_chosainKanaShimei" LIKE '%' || #{調査員カナ氏名} || '%'
+                </if>
             </if>
-             <if test="uses地区コード">
+            <if test="uses地区コード">
                 AND DbT5913ChosainJoho."dbT5913ChosainJoho_chikuCode" = #{地区コード}
             </if>
         </where>

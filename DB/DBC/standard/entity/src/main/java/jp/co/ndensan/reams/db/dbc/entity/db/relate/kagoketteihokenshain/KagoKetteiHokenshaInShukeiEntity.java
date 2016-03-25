@@ -5,13 +5,12 @@
  */
 package jp.co.ndensan.reams.db.dbc.entity.db.relate.kagoketteihokenshain;
 
+import java.io.Serializable;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HokenshaNo;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
-import jp.co.ndensan.reams.uz.uza.util.db.IDbAccessable;
-import jp.co.ndensan.reams.uz.uza.util.db.TableName;
 
 /**
  * 過誤決定通知書（保険者分）情報（集計）一時テーブルEntity
@@ -19,11 +18,9 @@ import jp.co.ndensan.reams.uz.uza.util.db.TableName;
 @lombok.Setter
 @lombok.Getter
 @SuppressWarnings("PMD.UnusedPrivateField")
-public class KagoKetteiHokenshaInShukeiEntity implements IDbAccessable {
+public class KagoKetteiHokenshaInShukeiEntity implements Serializable {
 
-    @TableName
-    public static final RString TABLE_NAME = new RString("TEMP_TABLE_KagoKetteiTsuchishoJyohoHokenshabunShukei");
-
+    private RString kokanShikibetsuNo;
     private FlexibleYearMonth toriatsukaiYM;
     private HokenshaNo shokisaiHokenshaNo;
     private RString shokisaiHokenshaNa;

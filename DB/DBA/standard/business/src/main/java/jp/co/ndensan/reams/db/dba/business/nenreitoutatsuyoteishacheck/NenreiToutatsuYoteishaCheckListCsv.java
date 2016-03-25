@@ -46,48 +46,7 @@ public class NenreiToutatsuYoteishaCheckListCsv {
             for (NenreiToutatsuYoteishaCheckListEntity entity : checkListEntity) {
                 NenreiToutatsuYoteishaCheckListEucCsvEntity csvDataEntity
                         = new NenreiToutatsuYoteishaCheckListEucCsvEntity();
-                csvDataEntity.setHihokenshaNo(new RString(entity.getHihokenshaNo().value().toString()));
-                csvDataEntity.setShikibetsuCode(new RString(entity.getShikibetsuCode().value().toString()));
-                csvDataEntity.setKanaMeisho(entity.getKanaMeisho());
-                csvDataEntity.setMeisho(entity.getMeisho());
-                if (性別コード1.equals(entity.getSeibetsuCode())) {
-                    csvDataEntity.setSeibetsu(性別_男);
-                } else if (性別コード2.equals(entity.getSeibetsuCode())) {
-                    csvDataEntity.setSeibetsu(性別_女);
-                }
-                if (nenCheckListJyohoEntity.is日付編集フラグ()) {
-                    if (entity.getSeinengappiYMD() != null) {
-                        csvDataEntity.setSeinengappiYMD(new RString(entity.getSeinengappiYMD().seireki().
-                                separator(Separator.SLASH).fillType(FillType.ZERO).toDateString().toString()));
-                    }
-                    if (entity.getNenreiyotainichi() != null) {
-                        csvDataEntity.setNenreiyotainichi(new RString(entity.getNenreiyotainichi().seireki().separator(
-                                Separator.SLASH).fillType(FillType.ZERO).toDateString().toString()));
-                    }
-                } else {
-                    if (entity.getSeinengappiYMD() != null) {
-                        csvDataEntity.setSeinengappiYMD(new RString(entity.getSeinengappiYMD().toString()));
-                    }
-                    if (entity.getNenreiyotainichi() != null) {
-                        csvDataEntity.setNenreiyotainichi(new RString(entity.getNenreiyotainichi().toString()));
-                    }
-                }
-                csvDataEntity.setShigekubun(entity.getShigekubun());
-                csvDataEntity.setJutosyakubun(entity.getJutosyakubun());
-                csvDataEntity.setJushoCode(entity.getZenkokuJushoCode());
-                csvDataEntity.setJusho(entity.getJusho());
-                csvDataEntity.setGyoseikuCode(entity.getGyoseikuCode());
-                csvDataEntity.setGyoseikuName(entity.getGyoseikuName());
-                if (住登内日本人.equals(entity.getJuminShubetsuCode()) || 住登外日本人.equals(
-                        entity.getJuminShubetsuCode())) {
-                    csvDataEntity.setJuminShubetsu(住民種別_日本人のみ);
-                } else if (住登内外国人.equals(entity.getJuminShubetsuCode()) || 住登外外国人.equals(
-                        entity.getJuminShubetsuCode())) {
-                    csvDataEntity.setJuminShubetsu(住民種別_外国人のみ);
-                }
-                csvDataEntity.setSeikatsu(entity.getSeikatsu());
-                csvDataEntity.setJyotei(entity.getJyotei());
-                csvDataList.add(csvDataEntity);
+                setData(nenCheckListJyohoEntity, csvDataList, entity, csvDataEntity);
             }
         }
         return csvDataList;
@@ -110,51 +69,57 @@ public class NenreiToutatsuYoteishaCheckListCsv {
                 NenreiToutatsuYoteishaCheckListEucCsvEntity csvDataEntity
                         = new NenreiToutatsuYoteishaCheckListEucCsvEntity();
                 csvDataEntity.setRenban(new RString(String.valueOf(renban)));
-                csvDataEntity.setHihokenshaNo(new RString(entity.getHihokenshaNo().value().toString()));
-                csvDataEntity.setShikibetsuCode(new RString(entity.getShikibetsuCode().value().toString()));
-                csvDataEntity.setKanaMeisho(entity.getKanaMeisho());
-                csvDataEntity.setMeisho(entity.getMeisho());
-                if (性別コード1.equals(entity.getSeibetsuCode())) {
-                    csvDataEntity.setSeibetsu(性別_男);
-                } else if (性別コード2.equals(entity.getSeibetsuCode())) {
-                    csvDataEntity.setSeibetsu(性別_女);
-                }
-                if (nenCheckListJyohoEntity.is日付編集フラグ()) {
-                    if (entity.getSeinengappiYMD() != null) {
-                        csvDataEntity.setSeinengappiYMD(new RString(entity.getSeinengappiYMD().seireki().
-                                separator(Separator.SLASH).fillType(FillType.ZERO).toDateString().toString()));
-                    }
-                    if (entity.getNenreiyotainichi() != null) {
-                        csvDataEntity.setNenreiyotainichi(new RString(entity.getNenreiyotainichi().seireki().separator(
-                                Separator.SLASH).fillType(FillType.ZERO).toDateString().toString()));
-                    }
-                } else {
-                    if (entity.getSeinengappiYMD() != null) {
-                        csvDataEntity.setSeinengappiYMD(new RString(entity.getSeinengappiYMD().toString()));
-                    }
-                    if (entity.getNenreiyotainichi() != null) {
-                        csvDataEntity.setNenreiyotainichi(new RString(entity.getNenreiyotainichi().toString()));
-                    }
-                }
-                csvDataEntity.setShigekubun(entity.getShigekubun());
-                csvDataEntity.setJutosyakubun(entity.getJutosyakubun());
-                csvDataEntity.setJushoCode(entity.getZenkokuJushoCode());
-                csvDataEntity.setJusho(entity.getJusho());
-                csvDataEntity.setGyoseikuCode(entity.getGyoseikuCode());
-                csvDataEntity.setGyoseikuName(entity.getGyoseikuName());
-                if (住登内日本人.equals(entity.getJuminShubetsuCode()) || 住登外日本人.equals(
-                        entity.getJuminShubetsuCode())) {
-                    csvDataEntity.setJuminShubetsu(住民種別_日本人のみ);
-                } else if (住登内外国人.equals(entity.getJuminShubetsuCode()) || 住登外外国人.equals(
-                        entity.getJuminShubetsuCode())) {
-                    csvDataEntity.setJuminShubetsu(住民種別_外国人のみ);
-                }
-                csvDataEntity.setSeikatsu(entity.getSeikatsu());
-                csvDataEntity.setJyotei(entity.getJyotei());
-                csvDataList.add(csvDataEntity);
+                setData(nenCheckListJyohoEntity, csvDataList, entity, csvDataEntity);
                 renban++;
             }
         }
         return csvDataList;
+    }
+
+    private void setData(NenreiToutatsuYoteishaCheckListJyohoEntity nenCheckListJyohoEntity,
+            List<NenreiToutatsuYoteishaCheckListEucCsvEntity> csvDataList, NenreiToutatsuYoteishaCheckListEntity entity,
+            NenreiToutatsuYoteishaCheckListEucCsvEntity csvDataEntity) {
+        csvDataEntity.setHihokenshaNo(new RString(entity.getHihokenshaNo().value().toString()));
+        csvDataEntity.setShikibetsuCode(new RString(entity.getShikibetsuCode().value().toString()));
+        csvDataEntity.setKanaMeisho(entity.getKanaMeisho());
+        csvDataEntity.setMeisho(entity.getMeisho());
+        if (性別コード1.equals(entity.getSeibetsuCode())) {
+            csvDataEntity.setSeibetsu(性別_男);
+        } else if (性別コード2.equals(entity.getSeibetsuCode())) {
+            csvDataEntity.setSeibetsu(性別_女);
+        }
+        if (nenCheckListJyohoEntity.is日付編集フラグ()) {
+            if (entity.getSeinengappiYMD() != null) {
+                csvDataEntity.setSeinengappiYMD(new RString(entity.getSeinengappiYMD().seireki().
+                        separator(Separator.SLASH).fillType(FillType.ZERO).toDateString().toString()));
+            }
+            if (entity.getNenreiyotainichi() != null) {
+                csvDataEntity.setNenreiyotainichi(new RString(entity.getNenreiyotainichi().seireki().separator(
+                        Separator.SLASH).fillType(FillType.ZERO).toDateString().toString()));
+            }
+        } else {
+            if (entity.getSeinengappiYMD() != null) {
+                csvDataEntity.setSeinengappiYMD(new RString(entity.getSeinengappiYMD().toString()));
+            }
+            if (entity.getNenreiyotainichi() != null) {
+                csvDataEntity.setNenreiyotainichi(new RString(entity.getNenreiyotainichi().toString()));
+            }
+        }
+        csvDataEntity.setShigekubun(entity.getShigekubun());
+        csvDataEntity.setJutosyakubun(entity.getJutosyakubun());
+        csvDataEntity.setJushoCode(entity.getZenkokuJushoCode());
+        csvDataEntity.setJusho(entity.getJusho());
+        csvDataEntity.setGyoseikuCode(entity.getGyoseikuCode());
+        csvDataEntity.setGyoseikuName(entity.getGyoseikuName());
+        if (住登内日本人.equals(entity.getJuminShubetsuCode()) || 住登外日本人.equals(
+                entity.getJuminShubetsuCode())) {
+            csvDataEntity.setJuminShubetsu(住民種別_日本人のみ);
+        } else if (住登内外国人.equals(entity.getJuminShubetsuCode()) || 住登外外国人.equals(
+                entity.getJuminShubetsuCode())) {
+            csvDataEntity.setJuminShubetsu(住民種別_外国人のみ);
+        }
+        csvDataEntity.setSeikatsu(entity.getSeikatsu());
+        csvDataEntity.setJyotei(entity.getJyotei());
+        csvDataList.add(csvDataEntity);
     }
 }

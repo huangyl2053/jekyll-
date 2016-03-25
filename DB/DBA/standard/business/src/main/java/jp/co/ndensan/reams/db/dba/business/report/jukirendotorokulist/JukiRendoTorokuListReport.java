@@ -13,12 +13,17 @@ import lombok.NonNull;
 
 /**
  *
- * 住基連動登録リスト帳票作成
+ * 住基連動登録リスト帳票です。
  */
 public class JukiRendoTorokuListReport extends Report<JukiRendoTorokuListReportSource> {
 
     private final List<JukiRendoTorokuListItem> targets;
 
+    /**
+     * コンストラクタです。
+     *
+     * @param targets JukiRendoTorokuListItem
+     */
     protected JukiRendoTorokuListReport(List<JukiRendoTorokuListItem> targets) {
         this.targets = targets;
 
@@ -27,17 +32,16 @@ public class JukiRendoTorokuListReport extends Report<JukiRendoTorokuListReportS
     /**
      * インスタンスを生成します。
      *
-     * @param JukiRendoTorokuListItems 住基連動登録リストのITEMリスト
+     * @param jukiRendoTorokuListItems 住基連動登録リストのITEMリスト
      * @return 住基連動登録リストのReport
      */
-
-    public static JukiRendoTorokuListReport createFrom(@NonNull List<JukiRendoTorokuListItem> JukiRendoTorokuListItems) {
-        return new JukiRendoTorokuListReport(JukiRendoTorokuListItems);
+    public static JukiRendoTorokuListReport createFrom(@NonNull List<JukiRendoTorokuListItem> jukiRendoTorokuListItems) {
+        return new JukiRendoTorokuListReport(jukiRendoTorokuListItems);
     }
 
     /**
      *
-     * @param reportSourceWriter
+     * @param reportSourceWriter ReportSourceWriter
      */
     @Override
     public void writeBy(ReportSourceWriter<JukiRendoTorokuListReportSource> reportSourceWriter) {

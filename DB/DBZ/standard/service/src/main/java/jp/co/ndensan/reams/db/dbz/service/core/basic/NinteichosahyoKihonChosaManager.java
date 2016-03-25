@@ -84,6 +84,7 @@ public class NinteichosahyoKihonChosaManager {
     /**
      * 認定調査票_基本調査を検索By申請書管理番号。
      *
+     * @param 申請書管理番号 申請書管理番号
      * @return NinteichosahyoKihonChosaの{@code list}
      */
     @Transaction

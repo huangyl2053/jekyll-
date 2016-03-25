@@ -118,30 +118,8 @@ public class JutakuKaishuKetteiKyufujissekiHennsyuManager {
             throw new ApplicationException(UrErrorMessages.存在しない
                     .getMessage().replace("認定有効期間").evaluate());
         }
-        KokanShikibetsuNo 交換情報識別番号;
-        if (サービス提供年月.isBeforeOrEquals(平成１５年３月)) {
-            交換情報識別番号 = new KokanShikibetsuNo(new RString("1131"));
-        } else if (平成１５年４月.isBeforeOrEquals(サービス提供年月)
-                && サービス提供年月.isBefore(平成１７年１０月)) {
-            交換情報識別番号 = new KokanShikibetsuNo(new RString("1132"));
-        } else if (平成１７年１０月.isBeforeOrEquals(サービス提供年月)
-                && サービス提供年月.isBefore(平成１８年４月)) {
-            交換情報識別番号 = new KokanShikibetsuNo(new RString("1133"));
-        } else if (平成１８年４月.isBeforeOrEquals(サービス提供年月)
-                && サービス提供年月.isBefore(平成２０年４月)) {
-            交換情報識別番号 = new KokanShikibetsuNo(new RString("1134"));
-        } else if (平成２０年４月.isBeforeOrEquals(サービス提供年月)
-                && サービス提供年月.isBefore(平成２１年４月)) {
-            交換情報識別番号 = new KokanShikibetsuNo(new RString("1135"));
-        } else if (平成２１年４月.isBeforeOrEquals(サービス提供年月)
-                && サービス提供年月.isBefore(平成２４年４月)) {
-            交換情報識別番号 = new KokanShikibetsuNo(new RString("1136"));
-        } else if (平成２４年４月.isBeforeOrEquals(サービス提供年月)
-                && サービス提供年月.isBefore(平成２７年４月)) {
-            交換情報識別番号 = new KokanShikibetsuNo(new RString("1137"));
-        } else {
-            交換情報識別番号 = new KokanShikibetsuNo(new RString("1138"));
-        }
+        KokanShikibetsuNo 交換情報識別番号 = null;
+        交換情報識別番号 = getKokanShikibetsuNo(サービス提供年月, 交換情報識別番号);
 
         DbT3017KyufujissekiKihonEntity 給付実績基本entity = new DbT3017KyufujissekiKihonEntity();
         RString 通し番号 = Saiban.get(SubGyomuCode.DBC介護給付, SaibanHanyokeyName.実績管理番号.getコード()).nextString();
@@ -238,6 +216,35 @@ public class JutakuKaishuKetteiKyufujissekiHennsyuManager {
         給付実績集計entity.setSeiriNo(給付実績基本entity.getSeiriNo());
         給付実績集計entity.setState(EntityDataState.Added);
         給付実績集計Dac.save(給付実績集計entity);
+    }
+
+    private KokanShikibetsuNo getKokanShikibetsuNo(
+            FlexibleYearMonth サービス提供年月,
+            KokanShikibetsuNo 交換情報識別番号) {
+        if (サービス提供年月.isBeforeOrEquals(平成１５年３月)) {
+            交換情報識別番号 = new KokanShikibetsuNo(new RString("1131"));
+        } else if (平成１５年４月.isBeforeOrEquals(サービス提供年月)
+                && サービス提供年月.isBefore(平成１７年１０月)) {
+            交換情報識別番号 = new KokanShikibetsuNo(new RString("1132"));
+        } else if (平成１７年１０月.isBeforeOrEquals(サービス提供年月)
+                && サービス提供年月.isBefore(平成１８年４月)) {
+            交換情報識別番号 = new KokanShikibetsuNo(new RString("1133"));
+        } else if (平成１８年４月.isBeforeOrEquals(サービス提供年月)
+                && サービス提供年月.isBefore(平成２０年４月)) {
+            交換情報識別番号 = new KokanShikibetsuNo(new RString("1134"));
+        } else if (平成２０年４月.isBeforeOrEquals(サービス提供年月)
+                && サービス提供年月.isBefore(平成２１年４月)) {
+            交換情報識別番号 = new KokanShikibetsuNo(new RString("1135"));
+        } else if (平成２１年４月.isBeforeOrEquals(サービス提供年月)
+                && サービス提供年月.isBefore(平成２４年４月)) {
+            交換情報識別番号 = new KokanShikibetsuNo(new RString("1136"));
+        } else if (平成２４年４月.isBeforeOrEquals(サービス提供年月)
+                && サービス提供年月.isBefore(平成２７年４月)) {
+            交換情報識別番号 = new KokanShikibetsuNo(new RString("1137"));
+        } else {
+            交換情報識別番号 = new KokanShikibetsuNo(new RString("1138"));
+        }
+        return 交換情報識別番号;
     }
 
 }

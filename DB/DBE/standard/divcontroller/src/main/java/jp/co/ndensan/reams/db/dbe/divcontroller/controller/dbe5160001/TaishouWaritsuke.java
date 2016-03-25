@@ -15,6 +15,7 @@ import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE5160001.dgWa
 import jp.co.ndensan.reams.db.dbe.divcontroller.handler.parentdiv.dbe5160001.TaishouWaritsukeHandler;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrInformationMessages;
+import jp.co.ndensan.reams.ur.urz.definition.message.UrQuestionMessages;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.core.validation.ValidateChain;
 import jp.co.ndensan.reams.uz.uza.core.validation.ValidationMessageControlDictionaryBuilder;
@@ -150,13 +151,20 @@ public class TaishouWaritsuke {
      * @return ResponseData<TaishouWaritsukeDiv>
      */
     public ResponseData<TaishouWaritsukeDiv> onClick_BtnDetermineToShinsakaiOrder(TaishouWaritsukeDiv div) {
-        ValidationMessageControlPairs pairs = new ValidationMessageControlPairs();
-        対象者一覧データ空チェック(pairs, div);
-
-        if (pairs.iterator().hasNext()) {
-            return ResponseData.of(div).addValidationMessages(pairs).respond();
+        if (!ResponseHolder.isReRequest()) {
+            return ResponseData.of(div).addMessage(UrQuestionMessages.処理実行の確認.getMessage()).respond();
         }
-        getHandler(div).審査会順序確定();
+        if (new RString(UrQuestionMessages.処理実行の確認.getMessage().getCode())
+                .equals(ResponseHolder.getMessageCode())
+                && ResponseHolder.getButtonType().equals(MessageDialogSelectedResult.Yes)) {
+            ValidationMessageControlPairs pairs = new ValidationMessageControlPairs();
+            対象者一覧データ空チェック(pairs, div);
+
+            if (pairs.iterator().hasNext()) {
+                return ResponseData.of(div).addValidationMessages(pairs).respond();
+            }
+            getHandler(div).審査会順序確定();
+        }
         return ResponseData.of(div).respond();
     }
 
@@ -167,16 +175,23 @@ public class TaishouWaritsuke {
      * @return ResponseData<TaishouWaritsukeDiv>
      */
     public ResponseData<TaishouWaritsukeDiv> onClick_BtnRegister(TaishouWaritsukeDiv div) {
-        ValidationMessageControlPairs pairs = new ValidationMessageControlPairs();
-        対象者一覧データ空チェック(pairs, div);
-        if (pairs.iterator().hasNext()) {
-            return ResponseData.of(div).addValidationMessages(pairs).respond();
+        if (!ResponseHolder.isReRequest()) {
+            return ResponseData.of(div).addMessage(UrQuestionMessages.保存の確認.getMessage()).respond();
         }
-        TaishouWaritsukeHandler handler = getHandler(div);
-        handler.介護認定審査会割付情報更新();
-        handler.対象者一覧検索();
-        handler.候補者一覧検索();
-        CommonButtonHolder.setDisabledByCommonButtonFieldName(審査会順番を振りなおす, false);
+        if (new RString(UrQuestionMessages.保存の確認.getMessage().getCode())
+                .equals(ResponseHolder.getMessageCode())
+                && ResponseHolder.getButtonType().equals(MessageDialogSelectedResult.Yes)) {
+            ValidationMessageControlPairs pairs = new ValidationMessageControlPairs();
+            対象者一覧データ空チェック(pairs, div);
+            if (pairs.iterator().hasNext()) {
+                return ResponseData.of(div).addValidationMessages(pairs).respond();
+            }
+            TaishouWaritsukeHandler handler = getHandler(div);
+            handler.介護認定審査会割付情報更新();
+            handler.対象者一覧検索();
+            handler.候補者一覧検索();
+            CommonButtonHolder.setDisabledByCommonButtonFieldName(審査会順番を振りなおす, false);
+        }
         return ResponseData.of(div).respond();
     }
 
@@ -197,8 +212,16 @@ public class TaishouWaritsuke {
      * @return ResponseData<TaishouWaritsukeDiv>
      */
     public ResponseData<TaishouWaritsukeDiv> onClick_BtnComplete(TaishouWaritsukeDiv div) {
-        getHandler(div).介護認定審査会開催予定情報更新(false);
-        return ResponseData.of(div).forwardWithEventName(DBE5160001TransitionEventName.一覧に戻る).respond();
+        if (!ResponseHolder.isReRequest()) {
+            return ResponseData.of(div).addMessage(UrQuestionMessages.処理実行の確認.getMessage()).respond();
+        }
+        if (new RString(UrQuestionMessages.処理実行の確認.getMessage().getCode())
+                .equals(ResponseHolder.getMessageCode())
+                && ResponseHolder.getButtonType().equals(MessageDialogSelectedResult.Yes)) {
+            getHandler(div).介護認定審査会開催予定情報更新(false);
+            return ResponseData.of(div).forwardWithEventName(DBE5160001TransitionEventName.一覧に戻る).respond();
+        }
+        return ResponseData.of(div).respond();
     }
 
     private TaishouWaritsukeHandler getHandler(TaishouWaritsukeDiv div) {

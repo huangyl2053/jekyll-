@@ -14,6 +14,7 @@ import lombok.Value;
  * 識別番号管理の識別子です。
  */
 @Value
+@SuppressWarnings("PMD.UnusedPrivateField")
 public class ShikibetsuNoKanriIdentifier implements Serializable {
 
     private final RString 識別番号;

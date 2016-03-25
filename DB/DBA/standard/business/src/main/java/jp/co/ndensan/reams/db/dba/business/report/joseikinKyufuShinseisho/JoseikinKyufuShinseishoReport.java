@@ -38,8 +38,9 @@ public class JoseikinKyufuShinseishoReport extends Report<JoseikinKyufuShinseish
         this.item = item;
     }
 
-	/**
+    /**
      * 介護保険助成金給付申請書writeByします。
+     *
      * @param reportSourceWriter 介護保険助成金給付申請書クラスパラメータ
      */
     @Override

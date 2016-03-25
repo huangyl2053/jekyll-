@@ -23,8 +23,9 @@ public class JoseikinKyufuShinseishoEditor implements IJoseikinKyufuShinseishoEd
         this.item = item;
     }
 
-	/**
+    /**
      * 介護保険助成金給付申請書editです。
+     *
      * @param source 介護保険助成金給付申請書Source
      * @return 介護保険助成金給付申請書
      */

@@ -75,7 +75,7 @@ public class DbT7056GappeiShichosonDac implements ISaveable<DbT7056GappeiShichos
      *
      * @param 基準日 基準日
      * @return List<DbT7056GappeiShichosonEntity>
-     * @throw NullPointerException NullPointerException
+     * @throws NullPointerException 引数のいずれかがnullの場合
      */
     @Transaction
     public List<DbT7056GappeiShichosonEntity> selectfor合併市町村選択情報の取得処理(

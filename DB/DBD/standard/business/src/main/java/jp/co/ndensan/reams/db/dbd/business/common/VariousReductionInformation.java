@@ -16,6 +16,11 @@ public class VariousReductionInformation {
 
     private final List<ShakaiFukushiHojinRiyoshaFutanKeigen> 社会福祉法人等利用者負担軽減の情報List;
 
+    /**
+     * コンストラクタです。
+     *
+     * @param 社会福祉法人等利用者負担軽減の情報List 社会福祉法人等利用者負担軽減の情報List
+     */
     public VariousReductionInformation(List<ShakaiFukushiHojinRiyoshaFutanKeigen> 社会福祉法人等利用者負担軽減の情報List) {
         this.社会福祉法人等利用者負担軽減の情報List = 社会福祉法人等利用者負担軽減の情報List;
     }

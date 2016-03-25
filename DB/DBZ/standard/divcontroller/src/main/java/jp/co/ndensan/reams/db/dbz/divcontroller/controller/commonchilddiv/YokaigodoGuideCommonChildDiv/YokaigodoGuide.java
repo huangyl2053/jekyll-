@@ -10,14 +10,13 @@ import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.YokaigodoG
 import jp.co.ndensan.reams.db.dbz.divcontroller.handler.commonchilddiv.yokaigodoguide.YokaigodoGuideHandler;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
 
 /**
  * 要介護度ガイドのクラス。
  */
 public class YokaigodoGuide {
-
-    private final int 桁数_6 = 6;
 
     /**
      * 要介護度ガイド一覧。<br/>
@@ -27,8 +26,8 @@ public class YokaigodoGuide {
      */
     public ResponseData<YokaigodoGuideDiv> onLoad(YokaigodoGuideDiv godoDiv) {
         ResponseData<YokaigodoGuideDiv> responseData = new ResponseData<>();
-        FlexibleDate kizyuniti = new FlexibleDate(godoDiv.getKijunYMD().substring(0, 桁数_6));
-        if (kizyuniti.isBefore(new FlexibleDate("200003"))) {
+        FlexibleYearMonth kizyuniti = new FlexibleDate(godoDiv.getKijunYMD()).getYearMonth();
+        if (kizyuniti.isBefore(new FlexibleYearMonth("200003"))) {
             ValidationMessageControlPairs validationMessages = createHandlerOf(godoDiv).check_btnKakuninn(godoDiv);
             if (validationMessages.iterator().hasNext()) {
                 return ResponseData.of(godoDiv).addValidationMessages(validationMessages).respond();

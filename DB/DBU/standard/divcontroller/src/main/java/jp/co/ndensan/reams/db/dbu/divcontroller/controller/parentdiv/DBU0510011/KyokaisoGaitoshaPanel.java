@@ -51,7 +51,7 @@ public class KyokaisoGaitoshaPanel {
     private static final RString 状態_追加 = new RString("追加");
     private static final RString 状態_修正 = new RString("修正");
     private static final RString 状態_削除 = new RString("削除");
-    private static final RString 更新 = new RString("更新");
+    private static final RString 保存 = new RString("保存");
 
     /**
      * 画面初期化処理です。
@@ -60,7 +60,6 @@ public class KyokaisoGaitoshaPanel {
      * @return ResponseData<KyokaisoGaitoshaPanelDiv>
      */
     public ResponseData<KyokaisoGaitoshaPanelDiv> onLoad(KyokaisoGaitoshaPanelDiv div) {
-
         RString 状態 = ViewStateHolder.get(ViewStateKeys.境界層該当者台帳管理_状態, RString.class);
         HihokenshaNo 被保険者番号 = ViewStateHolder.get(ViewStateKeys.境界層該当者台帳管理_被保険者番号, HihokenshaNo.class);
         div.getCcdKaigoAtena().onLoad(ViewStateHolder.get(ViewStateKeys.境界層該当者台帳管理_識別コード, ShikibetsuCode.class));
@@ -235,8 +234,8 @@ public class KyokaisoGaitoshaPanel {
                     = ViewStateHolder.get(ViewStateKeys.境界層該当者台帳管理_境界層保険料段階情報, Models.class);
 
             if (状態_追加.equals(div.getKyokaisouGaitouItiran().getIranState())) {
-                KyokaisoGaitosha kyokaisoGaitosha = new KyokaisoGaitosha(被保険者番号, 最新リンク番号, 最新履歴番号);
-                KyokaisoSochiShinsei kyokaisoSochiShinsei = new KyokaisoSochiShinsei(被保険者番号, 最新リンク番号, 最新履歴番号);
+                KyokaisoGaitosha kyokaisoGaitosha = new KyokaisoGaitosha(被保険者番号, 最新履歴番号, 最新リンク番号);
+                KyokaisoSochiShinsei kyokaisoSochiShinsei = new KyokaisoSochiShinsei(被保険者番号, 最新履歴番号, 最新リンク番号);
                 kyokaisoGaitosha = getHandler(div).editKyokaisoGaitosha(kyokaisoGaitosha);
                 kyokaisoSochiShinsei = getHandler(div).editKyokaisoSochiShinsei(kyokaisoSochiShinsei);
                 gaitoshaModels.add(kyokaisoGaitosha);
@@ -305,7 +304,7 @@ public class KyokaisoGaitoshaPanel {
                 manager.delKyokaisoGaitoshaJoho(kyokaisoGaito, 被保険者番号, new Decimal(最新履歴番号), new Decimal(最新履歴番号));
             }
             div.getCcdKanryoMessage().setSuccessMessage(new RString(
-                    UrInformationMessages.正常終了.getMessage().replace(更新.toString()).evaluate()), RString.EMPTY, RString.EMPTY);
+                    UrInformationMessages.正常終了.getMessage().replace(保存.toString()).evaluate()), RString.EMPTY, RString.EMPTY);
             return ResponseData.of(div).setState(DBU0510011StateName.AfterSave);
         }
 
@@ -339,7 +338,7 @@ public class KyokaisoGaitoshaPanel {
                     最新履歴番号,
                     最新リンク番号,
                     new FlexibleYearMonth(div.getTxtHohenryoNofuFromDate().getValue().seireki().getYearMonth().replace(new RString("."), RString.EMPTY)));
-            hokenryoDankai = getHandler(div).editHokenryoDankai(hokenryoDankai, 最新履歴番号, 最新リンク番号);
+            hokenryoDankai = getHandler(div).editHokenryoDankai(hokenryoDankai);
             models.add(hokenryoDankai);
         } else if (状態_修正.equals(状態)) {
             if (状態_修正.equals(イベント状態)) {
@@ -357,9 +356,7 @@ public class KyokaisoGaitoshaPanel {
                     最新リンク番号,
                     new FlexibleYearMonth(修正前の適用開始年月.getYearMonth().toDateString()));
             KyokaisoHokenryoDankai hokenryoDan = getHandler(div).editHokenryoDankai(
-                    models.get(key).modifiedModel(),
-                    最新履歴番号,
-                    Integer.parseInt(row.getLinkNo().toString()));
+                    models.get(key).modifiedModel());
             models.add(hokenryoDan);
         } else if (状態_削除.equals(状態)) {
             if (状態_修正.equals(イベント状態)) {
@@ -379,7 +376,7 @@ public class KyokaisoGaitoshaPanel {
             models.add(models.get(key).createBuilderForEdit().is論理削除フラグ(true).build());
         }
         ViewStateHolder.put(ViewStateKeys.境界層該当者台帳管理_境界層保険料段階情報, Models.create(models));
-        getHandler(div).onClick_btnKakutei(イベント状態);
+        getHandler(div).onClick_btnKakutei(イベント状態, 最新リンク番号, 最新履歴番号);
         return ResponseData.of(div).respond();
     }
 

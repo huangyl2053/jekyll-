@@ -3,6 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
+
 package jp.co.ndensan.reams.db.dbz.divcontroller.controller.commonchilddiv.NinteiShinseiRenrakusakiJoho;
 
 import java.util.List;
@@ -21,26 +22,25 @@ import jp.co.ndensan.reams.uz.uza.util.serialization.DataPassingConverter;
  * 認定申請連絡先情報のクラスです。
  */
 public class NinteiShinseiRenrakusakiJoho {
-
+    
     private final NinteiShinseiRenrakusakiJohoFinder service;
-
+    
     /**
      * コンストラクタです。
      */
     public NinteiShinseiRenrakusakiJoho() {
         service = NinteiShinseiRenrakusakiJohoFinder.createInstance();
     }
-
+    
     /**
      * 認定申請連絡先情報の初期化処理です。
-     *
      * @param div 画面情報
      * @return ResponseData<NinteiShinseiRenrakusakiJohoDiv>
      */
     public ResponseData<NinteiShinseiRenrakusakiJohoDiv> intialize(NinteiShinseiRenrakusakiJohoDiv div) {
         // TODO QA #78455 支所管理判定不明です、支所情報の取得不明です。
         getHandler(div).setClear();
-        NinteiShinseiBusinessCollection collection = DataPassingConverter.deserialize(div.getHdnRenrakusakiJoho(),
+        NinteiShinseiBusinessCollection collection = DataPassingConverter.deserialize(div.getNinteiShinseiBusinessCollection(),
                 NinteiShinseiBusinessCollection.class);
         if (SubGyomuCode.DBE認定支援.equals(collection.getHdnDatabaseSubGyomuCode())) {
             List<NinteiShinseiRenrakusakiKihon> ninteiShinseiList = service
@@ -54,7 +54,7 @@ public class NinteiShinseiRenrakusakiJoho {
         }
         return ResponseData.of(div).respond();
     }
-
+    
     private NinteiShinseiRenrakusakiJohoHandler getHandler(NinteiShinseiRenrakusakiJohoDiv div) {
         return new NinteiShinseiRenrakusakiJohoHandler(div);
     }

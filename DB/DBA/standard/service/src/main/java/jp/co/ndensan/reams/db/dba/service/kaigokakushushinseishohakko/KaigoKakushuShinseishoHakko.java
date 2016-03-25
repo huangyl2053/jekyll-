@@ -63,7 +63,6 @@ public class KaigoKakushuShinseishoHakko {
     private static final RString DBB800003_種類 = new RString("介護保険料納付額証明書交付申請書");
     private static final RString DBD800001_種類 = new RString("介護保険負担限度額認定申請書");
     private static final RString DBD800002_種類 = new RString("介護保険利用者負担額減額・免除申請書");
-    //private static final RString DBD800003_種類 = new RString("介護保険利用者負担額減額・免除申請書(旧措置者用）");
     private static final RString DBD800004_種類 = new RString("介護保険特定負担限度額申請書");
     private static final RString DBD800005_種類 = new RString("訪問介護利用者負担額減額申請書");
     private static final RString DBD800006_種類 = new RString("社会福祉法人等利用者負担軽減対象確認申請書");
@@ -71,13 +70,8 @@ public class KaigoKakushuShinseishoHakko {
     private static final RString DBD800008_種類 = new RString("給付額減額免除申請書");
     private static final RString DBD800009_種類 = new RString("支払方法変更（償還払い化）終了申請書");
     private static final RString DBC800001_種類 = new RString("介護保険受領委任払い取扱事業者登録申請書");
-    //private static final RString DBC800002_種類 = new RString("介護保険受領委任払い契約申請書(福祉用具）");
-    //private static final RString DBC800003_種類 = new RString("介護保険受領委任払い契約申請書(住宅改修）");
     private static final RString DBC800004_種類 = new RString("居宅（介護予防）サービス計画作成依頼（変更）届出書");
     private static final RString DBC800008_種類 = new RString("介護保険居宅介護サービス計画の作成（自己作成）");
-    //private static final RString DBC800005_種類 = new RString("福祉用具購入費申請書");
-    //private static final RString DBC800006_種類 = new RString("住宅改修費事前支給申請書");
-    //private static final RString DBC800007_種類 = new RString("住宅改修費支給申請書");
     private static final RString DBC800009_種類 = new RString("介護保険償還払支給申請書");
     private static final RString DBC800010_種類 = new RString("介護保険償還払受領委任払申請書");
     private static final RString DBC800011_種類 = new RString("介護保険居宅介護（予防）住宅改修費事前（受領委任払）申請書");
@@ -182,7 +176,6 @@ public class KaigoKakushuShinseishoHakko {
                 RiyoshaFutangakuGengakuMenjyoShinseisho riyoshaFutangakuGengakuMenjyoShinseisho
                         = RiyoshaFutangakuGengakuMenjyoShinseisho.createInstance();
                 riyoshaFutangakuGengakuMenjyoShinseisho.createKaigoHokenRiyoshaFutangakuGengakuMenjyoShinseishoChohyo(識別コード, 被保険者番号);
-
             }
             if (ShinseishoChohyoShurui.介護保険特定負担限度額申請書.getコード().equals(entity.get申請書ID())) {
                 TokuteifutanGendogakuShinseisho tokuteifutanGendogakuShinseisho = new TokuteifutanGendogakuShinseisho();
@@ -234,9 +227,6 @@ public class KaigoKakushuShinseishoHakko {
                 KyotakuServiceKeikakuSakuseiIraiTodokedesho kyotakuServiceKeikakuSakuseiIraiTodokedesho
                         = new KyotakuServiceKeikakuSakuseiIraiTodokedesho();
                 kyotakuServiceKeikakuSakuseiIraiTodokedesho.createKyotakuServiceKeikakuSakuseiIraiTodokedesho(識別コード, 被保険者番号);
-            }
-            if (ShinseishoChohyoShurui.介護保険居宅介護サービス計画の作成_自己作成.getコード().equals(entity.get申請書ID())) {
-                // TODO Redmine#76292 設計書を提供されてない
             }
             if (ShinseishoChohyoShurui.介護保険償還払支給申請書.getコード().equals(entity.get申請書ID())) {
                 ShoukanbaraiShikyuShinseishoChohyo shoukanbaraiShikyuShinseishoChohyo = new ShoukanbaraiShikyuShinseishoChohyo();
@@ -463,15 +453,6 @@ public class KaigoKakushuShinseishoHakko {
             kaigoKakushuShinseishoHakkoEntity.set業務(給付);
             kaigoKakushuShinseishoHakkoEntity.set申請書(
                     ShinseishoChohyoShurui.居宅_介護予防_サービス計画作成依頼_変更_届出書.get名称());
-            kaigoKakushuShinseishoHakkoEntityList.add(kaigoKakushuShinseishoHakkoEntity);
-        }
-        if (DBC800008_種類.equals(ShinseishoChohyoShurui.介護保険居宅介護サービス計画の作成_自己作成.get名称())) {
-            KaigoKakushuShinseishoHakkoEntity kaigoKakushuShinseishoHakkoEntity = new KaigoKakushuShinseishoHakkoEntity();
-            kaigoKakushuShinseishoHakkoEntity.set申請書ID(
-                    ShinseishoChohyoShurui.介護保険居宅介護サービス計画の作成_自己作成.getコード());
-            kaigoKakushuShinseishoHakkoEntity.set業務(給付);
-            kaigoKakushuShinseishoHakkoEntity.set申請書(
-                    ShinseishoChohyoShurui.介護保険居宅介護サービス計画の作成_自己作成.get名称());
             kaigoKakushuShinseishoHakkoEntityList.add(kaigoKakushuShinseishoHakkoEntity);
         }
         if (DBC800009_種類.equals(ShinseishoChohyoShurui.介護保険償還払支給申請書.get名称())) {

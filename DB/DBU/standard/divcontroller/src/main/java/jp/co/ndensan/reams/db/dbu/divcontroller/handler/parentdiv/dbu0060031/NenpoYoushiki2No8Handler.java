@@ -5,8 +5,10 @@
  */
 package jp.co.ndensan.reams.db.dbu.divcontroller.handler.parentdiv.dbu0060031;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.LinkedHashSet;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbu.business.core.basic.JigyoHokokuTokeiData;
@@ -89,11 +91,19 @@ public class NenpoYoushiki2No8Handler {
         List<Decimal> 行番list = new ArrayList<>();
         List<JigyoHokokuTokeiData> 事業報告集計一覧データリスト = JigyoHokokuNenpoHoseiHakoManager.createInstance().
                 getJigyoHokokuNenpoDetal(jigyoHokokuNenpoSearch).records();
-        Collections.sort(事業報告集計一覧データリスト);
+        Collections.sort(事業報告集計一覧データリスト, new DateComparator());
         for (JigyoHokokuTokeiData list : 事業報告集計一覧データリスト) {
             行番list.add(list.get縦番号());
         }
         return new ArrayList<>(new LinkedHashSet<>(行番list));
+    }
+
+    private static class DateComparator implements Comparator<JigyoHokokuTokeiData>, Serializable {
+
+        @Override
+        public int compare(JigyoHokokuTokeiData o1, JigyoHokokuTokeiData o2) {
+            return o1.get縦番号().compareTo(o2.get縦番号());
+        }
     }
 
     /**
