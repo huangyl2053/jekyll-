@@ -8,10 +8,9 @@ package jp.co.ndensan.reams.db.dba.business.report.nenreitotatsukakuninlist;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import lombok.Getter;
 
-
 /**
  *
- * @author yuyong3
+ * 住基連動登録リスト帳票NenreitotatsuKakuninListItemです。
  */
 @Getter
 @SuppressWarnings("PMD.UnusedPrivateField")
@@ -76,58 +75,58 @@ public class NenreitotatsuKakuninListItem {
      *
      * @param printTimeStamp 印刷日時
      * @param taishoJohotitle 対象情報タイトル
-     * @param	shichosonCode	市町村コード
-     * @param	shichosonName	市町村名
-     * @param	shutsuryokujun1	並び順１
-     * @param	shutsuryokujun2	並び順２
-     * @param	shutsuryokujun3	並び順３
-     * @param	shutsuryokujun4	並び順４
-     * @param	shutsuryokujun5	並び順５
-     * @param	kaipage1	改頁１
-     * @param	kaipage2	改頁２
-     * @param	kaipage3	改頁３
-     * @param	kaipage4	改頁４
-     * @param	kaipage5	改頁５
-     * @param	kaishiTitle	開始タイトル
-     * @param	shuryoTitle	終了タイトル
-     * @param	kubunTitle	区分タイトル
-     * @param	idoJohoTitle1	異動情報タイトル1
-     * @param	idoJohoTitle2	異動情報タイトル2
-     * @param	idoJohoTitle3	異動情報タイトル3
-     * @param	kaishiYmdTitle	開始年月日タイトル
-     * @param	shuryoYmdTitle	終了年月日タイトル
-     * @param	idoJohoTitle4	異動情報タイトル4
-     * @param	idoJohoTitle5	異動情報タイトル5
-     * @param	idoJohoTitle6	異動情報タイトル6
-     * @param	listUpper_1	世帯コード
-     * @param	listUpper_2	被保険者カナ氏名
-     * @param	listUpper_3	取得情報．前．事由
-     * @param	listUpper_4	取得情報．前．異動年月日
-     * @param	listUpper_5	取得情報．前．届出年月日
-     * @param	listUpper_6	開始年月日データ．前
-     * @param	listUpper_7	喪失情報．前．事由
-     * @param	listUpper_8	喪失情報．前．異動年月日
-     * @param	listUpper_9	喪失情報．前．届出年月日
-     * @param	listUpper_10	終了年月日データ．前
-     * @param	listUpper_11	区分．前．資格
-     * @param	listUpper_12	異動情報データ1
-     * @param	listUpper_13	異動情報データ2
-     * @param	listUpper_14	異動情報データ3
-     * @param	listHihokenshaNo_1	被保険者番号
-     * @param	listLower_1	識別コード
-     * @param	listLower_2	被保険者氏名
-     * @param	listLower_3	取得情報．後．事由
-     * @param	listLower_4	取得情報．後．異動年月日
-     * @param	listLower_5	取得情報．後．届出年月日
-     * @param	listLower_6	開始年月日データ．後
-     * @param	listLower_7	喪失情報．後．事由
-     * @param	listLower_8	喪失情報．後．異動年月日
-     * @param	listLower_9	喪失情報．後．届出年月日
-     * @param	listLower_10	終了年月日データ．後
-     * @param	listLower_11	区分．後．資格
-     * @param	listLower_12	異動情報データ4
-     * @param	listLower_13	異動情報データ5
-     * @param	listLower_14	異動情報データ6
+     * @param shichosonCode 市町村コード
+     * @param shichosonName 市町村名
+     * @param shutsuryokujun1 並び順１
+     * @param shutsuryokujun2 並び順２
+     * @param shutsuryokujun3 並び順３
+     * @param shutsuryokujun4 並び順４
+     * @param shutsuryokujun5 並び順５
+     * @param kaipage1 改頁１
+     * @param kaipage2 改頁２
+     * @param kaipage3 改頁３
+     * @param kaipage4 改頁４
+     * @param kaipage5 改頁５
+     * @param kaishiTitle 開始タイトル
+     * @param shuryoTitle 終了タイトル
+     * @param kubunTitle 区分タイトル
+     * @param idoJohoTitle1 異動情報タイトル1
+     * @param idoJohoTitle2 異動情報タイトル2
+     * @param idoJohoTitle3 異動情報タイトル3
+     * @param kaishiYmdTitle 開始年月日タイトル
+     * @param shuryoYmdTitle 終了年月日タイトル
+     * @param idoJohoTitle4 異動情報タイトル4
+     * @param idoJohoTitle5 異動情報タイトル5
+     * @param idoJohoTitle6 異動情報タイトル6
+     * @param listUpper_1 世帯コード
+     * @param listUpper_2 被保険者カナ氏名
+     * @param listUpper_3 取得情報．前．事由
+     * @param listUpper_4 取得情報．前．異動年月日
+     * @param listUpper_5 取得情報．前．届出年月日
+     * @param listUpper_6 開始年月日データ．前
+     * @param listUpper_7 喪失情報．前．事由
+     * @param listUpper_8 喪失情報．前．異動年月日
+     * @param listUpper_9 喪失情報．前．届出年月日
+     * @param listUpper_10 終了年月日データ．前
+     * @param listUpper_11 区分．前．資格
+     * @param listUpper_12 異動情報データ1
+     * @param listUpper_13 異動情報データ2
+     * @param listUpper_14 異動情報データ3
+     * @param listHihokenshaNo_1 被保険者番号
+     * @param listLower_1 識別コード
+     * @param listLower_2 被保険者氏名
+     * @param listLower_3 取得情報．後．事由
+     * @param listLower_4 取得情報．後．異動年月日
+     * @param listLower_5 取得情報．後．届出年月日
+     * @param listLower_6 開始年月日データ．後
+     * @param listLower_7 喪失情報．後．事由
+     * @param listLower_8 喪失情報．後．異動年月日
+     * @param listLower_9 喪失情報．後．届出年月日
+     * @param listLower_10 終了年月日データ．後
+     * @param listLower_11 区分．後．資格
+     * @param listLower_12 異動情報データ4
+     * @param listLower_13 異動情報データ5
+     * @param listLower_14 異動情報データ6
      */
     public NenreitotatsuKakuninListItem(
             RString printTimeStamp,

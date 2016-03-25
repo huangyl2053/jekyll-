@@ -7,32 +7,41 @@ package jp.co.ndensan.reams.db.dba.business.report.nenreitotatsukakuninlist;
 
 import java.util.List;
 import jp.co.ndensan.reams.db.dba.entity.report.nenreitotatsukakuninlist.NenreitotatsuKakuninListReportSource;
-
 import jp.co.ndensan.reams.uz.uza.report.Report;
 import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
 import lombok.NonNull;
 
 /**
  *
- * @author yuyong3
+ * NenreitotatsuKakuninListReportです。
  */
 public class NenreitotatsuKakuninListReport extends Report<NenreitotatsuKakuninListReportSource> {
 
     private final List<NenreitotatsuKakuninListItem> targets;
 
+    /**
+     * コンストラクタです。
+     *
+     * @param targets NenreitotatsuKakuninListItem
+     */
     protected NenreitotatsuKakuninListReport(List<NenreitotatsuKakuninListItem> targets) {
         this.targets = targets;
 
     }
 
-    public static NenreitotatsuKakuninListReport createFrom(@NonNull List<NenreitotatsuKakuninListItem> NenreitotatsuKakuninListItems) {
-        return new NenreitotatsuKakuninListReport(NenreitotatsuKakuninListItems);
+    /**
+     *
+     * @param nenreitotatsuKakuninListItems NenreitotatsuKakuninListItem
+     * @return NenreitotatsuKakuninListReport
+     */
+    public static NenreitotatsuKakuninListReport createFrom(@NonNull List<NenreitotatsuKakuninListItem> nenreitotatsuKakuninListItems) {
+        return new NenreitotatsuKakuninListReport(nenreitotatsuKakuninListItems);
 
     }
 
     /**
      *
-     * @param reportSourceWriter
+     * @param reportSourceWriter NenreitotatsuKakuninListReportSource
      */
     @Override
     public void writeBy(ReportSourceWriter<NenreitotatsuKakuninListReportSource> reportSourceWriter) {

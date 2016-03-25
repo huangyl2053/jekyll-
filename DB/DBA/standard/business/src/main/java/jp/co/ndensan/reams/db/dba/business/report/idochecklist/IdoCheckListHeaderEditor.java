@@ -7,17 +7,13 @@ package jp.co.ndensan.reams.db.dba.business.report.idochecklist;
 
 import jp.co.ndensan.reams.db.dba.entity.report.idochecklist.IdoCheckListReportSource;
 
-
-
 /**
  *
- * @author yuyong3
+ * 住基連動登録リスト帳票IdoCheckListHeaderEditorです。
  */
 class IdoCheckListHeaderEditor implements IIdoCheckListEditor {
 
     private final IdoCheckListItem item;
-
-
 
     protected IdoCheckListHeaderEditor(IdoCheckListItem item) {
         this.item = item;
@@ -30,9 +26,9 @@ class IdoCheckListHeaderEditor implements IIdoCheckListEditor {
     }
 
     private void editHeader(IdoCheckListReportSource source) {
-    source.taishoJohotitle=item.getTaishoJohotitle();
-    source.printTimeStamp=item.getPrintTimeStamp();
-    
+        source.taishoJohotitle = item.getTaishoJohotitle();
+        source.printTimeStamp = item.getPrintTimeStamp();
+
     }
 
 }
