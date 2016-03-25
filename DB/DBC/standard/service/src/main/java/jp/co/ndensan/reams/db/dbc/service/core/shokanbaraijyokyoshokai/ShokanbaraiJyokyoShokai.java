@@ -148,6 +148,7 @@ public class ShokanbaraiJyokyoShokai {
      * @param dbT3052Dac DbT3052ShokanShoteiShikkanShisetsuRyoyoDac
      * @param dbT3043Dac DbT3043ShokanShokujiHiyoDac
      * @param dbT3039Dac DbT3039ShokanMeisaiDac
+     * @param dbT7131Dac DbT7131KaigoServiceNaiyouDac
      */
     public ShokanbaraiJyokyoShokai(MapperProvider mapperProvider,
             DbT3034ShokanShinseiDac dbT3034Dac,
@@ -1042,7 +1043,7 @@ public class ShokanbaraiJyokyoShokai {
      *
      * @param サービス種類コード KaigoServiceShuruiCode
      * @param サービス項目コード RString
-     * @param サービス年月 FlexibleYearMonth
+     * @param 基準年月 FlexibleYearMonth
      * @return List<KaigoServiceNaiyou>
      */
     public List<KaigoServiceNaiyou> getServiceCodeInfo(
