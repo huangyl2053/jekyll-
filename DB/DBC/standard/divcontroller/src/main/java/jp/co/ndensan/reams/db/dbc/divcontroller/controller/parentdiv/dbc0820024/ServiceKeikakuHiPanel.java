@@ -59,7 +59,7 @@ public class ServiceKeikakuHiPanel {
      */
     public ResponseData<ServiceKeikakuHiPanelDiv> onLoad(ServiceKeikakuHiPanelDiv div) {
         SyokanbaraihishikyushinseiketteParameter param = new SyokanbaraihishikyushinseiketteParameter(
-                new HihokenshaNo("000000003"), new FlexibleYearMonth(new RString("201501")),
+                new HihokenshaNo("000000011"), new FlexibleYearMonth(new RString("201501")),
                 new RString("1111"), new JigyoshaNo("3333"), new RString("2222"),
                 new RString("4444"), null);
         SikibetuNokennsakuki key = new SikibetuNokennsakuki(new RString("0004"),
