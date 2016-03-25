@@ -105,10 +105,10 @@ public final class ChosaItakusakiAndChosainGuideParameter {
         this.調査員状況無効フラグ = 調査員状況無効フラグ;
         this.市町村コード = 市町村コード;
         this.サブ業務コード = サブ業務コード;
-        this.地区コード=地区コード;
-        this.地区コードフラグ=地区コードフラグ;
-        this.認定調査区分=認定調査区分;
-        this.認定調査区分フラグ=認定調査区分フラグ;
+        this.地区コード = 地区コード;
+        this.地区コードフラグ = 地区コードフラグ;
+        this.認定調査区分 = 認定調査区分;
+        this.認定調査区分フラグ = 認定調査区分フラグ;
     }
 
     /**
@@ -162,7 +162,7 @@ public final class ChosaItakusakiAndChosainGuideParameter {
         boolean 認定調査状況無効フラグ = false;
         boolean 調査員状況無効フラグ = false;
         boolean 地区コードフラグ = false;
-        boolean 認定調査区分フラグ = false; 
+        boolean 認定調査区分フラグ = false;
         if (!RString.isNullOrEmpty(認定調査委託先コードFROM)) {
             認定調査委託先コードFROMフラグ = true;
         }
@@ -203,11 +203,11 @@ public final class ChosaItakusakiAndChosainGuideParameter {
         if (saidaiHyojiKensu != null) {
             usesSaidaiHyojiKensu = true;
         }
-        if(!RString.isNullOrEmpty(地区コード)){
-            地区コードフラグ= true;
+        if (!RString.isNullOrEmpty(地区コード)) {
+            地区コードフラグ = true;
         }
-        if(!RString.isNullOrEmpty(認定調査区分)){
-            認定調査区分フラグ= true;
+        if (!RString.isNullOrEmpty(認定調査区分)) {
+            認定調査区分フラグ = true;
         }
         return new ChosaItakusakiAndChosainGuideParameter(
                 認定調査委託先コードFROMフラグ,

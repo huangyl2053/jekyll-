@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbc.business.report.kagoketteikohifutanshain.KagoKetteiKohifutanshaInItem;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.kagoketteikohifutanshain.KagoKetteiKohifutanshaInEntity;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.uz.uza.lang.EraType;
 import jp.co.ndensan.reams.uz.uza.lang.FillType;
 import jp.co.ndensan.reams.uz.uza.lang.FirstYear;
@@ -78,10 +79,13 @@ public class KagoKetteiTsuchishoJohoTorikomiIchiranhyoKouhiFutanshabun {
             itemList.add(item);
         } else {
             int no = 1;
+            HihokenshaNo 被保険者番号 = 過誤決定通知書情報取込一覧表リスト.get(0).get被保険者番号();
             for (KagoKetteiKohifutanshaInEntity entity : 過誤決定通知書情報取込一覧表リスト) {
+                if (!被保険者番号.equals(entity.get被保険者番号())) {
+                    no++;
+                }
                 itemList.add(createItem(entity, no,
                         並び順の１件目, 並び順の２件目, 並び順の３件目, 並び順の４件目, 並び順の５件目, 改頁));
-                no++;
             }
         }
         return itemList;
@@ -129,7 +133,7 @@ public class KagoKetteiTsuchishoJohoTorikomiIchiranhyoKouhiFutanshabun {
                 null == 並び順の３件目 ? RString.EMPTY : 並び順の３件目,
                 null == 並び順の４件目 ? RString.EMPTY : 並び順の４件目,
                 null == 並び順の５件目 ? RString.EMPTY : 並び順の５件目,
-                null == 改頁 ? RString.EMPTY : 改頁,
+                null == 改頁 || 改頁.isEmpty() ? entity.get被保険者番号().value() : 改頁,
                 RString.EMPTY, RString.EMPTY, RString.EMPTY, RString.EMPTY,
                 strNO, entity.get取扱年月().wareki().
                 separator(Separator.PERIOD).fillType(FillType.BLANK).toDateString(),

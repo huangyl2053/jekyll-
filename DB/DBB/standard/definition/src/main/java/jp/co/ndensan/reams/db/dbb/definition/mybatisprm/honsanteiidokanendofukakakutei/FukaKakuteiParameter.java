@@ -13,26 +13,28 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 /**
  * 本算定異動（過年度）賦課確定（削除込）用パラメータです
  */
+@lombok.Getter
+@SuppressWarnings("PMD.UnusedPrivateField")
 public class FukaKakuteiParameter {
 
-    FlexibleYear choteiNendo;
-    FlexibleYear fukaNendo;
-    TsuchishoNo tsuchishoNo;
-    int rirekiNo;
-    int ki;
-    RString choshuHouhou;
-    YMDHMS choteiNichiji;
+    private final FlexibleYear choteiNendo;
+    private final FlexibleYear fukaNendo;
+    private final TsuchishoNo tsuchishoNo;
+    private final int rirekiNo;
+    private final int ki;
+    private final RString choshuHouhou;
+    private final YMDHMS choteiNichiji;
 
     /**
      * コンストラクタです。
      *
-     * @param choteiNendo
-     * @param fukaNendo
-     * @param tsuchishoNo
-     * @param rirekiNo
-     * @param ki
-     * @param choshuHouhou
-     * @param choteiNichiji
+     * @param choteiNendo FlexibleYear
+     * @param fukaNendo FlexibleYear
+     * @param tsuchishoNo TsuchishoNo
+     * @param rirekiNo int
+     * @param ki int
+     * @param choshuHouhou RString
+     * @param choteiNichiji YMDHMS
      */
     public FukaKakuteiParameter(
             FlexibleYear choteiNendo,

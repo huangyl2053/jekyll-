@@ -5,16 +5,18 @@
  */
 package jp.co.ndensan.reams.db.dbb.business.core.nengakukeisan;
 
-import jp.co.ndensan.reams.db.dbb.business.core.nengakukeisan.param.NengakuHokenryoKeisanParameter;
-import jp.co.ndensan.reams.db.dbb.business.core.nengakukeisan.param.RankBetsuKijunKingaku;
-import jp.co.ndensan.reams.db.dbb.business.core.nengakukeisan.param.NengakuSeigyoJoho;
-import jp.co.ndensan.reams.db.dbb.business.core.nengakukeisan.hasuchosei.HasuChoseiFactory;
-import jp.co.ndensan.reams.db.dbb.business.core.nengakukeisan.hasuchosei.IHasuChosei;
-import jp.co.ndensan.reams.db.dbb.business.core.hokenryodankai.core.HokenryoDankai;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
+import jp.co.ndensan.reams.db.dbb.business.core.hokenryodankai.core.HokenryoDankai;
+import jp.co.ndensan.reams.db.dbb.business.core.nengakukeisan.hasuchosei.HasuChoseiFactory;
+import jp.co.ndensan.reams.db.dbb.business.core.nengakukeisan.hasuchosei.IHasuChosei;
+import jp.co.ndensan.reams.db.dbb.business.core.nengakukeisan.param.NengakuHokenryoKeisanParameter;
+import jp.co.ndensan.reams.db.dbb.business.core.nengakukeisan.param.NengakuSeigyoJoho;
+import jp.co.ndensan.reams.db.dbb.business.core.nengakukeisan.param.RankBetsuKijunKingaku;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 
@@ -33,7 +35,7 @@ public class NengakuHokenryoKeisan {
      * 年額計算
      *
      * @param nengakuHokenryoKeisanParameter 保険料段階判定パラメータ
-     * @return
+     * @return NengakuHokenryo
      */
     public NengakuHokenryo calculate年額保険料(NengakuHokenryoKeisanParameter nengakuHokenryoKeisanParameter) {
 
@@ -45,10 +47,14 @@ public class NengakuHokenryoKeisan {
         //NengakuHokenryoHoji nengakuhokenryohoji = new NengaokuHokenryoHoji();
         Map<RString, HokenryoDankai> hokenryoDankaiMap = nengakuHokenryoKeisanParameter.get年額賦課根拠().get月別保険料段階().createHokenryoDankaiMap();
         Map<RString, RString> rankMap = nengakuHokenryoKeisanParameter.get年額賦課根拠().createRankMap();
+        Set<Map.Entry<RString, HokenryoDankai>> set = hokenryoDankaiMap.entrySet();
+        Iterator<Map.Entry<RString, HokenryoDankai>> it = set.iterator();
 
-        for (RString tsuki : hokenryoDankaiMap.keySet()) {
-            if (kikannaiShikakuUmu(nengakuHokenryoKeisanParameter, tsuki)) {
-                dankaiShukei(hokenryoDankaiMap.get(tsuki).getSystemDankai(), rankMap.get(tsuki));
+        if (it.hasNext()) {
+            Map.Entry<RString, HokenryoDankai> entry = it.next();
+            RString key = entry.getKey();
+            if (kikannaiShikakuUmu(nengakuHokenryoKeisanParameter, key)) {
+                dankaiShukei(hokenryoDankaiMap.get(key).getSystemDankai(), rankMap.get(key));
             }
         }
 
@@ -114,11 +120,10 @@ public class NengakuHokenryoKeisan {
         boolean umuHantei = false;
         for (idx = 0; idx < nengakuHokenryoHojiList.size(); idx++) {
             if (nengakuHokenryoHojiList.get(idx).getDankai().equals(hokenryoDankai)) {
-                if (nengakuHokenryoHojiList.get(idx).getRank() == null) {
-                    if (rank == null) {
-                        umuHantei = true;
-                        break;
-                    }
+                if (nengakuHokenryoHojiList.get(idx).getRank() == null
+                        && rank == null) {
+                    umuHantei = true;
+                    break;
                 } else {
                     if (nengakuHokenryoHojiList.get(idx).getRank().equals(rank)) {
                         umuHantei = true;
@@ -167,7 +172,15 @@ public class NengakuHokenryoKeisan {
         }
 
         RankBetsuKijunKingaku rankbetsuSeigyoJoho = seigyoJoho.getランク別制御情報().get(rank);
-        Decimal result;
+        Decimal result = new Decimal(0);
+
+        result = getResult1(result, nengakuHokenryoHoji, rankbetsuSeigyoJoho);
+        result = getResult2(result, nengakuHokenryoHoji, rankbetsuSeigyoJoho);
+
+        return result;
+    }
+
+    private Decimal getResult1(Decimal result, NengaokuHokenryoHoji nengakuHokenryoHoji, RankBetsuKijunKingaku rankbetsuSeigyoJoho) {
 
         switch (String.valueOf(nengakuHokenryoHoji.getDankai())) {
             case "1":
@@ -200,40 +213,48 @@ public class NengakuHokenryoKeisan {
             case "10":
                 result = rankbetsuSeigyoJoho.getランク基準金額10();
                 break;
-            case "11":
-                result = rankbetsuSeigyoJoho.getランク基準金額11();
-                break;
-            case "12":
-                result = rankbetsuSeigyoJoho.getランク基準金額12();
-                break;
-            case "13":
-                result = rankbetsuSeigyoJoho.getランク基準金額13();
-                break;
-            case "14":
-                result = rankbetsuSeigyoJoho.getランク基準金額14();
-                break;
-            case "15":
-                result = rankbetsuSeigyoJoho.getランク基準金額15();
-                break;
-            case "16":
-                result = rankbetsuSeigyoJoho.getランク基準金額16();
-                break;
-            case "17":
-                result = rankbetsuSeigyoJoho.getランク基準金額17();
-                break;
-            case "18":
-                result = rankbetsuSeigyoJoho.getランク基準金額18();
-                break;
-            case "19":
-                result = rankbetsuSeigyoJoho.getランク基準金額19();
-                break;
-            case "20":
-                result = rankbetsuSeigyoJoho.getランク基準金額20();
-                break;
             default:
                 result = new Decimal(0);
         }
         return result;
     }
 
+    private Decimal getResult2(Decimal result, NengaokuHokenryoHoji nengakuHokenryoHoji, RankBetsuKijunKingaku rankbetsuSeigyoJoho) {
+        Decimal newResult;
+        switch (String.valueOf(nengakuHokenryoHoji.getDankai())) {
+            case "11":
+                newResult = rankbetsuSeigyoJoho.getランク基準金額11();
+                break;
+            case "12":
+                newResult = rankbetsuSeigyoJoho.getランク基準金額12();
+                break;
+            case "13":
+                newResult = rankbetsuSeigyoJoho.getランク基準金額13();
+                break;
+            case "14":
+                newResult = rankbetsuSeigyoJoho.getランク基準金額14();
+                break;
+            case "15":
+                newResult = rankbetsuSeigyoJoho.getランク基準金額15();
+                break;
+            case "16":
+                newResult = rankbetsuSeigyoJoho.getランク基準金額16();
+                break;
+            case "17":
+                newResult = rankbetsuSeigyoJoho.getランク基準金額17();
+                break;
+            case "18":
+                newResult = rankbetsuSeigyoJoho.getランク基準金額18();
+                break;
+            case "19":
+                newResult = rankbetsuSeigyoJoho.getランク基準金額19();
+                break;
+            case "20":
+                newResult = rankbetsuSeigyoJoho.getランク基準金額20();
+                break;
+            default:
+                newResult = result;
+        }
+        return newResult;
+    }
 }

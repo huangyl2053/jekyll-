@@ -13,7 +13,7 @@ import jp.co.ndensan.reams.db.dbb.business.core.tsuchishohakkogoidosha.TsuchiSho
 import jp.co.ndensan.reams.db.dbb.business.report.hakkogoidotaishoshaichiran.HakkogoIdoTaishoshaIchiranItem;
 import jp.co.ndensan.reams.db.dbb.business.report.hakkogoidotaishoshaichiran.HakkogoIdoTaishoshaIchiranProperty;
 import jp.co.ndensan.reams.db.dbb.business.report.hakkogoidotaishoshaichiran.HakkogoIdoTaishoshaIchiranReport;
-import jp.co.ndensan.reams.db.dbb.definition.reportId.ReportIdDBB;
+import jp.co.ndensan.reams.db.dbb.definition.reportid.ReportIdDBB;
 import jp.co.ndensan.reams.db.dbb.entity.report.hakkogoidotaishoshaichiran.HakkogoIdoTaishoshaIchiranSource;
 import jp.co.ndensan.reams.ur.urz.business.core.association.Association;
 import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;

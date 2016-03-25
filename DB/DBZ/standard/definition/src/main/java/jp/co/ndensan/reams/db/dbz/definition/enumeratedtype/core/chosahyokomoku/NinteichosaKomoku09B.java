@@ -332,7 +332,7 @@ public enum NinteichosaKomoku09B {
      *
      * @param code 認定調査特記事項のコード
      * @return {@code code} に対応する認定調査特記事項
-     * @throws IllegalArgumentException
+     * @throws IllegalArgumentException IllegalArgumentException
      */
     public static NinteichosaKomoku09B toValue(RString code) throws IllegalArgumentException {
 

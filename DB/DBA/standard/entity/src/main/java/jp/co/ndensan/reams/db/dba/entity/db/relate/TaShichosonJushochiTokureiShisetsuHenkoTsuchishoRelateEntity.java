@@ -21,7 +21,7 @@ public class TaShichosonJushochiTokureiShisetsuHenkoTsuchishoRelateEntity {
     private FlexibleDate 入所年月日;
     private RString 事業者名称;
     private RString 電話番号;
-    private RString FAX番号;
+    private RString fax番号;
     private YubinNo 郵便番号;
     private RString 事業者住所;
 

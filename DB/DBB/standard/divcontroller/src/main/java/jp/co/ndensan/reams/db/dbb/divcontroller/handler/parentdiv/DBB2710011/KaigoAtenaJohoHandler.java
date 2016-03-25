@@ -252,7 +252,7 @@ public class KaigoAtenaJohoHandler {
             throw new ApplicationException(DbbErrorMessages.被保険者でないため変更不可.getMessage());
         }
         TokubetuChosyutaisyosyaTorokuManager 特別徴収対象者登録Manager = TokubetuChosyutaisyosyaTorokuManager.createInstance();
-        FlexibleYear 賦課年度 = ViewStateHolder.get(DBB2710011ViewStateKey.賦課年度, FlexibleYear.class);;
+        FlexibleYear 賦課年度 = ViewStateHolder.get(DBB2710011ViewStateKey.賦課年度, FlexibleYear.class);
         //画面DIV．被保番号
         HihokenshaNo 被保険者番号 = new HihokenshaNo("12");
         RString 基礎年金番号 = div.getNenkinJohoKensaku().getTxtKisoNenkinNo().getValue();

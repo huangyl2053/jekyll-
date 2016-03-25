@@ -55,7 +55,7 @@ class ChosahyoSaiCheckhyoEditor implements IChosahyoSaiCheckhyoEditor {
         source.title = item.getTitle();
         source.hihokenshaNo = item.getHihokenshaNo();
         source.hihokenshaName = item.getHihokenshaName();
-        source.PageCount = item.getPageCount();
+        source.pageCount = item.getPageCount();
         source.printTimeStamp = item.getPrintTimeStamp();
         source.zenkaiIchijihanteikekka = item.getZenkaiIchijihanteikekka();
         source.konkaiIchijihanteikekka = item.getKonkaiIchijihanteikekka();

@@ -3,7 +3,7 @@ package jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE9020001;
  * このコードはツールによって生成されました。
  * このファイルへの変更は、以下の状況下で不正な動作の原因になったり、
  * コードが再生成されるときに損失したりします。
- * Thu Mar 10 14:55:11 CST 2016 
+ * Thu Mar 24 15:13:51 CST 2016 
  */
 
 
@@ -24,11 +24,12 @@ public class dgShujiiIchiran_Row extends DataRow {
 
     private RString jotai;
     private RString shichoson;
+    private TextBoxCode shujiiCode;
     private RString shujiiShimei;
     private RString shujiiKanaShimei;
-    private TextBoxCode shujiiCode;
     private TextBoxCode shujiiIryoKikanCode;
     private RString shujiiIryoKikan;
+    private RString seibetsu;
     private RString shinryoka;
     private RString shiteii;
     private RString jokyoFlag;
@@ -36,18 +37,18 @@ public class dgShujiiIchiran_Row extends DataRow {
     private RString jusho;
     private RString telNo;
     private RString faxNo;
-    private RString seibetsu;
     private RString shichosonCode;
 
     public dgShujiiIchiran_Row() {
         super();
         this.jotai = RString.EMPTY;
         this.shichoson = RString.EMPTY;
+        this.shujiiCode = new TextBoxCode();
         this.shujiiShimei = RString.EMPTY;
         this.shujiiKanaShimei = RString.EMPTY;
-        this.shujiiCode = new TextBoxCode();
         this.shujiiIryoKikanCode = new TextBoxCode();
         this.shujiiIryoKikan = RString.EMPTY;
+        this.seibetsu = RString.EMPTY;
         this.shinryoka = RString.EMPTY;
         this.shiteii = RString.EMPTY;
         this.jokyoFlag = RString.EMPTY;
@@ -55,15 +56,15 @@ public class dgShujiiIchiran_Row extends DataRow {
         this.jusho = RString.EMPTY;
         this.telNo = RString.EMPTY;
         this.faxNo = RString.EMPTY;
-        this.seibetsu = RString.EMPTY;
         this.shichosonCode = RString.EMPTY;
         this.setOriginalData("jotai", jotai);
         this.setOriginalData("shichoson", shichoson);
+        this.setOriginalData("shujiiCode", shujiiCode);
         this.setOriginalData("shujiiShimei", shujiiShimei);
         this.setOriginalData("shujiiKanaShimei", shujiiKanaShimei);
-        this.setOriginalData("shujiiCode", shujiiCode);
         this.setOriginalData("shujiiIryoKikanCode", shujiiIryoKikanCode);
         this.setOriginalData("shujiiIryoKikan", shujiiIryoKikan);
+        this.setOriginalData("seibetsu", seibetsu);
         this.setOriginalData("shinryoka", shinryoka);
         this.setOriginalData("shiteii", shiteii);
         this.setOriginalData("jokyoFlag", jokyoFlag);
@@ -71,19 +72,19 @@ public class dgShujiiIchiran_Row extends DataRow {
         this.setOriginalData("jusho", jusho);
         this.setOriginalData("telNo", telNo);
         this.setOriginalData("faxNo", faxNo);
-        this.setOriginalData("seibetsu", seibetsu);
         this.setOriginalData("shichosonCode", shichosonCode);
     }
 
-    public dgShujiiIchiran_Row(RString jotai, RString shichoson, RString shujiiShimei, RString shujiiKanaShimei, TextBoxCode shujiiCode, TextBoxCode shujiiIryoKikanCode, RString shujiiIryoKikan, RString shinryoka, RString shiteii, RString jokyoFlag, RString yubinNo, RString jusho, RString telNo, RString faxNo, RString seibetsu, RString shichosonCode) {
+    public dgShujiiIchiran_Row(RString jotai, RString shichoson, TextBoxCode shujiiCode, RString shujiiShimei, RString shujiiKanaShimei, TextBoxCode shujiiIryoKikanCode, RString shujiiIryoKikan, RString seibetsu, RString shinryoka, RString shiteii, RString jokyoFlag, RString yubinNo, RString jusho, RString telNo, RString faxNo, RString shichosonCode) {
         super();
         this.setOriginalData("jotai", jotai);
         this.setOriginalData("shichoson", shichoson);
+        this.setOriginalData("shujiiCode", shujiiCode);
         this.setOriginalData("shujiiShimei", shujiiShimei);
         this.setOriginalData("shujiiKanaShimei", shujiiKanaShimei);
-        this.setOriginalData("shujiiCode", shujiiCode);
         this.setOriginalData("shujiiIryoKikanCode", shujiiIryoKikanCode);
         this.setOriginalData("shujiiIryoKikan", shujiiIryoKikan);
+        this.setOriginalData("seibetsu", seibetsu);
         this.setOriginalData("shinryoka", shinryoka);
         this.setOriginalData("shiteii", shiteii);
         this.setOriginalData("jokyoFlag", jokyoFlag);
@@ -91,15 +92,15 @@ public class dgShujiiIchiran_Row extends DataRow {
         this.setOriginalData("jusho", jusho);
         this.setOriginalData("telNo", telNo);
         this.setOriginalData("faxNo", faxNo);
-        this.setOriginalData("seibetsu", seibetsu);
         this.setOriginalData("shichosonCode", shichosonCode);
         this.jotai = jotai;
         this.shichoson = shichoson;
+        this.shujiiCode = shujiiCode;
         this.shujiiShimei = shujiiShimei;
         this.shujiiKanaShimei = shujiiKanaShimei;
-        this.shujiiCode = shujiiCode;
         this.shujiiIryoKikanCode = shujiiIryoKikanCode;
         this.shujiiIryoKikan = shujiiIryoKikan;
+        this.seibetsu = seibetsu;
         this.shinryoka = shinryoka;
         this.shiteii = shiteii;
         this.jokyoFlag = jokyoFlag;
@@ -107,7 +108,6 @@ public class dgShujiiIchiran_Row extends DataRow {
         this.jusho = jusho;
         this.telNo = telNo;
         this.faxNo = faxNo;
-        this.seibetsu = seibetsu;
         this.shichosonCode = shichosonCode;
     }
 
@@ -119,6 +119,10 @@ public class dgShujiiIchiran_Row extends DataRow {
         return shichoson;
     }
 
+    public TextBoxCode getShujiiCode() {
+        return shujiiCode;
+    }
+
     public RString getShujiiShimei() {
         return shujiiShimei;
     }
@@ -127,16 +131,16 @@ public class dgShujiiIchiran_Row extends DataRow {
         return shujiiKanaShimei;
     }
 
-    public TextBoxCode getShujiiCode() {
-        return shujiiCode;
-    }
-
     public TextBoxCode getShujiiIryoKikanCode() {
         return shujiiIryoKikanCode;
     }
 
     public RString getShujiiIryoKikan() {
         return shujiiIryoKikan;
+    }
+
+    public RString getSeibetsu() {
+        return seibetsu;
     }
 
     public RString getShinryoka() {
@@ -167,10 +171,6 @@ public class dgShujiiIchiran_Row extends DataRow {
         return faxNo;
     }
 
-    public RString getSeibetsu() {
-        return seibetsu;
-    }
-
     public RString getShichosonCode() {
         return shichosonCode;
     }
@@ -185,6 +185,11 @@ public class dgShujiiIchiran_Row extends DataRow {
         this.shichoson = shichoson;
     }
 
+    public void setShujiiCode(TextBoxCode shujiiCode) {
+        this.setOriginalData("shujiiCode", shujiiCode);
+        this.shujiiCode = shujiiCode;
+    }
+
     public void setShujiiShimei(RString shujiiShimei) {
         this.setOriginalData("shujiiShimei", shujiiShimei);
         this.shujiiShimei = shujiiShimei;
@@ -195,11 +200,6 @@ public class dgShujiiIchiran_Row extends DataRow {
         this.shujiiKanaShimei = shujiiKanaShimei;
     }
 
-    public void setShujiiCode(TextBoxCode shujiiCode) {
-        this.setOriginalData("shujiiCode", shujiiCode);
-        this.shujiiCode = shujiiCode;
-    }
-
     public void setShujiiIryoKikanCode(TextBoxCode shujiiIryoKikanCode) {
         this.setOriginalData("shujiiIryoKikanCode", shujiiIryoKikanCode);
         this.shujiiIryoKikanCode = shujiiIryoKikanCode;
@@ -208,6 +208,11 @@ public class dgShujiiIchiran_Row extends DataRow {
     public void setShujiiIryoKikan(RString shujiiIryoKikan) {
         this.setOriginalData("shujiiIryoKikan", shujiiIryoKikan);
         this.shujiiIryoKikan = shujiiIryoKikan;
+    }
+
+    public void setSeibetsu(RString seibetsu) {
+        this.setOriginalData("seibetsu", seibetsu);
+        this.seibetsu = seibetsu;
     }
 
     public void setShinryoka(RString shinryoka) {
@@ -243,11 +248,6 @@ public class dgShujiiIchiran_Row extends DataRow {
     public void setFaxNo(RString faxNo) {
         this.setOriginalData("faxNo", faxNo);
         this.faxNo = faxNo;
-    }
-
-    public void setSeibetsu(RString seibetsu) {
-        this.setOriginalData("seibetsu", seibetsu);
-        this.seibetsu = seibetsu;
     }
 
     public void setShichosonCode(RString shichosonCode) {

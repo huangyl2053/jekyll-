@@ -5,10 +5,12 @@
  */
 package jp.co.ndensan.reams.db.dbb.business.core.hokenryodankai.core;
 
-import jp.co.ndensan.reams.db.dbb.business.core.hokenryodankai.param.HokenryoDankaiHanteiParameter;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
+import jp.co.ndensan.reams.db.dbb.business.core.hokenryodankai.param.HokenryoDankaiHanteiParameter;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
@@ -17,24 +19,33 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
  */
 public class HokenryoDankaiHanteiCore {
 
+    /**
+     *
+     * hokenryoDankaiHanteiを実行する
+     *
+     * @param hokenryoDankaiHanteiParameter hokenryoDankaiHanteiParameter
+     * @param hokenryoDankaiHanteiHoho hokenryoDankaiHanteiHoho
+     * @return TsukibetsuHokenryoDankai
+     */
     public TsukibetsuHokenryoDankai hokenryoDankaiHantei(
             HokenryoDankaiHanteiParameter hokenryoDankaiHanteiParameter, HokenryoDankaiHanteiHohoHozon hokenryoDankaiHanteiHoho) {
 
         TsukibetsuHokenryoDankai tsukibetsuHokenryoDankai = null;
+        Set<Map.Entry<RString, List<IHanteiHoho>>> set = hokenryoDankaiHanteiHoho.getHanteiHoho().entrySet();
+        Iterator<Map.Entry<RString, List<IHanteiHoho>>> it = set.iterator();
 
         //mapからkey(段階数)を取得
-        for (RString hanteiDankai : hokenryoDankaiHanteiHoho.getHanteiHoho().keySet()) {
+        if (it.hasNext()) {
 
+            Map.Entry<RString, List<IHanteiHoho>> entry = it.next();
+            RString key = entry.getKey();
             //取得した段階の判定方法を取得
-            List<IHanteiHoho> hanteihohoList = hokenryoDankaiHanteiHoho.getHanteiHoho().get(hanteiDankai);
+            List<IHanteiHoho> hanteihohoList = hokenryoDankaiHanteiHoho.getHanteiHoho().get(key);
             //hanteiResult = KakuDankaiHantei(hokenryoDankaiHanteiParameter,hanteihohoList);
 
             if (各段階判定(hokenryoDankaiHanteiParameter, hanteihohoList)) {
-                tsukibetsuHokenryoDankai = 出力データ作成(hokenryoDankaiHanteiParameter, hanteiDankai);
-                if (特例対象判定(hanteihohoList)) {
-                    特例対象設定(tsukibetsuHokenryoDankai);
-                }
-                break;
+                tsukibetsuHokenryoDankai = 出力データ作成(hokenryoDankaiHanteiParameter, key);
+                特例対象判定判断(hanteihohoList, tsukibetsuHokenryoDankai);
             }
         }
 
@@ -59,8 +70,7 @@ public class HokenryoDankaiHanteiCore {
         boolean result = true;
 
         for (IHanteiHoho hantei : hanteihohoList) {
-            if (hantei.matches(hokenryoDankaiHanteiParameter)) {
-            } else {
+            if (!hantei.matches(hokenryoDankaiHanteiParameter)) {
                 result = false;
                 break;
             }
@@ -91,8 +101,24 @@ public class HokenryoDankaiHanteiCore {
         }
     }
 
+    /**
+     *
+     * hokenryoDankaiHanteiを実行する
+     *
+     * @param hokenryoDankaiHanteiParameter hokenryoDankaiHanteiParameter
+     * @param dankaiResult dankaiResult
+     * @return TsukibetsuHokenryoDankai
+     */
     protected static TsukibetsuHokenryoDankai 出力データ作成(HokenryoDankaiHanteiParameter hokenryoDankaiHanteiParameter, RString dankaiResult) {
 
         return new TsukibetsuHokenryoDankai(dankaiResult);
     }
+
+    private void 特例対象判定判断(List<IHanteiHoho> hanteihohoList, TsukibetsuHokenryoDankai tsukibetsuHokenryoDankai) {
+
+        if (特例対象判定(hanteihohoList)) {
+            特例対象設定(tsukibetsuHokenryoDankai);
+        }
+    }
+
 }

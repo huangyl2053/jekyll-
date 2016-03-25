@@ -25,8 +25,6 @@ public class KihonChosaInput implements Serializable {
      *
      * @param 認定調査基本情報 認定調査基本情報
      * @link KihonChosaInputEntity}より{@link KihonChosaInput}を生成します。
-     *
-     * @param KihonChosaInput {@link KihonChosaInput}
      */
     public KihonChosaInput(KihonChosaInputEntity 認定調査基本情報) {
         this.認定調査基本情報 = requireNonNull(認定調査基本情報,
@@ -49,8 +47,6 @@ public class KihonChosaInput implements Serializable {
      * @param 原本マスク区分 原本マスク区分
      * @param 特記事項 特記事項
      * @link KihonChosaInputEntity}より{@link KihonChosaInput}を生成します。
-     *
-     * @param KihonChosaInput {@link KihonChosaInput}
      */
     public KihonChosaInput(Code 認知症高齢者自立度,
             Code 障害高齢者自立度,

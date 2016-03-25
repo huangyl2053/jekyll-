@@ -19,7 +19,7 @@ public interface IShikakuTokusouJouhoMapper {
      * 単一の場合。
      *
      * @param params ShikakuTokusoJouhoParameter
-     * @return ShikakuTokusouJouhoRelateEntity
+     * @return 資格履歴情報の単一
      */
     List<ShikakuTokusouJouhoRelateEntity> getShikakuJoho(ShikakuTokusoJouhoParameter params);
 
@@ -27,7 +27,7 @@ public interface IShikakuTokusouJouhoMapper {
      * 広域の場合。
      *
      * @param params ShikakuTokusoJouhoParameter
-     * @return ShikakuTokusouJouhoRelateEntity
+     * @return 資格履歴情報の広域
      */
     List<ShikakuTokusouJouhoRelateEntity> getShikakuTosoJoho(ShikakuTokusoJouhoParameter params);
 }

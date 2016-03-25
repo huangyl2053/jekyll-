@@ -18,6 +18,10 @@ import jp.co.ndensan.reams.uz.uza.math.Decimal;
 @lombok.Getter
 public final class NinteiChosainMasterMapperParameter {
 
+    private static final RString KEY0 = new RString("0");
+    private static final RString KEY1 = new RString("1");
+    private static final RString KEY2 = new RString("2");
+    private static final RString KEY3 = new RString("3");
     private final boolean 状況フラグ;
     private final LasdecCode 市町村コード;
     private final ChosaItakusakiCode 調査委託先コードFrom;
@@ -42,6 +46,22 @@ public final class NinteiChosainMasterMapperParameter {
     private final boolean uses調査員カナ氏名;
     private final boolean uses地区コード;
     private final boolean usesSaidaiHyojiKensu;
+    private final boolean uses委託先名称前方一致;
+    private final boolean uses委託先名称後方一致;
+    private final boolean uses委託先名称完全一致;
+    private final boolean uses委託先名称部分一致;
+    private final boolean uses委託先カナ名称前方一致;
+    private final boolean uses委託先カナ名称後方一致;
+    private final boolean uses委託先カナ名称完全一致;
+    private final boolean uses委託先カナ名称部分一致;
+    private final boolean uses調査員氏名前方一致;
+    private final boolean uses調査員氏名後方一致;
+    private final boolean uses調査員氏名完全一致;
+    private final boolean uses調査員氏名部分一致;
+    private final boolean uses調査員カナ氏名前方一致;
+    private final boolean uses調査員カナ氏名後方一致;
+    private final boolean uses調査員カナ氏名完全一致;
+    private final boolean uses調査員カナ氏名部分一致;
 
     private NinteiChosainMasterMapperParameter(
             boolean 状況フラグ,
@@ -66,7 +86,23 @@ public final class NinteiChosainMasterMapperParameter {
             boolean uses調査員氏名,
             boolean uses調査員カナ氏名,
             boolean uses地区コード,
-            boolean usesSaidaiHyojiKensu) {
+            boolean usesSaidaiHyojiKensu,
+            boolean uses委託先名称前方一致,
+            boolean uses委託先名称後方一致,
+            boolean uses委託先名称完全一致,
+            boolean uses委託先名称部分一致,
+            boolean uses委託先カナ名称前方一致,
+            boolean uses委託先カナ名称後方一致,
+            boolean uses委託先カナ名称完全一致,
+            boolean uses委託先カナ名称部分一致,
+            boolean uses調査員氏名前方一致,
+            boolean uses調査員氏名後方一致,
+            boolean uses調査員氏名完全一致,
+            boolean uses調査員氏名部分一致,
+            boolean uses調査員カナ氏名前方一致,
+            boolean uses調査員カナ氏名後方一致,
+            boolean uses調査員カナ氏名完全一致,
+            boolean uses調査員カナ氏名部分一致) {
 
         this.状況フラグ = 状況フラグ;
         this.市町村コード = 市町村コード;
@@ -91,6 +127,22 @@ public final class NinteiChosainMasterMapperParameter {
         this.uses地区コード = uses地区コード;
         this.saidaiHyojiKensu = saidaiHyojiKensu;
         this.usesSaidaiHyojiKensu = usesSaidaiHyojiKensu;
+        this.uses委託先名称前方一致 = uses委託先名称前方一致;
+        this.uses委託先名称後方一致 = uses委託先名称後方一致;
+        this.uses委託先名称完全一致 = uses委託先名称完全一致;
+        this.uses委託先名称部分一致 = uses委託先名称部分一致;
+        this.uses委託先カナ名称前方一致 = uses委託先カナ名称前方一致;
+        this.uses委託先カナ名称後方一致 = uses委託先カナ名称後方一致;
+        this.uses委託先カナ名称完全一致 = uses委託先カナ名称完全一致;
+        this.uses委託先カナ名称部分一致 = uses委託先カナ名称部分一致;
+        this.uses調査員氏名前方一致 = uses調査員氏名前方一致;
+        this.uses調査員氏名後方一致 = uses調査員氏名後方一致;
+        this.uses調査員氏名完全一致 = uses調査員氏名完全一致;
+        this.uses調査員氏名部分一致 = uses調査員氏名部分一致;
+        this.uses調査員カナ氏名前方一致 = uses調査員カナ氏名前方一致;
+        this.uses調査員カナ氏名後方一致 = uses調査員カナ氏名後方一致;
+        this.uses調査員カナ氏名完全一致 = uses調査員カナ氏名完全一致;
+        this.uses調査員カナ氏名部分一致 = uses調査員カナ氏名部分一致;
     }
 
     /**
@@ -101,11 +153,15 @@ public final class NinteiChosainMasterMapperParameter {
      * @param 調査委託先コードFrom 調査委託先コードFrom
      * @param 調査委託先コードTo 調査委託先コードTo
      * @param 調査委託先名称 調査委託先名称
+     * @param 調査委託先名称キー 調査委託先名称キー
      * @param 調査委託先カナ名称 調査委託先カナ名称
+     * @param 調査委託先カナ名称キー 調査委託先カナ名称キー
      * @param 調査員コードFrom 調査員コードFrom
      * @param 調査員コードTo 調査員コードTo
      * @param 調査員氏名 調査員氏名
+     * @param 調査員氏名キー 調査員氏名キー
      * @param 調査員カナ氏名 調査員カナ氏名
+     * @param 調査員カナ氏名キー 調査員カナ氏名キー
      * @param 地区コード 地区コード
      * @param 最大表示件数 最大表示件数
      *
@@ -117,11 +173,15 @@ public final class NinteiChosainMasterMapperParameter {
             ChosaItakusakiCode 調査委託先コードFrom,
             ChosaItakusakiCode 調査委託先コードTo,
             RString 調査委託先名称,
+            RString 調査委託先名称キー,
             RString 調査委託先カナ名称,
+            RString 調査委託先カナ名称キー,
             ChosainCode 調査員コードFrom,
             ChosainCode 調査員コードTo,
             RString 調査員氏名,
+            RString 調査員氏名キー,
             RString 調査員カナ氏名,
+            RString 調査員カナ氏名キー,
             RString 地区コード,
             Decimal 最大表示件数
     ) {
@@ -148,6 +208,23 @@ public final class NinteiChosainMasterMapperParameter {
                 調査員氏名 != null && !調査員氏名.isEmpty(),
                 調査員カナ氏名 != null && !調査員カナ氏名.isEmpty(),
                 地区コード != null && !地区コード.isEmpty(),
-                最大表示件数 != null);
+                最大表示件数 != null,
+                KEY0.equals(調査委託先名称キー),
+                KEY1.equals(調査委託先名称キー),
+                KEY2.equals(調査委託先名称キー),
+                KEY3.equals(調査委託先名称キー),
+                KEY0.equals(調査委託先カナ名称キー),
+                KEY1.equals(調査委託先カナ名称キー),
+                KEY2.equals(調査委託先カナ名称キー),
+                KEY3.equals(調査委託先カナ名称キー),
+                KEY0.equals(調査員氏名キー),
+                KEY1.equals(調査員氏名キー),
+                KEY2.equals(調査員氏名キー),
+                KEY3.equals(調査員氏名キー),
+                KEY0.equals(調査員カナ氏名キー),
+                KEY1.equals(調査員カナ氏名キー),
+                KEY2.equals(調査員カナ氏名キー),
+                KEY3.equals(調査員カナ氏名キー)
+        );
     }
 }

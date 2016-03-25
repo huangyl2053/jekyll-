@@ -26,7 +26,6 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 
 /**
- *
  * 本算定異動（過年度）賦課確定（削除込)
  */
 public class KanendoFukaKakuteiHandler {
@@ -39,6 +38,11 @@ public class KanendoFukaKakuteiHandler {
 
     private final KanendoFukaKakuteiDiv div;
 
+    /**
+     * コンストラクタです。
+     *
+     * @param div KanendoFukaKakuteiDiv
+     */
     public KanendoFukaKakuteiHandler(KanendoFukaKakuteiDiv div) {
         this.div = div;
     }

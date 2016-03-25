@@ -5,9 +5,11 @@
  */
 package jp.co.ndensan.reams.db.dbb.business.core.hokenryodankai.core;
 
-import jp.co.ndensan.reams.db.dbb.business.core.hokenryodankai.param.HokenryoDankaiHanteiParameter;
 import java.util.Calendar;
+import java.util.Iterator;
 import java.util.Map;
+import java.util.Set;
+import jp.co.ndensan.reams.db.dbb.business.core.hokenryodankai.param.HokenryoDankaiHanteiParameter;
 import jp.co.ndensan.reams.db.dbz.definition.core.fuka.KazeiKubun;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.Month;
@@ -39,10 +41,8 @@ class DankaiHanteiRoreiNenkin implements IDai1DankaiHantei {
             老齢年金開始日 = getRealDateCalendar(hokenryoDankaiHanteiParameter.getFukaKonkyo().getRoreiNenkinStartYMD());
             if (hokenryoDankaiHanteiParameter.getFukaKonkyo().getRoreiNenkinEndYMD() != null) {
                 老齢年金終了日 = getRealDateCalendar(hokenryoDankaiHanteiParameter.getFukaKonkyo().getRoreiNenkinEndYMD());
-                if (賦課年度開始日.compareTo(老齢年金終了日) <= 0
-                        && 老齢年金開始日.compareTo(賦課年度終了日) <= 0) {
-                    result = true;
-                }
+                result = this.getResult(賦課年度開始日, 賦課年度終了日, 老齢年金開始日, 老齢年金終了日);
+
             } else {
                 if (老齢年金開始日.compareTo(賦課年度終了日) <= 0) {
                     result = true;
@@ -65,19 +65,23 @@ class DankaiHanteiRoreiNenkin implements IDai1DankaiHantei {
                 hokenryoDankaiHanteiParameter.getFukaKonkyo().getSeihoStartYMD().getMonthValue(), 1);
 
         Map<RString, HokenryoDankai> hokenryoDankaiMap = tsukibetsuHokenryoDankai.createHokenryoDankaiMap();
+        Set<Map.Entry<RString, HokenryoDankai>> set = hokenryoDankaiMap.entrySet();
+        Iterator<Map.Entry<RString, HokenryoDankai>> it = set.iterator();
 
-        for (RString tsuki : hokenryoDankaiMap.keySet()) {
+        if (it.hasNext()) {
             判定年月.clear();
-            if (Integer.parseInt(tsuki.toString()) < Month.MARCH.getValue()) {
+            Map.Entry<RString, HokenryoDankai> entry = it.next();
+            RString key = entry.getKey();
+            if (Integer.parseInt(key.toString()) < Month.MARCH.getValue()) {
                 判定年月.set(Integer.parseInt(String.valueOf(hokenryoDankaiHanteiParameter.getFukaNendo())) + 1,
-                        Integer.parseInt(tsuki.toString()), 1);
+                        Integer.parseInt(key.toString()), 1);
 
             } else {
-                判定年月.set(Integer.parseInt(String.valueOf(hokenryoDankaiHanteiParameter.getFukaNendo())), Integer.parseInt(tsuki.toString()), 1);
+                判定年月.set(Integer.parseInt(String.valueOf(hokenryoDankaiHanteiParameter.getFukaNendo())), Integer.parseInt(key.toString()), 1);
             }
 
             if (dateHantei(老齢年金開始月, 判定年月)) {
-                hokenryoDankaiMap.get(tsuki).setHokenryoDankai(new RString("1"));
+                hokenryoDankaiMap.get(key).setHokenryoDankai(new RString("1"));
             }
         }
 
@@ -97,5 +101,14 @@ class DankaiHanteiRoreiNenkin implements IDai1DankaiHantei {
         calendar.set(Calendar.MONTH, roreiNenkinStartYMD.getMonthValue());
         calendar.set(Calendar.DATE, roreiNenkinStartYMD.getDayValue());
         return calendar;
+    }
+
+    private boolean getResult(Calendar 賦課年度開始日, Calendar 賦課年度終了日, Calendar 老齢年金開始日, Calendar 老齢年金終了日) {
+        boolean result = false;
+        if (賦課年度開始日.compareTo(老齢年金終了日) <= 0
+                && 老齢年金開始日.compareTo(賦課年度終了日) <= 0) {
+            result = true;
+        }
+        return result;
     }
 }

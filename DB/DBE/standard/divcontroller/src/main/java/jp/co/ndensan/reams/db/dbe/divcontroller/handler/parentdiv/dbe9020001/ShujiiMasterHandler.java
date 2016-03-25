@@ -14,7 +14,6 @@ import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE9020001.Shuj
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE9020001.dgShujiiIchiran_Row;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaJusho;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaKanaMeisho;
-import jp.co.ndensan.reams.uz.uza.biz.AtenaMeisho;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.TelNo;
@@ -49,6 +48,7 @@ public class ShujiiMasterHandler {
     private static final RString ハイフン = new RString("-");
     private static final int INDEX_3 = 3;
     private static final int INDEX_4 = 4;
+    private static final RString KEY_0 = new RString("0");
 
     private final ShujiiMasterDiv div;
 
@@ -83,6 +83,10 @@ public class ShujiiMasterHandler {
         div.getTxtSearchShujiiKanaShimei().clearValue();
         div.getRadSearchJokyoFlag().setSelectedIndex(0);
         div.getTxtSaidaiHyojiKensu().clearValue();
+        div.getDdlKikanMeisho().setSelectedKey(KEY_0);
+        div.getDdlKikanKanaMeisho().setSelectedKey(KEY_0);
+        div.getDdlShujiiMeisho().setSelectedKey(KEY_0);
+        div.getDdlShujiiKanaMeisho().setSelectedKey(KEY_0);
     }
 
     /**

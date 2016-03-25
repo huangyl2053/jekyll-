@@ -36,9 +36,9 @@ public final class KaigoNinteiAtenaInfoParameter {
     /**
      * 介護認定宛名情報のパラメータを生成します。
      *
-     * @param 識別コード
-     * @param 申請書管理番号
-     * @param psmShikibetsuTaisho
+     * @param 識別コード RString
+     * @param 申請書管理番号 RString
+     * @param psmShikibetsuTaisho RString
      * @return 介護認定宛名情報パラメータ
      */
     public static KaigoNinteiAtenaInfoParameter createSelectByKeyParam(

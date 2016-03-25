@@ -42,7 +42,7 @@ public class PnlTotalPanel {
     private static final RString 参照 = new RString("参照");
     private static final RString 削除 = new RString("削除");
     private static final RString 登録 = new RString("登録");
-    private static final Decimal 九割 = new Decimal(0.1);
+    private static final Decimal 九割 = new Decimal(0.9);
 
     /**
      * コンストラクタです。
@@ -64,6 +64,7 @@ public class PnlTotalPanel {
      * @return ResponseData<PnlTotalPanelDiv>
      */
     public ResponseData<PnlTotalPanelDiv> onLoad(PnlTotalPanelDiv div) {
+//        ViewStateHolder.put(ViewStateKeys.処理モード, 登録);
         RString 状態 = ViewStateHolder.get(ViewStateKeys.処理モード, RString.class);
         getHandler(div).createDropDownList();
         if (登録.equals(状態)) {
@@ -180,7 +181,6 @@ public class PnlTotalPanel {
             div.getPnlCommon().getPnlDetail().getTxtFusyoninriyu().setDisabled(true);
             div.getPnlCommon().getPnlDetail().getTxtFusyoninriyu().clearValue();
             div.getPnlCommon().getPnlDetail().getRdoKettekubun().setDisabled(false);
-            div.getPnlCommon().getPnlDetail().getTxtFusyoninriyu().setDisabled(false);
             div.getPnlCommon().getPnlDetail().getPnlHidari().getDdlYear().setDisabled(false);
             div.getPnlCommon().getPnlDetail().getPnlHidari().getTxtBango2().setDisabled(false);
             div.getPnlCommon().getPnlDetail().getPnlHidari().getTxtSyoninkikan().setDisabled(false);

@@ -19,9 +19,9 @@ import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE9030001.dgCh
 import jp.co.ndensan.reams.db.dbe.service.core.ninteichosaitakusakimaster.NinteichosaItakusakiManager;
 import jp.co.ndensan.reams.db.dbe.service.core.tyousai.koseishichosonmaster.KoseiShichosonMasterManager;
 import jp.co.ndensan.reams.db.dbe.service.core.tyousai.ninteichosaitakusakijoho.NinteichosaItakusakiJohoManager;
+import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBE;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.mybatisprm.relate.NinteichosaItakusakiKensakuParameter;
-import jp.co.ndensan.reams.db.dbz.definition.core.configkeys.ConfigNameDBE;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaJusho;
 import jp.co.ndensan.reams.uz.uza.biz.ChikuCode;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
@@ -140,7 +140,9 @@ public class NinteichosaItakusakiMasterHandler {
                 div.getChosainSearch().getDdlkikankubun().getSelectedKey().equals(SELECTKEY_空白)
                 ? null : div.getChosainSearch().getDdlkikankubun().getSelectedKey(),
                 div.getChosainSearch().getTxtSaidaiHyojiKensu().getValue() == null
-                ? null : div.getChosainSearch().getTxtSaidaiHyojiKensu().getValue().intValue()
+                ? null : div.getChosainSearch().getTxtSaidaiHyojiKensu().getValue().intValue(),
+                div.getChosainSearch().getDdlItakusakiMeisho().getSelectedKey(),
+                div.getChosainSearch().getDdlItakusakiKanaMeisho().getSelectedKey()
         );
 
         return NinteichosaItakusakiManager.createInstance().ninteichosaItakusakiSearch(構成市町村マスタ検索条件);
@@ -169,8 +171,8 @@ public class NinteichosaItakusakiMasterHandler {
         div.getChosaitakusakiJohoInput().getTxtJusho().clearDomain();
         div.getChosaitakusakiJohoInput().getTxtTelNo().clearDomain();
         div.getChosaitakusakiJohoInput().getTxtFaxNo().clearDomain();
-        div.getChosaitakusakiJohoInput().getTxtdaihyoshaname().clearDomain();
-        div.getChosaitakusakiJohoInput().getTxtdaihyoshakananame().clearDomain();
+        div.getChosaitakusakiJohoInput().getTxtdaihyoshaname().clearValue();
+        div.getChosaitakusakiJohoInput().getTxtdaihyoshakananame().clearValue();
         div.getChosaitakusakiJohoInput().getTxtTeiin().clearValue();
         div.getChosaitakusakiJohoInput().getCcdChiku().clearDisplayedValues();
         div.getChosaitakusakiJohoInput().getRadautowatitsuke().setSelectedKey(有効);
@@ -306,8 +308,8 @@ public class NinteichosaItakusakiMasterHandler {
                 div.getChosaitakusakiJohoInput().getTxtJusho().getDomain().getColumnValue(),
                 div.getChosaitakusakiJohoInput().getTxtTelNo().getDomain().getColumnValue(),
                 div.getChosaitakusakiJohoInput().getTxtFaxNo().getDomain().getColumnValue(),
-                div.getChosaitakusakiJohoInput().getTxtdaihyoshaname().getDomain().getColumnValue(),
-                div.getChosaitakusakiJohoInput().getTxtdaihyoshakananame().getDomain().getColumnValue(),
+                div.getChosaitakusakiJohoInput().getTxtdaihyoshaname().getValue(),
+                div.getChosaitakusakiJohoInput().getTxtdaihyoshakananame().getValue(),
                 div.getChosaitakusakiJohoInput().getDdlItakusakikubun().getSelectedValue(),
                 div.getChosaitakusakiJohoInput().getDdltokuteichosain().getSelectedValue(),
                 割付定員,
@@ -552,10 +554,10 @@ public class NinteichosaItakusakiMasterHandler {
                 row.getJusho() == null ? RString.EMPTY : row.getJusho()));
         div.getChosaitakusakiJohoInput().getTxtTelNo().setDomain(new TelNo(row.getTelNo()));
         div.getChosaitakusakiJohoInput().getTxtFaxNo().setDomain(new TelNo(row.getFaxNo()));
-        div.getChosaitakusakiJohoInput().getTxtdaihyoshaname().setDomain(new AtenaJusho(
-                row.getKikanDaihyoshaName() == null ? RString.EMPTY : row.getKikanDaihyoshaName()));
-        div.getChosaitakusakiJohoInput().getTxtdaihyoshakananame().setDomain(new AtenaJusho(
-                row.getKikanDaihyoshaKanaName() == null ? RString.EMPTY : row.getKikanDaihyoshaKanaName()));
+        div.getChosaitakusakiJohoInput().getTxtdaihyoshaname().setValue(
+                row.getKikanDaihyoshaName() == null ? RString.EMPTY : row.getKikanDaihyoshaName());
+        div.getChosaitakusakiJohoInput().getTxtdaihyoshakananame().setValue(
+                row.getKikanDaihyoshaKanaName() == null ? RString.EMPTY : row.getKikanDaihyoshaKanaName());
         if (!RString.isNullOrEmpty(row.getChosaItakuKubun())) {
             div.getChosaitakusakiJohoInput().getDdlItakusakikubun().setSelectedValue(row.getChosaItakuKubun());
         }
@@ -621,10 +623,10 @@ public class NinteichosaItakusakiMasterHandler {
     }
 
     private RString getInputValue(RStringBuilder builder) {
-        builder.append(div.getChosaitakusakiJohoInput().getTxtdaihyoshaname().getDomain() == null
-                ? RString.EMPTY : div.getChosaitakusakiJohoInput().getTxtdaihyoshaname().getDomain().getColumnValue());
-        builder.append(div.getChosaitakusakiJohoInput().getTxtdaihyoshakananame().getDomain() == null
-                ? RString.EMPTY : div.getChosaitakusakiJohoInput().getTxtdaihyoshakananame().getDomain().getColumnValue());
+        builder.append(div.getChosaitakusakiJohoInput().getTxtdaihyoshaname().getValue() == null
+                ? RString.EMPTY : div.getChosaitakusakiJohoInput().getTxtdaihyoshaname().getValue());
+        builder.append(div.getChosaitakusakiJohoInput().getTxtdaihyoshakananame().getValue() == null
+                ? RString.EMPTY : div.getChosaitakusakiJohoInput().getTxtdaihyoshakananame().getValue());
         builder.append(RString.isNullOrEmpty(div.getChosaitakusakiJohoInput().getDdlItakusakikubun().getSelectedKey())
                 ? RString.EMPTY : div.getChosaitakusakiJohoInput().getDdlItakusakikubun().getSelectedValue());
         builder.append(RString.isNullOrEmpty(div.getChosaitakusakiJohoInput().getDdltokuteichosain().getSelectedKey())

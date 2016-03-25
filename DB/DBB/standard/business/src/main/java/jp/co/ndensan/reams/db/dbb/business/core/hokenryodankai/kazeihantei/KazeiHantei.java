@@ -5,10 +5,10 @@
  */
 package jp.co.ndensan.reams.db.dbb.business.core.hokenryodankai.kazeihantei;
 
-import jp.co.ndensan.reams.db.dbb.business.core.hokenryodankai.core.HokenryoDankaiHosei;
-import jp.co.ndensan.reams.db.dbb.business.core.hokenryodankai.param.HokenryoDankaiHanteiParameter;
 import java.util.ArrayList;
 import java.util.List;
+import jp.co.ndensan.reams.db.dbb.business.core.hokenryodankai.core.HokenryoDankaiHosei;
+import jp.co.ndensan.reams.db.dbb.business.core.hokenryodankai.param.HokenryoDankaiHanteiParameter;
 import jp.co.ndensan.reams.db.dbz.definition.core.fuka.KazeiKubun;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
@@ -34,7 +34,7 @@ public class KazeiHantei {
     /**
      * 課税判定
      *
-     * @param hokenryoDankaiHanteiParameter
+     * @param hokenryoDankaiHanteiParameter hokenryoDankaiHanteiParameter
      * @return 保険料段階
      */
     public RString kazeiHantei(HokenryoDankaiHanteiParameter hokenryoDankaiHanteiParameter) {

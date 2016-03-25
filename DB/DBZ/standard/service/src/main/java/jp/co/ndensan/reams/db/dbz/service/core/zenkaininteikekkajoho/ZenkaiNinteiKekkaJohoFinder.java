@@ -85,13 +85,13 @@ public class ZenkaiNinteiKekkaJohoFinder {
      * @return SearchResult<ZenkaiNinteiKekkaJohoRelate>
      */
     public SearchResult<ZenkaiNinteiKekkaJohoRelate> get要介護度_今回受給(ShinseishoKanriNo 申請書管理番号) {
-        List<ZenkaiNinteiKekkaJohoRelate> zenkaiNinteiKekkaJohoRelateList = new ArrayList<>();
+        List<ZenkaiNinteiKekkaJohoRelate> zenkaiNinteiKekkaJohoList = new ArrayList<>();
         IZenkaiNinteiKekkaJohoMapper mapper = mapperProvider.create(IZenkaiNinteiKekkaJohoMapper.class);
         ZenkaiNinteiKekkaJohoRelateEntity entity = mapper.get要介護度_今回受給(申請書管理番号);
         if (entity != null) {
-            zenkaiNinteiKekkaJohoRelateList.add(new ZenkaiNinteiKekkaJohoRelate(entity));
+            zenkaiNinteiKekkaJohoList.add(new ZenkaiNinteiKekkaJohoRelate(entity));
         }
-        return SearchResult.of(zenkaiNinteiKekkaJohoRelateList, 0, false);
+        return SearchResult.of(zenkaiNinteiKekkaJohoList, 0, false);
     }
     
     /**
@@ -100,11 +100,11 @@ public class ZenkaiNinteiKekkaJohoFinder {
      * @return SearchResult<ZenkaiNinteiKekkaJohoRelate>
      */
     public SearchResult<ZenkaiNinteiKekkaJohoRelate> get要介護度_今回認定(ShinseishoKanriNo 申請書管理番号) {
-        List<ZenkaiNinteiKekkaJohoRelate> zenkaiNinteiKekkaJohoRelateList = new ArrayList<>();
+        List<ZenkaiNinteiKekkaJohoRelate> zenkaiNinteiKekkaJohoList = new ArrayList<>();
         IZenkaiNinteiKekkaJohoMapper mapper = mapperProvider.create(IZenkaiNinteiKekkaJohoMapper.class);
         ZenkaiNinteiKekkaJohoRelateEntity entity = mapper.get要介護度_今回認定(申請書管理番号);
-        zenkaiNinteiKekkaJohoRelateList.add(new ZenkaiNinteiKekkaJohoRelate(entity));
-        return SearchResult.of(zenkaiNinteiKekkaJohoRelateList, 0, false);
+        zenkaiNinteiKekkaJohoList.add(new ZenkaiNinteiKekkaJohoRelate(entity));
+        return SearchResult.of(zenkaiNinteiKekkaJohoList, 0, false);
     }
     
     /**

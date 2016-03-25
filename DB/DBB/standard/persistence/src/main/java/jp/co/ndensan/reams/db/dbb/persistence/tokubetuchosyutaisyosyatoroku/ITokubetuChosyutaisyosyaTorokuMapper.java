@@ -20,7 +20,7 @@ public interface ITokubetuChosyutaisyosyaTorokuMapper {
     /**
      * 徴収方法情報取得。
      *
-     * @param sqlparamEntity
+     * @param sqlparamEntity バラメンタ
      * @return 徴収方法の情報
      */
     DbT2001ChoshuHohoEntity getChoshuHoho(TokubetuChosyutaisyosyaTorokusqlparamEntity sqlparamEntity);
@@ -28,7 +28,7 @@ public interface ITokubetuChosyutaisyosyaTorokuMapper {
     /**
      * 年度内処理済み連番取得。
      *
-     * @param sqlparamEntity
+     * @param sqlparamEntity バラメンタ
      * @return 処理日付管理マスタリスト
      */
     List<DbT7022ShoriDateKanriEntity> getShorizumiRenban(TokubetuChosyutaisyosyaTorokusqlparamEntity sqlparamEntity);
@@ -36,7 +36,7 @@ public interface ITokubetuChosyutaisyosyaTorokuMapper {
     /**
      * 資格喪失フラグ取得
      *
-     * @param sqlparamEntity
+     * @param sqlparamEntity バラメンタ
      * @return 被保険者台帳管理
      */
     DbT1001HihokenshaDaichoEntity getHihokenshaFlag(TokubetuChosyutaisyosyaTorokusqlparamEntity sqlparamEntity);
@@ -44,7 +44,7 @@ public interface ITokubetuChosyutaisyosyaTorokuMapper {
     /**
      * 依頼金額計算基準日取得
      *
-     * @param sqlparamEntity
+     * @param sqlparamEntity バラメンタ
      * @return 処理日付管理マスタ
      */
     List<DbT7022ShoriDateKanriEntity> getIraikinKijunbi(TokubetuChosyutaisyosyaTorokusqlparamEntity sqlparamEntity);

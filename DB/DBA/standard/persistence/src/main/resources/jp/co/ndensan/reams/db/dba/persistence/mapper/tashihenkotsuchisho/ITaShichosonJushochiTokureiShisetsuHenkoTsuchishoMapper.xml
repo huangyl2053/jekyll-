@@ -40,7 +40,7 @@ and open the template in the editor.
         B."nyushoYMD" AS "入所年月日",
         C."jigyoshaMeisho" AS "事業者名称",
         C."telNo" AS "電話番号",
-        C."faxNo" AS "FAX番号",
+        C."faxNo" AS "fax番号",
         C."yubinNo" AS "郵便番号",
         C."jigyoshaJusho" AS "事業者住所"
         FROM

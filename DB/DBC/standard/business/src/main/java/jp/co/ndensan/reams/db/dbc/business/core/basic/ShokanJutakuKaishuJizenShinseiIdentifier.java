@@ -15,6 +15,7 @@ import lombok.Value;
  * 償還払支給住宅改修事前申請の識別子です。
  */
 @Value
+@SuppressWarnings("PMD.UnusedPrivateField")
 public class ShokanJutakuKaishuJizenShinseiIdentifier implements Serializable {
 
     private final HihokenshaNo 被保険者番号;

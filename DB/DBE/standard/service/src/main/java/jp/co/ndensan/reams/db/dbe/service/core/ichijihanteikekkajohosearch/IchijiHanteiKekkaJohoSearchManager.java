@@ -31,7 +31,6 @@ import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
 public class IchijiHanteiKekkaJohoSearchManager {
 
     private final MapperProvider mapperProvider;
-    private final IchijiHanteiKekkaJohoSearchMapper mapper;
     private final Code 厚労省IF識別コード_09A = new Code("09A");
     private final Code 厚労省IF識別コード_09B = new Code("09B");
 
@@ -40,7 +39,6 @@ public class IchijiHanteiKekkaJohoSearchManager {
      */
     IchijiHanteiKekkaJohoSearchManager() {
         this.mapperProvider = InstanceProvider.create(MapperProvider.class);
-        this.mapper = mapperProvider.create(IchijiHanteiKekkaJohoSearchMapper.class);
     }
 
     /**
@@ -49,7 +47,7 @@ public class IchijiHanteiKekkaJohoSearchManager {
      * @return IchijiHanteiKekkaJohoSearchManager
      */
     public static IchijiHanteiKekkaJohoSearchManager createIntance() {
-        return new IchijiHanteiKekkaJohoSearchManager();
+        return InstanceProvider.create(IchijiHanteiKekkaJohoSearchManager.class);
     }
 
     /**
@@ -62,6 +60,7 @@ public class IchijiHanteiKekkaJohoSearchManager {
      */
     @Transaction
     public IchijiHanteiKekkaJohoSearchBusiness getIchijiHanteiKekkaJoho(ShinseishoKanriNo 申請書管理番号) {
+        IchijiHanteiKekkaJohoSearchMapper mapper = mapperProvider.create(IchijiHanteiKekkaJohoSearchMapper.class);
         if (null == 申請書管理番号 || 申請書管理番号.isEmpty()) {
             throw new ApplicationException(UrErrorMessages.必須.getMessage().replace("申請書管理番号"));
         }
@@ -85,8 +84,8 @@ public class IchijiHanteiKekkaJohoSearchManager {
         return new IchijiHanteiKekkaJohoSearchBusiness(一次判定結果情報Entity);
     }
 
-    @Transaction
     private RString get認知症高齢者自立度_主治医意見書(ShinseishoKanriNo 申請書管理番号) {
+        IchijiHanteiKekkaJohoSearchMapper mapper = mapperProvider.create(IchijiHanteiKekkaJohoSearchMapper.class);
         List<DbT4304ShujiiIkenshoIkenItemEntity> dbT4304EntityList = mapper.get認知症高齢者自立度_主治医意見書(申請書管理番号);
         if (null == dbT4304EntityList || dbT4304EntityList.isEmpty()) {
             return RString.EMPTY;
@@ -95,8 +94,8 @@ public class IchijiHanteiKekkaJohoSearchManager {
         }
     }
 
-    @Transaction
     private DbT4203NinteichosahyoKihonChosaEntity get認定調査票_基本調査(ShinseishoKanriNo 申請書管理番号) {
+        IchijiHanteiKekkaJohoSearchMapper mapper = mapperProvider.create(IchijiHanteiKekkaJohoSearchMapper.class);
         List<DbT4203NinteichosahyoKihonChosaEntity> dbT4203EntityList = mapper.get認定調査票_基本調査(申請書管理番号);
         if (null == dbT4203EntityList || dbT4203EntityList.isEmpty()) {
             return new DbT4203NinteichosahyoKihonChosaEntity();
@@ -105,8 +104,8 @@ public class IchijiHanteiKekkaJohoSearchManager {
         }
     }
 
-    @Transaction
     private List<RString> get主治医意見書項目(ShinseishoKanriNo 申請書管理番号) {
+        IchijiHanteiKekkaJohoSearchMapper mapper = mapperProvider.create(IchijiHanteiKekkaJohoSearchMapper.class);
         List<RString> 主治医意見書項目List = new ArrayList<>();
         List<DbT4304ShujiiIkenshoIkenItemEntity> dbT4304Entity = mapper.get主治医意見書項目(申請書管理番号);
         for (DbT4304ShujiiIkenshoIkenItemEntity entity : dbT4304Entity) {
@@ -115,8 +114,8 @@ public class IchijiHanteiKekkaJohoSearchManager {
         return 主治医意見書項目List;
     }
 
-    @Transaction
     private List<RString> get基本調査項目(ShinseishoKanriNo 申請書管理番号) {
+        IchijiHanteiKekkaJohoSearchMapper mapper = mapperProvider.create(IchijiHanteiKekkaJohoSearchMapper.class);
         List<RString> 基本調査項目List = new ArrayList<>();
         List<DbT5211NinteichosahyoChosaItemEntity> dbT5211Entity = mapper.get基本調査項目(申請書管理番号);
         for (DbT5211NinteichosahyoChosaItemEntity entity : dbT5211Entity) {
@@ -125,8 +124,8 @@ public class IchijiHanteiKekkaJohoSearchManager {
         return 基本調査項目List;
     }
 
-    @Transaction
     private Code get厚労省IF識別コード(ShinseishoKanriNo 申請書管理番号) {
+        IchijiHanteiKekkaJohoSearchMapper mapper = mapperProvider.create(IchijiHanteiKekkaJohoSearchMapper.class);
         DbT5101NinteiShinseiJohoEntity entity = mapper.get厚労省IF識別コード(申請書管理番号);
         if (null == entity) {
             return Code.EMPTY;

@@ -18,14 +18,13 @@ import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
 import jp.co.ndensan.reams.uz.uza.lang.Separator;
-import jp.co.ndensan.reams.uz.uza.report.ReportManager;
 
 /**
  * 高額サービス費支給（不支給）決定者一覧表
  */
 public class KogakuServiceKetteishaIchiranhyoData {
 
-    private final RString SPACE = new RString(" ");
+    private final RString 符号_SPACE = new RString(" ");
     private final RString 固定文字 = new RString("該当データがありません");
 
     /**
@@ -48,7 +47,7 @@ public class KogakuServiceKetteishaIchiranhyoData {
                 .firstYear(FirstYear.GAN_NEN)
                 .separator(Separator.JAPANESE)
                 .fillType(FillType.BLANK).toDateString());
-        印刷日時Builder.append(印刷日).append(SPACE);
+        印刷日時Builder.append(印刷日).append(符号_SPACE);
         印刷日時Builder.append(String.format("%02d", 支印刷時間.getHour()));
         印刷日時Builder.append(new RString("時"));
         印刷日時Builder.append(String.format("%02d", 支印刷時間.getMinute()));
@@ -91,7 +90,7 @@ public class KogakuServiceKetteishaIchiranhyoData {
             帳票データ.set改頁４(高額サービス費決定情報Entity.get改頁4());
             帳票データ.set改頁５(高額サービス費決定情報Entity.get改頁5());
             帳票データ.set印刷日時(印刷日時Builder.toRString());
-            ReportManager manager = new ReportManager();
+//            ReportManager manager = new ReportManager();
 //            manager.reportAssembler(new RString(
 //                    "DBC200015_KogakuShikyuFushikyuKetteishaIchiran"), SubGyomuCode.DBC介護給付);
 //            帳票データ.setページ数(manager.reportAssembler(new RString(
