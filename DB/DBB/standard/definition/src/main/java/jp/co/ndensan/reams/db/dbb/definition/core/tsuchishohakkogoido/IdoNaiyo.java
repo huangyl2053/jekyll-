@@ -70,4 +70,19 @@ public enum IdoNaiyo {
         }
         throw new IllegalArgumentException(UrSystemErrorMessages.変換不可.getReplacedMessage("異動内容"));
     }
+
+    /**
+     * 異動内容のコードと一致する内容を探します。
+     *
+     * @param value 異動内容のコード
+     * @return {@value value} に対応する異動内容
+     */
+    public static IdoNaiyo toIdoNaiyo(RString value) {
+        for (IdoNaiyo idoNaiyo : IdoNaiyo.values()) {
+            if (idoNaiyo.fullName.equals(value)) {
+                return idoNaiyo;
+            }
+        }
+        throw new IllegalArgumentException(UrSystemErrorMessages.変換不可.getReplacedMessage("異動内容"));
+    }
 }
