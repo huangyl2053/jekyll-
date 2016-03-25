@@ -346,9 +346,11 @@ public class ServiceKeikakuHiPanelHandler {
         サービスコードBuilder.append(serviceCode1);
         サービスコードBuilder.append(serviceCodeInputDiv.getTxtServiceCode2().getValue());
         RString サービスコード名称 = serviceCodeInputDiv.getTxtServiceCodeName().getValue();
-        int 単位数 = div.getPanelServiceKeikakuhiDown().getTxtTanyiDown().getValue().intValue();
+        Decimal 単位数Decimal = div.getPanelServiceKeikakuhiDown().getTxtTanyiDown().getValue();
+        int 単位数 = 単位数Decimal == null ? 0 : 単位数Decimal.intValue();
         Decimal 単位数単価 = div.getPanelServiceKeikakuhiDown().getTxtTanyisuTanka().getValue();
-        int 請求金額 = div.getPanelServiceKeikakuhiDown().getTxtSeikyugakuDown().getValue().intValue();
+        Decimal 請求金額Decimal = div.getPanelServiceKeikakuhiDown().getTxtSeikyugakuDown().getValue();
+        int 請求金額 = 請求金額Decimal == null ? 0 : 請求金額Decimal.intValue();
         RString 担当介護支援専門員番号 = div.getPanelServiceKeikakuhiDown().getTxtTantoukayigoshien().getValue();
         RString 摘要 = div.getPanelServiceKeikakuhiDown().getTxtTekiyo().getValue();
         flag = flag + check(指定_基準該当事業者区分コード, entity200604.getEntity().get指定_基準該当事業者区分コード());
@@ -383,9 +385,11 @@ public class ServiceKeikakuHiPanelHandler {
         サービスコードBuilder.append(serviceCode1);
         サービスコードBuilder.append(serviceCodeInputDiv.getTxtServiceCode2().getValue());
         RString サービスコード名称 = serviceCodeInputDiv.getTxtServiceCodeName().getValue();
-        int 単位数 = div.getPanelServiceKeikakuhiDown().getTxtTanyiDown().getValue().intValue();
+        Decimal 単位数Decimal = div.getPanelServiceKeikakuhiDown().getTxtTanyiDown().getValue();
+        int 単位数 = 単位数Decimal == null ? 0 : 単位数Decimal.intValue();
         Decimal 単位数単価 = div.getPanelServiceKeikakuhiDown().getTxtTanyisuTanka().getValue();
-        int 請求金額 = div.getPanelServiceKeikakuhiDown().getTxtSeikyugakuDown().getValue().intValue();
+        Decimal 請求金額Decimal = div.getPanelServiceKeikakuhiDown().getTxtSeikyugakuDown().getValue();
+        int 請求金額 = 請求金額Decimal == null ? 0 : 請求金額Decimal.intValue();
         flag = flag + check(指定_基準該当事業者区分コード, entity200004.getEntity().get指定_基準該当事業者区分コード());
         flag = flag + check(届出日, new RDate(entity200004.getEntity().get居宅サービス計画作成依頼届出年月日().toString()));
         flag = flag + check(審査方法区分コード, entity200004.getEntity().get審査方法区分コード());
@@ -434,9 +438,11 @@ public class ServiceKeikakuHiPanelHandler {
                         .getDdlShiteiJigyoshaKubunCode().getSelectedKey();
                 RString 審査方法区分コード = div.getPanelServiceKeikakuhiDown().getRdoShinsaHouhou().getSelectedKey();
                 FlexibleDate 届出日 = get届出日(div.getPanelServiceKeikakuhiDown().getTxtTodokedeDate().getValue());
-                Decimal 単位数 = div.getPanelServiceKeikakuhiDown().getTxtTanyiDown().getValue();
+                Decimal 単位数Decimal = div.getPanelServiceKeikakuhiDown().getTxtTanyiDown().getValue();
+                int 単位数 = 単位数Decimal == null ? 0 : 単位数Decimal.intValue();
                 Decimal 単位数単価 = div.getPanelServiceKeikakuhiDown().getTxtTanyisuTanka().getValue();
-                Decimal 請求金額 = div.getPanelServiceKeikakuhiDown().getTxtSeikyugakuDown().getValue();
+                Decimal 請求金額Decimal = div.getPanelServiceKeikakuhiDown().getTxtSeikyugakuDown().getValue();
+                int 請求金額 = 請求金額Decimal == null ? 0 : 請求金額Decimal.intValue();
                 RString 担当介護支援専門員番号 = div.getPanelServiceKeikakuhiDown().getTxtTantoukayigoshien().getValue();
                 RString 摘要 = div.getPanelServiceKeikakuhiDown().getTxtTekiyo().getValue();
                 RStringBuilder サービスコードBuilder = new RStringBuilder();
@@ -449,9 +455,9 @@ public class ServiceKeikakuHiPanelHandler {
                         .set指定_基準該当事業者区分コード(指定_基準該当事業者区分コード)
                         .set審査方法区分コード(審査方法区分コード)
                         .set居宅サービス計画作成依頼届出年月日(届出日)
-                        .set単位数(単位数.intValue())
+                        .set単位数(単位数)
                         .set単位数単価(単位数単価)
-                        .set請求金額(請求金額.intValue())
+                        .set請求金額(請求金額)
                         .set担当介護支援専門員番号(担当介護支援専門員番号)
                         .set摘要(摘要)
                         .setサービスコード(new ServiceCode(サービスコードBuilder.toRString())).build().modified();
@@ -465,9 +471,11 @@ public class ServiceKeikakuHiPanelHandler {
                         .getDdlShiteiJigyoshaKubunCode().getSelectedKey();
                 RString 審査方法区分コード = div.getPanelServiceKeikakuhiDown().getRdoShinsaHouhou().getSelectedKey();
                 FlexibleDate 届出日 = get届出日(div.getPanelServiceKeikakuhiDown().getTxtTodokedeDate().getValue());
-                Decimal 単位数 = div.getPanelServiceKeikakuhiDown().getTxtTanyiDown().getValue();
+                Decimal 単位数Decimal = div.getPanelServiceKeikakuhiDown().getTxtTanyiDown().getValue();
+                int 単位数 = 単位数Decimal == null ? 0 : 単位数Decimal.intValue();
                 Decimal 単位数単価 = div.getPanelServiceKeikakuhiDown().getTxtTanyisuTanka().getValue();
-                Decimal 請求金額 = div.getPanelServiceKeikakuhiDown().getTxtSeikyugakuDown().getValue();
+                Decimal 請求金額Decimal = div.getPanelServiceKeikakuhiDown().getTxtSeikyugakuDown().getValue();
+                int 請求金額 = 請求金額Decimal == null ? 0 : 請求金額Decimal.intValue();
                 RStringBuilder サービスコードBuilder = new RStringBuilder();
                 RString serviceCode1 = serviceCodeInputDiv.getTxtServiceCode1().getValue();
                 サービスコードBuilder.append(serviceCode1);
@@ -478,9 +486,9 @@ public class ServiceKeikakuHiPanelHandler {
                         .set指定_基準該当事業者区分コード(指定_基準該当事業者区分コード)
                         .set審査方法区分コード(審査方法区分コード)
                         .set居宅サービス計画作成依頼届出年月日(届出日)
-                        .set単位数(単位数.intValue())
+                        .set単位数(単位数)
                         .set単位数単価(単位数単価)
-                        .set請求金額(請求金額.intValue())
+                        .set請求金額(請求金額)
                         .setサービスコード(new ServiceCode(サービスコードBuilder.toRString())).build().modified();
             }
             SyokanbaraihiShikyuShinseiKetteManager.createInstance().updShokanServicePlan(
@@ -620,21 +628,27 @@ public class ServiceKeikakuHiPanelHandler {
     private ShokanServicePlan200904 保存_データ(dgdYichiran_Row row, ShokanServicePlan200904 entity200904) {
         RowState state = row.getRowState();
         ServiceCode サービスコード = new ServiceCode(row.getDefaultDataName1());
-        Decimal 単位数 = row.getDefaultDataName2().getValue();
-        Decimal 回数 = row.getDefaultDataName3().getValue();
-        Decimal サービス単位数 = row.getDefaultDataName4().getValue();
+        Decimal 単位数Decimal = row.getDefaultDataName2().getValue();
+        int 単位数 = 単位数Decimal == null ? 0 : 単位数Decimal.intValue();
+        Decimal 回数Decimal = row.getDefaultDataName3().getValue();
+        int 回数 = 回数Decimal == null ? 0 : 回数Decimal.intValue();
+        Decimal サービス単位数Decimal = row.getDefaultDataName4().getValue();
+        int サービス単位数 = サービス単位数Decimal == null ? 0 : サービス単位数Decimal.intValue();
         RString 摘要 = row.getDefaultDataName5();
         RString 指定_基準該当事業者区分コード = div.getPanelServiceKeikakuhiUp().getDdlJigyoshaKubun().getSelectedKey();
         RString 審査方法区分コード = div.getPanelServiceKeikakuhiUp().getRdoShinsahouhou().getSelectedKey();
+        // TODO QA506 届出日check
         FlexibleDate 届出日 = get届出日(div.getPanelServiceKeikakuhiUp().getTxtTodokedeYMD().getValue());
         RString 担当介護支援専門員番号 = div.getPanelServiceKeikakuhiUp().getTxtTantoKaigoshien().getValue();
-        Decimal 単位数単価 = div.getPanelServiceKeikakuhiUp().getTxtTanyiTanka().getValue();
+        Decimal 単位数単価Decimal = div.getPanelServiceKeikakuhiUp().getTxtTanyiTanka().getValue();
+        // TODO QA506 単位数単価check
+        Decimal 単位数単価 = 単位数単価Decimal == null ? Decimal.ZERO : 単位数単価Decimal;
         // TODO QA506 INSERTサービス単位数合計の設定
         entity200904 = entity200904.createBuilderForEdit()
                 .setサービスコード(サービスコード)
-                .set単位数(単位数.intValue())
-                .set回数(回数.intValue())
-                .setサービス単位数(サービス単位数.intValue())
+                .set単位数(単位数)
+                .set回数(回数)
+                .setサービス単位数(サービス単位数)
                 .set摘要(摘要)
                 .set指定_基準該当事業者区分コード(指定_基準該当事業者区分コード)
                 .set審査方法区分コード(審査方法区分コード)
