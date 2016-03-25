@@ -166,7 +166,7 @@ public class HihokenshashoA4BodyEditor implements IHihokenshashoA4Editor {
         source.itakuGyosha3 = item.getItakuGyosha3();
         source.itakuGyosha3Asa = HOUSI;
         source.itakuGyosha3Massho = item.getItakuGyosha3();
-        source.ImageField1 = item.getImageField1();
+        source.imageField1 = item.getImageField1();
         return source;
     }
 }
