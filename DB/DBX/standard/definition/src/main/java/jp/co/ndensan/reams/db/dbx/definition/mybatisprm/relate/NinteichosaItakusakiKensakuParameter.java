@@ -23,10 +23,12 @@ public final class NinteichosaItakusakiKensakuParameter {
     private final RString chosaItakuKubun;
     private final RString kikanKubun;
     private final Integer limit;
+    private final Integer ddlItakusakiMeishoKey;
+    private final Integer ddlItakusakiKanaMeishoKey;
 
     private NinteichosaItakusakiKensakuParameter(boolean jokyoFlag, LasdecCode shichosonCode, RString searchChosaItakusakiCodeFrom,
             RString searchChosaItakusakiCodeTo, RString jigyoshaMeisho, RString jigyoshaMeishoKana, RString chosaItakuKubun, RString kikanKubun,
-            Integer limit) {
+            Integer limit, RString ddlItakusakiMeishoKey, RString ddlItakusakiKanaMeishoKey) {
         this.jokyoFlag = jokyoFlag;
         this.shichosonCode = shichosonCode;
         this.searchChosaItakusakiCodeFrom = checkForNullOrEmpty(searchChosaItakusakiCodeFrom);
@@ -36,6 +38,8 @@ public final class NinteichosaItakusakiKensakuParameter {
         this.chosaItakuKubun = checkForNullOrEmpty(chosaItakuKubun);
         this.kikanKubun = checkForNullOrEmpty(kikanKubun);
         this.limit = limit;
+        this.ddlItakusakiMeishoKey = Integer.parseInt(ddlItakusakiMeishoKey.toString());
+        this.ddlItakusakiKanaMeishoKey = Integer.parseInt(ddlItakusakiKanaMeishoKey.toString());
     }
 
     /**
@@ -50,13 +54,15 @@ public final class NinteichosaItakusakiKensakuParameter {
      * @param jigyoshaMeishoKana 画面の調査委託先カナ名称
      * @param kikanKubun 画面の機関の区分
      * @param limit 画面で入力した最大表示件数
+     * @param ddlItakusakiMeishoKey 画面で入力した調査委託先名称検索条件
+     * @param ddlItakusakiKanaMeishoKey 画面で入力した調査委託先名称検索条件
      * @return 認定調査督促状発行パラメータ
      */
     public static NinteichosaItakusakiKensakuParameter createParam(boolean jokyoFlag, LasdecCode shichosonCode, RString searchChosaItakusakiCodeFrom,
             RString searchChosaItakusakiCodeTo, RString jigyoshaMeisho, RString jigyoshaMeishoKana, RString chosaItakuKubun, RString kikanKubun,
-            Integer limit) {
+            Integer limit, RString ddlItakusakiMeishoKey, RString ddlItakusakiKanaMeishoKey) {
         return new NinteichosaItakusakiKensakuParameter(jokyoFlag, shichosonCode, searchChosaItakusakiCodeFrom, searchChosaItakusakiCodeTo,
-                jigyoshaMeisho, jigyoshaMeishoKana, chosaItakuKubun, kikanKubun, limit);
+                jigyoshaMeisho, jigyoshaMeishoKana, chosaItakuKubun, kikanKubun, limit, ddlItakusakiMeishoKey, ddlItakusakiKanaMeishoKey);
     }
 
     private RString checkForNullOrEmpty(RString str) {
