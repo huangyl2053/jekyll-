@@ -23,7 +23,7 @@ import jp.co.ndensan.reams.uz.uza.math.Decimal;
  *
  * 転入 広域保留対象者情報の取得処理の取得します
  */
-public class TenshutsuHoryuTaishoshaBusiness implements TennyuTenshutsuHoryuTaishosha {
+public class TenshutsuHoryuTaishoshaBusiness implements ITennyuTenshutsuHoryuTaishosha {
 
     private final TenshutsuHoryuTaishoshaEntity entity;
 

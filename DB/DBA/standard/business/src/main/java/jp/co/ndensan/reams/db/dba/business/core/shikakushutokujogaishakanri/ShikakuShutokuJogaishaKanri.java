@@ -20,15 +20,15 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
  */
 public class ShikakuShutokuJogaishaKanri {
 
-    private final ShikakuShutokuJogaishaKanriEntity shikakuShutokuJogaishaKanriEntity;
+    private final ShikakuShutokuJogaishaKanriEntity entity;
 
     /**
      * 資格取得除外者一覧取得のEntity
      *
-     * @param shikakuShutokuJogaishaKanriEntity ShikakuShutokuJogaishaKanriEntity
+     * @param entity ShikakuShutokuJogaishaKanriEntity
      */
-    public ShikakuShutokuJogaishaKanri(ShikakuShutokuJogaishaKanriEntity shikakuShutokuJogaishaKanriEntity) {
-        this.shikakuShutokuJogaishaKanriEntity = shikakuShutokuJogaishaKanriEntity;
+    public ShikakuShutokuJogaishaKanri(ShikakuShutokuJogaishaKanriEntity entity) {
+        this.entity = entity;
     }
 
     /**
@@ -37,7 +37,7 @@ public class ShikakuShutokuJogaishaKanri {
      * @return 市町村コード
      */
     public LasdecCode getShichosonCode() {
-        return shikakuShutokuJogaishaKanriEntity.getShichosonCode();
+        return entity.getShichosonCode();
     }
 
     /**
@@ -46,7 +46,7 @@ public class ShikakuShutokuJogaishaKanri {
      * @return 識別コード
      */
     public ShikibetsuCode getShikibetsuCode() {
-        return shikakuShutokuJogaishaKanriEntity.getShikibetsuCode();
+        return entity.getShikibetsuCode();
     }
 
     /**
@@ -55,7 +55,7 @@ public class ShikakuShutokuJogaishaKanri {
      * @return 履歴番号
      */
     public int getRirekiNo() {
-        return shikakuShutokuJogaishaKanriEntity.getRirekiNo();
+        return entity.getRirekiNo();
     }
 
     /**
@@ -64,7 +64,7 @@ public class ShikakuShutokuJogaishaKanri {
      * @return 氏名
      */
     public AtenaMeisho getMeisho() {
-        return shikakuShutokuJogaishaKanriEntity.getMeisho();
+        return entity.getMeisho();
     }
 
     /**
@@ -73,7 +73,7 @@ public class ShikakuShutokuJogaishaKanri {
      * @return 生年月日
      */
     public FlexibleDate getSeinengappiYMD() {
-        return shikakuShutokuJogaishaKanriEntity.getSeinengappiYMD();
+        return entity.getSeinengappiYMD();
     }
 
     /**
@@ -82,7 +82,7 @@ public class ShikakuShutokuJogaishaKanri {
      * @return 性別
      */
     public RString getSeibetsuCode() {
-        return Gender.toValue(shikakuShutokuJogaishaKanriEntity.getSeibetsuCode()).getName().getShortJapanese();
+        return Gender.toValue(entity.getSeibetsuCode()).getName().getShortJapanese();
     }
 
     /**
@@ -91,7 +91,7 @@ public class ShikakuShutokuJogaishaKanri {
      * @return 住民状態
      */
     public RString getJuminJotaiCode() {
-        return JuminJotai.toValue(shikakuShutokuJogaishaKanriEntity.getJuminJotaiCode()).住民状態略称();
+        return JuminJotai.toValue(entity.getJuminJotaiCode()).住民状態略称();
     }
 
     /**
@@ -100,7 +100,7 @@ public class ShikakuShutokuJogaishaKanri {
      * @return 資格取得除外理由
      */
     public RString getShikakuShutokuJogaiRiyu() {
-        return shikakuShutokuJogaishaKanriEntity.getShikakuShutokuJogaiRiyu();
+        return entity.getShikakuShutokuJogaiRiyu();
     }
 
     /**
@@ -109,7 +109,7 @@ public class ShikakuShutokuJogaishaKanri {
      * @return 資格取得除外年月日
      */
     public FlexibleDate getShikakuShutokuJogaiYMD() {
-        return shikakuShutokuJogaishaKanriEntity.getShikakuShutokuJogaiYMD();
+        return entity.getShikakuShutokuJogaiYMD();
     }
 
     /**
@@ -118,7 +118,7 @@ public class ShikakuShutokuJogaishaKanri {
      * @return 資格取得除外解除年月日
      */
     public FlexibleDate getShikakuShutokuJogaiKaijoYMD() {
-        return shikakuShutokuJogaishaKanriEntity.getShikakuShutokuJogaiKaijoYMD();
+        return entity.getShikakuShutokuJogaiKaijoYMD();
     }
 
 }
