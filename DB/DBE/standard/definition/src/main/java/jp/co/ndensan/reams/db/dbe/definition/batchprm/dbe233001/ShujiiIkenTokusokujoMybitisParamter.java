@@ -15,7 +15,7 @@ import lombok.Getter;
  */
 @SuppressWarnings("PMD.UnusedPrivateField")
 @Getter
-public class ShujiiIkenTokusokujoMybitisParamter implements IMyBatisParameter {
+public final class ShujiiIkenTokusokujoMybitisParamter implements IMyBatisParameter {
 
     private final FlexibleDate temp_基準日;
     private final RString temp_印刷済対象者;
@@ -26,6 +26,20 @@ public class ShujiiIkenTokusokujoMybitisParamter implements IMyBatisParameter {
     private final boolean uses保険者コード;
     private final boolean uses主治医医療機関コード;
     private final boolean uses主治医コード;
+
+    private ShujiiIkenTokusokujoMybitisParamter(FlexibleDate temp_基準日, RString temp_印刷済対象者, RString temp_保険者コード,
+            RString temp_主治医医療機関コード, RString temp_主治医コード, boolean uses印刷済対象者, boolean uses保険者コード,
+            boolean uses主治医医療機関コード, boolean uses主治医コード) {
+        this.temp_基準日 = temp_基準日;
+        this.temp_印刷済対象者 = temp_印刷済対象者;
+        this.temp_保険者コード = temp_保険者コード;
+        this.temp_主治医医療機関コード = temp_主治医医療機関コード;
+        this.temp_主治医コード = temp_主治医コード;
+        this.uses印刷済対象者 = uses印刷済対象者;
+        this.uses保険者コード = uses保険者コード;
+        this.uses主治医医療機関コード = uses主治医医療機関コード;
+        this.uses主治医コード = uses主治医コード;
+    }
 
     /**
      * コンストラクタです。
@@ -39,8 +53,9 @@ public class ShujiiIkenTokusokujoMybitisParamter implements IMyBatisParameter {
      * @param uses保険者コード uses保険者コード
      * @param uses主治医医療機関コード uses主治医医療機関コード
      * @param uses主治医コード uses主治医コード
+     * @return ShujiiIkenTokusokujoMybitisParamter
      */
-    public ShujiiIkenTokusokujoMybitisParamter(
+    public static ShujiiIkenTokusokujoMybitisParamter createParam(
             FlexibleDate temp_基準日,
             RString temp_印刷済対象者,
             RString temp_保険者コード,
@@ -66,14 +81,7 @@ public class ShujiiIkenTokusokujoMybitisParamter implements IMyBatisParameter {
         if (temp_主治医コード != null && !temp_主治医コード.isEmpty()) {
             uses主治医コード = true;
         }
-        this.temp_基準日 = temp_基準日;
-        this.temp_印刷済対象者 = temp_印刷済対象者;
-        this.temp_保険者コード = temp_保険者コード;
-        this.temp_主治医医療機関コード = temp_主治医医療機関コード;
-        this.temp_主治医コード = temp_主治医コード;
-        this.uses印刷済対象者 = uses印刷済対象者;
-        this.uses保険者コード = uses保険者コード;
-        this.uses主治医医療機関コード = uses主治医医療機関コード;
-        this.uses主治医コード = uses主治医コード;
+        return new ShujiiIkenTokusokujoMybitisParamter(temp_基準日, temp_印刷済対象者, temp_保険者コード, temp_主治医医療機関コード,
+                temp_主治医コード, uses印刷済対象者, uses保険者コード, uses主治医医療機関コード, uses主治医コード);
     }
 }

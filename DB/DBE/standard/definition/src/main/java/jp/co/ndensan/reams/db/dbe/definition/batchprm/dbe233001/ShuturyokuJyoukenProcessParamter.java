@@ -44,7 +44,7 @@ public class ShuturyokuJyoukenProcessParamter implements IBatchProcessParameter 
     public ShujiiIkenTokusokujoMybitisParamter toShujiiIkenTokusokujoMybitisParamter() {
         this.temp_基準日 = this.temp_基準日.minusDay(Integer.parseInt(temp_主治医意見書督促期限日数.toString()));
 
-        return new ShujiiIkenTokusokujoMybitisParamter(this.temp_基準日,
+        return ShujiiIkenTokusokujoMybitisParamter.createParam(this.temp_基準日,
                 this.temp_印刷済対象者,
                 this.temp_保険者コード,
                 this.temp_主治医医療機関コード,
@@ -61,7 +61,7 @@ public class ShuturyokuJyoukenProcessParamter implements IBatchProcessParameter 
      * @return 主治医意見書督促対象者一覧表のMybatisパラメータ
      */
     public ShujiiIkenTokusokujoHakkoMybitisParamter toShujiiIkenTokusokujoHakkoMybitisParamter() {
-        return new ShujiiIkenTokusokujoHakkoMybitisParamter(this.temp_印刷期間開始日 == null ? null : this.temp_印刷期間開始日.toDateString(),
+        return ShujiiIkenTokusokujoHakkoMybitisParamter.createParam(this.temp_印刷期間開始日 == null ? null : this.temp_印刷期間開始日.toDateString(),
                 this.temp_印刷期間終了日 == null ? null : this.temp_印刷期間終了日.toDateString(),
                 this.temp_保険者コード,
                 this.temp_主治医医療機関コード,
