@@ -4,7 +4,7 @@
 
 
 -->
-<mapper namespace="jp.co.ndensan.reams.db.dbc.persistence.mappers.KogakuKyufuKetteiDataTempTableMapper">
+<mapper namespace="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.kogakuserviceketteijoho.IKogakuServiceKetteiJohoTorikomiDataHenshuMapper">
     
     <resultMap id="resultMap_YishiEntity" type="jp.co.ndensan.reams.db.dbc.entity.db.basic.YishiEntity" autoMapping="true">
         <result property="決定者受取年月" column="決定者受取年月" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleYearMonthTypeHandler"/>
