@@ -77,10 +77,10 @@ public class GemmenShokaiHandler {
     private void onLoad給付制限情報(HihokenshaNo 被保険者番号) {
         GemmenJokyoFinder finder = GemmenJokyoFinder.createIntance();
         ShiharaiHohoHenkoSummaryBusiness 支払方法変更情報 = finder.find支払方法変更情報(被保険者番号);
-        div.getTxtShiharaiHohoHenkoTorokuKubun().setValue(支払方法変更情報.get支払方法変更_登録区分().get名称());
+        //div.getTxtShiharaiHohoHenkoTorokuKubun().setValue(支払方法変更情報.get支払方法変更_登録区分().get名称());
         div.getTxtShiharaiHohoHenkoKaishiYMD().setValue(支払方法変更情報.get支払方法変更_開始日());
         div.getTxtShiharaiHohoHenkoShuryoYMD().setValue(支払方法変更情報.get支払方法変更_終了日());
-        div.getTxtKyufuGakuGengakuTorokuKubun().setValue(支払方法変更情報.get給付額減額_登録区分().get名称());
+        //div.getTxtKyufuGakuGengakuTorokuKubun().setValue(支払方法変更情報.get給付額減額_登録区分().get名称());
         div.getTxtKyufuGakuGengakuKaishiYMD().setValue(支払方法変更情報.get給付額減額_開始日());
         div.getTxtKyufuGakuGengakuShuryoYMD().setValue(支払方法変更情報.get給付額減額_終了日());
     }
