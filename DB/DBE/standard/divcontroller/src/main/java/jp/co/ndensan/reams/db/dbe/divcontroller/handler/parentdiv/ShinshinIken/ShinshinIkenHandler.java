@@ -20,6 +20,7 @@ import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoK
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.KoroshoIfShikibetsuCode;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.ikensho.IkenKomoku01;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.ikensho.IkenKomoku02;
+import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.ikensho.IkenKomoku03;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.ikensho.IkenKomoku07;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.ikensho.IkenKomoku08;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.ikensho.IkenKomoku09;
@@ -809,7 +810,7 @@ public class ShinshinIkenHandler {
         for (ShujiiIkenshoIkenItem item : 意見項目List) {
             if (認知症高齢者の日常生活自立度 == item.get連番()) {
                 flag = true;
-                selectKey.add(setRadioKey(item));
+                selectKey.add(set認知症高齢者の日常生活自立度Key(item));
                 モード判断_意見項目(item);
             }
         }
@@ -1886,6 +1887,29 @@ public class ShinshinIkenHandler {
         return itemToKey(item.get意見項目());
     }
 
+    private RString set認知症高齢者の日常生活自立度Key(ShujiiIkenshoIkenItem item) {
+        if (IkenKomoku03.自立.getコード().equals(item.get意見項目())) {
+            return チェックボックス_1;
+        } else if (IkenKomoku03.Ⅰ.getコード().equals(item.get意見項目())) {
+            return チェックボックス_2;
+        } else if (IkenKomoku03.Ⅱa.getコード().equals(item.get意見項目())) {
+            return チェックボックス_3;
+        } else if (IkenKomoku03.Ⅱa.getコード().equals(item.get意見項目())) {
+            return チェックボックス_4;
+        } else if (IkenKomoku03.Ⅲa.getコード().equals(item.get意見項目())) {
+            return チェックボックス_5;
+        } else if (IkenKomoku03.Ⅲb.getコード().equals(item.get意見項目())) {
+            return チェックボックス_6;
+        } else if (IkenKomoku03.Ⅳ.getコード().equals(item.get意見項目())) {
+            return チェックボックス_7;
+        } else if (IkenKomoku03.M.getコード().equals(item.get意見項目())) {
+            return チェックボックス_8;
+        } else {
+            return チェックボックス_9;
+        }
+    }
+    
+    
     private List<RString> setCheckBoxNasiAri(ShujiiIkenshoIkenItem item) {
         List<RString> selectKey = new ArrayList<>();
         if (IkenKomoku07.有.getコード().equals(item.get意見項目())) {
