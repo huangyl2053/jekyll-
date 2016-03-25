@@ -23,20 +23,24 @@ public class ChosainSearchDiv extends Panel {
      * コントロール名とフィールド名を取得する
      * private + コントロール名 + フィールド名 の文字列を作成
      */
-    @JsonProperty("radSearchChosainJokyo")
-    private RadioButton radSearchChosainJokyo;
     @JsonProperty("txtSearchChosaItakusakiCodeFrom")
     private TextBoxCode txtSearchChosaItakusakiCodeFrom;
     @JsonProperty("txtSearchChosaItakusakiCodeTo")
     private TextBoxCode txtSearchChosaItakusakiCodeTo;
     @JsonProperty("txtSearchChosaItakusakiMeisho")
     private TextBox txtSearchChosaItakusakiMeisho;
+    @JsonProperty("ddlItakusakiMeisho")
+    private DropDownList ddlItakusakiMeisho;
     @JsonProperty("txtSearchChosaItakusakiKanaMeisho")
     private TextBoxKana txtSearchChosaItakusakiKanaMeisho;
+    @JsonProperty("ddlItakusakiKanaMeisho")
+    private DropDownList ddlItakusakiKanaMeisho;
     @JsonProperty("ddlitakukubun")
     private DropDownList ddlitakukubun;
     @JsonProperty("ddlkikankubun")
     private DropDownList ddlkikankubun;
+    @JsonProperty("radSearchChosainJokyo")
+    private RadioButton radSearchChosainJokyo;
     @JsonProperty("txtSaidaiHyojiKensu")
     private TextBoxNum txtSaidaiHyojiKensu;
     @JsonProperty("btnSearchShujii")
@@ -52,24 +56,6 @@ public class ChosainSearchDiv extends Panel {
      * コントロール名とフィールド名を取得する
      * フィールド名のGetterとSetter を作成
      */
-    /*
-     * getradSearchChosainJokyo
-     * @return radSearchChosainJokyo
-     */
-    @JsonProperty("radSearchChosainJokyo")
-    public RadioButton getRadSearchChosainJokyo() {
-        return radSearchChosainJokyo;
-    }
-
-    /*
-     * setradSearchChosainJokyo
-     * @param radSearchChosainJokyo radSearchChosainJokyo
-     */
-    @JsonProperty("radSearchChosainJokyo")
-    public void setRadSearchChosainJokyo(RadioButton radSearchChosainJokyo) {
-        this.radSearchChosainJokyo = radSearchChosainJokyo;
-    }
-
     /*
      * gettxtSearchChosaItakusakiCodeFrom
      * @return txtSearchChosaItakusakiCodeFrom
@@ -125,6 +111,24 @@ public class ChosainSearchDiv extends Panel {
     }
 
     /*
+     * getddlItakusakiMeisho
+     * @return ddlItakusakiMeisho
+     */
+    @JsonProperty("ddlItakusakiMeisho")
+    public DropDownList getDdlItakusakiMeisho() {
+        return ddlItakusakiMeisho;
+    }
+
+    /*
+     * setddlItakusakiMeisho
+     * @param ddlItakusakiMeisho ddlItakusakiMeisho
+     */
+    @JsonProperty("ddlItakusakiMeisho")
+    public void setDdlItakusakiMeisho(DropDownList ddlItakusakiMeisho) {
+        this.ddlItakusakiMeisho = ddlItakusakiMeisho;
+    }
+
+    /*
      * gettxtSearchChosaItakusakiKanaMeisho
      * @return txtSearchChosaItakusakiKanaMeisho
      */
@@ -140,6 +144,24 @@ public class ChosainSearchDiv extends Panel {
     @JsonProperty("txtSearchChosaItakusakiKanaMeisho")
     public void setTxtSearchChosaItakusakiKanaMeisho(TextBoxKana txtSearchChosaItakusakiKanaMeisho) {
         this.txtSearchChosaItakusakiKanaMeisho = txtSearchChosaItakusakiKanaMeisho;
+    }
+
+    /*
+     * getddlItakusakiKanaMeisho
+     * @return ddlItakusakiKanaMeisho
+     */
+    @JsonProperty("ddlItakusakiKanaMeisho")
+    public DropDownList getDdlItakusakiKanaMeisho() {
+        return ddlItakusakiKanaMeisho;
+    }
+
+    /*
+     * setddlItakusakiKanaMeisho
+     * @param ddlItakusakiKanaMeisho ddlItakusakiKanaMeisho
+     */
+    @JsonProperty("ddlItakusakiKanaMeisho")
+    public void setDdlItakusakiKanaMeisho(DropDownList ddlItakusakiKanaMeisho) {
+        this.ddlItakusakiKanaMeisho = ddlItakusakiKanaMeisho;
     }
 
     /*
@@ -176,6 +198,24 @@ public class ChosainSearchDiv extends Panel {
     @JsonProperty("ddlkikankubun")
     public void setDdlkikankubun(DropDownList ddlkikankubun) {
         this.ddlkikankubun = ddlkikankubun;
+    }
+
+    /*
+     * getradSearchChosainJokyo
+     * @return radSearchChosainJokyo
+     */
+    @JsonProperty("radSearchChosainJokyo")
+    public RadioButton getRadSearchChosainJokyo() {
+        return radSearchChosainJokyo;
+    }
+
+    /*
+     * setradSearchChosainJokyo
+     * @param radSearchChosainJokyo radSearchChosainJokyo
+     */
+    @JsonProperty("radSearchChosainJokyo")
+    public void setRadSearchChosainJokyo(RadioButton radSearchChosainJokyo) {
+        this.radSearchChosainJokyo = radSearchChosainJokyo;
     }
 
     /*

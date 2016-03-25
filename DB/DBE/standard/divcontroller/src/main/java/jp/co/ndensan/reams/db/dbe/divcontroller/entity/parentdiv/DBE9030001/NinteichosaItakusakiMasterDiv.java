@@ -11,14 +11,8 @@ import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.KaigoKanry
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.KaigoKanryoMessage.KaigoKanryoMessage.KaigoKanryoMessageDiv;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.hokenshalist.HokenshaList.IHokenshaListDiv;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.ui.binding.Button;
-import jp.co.ndensan.reams.uz.uza.ui.binding.DropDownList;
+import jp.co.ndensan.reams.uz.uza.ui.binding.*;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
-import jp.co.ndensan.reams.uz.uza.ui.binding.RadioButton;
-import jp.co.ndensan.reams.uz.uza.ui.binding.TextBox;
-import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxCode;
-import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxKana;
-import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxNum;
 
 /**
  * NinteichosaItakusakiMaster のクラスファイル
@@ -36,10 +30,10 @@ public class NinteichosaItakusakiMasterDiv extends Panel {
      */
     @JsonProperty("ChosainSearch")
     private ChosainSearchDiv ChosainSearch;
-    @JsonProperty("Chosaitakusakichiran")
-    private ChosaitakusakichiranDiv Chosaitakusakichiran;
     @JsonProperty("ChosaitakusakiJohoInput")
     private ChosaitakusakiJohoInputDiv ChosaitakusakiJohoInput;
+    @JsonProperty("Chosaitakusakichiran")
+    private ChosaitakusakichiranDiv Chosaitakusakichiran;
     @JsonProperty("ccdKanryoMessage")
     private KaigoKanryoMessageDiv ccdKanryoMessage;
     @JsonProperty("状態")
@@ -90,24 +84,6 @@ public class NinteichosaItakusakiMasterDiv extends Panel {
     }
 
     /*
-     * getChosaitakusakichiran
-     * @return Chosaitakusakichiran
-     */
-    @JsonProperty("Chosaitakusakichiran")
-    public ChosaitakusakichiranDiv getChosaitakusakichiran() {
-        return Chosaitakusakichiran;
-    }
-
-    /*
-     * setChosaitakusakichiran
-     * @param Chosaitakusakichiran Chosaitakusakichiran
-     */
-    @JsonProperty("Chosaitakusakichiran")
-    public void setChosaitakusakichiran(ChosaitakusakichiranDiv Chosaitakusakichiran) {
-        this.Chosaitakusakichiran = Chosaitakusakichiran;
-    }
-
-    /*
      * getChosaitakusakiJohoInput
      * @return ChosaitakusakiJohoInput
      */
@@ -123,6 +99,24 @@ public class NinteichosaItakusakiMasterDiv extends Panel {
     @JsonProperty("ChosaitakusakiJohoInput")
     public void setChosaitakusakiJohoInput(ChosaitakusakiJohoInputDiv ChosaitakusakiJohoInput) {
         this.ChosaitakusakiJohoInput = ChosaitakusakiJohoInput;
+    }
+
+    /*
+     * getChosaitakusakichiran
+     * @return Chosaitakusakichiran
+     */
+    @JsonProperty("Chosaitakusakichiran")
+    public ChosaitakusakichiranDiv getChosaitakusakichiran() {
+        return Chosaitakusakichiran;
+    }
+
+    /*
+     * setChosaitakusakichiran
+     * @param Chosaitakusakichiran Chosaitakusakichiran
+     */
+    @JsonProperty("Chosaitakusakichiran")
+    public void setChosaitakusakichiran(ChosaitakusakichiranDiv Chosaitakusakichiran) {
+        this.Chosaitakusakichiran = Chosaitakusakichiran;
     }
 
     /*
@@ -336,16 +330,6 @@ public class NinteichosaItakusakiMasterDiv extends Panel {
      * [ ショートカットの作成 ]
      */
     @JsonIgnore
-    public RadioButton getRadSearchChosainJokyo() {
-        return this.getChosainSearch().getRadSearchChosainJokyo();
-    }
-
-    @JsonIgnore
-    public void setRadSearchChosainJokyo(RadioButton radSearchChosainJokyo) {
-        this.getChosainSearch().setRadSearchChosainJokyo(radSearchChosainJokyo);
-    }
-
-    @JsonIgnore
     public TextBoxCode getTxtSearchChosaItakusakiCodeFrom() {
         return this.getChosainSearch().getTxtSearchChosaItakusakiCodeFrom();
     }
@@ -376,6 +360,16 @@ public class NinteichosaItakusakiMasterDiv extends Panel {
     }
 
     @JsonIgnore
+    public DropDownList getDdlItakusakiMeisho() {
+        return this.getChosainSearch().getDdlItakusakiMeisho();
+    }
+
+    @JsonIgnore
+    public void setDdlItakusakiMeisho(DropDownList ddlItakusakiMeisho) {
+        this.getChosainSearch().setDdlItakusakiMeisho(ddlItakusakiMeisho);
+    }
+
+    @JsonIgnore
     public TextBoxKana getTxtSearchChosaItakusakiKanaMeisho() {
         return this.getChosainSearch().getTxtSearchChosaItakusakiKanaMeisho();
     }
@@ -383,6 +377,16 @@ public class NinteichosaItakusakiMasterDiv extends Panel {
     @JsonIgnore
     public void setTxtSearchChosaItakusakiKanaMeisho(TextBoxKana txtSearchChosaItakusakiKanaMeisho) {
         this.getChosainSearch().setTxtSearchChosaItakusakiKanaMeisho(txtSearchChosaItakusakiKanaMeisho);
+    }
+
+    @JsonIgnore
+    public DropDownList getDdlItakusakiKanaMeisho() {
+        return this.getChosainSearch().getDdlItakusakiKanaMeisho();
+    }
+
+    @JsonIgnore
+    public void setDdlItakusakiKanaMeisho(DropDownList ddlItakusakiKanaMeisho) {
+        this.getChosainSearch().setDdlItakusakiKanaMeisho(ddlItakusakiKanaMeisho);
     }
 
     @JsonIgnore
@@ -403,6 +407,16 @@ public class NinteichosaItakusakiMasterDiv extends Panel {
     @JsonIgnore
     public void setDdlkikankubun(DropDownList ddlkikankubun) {
         this.getChosainSearch().setDdlkikankubun(ddlkikankubun);
+    }
+
+    @JsonIgnore
+    public RadioButton getRadSearchChosainJokyo() {
+        return this.getChosainSearch().getRadSearchChosainJokyo();
+    }
+
+    @JsonIgnore
+    public void setRadSearchChosainJokyo(RadioButton radSearchChosainJokyo) {
+        this.getChosainSearch().setRadSearchChosainJokyo(radSearchChosainJokyo);
     }
 
     @JsonIgnore
