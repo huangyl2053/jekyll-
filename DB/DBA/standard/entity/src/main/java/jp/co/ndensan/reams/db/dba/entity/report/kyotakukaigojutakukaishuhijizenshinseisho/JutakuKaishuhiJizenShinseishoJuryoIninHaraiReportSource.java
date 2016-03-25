@@ -1,10 +1,12 @@
-// TODO: 業務に合わせてパスを変更してください
 package jp.co.ndensan.reams.db.dba.entity.report.kyotakukaigojutakukaishuhijizenshinseisho;
 
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.report.IReportSource;
 import jp.co.ndensan.reams.uz.uza.report.source.ReportItem;
 
+/**
+ * 介護保険居宅介護（予防）住宅改修費事前（受領委任払）申請書クラスです。
+ */
 public class JutakuKaishuhiJizenShinseishoJuryoIninHaraiReportSource implements IReportSource {
 // <editor-fold defaultstate="collapsed" desc="Generated Code">
 

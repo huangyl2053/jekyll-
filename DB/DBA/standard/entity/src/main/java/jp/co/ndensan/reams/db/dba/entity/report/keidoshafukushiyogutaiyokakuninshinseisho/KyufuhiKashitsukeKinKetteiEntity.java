@@ -17,18 +17,38 @@ public class KyufuhiKashitsukeKinKetteiEntity {
     private HihokenshaNo hihokenshaNo;
     private RString kashitsukeKanriNo;
 
+    /**
+     * 被保険者番号の取得します。
+     *
+     * @return 被保険者番号
+     */
     public HihokenshaNo getHihokenshaNo() {
         return hihokenshaNo;
     }
 
+    /**
+     * 被保険者番号の設定します。
+     *
+     * @param hihokenshaNo 被保険者番号
+     */
     public void setHihokenshaNo(HihokenshaNo hihokenshaNo) {
         this.hihokenshaNo = hihokenshaNo;
     }
 
+    /**
+     * 貸付番号の取得します。
+     *
+     * @return 貸付番号
+     */
     public RString getKashitsukeKanriNo() {
         return kashitsukeKanriNo;
     }
 
+    /**
+     * 貸付番号の設定します。
+     *
+     * @param kashitsukeKanriNo 貸付番号
+     */
     public void setKashitsukeKanriNo(RString kashitsukeKanriNo) {
         this.kashitsukeKanriNo = kashitsukeKanriNo;
     }
