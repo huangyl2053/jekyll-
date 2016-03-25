@@ -5,7 +5,8 @@
  */
 package jp.co.ndensan.reams.db.dbd.business.common;
 
-import jp.co.ndensan.reams.db.dbb.business.shiharaihohohenko.ShiharaiHohoHenkoSummary;
+import jp.co.ndensan.reams.db.dbd.business.shiharaihohohenko.ShiharaiHohoHenkoSummary;
+import jp.co.ndensan.reams.db.dbd.definition.enumeratedtype.core.ShiharaiHenkoTorokuKubun;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 
 /**
@@ -25,22 +26,24 @@ public class ShiharaiHohoHenkoSummaryBusiness {
         this.支払方法変更概況 = 支払方法変更概況;
     }
 
-//    /**
-//     * 支払方法変更_登録区分を返します。
-//     *
-//     * @return 支払方法変更_登録区分
-//     */
-//    public ShiharaiHenkoTorokuKubun get支払方法変更_登録区分() {
-//        return 支払方法変更概況.get支払方法変更_登録区分();
-//    }
-//    /**
-//     * 給付額減額_登録区分を返します。
-//     *
-//     * @return 給付額減額_登録区分
-//     */
-//    public ShiharaiHenkoTorokuKubun get給付額減額_登録区分() {
-//        return 支払方法変更概況.get給付額減額_登録区分();
-//    }
+    /**
+     * 支払方法変更_登録区分を返します。
+     *
+     * @return 支払方法変更_登録区分
+     */
+    public ShiharaiHenkoTorokuKubun get支払方法変更_登録区分() {
+        return 支払方法変更概況.get支払方法変更_登録区分();
+    }
+
+    /**
+     * 給付額減額_登録区分を返します。
+     *
+     * @return 給付額減額_登録区分
+     */
+    public ShiharaiHenkoTorokuKubun get給付額減額_登録区分() {
+        return 支払方法変更概況.get給付額減額_登録区分();
+    }
+
     /**
      * 支払方法変更_開始日を返します。
      *

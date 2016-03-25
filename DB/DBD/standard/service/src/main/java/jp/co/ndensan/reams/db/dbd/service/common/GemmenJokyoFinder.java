@@ -7,12 +7,12 @@ package jp.co.ndensan.reams.db.dbd.service.common;
 
 import java.util.ArrayList;
 import java.util.List;
-import jp.co.ndensan.reams.db.dbb.business.shiharaihohohenko.ShiharaiHohoHenkoSummary;
 import jp.co.ndensan.reams.db.dbd.business.common.NursingCareInformationBusiness;
 import jp.co.ndensan.reams.db.dbd.business.common.ShiharaiHohoHenkoSummaryBusiness;
 import jp.co.ndensan.reams.db.dbd.business.common.VariousReductionInformation;
 import jp.co.ndensan.reams.db.dbd.business.core.basic.JukyushaDaicho;
 import jp.co.ndensan.reams.db.dbd.business.core.futanwariai.RiyoshaFutanWariaiMeisai;
+import jp.co.ndensan.reams.db.dbd.business.shiharaihohohenko.ShiharaiHohoHenkoSummary;
 import jp.co.ndensan.reams.db.dbd.definition.common.GemmenJokyoParameter;
 import jp.co.ndensan.reams.db.dbd.definition.enumeratedtype.core.JukyuShinseiJiyu;
 import jp.co.ndensan.reams.db.dbd.definition.enumeratedtype.core.ShiharaiHenkoKanriKubun;
@@ -45,7 +45,6 @@ public class GemmenJokyoFinder {
 
     private final MapperProvider mapperProvider;
     private final IGemmenJokyoMapper mapper;
-    private ShiharaiHenkoTorokuKubun ShiharaiHenkoTorokuKubun;
 
     /**
      * コンストラクタです。
