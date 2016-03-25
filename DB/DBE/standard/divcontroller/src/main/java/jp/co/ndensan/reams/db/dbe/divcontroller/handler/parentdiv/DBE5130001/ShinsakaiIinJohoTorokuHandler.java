@@ -169,7 +169,6 @@ public class ShinsakaiIinJohoTorokuHandler {
         } else {
             div.getDdlHaishiFlag().setSelectedKey(KEY_有効);
         }
-        div.getTxtHaishiYMD().setValue(div.getDgShinsaInJohoIchiran().getClickedItem().getHaishiYMD().getValue());
         div.getTxtTelNo1().setDomain(new TelNo(div.getDgShinsaInJohoIchiran().getClickedItem().getTelNo1()));
         div.getTxtFaxNo().setDomain(new TelNo(div.getDgShinsaInJohoIchiran().getClickedItem().getFaxNo()));
     }
@@ -195,7 +194,11 @@ public class ShinsakaiIinJohoTorokuHandler {
         div.getDdlYusoKubun().setDisabled(false);
         div.getTxtJusho().setDisabled(false);
         div.getDdlHaishiFlag().setDisabled(false);
-        div.getTxtHaishiYMD().setDisabled(false);
+        if (KEY_有効.equals(div.getDdlHaishiFlag().getSelectedKey())) {
+            div.getTxtHaishiYMD().setReadOnly(true);
+        } else {
+            div.getTxtHaishiYMD().setReadOnly(false);
+        }
         div.getTxtTelNo1().setDisabled(false);
         div.getTxtFaxNo().setDisabled(false);
         div.getBtnToroku().setDisabled(false);
@@ -222,7 +225,6 @@ public class ShinsakaiIinJohoTorokuHandler {
         div.getDdlYusoKubun().setDisabled(false);
         div.getTxtJusho().setDisabled(false);
         div.getDdlHaishiFlag().setDisabled(false);
-        div.getTxtHaishiYMD().setDisabled(false);
         div.getTxtTelNo1().setDisabled(false);
         div.getTxtFaxNo().setDisabled(false);
         div.getBtnDelete().setDisabled(false);
@@ -350,7 +352,7 @@ public class ShinsakaiIinJohoTorokuHandler {
         div.getDdlHaishiFlag().setSelectedKey(KEY_有効);
         div.getDdlHaishiFlag().setDisabled(true);
         div.getTxtHaishiYMD().clearValue();
-        div.getTxtHaishiYMD().setDisabled(true);
+        div.getTxtHaishiYMD().setReadOnly(true);
         div.getTxtTelNo1().clearDomain();
         div.getTxtTelNo1().setDisabled(true);
         div.getTxtFaxNo().clearDomain();
@@ -476,6 +478,9 @@ public class ShinsakaiIinJohoTorokuHandler {
         return false;
     }
 
+    /**
+     * 選択された審査会委員詳細情報をhidden項目に格納します。
+     */
     public void setShinsakaiIinJohoSyosai() {
         dgShinsaInJohoIchiran_Row clickRow = div.getDgShinsaInJohoIchiran().getClickedItem();
         RStringBuilder builder = new RStringBuilder(clickRow.getShinsainCode());

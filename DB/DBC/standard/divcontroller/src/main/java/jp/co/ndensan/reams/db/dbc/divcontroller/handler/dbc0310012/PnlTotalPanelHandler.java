@@ -268,57 +268,62 @@ public class PnlTotalPanelHandler {
         ShokanJuryoininKeiyakushaBuilder builder = shokan.createBuilderForEdit();
         builder.set受付年月日(new FlexibleDate(div.getPnlCommon().getPnlDetail().getTxtKeyakushinseuketukebi()
                 .getValue().toDateString()));
-        if (div.getPnlCommon().getPnlDetail().getTxtKeyakukettebi().getValue() != null) {
-            builder.set決定年月日(new FlexibleDate(div.getPnlCommon().getPnlDetail()
-                    .getTxtKeyakukettebi().getValue().toDateString()));
-        }
-        if (ShoninKubun.承認する.getコード().equals(div.getPnlCommon().getPnlDetail()
-                .getRdoKettekubun().getSelectedKey())) {
-            builder.set承認結果区分(ShoninKubun.承認する.getコード());
-        } else if (ShoninKubun.承認しない.getコード().equals(div.getPnlCommon().getPnlDetail()
-                .getRdoKettekubun().getSelectedKey())) {
-            builder.set承認結果区分(ShoninKubun.承認しない.getコード());
-        }
-        if (div.getPnlCommon().getPnlDetail().getPnlHidari().getTxtSyoninkikan().getFromValue() != null) {
-            builder.set受領委任払適用開始年月日(new FlexibleDate(div.getPnlCommon().getPnlDetail().getPnlHidari()
-                    .getTxtSyoninkikan().getFromValue().toDateString()));
-        }
-        if (div.getPnlCommon().getPnlDetail().getPnlHidari().getTxtSyoninkikan().getToValue() != null) {
-            builder.set受領委任払適用終了年月日(new FlexibleDate(div.getPnlCommon().getPnlDetail().getPnlHidari()
-                    .getTxtSyoninkikan().getToValue().toDateString()));
-        }
-        if (ShoninKubun.承認する.getコード().equals(div.getPnlCommon().getPnlDetail()
-                .getRdoKettekubun().getSelectedKey())) {
-            RStringBuilder rsb = new RStringBuilder();
-            rsb.append(div.getPnlCommon().getPnlDetail().getPnlHidari().getDdlYear().getSelectedValue());
-            rsb.append(div.getPnlCommon().getPnlDetail().getPnlHidari().getTxtBango1().getValue());
-            rsb.append(div.getPnlCommon().getPnlDetail().getPnlHidari().getTxtBango2().getValue());
-            builder.set契約番号(rsb.toRString());
-        }
-        if (!div.getPnlCommon().getPnlDetail().getTxtFusyoninriyu().getValue().isNullOrEmpty()) {
-            builder.set不承認理由(div.getPnlCommon().getPnlDetail().getTxtFusyoninriyu().getValue());
-        }
-        if (div.getPnlCommon().getPnlDetail().getPnlKyufuhi().getTxtHiyogakugokei().getValue() != null) {
-            builder.set費用額合計(div.getPnlCommon().getPnlDetail().getPnlKyufuhi().getTxtHiyogakugokei().getValue());
-        }
-        if (div.getPnlCommon().getPnlDetail().getPnlKyufuhi().getTxtHokentaisyohiyogaku().getValue() != null) {
-            builder.set保険対象費用額(div.getPnlCommon().getPnlDetail().getPnlKyufuhi()
-                    .getTxtHokentaisyohiyogaku().getValue());
-        }
-        if (div.getPnlCommon().getPnlDetail().getPnlKyufuhi().getTxtRiyosyajikofutangaku().getValue() != null) {
-            builder.set利用者自己負担額(div.getPnlCommon().getPnlDetail().getPnlKyufuhi()
-                    .getTxtRiyosyajikofutangaku().getValue());
-        }
-        if (div.getPnlCommon().getPnlDetail().getPnlKyufuhi().getTxtHokenkyufuhiyogaku().getValue() != null) {
-            builder.set保険給付費額(div.getPnlCommon().getPnlDetail().getPnlKyufuhi()
-                    .getTxtHokenkyufuhiyogaku().getValue());
-        }
-        if (div.getPnlCommon().getPnlDetail().getPnlHidari().getChkSaihakoukubun().isAllSelected()) {
-            builder.set承認結果通知書再発行区分(new RString("1"));
+        if (div.getPnlCommon().getPnlDetail().getTxtKeyakukettebi().getValue() == null) {
+            builder.set決定年月日(null);
+            builder.set承認結果区分(null);
+            builder.set受領委任払適用開始年月日(null);
+            builder.set契約番号(null);
+            builder.set不承認理由(null);
+            builder.set費用額合計(null);
+            builder.set保険対象費用額(null);
+            builder.set利用者自己負担額(null);
+            builder.set保険給付費額(null);
         } else {
-            builder.set承認結果通知書再発行区分(new RString("0"));
+            builder.set決定年月日(new FlexibleDate(div.getPnlCommon().getPnlDetail().getTxtKeyakukettebi()
+                    .getValue().toDateString()));
+            if (ShoninKubun.承認しない.getコード().equals(div.getPnlCommon().getPnlDetail()
+                    .getRdoKettekubun().getSelectedKey())) {
+                builder.set承認結果区分(null);
+                builder.set受領委任払適用開始年月日(null);
+                builder.set契約番号(null);
+                builder.set不承認理由(div.getPnlCommon().getPnlDetail().getTxtFusyoninriyu().getValue());
+                builder.set費用額合計(null);
+                builder.set保険対象費用額(null);
+                builder.set利用者自己負担額(null);
+                builder.set保険給付費額(null);
+            } else if (ShoninKubun.承認する.getコード().equals(div.getPnlCommon().getPnlDetail()
+                    .getRdoKettekubun().getSelectedKey())) {
+                builder.set承認結果区分(ShoninKubun.承認する.getコード());
+                builder.set受領委任払適用開始年月日(div.getPnlCommon().getPnlDetail().getPnlHidari().getTxtSyoninkikan()
+                        .getFromValue() == null ? null : new FlexibleDate(div.getPnlCommon().getPnlDetail()
+                                .getPnlHidari().getTxtSyoninkikan().getFromValue().toDateString()));
+                builder.set受領委任払適用終了年月日(div.getPnlCommon().getPnlDetail().getPnlHidari().getTxtSyoninkikan()
+                        .getToValue() == null ? null : new FlexibleDate(div.getPnlCommon().getPnlDetail().getPnlHidari()
+                                .getTxtSyoninkikan().getToValue().toDateString()));
+                RStringBuilder rsb = new RStringBuilder();
+                rsb.append(div.getPnlCommon().getPnlDetail().getPnlHidari().getDdlYear().getSelectedValue());
+                rsb.append(div.getPnlCommon().getPnlDetail().getPnlHidari().getTxtBango1().getValue());
+                rsb.append(div.getPnlCommon().getPnlDetail().getPnlHidari().getTxtBango2().getValue());
+                builder.set契約番号(rsb.toRString());
+                builder.set不承認理由(null);
+                if (div.getPnlCommon().getPnlDetail().getPnlHidari().getChkSaihakoukubun().isAllSelected()) {
+                    builder.set承認結果通知書再発行区分(new RString("1"));
+                } else {
+                    builder.set承認結果通知書再発行区分(new RString("0"));
+                }
+                builder.set費用額合計(div.getPnlCommon().getPnlDetail().getPnlKyufuhi()
+                        .getTxtHiyogakugokei().getValue());
+                builder.set保険対象費用額(div.getPnlCommon().getPnlDetail().getPnlKyufuhi()
+                        .getTxtHokentaisyohiyogaku().getValue());
+                builder.set利用者自己負担額(div.getPnlCommon().getPnlDetail().getPnlKyufuhi()
+                        .getTxtRiyosyajikofutangaku().getValue());
+                builder.set保険給付費額(div.getPnlCommon().getPnlDetail().getPnlKyufuhi()
+                        .getTxtHokenkyufuhiyogaku().getValue());
+            }
         }
-        if (!div.getPnlCommon().getPnlDetail().getPnlFoot().getTxtBikou().getValue().isNullOrEmpty()) {
+        if (div.getPnlCommon().getPnlDetail().getPnlFoot().getTxtBikou().getValue().isNullOrEmpty()) {
+            builder.set備考(null);
+        } else {
             builder.set備考(div.getPnlCommon().getPnlDetail().getPnlFoot().getTxtBikou().getValue());
         }
         return builder.build();

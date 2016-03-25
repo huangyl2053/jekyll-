@@ -12,7 +12,7 @@ import java.util.List;
 import jp.co.ndensan.reams.db.dbe.business.report.ikenshoShujiiIchiran.IkenshoShujiiIchiranBodyItem;
 import jp.co.ndensan.reams.db.dbe.business.report.ikenshoShujiiIchiran.IkenshoShujiiIchiranHeadItem;
 import jp.co.ndensan.reams.db.dbe.business.report.ikenshoShujiiIchiran.IkenshoShujiiIchiranReport;
-import jp.co.ndensan.reams.db.dbe.definition.core.reportId.ReportIdDBE;
+import jp.co.ndensan.reams.db.dbe.definition.core.reportid.ReportIdDBE;
 import jp.co.ndensan.reams.db.dbe.definition.processprm.IkenshoShujiiIchiranProcessParameter;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.basic.ikenshoshujiiichiran.IkenshoShujiiIchiranRelateEntity;
 import jp.co.ndensan.reams.db.dbe.entity.report.source.ShujiiIryokikanShujiiIchiranhyoReportSource;

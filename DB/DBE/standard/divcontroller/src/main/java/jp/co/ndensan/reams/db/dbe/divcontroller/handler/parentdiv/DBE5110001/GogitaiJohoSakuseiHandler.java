@@ -135,7 +135,7 @@ public class GogitaiJohoSakuseiHandler {
         } else {
             div.getRadSeishinkaiSonzai().setSelectedKey(SEISHINKAI_SONZAI_SHINAI);
         }
-        if (IsGogitaiDummy.toValue(row.getGogitaiDummyFlag()).getコード()) {
+        if (IsGogitaiDummy.toValue(row.getGogitaiDummyFlag()).is合議体ダミーフラグTrue()) {
             div.getRadDummyFlag().setSelectedKey(DUMMY_FLAG_DAMI);
         } else {
             div.getRadDummyFlag().setSelectedKey(DUMMY_FLAG_TUUJOU);

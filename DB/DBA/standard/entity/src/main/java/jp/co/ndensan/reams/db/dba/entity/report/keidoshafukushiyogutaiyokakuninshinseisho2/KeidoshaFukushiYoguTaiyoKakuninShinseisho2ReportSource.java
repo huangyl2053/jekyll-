@@ -1,10 +1,12 @@
-// TODO: 業務に合わせてパスを変更してください
 package jp.co.ndensan.reams.db.dba.entity.report.keidoshafukushiyogutaiyokakuninshinseisho2;
 
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.report.IReportSource;
 import jp.co.ndensan.reams.uz.uza.report.source.ReportItem;
 
+/**
+ * 軽度者に対する福祉用具貸与の取り扱いの特例に関する確認申請書2クラスです。
+ */
 public class KeidoshaFukushiYoguTaiyoKakuninShinseisho2ReportSource implements IReportSource {
 // <editor-fold defaultstate="collapsed" desc="Generated Code">
 

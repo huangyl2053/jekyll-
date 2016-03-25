@@ -17,7 +17,7 @@ import jp.co.ndensan.reams.db.dbu.entity.db.benmeisyo.NinshoshaDenshiKoinDataEnt
 import jp.co.ndensan.reams.db.dbu.persistence.benmeisyo.BenmeisyoMapper;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.service.core.MapperProvider;
-import jp.co.ndensan.reams.db.dbz.definition.core.configkeys.ConfigNameDBU;
+import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBU;
 import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.kyotsu.NinshoshaDenshikoinshubetsuCode;
 import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.kyotsu.ShobunShuruiCode;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7065ChohyoSeigyoKyotsuEntity;

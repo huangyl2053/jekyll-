@@ -108,61 +108,77 @@ public class KokuhorenTorikomiJohoInfo {
      *
      * @return 再処理可否区分
      */
-    public boolean get再処理可否区分() {
+    public boolean is再処理可否区分() {
         return this.entity.getSaiShoriKanoKubun();
     }
 
     /**
-     * @return the 処理名
+     * 処理名を取得します。
+     *
+     * @return 処理名
      */
     public RString get処理名() {
         return 処理名;
     }
 
     /**
-     * @param 処理名 the 処理名 to set
+     * 処理名を設定します。
+     *
+     * @param 処理名 RString
      */
     public void set処理名(RString 処理名) {
         this.処理名 = 処理名;
     }
 
     /**
-     * @return the バッチID
+     * バッチIDを取得します。
+     *
+     * @return バッチID
      */
     public RString getバッチID() {
         return バッチID;
     }
 
     /**
-     * @param バッチID the バッチID to set
+     * バッチIDを設定します。
+     *
+     * @param バッチID RString
      */
     public void setバッチID(RString バッチID) {
         this.バッチID = バッチID;
     }
 
     /**
-     * @return the 一覧表示順
+     * 一覧表示順を取得します。
+     *
+     * @return 一覧表示順
      */
     public RString get一覧表示順() {
         return 一覧表示順;
     }
 
     /**
-     * @param 一覧表示順 the 一覧表示順 to set
+     * 一覧表示順を設定します。
+     *
+     * @param 一覧表示順 RString
      */
     public void set一覧表示順(RString 一覧表示順) {
         this.一覧表示順 = 一覧表示順;
     }
 
     /**
-     * @return the 交換識別番号
+     * 交換識別番号を取得します。
+     *
+     * @return 交換識別番号
      */
     public RString get交換識別番号() {
         return 交換識別番号;
     }
 
     /**
-     * @param 交換識別番号 the 交換識別番号 to set
+     * 交換識別番号を設定します。
+     *
+     * @param 交換識別番号 RString
      */
     public void set交換識別番号(RString 交換識別番号) {
         this.交換識別番号 = 交換識別番号;

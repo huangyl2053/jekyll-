@@ -12,7 +12,7 @@ import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3104KokuhorenInterfaceKanri
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.kogakukyufuketteiin.KogakuKyufuKetteiInPartEntity;
 import jp.co.ndensan.reams.db.dbc.persistence.db.basic.DbT3058KogakuShikyuShinsaKetteiDac;
 import jp.co.ndensan.reams.db.dbc.persistence.db.basic.DbT3104KokuhorenInterfaceKanriDac;
-import jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.kogakuserviceketteijohotorikomidatahenshu.IKogakuServiceKetteiJohoTorikomiDataHenshuMapper;
+import jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.kogakuserviceketteijoho.IKogakuServiceKetteiJohoTorikomiDataHenshuMapper;
 import jp.co.ndensan.reams.db.dbc.service.core.MapperProvider;
 import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
@@ -26,23 +26,32 @@ import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
  */
 public class KogakuServiceKetteiJohoTorikomiDataHenshu {
 
-    private final Decimal DATAONE = new Decimal("1");
-    private final int ZERO = 0;
-    private final int ONE = 1;
-    private final int TWO = 2;
-    private final int THREE = 3;
-    private final int FOUR = 4;
-    private final int FIVE = 5;
+    private static final int 数字_0 = 0;
+    private static final int 数字_1 = 1;
+    private static final int 数字_2 = 2;
+    private static final int 数字_3 = 3;
+    private static final int 数字_4 = 4;
+    private static final int 数字_5 = 5;
     private final MapperProvider mapperProvider;
     private final DbT3058KogakuShikyuShinsaKetteiDac 高額介護サービス費支給審査決定Dac;
     private final DbT3104KokuhorenInterfaceKanriDac 国保連インターフェース管理Dac;
 
+    /**
+     * コンストラクタです。
+     */
     public KogakuServiceKetteiJohoTorikomiDataHenshu() {
         this.mapperProvider = InstanceProvider.create(MapperProvider.class);
         this.高額介護サービス費支給審査決定Dac = InstanceProvider.create(DbT3058KogakuShikyuShinsaKetteiDac.class);
         this.国保連インターフェース管理Dac = InstanceProvider.create(DbT3104KokuhorenInterfaceKanriDac.class);
     }
 
+    /**
+     * 単体テスト用のコンストラクタです。
+     *
+     * @param mapperProvider mapperProvider
+     * @param 高額介護サービス費支給審査決定Dac 高額介護サービス費支給審査決定Dac
+     * @param 国保連インターフェース管理Dac 国保連インターフェース管理Dac
+     */
     public KogakuServiceKetteiJohoTorikomiDataHenshu(MapperProvider mapperProvider,
             DbT3058KogakuShikyuShinsaKetteiDac 高額介護サービス費支給審査決定Dac,
             DbT3104KokuhorenInterfaceKanriDac 国保連インターフェース管理Dac) {
@@ -96,11 +105,11 @@ public class KogakuServiceKetteiJohoTorikomiDataHenshu {
             国保連インターフェース管理entity1.setShoriJisshiTimestamp(システム日付);
             国保連インターフェース管理entity1.setSaiShoriKanoKubun(再処理可能区分);
             国保連インターフェース管理entity1.setShoriJikkoKaisu(処理実行回数);
-            国保連インターフェース管理entity1.setFileName1(ファイル名リスト.get(0));
-            国保連インターフェース管理entity1.setFileName2(ファイル名リスト.get(1));
-            国保連インターフェース管理entity1.setFileName3(ファイル名リスト.get(2));
-            国保連インターフェース管理entity1.setFileName4(ファイル名リスト.get(3));
-            国保連インターフェース管理entity1.setFileName5(ファイル名リスト.get(4));
+            国保連インターフェース管理entity1.setFileName1(ファイル名リスト.get(数字_0));
+            国保連インターフェース管理entity1.setFileName2(ファイル名リスト.get(数字_1));
+            国保連インターフェース管理entity1.setFileName3(ファイル名リスト.get(数字_2));
+            国保連インターフェース管理entity1.setFileName4(ファイル名リスト.get(数字_3));
+            国保連インターフェース管理entity1.setFileName5(ファイル名リスト.get(数字_4));
             国保連インターフェース管理entity1.setSaiShoriFukaKubun(再処理設定不可区分);
             国保連インターフェース管理Dac.save(国保連インターフェース管理entity);
         } else {
@@ -110,30 +119,30 @@ public class KogakuServiceKetteiJohoTorikomiDataHenshu {
             国保連インターフェース管理entity.setSaiShoriKanoKubun(再処理可能区分);
             Decimal shoriJikkoKaisu = 国保連インターフェース管理entity.getShoriJikkoKaisu();
             if (shoriJikkoKaisu != null) {
-                国保連インターフェース管理entity.setShoriJikkoKaisu(shoriJikkoKaisu.add(DATAONE));
+                国保連インターフェース管理entity.setShoriJikkoKaisu(shoriJikkoKaisu.add(new Decimal("1")));
             }
-            if (ファイル名リスト.size() >= ONE) {
-                国保連インターフェース管理entity.setFileName1(ファイル名リスト.get(0));
+            if (ファイル名リスト.size() >= 数字_1) {
+                国保連インターフェース管理entity.setFileName1(ファイル名リスト.get(数字_0));
             } else {
                 国保連インターフェース管理entity.setFileName1(new RString(""));
             }
-            if (ファイル名リスト.size() >= TWO) {
-                国保連インターフェース管理entity.setFileName2(ファイル名リスト.get(1));
+            if (ファイル名リスト.size() >= 数字_2) {
+                国保連インターフェース管理entity.setFileName2(ファイル名リスト.get(数字_1));
             } else {
                 国保連インターフェース管理entity.setFileName2(new RString(""));
             }
-            if (ファイル名リスト.size() >= THREE) {
-                国保連インターフェース管理entity.setFileName3(ファイル名リスト.get(2));
+            if (ファイル名リスト.size() >= 数字_3) {
+                国保連インターフェース管理entity.setFileName3(ファイル名リスト.get(数字_2));
             } else {
                 国保連インターフェース管理entity.setFileName3(new RString(""));
             }
-            if (ファイル名リスト.size() >= FOUR) {
-                国保連インターフェース管理entity.setFileName4(ファイル名リスト.get(3));
+            if (ファイル名リスト.size() >= 数字_4) {
+                国保連インターフェース管理entity.setFileName4(ファイル名リスト.get(数字_3));
             } else {
                 国保連インターフェース管理entity.setFileName4(new RString(""));
             }
-            if (ファイル名リスト.size() >= FIVE) {
-                国保連インターフェース管理entity.setFileName5(ファイル名リスト.get(4));
+            if (ファイル名リスト.size() >= 数字_5) {
+                国保連インターフェース管理entity.setFileName5(ファイル名リスト.get(数字_4));
             } else {
                 国保連インターフェース管理entity.setFileName5(new RString(""));
             }

@@ -20,6 +20,12 @@ public final class HokenryoDankaiHanteiHohoHozonFactory {
     private HokenryoDankaiHanteiHohoHozonFactory() {
     }
 
+    /**
+     * createHokenryoDankaiHanteiHohoクラスです。
+     *
+     * @param hokenryoDankaiHanteiParameter hokenryoDankaiHanteiParameter
+     * @return HokenryoDankaiHanteiHohoHozon HokenryoDankaiHanteiHohoHozon
+     */
     public static HokenryoDankaiHanteiHohoHozon createHokenryoDankaiHanteiHoho(HokenryoDankaiHanteiParameter hokenryoDankaiHanteiParameter) {
 
         FlexibleYear fukanendo = hokenryoDankaiHanteiParameter.getFukaNendo();

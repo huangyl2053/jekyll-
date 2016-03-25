@@ -24,38 +24,83 @@ public class NengakuSeigyoJoho {
     private HasuChoseiHoho 端数調整方法_ランク用;
     private Map<RString, RankBetsuKijunKingaku> ランク別制御情報;
 
+    /**
+     * 端数単位を取得する。
+     *
+     * @return Decimal
+     */
     public Decimal get端数単位() {
         return 端数単位;
     }
 
+    /**
+     * 端数単位を設定する。
+     *
+     * @param 端数単位 端数単位
+     */
     protected void set端数単位(Decimal 端数単位) {
         this.端数単位 = 端数単位;
     }
 
+    /**
+     * 端数調整方法を取得する。
+     *
+     * @return Decimal
+     */
     public HasuChoseiHoho get端数調整方法() {
         return 端数調整方法;
     }
 
+    /**
+     * 端数調整方法を設定する。
+     *
+     * @param 端数調整方法 端数調整方法
+     */
     protected void set端数調整方法(HasuChoseiHoho 端数調整方法) {
         this.端数調整方法 = 端数調整方法;
     }
 
+    /**
+     * 端数単位_ランク用を取得する。
+     *
+     * @return Decimal
+     */
     public Decimal get端数単位_ランク用() {
         return 端数単位_ランク用;
     }
 
+    /**
+     * 端数単位_ランク用を設定する。
+     *
+     * @param 端数単位_ランク用 端数単位_ランク用
+     */
     protected void set端数単位_ランク用(Decimal 端数単位_ランク用) {
         this.端数単位_ランク用 = 端数単位_ランク用;
     }
 
+    /**
+     * 端数調整方法_ランク用を取得する。
+     *
+     * @return Decimal
+     */
     public HasuChoseiHoho get端数調整方法_ランク用() {
         return 端数調整方法_ランク用;
     }
 
+    /**
+     * 端数調整方法_ランク用を設定する。
+     *
+     * @param 端数調整方法_ランク用 端数調整方法_ランク用
+     */
     protected void set端数調整方法_ランク用(HasuChoseiHoho 端数調整方法_ランク用) {
         this.端数調整方法_ランク用 = 端数調整方法_ランク用;
     }
 
+    /**
+     * ランク別基準金額をcreateする。
+     *
+     * @return Map<RString, RankBetsuKijunKingaku>
+     */
     public Map<RString, RankBetsuKijunKingaku> createランク別基準金額() {
         return new HashMap<>();
     }

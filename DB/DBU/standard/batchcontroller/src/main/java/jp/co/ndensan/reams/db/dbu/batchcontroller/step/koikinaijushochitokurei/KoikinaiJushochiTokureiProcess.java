@@ -60,9 +60,10 @@ public class KoikinaiJushochiTokureiProcess extends SimpleBatchProcessBase {
         set並び順と改頁();
         get市町村コードと市町村名称();
         set出力順ソート();
-        List<KoikinaiJushochiTokureishaIchiranhyoChohyoDataSakusei> 帳票データlist 
-                =  is帳票データ作成(is広域内住所地特例者一覧表情報Entity作成(get広域内住所地特例者情報()));
         // TODO QA 440 董亜彬 帳票仕様とフォームファイルがありません
+        // List<KoikinaiJushochiTokureishaIchiranhyoChohyoDataSakusei> 帳票データlist 
+        is帳票データ作成(is広域内住所地特例者一覧表情報Entity作成(get広域内住所地特例者情報()));
+        
         
     }
     

@@ -11,7 +11,7 @@ import jp.co.ndensan.reams.db.dbc.business.core.kogakukyufuketteiin.KogakuKyufuK
 import jp.co.ndensan.reams.db.dbc.entity.csv.KogakuKyufuKetteiInHeaderCSVEntity;
 import jp.co.ndensan.reams.db.dbc.entity.csv.KogakuKyufuKetteiInMeisaiCSVEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.kogakukyufuketteiin.KogakuKyufuKetteiInTempTableEntity;
-import jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.kogakuserviceketteijohotorikomidatahenshu.IKogakuServiceKetteiJohoTorikomiDataHenshuMapper;
+import jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.kogakuserviceketteijoho.IKogakuServiceKetteiJohoTorikomiDataHenshuMapper;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchProcessBase;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchSimpleReader;
 import jp.co.ndensan.reams.uz.uza.batch.process.IBatchReader;

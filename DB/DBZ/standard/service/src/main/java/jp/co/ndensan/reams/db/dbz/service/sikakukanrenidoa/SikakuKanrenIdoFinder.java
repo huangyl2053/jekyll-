@@ -158,18 +158,13 @@ public class SikakuKanrenIdoFinder {
                         市町村セキュリティ.get市町村情報() == null ? null : 市町村セキュリティ.get市町村情報().get市町村コード(),
                         DonyuKeitaiCode.toValue(市町村セキュリティ.get導入形態コード().getKey() == null
                                 ? null : 市町村セキュリティ.get導入形態コード().getKey()));
-        if (旧市町村コード情報 == null) {
-
-            return SearchResult.of(Collections.<GappeiShichoson>emptyList(), 0, false);
-        } else {
-            for (KyuShichosonCode entity : 旧市町村コード情報.get旧市町村コード情報List()) {
-                DbT7056GappeiShichosonEntity dbT7056GappeiShichosonEntity = new DbT7056GappeiShichosonEntity();
-                dbT7056GappeiShichosonEntity.setKyuShichosonCode(entity.get旧市町村コード());
-                dbT7056GappeiShichosonEntity.setKyuHokenshaNo(entity.get旧保険者番号());
-                dbT7056GappeiShichosonEntity.setKyuShichosonMeisho(entity.get旧市町村名称());
-                旧市町村コード情報List.add(new GappeiShichoson(dbT7056GappeiShichosonEntity));
-            }
-            return SearchResult.of(旧市町村コード情報List, 0, false);
+        for (KyuShichosonCode entity : 旧市町村コード情報.get旧市町村コード情報List()) {
+            DbT7056GappeiShichosonEntity dbT7056GappeiShichosonEntity = new DbT7056GappeiShichosonEntity();
+            dbT7056GappeiShichosonEntity.setKyuShichosonCode(entity.get旧市町村コード());
+            dbT7056GappeiShichosonEntity.setKyuHokenshaNo(entity.get旧保険者番号());
+            dbT7056GappeiShichosonEntity.setKyuShichosonMeisho(entity.get旧市町村名称());
+            旧市町村コード情報List.add(new GappeiShichoson(dbT7056GappeiShichosonEntity));
         }
+        return SearchResult.of(旧市町村コード情報List, 0, false);
     }
 }

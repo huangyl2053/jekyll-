@@ -21,14 +21,13 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 @SuppressWarnings("PMD.UnusedPrivateField")
 public class TokubetuChosyutaisyosyaTorokusqlparamEntity {
 
-    FlexibleYear 賦課年度;
-    HihokenshaNo 被保険者番号;
-    ShoriName 処理名;
-    RString 資格区分;
-    RDate システム日付 = RDate.getNowDate();
-    SubGyomuCode サブ業務コード = SubGyomuCode.DBB介護賦課;
-    FlexibleYear 年度;
-
-    RString 年度内連番;
+    private FlexibleYear 賦課年度;
+    private HihokenshaNo 被保険者番号;
+    private ShoriName 処理名;
+    private RString 資格区分;
+    private RDate システム日付 = RDate.getNowDate();
+    private SubGyomuCode サブ業務コード = SubGyomuCode.DBB介護賦課;
+    private FlexibleYear 年度;
+    private RString 年度内連番;
 
 }

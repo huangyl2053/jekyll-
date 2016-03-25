@@ -24,6 +24,7 @@ public class ShokanKetteiTsuchiShoSealer2HeadEditor implements IShokanKetteiTsuc
         this.item = item;
     }
 
+    @Override
     public ShokanKetteiTsuchiShoSealer2ReportSource edit(ShokanKetteiTsuchiShoSealer2ReportSource source) {
         return editSource(source);
     }
@@ -75,10 +76,10 @@ public class ShokanKetteiTsuchiShoSealer2HeadEditor implements IShokanKetteiTsuc
         source.torikeshiShiharaibasho = item.getTorikeshiShiharaibasho();
         source.shumokuTitle = item.getShumokuTitle();
         source.kouzaShu = item.getKouzaShu();
-        source.ShoHokenshaNo = item.getShoHokenshaNo();
+        source.shoHokenshaNo = item.getShoHokenshaNo();
         source.hihokenshaNo21 = item.getHihokenshaNo21();
-        source.ServiceYM = item.getServiceYM();
-        source.Tsuban2 = item.getTsuban2();
+        source.serviceYM = item.getServiceYM();
+        source.tsuban2 = item.getTsuban2();
         source.bangoTitle = item.getBangoTitle();
         source.kouzaNo = item.getKouzaNo();
         source.shiharaiStartYMD = item.getShiharaiStartYMD();

@@ -13,7 +13,7 @@ import jp.co.ndensan.reams.db.dbe.business.core.chikuninteichosain.ChikuNinteiNi
 import jp.co.ndensan.reams.db.dbe.business.core.chikuninteichosain.ChosaChiku;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2020002.NinteiChosaScheduleShosaiDiv;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2020002.dgNinteiChosaSchedule_Row;
-import jp.co.ndensan.reams.db.dbz.definition.core.configkeys.ConfigNameDBE;
+import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBE;
 import jp.co.ndensan.reams.db.dbz.divcontroller.viewbox.ViewStateKeys;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;

@@ -129,7 +129,7 @@ public class KokuhorenTorikomiListHandler {
         row.setTxtShoriNichiji(model.get当月処理日時() != null ? model.get当月処理日時().getDate()
                 .wareki().toDateString().concat(RString.HALF_SPACE)
                 .concat(model.get当月処理日時().getRDateTime().getTime().toString().substring(0, NUM)) : RString.EMPTY);
-        row.setSaishoriFlag(get再処理可否区分(model.get再処理可否区分()));
+        row.setSaishoriFlag(get再処理可否区分(model.is再処理可否区分()));
         row.getIchiranHyojijun().setValue(model.get一覧表示順() != null ? new Decimal(model.get一覧表示順().toString())
                 : Decimal.ZERO);
         row.setBatchID(model.getバッチID());

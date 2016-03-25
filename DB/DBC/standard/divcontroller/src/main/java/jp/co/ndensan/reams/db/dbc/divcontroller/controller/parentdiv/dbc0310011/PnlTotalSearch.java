@@ -14,7 +14,7 @@ import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0310011.PnlT
 import jp.co.ndensan.reams.db.dbc.divcontroller.handler.dbc0310011.PnlTotalSearchHandler;
 import jp.co.ndensan.reams.db.dbc.divcontroller.viewbox.ViewStateKeys;
 import jp.co.ndensan.reams.db.dbx.service.core.dbbusinessconfig.DbBusinessConifg;
-import jp.co.ndensan.reams.db.dbz.definition.core.configkeys.ConfigNameDBU;
+import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBU;
 import jp.co.ndensan.reams.db.dbz.definition.message.DbzQuestionMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrWarningMessages;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
@@ -53,6 +53,7 @@ public class PnlTotalSearch {
      * @return ResponseData<PnlTotalSearchDiv>
      */
     public ResponseData<PnlTotalSearchDiv> onLoad(PnlTotalSearchDiv div) {
+        getHandler(div).set初期化状態();
         ShokanJuryoininKeiyakushaParameter parameter = ViewStateHolder
                 .get(ViewStateKeys.契約者一覧検索キー, ShokanJuryoininKeiyakushaParameter.class);
         if (parameter != null) {
@@ -65,7 +66,6 @@ public class PnlTotalSearch {
             div.getPnlSearch().getTxtMaxCount().setValue(最大取得件数);
             return set契約者一覧(div, shokanList);
         }
-        getHandler(div).set初期化状態();
         return ResponseData.of(div).respond();
     }
 

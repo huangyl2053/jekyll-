@@ -7,9 +7,6 @@ package jp.co.ndensan.reams.db.dbd.service.common;
 
 import java.util.ArrayList;
 import java.util.List;
-import jp.co.ndensan.reams.db.dbb.business.shiharaihohohenko.ShiharaiHohoHenkoSummary;
-import jp.co.ndensan.reams.db.dbc.business.core.basic.RiyoshaFutanWariaiMeisai;
-import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3114RiyoshaFutanWariaiMeisaiEntity;
 import jp.co.ndensan.reams.db.dbd.business.common.NursingCareInformationBusiness;
 import jp.co.ndensan.reams.db.dbd.business.common.ShiharaiHohoHenkoSummaryBusiness;
 import jp.co.ndensan.reams.db.dbd.business.common.VariousReductionInformation;
@@ -17,7 +14,6 @@ import jp.co.ndensan.reams.db.dbd.business.core.basic.JukyushaDaicho;
 import jp.co.ndensan.reams.db.dbd.definition.common.GemmenJokyoParameter;
 import jp.co.ndensan.reams.db.dbd.definition.enumeratedtype.core.JukyuShinseiJiyu;
 import jp.co.ndensan.reams.db.dbd.definition.enumeratedtype.core.ShiharaiHenkoKanriKubun;
-import jp.co.ndensan.reams.db.dbd.definition.enumeratedtype.core.ShiharaiHenkoTorokuKubun;
 import jp.co.ndensan.reams.db.dbd.definition.enumeratedtype.core.ShinseiJokyoKubun;
 import jp.co.ndensan.reams.db.dbd.entity.common.NursingCareInformationCodeEntity;
 import jp.co.ndensan.reams.db.dbd.entity.common.NursingCareInformationEntity;
@@ -32,7 +28,6 @@ import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT4001JukyushaDaichoEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7006RoreiFukushiNenkinJukyushaEntity;
 import jp.co.ndensan.reams.db.dbz.service.core.MapperProvider;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
-import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
@@ -149,48 +144,49 @@ public class GemmenJokyoFinder {
      */
     @Transaction
     public ShiharaiHohoHenkoSummaryBusiness find支払方法変更情報(HihokenshaNo 被保険者番号) {
-        IGemmenJokyoMapper mapper = mapperProvider.create(IGemmenJokyoMapper.class);
-        GemmenJokyoParameter parameter = new GemmenJokyoParameter();
-        parameter.set被保険者番号(被保険者番号);
-        List<DbT4021ShiharaiHohoHenkoEntity> dbT4021EntityList = mapper.get支払方法変更情報(parameter);
-        ShiharaiHohoHenkoSummary 支払方法変更概況 = new ShiharaiHohoHenkoSummary();
-        ShiharaiHohoHenkoSummaryBusiness 給付制限情報;
-        if (null == dbT4021EntityList || dbT4021EntityList.isEmpty()) {
-            支払方法変更概況.set支払方法変更_登録区分(ShiharaiHenkoTorokuKubun._空);
-            支払方法変更概況.set支払方法変更_開始日(FlexibleDate.EMPTY);
-            支払方法変更概況.set支払方法変更_終了日(FlexibleDate.EMPTY);
-            支払方法変更概況.set給付額減額_登録区分(ShiharaiHenkoTorokuKubun._空);
-            支払方法変更概況.set給付額減額_開始日(FlexibleDate.EMPTY);
-            支払方法変更概況.set給付額減額_終了日(FlexibleDate.EMPTY);
-            給付制限情報 = new ShiharaiHohoHenkoSummaryBusiness(支払方法変更概況);
-        } else {
-            DbT4021ShiharaiHohoHenkoEntity 支払方法変更取得結果_１号償還払い化 = get取得結果(ShiharaiHenkoKanriKubun._１号償還払い化, dbT4021EntityList);
-            DbT4021ShiharaiHohoHenkoEntity 支払方法変更取得結果_２号差止 = get取得結果(ShiharaiHenkoKanriKubun._２号差止, dbT4021EntityList);
-            if (支払方法変更取得結果_１号償還払い化 != null) {
-                支払方法変更概況.set支払方法変更_登録区分(ShiharaiHenkoTorokuKubun.toValue(支払方法変更取得結果_１号償還払い化.getKanriKubun()));
-                支払方法変更概況.set支払方法変更_開始日(支払方法変更取得結果_１号償還払い化.getTekiyoKaishiYMD());
-                支払方法変更概況.set支払方法変更_終了日(支払方法変更取得結果_１号償還払い化.getTekiyoShuryoYMD());
-            } else if (支払方法変更取得結果_２号差止 != null) {
-                支払方法変更概況.set支払方法変更_登録区分(ShiharaiHenkoTorokuKubun.toValue(支払方法変更取得結果_２号差止.getKanriKubun()));
-                支払方法変更概況.set支払方法変更_開始日(支払方法変更取得結果_２号差止.getTekiyoKaishiYMD());
-                支払方法変更概況.set支払方法変更_終了日(支払方法変更取得結果_２号差止.getTekiyoShuryoYMD());
-            } else {
-                支払方法変更概況.set支払方法変更_登録区分(ShiharaiHenkoTorokuKubun._空);
-                支払方法変更概況.set支払方法変更_開始日(FlexibleDate.EMPTY);
-                支払方法変更概況.set支払方法変更_終了日(FlexibleDate.EMPTY);
-            }
-            DbT4021ShiharaiHohoHenkoEntity 支払方法変更取得結果_１号給付額減額 = get取得結果(ShiharaiHenkoKanriKubun._１号給付額減額, dbT4021EntityList);
-            if (支払方法変更取得結果_１号給付額減額 != null) {
-                支払方法変更概況.set給付額減額_登録区分(ShiharaiHenkoTorokuKubun.toValue(支払方法変更取得結果_１号給付額減額.getKanriKubun()));
-                支払方法変更概況.set給付額減額_開始日(支払方法変更取得結果_１号給付額減額.getTekiyoKaishiYMD());
-                支払方法変更概況.set給付額減額_終了日(支払方法変更取得結果_１号給付額減額.getTekiyoShuryoYMD());
-            } else {
-                支払方法変更概況.set給付額減額_登録区分(ShiharaiHenkoTorokuKubun._空);
-                支払方法変更概況.set給付額減額_開始日(FlexibleDate.EMPTY);
-                支払方法変更概況.set給付額減額_終了日(FlexibleDate.EMPTY);
-            }
-            給付制限情報 = new ShiharaiHohoHenkoSummaryBusiness(支払方法変更概況);
-        }
+//        IGemmenJokyoMapper mapper = mapperProvider.create(IGemmenJokyoMapper.class);
+//        GemmenJokyoParameter parameter = new GemmenJokyoParameter();
+//        parameter.set被保険者番号(被保険者番号);
+//        List<DbT4021ShiharaiHohoHenkoEntity> dbT4021EntityList = mapper.get支払方法変更情報(parameter);
+        ShiharaiHohoHenkoSummaryBusiness 給付制限情報 = null;
+        //TODO QA #80225
+//        ShiharaiHohoHenkoSummary 支払方法変更概況 = new ShiharaiHohoHenkoSummary();
+//        if (null == dbT4021EntityList || dbT4021EntityList.isEmpty()) {
+//            支払方法変更概況.set支払方法変更_登録区分(ShiharaiHenkoTorokuKubun._空);
+//            支払方法変更概況.set支払方法変更_開始日(FlexibleDate.EMPTY);
+//            支払方法変更概況.set支払方法変更_終了日(FlexibleDate.EMPTY);
+//            支払方法変更概況.set給付額減額_登録区分(ShiharaiHenkoTorokuKubun._空);
+//            支払方法変更概況.set給付額減額_開始日(FlexibleDate.EMPTY);
+//            支払方法変更概況.set給付額減額_終了日(FlexibleDate.EMPTY);
+//            給付制限情報 = new ShiharaiHohoHenkoSummaryBusiness(支払方法変更概況);
+//        } else {
+//            DbT4021ShiharaiHohoHenkoEntity 支払方法変更取得結果_１号償還払い化 = get取得結果(ShiharaiHenkoKanriKubun._１号償還払い化, dbT4021EntityList);
+//            DbT4021ShiharaiHohoHenkoEntity 支払方法変更取得結果_２号差止 = get取得結果(ShiharaiHenkoKanriKubun._２号差止, dbT4021EntityList);
+//            if (支払方法変更取得結果_１号償還払い化 != null) {
+//                支払方法変更概況.set支払方法変更_登録区分(ShiharaiHenkoTorokuKubun.toValue(支払方法変更取得結果_１号償還払い化.getKanriKubun()));
+//                支払方法変更概況.set支払方法変更_開始日(支払方法変更取得結果_１号償還払い化.getTekiyoKaishiYMD());
+//                支払方法変更概況.set支払方法変更_終了日(支払方法変更取得結果_１号償還払い化.getTekiyoShuryoYMD());
+//            } else if (支払方法変更取得結果_２号差止 != null) {
+//                支払方法変更概況.set支払方法変更_登録区分(ShiharaiHenkoTorokuKubun.toValue(支払方法変更取得結果_２号差止.getKanriKubun()));
+//                支払方法変更概況.set支払方法変更_開始日(支払方法変更取得結果_２号差止.getTekiyoKaishiYMD());
+//                支払方法変更概況.set支払方法変更_終了日(支払方法変更取得結果_２号差止.getTekiyoShuryoYMD());
+//            } else {
+//                支払方法変更概況.set支払方法変更_登録区分(ShiharaiHenkoTorokuKubun._空);
+//                支払方法変更概況.set支払方法変更_開始日(FlexibleDate.EMPTY);
+//                支払方法変更概況.set支払方法変更_終了日(FlexibleDate.EMPTY);
+//            }
+//            DbT4021ShiharaiHohoHenkoEntity 支払方法変更取得結果_１号給付額減額 = get取得結果(ShiharaiHenkoKanriKubun._１号給付額減額, dbT4021EntityList);
+//            if (支払方法変更取得結果_１号給付額減額 != null) {
+//                支払方法変更概況.set給付額減額_登録区分(ShiharaiHenkoTorokuKubun.toValue(支払方法変更取得結果_１号給付額減額.getKanriKubun()));
+//                支払方法変更概況.set給付額減額_開始日(支払方法変更取得結果_１号給付額減額.getTekiyoKaishiYMD());
+//                支払方法変更概況.set給付額減額_終了日(支払方法変更取得結果_１号給付額減額.getTekiyoShuryoYMD());
+//            } else {
+//                支払方法変更概況.set給付額減額_登録区分(ShiharaiHenkoTorokuKubun._空);
+//                支払方法変更概況.set給付額減額_開始日(FlexibleDate.EMPTY);
+//                支払方法変更概況.set給付額減額_終了日(FlexibleDate.EMPTY);
+//            }
+//            給付制限情報 = new ShiharaiHohoHenkoSummaryBusiness(支払方法変更概況);
+//        }
         return 給付制限情報;
     }
 
@@ -222,25 +218,24 @@ public class GemmenJokyoFinder {
         return dbV1001EntityList.get(0).getShikibetsuCode();
     }
 
-    /**
-     * 指定の被保険者番号の利用者負担割合（明細）情報を取得します。
-     *
-     * @param 被保険者番号 被保険者番号
-     * @return 利用者負担割合明細
-     */
-    @Transaction
-    public List<RiyoshaFutanWariaiMeisai> find利用者負担割合明細(HihokenshaNo 被保険者番号) {
-        IGemmenJokyoMapper mapper = mapperProvider.create(IGemmenJokyoMapper.class);
-        GemmenJokyoParameter parameter = new GemmenJokyoParameter();
-        parameter.set被保険者番号(被保険者番号);
-        parameter.setシステム日付(RDate.getNowDate());
-        List<DbT3114RiyoshaFutanWariaiMeisaiEntity> dbT3114EntityList = mapper.get利用者負担割合明細(parameter);
-        List<RiyoshaFutanWariaiMeisai> 利用者負担割合明細List = new ArrayList<>();
-        for (DbT3114RiyoshaFutanWariaiMeisaiEntity dbT3114Entity : dbT3114EntityList) {
-            RiyoshaFutanWariaiMeisai 利用者負担割合明細 = new RiyoshaFutanWariaiMeisai(dbT3114Entity);
-            利用者負担割合明細List.add(利用者負担割合明細);
-        }
-        return 利用者負担割合明細List;
-    }
-
+//    /**
+//     * 指定の被保険者番号の利用者負担割合（明細）情報を取得します。
+//     *
+//     * @param 被保険者番号 被保険者番号
+//     * @return 利用者負担割合明細
+//     */
+//    @Transaction
+//    public List<RiyoshaFutanWariaiMeisai> find利用者負担割合明細(HihokenshaNo 被保険者番号) {
+//        IGemmenJokyoMapper mapper = mapperProvider.create(IGemmenJokyoMapper.class);
+//        GemmenJokyoParameter parameter = new GemmenJokyoParameter();
+//        parameter.set被保険者番号(被保険者番号);
+//        parameter.setシステム日付(RDate.getNowDate());
+//        List<DbT3114RiyoshaFutanWariaiMeisaiEntity> dbT3114EntityList = mapper.get利用者負担割合明細(parameter);
+//        List<RiyoshaFutanWariaiMeisai> 利用者負担割合明細List = new ArrayList<>();
+//        for (DbT3114RiyoshaFutanWariaiMeisaiEntity dbT3114Entity : dbT3114EntityList) {
+//            RiyoshaFutanWariaiMeisai 利用者負担割合明細 = new RiyoshaFutanWariaiMeisai(dbT3114Entity);
+//            利用者負担割合明細List.add(利用者負担割合明細);
+//        }
+//        return 利用者負担割合明細List;
+//    }
 }

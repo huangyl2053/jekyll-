@@ -14,5 +14,11 @@ import jp.co.ndensan.reams.uz.uza.math.Decimal;
  */
 public interface IHasuChosei {
 
+    /**
+     * calc端数を実行する。
+     *
+     * @param 年額保険料 年額保険料
+     * @return Decimal
+     */
     Decimal calc端数(Decimal 年額保険料);
 }

@@ -5,12 +5,12 @@
  */
 package jp.co.ndensan.reams.db.dbc.business.report.shokanbaraishikyufushikyuketteitsuchiichiran;
 
-import jp.co.ndensan.reams.db.dbc.entity.report.source.shokanbaraishikyufushikyuketteitsuchiichiran.ShokanbaraiShikyuFushikyuKetteiTsuchiIchiranReportSource;
+import jp.co.ndensan.reams.db.dbc.entity.report.source.shokanbaraishikyufushikyuketteitsuchiichiran.ShokanbaraiShikyuFushikyuReportSource;
 import jp.co.ndensan.reams.uz.uza.report.IReportEditor;
 
 /**
  * 償還払支給（不支給）決定通知一覧表覧表エディターのインターフェースクラスです。
  */
 public interface IShokanbaraiShikyuFushikyuKetteiTsuchiIchiranEditor
-        extends IReportEditor<ShokanbaraiShikyuFushikyuKetteiTsuchiIchiranReportSource> {
+        extends IReportEditor<ShokanbaraiShikyuFushikyuReportSource> {
 }

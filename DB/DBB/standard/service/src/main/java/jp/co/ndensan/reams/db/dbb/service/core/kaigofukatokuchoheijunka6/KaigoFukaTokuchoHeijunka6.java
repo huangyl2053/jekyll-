@@ -116,7 +116,6 @@ public class KaigoFukaTokuchoHeijunka6 {
             }
             List<DbT7022ShoriDateKanriEntity> entityList = bT7022ShoriDateKanriDac.select処理状況(調定年度, 処理名);
             for (DbT7022ShoriDateKanriEntity entity : entityList) {
-                shoriEntity = new ShorijyokyoEntity();
                 shoriEntity.set処理名(entity.getShoriName());
                 shoriEntity.set基準年月日(entity.getKijunYMD());
                 shoriEntity.set基準日時(entity.getKijunTimestamp());
@@ -126,7 +125,6 @@ public class KaigoFukaTokuchoHeijunka6 {
             処理名.add(ShoriName.特徴平準化計算_6月分.get名称());
             List<DbT7022ShoriDateKanriEntity> entityList = bT7022ShoriDateKanriDac.select処理状況(調定年度, 処理名);
             for (DbT7022ShoriDateKanriEntity entity : entityList) {
-                shoriEntity = new ShorijyokyoEntity();
                 shoriEntity.set処理名(entity.getShoriName());
                 shoriEntity.set基準年月日(entity.getKijunYMD());
                 shoriEntity.set基準日時(entity.getKijunTimestamp());

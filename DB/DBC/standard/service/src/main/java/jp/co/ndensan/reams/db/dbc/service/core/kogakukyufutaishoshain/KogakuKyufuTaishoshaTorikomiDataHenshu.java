@@ -28,7 +28,7 @@ public class KogakuKyufuTaishoshaTorikomiDataHenshu {
     private final DbT3104KokuhorenInterfaceKanriDac 国保連インターフェース管理Dac;
     private static final RString INDEX_2 = new RString("2");
     private static final RString INDEX_331 = new RString("331");
-    private static final Decimal Decimal_INDEX_1 = new Decimal("1");
+    private static final Decimal 数字_1 = new Decimal("1");
     private static final int LIST_INDEX_1 = 1;
     private static final int LIST_INDEX_2 = 2;
     private static final int LIST_INDEX_3 = 3;
@@ -76,20 +76,20 @@ public class KogakuKyufuTaishoshaTorikomiDataHenshu {
         dbt3104entity.setShoriJisshiTimestamp(YMDHMS.now());
         dbt3104entity.setSaiShoriKanoKubun(false);
         if (dbt3104entity.getShoriJikkoKaisu() != null) {
-            dbt3104entity.setShoriJikkoKaisu(dbt3104entity.getShoriJikkoKaisu().add(LIST_INDEX_1));
+            dbt3104entity.setShoriJikkoKaisu(数字_1.add(dbt3104entity.getShoriJikkoKaisu()));
         } else {
-            dbt3104entity.setShoriJikkoKaisu(Decimal_INDEX_1);
+            dbt3104entity.setShoriJikkoKaisu(数字_1);
         }
         dbt3104entity.setFileName1(fileNameList == null || fileNameList.isEmpty()
                 || fileNameList.get(0) == null ? RString.EMPTY : fileNameList.get(0));
         dbt3104entity.setFileName2(fileNameList == null || fileNameList.size() <= LIST_INDEX_1
-                || fileNameList.get(1) == null ? RString.EMPTY : fileNameList.get(1));
+                || fileNameList.get(LIST_INDEX_1) == null ? RString.EMPTY : fileNameList.get(LIST_INDEX_1));
         dbt3104entity.setFileName3(fileNameList == null || fileNameList.size() <= LIST_INDEX_2
-                || fileNameList.get(2) == null ? RString.EMPTY : fileNameList.get(2));
+                || fileNameList.get(LIST_INDEX_2) == null ? RString.EMPTY : fileNameList.get(LIST_INDEX_2));
         dbt3104entity.setFileName4(fileNameList == null || fileNameList.size() <= LIST_INDEX_3
-                || fileNameList.get(3) == null ? RString.EMPTY : fileNameList.get(3));
+                || fileNameList.get(LIST_INDEX_3) == null ? RString.EMPTY : fileNameList.get(LIST_INDEX_3));
         dbt3104entity.setFileName5(fileNameList == null || fileNameList.size() <= LIST_INDEX_4
-                || fileNameList.get(4) == null ? RString.EMPTY : fileNameList.get(4));
+                || fileNameList.get(LIST_INDEX_4) == null ? RString.EMPTY : fileNameList.get(LIST_INDEX_4));
         dbt3104entity.setState(EntityDataState.Modified);
         国保連インターフェース管理Dac.save(dbt3104entity);
     }

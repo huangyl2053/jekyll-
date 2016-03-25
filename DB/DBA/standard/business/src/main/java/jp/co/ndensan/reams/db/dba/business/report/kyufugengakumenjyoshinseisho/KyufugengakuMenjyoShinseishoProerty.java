@@ -5,7 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dba.business.report.kyufugengakumenjyoshinseisho;
 
-import jp.co.ndensan.reams.db.dba.definition.reportId.ReportIdDBA;
+import jp.co.ndensan.reams.db.dba.definition.reportid.ReportIdDBA;
 import jp.co.ndensan.reams.db.dba.entity.report.kyufugengakumenjyoshinseisho.KyufugengakuMenjyoShinseishoReportSource;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.report.ReportPropertyBase;

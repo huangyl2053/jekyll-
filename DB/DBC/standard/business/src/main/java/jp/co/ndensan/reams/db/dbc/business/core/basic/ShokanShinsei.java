@@ -211,7 +211,7 @@ public class ShokanShinsei extends ModelBase<ShokanShinseiIdentifier, DbT3034Sho
      *
      * @return 住宅住所変更
      */
-    public boolean get住宅住所変更() {
+    public boolean is住宅住所変更() {
         return entity.getJutakuJushoHenko();
     }
 
@@ -220,7 +220,7 @@ public class ShokanShinsei extends ModelBase<ShokanShinseiIdentifier, DbT3034Sho
      *
      * @return 要介護状態３段階変更
      */
-    public boolean get要介護状態３段階変更() {
+    public boolean is要介護状態３段階変更() {
         return entity.getYokaigo3DankaiHenko();
     }
 

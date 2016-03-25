@@ -49,9 +49,9 @@ public class ChosaitakusakiJohoInputDiv extends Panel {
     @JsonProperty("txtFaxNo")
     private TextBoxTelNo txtFaxNo;
     @JsonProperty("txtdaihyoshaname")
-    private TextBoxJusho txtdaihyoshaname;
+    private TextBox txtdaihyoshaname;
     @JsonProperty("txtdaihyoshakananame")
-    private TextBoxJusho txtdaihyoshakananame;
+    private TextBox txtdaihyoshakananame;
     @JsonProperty("ddlItakusakikubun")
     private DropDownList ddlItakusakikubun;
     @JsonProperty("ddltokuteichosain")
@@ -302,7 +302,7 @@ public class ChosaitakusakiJohoInputDiv extends Panel {
      * @return txtdaihyoshaname
      */
     @JsonProperty("txtdaihyoshaname")
-    public TextBoxJusho getTxtdaihyoshaname() {
+    public TextBox getTxtdaihyoshaname() {
         return txtdaihyoshaname;
     }
 
@@ -311,7 +311,7 @@ public class ChosaitakusakiJohoInputDiv extends Panel {
      * @param txtdaihyoshaname txtdaihyoshaname
      */
     @JsonProperty("txtdaihyoshaname")
-    public void setTxtdaihyoshaname(TextBoxJusho txtdaihyoshaname) {
+    public void setTxtdaihyoshaname(TextBox txtdaihyoshaname) {
         this.txtdaihyoshaname = txtdaihyoshaname;
     }
 
@@ -320,7 +320,7 @@ public class ChosaitakusakiJohoInputDiv extends Panel {
      * @return txtdaihyoshakananame
      */
     @JsonProperty("txtdaihyoshakananame")
-    public TextBoxJusho getTxtdaihyoshakananame() {
+    public TextBox getTxtdaihyoshakananame() {
         return txtdaihyoshakananame;
     }
 
@@ -329,7 +329,7 @@ public class ChosaitakusakiJohoInputDiv extends Panel {
      * @param txtdaihyoshakananame txtdaihyoshakananame
      */
     @JsonProperty("txtdaihyoshakananame")
-    public void setTxtdaihyoshakananame(TextBoxJusho txtdaihyoshakananame) {
+    public void setTxtdaihyoshakananame(TextBox txtdaihyoshakananame) {
         this.txtdaihyoshakananame = txtdaihyoshakananame;
     }
 

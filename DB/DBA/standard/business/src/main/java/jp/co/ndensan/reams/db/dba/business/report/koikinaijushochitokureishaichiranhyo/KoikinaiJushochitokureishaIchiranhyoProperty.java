@@ -8,7 +8,7 @@ package jp.co.ndensan.reams.db.dba.business.report.koikinaijushochitokureishaich
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
-import jp.co.ndensan.reams.db.dba.definition.reportId.ReportIdDBA;
+import jp.co.ndensan.reams.db.dba.definition.reportid.ReportIdDBA;
 import jp.co.ndensan.reams.db.dba.entity.report.koikinaijushochitokureishaichiranhyo.KoikinaiJushochitokureishaIchiranhyoReportSource;
 import jp.co.ndensan.reams.uz.uza.biz.ReportId;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;

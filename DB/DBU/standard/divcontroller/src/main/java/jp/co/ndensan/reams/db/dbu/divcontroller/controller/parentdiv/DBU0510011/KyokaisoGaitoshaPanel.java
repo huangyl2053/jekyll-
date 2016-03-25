@@ -234,8 +234,8 @@ public class KyokaisoGaitoshaPanel {
                     = ViewStateHolder.get(ViewStateKeys.境界層該当者台帳管理_境界層保険料段階情報, Models.class);
 
             if (状態_追加.equals(div.getKyokaisouGaitouItiran().getIranState())) {
-                KyokaisoGaitosha kyokaisoGaitosha = new KyokaisoGaitosha(被保険者番号, 最新リンク番号, 最新履歴番号);
-                KyokaisoSochiShinsei kyokaisoSochiShinsei = new KyokaisoSochiShinsei(被保険者番号, 最新リンク番号, 最新履歴番号);
+                KyokaisoGaitosha kyokaisoGaitosha = new KyokaisoGaitosha(被保険者番号, 最新履歴番号, 最新リンク番号);
+                KyokaisoSochiShinsei kyokaisoSochiShinsei = new KyokaisoSochiShinsei(被保険者番号, 最新履歴番号, 最新リンク番号);
                 kyokaisoGaitosha = getHandler(div).editKyokaisoGaitosha(kyokaisoGaitosha);
                 kyokaisoSochiShinsei = getHandler(div).editKyokaisoSochiShinsei(kyokaisoSochiShinsei);
                 gaitoshaModels.add(kyokaisoGaitosha);

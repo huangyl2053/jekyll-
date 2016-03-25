@@ -16,7 +16,7 @@ import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
  */
 @lombok.Getter
 @SuppressWarnings("PMD.UnusedPrivateField")
-public class KariSanteiNonyuTsuchiShoSeigyoJohoParameter {
+public final class KariSanteiNonyuTsuchiShoSeigyoJohoParameter {
 
     private final SubGyomuCode サブ業務コード;
     private final FlexibleYear 調定年度;

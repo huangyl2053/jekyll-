@@ -8,7 +8,7 @@ package jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.sonotakik
 import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbz.business.core.sonotakikanguide.SoNoTaKikanGuide;
-import jp.co.ndensan.reams.db.dbz.definition.core.configkeys.ConfigNameDBU;
+import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBU;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.chosain.ChosaItakuKubunCode;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
@@ -79,10 +79,10 @@ public class SoNoTaKikanGuideHandler {
      */
     public ValidationMessageControlPairs 大小関係チェック() {
         ValidationMessageControlPairs validPairs = new ValidationMessageControlPairs();
-        if (!div.getTxtSonotaKikanCodefrom().getValue().isEmpty() && !div.getTxtSonotaKikanCodeto().getValue().isEmpty()) {
-          if (div.getTxtSonotaKikanCodefrom().getValue().compareTo(div.getTxtSonotaKikanCodeto().getValue()) > 0) {
+        if (!div.getTxtSonotaKikanCodefrom().getValue().isEmpty() 
+                && !div.getTxtSonotaKikanCodeto().getValue().isEmpty()
+                && div.getTxtSonotaKikanCodefrom().getValue().compareTo(div.getTxtSonotaKikanCodeto().getValue()) > 0) {
               validPairs.add(new ValidationMessageControlPair(new IdocheckMessages(UrErrorMessages.大小関係が不正, "その他機関コード")));
-          }
         }
         return validPairs;
     }

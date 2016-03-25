@@ -32,7 +32,7 @@ public enum IsGogitaiDummy {
      *
      * @return 合議体ダミーフラグのコード
      */
-    public boolean getコード() {
+    public boolean is合議体ダミーフラグTrue() {
         return code;
     }
 

@@ -5,7 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbc.business.report.shokanbaraishikyufushikyuketteitsuchiichiran;
 
-import jp.co.ndensan.reams.db.dbc.entity.report.source.shokanbaraishikyufushikyuketteitsuchiichiran.ShokanbaraiShikyuFushikyuKetteiTsuchiIchiranReportSource;
+import jp.co.ndensan.reams.db.dbc.entity.report.source.shokanbaraishikyufushikyuketteitsuchiichiran.ShokanbaraiShikyuFushikyuReportSource;
 import jp.co.ndensan.reams.uz.uza.report.ReportEditorJoiner;
 
 /**
@@ -30,7 +30,7 @@ public class ShokanbaraiShikyuFushikyuKetteiTsuchiIchiranBuilder implements ISho
      * @return {@link ShokanbaraiShikyuFushikyuKetteiTsuchiIchiranReportSource}
      */
     @Override
-    public ShokanbaraiShikyuFushikyuKetteiTsuchiIchiranReportSource build() {
-        return ReportEditorJoiner.from(new ShokanbaraiShikyuFushikyuKetteiTsuchiIchiranReportSource()).join(editor).buildSource();
+    public ShokanbaraiShikyuFushikyuReportSource build() {
+        return ReportEditorJoiner.from(new ShokanbaraiShikyuFushikyuReportSource()).join(editor).buildSource();
     }
 }

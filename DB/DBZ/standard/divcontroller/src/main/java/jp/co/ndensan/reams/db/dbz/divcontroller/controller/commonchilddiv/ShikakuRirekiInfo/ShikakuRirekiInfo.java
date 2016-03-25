@@ -39,7 +39,7 @@ public class ShikakuRirekiInfo {
      * @return ResponseData<ShikakuRirekiInfoDiv>
      */
     public ResponseData<ShikakuRirekiInfoDiv> onLoad(ShikakuRirekiInfoDiv div) {
-        List<ShikakuTokusoJouho> list = finder.getShikakuTokuso(createParam(div)).records();
+        List<ShikakuTokusoJouho> list = finder.getShikakuJoho(createParam(div)).records();
         getHandler(div).setDataGrid(list);
         getHandler(div).intialize();
         return ResponseData.of(div).respond();

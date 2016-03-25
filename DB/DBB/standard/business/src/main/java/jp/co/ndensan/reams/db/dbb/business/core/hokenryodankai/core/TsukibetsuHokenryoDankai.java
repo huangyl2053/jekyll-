@@ -6,7 +6,9 @@
 package jp.co.ndensan.reams.db.dbb.business.core.hokenryodankai.core;
 
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.Map;
+import java.util.Set;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
@@ -28,10 +30,19 @@ public class TsukibetsuHokenryoDankai {
     private HokenryoDankai 保険料段階02月 = new HokenryoDankai();
     private HokenryoDankai 保険料段階03月 = new HokenryoDankai();
 
+    /**
+     * TsukibetsuHokenryoDankaiクラスです。
+     *
+     */
     public TsukibetsuHokenryoDankai() {
 
     }
 
+    /**
+     * TsukibetsuHokenryoDankaiクラスです。
+     *
+     * @param hokenryoDankai hokenryoDankai
+     */
     public TsukibetsuHokenryoDankai(RString hokenryoDankai) {
         保険料段階04月.setHokenryoDankai(hokenryoDankai);
         保険料段階05月.setHokenryoDankai(hokenryoDankai);
@@ -60,17 +71,26 @@ public class TsukibetsuHokenryoDankai {
         保険料段階03月.setSystemDankai(hokenryoDankai);
     }
 
+    /**
+     * TsukibetsuHokenryoDankaiクラスです。
+     *
+     * @param hokenryoDankaiMap hokenryoDankaiMap
+     */
     protected void createHokenryoDankaiOutput(Map<RString, HokenryoDankai> hokenryoDankaiMap) {
         //Map<RString, HokenryoDankai> tsukibetsuHokenryoDankai = new HashMap<>();
 
+        Set<Map.Entry<RString, HokenryoDankai>> set = hokenryoDankaiMap.entrySet();
+        Iterator<Map.Entry<RString, HokenryoDankai>> it = set.iterator();
         //mapからkey(段階数)を取得
-        for (RString tsuki : hokenryoDankaiMap.keySet()) {
+        if (it.hasNext()) {
 
+            Map.Entry<RString, HokenryoDankai> entry = it.next();
+            RString key = entry.getKey();
             //取得した段階の判定方法を取得
-            HokenryoDankai hokenryodankai = hokenryoDankaiMap.get(tsuki);
+            HokenryoDankai hokenryodankai = hokenryoDankaiMap.get(key);
             //hanteiResult = KakuDankaiHantei(hokenryoDankaiInput,hanteihohoList);
 
-            switch (tsuki.toString()) {
+            switch (key.toString()) {
                 case "1":
                     set保険料段階01月(hokenryodankai);
                     break;
@@ -107,10 +127,17 @@ public class TsukibetsuHokenryoDankai {
                 case "12":
                     set保険料段階12月(hokenryodankai);
                     break;
+                default:
+                    break;
             }
         }
     }
 
+    /**
+     * TsukibetsuHokenryoDankaiクラスです。
+     *
+     * @return Map<RString, HokenryoDankai>
+     */
     public Map<RString, HokenryoDankai> createHokenryoDankaiMap() {
         Map<RString, HokenryoDankai> hokenryoDankaiMap = new HashMap<>();
 

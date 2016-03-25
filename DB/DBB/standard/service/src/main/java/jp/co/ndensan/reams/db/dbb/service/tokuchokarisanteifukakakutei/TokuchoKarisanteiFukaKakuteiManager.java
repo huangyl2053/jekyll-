@@ -33,6 +33,7 @@ public class TokuchoKarisanteiFukaKakuteiManager {
     private static final RString 最大年度内連番 = new RString("0001");
     private static final RString 処理枝番 = new RString("0001");
     private final MapperProvider mapperProvider;
+    private static final int 格式 = 4;
 
     /**
      * コンストラクタです。
@@ -123,7 +124,7 @@ public class TokuchoKarisanteiFukaKakuteiManager {
                 登録_処理.setShoriEdaban(処理枝番);
                 登録_処理.setNendo(賦課年度);
                 登録_処理.setNendoNaiRenban(
-                        new RString(String.valueOf(Integer.valueOf(登録_処理.getNendoNaiRenban().toString()) + 1)).padZeroToLeft(4));
+                        new RString(String.valueOf(Integer.valueOf(登録_処理.getNendoNaiRenban().toString()) + 1)).padZeroToLeft(格式));
                 登録_処理.setKijunYMD(new FlexibleDate(RDate.getNowDate().toDateString()));
                 登録_処理.setKijunTimestamp(new YMDHMS(RDate.getNowDateTime()));
                 登録_処理.setState(EntityDataState.Added);
@@ -136,13 +137,13 @@ public class TokuchoKarisanteiFukaKakuteiManager {
     /**
      * 調定共通（介護継承）.賦課処理状況を更新します。
      *
-     * @param params　TokuchoKarisanteiFukaKakutei
+     * @param params TokuchoKarisanteiFukaKakuteiMapperParameter
      * @return 基準日時
      */
     @Transaction
     // TODO  内部QA：540 (賦課処理状況を更新)
     public boolean updateFukaShoriJyokyo(TokuchoKarisanteiFukaKakuteiMapperParameter params) {
-        ItokuchokarisanteiMapper ItokuchokarisanteiMapper = mapperProvider.create(ItokuchokarisanteiMapper.class);
-        return ItokuchokarisanteiMapper.updShoKofuKaishuJoho(params);
+        ItokuchokarisanteiMapper itokuchokarisanteiMapper = mapperProvider.create(ItokuchokarisanteiMapper.class);
+        return itokuchokarisanteiMapper.updShoKofuKaishuJoho(params);
     }
 }

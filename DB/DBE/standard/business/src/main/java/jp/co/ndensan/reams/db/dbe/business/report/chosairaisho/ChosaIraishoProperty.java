@@ -5,7 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbe.business.report.chosairaisho;
 
-import jp.co.ndensan.reams.db.dbe.definition.core.reportId.ReportIdDBE;
+import jp.co.ndensan.reams.db.dbe.definition.core.reportid.ReportIdDBE;
 import jp.co.ndensan.reams.db.dbe.entity.report.source.chosairaisho.ChosaIraishoReportSource;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.report.ReportPropertyBase;

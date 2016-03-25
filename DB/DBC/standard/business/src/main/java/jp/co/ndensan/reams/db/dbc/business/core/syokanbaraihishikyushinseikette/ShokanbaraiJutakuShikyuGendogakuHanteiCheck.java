@@ -72,11 +72,10 @@ public class ShokanbaraiJutakuShikyuGendogakuHanteiCheck {
         if (様式番号 == null) {
             return flag;
         }
-        if (様式番号.startsWith(DEFAULT_213) || 様式番号.startsWith(DEFAULT_214)
-                || 様式番号.startsWith(DEFAULT_215) || 様式番号.startsWith(DEFAULT_216)) {
-            if (!保険分単位合計.equals(限度額対象外単位.add(限度額対象単位))) {
-                flag = true;
-            }
+        if ((様式番号.startsWith(DEFAULT_213) || 様式番号.startsWith(DEFAULT_214)
+                || 様式番号.startsWith(DEFAULT_215) || 様式番号.startsWith(DEFAULT_216))
+                && !保険分単位合計.equals(限度額対象外単位.add(限度額対象単位))) {
+            flag = true;
         }
 
         return flag;

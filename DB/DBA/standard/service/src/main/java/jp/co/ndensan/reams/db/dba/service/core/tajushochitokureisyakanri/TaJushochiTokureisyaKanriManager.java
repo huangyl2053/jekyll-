@@ -5,8 +5,10 @@
  */
 package jp.co.ndensan.reams.db.dba.service.core.tajushochitokureisyakanri;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 import jp.co.ndensan.reams.db.dba.definition.mybatis.param.tajushochitokureisya.TaJushochiTokureisyaKanriParameter;
 import jp.co.ndensan.reams.db.dba.persistence.mapper.tajushochitokureisyakanri.TaJushochiTokureisyaKanriMapper;
@@ -67,7 +69,7 @@ public class TaJushochiTokureisyaKanriManager {
                 sortList.add(date);
             }
         }
-        Collections.sort(sortList);
+        Collections.sort(sortList, new DateComparator());
         TaJushochiTokureisyaKanriParameter 直近適用グリッド行 = sortList.get(0);
         for (TaJushochiTokureisyaKanriParameter date : paramater) {
 
@@ -76,6 +78,14 @@ public class TaJushochiTokureisyaKanriManager {
                 throw new ApplicationException(
                         UrErrorMessages.期間が重複.getMessage());
             }
+        }
+    }
+
+    private static class DateComparator implements Comparator<TaJushochiTokureisyaKanriParameter>, Serializable {
+
+        @Override
+        public int compare(TaJushochiTokureisyaKanriParameter o1, TaJushochiTokureisyaKanriParameter o2) {
+            return o1.getTekiyoYMD().compareTo(o2.getTekiyoYMD());
         }
     }
 
