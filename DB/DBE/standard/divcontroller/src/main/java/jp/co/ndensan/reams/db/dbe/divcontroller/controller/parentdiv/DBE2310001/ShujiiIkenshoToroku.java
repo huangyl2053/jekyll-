@@ -91,8 +91,9 @@ public class ShujiiIkenshoToroku {
         NinteiShinseiJoho ninteiShinseiJoho = ninteiManager.get意見書情報(NinteiShinseiJohoMapperParameter.createSelectByKeyParam(管理番号));
         if (resultList.records().isEmpty()) {
             div.setHdnHasChanged(RString.EMPTY);
+            div.getRadTakaShinryo().setSelectedKey(SELECT_KEY1);
             ViewStateHolder.put(ViewStateKeys.状態, JYOTAI_CODE_ADD);
-            getHandler(div).setChosaTishoJohoDisable(false);
+            getHandler(div).setChosaTishoJohoDisable(true);
             getHandler(div).setGaibuSoftDisable(true);
             getHandler(div).setSonotaDisable(true);
         } else {
