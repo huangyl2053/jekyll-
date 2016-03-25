@@ -4,6 +4,9 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.report.IReportSource;
 import jp.co.ndensan.reams.uz.uza.report.source.ReportItem;
 
+/**
+ * 介護保険償還払受領委任払申請書のReportSource
+ */
 public class ShokanharaiJuryoIninShinseishoReportSource implements IReportSource {
 // <editor-fold defaultstate="collapsed" desc="Generated Code">
 
