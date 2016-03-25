@@ -286,10 +286,36 @@ public class KaigoHokenTokubetuKaikeiKeiriJyokyoRegistManager {
                 = dbT7021dac.selectKaigoHokenTokeiData(報告年, 集計対象年, 統計対象区分, 市町村コード, 集計番号);
         if (!dbT7021EntityList.isEmpty()) {
             DbT7021JigyoHokokuTokeiDataEntity jigyoHokokuTokeiDataEntity = dbT7021EntityList.get(0);
+            Code 集計単位 = jigyoHokokuTokeiDataEntity.getShukeiTani();
+            RString 集計項目名称 = jigyoHokokuTokeiDataEntity.getShukeiKomokuMeisho();
+            Code 縦項目コード = jigyoHokokuTokeiDataEntity.getTateKomokuCode();
+            Code 横項目コード = jigyoHokokuTokeiDataEntity.getYokoKomokuCode();
             Map<RString, Decimal> 詳細データエリア = new HashMap<>();
             for (DbT7021JigyoHokokuTokeiDataEntity jigyoHokokuTokeiData : dbT7021EntityList) {
-                詳細データエリア.put(getMapKey(jigyoHokokuTokeiData.getTateNo(), jigyoHokokuTokeiData.getYokoNo()),
-                        jigyoHokokuTokeiData.getShukeiKekkaAtai());
+                if (集計単位.equals(jigyoHokokuTokeiData.getShukeiTani())
+                        && is集計項目名称同じ(集計項目名称, jigyoHokokuTokeiData.getShukeiKomokuMeisho())
+                        && is項目コード同じ(縦項目コード, jigyoHokokuTokeiData.getTateKomokuCode())
+                        && is項目コード同じ(横項目コード, jigyoHokokuTokeiData.getYokoKomokuCode())) {
+                    詳細データエリア.put(getMapKey(jigyoHokokuTokeiData.getTateNo(), jigyoHokokuTokeiData.getYokoNo()),
+                            jigyoHokokuTokeiData.getShukeiKekkaAtai());
+                } else {
+                    KaigoHokenJigyoHokokuNenpoEntity entity = new KaigoHokenJigyoHokokuNenpoEntity(
+                            jigyoHokokuTokeiDataEntity.getHokokuYSeireki(),
+                            jigyoHokokuTokeiDataEntity.getHokokuM(),
+                            jigyoHokokuTokeiDataEntity.getShukeiTaishoYSeireki(),
+                            jigyoHokokuTokeiDataEntity.getShukeiTaishoM(),
+                            jigyoHokokuTokeiDataEntity.getToukeiTaishoKubun(),
+                            jigyoHokokuTokeiDataEntity.getShichosonCode(),
+                            jigyoHokokuTokeiDataEntity.getHyoNo(),
+                            jigyoHokokuTokeiDataEntity.getShukeiNo(),
+                            jigyoHokokuTokeiDataEntity.getShukeiTani(),
+                            集計項目名称,
+                            縦項目コード,
+                            横項目コード,
+                            詳細データエリア);
+                    KaigoHokenJigyoHokokuNenpo kaigoHokenJigyoHokokuNenpo = new KaigoHokenJigyoHokokuNenpo(entity);
+                    kaigoHokenJigyoHokokuNenpoList.add(kaigoHokenJigyoHokokuNenpo);
+                }
             }
             KaigoHokenJigyoHokokuNenpoEntity entity = new KaigoHokenJigyoHokokuNenpoEntity(
                     jigyoHokokuTokeiDataEntity.getHokokuYSeireki(),
@@ -301,14 +327,30 @@ public class KaigoHokenTokubetuKaikeiKeiriJyokyoRegistManager {
                     jigyoHokokuTokeiDataEntity.getHyoNo(),
                     jigyoHokokuTokeiDataEntity.getShukeiNo(),
                     jigyoHokokuTokeiDataEntity.getShukeiTani(),
-                    jigyoHokokuTokeiDataEntity.getShukeiKomokuMeisho(),
-                    jigyoHokokuTokeiDataEntity.getTateKomokuCode(),
-                    jigyoHokokuTokeiDataEntity.getYokoKomokuCode(),
+                    集計項目名称,
+                    縦項目コード,
+                    横項目コード,
                     詳細データエリア);
             KaigoHokenJigyoHokokuNenpo kaigoHokenJigyoHokokuNenpo = new KaigoHokenJigyoHokokuNenpo(entity);
             kaigoHokenJigyoHokokuNenpoList.add(kaigoHokenJigyoHokokuNenpo);
         }
         return kaigoHokenJigyoHokokuNenpoList;
+    }
+
+    private boolean is項目コード同じ(Code 項目コード1, Code 項目コード2) {
+        if (null == 項目コード1) {
+            return null == 項目コード2;
+        } else {
+            return 項目コード2 != null && 項目コード1.equals(項目コード2);
+        }
+    }
+
+    private boolean is集計項目名称同じ(RString 集計項目名1, RString 集計項目名2) {
+        if (null == 集計項目名1) {
+            return null == 集計項目名2;
+        } else {
+            return 集計項目名2 != null && 集計項目名1.equals(集計項目名2);
+        }
     }
 
     /**
