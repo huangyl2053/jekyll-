@@ -135,7 +135,7 @@ public final class IdoTaishoshaIchiranHandler {
             }
             row.setTxtIdoYMD(idoYMD);
             // TODO QA340(Redmine#78346)
-            row.setTxtIdoNaiyo(entity.get異動内容().getコード());
+            row.setTxtIdoNaiyo(entity.get異動内容().get名称());
             row.setTexYSeireki(entity.get賦課年度().toDateString());
             rowList.add(row);
         }
