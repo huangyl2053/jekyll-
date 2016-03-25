@@ -10,7 +10,7 @@ import jp.co.ndensan.reams.db.dba.entity.report.koikinaijushochitokureishaichira
 /**
  * 広域内住所地特例者一覧表ボディEditorです。
  */
-class KoikinaiJushochitokureishaIchiranhyoBodyEditor implements KoikinaiJushochitokureishaIchiranhyoEditor {
+class KoikinaiJushochitokureishaIchiranhyoBodyEditor implements IKoikinaiJushochitokureishaIchiranhyoEditor {
 
     private final KoikinaiJushochitokureishaIchiranhyoBodyItem item;
 

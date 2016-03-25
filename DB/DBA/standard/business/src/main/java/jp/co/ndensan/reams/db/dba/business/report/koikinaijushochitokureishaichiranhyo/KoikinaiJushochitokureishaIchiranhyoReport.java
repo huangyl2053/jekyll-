@@ -51,14 +51,14 @@ public class KoikinaiJushochitokureishaIchiranhyoReport extends Report<KoikinaiJ
 
     /**
      *
-     * @param reportSourceWriter
+     * @param reportSourceWriter reportSourceWriter
      */
     @Override
     public void writeBy(ReportSourceWriter<KoikinaiJushochitokureishaIchiranhyoReportSource> reportSourceWriter) {
         for (KoikinaiJushochitokureishaIchiranhyoBodyItem bodyItem : bodyItemList) {
-            KoikinaiJushochitokureishaIchiranhyoEditor headerEditor = new KoikinaiJushochitokureishaIchiranhyoHeaderEditor(headItem);
-            KoikinaiJushochitokureishaIchiranhyoEditor bodyEditor = new KoikinaiJushochitokureishaIchiranhyoBodyEditor(bodyItem);
-            KoikinaiJushochitokureishaIchiranhyoBuilder builder = new KoikinaiJushochitokureishaIchiranhyoBuilderImpl(headerEditor, bodyEditor);
+            IKoikinaiJushochitokureishaIchiranhyoEditor headerEditor = new KoikinaiJushochitokureishaIchiranhyoHeaderEditor(headItem);
+            IKoikinaiJushochitokureishaIchiranhyoEditor bodyEditor = new KoikinaiJushochitokureishaIchiranhyoBodyEditor(bodyItem);
+            IKoikinaiJushochitokureishaIchiranhyoBuilder builder = new KoikinaiJushochitokureishaIchiranhyoBuilderImpl(headerEditor, bodyEditor);
             reportSourceWriter.writeLine(builder);
         }
     }

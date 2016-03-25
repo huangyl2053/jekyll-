@@ -11,5 +11,5 @@ import jp.co.ndensan.reams.uz.uza.report.IReportBuilder;
 /**
  * 広域内住所地特例者一覧表Builderのインターフェースクラスです。
  */
-interface KoikinaiJushochitokureishaIchiranhyoBuilder extends IReportBuilder<KoikinaiJushochitokureishaIchiranhyoReportSource> {
+interface IKoikinaiJushochitokureishaIchiranhyoBuilder extends IReportBuilder<KoikinaiJushochitokureishaIchiranhyoReportSource> {
 }
