@@ -27,7 +27,7 @@ public final class HihohenshashoHakoKanriboCsvDataSakusei {
      * @param entityList 証発行管理リストEntity
      * @param koumukumeyifukaflg 項目名付加フラグ
      * @param hizikehensyuuflg 日付'/'編集フラグ
-     * @return　List<HihohenshashoHakoKanriboCsvDataSakuseiEntity>
+     * @return List<HihohenshashoHakoKanriboCsvDataSakuseiEntity>
      * 証発行管理リストCSV用データリスト
      */
     public List<HihohenshashoHakoKanriboCsvDataSakuseiEntity> getShohakkoKanriCSVDataList(
@@ -87,7 +87,7 @@ public final class HihohenshashoHakoKanriboCsvDataSakusei {
      * @param entityList 証発行管理リストEntity
      * @param koumukumeyifukaflg 項目名付加フラグ
      * @param hizikehensyuuflg 日付'/'編集フラグ
-     * @return　List<HihohenshashoHakoKanriboCsvDataSakuseiEntity>
+     * @return List<HihohenshashoHakoKanriboCsvDataSakuseiEntity>
      */
     public List<HihohenshashoHakoKanriboCsvDataSakuseiEntity> getShohakkoKanriCSVDataListAddRenban(
             List<HihohenshashoHakkoKanriboChohyoDataSakuseiEntity> entityList,
