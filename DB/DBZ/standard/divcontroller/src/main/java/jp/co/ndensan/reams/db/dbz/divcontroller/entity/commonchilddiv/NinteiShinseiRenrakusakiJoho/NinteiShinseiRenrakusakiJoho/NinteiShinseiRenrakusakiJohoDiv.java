@@ -36,12 +36,14 @@ public class NinteiShinseiRenrakusakiJohoDiv extends Panel implements INinteiShi
     private Button btnModoru;
     @JsonProperty("btnKakutei")
     private Button btnKakutei;
-    @JsonProperty("ShinseishoKanriNo")
-    private RString ShinseishoKanriNo;
-    @JsonProperty("hdnDatabaseSubGyomuCode")
-    private RString hdnDatabaseSubGyomuCode;
-    @JsonProperty("NinteiShinseiBusinessCollection")
-    private RString NinteiShinseiBusinessCollection;
+    @JsonProperty("hdnShinseishoKanriNo")
+    private RString hdnShinseishoKanriNo;
+    @JsonProperty("hdnRenrakusakiJoho")
+    private RString hdnRenrakusakiJoho;
+    @JsonProperty("hdnZenkaiRenrakusakiJoho")
+    private RString hdnZenkaiRenrakusakiJoho;
+    @JsonProperty("hdnReadOnly")
+    private RString hdnReadOnly;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -122,57 +124,75 @@ public class NinteiShinseiRenrakusakiJohoDiv extends Panel implements INinteiShi
     }
 
     /*
-     * getShinseishoKanriNo
-     * @return ShinseishoKanriNo
+     * gethdnShinseishoKanriNo
+     * @return hdnShinseishoKanriNo
      */
-    @JsonProperty("ShinseishoKanriNo")
-    public RString getShinseishoKanriNo() {
-        return ShinseishoKanriNo;
+    @JsonProperty("hdnShinseishoKanriNo")
+    public RString getHdnShinseishoKanriNo() {
+        return hdnShinseishoKanriNo;
     }
 
     /*
-     * setShinseishoKanriNo
-     * @param ShinseishoKanriNo ShinseishoKanriNo
+     * sethdnShinseishoKanriNo
+     * @param hdnShinseishoKanriNo hdnShinseishoKanriNo
      */
-    @JsonProperty("ShinseishoKanriNo")
-    public void setShinseishoKanriNo(RString ShinseishoKanriNo) {
-        this.ShinseishoKanriNo = ShinseishoKanriNo;
+    @JsonProperty("hdnShinseishoKanriNo")
+    public void setHdnShinseishoKanriNo(RString hdnShinseishoKanriNo) {
+        this.hdnShinseishoKanriNo = hdnShinseishoKanriNo;
     }
 
     /*
-     * gethdnDatabaseSubGyomuCode
-     * @return hdnDatabaseSubGyomuCode
+     * gethdnRenrakusakiJoho
+     * @return hdnRenrakusakiJoho
      */
-    @JsonProperty("hdnDatabaseSubGyomuCode")
-    public RString getHdnDatabaseSubGyomuCode() {
-        return hdnDatabaseSubGyomuCode;
+    @JsonProperty("hdnRenrakusakiJoho")
+    public RString getHdnRenrakusakiJoho() {
+        return hdnRenrakusakiJoho;
     }
 
     /*
-     * sethdnDatabaseSubGyomuCode
-     * @param hdnDatabaseSubGyomuCode hdnDatabaseSubGyomuCode
+     * sethdnRenrakusakiJoho
+     * @param hdnRenrakusakiJoho hdnRenrakusakiJoho
      */
-    @JsonProperty("hdnDatabaseSubGyomuCode")
-    public void setHdnDatabaseSubGyomuCode(RString hdnDatabaseSubGyomuCode) {
-        this.hdnDatabaseSubGyomuCode = hdnDatabaseSubGyomuCode;
+    @JsonProperty("hdnRenrakusakiJoho")
+    public void setHdnRenrakusakiJoho(RString hdnRenrakusakiJoho) {
+        this.hdnRenrakusakiJoho = hdnRenrakusakiJoho;
     }
 
     /*
-     * getNinteiShinseiBusinessCollection
-     * @return NinteiShinseiBusinessCollection
+     * gethdnZenkaiRenrakusakiJoho
+     * @return hdnZenkaiRenrakusakiJoho
      */
-    @JsonProperty("NinteiShinseiBusinessCollection")
-    public RString getNinteiShinseiBusinessCollection() {
-        return NinteiShinseiBusinessCollection;
+    @JsonProperty("hdnZenkaiRenrakusakiJoho")
+    public RString getHdnZenkaiRenrakusakiJoho() {
+        return hdnZenkaiRenrakusakiJoho;
     }
 
     /*
-     * setNinteiShinseiBusinessCollection
-     * @param NinteiShinseiBusinessCollection NinteiShinseiBusinessCollection
+     * sethdnZenkaiRenrakusakiJoho
+     * @param hdnZenkaiRenrakusakiJoho hdnZenkaiRenrakusakiJoho
      */
-    @JsonProperty("NinteiShinseiBusinessCollection")
-    public void setNinteiShinseiBusinessCollection(RString NinteiShinseiBusinessCollection) {
-        this.NinteiShinseiBusinessCollection = NinteiShinseiBusinessCollection;
+    @JsonProperty("hdnZenkaiRenrakusakiJoho")
+    public void setHdnZenkaiRenrakusakiJoho(RString hdnZenkaiRenrakusakiJoho) {
+        this.hdnZenkaiRenrakusakiJoho = hdnZenkaiRenrakusakiJoho;
+    }
+
+    /*
+     * gethdnReadOnly
+     * @return hdnReadOnly
+     */
+    @JsonProperty("hdnReadOnly")
+    public RString getHdnReadOnly() {
+        return hdnReadOnly;
+    }
+
+    /*
+     * sethdnReadOnly
+     * @param hdnReadOnly hdnReadOnly
+     */
+    @JsonProperty("hdnReadOnly")
+    public void setHdnReadOnly(RString hdnReadOnly) {
+        this.hdnReadOnly = hdnReadOnly;
     }
 
     /*
@@ -185,7 +205,8 @@ public class NinteiShinseiRenrakusakiJohoDiv extends Panel implements INinteiShi
 
         InputMode("InputMode"),
         ShokaiMode("ShokaiMode"),
-        KoshinMode("KoshinMode");
+        KoshinMode("KoshinMode"),
+        ReadOnlyMode("ReadOnlyMode");
 
         private final String name;
 

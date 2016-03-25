@@ -6,6 +6,7 @@
 package jp.co.ndensan.reams.db.dbd.persistence.db.mapper.common;
 
 import java.util.List;
+import jp.co.ndensan.reams.db.dbd.entity.db.basic.DbT3114RiyoshaFutanWariaiMeisaiEntity;
 import jp.co.ndensan.reams.db.dbd.definition.common.GemmenJokyoParameter;
 import jp.co.ndensan.reams.db.dbd.entity.common.NursingCareInformationCodeEntity;
 import jp.co.ndensan.reams.db.dbd.entity.db.basic.DbT4021ShiharaiHohoHenkoEntity;
@@ -59,11 +60,12 @@ public interface IGemmenJokyoMapper {
      */
     List<DbV1001HihokenshaDaichoEntity> get識別コード(GemmenJokyoParameter parameter);
 
-//    /**
-//     * get利用者負担割合明細
-//     *
-//     * @param parameter パラメータク
-//     * @return List<DbT3114RiyoshaFutanWariaiMeisaiEntity>
-//     */
-//    List<DbT3114RiyoshaFutanWariaiMeisaiEntity> get利用者負担割合明細(GemmenJokyoParameter parameter);
+    /**
+     * get利用者負担割合明細
+     *
+     * @param parameter パラメータク
+     * @return List<DbT3114RiyoshaFutanWariaiMeisaiEntity>
+     */
+    List<DbT3114RiyoshaFutanWariaiMeisaiEntity> get利用者負担割合明細(GemmenJokyoParameter parameter);
+
 }

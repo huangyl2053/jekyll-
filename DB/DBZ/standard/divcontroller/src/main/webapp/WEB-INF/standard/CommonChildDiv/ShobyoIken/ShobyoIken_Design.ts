@@ -1,6 +1,7 @@
 /// <reference path="../../d.ts/jquery.d.ts" />
 /// <reference path="../../d.ts/UzViewControls.d.ts" />
 /// <reference path="../../d.ts/UzaConverter.d.ts" />
+/// <reference path="../../d.ts/URZCommonChildDiv.d.ts" />
 
 module DBZ {
 
@@ -65,8 +66,8 @@ module DBZ {
                 return new UZA.Panel(this.convFiledName("geninShikkanPanel"));
             }
 
-            public btnAdd(): UZA.ButtonDialog {
-                return new UZA.ButtonDialog(this.convFiledName("btnAdd"));
+            public btnAdd(): UZA.Button {
+                return new UZA.Button(this.convFiledName("btnAdd"));
             }
 
             public dgGenyin(): UZA.DataGrid {
@@ -77,16 +78,8 @@ module DBZ {
                 return new UZA.Panel(this.convFiledName("geninShikkanShosai"));
             }
 
-            public txtGeninShikkanCode(): UZA.TextBoxCode {
-                return new UZA.TextBoxCode(this.convFiledName("txtGeninShikkanCode"));
-            }
-
-            public btnToSearch(): UZA.ButtonDialog {
-                return new UZA.ButtonDialog(this.convFiledName("btnToSearch"));
-            }
-
-            public txtMeisho(): UZA.TextBox {
-                return new UZA.TextBox(this.convFiledName("txtMeisho"));
+            public ccdCodeInputGeninShikkan(): URZ.CodeInput.ModeController {
+                return new URZ.CodeInput.ModeController(this.convFiledName("ccdCodeInputGeninShikkan"));
             }
 
             public radIsShutaruGeninShikkan(): UZA.RadioButton {

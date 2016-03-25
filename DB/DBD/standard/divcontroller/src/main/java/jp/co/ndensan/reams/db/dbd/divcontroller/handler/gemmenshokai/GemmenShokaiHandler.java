@@ -6,6 +6,7 @@
 package jp.co.ndensan.reams.db.dbd.divcontroller.handler.gemmenshokai;
 
 import java.util.List;
+import jp.co.ndensan.reams.db.dbd.business.core.futanwariai.RiyoshaFutanWariaiMeisai;
 import jp.co.ndensan.reams.db.dbd.business.common.NursingCareInformationBusiness;
 import jp.co.ndensan.reams.db.dbd.business.common.ShiharaiHohoHenkoSummaryBusiness;
 import jp.co.ndensan.reams.db.dbd.business.core.basic.JukyushaDaicho;
@@ -19,7 +20,6 @@ import jp.co.ndensan.reams.ur.urd.service.core.seikatsuhogo.SeikatsuhogoManagerF
 import jp.co.ndensan.reams.uz.uza.biz.GyomuCode;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
-import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
@@ -29,11 +29,12 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 public class GemmenShokaiHandler {
 
     private final GemmenShokaiDiv div;
+    private final GemmenJokyoFinder finder;
     private final RString 旧措置者 = new RString("旧措置者");
-//    private final RString 負担割合区分_１ = new RString("1");
-//    private final RString 負担割合区分_２ = new RString("2");
-//    private final RString 負担割合区分_１割 = new RString("10");
-//    private final RString 負担割合区分_２割 = new RString("20");
+    private final RString 負担割合区分_１ = new RString("1");
+    private final RString 負担割合区分_２ = new RString("2");
+    private final RString 負担割合区分_１割 = new RString("10");
+    private final RString 負担割合区分_２割 = new RString("20");
 
     /**
      * コンストラクタです。
@@ -42,6 +43,7 @@ public class GemmenShokaiHandler {
      */
     public GemmenShokaiHandler(GemmenShokaiDiv div) {
         this.div = div;
+        this.finder = GemmenJokyoFinder.createIntance();
     }
 
     /**
@@ -59,34 +61,30 @@ public class GemmenShokaiHandler {
     }
 
     private void onLoad利用者負担割合情報(HihokenshaNo 被保険者番号) {
-        //TODO QA #80225
-//        GemmenJokyoFinder finder = GemmenJokyoFinder.createIntance();
-//        List<RiyoshaFutanWariaiMeisai> 利用者負担割合明細List = finder.find利用者負担割合明細(被保険者番号);
-//        if (!利用者負担割合明細List.isEmpty()) {
-//            RiyoshaFutanWariaiMeisai 利用者負担割合明細 = 利用者負担割合明細List.get(0);
-//            if (負担割合区分_１割.equals(利用者負担割合明細.get負担割合区分())) {
-//                div.getTxtFutanWariai().setValue(負担割合区分_１);
-//            } else if (負担割合区分_２割.equals(利用者負担割合明細.get負担割合区分())) {
-//                div.getTxtFutanWariai().setValue(負担割合区分_２);
-//            }
-//            div.getTxtFutanWariaiKaishiYMD().setValue(利用者負担割合明細.get有効開始日());
-//            div.getTxtFutanWariaiShuryoYMD().setValue(利用者負担割合明細.get有効終了日());
-//        }
+        List<RiyoshaFutanWariaiMeisai> 利用者負担割合明細List = finder.find利用者負担割合明細(被保険者番号);
+        if (!利用者負担割合明細List.isEmpty()) {
+            RiyoshaFutanWariaiMeisai 利用者負担割合明細 = 利用者負担割合明細List.get(0);
+            if (負担割合区分_１割.equals(利用者負担割合明細.get負担割合区分())) {
+                div.getTxtFutanWariai().setValue(負担割合区分_１);
+            } else if (負担割合区分_２割.equals(利用者負担割合明細.get負担割合区分())) {
+                div.getTxtFutanWariai().setValue(負担割合区分_２);
+            }
+            div.getTxtFutanWariaiKaishiYMD().setValue(利用者負担割合明細.get有効開始日());
+            div.getTxtFutanWariaiShuryoYMD().setValue(利用者負担割合明細.get有効終了日());
+        }
     }
 
     private void onLoad給付制限情報(HihokenshaNo 被保険者番号) {
-        GemmenJokyoFinder finder = GemmenJokyoFinder.createIntance();
         ShiharaiHohoHenkoSummaryBusiness 支払方法変更情報 = finder.find支払方法変更情報(被保険者番号);
-        //div.getTxtShiharaiHohoHenkoTorokuKubun().setValue(支払方法変更情報.get支払方法変更_登録区分().get名称());
+        div.getTxtShiharaiHohoHenkoTorokuKubun().setValue(支払方法変更情報.get支払方法変更_登録区分().get名称());
         div.getTxtShiharaiHohoHenkoKaishiYMD().setValue(支払方法変更情報.get支払方法変更_開始日());
         div.getTxtShiharaiHohoHenkoShuryoYMD().setValue(支払方法変更情報.get支払方法変更_終了日());
-        //div.getTxtKyufuGakuGengakuTorokuKubun().setValue(支払方法変更情報.get給付額減額_登録区分().get名称());
+        div.getTxtKyufuGakuGengakuTorokuKubun().setValue(支払方法変更情報.get給付額減額_登録区分().get名称());
         div.getTxtKyufuGakuGengakuKaishiYMD().setValue(支払方法変更情報.get給付額減額_開始日());
         div.getTxtKyufuGakuGengakuShuryoYMD().setValue(支払方法変更情報.get給付額減額_終了日());
     }
 
     private void onLoad老齢_生保情報(HihokenshaNo 被保険者番号) {
-        GemmenJokyoFinder finder = GemmenJokyoFinder.createIntance();
         ShikibetsuCode 識別コード = finder.get識別コード(被保険者番号);
         List<RoreiFukushiNenkinJukyusha> 老齢年金情報List = finder.find老齢年金情報(識別コード);
         if (!老齢年金情報List.isEmpty()) {
@@ -95,8 +93,7 @@ public class GemmenShokaiHandler {
             div.getTxtRoreiJukyuShuryoYMD().setValue(老齢年金情報.get受給終了年月日());
         }
         Seikatsuhogo seikatsuhogo
-                = SeikatsuhogoManagerFactory.createInstance()
-                .get生活保護(識別コード, GyomuCode.DB介護保険, new FlexibleDate(RDate.getNowDate().toDateString()));
+                = SeikatsuhogoManagerFactory.createInstance().get生活保護(識別コード, GyomuCode.DB介護保険, FlexibleDate.EMPTY);
         if (seikatsuhogo != null) {
             div.getTxtSeihoJukyuKaishiYMD().setValue(seikatsuhogo.get受給開始日());
             div.getTxtSeihoJukyuHaishiYMD().setValue(seikatsuhogo.get受給廃止日());
@@ -107,13 +104,11 @@ public class GemmenShokaiHandler {
     }
 
     private void onLoad各種減免情報(HihokenshaNo 被保険者番号) {
-        GemmenJokyoFinder finder = GemmenJokyoFinder.createIntance();
         //TODO QA #79662
         finder.find減免情報(被保険者番号);
     }
 
     private void onLoad申請中情報(HihokenshaNo 被保険者番号) {
-        GemmenJokyoFinder finder = GemmenJokyoFinder.createIntance();
         List<JukyushaDaicho> 申請中情報List = finder.find申請中情報(被保険者番号);
         if (!申請中情報List.isEmpty()) {
             JukyushaDaicho 申請中情報 = 申請中情報List.get(0);
@@ -123,7 +118,6 @@ public class GemmenShokaiHandler {
     }
 
     private void onLoad要介護認定情報(HihokenshaNo 被保険者番号) {
-        GemmenJokyoFinder finder = GemmenJokyoFinder.createIntance();
         List<NursingCareInformationBusiness> 要介護認定情報List = finder.find要介護認定情報(被保険者番号);
         if (!要介護認定情報List.isEmpty()) {
             NursingCareInformationBusiness 要介護認定情報 = 要介護認定情報List.get(0);

@@ -34,6 +34,11 @@ module DBZ
                 }
 
                 public InputMode(): void {
+                    this.controls.btnShinkiTsuika().disabled = false;
+                    this.controls.btnFukushaTsuika().disabled = false;
+                    this.controls.btnZenkaiFukusha().disabled = false;
+                    this.controls.dgRenrakusakiIchiran().readOnly = false;
+                    this.controls.btnKakutei().disabled = false;
                     this.controls.txtRenban().readOnly = false;
                     this.controls.ddlRenrakusakiKubun().readOnly = false;
                     this.controls.txtShimei().readOnly = false;
@@ -49,6 +54,11 @@ module DBZ
                 }
 
                 public ShokaiMode(): void {
+                    this.controls.btnShinkiTsuika().disabled = false;
+                    this.controls.btnFukushaTsuika().disabled = false;
+                    this.controls.btnZenkaiFukusha().disabled = false;
+                    this.controls.dgRenrakusakiIchiran().readOnly = false;
+                    this.controls.btnKakutei().disabled = false;
                     this.controls.txtRenban().readOnly = true;
                     this.controls.ddlRenrakusakiKubun().readOnly = true;
                     this.controls.txtShimei().readOnly = true;
@@ -64,6 +74,11 @@ module DBZ
                 }
 
                 public KoshinMode(): void {
+                    this.controls.btnShinkiTsuika().disabled = false;
+                    this.controls.btnFukushaTsuika().disabled = false;
+                    this.controls.btnZenkaiFukusha().disabled = false;
+                    this.controls.dgRenrakusakiIchiran().readOnly = false;
+                    this.controls.btnKakutei().disabled = false;
                     this.controls.txtRenban().readOnly = true;
                     this.controls.ddlRenrakusakiKubun().readOnly = false;
                     this.controls.txtShimei().readOnly = false;
@@ -76,6 +91,26 @@ module DBZ
                     this.controls.txtYusenJuni().readOnly = false;
                     this.controls.btnToroku().disabled = false;
                     this.controls.ddlShisho().readOnly = false;
+                }
+
+                public ReadOnlyMode(): void {
+                    this.controls.btnShinkiTsuika().disabled = true;
+                    this.controls.btnFukushaTsuika().disabled = true;
+                    this.controls.btnZenkaiFukusha().disabled = true;
+                    this.controls.dgRenrakusakiIchiran().readOnly = true;
+                    this.controls.btnKakutei().disabled = true;
+                    this.controls.txtRenban().readOnly = true;
+                    this.controls.ddlRenrakusakiKubun().readOnly = true;
+                    this.controls.txtShimei().readOnly = true;
+                    this.controls.txtKanaShimei().readOnly = true;
+                    this.controls.txtYubinNo().readOnly = true;
+                    this.controls.ddlTsuzukigara().readOnly = true;
+                    this.controls.txtTelNo().readOnly = true;
+                    this.controls.txtMobileNo().readOnly = true;
+                    this.controls.txtJusho().readOnly = true;
+                    this.controls.txtYusenJuni().readOnly = true;
+                    this.controls.btnToroku().disabled = true;
+                    this.controls.ddlShisho().readOnly = true;
                 }
             }
         }
