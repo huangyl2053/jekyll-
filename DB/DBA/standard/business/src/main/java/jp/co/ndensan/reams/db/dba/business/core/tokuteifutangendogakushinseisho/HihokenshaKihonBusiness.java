@@ -154,6 +154,11 @@ public class HihokenshaKihonBusiness {
         return entity.get生年月日不詳区分();
     }
 
+    /**
+     * 方書を取得します。
+     *
+     * @return 方書
+     */
     public RString get方書() {
         return entity.get方書();
     }

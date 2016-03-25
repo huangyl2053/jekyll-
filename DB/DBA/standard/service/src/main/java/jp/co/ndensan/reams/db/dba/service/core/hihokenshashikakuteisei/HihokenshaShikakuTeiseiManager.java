@@ -5,8 +5,10 @@
  */
 package jp.co.ndensan.reams.db.dba.service.core.hihokenshashikakuteisei;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 import jp.co.ndensan.reams.db.dba.business.core.hihokenshadaicho.HihokenshaShutokuJyoho;
 import jp.co.ndensan.reams.db.dba.definition.core.shikakuidojiyu.ShikakuHenkoJiyu;
@@ -180,7 +182,7 @@ public class HihokenshaShikakuTeiseiManager {
         } else if (被保履歴.equals(DATASYUUSEI)) {
             entityList = get資格訂正情報リスト2(資格詳細情報, 住所地特例, 資格関連異動).records();
         }
-        Collections.sort(entityList);
+        Collections.sort(entityList, new DateComparator2());
         if (get資格訂正登録リスト(shutokuJyohoList, entityList, 被保険者番号, 識別コード).records().isEmpty()) {
             return SearchResult.of(shutokuJyohoList, 0, false);
         }
@@ -195,7 +197,7 @@ public class HihokenshaShikakuTeiseiManager {
      * @return ERR_CODE エラーコード
      */
     public RString checkShikakuTorukuList(List<HihokenshaShutokuJyoho> 資格訂正登録リスト, IDateOfBirth 当該識別対象の生年月日) {
-        Collections.sort(資格訂正登録リスト);
+        Collections.sort(資格訂正登録リスト, new DateComparator());
         RString errorCode = new RString("");
         DbT1001HihokenshaDaichoEntity entity = new DbT1001HihokenshaDaichoEntity();
         for (HihokenshaShutokuJyoho hihokenshaShutokuJyoho : 資格訂正登録リスト) {
@@ -1081,5 +1083,21 @@ public class HihokenshaShikakuTeiseiManager {
             return errorCode;
         }
         return new RString("");
+    }
+
+    private static class DateComparator implements Comparator<HihokenshaShutokuJyoho>, Serializable {
+
+        @Override
+        public int compare(HihokenshaShutokuJyoho o1, HihokenshaShutokuJyoho o2) {
+            return o1.get異動日().compareTo(o2.get異動日());
+        }
+    }
+
+    private static class DateComparator2 implements Comparator<ShikakuTeyiseyiEntity>, Serializable {
+
+        @Override
+        public int compare(ShikakuTeyiseyiEntity o1, ShikakuTeyiseyiEntity o2) {
+            return o1.get異動日().compareTo(o2.get異動日());
+        }
     }
 }

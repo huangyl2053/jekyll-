@@ -11,18 +11,20 @@ import jp.co.ndensan.reams.uz.uza.report.ReportEditorJoiner;
 /**
  * 広域内住所地特例者一覧表Builderクラスです。
  */
-class KoikinaiJushochitokureishaIchiranhyoBuilderImpl implements KoikinaiJushochitokureishaIchiranhyoBuilder {
+class KoikinaiJushochitokureishaIchiranhyoBuilderImpl implements IKoikinaiJushochitokureishaIchiranhyoBuilder {
 
-    private final KoikinaiJushochitokureishaIchiranhyoEditor headerEditor;
-    private final KoikinaiJushochitokureishaIchiranhyoEditor bodyEditor;
+    private final IKoikinaiJushochitokureishaIchiranhyoEditor headerEditor;
+    private final IKoikinaiJushochitokureishaIchiranhyoEditor bodyEditor;
 
     /**
      * インスタンスを生成します。
      *
-     * @param headerEditor {@link KoikinaiJushochitokureishaIchiranhyoEditor}
-     * @param bodyEditor {@link KoikinaiJushochitokureishaIchiranhyoEditor}
+     * @param headerEditor {@link IKoikinaiJushochitokureishaIchiranhyoEditor}
+     * @param bodyEditor {@link IKoikinaiJushochitokureishaIchiranhyoEditor}
      */
-    public KoikinaiJushochitokureishaIchiranhyoBuilderImpl(KoikinaiJushochitokureishaIchiranhyoEditor headerEditor, KoikinaiJushochitokureishaIchiranhyoEditor bodyEditor) {
+    public KoikinaiJushochitokureishaIchiranhyoBuilderImpl(
+            IKoikinaiJushochitokureishaIchiranhyoEditor headerEditor,
+            IKoikinaiJushochitokureishaIchiranhyoEditor bodyEditor) {
         this.headerEditor = headerEditor;
         this.bodyEditor = bodyEditor;
     }

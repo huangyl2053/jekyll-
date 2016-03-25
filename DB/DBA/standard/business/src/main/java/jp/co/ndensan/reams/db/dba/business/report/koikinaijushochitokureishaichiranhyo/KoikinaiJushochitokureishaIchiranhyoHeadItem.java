@@ -36,7 +36,6 @@ public class KoikinaiJushochitokureishaIchiranhyoHeadItem {
      * インスタンスを生成します。
      *
      * @param 印刷日時 印刷日時
-     * @param ページ数 ページ数
      * @param 市町村コード 市町村コード
      * @param 市町村名 市町村名
      * @param 並び順１ 並び順１

@@ -10,7 +10,6 @@ import jp.co.ndensan.reams.uz.uza.report.IReportEditor;
 
 /**
  * 広域内住所地特例者一覧表のインターフェースクラスです。
- *
  */
-interface KoikinaiJushochitokureishaIchiranhyoEditor extends IReportEditor<KoikinaiJushochitokureishaIchiranhyoReportSource> {
+interface IKoikinaiJushochitokureishaIchiranhyoEditor extends IReportEditor<KoikinaiJushochitokureishaIchiranhyoReportSource> {
 }
