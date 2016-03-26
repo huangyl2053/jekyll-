@@ -42,6 +42,7 @@ dbe/db/dbe/GogitaiJohoSakusei/onBefore_btnShinsainSelect
 dbe/db/dbe/GogitaiJohoSakusei/onBefore_btnSubShinsainSelect
 dbe/db/dbe/GogitaiJohoSakusei/onClick_btnBatchRegister
 dbe/db/dbe/GogitaiJohoSakusei/onClick_btnCSVShutsuryoku
+dbe/db/dbe/GogitaiJohoSakusei/onClick_btnKakunin
 dbe/db/dbe/GogitaiJohoSakusei/onClick_btnKensaku
 dbe/db/dbe/GogitaiJohoSakusei/onClick_btnRegistUploadFile
 dbe/db/dbe/GogitaiJohoSakusei/onClick_btnTsuika
@@ -132,6 +133,7 @@ dbe/db/dbe/NijihanteiKekkaOutput/onClick_btnRenkeiDataOutput
 dbe/db/dbe/NijihanteiKekkaOutput/onLoad
 dbe/db/dbe/NinnteiChousaKekkaTouroku1/onActive
 dbe/db/dbe/NinnteiChousaKekkaTouroku1/onBeforeOpenDialog_btnIchiHanteiJisshi
+dbe/db/dbe/NinnteiChousaKekkaTouroku1/onBeforeOpenDialog_btnKihonChosa
 dbe/db/dbe/NinnteiChousaKekkaTouroku1/onBeforeOpenDialog_btnTeikeibun
 dbe/db/dbe/NinnteiChousaKekkaTouroku1/onChange_ddlChosaJisshiBasho
 dbe/db/dbe/NinnteiChousaKekkaTouroku1/onChange_radGenzaiService
@@ -142,11 +144,14 @@ dbe/db/dbe/NinnteiChousaKekkaTouroku1/onClick_btnTokkiJikoIchiran
 dbe/db/dbe/NinnteiChousaKekkaTouroku1/onClick_btnZenkaiCopy
 dbe/db/dbe/NinnteiChousaKekkaTouroku1/onLoad
 dbe/db/dbe/NinnteiChousaKekkaTouroku1/onOkClose_btnIchiHanteiJisshi
+dbe/db/dbe/NinnteiChousaKekkaTouroku1/onOkClose_btnKihonChosa
 dbe/db/dbe/NinnteiChousaKekkaTouroku1/onOkClose_btnTeikeibun
 dbe/db/dbe/NinnteiChousaKekkaTouroku1/onclick_btnBackToTaishoshaIchiran
 dbe/db/dbe/NinnteiChousaKekkaTouroku1/onclick_btnChosaKekkaUpdate
 dbe/db/dbe/NinnteiChousaKekkaTouroku1/onclick_btnComplete
 dbe/db/dbe/NinteiChosaIrai/onClick_BtnPrint
+dbe/db/dbe/NinteiChosaIrai/onClick_MiwaritsukeShokai
+dbe/db/dbe/NinteiChosaIrai/onClick_WaritsukeZumiShokai
 dbe/db/dbe/NinteiChosaIrai/onClick_btnBackToChosaItakusakiSentaku
 dbe/db/dbe/NinteiChosaIrai/onClick_btnBackToChosainSentaku
 dbe/db/dbe/NinteiChosaIrai/onClick_btnHozon
