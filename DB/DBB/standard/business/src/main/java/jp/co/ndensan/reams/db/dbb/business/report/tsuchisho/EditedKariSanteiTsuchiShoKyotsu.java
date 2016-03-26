@@ -86,7 +86,7 @@ public class EditedKariSanteiTsuchiShoKyotsu {
     Decimal 更正後特徴期別金額02;
     Decimal 更正後特徴期別金額03;
     Decimal 更正後特徴期別金額合計;
-    List<特徴期別金額entity> 更正後特徴期別金額リスト;
+    List<TokuchuKibetsuKingakuentity> 更正後特徴期別金額リスト;
     List<普徴期別金額Entity> 更正後普徴期別金額リスト;
     Decimal 更正後普徴第１期金額;
     Decimal 更正後普徴第２期金額;

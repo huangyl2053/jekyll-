@@ -8,7 +8,7 @@ package jp.co.ndensan.reams.db.dbb.business.report.tokubetsuchoshukaishitsuchish
 import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbb.business.report.tsuchisho.EditedKariSanteiTsuchiShoKyotsu;
-import jp.co.ndensan.reams.db.dbb.business.report.tsuchisho.特徴期別金額entity;
+import jp.co.ndensan.reams.db.dbb.business.report.tsuchisho.TokuchuKibetsuKingakuentity;
 import jp.co.ndensan.reams.db.dbb.definition.batchprm.nonyutsuchichiran.NonyuTsuchIchiranBatchParameter;
 import jp.co.ndensan.reams.db.dbb.entity.report.tokubetsuchoshukaishitsuchishokarihakkoichiran.TokubetsuChoshuKaishiSource;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -159,7 +159,7 @@ public class TokubetsuChoshuKaishiReport extends Report<TokubetsuChoshuKaishiSou
         item1.setListLower_4(編集後本算定通知書共通情報.get(i).get更正後特別徴収義務者());
         item1.setListLower_5(new RString(編集後本算定通知書共通情報.get(i).get更正後特別徴収対象年金コード().toString()));
         item1.setListLower_6(new RString("10月"));
-        for (特徴期別金額entity entity : 編集後本算定通知書共通情報.get(i).get更正後特徴期別金額リスト()) {
+        for (TokuchuKibetsuKingakuentity entity : 編集後本算定通知書共通情報.get(i).get更正後特徴期別金額リスト()) {
             if (entity.get期() == NUM4) {
                 item1.setListLower_7(new RString(entity.get金額().toString()));
             }
