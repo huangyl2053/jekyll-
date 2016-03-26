@@ -16,6 +16,7 @@ import jp.co.ndensan.reams.db.dbb.definition.core.choteibo.KibetsuGokeigo;
  */
 @lombok.Getter
 @lombok.Setter
+@SuppressWarnings("PMD.UnusedPrivateField")
 public class GokeigoEntity {
 
     private List<KibetsuGokeigo> 期別合計Parameter;

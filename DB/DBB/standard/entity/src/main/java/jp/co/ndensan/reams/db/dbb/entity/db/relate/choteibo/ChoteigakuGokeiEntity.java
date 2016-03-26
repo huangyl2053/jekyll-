@@ -14,30 +14,13 @@ import jp.co.ndensan.reams.uz.uza.math.Decimal;
  */
 @lombok.Getter
 @lombok.Setter
+@SuppressWarnings("PMD.UnusedPrivateField")
 public class ChoteigakuGokeiEntity {
 
-    /**
-     * 調定年度
-     */
     private FlexibleYear choteiNendo;
-    /**
-     * 賦課年度
-     */
     private FlexibleYear fukaNendo;
-    /**
-     * 段階
-     */
     private RString dankai;
-    /**
-     * 件数の合計
-     */
     private Decimal dankaiKensuGokei;
-    /**
-     * 増の全部調定額の合計
-     */
     private Decimal fueZennbuChoteigakuGokei;
-    /**
-     * 減の全部調定額の合計
-     */
     private Decimal genZennbuChoteigakuGokei;
 }

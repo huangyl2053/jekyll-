@@ -13,6 +13,7 @@ import java.util.List;
  */
 @lombok.Getter
 @lombok.Setter
+@SuppressWarnings("PMD.UnusedPrivateField")
 public class NendoDataListEntity {
 
     private List<DataListEntity> 当年度データリストEntity;
