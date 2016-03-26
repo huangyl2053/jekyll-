@@ -23,10 +23,10 @@ public class GogitaiIchiranDiv extends Panel {
      */
     @JsonProperty("btnTsuika")
     private Button btnTsuika;
-    @JsonProperty("dgGogitaiIchiran")
-    private DataGrid<dgGogitaiIchiran_Row> dgGogitaiIchiran;
     @JsonProperty("btnCSVShutsuryoku")
     private Button btnCSVShutsuryoku;
+    @JsonProperty("dgGogitaiIchiran")
+    private DataGrid<dgGogitaiIchiran_Row> dgGogitaiIchiran;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -53,24 +53,6 @@ public class GogitaiIchiranDiv extends Panel {
     }
 
     /*
-     * getdgGogitaiIchiran
-     * @return dgGogitaiIchiran
-     */
-    @JsonProperty("dgGogitaiIchiran")
-    public DataGrid<dgGogitaiIchiran_Row> getDgGogitaiIchiran() {
-        return dgGogitaiIchiran;
-    }
-
-    /*
-     * setdgGogitaiIchiran
-     * @param dgGogitaiIchiran dgGogitaiIchiran
-     */
-    @JsonProperty("dgGogitaiIchiran")
-    public void setDgGogitaiIchiran(DataGrid<dgGogitaiIchiran_Row> dgGogitaiIchiran) {
-        this.dgGogitaiIchiran = dgGogitaiIchiran;
-    }
-
-    /*
      * getbtnCSVShutsuryoku
      * @return btnCSVShutsuryoku
      */
@@ -86,6 +68,24 @@ public class GogitaiIchiranDiv extends Panel {
     @JsonProperty("btnCSVShutsuryoku")
     public void setBtnCSVShutsuryoku(Button btnCSVShutsuryoku) {
         this.btnCSVShutsuryoku = btnCSVShutsuryoku;
+    }
+
+    /*
+     * getdgGogitaiIchiran
+     * @return dgGogitaiIchiran
+     */
+    @JsonProperty("dgGogitaiIchiran")
+    public DataGrid<dgGogitaiIchiran_Row> getDgGogitaiIchiran() {
+        return dgGogitaiIchiran;
+    }
+
+    /*
+     * setdgGogitaiIchiran
+     * @param dgGogitaiIchiran dgGogitaiIchiran
+     */
+    @JsonProperty("dgGogitaiIchiran")
+    public void setDgGogitaiIchiran(DataGrid<dgGogitaiIchiran_Row> dgGogitaiIchiran) {
+        this.dgGogitaiIchiran = dgGogitaiIchiran;
     }
 
     // </editor-fold>

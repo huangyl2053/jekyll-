@@ -165,6 +165,26 @@ public class GogitaiJohoSakuseiDiv extends Panel {
     }
 
     @JsonIgnore
+    public TextBoxNum getTxtDispMax() {
+        return this.getKensakujyoken().getTxtDispMax();
+    }
+
+    @JsonIgnore
+    public void  setTxtDispMax(TextBoxNum txtDispMax) {
+        this.getKensakujyoken().setTxtDispMax(txtDispMax);
+    }
+
+    @JsonIgnore
+    public Button getBtnClear() {
+        return this.getKensakujyoken().getBtnClear();
+    }
+
+    @JsonIgnore
+    public void  setBtnClear(Button btnClear) {
+        this.getKensakujyoken().setBtnClear(btnClear);
+    }
+
+    @JsonIgnore
     public Button getBtnKensaku() {
         return this.getKensakujyoken().getBtnKensaku();
     }
@@ -185,16 +205,6 @@ public class GogitaiJohoSakuseiDiv extends Panel {
     }
 
     @JsonIgnore
-    public DataGrid<dgGogitaiIchiran_Row> getDgGogitaiIchiran() {
-        return this.getGogitaiIchiran().getDgGogitaiIchiran();
-    }
-
-    @JsonIgnore
-    public void  setDgGogitaiIchiran(DataGrid<dgGogitaiIchiran_Row> dgGogitaiIchiran) {
-        this.getGogitaiIchiran().setDgGogitaiIchiran(dgGogitaiIchiran);
-    }
-
-    @JsonIgnore
     public Button getBtnCSVShutsuryoku() {
         return this.getGogitaiIchiran().getBtnCSVShutsuryoku();
     }
@@ -202,6 +212,16 @@ public class GogitaiJohoSakuseiDiv extends Panel {
     @JsonIgnore
     public void  setBtnCSVShutsuryoku(Button btnCSVShutsuryoku) {
         this.getGogitaiIchiran().setBtnCSVShutsuryoku(btnCSVShutsuryoku);
+    }
+
+    @JsonIgnore
+    public DataGrid<dgGogitaiIchiran_Row> getDgGogitaiIchiran() {
+        return this.getGogitaiIchiran().getDgGogitaiIchiran();
+    }
+
+    @JsonIgnore
+    public void  setDgGogitaiIchiran(DataGrid<dgGogitaiIchiran_Row> dgGogitaiIchiran) {
+        this.getGogitaiIchiran().setDgGogitaiIchiran(dgGogitaiIchiran);
     }
 
     @JsonIgnore
@@ -225,16 +245,6 @@ public class GogitaiJohoSakuseiDiv extends Panel {
     }
 
     @JsonIgnore
-    public DropDownList getDdlkaisaibasho() {
-        return this.getGogitaiShosai().getDdlkaisaibasho();
-    }
-
-    @JsonIgnore
-    public void  setDdlkaisaibasho(DropDownList ddlkaisaibasho) {
-        this.getGogitaiShosai().setDdlkaisaibasho(ddlkaisaibasho);
-    }
-
-    @JsonIgnore
     public TextBoxDate getTxtYukoKaishiYMD() {
         return this.getGogitaiShosai().getTxtYukoKaishiYMD();
     }
@@ -252,26 +262,6 @@ public class GogitaiJohoSakuseiDiv extends Panel {
     @JsonIgnore
     public void  setTxtYukoShuryoYMD(TextBoxDate txtYukoShuryoYMD) {
         this.getGogitaiShosai().setTxtYukoShuryoYMD(txtYukoShuryoYMD);
-    }
-
-    @JsonIgnore
-    public TextBoxNum getTxtYoteiTeiin() {
-        return this.getGogitaiShosai().getTxtYoteiTeiin();
-    }
-
-    @JsonIgnore
-    public void  setTxtYoteiTeiin(TextBoxNum txtYoteiTeiin) {
-        this.getGogitaiShosai().setTxtYoteiTeiin(txtYoteiTeiin);
-    }
-
-    @JsonIgnore
-    public TextBoxNum getTxtJidoWariateTeiin() {
-        return this.getGogitaiShosai().getTxtJidoWariateTeiin();
-    }
-
-    @JsonIgnore
-    public void  setTxtJidoWariateTeiin(TextBoxNum txtJidoWariateTeiin) {
-        this.getGogitaiShosai().setTxtJidoWariateTeiin(txtJidoWariateTeiin);
     }
 
     @JsonIgnore
@@ -295,6 +285,16 @@ public class GogitaiJohoSakuseiDiv extends Panel {
     }
 
     @JsonIgnore
+    public DropDownList getDdlkaisaibasho() {
+        return this.getGogitaiShosai().getDdlkaisaibasho();
+    }
+
+    @JsonIgnore
+    public void  setDdlkaisaibasho(DropDownList ddlkaisaibasho) {
+        this.getGogitaiShosai().setDdlkaisaibasho(ddlkaisaibasho);
+    }
+
+    @JsonIgnore
     public TextBoxNum getTxtIinTeiin() {
         return this.getGogitaiShosai().getTxtIinTeiin();
     }
@@ -302,6 +302,26 @@ public class GogitaiJohoSakuseiDiv extends Panel {
     @JsonIgnore
     public void  setTxtIinTeiin(TextBoxNum txtIinTeiin) {
         this.getGogitaiShosai().setTxtIinTeiin(txtIinTeiin);
+    }
+
+    @JsonIgnore
+    public TextBoxNum getTxtYoteiTeiin() {
+        return this.getGogitaiShosai().getTxtYoteiTeiin();
+    }
+
+    @JsonIgnore
+    public void  setTxtYoteiTeiin(TextBoxNum txtYoteiTeiin) {
+        this.getGogitaiShosai().setTxtYoteiTeiin(txtYoteiTeiin);
+    }
+
+    @JsonIgnore
+    public TextBoxNum getTxtJidoWariateTeiin() {
+        return this.getGogitaiShosai().getTxtJidoWariateTeiin();
+    }
+
+    @JsonIgnore
+    public void  setTxtJidoWariateTeiin(TextBoxNum txtJidoWariateTeiin) {
+        this.getGogitaiShosai().setTxtJidoWariateTeiin(txtJidoWariateTeiin);
     }
 
     @JsonIgnore
@@ -345,6 +365,16 @@ public class GogitaiJohoSakuseiDiv extends Panel {
     }
 
     @JsonIgnore
+    public Label getLblHoketsuShinsain() {
+        return this.getGogitaiShosai().getLblHoketsuShinsain();
+    }
+
+    @JsonIgnore
+    public void  setLblHoketsuShinsain(Label lblHoketsuShinsain) {
+        this.getGogitaiShosai().setLblHoketsuShinsain(lblHoketsuShinsain);
+    }
+
+    @JsonIgnore
     public DataGrid<dgShinsainList_Row> getDgShinsainList() {
         return this.getGogitaiShosai().getDgShinsainList();
     }
@@ -362,16 +392,6 @@ public class GogitaiJohoSakuseiDiv extends Panel {
     @JsonIgnore
     public void  setBtnShinsainSelect(ButtonDialog btnShinsainSelect) {
         this.getGogitaiShosai().setBtnShinsainSelect(btnShinsainSelect);
-    }
-
-    @JsonIgnore
-    public Label getLblHoketsuShinsain() {
-        return this.getGogitaiShosai().getLblHoketsuShinsain();
-    }
-
-    @JsonIgnore
-    public void  setLblHoketsuShinsain(Label lblHoketsuShinsain) {
-        this.getGogitaiShosai().setLblHoketsuShinsain(lblHoketsuShinsain);
     }
 
     @JsonIgnore
@@ -462,16 +482,6 @@ public class GogitaiJohoSakuseiDiv extends Panel {
     @JsonIgnore
     public void  setBtnRegistUploadFile(Button btnRegistUploadFile) {
         this.getUploadFileToroku().setBtnRegistUploadFile(btnRegistUploadFile);
-    }
-
-    @JsonIgnore
-    public Button getBtnKakunin() {
-        return this.getUploadFileToroku().getBtnKakunin();
-    }
-
-    @JsonIgnore
-    public void  setBtnKakunin(Button btnKakunin) {
-        this.getUploadFileToroku().setBtnKakunin(btnKakunin);
     }
 
     // </editor-fold>

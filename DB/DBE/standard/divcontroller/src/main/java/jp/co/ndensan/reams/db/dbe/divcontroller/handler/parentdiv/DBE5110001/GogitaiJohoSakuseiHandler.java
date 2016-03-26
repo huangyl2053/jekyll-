@@ -42,6 +42,7 @@ public class GogitaiJohoSakuseiHandler {
     private static final RString DUMMY_FLAG_TUUJOU = new RString("key0");
     private static final RString DUMMY_FLAG_DAMI = new RString("key1");
     private static final RString KAISAI_BASHO_CODE_EMPTY = new RString("empty");
+    private static final Decimal DUMMY_DISP_MAX = new Decimal(100);
 
     private int hoketsuCount = 0;
     private int shinsainCount = 0;
@@ -72,6 +73,7 @@ public class GogitaiJohoSakuseiHandler {
         div.getRadSeishinkaiSonzai().setSelectedKey(SEISHINKAI_SONZAI_SHINAI);
         div.getRadDummyFlag().setSelectedKey(DUMMY_FLAG_TUUJOU);
         this.setDisableByAdd(true);
+        div.getTxtDispMax().setValue(DUMMY_DISP_MAX);
 
     }
 
