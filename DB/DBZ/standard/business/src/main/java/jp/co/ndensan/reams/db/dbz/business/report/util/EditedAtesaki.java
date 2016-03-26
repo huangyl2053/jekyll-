@@ -174,4 +174,13 @@ public class EditedAtesaki {
     public RString get番地() {
         return 宛先.get宛先住所().get番地().getBanchi().value();
     }
+
+    /**
+     * 宛先行政区を返します。
+     *
+     * @return 宛先行政区
+     */
+    public RString get宛先行政区() {
+        return 宛先.get宛先行政区().get名称();
+    }
 }

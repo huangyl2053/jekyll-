@@ -6,26 +6,28 @@
 package jp.co.ndensan.reams.db.dbb.business.report.tsuchisho;
 
 import java.util.List;
+import jp.co.ndensan.reams.db.dbb.business.report.tsuchisho.notsu.HyojiCodes;
 import jp.co.ndensan.reams.db.dbb.definition.core.fuka.KozaKubun;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.TsuchishoNo;
+import jp.co.ndensan.reams.db.dbz.business.report.util.EditedAtesaki;
+import jp.co.ndensan.reams.db.dbz.business.report.util.EditedKojin;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 
 /**
- *
- *
+ * 編集後本算定通知書共通情報
  */
 @lombok.Getter
 @lombok.Setter
 @SuppressWarnings("PMD.UnusedPrivateField")
 public class EditedKariSanteiTsuchiShoKyotsu {
 
-    RString 編集後宛先;//
-    RString 編集後個人;//
-    RString 表示コード;//
+    EditedAtesaki 編集後宛先;///
+    EditedKojin 編集後個人;//
+    HyojiCodes 表示コード;//
     HihokenshaNo 被保険者番号;
     ShikibetsuCode 識別コード;
     FlexibleYear 調定年度;
@@ -68,6 +70,7 @@ public class EditedKariSanteiTsuchiShoKyotsu {
     RString 更正前期間_至_西暦;
     RString 更正前保険料段階;
     RString 更正前保険料率;
+    RString 更正前確定保険料;///
     RString 更正前特別徴収義務者;
     RString 更正前特別徴収対象年金;
     RString 更正前特別徴収義務者コード;//
@@ -77,13 +80,13 @@ public class EditedKariSanteiTsuchiShoKyotsu {
     RString 更正前生保開始日_西暦;
     RString 更正前生活保護扶助種類;
     RString 更正前徴収方法;
-
     Decimal 更正後介護保険料仮徴収額合計;
     Decimal 更正後介護保険料減免額;
     Decimal 更正後特徴期別金額01;
     Decimal 更正後特徴期別金額02;
     Decimal 更正後特徴期別金額03;
     Decimal 更正後特徴期別金額合計;
+    List<特徴期別金額entity> 更正後特徴期別金額リスト;
     List<普徴期別金額Entity> 更正後普徴期別金額リスト;
     Decimal 更正後普徴第１期金額;
     Decimal 更正後普徴第２期金額;
@@ -98,6 +101,7 @@ public class EditedKariSanteiTsuchiShoKyotsu {
     RString 更正後期間_至__西暦;
     RString 更正後保険料段階;
     RString 更正後保険料率;
+    RString 更正後確定保険料;///
     RString 更正後特別徴収義務者;
     RString 更正後特別徴収対象年金;
     RString 更正後特別徴収義務者コード;	//
@@ -106,7 +110,7 @@ public class EditedKariSanteiTsuchiShoKyotsu {
     RString 更正後生保開始日;
     RString 更正後生保開始日_西暦;
     RString 更正後生活保護扶助種類;
-    //text 更正後徴収方法;
+    RString 更正後徴収方法;///
 
     Decimal 増減額;
     Decimal 納付済額_未到来期含む;
@@ -138,5 +142,4 @@ public class EditedKariSanteiTsuchiShoKyotsu {
     List<収入情報Entity> 普徴収入情報リスト;
 
     List<収入情報Entity> 特徴収入情報リスト;
-
 }
