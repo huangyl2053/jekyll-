@@ -6,7 +6,7 @@
 package jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC120160;
 
 import java.util.List;
-import jp.co.ndensan.reams.db.dbc.service.kagoketteitsuchishojohotorikomiichiranhyohokenshabun.KagoKetteiTsuchishoJohoTorikomiIchiranhyoHokenshabun;
+import jp.co.ndensan.reams.db.dbc.service.kagoketeitsuchishojohotorikomihenshuhokenshabun.KagoKeteiTsuchishoJohoTorikomiHenshuHokenshabun;
 import jp.co.ndensan.reams.uz.uza.batch.process.InputParameter;
 import jp.co.ndensan.reams.uz.uza.batch.process.SimpleBatchProcessBase;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
@@ -31,13 +31,13 @@ public class KagoKetteiHokenshaInUpdataDBProcess extends SimpleBatchProcessBase 
         PARAMETER_CSVFILENAME = new RString("csvFileName");
     }
 
-    private KagoKetteiTsuchishoJohoTorikomiIchiranhyoHokenshabun hokenshabun;
+    private KagoKeteiTsuchishoJohoTorikomiHenshuHokenshabun hokenshabun;
     InputParameter<FlexibleYearMonth> shoriYM;
     InputParameter<List<RString>> csvFileName;
 
     @Override
     protected void beforeExecute() {
-        hokenshabun = KagoKetteiTsuchishoJohoTorikomiIchiranhyoHokenshabun.createInstance();
+        hokenshabun = KagoKeteiTsuchishoJohoTorikomiHenshuHokenshabun.createInstance();
     }
 
     @Override

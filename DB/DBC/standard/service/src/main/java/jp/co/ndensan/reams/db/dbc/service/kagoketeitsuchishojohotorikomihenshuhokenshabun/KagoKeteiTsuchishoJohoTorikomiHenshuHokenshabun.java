@@ -3,12 +3,10 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbc.service.kagoketteitsuchishojohotorikomiichiranhyohokenshabun;
+package jp.co.ndensan.reams.db.dbc.service.kagoketeitsuchishojohotorikomihenshuhokenshabun;
 
 import java.util.List;
 import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3104KokuhorenInterfaceKanriEntity;
-import jp.co.ndensan.reams.db.dbc.entity.db.relate.kagoketteihokenshain.KagoKetteiHokenshaInMeisaiEntity;
-import jp.co.ndensan.reams.db.dbc.entity.db.relate.kagoketteihokenshain.KagoKetteiHokenshaInShukeiEntity;
 import jp.co.ndensan.reams.db.dbc.persistence.db.basic.DbT3104KokuhorenInterfaceKanriDac;
 import jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.kagoketteihokenshain.IKagoKetteiHokenshaInMapper;
 import jp.co.ndensan.reams.db.dbc.service.core.MapperProvider;
@@ -22,7 +20,7 @@ import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 /**
  * 過誤決定通知書情報取込（保険者分）データ編集
  */
-public class KagoKetteiTsuchishoJohoTorikomiIchiranhyoHokenshabun {
+public class KagoKeteiTsuchishoJohoTorikomiHenshuHokenshabun {
 
     private final MapperProvider mapperProvider;
     private final IKagoKetteiHokenshaInMapper mapper;
@@ -36,20 +34,20 @@ public class KagoKetteiTsuchishoJohoTorikomiIchiranhyoHokenshabun {
     /**
      * コンストラクタです。
      */
-    public KagoKetteiTsuchishoJohoTorikomiIchiranhyoHokenshabun() {
+    public KagoKeteiTsuchishoJohoTorikomiHenshuHokenshabun() {
         this.mapperProvider = InstanceProvider.create(MapperProvider.class);
         mapper = mapperProvider.create(IKagoKetteiHokenshaInMapper.class);
         kokuhorenInterfaceKanriDac = InstanceProvider.create(DbT3104KokuhorenInterfaceKanriDac.class);
     }
 
     /**
-     * {@link InstanceProvider#create}にて生成した{@link KagoKetteiTsuchishoJohoTorikomiIchiranhyoHokenshabun}のインスタンスを返します。
+     * {@link InstanceProvider#create}にて生成した{@link KagoKeteiTsuchishoJohoTorikomiHenshuHokenshabun}のインスタンスを返します。
      *
      * @return // *
-     * {@link InstanceProvider#create}にて生成した{@link KagoKetteiTsuchishoJohoTorikomiIchiranhyoHokenshabun}のインスタンス
+     * {@link InstanceProvider#create}にて生成した{@link KagoKeteiTsuchishoJohoTorikomiHenshuHokenshabun}のインスタンス
      */
-    public static KagoKetteiTsuchishoJohoTorikomiIchiranhyoHokenshabun createInstance() {
-        return InstanceProvider.create(KagoKetteiTsuchishoJohoTorikomiIchiranhyoHokenshabun.class);
+    public static KagoKeteiTsuchishoJohoTorikomiHenshuHokenshabun createInstance() {
+        return InstanceProvider.create(KagoKeteiTsuchishoJohoTorikomiHenshuHokenshabun.class);
     }
 
     /**
@@ -59,15 +57,8 @@ public class KagoKetteiTsuchishoJohoTorikomiIchiranhyoHokenshabun {
      * @param csvFileName csvFileName
      */
     public void updateKagoKeteiTsuchishoHokenshabun(FlexibleYearMonth 処理年月, List<RString> csvFileName) {
-        List<KagoKetteiHokenshaInMeisaiEntity> meisaiList = mapper.get保険者分情報_明細();
-        for (KagoKetteiHokenshaInMeisaiEntity entity : meisaiList) {
-            mapper.insert過誤決定明細(entity);
-        }
-
-        List<KagoKetteiHokenshaInShukeiEntity> shukeiList = mapper.get保険者分情報_集計();
-        for (KagoKetteiHokenshaInShukeiEntity entity2 : shukeiList) {
-            mapper.insert過誤決定集計(entity2);
-        }
+        mapper.insert過誤決定明細();
+        mapper.insert過誤決定集計();
 
         DbT3104KokuhorenInterfaceKanriEntity entity = kokuhorenInterfaceKanriDac.
                 selectByKey(処理年月, new RString("171"));
