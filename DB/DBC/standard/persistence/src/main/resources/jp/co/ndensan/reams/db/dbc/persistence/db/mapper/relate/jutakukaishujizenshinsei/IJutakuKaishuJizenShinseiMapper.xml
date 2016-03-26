@@ -151,9 +151,9 @@
             wariaiMeisai."edaNo" AS "edaNo",
             wariaiMeisai."futanWariaiKubun" AS "futanWariaiKubun"
         FROM
-        rgdb."DbT3113RiyoshaFutanWariai" AS "futanWariai"
+        rgdb."DbT3113RiyoshaFutanWariai" AS futanWariai
         INNER JOIN
-            rgdb."DbT3114RiyoshaFutanWariaiMeisai" AS "wariaiMeisai"
+            rgdb."DbT3114RiyoshaFutanWariaiMeisai" AS wariaiMeisai
             ON  
               wariaiMeisai."hihokenshaNo" = #{被保険者番号}
               AND wariaiMeisai."rirekiNo" = futanWariai."rirekiNo"
