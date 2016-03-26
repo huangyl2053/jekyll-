@@ -244,7 +244,9 @@ public class ChoteiboSakuseiReportProcess extends BatchProcessBase<DbT7022ShoriD
             }
             genmenGaku = changeDecimalToRString(合計データ.get減免の調定額の総計());
             genmenSu = changeDecimalToRString(合計データ.get減免の件数の総計());
-            nofuGakuSokei = changeDecimalToRString(合計データ.get特徴と普徴の総計());
+            if (null != 合計データ.get特徴と普徴の総計()) {
+                nofuGakuSokei = changeDecimalToRString(合計データ.get特徴と普徴の総計());
+            }
         }
         return new ChoteiboKitsukiItem(kitsukiTokuchoItem, kitsukiFuchoItem, genmenGaku, genmenSu, nofuGakuSokei, GOKEI);
     }
@@ -321,12 +323,8 @@ public class ChoteiboSakuseiReportProcess extends BatchProcessBase<DbT7022ShoriD
         if (null == 合計データ) {
             return new ChoteiboKitsukiTokuchoItem(
                     RString.EMPTY, RString.EMPTY, RString.EMPTY,
-                    文字列_第.concat(String.valueOf(第1期)).concat(文字列_期),
-                    文字列_第.concat(String.valueOf(第2期)).concat(文字列_期),
-                    文字列_第.concat(String.valueOf(第3期)).concat(文字列_期),
-                    文字列_第.concat(String.valueOf(第4期)).concat(文字列_期),
-                    文字列_第.concat(String.valueOf(第5期)).concat(文字列_期),
-                    文字列_第.concat(String.valueOf(第6期)).concat(文字列_期),
+                    RString.EMPTY, RString.EMPTY, RString.EMPTY,
+                    RString.EMPTY, RString.EMPTY, RString.EMPTY,
                     RString.EMPTY, RString.EMPTY, RString.EMPTY,
                     RString.EMPTY, RString.EMPTY, RString.EMPTY,
                     Tsuki._4月.get名称().replace(UNDERLINE, RString.EMPTY),
@@ -340,12 +338,8 @@ public class ChoteiboSakuseiReportProcess extends BatchProcessBase<DbT7022ShoriD
                 changeDecimalToRString(合計データ.get特別徴収の調定額の総計()),
                 changeDecimalToRString(合計データ.get特徴歳出還付の調定額の総計()),
                 changeDecimalToRString(合計データ.get特徴歳出還付の件数の総計()),
-                文字列_第.concat(String.valueOf(第1期)).concat(文字列_期),
-                文字列_第.concat(String.valueOf(第2期)).concat(文字列_期),
-                文字列_第.concat(String.valueOf(第3期)).concat(文字列_期),
-                文字列_第.concat(String.valueOf(第4期)).concat(文字列_期),
-                文字列_第.concat(String.valueOf(第5期)).concat(文字列_期),
-                文字列_第.concat(String.valueOf(第6期)).concat(文字列_期),
+                RString.EMPTY, RString.EMPTY, RString.EMPTY,
+                RString.EMPTY, RString.EMPTY, RString.EMPTY,
                 changeDecimalToRString(合計データ.get当_4月の調定額の小計()),
                 changeDecimalToRString(合計データ.get当_6月の調定額の小計()),
                 changeDecimalToRString(合計データ.get当_8月の調定額の小計()),
@@ -385,9 +379,9 @@ public class ChoteiboSakuseiReportProcess extends BatchProcessBase<DbT7022ShoriD
             Decimal 普徴者数の合計 = Decimal.ZERO;
             Decimal 特徴者数の合計 = Decimal.ZERO;
             for (DankaiShokeiEntity 段階 : 合計データ.get合計の段階リスト()) {
-                内併徴者数の件数合計.add(changeNULLToZero(段階.getNaiheisyaKensu()));
-                普徴者数の合計.add(changeNULLToZero(段階.getFuchosyaKensu()));
-                特徴者数の合計.add(changeNULLToZero(段階.getTokuchosyaKensu()));
+                内併徴者数の件数合計 = 内併徴者数の件数合計.add(changeNULLToZero(段階.getNaiheisyaKensu()));
+                普徴者数の合計 = 普徴者数の合計.add(changeNULLToZero(段階.getFuchosyaKensu()));
+                特徴者数の合計 = 特徴者数の合計.add(changeNULLToZero(段階.getTokuchosyaKensu()));
             }
             if (!is仮算定データ() && !内併徴者数の件数合計.equals(合計データ.get内併徴者数の総計())) {
                 ｈeichoShaSuKome = 星を追加する(RString.EMPTY);
@@ -416,8 +410,8 @@ public class ChoteiboSakuseiReportProcess extends BatchProcessBase<DbT7022ShoriD
         Decimal 当月末の件数合計 = Decimal.ZERO;
         Decimal 当月末の調定額合計 = Decimal.ZERO;
         for (DankaiShokeiEntity 段階 : 合計データ.get合計の段階リスト()) {
-            当月末の件数合計.add(changeNULLToZero(段階.getDogetsusueKensu()));
-            当月末の調定額合計.add(changeNULLToZero(段階.getDogetsusueChoteigakuCount()));
+            当月末の件数合計 = 当月末の件数合計.add(changeNULLToZero(段階.getDogetsusueKensu()));
+            当月末の調定額合計 = 当月末の調定額合計.add(changeNULLToZero(段階.getDogetsusueChoteigakuCount()));
         }
         if (!is仮算定データ() && !当月末の件数合計.equals(合計データ.get当月末の全部件数の総計())) {
             fuchoTogetsuSuKome = 星を追加する(RString.EMPTY);
@@ -449,8 +443,8 @@ public class ChoteiboSakuseiReportProcess extends BatchProcessBase<DbT7022ShoriD
         Decimal 当月末の件数合計 = Decimal.ZERO;
         Decimal 当月末の調定額合計 = Decimal.ZERO;
         for (DankaiShokeiEntity 段階 : 合計データ.get合計の段階リスト()) {
-            当月末の件数合計.add(changeNULLToZero(段階.getDogetsusueKensu()));
-            当月末の調定額合計.add(changeNULLToZero(段階.getDogetsusueChoteigakuCount()));
+            当月末の件数合計 = 当月末の件数合計.add(changeNULLToZero(段階.getDogetsusueKensu()));
+            当月末の調定額合計 = 当月末の調定額合計.add(changeNULLToZero(段階.getDogetsusueChoteigakuCount()));
         }
         if (!is仮算定データ() && !当月末の件数合計.equals(合計データ.get当月末の全部件数の総計())) {
             tokuchoTogetsuSuKome = 星を追加する(RString.EMPTY);
@@ -652,9 +646,9 @@ public class ChoteiboSakuseiReportProcess extends BatchProcessBase<DbT7022ShoriD
             Decimal 普徴者数の合計 = Decimal.ZERO;
             Decimal 特徴者数の合計 = Decimal.ZERO;
             for (DankaiShokeiEntity 段階 : 年度データ.get段階小計リスト()) {
-                内併徴者数の件数合計.add(changeNULLToZero(段階.getNaiheisyaKensu()));
-                普徴者数の合計.add(changeNULLToZero(段階.getFuchosyaKensu()));
-                特徴者数の合計.add(changeNULLToZero(段階.getTokuchosyaKensu()));
+                内併徴者数の件数合計 = 内併徴者数の件数合計.add(changeNULLToZero(段階.getNaiheisyaKensu()));
+                普徴者数の合計 = 普徴者数の合計.add(changeNULLToZero(段階.getFuchosyaKensu()));
+                特徴者数の合計 = 特徴者数の合計.add(changeNULLToZero(段階.getTokuchosyaKensu()));
             }
             if (!is仮算定データ() && !内併徴者数の件数合計.equals(年度データ.get内併徴者数の合計())) {
                 ｈeichoShaSuKome = 星を追加する(RString.EMPTY);
@@ -684,8 +678,8 @@ public class ChoteiboSakuseiReportProcess extends BatchProcessBase<DbT7022ShoriD
         Decimal 当月末の件数合計 = Decimal.ZERO;
         Decimal 当月末の調定額合計 = Decimal.ZERO;
         for (DankaiShokeiEntity 段階 : 年度データ.get段階小計リスト()) {
-            当月末の件数合計.add(changeNULLToZero(段階.getDogetsusueKensu()));
-            当月末の調定額合計.add(changeNULLToZero(段階.getDogetsusueChoteigakuCount()));
+            当月末の件数合計 = 当月末の件数合計.add(changeNULLToZero(段階.getDogetsusueKensu()));
+            当月末の調定額合計 = 当月末の調定額合計.add(changeNULLToZero(段階.getDogetsusueChoteigakuCount()));
         }
         if (!is仮算定データ() && !当月末の件数合計.equals(年度データ.get当月末の全部件数の合計())) {
             fuchoTogetsuSuKome = 星を追加する(RString.EMPTY);
@@ -717,8 +711,8 @@ public class ChoteiboSakuseiReportProcess extends BatchProcessBase<DbT7022ShoriD
         Decimal 当月末の件数合計 = Decimal.ZERO;
         Decimal 当月末の調定額合計 = Decimal.ZERO;
         for (DankaiShokeiEntity 段階 : 年度データ.get段階小計リスト()) {
-            当月末の件数合計.add(changeNULLToZero(段階.getDogetsusueKensu()));
-            当月末の調定額合計.add(changeNULLToZero(段階.getDogetsusueChoteigakuCount()));
+            当月末の件数合計 = 当月末の件数合計.add(changeNULLToZero(段階.getDogetsusueKensu()));
+            当月末の調定額合計 = 当月末の調定額合計.add(changeNULLToZero(段階.getDogetsusueChoteigakuCount()));
         }
         if (!is仮算定データ() && !当月末の件数合計.equals(年度データ.get前月末の全部件数の合計())) {
             tokuchoTogetsuSuKome = 星を追加する(RString.EMPTY);
@@ -1136,7 +1130,7 @@ public class ChoteiboSakuseiReportProcess extends BatchProcessBase<DbT7022ShoriD
                     && ChoshuHohoKibetsu.普通徴収.code().equals(徴収方法)
                     && 徴収方法.equals(期別合計.getChoshuHouhou())) {
                 年度データ.set普通徴収の調定額の合計(期別合計.getFutsuChoteigakuCount());
-                年度データ.set普徴歳出還付の件数(期別合計.getFutsuChoteigakuCount());
+                年度データ.set普徴歳出還付の件数(期別合計.getFuSaishutsuKampuCount());
                 年度データ.set普徴歳出還付の調定額(期別合計.getFuSaishutsuKampuChoteigaku());
             }
         }
