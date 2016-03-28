@@ -27,7 +27,6 @@ public class ShoKaishuKirokuKanri {
 
     private static final RString 状態_修正 = new RString("修正");
     private static final RString 状態_削除 = new RString("削除");
-    private static final int 桁数_256 = 256;
 
     /**
      * 証回収記録管理一覧。<br/>
@@ -211,88 +210,27 @@ public class ShoKaishuKirokuKanri {
 
     private ValidationMessageControlPairs check_btnKakuninn(ShoKaishuKirokuKanriDiv requestDiv) {
         ValidationMessageControlPairs validationMessages = new ValidationMessageControlPairs();
-        if (requestDiv.getPanelInput().getTxtKoufuType().getValue() != null
-                && new RString("資格者証").equals(requestDiv.getPanelInput().getTxtKoufuType().getValue())
-                && (requestDiv.getPanelInput().getTxtKoufuDate().getValue() != null
-                && requestDiv.getPanelInput().getTxtYukouKigen().getValue() != null)
-                && (!requestDiv.getPanelInput().getTxtKoufuDate().getValue().
-                isBefore(requestDiv.getPanelInput().getTxtYukouKigen().getValue()))) {
-            validationMessages.add(ValidationHandler.交付日と有効期限の整合性チェック());
-            return validationMessages;
-        }
 
-        交付事由の必須チェック(requestDiv, validationMessages);
-        交付理由の最大桁数(requestDiv, validationMessages);
-        回収理由のの最大桁数(requestDiv, validationMessages);
-        交付日と回収日の順番の整合性チェック(requestDiv, validationMessages);
-        交付日がセットになっているかの入力チェック(requestDiv, validationMessages);
-        交付事由がセットになっているかの入力チェック(requestDiv, validationMessages);
-        回収日がセットになっているかの入力チェック(requestDiv, validationMessages);
-        回収事由がセットになっているかの入力チェック(requestDiv, validationMessages);
+        getValidationHandler(requestDiv).交付日と有効期限の整合性チェック(validationMessages);
+        getValidationHandler(requestDiv).交付事由の必須チェック(validationMessages);
+        getValidationHandler(requestDiv).交付理由の最大桁数(validationMessages);
+        getValidationHandler(requestDiv).回収理由のの最大桁数(validationMessages);
+        getValidationHandler(requestDiv).交付日と回収日の順番の整合性チェック(validationMessages);
+        getValidationHandler(requestDiv).交付日がセットになっているかの入力チェック(validationMessages);
+        getValidationHandler(requestDiv).交付事由がセットになっているかの入力チェック(validationMessages);
+        getValidationHandler(requestDiv).回収日がセットになっているかの入力チェック(validationMessages);
+        getValidationHandler(requestDiv).回収事由がセットになっているかの入力チェック(validationMessages);
+
         return validationMessages;
-    }
-
-    private void 交付事由の必須チェック(ShoKaishuKirokuKanriDiv requestDiv, ValidationMessageControlPairs validationMessages) {
-        if (requestDiv.getPanelInput().getDdlKoufuJiyu().getSelectedValue() != null
-                && RString.EMPTY.equals(requestDiv.getPanelInput().getDdlKoufuJiyu().getSelectedValue())) {
-            validationMessages.add(ValidationHandler.交付事由の必須チェック());
-        }
-    }
-
-    private void 交付理由の最大桁数(ShoKaishuKirokuKanriDiv requestDiv, ValidationMessageControlPairs validationMessages) {
-        if (requestDiv.getPanelInput().getTxaKoufuRiyu().getValue() != null
-                && 桁数_256 < requestDiv.getPanelInput().getTxaKoufuRiyu().getValue().length()) {
-            validationMessages.add(ValidationHandler.交付理由の最大桁数());
-        }
-    }
-
-    private void 回収理由のの最大桁数(ShoKaishuKirokuKanriDiv requestDiv, ValidationMessageControlPairs validationMessages) {
-        if (requestDiv.getPanelInput().getTxaKaishuRiyu().getValue() != null
-                && 桁数_256 < requestDiv.getPanelInput().getTxaKaishuRiyu().getValue().length()) {
-            validationMessages.add(ValidationHandler.回収理由のの最大桁数());
-        }
-    }
-
-    private void 交付日と回収日の順番の整合性チェック(ShoKaishuKirokuKanriDiv requestDiv, ValidationMessageControlPairs validationMessages) {
-        if (requestDiv.getPanelInput().getTxtKoufuDate().getValue() != null
-                && requestDiv.getPanelInput().getTxtKaisyuDate().getValue() != null
-                && requestDiv.getPanelInput().getTxtKaisyuDate().getValue().
-                isBefore(requestDiv.getPanelInput().getTxtKoufuDate().getValue())) {
-            validationMessages.add(ValidationHandler.交付日と回収日の順番の整合性チェック());
-        }
-    }
-
-    private void 交付日がセットになっているかの入力チェック(ShoKaishuKirokuKanriDiv requestDiv, ValidationMessageControlPairs validationMessages) {
-        if (requestDiv.getPanelInput().getTxtKoufuDate().getValue() == null
-                && requestDiv.getPanelInput().getTxaKoufuRiyu().getValue() != null) {
-            validationMessages.add(ValidationHandler.交付日がセットになっているかの入力チェック());
-        }
-    }
-
-    private void 交付事由がセットになっているかの入力チェック(ShoKaishuKirokuKanriDiv requestDiv, ValidationMessageControlPairs validationMessages) {
-        if (RString.EMPTY.equals(requestDiv.getPanelInput().getDdlKoufuJiyu().getSelectedValue())
-                && requestDiv.getPanelInput().getTxtKoufuDate().getValue() != null) {
-            validationMessages.add(ValidationHandler.交付事由がセットになっているかの入力チェック());
-        }
-    }
-
-    private void 回収日がセットになっているかの入力チェック(ShoKaishuKirokuKanriDiv requestDiv, ValidationMessageControlPairs validationMessages) {
-        if (requestDiv.getPanelInput().getTxtKaisyuDate().getValue() == null
-                && requestDiv.getPanelInput().getTxaKaishuRiyu().getValue() != null) {
-            validationMessages.add(ValidationHandler.回収日がセットになっているかの入力チェック());
-        }
-    }
-
-    private void 回収事由がセットになっているかの入力チェック(ShoKaishuKirokuKanriDiv requestDiv, ValidationMessageControlPairs validationMessages) {
-        if (RString.EMPTY.equals(requestDiv.getPanelInput().getDdlKaisyuJiyu().getSelectedValue())
-                && requestDiv.getPanelInput().getTxtKaisyuDate().getValue() != null) {
-            validationMessages.add(ValidationHandler.回収事由がセットになっているかの入力チェック());
-        }
     }
 
     private ResponseData<ShoKaishuKirokuKanriDiv> createResponseData(ShoKaishuKirokuKanriDiv requestDiv) {
         ResponseData<ShoKaishuKirokuKanriDiv> response = new ResponseData();
         response.data = requestDiv;
         return response;
+    }
+
+    private ValidationHandler getValidationHandler(ShoKaishuKirokuKanriDiv requestDiv) {
+        return new ValidationHandler(requestDiv);
     }
 }
