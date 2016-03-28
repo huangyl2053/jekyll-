@@ -13,21 +13,28 @@ import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7037ShoKofuKaishuEntity;
  */
 public interface IDbT7037ShoKofuKaishuMapper {
 
-    /** {@link DbT7037ShoKofuKaishuEntity}を取得します。
+    /**
+     * {@link DbT7037ShoKofuKaishuEntity}を取得します。
      *
      * @return {@link DbT7037ShoKofuKaishuEntity}
      * @deprecated マッピング検証用のメソッドであるため、テストコード以外から使用しないで下さい。
      */
     DbT7037ShoKofuKaishuEntity getEntity();
-      
+
     /**
-     * 
-     * @param entity
-     * @return 
+     * 更新処理です。
+     *
+     * @param entity 証交付回収テーブルのエンティティクラス
+     * @return 更新件数
      */
     int updateShoKaishuKanri(DbT7037ShoKofuKaishuEntity entity);
 
+    /**
+     * 更新処理です。
+     *
+     * @param entity 証交付回収テーブルのエンティティクラス
+     * @return 更新件数
+     */
     int updateShokaishuKanriRnlisakuju(DbT7037ShoKofuKaishuEntity entity);
-    
-    
+
 }
