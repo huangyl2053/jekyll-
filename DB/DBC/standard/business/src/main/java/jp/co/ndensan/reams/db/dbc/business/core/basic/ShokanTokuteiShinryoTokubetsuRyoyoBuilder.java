@@ -7,9 +7,9 @@ package jp.co.ndensan.reams.db.dbc.business.core.basic;
 
 import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3042ShokanTokuteiShinryoTokubetsuRyoyoEntity;
-import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
+import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
@@ -154,7 +154,6 @@ public class ShokanTokuteiShinryoTokubetsuRyoyoBuilder {
      * @return {@link ShokanTokuteiShinryoTokubetsuRyoyoBuilder}
      */
     public ShokanTokuteiShinryoTokubetsuRyoyoBuilder set単位数(int 単位数) {
-        requireNonNull(単位数, UrSystemErrorMessages.値がnull.getReplacedMessage("単位数"));
         entity.setTanisu(単位数);
         return this;
     }
@@ -166,7 +165,6 @@ public class ShokanTokuteiShinryoTokubetsuRyoyoBuilder {
      * @return {@link ShokanTokuteiShinryoTokubetsuRyoyoBuilder}
      */
     public ShokanTokuteiShinryoTokubetsuRyoyoBuilder set回数(int 回数) {
-        requireNonNull(回数, UrSystemErrorMessages.値がnull.getReplacedMessage("回数"));
         entity.setKaisu(回数);
         return this;
     }
@@ -190,7 +188,6 @@ public class ShokanTokuteiShinryoTokubetsuRyoyoBuilder {
      * @return {@link ShokanTokuteiShinryoTokubetsuRyoyoBuilder}
      */
     public ShokanTokuteiShinryoTokubetsuRyoyoBuilder set合計単位数(int 合計単位数) {
-        requireNonNull(合計単位数, UrSystemErrorMessages.値がnull.getReplacedMessage("合計単位数"));
         entity.setTotalTanisu(合計単位数);
         return this;
     }
@@ -202,7 +199,6 @@ public class ShokanTokuteiShinryoTokubetsuRyoyoBuilder {
      * @return {@link ShokanTokuteiShinryoTokubetsuRyoyoBuilder}
      */
     public ShokanTokuteiShinryoTokubetsuRyoyoBuilder set摘要(RString 摘要) {
-        requireNonNull(摘要, UrSystemErrorMessages.値がnull.getReplacedMessage("摘要"));
         entity.setTekiyo(摘要);
         return this;
     }

@@ -5,10 +5,10 @@
  */
 package jp.co.ndensan.reams.db.dbc.definition.message;
 
+import static jp.co.ndensan.reams.db.dbz.definition.message.MessageCreateHelper.toCode;
 import jp.co.ndensan.reams.uz.uza.message.IMessageGettable;
 import jp.co.ndensan.reams.uz.uza.message.Message;
 import jp.co.ndensan.reams.uz.uza.message.WarningMessage;
-import static jp.co.ndensan.reams.db.dbz.definition.message.MessageCreateHelper.toCode;
 
 /**
  * DBCの警告メッセージ定義列挙型です。
@@ -18,7 +18,8 @@ import static jp.co.ndensan.reams.db.dbz.definition.message.MessageCreateHelper.
 public enum DbcWarningMessages implements IMessageGettable {
 
     // TODO 一つ目の要素が定義されたらこの要素は削除する。
-    ダミーメッセージ(0, "");
+    ダミーメッセージ(0, ""),
+    日数が30日を超える(1, "?～?間の日数が30日を超える。");
 
     private final Message message;
 
@@ -29,7 +30,7 @@ public enum DbcWarningMessages implements IMessageGettable {
      * @param message メッセージ
      */
     private DbcWarningMessages(int no, String message) {
-        this.message = new WarningMessage(toCode("W", no), message);
+        this.message = new WarningMessage(toCode("DBCW", no), message);
     }
 
     @Override

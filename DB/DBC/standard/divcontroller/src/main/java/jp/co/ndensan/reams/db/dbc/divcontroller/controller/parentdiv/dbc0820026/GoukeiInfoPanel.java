@@ -26,6 +26,7 @@ import jp.co.ndensan.reams.uz.uza.lang.ApplicationException;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 
 /**
@@ -47,7 +48,7 @@ public class GoukeiInfoPanel {
                 new JigyoshaNo("0000000003"),
                 new RString("0003"),
                 new RString("0003"),
-                new RString("10"));
+                Decimal.TEN);
         ViewStateHolder.put(ViewStateKeys.償還払費申請検索キー, par);
         SyokanbaraihishikyushinseiketteParameter paramter = ViewStateHolder.get(ViewStateKeys.償還払費申請検索キー,
                 SyokanbaraihishikyushinseiketteParameter.class);

@@ -228,10 +228,14 @@ public class KyuhuhiMeisaiJutokuPanelHandler {
                 getPnlKyufuhiMeisaiTouroku().getTxtTanyi().getValue())) {
             return true;
         }
-        if (!ddgRow.getDefaultDataName3().equals(
-                new RString(div.getPnlBtnDetail().getPnlKyufuhiMeisai().
-                        getPnlKyufuhiMeisaiTouroku().getTxtKaisu().getValue().toString()))) {
+        if (div.getPnlBtnDetail().getPnlKyufuhiMeisai().
+                getPnlKyufuhiMeisaiTouroku().getTxtKaisu().getValue() == null && ddgRow.getDefaultDataName3() != null) {
             return true;
+        } else if (div.getPnlBtnDetail().getPnlKyufuhiMeisai().
+                getPnlKyufuhiMeisaiTouroku().getTxtKaisu().getValue() != null) {
+            return !(new RString(div.getPnlBtnDetail().getPnlKyufuhiMeisai().
+                    getPnlKyufuhiMeisaiTouroku().getTxtKaisu().
+                    getValue().toString()).equals(ddgRow.getDefaultDataName3()));
         }
         if (!ddgRow.getDefaultDataName4().getValue().equals(div.getPnlBtnDetail().getPnlKyufuhiMeisai().
                 getPnlKyufuhiMeisaiTouroku().getTxtServiceTani().getValue())) {
@@ -241,10 +245,7 @@ public class KyuhuhiMeisaiJutokuPanelHandler {
                 div.getPnlBtnDetail().getPnlKyufuhiMeisai().getPnlKyufuhiMeisaiTouroku().getTxtTekiyo().getValue())) {
             return true;
         }
-        if (!ddgRow.getDefaultDataName6().equals(hojo.getTxtHokenshaMeisho().getValue())) {
-            return true;
-        }
-        return true;
+        return (!ddgRow.getDefaultDataName6().equals(hojo.getTxtHokenshaMeisho().getValue()));
     }
 
     private void setDgJushochiTokutei(dgJushochiTokutei_Row ddgRow) {

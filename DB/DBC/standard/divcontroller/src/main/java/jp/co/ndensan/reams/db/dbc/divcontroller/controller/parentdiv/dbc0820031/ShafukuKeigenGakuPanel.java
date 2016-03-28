@@ -63,7 +63,7 @@ public class ShafukuKeigenGakuPanel {
                 new JigyoshaNo("0000000003"),
                 new RString("0003"),
                 new RString("0003"),
-                new RString("10"));
+                Decimal.TEN);
         ViewStateHolder.put(ViewStateKeys.償還払費申請検索キー, par);
         SyokanbaraihishikyushinseiketteParameter paramter = ViewStateHolder.get(ViewStateKeys.償還払費申請検索キー,
                 SyokanbaraihishikyushinseiketteParameter.class);

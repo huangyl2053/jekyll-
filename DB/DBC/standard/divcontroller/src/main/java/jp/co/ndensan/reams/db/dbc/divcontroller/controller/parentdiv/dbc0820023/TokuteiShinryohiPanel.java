@@ -15,6 +15,7 @@ import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0820023.ddgT
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0820023.dgdTokuteiShinryohi_Row;
 import jp.co.ndensan.reams.db.dbc.divcontroller.handler.dbc0820023.TokuteiShinryohiPanelHandler;
 import jp.co.ndensan.reams.db.dbc.divcontroller.viewbox.ViewStateKeys;
+import jp.co.ndensan.reams.db.dbc.divcontroller.viewbox.syokanbaraihishikyushinseikette.ShoukanharaihishinseimeisaikensakuParameter;
 import jp.co.ndensan.reams.db.dbc.divcontroller.viewbox.syokanbaraihishikyushinseikette.SikibetuNokennsakuki;
 import jp.co.ndensan.reams.db.dbc.divcontroller.viewbox.syokanbaraihishikyushinseikette.SyokanbaraihishikyushinseiketteParameter;
 import jp.co.ndensan.reams.db.dbc.service.core.shokanbaraijyokyoshokai.ShokanbaraiJyokyoShokai;
@@ -29,7 +30,9 @@ import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.ApplicationException;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
+import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.message.MessageDialogSelectedResult;
 import jp.co.ndensan.reams.uz.uza.message.QuestionMessage;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.CommonButtonHolder;
@@ -56,34 +59,46 @@ public class TokuteiShinryohiPanel {
      * @return ResponseData
      */
     public ResponseData<TokuteiShinryohiPanelDiv> onLoad(TokuteiShinryohiPanelDiv div) {
-
+        // TODO 償還払費申請検索キー
         SyokanbaraihishikyushinseiketteParameter par = new SyokanbaraihishikyushinseiketteParameter(
+                new HihokenshaNo("000000004"),
+                new FlexibleYearMonth(new RString("200501")),
+                new RString("0000000004"),
+                new JigyoshaNo("0000000003"),
+                new RString("0004"),
+                new RString("0004"),
+                Decimal.TEN);
+        ViewStateHolder.put(ViewStateKeys.償還払費申請検索キー, par);
+        // TODO 償還払費申請明細検索キー
+        ShoukanharaihishinseimeisaikensakuParameter parameter = new ShoukanharaihishinseimeisaikensakuParameter(
                 new HihokenshaNo("000000003"),
                 new FlexibleYearMonth(new RString("200501")),
+                RDate.getNowDate(),
                 new RString("0000000003"),
                 new JigyoshaNo("0000000003"),
-                new RString("2165"),
                 new RString("0003"),
-                new RString("10"));
-        ViewStateHolder.put(ViewStateKeys.償還払費申請明細検索キー, par);
-        ViewStateHolder.put(ViewStateKeys.償還払費申請検索キー, par);
-        SyokanbaraihishikyushinseiketteParameter paramter = ViewStateHolder.get(ViewStateKeys.償還払費申請明細検索キー,
-                SyokanbaraihishikyushinseiketteParameter.class);
-        HihokenshaNo 被保険者番号 = paramter.getHiHokenshaNo();
-        FlexibleYearMonth サービス年月 = paramter.getServiceTeikyoYM();
-        RString 整理番号 = paramter.getSeiriNp();
-        JigyoshaNo 事業者番号 = paramter.getJigyoshaNo();
-        RString 様式番号 = paramter.getYoshikiNo();
-        RString 明細番号 = paramter.getMeisaiNo();
+                new RString("0003"));
+        ViewStateHolder.put(ViewStateKeys.償還払費申請明細検索キー, parameter);
+        ShoukanharaihishinseimeisaikensakuParameter meisaiPar = ViewStateHolder.get(ViewStateKeys.償還払費申請明細検索キー,
+                ShoukanharaihishinseimeisaikensakuParameter.class);
+        HihokenshaNo 被保険者番号 = meisaiPar.get被保険者番号();
+        FlexibleYearMonth サービス年月 = meisaiPar.getサービス年月();
+        RString 整理番号 = meisaiPar.get整理番号();
+        JigyoshaNo 事業者番号 = meisaiPar.get事業者番号();
+        RString 様式番号 = meisaiPar.get様式番号();
+        RString 明細番号 = meisaiPar.get明細番号();
+        RDate 申請日 = meisaiPar.get申請日();
         ViewStateHolder.put(ViewStateKeys.サービス年月, サービス年月);
         ViewStateHolder.put(ViewStateKeys.様式番号, 様式番号);
         ViewStateHolder.put(ViewStateKeys.被保険者番号, 被保険者番号);
         ViewStateHolder.put(ViewStateKeys.整理番号, 整理番号);
-        ViewStateHolder.put(ViewStateKeys.明細番号, 明細番号);
-        SikibetuNokennsakuki key = new SikibetuNokennsakuki(new RString("0003"),
-                new FlexibleYearMonth(new RString("200501")));
-        ViewStateHolder.put(ViewStateKeys.識別番号検索キー, key);
-        RString 申請日 = new RString("20151124");
+        ViewStateHolder.put(ViewStateKeys.申請年月日, 申請日);
+
+        SyokanbaraihishikyushinseiketteParameter 償還払費申請検索 = ViewStateHolder.get(ViewStateKeys.償還払費申請検索キー,
+                SyokanbaraihishikyushinseiketteParameter.class);
+        SikibetuNokennsakuki sikibetuKey = new SikibetuNokennsakuki(償還払費申請検索.getYoshikiNo(),
+                償還払費申請検索.getServiceTeikyoYM());
+        ViewStateHolder.put(ViewStateKeys.識別番号検索キー, sikibetuKey);
 
         ViewStateHolder.put(ViewStateKeys.識別コード, new ShikibetsuCode("000000000000010"));
         ShikibetsuCode 識別コード = ViewStateHolder.get(ViewStateKeys.識別コード, ShikibetsuCode.class);

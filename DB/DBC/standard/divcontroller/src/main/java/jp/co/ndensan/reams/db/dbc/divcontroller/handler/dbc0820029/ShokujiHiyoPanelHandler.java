@@ -34,7 +34,6 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.RowState;
 import jp.co.ndensan.reams.uz.uza.ui.binding.propertyenum.IconName;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 import jp.co.ndensan.reams.uz.uza.util.Saiban;
-import jp.co.ndensan.reams.uz.uza.util.editor.DecimalFormatter;
 
 /**
  * 償還払い費支給申請決定_サービス提供証明書(食事費用）の画面クラスです。
@@ -130,11 +129,13 @@ public class ShokujiHiyoPanelHandler {
                 div.getPanelShokuji().getPanelDetail2().getTxtTanyi().getValue())) {
             return true;
         }
-        if (!row.getDefaultDataName4().equals(new RString(
+        if (div.getPanelShokuji().getPanelDetail2().getTxtKaisuuNisuu().getValue() != null && !row.getDefaultDataName4().equals(new RString(
                 div.getPanelShokuji().getPanelDetail2().getTxtKaisuuNisuu().getValue().toString()))) {
             return true;
+        } else if (div.getPanelShokuji().getPanelDetail2().getTxtKaisuuNisuu().getValue() == null && row.getDefaultDataName4() != null) {
+            return true;
         }
-        return (row.getDefaultDataName5().getValue().equals(
+        return (!row.getDefaultDataName5().getValue().equals(
                 div.getPanelShokuji().getPanelDetail2().getBtnKinngaku().getValue()));
 
     }
@@ -156,20 +157,16 @@ public class ShokujiHiyoPanelHandler {
         RStringBuilder builder = new RStringBuilder();
         builder.append(DATA_FIFTY);
         builder.append(半角スペース);
-        if (serviceCodeInputDiv.getTxtServiceCode2() != null) {
-            builder.append(serviceCodeInputDiv.getTxtServiceCode2().getValue());
-        }
+        builder.append(serviceCodeInputDiv.getTxtServiceCode2().getValue());
         row.setDefaultDataName2(builder.toRString());
-        if (div.getPanelShokuji().getPanelDetail2().getTxtTanyi().getValue() != null) {
-            row.getDefaultDataName3().setValue(div.getPanelShokuji().getPanelDetail2().getTxtTanyi().getValue());
-        }
+        row.getDefaultDataName3().setValue(div.getPanelShokuji().getPanelDetail2().getTxtTanyi().getValue());
         if (div.getPanelShokuji().getPanelDetail2().getTxtKaisuuNisuu().getValue() != null) {
             row.setDefaultDataName4(new RString(
                     div.getPanelShokuji().getPanelDetail2().getTxtKaisuuNisuu().getValue().toString()));
+        } else if (div.getPanelShokuji().getPanelDetail2().getTxtKaisuuNisuu().getValue() == null) {
+            row.setDefaultDataName4(null);
         }
-        if (div.getPanelShokuji().getPanelDetail2().getBtnKinngaku().getValue() != null) {
-            row.getDefaultDataName5().setValue(div.getPanelShokuji().getPanelDetail2().getBtnKinngaku().getValue());
-        }
+        row.getDefaultDataName5().setValue(div.getPanelShokuji().getPanelDetail2().getBtnKinngaku().getValue());
 
     }
 
@@ -202,7 +199,7 @@ public class ShokujiHiyoPanelHandler {
 
     private Decimal getData1(dgdShokuji_Row row) {
         if (!row.getDefaultDataName4().toString().isEmpty()) {
-            return new Decimal(row.getDefaultDataName4().toString());
+            return new Decimal(row.getDefaultDataName4().toString().replace(",", ""));
         }
         return Decimal.ZERO;
     }
@@ -388,18 +385,17 @@ public class ShokujiHiyoPanelHandler {
             }
             dgdShokuji_Row.setDefaultDataName2(builder.toRString());
             dgdShokuji_Row.getDefaultDataName3().setValue(new Decimal(entity.get単位数()));
-            dgdShokuji_Row.setDefaultDataName4(DecimalFormatter.toコンマ区切りRString(
-                    new Decimal(entity.get日数_回数()), 0));
+//            dgdShokuji_Row.setDefaultDataName4(DecimalFormatter.toコンマ区切りRString(
+//                    new Decimal(entity.get日数_回数()), 0));
+            dgdShokuji_Row.setDefaultDataName4(new RString(String.valueOf(entity.get日数_回数())));
             dgdShokuji_Row.getDefaultDataName5().setValue(new Decimal(entity.getサービス単位数()));
             dgdShokuji_Row.setDefaultDataName6(entity.get連番());
             dataSource.add(dgdShokuji_Row);
         }
+
         div.getPanelShokuji().getPanelShoikujiList().getDgdShokuji().setDataSource(dataSource);
         if (!shokanShokujiHiyo.isEmpty()) {
             set食事費用合計設定(shokanShokujiHiyo.get(0));
-        } else {
-            Decimal 標準負担額_日額 = ViewStateHolder.get(ViewStateKeys.償還払請求食事費用データ1, Decimal.class);
-            div.getPanelShokuji().getPanelDetailGokei().getTxtHigaku().setValue(標準負担額_日額);
         }
     }
 
@@ -618,6 +614,7 @@ public class ShokujiHiyoPanelHandler {
                     if (RowState.Modified.equals(dgd.getRowState())) {
                         ShokanMeisai entityModified = map.get(dgd.getDefaultDataName6());
                         entityModified = entityModified.createBuilderForEdit().build();
+                        entityModified = cleearShokanMeisai(entityModified);
                         entityModified = buildShokanMeisai(entityModified, dgd);
                         shokanMeisaiList.add(entityModified);
                     } else if (RowState.Deleted.equals(dgd.getRowState())) {
@@ -635,7 +632,7 @@ public class ShokujiHiyoPanelHandler {
                                 事業者番号,
                                 様式番号,
                                 明細番号,
-                                new RString(String.valueOf(max連番))).createBuilderForEdit().build();
+                                new RString(String.format("%02d", max連番))).createBuilderForEdit().build();
                         entityAdded = buildShokanMeisai(entityAdded, dgd);
                         shokanMeisaiList.add(entityAdded);
                     } else {
@@ -676,6 +673,16 @@ public class ShokujiHiyoPanelHandler {
 
     }
 
+    private ShokanMeisai cleearShokanMeisai(ShokanMeisai entityModified) {
+
+//        entityModified = entityModified.createBuilderForEdit().setサービス種類コード(null).build();
+//        entityModified = entityModified.createBuilderForEdit().setサービス項目コード(null).build();
+        entityModified = entityModified.createBuilderForEdit().set単位数(0).build();
+        entityModified = entityModified.createBuilderForEdit().set日数_回数(0).build();
+        entityModified = entityModified.createBuilderForEdit().setサービス単位数(0).build();
+        return entityModified;
+    }
+
     /**
      * buildShokanMeisaiのメソッド
      *
@@ -685,7 +692,7 @@ public class ShokujiHiyoPanelHandler {
      */
     public ShokanMeisai buildShokanMeisai(ShokanMeisai entityModified, dgdShokuji_Row dgd) {
 
-        if (!dgd.getDefaultDataName2().isEmpty()) {
+        if (dgd.getDefaultDataName2() != null) {
             RString serviceCodeShuruyi = new RString(dgd.getDefaultDataName2().subSequence(ZERO, TWO).toString());
             RString serviceCodeKoumoku = new RString(dgd.getDefaultDataName2().subSequence(THREE, SEVEN).toString());
             ServiceCodeInputCommonChildDivDiv serviceCodeInputDiv = (ServiceCodeInputCommonChildDivDiv) div
@@ -702,7 +709,7 @@ public class ShokujiHiyoPanelHandler {
             entityModified = entityModified.createBuilderForEdit().set単位数(
                     dgd.getDefaultDataName3().getValue().intValue()).build();
         }
-        if (!dgd.getDefaultDataName4().isEmpty()) {
+        if (dgd.getDefaultDataName4() != null) {
             entityModified = entityModified.createBuilderForEdit().set日数_回数(
                     Integer.parseInt(dgd.getDefaultDataName4().toString())).build();
         }

@@ -6,7 +6,6 @@ package jp.co.ndensan.reams.db.dbz.persistence.db.basic;
 
 import java.util.List;
 import static java.util.Objects.requireNonNull;
-import jp.co.ndensan.reams.db.dbz.definition.core.valueobject.ninteishinsei.ShujiiIryokikanCode;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT4911ShujiiIryoKikanJoho;
 import static jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT4911ShujiiIryoKikanJoho.shichosonCode;
 import static jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT4911ShujiiIryoKikanJoho.shujiiIryokikanCode;

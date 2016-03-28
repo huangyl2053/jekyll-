@@ -6,12 +6,25 @@ package jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.RoreiFuku
  */
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import jp.co.ndensan.reams.uz.uza.ui.binding.*;
-import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
-
 import java.util.HashSet;
+import java.util.List;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
+import jp.co.ndensan.reams.db.dbz.business.core.hihokensha.roreifukushinenkinjukyusha.RoreiFukushiNenkinJukyusha;
+import jp.co.ndensan.reams.db.dbz.business.core.hihokensha.roreifukushinenkinjukyusha.RoreiFukushiNenkinJukyushaIdentifier;
+import jp.co.ndensan.reams.db.dbz.definition.core.roreifukushinenkinjoho.RoreiFukushiNenkinJohoMapperParameter;
+import jp.co.ndensan.reams.db.dbz.divcontroller.viewbox.ViewStateKeys;
+import jp.co.ndensan.reams.db.dbz.service.core.hihokensha.roreifukushinenkinjukyusha.RoreiFukushiNenkinJukyushaManager;
+import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.ui.binding.Button;
+import jp.co.ndensan.reams.uz.uza.ui.binding.DataGrid;
+import jp.co.ndensan.reams.uz.uza.ui.binding.Mode;
+import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ICommonChildDivMode;
+import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 import jp.co.ndensan.reams.uz.uza.ui.servlets._CommonChildDivModeUtil;
+import jp.co.ndensan.reams.uz.uza.util.Models;
 
 /**
  * RoreiFukushiNenkinShokai のクラスファイル 
@@ -19,7 +32,7 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets._CommonChildDivModeUtil;
  * @author 自動生成
  */
 public class RoreiFukushiNenkinShokaiDiv extends Panel implements IRoreiFukushiNenkinShokaiDiv {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：バージョン情報無し">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-01-15_09-59-03">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -30,6 +43,10 @@ public class RoreiFukushiNenkinShokaiDiv extends Panel implements IRoreiFukushiN
     private panelRirekiDiv panelRireki;
     @JsonProperty("panelInput")
     private panelInputDiv panelInput;
+    @JsonProperty("hihokenshaNo")
+    private RString hihokenshaNo;
+    @JsonProperty("shikibetsuCode")
+    private RString shikibetsuCode;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -71,6 +88,42 @@ public class RoreiFukushiNenkinShokaiDiv extends Panel implements IRoreiFukushiN
     @JsonProperty("panelInput")
     public void setPanelInput(panelInputDiv panelInput) {
         this.panelInput = panelInput;
+    }
+
+    /*
+     * gethihokenshaNo
+     * @return hihokenshaNo
+     */
+    @JsonProperty("hihokenshaNo")
+    public RString getHihokenshaNo() {
+        return hihokenshaNo;
+    }
+
+    /*
+     * sethihokenshaNo
+     * @param hihokenshaNo hihokenshaNo
+     */
+    @JsonProperty("hihokenshaNo")
+    public void setHihokenshaNo(RString hihokenshaNo) {
+        this.hihokenshaNo = hihokenshaNo;
+    }
+
+    /*
+     * getshikibetsuCode
+     * @return shikibetsuCode
+     */
+    @JsonProperty("shikibetsuCode")
+    public RString getShikibetsuCode() {
+        return shikibetsuCode;
+    }
+
+    /*
+     * setshikibetsuCode
+     * @param shikibetsuCode shikibetsuCode
+     */
+    @JsonProperty("shikibetsuCode")
+    public void setShikibetsuCode(RString shikibetsuCode) {
+        this.shikibetsuCode = shikibetsuCode;
     }
 
     /*
@@ -210,47 +263,33 @@ public class RoreiFukushiNenkinShokaiDiv extends Panel implements IRoreiFukushiN
         this.getPanelRireki().setDatagridRireki(datagridRireki);
     }
 
-    @JsonIgnore
-    public TextBoxDate getTxtStartDate() {
-        return this.getPanelInput().getTxtStartDate();
-    }
-
-    @JsonIgnore
-    public void  setTxtStartDate(TextBoxDate txtStartDate) {
-        this.getPanelInput().setTxtStartDate(txtStartDate);
-    }
-
-    @JsonIgnore
-    public TextBoxDate getTxtEndDate() {
-        return this.getPanelInput().getTxtEndDate();
-    }
-
-    @JsonIgnore
-    public void  setTxtEndDate(TextBoxDate txtEndDate) {
-        this.getPanelInput().setTxtEndDate(txtEndDate);
-    }
-
-    @JsonIgnore
-    public Button getBtnSave() {
-        return this.getPanelInput().getBtnSave();
-    }
-
-    @JsonIgnore
-    public void  setBtnSave(Button btnSave) {
-        this.getPanelInput().setBtnSave(btnSave);
-    }
-
-    @JsonIgnore
-    public Button getBtnCancel() {
-        return this.getPanelInput().getBtnCancel();
-    }
-
-    @JsonIgnore
-    public void  setBtnCancel(Button btnCancel) {
-        this.getPanelInput().setBtnCancel(btnCancel);
-    }
-
     // </editor-fold>
     //--------------- この行より下にコードを追加してください -------------------
+    /**
+     * 画面を初期化します。
+     * @param shikibetsuCode 識別コード
+     * @param hihokenshaNo 被保険者番号
+     */
+    @Override
+    public void initialize(ShikibetsuCode shikibetsuCode , HihokenshaNo hihokenshaNo) {
+        
+        RoreiFukushiNenkinJohoMapperParameter param = RoreiFukushiNenkinJohoMapperParameter.createRoreiFukushiParam(
+                shikibetsuCode,
+                FlexibleDate.EMPTY, HihokenshaNo.EMPTY,
+                FlexibleDate.EMPTY);
+        this.setHihokenshaNo(hihokenshaNo == null ? RString.EMPTY : hihokenshaNo.getColumnValue());
+        this.setShikibetsuCode(shikibetsuCode == null ? RString.EMPTY : shikibetsuCode
+                .getColumnValue());
+        List<RoreiFukushiNenkinJukyusha> 一覧情報 = RoreiFukushiNenkinJukyushaManager.createInstance()
+                .getRoreiFukushiNenkinJoho(param);
+        getHandler(this).set老齢福祉年金情報一覧表示グリッド(一覧情報);
+        Models<RoreiFukushiNenkinJukyushaIdentifier, RoreiFukushiNenkinJukyusha> roreiFukushiNenkinJukyusha
+                = Models.create(一覧情報);
+        ViewStateHolder.put(ViewStateKeys.老齢福祉年金情報_老齢福祉年金情報検索結果一覧, roreiFukushiNenkinJukyusha);
+    }
+    
+    private RoreiFukushiNenkinShokaiHandler getHandler(RoreiFukushiNenkinShokaiDiv div) {
+        return new RoreiFukushiNenkinShokaiHandler(div);
+    }
 
 }
