@@ -738,6 +738,8 @@ public class TokuteiShinryohiPanelHandler {
         row.setDefaultDataName2(div.getTxtShikibetsuCode().getValue());
         if (!div.getTxtTanyi().getValue().isEmpty()) {
             row.getDefaultDataName3().setValue(new Decimal(div.getTxtTanyi().getValue().toString()));
+        } else {
+            row.getDefaultDataName3().setValue(null);
         }
         if (div.getTxtKaiyisuNisu().getValue() != null) {
             row.getDefaultDataName4().setValue(div.getTxtKaiyisuNisu().getValue());
@@ -928,65 +930,76 @@ public class TokuteiShinryohiPanelHandler {
     private ShokanTokuteiShinryoTokubetsuRyoyo buildShokanTokuteiShinryoTokubetsuRyoyo(
             ShokanTokuteiShinryoTokubetsuRyoyo entity,
             dgdTokuteiShinryohi_Row dgdRow) {
-        entity = entity.createBuilderForEdit()
-                .set傷病名(dgdRow.getDefaultDataName1())
+        entity = entity.createBuilderForEdit().set傷病名(dgdRow.getDefaultDataName1())
                 .set識別番号(dgdRow.getDefaultDataName2()).build();
         if (dgdRow.getDefaultDataName3().getValue() != null) {
-            entity = entity.createBuilderForEdit()
-                    .set単位数(Integer.valueOf(dgdRow.getDefaultDataName3().getValue().toString())).build();
+            entity = entity.createBuilderForEdit().set単位数(dgdRow.getDefaultDataName3().getValue().intValue()).build();
+        } else {
+            entity = entity.createBuilderForEdit().set単位数(0).build();
         }
         if (dgdRow.getDefaultDataName4().getValue() != null) {
-            entity = entity.createBuilderForEdit()
-                    .set回数(Integer.valueOf(dgdRow.getDefaultDataName4().getValue().toString())).build();
+            entity = entity.createBuilderForEdit().set回数(dgdRow.getDefaultDataName4().getValue().intValue()).build();
+        } else {
+            entity = entity.createBuilderForEdit().set回数(0).build();
         }
         if (dgdRow.getDefaultDataName5().getValue() != null) {
             entity = entity.createBuilderForEdit()
-                    .set合計単位数(Integer.valueOf(dgdRow.getDefaultDataName5().getValue().toString())).build();
+                    .set合計単位数(dgdRow.getDefaultDataName5().getValue().intValue()).build();
+        } else {
+            entity = entity.createBuilderForEdit().set合計単位数(0).build();
         }
-        if (!dgdRow.getDefaultDataName6().isEmpty()) {
-            entity = entity.createBuilderForEdit()
-                    .set摘要(dgdRow.getDefaultDataName6()).build();
-        }
+        entity = entity.createBuilderForEdit().set摘要(dgdRow.getDefaultDataName6()).build();
         return entity;
     }
 
     private ShokanTokuteiShinryohi buildShokanTokuteiShinryohi(
             ShokanTokuteiShinryohi entityModified,
             ddgToteishinryoTokubetushinryo_Row ddg) {
-        entityModified = entityModified.createBuilderForEdit()
-                .set傷病名(ddg.getShobyouName()).build();
+        entityModified = entityModified.createBuilderForEdit().set傷病名(ddg.getShobyouName()).build();
+        entityModified = clearShokanTokuteiShinryohi(entityModified);
         if (ddg.getShidouKanri().getValue() != null) {
             entityModified = entityModified.createBuilderForEdit()
-                    .set指導管理料等単位数(Integer.parseInt(ddg.getShidouKanri().getValue().toString())).build();
+                    .set指導管理料等単位数(ddg.getShidouKanri().getValue().intValue()).build();
         }
         if (ddg.getEkusuLine().getValue() != null) {
             entityModified = entityModified.createBuilderForEdit()
-                    .set単純エックス線単位数(Integer.parseInt(ddg.getEkusuLine().getValue().toString())).build();
+                    .set単純エックス線単位数(ddg.getEkusuLine().getValue().intValue()).build();
         }
         if (ddg.getRihabiri().getValue() != null) {
             entityModified = entityModified.createBuilderForEdit()
-                    .setリハビリテーション単位数(Integer.parseInt(ddg.getRihabiri().getValue().toString())).build();
+                    .setリハビリテーション単位数(ddg.getRihabiri().getValue().intValue()).build();
         }
         if (ddg.getSeishinka().getValue() != null) {
             entityModified = entityModified.createBuilderForEdit()
-                    .set精神科専門療法単位数(Integer.parseInt(ddg.getSeishinka().getValue().toString())).build();
+                    .set精神科専門療法単位数(ddg.getSeishinka().getValue().intValue()).build();
         }
         if (ddg.getSochi().getValue() != null) {
             entityModified = entityModified.createBuilderForEdit()
-                    .set措置単位数(Integer.parseInt(ddg.getSochi().getValue().toString())).build();
+                    .set措置単位数(ddg.getSochi().getValue().intValue()).build();
         }
         if (ddg.getTejyutsu().getValue() != null) {
             entityModified = entityModified.createBuilderForEdit()
-                    .set手術単位数(Integer.parseInt(ddg.getTejyutsu().getValue().toString())).build();
+                    .set手術単位数(ddg.getTejyutsu().getValue().intValue()).build();
         }
         if (ddg.getGoukeyiTanyi().getValue() != null) {
             entityModified = entityModified.createBuilderForEdit()
-                    .set合計単位数(Integer.parseInt(ddg.getGoukeyiTanyi().getValue().toString())).build();
+                    .set合計単位数(ddg.getGoukeyiTanyi().getValue().intValue()).build();
         }
         RString 摘要 = ddg.getMutiTekiyo();
         if (!摘要.isEmpty()) {
             entityModified = set摘要１(entityModified, 摘要);
         }
+        return entityModified;
+    }
+
+    private ShokanTokuteiShinryohi clearShokanTokuteiShinryohi(ShokanTokuteiShinryohi entityModified) {
+        entityModified = entityModified.createBuilderForEdit()
+                .set指導管理料等単位数(0).set単純エックス線単位数(0).setリハビリテーション単位数(0)
+                .set精神科専門療法単位数(0).set措置単位数(0).set手術単位数(0).set合計単位数(0)
+                .set摘要１(null).set摘要２(null).set摘要３(null).set摘要４(null).set摘要５(null)
+                .set摘要６(null).set摘要７(null).set摘要８(null).set摘要９(null).set摘要１０(null)
+                .set摘要１１(null).set摘要１２(null).set摘要１３(null).set摘要１４(null).set摘要１５(null)
+                .set摘要１６(null).set摘要１７(null).set摘要１８(null).set摘要１９(null).set摘要２０(null).build();
         return entityModified;
     }
 
