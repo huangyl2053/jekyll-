@@ -22,11 +22,9 @@ public class BemmeisyoReport extends Report<BemmeisyoReportSource> {
      * @param headItem 弁明書ヘッダのITEM
      * @return 弁明書のReport
      */
-    public static BemmeisyoReport createFrom(
-            BemmeisyoHeadItem headItem) {
+    public static BemmeisyoReport createFrom(BemmeisyoHeadItem headItem) {
 
-        return new BemmeisyoReport(
-                headItem);
+        return new BemmeisyoReport(headItem);
     }
 
     /**
@@ -34,9 +32,7 @@ public class BemmeisyoReport extends Report<BemmeisyoReportSource> {
      *
      * @param headItem 弁明書ヘッダのITEM
      */
-    protected BemmeisyoReport(
-            BemmeisyoHeadItem headItem) {
-
+    protected BemmeisyoReport(BemmeisyoHeadItem headItem) {
         this.headItem = headItem;
     }
 

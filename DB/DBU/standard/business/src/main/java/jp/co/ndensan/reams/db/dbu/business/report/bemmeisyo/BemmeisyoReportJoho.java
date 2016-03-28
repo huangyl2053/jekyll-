@@ -19,9 +19,7 @@ public class BemmeisyoReportJoho {
      *
      * @param headItem 弁明書ヘッダ
      */
-    public BemmeisyoReportJoho(
-            BemmeisyoHeadItem headItem) {
-
+    public BemmeisyoReportJoho(BemmeisyoHeadItem headItem) {
         this.headItem = headItem;
     }
 }
