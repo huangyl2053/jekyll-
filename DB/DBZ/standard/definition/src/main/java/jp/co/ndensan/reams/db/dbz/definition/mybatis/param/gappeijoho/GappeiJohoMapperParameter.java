@@ -12,7 +12,8 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
  * 合併情報を特定するためのMyBatis用パラメータクラスです。
  */
 @lombok.Getter
-public class GappeiJohoMapperParameter {
+@SuppressWarnings("PMD.UnusedPrivateField")
+public final class GappeiJohoMapperParameter {
 
     private final FlexibleDate gappeiYMD;
     private final RString chiikiNo;
