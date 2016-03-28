@@ -7,6 +7,7 @@ package jp.co.ndensan.reams.db.dbc.service.shokanbaraishikyuketteitsuchishoseale
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import jp.co.ndensan.reams.db.dbc.business.core.shokanketteitsuchishoshiharai.ShokanKetteiTsuchiShoShiharai;
 import jp.co.ndensan.reams.db.dbc.definition.batchprm.shokanketteitsuchishosealer.ShokanKetteiTsuchiShoSealer;
 import jp.co.ndensan.reams.db.dbc.definition.batchprm.shokanketteitsuchishosealer.ShokanKetteiTsuchiShoSealerBatchParameter;
@@ -14,10 +15,9 @@ import jp.co.ndensan.reams.db.dbc.definition.core.shiharaihoho.ShiharaiHohoKubun
 import jp.co.ndensan.reams.db.dbc.definition.core.shikyufushikyukubun.ShikyuFushikyuKubun;
 import jp.co.ndensan.reams.db.dbc.definition.reportid.ReportIdDBC;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
-import jp.co.ndensan.reams.db.dbz.business.core.basic.ChohyoSeigyoKyotsu;
-import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.kyotsu.NinshoshaDenshikoinshubetsuCode;
-import jp.co.ndensan.reams.db.dbz.service.core.basic.ChohyoSeigyoKyotsuManager;
-import jp.co.ndensan.reams.db.dbz.service.core.teikeibunhenkan.KaigoTextHenkanRuleCreator;
+import jp.co.ndensan.reams.db.dbz.business.core.basic.ChohyoSeigyoHanyo;
+import jp.co.ndensan.reams.db.dbz.service.core.basic.ChohyoSeigyoHanyoManager;
+import jp.co.ndensan.reams.db.dbz.service.util.report.ReportUtil;
 import jp.co.ndensan.reams.ua.uax.business.core.atesaki.IAtesaki;
 import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.search.AtesakiGyomuHanteiKeyFactory;
 import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.search.AtesakiPSMSearchKeyBuilder;
@@ -28,46 +28,29 @@ import jp.co.ndensan.reams.ua.uax.definition.core.enumeratedtype.SofusakiRiyoKub
 import jp.co.ndensan.reams.ua.uax.definition.mybatisprm.atesaki.IAtesakiGyomuHanteiKey;
 import jp.co.ndensan.reams.ua.uax.service.core.shikibetsutaisho.ShikibetsuTaishoService;
 import jp.co.ndensan.reams.ur.urz.business.core.association.Association;
-import jp.co.ndensan.reams.ur.urz.business.core.bunshono.BunshoNo;
-import jp.co.ndensan.reams.ur.urz.business.core.bunshono.BunshoNoHatsubanHoho;
-import jp.co.ndensan.reams.ur.urz.business.core.ninshosha.Ninshosha;
 import jp.co.ndensan.reams.ur.urz.business.core.reportoutputorder.IOutputOrder;
 import jp.co.ndensan.reams.ur.urz.business.core.reportoutputorder.ISetSortItem;
-import jp.co.ndensan.reams.ur.urz.business.core.teikeibunhenkan.ITextHenkanRule;
 import jp.co.ndensan.reams.ur.urz.business.report.daikoprint.DaikoPrintItem;
-import jp.co.ndensan.reams.ur.urz.business.report.parts.ninshosha.NinshoshaSourceBuilderFactory;
-import jp.co.ndensan.reams.ur.urz.definition.core.ninshosha.KenmeiFuyoKubunType;
-import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.ur.urz.entity.report.parts.ninshosha.NinshoshaSource;
 import jp.co.ndensan.reams.ur.urz.entity.report.sofubutsuatesaki.SofubutsuAtesakiSource;
 import jp.co.ndensan.reams.ur.urz.service.core.association.AssociationFinderFactory;
-import jp.co.ndensan.reams.ur.urz.service.core.bunshono.BunshoNoFinderFactory;
-import jp.co.ndensan.reams.ur.urz.service.core.bunshono.IBunshoNoFinder;
-import jp.co.ndensan.reams.ur.urz.service.core.ninshosha._NinshoshaManager;
 import jp.co.ndensan.reams.ur.urz.service.core.reportoutputorder.ChohyoShutsuryokujunFinderFactory;
 import jp.co.ndensan.reams.ur.urz.service.report.daikoprint.DaikoPrintFactory;
 import jp.co.ndensan.reams.ur.urz.service.report.daikoprint.IDaikoPrint;
-import jp.co.ndensan.reams.ux.uxx.business.core.tsuchishoteikeibun.TsuchishoTeikeibunInfo;
-import jp.co.ndensan.reams.ux.uxx.entity.db.relate.tsuchishoteikeibun.TsuchishoTeikeibunEntity;
-import jp.co.ndensan.reams.ux.uxx.service.core.tsuchishoteikeibun.TsuchishoTeikeibunManager;
 import jp.co.ndensan.reams.uz.uza.batch.batchexecutor.util.JobContextHolder;
 import jp.co.ndensan.reams.uz.uza.biz.GyomuCode;
 import jp.co.ndensan.reams.uz.uza.biz.KamokuCode;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
-import jp.co.ndensan.reams.uz.uza.lang.ApplicationException;
 import jp.co.ndensan.reams.uz.uza.lang.EraType;
 import jp.co.ndensan.reams.uz.uza.lang.FillType;
 import jp.co.ndensan.reams.uz.uza.lang.FirstYear;
-import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
-import jp.co.ndensan.reams.uz.uza.lang.RDate;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
 import jp.co.ndensan.reams.uz.uza.lang.RTime;
 import jp.co.ndensan.reams.uz.uza.lang.Separator;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
-import jp.co.ndensan.reams.uz.uza.util.CountedItem;
-import jp.co.ndensan.reams.uz.uza.util.Saiban;
 
 /**
  * 償還払い支給（不支給）決定通知書（ｼｰﾗﾀｲﾌﾟ）のビジネスです。
@@ -99,8 +82,20 @@ public class ShokanBaraiShikyuKetteiTsuchishoSealerType1 {
     private static final int EIGHT = 8;
     private static final int NINE = 9;
     private static final int TEN = 10;
-    private static final RString 汎用キー_文書番号 = new RString("文書番号");
     private static final int パターン番号_5 = 5;
+    private static final RString 帳票制御汎用キー_シーラタイプタイトル１ = new RString("シーラタイプタイトル１");
+    private static final RString 帳票制御汎用キー_シーラタイプタイトル２ = new RString("シーラタイプタイトル２");
+    private static final RString 帳票制御汎用キー_取り消し線 = new RString("取り消し線");
+    private static final RString 帳票制御汎用キー_帳票タイトル_抹消線あり１ = new RString("帳票タイトル_抹消線あり１");
+    private static final RString 帳票制御汎用キー_帳票タイトル_抹消線あり２ = new RString("帳票タイトル_抹消線あり２");
+    private static final RString 帳票制御汎用キー_帳票タイトル_抹消線あり３ = new RString("帳票タイトル_抹消線あり３");
+    private static final RString 帳票制御汎用キー_帳票タイトル_抹消線あり４ = new RString("帳票タイトル_抹消線あり４");
+    private static final RString 帳票制御汎用キー_持ち物内容文言１ = new RString("持ち物内容文言１");
+    private static final RString 帳票制御汎用キー_持ち物内容文言２ = new RString("持ち物内容文言２");
+    private static final RString 帳票制御汎用キー_持ち物内容文言３ = new RString("持ち物内容文言３");
+    private static final RString 帳票制御汎用キー_帳票タイトル = new RString("帳票タイトル");
+    private static final RString 取り消し線を編集しない = new RString("0");
+    private static final RString 取り消し線を編集する = new RString("1");
 
     /**
      * 帳票データを作成します。
@@ -110,7 +105,7 @@ public class ShokanBaraiShikyuKetteiTsuchishoSealerType1 {
      * @param reportSourceWriter ReportSourceWriter
      * @return 伝送データEntity
      */
-    public TensoData shokanBaraiShikyuKetteiTsuchishoSealerType1(List<ShokanKetteiTsuchiShoShiharai> businessList,
+    public TensoData createChoHyoData(List<ShokanKetteiTsuchiShoShiharai> businessList,
             ShokanKetteiTsuchiShoSealerBatchParameter batchPram, ReportSourceWriter reportSourceWriter) {
         return 伝送データ作成(businessList, batchPram, reportSourceWriter);
     }
@@ -118,29 +113,9 @@ public class ShokanBaraiShikyuKetteiTsuchishoSealerType1 {
     private TensoData 伝送データ作成(List<ShokanKetteiTsuchiShoShiharai> businessList,
             ShokanKetteiTsuchiShoSealerBatchParameter batchPram, ReportSourceWriter reportSourceWriter) {
 
-        _NinshoshaManager ninshoshaManager = new _NinshoshaManager();
-        Ninshosha ninshosha = ninshoshaManager.get帳票認証者(GyomuCode.DB介護保険,
-                NinshoshaDenshikoinshubetsuCode.認定用印.getコード(), batchPram.getHakkoYMD());
-        Association 導入団体クラス = AssociationFinderFactory.createInstance().getAssociation();
-        ChohyoSeigyoKyotsuManager chohyoSeigyoKyotsuManager = new ChohyoSeigyoKyotsuManager();
-        ChohyoSeigyoKyotsu chohyoSeigyoKyotsu = chohyoSeigyoKyotsuManager.get帳票制御共通(
-                SubGyomuCode.DBC介護給付, ReportIdDBC.DBC100004.getReportId());
-        boolean is公印に掛ける = false;
-        boolean is公印を省略 = false;
-        if (chohyoSeigyoKyotsu != null) {
-            is公印に掛ける = chohyoSeigyoKyotsu.get首長名印字位置().equals(new RString("1"));
-            is公印を省略 = !chohyoSeigyoKyotsu.is電子公印印字有無();
-        }
-        NinshoshaSource ninshoshaSource = NinshoshaSourceBuilderFactory.createInstance(ninshosha, 導入団体クラス,
-                reportSourceWriter.getImageFolderPath(), new RDate(batchPram.getHakkoYMD().toString()),
-                is公印に掛ける, is公印を省略, KenmeiFuyoKubunType.付与なし).buildSource();
-
-        IBunshoNoFinder bushoFineder = BunshoNoFinderFactory.createInstance();
-        BunshoNo bushoNo = bushoFineder.get文書番号管理(ReportIdDBC.DBC100004.getReportId(), batchPram.getHakkoYMD());
-        RString 文書番号 = RString.EMPTY;
-        if (bushoNo != null) {
-            文書番号 = get文書番号(bushoNo);
-        }
+        NinshoshaSource ninshoshaSource = ReportUtil.get認証者情報(
+                SubGyomuCode.DBC介護給付, ReportIdDBC.DBC100004.getReportId(), batchPram.getHakkoYMD(), reportSourceWriter);
+        RString 文書番号 = ReportUtil.get文書番号(SubGyomuCode.DBC介護給付, ReportIdDBC.DBC100004.getReportId(), batchPram.getHakkoYMD());
 
         IAtesakiGyomuHanteiKey 宛先業務判定キー = AtesakiGyomuHanteiKeyFactory.createInstace(GyomuCode.DB介護保険, SubGyomuCode.DBC介護給付);
         AtesakiPSMSearchKeyBuilder 宛先builder = new AtesakiPSMSearchKeyBuilder(宛先業務判定キー);
@@ -151,25 +126,11 @@ public class ShokanBaraiShikyuKetteiTsuchishoSealerType1 {
         SofubutsuAtesakiSource atesakiSource
                 = new SofubutsuAtesakiSourceBuilder(new SofubutsuAtesakiEditorBuilder(宛先s.get(ZERO)).build()).buildSource();
 
-        TsuchishoTeikeibunManager tsuchishoTeikeibunManager = new TsuchishoTeikeibunManager();
-        TsuchishoTeikeibunInfo info = tsuchishoTeikeibunManager.get通知書定型文項目(SubGyomuCode.DBE認定支援,
-                ReportIdDBC.DBC100004.getReportId(), KamokuCode.EMPTY, パターン番号_5);
-        ITextHenkanRule textHenkanRule = KaigoTextHenkanRuleCreator.createRule(SubGyomuCode.DBC介護給付, ReportIdDBC.DBC100004.getReportId());
-        List<TsuchishoTeikeibunEntity> tsuchishoTeikeibunList = info.get通知書定型文List();
-        int 項目番号;
-        RString 情報文 = RString.EMPTY;
-        RString 通知文 = RString.EMPTY;
-        RString タイトル = RString.EMPTY;
-        for (TsuchishoTeikeibunEntity tsuchishoTeikeibun : tsuchishoTeikeibunList) {
-            項目番号 = tsuchishoTeikeibun.getTsuchishoTeikeibunEntity().getSentenceNo();
-            if (項目番号 == THREE) {
-                情報文 = textHenkanRule.editText(tsuchishoTeikeibun.getTsuchishoTeikeibunEntity().getSentence());
-            } else if (項目番号 == TWO) {
-                通知文 = textHenkanRule.editText(tsuchishoTeikeibun.getTsuchishoTeikeibunEntity().getSentence());
-            } else if (項目番号 == ONE) {
-                タイトル = textHenkanRule.editText(tsuchishoTeikeibun.getTsuchishoTeikeibunEntity().getSentence());
-            }
-        }
+        Map<Integer, RString> 通知文Map = ReportUtil.get通知文(SubGyomuCode.DBC介護給付,
+                ReportIdDBC.DBC100002_2.getReportId(), KamokuCode.EMPTY, パターン番号_5);
+        RString タイトル = 通知文Map.get(ONE);
+        RString 通知文 = 通知文Map.get(TWO);
+        RString 情報文 = 通知文Map.get(THREE);
 
         List<ShokanKetteiTsuchiShoSealer> 帳票ソースデータ = new ArrayList<>();
         List<RString> 重複キーリスト = new ArrayList<>();
@@ -179,7 +140,7 @@ public class ShokanBaraiShikyuKetteiTsuchishoSealerType1 {
                 continue;
             }
             重複キーリスト.add(key);
-            int pageCount = 0;
+            int pageCount = ZERO;
             HihokenshaNo 被保険者番号 = HihokenshaNo.EMPTY;
             if (!被保険者番号.equals(shiharai.get被保険者番号())) {
                 pageCount++;
@@ -247,6 +208,7 @@ public class ShokanBaraiShikyuKetteiTsuchishoSealerType1 {
                 改ページ項目.add(sortItem.get項目ID());
             }
         }
+        Association 導入団体クラス = AssociationFinderFactory.createInstance().getAssociation();
         DaikoPrintItem daikoPrintItem = new DaikoPrintItem(SubGyomuCode.DBC介護給付,
                 導入団体クラス.getLasdecCode_(), 導入団体クラス.get市町村名(),
                 new RString(String.valueOf(JobContextHolder.getJobId())),
@@ -256,21 +218,6 @@ public class ShokanBaraiShikyuKetteiTsuchishoSealerType1 {
                 出力順項目, 改ページ項目, null);
         IDaikoPrint daikoPrint = DaikoPrintFactory.createInstance(daikoPrintItem);
         return new TensoData(帳票ソースデータ, daikoPrint);
-    }
-
-    private RString get文書番号(BunshoNo bushoNo) {
-        RString 文書番号 = RString.EMPTY;
-        RString 文書番号発番方法 = bushoNo.get文書番号発番方法();
-        if (BunshoNoHatsubanHoho.固定.getCode().equalsIgnoreCase(文書番号発番方法)) {
-            文書番号 = bushoNo.edit文書番号();
-        } else if (BunshoNoHatsubanHoho.手入力.getCode().equalsIgnoreCase(文書番号発番方法)) {
-            throw new ApplicationException(UrErrorMessages.実行不可.getMessage().replace("文書番号情報の取得"));
-        } else if (BunshoNoHatsubanHoho.自動採番.getCode().equalsIgnoreCase(文書番号発番方法)) {
-            CountedItem 採番 = Saiban.get(SubGyomuCode.DBC介護給付, 汎用キー_文書番号,
-                    new FlexibleYear(RDate.getNowDate().getYear().toDateString()));
-            文書番号 = bushoNo.edit文書番号(採番.nextString());
-        }
-        return 文書番号;
     }
 
     private RString getJufukuKey(ShokanKetteiTsuchiShoShiharai shiharai) {
@@ -286,42 +233,56 @@ public class ShokanBaraiShikyuKetteiTsuchishoSealerType1 {
             ShokanKetteiTsuchiShoSealerBatchParameter batchPram, RString 文書番号, RString 通知文, RString 情報文, RString タイトル,
             SofubutsuAtesakiSource atesaki, int pageCount) {
 
+        RString 種別タイトル = get種別タイトル(business);
         RString 増減の理由タイトル;
-        RString 種別タイトル = RString.EMPTY;
         if (ShikyuFushikyuKubun.不支給.getコード().equals(business.get支給不支給決定区分())) {
             増減の理由タイトル = 増減の理由タイトル_不支給の理由;
-            if (ShiharaiHohoKubun.窓口払.getコード().equals(business.get支払方法区分コード())) {
-                種別タイトル = 種別タイトル_口座種別;
-            } else if (ShiharaiHohoKubun.口座払.getコード().equals(business.get支払方法区分コード())) {
-                if (金融機関コード_郵便局.equals(business.get金融機関コード().value())) {
-                    種別タイトル = 種別タイトル_店番;
-                } else {
-                    種別タイトル = 種別タイトル_口座種別;
-                }
-            }
         } else {
             増減の理由タイトル = 増減の理由タイトル_増減の理由;
-            種別タイトル = 種別タイトル_口座種別;
         }
-
+        ChohyoSeigyoHanyoManager 帳票制御汎用Manager = new ChohyoSeigyoHanyoManager();
+        RString タイトル1 = RString.EMPTY;
+        RString タイトル2 = RString.EMPTY;
+        if (RString.isNullOrEmpty(タイトル)) {
+            タイトル2 = get帳票制御汎用(帳票制御汎用Manager, 帳票制御汎用キー_シーラタイプタイトル２);
+        }
+        if (RString.isNullOrEmpty(タイトル2)) {
+            タイトル1 = get帳票制御汎用(帳票制御汎用Manager, 帳票制御汎用キー_シーラタイプタイトル１);
+        }
+        RString タイトル2_1 = RString.EMPTY;
         RString タイトル2_2_1 = RString.EMPTY;
         RString タイトル2_2_2 = RString.EMPTY;
         RString タイトル2_3_1 = RString.EMPTY;
         RString タイトル2_3_2 = RString.EMPTY;
-        if (ShikyuFushikyuKubun.支給.getコード().equals(business.get支給不支給決定区分())) {
-            // TODO QA696 帳票制御汎用関連資料無
-            タイトル2_2_1 = RString.EMPTY;
-            タイトル2_3_1 = RString.EMPTY;
-        } else {
-            タイトル2_2_2 = RString.EMPTY;
-            // TODO QA696 帳票制御汎用関連資料無
-            タイトル2_3_2 = RString.EMPTY;
+        RString タイトル2_4 = RString.EMPTY;
+        RString 取り消し線 = get帳票制御汎用(帳票制御汎用Manager, 帳票制御汎用キー_取り消し線);
+        if (取り消し線を編集しない.equals(取り消し線)) {
+            タイトル = get帳票制御汎用(帳票制御汎用Manager, 帳票制御汎用キー_帳票タイトル);
+        } else if (取り消し線を編集する.equals(取り消し線)) {
+            タイトル2_1 = get帳票制御汎用(帳票制御汎用Manager, 帳票制御汎用キー_帳票タイトル_抹消線あり１);
+            タイトル2_4 = get帳票制御汎用(帳票制御汎用Manager, 帳票制御汎用キー_帳票タイトル_抹消線あり４);
+            if (ShikyuFushikyuKubun.支給.getコード().equals(business.get支給不支給決定区分())) {
+                タイトル2_2_1 = get帳票制御汎用(帳票制御汎用Manager, 帳票制御汎用キー_帳票タイトル_抹消線あり２);
+                タイトル2_3_2 = get帳票制御汎用(帳票制御汎用Manager, 帳票制御汎用キー_帳票タイトル_抹消線あり３);
+            } else {
+                タイトル2_2_2 = get帳票制御汎用(帳票制御汎用Manager, 帳票制御汎用キー_帳票タイトル_抹消線あり２);
+                タイトル2_3_1 = get帳票制御汎用(帳票制御汎用Manager, 帳票制御汎用キー_帳票タイトル_抹消線あり３);
+            }
         }
 
-        RString 被保険者番号 = business.get被保険者番号().value();
         ShokanKetteiTsuchiShoSealer ketteiTsuchiShoSealer = new ShokanKetteiTsuchiShoSealer();
+        ketteiTsuchiShoSealer.setTitle1(タイトル1);
+        ketteiTsuchiShoSealer.setTitle2(タイトル2);
+        ketteiTsuchiShoSealer.setTitle(タイトル);
+        ketteiTsuchiShoSealer.setTitle2_1(タイトル2_1);
+        ketteiTsuchiShoSealer.setTitle2_2_1(タイトル2_2_1);
+        ketteiTsuchiShoSealer.setTitle2_2_2(タイトル2_2_2);
+        ketteiTsuchiShoSealer.setTitle2_3_1(タイトル2_3_1);
+        ketteiTsuchiShoSealer.setTitle2_3_2(タイトル2_3_2);
+        ketteiTsuchiShoSealer.setTitle2_4(タイトル2_4);
         ketteiTsuchiShoSealer.setBunshoNo(文書番号);
         ketteiTsuchiShoSealer.setHihokenshaName(business.get被保険者氏名());
+        RString 被保険者番号 = business.get被保険者番号().value();
         ketteiTsuchiShoSealer.setHihokenshaNo(被保険者番号);
         ketteiTsuchiShoSealer.setUketsukeYMD(business.get受付年月日() == null ? RString.EMPTY : business.get受付年月日().wareki().eraType(
                 EraType.KANJI).firstYear(FirstYear.GAN_NEN).separator(
@@ -374,6 +335,7 @@ public class ShokanBaraiShikyuKetteiTsuchishoSealerType1 {
         if (!RString.isNullOrEmpty(business.get支払窓口開始時間()) && !RString.isNullOrEmpty(business.get支払窓口終了期間())) {
             ketteiTsuchiShoSealer.setKaraFugo(KARA);
         }
+
         ketteiTsuchiShoSealer.setBankName(business.get金融機関名称());
         ketteiTsuchiShoSealer.setBranchBankName(business.get支店名称());
         ketteiTsuchiShoSealer.setKouzaShu(business.get預金種別名称());
@@ -384,10 +346,6 @@ public class ShokanBaraiShikyuKetteiTsuchishoSealerType1 {
         ketteiTsuchiShoSealer.set整理番号(business.get整理番号());
         ketteiTsuchiShoSealer.set決定通知書番号(business.get決定通知No());
         ketteiTsuchiShoSealer.setTsuban(RString.EMPTY);
-        // QA696 帳票制御汎用関連
-        ketteiTsuchiShoSealer.setTitle1(RString.EMPTY);
-        ketteiTsuchiShoSealer.setTitle2(RString.EMPTY);
-        ketteiTsuchiShoSealer.setTitle(タイトル);
         ketteiTsuchiShoSealer.setPage(new RString(String.valueOf(pageCount)));
         ketteiTsuchiShoSealer.setHihokenshaName2(business.get被保険者氏名());
         ketteiTsuchiShoSealer.setTsuchibun1(通知文);
@@ -399,6 +357,53 @@ public class ShokanBaraiShikyuKetteiTsuchishoSealerType1 {
         ketteiTsuchiShoSealer.setRiyuTitle(増減の理由タイトル);
         ketteiTsuchiShoSealer.setShumokuTitle(種別タイトル);
         ketteiTsuchiShoSealer.setBangoTitle(番号タイトル_口座番号);
+        ketteiTsuchiShoSealer.setMochimono1(get帳票制御汎用(帳票制御汎用Manager, 帳票制御汎用キー_持ち物内容文言１));
+        ketteiTsuchiShoSealer.setMochimono2(get帳票制御汎用(帳票制御汎用Manager, 帳票制御汎用キー_持ち物内容文言２));
+        ketteiTsuchiShoSealer.setMochimono3(get帳票制御汎用(帳票制御汎用Manager, 帳票制御汎用キー_持ち物内容文言３));
+        被保険者番号 = 被保険者番号.padRight(RString.HALF_SPACE, TEN);
+        ketteiTsuchiShoSealer.setHihokenshaNo1(被保険者番号.substring(ZERO, ONE));
+        ketteiTsuchiShoSealer.setHihokenshaNo2(被保険者番号.substring(ONE, TWO));
+        ketteiTsuchiShoSealer.setHihokenshaNo3(被保険者番号.substring(TWO, THREE));
+        ketteiTsuchiShoSealer.setHihokenshaNo4(被保険者番号.substring(THREE, FOUR));
+        ketteiTsuchiShoSealer.setHihokenshaNo5(被保険者番号.substring(FOUR, FIVE));
+        ketteiTsuchiShoSealer.setHihokenshaNo6(被保険者番号.substring(FIVE, SIX));
+        ketteiTsuchiShoSealer.setHihokenshaNo7(被保険者番号.substring(SIX, SEVEN));
+        ketteiTsuchiShoSealer.setHihokenshaNo8(被保険者番号.substring(SEVEN, EIGHT));
+        ketteiTsuchiShoSealer.setHihokenshaNo9(被保険者番号.substring(EIGHT, NINE));
+        ketteiTsuchiShoSealer.setHihokenshaNo10(被保険者番号.substring(NINE));
+        return setKetteiTsuchiShoSealer(ketteiTsuchiShoSealer, ninshoshaSource, business, atesaki);
+    }
+
+    private RString get種別タイトル(ShokanKetteiTsuchiShoShiharai business) {
+        if (!ShikyuFushikyuKubun.不支給.getコード().equals(business.get支給不支給決定区分())) {
+            return 種別タイトル_口座種別;
+        }
+        RString 種別タイトル = RString.EMPTY;
+        if (ShiharaiHohoKubun.窓口払.getコード().equals(business.get支払方法区分コード())) {
+            種別タイトル = 種別タイトル_口座種別;
+        } else if (ShiharaiHohoKubun.口座払.getコード().equals(business.get支払方法区分コード())) {
+            if (金融機関コード_郵便局.equals(business.get金融機関コード().value())) {
+                種別タイトル = 種別タイトル_店番;
+            } else {
+                種別タイトル = 種別タイトル_口座種別;
+            }
+        }
+        return 種別タイトル;
+    }
+
+    private RString get帳票制御汎用(ChohyoSeigyoHanyoManager 帳票制御汎用Manager, RString 項目名) {
+        RString 設定値 = RString.EMPTY;
+        ChohyoSeigyoHanyo chohyoSeigyoHanyo = 帳票制御汎用Manager.get帳票制御汎用(SubGyomuCode.DBC介護給付, ReportIdDBC.DBC100002_2.getReportId(),
+                FlexibleDate.getNowDate().getYearMonth().getYear(), 項目名);
+        if (chohyoSeigyoHanyo != null) {
+            設定値 = chohyoSeigyoHanyo.get設定値();
+        }
+        return 設定値;
+    }
+
+    private ShokanKetteiTsuchiShoSealer setKetteiTsuchiShoSealer(ShokanKetteiTsuchiShoSealer ketteiTsuchiShoSealer,
+            NinshoshaSource ninshoshaSource, ShokanKetteiTsuchiShoShiharai business, SofubutsuAtesakiSource atesaki) {
+
         ketteiTsuchiShoSealer.setHakkoYMD(ninshoshaSource.hakkoYMD);
         ketteiTsuchiShoSealer.setDenshiKoin(ninshoshaSource.denshiKoin);
         ketteiTsuchiShoSealer.setNinshoshaYakushokuMei(ninshoshaSource.ninshoshaYakushokuMei);
@@ -440,13 +445,6 @@ public class ShokanBaraiShikyuKetteiTsuchishoSealerType1 {
         ketteiTsuchiShoSealer.setKakkoRight1(atesaki.kakkoRight1);
         ketteiTsuchiShoSealer.setSamabunShimeiSmall1(atesaki.samabunShimeiSmall1);
         ketteiTsuchiShoSealer.setCustomerBarCode(atesaki.customerBarCode);
-        // TODO QA696 帳票制御汎用関連
-        ketteiTsuchiShoSealer.setTitle2_1(RString.EMPTY);
-        ketteiTsuchiShoSealer.setTitle2_2_1(タイトル2_2_1);
-        ketteiTsuchiShoSealer.setTitle2_2_2(タイトル2_2_2);
-        ketteiTsuchiShoSealer.setTitle2_3_1(タイトル2_3_1);
-        ketteiTsuchiShoSealer.setTitle2_3_2(タイトル2_3_2);
-        ketteiTsuchiShoSealer.setTitle2_4(RString.EMPTY);
         ketteiTsuchiShoSealer.setShoHokenshaNo(business.get証記載保険者番号());
         ketteiTsuchiShoSealer.setServiceYM(business.get提供年月() == null ? RString.EMPTY : business.get提供年月().wareki().firstYear(
                 FirstYear.GAN_NEN).separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString());
@@ -466,22 +464,6 @@ public class ShokanBaraiShikyuKetteiTsuchishoSealerType1 {
             ketteiTsuchiShoSealer.setTorikeshiShiharaibasho(記号_星);
             ketteiTsuchiShoSealer.setTorikeshiShiharaikikan(記号_星);
         }
-
-        // QA696 帳票制御汎用関連
-        ketteiTsuchiShoSealer.setMochimono1(RString.EMPTY);
-        ketteiTsuchiShoSealer.setMochimono2(RString.EMPTY);
-        ketteiTsuchiShoSealer.setMochimono3(RString.EMPTY);
-        被保険者番号 = 被保険者番号.padRight(RString.HALF_SPACE, TEN);
-        ketteiTsuchiShoSealer.setHihokenshaNo1(被保険者番号.substring(ZERO, ONE));
-        ketteiTsuchiShoSealer.setHihokenshaNo2(被保険者番号.substring(ONE, TWO));
-        ketteiTsuchiShoSealer.setHihokenshaNo3(被保険者番号.substring(TWO, THREE));
-        ketteiTsuchiShoSealer.setHihokenshaNo4(被保険者番号.substring(THREE, FOUR));
-        ketteiTsuchiShoSealer.setHihokenshaNo5(被保険者番号.substring(FOUR, FIVE));
-        ketteiTsuchiShoSealer.setHihokenshaNo6(被保険者番号.substring(FIVE, SIX));
-        ketteiTsuchiShoSealer.setHihokenshaNo7(被保険者番号.substring(SIX, SEVEN));
-        ketteiTsuchiShoSealer.setHihokenshaNo8(被保険者番号.substring(SEVEN, EIGHT));
-        ketteiTsuchiShoSealer.setHihokenshaNo9(被保険者番号.substring(EIGHT, NINE));
-        ketteiTsuchiShoSealer.setHihokenshaNo10(被保険者番号.substring(NINE));
         return ketteiTsuchiShoSealer;
     }
 }

@@ -34,6 +34,10 @@ public enum ReportIdDBC {
      */
     DBC100002(new ReportId("DBC100002_ShokanKetteiTsuchiShoShiharaiYoteiBiYijiNashi"), new RString("償還払い支給（不支給）決定通知書")),
     /**
+     * 償還払い支給（不支給）決定通知書の帳票ＩＤです。
+     */
+    DBC100002_2(new ReportId("DBC100002_ShokanKetteiTsuchiSho"), new RString("償還払い支給（不支給）決定通知書")),
+    /**
      * 償還払い支給（不支給）決定通知書(支払予定日あり）の帳票ＩＤです。
      */
     DBC100003(new ReportId("DBC100003_ShokanKetteiTsuchiShoShiharaiYoteiBiYijiAri"), new RString("償還払い支給（不支給）決定通知書(支払予定日あり）")),
