@@ -16,17 +16,19 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
  * @author 自動生成
  */
 public class HakkoJokenDiv extends Panel {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2015-11-30_08-54-50">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-01-15_09-59-03">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
      * コントロール名とフィールド名を取得する
      * private + コントロール名 + フィールド名 の文字列を作成
      */
-    @JsonProperty("ccdHokensha")
-    private HokenshaListDiv ccdHokensha;
     @JsonProperty("radChohyoSentaku")
     private RadioButton radChohyoSentaku;
+    @JsonProperty("txtKijunDay")
+    private TextBoxFlexibleDate txtKijunDay;
+    @JsonProperty("ccdHokensha")
+    private HokenshaListDiv ccdHokensha;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -34,15 +36,6 @@ public class HakkoJokenDiv extends Panel {
      * コントロール名とフィールド名を取得する
      * フィールド名のGetterとSetter を作成
      */
-    /*
-     * getccdHokensha
-     * @return ccdHokensha
-     */
-    @JsonProperty("ccdHokensha")
-    public IHokenshaListDiv getCcdHokensha() {
-        return ccdHokensha;
-    }
-
     /*
      * getradChohyoSentaku
      * @return radChohyoSentaku
@@ -59,6 +52,33 @@ public class HakkoJokenDiv extends Panel {
     @JsonProperty("radChohyoSentaku")
     public void setRadChohyoSentaku(RadioButton radChohyoSentaku) {
         this.radChohyoSentaku = radChohyoSentaku;
+    }
+
+    /*
+     * gettxtKijunDay
+     * @return txtKijunDay
+     */
+    @JsonProperty("txtKijunDay")
+    public TextBoxFlexibleDate getTxtKijunDay() {
+        return txtKijunDay;
+    }
+
+    /*
+     * settxtKijunDay
+     * @param txtKijunDay txtKijunDay
+     */
+    @JsonProperty("txtKijunDay")
+    public void setTxtKijunDay(TextBoxFlexibleDate txtKijunDay) {
+        this.txtKijunDay = txtKijunDay;
+    }
+
+    /*
+     * getccdHokensha
+     * @return ccdHokensha
+     */
+    @JsonProperty("ccdHokensha")
+    public IHokenshaListDiv getCcdHokensha() {
+        return ccdHokensha;
     }
 
     // </editor-fold>
