@@ -631,16 +631,24 @@ public class TokuteiNyushoshaHiyoPanelHandler {
         if (dgdRow.getDefaultDataName2().getValue() != null) {
             entity = entity.createBuilderForEdit().set費用単価(dgdRow.getDefaultDataName2()
                     .getValue().intValue()).build();
+        } else {
+            entity = entity.createBuilderForEdit().set費用単価(0).build();
         }
         if (dgdRow.getDefaultDataName3().getValue() != null) {
             entity = entity.createBuilderForEdit().set負担限度額(dgdRow.getDefaultDataName3()
                     .getValue().intValue()).build();
+        } else {
+            entity = entity.createBuilderForEdit().set負担限度額(0).build();
         }
         if (dgdRow.getDefaultDataName4().getValue() != null) {
             entity = entity.createBuilderForEdit().set日数(dgdRow.getDefaultDataName4().getValue().intValue()).build();
+        } else {
+            entity = entity.createBuilderForEdit().set日数(0).build();
         }
         if (dgdRow.getDefaultDataName5().getValue() != null) {
             entity = entity.createBuilderForEdit().set費用額(dgdRow.getDefaultDataName5().getValue().intValue()).build();
+        } else {
+            entity = entity.createBuilderForEdit().set費用額(0).build();
         }
         if (dgdRow.getDefaultDataName6().getValue() != null) {
             entity = entity.createBuilderForEdit().set保険分請求額(dgdRow.getDefaultDataName6()
@@ -649,19 +657,26 @@ public class TokuteiNyushoshaHiyoPanelHandler {
         if (dgdRow.getDefaultDataName7().getValue() != null) {
             entity = entity.createBuilderForEdit().set利用者負担額(dgdRow.getDefaultDataName7()
                     .getValue().intValue()).build();
+        } else {
+            entity = entity.createBuilderForEdit().set利用者負担額(0).build();
         }
         if (div.getPanelTokutei().getTxtHiyogakuTotal().getValue() != null) {
             entity = entity.createBuilderForEdit().set費用額合計(div.getPanelTokutei().getTxtHiyogakuTotal().getValue()
                     .intValue()).build();
+        } else {
+            entity = entity.createBuilderForEdit().set費用額合計(0).build();
         }
         if (div.getPanelTokutei().getTxtHokenbunTotal().getValue() != null) {
             entity = entity.createBuilderForEdit().set保険分請求額合計(div.getPanelTokutei()
-                    .getTxtHokenbunTotal().getValue()
-                    .intValue()).build();
+                    .getTxtHokenbunTotal().getValue().intValue()).build();
+        } else {
+            entity = entity.createBuilderForEdit().set保険分請求額合計(0).build();
         }
         if (div.getPanelTokutei().getTxtRiyoshaFutangakuTotal().getValue() != null) {
             entity = entity.createBuilderForEdit().set利用者負担額合計(div.getPanelTokutei().getTxtRiyoshaFutangakuTotal()
                     .getValue().intValue()).build();
+        } else {
+            entity = entity.createBuilderForEdit().set利用者負担額合計(0).build();
         }
         return entity;
     }
