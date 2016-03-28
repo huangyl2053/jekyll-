@@ -7,6 +7,8 @@ package jp.co.ndensan.reams.db.dbe.divcontroller.entity.commonchilddiv.ShobyoIke
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import jp.co.ndensan.reams.ur.urz.divcontroller.entity.commonchilddiv.CodeInput.CodeInputDiv;
+import jp.co.ndensan.reams.ur.urz.divcontroller.entity.commonchilddiv.CodeInput.ICodeInputDiv;
 import jp.co.ndensan.reams.uz.uza.ui.binding.*;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 
@@ -31,8 +33,8 @@ public class ShindanNameDiv extends Panel {
     private TextBox txtShindanName2;
     @JsonProperty("txtShindanYMD2")
     private TextBoxDate txtShindanYMD2;
-    @JsonProperty("txtShindanName3")
-    private TextBox txtShindanName3;
+    @JsonProperty("txtShindanName")
+    private TextBox txtShindanName;
     @JsonProperty("txtShindanYMD3")
     private TextBoxDate txtShindanYMD3;
     @JsonProperty("geninShikkanPanel")
@@ -117,21 +119,21 @@ public class ShindanNameDiv extends Panel {
     }
 
     /*
-     * gettxtShindanName3
-     * @return txtShindanName3
+     * gettxtShindanName
+     * @return txtShindanName
      */
-    @JsonProperty("txtShindanName3")
-    public TextBox getTxtShindanName3() {
-        return txtShindanName3;
+    @JsonProperty("txtShindanName")
+    public TextBox getTxtShindanName() {
+        return txtShindanName;
     }
 
     /*
-     * settxtShindanName3
-     * @param txtShindanName3 txtShindanName3
+     * settxtShindanName
+     * @param txtShindanName txtShindanName
      */
-    @JsonProperty("txtShindanName3")
-    public void setTxtShindanName3(TextBox txtShindanName3) {
-        this.txtShindanName3 = txtShindanName3;
+    @JsonProperty("txtShindanName")
+    public void setTxtShindanName(TextBox txtShindanName) {
+        this.txtShindanName = txtShindanName;
     }
 
     /*
@@ -174,12 +176,12 @@ public class ShindanNameDiv extends Panel {
      * [ ショートカットの作成 ]
      */
     @JsonIgnore
-    public ButtonDialog getBtnAdd() {
+    public Button getBtnAdd() {
         return this.getGeninShikkanPanel().getBtnAdd();
     }
 
     @JsonIgnore
-    public void  setBtnAdd(ButtonDialog btnAdd) {
+    public void  setBtnAdd(Button btnAdd) {
         this.getGeninShikkanPanel().setBtnAdd(btnAdd);
     }
 
@@ -204,33 +206,8 @@ public class ShindanNameDiv extends Panel {
     }
 
     @JsonIgnore
-    public TextBoxCode getTxtGeninShikkanCode() {
-        return this.getGeninShikkanPanel().getGeninShikkanShosai().getTxtGeninShikkanCode();
-    }
-
-    @JsonIgnore
-    public void  setTxtGeninShikkanCode(TextBoxCode txtGeninShikkanCode) {
-        this.getGeninShikkanPanel().getGeninShikkanShosai().setTxtGeninShikkanCode(txtGeninShikkanCode);
-    }
-
-    @JsonIgnore
-    public ButtonDialog getBtnToSearch() {
-        return this.getGeninShikkanPanel().getGeninShikkanShosai().getBtnToSearch();
-    }
-
-    @JsonIgnore
-    public void  setBtnToSearch(ButtonDialog btnToSearch) {
-        this.getGeninShikkanPanel().getGeninShikkanShosai().setBtnToSearch(btnToSearch);
-    }
-
-    @JsonIgnore
-    public TextBox getTxtMeisho() {
-        return this.getGeninShikkanPanel().getGeninShikkanShosai().getTxtMeisho();
-    }
-
-    @JsonIgnore
-    public void  setTxtMeisho(TextBox txtMeisho) {
-        this.getGeninShikkanPanel().getGeninShikkanShosai().setTxtMeisho(txtMeisho);
+    public ICodeInputDiv getCcdCodeInputGeninShikkan() {
+        return this.getGeninShikkanPanel().getGeninShikkanShosai().getCcdCodeInputGeninShikkan();
     }
 
     @JsonIgnore

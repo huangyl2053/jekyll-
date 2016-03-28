@@ -7,6 +7,8 @@ package jp.co.ndensan.reams.db.dbe.divcontroller.entity.commonchilddiv.ShobyoIke
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import jp.co.ndensan.reams.ur.urz.divcontroller.entity.commonchilddiv.CodeInput.CodeInputDiv;
+import jp.co.ndensan.reams.ur.urz.divcontroller.entity.commonchilddiv.CodeInput.ICodeInputDiv;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.binding.*;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
@@ -55,26 +57,8 @@ public class ShobyoIkenDiv extends Panel implements IShobyoIkenDiv {
     private RString Name3;
     @JsonProperty("YMD3")
     private RString YMD3;
-    @JsonProperty("radantei")
-    private RString radantei;
-    @JsonProperty("Fuantei")
-    private RString Fuantei;
     @JsonProperty("Naiyo")
     private RString Naiyo;
-    @JsonProperty("hdnTxtSchemaName")
-    private RString hdnTxtSchemaName;
-    @JsonProperty("hdnTxtSubGyomuCode")
-    private RString hdnTxtSubGyomuCode;
-    @JsonProperty("hdnTxtCodeShubetsu")
-    private RString hdnTxtCodeShubetsu;
-    @JsonProperty("hdnTxtKijunYmd")
-    private RString hdnTxtKijunYmd;
-    @JsonProperty("hdnTxtCodeMasterKind")
-    private RString hdnTxtCodeMasterKind;
-    @JsonProperty("hdnTxtCode")
-    private RString hdnTxtCode;
-    @JsonProperty("hdnTxtCodeMeisho")
-    private RString hdnTxtCodeMeisho;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -281,42 +265,6 @@ public class ShobyoIkenDiv extends Panel implements IShobyoIkenDiv {
     }
 
     /*
-     * getradantei
-     * @return radantei
-     */
-    @JsonProperty("radantei")
-    public RString getRadantei() {
-        return radantei;
-    }
-
-    /*
-     * setradantei
-     * @param radantei radantei
-     */
-    @JsonProperty("radantei")
-    public void setRadantei(RString radantei) {
-        this.radantei = radantei;
-    }
-
-    /*
-     * getFuantei
-     * @return Fuantei
-     */
-    @JsonProperty("Fuantei")
-    public RString getFuantei() {
-        return Fuantei;
-    }
-
-    /*
-     * setFuantei
-     * @param Fuantei Fuantei
-     */
-    @JsonProperty("Fuantei")
-    public void setFuantei(RString Fuantei) {
-        this.Fuantei = Fuantei;
-    }
-
-    /*
      * getNaiyo
      * @return Naiyo
      */
@@ -332,132 +280,6 @@ public class ShobyoIkenDiv extends Panel implements IShobyoIkenDiv {
     @JsonProperty("Naiyo")
     public void setNaiyo(RString Naiyo) {
         this.Naiyo = Naiyo;
-    }
-
-    /*
-     * gethdnTxtSchemaName
-     * @return hdnTxtSchemaName
-     */
-    @JsonProperty("hdnTxtSchemaName")
-    public RString getHdnTxtSchemaName() {
-        return hdnTxtSchemaName;
-    }
-
-    /*
-     * sethdnTxtSchemaName
-     * @param hdnTxtSchemaName hdnTxtSchemaName
-     */
-    @JsonProperty("hdnTxtSchemaName")
-    public void setHdnTxtSchemaName(RString hdnTxtSchemaName) {
-        this.hdnTxtSchemaName = hdnTxtSchemaName;
-    }
-
-    /*
-     * gethdnTxtSubGyomuCode
-     * @return hdnTxtSubGyomuCode
-     */
-    @JsonProperty("hdnTxtSubGyomuCode")
-    public RString getHdnTxtSubGyomuCode() {
-        return hdnTxtSubGyomuCode;
-    }
-
-    /*
-     * sethdnTxtSubGyomuCode
-     * @param hdnTxtSubGyomuCode hdnTxtSubGyomuCode
-     */
-    @JsonProperty("hdnTxtSubGyomuCode")
-    public void setHdnTxtSubGyomuCode(RString hdnTxtSubGyomuCode) {
-        this.hdnTxtSubGyomuCode = hdnTxtSubGyomuCode;
-    }
-
-    /*
-     * gethdnTxtCodeShubetsu
-     * @return hdnTxtCodeShubetsu
-     */
-    @JsonProperty("hdnTxtCodeShubetsu")
-    public RString getHdnTxtCodeShubetsu() {
-        return hdnTxtCodeShubetsu;
-    }
-
-    /*
-     * sethdnTxtCodeShubetsu
-     * @param hdnTxtCodeShubetsu hdnTxtCodeShubetsu
-     */
-    @JsonProperty("hdnTxtCodeShubetsu")
-    public void setHdnTxtCodeShubetsu(RString hdnTxtCodeShubetsu) {
-        this.hdnTxtCodeShubetsu = hdnTxtCodeShubetsu;
-    }
-
-    /*
-     * gethdnTxtKijunYmd
-     * @return hdnTxtKijunYmd
-     */
-    @JsonProperty("hdnTxtKijunYmd")
-    public RString getHdnTxtKijunYmd() {
-        return hdnTxtKijunYmd;
-    }
-
-    /*
-     * sethdnTxtKijunYmd
-     * @param hdnTxtKijunYmd hdnTxtKijunYmd
-     */
-    @JsonProperty("hdnTxtKijunYmd")
-    public void setHdnTxtKijunYmd(RString hdnTxtKijunYmd) {
-        this.hdnTxtKijunYmd = hdnTxtKijunYmd;
-    }
-
-    /*
-     * gethdnTxtCodeMasterKind
-     * @return hdnTxtCodeMasterKind
-     */
-    @JsonProperty("hdnTxtCodeMasterKind")
-    public RString getHdnTxtCodeMasterKind() {
-        return hdnTxtCodeMasterKind;
-    }
-
-    /*
-     * sethdnTxtCodeMasterKind
-     * @param hdnTxtCodeMasterKind hdnTxtCodeMasterKind
-     */
-    @JsonProperty("hdnTxtCodeMasterKind")
-    public void setHdnTxtCodeMasterKind(RString hdnTxtCodeMasterKind) {
-        this.hdnTxtCodeMasterKind = hdnTxtCodeMasterKind;
-    }
-
-    /*
-     * gethdnTxtCode
-     * @return hdnTxtCode
-     */
-    @JsonProperty("hdnTxtCode")
-    public RString getHdnTxtCode() {
-        return hdnTxtCode;
-    }
-
-    /*
-     * sethdnTxtCode
-     * @param hdnTxtCode hdnTxtCode
-     */
-    @JsonProperty("hdnTxtCode")
-    public void setHdnTxtCode(RString hdnTxtCode) {
-        this.hdnTxtCode = hdnTxtCode;
-    }
-
-    /*
-     * gethdnTxtCodeMeisho
-     * @return hdnTxtCodeMeisho
-     */
-    @JsonProperty("hdnTxtCodeMeisho")
-    public RString getHdnTxtCodeMeisho() {
-        return hdnTxtCodeMeisho;
-    }
-
-    /*
-     * sethdnTxtCodeMeisho
-     * @param hdnTxtCodeMeisho hdnTxtCodeMeisho
-     */
-    @JsonProperty("hdnTxtCodeMeisho")
-    public void setHdnTxtCodeMeisho(RString hdnTxtCodeMeisho) {
-        this.hdnTxtCodeMeisho = hdnTxtCodeMeisho;
     }
 
     /*
@@ -504,13 +326,13 @@ public class ShobyoIkenDiv extends Panel implements IShobyoIkenDiv {
     }
 
     @JsonIgnore
-    public TextBox getTxtShindanName3() {
-        return this.getShindanName().getTxtShindanName3();
+    public TextBox getTxtShindanName() {
+        return this.getShindanName().getTxtShindanName();
     }
 
     @JsonIgnore
-    public void  setTxtShindanName3(TextBox txtShindanName3) {
-        this.getShindanName().setTxtShindanName3(txtShindanName3);
+    public void  setTxtShindanName(TextBox txtShindanName) {
+        this.getShindanName().setTxtShindanName(txtShindanName);
     }
 
     @JsonIgnore
@@ -534,12 +356,12 @@ public class ShobyoIkenDiv extends Panel implements IShobyoIkenDiv {
     }
 
     @JsonIgnore
-    public ButtonDialog getBtnAdd() {
+    public Button getBtnAdd() {
         return this.getShindanName().getGeninShikkanPanel().getBtnAdd();
     }
 
     @JsonIgnore
-    public void  setBtnAdd(ButtonDialog btnAdd) {
+    public void  setBtnAdd(Button btnAdd) {
         this.getShindanName().getGeninShikkanPanel().setBtnAdd(btnAdd);
     }
 
@@ -564,33 +386,8 @@ public class ShobyoIkenDiv extends Panel implements IShobyoIkenDiv {
     }
 
     @JsonIgnore
-    public TextBoxCode getTxtGeninShikkanCode() {
-        return this.getShindanName().getGeninShikkanPanel().getGeninShikkanShosai().getTxtGeninShikkanCode();
-    }
-
-    @JsonIgnore
-    public void  setTxtGeninShikkanCode(TextBoxCode txtGeninShikkanCode) {
-        this.getShindanName().getGeninShikkanPanel().getGeninShikkanShosai().setTxtGeninShikkanCode(txtGeninShikkanCode);
-    }
-
-    @JsonIgnore
-    public ButtonDialog getBtnToSearch() {
-        return this.getShindanName().getGeninShikkanPanel().getGeninShikkanShosai().getBtnToSearch();
-    }
-
-    @JsonIgnore
-    public void  setBtnToSearch(ButtonDialog btnToSearch) {
-        this.getShindanName().getGeninShikkanPanel().getGeninShikkanShosai().setBtnToSearch(btnToSearch);
-    }
-
-    @JsonIgnore
-    public TextBox getTxtMeisho() {
-        return this.getShindanName().getGeninShikkanPanel().getGeninShikkanShosai().getTxtMeisho();
-    }
-
-    @JsonIgnore
-    public void  setTxtMeisho(TextBox txtMeisho) {
-        this.getShindanName().getGeninShikkanPanel().getGeninShikkanShosai().setTxtMeisho(txtMeisho);
+    public ICodeInputDiv getCcdCodeInputGeninShikkan() {
+        return this.getShindanName().getGeninShikkanPanel().getGeninShikkanShosai().getCcdCodeInputGeninShikkan();
     }
 
     @JsonIgnore

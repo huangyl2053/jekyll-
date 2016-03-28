@@ -3,13 +3,14 @@ package jp.co.ndensan.reams.db.dbe.divcontroller.entity.commonchilddiv.ShobyoIke
  * このコードはツールによって生成されました。
  * このファイルへの変更は、以下の状況下で不正な動作の原因になったり、
  * コードが再生成されるときに損失したりします。
- * Mon Mar 28 11:40:48 CST 2016 
+ * Mon Mar 28 17:21:37 CST 2016 
  */
 
 
 
 import jp.co.ndensan.reams.uz.uza.ui.binding.DataRow;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxCode;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxNum;
 
 
@@ -23,7 +24,7 @@ public class dgGenyin_Row extends DataRow {
     // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-01-15_09-59-03">
 
     private RString jotai;
-    private RString geninShikkanCode;
+    private TextBoxCode geninShikkanCode;
     private RString meiSho;
     private Boolean isShutaruGeninShikkan;
     private TextBoxNum renBan;
@@ -31,7 +32,7 @@ public class dgGenyin_Row extends DataRow {
     public dgGenyin_Row() {
         super();
         this.jotai = RString.EMPTY;
-        this.geninShikkanCode = RString.EMPTY;
+        this.geninShikkanCode = new TextBoxCode();
         this.meiSho = RString.EMPTY;
         this.isShutaruGeninShikkan = false;
         this.renBan = new TextBoxNum();
@@ -42,7 +43,7 @@ public class dgGenyin_Row extends DataRow {
         this.setOriginalData("renBan", renBan);
     }
 
-    public dgGenyin_Row(RString jotai, RString geninShikkanCode, RString meiSho, Boolean isShutaruGeninShikkan, TextBoxNum renBan) {
+    public dgGenyin_Row(RString jotai, TextBoxCode geninShikkanCode, RString meiSho, Boolean isShutaruGeninShikkan, TextBoxNum renBan) {
         super();
         this.setOriginalData("jotai", jotai);
         this.setOriginalData("geninShikkanCode", geninShikkanCode);
@@ -60,7 +61,7 @@ public class dgGenyin_Row extends DataRow {
         return jotai;
     }
 
-    public RString getGeninShikkanCode() {
+    public TextBoxCode getGeninShikkanCode() {
         return geninShikkanCode;
     }
 
@@ -81,7 +82,7 @@ public class dgGenyin_Row extends DataRow {
         this.jotai = jotai;
     }
 
-    public void setGeninShikkanCode(RString geninShikkanCode) {
+    public void setGeninShikkanCode(TextBoxCode geninShikkanCode) {
         this.setOriginalData("geninShikkanCode", geninShikkanCode);
         this.geninShikkanCode = geninShikkanCode;
     }
