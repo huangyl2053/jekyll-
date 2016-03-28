@@ -20,6 +20,7 @@ import jp.co.ndensan.reams.ur.urd.service.core.seikatsuhogo.SeikatsuhogoManagerF
 import jp.co.ndensan.reams.uz.uza.biz.GyomuCode;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
+import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
@@ -93,8 +94,8 @@ public class GemmenShokaiHandler {
             div.getTxtRoreiJukyuKaishiYMD().setValue(老齢年金情報.get受給開始年月日());
             div.getTxtRoreiJukyuShuryoYMD().setValue(老齢年金情報.get受給終了年月日());
         }
-        Seikatsuhogo seikatsuhogo
-                = SeikatsuhogoManagerFactory.createInstance().get生活保護(識別コード, GyomuCode.DB介護保険, FlexibleDate.EMPTY);
+        Seikatsuhogo seikatsuhogo = SeikatsuhogoManagerFactory.createInstance().get生活保護(
+                識別コード, GyomuCode.DB介護保険, new FlexibleDate(RDate.getNowDate().toDateString()));
         if (seikatsuhogo != null) {
             div.getTxtSeihoJukyuKaishiYMD().setValue(seikatsuhogo.get受給開始日());
             div.getTxtSeihoJukyuHaishiYMD().setValue(seikatsuhogo.get受給廃止日());
