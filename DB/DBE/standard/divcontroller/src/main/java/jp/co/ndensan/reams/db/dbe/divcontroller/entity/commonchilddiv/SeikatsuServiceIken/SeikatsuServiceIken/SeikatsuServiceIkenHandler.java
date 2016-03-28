@@ -133,6 +133,7 @@ public class SeikatsuServiceIkenHandler {
         }
         if (!div.getChkJotaiSonota().getSelectedKeys().isEmpty()) {
             div.getTxtSonotaJotaiShosai().setReadOnly(false);
+            div.getTxtTaishoHoushin().setDisplayNone(false);
         }
         if (!div.getChkSonotaIryoService().getSelectedKeys().isEmpty()) {
             div.getTxtShonotaIryoServiceShosai().setReadOnly(false);
