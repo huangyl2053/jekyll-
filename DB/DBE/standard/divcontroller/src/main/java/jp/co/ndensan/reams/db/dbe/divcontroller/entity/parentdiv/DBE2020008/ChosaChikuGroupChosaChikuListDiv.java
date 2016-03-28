@@ -22,7 +22,7 @@ public class ChosaChikuGroupChosaChikuListDiv extends Panel {
      * private + コントロール名 + フィールド名 の文字列を作成
      */
     @JsonProperty("txtChosaChikuCode")
-    private TextBoxNum txtChosaChikuCode;
+    private TextBoxCode txtChosaChikuCode;
     @JsonProperty("txtChosaChikuName")
     private TextBox txtChosaChikuName;
     @JsonProperty("btnInsert")
@@ -41,7 +41,7 @@ public class ChosaChikuGroupChosaChikuListDiv extends Panel {
      * @return txtChosaChikuCode
      */
     @JsonProperty("txtChosaChikuCode")
-    public TextBoxNum getTxtChosaChikuCode() {
+    public TextBoxCode getTxtChosaChikuCode() {
         return txtChosaChikuCode;
     }
 
@@ -50,7 +50,7 @@ public class ChosaChikuGroupChosaChikuListDiv extends Panel {
      * @param txtChosaChikuCode txtChosaChikuCode
      */
     @JsonProperty("txtChosaChikuCode")
-    public void setTxtChosaChikuCode(TextBoxNum txtChosaChikuCode) {
+    public void setTxtChosaChikuCode(TextBoxCode txtChosaChikuCode) {
         this.txtChosaChikuCode = txtChosaChikuCode;
     }
 
