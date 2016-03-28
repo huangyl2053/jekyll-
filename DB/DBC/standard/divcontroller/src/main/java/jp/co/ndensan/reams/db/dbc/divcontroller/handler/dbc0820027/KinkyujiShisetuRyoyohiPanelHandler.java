@@ -16,7 +16,8 @@ import jp.co.ndensan.reams.db.dbc.business.core.syokanbaraihishikyushinseikette.
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0820027.KinkyujiShisetuRyoyohiPanelDiv;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0820027.dgdKinkyujiShiseturyoyo_Row;
 import jp.co.ndensan.reams.db.dbc.divcontroller.viewbox.ViewStateKeys;
-import jp.co.ndensan.reams.db.dbc.divcontroller.viewbox.dbc0810014.ServiceTeiKyoShomeishoParameter;
+import jp.co.ndensan.reams.db.dbc.divcontroller.viewbox.syokanbaraihishikyushinseikette.ShoukanharaihishinseimeisaikensakuParameter;
+import jp.co.ndensan.reams.db.dbc.divcontroller.viewbox.syokanbaraihishikyushinseikette.SyokanbaraihishikyushinseiketteParameter;
 import jp.co.ndensan.reams.db.dbc.service.core.syokanbaraihishikyushinseikette.SyokanbaraihiShikyuShinseiKetteManager;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
@@ -70,6 +71,7 @@ public final class KinkyujiShisetuRyoyohiPanelHandler {
     private static final int 位置１９ = 608;
     private static final int 位置２０ = 640;
     private static final int SIX = 6;
+    private static final int ZERO = 0;
 
     private KinkyujiShisetuRyoyohiPanelHandler(KinkyujiShisetuRyoyohiPanelDiv div) {
         this.div = div;
@@ -337,15 +339,15 @@ public final class KinkyujiShisetuRyoyohiPanelHandler {
      * 申請を保存する設定
      */
     public void 保存処理() {
-        ServiceTeiKyoShomeishoParameter keys = ViewStateHolder.get(ViewStateKeys.償還払費申請明細検索キー,
-                ServiceTeiKyoShomeishoParameter.class);
-        JigyoshaNo 事業者番号 = keys.getJigyoshaNo();
-        RString 様式番号 = ViewStateHolder.get(ViewStateKeys.様式番号, RString.class);
-        HihokenshaNo 被保険者番号 = keys.getHiHokenshaNo();
+        ShoukanharaihishinseimeisaikensakuParameter keys = ViewStateHolder.get(ViewStateKeys.償還払費申請明細検索キー,
+                ShoukanharaihishinseimeisaikensakuParameter.class);
+        JigyoshaNo 事業者番号 = keys.get事業者番号();
+        RString 様式番号 = keys.get様式番号();
+        HihokenshaNo 被保険者番号 = keys.get被保険者番号();
         FlexibleYearMonth 提供購入年月 = new FlexibleYearMonth(div.getPanelHead().getTxtServiceTeikyoYM().
                 getValue().toDateString().substring(0, SIX));
-        RString 整理番号 = keys.getSeiriNp();
-        RString 明細番号 = keys.getMeisaiNo();
+        RString 整理番号 = keys.get整理番号();
+        RString 明細番号 = keys.get明細番号();
         if (削除.equals(ViewStateHolder.get(ViewStateKeys.処理モード, RString.class))) {
             SyokanbaraihiShikyuShinseiKetteManager.createInstance().delShokanSyomeisyo(
                     被保険者番号, 提供購入年月, 整理番号, 事業者番号, 様式番号, 明細番号);
@@ -398,6 +400,7 @@ public final class KinkyujiShisetuRyoyohiPanelHandler {
 
     private ShokanKinkyuShisetsuRyoyo buildEntity(ShokanKinkyuShisetsuRyoyo entity, dgdKinkyujiShiseturyoyo_Row row) {
         ShokanKinkyuShisetsuRyoyoBuilder builder = entity.createBuilderForEdit();
+        builder = clear2(builder);
         builder.set緊急時傷病名１(row.getDefaultDataName1());
         builder.set緊急時傷病名２(row.getDefaultDataName2());
         builder.set緊急時傷病名３(row.getDefaultDataName3());
@@ -469,6 +472,20 @@ public final class KinkyujiShisetuRyoyohiPanelHandler {
             builder = build摘要(builder, length, 摘要);
         }
         return builder.build();
+    }
+
+    private ShokanKinkyuShisetsuRyoyoBuilder clear2(ShokanKinkyuShisetsuRyoyoBuilder builder) {
+        builder.set緊急時治療開始年月日１(null).set緊急時治療開始年月日２(null).set緊急時治療開始年月日３(null).
+                set往診日数(ZERO).set通院日数(ZERO).set緊急時治療管理単位数(ZERO).set緊急時治療管理日数(ZERO).
+                set緊急時治療管理小計(ZERO).setリハビリテーション単位数(ZERO).set処置単位数(ZERO).
+                set手術単位数(ZERO).set麻酔単位数(ZERO).set放射線治療単位数(ZERO).
+                set緊急時施設療養費合計単位数(ZERO).set摘要１(null).set摘要２(null).set摘要３(null).
+                set摘要４(null).set摘要５(null).set摘要６(null).set摘要７(null).set摘要８(null).
+                set摘要８(null).set摘要９(null).set摘要１０(null).set摘要１１(null).
+                set摘要１２(null).set摘要１３(null).set摘要１４(null).set摘要１５(null).
+                set摘要１６(null).set摘要１７(null).set摘要１８(null).set摘要１９(null).
+                set摘要２０(null).build();
+        return builder;
     }
 
     private ShokanKinkyuShisetsuRyoyoBuilder build摘要(ShokanKinkyuShisetsuRyoyoBuilder builder,
@@ -768,14 +785,14 @@ public final class KinkyujiShisetuRyoyohiPanelHandler {
      */
     public void getボタンを制御(ShikibetsuNoKanri entity) {
 
-        ServiceTeiKyoShomeishoParameter parameter = ViewStateHolder.get(
-                ViewStateKeys.償還払費申請明細検索キー, ServiceTeiKyoShomeishoParameter.class);
-        FlexibleYearMonth サービス年月 = parameter.getServiceTeikyoYM();
-        HihokenshaNo 被保険者番号 = parameter.getHiHokenshaNo();
-        RString 整理番号 = parameter.getSeiriNp();
-        JigyoshaNo 事業者番号 = parameter.getJigyoshaNo();
-        RString 明細番号 = parameter.getMeisaiNo();
-        RString 様式番号 = ViewStateHolder.get(ViewStateKeys.様式番号, RString.class);
+        ShoukanharaihishinseimeisaikensakuParameter parameter = ViewStateHolder.get(
+                ViewStateKeys.償還払費申請明細検索キー, ShoukanharaihishinseimeisaikensakuParameter.class);
+        FlexibleYearMonth サービス年月 = parameter.getサービス年月();
+        HihokenshaNo 被保険者番号 = parameter.get被保険者番号();
+        RString 整理番号 = parameter.get整理番号();
+        JigyoshaNo 事業者番号 = parameter.get事業者番号();
+        RString 明細番号 = parameter.get明細番号();
+        RString 様式番号 = parameter.get様式番号();
 
         if (設定不可.equals(entity.get基本設定区分())) {
             div.getPanelHead().getBtnKihonInfo().setDisabled(true);
@@ -947,9 +964,9 @@ public final class KinkyujiShisetuRyoyohiPanelHandler {
      * ViewStateに以下の情報を設定する
      */
     public void putViewState() {
-        ViewStateHolder.put(ViewStateKeys.処理モード, "");
+        ViewStateHolder.put(ViewStateKeys.処理モード, ViewStateHolder.get(ViewStateKeys.処理モード, RString.class));
         ViewStateHolder.put(ViewStateKeys.申請日, div.getPanelHead().getTxtShinseiYMD().getValue());
-        ServiceTeiKyoShomeishoParameter paramter = new ServiceTeiKyoShomeishoParameter(
+        SyokanbaraihishikyushinseiketteParameter paramter = new SyokanbaraihishikyushinseiketteParameter(
                 ViewStateHolder.get(ViewStateKeys.被保険者番号, HihokenshaNo.class),
                 new FlexibleYearMonth(div.getPanelHead().getTxtServiceTeikyoYM().getValue().
                         toDateString().substring(0, SIX)),
@@ -958,6 +975,6 @@ public final class KinkyujiShisetuRyoyohiPanelHandler {
                 div.getPanelHead().getTxtShomeisho().getValue(),
                 div.getPanelHead().getTxtMeisaiBango().getValue(),
                 null);
-        ViewStateHolder.put(ViewStateKeys.償還払費申請明細検索キー, paramter);
+        ViewStateHolder.put(ViewStateKeys.償還払費申請検索キー, paramter);
     }
 }
