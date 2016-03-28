@@ -104,11 +104,5 @@
             <if test="uses保険者コード">
                 AND dbT5101."shoKisaiHokenshaNo" = #{保険者コード}
             </if>
-            <if test="uses主治医医療機関コード">
-                AND dbT5101."shujiiIryokikanCode" = #{主治医医療機関コード}
-            </if>
-            <if test="uses主治医コード">
-                AND dbT5101."shujiiCode" = #{主治医コード}
-            </if>
     </select>
 </mapper>
