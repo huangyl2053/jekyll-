@@ -3,16 +3,16 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dba.divcontroller.entity.commonchilddiv.RoreiFukushiNenkinShokai;
+package jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.RoreiFukushiNenkinShokai;
 
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
-import jp.co.ndensan.reams.db.dba.business.core.hihokensha.roreifukushinenkinjukyusha.RoreiFukushiNenkinJukyusha;
-import jp.co.ndensan.reams.db.dba.definition.core.roreifukushinenkinjoho.RoreiFukushiNenkinJohoMapperParameter;
-import jp.co.ndensan.reams.db.dba.service.core.hihokensha.roreifukushinenkinjukyusha.RoreiFukushiNenkinJukyushaManager;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
+import jp.co.ndensan.reams.db.dbz.business.core.hihokensha.roreifukushinenkinjukyusha.RoreiFukushiNenkinJukyusha;
+import jp.co.ndensan.reams.db.dbz.definition.core.roreifukushinenkinjoho.RoreiFukushiNenkinJohoMapperParameter;
+import jp.co.ndensan.reams.db.dbz.service.core.hihokensha.roreifukushinenkinjukyusha.RoreiFukushiNenkinJukyushaManager;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.lang.ApplicationException;
@@ -58,10 +58,10 @@ public class RoreiFukushiNenkinShokaiHandler {
         Collections.sort(rowList, new ComparatorByStartDateSort());
         div.getDatagridRireki().setDataSource(rowList);
         div.getPanelRireki().setDisplayNone(false);
-        div.getTxtStartDate().setReadOnly(true);
-        div.getTxtEndDate().setReadOnly(true);
-        div.getBtnCancel().setDisabled(true);
-        div.getBtnSave().setDisabled(true);
+        div.getPanelInput().getTxtStartDate().setReadOnly(true);
+        div.getPanelInput().getTxtEndDate().setReadOnly(true);
+        div.getPanelInput().getBtnCancel().setDisabled(true);
+        div.getPanelInput().getBtnSave().setDisabled(true);
     }
 
     /**
@@ -69,13 +69,13 @@ public class RoreiFukushiNenkinShokaiHandler {
      *
      */
     public void set老齢福祉年金追加ボタン画面表示() {
-        div.getBtnCancel().setDisabled(false);
-        div.getBtnSave().setDisabled(false);
-        div.getTxtStartDate().setReadOnly(false);
-        div.getTxtEndDate().setReadOnly(false);
+        div.getPanelInput().getBtnCancel().setDisabled(false);
+        div.getPanelInput().getBtnSave().setDisabled(false);
+        div.getPanelInput().getTxtStartDate().setReadOnly(false);
+        div.getPanelInput().getTxtEndDate().setReadOnly(false);
         div.getPanelInput().setDisplayNone(false);
-        div.getTxtStartDate().clearValue();
-        div.getTxtEndDate().clearValue();
+        div.getPanelInput().getTxtStartDate().clearValue();
+        div.getPanelInput().getTxtEndDate().clearValue();
         div.getPanelRireki().setDisabled(true);
     }
 
@@ -84,14 +84,13 @@ public class RoreiFukushiNenkinShokaiHandler {
      *
      */
     public void set老齢福祉年金修正ボタン画面表示() {
-        div.getTxtEndDate().setReadOnly(false);
-        div.getTxtStartDate().setReadOnly(true);
-        div.getTxtStartDate().setValue(div.getDatagridRireki().getClickedItem().getStartDate().getValue());
-        //if (!div.getDatagridRireki().getClickedItem().getEndDate().getValue().equals((""))) {
-        div.getTxtEndDate().setValue(div.getDatagridRireki().getClickedItem().getEndDate().getValue());
+        div.getPanelInput().getTxtEndDate().setReadOnly(false);
+        div.getPanelInput().getTxtStartDate().setReadOnly(true);
+        div.getPanelInput().getTxtStartDate().setValue(div.getDatagridRireki().getClickedItem().getStartDate().getValue());
+        div.getPanelInput().getTxtEndDate().setValue(div.getDatagridRireki().getClickedItem().getEndDate().getValue());
         div.getPanelInput().setDisplayNone(false);
-        div.getBtnCancel().setDisabled(false);
-        div.getBtnSave().setDisabled(false);
+        div.getPanelInput().getBtnCancel().setDisabled(false);
+        div.getPanelInput().getBtnSave().setDisabled(false);
         div.getPanelRireki().setDisabled(true);
     }
 
@@ -100,13 +99,13 @@ public class RoreiFukushiNenkinShokaiHandler {
      *
      */
     public void set老齢福祉年金削除ボタン画面表示() {
-        div.getTxtStartDate().setValue(div.getDatagridRireki().getClickedItem().getStartDate().getValue());
-        div.getTxtEndDate().setValue(div.getDatagridRireki().getClickedItem().getEndDate().getValue());
+        div.getPanelInput().getTxtStartDate().setValue(div.getDatagridRireki().getClickedItem().getStartDate().getValue());
+        div.getPanelInput().getTxtEndDate().setValue(div.getDatagridRireki().getClickedItem().getEndDate().getValue());
         div.getPanelInput().setDisplayNone(false);
-        div.getTxtStartDate().setReadOnly(true);
-        div.getTxtEndDate().setReadOnly(true);
-        div.getBtnCancel().setDisabled(false);
-        div.getBtnSave().setDisabled(false);
+        div.getPanelInput().getTxtStartDate().setReadOnly(true);
+        div.getPanelInput().getTxtEndDate().setReadOnly(true);
+        div.getPanelInput().getBtnCancel().setDisabled(false);
+        div.getPanelInput().getBtnSave().setDisabled(false);
         div.getPanelRireki().setDisabled(true);
     }
 
@@ -117,8 +116,8 @@ public class RoreiFukushiNenkinShokaiHandler {
     public void set老齢福祉年金取消ボタン画面表示() {
         div.getPanelRireki().setDisabled(false);
         div.getPanelInput().setDisplayNone(true);
-        div.getTxtStartDate().clearValue();
-        div.getTxtEndDate().clearValue();
+        div.getPanelInput().getTxtStartDate().clearValue();
+        div.getPanelInput().getTxtEndDate().clearValue();
     }
 
     /**
@@ -128,8 +127,8 @@ public class RoreiFukushiNenkinShokaiHandler {
     public void set確定ボタン画面表示() {
         div.getPanelRireki().setDisabled(false);
         div.getPanelInput().setDisplayNone(true);
-        div.getTxtStartDate().clearValue();
-        div.getTxtEndDate().clearValue();
+        div.getPanelInput().getTxtStartDate().clearValue();
+        div.getPanelInput().getTxtEndDate().clearValue();
     }
 
     /**
@@ -166,7 +165,7 @@ public class RoreiFukushiNenkinShokaiHandler {
     public RoreiFukushiNenkinJukyusha set年金確定ボタン押下の追加(
             RoreiFukushiNenkinJukyusha roreifukushinenkinjukyusha) {
         return roreifukushinenkinjukyusha.createBuilderForEdit()
-                .set被保険者番号(new HihokenshaNo(div.getHihokenshaNo().toString()))
+                .set被保険者番号(new HihokenshaNo(div.getHihokenshaNo()))
                 .set受給廃止年月日(new FlexibleDate(div.getPanelInput().getTxtEndDate().getValue().toDateString()))
                 .build();
     }
@@ -181,8 +180,8 @@ public class RoreiFukushiNenkinShokaiHandler {
         if (!状態_追加.equals(eventJotai)) {
             row = div.getDatagridRireki().getActiveRow();
         }
-        row.getStartDate().setValue(div.getTxtStartDate().getValue());
-        row.getEndDate().setValue(div.getTxtEndDate().getValue());
+        row.getStartDate().setValue(div.getPanelInput().getTxtStartDate().getValue());
+        row.getEndDate().setValue(div.getPanelInput().getTxtEndDate().getValue());
         int index = div.getDatagridRireki().getClickedRowId();
         if (状態_追加.equals(eventJotai)) {
             row.setJotai(eventJotai);
@@ -201,12 +200,12 @@ public class RoreiFukushiNenkinShokaiHandler {
     public void set受給開始日の重複チェック() {
         RoreiFukushiNenkinJohoMapperParameter addCheck = RoreiFukushiNenkinJohoMapperParameter.createRoreiFukushiParam(
                 new ShikibetsuCode(div.getShikibetsuCode()),
-                new FlexibleDate(div.getTxtStartDate().getValue().toDateString()),
+                new FlexibleDate(div.getPanelInput().getTxtStartDate().getValue().toDateString()),
                 HihokenshaNo.EMPTY,
                 FlexibleDate.EMPTY);
         if (RoreiFukushiNenkinJukyushaManager.createInstance().checkSameJukyuKaishibi(addCheck) > 0) {
             throw new ApplicationException(UrErrorMessages.既に登録済.getMessage().replace(
-                    div.getTxtStartDate().getValue().toString()));
+                    div.getPanelInput().getTxtStartDate().getValue().toString()));
         }
     }
 
@@ -223,11 +222,11 @@ public class RoreiFukushiNenkinShokaiHandler {
         if (状態_追加.equals(eventJotai)) {
             list.add(new datagridRireki_Row(
                     RString.EMPTY,
-                    div.getTxtStartDate(),
-                    div.getTxtEndDate()));
+                    div.getPanelInput().getTxtStartDate(),
+                    div.getPanelInput().getTxtEndDate()));
         } else {
-            clickRow.getStartDate().setValue(div.getTxtStartDate().getValue());
-            clickRow.getEndDate().setValue(div.getTxtEndDate().getValue());
+            clickRow.getStartDate().setValue(div.getPanelInput().getTxtStartDate().getValue());
+            clickRow.getEndDate().setValue(div.getPanelInput().getTxtEndDate().getValue());
             list.set(clickID, clickRow);
         }
         list = getSeiReKi(list);
