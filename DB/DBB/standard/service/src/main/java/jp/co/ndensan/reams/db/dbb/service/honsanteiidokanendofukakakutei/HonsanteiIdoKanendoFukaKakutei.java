@@ -337,7 +337,6 @@ public class HonsanteiIdoKanendoFukaKakutei {
                 choteiKyotsuDac.update(choteiKyotsuEntity);
             }
         }
-        // TODO QA310 調定年度
         RString choteiNendo = DbBusinessConifg.get(ConfigNameDBB.日付関連_調定年度, RDate.getNowDate(),
                 SubGyomuCode.DBB介護賦課);
         save処理日付管理(new FlexibleYear(choteiNendo.toString()));
