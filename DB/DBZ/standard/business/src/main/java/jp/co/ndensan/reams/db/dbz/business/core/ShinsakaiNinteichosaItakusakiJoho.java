@@ -47,7 +47,6 @@ public class ShinsakaiNinteichosaItakusakiJoho implements Serializable, INinteic
 //    public DbT5910NinteichosaItakusakiJohoEntity getEntity() {
 //        return entity;
 //    }
-
     /**
      * 市町村コードを返します。
      *
@@ -67,7 +66,6 @@ public class ShinsakaiNinteichosaItakusakiJoho implements Serializable, INinteic
 //    public ChosaItakusakiCode get認定調査委託先コード() {
 //        return entity.getNinteichosaItakusakiCode();
 //    }
-
     /**
      * 事業者番号を返します。
      *
@@ -366,7 +364,7 @@ public class ShinsakaiNinteichosaItakusakiJoho implements Serializable, INinteic
         @Override
         public Builder setNinteichosaItakusakiCode(ChosaItakusakiCode ninteichosaItakusakiCode) {
             Objects.requireNonNull(ninteichosaItakusakiCode);
-           // this.entity.setNinteichosaItakusakiCode(ninteichosaItakusakiCode);
+            // this.entity.setNinteichosaItakusakiCode(ninteichosaItakusakiCode);
             return this;
         }
 
@@ -503,13 +501,13 @@ public class ShinsakaiNinteichosaItakusakiJoho implements Serializable, INinteic
         /**
          * TokuteiChosainDisplayFlagを設定します。
          *
-         * @param TokuteiChosainDisplayFlag 特定調査員表示フラグ
+         * @param tokuteiChosainDisplayFlag 特定調査員表示フラグ
          * @return builder
          */
         @Override
-        public Builder setTokuteiChosainDisplayFlag(Boolean TokuteiChosainDisplayFlag) {
-            Objects.requireNonNull(TokuteiChosainDisplayFlag);
-            this.entity.setTokuteiChosainDisplayFlag(TokuteiChosainDisplayFlag);
+        public Builder setTokuteiChosainDisplayFlag(Boolean tokuteiChosainDisplayFlag) {
+            Objects.requireNonNull(tokuteiChosainDisplayFlag);
+            this.entity.setTokuteiChosainDisplayFlag(tokuteiChosainDisplayFlag);
             return this;
         }
 
@@ -587,8 +585,7 @@ public class ShinsakaiNinteichosaItakusakiJoho implements Serializable, INinteic
     }
 
     /**
-     * このオブジェクトのシリアライズ形式を提供します。
-     * 戻り値である{@link Serializable}のインスタンスは、デシリアライズ時に、このオブジェクトを生成します。
+     * このオブジェクトのシリアライズ形式を提供します。 戻り値である{@link Serializable}のインスタンスは、デシリアライズ時に、このオブジェクトを生成します。
      *
      * @return このオブジェクトのシリアライズ形式
      */

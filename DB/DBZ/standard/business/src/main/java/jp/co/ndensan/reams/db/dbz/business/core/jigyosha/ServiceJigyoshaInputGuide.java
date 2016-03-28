@@ -6,8 +6,8 @@
 package jp.co.ndensan.reams.db.dbz.business.core.jigyosha;
 
 import java.io.Serializable;
-import jp.co.ndensan.reams.db.dbz.entity.db.relate.ServiceJigyoshaInputGuideRelateEntity;
 import jp.co.ndensan.reams.db.dbz.definition.core.valueobject.kaigojigyoshano.KaigoJigyoshaNo;
+import jp.co.ndensan.reams.db.dbz.entity.db.relate.ServiceJigyoshaInputGuideRelateEntity;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaKanaMeisho;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaMeisho;
 import jp.co.ndensan.reams.uz.uza.biz.TelNo;
@@ -19,7 +19,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
  */
 public class ServiceJigyoshaInputGuide implements Serializable {
 
-    private final ServiceJigyoshaInputGuideRelateEntity entity;
+    private ServiceJigyoshaInputGuideRelateEntity entity;
 
     /**
      * コンストラクタです.

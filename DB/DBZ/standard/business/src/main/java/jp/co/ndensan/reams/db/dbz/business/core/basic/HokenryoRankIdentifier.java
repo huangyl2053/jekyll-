@@ -14,6 +14,7 @@ import lombok.Value;
  * 保険料ランクの識別子です。
  */
 @Value
+@SuppressWarnings("PMD.UnusedPrivateField")
 public class HokenryoRankIdentifier implements Serializable {
 
     private final FlexibleYear 賦課年度;

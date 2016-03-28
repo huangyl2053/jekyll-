@@ -8,8 +8,7 @@ package jp.co.ndensan.reams.db.dbz.business.hokensha;
 import java.io.Serializable;
 
 /**
- * 広域構成市町村のモデルです。{@link KoseiShichosonMasterModel 構成市町村マスタ}に対する処理の拡張に対応するためのラッパーです。
- * 構成市町村マスタに関連するテーブルを同時更新する必要が生じた時は、このクラスを使用して、RelateModelを作成してください。
+ * 広域構成市町村のモデルです。{@link KoseiShichosonMasterModel 構成市町村マスタ}に対する処理の拡張に対応するためのラッパーです。 構成市町村マスタに関連するテーブルを同時更新する必要が生じた時は、このクラスを使用して、RelateModelを作成してください。
  *
  * @author N3327 三浦 凌
  */

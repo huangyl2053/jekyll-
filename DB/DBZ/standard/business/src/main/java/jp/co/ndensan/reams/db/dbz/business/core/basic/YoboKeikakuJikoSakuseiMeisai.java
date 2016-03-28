@@ -7,13 +7,13 @@ package jp.co.ndensan.reams.db.dbz.business.core.basic;
 
 import java.io.Serializable;
 import static java.util.Objects.requireNonNull;
-import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT3011YoboKeikakuJikoSakuseiMeisaiEntity;
-import jp.co.ndensan.reams.db.dbz.business.core.uzclasses.ModelBase;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HokenKyufuRitsu;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ServiceKomokuCode;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ServiceShuruiCode;
+import jp.co.ndensan.reams.db.dbz.business.core.uzclasses.ModelBase;
+import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT3011YoboKeikakuJikoSakuseiMeisaiEntity;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
@@ -25,7 +25,8 @@ import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
  * 予防給付計画自己作成明細を管理するクラスです。
  */
 public class YoboKeikakuJikoSakuseiMeisai extends
-        ModelBase<YoboKeikakuJikoSakuseiMeisaiIdentifier, DbT3011YoboKeikakuJikoSakuseiMeisaiEntity, YoboKeikakuJikoSakuseiMeisai> implements Serializable {
+        ModelBase<YoboKeikakuJikoSakuseiMeisaiIdentifier, DbT3011YoboKeikakuJikoSakuseiMeisaiEntity, YoboKeikakuJikoSakuseiMeisai>
+        implements Serializable {
 
     private final DbT3011YoboKeikakuJikoSakuseiMeisaiEntity entity;
     private final YoboKeikakuJikoSakuseiMeisaiIdentifier id;
@@ -291,8 +292,7 @@ public class YoboKeikakuJikoSakuseiMeisai extends
     }
 
     /**
-     * 保持する予防給付計画自己作成明細を削除対象とします。<br/>
-     * {@link DbT3011YoboKeikakuJikoSakuseiMeisaiEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば削除状態にします。
+     * 保持する予防給付計画自己作成明細を削除対象とします。<br/> {@link DbT3011YoboKeikakuJikoSakuseiMeisaiEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば削除状態にします。
      *
      * @return 削除対象処理実施後の{@link YoboKeikakuJikoSakuseiMeisai}
      */

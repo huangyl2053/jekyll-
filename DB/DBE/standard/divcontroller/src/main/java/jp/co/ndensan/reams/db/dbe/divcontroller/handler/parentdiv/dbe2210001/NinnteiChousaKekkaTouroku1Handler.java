@@ -764,7 +764,7 @@ public class NinnteiChousaKekkaTouroku1Handler {
     private void 在宅_住宅改修radの設定(ShinseishoKanriNo temp_申請書管理番号, Integer temp_認定調査履歴番号) {
         NinteichosahyoServiceJokyoFlagManager manager = new NinteichosahyoServiceJokyoFlagManager();
         NinteichosahyoServiceJokyoFlag joho = manager.get認定調査票_概況調査_サービスの状況フラグ(temp_申請書管理番号, temp_認定調査履歴番号, 住宅改修_連番);
-        boolean 住宅改修 = joho.getサービスの状況フラグ();
+        boolean 住宅改修 = joho.isサービスの状況フラグ();
         RString 住宅改修rad = 住宅改修_無;
         if (住宅改修) {
             住宅改修rad = 住宅改修_有;

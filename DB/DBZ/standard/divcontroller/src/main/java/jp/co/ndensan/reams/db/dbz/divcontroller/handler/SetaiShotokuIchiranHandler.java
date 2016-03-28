@@ -341,7 +341,7 @@ public class SetaiShotokuIchiranHandler {
             row.setTxtTorokuGyomu(世帯員所得.get登録業務() != null && !世帯員所得.get登録業務().isEmpty()
                     ? TorokuGyomu.toValue(世帯員所得.get登録業務()).toRString().concat("<br>")
                     .concat(世帯員所得.get更正日() != null ? 世帯員所得.get更正日().wareki().separator(Separator.PERIOD).toDateString().toString() : RString.EMPTY.toString()) : RString.EMPTY);
-            row.setTxtDougetsuService(世帯員所得.get同月サービス有無() ? new RString("○") : RString.EMPTY);
+            row.setTxtDougetsuService(世帯員所得.is同月サービス有無() ? new RString("○") : RString.EMPTY);
             row.setTxtJukiIdoYMD(世帯員所得.get住民情報_異動日() != null ? new RString(世帯員所得.get住民情報_異動日().wareki().separator(Separator.PERIOD).toDateString().toString()) : RString.EMPTY);
             row.setTxtJuteiYMD(世帯員所得.get住民情報_住定日() != null ? new RString(世帯員所得.get住民情報_住定日().wareki().separator(Separator.PERIOD).toDateString().toString()) : RString.EMPTY);
             row.setTxtJukiIdoJiyu(世帯員所得.get住民情報_異動事由() != null ? 世帯員所得.get住民情報_異動事由() : RString.EMPTY);

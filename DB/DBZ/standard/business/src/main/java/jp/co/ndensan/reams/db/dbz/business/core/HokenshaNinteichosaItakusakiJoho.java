@@ -67,7 +67,6 @@ public class HokenshaNinteichosaItakusakiJoho implements Serializable, INinteich
 //    public ChosaItakusakiCode get認定調査委託先コード() {
 //        return entity.getNinteichosaItakusakiCode();
 //    }
-
     /**
      * 事業者番号を返します。
      *
@@ -503,13 +502,13 @@ public class HokenshaNinteichosaItakusakiJoho implements Serializable, INinteich
         /**
          * TokuteiChosainDisplayFlagを設定します。
          *
-         * @param TokuteiChosainDisplayFlag 特定調査員表示フラグ
+         * @param tokuteiChosainDisplayFlag 特定調査員表示フラグ
          * @return builder
          */
         @Override
-        public Builder setTokuteiChosainDisplayFlag(Boolean TokuteiChosainDisplayFlag) {
-            Objects.requireNonNull(TokuteiChosainDisplayFlag);
-            this.entity.setTokuteiChosainDisplayFlag(TokuteiChosainDisplayFlag);
+        public Builder setTokuteiChosainDisplayFlag(Boolean tokuteiChosainDisplayFlag) {
+            Objects.requireNonNull(tokuteiChosainDisplayFlag);
+            this.entity.setTokuteiChosainDisplayFlag(tokuteiChosainDisplayFlag);
             return this;
         }
 
@@ -587,8 +586,7 @@ public class HokenshaNinteichosaItakusakiJoho implements Serializable, INinteich
     }
 
     /**
-     * このオブジェクトのシリアライズ形式を提供します。
-     * 戻り値である{@link Serializable}のインスタンスは、デシリアライズ時に、このオブジェクトを生成します。
+     * このオブジェクトのシリアライズ形式を提供します。 戻り値である{@link Serializable}のインスタンスは、デシリアライズ時に、このオブジェクトを生成します。
      *
      * @return このオブジェクトのシリアライズ形式
      */

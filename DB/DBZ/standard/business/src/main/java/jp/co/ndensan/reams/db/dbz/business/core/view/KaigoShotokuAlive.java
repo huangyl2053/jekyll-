@@ -21,7 +21,9 @@ import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 /**
  * 介護所得Aliveを管理するクラスです。
  */
-public class KaigoShotokuAlive extends ParentModelBase<KaigoShotokuAliveIdentifier, DbV2502KaigoShotokuEntity, KaigoShotokuAlive> implements Serializable {
+public class KaigoShotokuAlive
+        extends ParentModelBase<KaigoShotokuAliveIdentifier, DbV2502KaigoShotokuEntity, KaigoShotokuAlive>
+        implements Serializable {
 
     private final DbV2502KaigoShotokuEntity entity;
     private final KaigoShotokuAliveIdentifier id;
@@ -177,8 +179,7 @@ public class KaigoShotokuAlive extends ParentModelBase<KaigoShotokuAliveIdentifi
     }
 
     /**
-     * 資格検索Aliveのみを変更対象とします。<br/>
-     * {@link DbV2502KaigoShotokuEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば変更状態にします。
+     * 資格検索Aliveのみを変更対象とします。<br/> {@link DbV2502KaigoShotokuEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば変更状態にします。
      *
      * @return 変更対象処理実施後の{@link ShikakuSearchAlive}
      */
@@ -192,8 +193,7 @@ public class KaigoShotokuAlive extends ParentModelBase<KaigoShotokuAliveIdentifi
     }
 
     /**
-     * 保持する資格検索Aliveを削除対象とします。<br/>
-     * {@link DbV2502KaigoShotokuEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば削除状態にします。
+     * 保持する資格検索Aliveを削除対象とします。<br/> {@link DbV2502KaigoShotokuEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば削除状態にします。
      *
      * @return 削除対象処理実施後の{@link ShikakuSearchAlive}
      */
@@ -226,7 +226,7 @@ public class KaigoShotokuAlive extends ParentModelBase<KaigoShotokuAliveIdentifi
 
     private static final class _SerializationProxy implements Serializable {
 
-        private static final long serialVersionUID = 1L;// TODO serialVersionUIDを生成してください
+        private static final long serialVersionUID = 1L; // TODO serialVersionUIDを生成してください
         private final DbV2502KaigoShotokuEntity entity;
         private final KaigoShotokuAliveIdentifier id;
 

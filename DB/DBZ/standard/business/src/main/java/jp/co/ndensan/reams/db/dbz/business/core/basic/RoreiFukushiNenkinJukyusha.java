@@ -7,8 +7,8 @@ package jp.co.ndensan.reams.db.dbz.business.core.basic;
 
 import java.io.Serializable;
 import static java.util.Objects.requireNonNull;
-import jp.co.ndensan.reams.db.dbz.business.core.uzclasses.ParentModelBase;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
+import jp.co.ndensan.reams.db.dbz.business.core.uzclasses.ParentModelBase;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7006RoreiFukushiNenkinJukyushaEntity;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
@@ -20,7 +20,8 @@ import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
  * 老齢福祉年金受給者を管理するクラスです。
  */
 public class RoreiFukushiNenkinJukyusha extends
-        ParentModelBase<RoreiFukushiNenkinJukyushaIdentifier, DbT7006RoreiFukushiNenkinJukyushaEntity, RoreiFukushiNenkinJukyusha> implements Serializable {
+        ParentModelBase<RoreiFukushiNenkinJukyushaIdentifier, DbT7006RoreiFukushiNenkinJukyushaEntity, RoreiFukushiNenkinJukyusha>
+        implements Serializable {
 
     private final DbT7006RoreiFukushiNenkinJukyushaEntity entity;
     private final RoreiFukushiNenkinJukyushaIdentifier id;
@@ -130,8 +131,7 @@ public class RoreiFukushiNenkinJukyusha extends
     }
 
     /**
-     * 老齢福祉年金受給者のみを変更対象とします。<br/>
-     * {@link DbT7006RoreiFukushiNenkinJukyushaEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば変更状態にします。
+     * 老齢福祉年金受給者のみを変更対象とします。<br/> {@link DbT7006RoreiFukushiNenkinJukyushaEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば変更状態にします。
      *
      * @return 変更対象処理実施後の{@link RoreiFukushiNenkinJukyusha}
      */
@@ -146,8 +146,7 @@ public class RoreiFukushiNenkinJukyusha extends
     }
 
     /**
-     * 保持する老齢福祉年金受給者を削除対象とします。<br/>
-     * {@link DbT7006RoreiFukushiNenkinJukyushaEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば削除状態にします。
+     * 保持する老齢福祉年金受給者を削除対象とします。<br/> {@link DbT7006RoreiFukushiNenkinJukyushaEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば削除状態にします。
      *
      * @return 削除対象処理実施後の{@link RoreiFukushiNenkinJukyusha}
      */

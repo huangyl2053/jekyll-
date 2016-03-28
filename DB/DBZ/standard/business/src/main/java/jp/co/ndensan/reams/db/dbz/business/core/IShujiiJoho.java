@@ -6,7 +6,6 @@
 package jp.co.ndensan.reams.db.dbz.business.core;
 
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.IShujiiJohoEntity;
-import jp.co.ndensan.reams.uz.uza.biz.AtenaJusho;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaKanaMeisho;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.TelNo;
