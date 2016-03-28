@@ -3,17 +3,13 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dba.divcontroller.controller.parentdiv.RoreiFukushiNenkinShokai;
+package jp.co.ndensan.reams.db.dbz.divcontroller.controller.parentdiv.RoreiFukushiNenkinShokai;
 
-import java.util.List;
-import jp.co.ndensan.reams.db.dba.business.core.hihokensha.roreifukushinenkinjukyusha.RoreiFukushiNenkinJukyusha;
-import jp.co.ndensan.reams.db.dba.business.core.hihokensha.roreifukushinenkinjukyusha.RoreiFukushiNenkinJukyushaIdentifier;
-import jp.co.ndensan.reams.db.dba.definition.core.roreifukushinenkinjoho.RoreiFukushiNenkinJohoMapperParameter;
-import jp.co.ndensan.reams.db.dba.definition.core.roreifukushinenkinjoho.ViewStateKeys;
-import jp.co.ndensan.reams.db.dba.divcontroller.entity.commonchilddiv.RoreiFukushiNenkinShokai.RoreiFukushiNenkinShokaiDiv;
-import jp.co.ndensan.reams.db.dba.divcontroller.entity.commonchilddiv.RoreiFukushiNenkinShokai.RoreiFukushiNenkinShokaiHandler;
-import jp.co.ndensan.reams.db.dba.service.core.hihokensha.roreifukushinenkinjukyusha.RoreiFukushiNenkinJukyushaManager;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
+import jp.co.ndensan.reams.db.dbz.business.core.hihokensha.roreifukushinenkinjukyusha.RoreiFukushiNenkinJukyusha;
+import jp.co.ndensan.reams.db.dbz.business.core.hihokensha.roreifukushinenkinjukyusha.RoreiFukushiNenkinJukyushaIdentifier;
+import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.RoreiFukushiNenkinShokai.RoreiFukushiNenkinShokaiDiv;
+import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.RoreiFukushiNenkinShokai.RoreiFukushiNenkinShokaiHandler;
+import jp.co.ndensan.reams.db.dbz.divcontroller.viewbox.ViewStateKeys;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrQuestionMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrWarningMessages;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
@@ -34,37 +30,6 @@ public class RoreiFukushiNenkinShokai {
     private static final RString 状態_追加 = new RString("追加");
     private static final RString 状態_更新 = new RString("更新");
     private static final RString 状態_削除 = new RString("削除");
-
-    private final RoreiFukushiNenkinJukyushaManager service;
-
-    /**
-     * コンストラクタです。
-     *
-     */
-    public RoreiFukushiNenkinShokai() {
-        service = RoreiFukushiNenkinJukyushaManager.createInstance();
-    }
-
-    /**
-     * 画面DIVを初期化します。
-     *
-     * @param div 老齢福祉年金Div
-     * @return ResponseData<RoreiFukushiNenkinShokaiDiv> 老齢福祉年金情報Div
-     */
-    public ResponseData<RoreiFukushiNenkinShokaiDiv> onLoad(RoreiFukushiNenkinShokaiDiv div) {
-        div.setHihokenshaNo(new RString("12"));
-        div.setShikibetsuCode(new RString("123456789000001"));
-        RoreiFukushiNenkinJohoMapperParameter param = RoreiFukushiNenkinJohoMapperParameter.createRoreiFukushiParam(
-                new ShikibetsuCode(div.getShikibetsuCode()),
-                FlexibleDate.EMPTY, HihokenshaNo.EMPTY,
-                FlexibleDate.EMPTY);
-        List<RoreiFukushiNenkinJukyusha> 一覧情報 = service.getRoreiFukushiNenkinJoho(param);
-        getHandler(div).set老齢福祉年金情報一覧表示グリッド(一覧情報);
-        Models<RoreiFukushiNenkinJukyushaIdentifier, RoreiFukushiNenkinJukyusha> roreiFukushiNenkinJukyusha
-                = Models.create(一覧情報);
-        ViewStateHolder.put(ViewStateKeys.老齢福祉年金情報検索結果一覧, roreiFukushiNenkinJukyusha);
-        return ResponseData.of(div).respond();
-    }
 
     /**
      * 「情報を追加する」ボタン処理です。
@@ -125,11 +90,11 @@ public class RoreiFukushiNenkinShokai {
         }
         if (new RString(UrQuestionMessages.処理実行の確認.getMessage().getCode()).equals(
                 ResponseHolder.getMessageCode()) && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
-            if (div.getTxtStartDate().getValue() != null
-                    && div.getTxtEndDate().getValue() != null
-                    && !div.getTxtStartDate().getValue().isBefore(div.getTxtEndDate().getValue())) {
+            if (div.getPanelInput().getTxtStartDate().getValue() != null
+                    && div.getPanelInput().getTxtEndDate().getValue() != null
+                    && !div.getPanelInput().getTxtStartDate().getValue().isBefore(div.getPanelInput().getTxtEndDate().getValue())) {
                 return ResponseData.of(div).addMessage(UrWarningMessages.日付の前後関係逆転以降.getMessage().replace(
-                        div.getTxtStartDate().getValue().toString(), div.getTxtEndDate().getValue().toString())).
+                        div.getPanelInput().getTxtStartDate().getValue().toString(), div.getPanelInput().getTxtEndDate().getValue().toString())).
                         respond();
             }
             this.onClick_はい(div);
@@ -144,11 +109,11 @@ public class RoreiFukushiNenkinShokai {
         }
         getHandler(div).set受給期間の重複チェック(イベント状態);
         Models<RoreiFukushiNenkinJukyushaIdentifier, RoreiFukushiNenkinJukyusha> models
-                = ViewStateHolder.get(ViewStateKeys.老齢福祉年金情報検索結果一覧, Models.class);
+                = ViewStateHolder.get(ViewStateKeys.老齢福祉年金情報_老齢福祉年金情報検索結果一覧, Models.class);
         if (状態_追加.equals(イベント状態)) {
             RoreiFukushiNenkinJukyusha busiRoreiFukushiNenkin = new RoreiFukushiNenkinJukyusha(
                     new ShikibetsuCode(div.getShikibetsuCode()),
-                    new FlexibleDate(div.getTxtStartDate().getValue().toDateString()));
+                    new FlexibleDate(div.getPanelInput().getTxtStartDate().getValue().toDateString()));
             busiRoreiFukushiNenkin = getHandler(div).set年金確定ボタン押下の追加(busiRoreiFukushiNenkin);
             models.add(busiRoreiFukushiNenkin);
         }
@@ -171,7 +136,7 @@ public class RoreiFukushiNenkinShokai {
             models.deleteOrRemove(key);
             models.add(roreifukushinenkinjukyusha);
         }
-        ViewStateHolder.put(ViewStateKeys.老齢福祉年金情報検索結果一覧, models);
+        ViewStateHolder.put(ViewStateKeys.老齢福祉年金情報_老齢福祉年金情報検索結果一覧, models);
         getHandler(div).setDatagridRirekichiran(イベント状態);
         getHandler(div).set確定ボタン画面表示();
         return ResponseData.of(div).respond();
