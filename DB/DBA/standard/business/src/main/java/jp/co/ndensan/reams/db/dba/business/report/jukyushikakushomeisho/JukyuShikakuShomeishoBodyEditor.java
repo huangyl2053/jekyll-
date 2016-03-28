@@ -24,9 +24,6 @@ public class JukyuShikakuShomeishoBodyEditor implements IJukyuShikakuShomeishoEd
     private static final int NOCOUNT_8 = 8;
     private static final int NOCOUNT_9 = 9;
     private static final int NOCOUNT_10 = 10;
-    private static final RString 元号_明治 = new RString("明治");
-    private static final RString 元号_大正 = new RString("大正");
-    private static final RString 元号_昭和 = new RString("昭和");
     private static final RString SHINSEICHU_1 = new RString("1");
     private static final RString SHINSEICHU_2 = new RString("2");
     private static final RString HOUSI = new RString("*");
@@ -99,6 +96,11 @@ public class JukyuShikakuShomeishoBodyEditor implements IJukyuShikakuShomeishoEd
         source.hihokenshaJusho = item.getSusakiYoteiJusho();
         source.tenshutsusakiYoteiJusho = item.getTenshutsusakiYoteiJusho();
         source.idoYoteiYMD = item.getIdoYoteiYMD();
+        bodyEdit2(source);
+        return source;
+    }
+    
+    private JukyuShikakuShomeishoReportSource bodyEdit2(JukyuShikakuShomeishoReportSource source) {
         if (item.getHokenshaNo() != null) {
             for (int i = 1; i <= item.getHokenshaNo().length(); i++) {
                 if (i == 1) {

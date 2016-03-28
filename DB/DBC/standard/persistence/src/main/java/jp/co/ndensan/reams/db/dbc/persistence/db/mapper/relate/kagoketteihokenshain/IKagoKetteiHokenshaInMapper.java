@@ -30,13 +30,6 @@ public interface IKagoKetteiHokenshaInMapper {
     void insert保険者分情報_明細(KagoKetteiHokenshaInMeisaiEntity entity);
 
     /**
-     * 過誤決定明細一時テーブルを取得する。
-     *
-     * @return 過誤決定明細一時テーブルEntity
-     */
-    List<KagoKetteiHokenshaInMeisaiEntity> get保険者分情報_明細();
-
-    /**
      * 過誤決定集計一時テーブルを作成する。
      */
     void create保険者分情報_集計();
@@ -49,25 +42,14 @@ public interface IKagoKetteiHokenshaInMapper {
     void insert保険者分情報_集計(KagoKetteiHokenshaInShukeiEntity entity);
 
     /**
-     * 過誤決定集計一時テーブルを取得する。
-     *
-     * @return 過誤決定集計一時テーブルEntity
-     */
-    List<KagoKetteiHokenshaInShukeiEntity> get保険者分情報_集計();
-
-    /**
      * 過誤決定明細の登録処理
-     *
-     * @param entity KagoKetteiHokenshaInMeisaiEntity
      */
-    void insert過誤決定明細(KagoKetteiHokenshaInMeisaiEntity entity);
+    void insert過誤決定明細();
 
     /**
      * 過誤決定集計の登録処理
-     *
-     * @param entity KagoKetteiHokenshaInShukeiEntity
      */
-    void insert過誤決定集計(KagoKetteiHokenshaInShukeiEntity entity);
+    void insert過誤決定集計();
 
     /**
      * 市町村コードを取得する。

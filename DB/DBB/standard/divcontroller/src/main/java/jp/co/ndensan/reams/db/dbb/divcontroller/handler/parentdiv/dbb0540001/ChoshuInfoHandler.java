@@ -118,6 +118,20 @@ public class ChoshuInfoHandler {
         row現在.getTxt2Gatsu().setValue(ChoshuHoho.toValue(serviceResult.getHoho().get徴収方法2月()).get名称());
         row現在.getTxt3Gatsu().setValue(ChoshuHoho.toValue(serviceResult.getHoho().get徴収方法3月()).get名称());
         row現在.getTxtYoku4Gatsu().setValue(ChoshuHoho.toValue(serviceResult.getHoho().get徴収方法翌4月()).get名称());
+        row現在.setCellBgColor(前の名_3.toString(), setBgColor(serviceResult.getChoshuHoho3gat()));
+        row現在.setCellBgColor(名_4.toString(), setBgColor(serviceResult.getHoho().get徴収方法4月()));
+        row現在.setCellBgColor(名_5.toString(), setBgColor(serviceResult.getHoho().get徴収方法5月()));
+        row現在.setCellBgColor(名_6.toString(), setBgColor(serviceResult.getHoho().get徴収方法6月()));
+        row現在.setCellBgColor(名_7.toString(), setBgColor(serviceResult.getHoho().get徴収方法7月()));
+        row現在.setCellBgColor(名_8.toString(), setBgColor(serviceResult.getHoho().get徴収方法8月()));
+        row現在.setCellBgColor(名_9.toString(), setBgColor(serviceResult.getHoho().get徴収方法9月()));
+        row現在.setCellBgColor(名_10.toString(), setBgColor(serviceResult.getHoho().get徴収方法10月()));
+        row現在.setCellBgColor(名_11.toString(), setBgColor(serviceResult.getHoho().get徴収方法11月()));
+        row現在.setCellBgColor(名_12.toString(), setBgColor(serviceResult.getHoho().get徴収方法12月()));
+        row現在.setCellBgColor(名_1.toString(), setBgColor(serviceResult.getHoho().get徴収方法1月()));
+        row現在.setCellBgColor(名_2.toString(), setBgColor(serviceResult.getHoho().get徴収方法2月()));
+        row現在.setCellBgColor(名_3.toString(), setBgColor(serviceResult.getHoho().get徴収方法3月()));
+        row現在.setCellBgColor(翌の名_4.toString(), setBgColor(serviceResult.getHoho().get徴収方法翌4月()));
         rows.add(row現在);
         row変更後.getTxtHenkouMaeAto().setValue(new RString("変更後"));
         row変更後.getTxtZen3Gatsu().setValue(ChoshuHoho.toValue(serviceResult.getChoshuHoho3gat()).get名称());
@@ -134,6 +148,20 @@ public class ChoshuInfoHandler {
         row変更後.getTxt2Gatsu().setValue(ChoshuHoho.toValue(serviceResult.getHoho().get徴収方法2月()).get名称());
         row変更後.getTxt3Gatsu().setValue(ChoshuHoho.toValue(serviceResult.getHoho().get徴収方法3月()).get名称());
         row変更後.getTxtYoku4Gatsu().setValue(ChoshuHoho.toValue(serviceResult.getHoho().get徴収方法翌4月()).get名称());
+        row変更後.setCellBgColor(前の名_3.toString(), setBgColor(serviceResult.getChoshuHoho3gat()));
+        row変更後.setCellBgColor(名_4.toString(), setBgColor(serviceResult.getHoho().get徴収方法4月()));
+        row変更後.setCellBgColor(名_5.toString(), setBgColor(serviceResult.getHoho().get徴収方法5月()));
+        row変更後.setCellBgColor(名_6.toString(), setBgColor(serviceResult.getHoho().get徴収方法6月()));
+        row変更後.setCellBgColor(名_7.toString(), setBgColor(serviceResult.getHoho().get徴収方法7月()));
+        row変更後.setCellBgColor(名_8.toString(), setBgColor(serviceResult.getHoho().get徴収方法8月()));
+        row変更後.setCellBgColor(名_9.toString(), setBgColor(serviceResult.getHoho().get徴収方法9月()));
+        row変更後.setCellBgColor(名_10.toString(), setBgColor(serviceResult.getHoho().get徴収方法10月()));
+        row変更後.setCellBgColor(名_11.toString(), setBgColor(serviceResult.getHoho().get徴収方法11月()));
+        row変更後.setCellBgColor(名_12.toString(), setBgColor(serviceResult.getHoho().get徴収方法12月()));
+        row変更後.setCellBgColor(名_1.toString(), setBgColor(serviceResult.getHoho().get徴収方法1月()));
+        row変更後.setCellBgColor(名_2.toString(), setBgColor(serviceResult.getHoho().get徴収方法2月()));
+        row変更後.setCellBgColor(名_3.toString(), setBgColor(serviceResult.getHoho().get徴収方法3月()));
+        row変更後.setCellBgColor(翌の名_4.toString(), setBgColor(serviceResult.getHoho().get徴収方法翌4月()));
         rows.add(row変更後);
         div.getChoshuHouhou().setDataSource(rows);
         set共通エリア();
@@ -163,8 +191,26 @@ public class ChoshuInfoHandler {
      */
     public void saveボタンを押下(FlexibleYear 賦課年度, HihokenshaNo 被保険者番号) {
 
-        implement入力チェック();
+        boolean flag = 入力チェック三月To九月();
+        if (flag) {
+            throw new ApplicationException(DbbErrorMessages.徴収方法設定不可.getMessage());
+        }
         dataSaveEdit(賦課年度, 被保険者番号);
+    }
+
+    private DataGridCellBgColor setBgColor(RString コード) {
+
+        DataGridCellBgColor bgColor = DataGridCellBgColor.bgColorLightGreen;
+        if (コード.equals(new RString("0"))) {
+            bgColor = DataGridCellBgColor.bgColorLightYellow;
+        } else if (コード.equals(new RString("3"))) {
+            bgColor = DataGridCellBgColor.bgColorLightRed;
+        } else if (コード.equals(new RString("2"))) {
+            bgColor = DataGridCellBgColor.bgColorLightGreen;
+        } else if (コード.equals(new RString("1"))) {
+            bgColor = DataGridCellBgColor.bgColorLightGreen;
+        }
+        return bgColor;
     }
 
     private RString createNenkinCode(RString 年金コード) {
@@ -234,107 +280,198 @@ public class ChoshuInfoHandler {
     private void edit空白以外を選択した場合() {
 
         RString gatsu = div.getDdlFucho().getSelectedValue();
-        set背景色も普通徴収の色に変更(gatsu);
+        set背景色も普通徴収の色に変更04To09(gatsu);
     }
 
-    private void set背景色も普通徴収の色に変更(RString gatsu) {
+    private void set背景色も普通徴収の色に変更04To09(RString gatsu) {
 
         if (new RString("04月").equals(gatsu)) {
-            div.getChoshuHouhou().getDataSource().get(1).getTxt4Gatsu().setValue(ChoshuHoho.toValue(new RString("3")).get名称());
-            div.getChoshuHouhou().getDataSource().get(1).getTxt5Gatsu().setValue(ChoshuHoho.toValue(new RString("3")).get名称());
-            div.getChoshuHouhou().getDataSource().get(1).getTxt6Gatsu().setValue(ChoshuHoho.toValue(new RString("3")).get名称());
-            div.getChoshuHouhou().getDataSource().get(1).getTxt7Gatsu().setValue(ChoshuHoho.toValue(new RString("3")).get名称());
-            div.getChoshuHouhou().getDataSource().get(1).getTxt8Gatsu().setValue(ChoshuHoho.toValue(new RString("3")).get名称());
-            div.getChoshuHouhou().getDataSource().get(1).getTxt9Gatsu().setValue(ChoshuHoho.toValue(new RString("3")).get名称());
-            div.getChoshuHouhou().getDataSource().get(1).setCellBgColor(名_4.toString(), DataGridCellBgColor.bgColorLightRed);
-            div.getChoshuHouhou().getDataSource().get(1).setCellBgColor(名_5.toString(), DataGridCellBgColor.bgColorLightRed);
-            div.getChoshuHouhou().getDataSource().get(1).setCellBgColor(名_6.toString(), DataGridCellBgColor.bgColorLightRed);
-            div.getChoshuHouhou().getDataSource().get(1).setCellBgColor(名_7.toString(), DataGridCellBgColor.bgColorLightRed);
-            div.getChoshuHouhou().getDataSource().get(1).setCellBgColor(名_8.toString(), DataGridCellBgColor.bgColorLightRed);
-            div.getChoshuHouhou().getDataSource().get(1).setCellBgColor(名_9.toString(), DataGridCellBgColor.bgColorLightRed);
+            div.getChoshuHouhou().getDataSource().get(1).getTxt4Gatsu().setValue(
+                    ChoshuHoho.toValue(new RString("3")).get名称());
+            div.getChoshuHouhou().getDataSource().get(1).getTxt5Gatsu().setValue(
+                    ChoshuHoho.toValue(new RString("3")).get名称());
+            div.getChoshuHouhou().getDataSource().get(1).getTxt6Gatsu().setValue(
+                    ChoshuHoho.toValue(new RString("3")).get名称());
+            div.getChoshuHouhou().getDataSource().get(1).getTxt7Gatsu().setValue(
+                    ChoshuHoho.toValue(new RString("3")).get名称());
+            div.getChoshuHouhou().getDataSource().get(1).getTxt8Gatsu().setValue(
+                    ChoshuHoho.toValue(new RString("3")).get名称());
+            div.getChoshuHouhou().getDataSource().get(1).getTxt9Gatsu().setValue(
+                    ChoshuHoho.toValue(new RString("3")).get名称());
+            div.getChoshuHouhou().getDataSource().get(1).setCellBgColor(
+                    名_4.toString(), DataGridCellBgColor.bgColorLightRed);
+            div.getChoshuHouhou().getDataSource().get(1).setCellBgColor(
+                    名_5.toString(), DataGridCellBgColor.bgColorLightRed);
+            div.getChoshuHouhou().getDataSource().get(1).setCellBgColor(
+                    名_6.toString(), DataGridCellBgColor.bgColorLightRed);
+            div.getChoshuHouhou().getDataSource().get(1).setCellBgColor(
+                    名_7.toString(), DataGridCellBgColor.bgColorLightRed);
+            div.getChoshuHouhou().getDataSource().get(1).setCellBgColor(
+                    名_8.toString(), DataGridCellBgColor.bgColorLightRed);
+            div.getChoshuHouhou().getDataSource().get(1).setCellBgColor(
+                    名_9.toString(), DataGridCellBgColor.bgColorLightRed);
         } else if (new RString("05月").equals(gatsu)) {
-            div.getChoshuHouhou().getDataSource().get(1).getTxt5Gatsu().setValue(ChoshuHoho.toValue(new RString("3")).get名称());
-            div.getChoshuHouhou().getDataSource().get(1).getTxt6Gatsu().setValue(ChoshuHoho.toValue(new RString("3")).get名称());
-            div.getChoshuHouhou().getDataSource().get(1).getTxt7Gatsu().setValue(ChoshuHoho.toValue(new RString("3")).get名称());
-            div.getChoshuHouhou().getDataSource().get(1).getTxt8Gatsu().setValue(ChoshuHoho.toValue(new RString("3")).get名称());
-            div.getChoshuHouhou().getDataSource().get(1).getTxt9Gatsu().setValue(ChoshuHoho.toValue(new RString("3")).get名称());
-            div.getChoshuHouhou().getDataSource().get(1).setCellBgColor(名_5.toString(), DataGridCellBgColor.bgColorLightRed);
-            div.getChoshuHouhou().getDataSource().get(1).setCellBgColor(名_6.toString(), DataGridCellBgColor.bgColorLightRed);
-            div.getChoshuHouhou().getDataSource().get(1).setCellBgColor(名_7.toString(), DataGridCellBgColor.bgColorLightRed);
-            div.getChoshuHouhou().getDataSource().get(1).setCellBgColor(名_8.toString(), DataGridCellBgColor.bgColorLightRed);
-            div.getChoshuHouhou().getDataSource().get(1).setCellBgColor(名_9.toString(), DataGridCellBgColor.bgColorLightRed);
+            div.getChoshuHouhou().getDataSource().get(1).getTxt5Gatsu().setValue(
+                    ChoshuHoho.toValue(new RString("3")).get名称());
+            div.getChoshuHouhou().getDataSource().get(1).getTxt6Gatsu().setValue(
+                    ChoshuHoho.toValue(new RString("3")).get名称());
+            div.getChoshuHouhou().getDataSource().get(1).getTxt7Gatsu().setValue(
+                    ChoshuHoho.toValue(new RString("3")).get名称());
+            div.getChoshuHouhou().getDataSource().get(1).getTxt8Gatsu().setValue(
+                    ChoshuHoho.toValue(new RString("3")).get名称());
+            div.getChoshuHouhou().getDataSource().get(1).getTxt9Gatsu().setValue(
+                    ChoshuHoho.toValue(new RString("3")).get名称());
+            div.getChoshuHouhou().getDataSource().get(1).setCellBgColor(
+                    名_5.toString(), DataGridCellBgColor.bgColorLightRed);
+            div.getChoshuHouhou().getDataSource().get(1).setCellBgColor(
+                    名_6.toString(), DataGridCellBgColor.bgColorLightRed);
+            div.getChoshuHouhou().getDataSource().get(1).setCellBgColor(
+                    名_7.toString(), DataGridCellBgColor.bgColorLightRed);
+            div.getChoshuHouhou().getDataSource().get(1).setCellBgColor(
+                    名_8.toString(), DataGridCellBgColor.bgColorLightRed);
+            div.getChoshuHouhou().getDataSource().get(1).setCellBgColor(
+                    名_9.toString(), DataGridCellBgColor.bgColorLightRed);
         } else if (new RString("06月").equals(gatsu)) {
-            div.getChoshuHouhou().getDataSource().get(1).getTxt6Gatsu().setValue(ChoshuHoho.toValue(new RString("3")).get名称());
-            div.getChoshuHouhou().getDataSource().get(1).getTxt7Gatsu().setValue(ChoshuHoho.toValue(new RString("3")).get名称());
-            div.getChoshuHouhou().getDataSource().get(1).getTxt8Gatsu().setValue(ChoshuHoho.toValue(new RString("3")).get名称());
-            div.getChoshuHouhou().getDataSource().get(1).getTxt9Gatsu().setValue(ChoshuHoho.toValue(new RString("3")).get名称());
-            div.getChoshuHouhou().getDataSource().get(1).setCellBgColor(名_6.toString(), DataGridCellBgColor.bgColorLightRed);
-            div.getChoshuHouhou().getDataSource().get(1).setCellBgColor(名_7.toString(), DataGridCellBgColor.bgColorLightRed);
-            div.getChoshuHouhou().getDataSource().get(1).setCellBgColor(名_8.toString(), DataGridCellBgColor.bgColorLightRed);
-            div.getChoshuHouhou().getDataSource().get(1).setCellBgColor(名_9.toString(), DataGridCellBgColor.bgColorLightRed);
+            div.getChoshuHouhou().getDataSource().get(1).getTxt6Gatsu().setValue(
+                    ChoshuHoho.toValue(new RString("3")).get名称());
+            div.getChoshuHouhou().getDataSource().get(1).getTxt7Gatsu().setValue(
+                    ChoshuHoho.toValue(new RString("3")).get名称());
+            div.getChoshuHouhou().getDataSource().get(1).getTxt8Gatsu().setValue(
+                    ChoshuHoho.toValue(new RString("3")).get名称());
+            div.getChoshuHouhou().getDataSource().get(1).getTxt9Gatsu().setValue(
+                    ChoshuHoho.toValue(new RString("3")).get名称());
+            div.getChoshuHouhou().getDataSource().get(1).setCellBgColor(
+                    名_6.toString(), DataGridCellBgColor.bgColorLightRed);
+            div.getChoshuHouhou().getDataSource().get(1).setCellBgColor(
+                    名_7.toString(), DataGridCellBgColor.bgColorLightRed);
+            div.getChoshuHouhou().getDataSource().get(1).setCellBgColor(
+                    名_8.toString(), DataGridCellBgColor.bgColorLightRed);
+            div.getChoshuHouhou().getDataSource().get(1).setCellBgColor(
+                    名_9.toString(), DataGridCellBgColor.bgColorLightRed);
         } else if (new RString("07月").equals(gatsu)) {
-            div.getChoshuHouhou().getDataSource().get(1).getTxt7Gatsu().setValue(ChoshuHoho.toValue(new RString("3")).get名称());
-            div.getChoshuHouhou().getDataSource().get(1).getTxt8Gatsu().setValue(ChoshuHoho.toValue(new RString("3")).get名称());
-            div.getChoshuHouhou().getDataSource().get(1).getTxt9Gatsu().setValue(ChoshuHoho.toValue(new RString("3")).get名称());
-            div.getChoshuHouhou().getDataSource().get(1).setCellBgColor(名_7.toString(), DataGridCellBgColor.bgColorLightRed);
-            div.getChoshuHouhou().getDataSource().get(1).setCellBgColor(名_8.toString(), DataGridCellBgColor.bgColorLightRed);
-            div.getChoshuHouhou().getDataSource().get(1).setCellBgColor(名_9.toString(), DataGridCellBgColor.bgColorLightRed);
+            div.getChoshuHouhou().getDataSource().get(1).getTxt7Gatsu().setValue(
+                    ChoshuHoho.toValue(new RString("3")).get名称());
+            div.getChoshuHouhou().getDataSource().get(1).getTxt8Gatsu().setValue(
+                    ChoshuHoho.toValue(new RString("3")).get名称());
+            div.getChoshuHouhou().getDataSource().get(1).getTxt9Gatsu().setValue(
+                    ChoshuHoho.toValue(new RString("3")).get名称());
+            div.getChoshuHouhou().getDataSource().get(1).setCellBgColor(
+                    名_7.toString(), DataGridCellBgColor.bgColorLightRed);
+            div.getChoshuHouhou().getDataSource().get(1).setCellBgColor(
+                    名_8.toString(), DataGridCellBgColor.bgColorLightRed);
+            div.getChoshuHouhou().getDataSource().get(1).setCellBgColor(
+                    名_9.toString(), DataGridCellBgColor.bgColorLightRed);
         } else if (new RString("08月").equals(gatsu)) {
-            div.getChoshuHouhou().getDataSource().get(1).getTxt8Gatsu().setValue(ChoshuHoho.toValue(new RString("3")).get名称());
-            div.getChoshuHouhou().getDataSource().get(1).getTxt9Gatsu().setValue(ChoshuHoho.toValue(new RString("3")).get名称());
-            div.getChoshuHouhou().getDataSource().get(1).setCellBgColor(名_8.toString(), DataGridCellBgColor.bgColorLightRed);
-            div.getChoshuHouhou().getDataSource().get(1).setCellBgColor(名_9.toString(), DataGridCellBgColor.bgColorLightRed);
+            div.getChoshuHouhou().getDataSource().get(1).getTxt8Gatsu().setValue(
+                    ChoshuHoho.toValue(new RString("3")).get名称());
+            div.getChoshuHouhou().getDataSource().get(1).getTxt9Gatsu().setValue(
+                    ChoshuHoho.toValue(new RString("3")).get名称());
+            div.getChoshuHouhou().getDataSource().get(1).setCellBgColor(
+                    名_8.toString(), DataGridCellBgColor.bgColorLightRed);
+            div.getChoshuHouhou().getDataSource().get(1).setCellBgColor(
+                    名_9.toString(), DataGridCellBgColor.bgColorLightRed);
         } else if (new RString("09月").equals(gatsu)) {
-            div.getChoshuHouhou().getDataSource().get(1).getTxt9Gatsu().setValue(ChoshuHoho.toValue(new RString("3")).get名称());
-            div.getChoshuHouhou().getDataSource().get(1).setCellBgColor(名_9.toString(), DataGridCellBgColor.bgColorLightRed);
-        } else if (new RString("10月").equals(gatsu)) {
-            div.getChoshuHouhou().getDataSource().get(1).getTxt10Gatsu().setValue(ChoshuHoho.toValue(new RString("3")).get名称());
-            div.getChoshuHouhou().getDataSource().get(1).getTxt11Gatsu().setValue(ChoshuHoho.toValue(new RString("3")).get名称());
-            div.getChoshuHouhou().getDataSource().get(1).getTxt12Gatsu().setValue(ChoshuHoho.toValue(new RString("3")).get名称());
-            div.getChoshuHouhou().getDataSource().get(1).getTxt1Gatsu().setValue(ChoshuHoho.toValue(new RString("3")).get名称());
-            div.getChoshuHouhou().getDataSource().get(1).getTxt2Gatsu().setValue(ChoshuHoho.toValue(new RString("3")).get名称());
-            div.getChoshuHouhou().getDataSource().get(1).getTxt3Gatsu().setValue(ChoshuHoho.toValue(new RString("3")).get名称());
-            div.getChoshuHouhou().getDataSource().get(1).setCellBgColor(名_10.toString(), DataGridCellBgColor.bgColorLightRed);
-            div.getChoshuHouhou().getDataSource().get(1).setCellBgColor(名_11.toString(), DataGridCellBgColor.bgColorLightRed);
-            div.getChoshuHouhou().getDataSource().get(1).setCellBgColor(名_12.toString(), DataGridCellBgColor.bgColorLightRed);
-            div.getChoshuHouhou().getDataSource().get(1).setCellBgColor(名_1.toString(), DataGridCellBgColor.bgColorLightRed);
-            div.getChoshuHouhou().getDataSource().get(1).setCellBgColor(名_2.toString(), DataGridCellBgColor.bgColorLightRed);
-            div.getChoshuHouhou().getDataSource().get(1).setCellBgColor(名_3.toString(), DataGridCellBgColor.bgColorLightRed);
+            div.getChoshuHouhou().getDataSource().get(1).getTxt9Gatsu().setValue(
+                    ChoshuHoho.toValue(new RString("3")).get名称());
+            div.getChoshuHouhou().getDataSource().get(1).setCellBgColor(
+                    名_9.toString(), DataGridCellBgColor.bgColorLightRed);
+        } else {
+            set背景色も普通徴収の色に変更10To03(gatsu);
+        }
+    }
+
+    private void set背景色も普通徴収の色に変更10To03(RString gatsu) {
+        if (new RString("10月").equals(gatsu)) {
+            div.getChoshuHouhou().getDataSource().get(1).getTxt10Gatsu().setValue(
+                    ChoshuHoho.toValue(new RString("3")).get名称());
+            div.getChoshuHouhou().getDataSource().get(1).getTxt11Gatsu().setValue(
+                    ChoshuHoho.toValue(new RString("3")).get名称());
+            div.getChoshuHouhou().getDataSource().get(1).getTxt12Gatsu().setValue(
+                    ChoshuHoho.toValue(new RString("3")).get名称());
+            div.getChoshuHouhou().getDataSource().get(1).getTxt1Gatsu().setValue(
+                    ChoshuHoho.toValue(new RString("3")).get名称());
+            div.getChoshuHouhou().getDataSource().get(1).getTxt2Gatsu().setValue(
+                    ChoshuHoho.toValue(new RString("3")).get名称());
+            div.getChoshuHouhou().getDataSource().get(1).getTxt3Gatsu().setValue(
+                    ChoshuHoho.toValue(new RString("3")).get名称());
+            div.getChoshuHouhou().getDataSource().get(1).setCellBgColor(
+                    名_10.toString(), DataGridCellBgColor.bgColorLightRed);
+            div.getChoshuHouhou().getDataSource().get(1).setCellBgColor(
+                    名_11.toString(), DataGridCellBgColor.bgColorLightRed);
+            div.getChoshuHouhou().getDataSource().get(1).setCellBgColor(
+                    名_12.toString(), DataGridCellBgColor.bgColorLightRed);
+            div.getChoshuHouhou().getDataSource().get(1).setCellBgColor(
+                    名_1.toString(), DataGridCellBgColor.bgColorLightRed);
+            div.getChoshuHouhou().getDataSource().get(1).setCellBgColor(
+                    名_2.toString(), DataGridCellBgColor.bgColorLightRed);
+            div.getChoshuHouhou().getDataSource().get(1).setCellBgColor(
+                    名_3.toString(), DataGridCellBgColor.bgColorLightRed);
         } else if (new RString("11月").equals(gatsu)) {
-            div.getChoshuHouhou().getDataSource().get(1).getTxt11Gatsu().setValue(ChoshuHoho.toValue(new RString("3")).get名称());
-            div.getChoshuHouhou().getDataSource().get(1).getTxt12Gatsu().setValue(ChoshuHoho.toValue(new RString("3")).get名称());
-            div.getChoshuHouhou().getDataSource().get(1).getTxt1Gatsu().setValue(ChoshuHoho.toValue(new RString("3")).get名称());
-            div.getChoshuHouhou().getDataSource().get(1).getTxt2Gatsu().setValue(ChoshuHoho.toValue(new RString("3")).get名称());
-            div.getChoshuHouhou().getDataSource().get(1).getTxt3Gatsu().setValue(ChoshuHoho.toValue(new RString("3")).get名称());
-            div.getChoshuHouhou().getDataSource().get(1).setCellBgColor(名_11.toString(), DataGridCellBgColor.bgColorLightRed);
-            div.getChoshuHouhou().getDataSource().get(1).setCellBgColor(名_12.toString(), DataGridCellBgColor.bgColorLightRed);
-            div.getChoshuHouhou().getDataSource().get(1).setCellBgColor(名_1.toString(), DataGridCellBgColor.bgColorLightRed);
-            div.getChoshuHouhou().getDataSource().get(1).setCellBgColor(名_2.toString(), DataGridCellBgColor.bgColorLightRed);
-            div.getChoshuHouhou().getDataSource().get(1).setCellBgColor(名_3.toString(), DataGridCellBgColor.bgColorLightRed);
+            div.getChoshuHouhou().getDataSource().get(1).getTxt11Gatsu().setValue(
+                    ChoshuHoho.toValue(new RString("3")).get名称());
+            div.getChoshuHouhou().getDataSource().get(1).getTxt12Gatsu().setValue(
+                    ChoshuHoho.toValue(new RString("3")).get名称());
+            div.getChoshuHouhou().getDataSource().get(1).getTxt1Gatsu().setValue(
+                    ChoshuHoho.toValue(new RString("3")).get名称());
+            div.getChoshuHouhou().getDataSource().get(1).getTxt2Gatsu().setValue(
+                    ChoshuHoho.toValue(new RString("3")).get名称());
+            div.getChoshuHouhou().getDataSource().get(1).getTxt3Gatsu().setValue(
+                    ChoshuHoho.toValue(new RString("3")).get名称()
+            );
+            div.getChoshuHouhou().getDataSource().get(1).setCellBgColor(
+                    名_11.toString(), DataGridCellBgColor.bgColorLightRed);
+            div.getChoshuHouhou().getDataSource().get(1).setCellBgColor(
+                    名_12.toString(), DataGridCellBgColor.bgColorLightRed);
+            div.getChoshuHouhou().getDataSource().get(1).setCellBgColor(
+                    名_1.toString(), DataGridCellBgColor.bgColorLightRed);
+            div.getChoshuHouhou().getDataSource().get(1).setCellBgColor(
+                    名_2.toString(), DataGridCellBgColor.bgColorLightRed);
+            div.getChoshuHouhou().getDataSource().get(1).setCellBgColor(
+                    名_3.toString(), DataGridCellBgColor.bgColorLightRed);
         } else if (new RString("12月").equals(gatsu)) {
-            div.getChoshuHouhou().getDataSource().get(1).getTxt12Gatsu().setValue(ChoshuHoho.toValue(new RString("3")).get名称());
-            div.getChoshuHouhou().getDataSource().get(1).getTxt1Gatsu().setValue(ChoshuHoho.toValue(new RString("3")).get名称());
-            div.getChoshuHouhou().getDataSource().get(1).getTxt2Gatsu().setValue(ChoshuHoho.toValue(new RString("3")).get名称());
-            div.getChoshuHouhou().getDataSource().get(1).getTxt3Gatsu().setValue(ChoshuHoho.toValue(new RString("3")).get名称());
-            div.getChoshuHouhou().getDataSource().get(1).setCellBgColor(名_12.toString(), DataGridCellBgColor.bgColorLightRed);
-            div.getChoshuHouhou().getDataSource().get(1).setCellBgColor(名_1.toString(), DataGridCellBgColor.bgColorLightRed);
-            div.getChoshuHouhou().getDataSource().get(1).setCellBgColor(名_2.toString(), DataGridCellBgColor.bgColorLightRed);
-            div.getChoshuHouhou().getDataSource().get(1).setCellBgColor(名_3.toString(), DataGridCellBgColor.bgColorLightRed);
-        } else if (new RString("1月").equals(gatsu)) {
-            div.getChoshuHouhou().getDataSource().get(1).getTxt1Gatsu().setValue(ChoshuHoho.toValue(new RString("3")).get名称());
-            div.getChoshuHouhou().getDataSource().get(1).getTxt2Gatsu().setValue(ChoshuHoho.toValue(new RString("3")).get名称());
-            div.getChoshuHouhou().getDataSource().get(1).getTxt3Gatsu().setValue(ChoshuHoho.toValue(new RString("3")).get名称());
-            div.getChoshuHouhou().getDataSource().get(1).setCellBgColor(名_1.toString(), DataGridCellBgColor.bgColorLightRed);
-            div.getChoshuHouhou().getDataSource().get(1).setCellBgColor(名_2.toString(), DataGridCellBgColor.bgColorLightRed);
-            div.getChoshuHouhou().getDataSource().get(1).setCellBgColor(名_3.toString(), DataGridCellBgColor.bgColorLightRed);
-        } else if (new RString("2月").equals(gatsu)) {
-            div.getChoshuHouhou().getDataSource().get(1).getTxt2Gatsu().setValue(ChoshuHoho.toValue(new RString("3")).get名称());
-            div.getChoshuHouhou().getDataSource().get(1).getTxt3Gatsu().setValue(ChoshuHoho.toValue(new RString("3")).get名称());
-            div.getChoshuHouhou().getDataSource().get(1).setCellBgColor(名_2.toString(), DataGridCellBgColor.bgColorLightRed);
-            div.getChoshuHouhou().getDataSource().get(1).setCellBgColor(名_3.toString(), DataGridCellBgColor.bgColorLightRed);
-        } else if (new RString("3月").equals(gatsu)) {
-            div.getChoshuHouhou().getDataSource().get(1).getTxt3Gatsu().setValue(ChoshuHoho.toValue(new RString("3")).get名称());
-            div.getChoshuHouhou().getDataSource().get(1).setCellBgColor(名_3.toString(), DataGridCellBgColor.bgColorLightRed);
+            div.getChoshuHouhou().getDataSource().get(1).getTxt12Gatsu().setValue(
+                    ChoshuHoho.toValue(new RString("3")).get名称());
+            div.getChoshuHouhou().getDataSource().get(1).getTxt1Gatsu().setValue(
+                    ChoshuHoho.toValue(new RString("3")).get名称());
+            div.getChoshuHouhou().getDataSource().get(1).getTxt2Gatsu().setValue(
+                    ChoshuHoho.toValue(new RString("3")).get名称());
+            div.getChoshuHouhou().getDataSource().get(1).getTxt3Gatsu().setValue(
+                    ChoshuHoho.toValue(new RString("3")).get名称());
+            div.getChoshuHouhou().getDataSource().get(1).setCellBgColor(
+                    名_12.toString(), DataGridCellBgColor.bgColorLightRed);
+            div.getChoshuHouhou().getDataSource().get(1).setCellBgColor(
+                    名_1.toString(), DataGridCellBgColor.bgColorLightRed);
+            div.getChoshuHouhou().getDataSource().get(1).setCellBgColor(
+                    名_2.toString(), DataGridCellBgColor.bgColorLightRed);
+            div.getChoshuHouhou().getDataSource().get(1).setCellBgColor(
+                    名_3.toString(), DataGridCellBgColor.bgColorLightRed);
+        } else if (new RString("01月").equals(gatsu)) {
+            div.getChoshuHouhou().getDataSource().get(1).getTxt1Gatsu().setValue(
+                    ChoshuHoho.toValue(new RString("3")).get名称());
+            div.getChoshuHouhou().getDataSource().get(1).getTxt2Gatsu().setValue(
+                    ChoshuHoho.toValue(new RString("3")).get名称());
+            div.getChoshuHouhou().getDataSource().get(1).getTxt3Gatsu().setValue(
+                    ChoshuHoho.toValue(new RString("3")).get名称());
+            div.getChoshuHouhou().getDataSource().get(1).setCellBgColor(
+                    名_1.toString(), DataGridCellBgColor.bgColorLightRed);
+            div.getChoshuHouhou().getDataSource().get(1).setCellBgColor(
+                    名_2.toString(), DataGridCellBgColor.bgColorLightRed);
+            div.getChoshuHouhou().getDataSource().get(1).setCellBgColor(
+                    名_3.toString(), DataGridCellBgColor.bgColorLightRed);
+        } else if (new RString("02月").equals(gatsu)) {
+            div.getChoshuHouhou().getDataSource().get(1).getTxt2Gatsu().setValue(
+                    ChoshuHoho.toValue(new RString("3")).get名称());
+            div.getChoshuHouhou().getDataSource().get(1).getTxt3Gatsu().setValue(
+                    ChoshuHoho.toValue(new RString("3")).get名称());
+            div.getChoshuHouhou().getDataSource().get(1).setCellBgColor(
+                    名_2.toString(), DataGridCellBgColor.bgColorLightRed);
+            div.getChoshuHouhou().getDataSource().get(1).setCellBgColor(
+                    名_3.toString(), DataGridCellBgColor.bgColorLightRed);
+        } else if (new RString("03月").equals(gatsu)) {
+            div.getChoshuHouhou().getDataSource().get(1).getTxt3Gatsu().setValue(
+                    ChoshuHoho.toValue(new RString("3")).get名称());
+            div.getChoshuHouhou().getDataSource().get(1).setCellBgColor(
+                    名_3.toString(), DataGridCellBgColor.bgColorLightRed);
         }
     }
 
@@ -406,7 +543,7 @@ public class ChoshuInfoHandler {
         }
     }
 
-    private void implement入力チェック() {
+    private boolean 入力チェック三月To九月() {
 
         choshuHouhou_Row row現在 = div.getChoshuHouhou().getDataSource().get(0);
         choshuHouhou_Row row変更後 = div.getChoshuHouhou().getDataSource().get(1);
@@ -414,67 +551,67 @@ public class ChoshuInfoHandler {
         RString getなし名称 = ChoshuHoho.toValue(new RString("0")).get名称();
         if (getなし名称.equals(row現在.getTxtZen3Gatsu().getValue())
                 && !getなし名称.equals(row変更後.getTxtZen3Gatsu().getValue())) {
-            flag = true;
+            return true;
         }
         if (getなし名称.equals(row現在.getTxt4Gatsu().getValue())
                 && !getなし名称.equals(row変更後.getTxt4Gatsu().getValue())) {
-            flag = true;
+            return true;
         }
         if (getなし名称.equals(row現在.getTxt5Gatsu().getValue())
                 && !getなし名称.equals(row変更後.getTxt5Gatsu().getValue())) {
-            flag = true;
+            return true;
         }
         if (getなし名称.equals(row現在.getTxt6Gatsu().getValue())
                 && !getなし名称.equals(row変更後.getTxt6Gatsu().getValue())) {
-            flag = true;
+            return true;
         }
         if (getなし名称.equals(row現在.getTxt7Gatsu().getValue())
                 && !getなし名称.equals(row変更後.getTxt7Gatsu().getValue())) {
-            flag = true;
+            return true;
         }
         if (getなし名称.equals(row現在.getTxt8Gatsu().getValue())
                 && !getなし名称.equals(row変更後.getTxt8Gatsu().getValue())) {
-            flag = true;
+            return true;
         }
         if (getなし名称.equals(row現在.getTxt9Gatsu().getValue())
                 && !getなし名称.equals(row変更後.getTxt9Gatsu().getValue())) {
-            flag = true;
+            return true;
         }
-        continue入力チェック(getなし名称, row現在, row変更後, flag);
+        return 入力チェック十月To四月(getなし名称, row現在, row変更後, flag);
+
     }
 
-    private void continue入力チェック(RString getなし名称, choshuHouhou_Row row現在, choshuHouhou_Row row変更後, boolean flag) {
+    private boolean 入力チェック十月To四月(RString getなし名称, choshuHouhou_Row row現在,
+            choshuHouhou_Row row変更後, boolean flag) {
         if (getなし名称.equals(row現在.getTxt10Gatsu().getValue())
                 && !getなし名称.equals(row変更後.getTxt10Gatsu().getValue())) {
-            flag = true;
+            return true;
         }
         if (getなし名称.equals(row現在.getTxt11Gatsu().getValue())
                 && !getなし名称.equals(row変更後.getTxt11Gatsu().getValue())) {
-            flag = true;
+            return true;
         }
         if (getなし名称.equals(row現在.getTxt12Gatsu().getValue())
                 && !getなし名称.equals(row変更後.getTxt12Gatsu().getValue())) {
-            flag = true;
+            return true;
         }
         if (getなし名称.equals(row現在.getTxt1Gatsu().getValue())
                 && !getなし名称.equals(row変更後.getTxt1Gatsu().getValue())) {
-            flag = true;
+            return true;
         }
         if (getなし名称.equals(row現在.getTxt2Gatsu().getValue())
                 && !getなし名称.equals(row変更後.getTxt2Gatsu().getValue())) {
-            flag = true;
+            return true;
         }
         if (getなし名称.equals(row現在.getTxt3Gatsu().getValue())
                 && !getなし名称.equals(row変更後.getTxt3Gatsu().getValue())) {
-            flag = true;
+            return true;
         }
         if (getなし名称.equals(row現在.getTxtYoku4Gatsu().getValue())
                 && !getなし名称.equals(row変更後.getTxtYoku4Gatsu().getValue())) {
-            flag = true;
+            return true;
         }
-        if (flag) {
-            throw new ApplicationException(DbbErrorMessages.徴収方法設定不可.getMessage());
-        }
+        return flag;
 
     }
 
@@ -487,7 +624,7 @@ public class ChoshuInfoHandler {
         RDate システム日付 = RDate.getNowDate();
         ChoshuHohoManager manager = new ChoshuHohoManager();
         jp.co.ndensan.reams.db.dbb.business.core.basic.ChoshuHoho choshuHoho
-                = manager.get介護徴収方法の直近データ(賦課年度, 被保険者番号);
+                = manager.get介護徴収方法(賦課年度, 被保険者番号);
 
         RString 賦課年度日付 = new RString(賦課年度.plusYear(1).toString() + "0331");
         RDate 賦課日付 = new RDate(賦課年度日付.toString());
@@ -497,8 +634,8 @@ public class ChoshuInfoHandler {
             現在の月 = システム日付.getMonthValue();
         }
 
-        boolean flag = is現在と変更後の徴収方法を比較(現在の月);
-        boolean flg = set変更無し特別徴収停止日時(現在の月, choshuHoho);
+        boolean flag = is四月To八月の徴収方法を比較(現在の月);
+        boolean flg = is四月To八月の徴収方法は変更無しの場合(現在の月, choshuHoho);
         if (!flag) {
             特別徴収停止日時 = YMDHMS.now();
             特別徴収停止事由コード = ChoteiJiyuCode.徴収方法修正.getコード();
@@ -543,7 +680,7 @@ public class ChoshuInfoHandler {
         return 徴収方法のコード;
     }
 
-    private boolean is現在と変更後の徴収方法を比較(int 現在の月) {
+    private boolean is四月To八月の徴収方法を比較(int 現在の月) {
 
         RString 現在;
         RString 変更後;
@@ -568,96 +705,99 @@ public class ChoshuInfoHandler {
             変更後 = div.getChoshuHouhou().getDataSource().get(1).getTxt7Gatsu().getValue();
             flg = judge(現在, 変更後);
         }
-        if (現在の月 == 現在の月_4 || 現在の月 == 現在の月_5 || 現在の月 == 現在の月_6 || 現在の月 == 現在の月_7 || 現在の月 == 現在の月_8) {
+        if (現在の月 == 現在の月_4 || 現在の月 == 現在の月_5 || 現在の月 == 現在の月_6
+                || 現在の月 == 現在の月_7 || 現在の月 == 現在の月_8) {
             現在 = div.getChoshuHouhou().getDataSource().get(0).getTxt8Gatsu().getValue();
             変更後 = div.getChoshuHouhou().getDataSource().get(1).getTxt8Gatsu().getValue();
             flg = judge(現在, 変更後);
         }
 
-        flg = continueOne現在と変更後の徴収方法を比較(現在の月, flg);
+        flg = is九月To十月の徴収方法を比較(現在の月, flg);
         return flg;
     }
 
-    private boolean continueOne現在と変更後の徴収方法を比較(int 現在の月, boolean flg) {
+    private boolean is九月To十月の徴収方法を比較(int 現在の月, boolean flg) {
 
         RString 現在;
         RString 変更後;
-        if (現在の月 == 現在の月_4 || 現在の月 == 現在の月_5 || 現在の月 == 現在の月_6 || 現在の月 == 現在の月_7 || 現在の月 == 現在の月_8
-                || 現在の月 == 現在の月_9) {
+        if (現在の月 == 現在の月_4 || 現在の月 == 現在の月_5 || 現在の月 == 現在の月_6 || 現在の月 == 現在の月_7
+                || 現在の月 == 現在の月_8 || 現在の月 == 現在の月_9) {
             現在 = div.getChoshuHouhou().getDataSource().get(0).getTxt9Gatsu().getValue();
             変更後 = div.getChoshuHouhou().getDataSource().get(1).getTxt9Gatsu().getValue();
             flg = judge(現在, 変更後);
         }
-        if (現在の月 == 現在の月_4 || 現在の月 == 現在の月_5 || 現在の月 == 現在の月_6 || 現在の月 == 現在の月_7 || 現在の月 == 現在の月_8
-                || 現在の月 == 現在の月_9 || 現在の月 == 現在の月_10) {
+        if (現在の月 == 現在の月_4 || 現在の月 == 現在の月_5 || 現在の月 == 現在の月_6 || 現在の月 == 現在の月_7
+                || 現在の月 == 現在の月_8 || 現在の月 == 現在の月_9 || 現在の月 == 現在の月_10) {
             現在 = div.getChoshuHouhou().getDataSource().get(0).getTxt10Gatsu().getValue();
             変更後 = div.getChoshuHouhou().getDataSource().get(1).getTxt10Gatsu().getValue();
             flg = judge(現在, 変更後);
         }
 
-        flg = continueTwo現在と変更後の徴収方法を比較(現在の月, flg);
+        flg = is十一月To十二月の徴収方法を比較(現在の月, flg);
         return flg;
     }
 
-    private boolean continueTwo現在と変更後の徴収方法を比較(int 現在の月, boolean flg) {
+    private boolean is十一月To十二月の徴収方法を比較(int 現在の月, boolean flg) {
 
         RString 現在;
         RString 変更後;
-        if (現在の月 == 現在の月_4 || 現在の月 == 現在の月_5 || 現在の月 == 現在の月_6 || 現在の月 == 現在の月_7 || 現在の月 == 現在の月_8
-                || 現在の月 == 現在の月_9 || 現在の月 == 現在の月_10 || 現在の月 == 現在の月_11) {
+        if (現在の月 == 現在の月_4 || 現在の月 == 現在の月_5 || 現在の月 == 現在の月_6 || 現在の月 == 現在の月_7
+                || 現在の月 == 現在の月_8 || 現在の月 == 現在の月_9 || 現在の月 == 現在の月_10 || 現在の月 == 現在の月_11) {
             現在 = div.getChoshuHouhou().getDataSource().get(0).getTxt11Gatsu().getValue();
             変更後 = div.getChoshuHouhou().getDataSource().get(1).getTxt11Gatsu().getValue();
             flg = judge(現在, 変更後);
         }
-        if (現在の月 == 現在の月_4 || 現在の月 == 現在の月_5 || 現在の月 == 現在の月_6 || 現在の月 == 現在の月_7 || 現在の月 == 現在の月_8
-                || 現在の月 == 現在の月_9 || 現在の月 == 現在の月_10 || 現在の月 == 現在の月_11 || 現在の月 == 現在の月_12) {
+        if (現在の月 == 現在の月_4 || 現在の月 == 現在の月_5 || 現在の月 == 現在の月_6 || 現在の月 == 現在の月_7
+                || 現在の月 == 現在の月_8 || 現在の月 == 現在の月_9 || 現在の月 == 現在の月_10 || 現在の月 == 現在の月_11
+                || 現在の月 == 現在の月_12) {
             現在 = div.getChoshuHouhou().getDataSource().get(0).getTxt12Gatsu().getValue();
             変更後 = div.getChoshuHouhou().getDataSource().get(1).getTxt12Gatsu().getValue();
             flg = judge(現在, 変更後);
         }
 
-        flg = continueThree現在と変更後の徴収方法を比較(現在の月, flg);
+        flg = is一月の徴収方法を比較(現在の月, flg);
         return flg;
     }
 
-    private boolean continueThree現在と変更後の徴収方法を比較(int 現在の月, boolean flg) {
+    private boolean is一月の徴収方法を比較(int 現在の月, boolean flg) {
 
         RString 現在;
         RString 変更後;
-        if (現在の月 == 現在の月_4 || 現在の月 == 現在の月_5 || 現在の月 == 現在の月_6 || 現在の月 == 現在の月_7 || 現在の月 == 現在の月_8
-                || 現在の月 == 現在の月_9 || 現在の月 == 現在の月_10 || 現在の月 == 現在の月_11 || 現在の月 == 現在の月_12 || 現在の月 == 現在の月_1) {
+        if (現在の月 == 現在の月_4 || 現在の月 == 現在の月_5 || 現在の月 == 現在の月_6 || 現在の月 == 現在の月_7
+                || 現在の月 == 現在の月_8 || 現在の月 == 現在の月_9 || 現在の月 == 現在の月_10 || 現在の月 == 現在の月_11
+                || 現在の月 == 現在の月_12 || 現在の月 == 現在の月_1) {
             現在 = div.getChoshuHouhou().getDataSource().get(0).getTxt1Gatsu().getValue();
             変更後 = div.getChoshuHouhou().getDataSource().get(1).getTxt1Gatsu().getValue();
             flg = judge(現在, 変更後);
         }
 
-        flg = continueFour現在と変更後の徴収方法を比較(現在の月, flg);
+        flg = is二月の徴収方法を比較(現在の月, flg);
         return flg;
     }
 
-    private boolean continueFour現在と変更後の徴収方法を比較(int 現在の月, boolean flg) {
+    private boolean is二月の徴収方法を比較(int 現在の月, boolean flg) {
 
         RString 現在;
         RString 変更後;
-        if (現在の月 == 現在の月_4 || 現在の月 == 現在の月_5 || 現在の月 == 現在の月_6 || 現在の月 == 現在の月_7 || 現在の月 == 現在の月_8
-                || 現在の月 == 現在の月_9 || 現在の月 == 現在の月_10 || 現在の月 == 現在の月_11 || 現在の月 == 現在の月_12 || 現在の月 == 現在の月_1
-                || 現在の月 == 現在の月_2) {
+        if (現在の月 == 現在の月_4 || 現在の月 == 現在の月_5 || 現在の月 == 現在の月_6 || 現在の月 == 現在の月_7
+                || 現在の月 == 現在の月_8 || 現在の月 == 現在の月_9 || 現在の月 == 現在の月_10 || 現在の月 == 現在の月_11
+                || 現在の月 == 現在の月_12 || 現在の月 == 現在の月_1 || 現在の月 == 現在の月_2) {
             現在 = div.getChoshuHouhou().getDataSource().get(0).getTxt2Gatsu().getValue();
             変更後 = div.getChoshuHouhou().getDataSource().get(1).getTxt2Gatsu().getValue();
             flg = judge(現在, 変更後);
         }
 
-        flg = continueFive現在と変更後の徴収方法を比較(現在の月, flg);
+        flg = is三月の徴収方法を比較(現在の月, flg);
         return flg;
     }
 
-    private boolean continueFive現在と変更後の徴収方法を比較(int 現在の月, boolean flg) {
+    private boolean is三月の徴収方法を比較(int 現在の月, boolean flg) {
 
         RString 現在;
         RString 変更後;
-        if (現在の月 == 現在の月_4 || 現在の月 == 現在の月_5 || 現在の月 == 現在の月_6 || 現在の月 == 現在の月_7 || 現在の月 == 現在の月_8
-                || 現在の月 == 現在の月_9 || 現在の月 == 現在の月_10 || 現在の月 == 現在の月_11 || 現在の月 == 現在の月_12 || 現在の月 == 現在の月_1
-                || 現在の月 == 現在の月_2 || 現在の月 == 現在の月_3) {
+        if (現在の月 == 現在の月_4 || 現在の月 == 現在の月_5 || 現在の月 == 現在の月_6 || 現在の月 == 現在の月_7
+                || 現在の月 == 現在の月_8 || 現在の月 == 現在の月_9 || 現在の月 == 現在の月_10 || 現在の月 == 現在の月_11
+                || 現在の月 == 現在の月_12 || 現在の月 == 現在の月_1 || 現在の月 == 現在の月_2 || 現在の月 == 現在の月_3) {
             現在 = div.getChoshuHouhou().getDataSource().get(0).getTxt3Gatsu().getValue();
             変更後 = div.getChoshuHouhou().getDataSource().get(1).getTxt3Gatsu().getValue();
             flg = judge(現在, 変更後);
@@ -678,7 +818,7 @@ public class ChoshuInfoHandler {
         return flag;
     }
 
-    private boolean set変更無し特別徴収停止日時(int 現在の月,
+    private boolean is四月To八月の徴収方法は変更無しの場合(int 現在の月,
             jp.co.ndensan.reams.db.dbb.business.core.basic.ChoshuHoho choshuHoho) {
 
         RString 現在;
@@ -689,143 +829,146 @@ public class ChoshuInfoHandler {
             現在 = div.getChoshuHouhou().getDataSource().get(0).getTxt4Gatsu().getValue();
             変更後 = div.getChoshuHouhou().getDataSource().get(1).getTxt4Gatsu().getValue();
             基本 = choshuHoho.get徴収方法4月();
-            flg = judge変更無しの場合(現在, 変更後, 基本);
+            flg = is変更無しの場合(現在, 変更後, 基本);
         }
         if (現在の月 == 現在の月_4 || 現在の月 == 現在の月_5) {
             現在 = div.getChoshuHouhou().getDataSource().get(0).getTxt5Gatsu().getValue();
             変更後 = div.getChoshuHouhou().getDataSource().get(1).getTxt5Gatsu().getValue();
             基本 = choshuHoho.get徴収方法5月();
-            flg = judge変更無しの場合(現在, 変更後, 基本);
+            flg = is変更無しの場合(現在, 変更後, 基本);
         }
         if (現在の月 == 現在の月_4 || 現在の月 == 現在の月_5 || 現在の月 == 現在の月_6) {
             現在 = div.getChoshuHouhou().getDataSource().get(0).getTxt6Gatsu().getValue();
             変更後 = div.getChoshuHouhou().getDataSource().get(1).getTxt6Gatsu().getValue();
             基本 = choshuHoho.get徴収方法6月();
-            flg = judge変更無しの場合(現在, 変更後, 基本);
+            flg = is変更無しの場合(現在, 変更後, 基本);
         }
         if (現在の月 == 現在の月_4 || 現在の月 == 現在の月_5 || 現在の月 == 現在の月_6 || 現在の月 == 現在の月_7) {
             現在 = div.getChoshuHouhou().getDataSource().get(0).getTxt7Gatsu().getValue();
             変更後 = div.getChoshuHouhou().getDataSource().get(1).getTxt7Gatsu().getValue();
             基本 = choshuHoho.get徴収方法7月();
-            flg = judge変更無しの場合(現在, 変更後, 基本);
+            flg = is変更無しの場合(現在, 変更後, 基本);
         }
-        if (現在の月 == 現在の月_4 || 現在の月 == 現在の月_5 || 現在の月 == 現在の月_6 || 現在の月 == 現在の月_7 || 現在の月 == 現在の月_8) {
+        if (現在の月 == 現在の月_4 || 現在の月 == 現在の月_5 || 現在の月 == 現在の月_6 || 現在の月 == 現在の月_7
+                || 現在の月 == 現在の月_8) {
             現在 = div.getChoshuHouhou().getDataSource().get(0).getTxt8Gatsu().getValue();
             変更後 = div.getChoshuHouhou().getDataSource().get(1).getTxt8Gatsu().getValue();
             基本 = choshuHoho.get徴収方法8月();
-            flg = judge変更無しの場合(現在, 変更後, 基本);
+            flg = is変更無しの場合(現在, 変更後, 基本);
         }
 
-        flg = continueOne変更無し特別徴収停止日時(現在の月, choshuHoho, flg);
+        flg = is九月To十月の徴収方法は変更無しの場合(現在の月, choshuHoho, flg);
         return flg;
     }
 
-    private boolean continueOne変更無し特別徴収停止日時(int 現在の月,
+    private boolean is九月To十月の徴収方法は変更無しの場合(int 現在の月,
             jp.co.ndensan.reams.db.dbb.business.core.basic.ChoshuHoho choshuHoho, boolean flg) {
 
         RString 現在;
         RString 変更後;
         RString 基本;
-        if (現在の月 == 現在の月_4 || 現在の月 == 現在の月_5 || 現在の月 == 現在の月_6 || 現在の月 == 現在の月_7 || 現在の月 == 現在の月_8
-                || 現在の月 == 現在の月_9) {
+        if (現在の月 == 現在の月_4 || 現在の月 == 現在の月_5 || 現在の月 == 現在の月_6 || 現在の月 == 現在の月_7
+                || 現在の月 == 現在の月_8 || 現在の月 == 現在の月_9) {
             現在 = div.getChoshuHouhou().getDataSource().get(0).getTxt9Gatsu().getValue();
             変更後 = div.getChoshuHouhou().getDataSource().get(1).getTxt9Gatsu().getValue();
             基本 = choshuHoho.get徴収方法9月();
-            flg = judge変更無しの場合(現在, 変更後, 基本);
+            flg = is変更無しの場合(現在, 変更後, 基本);
         }
-        if (現在の月 == 現在の月_4 || 現在の月 == 現在の月_5 || 現在の月 == 現在の月_6 || 現在の月 == 現在の月_7 || 現在の月 == 現在の月_8
-                || 現在の月 == 現在の月_9 || 現在の月 == 現在の月_10) {
+        if (現在の月 == 現在の月_4 || 現在の月 == 現在の月_5 || 現在の月 == 現在の月_6 || 現在の月 == 現在の月_7
+                || 現在の月 == 現在の月_8 || 現在の月 == 現在の月_9 || 現在の月 == 現在の月_10) {
             現在 = div.getChoshuHouhou().getDataSource().get(0).getTxt10Gatsu().getValue();
             変更後 = div.getChoshuHouhou().getDataSource().get(1).getTxt10Gatsu().getValue();
             基本 = choshuHoho.get徴収方法10月();
-            flg = judge変更無しの場合(現在, 変更後, 基本);
+            flg = is変更無しの場合(現在, 変更後, 基本);
         }
 
-        flg = continueTwo変更無し特別徴収停止日時(現在の月, choshuHoho, flg);
+        flg = is十一月To十二月の徴収方法は変更無しの場合(現在の月, choshuHoho, flg);
         return flg;
     }
 
-    private boolean continueTwo変更無し特別徴収停止日時(int 現在の月,
+    private boolean is十一月To十二月の徴収方法は変更無しの場合(int 現在の月,
             jp.co.ndensan.reams.db.dbb.business.core.basic.ChoshuHoho choshuHoho, boolean flg) {
 
         RString 現在;
         RString 変更後;
         RString 基本;
-        if (現在の月 == 現在の月_4 || 現在の月 == 現在の月_5 || 現在の月 == 現在の月_6 || 現在の月 == 現在の月_7 || 現在の月 == 現在の月_8
-                || 現在の月 == 現在の月_9 || 現在の月 == 現在の月_10 || 現在の月 == 現在の月_11) {
+        if (現在の月 == 現在の月_4 || 現在の月 == 現在の月_5 || 現在の月 == 現在の月_6 || 現在の月 == 現在の月_7
+                || 現在の月 == 現在の月_8 || 現在の月 == 現在の月_9 || 現在の月 == 現在の月_10 || 現在の月 == 現在の月_11) {
             現在 = div.getChoshuHouhou().getDataSource().get(0).getTxt11Gatsu().getValue();
             変更後 = div.getChoshuHouhou().getDataSource().get(1).getTxt11Gatsu().getValue();
             基本 = choshuHoho.get徴収方法11月();
-            flg = judge変更無しの場合(現在, 変更後, 基本);
+            flg = is変更無しの場合(現在, 変更後, 基本);
         }
-        if (現在の月 == 現在の月_4 || 現在の月 == 現在の月_5 || 現在の月 == 現在の月_6 || 現在の月 == 現在の月_7 || 現在の月 == 現在の月_8
-                || 現在の月 == 現在の月_9 || 現在の月 == 現在の月_10 || 現在の月 == 現在の月_11 || 現在の月 == 現在の月_12) {
+        if (現在の月 == 現在の月_4 || 現在の月 == 現在の月_5 || 現在の月 == 現在の月_6 || 現在の月 == 現在の月_7
+                || 現在の月 == 現在の月_8 || 現在の月 == 現在の月_9 || 現在の月 == 現在の月_10 || 現在の月 == 現在の月_11
+                || 現在の月 == 現在の月_12) {
             現在 = div.getChoshuHouhou().getDataSource().get(0).getTxt12Gatsu().getValue();
             変更後 = div.getChoshuHouhou().getDataSource().get(1).getTxt12Gatsu().getValue();
             基本 = choshuHoho.get徴収方法12月();
-            flg = judge変更無しの場合(現在, 変更後, 基本);
+            flg = is変更無しの場合(現在, 変更後, 基本);
         }
 
-        flg = continueThree変更無し特別徴収停止日時(現在の月, choshuHoho, flg);
+        flg = is一月の徴収方法は変更無しの場合(現在の月, choshuHoho, flg);
         return flg;
     }
 
-    private boolean continueThree変更無し特別徴収停止日時(int 現在の月,
+    private boolean is一月の徴収方法は変更無しの場合(int 現在の月,
             jp.co.ndensan.reams.db.dbb.business.core.basic.ChoshuHoho choshuHoho, boolean flg) {
 
         RString 現在;
         RString 変更後;
         RString 基本;
-        if (現在の月 == 現在の月_4 || 現在の月 == 現在の月_5 || 現在の月 == 現在の月_6 || 現在の月 == 現在の月_7 || 現在の月 == 現在の月_8
-                || 現在の月 == 現在の月_9 || 現在の月 == 現在の月_10 || 現在の月 == 現在の月_11 || 現在の月 == 現在の月_12 || 現在の月 == 現在の月_1) {
+        if (現在の月 == 現在の月_4 || 現在の月 == 現在の月_5 || 現在の月 == 現在の月_6 || 現在の月 == 現在の月_7
+                || 現在の月 == 現在の月_8 || 現在の月 == 現在の月_9 || 現在の月 == 現在の月_10 || 現在の月 == 現在の月_11
+                || 現在の月 == 現在の月_12 || 現在の月 == 現在の月_1) {
             現在 = div.getChoshuHouhou().getDataSource().get(0).getTxt1Gatsu().getValue();
             変更後 = div.getChoshuHouhou().getDataSource().get(1).getTxt1Gatsu().getValue();
             基本 = choshuHoho.get徴収方法1月();
-            flg = judge変更無しの場合(現在, 変更後, 基本);
+            flg = is変更無しの場合(現在, 変更後, 基本);
         }
 
-        flg = continueFour変更無し特別徴収停止日時(現在の月, choshuHoho, flg);
+        flg = is二月の徴収方法は変更無しの場合(現在の月, choshuHoho, flg);
         return flg;
     }
 
-    private boolean continueFour変更無し特別徴収停止日時(int 現在の月,
+    private boolean is二月の徴収方法は変更無しの場合(int 現在の月,
             jp.co.ndensan.reams.db.dbb.business.core.basic.ChoshuHoho choshuHoho, boolean flg) {
 
         RString 現在;
         RString 変更後;
         RString 基本;
-        if (現在の月 == 現在の月_4 || 現在の月 == 現在の月_5 || 現在の月 == 現在の月_6 || 現在の月 == 現在の月_7 || 現在の月 == 現在の月_8
-                || 現在の月 == 現在の月_9 || 現在の月 == 現在の月_10 || 現在の月 == 現在の月_11 || 現在の月 == 現在の月_12 || 現在の月 == 現在の月_1
-                || 現在の月 == 現在の月_2) {
+        if (現在の月 == 現在の月_4 || 現在の月 == 現在の月_5 || 現在の月 == 現在の月_6 || 現在の月 == 現在の月_7
+                || 現在の月 == 現在の月_8 || 現在の月 == 現在の月_9 || 現在の月 == 現在の月_10 || 現在の月 == 現在の月_11
+                || 現在の月 == 現在の月_12 || 現在の月 == 現在の月_1 || 現在の月 == 現在の月_2) {
             現在 = div.getChoshuHouhou().getDataSource().get(0).getTxt2Gatsu().getValue();
             変更後 = div.getChoshuHouhou().getDataSource().get(1).getTxt2Gatsu().getValue();
             基本 = choshuHoho.get徴収方法2月();
-            flg = judge変更無しの場合(現在, 変更後, 基本);
+            flg = is変更無しの場合(現在, 変更後, 基本);
         }
 
-        flg = continueFive変更無し特別徴収停止日時(現在の月, choshuHoho, flg);
+        flg = is三月の徴収方法は変更無しの場合(現在の月, choshuHoho, flg);
         return flg;
     }
 
-    private boolean continueFive変更無し特別徴収停止日時(int 現在の月,
+    private boolean is三月の徴収方法は変更無しの場合(int 現在の月,
             jp.co.ndensan.reams.db.dbb.business.core.basic.ChoshuHoho choshuHoho, boolean flg) {
 
         RString 現在;
         RString 変更後;
         RString 基本;
-        if (現在の月 == 現在の月_4 || 現在の月 == 現在の月_5 || 現在の月 == 現在の月_6 || 現在の月 == 現在の月_7 || 現在の月 == 現在の月_8
-                || 現在の月 == 現在の月_9 || 現在の月 == 現在の月_10 || 現在の月 == 現在の月_11 || 現在の月 == 現在の月_12 || 現在の月 == 現在の月_1
-                || 現在の月 == 現在の月_2 || 現在の月 == 現在の月_3) {
+        if (現在の月 == 現在の月_4 || 現在の月 == 現在の月_5 || 現在の月 == 現在の月_6 || 現在の月 == 現在の月_7
+                || 現在の月 == 現在の月_8 || 現在の月 == 現在の月_9 || 現在の月 == 現在の月_10 || 現在の月 == 現在の月_11
+                || 現在の月 == 現在の月_12 || 現在の月 == 現在の月_1 || 現在の月 == 現在の月_2 || 現在の月 == 現在の月_3) {
             現在 = div.getChoshuHouhou().getDataSource().get(0).getTxt3Gatsu().getValue();
             変更後 = div.getChoshuHouhou().getDataSource().get(1).getTxt3Gatsu().getValue();
             基本 = choshuHoho.get徴収方法3月();
-            flg = judge変更無しの場合(現在, 変更後, 基本);
+            flg = is変更無しの場合(現在, 変更後, 基本);
         }
 
         return flg;
     }
 
-    private boolean judge変更無しの場合(RString 現在, RString 変更後, RString 基本) {
+    private boolean is変更無しの場合(RString 現在, RString 変更後, RString 基本) {
 
         boolean flag = false;
         if (!現在.equals(ChoshuHoho.toValue(基本).get名称()) || !変更後.equals(ChoshuHoho.toValue(基本).get名称())) {

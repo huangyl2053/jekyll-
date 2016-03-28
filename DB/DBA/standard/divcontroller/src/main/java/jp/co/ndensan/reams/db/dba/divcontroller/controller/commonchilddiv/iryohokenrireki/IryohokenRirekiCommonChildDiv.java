@@ -5,8 +5,10 @@
  */
 package jp.co.ndensan.reams.db.dba.divcontroller.controller.commonchilddiv.iryohokenrireki;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 import jp.co.ndensan.reams.db.dba.business.iryohokenkanyujokyo.IryohokenRirekiCommonChildDivDate;
 import jp.co.ndensan.reams.db.dba.divcontroller.entity.commonchilddiv.IryohokenRirekiCommonChildDiv.IryohokenRirekiCommonChildDivDiv;
@@ -58,10 +60,8 @@ public class IryohokenRirekiCommonChildDiv {
         for (UzT0007CodeEntity codeEntity : entityList) {
             keyvalueList.add(new KeyValueDataSource(codeEntity.getコード().getKey(), codeEntity.getコード名称()));
         }
-        //医療保険情報_識別コード = ViewStateHolder.get(ViewStateKeys.医療保険情報_識別コード, RString.class);
-        //医療保険情報_市町村コード = ViewStateHolder.get(ViewStateKeys.医療保険情報_市町村コード, RString.class);
-        医療保険情報_識別コード = new RString("001");
-        医療保険情報_市町村コード = new RString("000000");
+        医療保険情報_識別コード = ViewStateHolder.get(ViewStateKeys.医療保険情報_識別コード, RString.class);
+        医療保険情報_市町村コード = ViewStateHolder.get(ViewStateKeys.医療保険情報_市町村コード, RString.class);
         RString mode = ViewStateHolder.get(ViewStateKeys.医療保険情報_モード, RString.class);
         requestDiv.getPnlIryohokenJoho().getDdlSyubetsu().setDataSource(keyvalueList);
         createHandlerOf(requestDiv).initialize(mode, 医療保険情報_識別コード);
@@ -275,7 +275,7 @@ public class IryohokenRirekiCommonChildDiv {
             childDivDate.add(iryohokenRirekiDate);
         }
 
-        Collections.sort(childDivDate);
+        Collections.sort(childDivDate, new DateComparator());
         int sortIndex = childDivDate.indexOf(iryohokenRirekiDate);
 
         if (ichiran_Row.getDefaultDataName4().compareTo(ichiran_Row.getDefaultDataName3()) < 0) {
@@ -310,6 +310,14 @@ public class IryohokenRirekiCommonChildDiv {
                                 ichiran_Row.getDefaultDataName4().toString(), childDivDate.get(sortIndex + 1).getDefaultDataName3().toString()));
             }
 
+        }
+    }
+
+    private static class DateComparator implements Comparator<IryohokenRirekiCommonChildDivDate>, Serializable {
+
+        @Override
+        public int compare(IryohokenRirekiCommonChildDivDate o1, IryohokenRirekiCommonChildDivDate o2) {
+            return o1.getDefaultDataName3().compareTo(o2.getDefaultDataName3());
         }
     }
 

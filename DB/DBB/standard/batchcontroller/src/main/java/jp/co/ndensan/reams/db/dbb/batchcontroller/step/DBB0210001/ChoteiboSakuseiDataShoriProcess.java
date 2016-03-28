@@ -402,7 +402,7 @@ public class ChoteiboSakuseiDataShoriProcess extends SimpleBatchProcessBase {
             choteiboSakuseiMapper.update増の調定額の小計(増の調定額の小計);
         }
         for (DankaiShokeiEntity 減の調定額の小計 : 減の調定額の小計リスト) {
-            choteiboSakuseiMapper.update増の調定額の小計(減の調定額の小計);
+            choteiboSakuseiMapper.update減の調定額の小計(減の調定額の小計);
         }
     }
 

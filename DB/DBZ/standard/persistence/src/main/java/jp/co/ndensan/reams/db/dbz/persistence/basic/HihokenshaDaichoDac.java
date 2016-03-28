@@ -77,7 +77,7 @@ public class HihokenshaDaichoDac implements IPersistable<DbT1001HihokenshaDaicho
      * 被保険者番号、異動日で被保険者台帳を取得します。
      *
      * @param 被保険者番号 {@link HihokenshaNo 被保険者番号}
-     * * @param 異動日 {@link FlexibleDate 異動日}
+     * @param 異動日 {@link FlexibleDate 異動日}
      * @return IItemList<DbT1001HihokenshaDaichoEntity>
      */
     @Transaction
@@ -102,8 +102,8 @@ public class HihokenshaDaichoDac implements IPersistable<DbT1001HihokenshaDaicho
      * @param 被保険者番号 {@link HihokenshaNo 被保険者番号}
      * @param 異動日 {@link FlexibleDate 異動日}
      * @param 枝番 {@link RString 枝番}
-     * @return
-     * {@link DbT1001HihokenshaDaichoEntity 被保険者台帳管理Entity}の{@link List リスト}
+     * @return {@link DbT1001HihokenshaDaichoEntity 被保険者台帳管理Entity}の{@link List リスト}
+     * @throws NullPointerException 引数のいずれかがnullの場合
      */
     @Transaction
     public DbT1001HihokenshaDaichoEntity selectByKey(HihokenshaNo 被保険者番号,
@@ -125,8 +125,7 @@ public class HihokenshaDaichoDac implements IPersistable<DbT1001HihokenshaDaicho
     }
 
     /**
-     * 指定の{@link LasdecCode 市町村コード}と{@link ShikibetsuCode 識別コード}から特定される個人の、
-     * 直近の資格情報を検索します。
+     * 指定の{@link LasdecCode 市町村コード}と{@link ShikibetsuCode 識別コード}から特定される個人の、 直近の資格情報を検索します。
      *
      * @param 市町村コード {@link LasdecCode 市町村コード}
      * @param 識別コード {@link ShikibetsuCode 識別コード}
@@ -145,8 +144,7 @@ public class HihokenshaDaichoDac implements IPersistable<DbT1001HihokenshaDaicho
     }
 
     /**
-     * 指定の{@link LasdecCode 市町村コード}と{@link HihokenshaNo 被保険者番号}から特定される被保険者の、
-     * 直近の資格情報を検索します。
+     * 指定の{@link LasdecCode 市町村コード}と{@link HihokenshaNo 被保険者番号}から特定される被保険者の、 直近の資格情報を検索します。
      *
      * @param 市町村コード {@link LasdecCode 市町村コード}
      * @param 被保険者番号 {@link HihokenshaNo 被保険者番号}

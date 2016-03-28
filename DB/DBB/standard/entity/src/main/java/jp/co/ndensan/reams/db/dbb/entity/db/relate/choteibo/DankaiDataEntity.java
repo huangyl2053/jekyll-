@@ -16,42 +16,16 @@ import jp.co.ndensan.reams.uz.uza.math.Decimal;
  */
 @lombok.Getter
 @lombok.Setter
+@SuppressWarnings("PMD.UnusedPrivateField")
 public class DankaiDataEntity {
 
-    /**
-     * 調定年度
-     */
     private FlexibleYear choteiNendo;
-    /**
-     * 賦課年度
-     */
     private FlexibleYear fukaNendo;
-    /**
-     * 通知書番号
-     */
     private TsuchishoNo tsuchishoNo;
-    /**
-     * 履歴番号
-     */
     private Decimal rirekiNo;
-    /**
-     * 被保険者番号
-     */
     private HihokenshaNo hihokenshaNo;
-    /**
-     * 段階
-     */
     private RString dankai;
-    /**
-     * 徴収方法
-     */
     private RString choshuHouhou;
-    /**
-     * 調定ID
-     */
     private Decimal choteiId;
-    /**
-     * 調定額
-     */
     private Decimal choteigaku;
 }

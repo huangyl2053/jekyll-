@@ -142,7 +142,6 @@ public class SeikyuGakuShukeiPanelHandler {
         dgdSeikyugakushukei_Row row = div.getPanelSeikyugakuShukei().getDgdSeikyugakushukei().getClickedItem();
         div.getPanelSeikyugakuShukei().getPanelSeikyuShokai().getTxtKyufuritsu().setValue(
                 ViewStateHolder.get(ViewStateKeys.給付率, Decimal.class));
-
         div.getPanelSeikyugakuShukei().getPanelSeikyuShokai().getTxtTanyigokeiHokenbun().setValue(
                 row.getDefaultDataName2().getValue());
         div.getPanelSeikyugakuShukei().getPanelSeikyuShokai().getTxtTanyiTanka().setValue(
@@ -240,94 +239,63 @@ public class SeikyuGakuShukeiPanelHandler {
     }
 
     private boolean checkState(dgdSeikyugakushukei_Row ddgRow) {
-        boolean flag = false;
-        List<ShokanShukeiResult> shokanShukeiResult = ViewStateHolder.
-                get(ViewStateKeys.請求額集計一覧情報, List.class);
-        for (ShokanShukeiResult entityModified : shokanShukeiResult) {
-            if (!ddgRow.getDefaultDataName15().isEmpty() && entityModified.getShukei().get連番().
-                    equals(ddgRow.getDefaultDataName15())) {
-                if (entityModified.getShukei().getサービス実日数() != Integer.parseInt(
-                        div.getPanelSeikyugakuShukei().getPanelSeikyuShokai().
-                        getTxtJitsuNissu().getValue().toString())) {
-                    flag = true;
-                    break;
-                }
-                if (entityModified.getShukei().get計画単位数() != Integer.parseInt(
-                        div.getPanelSeikyugakuShukei().getPanelSeikyuShokai().
-                        getTxtKeikakuTanyi().getValue().toString())) {
-                    flag = true;
-                    break;
-                }
-                if (entityModified.getShukei().get限度額管理対象単位数() != Integer.parseInt(
-                        div.getPanelSeikyugakuShukei().getPanelSeikyuShokai().
-                        getTxtTaishoTanyi().getValue().toString())) {
-                    flag = true;
-                    break;
-                }
-                if (entityModified.getShukei().get限度額管理対象外単位数() != Integer.parseInt(
-                        div.getPanelSeikyugakuShukei().getPanelSeikyuShokai().
-                        getTxtTaishoGaiTanyi().getValue().toString())) {
-                    flag = true;
-                    break;
-                }
-                if (entityModified.getShukei().get短期入所計画日数() != Integer.parseInt(
-                        div.getPanelSeikyugakuShukei().getPanelSeikyuShokai().
-                        getTxtKeikakuNissu().getValue().toString())) {
-                    flag = true;
-                    break;
-                }
-                if (entityModified.getShukei().get短期入所実日数() != Integer.parseInt(
-                        div.getPanelSeikyugakuShukei().getPanelSeikyuShokai().
-                        getTxtJitsuNissuTankinyusho().getValue().toString())) {
-                    flag = true;
-                    break;
-                }
-                if (entityModified.getShukei().get単位数合計() != Integer.parseInt(
-                        div.getPanelSeikyugakuShukei().getPanelSeikyuShokai().
-                        getTxtTanyigokeiHokenbun().getValue().toString())) {
-                    flag = true;
-                    break;
-                }
-                if (entityModified.getShukei().get単位数単価()
-                        != div.getPanelSeikyugakuShukei().getPanelSeikyuShokai().
-                        getTxtTanyiTanka().getValue()) {
-                    flag = true;
-                    break;
-                }
-                if (entityModified.getShukei().get請求額()
-                        != div.getPanelSeikyugakuShukei().getPanelSeikyuShokai().
-                        getTxtSeikyugakuHoken().getValue()) {
-                    flag = true;
-                    break;
-                }
-                if (entityModified.getShukei().get利用者負担額() != Integer.parseInt(
-                        div.getPanelSeikyugakuShukei().getPanelSeikyuShokai().
-                        getTxtRiyoshaFutanHoken().getValue().toString())) {
-                    flag = true;
-                    break;
-                }
-                if (entityModified.getShukei().get出来高医療費単位数合計() != Integer.parseInt(
-                        div.getPanelSeikyugakuShukei().getPanelSeikyuShokai().
-                        getTxtTanyigokeiDekikatabun().getValue().toString())) {
-                    flag = true;
-                    break;
-                }
-                if (entityModified.getShukei().get出来高請求額差額金額() != Integer.parseInt(
-                        div.getPanelSeikyugakuShukei().getPanelSeikyuShokai().
-                        getTxtSeikyugakuDekikata().getValue().toString())) {
-                    flag = true;
-                    break;
-                }
-                if (entityModified.getShukei().get出来高医療費利用者負担額()
-                        != div.getPanelSeikyugakuShukei().getPanelSeikyuShokai().
-                        getTxtRiyoshaFutanDekikata().getValue()) {
-                    flag = true;
-                    break;
-                }
-
-            }
+        ServiceTypeInputCommonChildDivDiv sercode
+                = (ServiceTypeInputCommonChildDivDiv) div.getPanelSeikyugakuShukei().
+                getPanelSeikyuShokai().getCcdServiceTypeInput();
+        if (!ddgRow.getDefaultDataName2().getValue().equals(div.getPanelSeikyugakuShukei().getPanelSeikyuShokai().
+                getTxtTanyigokeiHokenbun().getValue())) {
+            return true;
         }
-        return flag;
+        if (!ddgRow.getDefaultDataName3().getValue().equals(div.getPanelSeikyugakuShukei().getPanelSeikyuShokai().
+                getTxtTanyiTanka().getValue())) {
+            return true;
+        }
+        if (!ddgRow.getDefaultDataName4().getValue().equals(div.getPanelSeikyugakuShukei().getPanelSeikyuShokai().
+                getTxtSeikyugakuHoken().getValue())) {
+            return true;
+        }
+        if (!ddgRow.getDefaultDataName6().getValue().equals(div.getPanelSeikyugakuShukei().getPanelSeikyuShokai().
+                getTxtRiyoshaFutanHoken().getValue())) {
+            return true;
+        }
+        if (!ddgRow.getDefaultDataName7().getValue().equals(div.getPanelSeikyugakuShukei().getPanelSeikyuShokai().
+                getTxtTaishoTanyi().getValue())) {
+            return true;
+        }
+        if (!ddgRow.getDefaultDataName8().getValue().equals(div.getPanelSeikyugakuShukei().getPanelSeikyuShokai().
+                getTxtTaishoGaiTanyi().getValue())) {
+            return true;
+        }
+        if (!ddgRow.getDefaultDataName9().getValue().equals(div.getPanelSeikyugakuShukei().getPanelSeikyuShokai().
+                getTxtKeikakuNissu().getValue())) {
+            return true;
+        }
+        if (!ddgRow.getDefaultDataName10().getValue().equals(div.getPanelSeikyugakuShukei().getPanelSeikyuShokai().
+                getTxtJitsuNissuTankinyusho().getValue())) {
+            return true;
+        }
+        if (!ddgRow.getDefaultDataName11().getValue().equals(div.getPanelSeikyugakuShukei().getPanelSeikyuShokai().
+                getTxtTanyigokeiDekikatabun().getValue())) {
+            return true;
+        }
+        if (!ddgRow.getDefaultDataName12().getValue().equals(div.getPanelSeikyugakuShukei().getPanelSeikyuShokai().
+                getTxtSeikyugakuDekikata().getValue())) {
+            return true;
+        }
+        if (!ddgRow.getDefaultDataName13().getValue().equals(div.getPanelSeikyugakuShukei().getPanelSeikyuShokai().
+                getTxtRiyoshaFutanDekikata().getValue())) {
+            return true;
+        }
+        if (!ddgRow.getDefaultDataName14().getValue().equals(div.getPanelSeikyugakuShukei().getPanelSeikyuShokai().
+                getTxtKeikakuTanyi().getValue())) {
+            return true;
+        }
+        if (!ddgRow.getDefaultDataName19().equals(sercode.getTxtServiceType().getValue())) {
+            return true;
+        }
+        return (!ddgRow.getDefaultDataName17().getValue().equals(div.getPanelSeikyugakuShukei().getPanelSeikyuShokai().
+                getTxtJitsuNissu().getValue()));
+
     }
 
     /**

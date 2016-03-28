@@ -15,6 +15,7 @@ import jp.co.ndensan.reams.uz.uza.math.Decimal;
  */
 @lombok.Getter
 @lombok.Setter
+@SuppressWarnings("PMD.UnusedPrivateField")
 public class NendoDataEntity {
 
     private FlexibleYear 調定年度;

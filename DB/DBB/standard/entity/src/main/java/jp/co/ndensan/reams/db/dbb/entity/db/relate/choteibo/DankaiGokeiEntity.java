@@ -15,66 +15,22 @@ import jp.co.ndensan.reams.uz.uza.util.db.IDbAccessable;
  */
 @lombok.Getter
 @lombok.Setter
+@SuppressWarnings("PMD.UnusedPrivateField")
 public class DankaiGokeiEntity implements IDbAccessable {
 
-    /**
-     * 調定年度
-     */
     private FlexibleYear choteiNendo;
-    /**
-     * 賦課年度
-     */
     private FlexibleYear fukaNendo;
-    /**
-     * 徴収方法
-     */
     private RString choshuHouhou;
-    /**
-     * 当月フラグ
-     */
     private int dogetsuFlag;
-    /**
-     * 前月末の全部件数の合計
-     */
     private Decimal zengetsusueKensuCount;
-    /**
-     * 前月末の全部調定額の合計
-     */
     private Decimal zengetsusueChoteigakuCount;
-    /**
-     * 増の全部件数の合計
-     */
     private Decimal fueZennbuKennsuuGokei;
-    /**
-     * 増の全部調定額の合計
-     */
     private Decimal fueZennbuChoteigakuGokei;
-    /**
-     * 減の全部件数の合計
-     */
     private Decimal genZennbuKennsuuGokei;
-    /**
-     * 減の全部調定額の合計
-     */
     private Decimal genZennbuChoteigakuGokei;
-    /**
-     * 当月末の全部件数の合計
-     */
     private Decimal dogetsusueKensuCount;
-    /**
-     * 当月末の全部調定額の合計
-     */
     private Decimal dogetsusueChoteigakuCount;
-    /**
-     * 特徴者数の合計
-     */
     private Decimal tokuchosyaKensuCount;
-    /**
-     * 普徴者数の合計
-     */
     private Decimal fuchosyaKensuCount;
-    /**
-     * 内併徴者数の合計
-     */
     private Decimal naiheisyaKensuCount;
 }

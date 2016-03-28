@@ -13,6 +13,7 @@ import java.util.List;
  */
 @lombok.Getter
 @lombok.Setter
+@SuppressWarnings("PMD.UnusedPrivateField")
 public class DataListEntity {
 
     private List<KibetsuShokeiEntity> 期別小計Entity;

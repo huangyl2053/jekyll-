@@ -61,12 +61,12 @@ public class ShokujiHiyoPanel {
 
         SyokanbaraihishikyushinseiketteParameter par = new SyokanbaraihishikyushinseiketteParameter(
                 new HihokenshaNo("000000004"),
-                new FlexibleYearMonth(new RString("200501")),
+                new FlexibleYearMonth(new RString("200401")),
                 new RString("0000000003"),
                 new JigyoshaNo("0000000003"),
                 new RString("0003"),
                 new RString("0003"),
-                new RString("4"));
+                Decimal.TEN);
         ViewStateHolder.put(ViewStateKeys.償還払費申請明細検索キー, par);
         SyokanbaraihishikyushinseiketteParameter parameter = ViewStateHolder.get(ViewStateKeys.償還払費申請明細検索キー,
                 SyokanbaraihishikyushinseiketteParameter.class);
@@ -93,13 +93,6 @@ public class ShokujiHiyoPanel {
         } else {
             div.getPanelCcd().getCcdKaigoShikakuKihon().setVisible(false);
         }
-        Decimal 標準負担額_日額 = SyokanbaraihiShikyuShinseiKetteManager.createInstance()
-                .getHyojyunfutangaku(被保険者番号, サービス提供年月, 整理番号, 事業者番号, 様式番号, 明細番号);
-        if (標準負担額_日額 == null) {
-            throw new ApplicationException(UrErrorMessages.対象データなし_追加メッセージあり.getMessage()
-                    .replace(MESSAGE.toString()));
-        }
-        ViewStateHolder.put(ViewStateKeys.償還払請求食事費用データ1, 標準負担額_日額);
         getHandler(div).setヘッダーエリア(サービス提供年月, 申請日, 事業者番号, 明細番号, 様式番号);
 
         if (サービス提供年月.isBeforeOrEquals(平成１５年３月)) {
@@ -211,7 +204,7 @@ public class ShokujiHiyoPanel {
 
         List<ShokanMeisai> shokanMeisaiList = ShokanbaraiJyokyoShokai.createInstance()
                 .getShokujiHiyoDataList(被保険者番号, サービス提供年月, 整理番号, 事業者番号, 様式番号, 明細番号, null);
-        if (shokanMeisaiList != null) {
+        if (!shokanMeisaiList.isEmpty()) {
             List<ShokanShokujiHiyo> shokanShokujiHiyoList = ShokanbaraiJyokyoShokai.createInstance()
                     .getSeikyuShokujiHiyoTanjyunSearch(被保険者番号,
                             サービス提供年月,
@@ -220,12 +213,18 @@ public class ShokujiHiyoPanel {
                             様式番号,
                             明細番号,
                             null);
-
             getHandler(div).set食事費用一覧グリッド(shokanMeisaiList, shokanShokujiHiyoList);
             ViewStateHolder.put(ViewStateKeys.償還払請求食事費用データ, (Serializable) shokanShokujiHiyoList);
+        } else {
+            Decimal 標準負担額_日額 = SyokanbaraihiShikyuShinseiKetteManager.createInstance()
+                    .getHyojyunfutangaku(被保険者番号, サービス提供年月, 整理番号, 事業者番号, 様式番号, 明細番号);
+            if (標準負担額_日額 == null) {
+                throw new ApplicationException(UrErrorMessages.対象データなし_追加メッセージあり.getMessage()
+                        .replace(MESSAGE.toString()));
+            }
+            div.getPanelShokuji().getPanelDetailGokei().getTxtHigaku().setValue(標準負担額_日額);
         }
         ViewStateHolder.put(ViewStateKeys.償還払請求食事費用, (Serializable) shokanMeisaiList);
-
     }
 
     /**

@@ -15,119 +15,36 @@ import jp.co.ndensan.reams.uz.uza.util.db.IDbAccessable;
  */
 @lombok.Getter
 @lombok.Setter
+@SuppressWarnings("PMD.UnusedPrivateField")
 public class GokeiBubunEntity implements IDbAccessable {
 
-    /**
-     * 徴収方法
-     */
     private RString choshuHouhou;
-    /**
-     * 当月フラグ
-     */
     private int dogetsuFlag;
-    /**
-     * 段階
-     */
     private RString dankai;
-    /**
-     * 4月の調定額の小計
-     */
     private Decimal choteigaku4GatsuCount;
-    /**
-     * 5月の調定額の小計
-     */
     private Decimal choteigaku5GatsuCount;
-    /**
-     * 6月の調定額の小計
-     */
     private Decimal choteigaku6GatsuCount;
-    /**
-     * 7月の調定額の小計
-     */
     private Decimal choteigaku7GatsuCount;
-    /**
-     * 8月の調定額の小計
-     */
     private Decimal choteigaku8GatsuCount;
-    /**
-     * 9月の調定額の小計
-     */
     private Decimal choteigaku9GatsuCount;
-    /**
-     * 10月の調定額の小計
-     */
     private Decimal choteigaku10GatsuCount;
-    /**
-     * 11月の調定額の小計
-     */
     private Decimal choteigaku11GatsuCount;
-    /**
-     * 12月の調定額の小計
-     */
     private Decimal choteigaku12GatsuCount;
-    /**
-     * 1月の調定額の小計
-     */
     private Decimal choteigaku1GatsuCount;
-    /**
-     * 2月の調定額の小計
-     */
     private Decimal choteigaku2GatsuCount;
-    /**
-     * 3月の調定額の小計
-     */
     private Decimal choteigaku3GatsuCount;
-    /**
-     * 4月の調定額の小計(翌)
-     */
     private Decimal choteigaku4GatsuCountYoku;
-    /**
-     * 5月の調定額の小計(翌)
-     */
     private Decimal choteigaku5GatsuCountYoku;
-    /**
-     * 該当する段階の前月末の件数の小計
-     */
     private Decimal zengetsusueKensuCount;
-    /**
-     * 該当する段階の前月末の調定額の小計
-     */
     private Decimal zengetsusueChoteigakuCount;
-    /**
-     * 該当する段階の増の件数の小計
-     */
     private Decimal fueKensuCount;
-    /**
-     * 該当する段階の増の調定額の小計
-     */
     private Decimal fueChoteigakuCount;
-    /**
-     * 該当する段階の減の件数の小計
-     */
     private Decimal genKensuCount;
-    /**
-     * 該当する段階の減の調定額の小計
-     */
     private Decimal genChoteigakuCount;
-    /**
-     * 該当する段階の当月末の件数の小計
-     */
     private Decimal dogetsusueKensuCount;
-    /**
-     * 該当する段階の当月末の調定額の小計
-     */
     private Decimal dogetsusueChoteigakuCount;
-    /**
-     * 該当する段階の特徴者数の件数の小計
-     */
     private Decimal tokuchosyaKensuCount;
-    /**
-     * 該当する段階の普徴者数の件数の小計
-     */
     private Decimal fuchosyaKensuCount;
-    /**
-     * 該当する段階の内併徴者数の件数の小計
-     */
     private Decimal naiheisyaKensuCount;
 
     /**
@@ -139,33 +56,33 @@ public class GokeiBubunEntity implements IDbAccessable {
     public void add月の調定額の小計By月別(Tsuki 月別, Decimal 調定額の小計) {
         調定額の小計 = null == 調定額の小計 ? Decimal.ZERO : 調定額の小計;
         if (Tsuki._1月.equals(月別)) {
-            add(choteigaku1GatsuCount, 調定額の小計);
+            choteigaku1GatsuCount = add(choteigaku1GatsuCount, 調定額の小計);
         } else if (Tsuki._2月.equals(月別)) {
-            add(choteigaku2GatsuCount, 調定額の小計);
+            choteigaku2GatsuCount = add(choteigaku2GatsuCount, 調定額の小計);
         } else if (Tsuki._3月.equals(月別)) {
-            add(choteigaku3GatsuCount, 調定額の小計);
+            choteigaku3GatsuCount = add(choteigaku3GatsuCount, 調定額の小計);
         } else if (Tsuki._4月.equals(月別)) {
-            add(choteigaku4GatsuCount, 調定額の小計);
+            choteigaku4GatsuCount = add(choteigaku4GatsuCount, 調定額の小計);
         } else if (Tsuki._5月.equals(月別)) {
-            add(choteigaku5GatsuCount, 調定額の小計);
+            choteigaku5GatsuCount = add(choteigaku5GatsuCount, 調定額の小計);
         } else if (Tsuki._6月.equals(月別)) {
-            add(choteigaku6GatsuCount, 調定額の小計);
+            choteigaku6GatsuCount = add(choteigaku6GatsuCount, 調定額の小計);
         } else if (Tsuki._7月.equals(月別)) {
-            add(choteigaku7GatsuCount, 調定額の小計);
+            choteigaku7GatsuCount = add(choteigaku7GatsuCount, 調定額の小計);
         } else if (Tsuki._8月.equals(月別)) {
-            add(choteigaku8GatsuCount, 調定額の小計);
+            choteigaku8GatsuCount = add(choteigaku8GatsuCount, 調定額の小計);
         } else if (Tsuki._9月.equals(月別)) {
-            add(choteigaku9GatsuCount, 調定額の小計);
+            choteigaku9GatsuCount = add(choteigaku9GatsuCount, 調定額の小計);
         } else if (Tsuki._10月.equals(月別)) {
-            add(choteigaku10GatsuCount, 調定額の小計);
+            choteigaku10GatsuCount = add(choteigaku10GatsuCount, 調定額の小計);
         } else if (Tsuki._11月.equals(月別)) {
-            add(choteigaku11GatsuCount, 調定額の小計);
+            choteigaku11GatsuCount = add(choteigaku11GatsuCount, 調定額の小計);
         } else if (Tsuki._12月.equals(月別)) {
-            add(choteigaku12GatsuCount, 調定額の小計);
+            choteigaku12GatsuCount = add(choteigaku12GatsuCount, 調定額の小計);
         } else if (Tsuki.翌年度4月.equals(月別)) {
-            add(choteigaku4GatsuCountYoku, 調定額の小計);
+            choteigaku4GatsuCountYoku = add(choteigaku4GatsuCountYoku, 調定額の小計);
         } else if (Tsuki.翌年度5月.equals(月別)) {
-            add(choteigaku5GatsuCountYoku, 調定額の小計);
+            choteigaku5GatsuCountYoku = add(choteigaku5GatsuCountYoku, 調定額の小計);
         }
     }
 

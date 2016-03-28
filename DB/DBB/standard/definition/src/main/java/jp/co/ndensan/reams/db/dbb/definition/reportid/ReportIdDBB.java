@@ -41,7 +41,19 @@ public enum ReportIdDBB {
     /**
      * 賦課台帳（仮算定）の帳票ID
      */
-    DBB100031(new ReportId("DBB100031_KarisanteiFukaDaicho"), new RString("賦課台帳 仮算定"));
+    DBB100031(new ReportId("DBB100031_KarisanteiFukaDaicho"), new RString("賦課台帳 仮算定")),
+    /**
+     * 保険料納入通知書（本算定）の帳票ID
+     */
+    DBB200010(new ReportId("DBB200010_NonyuTsuchishoHonsanteiHakkoIchiran"), new RString("保険料納入通知書 本算定")),
+    /**
+     * 介護保険料額決定通知書発行一覧表の帳票ID
+     */
+    DBB200012(new ReportId("DBB200012_KaigoHokenryogakuKetteiHenkoTsuchiHakkoIchiran"), new RString("介護保険料額決定通知書発行 一覧表")),
+    /**
+     * 特別徴収開始通知書（本算定）発行一覧表の帳票ID
+     */
+    DBB200001(new ReportId("DBB200001_TokubetsuChoshuKaishiTsuchishoKariHakkoIchiran"), new RString("特別徴収開始通知書 本算定"));
     private final ReportId reportId;
     private final RString reportName;
 

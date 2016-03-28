@@ -53,16 +53,16 @@ public class JukyuNinteirirekiInfoHandler {
             FlexibleYearMonth yokaigoJotai = (list.get認定有効開始日() == null ? null : list.get認定有効開始日().getYearMonth());
             if (yokaigoJotai == null) {
                 row.setYokaigoJotaiKubun(RString.EMPTY);
-            } else if (new FlexibleYearMonth("200004").isBefore(yokaigoJotai)
-                    && yokaigoJotai.isBefore(new FlexibleYearMonth("200203"))) {
+            } else if (new FlexibleYearMonth("200004").isBeforeOrEquals(yokaigoJotai)
+                    && yokaigoJotai.isBeforeOrEquals(new FlexibleYearMonth("200203"))) {
                 row.setYokaigoJotaiKubun(YokaigoJotaiKubun99.toValue(list.get要介護認定状態区分().getKey()).get名称());
-            } else if (new FlexibleYearMonth("200204").isBefore(yokaigoJotai)
-                    && yokaigoJotai.isBefore(new FlexibleYearMonth("200603"))) {
+            } else if (new FlexibleYearMonth("200204").isBeforeOrEquals(yokaigoJotai)
+                    && yokaigoJotai.isBeforeOrEquals(new FlexibleYearMonth("200603"))) {
                 row.setYokaigoJotaiKubun(YokaigoJotaiKubun02.toValue(list.get要介護認定状態区分().getKey()).get名称());
-            } else if (new FlexibleYearMonth("200604").isBefore(yokaigoJotai)
-                    && yokaigoJotai.isBefore(new FlexibleYearMonth("200903"))) {
+            } else if (new FlexibleYearMonth("200604").isBeforeOrEquals(yokaigoJotai)
+                    && yokaigoJotai.isBeforeOrEquals(new FlexibleYearMonth("200903"))) {
                 row.setYokaigoJotaiKubun(YokaigoJotaiKubun06.toValue(list.get要介護認定状態区分().getKey()).get名称());
-            } else if (new FlexibleYearMonth("200904").isBefore(yokaigoJotai)) {
+            } else if (new FlexibleYearMonth("200904").isBeforeOrEquals(yokaigoJotai)) {
                 row.setYokaigoJotaiKubun(YokaigoJotaiKubun09.toValue(list.get要介護認定状態区分().getKey()).get名称());
             }
             row.getNinteiYukoKaishiYMD().setValue(list.get認定有効開始日());

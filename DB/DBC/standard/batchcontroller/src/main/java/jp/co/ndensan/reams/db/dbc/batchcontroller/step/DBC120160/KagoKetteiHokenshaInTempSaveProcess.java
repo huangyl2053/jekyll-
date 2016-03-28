@@ -92,9 +92,9 @@ public class KagoKetteiHokenshaInTempSaveProcess extends BatchProcessBase<RStrin
     @Override
     protected void afterExecute() {
         for (KagoKetteiHokenshaInCSVMeisaiEntity meisaiEntity : list) {
-            mapper.insert過誤決定明細(createMeiseiRecord(header, meisaiEntity));
+            mapper.insert保険者分情報_明細(createMeiseiRecord(header, meisaiEntity));
         }
-        mapper.insert過誤決定集計(createShukeiRecord(header, shukei));
+        mapper.insert保険者分情報_集計(createShukeiRecord(header, shukei));
     }
 
     private KagoKetteiHokenshaInMeisaiEntity createMeiseiRecord(

@@ -29,6 +29,7 @@ import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.ApplicationException;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.message.MessageDialogSelectedResult;
 import jp.co.ndensan.reams.uz.uza.message.QuestionMessage;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.CommonButtonHolder;
@@ -56,7 +57,7 @@ public class KyuhuhiMeisaiJutokuPanel {
         SyokanbaraihishikyushinseiketteParameter par = new SyokanbaraihishikyushinseiketteParameter(
                 new HihokenshaNo("000000003"), new FlexibleYearMonth(new RString("201406")),
                 new RString("1111"), new JigyoshaNo("3333"), new RString("2222"),
-                new RString("4444"), new RString("10"));
+                new RString("4444"), Decimal.TEN);
         ViewStateHolder.put(ViewStateKeys.償還払費申請明細検索キー, par);
         ViewStateHolder.put(ViewStateKeys.償還払費申請検索キー, par);
         SyokanbaraihishikyushinseiketteParameter parameter = ViewStateHolder.get(ViewStateKeys.償還払費申請明細検索キー,

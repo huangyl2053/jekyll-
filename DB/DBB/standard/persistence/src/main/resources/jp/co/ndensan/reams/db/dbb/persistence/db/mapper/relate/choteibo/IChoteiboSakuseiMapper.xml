@@ -1323,7 +1323,8 @@
         "fuchosyaKensuCount" = #{fuchosyaKensuCount},
         "naiheisyaKensuCount" = #{naiheisyaKensuCount}
         WHERE
-        "dankai" = #{dankai}
+        "choshuHouhou" = #{choshuHouhou}
+        AND "dankai" = #{dankai}
         AND "dogetsuFlag" = 1
     </update>
 

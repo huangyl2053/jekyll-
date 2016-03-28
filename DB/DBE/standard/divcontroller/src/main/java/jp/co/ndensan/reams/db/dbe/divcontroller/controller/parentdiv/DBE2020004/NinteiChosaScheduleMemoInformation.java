@@ -8,6 +8,7 @@ package jp.co.ndensan.reams.db.dbe.divcontroller.controller.parentdiv.DBE2020004
 import java.util.List;
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.importance.Importance;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2020004.DBE2020004StateName;
+import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2020004.DBE2020004TransitionEventName;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2020004.NinteiChosaScheduleMemoInformationDiv;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2020004.dgListOfCommonMemo_Row;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2020004.dgListOfJichikuMemo_Row;
@@ -158,6 +159,28 @@ public class NinteiChosaScheduleMemoInformation {
         }
         getHandler(div).onClick_Login();
         return ResponseData.of(div).setState(DBE2020004StateName.スケジュールメモ);
+    }
+
+    /**
+     * 戻るを押下時の処理。
+     *
+     * @param div 認定調査スケジュール情報Div
+     * @return ResponseData
+     */
+    public ResponseData onClick_MoDoRu(NinteiChosaScheduleMemoInformationDiv div) {
+
+        return ResponseData.of(div).forwardWithEventName(DBE2020004TransitionEventName.戻る).parameter(new RString("未定へ遷移"));
+    }
+
+    /**
+     * 完了を押下時の処理。
+     *
+     * @param div 認定調査スケジュール情報Div
+     * @return ResponseData
+     */
+    public ResponseData onClick_kanrRou(NinteiChosaScheduleMemoInformationDiv div) {
+
+        return ResponseData.of(div).forwardWithEventName(DBE2020004TransitionEventName.戻る).parameter(new RString("更新へ遷移"));
     }
 
     /**

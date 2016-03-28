@@ -15,6 +15,7 @@ import jp.co.ndensan.reams.db.dbc.business.core.syokanbaraihishikyushinseikette.
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0820025.TokuteiNyushoshaHiyoPanelDiv;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0820025.dgdTokuteiYichiran_Row;
 import jp.co.ndensan.reams.db.dbc.divcontroller.viewbox.ViewStateKeys;
+import jp.co.ndensan.reams.db.dbc.divcontroller.viewbox.syokanbaraihishikyushinseikette.ShoukanharaihishinseimeisaikensakuParameter;
 import jp.co.ndensan.reams.db.dbc.divcontroller.viewbox.syokanbaraihishikyushinseikette.SyokanbaraihishikyushinseiketteParameter;
 import jp.co.ndensan.reams.db.dbc.service.core.syokanbaraihishikyushinseikette.SyokanbaraihiShikyuShinseiKetteManager;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
@@ -62,18 +63,18 @@ public class TokuteiNyushoshaHiyoPanelHandler {
      *
      * @param サービス年月 FlexibleYearMonth
      * @param 事業者番号 JigyoshaNo
-     * @param 申請日 RString
+     * @param 申請日 RDate
      * @param 明細番号 RString
      * @param 証明書 RString
      */
     public void set申請共通エリア(
             FlexibleYearMonth サービス年月,
             JigyoshaNo 事業者番号,
-            RString 申請日,
+            RDate 申請日,
             RString 明細番号,
             RString 証明書) {
         div.getPanelHead().getTxtServiceTeikyoYM().setValue(new RDate(サービス年月.toString()));
-        div.getPanelHead().getTxtShinseiYMD().setValue(new RDate(申請日.toString()));
+        div.getPanelHead().getTxtShinseiYMD().setValue(申請日);
         div.getPanelHead().getTxtJigyoshaBango().setValue(事業者番号.getColumnValue());
         div.getPanelHead().getTxtMeisaiBango().setValue(明細番号);
         div.getPanelHead().getTxtShomeisho().setValue(証明書);
@@ -86,14 +87,14 @@ public class TokuteiNyushoshaHiyoPanelHandler {
      */
     public void getボタンを制御(ShikibetsuNoKanri shikibetsuNoKanri) {
 
-        SyokanbaraihishikyushinseiketteParameter paramter = ViewStateHolder.get(ViewStateKeys.償還払費申請検索キー,
-                SyokanbaraihishikyushinseiketteParameter.class);
-        HihokenshaNo 被保険者番号 = paramter.getHiHokenshaNo();
-        FlexibleYearMonth サービス年月 = paramter.getServiceTeikyoYM();
-        RString 整理番号 = paramter.getSeiriNp();
-        JigyoshaNo 事業者番号 = paramter.getJigyoshaNo();
-        RString 様式番号 = paramter.getYoshikiNo();
-        RString 明細番号 = paramter.getMeisaiNo();
+        ShoukanharaihishinseimeisaikensakuParameter meisaiPar = ViewStateHolder.get(ViewStateKeys.償還払費申請明細検索キー,
+                ShoukanharaihishinseimeisaikensakuParameter.class);
+        HihokenshaNo 被保険者番号 = meisaiPar.get被保険者番号();
+        FlexibleYearMonth サービス年月 = meisaiPar.getサービス年月();
+        RString 整理番号 = meisaiPar.get整理番号();
+        JigyoshaNo 事業者番号 = meisaiPar.get事業者番号();
+        RString 様式番号 = meisaiPar.get様式番号();
+        RString 明細番号 = meisaiPar.get明細番号();
         set基本情報ボタン制御(shikibetsuNoKanri, 被保険者番号, サービス年月, 整理番号, 事業者番号, 様式番号, 明細番号);
         set給付費明細ボタン制御(shikibetsuNoKanri, 被保険者番号, サービス年月, 整理番号, 事業者番号, 様式番号, 明細番号);
         set特定診療費ボタン制御(shikibetsuNoKanri, 被保険者番号, サービス年月, 整理番号, 事業者番号, 様式番号, 明細番号);
@@ -549,14 +550,14 @@ public class TokuteiNyushoshaHiyoPanelHandler {
      * 「申請を保存する」ボタン
      */
     public void 保存処理() {
-        SyokanbaraihishikyushinseiketteParameter paramter = ViewStateHolder.get(ViewStateKeys.償還払費申請検索キー,
-                SyokanbaraihishikyushinseiketteParameter.class);
-        HihokenshaNo 被保険者番号 = paramter.getHiHokenshaNo();
-        FlexibleYearMonth サービス年月 = paramter.getServiceTeikyoYM();
-        RString 整理番号 = paramter.getSeiriNp();
-        JigyoshaNo 事業者番号 = paramter.getJigyoshaNo();
-        RString 様式番号 = paramter.getYoshikiNo();
-        RString 明細番号 = paramter.getMeisaiNo();
+        ShoukanharaihishinseimeisaikensakuParameter meisaiPar = ViewStateHolder.get(ViewStateKeys.償還払費申請明細検索キー,
+                ShoukanharaihishinseimeisaikensakuParameter.class);
+        HihokenshaNo 被保険者番号 = meisaiPar.get被保険者番号();
+        FlexibleYearMonth サービス年月 = meisaiPar.getサービス年月();
+        RString 整理番号 = meisaiPar.get整理番号();
+        JigyoshaNo 事業者番号 = meisaiPar.get事業者番号();
+        RString 様式番号 = meisaiPar.get様式番号();
+        RString 明細番号 = meisaiPar.get明細番号();
         if (削除.equals(ViewStateHolder.get(ViewStateKeys.処理モード, RString.class))) {
             SyokanbaraihiShikyuShinseiKetteManager.createInstance().delShokanSyomeisyo(被保険者番号,
                     サービス年月, 整理番号, 事業者番号, 様式番号, 明細番号);
@@ -631,16 +632,24 @@ public class TokuteiNyushoshaHiyoPanelHandler {
         if (dgdRow.getDefaultDataName2().getValue() != null) {
             entity = entity.createBuilderForEdit().set費用単価(dgdRow.getDefaultDataName2()
                     .getValue().intValue()).build();
+        } else {
+            entity = entity.createBuilderForEdit().set費用単価(0).build();
         }
         if (dgdRow.getDefaultDataName3().getValue() != null) {
             entity = entity.createBuilderForEdit().set負担限度額(dgdRow.getDefaultDataName3()
                     .getValue().intValue()).build();
+        } else {
+            entity = entity.createBuilderForEdit().set負担限度額(0).build();
         }
         if (dgdRow.getDefaultDataName4().getValue() != null) {
             entity = entity.createBuilderForEdit().set日数(dgdRow.getDefaultDataName4().getValue().intValue()).build();
+        } else {
+            entity = entity.createBuilderForEdit().set日数(0).build();
         }
         if (dgdRow.getDefaultDataName5().getValue() != null) {
             entity = entity.createBuilderForEdit().set費用額(dgdRow.getDefaultDataName5().getValue().intValue()).build();
+        } else {
+            entity = entity.createBuilderForEdit().set費用額(0).build();
         }
         if (dgdRow.getDefaultDataName6().getValue() != null) {
             entity = entity.createBuilderForEdit().set保険分請求額(dgdRow.getDefaultDataName6()
@@ -649,19 +658,26 @@ public class TokuteiNyushoshaHiyoPanelHandler {
         if (dgdRow.getDefaultDataName7().getValue() != null) {
             entity = entity.createBuilderForEdit().set利用者負担額(dgdRow.getDefaultDataName7()
                     .getValue().intValue()).build();
+        } else {
+            entity = entity.createBuilderForEdit().set利用者負担額(0).build();
         }
         if (div.getPanelTokutei().getTxtHiyogakuTotal().getValue() != null) {
             entity = entity.createBuilderForEdit().set費用額合計(div.getPanelTokutei().getTxtHiyogakuTotal().getValue()
                     .intValue()).build();
+        } else {
+            entity = entity.createBuilderForEdit().set費用額合計(0).build();
         }
         if (div.getPanelTokutei().getTxtHokenbunTotal().getValue() != null) {
             entity = entity.createBuilderForEdit().set保険分請求額合計(div.getPanelTokutei()
-                    .getTxtHokenbunTotal().getValue()
-                    .intValue()).build();
+                    .getTxtHokenbunTotal().getValue().intValue()).build();
+        } else {
+            entity = entity.createBuilderForEdit().set保険分請求額合計(0).build();
         }
         if (div.getPanelTokutei().getTxtRiyoshaFutangakuTotal().getValue() != null) {
             entity = entity.createBuilderForEdit().set利用者負担額合計(div.getPanelTokutei().getTxtRiyoshaFutangakuTotal()
                     .getValue().intValue()).build();
+        } else {
+            entity = entity.createBuilderForEdit().set利用者負担額合計(0).build();
         }
         return entity;
     }

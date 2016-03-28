@@ -7,7 +7,7 @@ package jp.co.ndensan.reams.db.dbc.divcontroller.handler.parentdiv.paymentdate;
 
 import java.util.ArrayList;
 import java.util.List;
-import jp.co.ndensan.reams.db.dbc.definition.core.shiharaihouhoukinoukubun.ShiharaihouhouKinouKubun;
+import jp.co.ndensan.reams.db.dbc.definition.core.shiharaihohokinokubun.ShiharaiHohoKinoKubun;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.commonchilddiv.PaymentDate.PaymentDateDiv;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.ChohyoSeigyoHanyo;
 import jp.co.ndensan.reams.db.dbz.definition.message.DbzErrorMessages;
@@ -98,7 +98,7 @@ public class PaymentDateHandler {
             }
         }
 
-        RString 名称 = ShiharaihouhouKinouKubun.toValue(支払方法機能区分).get名称();
+        RString 名称 = ShiharaiHohoKinoKubun.toValue(支払方法機能区分).get名称();
         if (事業高額.equals(名称)) {
             if (!有.equals(事業高額決定通知書_支払予定日印字有無)) {
                 div.getPayToKoza().setDisplayNone(true);

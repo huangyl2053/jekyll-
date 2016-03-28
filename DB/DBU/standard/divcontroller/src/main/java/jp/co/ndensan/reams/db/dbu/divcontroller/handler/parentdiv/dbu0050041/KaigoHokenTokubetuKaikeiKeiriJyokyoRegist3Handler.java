@@ -258,18 +258,30 @@ public class KaigoHokenTokubetuKaikeiKeiriJyokyoRegist3Handler {
         RString 集計対象年 = new RString(insuranceInfEntity.get集計対象年().toString());
         RString 統計対象区分 = insuranceInfEntity.get統計対象区分();
         LasdecCode 市町村コード = insuranceInfEntity.get市町村コード();
-        KaigoHokenJigyoHokokuNenpo 前年度以前データ = 介護保険特別会計経理状況登録Manager
-                .getJigyoHokokuNenpoDetal(報告年, 集計対象年, 統計対象区分, 市町村コード, 集計番号_0301.getColumnValue()).get(0);
-        KaigoHokenJigyoHokokuNenpo 今年度データ = 介護保険特別会計経理状況登録Manager
-                .getJigyoHokokuNenpoDetal(報告年, 集計対象年, 統計対象区分, 市町村コード, 集計番号_0302.getColumnValue()).get(0);
-        KaigoHokenJigyoHokokuNenpo 実質的な収支についてデータ = 介護保険特別会計経理状況登録Manager
-                .getJigyoHokokuNenpoDetal(報告年, 集計対象年, 統計対象区分, 市町村コード, 集計番号_0303.getColumnValue()).get(0);
-        set前年度以前データ(前年度以前データ);
-        set今年度データ(今年度データ);
-        set実質的な収支についてデータ(実質的な収支についてデータ);
-        if ((null == 前年度以前データ || 前年度以前データ.get詳細データエリア().isEmpty())
-                && (null == 今年度データ || 今年度データ.get詳細データエリア().isEmpty())
-                && (null == 実質的な収支についてデータ || 実質的な収支についてデータ.get詳細データエリア().isEmpty())
+        List<KaigoHokenJigyoHokokuNenpo> 前年度以前データs = 介護保険特別会計経理状況登録Manager
+                .getJigyoHokokuNenpoDetal(報告年, 集計対象年, 統計対象区分, 市町村コード, 集計番号_0301.getColumnValue());
+        List<KaigoHokenJigyoHokokuNenpo> 今年度データs = 介護保険特別会計経理状況登録Manager
+                .getJigyoHokokuNenpoDetal(報告年, 集計対象年, 統計対象区分, 市町村コード, 集計番号_0302.getColumnValue());
+        List<KaigoHokenJigyoHokokuNenpo> 実質的な収支についてデータs = 介護保険特別会計経理状況登録Manager
+                .getJigyoHokokuNenpoDetal(報告年, 集計対象年, 統計対象区分, 市町村コード, 集計番号_0303.getColumnValue());
+        KaigoHokenJigyoHokokuNenpo data前年度以前データ = null;
+        KaigoHokenJigyoHokokuNenpo data今年度データ = null;
+        KaigoHokenJigyoHokokuNenpo data実質的な収支についてデータ = null;
+        if (!前年度以前データs.isEmpty()) {
+            data前年度以前データ = 前年度以前データs.get(0);
+        }
+        if (!今年度データs.isEmpty()) {
+            data今年度データ = 今年度データs.get(0);
+        }
+        if (!実質的な収支についてデータs.isEmpty()) {
+            data実質的な収支についてデータ = 実質的な収支についてデータs.get(0);
+        }
+        set前年度以前データ(data前年度以前データ);
+        set今年度データ(data今年度データ);
+        set実質的な収支についてデータ(data実質的な収支についてデータ);
+        if ((null == data前年度以前データ || data前年度以前データ.get詳細データエリア().isEmpty())
+                && (null == data今年度データ || data今年度データ.get詳細データエリア().isEmpty())
+                && (null == data実質的な収支についてデータ || data実質的な収支についてデータ.get詳細データエリア().isEmpty())
                 && !DELETE.equals(insuranceInfEntity.get処理フラグ())) {
             内部処理モード = 内部処理モード_修正新規;
         } else {

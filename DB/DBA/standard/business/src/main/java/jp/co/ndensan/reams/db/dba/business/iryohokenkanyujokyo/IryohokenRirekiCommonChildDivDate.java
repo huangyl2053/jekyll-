@@ -11,12 +11,16 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
  *
  * dgIryohokenIchiran_Row のクラスファイル。
  */
-public class IryohokenRirekiCommonChildDivDate implements Comparable<IryohokenRirekiCommonChildDivDate> {
+public class IryohokenRirekiCommonChildDivDate {
 
     private RString defaultDataName2;
     private RString defaultDataName3;
     private RString defaultDataName4;
 
+    /**
+     * コンストラクタです.
+     *
+     */
     public IryohokenRirekiCommonChildDivDate() {
         super();
 
@@ -26,10 +30,11 @@ public class IryohokenRirekiCommonChildDivDate implements Comparable<IryohokenRi
     }
 
     /**
+     * コンストラクタです。
      *
-     * @param defaultDataName2
-     * @param defaultDataName3
-     * @param defaultDataName4
+     * @param defaultDataName2 コード
+     * @param defaultDataName3 医療保険加入年月日
+     * @param defaultDataName4 医療保険脱退年月日
      */
     public IryohokenRirekiCommonChildDivDate(RString defaultDataName2, RString defaultDataName3, RString defaultDataName4) {
         this.defaultDataName2 = defaultDataName2;
@@ -92,13 +97,4 @@ public class IryohokenRirekiCommonChildDivDate implements Comparable<IryohokenRi
         this.defaultDataName4 = defaultDataName4;
     }
 
-    /**
-     *
-     * @param iryohoken
-     * @return
-     */
-    @Override
-    public int compareTo(IryohokenRirekiCommonChildDivDate iryohoken) {
-        return this.defaultDataName3.compareTo(iryohoken.defaultDataName3);
-    }
 }

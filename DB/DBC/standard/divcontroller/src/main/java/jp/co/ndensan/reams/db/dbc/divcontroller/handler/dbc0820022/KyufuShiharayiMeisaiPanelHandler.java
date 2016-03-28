@@ -193,45 +193,36 @@ public class KyufuShiharayiMeisaiPanelHandler {
     }
 
     private boolean checkState(dgdKyufuhiMeisai_Row ddgRow) {
-        boolean flag = false;
-        List<ShokanMeisaiResult> shokanMeisaiResult = ViewStateHolder.
-                get(ViewStateKeys.給付費明細登録, List.class);
         ServiceCodeInputCommonChildDivDiv sercode
                 = (ServiceCodeInputCommonChildDivDiv) div.getPanelThree().getPanelFour().getCcdServiceCodeInput();
         RString サービス種類コード = sercode.getTxtServiceCode1().getValue();
         RString サービス項目コード = sercode.getTxtServiceCode2().getValue();
         RStringBuilder builder = new RStringBuilder();
         builder.append(サービス種類コード).append(サービス項目コード);
-        for (ShokanMeisaiResult entityModified : shokanMeisaiResult) {
-            if (!ddgRow.getDefaultDataName6().isEmpty() && entityModified.getEntity().get連番().
-                    equals(ddgRow.getDefaultDataName6())) {
-                if (!ddgRow.getDefaultDataName1().equals(builder.toRString())) {
-                    flag = true;
-                    break;
-                }
-                if (entityModified.getEntity().get単位数() != div.getPanelThree().getPanelFour().getTxtTanyi().getValue().intValue()) {
-                    flag = true;
-                    break;
-                }
-                if (entityModified.getEntity().get日数_回数() != div.getPanelThree().getPanelFour().getTxtKaisu().getValue().intValue()) {
-                    flag = true;
-                    break;
-                }
-                if (entityModified.getEntity().getサービス単位数() != div.getPanelThree().getPanelFour().getTxtServiceTanyi().getValue().intValue()) {
-                    flag = true;
-                    break;
-                }
-                if (entityModified.getEntity().get摘要() != div.getPanelThree().getPanelFour().getTxtTeikiyo().getValue()) {
-                    flag = true;
-                    break;
-                }
-                if (entityModified.getServiceName() != sercode.getTxtServiceCodeName().getValue()) {
-                    flag = true;
-                    break;
-                }
-            }
+        if (ddgRow.getDefaultDataName1() != builder.toRString()) {
+            return true;
         }
-        return flag;
+        if (div.getPanelThree().getPanelFour().getTxtTanyi().getValue() == null && ddgRow.getDefaultDataName2() != null) {
+            return true;
+        } else if (div.getPanelThree().getPanelFour().getTxtTanyi().getValue() != null) {
+            return !(new RString(div.getPanelThree().getPanelFour().getTxtTanyi().
+                    getValue().toString()).equals(ddgRow.getDefaultDataName2()));
+        }
+        if (div.getPanelThree().getPanelFour().getTxtKaisu().
+                getValue() == null && ddgRow.getDefaultDataName3() != null) {
+            return true;
+        } else if (div.getPanelThree().getPanelFour().getTxtKaisu().getValue() != null) {
+            return !(new RString(div.getPanelThree().getPanelFour().getTxtKaisu().
+                    getValue().toString()).equals(ddgRow.getDefaultDataName3()));
+        }
+        if (div.getPanelThree().getPanelFour().getTxtServiceTanyi().
+                getValue() == null && ddgRow.getDefaultDataName4() != null) {
+            return true;
+        } else if (div.getPanelThree().getPanelFour().getTxtServiceTanyi().getValue() != null) {
+            return !(new RString(div.getPanelThree().getPanelFour().getTxtServiceTanyi().
+                    getValue().toString()).equals(ddgRow.getDefaultDataName4()));
+        }
+        return (!ddgRow.getDefaultDataName5().equals(div.getPanelThree().getPanelFour().getTxtTeikiyo().getValue()));
     }
 
     private void setDgdKyufuhiMeisai(dgdKyufuhiMeisai_Row ddgRow) {

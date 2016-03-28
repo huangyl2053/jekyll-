@@ -17,6 +17,7 @@ import jp.co.ndensan.reams.db.dbb.definition.core.choteibo.KibetsuShokei;
  */
 @lombok.Getter
 @lombok.Setter
+@SuppressWarnings("PMD.UnusedPrivateField")
 public class GokeiEntity implements Cloneable, Serializable {
 
     private List<KibetsuShokei> 期別小計Parameter;

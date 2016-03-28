@@ -13,6 +13,7 @@ import java.util.List;
  */
 @lombok.Getter
 @lombok.Setter
+@SuppressWarnings("PMD.UnusedPrivateField")
 public class GokeiDataListEntity {
 
     private List<GokeiBubunEntity> 合計部分Entity;
