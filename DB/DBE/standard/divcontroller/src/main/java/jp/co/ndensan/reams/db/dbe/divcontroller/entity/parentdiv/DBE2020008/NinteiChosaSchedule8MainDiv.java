@@ -257,12 +257,12 @@ public class NinteiChosaSchedule8MainDiv extends Panel {
     }
 
     @JsonIgnore
-    public TextBoxNum getTxtChosaChikuCode() {
+    public TextBoxCode getTxtChosaChikuCode() {
         return this.getChosaChikuGroupChosaChikuList().getTxtChosaChikuCode();
     }
 
     @JsonIgnore
-    public void  setTxtChosaChikuCode(TextBoxNum txtChosaChikuCode) {
+    public void  setTxtChosaChikuCode(TextBoxCode txtChosaChikuCode) {
         this.getChosaChikuGroupChosaChikuList().setTxtChosaChikuCode(txtChosaChikuCode);
     }
 
