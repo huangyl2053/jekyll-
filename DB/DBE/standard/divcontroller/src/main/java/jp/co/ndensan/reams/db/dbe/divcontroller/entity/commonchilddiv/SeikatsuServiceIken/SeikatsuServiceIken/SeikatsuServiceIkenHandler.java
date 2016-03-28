@@ -62,7 +62,6 @@ public class SeikatsuServiceIkenHandler {
     private static final String STR_KEY0 = "key0";
     private static final String STR_KEY1 = "key1";
     private static final String STR_KEY2 = "key2";
-    private static final int INDEX_0 = 0;
     private static final List<Integer> 連番_意見項目リスト = new ArrayList();
     private static final List<Integer> 連番_記入項目リスト = new ArrayList();
     List<RString> chkHokohojoShiyokeys = new ArrayList();
@@ -197,7 +196,7 @@ public class SeikatsuServiceIkenHandler {
 
     private ShujiiIkenshoJoho create記入項目(ShujiiIkenshoJoho 要介護認定主治医意見書情報, ShinseishoKanriNo 管理番号, int 履歴番号) {
         for (int 記入項目_連番 : 連番_記入項目リスト) {
-            要介護認定主治医意見書情報.createBuilderForEdit().setShujiiIkenshoIkenItem(new ShujiiIkenshoIkenItem(管理番号, 履歴番号, 記入項目_連番)
+            要介護認定主治医意見書情報.createBuilderForEdit().setShujiiIkenshoKinyuItem(new ShujiiIkenshoKinyuItem(管理番号, 履歴番号, 記入項目_連番)
                     .createBuilderForEdit().set厚労省IF識別コード(new Code(厚労省IF識別コード)).build());
 
         }
@@ -369,6 +368,9 @@ public class SeikatsuServiceIkenHandler {
     }
 
     private ShujiiIkenshoKinyuItem edit現在あるかまたは今後発生する可能性の高い状態とその対処方針エリアの記入項目編集(ShujiiIkenshoKinyuItem item) {
+        if (13 == item.get連番()) {
+            return item.createBuilderForEdit().set記入項目(div.getTxtEiyoShokuseikatsuRyuiten().getValue()).build();
+        }
         if (14 == item.get連番()) {
             return item.createBuilderForEdit().set記入項目(div.getTxtSonotaJotaiShosai().getValue()).build();
         }
@@ -677,7 +679,7 @@ public class SeikatsuServiceIkenHandler {
     private void 栄養_食生活エリアの意見項目初期化編集(ShujiiIkenshoIkenItem item) {
         if (69 == item.get連番()) {
             if (RString.isNullOrEmpty(item.get意見項目())) {
-                div.getRadShokujiKoi().setSelectedKey(KEY0);
+                div.getRadShokujiKoi().setSelectedKey(KEY2);
             } else if (RSTR_1.equals(item.get意見項目())) {
                 div.getRadShokujiKoi().setSelectedKey(KEY0);
             } else if (RSTR_2.equals(item.get意見項目())) {
@@ -764,7 +766,7 @@ public class SeikatsuServiceIkenHandler {
     private void サービス利用による生活機能の維持_改善の見通しエリアの意見項目初期化編集(ShujiiIkenshoIkenItem item) {
         if (85 == item.get連番()) {
             if (RString.isNullOrEmpty(item.get意見項目())) {
-                div.getRadSeikatsuKinoMitoshi().setSelectedKey(KEY0);
+                div.getRadSeikatsuKinoMitoshi().setSelectedKey(KEY2);
             } else if (RSTR_1.equals(item.get意見項目())) {
                 div.getRadSeikatsuKinoMitoshi().setSelectedKey(KEY0);
             } else if (RSTR_2.equals(item.get意見項目())) {
