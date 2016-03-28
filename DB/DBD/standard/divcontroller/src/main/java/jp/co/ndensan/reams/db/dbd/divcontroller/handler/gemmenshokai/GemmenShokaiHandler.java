@@ -6,10 +6,10 @@
 package jp.co.ndensan.reams.db.dbd.divcontroller.handler.gemmenshokai;
 
 import java.util.List;
-import jp.co.ndensan.reams.db.dbd.business.core.futanwariai.RiyoshaFutanWariaiMeisai;
 import jp.co.ndensan.reams.db.dbd.business.common.NursingCareInformationBusiness;
 import jp.co.ndensan.reams.db.dbd.business.common.ShiharaiHohoHenkoSummaryBusiness;
 import jp.co.ndensan.reams.db.dbd.business.core.basic.JukyushaDaicho;
+import jp.co.ndensan.reams.db.dbd.business.core.futanwariai.RiyoshaFutanWariaiMeisai;
 import jp.co.ndensan.reams.db.dbd.definition.enumeratedtype.core.JukyuShinseiJiyu;
 import jp.co.ndensan.reams.db.dbd.divcontroller.entity.commonchilddiv.gemmenshokai.GemmenShokai.GemmenShokaiDiv;
 import jp.co.ndensan.reams.db.dbd.service.common.GemmenJokyoFinder;
@@ -29,7 +29,6 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 public class GemmenShokaiHandler {
 
     private final GemmenShokaiDiv div;
-    private final GemmenJokyoFinder finder;
     private final RString 旧措置者 = new RString("旧措置者");
     private final RString 負担割合区分_１ = new RString("1");
     private final RString 負担割合区分_２ = new RString("2");
@@ -43,7 +42,6 @@ public class GemmenShokaiHandler {
      */
     public GemmenShokaiHandler(GemmenShokaiDiv div) {
         this.div = div;
-        this.finder = GemmenJokyoFinder.createIntance();
     }
 
     /**
@@ -61,6 +59,7 @@ public class GemmenShokaiHandler {
     }
 
     private void onLoad利用者負担割合情報(HihokenshaNo 被保険者番号) {
+        GemmenJokyoFinder finder = GemmenJokyoFinder.createIntance();
         List<RiyoshaFutanWariaiMeisai> 利用者負担割合明細List = finder.find利用者負担割合明細(被保険者番号);
         if (!利用者負担割合明細List.isEmpty()) {
             RiyoshaFutanWariaiMeisai 利用者負担割合明細 = 利用者負担割合明細List.get(0);
@@ -75,6 +74,7 @@ public class GemmenShokaiHandler {
     }
 
     private void onLoad給付制限情報(HihokenshaNo 被保険者番号) {
+        GemmenJokyoFinder finder = GemmenJokyoFinder.createIntance();
         ShiharaiHohoHenkoSummaryBusiness 支払方法変更情報 = finder.find支払方法変更情報(被保険者番号);
         div.getTxtShiharaiHohoHenkoTorokuKubun().setValue(支払方法変更情報.get支払方法変更_登録区分().get名称());
         div.getTxtShiharaiHohoHenkoKaishiYMD().setValue(支払方法変更情報.get支払方法変更_開始日());
@@ -85,6 +85,7 @@ public class GemmenShokaiHandler {
     }
 
     private void onLoad老齢_生保情報(HihokenshaNo 被保険者番号) {
+        GemmenJokyoFinder finder = GemmenJokyoFinder.createIntance();
         ShikibetsuCode 識別コード = finder.get識別コード(被保険者番号);
         List<RoreiFukushiNenkinJukyusha> 老齢年金情報List = finder.find老齢年金情報(識別コード);
         if (!老齢年金情報List.isEmpty()) {
@@ -104,11 +105,13 @@ public class GemmenShokaiHandler {
     }
 
     private void onLoad各種減免情報(HihokenshaNo 被保険者番号) {
+        GemmenJokyoFinder finder = GemmenJokyoFinder.createIntance();
         //TODO QA #79662
         finder.find減免情報(被保険者番号);
     }
 
     private void onLoad申請中情報(HihokenshaNo 被保険者番号) {
+        GemmenJokyoFinder finder = GemmenJokyoFinder.createIntance();
         List<JukyushaDaicho> 申請中情報List = finder.find申請中情報(被保険者番号);
         if (!申請中情報List.isEmpty()) {
             JukyushaDaicho 申請中情報 = 申請中情報List.get(0);
@@ -118,6 +121,7 @@ public class GemmenShokaiHandler {
     }
 
     private void onLoad要介護認定情報(HihokenshaNo 被保険者番号) {
+        GemmenJokyoFinder finder = GemmenJokyoFinder.createIntance();
         List<NursingCareInformationBusiness> 要介護認定情報List = finder.find要介護認定情報(被保険者番号);
         if (!要介護認定情報List.isEmpty()) {
             NursingCareInformationBusiness 要介護認定情報 = 要介護認定情報List.get(0);

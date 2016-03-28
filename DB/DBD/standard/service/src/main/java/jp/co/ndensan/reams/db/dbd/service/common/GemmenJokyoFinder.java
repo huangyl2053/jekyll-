@@ -58,7 +58,7 @@ public class GemmenJokyoFinder {
      * @return GemmenJokyoFinder
      */
     public static GemmenJokyoFinder createIntance() {
-        return new GemmenJokyoFinder();
+        return InstanceProvider.create(GemmenJokyoFinder.class);
     }
 
     /**
