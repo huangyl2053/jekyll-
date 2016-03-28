@@ -10,6 +10,7 @@ import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaN
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import lombok.Getter;
 
 /**
@@ -26,7 +27,7 @@ public class SyokanbaraihishikyushinseiketteParameter implements Serializable {
     private final JigyoshaNo jigyoshaNo;
     private final RString yoshikiNo;
     private final RString meisaiNo;
-    private final RString kyufuritsu;
+    private final Decimal kyufuritsu;
 
     /**
      * SyokanbaraihishikyushinseiketteParameter
@@ -37,10 +38,10 @@ public class SyokanbaraihishikyushinseiketteParameter implements Serializable {
      * @param jigyoshaNo JigyoshaNo
      * @param yoshikiNo RString
      * @param meisaiNo RString
-     * @param kyufuritsu RString
+     * @param kyufuritsu Decimal
      */
     public SyokanbaraihishikyushinseiketteParameter(HihokenshaNo hiHokenshaNo, FlexibleYearMonth serviceTeikyoYM,
-            RString seiriNp, JigyoshaNo jigyoshaNo, RString yoshikiNo, RString meisaiNo, RString kyufuritsu) {
+            RString seiriNp, JigyoshaNo jigyoshaNo, RString yoshikiNo, RString meisaiNo, Decimal kyufuritsu) {
         this.hiHokenshaNo = hiHokenshaNo;
         this.serviceTeikyoYM = serviceTeikyoYM;
         this.seiriNp = seiriNp;
