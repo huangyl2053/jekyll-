@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbc.definition.core.shiharaihouhoukinoukubun;
+package jp.co.ndensan.reams.db.dbc.definition.core.shiharaihohokinokubun;
 
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -11,7 +11,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 /**
  * 支払方法機能区分を表す列挙型です。
  */
-public enum ShiharaihouhouKinouKubun {
+public enum ShiharaiHohoKinoKubun {
 
     /**
      * コード:1 名称:事業高額
@@ -33,7 +33,7 @@ public enum ShiharaihouhouKinouKubun {
     private final RString code;
     private final RString fullName;
 
-    private ShiharaihouhouKinouKubun(String code, String fullname) {
+    private ShiharaiHohoKinoKubun(String code, String fullname) {
         this.code = new RString(code);
         this.fullName = new RString(fullname);
     }
@@ -62,9 +62,9 @@ public enum ShiharaihouhouKinouKubun {
      * @param code 支払方法機能区分のコード
      * @return {@code code} に対応する支払方法機能区分
      */
-    public static ShiharaihouhouKinouKubun toValue(RString code) {
+    public static ShiharaiHohoKinoKubun toValue(RString code) {
 
-        for (ShiharaihouhouKinouKubun shiharaihouhouKinouKubun : ShiharaihouhouKinouKubun.values()) {
+        for (ShiharaiHohoKinoKubun shiharaihouhouKinouKubun : ShiharaiHohoKinoKubun.values()) {
             if (shiharaihouhouKinouKubun.code.equals(code)) {
                 return shiharaihouhouKinouKubun;
             }
