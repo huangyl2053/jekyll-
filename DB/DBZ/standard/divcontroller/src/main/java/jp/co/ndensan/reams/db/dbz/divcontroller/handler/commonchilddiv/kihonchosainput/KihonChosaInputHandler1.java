@@ -22,6 +22,7 @@ public class KihonChosaInputHandler1 {
 
     private final KihonChosaInputDiv div;
     private final RString 認定調査前回結果表示 = new RString("1");
+    private final RString 調査項目ある = new RString("1");
     private final RString 調査項目1 = new RString("1");
     private final RString 調査項目2 = new RString("2");
     private final RString 調査項目3 = new RString("3");
@@ -1322,63 +1323,74 @@ public class KihonChosaInputHandler1 {
             List<RString> 拘縮の有無特記事項番号, KihonChosaInput 認定調査基本情報) {
         int 連番 = 認定調査基本情報.get調査連番();
         int 前回連番 = 認定調査基本情報.get前回調査連番();
+        RString 調査項目 = 認定調査基本情報.get調査項目();
+        RString 前回調査項目 = 認定調査基本情報.get前回調査項目();
         RString 特記事項番号 = 認定調査基本情報.get認定調査特記事項番号();
-        if (連番 == 整数6) {
-            拘縮の有無Keys.add(KEY1);
-            拘縮の有無特記事項番号.add(特記事項番号);
-        } else if (連番 == 整数7) {
-            拘縮の有無Keys.add(KEY2);
-            拘縮の有無特記事項番号.add(特記事項番号);
-        } else if (連番 == 整数8) {
-            拘縮の有無Keys.add(KEY3);
-            拘縮の有無特記事項番号.add(特記事項番号);
-        } else if (連番 == 整数9) {
-            拘縮の有無Keys.add(KEY4);
-            拘縮の有無特記事項番号.add(特記事項番号);
+        if (調査項目ある.equals(調査項目)) {
+            if (連番 == 整数6) {
+                拘縮の有無Keys.add(KEY1);
+                拘縮の有無特記事項番号.add(特記事項番号);
+            } else if (連番 == 整数7) {
+                拘縮の有無Keys.add(KEY2);
+                拘縮の有無特記事項番号.add(特記事項番号);
+            } else if (連番 == 整数8) {
+                拘縮の有無Keys.add(KEY3);
+                拘縮の有無特記事項番号.add(特記事項番号);
+            } else if (連番 == 整数9) {
+                拘縮の有無Keys.add(KEY4);
+                拘縮の有無特記事項番号.add(特記事項番号);
+            }
         }
-        if (前回連番 == 整数6) {
-            前回拘縮の有無Keys.add(KEY1);
-        } else if (前回連番 == 整数7) {
-            前回拘縮の有無Keys.add(KEY2);
-        } else if (前回連番 == 整数8) {
-            前回拘縮の有無Keys.add(KEY3);
-        } else if (前回連番 == 整数9) {
-            前回拘縮の有無Keys.add(KEY4);
+        if (調査項目ある.equals(前回調査項目)) {
+            if (前回連番 == 整数6) {
+                前回拘縮の有無Keys.add(KEY1);
+            } else if (前回連番 == 整数7) {
+                前回拘縮の有無Keys.add(KEY2);
+            } else if (前回連番 == 整数8) {
+                前回拘縮の有無Keys.add(KEY3);
+            } else if (前回連番 == 整数9) {
+                前回拘縮の有無Keys.add(KEY4);
+            }
         }
-
     }
 
     private void set麻痺等の有無Keys(List<RString> 麻痺等の有無Keys, List<RString> 前回麻痺等の有無Keys,
             List<RString> 麻痺等の有無特記事項番号, KihonChosaInput 認定調査基本情報) {
         int 連番 = 認定調査基本情報.get調査連番();
         int 前回連番 = 認定調査基本情報.get前回調査連番();
+        RString 調査項目 = 認定調査基本情報.get調査項目();
+        RString 前回調査項目 = 認定調査基本情報.get前回調査項目();
         RString 特記事項番号 = 認定調査基本情報.get認定調査特記事項番号();
-        if (連番 == 1) {
-            麻痺等の有無Keys.add(KEY1);
-            麻痺等の有無特記事項番号.add(特記事項番号);
-        } else if (連番 == 2) {
-            麻痺等の有無Keys.add(KEY2);
-            麻痺等の有無特記事項番号.add(特記事項番号);
-        } else if (連番 == 整数3) {
-            麻痺等の有無Keys.add(KEY3);
-            麻痺等の有無特記事項番号.add(特記事項番号);
-        } else if (連番 == 整数4) {
-            麻痺等の有無Keys.add(KEY4);
-            麻痺等の有無特記事項番号.add(特記事項番号);
-        } else if (連番 == 整数5) {
-            麻痺等の有無Keys.add(KEY5);
-            麻痺等の有無特記事項番号.add(特記事項番号);
+        if (調査項目ある.equals(調査項目)) {
+            if (連番 == 1) {
+                麻痺等の有無Keys.add(KEY1);
+                麻痺等の有無特記事項番号.add(特記事項番号);
+            } else if (連番 == 2) {
+                麻痺等の有無Keys.add(KEY2);
+                麻痺等の有無特記事項番号.add(特記事項番号);
+            } else if (連番 == 整数3) {
+                麻痺等の有無Keys.add(KEY3);
+                麻痺等の有無特記事項番号.add(特記事項番号);
+            } else if (連番 == 整数4) {
+                麻痺等の有無Keys.add(KEY4);
+                麻痺等の有無特記事項番号.add(特記事項番号);
+            } else if (連番 == 整数5) {
+                麻痺等の有無Keys.add(KEY5);
+                麻痺等の有無特記事項番号.add(特記事項番号);
+            }
         }
-        if (前回連番 == 1) {
-            前回麻痺等の有無Keys.add(KEY1);
-        } else if (前回連番 == 2) {
-            前回麻痺等の有無Keys.add(KEY2);
-        } else if (前回連番 == 整数3) {
-            前回麻痺等の有無Keys.add(KEY3);
-        } else if (前回連番 == 整数4) {
-            前回麻痺等の有無Keys.add(KEY4);
-        } else if (前回連番 == 整数5) {
-            前回麻痺等の有無Keys.add(KEY5);
+        if (調査項目ある.equals(前回調査項目)) {
+            if (前回連番 == 1) {
+                前回麻痺等の有無Keys.add(KEY1);
+            } else if (前回連番 == 2) {
+                前回麻痺等の有無Keys.add(KEY2);
+            } else if (前回連番 == 整数3) {
+                前回麻痺等の有無Keys.add(KEY3);
+            } else if (前回連番 == 整数4) {
+                前回麻痺等の有無Keys.add(KEY4);
+            } else if (前回連番 == 整数5) {
+                前回麻痺等の有無Keys.add(KEY5);
+            }
         }
     }
 

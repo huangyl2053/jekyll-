@@ -31,6 +31,8 @@ public class KihonChosaInputHandler {
 
     private final KihonChosaInputDiv div;
     private final RString 認定調査前回結果表示 = new RString("1");
+    private final RString 調査項目ある = new RString("1");
+    private final RString 調査項目ない = new RString("2");
     private final RString 調査項目1 = new RString("1");
     private final RString 調査項目2 = new RString("2");
     private final RString 調査項目3 = new RString("3");
@@ -585,23 +587,29 @@ public class KihonChosaInputHandler {
             List<RString> 特別な対応特記事項番号, KihonChosaInput 認定調査基本情報) {
         int 連番 = 認定調査基本情報.get調査連番();
         int 前回連番 = 認定調査基本情報.get前回調査連番();
+        RString 調査項目 = 認定調査基本情報.get調査項目();
+        RString 前回調査項目 = 認定調査基本情報.get前回調査項目();
         RString 特記事項番号 = 認定調査基本情報.get認定調査特記事項番号();
-        if (連番 == 整数72) {
-            特別な対応Keys.add(KEY0);
-            特別な対応特記事項番号.add(特記事項番号);
-        } else if (連番 == 整数73) {
-            特別な対応Keys.add(KEY1);
-            特別な対応特記事項番号.add(特記事項番号);
-        } else if (連番 == 整数74) {
-            特別な対応Keys.add(KEY2);
-            特別な対応特記事項番号.add(特記事項番号);
+        if (調査項目ある.equals(調査項目)) {
+            if (連番 == 整数72) {
+                特別な対応Keys.add(KEY0);
+                特別な対応特記事項番号.add(特記事項番号);
+            } else if (連番 == 整数73) {
+                特別な対応Keys.add(KEY1);
+                特別な対応特記事項番号.add(特記事項番号);
+            } else if (連番 == 整数74) {
+                特別な対応Keys.add(KEY2);
+                特別な対応特記事項番号.add(特記事項番号);
+            }
         }
-        if (前回連番 == 整数72) {
-            前回特別な対応Keys.add(KEY0);
-        } else if (前回連番 == 整数73) {
-            前回特別な対応Keys.add(KEY1);
-        } else if (前回連番 == 整数74) {
-            前回特別な対応Keys.add(KEY2);
+        if (調査項目ある.equals(前回調査項目)) {
+            if (前回連番 == 整数72) {
+                前回特別な対応Keys.add(KEY0);
+            } else if (前回連番 == 整数73) {
+                前回特別な対応Keys.add(KEY1);
+            } else if (前回連番 == 整数74) {
+                前回特別な対応Keys.add(KEY2);
+            }
         }
     }
 
@@ -628,54 +636,63 @@ public class KihonChosaInputHandler {
     private void set処置内容Keys(List<RString> 処置内容Keys, List<RString> 前回処置内容Keys,
             List<RString> 処置内容特記事項番号, KihonChosaInput 認定調査基本情報) {
         int 連番 = 認定調査基本情報.get調査連番();
-        int 前回連番 = 認定調査基本情報.get前回調査連番();
+        RString 調査項目 = 認定調査基本情報.get調査項目();
         RString 特記事項番号 = 認定調査基本情報.get認定調査特記事項番号();
-        if (連番 == 整数63) {
-            処置内容Keys.add(KEY0);
-            処置内容特記事項番号.add(特記事項番号);
-        } else if (連番 == 整数64) {
-            処置内容Keys.add(KEY1);
-            処置内容特記事項番号.add(特記事項番号);
-        } else if (連番 == 整数65) {
-            処置内容Keys.add(KEY2);
-            処置内容特記事項番号.add(特記事項番号);
-        } else if (連番 == 整数66) {
-            処置内容Keys.add(KEY3);
-            処置内容特記事項番号.add(特記事項番号);
-        } else if (連番 == 整数67) {
-            処置内容Keys.add(KEY4);
-            処置内容特記事項番号.add(特記事項番号);
-        } else if (連番 == 整数68) {
-            処置内容Keys.add(KEY5);
-            処置内容特記事項番号.add(特記事項番号);
-        } else if (連番 == 整数69) {
-            処置内容Keys.add(KEY6);
-            処置内容特記事項番号.add(特記事項番号);
-        } else if (連番 == 整数70) {
-            処置内容Keys.add(KEY7);
-            処置内容特記事項番号.add(特記事項番号);
-        } else if (連番 == 整数71) {
-            処置内容Keys.add(KEY8);
-            処置内容特記事項番号.add(特記事項番号);
+        if (調査項目ある.equals(調査項目)) {
+            if (連番 == 整数63) {
+                処置内容Keys.add(KEY0);
+                処置内容特記事項番号.add(特記事項番号);
+            } else if (連番 == 整数64) {
+                処置内容Keys.add(KEY1);
+                処置内容特記事項番号.add(特記事項番号);
+            } else if (連番 == 整数65) {
+                処置内容Keys.add(KEY2);
+                処置内容特記事項番号.add(特記事項番号);
+            } else if (連番 == 整数66) {
+                処置内容Keys.add(KEY3);
+                処置内容特記事項番号.add(特記事項番号);
+            } else if (連番 == 整数67) {
+                処置内容Keys.add(KEY4);
+                処置内容特記事項番号.add(特記事項番号);
+            } else if (連番 == 整数68) {
+                処置内容Keys.add(KEY5);
+                処置内容特記事項番号.add(特記事項番号);
+            } else if (連番 == 整数69) {
+                処置内容Keys.add(KEY6);
+                処置内容特記事項番号.add(特記事項番号);
+            } else if (連番 == 整数70) {
+                処置内容Keys.add(KEY7);
+                処置内容特記事項番号.add(特記事項番号);
+            } else if (連番 == 整数71) {
+                処置内容Keys.add(KEY8);
+                処置内容特記事項番号.add(特記事項番号);
+            }
         }
-        if (前回連番 == 整数63) {
-            前回処置内容Keys.add(KEY0);
-        } else if (前回連番 == 整数64) {
-            前回処置内容Keys.add(KEY1);
-        } else if (前回連番 == 整数65) {
-            前回処置内容Keys.add(KEY2);
-        } else if (前回連番 == 整数66) {
-            前回処置内容Keys.add(KEY3);
-        } else if (前回連番 == 整数67) {
-            前回処置内容Keys.add(KEY4);
-        } else if (前回連番 == 整数68) {
-            前回処置内容Keys.add(KEY5);
-        } else if (前回連番 == 整数69) {
-            前回処置内容Keys.add(KEY6);
-        } else if (前回連番 == 整数70) {
-            前回処置内容Keys.add(KEY7);
-        } else if (前回連番 == 整数71) {
-            前回処置内容Keys.add(KEY8);
+    }
+
+    private void set前回処置内容Keys(List<RString> 前回処置内容Keys, KihonChosaInput 認定調査基本情報) {
+        int 前回連番 = 認定調査基本情報.get前回調査連番();
+        RString 前回調査項目 = 認定調査基本情報.get前回調査項目();
+        if (調査項目ある.equals(前回調査項目)) {
+            if (前回連番 == 整数63) {
+                前回処置内容Keys.add(KEY0);
+            } else if (前回連番 == 整数64) {
+                前回処置内容Keys.add(KEY1);
+            } else if (前回連番 == 整数65) {
+                前回処置内容Keys.add(KEY2);
+            } else if (前回連番 == 整数66) {
+                前回処置内容Keys.add(KEY3);
+            } else if (前回連番 == 整数67) {
+                前回処置内容Keys.add(KEY4);
+            } else if (前回連番 == 整数68) {
+                前回処置内容Keys.add(KEY5);
+            } else if (前回連番 == 整数69) {
+                前回処置内容Keys.add(KEY6);
+            } else if (前回連番 == 整数70) {
+                前回処置内容Keys.add(KEY7);
+            } else if (前回連番 == 整数71) {
+                前回処置内容Keys.add(KEY8);
+            }
         }
     }
 
@@ -1688,26 +1705,26 @@ public class KihonChosaInputHandler {
     private void checkListBoxConfirm(ArrayList<KihonChosaInput> 認定調査基本情報リスト, List<Integer> 連番List) {
         for (KihonChosaInput 認定調査基本情報 : 認定調査基本情報リスト) {
             int 認定調査基本情報_連番 = 認定調査基本情報.get調査連番();
-            if (((認定調査基本情報_連番 <= 整数9 && 認定調査基本情報_連番 > 1) || (認定調査基本情報_連番 >= 整数63 && 認定調査基本情報_連番 <= 整数74))
-                    && !is認定調査基本情報_連番が連番Listに存在(連番List, 認定調査基本情報_連番)) {
-                認定調査基本情報リスト.remove(認定調査基本情報);
+            if (((認定調査基本情報_連番 <= 整数9 && 認定調査基本情報_連番 > 1) || (認定調査基本情報_連番 >= 整数63 && 認定調査基本情報_連番 <= 整数74))) {
+                if (!is認定調査基本情報_連番が連番Listに存在(連番List, 認定調査基本情報_連番)
+                        && 調査項目ある.equals(認定調査基本情報.get調査項目())) {
+                    KihonChosaInput new認定調査基本情報 = new KihonChosaInput(認定調査基本情報.get認知症高齢者自立度(), 認定調査基本情報.get障害高齢者自立度(),
+                            認定調査基本情報.get調査連番(), 調査項目ない, 認定調査基本情報.get前回認知症高齢者自立度(),
+                            認定調査基本情報.get前回障害高齢者自立度(), 認定調査基本情報.get前回調査連番(), 認定調査基本情報.get前回調査項目(),
+                            認定調査基本情報.get認定調査特記事項番号(), 認定調査基本情報.get認定調査特記事項連番(), 認定調査基本情報.get原本マスク区分(),
+                            認定調査基本情報.get特記事項());
+                    認定調査基本情報 = new認定調査基本情報;
+                } else if (is認定調査基本情報_連番が連番Listに存在(連番List, 認定調査基本情報_連番)
+                        && 調査項目ない.equals(認定調査基本情報.get調査項目())) {
+                    KihonChosaInput new認定調査基本情報 = new KihonChosaInput(認定調査基本情報.get認知症高齢者自立度(), 認定調査基本情報.get障害高齢者自立度(),
+                            認定調査基本情報.get調査連番(), 調査項目ある, 認定調査基本情報.get前回認知症高齢者自立度(),
+                            認定調査基本情報.get前回障害高齢者自立度(), 認定調査基本情報.get前回調査連番(), 認定調査基本情報.get前回調査項目(),
+                            認定調査基本情報.get認定調査特記事項番号(), 認定調査基本情報.get認定調査特記事項連番(), 認定調査基本情報.get原本マスク区分(),
+                            認定調査基本情報.get特記事項());
+                    認定調査基本情報 = new認定調査基本情報;
+                }
             }
         }
-        for (int 連番 : 連番List) {
-            if (!is認定調査基本情報リストに連番存在(認定調査基本情報リスト, 連番)) {
-                認定調査基本情報リスト.add(new KihonChosaInput(Code.EMPTY, Code.EMPTY, 連番, RString.EMPTY, Code.EMPTY, Code.EMPTY,
-                        0, RString.EMPTY, RString.EMPTY, 0, Code.EMPTY, RString.EMPTY));
-            }
-        }
-    }
-
-    private boolean is認定調査基本情報リストに連番存在(ArrayList<KihonChosaInput> 認定調査基本情報リスト, int 連番) {
-        for (KihonChosaInput 認定調査基本情報 : 認定調査基本情報リスト) {
-            if (連番 == 認定調査基本情報.get調査連番()) {
-                return true;
-            }
-        }
-        return false;
     }
 
     private boolean is認定調査基本情報_連番が連番Listに存在(List<Integer> 連番List, int 認定調査基本情報_連番) {
