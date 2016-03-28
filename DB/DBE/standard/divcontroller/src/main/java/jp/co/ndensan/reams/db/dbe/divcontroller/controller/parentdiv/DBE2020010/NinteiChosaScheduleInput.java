@@ -46,9 +46,17 @@ public class NinteiChosaScheduleInput {
     private static final RString 予約不可_KEY = new RString("key1");
     private static final RString 予約可 = new RString("0");
     private static final RString 予約不可 = new RString("1");
+    private static final RString 予約可名 = new RString("t");
+    private static final RString 予約不可名 = new RString("f");
     private static final RString 予約状況_仮予約 = new RString("key0");
     private static final RString 予約状況_確定 = new RString("key1");
     private static final RString 予約状況_未定 = new RString("key2");
+    private static final RString 予約状況_未定名 = new RString("未定");
+    private static final RString 予約状況_仮予約名 = new RString("仮予約");
+    private static final RString 予約状況_確定名 = new RString("確定");
+    private static final RString 予約状況_未定_KEY = new RString("0");
+    private static final RString 予約状況_仮予約_KEY = new RString("1");
+    private static final RString 予約状況_確定_KEY = new RString("2");
     private static final RString 対象者区分_申請者 = new RString("0");
     private static final RString 対象者区分_未定者 = new RString("1");
     private static final RString 遷移元画面番号_2 = new RString("2");
@@ -119,9 +127,9 @@ public class NinteiChosaScheduleInput {
             temp_設定日 = new RString(設定日.toString());
         }
         temp_時間枠 = ViewStateHolder.get(ViewStateKeys.認定調査スケジュール登録_時間枠, RString.class);
-        temp_予約可否 = ViewStateHolder.get(ViewStateKeys.認定調査スケジュール登録_予約可否, RString.class);
-        temp_予約状況 = ViewStateHolder.get(ViewStateKeys.認定調査スケジュール登録_予約状況, RString.class);
-        temp_調査員状況02 = ViewStateHolder.get(ViewStateKeys.認定調査スケジュール登録_調査員状況02, RString.class);
+        temp_予約可否 = get予約可のKEY(ViewStateHolder.get(ViewStateKeys.認定調査スケジュール登録_予約可否, RString.class));
+        temp_予約状況 = get予約状況のKEY(ViewStateHolder.get(ViewStateKeys.認定調査スケジュール登録_予約状況, RString.class));
+        temp_調査員状況02 = get予約状況のKEY(ViewStateHolder.get(ViewStateKeys.認定調査スケジュール登録_調査員状況02, RString.class));
 //        temp_認定調査予定開始時間 = get調査日時(temp_時間枠).split("-").get(0);
 //        temp_認定調査予定終了時間 = get調査日時(temp_時間枠).split("-").get(1);
 //        temp_編集状態 = new RString("0");
@@ -486,6 +494,26 @@ public class NinteiChosaScheduleInput {
             }
         }
         return message;
+    }
+
+    private RString get予約状況のKEY(RString 予約状況) {
+        if (予約状況_未定名.equals(予約状況)) {
+            return 予約状況_未定_KEY;
+        } else if (予約状況_仮予約名.equals(予約状況)) {
+            return 予約状況_仮予約_KEY;
+        } else if (予約状況_確定名.equals(予約状況)) {
+            return 予約状況_確定_KEY;
+        }
+        return 予約状況;
+    }
+
+    private RString get予約可のKEY(RString 予約可否) {
+        if (予約可名.equals(予約可否)) {
+            return 予約可;
+        } else if (予約不可名.equals(予約可否)) {
+            return 予約不可;
+        }
+        return 予約可否;
     }
 
     private NinteiChosaScheduleInputHandler getHandler(NinteiChosaScheduleInputDiv div) {

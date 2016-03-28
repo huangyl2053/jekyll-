@@ -7,8 +7,8 @@ package jp.co.ndensan.reams.db.dbe.divcontroller.handler.parentdiv.DBE2020010;
 
 import java.util.List;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2020010.NinteiChosaScheduleInputDiv;
-import jp.co.ndensan.reams.db.dbz.business.core.basic.NinteichosaSchedule;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBE;
+import jp.co.ndensan.reams.db.dbz.business.core.basic.NinteichosaSchedule;
 import jp.co.ndensan.reams.db.dbz.divcontroller.viewbox.ViewStateKeys;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
@@ -24,11 +24,16 @@ public class NinteiChosaScheduleInputHandler {
 
     private static final RString 予約可 = new RString("0");
     private static final RString 予約不可 = new RString("1");
+    private static final RString 予約可名 = new RString("t");
+    private static final RString 予約不可名 = new RString("f");
     private static final RString 予約可_KEY = new RString("key0");
     private static final RString 予約不可_KEY = new RString("key1");
     private static final RString 予約状況_未定 = new RString("0");
     private static final RString 予約状況_仮予約 = new RString("1");
     private static final RString 予約状況_確定 = new RString("2");
+    private static final RString 予約状況_未定名 = new RString("未定");
+    private static final RString 予約状況_仮予約名 = new RString("仮予約");
+    private static final RString 予約状況_確定名 = new RString("確定");
     private static final RString 予約状況_仮予約_KEY = new RString("key0");
     private static final RString 予約状況_確定_KEY = new RString("key1");
     private static final RString 予約状況_未定_KEY = new RString("key2");
@@ -91,8 +96,8 @@ public class NinteiChosaScheduleInputHandler {
             RString temp_備考, RString temp_予約状況, RString temp_被保番号, RString temp_被保険者区分コード, RString temp_保険者,
             FlexibleDate temp_認定申請日, RString temp_申請区分_申請時, RString temp_氏名, RString temp_カナ氏名, RString temp_場所,
             RString temp_駐車場, RString temp_立会人1, RString temp_連絡先1, RString temp_立会人2, RString temp_連絡先2, RString temp_対象者メモ) {
-        予約可否 = ViewStateHolder.get(ViewStateKeys.認定調査スケジュール登録_予約可否, RString.class);
-        予約状況 = ViewStateHolder.get(ViewStateKeys.認定調査スケジュール登録_予約状況, RString.class);
+        予約可否 = get予約可のKEY(ViewStateHolder.get(ViewStateKeys.認定調査スケジュール登録_予約可否, RString.class));
+        予約状況 = get予約状況のKEY(ViewStateHolder.get(ViewStateKeys.認定調査スケジュール登録_予約状況, RString.class));
         モード = ViewStateHolder.get(ViewStateKeys.認定調査スケジュール登録_モード, RString.class);
         認定調査員コード = ViewStateHolder.get(ViewStateKeys.認定調査スケジュール登録_認定調査員コード, RString.class);
         認定調査委託先コード = ViewStateHolder.get(ViewStateKeys.認定調査スケジュール登録_認定調査委託先コード, RString.class);
@@ -356,7 +361,6 @@ public class NinteiChosaScheduleInputHandler {
      * @param list List<認定調査スケジュール情報>
      */
     public void btnZenkayiJyoho(List<NinteichosaSchedule> list) {
-
         div.getTaishoshaShosai().getTxtBasho().setValue(list.get(0).get場所());
         div.getTaishoshaShosai().getTxtChushajo().setValue(list.get(0).get駐車場());
         div.getTaishoshaShosai().getTxtTachiainin1().setValue(list.get(0).get立会人１());
@@ -364,5 +368,25 @@ public class NinteiChosaScheduleInputHandler {
         div.getTaishoshaShosai().getTxtTachiainin2().setValue(list.get(0).get立会人２());
         div.getTaishoshaShosai().getTxtRenrakusaki2().setValue(list.get(0).get連絡先２().value());
         div.getTaishoshaShosai().getTxtTaishoshaShosaiMemo().setValue(list.get(0).get対象者メモ());
+    }
+
+    private RString get予約状況のKEY(RString 予約状況) {
+        if (予約状況_未定名.equals(予約状況)) {
+            return 予約状況_未定;
+        } else if (予約状況_仮予約名.equals(予約状況)) {
+            return 予約状況_仮予約;
+        } else if (予約状況_確定名.equals(予約状況)) {
+            return 予約状況_確定;
+        }
+        return 予約状況;
+    }
+
+    private RString get予約可のKEY(RString 予約可否) {
+        if (予約可名.equals(予約可否)) {
+            return 予約可;
+        } else if (予約不可名.equals(予約可否)) {
+            return 予約不可;
+        }
+        return 予約可否;
     }
 }

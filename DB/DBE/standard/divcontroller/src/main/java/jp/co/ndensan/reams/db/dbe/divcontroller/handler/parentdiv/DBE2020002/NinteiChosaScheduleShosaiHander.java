@@ -15,12 +15,18 @@ import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2020002.Nint
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2020002.dgNinteiChosaSchedule_Row;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBE;
 import jp.co.ndensan.reams.db.dbz.divcontroller.viewbox.ViewStateKeys;
+import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.message.IMessageGettable;
+import jp.co.ndensan.reams.uz.uza.message.IValidationMessage;
+import jp.co.ndensan.reams.uz.uza.message.Message;
 import jp.co.ndensan.reams.uz.uza.ui.binding.KeyValueDataSource;
+import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPair;
+import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 import jp.co.ndensan.reams.uz.uza.util.config.BusinessConfig;
 
@@ -465,5 +471,48 @@ public class NinteiChosaScheduleShosaiHander {
         row.getChosaTimeFrameMemo8().setVisible(非表示);
         row.getChosaTimeFrameMemo9().setVisible(非表示);
         row.getChosaTimeFrameMemo10().setVisible(非表示);
+    }
+
+    /**
+     * 認定調査委託先選択されていないのチェックです。
+     *
+     * @param validationMessages ValidationMessageControlPairs
+     * @return ValidationMessageControlPairs
+     */
+    public ValidationMessageControlPairs 認定調査委託先選択されていないのチェック(ValidationMessageControlPairs validationMessages) {
+
+        validationMessages.add(new ValidationMessageControlPair(
+                RRVMessages.Validate認定調査委託先, div.getDdlninteiChosaItakusaki()));
+        return validationMessages;
+    }
+
+    /**
+     * 保険者選択されていないのチェックです。
+     *
+     * @param validationMessages ValidationMessageControlPairs
+     * @return ValidationMessageControlPairs
+     */
+    public ValidationMessageControlPairs 保険者選択されていないのチェック(ValidationMessageControlPairs validationMessages) {
+
+        validationMessages.add(new ValidationMessageControlPair(
+                RRVMessages.Validate保険者, div.getDdlHokensha()));
+        return validationMessages;
+    }
+
+    private static enum RRVMessages implements IValidationMessage {
+
+        Validate保険者(UrErrorMessages.選択されていない, "保険者"),
+        Validate認定調査委託先(UrErrorMessages.選択されていない, "認定調査委託先");
+
+        private final Message message;
+
+        private RRVMessages(IMessageGettable message, String... replacements) {
+            this.message = message.getMessage().replace(replacements);
+        }
+
+        @Override
+        public Message getMessage() {
+            return message;
+        }
     }
 }
