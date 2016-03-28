@@ -127,10 +127,8 @@
          AND DbT5302ShujiiIkenshoJoho."dbT5302ShujiiIkenshoJoho_ikenshoIraiRirekiNo" = DbT5304ShujiiIkenshoIkenItem."dbT5304ShujiiIkenshoIkenItem_ikenshoIraiRirekiNo"
          AND DbT5101NinteiShinseiJoho."dbT5101NinteiShinseiJoho_koroshoIfShikibetsuCode" = DbT5304ShujiiIkenshoIkenItem."dbT5304ShujiiIkenshoIkenItem_koroshoIfShikibetsuCode"
        <where>
-            1 = 1
-            <if test="usesShinseishoKanriNo">
-                AND DbT5101NinteiShinseiJoho."dbT5101NinteiShinseiJoho_shinseishoKanriNo" = #{shinseishoKanriNo}
-            </if>
+            AND DbT5101NinteiShinseiJoho."dbT5101NinteiShinseiJoho_shinseishoKanriNo" = #{shinseishoKanriNo}
+            AND DbT5301ShujiiIkenshoIraiJoho."dbT5301ShujiiIkenshoIraiJoho_ikenshoIraiRirekiNo" = #{ikenshoIraiRirekiNo}
         </where>
     </select>
 

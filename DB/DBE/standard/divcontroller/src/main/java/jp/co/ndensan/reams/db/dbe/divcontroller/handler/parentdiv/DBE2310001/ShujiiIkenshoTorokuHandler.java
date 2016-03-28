@@ -79,7 +79,6 @@ public class ShujiiIkenshoTorokuHandler {
         setChosaTishoJohoDisable(!result.is他科受診の有無());
         setSonotaDisable(!result.isその他受診科の有無());
         setGaibuSoftDisable(true);
-        div.getCcdKaigoNinteiAtenaInfo().initialize();
     }
 
     /**

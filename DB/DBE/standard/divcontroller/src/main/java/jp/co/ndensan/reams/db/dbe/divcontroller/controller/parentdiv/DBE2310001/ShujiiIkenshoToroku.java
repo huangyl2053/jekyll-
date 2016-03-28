@@ -88,7 +88,7 @@ public class ShujiiIkenshoToroku {
                 = ShujiiIkenshoTorokuMapperParameter.createShujiiIkenshoTorokuMapperParameter(管理番号, 履歴番号, 市町村コード);
         SearchResult<ShujiiIkenshoTorokuResult> resultList = service.getDataForLoad(param);
         Image image = imageManager.getイメージ情報(管理番号);
-        NinteiShinseiJoho ninteiShinseiJoho = ninteiManager.get意見書情報(NinteiShinseiJohoMapperParameter.createSelectByKeyParam(管理番号));
+        NinteiShinseiJoho ninteiShinseiJoho = ninteiManager.get意見書情報(NinteiShinseiJohoMapperParameter.create主治医意見書登録Param(管理番号, 履歴番号));
         if (resultList.records().isEmpty()) {
             div.setHdnHasChanged(RString.EMPTY);
             div.getRadTakaShinryo().setSelectedKey(SELECT_KEY1);
@@ -101,6 +101,7 @@ public class ShujiiIkenshoToroku {
             div.setHdnHasChanged(getHandler(div).getDataRString());
             ViewStateHolder.put(ViewStateKeys.状態, JYOTAI_CODE_UPD);
         }
+        div.getCcdNinteiShinseishaKihonInfo().initialize(管理番号);
         // TODO Redmine#78229(再提出です、回答待ち)
         CommonButtonHolder.setDisabledByCommonButtonFieldName(new RString("btnComplete"), true);
         ViewStateHolder.put(ViewStateKeys.主治医意見書登録_意見書情報, ninteiShinseiJoho);

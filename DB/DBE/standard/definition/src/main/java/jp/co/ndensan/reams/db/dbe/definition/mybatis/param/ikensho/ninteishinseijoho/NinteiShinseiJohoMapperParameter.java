@@ -16,20 +16,24 @@ public final class NinteiShinseiJohoMapperParameter {
 
     private final ShinseishoKanriNo shinseishoKanriNo;
     private final boolean usesShinseishoKanriNo;
+    private final int ikenshoIraiRirekiNo;
 
     /**
      * コンストラクタです。
      *
      * @param shinseishoKanriNo shinseishoKanriNo
      * @param usesShinseishoKanriNo usesShinseishoKanriNo
+     * @param ikenshoIraiRirekiNo ikenshoIraiRirekiNo
      * @throws NullPointerException 引数のいずれかが{@code null}の場合
      */
     private NinteiShinseiJohoMapperParameter(
             ShinseishoKanriNo shinseishoKanriNo,
-            boolean usesShinseishoKanriNo) {
+            boolean usesShinseishoKanriNo,
+            int ikenshoIraiRirekiNo) {
 
         this.shinseishoKanriNo = shinseishoKanriNo;
         this.usesShinseishoKanriNo = usesShinseishoKanriNo;
+        this.ikenshoIraiRirekiNo = ikenshoIraiRirekiNo;
     }
 
     /**
@@ -40,7 +44,7 @@ public final class NinteiShinseiJohoMapperParameter {
      */
     public static NinteiShinseiJohoMapperParameter createSelectByKeyParam(
             ShinseishoKanriNo shinseishoKanriNo) {
-        return new NinteiShinseiJohoMapperParameter(shinseishoKanriNo, true);
+        return new NinteiShinseiJohoMapperParameter(shinseishoKanriNo, true, 0);
     }
 
     /**
@@ -51,6 +55,18 @@ public final class NinteiShinseiJohoMapperParameter {
      */
     public static NinteiShinseiJohoMapperParameter createSelectListParam(
             ShinseishoKanriNo shinseishoKanriNo) {
-        return new NinteiShinseiJohoMapperParameter(shinseishoKanriNo, false);
+        return new NinteiShinseiJohoMapperParameter(shinseishoKanriNo, false, 0);
+    }
+
+    /**
+     * 主治医意見書登録用のパラメータを生成します。
+     *
+     * @param shinseishoKanriNo shinseishoKanriNo
+     * @param ikenshoIraiRirekiNo ikenshoIraiRirekiNo
+     * @return 要介護認定申請情報パラメータ
+     */
+    public static NinteiShinseiJohoMapperParameter create主治医意見書登録Param(
+            ShinseishoKanriNo shinseishoKanriNo, int ikenshoIraiRirekiNo) {
+        return new NinteiShinseiJohoMapperParameter(shinseishoKanriNo, false, ikenshoIraiRirekiNo);
     }
 }
