@@ -14,16 +14,13 @@ import jp.co.ndensan.reams.db.dbz.business.core.basic.KaigoSetai;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.SetaiinJoho;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.SetaiinShikibetsuCd;
 import jp.co.ndensan.reams.db.dbz.definition.core.enumeratedtype.HonninKubun;
-import jp.co.ndensan.reams.db.dbz.service.core.MapperProvider;
 import jp.co.ndensan.reams.db.dbz.service.core.basic.HihokenshaDaichoManager;
 import jp.co.ndensan.reams.db.dbz.service.core.basic.KaigoSetaiManager;
 import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.IShikibetsuTaisho;
 import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.kojin.IKojin;
 import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.kojin.IKojins;
-//import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.search.ShikibetsuTaishoPSMSearchKeyBuilder;
 import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.setai.ISetai;
 import jp.co.ndensan.reams.ua.uax.definition.core.enumeratedtype.shikibetsutaisho.KensakuYusenKubun;
-//import jp.co.ndensan.reams.ua.uax.definition.mybatisprm.shikibetsutaisho.UaFt200FindShikibetsuTaishoParam;
 import jp.co.ndensan.reams.ua.uax.service.core.shikibetsutaisho.IShikibetsuTaishoFinder;
 import jp.co.ndensan.reams.ua.uax.service.core.shikibetsutaisho.ShikibetsuTaishoService;
 import jp.co.ndensan.reams.ua.uax.service.core.shikibetsutaisho.setai.ISetaiFinder;
@@ -42,7 +39,6 @@ import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
  */
 public class SetaiinFinder {
 
-    private final MapperProvider mapperProvider;
     private final HihokenshaDaichoManager 被保険者台帳Manager;
     private final KaigoSetaiManager 介護世帯Manager;
 
@@ -50,7 +46,6 @@ public class SetaiinFinder {
      * コンストラクタです。
      */
     public SetaiinFinder() {
-        this.mapperProvider = InstanceProvider.create(MapperProvider.class);
         this.被保険者台帳Manager = new HihokenshaDaichoManager();
         this.介護世帯Manager = new KaigoSetaiManager();
     }
@@ -58,12 +53,10 @@ public class SetaiinFinder {
     /**
      * 単体テスト用のコンストラクタです。
      *
-     * @param mapperProvider mapperProvider
      * @param 被保険者台帳Manager 被保険者台帳Manager
      * @param 介護世帯Manager 介護世帯Manager
      */
-    SetaiinFinder(MapperProvider mapperProvider, HihokenshaDaichoManager 被保険者台帳Manager, KaigoSetaiManager 介護世帯Manager) {
-        this.mapperProvider = mapperProvider;
+    SetaiinFinder(HihokenshaDaichoManager 被保険者台帳Manager, KaigoSetaiManager 介護世帯Manager) {
         this.被保険者台帳Manager = 被保険者台帳Manager;
         this.介護世帯Manager = 介護世帯Manager;
     }
@@ -222,7 +215,7 @@ public class SetaiinFinder {
      * @return 所得照会票用世帯員情報リスト
      */
     public List<SetaiinJoho> get所得照会票用世帯員情報() {
-        //TODO:処理内容について未精査のため実装されていません。
+        // TODO :処理内容について未精査のため実装されていません。
         return new ArrayList();
     }
 
@@ -232,7 +225,7 @@ public class SetaiinFinder {
      * @return 所得情報登録用世帯員情報リスト
      */
     public List<SetaiinJoho> get所得情報登録用世帯員情報() {
-        //TODO:処理内容について未精査のため実装されていません。
+        // TODO :処理内容について未精査のため実装されていません。
         return new ArrayList();
     }
 

@@ -14,8 +14,6 @@ import jp.co.ndensan.reams.db.dbz.persistence.db.relate.TaishoshaRelateDac;
 import jp.co.ndensan.reams.db.dbz.service.util.SearchResult;
 import jp.co.ndensan.reams.ua.uax.business.core.psm.KojinSearchEntityHolder;
 import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.search.IShikibetsuTaishoSearchKey;
-import jp.co.ndensan.reams.ur.urz.business.IUrControlData;
-import jp.co.ndensan.reams.ur.urz.business.UrControlDataFactory;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.util.db.IPsmCriteria;
 import jp.co.ndensan.reams.uz.uza.util.db.ITrueFalseCriteria;
@@ -33,25 +31,21 @@ import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
 public class TaishoshaFinder {
 
     private final TaishoshaRelateDac dac;
-    private final IUrControlData ctrlData;
 
     /**
      * コンストラクタです。
      */
     public TaishoshaFinder() {
         this.dac = InstanceProvider.create(TaishoshaRelateDac.class);
-        this.ctrlData = UrControlDataFactory.createInstance();
     }
 
     /**
      * モックを使用するテスト用コンストラクタです。
      *
      * @param dac 被保険者台帳ViewDoc
-     * @param ctrlData コントロールデータ
      */
-    TaishoshaFinder(TaishoshaRelateDac dac, IUrControlData ctrlData) {
+    TaishoshaFinder(TaishoshaRelateDac dac) {
         this.dac = dac;
-        this.ctrlData = ctrlData;
     }
 
     /**

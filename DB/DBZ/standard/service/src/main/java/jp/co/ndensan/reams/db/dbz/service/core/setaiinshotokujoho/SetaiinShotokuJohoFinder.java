@@ -13,10 +13,9 @@ import jp.co.ndensan.reams.db.dbz.business.core.HihokenshaDaicho;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.SetaiinJoho;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.SetaiinShotoku;
 import jp.co.ndensan.reams.db.dbz.business.core.view.KaigoShotokuAlive;
-import jp.co.ndensan.reams.db.dbz.service.core.MapperProvider;
 import jp.co.ndensan.reams.db.dbz.service.core.basic.HihokenshaDaichoManager;
-import jp.co.ndensan.reams.db.dbz.service.core.view.ShotokuManager;
 import jp.co.ndensan.reams.db.dbz.service.core.setai.SetaiinFinder;
+import jp.co.ndensan.reams.db.dbz.service.core.view.ShotokuManager;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
@@ -31,7 +30,7 @@ import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
  */
 public class SetaiinShotokuJohoFinder {
 
-    private final MapperProvider mapperProvider;
+    // private final MapperProvider mapperProvider;
     private final SetaiinFinder 世帯員Finder;
     private final HihokenshaDaichoManager 被保険者台帳Manager;
     private final ShotokuManager 介護所得Manager;
@@ -40,7 +39,7 @@ public class SetaiinShotokuJohoFinder {
      * コンストラクタです。
      */
     public SetaiinShotokuJohoFinder() {
-        this.mapperProvider = InstanceProvider.create(MapperProvider.class);
+        // this.mapperProvider = InstanceProvider.create(MapperProvider.class);
         this.世帯員Finder = new SetaiinFinder();
         this.被保険者台帳Manager = new HihokenshaDaichoManager();
         this.介護所得Manager = new ShotokuManager();
@@ -49,13 +48,14 @@ public class SetaiinShotokuJohoFinder {
     /**
      * 単体テスト用のコンストラクタです。
      *
-     * @param mapperProvider mapperProvider
      * @param 被保険者台帳Manager 被保険者台帳Manager
      * @param 介護所得Manager 介護所得Manager
      */
-    SetaiinShotokuJohoFinder(MapperProvider mapperProvider, SetaiinFinder 世帯員Finder,
+    SetaiinShotokuJohoFinder(
+            // MapperProvider mapperProvider,
+            SetaiinFinder 世帯員Finder,
             HihokenshaDaichoManager 被保険者台帳Manager, ShotokuManager 介護所得Manager) {
-        this.mapperProvider = mapperProvider;
+        // this.mapperProvider = mapperProvider;
         this.世帯員Finder = 世帯員Finder;
         this.被保険者台帳Manager = 被保険者台帳Manager;
         this.介護所得Manager = 介護所得Manager;
@@ -94,7 +94,7 @@ public class SetaiinShotokuJohoFinder {
             所得基準年月日 = YMDHMS.now();
         }
         List<SetaiinJoho> 世帯員リスト = 世帯員Finder.get世帯員情報By識別コード(識別コード, 世帯基準年月日);
-        if (世帯員リスト == null) {
+        if (世帯員リスト.isEmpty()) {
             return new ArrayList();
         }
         List<SetaiinShotoku> 世帯員所得情報リスト = new ArrayList();
@@ -148,19 +148,20 @@ public class SetaiinShotokuJohoFinder {
     public List<SetaiinShotoku> get世帯員所得情報(ShikibetsuCode 識別コード, FlexibleYear 所得年度, YMDHMS 所得基準年月日) {
         requireNonNull(識別コード, UrErrorMessages.検索キーの誤り.getMessage().toString());
         requireNonNull(所得年度, UrErrorMessages.検索キーの誤り.getMessage().toString());
-        requireNonNull(所得基準年月日, UrErrorMessages.検索キーの誤り.getMessage().toString());
-        if (所得基準年月日 == null) {
-            所得基準年月日 = YMDHMS.now();
-        }
-        //TODO:get所得情報登録用世帯員情報は見直しが入るため、実装後コメントアウト外す
+//        requireNonNull(所得基準年月日, UrErrorMessages.検索キーの誤り.getMessage().toString());
+//        if (所得基準年月日 == null) {
+//            所得基準年月日 = YMDHMS.now();
+//        }
+        //TODO :get所得情報登録用世帯員情報は見直しが入るため、実装後コメントアウト外す
         //世帯員Finder.get所得情報登録用世帯員情報();
         //世帯員情報リストが空であれば空のリストを返す。
 
         //世帯員情報リストに対するループ処理
-        //TODO:世帯員Finder.get所得情報登録用世帯員情報()で取得したリストに対する処理を行う。
+        //TODO :世帯員Finder.get所得情報登録用世帯員情報()で取得したリストに対する処理を行う。
         //被保険者台帳Manager.find被保険者台帳(世帯員情報の識別コード)で直近の被保険者台帳を取得する。
         //KaigoShotokuAlive 介護所得 = 介護所得Manager.get介護所得Alive(識別コード, 所得年度, 所得基準年月日);
-        //SetaiinShotoku 世帯所得 = new SetaiinShotoku(new ShikibetsuCode("123456789012345"), HihokenshaNo.EMPTY, RString.EMPTY, RString.EMPTY, null, RString.EMPTY,
+        //SetaiinShotoku 世帯所得 = new SetaiinShotoku(new ShikibetsuCode("123456789012345"),
+        //HihokenshaNo.EMPTY, RString.EMPTY, RString.EMPTY, null, RString.EMPTY,
         //        RString.EMPTY, RString.EMPTY, RString.EMPTY, RString.EMPTY, RString.EMPTY, RString.HALF_SPACE,
         //        RString.HALF_SPACE, RString.EMPTY, Decimal.ZERO, Decimal.ZERO, Decimal.ZERO, Decimal.ZERO,
         //        RString.EMPTY, null, false, null, null, RString.HALF_SPACE, RString.EMPTY, 0, RString.EMPTY);
