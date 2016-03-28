@@ -6,10 +6,8 @@
 package jp.co.ndensan.reams.db.dbu.divcontroller.controller.parentdiv.dbu0050011;
 
 import jp.co.ndensan.reams.db.dbu.business.kaigohokentokubetukaikeikeirijyokyoregist.InsuranceInformation;
-import static jp.co.ndensan.reams.db.dbu.divcontroller.entity.parentdiv.DBU0050011.DBU0050011TransitionEventName.修正;
+import jp.co.ndensan.reams.db.dbu.divcontroller.entity.parentdiv.DBU0050011.DBU0050011TransitionEventName;
 import static jp.co.ndensan.reams.db.dbu.divcontroller.entity.parentdiv.DBU0050011.DBU0050011TransitionEventName.削除;
-import static jp.co.ndensan.reams.db.dbu.divcontroller.entity.parentdiv.DBU0050011.DBU0050011TransitionEventName.様式4の３;
-import static jp.co.ndensan.reams.db.dbu.divcontroller.entity.parentdiv.DBU0050011.DBU0050011TransitionEventName.様式４の2;
 import static jp.co.ndensan.reams.db.dbu.divcontroller.entity.parentdiv.DBU0050011.DBU0050011TransitionEventName.追加;
 import jp.co.ndensan.reams.db.dbu.divcontroller.entity.parentdiv.DBU0050011.TaishokensakuJyoukenDiv;
 import jp.co.ndensan.reams.db.dbu.divcontroller.handler.parentdiv.dbu0050011.TaishokensakuJyoukenHandler;
@@ -25,6 +23,9 @@ public class TaishokensakuJyouken {
 
     private static final RString 入力済 = new RString("入力済");
     private static final RString ADD = new RString("add");
+    private static final RString 様仕４ = new RString("様仕４");
+    private static final RString 様仕４の２ = new RString("様仕４の２");
+    private static final RString 様仕４の３ = new RString("様仕４の３");
 
     /**
      * 介護保険特別会計経理状況登録_検索を画面初期化処理しました。
@@ -80,7 +81,7 @@ public class TaishokensakuJyouken {
     public ResponseData<TaishokensakuJyoukenDiv> onClick_btnModify(TaishokensakuJyoukenDiv div) {
         InsuranceInformation insuranceInformation = getHandler(div).onClick_btnModify();
         ViewStateHolder.put(ViewStateKey.様式４, insuranceInformation);
-        return ResponseData.of(div).forwardWithEventName(修正).respond();
+        return ResponseData.of(div).forwardWithEventName(DBU0050011TransitionEventName.修正).respond();
     }
 
     /**
@@ -91,13 +92,13 @@ public class TaishokensakuJyouken {
      */
     public ResponseData<TaishokensakuJyoukenDiv> onClick_btnDelete(TaishokensakuJyoukenDiv div) {
         InsuranceInformation insuranceInformation = getHandler(div).onClick_btnDelete();
-        ViewStateHolder.put(ViewStateKey.様式４の３, insuranceInformation);
+        ViewStateHolder.put(ViewStateKey.様式４, insuranceInformation);
         if (入力済.equals(insuranceInformation.get様式４入力状況())) {
-            return ResponseData.of(div).forwardWithEventName(削除).respond();
+            return ResponseData.of(div).forwardWithEventName(削除).parameter(様仕４);
         } else if (入力済.equals(insuranceInformation.get様式４の２入力状況())) {
-            return ResponseData.of(div).forwardWithEventName(様式４の2).respond();
+            return ResponseData.of(div).forwardWithEventName(削除).parameter(様仕４の２);
         } else {
-            return ResponseData.of(div).forwardWithEventName(様式4の３).respond();
+            return ResponseData.of(div).forwardWithEventName(削除).parameter(様仕４の３);
         }
     }
 

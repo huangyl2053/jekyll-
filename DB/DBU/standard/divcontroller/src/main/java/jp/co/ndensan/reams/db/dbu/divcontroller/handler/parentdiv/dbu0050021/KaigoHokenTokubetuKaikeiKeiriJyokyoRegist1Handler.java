@@ -280,11 +280,11 @@ public class KaigoHokenTokubetuKaikeiKeiriJyokyoRegist1Handler {
                 || UPDATE.equals(insuranceInf.get処理フラグ())) {
             onload一覧修正Or一覧削除(insuranceInf);
         } else if (ADD.equals(insuranceInf.get処理フラグ())) {
-//            List<Shichoson> 市町村Lst = get市町村Lst();
-//            if (市町村Lst.isEmpty()) {
-//                throw new ApplicationException(DbaErrorMessages.広域構成市町村からの補正処理.getMessage());
-//            }
-//            List<KeyValueDataSource> dataSource = getDataSourceFrom市町村Lst(市町村Lst);
+            List<Shichoson> 市町村Lst = get市町村Lst();
+            if (市町村Lst.isEmpty()) {
+                throw new ApplicationException(DbaErrorMessages.広域構成市町村からの補正処理.getMessage());
+            }
+            List<KeyValueDataSource> dataSource = getDataSourceFrom市町村Lst(市町村Lst);
             set年度();
             div.getCcdKanryoMessage().setDisplayNone(true);
             div.getHihokenshabango().getBtnYoshikiyon().setDisabled(true);
@@ -294,7 +294,7 @@ public class KaigoHokenTokubetuKaikeiKeiriJyokyoRegist1Handler {
             div.getHihokenshabango().getYoshikiyonMeisai().getTxtShukeiYM().setReadOnly(true);
             div.getHihokenshabango().getYoshikiyonMeisai().getTxtHihokenshabango().setDisplayNone(true);
             div.getHihokenshabango().getYoshikiyonMeisai().getTxthihokenshamei().setDisplayNone(true);
-            //div.getHihokenshabango().getYoshikiyonMeisai().getDdlShicyoson().setDataSource(dataSource);
+            div.getHihokenshabango().getYoshikiyonMeisai().getDdlShicyoson().setDataSource(dataSource);
             div.getHihokenshabango().getYoshikiyonMeisai().getDdlShicyoson().setDisabled(true);
             div.getHihokenshabango().getYoshikiyonMeisai().getDdlShicyoson().setSelectedIndex(0);
             div.getHihokenshabango().getYoshikiyonMeisai().getBtnHoukokuNenKT().setDisabled(false);

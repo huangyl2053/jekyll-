@@ -1,7 +1,7 @@
 package jp.co.ndensan.reams.db.dbu.divcontroller.entity.parentdiv.DBU0050011;
 
-import jp.co.ndensan.reams.uz.uza.core.ui.response.IContainerEvents;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.core.ui.response.IContainerEvents;
 
 /**
  * このコードはツールによって生成されました。</br>
@@ -16,9 +16,7 @@ public enum DBU0050011TransitionEventName implements IContainerEvents {
 
     追加("追加"),
     修正("修正"),
-    削除("削除"),
-    様式４の2("様式４の2"),
-    様式4の３("様式4の３");
+    削除("削除");
 
     private final RString name;
 
