@@ -1,22 +1,16 @@
 package jp.co.ndensan.reams.db.dba.divcontroller.entity.parentdiv.DBAM010011;
-/**
- * このコードはツールによって生成されました。
- * このファイルへの変更は、再生成時には損失するため
- * 不正な動作の原因になります。
- */
-import com.fasterxml.jackson.annotation.JsonProperty;
-import jp.co.ndensan.reams.db.dba.divcontroller.entity.parentdiv.DBAM010011.LblTitle1Div;
-import jp.co.ndensan.reams.db.dba.divcontroller.entity.parentdiv.DBAM010011.LblTitle3Div;
-import jp.co.ndensan.reams.db.dba.divcontroller.entity.parentdiv.DBAM010011.LblTitle4Div;
-import jp.co.ndensan.reams.db.dba.divcontroller.entity.parentdiv.DBAM010011.LblTitle6Div;
-import jp.co.ndensan.reams.db.dba.divcontroller.entity.parentdiv.DBAM010011.LblTitleDiv;
-import jp.co.ndensan.reams.uz.uza.ui.binding.*;
-import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
-import jp.co.ndensan.reams.uz.uza.ui.binding.domain.*;
 
 /**
- * FubanHoho のクラスファイル 
- * 
+ * このコードはツールによって生成されました。 このファイルへの変更は、再生成時には損失するため 不正な動作の原因になります。
+ */
+import com.fasterxml.jackson.annotation.JsonProperty;
+import jp.co.ndensan.reams.uz.uza.ui.binding.HorizontalLine;
+import jp.co.ndensan.reams.uz.uza.ui.binding.Label;
+import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
+
+/**
+ * FubanHoho のクラスファイル
+ *
  * @author 自動生成
  */
 public class FubanHohoDiv extends Panel {
@@ -26,6 +20,7 @@ public class FubanHohoDiv extends Panel {
      * コントロール名とフィールド名を取得する
      * private + コントロール名 + フィールド名 の文字列を作成
      */
+
     @JsonProperty("LblTitle")
     private LblTitleDiv LblTitle;
     @JsonProperty("LblTitle1")
@@ -56,7 +51,7 @@ public class FubanHohoDiv extends Panel {
 
     @JsonProperty("LblTitle")
     public void setLblTitle(LblTitleDiv LblTitle) {
-        this.LblTitle=LblTitle;
+        this.LblTitle = LblTitle;
     }
 
     @JsonProperty("LblTitle1")
@@ -66,7 +61,7 @@ public class FubanHohoDiv extends Panel {
 
     @JsonProperty("LblTitle1")
     public void setLblTitle1(LblTitle1Div LblTitle1) {
-        this.LblTitle1=LblTitle1;
+        this.LblTitle1 = LblTitle1;
     }
 
     @JsonProperty("Label1")
@@ -76,7 +71,7 @@ public class FubanHohoDiv extends Panel {
 
     @JsonProperty("Label1")
     public void setLabel1(Label Label1) {
-        this.Label1=Label1;
+        this.Label1 = Label1;
     }
 
     @JsonProperty("HorizontalLine1")
@@ -86,7 +81,7 @@ public class FubanHohoDiv extends Panel {
 
     @JsonProperty("HorizontalLine1")
     public void setHorizontalLine1(HorizontalLine HorizontalLine1) {
-        this.HorizontalLine1=HorizontalLine1;
+        this.HorizontalLine1 = HorizontalLine1;
     }
 
     @JsonProperty("LblTitle3")
@@ -96,7 +91,7 @@ public class FubanHohoDiv extends Panel {
 
     @JsonProperty("LblTitle3")
     public void setLblTitle3(LblTitle3Div LblTitle3) {
-        this.LblTitle3=LblTitle3;
+        this.LblTitle3 = LblTitle3;
     }
 
     @JsonProperty("LblTitle4")
@@ -106,7 +101,7 @@ public class FubanHohoDiv extends Panel {
 
     @JsonProperty("LblTitle4")
     public void setLblTitle4(LblTitle4Div LblTitle4) {
-        this.LblTitle4=LblTitle4;
+        this.LblTitle4 = LblTitle4;
     }
 
     @JsonProperty("LblTitle6")
@@ -116,7 +111,7 @@ public class FubanHohoDiv extends Panel {
 
     @JsonProperty("LblTitle6")
     public void setLblTitle6(LblTitle6Div LblTitle6) {
-        this.LblTitle6=LblTitle6;
+        this.LblTitle6 = LblTitle6;
     }
 
     @JsonProperty("Label3")
@@ -126,7 +121,7 @@ public class FubanHohoDiv extends Panel {
 
     @JsonProperty("Label3")
     public void setLabel3(Label Label3) {
-        this.Label3=Label3;
+        this.Label3 = Label3;
     }
 
 }

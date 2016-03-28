@@ -1,18 +1,15 @@
 package jp.co.ndensan.reams.db.dba.divcontroller.entity.parentdiv.DBA1070011;
-/**
- * このコードはツールによって生成されました。
- * このファイルへの変更は、再生成時には損失するため
- * 不正な動作の原因になります。
- */
-import com.fasterxml.jackson.annotation.JsonProperty;
-import jp.co.ndensan.reams.db.dba.divcontroller.entity.parentdiv.DBA1070011.dgTennyu_Row;
-import jp.co.ndensan.reams.uz.uza.ui.binding.*;
-import jp.co.ndensan.reams.uz.uza.ui.binding.TabPanel;
-import jp.co.ndensan.reams.uz.uza.ui.binding.domain.*;
 
 /**
- * tplTennyu のクラスファイル 
- * 
+ * このコードはツールによって生成されました。 このファイルへの変更は、再生成時には損失するため 不正な動作の原因になります。
+ */
+import com.fasterxml.jackson.annotation.JsonProperty;
+import jp.co.ndensan.reams.uz.uza.ui.binding.DataGrid;
+import jp.co.ndensan.reams.uz.uza.ui.binding.TabPanel;
+
+/**
+ * tplTennyu のクラスファイル
+ *
  * @author 自動生成
  */
 public class tplTennyuDiv extends TabPanel {
@@ -22,6 +19,7 @@ public class tplTennyuDiv extends TabPanel {
      * コントロール名とフィールド名を取得する
      * private + コントロール名 + フィールド名 の文字列を作成
      */
+
     @JsonProperty("dgTennyu")
     private DataGrid<dgTennyu_Row> dgTennyu;
 
@@ -38,7 +36,7 @@ public class tplTennyuDiv extends TabPanel {
 
     @JsonProperty("dgTennyu")
     public void setDgTennyu(DataGrid<dgTennyu_Row> dgTennyu) {
-        this.dgTennyu=dgTennyu;
+        this.dgTennyu = dgTennyu;
     }
 
 }

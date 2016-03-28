@@ -1,16 +1,14 @@
 package jp.co.ndensan.reams.db.dba.divcontroller.entity.parentdiv.dba203001t;
+
 /**
- * このコードはツールによって生成されました。
- * このファイルへの変更は、再生成時には損失するため
- * 不正な動作の原因になります。
+ * このコードはツールによって生成されました。 このファイルへの変更は、再生成時には損失するため 不正な動作の原因になります。
  */
 import com.fasterxml.jackson.annotation.JsonProperty;
-import jp.co.ndensan.reams.db.dba.divcontroller.entity.parentdiv.dba203001t.RohukuNenkinDiv;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TabPanel;
 
 /**
- * tplRofukuNenkin のクラスファイル 
- * 
+ * tplRofukuNenkin のクラスファイル
+ *
  * @author 自動生成
  */
 public class tplRofukuNenkinDiv extends TabPanel {
@@ -20,6 +18,7 @@ public class tplRofukuNenkinDiv extends TabPanel {
      * コントロール名とフィールド名を取得する
      * private + コントロール名 + フィールド名 の文字列を作成
      */
+
     @JsonProperty("RohukuNenkin")
     private RohukuNenkinDiv RohukuNenkin;
 
@@ -36,7 +35,7 @@ public class tplRofukuNenkinDiv extends TabPanel {
 
     @JsonProperty("RohukuNenkin")
     public void setRohukuNenkin(RohukuNenkinDiv RohukuNenkin) {
-        this.RohukuNenkin=RohukuNenkin;
+        this.RohukuNenkin = RohukuNenkin;
     }
 
 }

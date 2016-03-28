@@ -26,6 +26,16 @@ public final class ShikakuShosaiValidationHelper {
     private ShikakuShosaiValidationHelper() {
     }
 
+    /**
+     *
+     * @param target HihokenshaDaicho
+     * @param daichoList HihokenshaDaicho
+     * @param 適用日 適用日
+     * @param 解除日 解除日
+     * @param 住所地特例grid dgJutoku_Row
+     * @param status JushochiTokureiExecutionStatus
+     * @return ValidationMessageControlPairs
+     */
     public static ValidationMessageControlPairs validate画面起動時(HihokenshaDaicho target, IItemList<HihokenshaDaicho> daichoList,
             TextBoxFlexibleDate 適用日, TextBoxFlexibleDate 解除日, DataGrid<dgJutoku_Row> 住所地特例grid, JushochiTokureiExecutionStatus status) {
         ValidationMessageControlDictionary dictionary = new ValidationMessageControlDictionary();
@@ -34,6 +44,16 @@ public final class ShikakuShosaiValidationHelper {
         return dictionary.check(messages);
     }
 
+    /**
+     *
+     * @param target HihokenshaDaicho
+     * @param daichoList HihokenshaDaicho
+     * @param 適用日 適用日
+     * @param 解除日 解除日
+     * @param 住所地特例grid dgJutoku_Row
+     * @param status JushochiTokureiExecutionStatus
+     * @return ValidationMessageControlPairs
+     */
     public static ValidationMessageControlPairs validate保存前(HihokenshaDaicho target, IItemList<HihokenshaDaicho> daichoList,
             TextBoxFlexibleDate 適用日, TextBoxFlexibleDate 解除日, DataGrid<dgJutoku_Row> 住所地特例grid, JushochiTokureiExecutionStatus status) {
         ValidationMessageControlDictionary dictionary = new ValidationMessageControlDictionary();

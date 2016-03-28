@@ -1,16 +1,14 @@
 package jp.co.ndensan.reams.db.dba.divcontroller.entity.parentdiv.dba203001t;
+
 /**
- * このコードはツールによって生成されました。
- * このファイルへの変更は、再生成時には損失するため
- * 不正な動作の原因になります。
+ * このコードはツールによって生成されました。 このファイルへの変更は、再生成時には損失するため 不正な動作の原因になります。
  */
 import com.fasterxml.jackson.annotation.JsonProperty;
-import jp.co.ndensan.reams.db.dba.divcontroller.entity.parentdiv.dba203001t.SeikatsuHogoDiv;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TabPanel;
 
 /**
- * tplSeikatsuHogo のクラスファイル 
- * 
+ * tplSeikatsuHogo のクラスファイル
+ *
  * @author 自動生成
  */
 public class tplSeikatsuHogoDiv extends TabPanel {
@@ -20,6 +18,7 @@ public class tplSeikatsuHogoDiv extends TabPanel {
      * コントロール名とフィールド名を取得する
      * private + コントロール名 + フィールド名 の文字列を作成
      */
+
     @JsonProperty("SeikatsuHogo")
     private SeikatsuHogoDiv SeikatsuHogo;
 
@@ -36,7 +35,7 @@ public class tplSeikatsuHogoDiv extends TabPanel {
 
     @JsonProperty("SeikatsuHogo")
     public void setSeikatsuHogo(SeikatsuHogoDiv SeikatsuHogo) {
-        this.SeikatsuHogo=SeikatsuHogo;
+        this.SeikatsuHogo = SeikatsuHogo;
     }
 
 }

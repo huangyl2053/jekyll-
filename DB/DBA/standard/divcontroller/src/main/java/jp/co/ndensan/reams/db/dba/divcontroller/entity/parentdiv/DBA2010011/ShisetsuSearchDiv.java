@@ -1,21 +1,16 @@
 package jp.co.ndensan.reams.db.dba.divcontroller.entity.parentdiv.DBA2010011;
+
 /**
- * このコードはツールによって生成されました。
- * このファイルへの変更は、再生成時には損失するため
- * 不正な動作の原因になります。
+ * このコードはツールによって生成されました。 このファイルへの変更は、再生成時には損失するため 不正な動作の原因になります。
  */
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import jp.co.ndensan.reams.db.dba.divcontroller.entity.parentdiv.DBA2010011.CommonShisetsuSearchDiv;
-import jp.co.ndensan.reams.db.dba.divcontroller.entity.parentdiv.DBA2010011.KaigoHokenShisetsuSearchDiv;
-import jp.co.ndensan.reams.db.dba.divcontroller.entity.parentdiv.DBA2010011.OtherTokureiShisetsuSearchDiv;
 import jp.co.ndensan.reams.uz.uza.ui.binding.*;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
-import jp.co.ndensan.reams.uz.uza.ui.binding.domain.*;
 
 /**
- * ShisetsuSearch のクラスファイル 
- * 
+ * ShisetsuSearch のクラスファイル
+ *
  * @author 自動生成
  */
 public class ShisetsuSearchDiv extends Panel {
@@ -25,6 +20,7 @@ public class ShisetsuSearchDiv extends Panel {
      * コントロール名とフィールド名を取得する
      * private + コントロール名 + フィールド名 の文字列を作成
      */
+
     @JsonProperty("radShisetsuShurui")
     private RadioButton radShisetsuShurui;
     @JsonProperty("CommonShisetsuSearch")
@@ -55,7 +51,7 @@ public class ShisetsuSearchDiv extends Panel {
 
     @JsonProperty("radShisetsuShurui")
     public void setRadShisetsuShurui(RadioButton radShisetsuShurui) {
-        this.radShisetsuShurui=radShisetsuShurui;
+        this.radShisetsuShurui = radShisetsuShurui;
     }
 
     @JsonProperty("CommonShisetsuSearch")
@@ -65,7 +61,7 @@ public class ShisetsuSearchDiv extends Panel {
 
     @JsonProperty("CommonShisetsuSearch")
     public void setCommonShisetsuSearch(CommonShisetsuSearchDiv CommonShisetsuSearch) {
-        this.CommonShisetsuSearch=CommonShisetsuSearch;
+        this.CommonShisetsuSearch = CommonShisetsuSearch;
     }
 
     @JsonProperty("KaigoHokenShisetsuSearch")
@@ -75,7 +71,7 @@ public class ShisetsuSearchDiv extends Panel {
 
     @JsonProperty("KaigoHokenShisetsuSearch")
     public void setKaigoHokenShisetsuSearch(KaigoHokenShisetsuSearchDiv KaigoHokenShisetsuSearch) {
-        this.KaigoHokenShisetsuSearch=KaigoHokenShisetsuSearch;
+        this.KaigoHokenShisetsuSearch = KaigoHokenShisetsuSearch;
     }
 
     @JsonProperty("OtherTokureiShisetsuSearch")
@@ -85,7 +81,7 @@ public class ShisetsuSearchDiv extends Panel {
 
     @JsonProperty("OtherTokureiShisetsuSearch")
     public void setOtherTokureiShisetsuSearch(OtherTokureiShisetsuSearchDiv OtherTokureiShisetsuSearch) {
-        this.OtherTokureiShisetsuSearch=OtherTokureiShisetsuSearch;
+        this.OtherTokureiShisetsuSearch = OtherTokureiShisetsuSearch;
     }
 
     @JsonProperty("chkOutputKyushiHaishi")
@@ -95,7 +91,7 @@ public class ShisetsuSearchDiv extends Panel {
 
     @JsonProperty("chkOutputKyushiHaishi")
     public void setChkOutputKyushiHaishi(CheckBoxList chkOutputKyushiHaishi) {
-        this.chkOutputKyushiHaishi=chkOutputKyushiHaishi;
+        this.chkOutputKyushiHaishi = chkOutputKyushiHaishi;
     }
 
     @JsonProperty("chkOutputShisetsuRireki")
@@ -105,7 +101,7 @@ public class ShisetsuSearchDiv extends Panel {
 
     @JsonProperty("chkOutputShisetsuRireki")
     public void setChkOutputShisetsuRireki(CheckBoxList chkOutputShisetsuRireki) {
-        this.chkOutputShisetsuRireki=chkOutputShisetsuRireki;
+        this.chkOutputShisetsuRireki = chkOutputShisetsuRireki;
     }
 
     @JsonProperty("txtMaxNum")
@@ -115,7 +111,7 @@ public class ShisetsuSearchDiv extends Panel {
 
     @JsonProperty("txtMaxNum")
     public void setTxtMaxNum(TextBoxNum txtMaxNum) {
-        this.txtMaxNum=txtMaxNum;
+        this.txtMaxNum = txtMaxNum;
     }
 
     @JsonProperty("btnSearchShisetsu")
@@ -125,7 +121,7 @@ public class ShisetsuSearchDiv extends Panel {
 
     @JsonProperty("btnSearchShisetsu")
     public void setBtnSearchShisetsu(Button btnSearchShisetsu) {
-        this.btnSearchShisetsu=btnSearchShisetsu;
+        this.btnSearchShisetsu = btnSearchShisetsu;
     }
 
     /*
@@ -137,7 +133,7 @@ public class ShisetsuSearchDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setTxtSearchJigyoshaNo(TextBoxCode txtSearchJigyoshaNo) {
+    public void setTxtSearchJigyoshaNo(TextBoxCode txtSearchJigyoshaNo) {
         this.getCommonShisetsuSearch().setTxtSearchJigyoshaNo(txtSearchJigyoshaNo);
     }
 
@@ -147,7 +143,7 @@ public class ShisetsuSearchDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setTxtSearchJigyoshaKaishiDate(TextBoxFlexibleDate txtSearchJigyoshaKaishiDate) {
+    public void setTxtSearchJigyoshaKaishiDate(TextBoxFlexibleDate txtSearchJigyoshaKaishiDate) {
         this.getCommonShisetsuSearch().setTxtSearchJigyoshaKaishiDate(txtSearchJigyoshaKaishiDate);
     }
 
@@ -157,7 +153,7 @@ public class ShisetsuSearchDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setTxtSearchJigyoshaHaishiDate(TextBoxFlexibleDate txtSearchJigyoshaHaishiDate) {
+    public void setTxtSearchJigyoshaHaishiDate(TextBoxFlexibleDate txtSearchJigyoshaHaishiDate) {
         this.getCommonShisetsuSearch().setTxtSearchJigyoshaHaishiDate(txtSearchJigyoshaHaishiDate);
     }
 
@@ -167,7 +163,7 @@ public class ShisetsuSearchDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setTxtSearchJigyoshaMeiOrKanaMeisho(TextBox txtSearchJigyoshaMeiOrKanaMeisho) {
+    public void setTxtSearchJigyoshaMeiOrKanaMeisho(TextBox txtSearchJigyoshaMeiOrKanaMeisho) {
         this.getCommonShisetsuSearch().setTxtSearchJigyoshaMeiOrKanaMeisho(txtSearchJigyoshaMeiOrKanaMeisho);
     }
 
@@ -177,7 +173,7 @@ public class ShisetsuSearchDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setDdlSearchMeishoMatchCondition(DropDownList ddlSearchMeishoMatchCondition) {
+    public void setDdlSearchMeishoMatchCondition(DropDownList ddlSearchMeishoMatchCondition) {
         this.getCommonShisetsuSearch().setDdlSearchMeishoMatchCondition(ddlSearchMeishoMatchCondition);
     }
 
@@ -187,7 +183,7 @@ public class ShisetsuSearchDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setTxtSearchYubinNo(TextBoxYubinNo txtSearchYubinNo) {
+    public void setTxtSearchYubinNo(TextBoxYubinNo txtSearchYubinNo) {
         this.getCommonShisetsuSearch().setTxtSearchYubinNo(txtSearchYubinNo);
     }
 
@@ -197,7 +193,7 @@ public class ShisetsuSearchDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setTxtSearchJusho(TextBox txtSearchJusho) {
+    public void setTxtSearchJusho(TextBox txtSearchJusho) {
         this.getCommonShisetsuSearch().setTxtSearchJusho(txtSearchJusho);
     }
 
@@ -207,7 +203,7 @@ public class ShisetsuSearchDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setDdlSearchKenCode(DropDownList ddlSearchKenCode) {
+    public void setDdlSearchKenCode(DropDownList ddlSearchKenCode) {
         this.getKaigoHokenShisetsuSearch().setDdlSearchKenCode(ddlSearchKenCode);
     }
 
@@ -217,7 +213,7 @@ public class ShisetsuSearchDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setDdlSearchJigyoshaKubun(DropDownList ddlSearchJigyoshaKubun) {
+    public void setDdlSearchJigyoshaKubun(DropDownList ddlSearchJigyoshaKubun) {
         this.getKaigoHokenShisetsuSearch().setDdlSearchJigyoshaKubun(ddlSearchJigyoshaKubun);
     }
 
@@ -227,7 +223,7 @@ public class ShisetsuSearchDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setDdlSearchToshiCode(DropDownList ddlSearchToshiCode) {
+    public void setDdlSearchToshiCode(DropDownList ddlSearchToshiCode) {
         this.getKaigoHokenShisetsuSearch().setDdlSearchToshiCode(ddlSearchToshiCode);
     }
 
@@ -237,7 +233,7 @@ public class ShisetsuSearchDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setDdlSearchServiceType(DropDownList ddlSearchServiceType) {
+    public void setDdlSearchServiceType(DropDownList ddlSearchServiceType) {
         this.getKaigoHokenShisetsuSearch().setDdlSearchServiceType(ddlSearchServiceType);
     }
 
@@ -247,7 +243,7 @@ public class ShisetsuSearchDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setRadKannaiKangaiKubun(RadioButton radKannaiKangaiKubun) {
+    public void setRadKannaiKangaiKubun(RadioButton radKannaiKangaiKubun) {
         this.getOtherTokureiShisetsuSearch().setRadKannaiKangaiKubun(radKannaiKangaiKubun);
     }
 

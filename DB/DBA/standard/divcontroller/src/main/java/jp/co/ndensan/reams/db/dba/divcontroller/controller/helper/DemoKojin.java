@@ -20,6 +20,10 @@ public class DemoKojin {
     private static final RString DEMO_KOJIN = new RString("demoKojin.yml");
     private ControlGenerator generator;
 
+    /**
+     * @param hihokenshaKubun 被保険者区分
+     *
+     */
     public DemoKojin(String hihokenshaKubun) {
         List<HashMap> yamlDataList = YamlLoader.DBA.loadAsList(DEMO_KOJIN);
         generator = null;
@@ -35,10 +39,18 @@ public class DemoKojin {
         }
     }
 
+    /**
+     * @return 識別コード
+     *
+     */
     public RString getShikibetsuCode() {
         return generator.getAsRString("識別コード");
     }
 
+    /**
+     * @return 被保番号
+     *
+     */
     public RString getHihokenshaNo() {
         return generator.getAsRString("被保番号");
     }

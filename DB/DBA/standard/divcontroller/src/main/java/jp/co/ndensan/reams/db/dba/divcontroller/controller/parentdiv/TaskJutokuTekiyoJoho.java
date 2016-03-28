@@ -5,7 +5,6 @@
  */
 package jp.co.ndensan.reams.db.dba.divcontroller.controller.parentdiv;
 
-import jp.co.ndensan.reams.db.dba.divcontroller.controller.helper.DemoKojin;
 import jp.co.ndensan.reams.db.dba.divcontroller.entity.parentdiv.dba203001t.IryoHokenInputDiv;
 import jp.co.ndensan.reams.db.dba.divcontroller.entity.parentdiv.dba203001t.JutokuTekiyoInputDiv;
 import jp.co.ndensan.reams.db.dba.divcontroller.entity.parentdiv.dba203001t.TaskJutokuTekiyoJohoDiv;
@@ -31,8 +30,7 @@ public class TaskJutokuTekiyoJoho {
 //    private static final RString ROFUKU_NENKIN_DATA = new RString("DBA203001T/rofukuNenkin.yml");
 //    private static final RString SEIKATSU_HOGO_DATA = new RString("DBA203001T/seikatsuHogo.yml");
 //    private static final RString SHISETSU_NYUTAISHO_DATA = new RString("DBA203001T/shisetsuNyutaisho.yml");
-
-    private static final RString SHIKAKU_ADD = new RString("add");
+//    private static final RString SHIKAKU_ADD = new RString("add");
     private static final RString SHIKAKU_MODIFY = new RString("modify");
     private static final RString SHIKAKU_DELETE = new RString("delete");
     private static final RString IRYO_HOKEN_ADD = new RString("add");
@@ -49,15 +47,13 @@ public class TaskJutokuTekiyoJoho {
     public ResponseData onLoad(TaskJutokuTekiyoJohoDiv jutokuTekiyoJohoDiv) {
         ResponseData<TaskJutokuTekiyoJohoDiv> response = new ResponseData<>();
 
-        DemoKojin demoKojin = new DemoKojin("第1号");
-        RString shikibetsuCode = demoKojin.getShikibetsuCode();
-
-        setShikakuJoho(jutokuTekiyoJohoDiv, shikibetsuCode);
+//        DemoKojin demoKojin = new DemoKojin("第1号");
+//        RString shikibetsuCode = demoKojin.getShikibetsuCode();
+//        setShikakuJoho(jutokuTekiyoJohoDiv, shikibetsuCode);
 //        setIryoHoken(jutokuTekiyoJohoDiv, shikibetsuCode);
 //        setRofukuNenkin(jutokuTekiyoJohoDiv, shikibetsuCode);
 //        setSeikatsuHogo(jutokuTekiyoJohoDiv, shikibetsuCode);
 //        setShisetsuNyutaisho(jutokuTekiyoJohoDiv, shikibetsuCode);
-
         response.data = jutokuTekiyoJohoDiv;
         return response;
     }
@@ -68,7 +64,7 @@ public class TaskJutokuTekiyoJoho {
      * @param jutokuTekiyoJohoDiv 資格情報Div
      * @param shikibetsuCode 識別コード
      */
-    private void setShikakuJoho(TaskJutokuTekiyoJohoDiv jutokuTekiyoJohoDiv, RString shikibetsuCode) {
+//    private void setShikakuJoho(TaskJutokuTekiyoJohoDiv jutokuTekiyoJohoDiv, RString shikibetsuCode) {
 //        tplShikakuJohoDiv tplShikakuJoho = jutokuTekiyoJohoDiv.getTabInputs().getTplShikakuJoho();
 //
 //        List<HashMap> hihokenshaDaichoDataList = YamlLoader.DBA.loadAsList(HIHOKENSHA_DAICHO_DATA);
@@ -80,7 +76,6 @@ public class TaskJutokuTekiyoJoho {
 //            }
 //        }
 //        grid.setDataSource(dataSource);
-
 //        if (dataSource.isEmpty()) {
 //            jutokuTekiyoJohoDiv.setShikakuInputMode(SHIKAKU_ADD);
 //            setShikakuJohoDisabled(tplShikakuJoho, false);
@@ -92,8 +87,7 @@ public class TaskJutokuTekiyoJoho {
 //            setShikakuJohoDisabled(tplShikakuJoho, false);
 //            jutokuTekiyoJohoDiv.getTabInputs().getTplShikakuJoho().getShikakuTokusoRireki()
 //                    .getDgShikakuShutokuRireki().getGridSetting().setIsShowDeleteButtonColumn(false);
-    }
-
+//    }
 //
 //    private List<dgShikakuShutokuRireki_Row> createJutokuTekiyoRirekiList(List<HashMap> hihokenshaDaichoData) {
 //        List<dgShikakuShutokuRireki_Row> dataSource = new ArrayList<>();
@@ -171,7 +165,6 @@ public class TaskJutokuTekiyoJoho {
 //            setIryoHokenDisabled(tplIryoHoken, true);
 //        }
 //    }
-
 //    private List<dgIryoHokenRireki_Row> createDgIryoHokenRirekiList(List<HashMap> iryoHokenData) {
 //        List<dgIryoHokenRireki_Row> dataSource = new ArrayList<>();
 //        for (HashMap iryoHokenDataRow : iryoHokenData) {
@@ -179,7 +172,6 @@ public class TaskJutokuTekiyoJoho {
 //        }
 //        return dataSource;
 //    }
-
 //    private dgIryoHokenRireki_Row createDgIryoHokenRirekiRowFrowHashMap(HashMap hihokenshaDaichoData) {
 //        dgIryoHokenRireki_Row row = new dgIryoHokenRireki_Row(RString.EMPTY, new TextBoxFlexibleDate(), new TextBoxFlexibleDate(), RString.EMPTY,
 //                RString.EMPTY, RString.EMPTY, RString.EMPTY, RString.EMPTY, RString.EMPTY);
@@ -195,7 +187,6 @@ public class TaskJutokuTekiyoJoho {
 //        row.setKigoNo(generator.getAsRString("記号番号"));
 //        return row;
 //    }
-
     private void setIryoHokenDisabled(tplIryoHokenDiv tplIryoHoken, boolean disableValue) {
         tplIryoHoken.getIryoHokenInput().setDisabled(disableValue);
         tplIryoHoken.getBtnUpdateIryoHoken().setDisabled(disableValue);
@@ -226,7 +217,6 @@ public class TaskJutokuTekiyoJoho {
 //            setRofukuNenkinDisabled(tplRofukuNenkin, true);
 //        }
 //    }
-
 //    private List<dgRohukuNenkinRireki_Row> createRofukuNenkinList(List<HashMap> rofukuNenkiData) {
 //        List<dgRohukuNenkinRireki_Row> dataSource = new ArrayList<>();
 //        for (HashMap rofukuNenkiDataRow : rofukuNenkiData) {
@@ -234,7 +224,6 @@ public class TaskJutokuTekiyoJoho {
 //        }
 //        return dataSource;
 //    }
-
 //    private dgRohukuNenkinRireki_Row createRofukuNenkinRowFromHashMap(HashMap rofukuNenkiData) {
 //        dgRohukuNenkinRireki_Row row = new dgRohukuNenkinRireki_Row(new TextBoxFlexibleDate(), new TextBoxFlexibleDate(), RString.EMPTY);
 //
@@ -244,12 +233,10 @@ public class TaskJutokuTekiyoJoho {
 //        row.getShuryoDate().setValue(generator.getAsFlexibleDate("廃止日"));
 //        return row;
 //    }
-
 //    private void setRofukuNenkinDisabled(tplRofukuNenkinDiv tplRofukuNenkin, boolean disableValue) {
 //        tplRofukuNenkin.getRohukuNenkin().getRohukuNenkinInput().setDisabled(disableValue);
 //        tplRofukuNenkin.getRohukuNenkin().getBtnUpdateRofukuNenkin().setDisabled(disableValue);
 //    }
-
     /**
      * 生活保護Tabに初期表示する値を設定します。
      *
@@ -275,7 +262,6 @@ public class TaskJutokuTekiyoJoho {
 //            setSeikatsuHogoDisabled(tplSeikatsuHogo, true);
 //        }
 //    }
-
 //    private List<dgSeikatsuHogoRireki_Row> createSeikatsuHogoList(List<HashMap> seikatsuHogoData) {
 //        List<dgSeikatsuHogoRireki_Row> dataSource = new ArrayList<>();
 //        for (HashMap seikatsuHogoDataRow : seikatsuHogoData) {
@@ -283,7 +269,6 @@ public class TaskJutokuTekiyoJoho {
 //        }
 //        return dataSource;
 //    }
-
 //    private dgSeikatsuHogoRireki_Row createSeikatsuHogoRowFromHashMap(HashMap seikatsuHogoData) {
 //        dgSeikatsuHogoRireki_Row row = new dgSeikatsuHogoRireki_Row(new TextBoxFlexibleDate(), new TextBoxFlexibleDate(),
 //                RString.EMPTY, RString.EMPTY, RString.EMPTY);
@@ -296,12 +281,10 @@ public class TaskJutokuTekiyoJoho {
 //        row.setSeihoShubetsuKey(generator.getAsRString("種別Key"));
 //        return row;
 //    }
-
 //    private void setSeikatsuHogoDisabled(tplSeikatsuHogoDiv tplSeikatsuHogo, boolean disableValue) {
 //        tplSeikatsuHogo.getSeikatsuHogo().getSeikatsuHogoInput().setDisabled(disableValue);
 //        tplSeikatsuHogo.getSeikatsuHogo().getBtnUpdataSeikatsuHogo().setDisabled(disableValue);
 //    }
-
     /**
      * 施設入退所Tabに初期表示する値を設定します。
      *
@@ -332,7 +315,6 @@ public class TaskJutokuTekiyoJoho {
 ////        RadioButton rad = tplShisetsuNyutaisho.getShisetsuNyutaishoRirekiKanri().getShisetsuNyutaishoInput().getShisetsuJoho().getRadShisetsuShurui();
 ////        rad.setDataSource(rad.getDataSource().subList(0, 2));
 //    }
-
 //    private List<dgShisetsuNyutaishoRireki_Row> createShisetsuNyutaishoList(List<HashMap> shisetsuNyutaishoData) {
 //        List<dgShisetsuNyutaishoRireki_Row> dataSource = new ArrayList<>();
 //        for (HashMap shisetsuNyutaishoDataRow : shisetsuNyutaishoData) {
@@ -340,7 +322,6 @@ public class TaskJutokuTekiyoJoho {
 //        }
 //        return dataSource;
 //    }
-
 //    private dgShisetsuNyutaishoRireki_Row createShisetsuNyutaishoRowFromHashMap(HashMap seikatsuHogoData) {
 //        dgShisetsuNyutaishoRireki_Row row = new dgShisetsuNyutaishoRireki_Row(RString.EMPTY, new TextBoxFlexibleDate(),
 //                new TextBoxFlexibleDate(), RString.EMPTY, RString.EMPTY, RString.EMPTY, RString.EMPTY,
@@ -363,7 +344,6 @@ public class TaskJutokuTekiyoJoho {
 ////        tplShisetsuNyutaisho.getShisetsuNyutaishoRirekiKanri().getShisetsuNyutaishoInput().setDisabled(disableValue);
 ////        tplShisetsuNyutaisho.getShisetsuNyutaishoRirekiKanri().getBtnUpdateShisetsuNyutaisho().setDisabled(disableValue);
 //    }
-
     /**
      * 資格情報タブ内の処理です。グリッド内の視覚情報修正ボタンがクリックされた際に実行します。<br/>
      * 入力モードを修正モードに変更し、選択したグリッドのデータを表示します。また、確定ボタンのラベルが修正用に変更されます。
@@ -419,11 +399,11 @@ public class TaskJutokuTekiyoJoho {
 //        int selectRowNum;
 //        dgShikakuShutokuRireki_Row selectRow;
 
-        if (jutokuTekiyoJohoDiv.getShikakuInputMode().equals(SHIKAKU_ADD)) {
+//        if (jutokuTekiyoJohoDiv.getShikakuInputMode().equals(SHIKAKU_ADD)) {
 //            dgShikakuShutokuRireki_Row row = createJutokuTekiyoRirekiRowFromInputValue(tplShikakuJoho);
 //            row.setRowState(RowState.Added);
 //            tplShikakuJoho.getShikakuTokusoRireki().getDgShikakuShutokuRireki().getDataSource().add(0, row);
-        } else if (jutokuTekiyoJohoDiv.getShikakuInputMode().equals(SHIKAKU_MODIFY)) {
+//        } else if (jutokuTekiyoJohoDiv.getShikakuInputMode().equals(SHIKAKU_MODIFY)) {
 //            selectRowNum = Integer.parseInt(jutokuTekiyoJohoDiv.getShikakuSelectRow().toString());
 //            selectRow = tplShikakuJoho.getShikakuTokusoRireki().getDgShikakuShutokuRireki().getDataSource().get(selectRowNum);
 //            setJutokuTekiyoRirekiRowFromInputValue(tplShikakuJoho, selectRow);
@@ -431,7 +411,7 @@ public class TaskJutokuTekiyoJoho {
 //            } else {
 //                selectRow.setRowState(RowState.Modified);
 //            }
-        } else if (jutokuTekiyoJohoDiv.getShikakuInputMode().equals(SHIKAKU_DELETE)) {
+//        } else if (jutokuTekiyoJohoDiv.getShikakuInputMode().equals(SHIKAKU_DELETE)) {
 //            selectRowNum = Integer.parseInt(jutokuTekiyoJohoDiv.getShikakuSelectRow().toString());
 //            selectRow = tplShikakuJoho.getShikakuTokusoRireki().getDgShikakuShutokuRireki().getDataSource().get(selectRowNum);
 //            if (selectRow.getRowState().equals(RowState.Added)) {
@@ -439,8 +419,7 @@ public class TaskJutokuTekiyoJoho {
 //            } else {
 //                tplShikakuJoho.getShikakuTokusoRireki().getDgShikakuShutokuRireki().getDataSource().get(selectRowNum).setRowState(RowState.Deleted);
 //            }
-        }
-
+//        }
         setShikakuJohoDisabled(tplShikakuJoho, true);
         clearJutokuTekiyoInput(jutokuTekiyoJohoDiv.getTabInputs().getTplShikakuJoho());
         response.data = jutokuTekiyoJohoDiv;
@@ -565,8 +544,7 @@ public class TaskJutokuTekiyoJoho {
             selectRowNum = Integer.parseInt(jutokuTekiyoJohoDiv.getIryoHokenSelectRow().toString());
             dgIryoHokenRireki_Row selectRow = tplIryoHoken.getIryoHokenRireki().getDgIryoHokenRireki().getDataSource().get(selectRowNum);
             setDgIryoHokenRirekiRowFrowInputValue(tplIryoHoken, selectRow);
-            if (selectRow.getRowState().equals(RowState.Added)) {
-            } else {
+            if (!RowState.Added.equals(selectRow.getRowState())) {
                 selectRow.setRowState(RowState.Modified);
             }
         } else if (jutokuTekiyoJohoDiv.getIryoHokenInputMode().equals(IRYO_HOKEN_DELETE)) {

@@ -54,7 +54,7 @@ public class KihonJoho {
         kihonDiv.getCcdKaigoAtenaInfo().load(taishoshaKey.get識別コード());
         kihonDiv.getCcdKaigoShikakuKihon().initialize(lasdecCode, taishoshaKey.get識別コード());
 
-        if (isNot適用対象者(taishoshaKey, controlData)) {
+        if (isNot適用対象者(controlData)) {
             //TODO n8178 城間篤人 ApplicationExceptionでの実装ではメニューに遷移してしまうため問題がある。調査後、適切な処理に置き換える必要がある。 2015年3月
 
 //            WarningMessage message = new WarningMessage(DbaErrorMessages.住所地特例適用対象者でない.getMessage().getCode(),
@@ -68,7 +68,7 @@ public class KihonJoho {
         return response;
     }
 
-    private boolean isNot適用対象者(TaishoshaKey taishoshaKey, IUrControlData controlData) {
+    private boolean isNot適用対象者(IUrControlData controlData) {
         JushochiTokureiMenuType menuType = JushochiTokureiMenuType.toValue(controlData.getMenuID());
 
         switch (menuType) {
@@ -80,7 +80,7 @@ public class KihonJoho {
         }
 
         IKojinFinder kojinFinder = ShikibetsuTaishoService.getKojinFinder();
-        // IKojin kojin = kojinFinder.get個人(controlData.getGyomuCD(), taishoshaKey.get識別コード());
+//        IKojin kojin = kojinFinder.get個人(controlData.getGyomuCD(), taishoshaKey.get識別コード());
         IShikibetsuTaishoGyomuHanteiKey createInstance = ShikibetsuTaishoGyomuHanteiKeyFactory.createInstance(GyomuCode.EMPTY, KensakuYusenKubun.住登内優先);
         ShikibetsuTaishoSearchKeyBuilder keyBuilder = new ShikibetsuTaishoSearchKeyBuilder(createInstance);
         keyBuilder.set個人番号(KojinNo.EMPTY);

@@ -1,20 +1,14 @@
 package jp.co.ndensan.reams.db.dba.divcontroller.entity.parentdiv.dba203001t;
+
 /**
- * このコードはツールによって生成されました。
- * このファイルへの変更は、再生成時には損失するため
- * 不正な動作の原因になります。
+ * このコードはツールによって生成されました。 このファイルへの変更は、再生成時には損失するため 不正な動作の原因になります。
  */
 import com.fasterxml.jackson.annotation.JsonProperty;
-import jp.co.ndensan.reams.db.dba.divcontroller.entity.parentdiv.dba203001t.tplIryoHokenDiv;
-import jp.co.ndensan.reams.db.dba.divcontroller.entity.parentdiv.dba203001t.tplRofukuNenkinDiv;
-import jp.co.ndensan.reams.db.dba.divcontroller.entity.parentdiv.dba203001t.tplSeikatsuHogoDiv;
-import jp.co.ndensan.reams.db.dba.divcontroller.entity.parentdiv.dba203001t.tplShikakuJohoDiv;
-import jp.co.ndensan.reams.db.dba.divcontroller.entity.parentdiv.dba203001t.tplShisetsuNyutaishoDiv;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TabContainer;
 
 /**
- * tabInputs のクラスファイル 
- * 
+ * tabInputs のクラスファイル
+ *
  * @author 自動生成
  */
 public class tabInputsDiv extends TabContainer {
@@ -24,6 +18,7 @@ public class tabInputsDiv extends TabContainer {
      * コントロール名とフィールド名を取得する
      * private + コントロール名 + フィールド名 の文字列を作成
      */
+
     @JsonProperty("tplShikakuJoho")
     private tplShikakuJohoDiv tplShikakuJoho;
     @JsonProperty("tplIryoHoken")
@@ -48,7 +43,7 @@ public class tabInputsDiv extends TabContainer {
 
     @JsonProperty("tplShikakuJoho")
     public void setTplShikakuJoho(tplShikakuJohoDiv tplShikakuJoho) {
-        this.tplShikakuJoho=tplShikakuJoho;
+        this.tplShikakuJoho = tplShikakuJoho;
     }
 
     @JsonProperty("tplIryoHoken")
@@ -58,7 +53,7 @@ public class tabInputsDiv extends TabContainer {
 
     @JsonProperty("tplIryoHoken")
     public void setTplIryoHoken(tplIryoHokenDiv tplIryoHoken) {
-        this.tplIryoHoken=tplIryoHoken;
+        this.tplIryoHoken = tplIryoHoken;
     }
 
     @JsonProperty("tplRofukuNenkin")
@@ -68,7 +63,7 @@ public class tabInputsDiv extends TabContainer {
 
     @JsonProperty("tplRofukuNenkin")
     public void setTplRofukuNenkin(tplRofukuNenkinDiv tplRofukuNenkin) {
-        this.tplRofukuNenkin=tplRofukuNenkin;
+        this.tplRofukuNenkin = tplRofukuNenkin;
     }
 
     @JsonProperty("tplShisetsuNyutaisho")
@@ -78,7 +73,7 @@ public class tabInputsDiv extends TabContainer {
 
     @JsonProperty("tplShisetsuNyutaisho")
     public void setTplShisetsuNyutaisho(tplShisetsuNyutaishoDiv tplShisetsuNyutaisho) {
-        this.tplShisetsuNyutaisho=tplShisetsuNyutaisho;
+        this.tplShisetsuNyutaisho = tplShisetsuNyutaisho;
     }
 
     @JsonProperty("tplSeikatsuHogo")
@@ -88,7 +83,7 @@ public class tabInputsDiv extends TabContainer {
 
     @JsonProperty("tplSeikatsuHogo")
     public void setTplSeikatsuHogo(tplSeikatsuHogoDiv tplSeikatsuHogo) {
-        this.tplSeikatsuHogo=tplSeikatsuHogo;
+        this.tplSeikatsuHogo = tplSeikatsuHogo;
     }
 
 }

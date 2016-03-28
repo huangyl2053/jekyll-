@@ -1,19 +1,16 @@
 package jp.co.ndensan.reams.db.dba.divcontroller.entity.parentdiv.dba203001t;
-/**
- * このコードはツールによって生成されました。
- * このファイルへの変更は、再生成時には損失するため
- * 不正な動作の原因になります。
- */
-import com.fasterxml.jackson.annotation.JsonProperty;
-import jp.co.ndensan.reams.db.dba.divcontroller.entity.parentdiv.dba203001t.RohukuNenkinInputDiv;
-import jp.co.ndensan.reams.db.dba.divcontroller.entity.parentdiv.dba203001t.dgRohukuNenkinRireki_Row;
-import jp.co.ndensan.reams.uz.uza.ui.binding.*;
-import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
-import jp.co.ndensan.reams.uz.uza.ui.binding.domain.*;
 
 /**
- * RohukuNenkin のクラスファイル 
- * 
+ * このコードはツールによって生成されました。 このファイルへの変更は、再生成時には損失するため 不正な動作の原因になります。
+ */
+import com.fasterxml.jackson.annotation.JsonProperty;
+import jp.co.ndensan.reams.uz.uza.ui.binding.Button;
+import jp.co.ndensan.reams.uz.uza.ui.binding.DataGrid;
+import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
+
+/**
+ * RohukuNenkin のクラスファイル
+ *
  * @author 自動生成
  */
 public class RohukuNenkinDiv extends Panel {
@@ -23,6 +20,7 @@ public class RohukuNenkinDiv extends Panel {
      * コントロール名とフィールド名を取得する
      * private + コントロール名 + フィールド名 の文字列を作成
      */
+
     @JsonProperty("btnAddRofukuNenkin")
     private Button btnAddRofukuNenkin;
     @JsonProperty("dgRohukuNenkinRireki")
@@ -45,7 +43,7 @@ public class RohukuNenkinDiv extends Panel {
 
     @JsonProperty("btnAddRofukuNenkin")
     public void setBtnAddRofukuNenkin(Button btnAddRofukuNenkin) {
-        this.btnAddRofukuNenkin=btnAddRofukuNenkin;
+        this.btnAddRofukuNenkin = btnAddRofukuNenkin;
     }
 
     @JsonProperty("dgRohukuNenkinRireki")
@@ -55,7 +53,7 @@ public class RohukuNenkinDiv extends Panel {
 
     @JsonProperty("dgRohukuNenkinRireki")
     public void setDgRohukuNenkinRireki(DataGrid<dgRohukuNenkinRireki_Row> dgRohukuNenkinRireki) {
-        this.dgRohukuNenkinRireki=dgRohukuNenkinRireki;
+        this.dgRohukuNenkinRireki = dgRohukuNenkinRireki;
     }
 
     @JsonProperty("RohukuNenkinInput")
@@ -65,7 +63,7 @@ public class RohukuNenkinDiv extends Panel {
 
     @JsonProperty("RohukuNenkinInput")
     public void setRohukuNenkinInput(RohukuNenkinInputDiv RohukuNenkinInput) {
-        this.RohukuNenkinInput=RohukuNenkinInput;
+        this.RohukuNenkinInput = RohukuNenkinInput;
     }
 
     @JsonProperty("btnUpdateRofukuNenkin")
@@ -75,7 +73,7 @@ public class RohukuNenkinDiv extends Panel {
 
     @JsonProperty("btnUpdateRofukuNenkin")
     public void setBtnUpdateRofukuNenkin(Button btnUpdateRofukuNenkin) {
-        this.btnUpdateRofukuNenkin=btnUpdateRofukuNenkin;
+        this.btnUpdateRofukuNenkin = btnUpdateRofukuNenkin;
     }
 
 }

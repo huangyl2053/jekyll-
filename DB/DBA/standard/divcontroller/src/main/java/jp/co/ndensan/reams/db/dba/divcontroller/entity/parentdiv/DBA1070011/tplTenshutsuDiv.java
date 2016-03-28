@@ -1,18 +1,15 @@
 package jp.co.ndensan.reams.db.dba.divcontroller.entity.parentdiv.DBA1070011;
-/**
- * このコードはツールによって生成されました。
- * このファイルへの変更は、再生成時には損失するため
- * 不正な動作の原因になります。
- */
-import com.fasterxml.jackson.annotation.JsonProperty;
-import jp.co.ndensan.reams.db.dba.divcontroller.entity.parentdiv.DBA1070011.dgTenshutsu_Row;
-import jp.co.ndensan.reams.uz.uza.ui.binding.*;
-import jp.co.ndensan.reams.uz.uza.ui.binding.TabPanel;
-import jp.co.ndensan.reams.uz.uza.ui.binding.domain.*;
 
 /**
- * tplTenshutsu のクラスファイル 
- * 
+ * このコードはツールによって生成されました。 このファイルへの変更は、再生成時には損失するため 不正な動作の原因になります。
+ */
+import com.fasterxml.jackson.annotation.JsonProperty;
+import jp.co.ndensan.reams.uz.uza.ui.binding.DataGrid;
+import jp.co.ndensan.reams.uz.uza.ui.binding.TabPanel;
+
+/**
+ * tplTenshutsu のクラスファイル
+ *
  * @author 自動生成
  */
 public class tplTenshutsuDiv extends TabPanel {
@@ -22,6 +19,7 @@ public class tplTenshutsuDiv extends TabPanel {
      * コントロール名とフィールド名を取得する
      * private + コントロール名 + フィールド名 の文字列を作成
      */
+
     @JsonProperty("dgTenshutsu")
     private DataGrid<dgTenshutsu_Row> dgTenshutsu;
 
@@ -38,7 +36,7 @@ public class tplTenshutsuDiv extends TabPanel {
 
     @JsonProperty("dgTenshutsu")
     public void setDgTenshutsu(DataGrid<dgTenshutsu_Row> dgTenshutsu) {
-        this.dgTenshutsu=dgTenshutsu;
+        this.dgTenshutsu = dgTenshutsu;
     }
 
 }

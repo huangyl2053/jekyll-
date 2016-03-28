@@ -1,17 +1,15 @@
 package jp.co.ndensan.reams.db.dba.divcontroller.entity.parentdiv.dba203001t;
+
 /**
- * このコードはツールによって生成されました。
- * このファイルへの変更は、再生成時には損失するため
- * 不正な動作の原因になります。
+ * このコードはツールによって生成されました。 このファイルへの変更は、再生成時には損失するため 不正な動作の原因になります。
  */
 import com.fasterxml.jackson.annotation.JsonProperty;
-import jp.co.ndensan.reams.db.dba.divcontroller.entity.parentdiv.dba203001t.tabInputsDiv;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 
 /**
- * TaskJutokuTekiyoJoho のクラスファイル 
- * 
+ * TaskJutokuTekiyoJoho のクラスファイル
+ *
  * @author 自動生成
  */
 public class TaskJutokuTekiyoJohoDiv extends Panel {
@@ -21,6 +19,7 @@ public class TaskJutokuTekiyoJohoDiv extends Panel {
      * コントロール名とフィールド名を取得する
      * private + コントロール名 + フィールド名 の文字列を作成
      */
+
     @JsonProperty("tabInputs")
     private tabInputsDiv tabInputs;
     @JsonProperty("shikakuInputMode")
@@ -45,7 +44,7 @@ public class TaskJutokuTekiyoJohoDiv extends Panel {
 
     @JsonProperty("tabInputs")
     public void setTabInputs(tabInputsDiv tabInputs) {
-        this.tabInputs=tabInputs;
+        this.tabInputs = tabInputs;
     }
 
     @JsonProperty("shikakuInputMode")
@@ -55,7 +54,7 @@ public class TaskJutokuTekiyoJohoDiv extends Panel {
 
     @JsonProperty("shikakuInputMode")
     public void setShikakuInputMode(RString shikakuInputMode) {
-        this.shikakuInputMode=shikakuInputMode;
+        this.shikakuInputMode = shikakuInputMode;
     }
 
     @JsonProperty("iryoHokenInputMode")
@@ -65,7 +64,7 @@ public class TaskJutokuTekiyoJohoDiv extends Panel {
 
     @JsonProperty("iryoHokenInputMode")
     public void setIryoHokenInputMode(RString iryoHokenInputMode) {
-        this.iryoHokenInputMode=iryoHokenInputMode;
+        this.iryoHokenInputMode = iryoHokenInputMode;
     }
 
     @JsonProperty("shikakuSelectRow")
@@ -75,7 +74,7 @@ public class TaskJutokuTekiyoJohoDiv extends Panel {
 
     @JsonProperty("shikakuSelectRow")
     public void setShikakuSelectRow(RString shikakuSelectRow) {
-        this.shikakuSelectRow=shikakuSelectRow;
+        this.shikakuSelectRow = shikakuSelectRow;
     }
 
     @JsonProperty("iryoHokenSelectRow")
@@ -85,7 +84,7 @@ public class TaskJutokuTekiyoJohoDiv extends Panel {
 
     @JsonProperty("iryoHokenSelectRow")
     public void setIryoHokenSelectRow(RString iryoHokenSelectRow) {
-        this.iryoHokenSelectRow=iryoHokenSelectRow;
+        this.iryoHokenSelectRow = iryoHokenSelectRow;
     }
 
 }

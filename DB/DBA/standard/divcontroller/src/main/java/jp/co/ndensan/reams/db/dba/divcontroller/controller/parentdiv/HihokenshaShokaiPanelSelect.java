@@ -13,7 +13,6 @@ import jp.co.ndensan.reams.db.dba.divcontroller.entity.parentdiv.DBA4010011.Hiho
 import jp.co.ndensan.reams.db.dba.divcontroller.entity.parentdiv.DBA4010011.HihokenshaShokaiTaishoSearchDiv;
 import jp.co.ndensan.reams.db.dba.divcontroller.entity.parentdiv.DBA4010011.dgSetaiJoho_Row;
 import jp.co.ndensan.reams.db.dba.divcontroller.entity.parentdiv.DBA4010011.dgShinseishoTodokede_Row;
-import jp.co.ndensan.reams.db.dba.divcontroller.entity.parentdiv.DBA4010011.tplHihokenshaRirekiDiv;
 import jp.co.ndensan.reams.db.dba.divcontroller.entity.parentdiv.DBA4010011.tplIryoHokenDiv;
 import jp.co.ndensan.reams.db.dba.divcontroller.entity.parentdiv.DBA4010011.tplSetaiShokaiDiv;
 import jp.co.ndensan.reams.db.dba.divcontroller.entity.parentdiv.DBA4010011.tplShinseiTodokedeDiv;
@@ -39,7 +38,7 @@ public class HihokenshaShokaiPanelSelect {
 
     private final DemoKojin demoKojin = new DemoKojin("第1号");
     private ControlGenerator generator;
-    private final static RString SHIKIBETSUCODE = new RString("識別コード");
+    private static final RString SHIKIBETSUCODE = new RString("識別コード");
 
     /**
      * 該当者一覧から、被保険者照会の対象となる個人が選択された際に実行します。<br/>
@@ -52,14 +51,14 @@ public class HihokenshaShokaiPanelSelect {
     public ResponseData onClick_btnToDecide(HihokenshaShokaiPanelSelectDiv selectDiv, HihokenshaShokaiTaishoSearchDiv searchDiv) {
         ResponseData<HihokenshaShokaiPanelSelectDiv> response = new ResponseData<>();
 
-        setShikakuDiv(selectDiv.getTplHihokenshaRireki(), searchDiv);
-        setSetaiDiv(selectDiv.getTplSetaiShokai(), searchDiv);
+//        setShikakuDiv(selectDiv.getTplHihokenshaRireki(), searchDiv);
+        setSetaiDiv(selectDiv.getTplSetaiShokai());
 //        setSeikatsuHogoDiv(selectDiv.getHihokenshaShokaiSeikatsuHogo(), searchDiv);
 //        setRofukuNenkinDiv(selectDiv.getHihokenshaShokaiRofukuNenkin(), searchDiv);
-        setIryoHokenDiv(selectDiv.getTplIryoHoken(), searchDiv);
-        setNyutaishoDiv(selectDiv.getTplShisetsuNyutaisho(), searchDiv);
-        setShoKofuKaishuDiv(selectDiv.getTplShoKofuKaishu(), searchDiv);
-        setShinseiTodokedeDiv(selectDiv.getTplShinseiTodokede(), searchDiv);
+        setIryoHokenDiv(selectDiv.getTplIryoHoken());
+        setNyutaishoDiv(selectDiv.getTplShisetsuNyutaisho());
+        setShoKofuKaishuDiv(selectDiv.getTplShoKofuKaishu());
+        setShinseiTodokedeDiv(selectDiv.getTplShinseiTodokede());
 
         setStateButtonDisabled(selectDiv);
 //
@@ -80,13 +79,11 @@ public class HihokenshaShokaiPanelSelect {
      * @param searchDiv 検索Div
      * @return 資格得喪Div
      */
-    private void setShikakuDiv(tplHihokenshaRirekiDiv shikakuDiv, HihokenshaShokaiTaishoSearchDiv searchDiv) {
-
-//        
+//    private void setShikakuDiv(tplHihokenshaRirekiDiv shikakuDiv, HihokenshaShokaiTaishoSearchDiv searchDiv) {
+//
 //        RString hihokenshaNo = demoKojin.getHihokenshaNo();
 //        setShikakuTokusoJoho(shikakuDiv.getShikakuTokusoRireki().getDgShikakuShutokuRireki(), hihokenshaNo);
-    }
-
+//    }
 //    private void setShikakuTokusoJoho(DataGrid<dgShikakuShutokuRireki_Row> dgShikakuShutokuRireki, RString hihokenshaNo) {
 //
 //        List<HashMap> yamlShikakuTokusoList = YamlLoader.DBA.loadAsList(SHIKAKU_TOKUSO);
@@ -147,10 +144,9 @@ public class HihokenshaShokaiPanelSelect {
      * 選択した個人の識別コードを元に、世帯の情報を照会して表示します。
      *
      * @param setaiDiv 世帯照会Div
-     * @param searchDiv 検索Div
      * @return 世帯照会Div
      */
-    private void setSetaiDiv(tplSetaiShokaiDiv setaiDiv, HihokenshaShokaiTaishoSearchDiv searchDiv) {
+    private void setSetaiDiv(tplSetaiShokaiDiv setaiDiv) {
 
         RString shikibetsuCode = demoKojin.getShikibetsuCode();
         setSetaiJoho(setaiDiv.getDgSetaiJoho(), shikibetsuCode);
@@ -284,7 +280,7 @@ public class HihokenshaShokaiPanelSelect {
      *
      * @return 医療保険Div //
      */
-    private void setIryoHokenDiv(tplIryoHokenDiv iryoHokenDiv, HihokenshaShokaiTaishoSearchDiv searchDiv) {
+    private void setIryoHokenDiv(tplIryoHokenDiv iryoHokenDiv) {
 
         RString shikibetsuCode = demoKojin.getShikibetsuCode();
         setIryoHokenJoho(iryoHokenDiv.getIryoHokenRireki().getDgIryoHokenRireki(), shikibetsuCode);
@@ -329,11 +325,9 @@ public class HihokenshaShokaiPanelSelect {
      * 選択した個人の被保険者番号を元に、施設入退所の情報を表示します。
      *
      * @param nyutaishoDiv 施設入退所Div
-     * @param searchDiv 検索Div
      * @return 施設入退所Div
      */
-    private void setNyutaishoDiv(tplShisetsuNyutaishoDiv nyutaishoDiv,
-            HihokenshaShokaiTaishoSearchDiv searchDiv) {
+    private void setNyutaishoDiv(tplShisetsuNyutaishoDiv nyutaishoDiv) {
 
         RString hihokenshaNo = demoKojin.getHihokenshaNo();
         setNyutaishoJoho(nyutaishoDiv.getShisetsuNyutaishoRireki().getDgShisetsuNyutaishoRireki(), hihokenshaNo);
@@ -380,11 +374,9 @@ public class HihokenshaShokaiPanelSelect {
      * 選択した個人の被保険者番号を元に、証類交付回収状況を表示します。
      *
      * @param nyutaishoDiv 証交付回収Div
-     * @param searchDiv 検索Div
      * @return 証交付回収Div
      */
-    private void setShoKofuKaishuDiv(tplShoKofuKaishuDiv nyutaishoDiv,
-            HihokenshaShokaiTaishoSearchDiv searchDiv) {
+    private void setShoKofuKaishuDiv(tplShoKofuKaishuDiv nyutaishoDiv) {
 
         RString hihokenshaNo = demoKojin.getHihokenshaNo();
         setShoKofuKaishuJoho(nyutaishoDiv.getShoKofuKaishuKiroku().getCcdShoKaishuJokyoList().getDgShoKaishuJokyo(), hihokenshaNo);
@@ -432,8 +424,7 @@ public class HihokenshaShokaiPanelSelect {
      * @param searchDiv 検索Div
      * @return 申請届出Div
      */
-    private void setShinseiTodokedeDiv(tplShinseiTodokedeDiv todokedeDiv,
-            HihokenshaShokaiTaishoSearchDiv searchDiv) {
+    private void setShinseiTodokedeDiv(tplShinseiTodokedeDiv todokedeDiv) {
 
         RString shikibetsuCode = demoKojin.getShikibetsuCode();
         setTodokedeJoho(todokedeDiv.getDgShinseishoTodokede(), shikibetsuCode);

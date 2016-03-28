@@ -24,6 +24,8 @@ public class Dba3030011KaigoKanryoMessage {
     /**
      * 完了メッセージを出力します。
      *
+     * @param completeDiv Dba3030011KaigoKanryoMessageDiv
+     * @return response
      */
     public ResponseData onClick_btnAddUpdate(Dba3030011KaigoKanryoMessageDiv completeDiv) {
         ResponseData<Dba3030011KaigoKanryoMessageDiv> response = new ResponseData<>();

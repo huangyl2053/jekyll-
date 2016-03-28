@@ -24,6 +24,11 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
  */
 public class TaishoshaKeySetting {
 
+    /**
+     *
+     * @param settingDiv 検索Div
+     * @return レスポンス
+     */
     public ResponseData<TaishoshaKeySettingDiv> onLoad(TaishoshaKeySettingDiv settingDiv) {
 
         settingDiv.getTxtSetai().setValue(new RString("123450000100001"));
@@ -33,6 +38,11 @@ public class TaishoshaKeySetting {
         return ResponseDatas.createSettingDataTo(settingDiv);
     }
 
+    /**
+     *
+     * @param settingDiv 検索Div
+     * @return レスポンス
+     */
     public ResponseData<TaishoshaKeySettingDiv> onClick_btnNext(TaishoshaKeySettingDiv settingDiv) {
 
         SetaiCode setai = new SetaiCode(settingDiv.getTxtSetai().getValue());

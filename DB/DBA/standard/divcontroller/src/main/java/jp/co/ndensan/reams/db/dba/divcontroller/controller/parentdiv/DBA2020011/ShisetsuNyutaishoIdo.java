@@ -48,9 +48,8 @@ public class ShisetsuNyutaishoIdo {
 
         setIdoRirekiGrid(rirekiKanriDiv.getDgShisetsuNyutaishoRireki(), idoRirekiList);
 
-        setDdlTaishoShisetsu(idoRirekiDiv);
-        setRadShisetsuShurui(idoRirekiDiv);
-
+//        setDdlTaishoShisetsu(idoRirekiDiv);
+//        setRadShisetsuShurui(idoRirekiDiv);
 //        if (idoRirekiList.isEmpty()) {
 //            rirekiKanriDiv.getShisetsuNyutaishoInput().setDisabled(false);
 //            rirekiKanriDiv.getBtnUpdateShisetsuNyutaisho().setDisabled(false);
@@ -62,7 +61,7 @@ public class ShisetsuNyutaishoIdo {
         return response;
     }
 
-    private void setRadShisetsuShurui(ShisetsuNyutaishoIdoDiv idoRirekiDiv) {
+//    private void setRadShisetsuShurui(ShisetsuNyutaishoIdoDiv idoRirekiDiv) {
 //        ShisetsuJohoDiv shisetsuJoho = idoRirekiDiv.getShisetsuNyutaishoKanri().getShisetsuNyutaishoInput().getShisetsuJoho();
 //        List<KeyValueDataSource> sourceList = new ArrayList<>();
 //        KeyValueDataSource source1 = new KeyValueDataSource(new RString("kaigoHokenShisetsu"), new RString("介護保険施設"));
@@ -75,9 +74,8 @@ public class ShisetsuNyutaishoIdo {
 //        shisetsuJoho.getBtnJigyoshaInputGuide().setDisplayNone(false);
 //        shisetsuJoho.getBtnOtherTokureiShisetsuInputGuide().setDisplayNone(true);
 //        shisetsuJoho.getBtnJogaiShisetsuInputGuide().setDisplayNone(true);
-    }
-
-    private void setDdlTaishoShisetsu(ShisetsuNyutaishoIdoDiv idoRirekiDiv) {
+//    }
+//    private void setDdlTaishoShisetsu(ShisetsuNyutaishoIdoDiv idoRirekiDiv) {
 //        ShisetsuNyutaishoInputDiv inputDiv = idoRirekiDiv.getShisetsuNyutaishoKanri().getShisetsuNyutaishoInput();
 //        List<KeyValueDataSource> sourceList = new ArrayList<>();
 //        KeyValueDataSource source1 = new KeyValueDataSource(new RString("kannai"), new RString("管内施設"));
@@ -85,8 +83,7 @@ public class ShisetsuNyutaishoIdo {
 //        sourceList.add(source1);
 //        sourceList.add(source2);
 //        inputDiv.getDdlTaishoJoho().setDataSource(sourceList);
-    }
-
+//    }
     private List<HashMap> getIdoRireki(RString hihokenshaNo) {
         List<HashMap> gaitoshaRirekiList = YamlLoader.DBA.loadAsList(SHISETSU_NYUTAISHO_RIREKI);
         for (HashMap gaitoshaRireki : gaitoshaRirekiList) {

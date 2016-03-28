@@ -9,22 +9,15 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import jp.co.ndensan.reams.db.dba.divcontroller.controller.helper.DemoKojin;
-//import static jp.co.ndensan.reams.db.dba.divcontroller.entity.parentdiv.DBA1010011.DBA1010011StateName.医療保険入力;
-//import static jp.co.ndensan.reams.db.dba.divcontroller.entity.parentdiv.DBA1010011.DBA1010011StateName.施設入退所入力;
-//import static jp.co.ndensan.reams.db.dba.divcontroller.entity.parentdiv.DBA1010011.DBA1010011StateName.被保履歴入力;
-//import static jp.co.ndensan.reams.db.dba.divcontroller.entity.parentdiv.DBA1010011.DBA1010011StateName.資格取得情報登録;
 import jp.co.ndensan.reams.db.dba.divcontroller.entity.parentdiv.DBA1010011.ShikakuShutokuJohoDiv;
 import jp.co.ndensan.reams.db.dba.divcontroller.entity.parentdiv.DBA1010011.ShikakuShutokuSearchDiv;
 import jp.co.ndensan.reams.db.dba.divcontroller.entity.parentdiv.DBA1010011.dgRohukuNenkinRireki_Row;
 import jp.co.ndensan.reams.db.dba.divcontroller.entity.parentdiv.DBA1010011.dgSeikatsuHogoRireki_Row;
-import jp.co.ndensan.reams.db.dba.divcontroller.entity.parentdiv.DBA1010011.tplIryoHokenDiv;
 import jp.co.ndensan.reams.db.dba.divcontroller.entity.parentdiv.DBA1010011.tplRofukuNenkinDiv;
 import jp.co.ndensan.reams.db.dba.divcontroller.entity.parentdiv.DBA1010011.tplSeikatsuHogoDiv;
-import jp.co.ndensan.reams.db.dba.divcontroller.entity.parentdiv.DBA1010011.tplShikakuJohoDiv;
 import jp.co.ndensan.reams.db.dbz.divcontroller.helper.ControlGenerator;
 import jp.co.ndensan.reams.db.dbz.divcontroller.helper.YamlLoader;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
-import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.binding.DataGrid;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxFlexibleDate;
@@ -44,7 +37,7 @@ public class ShikakuShutokuJoho {
 //    private static final RString SHISETSU_NYUTAISHO_DATA = new RString("DBA1010011/shisetsuNyutaisho.yml");
 //    private static final RString DDL_SHUTOKU_JIYU = new RString("DBA1010011/ddlShutokuJiyu.yml");
 
- //   private static final RString SHIKAKU_ADD = new RString("add");
+    //   private static final RString SHIKAKU_ADD = new RString("add");
     private static final RString SHIKAKU_MODIFY = new RString("modify");
     private static final RString SHIKAKU_DELETE = new RString("delete");
     private static final RString IRYO_HOKEN_ADD = new RString("add");
@@ -65,14 +58,13 @@ public class ShikakuShutokuJoho {
         DemoKojin demoKojin = new DemoKojin("第2号");
         RString shikibetsuCode = demoKojin.getShikibetsuCode();
 
-        setShikakuJoho(shikakuJohoDiv, shikibetsuCode);
-        setIryoHoken(shikakuJohoDiv, shikibetsuCode);
+//        setShikakuJoho(shikakuJohoDiv, shikibetsuCode);
+//        setIryoHoken(shikakuJohoDiv, shikibetsuCode);
         setRofukuNenkin(shikakuJohoDiv, shikibetsuCode);
         setSeikatsuHogo(shikakuJohoDiv, shikibetsuCode);
-        setShisetsuNyutaisho(shikakuJohoDiv, shikibetsuCode);
+//        setShisetsuNyutaisho(shikakuJohoDiv, shikibetsuCode);
 
-        setShutokuJiyu(shikakuJohoDiv.getTabInputs().getTplShikakuJoho());
-
+//        setShutokuJiyu(shikakuJohoDiv.getTabInputs().getTplShikakuJoho());
         response.data = shikakuJohoDiv;
         return response;
     }
@@ -83,7 +75,7 @@ public class ShikakuShutokuJoho {
      * @param shikakuJohoDiv 資格情報Div
      * @param shikibetsuCode 識別コード
      */
-    private void setShikakuJoho(ShikakuShutokuJohoDiv shikakuJohoDiv, RString shikibetsuCode) {
+//    private void setShikakuJoho(ShikakuShutokuJohoDiv shikakuJohoDiv, RString shikibetsuCode) {
     //    tplShikakuJohoDiv tplShikakuJoho = shikakuJohoDiv.getTabInputs().getTplShikakuJoho();
 //
 //        List<HashMap> hihokenshaDaichoDataList = YamlLoader.DBA.loadAsList(HIHOKENSHA_DAICHO_DATA);
@@ -108,7 +100,7 @@ public class ShikakuShutokuJoho {
 //            shikakuJohoDiv.setShikakuSelectRow(new RString("0"));
 //            setShikakuJohoDisabled(tplShikakuJoho, false);
 //        }
-    }
+//    }
 //
 //    private List<dgShikakuShutokuRireki_Row> createShikakuShutokuRirekiList(List<HashMap> hihokenshaDaichoData) {
 //        List<dgShikakuShutokuRireki_Row> dataSource = new ArrayList<>();
@@ -155,21 +147,19 @@ public class ShikakuShutokuJoho {
 //        row.setShikibetsuCode(generator.getAsRString("識別コード"));
 //        return row;
 //    }
-
-    private void setShikakuJohoDisabled(tplShikakuJohoDiv tplShikakuJoho, boolean disableValue) {
-        //TODO n8187久保田 画面Entiityが変更されたがコード未対応のためエラーが発生するのでコメントアウト
+//    private void setShikakuJohoDisabled(tplShikakuJohoDiv tplShikakuJoho, boolean disableValue) {
+    //TODO n8187久保田 画面Entiityが変更されたがコード未対応のためエラーが発生するのでコメントアウト
 //        tplShikakuJoho.getShikakuShutokuInput().setDisabled(disableValue);
 //        tplShikakuJoho.getBtnUpdateShikaku().setDisabled(disableValue);
-    }
-
+//    }
     /**
      * 医療保険Tabに初期表示する値を設定します。
      *
      * @param shikakuJohoDiv 資格情報Div
      * @param shikibetsuCode 識別コード
      */
-    private void setIryoHoken(ShikakuShutokuJohoDiv shikakuJohoDiv, RString shikibetsuCode) {
-        //TODO n8187久保田 画面Entiityが変更されたがコード未対応のためエラーが発生するのでコメントアウト
+//    private void setIryoHoken(ShikakuShutokuJohoDiv shikakuJohoDiv, RString shikibetsuCode) {
+    //TODO n8187久保田 画面Entiityが変更されたがコード未対応のためエラーが発生するのでコメントアウト
 //        tplIryoHokenDiv tplIryoHoken = shikakuJohoDiv.getTabInputs().getTplIryoHoken();
 //
 //        List<HashMap> iryoHokenDataList = YamlLoader.DBA.loadAsList(IRYO_HOKEN_DATA);
@@ -191,8 +181,7 @@ public class ShikakuShutokuJoho {
 //            setIryoHokenDisabled(tplIryoHoken, true);
 //            tplIryoHoken.getBtnAddIryoHoken().setDisabled(false);
 //        }
-    }
-
+//    }
 //    private List<dgIryoHokenRireki_Row> createDgIryoHokenRirekiList(List<HashMap> iryoHokenData) {
 //        List<dgIryoHokenRireki_Row> dataSource = new ArrayList<>();
 //        for (HashMap iryoHokenDataRow : iryoHokenData) {
@@ -200,7 +189,6 @@ public class ShikakuShutokuJoho {
 //        }
 //        return dataSource;
 //    }
-
 //    private dgIryoHokenRireki_Row createDgIryoHokenRirekiRowFrowHashMap(HashMap hihokenshaDaichoData) {
 //        dgIryoHokenRireki_Row row = new dgIryoHokenRireki_Row(RString.EMPTY, new TextBoxFlexibleDate(), new TextBoxFlexibleDate(), RString.EMPTY,
 //                RString.EMPTY, RString.EMPTY, RString.EMPTY, RString.EMPTY, RString.EMPTY);
@@ -216,13 +204,11 @@ public class ShikakuShutokuJoho {
 //        row.setKigoNo(generator.getAsRString("記号番号"));
 //        return row;
 //    }
-
-    private void setIryoHokenDisabled(tplIryoHokenDiv tplIryoHoken, boolean disableValue) {
-        //TODO n8187久保田 画面Entiityが変更されたがコード未対応のためエラーが発生するのでコメントアウト
+//    private void setIryoHokenDisabled(tplIryoHokenDiv tplIryoHoken, boolean disableValue) {
+    //TODO n8187久保田 画面Entiityが変更されたがコード未対応のためエラーが発生するのでコメントアウト
 //        tplIryoHoken.getIryoHokenInput().setDisabled(disableValue);
 //        tplIryoHoken.getBtnUpdateIryoHoken().setDisabled(disableValue);
-    }
-
+//    }
     /**
      * 老福年金Tabに初期表示する値を設定します。
      *
@@ -242,11 +228,11 @@ public class ShikakuShutokuJoho {
         }
         grid.setDataSource(dataSource);
 
-        if (dataSource.isEmpty()) {
-            setRofukuNenkinDisabled(tplRofukuNenkin, false);
-        } else {
-            setRofukuNenkinDisabled(tplRofukuNenkin, true);
-        }
+//        if (dataSource.isEmpty()) {
+//            setRofukuNenkinDisabled(tplRofukuNenkin, false);
+//        } else {
+//            setRofukuNenkinDisabled(tplRofukuNenkin, true);
+//        }
     }
 
     private List<dgRohukuNenkinRireki_Row> createRofukuNenkinList(List<HashMap> rofukuNenkiData) {
@@ -267,12 +253,11 @@ public class ShikakuShutokuJoho {
         return row;
     }
 
-    private void setRofukuNenkinDisabled(tplRofukuNenkinDiv tplRofukuNenkin, boolean disableValue) {
-        //TODO n8187久保田 画面Entiityが変更されたがコード未対応のためエラーが発生するのでコメントアウト
+//    private void setRofukuNenkinDisabled(tplRofukuNenkinDiv tplRofukuNenkin, boolean disableValue) {
+    //TODO n8187久保田 画面Entiityが変更されたがコード未対応のためエラーが発生するのでコメントアウト
 //        tplRofukuNenkin.getRohukuNenkin().getRohukuNenkinInput().setDisabled(disableValue);
 //        tplRofukuNenkin.getRohukuNenkin().getBtnUpdateRofukuNenkin().setDisabled(disableValue);
-    }
-
+//    }
     /**
      * 生活保護Tabに初期表示する値を設定します。
      *
@@ -331,8 +316,8 @@ public class ShikakuShutokuJoho {
      * @param shikakuJohoDiv 資格情報Div
      * @param shikibetsuCode 識別コード
      */
-    private void setShisetsuNyutaisho(ShikakuShutokuJohoDiv shikakuJohoDiv, RString shikibetsuCode) {
-        //TODO n8187久保田 画面部品が変更されていたがコード未対応のためエラーが発生していたのでコメントアウト
+//    private void setShisetsuNyutaisho(ShikakuShutokuJohoDiv shikakuJohoDiv, RString shikibetsuCode) {
+    //TODO n8187久保田 画面部品が変更されていたがコード未対応のためエラーが発生していたのでコメントアウト
 //        tplShisetsuNyutaishoDiv tplShisetsuNyutaisho = shikakuJohoDiv.getTabInputs().getTplShisetsuNyutaisho();
 //
 //        List<HashMap> shisetsuNyutaishoRirekiDataList = YamlLoader.DBA.loadAsList(SHISETSU_NYUTAISHO_DATA);
@@ -350,13 +335,11 @@ public class ShikakuShutokuJoho {
 //        } else {
 //            setShisetsuNyutaishoDisabled(tplShisetsuNyutaisho, true);
 //        }
-
 //        DropDownList ddl = tplShisetsuNyutaisho.getShisetsuNyutaishoRirekiKanri().getShisetsuNyutaishoInput().getDdlTaishoJoho();
 //        ddl.setDataSource(ddl.getDataSource().subList(0, 2));
 //        RadioButton rad = tplShisetsuNyutaisho.getShisetsuNyutaishoRirekiKanri().getShisetsuNyutaishoInput().getShisetsuJoho().getRadShisetsuShurui();
 //        rad.setDataSource(rad.getDataSource().subList(0, 2));
-    }
-
+//    }
 //    private List<dgShisetsuNyutaishoRireki_Row> createShisetsuNyutaishoList(List<HashMap> shisetsuNyutaishoData) {
 //        List<dgShisetsuNyutaishoRireki_Row> dataSource = new ArrayList<>();
 //        for (HashMap shisetsuNyutaishoDataRow : shisetsuNyutaishoData) {
@@ -364,7 +347,6 @@ public class ShikakuShutokuJoho {
 //        }
 //        return dataSource;
 //    }
-
 //    private dgShisetsuNyutaishoRireki_Row createShisetsuNyutaishoRowFromHashMap(HashMap seikatsuHogoData) {
 //        dgShisetsuNyutaishoRireki_Row row = new dgShisetsuNyutaishoRireki_Row(RString.EMPTY, new TextBoxFlexibleDate(),
 //                new TextBoxFlexibleDate(), RString.EMPTY, RString.EMPTY, RString.EMPTY, RString.EMPTY,
@@ -382,15 +364,12 @@ public class ShikakuShutokuJoho {
 //        row.setShisetsuShurui(generator.getAsRString("施設種類"));
 //        return row;
 //    }
-
 //    private void setShisetsuNyutaishoDisabled(tplShisetsuNyutaishoDiv tplShisetsuNyutaisho, boolean disableValue) {
 ////        tplShisetsuNyutaisho.getShisetsuNyutaishoRirekiKanri().getShisetsuNyutaishoInput().setDisabled(disableValue);
 ////        tplShisetsuNyutaisho.getShisetsuNyutaishoRirekiKanri().getBtnUpdateShisetsuNyutaisho().setDisabled(disableValue);
 //    }
-
-    private void setShutokuJiyu(tplShikakuJohoDiv shikakuJohoDiv) {
-
-        //TODO n8187久保田 画面Entiityが変更されたがコード未対応のためエラーが発生するのでコメントアウト
+//    private void setShutokuJiyu(tplShikakuJohoDiv shikakuJohoDiv) {
+    //TODO n8187久保田 画面Entiityが変更されたがコード未対応のためエラーが発生するのでコメントアウト
 //        DropDownList ddl = shikakuJohoDiv.getShikakuShutokuInput().getDdlShikakuShutokuJiyu();
 //        ddl.setDataSource(createDdlShutokuJiyu());
 //        SqlSession session = _DbSession.get(_WorkFlowSession.KEY);
@@ -414,8 +393,7 @@ public class ShikakuShutokuJoho {
 //        } else if (KaigoMenuType.職権により取得.getFlowId().equals(flowId)) {
 //            createPartOfDdlShutokuJiyu(ddl, "shokkenShutoku");
 //        }
-    }
-
+//    }
 //    private List<KeyValueDataSource> createDdlShutokuJiyu() {
 //
 //        HashMap<String, String> ddlSource = (HashMap) YamlLoader.DBA.loadAsMap(DDL_SHUTOKU_JIYU);
@@ -427,7 +405,6 @@ public class ShikakuShutokuJoho {
 //        }
 //        return ddlSourceList;
 //    }
-
 //    private void createPartOfDdlShutokuJiyu(DropDownList ddl, String key) {
 //
 //        List<KeyValueDataSource> ddlSourceList = new ArrayList<>();
@@ -439,7 +416,6 @@ public class ShikakuShutokuJoho {
 //        ddl.setDataSource(ddlSourceList);
 //        ddl.setSelectedItem(new RString(key));
 //    }
-
     /**
      * 資格情報タブ内の処理です。グリッド内の視覚情報修正ボタンがクリックされた際に実行します。<br/>
      * 入力モードを修正モードに変更し、選択したグリッドのデータを表示します。また、確定ボタンのラベルが修正用に変更されます。
@@ -471,12 +447,12 @@ public class ShikakuShutokuJoho {
      */
     public ResponseData onSelectOfDeleteButton_dgShikakuShutokuRireki(ShikakuShutokuJohoDiv shikakuJohoDiv, ShikakuShutokuSearchDiv searchDiv) {
         ResponseData<ShikakuShutokuJohoDiv> response = new ResponseData<>();
-        tplShikakuJohoDiv tplShikakuJoho = shikakuJohoDiv.getTabInputs().getTplShikakuJoho();
+//        tplShikakuJohoDiv tplShikakuJoho = shikakuJohoDiv.getTabInputs().getTplShikakuJoho();
 
         shikakuJohoDiv.setShikakuInputMode(SHIKAKU_DELETE);
 //        shikakuJohoDiv.setShikakuSelectRow(new RString(Integer.toString(tplShikakuJoho.getShikakuTokusoRireki().getDgShikakuShutokuRireki().getClickedRowId())));
 //        setShikakuJohoInput(tplShikakuJoho, tplShikakuJoho.getShikakuTokusoRireki().getDgShikakuShutokuRireki().getClickedItem());
-        setShikakuJohoDisabled(tplShikakuJoho, true);
+//        setShikakuJohoDisabled(tplShikakuJoho, true);
         //TODO n8187久保田 画面Entiityが変更されたがコード未対応のためエラーが発生するのでコメントアウト
 //        tplShikakuJoho.getBtnUpdateShikaku().setDisabled(false);
         response.data = shikakuJohoDiv;
@@ -495,7 +471,7 @@ public class ShikakuShutokuJoho {
      */
     public ResponseData onClick_btnUpdateShikaku(ShikakuShutokuJohoDiv shikakuJohoDiv, ShikakuShutokuSearchDiv searchDiv) {
         ResponseData<ShikakuShutokuJohoDiv> response = new ResponseData<>();
-        tplShikakuJohoDiv tplShikakuJoho = shikakuJohoDiv.getTabInputs().getTplShikakuJoho();
+//        tplShikakuJohoDiv tplShikakuJoho = shikakuJohoDiv.getTabInputs().getTplShikakuJoho();
 //        int selectRowNum;
 ////        dgShikakuShutokuRireki_Row selectRow;
 //
@@ -523,8 +499,8 @@ public class ShikakuShutokuJoho {
 //            }
 //        }
 
-        setShikakuJohoDisabled(tplShikakuJoho, true);
-        clearShikakuJohoInput(shikakuJohoDiv.getTabInputs().getTplShikakuJoho());
+//        setShikakuJohoDisabled(tplShikakuJoho, true);
+//        clearShikakuJohoInput(shikakuJohoDiv.getTabInputs().getTplShikakuJoho());
         response.data = shikakuJohoDiv;
         return response;
     }
@@ -567,19 +543,17 @@ public class ShikakuShutokuJoho {
 //                row.getShutokuTodokedeDate().getValue(), row.getHihokenshaKubunKey(), row.getNenreiTotatsuDate().getValue());
 //    }
 
-    private void clearShikakuJohoInput(tplShikakuJohoDiv tplShikakuJoho) {
-        setShikakuShutokuJohoInput(tplShikakuJoho, new RString("tennyu"), null, null, new RString("dai1Go"), null);
-    }
-
-    private void setShikakuShutokuJohoInput(tplShikakuJohoDiv tplShikakuJoho, RString ddlShikakuShutokuJiyu, FlexibleDate shutokuDate,
-            FlexibleDate shutokuTodokedeDate, RString ddlHihokenshaKubun, FlexibleDate nenreiTotatsuDate) {
-        //TODO n8187久保田 画面Entiityが変更されたがコード未対応のためエラーが発生するのでコメントアウト
+//    private void clearShikakuJohoInput(tplShikakuJohoDiv tplShikakuJoho) {
+//        setShikakuShutokuJohoInput(tplShikakuJoho, new RString("tennyu"), null, null, new RString("dai1Go"), null);
+//    }
+//    private void setShikakuShutokuJohoInput(tplShikakuJohoDiv tplShikakuJoho, RString ddlShikakuShutokuJiyu, FlexibleDate shutokuDate,
+//            FlexibleDate shutokuTodokedeDate, RString ddlHihokenshaKubun, FlexibleDate nenreiTotatsuDate) {
+    //TODO n8187久保田 画面Entiityが変更されたがコード未対応のためエラーが発生するのでコメントアウト
 //        ShikakuShutokuInputDiv shikakuShutoku = tplShikakuJoho.getShikakuShutokuInput();
 //        shikakuShutoku.getDdlShikakuShutokuJiyu().setSelectedItem(ddlShikakuShutokuJiyu);
 //        shikakuShutoku.getTxtShutokuDate().setValue(ShutokuDate);
 //        shikakuShutoku.getTxtShutokuTodokedeDate().setValue(ShutokuTodokedeDate);
-    }
-
+//    }
     /**
      * 医療保険タブ内の処理です。医療保険情報追加ボタンがクリックされた際に実行します。<br/>
      * 入力モードを新規追加モードに変更します。
@@ -590,11 +564,11 @@ public class ShikakuShutokuJoho {
      */
     public ResponseData onClick_btnAddIryoHoken(ShikakuShutokuJohoDiv shikakuJohoDiv, ShikakuShutokuSearchDiv searchDiv) {
         ResponseData<ShikakuShutokuJohoDiv> response = new ResponseData<>();
-        tplIryoHokenDiv tplIryoHoken = shikakuJohoDiv.getTabInputs().getTplIryoHoken();
+//        tplIryoHokenDiv tplIryoHoken = shikakuJohoDiv.getTabInputs().getTplIryoHoken();
 
         shikakuJohoDiv.setIryoHokenInputMode(IRYO_HOKEN_ADD);
-        setIryoHokenDisabled(tplIryoHoken, false);
-        clearIryoHokenInput(tplIryoHoken);
+//        setIryoHokenDisabled(tplIryoHoken, false);
+//        clearIryoHokenInput(tplIryoHoken);
         response.data = shikakuJohoDiv;
         return response;
     }
@@ -689,7 +663,7 @@ public class ShikakuShutokuJoho {
     }
 
 //    private void setIryoHokenInput(tplIryoHokenDiv tplIryoHoken, dgIryoHokenRireki_Row row) {
-        //TODO n8187久保田 画面Entiityが変更されたがコード未対応のためエラーが発生するのでコメントアウト
+    //TODO n8187久保田 画面Entiityが変更されたがコード未対応のためエラーが発生するのでコメントアウト
 //        IryoHokenInputDiv iryoHokenInput = tplIryoHoken.getIryoHokenInput();
 //        iryoHokenInput.getTxtIryoHokenKanyuDate().setValue(row.getKanyuDate().getValue());
 //        iryoHokenInput.getTxtIryoHokenDattaiDate().setValue(row.getDattaiDate().getValue());
@@ -698,9 +672,8 @@ public class ShikakuShutokuJoho {
 //        iryoHokenInput.getDdlIryoHokenShubetsu().setSelectedItem(row.getIryoHokenShubetsuKey());
 //        iryoHokenInput.getTxtIryoHokenKigoNo().setValue(row.getKigoNo());
 //    }
-
-    private void clearIryoHokenInput(tplIryoHokenDiv tplIryoHoken) {
-        //TODO n8187久保田 画面Entiityが変更されたがコード未対応のためエラーが発生するのでコメントアウト
+//    private void clearIryoHokenInput(tplIryoHokenDiv tplIryoHoken) {
+    //TODO n8187久保田 画面Entiityが変更されたがコード未対応のためエラーが発生するのでコメントアウト
 //        IryoHokenInputDiv iryoHokenInput = tplIryoHoken.getIryoHokenInput();
 //        iryoHokenInput.getDdlIryoHokenShubetsu().setSelectedItem(new RString("kyokai"));
 //        iryoHokenInput.getTxtIryoHokenDattaiDate().setValue(null);
@@ -708,8 +681,7 @@ public class ShikakuShutokuJoho {
 //        iryoHokenInput.getTxtIryoHokenHokenshaNo().setValue(null);
 //        iryoHokenInput.getTxtIryoHokenKanyuDate().setValue(null);
 //        iryoHokenInput.getTxtIryoHokenKigoNo().setValue(null);
-    }
-
+//    }
 //    private dgIryoHokenRireki_Row createDgIryoHokenRirekiRowFrowInputValue(tplIryoHokenDiv tplIryoHoken) {
 //        dgIryoHokenRireki_Row row = new dgIryoHokenRireki_Row(RString.EMPTY, new TextBoxFlexibleDate(), new TextBoxFlexibleDate(), RString.EMPTY,
 //                RString.EMPTY, RString.EMPTY, RString.EMPTY, RString.EMPTY, RString.EMPTY);
@@ -717,9 +689,8 @@ public class ShikakuShutokuJoho {
 //        setDgIryoHokenRirekiRowFrowInputValue(tplIryoHoken, row);
 //        return row;
 //    }
-
 //    private dgIryoHokenRireki_Row setDgIryoHokenRirekiRowFrowInputValue(tplIryoHokenDiv tplIryoHoken, dgIryoHokenRireki_Row row) {
-        //TODO n8187久保田 画面Entiityが変更されたがコード未対応のためエラーが発生するのでコメントアウト
+    //TODO n8187久保田 画面Entiityが変更されたがコード未対応のためエラーが発生するのでコメントアウト
 //        IryoHokenInputDiv input = tplIryoHoken.getIryoHokenInput();
 //        row.setHokenshaNo(input.getTxtIryoHokenHokenshaNo().getValue());
 //        row.setHokenshaMeisho(input.getTxtIryoHokenHokenshaMeisho().getValue());
@@ -731,7 +702,6 @@ public class ShikakuShutokuJoho {
 //        row.setKigoNo(input.getTxtIryoHokenKigoNo().getValue());
 //        return row;
 //    }
-
 //    /**
 //     * 被保履歴タブで追加ボタン押下時の処理。
 //     *
@@ -851,7 +821,6 @@ public class ShikakuShutokuJoho {
 //    public ResponseData<ShikakuShutokuJohoDiv> onClick_btnShisetsuNyutaishoTorikeshi(ShikakuShutokuJohoDiv div) {
 //        return toShikakuShutokuJohoToroku(div);
 //    }
-
 //    private ResponseData<ShikakuShutokuJohoDiv> toHihoRirekiNyuryoku(ShikakuShutokuJohoDiv div) {
 //        return ResponseData.of(div).setState(被保履歴入力);
 //    }
@@ -867,5 +836,4 @@ public class ShikakuShutokuJoho {
 //    public ResponseData<ShikakuShutokuJohoDiv> toShikakuShutokuJohoToroku(ShikakuShutokuJohoDiv div) {
 //        return ResponseData.of(div).setState(資格取得情報登録);
 //    }
-
 }

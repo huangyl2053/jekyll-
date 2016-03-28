@@ -29,7 +29,7 @@ public class TajutokuTaishosaJoho {
      * 対象者検索で選択された個人の情報を元に、被保険者の基本情報を表示します。
      *
      * @param taishoshaJohoDiv 資格関連処理対象者情報
-     * @param searchDiv
+     * @param searchDiv 検索Div
      * @return レスポンス
      */
     public ResponseData onClick_btnToDecide(TajutokuTaishosaJohoDiv taishoshaJohoDiv, TajutokuTaishoshaSearchDiv searchDiv) {
