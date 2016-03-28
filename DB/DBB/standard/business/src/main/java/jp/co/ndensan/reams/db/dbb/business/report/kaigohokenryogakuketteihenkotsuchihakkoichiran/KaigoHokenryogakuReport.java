@@ -7,7 +7,7 @@ package jp.co.ndensan.reams.db.dbb.business.report.kaigohokenryogakuketteihenkot
 
 import java.util.ArrayList;
 import java.util.List;
-import jp.co.ndensan.reams.db.dbb.business.report.tsuchisho.EditedKariSanteiTsuchiShoKyotsu;
+import jp.co.ndensan.reams.db.dbb.business.report.tsuchisho.notsu.EditedHonSanteiTsuchiShoKyotsu;
 import jp.co.ndensan.reams.db.dbb.definition.batchprm.nonyutsuchichiran.NonyuTsuchIchiranBatchParameter;
 import jp.co.ndensan.reams.db.dbb.entity.report.kaigohokenryogakuketteihenkotsuchihakkoichiran.KaigoHokenryogakuSource;
 import jp.co.ndensan.reams.ur.urz.definition.core.codemaster.URZCodeShubetsu;
@@ -24,7 +24,7 @@ import lombok.NonNull;
  */
 public class KaigoHokenryogakuReport extends Report<KaigoHokenryogakuSource> {
 
-    private final List<EditedKariSanteiTsuchiShoKyotsu> 編集後本算定通知書共通情報;
+    private final List<EditedHonSanteiTsuchiShoKyotsu> 編集後本算定通知書共通情報;
     private final NonyuTsuchIchiranBatchParameter バッチパラメータ;
     private final RString 帳票作成日時;
     private final RString タイトル;
@@ -41,14 +41,14 @@ public class KaigoHokenryogakuReport extends Report<KaigoHokenryogakuSource> {
     /**
      * コンストラクタです。
      *
-     * @param 編集後本算定通知書共通情報 List<EditedKariSanteiTsuchiShoKyotsu>
+     * @param 編集後本算定通知書共通情報 List<EditedHonSanteiTsuchiShoKyotsu>
      * @param バッチパラメータ NonyuTsuchIchiranBatchParameter
      * @param 帳票作成日時 RString
      * @param タイトル RString
      * @param 市町村コード RString
      * @param 市町村名 RString
      */
-    protected KaigoHokenryogakuReport(List<EditedKariSanteiTsuchiShoKyotsu> 編集後本算定通知書共通情報,
+    protected KaigoHokenryogakuReport(List<EditedHonSanteiTsuchiShoKyotsu> 編集後本算定通知書共通情報,
             NonyuTsuchIchiranBatchParameter バッチパラメータ,
             RString 帳票作成日時, RString タイトル, RString 市町村コード, RString 市町村名) {
         this.編集後本算定通知書共通情報 = 編集後本算定通知書共通情報;
@@ -63,7 +63,7 @@ public class KaigoHokenryogakuReport extends Report<KaigoHokenryogakuSource> {
     /**
      * createFormメソッド
      *
-     * @param 編集後本算定通知書共通情報 EditedKariSanteiTsuchiShoKyotsu
+     * @param 編集後本算定通知書共通情報 EditedHonSanteiTsuchiShoKyotsu
      * @param バッチパラメータ KaigoHokenryogakuParameter
      * @param 帳票作成日時 RString
      * @param タイトル RString
@@ -71,7 +71,7 @@ public class KaigoHokenryogakuReport extends Report<KaigoHokenryogakuSource> {
      * @param 市町村名 RString
      * @return NonyuTsuchIchiranReport
      */
-    public static KaigoHokenryogakuReport createFrom(@NonNull List<EditedKariSanteiTsuchiShoKyotsu> 編集後本算定通知書共通情報,
+    public static KaigoHokenryogakuReport createFrom(@NonNull List<EditedHonSanteiTsuchiShoKyotsu> 編集後本算定通知書共通情報,
             @NonNull NonyuTsuchIchiranBatchParameter バッチパラメータ,
             @NonNull RString 帳票作成日時, @NonNull RString タイトル,
             @NonNull RString 市町村コード, @NonNull RString 市町村名
@@ -143,15 +143,15 @@ public class KaigoHokenryogakuReport extends Report<KaigoHokenryogakuSource> {
                 item1.setListUpper_6(編集後本算定通知書共通情報.get(i).get表示コード().get表示コード２());
                 item1.setListUpper_7(編集後本算定通知書共通情報.get(i).get表示コード().get表示コード３());
             }
-            item1.setListUpper_8(編集後本算定通知書共通情報.get(i).get更正前保険料段階());
-            item1.setListUpper_9(編集後本算定通知書共通情報.get(i).get更正前確定保険料());
-            item1.setListUpper_10(編集後本算定通知書共通情報.get(i).get更正前徴収方法());
-            item1.setListUpper_11(編集後本算定通知書共通情報.get(i).get更正後生保開始日());
+            item1.setListUpper_8(編集後本算定通知書共通情報.get(i).get更正後().get保険料段階());
+            item1.setListUpper_9(new RString(編集後本算定通知書共通情報.get(i).get更正前().get確定保険料_年額().toString()));
+            item1.setListUpper_10(編集後本算定通知書共通情報.get(i).get更正前().get徴収方法());
+            item1.setListUpper_11(編集後本算定通知書共通情報.get(i).get更正後().get生保開始日());
             RString 生活保護扶助名称 = null;
-            if (編集後本算定通知書共通情報.get(i).get更正後生活保護扶助種類().toString() != null) {
+            if (編集後本算定通知書共通情報.get(i).get更正後().get生活保護扶助種類().toString() != null) {
                 生活保護扶助名称 = CodeMaster.getCode(SubGyomuCode.URZ業務共通_共通系,
                         URZCodeShubetsu.扶助種類コード.getCodeShubetsu(),
-                        new Code(編集後本算定通知書共通情報.get(i).get更正後生活保護扶助種類().toString())).getコード名称();
+                        new Code(編集後本算定通知書共通情報.get(i).get更正後().get生活保護扶助種類().toString())).getコード名称();
             }
             item1.setListUpper_12(生活保護扶助名称);
             if (編集後本算定通知書共通情報.get(i).get編集後宛先() != null) {
@@ -163,9 +163,9 @@ public class KaigoHokenryogakuReport extends Report<KaigoHokenryogakuSource> {
             if (編集後本算定通知書共通情報.get(i).get編集後宛先() != null) {
                 item1.setListLower_3(編集後本算定通知書共通情報.get(i).get編集後宛先().get町域());
             }
-            item1.setListLower_4(編集後本算定通知書共通情報.get(i).get更正後保険料段階());
-            item1.setListLower_5(編集後本算定通知書共通情報.get(i).get更正後確定保険料());
-            item1.setListLower_6(編集後本算定通知書共通情報.get(i).get更正後徴収方法());
+            item1.setListLower_4(編集後本算定通知書共通情報.get(i).get更正後().get保険料段階());
+            item1.setListLower_5(new RString(編集後本算定通知書共通情報.get(i).get更正後().get確定保険料_年額().toString()));
+            item1.setListLower_6(編集後本算定通知書共通情報.get(i).get更正後().get徴収方法());
             item1.setListLower_7(new RString("口座情報（PSMで取得"));
             targets.add(item1);
         }

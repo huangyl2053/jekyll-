@@ -7,7 +7,7 @@ package jp.co.ndensan.reams.db.dbb.batchcontroller.step.nonyutsuchishohonsanteih
 
 import java.util.List;
 import jp.co.ndensan.reams.db.dbb.business.report.nonyutsuchishohonsanteihakkoichiran.NonyuTsuchIchiranReport;
-import jp.co.ndensan.reams.db.dbb.business.report.tsuchisho.EditedKariSanteiTsuchiShoKyotsu;
+import jp.co.ndensan.reams.db.dbb.business.report.tsuchisho.notsu.EditedHonSanteiTsuchiShoKyotsu;
 import jp.co.ndensan.reams.db.dbb.definition.batchprm.nonyutsuchichiran.NonyuTsuchIchiranBatchParameter;
 import jp.co.ndensan.reams.db.dbb.definition.reportid.ReportIdDBB;
 import jp.co.ndensan.reams.db.dbb.entity.report.nonyutsuchishohonsanteihakkoichiran.NonyuTsuchIchiranSource;
@@ -31,7 +31,7 @@ public class NonyuTsuchIchiranReportProcess extends SimpleBatchProcessBase {
     private BatchReportWriter<NonyuTsuchIchiranSource> batchReportWriter;
     private ReportSourceWriter<NonyuTsuchIchiranSource> reportSourceWriter;
     //パラメータ受取変数
-    InputParameter<List<EditedKariSanteiTsuchiShoKyotsu>> 編集後本算定通知書共通情報;
+    InputParameter<List<EditedHonSanteiTsuchiShoKyotsu>> 編集後本算定通知書共通情報;
     InputParameter<NonyuTsuchIchiranBatchParameter> バッチパラメータ;
     InputParameter<RString> 帳票作成日時;
 
@@ -49,7 +49,7 @@ public class NonyuTsuchIchiranReportProcess extends SimpleBatchProcessBase {
      * @param バッチパラメータ バッチパラメータ
      * @param 帳票作成日時 帳票作成日時
      */
-    private void 作成したdataを帳票に引き渡す(List<EditedKariSanteiTsuchiShoKyotsu> 編集後本算定通知書共通情報,
+    private void 作成したdataを帳票に引き渡す(List<EditedHonSanteiTsuchiShoKyotsu> 編集後本算定通知書共通情報,
             NonyuTsuchIchiranBatchParameter バッチパラメータ, RString 帳票作成日時) {
         batchReportWriter = BatchReportFactory.createBatchReportWriter(
                 ReportIdDBB.DBB200010.getReportId().value())

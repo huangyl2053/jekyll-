@@ -7,8 +7,8 @@ package jp.co.ndensan.reams.db.dbb.business.report.nonyutsuchishohonsanteihakkoi
 
 import java.util.ArrayList;
 import java.util.List;
-import jp.co.ndensan.reams.db.dbb.business.report.tsuchisho.EditedKariSanteiTsuchiShoKyotsu;
-import jp.co.ndensan.reams.db.dbb.business.report.tsuchisho.普徴期別金額Entity;
+import jp.co.ndensan.reams.db.dbb.business.report.tsuchisho.notsu.EditedHonSanteiTsuchiShoKyotsu;
+import jp.co.ndensan.reams.db.dbb.business.report.tsuchisho.notsu.UniversalPhase;
 import jp.co.ndensan.reams.db.dbb.definition.batchprm.nonyutsuchichiran.NonyuTsuchIchiranBatchParameter;
 import jp.co.ndensan.reams.db.dbb.entity.report.nonyutsuchishohonsanteihakkoichiran.NonyuTsuchIchiranSource;
 import jp.co.ndensan.reams.ur.urz.definition.core.codemaster.URZCodeShubetsu;
@@ -25,7 +25,7 @@ import lombok.NonNull;
  */
 public class NonyuTsuchIchiranReport extends Report<NonyuTsuchIchiranSource> {
 
-    private final List<EditedKariSanteiTsuchiShoKyotsu> 編集後本算定通知書共通情報;
+    private final List<EditedHonSanteiTsuchiShoKyotsu> 編集後本算定通知書共通情報;
     private final NonyuTsuchIchiranBatchParameter バッチパラメータ;
     private final RString 帳票作成日時;
     private final RString 市町村コード;
@@ -41,13 +41,13 @@ public class NonyuTsuchIchiranReport extends Report<NonyuTsuchIchiranSource> {
     /**
      * コンストラクタです。
      *
-     * @param 編集後本算定通知書共通情報 EditedKariSanteiTsuchiShoKyotsu
+     * @param 編集後本算定通知書共通情報 EditedHonSanteiTsuchiShoKyotsu
      * @param バッチパラメータ NonyuTsuchIchiranBatchParameter
      * @param 帳票作成日時 RString
      * @param 市町村コード RString
      * @param 市町村名 RString
      */
-    protected NonyuTsuchIchiranReport(List<EditedKariSanteiTsuchiShoKyotsu> 編集後本算定通知書共通情報,
+    protected NonyuTsuchIchiranReport(List<EditedHonSanteiTsuchiShoKyotsu> 編集後本算定通知書共通情報,
             NonyuTsuchIchiranBatchParameter バッチパラメータ,
             RString 帳票作成日時, RString 市町村コード, RString 市町村名) {
         this.編集後本算定通知書共通情報 = 編集後本算定通知書共通情報;
@@ -61,14 +61,14 @@ public class NonyuTsuchIchiranReport extends Report<NonyuTsuchIchiranSource> {
     /**
      * createFormメソッド
      *
-     * @param 編集後本算定通知書共通情報 EditedKariSanteiTsuchiShoKyotsu
+     * @param 編集後本算定通知書共通情報 EditedHonSanteiTsuchiShoKyotsu
      * @param バッチパラメータ NonyuTsuchIchiranBatchParameter
      * @param 帳票作成日時 RString
      * @param 市町村コード RString
      * @param 市町村名 RString
      * @return NonyuTsuchIchiranReport
      */
-    public static NonyuTsuchIchiranReport createFrom(@NonNull List<EditedKariSanteiTsuchiShoKyotsu> 編集後本算定通知書共通情報,
+    public static NonyuTsuchIchiranReport createFrom(@NonNull List<EditedHonSanteiTsuchiShoKyotsu> 編集後本算定通知書共通情報,
             @NonNull NonyuTsuchIchiranBatchParameter バッチパラメータ,
             @NonNull RString 帳票作成日時,
             @NonNull RString 市町村コード, @NonNull RString 市町村名) {
@@ -126,9 +126,9 @@ public class NonyuTsuchIchiranReport extends Report<NonyuTsuchIchiranSource> {
             if (編集後本算定通知書共通情報.get(i).get編集後宛先() != null) {
                 item1.setListUpper_8(編集後本算定通知書共通情報.get(i).get編集後宛先().get宛先行政区());
             }
-            item1.setListUpper_9(編集後本算定通知書共通情報.get(i).get更正後確定保険料());
-            if (編集後本算定通知書共通情報.get(i).get更正後普徴期別金額リスト() != null) {
-                for (普徴期別金額Entity entity : 編集後本算定通知書共通情報.get(i).get更正後普徴期別金額リスト()) {
+            item1.setListUpper_9(new RString(編集後本算定通知書共通情報.get(i).get更正後().get確定保険料_年額().toString()));
+            if (編集後本算定通知書共通情報.get(i).get更正後().get普徴期別金額リスト() != null) {
+                for (UniversalPhase entity : 編集後本算定通知書共通情報.get(i).get更正後().get普徴期別金額リスト()) {
                     if (entity.get期() == Integer.valueOf(バッチパラメータ.get出力期().toString())) {
                         item1.setListUpper_10(new RString(entity.get金額().toString()));
                     }
@@ -138,12 +138,12 @@ public class NonyuTsuchIchiranReport extends Report<NonyuTsuchIchiranSource> {
                     != (編集後本算定通知書共通情報.get(i).get編集後宛先().get宛先名称()))) {
                 item1.setListUpper_12(new RString("*" + "　" + 編集後本算定通知書共通情報.get(i).get編集後宛先().get宛先名称().toString()));
             }
-            item1.setListUpper_13(new RString(編集後本算定通知書共通情報.get(i).get更正後生保開始日().toString()));
+            item1.setListUpper_13(編集後本算定通知書共通情報.get(i).get更正後().get生保開始日());
             RString 生活保護扶助名称 = null;
-            if (編集後本算定通知書共通情報.get(i).get更正後生活保護扶助種類().toString() != null) {
+            if (編集後本算定通知書共通情報.get(i).get更正後().get生活保護扶助種類().toString() != null) {
                 生活保護扶助名称 = CodeMaster.getCode(SubGyomuCode.URZ業務共通_共通系,
                         URZCodeShubetsu.扶助種類コード.getCodeShubetsu(),
-                        new Code(編集後本算定通知書共通情報.get(i).get更正後生活保護扶助種類().toString())).getコード名称();
+                        new Code(編集後本算定通知書共通情報.get(i).get更正後().get生活保護扶助種類().toString())).getコード名称();
             }
             item1.setListUpper_14(生活保護扶助名称);
             listlowers(item1, i);
@@ -181,14 +181,14 @@ public class NonyuTsuchIchiranReport extends Report<NonyuTsuchIchiranSource> {
         if (編集後本算定通知書共通情報.get(i).get編集後宛先() != null) {
             item1.setListLower_3(編集後本算定通知書共通情報.get(i).get編集後宛先().get町域());
         }
-        if (編集後本算定通知書共通情報.get(i).get更正後保険料段階() != null) {
-            item1.setListLower_4(編集後本算定通知書共通情報.get(i).get更正後保険料段階());
+        if (編集後本算定通知書共通情報.get(i).get更正後().get保険料段階() != null) {
+            item1.setListLower_4(編集後本算定通知書共通情報.get(i).get更正後().get保険料段階());
         }
         if (編集後本算定通知書共通情報.get(i).get今後納付すべき額() != null) {
             item1.setListLower_5(new RString(編集後本算定通知書共通情報.get(i).get今後納付すべき額().toString()));
         }
-        if (編集後本算定通知書共通情報.get(i).get更正後普徴期別金額リスト() != null) {
-            for (普徴期別金額Entity entity : 編集後本算定通知書共通情報.get(i).get更正後普徴期別金額リスト()) {
+        if (編集後本算定通知書共通情報.get(i).get更正後().get普徴期別金額リスト() != null) {
+            for (UniversalPhase entity : 編集後本算定通知書共通情報.get(i).get更正後().get普徴期別金額リスト()) {
                 if (entity.get期() == (Integer.valueOf(バッチパラメータ.get出力期().toString()) + 1)) {
                     item1.setListLower_6(new RString(entity.get金額().toString()));
                 }

@@ -7,8 +7,8 @@ package jp.co.ndensan.reams.db.dbb.business.report.tokubetsuchoshukaishitsuchish
 
 import java.util.ArrayList;
 import java.util.List;
-import jp.co.ndensan.reams.db.dbb.business.report.tsuchisho.EditedKariSanteiTsuchiShoKyotsu;
-import jp.co.ndensan.reams.db.dbb.business.report.tsuchisho.TokuchuKibetsuKingakuentity;
+import jp.co.ndensan.reams.db.dbb.business.report.tsuchisho.notsu.CharacteristicsPhase;
+import jp.co.ndensan.reams.db.dbb.business.report.tsuchisho.notsu.EditedHonSanteiTsuchiShoKyotsu;
 import jp.co.ndensan.reams.db.dbb.definition.batchprm.nonyutsuchichiran.NonyuTsuchIchiranBatchParameter;
 import jp.co.ndensan.reams.db.dbb.entity.report.tokubetsuchoshukaishitsuchishokarihakkoichiran.TokubetsuChoshuKaishiSource;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -21,7 +21,7 @@ import lombok.NonNull;
  */
 public class TokubetsuChoshuKaishiReport extends Report<TokubetsuChoshuKaishiSource> {
 
-    private final List<EditedKariSanteiTsuchiShoKyotsu> 編集後本算定通知書共通情報;
+    private final List<EditedHonSanteiTsuchiShoKyotsu> 編集後本算定通知書共通情報;
     private final NonyuTsuchIchiranBatchParameter バッチパラメータ;
     private final RString 市町村コード;
     private final RString 市町村名;
@@ -39,13 +39,13 @@ public class TokubetsuChoshuKaishiReport extends Report<TokubetsuChoshuKaishiSou
     /**
      * コンストラクタです。
      *
-     * @param 編集後本算定通知書共通情報 EditedKariSanteiTsuchiShoKyotsu
+     * @param 編集後本算定通知書共通情報 EditedHonSanteiTsuchiShoKyotsu
      * @param バッチパラメータ TokubetsuChoshuKaishiParameter
      * @param 帳票作成日時 RString
      * @param 市町村コード RString
      * @param 市町村名 RString
      */
-    protected TokubetsuChoshuKaishiReport(List<EditedKariSanteiTsuchiShoKyotsu> 編集後本算定通知書共通情報,
+    protected TokubetsuChoshuKaishiReport(List<EditedHonSanteiTsuchiShoKyotsu> 編集後本算定通知書共通情報,
             NonyuTsuchIchiranBatchParameter バッチパラメータ,
             RString 帳票作成日時, RString 市町村コード, RString 市町村名) {
         this.編集後本算定通知書共通情報 = 編集後本算定通知書共通情報;
@@ -59,14 +59,14 @@ public class TokubetsuChoshuKaishiReport extends Report<TokubetsuChoshuKaishiSou
     /**
      * createFormメソッド
      *
-     * @param 編集後本算定通知書共通情報 List<EditedKariSanteiTsuchiShoKyotsu>
+     * @param 編集後本算定通知書共通情報 List<EditedHonSanteiTsuchiShoKyotsu>
      * @param バッチパラメータ NonyuTsuchIchiranBatchParameter
      * @param 帳票作成日時 RString
      * @param 市町村コード RString
      * @param 市町村名 RString
      * @return TokubetsuChoshuKaishiReport
      */
-    public static TokubetsuChoshuKaishiReport createFrom(@NonNull List<EditedKariSanteiTsuchiShoKyotsu> 編集後本算定通知書共通情報,
+    public static TokubetsuChoshuKaishiReport createFrom(@NonNull List<EditedHonSanteiTsuchiShoKyotsu> 編集後本算定通知書共通情報,
             @NonNull NonyuTsuchIchiranBatchParameter バッチパラメータ,
             @NonNull RString 帳票作成日時, @NonNull RString 市町村コード, @NonNull RString 市町村名) {
         return new TokubetsuChoshuKaishiReport(編集後本算定通知書共通情報, バッチパラメータ, 帳票作成日時, 市町村コード, 市町村名);
@@ -156,17 +156,17 @@ public class TokubetsuChoshuKaishiReport extends Report<TokubetsuChoshuKaishiSou
         if (編集後本算定通知書共通情報.get(i).get編集後個人() != null && 編集後本算定通知書共通情報.get(i).get編集後個人().get名称() != null) {
             item1.setListLower_3(new RString(編集後本算定通知書共通情報.get(i).get編集後個人().get名称().toString()));
         }
-        item1.setListLower_4(編集後本算定通知書共通情報.get(i).get更正後特別徴収義務者());
-        item1.setListLower_5(new RString(編集後本算定通知書共通情報.get(i).get更正後特別徴収対象年金コード().toString()));
+        item1.setListLower_4(編集後本算定通知書共通情報.get(i).get更正後().get特別徴収義務者());
+        item1.setListLower_5(new RString(編集後本算定通知書共通情報.get(i).get更正後().get特別徴収対象年金コード().toString()));
         item1.setListLower_6(new RString("10月"));
-        for (TokuchuKibetsuKingakuentity entity : 編集後本算定通知書共通情報.get(i).get更正後特徴期別金額リスト()) {
-            if (entity.get期() == NUM4) {
+        for (CharacteristicsPhase entity : 編集後本算定通知書共通情報.get(i).get更正後().get特徴期別金額リスト()) {
+            if (Integer.valueOf(entity.get期().toString()) == NUM4) {
                 item1.setListLower_7(new RString(entity.get金額().toString()));
             }
-            if (entity.get期() == NUM5) {
+            if (Integer.valueOf(entity.get期().toString()) == NUM5) {
                 item1.setListLower_9(new RString(entity.get金額().toString()));
             }
-            if (entity.get期() == NUM6) {
+            if (Integer.valueOf(entity.get期().toString()) == NUM6) {
                 item1.setListLower_11(new RString(entity.get金額().toString()));
             }
         }

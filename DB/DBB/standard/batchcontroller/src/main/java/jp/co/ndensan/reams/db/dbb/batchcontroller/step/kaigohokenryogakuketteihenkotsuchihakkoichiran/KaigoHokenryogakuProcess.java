@@ -9,7 +9,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import jp.co.ndensan.reams.db.dbb.business.report.kaigohokenryogakuketteihenkotsuchihakkoichiran.KaigoHokenryogakuReport;
-import jp.co.ndensan.reams.db.dbb.business.report.tsuchisho.EditedKariSanteiTsuchiShoKyotsu;
+import jp.co.ndensan.reams.db.dbb.business.report.tsuchisho.notsu.EditedHonSanteiTsuchiShoKyotsu;
 import jp.co.ndensan.reams.db.dbb.definition.batchprm.nonyutsuchichiran.NonyuTsuchIchiranBatchParameter;
 import jp.co.ndensan.reams.db.dbb.definition.reportid.ReportIdDBB;
 import jp.co.ndensan.reams.db.dbb.entity.report.kaigohokenryogakuketteihenkotsuchihakkoichiran.KaigoHokenryogakuSource;
@@ -32,7 +32,7 @@ public class KaigoHokenryogakuProcess extends SimpleBatchProcessBase {
     @BatchWriter
     private BatchReportWriter<KaigoHokenryogakuSource> batchReportWriter;
     private ReportSourceWriter<KaigoHokenryogakuSource> reportSourceWriter;
-    InputParameter<List<EditedKariSanteiTsuchiShoKyotsu>> 編集後本算定通知書共通情報;
+    InputParameter<List<EditedHonSanteiTsuchiShoKyotsu>> 編集後本算定通知書共通情報;
     InputParameter<NonyuTsuchIchiranBatchParameter> バッチパラメータ;
     InputParameter<RString> 帳票作成日時;
     InputParameter<RString> タイトル;
@@ -51,7 +51,7 @@ public class KaigoHokenryogakuProcess extends SimpleBatchProcessBase {
      * @param バッチパラメータ バッチパラメータ
      * @param 帳票作成日時 帳票作成日時
      */
-    private void 作成したdataを帳票に引き渡す(List<EditedKariSanteiTsuchiShoKyotsu> 編集後本算定通知書共通情報,
+    private void 作成したdataを帳票に引き渡す(List<EditedHonSanteiTsuchiShoKyotsu> 編集後本算定通知書共通情報,
             NonyuTsuchIchiranBatchParameter バッチパラメータ, RString 帳票作成日時, RString タイトル) {
         batchReportWriter = BatchReportFactory.createBatchReportWriter(
                 ReportIdDBB.DBB200012.getReportId().value())
