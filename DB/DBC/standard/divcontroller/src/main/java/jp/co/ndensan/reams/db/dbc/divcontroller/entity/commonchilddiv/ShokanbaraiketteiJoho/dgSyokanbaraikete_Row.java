@@ -3,7 +3,7 @@ package jp.co.ndensan.reams.db.dbc.divcontroller.entity.commonchilddiv.Shokanbar
  * このコードはツールによって生成されました。
  * このファイルへの変更は、以下の状況下で不正な動作の原因になったり、
  * コードが再生成されるときに損失したりします。
- * Fri Mar 25 11:24:29 CST 2016 
+ * Mon Mar 28 15:09:50 CST 2016 
  */
 
 
@@ -36,7 +36,6 @@ public class dgSyokanbaraikete_Row extends DataRow {
     private RString meisaiNo;
     private RString renban;
     private RString updateCount;
-    private RString serviceCode;
 
     public dgSyokanbaraikete_Row() {
         super();
@@ -54,7 +53,6 @@ public class dgSyokanbaraikete_Row extends DataRow {
         this.meisaiNo = RString.EMPTY;
         this.renban = RString.EMPTY;
         this.updateCount = RString.EMPTY;
-        this.serviceCode = RString.EMPTY;
         this.setOriginalData("no", no);
         this.setOriginalData("jigyoshaNo", jigyoshaNo);
         this.setOriginalData("yoshikiNo", yoshikiNo);
@@ -69,10 +67,9 @@ public class dgSyokanbaraikete_Row extends DataRow {
         this.setOriginalData("meisaiNo", meisaiNo);
         this.setOriginalData("renban", renban);
         this.setOriginalData("updateCount", updateCount);
-        this.setOriginalData("serviceCode", serviceCode);
     }
 
-    public dgSyokanbaraikete_Row(RString no, RString jigyoshaNo, RString yoshikiNo, RString shurui, RString serviceShuruiName, RString fukushiYoguName, TextBoxNum taniKingaku, TextBoxNum shiharaiKingaku, TextBoxNum sagakuKingaku, RString tableKubun, RString dekidakaKubun, RString meisaiNo, RString renban, RString updateCount, RString serviceCode) {
+    public dgSyokanbaraikete_Row(RString no, RString jigyoshaNo, RString yoshikiNo, RString shurui, RString serviceShuruiName, RString fukushiYoguName, TextBoxNum taniKingaku, TextBoxNum shiharaiKingaku, TextBoxNum sagakuKingaku, RString tableKubun, RString dekidakaKubun, RString meisaiNo, RString renban, RString updateCount) {
         super();
         this.setOriginalData("no", no);
         this.setOriginalData("jigyoshaNo", jigyoshaNo);
@@ -88,7 +85,6 @@ public class dgSyokanbaraikete_Row extends DataRow {
         this.setOriginalData("meisaiNo", meisaiNo);
         this.setOriginalData("renban", renban);
         this.setOriginalData("updateCount", updateCount);
-        this.setOriginalData("serviceCode", serviceCode);
         this.no = no;
         this.jigyoshaNo = jigyoshaNo;
         this.yoshikiNo = yoshikiNo;
@@ -103,7 +99,6 @@ public class dgSyokanbaraikete_Row extends DataRow {
         this.meisaiNo = meisaiNo;
         this.renban = renban;
         this.updateCount = updateCount;
-        this.serviceCode = serviceCode;
     }
 
     public RString getNo() {
@@ -160,10 +155,6 @@ public class dgSyokanbaraikete_Row extends DataRow {
 
     public RString getUpdateCount() {
         return updateCount;
-    }
-
-    public RString getServiceCode() {
-        return serviceCode;
     }
 
     public void setNo(RString no) {
@@ -234,11 +225,6 @@ public class dgSyokanbaraikete_Row extends DataRow {
     public void setUpdateCount(RString updateCount) {
         this.setOriginalData("updateCount", updateCount);
         this.updateCount = updateCount;
-    }
-
-    public void setServiceCode(RString serviceCode) {
-        this.setOriginalData("serviceCode", serviceCode);
-        this.serviceCode = serviceCode;
     }
 
     // </editor-fold>
