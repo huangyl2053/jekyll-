@@ -64,7 +64,7 @@
                AND dbT5913."shichosonCode" = dbT7051."shichosonCode"
       WHERE
            dbT5101."hihokenshaNo" = #{hihokenshaNo}
-           AND dbT5101."shoriJotaiKubun" IN ('01','04')
+           AND dbT5101."shoriJotaiKubun" IN (#{tujou}, #{enki})
            ORDER BY
                dbT5101."ninteiShinseiYMD" DESC
     </select>
