@@ -60,7 +60,7 @@ public class SeikyuGakuShukeiPanel {
         SyokanbaraihishikyushinseiketteParameter par = new SyokanbaraihishikyushinseiketteParameter(
                 new HihokenshaNo("000000003"), new FlexibleYearMonth(new RString("201406")),
                 new RString("1111"), new JigyoshaNo("3333"), new RString("2134"),
-                new RString("4444"), new RString("10"));
+                new RString("4444"), Decimal.TEN);
         ViewStateHolder.put(ViewStateKeys.償還払費申請明細検索キー, par);
         ViewStateHolder.put(ViewStateKeys.償還払費申請検索キー, par);
         SyokanbaraihishikyushinseiketteParameter parameter = ViewStateHolder.get(ViewStateKeys.償還払費申請明細検索キー,
@@ -100,7 +100,11 @@ public class SeikyuGakuShukeiPanel {
                 様式番号,
                 明細番号, null);
         div.getPanelSeikyugakuShukei().getPanelSeikyuShokai().setVisible(false);
-        getHandler(div).initialize(entityList);
+        if (entityList == null || entityList.isEmpty()) {
+            throw new ApplicationException(UrErrorMessages.データが存在しない.getMessage());
+        } else {
+            getHandler(div).initialize(entityList);
+        }
         ViewStateHolder.put(ViewStateKeys.請求額集計一覧情報, (Serializable) entityList);
         SikibetuNokennsakuki kennsakuki = ViewStateHolder.get(ViewStateKeys.識別番号検索キー, SikibetuNokennsakuki.class);
         ShikibetsuNoKanri shikibetsuNoKanri = SyokanbaraihiShikyuShinseiKetteManager.createInstance()
