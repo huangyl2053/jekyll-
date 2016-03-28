@@ -9,4 +9,6 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.ICommonChildDivBaseProperties;
 public interface IKaigoAtenaInfoDiv extends ICommonChildDivBaseProperties {
 
     void onLoad(ShikibetsuCode 識別コード);
+
+    KaigoAtenaInfoDiv getKaigoAtenaInfoDiv();
 }

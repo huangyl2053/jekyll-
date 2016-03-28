@@ -64,4 +64,13 @@ public class KaigoAtenaInfoDiv extends Panel implements IKaigoAtenaInfoDiv {
         getAtenaInfo().onChangeDisplayMode三行タイプ();
     }
 
+    /**
+     * 介護宛名基本情報を取得
+     *
+     * @return 介護宛名基本情報
+     */
+    @Override
+    public KaigoAtenaInfoDiv getKaigoAtenaInfoDiv() {
+        return this;
+    }
 }
