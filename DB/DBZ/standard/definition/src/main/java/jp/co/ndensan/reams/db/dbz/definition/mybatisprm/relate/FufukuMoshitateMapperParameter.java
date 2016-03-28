@@ -6,7 +6,6 @@
 package jp.co.ndensan.reams.db.dbz.definition.mybatisprm.relate;
 
 //import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShoKisaiHokenshaNo;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 //import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 
@@ -29,7 +28,7 @@ public final class FufukuMoshitateMapperParameter {
     /**
      * コンストラクタです。
      *
-// * @param 主キー1 主キー1
+     * // * @param 主キー1 主キー1
      *
      * @param 主キー2 主キー2
      * @param uses主キー1 uses主キー1
@@ -53,13 +52,11 @@ public final class FufukuMoshitateMapperParameter {
     /**
      * キー検索用のパラメータを生成します。
      *
-// * @param 主キー1 主キー1
      *
      * @param 主キー2 主キー2
      * @return 身体手帳検索パラメータ
      */
     public static FufukuMoshitateMapperParameter createSelectByKeyParam(
-            //            ShoKisaiHokenshaNo 主キー1,
             ShikibetsuCode 主キー2) {
         return new FufukuMoshitateMapperParameter(主キー2, true);
     }
@@ -83,7 +80,6 @@ public final class FufukuMoshitateMapperParameter {
 //    public ShoKisaiHokenshaNo get主キー1() {
 //        return 主キー1;
 //    }
-
     /**
      * get主キー2を取得します。
      *
@@ -119,7 +115,6 @@ public final class FufukuMoshitateMapperParameter {
 //    public boolean isUses主キー1() {
 //        return uses主キー1;
 //    }
-
     /**
      * isUses主キー2を取得します。
      *
