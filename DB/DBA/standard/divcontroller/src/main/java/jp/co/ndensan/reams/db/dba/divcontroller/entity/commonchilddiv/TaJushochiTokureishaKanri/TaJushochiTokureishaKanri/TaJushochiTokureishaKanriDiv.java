@@ -7,24 +7,31 @@ package jp.co.ndensan.reams.db.dba.divcontroller.entity.commonchilddiv.TaJushoch
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.HokenshaJoho.IHokenshaJohoDiv;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.ShisetsuJohoCommonChildDiv.IShisetsuJohoCommonChildDiv;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.ShisetsuJohoCommonChildDiv.ShisetsuJohoCommonChildDivDiv;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.parentdiv.HokenshaJohoDiv;
-import jp.co.ndensan.reams.db.dbz.divcontroller.entity.parentdiv.IHokenshaJohoDiv;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.binding.*;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 
 import java.util.HashSet;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ICommonChildDivMode;
 import jp.co.ndensan.reams.uz.uza.ui.servlets._CommonChildDivModeUtil;
+import jp.co.ndensan.reams.uz.uza.ui.binding.Button;
+import jp.co.ndensan.reams.uz.uza.ui.binding.DataGrid;
+import jp.co.ndensan.reams.uz.uza.ui.binding.DropDownList;
+import jp.co.ndensan.reams.uz.uza.ui.binding.Mode;
+import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxCode;
+import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxDate;
 
 /**
- * TaJushochiTokureishaKanri のクラスファイル 
- * 
+ * TaJushochiTokureishaKanri のクラスファイル
+ *
  * @author 自動生成
  */
 public class TaJushochiTokureishaKanriDiv extends Panel implements ITaJushochiTokureishaKanriDiv {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：バージョン情報無し">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-01-15_09-59-03">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -37,6 +44,10 @@ public class TaJushochiTokureishaKanriDiv extends Panel implements ITaJushochiTo
     private DataGrid<dgJushochiTokureiRireki_Row> dgJushochiTokureiRireki;
     @JsonProperty("TajushochiTokureiInput")
     private TajushochiTokureiInputDiv TajushochiTokureiInput;
+    @JsonProperty("Strate")
+    private RString Strate;
+    @JsonProperty("SelectData")
+    private RString SelectData;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -96,6 +107,42 @@ public class TaJushochiTokureishaKanriDiv extends Panel implements ITaJushochiTo
     @JsonProperty("TajushochiTokureiInput")
     public void setTajushochiTokureiInput(TajushochiTokureiInputDiv TajushochiTokureiInput) {
         this.TajushochiTokureiInput = TajushochiTokureiInput;
+    }
+
+    /*
+     * getStrate
+     * @return Strate
+     */
+    @JsonProperty("Strate")
+    public RString getStrate() {
+        return Strate;
+    }
+
+    /*
+     * setStrate
+     * @param Strate Strate
+     */
+    @JsonProperty("Strate")
+    public void setStrate(RString Strate) {
+        this.Strate = Strate;
+    }
+
+    /*
+     * getSelectData
+     * @return SelectData
+     */
+    @JsonProperty("SelectData")
+    public RString getSelectData() {
+        return SelectData;
+    }
+
+    /*
+     * setSelectData
+     * @param SelectData SelectData
+     */
+    @JsonProperty("SelectData")
+    public void setSelectData(RString SelectData) {
+        this.SelectData = SelectData;
     }
 
     /*
@@ -289,5 +336,23 @@ public class TaJushochiTokureishaKanriDiv extends Panel implements ITaJushochiTo
 
     // </editor-fold>
     //--------------- この行より下にコードを追加してください -------------------
+    private TaJushochiTokureishaKanriHandler getHandler() {
+        return new TaJushochiTokureishaKanriHandler(this);
+    }
 
+    /**
+     * 共通子DIVの初期化処理です。
+     */
+    @Override
+    public void initialize() {
+        getHandler().initialize();
+    }
+
+    /**
+     * 他住所地特例者の共有子DIVの画面内容から、他市町村住所地特例情報をDBに反映します。
+     */
+    @Override
+    public void saveTaJushochiTokurei() {
+        getHandler().saveTaJushochiTokurei();
+    }
 }

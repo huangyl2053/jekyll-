@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dba.divcontroller.entity.commonchilddiv.TaJushochiTokureishaKanri;
+package jp.co.ndensan.reams.db.dba.divcontroller.entity.commonchilddiv.TaJushochiTokureishaKanri.TaJushochiTokureishaKanri;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -12,6 +12,7 @@ import java.util.Comparator;
 import java.util.List;
 import jp.co.ndensan.reams.db.dba.business.core.tajushochitokureisyakanri.TaJushochiTokureisyaKanriMaster;
 import jp.co.ndensan.reams.db.dba.definition.message.DbaErrorMessages;
+import jp.co.ndensan.reams.db.dba.definition.message.DbaQuestionMessages;
 import jp.co.ndensan.reams.db.dba.service.core.tajushochito.TaJushochiTokureisyaKanriManager;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.code.KaigoTatokuKaijoJiyu;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.code.KaigoTatokuTekiyoJiyu;
@@ -22,7 +23,6 @@ import jp.co.ndensan.reams.db.dbz.business.core.ShisetsuNyutaisho;
 import jp.co.ndensan.reams.db.dbz.business.core.TashichosonJushochiTokurei;
 import jp.co.ndensan.reams.db.dbz.definition.core.ViewStateKeys;
 import jp.co.ndensan.reams.ua.uax.entity.db.basic.UaFt200FindShikibetsuTaishoEntity;
-import jp.co.ndensan.reams.ur.urz.definition.message.UrQuestionMessages;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaMeisho;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.CodeShubetsu;
@@ -418,8 +418,7 @@ public class TaJushochiTokureishaKanriHandler {
 
                 if (他特例解除.equals(row.getKaijoJiyu())) {
                     if (!TaJushochiTokureisyaKanriManager.createInstance().checkAge(識別コード, new FlexibleDate(row.getKaijoYMD().toString()))) {
-                        // TODO 凌護行 クラス「DBAQuestionMessages」が無し、QA回答まち、2016/1/28
-                        if (new RString(UrQuestionMessages.入力内容の破棄.getMessage().getCode())
+                        if (new RString(DbaQuestionMessages.資格取得確認.getMessage().getCode())
                                 .equals(ResponseHolder.getMessageCode())
                                 && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
                             TaJushochiTokureisyaKanriManager.createInstance().saveHihokenshaShutoku(
