@@ -22,7 +22,7 @@ public class KihonChosaInputHandler1 {
 
     private final KihonChosaInputDiv div;
     private final RString 認定調査前回結果表示 = new RString("1");
-    private final RString 調査項目ある = new RString("1");
+    private final RString 調査項目ある = new RString("2");
     private final RString 調査項目1 = new RString("1");
     private final RString 調査項目2 = new RString("2");
     private final RString 調査項目3 = new RString("3");
