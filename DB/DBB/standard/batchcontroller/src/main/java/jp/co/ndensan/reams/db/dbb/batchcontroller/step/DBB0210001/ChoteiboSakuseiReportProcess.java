@@ -58,14 +58,17 @@ import jp.co.ndensan.reams.uz.uza.batch.process.BatchWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.IBatchReader;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.EraType;
+import jp.co.ndensan.reams.uz.uza.lang.FillType;
 import jp.co.ndensan.reams.uz.uza.lang.FirstYear;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
+import jp.co.ndensan.reams.uz.uza.lang.Separator;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.report.BreakerCatalog;
 import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
+import jp.co.ndensan.reams.uz.uza.ui.binding.propertyenum.DisplayTimeFormat;
 
 /**
  * 調定簿作成帳票用Processクラスです。
@@ -105,6 +108,8 @@ public class ChoteiboSakuseiReportProcess extends BatchProcessBase<DbT7022ShoriD
     private static final int 第12期 = 12;
     private static final int 第13期 = 13;
     private static final int 第14期 = 14;
+    private static final int NENDO_SUBSTR_START = 2;
+    private static final RString STRING_SAKUSEI = new RString("作成");
     private static final RString UNDERLINE = new RString("_");
     private static final RString SELECT_ID = new RString(
             "jp.co.ndensan.reams.db.dbb.persistence.db.mapper.relate.choteibo.IChoteiboSakuseiMapper.select処理日付");
@@ -118,6 +123,9 @@ public class ChoteiboSakuseiReportProcess extends BatchProcessBase<DbT7022ShoriD
     private RString 導入団体コード;
     private RString 市町村名;
     private List<ChoteiboItem> targets;
+    private KitsukiList 期月リスト_特徴;
+    private KitsukiList 期月リスト_普徴;
+    private Kitsuki 最終法定納期;
     @BatchWriter
     private BatchReportWriter<ChoteiboSource> batchReportWriter;
     private ReportSourceWriter<ChoteiboSource> reportSourceWriter;
@@ -141,6 +149,11 @@ public class ChoteiboSakuseiReportProcess extends BatchProcessBase<DbT7022ShoriD
         Association 導入団体クラス = AssociationFinderFactory.createInstance().getAssociation();
         導入団体コード = 導入団体クラス.getLasdecCode_().value();
         市町村名 = 導入団体クラス.get市町村名();
+        TokuchoKiUtil 月期対応取得_特徴 = new TokuchoKiUtil();
+        期月リスト_特徴 = 月期対応取得_特徴.get期月リスト();
+        FuchoKiUtil 月期対応取得_普徴 = new FuchoKiUtil();
+        期月リスト_普徴 = 月期対応取得_普徴.get期月リスト();
+        最終法定納期 = 期月リスト_普徴.get最終法定納期();
         帳票用Entityリストを作成する();
     }
 
@@ -195,11 +208,22 @@ public class ChoteiboSakuseiReportProcess extends BatchProcessBase<DbT7022ShoriD
     }
 
     private void make帳票出力リスト() {
+        RString 年度 = parameter.getShoriNendo().wareki().eraType(EraType.KANJI).
+                firstYear(FirstYear.ICHI_NEN).toDateString();
+        RStringBuilder builder = new RStringBuilder();
+        RDateTime now = RDateTime.now();
+        builder.append(now.getDate().wareki()
+                .eraType(EraType.KANJI)
+                .firstYear(FirstYear.GAN_NEN)
+                .separator(Separator.JAPANESE)
+                .fillType(FillType.BLANK)
+                .toDateString());
+        builder.append(RString.HALF_SPACE);
+        builder.append(now.getTime().toFormattedTimeString(DisplayTimeFormat.HH時mm分ss秒));
         ChoteiboHeaderItem headerItem = new ChoteiboHeaderItem(
-                RDateTime.now().getDate().wareki().toDateString(),
+                builder.append(RString.HALF_SPACE).append(STRING_SAKUSEI).toRString(),
                 ReportIdDBB.DBB3001.getReportName(),
-                parameter.getShoriNendo().wareki().eraType(EraType.KANJI).firstYear(FirstYear.ICHI_NEN).toDateString(),
-                parameter.getShoriNendo().wareki().getYear(),
+                年度, 年度.substring(NENDO_SUBSTR_START),
                 導入団体コード, 市町村名);
         makeChoteiboItemList(headerItem);
     }
@@ -486,8 +510,6 @@ public class ChoteiboSakuseiReportProcess extends BatchProcessBase<DbT7022ShoriD
     }
 
     private ChoteiboKitsukiTokuchoItem makeKitsukiTokuchoItem(NendoDataEntity 年度データ) {
-        TokuchoKiUtil 月期対応取得_特徴 = new TokuchoKiUtil();
-        KitsukiList 期月リスト_特徴 = 月期対応取得_特徴.get期月リスト();
         if (null == 年度データ) {
             return new ChoteiboKitsukiTokuchoItem(
                     RString.EMPTY, RString.EMPTY, RString.EMPTY,
@@ -594,8 +616,6 @@ public class ChoteiboSakuseiReportProcess extends BatchProcessBase<DbT7022ShoriD
     }
 
     private RString get普徴月As期(int 期) {
-        FuchoKiUtil 月期対応取得_普徴 = new FuchoKiUtil();
-        KitsukiList 期月リスト_普徴 = 月期対応取得_普徴.get期月リスト();
         return 期月リスト_普徴.get期の月(期).get(0).get月().get名称().
                 replace(UNDERLINE, RString.EMPTY).
                 replace(文字列_翌年度, RString.EMPTY);
@@ -605,16 +625,12 @@ public class ChoteiboSakuseiReportProcess extends BatchProcessBase<DbT7022ShoriD
         if (null == 年度 || !年度.equals(parameter.getShoriNendo())) {
             return RString.EMPTY;
         }
-        FuchoKiUtil 月期対応取得_普徴 = new FuchoKiUtil();
-        KitsukiList 期月リスト_普徴 = 月期対応取得_普徴.get期月リスト();
-        Kitsuki 期月 = 期月リスト_普徴.get最終法定納期();
         for (Kitsuki kitsuki : 期月リスト_普徴.get期の月(期)) {
-            if (期 != kitsuki.get期AsInt()
-                    || !Tsuki.翌年度4月.equals(kitsuki.get月())
-                    || !Tsuki.翌年度5月.equals(kitsuki.get月())) {
+            if (!Tsuki.翌年度4月.equals(kitsuki.get月())
+                    && !Tsuki.翌年度5月.equals(kitsuki.get月())) {
                 continue;
             }
-            if (kitsuki.get月().getコード().compareTo(期月.get月().getコード()) > 0) {
+            if (kitsuki.get月().getコード().compareTo(最終法定納期.get月().getコード()) > 0) {
                 return 文字列_随;
             }
         }
