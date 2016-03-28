@@ -3,7 +3,7 @@ package jp.co.ndensan.reams.db.dbc.divcontroller.entity.commonchilddiv.Shokanbar
  * このコードはツールによって生成されました。
  * このファイルへの変更は、以下の状況下で不正な動作の原因になったり、
  * コードが再生成されるときに損失したりします。
- * Sat Jan 30 10:36:19 JST 2016 
+ * Mon Mar 28 13:18:54 CST 2016 
  */
 
 
@@ -20,7 +20,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxNum;
  */
 
 public class dgSyokanbaraikete_Row extends DataRow {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：バージョン情報無し">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-01-15_09-59-03">
 
     private RString no;
     private RString jigyoshaNo;
@@ -28,13 +28,14 @@ public class dgSyokanbaraikete_Row extends DataRow {
     private RString shurui;
     private RString serviceShuruiName;
     private RString fukushiYoguName;
-    private RString taniKingaku;
-    private RString shiharaiKingaku;
+    private TextBoxNum taniKingaku;
+    private TextBoxNum shiharaiKingaku;
     private TextBoxNum sagakuKingaku;
     private RString tableKubun;
     private RString dekidakaKubun;
     private RString meisaiNo;
     private RString renban;
+    private RString updateCount;
 
     public dgSyokanbaraikete_Row() {
         super();
@@ -44,13 +45,14 @@ public class dgSyokanbaraikete_Row extends DataRow {
         this.shurui = RString.EMPTY;
         this.serviceShuruiName = RString.EMPTY;
         this.fukushiYoguName = RString.EMPTY;
-        this.taniKingaku = RString.EMPTY;
-        this.shiharaiKingaku = RString.EMPTY;
+        this.taniKingaku = new TextBoxNum();
+        this.shiharaiKingaku = new TextBoxNum();
         this.sagakuKingaku = new TextBoxNum();
         this.tableKubun = RString.EMPTY;
         this.dekidakaKubun = RString.EMPTY;
         this.meisaiNo = RString.EMPTY;
         this.renban = RString.EMPTY;
+        this.updateCount = RString.EMPTY;
         this.setOriginalData("no", no);
         this.setOriginalData("jigyoshaNo", jigyoshaNo);
         this.setOriginalData("yoshikiNo", yoshikiNo);
@@ -64,9 +66,10 @@ public class dgSyokanbaraikete_Row extends DataRow {
         this.setOriginalData("dekidakaKubun", dekidakaKubun);
         this.setOriginalData("meisaiNo", meisaiNo);
         this.setOriginalData("renban", renban);
+        this.setOriginalData("updateCount", updateCount);
     }
 
-    public dgSyokanbaraikete_Row(RString no, RString jigyoshaNo, RString yoshikiNo, RString shurui, RString serviceShuruiName, RString fukushiYoguName, RString taniKingaku, RString shiharaiKingaku, TextBoxNum sagakuKingaku, RString tableKubun, RString dekidakaKubun, RString meisaiNo, RString renban) {
+    public dgSyokanbaraikete_Row(RString no, RString jigyoshaNo, RString yoshikiNo, RString shurui, RString serviceShuruiName, RString fukushiYoguName, TextBoxNum taniKingaku, TextBoxNum shiharaiKingaku, TextBoxNum sagakuKingaku, RString tableKubun, RString dekidakaKubun, RString meisaiNo, RString renban, RString updateCount) {
         super();
         this.setOriginalData("no", no);
         this.setOriginalData("jigyoshaNo", jigyoshaNo);
@@ -81,6 +84,7 @@ public class dgSyokanbaraikete_Row extends DataRow {
         this.setOriginalData("dekidakaKubun", dekidakaKubun);
         this.setOriginalData("meisaiNo", meisaiNo);
         this.setOriginalData("renban", renban);
+        this.setOriginalData("updateCount", updateCount);
         this.no = no;
         this.jigyoshaNo = jigyoshaNo;
         this.yoshikiNo = yoshikiNo;
@@ -94,6 +98,7 @@ public class dgSyokanbaraikete_Row extends DataRow {
         this.dekidakaKubun = dekidakaKubun;
         this.meisaiNo = meisaiNo;
         this.renban = renban;
+        this.updateCount = updateCount;
     }
 
     public RString getNo() {
@@ -120,11 +125,11 @@ public class dgSyokanbaraikete_Row extends DataRow {
         return fukushiYoguName;
     }
 
-    public RString getTaniKingaku() {
+    public TextBoxNum getTaniKingaku() {
         return taniKingaku;
     }
 
-    public RString getShiharaiKingaku() {
+    public TextBoxNum getShiharaiKingaku() {
         return shiharaiKingaku;
     }
 
@@ -146,6 +151,10 @@ public class dgSyokanbaraikete_Row extends DataRow {
 
     public RString getRenban() {
         return renban;
+    }
+
+    public RString getUpdateCount() {
+        return updateCount;
     }
 
     public void setNo(RString no) {
@@ -178,12 +187,12 @@ public class dgSyokanbaraikete_Row extends DataRow {
         this.fukushiYoguName = fukushiYoguName;
     }
 
-    public void setTaniKingaku(RString taniKingaku) {
+    public void setTaniKingaku(TextBoxNum taniKingaku) {
         this.setOriginalData("taniKingaku", taniKingaku);
         this.taniKingaku = taniKingaku;
     }
 
-    public void setShiharaiKingaku(RString shiharaiKingaku) {
+    public void setShiharaiKingaku(TextBoxNum shiharaiKingaku) {
         this.setOriginalData("shiharaiKingaku", shiharaiKingaku);
         this.shiharaiKingaku = shiharaiKingaku;
     }
@@ -211,6 +220,11 @@ public class dgSyokanbaraikete_Row extends DataRow {
     public void setRenban(RString renban) {
         this.setOriginalData("renban", renban);
         this.renban = renban;
+    }
+
+    public void setUpdateCount(RString updateCount) {
+        this.setOriginalData("updateCount", updateCount);
+        this.updateCount = updateCount;
     }
 
     // </editor-fold>

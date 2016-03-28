@@ -18,6 +18,7 @@
         <result property="sagakuKingaku" column="sagakuKingaku" />
         <result property="tableKbn" column="tableKbn" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
         <result property="dekidakaKbn" column="dekidakaKbn" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="updateCount" column="updateCount" />
     </resultMap>
         <resultMap id="resultMap_SyokanbaraiketeJohoDekidakaEntity" type="jp.co.ndensan.reams.db.dbc.entity.db.relate.syokanbaraiketejoho.SyokanbaraiketeJohoDekidakaEntity" autoMapping="true">
         <result property="jigyoshaNo" column="jigyoshaNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.JigyoshaNoTypeHandler" />
@@ -33,6 +34,7 @@
         <result property="dekidakaIryohiTanisuTotal" column="dekidakaIryohiTanisuTotal" />
         <result property="dekidakaSeikyukaku" column="dekidakaSeikyukaku" />
         <result property="dekidakaSeikyugakuSagaku" column="dekidakaSeikyugakuSagaku" />
+         <result property="updateCount" column="updateCount" />
     </resultMap>
     <select id="getSyokanbaraiketteFukushiList" 
             parameterType="jp.co.ndensan.reams.db.dbc.definition.mybatisprm.syokanbaraikettejoho.SyokanbaraiketteJohoParameter" 
@@ -50,13 +52,14 @@
                 ,DbT3048ShokanFukushiYoguHanbaihi."sagakuKingaku"
                 ,'2'               AS      tableKbn
                 ,'0'               AS      dekidakaKbn
+                ,DbT3048ShokanFukushiYoguHanbaihi."updateCount"
             FROM
                 rgdb."DbT3048ShokanFukushiYoguHanbaihi"  AS  DbT3048ShokanFukushiYoguHanbaihi
             INNER JOIN rgdb."DbT3038ShokanKihon"       AS  DbT3038ShokanKihon
                     ON
                       DbT3048ShokanFukushiYoguHanbaihi."hiHokenshaNo" = DbT3038ShokanKihon."hiHokenshaNo"
                   AND DbT3048ShokanFukushiYoguHanbaihi."serviceTeikyoYM" = DbT3038ShokanKihon."serviceTeikyoYM"
-                  AND DbT3048ShokanFukushiYoguHanbaihi."seiriNo" = DbT3038ShokanKihon."seiriNp"
+                  AND DbT3048ShokanFukushiYoguHanbaihi."seiriNo" = DbT3038ShokanKihon."seiriNo"
                   AND DbT3048ShokanFukushiYoguHanbaihi."jigyoshaNo" = DbT3038ShokanKihon."jigyoshaNo"
                   AND DbT3048ShokanFukushiYoguHanbaihi."yoshikiNo" = DbT3038ShokanKihon."yoshikiNo"
                   AND DbT3048ShokanFukushiYoguHanbaihi."meisaiNo" = DbT3038ShokanKihon."meisaiNo"
@@ -84,6 +87,7 @@
                 ,DbT3049ShokanJutakuKaishu."sagakuKingaku"
                 ,'1'               AS tableKbn
                 ,'0'               AS dekidakaKbn
+                ,DbT3049ShokanJutakuKaishu."updateCount"
             FROM
                 rgdb."DbT3049ShokanJutakuKaishu" AS DbT3049ShokanJutakuKaishu
             INNER JOIN rgdb."DbT7130KaigoServiceShurui" AS DbT7130KaigoServiceShurui
@@ -96,7 +100,7 @@
                 ON 
                     DbT3049ShokanJutakuKaishu."hiHokenshaNo" = DbT3038ShokanKihon."hiHokenshaNo"
                 AND DbT3049ShokanJutakuKaishu."serviceTeikyoYM" = DbT3038ShokanKihon."serviceTeikyoYM"
-                AND DbT3049ShokanJutakuKaishu."seiriNo" = DbT3038ShokanKihon."seiriNp"
+                AND DbT3049ShokanJutakuKaishu."seiriNo" = DbT3038ShokanKihon."seiriNo"
                 AND DbT3049ShokanJutakuKaishu."jigyoshaNo" = DbT3038ShokanKihon."jigyoshaNo"
                 AND DbT3049ShokanJutakuKaishu."yoshikiNo" = DbT3038ShokanKihon."yoshikiNo"
                 AND DbT3049ShokanJutakuKaishu."meisaiNo" = DbT3038ShokanKihon."meisaiNo"
@@ -125,6 +129,7 @@
                 ,償還払決定情報."sagakuKingaku"
                 ,償還払決定情報."tableKbn"
                 ,償還払決定情報."dekidakaKbn"
+                ,償還払決定情報."updateCount"
             FROM
                 (SELECT
                     DbT3053ShokanShukei."jigyoshaNo"
@@ -139,6 +144,7 @@
                     ,DbT3053ShokanShukei."seikyugakuSagakuKingaku"        AS "sagakuKingaku"
                     ,'3' AS "tableKbn"
                     ,'0' AS "dekidakaKbn"
+                    ,DbT3053ShokanShukei."updateCount"
                 FROM
                     rgdb."DbT3053ShokanShukei" AS  DbT3053ShokanShukei
                 INNER JOIN  rgdb."DbT7130KaigoServiceShurui" AS  DbT7130KaigoServiceShurui
@@ -148,7 +154,7 @@
                 LEFT JOIN  rgdb."DbT3038ShokanKihon" AS  DbT3038ShokanKihon
                     ON DbT3053ShokanShukei."hiHokenshaNo" = DbT3038ShokanKihon."hiHokenshaNo"
                     AND  DbT3053ShokanShukei."serviceTeikyoYM" = DbT3038ShokanKihon."serviceTeikyoYM"
-                    AND  DbT3053ShokanShukei."seiriNo" = DbT3038ShokanKihon."seiriNp"
+                    AND  DbT3053ShokanShukei."seiriNo" = DbT3038ShokanKihon."seiriNo"
                     AND  DbT3053ShokanShukei."jigyoshaNo" = DbT3038ShokanKihon."jigyoshaNo"
                     AND  DbT3053ShokanShukei."yoshikiNo" = DbT3038ShokanKihon."yoshikiNo"
                     AND  DbT3053ShokanShukei."meisaiNo" = DbT3038ShokanKihon."meisaiNo"
@@ -170,6 +176,7 @@
                     ,DbT3053ShokanShukei."dekidakaSeikyugakuSagaku"       AS "sagakuKingaku"
                     ,'3' AS "tableKbn"
                     ,'1' AS "dekidakaKbn"
+                    ,DbT3053ShokanShukei."updateCount"
                 FROM
                     rgdb."DbT3053ShokanShukei" AS  DbT3053ShokanShukei
                 INNER JOIN  rgdb."DbT7130KaigoServiceShurui" AS  DbT7130KaigoServiceShurui
@@ -179,7 +186,7 @@
                 LEFT JOIN  rgdb."DbT3038ShokanKihon" AS  DbT3038ShokanKihon
                     ON DbT3053ShokanShukei."hiHokenshaNo" = DbT3038ShokanKihon."hiHokenshaNo"
                     AND  DbT3053ShokanShukei."serviceTeikyoYM" = DbT3038ShokanKihon."serviceTeikyoYM"
-                    AND  DbT3053ShokanShukei."seiriNo" = DbT3038ShokanKihon."seiriNp"
+                    AND  DbT3053ShokanShukei."seiriNo" = DbT3038ShokanKihon."seiriNo"
                     AND  DbT3053ShokanShukei."jigyoshaNo" = DbT3038ShokanKihon."jigyoshaNo"
                     AND  DbT3053ShokanShukei."yoshikiNo" = DbT3038ShokanKihon."yoshikiNo"
                     AND  DbT3053ShokanShukei."meisaiNo" = DbT3038ShokanKihon."meisaiNo"
@@ -210,6 +217,7 @@
                 ,DbT3053ShokanShukei."dekidakaIryohiTanisuTotal"
                 ,(CAST(DbT3038ShokanKihon."hokenKyufuritsu" AS DECIMAL) * DbT3053ShokanShukei."dekidakaIryohiTanisuTotal" * 10)/100  AS "dekidakaSeikyukaku"
                 ,DbT3053ShokanShukei."dekidakaSeikyugakuSagaku"
+                ,DbT3053ShokanShukei."updateCount"
             FROM
                 rgdb."DbT3053ShokanShukei" AS  DbT3053ShokanShukei
             INNER JOIN  rgdb."DbT7130KaigoServiceShurui" AS  DbT7130KaigoServiceShurui
@@ -219,7 +227,7 @@
             LEFT JOIN  rgdb."DbT3038ShokanKihon" AS  DbT3038ShokanKihon
                 ON DbT3053ShokanShukei."hiHokenshaNo" = DbT3038ShokanKihon."hiHokenshaNo"
                 AND  DbT3053ShokanShukei."serviceTeikyoYM" = DbT3038ShokanKihon."serviceTeikyoYM"
-                AND  DbT3053ShokanShukei."seiriNo" = DbT3038ShokanKihon."seiriNp"
+                AND  DbT3053ShokanShukei."seiriNo" = DbT3038ShokanKihon."seiriNo"
                 AND  DbT3053ShokanShukei."jigyoshaNo" = DbT3038ShokanKihon."jigyoshaNo"
                 AND  DbT3053ShokanShukei."yoshikiNo" = DbT3038ShokanKihon."yoshikiNo"
                 AND  DbT3053ShokanShukei."meisaiNo" = DbT3038ShokanKihon."meisaiNo"
@@ -259,7 +267,7 @@
                     ,償還払決定一覧."seikyuKingaku"                  AS shiharaiKingaku
                     ,'8'             AS tableKbn
                 </if>
-                 <if test="is特定入所者">
+                <if test="is特定入所者">
                     ,substring(償還払決定一覧."serviceShuruiCode", 1, 2)       AS serviceCode
                     ,DbT7130KaigoServiceShurui."serviceShuruiMeisho"  AS serviceName
                     ,償還払決定一覧."hokenbunSeikyugakuTotal"        AS kounyuKingaku
@@ -275,21 +283,22 @@
                 </if>
                 ,償還払決定一覧."sagakuKingaku"
                 ,'0'             AS dekidakaKbn
+                ,償還払決定一覧."updateCount"
             FROM
                 <if test="is計画200904">
-                      rgdb."DbT3047ShokanServicePlan200904"    AS 償還払決定一覧
+                    rgdb."DbT3047ShokanServicePlan200904"    AS 償還払決定一覧
                 </if>
                 <if test="is計画200604">
-                      rgdb."DbT3046ShokanServicePlan200604"    AS 償還払決定一覧
+                    rgdb."DbT3046ShokanServicePlan200604"    AS 償還払決定一覧
                 </if>
                 <if test="is計画200004">
-                      rgdb."DbT3045ShokanServicePlan200004"    AS 償還払決定一覧
+                    rgdb."DbT3045ShokanServicePlan200004"    AS 償還払決定一覧
                 </if>
                 <if test="is特定入所者">
-                      rgdb."DbT3050ShokanTokuteiNyushoshaKaigoServiceHiyo"    AS 償還払決定一覧
+                    rgdb."DbT3050ShokanTokuteiNyushoshaKaigoServiceHiyo"    AS 償還払決定一覧
                 </if>
                 <if test="is償還払請求食事費用">
-                      rgdb."DbT3043ShokanShokujiHiyo"    AS 償還払決定一覧
+                    rgdb."DbT3043ShokanShokujiHiyo"    AS 償還払決定一覧
                 </if>
             INNER JOIN  rgdb."DbT7130KaigoServiceShurui" AS DbT7130KaigoServiceShurui
             <if test="is計画200904">
@@ -312,12 +321,7 @@
             WHERE
                     償還払決定一覧."hiHokenshaNo" = #{hiHokenshaNo}
                 AND 償還払決定一覧."serviceTeikyoYM" = #{serviceTeikyoYM}
-                <if test="!is特定入所者">
-                    AND 償還払決定一覧."seiriNp" = #{seiriNo}
-                </if>
-                <if test="is特定入所者">
-                    AND 償還払決定一覧."seiriNo" = #{seiriNo}
-                </if>
+                AND 償還払決定一覧."seiriNo" = #{seiriNo}
             ORDER BY
                 償還払決定一覧."jigyoshaNo",
                 償還払決定一覧."yoshikiNo"

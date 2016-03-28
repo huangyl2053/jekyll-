@@ -27,4 +27,11 @@ public interface IShokanbaraiketteiJohoDiv extends ICommonChildDivBaseProperties
      * @return 償還払決定一覧DIV
      */
     public ShokanbaraiketteiJohoDiv getShokanbaraiketteiJohoDiv();
+
+    /**
+     * データ件数取得を取得します。
+     *
+     * @return データグリッドに表示しているデータ件数を取得して返します。
+     */
+    public int getCount();
 }

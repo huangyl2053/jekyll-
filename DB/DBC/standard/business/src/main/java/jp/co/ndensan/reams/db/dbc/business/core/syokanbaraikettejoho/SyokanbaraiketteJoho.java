@@ -133,4 +133,13 @@ public class SyokanbaraiketteJoho {
     public RString getDekidakaKbn() {
         return entity.getDekidakaKbn();
     }
+
+    /**
+     * 更新カウントを取得します。
+     *
+     * @return 更新カウント
+     */
+    public int getUpdateCount() {
+        return entity.getUpdateCount();
+    }
 }

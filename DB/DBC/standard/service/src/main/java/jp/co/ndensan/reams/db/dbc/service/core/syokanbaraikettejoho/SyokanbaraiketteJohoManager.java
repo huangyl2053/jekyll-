@@ -323,6 +323,7 @@ public class SyokanbaraiketteJohoManager {
         entity.setMeisaiNo(dekidakaEntity.getMeisaiNo());
         entity.setRenban(dekidakaEntity.getRenban());
         entity.setFukushiYoguShohinName(dekidakaEntity.getFukushiYoguShohinName());
+        entity.setUpdateCount(dekidakaEntity.getUpdateCount());
         entity.setTableKbn(テーブル区分_償還払請求集計);
         if (出来高区分_非出来高.equals(tableKbn)) {
             entity.setServiceCode(dekidakaEntity.getServiceCode());

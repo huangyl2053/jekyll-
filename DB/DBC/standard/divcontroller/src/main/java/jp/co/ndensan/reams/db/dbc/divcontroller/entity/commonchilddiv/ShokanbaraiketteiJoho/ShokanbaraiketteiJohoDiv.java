@@ -4,9 +4,13 @@ package jp.co.ndensan.reams.db.dbc.divcontroller.entity.commonchilddiv.Shokanbar
  * このファイルへの変更は、再生成時には損失するため
  * 不正な動作の原因になります。
  */
-
 import com.fasterxml.jackson.annotation.JsonProperty;
+import jp.co.ndensan.reams.uz.uza.ui.binding.*;
+import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
+
 import java.util.HashSet;
+import jp.co.ndensan.reams.uz.uza.ui.servlets.ICommonChildDivMode;
+import jp.co.ndensan.reams.uz.uza.ui.servlets._CommonChildDivModeUtil;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -14,13 +18,10 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.DataGrid;
 import jp.co.ndensan.reams.uz.uza.ui.binding.HorizontalLine;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Label;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Mode;
-import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 import jp.co.ndensan.reams.uz.uza.ui.binding.RadioButton;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TextBox;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxDate;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxNum;
-import jp.co.ndensan.reams.uz.uza.ui.servlets.ICommonChildDivMode;
-import jp.co.ndensan.reams.uz.uza.ui.servlets._CommonChildDivModeUtil;
 
 /**
  * ShokanbaraiketteiJoho のクラスファイル
@@ -28,8 +29,7 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets._CommonChildDivModeUtil;
  * @author 自動生成
  */
 public class ShokanbaraiketteiJohoDiv extends Panel implements IShokanbaraiketteiJohoDiv {
-
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：バージョン情報無し">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-01-15_09-59-03">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -305,7 +305,7 @@ public class ShokanbaraiketteiJohoDiv extends Panel implements IShokanbaraikette
             State[] enumArray = State.values();
 
             for (State enumStr : enumArray) {
-                if (str.equals(enumStr.name.toString())) {
+                if (str.equals(enumStr.name.toString())) { 
                     return enumStr;
                 }
             }
@@ -320,11 +320,11 @@ public class ShokanbaraiketteiJohoDiv extends Panel implements IShokanbaraikette
     }
 
     public State getMode_State() {
-        return (State) _CommonChildDivModeUtil.getMode(this.modes, State.class);
+        return (State) _CommonChildDivModeUtil.getMode( this.modes, State.class );
     }
 
-    public void setMode_State(State value) {
-        _CommonChildDivModeUtil.setMode(this.modes, State.class, value);
+    public void setMode_State( State value ) {
+        _CommonChildDivModeUtil.setMode( this.modes, State.class , value );
     }
 
     // </editor-fold>
@@ -337,6 +337,11 @@ public class ShokanbaraiketteiJohoDiv extends Panel implements IShokanbaraikette
     @Override
     public ShokanbaraiketteiJohoDiv getShokanbaraiketteiJohoDiv() {
         return this;
+    }
+
+    @Override
+    public int getCount() {
+        return this.getDgSyokanbaraikete().getDataSource().size();
     }
 
     private ShokanbaraiketteiJohoHandler createHandlerOf(ShokanbaraiketteiJohoDiv requestDiv) {
