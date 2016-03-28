@@ -25,22 +25,22 @@ public class GogitaiShosaiDiv extends Panel {
     private TextBox txtGogitaiNumber;
     @JsonProperty("txtGogitaiMeisho")
     private TextBox txtGogitaiMeisho;
-    @JsonProperty("ddlkaisaibasho")
-    private DropDownList ddlkaisaibasho;
     @JsonProperty("txtYukoKaishiYMD")
     private TextBoxDate txtYukoKaishiYMD;
     @JsonProperty("txtYukoShuryoYMD")
     private TextBoxDate txtYukoShuryoYMD;
-    @JsonProperty("txtYoteiTeiin")
-    private TextBoxNum txtYoteiTeiin;
-    @JsonProperty("txtJidoWariateTeiin")
-    private TextBoxNum txtJidoWariateTeiin;
     @JsonProperty("txtKaishiYoteiTime")
     private TextBoxTime txtKaishiYoteiTime;
     @JsonProperty("txtShuryoYoteiTime")
     private TextBoxTime txtShuryoYoteiTime;
+    @JsonProperty("ddlkaisaibasho")
+    private DropDownList ddlkaisaibasho;
     @JsonProperty("txtIinTeiin")
     private TextBoxNum txtIinTeiin;
+    @JsonProperty("txtYoteiTeiin")
+    private TextBoxNum txtYoteiTeiin;
+    @JsonProperty("txtJidoWariateTeiin")
+    private TextBoxNum txtJidoWariateTeiin;
     @JsonProperty("radSeishinkaiSonzai")
     private RadioButton radSeishinkaiSonzai;
     @JsonProperty("radDummyFlag")
@@ -49,12 +49,12 @@ public class GogitaiShosaiDiv extends Panel {
     private Space spSpace;
     @JsonProperty("lblShinsain")
     private Label lblShinsain;
+    @JsonProperty("lblHoketsuShinsain")
+    private Label lblHoketsuShinsain;
     @JsonProperty("dgShinsainList")
     private DataGrid<dgShinsainList_Row> dgShinsainList;
     @JsonProperty("btnShinsainSelect")
     private ButtonDialog btnShinsainSelect;
-    @JsonProperty("lblHoketsuShinsain")
-    private Label lblHoketsuShinsain;
     @JsonProperty("dgHoketsuShinsainList")
     private DataGrid<dgHoketsuShinsainList_Row> dgHoketsuShinsainList;
     @JsonProperty("btnSubShinsainSelect")
@@ -109,24 +109,6 @@ public class GogitaiShosaiDiv extends Panel {
     }
 
     /*
-     * getddlkaisaibasho
-     * @return ddlkaisaibasho
-     */
-    @JsonProperty("ddlkaisaibasho")
-    public DropDownList getDdlkaisaibasho() {
-        return ddlkaisaibasho;
-    }
-
-    /*
-     * setddlkaisaibasho
-     * @param ddlkaisaibasho ddlkaisaibasho
-     */
-    @JsonProperty("ddlkaisaibasho")
-    public void setDdlkaisaibasho(DropDownList ddlkaisaibasho) {
-        this.ddlkaisaibasho = ddlkaisaibasho;
-    }
-
-    /*
      * gettxtYukoKaishiYMD
      * @return txtYukoKaishiYMD
      */
@@ -160,42 +142,6 @@ public class GogitaiShosaiDiv extends Panel {
     @JsonProperty("txtYukoShuryoYMD")
     public void setTxtYukoShuryoYMD(TextBoxDate txtYukoShuryoYMD) {
         this.txtYukoShuryoYMD = txtYukoShuryoYMD;
-    }
-
-    /*
-     * gettxtYoteiTeiin
-     * @return txtYoteiTeiin
-     */
-    @JsonProperty("txtYoteiTeiin")
-    public TextBoxNum getTxtYoteiTeiin() {
-        return txtYoteiTeiin;
-    }
-
-    /*
-     * settxtYoteiTeiin
-     * @param txtYoteiTeiin txtYoteiTeiin
-     */
-    @JsonProperty("txtYoteiTeiin")
-    public void setTxtYoteiTeiin(TextBoxNum txtYoteiTeiin) {
-        this.txtYoteiTeiin = txtYoteiTeiin;
-    }
-
-    /*
-     * gettxtJidoWariateTeiin
-     * @return txtJidoWariateTeiin
-     */
-    @JsonProperty("txtJidoWariateTeiin")
-    public TextBoxNum getTxtJidoWariateTeiin() {
-        return txtJidoWariateTeiin;
-    }
-
-    /*
-     * settxtJidoWariateTeiin
-     * @param txtJidoWariateTeiin txtJidoWariateTeiin
-     */
-    @JsonProperty("txtJidoWariateTeiin")
-    public void setTxtJidoWariateTeiin(TextBoxNum txtJidoWariateTeiin) {
-        this.txtJidoWariateTeiin = txtJidoWariateTeiin;
     }
 
     /*
@@ -235,6 +181,24 @@ public class GogitaiShosaiDiv extends Panel {
     }
 
     /*
+     * getddlkaisaibasho
+     * @return ddlkaisaibasho
+     */
+    @JsonProperty("ddlkaisaibasho")
+    public DropDownList getDdlkaisaibasho() {
+        return ddlkaisaibasho;
+    }
+
+    /*
+     * setddlkaisaibasho
+     * @param ddlkaisaibasho ddlkaisaibasho
+     */
+    @JsonProperty("ddlkaisaibasho")
+    public void setDdlkaisaibasho(DropDownList ddlkaisaibasho) {
+        this.ddlkaisaibasho = ddlkaisaibasho;
+    }
+
+    /*
      * gettxtIinTeiin
      * @return txtIinTeiin
      */
@@ -250,6 +214,42 @@ public class GogitaiShosaiDiv extends Panel {
     @JsonProperty("txtIinTeiin")
     public void setTxtIinTeiin(TextBoxNum txtIinTeiin) {
         this.txtIinTeiin = txtIinTeiin;
+    }
+
+    /*
+     * gettxtYoteiTeiin
+     * @return txtYoteiTeiin
+     */
+    @JsonProperty("txtYoteiTeiin")
+    public TextBoxNum getTxtYoteiTeiin() {
+        return txtYoteiTeiin;
+    }
+
+    /*
+     * settxtYoteiTeiin
+     * @param txtYoteiTeiin txtYoteiTeiin
+     */
+    @JsonProperty("txtYoteiTeiin")
+    public void setTxtYoteiTeiin(TextBoxNum txtYoteiTeiin) {
+        this.txtYoteiTeiin = txtYoteiTeiin;
+    }
+
+    /*
+     * gettxtJidoWariateTeiin
+     * @return txtJidoWariateTeiin
+     */
+    @JsonProperty("txtJidoWariateTeiin")
+    public TextBoxNum getTxtJidoWariateTeiin() {
+        return txtJidoWariateTeiin;
+    }
+
+    /*
+     * settxtJidoWariateTeiin
+     * @param txtJidoWariateTeiin txtJidoWariateTeiin
+     */
+    @JsonProperty("txtJidoWariateTeiin")
+    public void setTxtJidoWariateTeiin(TextBoxNum txtJidoWariateTeiin) {
+        this.txtJidoWariateTeiin = txtJidoWariateTeiin;
     }
 
     /*
@@ -325,6 +325,24 @@ public class GogitaiShosaiDiv extends Panel {
     }
 
     /*
+     * getlblHoketsuShinsain
+     * @return lblHoketsuShinsain
+     */
+    @JsonProperty("lblHoketsuShinsain")
+    public Label getLblHoketsuShinsain() {
+        return lblHoketsuShinsain;
+    }
+
+    /*
+     * setlblHoketsuShinsain
+     * @param lblHoketsuShinsain lblHoketsuShinsain
+     */
+    @JsonProperty("lblHoketsuShinsain")
+    public void setLblHoketsuShinsain(Label lblHoketsuShinsain) {
+        this.lblHoketsuShinsain = lblHoketsuShinsain;
+    }
+
+    /*
      * getdgShinsainList
      * @return dgShinsainList
      */
@@ -358,24 +376,6 @@ public class GogitaiShosaiDiv extends Panel {
     @JsonProperty("btnShinsainSelect")
     public void setBtnShinsainSelect(ButtonDialog btnShinsainSelect) {
         this.btnShinsainSelect = btnShinsainSelect;
-    }
-
-    /*
-     * getlblHoketsuShinsain
-     * @return lblHoketsuShinsain
-     */
-    @JsonProperty("lblHoketsuShinsain")
-    public Label getLblHoketsuShinsain() {
-        return lblHoketsuShinsain;
-    }
-
-    /*
-     * setlblHoketsuShinsain
-     * @param lblHoketsuShinsain lblHoketsuShinsain
-     */
-    @JsonProperty("lblHoketsuShinsain")
-    public void setLblHoketsuShinsain(Label lblHoketsuShinsain) {
-        this.lblHoketsuShinsain = lblHoketsuShinsain;
     }
 
     /*
