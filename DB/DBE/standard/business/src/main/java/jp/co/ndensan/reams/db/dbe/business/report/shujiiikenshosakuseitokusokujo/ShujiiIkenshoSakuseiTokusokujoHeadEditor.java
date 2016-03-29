@@ -106,6 +106,7 @@ public class ShujiiIkenshoSakuseiTokusokujoHeadEditor implements IShujiiIkenshoS
         source.birthGengoMeiji = headitem.getBirthGengoMeiji();
         source.birthGengoTaisho = headitem.getBirthGengoTaisho();
         source.birthGengoShowa = headitem.getBirthGengoShowa();
+        source.shoriName = headitem.getShoriName();
         return source;
     }
 }
