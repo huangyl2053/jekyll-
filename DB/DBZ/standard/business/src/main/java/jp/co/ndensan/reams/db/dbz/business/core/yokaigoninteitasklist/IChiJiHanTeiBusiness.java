@@ -150,7 +150,7 @@ public class IChiJiHanTeiBusiness {
      *
      * @return 仮一次判定区分
      */
-    public boolean get仮一次判定区分() {
+    public boolean is仮一次判定区分() {
         return entity.isKariIchijiHanteiKubun();
     }
 }

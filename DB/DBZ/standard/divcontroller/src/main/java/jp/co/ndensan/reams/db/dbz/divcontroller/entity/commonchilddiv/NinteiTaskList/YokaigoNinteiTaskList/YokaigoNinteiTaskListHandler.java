@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbz.divcontroller.handler.commonchilddiv.YokaigoNinteiTaskList;
+package jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.NinteiTaskList.YokaigoNinteiTaskList;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -35,8 +35,6 @@ import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.kekka.NijiHantei
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.NinteiShinseiHoreiCode;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.NinteiShinseiShinseijiKubunCode;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.ShinsakaiYusenWaritsukeKubunCode;
-import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.NinteiTaskList.YokaigoNinteiTaskList.YokaigoNinteiTaskListDiv;
-import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.NinteiTaskList.YokaigoNinteiTaskList.dgNinteiTaskList_Row;
 import jp.co.ndensan.reams.db.dbz.service.core.yokaigoninteitasklist.YokaigoNinteiTaskListFinder;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.CodeShubetsu;
@@ -71,6 +69,80 @@ public class YokaigoNinteiTaskListHandler {
     private static final Code 認定ｿﾌﾄ2006 = new Code(new RString("06A"));
     private static final Code 認定ｿﾌﾄ2009 = new Code(new RString("09A"));
     private static final CodeShubetsu コード種別 = new CodeShubetsu("5002");
+    private static final int インデックス_0 = 0;
+    private static final int インデックス_1 = 1;
+    private static final int インデックス_2 = 2;
+    private static final int インデックス_3 = 3;
+    private static final int インデックス_4 = 4;
+    private static final int インデックス_5 = 5;
+    private static final int インデックス_6 = 6;
+    private static final int インデックス_7 = 7;
+    private static final int インデックス_8 = 8;
+    private static final int インデックス_9 = 9;
+    private static final int インデックス_10 = 10;
+    private static final int インデックス_11 = 11;
+    private static final int インデックス_12 = 12;
+    private static final int インデックス_13 = 13;
+    private static final int インデックス_14 = 14;
+    private static final int インデックス_15 = 15;
+    private static final int インデックス_16 = 16;
+    private static final int インデックス_17 = 17;
+    private static final int インデックス_18 = 18;
+    private static final int インデックス_19 = 19;
+    private static final int インデックス_20 = 20;
+    private static final int インデックス_21 = 21;
+    private static final int インデックス_22 = 22;
+    private static final int インデックス_23 = 23;
+    private static final int インデックス_24 = 24;
+    private static final int インデックス_25 = 25;
+    private static final int インデックス_26 = 26;
+    private static final int インデックス_27 = 27;
+    private static final int インデックス_28 = 28;
+    private static final int インデックス_29 = 29;
+    private static final int インデックス_30 = 30;
+    private static final int インデックス_31 = 31;
+    private static final int インデックス_32 = 32;
+    private static final int インデックス_33 = 33;
+    private static final int インデックス_34 = 34;
+    private static final int インデックス_35 = 35;
+    private static final int インデックス_36 = 36;
+    private static final int インデックス_37 = 37;
+    private static final int インデックス_38 = 38;
+    private static final int インデックス_39 = 39;
+    private static final int インデックス_40 = 40;
+    private static final int インデックス_41 = 41;
+    private static final int インデックス_42 = 42;
+    private static final int インデックス_43 = 43;
+    private static final int インデックス_44 = 44;
+    private static final int インデックス_45 = 45;
+    private static final int インデックス_46 = 46;
+    private static final int インデックス_47 = 47;
+    private static final int インデックス_48 = 48;
+    private static final int インデックス_49 = 49;
+    private static final int インデックス_50 = 50;
+    private static final int インデックス_51 = 51;
+    private static final int インデックス_52 = 52;
+    private static final int インデックス_53 = 53;
+    private static final int インデックス_54 = 54;
+    private static final int インデックス_55 = 55;
+    private static final int インデックス_56 = 56;
+    private static final int インデックス_57 = 57;
+    private static final int インデックス_58 = 58;
+    private static final int インデックス_59 = 59;
+    private static final int インデックス_60 = 60;
+    private static final int インデックス_61 = 61;
+    private static final int インデックス_62 = 62;
+    private static final int インデックス_63 = 63;
+    private static final int インデックス_64 = 64;
+    private static final int インデックス_65 = 65;
+    private static final int インデックス_66 = 66;
+    private static final int インデックス_67 = 67;
+    private static final int インデックス_68 = 68;
+    private static final int インデックス_69 = 69;
+    private static final int インデックス_70 = 70;
+    private static final int インデックス_71 = 71;
+    private static final int インデックス_72 = 72;
+
 
     /**
      * コンストラクタです。
@@ -140,11 +212,11 @@ public class YokaigoNinteiTaskListHandler {
 
     private void 更新対象モード(List<KoShiTaisyoBusiness> 更新対象List) {
 
-        div.getDgNinteiTaskList().getGridSetting().getColumns().get(0).setVisible(true);
-        div.getDgNinteiTaskList().getGridSetting().getColumns().get(2).setVisible(true);
-        div.getDgNinteiTaskList().getGridSetting().getColumns().get(3).setVisible(true);
-        div.getDgNinteiTaskList().getGridSetting().getColumns().get(6).setVisible(true);
-        div.getDgNinteiTaskList().getGridSetting().getColumns().get(7).setVisible(true);
+        div.getDgNinteiTaskList().getGridSetting().getColumns().get(インデックス_0).setVisible(true);
+        div.getDgNinteiTaskList().getGridSetting().getColumns().get(インデックス_2).setVisible(true);
+        div.getDgNinteiTaskList().getGridSetting().getColumns().get(インデックス_3).setVisible(true);
+        div.getDgNinteiTaskList().getGridSetting().getColumns().get(インデックス_6).setVisible(true);
+        div.getDgNinteiTaskList().getGridSetting().getColumns().get(インデックス_7).setVisible(true);
         List<dgNinteiTaskList_Row> rowList = new ArrayList<>();
         int completeCount = 0;
         for (KoShiTaisyoBusiness business : 更新対象List) {
@@ -169,14 +241,14 @@ public class YokaigoNinteiTaskListHandler {
 
     private void 申請受付モード(List<ShiSeiKeTuKeBusiness> 申請受付List) {
 
-        div.getDgNinteiTaskList().getGridSetting().getColumns().get(0).setVisible(true);
-        div.getDgNinteiTaskList().getGridSetting().getColumns().get(1).setVisible(true);
-        div.getDgNinteiTaskList().getGridSetting().getColumns().get(2).setVisible(true);
-        div.getDgNinteiTaskList().getGridSetting().getColumns().get(3).setVisible(true);
-        div.getDgNinteiTaskList().getGridSetting().getColumns().get(4).setVisible(true);
-        div.getDgNinteiTaskList().getGridSetting().getColumns().get(8).setVisible(true);
-        div.getDgNinteiTaskList().getGridSetting().getColumns().get(11).setVisible(true);
-        div.getDgNinteiTaskList().getGridSetting().getColumns().get(13).setVisible(true);
+        div.getDgNinteiTaskList().getGridSetting().getColumns().get(インデックス_0).setVisible(true);
+        div.getDgNinteiTaskList().getGridSetting().getColumns().get(インデックス_1).setVisible(true);
+        div.getDgNinteiTaskList().getGridSetting().getColumns().get(インデックス_2).setVisible(true);
+        div.getDgNinteiTaskList().getGridSetting().getColumns().get(インデックス_3).setVisible(true);
+        div.getDgNinteiTaskList().getGridSetting().getColumns().get(インデックス_4).setVisible(true);
+        div.getDgNinteiTaskList().getGridSetting().getColumns().get(インデックス_8).setVisible(true);
+        div.getDgNinteiTaskList().getGridSetting().getColumns().get(インデックス_11).setVisible(true);
+        div.getDgNinteiTaskList().getGridSetting().getColumns().get(インデックス_13).setVisible(true);
         List<dgNinteiTaskList_Row> rowList = new ArrayList<>();
         int completeCount = 0;
         for (ShiSeiKeTuKeBusiness business : 申請受付List) {
@@ -208,60 +280,47 @@ public class YokaigoNinteiTaskListHandler {
     }
 
     private void 調査依頼モード(List<CyoSaiRaiBusiness> 調査依頼List) {
-        div.getDgNinteiTaskList().getGridSetting().getColumns().get(0).setVisible(true);
-        div.getDgNinteiTaskList().getGridSetting().getColumns().get(1).setVisible(true);
-        div.getDgNinteiTaskList().getGridSetting().getColumns().get(2).setVisible(true);
-        div.getDgNinteiTaskList().getGridSetting().getColumns().get(3).setVisible(true);
-        div.getDgNinteiTaskList().getGridSetting().getColumns().get(4).setVisible(true);
-        div.getDgNinteiTaskList().getGridSetting().getColumns().get(9).setVisible(true);
-        div.getDgNinteiTaskList().getGridSetting().getColumns().get(10).setVisible(true);
-        div.getDgNinteiTaskList().getGridSetting().getColumns().get(11).setVisible(true);
-        div.getDgNinteiTaskList().getGridSetting().getColumns().get(12).setVisible(true);
-        div.getDgNinteiTaskList().getGridSetting().getColumns().get(13).setVisible(true);
-        div.getDgNinteiTaskList().getGridSetting().getColumns().get(14).setVisible(true);
-        div.getDgNinteiTaskList().getGridSetting().getColumns().get(15).setVisible(true);
-        div.getDgNinteiTaskList().getGridSetting().getColumns().get(16).setVisible(true);
-        div.getDgNinteiTaskList().getGridSetting().getColumns().get(17).setVisible(true);
-        div.getDgNinteiTaskList().getGridSetting().getColumns().get(18).setVisible(true);
-        div.getDgNinteiTaskList().getGridSetting().getColumns().get(19).setVisible(true);
-        div.getDgNinteiTaskList().getGridSetting().getColumns().get(20).setVisible(true);
-        div.getDgNinteiTaskList().getGridSetting().getColumns().get(21).setVisible(true);
-        div.getDgNinteiTaskList().getGridSetting().getColumns().get(22).setVisible(true);
-        div.getDgNinteiTaskList().getGridSetting().getColumns().get(38).setVisible(true);
-        div.getDgNinteiTaskList().getGridSetting().getColumns().get(39).setVisible(true);
-        div.getDgNinteiTaskList().getGridSetting().getColumns().get(40).setVisible(true);
-        div.getDgNinteiTaskList().getGridSetting().getColumns().get(41).setVisible(true);
-        div.getDgNinteiTaskList().getGridSetting().getColumns().get(42).setVisible(true);
-        div.getDgNinteiTaskList().getGridSetting().getColumns().get(43).setVisible(true);
-        div.getDgNinteiTaskList().getGridSetting().getColumns().get(44).setVisible(true);
-        div.getDgNinteiTaskList().getGridSetting().getColumns().get(45).setVisible(true);
+        div.getDgNinteiTaskList().getGridSetting().getColumns().get(インデックス_0).setVisible(true);
+        div.getDgNinteiTaskList().getGridSetting().getColumns().get(インデックス_1).setVisible(true);
+        div.getDgNinteiTaskList().getGridSetting().getColumns().get(インデックス_2).setVisible(true);
+        div.getDgNinteiTaskList().getGridSetting().getColumns().get(インデックス_3).setVisible(true);
+        div.getDgNinteiTaskList().getGridSetting().getColumns().get(インデックス_4).setVisible(true);
+        div.getDgNinteiTaskList().getGridSetting().getColumns().get(インデックス_9).setVisible(true);
+        div.getDgNinteiTaskList().getGridSetting().getColumns().get(インデックス_10).setVisible(true);
+        div.getDgNinteiTaskList().getGridSetting().getColumns().get(インデックス_11).setVisible(true);
+        div.getDgNinteiTaskList().getGridSetting().getColumns().get(インデックス_12).setVisible(true);
+        div.getDgNinteiTaskList().getGridSetting().getColumns().get(インデックス_13).setVisible(true);
+        div.getDgNinteiTaskList().getGridSetting().getColumns().get(インデックス_14).setVisible(true);
+        div.getDgNinteiTaskList().getGridSetting().getColumns().get(インデックス_15).setVisible(true);
+        div.getDgNinteiTaskList().getGridSetting().getColumns().get(インデックス_16).setVisible(true);
+        div.getDgNinteiTaskList().getGridSetting().getColumns().get(インデックス_17).setVisible(true);
+        div.getDgNinteiTaskList().getGridSetting().getColumns().get(インデックス_18).setVisible(true);
+        div.getDgNinteiTaskList().getGridSetting().getColumns().get(インデックス_19).setVisible(true);
+        div.getDgNinteiTaskList().getGridSetting().getColumns().get(インデックス_20).setVisible(true);
+        div.getDgNinteiTaskList().getGridSetting().getColumns().get(インデックス_21).setVisible(true);
+        div.getDgNinteiTaskList().getGridSetting().getColumns().get(インデックス_22).setVisible(true);
+        div.getDgNinteiTaskList().getGridSetting().getColumns().get(インデックス_38).setVisible(true);
+        div.getDgNinteiTaskList().getGridSetting().getColumns().get(インデックス_39).setVisible(true);
+        div.getDgNinteiTaskList().getGridSetting().getColumns().get(インデックス_40).setVisible(true);
+        div.getDgNinteiTaskList().getGridSetting().getColumns().get(インデックス_41).setVisible(true);
+        div.getDgNinteiTaskList().getGridSetting().getColumns().get(インデックス_42).setVisible(true);
+        div.getDgNinteiTaskList().getGridSetting().getColumns().get(インデックス_43).setVisible(true);
+        div.getDgNinteiTaskList().getGridSetting().getColumns().get(インデックス_44).setVisible(true);
+        div.getDgNinteiTaskList().getGridSetting().getColumns().get(インデックス_45).setVisible(true);
         List<dgNinteiTaskList_Row> rowList = new ArrayList<>();
         int completeCount = 0;
         for (CyoSaiRaiBusiness business : 調査依頼List) {
 
             dgNinteiTaskList_Row row = new dgNinteiTaskList_Row();
             row.setHokensha(business.get保険者名() == null ? RString.EMPTY : business.get保険者名());
-            if (business.get認定申請年月日() != null && !business.get認定申請年月日().isEmpty()) {
-                row.getNinteiShinseiDay().setValue(new RDate(business.get認定申請年月日().toString()));
-            }
             row.setHihoNumber(business.get被保険者番号() == null ? RString.EMPTY : business.get被保険者番号());
             row.setHihoShimei(business.get氏名() == null ? RString.EMPTY : business.get氏名().value());
             row.setShinseiKubunShinseiji(business.get認定申請区分申請時コード() == null
                     ? RString.EMPTY : NinteiShinseiShinseijiKubunCode.toValue(business.get認定申請区分申請時コード().getKey()).get名称());
+            row.getChosaIraiSaichosaCount().setValue(new Decimal(business.get再調査依頼回数()));
             if (business.get認定調査依頼完了年月日() != null && !business.get認定調査依頼完了年月日().isEmpty()) {
                 completeCount++;
                 row.getChosaIraiKanryoDay().setValue(new RDate(business.get認定調査依頼完了年月日().toString()));
-            }
-            row.getChosaIraiSaichosaCount().setValue(new Decimal(business.get再調査依頼回数()));
-            if (business.get依頼書出力年月日() != null && !business.get依頼書出力年月日().isEmpty()) {
-                row.getChosaIraishoHakkoDay().setValue(new RDate(business.get依頼書出力年月日().toString()));
-            }
-            if (business.get調査票等出力年月日() != null && !business.get調査票等出力年月日().isEmpty()) {
-                row.getChousahyoOutput().setValue(new RDate(business.get調査票等出力年月日().toString()));
-                row.getChosaIraiDataShutsuryokuDay().setValue(new RDate(business.get調査票等出力年月日().toString()));
-            }
-            if (business.get認定調査期限年月日() != null && !business.get認定調査期限年月日().isEmpty()) {
-                row.getChosaIraiKigen().setValue(new RDate(business.get認定調査期限年月日().toString()));
             }
             row.setChosaIraiKubun(business.get認定調査依頼区分コード() == null ? RString.EMPTY
                     : NinteiChousaIraiKubunCode.toValue(business.get認定調査依頼区分コード().getKey()).get名称());
@@ -275,56 +334,71 @@ public class YokaigoNinteiTaskListHandler {
             row.setYubinNumber(business.get郵便番号() == null ? RString.EMPTY : business.get郵便番号().value());
             row.setJusho(business.get住所() == null ? RString.EMPTY : business.get住所().value());
             //row.setNyushoShisetsu(business.get入所施設);
-            if (business.get認定調査督促年月日() != null && !business.get認定調査督促年月日().isEmpty()) {
-                row.getChosaTokusokuHakkoDay().setValue(new RDate(business.get認定調査督促年月日().toString()));
-            }
             row.setChosaTokusokuHoho(business.get認定調査督促方法() == null ? RString.EMPTY
                     : new RString(NinteichosaTokusokuHoho.toValue(business.get認定調査督促方法()).name()));
             row.getChosaTokusokuCount().setValue(new Decimal(business.get認定調査督促回数()));
             row.getChosaTokusokuLiit().setValue(new RDate(business.get認定調査期限年月日().toString()));
             row.setChosaTokusokuChiku(business.get地区コード() == null ? RString.EMPTY
                     : CodeMaster.getCodeMeisho(SubGyomuCode.DBE認定支援, コード種別, new Code(business.get地区コード())));
+            調査依頼モードの日付設定(row, business);
             rowList.add(row);
         }
         div.getTxtTotalCount().setValue(new RString(String.valueOf(調査依頼List.size())));
         div.getTxtCompleteCount().setValue(new RString(String.valueOf(completeCount)));
         div.getDgNinteiTaskList().setDataSource(rowList);
     }
+    private void 調査依頼モードの日付設定(dgNinteiTaskList_Row row, CyoSaiRaiBusiness business) {
+        
+        if (business.get認定申請年月日() != null && !business.get認定申請年月日().isEmpty()) {
+            row.getNinteiShinseiDay().setValue(new RDate(business.get認定申請年月日().toString()));
+        }
+
+        if (business.get依頼書出力年月日() != null && !business.get依頼書出力年月日().isEmpty()) {
+            row.getChosaIraishoHakkoDay().setValue(new RDate(business.get依頼書出力年月日().toString()));
+        }
+        if (business.get調査票等出力年月日() != null && !business.get調査票等出力年月日().isEmpty()) {
+            row.getChousahyoOutput().setValue(new RDate(business.get調査票等出力年月日().toString()));
+            row.getChosaIraiDataShutsuryokuDay().setValue(new RDate(business.get調査票等出力年月日().toString()));
+        }
+        if (business.get認定調査期限年月日() != null && !business.get認定調査期限年月日().isEmpty()) {
+            row.getChosaIraiKigen().setValue(new RDate(business.get認定調査期限年月日().toString()));
+        }
+        if (business.get認定調査督促年月日() != null && !business.get認定調査督促年月日().isEmpty()) {
+            row.getChosaTokusokuHakkoDay().setValue(new RDate(business.get認定調査督促年月日().toString()));
+        }
+    }
 
     private void 意見書依頼モード(List<IKnSyoiRaiBusiness> 意見書依頼List) {
-        div.getDgNinteiTaskList().getGridSetting().getColumns().get(0).setVisible(true);
-        div.getDgNinteiTaskList().getGridSetting().getColumns().get(1).setVisible(true);
-        div.getDgNinteiTaskList().getGridSetting().getColumns().get(2).setVisible(true);
-        div.getDgNinteiTaskList().getGridSetting().getColumns().get(3).setVisible(true);
-        div.getDgNinteiTaskList().getGridSetting().getColumns().get(4).setVisible(true);
-        div.getDgNinteiTaskList().getGridSetting().getColumns().get(25).setVisible(true);
-        div.getDgNinteiTaskList().getGridSetting().getColumns().get(26).setVisible(true);
-        div.getDgNinteiTaskList().getGridSetting().getColumns().get(27).setVisible(true);
-        div.getDgNinteiTaskList().getGridSetting().getColumns().get(28).setVisible(true);
-        div.getDgNinteiTaskList().getGridSetting().getColumns().get(29).setVisible(true);
-        div.getDgNinteiTaskList().getGridSetting().getColumns().get(30).setVisible(true);
-        div.getDgNinteiTaskList().getGridSetting().getColumns().get(33).setVisible(true);
-        div.getDgNinteiTaskList().getGridSetting().getColumns().get(34).setVisible(true);
-        div.getDgNinteiTaskList().getGridSetting().getColumns().get(35).setVisible(true);
-        div.getDgNinteiTaskList().getGridSetting().getColumns().get(36).setVisible(true);
-        div.getDgNinteiTaskList().getGridSetting().getColumns().get(37).setVisible(true);
-        div.getDgNinteiTaskList().getGridSetting().getColumns().get(38).setVisible(true);
-        div.getDgNinteiTaskList().getGridSetting().getColumns().get(39).setVisible(true);
-        div.getDgNinteiTaskList().getGridSetting().getColumns().get(40).setVisible(true);
-        div.getDgNinteiTaskList().getGridSetting().getColumns().get(46).setVisible(true);
-        div.getDgNinteiTaskList().getGridSetting().getColumns().get(47).setVisible(true);
-        div.getDgNinteiTaskList().getGridSetting().getColumns().get(48).setVisible(true);
-        div.getDgNinteiTaskList().getGridSetting().getColumns().get(49).setVisible(true);
-        div.getDgNinteiTaskList().getGridSetting().getColumns().get(72).setVisible(true);
+        div.getDgNinteiTaskList().getGridSetting().getColumns().get(インデックス_0).setVisible(true);
+        div.getDgNinteiTaskList().getGridSetting().getColumns().get(インデックス_1).setVisible(true);
+        div.getDgNinteiTaskList().getGridSetting().getColumns().get(インデックス_2).setVisible(true);
+        div.getDgNinteiTaskList().getGridSetting().getColumns().get(インデックス_3).setVisible(true);
+        div.getDgNinteiTaskList().getGridSetting().getColumns().get(インデックス_4).setVisible(true);
+        div.getDgNinteiTaskList().getGridSetting().getColumns().get(インデックス_25).setVisible(true);
+        div.getDgNinteiTaskList().getGridSetting().getColumns().get(インデックス_26).setVisible(true);
+        div.getDgNinteiTaskList().getGridSetting().getColumns().get(インデックス_27).setVisible(true);
+        div.getDgNinteiTaskList().getGridSetting().getColumns().get(インデックス_28).setVisible(true);
+        div.getDgNinteiTaskList().getGridSetting().getColumns().get(インデックス_29).setVisible(true);
+        div.getDgNinteiTaskList().getGridSetting().getColumns().get(インデックス_30).setVisible(true);
+        div.getDgNinteiTaskList().getGridSetting().getColumns().get(インデックス_33).setVisible(true);
+        div.getDgNinteiTaskList().getGridSetting().getColumns().get(インデックス_34).setVisible(true);
+        div.getDgNinteiTaskList().getGridSetting().getColumns().get(インデックス_35).setVisible(true);
+        div.getDgNinteiTaskList().getGridSetting().getColumns().get(インデックス_36).setVisible(true);
+        div.getDgNinteiTaskList().getGridSetting().getColumns().get(インデックス_37).setVisible(true);
+        div.getDgNinteiTaskList().getGridSetting().getColumns().get(インデックス_38).setVisible(true);
+        div.getDgNinteiTaskList().getGridSetting().getColumns().get(インデックス_39).setVisible(true);
+        div.getDgNinteiTaskList().getGridSetting().getColumns().get(インデックス_40).setVisible(true);
+        div.getDgNinteiTaskList().getGridSetting().getColumns().get(インデックス_46).setVisible(true);
+        div.getDgNinteiTaskList().getGridSetting().getColumns().get(インデックス_47).setVisible(true);
+        div.getDgNinteiTaskList().getGridSetting().getColumns().get(インデックス_48).setVisible(true);
+        div.getDgNinteiTaskList().getGridSetting().getColumns().get(インデックス_49).setVisible(true);
+        div.getDgNinteiTaskList().getGridSetting().getColumns().get(インデックス_72).setVisible(true);
         List<dgNinteiTaskList_Row> rowList = new ArrayList<>();
         int completeCount = 0;
         for (IKnSyoiRaiBusiness business : 意見書依頼List) {
 
             dgNinteiTaskList_Row row = new dgNinteiTaskList_Row();
             row.setHokensha(business.get保険者名() == null ? RString.EMPTY : business.get保険者名());
-            if (business.get認定申請年月日() != null && !business.get認定申請年月日().isEmpty()) {
-                row.getNinteiShinseiDay().setValue(new RDate(business.get認定申請年月日().toString()));
-            }
             row.setHihoNumber(business.get被保険者番号() == null ? RString.EMPTY : business.get被保険者番号());
             row.setHihoShimei(business.get氏名() == null ? RString.EMPTY : business.get氏名().value());
             row.setShinseiKubunShinseiji(business.get認定申請区分申請時コード() == null
@@ -334,18 +408,6 @@ public class YokaigoNinteiTaskListHandler {
                 row.getIkenshoIraiKanryoDay().setValue(new RDate(business.get主治医意見書作成依頼完了年月日().toString()));
             }
             row.getIkenshoIraiIkenCount().setValue(new Decimal(business.get再作成依頼回数()));
-            if (business.get主治医意見書作成依頼年月日() != null && !business.get主治医意見書作成依頼年月日().isEmpty()) {
-                row.getIkenshoIraiDay().setValue(new RDate(business.get主治医意見書作成依頼年月日().toString()));
-            }
-            if (business.get依頼書出力年月日() != null && !business.get依頼書出力年月日().isEmpty()) {
-                row.getIkenshoIraiIraishoHakkoDay().setValue(new RDate(business.get依頼書出力年月日().toString()));
-            }
-            if (business.get意見書出力年月日() != null && !business.get意見書出力年月日().isEmpty()) {
-                row.getIkenshoIraiIkenshoShutsuryokuDay().setValue(new RDate(business.get意見書出力年月日().toString()));
-            }
-            if (business.get主治医意見書作成期限年月日() != null && !business.get主治医意見書作成期限年月日().isEmpty()) {
-                row.getIkenshoIraiKigen().setValue(new RDate(business.get主治医意見書作成期限年月日().toString()));
-            }
             row.setIkenshoIraiShokai(business.get意見書作成回数区分() == null
                     ? RString.EMPTY : IkenshoSakuseiKaisuKubun.toValue(business.get意見書作成回数区分().getKey()).get名称());
             row.setKonkaiShujiiIryokikan(business.get今回医療機関() == null ? RString.EMPTY : business.get今回医療機関());
@@ -355,16 +417,11 @@ public class YokaigoNinteiTaskListHandler {
             row.setYubinNumber(business.get郵便番号() == null ? RString.EMPTY : business.get郵便番号().value());
             row.setJusho(business.get住所() == null ? RString.EMPTY : business.get住所().value());
 //            row.setNyushoShisetsu(入所施設);
-            if (business.get主治医意見書作成督促年月日() != null && !business.get主治医意見書作成督促年月日().isEmpty()) {
-                row.getIkenshoTokusokuHakkoDay().setValue(new RDate(business.get主治医意見書作成督促年月日().toString()));
-            }
             row.setIkenshoTokusokuHoho(business.get主治医意見書作成督促方法() == null
                     ? RString.EMPTY : IkenshoSakuseiTokusokuHoho.toValue(business.get主治医意見書作成督促方法()).get名称());
             row.getIkenshoTokusokuCount().setValue(new Decimal(business.get主治医意見書作成督促回数()));
-            if (business.get主治医意見書作成期限年月日() != null && !business.get主治医意見書作成期限年月日().isEmpty()) {
-                row.getIkenshoTokusokuLimit().setValue(new RDate(business.get主治医意見書作成期限年月日().toString()));
-            }
 //            row.getKeikaNissu().setValue(new Decimal(business.get認定申請年月日()));
+            意見書依頼モードの日付設定(row, business);
             rowList.add(row);
         }
         div.getTxtTotalCount().setValue(new RString(String.valueOf(意見書依頼List.size())));
@@ -372,31 +429,52 @@ public class YokaigoNinteiTaskListHandler {
         div.getDgNinteiTaskList().setDataSource(rowList);
     }
 
+    private void 意見書依頼モードの日付設定(dgNinteiTaskList_Row row, IKnSyoiRaiBusiness business) {
+        if (business.get認定申請年月日() != null && !business.get認定申請年月日().isEmpty()) {
+            row.getNinteiShinseiDay().setValue(new RDate(business.get認定申請年月日().toString()));
+        }
+        if (business.get主治医意見書作成依頼年月日() != null && !business.get主治医意見書作成依頼年月日().isEmpty()) {
+            row.getIkenshoIraiDay().setValue(new RDate(business.get主治医意見書作成依頼年月日().toString()));
+        }
+        if (business.get依頼書出力年月日() != null && !business.get依頼書出力年月日().isEmpty()) {
+            row.getIkenshoIraiIraishoHakkoDay().setValue(new RDate(business.get依頼書出力年月日().toString()));
+        }
+        if (business.get意見書出力年月日() != null && !business.get意見書出力年月日().isEmpty()) {
+            row.getIkenshoIraiIkenshoShutsuryokuDay().setValue(new RDate(business.get意見書出力年月日().toString()));
+        }
+        if (business.get主治医意見書作成期限年月日() != null && !business.get主治医意見書作成期限年月日().isEmpty()) {
+            row.getIkenshoIraiKigen().setValue(new RDate(business.get主治医意見書作成期限年月日().toString()));
+        }
+        if (business.get主治医意見書作成督促年月日() != null && !business.get主治医意見書作成督促年月日().isEmpty()) {
+            row.getIkenshoTokusokuHakkoDay().setValue(new RDate(business.get主治医意見書作成督促年月日().toString()));
+        }
+        if (business.get主治医意見書作成期限年月日() != null && !business.get主治医意見書作成期限年月日().isEmpty()) {
+            row.getIkenshoTokusokuLimit().setValue(new RDate(business.get主治医意見書作成期限年月日().toString()));
+        }
+    }
+
     private void 調査入手モード(List<CyoSaNyuSyuBusiness> 調査入手List) {
 
-        div.getDgNinteiTaskList().getGridSetting().getColumns().get(0).setVisible(true);
-        div.getDgNinteiTaskList().getGridSetting().getColumns().get(1).setVisible(true);
-        div.getDgNinteiTaskList().getGridSetting().getColumns().get(2).setVisible(true);
-        div.getDgNinteiTaskList().getGridSetting().getColumns().get(3).setVisible(true);
-        div.getDgNinteiTaskList().getGridSetting().getColumns().get(4).setVisible(true);
-        div.getDgNinteiTaskList().getGridSetting().getColumns().get(9).setVisible(true);
-        div.getDgNinteiTaskList().getGridSetting().getColumns().get(16).setVisible(true);
-        div.getDgNinteiTaskList().getGridSetting().getColumns().get(17).setVisible(true);
-        div.getDgNinteiTaskList().getGridSetting().getColumns().get(23).setVisible(true);
-        div.getDgNinteiTaskList().getGridSetting().getColumns().get(24).setVisible(true);
-        div.getDgNinteiTaskList().getGridSetting().getColumns().get(41).setVisible(true);
-        div.getDgNinteiTaskList().getGridSetting().getColumns().get(42).setVisible(true);
-        div.getDgNinteiTaskList().getGridSetting().getColumns().get(43).setVisible(true);
-        div.getDgNinteiTaskList().getGridSetting().getColumns().get(44).setVisible(true);
-        div.getDgNinteiTaskList().getGridSetting().getColumns().get(45).setVisible(true);
+        div.getDgNinteiTaskList().getGridSetting().getColumns().get(インデックス_0).setVisible(true);
+        div.getDgNinteiTaskList().getGridSetting().getColumns().get(インデックス_1).setVisible(true);
+        div.getDgNinteiTaskList().getGridSetting().getColumns().get(インデックス_2).setVisible(true);
+        div.getDgNinteiTaskList().getGridSetting().getColumns().get(インデックス_3).setVisible(true);
+        div.getDgNinteiTaskList().getGridSetting().getColumns().get(インデックス_4).setVisible(true);
+        div.getDgNinteiTaskList().getGridSetting().getColumns().get(インデックス_9).setVisible(true);
+        div.getDgNinteiTaskList().getGridSetting().getColumns().get(インデックス_16).setVisible(true);
+        div.getDgNinteiTaskList().getGridSetting().getColumns().get(インデックス_17).setVisible(true);
+        div.getDgNinteiTaskList().getGridSetting().getColumns().get(インデックス_23).setVisible(true);
+        div.getDgNinteiTaskList().getGridSetting().getColumns().get(インデックス_24).setVisible(true);
+        div.getDgNinteiTaskList().getGridSetting().getColumns().get(インデックス_41).setVisible(true);
+        div.getDgNinteiTaskList().getGridSetting().getColumns().get(インデックス_42).setVisible(true);
+        div.getDgNinteiTaskList().getGridSetting().getColumns().get(インデックス_43).setVisible(true);
+        div.getDgNinteiTaskList().getGridSetting().getColumns().get(インデックス_44).setVisible(true);
+        div.getDgNinteiTaskList().getGridSetting().getColumns().get(インデックス_45).setVisible(true);
         List<dgNinteiTaskList_Row> rowList = new ArrayList<>();
         int completeCount = 0;
         for (CyoSaNyuSyuBusiness business : 調査入手List) {
             dgNinteiTaskList_Row row = new dgNinteiTaskList_Row();
             row.setHokensha(business.get保険者名() == null ? RString.EMPTY : business.get保険者名());
-            if (business.get認定申請年月日() != null && !business.get認定申請年月日().isEmpty()) {
-                row.getNinteiShinseiDay().setValue(new RDate(business.get認定申請年月日().toString()));
-            }
             row.setHihoNumber(business.get被保険者番号() == null ? RString.EMPTY : business.get被保険者番号());
             row.setHihoShimei(business.get氏名() == null ? RString.EMPTY : business.get氏名().value());
             row.setShinseiKubunShinseiji(business.get認定申請区分申請時コード() == null
@@ -407,23 +485,12 @@ public class YokaigoNinteiTaskListHandler {
             }
             row.setKonkaiChosaItakusaki(business.get調査委託先() == null ? RString.EMPTY : business.get調査委託先());
             row.setKonkaiChosain(business.get調査員氏名() == null ? RString.EMPTY : business.get調査員氏名());
-            if (business.get認定調査実施年月日() != null && !business.get認定調査実施年月日().isEmpty()) {
-                row.getChosahyoKanryoDay().setValue(new RDate(business.get認定調査実施年月日().toString()));
-            }
-            if (business.get認定調査完了年月日() != null && !business.get認定調査完了年月日().isEmpty()) {
-                row.getChosahyoDataNyuryokuDay().setValue(new RDate(business.get認定調査完了年月日().toString()));
-            }
-            if (business.get認定調査督促年月日() != null && !business.get認定調査督促年月日().isEmpty()) {
-                row.getChosaTokusokuHakkoDay().setValue(new RDate(business.get認定調査督促年月日().toString()));
-            }
             row.setChosaTokusokuHoho(business.get認定調査督促方法() == null ? RString.EMPTY
                     : new RString(NinteichosaTokusokuHoho.toValue(business.get認定調査督促方法()).name()));
             row.getChosaTokusokuCount().setValue(new Decimal(business.get認定調査督促回数()));
-            if (business.get認定調査期限年月日() != null && !business.get認定調査期限年月日().isEmpty()) {
-                row.getChosaTokusokuLiit().setValue(new RDate(business.get認定調査期限年月日().toString()));
-            }
             row.setChosaTokusokuChiku(business.get地区コード() == null ? RString.EMPTY
                     : CodeMaster.getCodeMeisho(SubGyomuCode.DBE認定支援, コード種別, new Code(business.get地区コード())));
+            調査入手モードの日付設定(row, business);
             rowList.add(row);
         }
         div.getTxtTotalCount().setValue(new RString(String.valueOf(調査入手List.size())));
@@ -431,55 +498,58 @@ public class YokaigoNinteiTaskListHandler {
         div.getDgNinteiTaskList().setDataSource(rowList);
     }
 
+    private void 調査入手モードの日付設定(dgNinteiTaskList_Row row, CyoSaNyuSyuBusiness business) {
+        if (business.get認定申請年月日() != null && !business.get認定申請年月日().isEmpty()) {
+            row.getNinteiShinseiDay().setValue(new RDate(business.get認定申請年月日().toString()));
+        }
+        if (business.get認定調査実施年月日() != null && !business.get認定調査実施年月日().isEmpty()) {
+            row.getChosahyoKanryoDay().setValue(new RDate(business.get認定調査実施年月日().toString()));
+        }
+        if (business.get認定調査完了年月日() != null && !business.get認定調査完了年月日().isEmpty()) {
+            row.getChosahyoDataNyuryokuDay().setValue(new RDate(business.get認定調査完了年月日().toString()));
+        }
+        if (business.get認定調査督促年月日() != null && !business.get認定調査督促年月日().isEmpty()) {
+            row.getChosaTokusokuHakkoDay().setValue(new RDate(business.get認定調査督促年月日().toString()));
+        }
+        if (business.get認定調査期限年月日() != null && !business.get認定調査期限年月日().isEmpty()) {
+            row.getChosaTokusokuLiit().setValue(new RDate(business.get認定調査期限年月日().toString()));
+        }
+    }
+
     private void 意見書入手モード(List<IkenSyoNyuSyuBusiness> 意見書入手List) {
 
-        div.getDgNinteiTaskList().getGridSetting().getColumns().get(0).setVisible(true);
-        div.getDgNinteiTaskList().getGridSetting().getColumns().get(1).setVisible(true);
-        div.getDgNinteiTaskList().getGridSetting().getColumns().get(2).setVisible(true);
-        div.getDgNinteiTaskList().getGridSetting().getColumns().get(3).setVisible(true);
-        div.getDgNinteiTaskList().getGridSetting().getColumns().get(4).setVisible(true);
-        div.getDgNinteiTaskList().getGridSetting().getColumns().get(25).setVisible(true);
-        div.getDgNinteiTaskList().getGridSetting().getColumns().get(31).setVisible(true);
-        div.getDgNinteiTaskList().getGridSetting().getColumns().get(32).setVisible(true);
-        div.getDgNinteiTaskList().getGridSetting().getColumns().get(33).setVisible(true);
-        div.getDgNinteiTaskList().getGridSetting().getColumns().get(46).setVisible(true);
-        div.getDgNinteiTaskList().getGridSetting().getColumns().get(47).setVisible(true);
-        div.getDgNinteiTaskList().getGridSetting().getColumns().get(48).setVisible(true);
-        div.getDgNinteiTaskList().getGridSetting().getColumns().get(49).setVisible(true);
-        div.getDgNinteiTaskList().getGridSetting().getColumns().get(72).setVisible(true);
+        div.getDgNinteiTaskList().getGridSetting().getColumns().get(インデックス_0).setVisible(true);
+        div.getDgNinteiTaskList().getGridSetting().getColumns().get(インデックス_1).setVisible(true);
+        div.getDgNinteiTaskList().getGridSetting().getColumns().get(インデックス_2).setVisible(true);
+        div.getDgNinteiTaskList().getGridSetting().getColumns().get(インデックス_3).setVisible(true);
+        div.getDgNinteiTaskList().getGridSetting().getColumns().get(インデックス_4).setVisible(true);
+        div.getDgNinteiTaskList().getGridSetting().getColumns().get(インデックス_25).setVisible(true);
+        div.getDgNinteiTaskList().getGridSetting().getColumns().get(インデックス_31).setVisible(true);
+        div.getDgNinteiTaskList().getGridSetting().getColumns().get(インデックス_32).setVisible(true);
+        div.getDgNinteiTaskList().getGridSetting().getColumns().get(インデックス_33).setVisible(true);
+        div.getDgNinteiTaskList().getGridSetting().getColumns().get(インデックス_46).setVisible(true);
+        div.getDgNinteiTaskList().getGridSetting().getColumns().get(インデックス_47).setVisible(true);
+        div.getDgNinteiTaskList().getGridSetting().getColumns().get(インデックス_48).setVisible(true);
+        div.getDgNinteiTaskList().getGridSetting().getColumns().get(インデックス_49).setVisible(true);
+        div.getDgNinteiTaskList().getGridSetting().getColumns().get(インデックス_72).setVisible(true);
         List<dgNinteiTaskList_Row> rowList = new ArrayList<>();
         int completeCount = 0;
         for (IkenSyoNyuSyuBusiness business : 意見書入手List) {
             dgNinteiTaskList_Row row = new dgNinteiTaskList_Row();
             row.setHokensha(business.get保険者名() == null ? RString.EMPTY : business.get保険者名());
-            if (business.get認定申請年月日() != null && !business.get認定申請年月日().isEmpty()) {
-                row.getNinteiShinseiDay().setValue(new RDate(business.get認定申請年月日().toString()));
-            }
             row.setHihoNumber(business.get被保険者番号() == null ? RString.EMPTY : business.get被保険者番号());
             row.setHihoShimei(business.get氏名() == null ? RString.EMPTY : business.get氏名().value());
             row.setShinseiKubunShinseiji(business.get認定申請区分申請時コード() == null
                     ? RString.EMPTY : NinteiShinseiShinseijiKubunCode.toValue(business.get認定申請区分申請時コード().getKey()).get名称());
-            if (business.get主治医意見書作成依頼完了年月日() != null && !business.get主治医意見書作成依頼完了年月日().isEmpty()) {
-                row.getIkenshoIraiKanryoDay().setValue(new RDate(business.get主治医意見書作成依頼完了年月日().toString()));
-            }
             if (business.get主治医意見書登録完了年月日() != null && !business.get主治医意見書登録完了年月日().isEmpty()) {
                 completeCount++;
                 row.getIkenshoNyushuKanryoDay().setValue(new RDate(business.get主治医意見書登録完了年月日().toString()));
             }
-            if (business.get主治医意見書読取年月日() != null && !business.get主治医意見書読取年月日().isEmpty()) {
-                row.getIkenshoNyushuTeikei().setValue(new RDate(business.get主治医意見書読取年月日().toString()));
-            }
             row.setIkenshoIraiShokai(business.get意見書作成回数区分() == null
                     ? RString.EMPTY : IkenshoSakuseiKaisuKubun.toValue(business.get意見書作成回数区分().getKey()).get名称());
-            if (business.get主治医意見書作成督促年月日() != null && !business.get主治医意見書作成督促年月日().isEmpty()) {
-                row.getIkenshoTokusokuHakkoDay().setValue(new RDate(business.get主治医意見書作成督促年月日().toString()));
-            }
             row.setIkenshoTokusokuHoho(business.get主治医意見書作成督促方法() == null ? RString.EMPTY : business.get主治医意見書作成督促方法());
             row.getIkenshoTokusokuCount().setValue(new Decimal(business.get主治医意見書作成督促回数()));
-
-            if (business.get主治医意見書作成期限年月日() != null && !business.get主治医意見書作成期限年月日().isEmpty()) {
-                row.getIkenshoTokusokuLimit().setValue(new RDate(business.get主治医意見書作成期限年月日().toString()));
-            }
+            意見書入手モードの日付設定(row, business);
 //            経過日数
             rowList.add(row);
         }
@@ -488,183 +558,208 @@ public class YokaigoNinteiTaskListHandler {
         div.getDgNinteiTaskList().setDataSource(rowList);
     }
 
+    private void 意見書入手モードの日付設定(dgNinteiTaskList_Row row, IkenSyoNyuSyuBusiness business) {
+        if (business.get認定申請年月日() != null && !business.get認定申請年月日().isEmpty()) {
+            row.getNinteiShinseiDay().setValue(new RDate(business.get認定申請年月日().toString()));
+        }
+        if (business.get主治医意見書作成依頼完了年月日() != null && !business.get主治医意見書作成依頼完了年月日().isEmpty()) {
+            row.getIkenshoIraiKanryoDay().setValue(new RDate(business.get主治医意見書作成依頼完了年月日().toString()));
+        }
+        if (business.get主治医意見書読取年月日() != null && !business.get主治医意見書読取年月日().isEmpty()) {
+            row.getIkenshoNyushuTeikei().setValue(new RDate(business.get主治医意見書読取年月日().toString()));
+        }
+        if (business.get主治医意見書作成督促年月日() != null && !business.get主治医意見書作成督促年月日().isEmpty()) {
+            row.getIkenshoTokusokuHakkoDay().setValue(new RDate(business.get主治医意見書作成督促年月日().toString()));
+        }
+
+        if (business.get主治医意見書作成期限年月日() != null && !business.get主治医意見書作成期限年月日().isEmpty()) {
+            row.getIkenshoTokusokuLimit().setValue(new RDate(business.get主治医意見書作成期限年月日().toString()));
+        }
+    }
+
     private void 一次判定モード(List<IChiJiHanTeiBusiness> 一次判定List) {
 
-        div.getDgNinteiTaskList().getGridSetting().getColumns().get(0).setVisible(true);
-        div.getDgNinteiTaskList().getGridSetting().getColumns().get(1).setVisible(true);
-        div.getDgNinteiTaskList().getGridSetting().getColumns().get(2).setVisible(true);
-        div.getDgNinteiTaskList().getGridSetting().getColumns().get(3).setVisible(true);
-        div.getDgNinteiTaskList().getGridSetting().getColumns().get(4).setVisible(true);
-        div.getDgNinteiTaskList().getGridSetting().getColumns().get(23).setVisible(true);
-        div.getDgNinteiTaskList().getGridSetting().getColumns().get(31).setVisible(true);
-        div.getDgNinteiTaskList().getGridSetting().getColumns().get(50).setVisible(true);
-        div.getDgNinteiTaskList().getGridSetting().getColumns().get(51).setVisible(true);
-        div.getDgNinteiTaskList().getGridSetting().getColumns().get(52).setVisible(true);
-        div.getDgNinteiTaskList().getGridSetting().getColumns().get(53).setVisible(true);
-        div.getDgNinteiTaskList().getGridSetting().getColumns().get(54).setVisible(true);
+        div.getDgNinteiTaskList().getGridSetting().getColumns().get(インデックス_0).setVisible(true);
+        div.getDgNinteiTaskList().getGridSetting().getColumns().get(インデックス_1).setVisible(true);
+        div.getDgNinteiTaskList().getGridSetting().getColumns().get(インデックス_2).setVisible(true);
+        div.getDgNinteiTaskList().getGridSetting().getColumns().get(インデックス_3).setVisible(true);
+        div.getDgNinteiTaskList().getGridSetting().getColumns().get(インデックス_4).setVisible(true);
+        div.getDgNinteiTaskList().getGridSetting().getColumns().get(インデックス_23).setVisible(true);
+        div.getDgNinteiTaskList().getGridSetting().getColumns().get(インデックス_31).setVisible(true);
+        div.getDgNinteiTaskList().getGridSetting().getColumns().get(インデックス_50).setVisible(true);
+        div.getDgNinteiTaskList().getGridSetting().getColumns().get(インデックス_51).setVisible(true);
+        div.getDgNinteiTaskList().getGridSetting().getColumns().get(インデックス_52).setVisible(true);
+        div.getDgNinteiTaskList().getGridSetting().getColumns().get(インデックス_53).setVisible(true);
+        div.getDgNinteiTaskList().getGridSetting().getColumns().get(インデックス_54).setVisible(true);
         List<dgNinteiTaskList_Row> rowList = new ArrayList<>();
         int completeCount = 0;
         for (IChiJiHanTeiBusiness business : 一次判定List) {
             dgNinteiTaskList_Row row = new dgNinteiTaskList_Row();
             row.setHokensha(business.get保険者() == null ? RString.EMPTY : business.get保険者());
-            if (business.get認定申請年月日() != null && !business.get認定申請年月日().isEmpty()) {
-                row.getNinteiShinseiDay().setValue(new RDate(business.get認定申請年月日().toString()));
-            }
             row.setHihoNumber(business.get被保険者番号() == null ? RString.EMPTY : business.get被保険者番号());
             row.setHihoShimei(business.get被保険者氏名() == null ? RString.EMPTY : business.get被保険者氏名().value());
             row.setShinseiKubunShinseiji(business.get認定申請区分申請時コード() == null
                     ? RString.EMPTY : NinteiShinseiShinseijiKubunCode.toValue(business.get認定申請区分申請時コード().getKey()).get名称());
-            if (business.get認定申請年月日() != null && !business.get認定申請年月日().isEmpty()) {
-                row.getChosahyoKanryoDay().setValue(new RDate(business.get認定申請年月日().toString()));
-            }
             if (business.get主治医意見書登録完了年月日() != null && !business.get主治医意見書登録完了年月日().isEmpty()) {
                 completeCount++;
                 row.getIkenshoNyushuKanryoDay().setValue(new RDate(business.get主治医意見書登録完了年月日().toString()));
             }
-            if (business.get要介護認定一次判定年月日() != null && !business.get要介護認定一次判定年月日().isEmpty()) {
-                row.getIchijiHanteiKanryoDay().setValue(new RDate(business.get要介護認定一次判定年月日().toString()));
-            }
-            if (business.get仮一次判定区分()) {
-                if (business.get要介護認定一次判定年月日() != null && !business.get要介護認定一次判定年月日().isEmpty()) {
-                    row.getIchijiHanteiKanri().setValue(new RDate(business.get要介護認定一次判定年月日().toString()));
-                }
-            } else {
-                if (business.get要介護認定一次判定年月日() != null && !business.get要介護認定一次判定年月日().isEmpty()) {
-                    row.getIchijiHantei().setValue(new RDate(business.get要介護認定一次判定年月日().toString()));
-                }
-            }
             row.setIchijiHanteiKekka(一次判定結果の名称を取得する(business.get厚労省IF識別コード(), business.get要介護認定一次判定結果コード()));
             row.setIchijiHanteiWarningCode(business.get要介護認定一次判定警告コード() == null
                     ? RString.EMPTY : IchijiHanteiKeikoku.toValue(business.get要介護認定一次判定警告コード()).get名称());
+            一次判定モードの日付設定(row, business);
             rowList.add(row);
         }
         div.getTxtTotalCount().setValue(new RString(String.valueOf(一次判定List.size())));
         div.getTxtCompleteCount().setValue(new RString(String.valueOf(completeCount)));
         div.getDgNinteiTaskList().setDataSource(rowList);
     }
-
+    private void 一次判定モードの日付設定(dgNinteiTaskList_Row row, IChiJiHanTeiBusiness business) {
+        if (business.get認定申請年月日() != null && !business.get認定申請年月日().isEmpty()) {
+            row.getNinteiShinseiDay().setValue(new RDate(business.get認定申請年月日().toString()));
+        }
+        if (business.get認定申請年月日() != null && !business.get認定申請年月日().isEmpty()) {
+            row.getChosahyoKanryoDay().setValue(new RDate(business.get認定申請年月日().toString()));
+        }
+        if (business.get要介護認定一次判定年月日() != null && !business.get要介護認定一次判定年月日().isEmpty()) {
+            row.getIchijiHanteiKanryoDay().setValue(new RDate(business.get要介護認定一次判定年月日().toString()));
+        }
+        if (business.is仮一次判定区分()) {
+            if (business.get要介護認定一次判定年月日() != null && !business.get要介護認定一次判定年月日().isEmpty()) {
+                row.getIchijiHanteiKanri().setValue(new RDate(business.get要介護認定一次判定年月日().toString()));
+            }
+        } else {
+            if (business.get要介護認定一次判定年月日() != null && !business.get要介護認定一次判定年月日().isEmpty()) {
+                row.getIchijiHantei().setValue(new RDate(business.get要介護認定一次判定年月日().toString()));
+            }
+        }
+    }
     private void マスキングモード(List<MaSuKinGuBusiness> マスキングList) {
 
-        div.getDgNinteiTaskList().getGridSetting().getColumns().get(0).setVisible(true);
-        div.getDgNinteiTaskList().getGridSetting().getColumns().get(1).setVisible(true);
-        div.getDgNinteiTaskList().getGridSetting().getColumns().get(2).setVisible(true);
-        div.getDgNinteiTaskList().getGridSetting().getColumns().get(3).setVisible(true);
-        div.getDgNinteiTaskList().getGridSetting().getColumns().get(4).setVisible(true);
-        div.getDgNinteiTaskList().getGridSetting().getColumns().get(9).setVisible(true);
-        div.getDgNinteiTaskList().getGridSetting().getColumns().get(23).setVisible(true);
-        div.getDgNinteiTaskList().getGridSetting().getColumns().get(25).setVisible(true);
-        div.getDgNinteiTaskList().getGridSetting().getColumns().get(31).setVisible(true);
-        div.getDgNinteiTaskList().getGridSetting().getColumns().get(55).setVisible(true);
+        div.getDgNinteiTaskList().getGridSetting().getColumns().get(インデックス_0).setVisible(true);
+        div.getDgNinteiTaskList().getGridSetting().getColumns().get(インデックス_1).setVisible(true);
+        div.getDgNinteiTaskList().getGridSetting().getColumns().get(インデックス_2).setVisible(true);
+        div.getDgNinteiTaskList().getGridSetting().getColumns().get(インデックス_3).setVisible(true);
+        div.getDgNinteiTaskList().getGridSetting().getColumns().get(インデックス_4).setVisible(true);
+        div.getDgNinteiTaskList().getGridSetting().getColumns().get(インデックス_9).setVisible(true);
+        div.getDgNinteiTaskList().getGridSetting().getColumns().get(インデックス_23).setVisible(true);
+        div.getDgNinteiTaskList().getGridSetting().getColumns().get(インデックス_25).setVisible(true);
+        div.getDgNinteiTaskList().getGridSetting().getColumns().get(インデックス_31).setVisible(true);
+        div.getDgNinteiTaskList().getGridSetting().getColumns().get(インデックス_55).setVisible(true);
         List<dgNinteiTaskList_Row> rowList = new ArrayList<>();
         int completeCount = 0;
         for (MaSuKinGuBusiness business : マスキングList) {
             dgNinteiTaskList_Row row = new dgNinteiTaskList_Row();
             row.setHokensha(business.get保険者() == null ? RString.EMPTY : business.get保険者());
-            if (business.get認定申請年月日() != null && !business.get認定申請年月日().isEmpty()) {
-                row.getNinteiShinseiDay().setValue(new RDate(business.get認定申請年月日().toString()));
-            }
             row.setHihoNumber(business.get被保険者番号() == null ? RString.EMPTY : business.get被保険者番号());
             row.setHihoShimei(business.get被保険者氏名() == null ? RString.EMPTY : business.get被保険者氏名().value());
             row.setShinseiKubunShinseiji(business.get認定申請区分申請時コード() == null
                     ? RString.EMPTY : NinteiShinseiShinseijiKubunCode.toValue(business.get認定申請区分申請時コード().getKey()).get名称());
-            if (business.get認定調査依頼完了年月日() != null && !business.get認定調査依頼完了年月日().isEmpty()) {
-                row.getChosaIraiKanryoDay().setValue(new RDate(business.get認定調査依頼完了年月日().toString()));
-            }
-            if (business.get認定申請年月日() != null && !business.get認定申請年月日().isEmpty()) {
-                row.getChosahyoKanryoDay().setValue(new RDate(business.get認定申請年月日().toString()));
-            }
-            if (business.get主治医意見書作成依頼完了年月日() != null && !business.get主治医意見書作成依頼完了年月日().isEmpty()) {
-                row.getIkenshoIraiKanryoDay().setValue(new RDate(business.get主治医意見書作成依頼完了年月日().toString()));
-            }
             if (business.get主治医意見書登録完了年月日() != null && !business.get主治医意見書登録完了年月日().isEmpty()) {
                 completeCount++;
                 row.getIkenshoNyushuKanryoDay().setValue(new RDate(business.get主治医意見書登録完了年月日().toString()));
             }
-            if (business.getマスキング完了年月日() != null && !business.getマスキング完了年月日().isEmpty()) {
-                row.getMaskingKanryoDay().setValue(new RDate(business.getマスキング完了年月日().toString()));
-            }
+            マスキングモードの日付設定(row, business);
             rowList.add(row);
         }
         div.getTxtTotalCount().setValue(new RString(String.valueOf(マスキングList.size())));
         div.getTxtCompleteCount().setValue(new RString(String.valueOf(completeCount)));
         div.getDgNinteiTaskList().setDataSource(rowList);
     }
-
+    private void マスキングモードの日付設定(dgNinteiTaskList_Row row, MaSuKinGuBusiness business) {
+        if (business.get認定申請年月日() != null && !business.get認定申請年月日().isEmpty()) {
+            row.getNinteiShinseiDay().setValue(new RDate(business.get認定申請年月日().toString()));
+        }
+        if (business.get認定調査依頼完了年月日() != null && !business.get認定調査依頼完了年月日().isEmpty()) {
+            row.getChosaIraiKanryoDay().setValue(new RDate(business.get認定調査依頼完了年月日().toString()));
+        }
+        if (business.get認定申請年月日() != null && !business.get認定申請年月日().isEmpty()) {
+            row.getChosahyoKanryoDay().setValue(new RDate(business.get認定申請年月日().toString()));
+        }
+        if (business.get主治医意見書作成依頼完了年月日() != null && !business.get主治医意見書作成依頼完了年月日().isEmpty()) {
+            row.getIkenshoIraiKanryoDay().setValue(new RDate(business.get主治医意見書作成依頼完了年月日().toString()));
+        }
+        if (business.getマスキング完了年月日() != null && !business.getマスキング完了年月日().isEmpty()) {
+            row.getMaskingKanryoDay().setValue(new RDate(business.getマスキング完了年月日().toString()));
+        }
+    }
     private void 審査会登録モード(List<ShinSaKaiToRoKuBusiness> 審査会登録List) {
 
-        div.getDgNinteiTaskList().getGridSetting().getColumns().get(0).setVisible(true);
-        div.getDgNinteiTaskList().getGridSetting().getColumns().get(1).setVisible(true);
-        div.getDgNinteiTaskList().getGridSetting().getColumns().get(2).setVisible(true);
-        div.getDgNinteiTaskList().getGridSetting().getColumns().get(3).setVisible(true);
-        div.getDgNinteiTaskList().getGridSetting().getColumns().get(4).setVisible(true);
-        div.getDgNinteiTaskList().getGridSetting().getColumns().get(23).setVisible(true);
-        div.getDgNinteiTaskList().getGridSetting().getColumns().get(31).setVisible(true);
-        div.getDgNinteiTaskList().getGridSetting().getColumns().get(55).setVisible(true);
-        div.getDgNinteiTaskList().getGridSetting().getColumns().get(56).setVisible(true);
-        div.getDgNinteiTaskList().getGridSetting().getColumns().get(57).setVisible(true);
-        div.getDgNinteiTaskList().getGridSetting().getColumns().get(58).setVisible(true);
-        div.getDgNinteiTaskList().getGridSetting().getColumns().get(59).setVisible(true);
-        div.getDgNinteiTaskList().getGridSetting().getColumns().get(60).setVisible(true);
-        div.getDgNinteiTaskList().getGridSetting().getColumns().get(61).setVisible(true);
-        div.getDgNinteiTaskList().getGridSetting().getColumns().get(62).setVisible(true);
+        div.getDgNinteiTaskList().getGridSetting().getColumns().get(インデックス_0).setVisible(true);
+        div.getDgNinteiTaskList().getGridSetting().getColumns().get(インデックス_1).setVisible(true);
+        div.getDgNinteiTaskList().getGridSetting().getColumns().get(インデックス_2).setVisible(true);
+        div.getDgNinteiTaskList().getGridSetting().getColumns().get(インデックス_3).setVisible(true);
+        div.getDgNinteiTaskList().getGridSetting().getColumns().get(インデックス_4).setVisible(true);
+        div.getDgNinteiTaskList().getGridSetting().getColumns().get(インデックス_23).setVisible(true);
+        div.getDgNinteiTaskList().getGridSetting().getColumns().get(インデックス_31).setVisible(true);
+        div.getDgNinteiTaskList().getGridSetting().getColumns().get(インデックス_55).setVisible(true);
+        div.getDgNinteiTaskList().getGridSetting().getColumns().get(インデックス_56).setVisible(true);
+        div.getDgNinteiTaskList().getGridSetting().getColumns().get(インデックス_57).setVisible(true);
+        div.getDgNinteiTaskList().getGridSetting().getColumns().get(インデックス_58).setVisible(true);
+        div.getDgNinteiTaskList().getGridSetting().getColumns().get(インデックス_59).setVisible(true);
+        div.getDgNinteiTaskList().getGridSetting().getColumns().get(インデックス_60).setVisible(true);
+        div.getDgNinteiTaskList().getGridSetting().getColumns().get(インデックス_61).setVisible(true);
+        div.getDgNinteiTaskList().getGridSetting().getColumns().get(インデックス_62).setVisible(true);
         List<dgNinteiTaskList_Row> rowList = new ArrayList<>();
         int completeCount = 0;
         for (ShinSaKaiToRoKuBusiness business : 審査会登録List) {
             dgNinteiTaskList_Row row = new dgNinteiTaskList_Row();
             row.setHokensha(business.get保険者() == null ? RString.EMPTY : business.get保険者());
-            if (business.get認定申請年月日() != null && !business.get認定申請年月日().isEmpty()) {
-                row.getNinteiShinseiDay().setValue(new RDate(business.get認定申請年月日().toString()));
-            }
             row.setHihoNumber(business.get被保険者番号() == null ? RString.EMPTY : business.get被保険者番号());
             row.setHihoShimei(business.get被保険者氏名() == null ? RString.EMPTY : business.get被保険者氏名().value());
             row.setShinseiKubunShinseiji(business.get認定申請区分申請時コード() == null
                     ? RString.EMPTY : NinteiShinseiShinseijiKubunCode.toValue(business.get認定申請区分申請時コード().getKey()).get名称());
-            if (business.get認定申請年月日() != null && !business.get認定申請年月日().isEmpty()) {
-                row.getChosahyoKanryoDay().setValue(new RDate(business.get認定申請年月日().toString()));
-            }
             if (business.get主治医意見書登録完了年月日() != null && !business.get主治医意見書登録完了年月日().isEmpty()) {
+                completeCount++;
                 row.getIkenshoNyushuKanryoDay().setValue(new RDate(business.get主治医意見書登録完了年月日().toString()));
-            }
-            if (business.getマスキング完了年月日() != null && !business.getマスキング完了年月日().isEmpty()) {
-                row.getMaskingKanryoDay().setValue(new RDate(business.getマスキング完了年月日().toString()));
-            }
-            if (business.get認定審査会完了年月日() != null && !business.get認定審査会完了年月日().isEmpty()) {
-                row.getShinsakaiKanryoDay().setValue(new RDate(business.get認定審査会完了年月日().toString()));
-            }
-            if (business.get認定審査会割当完了年月日() != null && !business.get認定審査会割当完了年月日().isEmpty()) {
-                row.getShinsakaiwaritukeDay().setValue(new RDate(business.get認定審査会完了年月日().toString()));
-            }
-            if (business.get介護認定審査会開催予定年月日() != null && !business.get介護認定審査会開催予定年月日().isEmpty()) {
-                row.getShinsakaiKaisaiDay().setValue(new RDate(business.get認定審査会完了年月日().toString()));
-            }
-            if (business.get介護認定審査会開始予定時刻() != null && !business.get介護認定審査会開始予定時刻().isEmpty()) {
-                row.getShinsakaiKaisaiJikan().setValue(RTime.of(Integer.valueOf(business.get介護認定審査会開始予定時刻().substring(0, 2).toString()),
-                        Integer.valueOf(business.get介護認定審査会開始予定時刻().substring(2).toString())));
             }
             row.setYusenWaritsukesha(business.get介護認定審査会優先振分区分コード() == null ? RString.EMPTY
                     : ShinsakaiYusenWaritsukeKubunCode.toValue(business.get介護認定審査会優先振分区分コード().getKey()).get名称());
-            row.setKaisaiNumber(business.get介護認定審査会開催番号() == null ? RString.EMPTY: business.get介護認定審査会開催番号());
+            row.setKaisaiNumber(business.get介護認定審査会開催番号() == null ? RString.EMPTY : business.get介護認定審査会開催番号());
             row.setGogitai(new RString(String.valueOf(business.get合議体番号())));
+            審査会登録モードの日付設定(row, business);
             rowList.add(row);
         }
         div.getTxtTotalCount().setValue(new RString(String.valueOf(審査会登録List.size())));
         div.getTxtCompleteCount().setValue(new RString(String.valueOf(completeCount)));
         div.getDgNinteiTaskList().setDataSource(rowList);
     }
+
+    private void 審査会登録モードの日付設定(dgNinteiTaskList_Row row, ShinSaKaiToRoKuBusiness business) {
+        if (business.get認定申請年月日() != null && !business.get認定申請年月日().isEmpty()) {
+            row.getChosahyoKanryoDay().setValue(new RDate(business.get認定申請年月日().toString()));
+        }
+        if (business.getマスキング完了年月日() != null && !business.getマスキング完了年月日().isEmpty()) {
+            row.getMaskingKanryoDay().setValue(new RDate(business.getマスキング完了年月日().toString()));
+        }
+        if (business.get認定審査会完了年月日() != null && !business.get認定審査会完了年月日().isEmpty()) {
+            row.getShinsakaiKanryoDay().setValue(new RDate(business.get認定審査会完了年月日().toString()));
+        }
+        if (business.get認定審査会割当完了年月日() != null && !business.get認定審査会割当完了年月日().isEmpty()) {
+            row.getShinsakaiwaritukeDay().setValue(new RDate(business.get認定審査会完了年月日().toString()));
+        }
+        if (business.get介護認定審査会開催予定年月日() != null && !business.get介護認定審査会開催予定年月日().isEmpty()) {
+            row.getShinsakaiKaisaiDay().setValue(new RDate(business.get認定審査会完了年月日().toString()));
+        }
+        if (business.get介護認定審査会開始予定時刻() != null && !business.get介護認定審査会開始予定時刻().isEmpty()) {
+            row.getShinsakaiKaisaiJikan().setValue(RTime.of(Integer.valueOf(business.get介護認定審査会開始予定時刻().substring(0, 2).toString()),
+                    Integer.valueOf(business.get介護認定審査会開始予定時刻().substring(2).toString())));
+        }
+    }
     private void 二次判定モード(List<NiJiHanTeiBusiness> 二次判定List) {
-        div.getDgNinteiTaskList().getGridSetting().getColumns().get(0).setVisible(true);
-        div.getDgNinteiTaskList().getGridSetting().getColumns().get(1).setVisible(true);
-        div.getDgNinteiTaskList().getGridSetting().getColumns().get(2).setVisible(true);
-        div.getDgNinteiTaskList().getGridSetting().getColumns().get(3).setVisible(true);
-        div.getDgNinteiTaskList().getGridSetting().getColumns().get(4).setVisible(true);
-        div.getDgNinteiTaskList().getGridSetting().getColumns().get(5).setVisible(true);
-        div.getDgNinteiTaskList().getGridSetting().getColumns().get(63).setVisible(true);
-        div.getDgNinteiTaskList().getGridSetting().getColumns().get(64).setVisible(true);
-        div.getDgNinteiTaskList().getGridSetting().getColumns().get(65).setVisible(true);
-        div.getDgNinteiTaskList().getGridSetting().getColumns().get(66).setVisible(true);
-        div.getDgNinteiTaskList().getGridSetting().getColumns().get(67).setVisible(true);
-        div.getDgNinteiTaskList().getGridSetting().getColumns().get(68).setVisible(true);
-        div.getDgNinteiTaskList().getGridSetting().getColumns().get(69).setVisible(true);
+        div.getDgNinteiTaskList().getGridSetting().getColumns().get(インデックス_0).setVisible(true);
+        div.getDgNinteiTaskList().getGridSetting().getColumns().get(インデックス_1).setVisible(true);
+        div.getDgNinteiTaskList().getGridSetting().getColumns().get(インデックス_2).setVisible(true);
+        div.getDgNinteiTaskList().getGridSetting().getColumns().get(インデックス_3).setVisible(true);
+        div.getDgNinteiTaskList().getGridSetting().getColumns().get(インデックス_4).setVisible(true);
+        div.getDgNinteiTaskList().getGridSetting().getColumns().get(インデックス_5).setVisible(true);
+        div.getDgNinteiTaskList().getGridSetting().getColumns().get(インデックス_63).setVisible(true);
+        div.getDgNinteiTaskList().getGridSetting().getColumns().get(インデックス_64).setVisible(true);
+        div.getDgNinteiTaskList().getGridSetting().getColumns().get(インデックス_65).setVisible(true);
+        div.getDgNinteiTaskList().getGridSetting().getColumns().get(インデックス_66).setVisible(true);
+        div.getDgNinteiTaskList().getGridSetting().getColumns().get(インデックス_67).setVisible(true);
+        div.getDgNinteiTaskList().getGridSetting().getColumns().get(インデックス_68).setVisible(true);
+        div.getDgNinteiTaskList().getGridSetting().getColumns().get(インデックス_69).setVisible(true);
         List<dgNinteiTaskList_Row> rowList = new ArrayList<>();
         int completeCount = 0;
         for (NiJiHanTeiBusiness business : 二次判定List) {
@@ -703,14 +798,14 @@ public class YokaigoNinteiTaskListHandler {
     }
     private void 月例処理モード(List<GeTuReiSyoRiBusiness> 月例処理List) {
 
-        div.getDgNinteiTaskList().getGridSetting().getColumns().get(0).setVisible(true);
-        div.getDgNinteiTaskList().getGridSetting().getColumns().get(1).setVisible(true);
-        div.getDgNinteiTaskList().getGridSetting().getColumns().get(2).setVisible(true);
-        div.getDgNinteiTaskList().getGridSetting().getColumns().get(3).setVisible(true);
-        div.getDgNinteiTaskList().getGridSetting().getColumns().get(4).setVisible(true);
-        div.getDgNinteiTaskList().getGridSetting().getColumns().get(5).setVisible(true);
-        div.getDgNinteiTaskList().getGridSetting().getColumns().get(70).setVisible(true);
-        div.getDgNinteiTaskList().getGridSetting().getColumns().get(71).setVisible(true);
+        div.getDgNinteiTaskList().getGridSetting().getColumns().get(インデックス_0).setVisible(true);
+        div.getDgNinteiTaskList().getGridSetting().getColumns().get(インデックス_1).setVisible(true);
+        div.getDgNinteiTaskList().getGridSetting().getColumns().get(インデックス_2).setVisible(true);
+        div.getDgNinteiTaskList().getGridSetting().getColumns().get(インデックス_3).setVisible(true);
+        div.getDgNinteiTaskList().getGridSetting().getColumns().get(インデックス_4).setVisible(true);
+        div.getDgNinteiTaskList().getGridSetting().getColumns().get(インデックス_5).setVisible(true);
+        div.getDgNinteiTaskList().getGridSetting().getColumns().get(インデックス_70).setVisible(true);
+        div.getDgNinteiTaskList().getGridSetting().getColumns().get(インデックス_71).setVisible(true);
         List<dgNinteiTaskList_Row> rowList = new ArrayList<>();
         int completeCount = 0;
         for (GeTuReiSyoRiBusiness business : 月例処理List) {
@@ -735,79 +830,79 @@ public class YokaigoNinteiTaskListHandler {
     }
     private void 共通状態() {
 
-        div.getDgNinteiTaskList().getGridSetting().getColumns().get(0).setVisible(false);
-        div.getDgNinteiTaskList().getGridSetting().getColumns().get(1).setVisible(false);
-        div.getDgNinteiTaskList().getGridSetting().getColumns().get(2).setVisible(false);
-        div.getDgNinteiTaskList().getGridSetting().getColumns().get(3).setVisible(false);
-        div.getDgNinteiTaskList().getGridSetting().getColumns().get(4).setVisible(false);
-        div.getDgNinteiTaskList().getGridSetting().getColumns().get(5).setVisible(false);
-        div.getDgNinteiTaskList().getGridSetting().getColumns().get(6).setVisible(false);
-        div.getDgNinteiTaskList().getGridSetting().getColumns().get(7).setVisible(false);
-        div.getDgNinteiTaskList().getGridSetting().getColumns().get(8).setVisible(false);
-        div.getDgNinteiTaskList().getGridSetting().getColumns().get(9).setVisible(false);
-        div.getDgNinteiTaskList().getGridSetting().getColumns().get(10).setVisible(false);
-        div.getDgNinteiTaskList().getGridSetting().getColumns().get(11).setVisible(false);
-        div.getDgNinteiTaskList().getGridSetting().getColumns().get(12).setVisible(false);
-        div.getDgNinteiTaskList().getGridSetting().getColumns().get(13).setVisible(false);
-        div.getDgNinteiTaskList().getGridSetting().getColumns().get(14).setVisible(false);
-        div.getDgNinteiTaskList().getGridSetting().getColumns().get(15).setVisible(false);
-        div.getDgNinteiTaskList().getGridSetting().getColumns().get(16).setVisible(false);
-        div.getDgNinteiTaskList().getGridSetting().getColumns().get(17).setVisible(false);
-        div.getDgNinteiTaskList().getGridSetting().getColumns().get(18).setVisible(false);
-        div.getDgNinteiTaskList().getGridSetting().getColumns().get(19).setVisible(false);
-        div.getDgNinteiTaskList().getGridSetting().getColumns().get(20).setVisible(false);
-        div.getDgNinteiTaskList().getGridSetting().getColumns().get(21).setVisible(false);
-        div.getDgNinteiTaskList().getGridSetting().getColumns().get(22).setVisible(false);
-        div.getDgNinteiTaskList().getGridSetting().getColumns().get(23).setVisible(false);
-        div.getDgNinteiTaskList().getGridSetting().getColumns().get(24).setVisible(false);
-        div.getDgNinteiTaskList().getGridSetting().getColumns().get(25).setVisible(false);
-        div.getDgNinteiTaskList().getGridSetting().getColumns().get(26).setVisible(false);
-        div.getDgNinteiTaskList().getGridSetting().getColumns().get(27).setVisible(false);
-        div.getDgNinteiTaskList().getGridSetting().getColumns().get(28).setVisible(false);
-        div.getDgNinteiTaskList().getGridSetting().getColumns().get(29).setVisible(false);
-        div.getDgNinteiTaskList().getGridSetting().getColumns().get(30).setVisible(false);
-        div.getDgNinteiTaskList().getGridSetting().getColumns().get(31).setVisible(false);
-        div.getDgNinteiTaskList().getGridSetting().getColumns().get(32).setVisible(false);
-        div.getDgNinteiTaskList().getGridSetting().getColumns().get(33).setVisible(false);
-        div.getDgNinteiTaskList().getGridSetting().getColumns().get(34).setVisible(false);
-        div.getDgNinteiTaskList().getGridSetting().getColumns().get(35).setVisible(false);
-        div.getDgNinteiTaskList().getGridSetting().getColumns().get(36).setVisible(false);
-        div.getDgNinteiTaskList().getGridSetting().getColumns().get(37).setVisible(false);
-        div.getDgNinteiTaskList().getGridSetting().getColumns().get(38).setVisible(false);
-        div.getDgNinteiTaskList().getGridSetting().getColumns().get(39).setVisible(false);
-        div.getDgNinteiTaskList().getGridSetting().getColumns().get(40).setVisible(false);
-        div.getDgNinteiTaskList().getGridSetting().getColumns().get(41).setVisible(false);
-        div.getDgNinteiTaskList().getGridSetting().getColumns().get(42).setVisible(false);
-        div.getDgNinteiTaskList().getGridSetting().getColumns().get(43).setVisible(false);
-        div.getDgNinteiTaskList().getGridSetting().getColumns().get(44).setVisible(false);
-        div.getDgNinteiTaskList().getGridSetting().getColumns().get(45).setVisible(false);
-        div.getDgNinteiTaskList().getGridSetting().getColumns().get(46).setVisible(false);
-        div.getDgNinteiTaskList().getGridSetting().getColumns().get(47).setVisible(false);
-        div.getDgNinteiTaskList().getGridSetting().getColumns().get(48).setVisible(false);
-        div.getDgNinteiTaskList().getGridSetting().getColumns().get(49).setVisible(false);
-        div.getDgNinteiTaskList().getGridSetting().getColumns().get(50).setVisible(false);
-        div.getDgNinteiTaskList().getGridSetting().getColumns().get(51).setVisible(false);
-        div.getDgNinteiTaskList().getGridSetting().getColumns().get(52).setVisible(false);
-        div.getDgNinteiTaskList().getGridSetting().getColumns().get(53).setVisible(false);
-        div.getDgNinteiTaskList().getGridSetting().getColumns().get(54).setVisible(false);
-        div.getDgNinteiTaskList().getGridSetting().getColumns().get(55).setVisible(false);
-        div.getDgNinteiTaskList().getGridSetting().getColumns().get(56).setVisible(false);
-        div.getDgNinteiTaskList().getGridSetting().getColumns().get(57).setVisible(false);
-        div.getDgNinteiTaskList().getGridSetting().getColumns().get(58).setVisible(false);
-        div.getDgNinteiTaskList().getGridSetting().getColumns().get(59).setVisible(false);
-        div.getDgNinteiTaskList().getGridSetting().getColumns().get(60).setVisible(false);
-        div.getDgNinteiTaskList().getGridSetting().getColumns().get(61).setVisible(false);
-        div.getDgNinteiTaskList().getGridSetting().getColumns().get(62).setVisible(false);
-        div.getDgNinteiTaskList().getGridSetting().getColumns().get(63).setVisible(false);
-        div.getDgNinteiTaskList().getGridSetting().getColumns().get(64).setVisible(false);
-        div.getDgNinteiTaskList().getGridSetting().getColumns().get(65).setVisible(false);
-        div.getDgNinteiTaskList().getGridSetting().getColumns().get(66).setVisible(false);
-        div.getDgNinteiTaskList().getGridSetting().getColumns().get(67).setVisible(false);
-        div.getDgNinteiTaskList().getGridSetting().getColumns().get(68).setVisible(false);
-        div.getDgNinteiTaskList().getGridSetting().getColumns().get(69).setVisible(false);
-        div.getDgNinteiTaskList().getGridSetting().getColumns().get(70).setVisible(false);
-        div.getDgNinteiTaskList().getGridSetting().getColumns().get(71).setVisible(false);
-        div.getDgNinteiTaskList().getGridSetting().getColumns().get(72).setVisible(false);
+        div.getDgNinteiTaskList().getGridSetting().getColumns().get(インデックス_0).setVisible(false);
+        div.getDgNinteiTaskList().getGridSetting().getColumns().get(インデックス_1).setVisible(false);
+        div.getDgNinteiTaskList().getGridSetting().getColumns().get(インデックス_2).setVisible(false);
+        div.getDgNinteiTaskList().getGridSetting().getColumns().get(インデックス_3).setVisible(false);
+        div.getDgNinteiTaskList().getGridSetting().getColumns().get(インデックス_4).setVisible(false);
+        div.getDgNinteiTaskList().getGridSetting().getColumns().get(インデックス_5).setVisible(false);
+        div.getDgNinteiTaskList().getGridSetting().getColumns().get(インデックス_6).setVisible(false);
+        div.getDgNinteiTaskList().getGridSetting().getColumns().get(インデックス_7).setVisible(false);
+        div.getDgNinteiTaskList().getGridSetting().getColumns().get(インデックス_8).setVisible(false);
+        div.getDgNinteiTaskList().getGridSetting().getColumns().get(インデックス_9).setVisible(false);
+        div.getDgNinteiTaskList().getGridSetting().getColumns().get(インデックス_10).setVisible(false);
+        div.getDgNinteiTaskList().getGridSetting().getColumns().get(インデックス_11).setVisible(false);
+        div.getDgNinteiTaskList().getGridSetting().getColumns().get(インデックス_12).setVisible(false);
+        div.getDgNinteiTaskList().getGridSetting().getColumns().get(インデックス_13).setVisible(false);
+        div.getDgNinteiTaskList().getGridSetting().getColumns().get(インデックス_14).setVisible(false);
+        div.getDgNinteiTaskList().getGridSetting().getColumns().get(インデックス_15).setVisible(false);
+        div.getDgNinteiTaskList().getGridSetting().getColumns().get(インデックス_16).setVisible(false);
+        div.getDgNinteiTaskList().getGridSetting().getColumns().get(インデックス_17).setVisible(false);
+        div.getDgNinteiTaskList().getGridSetting().getColumns().get(インデックス_18).setVisible(false);
+        div.getDgNinteiTaskList().getGridSetting().getColumns().get(インデックス_19).setVisible(false);
+        div.getDgNinteiTaskList().getGridSetting().getColumns().get(インデックス_20).setVisible(false);
+        div.getDgNinteiTaskList().getGridSetting().getColumns().get(インデックス_21).setVisible(false);
+        div.getDgNinteiTaskList().getGridSetting().getColumns().get(インデックス_22).setVisible(false);
+        div.getDgNinteiTaskList().getGridSetting().getColumns().get(インデックス_23).setVisible(false);
+        div.getDgNinteiTaskList().getGridSetting().getColumns().get(インデックス_24).setVisible(false);
+        div.getDgNinteiTaskList().getGridSetting().getColumns().get(インデックス_25).setVisible(false);
+        div.getDgNinteiTaskList().getGridSetting().getColumns().get(インデックス_26).setVisible(false);
+        div.getDgNinteiTaskList().getGridSetting().getColumns().get(インデックス_27).setVisible(false);
+        div.getDgNinteiTaskList().getGridSetting().getColumns().get(インデックス_28).setVisible(false);
+        div.getDgNinteiTaskList().getGridSetting().getColumns().get(インデックス_29).setVisible(false);
+        div.getDgNinteiTaskList().getGridSetting().getColumns().get(インデックス_30).setVisible(false);
+        div.getDgNinteiTaskList().getGridSetting().getColumns().get(インデックス_31).setVisible(false);
+        div.getDgNinteiTaskList().getGridSetting().getColumns().get(インデックス_32).setVisible(false);
+        div.getDgNinteiTaskList().getGridSetting().getColumns().get(インデックス_33).setVisible(false);
+        div.getDgNinteiTaskList().getGridSetting().getColumns().get(インデックス_34).setVisible(false);
+        div.getDgNinteiTaskList().getGridSetting().getColumns().get(インデックス_35).setVisible(false);
+        div.getDgNinteiTaskList().getGridSetting().getColumns().get(インデックス_36).setVisible(false);
+        div.getDgNinteiTaskList().getGridSetting().getColumns().get(インデックス_37).setVisible(false);
+        div.getDgNinteiTaskList().getGridSetting().getColumns().get(インデックス_38).setVisible(false);
+        div.getDgNinteiTaskList().getGridSetting().getColumns().get(インデックス_39).setVisible(false);
+        div.getDgNinteiTaskList().getGridSetting().getColumns().get(インデックス_40).setVisible(false);
+        div.getDgNinteiTaskList().getGridSetting().getColumns().get(インデックス_41).setVisible(false);
+        div.getDgNinteiTaskList().getGridSetting().getColumns().get(インデックス_42).setVisible(false);
+        div.getDgNinteiTaskList().getGridSetting().getColumns().get(インデックス_43).setVisible(false);
+        div.getDgNinteiTaskList().getGridSetting().getColumns().get(インデックス_44).setVisible(false);
+        div.getDgNinteiTaskList().getGridSetting().getColumns().get(インデックス_45).setVisible(false);
+        div.getDgNinteiTaskList().getGridSetting().getColumns().get(インデックス_46).setVisible(false);
+        div.getDgNinteiTaskList().getGridSetting().getColumns().get(インデックス_47).setVisible(false);
+        div.getDgNinteiTaskList().getGridSetting().getColumns().get(インデックス_48).setVisible(false);
+        div.getDgNinteiTaskList().getGridSetting().getColumns().get(インデックス_49).setVisible(false);
+        div.getDgNinteiTaskList().getGridSetting().getColumns().get(インデックス_50).setVisible(false);
+        div.getDgNinteiTaskList().getGridSetting().getColumns().get(インデックス_51).setVisible(false);
+        div.getDgNinteiTaskList().getGridSetting().getColumns().get(インデックス_52).setVisible(false);
+        div.getDgNinteiTaskList().getGridSetting().getColumns().get(インデックス_53).setVisible(false);
+        div.getDgNinteiTaskList().getGridSetting().getColumns().get(インデックス_54).setVisible(false);
+        div.getDgNinteiTaskList().getGridSetting().getColumns().get(インデックス_55).setVisible(false);
+        div.getDgNinteiTaskList().getGridSetting().getColumns().get(インデックス_56).setVisible(false);
+        div.getDgNinteiTaskList().getGridSetting().getColumns().get(インデックス_57).setVisible(false);
+        div.getDgNinteiTaskList().getGridSetting().getColumns().get(インデックス_58).setVisible(false);
+        div.getDgNinteiTaskList().getGridSetting().getColumns().get(インデックス_59).setVisible(false);
+        div.getDgNinteiTaskList().getGridSetting().getColumns().get(インデックス_60).setVisible(false);
+        div.getDgNinteiTaskList().getGridSetting().getColumns().get(インデックス_61).setVisible(false);
+        div.getDgNinteiTaskList().getGridSetting().getColumns().get(インデックス_62).setVisible(false);
+        div.getDgNinteiTaskList().getGridSetting().getColumns().get(インデックス_63).setVisible(false);
+        div.getDgNinteiTaskList().getGridSetting().getColumns().get(インデックス_64).setVisible(false);
+        div.getDgNinteiTaskList().getGridSetting().getColumns().get(インデックス_65).setVisible(false);
+        div.getDgNinteiTaskList().getGridSetting().getColumns().get(インデックス_66).setVisible(false);
+        div.getDgNinteiTaskList().getGridSetting().getColumns().get(インデックス_67).setVisible(false);
+        div.getDgNinteiTaskList().getGridSetting().getColumns().get(インデックス_68).setVisible(false);
+        div.getDgNinteiTaskList().getGridSetting().getColumns().get(インデックス_69).setVisible(false);
+        div.getDgNinteiTaskList().getGridSetting().getColumns().get(インデックス_70).setVisible(false);
+        div.getDgNinteiTaskList().getGridSetting().getColumns().get(インデックス_71).setVisible(false);
+        div.getDgNinteiTaskList().getGridSetting().getColumns().get(インデックス_72).setVisible(false);
     }
 
     private RString 一次判定結果の名称を取得する(Code 厚労省IF識別コード, Code 一次判定結果コード) {
