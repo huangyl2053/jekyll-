@@ -13,8 +13,11 @@ import jp.co.ndensan.reams.ua.uax.definition.core.enumeratedtype.shikibetsutaish
 import jp.co.ndensan.reams.ua.uax.definition.mybatisprm.atesaki.IAtesakiGyomuHanteiKey;
 import jp.co.ndensan.reams.ua.uax.divcontroller.entity.commonchilddiv.AtenaShokaiSimple.AtenaShokaiSimpleDiv;
 import jp.co.ndensan.reams.ua.uax.divcontroller.entity.commonchilddiv.AtenaShokaiSimple.IAtenaShokaiSimpleDiv;
+import jp.co.ndensan.reams.uz.uza.biz.AtenaJusho;
 import jp.co.ndensan.reams.uz.uza.biz.GyomuCode;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
+import jp.co.ndensan.reams.uz.uza.biz.YubinNo;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 
 /**
@@ -65,12 +68,42 @@ public class KaigoAtenaInfoDiv extends Panel implements IKaigoAtenaInfoDiv {
     }
 
     /**
-     * 介護宛名基本情報を取得
+     * 氏名漢字を取得
      *
-     * @return 介護宛名基本情報
+     * @return 氏名漢字
      */
     @Override
-    public KaigoAtenaInfoDiv getKaigoAtenaInfoDiv() {
-        return this;
+    public RString get氏名漢字() {
+        return atenaInfo.getCcdMeishoHyoji().get漢字名称();
+    }
+
+    /**
+     * 氏名カナを取得
+     *
+     * @return 氏名カナ
+     */
+    @Override
+    public RString get氏名カナ() {
+        return atenaInfo.getCcdMeishoHyoji().getカナ名称();
+    }
+
+    /**
+     * 郵便番号を取得
+     *
+     * @return 郵便番号
+     */
+    @Override
+    public YubinNo get郵便番号() {
+        return atenaInfo.getShokaiData().getTxtYubinNo().getValue();
+    }
+
+    /**
+     * 住所を取得
+     *
+     * @return 住所
+     */
+    @Override
+    public AtenaJusho get住所() {
+        return atenaInfo.getShokaiData().getTxtJusho().getDomain();
     }
 }

@@ -35,7 +35,6 @@ import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.SystemException;
-import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Button;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 
@@ -128,7 +127,7 @@ public class FukaRirekiPanel {
             setDgFukaRireki(rirekiDiv, descList, selectRow.get賦課年度());
         } else {
             Fuka model = descList.findFirst().get();
-            FukaShokaiKey key = ViewStateKeyCreator.createFukaShokaiKey(model, kihonDiv.getCcdKaigoAtenaInfo().getName());
+            FukaShokaiKey key = ViewStateKeyCreator.createFukaShokaiKey(model, kihonDiv.getCcdKaigoAtenaInfo().get氏名漢字());
             ViewStateHolder.put(DbbViewStateKey.FukaShokaiKey, key);
         }
 
@@ -203,9 +202,8 @@ public class FukaRirekiPanel {
                 choteiNendo,
                 rirekiDiv.getTxtFukaNendoFukaRireki().getDomain(),
                 new TsuchishoNo(selectRow.getTxtTsuchishoNo()),
-                Integer.valueOf(selectRow.getRirekiNo().toString()))
-                ;
-        FukaShokaiKey key = ViewStateKeyCreator.createFukaShokaiKey(fuka, kihonDiv.getCcdKaigoAtenaInfo().getName());
+                Integer.valueOf(selectRow.getRirekiNo().toString()));
+        FukaShokaiKey key = ViewStateKeyCreator.createFukaShokaiKey(fuka, kihonDiv.getCcdKaigoAtenaInfo().get氏名漢字());
         ViewStateHolder.put(DbbViewStateKey.FukaShokaiKey, key);
 
         return createResponseData(rirekiDiv);
@@ -235,7 +233,7 @@ public class FukaRirekiPanel {
                 new TsuchishoNo(selectRow.getTxtTsuchishoNo()),
                 履歴番号);
 
-        FukaShokaiKey atoRireki = ViewStateKeyCreator.createFukaShokaiKey(atoFuka, kihonDiv.getCcdKaigoAtenaInfo().getName());
+        FukaShokaiKey atoRireki = ViewStateKeyCreator.createFukaShokaiKey(atoFuka, kihonDiv.getCcdKaigoAtenaInfo().get氏名漢字());
         ViewStateHolder.put(DbbViewStateKey.FukaShokaiKey, atoRireki);
 
         if (履歴番号 == 0) {
@@ -246,7 +244,7 @@ public class FukaRirekiPanel {
                     rirekiDiv.getTxtFukaNendoFukaRireki().getDomain(),
                     new TsuchishoNo(selectRow.getTxtTsuchishoNo()),
                     履歴番号 - 1);
-            FukaShokaiKey maeRireki = ViewStateKeyCreator.createFukaShokaiKey(maeFuka, kihonDiv.getCcdKaigoAtenaInfo().getName());
+            FukaShokaiKey maeRireki = ViewStateKeyCreator.createFukaShokaiKey(maeFuka, kihonDiv.getCcdKaigoAtenaInfo().get氏名漢字());
             ViewStateHolder.put(DbbViewStateKey.FukaHikakuInput, FukaHikakuInput.createFor前履歴との比較(atoRireki, maeRireki));
         }
 

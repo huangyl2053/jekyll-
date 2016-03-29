@@ -66,7 +66,7 @@ public class BenmeiTorokuPanel {
         弁明書作成日 = ViewStateHolder.get(BenmeiTorokuViewStateKeys.弁明書作成日, FlexibleDate.class);
         RString 初期_状態 = ViewStateHolder.get(BenmeiTorokuViewStateKeys.モード, RString.class);
         //TODO 共通Div（AtenaCommonChildDiv）を呼び出しの場合、異常を発生する。
-        panelDiv.getAtenaPanel().getAtenaCommonChildDiv().load(識別コード);
+        panelDiv.getAtenaPanel().getAtenaCommonChildDiv().onLoad(識別コード);
         panelDiv.getShikakuKihonCommonChildDiv().initialize(被保険者番号);
         CommonButtonHolder.setVisibleByCommonButtonFieldName(BUTTON_COMMONBUTTONCOMPLETE, false);
         get保存情報の取得(識別コード, 被保険者番号, 審査請求届出日, 弁明書作成日);
