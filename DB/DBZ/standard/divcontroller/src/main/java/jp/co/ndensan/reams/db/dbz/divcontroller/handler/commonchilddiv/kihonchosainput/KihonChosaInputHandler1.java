@@ -1442,6 +1442,7 @@ public class KihonChosaInputHandler1 {
             div.getMahi().setMahiShinseishoKanriNo(DataPassingConverter.serialize(new ArrayList<>(麻痺等の有無特記事項番号)));
             div.getMahi().setIsMahiSelected(new RString("0"));
         }
+        div.getChkMahi().setMaxCheckedItem(整数6);
         div.getChkMahi().setSelectedItemsByKey(麻痺等の有無Keys);
         if (this.認定調査前回結果表示.equals(認定調査前回結果表示)) {
             麻痺等の有無アンダーライン(前回麻痺等の有無Keys);

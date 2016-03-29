@@ -955,7 +955,8 @@ public class KihonChosaInputHandler {
         }
     }
 
-    private void 自分勝手に行動する画面表示(List<RString> 自分勝手に行動するKeys, List<RString> 前回自分勝手に行動するKeys, RString 認定調査前回結果表示) {
+    private void 自分勝手に行動する画面表示(List<RString> 自分勝手に行動するKeys,
+            List<RString> 前回自分勝手に行動するKeys, RString 認定調査前回結果表示) {
         if (自分勝手に行動するKeys.isEmpty()) {
             div.getBtnKateKodo().setDisabled(true);
         } else {
@@ -1509,7 +1510,7 @@ public class KihonChosaInputHandler {
             } else if (KEY5.equals(key)) {
                 連番List.add(整数68);
             } else if (KEY6.equals(key)) {
-                連番List.add(整数68);
+                連番List.add(整数69);
             } else if (KEY7.equals(key)) {
                 連番List.add(整数70);
             } else if (KEY8.equals(key)) {
@@ -1703,27 +1704,35 @@ public class KihonChosaInputHandler {
     }
 
     private void checkListBoxConfirm(ArrayList<KihonChosaInput> 認定調査基本情報リスト, List<Integer> 連番List) {
+        ArrayList<KihonChosaInput> remove認定調査基本情報リスト = new ArrayList<>();
+        ArrayList<KihonChosaInput> add認定調査基本情報リスト = new ArrayList<>();
         for (KihonChosaInput 認定調査基本情報 : 認定調査基本情報リスト) {
             int 認定調査基本情報_連番 = 認定調査基本情報.get調査連番();
-            if (((認定調査基本情報_連番 <= 整数9 && 認定調査基本情報_連番 > 1) || (認定調査基本情報_連番 >= 整数63 && 認定調査基本情報_連番 <= 整数74))) {
+            if (((認定調査基本情報_連番 <= 整数9 && 認定調査基本情報_連番 >= 1) || (認定調査基本情報_連番 >= 整数63 && 認定調査基本情報_連番 <= 整数74))) {
                 if (!is認定調査基本情報_連番が連番Listに存在(連番List, 認定調査基本情報_連番)
                         && 調査項目ある.equals(認定調査基本情報.get調査項目())) {
-                    KihonChosaInput new認定調査基本情報 = new KihonChosaInput(認定調査基本情報.get認知症高齢者自立度(), 認定調査基本情報.get障害高齢者自立度(),
-                            認定調査基本情報.get調査連番(), 調査項目ない, 認定調査基本情報.get前回認知症高齢者自立度(),
-                            認定調査基本情報.get前回障害高齢者自立度(), 認定調査基本情報.get前回調査連番(), 認定調査基本情報.get前回調査項目(),
-                            認定調査基本情報.get認定調査特記事項番号(), 認定調査基本情報.get認定調査特記事項連番(), 認定調査基本情報.get原本マスク区分(),
-                            認定調査基本情報.get特記事項());
-                    認定調査基本情報 = new認定調査基本情報;
+                    KihonChosaInput new認定調査基本情報 = new KihonChosaInput(認定調査基本情報.get認知症高齢者自立度(),
+                            認定調査基本情報.get障害高齢者自立度(), 認定調査基本情報.get調査連番(), 調査項目ない,
+                            認定調査基本情報.get前回認知症高齢者自立度(), 認定調査基本情報.get前回障害高齢者自立度(), 認定調査基本情報.get前回調査連番(),
+                            認定調査基本情報.get前回調査項目(), 認定調査基本情報.get認定調査特記事項番号(), 認定調査基本情報.get認定調査特記事項連番(),
+                            認定調査基本情報.get原本マスク区分(), 認定調査基本情報.get特記事項());
+                    remove認定調査基本情報リスト.add(認定調査基本情報);
+                    add認定調査基本情報リスト.add(new認定調査基本情報);
                 } else if (is認定調査基本情報_連番が連番Listに存在(連番List, 認定調査基本情報_連番)
-                        && 調査項目ない.equals(認定調査基本情報.get調査項目())) {
-                    KihonChosaInput new認定調査基本情報 = new KihonChosaInput(認定調査基本情報.get認知症高齢者自立度(), 認定調査基本情報.get障害高齢者自立度(),
-                            認定調査基本情報.get調査連番(), 調査項目ある, 認定調査基本情報.get前回認知症高齢者自立度(),
-                            認定調査基本情報.get前回障害高齢者自立度(), 認定調査基本情報.get前回調査連番(), 認定調査基本情報.get前回調査項目(),
-                            認定調査基本情報.get認定調査特記事項番号(), 認定調査基本情報.get認定調査特記事項連番(), 認定調査基本情報.get原本マスク区分(),
-                            認定調査基本情報.get特記事項());
-                    認定調査基本情報 = new認定調査基本情報;
+                        && !調査項目ある.equals(認定調査基本情報.get調査項目())) {
+                    KihonChosaInput new認定調査基本情報 = new KihonChosaInput(認定調査基本情報.get認知症高齢者自立度(),
+                            認定調査基本情報.get障害高齢者自立度(), 認定調査基本情報.get調査連番(), 調査項目ある,
+                            認定調査基本情報.get前回認知症高齢者自立度(), 認定調査基本情報.get前回障害高齢者自立度(), 認定調査基本情報.get前回調査連番(),
+                            認定調査基本情報.get前回調査項目(), 認定調査基本情報.get認定調査特記事項番号(), 認定調査基本情報.get認定調査特記事項連番(),
+                            認定調査基本情報.get原本マスク区分(), 認定調査基本情報.get特記事項());
+                    remove認定調査基本情報リスト.add(認定調査基本情報);
+                    add認定調査基本情報リスト.add(new認定調査基本情報);
                 }
             }
+        }
+        if (!remove認定調査基本情報リスト.isEmpty()) {
+            認定調査基本情報リスト.removeAll(remove認定調査基本情報リスト);
+            認定調査基本情報リスト.addAll(add認定調査基本情報リスト);
         }
     }
 
@@ -1737,6 +1746,8 @@ public class KihonChosaInputHandler {
     }
 
     private void 単項Confirm(ArrayList<KihonChosaInput> 認定調査基本情報リスト, int 連番, RString 単項Key) {
+        ArrayList<KihonChosaInput> remove認定調査基本情報リスト = new ArrayList<>();
+        ArrayList<KihonChosaInput> add認定調査基本情報リスト = new ArrayList<>();
         if (単項Key.isNullOrEmpty()) {
             return;
         }
@@ -1744,15 +1755,20 @@ public class KihonChosaInputHandler {
         for (KihonChosaInput 認定調査基本情報 : 認定調査基本情報リスト) {
             if (連番 == 認定調査基本情報.get調査連番()) {
                 if (!get調査項目By単項Key(単項Key).equals(認定調査基本情報.get調査項目())) {
-                    KihonChosaInput new認定調査基本情報 = new KihonChosaInput(認定調査基本情報.get認知症高齢者自立度(), 認定調査基本情報.get障害高齢者自立度(),
-                            認定調査基本情報.get調査連番(), get調査項目By単項Key(単項Key), 認定調査基本情報.get前回認知症高齢者自立度(),
-                            認定調査基本情報.get前回障害高齢者自立度(), 認定調査基本情報.get前回調査連番(), 認定調査基本情報.get前回調査項目(),
-                            認定調査基本情報.get認定調査特記事項番号(), 認定調査基本情報.get認定調査特記事項連番(), 認定調査基本情報.get原本マスク区分(),
-                            認定調査基本情報.get特記事項());
-                    認定調査基本情報 = new認定調査基本情報;
+                    KihonChosaInput new認定調査基本情報 = new KihonChosaInput(認定調査基本情報.get認知症高齢者自立度(),
+                            認定調査基本情報.get障害高齢者自立度(), 認定調査基本情報.get調査連番(), get調査項目By単項Key(単項Key),
+                            認定調査基本情報.get前回認知症高齢者自立度(), 認定調査基本情報.get前回障害高齢者自立度(), 認定調査基本情報.get前回調査連番(),
+                            認定調査基本情報.get前回調査項目(), 認定調査基本情報.get認定調査特記事項番号(), 認定調査基本情報.get認定調査特記事項連番(),
+                            認定調査基本情報.get原本マスク区分(), 認定調査基本情報.get特記事項());
+                    remove認定調査基本情報リスト.add(認定調査基本情報);
+                    add認定調査基本情報リスト.add(new認定調査基本情報);
                 }
                 is連番対応認定調査基本情報なし = false;
             }
+        }
+        if (!remove認定調査基本情報リスト.isEmpty()) {
+            認定調査基本情報リスト.removeAll(remove認定調査基本情報リスト);
+            認定調査基本情報リスト.addAll(add認定調査基本情報リスト);
         }
         if (is連番対応認定調査基本情報なし) {
             認定調査基本情報リスト.add(new KihonChosaInput(Code.EMPTY, Code.EMPTY, 連番, get調査項目By単項Key(単項Key), Code.EMPTY, Code.EMPTY,
