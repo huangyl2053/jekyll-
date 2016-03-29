@@ -19,7 +19,7 @@ import jp.co.ndensan.reams.db.dbe.entity.db.shinsakaikaisaikekka.ShinsakaiKaisai
 import jp.co.ndensan.reams.db.dbe.entity.db.shinsakaikaisaikekka.ShinsakaiWariateIinJohoEntity;
 import jp.co.ndensan.reams.db.dbe.persistence.core.basic.MapperProvider;
 import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT5592ShinsakaiKaisaiBashoJohoDac;
-import jp.co.ndensan.reams.db.dbe.persistence.db.mapper.shinsakaikaisaikekka.IShinsakaiKaisaiKekkaMapper;
+import jp.co.ndensan.reams.db.dbe.persistence.db.mapper.relate.shinsakaikaisaikekka.IShinsakaiKaisaiKekkaMapper;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.binding.KeyValueDataSource;
