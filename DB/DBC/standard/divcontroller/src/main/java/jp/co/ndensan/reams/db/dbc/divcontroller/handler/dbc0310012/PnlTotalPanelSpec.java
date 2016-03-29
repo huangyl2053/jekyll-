@@ -152,32 +152,36 @@ public enum PnlTotalPanelSpec implements IPredicate<PnlTotalPanelDiv> {
         }
 
         public static boolean is不承認理由(PnlTotalPanelDiv div) {
-            if (ShoninKubun.承認しない.getコード().equals(div.getPnlCommon().getPnlDetail()
-                    .getRdoKettekubun().getSelectedKey())) {
+            if (div.getPnlCommon().getPnlDetail().getTxtKeyakukettebi().getValue() != null
+                    && ShoninKubun.承認しない.getコード().equals(div.getPnlCommon().getPnlDetail()
+                            .getRdoKettekubun().getSelectedKey())) {
                 return !div.getPnlCommon().getPnlDetail().getTxtFusyoninriyu().getValue().isEmpty();
             }
             return true;
         }
 
         public static boolean is年度(PnlTotalPanelDiv div) {
-            if (ShoninKubun.承認する.getコード().equals(div.getPnlCommon().getPnlDetail()
-                    .getRdoKettekubun().getSelectedKey())) {
+            if (div.getPnlCommon().getPnlDetail().getTxtKeyakukettebi().getValue() != null
+                    && ShoninKubun.承認する.getコード().equals(div.getPnlCommon().getPnlDetail()
+                            .getRdoKettekubun().getSelectedKey())) {
                 return !div.getPnlCommon().getPnlDetail().getPnlHidari().getDdlYear().getSelectedKey().isEmpty();
             }
             return true;
         }
 
         public static boolean is番号1(PnlTotalPanelDiv div) {
-            if (ShoninKubun.承認する.getコード().equals(div.getPnlCommon().getPnlDetail()
-                    .getRdoKettekubun().getSelectedKey())) {
+            if (div.getPnlCommon().getPnlDetail().getTxtKeyakukettebi().getValue() != null
+                    && ShoninKubun.承認する.getコード().equals(div.getPnlCommon().getPnlDetail()
+                            .getRdoKettekubun().getSelectedKey())) {
                 return !div.getPnlCommon().getPnlDetail().getPnlHidari().getTxtBango1().getValue().toString().isEmpty();
             }
             return true;
         }
 
         public static boolean is番号2(PnlTotalPanelDiv div) {
-            if (ShoninKubun.承認する.getコード().equals(div.getPnlCommon().getPnlDetail()
-                    .getRdoKettekubun().getSelectedKey())) {
+            if (div.getPnlCommon().getPnlDetail().getTxtKeyakukettebi().getValue() != null
+                    && ShoninKubun.承認する.getコード().equals(div.getPnlCommon().getPnlDetail()
+                            .getRdoKettekubun().getSelectedKey())) {
                 return !div.getPnlCommon().getPnlDetail().getPnlHidari().getTxtBango2().getValue().toString().isEmpty();
             }
             return true;
@@ -197,8 +201,9 @@ public enum PnlTotalPanelSpec implements IPredicate<PnlTotalPanelDiv> {
         }
 
         public static boolean is受領委任契約番号重複(PnlTotalPanelDiv div) {
-            if (ShoninKubun.承認する.getコード().equals(div.getPnlCommon().getPnlDetail()
-                    .getRdoKettekubun().getSelectedKey())) {
+            if (div.getPnlCommon().getPnlDetail().getTxtKeyakukettebi().getValue() != null
+                    && ShoninKubun.承認する.getコード().equals(div.getPnlCommon().getPnlDetail()
+                            .getRdoKettekubun().getSelectedKey())) {
                 RString 状態 = ViewStateHolder.get(ViewStateKeys.処理モード, RString.class);
                 KaigoShikakuKihonDiv kaigoDiv = (KaigoShikakuKihonDiv) div.getPnlCommon().getCcdKaigoShikakuKihon();
                 ShokanJuryoininKeiyakushaFinder finder = InstanceProvider.create(ShokanJuryoininKeiyakushaFinder.class);
@@ -222,6 +227,9 @@ public enum PnlTotalPanelSpec implements IPredicate<PnlTotalPanelDiv> {
         public static boolean is存在(PnlTotalPanelDiv div) {
             RString 状態 = ViewStateHolder.get(ViewStateKeys.処理モード, RString.class);
             ChkTorokuzumiParameter parameter;
+            if (div.getPnlCommon().getPnlDetail().getTxtKeyakushinseibi().getValue() == null) {
+                return true;
+            }
             if (登録.equals(状態)) {
                 parameter = new ChkTorokuzumiParameter(
                         // TODO QA No.431(Redmine#:79680)
