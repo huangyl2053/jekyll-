@@ -43,8 +43,10 @@ public class ShobyoIken {
     public ResponseData<ShobyoIkenDiv> onChange_antei(ShobyoIkenDiv div) {
         if (Anteisei.不安定.getコード().equals(div.getRadShojoAnteisei().getSelectedKey())) {
             div.getTxtFuanteiShosaiJokyo().setDisabled(false);
+            div.getTxtFuanteiShosaiJokyo().setValue(div.getShojoAnteisei().getFuantei());
         } else {
             div.getTxtFuanteiShosaiJokyo().setDisabled(true);
+            div.getTxtFuanteiShosaiJokyo().clearValue();
         }
         return ResponseData.of(div).respond();
     }
