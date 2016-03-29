@@ -74,6 +74,7 @@ public class HonsanteiIdoGennendo {
      * @param 遷移元区分 遷移元区分
      * @return List<ShoriDateKanri>
      */
+    //TODO QAのNo.443(Readmine#79693)
     public List<ShoriDateKanri> getShoriDateKanriList(RString 算定月, FlexibleYear 調定年度,
             RString 遷移元区分) {
         List<DbT7022ShoriDateKanriEntity> entityList = new ArrayList<>();
@@ -118,6 +119,7 @@ public class HonsanteiIdoGennendo {
         kanriEntity = 処理日付管理Dac.selectByFourKeys(SubGyomuCode.DBB介護賦課,
                 ShoriName.異動賦課.get名称(), zf, 調定年度);
         if (kanriEntity == null) {
+            //TODO QAのNo.443(Readmine#79693)
             kanriEntity = 処理日付管理Dac.selectBySomeKeysLimits(SubGyomuCode.DBB介護賦課,
                     ShoriName.本算定賦課.get名称(), zf,
                     調定年度, zf);
@@ -176,10 +178,13 @@ public class HonsanteiIdoGennendo {
         int countLog = 0;
         entityFir = 処理日付管理Dac.selectShorikubun(SubGyomuCode.DBB介護賦課,
                 ShoriName.特徴対象者同定.get名称(), 調定年度);
+        if (entityFir == null || entityFir.isEmpty()) {
+            return null;
+        }
         entitySec = 処理日付管理Dac.selectShorikubun(SubGyomuCode.DBB介護賦課,
                 ShoriName.依頼金額計算.get名称(), 調定年度);
 
-        if (entityFir == null || entityFir.isEmpty() || entitySec == null || entitySec.isEmpty()) {
+        if (entitySec == null || entitySec.isEmpty()) {
             return null;
         }
 
@@ -191,7 +196,6 @@ public class HonsanteiIdoGennendo {
                 return entity;
             } else {
                 entity.set特徴同定区分(new RString("1"));
-                countLog = 0;
                 countLog = this.getCountFlag(entitySec, new RString("0004"));
                 this.setEntity(entity, countLog);
                 return entity;
@@ -199,7 +203,6 @@ public class HonsanteiIdoGennendo {
         }
 
         if (new RString("12").equals(算定月)) {
-            countLog = 0;
             countLog = this.getCountFlag(entityFir, new RString("0004"));
             if (countLog == 0) {
                 entity.set特徴同定区分(new RString("0"));
@@ -207,7 +210,6 @@ public class HonsanteiIdoGennendo {
                 return entity;
             } else {
                 entity.set特徴同定区分(new RString("1"));
-                countLog = 0;
                 countLog = this.getCountFlag(entitySec, new RString("0005"));
                 this.setEntity(entity, countLog);
                 return entity;
@@ -215,7 +217,6 @@ public class HonsanteiIdoGennendo {
         }
 
         if (new RString("2").equals(算定月)) {
-            countLog = 0;
             countLog = this.getCountFlag(entityFir, new RString("0005"));
             if (countLog == 0) {
                 entity.set特徴同定区分(new RString("0"));
@@ -223,7 +224,6 @@ public class HonsanteiIdoGennendo {
                 return entity;
             } else {
                 entity.set特徴同定区分(new RString("1"));
-                countLog = 0;
                 countLog = this.getCountFlag(entitySec, new RString("0006"));
                 this.setEntity(entity, countLog);
                 return entity;
@@ -475,6 +475,7 @@ public class HonsanteiIdoGennendo {
     }
 
     /**
+     * バッチパラメータ作成 batchParameterクラス
      *
      * @param parameter parameter
      * @return BatchParamResult
