@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbb.persistence.core.kanri;
+package jp.co.ndensan.reams.db.dbb.persistence.db.mapper.relate.kanri;
 
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 

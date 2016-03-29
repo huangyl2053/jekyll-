@@ -5,7 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbb.service.core.kanri;
 
-import jp.co.ndensan.reams.db.dbb.persistence.core.kanri.INenkinHokenshaHanteiMapper;
+import jp.co.ndensan.reams.db.dbb.persistence.db.mapper.relate.kanri.INenkinHokenshaHanteiMapper;
 import jp.co.ndensan.reams.db.dbb.service.core.MapperProvider;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;

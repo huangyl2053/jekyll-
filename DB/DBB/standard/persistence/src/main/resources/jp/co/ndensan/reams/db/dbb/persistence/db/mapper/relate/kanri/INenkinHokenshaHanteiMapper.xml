@@ -3,7 +3,7 @@
 <!-- 概要： 介護賦課のマッピング用XMLです。 -->
 
 <!-- どのマッパーインターフェースと対応するかを指定する -->
-<mapper namespace="jp.co.ndensan.reams.db.dbb.persistence.core.kanri.INenkinHokenshaHanteiMapper">
+<mapper namespace="jp.co.ndensan.reams.db.dbb.persistence.db.mapper.relate.kanri.INenkinHokenshaHanteiMapper">
     <select id="selectByKey" resultType="RString"
             parameterType="jp.co.ndensan.reams.uz.uza.lang.RString" fetchSize="500">
         SELECT

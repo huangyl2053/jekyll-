@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbb.persistence.core.kanri;
+package jp.co.ndensan.reams.db.dbb.persistence.db.mapper.relate.kanri;
 
 import java.util.List;
 import jp.co.ndensan.reams.db.dbb.definition.mybatisprm.kanri.KariSanteiNonyuTsuchiShoSeigyoJohoParameter;

@@ -2,13 +2,13 @@
 <!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <!-- どのマッパーインターフェースと対応するかを指定する -->
 
-<mapper namespace="jp.co.ndensan.reams.db.dbb.persistence.tokubetuchosyutaisyosyatoroku.ITokubetuChosyutaisyosyaTorokuMapper">
+<mapper namespace="jp.co.ndensan.reams.db.dbb.persistence.db.mapper.relate.tokubetuchosyutaisyosyatoroku.ITokubetuChosyutaisyosyaTorokuMapper">
     <select id="getChoshuHoho" parameterType="jp.co.ndensan.reams.db.dbb.entity.tokubetuchosyutaisyosyatoroku.TokubetuChosyutaisyosyaTorokusqlparamEntity"
             resultType="jp.co.ndensan.reams.db.dbb.entity.db.basic.DbT2001ChoshuHohoEntity">
         SELECT *
         FROM rgdb."DbT2001ChoshuHoho" A
         WHERE A."fukaNendo" = #{賦課年度}
-        AND A."hihokenshaNo" = #{被保険者番号}		
+        AND A."hihokenshaNo" = #{被保険者番号}
 
     </select>
     <select id="getShorizumiRenban" parameterType="jp.co.ndensan.reams.db.dbb.entity.tokubetuchosyutaisyosyatoroku.TokubetuChosyutaisyosyaTorokusqlparamEntity"
