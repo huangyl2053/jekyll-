@@ -13,7 +13,7 @@ import jp.co.ndensan.reams.db.dbu.definition.jigyohokokunenpo.SearchJigyoHokokuN
 import jp.co.ndensan.reams.db.dbu.definition.jigyohokokunenpo.ShukeiInfo;
 import jp.co.ndensan.reams.db.dbu.entity.db.basic.DbT7021JigyoHokokuTokeiDataEntity;
 import jp.co.ndensan.reams.db.dbu.persistence.db.basic.DbT7021JigyoHokokuTokeiDataDac;
-import jp.co.ndensan.reams.db.dbu.persistence.jigyohokokunenpo.IJigyoHokokuNenpoMapper;
+import jp.co.ndensan.reams.db.dbu.persistence.db.mapper.relate.jigyohokokunenpo.IJigyoHokokuNenpoMapper;
 import jp.co.ndensan.reams.db.dbx.business.core.shichosonsecurity.IShichosonJoho;
 import jp.co.ndensan.reams.db.dbx.business.core.shichosonsecurity.ShichosonSecurityJoho;
 import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.DonyuKeitaiCode;
