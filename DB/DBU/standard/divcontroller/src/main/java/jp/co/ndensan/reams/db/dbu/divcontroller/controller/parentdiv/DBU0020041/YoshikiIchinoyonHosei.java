@@ -25,7 +25,6 @@ import jp.co.ndensan.reams.ur.urz.definition.message.UrWarningMessages;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.ApplicationException;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.message.InformationMessage;
 import jp.co.ndensan.reams.uz.uza.message.MessageDialogSelectedResult;
 import jp.co.ndensan.reams.uz.uza.message.QuestionMessage;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ResponseHolder;
@@ -45,6 +44,7 @@ public class YoshikiIchinoyonHosei {
     private static final RString 削除_状態 = new RString("削除");
     private static final RString MSG_SAKJYO = new RString("削除");
     private static final RString MSG_KOSIN = new RString("更新");
+    private static final RString MSG_KEI = new RString("計");
     private static final RString MSG_GOKEI = new RString("合計");
     private static final RString MSG_GOKEIKEKA = new RString("合計計算結果");
 
@@ -60,23 +60,21 @@ public class YoshikiIchinoyonHosei {
                 ViewStateKeys.事業報告基本, JigyoHokokuGeppoParameter.class);
         RString 様式種類 = 引き継ぎデータ.get行様式種類コード();
         List<JigyoHokokuTokeiData> 更新前データリスト = handler.get更新前データリスト(引き継ぎデータ, 様式種類);
-        if (!更新前データリスト.isEmpty()) {
-            handler.initializeKihoneria(引き継ぎデータ);
-            handler.initializeTabList(更新前データリスト, 様式種類);
-        }
+        handler.initializeKihoneria(引き継ぎデータ);
+        handler.initializeTabList(更新前データリスト, 様式種類);
 
         final RString 状態 = ViewStateHolder.get(ViewStateKeys.状態, RString.class);
         if (修正_状態.equals(状態)) {
-            if (様式種類_008.equalsIgnoreCase(様式種類) || 様式種類_108.equalsIgnoreCase(様式種類)) {
+            if (様式種類_008.equals(様式種類) || 様式種類_108.equals(様式種類)) {
                 return ResponseData.of(div).setState(修正状態1);
-            } else if (様式種類_009.equalsIgnoreCase(様式種類) || 様式種類_109.equalsIgnoreCase(様式種類)) {
+            } else if (様式種類_009.equals(様式種類) || 様式種類_109.equals(様式種類)) {
                 return ResponseData.of(div).setState(修正状態2);
             }
         } else if (削除_状態.equals(状態)) {
             handler.disableMainPanel();
-            if (様式種類_008.equalsIgnoreCase(様式種類) || 様式種類_108.equalsIgnoreCase(様式種類)) {
+            if (様式種類_008.equals(様式種類) || 様式種類_108.equals(様式種類)) {
                 return ResponseData.of(div).setState(削除状態3);
-            } else if (様式種類_009.equalsIgnoreCase(様式種類) || 様式種類_109.equalsIgnoreCase(様式種類)) {
+            } else if (様式種類_009.equals(様式種類) || 様式種類_109.equals(様式種類)) {
                 return ResponseData.of(div).setState(削除状態4);
             }
         }
@@ -96,29 +94,32 @@ public class YoshikiIchinoyonHosei {
         RString 様式種類 = 引き継ぎデータ.get行様式種類コード();
         if (削除_状態.equals(ViewStateHolder.get(ViewStateKeys.状態, RString.class))) {
             handler.delete(引き継ぎデータ, 様式種類);
-            InformationMessage message = new InformationMessage(
-                    UrInformationMessages.正常終了.getMessage().getCode(),
-                    UrInformationMessages.正常終了.getMessage().replace(MSG_SAKJYO.toString()).evaluate());
-            return ResponseData.of(div).addMessage(message).respond();
+            div.getKanryoMessage().getCcdKanryoMessage().setSuccessMessage(new RString(
+                    UrInformationMessages.正常終了.getMessage().replace(MSG_SAKJYO.toString()).evaluate()));
+            return ResponseData.of(div).setState(DBU0020041StateName.完了状態);
         }
 
         List<JigyoHokokuTokeiData> 修正データ = handler.get修正データ(引き継ぎデータ, 様式種類);
         if (修正_状態.equals(ViewStateHolder.get(ViewStateKeys.状態, RString.class))) {
             if (修正データ.isEmpty()) {
                 throw new ApplicationException(UrErrorMessages.編集なしで更新不可.getMessage());
-            } else if (様式種類_008.equalsIgnoreCase(様式種類) || 様式種類_108.equalsIgnoreCase(様式種類)) {
-                return 修正データ更新(handler.合計結果チェック(div), div, 修正データ);
-            } else if (様式種類_009.equalsIgnoreCase(様式種類) || 様式種類_109.equalsIgnoreCase(様式種類)) {
-                return 修正データ更新(handler.is整合性チェック_NG(handler, div), div, 修正データ);
+            } else if (様式種類_008.equals(様式種類) || 様式種類_108.equals(様式種類)) {
+                return 修正データ更新(handler.is合計結果チェック_NG(div), div, 修正データ, 様式種類);
+            } else if (様式種類_009.equals(様式種類) || 様式種類_109.equals(様式種類)) {
+                return 修正データ更新(handler.is整合性チェック_NG(handler, div), div, 修正データ, 様式種類);
             }
         }
         return ResponseData.of(div).setState(DBU0020041StateName.完了状態);
     }
 
     private ResponseData<YoshikiIchinoyonHoseiDiv> 修正データ更新(boolean チェック結果, YoshikiIchinoyonHoseiDiv div,
-            List<JigyoHokokuTokeiData> 修正データ) {
+            List<JigyoHokokuTokeiData> 修正データ, RString 様式種類) {
         if (チェック結果) {
-            if (!ResponseHolder.isReRequest()) {
+            if (!ResponseHolder.isReRequest() && (様式種類_008.equals(様式種類) || 様式種類_108.equals(様式種類))) {
+                return ResponseData.of(div).addMessage(
+                        UrWarningMessages.相違.getMessage().replace(
+                                MSG_GOKEI.toString(), MSG_KEI.toString())).respond();
+            } else if (!ResponseHolder.isReRequest() && (様式種類_009.equals(様式種類) || 様式種類_109.equals(様式種類))) {
                 return ResponseData.of(div).addMessage(
                         UrWarningMessages.相違.getMessage().replace(
                                 MSG_GOKEI.toString(), MSG_GOKEIKEKA.toString())).respond();
@@ -137,12 +138,11 @@ public class YoshikiIchinoyonHosei {
         }
         if (new RString(UrQuestionMessages.処理実行の確認.getMessage().getCode()).equals(ResponseHolder.getMessageCode())
                 && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
-            JigyoHokokuGeppoHoseiHako.createInstance().updateJigyoHokokuGeppoData(
+            JigyoHokokuGeppoHoseiHako.createInstance().updateJigyoHokokuGeppoEntity(
                     修正データ);
-            InformationMessage message = new InformationMessage(
-                    UrInformationMessages.正常終了.getMessage().getCode(),
-                    UrInformationMessages.正常終了.getMessage().replace(MSG_KOSIN.toString()).evaluate());
-            return ResponseData.of(div).addMessage(message).respond();
+            div.getKanryoMessage().getCcdKanryoMessage().setSuccessMessage(new RString(
+                    UrInformationMessages.正常終了.getMessage().replace(MSG_KOSIN.toString()).evaluate()));
+            return ResponseData.of(div).setState(DBU0020041StateName.完了状態);
         } else {
             return ResponseData.of(div).respond();
         }
@@ -164,7 +164,9 @@ public class YoshikiIchinoyonHosei {
             return ResponseData.of(div).forwardWithEventName(DBU0020041TransitionEventName.補正発行検索に戻る).respond();
         } else {
             if (!ResponseHolder.isReRequest()) {
-                return ResponseData.of(div).addMessage(UrQuestionMessages.入力内容の破棄.getMessage()).respond();
+                QuestionMessage message = new QuestionMessage(UrQuestionMessages.入力内容の破棄.getMessage().getCode(),
+                        UrQuestionMessages.入力内容の破棄.getMessage().evaluate());
+                return ResponseData.of(div).addMessage(message).respond();
             }
             if (new RString(UrQuestionMessages.入力内容の破棄.getMessage().getCode()).equals(
                     ResponseHolder.getMessageCode())
