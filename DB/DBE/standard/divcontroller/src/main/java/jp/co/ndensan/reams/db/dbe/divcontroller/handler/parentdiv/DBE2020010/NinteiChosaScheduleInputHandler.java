@@ -11,6 +11,7 @@ import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBE;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.NinteichosaSchedule;
 import jp.co.ndensan.reams.db.dbz.divcontroller.viewbox.ViewStateKeys;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
+import jp.co.ndensan.reams.uz.uza.biz.TelNo;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
@@ -361,13 +362,19 @@ public class NinteiChosaScheduleInputHandler {
      * @param list List<認定調査スケジュール情報>
      */
     public void btnZenkayiJyoho(List<NinteichosaSchedule> list) {
-        div.getTaishoshaShosai().getTxtBasho().setValue(list.get(0).get場所());
-        div.getTaishoshaShosai().getTxtChushajo().setValue(list.get(0).get駐車場());
-        div.getTaishoshaShosai().getTxtTachiainin1().setValue(list.get(0).get立会人１());
-        div.getTaishoshaShosai().getTxtRenrakusaki1().setValue(list.get(0).get連絡先１().value());
-        div.getTaishoshaShosai().getTxtTachiainin2().setValue(list.get(0).get立会人２());
-        div.getTaishoshaShosai().getTxtRenrakusaki2().setValue(list.get(0).get連絡先２().value());
-        div.getTaishoshaShosai().getTxtTaishoshaShosaiMemo().setValue(list.get(0).get対象者メモ());
+        if (list != null && !list.isEmpty()) {
+            div.getTaishoshaShosai().getTxtBasho().setValue(list.get(0).get場所());
+            div.getTaishoshaShosai().getTxtChushajo().setValue(list.get(0).get駐車場());
+            div.getTaishoshaShosai().getTxtTachiainin1().setValue(list.get(0).get立会人１());
+            div.getTaishoshaShosai().getTxtRenrakusaki1().setValue(get連絡先(list.get(0).get連絡先１()));
+            div.getTaishoshaShosai().getTxtTachiainin2().setValue(list.get(0).get立会人２());
+            div.getTaishoshaShosai().getTxtRenrakusaki2().setValue(get連絡先(list.get(0).get連絡先２()));
+            div.getTaishoshaShosai().getTxtTaishoshaShosaiMemo().setValue(list.get(0).get対象者メモ());
+        }
+    }
+
+    private RString get連絡先(TelNo 連絡先) {
+        return 連絡先 == null ? RString.EMPTY : 連絡先.value();
     }
 
     private RString get予約状況のKEY(RString 予約状況) {

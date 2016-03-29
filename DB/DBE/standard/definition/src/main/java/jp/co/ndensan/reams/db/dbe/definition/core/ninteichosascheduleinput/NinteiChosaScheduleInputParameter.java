@@ -23,6 +23,7 @@ public final class NinteiChosaScheduleInputParameter {
     private final RString 認定調査員コード;
     private final RString 市町村コード;
     private final RString 調査員状況02;
+    private final boolean has申請者管理番号2;
 
     /**
      * コンストラクタです。
@@ -35,6 +36,7 @@ public final class NinteiChosaScheduleInputParameter {
      * @param 認定調査員コード 認定調査員コード
      * @param 市町村コード 市町村コード
      * @param 調査員状況02 調査員状況02
+     * @param has申請者管理番号2 has申請者管理番号2
      */
     private NinteiChosaScheduleInputParameter(
             RString 申請者管理番号2,
@@ -44,7 +46,8 @@ public final class NinteiChosaScheduleInputParameter {
             RString 認定調査委託先コード,
             RString 認定調査員コード,
             RString 市町村コード,
-            RString 調査員状況02) {
+            RString 調査員状況02,
+            boolean has申請者管理番号2) {
         this.申請者管理番号2 = 申請者管理番号2;
         this.設定日 = 設定日;
         this.時間枠 = 時間枠;
@@ -53,6 +56,7 @@ public final class NinteiChosaScheduleInputParameter {
         this.認定調査員コード = 認定調査員コード;
         this.市町村コード = 市町村コード;
         this.調査員状況02 = 調査員状況02;
+        this.has申請者管理番号2 = has申請者管理番号2;
     }
 
     /**
@@ -76,6 +80,10 @@ public final class NinteiChosaScheduleInputParameter {
             RString 認定調査員コード,
             RString 市町村コード,
             RString 調査員状況02) {
+        boolean has申請者管理番号2 = false;
+        if (!RString.isNullOrEmpty(申請者管理番号2)) {
+            has申請者管理番号2 = true;
+        }
         return new NinteiChosaScheduleInputParameter(申請者管理番号2,
                 設定日,
                 時間枠,
@@ -83,6 +91,7 @@ public final class NinteiChosaScheduleInputParameter {
                 認定調査委託先コード,
                 認定調査員コード,
                 市町村コード,
-                調査員状況02);
+                調査員状況02,
+                has申請者管理番号2);
     }
 }

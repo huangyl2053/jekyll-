@@ -269,14 +269,14 @@ public class NinteiChosaScheduleShosaiHander {
         switch (guide.get認定調査時間枠数().toString()) {
             case "1":
                 if (枠数_1.equals(guide.get認定調査時間枠数())) {
-                    row.setChosaTimeFrame1(new RString(guide.get認定調査予定開始時間() + DASH.toString() + guide.get認定調査予定終了時間()));
+                    row.setChosaTimeFrame1(get予定時間(guide.get認定調査予定開始時間(), guide.get認定調査予定終了時間()));
                     row.getChosaTimeFrameMemo1().setVisible(表示);
                     row.getChosaTimeFrameMemo1().setDisabled(活性);
                 }
                 break;
             case "2":
                 if (枠数_2.equals(guide.get認定調査時間枠数())) {
-                    row.setChosaTimeFrame2(new RString(guide.get認定調査予定開始時間() + DASH.toString() + guide.get認定調査予定終了時間()));
+                    row.setChosaTimeFrame2(get予定時間(guide.get認定調査予定開始時間(), guide.get認定調査予定終了時間()));
                     row.getChosaTimeFrameMemo2().setVisible(表示);
                     row.getChosaTimeFrameMemo2().setDisabled(活性);
                 }
@@ -290,14 +290,14 @@ public class NinteiChosaScheduleShosaiHander {
         switch (guide.get認定調査時間枠数().toString()) {
             case "3":
                 if (枠数_3.equals(guide.get認定調査時間枠数())) {
-                    row.setChosaTimeFrame3(new RString(guide.get認定調査予定開始時間() + DASH.toString() + guide.get認定調査予定終了時間()));
+                    row.setChosaTimeFrame3(get予定時間(guide.get認定調査予定開始時間(), guide.get認定調査予定終了時間()));
                     row.getChosaTimeFrameMemo3().setVisible(表示);
                     row.getChosaTimeFrameMemo3().setDisabled(活性);
                 }
                 break;
             case "4":
                 if (枠数_4.equals(guide.get認定調査時間枠数())) {
-                    row.setChosaTimeFrame4(new RString(guide.get認定調査予定開始時間() + DASH.toString() + guide.get認定調査予定終了時間()));
+                    row.setChosaTimeFrame4(get予定時間(guide.get認定調査予定開始時間(), guide.get認定調査予定終了時間()));
                     row.getChosaTimeFrameMemo4().setVisible(表示);
                     row.getChosaTimeFrameMemo4().setDisabled(活性);
                 }
@@ -311,14 +311,14 @@ public class NinteiChosaScheduleShosaiHander {
         switch (guide.get認定調査時間枠数().toString()) {
             case "5":
                 if (枠数_5.equals(guide.get認定調査時間枠数())) {
-                    row.setChosaTimeFrame5(new RString(guide.get認定調査予定開始時間() + DASH.toString() + guide.get認定調査予定終了時間()));
+                    row.setChosaTimeFrame5(get予定時間(guide.get認定調査予定開始時間(), guide.get認定調査予定終了時間()));
                     row.getChosaTimeFrameMemo5().setVisible(表示);
                     row.getChosaTimeFrameMemo5().setDisabled(活性);
                 }
                 break;
             case "6":
                 if (枠数_6.equals(guide.get認定調査時間枠数())) {
-                    row.setChosaTimeFrame6(new RString(guide.get認定調査予定開始時間() + DASH.toString() + guide.get認定調査予定終了時間()));
+                    row.setChosaTimeFrame6(get予定時間(guide.get認定調査予定開始時間(), guide.get認定調査予定終了時間()));
                     row.getChosaTimeFrameMemo6().setVisible(表示);
                     row.getChosaTimeFrameMemo6().setDisabled(活性);
                 }
@@ -332,14 +332,14 @@ public class NinteiChosaScheduleShosaiHander {
         switch (guide.get認定調査時間枠数().toString()) {
             case "7":
                 if (枠数_7.equals(guide.get認定調査時間枠数())) {
-                    row.setChosaTimeFrame7(new RString(guide.get認定調査予定開始時間() + DASH.toString() + guide.get認定調査予定終了時間()));
+                    row.setChosaTimeFrame7(get予定時間(guide.get認定調査予定開始時間(), guide.get認定調査予定終了時間()));
                     row.getChosaTimeFrameMemo7().setVisible(表示);
                     row.getChosaTimeFrameMemo7().setDisabled(活性);
                 }
                 break;
             case "8":
                 if (枠数_8.equals(guide.get認定調査時間枠数())) {
-                    row.setChosaTimeFrame8(new RString(guide.get認定調査予定開始時間() + DASH.toString() + guide.get認定調査予定終了時間()));
+                    row.setChosaTimeFrame8(get予定時間(guide.get認定調査予定開始時間(), guide.get認定調査予定終了時間()));
                     row.getChosaTimeFrameMemo8().setVisible(表示);
                     row.getChosaTimeFrameMemo8().setDisabled(活性);
                 }
@@ -353,14 +353,14 @@ public class NinteiChosaScheduleShosaiHander {
         switch (guide.get認定調査時間枠数().toString()) {
             case "9":
                 if (枠数_9.equals(guide.get認定調査時間枠数())) {
-                    row.setChosaTimeFrame9(new RString(guide.get認定調査予定開始時間() + DASH.toString() + guide.get認定調査予定終了時間()));
+                    row.setChosaTimeFrame9(get予定時間(guide.get認定調査予定開始時間(), guide.get認定調査予定終了時間()));
                     row.getChosaTimeFrameMemo9().setVisible(表示);
                     row.getChosaTimeFrameMemo9().setDisabled(活性);
                 }
                 break;
             case "10":
                 if (枠数_10.equals(guide.get認定調査時間枠数())) {
-                    row.setChosaTimeFrame10(new RString(guide.get認定調査予定開始時間() + DASH.toString() + guide.get認定調査予定終了時間()));
+                    row.setChosaTimeFrame10(get予定時間(guide.get認定調査予定開始時間(), guide.get認定調査予定終了時間()));
                     row.getChosaTimeFrameMemo10().setVisible(表示);
                     row.getChosaTimeFrameMemo10().setDisabled(活性);
                 }
@@ -368,6 +368,18 @@ public class NinteiChosaScheduleShosaiHander {
             default:
                 break;
         }
+    }
+
+    private RString get予定時間(RString 認定調査予定開始時間, RString 認定調査予定終了時間) {
+        StringBuilder 予定時間 = new StringBuilder();
+        予定時間.append(認定調査予定開始時間.substring(0, 2));
+        予定時間.append(":");
+        予定時間.append(認定調査予定開始時間.substring(2));
+        予定時間.append(DASH);
+        予定時間.append(認定調査予定終了時間.substring(0, 2));
+        予定時間.append(":");
+        予定時間.append(認定調査予定終了時間.substring(2));
+        return new RString(予定時間.toString());
     }
 
     private void setChosaTimeFrameMemoDisabled(dgNinteiChosaSchedule_Row row) {

@@ -56,7 +56,7 @@ public class NinteiChosaScheduleMemoInformation {
     public ResponseData<NinteiChosaScheduleMemoInformationDiv> onLoad(NinteiChosaScheduleMemoInformationDiv div) {
 
         FlexibleDate メモ年月日 = ViewStateHolder.get(ViewStateKeys.認定調査スケジュール登録_設定日, FlexibleDate.class);
-        Code 地区コード = ViewStateHolder.get(ViewStateKeys.認定調査スケジュール登録_地区コード, Code.class);
+        Code 地区コード = new Code(ViewStateHolder.get(ViewStateKeys.認定調査スケジュール登録_地区コード, RString.class));
         List<NinteiChosaScheduleMemo> ninteiChosaScheduleMemo = ninteiChosaScheduleMemoManager.
                 get認定調査スケジュールメモ文本情報(メモ年月日, 地区コード).records();
         ViewStateHolder.put(ViewStateKeys.認定調査スケジュール登録_認定調査スケジュールメモ情報,
@@ -206,7 +206,7 @@ public class NinteiChosaScheduleMemoInformation {
                 && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
 
             FlexibleDate メモ年月日 = ViewStateHolder.get(ViewStateKeys.認定調査スケジュール登録_設定日, FlexibleDate.class);
-            Code 地区コード = ViewStateHolder.get(ViewStateKeys.認定調査スケジュール登録_地区コード, Code.class);
+            Code 地区コード = new Code(ViewStateHolder.get(ViewStateKeys.認定調査スケジュール登録_地区コード, RString.class));
 
             Models<NinteiChosaScheduleMemoIdentifier, NinteiChosaScheduleMemo> models = ViewStateHolder
                     .get(ViewStateKeys.認定調査スケジュール登録_認定調査スケジュールメモ情報, Models.class);

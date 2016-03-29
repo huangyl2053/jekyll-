@@ -21,7 +21,10 @@ import jp.co.ndensan.reams.db.dbz.business.core.basic.NinteichosaSchedule;
 import jp.co.ndensan.reams.db.dbz.divcontroller.viewbox.ViewStateKeys;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrInformationMessages;
+import jp.co.ndensan.reams.uz.uza.biz.AtenaKanaMeisho;
+import jp.co.ndensan.reams.uz.uza.biz.AtenaMeisho;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
+import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.TelNo;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.ApplicationException;
@@ -177,8 +180,8 @@ public class NinteiChosaScheduleInput {
                 temp_申請者管理番号2, temp_設定日, temp_時間枠, temp_地区コード, temp_認定調査委託先コード, temp_認定調査員コード,
                 temp_市町村コード, temp_調査員状況02);
         if (ninteiChosaSchedule != null) {
-            temp_地区コード = ninteiChosaSchedule.get地区コード().value();
-            temp_市町村コード = ninteiChosaSchedule.get市町村コード().value();
+            temp_地区コード = getコード(ninteiChosaSchedule.get地区コード());
+            temp_市町村コード = get市町村コード(ninteiChosaSchedule.get市町村コード());
             temp_認定調査委託先コード = ninteiChosaSchedule.get認定調査委託先コード();
             temp_認定調査委託先名称 = ninteiChosaSchedule.get認定調査委託先名称();
             temp_認定調査員コード = ninteiChosaSchedule.get認定調査員コード();
@@ -192,7 +195,7 @@ public class NinteiChosaScheduleInput {
             } else {
                 temp_予約可否 = 予約不可;
             }
-            temp_予約状況 = ninteiChosaSchedule.get予約状況().value();
+            temp_予約状況 = getコード(ninteiChosaSchedule.get予約状況());
             temp_備考 = ninteiChosaSchedule.get備考();
         }
     }
@@ -204,30 +207,48 @@ public class NinteiChosaScheduleInput {
             if (ninteiShinseiJoho != null) {
                 temp_被保番号 = ninteiShinseiJoho.get被保険者番号();
                 temp_被保険者区分コード = ninteiShinseiJoho.get被保険者区分コード();
-                temp_保険者 = ninteiShinseiJoho.get被保険者氏名().value();
+                temp_保険者 = get被保険者氏名(ninteiShinseiJoho.get被保険者氏名());
                 temp_認定申請日 = ninteiShinseiJoho.get認定申請年月日();
-                temp_申請区分_申請時 = ninteiShinseiJoho.get認定申請区分_申請時_コード().value();
-                temp_氏名 = ninteiShinseiJoho.get被保険者氏名().value();
-                temp_カナ氏名 = ninteiShinseiJoho.get被保険者氏名カナ().value();
+                temp_申請区分_申請時 = getコード(ninteiShinseiJoho.get認定申請区分_申請時_コード());
+                temp_氏名 = get被保険者氏名(ninteiShinseiJoho.get被保険者氏名());
+                temp_カナ氏名 = get被保険者氏名カナ(ninteiShinseiJoho.get被保険者氏名カナ());
             }
         }
     }
 
+    private RString get被保険者氏名(AtenaMeisho 被保険者氏名) {
+        return 被保険者氏名 == null ? RString.EMPTY : 被保険者氏名.value();
+    }
+
+    private RString get被保険者氏名カナ(AtenaKanaMeisho 被保険者氏名カナ) {
+        return 被保険者氏名カナ == null ? RString.EMPTY : 被保険者氏名カナ.value();
+    }
+
+    private RString getコード(Code コード) {
+        return コード == null ? RString.EMPTY : コード.value();
+    }
+
+    private RString get市町村コード(LasdecCode 市町村コード) {
+        return 市町村コード == null ? RString.EMPTY : 市町村コード.value();
+    }
+
+    private RString get連絡先(TelNo 連絡先) {
+        return 連絡先 == null ? RString.EMPTY : 連絡先.value();
+    }
+
     private void set対象者調査基本情報Temp変数() {
-        if (!RString.isNullOrEmpty(temp_申請者管理番号3)) {
-            NinteichosaSchedule ninteichosaSchedule = NinteiChosaScheduleInputManager.createInstance().get調査員情報(
-                    temp_申請者管理番号2, temp_設定日, temp_時間枠, temp_地区コード, temp_認定調査委託先コード, temp_認定調査員コード,
-                    temp_市町村コード, temp_調査員状況02);
-            ViewStateHolder.put(ViewStateKeys.認定調査スケジュール登録_調査員情報, ninteichosaSchedule);
-            if (ninteichosaSchedule != null) {
-                temp_場所 = ninteichosaSchedule.get場所();
-                temp_駐車場 = ninteichosaSchedule.get駐車場();
-                temp_立会人1 = ninteichosaSchedule.get立会人１();
-                temp_連絡先1 = ninteichosaSchedule.get連絡先１().value();
-                temp_立会人2 = ninteichosaSchedule.get立会人２();
-                temp_連絡先2 = ninteichosaSchedule.get連絡先２().value();
-                temp_対象者メモ = ninteichosaSchedule.get対象者メモ();
-            }
+        NinteichosaSchedule ninteichosaSchedule = NinteiChosaScheduleInputManager.createInstance().get調査員情報(
+                temp_申請者管理番号2, temp_設定日, temp_時間枠, temp_地区コード, temp_認定調査委託先コード, temp_認定調査員コード,
+                temp_市町村コード, temp_調査員状況02);
+        ViewStateHolder.put(ViewStateKeys.認定調査スケジュール登録_調査員情報, ninteichosaSchedule);
+        if (ninteichosaSchedule != null) {
+            temp_場所 = ninteichosaSchedule.get場所();
+            temp_駐車場 = ninteichosaSchedule.get駐車場();
+            temp_立会人1 = ninteichosaSchedule.get立会人１();
+            temp_連絡先1 = get連絡先(ninteichosaSchedule.get連絡先１());
+            temp_立会人2 = ninteichosaSchedule.get立会人２();
+            temp_連絡先2 = get連絡先(ninteichosaSchedule.get連絡先２());
+            temp_対象者メモ = ninteichosaSchedule.get対象者メモ();
         }
     }
 
