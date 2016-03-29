@@ -14,7 +14,7 @@ import jp.co.ndensan.reams.db.dbu.entity.db.benmeisyo.BenmeiJohoResultEntity;
 import jp.co.ndensan.reams.db.dbu.entity.db.benmeisyo.BenmeisyoTyohyoDataEntity;
 import jp.co.ndensan.reams.db.dbu.entity.db.benmeisyo.HihokenshaDateEntity;
 import jp.co.ndensan.reams.db.dbu.entity.db.benmeisyo.NinshoshaDenshiKoinDataEntity;
-import jp.co.ndensan.reams.db.dbu.persistence.benmeisyo.BenmeisyoMapper;
+import jp.co.ndensan.reams.db.dbu.persistence.db.mapper.relate.benmeisyo.BenmeisyoMapper;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.service.core.MapperProvider;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBU;

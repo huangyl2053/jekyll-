@@ -76,7 +76,7 @@ public class KyokaisogGaitoshaReportPageBreakProcess extends BatchProcessBase<Ky
     private static final RString 境界層該当内容 = new RString("【境界層該当内容】　");
     private static final ReportId ID = new ReportId("DBA200005_KyokaisoKanriMasterList");
     private static final RString MYBATIS_SELECT_ID = new RString(
-            "jp.co.ndensan.reams.db.dbu.persistence.db.basic.mapper.kyokaisogaitosha.IKkyokaisoGaitoshaMapper.getKyokaisoKanriMasterList");
+            "jp.co.ndensan.reams.db.dbu.persistence.db.mapper.relate.kyokaisogaitosha.IKkyokaisoGaitoshaMapper.getKyokaisoKanriMasterList");
     private List<ReportOutputJokenhyoItem> lists;
     private KyokaisoKanriMasterListHeadItem headItem;
     private List<KyokaisoKanriMasterListBodyItem> bodyItemList;
