@@ -1,22 +1,20 @@
 package jp.co.ndensan.reams.db.dbz.divcontroller.entity.parentdiv;
-/**
- * このコードはツールによって生成されました。
- * このファイルへの変更は、再生成時には損失するため
- * 不正な動作の原因になります。
- */
-import jp.co.ndensan.reams.db.dbz.divcontroller.entity.parentdiv.INenReiTotatsuSrchConInfoDiv;
-import com.fasterxml.jackson.annotation.JsonProperty;
-import jp.co.ndensan.reams.uz.uza.ui.binding.*;
-import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
-import jp.co.ndensan.reams.uz.uza.ui.binding.domain.*;
 
+/**
+ * このコードはツールによって生成されました。 このファイルへの変更は、再生成時には損失するため 不正な動作の原因になります。
+ */
+import com.fasterxml.jackson.annotation.JsonProperty;
 import java.util.HashSet;
+import jp.co.ndensan.reams.uz.uza.ui.binding.Button;
+import jp.co.ndensan.reams.uz.uza.ui.binding.Mode;
+import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
+import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxFlexibleDate;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ICommonChildDivMode;
 import jp.co.ndensan.reams.uz.uza.ui.servlets._CommonChildDivModeUtil;
 
 /**
- * NenReiTotatsuSrchConInfo のクラスファイル 
- * 
+ * NenReiTotatsuSrchConInfo のクラスファイル
+ *
  * @author 自動生成
  */
 public class NenReiTotatsuSrchConInfoDiv extends Panel implements INenReiTotatsuSrchConInfoDiv {
@@ -26,6 +24,7 @@ public class NenReiTotatsuSrchConInfoDiv extends Panel implements INenReiTotatsu
      * コントロール名とフィールド名を取得する
      * private + コントロール名 + フィールド名 の文字列を作成
      */
+
     @JsonProperty("txtZenkaiFrom")
     private TextBoxFlexibleDate txtZenkaiFrom;
     @JsonProperty("txtZenkaiTo")
@@ -50,7 +49,7 @@ public class NenReiTotatsuSrchConInfoDiv extends Panel implements INenReiTotatsu
 
     @JsonProperty("txtZenkaiFrom")
     public void setTxtZenkaiFrom(TextBoxFlexibleDate txtZenkaiFrom) {
-        this.txtZenkaiFrom=txtZenkaiFrom;
+        this.txtZenkaiFrom = txtZenkaiFrom;
     }
 
     @JsonProperty("txtZenkaiTo")
@@ -60,7 +59,7 @@ public class NenReiTotatsuSrchConInfoDiv extends Panel implements INenReiTotatsu
 
     @JsonProperty("txtZenkaiTo")
     public void setTxtZenkaiTo(TextBoxFlexibleDate txtZenkaiTo) {
-        this.txtZenkaiTo=txtZenkaiTo;
+        this.txtZenkaiTo = txtZenkaiTo;
     }
 
     @JsonProperty("btnKensaku")
@@ -70,7 +69,7 @@ public class NenReiTotatsuSrchConInfoDiv extends Panel implements INenReiTotatsu
 
     @JsonProperty("btnKensaku")
     public void setBtnKensaku(Button btnKensaku) {
-        this.btnKensaku=btnKensaku;
+        this.btnKensaku = btnKensaku;
     }
 
     @JsonProperty("txtNenreiTotatsuKikanFrom")
@@ -80,7 +79,7 @@ public class NenReiTotatsuSrchConInfoDiv extends Panel implements INenReiTotatsu
 
     @JsonProperty("txtNenreiTotatsuKikanFrom")
     public void setTxtNenreiTotatsuKikanFrom(TextBoxFlexibleDate txtNenreiTotatsuKikanFrom) {
-        this.txtNenreiTotatsuKikanFrom=txtNenreiTotatsuKikanFrom;
+        this.txtNenreiTotatsuKikanFrom = txtNenreiTotatsuKikanFrom;
     }
 
     @JsonProperty("txtNenreiTotatsuKikanTo")
@@ -90,7 +89,7 @@ public class NenReiTotatsuSrchConInfoDiv extends Panel implements INenReiTotatsu
 
     @JsonProperty("txtNenreiTotatsuKikanTo")
     public void setTxtNenreiTotatsuKikanTo(TextBoxFlexibleDate txtNenreiTotatsuKikanTo) {
-        this.txtNenreiTotatsuKikanTo=txtNenreiTotatsuKikanTo;
+        this.txtNenreiTotatsuKikanTo = txtNenreiTotatsuKikanTo;
     }
 
     /*
@@ -114,7 +113,7 @@ public class NenReiTotatsuSrchConInfoDiv extends Panel implements INenReiTotatsu
             DisplayMode[] enumArray = DisplayMode.values();
 
             for (DisplayMode enumStr : enumArray) {
-                if (str.equals(enumStr.name.toString())) { 
+                if (str.equals(enumStr.name.toString())) {
                     return enumStr;
                 }
             }
@@ -129,13 +128,12 @@ public class NenReiTotatsuSrchConInfoDiv extends Panel implements INenReiTotatsu
     }
 
     public DisplayMode getMode_DisplayMode() {
-        return (DisplayMode) _CommonChildDivModeUtil.getMode( this.modes, DisplayMode.class );
+        return (DisplayMode) _CommonChildDivModeUtil.getMode(this.modes, DisplayMode.class);
     }
 
-    public void setMode_DisplayMode( DisplayMode value ) {
-        _CommonChildDivModeUtil.setMode( this.modes, DisplayMode.class , value );
+    public void setMode_DisplayMode(DisplayMode value) {
+        _CommonChildDivModeUtil.setMode(this.modes, DisplayMode.class, value);
     }
 
     //--------------- この行より下にコードを追加してください -------------------
-
 }

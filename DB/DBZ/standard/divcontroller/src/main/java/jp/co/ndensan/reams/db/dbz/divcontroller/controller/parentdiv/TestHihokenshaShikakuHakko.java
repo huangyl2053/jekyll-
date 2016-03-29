@@ -19,7 +19,7 @@ public class TestHihokenshaShikakuHakko {
     /**
      * onLoad時の処理です。<br/>
      *
-     * @param div
+     * @param div TestHihokenshaShikakuHakkoDiv
      * @return ResponseData
      */
     public ResponseData<TestHihokenshaShikakuHakkoDiv> onLoad(TestHihokenshaShikakuHakkoDiv div) {

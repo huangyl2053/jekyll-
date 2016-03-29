@@ -3,7 +3,6 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.ZenkaiNinteiKekkaJoho.ZenkaiNinteiKekkaJoho;
 
 import java.util.List;
@@ -27,19 +26,21 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
  * 前回結果情報のHandlerクラスです。
  */
 public class ZenkaiNinteiKekkaJohoHandler {
-    
+
     private final ZenkaiNinteiKekkaJohoDiv div;
-    
+
     /**
      * コンストラクタです。
+     *
      * @param div 画面情報
      */
     public ZenkaiNinteiKekkaJohoHandler(ZenkaiNinteiKekkaJohoDiv div) {
         this.div = div;
     }
-    
+
     /**
      * 前回認定結果Divの初期化です。
+     *
      * @param subGyomuCode 画面モード
      * @param shinseishoKanriNo 申請書管理番号
      * @param 参照結果 参照結果
@@ -53,7 +54,7 @@ public class ZenkaiNinteiKekkaJohoHandler {
             set今回情報(subGyomuCode, shinseishoKanriNo);
         }
     }
-    
+
     private void set前回情報(SubGyomuCode subGyomuCode,
             ShinseishoKanriNo shinseishoKanriNo) {
         if (SubGyomuCode.DBD介護受給.equals(subGyomuCode)) {
@@ -78,39 +79,39 @@ public class ZenkaiNinteiKekkaJohoHandler {
             }
         }
     }
-    
+
     private void set今回情報(SubGyomuCode subGyomuCode,
             ShinseishoKanriNo shinseishoKanriNo) {
         if (SubGyomuCode.DBD介護受給.equals(subGyomuCode)) {
-            List<ZenkaiNinteiKekkaJohoRelate> zenkaiNinteiKekkaJohoRelateList = getService().get要介護度_今回受給(shinseishoKanriNo).records();
-            if (!zenkaiNinteiKekkaJohoRelateList.isEmpty()) {
-                ZenkaiNinteiKekkaJohoRelate joho = zenkaiNinteiKekkaJohoRelateList.get(0);
+            List<ZenkaiNinteiKekkaJohoRelate> zenkaiNinteiKekkaJohoList = getService().get要介護度_今回受給(shinseishoKanriNo).records();
+            if (!zenkaiNinteiKekkaJohoList.isEmpty()) {
+                ZenkaiNinteiKekkaJohoRelate joho = zenkaiNinteiKekkaJohoList.get(0);
                 div.getTxtYokaigodo().setValue(set要介護度(joho.get厚労省IF識別コード(), new Code(joho.get二次判定要介護状態区分コード())));
                 div.getTxtNinteiDay().setValue(set共通ポリシーパターン1(joho.get次判定年月日()));
                 div.getTxtYukoKikanFrom().setValue(set共通ポリシーパターン1(joho.get二次判定認定有効開始年月日()));
                 div.getTxtYukoKikanTo().setValue(set共通ポリシーパターン1(joho.get二次判定認定有効終了年月日()));
-                        
+
             }
         } else if (SubGyomuCode.DBE認定支援.equals(subGyomuCode)) {
-            List<ZenkaiNinteiKekkaJohoRelate> zenkaiNinteiKekkaJohoRelateList = getService().get要介護度_今回認定(shinseishoKanriNo).records();
-            if (!zenkaiNinteiKekkaJohoRelateList.isEmpty()) {
-                ZenkaiNinteiKekkaJohoRelate joho = zenkaiNinteiKekkaJohoRelateList.get(0);
+            List<ZenkaiNinteiKekkaJohoRelate> zenkaiNinteiKekkaJohoList = getService().get要介護度_今回認定(shinseishoKanriNo).records();
+            if (!zenkaiNinteiKekkaJohoList.isEmpty()) {
+                ZenkaiNinteiKekkaJohoRelate joho = zenkaiNinteiKekkaJohoList.get(0);
                 div.getTxtYokaigodo().setValue(set要介護度(joho.get厚労省IF識別コード(), new Code(joho.get二次判定要介護状態区分コード())));
                 div.getTxtNinteiDay().setValue(set共通ポリシーパターン1(joho.get次判定年月日()));
                 div.getTxtYukoKikanFrom().setValue(set共通ポリシーパターン1(joho.get二次判定認定有効開始年月日()));
                 div.getTxtYukoKikanTo().setValue(set共通ポリシーパターン1(joho.get二次判定認定有効終了年月日()));
-                        
+
             }
         }
     }
-    
+
     private FlexibleDate set共通ポリシーパターン1(RString date) {
         if (date != null) {
             return new FlexibleDate(date);
         }
         return null;
     }
-    
+
     private RString set要介護度(RString 厚労省IF識別コード, Code 前回要介護状態区分コード) {
         RString 要介護度 = RString.EMPTY;
         if (前回要介護状態区分コード != null) {
@@ -122,11 +123,11 @@ public class ZenkaiNinteiKekkaJohoHandler {
                 要介護度 = YokaigoJotaiKubun06.toValue(前回要介護状態区分コード.getColumnValue()).get名称();
             } else if (KoroshoIfShikibetsuCode.認定ｿﾌﾄ2009.getコード().equals(厚労省IF識別コード)) {
                 要介護度 = YokaigoJotaiKubun09.toValue(前回要介護状態区分コード.getColumnValue()).get名称();
-            } 
+            }
         }
         return 要介護度;
     }
-    
+
     private ZenkaiNinteiKekkaJohoFinder getService() {
         return ZenkaiNinteiKekkaJohoFinder.createInstance();
     }

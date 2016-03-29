@@ -1,18 +1,16 @@
 package jp.co.ndensan.reams.db.dbz.divcontroller.entity.parentdiv;
-/**
- * このコードはツールによって生成されました。
- * このファイルへの変更は、再生成時には損失するため
- * 不正な動作の原因になります。
- */
-import jp.co.ndensan.reams.db.dbz.divcontroller.entity.parentdiv.IKaigoUploadPanelDiv;
-import com.fasterxml.jackson.annotation.JsonProperty;
-import jp.co.ndensan.reams.uz.uza.ui.binding.*;
-import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
-import jp.co.ndensan.reams.uz.uza.ui.binding.domain.*;
 
 /**
- * KaigoUploadPanel のクラスファイル 
- * 
+ * このコードはツールによって生成されました。 このファイルへの変更は、再生成時には損失するため 不正な動作の原因になります。
+ */
+import com.fasterxml.jackson.annotation.JsonProperty;
+import jp.co.ndensan.reams.uz.uza.ui.binding.Button;
+import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
+import jp.co.ndensan.reams.uz.uza.ui.binding.UploadPanel;
+
+/**
+ * KaigoUploadPanel のクラスファイル
+ *
  * @author 自動生成
  */
 public class KaigoUploadPanelDiv extends Panel implements IKaigoUploadPanelDiv {
@@ -22,6 +20,7 @@ public class KaigoUploadPanelDiv extends Panel implements IKaigoUploadPanelDiv {
      * コントロール名とフィールド名を取得する
      * private + コントロール名 + フィールド名 の文字列を作成
      */
+
     @JsonProperty("uplUploadFile")
     private UploadPanel uplUploadFile;
     @JsonProperty("btnUpload")
@@ -40,7 +39,7 @@ public class KaigoUploadPanelDiv extends Panel implements IKaigoUploadPanelDiv {
 
     @JsonProperty("uplUploadFile")
     public void setUplUploadFile(UploadPanel uplUploadFile) {
-        this.uplUploadFile=uplUploadFile;
+        this.uplUploadFile = uplUploadFile;
     }
 
     @JsonProperty("btnUpload")
@@ -50,9 +49,8 @@ public class KaigoUploadPanelDiv extends Panel implements IKaigoUploadPanelDiv {
 
     @JsonProperty("btnUpload")
     public void setBtnUpload(Button btnUpload) {
-        this.btnUpload=btnUpload;
+        this.btnUpload = btnUpload;
     }
 
     //--------------- この行より下にコードを追加してください -------------------
-
 }

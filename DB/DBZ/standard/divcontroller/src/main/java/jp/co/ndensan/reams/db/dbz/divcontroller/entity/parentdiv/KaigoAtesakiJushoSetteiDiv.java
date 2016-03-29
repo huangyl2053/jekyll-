@@ -1,18 +1,17 @@
 package jp.co.ndensan.reams.db.dbz.divcontroller.entity.parentdiv;
-/**
- * このコードはツールによって生成されました。
- * このファイルへの変更は、再生成時には損失するため
- * 不正な動作の原因になります。
- */
-import jp.co.ndensan.reams.db.dbz.divcontroller.entity.parentdiv.IKaigoAtesakiJushoSetteiDiv;
-import com.fasterxml.jackson.annotation.JsonProperty;
-import jp.co.ndensan.reams.uz.uza.ui.binding.*;
-import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
-import jp.co.ndensan.reams.uz.uza.ui.binding.domain.*;
 
 /**
- * KaigoAtesakiJushoSettei のクラスファイル 
- * 
+ * このコードはツールによって生成されました。 このファイルへの変更は、再生成時には損失するため 不正な動作の原因になります。
+ */
+import com.fasterxml.jackson.annotation.JsonProperty;
+import jp.co.ndensan.reams.uz.uza.ui.binding.Button;
+import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
+import jp.co.ndensan.reams.uz.uza.ui.binding.RadioButton;
+import jp.co.ndensan.reams.uz.uza.ui.binding.TextBox;
+
+/**
+ * KaigoAtesakiJushoSettei のクラスファイル
+ *
  * @author 自動生成
  */
 public class KaigoAtesakiJushoSetteiDiv extends Panel implements IKaigoAtesakiJushoSetteiDiv {
@@ -22,6 +21,7 @@ public class KaigoAtesakiJushoSetteiDiv extends Panel implements IKaigoAtesakiJu
      * コントロール名とフィールド名を取得する
      * private + コントロール名 + フィールド名 の文字列を作成
      */
+
     @JsonProperty("radJushoSettei")
     private RadioButton radJushoSettei;
     @JsonProperty("btnAtesakiJushoSettei")
@@ -42,7 +42,7 @@ public class KaigoAtesakiJushoSetteiDiv extends Panel implements IKaigoAtesakiJu
 
     @JsonProperty("radJushoSettei")
     public void setRadJushoSettei(RadioButton radJushoSettei) {
-        this.radJushoSettei=radJushoSettei;
+        this.radJushoSettei = radJushoSettei;
     }
 
     @JsonProperty("btnAtesakiJushoSettei")
@@ -52,7 +52,7 @@ public class KaigoAtesakiJushoSetteiDiv extends Panel implements IKaigoAtesakiJu
 
     @JsonProperty("btnAtesakiJushoSettei")
     public void setBtnAtesakiJushoSettei(Button btnAtesakiJushoSettei) {
-        this.btnAtesakiJushoSettei=btnAtesakiJushoSettei;
+        this.btnAtesakiJushoSettei = btnAtesakiJushoSettei;
     }
 
     @JsonProperty("txtAtesakiJushoSettei")
@@ -62,9 +62,8 @@ public class KaigoAtesakiJushoSetteiDiv extends Panel implements IKaigoAtesakiJu
 
     @JsonProperty("txtAtesakiJushoSettei")
     public void setTxtAtesakiJushoSettei(TextBox txtAtesakiJushoSettei) {
-        this.txtAtesakiJushoSettei=txtAtesakiJushoSettei;
+        this.txtAtesakiJushoSettei = txtAtesakiJushoSettei;
     }
 
     //--------------- この行より下にコードを追加してください -------------------
-
 }

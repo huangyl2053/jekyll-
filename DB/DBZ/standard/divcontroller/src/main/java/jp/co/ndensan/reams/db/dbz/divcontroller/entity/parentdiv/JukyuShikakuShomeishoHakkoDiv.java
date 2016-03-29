@@ -1,18 +1,20 @@
 package jp.co.ndensan.reams.db.dbz.divcontroller.entity.parentdiv;
-/**
- * このコードはツールによって生成されました。
- * このファイルへの変更は、再生成時には損失するため
- * 不正な動作の原因になります。
- */
-import jp.co.ndensan.reams.db.dbz.divcontroller.entity.parentdiv.IJukyuShikakuShomeishoHakkoDiv;
-import com.fasterxml.jackson.annotation.JsonProperty;
-import jp.co.ndensan.reams.uz.uza.ui.binding.*;
-import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
-import jp.co.ndensan.reams.uz.uza.ui.binding.domain.*;
 
 /**
- * JukyuShikakuShomeishoHakko のクラスファイル 
- * 
+ * このコードはツールによって生成されました。 このファイルへの変更は、再生成時には損失するため 不正な動作の原因になります。
+ */
+import com.fasterxml.jackson.annotation.JsonProperty;
+import jp.co.ndensan.reams.uz.uza.ui.binding.CheckBoxList;
+import jp.co.ndensan.reams.uz.uza.ui.binding.Label;
+import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
+import jp.co.ndensan.reams.uz.uza.ui.binding.TextBox;
+import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxDateRange;
+import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxFlexibleDate;
+import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxMultiLine;
+
+/**
+ * JukyuShikakuShomeishoHakko のクラスファイル
+ *
  * @author 自動生成
  */
 public class JukyuShikakuShomeishoHakkoDiv extends Panel implements IJukyuShikakuShomeishoHakkoDiv {
@@ -22,6 +24,7 @@ public class JukyuShikakuShomeishoHakkoDiv extends Panel implements IJukyuShikak
      * コントロール名とフィールド名を取得する
      * private + コントロール名 + フィールド名 の文字列を作成
      */
+
     @JsonProperty("txtKofuDate")
     private TextBoxFlexibleDate txtKofuDate;
     @JsonProperty("txtIdoYoteiDate")
@@ -56,7 +59,7 @@ public class JukyuShikakuShomeishoHakkoDiv extends Panel implements IJukyuShikak
 
     @JsonProperty("txtKofuDate")
     public void setTxtKofuDate(TextBoxFlexibleDate txtKofuDate) {
-        this.txtKofuDate=txtKofuDate;
+        this.txtKofuDate = txtKofuDate;
     }
 
     @JsonProperty("txtIdoYoteiDate")
@@ -66,7 +69,7 @@ public class JukyuShikakuShomeishoHakkoDiv extends Panel implements IJukyuShikak
 
     @JsonProperty("txtIdoYoteiDate")
     public void setTxtIdoYoteiDate(TextBoxFlexibleDate txtIdoYoteiDate) {
-        this.txtIdoYoteiDate=txtIdoYoteiDate;
+        this.txtIdoYoteiDate = txtIdoYoteiDate;
     }
 
     @JsonProperty("txtYokaigoJotai")
@@ -76,7 +79,7 @@ public class JukyuShikakuShomeishoHakkoDiv extends Panel implements IJukyuShikak
 
     @JsonProperty("txtYokaigoJotai")
     public void setTxtYokaigoJotai(TextBox txtYokaigoJotai) {
-        this.txtYokaigoJotai=txtYokaigoJotai;
+        this.txtYokaigoJotai = txtYokaigoJotai;
     }
 
     @JsonProperty("txtNinteiYukoKikan")
@@ -86,7 +89,7 @@ public class JukyuShikakuShomeishoHakkoDiv extends Panel implements IJukyuShikak
 
     @JsonProperty("txtNinteiYukoKikan")
     public void setTxtNinteiYukoKikan(TextBoxDateRange txtNinteiYukoKikan) {
-        this.txtNinteiYukoKikan=txtNinteiYukoKikan;
+        this.txtNinteiYukoKikan = txtNinteiYukoKikan;
     }
 
     @JsonProperty("txtShinseiDate")
@@ -96,7 +99,7 @@ public class JukyuShikakuShomeishoHakkoDiv extends Panel implements IJukyuShikak
 
     @JsonProperty("txtShinseiDate")
     public void setTxtShinseiDate(TextBoxFlexibleDate txtShinseiDate) {
-        this.txtShinseiDate=txtShinseiDate;
+        this.txtShinseiDate = txtShinseiDate;
     }
 
     @JsonProperty("lblNinteiShinsakaiIken")
@@ -106,7 +109,7 @@ public class JukyuShikakuShomeishoHakkoDiv extends Panel implements IJukyuShikak
 
     @JsonProperty("lblNinteiShinsakaiIken")
     public void setLblNinteiShinsakaiIken(Label lblNinteiShinsakaiIken) {
-        this.lblNinteiShinsakaiIken=lblNinteiShinsakaiIken;
+        this.lblNinteiShinsakaiIken = lblNinteiShinsakaiIken;
     }
 
     @JsonProperty("txtNinteiShinsakaiIken")
@@ -116,7 +119,7 @@ public class JukyuShikakuShomeishoHakkoDiv extends Panel implements IJukyuShikak
 
     @JsonProperty("txtNinteiShinsakaiIken")
     public void setTxtNinteiShinsakaiIken(TextBoxMultiLine txtNinteiShinsakaiIken) {
-        this.txtNinteiShinsakaiIken=txtNinteiShinsakaiIken;
+        this.txtNinteiShinsakaiIken = txtNinteiShinsakaiIken;
     }
 
     @JsonProperty("lblBiko")
@@ -126,7 +129,7 @@ public class JukyuShikakuShomeishoHakkoDiv extends Panel implements IJukyuShikak
 
     @JsonProperty("lblBiko")
     public void setLblBiko(Label lblBiko) {
-        this.lblBiko=lblBiko;
+        this.lblBiko = lblBiko;
     }
 
     @JsonProperty("txtBiko")
@@ -136,7 +139,7 @@ public class JukyuShikakuShomeishoHakkoDiv extends Panel implements IJukyuShikak
 
     @JsonProperty("txtBiko")
     public void setTxtBiko(TextBoxMultiLine txtBiko) {
-        this.txtBiko=txtBiko;
+        this.txtBiko = txtBiko;
     }
 
     @JsonProperty("chkJushoHihyoji")
@@ -146,9 +149,8 @@ public class JukyuShikakuShomeishoHakkoDiv extends Panel implements IJukyuShikak
 
     @JsonProperty("chkJushoHihyoji")
     public void setChkJushoHihyoji(CheckBoxList chkJushoHihyoji) {
-        this.chkJushoHihyoji=chkJushoHihyoji;
+        this.chkJushoHihyoji = chkJushoHihyoji;
     }
 
     //--------------- この行より下にコードを追加してください -------------------
-
 }

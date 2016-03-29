@@ -4,23 +4,30 @@ package jp.co.ndensan.reams.db.dbz.divcontroller.entity.parentdiv.KaigoNinteiShi
  * このファイルへの変更は、再生成時には損失するため
  * 不正な動作の原因になります。
  */
-import jp.co.ndensan.reams.db.dbz.divcontroller.entity.parentdiv.KaigoNinteiShinseiKihonJohoInput.IKaigoNinteiShinseiKihonJohoInputDiv;
+
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.ui.binding.*;
-import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
-
 import java.util.HashSet;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.ui.binding.ButtonDialog;
+import jp.co.ndensan.reams.uz.uza.ui.binding.CheckBoxList;
+import jp.co.ndensan.reams.uz.uza.ui.binding.DropDownList;
+import jp.co.ndensan.reams.uz.uza.ui.binding.Mode;
+import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
+import jp.co.ndensan.reams.uz.uza.ui.binding.RadioButton;
+import jp.co.ndensan.reams.uz.uza.ui.binding.TextBox;
+import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxDate;
+import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxMultiLine;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ICommonChildDivMode;
 import jp.co.ndensan.reams.uz.uza.ui.servlets._CommonChildDivModeUtil;
 
 /**
- * KaigoNinteiShinseiKihonJohoInput のクラスファイル 
- * 
+ * KaigoNinteiShinseiKihonJohoInput のクラスファイル
+ *
  * @author 自動生成
  */
 public class KaigoNinteiShinseiKihonJohoInputDiv extends Panel implements IKaigoNinteiShinseiKihonJohoInputDiv {
+
     // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：Uz-master-44">
     /*
      * [ private の作成 ]
@@ -70,7 +77,7 @@ public class KaigoNinteiShinseiKihonJohoInputDiv extends Panel implements IKaigo
 
     @JsonProperty("radShinseishoKubun")
     public void setRadShinseishoKubun(RadioButton radShinseishoKubun) {
-        this.radShinseishoKubun=radShinseishoKubun;
+        this.radShinseishoKubun = radShinseishoKubun;
     }
 
     @JsonProperty("txtShinseiYMD")
@@ -80,7 +87,7 @@ public class KaigoNinteiShinseiKihonJohoInputDiv extends Panel implements IKaigo
 
     @JsonProperty("txtShinseiYMD")
     public void setTxtShinseiYMD(TextBoxDate txtShinseiYMD) {
-        this.txtShinseiYMD=txtShinseiYMD;
+        this.txtShinseiYMD = txtShinseiYMD;
     }
 
     @JsonProperty("ddlShinseiShubetsu")
@@ -90,7 +97,7 @@ public class KaigoNinteiShinseiKihonJohoInputDiv extends Panel implements IKaigo
 
     @JsonProperty("ddlShinseiShubetsu")
     public void setDdlShinseiShubetsu(DropDownList ddlShinseiShubetsu) {
-        this.ddlShinseiShubetsu=ddlShinseiShubetsu;
+        this.ddlShinseiShubetsu = ddlShinseiShubetsu;
     }
 
     @JsonProperty("ddlShinseiKubunShinseiji")
@@ -100,7 +107,7 @@ public class KaigoNinteiShinseiKihonJohoInputDiv extends Panel implements IKaigo
 
     @JsonProperty("ddlShinseiKubunShinseiji")
     public void setDdlShinseiKubunShinseiji(DropDownList ddlShinseiKubunShinseiji) {
-        this.ddlShinseiKubunShinseiji=ddlShinseiKubunShinseiji;
+        this.ddlShinseiKubunShinseiji = ddlShinseiKubunShinseiji;
     }
 
     @JsonProperty("ddlShinseiKubunHorei")
@@ -110,7 +117,7 @@ public class KaigoNinteiShinseiKihonJohoInputDiv extends Panel implements IKaigo
 
     @JsonProperty("ddlShinseiKubunHorei")
     public void setDdlShinseiKubunHorei(DropDownList ddlShinseiKubunHorei) {
-        this.ddlShinseiKubunHorei=ddlShinseiKubunHorei;
+        this.ddlShinseiKubunHorei = ddlShinseiKubunHorei;
     }
 
     @JsonProperty("chkKyuSochisha")
@@ -120,7 +127,7 @@ public class KaigoNinteiShinseiKihonJohoInputDiv extends Panel implements IKaigo
 
     @JsonProperty("chkKyuSochisha")
     public void setChkKyuSochisha(CheckBoxList chkKyuSochisha) {
-        this.chkKyuSochisha=chkKyuSochisha;
+        this.chkKyuSochisha = chkKyuSochisha;
     }
 
     @JsonProperty("ddlHihokenshaKubun")
@@ -130,7 +137,7 @@ public class KaigoNinteiShinseiKihonJohoInputDiv extends Panel implements IKaigo
 
     @JsonProperty("ddlHihokenshaKubun")
     public void setDdlHihokenshaKubun(DropDownList ddlHihokenshaKubun) {
-        this.ddlHihokenshaKubun=ddlHihokenshaKubun;
+        this.ddlHihokenshaKubun = ddlHihokenshaKubun;
     }
 
     @JsonProperty("chkShikakuShutokuMae")
@@ -140,7 +147,7 @@ public class KaigoNinteiShinseiKihonJohoInputDiv extends Panel implements IKaigo
 
     @JsonProperty("chkShikakuShutokuMae")
     public void setChkShikakuShutokuMae(CheckBoxList chkShikakuShutokuMae) {
-        this.chkShikakuShutokuMae=chkShikakuShutokuMae;
+        this.chkShikakuShutokuMae = chkShikakuShutokuMae;
     }
 
     @JsonProperty("ddlTokuteiShippei")
@@ -150,7 +157,7 @@ public class KaigoNinteiShinseiKihonJohoInputDiv extends Panel implements IKaigo
 
     @JsonProperty("ddlTokuteiShippei")
     public void setDdlTokuteiShippei(DropDownList ddlTokuteiShippei) {
-        this.ddlTokuteiShippei=ddlTokuteiShippei;
+        this.ddlTokuteiShippei = ddlTokuteiShippei;
     }
 
     @JsonProperty("txtShinseiJokyo")
@@ -160,7 +167,7 @@ public class KaigoNinteiShinseiKihonJohoInputDiv extends Panel implements IKaigo
 
     @JsonProperty("txtShinseiJokyo")
     public void setTxtShinseiJokyo(TextBox txtShinseiJokyo) {
-        this.txtShinseiJokyo=txtShinseiJokyo;
+        this.txtShinseiJokyo = txtShinseiJokyo;
     }
 
     @JsonProperty("ServiceSakujo")
@@ -170,7 +177,7 @@ public class KaigoNinteiShinseiKihonJohoInputDiv extends Panel implements IKaigo
 
     @JsonProperty("ServiceSakujo")
     public void setServiceSakujo(ServiceSakujoDiv ServiceSakujo) {
-        this.ServiceSakujo=ServiceSakujo;
+        this.ServiceSakujo = ServiceSakujo;
     }
 
     @JsonProperty("NinteiShinseiRiyu")
@@ -180,7 +187,7 @@ public class KaigoNinteiShinseiKihonJohoInputDiv extends Panel implements IKaigo
 
     @JsonProperty("NinteiShinseiRiyu")
     public void setNinteiShinseiRiyu(NinteiShinseiRiyuDiv NinteiShinseiRiyu) {
-        this.NinteiShinseiRiyu=NinteiShinseiRiyu;
+        this.NinteiShinseiRiyu = NinteiShinseiRiyu;
     }
 
     @JsonProperty("hdnServiceSakujoTeikeibunKey")
@@ -190,7 +197,7 @@ public class KaigoNinteiShinseiKihonJohoInputDiv extends Panel implements IKaigo
 
     @JsonProperty("hdnServiceSakujoTeikeibunKey")
     public void setHdnServiceSakujoTeikeibunKey(RString hdnServiceSakujoTeikeibunKey) {
-        this.hdnServiceSakujoTeikeibunKey=hdnServiceSakujoTeikeibunKey;
+        this.hdnServiceSakujoTeikeibunKey = hdnServiceSakujoTeikeibunKey;
     }
 
     @JsonProperty("hdnNinteiRiyuTeikeibunKey")
@@ -200,7 +207,7 @@ public class KaigoNinteiShinseiKihonJohoInputDiv extends Panel implements IKaigo
 
     @JsonProperty("hdnNinteiRiyuTeikeibunKey")
     public void setHdnNinteiRiyuTeikeibunKey(RString hdnNinteiRiyuTeikeibunKey) {
-        this.hdnNinteiRiyuTeikeibunKey=hdnNinteiRiyuTeikeibunKey;
+        this.hdnNinteiRiyuTeikeibunKey = hdnNinteiRiyuTeikeibunKey;
     }
 
     /*
@@ -232,7 +239,7 @@ public class KaigoNinteiShinseiKihonJohoInputDiv extends Panel implements IKaigo
             InputType[] enumArray = InputType.values();
 
             for (InputType enumStr : enumArray) {
-                if (str.equals(enumStr.name.toString())) { 
+                if (str.equals(enumStr.name.toString())) {
                     return enumStr;
                 }
             }
@@ -247,11 +254,11 @@ public class KaigoNinteiShinseiKihonJohoInputDiv extends Panel implements IKaigo
     }
 
     public InputType getMode_InputType() {
-        return (InputType) _CommonChildDivModeUtil.getMode( this.modes, InputType.class );
+        return (InputType) _CommonChildDivModeUtil.getMode(this.modes, InputType.class);
     }
 
-    public void setMode_InputType( InputType value ) {
-        _CommonChildDivModeUtil.setMode( this.modes, InputType.class , value );
+    public void setMode_InputType(InputType value) {
+        _CommonChildDivModeUtil.setMode(this.modes, InputType.class, value);
     }
 
     /*
@@ -263,7 +270,7 @@ public class KaigoNinteiShinseiKihonJohoInputDiv extends Panel implements IKaigo
     }
 
     @JsonIgnore
-    public void  setBtnServiceSakujoTeikeibun(ButtonDialog btnServiceSakujoTeikeibun) {
+    public void setBtnServiceSakujoTeikeibun(ButtonDialog btnServiceSakujoTeikeibun) {
         this.getServiceSakujo().setBtnServiceSakujoTeikeibun(btnServiceSakujoTeikeibun);
     }
 
@@ -273,7 +280,7 @@ public class KaigoNinteiShinseiKihonJohoInputDiv extends Panel implements IKaigo
     }
 
     @JsonIgnore
-    public void  setTxtServiceSakujo(TextBoxMultiLine txtServiceSakujo) {
+    public void setTxtServiceSakujo(TextBoxMultiLine txtServiceSakujo) {
         this.getServiceSakujo().setTxtServiceSakujo(txtServiceSakujo);
     }
 
@@ -283,7 +290,7 @@ public class KaigoNinteiShinseiKihonJohoInputDiv extends Panel implements IKaigo
     }
 
     @JsonIgnore
-    public void  setBtnNinteiShinseiRiyuTeikeibun(ButtonDialog btnNinteiShinseiRiyuTeikeibun) {
+    public void setBtnNinteiShinseiRiyuTeikeibun(ButtonDialog btnNinteiShinseiRiyuTeikeibun) {
         this.getNinteiShinseiRiyu().setBtnNinteiShinseiRiyuTeikeibun(btnNinteiShinseiRiyuTeikeibun);
     }
 
@@ -293,7 +300,7 @@ public class KaigoNinteiShinseiKihonJohoInputDiv extends Panel implements IKaigo
     }
 
     @JsonIgnore
-    public void  setTxtNinteiShinseRiyu(TextBoxMultiLine txtNinteiShinseRiyu) {
+    public void setTxtNinteiShinseRiyu(TextBoxMultiLine txtNinteiShinseRiyu) {
         this.getNinteiShinseiRiyu().setTxtNinteiShinseRiyu(txtNinteiShinseRiyu);
     }
 

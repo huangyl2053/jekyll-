@@ -1,19 +1,17 @@
 package jp.co.ndensan.reams.db.dbz.divcontroller.entity.parentdiv;
+
 /**
- * このコードはツールによって生成されました。
- * このファイルへの変更は、再生成時には損失するため
- * 不正な動作の原因になります。
+ * このコードはツールによって生成されました。 このファイルへの変更は、再生成時には損失するため 不正な動作の原因になります。
  */
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import jp.co.ndensan.reams.db.dbz.divcontroller.entity.parentdiv.GenGakuKikan2Div;
-import jp.co.ndensan.reams.uz.uza.ui.binding.*;
+import jp.co.ndensan.reams.uz.uza.ui.binding.Label;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
-import jp.co.ndensan.reams.uz.uza.ui.binding.domain.*;
+import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxNum;
 
 /**
- * GnegakuKikan のクラスファイル 
- * 
+ * GnegakuKikan のクラスファイル
+ *
  * @author 自動生成
  */
 public class GnegakuKikanDiv extends Panel {
@@ -23,6 +21,7 @@ public class GnegakuKikanDiv extends Panel {
      * コントロール名とフィールド名を取得する
      * private + コントロール名 + フィールド名 の文字列を作成
      */
+
     @JsonProperty("lblKeisanShiki")
     private Label lblKeisanShiki;
     @JsonProperty("GenGakuKikan2")
@@ -41,7 +40,7 @@ public class GnegakuKikanDiv extends Panel {
 
     @JsonProperty("lblKeisanShiki")
     public void setLblKeisanShiki(Label lblKeisanShiki) {
-        this.lblKeisanShiki=lblKeisanShiki;
+        this.lblKeisanShiki = lblKeisanShiki;
     }
 
     @JsonProperty("GenGakuKikan2")
@@ -51,7 +50,7 @@ public class GnegakuKikanDiv extends Panel {
 
     @JsonProperty("GenGakuKikan2")
     public void setGenGakuKikan2(GenGakuKikan2Div GenGakuKikan2) {
-        this.GenGakuKikan2=GenGakuKikan2;
+        this.GenGakuKikan2 = GenGakuKikan2;
     }
 
     /*
@@ -63,7 +62,7 @@ public class GnegakuKikanDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setLblGenGakuKikan(Label lblGenGakuKikan) {
+    public void setLblGenGakuKikan(Label lblGenGakuKikan) {
         this.getGenGakuKikan2().setLblGenGakuKikan(lblGenGakuKikan);
     }
 
@@ -73,7 +72,7 @@ public class GnegakuKikanDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setTxtGenGakuKikan(TextBoxNum txtGenGakuKikan) {
+    public void setTxtGenGakuKikan(TextBoxNum txtGenGakuKikan) {
         this.getGenGakuKikan2().setTxtGenGakuKikan(txtGenGakuKikan);
     }
 

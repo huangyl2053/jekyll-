@@ -62,7 +62,8 @@ import jp.co.ndensan.reams.uz.uza.util.db.searchcondition.StringOperator;
  * @author N8156 宮本 康
  */
 public class TaishoshaSearch {
- private static final ISearchCondition 条件無 = null;
+
+    private static final ISearchCondition 条件無 = null;
     private static final int 最近処理者検索数 = 1;
     private static final int 最大取得件数 = new GaitoshaKensakuConfig().get最大取得件数();
 
@@ -137,8 +138,8 @@ public class TaishoshaSearch {
         boolean 検索条件Flag = 検索条件Div.getKaigoFinder().getTxtHihokenshaNo().getValue().isEmpty()
                 && 検索条件Div.getKaigoFinder().getKaigoFinderDetail().getChkHihokenshaDaicho().getSelectedItems().isEmpty()
                 && 検索条件Div.getKaigoFinder().getKaigoFinderDetail().getChkJukyushaDaicho().getSelectedItems().isEmpty()
-                && 検索条件Div.getKaigoFinder().getKaigoFinderDetail().getChkJushochiTokureisha().getSelectedItems().isEmpty() //&& !検索条件Div.getCcdAtenaFinder().hasChanged()
-                ;
+                && 検索条件Div.getKaigoFinder().getKaigoFinderDetail().getChkJushochiTokureisha().getSelectedItems().isEmpty(); //&& !検索条件Div.getCcdAtenaFinder().hasChanged()
+
         if (検索条件Flag) {
             pairs.add(TaishoshaSearchValidationHelper.validate検索条件(検索条件Flag, div.getSearchCondition()));
             responseData = ResponseData.of(div).addValidationMessages(pairs).respond();

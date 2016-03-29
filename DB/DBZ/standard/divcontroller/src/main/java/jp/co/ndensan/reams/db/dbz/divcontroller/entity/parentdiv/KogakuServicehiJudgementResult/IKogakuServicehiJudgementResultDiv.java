@@ -14,10 +14,10 @@ public interface IKogakuServicehiJudgementResultDiv {
 
     KogakuServicehiJudgementResultDetail1Div getKogakuServicehiJudgementResultDetail1();
 
-    void setKogakuServicehiJudgementResultDetail1(KogakuServicehiJudgementResultDetail1Div KogakuServicehiJudgementResultDetail1);
+    void setKogakuServicehiJudgementResultDetail1(KogakuServicehiJudgementResultDetail1Div div);
 
     KogakuServicehiJudgementResultDetail2Div getKogakuServicehiJudgementResultDetail2();
 
-    void setKogakuServicehiJudgementResultDetail2(KogakuServicehiJudgementResultDetail2Div KogakuServicehiJudgementResultDetail2);
+    void setKogakuServicehiJudgementResultDetail2(KogakuServicehiJudgementResultDetail2Div div);
 
 }

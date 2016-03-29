@@ -9,7 +9,6 @@ import jp.co.ndensan.reams.db.dbz.definition.core.enumeratedtype.ViewExecutionSt
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.shikakuhenkorireki.ShikakuHenkoRireki.ShikakuHenkoRirekiDiv;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.shikakuhenkorireki.ShikakuHenkoRireki.ShikakuHenkoRirekiHandler;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.shikakuhenkorireki.ShikakuHenkoRireki.dgHenko_Row;
-import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
@@ -19,9 +18,6 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
  * @author n8235 船山洋介
  */
 public class ShikakuHenkoRireki {
-
-    private static final Code 広域 = new Code("111");
-    private static final RString 合併有り = new RString("1");
 
     /**
      * 追加ボタンを押下した際に実行します。<br/>

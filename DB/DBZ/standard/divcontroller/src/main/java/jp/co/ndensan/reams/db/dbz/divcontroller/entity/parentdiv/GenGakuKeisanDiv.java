@@ -1,24 +1,17 @@
 package jp.co.ndensan.reams.db.dbz.divcontroller.entity.parentdiv;
+
 /**
- * このコードはツールによって生成されました。
- * このファイルへの変更は、再生成時には損失するため
- * 不正な動作の原因になります。
+ * このコードはツールによって生成されました。 このファイルへの変更は、再生成時には損失するため 不正な動作の原因になります。
  */
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import jp.co.ndensan.reams.db.dbz.divcontroller.entity.parentdiv.ChoshuKenKeimetsuKikan1Div;
-import jp.co.ndensan.reams.db.dbz.divcontroller.entity.parentdiv.ChoshuKenKeimetsuKikan2Div;
-import jp.co.ndensan.reams.db.dbz.divcontroller.entity.parentdiv.ChoshuKenKeimetsuKikan3Div;
-import jp.co.ndensan.reams.db.dbz.divcontroller.entity.parentdiv.ChoshuKenKeimetsuKikan4Div;
-import jp.co.ndensan.reams.db.dbz.divcontroller.entity.parentdiv.GenGakuKikan2Div;
-import jp.co.ndensan.reams.db.dbz.divcontroller.entity.parentdiv.GnegakuKikanDiv;
-import jp.co.ndensan.reams.uz.uza.ui.binding.*;
+import jp.co.ndensan.reams.uz.uza.ui.binding.Label;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
-import jp.co.ndensan.reams.uz.uza.ui.binding.domain.*;
+import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxNum;
 
 /**
- * GenGakuKeisan のクラスファイル 
- * 
+ * GenGakuKeisan のクラスファイル
+ *
  * @author 自動生成
  */
 public class GenGakuKeisanDiv extends Panel {
@@ -28,6 +21,7 @@ public class GenGakuKeisanDiv extends Panel {
      * コントロール名とフィールド名を取得する
      * private + コントロール名 + フィールド名 の文字列を作成
      */
+
     @JsonProperty("ChoshuKenKeimetsuKikan1")
     private ChoshuKenKeimetsuKikan1Div ChoshuKenKeimetsuKikan1;
     @JsonProperty("ChoshuKenKeimetsuKikan2")
@@ -48,7 +42,7 @@ public class GenGakuKeisanDiv extends Panel {
 
     @JsonProperty("ChoshuKenKeimetsuKikan1")
     public void setChoshuKenKeimetsuKikan1(ChoshuKenKeimetsuKikan1Div ChoshuKenKeimetsuKikan1) {
-        this.ChoshuKenKeimetsuKikan1=ChoshuKenKeimetsuKikan1;
+        this.ChoshuKenKeimetsuKikan1 = ChoshuKenKeimetsuKikan1;
     }
 
     @JsonProperty("ChoshuKenKeimetsuKikan2")
@@ -58,7 +52,7 @@ public class GenGakuKeisanDiv extends Panel {
 
     @JsonProperty("ChoshuKenKeimetsuKikan2")
     public void setChoshuKenKeimetsuKikan2(ChoshuKenKeimetsuKikan2Div ChoshuKenKeimetsuKikan2) {
-        this.ChoshuKenKeimetsuKikan2=ChoshuKenKeimetsuKikan2;
+        this.ChoshuKenKeimetsuKikan2 = ChoshuKenKeimetsuKikan2;
     }
 
     @JsonProperty("GnegakuKikan")
@@ -68,7 +62,7 @@ public class GenGakuKeisanDiv extends Panel {
 
     @JsonProperty("GnegakuKikan")
     public void setGnegakuKikan(GnegakuKikanDiv GnegakuKikan) {
-        this.GnegakuKikan=GnegakuKikan;
+        this.GnegakuKikan = GnegakuKikan;
     }
 
     /*
@@ -80,7 +74,7 @@ public class GenGakuKeisanDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setLblChoShushometsu1(Label lblChoShushometsu1) {
+    public void setLblChoShushometsu1(Label lblChoShushometsu1) {
         this.getChoshuKenKeimetsuKikan1().setLblChoShushometsu1(lblChoShushometsu1);
     }
 
@@ -90,7 +84,7 @@ public class GenGakuKeisanDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setTxtChoShushometsu1(TextBoxNum txtChoShushometsu1) {
+    public void setTxtChoShushometsu1(TextBoxNum txtChoShushometsu1) {
         this.getChoshuKenKeimetsuKikan1().setTxtChoShushometsu1(txtChoShushometsu1);
     }
 
@@ -100,7 +94,7 @@ public class GenGakuKeisanDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setKakesan(KakesanDiv Kakesan) {
+    public void setKakesan(KakesanDiv Kakesan) {
         this.getChoshuKenKeimetsuKikan1().setKakesan(Kakesan);
     }
 
@@ -110,7 +104,7 @@ public class GenGakuKeisanDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setLblKakesan(Label lblKakesan) {
+    public void setLblKakesan(Label lblKakesan) {
         this.getChoshuKenKeimetsuKikan1().getKakesan().setLblKakesan(lblKakesan);
     }
 
@@ -120,7 +114,7 @@ public class GenGakuKeisanDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setChoshuKenKeimetsuKikan3(ChoshuKenKeimetsuKikan3Div ChoshuKenKeimetsuKikan3) {
+    public void setChoshuKenKeimetsuKikan3(ChoshuKenKeimetsuKikan3Div ChoshuKenKeimetsuKikan3) {
         this.getChoshuKenKeimetsuKikan2().setChoshuKenKeimetsuKikan3(ChoshuKenKeimetsuKikan3);
     }
 
@@ -130,7 +124,7 @@ public class GenGakuKeisanDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setLblChoShushometsu2(Label lblChoShushometsu2) {
+    public void setLblChoShushometsu2(Label lblChoShushometsu2) {
         this.getChoshuKenKeimetsuKikan2().getChoshuKenKeimetsuKikan3().setLblChoShushometsu2(lblChoShushometsu2);
     }
 
@@ -140,7 +134,7 @@ public class GenGakuKeisanDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setTxtChoShushometsu2(TextBoxNum txtChoShushometsu2) {
+    public void setTxtChoShushometsu2(TextBoxNum txtChoShushometsu2) {
         this.getChoshuKenKeimetsuKikan2().getChoshuKenKeimetsuKikan3().setTxtChoShushometsu2(txtChoShushometsu2);
     }
 
@@ -150,7 +144,7 @@ public class GenGakuKeisanDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setLblLine(Label lblLine) {
+    public void setLblLine(Label lblLine) {
         this.getChoshuKenKeimetsuKikan2().getChoshuKenKeimetsuKikan3().setLblLine(lblLine);
     }
 
@@ -160,7 +154,7 @@ public class GenGakuKeisanDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setChoshuKenKeimetsuKikan4(ChoshuKenKeimetsuKikan4Div ChoshuKenKeimetsuKikan4) {
+    public void setChoshuKenKeimetsuKikan4(ChoshuKenKeimetsuKikan4Div ChoshuKenKeimetsuKikan4) {
         this.getChoshuKenKeimetsuKikan2().setChoshuKenKeimetsuKikan4(ChoshuKenKeimetsuKikan4);
     }
 
@@ -170,7 +164,7 @@ public class GenGakuKeisanDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setLblChoShushometsu3(Label lblChoShushometsu3) {
+    public void setLblChoShushometsu3(Label lblChoShushometsu3) {
         this.getChoshuKenKeimetsuKikan2().getChoshuKenKeimetsuKikan4().setLblChoShushometsu3(lblChoShushometsu3);
     }
 
@@ -180,7 +174,7 @@ public class GenGakuKeisanDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setTxtChoShushometsu3(TextBoxNum txtChoShushometsu3) {
+    public void setTxtChoShushometsu3(TextBoxNum txtChoShushometsu3) {
         this.getChoshuKenKeimetsuKikan2().getChoshuKenKeimetsuKikan4().setTxtChoShushometsu3(txtChoShushometsu3);
     }
 
@@ -190,7 +184,7 @@ public class GenGakuKeisanDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setKasan(KasanDiv Kasan) {
+    public void setKasan(KasanDiv Kasan) {
         this.getChoshuKenKeimetsuKikan2().setKasan(Kasan);
     }
 
@@ -200,7 +194,7 @@ public class GenGakuKeisanDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setLblKasan(Label lblKasan) {
+    public void setLblKasan(Label lblKasan) {
         this.getChoshuKenKeimetsuKikan2().getKasan().setLblKasan(lblKasan);
     }
 
@@ -210,7 +204,7 @@ public class GenGakuKeisanDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setNofuZumiKikan(NofuZumiKikanDiv NofuZumiKikan) {
+    public void setNofuZumiKikan(NofuZumiKikanDiv NofuZumiKikan) {
         this.getChoshuKenKeimetsuKikan2().setNofuZumiKikan(NofuZumiKikan);
     }
 
@@ -220,7 +214,7 @@ public class GenGakuKeisanDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setLblNofuZumiKikan(Label lblNofuZumiKikan) {
+    public void setLblNofuZumiKikan(Label lblNofuZumiKikan) {
         this.getChoshuKenKeimetsuKikan2().getNofuZumiKikan().setLblNofuZumiKikan(lblNofuZumiKikan);
     }
 
@@ -230,7 +224,7 @@ public class GenGakuKeisanDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setTxtNofuZumiKikan(TextBoxNum txtNofuZumiKikan) {
+    public void setTxtNofuZumiKikan(TextBoxNum txtNofuZumiKikan) {
         this.getChoshuKenKeimetsuKikan2().getNofuZumiKikan().setTxtNofuZumiKikan(txtNofuZumiKikan);
     }
 
@@ -240,7 +234,7 @@ public class GenGakuKeisanDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setLblKeisanShiki(Label lblKeisanShiki) {
+    public void setLblKeisanShiki(Label lblKeisanShiki) {
         this.getGnegakuKikan().setLblKeisanShiki(lblKeisanShiki);
     }
 
@@ -250,7 +244,7 @@ public class GenGakuKeisanDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setGenGakuKikan2(GenGakuKikan2Div GenGakuKikan2) {
+    public void setGenGakuKikan2(GenGakuKikan2Div GenGakuKikan2) {
         this.getGnegakuKikan().setGenGakuKikan2(GenGakuKikan2);
     }
 
@@ -260,7 +254,7 @@ public class GenGakuKeisanDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setLblGenGakuKikan(Label lblGenGakuKikan) {
+    public void setLblGenGakuKikan(Label lblGenGakuKikan) {
         this.getGnegakuKikan().getGenGakuKikan2().setLblGenGakuKikan(lblGenGakuKikan);
     }
 
@@ -270,7 +264,7 @@ public class GenGakuKeisanDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setTxtGenGakuKikan(TextBoxNum txtGenGakuKikan) {
+    public void setTxtGenGakuKikan(TextBoxNum txtGenGakuKikan) {
         this.getGnegakuKikan().getGenGakuKikan2().setTxtGenGakuKikan(txtGenGakuKikan);
     }
 

@@ -4,20 +4,16 @@ package jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.KaigoNint
  * このファイルへの変更は、再生成時には損失するため
  * 不正な動作の原因になります。
  */
-import com.fasterxml.jackson.annotation.JsonProperty;
-import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.ui.binding.*;
-import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
-import jp.co.ndensan.reams.uz.uza.ui.binding.domain.*;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import java.util.HashSet;
-import jp.co.ndensan.reams.uz.uza.ui.servlets.ICommonChildDivMode;
-import jp.co.ndensan.reams.uz.uza.ui.servlets._CommonChildDivModeUtil;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo;
 import jp.co.ndensan.reams.db.dbz.divcontroller.handler.commonchilddiv.KaigoNinteiAtenaInfo.KaigoNinteiAtenaInfoHandler;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.binding.ButtonDialog;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Mode;
+import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 import jp.co.ndensan.reams.uz.uza.ui.binding.StaticImage;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TextBox;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxDate;
@@ -25,6 +21,8 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxYubinNo;
 import jp.co.ndensan.reams.uz.uza.ui.binding.domain.TextBoxJusho;
 import jp.co.ndensan.reams.uz.uza.ui.binding.domain.TextBoxSetaiCode;
 import jp.co.ndensan.reams.uz.uza.ui.binding.domain.TextBoxTelNo;
+import jp.co.ndensan.reams.uz.uza.ui.servlets.ICommonChildDivMode;
+import jp.co.ndensan.reams.uz.uza.ui.servlets._CommonChildDivModeUtil;
 
 /**
  * KaigoNinteiAtenaInfo のクラスファイル
@@ -32,6 +30,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.domain.TextBoxTelNo;
  * @author 自動生成
  */
 public class KaigoNinteiAtenaInfoDiv extends Panel implements IKaigoNinteiAtenaInfoDiv {
+
     // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-01-15_09-59-03">
     /*
      * [ private の作成 ]
@@ -510,7 +509,7 @@ public class KaigoNinteiAtenaInfoDiv extends Panel implements IKaigoNinteiAtenaI
             ShoriType[] enumArray = ShoriType.values();
 
             for (ShoriType enumStr : enumArray) {
-                if (str.equals(enumStr.name.toString())) { 
+                if (str.equals(enumStr.name.toString())) {
                     return enumStr;
                 }
             }
@@ -525,11 +524,11 @@ public class KaigoNinteiAtenaInfoDiv extends Panel implements IKaigoNinteiAtenaI
     }
 
     public ShoriType getMode_ShoriType() {
-        return (ShoriType) _CommonChildDivModeUtil.getMode( this.modes, ShoriType.class );
+        return (ShoriType) _CommonChildDivModeUtil.getMode(this.modes, ShoriType.class);
     }
 
-    public void setMode_ShoriType( ShoriType value ) {
-        _CommonChildDivModeUtil.setMode( this.modes, ShoriType.class , value );
+    public void setMode_ShoriType(ShoriType value) {
+        _CommonChildDivModeUtil.setMode(this.modes, ShoriType.class, value);
     }
 
     public static enum AtenaType implements ICommonChildDivMode {
@@ -547,7 +546,7 @@ public class KaigoNinteiAtenaInfoDiv extends Panel implements IKaigoNinteiAtenaI
             AtenaType[] enumArray = AtenaType.values();
 
             for (AtenaType enumStr : enumArray) {
-                if (str.equals(enumStr.name.toString())) { 
+                if (str.equals(enumStr.name.toString())) {
                     return enumStr;
                 }
             }
@@ -562,11 +561,11 @@ public class KaigoNinteiAtenaInfoDiv extends Panel implements IKaigoNinteiAtenaI
     }
 
     public AtenaType getMode_AtenaType() {
-        return (AtenaType) _CommonChildDivModeUtil.getMode( this.modes, AtenaType.class );
+        return (AtenaType) _CommonChildDivModeUtil.getMode(this.modes, AtenaType.class);
     }
 
-    public void setMode_AtenaType( AtenaType value ) {
-        _CommonChildDivModeUtil.setMode( this.modes, AtenaType.class , value );
+    public void setMode_AtenaType(AtenaType value) {
+        _CommonChildDivModeUtil.setMode(this.modes, AtenaType.class, value);
     }
 
     // </editor-fold>

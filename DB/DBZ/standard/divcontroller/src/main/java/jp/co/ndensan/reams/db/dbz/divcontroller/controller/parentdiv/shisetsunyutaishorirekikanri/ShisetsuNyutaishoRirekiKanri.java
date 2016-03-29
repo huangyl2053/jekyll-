@@ -7,14 +7,11 @@ package jp.co.ndensan.reams.db.dbz.divcontroller.controller.parentdiv.shisetsuny
 
 //import jp.co.ndensan.reams.db.dbz.business.shisetsunyutaisho.ShisetsuNyutaishoModel;
 //import jp.co.ndensan.reams.db.dbz.definition.core.util.optional.Optional;
+import jp.co.ndensan.reams.db.dbz.definition.core.enumeratedtype.ViewExecutionStatus;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.parentdiv.shisetsunyutaishorirekikanri.ShisetsuNyutaishoRirekiKanriDiv;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.parentdiv.shisetsunyutaishorirekikanri.ShisetsuNyutaishoRirekiKanriHandler;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.parentdiv.shisetsunyutaishorirekikanri.dgShisetsuNyutaishoRireki_Row;
-import jp.co.ndensan.reams.db.dbz.definition.core.enumeratedtype.ViewExecutionStatus;
-//import jp.co.ndensan.reams.db.dbz.definition.core.util.itemlist.IItemList;
-//import jp.co.ndensan.reams.db.dbz.definition.core.util.itemlist.ItemList;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrQuestionMessages;
-//import jp.co.ndensan.reams.ur.urz.divcontroller.validations.ValidationHelper;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -38,8 +35,7 @@ public class ShisetsuNyutaishoRirekiKanri {
     /**
      * 共有子Divのロード時に行う処理です。
      *
-     * @param shisetsuNyutaishoRirekiDiv
-     * {@link ShisetsuNyutaishoRirekiKanriDiv 施設入退所履歴Div}
+     * @param shisetsuNyutaishoRirekiDiv {@link ShisetsuNyutaishoRirekiKanriDiv 施設入退所履歴Div}
      * @return レスポンス
      */
     public ResponseData<ShisetsuNyutaishoRirekiKanriDiv> onLoad(ShisetsuNyutaishoRirekiKanriDiv shisetsuNyutaishoRirekiDiv) {
@@ -51,8 +47,7 @@ public class ShisetsuNyutaishoRirekiKanri {
      * 追加ボタンが押下された際に実行します。<br/>
      * 追加処理のための前準備を行います。
      *
-     * @param shisetsuNyutaishoRirekiDiv
-     * {@link ShisetsuNyutaishoRirekiKanriDiv 施設入退所履歴Div}
+     * @param shisetsuNyutaishoRirekiDiv {@link ShisetsuNyutaishoRirekiKanriDiv 施設入退所履歴Div}
      * @return 施設入退所履歴Divを持つResponseData
      */
     public ResponseData<ShisetsuNyutaishoRirekiKanriDiv> onClick_btnAddShisetsuNyutaisho(
@@ -79,8 +74,7 @@ public class ShisetsuNyutaishoRirekiKanri {
      * 施設入退所履歴上の1行が選択された際に実行します。<br/>
      * 選択行の状態に応じて、修正・照会などの処理のための前準備を行います。
      *
-     * @param shisetsuNyutaishoRirekiDiv
-     * {@link ShisetsuNyutaishoRirekiKanriDiv 施設入退所履歴Div}
+     * @param shisetsuNyutaishoRirekiDiv {@link ShisetsuNyutaishoRirekiKanriDiv 施設入退所履歴Div}
      * @return 施設入退所履歴Divを持つResponseData
      */
     public ResponseData<ShisetsuNyutaishoRirekiKanriDiv> onSelect_dgShisetsuNyutaishoRireki(
@@ -132,8 +126,7 @@ public class ShisetsuNyutaishoRirekiKanri {
      * 施設入退所履歴上の修正アイコンが押下された際に実行します。<br/>
      * 修正・変更処理のための前準備を行います。
      *
-     * @param shisetsuNyutaishoRirekiDiv
-     * {@link ShisetsuNyutaishoRirekiKanriDiv 施設入退所履歴Div}
+     * @param shisetsuNyutaishoRirekiDiv {@link ShisetsuNyutaishoRirekiKanriDiv 施設入退所履歴Div}
      * @return 施設入退所履歴Divを持つResponseData
      */
     public ResponseData<ShisetsuNyutaishoRirekiKanriDiv> onSelectByModifyButton_dgShisetsuNyutaishoRireki(
@@ -160,8 +153,7 @@ public class ShisetsuNyutaishoRirekiKanri {
      * 施設入退所履歴上の削除アイコンが押下された際に実行します。<br/>
      * 削除処理のための前準備を行います。
      *
-     * @param shisetsuNyutaishoRirekiDiv
-     * {@link ShisetsuNyutaishoRirekiKanriDiv 施設入退所履歴Div}
+     * @param shisetsuNyutaishoRirekiDiv {@link ShisetsuNyutaishoRirekiKanriDiv 施設入退所履歴Div}
      * @return 施設入退所履歴Divを持つResponseData
      */
     public ResponseData<ShisetsuNyutaishoRirekiKanriDiv> onSelectByDeleteButton_dgShisetsuNyutaishoRireki(
@@ -190,8 +182,7 @@ public class ShisetsuNyutaishoRirekiKanri {
      * 確定ボタンを押下した際に、onClick処理の前に実行されます。<br/>
      * 入力した情報について、バリデーションチェックを行います。
      *
-     * @param shisetsuNyutaishoRirekiDiv
-     * {@link ShisetsuNyutaishoRirekiKanriDiv 施設入退所履歴Div}
+     * @param shisetsuNyutaishoRirekiDiv {@link ShisetsuNyutaishoRirekiKanriDiv 施設入退所履歴Div}
      * @return 施設入退所履歴Divを持つResponseData
      */
     public ResponseData<ShisetsuNyutaishoRirekiKanriDiv> onBeforeClick_btnShisetsuNyutaishoKakutei(
@@ -217,7 +208,6 @@ public class ShisetsuNyutaishoRirekiKanri {
 //        Optional<ShisetsuNyutaishoModel> 前履歴;
 //        Optional<ShisetsuNyutaishoModel> 次履歴;
 //        IItemList<ShisetsuNyutaishoModel> 全履歴;
-
         switch (ViewExecutionStatus.toValue(rowState)) {
 
             case Add:
@@ -233,8 +223,8 @@ public class ShisetsuNyutaishoRirekiKanri {
 
 //                if (rowIndex != 0) {
 //                    int rdx = rowIndex - 1;
-                    // dgShisetsuNyutaishoRireki_Row row = shisetsuNyutaishoRirekiDiv.getDgShisetsuNyutaishoRireki().getDataSource().get(rdx);
-                    //TODO n3331 modelパッケージ廃止に伴うエラーの解消のためコメントアウト
+                // dgShisetsuNyutaishoRireki_Row row = shisetsuNyutaishoRirekiDiv.getDgShisetsuNyutaishoRireki().getDataSource().get(rdx);
+                //TODO n3331 modelパッケージ廃止に伴うエラーの解消のためコメントアウト
 //                    次履歴 = Optional.empty();
 //                    次履歴 = createHandlerOf(shisetsuNyutaishoRirekiDiv).get施設入退所履歴()
 //                            .filter(ShisetsuNyutaishoMapper.createKey(row))
@@ -242,11 +232,10 @@ public class ShisetsuNyutaishoRirekiKanri {
 //                } else {
 //                    次履歴 = Optional.empty();
 //                }
-
 //                if (rowIndex + 1 <= shisetsuNyutaishoRirekiDiv.getDgShisetsuNyutaishoRireki().getDataSource().size() - 1) {
 //                    int rdx = rowIndex + 1;
-                    //dgShisetsuNyutaishoRireki_Row row = shisetsuNyutaishoRirekiDiv.getDgShisetsuNyutaishoRireki().getDataSource().get(rdx);
-                    //TODO n3331 modelパッケージ廃止に伴うエラーの解消のためコメントアウト
+                //dgShisetsuNyutaishoRireki_Row row = shisetsuNyutaishoRirekiDiv.getDgShisetsuNyutaishoRireki().getDataSource().get(rdx);
+                //TODO n3331 modelパッケージ廃止に伴うエラーの解消のためコメントアウト
 //                    前履歴 = Optional.empty();
 //                    前履歴 = createHandlerOf(shisetsuNyutaishoRirekiDiv).get施設入退所履歴()
 //                            .filter(ShisetsuNyutaishoMapper.createKey(row))
@@ -254,7 +243,6 @@ public class ShisetsuNyutaishoRirekiKanri {
 //                } else {
 //                    前履歴 = Optional.empty();
 //                }
-
 //                全履歴 = ItemList.empty();
                 break;
             case Delete:
@@ -326,8 +314,7 @@ public class ShisetsuNyutaishoRirekiKanri {
      * 確定ボタンを押下した時に実行されます。<br/>
      * 明細エリアの入力内容を施設入退所履歴一覧に反映します。
      *
-     * @param shisetsuNyutaishoRirekiDiv
-     * {@link ShisetsuNyutaishoRirekiKanriDiv 施設入退所履歴Div}
+     * @param shisetsuNyutaishoRirekiDiv {@link ShisetsuNyutaishoRirekiKanriDiv 施設入退所履歴Div}
      * @return 施設入退所履歴Divを持つResponseData
      */
     public ResponseData<ShisetsuNyutaishoRirekiKanriDiv> onClick_btnShisetsuNyutaishoKakutei(ShisetsuNyutaishoRirekiKanriDiv shisetsuNyutaishoRirekiDiv) {
@@ -363,8 +350,7 @@ public class ShisetsuNyutaishoRirekiKanri {
      * 明細エリアの取消ボタンが押下された際に実行します。<br/>
      * 入力した情報を破棄してもよいかの確認メッセージを表示します。
      *
-     * @param shisetsuNyutaishoRirekiDiv
-     * {@link ShisetsuNyutaishoRirekiKanriDiv 施設入退所履歴Div}
+     * @param shisetsuNyutaishoRirekiDiv {@link ShisetsuNyutaishoRirekiKanriDiv 施設入退所履歴Div}
      * @return 施設入退所履歴Divを持つResponseData
      */
     public ResponseData<ShisetsuNyutaishoRirekiKanriDiv> onClick_btnShisetsuNyutaishoTorikeshi(ShisetsuNyutaishoRirekiKanriDiv shisetsuNyutaishoRirekiDiv) {
@@ -390,8 +376,8 @@ public class ShisetsuNyutaishoRirekiKanri {
         QuestionMessage message = new QuestionMessage(UrQuestionMessages.入力内容の破棄.getMessage().getCode(),
                 UrQuestionMessages.入力内容の破棄.getMessage().evaluate(), "はい", "いいえ");
 
-        ICallbackMethod[] methods = {methodYes}; //ユーザー選択時の動作を規定する
-        message.addInvokeMethod(methods);
+        // ICallbackMethod[] methods = {methodYes}; //ユーザー選択時の動作を規定する
+        message.addInvokeMethod(methodYes);
 
         response.addMessage(message);
         response.data = shisetsuNyutaishoRirekiDiv;
@@ -402,8 +388,7 @@ public class ShisetsuNyutaishoRirekiKanri {
      * 取消ボタンを押下した際に表示されるダイアログで、はいを選択した際に実行されます。<br/>
      * 明細エリアに入力した情報を破棄し、追加・修正・削除が可能な状態に戻します。
      *
-     * @param shisetsuNyutaishoRirekiDiv
-     * {@link ShisetsuNyutaishoRirekiKanriDiv 施設入退所履歴Div}
+     * @param shisetsuNyutaishoRirekiDiv {@link ShisetsuNyutaishoRirekiKanriDiv 施設入退所履歴Div}
      * @return 施設入退所履歴Divを持つResponseData
      */
     public ResponseData<ShisetsuNyutaishoRirekiKanriDiv> onClick_btnShisetsuNyutaishoTorikeshi_onYes(

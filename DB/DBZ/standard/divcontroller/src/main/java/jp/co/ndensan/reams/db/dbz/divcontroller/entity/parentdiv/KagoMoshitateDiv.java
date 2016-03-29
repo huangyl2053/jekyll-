@@ -1,18 +1,19 @@
 package jp.co.ndensan.reams.db.dbz.divcontroller.entity.parentdiv;
-/**
- * このコードはツールによって生成されました。
- * このファイルへの変更は、再生成時には損失するため
- * 不正な動作の原因になります。
- */
-import jp.co.ndensan.reams.db.dbz.divcontroller.entity.parentdiv.IKagoMoshitateDiv;
-import com.fasterxml.jackson.annotation.JsonProperty;
-import jp.co.ndensan.reams.uz.uza.ui.binding.*;
-import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
-import jp.co.ndensan.reams.uz.uza.ui.binding.domain.*;
 
 /**
- * KagoMoshitate のクラスファイル 
- * 
+ * このコードはツールによって生成されました。 このファイルへの変更は、再生成時には損失するため 不正な動作の原因になります。
+ */
+import com.fasterxml.jackson.annotation.JsonProperty;
+import jp.co.ndensan.reams.uz.uza.ui.binding.CheckBoxList;
+import jp.co.ndensan.reams.uz.uza.ui.binding.DropDownList;
+import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
+import jp.co.ndensan.reams.uz.uza.ui.binding.TextBox;
+import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxCode;
+import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxDate;
+
+/**
+ * KagoMoshitate のクラスファイル
+ *
  * @author 自動生成
  */
 public class KagoMoshitateDiv extends Panel implements IKagoMoshitateDiv {
@@ -22,6 +23,7 @@ public class KagoMoshitateDiv extends Panel implements IKagoMoshitateDiv {
      * コントロール名とフィールド名を取得する
      * private + コントロール名 + フィールド名 の文字列を作成
      */
+
     @JsonProperty("txtJigyoshaNo")
     private TextBoxCode txtJigyoshaNo;
     @JsonProperty("txtJigyoshaName")
@@ -58,7 +60,7 @@ public class KagoMoshitateDiv extends Panel implements IKagoMoshitateDiv {
 
     @JsonProperty("txtJigyoshaNo")
     public void setTxtJigyoshaNo(TextBoxCode txtJigyoshaNo) {
-        this.txtJigyoshaNo=txtJigyoshaNo;
+        this.txtJigyoshaNo = txtJigyoshaNo;
     }
 
     @JsonProperty("txtJigyoshaName")
@@ -68,7 +70,7 @@ public class KagoMoshitateDiv extends Panel implements IKagoMoshitateDiv {
 
     @JsonProperty("txtJigyoshaName")
     public void setTxtJigyoshaName(TextBox txtJigyoshaName) {
-        this.txtJigyoshaName=txtJigyoshaName;
+        this.txtJigyoshaName = txtJigyoshaName;
     }
 
     @JsonProperty("txtSendYM")
@@ -78,7 +80,7 @@ public class KagoMoshitateDiv extends Panel implements IKagoMoshitateDiv {
 
     @JsonProperty("txtSendYM")
     public void setTxtSendYM(TextBoxDate txtSendYM) {
-        this.txtSendYM=txtSendYM;
+        this.txtSendYM = txtSendYM;
     }
 
     @JsonProperty("txtMoshitateshaKubun")
@@ -88,7 +90,7 @@ public class KagoMoshitateDiv extends Panel implements IKagoMoshitateDiv {
 
     @JsonProperty("txtMoshitateshaKubun")
     public void setTxtMoshitateshaKubun(TextBox txtMoshitateshaKubun) {
-        this.txtMoshitateshaKubun=txtMoshitateshaKubun;
+        this.txtMoshitateshaKubun = txtMoshitateshaKubun;
     }
 
     @JsonProperty("txtShokisaiHokenshaNo")
@@ -98,7 +100,7 @@ public class KagoMoshitateDiv extends Panel implements IKagoMoshitateDiv {
 
     @JsonProperty("txtShokisaiHokenshaNo")
     public void setTxtShokisaiHokenshaNo(TextBoxCode txtShokisaiHokenshaNo) {
-        this.txtShokisaiHokenshaNo=txtShokisaiHokenshaNo;
+        this.txtShokisaiHokenshaNo = txtShokisaiHokenshaNo;
     }
 
     @JsonProperty("txtShokisaiHokenshaName")
@@ -108,7 +110,7 @@ public class KagoMoshitateDiv extends Panel implements IKagoMoshitateDiv {
 
     @JsonProperty("txtShokisaiHokenshaName")
     public void setTxtShokisaiHokenshaName(TextBox txtShokisaiHokenshaName) {
-        this.txtShokisaiHokenshaName=txtShokisaiHokenshaName;
+        this.txtShokisaiHokenshaName = txtShokisaiHokenshaName;
     }
 
     @JsonProperty("txtTeikyoYM")
@@ -118,7 +120,7 @@ public class KagoMoshitateDiv extends Panel implements IKagoMoshitateDiv {
 
     @JsonProperty("txtTeikyoYM")
     public void setTxtTeikyoYM(TextBoxDate txtTeikyoYM) {
-        this.txtTeikyoYM=txtTeikyoYM;
+        this.txtTeikyoYM = txtTeikyoYM;
     }
 
     @JsonProperty("txtKagoForm")
@@ -128,7 +130,7 @@ public class KagoMoshitateDiv extends Panel implements IKagoMoshitateDiv {
 
     @JsonProperty("txtKagoForm")
     public void setTxtKagoForm(TextBox txtKagoForm) {
-        this.txtKagoForm=txtKagoForm;
+        this.txtKagoForm = txtKagoForm;
     }
 
     @JsonProperty("txtMoshitateDate")
@@ -138,7 +140,7 @@ public class KagoMoshitateDiv extends Panel implements IKagoMoshitateDiv {
 
     @JsonProperty("txtMoshitateDate")
     public void setTxtMoshitateDate(TextBoxDate txtMoshitateDate) {
-        this.txtMoshitateDate=txtMoshitateDate;
+        this.txtMoshitateDate = txtMoshitateDate;
     }
 
     @JsonProperty("ddlKagoMoshitateRiyu")
@@ -148,7 +150,7 @@ public class KagoMoshitateDiv extends Panel implements IKagoMoshitateDiv {
 
     @JsonProperty("ddlKagoMoshitateRiyu")
     public void setDdlKagoMoshitateRiyu(DropDownList ddlKagoMoshitateRiyu) {
-        this.ddlKagoMoshitateRiyu=ddlKagoMoshitateRiyu;
+        this.ddlKagoMoshitateRiyu = ddlKagoMoshitateRiyu;
     }
 
     @JsonProperty("chkForDogetsuShinsa")
@@ -158,9 +160,8 @@ public class KagoMoshitateDiv extends Panel implements IKagoMoshitateDiv {
 
     @JsonProperty("chkForDogetsuShinsa")
     public void setChkForDogetsuShinsa(CheckBoxList chkForDogetsuShinsa) {
-        this.chkForDogetsuShinsa=chkForDogetsuShinsa;
+        this.chkForDogetsuShinsa = chkForDogetsuShinsa;
     }
 
     //--------------- この行より下にコードを追加してください -------------------
-
 }

@@ -1,16 +1,14 @@
 package jp.co.ndensan.reams.db.dbz.divcontroller.entity.parentdiv.KogakuServicehiJudgementResult;
+
 /**
- * このコードはツールによって生成されました。
- * このファイルへの変更は、再生成時には損失するため
- * 不正な動作の原因になります。
+ * このコードはツールによって生成されました。 このファイルへの変更は、再生成時には損失するため 不正な動作の原因になります。
  */
 import com.fasterxml.jackson.annotation.JsonProperty;
-import jp.co.ndensan.reams.db.dbz.divcontroller.entity.parentdiv.KogakuServicehiJudgementResult.KogakuServicehiJudgementResultDiv;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TabPanel;
 
 /**
- * tplJudgementResult のクラスファイル 
- * 
+ * tplJudgementResult のクラスファイル
+ *
  * @author 自動生成
  */
 public class tplJudgementResultDiv extends TabPanel {
@@ -20,6 +18,7 @@ public class tplJudgementResultDiv extends TabPanel {
      * コントロール名とフィールド名を取得する
      * private + コントロール名 + フィールド名 の文字列を作成
      */
+
     @JsonProperty("JudgementResult")
     private KogakuServicehiJudgementResultDiv JudgementResult;
 

@@ -1,19 +1,18 @@
 package jp.co.ndensan.reams.db.dbz.divcontroller.entity.parentdiv;
-/**
- * このコードはツールによって生成されました。
- * このファイルへの変更は、再生成時には損失するため
- * 不正な動作の原因になります。
- */
-import jp.co.ndensan.reams.db.dbz.divcontroller.entity.parentdiv.IJigyoshaInputGuideDiv;
-import com.fasterxml.jackson.annotation.JsonProperty;
-import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.ui.binding.*;
-import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
-import jp.co.ndensan.reams.uz.uza.ui.binding.domain.*;
 
 /**
- * JigyoshaInputGuide のクラスファイル 
- * 
+ * このコードはツールによって生成されました。 このファイルへの変更は、再生成時には損失するため 不正な動作の原因になります。
+ */
+import com.fasterxml.jackson.annotation.JsonProperty;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.ui.binding.Button;
+import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
+import jp.co.ndensan.reams.uz.uza.ui.binding.RadioButton;
+import jp.co.ndensan.reams.uz.uza.ui.binding.TextBox;
+
+/**
+ * JigyoshaInputGuide のクラスファイル
+ *
  * @author 自動生成
  */
 public class JigyoshaInputGuideDiv extends Panel implements IJigyoshaInputGuideDiv {
@@ -23,6 +22,7 @@ public class JigyoshaInputGuideDiv extends Panel implements IJigyoshaInputGuideD
      * コントロール名とフィールド名を取得する
      * private + コントロール名 + フィールド名 の文字列を作成
      */
+
     @JsonProperty("radJigyoshaSearchType")
     private RadioButton radJigyoshaSearchType;
     @JsonProperty("txtJigyoshaCode")
@@ -53,7 +53,7 @@ public class JigyoshaInputGuideDiv extends Panel implements IJigyoshaInputGuideD
 
     @JsonProperty("radJigyoshaSearchType")
     public void setRadJigyoshaSearchType(RadioButton radJigyoshaSearchType) {
-        this.radJigyoshaSearchType=radJigyoshaSearchType;
+        this.radJigyoshaSearchType = radJigyoshaSearchType;
     }
 
     @JsonProperty("txtJigyoshaCode")
@@ -63,7 +63,7 @@ public class JigyoshaInputGuideDiv extends Panel implements IJigyoshaInputGuideD
 
     @JsonProperty("txtJigyoshaCode")
     public void setTxtJigyoshaCode(TextBox txtJigyoshaCode) {
-        this.txtJigyoshaCode=txtJigyoshaCode;
+        this.txtJigyoshaCode = txtJigyoshaCode;
     }
 
     @JsonProperty("btnSearchJigyosha")
@@ -73,7 +73,7 @@ public class JigyoshaInputGuideDiv extends Panel implements IJigyoshaInputGuideD
 
     @JsonProperty("btnSearchJigyosha")
     public void setBtnSearchJigyosha(Button btnSearchJigyosha) {
-        this.btnSearchJigyosha=btnSearchJigyosha;
+        this.btnSearchJigyosha = btnSearchJigyosha;
     }
 
     @JsonProperty("SearchResultJigyosha")
@@ -83,7 +83,7 @@ public class JigyoshaInputGuideDiv extends Panel implements IJigyoshaInputGuideD
 
     @JsonProperty("SearchResultJigyosha")
     public void setSearchResultJigyosha(SearchResultJigyoshaDiv SearchResultJigyosha) {
-        this.SearchResultJigyosha=SearchResultJigyosha;
+        this.SearchResultJigyosha = SearchResultJigyosha;
     }
 
     @JsonProperty("btnKaigoHokenShisetsuReturn")
@@ -93,7 +93,7 @@ public class JigyoshaInputGuideDiv extends Panel implements IJigyoshaInputGuideD
 
     @JsonProperty("btnKaigoHokenShisetsuReturn")
     public void setBtnKaigoHokenShisetsuReturn(Button btnKaigoHokenShisetsuReturn) {
-        this.btnKaigoHokenShisetsuReturn=btnKaigoHokenShisetsuReturn;
+        this.btnKaigoHokenShisetsuReturn = btnKaigoHokenShisetsuReturn;
     }
 
     @JsonProperty("jigyoshaCode")
@@ -103,7 +103,7 @@ public class JigyoshaInputGuideDiv extends Panel implements IJigyoshaInputGuideD
 
     @JsonProperty("jigyoshaCode")
     public void setJigyoshaCode(RString jigyoshaCode) {
-        this.jigyoshaCode=jigyoshaCode;
+        this.jigyoshaCode = jigyoshaCode;
     }
 
     @JsonProperty("jigyoshaMeisho")
@@ -113,7 +113,7 @@ public class JigyoshaInputGuideDiv extends Panel implements IJigyoshaInputGuideD
 
     @JsonProperty("jigyoshaMeisho")
     public void setJigyoshaMeisho(RString jigyoshaMeisho) {
-        this.jigyoshaMeisho=jigyoshaMeisho;
+        this.jigyoshaMeisho = jigyoshaMeisho;
     }
 
     @JsonProperty("jigyoshaCodeMeisho")
@@ -123,9 +123,8 @@ public class JigyoshaInputGuideDiv extends Panel implements IJigyoshaInputGuideD
 
     @JsonProperty("jigyoshaCodeMeisho")
     public void setJigyoshaCodeMeisho(RString jigyoshaCodeMeisho) {
-        this.jigyoshaCodeMeisho=jigyoshaCodeMeisho;
+        this.jigyoshaCodeMeisho = jigyoshaCodeMeisho;
     }
 
     //--------------- この行より下にコードを追加してください -------------------
-
 }

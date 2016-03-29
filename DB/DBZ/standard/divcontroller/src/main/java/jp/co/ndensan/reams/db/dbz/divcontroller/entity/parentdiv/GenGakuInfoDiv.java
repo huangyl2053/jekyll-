@@ -3,19 +3,15 @@ package jp.co.ndensan.reams.db.dbz.divcontroller.entity.parentdiv;
 /**
  * このコードはツールによって生成されました。 このファイルへの変更は、再生成時には損失するため 不正な動作の原因になります。
  */
-import jp.co.ndensan.reams.db.dbz.divcontroller.entity.parentdiv.IGenGakuInfoDiv;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import jp.co.ndensan.reams.db.dbz.divcontroller.entity.parentdiv.ChoshuKenKeimetsuKikan1Div;
-import jp.co.ndensan.reams.db.dbz.divcontroller.entity.parentdiv.ChoshuKenKeimetsuKikan2Div;
-import jp.co.ndensan.reams.db.dbz.divcontroller.entity.parentdiv.ChoshuKenKeimetsuKikan3Div;
-import jp.co.ndensan.reams.db.dbz.divcontroller.entity.parentdiv.ChoshuKenKeimetsuKikan4Div;
-import jp.co.ndensan.reams.db.dbz.divcontroller.entity.parentdiv.GenGakuKeisanDiv;
-import jp.co.ndensan.reams.db.dbz.divcontroller.entity.parentdiv.GenGakuKikan2Div;
-import jp.co.ndensan.reams.db.dbz.divcontroller.entity.parentdiv.GnegakuKikanDiv;
-import jp.co.ndensan.reams.uz.uza.ui.binding.*;
+import jp.co.ndensan.reams.uz.uza.ui.binding.Button;
+import jp.co.ndensan.reams.uz.uza.ui.binding.CheckBoxList;
+import jp.co.ndensan.reams.uz.uza.ui.binding.DataGrid;
+import jp.co.ndensan.reams.uz.uza.ui.binding.Label;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
-import jp.co.ndensan.reams.uz.uza.ui.binding.domain.*;
+import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxDate;
+import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxNum;
 
 /**
  * GenGakuInfo のクラスファイル

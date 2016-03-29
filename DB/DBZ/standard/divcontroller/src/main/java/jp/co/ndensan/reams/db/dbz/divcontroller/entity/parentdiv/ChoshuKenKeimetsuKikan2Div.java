@@ -1,20 +1,17 @@
 package jp.co.ndensan.reams.db.dbz.divcontroller.entity.parentdiv;
+
 /**
- * このコードはツールによって生成されました。
- * このファイルへの変更は、再生成時には損失するため
- * 不正な動作の原因になります。
+ * このコードはツールによって生成されました。 このファイルへの変更は、再生成時には損失するため 不正な動作の原因になります。
  */
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import jp.co.ndensan.reams.db.dbz.divcontroller.entity.parentdiv.ChoshuKenKeimetsuKikan3Div;
-import jp.co.ndensan.reams.db.dbz.divcontroller.entity.parentdiv.ChoshuKenKeimetsuKikan4Div;
-import jp.co.ndensan.reams.uz.uza.ui.binding.*;
+import jp.co.ndensan.reams.uz.uza.ui.binding.Label;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
-import jp.co.ndensan.reams.uz.uza.ui.binding.domain.*;
+import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxNum;
 
 /**
- * ChoshuKenKeimetsuKikan2 のクラスファイル 
- * 
+ * ChoshuKenKeimetsuKikan2 のクラスファイル
+ *
  * @author 自動生成
  */
 public class ChoshuKenKeimetsuKikan2Div extends Panel {
@@ -24,6 +21,7 @@ public class ChoshuKenKeimetsuKikan2Div extends Panel {
      * コントロール名とフィールド名を取得する
      * private + コントロール名 + フィールド名 の文字列を作成
      */
+
     @JsonProperty("ChoshuKenKeimetsuKikan3")
     private ChoshuKenKeimetsuKikan3Div ChoshuKenKeimetsuKikan3;
     @JsonProperty("ChoshuKenKeimetsuKikan4")
@@ -46,7 +44,7 @@ public class ChoshuKenKeimetsuKikan2Div extends Panel {
 
     @JsonProperty("ChoshuKenKeimetsuKikan3")
     public void setChoshuKenKeimetsuKikan3(ChoshuKenKeimetsuKikan3Div ChoshuKenKeimetsuKikan3) {
-        this.ChoshuKenKeimetsuKikan3=ChoshuKenKeimetsuKikan3;
+        this.ChoshuKenKeimetsuKikan3 = ChoshuKenKeimetsuKikan3;
     }
 
     @JsonProperty("ChoshuKenKeimetsuKikan4")
@@ -56,7 +54,7 @@ public class ChoshuKenKeimetsuKikan2Div extends Panel {
 
     @JsonProperty("ChoshuKenKeimetsuKikan4")
     public void setChoshuKenKeimetsuKikan4(ChoshuKenKeimetsuKikan4Div ChoshuKenKeimetsuKikan4) {
-        this.ChoshuKenKeimetsuKikan4=ChoshuKenKeimetsuKikan4;
+        this.ChoshuKenKeimetsuKikan4 = ChoshuKenKeimetsuKikan4;
     }
 
     @JsonProperty("Kasan")
@@ -66,7 +64,7 @@ public class ChoshuKenKeimetsuKikan2Div extends Panel {
 
     @JsonProperty("Kasan")
     public void setKasan(KasanDiv Kasan) {
-        this.Kasan=Kasan;
+        this.Kasan = Kasan;
     }
 
     @JsonProperty("NofuZumiKikan")
@@ -76,7 +74,7 @@ public class ChoshuKenKeimetsuKikan2Div extends Panel {
 
     @JsonProperty("NofuZumiKikan")
     public void setNofuZumiKikan(NofuZumiKikanDiv NofuZumiKikan) {
-        this.NofuZumiKikan=NofuZumiKikan;
+        this.NofuZumiKikan = NofuZumiKikan;
     }
 
     /*
@@ -88,7 +86,7 @@ public class ChoshuKenKeimetsuKikan2Div extends Panel {
     }
 
     @JsonIgnore
-    public void  setLblChoShushometsu2(Label lblChoShushometsu2) {
+    public void setLblChoShushometsu2(Label lblChoShushometsu2) {
         this.getChoshuKenKeimetsuKikan3().setLblChoShushometsu2(lblChoShushometsu2);
     }
 
@@ -98,7 +96,7 @@ public class ChoshuKenKeimetsuKikan2Div extends Panel {
     }
 
     @JsonIgnore
-    public void  setTxtChoShushometsu2(TextBoxNum txtChoShushometsu2) {
+    public void setTxtChoShushometsu2(TextBoxNum txtChoShushometsu2) {
         this.getChoshuKenKeimetsuKikan3().setTxtChoShushometsu2(txtChoShushometsu2);
     }
 
@@ -108,7 +106,7 @@ public class ChoshuKenKeimetsuKikan2Div extends Panel {
     }
 
     @JsonIgnore
-    public void  setLblLine(Label lblLine) {
+    public void setLblLine(Label lblLine) {
         this.getChoshuKenKeimetsuKikan3().setLblLine(lblLine);
     }
 
@@ -118,7 +116,7 @@ public class ChoshuKenKeimetsuKikan2Div extends Panel {
     }
 
     @JsonIgnore
-    public void  setLblChoShushometsu3(Label lblChoShushometsu3) {
+    public void setLblChoShushometsu3(Label lblChoShushometsu3) {
         this.getChoshuKenKeimetsuKikan4().setLblChoShushometsu3(lblChoShushometsu3);
     }
 
@@ -128,7 +126,7 @@ public class ChoshuKenKeimetsuKikan2Div extends Panel {
     }
 
     @JsonIgnore
-    public void  setTxtChoShushometsu3(TextBoxNum txtChoShushometsu3) {
+    public void setTxtChoShushometsu3(TextBoxNum txtChoShushometsu3) {
         this.getChoshuKenKeimetsuKikan4().setTxtChoShushometsu3(txtChoShushometsu3);
     }
 
@@ -138,7 +136,7 @@ public class ChoshuKenKeimetsuKikan2Div extends Panel {
     }
 
     @JsonIgnore
-    public void  setLblKasan(Label lblKasan) {
+    public void setLblKasan(Label lblKasan) {
         this.getKasan().setLblKasan(lblKasan);
     }
 
@@ -148,7 +146,7 @@ public class ChoshuKenKeimetsuKikan2Div extends Panel {
     }
 
     @JsonIgnore
-    public void  setLblNofuZumiKikan(Label lblNofuZumiKikan) {
+    public void setLblNofuZumiKikan(Label lblNofuZumiKikan) {
         this.getNofuZumiKikan().setLblNofuZumiKikan(lblNofuZumiKikan);
     }
 
@@ -158,7 +156,7 @@ public class ChoshuKenKeimetsuKikan2Div extends Panel {
     }
 
     @JsonIgnore
-    public void  setTxtNofuZumiKikan(TextBoxNum txtNofuZumiKikan) {
+    public void setTxtNofuZumiKikan(TextBoxNum txtNofuZumiKikan) {
         this.getNofuZumiKikan().setTxtNofuZumiKikan(txtNofuZumiKikan);
     }
 

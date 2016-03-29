@@ -35,6 +35,7 @@ import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
+import jp.co.ndensan.reams.uz.uza.lang.Month;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.Separator;
@@ -47,6 +48,17 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.KeyValueDataSource;
  */
 public class SetaiShotokuIchiranHandler {
 
+    private static final int INDEX_3 = 3;
+    private static final int INDEX_4 = 4;
+    private static final int INDEX_5 = 5;
+    private static final int INDEX_6 = 6;
+    private static final int INDEX_7 = 7;
+    private static final int INDEX_8 = 8;
+    private static final int INDEX_9 = 9;
+    private static final int INDEX_10 = 10;
+    private static final int INDEX_11 = 11;
+    private static final int INDEX_12 = 12;
+    private static final int INDEX_13 = 13;
     private final SetaiShotokuIchiranDiv div;
     private final DataGridSetting setaiShotokuGridSetting;
     private final DataGridSetting shotokuRirekiGridSetting;
@@ -97,7 +109,7 @@ public class SetaiShotokuIchiranHandler {
      * 賦課照会モードでDivの初期化を行います。
      */
     void initialize賦課照会モード() {
-        setaiShotokuGridSetting.getColumns().get(13).setVisible(false);
+        setaiShotokuGridSetting.getColumns().get(INDEX_13).setVisible(false);
         div.getDgSetaiShotoku().setGridSetting(setaiShotokuGridSetting);
     }
 
@@ -105,7 +117,7 @@ public class SetaiShotokuIchiranHandler {
      * 所得照会モードでDivの初期化を行います。
      */
     void initialize所得照会モード() {
-        setaiShotokuGridSetting.getColumns().get(13).setVisible(false);
+        setaiShotokuGridSetting.getColumns().get(INDEX_13).setVisible(false);
         div.getDgSetaiShotoku().setGridSetting(setaiShotokuGridSetting);
     }
 
@@ -113,7 +125,7 @@ public class SetaiShotokuIchiranHandler {
      * 所得履歴照会モードでDivの初期化を行います。
      */
     void initialize所得履歴照会モード() {
-        setaiShotokuGridSetting.getColumns().get(13).setVisible(true);
+        setaiShotokuGridSetting.getColumns().get(INDEX_13).setVisible(true);
         div.getDgSetaiShotoku().setGridSetting(setaiShotokuGridSetting);
     }
 
@@ -121,7 +133,7 @@ public class SetaiShotokuIchiranHandler {
      * 高額介護サービス費モードでDivの初期化を行います。
      */
     void initialize高額介護サービス費モード() {
-        setaiShotokuGridSetting.getColumns().get(13).setVisible(true);
+        setaiShotokuGridSetting.getColumns().get(INDEX_13).setVisible(true);
         div.getDgSetaiShotoku().setGridSetting(setaiShotokuGridSetting);
     }
 
@@ -192,14 +204,14 @@ public class SetaiShotokuIchiranHandler {
         RString juminzeiGenmenHyojiKubun = shotokuHikidashiConfig.get所得引出_住民税減免前後表示区分();
         if (juminzeiGenmenHyojiKubun.equals(new RString("0"))) {
             //住民税減免前,減免後が非表示になっているか要確認
-            setaiShotokuGridSetting.getColumns().get(6).setVisible(false);
-            setaiShotokuGridSetting.getColumns().get(7).setVisible(false);
-            setaiShotokuGridSetting.getColumns().get(8).setVisible(true);
+            setaiShotokuGridSetting.getColumns().get(INDEX_6).setVisible(false);
+            setaiShotokuGridSetting.getColumns().get(INDEX_7).setVisible(false);
+            setaiShotokuGridSetting.getColumns().get(INDEX_8).setVisible(true);
             div.getDgSetaiShotoku().setGridSetting(setaiShotokuGridSetting);
         } else if (juminzeiGenmenHyojiKubun.equals(new RString("1"))) {
-            setaiShotokuGridSetting.getColumns().get(6).setVisible(true);
-            setaiShotokuGridSetting.getColumns().get(7).setVisible(true);
-            setaiShotokuGridSetting.getColumns().get(8).setVisible(false);
+            setaiShotokuGridSetting.getColumns().get(INDEX_6).setVisible(true);
+            setaiShotokuGridSetting.getColumns().get(INDEX_7).setVisible(true);
+            setaiShotokuGridSetting.getColumns().get(INDEX_8).setVisible(false);
         }
         div.getDgSetaiShotoku().setGridSetting(setaiShotokuGridSetting);
     }
@@ -212,14 +224,14 @@ public class SetaiShotokuIchiranHandler {
         ShotokuHikidashiConfig shotokuHikidashiConfig = new ShotokuHikidashiConfig();
         RString juminzeiGenmenHyojiKubun = shotokuHikidashiConfig.get所得引出_住民税減免前後表示区分();
         if (juminzeiGenmenHyojiKubun.equals(new RString("0"))) {
-            shotokuRirekiGridSetting.getColumns().get(3).setVisible(false);
-            shotokuRirekiGridSetting.getColumns().get(4).setVisible(false);
-            shotokuRirekiGridSetting.getColumns().get(5).setVisible(true);
+            shotokuRirekiGridSetting.getColumns().get(INDEX_3).setVisible(false);
+            shotokuRirekiGridSetting.getColumns().get(INDEX_4).setVisible(false);
+            shotokuRirekiGridSetting.getColumns().get(INDEX_5).setVisible(true);
             div.getDgSetaiShotoku().setGridSetting(shotokuRirekiGridSetting);
         } else if (juminzeiGenmenHyojiKubun.equals(new RString("1"))) {
-            shotokuRirekiGridSetting.getColumns().get(3).setVisible(true);
-            shotokuRirekiGridSetting.getColumns().get(4).setVisible(true);
-            shotokuRirekiGridSetting.getColumns().get(5).setVisible(false);
+            shotokuRirekiGridSetting.getColumns().get(INDEX_3).setVisible(true);
+            shotokuRirekiGridSetting.getColumns().get(INDEX_4).setVisible(true);
+            shotokuRirekiGridSetting.getColumns().get(INDEX_5).setVisible(false);
         }
         div.getDgShotokuRireki().setGridSetting(shotokuRirekiGridSetting);
     }
@@ -243,9 +255,9 @@ public class SetaiShotokuIchiranHandler {
                     .getYear().toDateString());
         }
         if (激変緩和開始年度.isBefore(賦課年度) && 賦課年度.isBefore(激変緩和終了年度)) {
-            setaiShotokuGridSetting.getColumns().get(9).setVisible(true);
+            setaiShotokuGridSetting.getColumns().get(INDEX_9).setVisible(true);
         } else {
-            setaiShotokuGridSetting.getColumns().get(9).setVisible(false);
+            setaiShotokuGridSetting.getColumns().get(INDEX_9).setVisible(false);
         }
         div.getDgSetaiShotoku().setGridSetting(setaiShotokuGridSetting);
     }
@@ -260,9 +272,9 @@ public class SetaiShotokuIchiranHandler {
         FlexibleYear 激変緩和終了年度 = fukakeisanConfig.get激変緩和終了年度();
         FlexibleYear 賦課年度 = FlexibleYear.EMPTY;
         if (激変緩和開始年度.isBefore(賦課年度) && 賦課年度.isBefore(激変緩和終了年度)) {
-            shotokuRirekiGridSetting.getColumns().get(6).setVisible(false);
+            shotokuRirekiGridSetting.getColumns().get(INDEX_6).setVisible(false);
         } else {
-            shotokuRirekiGridSetting.getColumns().get(6).setVisible(false);
+            shotokuRirekiGridSetting.getColumns().get(INDEX_6).setVisible(false);
         }
         div.getDgShotokuRireki().setGridSetting(shotokuRirekiGridSetting);
     }
@@ -301,7 +313,7 @@ public class SetaiShotokuIchiranHandler {
             所得年度 = new FlexibleYear(new RDate(div.getDdlSetaiIchiranKazeiNendo().getSelectedValue().toString())
                     .getYear().toDateString());
         }
-        RDate 計算基準日 = new RDate(所得年度.getYearValue(), 4, 1);
+        RDate 計算基準日 = new RDate(所得年度.getYearValue(), Month.APRIL.getValue(), 1);
         NenreiTotatsuChecker checker
                 = new NenreiTotatsuChecker(ConfigKeysNenreiTotatsuKijunJoho.年齢到達基準_第１号被保険者到達基準年齢, 計算基準日);
         return checker.personBornOn(new FlexibleDate(計算基準日.toDateString())).has年齢到達();
@@ -338,16 +350,20 @@ public class SetaiShotokuIchiranHandler {
                 row.setTxtKetsugo04(世帯員所得.get年金収入額() != null ? editComma(new RString(世帯員所得.get年金収入額().toString())).concat("<br>")
                         .concat(世帯員所得.get年金所得額() != null ? editComma(new RString(世帯員所得.get年金所得額().toString())) : RString.EMPTY) : RString.EMPTY);
             }
-            row.setTxtTorokuGyomu(世帯員所得.get登録業務() != null && !世帯員所得.get登録業務().isEmpty()
-                    ? TorokuGyomu.toValue(世帯員所得.get登録業務()).toRString().concat("<br>")
-                    .concat(世帯員所得.get更正日() != null ? 世帯員所得.get更正日().wareki().separator(Separator.PERIOD).toDateString().toString() : RString.EMPTY.toString()) : RString.EMPTY);
-            row.setTxtDougetsuService(世帯員所得.is同月サービス有無() ? new RString("○") : RString.EMPTY);
-            row.setTxtJukiIdoYMD(世帯員所得.get住民情報_異動日() != null ? new RString(世帯員所得.get住民情報_異動日().wareki().separator(Separator.PERIOD).toDateString().toString()) : RString.EMPTY);
-            row.setTxtJuteiYMD(世帯員所得.get住民情報_住定日() != null ? new RString(世帯員所得.get住民情報_住定日().wareki().separator(Separator.PERIOD).toDateString().toString()) : RString.EMPTY);
-            row.setTxtJukiIdoJiyu(世帯員所得.get住民情報_異動事由() != null ? 世帯員所得.get住民情報_異動事由() : RString.EMPTY);
+            editDgSetaiShotokuRow(世帯員所得, row);
             list.add(row);
         }
         div.getDgSetaiShotoku().setDataSource(list);
+    }
+
+    private void editDgSetaiShotokuRow(SetaiinShotoku 世帯員所得, dgSetaiShotoku_Row row) {
+        row.setTxtTorokuGyomu(世帯員所得.get登録業務() != null && !世帯員所得.get登録業務().isEmpty()
+                ? TorokuGyomu.toValue(世帯員所得.get登録業務()).toRString().concat("<br>")
+                .concat(世帯員所得.get更正日() != null ? 世帯員所得.get更正日().wareki().separator(Separator.PERIOD).toDateString().toString() : RString.EMPTY.toString()) : RString.EMPTY);
+        row.setTxtDougetsuService(世帯員所得.is同月サービス有無() ? new RString("○") : RString.EMPTY);
+        row.setTxtJukiIdoYMD(世帯員所得.get住民情報_異動日() != null ? new RString(世帯員所得.get住民情報_異動日().wareki().separator(Separator.PERIOD).toDateString().toString()) : RString.EMPTY);
+        row.setTxtJuteiYMD(世帯員所得.get住民情報_住定日() != null ? new RString(世帯員所得.get住民情報_住定日().wareki().separator(Separator.PERIOD).toDateString().toString()) : RString.EMPTY);
+        row.setTxtJukiIdoJiyu(世帯員所得.get住民情報_異動事由() != null ? 世帯員所得.get住民情報_異動事由() : RString.EMPTY);
     }
 
     /**
