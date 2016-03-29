@@ -152,14 +152,19 @@
             AND 
             DbT5101."ninteiShinseiShinseijiKubunCode" = #{申請区分_申請時} 
         </if>
-        <if test="性別男フラグ">
-            AND
-            DbT5101."seibetsu" = '1'
-        </if>
-        <if test="性別女フラグ">
-            AND
-            DbT5101."seibetsu" = '2'
-        </if>
+        
+        <if test="性別区分フラグ">
+            AND 
+            DbT5101."seibetsu" IN
+        <foreach
+             collection="kaisaiNoList"
+             item="item"
+             open="("
+             separator=","
+             close=")">
+             #{item}
+        </foreach>
+         </if>
         ORDER BY
         DbT5101."ninteiShinseiYMD"
         <if test="usesSaidaiHyojiKensu">

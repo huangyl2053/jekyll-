@@ -17,6 +17,7 @@ import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBU;
 import jp.co.ndensan.reams.db.dbz.definition.core.seibetsu.Seibetsu;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigojotaikubun.YokaigoJotaiKubun09;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.NinteiShinseiShinseijiKubunCode;
+import jp.co.ndensan.reams.ur.urz.definition.core.shikibetsutaisho.Gender;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
@@ -81,16 +82,14 @@ public class NijihanteiKekkaOutputHandler {
         if (nijidiv.getKensakuJoken().getTxtNijihanteDateRange().getToValue() != null) {
             totime = new RString(nijidiv.getKensakuJoken().getTxtNijihanteDateRange().getToValue().toString());
         }
-        boolean 性別男フラグ = false;
-        boolean 性別女フラグ = false;
+        List<RString> 性別区分 = new ArrayList<>();
         List<KeyValueDataSource> 性別 = nijidiv.getKensakuJoken().getCcdShinseishaFinder().
                 getNinteiShinseishaFinderDiv().getChkSeibetsu().getSelectedItems();
         for (KeyValueDataSource keyValueDataSource : 性別) {
             if (男.equals(keyValueDataSource.getKey())) {
-                性別男フラグ = true;
-            }
-            if (女.equals(keyValueDataSource.getKey())) {
-                性別女フラグ = true;
+                性別区分.add(Gender.MALE.getCode());
+            } else if (女.equals(keyValueDataSource.getKey())) {
+                性別区分.add(Gender.FEMALE.getCode());
             }
         }
 
@@ -123,8 +122,8 @@ public class NijihanteiKekkaOutputHandler {
                                 getNinteiShinseishaFinderDiv().getTxtBirthDateTO().getValue().toString()),
                         nijidiv.getKensakuJoken().getCcdShinseishaFinder().
                         getNinteiShinseishaFinderDiv().getDdlShinseijiShinseiKubun().getSelectedKey(),
-                        性別男フラグ,
-                        性別女フラグ,
+                        false,
+                        性別区分,
                         nijidiv.getKensakuJoken().getTxtHyojiDataLimit().getValue().isEmpty() ? new Decimal(0)
                         : new Decimal(nijidiv.getKensakuJoken().getTxtHyojiDataLimit().getValue().toString()),
                         nijidiv.getKensakuJoken().getCcdShinseishaFinder().
