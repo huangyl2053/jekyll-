@@ -7,10 +7,10 @@ package jp.co.ndensan.reams.db.dbc.business.core.basic;
 
 import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3053ShokanShukeiEntity;
-import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ServiceShuruiCode;
+import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
@@ -228,7 +228,6 @@ public class ShokanShukeiBuilder {
      * @return {@link ShokanShukeiBuilder}
      */
     public ShokanShukeiBuilder set単位数単価(Decimal 単位数単価) {
-        requireNonNull(単位数単価, UrSystemErrorMessages.値がnull.getReplacedMessage("単位数単価"));
         entity.setTanisuTanka(単位数単価);
         return this;
     }
@@ -240,7 +239,6 @@ public class ShokanShukeiBuilder {
      * @return {@link ShokanShukeiBuilder}
      */
     public ShokanShukeiBuilder set請求額(Decimal 請求額) {
-        requireNonNull(請求額, UrSystemErrorMessages.値がnull.getReplacedMessage("請求額"));
         entity.setSeikyugaku(請求額);
         return this;
     }
@@ -276,7 +274,6 @@ public class ShokanShukeiBuilder {
      * @return {@link ShokanShukeiBuilder}
      */
     public ShokanShukeiBuilder set出来高医療費請求額(Decimal 出来高医療費請求額) {
-        requireNonNull(出来高医療費請求額, UrSystemErrorMessages.値がnull.getReplacedMessage("出来高医療費請求額"));
         entity.setDekidakaIryohiSeikyugaku(出来高医療費請求額);
         return this;
     }
@@ -288,7 +285,6 @@ public class ShokanShukeiBuilder {
      * @return {@link ShokanShukeiBuilder}
      */
     public ShokanShukeiBuilder set出来高医療費利用者負担額(Decimal 出来高医療費利用者負担額) {
-        requireNonNull(出来高医療費利用者負担額, UrSystemErrorMessages.値がnull.getReplacedMessage("出来高医療費利用者負担額"));
         entity.setDekidakaIryohiRiyoshaFutangaku(出来高医療費利用者負担額);
         return this;
     }

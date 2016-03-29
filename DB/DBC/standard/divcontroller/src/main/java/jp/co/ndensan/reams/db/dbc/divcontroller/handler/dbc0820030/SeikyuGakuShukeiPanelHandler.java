@@ -402,17 +402,25 @@ public class SeikyuGakuShukeiPanelHandler {
         Decimal 保険分単位合計 = div.getPanelSeikyugakuShukei().getPanelSeikyuShokai().getTxtTanyigokeiHokenbun().getValue();
         ServiceShuruiCode サービス種類コード = new ServiceShuruiCode(sercode.getTxtServiceType().getValue());
         ShokanbaraiJutakuShikyuGendogakuHanteiCheck shcheck = new ShokanbaraiJutakuShikyuGendogakuHanteiCheck();
+        boolean falg2 = true;
         boolean falg1 = div.getPanelSeikyugakuShukei().getPanelSeikyuShokai().
                 getTxtKeikakuTanyi().getValue() != null && div.getPanelSeikyugakuShukei().getPanelSeikyuShokai().
                 getTxtTaishoTanyi().getValue() != null && div.getPanelSeikyugakuShukei().getPanelSeikyuShokai().
                 getTxtTaishoGaiTanyi().getValue() != null;
-        boolean falg2 = !div.getPanelSeikyugakuShukei().getPanelSeikyuShokai().
-                getTxtKeikakuTanyi().getValue().equals(div.getPanelSeikyugakuShukei().getPanelSeikyuShokai().
-                        getTxtTaishoTanyi().getValue().add(div.getPanelSeikyugakuShukei().getPanelSeikyuShokai().
-                                getTxtTaishoGaiTanyi().getValue()));
+        if (div.getPanelSeikyugakuShukei().getPanelSeikyuShokai().
+                getTxtTaishoTanyi().getValue() != null && div.getPanelSeikyugakuShukei().getPanelSeikyuShokai().
+                getTxtTaishoGaiTanyi().getValue() != null) {
+            falg2 = !div.getPanelSeikyugakuShukei().getPanelSeikyuShokai().
+                    getTxtKeikakuTanyi().getValue().equals(div.getPanelSeikyugakuShukei().getPanelSeikyuShokai().
+                            getTxtTaishoTanyi().getValue().add(div.getPanelSeikyugakuShukei().getPanelSeikyuShokai().
+                                    getTxtTaishoGaiTanyi().getValue()));
+        }
         boolean falg3 = shcheck.chkShokanbaraiJutakuShikyuGendogakuTaishoTani(様式番号, 限度額対象単位, サービス種類コード);
-        boolean falg4 = shcheck.chkShokanbaraiJutakuShikyuGendogakuTaniGokei(
-                様式番号, 限度額対象外単位, 限度額対象単位, 保険分単位合計, サービス種類コード);
+        boolean falg4 = true;
+        if (限度額対象外単位 != null && 限度額対象単位 != null && 保険分単位合計 != null) {
+            falg4 = shcheck.chkShokanbaraiJutakuShikyuGendogakuTaniGokei(
+                    様式番号, 限度額対象外単位, 限度額対象単位, 保険分単位合計, サービス種類コード);
+        }
         if (falg1 && falg2) {
             throw new ApplicationException("限度額対象単位および限度額対象外単位数が計画単位数を一致しません");
         }
@@ -422,7 +430,7 @@ public class SeikyuGakuShukeiPanelHandler {
                 throw new ApplicationException("サービス種類が登録されていますん");
             }
         }
-        if (限度額対象単位 != null && falg3) {
+        if (falg3) {
             validPairs.add(new ValidationMessageControlPair(new IdocheckMessages(
                     UrErrorMessages.必須, 対象単位.toString())));
         }
@@ -556,7 +564,7 @@ public class SeikyuGakuShukeiPanelHandler {
     }
 
     private ShokanShukei buildshokanShukei(ShokanShukei entity, dgdSeikyugakushukei_Row row) {
-
+        entity = clearshokanShukei(entity);
         if (row.getDefaultDataName19() != null) {
             entity = entity.createBuilderForEdit().setサービス種類コード(
                     new ServiceShuruiCode(row.getDefaultDataName19())).build();
@@ -607,6 +615,24 @@ public class SeikyuGakuShukeiPanelHandler {
 
         return entity;
 
+    }
+
+    private ShokanShukei clearshokanShukei(ShokanShukei entity) {
+        entity = entity.createBuilderForEdit()
+                .set単位数合計(0)
+                .set単位数単価(null)
+                .set請求額(null)
+                .set利用者負担額(0)
+                .set限度額管理対象単位数(0)
+                .set限度額管理対象外単位数(0)
+                .set短期入所計画日数(0)
+                .set短期入所実日数(0)
+                .set出来高医療費単位数合計(0)
+                .set出来高医療費請求額(null)
+                .set出来高医療費利用者負担額(null)
+                .set計画単位数(0)
+                .setサービス実日数(0).build();
+        return entity;
     }
 
     /**
