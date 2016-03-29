@@ -94,20 +94,24 @@ public class IchijiHanteiKekkaJohoHandler {
             if (ichijiHanteiKekkaJoho != null) {
                 div.getTxtIchijiHanteibi().setValue(ichijiHanteiKekkaJoho.toEntity().getIchijiHanteiYMD());
 
-                if (KoroshoIfShikibetsuCode.認定ｿﾌﾄ99.getコード().equals(
-                        ninteiShinseiJoho.get厚労省IF識別コード().value())) {
+                if (ninteiShinseiJoho.get厚労省IF識別コード() != null
+                        && KoroshoIfShikibetsuCode.認定ｿﾌﾄ99.getコード().equals(
+                                ninteiShinseiJoho.get厚労省IF識別コード().value())) {
                     div.getTxtIchijiHanteiKekka().setValue(
                             IchijiHanteiKekkaCode99.toValue(ichijiHanteiKekkaJoho.toEntity().getIchijiHanteiKekkaCode().value()).get名称());
-                } else if (KoroshoIfShikibetsuCode.認定ｿﾌﾄ2002.getコード().equals(
-                        ninteiShinseiJoho.get厚労省IF識別コード().value())) {
+                } else if (ninteiShinseiJoho.get厚労省IF識別コード() != null
+                        && KoroshoIfShikibetsuCode.認定ｿﾌﾄ2002.getコード().equals(
+                                ninteiShinseiJoho.get厚労省IF識別コード().value())) {
                     div.getTxtIchijiHanteiKekka().setValue(
                             IchijiHanteiKekkaCode02.toValue(ichijiHanteiKekkaJoho.toEntity().getIchijiHanteiKekkaCode().value()).get名称());
-                } else if (KoroshoIfShikibetsuCode.認定ｿﾌﾄ2006_新要介護認定適用区分が未適用.getコード().equals(
-                        ninteiShinseiJoho.get厚労省IF識別コード().value())) {
+                } else if (ninteiShinseiJoho.get厚労省IF識別コード() != null
+                        && KoroshoIfShikibetsuCode.認定ｿﾌﾄ2006_新要介護認定適用区分が未適用.getコード().equals(
+                                ninteiShinseiJoho.get厚労省IF識別コード().value())) {
                     div.getTxtIchijiHanteiKekka().setValue(
                             IchijiHanteiKekkaCode06.toValue(ichijiHanteiKekkaJoho.toEntity().getIchijiHanteiKekkaCode().value()).get名称());
-                } else if (KoroshoIfShikibetsuCode.認定ｿﾌﾄ2009.getコード().equals(
-                        ninteiShinseiJoho.get厚労省IF識別コード().value())
+                } else if (ninteiShinseiJoho.get厚労省IF識別コード() != null
+                        && KoroshoIfShikibetsuCode.認定ｿﾌﾄ2009.getコード().equals(
+                                ninteiShinseiJoho.get厚労省IF識別コード().value())
                         || KoroshoIfShikibetsuCode.認定ｿﾌﾄ2009_SP3.getコード().equals(
                                 ninteiShinseiJoho.get厚労省IF識別コード().value())) {
                     div.getTxtIchijiHanteiKekka().setValue(
@@ -164,10 +168,11 @@ public class IchijiHanteiKekkaJohoHandler {
                         dgIchijiHanteiKeikokuCode_Row row = new dgIchijiHanteiKeikokuCode_Row();
                         row.setNo(new RString(String.valueOf(i + 1)));
                         row.setCode(codeList.get(i));
-                        if (KoroshoIfShikibetsuCode.認定ｿﾌﾄ2009.getコード().equals(
-                                ninteiShinseiJoho.get厚労省IF識別コード().value())
+                        if (ninteiShinseiJoho.get厚労省IF識別コード() != null
+                                && (KoroshoIfShikibetsuCode.認定ｿﾌﾄ2009.getコード().equals(
+                                        ninteiShinseiJoho.get厚労省IF識別コード().value())
                                 || KoroshoIfShikibetsuCode.認定ｿﾌﾄ2009_SP3.getコード().equals(
-                                        ninteiShinseiJoho.get厚労省IF識別コード().value())) {
+                                        ninteiShinseiJoho.get厚労省IF識別コード().value()))) {
                             row.setSetsumei(IchijiHanteiKeikoku.toValue(codeList.get(i)).get名称());
                         }
                         rowList.add(row);
@@ -239,10 +244,11 @@ public class IchijiHanteiKekkaJohoHandler {
                         dgIchijiHanteiKeikokuCode_Row row = new dgIchijiHanteiKeikokuCode_Row();
                         row.setNo(new RString(String.valueOf(i + 1)));
                         row.setCode(codeList.get(i));
-                        if (KoroshoIfShikibetsuCode.認定ｿﾌﾄ2009.getコード().equals(
-                                business.get厚労省IF識別コード().value())
+                        if (business.get厚労省IF識別コード() != null
+                                && (KoroshoIfShikibetsuCode.認定ｿﾌﾄ2009.getコード().equals(
+                                        business.get厚労省IF識別コード().value())
                                 || KoroshoIfShikibetsuCode.認定ｿﾌﾄ2009_SP3.getコード().equals(
-                                        business.get厚労省IF識別コード().value())) {
+                                        business.get厚労省IF識別コード().value()))) {
                             row.setSetsumei(IchijiHanteiKeikoku.toValue(codeList.get(i)).get名称());
                         }
                         rowList.add(row);
@@ -261,68 +267,70 @@ public class IchijiHanteiKekkaJohoHandler {
 
         ShinseishoKanriNo shinseishoKanriNo = ViewStateHolder.get(ViewStateKeys.申請書管理番号, ShinseishoKanriNo.class);
         ModeType modeType = ViewStateHolder.get(ViewStateKeys.モード, ModeType.class);
-        IchijiHanteiKekkaJohoSearchManager manager = IchijiHanteiKekkaJohoSearchManager.createIntance();
-        IchijiHanteiKekkaJohoSearchBusiness business = manager.getIchijiHanteiKekkaJoho(shinseishoKanriNo);
 
         if (ModeType.SHOKAI_MODE.equals(modeType)) {
 
             RString 一次判定結果 = div.getTxtIchijiHanteiKekka().getValue();
             ViewStateHolder.put(ViewStateKeys.一次判定結果_一次判定結果, 一次判定結果);
 
-        } else if (ModeType.ADD_MODE.equals(modeType)
-                && business != null
-                && (KoroshoIfShikibetsuCode.認定ｿﾌﾄ2009.getコード().equals(
-                        business.get厚労省IF識別コード().value())
-                || KoroshoIfShikibetsuCode.認定ｿﾌﾄ2009_SP3.getコード().equals(
-                        business.get厚労省IF識別コード().value()))) {
-            IchijiHanteiKekkaJoho ichijiHanteiKekkaJoho = new IchijiHanteiKekkaJoho(shinseishoKanriNo);
+        } else if (ModeType.ADD_MODE.equals(modeType)) {
+            IchijiHanteiKekkaJohoSearchManager manager = IchijiHanteiKekkaJohoSearchManager.createIntance();
+            IchijiHanteiKekkaJohoSearchBusiness business = manager.getIchijiHanteiKekkaJoho(shinseishoKanriNo);
+            if (business != null
+                    && business.get厚労省IF識別コード() != null
+                    && (KoroshoIfShikibetsuCode.認定ｿﾌﾄ2009.getコード().equals(
+                            business.get厚労省IF識別コード().value())
+                    || KoroshoIfShikibetsuCode.認定ｿﾌﾄ2009_SP3.getコード().equals(
+                            business.get厚労省IF識別コード().value()))) {
+                IchijiHanteiKekkaJoho ichijiHanteiKekkaJoho = new IchijiHanteiKekkaJoho(shinseishoKanriNo);
 
-            boolean kariIchijiHanteiKubun = false;
-            if (div.getTxtJiritsudoIkensho().getValue().isNullOrEmpty()) {
-                kariIchijiHanteiKubun = true;
+                boolean kariIchijiHanteiKubun = false;
+                if (div.getTxtJiritsudoIkensho().getValue().isNullOrEmpty()) {
+                    kariIchijiHanteiKubun = true;
+                }
+                ichijiHanteiKekkaJoho.toEntity().setKariIchijiHanteiKubun(kariIchijiHanteiKubun);
+                ichijiHanteiKekkaJoho.toEntity().setIchijiHanteiYMD(new FlexibleDate(RDate.getNowDate().toDateString()));
+                ichijiHanteiKekkaJoho.toEntity().setIchijiHanteiKekkaCode(new Code(business.get一次判定結果()));
+                ichijiHanteiKekkaJoho.toEntity().setIchijiHanteiKekkaNinchishoKasanCode(new Code(business.get認知症加算後の一次判定結果()));
+                ichijiHanteiKekkaJoho.toEntity().setKijunJikan(Integer.valueOf(div.getTxtKijunJikan().getValue().toString()));
+                ichijiHanteiKekkaJoho.toEntity().setKijunJikanShokuji(Integer.valueOf(div.getTxtShokuji().getValue().toString()));
+                ichijiHanteiKekkaJoho.toEntity().setKijunJikanHaisetsu(Integer.valueOf(div.getTxtHaisetsu().getValue().toString()));
+                ichijiHanteiKekkaJoho.toEntity().setKijunJikanIdo(Integer.valueOf(div.getTxtIdo().getValue().toString()));
+                ichijiHanteiKekkaJoho.toEntity().setKijunJikanSeiketsuHoji(Integer.valueOf(div.getTxtSeiketsuHoji().getValue().toString()));
+                ichijiHanteiKekkaJoho.toEntity().setKijunJikanKansetsuCare(Integer.valueOf(div.getTxtKansetsuCare().getValue().toString()));
+                ichijiHanteiKekkaJoho.toEntity().setKijunJikanBPSDKanren(Integer.valueOf(div.getTxtBpsdKanren().getValue().toString()));
+                ichijiHanteiKekkaJoho.toEntity().setKijunJikanKinoKunren(Integer.valueOf(div.getTxtKinoKunren().getValue().toString()));
+                ichijiHanteiKekkaJoho.toEntity().setKijunJikanIryoKanren(Integer.valueOf(div.getTxtIryoKanren().getValue().toString()));
+                ichijiHanteiKekkaJoho.toEntity().setKijunJikanNinchishoKasan(Integer.valueOf(div.getTxtNinchishoKasan().getValue().toString()));
+                ichijiHanteiKekkaJoho.toEntity().setChukanHyokaKomoku1gun(Integer.valueOf(div.getTxtDai1gun().getValue().toString()));
+                ichijiHanteiKekkaJoho.toEntity().setChukanHyokaKomoku2gun(Integer.valueOf(div.getTxtDai2gun().getValue().toString()));
+                ichijiHanteiKekkaJoho.toEntity().setChukanHyokaKomoku3gun(Integer.valueOf(div.getTxtDai3gun().getValue().toString()));
+                ichijiHanteiKekkaJoho.toEntity().setChukanHyokaKomoku4gun(Integer.valueOf(div.getTxtDai4gun().getValue().toString()));
+                ichijiHanteiKekkaJoho.toEntity().setChukanHyokaKomoku5gun(Integer.valueOf(div.getTxtDai5gun().getValue().toString()));
+                ichijiHanteiKekkaJoho.toEntity().setChukanHyokaKomoku6gun(0);
+                ichijiHanteiKekkaJoho.toEntity().setChukanHyokaKomoku7gun(0);
+                ichijiHanteiKekkaJoho.toEntity().setIchijiHnateiKeikokuCode(business.get一次判定警告コード());
+                ichijiHanteiKekkaJoho.toEntity().setJotaiAnteiseiCode(new Code(business.get状態の安定性()));
+                ichijiHanteiKekkaJoho.toEntity().
+                        setNinchishoJiritsudoIIijoNoGaizensei(new Decimal(div.getTxtGaizensei().getValue().toString()));
+                ichijiHanteiKekkaJoho.toEntity().setSuiteiKyufuKubunCode(new Code(business.get認知機能及び状態安定性から推定される給付区分()));
+                ichijiHanteiKekkaJoho.toEntity().setNinchishoKoreishaShihyoCode(new Code("1"));
+                ichijiHanteiKekkaJoho.toEntity().setJiritsudoKumiawase1(0);
+                ichijiHanteiKekkaJoho.toEntity().setJiritsudoKumiawase2(0);
+                ichijiHanteiKekkaJoho.toEntity().setJiritsudoKumiawase3(0);
+                ichijiHanteiKekkaJoho.toEntity().setJiritsudoKumiawase4(0);
+                ichijiHanteiKekkaJoho.toEntity().setJiritsudoKumiawase5(0);
+                ichijiHanteiKekkaJoho.toEntity().setJiritsudoKumiawase6(0);
+                ichijiHanteiKekkaJoho.toEntity().setJiritsudoKumiawase7(0);
+                ichijiHanteiKekkaJoho.toEntity().setGaizenseiHyokaCode(Code.EMPTY);
+                ichijiHanteiKekkaJoho.toEntity().setGaizenseiHyokaPercent(0);
+                ichijiHanteiKekkaJoho.toEntity().setIchijiHanteiSofuKubun(RString.EMPTY);
+                ichijiHanteiKekkaJoho.toEntity().setIchijiHanteiKekkaSofuYMD(FlexibleDate.EMPTY);
+                ichijiHanteiKekkaJoho.toEntity().setChert(RString.EMPTY);
+                ichijiHanteiKekkaJoho.toEntity().setJotaizo(RString.EMPTY);
+
+                ViewStateHolder.put(ViewStateKeys.一次判定結果_一次判定結果情報, ichijiHanteiKekkaJoho);
             }
-            ichijiHanteiKekkaJoho.toEntity().setKariIchijiHanteiKubun(kariIchijiHanteiKubun);
-            ichijiHanteiKekkaJoho.toEntity().setIchijiHanteiYMD(new FlexibleDate(RDate.getNowDate().toDateString()));
-            ichijiHanteiKekkaJoho.toEntity().setIchijiHanteiKekkaCode(new Code(business.get一次判定結果()));
-            ichijiHanteiKekkaJoho.toEntity().setIchijiHanteiKekkaNinchishoKasanCode(new Code(business.get認知症加算後の一次判定結果()));
-            ichijiHanteiKekkaJoho.toEntity().setKijunJikan(Integer.valueOf(div.getTxtKijunJikan().getValue().toString()));
-            ichijiHanteiKekkaJoho.toEntity().setKijunJikanShokuji(Integer.valueOf(div.getTxtShokuji().getValue().toString()));
-            ichijiHanteiKekkaJoho.toEntity().setKijunJikanHaisetsu(Integer.valueOf(div.getTxtHaisetsu().getValue().toString()));
-            ichijiHanteiKekkaJoho.toEntity().setKijunJikanIdo(Integer.valueOf(div.getTxtIdo().getValue().toString()));
-            ichijiHanteiKekkaJoho.toEntity().setKijunJikanSeiketsuHoji(Integer.valueOf(div.getTxtSeiketsuHoji().getValue().toString()));
-            ichijiHanteiKekkaJoho.toEntity().setKijunJikanKansetsuCare(Integer.valueOf(div.getTxtKansetsuCare().getValue().toString()));
-            ichijiHanteiKekkaJoho.toEntity().setKijunJikanBPSDKanren(Integer.valueOf(div.getTxtBpsdKanren().getValue().toString()));
-            ichijiHanteiKekkaJoho.toEntity().setKijunJikanKinoKunren(Integer.valueOf(div.getTxtKinoKunren().getValue().toString()));
-            ichijiHanteiKekkaJoho.toEntity().setKijunJikanIryoKanren(Integer.valueOf(div.getTxtIryoKanren().getValue().toString()));
-            ichijiHanteiKekkaJoho.toEntity().setKijunJikanNinchishoKasan(Integer.valueOf(div.getTxtNinchishoKasan().getValue().toString()));
-            ichijiHanteiKekkaJoho.toEntity().setChukanHyokaKomoku1gun(Integer.valueOf(div.getTxtDai1gun().getValue().toString()));
-            ichijiHanteiKekkaJoho.toEntity().setChukanHyokaKomoku2gun(Integer.valueOf(div.getTxtDai2gun().getValue().toString()));
-            ichijiHanteiKekkaJoho.toEntity().setChukanHyokaKomoku3gun(Integer.valueOf(div.getTxtDai3gun().getValue().toString()));
-            ichijiHanteiKekkaJoho.toEntity().setChukanHyokaKomoku4gun(Integer.valueOf(div.getTxtDai4gun().getValue().toString()));
-            ichijiHanteiKekkaJoho.toEntity().setChukanHyokaKomoku5gun(Integer.valueOf(div.getTxtDai5gun().getValue().toString()));
-            ichijiHanteiKekkaJoho.toEntity().setChukanHyokaKomoku6gun(0);
-            ichijiHanteiKekkaJoho.toEntity().setChukanHyokaKomoku7gun(0);
-            ichijiHanteiKekkaJoho.toEntity().setIchijiHnateiKeikokuCode(business.get一次判定警告コード());
-            ichijiHanteiKekkaJoho.toEntity().setJotaiAnteiseiCode(new Code(business.get状態の安定性()));
-            ichijiHanteiKekkaJoho.toEntity().
-                    setNinchishoJiritsudoIIijoNoGaizensei(new Decimal(div.getTxtGaizensei().getValue().toString()));
-            ichijiHanteiKekkaJoho.toEntity().setSuiteiKyufuKubunCode(new Code(business.get認知機能及び状態安定性から推定される給付区分()));
-            ichijiHanteiKekkaJoho.toEntity().setNinchishoKoreishaShihyoCode(new Code("1"));
-            ichijiHanteiKekkaJoho.toEntity().setJiritsudoKumiawase1(0);
-            ichijiHanteiKekkaJoho.toEntity().setJiritsudoKumiawase2(0);
-            ichijiHanteiKekkaJoho.toEntity().setJiritsudoKumiawase3(0);
-            ichijiHanteiKekkaJoho.toEntity().setJiritsudoKumiawase4(0);
-            ichijiHanteiKekkaJoho.toEntity().setJiritsudoKumiawase5(0);
-            ichijiHanteiKekkaJoho.toEntity().setJiritsudoKumiawase6(0);
-            ichijiHanteiKekkaJoho.toEntity().setJiritsudoKumiawase7(0);
-            ichijiHanteiKekkaJoho.toEntity().setGaizenseiHyokaCode(Code.EMPTY);
-            ichijiHanteiKekkaJoho.toEntity().setGaizenseiHyokaPercent(0);
-            ichijiHanteiKekkaJoho.toEntity().setIchijiHanteiSofuKubun(RString.EMPTY);
-            ichijiHanteiKekkaJoho.toEntity().setIchijiHanteiKekkaSofuYMD(FlexibleDate.EMPTY);
-            ichijiHanteiKekkaJoho.toEntity().setChert(RString.EMPTY);
-            ichijiHanteiKekkaJoho.toEntity().setJotaizo(RString.EMPTY);
-
-            ViewStateHolder.put(ViewStateKeys.一次判定結果_一次判定結果情報, ichijiHanteiKekkaJoho);
         }
     }
 }

@@ -177,8 +177,8 @@ public class ShokanbarayiKeteiInfoPanelHandler {
         ShikibetsuCode 識別コード = new ShikibetsuCode("00001");
         SyokanbaraihiShikyuShinseiKetteParameter parameter = SyokanbaraihiShikyuShinseiKetteParameter.
                 createSelectByKeyParam(被保険者番号, サービス提供年月, 整理番号, 決定年月日, 支給区分, 支払金額合計,
-                        差額金額, 増減理由等, 不支給理由等1, 不支給理由等2, 増減単位, 差額金額登録フラグ, 事業者番号,
-                        証明書コード, 明細番号, 連番, 画面モード, 識別コード, 決定情報一覧List);
+                        差額金額, 増減理由等, 不支給理由等1, 不支給理由等2, 増減単位, 差額金額登録フラグ, 画面モード, 識別コード, 決定情報一覧List);
         SyokanbaraihiShikyuShinseiKetteManager.createInstance().updKetteJoho(parameter);
     }
+
 }
