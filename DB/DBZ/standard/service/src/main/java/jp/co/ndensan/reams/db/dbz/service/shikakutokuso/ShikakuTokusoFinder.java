@@ -8,7 +8,7 @@ package jp.co.ndensan.reams.db.dbz.service.shikakutokuso;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-import jp.co.ndensan.reams.db.dbz.persistence.db.basic.shikakutokuso.IShikakuTokusoMapper;
+import jp.co.ndensan.reams.db.dbz.persistence.db.mapper.relate.shikakutokuso.IShikakuTokusoMapper;
 import jp.co.ndensan.reams.db.dbz.business.core.shikakutokuso.ShikakuTokuso;
 import jp.co.ndensan.reams.db.dbz.business.core.shikakutokuso.ShutokuJiyuDDL;
 import jp.co.ndensan.reams.db.dbz.definition.shikakutokuso.ShikakuTokusoParameter;

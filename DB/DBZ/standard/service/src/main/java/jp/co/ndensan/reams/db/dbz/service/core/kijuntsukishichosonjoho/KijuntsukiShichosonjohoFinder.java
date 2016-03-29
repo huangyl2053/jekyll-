@@ -9,7 +9,7 @@ import jp.co.ndensan.reams.db.dbz.business.core.kijunt.KoseiShichosonMaster;
 import jp.co.ndensan.reams.db.dbz.business.core.koikizenshichosonjoho.KoikiZenShichosonJoho;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.GappeiShichosonEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.KoseiShichosonMasterEntity;
-import jp.co.ndensan.reams.db.dbz.persistence.db.basic.kijuntsukishichosonjoho.IKijuntsukiShichosonjohoMapper;
+import jp.co.ndensan.reams.db.dbz.persistence.db.mapper.relate.kijuntsukishichosonjoho.IKijuntsukiShichosonjohoMapper;
 import jp.co.ndensan.reams.db.dbz.service.core.MapperProvider;
 import jp.co.ndensan.reams.db.dbz.service.core.basic.koikishichosonjoho.KoikiShichosonJohoFinder;
 import jp.co.ndensan.reams.db.dbz.service.core.gappeijoho.gappeijoho.GappeiCityJohoBFinder;
