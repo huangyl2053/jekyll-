@@ -16,7 +16,7 @@ public interface ItokuchokarisanteiMapper {
     /**
      * 賦課処理状況の更新処理します。
      *
-     * @param params　TokuchoKarisanteiFukaKakutei
+     * @param params TokuchoKarisanteiFukaKakutei
      * @return boolean
      */
     boolean updShoKofuKaishuJoho(TokuchoKarisanteiFukaKakuteiMapperParameter params);
