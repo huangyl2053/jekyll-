@@ -7,7 +7,6 @@ package jp.co.ndensan.reams.db.dbc.service.core.syokanbaraihishikyushinseikette;
 
 import java.util.ArrayList;
 import java.util.List;
-import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dbc.business.core.basic.ShikibetsuNoKanri;
 import jp.co.ndensan.reams.db.dbc.business.core.basic.ShokanHanteiKekka;
 import jp.co.ndensan.reams.db.dbc.business.core.basic.ShokanKihon;
@@ -27,14 +26,12 @@ import jp.co.ndensan.reams.db.dbc.business.core.basic.ShokanTokuteiShinryoTokube
 import jp.co.ndensan.reams.db.dbc.business.core.basic.ShokanTokuteiShinryohi;
 import jp.co.ndensan.reams.db.dbc.business.core.basic.TokuteiShinryoServiceCode;
 import jp.co.ndensan.reams.db.dbc.business.core.servicekeikakuhi.ServiceKeikakuHiRealtEntity;
-import jp.co.ndensan.reams.db.dbc.business.core.syokanbaraihishikyushinseikette.KyufujissekiKihonResult;
 import jp.co.ndensan.reams.db.dbc.business.core.syokanbaraihishikyushinseikette.ShafukukeigenServiceResult;
 import jp.co.ndensan.reams.db.dbc.business.core.syokanbaraihishikyushinseikette.ShokanKihonParameter;
 import jp.co.ndensan.reams.db.dbc.business.core.syokanbaraishikyukettekyufujssekihensyu.KyufujissekiEntity;
 import jp.co.ndensan.reams.db.dbc.definition.core.shikyufushikyukubun.ShikyuFushikyuKubun;
 import jp.co.ndensan.reams.db.dbc.definition.core.syokanbaraihishikyushinseikette.SyokanbaraihiShikyuShinseiKetteEntity;
 import jp.co.ndensan.reams.db.dbc.definition.core.syokanbaraihishikyushinseikette.SyokanbaraihiShikyuShinseiKetteParameter;
-import jp.co.ndensan.reams.db.dbc.definition.mybatisprm.syokanbaraihishikyushinseikette.KyufujissekiKihonParameter;
 import jp.co.ndensan.reams.db.dbc.definition.mybatisprm.syokanbaraihishikyushinseikette.ShafukukeigenServiceParameter;
 import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3034ShokanShinseiEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3036ShokanHanteiKekkaEntity;
@@ -54,7 +51,6 @@ import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3053ShokanShukeiEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3107ShokanMeisaiJushochiTokureiEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3118ShikibetsuNoKanriEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT7120TokuteiShinryoServiceCodeEntity;
-import jp.co.ndensan.reams.db.dbc.entity.db.relate.syokanbaraihishikyushinseikette.KyufujissekiKihonEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.syokanbaraihishikyushinseikette.ShafukukeigenServiceEntity;
 import jp.co.ndensan.reams.db.dbc.persistence.db.basic.DbT3034ShokanShinseiDac;
 import jp.co.ndensan.reams.db.dbc.persistence.db.basic.DbT3036ShokanHanteiKekkaDac;
@@ -83,7 +79,6 @@ import jp.co.ndensan.reams.db.dbd.entity.db.basic.DbT4017ShakaiFukushiHojinRiyos
 import jp.co.ndensan.reams.db.dbd.persistence.db.basic.DbT4012HyojunFutangakuGemmenDac;
 import jp.co.ndensan.reams.db.dbd.persistence.db.basic.DbT4017ShakaiFukushiHojinRiyoshaFutanKeigenDac;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ServiceKomokuCode;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ServiceShuruiCode;
@@ -91,7 +86,6 @@ import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShoKisaiHok
 import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT7131KaigoServiceNaiyouEntity;
 import jp.co.ndensan.reams.db.dbx.persistence.db.basic.DbT7131KaigoServiceNaiyouDac;
 import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.kyotsu.SaibanHanyokeyName;
-import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
@@ -105,7 +99,7 @@ import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
 /**
  * 償還払い費支給申請決定クラスです。
  */
-public class SyokanbaraihiShikyuShinseiKetteManager {
+public class SyokanbaraihiShikyuShinseiKetteManager extends SyokanbaraihiShikyuShinseiKetteFath {
 
     private final MapperProvider mapperProvider;
     private final DbT3050ShokanTokuteiNyushoshaKaigoServiceHiyoDac 償還払請求特定入所者介護サービス費用Dac;
@@ -140,9 +134,6 @@ public class SyokanbaraihiShikyuShinseiKetteManager {
     private static final RString サービス年月2 = new RString("200303");
     private static final RString サービス年月3 = new RString("200903");
     private static final RString サービス年月4 = new RString("200603");
-    private static final RString 定数_被保険者番号 = new RString("被保険者番号");
-    private static final RString 定数_サービス年月 = new RString("サービス年月");
-    private static final RString 定数_整理番号 = new RString("定数_整理番号");
 
     /**
      * コンストラクタです。
@@ -1369,448 +1360,6 @@ public class SyokanbaraihiShikyuShinseiKetteManager {
         }
         return 償還払請求サービス計画200604Dac.selectサービス計画費情報件数(被保険者番号, サービス提供年月,
                 整理番号, 事業者番号, 様式番号, 明細番号);
-    }
-
-    /**
-     * 給付実績基本情報リスト取得メソッドです。
-     *
-     * @param 保険者番号 保険者番号
-     * @param 被保険者番号 被保険者番号
-     * @param サービス年月 サービス年月
-     * @param 整理番号 整理番号
-     * @param 給付実績区分コード 給付実績区分コード
-     * @return List<KyufujissekiKihonResult>
-     */
-    public List<KyufujissekiKihonResult> getKyufuJissekiKihonJohoList(HokenshaNo 保険者番号, HihokenshaNo 被保険者番号,
-            FlexibleYearMonth サービス年月, RString 整理番号, RString 給付実績区分コード) {
-
-        List<KyufujissekiKihonResult> kyufujissekiKihonResultList = new ArrayList<>();
-        ISyokanbaraihiShikyuShinseiKetteMapper mapper
-                = mapperProvider.create(ISyokanbaraihiShikyuShinseiKetteMapper.class);
-        KyufujissekiKihonParameter parameter
-                = KyufujissekiKihonParameter.createSelectByKeyParam(保険者番号, 被保険者番号, サービス年月, 整理番号, 給付実績区分コード);
-        List<KyufujissekiKihonEntity> entityList = mapper.get給付実績基本情報(parameter);
-        if (entityList == null || entityList.isEmpty()) {
-            return null;
-        }
-        for (KyufujissekiKihonEntity entity : entityList) {
-            kyufujissekiKihonResultList.add(new KyufujissekiKihonResult(entity));
-        }
-        return kyufujissekiKihonResultList;
-    }
-
-    /**
-     * 償還払支給申請詳細データ取得メソッドです。
-     *
-     * @param 被保険者番号 被保険者番号
-     * @param サービス年月 サービス年月
-     * @param 整理番号 整理番号
-     * @return DbT3034ShokanShinseiEntity
-     */
-    public ShokanShinsei getShokanbaraiShinseiJyohoDetail(HihokenshaNo 被保険者番号,
-            FlexibleYearMonth サービス年月,
-            RString 整理番号) {
-
-        requireNonNull(被保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage(定数_被保険者番号.toString()));
-        requireNonNull(サービス年月, UrSystemErrorMessages.値がnull.getReplacedMessage(定数_サービス年月.toString()));
-        requireNonNull(整理番号, UrSystemErrorMessages.値がnull.getReplacedMessage(定数_整理番号.toString()));
-
-        DbT3034ShokanShinseiEntity entity = 償還払支給申請Dac.selectByKey(被保険者番号, サービス年月, 整理番号);
-        if (entity == null) {
-            return null;
-        }
-        return new ShokanShinsei(entity);
-    }
-
-    /**
-     * 償還払請求基本詳細データ取得メソッドです。
-     *
-     * @param 被保険者番号 被保険者番号
-     * @param サービス年月 サービス年月
-     * @param 整理番号 整理番号
-     * @return List<ShokanKihon>
-     */
-    public List<ShokanKihon> getShokanbarayiSeikyukihonDetail(HihokenshaNo 被保険者番号,
-            FlexibleYearMonth サービス年月,
-            RString 整理番号) {
-
-        requireNonNull(被保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage(定数_被保険者番号.toString()));
-        requireNonNull(サービス年月, UrSystemErrorMessages.値がnull.getReplacedMessage(定数_サービス年月.toString()));
-        requireNonNull(整理番号, UrSystemErrorMessages.値がnull.getReplacedMessage(定数_整理番号.toString()));
-
-        List<ShokanKihon> resultList = new ArrayList<>();
-        List<DbT3038ShokanKihonEntity> entityList = 償還払請求基本Dac.selectByKey(被保険者番号, サービス年月, 整理番号);
-        if (entityList == null || entityList.isEmpty()) {
-            return resultList;
-        }
-        for (DbT3038ShokanKihonEntity entity : entityList) {
-            resultList.add(new ShokanKihon(entity));
-        }
-        return resultList;
-    }
-
-    /**
-     * 償還払請求明細データ取得メソッドです。
-     *
-     * @param 被保険者番号 被保険者番号
-     * @param サービス年月 サービス年月
-     * @param 整理番号 整理番号
-     * @return List<ShokanMeisai>
-     */
-    public List<ShokanMeisai> getShokanbarayiSeikyuMeisayiDetail(HihokenshaNo 被保険者番号,
-            FlexibleYearMonth サービス年月,
-            RString 整理番号) {
-
-        requireNonNull(被保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage(定数_被保険者番号.toString()));
-        requireNonNull(サービス年月, UrSystemErrorMessages.値がnull.getReplacedMessage(定数_サービス年月.toString()));
-        requireNonNull(整理番号, UrSystemErrorMessages.値がnull.getReplacedMessage(定数_整理番号.toString()));
-
-        List<ShokanMeisai> resultList = new ArrayList<>();
-        List<DbT3039ShokanMeisaiEntity> entityList
-                = 償還払請求明細Dac.select証明書削除(被保険者番号, サービス年月, 整理番号, null, null, null);
-        if (entityList == null || entityList.isEmpty()) {
-            return resultList;
-        }
-        for (DbT3039ShokanMeisaiEntity entity : entityList) {
-            resultList.add(new ShokanMeisai(entity));
-        }
-        return resultList;
-    }
-
-    /**
-     * 償還払請求明細住特データ取得メソッドです。
-     *
-     * @param 被保険者番号 被保険者番号
-     * @param サービス年月 サービス年月
-     * @param 整理番号 整理番号
-     * @return List<ShokanMeisaiJushochiTokurei>
-     */
-    public List<ShokanMeisaiJushochiTokurei> getShokanbarayiSeikyuMeisayiJyutoku(HihokenshaNo 被保険者番号,
-            FlexibleYearMonth サービス年月,
-            RString 整理番号) {
-
-        requireNonNull(被保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage(定数_被保険者番号.toString()));
-        requireNonNull(サービス年月, UrSystemErrorMessages.値がnull.getReplacedMessage(定数_サービス年月.toString()));
-        requireNonNull(整理番号, UrSystemErrorMessages.値がnull.getReplacedMessage(定数_整理番号.toString()));
-
-        List<ShokanMeisaiJushochiTokurei> resultList = new ArrayList<>();
-        List<DbT3107ShokanMeisaiJushochiTokureiEntity> entityList
-                = 住所地特例Dac.select証明書削除(被保険者番号, サービス年月, 整理番号, null, null, null);
-        if (entityList == null || entityList.isEmpty()) {
-            return resultList;
-        }
-        for (DbT3107ShokanMeisaiJushochiTokureiEntity entity : entityList) {
-            resultList.add(new ShokanMeisaiJushochiTokurei(entity));
-        }
-        return resultList;
-    }
-
-    /**
-     * 償還払請求緊急時施設療養データ取得メソッドです。
-     *
-     * @param 被保険者番号 被保険者番号
-     * @param サービス年月 サービス年月
-     * @param 整理番号 整理番号
-     * @return List<ShokanKinkyuShisetsuRyoyo>
-     */
-    public List<ShokanKinkyuShisetsuRyoyo> getKinkyujiShisetsuRyoyo(HihokenshaNo 被保険者番号,
-            FlexibleYearMonth サービス年月,
-            RString 整理番号) {
-
-        requireNonNull(被保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage(定数_被保険者番号.toString()));
-        requireNonNull(サービス年月, UrSystemErrorMessages.値がnull.getReplacedMessage(定数_サービス年月.toString()));
-        requireNonNull(整理番号, UrSystemErrorMessages.値がnull.getReplacedMessage(定数_整理番号.toString()));
-
-        List<ShokanKinkyuShisetsuRyoyo> resultList = new ArrayList<>();
-        List<DbT3040ShokanKinkyuShisetsuRyoyoEntity> entityList
-                = 償還払請求緊急時施設療養Dac.select証明書削除(被保険者番号, サービス年月, 整理番号, null, null, null);
-        if (entityList == null || entityList.isEmpty()) {
-            return resultList;
-        }
-        for (DbT3040ShokanKinkyuShisetsuRyoyoEntity entity : entityList) {
-            resultList.add(new ShokanKinkyuShisetsuRyoyo(entity));
-        }
-        return resultList;
-    }
-
-    /**
-     * 償還払請求特定診療費データ取得メソッドです。
-     *
-     * @param 被保険者番号 被保険者番号
-     * @param サービス年月 サービス年月
-     * @param 整理番号 整理番号
-     * @return List<ShokanTokuteiShinryohi>
-     */
-    public List<ShokanTokuteiShinryohi> getTokuteiShinryohi(HihokenshaNo 被保険者番号,
-            FlexibleYearMonth サービス年月,
-            RString 整理番号) {
-
-        requireNonNull(被保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage(定数_被保険者番号.toString()));
-        requireNonNull(サービス年月, UrSystemErrorMessages.値がnull.getReplacedMessage(定数_サービス年月.toString()));
-        requireNonNull(整理番号, UrSystemErrorMessages.値がnull.getReplacedMessage(定数_整理番号.toString()));
-
-        List<ShokanTokuteiShinryohi> resultList = new ArrayList<>();
-        List<DbT3041ShokanTokuteiShinryohiEntity> entityList
-                = 償還払請求特定診療費Dac.select証明書削除(被保険者番号, サービス年月, 整理番号, null, null, null);
-        if (entityList == null || entityList.isEmpty()) {
-            return resultList;
-        }
-        for (DbT3041ShokanTokuteiShinryohiEntity entity : entityList) {
-            resultList.add(new ShokanTokuteiShinryohi(entity));
-        }
-        return resultList;
-    }
-
-    /**
-     * 償還払請求特定診療費・特別療養費データ取得メソッドです。
-     *
-     * @param 被保険者番号 被保険者番号
-     * @param サービス年月 サービス年月
-     * @param 整理番号 整理番号
-     * @return List<ShokanTokuteiShinryoTokubetsuRyoyo>
-     */
-    public List<ShokanTokuteiShinryoTokubetsuRyoyo> getTokuteyiShinnryouhiTokubeturyoyohi(HihokenshaNo 被保険者番号,
-            FlexibleYearMonth サービス年月,
-            RString 整理番号) {
-
-        requireNonNull(被保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage(定数_被保険者番号.toString()));
-        requireNonNull(サービス年月, UrSystemErrorMessages.値がnull.getReplacedMessage(定数_サービス年月.toString()));
-        requireNonNull(整理番号, UrSystemErrorMessages.値がnull.getReplacedMessage(定数_整理番号.toString()));
-
-        List<ShokanTokuteiShinryoTokubetsuRyoyo> resultList = new ArrayList<>();
-        List<DbT3042ShokanTokuteiShinryoTokubetsuRyoyoEntity> entityList
-                = 特別療養費Dac.select証明書削除(被保険者番号, サービス年月, 整理番号, null, null, null);
-        if (entityList == null || entityList.isEmpty()) {
-            return resultList;
-        }
-        for (DbT3042ShokanTokuteiShinryoTokubetsuRyoyoEntity entity : entityList) {
-            resultList.add(new ShokanTokuteiShinryoTokubetsuRyoyo(entity));
-        }
-        return resultList;
-    }
-
-    /**
-     * 償還払請求食事費用の単純検索メソッドです。
-     *
-     * @param 被保険者番号 被保険者番号
-     * @param サービス年月 サービス年月
-     * @param 整理番号 整理番号
-     * @return List<ShokanTokuteiShinryohi>
-     */
-    public List<ShokanShokujiHiyo> getSeikyuShokujiHiyoTanjyunSearch(HihokenshaNo 被保険者番号,
-            FlexibleYearMonth サービス年月,
-            RString 整理番号) {
-
-        requireNonNull(被保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage(定数_被保険者番号.toString()));
-        requireNonNull(サービス年月, UrSystemErrorMessages.値がnull.getReplacedMessage(定数_サービス年月.toString()));
-        requireNonNull(整理番号, UrSystemErrorMessages.値がnull.getReplacedMessage(定数_整理番号.toString()));
-
-        List<ShokanShokujiHiyo> resultList = new ArrayList<>();
-        List<DbT3043ShokanShokujiHiyoEntity> entityList
-                = 償還払請求食事費用Dac.select証明書削除(被保険者番号, サービス年月, 整理番号, null, null, null);
-        if (entityList == null || entityList.isEmpty()) {
-            return resultList;
-        }
-        for (DbT3043ShokanShokujiHiyoEntity entity : entityList) {
-            resultList.add(new ShokanShokujiHiyo(entity));
-        }
-        return resultList;
-    }
-
-    /**
-     * 償還払請求サービス計画200904データ取得メソッドです。
-     *
-     * @param 被保険者番号 被保険者番号
-     * @param サービス年月 サービス年月
-     * @param 整理番号 整理番号
-     * @return List<ShokanServicePlan200904>
-     */
-    public List<ShokanServicePlan200904> getServiceKeikaku200904(HihokenshaNo 被保険者番号,
-            FlexibleYearMonth サービス年月,
-            RString 整理番号) {
-
-        requireNonNull(被保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage(定数_被保険者番号.toString()));
-        requireNonNull(サービス年月, UrSystemErrorMessages.値がnull.getReplacedMessage(定数_サービス年月.toString()));
-        requireNonNull(整理番号, UrSystemErrorMessages.値がnull.getReplacedMessage(定数_整理番号.toString()));
-
-        List<ShokanServicePlan200904> resultList = new ArrayList<>();
-        List<DbT3047ShokanServicePlan200904Entity> entityList
-                = 償還払請求サービス計画200904Dac.select証明書削除(被保険者番号, サービス年月, 整理番号, null, null, null);
-        if (entityList == null || entityList.isEmpty()) {
-            return resultList;
-        }
-        for (DbT3047ShokanServicePlan200904Entity entity : entityList) {
-            resultList.add(new ShokanServicePlan200904(entity));
-        }
-        return resultList;
-    }
-
-    /**
-     * 償還払請求サービス計画200604データ取得メソッドです。
-     *
-     * @param 被保険者番号 被保険者番号
-     * @param サービス年月 サービス年月
-     * @param 整理番号 整理番号
-     * @return List<ShokanServicePlan200604>
-     */
-    public List<ShokanServicePlan200604> getServiceKeikaku200604(HihokenshaNo 被保険者番号,
-            FlexibleYearMonth サービス年月,
-            RString 整理番号) {
-
-        requireNonNull(被保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage(定数_被保険者番号.toString()));
-        requireNonNull(サービス年月, UrSystemErrorMessages.値がnull.getReplacedMessage(定数_サービス年月.toString()));
-        requireNonNull(整理番号, UrSystemErrorMessages.値がnull.getReplacedMessage(定数_整理番号.toString()));
-
-        List<ShokanServicePlan200604> resultList = new ArrayList<>();
-        List<DbT3046ShokanServicePlan200604Entity> entityList
-                = 償還払請求サービス計画200604Dac.select証明書削除(被保険者番号, サービス年月, 整理番号, null, null, null);
-        if (entityList == null || entityList.isEmpty()) {
-            return resultList;
-        }
-        for (DbT3046ShokanServicePlan200604Entity entity : entityList) {
-            resultList.add(new ShokanServicePlan200604(entity));
-        }
-        return resultList;
-    }
-
-    /**
-     * 償還払請求サービス計画200004データ取得メソッドです。
-     *
-     * @param 被保険者番号 被保険者番号
-     * @param サービス年月 サービス年月
-     * @param 整理番号 整理番号
-     * @return List<ShokanServicePlan200004>
-     */
-    public List<ShokanServicePlan200004> getServiceKeikaku200004(HihokenshaNo 被保険者番号,
-            FlexibleYearMonth サービス年月,
-            RString 整理番号) {
-
-        requireNonNull(被保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage(定数_被保険者番号.toString()));
-        requireNonNull(サービス年月, UrSystemErrorMessages.値がnull.getReplacedMessage(定数_サービス年月.toString()));
-        requireNonNull(整理番号, UrSystemErrorMessages.値がnull.getReplacedMessage(定数_整理番号.toString()));
-
-        List<ShokanServicePlan200004> resultList = new ArrayList<>();
-        List<DbT3045ShokanServicePlan200004Entity> entityList
-                = 償還払請求サービス計画200004Dac.select証明書削除(被保険者番号, サービス年月, 整理番号, null, null, null);
-        if (entityList == null || entityList.isEmpty()) {
-            return resultList;
-        }
-        for (DbT3045ShokanServicePlan200004Entity entity : entityList) {
-            resultList.add(new ShokanServicePlan200004(entity));
-        }
-        return resultList;
-    }
-
-    /**
-     * 償還払請求特定入所者介護サービス費用データ取得メソッドです。
-     *
-     * @param 被保険者番号 被保険者番号
-     * @param サービス年月 サービス年月
-     * @param 整理番号 整理番号
-     * @return List<ShokanTokuteiNyushoshaKaigoServiceHiyo>
-     */
-    public List<ShokanTokuteiNyushoshaKaigoServiceHiyo> getTokuteyiNyushosyaKaigoserviceHiyo(HihokenshaNo 被保険者番号,
-            FlexibleYearMonth サービス年月,
-            RString 整理番号) {
-
-        requireNonNull(被保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage(定数_被保険者番号.toString()));
-        requireNonNull(サービス年月, UrSystemErrorMessages.値がnull.getReplacedMessage(定数_サービス年月.toString()));
-        requireNonNull(整理番号, UrSystemErrorMessages.値がnull.getReplacedMessage(定数_整理番号.toString()));
-
-        List<ShokanTokuteiNyushoshaKaigoServiceHiyo> resultList = new ArrayList<>();
-        List<DbT3050ShokanTokuteiNyushoshaKaigoServiceHiyoEntity> entityList
-                = 償還払請求特定入所者介護サービス費用Dac.select証明書削除(被保険者番号, サービス年月, 整理番号, null, null, null);
-        if (entityList == null || entityList.isEmpty()) {
-            return resultList;
-        }
-        for (DbT3050ShokanTokuteiNyushoshaKaigoServiceHiyoEntity entity : entityList) {
-            resultList.add(new ShokanTokuteiNyushoshaKaigoServiceHiyo(entity));
-        }
-        return resultList;
-    }
-
-    /**
-     * 償還払請求社会福祉法人軽減額データ取得メソッドです。
-     *
-     * @param 被保険者番号 被保険者番号
-     * @param サービス年月 サービス年月
-     * @param 整理番号 整理番号
-     * @return List<ShokanShakaiFukushiHojinKeigengaku>
-     */
-    public List<ShokanShakaiFukushiHojinKeigengaku> getSeikyuShakaifukushiHoujinKeigengaku(HihokenshaNo 被保険者番号,
-            FlexibleYearMonth サービス年月,
-            RString 整理番号) {
-
-        requireNonNull(被保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage(定数_被保険者番号.toString()));
-        requireNonNull(サービス年月, UrSystemErrorMessages.値がnull.getReplacedMessage(定数_サービス年月.toString()));
-        requireNonNull(整理番号, UrSystemErrorMessages.値がnull.getReplacedMessage(定数_整理番号.toString()));
-
-        List<ShokanShakaiFukushiHojinKeigengaku> resultList = new ArrayList<>();
-        List<DbT3051ShokanShakaiFukushiHojinKeigengakuEntity> entityList
-                = 償還払請求社会福祉法人軽減額Dac.select証明書削除(被保険者番号, サービス年月, 整理番号, null, null, null);
-        if (entityList == null || entityList.isEmpty()) {
-            return resultList;
-        }
-        for (DbT3051ShokanShakaiFukushiHojinKeigengakuEntity entity : entityList) {
-            resultList.add(new ShokanShakaiFukushiHojinKeigengaku(entity));
-        }
-        return resultList;
-    }
-
-    /**
-     * 償還払請求所定疾患施設療養費等データ取得メソッドです。
-     *
-     * @param 被保険者番号 被保険者番号
-     * @param サービス年月 サービス年月
-     * @param 整理番号 整理番号
-     * @return List<ShokanShoteiShikkanShisetsuRyoyo>
-     */
-    public List<ShokanShoteiShikkanShisetsuRyoyo> getShoteiShikanShisetsuRyoyohiEtc(HihokenshaNo 被保険者番号,
-            FlexibleYearMonth サービス年月,
-            RString 整理番号) {
-
-        requireNonNull(被保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage(定数_被保険者番号.toString()));
-        requireNonNull(サービス年月, UrSystemErrorMessages.値がnull.getReplacedMessage(定数_サービス年月.toString()));
-        requireNonNull(整理番号, UrSystemErrorMessages.値がnull.getReplacedMessage(定数_整理番号.toString()));
-
-        List<ShokanShoteiShikkanShisetsuRyoyo> resultList = new ArrayList<>();
-        List<DbT3052ShokanShoteiShikkanShisetsuRyoyoEntity> entityList
-                = 償還払請求所定疾患施設療養費等Dac.select証明書削除(被保険者番号, サービス年月, 整理番号, null, null, null);
-        if (entityList == null || entityList.isEmpty()) {
-            return resultList;
-        }
-        for (DbT3052ShokanShoteiShikkanShisetsuRyoyoEntity entity : entityList) {
-            resultList.add(new ShokanShoteiShikkanShisetsuRyoyo(entity));
-        }
-        return resultList;
-    }
-
-    /**
-     * 償還払請求集計データ取得メソッドです。
-     *
-     * @param 被保険者番号 被保険者番号
-     * @param サービス年月 サービス年月
-     * @param 整理番号 整理番号
-     * @return List<ShokanShukei>
-     */
-    public List<ShokanShukei> getShokanShukei(HihokenshaNo 被保険者番号,
-            FlexibleYearMonth サービス年月,
-            RString 整理番号) {
-
-        requireNonNull(被保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage(定数_被保険者番号.toString()));
-        requireNonNull(サービス年月, UrSystemErrorMessages.値がnull.getReplacedMessage(定数_サービス年月.toString()));
-        requireNonNull(整理番号, UrSystemErrorMessages.値がnull.getReplacedMessage(定数_整理番号.toString()));
-
-        List<ShokanShukei> resultList = new ArrayList<>();
-        List<DbT3053ShokanShukeiEntity> entityList
-                = 償還払請求集計Dac.select証明書削除(被保険者番号, サービス年月, 整理番号, null, null, null);
-        if (entityList == null || entityList.isEmpty()) {
-            return resultList;
-        }
-        for (DbT3053ShokanShukeiEntity entity : entityList) {
-            resultList.add(new ShokanShukei(entity));
-        }
-        return resultList;
     }
 
     /**
