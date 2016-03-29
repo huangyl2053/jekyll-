@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbe.divcontroller.entity.shujiiikenshoiraishokai;
+package jp.co.ndensan.reams.db.dbe.divcontroller.controller.commonchilddiv.shujiiikenshoiraishokai;
 
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.commonchilddiv.ShujiiIkenshoIraiShokai.ShujiiIkenshoIraiShokai.ShujiiIkenshoIraiHandler;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.commonchilddiv.ShujiiIkenshoIraiShokai.ShujiiIkenshoIraiShokai.ShujiiIkenshoIraiShokaiDiv;
