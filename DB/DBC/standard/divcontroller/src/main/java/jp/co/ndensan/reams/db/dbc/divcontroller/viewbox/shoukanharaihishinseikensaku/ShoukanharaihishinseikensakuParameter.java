@@ -32,13 +32,13 @@ public class ShoukanharaihishinseikensakuParameter implements Serializable {
     /**
      * コンストラクタです。
      *
-     * @param hiHokenshaNo HihokenshaNo
-     * @param serviceTeikyoYM FlexibleYearMonth
-     * @param seiriNp RString
-     * @param jigyoshaNo JigyoshaNo
-     * @param yoshikiNo RString
-     * @param meisaiNo RString
-     * @param kyufuritsu Decimal
+     * @param hiHokenshaNo 被保険者番号
+     * @param serviceTeikyoYM サービス年月
+     * @param seiriNp 整理番号
+     * @param jigyoshaNo 事業者番号
+     * @param yoshikiNo 様式番号
+     * @param meisaiNo 明細番号
+     * @param kyufuritsu 給付率
      */
     public ShoukanharaihishinseikensakuParameter(HihokenshaNo hiHokenshaNo, FlexibleYearMonth serviceTeikyoYM,
             RString seiriNp, JigyoshaNo jigyoshaNo, RString yoshikiNo, RString meisaiNo, Decimal kyufuritsu) {
