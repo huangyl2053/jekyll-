@@ -118,7 +118,7 @@ public class YoshikiIchinoyonHosei {
             if (!ResponseHolder.isReRequest() && (様式種類_008.equals(様式種類) || 様式種類_108.equals(様式種類))) {
                 return ResponseData.of(div).addMessage(
                         UrWarningMessages.相違.getMessage().replace(
-                                MSG_GOKEI.toString(), MSG_KEI.toString())).respond();
+                                MSG_KEI.toString(), MSG_GOKEIKEKA.toString())).respond();
             } else if (!ResponseHolder.isReRequest() && (様式種類_009.equals(様式種類) || 様式種類_109.equals(様式種類))) {
                 return ResponseData.of(div).addMessage(
                         UrWarningMessages.相違.getMessage().replace(
