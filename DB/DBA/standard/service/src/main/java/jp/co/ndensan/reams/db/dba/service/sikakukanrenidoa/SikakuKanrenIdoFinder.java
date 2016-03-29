@@ -23,7 +23,7 @@ import jp.co.ndensan.reams.db.dbz.definition.core.enumeratedtype.ConfigNameDBU;
 import jp.co.ndensan.reams.db.dbz.definition.param.sikakukanrenido.SikakuKanrenIdoParameter;
 import jp.co.ndensan.reams.db.dbz.entity.db.relate.SikakuKanrenIdoEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.relate.shikakujiyushutoku.ShikakuJiyuShutoku;
-import jp.co.ndensan.reams.db.dbz.persistence.mapper.basic.sikakukanrenido.ISikakuKanrenIdoMapper;
+import jp.co.ndensan.reams.db.dbz.persistence.db.mapper.relate.sikakukanrenido.ISikakuKanrenIdoMapper;
 import jp.co.ndensan.reams.db.dbz.service.KyuShichosonCode;
 import jp.co.ndensan.reams.db.dbz.service.core.MapperProvider;
 import jp.co.ndensan.reams.db.dbz.service.kyushichosoncode.KyuShichosonCodeJoho;
