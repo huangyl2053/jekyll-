@@ -99,18 +99,4 @@ public class NinteichosahyoChosaItemManager {
         return 1 == dac.save(認定調査票_基本調査_調査項目.toEntity());
     }
 
-    /**
-     * 認定調査票_基本調査_調査項目{@link NinteichosahyoChosaItem}を削除します。
-     *
-     * @param 認定調査票_基本調査_調査項目 {@link NinteichosahyoChosaItem}
-     * @return 削除件数 削除結果の件数を返します。
-     */
-    @Transaction
-    public boolean delete認定調査票_基本調査_調査項目(NinteichosahyoChosaItem 認定調査票_基本調査_調査項目) {
-        requireNonNull(認定調査票_基本調査_調査項目, UrSystemErrorMessages.値がnull.getReplacedMessage("認定調査票_基本調査_調査項目"));
-        if (!認定調査票_基本調査_調査項目.hasChanged()) {
-            return false;
-        }
-        return 1 == dac.delete(認定調査票_基本調査_調査項目.toEntity());
-    }
 }
