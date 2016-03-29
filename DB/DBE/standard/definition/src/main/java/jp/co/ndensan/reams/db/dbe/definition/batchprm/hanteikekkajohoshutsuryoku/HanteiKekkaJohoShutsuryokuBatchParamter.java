@@ -50,6 +50,12 @@ public class HanteiKekkaJohoShutsuryokuBatchParamter extends BatchParameterBase 
     }
 
     /**
+     * コンストラクタです。
+     */
+    public HanteiKekkaJohoShutsuryokuBatchParamter() {
+    }
+
+    /**
      * processのパラメータを生成します。
      *
      * @return ItakusakiChosainIchiranMybitisParamter
