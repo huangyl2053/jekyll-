@@ -8,22 +8,21 @@ package jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0700011;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.commonchilddiv.ShiharaiHohoJyoho.ShiharaiHohoJyoho.IShiharaiHohoJyohoDiv;
-import jp.co.ndensan.reams.db.dbc.divcontroller.entity.commonchilddiv.ShiharaiHohoJyoho.ShiharaiHohoJyoho.ShiharaiHohoJyohoDiv;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.commonchilddiv.jyutakugaisyunaiyolist.JyutakugaisyunaiyoList.IJyutakugaisyunaiyoListDiv;
-import jp.co.ndensan.reams.db.dbc.divcontroller.entity.commonchilddiv.jyutakugaisyunaiyolist.JyutakugaisyunaiyoList.JyutakugaisyunaiyoListDiv;
-import jp.co.ndensan.reams.db.dbz.divcontroller.entity.parentdiv.kaigoatenainfo.IKaigoAtenaInfoDiv;
-import jp.co.ndensan.reams.db.dbz.divcontroller.entity.parentdiv.kaigoatenainfo.KaigoAtenaInfoDiv;
+import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.kaigoatenainfo.KaigoAtenaInfo.IKaigoAtenaInfoDiv;
+import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.kaigoatenainfo.KaigoAtenaInfo.KaigoAtenaInfoDiv;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.parentdiv.kaigoshikakukihon.IKaigoShikakuKihonDiv;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.parentdiv.kaigoshikakukihon.KaigoShikakuKihonDiv;
 import jp.co.ndensan.reams.uz.uza.ui.binding.*;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 
 /**
- * KaigoShikakuKihonShaPanel のクラスファイル 
- * 
+ * KaigoShikakuKihonShaPanel のクラスファイル
+ *
  * @author 自動生成
  */
 public class KaigoShikakuKihonShaPanelDiv extends Panel {
+
     // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：バージョン情報無し">
     /*
      * [ private の作成 ]
@@ -149,7 +148,7 @@ public class KaigoShikakuKihonShaPanelDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setTabShinseiJyoho(tabShinseiJyohoDiv tabShinseiJyoho) {
+    public void setTabShinseiJyoho(tabShinseiJyohoDiv tabShinseiJyoho) {
         this.getTabShinseiContents().setTabShinseiJyoho(tabShinseiJyoho);
     }
 
@@ -159,7 +158,7 @@ public class KaigoShikakuKihonShaPanelDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setTxtJutakuOwner(TextBox txtJutakuOwner) {
+    public void setTxtJutakuOwner(TextBox txtJutakuOwner) {
         this.getTabShinseiContents().getTabShinseiJyoho().setTxtJutakuOwner(txtJutakuOwner);
     }
 
@@ -169,7 +168,7 @@ public class KaigoShikakuKihonShaPanelDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setTxtRelationWithHihokensha(TextBox txtRelationWithHihokensha) {
+    public void setTxtRelationWithHihokensha(TextBox txtRelationWithHihokensha) {
         this.getTabShinseiContents().getTabShinseiJyoho().setTxtRelationWithHihokensha(txtRelationWithHihokensha);
     }
 
@@ -179,7 +178,7 @@ public class KaigoShikakuKihonShaPanelDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setShinseishaInfo(ShinseishaInfoDiv ShinseishaInfo) {
+    public void setShinseishaInfo(ShinseishaInfoDiv ShinseishaInfo) {
         this.getTabShinseiContents().getTabShinseiJyoho().setShinseishaInfo(ShinseishaInfo);
     }
 
@@ -189,7 +188,7 @@ public class KaigoShikakuKihonShaPanelDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setJutakuKaishuJizenShinseiReason(JutakuKaishuJizenShinseiReasonDiv JutakuKaishuJizenShinseiReason) {
+    public void setJutakuKaishuJizenShinseiReason(JutakuKaishuJizenShinseiReasonDiv JutakuKaishuJizenShinseiReason) {
         this.getTabShinseiContents().getTabShinseiJyoho().setJutakuKaishuJizenShinseiReason(JutakuKaishuJizenShinseiReason);
     }
 
@@ -199,7 +198,7 @@ public class KaigoShikakuKihonShaPanelDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setTabKozaJyoho(tabKozaJyohoDiv tabKozaJyoho) {
+    public void setTabKozaJyoho(tabKozaJyohoDiv tabKozaJyoho) {
         this.getTabShinseiContents().setTabKozaJyoho(tabKozaJyoho);
     }
 
@@ -214,7 +213,7 @@ public class KaigoShikakuKihonShaPanelDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setTabJutakuKaisyuJyoho(tabJutakuKaisyuJyohoDiv tabJutakuKaisyuJyoho) {
+    public void setTabJutakuKaisyuJyoho(tabJutakuKaisyuJyohoDiv tabJutakuKaisyuJyoho) {
         this.getTabShinseiContents().setTabJutakuKaisyuJyoho(tabJutakuKaisyuJyoho);
     }
 
@@ -224,7 +223,7 @@ public class KaigoShikakuKihonShaPanelDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setTotalPanel(TotalPanelDiv TotalPanel) {
+    public void setTotalPanel(TotalPanelDiv TotalPanel) {
         this.getTabShinseiContents().getTabJutakuKaisyuJyoho().setTotalPanel(TotalPanel);
     }
 
@@ -239,7 +238,7 @@ public class KaigoShikakuKihonShaPanelDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setTabShinsaKakka(tabShinsaKakkaDiv tabShinsaKakka) {
+    public void setTabShinsaKakka(tabShinsaKakkaDiv tabShinsaKakka) {
         this.getTabShinseiContents().setTabShinsaKakka(tabShinsaKakka);
     }
 
@@ -249,7 +248,7 @@ public class KaigoShikakuKihonShaPanelDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setTxtJudgeYMD(TextBoxDate txtJudgeYMD) {
+    public void setTxtJudgeYMD(TextBoxDate txtJudgeYMD) {
         this.getTabShinseiContents().getTabShinsaKakka().setTxtJudgeYMD(txtJudgeYMD);
     }
 
@@ -259,7 +258,7 @@ public class KaigoShikakuKihonShaPanelDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setRadJudgeKubun(RadioButton radJudgeKubun) {
+    public void setRadJudgeKubun(RadioButton radJudgeKubun) {
         this.getTabShinseiContents().getTabShinsaKakka().setRadJudgeKubun(radJudgeKubun);
     }
 
@@ -269,7 +268,7 @@ public class KaigoShikakuKihonShaPanelDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setTxtShoninCondition(TextBoxMultiLine txtShoninCondition) {
+    public void setTxtShoninCondition(TextBoxMultiLine txtShoninCondition) {
         this.getTabShinseiContents().getTabShinsaKakka().setTxtShoninCondition(txtShoninCondition);
     }
 
@@ -279,7 +278,7 @@ public class KaigoShikakuKihonShaPanelDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setTxtFushoninReason(TextBoxMultiLine txtFushoninReason) {
+    public void setTxtFushoninReason(TextBoxMultiLine txtFushoninReason) {
         this.getTabShinseiContents().getTabShinsaKakka().setTxtFushoninReason(txtFushoninReason);
     }
 
@@ -289,7 +288,7 @@ public class KaigoShikakuKihonShaPanelDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setJutakuKaishuJizenShoninKetteiTsuchisho(JutakuKaishuJizenShoninKetteiTsuchishoDiv JutakuKaishuJizenShoninKetteiTsuchisho) {
+    public void setJutakuKaishuJizenShoninKetteiTsuchisho(JutakuKaishuJizenShoninKetteiTsuchishoDiv JutakuKaishuJizenShoninKetteiTsuchisho) {
         this.getTabShinseiContents().getTabShinsaKakka().setJutakuKaishuJizenShoninKetteiTsuchisho(JutakuKaishuJizenShoninKetteiTsuchisho);
     }
 
