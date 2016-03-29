@@ -12,7 +12,7 @@ import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.DonyuKeitaiC
 import jp.co.ndensan.reams.db.dbz.business.core.shikakutokusojouho.ShikakuTokusoJouho;
 import jp.co.ndensan.reams.db.dbz.definition.shikakutokusojouho.ShikakuTokusoJouhoParameter;
 import jp.co.ndensan.reams.db.dbz.entity.db.relate.shikakutokusojouho.ShikakuTokusouJouhoRelateEntity;
-import jp.co.ndensan.reams.db.dbz.persistence.db.mapper.relate.shikakutokusojouho.IShikakuTokusouJouhoMapper;
+import jp.co.ndensan.reams.db.dbz.persistence.db.basic.shikakutokusojouho.IShikakuTokusouJouhoMapper;
 import jp.co.ndensan.reams.db.dbz.service.core.MapperProvider;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.util.db.SearchResult;
@@ -68,11 +68,11 @@ public class ShikakuTokusoJouhoFinder {
         IShikakuTokusouJouhoMapper shikakuTokusoMapper = mapperProvider.create(IShikakuTokusouJouhoMapper.class);
         List<ShikakuTokusouJouhoRelateEntity> 一覧データ取得リスト = null;
         if (DonyuKeitaiCode.事務広域.getCode().equals(params.get単一広域区分())) {
-            一覧データ取得リスト = shikakuTokusoMapper.getShikakuJoho(params);
+            一覧データ取得リスト = shikakuTokusoMapper.getShikakuTosoJoho(params);
         }
         if (DonyuKeitaiCode.事務構成市町村.getCode().equals(params.get単一広域区分())
                 || DonyuKeitaiCode.事務単一.getCode().equals(params.get単一広域区分())) {
-            一覧データ取得リスト = shikakuTokusoMapper.getShikakuTosoJoho(params);
+            一覧データ取得リスト = shikakuTokusoMapper.getShikakuJoho(params);
         }
         List<ShikakuTokusoJouho> serviceShuruiList = new ArrayList<>();
         List<ShikakuTokusouJouhoRelateEntity> 取得日リスト = new ArrayList<>();

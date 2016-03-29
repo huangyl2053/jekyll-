@@ -86,7 +86,7 @@
         DbT7056Gappei."kyuShichosonCode" as "DbT7056Gappei_kyuShichosonCode",
         DbT7056Gappei."kyuShichosonMeisho" as "DbT7056Gappei_kyuShichosonMeisho",
         DbT1001Hiho."lastUpdateTimestamp" as "DbT1001Hiho_lastUpdateTimestamp",
-        "1" as tanIchi
+        '1' as tanIchi
         FROM
         rgdb."DbT1001HihokenshaDaicho" as DbT1001Hiho
         LEFT JOIN
