@@ -20,7 +20,6 @@ import jp.co.ndensan.reams.db.dba.persistence.db.mapper.relate.kaigojigyoshashis
 import jp.co.ndensan.reams.db.dbx.business.core.kaigojigyosha.kaigojigyosha.KaigoJigyosha;
 import jp.co.ndensan.reams.db.dbx.business.core.kaigojigyosha.kaigojigyoshashiteiservice.KaigoJigyoshaShiteiService;
 import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT7063KaigoJigyoshaShiteiServiceEntity;
-import jp.co.ndensan.reams.db.dbx.persistence.db.basic.DbT7060KaigoJigyoshaDac;
 import jp.co.ndensan.reams.db.dbx.persistence.db.basic.DbT7063KaigoJigyoshaShiteiServiceDac;
 import jp.co.ndensan.reams.db.dbx.service.core.kaigojigyosha.kaigojigyosha.KaigoJigyoshaManager;
 import jp.co.ndensan.reams.db.dbz.business.core.KaigoJogaiTokureiTaishoShisetsu;
@@ -43,11 +42,7 @@ public class KaigoJigyoshaShisetsuKanriManager {
     private final MapperProvider mapperProvider;
     private final DbT1005KaigoJogaiTokureiTaishoShisetsuDac dbT1005dac;
     private final DbT7063KaigoJigyoshaShiteiServiceDac dbT7063dac;
-    private final DbT7060KaigoJigyoshaDac dbT7060dac;
     private static final RString 介護保険施設 = new RString("11");
-    private static final RString 住所地特例対象施設 = new RString("12");
-    private static final RString 適用除外施設 = new RString("21");
-    private static final RString 異動事由 = new RString("01");
     private static final RString 変更区分_新履歴 = new RString("1");
     private final KaigoJigyoshaManager manager;
     private final KaigoJogaiTokureiTaishoShisetsuManager 対象施設;
@@ -59,7 +54,6 @@ public class KaigoJigyoshaShisetsuKanriManager {
         this.mapperProvider = InstanceProvider.create(MapperProvider.class);
         this.dbT1005dac = InstanceProvider.create(DbT1005KaigoJogaiTokureiTaishoShisetsuDac.class);
         this.dbT7063dac = InstanceProvider.create(DbT7063KaigoJigyoshaShiteiServiceDac.class);
-        this.dbT7060dac = InstanceProvider.create(DbT7060KaigoJigyoshaDac.class);
         this.manager = InstanceProvider.create(KaigoJigyoshaManager.class);
         this.対象施設 = InstanceProvider.create(KaigoJogaiTokureiTaishoShisetsuManager.class);
     }
@@ -72,13 +66,11 @@ public class KaigoJigyoshaShisetsuKanriManager {
     KaigoJigyoshaShisetsuKanriManager(MapperProvider mapperProvider,
             DbT1005KaigoJogaiTokureiTaishoShisetsuDac dbT1005dac,
             DbT7063KaigoJigyoshaShiteiServiceDac dbT7063dac,
-            DbT7060KaigoJigyoshaDac dbT7060dac,
             KaigoJigyoshaManager manager,
             KaigoJogaiTokureiTaishoShisetsuManager 対象施設) {
         this.mapperProvider = mapperProvider;
         this.dbT1005dac = dbT1005dac;
         this.dbT7063dac = dbT7063dac;
-        this.dbT7060dac = dbT7060dac;
         this.manager = manager;
         this.対象施設 = 対象施設;
     }
@@ -120,7 +112,7 @@ public class KaigoJigyoshaShisetsuKanriManager {
      * @return 事業者サービス情報取得
      */
     @Transaction
-    public SearchResult<KaigoJigyoshaShiteiService> getJigyoshaServiceJoho(KaigoJigyoshaShisetsuKanriMapperParameter parameter) {
+    public SearchResult<KaigoJigyoshaShiteiService> getServiceItiranJoho(KaigoJigyoshaShisetsuKanriMapperParameter parameter) {
 
         List<KaigoJigyoshaShiteiService> serviceShuruiList = new ArrayList<>();
         List<DbT7063KaigoJigyoshaShiteiServiceEntity> 事業者サービス情報取得 = dbT7063dac.select事業者サービス(parameter.getJigyoshaNo(),
@@ -141,7 +133,7 @@ public class KaigoJigyoshaShisetsuKanriManager {
      * @return 事業者情報取得
      */
     @Transaction
-    public SearchResult<KaigoJigyoshaShisetsuKanriBusiness> getServiceItiranJoho(KaigoJigyoshaShisetsuKanriMapperParameter parameter) {
+    public SearchResult<KaigoJigyoshaShisetsuKanriBusiness> getJigyoshaJoho(KaigoJigyoshaShisetsuKanriMapperParameter parameter) {
         List<KaigoJigyoshaShisetsuKanriBusiness> serviceShuruiList = new ArrayList<>();
         IKaigoJigyoshaShisetsuKanriMapper iKaigoJigyoshaShisetsuKanri = mapperProvider.create(IKaigoJigyoshaShisetsuKanriMapper.class);
         List<KaigoJigyoshaShisetsuKanriRelateEntity> サービス一覧情報 = iKaigoJigyoshaShisetsuKanri.getJigyoshaJoho(parameter);
@@ -243,11 +235,13 @@ public class KaigoJigyoshaShisetsuKanriManager {
         if (事業者種別.equals(介護保険施設)) {
             if ((変更区分_新履歴.equals(変更区分)) && (事業者登録情報.get有効終了日() == null
                     || 事業者登録情報.get有効終了日().isEmpty())) {
-                事業者登録情報.createBuilderForEdit().build().
-                        createBuilderForEdit().set有効終了日(事業者登録情報.get有効開始日().minusDay(1));
+                事業者登録情報 = 事業者登録情報.createBuilderForEdit()
+                        .set有効終了日(事業者登録情報.get有効開始日().minusDay(1)).build();
             }
             return manager.save(事業者登録情報);
         } else {
+            介護除外住所地特例対象施設 = 介護除外住所地特例対象施設.createBuilderForEdit()
+                    .set有効終了年月日(介護除外住所地特例対象施設.get有効開始年月日().minusDay(1)).build();
             return 対象施設.save介護除外住所地特例対象施設(介護除外住所地特例対象施設);
         }
     }
