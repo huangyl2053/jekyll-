@@ -22,7 +22,7 @@ import jp.co.ndensan.reams.db.dbd.entity.common.NursingCareInformationCodeEntity
 import jp.co.ndensan.reams.db.dbd.entity.common.NursingCareInformationEntity;
 import jp.co.ndensan.reams.db.dbd.entity.db.basic.DbT3114RiyoshaFutanWariaiMeisaiEntity;
 import jp.co.ndensan.reams.db.dbd.entity.db.basic.DbT4021ShiharaiHohoHenkoEntity;
-import jp.co.ndensan.reams.db.dbd.persistence.db.mapper.common.IGemmenJokyoMapper;
+import jp.co.ndensan.reams.db.dbd.persistence.db.mapper.relate.gemmenjokyo.IGemmenJokyoMapper;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbV1001HihokenshaDaichoEntity;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.RoreiFukushiNenkinJukyusha;

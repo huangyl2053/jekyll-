@@ -5,8 +5,8 @@
  */
 package jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC120010;
 
-import jp.co.ndensan.reams.db.dbc.persistence.mappers.IKyufuKanrihyo200004Mapper;
-import jp.co.ndensan.reams.db.dbc.persistence.mappers.IKyufuKanrihyo200604Mapper;
+import jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.kyufukanrihyo200004.IKyufuKanrihyo200004Mapper;
+import jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.kyufukanrihyo200604.IKyufuKanrihyo200604Mapper;
 import jp.co.ndensan.reams.uz.uza.batch.process.InputParameter;
 import jp.co.ndensan.reams.uz.uza.batch.process.SimpleBatchProcessBase;
 import jp.co.ndensan.reams.uz.uza.lang.RString;

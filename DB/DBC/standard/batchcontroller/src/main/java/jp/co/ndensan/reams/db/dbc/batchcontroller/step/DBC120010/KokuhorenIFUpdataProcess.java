@@ -7,7 +7,7 @@ package jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC120010;
 
 import java.util.HashMap;
 import java.util.Map;
-import jp.co.ndensan.reams.db.dbc.persistence.mappers.IKokuhorenInterfaceKanriMapper;
+import jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.kokuhoreninterfacekanri.IKokuhorenInterfaceKanriMapper;
 import jp.co.ndensan.reams.uz.uza.batch.process.InputParameter;
 import jp.co.ndensan.reams.uz.uza.batch.process.SimpleBatchProcessBase;
 import jp.co.ndensan.reams.uz.uza.lang.RString;

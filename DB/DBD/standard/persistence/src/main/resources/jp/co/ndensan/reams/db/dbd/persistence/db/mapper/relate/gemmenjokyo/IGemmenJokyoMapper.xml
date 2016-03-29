@@ -2,7 +2,7 @@
 <!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <!-- どのマッパーインターフェースと対応するかを指定する -->
-<mapper namespace="jp.co.ndensan.reams.db.dbd.persistence.db.mapper.common.IGemmenJokyoMapper">
+<mapper namespace="jp.co.ndensan.reams.db.dbd.persistence.db.mapper.relate.gemmenjokyo.IGemmenJokyoMapper">
     <resultMap id="resultMap_NursingCareInformationCodeEntity" type="jp.co.ndensan.reams.db.dbd.entity.common.NursingCareInformationCodeEntity" autoMapping="true">
         <result property="申請状況区分" column="申請状況区分" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
         <result property="受給申請年月日" column="受給申請年月日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler" />
@@ -18,20 +18,20 @@
             resultMap="resultMap_NursingCareInformationCodeEntity"
             parameterType="jp.co.ndensan.reams.db.dbd.definition.common.GemmenJokyoParameter"  fetchSize="500">
         SELECT A."shinseiJokyoKubun" AS "申請状況区分",
-               A."jukyuShinseiYMD" AS "受給申請年月日",
-               A."jukyuShinseiJiyu" AS "受給申請事由",
-               A."kyuSochishaFlag" AS "旧措置者フラグ",
-               A."ninteiYukoKikanKaishiYMD" AS "認定有効期間開始年月日",
-               A."ninteiYukoKikanShuryoYMD" AS "認定有効期間終了年月日",
-               A."ninteiYMD" AS "認定年月日",
-               B."koroshoIfShikibetsuCode" AS "厚労省IF識別コード",
-               A."yokaigoJotaiKubunCode" AS "要介護認定状態区分コード"
+        A."jukyuShinseiYMD" AS "受給申請年月日",
+        A."jukyuShinseiJiyu" AS "受給申請事由",
+        A."kyuSochishaFlag" AS "旧措置者フラグ",
+        A."ninteiYukoKikanKaishiYMD" AS "認定有効期間開始年月日",
+        A."ninteiYukoKikanShuryoYMD" AS "認定有効期間終了年月日",
+        A."ninteiYMD" AS "認定年月日",
+        B."koroshoIfShikibetsuCode" AS "厚労省IF識別コード",
+        A."yokaigoJotaiKubunCode" AS "要介護認定状態区分コード"
         FROM rgdb."DbV4001JukyushaDaicho" A
         INNER JOIN  rgdb."DbT4101NinteiShinseiJoho" B
         ON A."shinseishoKanriNo" = B."shinseishoKanriNo"
         WHERE A."hihokenshaNo" = #{被保険者番号}
     </select>
-<!--    <select id="get介護保険負担限度額認定の情報"
+    <!--    <select id="get介護保険負担限度額認定の情報"
             resultMap="resultMap_NursingCareInformationCodeEntity"
             parameterType="jp.co.ndensan.reams.db.dbd.definition.common.GemmenJokyoParameter"  fetchSize="500">
         SELECT *
@@ -107,7 +107,7 @@
         SELECT *
         FROM rgdb."DbT4001JukyushaDaicho" A
         WHERE A."hihokenshaNo" = #{被保険者番号}
-              AND A."rirekiNo" = '0'
+        AND A."rirekiNo" = '0'
         ORDER BY A."jukyuShinseiYMD" DESC
         LIMIT 1
     </select>
@@ -117,9 +117,9 @@
         SELECT *
         FROM rgdb."DbT7006RoreiFukushiNenkinJukyusha" A
         WHERE A."shikibetsuCode" = #{識別コード}
-              AND A."jukyuKaishiYMD" <![CDATA[<=]]> #{システム日付}
-              AND #{システム日付} <![CDATA[<=]]> (CASE WHEN A."jukyuHaishiYMD" IN(NULL,'') THEN '99999999'
-                                                   ELSE A."jukyuHaishiYMD" END)
+        AND A."jukyuKaishiYMD" <![CDATA[<=]]> #{システム日付}
+        AND #{システム日付} <![CDATA[<=]]> (CASE WHEN A."jukyuHaishiYMD" IN(NULL,'') THEN '99999999'
+        ELSE A."jukyuHaishiYMD" END)
         ORDER BY A."jukyuKaishiYMD" DESC
         LIMIT 1
     </select>
@@ -129,11 +129,11 @@
         SELECT *
         FROM rgdb."DbT4021ShiharaiHohoHenko" A
         WHERE A."hihokenshaNo" = #{被保険者番号}
-              AND NOT EXISTS(SELECT 1 FROM rgdb."DbT4021ShiharaiHohoHenko" B
-                             WHERE A."hihokenshaNo" = B."hihokenshaNo"
-                                   AND A."kanriKubun" = B."kanriKubun"
-                                   AND A."rirekiNo" = B."rirekiNo"
-                            )
+        AND NOT EXISTS(SELECT 1 FROM rgdb."DbT4021ShiharaiHohoHenko" B
+        WHERE A."hihokenshaNo" = B."hihokenshaNo"
+        AND A."kanriKubun" = B."kanriKubun"
+        AND A."rirekiNo" = B."rirekiNo"
+        )
     </select>
     <select id="get識別コード"
             resultType="jp.co.ndensan.reams.db.dbx.entity.db.basic.DbV1001HihokenshaDaichoEntity"
@@ -148,13 +148,13 @@
         SELECT *
         FROM rgdb."DbT3114RiyoshaFutanWariaiMeisai" A
         WHERE A."hihokenshaNo" = #{被保険者番号}
-              AND NOT EXISTS(SELECT 1
-                             FROM rgdb."DbT3114RiyoshaFutanWariaiMeisai" B
-                             WHERE A."hihokenshaNo" = B."hihokenshaNo"
-                                   AND A."nendo" = B."nendo"
-                                   AND A."rirekiNo" <![CDATA[<]]> B."rirekiNo")
-              AND A."yukoKaishiYMD" <![CDATA[<=]]> #{システム日付}
-              AND A."yukoShuryoYMD" <![CDATA[>=]]> #{システム日付}
-              AND A."logicalDeletedFlag" = FALSE
+        AND NOT EXISTS(SELECT 1
+        FROM rgdb."DbT3114RiyoshaFutanWariaiMeisai" B
+        WHERE A."hihokenshaNo" = B."hihokenshaNo"
+        AND A."nendo" = B."nendo"
+        AND A."rirekiNo" <![CDATA[<]]> B."rirekiNo")
+        AND A."yukoKaishiYMD" <![CDATA[<=]]> #{システム日付}
+        AND A."yukoShuryoYMD" <![CDATA[>=]]> #{システム日付}
+        AND A."logicalDeletedFlag" = FALSE
     </select>
 </mapper>

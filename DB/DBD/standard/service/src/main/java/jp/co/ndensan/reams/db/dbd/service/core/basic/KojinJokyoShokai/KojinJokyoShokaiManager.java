@@ -8,7 +8,7 @@ package jp.co.ndensan.reams.db.dbd.service.core.basic.KojinJokyoShokai;
 import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dbd.definition.parameter.KojinJokyoShokaiParameter;
 import jp.co.ndensan.reams.db.dbd.entity.db.basic.relate.KojinJokyoShokai.KojinJokyoShokaiRelateEntity;
-import jp.co.ndensan.reams.db.dbd.persistence.db.basic.KojinJokyoShokai.KojinJokyoShokaiMapper;
+import jp.co.ndensan.reams.db.dbd.persistence.db.mapper.relate.KojinJokyoShokai.KojinJokyoShokaiMapper;
 import jp.co.ndensan.reams.db.dbz.service.core.MapperProvider;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;

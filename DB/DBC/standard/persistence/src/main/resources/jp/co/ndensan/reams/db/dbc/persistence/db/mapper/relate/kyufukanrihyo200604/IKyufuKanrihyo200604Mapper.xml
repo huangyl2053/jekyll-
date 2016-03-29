@@ -6,7 +6,7 @@ To change this template file, choose Tools | Templates
 and open the template in the editor.
 -->
 
-<mapper namespace="jp.co.ndensan.reams.db.dbc.persistence.mappers.IKyufuKanrihyo200604Mapper">
+<mapper namespace="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.kyufukanrihyo200604.IKyufuKanrihyo200604Mapper">
     <delete id="deleteKyufuKanrihyo200604" parameterType="RString">
         delete from rgdb."DbT3015KyufuKanrihyo200604" where "torikomiYM"=#{shoriYM}
     </delete>
