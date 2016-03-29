@@ -68,11 +68,11 @@ public class ShikakuTokusoJouhoFinder {
         IShikakuTokusouJouhoMapper shikakuTokusoMapper = mapperProvider.create(IShikakuTokusouJouhoMapper.class);
         List<ShikakuTokusouJouhoRelateEntity> 一覧データ取得リスト = null;
         if (DonyuKeitaiCode.事務広域.getCode().equals(params.get単一広域区分())) {
-            一覧データ取得リスト = shikakuTokusoMapper.getShikakuJoho(params);
+            一覧データ取得リスト = shikakuTokusoMapper.getShikakuTosoJoho(params);
         }
         if (DonyuKeitaiCode.事務構成市町村.getCode().equals(params.get単一広域区分())
                 || DonyuKeitaiCode.事務単一.getCode().equals(params.get単一広域区分())) {
-            一覧データ取得リスト = shikakuTokusoMapper.getShikakuTosoJoho(params);
+            一覧データ取得リスト = shikakuTokusoMapper.getShikakuJoho(params);
         }
         List<ShikakuTokusoJouho> serviceShuruiList = new ArrayList<>();
         List<ShikakuTokusouJouhoRelateEntity> 取得日リスト = new ArrayList<>();
