@@ -241,6 +241,10 @@ public enum ViewStateKeys {
     /**
      * 福祉用具購入費支給申請_決定情報登録 キーが「fuSyikyuriyu2」であることを表します
      */
-    fuSyikyuriyu2;
+    fuSyikyuriyu2,
+    /**
+     * キーが「様式番号」であることを表します
+     */
+    様式番号List;
 
 }
