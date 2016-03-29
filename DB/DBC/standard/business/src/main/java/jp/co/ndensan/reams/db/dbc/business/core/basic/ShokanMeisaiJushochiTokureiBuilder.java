@@ -169,7 +169,6 @@ public class ShokanMeisaiJushochiTokureiBuilder {
      * @return {@link ShokanMeisaiJushochiTokureiBuilder}
      */
     public ShokanMeisaiJushochiTokureiBuilder set施設所在保険者番号(ShoKisaiHokenshaNo 施設所在保険者番号) {
-        requireNonNull(施設所在保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage("施設所在保険者番号"));
         entity.setShisetsuShozaiHokenshaNo(施設所在保険者番号);
         return this;
     }
@@ -181,7 +180,6 @@ public class ShokanMeisaiJushochiTokureiBuilder {
      * @return {@link ShokanMeisaiJushochiTokureiBuilder}
      */
     public ShokanMeisaiJushochiTokureiBuilder set摘要(RString 摘要) {
-        requireNonNull(摘要, UrSystemErrorMessages.値がnull.getReplacedMessage("摘要"));
         entity.setTekiyo(摘要);
         return this;
     }

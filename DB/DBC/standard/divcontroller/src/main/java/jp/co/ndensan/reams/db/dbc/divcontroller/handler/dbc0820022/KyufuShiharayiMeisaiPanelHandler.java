@@ -21,7 +21,9 @@ import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaN
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ServiceKomokuCode;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ServiceShuruiCode;
+import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.kyotsu.SaibanHanyokeyName;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.ServiceCodeInputCommonChildDiv.ServiceCodeInputCommonChildDivDiv;
+import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -30,6 +32,7 @@ import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.ui.binding.RowState;
 import jp.co.ndensan.reams.uz.uza.ui.binding.propertyenum.IconName;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
+import jp.co.ndensan.reams.uz.uza.util.Saiban;
 import jp.co.ndensan.reams.uz.uza.util.editor.DecimalFormatter;
 
 /**
@@ -204,25 +207,28 @@ public class KyufuShiharayiMeisaiPanelHandler {
         }
         if (div.getPanelThree().getPanelFour().getTxtTanyi().getValue() == null && ddgRow.getDefaultDataName2() != null) {
             return true;
-        } else if (div.getPanelThree().getPanelFour().getTxtTanyi().getValue() != null) {
-            return !(new RString(div.getPanelThree().getPanelFour().getTxtTanyi().
-                    getValue().toString()).equals(ddgRow.getDefaultDataName2()));
+        } else if (div.getPanelThree().getPanelFour().getTxtTanyi().getValue() != null
+                && !(new RString(div.getPanelThree().getPanelFour().getTxtTanyi().
+                        getValue().toString()).equals(ddgRow.getDefaultDataName2()))) {
+            return true;
         }
         if (div.getPanelThree().getPanelFour().getTxtKaisu().
                 getValue() == null && ddgRow.getDefaultDataName3() != null) {
             return true;
-        } else if (div.getPanelThree().getPanelFour().getTxtKaisu().getValue() != null) {
-            return !(new RString(div.getPanelThree().getPanelFour().getTxtKaisu().
-                    getValue().toString()).equals(ddgRow.getDefaultDataName3()));
+        } else if (div.getPanelThree().getPanelFour().getTxtKaisu().getValue() != null
+                && !(new RString(div.getPanelThree().getPanelFour().getTxtKaisu().
+                        getValue().toString()).equals(ddgRow.getDefaultDataName3()))) {
+            return true;
         }
         if (div.getPanelThree().getPanelFour().getTxtServiceTanyi().
                 getValue() == null && ddgRow.getDefaultDataName4() != null) {
             return true;
-        } else if (div.getPanelThree().getPanelFour().getTxtServiceTanyi().getValue() != null) {
-            return !(new RString(div.getPanelThree().getPanelFour().getTxtServiceTanyi().
-                    getValue().toString()).equals(ddgRow.getDefaultDataName4()));
+        } else if (div.getPanelThree().getPanelFour().getTxtServiceTanyi().getValue() != null
+                && !(new RString(div.getPanelThree().getPanelFour().getTxtServiceTanyi().
+                        getValue().toString()).equals(ddgRow.getDefaultDataName4()))) {
+            return true;
         }
-        return (!ddgRow.getDefaultDataName5().equals(div.getPanelThree().getPanelFour().getTxtTeikiyo().getValue()));
+        return !ddgRow.getDefaultDataName5().equals(div.getPanelThree().getPanelFour().getTxtTeikiyo().getValue());
     }
 
     private void setDgdKyufuhiMeisai(dgdKyufuhiMeisai_Row ddgRow) {
@@ -331,10 +337,12 @@ public class KyufuShiharayiMeisaiPanelHandler {
                     entityList.add(mapList.get(row.getDefaultDataName6()).deleted());
                 } else if (RowState.Added.equals(row.getRowState())) {
                     max連番 = max連番 + 1;
+                    RString 新整理番号 = Saiban.get(SubGyomuCode.DBC介護給付, SaibanHanyokeyName.償還整理番号.
+                            getコード()).nextString();
                     ShokanMeisai entityAdded = new ShokanMeisai(
                             被保険者番号,
                             サービス年月,
-                            整理番号,
+                            新整理番号,
                             事業者番号,
                             様式番号,
                             明細番号,
