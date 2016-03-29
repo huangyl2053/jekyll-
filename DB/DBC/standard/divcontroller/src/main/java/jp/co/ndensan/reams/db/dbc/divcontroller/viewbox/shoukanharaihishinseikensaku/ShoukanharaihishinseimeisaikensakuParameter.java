@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbc.divcontroller.viewbox.syokanbaraihishikyushinseikette;
+package jp.co.ndensan.reams.db.dbc.divcontroller.viewbox.shoukanharaihishinseikensaku;
 
 import java.io.Serializable;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
@@ -30,7 +30,7 @@ public class ShoukanharaihishinseimeisaikensakuParameter implements Serializable
     private final RString 明細番号;
 
     /**
-     * ShoukanharaihishinseimeisaikensakuParameter
+     * コンストラクタです。
      *
      * @param 被保険者番号 HihokenshaNo
      * @param サービス年月 FlexibleYearMonth

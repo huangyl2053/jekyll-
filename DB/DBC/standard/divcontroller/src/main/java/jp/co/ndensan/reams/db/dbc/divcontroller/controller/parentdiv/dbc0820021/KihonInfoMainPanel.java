@@ -11,9 +11,9 @@ import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0820021.DBC0
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0820021.KihonInfoMainPanelDiv;
 import jp.co.ndensan.reams.db.dbc.divcontroller.handler.parentdiv.dbc0820021.KihonInfoMainPanelHandler;
 import jp.co.ndensan.reams.db.dbc.divcontroller.viewbox.ViewStateKeys;
-import jp.co.ndensan.reams.db.dbc.divcontroller.viewbox.syokanbaraihishikyushinseikette.ShoukanharaihishinseimeisaikensakuParameter;
-import jp.co.ndensan.reams.db.dbc.divcontroller.viewbox.syokanbaraihishikyushinseikette.SikibetuNokennsakuki;
-import jp.co.ndensan.reams.db.dbc.divcontroller.viewbox.syokanbaraihishikyushinseikette.SyokanbaraihishikyushinseiketteParameter;
+import jp.co.ndensan.reams.db.dbc.divcontroller.viewbox.shoukanharaihishinseikensaku.ShoukanharaihishinseikensakuParameter;
+import jp.co.ndensan.reams.db.dbc.divcontroller.viewbox.shoukanharaihishinseikensaku.ShoukanharaihishinseimeisaikensakuParameter;
+import jp.co.ndensan.reams.db.dbc.divcontroller.viewbox.shoukanharaihishinseikensaku.SikibetuNokennsakuki;
 import jp.co.ndensan.reams.db.dbc.service.core.shokanbaraijyokyoshokai.ShokanbaraiJyokyoShokai;
 import jp.co.ndensan.reams.db.dbc.service.core.syokanbaraihishikyushinseikette.SyokanbaraihiShikyuShinseiKetteManager;
 import jp.co.ndensan.reams.db.dbc.service.jutakukaishujizenshinsei.JutakuKaishuJizenShinsei;
@@ -59,7 +59,7 @@ public class KihonInfoMainPanel {
      */
     public ResponseData<KihonInfoMainPanelDiv> onLoad(KihonInfoMainPanelDiv div) {
         // TODO 償還払費申請検索キー
-        SyokanbaraihishikyushinseiketteParameter par = new SyokanbaraihishikyushinseiketteParameter(
+        ShoukanharaihishinseikensakuParameter par = new ShoukanharaihishinseikensakuParameter(
                 new HihokenshaNo("000000004"),
                 new FlexibleYearMonth(new RString("200501")),
                 new RString("0000000004"),
@@ -94,8 +94,8 @@ public class KihonInfoMainPanel {
         ViewStateHolder.put(ViewStateKeys.申請年月日, 申請日);
         getHandler(div).put様式番号ViewState();
 
-        SyokanbaraihishikyushinseiketteParameter 償還払費申請検索 = ViewStateHolder.get(ViewStateKeys.償還払費申請検索キー,
-                SyokanbaraihishikyushinseiketteParameter.class);
+        ShoukanharaihishinseikensakuParameter 償還払費申請検索 = ViewStateHolder.get(ViewStateKeys.償還払費申請検索キー,
+                ShoukanharaihishinseikensakuParameter.class);
         SikibetuNokennsakuki sikibetuKey = new SikibetuNokennsakuki(償還払費申請検索.getYoshikiNo(),
                 償還払費申請検索.getServiceTeikyoYM());
         ViewStateHolder.put(ViewStateKeys.識別番号検索キー, sikibetuKey);
@@ -103,7 +103,7 @@ public class KihonInfoMainPanel {
         ViewStateHolder.put(ViewStateKeys.識別コード, new ShikibetsuCode("000000000000010"));
         ShikibetsuCode 識別コード = ViewStateHolder.get(ViewStateKeys.識別コード, ShikibetsuCode.class);
         div.getPanelCcd().getCcdKaigoAtenaInfo().onLoad(識別コード);
-        if (!被保険者番号.isEmpty()) {
+        if (被保険者番号 != null && !被保険者番号.isEmpty()) {
             div.getPanelCcd().getCcdKaigoShikakuKihon().onLoad(被保険者番号);
         } else {
             div.getPanelCcd().getCcdKaigoShikakuKihon().setVisible(false);
@@ -154,8 +154,7 @@ public class KihonInfoMainPanel {
      */
     public ResponseData<KihonInfoMainPanelDiv> onClick_btnFree(KihonInfoMainPanelDiv div) {
         if (削除.equals(ViewStateHolder.get(ViewStateKeys.処理モード, RString.class))) {
-            return ResponseData.of(div).forwardWithEventName(DBC0820021TransitionEventName.償還払支給申請一覧画面)
-                    .respond();
+            return ResponseData.of(div).forwardWithEventName(DBC0820021TransitionEventName.一覧に戻る).respond();
         }
         boolean flag = getHandler(div).get内容変更状態();
         if (flag) {
@@ -167,12 +166,10 @@ public class KihonInfoMainPanel {
             if (new RString(UrQuestionMessages.入力内容の破棄.getMessage().getCode())
                     .equals(ResponseHolder.getMessageCode())
                     && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
-                return ResponseData.of(div).forwardWithEventName(DBC0820021TransitionEventName.償還払支給申請一覧画面)
-                        .respond();
+                return ResponseData.of(div).forwardWithEventName(DBC0820021TransitionEventName.一覧に戻る).respond();
             }
         } else {
-            return ResponseData.of(div).forwardWithEventName(DBC0820021TransitionEventName.償還払支給申請一覧画面)
-                    .respond();
+            return ResponseData.of(div).forwardWithEventName(DBC0820021TransitionEventName.一覧に戻る).respond();
         }
         return ResponseData.of(div).respond();
     }
@@ -185,7 +182,16 @@ public class KihonInfoMainPanel {
      */
     public ResponseData<KihonInfoMainPanelDiv> onClick_btnSave(KihonInfoMainPanelDiv div) {
         if (削除.equals(ViewStateHolder.get(ViewStateKeys.処理モード, RString.class))) {
-            return 保存処理(div, 削除);
+            if (!ResponseHolder.isReRequest()) {
+                getHandler(div).保存処理();
+                return ResponseData.of(div).addMessage(UrInformationMessages.正常終了.getMessage()
+                        .replace(削除.toString())).respond();
+            }
+            if (new RString(UrInformationMessages.正常終了.getMessage().getCode())
+                    .equals(ResponseHolder.getMessageCode())) {
+                return ResponseData.of(div).respond();
+            }
+            return ResponseData.of(div).addMessage(UrErrorMessages.異常終了.getMessage()).respond();
         } else {
             boolean flag = getHandler(div).get内容変更状態();
             if (flag) {
@@ -279,7 +285,7 @@ public class KihonInfoMainPanel {
     public ResponseData<KihonInfoMainPanelDiv> onClick_btnKyufuMeisai(KihonInfoMainPanelDiv div) {
         check明細番号(div);
         getHandler(div).putViewState();
-        return ResponseData.of(div).respond();
+        return ResponseData.of(div).forwardWithEventName(DBC0820021TransitionEventName.給付費明細).respond();
     }
 
     /**
@@ -291,7 +297,7 @@ public class KihonInfoMainPanel {
     public ResponseData<KihonInfoMainPanelDiv> onClick_btnTokuteiShiryohi(KihonInfoMainPanelDiv div) {
         check明細番号(div);
         getHandler(div).putViewState();
-        return ResponseData.of(div).respond();
+        return ResponseData.of(div).forwardWithEventName(DBC0820021TransitionEventName.特定診療費).respond();
     }
 
     /**
@@ -303,7 +309,7 @@ public class KihonInfoMainPanel {
     public ResponseData<KihonInfoMainPanelDiv> onClick_btnServiceKeikakuhi(KihonInfoMainPanelDiv div) {
         check明細番号(div);
         getHandler(div).putViewState();
-        return ResponseData.of(div).respond();
+        return ResponseData.of(div).forwardWithEventName(DBC0820021TransitionEventName.サービス計画費).respond();
     }
 
     /**
@@ -315,7 +321,7 @@ public class KihonInfoMainPanel {
     public ResponseData<KihonInfoMainPanelDiv> onClick_btnTokuteinyushosha(KihonInfoMainPanelDiv div) {
         check明細番号(div);
         getHandler(div).putViewState();
-        return ResponseData.of(div).respond();
+        return ResponseData.of(div).forwardWithEventName(DBC0820021TransitionEventName.特定入所者費用).respond();
     }
 
     /**
@@ -327,7 +333,7 @@ public class KihonInfoMainPanel {
     public ResponseData<KihonInfoMainPanelDiv> onClick_btnGokeiinfo(KihonInfoMainPanelDiv div) {
         check明細番号(div);
         getHandler(div).putViewState();
-        return ResponseData.of(div).respond();
+        return ResponseData.of(div).forwardWithEventName(DBC0820021TransitionEventName.合計情報).respond();
     }
 
     /**
@@ -339,7 +345,7 @@ public class KihonInfoMainPanel {
     public ResponseData<KihonInfoMainPanelDiv> onClick_btnKyufuhiMeisaiJutoku(KihonInfoMainPanelDiv div) {
         check明細番号(div);
         getHandler(div).putViewState();
-        return ResponseData.of(div).respond();
+        return ResponseData.of(div).forwardWithEventName(DBC0820021TransitionEventName.給付費明細_住特).respond();
     }
 
     /**
@@ -351,7 +357,7 @@ public class KihonInfoMainPanel {
     public ResponseData<KihonInfoMainPanelDiv> onClick_btnKinkyujiShoteiShikan(KihonInfoMainPanelDiv div) {
         check明細番号(div);
         getHandler(div).putViewState();
-        return ResponseData.of(div).respond();
+        return ResponseData.of(div).forwardWithEventName(DBC0820021TransitionEventName.緊急時_所定疾患).respond();
     }
 
     /**
@@ -363,7 +369,7 @@ public class KihonInfoMainPanel {
     public ResponseData<KihonInfoMainPanelDiv> onClick_btnKinkyujiShisetsu(KihonInfoMainPanelDiv div) {
         check明細番号(div);
         getHandler(div).putViewState();
-        return ResponseData.of(div).respond();
+        return ResponseData.of(div).forwardWithEventName(DBC0820021TransitionEventName.緊急時施設療養費).respond();
     }
 
     /**
@@ -375,7 +381,7 @@ public class KihonInfoMainPanel {
     public ResponseData<KihonInfoMainPanelDiv> onClick_btnShokujihiyo(KihonInfoMainPanelDiv div) {
         check明細番号(div);
         getHandler(div).putViewState();
-        return ResponseData.of(div).respond();
+        return ResponseData.of(div).forwardWithEventName(DBC0820021TransitionEventName.食事費用).respond();
     }
 
     /**
@@ -387,7 +393,7 @@ public class KihonInfoMainPanel {
     public ResponseData<KihonInfoMainPanelDiv> onClick_btnSeikyugaku(KihonInfoMainPanelDiv div) {
         check明細番号(div);
         getHandler(div).putViewState();
-        return ResponseData.of(div).respond();
+        return ResponseData.of(div).forwardWithEventName(DBC0820021TransitionEventName.請求額集計).respond();
     }
 
     /**
@@ -399,7 +405,7 @@ public class KihonInfoMainPanel {
     public ResponseData<KihonInfoMainPanelDiv> onClick_btnShafuku(KihonInfoMainPanelDiv div) {
         check明細番号(div);
         getHandler(div).putViewState();
-        return ResponseData.of(div).respond();
+        return ResponseData.of(div).forwardWithEventName(DBC0820021TransitionEventName.社福軽減額).respond();
     }
 
     private ResponseData<KihonInfoMainPanelDiv> check明細番号(KihonInfoMainPanelDiv div) {

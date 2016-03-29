@@ -15,7 +15,7 @@ import jp.co.ndensan.reams.db.dbc.business.core.shokanbaraijyokyoshokai.ShokanMe
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0820022.KyufuShiharayiMeisaiPanelDiv;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0820022.dgdKyufuhiMeisai_Row;
 import jp.co.ndensan.reams.db.dbc.divcontroller.viewbox.ViewStateKeys;
-import jp.co.ndensan.reams.db.dbc.divcontroller.viewbox.syokanbaraihishikyushinseikette.SyokanbaraihishikyushinseiketteParameter;
+import jp.co.ndensan.reams.db.dbc.divcontroller.viewbox.shoukanharaihishinseikensaku.ShoukanharaihishinseikensakuParameter;
 import jp.co.ndensan.reams.db.dbc.service.core.syokanbaraihishikyushinseikette.SyokanbaraihiShikyuShinseiKetteManager;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
@@ -304,9 +304,9 @@ public class KyufuShiharayiMeisaiPanelHandler {
      * 保存処理
      */
     public void 保存処理() {
-        SyokanbaraihishikyushinseiketteParameter parameter = ViewStateHolder.
+        ShoukanharaihishinseikensakuParameter parameter = ViewStateHolder.
                 get(ViewStateKeys.償還払費申請検索キー,
-                        SyokanbaraihishikyushinseiketteParameter.class);
+                        ShoukanharaihishinseikensakuParameter.class);
         FlexibleYearMonth サービス年月 = parameter.getServiceTeikyoYM();
         HihokenshaNo 被保険者番号 = parameter.getHiHokenshaNo();
         RString 整理番号 = parameter.getSeiriNp();
@@ -387,9 +387,9 @@ public class KyufuShiharayiMeisaiPanelHandler {
      * @param shikibetsuNoKanri ShikibetsuNoKanri
      */
     public void getボタンを制御(ShikibetsuNoKanri shikibetsuNoKanri) {
-        SyokanbaraihishikyushinseiketteParameter paramter
+        ShoukanharaihishinseikensakuParameter paramter
                 = ViewStateHolder.get(ViewStateKeys.償還払費申請検索キー,
-                        SyokanbaraihishikyushinseiketteParameter.class);
+                        ShoukanharaihishinseikensakuParameter.class);
         HihokenshaNo 被保険者番号 = paramter.getHiHokenshaNo();
         FlexibleYearMonth サービス年月 = paramter.getServiceTeikyoYM();
         RString 整理番号 = paramter.getSeiriNp();
@@ -588,7 +588,7 @@ public class KyufuShiharayiMeisaiPanelHandler {
         // TODO 支給申請画面のモード　
         ViewStateHolder.put(ViewStateKeys.処理モード, "");
         ViewStateHolder.put(ViewStateKeys.申請日, div.getPanelTwo().getTxtShinseiYMD().getValue());
-        SyokanbaraihishikyushinseiketteParameter paramter = new SyokanbaraihishikyushinseiketteParameter(
+        ShoukanharaihishinseikensakuParameter paramter = new ShoukanharaihishinseikensakuParameter(
                 ViewStateHolder.get(ViewStateKeys.被保険者番号, HihokenshaNo.class),
                 new FlexibleYearMonth(div.getPanelTwo().getTxtServiceTeikyoYM().getValue().toDateString()),
                 ViewStateHolder.get(ViewStateKeys.整理番号, RString.class),

@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbc.divcontroller.viewbox.syokanbaraihishikyushinseikette;
+package jp.co.ndensan.reams.db.dbc.divcontroller.viewbox.shoukanharaihishinseikensaku;
 
 import java.io.Serializable;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
@@ -18,7 +18,7 @@ import lombok.Getter;
  */
 @SuppressWarnings("PMD.UnusedPrivateField")
 @Getter
-public class SyokanbaraihishikyushinseiketteParameter implements Serializable {
+public class ShoukanharaihishinseikensakuParameter implements Serializable {
 
     private static final long serialVersionUID = 1L;
     private final HihokenshaNo hiHokenshaNo;
@@ -30,7 +30,7 @@ public class SyokanbaraihishikyushinseiketteParameter implements Serializable {
     private final Decimal kyufuritsu;
 
     /**
-     * SyokanbaraihishikyushinseiketteParameter
+     * コンストラクタです。
      *
      * @param hiHokenshaNo HihokenshaNo
      * @param serviceTeikyoYM FlexibleYearMonth
@@ -40,7 +40,7 @@ public class SyokanbaraihishikyushinseiketteParameter implements Serializable {
      * @param meisaiNo RString
      * @param kyufuritsu Decimal
      */
-    public SyokanbaraihishikyushinseiketteParameter(HihokenshaNo hiHokenshaNo, FlexibleYearMonth serviceTeikyoYM,
+    public ShoukanharaihishinseikensakuParameter(HihokenshaNo hiHokenshaNo, FlexibleYearMonth serviceTeikyoYM,
             RString seiriNp, JigyoshaNo jigyoshaNo, RString yoshikiNo, RString meisaiNo, Decimal kyufuritsu) {
         this.hiHokenshaNo = hiHokenshaNo;
         this.serviceTeikyoYM = serviceTeikyoYM;

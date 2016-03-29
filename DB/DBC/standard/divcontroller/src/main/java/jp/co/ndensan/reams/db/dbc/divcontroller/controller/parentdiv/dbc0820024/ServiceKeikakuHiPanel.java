@@ -15,9 +15,9 @@ import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0820024.Serv
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0820024.dgdYichiran_Row;
 import jp.co.ndensan.reams.db.dbc.divcontroller.handler.dbc0820024.ServiceKeikakuHiPanelHandler;
 import jp.co.ndensan.reams.db.dbc.divcontroller.viewbox.ViewStateKeys;
-import jp.co.ndensan.reams.db.dbc.divcontroller.viewbox.syokanbaraihishikyushinseikette.ShoukanharaihishinseimeisaikensakuParameter;
-import jp.co.ndensan.reams.db.dbc.divcontroller.viewbox.syokanbaraihishikyushinseikette.SikibetuNokennsakuki;
-import jp.co.ndensan.reams.db.dbc.divcontroller.viewbox.syokanbaraihishikyushinseikette.SyokanbaraihishikyushinseiketteParameter;
+import jp.co.ndensan.reams.db.dbc.divcontroller.viewbox.shoukanharaihishinseikensaku.ShoukanharaihishinseimeisaikensakuParameter;
+import jp.co.ndensan.reams.db.dbc.divcontroller.viewbox.shoukanharaihishinseikensaku.SikibetuNokennsakuki;
+import jp.co.ndensan.reams.db.dbc.divcontroller.viewbox.shoukanharaihishinseikensaku.ShoukanharaihishinseikensakuParameter;
 import jp.co.ndensan.reams.db.dbc.service.core.shokanbaraijyokyoshokai.ShokanbaraiJyokyoShokai;
 import jp.co.ndensan.reams.db.dbc.service.core.syokanbaraihishikyushinseikette.SyokanbaraihiShikyuShinseiKetteManager;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
@@ -72,7 +72,7 @@ public class ServiceKeikakuHiPanel {
                 new RString("4444"));
         ViewStateHolder.put(ViewStateKeys.償還払費申請明細検索キー, param);
         // TODO 償還払費申請検索キー
-        SyokanbaraihishikyushinseiketteParameter par = new SyokanbaraihishikyushinseiketteParameter(
+        ShoukanharaihishinseikensakuParameter par = new ShoukanharaihishinseikensakuParameter(
                 new HihokenshaNo("000000004"),
                 new FlexibleYearMonth(new RString("200501")),
                 new RString("0000000004"),
@@ -81,8 +81,8 @@ public class ServiceKeikakuHiPanel {
                 new RString("0004"),
                 Decimal.TEN);
         ViewStateHolder.put(ViewStateKeys.償還払費申請検索キー, par);
-        SyokanbaraihishikyushinseiketteParameter parame = ViewStateHolder.get(ViewStateKeys.償還払費申請検索キー,
-                SyokanbaraihishikyushinseiketteParameter.class);
+        ShoukanharaihishinseikensakuParameter parame = ViewStateHolder.get(ViewStateKeys.償還払費申請検索キー,
+                ShoukanharaihishinseikensakuParameter.class);
         SikibetuNokennsakuki key = new SikibetuNokennsakuki(parame.getYoshikiNo(), parame.getServiceTeikyoYM());
         ViewStateHolder.put(ViewStateKeys.識別番号検索キー, key);
         ViewStateHolder.put(ViewStateKeys.識別コード, new ShikibetsuCode("000000000000010"));
@@ -277,8 +277,8 @@ public class ServiceKeikakuHiPanel {
             return createResponse(div);
         } else {
             boolean 変更 = false;
-            SyokanbaraihishikyushinseiketteParameter parameter = ViewStateHolder.get(ViewStateKeys.償還払費申請検索キー,
-                    SyokanbaraihishikyushinseiketteParameter.class);
+            ShoukanharaihishinseikensakuParameter parameter = ViewStateHolder.get(ViewStateKeys.償還払費申請検索キー,
+                    ShoukanharaihishinseikensakuParameter.class);
             FlexibleYearMonth サービス年月 = parameter.getServiceTeikyoYM();
             if (サービス年月_200904.isBeforeOrEquals(サービス年月)) {
                 変更 = handler.変更チェック処理();
@@ -304,8 +304,8 @@ public class ServiceKeikakuHiPanel {
             handler.保存処理(削除モード);
         } else if (登録モード.equals(画面モード)) {
             boolean 変更 = false;
-            SyokanbaraihishikyushinseiketteParameter parameter = ViewStateHolder.get(ViewStateKeys.償還払費申請検索キー,
-                    SyokanbaraihishikyushinseiketteParameter.class);
+            ShoukanharaihishinseikensakuParameter parameter = ViewStateHolder.get(ViewStateKeys.償還払費申請検索キー,
+                    ShoukanharaihishinseikensakuParameter.class);
             FlexibleYearMonth サービス年月 = parameter.getServiceTeikyoYM();
             if (サービス年月_200904.isBeforeOrEquals(サービス年月)) {
                 変更 = handler.変更チェック処理();
@@ -366,8 +366,8 @@ public class ServiceKeikakuHiPanel {
             if (new RString(UrQuestionMessages.入力内容の破棄.getMessage().getCode())
                     .equals(ResponseHolder.getMessageCode())
                     && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
-                SyokanbaraihishikyushinseiketteParameter parameter = ViewStateHolder.get(ViewStateKeys.償還払費申請検索キー,
-                        SyokanbaraihishikyushinseiketteParameter.class);
+                ShoukanharaihishinseikensakuParameter parameter = ViewStateHolder.get(ViewStateKeys.償還払費申請検索キー,
+                        ShoukanharaihishinseikensakuParameter.class);
                 FlexibleYearMonth サービス年月 = parameter.getServiceTeikyoYM();
                 getHandler(div).登録モード変更処理(サービス年月);
                 return createResponse(div);

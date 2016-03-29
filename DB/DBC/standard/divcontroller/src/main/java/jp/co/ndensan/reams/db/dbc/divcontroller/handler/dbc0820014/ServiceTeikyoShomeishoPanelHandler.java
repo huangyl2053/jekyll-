@@ -14,8 +14,8 @@ import jp.co.ndensan.reams.db.dbc.definition.enumeratedtype.config.ConfigNameDBC
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0820014.ServiceTeikyoShomeishoPanelDiv;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0820014.dgdServiceTeikyoShomeisyo_Row;
 import jp.co.ndensan.reams.db.dbc.divcontroller.viewbox.ViewStateKeys;
-import jp.co.ndensan.reams.db.dbc.divcontroller.viewbox.syokanbaraihishikyushinseikette.ShoukanharaihishinseimeisaikensakuParameter;
-import jp.co.ndensan.reams.db.dbc.divcontroller.viewbox.syokanbaraihishikyushinseikette.SyokanbaraihishikyushinseiketteParameter;
+import jp.co.ndensan.reams.db.dbc.divcontroller.viewbox.shoukanharaihishinseikensaku.ShoukanharaihishinseimeisaikensakuParameter;
+import jp.co.ndensan.reams.db.dbc.divcontroller.viewbox.shoukanharaihishinseikensaku.ShoukanharaihishinseikensakuParameter;
 import jp.co.ndensan.reams.db.dbc.service.core.shokanbaraijyokyoshokai.ShokanbaraiJyokyoShokai;
 import jp.co.ndensan.reams.db.dbc.service.core.syokanbaraihishikyushinseikette.SyokanbaraihiShikyuShinseiKetteManager;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
@@ -167,15 +167,15 @@ public class ServiceTeikyoShomeishoPanelHandler {
      */
     public void putViewState() {
         // TODO QA528 ViewStateの設定。
-        SyokanbaraihishikyushinseiketteParameter parameter = ViewStateHolder
-                .get(ViewStateKeys.償還払費申請検索キー, SyokanbaraihishikyushinseiketteParameter.class);
+        ShoukanharaihishinseikensakuParameter parameter = ViewStateHolder
+                .get(ViewStateKeys.償還払費申請検索キー, ShoukanharaihishinseikensakuParameter.class);
         HihokenshaNo 被保険者番号 = parameter.getHiHokenshaNo();
         FlexibleYearMonth サービス年月 = null;
         if (div.getPanelTwo().getTxtServiceTeikyoYM() != null) {
             サービス年月 = new FlexibleYearMonth(div.getPanelTwo().getTxtServiceTeikyoYM().toString());
         }
         RString 整理番号 = div.getPanelTwo().getTxtSeiriBango().getValue();
-        SyokanbaraihishikyushinseiketteParameter par = new SyokanbaraihishikyushinseiketteParameter(
+        ShoukanharaihishinseikensakuParameter par = new ShoukanharaihishinseikensakuParameter(
                 被保険者番号,
                 サービス年月,
                 整理番号,
@@ -228,8 +228,8 @@ public class ServiceTeikyoShomeishoPanelHandler {
      */
     public Boolean 申請既存チェック() {
         // TODO QA528 申請既存チェックは設計書の里にありません。
-        SyokanbaraihishikyushinseiketteParameter paramter = ViewStateHolder.get(ViewStateKeys.償還払費申請検索キー,
-                SyokanbaraihishikyushinseiketteParameter.class);
+        ShoukanharaihishinseikensakuParameter paramter = ViewStateHolder.get(ViewStateKeys.償還払費申請検索キー,
+                ShoukanharaihishinseikensakuParameter.class);
         HihokenshaNo 被保険者番号 = paramter.getHiHokenshaNo();
         FlexibleYearMonth サービス年月 = paramter.getServiceTeikyoYM();
         RString 整理番号 = paramter.getSeiriNp();
@@ -262,8 +262,8 @@ public class ServiceTeikyoShomeishoPanelHandler {
      */
     public Boolean サービス提供証明書の存在チェック() {
         // TODO QA530 viewStateの償還払費証明書検索キーの取得。
-        SyokanbaraihishikyushinseiketteParameter parameter = ViewStateHolder
-                .get(ViewStateKeys.償還払費申請検索キー, SyokanbaraihishikyushinseiketteParameter.class);
+        ShoukanharaihishinseikensakuParameter parameter = ViewStateHolder
+                .get(ViewStateKeys.償還払費申請検索キー, ShoukanharaihishinseikensakuParameter.class);
         JigyoshaNo 事業者番号 = new JigyoshaNo(div.getPanelShinseiNaiyo().getCcdShisetsuJoho().getNyuryokuShisetsuKodo());
         RString 様式番号 = div.getPanelShinseiNaiyo().getDdlShomeisho().getSelectedValue();
         int 証明書件数 = SyokanbaraihiShikyuShinseiKetteManager.createInstance().getShikibetsuNoKanri(
