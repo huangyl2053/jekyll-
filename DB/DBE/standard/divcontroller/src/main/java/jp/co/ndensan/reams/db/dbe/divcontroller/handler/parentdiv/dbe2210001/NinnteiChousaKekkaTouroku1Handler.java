@@ -1067,7 +1067,7 @@ public class NinnteiChousaKekkaTouroku1Handler {
                 特別な医療 = 特別な医療.concat(String.valueOf(基本情報.get調査項目()));
 
             } else if (!基本情報.get前回認知症高齢者自立度().isEmpty() || !基本情報.get前回障害高齢者自立度().isEmpty()
-                    || 基本情報.get認知症高齢者自立度().isEmpty() || !基本情報.get障害高齢者自立度().isEmpty()) {
+                    || !基本情報.get認知症高齢者自立度().isEmpty() || !基本情報.get障害高齢者自立度().isEmpty()) {
                 自立度List.add(基本情報);
                 生活自立度 = 生活自立度.concat(基本情報.get認知症高齢者自立度().getKey()).concat(基本情報.get障害高齢者自立度().getKey());
             }
