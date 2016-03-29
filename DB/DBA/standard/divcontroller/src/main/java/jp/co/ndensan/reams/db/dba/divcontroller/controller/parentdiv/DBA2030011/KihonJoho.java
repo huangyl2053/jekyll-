@@ -51,7 +51,7 @@ public class KihonJoho {
         //TODO n8178 城間篤人 テスト用の市町村コードには何が入るか不明のため、検索に失敗する。テスト用市町村コードで取得できるデータが用意された後に修正する。
 //        lasdecCode = new LasdecCode("209007");
 
-        kihonDiv.getCcdKaigoAtenaInfo().load(taishoshaKey.get識別コード());
+        kihonDiv.getCcdKaigoAtenaInfo().onLoad(taishoshaKey.get識別コード());
         kihonDiv.getCcdKaigoShikakuKihon().onLoad(taishoshaKey.get識別コード());
 
         if (isNot適用対象者(controlData)) {
