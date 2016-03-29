@@ -86,7 +86,7 @@ public enum ReportIdDBE {
      * 介護認定審査会スケジュール表
      */
     DBE514001(
-            new ReportId("DBE514001_shinsakaisukejuruhyo"), new RString("介護認定審査会スケジュール表")),
+            new ReportId("DBE514001_Shinsakaisukejuruhyo"), new RString("介護認定審査会スケジュール表")),
     /**
      * 要介護認定結果通知対象者一覧表
      */
