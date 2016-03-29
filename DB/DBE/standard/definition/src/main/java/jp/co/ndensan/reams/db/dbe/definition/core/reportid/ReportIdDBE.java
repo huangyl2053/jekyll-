@@ -171,7 +171,15 @@ public enum ReportIdDBE {
     /**
      * 前回認定調査結果との比較表の帳票ＩＤです。
      */
-    DBE293001(new ReportId("DBE293001_ChosahyoSaiCheckhyo"), new RString("前回認定調査結果との比較表"));
+    DBE293001(new ReportId("DBE293001_ChosahyoSaiCheckhyo"), new RString("前回認定調査結果との比較表")),
+    /**
+     * 要介護認定調査票差異チェック票(片面)の帳票ＩＤです。
+     */
+    DBE292001(new ReportId("DBE292001_SaiChekkuhyo"), new RString("要介護認定調査票差異チェック票")),
+    /**
+     * 要介護認定調査票差異チェック票(両面)の帳票ＩＤです。
+     */
+    DBE292001_Ryoumen(new ReportId("SaiChekkuhyoRyoumen"), new RString("要介護認定調査票差異チェック票"));
 
     private final ReportId reportId;
     private final RString reportName;
