@@ -203,25 +203,25 @@ public class ShisetsuJohoCommonChildDivDiv extends Panel implements IShisetsuJoh
      */
     @JsonProperty("modes")
     private HashSet<Mode> modes;
-    
+
     public static enum State implements ICommonChildDivMode {
-        
+
         DaichoShubetsuAriMode("DaichoShubetsuAriMode"),
         DaichoShubetsuNashiMode("DaichoShubetsuNashiMode"),
         KaigoHokenMode("KaigoHokenMode"),
         OtherTokureiMode("OtherTokureiMode"),
         TekiyoJogaiMode("TekiyoJogaiMode"),
         JigyoshaInputGuideMode("JigyoshaInputGuideMode");
-        
+
         private final String name;
-        
+
         private State(final String name) {
             this.name = name;
         }
-        
+
         public static State getEnum(String str) {
             State[] enumArray = State.values();
-            
+
             for (State enumStr : enumArray) {
                 if (str.equals(enumStr.name.toString())) {
                     return enumStr;
@@ -229,18 +229,18 @@ public class ShisetsuJohoCommonChildDivDiv extends Panel implements IShisetsuJoh
             }
             return null;
         }
-        
+
         @Override
         public String toString() {
             return this.name;
         }
-        
+
     }
-    
+
     public State getMode_State() {
         return (State) _CommonChildDivModeUtil.getMode(this.modes, State.class);
     }
-    
+
     public void setMode_State(State value) {
         _CommonChildDivModeUtil.setMode(this.modes, State.class, value);
     }
@@ -287,7 +287,48 @@ public class ShisetsuJohoCommonChildDivDiv extends Panel implements IShisetsuJoh
      * @param nyuryokuShisetsucode 入所施設コード
      */
     @Override
-    public void setNyuryokuShisetsuMeisho(RString nyuryokuShisetsucode) {
-        getHandler().setNyuryokuShisetsuMeisho(nyuryokuShisetsucode);
+    public void setNyuryokuShisetsuKodo(RString nyuryokuShisetsucode) {
+        getHandler().setNyuryokuShisetsuKodo(nyuryokuShisetsucode);
+    }
+
+    /**
+     * 台帳種別の取得。
+     *
+     *
+     * @return 台帳種別
+     */
+    @Override
+    public RString getDaichoShubetsu() {
+        return getHandler().getDdlDaichoShubetsu();
+    }
+
+    /**
+     * 台帳種別の設定。
+     *
+     * @param key 台帳種別
+     */
+    @Override
+    public void set台帳種別(RString key) {
+        getHandler().set台帳種別(key);
+    }
+
+    /**
+     * 施設種類の取得。
+     *
+     * @return 施設種類
+     */
+    @Override
+    public RString get施設種類() {
+        return getHandler().get施設種類();
+    }
+
+    /**
+     * 施設種類の設定。
+     *
+     * @param key 施設種類
+     */
+    @Override
+    public void set施設種類(RString key) {
+        getHandler().set施設種類(key);
     }
 }

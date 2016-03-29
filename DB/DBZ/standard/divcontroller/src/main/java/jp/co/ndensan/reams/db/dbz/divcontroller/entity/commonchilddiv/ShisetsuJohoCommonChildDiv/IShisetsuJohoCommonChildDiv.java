@@ -13,6 +13,14 @@ public interface IShisetsuJohoCommonChildDiv extends ICommonChildDivBaseProperti
     public abstract RString getNyuryokuShisetsuKodo();
 
     public abstract RString getNyuryokuShisetsuMeisho();
-    
-    public abstract void setNyuryokuShisetsuMeisho(RString nyuryokuShisetsucode);
+
+    public abstract void setNyuryokuShisetsuKodo(RString nyuryokuShisetsucode);
+
+    public abstract RString getDaichoShubetsu();
+
+    public abstract void set台帳種別(RString key);
+
+    public abstract RString get施設種類();
+
+    public abstract void set施設種類(RString key);
 }

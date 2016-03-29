@@ -250,8 +250,83 @@ public class ShisetsuJohoHandler {
      *
      * @param nyuryokuShisetsucode 入所施設コード
      */
-    public void setNyuryokuShisetsuMeisho(RString nyuryokuShisetsucode) {
+    public void setNyuryokuShisetsuKodo(RString nyuryokuShisetsucode) {
         div.getTxtNyuryokuShisetsuKodo().setValue(nyuryokuShisetsucode);
         this.selectShiSeTuMeiSyo();
+    }
+
+    /**
+     * 台帳種別の取得。
+     *
+     * @return 台帳種別
+     */
+    public RString getDdlDaichoShubetsu() {
+        return div.getDdlDaichoShubetsu().getSelectedKey();
+    }
+
+    /**
+     * 施設種類の取得。
+     *
+     * @return 施設種類
+     */
+    public RString get施設種類() {
+        if (div.getRadKaigoHokenShisetsu().getSelectedKey() != null
+                && !div.getRadKaigoHokenShisetsu().getSelectedKey().isEmpty()) {
+
+            return div.getRadKaigoHokenShisetsu().getSelectedKey();
+        } else if (div.getRadOtherTokureiShisetsu().getSelectedKey() != null
+                && !div.getRadOtherTokureiShisetsu().getSelectedKey().isEmpty()) {
+
+            return div.getRadOtherTokureiShisetsu().getSelectedKey();
+        } else if (div.getRadTekiyoJyogaiShisetsu().getSelectedKey() != null
+                && !div.getRadTekiyoJyogaiShisetsu().getSelectedKey().isEmpty()) {
+
+            return div.getRadTekiyoJyogaiShisetsu().getSelectedKey();
+        } else if ((div.getRadKaigoHokenShisetsu().getSelectedKey() == null
+                || div.getRadKaigoHokenShisetsu().getSelectedKey().isEmpty())
+                && (div.getRadOtherTokureiShisetsu().getSelectedKey() == null
+                || div.getRadOtherTokureiShisetsu().getSelectedKey().isEmpty())
+                && (div.getRadTekiyoJyogaiShisetsu().getSelectedKey() == null
+                || div.getRadTekiyoJyogaiShisetsu().getSelectedKey().isEmpty())) {
+
+            return ShisetsuType.適用除外施設.getCode();
+        }
+        return RString.EMPTY;
+    }
+
+    /**
+     * 施設種類の設定。
+     *
+     * @param key 施設種類
+     */
+    public void set施設種類(RString key) {
+
+        if (ShisetsuType.介護保険施設.getCode().equals(key)) {
+            div.getRadKaigoHokenShisetsu().setSelectedKey(key);
+        }
+        if (ShisetsuType.住所地特例対象施設.getCode().equals(key)) {
+            div.getRadTekiyoJyogaiShisetsu().setSelectedKey(key);
+        }
+        if (ShisetsuType.適用除外施設.getCode().equals(key)) {
+            div.getRadOtherTokureiShisetsu().setSelectedKey(key);
+        }
+    }
+
+    /**
+     * 台帳種別の設定。
+     *
+     * @param key 台帳種別
+     */
+    public void set台帳種別(RString key) {
+
+        if (DaichoType.被保険者.getCode().equals(key)) {
+            div.getDdlDaichoShubetsu().setSelectedKey(key);
+        }
+        if (DaichoType.他市町村住所地特例者.getCode().equals(key)) {
+            div.getDdlDaichoShubetsu().setSelectedKey(key);
+        }
+        if (DaichoType.適用除外者.getCode().equals(key)) {
+            div.getDdlDaichoShubetsu().setSelectedKey(key);
+        }
     }
 }
