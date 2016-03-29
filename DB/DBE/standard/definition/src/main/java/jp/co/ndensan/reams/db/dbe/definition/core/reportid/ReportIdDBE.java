@@ -125,9 +125,41 @@ public enum ReportIdDBE {
      */
     DBE221011(new ReportId("DBE221011_chosahyoGaikyochosa"), new RString("要介護認定調査票（概況調査）")),
     /**
+     * 要介護認定調査票（概況調査）の帳票ＩＤです。
+     */
+    DBE221001(new ReportId("DBE221001_ChosahyoGaikyochosa"), new RString("要介護認定調査票（概況調査）")),
+    /**
      * 要介護認定調査票（特記事項）の帳票ＩＤです。
      */
     DBE221022_1(new ReportId("DBE221022_chosahyoTokkijiko"), new RString("要介護認定調査票（特記事項）")),
+    /**
+     * 要介護認定調査票（特記事項）の帳票ＩＤです。
+     */
+    DBE221021(new ReportId("DBE221021_chosahyoTokkijiko"), new RString("要介護認定調査票（特記事項）")),
+    /**
+     * 要介護認定調査票（特記事項）の帳票ＩＤです。
+     */
+    DBE221022(new ReportId("DBE221022_chosahyoTokkijiko"), new RString("要介護認定調査票（特記事項）")),
+    /**
+     * 要介護認定調査票（特記事項）の帳票ＩＤです。
+     */
+    DBE221023(new ReportId("DBE221023_chosahyoTokkijiko"), new RString("要介護認定調査票（特記事項）")),
+    /**
+     * 要介護認定調査票（特記事項）の帳票ＩＤです。
+     */
+    DBE221024(new ReportId("DBE221024_chosahyoTokkijiko"), new RString("要介護認定調査票（特記事項）")),
+    /**
+     * 要介護認定調査票（特記事項）の帳票ＩＤです。
+     */
+    DBE221041(new ReportId("DBE221041_tokkijikoOCR"), new RString("要介護認定調査票（特記事項）")),
+    /**
+     * 要介護認定調査票（特記事項）の帳票ＩＤです。
+     */
+    DBE221042(new ReportId("DBE221042_tokkijikoOCR"), new RString("要介護認定調査票（特記事項）")),
+    /**
+     * 要介護認定調査票（特記事項）の帳票ＩＤです。
+     */
+    DBE221043(new ReportId("DBE221043_tokkijikoOCR"), new RString("要介護認定調査票（特記事項）")),
     /**
      * 要介護認定調査票（特記事項）フリー様式の帳票ＩＤです。
      */
