@@ -61,7 +61,7 @@ public class ShiSeiKeTuKeBusiness {
      * @return 認定申請区分申請時コード
      */
     public Code get認定申請区分申請時コード() {
-        return entity.getNinteiShinseiShinseijiKubunCode();
+        return entity.getShinseijiKubunCode();
     }
 
     /**
@@ -115,7 +115,7 @@ public class ShiSeiKeTuKeBusiness {
      * @return 認定申請情報登録完了年月日
      */
     public FlexibleDate get認定申請情報登録完了年月日() {
-        return entity.getNinteiShinseiJohoTorokuKanryoYMD();
+        return entity.getJohoTorokuKanryoYMD();
     }
 
     /**

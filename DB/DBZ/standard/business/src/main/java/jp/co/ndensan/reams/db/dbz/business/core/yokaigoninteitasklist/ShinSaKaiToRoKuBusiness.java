@@ -61,7 +61,7 @@ public class ShinSaKaiToRoKuBusiness {
      * @return 認定申請区分申請時コード
      */
     public Code get認定申請区分申請時コード() {
-        return entity.getNinteiShinseiShinseijiKubunCode();
+        return entity.getShinseijiKubunCode();
     }
 
     /**
@@ -88,7 +88,7 @@ public class ShinSaKaiToRoKuBusiness {
      * @return 介護認定審査会優先振分区分コード
      */
     public Code get介護認定審査会優先振分区分コード() {
-        return entity.getShinsakaiYusenWaritsukeKubunCode();
+        return entity.getYusenWaritsukeKubunCode();
     }
 
     /**
@@ -142,7 +142,7 @@ public class ShinSaKaiToRoKuBusiness {
      * @return 認定審査会割当完了年月日
      */
     public FlexibleDate get認定審査会割当完了年月日() {
-        return entity.getNinteiShinsakaiWariateKanryoYMD();
+        return entity.getKaiWariateKanryoYMD();
     }
 
     /**

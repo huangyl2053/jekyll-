@@ -29,7 +29,7 @@ public class CyoSaiRaiRelateEntity {
     private RString hihokenshaNo;
     private AtenaMeisho hihokenshaName;
     private FlexibleDate ninteiShinseiYMD;
-    private Code ninteiShinseiShinseijiKubunCode;
+    private Code shinseijiKubunCode;
     private int saiChosaIraiKaisu;
     private YubinNo yubinNo;
     private AtenaJusho jusho;

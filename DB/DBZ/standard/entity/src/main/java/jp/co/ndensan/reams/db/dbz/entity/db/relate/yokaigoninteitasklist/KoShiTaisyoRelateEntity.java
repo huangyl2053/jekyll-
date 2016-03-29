@@ -22,7 +22,7 @@ import lombok.Setter;
 public class KoShiTaisyoRelateEntity {
 
     private ShinseishoKanriNo shinseishoKanriNo;
-    private Code ninteiShinseiShinseijiKubunCode;
+    private Code shinseijiKubunCode;
     private RString hihokenshaNo;
     private AtenaMeisho hihokenshaName;
     private FlexibleDate koshinTsuchiHakkoYMD;

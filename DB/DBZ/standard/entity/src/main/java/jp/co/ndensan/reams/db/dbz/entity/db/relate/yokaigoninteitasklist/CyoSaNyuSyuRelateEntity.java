@@ -26,7 +26,7 @@ public class CyoSaNyuSyuRelateEntity {
     private RString hihokenshaNo;
     private AtenaMeisho hihokenshaName;
     private FlexibleDate ninteiShinseiYMD;
-    private Code ninteiShinseiShinseijiKubunCode;
+    private Code shinseijiKubunCode;
     private int saiChosaIraiKaisu;
     private Code shoriJotaiKubun;
     private RString shichosonMeisho;

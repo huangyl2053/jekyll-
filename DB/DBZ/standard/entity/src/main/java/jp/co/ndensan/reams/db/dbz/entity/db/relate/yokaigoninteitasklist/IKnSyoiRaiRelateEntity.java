@@ -32,7 +32,7 @@ public class IKnSyoiRaiRelateEntity {
     private AtenaJusho jusho;
     private JigyoshaNo nyushoShisetsuCode;
     private Code shoriJotaiKubun;
-    private Code ninteiShinseiShinseijiKubunCode;
+    private Code shinseijiKubunCode;
     private FlexibleDate ninteiShinseiYMD;
     private int saiSakuseiIraiKaisu;
     private FlexibleDate ikenshoSakuseiIraiKanryoYMD;

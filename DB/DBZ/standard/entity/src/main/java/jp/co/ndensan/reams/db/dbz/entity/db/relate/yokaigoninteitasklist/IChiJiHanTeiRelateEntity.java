@@ -26,12 +26,12 @@ public class IChiJiHanTeiRelateEntity {
     private Code koroshoIfShikibetsuCode;
     private RString hihokenshaNo;
     private AtenaKanaMeisho hihokenshaKana;
-    private Code ninteiShinseiShinseijiKubunCode;
+    private Code shinseijiKubunCode;
     private FlexibleDate ninteiShinseiYMD;
     private FlexibleDate ninteichosaKanryoYMD;
     private FlexibleDate ikenshoTorokuKanryoYMD;
     private RString shichosonMeisho;
-    private FlexibleDate ninteiShinseiJohoTorokuKanryoYMD;
+    private FlexibleDate johoTorokuKanryoYMD;
     private FlexibleDate ichijiHanteiYMD;
     private Code ichijiHanteiKekkaCode;
     private RString ichijiHnateiKeikokuCode;

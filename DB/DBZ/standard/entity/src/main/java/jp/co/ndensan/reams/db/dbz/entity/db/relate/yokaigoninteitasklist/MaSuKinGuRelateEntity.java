@@ -25,7 +25,7 @@ public class MaSuKinGuRelateEntity {
     private ShinseishoKanriNo shinseishoKanriNo;
     private RString hihokenshaNo;
     private AtenaMeisho hihokenshaName;
-    private Code ninteiShinseiShinseijiKubunCode;
+    private Code shinseijiKubunCode;
     private FlexibleDate ninteiShinseiYMD;
     private RString shichosonMeisho;
     private FlexibleDate ninteichosaIraiKanryoYMD;

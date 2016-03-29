@@ -26,7 +26,7 @@ public class IkenSyoNyuSyuRelateEntity {
     private RString hihokenshaNo;
     private AtenaMeisho hihokenshaName;
     private Code shoriJotaiKubun;
-    private Code ninteiShinseiShinseijiKubunCode;
+    private Code shinseijiKubunCode;
     private FlexibleDate ninteiShinseiYMD;
     private FlexibleDate ikenshoSakuseiIraiKanryoYMD;
     private FlexibleDate ikenshoTorokuKanryoYMD;

@@ -24,13 +24,13 @@ public class ShiSeiKeTuKeRelateEntity {
     private ShinseishoKanriNo shinseishoKanriNo;
     private RString hihokenshaNo;
     private AtenaMeisho hihokenshaName;
-    private Code ninteiShinseiShinseijiKubunCode;
+    private Code shinseijiKubunCode;
     private FlexibleDate ninteiShinseiYMD;
     private FlexibleDate koshinTsuchiHakkoYMD;
     private FlexibleDate koshinTsuchiHakkoKanryoYMD;
     private Code shoriJotaiKubun;
     private RString shichosonMeisho;
-    private FlexibleDate ninteiShinseiJohoTorokuKanryoYMD;
+    private FlexibleDate johoTorokuKanryoYMD;
     private FlexibleDate iraishoShutsuryokuYMD;
     private FlexibleDate chosahyoTouShutsuryokuYMD;
 }

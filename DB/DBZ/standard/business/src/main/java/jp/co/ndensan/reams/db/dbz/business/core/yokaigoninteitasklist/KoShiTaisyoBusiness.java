@@ -43,7 +43,7 @@ public class KoShiTaisyoBusiness {
      * @return 認定申請区分（申請時）コード
      */
     public Code get認定申請区分_申請時コード() {
-        return entity.getNinteiShinseiShinseijiKubunCode();
+        return entity.getShinseijiKubunCode();
     }
 
     /**
