@@ -5,8 +5,6 @@ package jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0600031;
  * 不正な動作の原因になります。
  */
 import com.fasterxml.jackson.annotation.JsonProperty;
-import jp.co.ndensan.reams.db.dbc.divcontroller.entity.commonchilddiv.ShokanbaraiketteiJoho.IShokanbaraiketteiJohoDiv;
-import jp.co.ndensan.reams.db.dbc.divcontroller.entity.commonchilddiv.ShokanbaraiketteiJoho.ShokanbaraiketteiJohoDiv;
 import jp.co.ndensan.reams.uz.uza.ui.binding.*;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 
@@ -33,8 +31,6 @@ public class YoguKonyuhiShikyuShinseiContentsPanelDiv extends Panel {
     private TextBoxCode txtJigyoshaNo;
     @JsonProperty("txtSyomeisyo")
     private TextBoxCode txtSyomeisyo;
-    @JsonProperty("ccdKetteiList")
-    private ShokanbaraiketteiJohoDiv ccdKetteiList;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -130,15 +126,6 @@ public class YoguKonyuhiShikyuShinseiContentsPanelDiv extends Panel {
     @JsonProperty("txtSyomeisyo")
     public void setTxtSyomeisyo(TextBoxCode txtSyomeisyo) {
         this.txtSyomeisyo = txtSyomeisyo;
-    }
-
-    /*
-     * getccdKetteiList
-     * @return ccdKetteiList
-     */
-    @JsonProperty("ccdKetteiList")
-    public IShokanbaraiketteiJohoDiv getCcdKetteiList() {
-        return ccdKetteiList;
     }
 
     // </editor-fold>
