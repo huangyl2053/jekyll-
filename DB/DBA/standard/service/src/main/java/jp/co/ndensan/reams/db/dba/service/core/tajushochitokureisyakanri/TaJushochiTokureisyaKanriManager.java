@@ -11,7 +11,7 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 import jp.co.ndensan.reams.db.dba.definition.mybatis.param.tajushochitokureisya.TaJushochiTokureisyaKanriParameter;
-import jp.co.ndensan.reams.db.dba.persistence.mapper.tajushochitokureisyakanri.TaJushochiTokureisyaKanriMapper;
+import jp.co.ndensan.reams.db.dba.persistence.db.mapper.relate.tajushochitokureisyakanri.ITaJushochiTokureisyaKanriMapper;
 import jp.co.ndensan.reams.db.dbz.service.core.MapperProvider;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.uz.uza.lang.ApplicationException;
@@ -112,7 +112,7 @@ public class TaJushochiTokureisyaKanriManager {
         for (TaJushochiTokureisyaKanriParameter date : paramater) {
             if (追加.equals(date.get状態()) || 修正.equals(date.get状態())) {
 
-                TaJushochiTokureisyaKanriMapper mapper = mapperProvider.create(TaJushochiTokureisyaKanriMapper.class);
+                ITaJushochiTokureisyaKanriMapper mapper = mapperProvider.create(ITaJushochiTokureisyaKanriMapper.class);
                 int count = mapper.select施設入退所情報リスト件数取得(date);
                 if (count > 1) {
                     throw new ApplicationException(

@@ -13,7 +13,7 @@ import jp.co.ndensan.reams.db.dba.entity.db.otheraddressledger.OtherAddressInfEn
 import jp.co.ndensan.reams.db.dba.entity.db.otheraddressledger.OtherAddressInfFromDBEntity;
 import jp.co.ndensan.reams.db.dba.entity.db.otheraddressledger.OtherAddressInformationRecipientNameMybatisEntity;
 import jp.co.ndensan.reams.db.dba.entity.db.otheraddressledger.OtherAddressLedgerEntity;
-import jp.co.ndensan.reams.db.dba.persistence.mapper.otheraddressinformation.IOtherAddressInformationMapper;
+import jp.co.ndensan.reams.db.dba.persistence.db.mapper.relate.otheraddressinformation.IOtherAddressInformationMapper;
 import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.GyomuBunrui;
 import jp.co.ndensan.reams.db.dbx.service.ShichosonSecurityJoho;
 import jp.co.ndensan.reams.db.dbz.business.core.koikizenshichosonjoho.KoikiZenShichosonJoho;

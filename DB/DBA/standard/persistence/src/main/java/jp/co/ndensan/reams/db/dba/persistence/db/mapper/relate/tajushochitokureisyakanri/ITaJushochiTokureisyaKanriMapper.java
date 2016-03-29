@@ -45,4 +45,12 @@ public interface ITaJushochiTokureisyaKanriMapper {
      * @return UaFt200FindShikibetsuTaishoEntity
      */
     UaFt200FindShikibetsuTaishoEntity select宛名情報(TaJushochiTokureisyaKanriParameter 宛名情報PSM検索条件);
+
+    /**
+     * 施設入退所情報リスト件数取得の取得処理です。
+     *
+     * @param 施設入退所情報リスト件数取得 TaJushochiTokureisyaKanriParameter
+     * @return 施設入退所情報リスト件数
+     */
+    int select施設入退所情報リスト件数取得(jp.co.ndensan.reams.db.dba.definition.mybatis.param.tajushochitokureisya.TaJushochiTokureisyaKanriParameter 施設入退所情報リスト件数取得);
 }

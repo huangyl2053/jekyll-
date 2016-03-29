@@ -14,8 +14,8 @@ import jp.co.ndensan.reams.db.dba.business.report.kyufuhikashitsukekinshokankige
 import jp.co.ndensan.reams.db.dba.entity.report.keidoshafukushiyogutaiyokakuninshinseisho.KyufuhiKashitsukeKinKetteiEntity;
 import jp.co.ndensan.reams.db.dba.entity.report.keidoshafukushiyogutaiyokakuninshinseisho.KyufuhiKashitsukekinShakuyoshoJuriEntity;
 import jp.co.ndensan.reams.db.dba.entity.report.kyufuhikashitsukekinshokankigen.KyufuKashitsukekinShokanKigenEnchoShinseishoReportSource;
-import jp.co.ndensan.reams.db.dba.persistence.mapper.kyufuhikashitsukekinkettei.IKyufuhiKashitsukeKinKetteiMapper;
-import jp.co.ndensan.reams.db.dba.persistence.mapper.kyufuhikashitsukekinshakuyoshojuri.IKyufuhiKashitsukekinShakuyoshoJuriMapper;
+import jp.co.ndensan.reams.db.dba.persistence.db.mapper.relate.kyufuhikashitsukekinkettei.IKyufuhiKashitsukeKinKetteiMapper;
+import jp.co.ndensan.reams.db.dba.persistence.db.mapper.relate.kyufuhikashitsukekinshakuyoshojuri.IKyufuhiKashitsukekinShakuyoshoJuriMapper;
 import jp.co.ndensan.reams.db.dba.service.core.tokuteifutangendogakushinseisho.TokuteifutanGendogakuShinseisho;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.kyotsu.NinshoshaDenshikoinshubetsuCode;

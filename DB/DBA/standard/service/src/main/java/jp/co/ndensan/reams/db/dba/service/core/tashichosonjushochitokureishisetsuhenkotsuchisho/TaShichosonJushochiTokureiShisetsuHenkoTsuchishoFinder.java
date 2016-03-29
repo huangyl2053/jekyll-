@@ -12,7 +12,7 @@ import jp.co.ndensan.reams.db.dba.entity.TatokuKanrenChohyoHenkoTsuchishoEntity;
 import jp.co.ndensan.reams.db.dba.entity.TatokuKanrenChohyoRenrakuhyoEntity;
 import jp.co.ndensan.reams.db.dba.entity.TatokuKanrenChohyoShijiDataEntity;
 import jp.co.ndensan.reams.db.dba.entity.db.relate.TaShichosonJushochiTokureiShisetsuHenkoTsuchishoRelateEntity;
-import jp.co.ndensan.reams.db.dba.persistence.mapper.tashihenkotsuchisho.ITaShichosonJushochiTokureiShisetsuHenkoTsuchishoMapper;
+import jp.co.ndensan.reams.db.dba.persistence.db.mapper.relate.tashihenkotsuchisho.ITaShichosonJushochiTokureiShisetsuHenkoTsuchishoMapper;
 import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.kyotsu.NinshoshaDenshikoinshubetsuCode;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT1005KaigoJogaiTokureiTaishoShisetsuEntity;
 import jp.co.ndensan.reams.db.dbz.service.core.MapperProvider;

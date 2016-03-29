@@ -18,7 +18,7 @@ import jp.co.ndensan.reams.db.dba.entity.db.hihokenshadaichosakusei.SeikatsuHogo
 import jp.co.ndensan.reams.db.dba.entity.db.hihokenshadaichosakusei.ShisetsuNyutaishoEntity;
 import jp.co.ndensan.reams.db.dba.entity.db.hihokenshadaichosakusei.ShoKofuKaishuDivisionEntity;
 import jp.co.ndensan.reams.db.dba.entity.db.hihokenshadaichosakusei.ShoKofuKaishuDivisionSumEntity;
-import jp.co.ndensan.reams.db.dba.persistence.db.mapper.basic.hihokenshadaichosakusei.IHihokenshaDaichoSakuseiMapper;
+import jp.co.ndensan.reams.db.dba.persistence.db.mapper.relate.hihokenshadaichosakusei.IHihokenshaDaichoSakuseiMapper;
 import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.GyomuBunrui;
 import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT7051KoseiShichosonMasterEntity;
 import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT7060KaigoJigyoshaEntity;

@@ -9,7 +9,7 @@ import jp.co.ndensan.reams.db.dba.business.core.tokuteifutangendogakushinseisho.
 import jp.co.ndensan.reams.db.dba.definition.core.tokuteifutangendogakushinseisho.PsmTokuteifutanGendogakudoMybatisParameter;
 import jp.co.ndensan.reams.db.dba.definition.core.tokuteifutangendogakushinseisho.TokuteifutanGendogakuShinseishoMybatisParameter;
 import jp.co.ndensan.reams.db.dba.entity.db.relate.tokuteifutangendogakushinseisho.HihokenshaKihonEntity;
-import jp.co.ndensan.reams.db.dba.persistence.mapper.tokuteifutangendogakushinseisho.ITokuteifutanGendogakuShinseishoMapper;
+import jp.co.ndensan.reams.db.dba.persistence.db.mapper.relate.tokuteifutangendogakushinseisho.ITokuteifutanGendogakuShinseishoMapper;
 import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.DonyuKeitaiCode;
 import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.GyomuBunrui;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;

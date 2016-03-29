@@ -11,7 +11,7 @@ import java.util.List;
 import jp.co.ndensan.reams.db.dba.business.core.shikakushutokujogaishakanri.ShikakuShutokuJogaishaKanri;
 import jp.co.ndensan.reams.db.dba.definition.mybatis.param.shikakushutokujogaishakanri.ShikakuShutokuJogaishaKanriParameter;
 import jp.co.ndensan.reams.db.dba.entity.db.shikakushutokujogaishakanri.ShikakuShutokuJogaishaKanriEntity;
-import jp.co.ndensan.reams.db.dba.persistence.mapper.shikakushutoku.IShikakuShutokuJogaishaKanriMapper;
+import jp.co.ndensan.reams.db.dba.persistence.db.mapper.relate.shikakushutoku.IShikakuShutokuJogaishaKanriMapper;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT1009ShikakuShutokuJogaishaEntity;
 import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT1009ShikakuShutokuJogaishaDac;
 import jp.co.ndensan.reams.db.dbz.service.core.MapperProvider;

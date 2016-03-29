@@ -13,7 +13,7 @@ import jp.co.ndensan.reams.db.dba.definition.processprm.nenreitotatsutorokushali
 import jp.co.ndensan.reams.db.dba.entity.nenreitotatsushatorokusha.NenreiTotatsuTorokushaListEntity;
 import jp.co.ndensan.reams.db.dba.entity.nenreitotatsushatorokusha.NenreiTotatsushaJouhouEntity;
 import jp.co.ndensan.reams.db.dba.entity.report.nenreitotatsukakuninlist.NenreitotatsuKakuninListReportSource;
-import jp.co.ndensan.reams.db.dba.persistence.db.mapper.nenreitotatsutorokusha.INenreiTotatsuTorokushaMapper;
+import jp.co.ndensan.reams.db.dba.persistence.db.mapper.relate.nenreitotatsutorokusha.INenreiTotatsuTorokushaMapper;
 import jp.co.ndensan.reams.db.dba.service.nenreitotatsutorokushalist.NenreiTotatsushaTorokuListBatch;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7022ShoriDateKanriEntity;
 import jp.co.ndensan.reams.ua.uax.business.core.psm.UaFt200FindShikibetsuTaishoFunction;
@@ -53,7 +53,7 @@ public class NenreiTotatsuTorokushaProcess extends BatchProcessBase<NenreiTotats
 
     private static final ReportId ID = new ReportId("DBA200008_NenreitotatsuKakuninList");
     private static final RString MYBATIS_SELECT_ID = new RString(
-            "jp.co.ndensan.reams.db.dba.persistence.mapper.nenreitotatsutorokusha."
+            "jp.co.ndensan.reams.db.dba.persistence.db.mapper.relate.nenreitotatsutorokusha."
             + "INenreiTotatsuTorokushaMapper.getHiHokenshaDaichoList");
     private static final RString データ種別_被保険者台帳 = new RString("データ種別：被保険者台帳");
     private static final RString 取得情報 = new RString("取得情報");

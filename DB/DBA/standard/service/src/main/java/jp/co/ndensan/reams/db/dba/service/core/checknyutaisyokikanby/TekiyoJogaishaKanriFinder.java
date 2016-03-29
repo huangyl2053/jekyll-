@@ -8,7 +8,7 @@ package jp.co.ndensan.reams.db.dba.service.core.checknyutaisyokikanby;
 import java.util.List;
 import jp.co.ndensan.reams.db.dba.business.core.tekiyojogaikaijo.TekiyoJogaiKaijo;
 import jp.co.ndensan.reams.db.dba.definition.mybatisprm.checknyutaisyokikanby.ShisetsuJouHouParamer;
-import jp.co.ndensan.reams.db.dba.persistence.db.mapper.basic.checknyutaisyokikanby.ITekiyoJogaishaKanriMapper;
+import jp.co.ndensan.reams.db.dba.persistence.db.mapper.relate.checknyutaisyokikanby.ITekiyoJogaishaKanriMapper;
 import jp.co.ndensan.reams.db.dbz.service.core.MapperProvider;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
