@@ -7,7 +7,6 @@ package jp.co.ndensan.reams.db.dbc.business.core.kogakukyufutaishoshain;
 
 import java.util.ArrayList;
 import java.util.List;
-import jp.co.ndensan.reams.db.dbc.definition.core.kogakukyufutaishoshain.KogakuKyufuTaishoshaInOutPutOrder;
 import jp.co.ndensan.reams.db.dbc.entity.report.source.kogakukyufutaishoshaichiran.KogakuKyufuTaishoshaIchiranSource;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.report.ReportLineRecord;
@@ -15,7 +14,7 @@ import jp.co.ndensan.reams.uz.uza.report.source.breaks.PageBreaker;
 
 /**
  *
- * @author chenaoqi
+ * 高額介護サービス費給付対象者取込みPageBreak
  */
 public class KogakuKyufuTaishoshaInPageBreak extends PageBreaker<KogakuKyufuTaishoshaIchiranSource> {
 

@@ -3,14 +3,13 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbc.definition.core.kogakukyufutaishoshain;
+package jp.co.ndensan.reams.db.dbc.business.core.kogakukyufutaishoshain;
 
 import jp.co.ndensan.reams.ur.urz.business.core.reportoutputorder.IReportItems;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
- *
- * @author chenaoqi
+ * 高額介護サービス費給付対象者取込みenum
  */
 public enum KogakuKyufuTaishoshaInOutPutOrder implements IReportItems {
 
