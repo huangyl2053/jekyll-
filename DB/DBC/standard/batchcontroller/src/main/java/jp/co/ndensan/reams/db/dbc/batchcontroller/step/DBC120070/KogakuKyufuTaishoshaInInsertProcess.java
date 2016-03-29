@@ -12,7 +12,6 @@ import jp.co.ndensan.reams.db.dbc.entity.csv.kogakukyufutaishoshaichiran.DbT3055
 import jp.co.ndensan.reams.db.dbc.entity.csv.kogakukyufutaishoshaichiran.DbTKogakuKyufuCSVDataHeadEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.kogakukyufutaishoshain.DbTKogakuKyufuTaishoshaDataTempTableEntity;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ServiceShuruiCode;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShoKisaiHokenshaNo;
@@ -131,7 +130,6 @@ public class KogakuKyufuTaishoshaInInsertProcess extends BatchProcessBase<RStrin
         DbTKogakuKyufuTaishoshaDataTempTableEntity result = new DbTKogakuKyufuTaishoshaDataTempTableEntity();
         result.setKokanShikibetsuNo((trim囲み文字(headEntity.getKokanShikibetsuNo())));
         result.setShoKisaiHokenshaNo(new ShoKisaiHokenshaNo(trim囲み文字(headEntity.getShoKisaiHokenshaNo())));
-        result.setHokenshaNo(new HokenshaNo(trim囲み文字(headEntity.getHokenshaNo())));
         result.setHihokenshaName(trim囲み文字(headEntity.getHihokenshaName()));
         result.setSakuseiYMD(new FlexibleDate(trim囲み文字(headEntity.getSakuseiYMD())));
         result.setKokukoRengoukaiNa(trim囲み文字(headEntity.getKokukoRengoukaiNa()));
@@ -161,7 +159,6 @@ public class KogakuKyufuTaishoshaInInsertProcess extends BatchProcessBase<RStrin
         DbTKogakuKyufuTaishoshaDataTempTableEntity result = new DbTKogakuKyufuTaishoshaDataTempTableEntity();
         result.setKokanShikibetsuNo((trim囲み文字(headEntity.getKokanShikibetsuNo())));
         result.setShoKisaiHokenshaNo(new ShoKisaiHokenshaNo(trim囲み文字(headEntity.getShoKisaiHokenshaNo())));
-        result.setHokenshaNo(new HokenshaNo(trim囲み文字(headEntity.getHokenshaNo())));
         result.setHihokenshaName(trim囲み文字(headEntity.getHihokenshaName()));
         result.setSakuseiYMD(new FlexibleDate(trim囲み文字(headEntity.getSakuseiYMD())));
         result.setKokukoRengoukaiNa(trim囲み文字(headEntity.getKokukoRengoukaiNa()));

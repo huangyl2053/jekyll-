@@ -84,7 +84,7 @@ public class KogakuKyufuTaishoshaIchiranhyo {
             if (entity.get明細集計List() == null || entity.get明細集計List().isEmpty()) {
                 KogakuKyufuTaishoshaIchiranItem item = new KogakuKyufuTaishoshaIchiranItem();
                 item.set送付元団体名(entity.getHeadEntity().getKokukoRengoukaiNa());
-                item.set保険者番号(entity.getHeadEntity().getHokenshaNo());
+                item.set保険者番号(entity.getHeadEntity().getShoKisaiHokenshaNo());
                 item.set保険者名称(entity.getHeadEntity().getHihokenshaName());
                 item.set並び順１(並び順の1件目);
                 item.set並び順２(並び順の2件目);
@@ -101,20 +101,21 @@ public class KogakuKyufuTaishoshaIchiranhyo {
                 item.set被保険者氏名(氏名_データなし);
                 dataList.add(item);
             } else {
-                RString 被保険者番号 = entity.get明細集計List().get(0).get明細Entity().getHihokenshaNo();
+                KogakuKyufuMeisaiGokeiEntity 前データ = entity.get明細集計List().get(0);
+                RString 被保険者番号 = 前データ.get明細Entity().getHihokenshaNo();
                 RString 送付元団体名 = entity.getHeadEntity().getKokukoRengoukaiNa();
-                RString 保険者番号 = entity.getHeadEntity().getHokenshaNo();
+                RString 保険者番号 = entity.getHeadEntity().getShoKisaiHokenshaNo();
                 RString 保険者名称 = entity.getHeadEntity().getHihokenshaName();
                 for (KogakuKyufuMeisaiGokeiEntity 該当データ : entity.get明細集計List()) {
                     if (!被保険者番号.equals(該当データ.get明細Entity().getHihokenshaNo())) {
-                        dataList.add(makeItem(該当データ, 送付元団体名, 保険者番号, 保険者名称, true));
+                        dataList.add(makeItem(前データ, 送付元団体名, 保険者番号, 保険者名称, true));
                         被保険者番号 = 該当データ.get明細Entity().getHihokenshaNo();
+                        前データ = 該当データ;
                     }
                     dataList.add(makeItem(該当データ, 送付元団体名, 保険者番号, 保険者名称, false));
                 }
-                KogakuKyufuMeisaiGokeiEntity 該当データ
-                        = entity.get明細集計List().get(entity.get明細集計List().size() - 1);
-                dataList.add(makeItem(該当データ, 送付元団体名, 保険者番号, 保険者名称, true));
+                前データ = entity.get明細集計List().get(entity.get明細集計List().size() - 1);
+                dataList.add(makeItem(前データ, 送付元団体名, 保険者番号, 保険者名称, true));
             }
         }
         return dataList;
@@ -190,4 +191,5 @@ public class KogakuKyufuTaishoshaIchiranhyo {
         }
         return item;
     }
+
 }

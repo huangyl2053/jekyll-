@@ -9,8 +9,6 @@
                 typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="shoKisaiHokenshaNo" column="shoKisaiHokenshaNo" 
                 typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.ShoKisaiHokenshaNoTypeHandler"/>
-        <result property="hokenshaNo" column="hokenshaNo" 
-                typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.HokenshaNoTypeHandler"/>
         <result property="hihokenshaName" column="hihokenshaName" 
                 typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="sakuseiYMD" column="sakuseiYMD" 
@@ -60,7 +58,6 @@
         SELECT DISTINCT
         一時テーブル."kokanShikibetsuNo",
         一時テーブル."shoKisaiHokenshaNo",
-        一時テーブル."hokenshaNo",
         一時テーブル."hihokenshaName",
         一時テーブル."sakuseiYMD",
         一時テーブル."kokukoRengoukaiNa",
@@ -234,14 +231,16 @@
         )AS TEMP
     </insert>
     
-    <resultMap id="resultMap_Hihokensha" type="jp.co.ndensan.reams.db.dbc.entity.db.relate.kogakukyufutaishoshain.DbTKogakuKyufuTaishoshaDataTempTableEntity" autoMapping="true">
-        <result property="hiHokenshaNo" column="hiHokenshaNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.HihokenshaNoTypeHandler"/>
+    <resultMap id="resultMap_Hihokensha" autoMapping="true"
+               type="jp.co.ndensan.reams.db.dbc.entity.db.relate.kogakukyufutaishoshain.DbTKogakuKyufuTaishoshaDataTempTableEntity" >
+        <result property="hihokenshaNo" column="hihokenshaNo"
+                typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.HihokenshaNoTypeHandler"/>
     </resultMap>
     
     <!-- 一時テーブルのデータの取得-->
     <select id="select被保険者番号From一時テーブル" resultMap="resultMap_Hihokensha" fetchSize="500">
-        SELECT DISTINCT ICHIJI."hiHokenshaNo"
-        FROM "TABLE_KAGOKETTEIMEISAIICHIJI" AS ICHIJI
+        SELECT DISTINCT 一時テーブル."hihokenshaNo"
+        FROM "DbTKogakuKyufuTaishoshaDataTempTable" AS 一時テーブル
     </select>
     
     <!-- 被保険者台帳管理から市町村コード取得 -->
@@ -308,16 +307,16 @@
         dbT3004."shoKisaiHokenshaNo"
         FROM rgdb."DbT3004KyodoShoriyoJukyushaIdoKogakuSofu" AS dbT3004
         LEFT JOIN "DbTKogakuKyufuTaishoshaDataTempTable" AS 一時テーブル
-        ON dbT3004."hiHokenshaNo" = 一時テーブル."hiHokenshaNo"
+        ON dbT3004."hiHokenshaNo" = 一時テーブル."hihokenshaNo"
         AND dbT3004."shoKisaiHokenshaNo" =  一時テーブル."shoKisaiHokenshaNo"
-<!--        AND dbT3004."idoYMD" <![CDATA[<=]]> 一時テーブル."serviceTeikyoYM"-->
+        AND dbT3004."idoYMD" <![CDATA[<=]]> (一時テーブル."serviceTeikyoYM"||31)
         AND dbT3004."isDeleted" <![CDATA[<>]]> TRUE
     </select>
     <update id="update世帯集約番号" 
              parameterType="jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3004KyodoShoriyoJukyushaIdoKogakuSofuEntity">
         UPDATE "DbTKogakuKyufuTaishoshaDataTempTable"
         SET "setaiShuyakuNo"=#{setaiShuyakuNo}
-        where "hihokenshaNo" = #{hihokenshaNo}
+        where "hihokenshaNo" = #{hiHokenshaNo}
         and "shoKisaiHokenshaNo" = #{shoKisaiHokenshaNo}
     </update>
 </mapper>
