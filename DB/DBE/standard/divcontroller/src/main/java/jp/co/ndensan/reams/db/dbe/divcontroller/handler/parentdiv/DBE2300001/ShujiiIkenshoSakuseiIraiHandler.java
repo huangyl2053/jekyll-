@@ -92,7 +92,7 @@ public class ShujiiIkenshoSakuseiIraiHandler {
             row.setHokensha(申請者.getTemp_保険者名称());
             row.setZenkaiShujiiIryoKikan(申請者.getTemp_前回主治医医療機関());
             if (申請者.getTemp_前回主治医() != null) {
-                row.setShujii(申請者.getTemp_前回主治医().value());
+                row.setZenkaiShujii(申請者.getTemp_前回主治医().value());
             }
             if (申請者.getTemp_依頼書出力年月日() != null) {
                 row.getIraishoShutsuryokuDay().setValue(new RDate(申請者.getTemp_依頼書出力年月日().toString()));
@@ -111,7 +111,7 @@ public class ShujiiIkenshoSakuseiIraiHandler {
             row.setShiseishoKanriNo(申請者.getTemp_申請書管理番号().value());
             row.setKoroshoIfShikibetsuCode(申請者.getTemp_厚労省IF識別コード().getKey());
             row.setIryoukikanShozaichi(申請者.getTemp_医療機関所在地());
-            row.setHokensha(申請者.getTemp_保険者番号());
+            row.setHokenshaNo(申請者.getTemp_保険者番号());
             row.setIryoKikanTelNo(申請者.getTemp_医療機関電話番号() == null ? RString.EMPTY : 申請者.getTemp_医療機関電話番号().value());
             if (申請者.getTemp_被保険者氏名カナ() != null) {
                 row.setHihokenshaShimeiKana(申請者.getTemp_被保険者氏名カナ().value());

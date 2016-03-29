@@ -960,7 +960,10 @@ public class NinnteiChousaKekkaTouroku1 {
             Code 認知症高齢者の日常生活自立度コード = 基本情報.get認知症高齢者自立度();
             Code 障害高齢者の日常生活自立度コード = 基本情報.get障害高齢者自立度();
 
-            NinteichosahyoKihonChosa dbt5203 = new NinteichosahyoKihonChosa(temp_申請書管理番号, temp_認定調査履歴番号);
+            NinteichosahyoKihonChosa dbt5203 = manager.get認定調査票_基本調査(temp_申請書管理番号, temp_認定調査履歴番号);
+            if (dbt5203 == null) {
+                dbt5203 = new NinteichosahyoKihonChosa(temp_申請書管理番号, temp_認定調査履歴番号);
+            }
             NinteichosahyoKihonChosaBuilder builder = dbt5203.createBuilderForEdit();
             builder.set厚労省IF識別コード(new Code(temp_厚労省IF識別コード));
             builder.set認定調査_認知症高齢者の日常生活自立度コード(認知症高齢者の日常生活自立度コード);
