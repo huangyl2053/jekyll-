@@ -154,6 +154,7 @@ public final class PnlTotalRegisterHandler {
         } else {
             JuryoininKeiyakuJigyosha insertData = new JuryoininKeiyakuJigyosha(RString.EMPTY);
             JuryoininKeiyakuJigyoshaBuilder builder = insertData.createBuilderForEdit();
+            builder.set開始年月日(new FlexibleDate(div.getPnlKeyakuJigyosya().getTxtKeyakubi().getFromValue().toDateString()));
             builder.set終了年月日(new FlexibleDate(div.getPnlKeyakuJigyosya().getTxtKeyakubi().getToValue().toDateString()));
             builder.set契約種類(div.getPnlKeyakuJigyosya().getDdlKeyakusyurui().getSelectedKey());
             builder.set契約事業者名称(div.getPnlKeyakuJigyosya().getTxtKeyakuJigyosyaMeisyo().getDomain());
