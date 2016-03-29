@@ -30,7 +30,6 @@ public class SeikyuGakuShukeiHandler {
     private final SeikyuGakuShukeiDiv div;
     private static final RString 設定不可 = new RString("0");
     private static final RString 設定可_任意 = new RString("2");
-    private static final FlexibleYearMonth 平成２１年４月 = new FlexibleYearMonth("200904");
     private static final FlexibleYearMonth 平成２４年４月 = new FlexibleYearMonth("201204");
 
     /**
@@ -58,6 +57,7 @@ public class SeikyuGakuShukeiHandler {
             if (ShinsaHohoKubun.toValue(shokanshukei.getShukei().get審査方法区分コード()) != null) {
                 row.setDefaultDataName5(ShinsaHohoKubun.toValue(shokanshukei.getShukei().get審査方法区分コード()).get名称());
             }
+            row.setDefaultDataName7(shokanshukei.getShukei().get連番());
             row.getDefaultDataName6().setValue(new Decimal(shokanshukei.getShukei().get利用者負担額()));
             row.getDefaultDataName8().setValue(new Decimal(shokanshukei.getShukei().get限度額管理対象外単位数()));
             row.getDefaultDataName9().setValue(new Decimal(shokanshukei.getShukei().get短期入所計画日数()));
@@ -106,6 +106,7 @@ public class SeikyuGakuShukeiHandler {
         ShokanShukeiResult shokanshukei = shkanList.get(0);
 
         div.getPanelSeikyuShokai().getTxtServiceShurui().setValue(shokanshukei.getShukei().getサービス種類コード().value());
+        div.getPanelSeikyuShokai().getTxtServiceName().setValue(shokanshukei.getServiceShuruiRyakusho());
         div.getPanelSeikyuShokai().getTxtJitsuNissu().setValue(new Decimal(
                 shokanshukei.getShukei().toEntity().getTankiNyushoJitsunissu()));
         List<KeyValueDataSource> source = new ArrayList<>();
@@ -113,7 +114,7 @@ public class SeikyuGakuShukeiHandler {
         source.add(new KeyValueDataSource(shokanshukei.getShukei().get審査方法区分コード(), new RString("審査方法区分")));
         div.getPanelSeikyuShokai().getRdoShinsahouhou().setDataSource(source);
         div.getPanelSeikyuShokai().getRdoShinsahouhou().setSelectedKey(shokanshukei.getShukei().get審査方法区分コード());
-        div.getPanelSeikyuShokai().getTxtKyufuritsu().setValue(new Decimal(entity.get保険給付率().toString()));
+        div.getPanelSeikyuShokai().getTxtKyufuritsu().setValue(entity.get保険給付率().value());
         div.getPanelSeikyuShokai().getTxtKeikakuTanyi().setValue(new Decimal(shokanshukei.getShukei().get計画単位数()));
         div.getPanelSeikyuShokai().getTxtTaishoTanyi().setValue(
                 new Decimal(shokanshukei.getShukei().get限度額管理対象単位数()));

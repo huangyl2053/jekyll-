@@ -42,8 +42,8 @@ public class SeikyuGakuShukei {
 
         ServiceTeiKyoShomeishoParameter parmeter = new ServiceTeiKyoShomeishoParameter(
                 new HihokenshaNo("000000033"), new FlexibleYearMonth(new RString("201601")),
-                new RString("0000000003"), new JigyoshaNo("0000000003"), new RString("事業者名"),
-                new RString("0003"), new RString("証明書"));
+                new RString("0000000003"), new JigyoshaNo("0000000004"), new RString("事業者名"),
+                new RString("0004"), new RString("証明書"));
         ViewStateHolder.put(ViewStateKeys.基本情報パラメータ, parmeter);
         ServiceTeiKyoShomeishoParameter parameter = ViewStateHolder.get(
                 ViewStateKeys.基本情報パラメータ, ServiceTeiKyoShomeishoParameter.class);
@@ -58,7 +58,7 @@ public class SeikyuGakuShukei {
         ViewStateHolder.put(ViewStateKeys.識別コード, new ShikibetsuCode(new RString("000000000000010")));
         ShikibetsuCode 識別コード = ViewStateHolder.get(
                 ViewStateKeys.識別コード, ShikibetsuCode.class);
-        ViewStateHolder.put(ViewStateKeys.様式番号, new RString("0003"));
+        ViewStateHolder.put(ViewStateKeys.様式番号, new RString("0005"));
         RString 様式番号 = ViewStateHolder.get(ViewStateKeys.様式番号, RString.class);
         ViewStateHolder.put(ViewStateKeys.申請日, new RString("20151124"));
         div.getPanelCcd().getCcdKaigoAtenaInfo().onLoad(識別コード);
@@ -100,7 +100,7 @@ public class SeikyuGakuShukei {
         div.getPanelSeikyuShokai().setVisible(true);
         ServiceTeiKyoShomeishoParameter parameter = ViewStateHolder.get(
                 ViewStateKeys.基本情報パラメータ, ServiceTeiKyoShomeishoParameter.class);
-        FlexibleYearMonth サービス年月 = new FlexibleYearMonth(new RString("200904"));
+        FlexibleYearMonth サービス年月 = parameter.getServiceTeikyoYM();
         HihokenshaNo 被保険者番号 = parameter.getHiHokenshaNo();
         RString 整理番号 = parameter.getSeiriNp();
         RString 様式番号 = ViewStateHolder.get(ViewStateKeys.様式番号, RString.class);
