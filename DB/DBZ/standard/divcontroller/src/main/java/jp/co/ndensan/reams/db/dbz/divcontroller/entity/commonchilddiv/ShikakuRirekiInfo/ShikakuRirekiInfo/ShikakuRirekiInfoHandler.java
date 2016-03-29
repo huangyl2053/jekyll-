@@ -66,18 +66,18 @@ public class ShikakuRirekiInfoHandler {
         if ((DonyuKeitaiCode.事務広域.getCode().equals(市町村セキュリティ.get導入形態コード().getKey()))
                 && (合併有り.equals(BusinessConfig.get(ConfigNameDBU.合併情報管理_合併情報区分, SubGyomuCode.DBU介護統計報告)))) {
 
-            div.getDgShikakuRirekiInfo().getGridSetting().getColumns().get(10).setVisible(true);
-            div.getDgShikakuRirekiInfo().getGridSetting().getColumns().get(11).setVisible(true);
             div.getDgShikakuRirekiInfo().getGridSetting().getColumns().get(12).setVisible(true);
             div.getDgShikakuRirekiInfo().getGridSetting().getColumns().get(13).setVisible(true);
+            div.getDgShikakuRirekiInfo().getGridSetting().getColumns().get(14).setVisible(true);
+            div.getDgShikakuRirekiInfo().getGridSetting().getColumns().get(15).setVisible(true);
         }
         if ((DonyuKeitaiCode.事務広域.getCode().equals(市町村セキュリティ.get導入形態コード().getKey()))
                 && (合併無し.equals(BusinessConfig.get(ConfigNameDBU.合併情報管理_合併情報区分, SubGyomuCode.DBU介護統計報告)))) {
 
-            div.getDgShikakuRirekiInfo().getGridSetting().getColumns().get(10).setVisible(true);
-            div.getDgShikakuRirekiInfo().getGridSetting().getColumns().get(11).setVisible(true);
-            div.getDgShikakuRirekiInfo().getGridSetting().getColumns().get(12).setVisible(false);
+            div.getDgShikakuRirekiInfo().getGridSetting().getColumns().get(12).setVisible(true);
             div.getDgShikakuRirekiInfo().getGridSetting().getColumns().get(13).setVisible(true);
+            div.getDgShikakuRirekiInfo().getGridSetting().getColumns().get(14).setVisible(false);
+            div.getDgShikakuRirekiInfo().getGridSetting().getColumns().get(15).setVisible(true);
         }
         div.getDgShikakuRirekiInfo().setDisabled(true);
     }
