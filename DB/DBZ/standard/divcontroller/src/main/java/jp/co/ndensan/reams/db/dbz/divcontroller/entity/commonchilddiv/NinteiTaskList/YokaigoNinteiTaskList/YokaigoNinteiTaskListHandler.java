@@ -333,7 +333,7 @@ public class YokaigoNinteiTaskListHandler {
             row.setZenzenkaiChosain(business.get前前回調査員氏名() == null ? RString.EMPTY : business.get前前回調査員氏名());
             row.setYubinNumber(business.get郵便番号() == null ? RString.EMPTY : business.get郵便番号().value());
             row.setJusho(business.get住所() == null ? RString.EMPTY : business.get住所().value());
-            //row.setNyushoShisetsu(business.get入所施設);
+            //row.setNyushoShisetsu(business.get入所施設); TODO QA982
             row.setChosaTokusokuHoho(business.get認定調査督促方法() == null ? RString.EMPTY
                     : new RString(NinteichosaTokusokuHoho.toValue(business.get認定調査督促方法()).name()));
             row.getChosaTokusokuCount().setValue(new Decimal(business.get認定調査督促回数()));
@@ -416,11 +416,11 @@ public class YokaigoNinteiTaskListHandler {
             row.setZenkaiShujii(business.get前回主治医() == null ? RString.EMPTY : business.get前回主治医());
             row.setYubinNumber(business.get郵便番号() == null ? RString.EMPTY : business.get郵便番号().value());
             row.setJusho(business.get住所() == null ? RString.EMPTY : business.get住所().value());
-//            row.setNyushoShisetsu(入所施設);
+//            row.setNyushoShisetsu(入所施設); TODO QA982
             row.setIkenshoTokusokuHoho(business.get主治医意見書作成督促方法() == null
                     ? RString.EMPTY : IkenshoSakuseiTokusokuHoho.toValue(business.get主治医意見書作成督促方法()).get名称());
             row.getIkenshoTokusokuCount().setValue(new Decimal(business.get主治医意見書作成督促回数()));
-//            row.getKeikaNissu().setValue(new Decimal(business.get認定申請年月日()));
+//            row.getKeikaNissu().setValue(new Decimal(business.get認定申請年月日())); TODO QA982
             意見書依頼モードの日付設定(row, business);
             rowList.add(row);
         }
@@ -550,7 +550,7 @@ public class YokaigoNinteiTaskListHandler {
             row.setIkenshoTokusokuHoho(business.get主治医意見書作成督促方法() == null ? RString.EMPTY : business.get主治医意見書作成督促方法());
             row.getIkenshoTokusokuCount().setValue(new Decimal(business.get主治医意見書作成督促回数()));
             意見書入手モードの日付設定(row, business);
-//            経過日数
+//            経過日数 TODO QA982
             rowList.add(row);
         }
         div.getTxtTotalCount().setValue(new RString(String.valueOf(意見書入手List.size())));
@@ -820,8 +820,8 @@ public class YokaigoNinteiTaskListHandler {
                     ? RString.EMPTY : NinteiShinseiShinseijiKubunCode.toValue(business.get認定申請区分申請時コード().getKey()).get名称());
             row.setShinseiKubunHorei(business.get認定申請区分法令コード() == null
                     ? RString.EMPTY : NinteiShinseiHoreiCode.toValue(business.get認定申請区分法令コード().getKey()).get名称());
-//            row.getGetsureiShoriKanryoDay().setValue(RDate.MAX);(月例処理)完了日
-//            centerSoshinDay(月例処理)センター送信日
+//            row.getGetsureiShoriKanryoDay().setValue(RDate.MAX);(月例処理)完了日 TODO QA982
+//            centerSoshinDay(月例処理)センター送信日 TODO QA982
             rowList.add(row);
         }
         div.getTxtTotalCount().setValue(new RString(String.valueOf(月例処理List.size())));
