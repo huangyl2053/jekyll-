@@ -17,8 +17,8 @@ import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
+import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 
 /**
@@ -80,14 +80,10 @@ public final class YoshikiIchinoyonHoseiHandler {
      * @param 引き継ぎデータ 引き継ぎデータ
      */
     public void initializeKihoneria(JigyoHokokuGeppoParameter 引き継ぎデータ) {
-        RStringBuilder 報告年月 = new RStringBuilder();
-        報告年月.append(引き継ぎデータ.get行報告年());
-        報告年月.append(引き継ぎデータ.get行報告月());
-        div.getYoshikiIchinoyonHoseiHeader().getTxtHokokuNengetsu().setValue(new RDate(報告年月.toString()));
-        RStringBuilder 集計年月 = new RStringBuilder();
-        集計年月.append(引き継ぎデータ.get行集計対象年());
-        集計年月.append(引き継ぎデータ.get行集計対象月());
-        div.getYoshikiIchinoyonHoseiHeader().getTxtShukeiNengetsu().setValue(new RDate(集計年月.toString()));
+        div.getYoshikiIchinoyonHoseiHeader().getTxtHokokuNengetsu().setValue(new RDate(
+                引き継ぎデータ.get報告年月().toString()));
+        div.getYoshikiIchinoyonHoseiHeader().getTxtShukeiNengetsu().setValue(new RDate(
+                引き継ぎデータ.get集計年月().toString()));
         div.getYoshikiIchinoyonHoseiHeader().getTxtHokenshaNo().setValue(引き継ぎデータ.get保険者コード());
         div.getYoshikiIchinoyonHoseiHeader().getTxtHokenshaName().setValue(引き継ぎデータ.get市町村名称());
     }
@@ -101,7 +97,7 @@ public final class YoshikiIchinoyonHoseiHandler {
      */
     public List<JigyoHokokuTokeiData> get更新前データリスト(JigyoHokokuGeppoParameter 引き継ぎデータ, RString 様式種類) {
         JigyoHokokuGeppoDetalSearchParameter param = null;
-        if (様式種類_008.equals(様式種類)) {
+        if (様式種類_008.equals(様式種類) || 様式種類_108.equals(様式種類)) {
             param = JigyoHokokuGeppoDetalSearchParameter.
                     createParameterForJigyoHokokuGeppoDetal(
                             new FlexibleYear(引き継ぎデータ.get行報告年()),
@@ -112,7 +108,7 @@ public final class YoshikiIchinoyonHoseiHandler {
                             new LasdecCode(引き継ぎデータ.get行市町村コード()),
                             new Code(引き継ぎデータ.get行表番号()),
                             new Code(集計番号_1040));
-        } else if (様式種類_009.equals(様式種類)) {
+        } else if (様式種類_009.equals(様式種類) || 様式種類_109.equals(様式種類)) {
             param = JigyoHokokuGeppoDetalSearchParameter.
                     createParameterForJigyoHokokuGeppoDetal(
                             new FlexibleYear(引き継ぎデータ.get行報告年()),
@@ -139,7 +135,7 @@ public final class YoshikiIchinoyonHoseiHandler {
 
         JigyoHokokuTokeiData 更新前データ = 更新前データリスト.get(0);
         List<JigyoHokokuTokeiData> 画面データリスト = new ArrayList<>();
-        if (様式種類_008.equalsIgnoreCase(様式種類) || 様式種類_108.equalsIgnoreCase(様式種類)) {
+        if (様式種類_008.equals(様式種類) || 様式種類_108.equals(様式種類)) {
             List<Decimal> 申請件数リスト = new ArrayList<>();
             set申請件数リスト(申請件数リスト);
             set画面データリスト(
@@ -167,7 +163,7 @@ public final class YoshikiIchinoyonHoseiHandler {
             set画面データリスト(
                     画面データリスト, 更新前データ, new Code(集計番号_1040), 第二段階認定件数当該月末現在リスト,
                     new Decimal(縦番号_5));
-        } else if (様式種類_009.equalsIgnoreCase(様式種類) || 様式種類_109.equalsIgnoreCase(様式種類)) {
+        } else if (様式種類_009.equals(様式種類) || 様式種類_109.equals(様式種類)) {
             List<Decimal> 第4段階申請件数リスト = new ArrayList<>();
             set第4段階申請件数リスト(第4段階申請件数リスト);
             set画面データリスト(画面データリスト, 更新前データ, new Code(集計番号_1030), 第4段階申請件数リスト,
@@ -209,6 +205,7 @@ public final class YoshikiIchinoyonHoseiHandler {
             JigyoHokokuTokeiData 画面データ = 画面データリスト.get(j);
             JigyoHokokuTokeiData 更新前_isNull = get更新前空データ(更新前データリスト, 画面データ);
             if ((更新前_isNull != null) && (更新前_isNull.get集計結果値() != null)) {
+                更新前_isNull.toEntity().setState(EntityDataState.Added);
                 修正データリスト.add(更新前_isNull);
             }
         }
@@ -219,6 +216,7 @@ public final class YoshikiIchinoyonHoseiHandler {
                 if (更新前.get縦番号().equals(画面データ.get縦番号())
                         && 更新前.get横番号().equals(画面データ.get横番号())
                         && (!更新前.get集計結果値().equals(画面データ.get集計結果値()))) {
+                    画面データ.toEntity().setState(EntityDataState.Added);
                     修正データリスト.add(画面データ);
                 }
             }
@@ -460,7 +458,7 @@ public final class YoshikiIchinoyonHoseiHandler {
      * @param 様式種類 様式種類
      */
     public void initializeTabList(List<JigyoHokokuTokeiData> 更新前データリスト, RString 様式種類) {
-        if (様式種類_008.equalsIgnoreCase(様式種類) || 様式種類_108.equalsIgnoreCase(様式種類)) {
+        if (様式種類_008.equals(様式種類) || 様式種類_108.equals(様式種類)) {
             for (JigyoHokokuTokeiData 更新前データ : 更新前データリスト) {
                 Decimal 集計結果値 = 更新前データ.get集計結果値();
                 switch (更新前データ.get縦番号().intValue()) {
@@ -483,7 +481,7 @@ public final class YoshikiIchinoyonHoseiHandler {
                         break;
                 }
             }
-        } else if (様式種類_009.equalsIgnoreCase(様式種類) || 様式種類_109.equalsIgnoreCase(様式種類)) {
+        } else if (様式種類_009.equals(様式種類) || 様式種類_109.equals(様式種類)) {
             for (JigyoHokokuTokeiData 更新前データ : 更新前データリスト) {
                 Decimal 集計結果値 = 更新前データ.get集計結果値();
                 switch (更新前データ.get縦番号().intValue()) {
@@ -943,13 +941,13 @@ public final class YoshikiIchinoyonHoseiHandler {
      * @param div 画面DIV
      * @return 整合性チェック結果(true:結果が不整合 ;false:結果が整合)
      */
-    public boolean 合計結果チェック(YoshikiIchinoyonHoseiDiv div) {
-        if (div.getYoshikiIchinoyonHosei9().getTxtFukushiShisetsuShinseiSu() == null
-                || div.getYoshikiIchinoyonHosei9().getTxtHokenShisetsuShinseiSu() == null
-                || div.getYoshikiIchinoyonHosei9().getTxtIryoShisetsuShinseiSu() == null
-                || div.getYoshikiIchinoyonHosei9().getTxtSeiKatsuKaigoShinseiSu() == null
-                || div.getYoshikiIchinoyonHosei9().getTxtSonotaShinseiSu() == null
-                || div.getYoshikiIchinoyonHosei9().getTxtKeiShinseiSu() == null) {
+    public boolean is合計結果チェック_NG(YoshikiIchinoyonHoseiDiv div) {
+        if (div.getYoshikiIchinoyonHosei9().getTxtFukushiShisetsuShinseiSu().getValue() == null
+                || div.getYoshikiIchinoyonHosei9().getTxtHokenShisetsuShinseiSu().getValue() == null
+                || div.getYoshikiIchinoyonHosei9().getTxtIryoShisetsuShinseiSu().getValue() == null
+                || div.getYoshikiIchinoyonHosei9().getTxtSeiKatsuKaigoShinseiSu().getValue() == null
+                || div.getYoshikiIchinoyonHosei9().getTxtSonotaShinseiSu().getValue() == null
+                || div.getYoshikiIchinoyonHosei9().getTxtKeiShinseiSu().getValue() == null) {
             return true;
         }
         return !div.getYoshikiIchinoyonHosei9().getTxtFukushiShisetsuShinseiSu().getValue().add(
@@ -984,9 +982,9 @@ public final class YoshikiIchinoyonHoseiHandler {
      */
     public boolean delete(JigyoHokokuGeppoParameter 引き継ぎデータ, RString 様式種類) {
         int row = 0;
-        if (様式種類_008.equals(様式種類)) {
+        if (様式種類_008.equals(様式種類) || 様式種類_108.equals(様式種類)) {
             row = deleteByParameter(引き継ぎデータ, new Code(集計番号_1030));
-        } else if (様式種類_009.equals(様式種類)) {
+        } else if (様式種類_009.equals(様式種類) || 様式種類_109.equals(様式種類)) {
             row = deleteByParameter(引き継ぎデータ, new Code(集計番号_1040));
         }
         return 0 <= row;

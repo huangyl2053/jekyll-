@@ -288,4 +288,22 @@ public class JigyoHokokuGeppoHoseiHako {
         int deleteCount = hoseiHakoMapper.delete事業報告月報(parameter);
         return deleteCount;
     }
+
+    /**
+     * 事業報告月報詳細データの更新するメソッド
+     *
+     * @param parameterList パラメータList
+     * @return 更新件数
+     */
+    @Transaction
+    public int updateJigyoHokokuGeppoEntity(List<JigyoHokokuTokeiData> parameterList) {
+        int updateCount = 0;
+        if (parameterList != null && !parameterList.isEmpty()) {
+            for (JigyoHokokuTokeiData entity : parameterList) {
+                DbT7021JigyoHokokuTokeiDataEntity dataEntity = entity.toEntity();
+                updateCount = updateCount + dac.save(dataEntity);
+            }
+        }
+        return updateCount;
+    }
 }
