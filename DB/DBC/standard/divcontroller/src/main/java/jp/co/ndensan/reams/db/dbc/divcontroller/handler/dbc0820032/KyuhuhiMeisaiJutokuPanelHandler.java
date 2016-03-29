@@ -22,8 +22,10 @@ import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ServiceKomokuCode;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ServiceShuruiCode;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShoKisaiHokenshaNo;
+import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.kyotsu.SaibanHanyokeyName;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.HokenshaJoho.HokenshaJohoDiv;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.ServiceCodeInputCommonChildDiv.ServiceCodeInputCommonChildDivDiv;
+import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -32,6 +34,7 @@ import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.ui.binding.RowState;
 import jp.co.ndensan.reams.uz.uza.ui.binding.propertyenum.IconName;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
+import jp.co.ndensan.reams.uz.uza.util.Saiban;
 
 /**
  *
@@ -232,20 +235,21 @@ public class KyuhuhiMeisaiJutokuPanelHandler {
                 getPnlKyufuhiMeisaiTouroku().getTxtKaisu().getValue() == null && ddgRow.getDefaultDataName3() != null) {
             return true;
         } else if (div.getPnlBtnDetail().getPnlKyufuhiMeisai().
-                getPnlKyufuhiMeisaiTouroku().getTxtKaisu().getValue() != null) {
-            return !(new RString(div.getPnlBtnDetail().getPnlKyufuhiMeisai().
-                    getPnlKyufuhiMeisaiTouroku().getTxtKaisu().
-                    getValue().toString()).equals(ddgRow.getDefaultDataName3()));
+                getPnlKyufuhiMeisaiTouroku().getTxtKaisu().getValue() != null
+                && !new RString(div.getPnlBtnDetail().getPnlKyufuhiMeisai().
+                        getPnlKyufuhiMeisaiTouroku().getTxtKaisu().
+                        getValue().toString()).equals(ddgRow.getDefaultDataName3())) {
+            return true;
         }
         if (!ddgRow.getDefaultDataName4().getValue().equals(div.getPnlBtnDetail().getPnlKyufuhiMeisai().
                 getPnlKyufuhiMeisaiTouroku().getTxtServiceTani().getValue())) {
             return true;
         }
-        if (!ddgRow.getDefaultDataName5().equals(
-                div.getPnlBtnDetail().getPnlKyufuhiMeisai().getPnlKyufuhiMeisaiTouroku().getTxtTekiyo().getValue())) {
+        if (!ddgRow.getDefaultDataName6().equals(hojo.getTxtHokenshaMeisho().getValue())) {
             return true;
         }
-        return (!ddgRow.getDefaultDataName6().equals(hojo.getTxtHokenshaMeisho().getValue()));
+        return (!ddgRow.getDefaultDataName5().equals(
+                div.getPnlBtnDetail().getPnlKyufuhiMeisai().getPnlKyufuhiMeisaiTouroku().getTxtTekiyo().getValue()));
     }
 
     private void setDgJushochiTokutei(dgJushochiTokutei_Row ddgRow) {
@@ -364,10 +368,12 @@ public class KyuhuhiMeisaiJutokuPanelHandler {
                     entityList.add(mapList.get(row.getDefaultDataName7()).deleted());
                 } else if (RowState.Added.equals(row.getRowState())) {
                     max連番 = max連番 + 1;
+                    RString 新整理番号 = Saiban.get(SubGyomuCode.DBC介護給付, SaibanHanyokeyName.償還整理番号.
+                            getコード()).nextString();
                     ShokanMeisaiJushochiTokurei entityAdded = new ShokanMeisaiJushochiTokurei(
                             被保険者番号,
                             サービス年月,
-                            整理番号,
+                            新整理番号,
                             事業者番号,
                             様式番号,
                             明細番号,
@@ -384,6 +390,7 @@ public class KyuhuhiMeisaiJutokuPanelHandler {
     private ShokanMeisaiJushochiTokurei buildshokanMeisai(ShokanMeisaiJushochiTokurei entity, dgJushochiTokutei_Row row) {
         RString serviceCodeShuruyi = new RString(row.getDefaultDataName1().substring(0, 2).toString());
         RString serviceCodeKoumoku = new RString(row.getDefaultDataName1().substring(2, NUM).toString());
+        entity = clearshokanMeisaii(entity);
         entity = entity.createBuilderForEdit().setサービス種類コード(
                 new ServiceShuruiCode(serviceCodeShuruyi)).build();
         entity = entity.createBuilderForEdit().setサービス項目コード(
@@ -409,6 +416,17 @@ public class KyuhuhiMeisaiJutokuPanelHandler {
         }
 
         return entity;
+
+    }
+
+    private ShokanMeisaiJushochiTokurei clearshokanMeisaii(ShokanMeisaiJushochiTokurei entityModified) {
+        entityModified = entityModified.createBuilderForEdit()
+                .set単位数(0)
+                .set日数_回数(0)
+                .setサービス単位数(0)
+                .set摘要(null)
+                .set施設所在保険者番号(null).build();
+        return entityModified;
 
     }
 
