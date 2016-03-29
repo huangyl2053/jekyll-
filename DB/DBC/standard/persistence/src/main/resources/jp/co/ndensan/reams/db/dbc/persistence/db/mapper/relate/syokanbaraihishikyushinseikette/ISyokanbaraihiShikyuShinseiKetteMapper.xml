@@ -34,4 +34,82 @@
             AND A."yoshikiNo" = #{様式番号}
             AND A."meisaiNo" = #{明細番号}
     </select>
+     <resultMap id="resultMap_KyufujissekiKihon"
+               type="jp.co.ndensan.reams.db.dbc.entity.db.relate.syokanbaraihishikyushinseikette.KyufujissekiKihonEntity"
+               autoMapping="true">
+        <result property="審査年月" column="shinsaYM" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleYearMonthTypeHandler"/>
+        <result property="入力識別番号" column="inputShikibetsuNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.NyuryokuShikibetsuNoTypeHandler"/>
+        <result property="証記載保険者番号" column="shokisaiHokenshaNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.HokenshaNoTypeHandler"/>
+        <result property="被保険者番号" column="hiHokenshaNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.HihokenshaNoTypeHandler"/>
+        <result property="サービス提供年月" column="serviceTeikyoYM" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleYearMonthTypeHandler"/>
+        <result property="事業所番号" column="jigyoshoNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.JigyoshaNoTypeHandler"/>
+        <result property="給付実績作成区分コード" column="kyufuSakuseiKubunCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="給付実績区分コード" column="kyufuJissekiKubunCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="整理番号" column="seiriNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="後保険請求額" column="atoHokenSeikyugaku" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="件数" column="count" />
+    </resultMap>
+    <select id="get社福軽減額サービス種類"
+            resultMap="resultMap_KyufujissekiKihon"
+            parameterType="jp.co.ndensan.reams.db.dbc.definition.mybatisprm.syokanbaraihishikyushinseikette.KyufujissekiKihonParameter" fetchSize="500">
+        SELECT
+            A."shinsaYM",
+            A."inputShikibetsuNo",
+            A."shokisaiHokenshaNo",
+            A."hiHokenshaNo",
+            A."serviceTeikyoYM",
+            A."jigyoshoNo",
+            A."kyufuSakuseiKubunCode",
+            A."kyufuJissekiKubunCode",
+            A."seiriNo",
+            A."atoHokenSeikyugaku",
+            COUNT(*) AS "count"
+        FROM
+           (
+            SELECT
+                 MAX(B."shinsaYM") AS "shinsaYM",
+                 B."inputShikibetsuNo",
+                 B."shokisaiHokenshaNo",
+                 B."hiHokenshaNo",
+                 B."serviceTeikyoYM",
+                 B."jigyoshoNo",
+                 B."kyufuSakuseiKubunCode",
+                 B."kyufuJissekiKubunCode",
+                 B."seiriNo",
+                 B."atoHokenSeikyugaku"
+            FROM
+                rgdb."DbT3017KyufujissekiKihon" B
+            WHERE
+                B."shokisaiHokenshaNo" = #{保険者番号}
+                AND B."hiHokenshaNo" = #{被保険者番号}
+                AND B."serviceTeikyoYM" = #{サービス提供年月}
+                AND B."kyufuJissekiKubunCode" = #{給付実績区分コード}
+                AND B."seiriNo" = #{整理番号}
+            GROUP BY
+                 B."inputShikibetsuNo",
+                 B."shokisaiHokenshaNo",
+                 B."hiHokenshaNo",
+                 B."serviceTeikyoYM",
+                 B."jigyoshoNo",
+                 B."kyufuSakuseiKubunCode",
+                 B."kyufuJissekiKubunCode",
+                 B."seiriNo",
+                 B."atoHokenSeikyugaku"
+            ORDER BY 
+                  B."shinsaYM" DESC
+           ) AS A
+        GROUP BY
+            A."shinsaYM",
+            A."inputShikibetsuNo",
+            A."shokisaiHokenshaNo",
+            A."hiHokenshaNo",
+            A."serviceTeikyoYM",
+            A."jigyoshoNo",
+            A."kyufuSakuseiKubunCode",
+            A."kyufuJissekiKubunCode",
+            A."seiriNo",
+            A."atoHokenSeikyugaku"
+        ORDER BY 
+            A."shinsaYM" DESC
+    </select>
 </mapper>

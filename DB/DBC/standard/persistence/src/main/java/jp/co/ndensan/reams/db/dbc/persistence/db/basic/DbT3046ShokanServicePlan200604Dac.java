@@ -11,6 +11,7 @@ import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3046ShokanServicePlan200604
 import static jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3046ShokanServicePlan200604.hiHokenshaNo;
 import static jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3046ShokanServicePlan200604.jigyoshaNo;
 import static jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3046ShokanServicePlan200604.meisaiNo;
+import static jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3046ShokanServicePlan200604.renban;
 import static jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3046ShokanServicePlan200604.seiriNo;
 import static jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3046ShokanServicePlan200604.serviceTeikyoYM;
 import static jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3046ShokanServicePlan200604.yoshikiNo;
@@ -248,5 +249,49 @@ public class DbT3046ShokanServicePlan200604Dac implements ISaveable<DbT3046Shoka
                     eq(meisaiNo, 明細番号));
         }
         return iTrueFalseCriteria;
+    }
+
+    /**
+     * 主キーで償還払請求サービス計画200604を取得します。
+     *
+     * @param 被保険者番号 被保険者番号
+     * @param サービス提供年月 サービス提供年月
+     * @param 整理番号 整理番号
+     * @param 事業者番号 事業者番号
+     * @param 様式番号 様式番号
+     * @param 明細番号 明細番号
+     * @param 連番 連番
+     * @return DbT3046ShokanServicePlan200604Entity
+     * @throws NullPointerException 引数のいずれかがnullの場合
+     */
+    public DbT3046ShokanServicePlan200604Entity selectByKey(
+            HihokenshaNo 被保険者番号,
+            FlexibleYearMonth サービス提供年月,
+            RString 整理番号,
+            JigyoshaNo 事業者番号,
+            RString 様式番号,
+            RString 明細番号,
+            RString 連番) throws NullPointerException {
+        requireNonNull(被保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage("被保険者番号"));
+        requireNonNull(サービス提供年月, UrSystemErrorMessages.値がnull.getReplacedMessage("サービス提供年月"));
+        requireNonNull(整理番号, UrSystemErrorMessages.値がnull.getReplacedMessage("整理番号"));
+        requireNonNull(事業者番号, UrSystemErrorMessages.値がnull.getReplacedMessage("事業者番号"));
+        requireNonNull(様式番号, UrSystemErrorMessages.値がnull.getReplacedMessage("様式番号"));
+        requireNonNull(明細番号, UrSystemErrorMessages.値がnull.getReplacedMessage("明細番号"));
+        requireNonNull(連番, UrSystemErrorMessages.値がnull.getReplacedMessage("連番"));
+
+        DbAccessorNormalType accessor = new DbAccessorNormalType(session);
+
+        return accessor.select().
+                table(DbT3046ShokanServicePlan200604.class).
+                where(and(
+                                eq(hiHokenshaNo, 被保険者番号),
+                                eq(serviceTeikyoYM, サービス提供年月),
+                                eq(seiriNo, 整理番号),
+                                eq(jigyoshaNo, 事業者番号),
+                                eq(yoshikiNo, 様式番号),
+                                eq(meisaiNo, 明細番号),
+                                eq(renban, 連番))).
+                toObject(DbT3046ShokanServicePlan200604Entity.class);
     }
 }
