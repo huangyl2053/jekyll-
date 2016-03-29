@@ -14,6 +14,8 @@ import lombok.Value;
  * 利用者負担割合明細の識別子です。
  */
 @Value
+@lombok.Getter
+@SuppressWarnings("PMD.UnusedPrivateField")
 public class RiyoshaFutanWariaiMeisaiIdentifier implements Serializable {
 
     private final FlexibleYear 年度;

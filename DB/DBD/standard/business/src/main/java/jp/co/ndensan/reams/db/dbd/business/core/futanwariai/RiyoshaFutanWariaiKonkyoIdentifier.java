@@ -6,15 +6,16 @@
 package jp.co.ndensan.reams.db.dbd.business.core.futanwariai;
 
 import java.io.Serializable;
-import lombok.Value;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
-import jp.co.ndensan.reams.uz.uza.math.Decimal;
+import lombok.Value;
 
 /**
  * 利用者負担割合世帯員の識別子です。
  */
 @Value
+@lombok.Getter
+@SuppressWarnings("PMD.UnusedPrivateField")
 public class RiyoshaFutanWariaiKonkyoIdentifier implements Serializable {
 
     private final FlexibleYear 年度;

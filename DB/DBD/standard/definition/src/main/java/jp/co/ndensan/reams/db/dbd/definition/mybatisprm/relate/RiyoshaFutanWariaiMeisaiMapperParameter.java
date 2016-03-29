@@ -72,26 +72,56 @@ public final class RiyoshaFutanWariaiMeisaiMapperParameter {
         return new RiyoshaFutanWariaiMeisaiMapperParameter(主キー1, HihokenshaNo.EMPTY, true, false);
     }
 
+    /**
+     * 主キー1を取得します。
+     *
+     * @return 主キー1
+     */
     public FlexibleYear get主キー1() {
         return 主キー1;
     }
 
+    /**
+     * 主キー2を取得します。
+     *
+     * @return 主キー2
+     */
     public HihokenshaNo get主キー2() {
         return 主キー2;
     }
 
+    /**
+     * 主キー3を取得します。
+     *
+     * @return 主キー3
+     */
     public Decimal get主キー3() {
         return 主キー3;
     }
 
+    /**
+     * 主キー4を取得します。
+     *
+     * @return 主キー4
+     */
     public Decimal get主キー4() {
         return 主キー4;
     }
 
+    /**
+     * uses主キー1を取得します。
+     *
+     * @return uses主キー1
+     */
     public boolean isUses主キー1() {
         return uses主キー1;
     }
 
+    /**
+     * uses主キー2を取得します。
+     *
+     * @return uses主キー2
+     */
     public boolean isUses主キー2() {
         return uses主キー2;
     }
