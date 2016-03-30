@@ -5,15 +5,20 @@
  */
 package jp.co.ndensan.reams.db.dbe.divcontroller.controller.parentdiv.DBE2020001;
 
+import java.util.List;
+import jp.co.ndensan.reams.db.dbe.business.core.ninteichosaschedule.NinteichosaScheduleBusiness;
+import jp.co.ndensan.reams.db.dbe.definition.mybatis.param.ninteichousasukejuru.NinteiChousaSukejuruParameter;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2020001.DBE2020001TransitionEventName;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2020001.NinteiChosaSchedulePanelDiv;
 import jp.co.ndensan.reams.db.dbe.divcontroller.handler.parentdiv.DBE2020001.NinteiChosaScheduleHandler;
+import jp.co.ndensan.reams.db.dbe.service.core.basic.sukejurutouroku.SukejuruTourokuFinder;
 import jp.co.ndensan.reams.db.dbz.divcontroller.viewbox.ViewStateKeys;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.Seireki;
+import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 
 /**
@@ -92,7 +97,21 @@ public class NinteiChosaSchedulePanel {
      * @return ResponseData<NinteiChosaSchedulePanelDiv>
      */
     public ResponseData<NinteiChosaSchedulePanelDiv> onClick_btnDisplay(NinteiChosaSchedulePanelDiv ninteiDiv) {
-        createHandlerOf(ninteiDiv).kennsaku();
+        Seireki date2 = ninteiDiv.getSearchConditionPanel().getTxtSetteiYM().getValue().seireki();
+        FlexibleDate date = new FlexibleDate(Integer.parseInt(date2.getYear().toString()), Integer.parseInt(date2.getMonth().toString()), 1);
+        NinteiChousaSukejuruParameter ninteiParameter = NinteiChousaSukejuruParameter.
+                createGamenParam(new RString(ninteiDiv.getSearchConditionPanel().getTxtSetteiYM().getValue().toString()),
+                        new RString(ninteiDiv.getSearchConditionPanel().getDdlTaishoChiku().getSelectedKey().toString()),
+                        new RString(date.toString()), new RString(date.plusMonth(1).minusDay(1).toString()));
+        List<NinteichosaScheduleBusiness> ninteiList = SukejuruTourokuFinder.createInstance()
+                .getcheMapper(ninteiParameter).records();
+        if (ninteiList == null || ninteiList.isEmpty()) {
+            ValidationMessageControlPairs validationMessages = createHandlerOf(ninteiDiv).check_btnKakuninn(ninteiDiv);
+            if (validationMessages.iterator().hasNext()) {
+                return ResponseData.of(ninteiDiv).addValidationMessages(validationMessages).respond();
+            }
+        }
+        createHandlerOf(ninteiDiv).kennsaku(ninteiList);
         return createResponseData(ninteiDiv);
     }
 
@@ -103,7 +122,8 @@ public class NinteiChosaSchedulePanel {
      * @return ResponseData<NinteiChosaSchedulePanelDiv>
      */
     public ResponseData<NinteiChosaSchedulePanelDiv> onClick_Btnsenntaku(NinteiChosaSchedulePanelDiv ninteiDiv) {
-        ViewStateHolder.put(ViewStateKeys.認定調査スケジュール登録_設定日, new FlexibleDate(ninteiDiv.getDgNinteiChosaSchedule().getActiveRow().getDate()));
+        ViewStateHolder.put(ViewStateKeys.認定調査スケジュール登録_設定日,
+                new FlexibleDate(ninteiDiv.getDgNinteiChosaSchedule().getActiveRow().getDate().getValue().toDateString()));
         ViewStateHolder.put(ViewStateKeys.認定調査スケジュール登録_地区コード, ninteiDiv.getSearchConditionPanel().getDdlTaishoChiku().getSelectedKey());
         ViewStateHolder.put(ViewStateKeys.認定調査スケジュール登録_画面ステート, 画面ステート_1);
         ViewStateHolder.put(ViewStateKeys.認定調査スケジュール登録_モード, モード);
