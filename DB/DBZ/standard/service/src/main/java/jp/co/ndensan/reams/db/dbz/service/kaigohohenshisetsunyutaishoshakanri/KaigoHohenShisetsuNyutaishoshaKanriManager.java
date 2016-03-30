@@ -62,9 +62,9 @@ public class KaigoHohenShisetsuNyutaishoshaKanriManager {
      * 施設種類によって、施設入退所履歴一覧データを取得します。
      *
      * @param 識別コード 識別コード
-     * @return SearchResult<KaigoHohenShisetsuRelateEntity> 介護保険入退所履歴リスト
+     * @return SearchResult<KaigoHohenShisetsuBusiness> 介護保険入退所履歴リスト
      */
-    public SearchResult<KaigoHohenShisetsuRelateEntity> select介護保険施設入退所一覧By識別コード(ShikibetsuCode 識別コード) {
+    public SearchResult<KaigoHohenShisetsuBusiness> select介護保険施設入退所一覧By識別コード(ShikibetsuCode 識別コード) {
         IKaigoHohenShisetsuMapper mapper = mapperProvider.create(IKaigoHohenShisetsuMapper.class);
         List<DbT1004ShisetsuNyutaishoEntity> entityList = mapper
                 .getShiSeTsuJyoHon(new KaigoHohenShisetsuMybatisParameter(識別コード, null, null, 0));
@@ -83,7 +83,7 @@ public class KaigoHohenShisetsuNyutaishoshaKanriManager {
         }
         List<KaigoHohenShisetsuBusiness> result = new ArrayList<>();
         for (KaigoHohenShisetsuRelateEntity entity : resultList) {
-            result.add(new KaigoHohenShisetsuBusiness((entity)));
+            result.add(new KaigoHohenShisetsuBusiness(entity));
         }
         return SearchResult.of(result, 0, false);
     }
