@@ -4,10 +4,10 @@
  * and open the template in the editor.
  */
 
-package jp.co.ndensan.reams.db.dba.divcontroller.entity.commonchilddiv.ServiceCodeInputCommonChildDiv;
+package jp.co.ndensan.reams.db.dbc.divcontroller.entity.commonchilddiv.ServiceCodeInputCommonChildDiv.ServiceCodeInputCommonChildDiv;
 
 import java.util.List;
-import jp.co.ndensan.reams.db.dba.business.core.servicecode.ServiceCodeModel;
+import jp.co.ndensan.reams.db.dbc.business.core.servicecode.ServiceCodeModel;
 import jp.co.ndensan.reams.db.dbx.business.core.kaigoserviceshurui.kaigoservicenaiyou.KaigoServiceNaiyou;
 import jp.co.ndensan.reams.uz.uza.util.serialization.DataPassingConverter;
 
@@ -35,7 +35,6 @@ public class ServiceCodeInputCommonChildDivHandler {
      * @param focusServiceCodeList
      */
     public void initialize(List<KaigoServiceNaiyou> focusServiceCodeList) {
-        // TODO QA:93 
         if (!focusServiceCodeList.isEmpty()) {
             div.getTxtServiceCodeName().setValue(focusServiceCodeList.get(0).getサービス名称());
         } else {

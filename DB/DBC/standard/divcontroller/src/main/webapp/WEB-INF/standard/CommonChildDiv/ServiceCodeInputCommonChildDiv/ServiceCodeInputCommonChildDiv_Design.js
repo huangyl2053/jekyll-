@@ -1,5 +1,5 @@
-var DBA;
-(function (DBA) {
+var DBC;
+(function (DBC) {
     (function (ServiceCodeInputCommonChildDiv) {
         var Events = (function () {
             function Events() {
@@ -28,11 +28,11 @@ var DBA;
             };
 
             Controls.prototype.convFiledNameSelf = function () {
-                return this._myName + "_" + DBA.ServiceCodeInputCommonChildDiv.Controls.myType();
+                return this._myName + "_" + DBC.ServiceCodeInputCommonChildDiv.Controls.myType();
             };
 
             Controls.prototype.convFiledName = function (fieldName) {
-                return this._myName + "_" + DBA.ServiceCodeInputCommonChildDiv.Controls.myType() + "_" + fieldName;
+                return this._myName + "_" + DBC.ServiceCodeInputCommonChildDiv.Controls.myType() + "_" + fieldName;
             };
 
             Controls.prototype.ServiceCodeInputCommonChildDiv = function () {
@@ -61,6 +61,6 @@ var DBA;
             return Controls;
         })();
         ServiceCodeInputCommonChildDiv.Controls = Controls;
-    })(DBA.ServiceCodeInputCommonChildDiv || (DBA.ServiceCodeInputCommonChildDiv = {}));
-    var ServiceCodeInputCommonChildDiv = DBA.ServiceCodeInputCommonChildDiv;
-})(DBA || (DBA = {}));
+    })(DBC.ServiceCodeInputCommonChildDiv || (DBC.ServiceCodeInputCommonChildDiv = {}));
+    var ServiceCodeInputCommonChildDiv = DBC.ServiceCodeInputCommonChildDiv;
+})(DBC || (DBC = {}));

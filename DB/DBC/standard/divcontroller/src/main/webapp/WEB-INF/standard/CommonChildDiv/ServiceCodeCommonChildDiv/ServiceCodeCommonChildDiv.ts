@@ -1,7 +1,7 @@
-/// <reference path='ServiceCodeInputCommonChildDiv_Design.ts' />
-module DBA
+/// <reference path='ServiceCodeCommonChildDiv_Design.ts' />
+module DBC
 {
-    export module ServiceCodeInputCommonChildDiv
+    export module ServiceCodeCommonChildDiv
     {
         export class ModeController {
             private controls: Controls;
@@ -26,9 +26,9 @@ module DBA
     }
 }
 
-module DBA
+module DBC
 {
-    export module ServiceCodeInputCommonChildDiv
+    export module ServiceCodeCommonChildDiv
     {
         export class PublicProperties {
             private controls: Controls;

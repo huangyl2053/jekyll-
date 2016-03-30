@@ -4,11 +4,11 @@
  * and open the template in the editor.
  */
 
-package jp.co.ndensan.reams.db.dba.divcontroller.controller;
+package jp.co.ndensan.reams.db.dbc.divcontroller.controller.commonchilddiv.ServiceCodeCommonChildDiv;
 
 import java.util.List;
-import jp.co.ndensan.reams.db.dba.divcontroller.entity.commonchilddiv.ServiceCodeCommonChildDiv.ServiceCodeCommonChildDivDiv;
-import jp.co.ndensan.reams.db.dba.divcontroller.entity.commonchilddiv.ServiceCodeCommonChildDiv.ServiceCodeCommonChildDivHandler;
+import jp.co.ndensan.reams.db.dbc.divcontroller.entity.commonchilddiv.ServiceCodeCommonChildDiv.ServiceCodeCommonChildDiv.ServiceCodeCommonChildDivDiv;
+import jp.co.ndensan.reams.db.dbc.divcontroller.entity.commonchilddiv.ServiceCodeCommonChildDiv.ServiceCodeCommonChildDiv.ServiceCodeCommonChildDivHandler;
 import jp.co.ndensan.reams.db.dbx.business.core.kaigoserviceshurui.kaigoservicenaiyou.KaigoServiceNaiyou;
 import jp.co.ndensan.reams.db.dbx.definition.mybatis.param.servicecode.SabisuKodoParameter;
 import jp.co.ndensan.reams.db.dbx.service.core.kaigoserviceshurui.kaigoservicenaiyou.KaigoServiceNaiyouManager;
@@ -39,7 +39,7 @@ public class ServiceCodeCommonChildDiv {
      * @param div ServiceCodeCommonChildDivDiv
      * @return ResponseData<ServiceCodeCommonChildDivDiv>
      */
-    public ResponseData<ServiceCodeCommonChildDivDiv> onLoad(ServiceCodeCommonChildDivDiv div) {
+    public ResponseData<ServiceCodeCommonChildDivDiv>  initialize(ServiceCodeCommonChildDivDiv div) {
         getHandler(div).onLoad();
         return ResponseData.of(div).respond();
     }

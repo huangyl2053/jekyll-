@@ -1,8 +1,8 @@
-/// <reference path="../d.ts/jquery.d.ts" />
-/// <reference path="../d.ts/UzViewControls.d.ts" />
-/// <reference path="../d.ts/UzaConverter.d.ts" />
+/// <reference path="../../d.ts/jquery.d.ts" />
+/// <reference path="../../d.ts/UzViewControls.d.ts" />
+/// <reference path="../../d.ts/UzaConverter.d.ts" />
 
-module DBA {
+module DBC {
 
      export module ServiceCodeCommonChildDiv {
 
@@ -34,11 +34,11 @@ module DBA {
             }
 
             public convFiledNameSelf(): string {
-                return this._myName + "_" + DBA.ServiceCodeCommonChildDiv.Controls.myType();
+                return this._myName + "_" + DBC.ServiceCodeCommonChildDiv.Controls.myType();
             }
 
             public convFiledName(fieldName: string): string {
-                return this._myName + "_" + DBA.ServiceCodeCommonChildDiv.Controls.myType() + "_" + fieldName;
+                return this._myName + "_" + DBC.ServiceCodeCommonChildDiv.Controls.myType() + "_" + fieldName;
             }
 
             public ServiceCodeCommonChildDiv(): UZA.Panel {

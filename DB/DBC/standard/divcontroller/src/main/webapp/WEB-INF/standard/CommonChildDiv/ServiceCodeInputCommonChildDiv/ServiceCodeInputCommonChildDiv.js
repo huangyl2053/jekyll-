@@ -1,5 +1,5 @@
-var DBA;
-(function (DBA) {
+var DBC;
+(function (DBC) {
     (function (ServiceCodeInputCommonChildDiv) {
         var ModeController = (function () {
             function ModeController(fieldName) {
@@ -16,12 +16,12 @@ var DBA;
             return ModeController;
         })();
         ServiceCodeInputCommonChildDiv.ModeController = ModeController;
-    })(DBA.ServiceCodeInputCommonChildDiv || (DBA.ServiceCodeInputCommonChildDiv = {}));
-    var ServiceCodeInputCommonChildDiv = DBA.ServiceCodeInputCommonChildDiv;
-})(DBA || (DBA = {}));
+    })(DBC.ServiceCodeInputCommonChildDiv || (DBC.ServiceCodeInputCommonChildDiv = {}));
+    var ServiceCodeInputCommonChildDiv = DBC.ServiceCodeInputCommonChildDiv;
+})(DBC || (DBC = {}));
 
-var DBA;
-(function (DBA) {
+var DBC;
+(function (DBC) {
     (function (ServiceCodeInputCommonChildDiv) {
         var PublicProperties = (function () {
             function PublicProperties(fieldName) {
@@ -36,6 +36,6 @@ var DBA;
             return PublicProperties;
         })();
         ServiceCodeInputCommonChildDiv.PublicProperties = PublicProperties;
-    })(DBA.ServiceCodeInputCommonChildDiv || (DBA.ServiceCodeInputCommonChildDiv = {}));
-    var ServiceCodeInputCommonChildDiv = DBA.ServiceCodeInputCommonChildDiv;
-})(DBA || (DBA = {}));
+    })(DBC.ServiceCodeInputCommonChildDiv || (DBC.ServiceCodeInputCommonChildDiv = {}));
+    var ServiceCodeInputCommonChildDiv = DBC.ServiceCodeInputCommonChildDiv;
+})(DBC || (DBC = {}));

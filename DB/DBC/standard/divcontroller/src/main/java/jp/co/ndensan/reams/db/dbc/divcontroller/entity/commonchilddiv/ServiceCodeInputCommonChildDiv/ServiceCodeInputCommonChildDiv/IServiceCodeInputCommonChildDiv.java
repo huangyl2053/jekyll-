@@ -1,4 +1,4 @@
-package jp.co.ndensan.reams.db.dba.divcontroller.entity.commonchilddiv.ServiceCodeInputCommonChildDiv;
+package jp.co.ndensan.reams.db.dbc.divcontroller.entity.commonchilddiv.ServiceCodeInputCommonChildDiv.ServiceCodeInputCommonChildDiv;
 
 import jp.co.ndensan.reams.uz.uza.ui.binding.ICommonChildDivBaseProperties;
 
@@ -7,4 +7,8 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.ICommonChildDivBaseProperties;
  */
 public interface IServiceCodeInputCommonChildDiv extends ICommonChildDivBaseProperties {
 
+    /**
+     * 画面を画面初期化します。
+     */
+    public void  initialize();
 }

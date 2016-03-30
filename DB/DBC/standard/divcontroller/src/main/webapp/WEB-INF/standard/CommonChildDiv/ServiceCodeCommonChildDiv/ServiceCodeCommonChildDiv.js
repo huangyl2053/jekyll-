@@ -1,5 +1,5 @@
-var DBA;
-(function (DBA) {
+var DBC;
+(function (DBC) {
     (function (ServiceCodeCommonChildDiv) {
         var ModeController = (function () {
             function ModeController(fieldName) {
@@ -16,12 +16,12 @@ var DBA;
             return ModeController;
         })();
         ServiceCodeCommonChildDiv.ModeController = ModeController;
-    })(DBA.ServiceCodeCommonChildDiv || (DBA.ServiceCodeCommonChildDiv = {}));
-    var ServiceCodeCommonChildDiv = DBA.ServiceCodeCommonChildDiv;
-})(DBA || (DBA = {}));
+    })(DBC.ServiceCodeCommonChildDiv || (DBC.ServiceCodeCommonChildDiv = {}));
+    var ServiceCodeCommonChildDiv = DBC.ServiceCodeCommonChildDiv;
+})(DBC || (DBC = {}));
 
-var DBA;
-(function (DBA) {
+var DBC;
+(function (DBC) {
     (function (ServiceCodeCommonChildDiv) {
         var PublicProperties = (function () {
             function PublicProperties(fieldName) {
@@ -36,6 +36,6 @@ var DBA;
             return PublicProperties;
         })();
         ServiceCodeCommonChildDiv.PublicProperties = PublicProperties;
-    })(DBA.ServiceCodeCommonChildDiv || (DBA.ServiceCodeCommonChildDiv = {}));
-    var ServiceCodeCommonChildDiv = DBA.ServiceCodeCommonChildDiv;
-})(DBA || (DBA = {}));
+    })(DBC.ServiceCodeCommonChildDiv || (DBC.ServiceCodeCommonChildDiv = {}));
+    var ServiceCodeCommonChildDiv = DBC.ServiceCodeCommonChildDiv;
+})(DBC || (DBC = {}));

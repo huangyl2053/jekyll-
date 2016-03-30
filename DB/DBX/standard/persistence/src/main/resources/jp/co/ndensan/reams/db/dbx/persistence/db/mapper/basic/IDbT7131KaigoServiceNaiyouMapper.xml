@@ -100,25 +100,25 @@
             parameterType="jp.co.ndensan.reams.db.dbx.definition.mybatis.param.servicecode.SabisuKodoParameter"
             fetchSize="500">
         SELECT
-        DbT7131."serviceShuruiCode" AS "serviceShuruiCode",
-        DbT7131."serviceKoumokuCode" AS "serviceKoumokuCode",
+        DbT7131."serviceShuruiCd" AS "serviceShuruiCode",
+        DbT7131."serviceKoumokuCd" AS "serviceKoumokuCode",
         DbT7131."serviceName" AS "serviceName"
         FROM 
         rgdb."DbT7131KaigoServiceNaiyou" AS DbT7131
         WHERE
         1 = 1
         <if test="isShuruiCodeFlag">
-            AND DbT7131."serviceShuruiCode" = #{serviceShuruiCode}
+            AND DbT7131."serviceShuruiCd" = #{serviceShuruiCode}
         </if>
         <if test="isKoumokuCodeFlag">
-            AND DbT7131."serviceKoumokuCode" = #{serviceKoumokuCode}
+            AND DbT7131."serviceKoumokuCd" = #{serviceKoumokuCode}
         </if>
         <if test="isHaakuKijunYMFlag">
             AND DbT7131."teikyoKaishiYM" <![CDATA[<=]]>  #{haakuKijunYM}
             AND #{haakuKijunYM} <![CDATA[<=]]>DbT7131."teikyoShuryoYM"
         </if>
         ORDER BY
-        DbT7131."serviceShuruiCode", DbT7131."serviceKoumokuCode"
+        DbT7131."serviceShuruiCd", DbT7131."serviceKoumokuCd"
     </select>
       
     <select id="getEntity" resultMap="ResultMap_DbT7131KaigoServiceNaiyouEntity">
