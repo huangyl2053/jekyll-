@@ -110,10 +110,10 @@ public class IchijiHanteiKekkaJohoHandler {
                     div.getTxtIchijiHanteiKekka().setValue(
                             IchijiHanteiKekkaCode06.toValue(ichijiHanteiKekkaJoho.toEntity().getIchijiHanteiKekkaCode().value()).get名称());
                 } else if (ninteiShinseiJoho != null
-                        && KoroshoIfShikibetsuCode.認定ｿﾌﾄ2009.getコード().equals(
+                        && (KoroshoIfShikibetsuCode.認定ｿﾌﾄ2009.getコード().equals(
                                 ninteiShinseiJoho.get厚労省IF識別コード().value())
                         || KoroshoIfShikibetsuCode.認定ｿﾌﾄ2009_SP3.getコード().equals(
-                                ninteiShinseiJoho.get厚労省IF識別コード().value())) {
+                                ninteiShinseiJoho.get厚労省IF識別コード().value()))) {
                     div.getTxtIchijiHanteiKekka().setValue(
                             IchijiHanteiKekkaCode09.toValue(ichijiHanteiKekkaJoho.toEntity().getIchijiHanteiKekkaCode().value()).get名称());
                 }
