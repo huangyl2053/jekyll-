@@ -53,6 +53,15 @@ public class KaigoJigyoshaShisetsuKanriBusiness {
     }
 
     /**
+     * 事業者名を取得します。
+     *
+     * @return 事業者名（ｶﾅ）
+     */
+    public RString get事業者名() {
+        return entity.getJigyoshaName();
+    }
+
+    /**
      * 事業者名（ｶﾅ）を取得します。
      *
      * @return 事業者名（ｶﾅ）

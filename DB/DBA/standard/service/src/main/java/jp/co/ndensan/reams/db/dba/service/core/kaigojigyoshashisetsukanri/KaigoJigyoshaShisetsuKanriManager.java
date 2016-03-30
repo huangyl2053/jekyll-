@@ -112,7 +112,7 @@ public class KaigoJigyoshaShisetsuKanriManager {
      * @return 事業者サービス情報取得
      */
     @Transaction
-    public SearchResult<KaigoJigyoshaShiteiService> getServiceItiranJoho(KaigoJigyoshaShisetsuKanriMapperParameter parameter) {
+    public SearchResult<KaigoJigyoshaShiteiService> getJigyoshaServiceJoho(KaigoJigyoshaShisetsuKanriMapperParameter parameter) {
 
         List<KaigoJigyoshaShiteiService> serviceShuruiList = new ArrayList<>();
         List<DbT7063KaigoJigyoshaShiteiServiceEntity> 事業者サービス情報取得 = dbT7063dac.select事業者サービス(parameter.getJigyoshaNo(),
@@ -153,7 +153,7 @@ public class KaigoJigyoshaShisetsuKanriManager {
      * @return サービス一覧情報取得
      */
     @Transaction
-    public SearchResult<KaigoJogaiTokureiBusiness> getJigyoshaJoho(KaigoJogaiTokureiParameter parameter) {
+    public SearchResult<KaigoJogaiTokureiBusiness> getServiceItiranJoho(KaigoJogaiTokureiParameter parameter) {
 
         List<KaigoJogaiTokureiBusiness> serviceShuruiList = new ArrayList<>();
         IKaigoJigyoshaShisetsuKanriMapper iKaigoJigyoshaShisetsuKanri = mapperProvider.create(IKaigoJigyoshaShisetsuKanriMapper.class);
