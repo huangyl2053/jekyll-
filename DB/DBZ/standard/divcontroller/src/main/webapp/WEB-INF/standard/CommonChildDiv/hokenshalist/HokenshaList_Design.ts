@@ -8,6 +8,10 @@ module DBZ {
 
         export class Events {
 
+            public static onChange_ddlHokenshaList(): string {
+                return "onChange_ddlHokenshaList";
+            }
+
         }
 
         export class Controls {
