@@ -250,6 +250,20 @@ public class NinteiChosaScheduleShosai {
     }
 
     /**
+     * 認定調査スケジュール登録2のメモを表示するボタンの処理です。
+     *
+     * @param div NinteiChosaScheduleShosaiDiv
+     * @return ResponseData<NinteiChosaScheduleShosaiDiv>
+     */
+    public ResponseData<NinteiChosaScheduleShosaiDiv> onSelect_BtnModoRu(NinteiChosaScheduleShosaiDiv div) {
+        モード = ViewStateHolder.get(ViewStateKeys.認定調査スケジュール登録_モード, RString.class);
+        if (モード_1.equals(モード)) {
+            return ResponseData.of(div).forwardWithEventName(DBE2020002TransitionEventName.更新モード_スケジュール一覧に戻る).respond();
+        }
+        return ResponseData.of(div).forwardWithEventName(DBE2020002TransitionEventName.未定モード_該当者一覧に戻る).respond();
+    }
+
+    /**
      * 認定調査スケジュール登録2の編集ボタン1の処理です。
      *
      * @param div NinteiChosaScheduleShosaiDiv
