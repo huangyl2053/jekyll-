@@ -1,20 +1,20 @@
 package jp.co.ndensan.reams.db.dbz.divcontroller.entity.parentdiv;
-/**
- * このコードはツールによって生成されました。
- * このファイルへの変更は、再生成時には損失するため
- * 不正な動作の原因になります。
- */
-import jp.co.ndensan.reams.db.dbz.divcontroller.entity.parentdiv.ISogoShokaiJutakuKaishuhiInfoDiv;
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonProperty;
-import jp.co.ndensan.reams.db.dbz.divcontroller.entity.parentdiv.JutakuKaishuDetailDiv;
-import jp.co.ndensan.reams.uz.uza.ui.binding.*;
-import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
-import jp.co.ndensan.reams.uz.uza.ui.binding.domain.*;
 
 /**
- * SogoShokaiJutakuKaishuhiInfo のクラスファイル 
- * 
+ * このコードはツールによって生成されました。 このファイルへの変更は、再生成時には損失するため 不正な動作の原因になります。
+ */
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import jp.co.ndensan.reams.uz.uza.ui.binding.Button;
+import jp.co.ndensan.reams.uz.uza.ui.binding.DataGrid;
+import jp.co.ndensan.reams.uz.uza.ui.binding.Label;
+import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
+import jp.co.ndensan.reams.uz.uza.ui.binding.TextBox;
+import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxNum;
+
+/**
+ * SogoShokaiJutakuKaishuhiInfo のクラスファイル
+ *
  * @author 自動生成
  */
 public class SogoShokaiJutakuKaishuhiInfoDiv extends Panel implements ISogoShokaiJutakuKaishuhiInfoDiv {
@@ -24,6 +24,7 @@ public class SogoShokaiJutakuKaishuhiInfoDiv extends Panel implements ISogoShoka
      * コントロール名とフィールド名を取得する
      * private + コントロール名 + フィールド名 の文字列を作成
      */
+
     @JsonProperty("txtJutakuOwner")
     private TextBox txtJutakuOwner;
     @JsonProperty("txtRelationWithHihokensha")
@@ -50,7 +51,7 @@ public class SogoShokaiJutakuKaishuhiInfoDiv extends Panel implements ISogoShoka
 
     @JsonProperty("txtJutakuOwner")
     public void setTxtJutakuOwner(TextBox txtJutakuOwner) {
-        this.txtJutakuOwner=txtJutakuOwner;
+        this.txtJutakuOwner = txtJutakuOwner;
     }
 
     @JsonProperty("txtRelationWithHihokensha")
@@ -60,7 +61,7 @@ public class SogoShokaiJutakuKaishuhiInfoDiv extends Panel implements ISogoShoka
 
     @JsonProperty("txtRelationWithHihokensha")
     public void setTxtRelationWithHihokensha(TextBox txtRelationWithHihokensha) {
-        this.txtRelationWithHihokensha=txtRelationWithHihokensha;
+        this.txtRelationWithHihokensha = txtRelationWithHihokensha;
     }
 
     @JsonProperty("dgJutakuKaishuDetail")
@@ -70,7 +71,7 @@ public class SogoShokaiJutakuKaishuhiInfoDiv extends Panel implements ISogoShoka
 
     @JsonProperty("dgJutakuKaishuDetail")
     public void setDgJutakuKaishuDetail(DataGrid<dgJutakuKaishuDetail_Row> dgJutakuKaishuDetail) {
-        this.dgJutakuKaishuDetail=dgJutakuKaishuDetail;
+        this.dgJutakuKaishuDetail = dgJutakuKaishuDetail;
     }
 
     @JsonProperty("JutakuKaishuDetail")
@@ -80,7 +81,7 @@ public class SogoShokaiJutakuKaishuhiInfoDiv extends Panel implements ISogoShoka
 
     @JsonProperty("JutakuKaishuDetail")
     public void setJutakuKaishuDetail(JutakuKaishuDetailDiv JutakuKaishuDetail) {
-        this.JutakuKaishuDetail=JutakuKaishuDetail;
+        this.JutakuKaishuDetail = JutakuKaishuDetail;
     }
 
     @JsonProperty("tblSeikyuSummary")
@@ -90,7 +91,7 @@ public class SogoShokaiJutakuKaishuhiInfoDiv extends Panel implements ISogoShoka
 
     @JsonProperty("tblSeikyuSummary")
     public void setTblSeikyuSummary(tblSeikyuSummaryDiv tblSeikyuSummary) {
-        this.tblSeikyuSummary=tblSeikyuSummary;
+        this.tblSeikyuSummary = tblSeikyuSummary;
     }
 
     @JsonProperty("btnClose")
@@ -100,7 +101,7 @@ public class SogoShokaiJutakuKaishuhiInfoDiv extends Panel implements ISogoShoka
 
     @JsonProperty("btnClose")
     public void setBtnClose(Button btnClose) {
-        this.btnClose=btnClose;
+        this.btnClose = btnClose;
     }
 
     /*
@@ -182,5 +183,4 @@ public class SogoShokaiJutakuKaishuhiInfoDiv extends Panel implements ISogoShoka
     }
 
     //--------------- この行より下にコードを追加してください -------------------
-
 }

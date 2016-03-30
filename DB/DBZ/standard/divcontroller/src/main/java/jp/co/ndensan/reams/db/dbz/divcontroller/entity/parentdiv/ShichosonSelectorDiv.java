@@ -1,18 +1,16 @@
 package jp.co.ndensan.reams.db.dbz.divcontroller.entity.parentdiv;
-/**
- * このコードはツールによって生成されました。
- * このファイルへの変更は、再生成時には損失するため
- * 不正な動作の原因になります。
- */
-import jp.co.ndensan.reams.db.dbz.divcontroller.entity.parentdiv.IShichosonSelectorDiv;
-import com.fasterxml.jackson.annotation.JsonProperty;
-import jp.co.ndensan.reams.uz.uza.ui.binding.*;
-import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
-import jp.co.ndensan.reams.uz.uza.ui.binding.domain.*;
 
 /**
- * ShichosonSelector のクラスファイル 
- * 
+ * このコードはツールによって生成されました。 このファイルへの変更は、再生成時には損失するため 不正な動作の原因になります。
+ */
+import com.fasterxml.jackson.annotation.JsonProperty;
+import jp.co.ndensan.reams.uz.uza.ui.binding.Button;
+import jp.co.ndensan.reams.uz.uza.ui.binding.DataGrid;
+import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
+
+/**
+ * ShichosonSelector のクラスファイル
+ *
  * @author 自動生成
  */
 public class ShichosonSelectorDiv extends Panel implements IShichosonSelectorDiv {
@@ -22,6 +20,7 @@ public class ShichosonSelectorDiv extends Panel implements IShichosonSelectorDiv
      * コントロール名とフィールド名を取得する
      * private + コントロール名 + フィールド名 の文字列を作成
      */
+
     @JsonProperty("dgShichoson")
     private DataGrid<dgShichoson_Row> dgShichoson;
     @JsonProperty("btnReturn")
@@ -42,7 +41,7 @@ public class ShichosonSelectorDiv extends Panel implements IShichosonSelectorDiv
 
     @JsonProperty("dgShichoson")
     public void setDgShichoson(DataGrid<dgShichoson_Row> dgShichoson) {
-        this.dgShichoson=dgShichoson;
+        this.dgShichoson = dgShichoson;
     }
 
     @JsonProperty("btnReturn")
@@ -52,7 +51,7 @@ public class ShichosonSelectorDiv extends Panel implements IShichosonSelectorDiv
 
     @JsonProperty("btnReturn")
     public void setBtnReturn(Button btnReturn) {
-        this.btnReturn=btnReturn;
+        this.btnReturn = btnReturn;
     }
 
     @JsonProperty("btnDecision")
@@ -62,9 +61,8 @@ public class ShichosonSelectorDiv extends Panel implements IShichosonSelectorDiv
 
     @JsonProperty("btnDecision")
     public void setBtnDecision(Button btnDecision) {
-        this.btnDecision=btnDecision;
+        this.btnDecision = btnDecision;
     }
 
     //--------------- この行より下にコードを追加してください -------------------
-
 }

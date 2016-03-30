@@ -1,18 +1,18 @@
 package jp.co.ndensan.reams.db.dbz.divcontroller.entity.parentdiv;
-/**
- * このコードはツールによって生成されました。
- * このファイルへの変更は、再生成時には損失するため
- * 不正な動作の原因になります。
- */
-import jp.co.ndensan.reams.db.dbz.divcontroller.entity.parentdiv.ISogoShokaiNinteiInfoDiv;
-import com.fasterxml.jackson.annotation.JsonProperty;
-import jp.co.ndensan.reams.uz.uza.ui.binding.*;
-import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
-import jp.co.ndensan.reams.uz.uza.ui.binding.domain.*;
 
 /**
- * SogoShokaiNinteiInfo のクラスファイル 
- * 
+ * このコードはツールによって生成されました。 このファイルへの変更は、再生成時には損失するため 不正な動作の原因になります。
+ */
+import com.fasterxml.jackson.annotation.JsonProperty;
+import jp.co.ndensan.reams.uz.uza.ui.binding.Button;
+import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
+import jp.co.ndensan.reams.uz.uza.ui.binding.TextBox;
+import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxDate;
+import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxDateRange;
+
+/**
+ * SogoShokaiNinteiInfo のクラスファイル
+ *
  * @author 自動生成
  */
 public class SogoShokaiNinteiInfoDiv extends Panel implements ISogoShokaiNinteiInfoDiv {
@@ -22,6 +22,7 @@ public class SogoShokaiNinteiInfoDiv extends Panel implements ISogoShokaiNinteiI
      * コントロール名とフィールド名を取得する
      * private + コントロール名 + フィールド名 の文字列を作成
      */
+
     @JsonProperty("txtNinteiShinseiYMD")
     private TextBoxDate txtNinteiShinseiYMD;
     @JsonProperty("txtNinteiShinseiKubun")
@@ -88,7 +89,7 @@ public class SogoShokaiNinteiInfoDiv extends Panel implements ISogoShokaiNinteiI
 
     @JsonProperty("txtNinteiShinseiYMD")
     public void setTxtNinteiShinseiYMD(TextBoxDate txtNinteiShinseiYMD) {
-        this.txtNinteiShinseiYMD=txtNinteiShinseiYMD;
+        this.txtNinteiShinseiYMD = txtNinteiShinseiYMD;
     }
 
     @JsonProperty("txtNinteiShinseiKubun")
@@ -98,7 +99,7 @@ public class SogoShokaiNinteiInfoDiv extends Panel implements ISogoShokaiNinteiI
 
     @JsonProperty("txtNinteiShinseiKubun")
     public void setTxtNinteiShinseiKubun(TextBox txtNinteiShinseiKubun) {
-        this.txtNinteiShinseiKubun=txtNinteiShinseiKubun;
+        this.txtNinteiShinseiKubun = txtNinteiShinseiKubun;
     }
 
     @JsonProperty("txtNinteiYukoKubun")
@@ -108,7 +109,7 @@ public class SogoShokaiNinteiInfoDiv extends Panel implements ISogoShokaiNinteiI
 
     @JsonProperty("txtNinteiYukoKubun")
     public void setTxtNinteiYukoKubun(TextBox txtNinteiYukoKubun) {
-        this.txtNinteiYukoKubun=txtNinteiYukoKubun;
+        this.txtNinteiYukoKubun = txtNinteiYukoKubun;
     }
 
     @JsonProperty("txtNinteiChosaJissiYMD")
@@ -118,7 +119,7 @@ public class SogoShokaiNinteiInfoDiv extends Panel implements ISogoShokaiNinteiI
 
     @JsonProperty("txtNinteiChosaJissiYMD")
     public void setTxtNinteiChosaJissiYMD(TextBoxDate txtNinteiChosaJissiYMD) {
-        this.txtNinteiChosaJissiYMD=txtNinteiChosaJissiYMD;
+        this.txtNinteiChosaJissiYMD = txtNinteiChosaJissiYMD;
     }
 
     @JsonProperty("txtNinteiChosaJuryoYMD")
@@ -128,7 +129,7 @@ public class SogoShokaiNinteiInfoDiv extends Panel implements ISogoShokaiNinteiI
 
     @JsonProperty("txtNinteiChosaJuryoYMD")
     public void setTxtNinteiChosaJuryoYMD(TextBoxDate txtNinteiChosaJuryoYMD) {
-        this.txtNinteiChosaJuryoYMD=txtNinteiChosaJuryoYMD;
+        this.txtNinteiChosaJuryoYMD = txtNinteiChosaJuryoYMD;
     }
 
     @JsonProperty("txtNinteiChosaKanryoYMD")
@@ -138,7 +139,7 @@ public class SogoShokaiNinteiInfoDiv extends Panel implements ISogoShokaiNinteiI
 
     @JsonProperty("txtNinteiChosaKanryoYMD")
     public void setTxtNinteiChosaKanryoYMD(TextBoxDate txtNinteiChosaKanryoYMD) {
-        this.txtNinteiChosaKanryoYMD=txtNinteiChosaKanryoYMD;
+        this.txtNinteiChosaKanryoYMD = txtNinteiChosaKanryoYMD;
     }
 
     @JsonProperty("txtNinteiChosaItakusaki")
@@ -148,7 +149,7 @@ public class SogoShokaiNinteiInfoDiv extends Panel implements ISogoShokaiNinteiI
 
     @JsonProperty("txtNinteiChosaItakusaki")
     public void setTxtNinteiChosaItakusaki(TextBox txtNinteiChosaItakusaki) {
-        this.txtNinteiChosaItakusaki=txtNinteiChosaItakusaki;
+        this.txtNinteiChosaItakusaki = txtNinteiChosaItakusaki;
     }
 
     @JsonProperty("txtNinteiChosain")
@@ -158,7 +159,7 @@ public class SogoShokaiNinteiInfoDiv extends Panel implements ISogoShokaiNinteiI
 
     @JsonProperty("txtNinteiChosain")
     public void setTxtNinteiChosain(TextBox txtNinteiChosain) {
-        this.txtNinteiChosain=txtNinteiChosain;
+        this.txtNinteiChosain = txtNinteiChosain;
     }
 
     @JsonProperty("txtNinteiShujiiIryoKikan")
@@ -168,7 +169,7 @@ public class SogoShokaiNinteiInfoDiv extends Panel implements ISogoShokaiNinteiI
 
     @JsonProperty("txtNinteiShujiiIryoKikan")
     public void setTxtNinteiShujiiIryoKikan(TextBox txtNinteiShujiiIryoKikan) {
-        this.txtNinteiShujiiIryoKikan=txtNinteiShujiiIryoKikan;
+        this.txtNinteiShujiiIryoKikan = txtNinteiShujiiIryoKikan;
     }
 
     @JsonProperty("txtNinteiShujii")
@@ -178,7 +179,7 @@ public class SogoShokaiNinteiInfoDiv extends Panel implements ISogoShokaiNinteiI
 
     @JsonProperty("txtNinteiShujii")
     public void setTxtNinteiShujii(TextBox txtNinteiShujii) {
-        this.txtNinteiShujii=txtNinteiShujii;
+        this.txtNinteiShujii = txtNinteiShujii;
     }
 
     @JsonProperty("txtNinteiIkenshoJuryoYMD")
@@ -188,7 +189,7 @@ public class SogoShokaiNinteiInfoDiv extends Panel implements ISogoShokaiNinteiI
 
     @JsonProperty("txtNinteiIkenshoJuryoYMD")
     public void setTxtNinteiIkenshoJuryoYMD(TextBoxDate txtNinteiIkenshoJuryoYMD) {
-        this.txtNinteiIkenshoJuryoYMD=txtNinteiIkenshoJuryoYMD;
+        this.txtNinteiIkenshoJuryoYMD = txtNinteiIkenshoJuryoYMD;
     }
 
     @JsonProperty("txtNinteiIkenshoKanryoYMD")
@@ -198,7 +199,7 @@ public class SogoShokaiNinteiInfoDiv extends Panel implements ISogoShokaiNinteiI
 
     @JsonProperty("txtNinteiIkenshoKanryoYMD")
     public void setTxtNinteiIkenshoKanryoYMD(TextBoxDate txtNinteiIkenshoKanryoYMD) {
-        this.txtNinteiIkenshoKanryoYMD=txtNinteiIkenshoKanryoYMD;
+        this.txtNinteiIkenshoKanryoYMD = txtNinteiIkenshoKanryoYMD;
     }
 
     @JsonProperty("txtNinteiIchijiHantei")
@@ -208,7 +209,7 @@ public class SogoShokaiNinteiInfoDiv extends Panel implements ISogoShokaiNinteiI
 
     @JsonProperty("txtNinteiIchijiHantei")
     public void setTxtNinteiIchijiHantei(TextBox txtNinteiIchijiHantei) {
-        this.txtNinteiIchijiHantei=txtNinteiIchijiHantei;
+        this.txtNinteiIchijiHantei = txtNinteiIchijiHantei;
     }
 
     @JsonProperty("txtNinteiIchijiHanteiNinchi")
@@ -218,7 +219,7 @@ public class SogoShokaiNinteiInfoDiv extends Panel implements ISogoShokaiNinteiI
 
     @JsonProperty("txtNinteiIchijiHanteiNinchi")
     public void setTxtNinteiIchijiHanteiNinchi(TextBox txtNinteiIchijiHanteiNinchi) {
-        this.txtNinteiIchijiHanteiNinchi=txtNinteiIchijiHanteiNinchi;
+        this.txtNinteiIchijiHanteiNinchi = txtNinteiIchijiHanteiNinchi;
     }
 
     @JsonProperty("txtNinteiIchijiHanteiYMD")
@@ -228,7 +229,7 @@ public class SogoShokaiNinteiInfoDiv extends Panel implements ISogoShokaiNinteiI
 
     @JsonProperty("txtNinteiIchijiHanteiYMD")
     public void setTxtNinteiIchijiHanteiYMD(TextBoxDate txtNinteiIchijiHanteiYMD) {
-        this.txtNinteiIchijiHanteiYMD=txtNinteiIchijiHanteiYMD;
+        this.txtNinteiIchijiHanteiYMD = txtNinteiIchijiHanteiYMD;
     }
 
     @JsonProperty("txtNinteiIchijiKanryoYMD")
@@ -238,7 +239,7 @@ public class SogoShokaiNinteiInfoDiv extends Panel implements ISogoShokaiNinteiI
 
     @JsonProperty("txtNinteiIchijiKanryoYMD")
     public void setTxtNinteiIchijiKanryoYMD(TextBoxDate txtNinteiIchijiKanryoYMD) {
-        this.txtNinteiIchijiKanryoYMD=txtNinteiIchijiKanryoYMD;
+        this.txtNinteiIchijiKanryoYMD = txtNinteiIchijiKanryoYMD;
     }
 
     @JsonProperty("txtNinteiNinteiYMD")
@@ -248,7 +249,7 @@ public class SogoShokaiNinteiInfoDiv extends Panel implements ISogoShokaiNinteiI
 
     @JsonProperty("txtNinteiNinteiYMD")
     public void setTxtNinteiNinteiYMD(TextBoxDate txtNinteiNinteiYMD) {
-        this.txtNinteiNinteiYMD=txtNinteiNinteiYMD;
+        this.txtNinteiNinteiYMD = txtNinteiNinteiYMD;
     }
 
     @JsonProperty("txtNinteiJotaiKubun")
@@ -258,7 +259,7 @@ public class SogoShokaiNinteiInfoDiv extends Panel implements ISogoShokaiNinteiI
 
     @JsonProperty("txtNinteiJotaiKubun")
     public void setTxtNinteiJotaiKubun(TextBox txtNinteiJotaiKubun) {
-        this.txtNinteiJotaiKubun=txtNinteiJotaiKubun;
+        this.txtNinteiJotaiKubun = txtNinteiJotaiKubun;
     }
 
     @JsonProperty("txtNinteiYukoKikan")
@@ -268,7 +269,7 @@ public class SogoShokaiNinteiInfoDiv extends Panel implements ISogoShokaiNinteiI
 
     @JsonProperty("txtNinteiYukoKikan")
     public void setTxtNinteiYukoKikan(TextBoxDateRange txtNinteiYukoKikan) {
-        this.txtNinteiYukoKikan=txtNinteiYukoKikan;
+        this.txtNinteiYukoKikan = txtNinteiYukoKikan;
     }
 
     @JsonProperty("txtNinteiIdoJiyu")
@@ -278,7 +279,7 @@ public class SogoShokaiNinteiInfoDiv extends Panel implements ISogoShokaiNinteiI
 
     @JsonProperty("txtNinteiIdoJiyu")
     public void setTxtNinteiIdoJiyu(TextBox txtNinteiIdoJiyu) {
-        this.txtNinteiIdoJiyu=txtNinteiIdoJiyu;
+        this.txtNinteiIdoJiyu = txtNinteiIdoJiyu;
     }
 
     @JsonProperty("txtNinteiIdoYMD")
@@ -288,7 +289,7 @@ public class SogoShokaiNinteiInfoDiv extends Panel implements ISogoShokaiNinteiI
 
     @JsonProperty("txtNinteiIdoYMD")
     public void setTxtNinteiIdoYMD(TextBoxDate txtNinteiIdoYMD) {
-        this.txtNinteiIdoYMD=txtNinteiIdoYMD;
+        this.txtNinteiIdoYMD = txtNinteiIdoYMD;
     }
 
     @JsonProperty("txtNinteiSoshitsuYMD")
@@ -298,7 +299,7 @@ public class SogoShokaiNinteiInfoDiv extends Panel implements ISogoShokaiNinteiI
 
     @JsonProperty("txtNinteiSoshitsuYMD")
     public void setTxtNinteiSoshitsuYMD(TextBoxDate txtNinteiSoshitsuYMD) {
-        this.txtNinteiSoshitsuYMD=txtNinteiSoshitsuYMD;
+        this.txtNinteiSoshitsuYMD = txtNinteiSoshitsuYMD;
     }
 
     @JsonProperty("txtNinteiTorikeshiRiyu")
@@ -308,7 +309,7 @@ public class SogoShokaiNinteiInfoDiv extends Panel implements ISogoShokaiNinteiI
 
     @JsonProperty("txtNinteiTorikeshiRiyu")
     public void setTxtNinteiTorikeshiRiyu(TextBox txtNinteiTorikeshiRiyu) {
-        this.txtNinteiTorikeshiRiyu=txtNinteiTorikeshiRiyu;
+        this.txtNinteiTorikeshiRiyu = txtNinteiTorikeshiRiyu;
     }
 
     @JsonProperty("txtNinteiTorikeshiYMD")
@@ -318,7 +319,7 @@ public class SogoShokaiNinteiInfoDiv extends Panel implements ISogoShokaiNinteiI
 
     @JsonProperty("txtNinteiTorikeshiYMD")
     public void setTxtNinteiTorikeshiYMD(TextBoxDate txtNinteiTorikeshiYMD) {
-        this.txtNinteiTorikeshiYMD=txtNinteiTorikeshiYMD;
+        this.txtNinteiTorikeshiYMD = txtNinteiTorikeshiYMD;
     }
 
     @JsonProperty("txtNinteiTokuteiShippei")
@@ -328,7 +329,7 @@ public class SogoShokaiNinteiInfoDiv extends Panel implements ISogoShokaiNinteiI
 
     @JsonProperty("txtNinteiTokuteiShippei")
     public void setTxtNinteiTokuteiShippei(TextBox txtNinteiTokuteiShippei) {
-        this.txtNinteiTokuteiShippei=txtNinteiTokuteiShippei;
+        this.txtNinteiTokuteiShippei = txtNinteiTokuteiShippei;
     }
 
     @JsonProperty("btnClose")
@@ -338,9 +339,8 @@ public class SogoShokaiNinteiInfoDiv extends Panel implements ISogoShokaiNinteiI
 
     @JsonProperty("btnClose")
     public void setBtnClose(Button btnClose) {
-        this.btnClose=btnClose;
+        this.btnClose = btnClose;
     }
 
     //--------------- この行より下にコードを追加してください -------------------
-
 }

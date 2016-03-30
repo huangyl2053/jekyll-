@@ -1,21 +1,20 @@
 package jp.co.ndensan.reams.db.dbz.divcontroller.entity.parentdiv;
-/**
- * このコードはツールによって生成されました。
- * このファイルへの変更は、再生成時には損失するため
- * 不正な動作の原因になります。
- */
-import jp.co.ndensan.reams.db.dbz.divcontroller.entity.parentdiv.ISogoShokaiKogakuKaigoServicehiInfoDiv;
-import com.fasterxml.jackson.annotation.JsonProperty;
-import jp.co.ndensan.reams.db.dbz.divcontroller.entity.parentdiv.SogoShokaiKogakuFurikomiDiv;
-import jp.co.ndensan.reams.db.dbz.divcontroller.entity.parentdiv.SogoShokaiKogakuKokuhorenKetteiDiv;
-import jp.co.ndensan.reams.db.dbz.divcontroller.entity.parentdiv.SogoShokaiKogakuKokuhorenSofuDiv;
-import jp.co.ndensan.reams.uz.uza.ui.binding.*;
-import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
-import jp.co.ndensan.reams.uz.uza.ui.binding.domain.*;
 
 /**
- * SogoShokaiKogakuKaigoServicehiInfo のクラスファイル 
- * 
+ * このコードはツールによって生成されました。 このファイルへの変更は、再生成時には損失するため 不正な動作の原因になります。
+ */
+import com.fasterxml.jackson.annotation.JsonProperty;
+import jp.co.ndensan.reams.uz.uza.ui.binding.Button;
+import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
+import jp.co.ndensan.reams.uz.uza.ui.binding.TextBox;
+import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxCode;
+import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxDate;
+import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxKana;
+import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxNum;
+
+/**
+ * SogoShokaiKogakuKaigoServicehiInfo のクラスファイル
+ *
  * @author 自動生成
  */
 public class SogoShokaiKogakuKaigoServicehiInfoDiv extends Panel implements ISogoShokaiKogakuKaigoServicehiInfoDiv {
@@ -25,6 +24,7 @@ public class SogoShokaiKogakuKaigoServicehiInfoDiv extends Panel implements ISog
      * コントロール名とフィールド名を取得する
      * private + コントロール名 + フィールド名 の文字列を作成
      */
+
     @JsonProperty("txtKogakuTeikyoYM")
     private TextBoxDate txtKogakuTeikyoYM;
     @JsonProperty("txtKogakuShinseiYMD")
@@ -83,7 +83,7 @@ public class SogoShokaiKogakuKaigoServicehiInfoDiv extends Panel implements ISog
 
     @JsonProperty("txtKogakuTeikyoYM")
     public void setTxtKogakuTeikyoYM(TextBoxDate txtKogakuTeikyoYM) {
-        this.txtKogakuTeikyoYM=txtKogakuTeikyoYM;
+        this.txtKogakuTeikyoYM = txtKogakuTeikyoYM;
     }
 
     @JsonProperty("txtKogakuShinseiYMD")
@@ -93,7 +93,7 @@ public class SogoShokaiKogakuKaigoServicehiInfoDiv extends Panel implements ISog
 
     @JsonProperty("txtKogakuShinseiYMD")
     public void setTxtKogakuShinseiYMD(TextBoxDate txtKogakuShinseiYMD) {
-        this.txtKogakuShinseiYMD=txtKogakuShinseiYMD;
+        this.txtKogakuShinseiYMD = txtKogakuShinseiYMD;
     }
 
     @JsonProperty("txtKogakuShiharaigaku")
@@ -103,7 +103,7 @@ public class SogoShokaiKogakuKaigoServicehiInfoDiv extends Panel implements ISog
 
     @JsonProperty("txtKogakuShiharaigaku")
     public void setTxtKogakuShiharaigaku(TextBoxNum txtKogakuShiharaigaku) {
-        this.txtKogakuShiharaigaku=txtKogakuShiharaigaku;
+        this.txtKogakuShiharaigaku = txtKogakuShiharaigaku;
     }
 
     @JsonProperty("txtKogakuShiharaiHoho")
@@ -113,7 +113,7 @@ public class SogoShokaiKogakuKaigoServicehiInfoDiv extends Panel implements ISog
 
     @JsonProperty("txtKogakuShiharaiHoho")
     public void setTxtKogakuShiharaiHoho(TextBox txtKogakuShiharaiHoho) {
-        this.txtKogakuShiharaiHoho=txtKogakuShiharaiHoho;
+        this.txtKogakuShiharaiHoho = txtKogakuShiharaiHoho;
     }
 
     @JsonProperty("txtKogakuKinyuKikanCode")
@@ -123,7 +123,7 @@ public class SogoShokaiKogakuKaigoServicehiInfoDiv extends Panel implements ISog
 
     @JsonProperty("txtKogakuKinyuKikanCode")
     public void setTxtKogakuKinyuKikanCode(TextBoxCode txtKogakuKinyuKikanCode) {
-        this.txtKogakuKinyuKikanCode=txtKogakuKinyuKikanCode;
+        this.txtKogakuKinyuKikanCode = txtKogakuKinyuKikanCode;
     }
 
     @JsonProperty("txtKogakuKinyuKikanName")
@@ -133,7 +133,7 @@ public class SogoShokaiKogakuKaigoServicehiInfoDiv extends Panel implements ISog
 
     @JsonProperty("txtKogakuKinyuKikanName")
     public void setTxtKogakuKinyuKikanName(TextBox txtKogakuKinyuKikanName) {
-        this.txtKogakuKinyuKikanName=txtKogakuKinyuKikanName;
+        this.txtKogakuKinyuKikanName = txtKogakuKinyuKikanName;
     }
 
     @JsonProperty("txtKogakuKozaShubetsu")
@@ -143,7 +143,7 @@ public class SogoShokaiKogakuKaigoServicehiInfoDiv extends Panel implements ISog
 
     @JsonProperty("txtKogakuKozaShubetsu")
     public void setTxtKogakuKozaShubetsu(TextBox txtKogakuKozaShubetsu) {
-        this.txtKogakuKozaShubetsu=txtKogakuKozaShubetsu;
+        this.txtKogakuKozaShubetsu = txtKogakuKozaShubetsu;
     }
 
     @JsonProperty("txtKogakuKozaMeiginin")
@@ -153,7 +153,7 @@ public class SogoShokaiKogakuKaigoServicehiInfoDiv extends Panel implements ISog
 
     @JsonProperty("txtKogakuKozaMeiginin")
     public void setTxtKogakuKozaMeiginin(TextBox txtKogakuKozaMeiginin) {
-        this.txtKogakuKozaMeiginin=txtKogakuKozaMeiginin;
+        this.txtKogakuKozaMeiginin = txtKogakuKozaMeiginin;
     }
 
     @JsonProperty("txtKogakuShitenCode")
@@ -163,7 +163,7 @@ public class SogoShokaiKogakuKaigoServicehiInfoDiv extends Panel implements ISog
 
     @JsonProperty("txtKogakuShitenCode")
     public void setTxtKogakuShitenCode(TextBoxCode txtKogakuShitenCode) {
-        this.txtKogakuShitenCode=txtKogakuShitenCode;
+        this.txtKogakuShitenCode = txtKogakuShitenCode;
     }
 
     @JsonProperty("txtKogakuShitenName")
@@ -173,7 +173,7 @@ public class SogoShokaiKogakuKaigoServicehiInfoDiv extends Panel implements ISog
 
     @JsonProperty("txtKogakuShitenName")
     public void setTxtKogakuShitenName(TextBox txtKogakuShitenName) {
-        this.txtKogakuShitenName=txtKogakuShitenName;
+        this.txtKogakuShitenName = txtKogakuShitenName;
     }
 
     @JsonProperty("txtKogakuKozaNo")
@@ -183,7 +183,7 @@ public class SogoShokaiKogakuKaigoServicehiInfoDiv extends Panel implements ISog
 
     @JsonProperty("txtKogakuKozaNo")
     public void setTxtKogakuKozaNo(TextBoxCode txtKogakuKozaNo) {
-        this.txtKogakuKozaNo=txtKogakuKozaNo;
+        this.txtKogakuKozaNo = txtKogakuKozaNo;
     }
 
     @JsonProperty("txtKogakuKozaMeigininKana")
@@ -193,7 +193,7 @@ public class SogoShokaiKogakuKaigoServicehiInfoDiv extends Panel implements ISog
 
     @JsonProperty("txtKogakuKozaMeigininKana")
     public void setTxtKogakuKozaMeigininKana(TextBoxKana txtKogakuKozaMeigininKana) {
-        this.txtKogakuKozaMeigininKana=txtKogakuKozaMeigininKana;
+        this.txtKogakuKozaMeigininKana = txtKogakuKozaMeigininKana;
     }
 
     @JsonProperty("txtKogakuKetteiYMD")
@@ -203,7 +203,7 @@ public class SogoShokaiKogakuKaigoServicehiInfoDiv extends Panel implements ISog
 
     @JsonProperty("txtKogakuKetteiYMD")
     public void setTxtKogakuKetteiYMD(TextBoxDate txtKogakuKetteiYMD) {
-        this.txtKogakuKetteiYMD=txtKogakuKetteiYMD;
+        this.txtKogakuKetteiYMD = txtKogakuKetteiYMD;
     }
 
     @JsonProperty("txtKogakuShikyuKubun")
@@ -213,7 +213,7 @@ public class SogoShokaiKogakuKaigoServicehiInfoDiv extends Panel implements ISog
 
     @JsonProperty("txtKogakuShikyuKubun")
     public void setTxtKogakuShikyuKubun(TextBox txtKogakuShikyuKubun) {
-        this.txtKogakuShikyuKubun=txtKogakuShikyuKubun;
+        this.txtKogakuShikyuKubun = txtKogakuShikyuKubun;
     }
 
     @JsonProperty("txtKogakuShikyugaku")
@@ -223,7 +223,7 @@ public class SogoShokaiKogakuKaigoServicehiInfoDiv extends Panel implements ISog
 
     @JsonProperty("txtKogakuShikyugaku")
     public void setTxtKogakuShikyugaku(TextBoxNum txtKogakuShikyugaku) {
-        this.txtKogakuShikyugaku=txtKogakuShikyugaku;
+        this.txtKogakuShikyugaku = txtKogakuShikyugaku;
     }
 
     @JsonProperty("txtKogakuFushikyuRiyu")
@@ -233,7 +233,7 @@ public class SogoShokaiKogakuKaigoServicehiInfoDiv extends Panel implements ISog
 
     @JsonProperty("txtKogakuFushikyuRiyu")
     public void setTxtKogakuFushikyuRiyu(TextBox txtKogakuFushikyuRiyu) {
-        this.txtKogakuFushikyuRiyu=txtKogakuFushikyuRiyu;
+        this.txtKogakuFushikyuRiyu = txtKogakuFushikyuRiyu;
     }
 
     @JsonProperty("txtKogakuSetaiShuyakuNo")
@@ -243,7 +243,7 @@ public class SogoShokaiKogakuKaigoServicehiInfoDiv extends Panel implements ISog
 
     @JsonProperty("txtKogakuSetaiShuyakuNo")
     public void setTxtKogakuSetaiShuyakuNo(TextBox txtKogakuSetaiShuyakuNo) {
-        this.txtKogakuSetaiShuyakuNo=txtKogakuSetaiShuyakuNo;
+        this.txtKogakuSetaiShuyakuNo = txtKogakuSetaiShuyakuNo;
     }
 
     @JsonProperty("SogoShokaiKogakuKokuhorenKettei")
@@ -253,7 +253,7 @@ public class SogoShokaiKogakuKaigoServicehiInfoDiv extends Panel implements ISog
 
     @JsonProperty("SogoShokaiKogakuKokuhorenKettei")
     public void setSogoShokaiKogakuKokuhorenKettei(SogoShokaiKogakuKokuhorenKetteiDiv SogoShokaiKogakuKokuhorenKettei) {
-        this.SogoShokaiKogakuKokuhorenKettei=SogoShokaiKogakuKokuhorenKettei;
+        this.SogoShokaiKogakuKokuhorenKettei = SogoShokaiKogakuKokuhorenKettei;
     }
 
     @JsonProperty("txtKogakuTsuchishoSakuseiYMD")
@@ -263,7 +263,7 @@ public class SogoShokaiKogakuKaigoServicehiInfoDiv extends Panel implements ISog
 
     @JsonProperty("txtKogakuTsuchishoSakuseiYMD")
     public void setTxtKogakuTsuchishoSakuseiYMD(TextBoxDate txtKogakuTsuchishoSakuseiYMD) {
-        this.txtKogakuTsuchishoSakuseiYMD=txtKogakuTsuchishoSakuseiYMD;
+        this.txtKogakuTsuchishoSakuseiYMD = txtKogakuTsuchishoSakuseiYMD;
     }
 
     @JsonProperty("SogoShokaiKogakuFurikomi")
@@ -273,7 +273,7 @@ public class SogoShokaiKogakuKaigoServicehiInfoDiv extends Panel implements ISog
 
     @JsonProperty("SogoShokaiKogakuFurikomi")
     public void setSogoShokaiKogakuFurikomi(SogoShokaiKogakuFurikomiDiv SogoShokaiKogakuFurikomi) {
-        this.SogoShokaiKogakuFurikomi=SogoShokaiKogakuFurikomi;
+        this.SogoShokaiKogakuFurikomi = SogoShokaiKogakuFurikomi;
     }
 
     @JsonProperty("SogoShokaiKogakuKokuhorenSofu")
@@ -283,7 +283,7 @@ public class SogoShokaiKogakuKaigoServicehiInfoDiv extends Panel implements ISog
 
     @JsonProperty("SogoShokaiKogakuKokuhorenSofu")
     public void setSogoShokaiKogakuKokuhorenSofu(SogoShokaiKogakuKokuhorenSofuDiv SogoShokaiKogakuKokuhorenSofu) {
-        this.SogoShokaiKogakuKokuhorenSofu=SogoShokaiKogakuKokuhorenSofu;
+        this.SogoShokaiKogakuKokuhorenSofu = SogoShokaiKogakuKokuhorenSofu;
     }
 
     @JsonProperty("btnClose")
@@ -293,9 +293,8 @@ public class SogoShokaiKogakuKaigoServicehiInfoDiv extends Panel implements ISog
 
     @JsonProperty("btnClose")
     public void setBtnClose(Button btnClose) {
-        this.btnClose=btnClose;
+        this.btnClose = btnClose;
     }
 
     //--------------- この行より下にコードを追加してください -------------------
-
 }

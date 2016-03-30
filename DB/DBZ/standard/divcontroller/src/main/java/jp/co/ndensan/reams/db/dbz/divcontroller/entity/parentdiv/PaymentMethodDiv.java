@@ -1,22 +1,17 @@
 package jp.co.ndensan.reams.db.dbz.divcontroller.entity.parentdiv;
-/**
- * このコードはツールによって生成されました。
- * このファイルへの変更は、再生成時には損失するため
- * 不正な動作の原因になります。
- */
-import jp.co.ndensan.reams.db.dbz.divcontroller.entity.parentdiv.IPaymentMethodDiv;
-import com.fasterxml.jackson.annotation.JsonProperty;
-import jp.co.ndensan.reams.db.dbz.divcontroller.entity.parentdiv.JuryoininJohoDiv;
-import jp.co.ndensan.reams.db.dbz.divcontroller.entity.parentdiv.KozaPayment.IKozaPaymentDiv;
-import jp.co.ndensan.reams.db.dbz.divcontroller.entity.parentdiv.KozaPayment.KozaPaymentDiv;
-import jp.co.ndensan.reams.db.dbz.divcontroller.entity.parentdiv.MadoguchiPaymentDiv;
-import jp.co.ndensan.reams.uz.uza.ui.binding.*;
-import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
-import jp.co.ndensan.reams.uz.uza.ui.binding.domain.*;
 
 /**
- * PaymentMethod のクラスファイル 
- * 
+ * このコードはツールによって生成されました。 このファイルへの変更は、再生成時には損失するため 不正な動作の原因になります。
+ */
+import com.fasterxml.jackson.annotation.JsonProperty;
+import jp.co.ndensan.reams.db.dbz.divcontroller.entity.parentdiv.KozaPayment.IKozaPaymentDiv;
+import jp.co.ndensan.reams.db.dbz.divcontroller.entity.parentdiv.KozaPayment.KozaPaymentDiv;
+import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
+import jp.co.ndensan.reams.uz.uza.ui.binding.RadioButton;
+
+/**
+ * PaymentMethod のクラスファイル
+ *
  * @author 自動生成
  */
 public class PaymentMethodDiv extends Panel implements IPaymentMethodDiv {
@@ -26,6 +21,7 @@ public class PaymentMethodDiv extends Panel implements IPaymentMethodDiv {
      * コントロール名とフィールド名を取得する
      * private + コントロール名 + フィールド名 の文字列を作成
      */
+
     @JsonProperty("radPayMethod1")
     private RadioButton radPayMethod1;
     @JsonProperty("JuryoininJoho")
@@ -52,7 +48,7 @@ public class PaymentMethodDiv extends Panel implements IPaymentMethodDiv {
 
     @JsonProperty("radPayMethod1")
     public void setRadPayMethod1(RadioButton radPayMethod1) {
-        this.radPayMethod1=radPayMethod1;
+        this.radPayMethod1 = radPayMethod1;
     }
 
     @JsonProperty("JuryoininJoho")
@@ -62,7 +58,7 @@ public class PaymentMethodDiv extends Panel implements IPaymentMethodDiv {
 
     @JsonProperty("JuryoininJoho")
     public void setJuryoininJoho(JuryoininJohoDiv JuryoininJoho) {
-        this.JuryoininJoho=JuryoininJoho;
+        this.JuryoininJoho = JuryoininJoho;
     }
 
     @JsonProperty("radPayMethod2")
@@ -72,7 +68,7 @@ public class PaymentMethodDiv extends Panel implements IPaymentMethodDiv {
 
     @JsonProperty("radPayMethod2")
     public void setRadPayMethod2(RadioButton radPayMethod2) {
-        this.radPayMethod2=radPayMethod2;
+        this.radPayMethod2 = radPayMethod2;
     }
 
     @JsonProperty("KozaPayment")
@@ -87,7 +83,7 @@ public class PaymentMethodDiv extends Panel implements IPaymentMethodDiv {
 
     @JsonProperty("radPayMethod3")
     public void setRadPayMethod3(RadioButton radPayMethod3) {
-        this.radPayMethod3=radPayMethod3;
+        this.radPayMethod3 = radPayMethod3;
     }
 
     @JsonProperty("MadoguchiPayment")
@@ -97,9 +93,8 @@ public class PaymentMethodDiv extends Panel implements IPaymentMethodDiv {
 
     @JsonProperty("MadoguchiPayment")
     public void setMadoguchiPayment(MadoguchiPaymentDiv MadoguchiPayment) {
-        this.MadoguchiPayment=MadoguchiPayment;
+        this.MadoguchiPayment = MadoguchiPayment;
     }
 
     //--------------- この行より下にコードを追加してください -------------------
-
 }

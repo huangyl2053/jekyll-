@@ -1,21 +1,22 @@
 package jp.co.ndensan.reams.db.dbz.divcontroller.entity.parentdiv;
-/**
- * このコードはツールによって生成されました。
- * このファイルへの変更は、再生成時には損失するため
- * 不正な動作の原因になります。
- */
-import jp.co.ndensan.reams.db.dbz.divcontroller.entity.parentdiv.ITainoInfoDiv;
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonProperty;
-import jp.co.ndensan.reams.db.dbz.divcontroller.entity.parentdiv.TainoSetsumeiDiv;
-import jp.co.ndensan.reams.db.dbz.divcontroller.entity.parentdiv.TainocolorKannoDiv;
-import jp.co.ndensan.reams.uz.uza.ui.binding.*;
-import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
-import jp.co.ndensan.reams.uz.uza.ui.binding.domain.*;
 
 /**
- * TainoInfo のクラスファイル 
- * 
+ * このコードはツールによって生成されました。 このファイルへの変更は、再生成時には損失するため 不正な動作の原因になります。
+ */
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import jp.co.ndensan.reams.uz.uza.ui.binding.Button;
+import jp.co.ndensan.reams.uz.uza.ui.binding.DataGrid;
+import jp.co.ndensan.reams.uz.uza.ui.binding.HorizontalLine;
+import jp.co.ndensan.reams.uz.uza.ui.binding.Label;
+import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
+import jp.co.ndensan.reams.uz.uza.ui.binding.TextBox;
+import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxDate;
+import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxNum;
+
+/**
+ * TainoInfo のクラスファイル
+ *
  * @author 自動生成
  */
 public class TainoInfoDiv extends Panel implements ITainoInfoDiv {
@@ -25,6 +26,7 @@ public class TainoInfoDiv extends Panel implements ITainoInfoDiv {
      * コントロール名とフィールド名を取得する
      * private + コントロール名 + フィールド名 の文字列を作成
      */
+
     @JsonProperty("txtHanteiKijunYMD")
     private TextBoxDate txtHanteiKijunYMD;
     @JsonProperty("btnKensaku")
@@ -71,7 +73,7 @@ public class TainoInfoDiv extends Panel implements ITainoInfoDiv {
 
     @JsonProperty("txtHanteiKijunYMD")
     public void setTxtHanteiKijunYMD(TextBoxDate txtHanteiKijunYMD) {
-        this.txtHanteiKijunYMD=txtHanteiKijunYMD;
+        this.txtHanteiKijunYMD = txtHanteiKijunYMD;
     }
 
     @JsonProperty("btnKensaku")
@@ -81,7 +83,7 @@ public class TainoInfoDiv extends Panel implements ITainoInfoDiv {
 
     @JsonProperty("btnKensaku")
     public void setBtnKensaku(Button btnKensaku) {
-        this.btnKensaku=btnKensaku;
+        this.btnKensaku = btnKensaku;
     }
 
     @JsonProperty("btnGengakuJoho")
@@ -91,7 +93,7 @@ public class TainoInfoDiv extends Panel implements ITainoInfoDiv {
 
     @JsonProperty("btnGengakuJoho")
     public void setBtnGengakuJoho(Button btnGengakuJoho) {
-        this.btnGengakuJoho=btnGengakuJoho;
+        this.btnGengakuJoho = btnGengakuJoho;
     }
 
     @JsonProperty("txtSaikoNokigen")
@@ -101,7 +103,7 @@ public class TainoInfoDiv extends Panel implements ITainoInfoDiv {
 
     @JsonProperty("txtSaikoNokigen")
     public void setTxtSaikoNokigen(TextBoxDate txtSaikoNokigen) {
-        this.txtSaikoNokigen=txtSaikoNokigen;
+        this.txtSaikoNokigen = txtSaikoNokigen;
     }
 
     @JsonProperty("txtKeikaNen")
@@ -111,7 +113,7 @@ public class TainoInfoDiv extends Panel implements ITainoInfoDiv {
 
     @JsonProperty("txtKeikaNen")
     public void setTxtKeikaNen(TextBox txtKeikaNen) {
-        this.txtKeikaNen=txtKeikaNen;
+        this.txtKeikaNen = txtKeikaNen;
     }
 
     @JsonProperty("txtKeikaTsuki")
@@ -121,7 +123,7 @@ public class TainoInfoDiv extends Panel implements ITainoInfoDiv {
 
     @JsonProperty("txtKeikaTsuki")
     public void setTxtKeikaTsuki(TextBox txtKeikaTsuki) {
-        this.txtKeikaTsuki=txtKeikaTsuki;
+        this.txtKeikaTsuki = txtKeikaTsuki;
     }
 
     @JsonProperty("linTaino1")
@@ -131,7 +133,7 @@ public class TainoInfoDiv extends Panel implements ITainoInfoDiv {
 
     @JsonProperty("linTaino1")
     public void setLinTaino1(HorizontalLine linTaino1) {
-        this.linTaino1=linTaino1;
+        this.linTaino1 = linTaino1;
     }
 
     @JsonProperty("txtHokenryoNendo1")
@@ -141,7 +143,7 @@ public class TainoInfoDiv extends Panel implements ITainoInfoDiv {
 
     @JsonProperty("txtHokenryoNendo1")
     public void setTxtHokenryoNendo1(TextBox txtHokenryoNendo1) {
-        this.txtHokenryoNendo1=txtHokenryoNendo1;
+        this.txtHokenryoNendo1 = txtHokenryoNendo1;
     }
 
     @JsonProperty("txtHokenryoNendo2")
@@ -151,7 +153,7 @@ public class TainoInfoDiv extends Panel implements ITainoInfoDiv {
 
     @JsonProperty("txtHokenryoNendo2")
     public void setTxtHokenryoNendo2(TextBox txtHokenryoNendo2) {
-        this.txtHokenryoNendo2=txtHokenryoNendo2;
+        this.txtHokenryoNendo2 = txtHokenryoNendo2;
     }
 
     @JsonProperty("txtHokenryoNendo3")
@@ -161,7 +163,7 @@ public class TainoInfoDiv extends Panel implements ITainoInfoDiv {
 
     @JsonProperty("txtHokenryoNendo3")
     public void setTxtHokenryoNendo3(TextBox txtHokenryoNendo3) {
-        this.txtHokenryoNendo3=txtHokenryoNendo3;
+        this.txtHokenryoNendo3 = txtHokenryoNendo3;
     }
 
     @JsonProperty("dgTainoJokyo1")
@@ -171,7 +173,7 @@ public class TainoInfoDiv extends Panel implements ITainoInfoDiv {
 
     @JsonProperty("dgTainoJokyo1")
     public void setDgTainoJokyo1(DataGrid<dgTainoJokyo1_Row> dgTainoJokyo1) {
-        this.dgTainoJokyo1=dgTainoJokyo1;
+        this.dgTainoJokyo1 = dgTainoJokyo1;
     }
 
     @JsonProperty("dgTainoJokyo2")
@@ -181,7 +183,7 @@ public class TainoInfoDiv extends Panel implements ITainoInfoDiv {
 
     @JsonProperty("dgTainoJokyo2")
     public void setDgTainoJokyo2(DataGrid<dgTainoJokyo2_Row> dgTainoJokyo2) {
-        this.dgTainoJokyo2=dgTainoJokyo2;
+        this.dgTainoJokyo2 = dgTainoJokyo2;
     }
 
     @JsonProperty("dgTainoJokyo3")
@@ -191,7 +193,7 @@ public class TainoInfoDiv extends Panel implements ITainoInfoDiv {
 
     @JsonProperty("dgTainoJokyo3")
     public void setDgTainoJokyo3(DataGrid<dgTainoJokyo3_Row> dgTainoJokyo3) {
-        this.dgTainoJokyo3=dgTainoJokyo3;
+        this.dgTainoJokyo3 = dgTainoJokyo3;
     }
 
     @JsonProperty("txtSonotaHokenryo")
@@ -201,7 +203,7 @@ public class TainoInfoDiv extends Panel implements ITainoInfoDiv {
 
     @JsonProperty("txtSonotaHokenryo")
     public void setTxtSonotaHokenryo(TextBoxNum txtSonotaHokenryo) {
-        this.txtSonotaHokenryo=txtSonotaHokenryo;
+        this.txtSonotaHokenryo = txtSonotaHokenryo;
     }
 
     @JsonProperty("txtSonotatainoGaku")
@@ -211,7 +213,7 @@ public class TainoInfoDiv extends Panel implements ITainoInfoDiv {
 
     @JsonProperty("txtSonotatainoGaku")
     public void setTxtSonotatainoGaku(TextBoxNum txtSonotatainoGaku) {
-        this.txtSonotatainoGaku=txtSonotatainoGaku;
+        this.txtSonotatainoGaku = txtSonotatainoGaku;
     }
 
     @JsonProperty("TainoSetsumei")
@@ -221,7 +223,7 @@ public class TainoInfoDiv extends Panel implements ITainoInfoDiv {
 
     @JsonProperty("TainoSetsumei")
     public void setTainoSetsumei(TainoSetsumeiDiv TainoSetsumei) {
-        this.TainoSetsumei=TainoSetsumei;
+        this.TainoSetsumei = TainoSetsumei;
     }
 
     /*
@@ -288,5 +290,4 @@ public class TainoInfoDiv extends Panel implements ITainoInfoDiv {
     }
 
     //--------------- この行より下にコードを追加してください -------------------
-
 }

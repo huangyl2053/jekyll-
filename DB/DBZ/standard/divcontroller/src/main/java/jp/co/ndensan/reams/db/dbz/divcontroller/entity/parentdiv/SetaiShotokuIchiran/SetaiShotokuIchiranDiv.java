@@ -1,18 +1,22 @@
 package jp.co.ndensan.reams.db.dbz.divcontroller.entity.parentdiv.SetaiShotokuIchiran;
-/**
- * このコードはツールによって生成されました。
- * このファイルへの変更は、再生成時には損失するため
- * 不正な動作の原因になります。
- */
-import com.fasterxml.jackson.annotation.JsonProperty;
-import jp.co.ndensan.reams.db.dbz.divcontroller.entity.parentdiv.SetaiShotokuIchiran.dgSetaiShotoku_Row;
-import jp.co.ndensan.reams.uz.uza.ui.binding.*;
-import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
-import jp.co.ndensan.reams.uz.uza.ui.binding.domain.*;
 
 /**
- * SetaiShotokuIchiran のクラスファイル 
- * 
+ * このコードはツールによって生成されました。 このファイルへの変更は、再生成時には損失するため 不正な動作の原因になります。
+ */
+import com.fasterxml.jackson.annotation.JsonProperty;
+import jp.co.ndensan.reams.uz.uza.ui.binding.Button;
+import jp.co.ndensan.reams.uz.uza.ui.binding.CheckBoxList;
+import jp.co.ndensan.reams.uz.uza.ui.binding.DataGrid;
+import jp.co.ndensan.reams.uz.uza.ui.binding.DropDownList;
+import jp.co.ndensan.reams.uz.uza.ui.binding.Label;
+import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
+import jp.co.ndensan.reams.uz.uza.ui.binding.TextBox;
+import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxCode;
+import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxDate;
+
+/**
+ * SetaiShotokuIchiran のクラスファイル
+ *
  * @author 自動生成
  */
 public class SetaiShotokuIchiranDiv extends Panel {
@@ -22,6 +26,7 @@ public class SetaiShotokuIchiranDiv extends Panel {
      * コントロール名とフィールド名を取得する
      * private + コントロール名 + フィールド名 の文字列を作成
      */
+
     @JsonProperty("txtSetaiIchiranKijunYMD")
     private TextBoxDate txtSetaiIchiranKijunYMD;
     @JsonProperty("txtSetaiIchiranKazeiNendo")
@@ -54,7 +59,7 @@ public class SetaiShotokuIchiranDiv extends Panel {
 
     @JsonProperty("txtSetaiIchiranKijunYMD")
     public void setTxtSetaiIchiranKijunYMD(TextBoxDate txtSetaiIchiranKijunYMD) {
-        this.txtSetaiIchiranKijunYMD=txtSetaiIchiranKijunYMD;
+        this.txtSetaiIchiranKijunYMD = txtSetaiIchiranKijunYMD;
     }
 
     @JsonProperty("txtSetaiIchiranKazeiNendo")
@@ -64,7 +69,7 @@ public class SetaiShotokuIchiranDiv extends Panel {
 
     @JsonProperty("txtSetaiIchiranKazeiNendo")
     public void setTxtSetaiIchiranKazeiNendo(TextBox txtSetaiIchiranKazeiNendo) {
-        this.txtSetaiIchiranKazeiNendo=txtSetaiIchiranKazeiNendo;
+        this.txtSetaiIchiranKazeiNendo = txtSetaiIchiranKazeiNendo;
     }
 
     @JsonProperty("ddlSetaiIchiranKazeiNendo")
@@ -74,7 +79,7 @@ public class SetaiShotokuIchiranDiv extends Panel {
 
     @JsonProperty("ddlSetaiIchiranKazeiNendo")
     public void setDdlSetaiIchiranKazeiNendo(DropDownList ddlSetaiIchiranKazeiNendo) {
-        this.ddlSetaiIchiranKazeiNendo=ddlSetaiIchiranKazeiNendo;
+        this.ddlSetaiIchiranKazeiNendo = ddlSetaiIchiranKazeiNendo;
     }
 
     @JsonProperty("btnSaiHyoji")
@@ -84,7 +89,7 @@ public class SetaiShotokuIchiranDiv extends Panel {
 
     @JsonProperty("btnSaiHyoji")
     public void setBtnSaiHyoji(Button btnSaiHyoji) {
-        this.btnSaiHyoji=btnSaiHyoji;
+        this.btnSaiHyoji = btnSaiHyoji;
     }
 
     @JsonProperty("txtSetaiIchiranSetaiCode")
@@ -94,7 +99,7 @@ public class SetaiShotokuIchiranDiv extends Panel {
 
     @JsonProperty("txtSetaiIchiranSetaiCode")
     public void setTxtSetaiIchiranSetaiCode(TextBoxCode txtSetaiIchiranSetaiCode) {
-        this.txtSetaiIchiranSetaiCode=txtSetaiIchiranSetaiCode;
+        this.txtSetaiIchiranSetaiCode = txtSetaiIchiranSetaiCode;
     }
 
     @JsonProperty("chkSetaiIchiranAll")
@@ -104,7 +109,7 @@ public class SetaiShotokuIchiranDiv extends Panel {
 
     @JsonProperty("chkSetaiIchiranAll")
     public void setChkSetaiIchiranAll(CheckBoxList chkSetaiIchiranAll) {
-        this.chkSetaiIchiranAll=chkSetaiIchiranAll;
+        this.chkSetaiIchiranAll = chkSetaiIchiranAll;
     }
 
     @JsonProperty("lblSetaiIchiranMsg")
@@ -114,7 +119,7 @@ public class SetaiShotokuIchiranDiv extends Panel {
 
     @JsonProperty("lblSetaiIchiranMsg")
     public void setLblSetaiIchiranMsg(Label lblSetaiIchiranMsg) {
-        this.lblSetaiIchiranMsg=lblSetaiIchiranMsg;
+        this.lblSetaiIchiranMsg = lblSetaiIchiranMsg;
     }
 
     @JsonProperty("btnNarabeteHyoji")
@@ -124,7 +129,7 @@ public class SetaiShotokuIchiranDiv extends Panel {
 
     @JsonProperty("btnNarabeteHyoji")
     public void setBtnNarabeteHyoji(Button btnNarabeteHyoji) {
-        this.btnNarabeteHyoji=btnNarabeteHyoji;
+        this.btnNarabeteHyoji = btnNarabeteHyoji;
     }
 
     @JsonProperty("dgSetaiShotoku")
@@ -134,7 +139,7 @@ public class SetaiShotokuIchiranDiv extends Panel {
 
     @JsonProperty("dgSetaiShotoku")
     public void setDgSetaiShotoku(DataGrid<dgSetaiShotoku_Row> dgSetaiShotoku) {
-        this.dgSetaiShotoku=dgSetaiShotoku;
+        this.dgSetaiShotoku = dgSetaiShotoku;
     }
 
 }

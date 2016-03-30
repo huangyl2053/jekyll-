@@ -1,20 +1,18 @@
 package jp.co.ndensan.reams.db.dbz.divcontroller.entity.parentdiv;
-/**
- * このコードはツールによって生成されました。
- * このファイルへの変更は、再生成時には損失するため
- * 不正な動作の原因になります。
- */
-import jp.co.ndensan.reams.db.dbz.divcontroller.entity.parentdiv.IServiceInputGuideDiv;
-import com.fasterxml.jackson.annotation.JsonProperty;
-import jp.co.ndensan.reams.db.dbz.divcontroller.entity.parentdiv.SearchResultServiceDiv;
-import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.ui.binding.*;
-import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
-import jp.co.ndensan.reams.uz.uza.ui.binding.domain.*;
 
 /**
- * ServiceInputGuide のクラスファイル 
- * 
+ * このコードはツールによって生成されました。 このファイルへの変更は、再生成時には損失するため 不正な動作の原因になります。
+ */
+import com.fasterxml.jackson.annotation.JsonProperty;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.ui.binding.Button;
+import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
+import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxCode;
+import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxDate;
+
+/**
+ * ServiceInputGuide のクラスファイル
+ *
  * @author 自動生成
  */
 public class ServiceInputGuideDiv extends Panel implements IServiceInputGuideDiv {
@@ -24,6 +22,7 @@ public class ServiceInputGuideDiv extends Panel implements IServiceInputGuideDiv
      * コントロール名とフィールド名を取得する
      * private + コントロール名 + フィールド名 の文字列を作成
      */
+
     @JsonProperty("txtServiceShuruiCode")
     private TextBoxCode txtServiceShuruiCode;
     @JsonProperty("txtServiceCode")
@@ -58,7 +57,7 @@ public class ServiceInputGuideDiv extends Panel implements IServiceInputGuideDiv
 
     @JsonProperty("txtServiceShuruiCode")
     public void setTxtServiceShuruiCode(TextBoxCode txtServiceShuruiCode) {
-        this.txtServiceShuruiCode=txtServiceShuruiCode;
+        this.txtServiceShuruiCode = txtServiceShuruiCode;
     }
 
     @JsonProperty("txtServiceCode")
@@ -68,7 +67,7 @@ public class ServiceInputGuideDiv extends Panel implements IServiceInputGuideDiv
 
     @JsonProperty("txtServiceCode")
     public void setTxtServiceCode(TextBoxCode txtServiceCode) {
-        this.txtServiceCode=txtServiceCode;
+        this.txtServiceCode = txtServiceCode;
     }
 
     @JsonProperty("txtKijyunYM")
@@ -78,7 +77,7 @@ public class ServiceInputGuideDiv extends Panel implements IServiceInputGuideDiv
 
     @JsonProperty("txtKijyunYM")
     public void setTxtKijyunYM(TextBoxDate txtKijyunYM) {
-        this.txtKijyunYM=txtKijyunYM;
+        this.txtKijyunYM = txtKijyunYM;
     }
 
     @JsonProperty("btnSearchJService")
@@ -88,7 +87,7 @@ public class ServiceInputGuideDiv extends Panel implements IServiceInputGuideDiv
 
     @JsonProperty("btnSearchJService")
     public void setBtnSearchJService(Button btnSearchJService) {
-        this.btnSearchJService=btnSearchJService;
+        this.btnSearchJService = btnSearchJService;
     }
 
     @JsonProperty("SearchResultService")
@@ -98,7 +97,7 @@ public class ServiceInputGuideDiv extends Panel implements IServiceInputGuideDiv
 
     @JsonProperty("SearchResultService")
     public void setSearchResultService(SearchResultServiceDiv SearchResultService) {
-        this.SearchResultService=SearchResultService;
+        this.SearchResultService = SearchResultService;
     }
 
     @JsonProperty("btnServiceInputGuideReturn")
@@ -108,7 +107,7 @@ public class ServiceInputGuideDiv extends Panel implements IServiceInputGuideDiv
 
     @JsonProperty("btnServiceInputGuideReturn")
     public void setBtnServiceInputGuideReturn(Button btnServiceInputGuideReturn) {
-        this.btnServiceInputGuideReturn=btnServiceInputGuideReturn;
+        this.btnServiceInputGuideReturn = btnServiceInputGuideReturn;
     }
 
     @JsonProperty("serviceCode")
@@ -118,7 +117,7 @@ public class ServiceInputGuideDiv extends Panel implements IServiceInputGuideDiv
 
     @JsonProperty("serviceCode")
     public void setServiceCode(RString serviceCode) {
-        this.serviceCode=serviceCode;
+        this.serviceCode = serviceCode;
     }
 
     @JsonProperty("serviceMeisho")
@@ -128,7 +127,7 @@ public class ServiceInputGuideDiv extends Panel implements IServiceInputGuideDiv
 
     @JsonProperty("serviceMeisho")
     public void setServiceMeisho(RString serviceMeisho) {
-        this.serviceMeisho=serviceMeisho;
+        this.serviceMeisho = serviceMeisho;
     }
 
     @JsonProperty("serviceTaishoYM")
@@ -138,7 +137,7 @@ public class ServiceInputGuideDiv extends Panel implements IServiceInputGuideDiv
 
     @JsonProperty("serviceTaishoYM")
     public void setServiceTaishoYM(RString serviceTaishoYM) {
-        this.serviceTaishoYM=serviceTaishoYM;
+        this.serviceTaishoYM = serviceTaishoYM;
     }
 
     @JsonProperty("serviceCodeMeisho")
@@ -148,9 +147,8 @@ public class ServiceInputGuideDiv extends Panel implements IServiceInputGuideDiv
 
     @JsonProperty("serviceCodeMeisho")
     public void setServiceCodeMeisho(RString serviceCodeMeisho) {
-        this.serviceCodeMeisho=serviceCodeMeisho;
+        this.serviceCodeMeisho = serviceCodeMeisho;
     }
 
     //--------------- この行より下にコードを追加してください -------------------
-
 }

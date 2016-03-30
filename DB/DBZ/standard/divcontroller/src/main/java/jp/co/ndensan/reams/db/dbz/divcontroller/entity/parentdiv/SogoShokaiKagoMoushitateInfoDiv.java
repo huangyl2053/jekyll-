@@ -1,20 +1,18 @@
 package jp.co.ndensan.reams.db.dbz.divcontroller.entity.parentdiv;
-/**
- * このコードはツールによって生成されました。
- * このファイルへの変更は、再生成時には損失するため
- * 不正な動作の原因になります。
- */
-import jp.co.ndensan.reams.db.dbz.divcontroller.entity.parentdiv.ISogoShokaiKagoMoushitateInfoDiv;
-import com.fasterxml.jackson.annotation.JsonProperty;
-import jp.co.ndensan.reams.db.dbz.divcontroller.entity.parentdiv.SogoShokaiKagoMoshitateJiyuDiv;
-import jp.co.ndensan.reams.db.dbz.divcontroller.entity.parentdiv.SogoShokaiKagoMoshitateKekkaDiv;
-import jp.co.ndensan.reams.uz.uza.ui.binding.*;
-import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
-import jp.co.ndensan.reams.uz.uza.ui.binding.domain.*;
 
 /**
- * SogoShokaiKagoMoushitateInfo のクラスファイル 
- * 
+ * このコードはツールによって生成されました。 このファイルへの変更は、再生成時には損失するため 不正な動作の原因になります。
+ */
+import com.fasterxml.jackson.annotation.JsonProperty;
+import jp.co.ndensan.reams.uz.uza.ui.binding.Button;
+import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
+import jp.co.ndensan.reams.uz.uza.ui.binding.TextBox;
+import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxCode;
+import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxDate;
+
+/**
+ * SogoShokaiKagoMoushitateInfo のクラスファイル
+ *
  * @author 自動生成
  */
 public class SogoShokaiKagoMoushitateInfoDiv extends Panel implements ISogoShokaiKagoMoushitateInfoDiv {
@@ -24,6 +22,7 @@ public class SogoShokaiKagoMoushitateInfoDiv extends Panel implements ISogoShoka
      * コントロール名とフィールド名を取得する
      * private + コントロール名 + フィールド名 の文字列を作成
      */
+
     @JsonProperty("txtKagoTaishoYM")
     private TextBoxDate txtKagoTaishoYM;
     @JsonProperty("txtKagoMoshitateYMD")
@@ -56,7 +55,7 @@ public class SogoShokaiKagoMoushitateInfoDiv extends Panel implements ISogoShoka
 
     @JsonProperty("txtKagoTaishoYM")
     public void setTxtKagoTaishoYM(TextBoxDate txtKagoTaishoYM) {
-        this.txtKagoTaishoYM=txtKagoTaishoYM;
+        this.txtKagoTaishoYM = txtKagoTaishoYM;
     }
 
     @JsonProperty("txtKagoMoshitateYMD")
@@ -66,7 +65,7 @@ public class SogoShokaiKagoMoushitateInfoDiv extends Panel implements ISogoShoka
 
     @JsonProperty("txtKagoMoshitateYMD")
     public void setTxtKagoMoshitateYMD(TextBoxDate txtKagoMoshitateYMD) {
-        this.txtKagoMoshitateYMD=txtKagoMoshitateYMD;
+        this.txtKagoMoshitateYMD = txtKagoMoshitateYMD;
     }
 
     @JsonProperty("txtKagoTeikyoYM")
@@ -76,7 +75,7 @@ public class SogoShokaiKagoMoushitateInfoDiv extends Panel implements ISogoShoka
 
     @JsonProperty("txtKagoTeikyoYM")
     public void setTxtKagoTeikyoYM(TextBoxDate txtKagoTeikyoYM) {
-        this.txtKagoTeikyoYM=txtKagoTeikyoYM;
+        this.txtKagoTeikyoYM = txtKagoTeikyoYM;
     }
 
     @JsonProperty("txtKagoDogetsuKago")
@@ -86,7 +85,7 @@ public class SogoShokaiKagoMoushitateInfoDiv extends Panel implements ISogoShoka
 
     @JsonProperty("txtKagoDogetsuKago")
     public void setTxtKagoDogetsuKago(TextBox txtKagoDogetsuKago) {
-        this.txtKagoDogetsuKago=txtKagoDogetsuKago;
+        this.txtKagoDogetsuKago = txtKagoDogetsuKago;
     }
 
     @JsonProperty("txtKagoJigyoshaCode")
@@ -96,7 +95,7 @@ public class SogoShokaiKagoMoushitateInfoDiv extends Panel implements ISogoShoka
 
     @JsonProperty("txtKagoJigyoshaCode")
     public void setTxtKagoJigyoshaCode(TextBoxCode txtKagoJigyoshaCode) {
-        this.txtKagoJigyoshaCode=txtKagoJigyoshaCode;
+        this.txtKagoJigyoshaCode = txtKagoJigyoshaCode;
     }
 
     @JsonProperty("txtKagoJigyoshaName")
@@ -106,7 +105,7 @@ public class SogoShokaiKagoMoushitateInfoDiv extends Panel implements ISogoShoka
 
     @JsonProperty("txtKagoJigyoshaName")
     public void setTxtKagoJigyoshaName(TextBox txtKagoJigyoshaName) {
-        this.txtKagoJigyoshaName=txtKagoJigyoshaName;
+        this.txtKagoJigyoshaName = txtKagoJigyoshaName;
     }
 
     @JsonProperty("SogoShokaiKagoMoshitateJiyu")
@@ -116,7 +115,7 @@ public class SogoShokaiKagoMoushitateInfoDiv extends Panel implements ISogoShoka
 
     @JsonProperty("SogoShokaiKagoMoshitateJiyu")
     public void setSogoShokaiKagoMoshitateJiyu(SogoShokaiKagoMoshitateJiyuDiv SogoShokaiKagoMoshitateJiyu) {
-        this.SogoShokaiKagoMoshitateJiyu=SogoShokaiKagoMoshitateJiyu;
+        this.SogoShokaiKagoMoshitateJiyu = SogoShokaiKagoMoshitateJiyu;
     }
 
     @JsonProperty("SogoShokaiKagoMoshitateKekka")
@@ -126,7 +125,7 @@ public class SogoShokaiKagoMoushitateInfoDiv extends Panel implements ISogoShoka
 
     @JsonProperty("SogoShokaiKagoMoshitateKekka")
     public void setSogoShokaiKagoMoshitateKekka(SogoShokaiKagoMoshitateKekkaDiv SogoShokaiKagoMoshitateKekka) {
-        this.SogoShokaiKagoMoshitateKekka=SogoShokaiKagoMoshitateKekka;
+        this.SogoShokaiKagoMoshitateKekka = SogoShokaiKagoMoshitateKekka;
     }
 
     @JsonProperty("btnClose")
@@ -136,9 +135,8 @@ public class SogoShokaiKagoMoushitateInfoDiv extends Panel implements ISogoShoka
 
     @JsonProperty("btnClose")
     public void setBtnClose(Button btnClose) {
-        this.btnClose=btnClose;
+        this.btnClose = btnClose;
     }
 
     //--------------- この行より下にコードを追加してください -------------------
-
 }

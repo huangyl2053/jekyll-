@@ -1,22 +1,18 @@
 package jp.co.ndensan.reams.db.dbz.divcontroller.entity.parentdiv.jushochitokureirirekilist;
+
 /**
- * このコードはツールによって生成されました。
- * このファイルへの変更は、再生成時には損失するため
- * 不正な動作の原因になります。
+ * このコードはツールによって生成されました。 このファイルへの変更は、再生成時には損失するため 不正な動作の原因になります。
  */
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import jp.co.ndensan.reams.db.dbz.divcontroller.entity.parentdiv.jushochitokureirirekilist.JutokuKaijoInputDiv;
-import jp.co.ndensan.reams.db.dbz.divcontroller.entity.parentdiv.jushochitokureirirekilist.JutokuTekiyoInputDiv;
-import jp.co.ndensan.reams.db.dbz.divcontroller.entity.parentdiv.jushochitokureirirekilist.KaijojiHokenshaJohoDiv;
-import jp.co.ndensan.reams.db.dbz.divcontroller.entity.parentdiv.jushochitokureirirekilist.TekiyojiHokenshaJohoDiv;
-import jp.co.ndensan.reams.uz.uza.ui.binding.*;
+import jp.co.ndensan.reams.uz.uza.ui.binding.Button;
+import jp.co.ndensan.reams.uz.uza.ui.binding.DropDownList;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
-import jp.co.ndensan.reams.uz.uza.ui.binding.domain.*;
+import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxFlexibleDate;
 
 /**
- * JutokuInput のクラスファイル 
- * 
+ * JutokuInput のクラスファイル
+ *
  * @author 自動生成
  */
 public class JutokuInputDiv extends Panel {
@@ -26,6 +22,7 @@ public class JutokuInputDiv extends Panel {
      * コントロール名とフィールド名を取得する
      * private + コントロール名 + フィールド名 の文字列を作成
      */
+
     @JsonProperty("JutokuTekiyoInput")
     private JutokuTekiyoInputDiv JutokuTekiyoInput;
     @JsonProperty("JutokuKaijoInput")
@@ -48,7 +45,7 @@ public class JutokuInputDiv extends Panel {
 
     @JsonProperty("JutokuTekiyoInput")
     public void setJutokuTekiyoInput(JutokuTekiyoInputDiv JutokuTekiyoInput) {
-        this.JutokuTekiyoInput=JutokuTekiyoInput;
+        this.JutokuTekiyoInput = JutokuTekiyoInput;
     }
 
     @JsonProperty("JutokuKaijoInput")
@@ -58,7 +55,7 @@ public class JutokuInputDiv extends Panel {
 
     @JsonProperty("JutokuKaijoInput")
     public void setJutokuKaijoInput(JutokuKaijoInputDiv JutokuKaijoInput) {
-        this.JutokuKaijoInput=JutokuKaijoInput;
+        this.JutokuKaijoInput = JutokuKaijoInput;
     }
 
     @JsonProperty("btnJutokuKakutei")
@@ -68,7 +65,7 @@ public class JutokuInputDiv extends Panel {
 
     @JsonProperty("btnJutokuKakutei")
     public void setBtnJutokuKakutei(Button btnJutokuKakutei) {
-        this.btnJutokuKakutei=btnJutokuKakutei;
+        this.btnJutokuKakutei = btnJutokuKakutei;
     }
 
     @JsonProperty("btnJutokuTorikeshi")
@@ -78,7 +75,7 @@ public class JutokuInputDiv extends Panel {
 
     @JsonProperty("btnJutokuTorikeshi")
     public void setBtnJutokuTorikeshi(Button btnJutokuTorikeshi) {
-        this.btnJutokuTorikeshi=btnJutokuTorikeshi;
+        this.btnJutokuTorikeshi = btnJutokuTorikeshi;
     }
 
     /*
@@ -90,7 +87,7 @@ public class JutokuInputDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setTxtTekiyoDate(TextBoxFlexibleDate txtTekiyoDate) {
+    public void setTxtTekiyoDate(TextBoxFlexibleDate txtTekiyoDate) {
         this.getJutokuTekiyoInput().setTxtTekiyoDate(txtTekiyoDate);
     }
 
@@ -100,7 +97,7 @@ public class JutokuInputDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setTxtTekiyoTodokedeDate(TextBoxFlexibleDate txtTekiyoTodokedeDate) {
+    public void setTxtTekiyoTodokedeDate(TextBoxFlexibleDate txtTekiyoTodokedeDate) {
         this.getJutokuTekiyoInput().setTxtTekiyoTodokedeDate(txtTekiyoTodokedeDate);
     }
 
@@ -110,7 +107,7 @@ public class JutokuInputDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setDdlTekiyoJiyu(DropDownList ddlTekiyoJiyu) {
+    public void setDdlTekiyoJiyu(DropDownList ddlTekiyoJiyu) {
         this.getJutokuTekiyoInput().setDdlTekiyoJiyu(ddlTekiyoJiyu);
     }
 
@@ -120,7 +117,7 @@ public class JutokuInputDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setTekiyojiHokenshaJoho(TekiyojiHokenshaJohoDiv TekiyojiHokenshaJoho) {
+    public void setTekiyojiHokenshaJoho(TekiyojiHokenshaJohoDiv TekiyojiHokenshaJoho) {
         this.getJutokuTekiyoInput().setTekiyojiHokenshaJoho(TekiyojiHokenshaJoho);
     }
 
@@ -130,7 +127,7 @@ public class JutokuInputDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setDdlTekiyojiSochimotoHokensha(DropDownList ddlTekiyojiSochimotoHokensha) {
+    public void setDdlTekiyojiSochimotoHokensha(DropDownList ddlTekiyojiSochimotoHokensha) {
         this.getJutokuTekiyoInput().getTekiyojiHokenshaJoho().setDdlTekiyojiSochimotoHokensha(ddlTekiyojiSochimotoHokensha);
     }
 
@@ -140,7 +137,7 @@ public class JutokuInputDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setDdlTekiyojiKyuHokensha(DropDownList ddlTekiyojiKyuHokensha) {
+    public void setDdlTekiyojiKyuHokensha(DropDownList ddlTekiyojiKyuHokensha) {
         this.getJutokuTekiyoInput().getTekiyojiHokenshaJoho().setDdlTekiyojiKyuHokensha(ddlTekiyojiKyuHokensha);
     }
 
@@ -150,7 +147,7 @@ public class JutokuInputDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setDdlTekiyojiJuminJoho(DropDownList ddlTekiyojiJuminJoho) {
+    public void setDdlTekiyojiJuminJoho(DropDownList ddlTekiyojiJuminJoho) {
         this.getJutokuTekiyoInput().getTekiyojiHokenshaJoho().setDdlTekiyojiJuminJoho(ddlTekiyojiJuminJoho);
     }
 
@@ -160,7 +157,7 @@ public class JutokuInputDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setTxtKaijoDate(TextBoxFlexibleDate txtKaijoDate) {
+    public void setTxtKaijoDate(TextBoxFlexibleDate txtKaijoDate) {
         this.getJutokuKaijoInput().setTxtKaijoDate(txtKaijoDate);
     }
 
@@ -170,7 +167,7 @@ public class JutokuInputDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setTxtKaijoTodokedeDate(TextBoxFlexibleDate txtKaijoTodokedeDate) {
+    public void setTxtKaijoTodokedeDate(TextBoxFlexibleDate txtKaijoTodokedeDate) {
         this.getJutokuKaijoInput().setTxtKaijoTodokedeDate(txtKaijoTodokedeDate);
     }
 
@@ -180,7 +177,7 @@ public class JutokuInputDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setDdlKaijoJiyu(DropDownList ddlKaijoJiyu) {
+    public void setDdlKaijoJiyu(DropDownList ddlKaijoJiyu) {
         this.getJutokuKaijoInput().setDdlKaijoJiyu(ddlKaijoJiyu);
     }
 
@@ -190,7 +187,7 @@ public class JutokuInputDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setKaijojiHokenshaJoho(KaijojiHokenshaJohoDiv KaijojiHokenshaJoho) {
+    public void setKaijojiHokenshaJoho(KaijojiHokenshaJohoDiv KaijojiHokenshaJoho) {
         this.getJutokuKaijoInput().setKaijojiHokenshaJoho(KaijojiHokenshaJoho);
     }
 
@@ -200,7 +197,7 @@ public class JutokuInputDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setDdlKaijojiSochimotoHokensha(DropDownList ddlKaijojiSochimotoHokensha) {
+    public void setDdlKaijojiSochimotoHokensha(DropDownList ddlKaijojiSochimotoHokensha) {
         this.getJutokuKaijoInput().getKaijojiHokenshaJoho().setDdlKaijojiSochimotoHokensha(ddlKaijojiSochimotoHokensha);
     }
 
@@ -210,7 +207,7 @@ public class JutokuInputDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setDdlKaijojiKyuHokensha(DropDownList ddlKaijojiKyuHokensha) {
+    public void setDdlKaijojiKyuHokensha(DropDownList ddlKaijojiKyuHokensha) {
         this.getJutokuKaijoInput().getKaijojiHokenshaJoho().setDdlKaijojiKyuHokensha(ddlKaijojiKyuHokensha);
     }
 
@@ -220,7 +217,7 @@ public class JutokuInputDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setDdlKaijojiJuminJono(DropDownList ddlKaijojiJuminJono) {
+    public void setDdlKaijojiJuminJono(DropDownList ddlKaijojiJuminJono) {
         this.getJutokuKaijoInput().getKaijojiHokenshaJoho().setDdlKaijojiJuminJono(ddlKaijojiJuminJono);
     }
 

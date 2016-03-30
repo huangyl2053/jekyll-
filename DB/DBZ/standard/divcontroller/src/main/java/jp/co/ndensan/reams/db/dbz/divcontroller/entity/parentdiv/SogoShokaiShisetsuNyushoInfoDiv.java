@@ -1,18 +1,18 @@
 package jp.co.ndensan.reams.db.dbz.divcontroller.entity.parentdiv;
-/**
- * このコードはツールによって生成されました。
- * このファイルへの変更は、再生成時には損失するため
- * 不正な動作の原因になります。
- */
-import jp.co.ndensan.reams.db.dbz.divcontroller.entity.parentdiv.ISogoShokaiShisetsuNyushoInfoDiv;
-import com.fasterxml.jackson.annotation.JsonProperty;
-import jp.co.ndensan.reams.uz.uza.ui.binding.*;
-import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
-import jp.co.ndensan.reams.uz.uza.ui.binding.domain.*;
 
 /**
- * SogoShokaiShisetsuNyushoInfo のクラスファイル 
- * 
+ * このコードはツールによって生成されました。 このファイルへの変更は、再生成時には損失するため 不正な動作の原因になります。
+ */
+import com.fasterxml.jackson.annotation.JsonProperty;
+import jp.co.ndensan.reams.uz.uza.ui.binding.Button;
+import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
+import jp.co.ndensan.reams.uz.uza.ui.binding.TextBox;
+import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxCode;
+import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxDate;
+
+/**
+ * SogoShokaiShisetsuNyushoInfo のクラスファイル
+ *
  * @author 自動生成
  */
 public class SogoShokaiShisetsuNyushoInfoDiv extends Panel implements ISogoShokaiShisetsuNyushoInfoDiv {
@@ -22,6 +22,7 @@ public class SogoShokaiShisetsuNyushoInfoDiv extends Panel implements ISogoShoka
      * コントロール名とフィールド名を取得する
      * private + コントロール名 + フィールド名 の文字列を作成
      */
+
     @JsonProperty("txtShisetsuBunrui")
     private TextBox txtShisetsuBunrui;
     @JsonProperty("txtShisetsuNyushoYMD")
@@ -52,7 +53,7 @@ public class SogoShokaiShisetsuNyushoInfoDiv extends Panel implements ISogoShoka
 
     @JsonProperty("txtShisetsuBunrui")
     public void setTxtShisetsuBunrui(TextBox txtShisetsuBunrui) {
-        this.txtShisetsuBunrui=txtShisetsuBunrui;
+        this.txtShisetsuBunrui = txtShisetsuBunrui;
     }
 
     @JsonProperty("txtShisetsuNyushoYMD")
@@ -62,7 +63,7 @@ public class SogoShokaiShisetsuNyushoInfoDiv extends Panel implements ISogoShoka
 
     @JsonProperty("txtShisetsuNyushoYMD")
     public void setTxtShisetsuNyushoYMD(TextBoxDate txtShisetsuNyushoYMD) {
-        this.txtShisetsuNyushoYMD=txtShisetsuNyushoYMD;
+        this.txtShisetsuNyushoYMD = txtShisetsuNyushoYMD;
     }
 
     @JsonProperty("txtShisetsuTaishoYMD")
@@ -72,7 +73,7 @@ public class SogoShokaiShisetsuNyushoInfoDiv extends Panel implements ISogoShoka
 
     @JsonProperty("txtShisetsuTaishoYMD")
     public void setTxtShisetsuTaishoYMD(TextBoxDate txtShisetsuTaishoYMD) {
-        this.txtShisetsuTaishoYMD=txtShisetsuTaishoYMD;
+        this.txtShisetsuTaishoYMD = txtShisetsuTaishoYMD;
     }
 
     @JsonProperty("txtShisetsuName")
@@ -82,7 +83,7 @@ public class SogoShokaiShisetsuNyushoInfoDiv extends Panel implements ISogoShoka
 
     @JsonProperty("txtShisetsuName")
     public void setTxtShisetsuName(TextBox txtShisetsuName) {
-        this.txtShisetsuName=txtShisetsuName;
+        this.txtShisetsuName = txtShisetsuName;
     }
 
     @JsonProperty("txtShisetsuJigyoshaNo")
@@ -92,7 +93,7 @@ public class SogoShokaiShisetsuNyushoInfoDiv extends Panel implements ISogoShoka
 
     @JsonProperty("txtShisetsuJigyoshaNo")
     public void setTxtShisetsuJigyoshaNo(TextBoxCode txtShisetsuJigyoshaNo) {
-        this.txtShisetsuJigyoshaNo=txtShisetsuJigyoshaNo;
+        this.txtShisetsuJigyoshaNo = txtShisetsuJigyoshaNo;
     }
 
     @JsonProperty("txtShisetsuJigyoshaName")
@@ -102,7 +103,7 @@ public class SogoShokaiShisetsuNyushoInfoDiv extends Panel implements ISogoShoka
 
     @JsonProperty("txtShisetsuJigyoshaName")
     public void setTxtShisetsuJigyoshaName(TextBox txtShisetsuJigyoshaName) {
-        this.txtShisetsuJigyoshaName=txtShisetsuJigyoshaName;
+        this.txtShisetsuJigyoshaName = txtShisetsuJigyoshaName;
     }
 
     @JsonProperty("txtShisetsuJigyoshaJusho")
@@ -112,7 +113,7 @@ public class SogoShokaiShisetsuNyushoInfoDiv extends Panel implements ISogoShoka
 
     @JsonProperty("txtShisetsuJigyoshaJusho")
     public void setTxtShisetsuJigyoshaJusho(TextBox txtShisetsuJigyoshaJusho) {
-        this.txtShisetsuJigyoshaJusho=txtShisetsuJigyoshaJusho;
+        this.txtShisetsuJigyoshaJusho = txtShisetsuJigyoshaJusho;
     }
 
     @JsonProperty("btnClose")
@@ -122,9 +123,8 @@ public class SogoShokaiShisetsuNyushoInfoDiv extends Panel implements ISogoShoka
 
     @JsonProperty("btnClose")
     public void setBtnClose(Button btnClose) {
-        this.btnClose=btnClose;
+        this.btnClose = btnClose;
     }
 
     //--------------- この行より下にコードを追加してください -------------------
-
 }

@@ -1,17 +1,14 @@
 package jp.co.ndensan.reams.db.dbz.divcontroller.entity.parentdiv.dbz0010000;
+
 /**
- * このコードはツールによって生成されました。
- * このファイルへの変更は、再生成時には損失するため
- * 不正な動作の原因になります。
+ * このコードはツールによって生成されました。 このファイルへの変更は、再生成時には損失するため 不正な動作の原因になります。
  */
 import com.fasterxml.jackson.annotation.JsonProperty;
-import jp.co.ndensan.reams.db.dbz.divcontroller.entity.parentdiv.dbz0010000.SogoShokaiSaishinsaHokenshaDiv;
-import jp.co.ndensan.reams.db.dbz.divcontroller.entity.parentdiv.dbz0010000.SogoShokaiSaishinsaKohiDiv;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 
 /**
- * SogoShokaiSaishinsaKekka のクラスファイル 
- * 
+ * SogoShokaiSaishinsaKekka のクラスファイル
+ *
  * @author 自動生成
  */
 public class SogoShokaiSaishinsaKekkaDiv extends Panel {
@@ -21,6 +18,7 @@ public class SogoShokaiSaishinsaKekkaDiv extends Panel {
      * コントロール名とフィールド名を取得する
      * private + コントロール名 + フィールド名 の文字列を作成
      */
+
     @JsonProperty("SogoShokaiSaishinsaHokensha")
     private SogoShokaiSaishinsaHokenshaDiv SogoShokaiSaishinsaHokensha;
     @JsonProperty("SogoShokaiSaishinsaKohi")
@@ -39,7 +37,7 @@ public class SogoShokaiSaishinsaKekkaDiv extends Panel {
 
     @JsonProperty("SogoShokaiSaishinsaHokensha")
     public void setSogoShokaiSaishinsaHokensha(SogoShokaiSaishinsaHokenshaDiv SogoShokaiSaishinsaHokensha) {
-        this.SogoShokaiSaishinsaHokensha=SogoShokaiSaishinsaHokensha;
+        this.SogoShokaiSaishinsaHokensha = SogoShokaiSaishinsaHokensha;
     }
 
     @JsonProperty("SogoShokaiSaishinsaKohi")
@@ -49,7 +47,7 @@ public class SogoShokaiSaishinsaKekkaDiv extends Panel {
 
     @JsonProperty("SogoShokaiSaishinsaKohi")
     public void setSogoShokaiSaishinsaKohi(SogoShokaiSaishinsaKohiDiv SogoShokaiSaishinsaKohi) {
-        this.SogoShokaiSaishinsaKohi=SogoShokaiSaishinsaKohi;
+        this.SogoShokaiSaishinsaKohi = SogoShokaiSaishinsaKohi;
     }
 
 }
