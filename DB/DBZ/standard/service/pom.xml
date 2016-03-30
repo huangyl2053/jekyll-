@@ -91,7 +91,6 @@
         <dependency>
             <groupId>jp.co.ndensan.reams.ua.uax</groupId>
             <artifactId>UaxPersistence</artifactId>
-            <type>jar</type>
         </dependency>
         <dependency>
             <groupId>jp.co.ndensan.reams.ux.uxx</groupId>
