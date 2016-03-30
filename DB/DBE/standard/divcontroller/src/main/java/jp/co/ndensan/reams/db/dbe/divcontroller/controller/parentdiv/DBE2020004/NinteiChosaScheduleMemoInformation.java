@@ -276,6 +276,11 @@ public class NinteiChosaScheduleMemoInformation {
                 }
             }
         }
+        if (new RString(UrQuestionMessages.保存の確認.getMessage().getCode())
+                .equals(ResponseHolder.getMessageCode())
+                && ResponseHolder.getButtonType() == MessageDialogSelectedResult.No) {
+            return ResponseData.of(div).setState(DBE2020004StateName.スケジュールメモ);
+        }
         // TODO 画面の戻るボタンを実装しない、前排他を実装しない、遷移を実装しない。内部番号：612
         getHandler(div).完了状態();
         return ResponseData.of(div).setState(DBE2020004StateName.完了);
