@@ -23,4 +23,8 @@ public interface IShisetsuJohoCommonChildDiv extends ICommonChildDivBaseProperti
     public abstract RString get施設種類();
 
     public abstract void set施設種類(RString key);
+
+    public abstract void setShisetsuMeisho(RString meisho);
+
+    public abstract void clear();
 }

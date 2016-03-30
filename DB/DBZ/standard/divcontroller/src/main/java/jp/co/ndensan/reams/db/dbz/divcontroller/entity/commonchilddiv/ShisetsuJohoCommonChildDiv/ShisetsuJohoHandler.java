@@ -305,10 +305,10 @@ public class ShisetsuJohoHandler {
             div.getRadKaigoHokenShisetsu().setSelectedKey(key);
         }
         if (ShisetsuType.住所地特例対象施設.getCode().equals(key)) {
-            div.getRadTekiyoJyogaiShisetsu().setSelectedKey(key);
+            div.getRadOtherTokureiShisetsu().setSelectedKey(key);
         }
         if (ShisetsuType.適用除外施設.getCode().equals(key)) {
-            div.getRadOtherTokureiShisetsu().setSelectedKey(key);
+            div.getRadTekiyoJyogaiShisetsu().setSelectedKey(key);
         }
     }
 
@@ -328,5 +328,24 @@ public class ShisetsuJohoHandler {
         if (DaichoType.適用除外者.getCode().equals(key)) {
             div.getDdlDaichoShubetsu().setSelectedKey(key);
         }
+    }
+
+    /**
+     * 事業者名称の設定.
+     *
+     * @param meisho 事業者名称
+     */
+    public void setShisetsuMeisho(RString meisho) {
+        div.getTxtNyuryokuShisetsuMeisho().setValue(meisho);
+    }
+
+    /**
+     * クリア.
+     *
+     */
+    public void clear() {
+        initialize();
+        div.getTxtNyuryokuShisetsuMeisho().clearValue();
+        div.getTxtNyuryokuShisetsuKodo().clearValue();
     }
 }
