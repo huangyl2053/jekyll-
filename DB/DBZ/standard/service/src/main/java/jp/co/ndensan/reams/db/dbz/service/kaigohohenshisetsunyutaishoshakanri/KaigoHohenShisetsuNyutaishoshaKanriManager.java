@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dbz.business.core.ShisetsuNyutaisho;
+import jp.co.ndensan.reams.db.dbz.business.core.kaigohohenshisetsu.KaigoHohenShisetsuBusiness;
 import jp.co.ndensan.reams.db.dbz.definition.mybatisprm.kaigohohenshisetsu.KaigoHohenShisetsuMybatisParameter;
 import jp.co.ndensan.reams.db.dbz.entity.db.relate.kaigohohenshisetsu.KaigoHohenShisetsuRelateEntity;
 import jp.co.ndensan.reams.db.dbz.persistence.db.mapper.relate.kaigohohenshisetsu.IKaigoHohenShisetsuMapper;
@@ -80,7 +81,11 @@ public class KaigoHohenShisetsuNyutaishoshaKanriManager {
                         entity.getNyushoShisetsuCode().getColumnValue(), entity.getRirekiNo())));
             }
         }
-        return SearchResult.of(resultList, 0, false);
+        List<KaigoHohenShisetsuBusiness> result = new ArrayList<>();
+        for (KaigoHohenShisetsuRelateEntity entity : resultList) {
+            result.add(new KaigoHohenShisetsuBusiness((entity)));
+        }
+        return SearchResult.of(result, 0, false);
     }
 
     /**
