@@ -250,7 +250,7 @@ public class NinteiChosaScheduleShosai {
     }
 
     /**
-     * 認定調査スケジュール登録2のメモを表示するボタンの処理です。
+     * 認定調査スケジュール登録2の戻るボタンの処理です。
      *
      * @param div NinteiChosaScheduleShosaiDiv
      * @return ResponseData<NinteiChosaScheduleShosaiDiv>
