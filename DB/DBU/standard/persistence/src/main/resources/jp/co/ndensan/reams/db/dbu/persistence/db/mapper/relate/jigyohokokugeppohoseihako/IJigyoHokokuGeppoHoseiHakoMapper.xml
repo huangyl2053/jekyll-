@@ -46,7 +46,7 @@
         TO_NUMBER("toukeiTaishoKubun", '9') -1 || '01'
         WHEN
         dbT7021JigyoHokokuTokeiData."hyoNo" = '01'
-        AND dbT7021JigyoHokokuTokeiData."shukeiNo" = '0701'
+        AND dbT7021JigyoHokokuTokeiData."shukeiNo" = '0710'
         THEN
         TO_NUMBER("toukeiTaishoKubun", '9') -1 ||  '02'
         WHEN
