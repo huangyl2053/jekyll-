@@ -9,8 +9,8 @@ import java.util.List;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.TsuchishoNo;
 import jp.co.ndensan.reams.db.dbz.business.report.util.EditedAtesaki;
+import jp.co.ndensan.reams.db.dbz.business.report.util.EditedKojin;
 import jp.co.ndensan.reams.db.dbz.business.report.util.EditedKoza;
-import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.kojin.IKojin;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -27,7 +27,7 @@ import org.dom4j.Text;
 public class EditedKariSanteiTsuchiShoKyotsu {
 
     private EditedAtesaki 編集後宛先;
-    private IKojin 編集後個人;
+    private EditedKojin 編集後個人;
     private RString 表示コード1;
     private RString 表示コード２;
     private RString 表示コード３;
