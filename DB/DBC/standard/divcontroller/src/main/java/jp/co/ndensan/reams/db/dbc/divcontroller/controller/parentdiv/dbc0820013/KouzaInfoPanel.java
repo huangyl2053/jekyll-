@@ -41,13 +41,14 @@ public class KouzaInfoPanel {
     private static final RString 申請を保存ボタン = new RString("Element3");
 
     /**
-     * 画面初期化onLoad
+     * 画面初期化onLoadメソッドです。
      *
      * @param div KouzaInfoPanelDiv
      * @return 償還払い費支給申請決定_口座情報画面
      */
     public ResponseData<KouzaInfoPanelDiv> onLoad(KouzaInfoPanelDiv div) {
 
+        // TODO うそのデータ
         ServiceTeiKyoShomeishoParameter parmeter = new ServiceTeiKyoShomeishoParameter(
                 new HihokenshaNo("000000003"), new FlexibleYearMonth(new RString("201601")),
                 new RString("123123"), new JigyoshaNo("0000000003"), new RString("事業者名"),

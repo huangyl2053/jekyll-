@@ -15,6 +15,10 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 public enum ReportIdDBA {
 
     /**
+     * 適用除外者台帳の帳票ID。
+     */
+    DBA100010(new ReportId("DBA100010_TekiyojogaishaDaicho"), new RString("適用除外者台帳")),
+    /**
      * 境界層管理マスタリストの帳票ID。
      */
     DBA200005(new ReportId("DBA200005"), new RString("境界層管理マスタリスト")),

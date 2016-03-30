@@ -14,8 +14,8 @@ import jp.co.ndensan.reams.db.dbc.definition.enumeratedtype.config.ConfigNameDBC
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0820014.ServiceTeikyoShomeishoPanelDiv;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0820014.dgdServiceTeikyoShomeisyo_Row;
 import jp.co.ndensan.reams.db.dbc.divcontroller.viewbox.ViewStateKeys;
-import jp.co.ndensan.reams.db.dbc.divcontroller.viewbox.shoukanharaihishinseikensaku.ShoukanharaihishinseimeisaikensakuParameter;
 import jp.co.ndensan.reams.db.dbc.divcontroller.viewbox.shoukanharaihishinseikensaku.ShoukanharaihishinseikensakuParameter;
+import jp.co.ndensan.reams.db.dbc.divcontroller.viewbox.shoukanharaihishinseikensaku.ShoukanharaihishinseimeisaikensakuParameter;
 import jp.co.ndensan.reams.db.dbc.service.core.shokanbaraijyokyoshokai.ShokanbaraiJyokyoShokai;
 import jp.co.ndensan.reams.db.dbc.service.core.syokanbaraihishikyushinseikette.SyokanbaraihiShikyuShinseiKetteManager;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
@@ -39,6 +39,9 @@ public class ServiceTeikyoShomeishoPanelHandler {
     private final ServiceTeikyoShomeishoPanelDiv div;
     private static final RString 受託なし = new RString("1");
     private static final RString 受託あり = new RString("2");
+    private static final RString 証明書BLANK = new RString("0");
+    private static final RString 証明書 = new RString("証明書");
+    private static final RString 支給申請 = new RString("支給申請");
     private static final RString 登録モード = new RString("登録");
     private static final RString 修正モード = new RString("修正");
     private static final RString 削除モード = new RString("削除");
@@ -46,7 +49,6 @@ public class ServiceTeikyoShomeishoPanelHandler {
     private static final RString 処理モード_参照 = new RString("参照");
     private static final RString 処理モード_修正 = new RString("修正");
     private static final RString 処理モード_登録 = new RString("登録");
-    private static final RString 証明書BLANK = new RString("0");
 
     /**
      * コンストラクタです。
@@ -205,7 +207,7 @@ public class ServiceTeikyoShomeishoPanelHandler {
         } else if (事業者番号_当該行 != null) {
             事業者番号 = new JigyoshaNo(事業者番号_当該行);
         }
-        RString 様式番号 = RString.EMPTY;
+        RString 様式番号 = null;
         if (処理モード_登録.equals(処理モード)) {
             様式番号 = div.getPanelShinseiNaiyo().getDdlShomeisho().getSelectedValue();
         } else {
@@ -237,7 +239,7 @@ public class ServiceTeikyoShomeishoPanelHandler {
                 .getShokanbaraiShinseiJyohoDetail(被保険者番号, サービス年月, 整理番号);
         if (支給申請一覧情報リスト == null || 支給申請一覧情報リスト.isEmpty()) {
             throw new ApplicationException(UrErrorMessages.存在しない
-                    .getMessage().replace("支給申請").evaluate());
+                    .getMessage().replace(支給申請.toString()).evaluate());
         }
         return true;
     }
@@ -250,7 +252,7 @@ public class ServiceTeikyoShomeishoPanelHandler {
     public Boolean 証明書選択チェック() {
         if (証明書BLANK.equals(div.getPanelShinseiNaiyo().getDdlShomeisho().getSelectedKey())) {
             throw new ApplicationException(UrErrorMessages.選択されていない
-                    .getMessage().replace("証明書").evaluate());
+                    .getMessage().replace(証明書.toString()).evaluate());
         }
         return true;
     }
@@ -274,7 +276,7 @@ public class ServiceTeikyoShomeishoPanelHandler {
                 様式番号);
         if (証明書件数 > 0) {
             throw new ApplicationException(UrErrorMessages.選択されていない
-                    .getMessage().replace("証明書").evaluate());
+                    .getMessage().replace(証明書.toString()).evaluate());
         }
         return true;
     }
