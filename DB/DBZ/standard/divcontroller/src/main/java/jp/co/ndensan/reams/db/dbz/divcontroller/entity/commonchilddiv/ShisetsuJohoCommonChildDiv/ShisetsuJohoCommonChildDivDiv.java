@@ -331,4 +331,23 @@ public class ShisetsuJohoCommonChildDivDiv extends Panel implements IShisetsuJoh
     public void set施設種類(RString key) {
         getHandler().set施設種類(key);
     }
+
+    /**
+     * クリア.
+     *
+     */
+    @Override
+    public void clear() {
+        getHandler().clear();
+    }
+
+    /**
+     * 事業者名称の設定.
+     *
+     * @param meisho 事業者名称
+     */
+    @Override
+    public void setShisetsuMeisho(RString meisho) {
+        getHandler().setShisetsuMeisho(meisho);
+    }
 }
