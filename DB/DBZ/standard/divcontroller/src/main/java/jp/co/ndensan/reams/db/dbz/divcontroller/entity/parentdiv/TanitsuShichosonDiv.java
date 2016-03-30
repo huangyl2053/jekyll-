@@ -3,11 +3,6 @@ package jp.co.ndensan.reams.db.dbz.divcontroller.entity.parentdiv;
 /**
  * このコードはツールによって生成されました。 このファイルへの変更は、再生成時には損失するため 不正な動作の原因になります。
  */
-import jp.co.ndensan.reams.db.dbz.divcontroller.entity.parentdiv.GyoseikuSelectDiv;
-import jp.co.ndensan.reams.db.dbz.divcontroller.entity.parentdiv.Chikiku2SelectDiv;
-import jp.co.ndensan.reams.db.dbz.divcontroller.entity.parentdiv.Chikiku3SelectDiv;
-import jp.co.ndensan.reams.db.dbz.divcontroller.entity.parentdiv.ChoikiSelectDiv;
-import jp.co.ndensan.reams.db.dbz.divcontroller.entity.parentdiv.Chikiku1SelectDiv;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jp.co.ndensan.reams.ur.ura.divcontroller.entity.commonchilddiv.Chiku1Input.IChiku1InputDiv;
@@ -15,7 +10,8 @@ import jp.co.ndensan.reams.ur.ura.divcontroller.entity.commonchilddiv.Chiku2Inpu
 import jp.co.ndensan.reams.ur.ura.divcontroller.entity.commonchilddiv.Chiku3Input.IChiku3InputDiv;
 import jp.co.ndensan.reams.ur.ura.divcontroller.entity.commonchilddiv.ChoikiInput.IChoikiInputDiv;
 import jp.co.ndensan.reams.ur.ura.divcontroller.entity.commonchilddiv.GyoseikuInput.IGyoseikuInputDiv;
-import jp.co.ndensan.reams.uz.uza.ui.binding.*;
+import jp.co.ndensan.reams.uz.uza.ui.binding.DropDownList;
+import jp.co.ndensan.reams.uz.uza.ui.binding.Label;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 
 /**

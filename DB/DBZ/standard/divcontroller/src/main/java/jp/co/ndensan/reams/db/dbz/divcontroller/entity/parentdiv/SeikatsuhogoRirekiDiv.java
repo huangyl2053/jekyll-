@@ -1,18 +1,16 @@
 package jp.co.ndensan.reams.db.dbz.divcontroller.entity.parentdiv;
-/**
- * このコードはツールによって生成されました。
- * このファイルへの変更は、再生成時には損失するため
- * 不正な動作の原因になります。
- */
-import jp.co.ndensan.reams.db.dbz.divcontroller.entity.parentdiv.ISeikatsuhogoRirekiDiv;
-import com.fasterxml.jackson.annotation.JsonProperty;
-import jp.co.ndensan.reams.uz.uza.ui.binding.*;
-import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
-import jp.co.ndensan.reams.uz.uza.ui.binding.domain.*;
 
 /**
- * SeikatsuhogoRireki のクラスファイル 
- * 
+ * このコードはツールによって生成されました。 このファイルへの変更は、再生成時には損失するため 不正な動作の原因になります。
+ */
+import com.fasterxml.jackson.annotation.JsonProperty;
+import jp.co.ndensan.reams.uz.uza.ui.binding.Button;
+import jp.co.ndensan.reams.uz.uza.ui.binding.DataGrid;
+import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
+
+/**
+ * SeikatsuhogoRireki のクラスファイル
+ *
  * @author 自動生成
  */
 public class SeikatsuhogoRirekiDiv extends Panel implements ISeikatsuhogoRirekiDiv {
@@ -22,6 +20,7 @@ public class SeikatsuhogoRirekiDiv extends Panel implements ISeikatsuhogoRirekiD
      * コントロール名とフィールド名を取得する
      * private + コントロール名 + フィールド名 の文字列を作成
      */
+
     @JsonProperty("btnAddRow")
     private Button btnAddRow;
     @JsonProperty("dgSeikatsuhogoRireki")
@@ -40,7 +39,7 @@ public class SeikatsuhogoRirekiDiv extends Panel implements ISeikatsuhogoRirekiD
 
     @JsonProperty("btnAddRow")
     public void setBtnAddRow(Button btnAddRow) {
-        this.btnAddRow=btnAddRow;
+        this.btnAddRow = btnAddRow;
     }
 
     @JsonProperty("dgSeikatsuhogoRireki")
@@ -50,9 +49,8 @@ public class SeikatsuhogoRirekiDiv extends Panel implements ISeikatsuhogoRirekiD
 
     @JsonProperty("dgSeikatsuhogoRireki")
     public void setDgSeikatsuhogoRireki(DataGrid<dgSeikatsuhogoRireki_Row> dgSeikatsuhogoRireki) {
-        this.dgSeikatsuhogoRireki=dgSeikatsuhogoRireki;
+        this.dgSeikatsuhogoRireki = dgSeikatsuhogoRireki;
     }
 
     //--------------- この行より下にコードを追加してください -------------------
-
 }

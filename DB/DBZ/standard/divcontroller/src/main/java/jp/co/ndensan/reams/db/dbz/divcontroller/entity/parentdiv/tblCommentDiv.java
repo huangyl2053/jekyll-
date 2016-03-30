@@ -1,24 +1,17 @@
 package jp.co.ndensan.reams.db.dbz.divcontroller.entity.parentdiv;
+
 /**
- * このコードはツールによって生成されました。
- * このファイルへの変更は、再生成時には損失するため
- * 不正な動作の原因になります。
+ * このコードはツールによって生成されました。 このファイルへの変更は、再生成時には損失するため 不正な動作の原因になります。
  */
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import jp.co.ndensan.reams.db.dbz.divcontroller.entity.parentdiv.TainocolorKannoDiv;
-import jp.co.ndensan.reams.db.dbz.divcontroller.entity.parentdiv.TainocolorKanoDiv;
-import jp.co.ndensan.reams.db.dbz.divcontroller.entity.parentdiv.TainocolorMitoraiDiv;
-import jp.co.ndensan.reams.db.dbz.divcontroller.entity.parentdiv.TainocolorTaishoGaiDiv;
-import jp.co.ndensan.reams.db.dbz.divcontroller.entity.parentdiv.TainocolorToraiDiv;
-import jp.co.ndensan.reams.uz.uza.ui.binding.*;
+import jp.co.ndensan.reams.uz.uza.ui.binding.Label;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TableCell;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TablePanel;
-import jp.co.ndensan.reams.uz.uza.ui.binding.domain.*;
 
 /**
- * tblComment のクラスファイル 
- * 
+ * tblComment のクラスファイル
+ *
  * @author 自動生成
  */
 public class tblCommentDiv extends TablePanel {
@@ -28,6 +21,7 @@ public class tblCommentDiv extends TablePanel {
      * コントロール名とフィールド名を取得する
      * private + コントロール名 + フィールド名 の文字列を作成
      */
+
     @JsonProperty("celTainocolorKanno")
     private celTainocolorKannoAttblComment celTainocolorKanno;
     @JsonProperty("celTainoSetsumeiKanno")
@@ -116,7 +110,7 @@ public class tblCommentDiv extends TablePanel {
 
     @JsonProperty("celTainocolorKanno")
     private void setCelTainocolorKanno(celTainocolorKannoAttblComment celTainocolorKanno) {
-        this.celTainocolorKanno=celTainocolorKanno;
+        this.celTainocolorKanno = celTainocolorKanno;
     }
 
     @JsonProperty("celTainoSetsumeiKanno")
@@ -126,7 +120,7 @@ public class tblCommentDiv extends TablePanel {
 
     @JsonProperty("celTainoSetsumeiKanno")
     private void setCelTainoSetsumeiKanno(celTainoSetsumeiKannoAttblComment celTainoSetsumeiKanno) {
-        this.celTainoSetsumeiKanno=celTainoSetsumeiKanno;
+        this.celTainoSetsumeiKanno = celTainoSetsumeiKanno;
     }
 
     @JsonProperty("celTainocolorMitorai")
@@ -136,7 +130,7 @@ public class tblCommentDiv extends TablePanel {
 
     @JsonProperty("celTainocolorMitorai")
     private void setCelTainocolorMitorai(celTainocolorMitoraiAttblComment celTainocolorMitorai) {
-        this.celTainocolorMitorai=celTainocolorMitorai;
+        this.celTainocolorMitorai = celTainocolorMitorai;
     }
 
     @JsonProperty("celTainoSetsumeiMiTorai")
@@ -146,7 +140,7 @@ public class tblCommentDiv extends TablePanel {
 
     @JsonProperty("celTainoSetsumeiMiTorai")
     private void setCelTainoSetsumeiMiTorai(celTainoSetsumeiMiToraiAttblComment celTainoSetsumeiMiTorai) {
-        this.celTainoSetsumeiMiTorai=celTainoSetsumeiMiTorai;
+        this.celTainoSetsumeiMiTorai = celTainoSetsumeiMiTorai;
     }
 
     @JsonProperty("celTainocolorTorai")
@@ -156,7 +150,7 @@ public class tblCommentDiv extends TablePanel {
 
     @JsonProperty("celTainocolorTorai")
     private void setCelTainocolorTorai(celTainocolorToraiAttblComment celTainocolorTorai) {
-        this.celTainocolorTorai=celTainocolorTorai;
+        this.celTainocolorTorai = celTainocolorTorai;
     }
 
     @JsonProperty("celTainoSetsumeiTorai")
@@ -166,7 +160,7 @@ public class tblCommentDiv extends TablePanel {
 
     @JsonProperty("celTainoSetsumeiTorai")
     private void setCelTainoSetsumeiTorai(celTainoSetsumeiToraiAttblComment celTainoSetsumeiTorai) {
-        this.celTainoSetsumeiTorai=celTainoSetsumeiTorai;
+        this.celTainoSetsumeiTorai = celTainoSetsumeiTorai;
     }
 
     @JsonProperty("celTainocolorTaishoGai")
@@ -176,7 +170,7 @@ public class tblCommentDiv extends TablePanel {
 
     @JsonProperty("celTainocolorTaishoGai")
     private void setCelTainocolorTaishoGai(celTainocolorTaishoGaiAttblComment celTainocolorTaishoGai) {
-        this.celTainocolorTaishoGai=celTainocolorTaishoGai;
+        this.celTainocolorTaishoGai = celTainocolorTaishoGai;
     }
 
     @JsonProperty("celTainoSetsumeiTaishoGai")
@@ -186,7 +180,7 @@ public class tblCommentDiv extends TablePanel {
 
     @JsonProperty("celTainoSetsumeiTaishoGai")
     private void setCelTainoSetsumeiTaishoGai(celTainoSetsumeiTaishoGaiAttblComment celTainoSetsumeiTaishoGai) {
-        this.celTainoSetsumeiTaishoGai=celTainoSetsumeiTaishoGai;
+        this.celTainoSetsumeiTaishoGai = celTainoSetsumeiTaishoGai;
     }
 
     @JsonProperty("celTainocolorKano")
@@ -196,7 +190,7 @@ public class tblCommentDiv extends TablePanel {
 
     @JsonProperty("celTainocolorKano")
     private void setCelTainocolorKano(celTainocolorKanoAttblComment celTainocolorKano) {
-        this.celTainocolorKano=celTainocolorKano;
+        this.celTainocolorKano = celTainocolorKano;
     }
 
     @JsonProperty("celTainoSetsumeiKano")
@@ -206,16 +200,18 @@ public class tblCommentDiv extends TablePanel {
 
     @JsonProperty("celTainoSetsumeiKano")
     private void setCelTainoSetsumeiKano(celTainoSetsumeiKanoAttblComment celTainoSetsumeiKano) {
-        this.celTainoSetsumeiKano=celTainoSetsumeiKano;
+        this.celTainoSetsumeiKano = celTainoSetsumeiKano;
     }
 
 }
+
 /**
- * celTainocolorKanno のクラスファイル 
- * 
+ * celTainocolorKanno のクラスファイル
+ *
  * @author 自動生成
  */
 class celTainocolorKannoAttblComment extends TableCell {
+
     @JsonProperty("TainocolorKanno")
     private TainocolorKannoDiv TainocolorKanno;
 
@@ -226,16 +222,18 @@ class celTainocolorKannoAttblComment extends TableCell {
 
     @JsonProperty("TainocolorKanno")
     public void setTainocolorKanno(TainocolorKannoDiv TainocolorKanno) {
-        this.TainocolorKanno=TainocolorKanno;
+        this.TainocolorKanno = TainocolorKanno;
     }
 
 }
+
 /**
- * celTainoSetsumeiKanno のクラスファイル 
- * 
+ * celTainoSetsumeiKanno のクラスファイル
+ *
  * @author 自動生成
  */
 class celTainoSetsumeiKannoAttblComment extends TableCell {
+
     @JsonProperty("lblTainoSetsumeiKanno")
     private Label lblTainoSetsumeiKanno;
 
@@ -246,16 +244,18 @@ class celTainoSetsumeiKannoAttblComment extends TableCell {
 
     @JsonProperty("lblTainoSetsumeiKanno")
     public void setLblTainoSetsumeiKanno(Label lblTainoSetsumeiKanno) {
-        this.lblTainoSetsumeiKanno=lblTainoSetsumeiKanno;
+        this.lblTainoSetsumeiKanno = lblTainoSetsumeiKanno;
     }
 
 }
+
 /**
- * celTainocolorMitorai のクラスファイル 
- * 
+ * celTainocolorMitorai のクラスファイル
+ *
  * @author 自動生成
  */
 class celTainocolorMitoraiAttblComment extends TableCell {
+
     @JsonProperty("TainocolorMitorai")
     private TainocolorMitoraiDiv TainocolorMitorai;
 
@@ -266,16 +266,18 @@ class celTainocolorMitoraiAttblComment extends TableCell {
 
     @JsonProperty("TainocolorMitorai")
     public void setTainocolorMitorai(TainocolorMitoraiDiv TainocolorMitorai) {
-        this.TainocolorMitorai=TainocolorMitorai;
+        this.TainocolorMitorai = TainocolorMitorai;
     }
 
 }
+
 /**
- * celTainoSetsumeiMiTorai のクラスファイル 
- * 
+ * celTainoSetsumeiMiTorai のクラスファイル
+ *
  * @author 自動生成
  */
 class celTainoSetsumeiMiToraiAttblComment extends TableCell {
+
     @JsonProperty("lblTainoSetsumeiMiTorai")
     private Label lblTainoSetsumeiMiTorai;
 
@@ -286,16 +288,18 @@ class celTainoSetsumeiMiToraiAttblComment extends TableCell {
 
     @JsonProperty("lblTainoSetsumeiMiTorai")
     public void setLblTainoSetsumeiMiTorai(Label lblTainoSetsumeiMiTorai) {
-        this.lblTainoSetsumeiMiTorai=lblTainoSetsumeiMiTorai;
+        this.lblTainoSetsumeiMiTorai = lblTainoSetsumeiMiTorai;
     }
 
 }
+
 /**
- * celTainocolorTorai のクラスファイル 
- * 
+ * celTainocolorTorai のクラスファイル
+ *
  * @author 自動生成
  */
 class celTainocolorToraiAttblComment extends TableCell {
+
     @JsonProperty("TainocolorTorai")
     private TainocolorToraiDiv TainocolorTorai;
 
@@ -306,16 +310,18 @@ class celTainocolorToraiAttblComment extends TableCell {
 
     @JsonProperty("TainocolorTorai")
     public void setTainocolorTorai(TainocolorToraiDiv TainocolorTorai) {
-        this.TainocolorTorai=TainocolorTorai;
+        this.TainocolorTorai = TainocolorTorai;
     }
 
 }
+
 /**
- * celTainoSetsumeiTorai のクラスファイル 
- * 
+ * celTainoSetsumeiTorai のクラスファイル
+ *
  * @author 自動生成
  */
 class celTainoSetsumeiToraiAttblComment extends TableCell {
+
     @JsonProperty("lblTainoSetsumeiTorai")
     private Label lblTainoSetsumeiTorai;
 
@@ -326,16 +332,18 @@ class celTainoSetsumeiToraiAttblComment extends TableCell {
 
     @JsonProperty("lblTainoSetsumeiTorai")
     public void setLblTainoSetsumeiTorai(Label lblTainoSetsumeiTorai) {
-        this.lblTainoSetsumeiTorai=lblTainoSetsumeiTorai;
+        this.lblTainoSetsumeiTorai = lblTainoSetsumeiTorai;
     }
 
 }
+
 /**
- * celTainocolorTaishoGai のクラスファイル 
- * 
+ * celTainocolorTaishoGai のクラスファイル
+ *
  * @author 自動生成
  */
 class celTainocolorTaishoGaiAttblComment extends TableCell {
+
     @JsonProperty("TainocolorTaishoGai")
     private TainocolorTaishoGaiDiv TainocolorTaishoGai;
 
@@ -346,16 +354,18 @@ class celTainocolorTaishoGaiAttblComment extends TableCell {
 
     @JsonProperty("TainocolorTaishoGai")
     public void setTainocolorTaishoGai(TainocolorTaishoGaiDiv TainocolorTaishoGai) {
-        this.TainocolorTaishoGai=TainocolorTaishoGai;
+        this.TainocolorTaishoGai = TainocolorTaishoGai;
     }
 
 }
+
 /**
- * celTainoSetsumeiTaishoGai のクラスファイル 
- * 
+ * celTainoSetsumeiTaishoGai のクラスファイル
+ *
  * @author 自動生成
  */
 class celTainoSetsumeiTaishoGaiAttblComment extends TableCell {
+
     @JsonProperty("lblTainoSetsumeiTaishoGai")
     private Label lblTainoSetsumeiTaishoGai;
 
@@ -366,16 +376,18 @@ class celTainoSetsumeiTaishoGaiAttblComment extends TableCell {
 
     @JsonProperty("lblTainoSetsumeiTaishoGai")
     public void setLblTainoSetsumeiTaishoGai(Label lblTainoSetsumeiTaishoGai) {
-        this.lblTainoSetsumeiTaishoGai=lblTainoSetsumeiTaishoGai;
+        this.lblTainoSetsumeiTaishoGai = lblTainoSetsumeiTaishoGai;
     }
 
 }
+
 /**
- * celTainocolorKano のクラスファイル 
- * 
+ * celTainocolorKano のクラスファイル
+ *
  * @author 自動生成
  */
 class celTainocolorKanoAttblComment extends TableCell {
+
     @JsonProperty("TainocolorKano")
     private TainocolorKanoDiv TainocolorKano;
 
@@ -386,16 +398,18 @@ class celTainocolorKanoAttblComment extends TableCell {
 
     @JsonProperty("TainocolorKano")
     public void setTainocolorKano(TainocolorKanoDiv TainocolorKano) {
-        this.TainocolorKano=TainocolorKano;
+        this.TainocolorKano = TainocolorKano;
     }
 
 }
+
 /**
- * celTainoSetsumeiKano のクラスファイル 
- * 
+ * celTainoSetsumeiKano のクラスファイル
+ *
  * @author 自動生成
  */
 class celTainoSetsumeiKanoAttblComment extends TableCell {
+
     @JsonProperty("lblTainoSetsumeiKano")
     private Label lblTainoSetsumeiKano;
 
@@ -406,7 +420,7 @@ class celTainoSetsumeiKanoAttblComment extends TableCell {
 
     @JsonProperty("lblTainoSetsumeiKano")
     public void setLblTainoSetsumeiKano(Label lblTainoSetsumeiKano) {
-        this.lblTainoSetsumeiKano=lblTainoSetsumeiKano;
+        this.lblTainoSetsumeiKano = lblTainoSetsumeiKano;
     }
 
 }

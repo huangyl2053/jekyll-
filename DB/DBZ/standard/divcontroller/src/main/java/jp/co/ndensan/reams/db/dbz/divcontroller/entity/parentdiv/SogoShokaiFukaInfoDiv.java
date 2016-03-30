@@ -1,20 +1,20 @@
 package jp.co.ndensan.reams.db.dbz.divcontroller.entity.parentdiv;
-/**
- * このコードはツールによって生成されました。
- * このファイルへの変更は、再生成時には損失するため
- * 不正な動作の原因になります。
- */
-import jp.co.ndensan.reams.db.dbz.divcontroller.entity.parentdiv.ISogoShokaiFukaInfoDiv;
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonProperty;
-import jp.co.ndensan.reams.db.dbz.divcontroller.entity.parentdiv.SogoShokaiFukaTokubetsuChoshuDiv;
-import jp.co.ndensan.reams.uz.uza.ui.binding.*;
-import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
-import jp.co.ndensan.reams.uz.uza.ui.binding.domain.*;
 
 /**
- * SogoShokaiFukaInfo のクラスファイル 
- * 
+ * このコードはツールによって生成されました。 このファイルへの変更は、再生成時には損失するため 不正な動作の原因になります。
+ */
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import jp.co.ndensan.reams.uz.uza.ui.binding.Button;
+import jp.co.ndensan.reams.uz.uza.ui.binding.Label;
+import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
+import jp.co.ndensan.reams.uz.uza.ui.binding.TextBox;
+import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxDate;
+import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxNum;
+
+/**
+ * SogoShokaiFukaInfo のクラスファイル
+ *
  * @author 自動生成
  */
 public class SogoShokaiFukaInfoDiv extends Panel implements ISogoShokaiFukaInfoDiv {
@@ -24,6 +24,7 @@ public class SogoShokaiFukaInfoDiv extends Panel implements ISogoShokaiFukaInfoD
      * コントロール名とフィールド名を取得する
      * private + コントロール名 + フィールド名 の文字列を作成
      */
+
     @JsonProperty("txtFukaChoteiNendo")
     private TextBoxDate txtFukaChoteiNendo;
     @JsonProperty("txtFukaChoteiJiyu")
@@ -60,7 +61,7 @@ public class SogoShokaiFukaInfoDiv extends Panel implements ISogoShokaiFukaInfoD
 
     @JsonProperty("txtFukaChoteiNendo")
     public void setTxtFukaChoteiNendo(TextBoxDate txtFukaChoteiNendo) {
-        this.txtFukaChoteiNendo=txtFukaChoteiNendo;
+        this.txtFukaChoteiNendo = txtFukaChoteiNendo;
     }
 
     @JsonProperty("txtFukaChoteiJiyu")
@@ -70,7 +71,7 @@ public class SogoShokaiFukaInfoDiv extends Panel implements ISogoShokaiFukaInfoD
 
     @JsonProperty("txtFukaChoteiJiyu")
     public void setTxtFukaChoteiJiyu(TextBox txtFukaChoteiJiyu) {
-        this.txtFukaChoteiJiyu=txtFukaChoteiJiyu;
+        this.txtFukaChoteiJiyu = txtFukaChoteiJiyu;
     }
 
     @JsonProperty("txtFukaKoseiTsuki")
@@ -80,7 +81,7 @@ public class SogoShokaiFukaInfoDiv extends Panel implements ISogoShokaiFukaInfoD
 
     @JsonProperty("txtFukaKoseiTsuki")
     public void setTxtFukaKoseiTsuki(TextBoxNum txtFukaKoseiTsuki) {
-        this.txtFukaKoseiTsuki=txtFukaKoseiTsuki;
+        this.txtFukaKoseiTsuki = txtFukaKoseiTsuki;
     }
 
     @JsonProperty("txtFukaFukaNendo")
@@ -90,7 +91,7 @@ public class SogoShokaiFukaInfoDiv extends Panel implements ISogoShokaiFukaInfoD
 
     @JsonProperty("txtFukaFukaNendo")
     public void setTxtFukaFukaNendo(TextBoxDate txtFukaFukaNendo) {
-        this.txtFukaFukaNendo=txtFukaFukaNendo;
+        this.txtFukaFukaNendo = txtFukaFukaNendo;
     }
 
     @JsonProperty("txtFukaKazeiKubunHonnin")
@@ -100,7 +101,7 @@ public class SogoShokaiFukaInfoDiv extends Panel implements ISogoShokaiFukaInfoD
 
     @JsonProperty("txtFukaKazeiKubunHonnin")
     public void setTxtFukaKazeiKubunHonnin(TextBox txtFukaKazeiKubunHonnin) {
-        this.txtFukaKazeiKubunHonnin=txtFukaKazeiKubunHonnin;
+        this.txtFukaKazeiKubunHonnin = txtFukaKazeiKubunHonnin;
     }
 
     @JsonProperty("txtFukaKazeiKubunSetai")
@@ -110,7 +111,7 @@ public class SogoShokaiFukaInfoDiv extends Panel implements ISogoShokaiFukaInfoD
 
     @JsonProperty("txtFukaKazeiKubunSetai")
     public void setTxtFukaKazeiKubunSetai(TextBox txtFukaKazeiKubunSetai) {
-        this.txtFukaKazeiKubunSetai=txtFukaKazeiKubunSetai;
+        this.txtFukaKazeiKubunSetai = txtFukaKazeiKubunSetai;
     }
 
     @JsonProperty("tblFuka")
@@ -120,7 +121,7 @@ public class SogoShokaiFukaInfoDiv extends Panel implements ISogoShokaiFukaInfoD
 
     @JsonProperty("tblFuka")
     public void setTblFuka(tblFukaDiv tblFuka) {
-        this.tblFuka=tblFuka;
+        this.tblFuka = tblFuka;
     }
 
     @JsonProperty("tblFutsuChoshu")
@@ -130,7 +131,7 @@ public class SogoShokaiFukaInfoDiv extends Panel implements ISogoShokaiFukaInfoD
 
     @JsonProperty("tblFutsuChoshu")
     public void setTblFutsuChoshu(tblFutsuChoshuDiv tblFutsuChoshu) {
-        this.tblFutsuChoshu=tblFutsuChoshu;
+        this.tblFutsuChoshu = tblFutsuChoshu;
     }
 
     @JsonProperty("tblTokubetsuChoshu")
@@ -140,7 +141,7 @@ public class SogoShokaiFukaInfoDiv extends Panel implements ISogoShokaiFukaInfoD
 
     @JsonProperty("tblTokubetsuChoshu")
     public void setTblTokubetsuChoshu(tblTokubetsuChoshuDiv tblTokubetsuChoshu) {
-        this.tblTokubetsuChoshu=tblTokubetsuChoshu;
+        this.tblTokubetsuChoshu = tblTokubetsuChoshu;
     }
 
     @JsonProperty("SogoShokaiFukaTokubetsuChoshu")
@@ -150,7 +151,7 @@ public class SogoShokaiFukaInfoDiv extends Panel implements ISogoShokaiFukaInfoD
 
     @JsonProperty("SogoShokaiFukaTokubetsuChoshu")
     public void setSogoShokaiFukaTokubetsuChoshu(SogoShokaiFukaTokubetsuChoshuDiv SogoShokaiFukaTokubetsuChoshu) {
-        this.SogoShokaiFukaTokubetsuChoshu=SogoShokaiFukaTokubetsuChoshu;
+        this.SogoShokaiFukaTokubetsuChoshu = SogoShokaiFukaTokubetsuChoshu;
     }
 
     @JsonProperty("btnClose")
@@ -160,7 +161,7 @@ public class SogoShokaiFukaInfoDiv extends Panel implements ISogoShokaiFukaInfoD
 
     @JsonProperty("btnClose")
     public void setBtnClose(Button btnClose) {
-        this.btnClose=btnClose;
+        this.btnClose = btnClose;
     }
 
     /*
@@ -507,5 +508,4 @@ public class SogoShokaiFukaInfoDiv extends Panel implements ISogoShokaiFukaInfoD
     }
 
     //--------------- この行より下にコードを追加してください -------------------
-
 }

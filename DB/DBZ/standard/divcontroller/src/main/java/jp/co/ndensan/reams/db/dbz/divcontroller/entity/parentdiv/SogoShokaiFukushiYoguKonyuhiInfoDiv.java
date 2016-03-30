@@ -1,19 +1,21 @@
 package jp.co.ndensan.reams.db.dbz.divcontroller.entity.parentdiv;
-/**
- * このコードはツールによって生成されました。
- * このファイルへの変更は、再生成時には損失するため
- * 不正な動作の原因になります。
- */
-import jp.co.ndensan.reams.db.dbz.divcontroller.entity.parentdiv.ISogoShokaiFukushiYoguKonyuhiInfoDiv;
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonProperty;
-import jp.co.ndensan.reams.uz.uza.ui.binding.*;
-import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
-import jp.co.ndensan.reams.uz.uza.ui.binding.domain.*;
 
 /**
- * SogoShokaiFukushiYoguKonyuhiInfo のクラスファイル 
- * 
+ * このコードはツールによって生成されました。 このファイルへの変更は、再生成時には損失するため 不正な動作の原因になります。
+ */
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import jp.co.ndensan.reams.uz.uza.ui.binding.Button;
+import jp.co.ndensan.reams.uz.uza.ui.binding.DataGrid;
+import jp.co.ndensan.reams.uz.uza.ui.binding.Label;
+import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
+import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxCode;
+import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxDate;
+import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxNum;
+
+/**
+ * SogoShokaiFukushiYoguKonyuhiInfo のクラスファイル
+ *
  * @author 自動生成
  */
 public class SogoShokaiFukushiYoguKonyuhiInfoDiv extends Panel implements ISogoShokaiFukushiYoguKonyuhiInfoDiv {
@@ -23,6 +25,7 @@ public class SogoShokaiFukushiYoguKonyuhiInfoDiv extends Panel implements ISogoS
      * コントロール名とフィールド名を取得する
      * private + コントロール名 + フィールド名 の文字列を作成
      */
+
     @JsonProperty("txtTeikyoYM")
     private TextBoxDate txtTeikyoYM;
     @JsonProperty("txtSeiriNo")
@@ -51,7 +54,7 @@ public class SogoShokaiFukushiYoguKonyuhiInfoDiv extends Panel implements ISogoS
 
     @JsonProperty("txtTeikyoYM")
     public void setTxtTeikyoYM(TextBoxDate txtTeikyoYM) {
-        this.txtTeikyoYM=txtTeikyoYM;
+        this.txtTeikyoYM = txtTeikyoYM;
     }
 
     @JsonProperty("txtSeiriNo")
@@ -61,7 +64,7 @@ public class SogoShokaiFukushiYoguKonyuhiInfoDiv extends Panel implements ISogoS
 
     @JsonProperty("txtSeiriNo")
     public void setTxtSeiriNo(TextBoxCode txtSeiriNo) {
-        this.txtSeiriNo=txtSeiriNo;
+        this.txtSeiriNo = txtSeiriNo;
     }
 
     @JsonProperty("txtKyufuritsu")
@@ -71,7 +74,7 @@ public class SogoShokaiFukushiYoguKonyuhiInfoDiv extends Panel implements ISogoS
 
     @JsonProperty("txtKyufuritsu")
     public void setTxtKyufuritsu(TextBoxNum txtKyufuritsu) {
-        this.txtKyufuritsu=txtKyufuritsu;
+        this.txtKyufuritsu = txtKyufuritsu;
     }
 
     @JsonProperty("dgYoguSeikyuDetail")
@@ -81,7 +84,7 @@ public class SogoShokaiFukushiYoguKonyuhiInfoDiv extends Panel implements ISogoS
 
     @JsonProperty("dgYoguSeikyuDetail")
     public void setDgYoguSeikyuDetail(DataGrid<dgYoguSeikyuDetail_Row> dgYoguSeikyuDetail) {
-        this.dgYoguSeikyuDetail=dgYoguSeikyuDetail;
+        this.dgYoguSeikyuDetail = dgYoguSeikyuDetail;
     }
 
     @JsonProperty("YoguKonyuhiShikyuShinseiSeikyuDetail")
@@ -91,7 +94,7 @@ public class SogoShokaiFukushiYoguKonyuhiInfoDiv extends Panel implements ISogoS
 
     @JsonProperty("YoguKonyuhiShikyuShinseiSeikyuDetail")
     public void setYoguKonyuhiShikyuShinseiSeikyuDetail(YoguKonyuhiShikyuShinseiSeikyuDetailDiv YoguKonyuhiShikyuShinseiSeikyuDetail) {
-        this.YoguKonyuhiShikyuShinseiSeikyuDetail=YoguKonyuhiShikyuShinseiSeikyuDetail;
+        this.YoguKonyuhiShikyuShinseiSeikyuDetail = YoguKonyuhiShikyuShinseiSeikyuDetail;
     }
 
     @JsonProperty("tblYoguSeikyuSummary")
@@ -101,7 +104,7 @@ public class SogoShokaiFukushiYoguKonyuhiInfoDiv extends Panel implements ISogoS
 
     @JsonProperty("tblYoguSeikyuSummary")
     public void setTblYoguSeikyuSummary(tblYoguSeikyuSummaryDiv tblYoguSeikyuSummary) {
-        this.tblYoguSeikyuSummary=tblYoguSeikyuSummary;
+        this.tblYoguSeikyuSummary = tblYoguSeikyuSummary;
     }
 
     @JsonProperty("btnClose")
@@ -111,7 +114,7 @@ public class SogoShokaiFukushiYoguKonyuhiInfoDiv extends Panel implements ISogoS
 
     @JsonProperty("btnClose")
     public void setBtnClose(Button btnClose) {
-        this.btnClose=btnClose;
+        this.btnClose = btnClose;
     }
 
     /*
@@ -193,5 +196,4 @@ public class SogoShokaiFukushiYoguKonyuhiInfoDiv extends Panel implements ISogoS
     }
 
     //--------------- この行より下にコードを追加してください -------------------
-
 }

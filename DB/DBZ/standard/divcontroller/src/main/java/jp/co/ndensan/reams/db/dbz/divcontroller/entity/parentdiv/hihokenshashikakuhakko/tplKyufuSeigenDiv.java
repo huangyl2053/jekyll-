@@ -1,19 +1,18 @@
 package jp.co.ndensan.reams.db.dbz.divcontroller.entity.parentdiv.hihokenshashikakuhakko;
+
 /**
- * このコードはツールによって生成されました。
- * このファイルへの変更は、再生成時には損失するため
- * 不正な動作の原因になります。
+ * このコードはツールによって生成されました。 このファイルへの変更は、再生成時には損失するため 不正な動作の原因になります。
  */
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import jp.co.ndensan.reams.db.dbz.divcontroller.entity.parentdiv.hihokenshashikakuhakko.tblKyuhuSeigenDiv;
-import jp.co.ndensan.reams.uz.uza.ui.binding.*;
+import jp.co.ndensan.reams.uz.uza.ui.binding.Label;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TabPanel;
-import jp.co.ndensan.reams.uz.uza.ui.binding.domain.*;
+import jp.co.ndensan.reams.uz.uza.ui.binding.TextBox;
+import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxDateRange;
 
 /**
- * tplKyufuSeigen のクラスファイル 
- * 
+ * tplKyufuSeigen のクラスファイル
+ *
  * @author 自動生成
  */
 public class tplKyufuSeigenDiv extends TabPanel {
@@ -23,6 +22,7 @@ public class tplKyufuSeigenDiv extends TabPanel {
      * コントロール名とフィールド名を取得する
      * private + コントロール名 + フィールド名 の文字列を作成
      */
+
     @JsonProperty("lblKyufuSeigen")
     private Label lblKyufuSeigen;
     @JsonProperty("tblKyuhuSeigen")
@@ -41,7 +41,7 @@ public class tplKyufuSeigenDiv extends TabPanel {
 
     @JsonProperty("lblKyufuSeigen")
     public void setLblKyufuSeigen(Label lblKyufuSeigen) {
-        this.lblKyufuSeigen=lblKyufuSeigen;
+        this.lblKyufuSeigen = lblKyufuSeigen;
     }
 
     @JsonProperty("tblKyuhuSeigen")
@@ -51,7 +51,7 @@ public class tplKyufuSeigenDiv extends TabPanel {
 
     @JsonProperty("tblKyuhuSeigen")
     public void setTblKyuhuSeigen(tblKyuhuSeigenDiv tblKyuhuSeigen) {
-        this.tblKyuhuSeigen=tblKyuhuSeigen;
+        this.tblKyuhuSeigen = tblKyuhuSeigen;
     }
 
     /*

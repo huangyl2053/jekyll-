@@ -1,19 +1,19 @@
 package jp.co.ndensan.reams.db.dbz.divcontroller.entity.parentdiv.dbz0010000;
-/**
- * このコードはツールによって生成されました。
- * このファイルへの変更は、再生成時には損失するため
- * 不正な動作の原因になります。
- */
-import com.fasterxml.jackson.annotation.JsonProperty;
-import jp.co.ndensan.reams.db.dbz.divcontroller.entity.parentdiv.dbz0010000.SogoShokaiSaishinsaJiyuDiv;
-import jp.co.ndensan.reams.db.dbz.divcontroller.entity.parentdiv.dbz0010000.SogoShokaiSaishinsaKekkaDiv;
-import jp.co.ndensan.reams.uz.uza.ui.binding.*;
-import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
-import jp.co.ndensan.reams.uz.uza.ui.binding.domain.*;
 
 /**
- * SogoShokaiSaishinsaMoushitateInfo のクラスファイル 
- * 
+ * このコードはツールによって生成されました。 このファイルへの変更は、再生成時には損失するため 不正な動作の原因になります。
+ */
+import com.fasterxml.jackson.annotation.JsonProperty;
+import jp.co.ndensan.reams.uz.uza.ui.binding.Button;
+import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
+import jp.co.ndensan.reams.uz.uza.ui.binding.TextBox;
+import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxCode;
+import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxDate;
+import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxNum;
+
+/**
+ * SogoShokaiSaishinsaMoushitateInfo のクラスファイル
+ *
  * @author 自動生成
  */
 public class SogoShokaiSaishinsaMoushitateInfoDiv extends Panel {
@@ -23,6 +23,7 @@ public class SogoShokaiSaishinsaMoushitateInfoDiv extends Panel {
      * コントロール名とフィールド名を取得する
      * private + コントロール名 + フィールド名 の文字列を作成
      */
+
     @JsonProperty("txtSaishinsaTaishoYM")
     private TextBoxDate txtSaishinsaTaishoYM;
     @JsonProperty("txtSaishinsaMoshitateYMD")
@@ -61,7 +62,7 @@ public class SogoShokaiSaishinsaMoushitateInfoDiv extends Panel {
 
     @JsonProperty("txtSaishinsaTaishoYM")
     public void setTxtSaishinsaTaishoYM(TextBoxDate txtSaishinsaTaishoYM) {
-        this.txtSaishinsaTaishoYM=txtSaishinsaTaishoYM;
+        this.txtSaishinsaTaishoYM = txtSaishinsaTaishoYM;
     }
 
     @JsonProperty("txtSaishinsaMoshitateYMD")
@@ -71,7 +72,7 @@ public class SogoShokaiSaishinsaMoushitateInfoDiv extends Panel {
 
     @JsonProperty("txtSaishinsaMoshitateYMD")
     public void setTxtSaishinsaMoshitateYMD(TextBoxDate txtSaishinsaMoshitateYMD) {
-        this.txtSaishinsaMoshitateYMD=txtSaishinsaMoshitateYMD;
+        this.txtSaishinsaMoshitateYMD = txtSaishinsaMoshitateYMD;
     }
 
     @JsonProperty("txtSaishinsaTeikyoYM")
@@ -81,7 +82,7 @@ public class SogoShokaiSaishinsaMoushitateInfoDiv extends Panel {
 
     @JsonProperty("txtSaishinsaTeikyoYM")
     public void setTxtSaishinsaTeikyoYM(TextBoxDate txtSaishinsaTeikyoYM) {
-        this.txtSaishinsaTeikyoYM=txtSaishinsaTeikyoYM;
+        this.txtSaishinsaTeikyoYM = txtSaishinsaTeikyoYM;
     }
 
     @JsonProperty("txtSaishinsaJigyoshaCode")
@@ -91,7 +92,7 @@ public class SogoShokaiSaishinsaMoushitateInfoDiv extends Panel {
 
     @JsonProperty("txtSaishinsaJigyoshaCode")
     public void setTxtSaishinsaJigyoshaCode(TextBoxCode txtSaishinsaJigyoshaCode) {
-        this.txtSaishinsaJigyoshaCode=txtSaishinsaJigyoshaCode;
+        this.txtSaishinsaJigyoshaCode = txtSaishinsaJigyoshaCode;
     }
 
     @JsonProperty("txtSaishinsaJigyoshaName")
@@ -101,7 +102,7 @@ public class SogoShokaiSaishinsaMoushitateInfoDiv extends Panel {
 
     @JsonProperty("txtSaishinsaJigyoshaName")
     public void setTxtSaishinsaJigyoshaName(TextBox txtSaishinsaJigyoshaName) {
-        this.txtSaishinsaJigyoshaName=txtSaishinsaJigyoshaName;
+        this.txtSaishinsaJigyoshaName = txtSaishinsaJigyoshaName;
     }
 
     @JsonProperty("txtSaishinsaServiceShuruiCode")
@@ -111,7 +112,7 @@ public class SogoShokaiSaishinsaMoushitateInfoDiv extends Panel {
 
     @JsonProperty("txtSaishinsaServiceShuruiCode")
     public void setTxtSaishinsaServiceShuruiCode(TextBoxCode txtSaishinsaServiceShuruiCode) {
-        this.txtSaishinsaServiceShuruiCode=txtSaishinsaServiceShuruiCode;
+        this.txtSaishinsaServiceShuruiCode = txtSaishinsaServiceShuruiCode;
     }
 
     @JsonProperty("txtSaishinsaServiceCode")
@@ -121,7 +122,7 @@ public class SogoShokaiSaishinsaMoushitateInfoDiv extends Panel {
 
     @JsonProperty("txtSaishinsaServiceCode")
     public void setTxtSaishinsaServiceCode(TextBoxCode txtSaishinsaServiceCode) {
-        this.txtSaishinsaServiceCode=txtSaishinsaServiceCode;
+        this.txtSaishinsaServiceCode = txtSaishinsaServiceCode;
     }
 
     @JsonProperty("txtSaishinsaServiceName")
@@ -131,7 +132,7 @@ public class SogoShokaiSaishinsaMoushitateInfoDiv extends Panel {
 
     @JsonProperty("txtSaishinsaServiceName")
     public void setTxtSaishinsaServiceName(TextBox txtSaishinsaServiceName) {
-        this.txtSaishinsaServiceName=txtSaishinsaServiceName;
+        this.txtSaishinsaServiceName = txtSaishinsaServiceName;
     }
 
     @JsonProperty("txtSaishinsaMoshitateTanisu")
@@ -141,7 +142,7 @@ public class SogoShokaiSaishinsaMoushitateInfoDiv extends Panel {
 
     @JsonProperty("txtSaishinsaMoshitateTanisu")
     public void setTxtSaishinsaMoshitateTanisu(TextBoxNum txtSaishinsaMoshitateTanisu) {
-        this.txtSaishinsaMoshitateTanisu=txtSaishinsaMoshitateTanisu;
+        this.txtSaishinsaMoshitateTanisu = txtSaishinsaMoshitateTanisu;
     }
 
     @JsonProperty("SogoShokaiSaishinsaJiyu")
@@ -151,7 +152,7 @@ public class SogoShokaiSaishinsaMoushitateInfoDiv extends Panel {
 
     @JsonProperty("SogoShokaiSaishinsaJiyu")
     public void setSogoShokaiSaishinsaJiyu(SogoShokaiSaishinsaJiyuDiv SogoShokaiSaishinsaJiyu) {
-        this.SogoShokaiSaishinsaJiyu=SogoShokaiSaishinsaJiyu;
+        this.SogoShokaiSaishinsaJiyu = SogoShokaiSaishinsaJiyu;
     }
 
     @JsonProperty("SogoShokaiSaishinsaKekka")
@@ -161,7 +162,7 @@ public class SogoShokaiSaishinsaMoushitateInfoDiv extends Panel {
 
     @JsonProperty("SogoShokaiSaishinsaKekka")
     public void setSogoShokaiSaishinsaKekka(SogoShokaiSaishinsaKekkaDiv SogoShokaiSaishinsaKekka) {
-        this.SogoShokaiSaishinsaKekka=SogoShokaiSaishinsaKekka;
+        this.SogoShokaiSaishinsaKekka = SogoShokaiSaishinsaKekka;
     }
 
     @JsonProperty("btnClose")
@@ -171,7 +172,7 @@ public class SogoShokaiSaishinsaMoushitateInfoDiv extends Panel {
 
     @JsonProperty("btnClose")
     public void setBtnClose(Button btnClose) {
-        this.btnClose=btnClose;
+        this.btnClose = btnClose;
     }
 
 }

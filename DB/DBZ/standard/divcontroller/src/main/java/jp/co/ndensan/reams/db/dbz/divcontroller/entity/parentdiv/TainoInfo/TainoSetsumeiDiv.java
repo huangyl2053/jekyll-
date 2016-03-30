@@ -1,23 +1,17 @@
 package jp.co.ndensan.reams.db.dbz.divcontroller.entity.parentdiv.TainoInfo;
+
 /**
- * このコードはツールによって生成されました。
- * このファイルへの変更は、再生成時には損失するため
- * 不正な動作の原因になります。
+ * このコードはツールによって生成されました。 このファイルへの変更は、再生成時には損失するため 不正な動作の原因になります。
  */
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import jp.co.ndensan.reams.db.dbz.divcontroller.entity.parentdiv.TainoInfo.TainocolorKannoDiv;
-import jp.co.ndensan.reams.db.dbz.divcontroller.entity.parentdiv.TainoInfo.TainocolorKanoDiv;
-import jp.co.ndensan.reams.db.dbz.divcontroller.entity.parentdiv.TainoInfo.TainocolorMinoDiv;
-import jp.co.ndensan.reams.db.dbz.divcontroller.entity.parentdiv.TainoInfo.TainocolorMitoraiDiv;
-import jp.co.ndensan.reams.uz.uza.ui.binding.*;
+import jp.co.ndensan.reams.uz.uza.ui.binding.Label;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TableCell;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TablePanel;
-import jp.co.ndensan.reams.uz.uza.ui.binding.domain.*;
 
 /**
- * TainoSetsumei のクラスファイル 
- * 
+ * TainoSetsumei のクラスファイル
+ *
  * @author 自動生成
  */
 public class TainoSetsumeiDiv extends TablePanel {
@@ -27,6 +21,7 @@ public class TainoSetsumeiDiv extends TablePanel {
      * コントロール名とフィールド名を取得する
      * private + コントロール名 + フィールド名 の文字列を作成
      */
+
     @JsonProperty("celTainoSetsumei1")
     private celTainoSetsumei1AtTainoSetsumei celTainoSetsumei1;
     @JsonProperty("celTainoSetsumei2")
@@ -93,7 +88,7 @@ public class TainoSetsumeiDiv extends TablePanel {
 
     @JsonProperty("celTainoSetsumei1")
     private void setCelTainoSetsumei1(celTainoSetsumei1AtTainoSetsumei celTainoSetsumei1) {
-        this.celTainoSetsumei1=celTainoSetsumei1;
+        this.celTainoSetsumei1 = celTainoSetsumei1;
     }
 
     @JsonProperty("celTainoSetsumei2")
@@ -103,7 +98,7 @@ public class TainoSetsumeiDiv extends TablePanel {
 
     @JsonProperty("celTainoSetsumei2")
     private void setCelTainoSetsumei2(celTainoSetsumei2AtTainoSetsumei celTainoSetsumei2) {
-        this.celTainoSetsumei2=celTainoSetsumei2;
+        this.celTainoSetsumei2 = celTainoSetsumei2;
     }
 
     @JsonProperty("celTainoSetsumei3")
@@ -113,7 +108,7 @@ public class TainoSetsumeiDiv extends TablePanel {
 
     @JsonProperty("celTainoSetsumei3")
     private void setCelTainoSetsumei3(celTainoSetsumei3AtTainoSetsumei celTainoSetsumei3) {
-        this.celTainoSetsumei3=celTainoSetsumei3;
+        this.celTainoSetsumei3 = celTainoSetsumei3;
     }
 
     @JsonProperty("celTainoSetsumei4")
@@ -123,16 +118,18 @@ public class TainoSetsumeiDiv extends TablePanel {
 
     @JsonProperty("celTainoSetsumei4")
     private void setCelTainoSetsumei4(celTainoSetsumei4AtTainoSetsumei celTainoSetsumei4) {
-        this.celTainoSetsumei4=celTainoSetsumei4;
+        this.celTainoSetsumei4 = celTainoSetsumei4;
     }
 
 }
+
 /**
- * celTainoSetsumei1 のクラスファイル 
- * 
+ * celTainoSetsumei1 のクラスファイル
+ *
  * @author 自動生成
  */
 class celTainoSetsumei1AtTainoSetsumei extends TableCell {
+
     @JsonProperty("TainocolorKanno")
     private TainocolorKannoDiv TainocolorKanno;
     @JsonProperty("TainocolorMino")
@@ -145,7 +142,7 @@ class celTainoSetsumei1AtTainoSetsumei extends TableCell {
 
     @JsonProperty("TainocolorKanno")
     public void setTainocolorKanno(TainocolorKannoDiv TainocolorKanno) {
-        this.TainocolorKanno=TainocolorKanno;
+        this.TainocolorKanno = TainocolorKanno;
     }
 
     @JsonProperty("TainocolorMino")
@@ -155,16 +152,18 @@ class celTainoSetsumei1AtTainoSetsumei extends TableCell {
 
     @JsonProperty("TainocolorMino")
     public void setTainocolorMino(TainocolorMinoDiv TainocolorMino) {
-        this.TainocolorMino=TainocolorMino;
+        this.TainocolorMino = TainocolorMino;
     }
 
 }
+
 /**
- * celTainoSetsumei2 のクラスファイル 
- * 
+ * celTainoSetsumei2 のクラスファイル
+ *
  * @author 自動生成
  */
 class celTainoSetsumei2AtTainoSetsumei extends TableCell {
+
     @JsonProperty("lblMassage1")
     private Label lblMassage1;
     @JsonProperty("lblMassage2")
@@ -177,7 +176,7 @@ class celTainoSetsumei2AtTainoSetsumei extends TableCell {
 
     @JsonProperty("lblMassage1")
     public void setLblMassage1(Label lblMassage1) {
-        this.lblMassage1=lblMassage1;
+        this.lblMassage1 = lblMassage1;
     }
 
     @JsonProperty("lblMassage2")
@@ -187,16 +186,18 @@ class celTainoSetsumei2AtTainoSetsumei extends TableCell {
 
     @JsonProperty("lblMassage2")
     public void setLblMassage2(Label lblMassage2) {
-        this.lblMassage2=lblMassage2;
+        this.lblMassage2 = lblMassage2;
     }
 
 }
+
 /**
- * celTainoSetsumei3 のクラスファイル 
- * 
+ * celTainoSetsumei3 のクラスファイル
+ *
  * @author 自動生成
  */
 class celTainoSetsumei3AtTainoSetsumei extends TableCell {
+
     @JsonProperty("TainocolorMitorai")
     private TainocolorMitoraiDiv TainocolorMitorai;
     @JsonProperty("TainocolorKano")
@@ -209,7 +210,7 @@ class celTainoSetsumei3AtTainoSetsumei extends TableCell {
 
     @JsonProperty("TainocolorMitorai")
     public void setTainocolorMitorai(TainocolorMitoraiDiv TainocolorMitorai) {
-        this.TainocolorMitorai=TainocolorMitorai;
+        this.TainocolorMitorai = TainocolorMitorai;
     }
 
     @JsonProperty("TainocolorKano")
@@ -219,16 +220,18 @@ class celTainoSetsumei3AtTainoSetsumei extends TableCell {
 
     @JsonProperty("TainocolorKano")
     public void setTainocolorKano(TainocolorKanoDiv TainocolorKano) {
-        this.TainocolorKano=TainocolorKano;
+        this.TainocolorKano = TainocolorKano;
     }
 
 }
+
 /**
- * celTainoSetsumei4 のクラスファイル 
- * 
+ * celTainoSetsumei4 のクラスファイル
+ *
  * @author 自動生成
  */
 class celTainoSetsumei4AtTainoSetsumei extends TableCell {
+
     @JsonProperty("lblMassage3")
     private Label lblMassage3;
     @JsonProperty("lblMassage4")
@@ -241,7 +244,7 @@ class celTainoSetsumei4AtTainoSetsumei extends TableCell {
 
     @JsonProperty("lblMassage3")
     public void setLblMassage3(Label lblMassage3) {
-        this.lblMassage3=lblMassage3;
+        this.lblMassage3 = lblMassage3;
     }
 
     @JsonProperty("lblMassage4")
@@ -251,7 +254,7 @@ class celTainoSetsumei4AtTainoSetsumei extends TableCell {
 
     @JsonProperty("lblMassage4")
     public void setLblMassage4(Label lblMassage4) {
-        this.lblMassage4=lblMassage4;
+        this.lblMassage4 = lblMassage4;
     }
 
 }

@@ -219,7 +219,7 @@ public class ShisetsuNyutaishoRirekiKanri {
                 //全履歴 = createHandlerOf(shisetsuNyutaishoRirekiDiv).get施設入退所履歴().map(toShisetsuNyutaishoModel());
                 break;
             case Modify:
-                int rowIndex = Integer.valueOf(shisetsuNyutaishoRirekiDiv.getSelectRow().toString()).intValue();
+//                int rowIndex = Integer.valueOf(shisetsuNyutaishoRirekiDiv.getSelectRow().toString()).intValue();
 
 //                if (rowIndex != 0) {
 //                    int rdx = rowIndex - 1;

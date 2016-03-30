@@ -55,10 +55,8 @@ public class SetaiShotokuIchiranHandler {
     private static final int INDEX_7 = 7;
     private static final int INDEX_8 = 8;
     private static final int INDEX_9 = 9;
-    private static final int INDEX_10 = 10;
-    private static final int INDEX_11 = 11;
-    private static final int INDEX_12 = 12;
     private static final int INDEX_13 = 13;
+    private static final RString BR = new RString("<br>");
     private final SetaiShotokuIchiranDiv div;
     private final DataGridSetting setaiShotokuGridSetting;
     private final DataGridSetting shotokuRirekiGridSetting;
@@ -327,12 +325,12 @@ public class SetaiShotokuIchiranHandler {
                 div.getTxtSetaiIchiranSetaiCode().setDomain(new SetaiCode(世帯員所得.get世帯コード()));
             }
             dgSetaiShotoku_Row row = new dgSetaiShotoku_Row();
-            row.setTxtKetsugo01(世帯員所得.get識別コード() != null ? 世帯員所得.get識別コード().value().concat("<br>")
+            row.setTxtKetsugo01(世帯員所得.get識別コード() != null ? 世帯員所得.get識別コード().value().concat(BR)
                     .concat(世帯員所得.get被保険者番号() != null ? 世帯員所得.get被保険者番号().value() : RString.EMPTY) : RString.EMPTY);
-            row.setTxtShimei(世帯員所得.getカナ氏名() != null ? 世帯員所得.getカナ氏名().concat("<br>")
+            row.setTxtShimei(世帯員所得.getカナ氏名() != null ? 世帯員所得.getカナ氏名().concat(BR)
                     .concat(世帯員所得.get氏名() != null ? 世帯員所得.get氏名() : RString.EMPTY) : RString.EMPTY);
             row.setTxtKetsugo02(世帯員所得.get生年月日() != null ? new RString(世帯員所得.get生年月日().wareki().separator(Separator.PERIOD).toDateString().toString()).concat(RString.FULL_SPACE)
-                    .concat(世帯員所得.get性別()).concat("<br>").concat(世帯員所得.get続柄()) : RString.EMPTY);
+                    .concat(世帯員所得.get性別()).concat(BR).concat(世帯員所得.get続柄()) : RString.EMPTY);
             row.setTxtShubetsu(世帯員所得.get種別());
             row.setTxtIdoYMD(世帯員所得.get住民情報_異動日() != null ? new RString(世帯員所得.get住民情報_異動日().wareki().separator(Separator.PERIOD).toDateString().toString()) : RString.EMPTY);
             row.setTxtJuminzeiGenmenMae(世帯員所得.get課税区分_住民税減免前() != null && !世帯員所得.get課税区分_住民税減免前().isEmpty()
@@ -345,9 +343,9 @@ public class SetaiShotokuIchiranHandler {
                     .equals(世帯員所得.get激変緩和措置()) ? new RString("対象者") : GekihenkanwaSochi.対象外.toRString());
             if (displayNenkingaku) {
                 row.setTxtKetsugo03(世帯員所得.get合計所得金額() != null
-                        ? editComma(new RString(世帯員所得.get合計所得金額().toString())).concat("<br>")
+                        ? editComma(new RString(世帯員所得.get合計所得金額().toString())).concat(BR)
                         .concat(世帯員所得.get課税所得額() != null ? editComma(new RString(世帯員所得.get課税所得額().toString())) : RString.EMPTY) : RString.EMPTY);
-                row.setTxtKetsugo04(世帯員所得.get年金収入額() != null ? editComma(new RString(世帯員所得.get年金収入額().toString())).concat("<br>")
+                row.setTxtKetsugo04(世帯員所得.get年金収入額() != null ? editComma(new RString(世帯員所得.get年金収入額().toString())).concat(BR)
                         .concat(世帯員所得.get年金所得額() != null ? editComma(new RString(世帯員所得.get年金所得額().toString())) : RString.EMPTY) : RString.EMPTY);
             }
             editDgSetaiShotokuRow(世帯員所得, row);
@@ -358,7 +356,7 @@ public class SetaiShotokuIchiranHandler {
 
     private void editDgSetaiShotokuRow(SetaiinShotoku 世帯員所得, dgSetaiShotoku_Row row) {
         row.setTxtTorokuGyomu(世帯員所得.get登録業務() != null && !世帯員所得.get登録業務().isEmpty()
-                ? TorokuGyomu.toValue(世帯員所得.get登録業務()).toRString().concat("<br>")
+                ? TorokuGyomu.toValue(世帯員所得.get登録業務()).toRString().concat(BR)
                 .concat(世帯員所得.get更正日() != null ? 世帯員所得.get更正日().wareki().separator(Separator.PERIOD).toDateString().toString() : RString.EMPTY.toString()) : RString.EMPTY);
         row.setTxtDougetsuService(世帯員所得.is同月サービス有無() ? new RString("○") : RString.EMPTY);
         row.setTxtJukiIdoYMD(世帯員所得.get住民情報_異動日() != null ? new RString(世帯員所得.get住民情報_異動日().wareki().separator(Separator.PERIOD).toDateString().toString()) : RString.EMPTY);
@@ -423,11 +421,11 @@ public class SetaiShotokuIchiranHandler {
             row.setTxtGekihenTaishosha(GekihenkanwaSochi.対象.code()
                     .equals(介護所得情報.get激変緩和措置()) ? new RString("対象者") : GekihenkanwaSochi.対象外.toRString());
             row.setTxtKetsugo03(介護所得情報.get合計所得金額() != null ? editComma(new RString(介護所得情報.get合計所得金額().toString()))
-                    .concat("<br>").concat(介護所得情報.get課税所得額() != null ? editComma(new RString(介護所得情報.get課税所得額().toString())) : RString.EMPTY) : RString.EMPTY);
+                    .concat(BR).concat(介護所得情報.get課税所得額() != null ? editComma(new RString(介護所得情報.get課税所得額().toString())) : RString.EMPTY) : RString.EMPTY);
             row.setTxtKetsugo04(介護所得情報.get年金収入額() != null ? editComma(new RString(介護所得情報.get年金収入額().toString()))
-                    .concat("<br>").concat(介護所得情報.get年金所得額() != null ? editComma(new RString(介護所得情報.get年金所得額().toString())) : RString.EMPTY) : RString.EMPTY);
+                    .concat(BR).concat(介護所得情報.get年金所得額() != null ? editComma(new RString(介護所得情報.get年金所得額().toString())) : RString.EMPTY) : RString.EMPTY);
             row.setTxtTorokuGyomu(介護所得情報.get登録業務() != null && !介護所得情報.get登録業務().isEmpty()
-                    ? TorokuGyomu.toValue(介護所得情報.get登録業務()).toRString().concat("<br>")
+                    ? TorokuGyomu.toValue(介護所得情報.get登録業務()).toRString().concat(BR)
                     .concat(介護所得情報.get更正日() != null ? 介護所得情報.get更正日().wareki().separator(Separator.PERIOD).toDateString().toString() : RString.EMPTY.toString()) : RString.EMPTY);
             list.add(row);
         }
@@ -455,8 +453,8 @@ public class SetaiShotokuIchiranHandler {
      * @return
      */
     private SetaiinShotoku createSetaiinShotoku(dgSetaiShotoku_Row row) {
-        ShikibetsuCode shikibetsuCode = new ShikibetsuCode(row.getTxtKetsugo01().split("<br>").get(0));
-        HihokenshaNo hihokenshaNo = new HihokenshaNo(row.getTxtKetsugo01().split("<br>").get(1));
+        ShikibetsuCode shikibetsuCode = new ShikibetsuCode(row.getTxtKetsugo01().split(BR.toString()).get(0));
+        HihokenshaNo hihokenshaNo = new HihokenshaNo(row.getTxtKetsugo01().split(BR.toString()).get(1));
 
         return new SetaiinShotoku(
                 shikibetsuCode, hihokenshaNo, RString.EMPTY, RString.EMPTY,

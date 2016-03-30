@@ -4,22 +4,24 @@ package jp.co.ndensan.reams.db.dbz.divcontroller.entity.parentdiv.NinteiShinseiS
  * このファイルへの変更は、再生成時には損失するため
  * 不正な動作の原因になります。
  */
-import jp.co.ndensan.reams.db.dbz.divcontroller.entity.parentdiv.NinteiShinseiShichosonRenrakuJiko.INinteiShinseiShichosonRenrakuJikoDiv;
-import com.fasterxml.jackson.annotation.JsonProperty;
-import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.ui.binding.*;
-import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import java.util.HashSet;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.ui.binding.Button;
+import jp.co.ndensan.reams.uz.uza.ui.binding.Mode;
+import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
+import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxMultiLine;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ICommonChildDivMode;
 import jp.co.ndensan.reams.uz.uza.ui.servlets._CommonChildDivModeUtil;
 
 /**
- * NinteiShinseiShichosonRenrakuJiko のクラスファイル 
- * 
+ * NinteiShinseiShichosonRenrakuJiko のクラスファイル
+ *
  * @author 自動生成
  */
 public class NinteiShinseiShichosonRenrakuJikoDiv extends Panel implements INinteiShinseiShichosonRenrakuJikoDiv {
+
     // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：Uz-master-44">
     /*
      * [ private の作成 ]
@@ -51,7 +53,7 @@ public class NinteiShinseiShichosonRenrakuJikoDiv extends Panel implements INint
 
     @JsonProperty("txtRenrakujiko")
     public void setTxtRenrakujiko(TextBoxMultiLine txtRenrakujiko) {
-        this.txtRenrakujiko=txtRenrakujiko;
+        this.txtRenrakujiko = txtRenrakujiko;
     }
 
     @JsonProperty("btnToroku")
@@ -61,7 +63,7 @@ public class NinteiShinseiShichosonRenrakuJikoDiv extends Panel implements INint
 
     @JsonProperty("btnToroku")
     public void setBtnToroku(Button btnToroku) {
-        this.btnToroku=btnToroku;
+        this.btnToroku = btnToroku;
     }
 
     @JsonProperty("btnModoru")
@@ -71,7 +73,7 @@ public class NinteiShinseiShichosonRenrakuJikoDiv extends Panel implements INint
 
     @JsonProperty("btnModoru")
     public void setBtnModoru(Button btnModoru) {
-        this.btnModoru=btnModoru;
+        this.btnModoru = btnModoru;
     }
 
     @JsonProperty("hdnShinseishoKanriNo")
@@ -81,7 +83,7 @@ public class NinteiShinseiShichosonRenrakuJikoDiv extends Panel implements INint
 
     @JsonProperty("hdnShinseishoKanriNo")
     public void setHdnShinseishoKanriNo(RString hdnShinseishoKanriNo) {
-        this.hdnShinseishoKanriNo=hdnShinseishoKanriNo;
+        this.hdnShinseishoKanriNo = hdnShinseishoKanriNo;
     }
 
     @JsonProperty("hdnDatabaseSubGyomuCode")
@@ -91,7 +93,7 @@ public class NinteiShinseiShichosonRenrakuJikoDiv extends Panel implements INint
 
     @JsonProperty("hdnDatabaseSubGyomuCode")
     public void setHdnDatabaseSubGyomuCode(RString hdnDatabaseSubGyomuCode) {
-        this.hdnDatabaseSubGyomuCode=hdnDatabaseSubGyomuCode;
+        this.hdnDatabaseSubGyomuCode = hdnDatabaseSubGyomuCode;
     }
 
     /*
@@ -115,7 +117,7 @@ public class NinteiShinseiShichosonRenrakuJikoDiv extends Panel implements INint
             ShoriType[] enumArray = ShoriType.values();
 
             for (ShoriType enumStr : enumArray) {
-                if (str.equals(enumStr.name.toString())) { 
+                if (str.equals(enumStr.name.toString())) {
                     return enumStr;
                 }
             }
@@ -130,14 +132,13 @@ public class NinteiShinseiShichosonRenrakuJikoDiv extends Panel implements INint
     }
 
     public ShoriType getMode_ShoriType() {
-        return (ShoriType) _CommonChildDivModeUtil.getMode( this.modes, ShoriType.class );
+        return (ShoriType) _CommonChildDivModeUtil.getMode(this.modes, ShoriType.class);
     }
 
-    public void setMode_ShoriType( ShoriType value ) {
-        _CommonChildDivModeUtil.setMode( this.modes, ShoriType.class , value );
+    public void setMode_ShoriType(ShoriType value) {
+        _CommonChildDivModeUtil.setMode(this.modes, ShoriType.class, value);
     }
 
     // </editor-fold>
     //--------------- この行より下にコードを追加してください -------------------
-
 }

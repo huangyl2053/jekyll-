@@ -1,19 +1,17 @@
 package jp.co.ndensan.reams.db.dbz.divcontroller.entity.parentdiv.dbz0010000;
-/**
- * このコードはツールによって生成されました。
- * このファイルへの変更は、再生成時には損失するため
- * 不正な動作の原因になります。
- */
-import com.fasterxml.jackson.annotation.JsonProperty;
-import jp.co.ndensan.reams.db.dbz.divcontroller.entity.parentdiv.dbz0010000.SogoShokaiGenmenGengakuFutanDiv;
-import jp.co.ndensan.reams.db.dbz.divcontroller.entity.parentdiv.dbz0010000.SogoShokaiGenmenGengakuTechoDiv;
-import jp.co.ndensan.reams.uz.uza.ui.binding.*;
-import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
-import jp.co.ndensan.reams.uz.uza.ui.binding.domain.*;
 
 /**
- * SogoShokaiGenmenGengakuInfo のクラスファイル 
- * 
+ * このコードはツールによって生成されました。 このファイルへの変更は、再生成時には損失するため 不正な動作の原因になります。
+ */
+import com.fasterxml.jackson.annotation.JsonProperty;
+import jp.co.ndensan.reams.uz.uza.ui.binding.Button;
+import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
+import jp.co.ndensan.reams.uz.uza.ui.binding.TextBox;
+import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxDate;
+
+/**
+ * SogoShokaiGenmenGengakuInfo のクラスファイル
+ *
  * @author 自動生成
  */
 public class SogoShokaiGenmenGengakuInfoDiv extends Panel {
@@ -23,6 +21,7 @@ public class SogoShokaiGenmenGengakuInfoDiv extends Panel {
      * コントロール名とフィールド名を取得する
      * private + コントロール名 + フィールド名 の文字列を作成
      */
+
     @JsonProperty("txtGenmenShinseiYMD")
     private TextBoxDate txtGenmenShinseiYMD;
     @JsonProperty("txtGenmenKyuSochiUmu")
@@ -61,7 +60,7 @@ public class SogoShokaiGenmenGengakuInfoDiv extends Panel {
 
     @JsonProperty("txtGenmenShinseiYMD")
     public void setTxtGenmenShinseiYMD(TextBoxDate txtGenmenShinseiYMD) {
-        this.txtGenmenShinseiYMD=txtGenmenShinseiYMD;
+        this.txtGenmenShinseiYMD = txtGenmenShinseiYMD;
     }
 
     @JsonProperty("txtGenmenKyuSochiUmu")
@@ -71,7 +70,7 @@ public class SogoShokaiGenmenGengakuInfoDiv extends Panel {
 
     @JsonProperty("txtGenmenKyuSochiUmu")
     public void setTxtGenmenKyuSochiUmu(TextBox txtGenmenKyuSochiUmu) {
-        this.txtGenmenKyuSochiUmu=txtGenmenKyuSochiUmu;
+        this.txtGenmenKyuSochiUmu = txtGenmenKyuSochiUmu;
     }
 
     @JsonProperty("SogoShokaiGenmenGengakuTecho")
@@ -81,7 +80,7 @@ public class SogoShokaiGenmenGengakuInfoDiv extends Panel {
 
     @JsonProperty("SogoShokaiGenmenGengakuTecho")
     public void setSogoShokaiGenmenGengakuTecho(SogoShokaiGenmenGengakuTechoDiv SogoShokaiGenmenGengakuTecho) {
-        this.SogoShokaiGenmenGengakuTecho=SogoShokaiGenmenGengakuTecho;
+        this.SogoShokaiGenmenGengakuTecho = SogoShokaiGenmenGengakuTecho;
     }
 
     @JsonProperty("txtGenmenSeihoUmu")
@@ -91,7 +90,7 @@ public class SogoShokaiGenmenGengakuInfoDiv extends Panel {
 
     @JsonProperty("txtGenmenSeihoUmu")
     public void setTxtGenmenSeihoUmu(TextBox txtGenmenSeihoUmu) {
-        this.txtGenmenSeihoUmu=txtGenmenSeihoUmu;
+        this.txtGenmenSeihoUmu = txtGenmenSeihoUmu;
     }
 
     @JsonProperty("txtGenmenSeihoTokureiUmu")
@@ -101,7 +100,7 @@ public class SogoShokaiGenmenGengakuInfoDiv extends Panel {
 
     @JsonProperty("txtGenmenSeihoTokureiUmu")
     public void setTxtGenmenSeihoTokureiUmu(TextBox txtGenmenSeihoTokureiUmu) {
-        this.txtGenmenSeihoTokureiUmu=txtGenmenSeihoTokureiUmu;
+        this.txtGenmenSeihoTokureiUmu = txtGenmenSeihoTokureiUmu;
     }
 
     @JsonProperty("txtGenmenRofukuUmu")
@@ -111,7 +110,7 @@ public class SogoShokaiGenmenGengakuInfoDiv extends Panel {
 
     @JsonProperty("txtGenmenRofukuUmu")
     public void setTxtGenmenRofukuUmu(TextBox txtGenmenRofukuUmu) {
-        this.txtGenmenRofukuUmu=txtGenmenRofukuUmu;
+        this.txtGenmenRofukuUmu = txtGenmenRofukuUmu;
     }
 
     @JsonProperty("txtGenmenFutanDankai")
@@ -121,7 +120,7 @@ public class SogoShokaiGenmenGengakuInfoDiv extends Panel {
 
     @JsonProperty("txtGenmenFutanDankai")
     public void setTxtGenmenFutanDankai(TextBox txtGenmenFutanDankai) {
-        this.txtGenmenFutanDankai=txtGenmenFutanDankai;
+        this.txtGenmenFutanDankai = txtGenmenFutanDankai;
     }
 
     @JsonProperty("txtGenmenKyokaiKubun")
@@ -131,7 +130,7 @@ public class SogoShokaiGenmenGengakuInfoDiv extends Panel {
 
     @JsonProperty("txtGenmenKyokaiKubun")
     public void setTxtGenmenKyokaiKubun(TextBox txtGenmenKyokaiKubun) {
-        this.txtGenmenKyokaiKubun=txtGenmenKyokaiKubun;
+        this.txtGenmenKyokaiKubun = txtGenmenKyokaiKubun;
     }
 
     @JsonProperty("txtGenmenGekihenDanwaKubun")
@@ -141,7 +140,7 @@ public class SogoShokaiGenmenGengakuInfoDiv extends Panel {
 
     @JsonProperty("txtGenmenGekihenDanwaKubun")
     public void setTxtGenmenGekihenDanwaKubun(TextBox txtGenmenGekihenDanwaKubun) {
-        this.txtGenmenGekihenDanwaKubun=txtGenmenGekihenDanwaKubun;
+        this.txtGenmenGekihenDanwaKubun = txtGenmenGekihenDanwaKubun;
     }
 
     @JsonProperty("SogoShokaiGenmenGengakuFutan")
@@ -151,7 +150,7 @@ public class SogoShokaiGenmenGengakuInfoDiv extends Panel {
 
     @JsonProperty("SogoShokaiGenmenGengakuFutan")
     public void setSogoShokaiGenmenGengakuFutan(SogoShokaiGenmenGengakuFutanDiv SogoShokaiGenmenGengakuFutan) {
-        this.SogoShokaiGenmenGengakuFutan=SogoShokaiGenmenGengakuFutan;
+        this.SogoShokaiGenmenGengakuFutan = SogoShokaiGenmenGengakuFutan;
     }
 
     @JsonProperty("txtGenmenFutanHyojunKubun")
@@ -161,7 +160,7 @@ public class SogoShokaiGenmenGengakuInfoDiv extends Panel {
 
     @JsonProperty("txtGenmenFutanHyojunKubun")
     public void setTxtGenmenFutanHyojunKubun(TextBox txtGenmenFutanHyojunKubun) {
-        this.txtGenmenFutanHyojunKubun=txtGenmenFutanHyojunKubun;
+        this.txtGenmenFutanHyojunKubun = txtGenmenFutanHyojunKubun;
     }
 
     @JsonProperty("btnClose")
@@ -171,7 +170,7 @@ public class SogoShokaiGenmenGengakuInfoDiv extends Panel {
 
     @JsonProperty("btnClose")
     public void setBtnClose(Button btnClose) {
-        this.btnClose=btnClose;
+        this.btnClose = btnClose;
     }
 
 }

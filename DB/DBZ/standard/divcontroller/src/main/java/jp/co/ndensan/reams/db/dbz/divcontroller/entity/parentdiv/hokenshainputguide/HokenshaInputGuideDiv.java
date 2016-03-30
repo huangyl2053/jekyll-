@@ -1,19 +1,17 @@
 package jp.co.ndensan.reams.db.dbz.divcontroller.entity.parentdiv.hokenshainputguide;
-/**
- * このコードはツールによって生成されました。
- * このファイルへの変更は、再生成時には損失するため
- * 不正な動作の原因になります。
- */
-import com.fasterxml.jackson.annotation.JsonProperty;
-import jp.co.ndensan.reams.db.dbz.divcontroller.entity.parentdiv.hokenshainputguide.SearchResultHokenshaDiv;
-import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.ui.binding.*;
-import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
-import jp.co.ndensan.reams.uz.uza.ui.binding.domain.*;
 
 /**
- * HokenshaInputGuide のクラスファイル 
- * 
+ * このコードはツールによって生成されました。 このファイルへの変更は、再生成時には損失するため 不正な動作の原因になります。
+ */
+import com.fasterxml.jackson.annotation.JsonProperty;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.ui.binding.Button;
+import jp.co.ndensan.reams.uz.uza.ui.binding.DropDownList;
+import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
+
+/**
+ * HokenshaInputGuide のクラスファイル
+ *
  * @author 自動生成
  */
 public class HokenshaInputGuideDiv extends Panel {
@@ -23,6 +21,7 @@ public class HokenshaInputGuideDiv extends Panel {
      * コントロール名とフィールド名を取得する
      * private + コントロール名 + フィールド名 の文字列を作成
      */
+
     @JsonProperty("ddlHokenshaKenCode")
     private DropDownList ddlHokenshaKenCode;
     @JsonProperty("btnSearchGaitoHokensha")
@@ -49,7 +48,7 @@ public class HokenshaInputGuideDiv extends Panel {
 
     @JsonProperty("ddlHokenshaKenCode")
     public void setDdlHokenshaKenCode(DropDownList ddlHokenshaKenCode) {
-        this.ddlHokenshaKenCode=ddlHokenshaKenCode;
+        this.ddlHokenshaKenCode = ddlHokenshaKenCode;
     }
 
     @JsonProperty("btnSearchGaitoHokensha")
@@ -59,7 +58,7 @@ public class HokenshaInputGuideDiv extends Panel {
 
     @JsonProperty("btnSearchGaitoHokensha")
     public void setBtnSearchGaitoHokensha(Button btnSearchGaitoHokensha) {
-        this.btnSearchGaitoHokensha=btnSearchGaitoHokensha;
+        this.btnSearchGaitoHokensha = btnSearchGaitoHokensha;
     }
 
     @JsonProperty("SearchResultHokensha")
@@ -69,7 +68,7 @@ public class HokenshaInputGuideDiv extends Panel {
 
     @JsonProperty("SearchResultHokensha")
     public void setSearchResultHokensha(SearchResultHokenshaDiv SearchResultHokensha) {
-        this.SearchResultHokensha=SearchResultHokensha;
+        this.SearchResultHokensha = SearchResultHokensha;
     }
 
     @JsonProperty("btnHokenshaReturn")
@@ -79,7 +78,7 @@ public class HokenshaInputGuideDiv extends Panel {
 
     @JsonProperty("btnHokenshaReturn")
     public void setBtnHokenshaReturn(Button btnHokenshaReturn) {
-        this.btnHokenshaReturn=btnHokenshaReturn;
+        this.btnHokenshaReturn = btnHokenshaReturn;
     }
 
     @JsonProperty("hokenshaNo")
@@ -89,7 +88,7 @@ public class HokenshaInputGuideDiv extends Panel {
 
     @JsonProperty("hokenshaNo")
     public void setHokenshaNo(RString hokenshaNo) {
-        this.hokenshaNo=hokenshaNo;
+        this.hokenshaNo = hokenshaNo;
     }
 
     @JsonProperty("hokenshaMeisho")
@@ -99,7 +98,7 @@ public class HokenshaInputGuideDiv extends Panel {
 
     @JsonProperty("hokenshaMeisho")
     public void setHokenshaMeisho(RString hokenshaMeisho) {
-        this.hokenshaMeisho=hokenshaMeisho;
+        this.hokenshaMeisho = hokenshaMeisho;
     }
 
 }

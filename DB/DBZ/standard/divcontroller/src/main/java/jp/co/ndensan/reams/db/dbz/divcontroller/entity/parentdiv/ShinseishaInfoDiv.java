@@ -1,18 +1,22 @@
 package jp.co.ndensan.reams.db.dbz.divcontroller.entity.parentdiv;
-/**
- * このコードはツールによって生成されました。
- * このファイルへの変更は、再生成時には損失するため
- * 不正な動作の原因になります。
- */
-import jp.co.ndensan.reams.db.dbz.divcontroller.entity.parentdiv.IShinseishaInfoDiv;
-import com.fasterxml.jackson.annotation.JsonProperty;
-import jp.co.ndensan.reams.uz.uza.ui.binding.*;
-import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
-import jp.co.ndensan.reams.uz.uza.ui.binding.domain.*;
 
 /**
- * ShinseishaInfo のクラスファイル 
- * 
+ * このコードはツールによって生成されました。 このファイルへの変更は、再生成時には損失するため 不正な動作の原因になります。
+ */
+import com.fasterxml.jackson.annotation.JsonProperty;
+import jp.co.ndensan.reams.uz.uza.ui.binding.Button;
+import jp.co.ndensan.reams.uz.uza.ui.binding.ButtonDialog;
+import jp.co.ndensan.reams.uz.uza.ui.binding.DropDownList;
+import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
+import jp.co.ndensan.reams.uz.uza.ui.binding.TextBox;
+import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxCode;
+import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxDate;
+import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxMultiLine;
+import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxYubinNo;
+
+/**
+ * ShinseishaInfo のクラスファイル
+ *
  * @author 自動生成
  */
 public class ShinseishaInfoDiv extends Panel implements IShinseishaInfoDiv {
@@ -22,6 +26,7 @@ public class ShinseishaInfoDiv extends Panel implements IShinseishaInfoDiv {
      * コントロール名とフィールド名を取得する
      * private + コントロール名 + フィールド名 の文字列を作成
      */
+
     @JsonProperty("txtShinseiDate")
     private TextBoxDate txtShinseiDate;
     @JsonProperty("ddlShinseishaKubun")
@@ -62,7 +67,7 @@ public class ShinseishaInfoDiv extends Panel implements IShinseishaInfoDiv {
 
     @JsonProperty("txtShinseiDate")
     public void setTxtShinseiDate(TextBoxDate txtShinseiDate) {
-        this.txtShinseiDate=txtShinseiDate;
+        this.txtShinseiDate = txtShinseiDate;
     }
 
     @JsonProperty("ddlShinseishaKubun")
@@ -72,7 +77,7 @@ public class ShinseishaInfoDiv extends Panel implements IShinseishaInfoDiv {
 
     @JsonProperty("ddlShinseishaKubun")
     public void setDdlShinseishaKubun(DropDownList ddlShinseishaKubun) {
-        this.ddlShinseishaKubun=ddlShinseishaKubun;
+        this.ddlShinseishaKubun = ddlShinseishaKubun;
     }
 
     @JsonProperty("txtUketsukeDate")
@@ -82,7 +87,7 @@ public class ShinseishaInfoDiv extends Panel implements IShinseishaInfoDiv {
 
     @JsonProperty("txtUketsukeDate")
     public void setTxtUketsukeDate(TextBoxDate txtUketsukeDate) {
-        this.txtUketsukeDate=txtUketsukeDate;
+        this.txtUketsukeDate = txtUketsukeDate;
     }
 
     @JsonProperty("txtShinseiRiyu")
@@ -92,7 +97,7 @@ public class ShinseishaInfoDiv extends Panel implements IShinseishaInfoDiv {
 
     @JsonProperty("txtShinseiRiyu")
     public void setTxtShinseiRiyu(TextBoxMultiLine txtShinseiRiyu) {
-        this.txtShinseiRiyu=txtShinseiRiyu;
+        this.txtShinseiRiyu = txtShinseiRiyu;
     }
 
     @JsonProperty("txtJigyoshaNo")
@@ -102,7 +107,7 @@ public class ShinseishaInfoDiv extends Panel implements IShinseishaInfoDiv {
 
     @JsonProperty("txtJigyoshaNo")
     public void setTxtJigyoshaNo(TextBoxCode txtJigyoshaNo) {
-        this.txtJigyoshaNo=txtJigyoshaNo;
+        this.txtJigyoshaNo = txtJigyoshaNo;
     }
 
     @JsonProperty("btnJigyoshaInputGuide")
@@ -112,7 +117,7 @@ public class ShinseishaInfoDiv extends Panel implements IShinseishaInfoDiv {
 
     @JsonProperty("btnJigyoshaInputGuide")
     public void setBtnJigyoshaInputGuide(ButtonDialog btnJigyoshaInputGuide) {
-        this.btnJigyoshaInputGuide=btnJigyoshaInputGuide;
+        this.btnJigyoshaInputGuide = btnJigyoshaInputGuide;
     }
 
     @JsonProperty("btnHonninJohoCopy")
@@ -122,7 +127,7 @@ public class ShinseishaInfoDiv extends Panel implements IShinseishaInfoDiv {
 
     @JsonProperty("btnHonninJohoCopy")
     public void setBtnHonninJohoCopy(Button btnHonninJohoCopy) {
-        this.btnHonninJohoCopy=btnHonninJohoCopy;
+        this.btnHonninJohoCopy = btnHonninJohoCopy;
     }
 
     @JsonProperty("ddlHokensha")
@@ -132,7 +137,7 @@ public class ShinseishaInfoDiv extends Panel implements IShinseishaInfoDiv {
 
     @JsonProperty("ddlHokensha")
     public void setDdlHokensha(DropDownList ddlHokensha) {
-        this.ddlHokensha=ddlHokensha;
+        this.ddlHokensha = ddlHokensha;
     }
 
     @JsonProperty("txtShinseishaNameKana")
@@ -142,7 +147,7 @@ public class ShinseishaInfoDiv extends Panel implements IShinseishaInfoDiv {
 
     @JsonProperty("txtShinseishaNameKana")
     public void setTxtShinseishaNameKana(TextBox txtShinseishaNameKana) {
-        this.txtShinseishaNameKana=txtShinseishaNameKana;
+        this.txtShinseishaNameKana = txtShinseishaNameKana;
     }
 
     @JsonProperty("txtShinseishaName")
@@ -152,7 +157,7 @@ public class ShinseishaInfoDiv extends Panel implements IShinseishaInfoDiv {
 
     @JsonProperty("txtShinseishaName")
     public void setTxtShinseishaName(TextBox txtShinseishaName) {
-        this.txtShinseishaName=txtShinseishaName;
+        this.txtShinseishaName = txtShinseishaName;
     }
 
     @JsonProperty("txtTelNo")
@@ -162,7 +167,7 @@ public class ShinseishaInfoDiv extends Panel implements IShinseishaInfoDiv {
 
     @JsonProperty("txtTelNo")
     public void setTxtTelNo(TextBox txtTelNo) {
-        this.txtTelNo=txtTelNo;
+        this.txtTelNo = txtTelNo;
     }
 
     @JsonProperty("txtYubinNo")
@@ -172,7 +177,7 @@ public class ShinseishaInfoDiv extends Panel implements IShinseishaInfoDiv {
 
     @JsonProperty("txtYubinNo")
     public void setTxtYubinNo(TextBoxYubinNo txtYubinNo) {
-        this.txtYubinNo=txtYubinNo;
+        this.txtYubinNo = txtYubinNo;
     }
 
     @JsonProperty("txtAddress")
@@ -182,9 +187,8 @@ public class ShinseishaInfoDiv extends Panel implements IShinseishaInfoDiv {
 
     @JsonProperty("txtAddress")
     public void setTxtAddress(TextBox txtAddress) {
-        this.txtAddress=txtAddress;
+        this.txtAddress = txtAddress;
     }
 
     //--------------- この行より下にコードを追加してください -------------------
-
 }

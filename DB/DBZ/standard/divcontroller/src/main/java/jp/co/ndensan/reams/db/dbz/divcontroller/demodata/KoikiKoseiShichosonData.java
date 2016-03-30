@@ -89,7 +89,7 @@ public class KoikiKoseiShichosonData {
             });
         }
 
-        private final class Shichoson implements KoikiKoseiShichosonData.IShichoson {
+        private static final class Shichoson implements KoikiKoseiShichosonData.IShichoson {
 
             private final RString code;
             private final RString name;

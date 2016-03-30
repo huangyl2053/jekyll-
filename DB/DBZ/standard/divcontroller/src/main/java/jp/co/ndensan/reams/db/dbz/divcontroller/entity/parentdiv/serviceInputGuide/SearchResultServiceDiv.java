@@ -1,18 +1,15 @@
 package jp.co.ndensan.reams.db.dbz.divcontroller.entity.parentdiv.serviceInputGuide;
-/**
- * このコードはツールによって生成されました。
- * このファイルへの変更は、再生成時には損失するため
- * 不正な動作の原因になります。
- */
-import com.fasterxml.jackson.annotation.JsonProperty;
-import jp.co.ndensan.reams.db.dbz.divcontroller.entity.parentdiv.serviceInputGuide.dgSearchResultService_Row;
-import jp.co.ndensan.reams.uz.uza.ui.binding.*;
-import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
-import jp.co.ndensan.reams.uz.uza.ui.binding.domain.*;
 
 /**
- * SearchResultService のクラスファイル 
- * 
+ * このコードはツールによって生成されました。 このファイルへの変更は、再生成時には損失するため 不正な動作の原因になります。
+ */
+import com.fasterxml.jackson.annotation.JsonProperty;
+import jp.co.ndensan.reams.uz.uza.ui.binding.DataGrid;
+import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
+
+/**
+ * SearchResultService のクラスファイル
+ *
  * @author 自動生成
  */
 public class SearchResultServiceDiv extends Panel {
@@ -22,6 +19,7 @@ public class SearchResultServiceDiv extends Panel {
      * コントロール名とフィールド名を取得する
      * private + コントロール名 + フィールド名 の文字列を作成
      */
+
     @JsonProperty("dgSearchResultService")
     private DataGrid<dgSearchResultService_Row> dgSearchResultService;
 
@@ -38,7 +36,7 @@ public class SearchResultServiceDiv extends Panel {
 
     @JsonProperty("dgSearchResultService")
     public void setDgSearchResultService(DataGrid<dgSearchResultService_Row> dgSearchResultService) {
-        this.dgSearchResultService=dgSearchResultService;
+        this.dgSearchResultService = dgSearchResultService;
     }
 
 }

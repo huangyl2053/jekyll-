@@ -1,19 +1,16 @@
 package jp.co.ndensan.reams.db.dbz.divcontroller.entity.parentdiv.SeikatsuhogoDetail;
-/**
- * このコードはツールによって生成されました。
- * このファイルへの変更は、再生成時には損失するため
- * 不正な動作の原因になります。
- */
-import com.fasterxml.jackson.annotation.JsonProperty;
-import jp.co.ndensan.reams.db.dbz.divcontroller.entity.parentdiv.SeikatsuhogoDetail.HokenryoDairinofuDiv;
-import jp.co.ndensan.reams.db.dbz.divcontroller.entity.parentdiv.SeikatsuhogoDetail.KyugoShisetsuDiv;
-import jp.co.ndensan.reams.uz.uza.ui.binding.*;
-import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
-import jp.co.ndensan.reams.uz.uza.ui.binding.domain.*;
 
 /**
- * SeikatsuhogoJukyusha のクラスファイル 
- * 
+ * このコードはツールによって生成されました。 このファイルへの変更は、再生成時には損失するため 不正な動作の原因になります。
+ */
+import com.fasterxml.jackson.annotation.JsonProperty;
+import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
+import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxCode;
+import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxDate;
+
+/**
+ * SeikatsuhogoJukyusha のクラスファイル
+ *
  * @author 自動生成
  */
 public class SeikatsuhogoJukyushaDiv extends Panel {
@@ -23,6 +20,7 @@ public class SeikatsuhogoJukyushaDiv extends Panel {
      * コントロール名とフィールド名を取得する
      * private + コントロール名 + フィールド名 の文字列を作成
      */
+
     @JsonProperty("txtJukyushaNo")
     private TextBoxCode txtJukyushaNo;
     @JsonProperty("txtKaishiYM")
@@ -47,7 +45,7 @@ public class SeikatsuhogoJukyushaDiv extends Panel {
 
     @JsonProperty("txtJukyushaNo")
     public void setTxtJukyushaNo(TextBoxCode txtJukyushaNo) {
-        this.txtJukyushaNo=txtJukyushaNo;
+        this.txtJukyushaNo = txtJukyushaNo;
     }
 
     @JsonProperty("txtKaishiYM")
@@ -57,7 +55,7 @@ public class SeikatsuhogoJukyushaDiv extends Panel {
 
     @JsonProperty("txtKaishiYM")
     public void setTxtKaishiYM(TextBoxDate txtKaishiYM) {
-        this.txtKaishiYM=txtKaishiYM;
+        this.txtKaishiYM = txtKaishiYM;
     }
 
     @JsonProperty("txtHaishiYM")
@@ -67,7 +65,7 @@ public class SeikatsuhogoJukyushaDiv extends Panel {
 
     @JsonProperty("txtHaishiYM")
     public void setTxtHaishiYM(TextBoxDate txtHaishiYM) {
-        this.txtHaishiYM=txtHaishiYM;
+        this.txtHaishiYM = txtHaishiYM;
     }
 
     @JsonProperty("HokenryoDairinofu")
@@ -77,7 +75,7 @@ public class SeikatsuhogoJukyushaDiv extends Panel {
 
     @JsonProperty("HokenryoDairinofu")
     public void setHokenryoDairinofu(HokenryoDairinofuDiv HokenryoDairinofu) {
-        this.HokenryoDairinofu=HokenryoDairinofu;
+        this.HokenryoDairinofu = HokenryoDairinofu;
     }
 
     @JsonProperty("KyugoShisetsu")
@@ -87,7 +85,7 @@ public class SeikatsuhogoJukyushaDiv extends Panel {
 
     @JsonProperty("KyugoShisetsu")
     public void setKyugoShisetsu(KyugoShisetsuDiv KyugoShisetsu) {
-        this.KyugoShisetsu=KyugoShisetsu;
+        this.KyugoShisetsu = KyugoShisetsu;
     }
 
 }

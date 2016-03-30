@@ -1,29 +1,22 @@
 package jp.co.ndensan.reams.db.dbz.divcontroller.entity.parentdiv.hihokenshashikakuhakko;
+
 /**
- * このコードはツールによって生成されました。
- * このファイルへの変更は、再生成時には損失するため
- * 不正な動作の原因になります。
+ * このコードはツールによって生成されました。 このファイルへの変更は、再生成時には損失するため 不正な動作の原因になります。
  */
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import jp.co.ndensan.reams.db.dbz.divcontroller.entity.parentdiv.hihokenshashikakuhakko.KubunGendoGakuDiv;
-import jp.co.ndensan.reams.db.dbz.divcontroller.entity.parentdiv.hihokenshashikakuhakko.ShuruiShikyuGendoKijungakuDiv;
-import jp.co.ndensan.reams.db.dbz.divcontroller.entity.parentdiv.hihokenshashikakuhakko.tblGendoGakuDiv;
-import jp.co.ndensan.reams.db.dbz.divcontroller.entity.parentdiv.hihokenshashikakuhakko.tblJigyoshaDiv;
-import jp.co.ndensan.reams.db.dbz.divcontroller.entity.parentdiv.hihokenshashikakuhakko.tblKyuhuSeigenDiv;
-import jp.co.ndensan.reams.db.dbz.divcontroller.entity.parentdiv.hihokenshashikakuhakko.tblShisetsuNyutaishoDiv;
-import jp.co.ndensan.reams.db.dbz.divcontroller.entity.parentdiv.hihokenshashikakuhakko.tplGendoGakuDiv;
-import jp.co.ndensan.reams.db.dbz.divcontroller.entity.parentdiv.hihokenshashikakuhakko.tplKyufuSeigenDiv;
-import jp.co.ndensan.reams.db.dbz.divcontroller.entity.parentdiv.hihokenshashikakuhakko.tplShienJigyoshaDiv;
-import jp.co.ndensan.reams.db.dbz.divcontroller.entity.parentdiv.hihokenshashikakuhakko.tplShinsakaiIkenDiv;
-import jp.co.ndensan.reams.db.dbz.divcontroller.entity.parentdiv.hihokenshashikakuhakko.tplShisetsuNyutaishoDiv;
-import jp.co.ndensan.reams.uz.uza.ui.binding.*;
+import jp.co.ndensan.reams.uz.uza.ui.binding.Label;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TabContainer;
-import jp.co.ndensan.reams.uz.uza.ui.binding.domain.*;
+import jp.co.ndensan.reams.uz.uza.ui.binding.TextBox;
+import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxDate;
+import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxDateRange;
+import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxFlexibleDate;
+import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxMultiLine;
+import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxNum;
 
 /**
- * tabHihokenshaShikakuShosai のクラスファイル 
- * 
+ * tabHihokenshaShikakuShosai のクラスファイル
+ *
  * @author 自動生成
  */
 public class tabHihokenshaShikakuShosaiDiv extends TabContainer {
@@ -33,6 +26,7 @@ public class tabHihokenshaShikakuShosaiDiv extends TabContainer {
      * コントロール名とフィールド名を取得する
      * private + コントロール名 + フィールド名 の文字列を作成
      */
+
     @JsonProperty("tplGendoGaku")
     private tplGendoGakuDiv tplGendoGaku;
     @JsonProperty("tplShinsakaiIken")
@@ -57,7 +51,7 @@ public class tabHihokenshaShikakuShosaiDiv extends TabContainer {
 
     @JsonProperty("tplGendoGaku")
     public void setTplGendoGaku(tplGendoGakuDiv tplGendoGaku) {
-        this.tplGendoGaku=tplGendoGaku;
+        this.tplGendoGaku = tplGendoGaku;
     }
 
     @JsonProperty("tplShinsakaiIken")
@@ -67,7 +61,7 @@ public class tabHihokenshaShikakuShosaiDiv extends TabContainer {
 
     @JsonProperty("tplShinsakaiIken")
     public void setTplShinsakaiIken(tplShinsakaiIkenDiv tplShinsakaiIken) {
-        this.tplShinsakaiIken=tplShinsakaiIken;
+        this.tplShinsakaiIken = tplShinsakaiIken;
     }
 
     @JsonProperty("tplKyufuSeigen")
@@ -77,7 +71,7 @@ public class tabHihokenshaShikakuShosaiDiv extends TabContainer {
 
     @JsonProperty("tplKyufuSeigen")
     public void setTplKyufuSeigen(tplKyufuSeigenDiv tplKyufuSeigen) {
-        this.tplKyufuSeigen=tplKyufuSeigen;
+        this.tplKyufuSeigen = tplKyufuSeigen;
     }
 
     @JsonProperty("tplShienJigyosha")
@@ -87,7 +81,7 @@ public class tabHihokenshaShikakuShosaiDiv extends TabContainer {
 
     @JsonProperty("tplShienJigyosha")
     public void setTplShienJigyosha(tplShienJigyoshaDiv tplShienJigyosha) {
-        this.tplShienJigyosha=tplShienJigyosha;
+        this.tplShienJigyosha = tplShienJigyosha;
     }
 
     @JsonProperty("tplShisetsuNyutaisho")
@@ -97,7 +91,7 @@ public class tabHihokenshaShikakuShosaiDiv extends TabContainer {
 
     @JsonProperty("tplShisetsuNyutaisho")
     public void setTplShisetsuNyutaisho(tplShisetsuNyutaishoDiv tplShisetsuNyutaisho) {
-        this.tplShisetsuNyutaisho=tplShisetsuNyutaisho;
+        this.tplShisetsuNyutaisho = tplShisetsuNyutaisho;
     }
 
     /*
@@ -109,7 +103,7 @@ public class tabHihokenshaShikakuShosaiDiv extends TabContainer {
     }
 
     @JsonIgnore
-    public void  setTblGendoGaku(tblGendoGakuDiv tblGendoGaku) {
+    public void setTblGendoGaku(tblGendoGakuDiv tblGendoGaku) {
         this.getTplGendoGaku().setTblGendoGaku(tblGendoGaku);
     }
 
@@ -124,7 +118,7 @@ public class tabHihokenshaShikakuShosaiDiv extends TabContainer {
     }
 
     @JsonIgnore
-    public void  setTxtKubunShikyuGendoKijunGaku(TextBoxNum txtKubunShikyuGendoKijunGaku) {
+    public void setTxtKubunShikyuGendoKijunGaku(TextBoxNum txtKubunShikyuGendoKijunGaku) {
         this.getTplGendoGaku().getTblGendoGaku().getKubunGendoGaku().setTxtKubunShikyuGendoKijunGaku(txtKubunShikyuGendoKijunGaku);
     }
 
@@ -134,7 +128,7 @@ public class tabHihokenshaShikakuShosaiDiv extends TabContainer {
     }
 
     @JsonIgnore
-    public void  setTxtYukoFromYMD(TextBoxDate txtYukoFromYMD) {
+    public void setTxtYukoFromYMD(TextBoxDate txtYukoFromYMD) {
         this.getTplGendoGaku().getTblGendoGaku().getKubunGendoGaku().setTxtYukoFromYMD(txtYukoFromYMD);
     }
 
@@ -144,7 +138,7 @@ public class tabHihokenshaShikakuShosaiDiv extends TabContainer {
     }
 
     @JsonIgnore
-    public void  setLblKara(Label lblKara) {
+    public void setLblKara(Label lblKara) {
         this.getTplGendoGaku().getTblGendoGaku().getKubunGendoGaku().setLblKara(lblKara);
     }
 
@@ -154,7 +148,7 @@ public class tabHihokenshaShikakuShosaiDiv extends TabContainer {
     }
 
     @JsonIgnore
-    public void  setTxtYukoToYMD(TextBoxDate txtYukoToYMD) {
+    public void setTxtYukoToYMD(TextBoxDate txtYukoToYMD) {
         this.getTplGendoGaku().getTblGendoGaku().getKubunGendoGaku().setTxtYukoToYMD(txtYukoToYMD);
     }
 
@@ -169,7 +163,7 @@ public class tabHihokenshaShikakuShosaiDiv extends TabContainer {
     }
 
     @JsonIgnore
-    public void  setLblShinsakaiIken(Label lblShinsakaiIken) {
+    public void setLblShinsakaiIken(Label lblShinsakaiIken) {
         this.getTplShinsakaiIken().setLblShinsakaiIken(lblShinsakaiIken);
     }
 
@@ -179,7 +173,7 @@ public class tabHihokenshaShikakuShosaiDiv extends TabContainer {
     }
 
     @JsonIgnore
-    public void  setTxtShinsakaiIken(TextBoxMultiLine txtShinsakaiIken) {
+    public void setTxtShinsakaiIken(TextBoxMultiLine txtShinsakaiIken) {
         this.getTplShinsakaiIken().setTxtShinsakaiIken(txtShinsakaiIken);
     }
 
@@ -189,7 +183,7 @@ public class tabHihokenshaShikakuShosaiDiv extends TabContainer {
     }
 
     @JsonIgnore
-    public void  setLblKyufuSeigen(Label lblKyufuSeigen) {
+    public void setLblKyufuSeigen(Label lblKyufuSeigen) {
         this.getTplKyufuSeigen().setLblKyufuSeigen(lblKyufuSeigen);
     }
 
@@ -199,7 +193,7 @@ public class tabHihokenshaShikakuShosaiDiv extends TabContainer {
     }
 
     @JsonIgnore
-    public void  setTblKyuhuSeigen(tblKyuhuSeigenDiv tblKyuhuSeigen) {
+    public void setTblKyuhuSeigen(tblKyuhuSeigenDiv tblKyuhuSeigen) {
         this.getTplKyufuSeigen().setTblKyuhuSeigen(tblKyuhuSeigen);
     }
 
@@ -249,7 +243,7 @@ public class tabHihokenshaShikakuShosaiDiv extends TabContainer {
     }
 
     @JsonIgnore
-    public void  setLblShienJigyosha(Label lblShienJigyosha) {
+    public void setLblShienJigyosha(Label lblShienJigyosha) {
         this.getTplShienJigyosha().setLblShienJigyosha(lblShienJigyosha);
     }
 
@@ -259,7 +253,7 @@ public class tabHihokenshaShikakuShosaiDiv extends TabContainer {
     }
 
     @JsonIgnore
-    public void  setTblJigyosha(tblJigyoshaDiv tblJigyosha) {
+    public void setTblJigyosha(tblJigyoshaDiv tblJigyosha) {
         this.getTplShienJigyosha().setTblJigyosha(tblJigyosha);
     }
 
@@ -329,7 +323,7 @@ public class tabHihokenshaShikakuShosaiDiv extends TabContainer {
     }
 
     @JsonIgnore
-    public void  setLblKaigoHokensha(Label lblKaigoHokensha) {
+    public void setLblKaigoHokensha(Label lblKaigoHokensha) {
         this.getTplShisetsuNyutaisho().setLblKaigoHokensha(lblKaigoHokensha);
     }
 
@@ -339,7 +333,7 @@ public class tabHihokenshaShikakuShosaiDiv extends TabContainer {
     }
 
     @JsonIgnore
-    public void  setTblShisetsuNyutaisho(tblShisetsuNyutaishoDiv tblShisetsuNyutaisho) {
+    public void setTblShisetsuNyutaisho(tblShisetsuNyutaishoDiv tblShisetsuNyutaisho) {
         this.getTplShisetsuNyutaisho().setTblShisetsuNyutaisho(tblShisetsuNyutaisho);
     }
 

@@ -1,17 +1,18 @@
 package jp.co.ndensan.reams.db.dbz.divcontroller.entity.parentdiv;
-/**
- * このコードはツールによって生成されました。
- * このファイルへの変更は、再生成時には損失するため
- * 不正な動作の原因になります。
- */
-import com.fasterxml.jackson.annotation.JsonProperty;
-import jp.co.ndensan.reams.uz.uza.ui.binding.*;
-import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
-import jp.co.ndensan.reams.uz.uza.ui.binding.domain.*;
 
 /**
- * SogoShokaiGenmenGengakuFutan のクラスファイル 
- * 
+ * このコードはツールによって生成されました。 このファイルへの変更は、再生成時には損失するため 不正な動作の原因になります。
+ */
+import com.fasterxml.jackson.annotation.JsonProperty;
+import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
+import jp.co.ndensan.reams.uz.uza.ui.binding.TextBox;
+import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxCode;
+import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxDate;
+import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxNum;
+
+/**
+ * SogoShokaiGenmenGengakuFutan のクラスファイル
+ *
  * @author 自動生成
  */
 public class SogoShokaiGenmenGengakuFutanDiv extends Panel {
@@ -21,6 +22,7 @@ public class SogoShokaiGenmenGengakuFutanDiv extends Panel {
      * コントロール名とフィールド名を取得する
      * private + コントロール名 + フィールド名 の文字列を作成
      */
+
     @JsonProperty("txtGenmenFutanKetteiKubun")
     private TextBox txtGenmenFutanKetteiKubun;
     @JsonProperty("txtGenmenFutanKetteiYMD")
@@ -69,7 +71,7 @@ public class SogoShokaiGenmenGengakuFutanDiv extends Panel {
 
     @JsonProperty("txtGenmenFutanKetteiKubun")
     public void setTxtGenmenFutanKetteiKubun(TextBox txtGenmenFutanKetteiKubun) {
-        this.txtGenmenFutanKetteiKubun=txtGenmenFutanKetteiKubun;
+        this.txtGenmenFutanKetteiKubun = txtGenmenFutanKetteiKubun;
     }
 
     @JsonProperty("txtGenmenFutanKetteiYMD")
@@ -79,7 +81,7 @@ public class SogoShokaiGenmenGengakuFutanDiv extends Panel {
 
     @JsonProperty("txtGenmenFutanKetteiYMD")
     public void setTxtGenmenFutanKetteiYMD(TextBoxDate txtGenmenFutanKetteiYMD) {
-        this.txtGenmenFutanKetteiYMD=txtGenmenFutanKetteiYMD;
+        this.txtGenmenFutanKetteiYMD = txtGenmenFutanKetteiYMD;
     }
 
     @JsonProperty("txtGenmenFutanTekiyoKaishiYMD")
@@ -89,7 +91,7 @@ public class SogoShokaiGenmenGengakuFutanDiv extends Panel {
 
     @JsonProperty("txtGenmenFutanTekiyoKaishiYMD")
     public void setTxtGenmenFutanTekiyoKaishiYMD(TextBoxDate txtGenmenFutanTekiyoKaishiYMD) {
-        this.txtGenmenFutanTekiyoKaishiYMD=txtGenmenFutanTekiyoKaishiYMD;
+        this.txtGenmenFutanTekiyoKaishiYMD = txtGenmenFutanTekiyoKaishiYMD;
     }
 
     @JsonProperty("txtGenmenFutanYukoKigen")
@@ -99,7 +101,7 @@ public class SogoShokaiGenmenGengakuFutanDiv extends Panel {
 
     @JsonProperty("txtGenmenFutanYukoKigen")
     public void setTxtGenmenFutanYukoKigen(TextBoxDate txtGenmenFutanYukoKigen) {
-        this.txtGenmenFutanYukoKigen=txtGenmenFutanYukoKigen;
+        this.txtGenmenFutanYukoKigen = txtGenmenFutanYukoKigen;
     }
 
     @JsonProperty("txtGenmenFutanKyufuritsu")
@@ -109,7 +111,7 @@ public class SogoShokaiGenmenGengakuFutanDiv extends Panel {
 
     @JsonProperty("txtGenmenFutanKyufuritsu")
     public void setTxtGenmenFutanKyufuritsu(TextBoxNum txtGenmenFutanKyufuritsu) {
-        this.txtGenmenFutanKyufuritsu=txtGenmenFutanKyufuritsu;
+        this.txtGenmenFutanKyufuritsu = txtGenmenFutanKyufuritsu;
     }
 
     @JsonProperty("txtGenmenFutanFutanshaNo")
@@ -119,7 +121,7 @@ public class SogoShokaiGenmenGengakuFutanDiv extends Panel {
 
     @JsonProperty("txtGenmenFutanFutanshaNo")
     public void setTxtGenmenFutanFutanshaNo(TextBoxCode txtGenmenFutanFutanshaNo) {
-        this.txtGenmenFutanFutanshaNo=txtGenmenFutanFutanshaNo;
+        this.txtGenmenFutanFutanshaNo = txtGenmenFutanFutanshaNo;
     }
 
     @JsonProperty("txtGenmenFutanJukyushaNo")
@@ -129,7 +131,7 @@ public class SogoShokaiGenmenGengakuFutanDiv extends Panel {
 
     @JsonProperty("txtGenmenFutanJukyushaNo")
     public void setTxtGenmenFutanJukyushaNo(TextBoxCode txtGenmenFutanJukyushaNo) {
-        this.txtGenmenFutanJukyushaNo=txtGenmenFutanJukyushaNo;
+        this.txtGenmenFutanJukyushaNo = txtGenmenFutanJukyushaNo;
     }
 
     @JsonProperty("txtGenmenFutanKyoshitsuShubetsu")
@@ -139,7 +141,7 @@ public class SogoShokaiGenmenGengakuFutanDiv extends Panel {
 
     @JsonProperty("txtGenmenFutanKyoshitsuShubetsu")
     public void setTxtGenmenFutanKyoshitsuShubetsu(TextBox txtGenmenFutanKyoshitsuShubetsu) {
-        this.txtGenmenFutanKyoshitsuShubetsu=txtGenmenFutanKyoshitsuShubetsu;
+        this.txtGenmenFutanKyoshitsuShubetsu = txtGenmenFutanKyoshitsuShubetsu;
     }
 
     @JsonProperty("txtGenmenFutanShokuji")
@@ -149,7 +151,7 @@ public class SogoShokaiGenmenGengakuFutanDiv extends Panel {
 
     @JsonProperty("txtGenmenFutanShokuji")
     public void setTxtGenmenFutanShokuji(TextBoxNum txtGenmenFutanShokuji) {
-        this.txtGenmenFutanShokuji=txtGenmenFutanShokuji;
+        this.txtGenmenFutanShokuji = txtGenmenFutanShokuji;
     }
 
     @JsonProperty("txtGenmenFutanUnit")
@@ -159,7 +161,7 @@ public class SogoShokaiGenmenGengakuFutanDiv extends Panel {
 
     @JsonProperty("txtGenmenFutanUnit")
     public void setTxtGenmenFutanUnit(TextBoxNum txtGenmenFutanUnit) {
-        this.txtGenmenFutanUnit=txtGenmenFutanUnit;
+        this.txtGenmenFutanUnit = txtGenmenFutanUnit;
     }
 
     @JsonProperty("txtGenmenFutanUnitJun")
@@ -169,7 +171,7 @@ public class SogoShokaiGenmenGengakuFutanDiv extends Panel {
 
     @JsonProperty("txtGenmenFutanUnitJun")
     public void setTxtGenmenFutanUnitJun(TextBoxNum txtGenmenFutanUnitJun) {
-        this.txtGenmenFutanUnitJun=txtGenmenFutanUnitJun;
+        this.txtGenmenFutanUnitJun = txtGenmenFutanUnitJun;
     }
 
     @JsonProperty("txtGenmenFutanTokuyo")
@@ -179,7 +181,7 @@ public class SogoShokaiGenmenGengakuFutanDiv extends Panel {
 
     @JsonProperty("txtGenmenFutanTokuyo")
     public void setTxtGenmenFutanTokuyo(TextBoxNum txtGenmenFutanTokuyo) {
-        this.txtGenmenFutanTokuyo=txtGenmenFutanTokuyo;
+        this.txtGenmenFutanTokuyo = txtGenmenFutanTokuyo;
     }
 
     @JsonProperty("txtGenmenFutanRoken")
@@ -189,7 +191,7 @@ public class SogoShokaiGenmenGengakuFutanDiv extends Panel {
 
     @JsonProperty("txtGenmenFutanRoken")
     public void setTxtGenmenFutanRoken(TextBoxNum txtGenmenFutanRoken) {
-        this.txtGenmenFutanRoken=txtGenmenFutanRoken;
+        this.txtGenmenFutanRoken = txtGenmenFutanRoken;
     }
 
     @JsonProperty("txtGenmenFutanTasho")
@@ -199,7 +201,7 @@ public class SogoShokaiGenmenGengakuFutanDiv extends Panel {
 
     @JsonProperty("txtGenmenFutanTasho")
     public void setTxtGenmenFutanTasho(TextBoxNum txtGenmenFutanTasho) {
-        this.txtGenmenFutanTasho=txtGenmenFutanTasho;
+        this.txtGenmenFutanTasho = txtGenmenFutanTasho;
     }
 
     @JsonProperty("txtGenmenFutanSeigen")
@@ -209,7 +211,7 @@ public class SogoShokaiGenmenGengakuFutanDiv extends Panel {
 
     @JsonProperty("txtGenmenFutanSeigen")
     public void setTxtGenmenFutanSeigen(TextBox txtGenmenFutanSeigen) {
-        this.txtGenmenFutanSeigen=txtGenmenFutanSeigen;
+        this.txtGenmenFutanSeigen = txtGenmenFutanSeigen;
     }
 
     @JsonProperty("txtGenmenFutanGengakuKubun")
@@ -219,7 +221,7 @@ public class SogoShokaiGenmenGengakuFutanDiv extends Panel {
 
     @JsonProperty("txtGenmenFutanGengakuKubun")
     public void setTxtGenmenFutanGengakuKubun(TextBox txtGenmenFutanGengakuKubun) {
-        this.txtGenmenFutanGengakuKubun=txtGenmenFutanGengakuKubun;
+        this.txtGenmenFutanGengakuKubun = txtGenmenFutanGengakuKubun;
     }
 
     @JsonProperty("txtGenmenFutanFutangaku")
@@ -229,7 +231,7 @@ public class SogoShokaiGenmenGengakuFutanDiv extends Panel {
 
     @JsonProperty("txtGenmenFutanFutangaku")
     public void setTxtGenmenFutanFutangaku(TextBoxNum txtGenmenFutanFutangaku) {
-        this.txtGenmenFutanFutangaku=txtGenmenFutanFutangaku;
+        this.txtGenmenFutanFutangaku = txtGenmenFutanFutangaku;
     }
 
 }

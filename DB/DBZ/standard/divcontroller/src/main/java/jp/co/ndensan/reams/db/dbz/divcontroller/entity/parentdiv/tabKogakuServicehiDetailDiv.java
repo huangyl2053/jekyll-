@@ -3,16 +3,12 @@ package jp.co.ndensan.reams.db.dbz.divcontroller.entity.parentdiv;
 /**
  * このコードはツールによって生成されました。 このファイルへの変更は、再生成時には損失するため 不正な動作の原因になります。
  */
-import jp.co.ndensan.reams.db.dbz.divcontroller.entity.parentdiv.IShinseishaInfoDiv;
-import jp.co.ndensan.reams.db.dbz.divcontroller.entity.parentdiv.IPaymentMethodDiv;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.parentdiv.KogakuServicehiJudgementResult.IKogakuServicehiJudgementResultDiv;
-import jp.co.ndensan.reams.db.dbz.divcontroller.entity.parentdiv.tplJudgementResultDiv;
-import jp.co.ndensan.reams.db.dbz.divcontroller.entity.parentdiv.tplKozaDiv;
-import jp.co.ndensan.reams.db.dbz.divcontroller.entity.parentdiv.tplShinseishaDiv;
-import jp.co.ndensan.reams.uz.uza.ui.binding.*;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TabContainer;
+import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxMultiLine;
+import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxNum;
 
 /**
  * tabKogakuServicehiDetail のクラスファイル
