@@ -247,10 +247,13 @@ public class TsuchiShoHakkogoIdoHaaku {
 
     private boolean get住所変更(ShikibetsuTaishoIdoJoho 異動前PSM結果, ShikibetsuTaishoIdoJoho 異動後PSM結果) {
         boolean flag = false;
-        flag = get郵便番号(異動前PSM結果, 異動後PSM結果, flag);
-        flag = get住所(異動前PSM結果, 異動後PSM結果, flag);
-        flag = get番地(異動前PSM結果, 異動後PSM結果, flag);
-        flag = get方書(異動前PSM結果, 異動後PSM結果, flag);
+        boolean 郵便番号flag = get郵便番号(異動前PSM結果, 異動後PSM結果, flag);
+        boolean 住所flag = get住所(異動前PSM結果, 異動後PSM結果, flag);
+        boolean 番地flag = get番地(異動前PSM結果, 異動後PSM結果, flag);
+        boolean 方書flag = get方書(異動前PSM結果, 異動後PSM結果, flag);
+        if (郵便番号flag || 住所flag || 番地flag || 方書flag) {
+            flag = true;
+        }
         return flag;
     }
 
@@ -304,13 +307,16 @@ public class TsuchiShoHakkogoIdoHaaku {
 
     private boolean get氏名変更(ShikibetsuTaishoIdoJoho 異動前PSM結果, ShikibetsuTaishoIdoJoho 異動後PSM結果) {
         boolean flag = false;
-        flag = get漢字氏名(異動前PSM結果, 異動後PSM結果, flag);
-        flag = getカナ氏名(異動前PSM結果, 異動後PSM結果, flag);
-        flag = get外国人氏名(異動前PSM結果, 異動後PSM結果, flag);
-        flag = get外国人併記名(異動前PSM結果, 異動後PSM結果, flag);
-        flag = get外国人カナ氏名(異動前PSM結果, 異動後PSM結果, flag);
-        flag = get通称名(異動前PSM結果, 異動後PSM結果, flag);
-        flag = getカナ通称名(異動前PSM結果, 異動後PSM結果, flag);
+        boolean flagOne = get漢字氏名(異動前PSM結果, 異動後PSM結果, flag);
+        boolean flagTwo = getカナ氏名(異動前PSM結果, 異動後PSM結果, flag);
+        boolean flagThree = get外国人氏名(異動前PSM結果, 異動後PSM結果, flag);
+        boolean flagFour = get外国人併記名(異動前PSM結果, 異動後PSM結果, flag);
+        boolean flagFive = get外国人カナ氏名(異動前PSM結果, 異動後PSM結果, flag);
+        boolean flagSix = get通称名(異動前PSM結果, 異動後PSM結果, flag);
+        boolean flagSeven = getカナ通称名(異動前PSM結果, 異動後PSM結果, flag);
+        if (flagOne || flagTwo || flagThree || flagFour || flagFive || flagSix || flagSeven) {
+            flag = true;
+        }
         return flag;
     }
 
