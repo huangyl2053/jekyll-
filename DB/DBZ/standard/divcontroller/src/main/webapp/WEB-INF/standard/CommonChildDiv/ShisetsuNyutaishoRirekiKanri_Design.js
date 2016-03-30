@@ -8,14 +8,6 @@ var DBZ;
                 return "onClick_btnAddShisetsuNyutaisho";
             };
 
-            Events.onSelect_dgShisetsuNyutaishoRireki = function () {
-                return "onSelect_dgShisetsuNyutaishoRireki";
-            };
-
-            Events.onSelectByDblClick_dgShisetsuNyutaishoRireki = function () {
-                return "onSelectByDblClick_dgShisetsuNyutaishoRireki";
-            };
-
             Events.onSelectBySelectButton_dgShisetsuNyutaishoRireki = function () {
                 return "onSelectBySelectButton_dgShisetsuNyutaishoRireki";
             };
