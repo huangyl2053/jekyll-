@@ -18,8 +18,7 @@ import jp.co.ndensan.reams.uz.uza.util.editor.DecimalFormatter;
 import lombok.NonNull;
 
 /**
- *
- * @author yebangqiang
+ * 特別徴収開始通知書（本算定） A4縦・オーバレイタイプ帳票Report
  */
 public class TokubetsuChoshuKaishiTsuchishoOverlayA4TateReport extends Report<TokubetsuChoshuKaishiTsuchishoOverlayA4TateSource> {
 

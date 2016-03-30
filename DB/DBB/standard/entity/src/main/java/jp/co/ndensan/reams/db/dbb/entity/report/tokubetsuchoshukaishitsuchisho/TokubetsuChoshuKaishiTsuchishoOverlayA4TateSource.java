@@ -7,7 +7,9 @@ package jp.co.ndensan.reams.db.dbb.entity.report.tokubetsuchoshukaishitsuchisho;
 
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.report.IReportSource;
+import jp.co.ndensan.reams.uz.uza.report.source.ReportExpandedInfo;
 import jp.co.ndensan.reams.uz.uza.report.source.ReportItem;
+import jp.co.ndensan.reams.uz.uza.report.source.ReportPerson;
 
 /**
  * 特別徴収開始通知書（本算定） A4縦・オーバレイタイプ帳票Source
@@ -29,12 +31,14 @@ public class TokubetsuChoshuKaishiTsuchishoOverlayA4TateSource implements IRepor
     public RString hyojicodeCode2;
     @ReportItem(name = "hyojicodeCode3", length = 11, order = 7)
     public RString hyojicodeCode3;
+    @ReportExpandedInfo(id = "X")
     @ReportItem(name = "hihokenshaNo", length = 10, order = 8)
     public RString hihokenshaNo;
     @ReportItem(name = "tuchishoNo", order = 9)
     public RString tuchishoNo;
     @ReportItem(name = "setaiCode", length = 15, order = 10)
     public RString setaiCode;
+    @ReportPerson(id = "X")
     @ReportItem(name = "shikibetsuCode", length = 15, order = 11)
     public RString shikibetsuCode;
     @ReportItem(name = "hihokenshaName", order = 12)
