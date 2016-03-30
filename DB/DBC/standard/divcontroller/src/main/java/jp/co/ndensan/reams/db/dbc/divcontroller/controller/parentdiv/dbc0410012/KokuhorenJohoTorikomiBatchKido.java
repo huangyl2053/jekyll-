@@ -9,7 +9,7 @@ import jp.co.ndensan.reams.db.dbc.business.core.KokuhorenJohoTorikomi;
 import jp.co.ndensan.reams.db.dbc.definition.batchprm.KokuhorenJohoTorikomiBatchParameter;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0410012.KokuhorenJohoTorikomiBatchKidoDiv;
 import jp.co.ndensan.reams.db.dbc.divcontroller.helper.KokuhorenJohoTorikomiValidationHelper;
-import jp.co.ndensan.reams.db.dbz.definition.core.enumeratedtype.ConfigNameDBU;
+import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBU;
 import jp.co.ndensan.reams.ur.urz.divcontroller.entity.commonchilddiv.chohyoshutsuryokujun.ChohyoShutsuryokujun.IChohyoShutsuryokujunDiv;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
@@ -29,7 +29,6 @@ public class KokuhorenJohoTorikomiBatchKido {
 
 //    private final RString 同月過誤分ファイル名 = new RString("01110000");
 //    private final RString 通常分ファイル名 = new RString("11100000");
-
     public ResponseData<KokuhorenJohoTorikomiBatchKidoDiv> onLoad(KokuhorenJohoTorikomiBatchKidoDiv panel) {
 
 //        KokuhorenJohoTorikomiBatchKidoModel selectedrow
@@ -110,7 +109,6 @@ public class KokuhorenJohoTorikomiBatchKido {
 //            default:
 //        }
 //    }
-
 //    private void setDisplayData(KokuhorenJohoTorikomiBatchKidoModel selectedrow, KokuhorenJohoTorikomiBatchKidoDiv panel) {
 //      KokuhorenJohoTorikomi business = new KokuhorenJohoTorikomi();
 //        switch (selectedrow.get交換識別番号().toString()) {

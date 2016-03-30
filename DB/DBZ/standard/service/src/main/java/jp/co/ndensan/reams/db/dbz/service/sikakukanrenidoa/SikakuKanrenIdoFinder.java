@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbx.business.core.gappeijoho.gappeishichoson.GappeiShichoson;
+import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBU;
 import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.DonyuKeitaiCode;
 import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.GyomuBunrui;
 import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT7051KoseiShichosonMasterEntity;
@@ -19,7 +20,6 @@ import jp.co.ndensan.reams.db.dbz.business.HenkoJiyu;
 import jp.co.ndensan.reams.db.dbz.business.core.koseishichosonmaster.koseishichosonmaster.KoseiShichosonMaster;
 import jp.co.ndensan.reams.db.dbz.business.core.sikakukanrenido.SikakuKanrenIdo;
 import jp.co.ndensan.reams.db.dbz.business.sikakujiyushutoku.SikakuJiyuShutoku;
-import jp.co.ndensan.reams.db.dbz.definition.core.enumeratedtype.ConfigNameDBU;
 import jp.co.ndensan.reams.db.dbz.definition.param.sikakukanrenido.SikakuKanrenIdoParameter;
 import jp.co.ndensan.reams.db.dbz.entity.db.relate.SikakuKanrenIdoEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.relate.shikakujiyushutoku.ShikakuJiyuShutoku;
@@ -75,7 +75,8 @@ public class SikakuKanrenIdoFinder {
     /**
      * {@link InstanceProvider#create}にて生成した{@link SikakuKanrenIdoFinder}のインスタンスを返します。
      *
-     * @return {@link InstanceProvider#create}にて生成した{@link SikakuKanrenIdoFinder}のインスタンス
+     * @return
+     * {@link InstanceProvider#create}にて生成した{@link SikakuKanrenIdoFinder}のインスタンス
      */
     public static SikakuKanrenIdoFinder createInstance() {
         return InstanceProvider.create(SikakuKanrenIdoFinder.class);

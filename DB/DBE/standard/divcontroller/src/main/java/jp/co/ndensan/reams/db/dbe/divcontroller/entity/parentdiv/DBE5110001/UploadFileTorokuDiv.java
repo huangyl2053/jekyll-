@@ -29,8 +29,6 @@ public class UploadFileTorokuDiv extends Panel {
     private UploadFileTorokuBatchDiv UploadFileTorokuBatch;
     @JsonProperty("btnRegistUploadFile")
     private Button btnRegistUploadFile;
-    @JsonProperty("btnKakunin")
-    private Button btnKakunin;
     @JsonProperty("uploadedFileID")
     private RString uploadedFileID;
 
@@ -92,24 +90,6 @@ public class UploadFileTorokuDiv extends Panel {
     @JsonProperty("btnRegistUploadFile")
     public void setBtnRegistUploadFile(Button btnRegistUploadFile) {
         this.btnRegistUploadFile = btnRegistUploadFile;
-    }
-
-    /*
-     * getbtnKakunin
-     * @return btnKakunin
-     */
-    @JsonProperty("btnKakunin")
-    public Button getBtnKakunin() {
-        return btnKakunin;
-    }
-
-    /*
-     * setbtnKakunin
-     * @param btnKakunin btnKakunin
-     */
-    @JsonProperty("btnKakunin")
-    public void setBtnKakunin(Button btnKakunin) {
-        this.btnKakunin = btnKakunin;
     }
 
     /*

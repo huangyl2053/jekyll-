@@ -354,6 +354,16 @@ public class ChosaItakusakiAndChosainInputDiv extends Panel implements IChosaIta
         getHandler().initialize(モード);
     }
 
+    @Override
+    public RString getChosaItakusakiCode() {
+        return getHandler().getChosaItakusakiCode();
+    }
+
+    @Override
+    public RString getChosainCode() {
+        return getHandler().getChosainCode();
+    }
+
     @JsonIgnore
     private ChosaItakusakiAndChosainInputHandler getHandler() {
         return new ChosaItakusakiAndChosainInputHandler(this);

@@ -115,4 +115,23 @@ public class ChosaItakusakiAndChosainInputHandler {
         div.getTxtChosainName().setValue(chosaItakusakiAndChosain.get調査員氏名());
 
     }
+
+    /**
+     * 調査委託先コードを取得します。
+     *
+     * @return 調査委託先コード
+     */
+    public RString getChosaItakusakiCode() {
+        return div.getChosaItakusakiCode();
+    }
+
+    /**
+     * 調査員コードを取得します。
+     *
+     * @return 調査員コード
+     */
+    public RString getChosainCode() {
+        return div.getChosainCode();
+    }
+
 }

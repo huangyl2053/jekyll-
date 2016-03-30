@@ -23,6 +23,8 @@ public class PrintPanelDiv extends Panel {
      */
     @JsonProperty("txtNinteiJokyoTeikyoYMD")
     private TextBoxDate txtNinteiJokyoTeikyoYMD;
+    @JsonProperty("radPrintCondition")
+    private RadioButton radPrintCondition;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -46,6 +48,24 @@ public class PrintPanelDiv extends Panel {
     @JsonProperty("txtNinteiJokyoTeikyoYMD")
     public void setTxtNinteiJokyoTeikyoYMD(TextBoxDate txtNinteiJokyoTeikyoYMD) {
         this.txtNinteiJokyoTeikyoYMD = txtNinteiJokyoTeikyoYMD;
+    }
+
+    /*
+     * getradPrintCondition
+     * @return radPrintCondition
+     */
+    @JsonProperty("radPrintCondition")
+    public RadioButton getRadPrintCondition() {
+        return radPrintCondition;
+    }
+
+    /*
+     * setradPrintCondition
+     * @param radPrintCondition radPrintCondition
+     */
+    @JsonProperty("radPrintCondition")
+    public void setRadPrintCondition(RadioButton radPrintCondition) {
+        this.radPrintCondition = radPrintCondition;
     }
 
     // </editor-fold>
