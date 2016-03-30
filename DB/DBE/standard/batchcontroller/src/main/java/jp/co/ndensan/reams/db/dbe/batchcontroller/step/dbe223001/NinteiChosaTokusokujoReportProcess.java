@@ -134,7 +134,11 @@ public class NinteiChosaTokusokujoReportProcess extends BatchProcessBase<NinteiC
         if (atenaKikan.get宛名郵便番号() != null) {
             宛名郵便番号 = atenaKikan.get宛名郵便番号().getColumnValue();
         }
-        RString customerBarCode = ReportUtil.getCustomerBarCode(宛名郵便番号, atenaKikan.get宛名住所());
+        RString 住所 = RString.EMPTY;
+        if (atenaKikan.get宛名住所() != null) {
+            住所 = atenaKikan.get宛名住所();
+        }
+        RString customerBarCode = ReportUtil.getCustomerBarCode(宛名郵便番号, 住所);
 
         RString tempP_性別男 = RString.EMPTY;
         RString tempP_性別女 = RString.EMPTY;
