@@ -6,6 +6,7 @@ package jp.co.ndensan.reams.db.dbd.persistence.db.basic;
 
 import java.util.List;
 import static java.util.Objects.requireNonNull;
+import jp.co.ndensan.reams.db.dbd.definition.core.gemmengengaku.KetteiKubun;
 import jp.co.ndensan.reams.db.dbd.entity.db.basic.DbT4014RiyoshaFutangakuGengaku;
 import static jp.co.ndensan.reams.db.dbd.entity.db.basic.DbT4014RiyoshaFutangakuGengaku.hihokenshaNo;
 import static jp.co.ndensan.reams.db.dbd.entity.db.basic.DbT4014RiyoshaFutangakuGengaku.ketteiKubun;
@@ -34,6 +35,8 @@ import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
  * 利用者負担額減額のデータアクセスクラスです。
  */
 public class DbT4014RiyoshaFutangakuGengakuDac {
+
+    private static final int 区分_いち = 1;
 
     @InjectSession
     private SqlSession session;
@@ -111,8 +114,8 @@ public class DbT4014RiyoshaFutangakuGengakuDac {
                 table(DbT4014RiyoshaFutangakuGengaku.class).
                 where(and(
                                 eq(hihokenshaNo, 被保険者番号),
-                                eq(ketteiKubun, 1),
-                                leq(tekiyoKaishiYMD, サービス提供年月.plusMonth(1)),
+                                eq(ketteiKubun, KetteiKubun.承認する.getコード()),
+                                leq(tekiyoKaishiYMD, サービス提供年月.plusMonth(区分_いち)),
                                 leq(new FlexibleDate(サービス提供年月.toDateString().toString()
                                                 + サービス提供年月.getLastDay()), tekiyoShuryoYMD))).
                 order(by(rirekiNo, DESC)).
