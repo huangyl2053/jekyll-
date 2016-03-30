@@ -3,7 +3,7 @@ package jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2300001;
  * このコードはツールによって生成されました。
  * このファイルへの変更は、以下の状況下で不正な動作の原因になったり、
  * コードが再生成されるときに損失したりします。
- * Wed Mar 16 11:39:06 CST 2016 
+ * Wed Mar 30 10:38:49 JST 2016 
  */
 
 
@@ -58,6 +58,7 @@ public class dgShinseishaIchiran_Row extends DataRow {
     private RString hokenshaNo;
     private RString iryoKikanTelNo;
     private RString preRirekiNo;
+    private RString shichosonCode;
 
     public dgShinseishaIchiran_Row() {
         super();
@@ -95,6 +96,7 @@ public class dgShinseishaIchiran_Row extends DataRow {
         this.hokenshaNo = RString.EMPTY;
         this.iryoKikanTelNo = RString.EMPTY;
         this.preRirekiNo = RString.EMPTY;
+        this.shichosonCode = RString.EMPTY;
         this.setOriginalData("shokai", shokai);
         this.setOriginalData("status", status);
         this.setOriginalData("hihokenshaNo", hihokenshaNo);
@@ -129,9 +131,10 @@ public class dgShinseishaIchiran_Row extends DataRow {
         this.setOriginalData("hokenshaNo", hokenshaNo);
         this.setOriginalData("iryoKikanTelNo", iryoKikanTelNo);
         this.setOriginalData("preRirekiNo", preRirekiNo);
+        this.setOriginalData("shichosonCode", shichosonCode);
     }
 
-    public dgShinseishaIchiran_Row(ButtonDialog shokai, RString status, RString hihokenshaNo, RString hihokennshaShimei, RString seibetsu, TextBoxDate shinseiDay, RString shinseiKubunShinseiji, RString jusho, RString shujiiIryoKikan, RString shujii, TextBoxDate shujiiIkenshoSakuseiIraiDay, RString iraiKubun, RString hokensha, RString zenkaiShujiiIryoKikan, RString zenkaiShujii, TextBoxDate iraishoShutsuryokuDay, TextBoxDate ikenshoShutsuryokuDay, TextBoxDate seikyushoShutsuryokuDay, RString rirekiNo, Boolean sakujoKbn, RString shujiiIryoKikanCode, RString shujiiCode, RString ishiKbnCode, Boolean shiteiiFlag, RString shiseishoKanriNo, TextBoxFlexibleDate birthYMD, RString hihokenshaShimeiKana, Boolean shisetsuNyushoFlag, RString yubinNo, RString koroshoIfShikibetsuCode, RString iryoukikanShozaichi, RString hokenshaNo, RString iryoKikanTelNo, RString preRirekiNo) {
+    public dgShinseishaIchiran_Row(ButtonDialog shokai, RString status, RString hihokenshaNo, RString hihokennshaShimei, RString seibetsu, TextBoxDate shinseiDay, RString shinseiKubunShinseiji, RString jusho, RString shujiiIryoKikan, RString shujii, TextBoxDate shujiiIkenshoSakuseiIraiDay, RString iraiKubun, RString hokensha, RString zenkaiShujiiIryoKikan, RString zenkaiShujii, TextBoxDate iraishoShutsuryokuDay, TextBoxDate ikenshoShutsuryokuDay, TextBoxDate seikyushoShutsuryokuDay, RString rirekiNo, Boolean sakujoKbn, RString shujiiIryoKikanCode, RString shujiiCode, RString ishiKbnCode, Boolean shiteiiFlag, RString shiseishoKanriNo, TextBoxFlexibleDate birthYMD, RString hihokenshaShimeiKana, Boolean shisetsuNyushoFlag, RString yubinNo, RString koroshoIfShikibetsuCode, RString iryoukikanShozaichi, RString hokenshaNo, RString iryoKikanTelNo, RString preRirekiNo, RString shichosonCode) {
         super();
         this.setOriginalData("shokai", shokai);
         this.setOriginalData("status", status);
@@ -167,6 +170,7 @@ public class dgShinseishaIchiran_Row extends DataRow {
         this.setOriginalData("hokenshaNo", hokenshaNo);
         this.setOriginalData("iryoKikanTelNo", iryoKikanTelNo);
         this.setOriginalData("preRirekiNo", preRirekiNo);
+        this.setOriginalData("shichosonCode", shichosonCode);
         this.shokai = shokai;
         this.status = status;
         this.hihokenshaNo = hihokenshaNo;
@@ -201,6 +205,7 @@ public class dgShinseishaIchiran_Row extends DataRow {
         this.hokenshaNo = hokenshaNo;
         this.iryoKikanTelNo = iryoKikanTelNo;
         this.preRirekiNo = preRirekiNo;
+        this.shichosonCode = shichosonCode;
     }
 
     public ButtonDialog getShokai() {
@@ -337,6 +342,10 @@ public class dgShinseishaIchiran_Row extends DataRow {
 
     public RString getPreRirekiNo() {
         return preRirekiNo;
+    }
+
+    public RString getShichosonCode() {
+        return shichosonCode;
     }
 
     public void setShokai(ButtonDialog shokai) {
@@ -507,6 +516,11 @@ public class dgShinseishaIchiran_Row extends DataRow {
     public void setPreRirekiNo(RString preRirekiNo) {
         this.setOriginalData("preRirekiNo", preRirekiNo);
         this.preRirekiNo = preRirekiNo;
+    }
+
+    public void setShichosonCode(RString shichosonCode) {
+        this.setOriginalData("shichosonCode", shichosonCode);
+        this.shichosonCode = shichosonCode;
     }
 
     // </editor-fold>
