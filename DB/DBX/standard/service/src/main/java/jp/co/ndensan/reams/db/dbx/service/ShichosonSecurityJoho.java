@@ -110,10 +110,23 @@ public final class ShichosonSecurityJoho {
     /**
      * 業務コンフィグから管理情報を取得する
      *
-     * @param 介護導入形態 介護導入形態
+     * @param 業務分類 業務分類
      * @return 管理情報
      */
-    public static KanriJoho getKanriJoho(DbT7908KaigoDonyuKeitaiEntity 介護導入形態) {
+    public static KanriJoho getKanriJoho(GyomuBunrui 業務分類) {
+        requireNonNull(業務分類, UrErrorMessages.対象データなし.getMessage().toString());
+        介護導入形態Dac = InstanceProvider.create(DbT7908KaigoDonyuKeitaiDac.class);
+        構成市町村マスタDac = InstanceProvider.create(DbT7051KoseiShichosonMasterDac.class);
+        List<DbT7908KaigoDonyuKeitaiEntity> entitys = 介護導入形態Dac.selectByGyomuBunrui(業務分類.code());
+        if (entitys.isEmpty()) {
+            return null;
+        } else {
+            DbT7908KaigoDonyuKeitaiEntity 介護導入形態 = entitys.get(0);
+            return getKanriJoho(介護導入形態);
+        }
+    }
+
+    private static KanriJoho getKanriJoho(DbT7908KaigoDonyuKeitaiEntity 介護導入形態) {
         requireNonNull(介護導入形態, UrErrorMessages.対象データなし.getMessage().toString());
         KanriJoho 管理情報 = new KanriJoho();
         管理情報.set導入形態コード(介護導入形態.getDonyuKeitaiCode());
