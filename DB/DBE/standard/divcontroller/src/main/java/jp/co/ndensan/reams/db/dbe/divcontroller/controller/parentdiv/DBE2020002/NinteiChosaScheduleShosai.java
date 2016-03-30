@@ -503,7 +503,7 @@ public class NinteiChosaScheduleShosai {
         ViewStateHolder.put(ViewStateKeys.認定調査スケジュール登録_地区コード, 地区コード.value());
         ViewStateHolder.put(ViewStateKeys.認定調査スケジュール登録_設定日, 設定日);
         ViewStateHolder.put(ViewStateKeys.認定調査スケジュール登録_保険者, 保険者.value());
-        ViewStateHolder.put(ViewStateKeys.認定調査スケジュール登録_調査員状況02, div.getRadChosainJokyo().getSelectedKey());
+        ViewStateHolder.put(ViewStateKeys.認定調査スケジュール登録_調査員状況02, row.getYoyakuJokyo());
         ViewStateHolder.put(ViewStateKeys.認定調査スケジュール登録_認定調査委託先コード, 認定調査委託先コード);
         ViewStateHolder.put(ViewStateKeys.認定調査スケジュール登録_時間枠, 選択された時間枠.value());
         ViewStateHolder.put(ViewStateKeys.認定調査スケジュール登録_認定調査員コード, 認定調査員コード);

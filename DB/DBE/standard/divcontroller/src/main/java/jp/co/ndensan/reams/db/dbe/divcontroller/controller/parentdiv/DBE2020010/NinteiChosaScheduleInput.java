@@ -277,7 +277,7 @@ public class NinteiChosaScheduleInput {
             ShinseiRirekiJoho shinseiRirekiJoho = NinteiChosaScheduleInputManager.createInstance()
                     .get前回情報(new ShinseishoKanriNo(temp_申請者管理番号3));
             if (shinseiRirekiJoho == null || shinseiRirekiJoho.get前回申請管理番号() == null || shinseiRirekiJoho.get前回申請管理番号().isEmpty()) {
-                throw new ApplicationException(UrErrorMessages.選択されていない.getMessage().replace("前回履歴"));
+                throw new ApplicationException(UrErrorMessages.存在しない.getMessage().replace("前回履歴"));
             } else {
                 List<NinteichosaSchedule> list = NinteiChosaScheduleInputManager.createInstance()
                         .get対象調査基本情報取得(new ShinseishoKanriNo(shinseiRirekiJoho.get前回申請管理番号().value())).records();

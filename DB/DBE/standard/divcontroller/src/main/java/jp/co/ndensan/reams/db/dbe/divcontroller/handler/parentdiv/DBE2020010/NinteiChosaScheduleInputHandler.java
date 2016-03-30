@@ -9,6 +9,7 @@ import java.util.List;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2020010.NinteiChosaScheduleInputDiv;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBE;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.NinteichosaSchedule;
+import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.NinteiShinseiShinseijiKubunCode;
 import jp.co.ndensan.reams.db.dbz.divcontroller.viewbox.ViewStateKeys;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.biz.TelNo;
@@ -309,7 +310,7 @@ public class NinteiChosaScheduleInputHandler {
         div.getTaishoshaShosai().getTxtHihoBangoGosu().setValue(temp_被保険者区分コード == null ? RString.EMPTY : temp_被保険者区分コード);
         div.getTaishoshaShosai().getTxtHokenshaName().setValue(temp_保険者 == null ? RString.EMPTY : temp_保険者);
         div.getTaishoshaShosai().getTxtNinteiShinseiDate().setValue(temp_認定申請日 == null ? FlexibleDate.EMPTY : temp_認定申請日);
-        div.getTaishoshaShosai().getTxtNinteiShinseiKubun().setValue(temp_申請区分_申請時 == null ? RString.EMPTY : temp_申請区分_申請時);
+        div.getTaishoshaShosai().getTxtNinteiShinseiKubun().setValue(get申請区分(temp_申請区分_申請時));
         div.getTaishoshaShosai().getTxtTaishoshaName().setValue(temp_氏名 == null ? RString.EMPTY : temp_氏名);
         div.getTaishoshaShosai().getTxtTaishoshaNameKana().setValue(temp_カナ氏名 == null ? RString.EMPTY : temp_カナ氏名);
         div.getTaishoshaShosai().getTxtBasho().setValue(temp_場所 == null ? RString.EMPTY : temp_場所);
@@ -319,6 +320,13 @@ public class NinteiChosaScheduleInputHandler {
         div.getTaishoshaShosai().getTxtTachiainin2().setValue(temp_立会人2 == null ? RString.EMPTY : temp_立会人2);
         div.getTaishoshaShosai().getTxtRenrakusaki2().setValue(temp_連絡先2 == null ? RString.EMPTY : temp_連絡先2);
         div.getTaishoshaShosai().getTxtTaishoshaShosaiMemo().setValue(temp_対象者メモ == null ? RString.EMPTY : temp_対象者メモ);
+    }
+
+    private RString get申請区分(RString 申請区分) {
+        if (!RString.isNullOrEmpty(申請区分)) {
+            return NinteiShinseiShinseijiKubunCode.toValue(申請区分).get名称();
+        }
+        return RString.EMPTY;
     }
 
     private RString get調査日時(RString 時間枠) {
