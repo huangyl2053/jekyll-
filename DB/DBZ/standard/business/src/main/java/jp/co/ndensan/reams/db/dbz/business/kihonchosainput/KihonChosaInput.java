@@ -46,6 +46,7 @@ public class KihonChosaInput implements Serializable {
      * @param 認定調査特記事項連番 認定調査特記事項連番
      * @param 原本マスク区分 原本マスク区分
      * @param 特記事項 特記事項
+     * @param 特記事項有無 特記事項有無
      * @link KihonChosaInputEntity}より{@link KihonChosaInput}を生成します。
      */
     public KihonChosaInput(Code 認知症高齢者自立度,
@@ -59,7 +60,8 @@ public class KihonChosaInput implements Serializable {
             RString 認定調査特記事項番号,
             int 認定調査特記事項連番,
             Code 原本マスク区分,
-            RString 特記事項
+            RString 特記事項,
+            boolean 特記事項有無
     ) {
         this.認定調査基本情報 = new KihonChosaInputEntity();
         認定調査基本情報.set前回認知症高齢者自立度(前回認知症高齢者自立度);
@@ -74,6 +76,7 @@ public class KihonChosaInput implements Serializable {
         認定調査基本情報.set調査連番(調査連番);
         認定調査基本情報.set調査項目(調査項目);
         認定調査基本情報.set障害高齢者自立度(障害高齢者自立度);
+        認定調査基本情報.set特記事項有無(特記事項有無);
     }
 
     /**

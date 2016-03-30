@@ -668,6 +668,7 @@ public class KihonChosaInputHandler {
                 処置内容特記事項番号.add(特記事項番号);
             }
         }
+        set前回処置内容Keys(前回処置内容Keys, 認定調査基本情報);
     }
 
     private void set前回処置内容Keys(List<RString> 前回処置内容Keys, KihonChosaInput 認定調査基本情報) {
@@ -1447,13 +1448,13 @@ public class KihonChosaInputHandler {
             認定調査基本情報 = 認定調査基本情報リスト.get(0);
         } else {
             認定調査基本情報 = new KihonChosaInput(Code.EMPTY, Code.EMPTY, 0, RString.EMPTY,
-                    Code.EMPTY, Code.EMPTY, 0, RString.EMPTY, RString.EMPTY, 0, Code.EMPTY, RString.EMPTY);
+                    Code.EMPTY, Code.EMPTY, 0, RString.EMPTY, RString.EMPTY, 0, Code.EMPTY, RString.EMPTY, false);
         }
         KihonChosaInput new認定調査基本情報 = new KihonChosaInput(get日常生活自立度(認知症高齢者の日常生活自立度Key),
                 get日常生活自立度(障害高齢者の日常生活自立度_寝たきり度Key), 認定調査基本情報.get調査連番(), 認定調査基本情報.get調査項目(),
                 認定調査基本情報.get前回認知症高齢者自立度(), 認定調査基本情報.get前回障害高齢者自立度(), 認定調査基本情報.get前回調査連番(),
                 認定調査基本情報.get前回調査項目(), 認定調査基本情報.get認定調査特記事項番号(), 認定調査基本情報.get認定調査特記事項連番(),
-                認定調査基本情報.get原本マスク区分(), 認定調査基本情報.get特記事項());
+                認定調査基本情報.get原本マスク区分(), 認定調査基本情報.get特記事項(), 認定調査基本情報.get特記事項有無());
         認定調査基本情報リスト.clear();
         認定調査基本情報リスト.add(new認定調査基本情報);
     }
@@ -1715,7 +1716,7 @@ public class KihonChosaInputHandler {
                             認定調査基本情報.get障害高齢者自立度(), 認定調査基本情報.get調査連番(), 調査項目ない,
                             認定調査基本情報.get前回認知症高齢者自立度(), 認定調査基本情報.get前回障害高齢者自立度(), 認定調査基本情報.get前回調査連番(),
                             認定調査基本情報.get前回調査項目(), 認定調査基本情報.get認定調査特記事項番号(), 認定調査基本情報.get認定調査特記事項連番(),
-                            認定調査基本情報.get原本マスク区分(), 認定調査基本情報.get特記事項());
+                            認定調査基本情報.get原本マスク区分(), 認定調査基本情報.get特記事項(), 認定調査基本情報.get特記事項有無());
                     remove認定調査基本情報リスト.add(認定調査基本情報);
                     add認定調査基本情報リスト.add(new認定調査基本情報);
                 } else if (is認定調査基本情報_連番が連番Listに存在(連番List, 認定調査基本情報_連番)
@@ -1724,7 +1725,7 @@ public class KihonChosaInputHandler {
                             認定調査基本情報.get障害高齢者自立度(), 認定調査基本情報.get調査連番(), 調査項目ある,
                             認定調査基本情報.get前回認知症高齢者自立度(), 認定調査基本情報.get前回障害高齢者自立度(), 認定調査基本情報.get前回調査連番(),
                             認定調査基本情報.get前回調査項目(), 認定調査基本情報.get認定調査特記事項番号(), 認定調査基本情報.get認定調査特記事項連番(),
-                            認定調査基本情報.get原本マスク区分(), 認定調査基本情報.get特記事項());
+                            認定調査基本情報.get原本マスク区分(), 認定調査基本情報.get特記事項(), 認定調査基本情報.get特記事項有無());
                     remove認定調査基本情報リスト.add(認定調査基本情報);
                     add認定調査基本情報リスト.add(new認定調査基本情報);
                 }
@@ -1759,7 +1760,7 @@ public class KihonChosaInputHandler {
                             認定調査基本情報.get障害高齢者自立度(), 認定調査基本情報.get調査連番(), get調査項目By単項Key(単項Key),
                             認定調査基本情報.get前回認知症高齢者自立度(), 認定調査基本情報.get前回障害高齢者自立度(), 認定調査基本情報.get前回調査連番(),
                             認定調査基本情報.get前回調査項目(), 認定調査基本情報.get認定調査特記事項番号(), 認定調査基本情報.get認定調査特記事項連番(),
-                            認定調査基本情報.get原本マスク区分(), 認定調査基本情報.get特記事項());
+                            認定調査基本情報.get原本マスク区分(), 認定調査基本情報.get特記事項(), 認定調査基本情報.get特記事項有無());
                     remove認定調査基本情報リスト.add(認定調査基本情報);
                     add認定調査基本情報リスト.add(new認定調査基本情報);
                 }
@@ -1772,7 +1773,7 @@ public class KihonChosaInputHandler {
         }
         if (is連番対応認定調査基本情報なし) {
             認定調査基本情報リスト.add(new KihonChosaInput(Code.EMPTY, Code.EMPTY, 連番, get調査項目By単項Key(単項Key), Code.EMPTY, Code.EMPTY,
-                    0, RString.EMPTY, RString.EMPTY, 0, Code.EMPTY, RString.EMPTY));
+                    0, RString.EMPTY, RString.EMPTY, 0, Code.EMPTY, RString.EMPTY, false));
         }
     }
 
