@@ -33,23 +33,6 @@ public class HanteiKekkaJohoShutsuryokuBatchParamter extends BatchParameterBase 
     private RString nijiHanteiYMDTo;
 
     /**
-     * コンストラクタです。
-     *
-     * @param 申請書管理番号 申請書管理番号
-     * @param 二次判定日From 二次判定日From
-     * @param 二次判定日To 二次判定日To
-     * @throws NullPointerException 引数のいずれかが{@code null}の場合
-     */
-    public HanteiKekkaJohoShutsuryokuBatchParamter(
-            List<RString> 申請書管理番号,
-            RString 二次判定日From,
-            RString 二次判定日To) {
-        this.shinseishoKanriNo = 申請書管理番号;
-        this.nijiHanteiYMDFrom = 二次判定日From;
-        this.nijiHanteiYMDTo = 二次判定日To;
-    }
-
-    /**
      * processのパラメータを生成します。
      *
      * @return ItakusakiChosainIchiranMybitisParamter
