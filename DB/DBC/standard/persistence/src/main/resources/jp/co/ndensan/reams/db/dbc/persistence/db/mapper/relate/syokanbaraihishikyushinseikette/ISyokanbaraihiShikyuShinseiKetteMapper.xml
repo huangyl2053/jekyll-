@@ -49,7 +49,7 @@
         <result property="後保険請求額" column="atoHokenSeikyugaku" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
         <result property="件数" column="count" />
     </resultMap>
-    <select id="get社福軽減額サービス種類"
+    <select id="get給付実績基本情報"
             resultMap="resultMap_KyufujissekiKihon"
             parameterType="jp.co.ndensan.reams.db.dbc.definition.mybatisprm.syokanbaraihishikyushinseikette.KyufujissekiKihonParameter" fetchSize="500">
         SELECT
@@ -96,7 +96,7 @@
                  B."seiriNo",
                  B."atoHokenSeikyugaku"
             ORDER BY 
-                  B."shinsaYM" DESC
+                  "shinsaYM" DESC
            ) AS A
         GROUP BY
             A."shinsaYM",
