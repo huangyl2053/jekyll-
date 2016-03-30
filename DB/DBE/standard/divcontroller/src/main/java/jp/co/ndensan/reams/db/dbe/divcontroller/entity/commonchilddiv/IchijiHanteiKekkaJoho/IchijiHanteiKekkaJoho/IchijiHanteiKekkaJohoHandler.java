@@ -94,22 +94,22 @@ public class IchijiHanteiKekkaJohoHandler {
             if (ichijiHanteiKekkaJoho != null) {
                 div.getTxtIchijiHanteibi().setValue(ichijiHanteiKekkaJoho.toEntity().getIchijiHanteiYMD());
 
-                if (ninteiShinseiJoho.get厚労省IF識別コード() != null
+                if (ninteiShinseiJoho != null
                         && KoroshoIfShikibetsuCode.認定ｿﾌﾄ99.getコード().equals(
                                 ninteiShinseiJoho.get厚労省IF識別コード().value())) {
                     div.getTxtIchijiHanteiKekka().setValue(
                             IchijiHanteiKekkaCode99.toValue(ichijiHanteiKekkaJoho.toEntity().getIchijiHanteiKekkaCode().value()).get名称());
-                } else if (ninteiShinseiJoho.get厚労省IF識別コード() != null
+                } else if (ninteiShinseiJoho != null
                         && KoroshoIfShikibetsuCode.認定ｿﾌﾄ2002.getコード().equals(
                                 ninteiShinseiJoho.get厚労省IF識別コード().value())) {
                     div.getTxtIchijiHanteiKekka().setValue(
                             IchijiHanteiKekkaCode02.toValue(ichijiHanteiKekkaJoho.toEntity().getIchijiHanteiKekkaCode().value()).get名称());
-                } else if (ninteiShinseiJoho.get厚労省IF識別コード() != null
+                } else if (ninteiShinseiJoho != null
                         && KoroshoIfShikibetsuCode.認定ｿﾌﾄ2006_新要介護認定適用区分が未適用.getコード().equals(
                                 ninteiShinseiJoho.get厚労省IF識別コード().value())) {
                     div.getTxtIchijiHanteiKekka().setValue(
                             IchijiHanteiKekkaCode06.toValue(ichijiHanteiKekkaJoho.toEntity().getIchijiHanteiKekkaCode().value()).get名称());
-                } else if (ninteiShinseiJoho.get厚労省IF識別コード() != null
+                } else if (ninteiShinseiJoho != null
                         && KoroshoIfShikibetsuCode.認定ｿﾌﾄ2009.getコード().equals(
                                 ninteiShinseiJoho.get厚労省IF識別コード().value())
                         || KoroshoIfShikibetsuCode.認定ｿﾌﾄ2009_SP3.getコード().equals(
@@ -168,7 +168,7 @@ public class IchijiHanteiKekkaJohoHandler {
                         dgIchijiHanteiKeikokuCode_Row row = new dgIchijiHanteiKeikokuCode_Row();
                         row.setNo(new RString(String.valueOf(i + 1)));
                         row.setCode(codeList.get(i));
-                        if (ninteiShinseiJoho.get厚労省IF識別コード() != null
+                        if (ninteiShinseiJoho != null
                                 && (KoroshoIfShikibetsuCode.認定ｿﾌﾄ2009.getコード().equals(
                                         ninteiShinseiJoho.get厚労省IF識別コード().value())
                                 || KoroshoIfShikibetsuCode.認定ｿﾌﾄ2009_SP3.getコード().equals(
