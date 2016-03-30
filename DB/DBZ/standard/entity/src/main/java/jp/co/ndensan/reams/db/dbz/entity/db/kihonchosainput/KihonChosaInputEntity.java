@@ -30,5 +30,6 @@ public class KihonChosaInputEntity implements Serializable {
     private int 認定調査特記事項連番;
     private Code 原本マスク区分;
     private RString 特記事項;
+    private boolean 特記事項有無;
 
 }
