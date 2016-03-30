@@ -4,6 +4,25 @@ var DBC;
         var Events = (function () {
             function Events() {
             }
+            Events.onClick_InsertButton = function () {
+                return "onClick_InsertButton";
+            };
+
+            Events.onSelectByDbClick = function () {
+                return "onSelectByDbClick";
+            };
+
+            Events.onClick_SelectButton = function () {
+                return "onClick_SelectButton";
+            };
+
+            Events.onClick_ModifyButton = function () {
+                return "onClick_ModifyButton";
+            };
+
+            Events.onClick_DeleteButton = function () {
+                return "onClick_DeleteButton";
+            };
             return Events;
         })();
         ShokanShinseiList.Events = Events;

@@ -3,7 +3,7 @@ package jp.co.ndensan.reams.db.dbc.divcontroller.entity.commonchilddiv.ShokanShi
  * このコードはツールによって生成されました。
  * このファイルへの変更は、以下の状況下で不正な動作の原因になったり、
  * コードが再生成されるときに損失したりします。
- * Wed Jan 27 19:06:49 JST 2016 
+ * Tue Mar 29 14:55:20 CST 2016 
  */
 
 
@@ -19,7 +19,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
  */
 
 public class dgShinseiList_Row extends DataRow {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：バージョン情報無し">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-01-15_09-59-03">
 
     private RString hiHokenshaNo;
     private RString serviceTeikyoYM;
@@ -28,6 +28,7 @@ public class dgShinseiList_Row extends DataRow {
     private RString rirekiNo;
     private RString sofuYM;
     private RString ketteiYMD;
+    private RString yoshikiNo;
 
     public dgShinseiList_Row() {
         super();
@@ -38,6 +39,7 @@ public class dgShinseiList_Row extends DataRow {
         this.rirekiNo = RString.EMPTY;
         this.sofuYM = RString.EMPTY;
         this.ketteiYMD = RString.EMPTY;
+        this.yoshikiNo = RString.EMPTY;
         this.setOriginalData("hiHokenshaNo", hiHokenshaNo);
         this.setOriginalData("serviceTeikyoYM", serviceTeikyoYM);
         this.setOriginalData("shinseiYMD", shinseiYMD);
@@ -45,9 +47,10 @@ public class dgShinseiList_Row extends DataRow {
         this.setOriginalData("rirekiNo", rirekiNo);
         this.setOriginalData("sofuYM", sofuYM);
         this.setOriginalData("ketteiYMD", ketteiYMD);
+        this.setOriginalData("yoshikiNo", yoshikiNo);
     }
 
-    public dgShinseiList_Row(RString hiHokenshaNo, RString serviceTeikyoYM, RString shinseiYMD, RString seiriNo, RString rirekiNo, RString sofuYM, RString ketteiYMD) {
+    public dgShinseiList_Row(RString hiHokenshaNo, RString serviceTeikyoYM, RString shinseiYMD, RString seiriNo, RString rirekiNo, RString sofuYM, RString ketteiYMD, RString yoshikiNo) {
         super();
         this.setOriginalData("hiHokenshaNo", hiHokenshaNo);
         this.setOriginalData("serviceTeikyoYM", serviceTeikyoYM);
@@ -56,6 +59,7 @@ public class dgShinseiList_Row extends DataRow {
         this.setOriginalData("rirekiNo", rirekiNo);
         this.setOriginalData("sofuYM", sofuYM);
         this.setOriginalData("ketteiYMD", ketteiYMD);
+        this.setOriginalData("yoshikiNo", yoshikiNo);
         this.hiHokenshaNo = hiHokenshaNo;
         this.serviceTeikyoYM = serviceTeikyoYM;
         this.shinseiYMD = shinseiYMD;
@@ -63,6 +67,7 @@ public class dgShinseiList_Row extends DataRow {
         this.rirekiNo = rirekiNo;
         this.sofuYM = sofuYM;
         this.ketteiYMD = ketteiYMD;
+        this.yoshikiNo = yoshikiNo;
     }
 
     public RString getHiHokenshaNo() {
@@ -91,6 +96,10 @@ public class dgShinseiList_Row extends DataRow {
 
     public RString getKetteiYMD() {
         return ketteiYMD;
+    }
+
+    public RString getYoshikiNo() {
+        return yoshikiNo;
     }
 
     public void setHiHokenshaNo(RString hiHokenshaNo) {
@@ -126,6 +135,11 @@ public class dgShinseiList_Row extends DataRow {
     public void setKetteiYMD(RString ketteiYMD) {
         this.setOriginalData("ketteiYMD", ketteiYMD);
         this.ketteiYMD = ketteiYMD;
+    }
+
+    public void setYoshikiNo(RString yoshikiNo) {
+        this.setOriginalData("yoshikiNo", yoshikiNo);
+        this.yoshikiNo = yoshikiNo;
     }
 
     // </editor-fold>
