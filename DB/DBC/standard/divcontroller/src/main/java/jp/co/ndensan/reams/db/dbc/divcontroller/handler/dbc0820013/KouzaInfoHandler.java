@@ -34,12 +34,13 @@ import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 public class KouzaInfoHandler {
 
     private final KouzaInfoPanelDiv div;
+    private static final long 口座ID = 11111;
     private static final RString 受託なし = new RString("1");
     private static final RString 受託あり = new RString("2");
-    private static final long 口座ID = 11111;
+    private static final RString 償還払支給申請 = new RString("償還払支給申請");
 
     /**
-     * KouzaInfoHandler
+     * KouzaInfoHandlerのコンストラクタです。
      *
      * @param div KouzaInfoPanelDiv
      */
@@ -48,7 +49,7 @@ public class KouzaInfoHandler {
     }
 
     /**
-     * ヘッダエリアの設定
+     * ヘッダエリアの設定です。
      *
      * @param 識別コード ShikibetsuCode
      * @param 被保険者番号 HihokenshaNo
@@ -59,7 +60,7 @@ public class KouzaInfoHandler {
     }
 
     /**
-     * 申請共通エリアの設定
+     * 申請共通エリアの設定する。
      *
      * @param サービス年月 FlexibleYearMonth
      * @param 整理番号 RString
@@ -76,7 +77,7 @@ public class KouzaInfoHandler {
     }
 
     /**
-     * 登録モードの初期化。
+     * 登録モードの初期化メソッドです。
      *
      * @param 被保険者番号 HihokenshaNo
      * @param サービス年月 FlexibleYearMonth
@@ -98,7 +99,7 @@ public class KouzaInfoHandler {
     }
 
     /**
-     * 「申請情報」ボタン Handler処理
+     * 「申請情報」ボタン Handler処理です。
      */
     public void onClick_btnShinseiInfo() {
         RString 処理モード = ViewStateHolder.get(ViewStateKeys.処理モード, RString.class);
@@ -113,14 +114,14 @@ public class KouzaInfoHandler {
     }
 
     /**
-     * 「申請情報」ボタン Handler処理
+     * 「申請情報」ボタン Handler処理です。
      */
     public void onClick_btnKouzaInfo() {
         // TODO QA252
     }
 
     /**
-     * 「サービス提供証明書」ボタン Handler処理
+     * 「サービス提供証明書」ボタン Handler処理です。
      */
     public void onClick_btnServiceTeikyoShomeisyo() {
         // TODO　QA252 画面モードの用处　
@@ -130,7 +131,7 @@ public class KouzaInfoHandler {
     }
 
     /**
-     * 「償還払決定情報」ボタン Handler処理
+     * 「償還払決定情報」ボタン Handler処理です。
      */
     public void onClick_btnShokanbaraiKeiteInfo() {
         // TODO　QA252 画面モードの用处
@@ -140,7 +141,7 @@ public class KouzaInfoHandler {
     }
 
     /**
-     * 申請既存チェック
+     * 申請既存チェックです。
      */
     public void 申請既存チェック() {
         ServiceTeiKyoShomeishoParameter parameter = ViewStateHolder.get(
@@ -151,12 +152,12 @@ public class KouzaInfoHandler {
         List<ShokanShinsei> entity = ShokanbaraiJyokyoShokai.createInstance()
                 .getShokanbaraiShinseiJyohoDetail(被保険者番号, サービス年月, 整理番号);
         if (entity == null) {
-            throw new ApplicationException(UrErrorMessages.存在しない.getMessage().replace("償還払支給申請"));
+            throw new ApplicationException(UrErrorMessages.存在しない.getMessage().replace(償還払支給申請.toString()));
         }
     }
 
     /**
-     * 画面内容の変更有無チェック
+     * 画面内容の変更有無チェックです。
      *
      * @return 画面内容の変更
      */
@@ -166,9 +167,10 @@ public class KouzaInfoHandler {
     }
 
     /**
-     * 「申請を保存する」ボタン 登録、修正の場合
+     * 「申請を保存する」ボタン 登録、修正の場合です。
      */
     public void 保存_修正() {
+        // TODO うそのデータ
         ShokanShinsei entityView = ViewStateHolder.get(ViewStateKeys.償還払い費支給申請決定_口座情報, ShokanShinsei.class);
         ServiceTeiKyoShomeishoParameter parameter = ViewStateHolder.get(
                 ViewStateKeys.基本情報パラメータ, ServiceTeiKyoShomeishoParameter.class);
@@ -199,7 +201,7 @@ public class KouzaInfoHandler {
     }
 
     /**
-     * 「申請を保存する」ボタン 削除モードの場合
+     * 「申請を保存する」ボタン 削除モードの場合です。
      */
     public void 保存_削除() {
         ServiceTeiKyoShomeishoParameter parameter = ViewStateHolder.get(
@@ -212,7 +214,7 @@ public class KouzaInfoHandler {
     }
 
     /**
-     * 償還払支給申請詳細データ取得
+     * 償還払支給申請詳細データ取得する。
      *
      * @param 被保険者番号 HihokenshaNo
      * @param サービス年月 FlexibleYearMonth
