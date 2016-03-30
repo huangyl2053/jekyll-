@@ -184,4 +184,23 @@ public class KihonChosaInput implements Serializable {
         return 認定調査基本情報.get特記事項();
     }
 
+    /**
+     * 特記事項有無を返します。
+     *
+     * @return 特記事項
+     */
+    public boolean get特記事項有無() {
+        return 認定調査基本情報.is特記事項有無();
+    }
+
+    /**
+     * このクラスの編集を行うBuilderを取得します。<br/>
+     * 編集後のインスタンスを取得する場合は{@link SeishinTechoNini.createBuilderForEdit#build()}を使用してください。
+     *
+     * @return Builder
+     */
+    public KihonChosaInputBuilder createBuilderForEdit() {
+        return new KihonChosaInputBuilder(認定調査基本情報);
+    }
+
 }
