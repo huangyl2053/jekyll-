@@ -116,7 +116,6 @@ public final class ShichosonSecurityJoho {
     public static KanriJoho getKanriJoho(GyomuBunrui 業務分類) {
         requireNonNull(業務分類, UrErrorMessages.対象データなし.getMessage().toString());
         介護導入形態Dac = InstanceProvider.create(DbT7908KaigoDonyuKeitaiDac.class);
-        構成市町村マスタDac = InstanceProvider.create(DbT7051KoseiShichosonMasterDac.class);
         List<DbT7908KaigoDonyuKeitaiEntity> entitys = 介護導入形態Dac.selectByGyomuBunrui(業務分類.code());
         if (entitys.isEmpty()) {
             return null;
