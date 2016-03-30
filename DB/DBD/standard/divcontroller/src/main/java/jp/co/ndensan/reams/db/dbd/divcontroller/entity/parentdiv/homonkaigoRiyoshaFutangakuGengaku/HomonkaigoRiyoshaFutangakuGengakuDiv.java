@@ -1,19 +1,15 @@
 package jp.co.ndensan.reams.db.dbd.divcontroller.entity.parentdiv.homonkaigoRiyoshaFutangakuGengaku;
-/**
- * このコードはツールによって生成されました。
- * このファイルへの変更は、再生成時には損失するため
- * 不正な動作の原因になります。
- */
-import com.fasterxml.jackson.annotation.JsonProperty;
-import jp.co.ndensan.reams.db.dbd.divcontroller.entity.parentdiv.homonkaigoRiyoshaFutangakuGengaku.HomonkaigoRiyoshaFutangakuGengakuDetailDiv;
-import jp.co.ndensan.reams.db.dbd.divcontroller.entity.parentdiv.homonkaigoRiyoshaFutangakuGengaku.dgHomonkaigoRiyoshaFutangakuGengakuList_Row;
-import jp.co.ndensan.reams.uz.uza.ui.binding.*;
-import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
-import jp.co.ndensan.reams.uz.uza.ui.binding.domain.*;
 
 /**
- * HomonkaigoRiyoshaFutangakuGengaku のクラスファイル 
- * 
+ * このコードはツールによって生成されました。 このファイルへの変更は、再生成時には損失するため 不正な動作の原因になります。
+ */
+import com.fasterxml.jackson.annotation.JsonProperty;
+import jp.co.ndensan.reams.uz.uza.ui.binding.*;
+import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
+
+/**
+ * HomonkaigoRiyoshaFutangakuGengaku のクラスファイル
+ *
  * @author 自動生成
  */
 public class HomonkaigoRiyoshaFutangakuGengakuDiv extends Panel {
@@ -23,6 +19,7 @@ public class HomonkaigoRiyoshaFutangakuGengakuDiv extends Panel {
      * コントロール名とフィールド名を取得する
      * private + コントロール名 + フィールド名 の文字列を作成
      */
+
     @JsonProperty("txtHiddenHihokenshaNo")
     private TextBox txtHiddenHihokenshaNo;
     @JsonProperty("dgHomonkaigoRiyoshaFutangakuGengakuList")
@@ -45,7 +42,7 @@ public class HomonkaigoRiyoshaFutangakuGengakuDiv extends Panel {
 
     @JsonProperty("txtHiddenHihokenshaNo")
     public void setTxtHiddenHihokenshaNo(TextBox txtHiddenHihokenshaNo) {
-        this.txtHiddenHihokenshaNo=txtHiddenHihokenshaNo;
+        this.txtHiddenHihokenshaNo = txtHiddenHihokenshaNo;
     }
 
     @JsonProperty("dgHomonkaigoRiyoshaFutangakuGengakuList")
@@ -55,7 +52,7 @@ public class HomonkaigoRiyoshaFutangakuGengakuDiv extends Panel {
 
     @JsonProperty("dgHomonkaigoRiyoshaFutangakuGengakuList")
     public void setDgHomonkaigoRiyoshaFutangakuGengakuList(DataGrid<dgHomonkaigoRiyoshaFutangakuGengakuList_Row> dgHomonkaigoRiyoshaFutangakuGengakuList) {
-        this.dgHomonkaigoRiyoshaFutangakuGengakuList=dgHomonkaigoRiyoshaFutangakuGengakuList;
+        this.dgHomonkaigoRiyoshaFutangakuGengakuList = dgHomonkaigoRiyoshaFutangakuGengakuList;
     }
 
     @JsonProperty("HomonkaigoRiyoshaFutangakuGengakuDetail")
@@ -65,7 +62,7 @@ public class HomonkaigoRiyoshaFutangakuGengakuDiv extends Panel {
 
     @JsonProperty("HomonkaigoRiyoshaFutangakuGengakuDetail")
     public void setHomonkaigoRiyoshaFutangakuGengakuDetail(HomonkaigoRiyoshaFutangakuGengakuDetailDiv HomonkaigoRiyoshaFutangakuGengakuDetail) {
-        this.HomonkaigoRiyoshaFutangakuGengakuDetail=HomonkaigoRiyoshaFutangakuGengakuDetail;
+        this.HomonkaigoRiyoshaFutangakuGengakuDetail = HomonkaigoRiyoshaFutangakuGengakuDetail;
     }
 
     @JsonProperty("btnClose")
@@ -75,7 +72,7 @@ public class HomonkaigoRiyoshaFutangakuGengakuDiv extends Panel {
 
     @JsonProperty("btnClose")
     public void setBtnClose(Button btnClose) {
-        this.btnClose=btnClose;
+        this.btnClose = btnClose;
     }
 
 }
