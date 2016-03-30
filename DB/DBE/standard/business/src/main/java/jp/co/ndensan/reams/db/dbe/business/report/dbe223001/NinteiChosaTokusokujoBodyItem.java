@@ -5,10 +5,6 @@
  */
 package jp.co.ndensan.reams.db.dbe.business.report.dbe223001;
 
-import jp.co.ndensan.reams.ur.urz.business.core.association.Association;
-import jp.co.ndensan.reams.ur.urz.business.core.ninshosha.Ninshosha;
-import jp.co.ndensan.reams.ur.urz.definition.core.ninshosha.KenmeiFuyoKubunType;
-import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import lombok.Getter;
 
@@ -20,13 +16,15 @@ import lombok.Getter;
 @SuppressWarnings("PMD.UnusedPrivateField")
 public class NinteiChosaTokusokujoBodyItem {
 
-    private final Ninshosha 認証者情報;
-    private final Association 公共団体情報;
-    private final RString イメージファイルパス;
-    private final RDate 発行日;
-    private final boolean is公印に掛ける;
-    private final boolean is公印を省略;
-    private final KenmeiFuyoKubunType 県郡名付与区分;
+    private final RString hakkoYMD;
+    private final RString denshiKoin;
+    private final RString koinMojiretsu;
+    private final RString koinShoryaku;
+    private final RString ninshoshaYakushokuMei;
+    private final RString ninshoshaYakushokuMei1;
+    private final RString ninshoshaYakushokuMei2;
+    private final RString ninshoshaShimeiKakenai;
+    private final RString ninshoshaShimeiKakeru;
     private final RString bunshoNo;
     private final RString tsuchibun1;
     private final RString shinseiKubun;
@@ -58,17 +56,27 @@ public class NinteiChosaTokusokujoBodyItem {
     private final RString yubinNo;
     private final RString jusho;
     private final RString tsuchibun2;
+    private final RString yubinNo1;
+    private final RString jushoText;
+    private final RString kikanNameText;
+    private final RString shimeiText;
+    private final RString meishoFuyo;
+    private final RString customerBarCode;
+    private final RString sonota;
+    private final RString title;
 
     /**
      * 要介護認定調査督促状表情報を生成します。
      *
-     * @param 認証者情報 認証者情報
-     * @param 公共団体情報 公共団体情報
-     * @param イメージファイルパス イメージファイルパス
-     * @param 発行日 発行日
-     * @param is公印に掛ける is公印に掛ける
-     * @param is公印を省略 is公印を省略
-     * @param 県郡名付与区分 認証者氏名(県郡名付与区分)
+     * @param hakkoYMD 発行日
+     * @param denshiKoin 電子公印
+     * @param koinMojiretsu 公印文字列
+     * @param koinShoryaku 公印省略
+     * @param ninshoshaYakushokuMei 認証者役職名
+     * @param ninshoshaYakushokuMei1 認証者役職名1
+     * @param ninshoshaYakushokuMei2 認証者役職名2
+     * @param ninshoshaShimeiKakenai 認証者氏名(公印に掛けない)
+     * @param ninshoshaShimeiKakeru 認証者氏名(公印に掛ける)
      * @param bunshoNo 文書番号
      * @param tsuchibun1 通知文定型文1
      * @param shinseiKubun 申請区分
@@ -100,14 +108,24 @@ public class NinteiChosaTokusokujoBodyItem {
      * @param yubinNo 住所郵便
      * @param jusho 住所
      * @param tsuchibun2 通知文問合せ
+     * @param yubinNo1 宛名郵便番号
+     * @param jushoText 宛名住所
+     * @param kikanNameText 宛名機関名
+     * @param shimeiText 宛名氏名
+     * @param meishoFuyo 宛名名称付与
+     * @param customerBarCode カスタマーバーコード
+     * @param sonota 宛名その他
+     * @param title タイトル
      */
-    public NinteiChosaTokusokujoBodyItem(Ninshosha 認証者情報,
-            Association 公共団体情報,
-            RString イメージファイルパス,
-            RDate 発行日,
-            boolean is公印に掛ける,
-            boolean is公印を省略,
-            KenmeiFuyoKubunType 県郡名付与区分,
+    public NinteiChosaTokusokujoBodyItem(RString hakkoYMD,
+            RString denshiKoin,
+            RString koinMojiretsu,
+            RString koinShoryaku,
+            RString ninshoshaYakushokuMei,
+            RString ninshoshaYakushokuMei1,
+            RString ninshoshaYakushokuMei2,
+            RString ninshoshaShimeiKakenai,
+            RString ninshoshaShimeiKakeru,
             RString bunshoNo,
             RString tsuchibun1,
             RString shinseiKubun,
@@ -138,15 +156,25 @@ public class NinteiChosaTokusokujoBodyItem {
             RString birthYMD,
             RString yubinNo,
             RString jusho,
-            RString tsuchibun2
+            RString tsuchibun2,
+            RString yubinNo1,
+            RString jushoText,
+            RString kikanNameText,
+            RString shimeiText,
+            RString meishoFuyo,
+            RString customerBarCode,
+            RString sonota,
+            RString title
     ) {
-        this.認証者情報 = 認証者情報;
-        this.公共団体情報 = 公共団体情報;
-        this.イメージファイルパス = イメージファイルパス;
-        this.発行日 = 発行日;
-        this.is公印に掛ける = is公印に掛ける;
-        this.is公印を省略 = is公印を省略;
-        this.県郡名付与区分 = 県郡名付与区分;
+        this.hakkoYMD = hakkoYMD;
+        this.denshiKoin = denshiKoin;
+        this.ninshoshaYakushokuMei = ninshoshaYakushokuMei;
+        this.ninshoshaYakushokuMei2 = ninshoshaYakushokuMei2;
+        this.ninshoshaYakushokuMei1 = ninshoshaYakushokuMei1;
+        this.koinMojiretsu = koinMojiretsu;
+        this.ninshoshaShimeiKakenai = ninshoshaShimeiKakenai;
+        this.ninshoshaShimeiKakeru = ninshoshaShimeiKakeru;
+        this.koinShoryaku = koinShoryaku;
         this.bunshoNo = bunshoNo;
         this.tsuchibun1 = tsuchibun1;
         this.shinseiKubun = shinseiKubun;
@@ -178,5 +206,13 @@ public class NinteiChosaTokusokujoBodyItem {
         this.yubinNo = yubinNo;
         this.jusho = jusho;
         this.tsuchibun2 = tsuchibun2;
+        this.yubinNo1 = yubinNo1;
+        this.jushoText = jushoText;
+        this.kikanNameText = kikanNameText;
+        this.shimeiText = shimeiText;
+        this.meishoFuyo = meishoFuyo;
+        this.customerBarCode = customerBarCode;
+        this.sonota = sonota;
+        this.title = title;
     }
 }

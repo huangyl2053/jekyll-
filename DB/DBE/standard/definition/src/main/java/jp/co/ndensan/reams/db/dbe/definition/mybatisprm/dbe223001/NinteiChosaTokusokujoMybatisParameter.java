@@ -6,6 +6,7 @@
 package jp.co.ndensan.reams.db.dbe.definition.mybatisprm.dbe223001;
 
 import jp.co.ndensan.reams.uz.uza.batch.parameter.IMyBatisParameter;
+import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
@@ -25,6 +26,7 @@ public final class NinteiChosaTokusokujoMybatisParameter implements IMyBatisPara
     private final RString temp_保険者コード;
     private final RString temp_認定調査委託先コード;
     private final RString temp_認定調査員コード;
+    private final LasdecCode temp_市町村コード;
 
     /**
      * コンストラクタです。
@@ -35,13 +37,15 @@ public final class NinteiChosaTokusokujoMybatisParameter implements IMyBatisPara
      * @param temp_保険者コード 保険者コード
      * @param temp_認定調査委託先コード 認定調査委託先コード
      * @param temp_認定調査員コード 認定調査員コード
+     * @param temp_市町村コード 市町村コード
      */
     public NinteiChosaTokusokujoMybatisParameter(FlexibleDate temp_基準日,
             Decimal temp_認定調査督促期限日数,
             RString temp_印刷済対象者,
             RString temp_保険者コード,
             RString temp_認定調査委託先コード,
-            RString temp_認定調査員コード
+            RString temp_認定調査員コード,
+            LasdecCode temp_市町村コード
     ) {
         this.temp_基準日 = temp_基準日;
         this.temp_認定調査督促期限日数 = temp_認定調査督促期限日数;
@@ -49,6 +53,7 @@ public final class NinteiChosaTokusokujoMybatisParameter implements IMyBatisPara
         this.temp_保険者コード = temp_保険者コード;
         this.temp_認定調査委託先コード = temp_認定調査委託先コード;
         this.temp_認定調査員コード = temp_認定調査員コード;
+        this.temp_市町村コード = temp_市町村コード;
     }
 
 }

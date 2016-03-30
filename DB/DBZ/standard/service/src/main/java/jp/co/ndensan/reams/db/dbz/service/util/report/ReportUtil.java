@@ -39,6 +39,8 @@ import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
+import jp.co.ndensan.reams.uz.uza.report.util.barcode.CustomerBarCode;
+import jp.co.ndensan.reams.uz.uza.report.util.barcode.CustomerBarCodeResult;
 import jp.co.ndensan.reams.uz.uza.util.CountedItem;
 import jp.co.ndensan.reams.uz.uza.util.Saiban;
 
@@ -131,5 +133,18 @@ public final class ReportUtil {
             通知文.put(sentenceNo, textHenkanRule.editText(tsuchishoTeikeibun.getTsuchishoTeikeibunEntity().getSentence()));
         }
         return 通知文;
+    }
+
+    /**
+     * カスタマーバーコードを取得します。
+     *
+     * @param yubinNo 郵便番号
+     * @param jusho 住所
+     * @return カスタマーバーコード
+     */
+    public static RString getCustomerBarCode(RString yubinNo, RString jusho) {
+        CustomerBarCode barcode = new CustomerBarCode();
+        CustomerBarCodeResult result = barcode.convertCustomerBarCode(yubinNo, jusho);
+        return result.getCustomerBarCode();
     }
 }

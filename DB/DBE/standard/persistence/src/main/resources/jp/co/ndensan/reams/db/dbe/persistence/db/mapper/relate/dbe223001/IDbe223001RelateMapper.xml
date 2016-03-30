@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<!-- 概要： 合議体情報のマッピング用XMLです。 -->
+<!-- 概要： 認定調査督促状発行のマッピング用XMLです。 -->
 
 <!-- どのマッパーインターフェースと対応するかを指定する -->
 <mapper namespace="jp.co.ndensan.reams.db.dbe.persistence.db.mapper.relate.dbe223001.IDbe223001RelateMapper">
@@ -28,10 +28,6 @@
             parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatisprm.dbe223001.NinteiChosaTokusokujoMybatisParameter"
             fetchSize="500">
         SELECT
-        DbT5910NinteichosaItakusakiJoho."yubinNo"  AS  temp_事業者郵便番号,
-        DbT7051KoseiShichosonMaster."shichosonMeisho"  AS  temp_市町村名称,
-        DbT5910NinteichosaItakusakiJoho."jigyoshaMeisho"  AS  temp_事業者名称,
-        DbT5913ChosainJoho."chosainShimei"  AS  temp_調査員氏名,
         DbT5101NinteiShinseiJoho."shoKisaiHokenshaNo"  AS  temp_保険者番号,
         DbT5101NinteiShinseiJoho."hihokenshaNo"  AS  temp_被保険者番号,
         DbT5101NinteiShinseiJoho."hihokenshaKana"  AS  temp_被保険者氏名カナ,
@@ -41,50 +37,9 @@
         DbT5101NinteiShinseiJoho."seinengappiYMD"  AS  temp_生年月日,
         DbT5101NinteiShinseiJoho."jusho"  AS  temp_被保険者住所,
         DbT5101NinteiShinseiJoho."yubinNo"  AS  temp_被保険者郵便番号,
-        DbT5101NinteiShinseiJoho."shinseishoKanriNo"  AS  temp_申請書管理番号,
         DbT5101NinteiShinseiJoho."ninteiShinseiShinseijiKubunCode"  AS  temp_申請区分コード
         FROM
         rgdb."DbT5101NinteiShinseiJoho"  AS  DbT5101NinteiShinseiJoho  <!-- 要介護認定申請情報 -->
-        INNER JOIN
-        rgdb."DbT7051KoseiShichosonMaster"  AS  DbT7051KoseiShichosonMaster  <!-- 構成市町村マスタ -->
-        ON  DbT7051KoseiShichosonMaster."shoKisaiHokenshaNo" = DbT5101NinteiShinseiJoho."shoKisaiHokenshaNo"
-        INNER JOIN
-        rgdb."DbT5910NinteichosaItakusakiJoho"  AS  DbT5910NinteichosaItakusakiJoho  <!-- 認定調査委託先情報 -->
-        ON  DbT5910NinteichosaItakusakiJoho."shichosonCode" = DbT7051KoseiShichosonMaster."shichosonCode"
-        INNER JOIN
-        rgdb."DbT5913ChosainJoho"  AS  DbT5913ChosainJoho     <!-- 調査員情報 -->
-        ON  DbT5913ChosainJoho."shichosonCode" = DbT5910NinteichosaItakusakiJoho."shichosonCode"
-        AND  DbT5913ChosainJoho."ninteiChosaItakusakiCode" = DbT5910NinteichosaItakusakiJoho."ninteichosaItakusakiCode"
-        INNER JOIN
-        (
-        SELECT
-        "shinseishoKanriNo",
-        MAX("ninteichosaIraiRirekiNo") AS ninteichosaIraiRirekiNo
-        FROM
-        rgdb."DbT5201NinteichosaIraiJoho"  <!-- 認定調査依頼情報 -->
-        WHERE
-        "logicalDeletedFlag" = FALSE
-        GROUP BY
-        "shinseishoKanriNo"
-        ) AS TB1
-        ON TB1."shinseishoKanriNo" = DbT5101NinteiShinseiJoho."shinseishoKanriNo"
-        INNER JOIN
-        rgdb."DbT5201NinteichosaIraiJoho"  AS  DbT5201NinteichosaIraiJoho      <!-- 認定調査依頼情報 -->
-        ON  DbT5201NinteichosaIraiJoho."shinseishoKanriNo" = DbT5101NinteiShinseiJoho."shinseishoKanriNo"
-        AND  DbT5201NinteichosaIraiJoho."ninteichosaIraiRirekiNo" = TB1.ninteichosaIraiRirekiNo
-        AND  DbT5201NinteichosaIraiJoho."ninteichosaKigenYMD" <![CDATA[<]]> #{temp_基準日}
-        <if test="temp_印刷済対象者==1">
-            AND (DbT5201NinteichosaIraiJoho."ninteichosaTokusokuYMD" is null OR DbT5201NinteichosaIraiJoho."ninteichosaTokusokuYMD" = '')
-        </if>
-        INNER JOIN
-        rgdb."DbT5105NinteiKanryoJoho" AS DbT5105NinteiKanryoJoho
-        ON  DbT5105NinteiKanryoJoho."shinseishoKanriNo" = DbT5101NinteiShinseiJoho."shinseishoKanriNo"
-        AND  DbT5105NinteiKanryoJoho."ninteiShinseiJohoTorokuKanryoYMD" is not null AND DbT5105NinteiKanryoJoho."ninteiShinseiJohoTorokuKanryoYMD" != ''
-        AND  DbT5105NinteiKanryoJoho."ninteichosaIraiKanryoYMD" is not null AND DbT5105NinteiKanryoJoho."ninteichosaIraiKanryoYMD" != ''
-        AND  (DbT5105NinteiKanryoJoho."ninteichosaKanryoYMD" is null OR DbT5105NinteiKanryoJoho."ninteichosaKanryoYMD" = '')
-        AND  (DbT5105NinteiKanryoJoho."ninteiShinsakaiWariateKanryoYMD" is null OR DbT5105NinteiKanryoJoho."ninteiShinsakaiWariateKanryoYMD" = '')
-        AND  (DbT5105NinteiKanryoJoho."ninteiShinsakaiKanryoYMD" is null OR DbT5105NinteiKanryoJoho."ninteiShinsakaiKanryoYMD" = '')
-        AND  (DbT5105NinteiKanryoJoho."centerSoshinYMD" is null OR DbT5105NinteiKanryoJoho."centerSoshinYMD" = '')
         <where>
             1 = 1
             <if test="temp_保険者コード!=null and !temp_保険者コード.isEmpty()">
@@ -99,11 +54,10 @@
         </where>
         AND  DbT5101NinteiShinseiJoho."shoriJotaiKubun" != '1'
         AND  DbT5101NinteiShinseiJoho."shoriJotaiKubun" != '2'
-        ORDER BY 
+        ORDER BY
         temp_保険者番号,
         temp_被保険者氏名カナ
     </select>
-
 
     <!--  NinteiChosaTokusokuTaishoshaIchiranhyoEntityの項目にマッピングします。-->
     <resultMap id="resultMap_NinteiChosaTokusokuTaishoshaIchiranhyoRelateEntity" type="jp.co.ndensan.reams.db.dbe.entity.db.relate.dbe223001.NinteiChosaTokusokuTaishoshaIchiranhyoRelateEntity" autoMapping="true">
@@ -205,4 +159,37 @@
         temp_保険者番号,
         temp_被保険者氏名カナ
     </select>
+
+    <select id="select市町村コード"
+            resultType="jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT7051KoseiShichosonMasterEntity"
+            parameterType="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"
+            fetchSize="500">
+        SELECT
+        DbT7051."shichosonCode" AS shichosonCode
+        FROM rgdb."DbT7051KoseiShichosonMaster" AS DbT7051
+        WHERE
+        DbT7051."shoKisaiHokenshaNo" = #{保険者コード}
+        LIMIT 1
+    </select>
+
+    <select id="select宛名機関"
+            resultType="jp.co.ndensan.reams.db.dbe.entity.db.relate.dbe223001.AtenaKikan"
+            parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatisprm.dbe223001.NinteiChosaTokusokuTaishoshaIchiranhyoMybatisParameter"
+            fetchSize="500">
+        SELECT
+        DbT5910."jigyoshaMeisho" AS 宛名機関名,
+        DbT5910."yubinNo" AS 宛名郵便番号,
+        DbT5910."jusho" AS 宛名住所,
+        DbT5913."chosainShimei" AS 宛名氏名
+        FROM
+        rgdb."DbT5913ChosainJoho" AS DbT5913
+        LEFT JOIN rgdb."DbT5910NinteichosaItakusakiJoho" AS DbT5910
+        ON DbT5913."shichosonCode" = DbT5910."shichosonCode"
+        AND DbT5913."ninteiChosaItakusakiCode" = DbT5910."ninteichosaItakusakiCode"
+        WHERE
+        DbT5913."ninteiChosaItakusakiCode" = #{temp_認定調査委託先コード}
+        AND DbT5913."ninteiChosainCode" = #{temp_認定調査員コード}
+        AND DbT5913."shichosonCode" = #{temp_市町村コード}
+    </select>
+
 </mapper>

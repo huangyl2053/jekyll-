@@ -32,7 +32,7 @@ public class UpadteDataProcess extends SimpleBatchProcessBase {
 
         List<RString> noList = processParameter.get申請書管理番号List();
         for (RString shinseishoKanriNo : noList) {
-            mapper.update認定調査依頼情報BY申請書管理番号(processParameter.toNinteiChosaTokusokujoMybatisParameter(shinseishoKanriNo));
+//            mapper.update認定調査依頼情報BY申請書管理番号(processParameter.toNinteiChosaTokusokujoMybatisParameter(shinseishoKanriNo));
         }
     }
 
