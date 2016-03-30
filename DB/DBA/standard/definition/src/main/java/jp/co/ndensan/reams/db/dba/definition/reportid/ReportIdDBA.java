@@ -211,7 +211,11 @@ public enum ReportIdDBA {
     /**
      * 年齢到達予定者一覧表の帳票ＩＤです。
      */
-    DBA200001(new ReportId("DBA200001_NenreitotatsuYoteishaIchiranhyo"), new RString("年齢到達予定者一覧表"));
+    DBA200001(new ReportId("DBA200001_NenreitotatsuYoteishaIchiranhyo"), new RString("年齢到達予定者一覧表")),
+    /**
+     * 被保険者台帳一覧表の帳票ＩＤです。
+     */
+    DBA200002(new ReportId("DBA200002_HihokenshaDaichoHakkoIchiranhyo"), new RString("被保険者台帳一覧表"));
 
     private final ReportId reportId;
     private final RString reportName;
