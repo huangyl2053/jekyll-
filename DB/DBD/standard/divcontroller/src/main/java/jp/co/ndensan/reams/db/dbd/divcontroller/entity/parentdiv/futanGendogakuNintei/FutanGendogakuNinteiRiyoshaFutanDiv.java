@@ -1,18 +1,15 @@
 package jp.co.ndensan.reams.db.dbd.divcontroller.entity.parentdiv.futanGendogakuNintei;
-/**
- * このコードはツールによって生成されました。
- * このファイルへの変更は、再生成時には損失するため
- * 不正な動作の原因になります。
- */
-import com.fasterxml.jackson.annotation.JsonProperty;
-import jp.co.ndensan.reams.db.dbd.divcontroller.entity.parentdiv.futanGendogakuNintei.FutanGendogakuDiv;
-import jp.co.ndensan.reams.uz.uza.ui.binding.*;
-import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
-import jp.co.ndensan.reams.uz.uza.ui.binding.domain.*;
 
 /**
- * FutanGendogakuNinteiRiyoshaFutan のクラスファイル 
- * 
+ * このコードはツールによって生成されました。 このファイルへの変更は、再生成時には損失するため 不正な動作の原因になります。
+ */
+import com.fasterxml.jackson.annotation.JsonProperty;
+import jp.co.ndensan.reams.uz.uza.ui.binding.*;
+import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
+
+/**
+ * FutanGendogakuNinteiRiyoshaFutan のクラスファイル
+ *
  * @author 自動生成
  */
 public class FutanGendogakuNinteiRiyoshaFutanDiv extends Panel {
@@ -22,6 +19,7 @@ public class FutanGendogakuNinteiRiyoshaFutanDiv extends Panel {
      * コントロール名とフィールド名を取得する
      * private + コントロール名 + フィールド名 の文字列を作成
      */
+
     @JsonProperty("txtKetteiDate")
     private TextBoxFlexibleDate txtKetteiDate;
     @JsonProperty("txtKetteiKubun")
@@ -58,7 +56,7 @@ public class FutanGendogakuNinteiRiyoshaFutanDiv extends Panel {
 
     @JsonProperty("txtKetteiDate")
     public void setTxtKetteiDate(TextBoxFlexibleDate txtKetteiDate) {
-        this.txtKetteiDate=txtKetteiDate;
+        this.txtKetteiDate = txtKetteiDate;
     }
 
     @JsonProperty("txtKetteiKubun")
@@ -68,7 +66,7 @@ public class FutanGendogakuNinteiRiyoshaFutanDiv extends Panel {
 
     @JsonProperty("txtKetteiKubun")
     public void setTxtKetteiKubun(TextBox txtKetteiKubun) {
-        this.txtKetteiKubun=txtKetteiKubun;
+        this.txtKetteiKubun = txtKetteiKubun;
     }
 
     @JsonProperty("txtTekiyoDate")
@@ -78,7 +76,7 @@ public class FutanGendogakuNinteiRiyoshaFutanDiv extends Panel {
 
     @JsonProperty("txtTekiyoDate")
     public void setTxtTekiyoDate(TextBoxFlexibleDate txtTekiyoDate) {
-        this.txtTekiyoDate=txtTekiyoDate;
+        this.txtTekiyoDate = txtTekiyoDate;
     }
 
     @JsonProperty("txtYukokigenDate")
@@ -88,7 +86,7 @@ public class FutanGendogakuNinteiRiyoshaFutanDiv extends Panel {
 
     @JsonProperty("txtYukokigenDate")
     public void setTxtYukokigenDate(TextBoxFlexibleDate txtYukokigenDate) {
-        this.txtYukokigenDate=txtYukokigenDate;
+        this.txtYukokigenDate = txtYukokigenDate;
     }
 
     @JsonProperty("txtKyushochisha")
@@ -98,7 +96,7 @@ public class FutanGendogakuNinteiRiyoshaFutanDiv extends Panel {
 
     @JsonProperty("txtKyushochisha")
     public void setTxtKyushochisha(TextBox txtKyushochisha) {
-        this.txtKyushochisha=txtKyushochisha;
+        this.txtKyushochisha = txtKyushochisha;
     }
 
     @JsonProperty("txtFutanDankai")
@@ -108,7 +106,7 @@ public class FutanGendogakuNinteiRiyoshaFutanDiv extends Panel {
 
     @JsonProperty("txtFutanDankai")
     public void setTxtFutanDankai(TextBox txtFutanDankai) {
-        this.txtFutanDankai=txtFutanDankai;
+        this.txtFutanDankai = txtFutanDankai;
     }
 
     @JsonProperty("txtKyoshitsuType")
@@ -118,7 +116,7 @@ public class FutanGendogakuNinteiRiyoshaFutanDiv extends Panel {
 
     @JsonProperty("txtKyoshitsuType")
     public void setTxtKyoshitsuType(TextBox txtKyoshitsuType) {
-        this.txtKyoshitsuType=txtKyoshitsuType;
+        this.txtKyoshitsuType = txtKyoshitsuType;
     }
 
     @JsonProperty("txtKyokaiso")
@@ -128,7 +126,7 @@ public class FutanGendogakuNinteiRiyoshaFutanDiv extends Panel {
 
     @JsonProperty("txtKyokaiso")
     public void setTxtKyokaiso(TextBox txtKyokaiso) {
-        this.txtKyokaiso=txtKyokaiso;
+        this.txtKyokaiso = txtKyokaiso;
     }
 
     @JsonProperty("txtGekihenKanwa")
@@ -138,7 +136,7 @@ public class FutanGendogakuNinteiRiyoshaFutanDiv extends Panel {
 
     @JsonProperty("txtGekihenKanwa")
     public void setTxtGekihenKanwa(TextBox txtGekihenKanwa) {
-        this.txtGekihenKanwa=txtGekihenKanwa;
+        this.txtGekihenKanwa = txtGekihenKanwa;
     }
 
     @JsonProperty("FutanGendogaku")
@@ -148,7 +146,7 @@ public class FutanGendogakuNinteiRiyoshaFutanDiv extends Panel {
 
     @JsonProperty("FutanGendogaku")
     public void setFutanGendogaku(FutanGendogakuDiv FutanGendogaku) {
-        this.FutanGendogaku=FutanGendogaku;
+        this.FutanGendogaku = FutanGendogaku;
     }
 
     @JsonProperty("txtFushoninRiyu")
@@ -158,7 +156,7 @@ public class FutanGendogakuNinteiRiyoshaFutanDiv extends Panel {
 
     @JsonProperty("txtFushoninRiyu")
     public void setTxtFushoninRiyu(TextBoxMultiLine txtFushoninRiyu) {
-        this.txtFushoninRiyu=txtFushoninRiyu;
+        this.txtFushoninRiyu = txtFushoninRiyu;
     }
 
 }
