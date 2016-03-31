@@ -11,13 +11,13 @@ import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.RoreiFukus
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.RoreiFukushiNenkinShokai.RoreiFukushiNenkinShokaiHandler;
 import jp.co.ndensan.reams.db.dbz.divcontroller.viewbox.ViewStateKeys;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrQuestionMessages;
-import jp.co.ndensan.reams.ur.urz.definition.message.UrWarningMessages;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.message.MessageDialogSelectedResult;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ResponseHolder;
+import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 import jp.co.ndensan.reams.uz.uza.util.Models;
 
@@ -28,7 +28,7 @@ import jp.co.ndensan.reams.uz.uza.util.Models;
 public class RoreiFukushiNenkinShokai {
 
     private static final RString 状態_追加 = new RString("追加");
-    private static final RString 状態_更新 = new RString("更新");
+    private static final RString 状態_更新 = new RString("修正");
     private static final RString 状態_削除 = new RString("削除");
 
     /**
@@ -92,10 +92,21 @@ public class RoreiFukushiNenkinShokai {
                 ResponseHolder.getMessageCode()) && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
             if (div.getPanelInput().getTxtStartDate().getValue() != null
                     && div.getPanelInput().getTxtEndDate().getValue() != null
-                    && !div.getPanelInput().getTxtStartDate().getValue().isBefore(div.getPanelInput().getTxtEndDate().getValue())) {
-                return ResponseData.of(div).addMessage(UrWarningMessages.日付の前後関係逆転以降.getMessage().replace(
-                        div.getPanelInput().getTxtStartDate().getValue().toString(), div.getPanelInput().getTxtEndDate().getValue().toString())).
+                    && !div.getPanelInput().getTxtStartDate().getValue().isBeforeOrEquals(div.getPanelInput().getTxtEndDate().getValue())) {
+                ValidationMessageControlPairs validPairs = new ValidationMessageControlPairs();
+                return ResponseData.of(div).addValidationMessages(getHandler(div).addMessage(validPairs, 
+                        div.getPanelInput().getTxtStartDate().getValue().toString(),
+                        div.getPanelInput().getTxtEndDate().getValue().toString())).
                         respond();
+            }
+            RString イベント状態 = div.getPanelInput().getState();
+            ValidationMessageControlPairs 受給開始日重複チェック = getHandler(div).set受給開始日の重複チェック();
+            if (状態_追加.equals(イベント状態) && 受給開始日重複チェック.iterator().hasNext()) {
+                return ResponseData.of(div).addValidationMessages(受給開始日重複チェック).respond();
+            }
+            ValidationMessageControlPairs validPairs = getHandler(div).set受給期間の重複チェック(イベント状態);
+            if (validPairs.iterator().hasNext()) {
+                return ResponseData.of(div).addValidationMessages(validPairs).respond();
             }
             this.onClick_はい(div);
         }
@@ -104,10 +115,6 @@ public class RoreiFukushiNenkinShokai {
 
     private ResponseData<RoreiFukushiNenkinShokaiDiv> onClick_はい(RoreiFukushiNenkinShokaiDiv div) {
         RString イベント状態 = div.getPanelInput().getState();
-        if (状態_追加.equals(イベント状態)) {
-            getHandler(div).set受給開始日の重複チェック();
-        }
-        getHandler(div).set受給期間の重複チェック(イベント状態);
         Models<RoreiFukushiNenkinJukyushaIdentifier, RoreiFukushiNenkinJukyusha> models
                 = ViewStateHolder.get(ViewStateKeys.老齢福祉年金情報_老齢福祉年金情報検索結果一覧, Models.class);
         if (状態_追加.equals(イベント状態)) {

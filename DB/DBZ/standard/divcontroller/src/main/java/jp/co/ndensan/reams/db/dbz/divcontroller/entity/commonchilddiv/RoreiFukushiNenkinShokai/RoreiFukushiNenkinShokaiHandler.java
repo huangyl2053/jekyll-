@@ -15,10 +15,14 @@ import jp.co.ndensan.reams.db.dbz.definition.core.roreifukushinenkinjoho.RoreiFu
 import jp.co.ndensan.reams.db.dbz.service.core.hihokensha.roreifukushinenkinjukyusha.RoreiFukushiNenkinJukyushaManager;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
-import jp.co.ndensan.reams.uz.uza.lang.ApplicationException;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.message.IMessageGettable;
+import jp.co.ndensan.reams.uz.uza.message.IValidationMessage;
+import jp.co.ndensan.reams.uz.uza.message.Message;
+import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPair;
+import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
 
 /**
  * 老齢福祉年金画面のハンドラークラスです。
@@ -126,7 +130,8 @@ public class RoreiFukushiNenkinShokaiHandler {
      */
     public void set確定ボタン画面表示() {
         div.getPanelRireki().setDisabled(false);
-        div.getPanelInput().setDisplayNone(true);
+        div.getPanelInput().getBtnCancel().setDisabled(true);
+        div.getPanelInput().getBtnSave().setDisabled(true);
         div.getPanelInput().getTxtStartDate().clearValue();
         div.getPanelInput().getTxtEndDate().clearValue();
     }
@@ -164,6 +169,12 @@ public class RoreiFukushiNenkinShokaiHandler {
      */
     public RoreiFukushiNenkinJukyusha set年金確定ボタン押下の追加(
             RoreiFukushiNenkinJukyusha roreifukushinenkinjukyusha) {
+        if (div.getPanelInput().getTxtEndDate().getValue() == null) {
+            return roreifukushinenkinjukyusha.createBuilderForEdit()
+                .set被保険者番号(new HihokenshaNo(div.getHihokenshaNo()))
+                .set受給廃止年月日(null)
+                .build();
+        }
         return roreifukushinenkinjukyusha.createBuilderForEdit()
                 .set被保険者番号(new HihokenshaNo(div.getHihokenshaNo()))
                 .set受給廃止年月日(new FlexibleDate(div.getPanelInput().getTxtEndDate().getValue().toDateString()))
@@ -196,25 +207,30 @@ public class RoreiFukushiNenkinShokaiHandler {
 
     /**
      * 老齢福祉年金「追加モード」の場合、「受給開始日の重複チェック」、 DBには、既に存在していれば、エラーとする。
+     * @return ValidationMessageControlPairs
      */
-    public void set受給開始日の重複チェック() {
+    public ValidationMessageControlPairs set受給開始日の重複チェック() {
+        ValidationMessageControlPairs validPairs = new ValidationMessageControlPairs();
         RoreiFukushiNenkinJohoMapperParameter addCheck = RoreiFukushiNenkinJohoMapperParameter.createRoreiFukushiParam(
                 new ShikibetsuCode(div.getShikibetsuCode()),
                 new FlexibleDate(div.getPanelInput().getTxtStartDate().getValue().toDateString()),
                 HihokenshaNo.EMPTY,
                 FlexibleDate.EMPTY);
         if (RoreiFukushiNenkinJukyushaManager.createInstance().checkSameJukyuKaishibi(addCheck) > 0) {
-            throw new ApplicationException(UrErrorMessages.既に登録済.getMessage().replace(
-                    div.getPanelInput().getTxtStartDate().getValue().toString()));
+            addMessage_既に登録済(validPairs, 
+                        div.getPanelInput().getTxtStartDate().getValue().toString());
         }
+        return validPairs;
     }
 
     /**
      * 「受給期間の重複チェック」、履歴一覧に１件以上、受給期間が存在場合、受給期間が重複していれば、エラーとする。
      *
      * @param eventJotai 状態
+     * @return ValidationMessageControlPairs
      */
-    public void set受給期間の重複チェック(RString eventJotai) {
+    public ValidationMessageControlPairs set受給期間の重複チェック(RString eventJotai) {
+        ValidationMessageControlPairs validPairs = new ValidationMessageControlPairs();
         datagridRireki_Row clickRow = div.getDatagridRireki().getClickedItem();
         int clickID = div.getDatagridRireki().getClickedRowId();
         List<datagridRireki_Row> list = new ArrayList<>();
@@ -234,11 +250,12 @@ public class RoreiFukushiNenkinShokaiHandler {
         for (int i = 0; i < list.size() - 1; i++) {
             if (!list.get(i).getEndDate().getValue()
                     .isBefore(list.get(i + 1).getStartDate().getValue())) {
-                throw new ApplicationException(UrErrorMessages.期間が不正_追加メッセージあり２.getMessage().replace(
-                        list.get(i).getEndDate().getValue().toString(), list.get(i + 1).getStartDate().getValue()
-                        .toString()));
+                addMessage(validPairs, 
+                        list.get(i).getEndDate().getValue().toString(),
+                        list.get(i + 1).getStartDate().getValue().toString());
             }
         }
+        return validPairs;
     }
 
     /**
@@ -263,5 +280,38 @@ public class RoreiFukushiNenkinShokaiHandler {
                     row.getEndDate()));
         }
         return tempList;
+    }
+    
+    /**
+     * 期間が不正チェックです。
+     * @param validPairs ValidationMessageControlPairs
+     * @param replace 受給開始日
+     * @param replace1 受給廃止日
+     * @return ValidationMessageControlPairs
+     */
+    public ValidationMessageControlPairs addMessage(ValidationMessageControlPairs validPairs, String replace, String replace1) {
+        validPairs.add(new ValidationMessageControlPair(new IdocheckMessages(
+                    UrErrorMessages.期間が不正_追加メッセージあり２, replace, replace1)));
+        return validPairs;
+    }
+    
+    private ValidationMessageControlPairs addMessage_既に登録済(ValidationMessageControlPairs validPairs, String replace) {
+        validPairs.add(new ValidationMessageControlPair(new IdocheckMessages(
+                    UrErrorMessages.既に登録済, replace)));
+        return validPairs;
+    }
+    
+    private static class IdocheckMessages implements IValidationMessage {
+
+        private final Message message;
+
+        public IdocheckMessages(IMessageGettable message, String... replacements) {
+            this.message = message.getMessage().replace(replacements);
+        }
+
+        @Override
+        public Message getMessage() {
+            return message;
+        }
     }
 }
