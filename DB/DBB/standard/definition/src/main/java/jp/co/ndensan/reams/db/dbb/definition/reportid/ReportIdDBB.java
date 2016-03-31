@@ -33,7 +33,7 @@ public enum ReportIdDBB {
     /**
      * 介護保険料減免決定通知書A4縦タイプ帳票
      */
-    DDBB100078(new ReportId("DDBB100078_KaigoHokenryoGenmenKetteiTsuchishoA4Tate"), new RString("介護保険料減免決定通知書A4縦タイプ.")),
+    DBB100078(new ReportId("DDBB100078_KaigoHokenryoGenmenKetteiTsuchishoA4Tate"), new RString("介護保険料減免決定通知書A4縦タイプ.")),
     /**
      * 介護保険料減免決定通知書B5横タイプ
      */
