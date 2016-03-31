@@ -183,6 +183,31 @@ public class ShisetsuNyutaishoRirekiKanriDiv extends Panel implements IShisetsuN
     @JsonProperty("modes")
     private HashSet<Mode> modes;
 
+    @Override
+    public void set表示モード(RString 表示) {
+        setMode_表示モード(表示モード.getEnum(表示.toString()));
+    }
+
+    @Override
+    public void set明細表示モード(RString 明細表示) {
+        setMode_明細表示モード(明細表示モード.getEnum(明細表示.toString()));
+    }
+    
+    @Override
+    public void set利用モード(RString 利用モード) {
+        setMode_利用(利用.getEnum(利用モード.toString()));
+    }
+
+    @Override
+    public void set表示widthサイズ(RString 表示サイズ) {
+        setMode_表示widthサイズ(表示widthサイズ.getEnum(表示サイズ.toString()));
+    }
+
+    @Override
+    public void set表示heightサイズ(RString 表示サイズ) {
+        setMode_表示heightサイズ(表示heightサイズ.getEnum(表示サイズ.toString()));
+    }
+
     public static enum 表示widthサイズ implements ICommonChildDivMode {
 
         モード1("モード1"),

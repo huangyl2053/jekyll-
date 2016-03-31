@@ -34,17 +34,13 @@ import jp.co.ndensan.reams.uz.uza.util.Models;
 public class ShisetsuNyutaishoRirekiKanriHandler {
 
     private final ShisetsuNyutaishoRirekiKanriDiv div;
-    private final RString 照会選択有 = new RString("照会選択有");
-    private final RString 照会選択無 = new RString("照会選択無");
     private final RString 資格異動 = new RString("資格異動");
     private final RString 台帳種別表示機能 = new RString("台帳種別表示機能");
-    private final RString 全施設対象機能 = new RString("全施設対象機能");
-    private final RString 被保険者対象機能 = new RString("被保険者対象機能");
-    private final RString 他市町村住所地特例者対象機能 = new RString("他市町村住所地特例者対象機能");
     private final RString 適用除外者対象機能 = new RString("適用除外者対象機能");
     private final RString 追加 = new RString("追加");
     private final RString 更新 = new RString("修正");
     private final RString 削除 = new RString("削除");
+    private RString 利用モード = RString.EMPTY;
 
     /**
      * コンストラクタです。
@@ -61,8 +57,7 @@ public class ShisetsuNyutaishoRirekiKanriHandler {
      * @param 識別コード 識別コード
      */
     public void initialize(ShikibetsuCode 識別コード) {
-        RString 表示モード = ViewStateHolder.get(ViewStateKeys.施設入退所履歴_表示モード, RString.class);
-        RString 利用モード = ViewStateHolder.get(ViewStateKeys.施設入退所履歴_利用モード, RString.class);
+        div.setShikibetsuCode(識別コード.getColumnValue());
         List<KaigoHohenShisetsuBusiness> 施設入退所情報
                 = KaigoHohenShisetsuNyutaishoshaKanriManager.createInstance().select介護保険施設入退所一覧By識別コード(識別コード).records();
         if (施設入退所情報 != null && !施設入退所情報.isEmpty()) {
@@ -73,12 +68,15 @@ public class ShisetsuNyutaishoRirekiKanriHandler {
         } else {
             ViewStateHolder.put(ViewStateKeys.施設入退所履歴_施設入退所情報, Models.create(new ArrayList()));
         }
-        if (照会選択無.equals(表示モード)) {
-            照会モード表示_非表示(照会選択無);
-        } else if (照会選択有.equals(表示モード)) {
-            照会モード表示_非表示(照会選択有);
-        } else if (資格異動.equals(表示モード)) {
-            資格異動モード(利用モード);
+        switch (div.getMode_表示モード()) {
+            case 照会:
+                break;
+            case 照会選択有:
+                break;
+            case 資格異動:
+                資格異動モード();
+                利用モード = new RString(div.getMode_利用().toString());
+                break;
         }
     }
 
@@ -96,7 +94,6 @@ public class ShisetsuNyutaishoRirekiKanriHandler {
      * @param row 選択データ
      */
     public void onSelectBySelectButton_dgShisetsuNyutaishoRireki(dgShisetsuNyutaishoRireki_Row row) {
-        RString 利用モード = ViewStateHolder.get(ViewStateKeys.施設入退所履歴_利用モード, RString.class);
         div.getShisetsuNyutaishoInput().getTxtNyushoDate().setValue(row.getNyushoDate().getValue());
         div.getShisetsuNyutaishoInput().getTxtTaishoDate().setValue(row.getTaishoDate().getValue());
         if (台帳種別表示機能.equals(利用モード)) {
@@ -117,7 +114,6 @@ public class ShisetsuNyutaishoRirekiKanriHandler {
      * @param row 選択データ
      */
     public void onSelectByModifyButton_dgShisetsuNyutaishoRireki(dgShisetsuNyutaishoRireki_Row row) {
-        RString 利用モード = ViewStateHolder.get(ViewStateKeys.施設入退所履歴_利用モード, RString.class);
         div.setInputMode(更新);
         div.getShisetsuNyutaishoInput().getTxtNyushoDate().setDisabled(false);
         div.getShisetsuNyutaishoInput().getTxtTaishoDate().setDisabled(false);
@@ -142,7 +138,6 @@ public class ShisetsuNyutaishoRirekiKanriHandler {
      * @param row 選択データ
      */
     public void onSelectByDeleteButton_dgShisetsuNyutaishoRireki(dgShisetsuNyutaishoRireki_Row row) {
-        RString 利用モード = ViewStateHolder.get(ViewStateKeys.施設入退所履歴_利用モード, RString.class);
         div.setInputMode(削除);
         div.getShisetsuNyutaishoInput().getTxtNyushoDate().setDisabled(true);
         div.getShisetsuNyutaishoInput().getTxtTaishoDate().setDisabled(true);
@@ -184,8 +179,7 @@ public class ShisetsuNyutaishoRirekiKanriHandler {
     public void onClick_btnShisetsuNyutaishoKakutei(dgShisetsuNyutaishoRireki_Row row) {
         Models<ShisetsuNyutaishoIdentifier, ShisetsuNyutaisho> 施設入退所情報Model
                 = ViewStateHolder.get(ViewStateKeys.施設入退所履歴_施設入退所情報, Models.class);
-        ShikibetsuCode 識別コード = new ShikibetsuCode(ViewStateHolder.get(ViewStateKeys.施設入退所履歴_識別コード, RString.class));
-        RString 利用モード = ViewStateHolder.get(ViewStateKeys.施設入退所履歴_利用モード, RString.class);
+        ShikibetsuCode 識別コード = new ShikibetsuCode(div.getShikibetsuCode());
         List<dgShisetsuNyutaishoRireki_Row> listRow = div.getDgShisetsuNyutaishoRireki().getDataSource();
         dgShisetsuNyutaishoRireki_Row newRow = new dgShisetsuNyutaishoRireki_Row();
         int 最大履歴番号 = 1;
@@ -248,7 +242,7 @@ public class ShisetsuNyutaishoRirekiKanriHandler {
      * 施設入退所履歴の共有子DIVの画面内容から、施設入退所履歴情報をDBに反映します。
      */
     public void saveShisetsuNyutaisho() {
-        ShikibetsuCode 識別コード = new ShikibetsuCode(ViewStateHolder.get(ViewStateKeys.施設入退所履歴_識別コード, RString.class));
+        ShikibetsuCode 識別コード = new ShikibetsuCode(div.getShikibetsuCode());
         Models<ShisetsuNyutaishoIdentifier, ShisetsuNyutaisho> 施設入退所情報Model
                 = ViewStateHolder.get(ViewStateKeys.施設入退所履歴_施設入退所情報, Models.class);
         List<dgShisetsuNyutaishoRireki_Row> listRow = div.getDgShisetsuNyutaishoRireki().getDataSource();
@@ -334,32 +328,29 @@ public class ShisetsuNyutaishoRirekiKanriHandler {
         return 施設種類;
     }
 
-    private void 照会モード表示_非表示(RString 選択有無) {
-        div.getDgShisetsuNyutaishoRireki().getGridSetting().setIsShowSelectButtonColumn(true);
-        if (照会選択無.equals(選択有無)) {
-            div.getDgShisetsuNyutaishoRireki().getGridSetting().setIsShowSelectButtonColumn(false);
-        }
-        div.getShisetsuNyutaishoInput().setVisible(false);
-        div.getBtnAddShisetsuNyutaisho().setDisplayNone(true);
-        div.getDgShisetsuNyutaishoRireki().getGridSetting().setIsShowModifyButtonColumn(false);
-        div.getDgShisetsuNyutaishoRireki().getGridSetting().setIsShowDeleteButtonColumn(false);
-        div.getDgShisetsuNyutaishoRireki().getGridSetting().getColumns().get(0).setVisible(false);
-    }
+    private void 資格異動モード() {
+        ViewStateHolder.put(jp.co.ndensan.reams.db.dbz.definition.core.ViewStateKeys.台帳種別表示, new RString("台帳種別表示無し"));
+        switch (div.getMode_利用()) {
+            case 台帳種別表示機能:
+                ViewStateHolder.put(jp.co.ndensan.reams.db.dbz.definition.core.ViewStateKeys.台帳種別表示, new RString("台帳種別表示有り"));
+                break;
+            case 全施設対象機能:
+                break;
+            case 被保険者対象機能:
+                ViewStateHolder.put(jp.co.ndensan.reams.db.dbz.definition.core.ViewStateKeys.被保険者, new RString("被保険者"));
+                break;
+            case 他市町村住所地特例者対象機能:
+                ViewStateHolder.put(jp.co.ndensan.reams.db.dbz.definition.core.ViewStateKeys.他市町村住所地特例者, new RString("他市町村住所地特例者"));
+                break;
+            case 適用除外者対象機能:
+                ViewStateHolder.put(jp.co.ndensan.reams.db.dbz.definition.core.ViewStateKeys.適用除外者, new RString("適用除外者"));
+                break;
+            default:
+                break;
 
-    private void 資格異動モード(RString 利用モード) {
+        }
         div.getDgShisetsuNyutaishoRireki().getGridSetting().setIsShowSelectButtonColumn(false);
         div.getBtnAddShisetsuNyutaisho().setVisible(true);
-        ViewStateHolder.put(jp.co.ndensan.reams.db.dbz.definition.core.ViewStateKeys.台帳種別表示, new RString("台帳種別表示無し"));
-        if (台帳種別表示機能.equals(利用モード)) {
-            ViewStateHolder.put(jp.co.ndensan.reams.db.dbz.definition.core.ViewStateKeys.台帳種別表示, new RString("台帳種別表示有り"));
-        } else if (全施設対象機能.equals(利用モード)) {
-        } else if (被保険者対象機能.equals(利用モード)) {
-            ViewStateHolder.put(jp.co.ndensan.reams.db.dbz.definition.core.ViewStateKeys.被保険者, new RString("被保険者"));
-        } else if (他市町村住所地特例者対象機能.equals(利用モード)) {
-            ViewStateHolder.put(jp.co.ndensan.reams.db.dbz.definition.core.ViewStateKeys.他市町村住所地特例者, new RString("他市町村住所地特例者"));
-        } else if (適用除外者対象機能.equals(利用モード)) {
-            ViewStateHolder.put(jp.co.ndensan.reams.db.dbz.definition.core.ViewStateKeys.適用除外者, new RString("適用除外者"));
-        }
         div.getShisetsuNyutaishoInput().getTxtNyushoDate().setDisabled(true);
         div.getShisetsuNyutaishoInput().getTxtTaishoDate().setDisabled(true);
         div.getShisetsuNyutaishoInput().getCcdShisetsuJoho().setDisabled(true);
