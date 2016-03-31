@@ -7,6 +7,7 @@ package jp.co.ndensan.reams.db.dbe.definition.mybatisprm.hakkoichiranhyo;
 
 import java.util.List;
 import jp.co.ndensan.reams.db.dbe.definition.batchprm.iraisho.GridParameter;
+import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.ShoriJotaiKubun;
 import jp.co.ndensan.reams.uz.uza.batch.parameter.IMyBatisParameter;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import lombok.Getter;
@@ -20,6 +21,8 @@ public final class ShujiiIkenshoSakuseiMybitisParamter implements IMyBatisParame
 
     private static final RString 未印刷 = new RString("1");
     private static final RString 印刷済 = new RString("2");
+    private final RString 通常 = ShoriJotaiKubun.通常.getコード();
+    private final RString 延期 = ShoriJotaiKubun.延期.getコード();
     private final RString 依頼日From;
     private final RString 依頼日To;
     private final RString 主治医意見書作成依頼書;

@@ -7,6 +7,7 @@ package jp.co.ndensan.reams.db.dbe.definition.mybatis.param.iraisho;
 
 import java.util.List;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShoKisaiHokenshaNo;
+import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.ShoriJotaiKubun;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
@@ -24,7 +25,8 @@ public final class IraishoIkkatsuHakkoParameter {
     private final List<RString> 認定調査票;
     private final List<RString> 主治医意見書作成依頼書;
     private final List<RString> 主治医意見書;
-
+    private final RString 通常 = ShoriJotaiKubun.通常.getコード();
+    private final RString 延期 = ShoriJotaiKubun.延期.getコード();
     private final boolean is依頼日From;
     private final boolean is依頼日To;
     private final boolean is認定調査依頼書未印刷;

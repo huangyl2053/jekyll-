@@ -72,7 +72,7 @@
                 "shinseishoKanriNo" = DbT5301."shinseishoKanriNo"
             AND "logicalDeletedFlag" = false)
         AND Dbt5101."logicalDeletedFlag" = false
-        AND Dbt5101."shoriJotaiKubun" IN ('0','3')
+        AND Dbt5101."shoriJotaiKubun" IN (#{通常},#{延期})
         AND Dbt5105."ninteiShinseiJohoTorokuKanryoYMD" IS NOT NULL
         AND Dbt5105."ninteiShinsakaiWariateKanryoYMD" IS NULL
         AND Dbt5105."ninteiShinsakaiKanryoYMD" IS NULL
