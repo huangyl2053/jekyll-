@@ -15,6 +15,30 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 public enum ReportIdDBB {
 
     /**
+     * 特別徴収開始通知書（仮算定）【B5横タイプ】
+     */
+    DBB100003(new ReportId("DBB100003_TokubetsuChoshuKaishiTsuchishoKariB5"), new RString("特別徴収開始通知書（仮算定）【B5横タイプ】")),
+    /**
+     * 特別徴収開始通知書（仮算定）【B5横タイプ（連帳）】
+     */
+    DBB100004(new ReportId("DBB100004_TokubetsuChoshuKaishiTsuchishoKariB5Rencho"), new RString("特別徴収開始通知書（仮算定）【B5横タイプ（連帳）】")),
+    /**
+     * 特別徴収開始通知書（仮算定）【シーラタイプ】
+     */
+    DBB100005(new ReportId("DBB100005_TokubetsuChoshuKaishiTsuchishoKariSealer"), new RString("特別徴収開始通知書（仮算定）【シーラタイプ】")),
+    /**
+     * 特別徴収開始通知書（仮算定）【シーラタイプ（連帳）】
+     */
+    DBB100006(new ReportId("DBB100006_TokubetsuChoshuKaishiTsuchishoKariSealerRencho"), new RString("特別徴収開始通知書（仮算定）【シーラタイプ（連帳）】")),
+    /**
+     * 特別徴収開始通知書（仮算定）【A4縦・オーバレイタイプ】
+     */
+    DBB100008(new ReportId("DBB100008_TokubetsuChoshuKaishiTsuchishoKariOverlayA4Tate"), new RString("特別徴収開始通知書（仮算定）【A4縦・オーバレイタイプ】")),
+    /**
+     * 特別徴収開始通知書（仮算定）【B5横・オーバレイタイプ】
+     */
+    DBB100009(new ReportId("DBB100009_TokubetsuChoshuKaishiTsuchishoKariOverlayB5Yoko"), new RString("特別徴収開始通知書（仮算定）【B5横・オーバレイタイプ】")),
+    /**
      * 調定簿（帳票）
      */
     DBB3001(new ReportId("DBB300001_Choteibo"), new RString("介護保険料　調定簿")),
