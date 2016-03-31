@@ -216,7 +216,7 @@ public final class YoshikiIchinoyonHoseiHandler {
                 if (更新前.get縦番号().equals(画面データ.get縦番号())
                         && 更新前.get横番号().equals(画面データ.get横番号())
                         && (!更新前.get集計結果値().equals(画面データ.get集計結果値()))) {
-                    画面データ.toEntity().setState(EntityDataState.Added);
+                    画面データ.toEntity().setState(EntityDataState.Modified);
                     修正データリスト.add(画面データ);
                 }
             }
