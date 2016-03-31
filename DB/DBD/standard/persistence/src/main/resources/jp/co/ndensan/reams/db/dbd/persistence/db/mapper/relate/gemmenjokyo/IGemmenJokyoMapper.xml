@@ -143,7 +143,7 @@
         WHERE A."hihokenshaNo" = #{被保険者番号}
     </select>
     <select id="get利用者負担割合明細"
-            resultType="jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3114RiyoshaFutanWariaiMeisaiEntity"
+            resultType="jp.co.ndensan.reams.db.dbd.entity.db.basic.DbT3114RiyoshaFutanWariaiMeisaiEntity"
             parameterType="jp.co.ndensan.reams.db.dbd.definition.common.GemmenJokyoParameter"  fetchSize="500">
         SELECT *
         FROM rgdb."DbT3114RiyoshaFutanWariaiMeisai" A
