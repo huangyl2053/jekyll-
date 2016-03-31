@@ -93,20 +93,6 @@ public class NinnteiChousaKekkaTouroku1 {
     private static final int 住宅改修_連番 = 1;
     private static final int 市町村特別給付_連番 = 1;
     private static final int 介護保険給付外の在宅サービス_連番 = 2;
-    private static final RString モードDAIGUN = new RString("Dai1gun");
-    private static final RString モードDA2GUN = new RString("Dai2gun");
-    private static final RString モードDA3GUN = new RString("Dai3gun");
-    private static final RString モードDA4GUN = new RString("Dai4gun");
-    private static final RString モードDA5GUN = new RString("Dai5gun");
-    private static final RString モードDA6GUN = new RString("Dai6gun");
-    private static final RString モードDA7GUN = new RString("Dai7gun");
-    private static final RString 第１群 = new RString("btnKihonchosa1");
-    private static final RString 第２群 = new RString("btnKihonchosa2");
-    private static final RString 第３群 = new RString("btnKihonchosa3");
-    private static final RString 第４群 = new RString("btnKihonchosa4");
-    private static final RString 第５群 = new RString("btnKihonchosa5");
-    private static final RString 特別な医療 = new RString("btnKihonchosa6");
-    private static final RString 生活自立度 = new RString("btnKihonchosa7");
 
     /**
      * 認定調査結果登録1の初期化。(オンロード)<br/>
@@ -372,23 +358,6 @@ public class NinnteiChousaKekkaTouroku1 {
 
         div.setShinseishoKanriNo(temp_申請書管理番号.getColumnValue());
         div.setRecordNumber(new RString(String.valueOf(temp_認定調査履歴番号)));
-
-        RString focusPositionID = div.getFocusPositionID();
-        if (第１群.equals(focusPositionID)) {
-            div.setモード(モードDAIGUN);
-        } else if (第２群.equals(focusPositionID)) {
-            div.setモード(モードDA2GUN);
-        } else if (第３群.equals(focusPositionID)) {
-            div.setモード(モードDA3GUN);
-        } else if (第４群.equals(focusPositionID)) {
-            div.setモード(モードDA4GUN);
-        } else if (第５群.equals(focusPositionID)) {
-            div.setモード(モードDA5GUN);
-        } else if (特別な医療.equals(focusPositionID)) {
-            div.setモード(モードDA6GUN);
-        } else if (生活自立度.equals(focusPositionID)) {
-            div.setモード(モードDA7GUN);
-        }
         return ResponseData.of(div).respond();
     }
 
@@ -956,20 +925,18 @@ public class NinnteiChousaKekkaTouroku1 {
 
         NinteichosahyoKihonChosaManager manager = new NinteichosahyoKihonChosaManager();
 
-        for (KihonChosaInput 基本情報 : 第7群List) {
-            Code 認知症高齢者の日常生活自立度コード = 基本情報.get認知症高齢者自立度();
-            Code 障害高齢者の日常生活自立度コード = 基本情報.get障害高齢者自立度();
+        Code 障害高齢者の日常生活自立度コード = 第7群List.get(0).get障害高齢者自立度();
+        Code 認知症高齢者の日常生活自立度コード = 第7群List.get(1).get認知症高齢者自立度();
 
-            NinteichosahyoKihonChosa dbt5203 = manager.get認定調査票_基本調査(temp_申請書管理番号, temp_認定調査履歴番号);
-            if (dbt5203 == null) {
-                dbt5203 = new NinteichosahyoKihonChosa(temp_申請書管理番号, temp_認定調査履歴番号);
-            }
-            NinteichosahyoKihonChosaBuilder builder = dbt5203.createBuilderForEdit();
-            builder.set厚労省IF識別コード(new Code(temp_厚労省IF識別コード));
-            builder.set認定調査_認知症高齢者の日常生活自立度コード(認知症高齢者の日常生活自立度コード);
-            builder.set認定調査_障害高齢者の日常生活自立度コード(障害高齢者の日常生活自立度コード);
-            manager.save認定調査票_基本調査(builder.build());
+        NinteichosahyoKihonChosa dbt5203 = manager.get認定調査票_基本調査(temp_申請書管理番号, temp_認定調査履歴番号);
+        if (dbt5203 == null) {
+            dbt5203 = new NinteichosahyoKihonChosa(temp_申請書管理番号, temp_認定調査履歴番号);
         }
+        NinteichosahyoKihonChosaBuilder builder = dbt5203.createBuilderForEdit();
+        builder.set厚労省IF識別コード(new Code(temp_厚労省IF識別コード));
+        builder.set認定調査_障害高齢者の日常生活自立度コード(障害高齢者の日常生活自立度コード);
+        builder.set認定調査_認知症高齢者の日常生活自立度コード(認知症高齢者の日常生活自立度コード);
+        manager.save認定調査票_基本調査(builder.build());
     }
 
     private void 調査項目の保存(int 連番, RString 調査項目) {
