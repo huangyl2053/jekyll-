@@ -9,7 +9,6 @@ import java.util.List;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT4203NinteichosahyoKihonChosaEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT4304ShujiiIkenshoIkenItemEntity;
-import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5101NinteiShinseiJohoEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5211NinteichosahyoChosaItemEntity;
 
 /**
@@ -17,14 +16,6 @@ import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5211NinteichosahyoChosaItem
  * 一次判定結果情報取得 Mapper
  */
 public interface IchijiHanteiKekkaJohoSearchMapper {
-
-    /**
-     * 厚労省IF識別コードを取得します。
-     *
-     * @param 申請書管理番号 申請書管理番号
-     * @return DbT5101NinteiShinseiJohoEntity
-     */
-    DbT5101NinteiShinseiJohoEntity get厚労省IF識別コード(ShinseishoKanriNo 申請書管理番号);
 
     /**
      * 基本調査項目を取得します。

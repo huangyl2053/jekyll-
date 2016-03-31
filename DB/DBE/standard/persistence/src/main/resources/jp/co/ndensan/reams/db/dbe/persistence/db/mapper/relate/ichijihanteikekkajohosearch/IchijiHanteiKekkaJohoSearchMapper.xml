@@ -3,14 +3,6 @@
 
 <!-- どのマッパーインターフェースと対応するかを指定する -->
 <mapper namespace="jp.co.ndensan.reams.db.dbe.persistence.db.mapper.relate.ichijihanteikekkajohosearch.IchijiHanteiKekkaJohoSearchMapper">
-    <select id="get厚労省IF識別コード"
-            resultType="jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5101NinteiShinseiJohoEntity"
-            parameterType="jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo">
-        SELECT A."koroshoIfShikibetsuCode"
-        FROM rgdb."DbT5101NinteiShinseiJoho" AS A
-        WHERE A."shinseishoKanriNo" = #{申請書管理番号}
-        AND A."logicalDeletedFlag" = FALSE
-    </select>
     <select id="get基本調査項目"
             resultType="jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5211NinteichosahyoChosaItemEntity"
             parameterType="jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo" fetchSize="500">

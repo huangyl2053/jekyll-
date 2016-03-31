@@ -5,12 +5,13 @@
  */
 package jp.co.ndensan.reams.db.dbe.service.core.ichijihanteikekkajohosearch;
 
+import jp.co.ndensan.reams.db.dbe.business.core.Shinsakai.ninteishinseijoho.NinteiShinseiJoho;
 import jp.co.ndensan.reams.db.dbe.business.core.ichijihanteikekkajohosearch.IchijiHanteiKekkaJohoSearchBusiness;
 import jp.co.ndensan.reams.db.dbe.definition.message.DbeErrorMessages;
 import jp.co.ndensan.reams.db.dbe.entity.ichijihanteikekkajohosearch.IchijiHanteiKekkaJohoSearchEntity;
 import jp.co.ndensan.reams.db.dbe.persistence.db.mapper.relate.ichijihanteikekkajohosearch.IchijiHanteiKekkaJohoSearchMapper;
+import jp.co.ndensan.reams.db.dbe.service.core.shinsakai.ninteishinseijoho.NinteiShinseiJohoManager;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo;
-import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5101NinteiShinseiJohoEntity;
 import jp.co.ndensan.reams.db.dbz.service.core.MapperProvider;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
@@ -115,12 +116,12 @@ public class IchijiHanteiKekkaJohoSearchManager {
 //        return 基本調査項目List;
 //    }
     private Code get厚労省IF識別コード(ShinseishoKanriNo 申請書管理番号) {
-        IchijiHanteiKekkaJohoSearchMapper mapper = mapperProvider.create(IchijiHanteiKekkaJohoSearchMapper.class);
-        DbT5101NinteiShinseiJohoEntity entity = mapper.get厚労省IF識別コード(申請書管理番号);
-        if (null == entity) {
+        NinteiShinseiJohoManager ninteiShinseiJohoManager = new NinteiShinseiJohoManager();
+        NinteiShinseiJoho ninteiShinseiJoho = ninteiShinseiJohoManager.get要介護認定申請情報(申請書管理番号);
+        if (null == ninteiShinseiJoho) {
             return Code.EMPTY;
         } else {
-            return entity.getKoroshoIfShikibetsuCode();
+            return ninteiShinseiJoho.get厚労省IF識別コード();
         }
     }
 
