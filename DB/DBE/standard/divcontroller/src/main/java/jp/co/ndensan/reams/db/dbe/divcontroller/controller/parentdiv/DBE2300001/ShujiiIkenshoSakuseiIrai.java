@@ -17,6 +17,7 @@ import jp.co.ndensan.reams.db.dbe.business.report.shujiiikenshosakusei.ShujiiIke
 import jp.co.ndensan.reams.db.dbe.business.report.shujiiikenshoteishutsuiraisho.ShujiiIkenshoTeishutsuIraishoItem;
 import jp.co.ndensan.reams.db.dbe.definition.core.enumeratedtype.ShujiiIkenshoIraiKubun;
 import jp.co.ndensan.reams.db.dbe.definition.core.reportid.ReportIdDBE;
+import jp.co.ndensan.reams.db.dbe.definition.mybatisprm.shujiiikenshosakuseiirai.ShujiiIkenshoSakuseiIraiParameter;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2300001.ShujiiIkenshoSakuseiIraiDiv;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2300001.dgShinseishaIchiran_Row;
 import jp.co.ndensan.reams.db.dbe.divcontroller.handler.parentdiv.DBE2300001.ShujiiIkenshoSakuseiIraiHandler;
@@ -140,11 +141,12 @@ public class ShujiiIkenshoSakuseiIrai {
         RString 被保険者番号 = div.getCcdHihokenshaFinder().get被保険者番号();
         // QA894　最大表示件数の確認
         ShujiiIkenshoSakuseiIraiManager manager = ShujiiIkenshoSakuseiIraiManager.createInstance();
-        createHandler(div).init(manager.get申請者情報(被保険者番号).records());
+        ShujiiIkenshoSakuseiIraiParameter param = ShujiiIkenshoSakuseiIraiParameter.createShujiiIkenshoSakuseiIraiParameter(被保険者番号);
+        createHandler(div).init(manager.get申請者情報(param).records());
         Models<ShujiiIkenshoIraiJohoIdentifier, ShujiiIkenshoIraiJoho> 主治医意見書作成依頼情報
-                = Models.create(manager.get主治医意見書作成依頼情報(被保険者番号).records());
+                = Models.create(manager.get主治医意見書作成依頼情報(param).records());
         Models<NinteiShinseiJohoIdentifier, NinteiShinseiJoho> 要介護認定申請情報
-                = Models.create(manager.get要介護認定申請情報(被保険者番号).records());
+                = Models.create(manager.get要介護認定申請情報(param).records());
         ViewStateHolder.put(ViewStateKeys.主治医意見書作成依頼_主治医意見書作成依頼情報, 主治医意見書作成依頼情報);
         ViewStateHolder.put(ViewStateKeys.主治医意見書作成依頼_要介護認定申請情報, 要介護認定申請情報);
         return ResponseData.of(div).respond();
