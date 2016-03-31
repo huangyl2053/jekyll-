@@ -19,8 +19,6 @@ import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
  * 主治医情報のCSV出力クラスです。
  */
 public class ShujiiMasterManager {
-    
-    private static final int BYTE = 1024;
 
     /**
      * コンストラクタです。
