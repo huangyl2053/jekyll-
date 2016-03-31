@@ -24,10 +24,10 @@ public interface IHomonChosaIraishoMapper {
     List<HomonChosaIraishoRelateEntity> get訪問調査依頼書(HomonChosaIraishoMybitisParamter param);
 
     /**
-     * 認定調査依頼情報を更新します。
+     * 認定調査依頼情報を検索します。
      *
-     * @param entity DbT5201NinteichosaIraiJohoEntity
-     * @return 更新件数
+     * @param entity HomonChosaIraishoRelateEntity
+     * @return DbT5201NinteichosaIraiJohoEntity
      */
-    int update認定調査依頼情報(DbT5201NinteichosaIraiJohoEntity entity);
+    DbT5201NinteichosaIraiJohoEntity get認定調査依頼情報(HomonChosaIraishoRelateEntity entity);
 }
