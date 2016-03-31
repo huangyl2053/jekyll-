@@ -914,13 +914,13 @@ public class KihonChosaInputHandler1 {
         }
         for (RString key : 拘縮の有無keys) {
             if (KEY1.equals(key)) {
-                連番List.add(1);
+                連番List.add(整数6);
             } else if (KEY2.equals(key)) {
-                連番List.add(2);
+                連番List.add(整数7);
             } else if (KEY3.equals(key)) {
-                連番List.add(整数3);
+                連番List.add(整数8);
             } else if (KEY4.equals(key)) {
-                連番List.add(整数4);
+                連番List.add(整数9);
             }
         }
     }
