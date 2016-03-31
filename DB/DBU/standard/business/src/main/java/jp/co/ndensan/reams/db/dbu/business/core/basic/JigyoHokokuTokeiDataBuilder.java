@@ -179,7 +179,7 @@ public class JigyoHokokuTokeiDataBuilder {
      * @return {@link JigyoHokokuTokeiDataBuilder}
      */
     public JigyoHokokuTokeiDataBuilder set集計結果値(Decimal 集計結果値) {
-        requireNonNull(集計結果値, UrSystemErrorMessages.値がnull.getReplacedMessage("集計結果値"));
+//        requireNonNull(集計結果値, UrSystemErrorMessages.値がnull.getReplacedMessage("集計結果値"));
         entity.setShukeiKekkaAtai(集計結果値);
         return this;
     }
@@ -191,7 +191,7 @@ public class JigyoHokokuTokeiDataBuilder {
      * @return {@link JigyoHokokuTokeiDataBuilder}
      */
     public JigyoHokokuTokeiDataBuilder set集計項目名称(RString 集計項目名称) {
-        requireNonNull(集計項目名称, UrSystemErrorMessages.値がnull.getReplacedMessage("集計項目名称"));
+//        requireNonNull(集計項目名称, UrSystemErrorMessages.値がnull.getReplacedMessage("集計項目名称"));
         entity.setShukeiKomokuMeisho(集計項目名称);
         return this;
     }
@@ -203,7 +203,7 @@ public class JigyoHokokuTokeiDataBuilder {
      * @return {@link JigyoHokokuTokeiDataBuilder}
      */
     public JigyoHokokuTokeiDataBuilder set縦項目コード(Code 縦項目コード) {
-        requireNonNull(縦項目コード, UrSystemErrorMessages.値がnull.getReplacedMessage("縦項目コード"));
+//        requireNonNull(縦項目コード, UrSystemErrorMessages.値がnull.getReplacedMessage("縦項目コード"));
         entity.setTateKomokuCode(縦項目コード);
         return this;
     }
@@ -215,7 +215,7 @@ public class JigyoHokokuTokeiDataBuilder {
      * @return {@link JigyoHokokuTokeiDataBuilder}
      */
     public JigyoHokokuTokeiDataBuilder set横項目コード(Code 横項目コード) {
-        requireNonNull(横項目コード, UrSystemErrorMessages.値がnull.getReplacedMessage("横項目コード"));
+//        requireNonNull(横項目コード, UrSystemErrorMessages.値がnull.getReplacedMessage("横項目コード"));
         entity.setYokoKomokuCode(横項目コード);
         return this;
     }

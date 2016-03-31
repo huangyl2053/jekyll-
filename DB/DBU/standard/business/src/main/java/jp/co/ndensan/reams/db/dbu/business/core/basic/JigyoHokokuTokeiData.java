@@ -285,7 +285,8 @@ public class JigyoHokokuTokeiData
     }
 
     /**
-     * 事業報告統計データのみを変更対象とします。<br/> {@link DbT7021JigyoHokokuTokeiDataEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば変更状態にします。
+     * 事業報告統計データのみを変更対象とします。<br/>
+     * {@link DbT7021JigyoHokokuTokeiDataEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば変更状態にします。
      *
      * @return 変更対象処理実施後の{@link JigyoHokokuTokeiData}
      */
@@ -299,7 +300,21 @@ public class JigyoHokokuTokeiData
     }
 
     /**
-     * 保持する事業報告統計データを削除対象とします。<br/> {@link DbT7021JigyoHokokuTokeiDataEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば削除状態にします。
+     * 事業報告統計データのみを追加対象とします。<br/>
+     * {@link DbT7021JigyoHokokuTokeiDataEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば追加状態にします。
+     *
+     * @return 変更対象処理実施後の{@link JigyoHokokuTokeiData}
+     */
+    public JigyoHokokuTokeiData addedModel() {
+        DbT7021JigyoHokokuTokeiDataEntity modifiedEntity = this.toEntity();
+        modifiedEntity.setState(EntityDataState.Added);
+        return new JigyoHokokuTokeiData(
+                modifiedEntity, id);
+    }
+
+    /**
+     * 保持する事業報告統計データを削除対象とします。<br/>
+     * {@link DbT7021JigyoHokokuTokeiDataEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば削除状態にします。
      *
      * @return 削除対象処理実施後の{@link JigyoHokokuTokeiData}
      */
