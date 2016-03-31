@@ -291,13 +291,14 @@ public class RoreiFukushiNenkinShokaiHandler {
      */
     public ValidationMessageControlPairs addMessage(ValidationMessageControlPairs validPairs, String replace, String replace1) {
         validPairs.add(new ValidationMessageControlPair(new IdocheckMessages(
-                    UrErrorMessages.期間が不正_追加メッセージあり２, replace, replace1)));
+                    UrErrorMessages.期間が不正_追加メッセージあり２, replace, replace1), div.getPanelInput()
+                            .getTxtStartDate(), div.getPanelInput().getTxtEndDate()));
         return validPairs;
     }
     
     private ValidationMessageControlPairs addMessage_既に登録済(ValidationMessageControlPairs validPairs, String replace) {
         validPairs.add(new ValidationMessageControlPair(new IdocheckMessages(
-                    UrErrorMessages.既に登録済, replace)));
+                    UrErrorMessages.既に登録済, replace), div.getPanelInput().getTxtStartDate()));
         return validPairs;
     }
     
