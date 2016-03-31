@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import static java.util.Objects.requireNonNull;
+import jp.co.ndensan.reams.db.dba.business.core.hihokenshadaichosakusei.HihokenshaDaichoSakusei;
 import jp.co.ndensan.reams.db.dba.definition.mybatis.param.hihokenshadaichosakusei.HihokenshaDaichoSakuseiParameter;
 import jp.co.ndensan.reams.db.dba.entity.db.hihokenshadaichosakusei.HihokenshaDaichoDivisionEntity;
 import jp.co.ndensan.reams.db.dba.entity.db.hihokenshadaichosakusei.HihokenshaDaichoSakuseiEntity;
@@ -64,6 +65,7 @@ import jp.co.ndensan.reams.uz.uza.util.db.IPsmCriteria;
 import jp.co.ndensan.reams.uz.uza.util.db.ITrueFalseCriteria;
 import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.and;
 import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.eq;
+import jp.co.ndensan.reams.uz.uza.util.db.SearchResult;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
 
@@ -163,15 +165,18 @@ public class HihokenshaDaichoSakuseiManager {
      * @return hihokenshaDaichoSakuseiEntityList 被保険者台帳
      */
     @Transaction
-    public List<HihokenshaDaichoSakuseiEntity> getHihokenshaDaichoSakusei(
+    public SearchResult<HihokenshaDaichoSakusei> getHihokenshaDaichoSakusei(
             HihokenshaDaichoSakuseiParameter parameter) {
         requireNonNull(parameter, UrSystemErrorMessages.値がnull.getReplacedMessage(REPLACED_MESSAGE.toString()));
+        List<HihokenshaDaichoSakusei> businessList = new ArrayList<>();
         List<HihokenshaEntity> hihokenshaList = get被保険者情報(parameter);
-        if (hihokenshaList.isEmpty()) {
-            return new ArrayList<>();
+        List<HihokenshaDaichoSakuseiEntity> daichoSakuseiEntityList = getHihokenshaDaichoHenshu(hihokenshaList);
+        if (!daichoSakuseiEntityList.isEmpty()) {
+            for (HihokenshaDaichoSakuseiEntity daichoSakuseiEntity : daichoSakuseiEntityList) {
+                businessList.add(new HihokenshaDaichoSakusei(daichoSakuseiEntity));
+            }
         }
-
-        return getHihokenshaDaichoHenshu(hihokenshaList);
+        return SearchResult.of(businessList, 0, false);
     }
 
     private List<HihokenshaEntity> get被保険者情報(HihokenshaDaichoSakuseiParameter parameter) {

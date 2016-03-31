@@ -64,6 +64,11 @@ public class HihokenshaDaichoSakuseiEntity {
     private RoreiFukushiNenkinJukyushaDivisionEntity 老齢福祉情報Entity;
     private ShoKofuKaishuDivisionSumEntity 被保険者証発行履歴情報１;
     private ShoKofuKaishuDivisionSumEntity 被保険者証発行履歴情報２;
+    private RString setaiName1;
+    private RString setaiName2;
+    private RString setaiName3;
+    private RString setaiName4;
+    private RString setaiName5;
 
     // TODO 蘇広俊 世帯情報取得方針不明、QA170提出中
 }

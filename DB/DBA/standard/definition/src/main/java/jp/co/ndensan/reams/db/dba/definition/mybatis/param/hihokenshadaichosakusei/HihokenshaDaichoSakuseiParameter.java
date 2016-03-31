@@ -48,7 +48,7 @@ public final class HihokenshaDaichoSakuseiParameter {
             HihokenshaNo hihokenshaNo
     ) {
         boolean useshihokenshaNo = false;
-        if (hihokenshaNo != null && hihokenshaNo.isEmpty()) {
+        if (hihokenshaNo != null && !hihokenshaNo.isEmpty()) {
             useshihokenshaNo = true;
         }
         return new HihokenshaDaichoSakuseiParameter(shikibetsuCode,
