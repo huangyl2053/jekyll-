@@ -38,12 +38,21 @@ public class IchijiHanteiResultSofu {
         this.一次判定結果送付年月日 = 一次判定結果送付年月日;
     }
 
+    /**
+     * 一次判定結果送付区分を取得します。
+     *
+     * @return 一次判定結果送付区分
+     */
     public IchijiHanteiResultSofuKubun get一次判定結果送付区分() {
         return 一次判定結果送付区分;
     }
 
+    /**
+     * 一次判定結果送付年月日を取得します。
+     *
+     * @return 一次判定結果送付年月日
+     */
     public FlexibleDate get一次判定結果送付年月日() {
         return 一次判定結果送付年月日;
     }
-
 }

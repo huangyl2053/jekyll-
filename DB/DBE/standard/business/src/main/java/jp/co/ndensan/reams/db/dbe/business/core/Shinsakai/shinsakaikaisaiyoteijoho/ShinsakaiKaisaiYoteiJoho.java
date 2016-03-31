@@ -246,7 +246,7 @@ public class ShinsakaiKaisaiYoteiJoho
      *
      * @return 資料作成済フラグ
      */
-    public boolean get資料作成済フラグ() {
+    public boolean is資料作成済フラグ() {
         return entity.getShiryoSakuseiZumiFlag();
     }
 
@@ -455,7 +455,10 @@ public class ShinsakaiKaisaiYoteiJoho
         }
 
         private Object readResolve() {
-            return new ShinsakaiKaisaiYoteiJoho(this.entity, this.id, this.shinsakaiWariateJoho, this.shinsakaiWariateIinJoho, this.shinsakaiOnseiJoho, this.shinsakaiKaisaiKekkaJoho);
+            return new ShinsakaiKaisaiYoteiJoho(this.entity,
+                    this.id, this.shinsakaiWariateJoho,
+                    this.shinsakaiWariateIinJoho,
+                    this.shinsakaiOnseiJoho, this.shinsakaiKaisaiKekkaJoho);
         }
     }
 
@@ -466,7 +469,9 @@ public class ShinsakaiKaisaiYoteiJoho
      * @return {@link ShinsakaiKaisaiYoteiJohoBuilder}
      */
     public ShinsakaiKaisaiYoteiJohoBuilder createBuilderForEdit() {
-        return new ShinsakaiKaisaiYoteiJohoBuilder(entity, id, shinsakaiWariateJoho, shinsakaiWariateIinJoho, shinsakaiOnseiJoho, shinsakaiKaisaiKekkaJoho);
+        return new ShinsakaiKaisaiYoteiJohoBuilder(entity, id,
+                shinsakaiWariateJoho, shinsakaiWariateIinJoho,
+                shinsakaiOnseiJoho, shinsakaiKaisaiKekkaJoho);
     }
 
     @Override

@@ -18,7 +18,9 @@ import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 /**
  * 介護認定審査会音声情報を管理するクラスです。
  */
-public class ShinsakaiOnseiJoho extends ModelBase<ShinsakaiOnseiJohoIdentifier, DbT5512ShinsakaiOnseiJohoEntity, ShinsakaiOnseiJoho> implements Serializable {
+public class ShinsakaiOnseiJoho
+        extends ModelBase<ShinsakaiOnseiJohoIdentifier, DbT5512ShinsakaiOnseiJohoEntity, ShinsakaiOnseiJoho>
+        implements Serializable {
 
     private final DbT5512ShinsakaiOnseiJohoEntity entity;
     private final ShinsakaiOnseiJohoIdentifier id;
@@ -118,8 +120,7 @@ public class ShinsakaiOnseiJoho extends ModelBase<ShinsakaiOnseiJohoIdentifier, 
     }
 
     /**
-     * 介護認定審査会音声情報のみを変更対象とします。<br/>
-     * {@link DbT5512ShinsakaiOnseiJohoEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば変更状態にします。
+     * 介護認定審査会音声情報のみを変更対象とします。<br/> {@link DbT5512ShinsakaiOnseiJohoEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば変更状態にします。
      *
      * @return 変更対象処理実施後の{@link ShinsakaiOnseiJoho}
      */
@@ -133,8 +134,7 @@ public class ShinsakaiOnseiJoho extends ModelBase<ShinsakaiOnseiJohoIdentifier, 
     }
 
     /**
-     * 保持する介護認定審査会音声情報を削除対象とします。<br/>
-     * {@link DbT5512ShinsakaiOnseiJohoEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば削除状態にします。
+     * 保持する介護認定審査会音声情報を削除対象とします。<br/> {@link DbT5512ShinsakaiOnseiJohoEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば削除状態にします。
      *
      * @return 削除対象処理実施後の{@link ShinsakaiOnseiJoho}
      */

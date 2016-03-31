@@ -19,7 +19,9 @@ import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 /**
  * 介護認定審査会開催結果情報を管理するクラスです。
  */
-public class ShinsakaiKaisaiKekkaJoho extends ModelBase<ShinsakaiKaisaiKekkaJohoIdentifier, DbT5511ShinsakaiKaisaiKekkaJohoEntity, ShinsakaiKaisaiKekkaJoho> implements Serializable {
+public class ShinsakaiKaisaiKekkaJoho
+        extends ModelBase<ShinsakaiKaisaiKekkaJohoIdentifier, DbT5511ShinsakaiKaisaiKekkaJohoEntity, ShinsakaiKaisaiKekkaJoho>
+        implements Serializable {
 
     private final DbT5511ShinsakaiKaisaiKekkaJohoEntity entity;
     private final ShinsakaiKaisaiKekkaJohoIdentifier id;
@@ -158,8 +160,7 @@ public class ShinsakaiKaisaiKekkaJoho extends ModelBase<ShinsakaiKaisaiKekkaJoho
     }
 
     /**
-     * 介護認定審査会開催結果情報のみを変更対象とします。<br/>
-     * {@link DbT5511ShinsakaiKaisaiKekkaJohoEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば変更状態にします。
+     * 介護認定審査会開催結果情報のみを変更対象とします。<br/> {@link DbT5511ShinsakaiKaisaiKekkaJohoEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば変更状態にします。
      *
      * @return 変更対象処理実施後の{@link ShinsakaiKaisaiKekkaJoho}
      */
@@ -173,8 +174,7 @@ public class ShinsakaiKaisaiKekkaJoho extends ModelBase<ShinsakaiKaisaiKekkaJoho
     }
 
     /**
-     * 保持する介護認定審査会開催結果情報を削除対象とします。<br/>
-     * {@link DbT5511ShinsakaiKaisaiKekkaJohoEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば削除状態にします。
+     * 保持する介護認定審査会開催結果情報を削除対象とします。<br/> {@link DbT5511ShinsakaiKaisaiKekkaJohoEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば削除状態にします。
      *
      * @return 削除対象処理実施後の{@link ShinsakaiKaisaiKekkaJoho}
      */

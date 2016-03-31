@@ -16,6 +16,9 @@ import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
  */
 public class NinteiShinseiTorisage {
 
+    /**
+     * NONE
+     */
     public static final NinteiShinseiTorisage NONE;
 
     static {

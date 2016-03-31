@@ -4,8 +4,8 @@
  */
 package jp.co.ndensan.reams.db.dbe.business.core.KaigoIryoKikan;
 
-import jp.co.ndensan.reams.db.dbe.business.core.ShujiiIryoKikan.IShujiiIryoKikan;
 import static java.util.Objects.requireNonNull;
+import jp.co.ndensan.reams.db.dbe.business.core.ShujiiIryoKikan.IShujiiIryoKikan;
 import jp.co.ndensan.reams.db.dbe.definition.core.IryoKikanKubun;
 import jp.co.ndensan.reams.db.dbe.definition.core.enumeratedtype.IryoKikanJokyo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.IryoKikanCode;
@@ -84,18 +84,38 @@ public class KaigoIryoKikan implements IShujiiIryoKikan {
         return 医療機関.get住所();
     }
 
+    /**
+     * 新設年月日を返します。
+     *
+     * @return 新設年月日
+     */
     public FlexibleDate get開設期間() {
         return 医療機関.get新設年月日();
     }
 
+    /**
+     * 異動年月日を返します。
+     *
+     * @return 異動年月日
+     */
     public FlexibleDate get異動年月日() {
         return 医療機関.get異動年月日();
     }
 
+    /**
+     * 廃止年月日を返します。
+     *
+     * @return 廃止年月日
+     */
     public FlexibleDate get廃止年月日() {
         return 医療機関.get廃止年月日();
     }
 
+    /**
+     * 休止を返します。
+     *
+     * @return 休止
+     */
     public boolean is休止() {
         return 医療機関.is休止フラグ();
     }
@@ -107,6 +127,11 @@ public class KaigoIryoKikan implements IShujiiIryoKikan {
 //    public Code get会員区分() {
 //        return 医療機関.get会員区分().value();
 //    }
+    /**
+     * 指定自立支援医療機関フラグを返します。
+     *
+     * @return 指定自立支援医療機関フラグ
+     */
     public boolean is指定自立支援医療機関() {
         return 医療機関.is指定自立支援医療機関フラグ();
     }

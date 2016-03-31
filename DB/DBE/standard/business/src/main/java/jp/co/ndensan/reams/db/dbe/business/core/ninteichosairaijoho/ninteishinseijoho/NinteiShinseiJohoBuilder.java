@@ -469,7 +469,7 @@ public class NinteiShinseiJohoBuilder {
     /**
      * ２号特定疾病コードを設定します。
      *
-     * @param 特定疾病コード_２号
+     * @param 特定疾病コード_２号 特定疾病コード_２号
      * @return {@link NinteiShinseiJohoBuilder}
      */
     public NinteiShinseiJohoBuilder set２号特定疾病コード(Code 特定疾病コード_２号) {

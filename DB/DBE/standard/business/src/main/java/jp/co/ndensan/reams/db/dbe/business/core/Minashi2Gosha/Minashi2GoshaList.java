@@ -33,7 +33,7 @@ public class Minashi2GoshaList implements Iterable<Minashi2Gosha> {
     /**
      * Listのサイズを返します。
      *
-     * @return
+     * @return サイズ
      */
     public int size() {
         return goshaList.size();

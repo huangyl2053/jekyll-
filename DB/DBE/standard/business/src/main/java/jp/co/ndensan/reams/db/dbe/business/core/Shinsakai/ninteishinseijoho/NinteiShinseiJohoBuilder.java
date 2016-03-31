@@ -9,8 +9,6 @@ import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
 import jp.co.ndensan.reams.db.dbz.definition.core.valueobject.ninteishinsei.ChosaItakusakiCode;
 import jp.co.ndensan.reams.db.dbz.definition.core.valueobject.ninteishinsei.ChosainCode;
-import jp.co.ndensan.reams.db.dbz.definition.core.valueobject.ninteishinsei.ShujiiCode;
-import jp.co.ndensan.reams.db.dbz.definition.core.valueobject.ninteishinsei.ShujiiIryokikanCode;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5101NinteiShinseiJohoEntity;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaJusho;
@@ -125,7 +123,7 @@ public class NinteiShinseiJohoBuilder {
     /**
      * 認定申請区分（法令）コードを設定します。
      *
-     * @param 認定申請区分_法令_コード
+     * @param 認定申請区分_法令_コード 認定申請区分_法令_コード
      * @return {@link NinteiShinseiJohoBuilder}
      */
     public NinteiShinseiJohoBuilder set認定申請区分_法令_コード(Code 認定申請区分_法令_コード) {
@@ -137,7 +135,7 @@ public class NinteiShinseiJohoBuilder {
     /**
      * 認定申請区分（申請時）コードを設定します。
      *
-     * @param 認定申請区分_申請時_コード
+     * @param 認定申請区分_申請時_コード 認定申請区分_申請時_コード
      * @return {@link NinteiShinseiJohoBuilder}
      */
     public NinteiShinseiJohoBuilder set認定申請区分_申請時_コード(Code 認定申請区分_申請時_コード) {
@@ -341,7 +339,7 @@ public class NinteiShinseiJohoBuilder {
     /**
      * 要介護申請・要支援申請の区分を設定します。
      *
-     * @param 要介護申請_要支援申請の区分
+     * @param 要介護申請_要支援申請の区分 要介護申請_要支援申請の区分
      * @return {@link NinteiShinseiJohoBuilder}
      */
     public NinteiShinseiJohoBuilder set要介護申請_要支援申請の区分(RString 要介護申請_要支援申請の区分) {
@@ -401,7 +399,7 @@ public class NinteiShinseiJohoBuilder {
     /**
      * 前回認定有効期間（開始）を設定します。
      *
-     * @param 前回認定有効期間_開始_
+     * @param 前回認定有効期間_開始_ 前回認定有効期間_開始_
      * @return {@link NinteiShinseiJohoBuilder}
      */
     public NinteiShinseiJohoBuilder set前回認定有効期間_開始_(FlexibleDate 前回認定有効期間_開始_) {
@@ -414,7 +412,7 @@ public class NinteiShinseiJohoBuilder {
     /**
      * 前回認定有効期間（終了）を設定します。
      *
-     * @param 前回認定有効期間_終了_
+     * @param 前回認定有効期間_終了_ 前回認定有効期間_終了_
      * @return {@link NinteiShinseiJohoBuilder}
      */
     public NinteiShinseiJohoBuilder set前回認定有効期間_終了_(FlexibleDate 前回認定有効期間_終了_) {
@@ -427,7 +425,7 @@ public class NinteiShinseiJohoBuilder {
     /**
      * ２号医療保険者名を設定します。
      *
-     * @param 医療保険者名_２号
+     * @param 医療保険者名_２号 医療保険者名_２号
      * @return {@link NinteiShinseiJohoBuilder}
      */
     public NinteiShinseiJohoBuilder set２号医療保険者名(RString 医療保険者名_２号) {
@@ -439,7 +437,7 @@ public class NinteiShinseiJohoBuilder {
     /**
      * ２号医療保険記号番号を設定します。
      *
-     * @param 医療保険記号番号_２号
+     * @param 医療保険記号番号_２号 医療保険記号番号_２号
      * @return {@link NinteiShinseiJohoBuilder}
      */
     public NinteiShinseiJohoBuilder set２号医療保険記号番号(RString 医療保険記号番号_２号) {
@@ -451,7 +449,7 @@ public class NinteiShinseiJohoBuilder {
     /**
      * ２号特定疾病コードを設定します。
      *
-     * @param 特定疾病コード_２号
+     * @param 特定疾病コード_２号 特定疾病コード_２号
      * @return {@link NinteiShinseiJohoBuilder}
      */
     public NinteiShinseiJohoBuilder set２号特定疾病コード(Code 特定疾病コード_２号) {
