@@ -23,10 +23,32 @@ public class ShinsakaiKaisaiKekkaDiv extends Panel {
      * コントロール名とフィールド名を取得する
      * private + コントロール名 + フィールド名 の文字列を作成
      */
-    @JsonProperty("ShinsakaiYoteiInfo")
-    private ShinsakaiYoteiInfoDiv ShinsakaiYoteiInfo;
-    @JsonProperty("ShinsakaiKaisaiInfo")
-    private ShinsakaiKaisaiInfoDiv ShinsakaiKaisaiInfo;
+    @JsonProperty("txtShinsakaiMeisho")
+    private TextBox txtShinsakaiMeisho;
+    @JsonProperty("txtGogitai")
+    private TextBox txtGogitai;
+    @JsonProperty("txtYoteiTeiin")
+    private TextBoxNum txtYoteiTeiin;
+    @JsonProperty("txtJissiSu")
+    private TextBoxNum txtJissiSu;
+    @JsonProperty("txtKaisaiYoteibi")
+    private TextBoxFlexibleDate txtKaisaiYoteibi;
+    @JsonProperty("txtYoteiStartTime")
+    private TextBoxTime txtYoteiStartTime;
+    @JsonProperty("txtYoteiEndTime")
+    private TextBoxTime txtYoteiEndTime;
+    @JsonProperty("txtYoteiKaijo")
+    private TextBox txtYoteiKaijo;
+    @JsonProperty("txtKaisaiBi")
+    private TextBoxFlexibleDate txtKaisaiBi;
+    @JsonProperty("txtKaisaiStartTime")
+    private TextBoxTime txtKaisaiStartTime;
+    @JsonProperty("txtKaisaiEndTime")
+    private TextBoxTime txtKaisaiEndTime;
+    @JsonProperty("txtShoyoTime")
+    private TextBox txtShoyoTime;
+    @JsonProperty("ddlKaisaiBasho")
+    private DropDownList ddlKaisaiBasho;
     @JsonProperty("ShinsakaiIinToroku")
     private ShinsakaiIinTorokuDiv ShinsakaiIinToroku;
     @JsonProperty("onseiFile")
@@ -43,39 +65,237 @@ public class ShinsakaiKaisaiKekkaDiv extends Panel {
      * フィールド名のGetterとSetter を作成
      */
     /*
-     * getShinsakaiYoteiInfo
-     * @return ShinsakaiYoteiInfo
+     * gettxtShinsakaiMeisho
+     * @return txtShinsakaiMeisho
      */
-    @JsonProperty("ShinsakaiYoteiInfo")
-    public ShinsakaiYoteiInfoDiv getShinsakaiYoteiInfo() {
-        return ShinsakaiYoteiInfo;
+    @JsonProperty("txtShinsakaiMeisho")
+    public TextBox getTxtShinsakaiMeisho() {
+        return txtShinsakaiMeisho;
     }
 
     /*
-     * setShinsakaiYoteiInfo
-     * @param ShinsakaiYoteiInfo ShinsakaiYoteiInfo
+     * settxtShinsakaiMeisho
+     * @param txtShinsakaiMeisho txtShinsakaiMeisho
      */
-    @JsonProperty("ShinsakaiYoteiInfo")
-    public void setShinsakaiYoteiInfo(ShinsakaiYoteiInfoDiv ShinsakaiYoteiInfo) {
-        this.ShinsakaiYoteiInfo = ShinsakaiYoteiInfo;
+    @JsonProperty("txtShinsakaiMeisho")
+    public void setTxtShinsakaiMeisho(TextBox txtShinsakaiMeisho) {
+        this.txtShinsakaiMeisho = txtShinsakaiMeisho;
     }
 
     /*
-     * getShinsakaiKaisaiInfo
-     * @return ShinsakaiKaisaiInfo
+     * gettxtGogitai
+     * @return txtGogitai
      */
-    @JsonProperty("ShinsakaiKaisaiInfo")
-    public ShinsakaiKaisaiInfoDiv getShinsakaiKaisaiInfo() {
-        return ShinsakaiKaisaiInfo;
+    @JsonProperty("txtGogitai")
+    public TextBox getTxtGogitai() {
+        return txtGogitai;
     }
 
     /*
-     * setShinsakaiKaisaiInfo
-     * @param ShinsakaiKaisaiInfo ShinsakaiKaisaiInfo
+     * settxtGogitai
+     * @param txtGogitai txtGogitai
      */
-    @JsonProperty("ShinsakaiKaisaiInfo")
-    public void setShinsakaiKaisaiInfo(ShinsakaiKaisaiInfoDiv ShinsakaiKaisaiInfo) {
-        this.ShinsakaiKaisaiInfo = ShinsakaiKaisaiInfo;
+    @JsonProperty("txtGogitai")
+    public void setTxtGogitai(TextBox txtGogitai) {
+        this.txtGogitai = txtGogitai;
+    }
+
+    /*
+     * gettxtYoteiTeiin
+     * @return txtYoteiTeiin
+     */
+    @JsonProperty("txtYoteiTeiin")
+    public TextBoxNum getTxtYoteiTeiin() {
+        return txtYoteiTeiin;
+    }
+
+    /*
+     * settxtYoteiTeiin
+     * @param txtYoteiTeiin txtYoteiTeiin
+     */
+    @JsonProperty("txtYoteiTeiin")
+    public void setTxtYoteiTeiin(TextBoxNum txtYoteiTeiin) {
+        this.txtYoteiTeiin = txtYoteiTeiin;
+    }
+
+    /*
+     * gettxtJissiSu
+     * @return txtJissiSu
+     */
+    @JsonProperty("txtJissiSu")
+    public TextBoxNum getTxtJissiSu() {
+        return txtJissiSu;
+    }
+
+    /*
+     * settxtJissiSu
+     * @param txtJissiSu txtJissiSu
+     */
+    @JsonProperty("txtJissiSu")
+    public void setTxtJissiSu(TextBoxNum txtJissiSu) {
+        this.txtJissiSu = txtJissiSu;
+    }
+
+    /*
+     * gettxtKaisaiYoteibi
+     * @return txtKaisaiYoteibi
+     */
+    @JsonProperty("txtKaisaiYoteibi")
+    public TextBoxFlexibleDate getTxtKaisaiYoteibi() {
+        return txtKaisaiYoteibi;
+    }
+
+    /*
+     * settxtKaisaiYoteibi
+     * @param txtKaisaiYoteibi txtKaisaiYoteibi
+     */
+    @JsonProperty("txtKaisaiYoteibi")
+    public void setTxtKaisaiYoteibi(TextBoxFlexibleDate txtKaisaiYoteibi) {
+        this.txtKaisaiYoteibi = txtKaisaiYoteibi;
+    }
+
+    /*
+     * gettxtYoteiStartTime
+     * @return txtYoteiStartTime
+     */
+    @JsonProperty("txtYoteiStartTime")
+    public TextBoxTime getTxtYoteiStartTime() {
+        return txtYoteiStartTime;
+    }
+
+    /*
+     * settxtYoteiStartTime
+     * @param txtYoteiStartTime txtYoteiStartTime
+     */
+    @JsonProperty("txtYoteiStartTime")
+    public void setTxtYoteiStartTime(TextBoxTime txtYoteiStartTime) {
+        this.txtYoteiStartTime = txtYoteiStartTime;
+    }
+
+    /*
+     * gettxtYoteiEndTime
+     * @return txtYoteiEndTime
+     */
+    @JsonProperty("txtYoteiEndTime")
+    public TextBoxTime getTxtYoteiEndTime() {
+        return txtYoteiEndTime;
+    }
+
+    /*
+     * settxtYoteiEndTime
+     * @param txtYoteiEndTime txtYoteiEndTime
+     */
+    @JsonProperty("txtYoteiEndTime")
+    public void setTxtYoteiEndTime(TextBoxTime txtYoteiEndTime) {
+        this.txtYoteiEndTime = txtYoteiEndTime;
+    }
+
+    /*
+     * gettxtYoteiKaijo
+     * @return txtYoteiKaijo
+     */
+    @JsonProperty("txtYoteiKaijo")
+    public TextBox getTxtYoteiKaijo() {
+        return txtYoteiKaijo;
+    }
+
+    /*
+     * settxtYoteiKaijo
+     * @param txtYoteiKaijo txtYoteiKaijo
+     */
+    @JsonProperty("txtYoteiKaijo")
+    public void setTxtYoteiKaijo(TextBox txtYoteiKaijo) {
+        this.txtYoteiKaijo = txtYoteiKaijo;
+    }
+
+    /*
+     * gettxtKaisaiBi
+     * @return txtKaisaiBi
+     */
+    @JsonProperty("txtKaisaiBi")
+    public TextBoxFlexibleDate getTxtKaisaiBi() {
+        return txtKaisaiBi;
+    }
+
+    /*
+     * settxtKaisaiBi
+     * @param txtKaisaiBi txtKaisaiBi
+     */
+    @JsonProperty("txtKaisaiBi")
+    public void setTxtKaisaiBi(TextBoxFlexibleDate txtKaisaiBi) {
+        this.txtKaisaiBi = txtKaisaiBi;
+    }
+
+    /*
+     * gettxtKaisaiStartTime
+     * @return txtKaisaiStartTime
+     */
+    @JsonProperty("txtKaisaiStartTime")
+    public TextBoxTime getTxtKaisaiStartTime() {
+        return txtKaisaiStartTime;
+    }
+
+    /*
+     * settxtKaisaiStartTime
+     * @param txtKaisaiStartTime txtKaisaiStartTime
+     */
+    @JsonProperty("txtKaisaiStartTime")
+    public void setTxtKaisaiStartTime(TextBoxTime txtKaisaiStartTime) {
+        this.txtKaisaiStartTime = txtKaisaiStartTime;
+    }
+
+    /*
+     * gettxtKaisaiEndTime
+     * @return txtKaisaiEndTime
+     */
+    @JsonProperty("txtKaisaiEndTime")
+    public TextBoxTime getTxtKaisaiEndTime() {
+        return txtKaisaiEndTime;
+    }
+
+    /*
+     * settxtKaisaiEndTime
+     * @param txtKaisaiEndTime txtKaisaiEndTime
+     */
+    @JsonProperty("txtKaisaiEndTime")
+    public void setTxtKaisaiEndTime(TextBoxTime txtKaisaiEndTime) {
+        this.txtKaisaiEndTime = txtKaisaiEndTime;
+    }
+
+    /*
+     * gettxtShoyoTime
+     * @return txtShoyoTime
+     */
+    @JsonProperty("txtShoyoTime")
+    public TextBox getTxtShoyoTime() {
+        return txtShoyoTime;
+    }
+
+    /*
+     * settxtShoyoTime
+     * @param txtShoyoTime txtShoyoTime
+     */
+    @JsonProperty("txtShoyoTime")
+    public void setTxtShoyoTime(TextBox txtShoyoTime) {
+        this.txtShoyoTime = txtShoyoTime;
+    }
+
+    /*
+     * getddlKaisaiBasho
+     * @return ddlKaisaiBasho
+     */
+    @JsonProperty("ddlKaisaiBasho")
+    public DropDownList getDdlKaisaiBasho() {
+        return ddlKaisaiBasho;
+    }
+
+    /*
+     * setddlKaisaiBasho
+     * @param ddlKaisaiBasho ddlKaisaiBasho
+     */
+    @JsonProperty("ddlKaisaiBasho")
+    public void setDdlKaisaiBasho(DropDownList ddlKaisaiBasho) {
+        this.ddlKaisaiBasho = ddlKaisaiBasho;
     }
 
     /*
@@ -153,136 +373,6 @@ public class ShinsakaiKaisaiKekkaDiv extends Panel {
     /*
      * [ ショートカットの作成 ]
      */
-    @JsonIgnore
-    public TextBox getTxtShinsakaiMeisho() {
-        return this.getShinsakaiYoteiInfo().getTxtShinsakaiMeisho();
-    }
-
-    @JsonIgnore
-    public void  setTxtShinsakaiMeisho(TextBox txtShinsakaiMeisho) {
-        this.getShinsakaiYoteiInfo().setTxtShinsakaiMeisho(txtShinsakaiMeisho);
-    }
-
-    @JsonIgnore
-    public TextBox getTxtGogitai() {
-        return this.getShinsakaiYoteiInfo().getTxtGogitai();
-    }
-
-    @JsonIgnore
-    public void  setTxtGogitai(TextBox txtGogitai) {
-        this.getShinsakaiYoteiInfo().setTxtGogitai(txtGogitai);
-    }
-
-    @JsonIgnore
-    public TextBoxFlexibleDate getTxtKaisaiYoteibi() {
-        return this.getShinsakaiYoteiInfo().getTxtKaisaiYoteibi();
-    }
-
-    @JsonIgnore
-    public void  setTxtKaisaiYoteibi(TextBoxFlexibleDate txtKaisaiYoteibi) {
-        this.getShinsakaiYoteiInfo().setTxtKaisaiYoteibi(txtKaisaiYoteibi);
-    }
-
-    @JsonIgnore
-    public TextBoxTime getTxtYoteiStartTime() {
-        return this.getShinsakaiYoteiInfo().getTxtYoteiStartTime();
-    }
-
-    @JsonIgnore
-    public void  setTxtYoteiStartTime(TextBoxTime txtYoteiStartTime) {
-        this.getShinsakaiYoteiInfo().setTxtYoteiStartTime(txtYoteiStartTime);
-    }
-
-    @JsonIgnore
-    public TextBoxTime getTxtYoteiEndTime() {
-        return this.getShinsakaiYoteiInfo().getTxtYoteiEndTime();
-    }
-
-    @JsonIgnore
-    public void  setTxtYoteiEndTime(TextBoxTime txtYoteiEndTime) {
-        this.getShinsakaiYoteiInfo().setTxtYoteiEndTime(txtYoteiEndTime);
-    }
-
-    @JsonIgnore
-    public TextBoxNum getTxtYoteiTeiin() {
-        return this.getShinsakaiYoteiInfo().getTxtYoteiTeiin();
-    }
-
-    @JsonIgnore
-    public void  setTxtYoteiTeiin(TextBoxNum txtYoteiTeiin) {
-        this.getShinsakaiYoteiInfo().setTxtYoteiTeiin(txtYoteiTeiin);
-    }
-
-    @JsonIgnore
-    public TextBox getTxtYoteiKaijo() {
-        return this.getShinsakaiYoteiInfo().getTxtYoteiKaijo();
-    }
-
-    @JsonIgnore
-    public void  setTxtYoteiKaijo(TextBox txtYoteiKaijo) {
-        this.getShinsakaiYoteiInfo().setTxtYoteiKaijo(txtYoteiKaijo);
-    }
-
-    @JsonIgnore
-    public TextBoxFlexibleDate getTxtKaisaiBi() {
-        return this.getShinsakaiKaisaiInfo().getTxtKaisaiBi();
-    }
-
-    @JsonIgnore
-    public void  setTxtKaisaiBi(TextBoxFlexibleDate txtKaisaiBi) {
-        this.getShinsakaiKaisaiInfo().setTxtKaisaiBi(txtKaisaiBi);
-    }
-
-    @JsonIgnore
-    public TextBoxTime getTxtKaisaiStartTime() {
-        return this.getShinsakaiKaisaiInfo().getTxtKaisaiStartTime();
-    }
-
-    @JsonIgnore
-    public void  setTxtKaisaiStartTime(TextBoxTime txtKaisaiStartTime) {
-        this.getShinsakaiKaisaiInfo().setTxtKaisaiStartTime(txtKaisaiStartTime);
-    }
-
-    @JsonIgnore
-    public TextBoxTime getTxtKaisaiEndTime() {
-        return this.getShinsakaiKaisaiInfo().getTxtKaisaiEndTime();
-    }
-
-    @JsonIgnore
-    public void  setTxtKaisaiEndTime(TextBoxTime txtKaisaiEndTime) {
-        this.getShinsakaiKaisaiInfo().setTxtKaisaiEndTime(txtKaisaiEndTime);
-    }
-
-    @JsonIgnore
-    public TextBox getTxtShoyoTime() {
-        return this.getShinsakaiKaisaiInfo().getTxtShoyoTime();
-    }
-
-    @JsonIgnore
-    public void  setTxtShoyoTime(TextBox txtShoyoTime) {
-        this.getShinsakaiKaisaiInfo().setTxtShoyoTime(txtShoyoTime);
-    }
-
-    @JsonIgnore
-    public TextBoxNum getTxtJissiSu() {
-        return this.getShinsakaiKaisaiInfo().getTxtJissiSu();
-    }
-
-    @JsonIgnore
-    public void  setTxtJissiSu(TextBoxNum txtJissiSu) {
-        this.getShinsakaiKaisaiInfo().setTxtJissiSu(txtJissiSu);
-    }
-
-    @JsonIgnore
-    public DropDownList getDdlKaisaiBasho() {
-        return this.getShinsakaiKaisaiInfo().getDdlKaisaiBasho();
-    }
-
-    @JsonIgnore
-    public void  setDdlKaisaiBasho(DropDownList ddlKaisaiBasho) {
-        this.getShinsakaiKaisaiInfo().setDdlKaisaiBasho(ddlKaisaiBasho);
-    }
-
     @JsonIgnore
     public DataGrid<dgShinsakaiIinIchiran_Row> getDgShinsakaiIinIchiran() {
         return this.getShinsakaiIinToroku().getDgShinsakaiIinIchiran();
