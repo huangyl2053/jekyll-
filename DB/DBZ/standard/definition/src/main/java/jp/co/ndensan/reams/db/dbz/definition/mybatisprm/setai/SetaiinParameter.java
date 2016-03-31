@@ -18,6 +18,7 @@ import lombok.Getter;
 public class SetaiinParameter extends UaFt200FindShikibetsuTaishoParam implements IMyBatisParameter {
 
     /**
+     * コンストラクス
      *
      * @param key key
      */
