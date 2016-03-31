@@ -52,8 +52,15 @@
             separator=","  
             close=")">  
             #{item}  
-        </foreach>																
-        AND dbT5102."nijiHanteiYMD" BETWEEN #{nijiHanteiYMDFrom} AND #{nijiHanteiYMDTo}																
+        </foreach>
+        <if test="二次判定日FromFlag">
+            AND
+            DbT5101."ninteiShinseiYMD" <![CDATA[>=]]> #{nijiHanteiYMDFrom}
+        </if>
+        <if test="二次判定日ToFlag">
+            AND 
+            DbT5101."ninteiShinseiYMD" <![CDATA[<=]]> #{nijiHanteiYMDTo} 
+        </if>																													
         ORDER BY																		
             dbT5102."shinsakaiKaisaiNo",															
             dbT5101."ninteiShinseiYMD"	
