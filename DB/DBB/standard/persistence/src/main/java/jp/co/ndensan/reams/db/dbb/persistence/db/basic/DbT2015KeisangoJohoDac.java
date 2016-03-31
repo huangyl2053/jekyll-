@@ -37,11 +37,11 @@ public class DbT2015KeisangoJohoDac implements ISaveable<DbT2015KeisangoJohoEnti
     /**
      * 主キーで計算後情報を取得します。
      *
-     * @param 調定年度
-     * @param 賦課年度
-     * @param 通知書番号
-     * @param 更正前後区分
-     * @param 作成処理名
+     * @param 調定年度 調定年度
+     * @param 賦課年度 賦課年度
+     * @param 通知書番号 通知書番号
+     * @param 更正前後区分 更正前後区分
+     * @param 作成処理名 作成処理名
      * @return DbT2015KeisangoJohoEntity
      * @throws NullPointerException 引数のいずれかがnullの場合
      */

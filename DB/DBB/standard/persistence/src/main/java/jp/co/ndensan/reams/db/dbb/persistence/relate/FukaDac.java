@@ -26,6 +26,7 @@ import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.core.mybatis.SqlSession;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.util.db.DbAccessorNormalType;
 import jp.co.ndensan.reams.uz.uza.util.db.Order;
 import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.and;
@@ -45,6 +46,8 @@ public class FukaDac implements IModifiable<DbT2002FukaEntity> {
 
     @InjectSession
     private SqlSession session;
+    private static final RString 賦課年度RSTRING = new RString("賦課年度");
+    private static final RString 通知書番号RSTRING = new RString("通知書番号");
     private final DbT2002FukaDac 介護賦課Dac = InstanceProvider.create(DbT2002FukaDac.class);
 
     /**
@@ -63,8 +66,8 @@ public class FukaDac implements IModifiable<DbT2002FukaEntity> {
             int 履歴番号) {
 
         requireNonNull(調定年度, UrSystemErrorMessages.値がnull.getReplacedMessage("調定年度"));
-        requireNonNull(賦課年度, UrSystemErrorMessages.値がnull.getReplacedMessage("賦課年度"));
-        requireNonNull(通知書番号, UrSystemErrorMessages.値がnull.getReplacedMessage("通知書番号"));
+        requireNonNull(賦課年度, UrSystemErrorMessages.値がnull.getReplacedMessage(賦課年度RSTRING.toString()));
+        requireNonNull(通知書番号, UrSystemErrorMessages.値がnull.getReplacedMessage(通知書番号RSTRING.toString()));
         requireNonNull(履歴番号, UrSystemErrorMessages.値がnull.getReplacedMessage("履歴番号"));
 
         return Optional.ofNullable(createModel(介護賦課Dac.selectByKey(
@@ -88,8 +91,8 @@ public class FukaDac implements IModifiable<DbT2002FukaEntity> {
             TsuchishoNo 通知書番号,
             int 履歴番号) throws NullPointerException {
 
-        requireNonNull(賦課年度, UrSystemErrorMessages.値がnull.getReplacedMessage("賦課年度"));
-        requireNonNull(通知書番号, UrSystemErrorMessages.値がnull.getReplacedMessage("通知書番号"));
+        requireNonNull(賦課年度, UrSystemErrorMessages.値がnull.getReplacedMessage(賦課年度RSTRING.toString()));
+        requireNonNull(通知書番号, UrSystemErrorMessages.値がnull.getReplacedMessage(通知書番号RSTRING.toString()));
         requireNonNull(履歴番号, UrSystemErrorMessages.値がnull.getReplacedMessage("履歴番号"));
 
         DbAccessorNormalType accessor = new DbAccessorNormalType(session);
@@ -123,7 +126,7 @@ public class FukaDac implements IModifiable<DbT2002FukaEntity> {
             TsuchishoNo 通知書番号,
             RDateTime 処理日時) throws NullPointerException {
 
-        requireNonNull(通知書番号, UrSystemErrorMessages.値がnull.getReplacedMessage("通知書番号"));
+        requireNonNull(通知書番号, UrSystemErrorMessages.値がnull.getReplacedMessage(通知書番号RSTRING.toString()));
         requireNonNull(処理日時, UrSystemErrorMessages.値がnull.getReplacedMessage("処理日時"));
 
         DbAccessorNormalType accessor = new DbAccessorNormalType(session);
@@ -154,8 +157,8 @@ public class FukaDac implements IModifiable<DbT2002FukaEntity> {
     public IItemList<DbT2002FukaEntity> select介護賦課一覧(FlexibleYear 調定年度, FlexibleYear 賦課年度, TsuchishoNo 通知書番号) {
 
         requireNonNull(調定年度, UrSystemErrorMessages.値がnull.getReplacedMessage("調定年度"));
-        requireNonNull(賦課年度, UrSystemErrorMessages.値がnull.getReplacedMessage("賦課年度"));
-        requireNonNull(通知書番号, UrSystemErrorMessages.値がnull.getReplacedMessage("通知書番号"));
+        requireNonNull(賦課年度, UrSystemErrorMessages.値がnull.getReplacedMessage(賦課年度RSTRING.toString()));
+        requireNonNull(通知書番号, UrSystemErrorMessages.値がnull.getReplacedMessage(通知書番号RSTRING.toString()));
 
         DbAccessorNormalType accessor = new DbAccessorNormalType(session);
         List<DbT2002FukaEntity> 介護賦課List = accessor.select().
@@ -185,8 +188,8 @@ public class FukaDac implements IModifiable<DbT2002FukaEntity> {
     @Transaction
     public Optional<DbT2002FukaEntity> select最新介護賦課(FlexibleYear 賦課年度, TsuchishoNo 通知書番号) {
 
-        requireNonNull(賦課年度, UrSystemErrorMessages.値がnull.getReplacedMessage("賦課年度"));
-        requireNonNull(通知書番号, UrSystemErrorMessages.値がnull.getReplacedMessage("通知書番号"));
+        requireNonNull(賦課年度, UrSystemErrorMessages.値がnull.getReplacedMessage(賦課年度RSTRING.toString()));
+        requireNonNull(通知書番号, UrSystemErrorMessages.値がnull.getReplacedMessage(通知書番号RSTRING.toString()));
 
         DbAccessorNormalType accessor = new DbAccessorNormalType(session);
         List<DbT2002FukaEntity> 介護賦課List = accessor.select().
@@ -236,7 +239,7 @@ public class FukaDac implements IModifiable<DbT2002FukaEntity> {
     public IItemList<DbT2002FukaEntity> select介護賦課一覧(HihokenshaNo 被保険者番号, FlexibleYear 賦課年度) {
 
         requireNonNull(被保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage("被保険者番号"));
-        requireNonNull(賦課年度, UrSystemErrorMessages.値がnull.getReplacedMessage("賦課年度"));
+        requireNonNull(賦課年度, UrSystemErrorMessages.値がnull.getReplacedMessage(賦課年度RSTRING.toString()));
 
         DbAccessorNormalType accessor = new DbAccessorNormalType(session);
         List<DbT2002FukaEntity> 介護賦課List = accessor.select().
@@ -267,8 +270,8 @@ public class FukaDac implements IModifiable<DbT2002FukaEntity> {
             TsuchishoNo 通知書番号) {
 
         requireNonNull(調定年度, UrSystemErrorMessages.値がnull.getReplacedMessage("調定年度"));
-        requireNonNull(賦課年度, UrSystemErrorMessages.値がnull.getReplacedMessage("賦課年度"));
-        requireNonNull(通知書番号, UrSystemErrorMessages.値がnull.getReplacedMessage("通知書番号"));
+        requireNonNull(賦課年度, UrSystemErrorMessages.値がnull.getReplacedMessage(賦課年度RSTRING.toString()));
+        requireNonNull(通知書番号, UrSystemErrorMessages.値がnull.getReplacedMessage(通知書番号RSTRING.toString()));
 
         DbAccessorNormalType accessor = new DbAccessorNormalType(session);
         List<DbT2002FukaEntity> 介護賦課List = accessor.select().
@@ -298,7 +301,7 @@ public class FukaDac implements IModifiable<DbT2002FukaEntity> {
     @Transaction
     public IItemList<DbT2002FukaEntity> selectRecently賦課一覧by通知書番号(TsuchishoNo 通知書番号) {
 
-        requireNonNull(通知書番号, UrSystemErrorMessages.値がnull.getReplacedMessage("通知書番号"));
+        requireNonNull(通知書番号, UrSystemErrorMessages.値がnull.getReplacedMessage(通知書番号RSTRING.toString()));
 
         DbAccessorNormalType accessor = new DbAccessorNormalType(session);
         List<DbT2002FukaEntity> 介護賦課List = accessor.select().

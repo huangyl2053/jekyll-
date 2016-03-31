@@ -6,7 +6,7 @@
 package jp.co.ndensan.reams.db.dbb.persistence.db.mapper.relate.tokuchoheijunka6gatsutsuchishoikkatsuhakko;
 
 import jp.co.ndensan.reams.db.dbb.definition.mybatisprm.tokuchoheijunka6gatsutsuchishoikkatsuhakko.TokuchoHeijunka6gatsuMyBatisParameter;
-import jp.co.ndensan.reams.db.dbb.entity.tokuchoHeijunka6gatsu.TsuchishoIkkatsuHakkoParamEntity;
+import jp.co.ndensan.reams.db.dbb.entity.tokuchoheijunka6gatsu.TsuchishoIkkatsuHakkoParamEntity;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
@@ -19,7 +19,7 @@ public interface ITokuchoHeijunka6gatsuTsuchishoIkkatsuHakkoMapper {
      * 基準日時を取得する。
      *
      * @param sqlparams TsuchishoIkkatsuHakkoParamEntity
-     * @return
+     * @return 基準日時
      */
     RString get基準日時(TsuchishoIkkatsuHakkoParamEntity sqlparams);
 
