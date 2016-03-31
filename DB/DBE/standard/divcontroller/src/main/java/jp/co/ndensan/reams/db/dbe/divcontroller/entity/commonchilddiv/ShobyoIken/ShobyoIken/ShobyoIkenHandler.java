@@ -17,13 +17,13 @@ import jp.co.ndensan.reams.db.dbe.business.core.ikensho.shujiiikenshojoho.Shujii
 import jp.co.ndensan.reams.db.dbe.business.core.ikensho.shujiiikenshojoho.ShujiiIkenshoJohoBuilder;
 import jp.co.ndensan.reams.db.dbe.business.core.ikensho.shujiiikenshojoho.ShujiiIkenshoJohoIdentifier;
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.core.KoroshoIfShikibetsuCode;
+import jp.co.ndensan.reams.db.dbe.service.shobyoiken.ShobyoIkenFinder;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.ikensho.Anteisei;
 import jp.co.ndensan.reams.db.dbz.divcontroller.viewbox.ViewStateKeys;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.CodeShubetsu;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
-import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
@@ -164,9 +164,10 @@ public class ShobyoIkenHandler {
     public void onClick_tsuika() {
         div.getGeninShikkanShosai().setVisible(true);
         div.getGeninShikkanShosai().getCcdCodeInputGeninShikkan().setDisabled(false);
+        div.getGeninShikkanShosai().getCcdCodeInputGeninShikkan().clearDisplayedValues();
         div.getRadIsShutaruGeninShikkan().setDisabled(false);
         div.getCcdCodeInputGeninShikkan().applyNoOptionCodeMaster().load(SubGyomuCode.DBE認定支援,
-                コード種別, FlexibleDate.getNowDate());
+                コード種別);
         div.getGeninShikkanPanel().getGeninShikkanShosai().setJotai(追加);
     }
 
@@ -204,6 +205,7 @@ public class ShobyoIkenHandler {
      */
     public void onClick_sakujyo() {
         div.getGeninShikkanShosai().setVisible(true);
+        div.getGeninShikkanShosai().getCcdCodeInputGeninShikkan().setDisabled(true);
         div.getRadIsShutaruGeninShikkan().setDisabled(true);
         div.getBtnNo().setDisabled(false);
         div.getBtnOK().setDisabled(false);
@@ -498,7 +500,7 @@ public class ShobyoIkenHandler {
                 意見書情報 = 意見書情報.createBuilderForEdit().setGeninShikkan(原因疾患).build();
             }
             if (追加.equals(row.getJotai())) {
-                GeninShikkan geninShikkan = new GeninShikkan(管理番号, div.getDgGenyin().getDataSource().size());
+                GeninShikkan geninShikkan = new GeninShikkan(管理番号, get連番(管理番号));
                 GeninShikkanBuilder builder2 = geninShikkan.createBuilderForEdit();
                 builder2.set原因疾患コード(new Code(row.getGeninShikkanCode().getValue()));
                 if (row.getIsShutaruGeninShikkan()) {
@@ -511,5 +513,9 @@ public class ShobyoIkenHandler {
             }
         }
         return 意見書情報;
+    }
+
+    private int get連番(ShinseishoKanriNo 管理番号) {
+        return ShobyoIkenFinder.createInstance().get連番(管理番号);
     }
 }
