@@ -4,7 +4,6 @@ package jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE0330001;
  * このファイルへの変更は、再生成時には損失するため
  * 不正な動作の原因になります。
  */
-
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.shujiiIryokikanandshujiiinput.ShujiiIryokikanAndShujiiInput.IShujiiIryokikanAndShujiiInputDiv;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.shujiiIryokikanandshujiiinput.ShujiiIryokikanAndShujiiInput.ShujiiIryokikanAndShujiiInputDiv;
@@ -12,12 +11,11 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.*;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 
 /**
- * SearchConditionPanel のクラスファイル
- *
+ * SearchConditionPanel のクラスファイル 
+ * 
  * @author 自動生成
  */
 public class SearchConditionPanelDiv extends Panel {
-
     // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-01-15_09-59-03">
     /*
      * [ private の作成 ]
@@ -27,12 +25,10 @@ public class SearchConditionPanelDiv extends Panel {
      */
     @JsonProperty("txtNijiHanteiKikan")
     private TextBoxDateRange txtNijiHanteiKikan;
+    @JsonProperty("radPrintCondition")
+    private RadioButton radPrintCondition;
     @JsonProperty("radKekkaTsuchiOutputTaisho")
     private RadioButton radKekkaTsuchiOutputTaisho;
-    @JsonProperty("txtDispMax")
-    private TextBoxNum txtDispMax;
-    @JsonProperty("btnClear")
-    private Button btnClear;
     @JsonProperty("btnSearch")
     private Button btnSearch;
     @JsonProperty("ccdShujiiIryokikanAndShujiiInput")
@@ -63,6 +59,24 @@ public class SearchConditionPanelDiv extends Panel {
     }
 
     /*
+     * getradPrintCondition
+     * @return radPrintCondition
+     */
+    @JsonProperty("radPrintCondition")
+    public RadioButton getRadPrintCondition() {
+        return radPrintCondition;
+    }
+
+    /*
+     * setradPrintCondition
+     * @param radPrintCondition radPrintCondition
+     */
+    @JsonProperty("radPrintCondition")
+    public void setRadPrintCondition(RadioButton radPrintCondition) {
+        this.radPrintCondition = radPrintCondition;
+    }
+
+    /*
      * getradKekkaTsuchiOutputTaisho
      * @return radKekkaTsuchiOutputTaisho
      */
@@ -78,42 +92,6 @@ public class SearchConditionPanelDiv extends Panel {
     @JsonProperty("radKekkaTsuchiOutputTaisho")
     public void setRadKekkaTsuchiOutputTaisho(RadioButton radKekkaTsuchiOutputTaisho) {
         this.radKekkaTsuchiOutputTaisho = radKekkaTsuchiOutputTaisho;
-    }
-
-    /*
-     * gettxtDispMax
-     * @return txtDispMax
-     */
-    @JsonProperty("txtDispMax")
-    public TextBoxNum getTxtDispMax() {
-        return txtDispMax;
-    }
-
-    /*
-     * settxtDispMax
-     * @param txtDispMax txtDispMax
-     */
-    @JsonProperty("txtDispMax")
-    public void setTxtDispMax(TextBoxNum txtDispMax) {
-        this.txtDispMax = txtDispMax;
-    }
-
-    /*
-     * getbtnClear
-     * @return btnClear
-     */
-    @JsonProperty("btnClear")
-    public Button getBtnClear() {
-        return btnClear;
-    }
-
-    /*
-     * setbtnClear
-     * @param btnClear btnClear
-     */
-    @JsonProperty("btnClear")
-    public void setBtnClear(Button btnClear) {
-        this.btnClear = btnClear;
     }
 
     /*
