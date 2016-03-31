@@ -238,30 +238,6 @@
         SET    "shikakuSoshitsuJiyuCode"= #{shikakuSoshitsuJiyuCode}
         SET    "shikakuSoshitsuYMD" = #{shikakuSoshitsuYMD}
         WHERE  "hihokenshaNo" = #{hihokenshaNo}
-    </update>
-
-    <resultMap id="resultMap_ShikibetsuCode"
-               type="jp.co.ndensan.reams.db.dbc.entity.db.relate.shokanbaraishikyuketteijoho.ShokanBaraiShikyuKetteiJohoItijiEntity"
-               autoMapping="true">
-        <result property="識別コード" column="shikibetsuCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.ShikibetsuCodeTypeHandler"/>
-    </resultMap>
-
-    <!-- 一時テーブルの被保険者番号の取得 -->
-    <select id="select識別コード"
-            resultMap="resultMap_ShikibetsuCode" fetchSize="500">
-        SELECT DISTINCT TEMP."shikibetsuCode"
-        FROM "TABLE_SHOKANBARAISHIKYUKETTEIJOHO" AS TEMP
-    </select>
-
-    <resultMap id="resultMap_PSM"
-               type="jp.co.ndensan.reams.db.dbc.entity.db.relate.shokanbaraishikyuketteijoho.IShikibetsuTaishoPSMEntity"
-               autoMapping="true">
-        <result property="識別コード" column="shikibetsuCode" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.ShikibetsuCodeTypeHandler"/>
-        <result property="全国住所コード" column="zenkokuJushoCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.ZenkokuJushoCodeTypeHandler"/>
-        <result property="住所" column="jusho" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
-        <result property="行政区コード" column="gyoseikuCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.GyoseikuCodeTypehandler"/>
-        <result property="行政区名" column="gyoseikuName" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
-    </resultMap>
 
     <!-- 償還払支給決定情報一時TBLの宛名情報更新。 -->
     <update id="update償還払支給決定情報一時TBL_宛名"
