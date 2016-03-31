@@ -12,7 +12,7 @@ import jp.co.ndensan.reams.db.dbe.business.core.ikensho.ninteishinseijoho.Nintei
 import jp.co.ndensan.reams.db.dbe.business.core.ikensho.shujiiikenshoiraijoho.ShujiiIkenshoIraiJoho;
 import jp.co.ndensan.reams.db.dbe.definition.mybatis.param.ikensho.ninteishinseijoho.NinteiShinseiJohoMapperParameter;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.ikensho.ninteishinseijoho.NinteiShinseiJohoEntity;
-import jp.co.ndensan.reams.db.dbe.persistence.core.basic.MapperProvider;
+import jp.co.ndensan.reams.db.dbe.persistence.db.util.MapperProvider;
 import jp.co.ndensan.reams.db.dbe.persistence.db.mapper.relate.ikensho.ninteishinseijoho.INinteiShinseiJohoMapper;
 import jp.co.ndensan.reams.db.dbe.service.core.ikensho.geninshikkan.GeninShikkanManager;
 import jp.co.ndensan.reams.db.dbe.service.core.ikensho.shujiiIkenshoIraiJoho.ShujiiIkenshoIraiJohoManager;

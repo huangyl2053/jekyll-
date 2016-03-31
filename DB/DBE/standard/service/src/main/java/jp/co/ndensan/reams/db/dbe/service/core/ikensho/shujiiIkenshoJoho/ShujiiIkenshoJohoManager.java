@@ -12,7 +12,7 @@ import jp.co.ndensan.reams.db.dbe.business.core.ikensho.shujiiikenshojoho.Shujii
 import jp.co.ndensan.reams.db.dbe.business.core.ikensho.shujiiikenshokinyuitem.ShujiiIkenshoKinyuItem;
 import jp.co.ndensan.reams.db.dbe.definition.mybatis.param.ikensho.shujiiIkenshoJoho.ShujiiIkenshoJohoMapperParameter;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.ikensho.shujiiIkenshoJoho.ShujiiIkenshoJohoEntity;
-import jp.co.ndensan.reams.db.dbe.persistence.core.basic.MapperProvider;
+import jp.co.ndensan.reams.db.dbe.persistence.db.util.MapperProvider;
 import jp.co.ndensan.reams.db.dbe.persistence.db.mapper.relate.ikensho.shujiiIkenshoJoho.IShujiiIkenshoJohoMapper;
 import jp.co.ndensan.reams.db.dbe.service.core.ikensho.shujiiikenshoikenitem.ShujiiIkenshoIkenItemManager;
 import jp.co.ndensan.reams.db.dbe.service.core.ikensho.shujiiikenshokinyuitem.ShujiiIkenshoKinyuItemManager;

@@ -11,7 +11,7 @@ import jp.co.ndensan.reams.db.dbe.business.core.ninteichosahyo.ninteichosahyogai
 import jp.co.ndensan.reams.db.dbe.business.core.ninteichosahyo.ninteichosairaijoho.NinteichosaIraiJoho;
 import jp.co.ndensan.reams.db.dbe.definition.mybatisprm.ninteichosahyo.ninteichosairaijoho.NinteichosaIraiJohoMapperParameter;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.ninteichosahyo.ninteichosairaijoho.NinteichosaIraiJohoEntity;
-import jp.co.ndensan.reams.db.dbe.persistence.core.basic.MapperProvider;
+import jp.co.ndensan.reams.db.dbe.persistence.db.util.MapperProvider;
 import jp.co.ndensan.reams.db.dbe.persistence.db.mapper.relate.ninteichosahyo.ninteichosairaijoho.INinteichosaIraiJohoMapper;
 import jp.co.ndensan.reams.db.dbe.service.core.ninteichosahyo.ninteichosahyogaikyochosa.NinteichosahyoGaikyoChosaManager;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo;
