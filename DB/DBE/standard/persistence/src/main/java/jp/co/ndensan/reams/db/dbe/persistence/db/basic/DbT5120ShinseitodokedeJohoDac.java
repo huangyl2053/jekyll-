@@ -6,9 +6,9 @@ package jp.co.ndensan.reams.db.dbe.persistence.db.basic;
 
 import java.util.List;
 import static java.util.Objects.requireNonNull;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo;
 import jp.co.ndensan.reams.db.dbe.entity.db.basic.DbT5120ShinseitodokedeJoho;
 import jp.co.ndensan.reams.db.dbe.entity.db.basic.DbT5120ShinseitodokedeJohoEntity;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo;
 import static jp.co.ndensan.reams.db.dbz.entity.db.basic.DbV4001JukyushaDaicho.shinseishoKanriNo;
 import jp.co.ndensan.reams.db.dbz.persistence.db.basic.ISaveable;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
@@ -30,7 +30,7 @@ public class DbT5120ShinseitodokedeJohoDac implements ISaveable<DbT5120Shinseito
     /**
      * 主キーで申請届出情報を取得します。
      *
-     * @param 申請書管理番号
+     * @param 申請書管理番号　ShinseishoKanriNo
      * @return DbT5120ShinseitodokedeJohoEntity
      * @throws NullPointerException 引数のいずれかがnullの場合
      */

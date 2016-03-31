@@ -5,11 +5,11 @@
 package jp.co.ndensan.reams.db.dbe.persistence.db.basic;
 
 import static java.util.Objects.requireNonNull;
+import jp.co.ndensan.reams.db.dbe.entity.db.basic.DbT5120ShinseitodokedeJoho;
+import jp.co.ndensan.reams.db.dbe.entity.db.basic.DbT5120ShinseitodokedeJohoEntity;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo;
 import jp.co.ndensan.reams.db.dbz.definition.core.util.itemlist.ItemList;
 import jp.co.ndensan.reams.db.dbz.definition.core.util.optional.Optional;
-import jp.co.ndensan.reams.db.dbe.entity.db.basic.DbT5120ShinseitodokedeJoho;
-import jp.co.ndensan.reams.db.dbe.entity.db.basic.DbT5120ShinseitodokedeJohoEntity;
 import static jp.co.ndensan.reams.db.dbz.entity.db.basic.DbV4001JukyushaDaicho.shinseishoKanriNo;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.IShinseitodokedeJohoEntity;
 import jp.co.ndensan.reams.db.dbz.persistence.IModifiable;
@@ -87,6 +87,12 @@ public class DbT5120ShinsakaiShinseitodokedeJohoDac implements IModifiable<IShin
     }
 
     // TODO 物理削除用メソッドが必要であるかは業務ごとに検討してください。
+    /**
+     * deletePhysical
+     *
+     * @param entity IShinseitodokedeJohoEntity
+     * @return 変更件数
+     */
     @Transaction
     public int deletePhysical(IShinseitodokedeJohoEntity entity) {
         DbAccessorNormalType accessor = new DbAccessorNormalType(session);
