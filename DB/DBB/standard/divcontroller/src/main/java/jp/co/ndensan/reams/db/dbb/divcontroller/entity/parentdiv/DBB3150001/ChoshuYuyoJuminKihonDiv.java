@@ -27,16 +27,16 @@ public class ChoshuYuyoJuminKihonDiv extends Panel {
      * コントロール名とフィールド名を取得する
      * private + コントロール名 + フィールド名 の文字列を作成
      */
-    @JsonProperty("ccdKaigoFukaKihon")
-    private KaigoFukaKihonDiv ccdKaigoFukaKihon;
-    @JsonProperty("AtenaKihon")
-    private KaigoAtenaInfoDiv AtenaKihon;
     @JsonProperty("ChoshuYuyoFukaRirekiAll")
     private ChoshuYuyoFukaRirekiAllDiv ChoshuYuyoFukaRirekiAll;
     @JsonProperty("ChoshuYuyoMain")
     private ChoshuYuyoMainDiv ChoshuYuyoMain;
     @JsonProperty("ChoshuYuyoPrintinfo")
     private ChoshuYuyoPrintinfoDiv ChoshuYuyoPrintinfo;
+    @JsonProperty("ccdKaigoFukaKihon")
+    private KaigoFukaKihonDiv ccdKaigoFukaKihon;
+    @JsonProperty("AtenaKihon")
+    private KaigoAtenaInfoDiv AtenaKihon;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -44,24 +44,6 @@ public class ChoshuYuyoJuminKihonDiv extends Panel {
      * コントロール名とフィールド名を取得する
      * フィールド名のGetterとSetter を作成
      */
-    /*
-     * getccdKaigoFukaKihon
-     * @return ccdKaigoFukaKihon
-     */
-    @JsonProperty("ccdKaigoFukaKihon")
-    public IKaigoFukaKihonDiv getCcdKaigoFukaKihon() {
-        return ccdKaigoFukaKihon;
-    }
-
-    /*
-     * getAtenaKihon
-     * @return AtenaKihon
-     */
-    @JsonProperty("AtenaKihon")
-    public IKaigoAtenaInfoDiv getAtenaKihon() {
-        return AtenaKihon;
-    }
-
     /*
      * getChoshuYuyoFukaRirekiAll
      * @return ChoshuYuyoFukaRirekiAll
@@ -114,6 +96,24 @@ public class ChoshuYuyoJuminKihonDiv extends Panel {
     @JsonProperty("ChoshuYuyoPrintinfo")
     public void setChoshuYuyoPrintinfo(ChoshuYuyoPrintinfoDiv ChoshuYuyoPrintinfo) {
         this.ChoshuYuyoPrintinfo = ChoshuYuyoPrintinfo;
+    }
+
+    /*
+     * getccdKaigoFukaKihon
+     * @return ccdKaigoFukaKihon
+     */
+    @JsonProperty("ccdKaigoFukaKihon")
+    public IKaigoFukaKihonDiv getCcdKaigoFukaKihon() {
+        return ccdKaigoFukaKihon;
+    }
+
+    /*
+     * getAtenaKihon
+     * @return AtenaKihon
+     */
+    @JsonProperty("AtenaKihon")
+    public IKaigoAtenaInfoDiv getAtenaKihon() {
+        return AtenaKihon;
     }
 
     /*

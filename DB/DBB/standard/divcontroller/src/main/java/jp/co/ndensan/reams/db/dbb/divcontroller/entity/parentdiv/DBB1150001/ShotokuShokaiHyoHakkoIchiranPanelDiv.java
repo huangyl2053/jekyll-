@@ -33,8 +33,6 @@ public class ShotokuShokaiHyoHakkoIchiranPanelDiv extends Panel {
     private Button btnSentakuShusei;
     @JsonProperty("btnModosu")
     private Button btnModosu;
-    @JsonProperty("btnSashidashininShusei")
-    private Button btnSashidashininShusei;
     @JsonProperty("dgShotokuShokaiHyoHakko")
     private DataGrid<dgShotokuShokaiHyoHakko_Row> dgShotokuShokaiHyoHakko;
 
@@ -150,24 +148,6 @@ public class ShotokuShokaiHyoHakkoIchiranPanelDiv extends Panel {
     @JsonProperty("btnModosu")
     public void setBtnModosu(Button btnModosu) {
         this.btnModosu = btnModosu;
-    }
-
-    /*
-     * getbtnSashidashininShusei
-     * @return btnSashidashininShusei
-     */
-    @JsonProperty("btnSashidashininShusei")
-    public Button getBtnSashidashininShusei() {
-        return btnSashidashininShusei;
-    }
-
-    /*
-     * setbtnSashidashininShusei
-     * @param btnSashidashininShusei btnSashidashininShusei
-     */
-    @JsonProperty("btnSashidashininShusei")
-    public void setBtnSashidashininShusei(Button btnSashidashininShusei) {
-        this.btnSashidashininShusei = btnSashidashininShusei;
     }
 
     /*

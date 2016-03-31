@@ -1,27 +1,27 @@
 ﻿{
- "uiContainerName": "DBBUC01300",
+ "uiContainerName": "DBBUC27102",
  "displayWizard": false,
  "subGyomuCode": "DBB",
  "steps": [
   {
    "id": 1,
-   "name": "特別徴収平準化計算8月分",
+   "name": "特徴対象者一覧作成",
    "transitionList": [
     {
      "id": "1",
      "type": "start",
      "condition": "",
      "toLayoutSubGyomuCode": "DBB",
-     "toLayoutName": "DBB0130001",
-     "toLayoutTitle": "特別徴収平準化計算（特別徴収8月分）",
-     "toState": "平準化計算"
+     "toLayoutName": "DBB2710002",
+     "toLayoutTitle": "特別徴収対象者一覧作成",
+     "toState": ""
     },
     {
      "id": "2",
      "type": "end",
      "layoutSubGyomuCode": "DBB",
-     "layoutName": "DBB0130001",
-     "layoutTitle": "特別徴収平準化計算（特別徴収8月分）",
+     "layoutName": "DBB2710002",
+     "layoutTitle": "特別徴収対象者一覧作成",
      "eventName": "完了",
      "destroy": false,
      "condition": ""

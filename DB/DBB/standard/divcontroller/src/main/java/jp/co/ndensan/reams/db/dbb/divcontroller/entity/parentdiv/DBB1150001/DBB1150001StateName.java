@@ -15,7 +15,7 @@ public enum DBB1150001StateName implements IStateEnumerations {
 // <editor-fold defaultstate="collapsed" desc="Created By UI Designer ver 1.0.0">
 
     NoChange(""),
-    初期状態("初期状態"),
+    所得照会票個別発行個人一覧("所得照会票個別発行個人一覧"),
     所得照会票印字内容修正("所得照会票印字内容修正"),
     所得照会票発行("所得照会票発行");
 

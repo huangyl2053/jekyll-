@@ -5,8 +5,6 @@ package jp.co.ndensan.reams.db.dbb.divcontroller.entity.parentdiv.DBB1150001;
  * 不正な動作の原因になります。
  */
 import com.fasterxml.jackson.annotation.JsonProperty;
-import jp.co.ndensan.reams.ur.urz.divcontroller.entity.commonchilddiv.ZenkokuJushoInput.IZenkokuJushoInputDiv;
-import jp.co.ndensan.reams.ur.urz.divcontroller.entity.commonchilddiv.ZenkokuJushoInput.ZenkokuJushoInputDiv;
 import jp.co.ndensan.reams.uz.uza.ui.binding.*;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 import jp.co.ndensan.reams.uz.uza.ui.binding.domain.*;
@@ -24,8 +22,6 @@ public class SashidashininKakuninPanelDiv extends Panel {
      * コントロール名とフィールド名を取得する
      * private + コントロール名 + フィールド名 の文字列を作成
      */
-    @JsonProperty("ccdZenkokuJushoInput4")
-    private ZenkokuJushoInputDiv ccdZenkokuJushoInput4;
     @JsonProperty("txtSashidashiNinYubinNo")
     private TextBoxYubinNo txtSashidashiNinYubinNo;
     @JsonProperty("txtSashidashiNinJusho")
@@ -41,15 +37,6 @@ public class SashidashininKakuninPanelDiv extends Panel {
      * コントロール名とフィールド名を取得する
      * フィールド名のGetterとSetter を作成
      */
-    /*
-     * getccdZenkokuJushoInput4
-     * @return ccdZenkokuJushoInput4
-     */
-    @JsonProperty("ccdZenkokuJushoInput4")
-    public IZenkokuJushoInputDiv getCcdZenkokuJushoInput4() {
-        return ccdZenkokuJushoInput4;
-    }
-
     /*
      * gettxtSashidashiNinYubinNo
      * @return txtSashidashiNinYubinNo

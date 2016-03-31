@@ -14,9 +14,10 @@ import jp.co.ndensan.reams.uz.uza.core.ui.response.IContainerEvents;
 public enum DBB3150001TransitionEventName implements IContainerEvents {
 // <editor-fold defaultstate="collapsed" desc="Created By UI Designer ver 1.0.0">
 
-    介護保険料徴収猶予("介護保険料徴収猶予"),
-    更新結果確認("更新結果確認"),
-    完了("完了");
+    完了("完了"),
+    猶予種類選択("猶予種類選択"),
+    取消種類選択("取消種類選択"),
+    発行("発行");
 
     private final RString name;
 

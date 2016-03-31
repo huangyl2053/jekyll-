@@ -5,8 +5,6 @@ package jp.co.ndensan.reams.db.dbb.divcontroller.entity.parentdiv.DBB1150001;
  * 不正な動作の原因になります。
  */
 import com.fasterxml.jackson.annotation.JsonProperty;
-import jp.co.ndensan.reams.ur.urz.divcontroller.entity.commonchilddiv.ZenkokuJushoInput.IZenkokuJushoInputDiv;
-import jp.co.ndensan.reams.ur.urz.divcontroller.entity.commonchilddiv.ZenkokuJushoInput.ZenkokuJushoInputDiv;
 import jp.co.ndensan.reams.uz.uza.ui.binding.*;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 
@@ -23,8 +21,6 @@ public class GenJushoPanelDiv extends Panel {
      * コントロール名とフィールド名を取得する
      * private + コントロール名 + フィールド名 の文字列を作成
      */
-    @JsonProperty("ccdZenkokuJushoInput3")
-    private ZenkokuJushoInputDiv ccdZenkokuJushoInput3;
     @JsonProperty("txtGenJusho")
     private TextBox txtGenJusho;
 
@@ -34,15 +30,6 @@ public class GenJushoPanelDiv extends Panel {
      * コントロール名とフィールド名を取得する
      * フィールド名のGetterとSetter を作成
      */
-    /*
-     * getccdZenkokuJushoInput3
-     * @return ccdZenkokuJushoInput3
-     */
-    @JsonProperty("ccdZenkokuJushoInput3")
-    public IZenkokuJushoInputDiv getCcdZenkokuJushoInput3() {
-        return ccdZenkokuJushoInput3;
-    }
-
     /*
      * gettxtGenJusho
      * @return txtGenJusho

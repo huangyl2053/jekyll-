@@ -5,8 +5,6 @@ package jp.co.ndensan.reams.db.dbb.divcontroller.entity.parentdiv.DBB1150001;
  * 不正な動作の原因になります。
  */
 import com.fasterxml.jackson.annotation.JsonProperty;
-import jp.co.ndensan.reams.ur.urz.divcontroller.entity.commonchilddiv.ZenkokuJushoInput.IZenkokuJushoInputDiv;
-import jp.co.ndensan.reams.ur.urz.divcontroller.entity.commonchilddiv.ZenkokuJushoInput.ZenkokuJushoInputDiv;
 import jp.co.ndensan.reams.uz.uza.ui.binding.*;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 
@@ -25,8 +23,6 @@ public class GenJushoNyuryokuPanelDiv extends Panel {
      */
     @JsonProperty("radMaeJusho")
     private RadioButton radMaeJusho;
-    @JsonProperty("ccdZenkokuJushoInput2")
-    private ZenkokuJushoInputDiv ccdZenkokuJushoInput2;
     @JsonProperty("txtZenJusho")
     private TextBox txtZenJusho;
 
@@ -52,15 +48,6 @@ public class GenJushoNyuryokuPanelDiv extends Panel {
     @JsonProperty("radMaeJusho")
     public void setRadMaeJusho(RadioButton radMaeJusho) {
         this.radMaeJusho = radMaeJusho;
-    }
-
-    /*
-     * getccdZenkokuJushoInput2
-     * @return ccdZenkokuJushoInput2
-     */
-    @JsonProperty("ccdZenkokuJushoInput2")
-    public IZenkokuJushoInputDiv getCcdZenkokuJushoInput2() {
-        return ccdZenkokuJushoInput2;
     }
 
     /*
