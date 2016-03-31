@@ -16,8 +16,7 @@ public enum DBC0710022StateName implements IStateEnumerations {
 
     NoChange(""),
     Default("default"),
-    KanryoMessage("KanryoMessage"),
-    shokai("shokai");
+    KanryoMessage("KanryoMessage");
 
     private final RString name;
 
