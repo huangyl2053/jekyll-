@@ -218,7 +218,7 @@ public class NinteichosaScheduleBuilder {
      * @return Builder
      * @throws IllegalStateException キーが一致しない場合
      */
-    public NinteichosaScheduleBuilder setTodokedesha(NinteiChosaScheduleMemo  認定調査スケジュールメモ情報) {
+    public NinteichosaScheduleBuilder setTodokedesha(NinteiChosaScheduleMemo 認定調査スケジュールメモ情報) {
         if (hasSameIdentifier(認定調査スケジュールメモ情報.identifier())) {
             ninteiChosaScheduleMemo.add(認定調査スケジュールメモ情報);
             return this;
@@ -229,7 +229,7 @@ public class NinteichosaScheduleBuilder {
     private boolean hasSameIdentifier(NinteiChosaScheduleMemoIdentifier 認定調査スケジュールメモ情報の識別子) {
         return (id.get調査地区コード().equals(認定調査スケジュールメモ情報の識別子.get調査地区コード()));
     }
-    
+
     /**
      * 認定調査スケジュールメモ情報のキー情報について判定します。<br>
      * 精神手帳情報に関連できる届出者情報である場合、下記の処理に遷移します。<br>
@@ -240,7 +240,7 @@ public class NinteichosaScheduleBuilder {
      * @return Builder
      * @throws IllegalStateException キーが一致しない場合
      */
-    public NinteichosaScheduleBuilder setChikuNinteiChosain(ChikuNinteiChosain  地区認定調査員情報) {
+    public NinteichosaScheduleBuilder setChikuNinteiChosain(ChikuNinteiChosain 地区認定調査員情報) {
         if (hasSameIdentifier(地区認定調査員情報.identifier())) {
             chikuNinteiChosain.add(地区認定調査員情報);
             return this;
@@ -258,6 +258,6 @@ public class NinteichosaScheduleBuilder {
      * @return {@link NinteichosaSchedule}のインスタンス
      */
     public NinteichosaSchedule build() {
-        return new NinteichosaSchedule(entity, id, ninteiShinseiJoho, ninteiChosaScheduleMemo,chikuNinteiChosain);
+        return new NinteichosaSchedule(entity, id, ninteiShinseiJoho, ninteiChosaScheduleMemo, chikuNinteiChosain);
     }
 }

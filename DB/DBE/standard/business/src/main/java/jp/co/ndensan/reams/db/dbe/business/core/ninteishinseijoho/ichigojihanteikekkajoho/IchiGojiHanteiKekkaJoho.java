@@ -21,7 +21,9 @@ import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 /**
  * 要介護認定1.5次判定結果情報を管理するクラスです。
  */
-public class IchiGojiHanteiKekkaJoho extends ModelBase<IchiGojiHanteiKekkaJohoIdentifier, DbT5510IchiGojiHanteiKekkaJohoEntity, IchiGojiHanteiKekkaJoho> implements Serializable {
+public class IchiGojiHanteiKekkaJoho
+        extends ModelBase<IchiGojiHanteiKekkaJohoIdentifier, DbT5510IchiGojiHanteiKekkaJohoEntity, IchiGojiHanteiKekkaJoho>
+        implements Serializable {
 
     private final DbT5510IchiGojiHanteiKekkaJohoEntity entity;
     private final IchiGojiHanteiKekkaJohoIdentifier id;
@@ -296,8 +298,7 @@ public class IchiGojiHanteiKekkaJoho extends ModelBase<IchiGojiHanteiKekkaJohoId
     }
 
     /**
-     * 要介護認定1.5次判定結果情報のみを変更対象とします。<br/>
-     * {@link DbT5510IchiGojiHanteiKekkaJohoEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば変更状態にします。
+     * 要介護認定1.5次判定結果情報のみを変更対象とします。<br/> {@link DbT5510IchiGojiHanteiKekkaJohoEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば変更状態にします。
      *
      * @return 変更対象処理実施後の{@link IchiGojiHanteiKekkaJoho}
      */
@@ -311,8 +312,7 @@ public class IchiGojiHanteiKekkaJoho extends ModelBase<IchiGojiHanteiKekkaJohoId
     }
 
     /**
-     * 保持する要介護認定1.5次判定結果情報を削除対象とします。<br/>
-     * {@link DbT5510IchiGojiHanteiKekkaJohoEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば削除状態にします。
+     * 保持する要介護認定1.5次判定結果情報を削除対象とします。<br/> {@link DbT5510IchiGojiHanteiKekkaJohoEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば削除状態にします。
      *
      * @return 削除対象処理実施後の{@link IchiGojiHanteiKekkaJoho}
      */

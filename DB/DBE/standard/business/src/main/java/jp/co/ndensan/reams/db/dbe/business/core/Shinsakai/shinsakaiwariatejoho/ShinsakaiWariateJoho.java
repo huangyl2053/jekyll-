@@ -28,7 +28,9 @@ import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 /**
  * 介護認定審査会割当情報を管理するクラスです。
  */
-public class ShinsakaiWariateJoho extends ModelBase<ShinsakaiWariateJohoIdentifier, DbT5502ShinsakaiWariateJohoEntity, ShinsakaiWariateJoho> implements Serializable {
+public class ShinsakaiWariateJoho
+        extends ModelBase<ShinsakaiWariateJohoIdentifier, DbT5502ShinsakaiWariateJohoEntity, ShinsakaiWariateJoho>
+        implements Serializable {
 
     private final DbT5502ShinsakaiWariateJohoEntity entity;
     private final ShinsakaiWariateJohoIdentifier id;
@@ -140,7 +142,7 @@ public class ShinsakaiWariateJoho extends ModelBase<ShinsakaiWariateJohoIdentifi
      *
      * @return 介護認定審査会審査順確定フラグ
      */
-    public boolean get介護認定審査会審査順確定フラグ() {
+    public boolean is介護認定審査会審査順確定フラグ() {
         return entity.getShinsakaiOrderKakuteiFlag();
     }
 
@@ -149,7 +151,7 @@ public class ShinsakaiWariateJoho extends ModelBase<ShinsakaiWariateJohoIdentifi
      *
      * @return 審査会自動割付フラグ
      */
-    public boolean get審査会自動割付フラグ() {
+    public boolean is審査会自動割付フラグ() {
         return entity.getShinsakaiJidoWaritsukeFlag();
     }
 

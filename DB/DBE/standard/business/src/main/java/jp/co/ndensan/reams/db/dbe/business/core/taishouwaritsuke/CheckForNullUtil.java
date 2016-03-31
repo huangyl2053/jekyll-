@@ -16,7 +16,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 /**
  * NullをCheckのツール
  */
-public class CheckForNullUtil {
+public final class CheckForNullUtil {
 
     /**
      * コンストラクタ

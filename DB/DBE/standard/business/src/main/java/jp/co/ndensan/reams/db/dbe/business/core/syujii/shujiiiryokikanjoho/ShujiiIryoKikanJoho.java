@@ -29,7 +29,9 @@ import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 /**
  * 主治医医療機関情報を管理するクラスです。
  */
-public class ShujiiIryoKikanJoho extends ModelBase<ShujiiIryoKikanJohoIdentifier, DbT5911ShujiiIryoKikanJohoEntity, ShujiiIryoKikanJoho> implements Serializable {
+public class ShujiiIryoKikanJoho
+        extends ModelBase<ShujiiIryoKikanJohoIdentifier, DbT5911ShujiiIryoKikanJohoEntity, ShujiiIryoKikanJoho>
+        implements Serializable {
 
     private final DbT5911ShujiiIryoKikanJohoEntity entity;
     private final ShujiiIryoKikanJohoIdentifier id;
@@ -186,7 +188,7 @@ public class ShujiiIryoKikanJoho extends ModelBase<ShujiiIryoKikanJohoIdentifier
      *
      * @return 状況フラグ
      */
-    public boolean get状況フラグ() {
+    public boolean is状況フラグ() {
         return entity.getJokyoFlag();
     }
 
@@ -211,8 +213,7 @@ public class ShujiiIryoKikanJoho extends ModelBase<ShujiiIryoKikanJohoIdentifier
     }
 
     /**
-     * 主治医医療機関情報配下の要素を削除対象とします。<br/>
-     * {@link DbT5911ShujiiIryoKikanJohoEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば削除状態にします。
+     * 主治医医療機関情報配下の要素を削除対象とします。<br/> {@link DbT5911ShujiiIryoKikanJohoEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば削除状態にします。
      * 主治医医療機関情報配下の要素である精神手帳任意項目情報の{@link Models#deleteOrRemoveAll() }を実行します。 削除処理結果となる{@link ShujiiIryoKikanJoho}を返します。
      *
      * @return 削除対象処理実施後の{@link ShujiiIryoKikanJoho}
@@ -239,8 +240,7 @@ public class ShujiiIryoKikanJoho extends ModelBase<ShujiiIryoKikanJohoIdentifier
     }
 
     /**
-     * 主治医医療機関情報のみを変更対象とします。<br/>
-     * {@link DbT5911ShujiiIryoKikanJohoEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば変更状態にします。
+     * 主治医医療機関情報のみを変更対象とします。<br/> {@link DbT5911ShujiiIryoKikanJohoEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば変更状態にします。
      *
      * @return 変更対象処理実施後の{@link ShujiiIryoKikanJoho}
      */

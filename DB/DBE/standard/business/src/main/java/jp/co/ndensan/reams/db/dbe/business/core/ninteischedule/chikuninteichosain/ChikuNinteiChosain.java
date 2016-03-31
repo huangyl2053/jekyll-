@@ -27,7 +27,9 @@ import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 /**
  * 地区認定調査員を管理するクラスです。
  */
-public class ChikuNinteiChosain extends ModelBase<ChikuNinteiChosainIdentifier, DbT5223ChikuNinteiChosainEntity, ChikuNinteiChosain> implements Serializable {
+public class ChikuNinteiChosain
+        extends ModelBase<ChikuNinteiChosainIdentifier, DbT5223ChikuNinteiChosainEntity, ChikuNinteiChosain>
+        implements Serializable {
 
     private static final long serialVersionUID = -921565083586101661L;
 
@@ -84,6 +86,7 @@ public class ChikuNinteiChosain extends ModelBase<ChikuNinteiChosainIdentifier, 
         }
         this.chikuShichoson = Models.create(chikushichosonList);
     }
+
     /**
      * シリアライズ、ビルダー用コンストラクタです。
      *
@@ -98,6 +101,7 @@ public class ChikuNinteiChosain extends ModelBase<ChikuNinteiChosainIdentifier, 
         this.id = id;
         this.chikuShichoson = chikushichoson;
     }
+
     /**
      * 調査地区コードを返します。
      *
@@ -173,10 +177,8 @@ public class ChikuNinteiChosain extends ModelBase<ChikuNinteiChosainIdentifier, 
     }
 
     /**
-     * 地区認定調査員配下の要素を削除対象とします。<br/>
-     * {@link DbT5223ChikuNinteiChosainEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば削除状態にします。
-     * 地区認定調査員配下の要素である精神手帳任意項目情報の{@link Models#deleteOrRemoveAll() }を実行します。
-     * 削除処理結果となる{@link ChikuNinteiChosain}を返します。
+     * 地区認定調査員配下の要素を削除対象とします。<br/> {@link DbT5223ChikuNinteiChosainEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば削除状態にします。
+     * 地区認定調査員配下の要素である精神手帳任意項目情報の{@link Models#deleteOrRemoveAll() }を実行します。 削除処理結果となる{@link ChikuNinteiChosain}を返します。
      *
      * @return 削除対象処理実施後の{@link ChikuNinteiChosain}
      * @throws IllegalStateException DbT5223ChikuNinteiChosainEntityのデータ状態が変更の場合
@@ -200,8 +202,7 @@ public class ChikuNinteiChosain extends ModelBase<ChikuNinteiChosainIdentifier, 
     }
 
     /**
-     * 地区認定調査員のみを変更対象とします。<br/>
-     * {@link DbT5223ChikuNinteiChosainEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば変更状態にします。
+     * 地区認定調査員のみを変更対象とします。<br/> {@link DbT5223ChikuNinteiChosainEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば変更状態にします。
      *
      * @return 変更対象処理実施後の{@link ChikuNinteiChosain}
      */
@@ -254,6 +255,7 @@ public class ChikuNinteiChosain extends ModelBase<ChikuNinteiChosainIdentifier, 
         private final DbT5223ChikuNinteiChosainEntity entity;
         private final ChikuNinteiChosainIdentifier id;
         private final Models<ChikuShichosonIdentifier, ChikuShichoson> chikuShichoson;
+
         private _SerializationProxy(
                 DbT5223ChikuNinteiChosainEntity entity,
                 ChikuNinteiChosainIdentifier id,
@@ -278,7 +280,7 @@ public class ChikuNinteiChosain extends ModelBase<ChikuNinteiChosainIdentifier, 
     public ChikuNinteiChosainBuilder createBuilderForEdit() {
         return new ChikuNinteiChosainBuilder(entity, id, chikuShichoson);
     }
-    
+
     @Override
     public int hashCode() {
         int hash = 7;

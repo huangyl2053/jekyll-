@@ -214,8 +214,8 @@ public class GogitaiJohoSakuseiHandler {
                 && result.get介護認定審査会予定定員() == div.getTxtYoteiTeiin().getValue().intValue()
                 && result.get介護認定審査会自動割当定員() == div.getTxtJidoWariateTeiin().getValue().intValue()
                 && result.get介護認定審査会委員定員() == div.getTxtIinTeiin().getValue().intValue()
-                && result.get合議体精神科医存在フラグ() == div.getRadSeishinkaiSonzai().getSelectedKey().equals(SEISHINKAI_SONZAI_SURU)
-                && result.get合議体ダミーフラグ() == div.getRadDummyFlag().getSelectedKey().equals(DUMMY_FLAG_DAMI);
+                && result.is合議体精神科医存在フラグ() == div.getRadSeishinkaiSonzai().getSelectedKey().equals(SEISHINKAI_SONZAI_SURU)
+                && result.is合議体ダミーフラグ() == div.getRadDummyFlag().getSelectedKey().equals(DUMMY_FLAG_DAMI);
 
         if (!flg) {
             return flg;
@@ -253,7 +253,7 @@ public class GogitaiJohoSakuseiHandler {
             dgShinsainList_Row dgShinsain,
             GogitaiWariateIinJoho gogitaiWariateIinJoho,
             boolean flg) {
-        if (gogitaiWariateIinJoho.get補欠()) {
+        if (gogitaiWariateIinJoho.is補欠()) {
             if (!gogitaiWariateIinJoho.get介護認定審査会委員コード().equals(dgHoketsuShinsain.getHoketsuShinsakaiIinCode())) {
                 return !flg;
             }

@@ -43,7 +43,9 @@ import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 /**
  * 要介護認定申請情報を管理するクラスです。
  */
-public class NinteiShinseiJoho extends ParentModelBase<NinteiShinseiJohoIdentifier, DbT5101NinteiShinseiJohoEntity, NinteiShinseiJoho> implements Serializable {
+public class NinteiShinseiJoho
+        extends ParentModelBase<NinteiShinseiJohoIdentifier, DbT5101NinteiShinseiJohoEntity, NinteiShinseiJoho>
+        implements Serializable {
 
     private static final long serialVersionUID = -2997577397140722215L;
 
@@ -307,7 +309,7 @@ public class NinteiShinseiJoho extends ParentModelBase<NinteiShinseiJohoIdentifi
      *
      * @return みなし２号等対象フラグ
      */
-    public boolean getみなし２号等対象フラグ() {
+    public boolean isみなし２号等対象フラグ() {
         return entity.getMinashiNigoEtcTaishoFlag();
     }
 
@@ -433,7 +435,7 @@ public class NinteiShinseiJoho extends ParentModelBase<NinteiShinseiJohoIdentifi
      *
      * @return 情報提供への同意有無
      */
-    public boolean get情報提供への同意有無() {
+    public boolean is情報提供への同意有無() {
         return entity.getJohoteikyoDoiFlag();
     }
 
@@ -505,7 +507,7 @@ public class NinteiShinseiJoho extends ParentModelBase<NinteiShinseiJohoIdentifi
      *
      * @return 指定医フラグ
      */
-    public boolean get指定医フラグ() {
+    public boolean is指定医フラグ() {
         return entity.getShiteiiFlag();
     }
 
@@ -532,7 +534,7 @@ public class NinteiShinseiJoho extends ParentModelBase<NinteiShinseiJohoIdentifi
      *
      * @return 認定延期通知発行しないことに対する同意有無
      */
-    public boolean get認定延期通知発行しないことに対する同意有無() {
+    public boolean is認定延期通知発行しないことに対する同意有無() {
         return entity.getEnkitsuchiNashiDoiFlag();
     }
 
@@ -541,7 +543,7 @@ public class NinteiShinseiJoho extends ParentModelBase<NinteiShinseiJohoIdentifi
      *
      * @return 施設入所の有無
      */
-    public boolean get施設入所の有無() {
+    public boolean is施設入所の有無() {
         return entity.getShisetsuNyushoFlag();
     }
 
@@ -559,7 +561,7 @@ public class NinteiShinseiJoho extends ParentModelBase<NinteiShinseiJohoIdentifi
      *
      * @return 家庭訪問の有無
      */
-    public boolean get家庭訪問の有無() {
+    public boolean is家庭訪問の有無() {
         return entity.getKateiHomonFlag();
     }
 
@@ -712,7 +714,7 @@ public class NinteiShinseiJoho extends ParentModelBase<NinteiShinseiJohoIdentifi
      *
      * @return 審査継続区分
      */
-    public boolean get審査継続区分() {
+    public boolean is審査継続区分() {
         return entity.getShinsaKeizokuFlag();
     }
 
@@ -784,7 +786,7 @@ public class NinteiShinseiJoho extends ParentModelBase<NinteiShinseiJohoIdentifi
      *
      * @return 論理削除フラグ
      */
-    public boolean get論理削除フラグ() {
+    public boolean is論理削除フラグ() {
         return entity.getLogicalDeletedFlag();
     }
 
@@ -809,10 +811,8 @@ public class NinteiShinseiJoho extends ParentModelBase<NinteiShinseiJohoIdentifi
     }
 
     /**
-     * 要介護認定申請情報配下の要素を削除対象とします。<br/>
-     * {@link DbT5101NinteiShinseiJohoEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば削除状態にします。
-     * 要介護認定申請情報配下の要素である要介護認定申請情報の{@link Models#deleteOrRemoveAll() }を実行します。
-     * 削除処理結果となる{@link NinteiShinseiJoho}を返します。
+     * 要介護認定申請情報配下の要素を削除対象とします。<br/> {@link DbT5101NinteiShinseiJohoEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば削除状態にします。
+     * 要介護認定申請情報配下の要素である要介護認定申請情報の{@link Models#deleteOrRemoveAll() }を実行します。 削除処理結果となる{@link NinteiShinseiJoho}を返します。
      *
      * @return 削除対象処理実施後の{@link NinteiShinseiJoho}
      * @throws IllegalStateException DbT5101NinteiShinseiJohoEntityのデータ状態が変更の場合
@@ -835,8 +835,7 @@ public class NinteiShinseiJoho extends ParentModelBase<NinteiShinseiJohoIdentifi
     }
 
     /**
-     * 要介護認定申請情報のみを変更対象とします。<br/>
-     * {@link DbT5101NinteiShinseiJohoEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば変更状態にします。
+     * 要介護認定申請情報のみを変更対象とします。<br/> {@link DbT5101NinteiShinseiJohoEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば変更状態にします。
      *
      * @return 変更対象処理実施後の{@link NinteiShinseiJoho}
      */

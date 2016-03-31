@@ -46,18 +46,18 @@ public class ChosaChiku {
     /**
      * 調査地区コード設定する。
      *
-     * @param ChosaChikuCode 調査地区コード
+     * @param chosaChikuCode 調査地区コード
      */
-    public void set調査地区コード(RString ChosaChikuCode) {
-        chosaChikuEntity.setChosaChikuCode(ChosaChikuCode);
+    public void set調査地区コード(RString chosaChikuCode) {
+        chosaChikuEntity.setChosaChikuCode(chosaChikuCode);
     }
 
     /**
      * 調査地区名称設定する。
      *
-     * @param ChosaChikuName 調査地区名称
+     * @param chosaChikuName 調査地区名称
      */
-    public void set調査地区名称(RString ChosaChikuName) {
-        chosaChikuEntity.setChosaChikuName(ChosaChikuName);
+    public void set調査地区名称(RString chosaChikuName) {
+        chosaChikuEntity.setChosaChikuName(chosaChikuName);
     }
 }

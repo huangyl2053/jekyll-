@@ -210,7 +210,7 @@ public class NinteichosaItakusakiJoho extends
      *
      * @return 特定調査員表示フラグ
      */
-    public Boolean get特定調査員表示フラグ() {
+    public Boolean is特定調査員表示フラグ() {
         return entity.getTokuteiChosainDisplayFlag();
     }
 

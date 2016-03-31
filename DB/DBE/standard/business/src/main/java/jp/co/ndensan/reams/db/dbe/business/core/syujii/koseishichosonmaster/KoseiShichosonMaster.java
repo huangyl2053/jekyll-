@@ -31,7 +31,9 @@ import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 /**
  * 構成市町村マスタを管理するクラスです。
  */
-public class KoseiShichosonMaster extends ParentModelBase<KoseiShichosonMasterIdentifier, DbT5051KoseiShichosonMasterEntity, KoseiShichosonMaster> implements Serializable {
+public class KoseiShichosonMaster
+        extends ParentModelBase<KoseiShichosonMasterIdentifier, DbT5051KoseiShichosonMasterEntity, KoseiShichosonMaster>
+        implements Serializable {
 
     private final DbT5051KoseiShichosonMasterEntity entity;
     private final KoseiShichosonMasterIdentifier id;

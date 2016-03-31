@@ -585,10 +585,10 @@ public class TaishouWaritsukeHandler {
                                 new ShinseishoKanriNo(row.getShinseishoKanriNo()));
                 ShinsakaiWariateJoho shinsakaiWariateJoho = johoManager.get介護認定審査会割当情報(mapperParameter);
                 if (!row.getNo().equals(new RString(String.valueOf(gridソート順))) || (shinsakaiWariateJoho != null
-                        && row.getShinsajunKakuteiFlag().equals(審査順確定フラグ_確定) != (shinsakaiWariateJoho.get介護認定審査会審査順確定フラグ()))) {
+                        && row.getShinsajunKakuteiFlag().equals(審査順確定フラグ_確定) != (shinsakaiWariateJoho.is介護認定審査会審査順確定フラグ()))) {
                     ShinsakaiWariateJohoBuilder johoBuilder = shinsakaiWariateJoho.createBuilderForEdit();
                     johoBuilder.set介護認定審査会審査順(gridソート順);
-                    johoBuilder.set介護認定審査会審査順確定フラグ(shinsakaiWariateJoho.get介護認定審査会審査順確定フラグ());
+                    johoBuilder.set介護認定審査会審査順確定フラグ(shinsakaiWariateJoho.is介護認定審査会審査順確定フラグ());
                     johoManager.save介護認定審査会割当情報(johoBuilder.build().modifiedModel());
                 }
             }

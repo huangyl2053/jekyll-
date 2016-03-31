@@ -36,7 +36,9 @@ import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 /**
  * 認定調査スケジュール情報を管理するクラスです。
  */
-public class NinteichosaSchedule extends ParentModelBase<NinteichosaScheduleIdentifier, DbT5221NinteichosaScheduleEntity, NinteichosaSchedule> implements Serializable {
+public class NinteichosaSchedule
+        extends ParentModelBase<NinteichosaScheduleIdentifier, DbT5221NinteichosaScheduleEntity, NinteichosaSchedule>
+        implements Serializable {
 
     private static final long serialVersionUID = -7680664538917615055L;
 
@@ -249,7 +251,7 @@ public class NinteichosaSchedule extends ParentModelBase<NinteichosaScheduleIden
      *
      * @return 予約可能フラグ
      */
-    public boolean get予約可能フラグ() {
+    public boolean is予約可能フラグ() {
         return entity.getYoyakuKaoFlag();
     }
 
@@ -367,7 +369,10 @@ public class NinteichosaSchedule extends ParentModelBase<NinteichosaScheduleIden
 
     @Override
     public boolean hasChanged() {
-        return hasChangedEntity() || ninteiShinseiJoho.hasAnyChanged() || ninteiChosaScheduleMemo.hasAnyChanged() || chikuNinteiChosain.hasAnyChanged();
+        return hasChangedEntity()
+                || ninteiShinseiJoho.hasAnyChanged()
+                || ninteiChosaScheduleMemo.hasAnyChanged()
+                || chikuNinteiChosain.hasAnyChanged();
     }
 
     /**

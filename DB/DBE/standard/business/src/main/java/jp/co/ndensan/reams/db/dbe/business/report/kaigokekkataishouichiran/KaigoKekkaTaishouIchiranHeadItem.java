@@ -13,7 +13,7 @@ import lombok.Getter;
  */
 @Getter
 @SuppressWarnings("PMD.UnusedPrivateField")
-public class KaigoKekkaTaishouIchiranHeadItem {
+public final class KaigoKekkaTaishouIchiranHeadItem {
 
     private final RString shichosonName;
     private final RString chushutsuKikanFrom;

@@ -78,7 +78,7 @@ public class GeninShikkan extends ModelBase<GeninShikkanIdentifier, DbT5300Genin
      *
      * @return 主たる原因疾患フラグ
      */
-    public boolean get主たる原因疾患フラグ() {
+    public boolean is主たる原因疾患フラグ() {
         return entity.getIsShutaruGeninShikkan();
     }
 

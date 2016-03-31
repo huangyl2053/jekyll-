@@ -128,7 +128,7 @@ public class ShobyoIkenHandler {
             原因疾患コード.setValue(原因疾患.get原因疾患コード().getColumnValue());
             dgGenyin_row.setGeninShikkanCode(原因疾患コード);
             dgGenyin_row.setMeiSho(CodeMaster.getCodeMeisho(SubGyomuCode.DBE認定支援, コード種別, 原因疾患.get原因疾患コード()));
-            if (原因疾患.get主たる原因疾患フラグ()) {
+            if (原因疾患.is主たる原因疾患フラグ()) {
                 dgGenyin_row.setIsShutaruGeninShikkan(Boolean.TRUE);
             } else {
                 dgGenyin_row.setIsShutaruGeninShikkan(Boolean.FALSE);

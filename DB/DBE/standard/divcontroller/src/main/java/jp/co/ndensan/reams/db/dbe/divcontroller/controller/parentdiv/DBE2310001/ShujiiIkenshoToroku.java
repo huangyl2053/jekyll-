@@ -352,7 +352,7 @@ public class ShujiiIkenshoToroku {
             shujiiIkenshoBuilder.set主治医医療機関コード(shujiiIkenshoIraiJoho.get主治医医療機関コード());
             shujiiIkenshoBuilder.set主治医意見書受領年月日(FlexibleDate.getNowDate());
             shujiiIkenshoBuilder.set在宅_施設区分(new Code(ZaitakuShisetsuKubun.在宅.getコード()));
-            if (ninteiShinseiJoho.get施設入所の有無()) {
+            if (ninteiShinseiJoho.is施設入所の有無()) {
                 shujiiIkenshoBuilder.set在宅_施設区分(new Code(ZaitakuShisetsuKubun.施設.getコード()));
             }
             shujiiIkenshoBuilder.set主治医意見書記入年月日(rdateToFlex(div.getTxtKinyuYMD().getValue()));

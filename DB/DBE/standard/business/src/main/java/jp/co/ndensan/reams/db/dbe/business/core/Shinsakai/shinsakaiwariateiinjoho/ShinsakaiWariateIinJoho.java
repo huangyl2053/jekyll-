@@ -12,9 +12,9 @@ import java.util.Objects;
 import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dbe.business.core.Shinsakai.shinsakaiiinjoho.ShinsakaiIinJoho;
 import jp.co.ndensan.reams.db.dbe.business.core.Shinsakai.shinsakaiiinjoho.ShinsakaiIinJohoIdentifier;
+import jp.co.ndensan.reams.db.dbe.entity.db.relate.shinsakai.shinsakaiwariateiinjoho.ShinsakaiWariateIinJohoRelateEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5503ShinsakaiWariateIinJohoEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5594ShinsakaiIinJohoEntity;
-import jp.co.ndensan.reams.db.dbe.entity.db.relate.shinsakai.shinsakaiwariateiinjoho.ShinsakaiWariateIinJohoRelateEntity;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
@@ -27,7 +27,9 @@ import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 /**
  * 介護認定審査会割当委員情報を管理するクラスです。
  */
-public class ShinsakaiWariateIinJoho extends ModelBase<ShinsakaiWariateIinJohoIdentifier, DbT5503ShinsakaiWariateIinJohoEntity, ShinsakaiWariateIinJoho> implements Serializable {
+public class ShinsakaiWariateIinJoho
+        extends ModelBase<ShinsakaiWariateIinJohoIdentifier, DbT5503ShinsakaiWariateIinJohoEntity, ShinsakaiWariateIinJoho>
+        implements Serializable {
 
     private final DbT5503ShinsakaiWariateIinJohoEntity entity;
     private final ShinsakaiWariateIinJohoIdentifier id;
@@ -130,7 +132,7 @@ public class ShinsakaiWariateIinJoho extends ModelBase<ShinsakaiWariateIinJohoId
      *
      * @return 委員出席
      */
-    public boolean get委員出席() {
+    public boolean is委員出席() {
         return entity.getShussekiFlag();
     }
 
@@ -139,7 +141,7 @@ public class ShinsakaiWariateIinJoho extends ModelBase<ShinsakaiWariateIinJohoId
      *
      * @return 委員遅刻有無
      */
-    public boolean get委員遅刻有無() {
+    public boolean is委員遅刻有無() {
         return entity.getExistChikokuFlag();
     }
 
@@ -157,7 +159,7 @@ public class ShinsakaiWariateIinJoho extends ModelBase<ShinsakaiWariateIinJohoId
      *
      * @return 委員早退有無
      */
-    public boolean get委員早退有無() {
+    public boolean is委員早退有無() {
         return entity.getExistSotaiFlag();
     }
 
@@ -191,8 +193,7 @@ public class ShinsakaiWariateIinJoho extends ModelBase<ShinsakaiWariateIinJohoId
     }
 
     /**
-     * 介護認定審査会割当委員情報のみを変更対象とします。<br/>
-     * {@link DbT5503ShinsakaiWariateIinJohoEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば変更状態にします。
+     * 介護認定審査会割当委員情報のみを変更対象とします。<br/> {@link DbT5503ShinsakaiWariateIinJohoEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば変更状態にします。
      *
      * @return 変更対象処理実施後の{@link ShinsakaiWariateIinJoho}
      */
@@ -206,8 +207,7 @@ public class ShinsakaiWariateIinJoho extends ModelBase<ShinsakaiWariateIinJohoId
     }
 
     /**
-     * 保持する介護認定審査会割当委員情報を削除対象とします。<br/>
-     * {@link DbT5503ShinsakaiWariateIinJohoEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば削除状態にします。
+     * 保持する介護認定審査会割当委員情報を削除対象とします。<br/> {@link DbT5503ShinsakaiWariateIinJohoEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば削除状態にします。
      *
      * @return 削除対象処理実施後の{@link ShinsakaiWariateIinJoho}
      */
@@ -238,6 +238,12 @@ public class ShinsakaiWariateIinJoho extends ModelBase<ShinsakaiWariateIinJohoId
         return hasChangedEntity() || shinsakaiIinJoho.hasAnyChanged();
     }
 
+    /**
+     * 介護認定審査会委員情報を取得します。
+     *
+     * @param id 介護認定審査会委員情報の識別子
+     * @return 介護認定審査会委員情報
+     */
     public ShinsakaiIinJoho getShinsakaiIinJoho(ShinsakaiIinJohoIdentifier id) {
         if (shinsakaiIinJoho.contains(id)) {
             return shinsakaiIinJoho.clone().get(id);
@@ -246,6 +252,11 @@ public class ShinsakaiWariateIinJoho extends ModelBase<ShinsakaiWariateIinJohoId
         throw new IllegalArgumentException(UrErrorMessages.不正.toString());
     }
 
+    /**
+     * 介護認定審査会委員情報リストを取得します。
+     *
+     * @return 介護認定審査会委員情報リスト
+     */
     public List<ShinsakaiIinJoho> getShinsakaiIinJohoList() {
         return new ArrayList<>(shinsakaiIinJoho.values());
     }

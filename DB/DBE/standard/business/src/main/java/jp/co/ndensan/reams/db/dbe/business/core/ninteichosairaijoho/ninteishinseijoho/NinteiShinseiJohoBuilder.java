@@ -14,8 +14,6 @@ import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoK
 import jp.co.ndensan.reams.db.dbz.business.core.uzclasses.Models;
 import jp.co.ndensan.reams.db.dbz.definition.core.valueobject.ninteishinsei.ChosaItakusakiCode;
 import jp.co.ndensan.reams.db.dbz.definition.core.valueobject.ninteishinsei.ChosainCode;
-import jp.co.ndensan.reams.db.dbz.definition.core.valueobject.ninteishinsei.ShujiiCode;
-import jp.co.ndensan.reams.db.dbz.definition.core.valueobject.ninteishinsei.ShujiiIryokikanCode;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5101NinteiShinseiJohoEntity;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
@@ -363,7 +361,7 @@ public class NinteiShinseiJohoBuilder {
     /**
      * 要介護申請・要支援申請の区分を設定します。
      *
-     * @param 要介護申請_要支援申請の区分
+     * @param 要介護申請_要支援申請の区分 要介護申請_要支援申請の区分
      * @return {@link NinteiShinseiJohoBuilder}
      */
     public NinteiShinseiJohoBuilder set要介護申請_要支援申請の区分(RString 要介護申請_要支援申請の区分) {
@@ -447,7 +445,7 @@ public class NinteiShinseiJohoBuilder {
     /**
      * ２号医療保険者名を設定します。
      *
-     * @param 医療保険者名_２号
+     * @param 医療保険者名_２号 医療保険者名_２号
      * @return {@link NinteiShinseiJohoBuilder}
      */
     public NinteiShinseiJohoBuilder set２号医療保険者名(RString 医療保険者名_２号) {
@@ -459,7 +457,7 @@ public class NinteiShinseiJohoBuilder {
     /**
      * ２号医療保険記号番号を設定します。
      *
-     * @param 医療保険記号番号_２号
+     * @param 医療保険記号番号_２号 医療保険記号番号_２号
      * @return {@link NinteiShinseiJohoBuilder}
      */
     public NinteiShinseiJohoBuilder set２号医療保険記号番号(RString 医療保険記号番号_２号) {

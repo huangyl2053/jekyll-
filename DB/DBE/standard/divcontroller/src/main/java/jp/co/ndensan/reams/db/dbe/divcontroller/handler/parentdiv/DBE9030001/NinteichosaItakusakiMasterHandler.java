@@ -445,8 +445,8 @@ public class NinteichosaItakusakiMasterHandler {
     }
 
     private RString get特定調査員表示フラグ(NinteichosaItakusakiJoho joho) {
-        if (joho.get特定調査員表示フラグ() != null) {
-            return joho.get特定調査員表示フラグ() ? 特定調査員表示フラグ表示 : 特定調査員表示フラグ非表示;
+        if (joho.is特定調査員表示フラグ() != null) {
+            return joho.is特定調査員表示フラグ() ? 特定調査員表示フラグ表示 : 特定調査員表示フラグ非表示;
         }
         return RString.EMPTY;
     }

@@ -19,11 +19,11 @@ import jp.co.ndensan.reams.db.dbe.business.core.Shinsakai.shinsakaiwariateiinjoh
 import jp.co.ndensan.reams.db.dbe.business.core.Shinsakai.shinsakaiwariatejoho.ShinsakaiWariateJoho;
 import jp.co.ndensan.reams.db.dbe.business.core.Shinsakai.shinsakaiwariatejoho.ShinsakaiWariateJohoIdentifier;
 import jp.co.ndensan.reams.db.dbe.entity.db.basic.DbT5501ShinsakaiKaisaiYoteiJohoEntity;
-import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5511ShinsakaiKaisaiKekkaJohoEntity;
 import jp.co.ndensan.reams.db.dbe.entity.db.basic.DbT5512ShinsakaiOnseiJohoEntity;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.shinsakai.shinsakaikaisaiyoteijoho.ShinsakaiKaisaiYoteiJohoRelateEntity;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.shinsakai.shinsakaiwariateiinjoho.ShinsakaiWariateIinJohoRelateEntity;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.shinsakai.shinsakaiwariatejoho.ShinsakaiWariateJohoRelateEntity;
+import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5511ShinsakaiKaisaiKekkaJohoEntity;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
@@ -36,7 +36,9 @@ import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 /**
  * 介護認定審査会開催予定情報を管理するクラスです。
  */
-public class ShinsakaiKaisaiYoteiJoho extends ParentModelBase<ShinsakaiKaisaiYoteiJohoIdentifier, DbT5501ShinsakaiKaisaiYoteiJohoEntity, ShinsakaiKaisaiYoteiJoho> implements Serializable {
+public class ShinsakaiKaisaiYoteiJoho
+        extends ParentModelBase<ShinsakaiKaisaiYoteiJohoIdentifier, DbT5501ShinsakaiKaisaiYoteiJohoEntity, ShinsakaiKaisaiYoteiJoho>
+        implements Serializable {
 
     private final DbT5501ShinsakaiKaisaiYoteiJohoEntity entity;
     private final ShinsakaiKaisaiYoteiJohoIdentifier id;
@@ -278,10 +280,8 @@ public class ShinsakaiKaisaiYoteiJoho extends ParentModelBase<ShinsakaiKaisaiYot
     }
 
     /**
-     * 介護認定審査会開催予定情報配下の要素を削除対象とします。<br/>
-     * {@link DbT5501ShinsakaiKaisaiYoteiJohoEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば削除状態にします。
-     * 介護認定審査会開催予定情報配下の要素である精神手帳任意項目情報の{@link Models#deleteOrRemoveAll() }を実行します。
-     * 削除処理結果となる{@link ShinsakaiKaisaiYoteiJoho}を返します。
+     * 介護認定審査会開催予定情報配下の要素を削除対象とします。<br/> {@link DbT5501ShinsakaiKaisaiYoteiJohoEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば削除状態にします。
+     * 介護認定審査会開催予定情報配下の要素である精神手帳任意項目情報の{@link Models#deleteOrRemoveAll() }を実行します。 削除処理結果となる{@link ShinsakaiKaisaiYoteiJoho}を返します。
      *
      * @return 削除対象処理実施後の{@link ShinsakaiKaisaiYoteiJoho}
      * @throws IllegalStateException DbT5501ShinsakaiKaisaiYoteiJohoEntityのデータ状態が変更の場合
@@ -296,19 +296,22 @@ public class ShinsakaiKaisaiYoteiJoho extends ParentModelBase<ShinsakaiKaisaiYot
             throw new IllegalStateException(UrErrorMessages.不正.toString());
         }
         return new ShinsakaiKaisaiYoteiJoho(
-                deletedEntity, id, shinsakaiWariateJoho.deleted(), shinsakaiWariateIinJoho.deleted(), shinsakaiOnseiJoho.deleted(), shinsakaiKaisaiKekkaJoho.deleted());
+                deletedEntity, id, shinsakaiWariateJoho.deleted(),
+                shinsakaiWariateIinJoho.deleted(), shinsakaiOnseiJoho.deleted(), shinsakaiKaisaiKekkaJoho.deleted());
     }
 
     @Override
     public boolean hasChanged() {
 
-        return hasChangedEntity() || shinsakaiWariateJoho.hasAnyChanged() || shinsakaiWariateIinJoho.hasAnyChanged() || shinsakaiOnseiJoho.hasAnyChanged() || shinsakaiKaisaiKekkaJoho.hasAnyChanged();
+        return hasChangedEntity()
+                || shinsakaiWariateJoho.hasAnyChanged()
+                || shinsakaiWariateIinJoho.hasAnyChanged()
+                || shinsakaiOnseiJoho.hasAnyChanged() || shinsakaiKaisaiKekkaJoho.hasAnyChanged();
 
     }
 
     /**
-     * 介護認定審査会開催予定情報のみを変更対象とします。<br/>
-     * {@link DbT5501ShinsakaiKaisaiYoteiJohoEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば変更状態にします。
+     * 介護認定審査会開催予定情報のみを変更対象とします。<br/> {@link DbT5501ShinsakaiKaisaiYoteiJohoEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば変更状態にします。
      *
      * @return 変更対象処理実施後の{@link ShinsakaiKaisaiYoteiJoho}
      */
@@ -347,6 +350,12 @@ public class ShinsakaiKaisaiYoteiJoho extends ParentModelBase<ShinsakaiKaisaiYot
 
     }
 
+    /**
+     * 介護認定審査会開催予定情報が保持する介護認定審査会割当委員情報を返します。
+     *
+     * @param id 介護認定審査会割当委員情報の識別子
+     * @return 介護認定審査会割当委員情報
+     */
     public ShinsakaiWariateIinJoho getShinsakaiWariateIinJoho(ShinsakaiWariateIinJohoIdentifier id) {
         if (shinsakaiWariateIinJoho.contains(id)) {
             return shinsakaiWariateIinJoho.clone().get(id);
@@ -355,10 +364,21 @@ public class ShinsakaiKaisaiYoteiJoho extends ParentModelBase<ShinsakaiKaisaiYot
         throw new IllegalArgumentException(UrErrorMessages.不正.toString());
     }
 
+    /**
+     * 介護認定審査会開催予定情報が保持する介護認定審査会割当委員情報をリストで返します。
+     *
+     * @return 介護認定審査会割当委員情報リスト
+     */
     public List<ShinsakaiWariateIinJoho> getShinsakaiWariateIinJohoList() {
         return new ArrayList<>(shinsakaiWariateIinJoho.values());
     }
 
+    /**
+     * 介護認定審査会開催予定情報が保持する介護認定審査会音声情報を返します。
+     *
+     * @param id 介護認定審査会音声情報の識別子
+     * @return 介護認定審査会音声情報
+     */
     public ShinsakaiOnseiJoho getShinsakaiOnseiJoho(ShinsakaiOnseiJohoIdentifier id) {
         if (shinsakaiOnseiJoho.contains(id)) {
             return shinsakaiOnseiJoho.clone().get(id);
@@ -367,10 +387,21 @@ public class ShinsakaiKaisaiYoteiJoho extends ParentModelBase<ShinsakaiKaisaiYot
         throw new IllegalArgumentException(UrErrorMessages.不正.toString());
     }
 
+    /**
+     * 介護認定審査会開催予定情報が保持する介護認定審査会音声情報をリストで返します。
+     *
+     * @return 介護認定審査会音声情報リスト
+     */
     public List<ShinsakaiOnseiJoho> getShinsakaiOnseiJohoList() {
         return new ArrayList<>(shinsakaiOnseiJoho.values());
     }
 
+    /**
+     * 介護認定審査会開催予定情報が保持する介護認定審査会開催結果情報を返します。
+     *
+     * @param id 介護認定審査会開催結果情報の識別子
+     * @return 介護認定審査会開催結果情報
+     */
     public ShinsakaiKaisaiKekkaJoho getShinsakaiKaisaiKekkaJoho(ShinsakaiKaisaiKekkaJohoIdentifier id) {
         if (shinsakaiKaisaiKekkaJoho.contains(id)) {
             return shinsakaiKaisaiKekkaJoho.clone().get(id);
@@ -379,6 +410,11 @@ public class ShinsakaiKaisaiYoteiJoho extends ParentModelBase<ShinsakaiKaisaiYot
         throw new IllegalArgumentException(UrErrorMessages.不正.toString());
     }
 
+    /**
+     * 介護認定審査会開催予定情報が保持する介護認定審査会開催結果情報をリストで返します。
+     *
+     * @return 介護認定審査会開催結果情報リスト
+     */
     public List<ShinsakaiKaisaiKekkaJoho> getShinsakaiKaisaiKekkaJohoList() {
         return new ArrayList<>(shinsakaiKaisaiKekkaJoho.values());
     }

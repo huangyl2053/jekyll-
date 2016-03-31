@@ -22,7 +22,9 @@ import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 /**
  * 認定調査依頼情報を管理するクラスです。
  */
-public class NinteichosaIraiJoho extends ModelBase<NinteichosaIraiJohoIdentifier, DbT5201NinteichosaIraiJohoEntity, NinteichosaIraiJoho> implements Serializable {
+public class NinteichosaIraiJoho
+        extends ModelBase<NinteichosaIraiJohoIdentifier, DbT5201NinteichosaIraiJohoEntity, NinteichosaIraiJoho>
+        implements Serializable {
 
     private final DbT5201NinteichosaIraiJohoEntity entity;
     private final NinteichosaIraiJohoIdentifier id;
@@ -178,7 +180,7 @@ public class NinteichosaIraiJoho extends ModelBase<NinteichosaIraiJohoIdentifier
      *
      * @return モバイルデータ出力済フラグ
      */
-    public boolean getモバイルデータ出力済フラグ() {
+    public boolean isモバイルデータ出力済フラグ() {
         return entity.getMobileDataShutsuryokuZumiFlag();
     }
 
@@ -187,7 +189,7 @@ public class NinteichosaIraiJoho extends ModelBase<NinteichosaIraiJohoIdentifier
      *
      * @return 事前調査フラグ
      */
-    public boolean get事前調査フラグ() {
+    public boolean is事前調査フラグ() {
         return entity.getJizenChosaFlag();
     }
 
@@ -232,7 +234,7 @@ public class NinteichosaIraiJoho extends ModelBase<NinteichosaIraiJohoIdentifier
      *
      * @return 論理削除フラグ
      */
-    public boolean get論理削除フラグ() {
+    public boolean is論理削除フラグ() {
         return entity.getLogicalDeletedFlag();
     }
 

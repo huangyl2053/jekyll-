@@ -5,14 +5,14 @@
 package jp.co.ndensan.reams.db.dbe.business.core.YokaigoNintei;
 
 import jp.co.ndensan.reams.db.dbe.business.core.NinteiResult.NinteiResultSimple;
-import jp.co.ndensan.reams.db.dbe.business.core.NinteiShinseiTorisage.NinteiShinseiTorisage;
 import jp.co.ndensan.reams.db.dbe.business.core.NinteiShinsei.NinteiShinseiRiyu;
+import jp.co.ndensan.reams.db.dbe.business.core.NinteiShinseiTorisage.NinteiShinseiTorisage;
 import jp.co.ndensan.reams.db.dbe.definition.core.enumeratedtype.ShinsakaiYusenWaritsukeKubun;
 import jp.co.ndensan.reams.db.dbe.definition.core.valueobject.NinteichosaIraiRirekiNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShoKisaiHokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShishoCode;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShoKisaiHokenshaNo;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.EdabanCode;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
@@ -70,7 +70,7 @@ public class YokaigoNinteiShinsei {
      * @param 認定申請有効区分 認定申請有効区分
      * @param 要支援申請区分 要支援申請区分
      * @param 認定申請理由 認定申請理由
-     * @param 前回認定結果
+     * @param 前回認定結果 前回認定結果
      * @param 情報提供への同意有無 情報提供への同意有無
      * @param 認定調査依頼履歴番号 認定調査依頼履歴番号
      * @param 意見書依頼履歴番号 意見書依頼履歴番号
@@ -79,7 +79,9 @@ public class YokaigoNinteiShinsei {
      * @param is施設入所 施設入所
      * @param 市町村連絡事項 市町村連絡事項
      * @param 認定申請取下げ 認定申請取下げ
+     * @param 審査会優先割付区分 審査会優先割付区分
      * @param 送付年月日 送付年月日
+     *
      */
     public YokaigoNinteiShinsei(ShinseishoKanriNo 申請書管理番号, YMDHMS 処理日時, ShoKisaiHokenshaNo 証記載保険者番号, ShishoCode 支所コード,
             HihokenshaNo 被保番号, ShikibetsuCode 識別コード, FlexibleDate 認定申請年月日, EdabanCode 枝番コード,
