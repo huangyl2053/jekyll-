@@ -2,7 +2,7 @@
 <!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <!--  -->
 
-<mapper namespace="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.shokanshinseiichiran.ShokanShinseiIchiranMapper">
+<mapper namespace="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.shokanshinseiichiran.IShokanShinseiIchiranMapper">
 
     <resultMap id="ShokanShinseiIchiranRelateEntity" type="jp.co.ndensan.reams.db.dbc.entity.db.relate.shokanshinseiichiran.ShokanShinseiIchiranRelateEntity">
         <result property="hiHokenshaNo" column="hiHokenshaNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.HihokenshaNoTypeHandler"/>
@@ -33,7 +33,7 @@
         SELECT
         shokanKihon."hiHokenshaNo" AS "hiHokenshaNo",
         shokanKihon."serviceTeikyoYM" AS "serviceTeikyoYM",
-        shokanKihon."seiriNp" AS "seiriNp",
+        shokanKihon."seiriNo" AS "seiriNo",
         shokanKihon."yoshikiNo" AS "yoshikiNo"
         FROM
         rgdb."DbT3038ShokanKihon" AS shokanKihon
@@ -48,13 +48,13 @@
         GROUP BY
         shokanKihon."hiHokenshaNo",
         shokanKihon."serviceTeikyoYM",
-        shokanKihon."seiriNp",
+        shokanKihon."seiriNo",
         shokanKihon."yoshikiNo"
         )AS T1
         ON
         T1."hiHokenshaNo" = shokanShinsei."hiHokenshaNo" AND
         T1."serviceTeikyoYM" = shokanShinsei."serviceTeikyoYM" AND
-        t1."seiriNp" = shokanShinsei."seiriNo"
+        t1."seiriNo" = shokanShinsei."seiriNo"
         LEFT JOIN
         (
         SELECT
@@ -108,7 +108,7 @@
         SELECT
         shokanKihon."hiHokenshaNo" AS "hiHokenshaNo",
         shokanKihon."serviceTeikyoYM" AS "serviceTeikyoYM",
-        shokanKihon."seiriNp" AS "seiriNp",
+        shokanKihon."seiriNo" AS "seiriNo",
         shokanKihon."yoshikiNo" AS "yoshikiNo"
         FROM
         rgdb."DbT3038ShokanKihon" AS shokanKihon
@@ -125,13 +125,13 @@
         GROUP BY
         shokanKihon."hiHokenshaNo",
         shokanKihon."serviceTeikyoYM",
-        shokanKihon."seiriNp",
+        shokanKihon."seiriNo",
         shokanKihon."yoshikiNo"
         )AS T1
         ON
         T1."hiHokenshaNo" = shokanShinsei."hiHokenshaNo" AND
         T1."serviceTeikyoYM" = shokanShinsei."serviceTeikyoYM" AND
-        t1."seiriNp" = shokanShinsei."seiriNo"
+        T1."seiriNo" = shokanShinsei."seiriNo"
         LEFT JOIN
         (
         SELECT
@@ -178,7 +178,7 @@
         SELECT
         ShokanKihon."hiHokenshaNo" AS "hiHokenshaNo",
         ShokanKihon."serviceTeikyoYM" AS "serviceTeikyoYM",
-        ShokanKihon."seiriNp" AS "seiriNp"
+        ShokanKihon."seiriNo" AS "seiriNo"
         FROM
         rgdb."DbT3038ShokanKihon" AS ShokanKihon
         WHERE
@@ -189,12 +189,12 @@
         ORDER BY
         ShokanKihon."hiHokenshaNo",
         ShokanKihon."serviceTeikyoYM",
-        ShokanKihon."seiriNp"
+        ShokanKihon."seiriNo"
         ) T1
         ON
         T1."hiHokenshaNo" = ShokanShinsei."hiHokenshaNo"AND
         T1."serviceTeikyoYM" = ShokanShinsei."serviceTeikyoYM" AND
-        T1."seiriNp" = ShokanShinsei."seiriNo"
+        T1."seiriNo" = ShokanShinsei."seiriNo"
         WHERE
         ShokanShinsei."hiHokenshaNo" = #{被保険者番号} AND
         ShokanShinsei."serviceTeikyoYM" = #{サービス年月}

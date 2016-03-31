@@ -13,7 +13,7 @@ import jp.co.ndensan.reams.db.dbc.entity.db.relate.shokanshinseiichiran.ShokanSh
 /**
  * 償還払申請一覧のマッパーインタフェースです。
  */
-public interface ShokanShinseiIchiranMapper {
+public interface IShokanShinseiIchiranMapper {
 
     /**
      * 償還払支給申請リスト照会
