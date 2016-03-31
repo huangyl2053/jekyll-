@@ -103,7 +103,9 @@ public class ZenkaiNinteiKekkaJohoFinder {
         List<ZenkaiNinteiKekkaJohoRelate> zenkaiNinteiKekkaJohoList = new ArrayList<>();
         IZenkaiNinteiKekkaJohoMapper mapper = mapperProvider.create(IZenkaiNinteiKekkaJohoMapper.class);
         ZenkaiNinteiKekkaJohoRelateEntity entity = mapper.get要介護度_今回認定(申請書管理番号);
-        zenkaiNinteiKekkaJohoList.add(new ZenkaiNinteiKekkaJohoRelate(entity));
+        if (entity != null) {
+            zenkaiNinteiKekkaJohoList.add(new ZenkaiNinteiKekkaJohoRelate(entity));
+        }
         return SearchResult.of(zenkaiNinteiKekkaJohoList, 0, false);
     }
     

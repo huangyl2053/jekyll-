@@ -121,7 +121,8 @@ public class ZenkaiNinteiKekkaJohoHandler {
                 要介護度 = YokaigoJotaiKubun02.toValue(前回要介護状態区分コード.getColumnValue()).get名称();
             } else if (KoroshoIfShikibetsuCode.認定ｿﾌﾄ2006_新要介護認定適用区分が未適用.getコード().equals(厚労省IF識別コード)) {
                 要介護度 = YokaigoJotaiKubun06.toValue(前回要介護状態区分コード.getColumnValue()).get名称();
-            } else if (KoroshoIfShikibetsuCode.認定ｿﾌﾄ2009.getコード().equals(厚労省IF識別コード)) {
+            } else if (KoroshoIfShikibetsuCode.認定ｿﾌﾄ2009.getコード().equals(厚労省IF識別コード) 
+                    || KoroshoIfShikibetsuCode.認定ｿﾌﾄ2009_SP3.getコード().equals(厚労省IF識別コード)) {
                 要介護度 = YokaigoJotaiKubun09.toValue(前回要介護状態区分コード.getColumnValue()).get名称();
             }
         }
