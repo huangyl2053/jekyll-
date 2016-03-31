@@ -127,4 +127,24 @@ public class HokenshaJohoDiv extends Panel implements IHokenshaJohoDiv {
     public RString getHokenjaName() {
         return getHandler().getHokenjaName();
     }
+
+    /**
+     * 保険者番号を設定する。
+     *
+     * @param 保険者番号 HokenjaNo
+     */
+    @Override
+    public void setHokenjaNo(RString 保険者番号) {
+        getHandler().setHokenjaNo(保険者番号);
+    }
+
+    /**
+     * 保険者名を設定する。
+     *
+     * @param 保険者名 HokenjaName
+     */
+    @Override
+    public void setHokenjaName(RString 保険者名) {
+        getHandler().setHokenjaName(保険者名);
+    }
 }

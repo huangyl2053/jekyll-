@@ -64,4 +64,22 @@ public class HokenshaJohoHandler {
     public RString getHokenjaName() {
         return div.getTxtHokenshaMeisho().getValue();
     }
+
+    /**
+     * 保険者番号を設定する。
+     *
+     * @param 保険者番号 HokenjaNo
+     */
+    public void setHokenjaNo(RString 保険者番号) {
+        div.getTxtHokenshaNo().setValue(保険者番号);
+    }
+
+    /**
+     * 保険者名を設定する。
+     *
+     * @param 保険者名 HokenjaName
+     */
+    public void setHokenjaName(RString 保険者名) {
+        div.getTxtHokenshaMeisho().setValue(保険者名);
+    }
 }

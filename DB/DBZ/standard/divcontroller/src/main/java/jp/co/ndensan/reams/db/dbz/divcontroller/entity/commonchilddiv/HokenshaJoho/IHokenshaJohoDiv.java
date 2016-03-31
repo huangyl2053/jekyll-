@@ -13,4 +13,8 @@ public interface IHokenshaJohoDiv extends ICommonChildDivBaseProperties {
     public abstract RString getHokenjaNo();
 
     public abstract RString getHokenjaName();
+
+    public abstract void setHokenjaNo(RString 保険者番号);
+
+    public abstract void setHokenjaName(RString 保険者名);
 }
