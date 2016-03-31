@@ -12,7 +12,7 @@ import jp.co.ndensan.reams.db.dbd.business.core.futanwariai.RiyoshaFutanWariaiMe
 import jp.co.ndensan.reams.db.dbd.definition.mybatisprm.relate.RiyoshaFutanWariaiMeisaiMapperParameter;
 import jp.co.ndensan.reams.db.dbd.entity.db.relate.RiyoshaFutanWariaiMeisaiEntity;
 import jp.co.ndensan.reams.db.dbd.persistence.db.basic.DbT3114RiyoshaFutanWariaiMeisaiDac;
-import jp.co.ndensan.reams.db.dbd.persistence.db.mapper.relate.IRiyoshaFutanWariaiMeisaiMapper;
+import jp.co.ndensan.reams.db.dbd.persistence.db.mapper.relate.riyoshafutanwariai.IRiyoshaFutanWariaiMeisaiMapper;
 import jp.co.ndensan.reams.db.dbz.service.core.MapperProvider;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;

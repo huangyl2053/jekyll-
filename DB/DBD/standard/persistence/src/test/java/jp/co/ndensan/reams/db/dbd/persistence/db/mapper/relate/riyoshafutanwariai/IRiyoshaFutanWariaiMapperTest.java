@@ -2,8 +2,9 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbd.persistence.db.mapper.relate;
+package jp.co.ndensan.reams.db.dbd.persistence.db.mapper.relate.riyoshafutanwariai;
 
+import jp.co.ndensan.reams.db.dbd.persistence.db.mapper.relate.riyoshafutanwariai.IRiyoshaFutanWariaiMapper;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbd.definition.mybatisprm.relate.RiyoshaFutanWariaiMapperParameter;
 import jp.co.ndensan.reams.db.dbd.entity.db.basic.DbT3113RiyoshaFutanWariaiEntity;

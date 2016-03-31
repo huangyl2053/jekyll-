@@ -2,8 +2,9 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate;
+package jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.nijiyobojigyotaishosha;
 
+import jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.nijiyobojigyotaishosha.INijiYoboJigyoTaishoshaMapper;
 import jp.co.ndensan.reams.db.dbc.definition.mybatisprm.relate.NijiYoboJigyoTaishoshaMapperParameter;
 import jp.co.ndensan.reams.db.dbc.entity.basic.helper.DbT3100NijiYoboJigyoTaishoshaEntityGenerator;
 import jp.co.ndensan.reams.db.dbc.entity.basic.helper.DbT3101NijiYoboKihonCheckListEntityGenerator;
