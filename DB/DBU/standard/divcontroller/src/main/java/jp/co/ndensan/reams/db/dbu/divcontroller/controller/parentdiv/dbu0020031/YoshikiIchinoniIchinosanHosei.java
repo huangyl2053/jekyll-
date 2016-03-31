@@ -32,7 +32,6 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
  */
 public class YoshikiIchinoniIchinosanHosei {
 
-    private static final RString 修正状態 = new RString("修正状態");
     private static final RString 削除状態 = new RString("削除状態");
     private static final RString 削除 = new RString("削除");
     private static final RString 更新 = new RString("更新");
@@ -46,24 +45,6 @@ public class YoshikiIchinoniIchinosanHosei {
      * @return ResponseData
      */
     public ResponseData<YoshikiIchinoniIchinosanHoseiDiv> onload(YoshikiIchinoniIchinosanHoseiDiv div) {
-        // TODO 仮データ
-        JigyoHokokuGeppoParameter par = new JigyoHokokuGeppoParameter();
-        par.set行報告年(new RString("2016"));
-        par.set行報告月(new RString("03"));
-        par.set行集計対象年(new RString("2016"));
-        par.set行集計対象月(new RString("02"));
-        par.set行統計対象区分(new RString("1"));
-        par.set行市町村コード(new RString("209007"));
-        par.set行表番号(new RString("02"));
-        par.set報告年月(new RString("201602"));
-        par.set集計年月(new RString("201603"));
-        par.set保険者コード(new RString("1001"));
-        par.set市町村名称(new RString("市町村"));
-        par.set行様式種類コード(new RString("002"));
-        par.set行集計番号(new RString("0710"));
-        ViewStateHolder.put(ViewStateKeys.事業報告基本, par);
-        ViewStateHolder.put(ViewStateKeys.状態, new RString("修正状態"));
-
         JigyoHokokuGeppoParameter 引き継ぎデータ = ViewStateHolder.get(
                 ViewStateKeys.事業報告基本, JigyoHokokuGeppoParameter.class);
         RString 状態 = ViewStateHolder.get(ViewStateKeys.状態, RString.class);
