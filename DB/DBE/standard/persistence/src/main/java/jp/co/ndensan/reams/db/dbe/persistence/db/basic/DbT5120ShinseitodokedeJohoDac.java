@@ -30,13 +30,12 @@ public class DbT5120ShinseitodokedeJohoDac implements ISaveable<DbT5120Shinseito
     /**
      * 主キーで申請届出情報を取得します。
      *
-     * @param 申請書管理番号　ShinseishoKanriNo
+     * @param 申請書管理番号 ShinseishoKanriNo
      * @return DbT5120ShinseitodokedeJohoEntity
      * @throws NullPointerException 引数のいずれかがnullの場合
      */
     @Transaction
-    public DbT5120ShinseitodokedeJohoEntity selectByKey(
-            ShinseishoKanriNo 申請書管理番号) throws NullPointerException {
+    public DbT5120ShinseitodokedeJohoEntity selectByKey(ShinseishoKanriNo 申請書管理番号) throws NullPointerException {
         requireNonNull(申請書管理番号, UrSystemErrorMessages.値がnull.getReplacedMessage(""));
 
         DbAccessorNormalType accessor = new DbAccessorNormalType(session);
