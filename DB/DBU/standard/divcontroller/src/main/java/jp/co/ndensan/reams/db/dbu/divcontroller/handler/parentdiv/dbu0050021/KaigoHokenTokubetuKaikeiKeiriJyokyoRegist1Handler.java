@@ -15,6 +15,7 @@ import jp.co.ndensan.reams.db.dbu.business.kaigohokentokubetukaikeikeirijyokyore
 import jp.co.ndensan.reams.db.dbu.business.kaigohokentokubetukaikeikeirijyokyoregist.KaigoHokenShoriDateKanri;
 import jp.co.ndensan.reams.db.dbu.business.kaigohokentokubetukaikeikeirijyokyoregist.Shichoson;
 import jp.co.ndensan.reams.db.dbu.divcontroller.controller.parentdiv.dbu0050011.TaishokensakuJyouken;
+import jp.co.ndensan.reams.db.dbu.divcontroller.entity.parentdiv.DBU0050021.DBU0050021StateName;
 import jp.co.ndensan.reams.db.dbu.divcontroller.entity.parentdiv.DBU0050021.KaigoHokenTokubetuKaikeiKeiriJyokyoRegist1Div;
 import jp.co.ndensan.reams.db.dbu.divcontroller.entity.parentdiv.DBU0050021.YoshikiyonMeisaiDiv;
 import jp.co.ndensan.reams.db.dbu.service.core.kaigohokentokubetukaikeikeirijyokyoregist.KaigoHokenTokubetuKaikeiKeiriJyokyoRegistManager;
@@ -36,6 +37,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxCode;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxFlexibleDate;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxNum;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.CommonButtonHolder;
+import jp.co.ndensan.reams.uz.uza.ui.servlets.ResponseHolder;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 
 /**
@@ -408,7 +410,7 @@ public class KaigoHokenTokubetuKaikeiKeiriJyokyoRegist1Handler {
             set詳細データエリア(詳細データ);
         }
         if (状態2.equals(状態) || 状態3.equals(状態) || 状態1.equals(状態) || 状態1_確定.equals(状態)) {
-            Boolean isReadOnly = 状態3.equals(状態) || 状態1.equals(状態);
+            Boolean isReadOnly = 状態3.equals(状態);
             is詳細データエリアReadOnly(isReadOnly);
         }
     }
@@ -471,7 +473,13 @@ public class KaigoHokenTokubetuKaikeiKeiriJyokyoRegist1Handler {
             報告年度Box.setReadOnly(true);
             div.getHihokenshabango().getYoshikiyonMeisai().getDdlShicyoson().setDisabled(true);
             div.getHihokenshabango().getYoshikiyonMeisai().getBtnHoukokuNenKT().setDisabled(true);
-            CommonButtonHolder.setDisabledByCommonButtonFieldName(new RString("btnSaveCancel"), true);
+            if (ResponseHolder.getState().equals(DBU0050021StateName.add.getName())) {
+                CommonButtonHolder.setDisabledByCommonButtonFieldName(new RString("btnAddUpdate"), false);
+            } else if (ResponseHolder.getState().equals(DBU0050021StateName.del.getName())) {
+                CommonButtonHolder.setDisabledByCommonButtonFieldName(new RString("btnModUpdate"), false);
+            } else if (ResponseHolder.getState().equals(DBU0050021StateName.mod.getName())) {
+                CommonButtonHolder.setDisabledByCommonButtonFieldName(new RString("btnDelUpdate"), false);
+            }
             詳細データエリ表示(null, 状態1_確定);
         }
     }
