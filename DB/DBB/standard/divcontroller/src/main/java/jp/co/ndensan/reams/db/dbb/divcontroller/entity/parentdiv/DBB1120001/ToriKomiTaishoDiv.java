@@ -5,16 +5,15 @@ package jp.co.ndensan.reams.db.dbb.divcontroller.entity.parentdiv.DBB1120001;
  * 不正な動作の原因になります。
  */
 import com.fasterxml.jackson.annotation.JsonProperty;
-import jp.co.ndensan.reams.ur.urz.divcontroller.entity.commonchilddiv.chohyoshutsuryokujun.ChohyoShutsuryokujun.ChohyoShutsuryokujunDiv;
-import jp.co.ndensan.reams.ur.urz.divcontroller.entity.commonchilddiv.chohyoshutsuryokujun.ChohyoShutsuryokujun.IChohyoShutsuryokujunDiv;
+import jp.co.ndensan.reams.uz.uza.ui.binding.*;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 
 /**
- * ShotokuRenkeiJohoIchiran のクラスファイル 
+ * ToriKomiTaisho のクラスファイル 
  * 
  * @author 自動生成
  */
-public class ShotokuRenkeiJohoIchiranDiv extends Panel {
+public class ToriKomiTaishoDiv extends Panel {
     // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-01-15_09-59-03">
     /*
      * [ private の作成 ]
@@ -22,8 +21,10 @@ public class ShotokuRenkeiJohoIchiranDiv extends Panel {
      * コントロール名とフィールド名を取得する
      * private + コントロール名 + フィールド名 の文字列を作成
      */
-    @JsonProperty("ccdChohyoShutsuryokujun")
-    private ChohyoShutsuryokujunDiv ccdChohyoShutsuryokujun;
+    @JsonProperty("uplUpload")
+    private UploadPanel uplUpload;
+    @JsonProperty("btnUpload")
+    private Button btnUpload;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -32,12 +33,39 @@ public class ShotokuRenkeiJohoIchiranDiv extends Panel {
      * フィールド名のGetterとSetter を作成
      */
     /*
-     * getccdChohyoShutsuryokujun
-     * @return ccdChohyoShutsuryokujun
+     * getuplUpload
+     * @return uplUpload
      */
-    @JsonProperty("ccdChohyoShutsuryokujun")
-    public IChohyoShutsuryokujunDiv getCcdChohyoShutsuryokujun() {
-        return ccdChohyoShutsuryokujun;
+    @JsonProperty("uplUpload")
+    public UploadPanel getUplUpload() {
+        return uplUpload;
+    }
+
+    /*
+     * setuplUpload
+     * @param uplUpload uplUpload
+     */
+    @JsonProperty("uplUpload")
+    public void setUplUpload(UploadPanel uplUpload) {
+        this.uplUpload = uplUpload;
+    }
+
+    /*
+     * getbtnUpload
+     * @return btnUpload
+     */
+    @JsonProperty("btnUpload")
+    public Button getBtnUpload() {
+        return btnUpload;
+    }
+
+    /*
+     * setbtnUpload
+     * @param btnUpload btnUpload
+     */
+    @JsonProperty("btnUpload")
+    public void setBtnUpload(Button btnUpload) {
+        this.btnUpload = btnUpload;
     }
 
     // </editor-fold>
