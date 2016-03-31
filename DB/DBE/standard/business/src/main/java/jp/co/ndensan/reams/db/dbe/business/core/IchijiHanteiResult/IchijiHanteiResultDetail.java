@@ -231,16 +231,16 @@ public final class IchijiHanteiResultDetail {
      *
      * @return 一次判定結果詳細Builder
      */
-    public static ShinseishoKanriNoSetter builder() {
+    public static IShinseishoKanriNoSetter builder() {
         return new Builder();
     }
 
     /**
      * 一次判定結果詳細のBuilderです。
      */
-    public static final class Builder implements ShinseishoKanriNoSetter, KoroshoIFKubunSetter, KariIchijiHanteiKubunSetter, IchijiHanteiDateSetter,
-            IchijiHanteiResultSetter, NinchishoKasanIchijiHanteiResultSetter, YokaigoNinteiKijunTimeSetter, ChukanHyokaKomokuTokutenSetter,
-            IchijiHanteiKeikokuListSetter, JotaiAnteiseiSetter, GaizenseiSetter, SuiteiKyuhuKubunSetter, OthersSetter {
+    public static final class Builder implements IShinseishoKanriNoSetter, IKoroshoIFKubunSetter, IKariIchijiHanteiKubunSetter, IchijiHanteiDateSetter,
+            IchijiHanteiResultSetter, INinchishoKasanIchijiHanteiResultSetter, IYokaigoNinteiKijunTimeSetter, IChukanHyokaKomokuTokutenSetter,
+            IchijiHanteiKeikokuListSetter, IJotaiAnteiseiSetter, IGaizenseiSetter, ISuiteiKyuhuKubunSetter, IOthersSetter {
 
         private ShinseishoKanriNo 申請書管理番号;
         private KoroshoIFKubun 厚労省IF区分;
@@ -293,14 +293,14 @@ public final class IchijiHanteiResultDetail {
         }
 
         @Override
-        public KoroshoIFKubunSetter set申請書管理番号(ShinseishoKanriNo 申請書管理番号) {
+        public IKoroshoIFKubunSetter set申請書管理番号(ShinseishoKanriNo 申請書管理番号) {
             requireNonNull(申請書管理番号, UrSystemErrorMessages.値がnull.getReplacedMessage("申請書管理番号"));
             this.申請書管理番号 = 申請書管理番号;
             return this;
         }
 
         @Override
-        public KariIchijiHanteiKubunSetter set厚労省IF区分(KoroshoIFKubun 厚労省IF区分) {
+        public IKariIchijiHanteiKubunSetter set厚労省IF区分(KoroshoIFKubun 厚労省IF区分) {
             requireNonNull(厚労省IF区分, UrSystemErrorMessages.値がnull.getReplacedMessage("厚労省IF区分"));
             this.厚労省IF区分 = 厚労省IF区分;
             return this;
@@ -321,21 +321,21 @@ public final class IchijiHanteiResultDetail {
         }
 
         @Override
-        public NinchishoKasanIchijiHanteiResultSetter set一次判定結果(IchijiHanteiResultKomoku 一次判定結果) {
+        public INinchishoKasanIchijiHanteiResultSetter set一次判定結果(IchijiHanteiResultKomoku 一次判定結果) {
             requireNonNull(一次判定結果, UrSystemErrorMessages.値がnull.getReplacedMessage("一次判定結果"));
             this.一次判定結果 = 一次判定結果;
             return this;
         }
 
         @Override
-        public YokaigoNinteiKijunTimeSetter set認知症加算一次判定結果(IchijiHanteiResultKomoku 認知症加算一次判定結果) {
+        public IYokaigoNinteiKijunTimeSetter set認知症加算一次判定結果(IchijiHanteiResultKomoku 認知症加算一次判定結果) {
             requireNonNull(認知症加算一次判定結果, UrSystemErrorMessages.値がnull.getReplacedMessage("認知症加算一次判定結果"));
             this.認知症加算一次判定結果 = 認知症加算一次判定結果;
             return this;
         }
 
         @Override
-        public ChukanHyokaKomokuTokutenSetter set要介護認定等基準時間(YokaigoNinteiKijunTime 要介護認定等基準時間) {
+        public IChukanHyokaKomokuTokutenSetter set要介護認定等基準時間(YokaigoNinteiKijunTime 要介護認定等基準時間) {
             requireNonNull(要介護認定等基準時間, UrSystemErrorMessages.値がnull.getReplacedMessage("要介護認定等基準時間"));
             this.要介護認定等基準時間 = 要介護認定等基準時間;
             return this;
@@ -349,59 +349,59 @@ public final class IchijiHanteiResultDetail {
         }
 
         @Override
-        public JotaiAnteiseiSetter set一次判定警告List(IchijiHanteiKeikokuList 一次判定警告List) {
+        public IJotaiAnteiseiSetter set一次判定警告List(IchijiHanteiKeikokuList 一次判定警告List) {
             requireNonNull(一次判定警告List, UrSystemErrorMessages.値がnull.getReplacedMessage("一次判定警告List"));
             this.一次判定警告List = 一次判定警告List;
             return this;
         }
 
         @Override
-        public GaizenseiSetter set状態安定性(JotaiAnteiseiKubun 認定状態安定性) {
+        public IGaizenseiSetter set状態安定性(JotaiAnteiseiKubun 認定状態安定性) {
             requireNonNull(認定状態安定性, UrSystemErrorMessages.値がnull.getReplacedMessage("認定状態安定性"));
             this.認定状態安定性 = 認定状態安定性;
             return this;
         }
 
         @Override
-        public SuiteiKyuhuKubunSetter set認知症自立度2以上蓋然性(Decimal 認知症自立度2以上蓋然性) {
+        public ISuiteiKyuhuKubunSetter set認知症自立度2以上蓋然性(Decimal 認知症自立度2以上蓋然性) {
             requireNonNull(認知症自立度2以上蓋然性, UrSystemErrorMessages.値がnull.getReplacedMessage("認知症自立度2以上蓋然性"));
             this.認知症自立度2以上蓋然性 = 認知症自立度2以上蓋然性;
             return this;
         }
 
         @Override
-        public OthersSetter set推定給付区分(SuiteiKyuhuKubun 推定給付区分) {
+        public IOthersSetter set推定給付区分(SuiteiKyuhuKubun 推定給付区分) {
             requireNonNull(推定給付区分, UrSystemErrorMessages.値がnull.getReplacedMessage("推定給付区分"));
             this.推定給付区分 = 推定給付区分;
             return this;
         }
 
         @Override
-        public OthersSetter set運動能力未低下認知症高齢者指標(NoryokuMiteikaNinchishoKoreishaShihyoKomoku 運動能力未低下認知症高齢者指標) {
+        public IOthersSetter set運動能力未低下認知症高齢者指標(NoryokuMiteikaNinchishoKoreishaShihyoKomoku 運動能力未低下認知症高齢者指標) {
             this.運動能力未低下認知症高齢者指標 = 運動能力未低下認知症高齢者指標;
             return this;
         }
 
         @Override
-        public OthersSetter set日常生活自立度組み合わせ(NichijoSeikatsuJiritsudoKumiawase 日常生活自立度組み合わせ) {
+        public IOthersSetter set日常生活自立度組み合わせ(NichijoSeikatsuJiritsudoKumiawase 日常生活自立度組み合わせ) {
             this.日常生活自立度組み合わせ = 日常生活自立度組み合わせ;
             return this;
         }
 
         @Override
-        public OthersSetter set認知症高齢者日常生活自立度蓋然性評価(NinchishoKoreishaJiritsudoGaizenseiHyokaKomoku 認知症高齢者日常生活自立度蓋然性評価) {
+        public IOthersSetter set認知症高齢者日常生活自立度蓋然性評価(NinchishoKoreishaJiritsudoGaizenseiHyokaKomoku 認知症高齢者日常生活自立度蓋然性評価) {
             this.認知症高齢者日常生活自立度蓋然性評価 = 認知症高齢者日常生活自立度蓋然性評価;
             return this;
         }
 
         @Override
-        public OthersSetter set認知症高齢者日常生活自立度蓋然性評価率(int 認知症高齢者日常生活自立度蓋然性評価率) {
+        public IOthersSetter set認知症高齢者日常生活自立度蓋然性評価率(int 認知症高齢者日常生活自立度蓋然性評価率) {
             this.認知症高齢者日常生活自立度蓋然性評価率 = 認知症高齢者日常生活自立度蓋然性評価率;
             return this;
         }
 
         @Override
-        public OthersSetter set一次判定結果送付状況(IchijiHanteiResultSofu 一次判定結果送付状況) {
+        public IOthersSetter set一次判定結果送付状況(IchijiHanteiResultSofu 一次判定結果送付状況) {
             this.一次判定結果送付状況 = 一次判定結果送付状況;
             return this;
         }
@@ -410,35 +410,35 @@ public final class IchijiHanteiResultDetail {
     /**
      * 申請書管理番号を設定するためのSetterインターフェースです。
      */
-    public interface ShinseishoKanriNoSetter {
+    public interface IShinseishoKanriNoSetter {
 
         /**
          * 申請書管理番号を引数から設定します。
          *
          * @param 申請書管理番号 申請書管理番号
-         * @return KoroshoIFKubunSetter
+         * @return IKoroshoIFKubunSetter
          */
-        KoroshoIFKubunSetter set申請書管理番号(ShinseishoKanriNo 申請書管理番号);
+        IKoroshoIFKubunSetter set申請書管理番号(ShinseishoKanriNo 申請書管理番号);
     }
 
     /**
      * 厚労省IF区分を設定するためのSetterインターフェースです。
      */
-    public interface KoroshoIFKubunSetter {
+    public interface IKoroshoIFKubunSetter {
 
         /**
          * 厚労省IF区分を引数から設定します。
          *
          * @param 厚労省IF区分 厚労省IF区分
-         * @return KariIchijiHanteiKubunSetter
+         * @return IKariIchijiHanteiKubunSetter
          */
-        KariIchijiHanteiKubunSetter set厚労省IF区分(KoroshoIFKubun 厚労省IF区分);
+        IKariIchijiHanteiKubunSetter set厚労省IF区分(KoroshoIFKubun 厚労省IF区分);
     }
 
     /**
      * 仮一次判定区分を設定するためのSetterインターフェースです。
      */
-    public interface KariIchijiHanteiKubunSetter {
+    public interface IKariIchijiHanteiKubunSetter {
 
         /**
          * 仮一次判定区分を引数から設定します。
@@ -472,43 +472,43 @@ public final class IchijiHanteiResultDetail {
          * 一次判定結果を引数から設定します。
          *
          * @param 一次判定結果 一次判定結果
-         * @return NinchishoKasanIchijiHanteiResultSetter
+         * @return INinchishoKasanIchijiHanteiResultSetter
          */
-        NinchishoKasanIchijiHanteiResultSetter set一次判定結果(IchijiHanteiResultKomoku 一次判定結果);
+        INinchishoKasanIchijiHanteiResultSetter set一次判定結果(IchijiHanteiResultKomoku 一次判定結果);
     }
 
     /**
      * 認知症加算一次判定結果を設定するためのSetterインターフェースです。
      */
-    public interface NinchishoKasanIchijiHanteiResultSetter {
+    public interface INinchishoKasanIchijiHanteiResultSetter {
 
         /**
          * 認知症加算一次判定結果を引数から設定します。
          *
          * @param 認知症加算一次判定結果 認知症加算一次判定結果
-         * @return YokaigoNinteiKijunTimeSetter
+         * @return IYokaigoNinteiKijunTimeSetter
          */
-        YokaigoNinteiKijunTimeSetter set認知症加算一次判定結果(IchijiHanteiResultKomoku 認知症加算一次判定結果);
+        IYokaigoNinteiKijunTimeSetter set認知症加算一次判定結果(IchijiHanteiResultKomoku 認知症加算一次判定結果);
     }
 
     /**
      * 要介護認定等基準時間を設定するためのSetterインターフェースです。
      */
-    public interface YokaigoNinteiKijunTimeSetter {
+    public interface IYokaigoNinteiKijunTimeSetter {
 
         /**
          * 要介護認定等基準時間を引数から設定します。
          *
          * @param 要介護認定等基準時間 要介護認定等基準時間
-         * @return ChukanHyokaKomokuTokutenSetter
+         * @return IChukanHyokaKomokuTokutenSetter
          */
-        ChukanHyokaKomokuTokutenSetter set要介護認定等基準時間(YokaigoNinteiKijunTime 要介護認定等基準時間);
+        IChukanHyokaKomokuTokutenSetter set要介護認定等基準時間(YokaigoNinteiKijunTime 要介護認定等基準時間);
     }
 
     /**
      * 中間評価項目得点群を設定するためのSetterインターフェースです。
      */
-    public interface ChukanHyokaKomokuTokutenSetter {
+    public interface IChukanHyokaKomokuTokutenSetter {
 
         /**
          * 中間評価項目得点を引数から設定します。
@@ -528,97 +528,97 @@ public final class IchijiHanteiResultDetail {
          * 一次判定警告Listを引数から設定します。
          *
          * @param 一次判定警告List 一次判定警告List
-         * @return JotaiAnteiseiSetter
+         * @return IJotaiAnteiseiSetter
          */
-        JotaiAnteiseiSetter set一次判定警告List(IchijiHanteiKeikokuList 一次判定警告List);
+        IJotaiAnteiseiSetter set一次判定警告List(IchijiHanteiKeikokuList 一次判定警告List);
     }
 
     /**
      * 状態安定性を設定するためのSetterインターフェースです。
      */
-    public interface JotaiAnteiseiSetter {
+    public interface IJotaiAnteiseiSetter {
 
         /**
          * 状態安定性を引数から設定します。
          *
          * @param 状態安定性 状態安定性
-         * @return GaizenseiSetter
+         * @return IGaizenseiSetter
          */
-        GaizenseiSetter set状態安定性(JotaiAnteiseiKubun 状態安定性);
+        IGaizenseiSetter set状態安定性(JotaiAnteiseiKubun 状態安定性);
     }
 
     /**
      * 認知症自立度が2以上であることの蓋然性を設定するためのSetterインターフェースです。
      */
-    public interface GaizenseiSetter {
+    public interface IGaizenseiSetter {
 
         /**
          * 認知症自立度2以上蓋然性を引数から設定します。
          *
          * @param 認知症自立度2以上蓋然性 認知症自立度2以上蓋然性
-         * @return SuiteiKyuhuKubunSetter
+         * @return ISuiteiKyuhuKubunSetter
          */
-        SuiteiKyuhuKubunSetter set認知症自立度2以上蓋然性(Decimal 認知症自立度2以上蓋然性);
+        ISuiteiKyuhuKubunSetter set認知症自立度2以上蓋然性(Decimal 認知症自立度2以上蓋然性);
     }
 
     /**
      * 推定給付区分を設定するためのSetterインターフェースです。
      */
-    public interface SuiteiKyuhuKubunSetter {
+    public interface ISuiteiKyuhuKubunSetter {
 
         /**
          * 推定給付区分を引数から設定します。
          *
          * @param 推定給付区分 推定給付区分
-         * @return OthersSetter
+         * @return IOthersSetter
          */
-        OthersSetter set推定給付区分(SuiteiKyuhuKubun 推定給付区分);
+        IOthersSetter set推定給付区分(SuiteiKyuhuKubun 推定給付区分);
     }
 
     /**
      * 必須項目以外の項目について設定するためのインターフェースです。
      */
-    public interface OthersSetter {
+    public interface IOthersSetter {
 
         /**
          * 運動能力が低下していない認知症高齢者の指標を、引数から設定します。
          *
          * @param 運動能力未低下認知症高齢者指標 運動能力が低下していない認知症高齢者の指標
-         * @return OthersSetter
+         * @return IOthersSetter
          */
-        OthersSetter set運動能力未低下認知症高齢者指標(NoryokuMiteikaNinchishoKoreishaShihyoKomoku 運動能力未低下認知症高齢者指標);
+        IOthersSetter set運動能力未低下認知症高齢者指標(NoryokuMiteikaNinchishoKoreishaShihyoKomoku 運動能力未低下認知症高齢者指標);
 
         /**
          * 日常生活自立度組み合わせを、引数から設定します。
          *
          * @param 日常生活自立度組み合わせ 日常生活自立度組み合わせ
-         * @return OthersSetter
+         * @return IOthersSetter
          */
-        OthersSetter set日常生活自立度組み合わせ(NichijoSeikatsuJiritsudoKumiawase 日常生活自立度組み合わせ);
+        IOthersSetter set日常生活自立度組み合わせ(NichijoSeikatsuJiritsudoKumiawase 日常生活自立度組み合わせ);
 
         /**
          * 認知症高齢者日常生活自立度についての蓋然性評価を、引数から設定します。
          *
          * @param 認知症高齢者日常生活自立度蓋然性評価 認知症高齢者日常生活自立度についての蓋然性評価
-         * @return OthersSetter
+         * @return IOthersSetter
          */
-        OthersSetter set認知症高齢者日常生活自立度蓋然性評価(NinchishoKoreishaJiritsudoGaizenseiHyokaKomoku 認知症高齢者日常生活自立度蓋然性評価);
+        IOthersSetter set認知症高齢者日常生活自立度蓋然性評価(NinchishoKoreishaJiritsudoGaizenseiHyokaKomoku 認知症高齢者日常生活自立度蓋然性評価);
 
         /**
          * 認知症高齢者日常生活自立度についての蓋然性評価率を、引数から設定します。
          *
          * @param 認知症高齢者日常生活自立度蓋然性評価率 認知症高齢者日常生活自立度についての蓋然性評価率
-         * @return OthersSetter
+         * @return IOthersSetter
          */
-        OthersSetter set認知症高齢者日常生活自立度蓋然性評価率(int 認知症高齢者日常生活自立度蓋然性評価率);
+        IOthersSetter set認知症高齢者日常生活自立度蓋然性評価率(int 認知症高齢者日常生活自立度蓋然性評価率);
 
         /**
          * 一次判定結果送付区分を、引数から設定します。
          *
          * @param 一次判定結果送付状況 一次判定結果送付状況
-         * @return OthersSetter
+         * @return IOthersSetter
          */
-        OthersSetter set一次判定結果送付状況(IchijiHanteiResultSofu 一次判定結果送付状況);
+        IOthersSetter set一次判定結果送付状況(IchijiHanteiResultSofu 一次判定結果送付状況);
 
         /**
          * 設定した情報を元に、一次判定結果の詳細情報を生成して返します。

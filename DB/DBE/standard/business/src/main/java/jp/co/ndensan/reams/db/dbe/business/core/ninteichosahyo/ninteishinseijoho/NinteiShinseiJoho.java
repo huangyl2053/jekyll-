@@ -298,7 +298,7 @@ public class NinteiShinseiJoho
      *
      * @return みなし２号等対象フラグ
      */
-    public boolean getみなし２号等対象フラグ() {
+    public boolean isみなし２号等対象フラグ() {
         return entity.getMinashiNigoEtcTaishoFlag();
     }
 
@@ -424,7 +424,7 @@ public class NinteiShinseiJoho
      *
      * @return 情報提供への同意有無
      */
-    public boolean get情報提供への同意有無() {
+    public boolean is情報提供への同意有無() {
         return entity.getJohoteikyoDoiFlag();
     }
 
@@ -496,7 +496,7 @@ public class NinteiShinseiJoho
      *
      * @return 指定医フラグ
      */
-    public boolean get指定医フラグ() {
+    public boolean is指定医フラグ() {
         return entity.getShiteiiFlag();
     }
 
@@ -523,7 +523,7 @@ public class NinteiShinseiJoho
      *
      * @return 認定延期通知発行しないことに対する同意有無
      */
-    public boolean get認定延期通知発行しないことに対する同意有無() {
+    public boolean is認定延期通知発行しないことに対する同意有無() {
         return entity.getEnkitsuchiNashiDoiFlag();
     }
 
@@ -532,7 +532,7 @@ public class NinteiShinseiJoho
      *
      * @return 施設入所の有無
      */
-    public boolean get施設入所の有無() {
+    public boolean is施設入所の有無() {
         return entity.getShisetsuNyushoFlag();
     }
 
@@ -550,7 +550,7 @@ public class NinteiShinseiJoho
      *
      * @return 家庭訪問の有無
      */
-    public boolean get家庭訪問の有無() {
+    public boolean is家庭訪問の有無() {
         return entity.getKateiHomonFlag();
     }
 
@@ -703,7 +703,7 @@ public class NinteiShinseiJoho
      *
      * @return 審査継続区分
      */
-    public boolean get審査継続区分() {
+    public boolean is審査継続区分() {
         return entity.getShinsaKeizokuFlag();
     }
 
@@ -775,7 +775,7 @@ public class NinteiShinseiJoho
      *
      * @return 論理削除フラグ
      */
-    public boolean get論理削除フラグ() {
+    public boolean is論理削除フラグ() {
         return entity.getLogicalDeletedFlag();
     }
 

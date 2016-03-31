@@ -70,9 +70,9 @@ public class ShinsakaiIinJoho
         this.id = new ShinsakaiIinJohoIdentifier(
                 entity.get介護認定審査会委員情報Entity().getShinsakaiIinCode());
         List<KaigoNinteiShinsakaiIinShozokuKikanJoho> shozokuKikanJohoList = new ArrayList<>();
-        for (DbT5595KaigoNinteiShinsakaiIinShozokuKikanJohoEntity kaigoNinteiShinsakaiIinShozokuKikanJohoEntity : entity.get介護認定審査会委員所属機関情報Entity()) {
+        for (DbT5595KaigoNinteiShinsakaiIinShozokuKikanJohoEntity kikanJohoEntity : entity.get介護認定審査会委員所属機関情報Entity()) {
             shozokuKikanJohoList.add(
-                    new KaigoNinteiShinsakaiIinShozokuKikanJoho(kaigoNinteiShinsakaiIinShozokuKikanJohoEntity));
+                    new KaigoNinteiShinsakaiIinShozokuKikanJoho(kikanJohoEntity));
         }
         this.shinsakaiIinShozokuKikan = Models.create(shozokuKikanJohoList);
 

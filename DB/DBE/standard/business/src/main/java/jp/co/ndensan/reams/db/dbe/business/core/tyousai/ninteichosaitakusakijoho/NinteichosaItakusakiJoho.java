@@ -255,7 +255,7 @@ public class NinteichosaItakusakiJoho extends
      *
      * @return 状況フラグ
      */
-    public boolean get状況フラグ() {
+    public boolean is状況フラグ() {
         return entity.getJokyoFlag();
     }
 

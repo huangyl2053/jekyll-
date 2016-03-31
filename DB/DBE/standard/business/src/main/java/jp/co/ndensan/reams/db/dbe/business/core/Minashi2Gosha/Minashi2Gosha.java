@@ -78,6 +78,11 @@ public class Minashi2Gosha implements IMinashi2GoshaDaicho, INinteiShinseiTaisho
         return profile.get生年月日();
     }
 
+    /**
+     * 住所を取得します。
+     *
+     * @return 住所
+     */
     public IJusho get住所() {
         return profile.get住所();
     }
