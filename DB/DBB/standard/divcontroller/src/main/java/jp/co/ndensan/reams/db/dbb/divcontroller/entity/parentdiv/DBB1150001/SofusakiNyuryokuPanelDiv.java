@@ -5,6 +5,8 @@ package jp.co.ndensan.reams.db.dbb.divcontroller.entity.parentdiv.DBB1150001;
  * 不正な動作の原因になります。
  */
 import com.fasterxml.jackson.annotation.JsonProperty;
+import jp.co.ndensan.reams.ur.urz.divcontroller.entity.commonchilddiv.ZenkokuJushoInput.IZenkokuJushoInputDiv;
+import jp.co.ndensan.reams.ur.urz.divcontroller.entity.commonchilddiv.ZenkokuJushoInput.ZenkokuJushoInputDiv;
 import jp.co.ndensan.reams.uz.uza.ui.binding.*;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 
@@ -21,10 +23,10 @@ public class SofusakiNyuryokuPanelDiv extends Panel {
      * コントロール名とフィールド名を取得する
      * private + コントロール名 + フィールド名 の文字列を作成
      */
+    @JsonProperty("ccdZenkokuJushoInput1")
+    private ZenkokuJushoInputDiv ccdZenkokuJushoInput1;
     @JsonProperty("txtSofusakiYubinNo")
     private TextBoxYubinNo txtSofusakiYubinNo;
-    @JsonProperty("btnZenkokuJushoMae")
-    private Button btnZenkokuJushoMae;
     @JsonProperty("txtSofusaki01")
     private TextBox txtSofusaki01;
     @JsonProperty("txtSofusaki02")
@@ -47,6 +49,15 @@ public class SofusakiNyuryokuPanelDiv extends Panel {
      * フィールド名のGetterとSetter を作成
      */
     /*
+     * getccdZenkokuJushoInput1
+     * @return ccdZenkokuJushoInput1
+     */
+    @JsonProperty("ccdZenkokuJushoInput1")
+    public IZenkokuJushoInputDiv getCcdZenkokuJushoInput1() {
+        return ccdZenkokuJushoInput1;
+    }
+
+    /*
      * gettxtSofusakiYubinNo
      * @return txtSofusakiYubinNo
      */
@@ -62,24 +73,6 @@ public class SofusakiNyuryokuPanelDiv extends Panel {
     @JsonProperty("txtSofusakiYubinNo")
     public void setTxtSofusakiYubinNo(TextBoxYubinNo txtSofusakiYubinNo) {
         this.txtSofusakiYubinNo = txtSofusakiYubinNo;
-    }
-
-    /*
-     * getbtnZenkokuJushoMae
-     * @return btnZenkokuJushoMae
-     */
-    @JsonProperty("btnZenkokuJushoMae")
-    public Button getBtnZenkokuJushoMae() {
-        return btnZenkokuJushoMae;
-    }
-
-    /*
-     * setbtnZenkokuJushoMae
-     * @param btnZenkokuJushoMae btnZenkokuJushoMae
-     */
-    @JsonProperty("btnZenkokuJushoMae")
-    public void setBtnZenkokuJushoMae(Button btnZenkokuJushoMae) {
-        this.btnZenkokuJushoMae = btnZenkokuJushoMae;
     }
 
     /*

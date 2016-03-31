@@ -25,8 +25,8 @@ public class ShotokuShokaiHyoHakkoIchiranPanelDiv extends Panel {
     private Label lblJuminzeiNendo;
     @JsonProperty("ddlJuminzeiNendo")
     private DropDownList ddlJuminzeiNendo;
-    @JsonProperty("lblHakkoNengappi")
-    private Label lblHakkoNengappi;
+    @JsonProperty("lblHakkobi")
+    private Label lblHakkobi;
     @JsonProperty("txtHakkoNengappi")
     private TextBoxDate txtHakkoNengappi;
     @JsonProperty("btnSentakuShusei")
@@ -81,21 +81,21 @@ public class ShotokuShokaiHyoHakkoIchiranPanelDiv extends Panel {
     }
 
     /*
-     * getlblHakkoNengappi
-     * @return lblHakkoNengappi
+     * getlblHakkobi
+     * @return lblHakkobi
      */
-    @JsonProperty("lblHakkoNengappi")
-    public Label getLblHakkoNengappi() {
-        return lblHakkoNengappi;
+    @JsonProperty("lblHakkobi")
+    public Label getLblHakkobi() {
+        return lblHakkobi;
     }
 
     /*
-     * setlblHakkoNengappi
-     * @param lblHakkoNengappi lblHakkoNengappi
+     * setlblHakkobi
+     * @param lblHakkobi lblHakkobi
      */
-    @JsonProperty("lblHakkoNengappi")
-    public void setLblHakkoNengappi(Label lblHakkoNengappi) {
-        this.lblHakkoNengappi = lblHakkoNengappi;
+    @JsonProperty("lblHakkobi")
+    public void setLblHakkobi(Label lblHakkobi) {
+        this.lblHakkobi = lblHakkobi;
     }
 
     /*

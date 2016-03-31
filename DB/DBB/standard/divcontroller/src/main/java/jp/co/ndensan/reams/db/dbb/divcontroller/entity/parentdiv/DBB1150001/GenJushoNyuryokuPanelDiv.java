@@ -5,6 +5,8 @@ package jp.co.ndensan.reams.db.dbb.divcontroller.entity.parentdiv.DBB1150001;
  * 不正な動作の原因になります。
  */
 import com.fasterxml.jackson.annotation.JsonProperty;
+import jp.co.ndensan.reams.ur.urz.divcontroller.entity.commonchilddiv.ZenkokuJushoInput.IZenkokuJushoInputDiv;
+import jp.co.ndensan.reams.ur.urz.divcontroller.entity.commonchilddiv.ZenkokuJushoInput.ZenkokuJushoInputDiv;
 import jp.co.ndensan.reams.uz.uza.ui.binding.*;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 
@@ -23,8 +25,8 @@ public class GenJushoNyuryokuPanelDiv extends Panel {
      */
     @JsonProperty("radMaeJusho")
     private RadioButton radMaeJusho;
-    @JsonProperty("btnZenkokuJushoTenshutsusaki")
-    private Button btnZenkokuJushoTenshutsusaki;
+    @JsonProperty("ccdZenkokuJushoInput2")
+    private ZenkokuJushoInputDiv ccdZenkokuJushoInput2;
     @JsonProperty("txtZenJusho")
     private TextBox txtZenJusho;
 
@@ -53,21 +55,12 @@ public class GenJushoNyuryokuPanelDiv extends Panel {
     }
 
     /*
-     * getbtnZenkokuJushoTenshutsusaki
-     * @return btnZenkokuJushoTenshutsusaki
+     * getccdZenkokuJushoInput2
+     * @return ccdZenkokuJushoInput2
      */
-    @JsonProperty("btnZenkokuJushoTenshutsusaki")
-    public Button getBtnZenkokuJushoTenshutsusaki() {
-        return btnZenkokuJushoTenshutsusaki;
-    }
-
-    /*
-     * setbtnZenkokuJushoTenshutsusaki
-     * @param btnZenkokuJushoTenshutsusaki btnZenkokuJushoTenshutsusaki
-     */
-    @JsonProperty("btnZenkokuJushoTenshutsusaki")
-    public void setBtnZenkokuJushoTenshutsusaki(Button btnZenkokuJushoTenshutsusaki) {
-        this.btnZenkokuJushoTenshutsusaki = btnZenkokuJushoTenshutsusaki;
+    @JsonProperty("ccdZenkokuJushoInput2")
+    public IZenkokuJushoInputDiv getCcdZenkokuJushoInput2() {
+        return ccdZenkokuJushoInput2;
     }
 
     /*
