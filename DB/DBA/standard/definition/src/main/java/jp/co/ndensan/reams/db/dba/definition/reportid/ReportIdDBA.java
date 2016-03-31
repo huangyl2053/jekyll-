@@ -221,6 +221,10 @@ public enum ReportIdDBA {
      */
     DBA200002(new ReportId("DBA200002_HihokenshaDaichoHakkoIchiranhyo"), new RString("被保険者台帳一覧表")),
     /**
+     * 異動チェックリスト帳票の帳票ＩＤです。
+     */
+    DBA200006(new ReportId("DBA200006_IdoCheckList"), new RString("異動チェックリスト")),
+    /**
      * 介護保険　転入・転出未登録一覧表です。
      */
     DBA200014(new ReportId("DBA200014_TennyuTenshutsuMitorokuIchiranhyo"), new RString("介護保険　転入・転出未登録一覧表"));

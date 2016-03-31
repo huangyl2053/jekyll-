@@ -15,6 +15,7 @@ import jp.co.ndensan.reams.db.dba.business.report.idochecklist.IdoCheckListRepor
 import jp.co.ndensan.reams.db.dba.definition.enumeratedtype.core.idochecklist.IdochecklistTitle;
 import jp.co.ndensan.reams.db.dba.definition.mybatis.param.idochecklist.IdoCheckListGetDataParameter;
 import jp.co.ndensan.reams.db.dba.definition.processprm.idochecklist.IdoCheckListGetDataProcessParameter;
+import jp.co.ndensan.reams.db.dba.definition.reportid.ReportIdDBA;
 import jp.co.ndensan.reams.db.dba.entity.db.relate.idochecklist.IdoCheckListEntity;
 import jp.co.ndensan.reams.db.dba.entity.db.relate.idochecklist.IdoInfoEntity;
 import jp.co.ndensan.reams.db.dba.entity.db.relate.idochecklist.ShisetsuNyutaishoEntity;
@@ -47,7 +48,6 @@ import jp.co.ndensan.reams.uz.uza.biz.AtenaMeisho;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.CodeShubetsu;
 import jp.co.ndensan.reams.uz.uza.biz.GyomuCode;
-import jp.co.ndensan.reams.uz.uza.biz.ReportId;
 import jp.co.ndensan.reams.uz.uza.biz.SetaiCode;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
@@ -68,7 +68,6 @@ public class IdoCheckListReportProcess extends BatchProcessBase<RString> {
             "jp.co.ndensan.reams.db.dba.persistence.db.mapper.relate.idochecklist.IIdoCheckListMapper."
             + "getListForProcess");
     private IdoCheckListEntity idoCheckListEntity;
-    private static final ReportId REPORT_ID = new ReportId(new RString("DBA200006"));
     private static final CodeShubetsu CODE_SHUBETSU_SOSHITSU_JIYU = new CodeShubetsu(new RString("0008"));
     private static final CodeShubetsu CODE_SHUBETSU_IRYO_HOKEN = new CodeShubetsu(new RString("0009"));
     private static final CodeShubetsu CODE_SHUBETSU_HOKA_TOKUREI = new CodeShubetsu(new RString("0011"));
@@ -113,7 +112,7 @@ public class IdoCheckListReportProcess extends BatchProcessBase<RString> {
 
     @Override
     protected void createWriter() {
-        batchWrite = BatchReportFactory.createBatchReportWriter(REPORT_ID.value()).create();
+        batchWrite = BatchReportFactory.createBatchReportWriter(ReportIdDBA.DBA200006.getReportId().value()).create();
         reportSourceWriter = new ReportSourceWriter<>(batchWrite);
     }
 
