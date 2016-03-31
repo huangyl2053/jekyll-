@@ -37,6 +37,7 @@ public class SaikofuJiyu implements IValueObject<RString>, IDbColumnMappable, IV
      *
      * @param code コード
      * @param name 名称
+     * @throws NullPointerException Ex
      */
     public SaikofuJiyu(RString code, RString name) throws NullPointerException {
         this.code = Objects.requireNonNull(code, UrSystemErrorMessages.値がnull.getReplacedMessage("再交付事由コード"));
@@ -44,8 +45,7 @@ public class SaikofuJiyu implements IValueObject<RString>, IDbColumnMappable, IV
     }
 
     /**
-     * DB等からコンストラクタを利用して直接マッピングされた、<br/>
-     * {@link SaikofuJiyu}が持つcodeについてバリデーションを実施します。
+     * DB等からコンストラクタを利用して直接マッピングされた、<br/> {@link SaikofuJiyu}が持つcodeについてバリデーションを実施します。
      *
      * @return {@link IValidationMessages}
      */

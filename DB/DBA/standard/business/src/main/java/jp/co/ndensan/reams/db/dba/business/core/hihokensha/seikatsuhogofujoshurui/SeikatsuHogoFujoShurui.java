@@ -21,7 +21,9 @@ import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 /**
  * 生活保護扶助種類を管理するクラスです。
  */
-public class SeikatsuHogoFujoShurui extends ModelBase<SeikatsuHogoFujoShuruiIdentifier, UrT0526SeikatsuHogoFujoShuruiEntity, SeikatsuHogoFujoShurui> implements Serializable {
+public class SeikatsuHogoFujoShurui
+        extends ModelBase<SeikatsuHogoFujoShuruiIdentifier, UrT0526SeikatsuHogoFujoShuruiEntity, SeikatsuHogoFujoShurui>
+        implements Serializable {
 
     private final UrT0526SeikatsuHogoFujoShuruiEntity entity;
     private final SeikatsuHogoFujoShuruiIdentifier id;
