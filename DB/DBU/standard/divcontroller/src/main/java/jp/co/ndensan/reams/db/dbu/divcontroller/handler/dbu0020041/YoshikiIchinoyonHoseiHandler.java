@@ -18,7 +18,6 @@ import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
-import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 
 /**
@@ -205,7 +204,7 @@ public final class YoshikiIchinoyonHoseiHandler {
             JigyoHokokuTokeiData 画面データ = 画面データリスト.get(j);
             JigyoHokokuTokeiData 更新前_isNull = get更新前空データ(更新前データリスト, 画面データ);
             if ((更新前_isNull != null) && (更新前_isNull.get集計結果値() != null)) {
-                更新前_isNull.toEntity().setState(EntityDataState.Added);
+                更新前_isNull = 更新前_isNull.addedModel();
                 修正データリスト.add(更新前_isNull);
             }
         }
@@ -215,9 +214,9 @@ public final class YoshikiIchinoyonHoseiHandler {
                 JigyoHokokuTokeiData 更新前 = 更新前データリスト.get(i);
                 if (更新前.get縦番号().equals(画面データ.get縦番号())
                         && 更新前.get横番号().equals(画面データ.get横番号())
-                        && (!更新前.get集計結果値().equals(画面データ.get集計結果値()))) {
-                    画面データ.toEntity().setState(EntityDataState.Modified);
-                    修正データリスト.add(画面データ);
+                        && (更新前.get集計結果値() == null || (!更新前.get集計結果値().equals(画面データ.get集計結果値())))) {
+                    更新前 = 更新前.createBuilderForEdit().set集計結果値(画面データ.get集計結果値()).build();
+                    修正データリスト.add(更新前);
                 }
             }
         }
