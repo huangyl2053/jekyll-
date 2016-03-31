@@ -18,7 +18,7 @@ import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5222NinteiChosaScheduleMemo
  */
 @lombok.Getter
 @lombok.Setter
-public class NinteichosaScheduleEntity implements Cloneable, Serializable {
+public class NinteichosaScheduleEntity implements Serializable {
 
     private static final long serialVersionUID = -7403649900478063342L;
 

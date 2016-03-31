@@ -101,9 +101,9 @@ public class ChosainJohoManager {
     /**
      * 市町村コードと認定調査委託先コードで、調査員情報を取得します。
      *
-     * @param 市町村コード 市町村コード
-     * @param 認定調査委託先コード 認定調査委託先コード
-     * @param 認定調査員コード
+     * @param 市町村コード LasdecCode
+     * @param 認定調査委託先コード ChosaItakusakiCode
+     * @param 認定調査員コード ChosainCode
      * @return 件数
      */
     @Transaction

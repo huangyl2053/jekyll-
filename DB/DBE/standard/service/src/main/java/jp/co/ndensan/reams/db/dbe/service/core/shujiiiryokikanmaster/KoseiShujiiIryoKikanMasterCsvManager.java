@@ -21,8 +21,6 @@ import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
  */
 public class KoseiShujiiIryoKikanMasterCsvManager {
 
-    private static final int CSV_TYPE = 1024;
-
     /**
      * コンストラクタです。
      */

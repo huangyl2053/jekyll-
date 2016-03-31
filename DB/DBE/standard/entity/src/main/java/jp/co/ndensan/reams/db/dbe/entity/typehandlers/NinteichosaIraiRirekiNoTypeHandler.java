@@ -4,9 +4,9 @@ import java.sql.CallableStatement;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import jp.co.ndensan.reams.db.dbe.definition.core.valueobject.NinteichosaIraiRirekiNo;
 import org.apache.ibatis.type.BaseTypeHandler;
 import org.apache.ibatis.type.JdbcType;
-import jp.co.ndensan.reams.db.dbe.definition.core.valueobject.NinteichosaIraiRirekiNo;
 
 /**
  * 認定調査依頼履歴番号のTypeHandlerです。
@@ -36,7 +36,7 @@ public class NinteichosaIraiRirekiNoTypeHandler extends BaseTypeHandler<Ninteich
     }
 
     private Integer getResultInteger(Integer result) {
-        return result == null ? 0 : result;
+        return result == null ? Integer.valueOf(0) : result;
     }
 // </editor-fold>
 }

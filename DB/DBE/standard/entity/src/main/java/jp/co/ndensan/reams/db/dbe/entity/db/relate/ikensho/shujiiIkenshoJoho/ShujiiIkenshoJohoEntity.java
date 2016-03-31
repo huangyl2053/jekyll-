@@ -17,7 +17,7 @@ import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5304ShujiiIkenshoIkenItemEn
  */
 @lombok.Getter
 @lombok.Setter
-public class ShujiiIkenshoJohoEntity implements Cloneable, Serializable {
+public class ShujiiIkenshoJohoEntity implements Serializable {
 
     /**
      * -- GETTER -- 要介護認定主治医意見書情報Entityを返します。
@@ -30,8 +30,7 @@ public class ShujiiIkenshoJohoEntity implements Cloneable, Serializable {
     /**
      * -- GETTER -- 要介護認定主治医意見書記入項目EntityListを返します。
      *
-     * @return 要介護認定主治医意見書記入項目EntityList -- SETTER --
-     * 要介護認定主治医意見書記入項目EntityListを設定します。
+     * @return 要介護認定主治医意見書記入項目EntityList -- SETTER -- 要介護認定主治医意見書記入項目EntityListを設定します。
      *
      * @param 要介護認定主治医意見書記入項目EntityList 要介護認定主治医意見書記入項目EntityList
      */
@@ -39,8 +38,7 @@ public class ShujiiIkenshoJohoEntity implements Cloneable, Serializable {
     /**
      * -- GETTER -- 要介護認定主治医意見書意見項目EntityListを返します。
      *
-     * @return 要介護認定主治医意見書意見項目EntityList -- SETTER --
-     * 要介護認定主治医意見書意見項目EntityListを設定します。
+     * @return 要介護認定主治医意見書意見項目EntityList -- SETTER -- 要介護認定主治医意見書意見項目EntityListを設定します。
      *
      * @param 要介護認定主治医意見書意見項目EntityList 要介護認定主治医意見書意見項目EntityList
      */
@@ -58,8 +56,7 @@ public class ShujiiIkenshoJohoEntity implements Cloneable, Serializable {
     /**
      * MyBatisで取得された場合に使用して下さい。<br/>
      * MyBatisで当クラス取得時は、新規追加(Added)となるため、変更無し(Unchanged)に設定します。<br/>
-     * ShujiiIkenshoJohoEntityが持つ{@link DbT5303ShujiiIkenshoKinyuItemEntity}<br/>
-     * {@link DbT5304ShujiiIkenshoIkenItemEntity}のMD5値を計算し、設定します。
+     * ShujiiIkenshoJohoEntityが持つ{@link DbT5303ShujiiIkenshoKinyuItemEntity}<br/> {@link DbT5304ShujiiIkenshoIkenItemEntity}のMD5値を計算し、設定します。
      */
     public void initializeMd5ToEntities() {
         this.要介護認定主治医意見書情報Entity.initializeMd5();

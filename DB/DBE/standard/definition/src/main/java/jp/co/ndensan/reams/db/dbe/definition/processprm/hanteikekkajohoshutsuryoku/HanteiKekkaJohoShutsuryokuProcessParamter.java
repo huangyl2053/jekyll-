@@ -45,7 +45,7 @@ public class HanteiKekkaJohoShutsuryokuProcessParamter implements IBatchProcessP
      * @return mybatisパラメータ
      */
     public HanteiKekkaJohoShutsuryokuMybitisParamter toHanteiKekkaJohoShutsuryokuMybitisParamter() {
-        return new HanteiKekkaJohoShutsuryokuMybitisParamter(shinseishoKanriNo, nijiHanteiYMDFrom, nijiHanteiYMDTo);
+        return HanteiKekkaJohoShutsuryokuMybitisParamter.createParam(shinseishoKanriNo, nijiHanteiYMDFrom, nijiHanteiYMDTo);
     }
 
 }

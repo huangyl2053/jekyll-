@@ -22,7 +22,7 @@ import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5210NinteichosahyoShisetsuR
  */
 @lombok.Getter
 @lombok.Setter
-public class NinteichosahyoGaikyoChosaEntity implements Cloneable, Serializable {
+public class NinteichosahyoGaikyoChosaEntity implements Serializable {
 
     /**
      * -- GETTER -- 認定調査票（概況調査）Entityを返します。

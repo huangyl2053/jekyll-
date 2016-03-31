@@ -16,7 +16,7 @@ import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5301ShujiiIkenshoIraiJohoEn
  */
 @lombok.Getter
 @lombok.Setter
-public class NinteiShinseiJohoRelateEntity implements Cloneable, Serializable {
+public class NinteiShinseiJohoRelateEntity implements Serializable {
 
     /**
      * -- GETTER -- 要介護認定申請情報Entityを返します。

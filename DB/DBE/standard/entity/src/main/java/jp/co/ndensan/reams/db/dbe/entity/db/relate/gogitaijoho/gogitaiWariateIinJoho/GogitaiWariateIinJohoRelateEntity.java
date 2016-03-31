@@ -15,28 +15,20 @@ import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5594ShinsakaiIinJohoEntity;
  * 合議体割当委員情報RelateEntityクラスです。
  */
 @lombok.Getter
-@lombok.Setter
-public class GogitaiWariateIinJohoRelateEntity implements Cloneable, Serializable {
-
+public class GogitaiWariateIinJohoRelateEntity implements Serializable {
 
     /**
-     * -- GETTER --
-     * 合議体割当委員情報Entityを返します。
+     * -- GETTER -- 合議体割当委員情報Entityを返します。
      *
-     * @return 合議体割当委員情報Entity
-     * -- SETTER --
-     * 合議体割当委員情報Entityを設定します。
+     * @return 合議体割当委員情報Entity -- SETTER -- 合議体割当委員情報Entityを設定します。
      *
      * @param 合議体割当委員情報Entity 合議体割当委員情報Entity
      */
     private DbT5593GogitaiWariateIinJohoEntity 合議体割当委員情報Entity;
     /**
-     * -- GETTER --
-     * 介護認定審査会委員情報EntityListを返します。
+     * -- GETTER -- 介護認定審査会委員情報EntityListを返します。
      *
-     * @return 介護認定審査会委員情報EntityList
-     * -- SETTER --
-     * 介護認定審査会委員情報EntityListを設定します。
+     * @return 介護認定審査会委員情報EntityList -- SETTER -- 介護認定審査会委員情報EntityListを設定します。
      *
      * @param 介護認定審査会委員情報EntityList 介護認定審査会委員情報EntityList
      */
@@ -53,8 +45,7 @@ public class GogitaiWariateIinJohoRelateEntity implements Cloneable, Serializabl
     /**
      * MyBatisで取得された場合に使用して下さい。<br/>
      * MyBatisで当クラス取得時は、新規追加(Added)となるため、変更無し(Unchanged)に設定します。<br/>
-     * GogitaiWariateIinJohoRelateEntityが持つ{@link DbT5593GogitaiWariateIinJohoEntity}と<br/>
-     * {@link DbT5594ShinsakaiIinJohoEntity}のMD5値を計算し、設定します。
+     * GogitaiWariateIinJohoRelateEntityが持つ{@link DbT5593GogitaiWariateIinJohoEntity}と<br/> {@link DbT5594ShinsakaiIinJohoEntity}のMD5値を計算し、設定します。
      */
     public void initializeMd5ToEntities() {
         this.合議体割当委員情報Entity.initializeMd5();
