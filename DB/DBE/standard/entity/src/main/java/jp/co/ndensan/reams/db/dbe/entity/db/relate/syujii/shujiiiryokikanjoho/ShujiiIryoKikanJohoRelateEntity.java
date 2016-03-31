@@ -16,7 +16,7 @@ import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5912ShujiiJohoEntity;
  */
 @lombok.Getter
 @lombok.Setter
-public class ShujiiIryoKikanJohoRelateEntity implements Cloneable, Serializable {
+public class ShujiiIryoKikanJohoRelateEntity implements Serializable {
 
     /**
      * -- GETTER -- 主治医医療機関情報Entityを返します。

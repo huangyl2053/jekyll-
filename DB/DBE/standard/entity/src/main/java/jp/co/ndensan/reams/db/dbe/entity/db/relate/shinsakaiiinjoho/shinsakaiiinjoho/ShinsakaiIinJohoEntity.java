@@ -16,7 +16,7 @@ import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5595KaigoNinteiShinsakaiIin
  */
 @lombok.Getter
 @lombok.Setter
-public class ShinsakaiIinJohoEntity implements Cloneable, Serializable {
+public class ShinsakaiIinJohoEntity implements Serializable {
 
     private static final long serialVersionUID = -5586836242413746270L;
 

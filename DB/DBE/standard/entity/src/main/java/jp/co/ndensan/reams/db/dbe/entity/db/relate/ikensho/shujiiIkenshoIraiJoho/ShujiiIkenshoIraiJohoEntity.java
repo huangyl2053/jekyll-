@@ -16,7 +16,7 @@ import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5301ShujiiIkenshoIraiJohoEn
  */
 @lombok.Getter
 @lombok.Setter
-public class ShujiiIkenshoIraiJohoEntity implements Cloneable, Serializable {
+public class ShujiiIkenshoIraiJohoEntity implements Serializable {
 
     /**
      * -- GETTER -- 主治医意見書作成依頼情報Entityを返します。
@@ -29,8 +29,7 @@ public class ShujiiIkenshoIraiJohoEntity implements Cloneable, Serializable {
     /**
      * -- GETTER -- 要介護認定主治医意見書情報EntityListを返します。
      *
-     * @return 要介護認定主治医意見書情報EntityList -- SETTER --
-     * 要介護認定主治医意見書情報EntityListを設定します。
+     * @return 要介護認定主治医意見書情報EntityList -- SETTER -- 要介護認定主治医意見書情報EntityListを設定します。
      *
      * @param 要介護認定主治医意見書情報EntityList 要介護認定主治医意見書情報EntityList
      */
@@ -47,8 +46,7 @@ public class ShujiiIkenshoIraiJohoEntity implements Cloneable, Serializable {
     /**
      * MyBatisで取得された場合に使用して下さい。<br/>
      * MyBatisで当クラス取得時は、新規追加(Added)となるため、変更無し(Unchanged)に設定します。<br/>
-     * ShujiiIkenshoIraiJohoEntityが持つ<br/>
-     * {@link ShujiiIkenshoJohoEntity}のMD5値を計算し、設定します。
+     * ShujiiIkenshoIraiJohoEntityが持つ<br/> {@link ShujiiIkenshoJohoEntity}のMD5値を計算し、設定します。
      */
     public void initializeMd5ToEntities() {
         this.主治医意見書作成依頼情報Entity.initializeMd5();

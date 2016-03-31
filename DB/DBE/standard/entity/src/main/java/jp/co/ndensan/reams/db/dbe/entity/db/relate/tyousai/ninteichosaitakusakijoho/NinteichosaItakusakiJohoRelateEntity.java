@@ -16,7 +16,7 @@ import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5913ChosainJohoEntity;
  */
 @lombok.Getter
 @lombok.Setter
-public class NinteichosaItakusakiJohoRelateEntity implements Cloneable, Serializable {
+public class NinteichosaItakusakiJohoRelateEntity implements Serializable {
 
     private static final long serialVersionUID = 8105757481386721125L;
 
