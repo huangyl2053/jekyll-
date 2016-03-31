@@ -209,7 +209,6 @@ public class ShisetsuNyutaishoRirekiKanriHandler {
             ShisetsuNyutaisho 介護保険施設入退所情報 = new ShisetsuNyutaisho(識別コード, 最大履歴番号);
             施設入退所情報Model.add(追加の処理(介護保険施設入退所情報));
         } else if (更新.equals(div.getInputMode())) {
-            row.setState(更新);
             row.getNyushoDate().setValue(div.getShisetsuNyutaishoInput().getTxtNyushoDate().getValue());
             row.getTaishoDate().setValue(div.getShisetsuNyutaishoInput().getTxtTaishoDate().getValue());
             row.setShisetsu(div.getShisetsuNyutaishoInput().getCcdShisetsuJoho().getNyuryokuShisetsuMeisho());
@@ -223,14 +222,21 @@ public class ShisetsuNyutaishoRirekiKanriHandler {
             }
             row.setShisetsuCode(div.getShisetsuNyutaishoInput().getCcdShisetsuJoho().getNyuryokuShisetsuKodo());
             row.setShisetsuMeisho(div.getShisetsuNyutaishoInput().getCcdShisetsuJoho().getNyuryokuShisetsuMeisho());
-            int 履歴番号 = Integer.parseInt(row.getRirekiNo().toString());
-            ShisetsuNyutaishoIdentifier 介護保険施設入退所の識別子 = new ShisetsuNyutaishoIdentifier(識別コード, 履歴番号);
-            施設入退所情報Model.add(修正の処理(介護保険施設入退所の識別子, 施設入退所情報Model));
+            if (RString.isNullOrEmpty(row.getState())) {
+                row.setState(更新);
+                int 履歴番号 = Integer.parseInt(row.getRirekiNo().toString());
+                ShisetsuNyutaishoIdentifier 介護保険施設入退所の識別子 = new ShisetsuNyutaishoIdentifier(識別コード, 履歴番号);
+                施設入退所情報Model.add(修正の処理(介護保険施設入退所の識別子, 施設入退所情報Model));
+            }
         } else if (削除.equals(div.getInputMode())) {
-            row.setState(削除);
-            int 履歴番号 = Integer.parseInt(row.getRirekiNo().toString());
-            ShisetsuNyutaishoIdentifier 介護保険施設入退所の識別子 = new ShisetsuNyutaishoIdentifier(識別コード, 履歴番号);
-            施設入退所情報Model.add(削除の処理(介護保険施設入退所の識別子, 施設入退所情報Model));
+            if (RString.isNullOrEmpty(row.getState())) {
+                row.setState(削除);
+                int 履歴番号 = Integer.parseInt(row.getRirekiNo().toString());
+                ShisetsuNyutaishoIdentifier 介護保険施設入退所の識別子 = new ShisetsuNyutaishoIdentifier(識別コード, 履歴番号);
+                施設入退所情報Model.add(削除の処理(介護保険施設入退所の識別子, 施設入退所情報Model));
+            } else {
+                listRow.remove(row);
+            }
         }
         ViewStateHolder.put(ViewStateKeys.施設入退所履歴_施設入退所情報, Models.create(施設入退所情報Model));
         div.setInputMode(RString.EMPTY);
