@@ -498,7 +498,7 @@ public class ShobyoIkenHandler {
                 意見書情報 = 意見書情報.createBuilderForEdit().setGeninShikkan(原因疾患).build();
             }
             if (追加.equals(row.getJotai())) {
-                GeninShikkan geninShikkan = new GeninShikkan(管理番号, row.getRenBan().getValue().intValue());
+                GeninShikkan geninShikkan = new GeninShikkan(管理番号, div.getDgGenyin().getDataSource().size());
                 GeninShikkanBuilder builder2 = geninShikkan.createBuilderForEdit();
                 builder2.set原因疾患コード(new Code(row.getGeninShikkanCode().getValue()));
                 if (row.getIsShutaruGeninShikkan()) {
