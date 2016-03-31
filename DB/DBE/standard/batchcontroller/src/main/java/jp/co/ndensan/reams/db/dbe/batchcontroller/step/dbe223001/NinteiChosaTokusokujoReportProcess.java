@@ -169,9 +169,20 @@ public class NinteiChosaTokusokujoReportProcess extends BatchProcessBase<NinteiC
                 .eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN).
                 separator(Separator.JAPANESE).fillType(FillType.ZERO).toDateString();
 
-        RString 帳票宛先敬称コード = DbBusinessConifg.get(ConfigNameDBE.認定調査督促状_宛先敬称, RDate.getNowDate(), SubGyomuCode.DBE認定支援);
-        RString tempP_宛名名称付与 = ChohyoAtesakiKeisho.toValue(帳票宛先敬称コード).get名称();
-        RString title = DbBusinessConifg.get(ConfigNameDBE.要介護認定調査督促状, RDate.getNowDate(), SubGyomuCode.DBE認定支援);
+        RString 帳票宛先敬称コード;
+        RString tempP_宛名名称付与;
+        try {
+            帳票宛先敬称コード = DbBusinessConifg.get(ConfigNameDBE.認定調査督促状_宛先敬称, RDate.getNowDate(), SubGyomuCode.DBE認定支援);
+            tempP_宛名名称付与 = ChohyoAtesakiKeisho.toValue(帳票宛先敬称コード).get名称();
+        } catch (Exception e) {
+            tempP_宛名名称付与 = RString.EMPTY;
+        }
+        RString title;
+        try {
+            title = DbBusinessConifg.get(ConfigNameDBE.要介護認定調査督促状, RDate.getNowDate(), SubGyomuCode.DBE認定支援);
+        } catch (Exception e) {
+            title = RString.EMPTY;
+        }
 
         return new NinteiChosaTokusokujoBodyItem(
                 ninshoshaSource.hakkoYMD,
