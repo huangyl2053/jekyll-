@@ -96,7 +96,7 @@
         DbT5221."ninteiChosaItakusakiCode" AS Temp_ninteiChosaItakusakiCode,
         DbT5910."jigyoshaMeisho" AS Temp_jigyoshaMeisho,
         DbT5221."ninteiChosainCode" AS Temp_ninteiChosainCode,
-        DbT4913."chosainShimei" AS Temp_chosainShimei,
+        DbT5913."chosainShimei" AS Temp_chosainShimei,
         DbT5221."ninteiChosaYoteiYMD" AS Temp_ninteiChosaYoteiYMD,
         DbT5221."ninteiChosaYoteiKaishiTime" AS Temp_ninteiChosaYoteiKaishiTime,
         DbT5221."ninteiChosaYoteiShuryoTime" AS Temp_ninteiChosaYoteiShuryoTime,
@@ -114,10 +114,10 @@
         LEFT JOIN rgdb."DbT5910NinteichosaItakusakiJoho" DbT5910
         ON DbT5221."shichosonCode" = DbT5910."shichosonCode"
         AND DbT5221."ninteiChosaItakusakiCode" = DbT5910."ninteichosaItakusakiCode"
-        LEFT JOIN rgdb."DbT4913ChosainJoho" DbT4913
-        ON DbT4913."shichosonCode" = DbT5221."shichosonCode"
-        AND DbT4913."ninteiChosaItakusakiCode" = DbT5221."ninteiChosaItakusakiCode"
-        AND DbT4913."ninteiChosainCode" = DbT5221."ninteiChosainCode"
+        LEFT JOIN rgdb."DbT5913ChosainJoho" DbT5913
+        ON DbT5913."shichosonCode" = DbT5221."shichosonCode"
+        AND DbT5913."ninteiChosaItakusakiCode" = DbT5221."ninteiChosaItakusakiCode"
+        AND DbT5913."ninteiChosainCode" = DbT5221."ninteiChosainCode"
         INNER JOIN rgdb."DbT5101NinteiShinseiJoho" DbT5101
         ON DbT5101."shinseishoKanriNo" = DbT5221."shinseishoKanriNo"
         AND DbT5101."shoriJotaiKubun" in ('0','3')
@@ -196,32 +196,32 @@
         DbT5221."chosaChikuCode" AS Temp_chosaChikuCode,
         DbT5221."shichosonCode" AS Temp_shichosonCode,
         DbT5221."ninteiChosaItakusakiCode" AS Temp_ninteiChosaItakusakiCode,
-        CASE WHEN DbT5221."ninteiChosaYoteiShuryoTime"  <![CDATA[<=]]> '12:00'
+        CASE WHEN DbT5221."ninteiChosaYoteiShuryoTime"  <![CDATA[<=]]> '1200'
         AND DbT5221."yoyakuJokyo" = '0'
         THEN 1
         ELSE 0
         END AS "空きの午前",
-        CASE WHEN DbT5221."ninteiChosaYoteiKaishiTime"  <![CDATA[>=]]> '12:00'
+        CASE WHEN DbT5221."ninteiChosaYoteiKaishiTime"  <![CDATA[>=]]> '1200'
         AND DbT5221."yoyakuJokyo" = '0'
         THEN 1
         ELSE 0
         END AS "空きの午後",
-        CASE WHEN DbT5221."ninteiChosaYoteiShuryoTime"  <![CDATA[<=]]> '12:00'
+        CASE WHEN DbT5221."ninteiChosaYoteiShuryoTime"  <![CDATA[<=]]> '1200'
         AND DbT5221."yoyakuJokyo" = '1'
         THEN 1
         ELSE 0
         END AS "仮予約の午前",
-        CASE WHEN DbT5221."ninteiChosaYoteiKaishiTime"  <![CDATA[>=]]> '12:00'
+        CASE WHEN DbT5221."ninteiChosaYoteiKaishiTime"  <![CDATA[>=]]> '1200'
         AND DbT5221."yoyakuJokyo" = '1'
         THEN 1
         ELSE 0
         END AS "仮予約の午後",
-        CASE WHEN DbT5221."ninteiChosaYoteiShuryoTime"  <![CDATA[<=]]> '12:00'
+        CASE WHEN DbT5221."ninteiChosaYoteiShuryoTime"  <![CDATA[<=]]> '1200'
         AND DbT5221."yoyakuJokyo" = '2'
         THEN 1
         ELSE 0
         END AS "確定の午前",
-        CASE WHEN DbT5221."ninteiChosaYoteiKaishiTime"  <![CDATA[>=]]> '12:00'
+        CASE WHEN DbT5221."ninteiChosaYoteiKaishiTime"  <![CDATA[>=]]> '1200'
         AND DbT5221."yoyakuJokyo" = '2'
         THEN 1
         ELSE 0
@@ -255,217 +255,217 @@
         SELECT
         DbT5221."ninteiChosaItakusakiCode" AS ninteiChosaItakusakiCode_temp,
         DbT5910."jigyoshaMeisho" AS jigyoshaMeisho_temp,
-        DbT4913."chosainShimei" AS chosainShimei_temp,
+        DbT5913."chosainShimei" AS chosainShimei_temp,
         DbT5221."yoyakuJokyo" AS yoyakuJokyo_temp,
         DbT5101."hihokenshaNo" AS hihokenshaNo_temp,
         DbT5101."hihokenshaName" AS hihokenshaName_temp,
         DbT5221."renrakusaki1" AS renrakusaki1_temp,
         DbT5221."renrakusaki2" AS renrakusaki2_temp,
-        CASE WHEN DbT5221."yoyakuJokyo" = '0' AND DbT5221."ninteiChosaYoteiKaishiTime" = '8:00'
+        CASE WHEN DbT5221."yoyakuJokyo" = '0' AND DbT5221."ninteiChosaYoteiKaishiTime" = '0800'
         THEN ''
-        WHEN DbT5221."yoyakuJokyo" = '1' AND DbT5221."ninteiChosaYoteiKaishiTime" = '8:00'
+        WHEN DbT5221."yoyakuJokyo" = '1' AND DbT5221."ninteiChosaYoteiKaishiTime" = '0800'
         THEN '☆'
-        WHEN DbT5221."yoyakuJokyo" = '2' AND DbT5221."ninteiChosaYoteiKaishiTime" = '8:00'
+        WHEN DbT5221."yoyakuJokyo" = '2' AND DbT5221."ninteiChosaYoteiKaishiTime" = '0800'
         THEN '★'
         ELSE ''
         END AS "eightClock",
-        CASE WHEN DbT5221."yoyakuJokyo" = '0' AND DbT5221."ninteiChosaYoteiKaishiTime" = '8:30'
+        CASE WHEN DbT5221."yoyakuJokyo" = '0' AND DbT5221."ninteiChosaYoteiKaishiTime" = '0830'
         THEN ''
-        WHEN DbT5221."yoyakuJokyo" = '1' AND DbT5221."ninteiChosaYoteiKaishiTime" = '8:30'
+        WHEN DbT5221."yoyakuJokyo" = '1' AND DbT5221."ninteiChosaYoteiKaishiTime" = '0830'
         THEN '☆'
-        WHEN DbT5221."yoyakuJokyo" = '2' AND DbT5221."ninteiChosaYoteiKaishiTime" = '8:30'
+        WHEN DbT5221."yoyakuJokyo" = '2' AND DbT5221."ninteiChosaYoteiKaishiTime" = '0830'
         THEN '★'
         ELSE ''
         END AS "halfPastEightClock",
-        CASE WHEN DbT5221."yoyakuJokyo" = '0' AND DbT5221."ninteiChosaYoteiKaishiTime" = '9:00'
+        CASE WHEN DbT5221."yoyakuJokyo" = '0' AND DbT5221."ninteiChosaYoteiKaishiTime" = '0900'
         THEN ''
-        WHEN DbT5221."yoyakuJokyo" = '1' AND DbT5221."ninteiChosaYoteiKaishiTime" = '9:00'
+        WHEN DbT5221."yoyakuJokyo" = '1' AND DbT5221."ninteiChosaYoteiKaishiTime" = '0900'
         THEN '☆'
-        WHEN DbT5221."yoyakuJokyo" = '2' AND DbT5221."ninteiChosaYoteiKaishiTime" = '9:00'
+        WHEN DbT5221."yoyakuJokyo" = '2' AND DbT5221."ninteiChosaYoteiKaishiTime" = '0900'
         THEN '★'
         ELSE ''
         END AS "nineClock",
-        CASE WHEN DbT5221."yoyakuJokyo" = '0' AND DbT5221."ninteiChosaYoteiKaishiTime" = '9:30'
+        CASE WHEN DbT5221."yoyakuJokyo" = '0' AND DbT5221."ninteiChosaYoteiKaishiTime" = '0930'
         THEN ''
-        WHEN DbT5221."yoyakuJokyo" = '1' AND DbT5221."ninteiChosaYoteiKaishiTime" = '9:30'
+        WHEN DbT5221."yoyakuJokyo" = '1' AND DbT5221."ninteiChosaYoteiKaishiTime" = '0930'
         THEN '☆'
-        WHEN DbT5221."yoyakuJokyo" = '2' AND DbT5221."ninteiChosaYoteiKaishiTime" = '9:30'
+        WHEN DbT5221."yoyakuJokyo" = '2' AND DbT5221."ninteiChosaYoteiKaishiTime" = '0930'
         THEN '★'
         ELSE ''
         END AS "halfPastNineClock",
-        CASE WHEN DbT5221."yoyakuJokyo" = '0' AND DbT5221."ninteiChosaYoteiKaishiTime" = '10:00'
+        CASE WHEN DbT5221."yoyakuJokyo" = '0' AND DbT5221."ninteiChosaYoteiKaishiTime" = '1000'
         THEN ''
-        WHEN DbT5221."yoyakuJokyo" = '1' AND DbT5221."ninteiChosaYoteiKaishiTime" = '10:00'
+        WHEN DbT5221."yoyakuJokyo" = '1' AND DbT5221."ninteiChosaYoteiKaishiTime" = '1000'
         THEN '☆'
-        WHEN DbT5221."yoyakuJokyo" = '2' AND DbT5221."ninteiChosaYoteiKaishiTime" = '10:00'
+        WHEN DbT5221."yoyakuJokyo" = '2' AND DbT5221."ninteiChosaYoteiKaishiTime" = '1000'
         THEN '★'
         ELSE ''
         END AS "tenClock",
-        CASE WHEN DbT5221."yoyakuJokyo" = '0' AND DbT5221."ninteiChosaYoteiKaishiTime" = '10:30'
+        CASE WHEN DbT5221."yoyakuJokyo" = '0' AND DbT5221."ninteiChosaYoteiKaishiTime" = '1030'
         THEN ''
-        WHEN DbT5221."yoyakuJokyo" = '1' AND DbT5221."ninteiChosaYoteiKaishiTime" = '10:30'
+        WHEN DbT5221."yoyakuJokyo" = '1' AND DbT5221."ninteiChosaYoteiKaishiTime" = '1030'
         THEN '☆'
-        WHEN DbT5221."yoyakuJokyo" = '2' AND DbT5221."ninteiChosaYoteiKaishiTime" = '10:30'
+        WHEN DbT5221."yoyakuJokyo" = '2' AND DbT5221."ninteiChosaYoteiKaishiTime" = '1030'
         THEN '★'
         ELSE ''
         END AS "halfPastTenClock",
-        CASE WHEN DbT5221."yoyakuJokyo" = '0' AND DbT5221."ninteiChosaYoteiKaishiTime" = '11:00'
+        CASE WHEN DbT5221."yoyakuJokyo" = '0' AND DbT5221."ninteiChosaYoteiKaishiTime" = '1100'
         THEN ''
-        WHEN DbT5221."yoyakuJokyo" = '1' AND DbT5221."ninteiChosaYoteiKaishiTime" = '11:00'
+        WHEN DbT5221."yoyakuJokyo" = '1' AND DbT5221."ninteiChosaYoteiKaishiTime" = '1100'
         THEN '☆'
-        WHEN DbT5221."yoyakuJokyo" = '2' AND DbT5221."ninteiChosaYoteiKaishiTime" = '11:00'
+        WHEN DbT5221."yoyakuJokyo" = '2' AND DbT5221."ninteiChosaYoteiKaishiTime" = '1100'
         THEN '★'
         ELSE ''
         END AS "elevenClock",
-        CASE WHEN DbT5221."yoyakuJokyo" = '0' AND DbT5221."ninteiChosaYoteiKaishiTime" = '11:30'
+        CASE WHEN DbT5221."yoyakuJokyo" = '0' AND DbT5221."ninteiChosaYoteiKaishiTime" = '1130'
         THEN ''
-        WHEN DbT5221."yoyakuJokyo" = '1' AND DbT5221."ninteiChosaYoteiKaishiTime" = '11:30'
+        WHEN DbT5221."yoyakuJokyo" = '1' AND DbT5221."ninteiChosaYoteiKaishiTime" = '1130'
         THEN '☆'
-        WHEN DbT5221."yoyakuJokyo" = '2' AND DbT5221."ninteiChosaYoteiKaishiTime" = '11:30'
+        WHEN DbT5221."yoyakuJokyo" = '2' AND DbT5221."ninteiChosaYoteiKaishiTime" = '1130'
         THEN '★'
         ELSE ''
         END AS "halfPastElevenClock",
-        CASE WHEN DbT5221."yoyakuJokyo" = '0' AND DbT5221."ninteiChosaYoteiKaishiTime" = '12:00'
+        CASE WHEN DbT5221."yoyakuJokyo" = '0' AND DbT5221."ninteiChosaYoteiKaishiTime" = '1200'
         THEN ''
-        WHEN DbT5221."yoyakuJokyo" = '1' AND DbT5221."ninteiChosaYoteiKaishiTime" = '12:00'
+        WHEN DbT5221."yoyakuJokyo" = '1' AND DbT5221."ninteiChosaYoteiKaishiTime" = '1200'
         THEN '☆'
-        WHEN DbT5221."yoyakuJokyo" = '2' AND DbT5221."ninteiChosaYoteiKaishiTime" = '12:00'
+        WHEN DbT5221."yoyakuJokyo" = '2' AND DbT5221."ninteiChosaYoteiKaishiTime" = '1200'
         THEN '★'
         ELSE ''
         END AS "twelveClock",
-        CASE WHEN DbT5221."yoyakuJokyo" = '0' AND DbT5221."ninteiChosaYoteiKaishiTime" = '12:30'
+        CASE WHEN DbT5221."yoyakuJokyo" = '0' AND DbT5221."ninteiChosaYoteiKaishiTime" = '1230'
         THEN ''
-        WHEN DbT5221."yoyakuJokyo" = '1' AND DbT5221."ninteiChosaYoteiKaishiTime" = '12:30'
+        WHEN DbT5221."yoyakuJokyo" = '1' AND DbT5221."ninteiChosaYoteiKaishiTime" = '1230'
         THEN '☆'
-        WHEN DbT5221."yoyakuJokyo" = '2' AND DbT5221."ninteiChosaYoteiKaishiTime" = '12:30'
+        WHEN DbT5221."yoyakuJokyo" = '2' AND DbT5221."ninteiChosaYoteiKaishiTime" = '1230'
         THEN '★'
         ELSE ''
         END AS "halfPastTwelveClock",
-        CASE WHEN DbT5221."yoyakuJokyo" = '0' AND DbT5221."ninteiChosaYoteiKaishiTime" = '13:00'
+        CASE WHEN DbT5221."yoyakuJokyo" = '0' AND DbT5221."ninteiChosaYoteiKaishiTime" = '1300'
         THEN ''
-        WHEN DbT5221."yoyakuJokyo" = '1' AND DbT5221."ninteiChosaYoteiKaishiTime" = '13:00'
+        WHEN DbT5221."yoyakuJokyo" = '1' AND DbT5221."ninteiChosaYoteiKaishiTime" = '1300'
         THEN '☆'
-        WHEN DbT5221."yoyakuJokyo" = '2' AND DbT5221."ninteiChosaYoteiKaishiTime" = '13:00'
+        WHEN DbT5221."yoyakuJokyo" = '2' AND DbT5221."ninteiChosaYoteiKaishiTime" = '1300'
         THEN '★'
         ELSE ''
         END AS "thirteenClock",
-        CASE WHEN DbT5221."yoyakuJokyo" = '0' AND DbT5221."ninteiChosaYoteiKaishiTime" = '13:30'
+        CASE WHEN DbT5221."yoyakuJokyo" = '0' AND DbT5221."ninteiChosaYoteiKaishiTime" = '1330'
         THEN ''
-        WHEN DbT5221."yoyakuJokyo" = '1' AND DbT5221."ninteiChosaYoteiKaishiTime" = '13:30'
+        WHEN DbT5221."yoyakuJokyo" = '1' AND DbT5221."ninteiChosaYoteiKaishiTime" = '1330'
         THEN '☆'
-        WHEN DbT5221."yoyakuJokyo" = '2' AND DbT5221."ninteiChosaYoteiKaishiTime" = '13:30'
+        WHEN DbT5221."yoyakuJokyo" = '2' AND DbT5221."ninteiChosaYoteiKaishiTime" = '1330'
         THEN '★'
         ELSE ''
         END AS "halfPastThirteenClock",
-        CASE WHEN DbT5221."yoyakuJokyo" = '0' AND DbT5221."ninteiChosaYoteiKaishiTime" = '14:00'
+        CASE WHEN DbT5221."yoyakuJokyo" = '0' AND DbT5221."ninteiChosaYoteiKaishiTime" = '1400'
         THEN ''
-        WHEN DbT5221."yoyakuJokyo" = '1' AND DbT5221."ninteiChosaYoteiKaishiTime" = '14:00'
+        WHEN DbT5221."yoyakuJokyo" = '1' AND DbT5221."ninteiChosaYoteiKaishiTime" = '1400'
         THEN '☆'
-        WHEN DbT5221."yoyakuJokyo" = '2' AND DbT5221."ninteiChosaYoteiKaishiTime" = '14:00'
+        WHEN DbT5221."yoyakuJokyo" = '2' AND DbT5221."ninteiChosaYoteiKaishiTime" = '1400'
         THEN '★'
         ELSE ''
         END AS "fourteenClock",
-        CASE WHEN DbT5221."yoyakuJokyo" = '0' AND DbT5221."ninteiChosaYoteiKaishiTime" = '14:30'
+        CASE WHEN DbT5221."yoyakuJokyo" = '0' AND DbT5221."ninteiChosaYoteiKaishiTime" = '1430'
         THEN ''
-        WHEN DbT5221."yoyakuJokyo" = '1' AND DbT5221."ninteiChosaYoteiKaishiTime" = '14:30'
+        WHEN DbT5221."yoyakuJokyo" = '1' AND DbT5221."ninteiChosaYoteiKaishiTime" = '1430'
         THEN '☆'
-        WHEN DbT5221."yoyakuJokyo" = '2' AND DbT5221."ninteiChosaYoteiKaishiTime" = '14:30'
+        WHEN DbT5221."yoyakuJokyo" = '2' AND DbT5221."ninteiChosaYoteiKaishiTime" = '1430'
         THEN '★'
         ELSE ''
         END AS "halfPastFourteenClock",
-        CASE WHEN DbT5221."yoyakuJokyo" = '0' AND DbT5221."ninteiChosaYoteiKaishiTime" = '15:00'
+        CASE WHEN DbT5221."yoyakuJokyo" = '0' AND DbT5221."ninteiChosaYoteiKaishiTime" = '1500'
         THEN ''
-        WHEN DbT5221."yoyakuJokyo" = '1' AND DbT5221."ninteiChosaYoteiKaishiTime" = '15:00'
+        WHEN DbT5221."yoyakuJokyo" = '1' AND DbT5221."ninteiChosaYoteiKaishiTime" = '1500'
         THEN '☆'
-        WHEN DbT5221."yoyakuJokyo" = '2' AND DbT5221."ninteiChosaYoteiKaishiTime" = '15:00'
+        WHEN DbT5221."yoyakuJokyo" = '2' AND DbT5221."ninteiChosaYoteiKaishiTime" = '1500'
         THEN '★'
         ELSE ''
         END AS "fifteenClock",
-        CASE WHEN DbT5221."yoyakuJokyo" = '0' AND DbT5221."ninteiChosaYoteiKaishiTime" = '15:30'
+        CASE WHEN DbT5221."yoyakuJokyo" = '0' AND DbT5221."ninteiChosaYoteiKaishiTime" = '1530'
         THEN ''
-        WHEN DbT5221."yoyakuJokyo" = '1' AND DbT5221."ninteiChosaYoteiKaishiTime" = '15:30'
+        WHEN DbT5221."yoyakuJokyo" = '1' AND DbT5221."ninteiChosaYoteiKaishiTime" = '1530'
         THEN '☆'
-        WHEN DbT5221."yoyakuJokyo" = '2' AND DbT5221."ninteiChosaYoteiKaishiTime" = '15:30'
+        WHEN DbT5221."yoyakuJokyo" = '2' AND DbT5221."ninteiChosaYoteiKaishiTime" = '1530'
         THEN '★'
         ELSE ''
         END AS "halfPastFifteenClock",
-        CASE WHEN DbT5221."yoyakuJokyo" = '0' AND DbT5221."ninteiChosaYoteiKaishiTime" = '16:00'
+        CASE WHEN DbT5221."yoyakuJokyo" = '0' AND DbT5221."ninteiChosaYoteiKaishiTime" = '1600'
         THEN ''
-        WHEN DbT5221."yoyakuJokyo" = '1' AND DbT5221."ninteiChosaYoteiKaishiTime" = '16:00'
+        WHEN DbT5221."yoyakuJokyo" = '1' AND DbT5221."ninteiChosaYoteiKaishiTime" = '1600'
         THEN '☆'
-        WHEN DbT5221."yoyakuJokyo" = '2' AND DbT5221."ninteiChosaYoteiKaishiTime" = '16:00'
+        WHEN DbT5221."yoyakuJokyo" = '2' AND DbT5221."ninteiChosaYoteiKaishiTime" = '1600'
         THEN '★'
         ELSE ''
         END AS "sixteenClock",
-        CASE WHEN DbT5221."yoyakuJokyo" = '0' AND DbT5221."ninteiChosaYoteiKaishiTime" = '16:30'
+        CASE WHEN DbT5221."yoyakuJokyo" = '0' AND DbT5221."ninteiChosaYoteiKaishiTime" = '1630'
         THEN ''
-        WHEN DbT5221."yoyakuJokyo" = '1' AND DbT5221."ninteiChosaYoteiKaishiTime" = '16:30'
+        WHEN DbT5221."yoyakuJokyo" = '1' AND DbT5221."ninteiChosaYoteiKaishiTime" = '1630'
         THEN '☆'
-        WHEN DbT5221."yoyakuJokyo" = '2' AND DbT5221."ninteiChosaYoteiKaishiTime" = '16:30'
+        WHEN DbT5221."yoyakuJokyo" = '2' AND DbT5221."ninteiChosaYoteiKaishiTime" = '1630'
         THEN '★'
         ELSE ''
         END AS "halfPastSixteenClock",
-        CASE WHEN DbT5221."yoyakuJokyo" = '0' AND DbT5221."ninteiChosaYoteiKaishiTime" = '17:00'
+        CASE WHEN DbT5221."yoyakuJokyo" = '0' AND DbT5221."ninteiChosaYoteiKaishiTime" = '1700'
         THEN ''
-        WHEN DbT5221."yoyakuJokyo" = '1' AND DbT5221."ninteiChosaYoteiKaishiTime" = '17:00'
+        WHEN DbT5221."yoyakuJokyo" = '1' AND DbT5221."ninteiChosaYoteiKaishiTime" = '1700'
         THEN '☆'
-        WHEN DbT5221."yoyakuJokyo" = '2' AND DbT5221."ninteiChosaYoteiKaishiTime" = '17:00'
+        WHEN DbT5221."yoyakuJokyo" = '2' AND DbT5221."ninteiChosaYoteiKaishiTime" = '1700'
         THEN '★'
         ELSE ''
         END AS "seventeenClock",
-        CASE WHEN DbT5221."yoyakuJokyo" = '0' AND DbT5221."ninteiChosaYoteiKaishiTime" = '17:30'
+        CASE WHEN DbT5221."yoyakuJokyo" = '0' AND DbT5221."ninteiChosaYoteiKaishiTime" = '1730'
         THEN ''
-        WHEN DbT5221."yoyakuJokyo" = '1' AND DbT5221."ninteiChosaYoteiKaishiTime" = '17:30'
+        WHEN DbT5221."yoyakuJokyo" = '1' AND DbT5221."ninteiChosaYoteiKaishiTime" = '1730'
         THEN '☆'
-        WHEN DbT5221."yoyakuJokyo" = '2' AND DbT5221."ninteiChosaYoteiKaishiTime" = '17:30'
+        WHEN DbT5221."yoyakuJokyo" = '2' AND DbT5221."ninteiChosaYoteiKaishiTime" = '1730'
         THEN '★'
         ELSE ''
         END AS "halfPastSeventeenClock",
-        CASE WHEN DbT5221."yoyakuJokyo" = '0' AND DbT5221."ninteiChosaYoteiKaishiTime" = '18:00'
+        CASE WHEN DbT5221."yoyakuJokyo" = '0' AND DbT5221."ninteiChosaYoteiKaishiTime" = '10800'
         THEN ''
-        WHEN DbT5221."yoyakuJokyo" = '1' AND DbT5221."ninteiChosaYoteiKaishiTime" = '18:00'
+        WHEN DbT5221."yoyakuJokyo" = '1' AND DbT5221."ninteiChosaYoteiKaishiTime" = '10800'
         THEN '☆'
-        WHEN DbT5221."yoyakuJokyo" = '2' AND DbT5221."ninteiChosaYoteiKaishiTime" = '18:00'
+        WHEN DbT5221."yoyakuJokyo" = '2' AND DbT5221."ninteiChosaYoteiKaishiTime" = '10800'
         THEN '★'
         ELSE ''
         END AS "eighteenClock",
-        CASE WHEN DbT5221."yoyakuJokyo" = '0' AND DbT5221."ninteiChosaYoteiKaishiTime" = '18:30'
+        CASE WHEN DbT5221."yoyakuJokyo" = '0' AND DbT5221."ninteiChosaYoteiKaishiTime" = '10830'
         THEN ''
-        WHEN DbT5221."yoyakuJokyo" = '1' AND DbT5221."ninteiChosaYoteiKaishiTime" = '18:30'
+        WHEN DbT5221."yoyakuJokyo" = '1' AND DbT5221."ninteiChosaYoteiKaishiTime" = '10830'
         THEN '☆'
-        WHEN DbT5221."yoyakuJokyo" = '2' AND DbT5221."ninteiChosaYoteiKaishiTime" = '18:30'
+        WHEN DbT5221."yoyakuJokyo" = '2' AND DbT5221."ninteiChosaYoteiKaishiTime" = '10830'
         THEN '★'
         ELSE ''
         END AS "halfPastEighteenClock",
-        CASE WHEN DbT5221."yoyakuJokyo" = '0' AND DbT5221."ninteiChosaYoteiKaishiTime" = '19:00'
+        CASE WHEN DbT5221."yoyakuJokyo" = '0' AND DbT5221."ninteiChosaYoteiKaishiTime" = '10900'
         THEN ''
-        WHEN DbT5221."yoyakuJokyo" = '1' AND DbT5221."ninteiChosaYoteiKaishiTime" = '19:00'
+        WHEN DbT5221."yoyakuJokyo" = '1' AND DbT5221."ninteiChosaYoteiKaishiTime" = '10900'
         THEN '☆'
-        WHEN DbT5221."yoyakuJokyo" = '2' AND DbT5221."ninteiChosaYoteiKaishiTime" = '19:00'
+        WHEN DbT5221."yoyakuJokyo" = '2' AND DbT5221."ninteiChosaYoteiKaishiTime" = '10900'
         THEN '★'
         ELSE ''
         END AS "nineteenClock",
-        CASE WHEN DbT5221."yoyakuJokyo" = '0' AND DbT5221."ninteiChosaYoteiKaishiTime" = '19:30'
+        CASE WHEN DbT5221."yoyakuJokyo" = '0' AND DbT5221."ninteiChosaYoteiKaishiTime" = '10930'
         THEN ''
-        WHEN DbT5221."yoyakuJokyo" = '1' AND DbT5221."ninteiChosaYoteiKaishiTime" = '19:30'
+        WHEN DbT5221."yoyakuJokyo" = '1' AND DbT5221."ninteiChosaYoteiKaishiTime" = '10930'
         THEN '☆'
-        WHEN DbT5221."yoyakuJokyo" = '2' AND DbT5221."ninteiChosaYoteiKaishiTime" = '19:30'
+        WHEN DbT5221."yoyakuJokyo" = '2' AND DbT5221."ninteiChosaYoteiKaishiTime" = '10930'
         THEN '★'
         ELSE ''
         END AS "halfPastNineteenClock",
-        CASE WHEN DbT5221."yoyakuJokyo" = '0' AND DbT5221."ninteiChosaYoteiKaishiTime" = '20:00'
+        CASE WHEN DbT5221."yoyakuJokyo" = '0' AND DbT5221."ninteiChosaYoteiKaishiTime" = '2000'
         THEN ''
-        WHEN DbT5221."yoyakuJokyo" = '1' AND DbT5221."ninteiChosaYoteiKaishiTime" = '20:00'
+        WHEN DbT5221."yoyakuJokyo" = '1' AND DbT5221."ninteiChosaYoteiKaishiTime" = '2000'
         THEN '☆'
-        WHEN DbT5221."yoyakuJokyo" = '2' AND DbT5221."ninteiChosaYoteiKaishiTime" = '20:00'
+        WHEN DbT5221."yoyakuJokyo" = '2' AND DbT5221."ninteiChosaYoteiKaishiTime" = '2000'
         THEN '★'
         ELSE ''
         END AS "twentyClock",
-        CASE WHEN DbT5221."yoyakuJokyo" = '0' AND DbT5221."ninteiChosaYoteiKaishiTime" = '20:30'
+        CASE WHEN DbT5221."yoyakuJokyo" = '0' AND DbT5221."ninteiChosaYoteiKaishiTime" = '2030'
         THEN ''
-        WHEN DbT5221."yoyakuJokyo" = '1' AND DbT5221."ninteiChosaYoteiKaishiTime" = '20:30'
+        WHEN DbT5221."yoyakuJokyo" = '1' AND DbT5221."ninteiChosaYoteiKaishiTime" = '2030'
         THEN '☆'
-        WHEN DbT5221."yoyakuJokyo" = '2' AND DbT5221."ninteiChosaYoteiKaishiTime" = '20:30'
+        WHEN DbT5221."yoyakuJokyo" = '2' AND DbT5221."ninteiChosaYoteiKaishiTime" = '2030'
         THEN '★'
         ELSE ''
         END AS "halfPastTwentyClock"
@@ -473,10 +473,10 @@
         LEFT JOIN rgdb."DbT5910NinteichosaItakusakiJoho" DbT5910
         ON DbT5221."shichosonCode" = DbT5910."shichosonCode"
         AND DbT5221."ninteiChosaItakusakiCode" = DbT5910."ninteichosaItakusakiCode"
-        LEFT JOIN rgdb."DbT4913ChosainJoho" DbT4913
-        ON DbT4913."shichosonCode" = DbT5221."shichosonCode"
-        AND DbT4913."ninteiChosaItakusakiCode" = DbT5221."ninteiChosaItakusakiCode"
-        AND DbT4913."ninteiChosainCode" = DbT5221."ninteiChosainCode"
+        LEFT JOIN rgdb."DbT5913ChosainJoho" DbT5913
+        ON DbT5913."shichosonCode" = DbT5221."shichosonCode"
+        AND DbT5913."ninteiChosaItakusakiCode" = DbT5221."ninteiChosaItakusakiCode"
+        AND DbT5913."ninteiChosainCode" = DbT5221."ninteiChosainCode"
         INNER JOIN rgdb."DbT5101NinteiShinseiJoho" DbT5101
         ON DbT5101."shinseishoKanriNo" = DbT5221."shinseishoKanriNo"
         AND DbT5101."shoriJotaiKubun" in ('0','3')
