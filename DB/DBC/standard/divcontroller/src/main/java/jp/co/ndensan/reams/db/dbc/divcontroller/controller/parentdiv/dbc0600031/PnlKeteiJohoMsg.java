@@ -173,6 +173,12 @@ public class PnlKeteiJohoMsg {
         return ResponseData.of(div).forwardWithEventName(DBC0600031TransitionEventName.明細情報).respond();
     }
 
+    /**
+     * 判断内容が変わるかどうかを判断する
+     *
+     * @param div 画面DIV
+     * @return PnlKeteiJohoMsgHandler
+     */
     private PnlKeteiJohoMsgHandler getHandler(PnlKeteiJohoMsgDiv div) {
         return PnlKeteiJohoMsgHandler.of(div);
     }

@@ -16,14 +16,15 @@ import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.util.ModelBase;
 import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 
 /**
  * 介護保険医療保険加入状況を管理するクラスです。
  */
-public class IryohokenKanyuJokyo extends ModelBase<IryohokenKanyuJokyoIdentifier, DbT1008IryohokenKanyuJokyoEntity, IryohokenKanyuJokyo> implements Serializable {
+public class IryohokenKanyuJokyo
+        extends ModelBase<IryohokenKanyuJokyoIdentifier, DbT1008IryohokenKanyuJokyoEntity, IryohokenKanyuJokyo>
+        implements Serializable {
 
     private final DbT1008IryohokenKanyuJokyoEntity entity;
     private final IryohokenKanyuJokyoIdentifier id;
@@ -186,7 +187,8 @@ public class IryohokenKanyuJokyo extends ModelBase<IryohokenKanyuJokyoIdentifier
     }
 
     /**
-     * 介護保険医療保険加入状況のみを変更対象とします。<br/> {@link DbT1008IryohokenKanyuJokyoEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば変更状態にします。
+     * 介護保険医療保険加入状況のみを変更対象とします。<br/>
+     * {@link DbT1008IryohokenKanyuJokyoEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば変更状態にします。
      *
      * @return 変更対象処理実施後の{@link IryohokenKanyuJokyo}
      */
@@ -200,7 +202,8 @@ public class IryohokenKanyuJokyo extends ModelBase<IryohokenKanyuJokyoIdentifier
     }
 
     /**
-     * 保持する介護保険医療保険加入状況を削除対象とします。<br/> {@link DbT1008IryohokenKanyuJokyoEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば削除状態にします。
+     * 保持する介護保険医療保険加入状況を削除対象とします。<br/>
+     * {@link DbT1008IryohokenKanyuJokyoEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば削除状態にします。
      *
      * @return 削除対象処理実施後の{@link IryohokenKanyuJokyo}
      */

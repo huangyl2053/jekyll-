@@ -7,6 +7,11 @@ package jp.co.ndensan.reams.db.dbc.divcontroller.handler.dbc0710022;
 
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.commonchilddiv.ShokanbaraiketteiJoho.ShokanbaraiketteiJoho.ShokanbaraiketteiJohoDiv;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0710022.MainPanelDiv;
+import jp.co.ndensan.reams.db.dbc.divcontroller.viewbox.ViewStateKeys;
+import jp.co.ndensan.reams.uz.uza.lang.RDate;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.math.Decimal;
+import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 
 /**
  *
@@ -29,38 +34,46 @@ public final class MainPanelHandler {
     }
 
     /**
+     * 内容変更状態
      *
-     * @param div1 div1
-     * @return get内容変更状態
+     * @return boolean
      */
-    public boolean get内容変更状態(MainPanelDiv div1) {
+    public boolean get内容変更状態() {
         ShokanbaraiketteiJohoDiv shokanbaraiketteiJohoDiv = (ShokanbaraiketteiJohoDiv) div.getJutakuKaishuShinseiInfoPanel()
                 .getShokanbaraiKetteiJyohoPanel().getCcdShokanbaraiketteiJoho();
-        ShokanbaraiketteiJohoDiv shokanbaraiketteiJohoDiv1 = (ShokanbaraiketteiJohoDiv) div1.getJutakuKaishuShinseiInfoPanel()
-                .getShokanbaraiKetteiJyohoPanel().getCcdShokanbaraiketteiJoho();
-        boolean f1 = shokanbaraiketteiJohoDiv.getDgSyokanbaraikete().getDataSource().equals(shokanbaraiketteiJohoDiv1.getDgSyokanbaraikete().getDataSource());
-        //   boolean f2 = shokanbaraiketteiJohoDiv.getTxtFuSyikyuriyu1().equals(shokanbaraiketteiJohoDiv1.getTxtFuSyikyuriyu1());
-        //  boolean f3 = shokanbaraiketteiJohoDiv.getTxtFushikyuriyu2().equals(shokanbaraiketteiJohoDiv1.getTxtFushikyuriyu2());
-        // boolean f4 = shokanbaraiketteiJohoDiv.getTxtKetebi().equals(shokanbaraiketteiJohoDiv1.getTxtKetebi());
-        //  boolean f5 = shokanbaraiketteiJohoDiv.getTxtSagakuGoke().equals(shokanbaraiketteiJohoDiv1.getTxtSagakuGoke());
-        //  boolean f6 = shokanbaraiketteiJohoDiv.getTxtShiharaikingakugoke().equals(shokanbaraiketteiJohoDiv1.getTxtShiharaikingakugoke());
-        //  boolean f7 = shokanbaraiketteiJohoDiv.getTxtZogenriyu().equals(shokanbaraiketteiJohoDiv1.getTxtZogenriyu());
-        //  boolean f8 = shokanbaraiketteiJohoDiv.getTxtZogentani().equals(shokanbaraiketteiJohoDiv1.getTxtZogentani());
-        //f1 & f2 & f3 & f4 & f5 & f6 & f7 & f8
-
-        return !f1;
-
+        Decimal 支払金額合計New = shokanbaraiketteiJohoDiv.getTxtShiharaikingakugoke().getValue();
+        Decimal 支払金額合計Old = ViewStateHolder.get(ViewStateKeys.支払金額合計, Decimal.class);
+        if (!支払金額合計New.equals(支払金額合計Old)) {
+            return true;
+        }
+        RString 増減理由New = shokanbaraiketteiJohoDiv.getTxtZogenriyu().getValue();
+        RString 増減理由Old = ViewStateHolder.get(ViewStateKeys.増減理由, RString.class);
+        if (!増減理由New.equals(増減理由Old)) {
+            return true;
+        }
+        int 増減単位New = shokanbaraiketteiJohoDiv.getTxtZogentani().getValue().intValue();
+        int 増減単位Old = ViewStateHolder.get(ViewStateKeys.増減単位, int.class);
+        if (増減単位New != 増減単位Old) {
+            return true;
+        }
+        RDate 決定日New = shokanbaraiketteiJohoDiv.getTxtKetebi().getValue();
+        RDate 決定日Old = ViewStateHolder.get(ViewStateKeys.決定日, RDate.class);
+        if (!決定日New.equals(決定日Old)) {
+            return true;
+        }
+        RString 支給区分New = shokanbaraiketteiJohoDiv.getRdoShikyukubun().getSelectedKey();
+        RString 支給区分Old = ViewStateHolder.get(ViewStateKeys.支給区分, RString.class);
+        if (!支給区分New.equals(支給区分Old)) {
+            return true;
+        }
+        RString fuSyikyuriyu1New = shokanbaraiketteiJohoDiv.getTxtFuSyikyuriyu1().getValue();
+        RString fuSyikyuriyu1Old = ViewStateHolder.get(ViewStateKeys.fuSyikyuriyu1, RString.class);
+        if (!fuSyikyuriyu1New.equals(fuSyikyuriyu1Old)) {
+            return true;
+        }
+        RString fuSyikyuriyu2New = shokanbaraiketteiJohoDiv.getTxtFushikyuriyu2().getValue();
+        RString fuSyikyuriyu2Old = ViewStateHolder.get(ViewStateKeys.fuSyikyuriyu2, RString.class);
+        return !fuSyikyuriyu2New.equals(fuSyikyuriyu2Old);
     }
-    //    ShokanShinsei 償還払支給申請 = get償還払支給申請(被保険者番号, サービス年月, 整理番号);
-//        償還払支給申請 = 償還払支給申請.createBuilderForEdit().
-//                set受付年月日(
-//                        new FlexibleDate(this.parentDiv.getPnlShinsei().getTxtUketsukeYMD().getValue().toString())).
-//                set申請年月日(
-//                        new FlexibleDate(this.parentDiv.getPnlShinsei().getTxtShinseiYMD().getValue().toString())).
-//                set申請理由(this.parentDiv.getPnlShinsei().getTxtMulShinseiRiyu().getValue()).
-//                set申請者区分(this.parentDiv.getPnlShinsei().getRdoShinseisyaKubun().getSelectedValue()).
-//                set申請者氏名(this.parentDiv.getPnlShinsei().getTxtShimeiKanji().getDomain().value()).
-//                set申請者氏名カナ(this.parentDiv.getPnlShinsei().getTxtShimeikana().getDomain().value()).
-//                set支払金額合計(this.parentDiv.getPnlShinsei().getTxtNumShiharaKingakuGk().getValue()).build();
-//        return 償還払支給申請.hasChanged();
+
 }

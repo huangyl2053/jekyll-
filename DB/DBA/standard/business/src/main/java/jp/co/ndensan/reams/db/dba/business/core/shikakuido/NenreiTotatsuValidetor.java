@@ -71,14 +71,26 @@ public class NenreiTotatsuValidetor implements IValidatable {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
+    /**
+     *
+     * @return model
+     */
     public HihokenshaDaichoModel getModel() {
         return model;
     }
 
+    /**
+     *
+     * @return dateOfBirth
+     */
     public IDateOfBirth getDateOfBirth() {
         return dateOfBirth;
     }
 
+    /**
+     *
+     * @return config
+     */
     public NenreiTotatsuKijunConfig getConfig() {
         return config;
     }

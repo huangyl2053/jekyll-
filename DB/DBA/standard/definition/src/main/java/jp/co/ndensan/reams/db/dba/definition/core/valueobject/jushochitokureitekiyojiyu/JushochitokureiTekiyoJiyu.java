@@ -37,6 +37,7 @@ public class JushochitokureiTekiyoJiyu implements IDbColumnMappable, IValidatabl
      *
      * @param code コード
      * @param name 名称
+     * @throws NullPointerException Ex
      */
     public JushochitokureiTekiyoJiyu(RString code, RString name) throws NullPointerException {
         this.code = Objects.requireNonNull(code, UrSystemErrorMessages.値がnull.getReplacedMessage("住所地特例適用事由コード"));
@@ -44,8 +45,7 @@ public class JushochitokureiTekiyoJiyu implements IDbColumnMappable, IValidatabl
     }
 
     /**
-     * DB等からコンストラクタを利用して直接マッピングされた、<br/>
-     * {@link JushochitokureiTekiyoJiyu}が持つcodeについてバリデーションを実施します。
+     * DB等からコンストラクタを利用して直接マッピングされた、<br/> {@link JushochitokureiTekiyoJiyu}が持つcodeについてバリデーションを実施します。
      *
      * @return {@link IValidationMessages}
      */
@@ -62,8 +62,7 @@ public class JushochitokureiTekiyoJiyu implements IDbColumnMappable, IValidatabl
      * @param code {@link JushochitokureiTekiyoJiyu}となる文字列{@link RString}
      * @param name {@link JushochitokureiTekiyoJiyu}となる文字列{@link RString}
      * @return {@link JushochitokureiTekiyoJiyu}
-     * @throws IllegalArgumentException
-     * {@link JushochitokureiTekiyoJiyuSpec}の仕様を満たさない場合
+     * @throws IllegalArgumentException {@link JushochitokureiTekiyoJiyuSpec}の仕様を満たさない場合
      */
     public static JushochitokureiTekiyoJiyu createCheckInstance(RString code, RString name) throws IllegalArgumentException {
         List<IValidationMessage> validResult
