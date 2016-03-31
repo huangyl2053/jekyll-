@@ -12,7 +12,7 @@ import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT5121ShinseiRirekiJohoD
 import jp.co.ndensan.reams.db.dbu.definition.mybatisprm.jukyushikakushomeisho.JukyuShikakuShomeishoMyBatisParameter;
 import jp.co.ndensan.reams.db.dbu.entity.jukyushikakushomeisho.JukyuShikakuShomeishoDataEntity;
 import jp.co.ndensan.reams.db.dbu.entity.jukyushikakushomeisho.JukyuShikakuShomeishoKaiKoEntity;
-import jp.co.ndensan.reams.db.dbu.persistence.db.mapper.relate.jukyushikakushomeisho.JukyuShikakuShomeishoMapper;
+import jp.co.ndensan.reams.db.dbu.persistence.db.mapper.relate.jukyushikakushomeisho.IJukyuShikakuShomeishoMapper;
 import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.GyomuBunrui;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import static jp.co.ndensan.reams.db.dbx.service.ShichosonSecurityJoho.getShichosonSecurityJoho;
@@ -74,14 +74,14 @@ public class JukyuShikakuShomeishoFinder {
     private static final RString 全角スペース = new RString("　");
 
     private final MapperProvider mapperProvider;
-    private final JukyuShikakuShomeishoMapper mapper;
+    private final IJukyuShikakuShomeishoMapper mapper;
 
     /**
      * コンストラクタです。
      */
     public JukyuShikakuShomeishoFinder() {
         this.mapperProvider = InstanceProvider.create(MapperProvider.class);
-        this.mapper = mapperProvider.create(JukyuShikakuShomeishoMapper.class);
+        this.mapper = mapperProvider.create(IJukyuShikakuShomeishoMapper.class);
     }
 
     /**
