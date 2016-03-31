@@ -283,7 +283,7 @@ public class TsuchiShoHakkogoIdoHaaku {
 
     private boolean get住所(ShikibetsuTaishoIdoJoho 異動前PSM結果, ShikibetsuTaishoIdoJoho 異動後PSM結果, boolean flag) {
         if ((異動前PSM結果.get住所() == null && 異動後PSM結果.get住所() != null)
-                || (異動前PSM結果.get郵便番号() != null && 異動後PSM結果.get郵便番号() == null)) {
+                || (異動前PSM結果.get住所() != null && 異動後PSM結果.get住所() == null)) {
             flag = true;
         }
         if ((異動前PSM結果.get住所() != null && 異動後PSM結果.get住所() != null)
@@ -322,11 +322,11 @@ public class TsuchiShoHakkogoIdoHaaku {
 
     private boolean getカナ通称名(ShikibetsuTaishoIdoJoho 異動前PSM結果, ShikibetsuTaishoIdoJoho 異動後PSM結果, boolean flag) {
         if ((異動前PSM結果.getカナ通称名() == null && 異動後PSM結果.getカナ通称名() != null)
-                || (異動前PSM結果.get郵便番号() != null && 異動後PSM結果.get郵便番号() == null)) {
+                || (異動前PSM結果.getカナ通称名() != null && 異動後PSM結果.getカナ通称名() == null)) {
             flag = true;
         }
         if ((異動前PSM結果.getカナ通称名() != null && 異動後PSM結果.getカナ通称名() != null)
-                && (!異動前PSM結果.get郵便番号().equals(異動後PSM結果.get郵便番号()))) {
+                && (!異動前PSM結果.getカナ通称名().equals(異動後PSM結果.getカナ通称名()))) {
             flag = true;
         }
         return flag;
@@ -334,11 +334,11 @@ public class TsuchiShoHakkogoIdoHaaku {
 
     private boolean get通称名(ShikibetsuTaishoIdoJoho 異動前PSM結果, ShikibetsuTaishoIdoJoho 異動後PSM結果, boolean flag) {
         if ((異動前PSM結果.get通称名() == null && 異動後PSM結果.get通称名() != null)
-                || (異動前PSM結果.get郵便番号() != null && 異動後PSM結果.get郵便番号() == null)) {
+                || (異動前PSM結果.get通称名() != null && 異動後PSM結果.get通称名() == null)) {
             flag = true;
         }
         if ((異動前PSM結果.get通称名() != null && 異動後PSM結果.get通称名() != null)
-                && (!異動前PSM結果.get郵便番号().equals(異動後PSM結果.get郵便番号()))) {
+                && (!異動前PSM結果.get通称名().equals(異動後PSM結果.get通称名()))) {
             flag = true;
         }
         return flag;
