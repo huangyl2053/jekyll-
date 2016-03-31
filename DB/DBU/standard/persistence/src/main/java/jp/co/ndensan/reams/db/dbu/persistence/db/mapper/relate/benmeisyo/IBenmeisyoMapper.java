@@ -14,7 +14,7 @@ import jp.co.ndensan.reams.ua.uax.entity.db.basic.UaFt200FindShikibetsuTaishoEnt
  *
  * 弁明情報取得のマッパーインタフェースです。
  */
-public interface BenmeisyoMapper {
+public interface IBenmeisyoMapper {
 
     /**
      * 弁明情報を検索です。
