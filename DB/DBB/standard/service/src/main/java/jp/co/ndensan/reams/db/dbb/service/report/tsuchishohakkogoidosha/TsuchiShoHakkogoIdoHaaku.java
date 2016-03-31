@@ -421,6 +421,7 @@ public class TsuchiShoHakkogoIdoHaaku {
     private DbT2017TsuchishoHakkogoIdoshaEntity set資格異動(
             DbT2017TsuchishoHakkogoIdoshaEntity dbt2017Entity, DbV2001ChoshuHohoEntity dbv2001Entity) {
         // TODO QA340(Redmine#78346)
+        dbv2001Entity.getChoshuHoho10gatsu();
         dbt2017Entity.setIdoNaiyo(IdoNaiyo.資格の異動.getコード());
         dbt2017Entity.setIdoAriFlag(true);
         dbt2017Entity.setState(EntityDataState.Modified);
