@@ -70,7 +70,7 @@
      "toLayoutSubGyomuCode": "DBE",
      "toLayoutName": "DBE2020009",
      "toLayoutTitle": "認定調査スケジュール表発行",
-     "toState": "印刷"
+     "toState": "初期化"
     },
     {
      "id": "6",
