@@ -20,7 +20,11 @@ import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 /**
  * 老齢福祉年金受給者を管理するクラスです。
  */
-public class RoreiFukushiNenkinJukyusha extends ModelBase<RoreiFukushiNenkinJukyushaIdentifier, DbT7006RoreiFukushiNenkinJukyushaEntity, RoreiFukushiNenkinJukyusha> implements Serializable {
+public class RoreiFukushiNenkinJukyusha
+        extends
+        ModelBase<
+        RoreiFukushiNenkinJukyushaIdentifier, DbT7006RoreiFukushiNenkinJukyushaEntity, RoreiFukushiNenkinJukyusha>
+        implements Serializable {
 
     private final DbT7006RoreiFukushiNenkinJukyushaEntity entity;
     private final RoreiFukushiNenkinJukyushaIdentifier id;

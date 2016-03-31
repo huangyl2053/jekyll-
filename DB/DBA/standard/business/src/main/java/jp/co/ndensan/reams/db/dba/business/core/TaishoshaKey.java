@@ -16,10 +16,18 @@ import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
  */
 public class TaishoshaKey implements Serializable {
 
+    /**
+     * @param hihokenshaNo HihokenshaNo。
+     * @param empty ShikibetsuCode。
+     * @param empty0 SetaiCode。
+     */
     public TaishoshaKey(HihokenshaNo hihokenshaNo, ShikibetsuCode empty, SetaiCode empty0) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
+    /**
+     * @return ShikibetsuCode。
+     */
     public ShikibetsuCode get識別コード() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }

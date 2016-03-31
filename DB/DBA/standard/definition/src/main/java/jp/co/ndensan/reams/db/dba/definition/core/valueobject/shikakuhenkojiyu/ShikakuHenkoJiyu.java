@@ -37,6 +37,7 @@ public class ShikakuHenkoJiyu implements IValueObject<RString>, IDbColumnMappabl
      *
      * @param code コード
      * @param name 名称
+     * @throws NullPointerException Ex
      */
     public ShikakuHenkoJiyu(RString code, RString name) throws NullPointerException {
         this.code = Objects.requireNonNull(code, UrSystemErrorMessages.値がnull.getReplacedMessage("資格変更事由コード"));
@@ -44,8 +45,7 @@ public class ShikakuHenkoJiyu implements IValueObject<RString>, IDbColumnMappabl
     }
 
     /**
-     * DB等からコンストラクタを利用して直接マッピングされた、<br/>
-     * {@link ShikakuHenkoJiyu}が持つcodeについてバリデーションを実施します。
+     * DB等からコンストラクタを利用して直接マッピングされた、<br/> {@link ShikakuHenkoJiyu}が持つcodeについてバリデーションを実施します。
      *
      * @return {@link IValidationMessages}
      */

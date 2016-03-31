@@ -21,21 +21,27 @@ import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
  */
 public class IIryohokenKanyuJokyoManager {
 
-    private final MapperProvider mapperProvider;
     private final DbT1008IryohokenKanyuJokyoDac dac;
 
+    /**
+     * コンストラクタです。
+     *
+     */
     public IIryohokenKanyuJokyoManager() {
 
-        mapperProvider = InstanceProvider.create(MapperProvider.class);
         dac = InstanceProvider.create(DbT1008IryohokenKanyuJokyoDac.class);
     }
 
     IIryohokenKanyuJokyoManager(DbT1008IryohokenKanyuJokyoDac dac, MapperProvider mapperProvider) {
 
-        this.mapperProvider = mapperProvider;
         this.dac = dac;
     }
 
+    /**
+     * コンストラクタです。
+     *
+     * @return object IIryohokenKanyuJokyoManager
+     */
     public static IIryohokenKanyuJokyoManager createInstance() {
         return InstanceProvider.create(IIryohokenKanyuJokyoManager.class);
     }

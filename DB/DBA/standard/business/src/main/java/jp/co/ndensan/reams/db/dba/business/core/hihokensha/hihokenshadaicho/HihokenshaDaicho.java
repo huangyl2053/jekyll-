@@ -38,7 +38,9 @@ import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 /**
  * 被保険者台帳管理を管理するクラスです。
  */
-public class HihokenshaDaicho extends ParentModelBase<HihokenshaDaichoIdentifier, DbT1001HihokenshaDaichoEntity, HihokenshaDaicho> implements Serializable {
+public class HihokenshaDaicho
+        extends ParentModelBase<HihokenshaDaichoIdentifier, DbT1001HihokenshaDaichoEntity, HihokenshaDaicho>
+        implements Serializable {
 
     private final DbT1001HihokenshaDaichoEntity entity;
     private final HihokenshaDaichoIdentifier id;
@@ -384,7 +386,7 @@ public class HihokenshaDaicho extends ParentModelBase<HihokenshaDaichoIdentifier
      *
      * @return 論理削除フラグ
      */
-    public boolean get論理削除フラグ() {
+    public boolean is論理削除フラグ() {
         return entity.getLogicalDeletedFlag();
     }
 
