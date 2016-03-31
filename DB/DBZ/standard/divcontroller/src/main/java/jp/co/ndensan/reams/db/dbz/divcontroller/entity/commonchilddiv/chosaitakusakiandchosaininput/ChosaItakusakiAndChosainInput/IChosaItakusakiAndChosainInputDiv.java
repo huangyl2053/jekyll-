@@ -28,19 +28,4 @@ public interface IChosaItakusakiAndChosainInputDiv extends ICommonChildDivBasePr
      * @param HdnShinseishoKanriNo 申請管理番号
      */
     void setHdnShinseishoKanriNo(RString HdnShinseishoKanriNo);
-
-    /**
-     * 認定調査委託先情報の認定調査委託先コード
-     *
-     * @return 認定調査委託先コード
-     */
-    RString getChosaItakusakiCode();
-
-    /**
-     * 認定調査委託先情報の認定調査員コード
-     *
-     * @return 認定調査員コード
-     */
-    RString getChosainCode();
-
 }

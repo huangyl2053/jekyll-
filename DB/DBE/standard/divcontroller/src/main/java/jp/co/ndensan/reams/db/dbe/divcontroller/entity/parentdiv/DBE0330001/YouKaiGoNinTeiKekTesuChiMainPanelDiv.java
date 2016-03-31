@@ -125,6 +125,16 @@ public class YouKaiGoNinTeiKekTesuChiMainPanelDiv extends Panel {
     }
 
     @JsonIgnore
+    public RadioButton getRadPrintCondition() {
+        return this.getSearchConditionPanel().getRadPrintCondition();
+    }
+
+    @JsonIgnore
+    public void  setRadPrintCondition(RadioButton radPrintCondition) {
+        this.getSearchConditionPanel().setRadPrintCondition(radPrintCondition);
+    }
+
+    @JsonIgnore
     public RadioButton getRadKekkaTsuchiOutputTaisho() {
         return this.getSearchConditionPanel().getRadKekkaTsuchiOutputTaisho();
     }
@@ -132,26 +142,6 @@ public class YouKaiGoNinTeiKekTesuChiMainPanelDiv extends Panel {
     @JsonIgnore
     public void  setRadKekkaTsuchiOutputTaisho(RadioButton radKekkaTsuchiOutputTaisho) {
         this.getSearchConditionPanel().setRadKekkaTsuchiOutputTaisho(radKekkaTsuchiOutputTaisho);
-    }
-
-    @JsonIgnore
-    public TextBoxNum getTxtDispMax() {
-        return this.getSearchConditionPanel().getTxtDispMax();
-    }
-
-    @JsonIgnore
-    public void  setTxtDispMax(TextBoxNum txtDispMax) {
-        this.getSearchConditionPanel().setTxtDispMax(txtDispMax);
-    }
-
-    @JsonIgnore
-    public Button getBtnClear() {
-        return this.getSearchConditionPanel().getBtnClear();
-    }
-
-    @JsonIgnore
-    public void  setBtnClear(Button btnClear) {
-        this.getSearchConditionPanel().setBtnClear(btnClear);
     }
 
     @JsonIgnore
@@ -197,16 +187,6 @@ public class YouKaiGoNinTeiKekTesuChiMainPanelDiv extends Panel {
     @JsonIgnore
     public void  setTxtNinteiJokyoTeikyoYMD(TextBoxDate txtNinteiJokyoTeikyoYMD) {
         this.getPrintPanel().setTxtNinteiJokyoTeikyoYMD(txtNinteiJokyoTeikyoYMD);
-    }
-
-    @JsonIgnore
-    public RadioButton getRadPrintCondition() {
-        return this.getPrintPanel().getRadPrintCondition();
-    }
-
-    @JsonIgnore
-    public void  setRadPrintCondition(RadioButton radPrintCondition) {
-        this.getPrintPanel().setRadPrintCondition(radPrintCondition);
     }
 
     // </editor-fold>

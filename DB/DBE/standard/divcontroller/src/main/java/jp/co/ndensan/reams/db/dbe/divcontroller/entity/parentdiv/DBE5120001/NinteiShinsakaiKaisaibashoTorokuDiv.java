@@ -18,7 +18,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.domain.*;
  * @author 自動生成
  */
 public class NinteiShinsakaiKaisaibashoTorokuDiv extends Panel {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-01-15_09-59-03">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：バージョン情報無し">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -106,26 +106,6 @@ public class NinteiShinsakaiKaisaibashoTorokuDiv extends Panel {
     }
 
     @JsonIgnore
-    public TextBoxNum getTxtDispMax() {
-        return this.getShinsakaiKaisaibashokensaku().getTxtDispMax();
-    }
-
-    @JsonIgnore
-    public void  setTxtDispMax(TextBoxNum txtDispMax) {
-        this.getShinsakaiKaisaibashokensaku().setTxtDispMax(txtDispMax);
-    }
-
-    @JsonIgnore
-    public Button getBtnClear() {
-        return this.getShinsakaiKaisaibashokensaku().getBtnClear();
-    }
-
-    @JsonIgnore
-    public void  setBtnClear(Button btnClear) {
-        this.getShinsakaiKaisaibashokensaku().setBtnClear(btnClear);
-    }
-
-    @JsonIgnore
     public Button getBtnKensaku() {
         return this.getShinsakaiKaisaibashokensaku().getBtnKensaku();
     }
@@ -206,6 +186,11 @@ public class NinteiShinsakaiKaisaibashoTorokuDiv extends Panel {
     }
 
     @JsonIgnore
+    public ICodeInputDiv getCcdKaisaiChikuCode() {
+        return this.getShinakaiKaisaIbashoShosai().getCcdKaisaiChikuCode();
+    }
+
+    @JsonIgnore
     public Button getBtnupdate() {
         return this.getShinakaiKaisaIbashoShosai().getBtnupdate();
     }
@@ -223,11 +208,6 @@ public class NinteiShinsakaiKaisaibashoTorokuDiv extends Panel {
     @JsonIgnore
     public void  setBtnback(Button btnback) {
         this.getShinakaiKaisaIbashoShosai().setBtnback(btnback);
-    }
-
-    @JsonIgnore
-    public ICodeInputDiv getCcdKaisaiChikuCode() {
-        return this.getShinakaiKaisaIbashoShosai().getCcdKaisaiChikuCode();
     }
 
     // </editor-fold>
