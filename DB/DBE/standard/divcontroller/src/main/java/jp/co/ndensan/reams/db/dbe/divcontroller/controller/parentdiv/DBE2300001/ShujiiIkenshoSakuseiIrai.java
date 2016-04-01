@@ -159,7 +159,7 @@ public class ShujiiIkenshoSakuseiIrai {
      */
     public ResponseData<ShujiiIkenshoSakuseiIraiDiv> onClick_btnSearch(ShujiiIkenshoSakuseiIraiDiv div) {
 
-        RString 被保険者番号 = div.getCcdHihokenshaFinder().get被保険者番号();
+        RString 被保険者番号 = div.getCcdNinteishinseishaFinder().getNinteiShinseishaFinderDiv().getTxtHihokenshaNumber().getValue();
         // QA894　最大表示件数の確認
         ShujiiIkenshoSakuseiIraiManager manager = ShujiiIkenshoSakuseiIraiManager.createInstance();
         createHandler(div).init(manager.get申請者情報(被保険者番号).records());

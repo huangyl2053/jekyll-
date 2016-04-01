@@ -63,7 +63,7 @@ public class ShujiiIkenshoSakuseiIraiHandler {
         List<dgShinseishaIchiran_Row> 申請者一覧 = new ArrayList<>();
         for (Shujiiikenshosakuseiirai 申請者 : 申請者情報一覧) {
             dgShinseishaIchiran_Row row = new dgShinseishaIchiran_Row();
-            row.setHihokenshaNo(div.getCcdHihokenshaFinder().get被保険者番号());
+            row.setHihokenshaNo(div.getCcdNinteishinseishaFinder().getNinteiShinseishaFinderDiv().getTxtHihokenshaNumber().getValue());
             if (申請者.getTemp_被保険者氏名() != null) {
                 row.setHihokennshaShimei(申請者.getTemp_被保険者氏名().value());
             }
