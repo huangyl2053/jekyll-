@@ -6,9 +6,7 @@
 package jp.co.ndensan.reams.db.dbe.divcontroller.handler.parentdiv.DBE5250002;
 
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 import jp.co.ndensan.reams.db.dbe.business.core.hanteikekkajouhoushuturyoku.HanteiKekkaJouhouShuturyokuBusiness;
 import jp.co.ndensan.reams.db.dbe.definition.batchprm.hanteikekkajohoshutsuryoku.HanteiKekkaJohoShutsuryokuBatchParamter;
 import jp.co.ndensan.reams.db.dbe.definition.core.hanteikekkajouhoushuturyoku.HanteiKekkaJouhouShuturyokuParameter;
@@ -167,6 +165,7 @@ public class NijihanteiKekkaOutputHandler {
                 } else {
                     dgFukushiyoguShohin.setDataShutsuryoku(new RString("済"));
                 }
+                dgFukushiyoguShohin.setShinseishoKanriNo(jigyoshaInput.get申請書管理番号());
                 dgTaishoshaIchiranList.add(dgFukushiyoguShohin);
             }
         }
@@ -189,9 +188,9 @@ public class NijihanteiKekkaOutputHandler {
                 = new HanteiKekkaJohoShutsuryokuBatchParamter();
         hanteibatchParameter.setShinseishoKanriNo(shinseishoKanriNo);
         hanteibatchParameter.setNijiHanteiYMDFrom(nijidiv.getKensakuJoken().getTxtNijihanteDateRange().getFromValue() == null ? RString.EMPTY
-                        : new RString(nijidiv.getKensakuJoken().getTxtNijihanteDateRange().getFromValue().toString()));
+                : new RString(nijidiv.getKensakuJoken().getTxtNijihanteDateRange().getFromValue().toString()));
         hanteibatchParameter.setNijiHanteiYMDTo(nijidiv.getKensakuJoken().getTxtNijihanteDateRange().getToValue() == null ? RString.EMPTY
-                        : new RString(nijidiv.getKensakuJoken().getTxtNijihanteDateRange().getToValue().toString()));
+                : new RString(nijidiv.getKensakuJoken().getTxtNijihanteDateRange().getToValue().toString()));
 //        (shinseishoKanriNo,
 //                        nijidiv.getKensakuJoken().getTxtNijihanteDateRange().getFromValue() == null ? RString.EMPTY
 //                        : new RString(nijidiv.getKensakuJoken().getTxtNijihanteDateRange().getFromValue().toString()),
@@ -212,14 +211,14 @@ public class NijihanteiKekkaOutputHandler {
                 shinseishoKanriNo.add(row.getShinseishoKanriNo());
             }
         }
-                HanteiKekkaJohoShutsuryokuBatchParamter hanteibatchParameter
+        HanteiKekkaJohoShutsuryokuBatchParamter hanteibatchParameter
                 = new HanteiKekkaJohoShutsuryokuBatchParamter();
         hanteibatchParameter.setShinseishoKanriNo(shinseishoKanriNo);
         hanteibatchParameter.setNijiHanteiYMDFrom(nijidiv.getKensakuJoken().getTxtNijihanteDateRange().getFromValue() == null ? RString.EMPTY
-                        : new RString(nijidiv.getKensakuJoken().getTxtNijihanteDateRange().getFromValue().toString()));
+                : new RString(nijidiv.getKensakuJoken().getTxtNijihanteDateRange().getFromValue().toString()));
         hanteibatchParameter.setNijiHanteiYMDTo(nijidiv.getKensakuJoken().getTxtNijihanteDateRange().getToValue() == null ? RString.EMPTY
-                        : new RString(nijidiv.getKensakuJoken().getTxtNijihanteDateRange().getToValue().toString()));
-        
+                : new RString(nijidiv.getKensakuJoken().getTxtNijihanteDateRange().getToValue().toString()));
+
 //        HanteiKekkaJohoShutsuryokuBatchParamter hanteibatchParameter
 //                = new HanteiKekkaJohoShutsuryokuBatchParamter(shinseishoKanriNo,
 //                        nijidiv.getKensakuJoken().getTxtNijihanteDateRange().getFromValue() == null ? RString.EMPTY
