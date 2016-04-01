@@ -116,7 +116,7 @@
         WHERE
         DbT1005".jigyoshaNo"= #{jigyoshaNo}
         AND
-        DbT1005."jigyoshaShubetsu"= #{jigyoshaShubetsu}
+        DbT1005."jigyoshaShubetsu"= #{事業者種別}
         AND
         DbT1005."isDeleted"<![CDATA[<>]]>TRUE
         AND
