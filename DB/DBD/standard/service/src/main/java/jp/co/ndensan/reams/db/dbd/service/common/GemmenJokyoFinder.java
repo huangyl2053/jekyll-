@@ -15,6 +15,7 @@ import jp.co.ndensan.reams.db.dbd.business.core.futanwariai.RiyoshaFutanWariaiMe
 import jp.co.ndensan.reams.db.dbd.business.shiharaihohohenko.ShiharaiHohoHenkoSummary;
 import jp.co.ndensan.reams.db.dbd.definition.common.GemmenJokyoParameter;
 import jp.co.ndensan.reams.db.dbd.definition.enumeratedtype.core.JukyuShinseiJiyu;
+import jp.co.ndensan.reams.db.dbd.definition.enumeratedtype.core.ShiharaiHenkoKanriKubun;
 import jp.co.ndensan.reams.db.dbd.definition.enumeratedtype.core.ShiharaiHenkoTorokuKubun;
 import jp.co.ndensan.reams.db.dbd.definition.enumeratedtype.core.ShinseiJokyoKubun;
 import jp.co.ndensan.reams.db.dbd.entity.common.NursingCareInformationCodeEntity;
@@ -163,52 +164,46 @@ public class GemmenJokyoFinder {
             支払方法変更概況.set給付額減額_終了日(FlexibleDate.EMPTY);
             給付制限情報 = new ShiharaiHohoHenkoSummaryBusiness(支払方法変更概況);
         } else {
-            //TODO
-//            DbT4021ShiharaiHohoHenkoEntity 支払方法変更取得結果_１号償還払い化 = get取得結果(ShiharaiHenkoKanriKubun._１号償還払い化, dbt4021EntityList);
-//            DbT4021ShiharaiHohoHenkoEntity 支払方法変更取得結果_２号差止 = get取得結果(ShiharaiHenkoKanriKubun._２号差止, dbt4021EntityList);
-//            if (支払方法変更取得結果_１号償還払い化 != null) {
-//                支払方法変更概況.set支払方法変更_登録区分(ShiharaiHenkoTorokuKubun.toValue(支払方法変更取得結果_１号償還払い化.getKanriKubun()));
-//                支払方法変更概況.set支払方法変更_開始日(支払方法変更取得結果_１号償還払い化.getTekiyoKaishiYMD());
-//                支払方法変更概況.set支払方法変更_終了日(支払方法変更取得結果_１号償還払い化.getTekiyoShuryoYMD());
-//            } else if (支払方法変更取得結果_２号差止 != null) {
-//                支払方法変更概況.set支払方法変更_登録区分(ShiharaiHenkoTorokuKubun.toValue(支払方法変更取得結果_２号差止.getKanriKubun()));
-//                支払方法変更概況.set支払方法変更_開始日(支払方法変更取得結果_２号差止.getTekiyoKaishiYMD());
-//                支払方法変更概況.set支払方法変更_終了日(支払方法変更取得結果_２号差止.getTekiyoShuryoYMD());
-//            } else {
-//                支払方法変更概況.set支払方法変更_登録区分(ShiharaiHenkoTorokuKubun._空);
-//                支払方法変更概況.set支払方法変更_開始日(FlexibleDate.EMPTY);
-//                支払方法変更概況.set支払方法変更_終了日(FlexibleDate.EMPTY);
-//            }
-//            DbT4021ShiharaiHohoHenkoEntity 支払方法変更取得結果_１号給付額減額 = get取得結果(ShiharaiHenkoKanriKubun._１号給付額減額, dbt4021EntityList);
-//            if (支払方法変更取得結果_１号給付額減額 != null) {
-//                支払方法変更概況.set給付額減額_登録区分(ShiharaiHenkoTorokuKubun.toValue(支払方法変更取得結果_１号給付額減額.getKanriKubun()));
-//                支払方法変更概況.set給付額減額_開始日(支払方法変更取得結果_１号給付額減額.getTekiyoKaishiYMD());
-//                支払方法変更概況.set給付額減額_終了日(支払方法変更取得結果_１号給付額減額.getTekiyoShuryoYMD());
-//            } else {
-//                支払方法変更概況.set給付額減額_登録区分(ShiharaiHenkoTorokuKubun._空);
-//                支払方法変更概況.set給付額減額_開始日(FlexibleDate.EMPTY);
-//                支払方法変更概況.set給付額減額_終了日(FlexibleDate.EMPTY);
-//            }
-            支払方法変更概況.set支払方法変更_登録区分(ShiharaiHenkoTorokuKubun._空);
-            支払方法変更概況.set支払方法変更_開始日(FlexibleDate.EMPTY);
-            支払方法変更概況.set支払方法変更_終了日(FlexibleDate.EMPTY);
-            支払方法変更概況.set給付額減額_登録区分(ShiharaiHenkoTorokuKubun._空);
-            支払方法変更概況.set給付額減額_開始日(FlexibleDate.EMPTY);
-            支払方法変更概況.set給付額減額_終了日(FlexibleDate.EMPTY);
+            DbT4021ShiharaiHohoHenkoEntity 支払方法変更取得結果_１号償還払い化 = get取得結果(ShiharaiHenkoKanriKubun._１号償還払い化, dbt4021EntityList);
+            DbT4021ShiharaiHohoHenkoEntity 支払方法変更取得結果_２号差止 = get取得結果(ShiharaiHenkoKanriKubun._２号差止, dbt4021EntityList);
+            if (支払方法変更取得結果_１号償還払い化 != null) {
+                支払方法変更概況.set支払方法変更_登録区分(ShiharaiHenkoTorokuKubun.toValue(支払方法変更取得結果_１号償還払い化.getKanriKubun()));
+                支払方法変更概況.set支払方法変更_開始日(支払方法変更取得結果_１号償還払い化.getTekiyoKaishiYMD());
+                支払方法変更概況.set支払方法変更_終了日(支払方法変更取得結果_１号償還払い化.getTekiyoShuryoYMD());
+            } else if (支払方法変更取得結果_２号差止 != null) {
+                支払方法変更概況.set支払方法変更_登録区分(ShiharaiHenkoTorokuKubun.toValue(支払方法変更取得結果_２号差止.getKanriKubun()));
+                支払方法変更概況.set支払方法変更_開始日(支払方法変更取得結果_２号差止.getTekiyoKaishiYMD());
+                支払方法変更概況.set支払方法変更_終了日(支払方法変更取得結果_２号差止.getTekiyoShuryoYMD());
+            } else {
+                支払方法変更概況.set支払方法変更_登録区分(ShiharaiHenkoTorokuKubun._空);
+                支払方法変更概況.set支払方法変更_開始日(FlexibleDate.EMPTY);
+                支払方法変更概況.set支払方法変更_終了日(FlexibleDate.EMPTY);
+            }
+            DbT4021ShiharaiHohoHenkoEntity 支払方法変更取得結果_１号給付額減額 = get取得結果(ShiharaiHenkoKanriKubun._１号給付額減額, dbt4021EntityList);
+            if (支払方法変更取得結果_１号給付額減額 != null) {
+                支払方法変更概況.set給付額減額_登録区分(ShiharaiHenkoTorokuKubun.toValue(支払方法変更取得結果_１号給付額減額.getKanriKubun()));
+                支払方法変更概況.set給付額減額_開始日(支払方法変更取得結果_１号給付額減額.getTekiyoKaishiYMD());
+                支払方法変更概況.set給付額減額_終了日(支払方法変更取得結果_１号給付額減額.getTekiyoShuryoYMD());
+            } else {
+                支払方法変更概況.set給付額減額_登録区分(ShiharaiHenkoTorokuKubun._空);
+                支払方法変更概況.set給付額減額_開始日(FlexibleDate.EMPTY);
+                支払方法変更概況.set給付額減額_終了日(FlexibleDate.EMPTY);
+            }
             給付制限情報 = new ShiharaiHohoHenkoSummaryBusiness(支払方法変更概況);
         }
         return 給付制限情報;
     }
 
-//    private DbT4021ShiharaiHohoHenkoEntity get取得結果(ShiharaiHenkoKanriKubun 管理区分,
-//            List<DbT4021ShiharaiHohoHenkoEntity> dbt4021EntityList) {
-//        for (DbT4021ShiharaiHohoHenkoEntity dbT4021Entity : dbt4021EntityList) {
-//            if (管理区分.getコード().equals(dbT4021Entity.getKanriKubun())) {
-//                return dbT4021Entity;
-//            }
-//        }
-//        return null;
-//    }
+    private DbT4021ShiharaiHohoHenkoEntity get取得結果(ShiharaiHenkoKanriKubun 管理区分,
+            List<DbT4021ShiharaiHohoHenkoEntity> dbt4021EntityList) {
+        for (DbT4021ShiharaiHohoHenkoEntity dbT4021Entity : dbt4021EntityList) {
+            if (管理区分.getコード().equals(dbT4021Entity.getKanriKubun())) {
+                return dbT4021Entity;
+            }
+        }
+        return null;
+    }
+
     /**
      * 指定の被保険者番号を持つ被保険者の識別コードを取得して返却します。
      *
