@@ -7,7 +7,7 @@ package jp.co.ndensan.reams.db.dbd.persistence.db.mapper.relate.gemmenjokyo;
 
 import java.util.List;
 import jp.co.ndensan.reams.db.dbd.entity.db.basic.DbT3114RiyoshaFutanWariaiMeisaiEntity;
-import jp.co.ndensan.reams.db.dbd.definition.common.GemmenJokyoParameter;
+import jp.co.ndensan.reams.db.dbd.definition.mybatisprm.gemmenjokyo.GemmenJokyoParameter;
 import jp.co.ndensan.reams.db.dbd.entity.common.NursingCareInformationCodeEntity;
 import jp.co.ndensan.reams.db.dbd.entity.db.basic.DbT4021ShiharaiHohoHenkoEntity;
 import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbV1001HihokenshaDaichoEntity;
