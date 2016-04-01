@@ -226,6 +226,7 @@ public class ShisetsuNyutaishoRirekiKanriHandler {
                 row.setState(更新);
                 int 履歴番号 = Integer.parseInt(row.getRirekiNo().toString());
                 ShisetsuNyutaishoIdentifier 介護保険施設入退所の識別子 = new ShisetsuNyutaishoIdentifier(識別コード, 履歴番号);
+                施設入退所情報Model.deleteOrRemove(介護保険施設入退所の識別子);
                 施設入退所情報Model.add(修正の処理(介護保険施設入退所の識別子, 施設入退所情報Model));
             }
         } else if (削除.equals(div.getInputMode())) {
@@ -233,6 +234,7 @@ public class ShisetsuNyutaishoRirekiKanriHandler {
                 row.setState(削除);
                 int 履歴番号 = Integer.parseInt(row.getRirekiNo().toString());
                 ShisetsuNyutaishoIdentifier 介護保険施設入退所の識別子 = new ShisetsuNyutaishoIdentifier(識別コード, 履歴番号);
+                施設入退所情報Model.deleteOrRemove(介護保険施設入退所の識別子);
                 施設入退所情報Model.add(削除の処理(介護保険施設入退所の識別子, 施設入退所情報Model));
             } else {
                 listRow.remove(row);
@@ -261,11 +263,11 @@ public class ShisetsuNyutaishoRirekiKanriHandler {
                 KaigoHohenShisetsuNyutaishoshaKanriManager.createInstance().
                         施設入退所履歴一覧情報の追加(施設入退所情報Model.get(介護保険施設入退所の識別子));
             }
-            if (更新.equals(row.getRirekiNo())) {
+            if (更新.equals(row.getState())) {
                 KaigoHohenShisetsuNyutaishoshaKanriManager.createInstance().
                         介護認定審査会開催場所情報の更新(施設入退所情報Model.get(介護保険施設入退所の識別子));
             }
-            if (削除.equals(row.getRirekiNo())) {
+            if (削除.equals(row.getState())) {
                 KaigoHohenShisetsuNyutaishoshaKanriManager.createInstance().
                         施設入退所履歴一覧情報の削除(施設入退所情報Model.get(介護保険施設入退所の識別子));
             }
@@ -289,6 +291,7 @@ public class ShisetsuNyutaishoRirekiKanriHandler {
             rowList.add(row);
 
         }
+        Collections.sort(rowList, new ShisetsuNyutaishoRirekiKanriHandler.RirekiNoDateComparator());
         div.getDgShisetsuNyutaishoRireki().setDataSource(rowList);
     }
 
@@ -375,7 +378,6 @@ public class ShisetsuNyutaishoRirekiKanriHandler {
         JigyoshaNo 施設コード = JigyoshaNo.EMPTY;
         FlexibleDate 入所年月日 = FlexibleDate.EMPTY;
         FlexibleDate 退所年月日 = FlexibleDate.EMPTY;
-        RString 利用モード = ViewStateHolder.get(ViewStateKeys.施設入退所履歴_利用モード, RString.class);
         if (div.getShisetsuNyutaishoInput().getTxtNyushoDate().getValue() != null
                 && !div.getShisetsuNyutaishoInput().getTxtNyushoDate().getValue().isEmpty()) {
             入所処理年月日 = new FlexibleDate(RDate.getNowDate().toString());
@@ -393,7 +395,7 @@ public class ShisetsuNyutaishoRirekiKanriHandler {
             施設種類 = div.getShisetsuNyutaishoInput().getCcdShisetsuJoho().get施設種類();
         }
         if (div.getShisetsuNyutaishoInput().getCcdShisetsuJoho().getNyuryokuShisetsuKodo() != null
-                && div.getShisetsuNyutaishoInput().getCcdShisetsuJoho().getNyuryokuShisetsuKodo().isEmpty()) {
+                && !div.getShisetsuNyutaishoInput().getCcdShisetsuJoho().getNyuryokuShisetsuKodo().isEmpty()) {
             施設コード = new JigyoshaNo(div.getShisetsuNyutaishoInput().getCcdShisetsuJoho().getNyuryokuShisetsuKodo());
         }
         return 介護保険施設入退所情報.createBuilderForEdit()
@@ -418,7 +420,6 @@ public class ShisetsuNyutaishoRirekiKanriHandler {
         JigyoshaNo 施設コード = JigyoshaNo.EMPTY;
         FlexibleDate 入所年月日 = FlexibleDate.EMPTY;
         FlexibleDate 退所年月日 = FlexibleDate.EMPTY;
-        RString 利用モード = ViewStateHolder.get(ViewStateKeys.施設入退所履歴_利用モード, RString.class);
         if (div.getShisetsuNyutaishoInput().getTxtNyushoDate().getValue() != null
                 && !div.getShisetsuNyutaishoInput().getTxtNyushoDate().getValue().isEmpty()) {
             入所処理年月日 = new FlexibleDate(RDate.getNowDate().toString());
@@ -436,7 +437,7 @@ public class ShisetsuNyutaishoRirekiKanriHandler {
             施設種類 = div.getShisetsuNyutaishoInput().getCcdShisetsuJoho().get施設種類();
         }
         if (div.getShisetsuNyutaishoInput().getCcdShisetsuJoho().getNyuryokuShisetsuKodo() != null
-                && div.getShisetsuNyutaishoInput().getCcdShisetsuJoho().getNyuryokuShisetsuKodo().isEmpty()) {
+                && !div.getShisetsuNyutaishoInput().getCcdShisetsuJoho().getNyuryokuShisetsuKodo().isEmpty()) {
             施設コード = new JigyoshaNo(div.getShisetsuNyutaishoInput().getCcdShisetsuJoho().getNyuryokuShisetsuKodo());
         }
         return 施設入退所情報Model.get(介護保険施設入退所の識別子).createBuilderForEdit()
