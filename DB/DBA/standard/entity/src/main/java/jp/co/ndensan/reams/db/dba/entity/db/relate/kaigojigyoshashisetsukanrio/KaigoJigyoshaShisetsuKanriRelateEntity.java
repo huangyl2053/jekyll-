@@ -5,7 +5,9 @@
  */
 package jp.co.ndensan.reams.db.dba.entity.db.relate.kaigojigyoshashisetsukanrio;
 
-import jp.co.ndensan.reams.uz.uza.lang.RString;
+import java.io.Serializable;
+import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT7060KaigoJigyoshaEntity;
+import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT7062KaigoJigyoshaDaihyoshaEntity;
 
 /**
  *
@@ -14,45 +16,24 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 @lombok.Getter
 @lombok.Setter
 @SuppressWarnings("PMD.UnusedPrivateField")
-public class KaigoJigyoshaShisetsuKanriRelateEntity {
+public class KaigoJigyoshaShisetsuKanriRelateEntity implements Cloneable, Serializable {
 
-    private RString yukoKaishiYMD;
-    private RString yukoShuryoYMD;
-    private RString jigyoshaNo;
-    private RString jigyoshaName;
-    private RString jigyoshaNameKana;
-    private RString jigyoKaishiYMD;
-    private RString jigyoKyushiYMD;
-    private RString jigyoSaikaiYMD;
-    private RString jigyoHaishiYMD;
-    private RString yubinNo;
-    private RString telNo;
-    private RString faxNo;
-    private RString jigyoshaAddress;
-    private RString jigyoshaKanaAddress;
-    private RString shozaiShichoson;
-    private RString serviceJisshiChiiki;
-    private RString shozokuNinzu;
-    private RString riyoshaSu;
-    private RString bedSu;
-    private RString atesakininName;
-    private RString atesakininNamekana;
-    private RString atesakiBusho;
-    private RString hojinShubetsu;
-    private RString shiteiKijungaitoJigyoshaKubun;
-    private RString biko;
-    private RString daihyoshaShimei;
-    private RString daihyoshaKanaShimei;
-    private RString daihyoshaYubinNo;
-    private RString daihyoshaJusho;
-    private RString daihyoshaKanaJusho;
-    private RString daihyoshaYakushokuMei;
-    private RString kaisetsushaShimei;
-    private RString kaisetsushaKanaShimei;
-    private RString kaisetsushaYubinNo;
-    private RString kaisetsushaJusho;
-    private RString kaisetsushaKanaJusho;
-    private RString kaisetsushaTelNo;
-    private RString kaisetsushaFaxNo;
+    /**
+     * @param dbT7060KaigoJigyoshaEntity 被保険者台帳管理Entity
+     */
+    private final DbT7060KaigoJigyoshaEntity dbT7060KaigoJigyoshaEntity;
+
+    /**
+     * @param dbT7062KaigoJigyoshaDaihyoshaEntity 受給者台帳Entity
+     */
+    private final DbT7062KaigoJigyoshaDaihyoshaEntity dbT7062KaigoJigyoshaDaihyoshaEntity;
+
+    /**
+     * コンストラクタです。
+     */
+    public KaigoJigyoshaShisetsuKanriRelateEntity() {
+        dbT7060KaigoJigyoshaEntity = new DbT7060KaigoJigyoshaEntity();
+        dbT7062KaigoJigyoshaDaihyoshaEntity = new DbT7062KaigoJigyoshaDaihyoshaEntity();
+    }
 
 }
