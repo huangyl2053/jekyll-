@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbc.definition.batchprm.ｋogakuｋyufuｋetteiIn;
+package jp.co.ndensan.reams.db.dbc.definition.batchprm.kogakukyufuketteiin;
 
 import jp.co.ndensan.reams.uz.uza.batch.BatchParameter;
 import jp.co.ndensan.reams.uz.uza.batch.flow.BatchParameterBase;
@@ -14,13 +14,10 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
  */
 public class KogakuKyufuKetteiInBatchParameter extends BatchParameterBase {
 
-    public final static String SHORIYM = "shoriym";
-    public final static String SHUTSURYOKUJUN = "shutsuryokujun";
-
-    @BatchParameter(key = SHORIYM, name = "処理年月")
+    @BatchParameter(key = "処理年月", name = "処理年月")
     private RString shoriYM;
 
-    @BatchParameter(key = SHUTSURYOKUJUN, name = "出力順")
+    @BatchParameter(key = "出力順", name = "出力順")
     private Long shutsuryokujun;
 
     /**
