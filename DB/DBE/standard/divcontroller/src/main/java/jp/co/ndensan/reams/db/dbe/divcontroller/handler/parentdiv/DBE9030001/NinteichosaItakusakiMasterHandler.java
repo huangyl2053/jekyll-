@@ -436,7 +436,7 @@ public class NinteichosaItakusakiMasterHandler {
                         割付地区名称,
                         joho.is自動割付フラグTrue() ? 自動割付フラグ有効 : 自動割付フラグ無効,
                         chosaKikanKubun,
-                        joho.get状況フラグ() ? 状況フラグ有効 : 状況フラグ無効);
+                        joho.is状況フラグ() ? 状況フラグ有効 : 状況フラグ無効);
                 dataSources.add(row);
                 div.setHdnShichosonCodeList(div.getHdnShichosonCodeList().concat(joho.get市町村コード().toString()).concat(CSV_WRITER_DELIMITER));
             }
