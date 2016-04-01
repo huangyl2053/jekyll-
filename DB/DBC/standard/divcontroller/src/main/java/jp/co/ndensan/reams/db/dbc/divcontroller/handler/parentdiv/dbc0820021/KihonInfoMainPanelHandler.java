@@ -12,13 +12,12 @@ import jp.co.ndensan.reams.db.dbc.business.core.basic.ShokanKihon;
 import jp.co.ndensan.reams.db.dbc.definition.message.DbcWarningMessages;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0820021.KihonInfoMainPanelDiv;
 import jp.co.ndensan.reams.db.dbc.divcontroller.viewbox.ViewStateKeys;
-import jp.co.ndensan.reams.db.dbc.divcontroller.viewbox.shoukanharaihishinseikensaku.ShoukanharaihishinseimeisaikensakuParameter;
 import jp.co.ndensan.reams.db.dbc.divcontroller.viewbox.shoukanharaihishinseikensaku.ShoukanharaihishinseikensakuParameter;
+import jp.co.ndensan.reams.db.dbc.divcontroller.viewbox.shoukanharaihishinseikensaku.ShoukanharaihishinseimeisaikensakuParameter;
 import jp.co.ndensan.reams.db.dbc.service.core.syokanbaraihishikyushinseikette.SyokanbaraihiShikyuShinseiKetteManager;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HokenKyufuRitsu;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
-import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.ShisetsuJohoCommonChildDiv.ShisetsuJohoCommonChildDivDiv;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.uz.uza.biz.CodeShubetsu;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
@@ -56,6 +55,25 @@ public class KihonInfoMainPanelHandler {
     private static final int 日数 = 30;
     private static final FlexibleYearMonth 平成２１年３月 = new FlexibleYearMonth("200903");
     private static final FlexibleYearMonth 平成２１年４月 = new FlexibleYearMonth("200904");
+    private static final RString コード_0001 = new RString("0001");
+    private static final RString コード_0009 = new RString("0009");
+    private static final RString コード_0048 = new RString("0048");
+    private static final RString コード_0010 = new RString("0010");
+    private static final RString STR_2171 = new RString("2171");
+    private static final RString STR_2172 = new RString("2172");
+    private static final RString STR_2173 = new RString("2173");
+    private static final RString STR_2174 = new RString("2174");
+    private static final RString STR_2181 = new RString("2181");
+    private static final RString STR_2182 = new RString("2182");
+    private static final RString STR_2183 = new RString("2183");
+    private static final RString STR_2191 = new RString("2191");
+    private static final RString STR_2192 = new RString("2192");
+    private static final RString STR_2193 = new RString("2193");
+    private static final RString STR_2194 = new RString("2194");
+    private static final RString STR_2195 = new RString("2195");
+    private static final RString STR_21A1 = new RString("21A1");
+    private static final RString STR_21A2 = new RString("21A2");
+    private static final RString STR_21A3 = new RString("21A3");
 
     /**
      * コンストラクタです。
@@ -94,7 +112,7 @@ public class KihonInfoMainPanelHandler {
     public void set初期基本情報() {
         FlexibleDate date = new FlexibleDate(RDate.getNowDate().toDateString());
         List<UzT0007CodeEntity> codeList1 = CodeMaster.getCode(SubGyomuCode.DBC介護給付,
-                new CodeShubetsu(new RString("0001")), date);
+                new CodeShubetsu(コード_0001), date);
         List<KeyValueDataSource> keyValueDataSource1 = new ArrayList<>();
         keyValueDataSource1.add(new KeyValueDataSource(KEY, RString.EMPTY));
         for (UzT0007CodeEntity code : codeList1) {
@@ -103,7 +121,7 @@ public class KihonInfoMainPanelHandler {
         div.getPanelKihon().getPanelKyotaku().getDdlKeikakuSakuseiKubun().setDataSource(keyValueDataSource1);
 
         List<UzT0007CodeEntity> codeList2 = CodeMaster.getCode(SubGyomuCode.DBC介護給付,
-                new CodeShubetsu(new RString("0009")), date);
+                new CodeShubetsu(コード_0009), date);
         List<KeyValueDataSource> keyValueDataSource2 = new ArrayList<>();
         keyValueDataSource2.add(new KeyValueDataSource(KEY, RString.EMPTY));
         for (UzT0007CodeEntity code : codeList2) {
@@ -112,7 +130,7 @@ public class KihonInfoMainPanelHandler {
         div.getPanelKihon().getPanelServiceKikan().getDdlCyushiRiyu().setDataSource(keyValueDataSource2);
 
         List<UzT0007CodeEntity> codeList3 = CodeMaster.getCode(SubGyomuCode.DBC介護給付,
-                new CodeShubetsu(new RString("0048")), date);
+                new CodeShubetsu(コード_0048), date);
         List<KeyValueDataSource> keyValueDataSource3 = new ArrayList<>();
         keyValueDataSource3.add(new KeyValueDataSource(KEY, RString.EMPTY));
         for (UzT0007CodeEntity code : codeList3) {
@@ -121,7 +139,7 @@ public class KihonInfoMainPanelHandler {
         div.getPanelKihon().getPanelShisetuNyutaisyoInfo().getDdlNyushoMaeState().setDataSource(keyValueDataSource3);
 
         List<UzT0007CodeEntity> codeList4 = CodeMaster.getCode(SubGyomuCode.DBC介護給付,
-                new CodeShubetsu(new RString("0010")), date);
+                new CodeShubetsu(コード_0010), date);
         List<KeyValueDataSource> keyValueDataSource4 = new ArrayList<>();
         keyValueDataSource4.add(new KeyValueDataSource(KEY, RString.EMPTY));
         for (UzT0007CodeEntity code : codeList4) {
@@ -150,10 +168,8 @@ public class KihonInfoMainPanelHandler {
             div.getPanelKihon().getPanelKyotaku().getChkKyusochi().setSelectedItemsByKey(sources);
         }
         if (shokanKihon.get居宅サービス計画事業者番号() != null) {
-            ShisetsuJohoCommonChildDivDiv shisetsuJoho
-                    = (ShisetsuJohoCommonChildDivDiv) div.getPanelKihon().getPanelKyotaku()
-                    .getCcdShisetsuJoho();
-            shisetsuJoho.getTxtNyuryokuShisetsuKodo().setValue(shokanKihon.get居宅サービス計画事業者番号().value());
+            div.getPanelKihon().getPanelKyotaku()
+                    .getCcdShisetsuJoho().setNyuryokuShisetsuKodo(shokanKihon.get居宅サービス計画事業者番号().value());
         }
         if (shokanKihon.get保険給付率() != null) {
             div.getPanelKihon().getPanelKyotaku().getTxtHokenKyufuritsu().setValue(shokanKihon.get保険給付率().value());
@@ -281,11 +297,10 @@ public class KihonInfoMainPanelHandler {
         }
         RString 居宅サービス計画事業者番号 = div.getPanelKihon().getPanelKyotaku()
                 .getCcdShisetsuJoho().getNyuryokuShisetsuKodo();
-        if (居宅サービス計画事業者番号 != null) {
+        if (!居宅サービス計画事業者番号.isEmpty()) {
             shokanKihon = shokanKihon.createBuilderForEdit()
                     .set居宅サービス計画事業者番号(new JigyoshaNo(居宅サービス計画事業者番号)).build();
         } else {
-            // TODO  null error
             shokanKihon = shokanKihon.createBuilderForEdit().set居宅サービス計画事業者番号(null).build();
         }
         RDate 開始年月日 = div.getPanelKihon().getPanelServiceKikan().getTxtServiceKikan().getFromValue();
@@ -302,7 +317,7 @@ public class KihonInfoMainPanelHandler {
         } else {
             shokanKihon = shokanKihon.createBuilderForEdit().set中止年月日(null).build();
         }
-        save登録項目(shokanKihon, サービス年月, 様式番号);
+        shokanKihon = save登録項目(shokanKihon, サービス年月, 様式番号);
         RDate 入所_院年月日 = div.getPanelKihon().getPanelShisetuNyutaisyoInfo().getTxtNyushoYMD().getValue();
         if (入所_院年月日 != null) {
             shokanKihon = shokanKihon.createBuilderForEdit()
@@ -439,10 +454,7 @@ public class KihonInfoMainPanelHandler {
                 return true;
             }
         }
-
-        HokenKyufuRitsu 保険給付率 = shokanKihon.get保険給付率();
-        return shokanKihon.get保険給付率() != null
-                && !保険給付率.value().equals(div.getPanelKihon().getPanelKyotaku().getTxtHokenKyufuritsu().getValue());
+        return false;
     }
 
     private boolean checkPanelServiceKikan(ShokanKihon shokanKihon) {
@@ -776,21 +788,21 @@ public class KihonInfoMainPanelHandler {
      */
     public void put様式番号ViewState() {
         ArrayList<RString> list = new ArrayList<>();
-        list.add(new RString("2171"));
-        list.add(new RString("2172"));
-        list.add(new RString("2173"));
-        list.add(new RString("2174"));
-        list.add(new RString("2181"));
-        list.add(new RString("2182"));
-        list.add(new RString("2183"));
-        list.add(new RString("2191"));
-        list.add(new RString("2192"));
-        list.add(new RString("2193"));
-        list.add(new RString("2194"));
-        list.add(new RString("2195"));
-        list.add(new RString("21A1"));
-        list.add(new RString("21A2"));
-        list.add(new RString("21A3"));
+        list.add(STR_2171);
+        list.add(STR_2172);
+        list.add(STR_2173);
+        list.add(STR_2174);
+        list.add(STR_2181);
+        list.add(STR_2182);
+        list.add(STR_2183);
+        list.add(STR_2191);
+        list.add(STR_2192);
+        list.add(STR_2193);
+        list.add(STR_2194);
+        list.add(STR_2195);
+        list.add(STR_21A1);
+        list.add(STR_21A2);
+        list.add(STR_21A3);
         ViewStateHolder.put(ViewStateKeys.様式番号List, list);
     }
 

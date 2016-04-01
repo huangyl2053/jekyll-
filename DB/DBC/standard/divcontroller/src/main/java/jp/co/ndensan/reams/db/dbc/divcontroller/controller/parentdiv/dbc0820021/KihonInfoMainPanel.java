@@ -58,26 +58,7 @@ public class KihonInfoMainPanel {
      * @return ResponseData
      */
     public ResponseData<KihonInfoMainPanelDiv> onLoad(KihonInfoMainPanelDiv div) {
-        // TODO 償還払費申請検索キー
-        ShoukanharaihishinseikensakuParameter par = new ShoukanharaihishinseikensakuParameter(
-                new HihokenshaNo("000000004"),
-                new FlexibleYearMonth(new RString("200501")),
-                new RString("0000000004"),
-                new JigyoshaNo("0000000003"),
-                new RString("0004"),
-                new RString("0004"),
-                Decimal.TEN);
-        ViewStateHolder.put(ViewStateKeys.償還払費申請検索キー, par);
-        // TODO 償還払費申請明細検索キー
-        ShoukanharaihishinseimeisaikensakuParameter parameter = new ShoukanharaihishinseimeisaikensakuParameter(
-                new HihokenshaNo("000000003"),
-                new FlexibleYearMonth(new RString("200501")),
-                RDate.getNowDate(),
-                new RString("0000000003"),
-                new JigyoshaNo("0000000003"),
-                new RString("0003"),
-                new RString("0003"));
-        ViewStateHolder.put(ViewStateKeys.償還払費申請明細検索キー, parameter);
+
         ShoukanharaihishinseimeisaikensakuParameter meisaiPar = ViewStateHolder.get(ViewStateKeys.償還払費申請明細検索キー,
                 ShoukanharaihishinseimeisaikensakuParameter.class);
         HihokenshaNo 被保険者番号 = meisaiPar.get被保険者番号();
@@ -100,7 +81,6 @@ public class KihonInfoMainPanel {
                 償還払費申請検索.getServiceTeikyoYM());
         ViewStateHolder.put(ViewStateKeys.識別番号検索キー, sikibetuKey);
 
-        ViewStateHolder.put(ViewStateKeys.識別コード, new ShikibetsuCode("000000000000010"));
         ShikibetsuCode 識別コード = ViewStateHolder.get(ViewStateKeys.識別コード, ShikibetsuCode.class);
         div.getPanelCcd().getCcdKaigoAtenaInfo().onLoad(識別コード);
         if (被保険者番号 != null && !被保険者番号.isEmpty()) {
@@ -136,7 +116,11 @@ public class KihonInfoMainPanel {
             getHandler(div).getボタンを制御(entity);
         }
         if (削除.equals(ViewStateHolder.get(ViewStateKeys.処理モード, RString.class))) {
-            div.getPanelKihon().setDisplayNone(false);
+            div.getPanelKihon().setReadOnly(true);
+            div.getPanelKihon().getPanelKyotaku().getDdlKeikakuSakuseiKubun().setDisabled(true);
+            div.getPanelKihon().getPanelServiceKikan().getDdlCyushiRiyu().setDisabled(true);
+            div.getPanelKihon().getPanelShisetuNyutaisyoInfo().getDdlNyushoMaeState().setDisabled(true);
+            div.getPanelKihon().getPanelShisetuNyutaisyoInfo().getDdlTaishoMaeState().setDisabled(true);
         } else {
             HokenKyufuRitsu 保険給付率 = JutakuKaishuJizenShinsei.createInstance().getKyufuritsu(被保険者番号, サービス年月);
             if (保険給付率 != null) {
