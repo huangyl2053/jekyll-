@@ -36,7 +36,7 @@ public class ShinseiSearch {
         div.getPanelAtenaShikaku().getCcdKaigoAtenalInfo().onLoad(識別コード);
 
         HihokenshaNo 被保険者番号 = ViewStateHolder.get(ViewStateKeys.被保険者番号, HihokenshaNo.class);
-        div.getPanelAtenaShikaku().getCcdKaigoShikakuKihon().initialize(被保険者番号);
+        div.getPanelAtenaShikaku().getCcdKaigoShikakuKihon().onLoad(被保険者番号);
 
         div.getPanelShokan().getCcdShokanShinseiList().initialize(照会, 被保険者番号, FlexibleYearMonth.MIN, FlexibleYearMonth.MAX);
 
