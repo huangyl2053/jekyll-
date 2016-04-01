@@ -467,7 +467,6 @@ public class KaigoHokenTokubetuKaikeiKeiriJyokyoRegist1Handler {
         List<KaigoHokenJigyoHokokuNenpo> 一覧データLst
                 = 介護保険特別会計経理状況登録Manager.getJigyoHokokuNenpoList(報告年度.getYear(), 市町村コード, 保険者区分);
         if (!一覧データLst.isEmpty() && 一覧データLst.get(0) != null && !一覧データLst.get(0).get詳細データエリア().isEmpty()) {
-            //TODO DBAE00027（該当報告年度の集計データは既に存在しているため、追加はできません。）は、DB（統合）介護メッセージ一覧.xlsxにありません
             throw new ApplicationException(DbaErrorMessages.該当報告年度の集計データは既に存在.getMessage());
         } else {
             報告年度Box.setReadOnly(true);
