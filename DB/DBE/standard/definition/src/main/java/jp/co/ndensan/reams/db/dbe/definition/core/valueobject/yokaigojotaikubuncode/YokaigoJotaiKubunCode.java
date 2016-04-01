@@ -38,6 +38,7 @@ public class YokaigoJotaiKubunCode implements Comparable<YokaigoJotaiKubunCode>,
      * コンストラクタです。<br/>
      *
      * @param code 値
+     * @throws NullPointerException Error
      */
     public YokaigoJotaiKubunCode(Code code) throws NullPointerException {
         this.code = requireNonNull(code, UrSystemErrorMessages.値がnull.getReplacedMessage("code"));
@@ -71,6 +72,7 @@ public class YokaigoJotaiKubunCode implements Comparable<YokaigoJotaiKubunCode>,
         return new YokaigoJotaiKubunCode(code);
     }
 
+    @Override
     public Code asCode() {
         return this.code;
     }

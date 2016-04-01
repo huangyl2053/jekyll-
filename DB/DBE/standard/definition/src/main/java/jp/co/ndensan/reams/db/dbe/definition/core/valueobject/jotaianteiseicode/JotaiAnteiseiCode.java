@@ -24,6 +24,9 @@ import jp.co.ndensan.reams.uz.uza.util.db.IDbColumnMappable;
 public class JotaiAnteiseiCode implements Comparable<JotaiAnteiseiCode>, ICodeWrapValueObject, IDbColumnMappable, IValidatable {
 
     private final Code code;
+    /**
+     * JotaiAnteiseiCodeのEMPTY値です。
+     */
     public static final JotaiAnteiseiCode EMPTY;
 
     /**

@@ -20,7 +20,7 @@ public class NoryokuMiteikaNinchishoKoreishaShihyoCodeValidator {
     /**
      * コンストラクタです。
      *
-     * @param noryokuMiteikaNinchishoKoreishaShihyoCode 運動能力が低下していない認知症高齢者の指標
+     * @param noryokuKoreishaShihyoCode 運動能力が低下していない認知症高齢者の指標
      */
     public NoryokuMiteikaNinchishoKoreishaShihyoCodeValidator(NoryokuMiteikaNinchishoKoreishaShihyoCode noryokuKoreishaShihyoCode) {
         requireNonNull(noryokuKoreishaShihyoCode, UrSystemErrorMessages.値がnull.getReplacedMessage("運動能力が低下していない認知症高齢者の指標"));

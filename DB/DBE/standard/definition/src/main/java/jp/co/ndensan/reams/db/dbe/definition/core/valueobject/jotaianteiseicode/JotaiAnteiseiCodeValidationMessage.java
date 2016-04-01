@@ -18,6 +18,9 @@ import jp.co.ndensan.reams.uz.uza.message.Message;
  */
 public enum JotaiAnteiseiCodeValidationMessage implements IValidationMessage {
 
+    /**
+     * テスト用です。
+     */
     テスト用(JotaiAnteiseiCodeErrorMessage.テスト用);
     private final Message message;
 
@@ -35,6 +38,9 @@ public enum JotaiAnteiseiCodeValidationMessage implements IValidationMessage {
      */
     public enum JotaiAnteiseiCodeErrorMessage implements IMessageGettable {
 
+        /**
+         * テスト用 "" です。
+         */
         テスト用(1, "");
         private final int no;
         private final RString message;

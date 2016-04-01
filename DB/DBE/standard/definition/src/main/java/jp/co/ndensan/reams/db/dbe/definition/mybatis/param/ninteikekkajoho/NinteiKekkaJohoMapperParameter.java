@@ -13,9 +13,7 @@ import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
  * 要介護認定結果情報を特定するためのMyBatis用パラメータクラスです。
  */
 @lombok.Getter
-public class NinteiKekkaJohoMapperParameter {
-
-    private final ShinseishoKanriNo shinseishoKanriNo;
+public final class NinteiKekkaJohoMapperParameter {
 
     /**
      * コンストラクタです。
@@ -26,7 +24,7 @@ public class NinteiKekkaJohoMapperParameter {
     private NinteiKekkaJohoMapperParameter(
             ShinseishoKanriNo shinseishoKanriNo) {
 
-        this.shinseishoKanriNo = requireNonNull(shinseishoKanriNo, UrSystemErrorMessages.値がnull.getReplacedMessage("申請書管理番号"));
+        requireNonNull(shinseishoKanriNo, UrSystemErrorMessages.値がnull.getReplacedMessage("申請書管理番号"));
     }
 
     /**

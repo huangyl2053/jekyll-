@@ -14,10 +14,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
  * 構成市町村マスタを特定するためのMyBatis用パラメータクラスです。
  */
 @lombok.Getter
-public class ShujiiIryoKikanShujiiParameter {
-
-    private final RString shichosonShokibetsuID;
-    private final LasdecCode shichosonCode;
+public final class ShujiiIryoKikanShujiiParameter {
 
     /**
      * コンストラクタです。
@@ -30,15 +27,15 @@ public class ShujiiIryoKikanShujiiParameter {
             RString shichosonShokibetsuID,
             LasdecCode shichosonCode
     ) {
-        this.shichosonShokibetsuID = requireNonNull(shichosonShokibetsuID, UrSystemErrorMessages.値がnull.getReplacedMessage("市町村識別ID"));
-        this.shichosonCode = requireNonNull(shichosonCode, UrSystemErrorMessages.値がnull.getReplacedMessage("市町村コード"));
+        requireNonNull(shichosonShokibetsuID, UrSystemErrorMessages.値がnull.getReplacedMessage("市町村識別ID"));
+        requireNonNull(shichosonCode, UrSystemErrorMessages.値がnull.getReplacedMessage("市町村コード"));
     }
 
     /**
      * キー検索用のパラメータを生成します。
      *
-     * @param shichosonShokibetsuID
-     * @param shichosonCode
+     * @param shichosonShokibetsuID RString
+     * @param shichosonCode LasdecCode
      * @return 身体手帳検索パラメータ
      */
     public static ShujiiIryoKikanShujiiParameter createSelectByKeyParam(

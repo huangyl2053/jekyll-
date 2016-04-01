@@ -29,18 +29,18 @@ public final class KoNiChoRelateMapperParameter {
     private final RString chosainKanaShimei;
     private final RString chikuCode;
 
-    private boolean jokyoflag1;
-    private boolean jokyoflag2;
-    private boolean shichosonCodeflag;
-    private boolean ninteichosaItakusakiCodeflagFrom;
-    private boolean ninteichosaItakusakiCodeflagTo;
-    private boolean jigyoshaMeishoflag;
-    private boolean jigyoshaMeishoKanaflag;
-    private boolean ninteiChosainNoflagFrom;
-    private boolean ninteiChosainNoflagTo;
-    private boolean chosainShimeiflag;
-    private boolean chosainKanaShimeiflag;
-    private boolean chikuCodeflag;
+    private final boolean jokyoflag1;
+    private final boolean jokyoflag2;
+    private final boolean shichosonCodeflag;
+    private final boolean ninteichosaItakusakiCdflagFrom;
+    private final boolean ninteichosaItakusakiCodeflagTo;
+    private final boolean jigyoshaMeishoflag;
+    private final boolean jigyoshaMeishoKanaflag;
+    private final boolean ninteiChosainNoflagFrom;
+    private final boolean ninteiChosainNoflagTo;
+    private final boolean chosainShimeiflag;
+    private final boolean chosainKanaShimeiflag;
+    private final boolean chikuCodeflag;
 
     /**
      * 非公開コンストラクタです。
@@ -71,7 +71,7 @@ public final class KoNiChoRelateMapperParameter {
             boolean jokyoflag1,
             boolean jokyoflag2,
             boolean shichosonCodeflag,
-            boolean ninteichosaItakusakiCodeflagFrom,
+            boolean ninteichosaItakusakiCdflagFrom,
             boolean ninteichosaItakusakiCodeflagTo,
             boolean jigyoshaMeishoflag,
             boolean jigyoshaMeishoKanaflag,
@@ -96,7 +96,7 @@ public final class KoNiChoRelateMapperParameter {
         this.jokyoflag1 = jokyoflag1;
         this.jokyoflag2 = jokyoflag2;
         this.shichosonCodeflag = shichosonCodeflag;
-        this.ninteichosaItakusakiCodeflagFrom = ninteichosaItakusakiCodeflagFrom;
+        this.ninteichosaItakusakiCdflagFrom = ninteichosaItakusakiCdflagFrom;
         this.ninteichosaItakusakiCodeflagTo = ninteichosaItakusakiCodeflagTo;
         this.jigyoshaMeishoflag = jigyoshaMeishoflag;
         this.jigyoshaMeishoKanaflag = jigyoshaMeishoKanaflag;
@@ -110,7 +110,18 @@ public final class KoNiChoRelateMapperParameter {
     /**
      * 非公開コンストラクタです。
      *
-     * @return
+     * @param jokyoFlag boolean
+     * @param shichosonCode LasdecCode
+     * @param ninteichosaItakusakiCodeFrom ChosaItakusakiCode
+     * @param ninteichosaItakusakiCodeTo ChosaItakusakiCode
+     * @param jigyoshaMeisho RString
+     * @param jigyoshaMeishoKana RString
+     * @param ninteiChosainNoFrom ChosainCode
+     * @param ninteiChosainNoTo ChosainCode
+     * @param chosainShimei RString
+     * @param chosainKanaShimei RString
+     * @param chikuCode RString
+     * @return KoNiChoRelateMapperParameter
      *
      */
     public static KoNiChoRelateMapperParameter createSelectByKeyParam(
@@ -129,7 +140,7 @@ public final class KoNiChoRelateMapperParameter {
         boolean jokyoflag1 = true;
         boolean jokyoflag2 = true;
         boolean shichosonCodeflag = true;
-        boolean ninteichosaItakusakiCodeflagFrom = true;
+        boolean ninteichosaItakusakiCdflagFrom = true;
         boolean ninteichosaItakusakiCodeflagTo = true;
         boolean jigyoshaMeishoflag = true;
         boolean jigyoshaMeishoKanaflag = true;
@@ -139,7 +150,7 @@ public final class KoNiChoRelateMapperParameter {
         boolean chosainKanaShimeiflag = true;
         boolean chikuCodeflag = true;
 
-        if (jokyoFlag == true) {
+        if (jokyoFlag) {
             jokyoflag1 = false;
         } else {
             jokyoflag2 = true;
@@ -150,7 +161,7 @@ public final class KoNiChoRelateMapperParameter {
         }
 
         if (ninteichosaItakusakiCodeFrom == null) {
-            ninteichosaItakusakiCodeflagFrom = false;
+            ninteichosaItakusakiCdflagFrom = false;
         }
         if (ninteichosaItakusakiCodeTo == null) {
             ninteichosaItakusakiCodeflagTo = false;
@@ -192,7 +203,7 @@ public final class KoNiChoRelateMapperParameter {
                 jokyoflag1,
                 jokyoflag2,
                 shichosonCodeflag,
-                ninteichosaItakusakiCodeflagFrom,
+                ninteichosaItakusakiCdflagFrom,
                 ninteichosaItakusakiCodeflagTo,
                 jigyoshaMeishoflag,
                 jigyoshaMeishoKanaflag,
@@ -204,94 +215,186 @@ public final class KoNiChoRelateMapperParameter {
         );
     }
 
+    /**
+     *
+     * @return jokyoFlag
+     */
     public boolean isJokyoFlag() {
         return jokyoFlag;
     }
 
+    /**
+     *
+     * @return shichosonCode
+     */
     public LasdecCode getShichosonCode() {
         return shichosonCode;
     }
 
+    /**
+     *
+     * @return ninteichosaItakusakiCodeFrom
+     */
     public ChosaItakusakiCode getNinteichosaItakusakiCodeFrom() {
         return ninteichosaItakusakiCodeFrom;
     }
 
+    /**
+     *
+     * @return ninteichosaItakusakiCodeTo
+     */
     public ChosaItakusakiCode getNinteichosaItakusakiCodeTo() {
         return ninteichosaItakusakiCodeTo;
     }
 
+    /**
+     *
+     * @return jigyoshaMeisho
+     */
     public RString getJigyoshaMeisho() {
         return jigyoshaMeisho;
     }
 
+    /**
+     *
+     * @return jigyoshaMeishoKana
+     */
     public RString getJigyoshaMeishoKana() {
         return jigyoshaMeishoKana;
     }
 
+    /**
+     *
+     * @return ninteiChosainNoFrom
+     */
     public ChosainCode getNinteiChosainNoFrom() {
         return ninteiChosainNoFrom;
     }
 
+    /**
+     *
+     * @return ninteiChosainNoTo
+     */
     public ChosainCode getNinteiChosainNoTo() {
         return ninteiChosainNoTo;
     }
 
+    /**
+     *
+     * @return chosainShimei
+     */
     public RString getChosainShimei() {
         return chosainShimei;
     }
 
+    /**
+     *
+     * @return chosainKanaShimei
+     */
     public RString getChosainKanaShimei() {
         return chosainKanaShimei;
     }
 
+    /**
+     *
+     * @return chikuCode
+     */
     public RString getChikuCode() {
         return chikuCode;
     }
 
+    /**
+     *
+     * @return jokyoflag1
+     */
     public boolean isJokyoflag1() {
         return jokyoflag1;
     }
 
+    /**
+     *
+     * @return jokyoflag2
+     */
     public boolean isJokyoflag2() {
         return jokyoflag2;
     }
 
+    /**
+     *
+     * @return shichosonCodeflag
+     */
     public boolean isShichosonCodeflag() {
         return shichosonCodeflag;
     }
 
+    /**
+     *
+     * @return ninteichosaItakusakiCdflagFrom
+     */
     public boolean isNinteichosaItakusakiCodeflagFrom() {
-        return ninteichosaItakusakiCodeflagFrom;
+        return ninteichosaItakusakiCdflagFrom;
     }
 
+    /**
+     *
+     * @return ninteichosaItakusakiCodeflagTo
+     */
     public boolean isNinteichosaItakusakiCodeflagTo() {
         return ninteichosaItakusakiCodeflagTo;
     }
 
+    /**
+     *
+     * @return jigyoshaMeishoflag
+     */
     public boolean isJigyoshaMeishoflag() {
         return jigyoshaMeishoflag;
     }
 
+    /**
+     *
+     * @return jigyoshaMeishoKanaflag
+     */
     public boolean isJigyoshaMeishoKanaflag() {
         return jigyoshaMeishoKanaflag;
     }
 
+    /**
+     *
+     * @return ninteiChosainNoflagFrom
+     */
     public boolean isNinteiChosainNoflagFrom() {
         return ninteiChosainNoflagFrom;
     }
 
+    /**
+     *
+     * @return ninteiChosainNoflagTo
+     */
     public boolean isNinteiChosainNoflagTo() {
         return ninteiChosainNoflagTo;
     }
 
+    /**
+     *
+     * @return chosainShimeiflag
+     */
     public boolean isChosainShimeiflag() {
         return chosainShimeiflag;
     }
 
+    /**
+     *
+     * @return chosainKanaShimeiflag
+     */
     public boolean isChosainKanaShimeiflag() {
         return chosainKanaShimeiflag;
     }
 
+    /**
+     *
+     * @return chikuCodeflag
+     */
     public boolean isChikuCodeflag() {
         return chikuCodeflag;
     }

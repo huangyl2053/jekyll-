@@ -12,7 +12,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
  */
 @lombok.Getter
 @SuppressWarnings("PMD.UnusedPrivateField")
-public class ChosaChikuChichosonParameter {
+public final class ChosaChikuChichosonParameter {
 
     private final RString chosaChikuCode;
     private final RString shichosonCode;
