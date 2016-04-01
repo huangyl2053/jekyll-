@@ -1,0 +1,32 @@
+﻿{
+ "uiContainerName": "DBDUC10321",
+ "displayWizard": false,
+ "subGyomuCode": "DBD",
+ "steps": [
+  {
+   "id": 1,
+   "name": "社会福祉法人軽減認定者リスト",
+   "transitionList": [
+    {
+     "id": "1",
+     "type": "start",
+     "condition": "",
+     "toLayoutSubGyomuCode": "DBD",
+     "toLayoutName": "DBD1030021",
+     "toLayoutTitle": "社会福祉法人軽減認定者リスト",
+     "toState": "バッチ実行"
+    },
+    {
+     "id": "2",
+     "type": "end",
+     "layoutSubGyomuCode": "DBD",
+     "layoutName": "DBD1030021",
+     "layoutTitle": "社会福祉法人軽減認定者リスト",
+     "eventName": "処理完了",
+     "destroy": false,
+     "condition": ""
+    }
+   ]
+  }
+ ]
+}
