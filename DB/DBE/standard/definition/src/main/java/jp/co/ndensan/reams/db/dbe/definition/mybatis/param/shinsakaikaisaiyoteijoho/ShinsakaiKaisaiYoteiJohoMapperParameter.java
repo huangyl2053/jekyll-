@@ -13,9 +13,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
  * 介護認定審査会開催予定情報を特定するためのMyBatis用パラメータクラスです。
  */
 @lombok.Getter
-public class ShinsakaiKaisaiYoteiJohoMapperParameter {
-
-    private final RString shinsakaiKaisaiNo;
+public final class ShinsakaiKaisaiYoteiJohoMapperParameter {
 
     /**
      * コンストラクタです。
@@ -25,8 +23,7 @@ public class ShinsakaiKaisaiYoteiJohoMapperParameter {
      */
     private ShinsakaiKaisaiYoteiJohoMapperParameter(RString shinsakaiKaisaiNo) {
 
-        this.shinsakaiKaisaiNo
-                = requireNonNull(shinsakaiKaisaiNo, UrSystemErrorMessages.値がnull.getReplacedMessage("介護認定審査会開催番号"));
+        requireNonNull(shinsakaiKaisaiNo, UrSystemErrorMessages.値がnull.getReplacedMessage("介護認定審査会開催番号"));
     }
 
     /**

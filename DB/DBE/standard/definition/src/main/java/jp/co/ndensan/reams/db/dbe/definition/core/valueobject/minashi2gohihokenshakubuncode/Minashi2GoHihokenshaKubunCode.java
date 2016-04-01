@@ -22,7 +22,9 @@ import jp.co.ndensan.reams.uz.uza.util.db.IDbColumnMappable;
 public class Minashi2GoHihokenshaKubunCode implements Comparable<Minashi2GoHihokenshaKubunCode>, IDbColumnMappable, IValidatable, IValueObject<Code> {
 
     private final Code code;
-
+    /**
+     * Minashi2GoHihokenshaKubunCodeのEMPTYです。
+     */
     public static final Minashi2GoHihokenshaKubunCode EMPTY;
 
     /**
@@ -43,8 +45,7 @@ public class Minashi2GoHihokenshaKubunCode implements Comparable<Minashi2GoHihok
     }
 
     /**
-     * DB等からコンストラクタを利用して直接マッピングされた、<br/>
-     * {@link Minashi2GoHihokenshaKubunCode}が持つcodeについてバリデーションを実施します。
+     * DB等からコンストラクタを利用して直接マッピングされた、<br/> {@link Minashi2GoHihokenshaKubunCode}が持つcodeについてバリデーションを実施します。
      *
      * @return {@link IValidationMessages}
      */
@@ -60,8 +61,7 @@ public class Minashi2GoHihokenshaKubunCode implements Comparable<Minashi2GoHihok
      *
      * @param code {@link Minashi2GoHihokenshaKubunCode}となるコード{@link Code}
      * @return {@link Minashi2GoHihokenshaKubunCode}
-     * @throws IllegalArgumentException
-     * {@link Minashi2GoHihokenshaKubunCodeSpec}の仕様を満たさない場合
+     * @throws IllegalArgumentException {@link Minashi2GoHihokenshaKubunCodeSpec}の仕様を満たさない場合
      */
     public static Minashi2GoHihokenshaKubunCode createCheckInstance(Code code) throws IllegalArgumentException {
         List<IValidationMessage> validResult

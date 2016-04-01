@@ -59,8 +59,14 @@ public final class NinteichosaScheduleMapperParameter {
     /**
      * キー検索用のパラメータを生成します。
      *
-     * @param 主キー1 主キー1
-     * @param 主キー2 主キー2
+     * @param ninteiChosaYoteiYMD 主キー1
+     * @param ninteiChosaYoteiKaishiTime 主キー2
+     * @param ninteiChosaYoteiShuryoTime 主キー1
+     * @param ninteiChosaJikanWaku 主キー2
+     * @param chosaChikuCode 主キー1
+     * @param ninteichosaItakusakiCode 主キー2
+     * @param ninteiChosainNo 主キー1
+     * @param shichosonCode 主キー2
      * @return 身体手帳検索パラメータ
      */
     public static NinteichosaScheduleMapperParameter createSelectByKeyParam(
@@ -72,7 +78,9 @@ public final class NinteichosaScheduleMapperParameter {
             RString ninteichosaItakusakiCode,
             RString ninteiChosainNo,
             LasdecCode shichosonCode) {
-        return new NinteichosaScheduleMapperParameter(ninteiChosaYoteiYMD, ninteiChosaYoteiKaishiTime, ninteiChosaYoteiShuryoTime, ninteiChosaJikanWaku, chosaChikuCode, ninteichosaItakusakiCode, ninteiChosainNo, shichosonCode);
+        return new NinteichosaScheduleMapperParameter(
+                ninteiChosaYoteiYMD, ninteiChosaYoteiKaishiTime, ninteiChosaYoteiShuryoTime, ninteiChosaJikanWaku,
+                chosaChikuCode, ninteichosaItakusakiCode, ninteiChosainNo, shichosonCode);
     }
 
 }

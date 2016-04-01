@@ -12,6 +12,9 @@ import jp.co.ndensan.reams.uz.uza.message.IMessageGettable;
 import jp.co.ndensan.reams.uz.uza.message.IValidationMessage;
 import jp.co.ndensan.reams.uz.uza.message.Message;
 
+/**
+ * 合議体有効期間開始日付。
+ */
 public enum GogitaiYukoKikanKaishiDateValidationMessage implements IValidationMessage {
 
     /**

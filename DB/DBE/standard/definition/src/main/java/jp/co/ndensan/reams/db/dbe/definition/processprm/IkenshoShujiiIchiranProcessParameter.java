@@ -15,7 +15,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
  */
 @lombok.Getter
 @SuppressWarnings("PMD.UnusedPrivateField")
-public class IkenshoShujiiIchiranProcessParameter implements IBatchProcessParameter {
+public final class IkenshoShujiiIchiranProcessParameter implements IBatchProcessParameter {
 
     private final RString shichosonCode;
     private final RString shichosonName;
@@ -40,7 +40,7 @@ public class IkenshoShujiiIchiranProcessParameter implements IBatchProcessParame
      * @param outputSort 並び順
      * @param nextpage 改頁
      */
-    public IkenshoShujiiIchiranProcessParameter(RString shichosonCode,
+    private IkenshoShujiiIchiranProcessParameter(RString shichosonCode,
             RString shichosonName, RString iryoKikanCodeFrom,
             RString iryoKikanCodeTo, RString shujiiCodeFrom,
             RString shujiiCodeTo, RString jyokyo, RString outputSort,
@@ -77,13 +77,11 @@ public class IkenshoShujiiIchiranProcessParameter implements IBatchProcessParame
             RString shujiiCodeTo, RString jyokyo,
             RString outputSort, RString nextpage) {
 
-
         return new IkenshoShujiiIchiranProcessParameter(shichosonCode,
                 shichosonName, iryoKikanCodeFrom, iryoKikanCodeTo,
                 shujiiCodeFrom, shujiiCodeTo, jyokyo, outputSort, nextpage);
     }
-    
-    
+
     /**
      * 医療機関・主治医一覧表作成Mybatisパラメータークラス作成
      *

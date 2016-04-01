@@ -25,7 +25,7 @@ public class ShinsakaiKaisaiNo implements Comparable<ShinsakaiKaisaiNo>, IValueO
      * コンストラクタです。<br/>
      *
      * @param value 値
-     * @throws NullPointerException
+     * @throws NullPointerException Error
      */
     public ShinsakaiKaisaiNo(Integer value) throws NullPointerException {
         requireNonNull(value, UrSystemErrorMessages.値がnull.getReplacedMessage("value"));
@@ -33,8 +33,7 @@ public class ShinsakaiKaisaiNo implements Comparable<ShinsakaiKaisaiNo>, IValueO
     }
 
     /**
-     * DB等からコンストラクタを利用して直接マッピングされた、<br/>
-     * {@link ShinsakaiKaisaiNo}が持つvalueについてバリデーションを実施します。
+     * DB等からコンストラクタを利用して直接マッピングされた、<br/> {@link ShinsakaiKaisaiNo}が持つvalueについてバリデーションを実施します。
      *
      * @return {@link IValidationMessages}
      */
