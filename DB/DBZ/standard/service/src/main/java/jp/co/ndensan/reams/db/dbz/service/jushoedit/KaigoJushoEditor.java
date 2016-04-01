@@ -21,6 +21,7 @@ import jp.co.ndensan.reams.ur.urz.service.core.association.AssociationFinderFact
 import jp.co.ndensan.reams.uz.uza.biz.ReportId;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
 import jp.co.ndensan.reams.uz.uza.util.config.BusinessConfig;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 
@@ -97,7 +98,7 @@ public class KaigoJushoEditor {
     }
 
     private RString 単一市町村の住所編集処理(SubGyomuCode subGyomuCode, RString 帳票分類ID, IJusho 住所クラス) {
-        StringBuilder 単一住所builder = new StringBuilder();
+        RStringBuilder 単一住所builder = new RStringBuilder();
         DbT7065ChohyoSeigyoKyotsuEntity 帳票制御共通 = dbt7065dac.selectByKey(subGyomuCode, new ReportId(帳票分類ID));
         RString 管内住所編集_都道府県名付与有無 = 表示なし;
         RString 管内住所編集_郡名付与有無 = 表示なし;
@@ -163,16 +164,32 @@ public class KaigoJushoEditor {
             単一住所builder.append(new RString(" "));
             単一住所builder.append(住所クラス.get方書().getColumnValue());
         }
-        return new RString(単一住所builder.toString());
+        return 単一住所builder.toRString();
     }
 
     private RString 広域構成市町村の住所編集処理(ShichosonSecurityJoho shichosonSecurity, IJusho 住所クラス) {
-        StringBuilder 広域住所builder = new StringBuilder();
-        RString 帳票用都道府県名称表示有無 = 表示なし;
-        RString 帳票用郡名称表示有無 = 表示なし;
-        RString 帳票用市町村名称表示有無 = 表示なし;
-        RString 帳票用住所編集方法 = 表示なし;
-        RString 帳票用方書表示有無 = 表示なし;
+        RStringBuilder 広域住所builder = new RStringBuilder();
+        RString 帳票用都道府県名称表示有無;
+        RString 帳票用郡名称表示有無;
+        RString 帳票用市町村名称表示有無;
+        RString 帳票用住所編集方法;
+        RString 帳票用方書表示有無;
+        //TODO どんな状況で業務コンフィグの代わりに以下の要素を使用する。 QA:1005 2016/03/29
+        if (shichosonSecurity.is支所管理有無フラグ()) {
+            帳票用都道府県名称表示有無 = shichosonSecurity.get市町村情報().get帳票用都道府県名称表示有無();
+            帳票用郡名称表示有無 = shichosonSecurity.get市町村情報().get帳票用郡名称表示有無();
+            帳票用市町村名称表示有無 = shichosonSecurity.get市町村情報().get帳票用市町村名称表示有無();
+            帳票用住所編集方法 = shichosonSecurity.get市町村情報().get帳票用住所編集方法();
+            帳票用方書表示有無 = shichosonSecurity.get市町村情報().get帳票用方書表示有無();
+        } else {
+            帳票用都道府県名称表示有無 = BusinessConfig.get(ConfigNameDBU.帳票共通住所編集方法_管内住所編集_都道府県名付与有無,
+                    SubGyomuCode.DBU介護統計報告);
+            帳票用郡名称表示有無 = BusinessConfig.get(ConfigNameDBU.帳票共通住所編集方法_管内住所編集_郡名付与有無, SubGyomuCode.DBU介護統計報告);
+            帳票用市町村名称表示有無 = BusinessConfig.get(ConfigNameDBU.帳票共通住所編集方法_管内住所編集_市町村名付与有無,
+                    SubGyomuCode.DBU介護統計報告);
+            帳票用住所編集方法 = BusinessConfig.get(ConfigNameDBU.帳票共通住所編集方法_管内住所編集_編集方法, SubGyomuCode.DBU介護統計報告);
+            帳票用方書表示有無 = BusinessConfig.get(ConfigNameDBU.帳票共通住所編集方法_住所編集_方書表示有無, SubGyomuCode.DBU介護統計報告);
+        }
         if (表示する.equals(帳票用都道府県名称表示有無)) {
             広域住所builder.append(shichosonSecurity.get市町村情報().get都道府県名称());
         }
@@ -206,6 +223,6 @@ public class KaigoJushoEditor {
             広域住所builder.append(new RString(" "));
             広域住所builder.append(住所クラス.get方書().getColumnValue());
         }
-        return new RString(広域住所builder.toString());
+        return 広域住所builder.toRString();
     }
 }
