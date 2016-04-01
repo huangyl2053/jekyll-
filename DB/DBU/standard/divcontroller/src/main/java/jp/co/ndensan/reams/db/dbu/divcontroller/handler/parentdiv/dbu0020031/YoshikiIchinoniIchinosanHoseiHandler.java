@@ -144,7 +144,7 @@ public class YoshikiIchinoniIchinosanHoseiHandler {
                 return DBU0020031StateName.修正状態1;
             }
             return DBU0020031StateName.削除状態1;
-        } else if (list12.contains(様式種類)) {
+        } else if (list21.contains(様式種類)) {
             List<JigyoHokokuTokeiData> 食費_居住費6List = get事業報告月報詳細データリスト(引き継ぎデータ, 集計番号_１０１０);
             set食費_居住費(食費_居住費6List);
             div.getPanelDaisan().setTitle(食費_居住費6);
@@ -153,7 +153,7 @@ public class YoshikiIchinoniIchinosanHoseiHandler {
                 return DBU0020031StateName.修正状態1;
             }
             return DBU0020031StateName.削除状態1;
-        } else if (list21.contains(様式種類)) {
+        } else if (list31.contains(様式種類)) {
             List<JigyoHokokuTokeiData> 利用者負担滅額4List = get事業報告月報詳細データリスト(引き継ぎデータ, 集計番号_０６００);
             set利用者負担滅額(利用者負担滅額4List);
             div.getPanelDaiyon().setTitle(利用者負担滅額4);
@@ -162,7 +162,7 @@ public class YoshikiIchinoniIchinosanHoseiHandler {
                 return DBU0020031StateName.修正状態2;
             }
             return DBU0020031StateName.削除状態2;
-        } else if (list22.contains(様式種類)) {
+        } else if (list12.contains(様式種類)) {
             List<JigyoHokokuTokeiData> 利用者負担滅額7List = get事業報告月報詳細データリスト(引き継ぎデータ, 集計番号_０９００);
             set利用者負担滅額(利用者負担滅額7List);
             div.getPanelDaiyon().setTitle(利用者負担滅額7);
@@ -171,7 +171,7 @@ public class YoshikiIchinoniIchinosanHoseiHandler {
                 return DBU0020031StateName.修正状態2;
             }
             return DBU0020031StateName.削除状態2;
-        } else if (list31.contains(様式種類)) {
+        } else if (list22.contains(様式種類)) {
             List<JigyoHokokuTokeiData> 特定負担限度額5List = get事業報告月報詳細データリスト(引き継ぎデータ, 集計番号_０７２０);
             List<JigyoHokokuTokeiData> 利用者負担5List = get事業報告月報詳細データリスト(引き継ぎデータ, 集計番号_０７０２);
             set特定負担限度額と利用者負担(特定負担限度額5List, 利用者負担5List);
@@ -695,21 +695,26 @@ public class YoshikiIchinoniIchinosanHoseiHandler {
         List<RString> list22 = ViewStateHolder.get(ViewStateKeys.様式種類_22, List.class);
         List<RString> list31 = ViewStateHolder.get(ViewStateKeys.様式種類_31, List.class);
         List<RString> list32 = ViewStateHolder.get(ViewStateKeys.様式種類_32, List.class);
-        if (list11.contains(様式種類) || list12.contains(様式種類)) {
+        if (list11.contains(様式種類) || list21.contains(様式種類)) {
             List<JigyoHokokuTokeiData> 食費_居住費データリスト = ViewStateHolder
                     .get(ViewStateKeys.食費_居住費データリスト, List.class);
             修正データリスト = get食費_居住費修正データリスト(食費_居住費データリスト, 修正データリスト);
-        } else if (list21.contains(様式種類) || list22.contains(様式種類)) {
+        } else if (list31.contains(様式種類) || list12.contains(様式種類)) {
             List<JigyoHokokuTokeiData> 利用者負担滅額データリスト = ViewStateHolder
                     .get(ViewStateKeys.利用者負担滅額データリスト, List.class);
             修正データリスト = get利用者負担滅額修正データリスト(利用者負担滅額データリスト, 修正データリスト);
-        } else if (list31.contains(様式種類) || list32.contains(様式種類)) {
+        } else if (list22.contains(様式種類) || list32.contains(様式種類)) {
             List<JigyoHokokuTokeiData> 特定負担限度額データリスト = ViewStateHolder
                     .get(ViewStateKeys.特定負担限度額データリスト, List.class);
             List<JigyoHokokuTokeiData> 利用者負担データリスト = ViewStateHolder
                     .get(ViewStateKeys.利用者負担データリスト, List.class);
-            修正データリスト = get特定と利用者修正データリスト(特定負担限度額データリスト, 利用者負担データリスト,
-                    修正データリスト);
+            修正データリスト = get特定と利用者修正データリスト(
+                    特定負担限度額データリスト,
+                    利用者負担データリスト,
+                    修正データリスト,
+                    様式種類,
+                    list22,
+                    list32);
         }
         return 修正データリスト;
     }
@@ -934,8 +939,44 @@ public class YoshikiIchinoniIchinosanHoseiHandler {
     private List<JigyoHokokuTokeiData> get特定と利用者修正データリスト(
             List<JigyoHokokuTokeiData> 特定負担限度額リスト,
             List<JigyoHokokuTokeiData> 利用者負担リスト,
-            List<JigyoHokokuTokeiData> 修正リスト) {
+            List<JigyoHokokuTokeiData> 修正リスト,
+            RString 様式種類,
+            List<RString> list22,
+            List<RString> list32) {
 
+        Code 特定負担限度額集計番号 = null;
+        Code 利用者負担集計番号 = null;
+        if (list22.contains(様式種類)) {
+            特定負担限度額集計番号 = 集計番号_０７２０;
+            利用者負担集計番号 = 集計番号_０７０２;
+        } else if (list32.contains(様式種類)) {
+            特定負担限度額集計番号 = 集計番号_１０２０;
+            利用者負担集計番号 = 集計番号_１００２;
+        }
+        if (特定負担限度額リスト == null || 特定負担限度額リスト.isEmpty()) {
+            特定負担限度額リスト = new ArrayList<>();
+            JigyoHokokuTokeiData entity = 利用者負担リスト.get(0).createBuilderForEdit()
+                    .set集計番号(特定負担限度額集計番号)
+                    .set横番号(Decimal.ONE)
+                    .set縦番号(Decimal.ONE)
+                    .set集計結果値(null)
+                    .set集計項目名称(null)
+                    .set縦項目コード(null)
+                    .set横項目コード(null).build();
+            特定負担限度額リスト.add(entity);
+        }
+        if (利用者負担リスト == null || 利用者負担リスト.isEmpty()) {
+            利用者負担リスト = new ArrayList<>();
+            JigyoHokokuTokeiData entity = 特定負担限度額リスト.get(0).createBuilderForEdit()
+                    .set集計番号(利用者負担集計番号)
+                    .set横番号(Decimal.ONE)
+                    .set縦番号(Decimal.ONE)
+                    .set集計結果値(null)
+                    .set集計項目名称(null)
+                    .set縦項目コード(null)
+                    .set横項目コード(null).build();
+            利用者負担リスト.add(entity);
+        }
         修正リスト = set集計結果値(div.getPanelDaigo().getTxtKensu522().getValue(),
                 修正リスト, 特定負担限度額リスト, Decimal.ONE, Decimal.ONE);
         修正リスト = get特定負担限度額_認定件数(特定負担限度額リスト, 修正リスト, NUM_2,
@@ -1009,26 +1050,26 @@ public class YoshikiIchinoniIchinosanHoseiHandler {
      * @return boolean チェック結果
      */
     public boolean is整合性チェック_NG() {
-//        if (DBU0020031StateName.修正状態1.getName().equals(this)) {
-        RString 介護老人福祉施設 = div.getPanelDaisan().getTxtShinseiKensu1().getValue();
-        RString 介護老人保健施設 = div.getPanelDaisan().getTxtShinseiKensu2().getValue();
-        RString 介護療養型医療施設 = div.getPanelDaisan().getTxtShinseiKensu3().getValue();
-        RString 地域密着型 = div.getPanelDaisan().getTxtShinseiKensu4().getValue();
-        RString その他 = div.getPanelDaisan().getTxtShinseiKensu5().getValue();
-        RString 計 = div.getPanelDaisan().getTxtShinseiKensu6().getValue();
-        Decimal 福祉施設 = (null == 介護老人福祉施設 || 介護老人福祉施設.isEmpty())
-                ? Decimal.ZERO : new Decimal(介護老人福祉施設.toString());
-        Decimal 保健施設 = (null == 介護老人保健施設 || 介護老人保健施設.isEmpty())
-                ? Decimal.ZERO : new Decimal(介護老人保健施設.toString());
-        Decimal 医療施設 = (null == 介護療養型医療施設 || 介護療養型医療施設.isEmpty())
-                ? Decimal.ZERO : new Decimal(介護療養型医療施設.toString());
-        Decimal 密着型 = (null == 地域密着型 || 地域密着型.isEmpty())
-                ? Decimal.ZERO : new Decimal(地域密着型.toString());
-        Decimal その他data = (null == その他 || その他.isEmpty()) ? Decimal.ZERO : new Decimal(その他.toString());
-        Decimal 計data = (null == 計 || 計.isEmpty()) ? Decimal.ZERO : new Decimal(計.toString());
-        return !計data.equals(福祉施設.add(保健施設).add(医療施設).add(密着型).add(その他data));
-//        }
-//        return false;
+        if (DBU0020031StateName.修正状態1.getName().equals(ViewStateHolder.get(ViewStateKeys.今画面状態, RString.class))) {
+            RString 介護老人福祉施設 = div.getPanelDaisan().getTxtShinseiKensu1().getValue();
+            RString 介護老人保健施設 = div.getPanelDaisan().getTxtShinseiKensu2().getValue();
+            RString 介護療養型医療施設 = div.getPanelDaisan().getTxtShinseiKensu3().getValue();
+            RString 地域密着型 = div.getPanelDaisan().getTxtShinseiKensu4().getValue();
+            RString その他 = div.getPanelDaisan().getTxtShinseiKensu5().getValue();
+            RString 計 = div.getPanelDaisan().getTxtShinseiKensu6().getValue();
+            Decimal 福祉施設 = (null == 介護老人福祉施設 || 介護老人福祉施設.isEmpty())
+                    ? Decimal.ZERO : new Decimal(介護老人福祉施設.toString());
+            Decimal 保健施設 = (null == 介護老人保健施設 || 介護老人保健施設.isEmpty())
+                    ? Decimal.ZERO : new Decimal(介護老人保健施設.toString());
+            Decimal 医療施設 = (null == 介護療養型医療施設 || 介護療養型医療施設.isEmpty())
+                    ? Decimal.ZERO : new Decimal(介護療養型医療施設.toString());
+            Decimal 密着型 = (null == 地域密着型 || 地域密着型.isEmpty())
+                    ? Decimal.ZERO : new Decimal(地域密着型.toString());
+            Decimal その他data = (null == その他 || その他.isEmpty()) ? Decimal.ZERO : new Decimal(その他.toString());
+            Decimal 計data = (null == 計 || 計.isEmpty()) ? Decimal.ZERO : new Decimal(計.toString());
+            return !計data.equals(福祉施設.add(保健施設).add(医療施設).add(密着型).add(その他data));
+        }
+        return false;
     }
 
     /**
