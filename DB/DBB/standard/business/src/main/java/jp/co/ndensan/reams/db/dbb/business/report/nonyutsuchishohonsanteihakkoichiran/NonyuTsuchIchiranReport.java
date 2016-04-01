@@ -90,6 +90,23 @@ public class NonyuTsuchIchiranReport extends Report<NonyuTsuchIchiranSource> {
         }
     }
 
+    /**
+     * 変数付値、復雑度を簡素化する
+     *
+     * @param 編集後本算定通知書共通情報
+     * @param item
+     */
+    private void setOtherValue(EditedHonSanteiTsuchiShoKyotsu 編集後本算定通知書共通情報, NonyuTsuchIchiranItem item) {
+        if (編集後本算定通知書共通情報.get更正後() != null
+                && 編集後本算定通知書共通情報.get更正後().get普徴期別金額リスト() != null) {
+            for (UniversalPhase entity : 編集後本算定通知書共通情報.get更正後().get普徴期別金額リスト()) {
+                if (entity.get期() == Integer.valueOf(バッチパラメータ.get出力期().toString())) {
+                    item.setListUpper_10(new RString(entity.get金額().toString()));
+                }
+            }
+        }
+    }
+
     private void makeNonyuTsuchIchiranItemList() {
         for (int i = 0; i < 編集後本算定通知書共通情報.size(); i++) {
             NonyuTsuchIchiranItem item1 = new NonyuTsuchIchiranItem();
@@ -115,7 +132,8 @@ public class NonyuTsuchIchiranReport extends Report<NonyuTsuchIchiranSource> {
             if (編集後本算定通知書共通情報.get(i).get被保険者番号() != null) {
                 item1.setListUpper_3(編集後本算定通知書共通情報.get(i).get被保険者番号().value());
             }
-            if (編集後本算定通知書共通情報.get(i).get編集後個人() != null && 編集後本算定通知書共通情報.get(i).get編集後個人().get世帯コード() != null) {
+            if (編集後本算定通知書共通情報.get(i).get編集後個人() != null && 編集後本算定通知書共通情報.get(i).
+                    get編集後個人().get世帯コード() != null) {
                 item1.setListUpper_4(new RString(編集後本算定通知書共通情報.get(i).get編集後個人().get世帯コード().toString()));
             }
             if (編集後本算定通知書共通情報.get(i).get表示コード() != null) {
@@ -126,21 +144,23 @@ public class NonyuTsuchIchiranReport extends Report<NonyuTsuchIchiranSource> {
             if (編集後本算定通知書共通情報.get(i).get編集後宛先() != null) {
                 item1.setListUpper_8(編集後本算定通知書共通情報.get(i).get編集後宛先().get宛先行政区());
             }
-            item1.setListUpper_9(new RString(編集後本算定通知書共通情報.get(i).get更正後().get確定保険料_年額().toString()));
-            if (編集後本算定通知書共通情報.get(i).get更正後().get普徴期別金額リスト() != null) {
-                for (UniversalPhase entity : 編集後本算定通知書共通情報.get(i).get更正後().get普徴期別金額リスト()) {
-                    if (entity.get期() == Integer.valueOf(バッチパラメータ.get出力期().toString())) {
-                        item1.setListUpper_10(new RString(entity.get金額().toString()));
-                    }
-                }
+            if (編集後本算定通知書共通情報.get(i).get更正後() != null
+                    && 編集後本算定通知書共通情報.get(i).get更正後().get確定保険料_年額() != null) {
+                item1.setListUpper_9(new RString(編集後本算定通知書共通情報.get(i).get更正後().get確定保険料_年額().toString()));
             }
+            setOtherValue(編集後本算定通知書共通情報.get(i), item1);
             if ((編集後本算定通知書共通情報.get(i).get編集後宛先() != null) && ((編集後本算定通知書共通情報.get(i).get編集後宛先().get本人名称())
                     != (編集後本算定通知書共通情報.get(i).get編集後宛先().get宛先名称()))) {
                 item1.setListUpper_12(new RString("*" + "　" + 編集後本算定通知書共通情報.get(i).get編集後宛先().get宛先名称().toString()));
             }
-            item1.setListUpper_13(編集後本算定通知書共通情報.get(i).get更正後().get生保開始日());
+            if (編集後本算定通知書共通情報.get(i).get更正後() != null
+                    && 編集後本算定通知書共通情報.get(i).get更正後().get生保開始日() != null) {
+                item1.setListUpper_13(編集後本算定通知書共通情報.get(i).get更正後().get生保開始日());
+            }
+
             RString 生活保護扶助名称 = null;
-            if (編集後本算定通知書共通情報.get(i).get更正後().get生活保護扶助種類().toString() != null) {
+            if (編集後本算定通知書共通情報.get(i).get更正後() != null
+                    && 編集後本算定通知書共通情報.get(i).get更正後().get生活保護扶助種類().toString() != null) {
                 生活保護扶助名称 = CodeMaster.getCode(SubGyomuCode.URZ業務共通_共通系,
                         URZCodeShubetsu.扶助種類コード.getCodeShubetsu(),
                         new Code(編集後本算定通知書共通情報.get(i).get更正後().get生活保護扶助種類().toString())).getコード名称();
@@ -181,19 +201,22 @@ public class NonyuTsuchIchiranReport extends Report<NonyuTsuchIchiranSource> {
         if (編集後本算定通知書共通情報.get(i).get編集後宛先() != null) {
             item1.setListLower_3(編集後本算定通知書共通情報.get(i).get編集後宛先().get町域());
         }
-        if (編集後本算定通知書共通情報.get(i).get更正後().get保険料段階() != null) {
+        if (編集後本算定通知書共通情報.get(i).get更正後() != null
+                && 編集後本算定通知書共通情報.get(i).get更正後().get保険料段階() != null) {
             item1.setListLower_4(編集後本算定通知書共通情報.get(i).get更正後().get保険料段階());
         }
         if (編集後本算定通知書共通情報.get(i).get今後納付すべき額() != null) {
             item1.setListLower_5(new RString(編集後本算定通知書共通情報.get(i).get今後納付すべき額().toString()));
         }
-        if (編集後本算定通知書共通情報.get(i).get更正後().get普徴期別金額リスト() != null) {
+        if (編集後本算定通知書共通情報.get(i).get更正後() != null
+                && 編集後本算定通知書共通情報.get(i).get更正後().get普徴期別金額リスト() != null) {
             for (UniversalPhase entity : 編集後本算定通知書共通情報.get(i).get更正後().get普徴期別金額リスト()) {
                 if (entity.get期() == (Integer.valueOf(バッチパラメータ.get出力期().toString()) + 1)) {
                     item1.setListLower_6(new RString(entity.get金額().toString()));
                 }
             }
         }
+        //TODO ビジネス設計_DBBBZ43002_本算定通知書一括発行（バッチ）まだ完成していない
         item1.setListLower_8(new RString("口座情報（PSMで取得"));
         targets.add(item1);
     }
