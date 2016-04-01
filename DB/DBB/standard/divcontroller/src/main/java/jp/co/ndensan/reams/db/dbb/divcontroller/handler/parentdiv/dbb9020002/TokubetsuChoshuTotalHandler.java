@@ -84,8 +84,6 @@ public final class TokubetsuChoshuTotalHandler {
     private static final RString 選択数エラーメッセージ2 = new RString("月の納期限");
     private static final RString 保険者構成エラーメッセージ
             = new RString("保険者が単一市町村または広域市町村ではないため処理の継続");
-    private static final RString 平成18年から平20年まで = new RString("平成18年から平20年まで");
-    private static final RString 平成17年以前 = new RString("平成17年以前");
     private static final RString FORMAT = new RString("%02d");
     private static final RString 一月 = new RString("01");
     private static final RString 二月 = new RString("02");
@@ -200,6 +198,7 @@ public final class TokubetsuChoshuTotalHandler {
     private List<KeyValueDataSource> create市町村指定DDL(ShichosonSecurityJoho 市町村セキュリティ情報) {
         List<KeyValueDataSource> list = new ArrayList<>();
         // TODO QA No.534(Redmine#80710)
+        市町村セキュリティ情報.get市町村情報();
         list.add(new KeyValueDataSource(RString.EMPTY, RString.EMPTY));
         return list;
     }
@@ -752,13 +751,11 @@ public final class TokubetsuChoshuTotalHandler {
     public void 納期限チェック() {
         for (dgKibetsuJoho_Row row : div.getTokubetsuChoshu().getTabTokucho().getTplKibetsuHasuJoho()
                 .getKibetsuJohoHasu().getDgKibetsuJoho().getDataSource()) {
-            if (row.getSelected()) {
-                if (row.getTxtNokigen().getValue() == null || row.getTxtNokigen().getValue().isEmpty()) {
-                    RStringBuilder 納期限エラー = new RStringBuilder();
-                    納期限エラー.append(選択数エラーメッセージ1).append(row.getTxtTsuki()).append(選択数エラーメッセージ2);
-                    throw new ApplicationException(UrErrorMessages.入力値が不正_追加メッセージあり.getMessage()
-                            .replace(納期限エラー.toString()));
-                }
+            if (row.getSelected() && (row.getTxtNokigen().getValue() == null || row.getTxtNokigen().getValue().isEmpty())) {
+                RStringBuilder 納期限エラー = new RStringBuilder();
+                納期限エラー.append(選択数エラーメッセージ1).append(row.getTxtTsuki()).append(選択数エラーメッセージ2);
+                throw new ApplicationException(UrErrorMessages.入力値が不正_追加メッセージあり.getMessage()
+                        .replace(納期限エラー.toString()));
             }
         }
     }
@@ -787,44 +784,37 @@ public final class TokubetsuChoshuTotalHandler {
 
     /**
      * 業務コンフィグを更新する。
-     *
-     * @param 状態 RString
      */
-    public void save業務コンフィグ(RString 状態) {
+    public void save業務コンフィグ() {
         update暫定期数();
         update設定納期数();
         update月の期();
         update特徴情報月処理区分();
         update期別テーブル();
-        if (!平成17年以前.equals(状態)) {
-            update平準化計算方法_6月分();
-            update平準化計算方法_6月分減額();
-            update平準化計算方法_6月分増額();
-            update平準化計算方法_8月分();
-            update平準化計算方法_8月分減額();
-            update平準化計算方法_8月分増額();
-            update特徴開始月_4月捕捉();
-            update特徴開始月_6月捕捉();
-            update特徴開始月_8月捕捉();
-            update特徴開始月_10月捕捉();
-            update特徴開始月_12月捕捉();
-            update特徴開始月_2月捕捉();
-            update年額基準年度_4月開始();
-            update年額基準年度_6月開始();
-            update年額基準年度_8月開始();
-            update依頼金額計算方法_12月開始();
-            update依頼金額計算方法_2月開始();
-            update依頼金額計算方法_4月開始();
-            update依頼金額計算方法_6月開始();
-            update依頼金額計算方法_8月開始();
-            update特徴開始前普通徴収_6月();
-            update特徴開始前普通徴収_8月();
-            update特徴開始前普通徴収_10月();
-            if (!平成18年から平20年まで.equals(状態)) {
-                update普徴切替方法();
-            }
-        }
-
+        update普徴切替方法();
+        update平準化計算方法_6月分();
+        update平準化計算方法_6月分減額();
+        update平準化計算方法_6月分増額();
+        update平準化計算方法_8月分();
+        update平準化計算方法_8月分減額();
+        update平準化計算方法_8月分増額();
+        update特徴開始月_4月捕捉();
+        update特徴開始月_6月捕捉();
+        update特徴開始月_8月捕捉();
+        update特徴開始月_10月捕捉();
+        update特徴開始月_12月捕捉();
+        update特徴開始月_2月捕捉();
+        update年額基準年度_4月開始();
+        update年額基準年度_6月開始();
+        update年額基準年度_8月開始();
+        update依頼金額計算方法_12月開始();
+        update依頼金額計算方法_2月開始();
+        update依頼金額計算方法_4月開始();
+        update依頼金額計算方法_6月開始();
+        update依頼金額計算方法_8月開始();
+        update特徴開始前普通徴収_6月();
+        update特徴開始前普通徴収_8月();
+        update特徴開始前普通徴収_10月();
     }
 
     private void update暫定期数() {

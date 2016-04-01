@@ -29,9 +29,6 @@ public class TokubetsuChoshuTotal {
 
     private static final FlexibleYear 平成21年 = new FlexibleYear("2009");
     private static final FlexibleYear 平成17年 = new FlexibleYear("2005");
-    private static final RString 平成21年以降 = new RString("平成21年以降");
-    private static final RString 平成18年から平20年まで = new RString("平成18年から平20年まで");
-    private static final RString 平成17年以前 = new RString("平成17年以前");
     private static final RString 終了メッセージ1 = new RString("調定年度：");
     private static final RString 終了メッセージ2 = new RString("年度");
     private static final RString 終了メッセージ3 = new RString("システム管理登録_特別徴収保存処理");
@@ -113,7 +110,7 @@ public class TokubetsuChoshuTotal {
      * @return ResponseData<TokubetsuChoshuTotalDiv>
      */
     public ResponseData<TokubetsuChoshuTotalDiv> onClick_btnKoshinFrom2009(TokubetsuChoshuTotalDiv div) {
-        return 保存処理(div, 平成21年以降);
+        return 保存処理(div);
     }
 
     /**
@@ -123,7 +120,7 @@ public class TokubetsuChoshuTotal {
      * @return ResponseData<TokubetsuChoshuTotalDiv>
      */
     public ResponseData<TokubetsuChoshuTotalDiv> onClick_btnKoshinFrom2006To2008(TokubetsuChoshuTotalDiv div) {
-        return 保存処理(div, 平成18年から平20年まで);
+        return 保存処理(div);
     }
 
     /**
@@ -133,7 +130,7 @@ public class TokubetsuChoshuTotal {
      * @return ResponseData<TokubetsuChoshuTotalDiv>
      */
     public ResponseData<TokubetsuChoshuTotalDiv> onClick_btnKoshinTo2005(TokubetsuChoshuTotalDiv div) {
-        return 保存処理(div, 平成17年以前);
+        return 保存処理(div);
     }
 
     /**
@@ -172,7 +169,7 @@ public class TokubetsuChoshuTotal {
      * @param div TokubetsuChoshuTotalDiv
      * @return ResponseData<TokubetsuChoshuTotalDiv>
      */
-    private ResponseData<TokubetsuChoshuTotalDiv> 保存処理(TokubetsuChoshuTotalDiv div, RString 状態) {
+    private ResponseData<TokubetsuChoshuTotalDiv> 保存処理(TokubetsuChoshuTotalDiv div) {
         getHandler(div).チェック選択制御();
         ValidationMessageControlPairs valid = getTokubetsuChoshuTotalValidationHandler(div).validate();
         if (valid.iterator().hasNext()) {
@@ -183,7 +180,7 @@ public class TokubetsuChoshuTotal {
         if (!div.getKonkaiShoriNaiyo().getDdlShichosonSelect().isVisible()) {
             getHandler(div).save納期限(調定年度);
         }
-        getHandler(div).save業務コンフィグ(状態);
+        getHandler(div).save業務コンフィグ();
         RStringBuilder rsb = new RStringBuilder();
         rsb.append(終了メッセージ1).append(調定年度.wareki().toDateString()).append(終了メッセージ2);
         div.getKanryoMessage().getCcdKanryoMessage().setMessage(

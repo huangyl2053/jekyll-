@@ -47,15 +47,12 @@ public enum TokubetsuChoshuTotalSpec implements IPredicate<TokubetsuChoshuTotalD
                                 .getRadZogakuHeijunKa().getSelectedKey())) {
                     return false;
                 }
-            } else if (TokuchoHeijunkaKeisanHoho6Gatsu.平準化しない.getコード().equals(div.getTokubetsuChoshu().getTabTokucho()
-                    .getTplKibetsuHasuJoho().getHeijunka6GatsuKeisanHoho().getDdlHeijunkaKeisanHoho().getSelectedKey())) {
-                if (HeijunkaUmu.する.getコード().equals(div.getTokubetsuChoshu().getTabTokucho()
-                        .getTplKibetsuHasuJoho().getHeijunka6GatsuKeisanHoho().getRadGengakuHeijunKa().getSelectedKey())
-                        || HeijunkaUmu.する.getコード().equals(div.getTokubetsuChoshu().getTabTokucho()
-                                .getTplKibetsuHasuJoho().getHeijunka6GatsuKeisanHoho()
-                                .getRadZogakuHeijunKa().getSelectedKey())) {
-                    return false;
-                }
+            } else if (HeijunkaUmu.する.getコード().equals(div.getTokubetsuChoshu().getTabTokucho()
+                    .getTplKibetsuHasuJoho().getHeijunka6GatsuKeisanHoho().getRadGengakuHeijunKa().getSelectedKey())
+                    || HeijunkaUmu.する.getコード().equals(div.getTokubetsuChoshu().getTabTokucho()
+                            .getTplKibetsuHasuJoho().getHeijunka6GatsuKeisanHoho()
+                            .getRadZogakuHeijunKa().getSelectedKey())) {
+                return false;
             }
             return true;
         }
@@ -71,16 +68,12 @@ public enum TokubetsuChoshuTotalSpec implements IPredicate<TokubetsuChoshuTotalD
                                 .getRad8GatsuZogakuHeijunKa().getSelectedKey())) {
                     return false;
                 }
-            } else if (TokuchoHeijunkaKeisanHoho8Gatsu.平準化しない.getコード().equals(div.getTokubetsuChoshu().getTabTokucho()
-                    .getTplKibetsuHasuJoho().getHasuHeijunkaJoho().getHeijunka8GatsuKeisanHoho()
-                    .getDdlHeijunka8GatsuKeisanHoho().getSelectedKey())) {
-                if (HeijunkaUmu.する.getコード().equals(div.getTokubetsuChoshu().getTabTokucho().getTplKibetsuHasuJoho()
-                        .getHasuHeijunkaJoho().getHeijunka8GatsuKeisanHoho().getRad8GatsuGengakuHeijunKa().getSelectedKey())
-                        || HeijunkaUmu.する.getコード().equals(div.getTokubetsuChoshu().getTabTokucho()
-                                .getTplKibetsuHasuJoho().getHasuHeijunkaJoho().getHeijunka8GatsuKeisanHoho()
-                                .getRad8GatsuZogakuHeijunKa().getSelectedKey())) {
-                    return false;
-                }
+            } else if (HeijunkaUmu.する.getコード().equals(div.getTokubetsuChoshu().getTabTokucho().getTplKibetsuHasuJoho()
+                    .getHasuHeijunkaJoho().getHeijunka8GatsuKeisanHoho().getRad8GatsuGengakuHeijunKa().getSelectedKey())
+                    || HeijunkaUmu.する.getコード().equals(div.getTokubetsuChoshu().getTabTokucho()
+                            .getTplKibetsuHasuJoho().getHasuHeijunkaJoho().getHeijunka8GatsuKeisanHoho()
+                            .getRad8GatsuZogakuHeijunKa().getSelectedKey())) {
+                return false;
             }
             return true;
         }
