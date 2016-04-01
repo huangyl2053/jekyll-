@@ -24,7 +24,10 @@ public class NoryokuMiteikaNinchishoKoreishaShihyoCode implements Comparable<Nor
         IDbColumnMappable, IValidatable, ICodeWrapValueObject {
 
     private final Code code;
-
+    /**
+     * NoryokuMiteikaNinchishoKoreishaShihyoCodeのEMPTY値です。
+     *
+     */
     public static final NoryokuMiteikaNinchishoKoreishaShihyoCode EMPTY;
 
     /**
@@ -45,8 +48,7 @@ public class NoryokuMiteikaNinchishoKoreishaShihyoCode implements Comparable<Nor
     }
 
     /**
-     * DB等からコンストラクタを利用して直接マッピングされた、<br/>
-     * {@link NoryokuMiteikaNinchishoKoreishaShihyoCode}が持つcodeについてバリデーションを実施します。
+     * DB等からコンストラクタを利用して直接マッピングされた、<br/> {@link NoryokuMiteikaNinchishoKoreishaShihyoCode}が持つcodeについてバリデーションを実施します。
      *
      * @return {@link IValidationMessages}
      */
@@ -60,11 +62,9 @@ public class NoryokuMiteikaNinchishoKoreishaShihyoCode implements Comparable<Nor
      * 指定のcodeについて、バリデーションを実施し、バリデーション実施結果としての、<br/>
      * {@link IValidationMessages}にメッセージが含まれていた場合に{@link IllegalArgumentException}をthrowします。<br/>
      *
-     * @param code
-     * {@link NoryokuMiteikaNinchishoKoreishaShihyoCode}となるコード{@link Code}
+     * @param code {@link NoryokuMiteikaNinchishoKoreishaShihyoCode}となるコード{@link Code}
      * @return {@link NoryokuMiteikaNinchishoKoreishaShihyoCode}
-     * @throws IllegalArgumentException
-     * {@link NoryokuMiteikaNinchishoKoreishaShihyoCodeSpec}の仕様を満たさない場合
+     * @throws IllegalArgumentException {@link NoryokuMiteikaNinchishoKoreishaShihyoCodeSpec}の仕様を満たさない場合
      */
     public static NoryokuMiteikaNinchishoKoreishaShihyoCode createCheckInstance(Code code) throws IllegalArgumentException {
         List<IValidationMessage> validResult

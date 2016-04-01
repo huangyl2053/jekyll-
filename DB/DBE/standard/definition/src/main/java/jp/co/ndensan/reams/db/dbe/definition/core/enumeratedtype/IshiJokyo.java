@@ -51,6 +51,7 @@ public enum IshiJokyo {
      *
      * @param code 医師の状況コード
      * @return 引数のコードに対応するIshiJokyo型のenum
+     * @throws NullPointerException Error
      * @throws IllegalArgumentException 実在しない医師状況コードの場合
      */
     public static IshiJokyo toValue(RString code) throws NullPointerException, IllegalArgumentException {

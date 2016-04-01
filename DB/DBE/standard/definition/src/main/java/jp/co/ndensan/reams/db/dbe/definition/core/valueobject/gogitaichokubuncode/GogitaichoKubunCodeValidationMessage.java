@@ -18,6 +18,9 @@ import jp.co.ndensan.reams.uz.uza.message.Message;
  */
 public enum GogitaichoKubunCodeValidationMessage implements IValidationMessage {
 
+    /**
+     * コードがNullであること判定する.
+     */
     コードがNullであること(GogitaichoKubunCodeErrorMessage.コードがNullであること);
     private final Message message;
 
@@ -35,6 +38,9 @@ public enum GogitaichoKubunCodeValidationMessage implements IValidationMessage {
      */
     public enum GogitaichoKubunCodeErrorMessage implements IMessageGettable {
 
+        /**
+         * 合議体長区分コード判定する.
+         */
         コードがNullであること(1, "合議体長区分コードを指定してください。");
         private final int no;
         private final RString message;

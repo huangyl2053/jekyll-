@@ -13,7 +13,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
  */
 @lombok.Getter
 @SuppressWarnings("PMD.UnusedPrivateField")
-public class ShinsakaiIinWaritsukeParameter {
+public final class ShinsakaiIinWaritsukeParameter {
 
     private final RString kaisaiNo;
     private final LasdecCode shichousonCode;

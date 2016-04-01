@@ -12,6 +12,9 @@ import jp.co.ndensan.reams.uz.uza.core.validation.IPredicate;
  */
 public enum NoryokuMiteikaNinchishoKoreishaShihyoCodeSpec implements IPredicate<NoryokuMiteikaNinchishoKoreishaShihyoCode> {
 
+    /**
+     * コードがNullでないこと
+     */
     コードがNullでないこと {
 
                 /**
