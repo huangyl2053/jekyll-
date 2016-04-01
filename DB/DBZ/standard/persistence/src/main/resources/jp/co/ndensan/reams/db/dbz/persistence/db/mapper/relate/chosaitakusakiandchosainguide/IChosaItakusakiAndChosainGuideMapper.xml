@@ -63,6 +63,7 @@
             DbT4910."chosaItakuKubun" =#{認定調査区分}
         </if>
         <if test="地区コードフラグ"  >
+            AND
             DbT4910."waritsukeChiku" =  LIKE '%'||#{地区コード}||'%'
         </if>
         <if test="認定調査員コードFROMフラグ">

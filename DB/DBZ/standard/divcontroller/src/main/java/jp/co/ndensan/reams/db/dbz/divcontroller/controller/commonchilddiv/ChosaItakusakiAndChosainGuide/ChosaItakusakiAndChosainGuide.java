@@ -6,6 +6,7 @@
 package jp.co.ndensan.reams.db.dbz.divcontroller.controller.commonchilddiv.ChosaItakusakiAndChosainGuide;
 
 import java.util.List;
+import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.GyomuBunrui;
 import jp.co.ndensan.reams.db.dbz.business.core.inkijuntsukishichosonjoho.KijuntsukiShichosonjoho;
 import jp.co.ndensan.reams.db.dbz.business.core.inkijuntsukishichosonjoho.KijuntsukiShichosonjohoiDataPassModel;
 import jp.co.ndensan.reams.db.dbz.definition.param.ikninteichosaitakusakijoho.ChosaItakusakiAndChosainGuideParameter;
@@ -42,7 +43,7 @@ public class ChosaItakusakiAndChosainGuide {
      * @return ResponseData<ChosaItakusakiAndChosainGuideDiv>
      */
     public ResponseData<ChosaItakusakiAndChosainGuideDiv> onLoad(ChosaItakusakiAndChosainGuideDiv div) {
-        div.getHokensha().loadHokenshaList();
+        div.getHokensha().loadHokenshaList(GyomuBunrui.介護認定);
         getHandler(div).intialize();
         return ResponseData.of(div).respond();
     }

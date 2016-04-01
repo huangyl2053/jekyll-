@@ -109,9 +109,8 @@ public class ShikakuRirekiInfoHandler {
                             ? RString.EMPTY : ShikakuSoshitsuJiyu.toValue(business.get喪失事由コード()).getName());
                     dgShikakuRirekiInfo_Row.setJutokuKubun(business.get住所地特例フラグ() == null
                             ? RString.EMPTY : JushochitokureishaKubun.toValue(business.get住所地特例フラグ()).getName());
-                    //TODO QA973提出する。
-                    dgShikakuRirekiInfo_Row.setShozaiHokensha(business.get市町村名称() == null
-                            ? RString.EMPTY : business.get市町村名称());
+                    dgShikakuRirekiInfo_Row.setShozaiHokensha(ShichosonSecurityJoho.getKanriJoho(GyomuBunrui.介護事務).get市町村情報().get市町村名称() == null
+                            ? RString.EMPTY : ShichosonSecurityJoho.getKanriJoho(GyomuBunrui.介護事務).get市町村情報().get市町村名称());
                     dgShikakuRirekiInfo_Row.setSochimotoHokensha(RString.EMPTY);
                     dgShikakuRirekiInfo_Row.setKyuHokensha(business.get旧市町村名称() == null
                             ? RString.EMPTY : business.get旧市町村名称());
