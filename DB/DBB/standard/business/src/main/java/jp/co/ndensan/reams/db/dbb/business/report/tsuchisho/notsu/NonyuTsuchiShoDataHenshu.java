@@ -6,12 +6,17 @@
 package jp.co.ndensan.reams.db.dbb.business.report.tsuchisho.notsu;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.Set;
 import jp.co.ndensan.reams.ca.cax.business.report.seikyu.SeikyuForPrinting;
 import jp.co.ndensan.reams.db.dbb.definition.core.HyojiUmu;
 import jp.co.ndensan.reams.db.dbb.definition.core.fuka.KozaKubun;
 import jp.co.ndensan.reams.db.dbb.definition.core.tsuchisho.notsu.HenshuHaniKubun;
 import jp.co.ndensan.reams.db.dbb.definition.core.tsuchisho.notsu.KanendoMongon;
+import jp.co.ndensan.reams.db.dbb.definition.core.tsuchisho.notsu.NofugakuranHyojiKubun;
+import jp.co.ndensan.reams.db.dbb.definition.core.tsuchisho.notsu.OCRShutsuryokuHoho;
 import jp.co.ndensan.reams.db.dbb.definition.core.tsuchisho.notsu.RyoshuHizukeRan;
 import jp.co.ndensan.reams.db.dbb.definition.core.tsuchisho.notsu.RyoshuinranHyojiKubun;
 import jp.co.ndensan.reams.db.dbb.definition.core.tsuchisho.notsu.RyoshushoHizukeranKiHyoji;
@@ -62,6 +67,7 @@ public class NonyuTsuchiShoDataHenshu {
     private final int 整数12 = 12;
     private final int 整数13 = 13;
     private final int 整数14 = 14;
+    private final RString 星10 = new RString("**********");
 
     /**
      * 仮算定納入通知書情報を作成する。
@@ -275,7 +281,7 @@ public class NonyuTsuchiShoDataHenshu {
                 continue;
             }
             NonyuTsuchiShoKiJoho 納入通知書期情報 = get納入通知書期情報(普徴納期情報リスト, 請求情報リスト, 期, 出力期, 銀振印字位置,
-                    ブック開始位置, コンビニ連帳印字位置, コンビニカット印字位置, 納入通知書制御情報, 金額, 収入額, 納付額);
+                    ブック開始位置, コンビニ連帳印字位置, コンビニカット印字位置, 納入通知書制御情報, 金額, 収入額, 納付額, 口座区分);
             納入通知書期情報リスト.add(納入通知書期情報);
         }
         return 納入通知書期情報リスト;
@@ -292,7 +298,7 @@ public class NonyuTsuchiShoDataHenshu {
 
     private NonyuTsuchiShoKiJoho get納入通知書期情報(List<NokiJoho> 普徴納期情報リスト, List<SeikyuForPrinting> 請求情報リスト, int 期,
             Kitsuki 出力期, int 銀振印字位置, int ブック開始位置, int コンビニ連帳印字位置, int コンビニカット印字位置,
-            NonyuTsuchiShoSeigyoJoho 納入通知書制御情報, Decimal 金額, Decimal 収入額, Decimal 納付額) {
+            NonyuTsuchiShoSeigyoJoho 納入通知書制御情報, Decimal 金額, Decimal 収入額, Decimal 納付額, KozaKubun 口座区分) {
         NonyuTsuchiShoKiJoho 納入通知書期情報 = new NonyuTsuchiShoKiJoho();
         NokiJoho 普徴納期情報 = get普徴納期情報By期(普徴納期情報リスト, 期);
         Noki 納期 = null == 普徴納期情報.get納期() ? new Noki(new UrT0729NokiKanriEntity()) : 普徴納期情報.get納期();
@@ -305,8 +311,7 @@ public class NonyuTsuchiShoDataHenshu {
         納入通知書期情報.set月(出力期.get月());
         納入通知書期情報.set期表記(new RString(String.valueOf(出力期.get期AsInt())).padLeft(RString.HALF_SPACE, 2));
         納入通知書期情報.set月表記(new RString(String.valueOf(出力期.get月AsInt())).padLeft(RString.HALF_SPACE, 2));
-        //TODO QA #76901
-        納入通知書期情報.set随時表記(KanendoMongon.随時.equals(納入通知書制御情報.get過年度文言1()) ? null : RString.EMPTY);
+        納入通知書期情報.set随時表記(KanendoMongon.随時.equals(納入通知書制御情報.get過年度文言1()) ? KanendoMongon.随時.get名称() : RString.EMPTY);
         納入通知書期情報.set納期開始日(納期.get納期開始日());
         納入通知書期情報.set納期開始日表記(納期.get納期開始日().wareki()
                 .eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN).separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString());
@@ -324,13 +329,22 @@ public class NonyuTsuchiShoDataHenshu {
         納入通知書期情報.set収入額表記(new RString(String.valueOf(収入額)));
         納入通知書期情報.set差額(金額.subtract(収入額));
         納入通知書期情報.set差額表記(new RString(String.valueOf(金額.subtract(収入額))));
+        boolean is口座振替 = KozaKubun.口座振替.equals(口座区分);
+        boolean is現金納付 = KozaKubun.現金納付.equals(口座区分);
         if (is該当する請求情報ある(請求情報)) {
             納入通知書期情報.set収納機関番号表示用(請求情報.getMpn().get収納機関番号表示用());
             納入通知書期情報.set納付番号(請求情報.getMpn().get納付番号());
             納入通知書期情報.set確認番号(請求情報.getMpn().get確認番号());
             納入通知書期情報.set納付区分(請求情報.getMpn().get納付区分());
-            //TODO 入力.口座区分＝「1：該当」の場合
-            納入通知書期情報.setOCRID(null);
+            if (is口座振替) {
+                納入通知書期情報.setOCRID(請求情報.getOcr().getOCRID());
+                OCRShutsuryokuHoho 口座振替のOCR出力方法 = 納入通知書制御情報.get口座振替のOCR出力方法();
+                納入通知書期情報.setOCR(getOCRBy口座振替のOCR出力方法(請求情報, 口座振替のOCR出力方法));
+            } else if (is現金納付) {
+                納入通知書期情報.setOCRID(空白);
+                納入通知書期情報.setOCR(getNewOCR(請求情報, 空白));
+            }
+            納入通知書期情報.setOCRID(請求情報.getOcr().getOCRID());
             納入通知書期情報.setOCR(null);
             納入通知書期情報.setバーコード情報((HyojiUmu.表示する.equals(納入通知書制御情報.getコンビニバーコード表示())
                     ? 請求情報.getCvs().getバーコード情報() : 空白));
@@ -352,9 +366,7 @@ public class NonyuTsuchiShoDataHenshu {
             納入通知書期情報.setバーコード情報下段(空白);
             納入通知書期情報.setコンビニ支払期限(new RDate(空白.toString()));
         }
-        //TODO 入力.口座区分＝「1：該当」の場合
-        納入通知書期情報.set領収証書納付額欄(null);
-        納入通知書期情報.set納付書納付額欄(null);
+        set納付額欄(is現金納付, is口座振替, 納入通知書期情報, 納付額, 納入通知書制御情報);
         納入通知書期情報.set領収証書領収印欄(RyoshuinranHyojiKubun._口座振替_を印字する.equals(納入通知書制御情報.get領収証書領収印欄()) ? 口座振替 : 空白);
         納入通知書期情報.set納付書領収印欄(RyoshuinranHyojiKubun._口座振替_を印字する.equals(納入通知書制御情報.get納付書領収印欄()) ? 口座振替 : 空白);
         RString 領収日付印欄;
@@ -385,6 +397,52 @@ public class NonyuTsuchiShoDataHenshu {
         納入通知書期情報.set領収日付欄(領収日付欄);
         納入通知書期情報.set領収書日付欄期月(領収書日付欄期月);
         return 納入通知書期情報;
+    }
+
+    private void set納付額欄(boolean is現金納付, boolean is口座振替,
+            NonyuTsuchiShoKiJoho 納入通知書期情報, Decimal 納付額, NonyuTsuchiShoSeigyoJoho 納入通知書制御情報) {
+        if (is現金納付) {
+            納入通知書期情報.set領収証書納付額欄(納付額.compareTo(Decimal.ZERO) <= 0 ? 星10 : new RString(納付額.toString()));
+            納入通知書期情報.set納付書納付額欄(納付額.compareTo(Decimal.ZERO) <= 0 ? 星10 : new RString(納付額.toString()));
+        } else if (is口座振替) {
+            NofugakuranHyojiKubun 納付書納付額欄 = 納入通知書制御情報.get納付書納付額欄();
+            if (NofugakuranHyojiKubun._口座振替_を印字する.equals(納付書納付額欄)) {
+                納入通知書期情報.set領収証書納付額欄(口座振替);
+                納入通知書期情報.set納付書納付額欄(口座振替);
+            } else if (NofugakuranHyojiKubun.__を印字する.equals(納付書納付額欄)) {
+                納入通知書期情報.set領収証書納付額欄(空白);
+                納入通知書期情報.set納付書納付額欄(空白);
+            } else if (NofugakuranHyojiKubun.星印を印字する.equals(納付書納付額欄)) {
+                納入通知書期情報.set領収証書納付額欄(星10);
+                納入通知書期情報.set納付書納付額欄(星10);
+            } else if (NofugakuranHyojiKubun.金額出力.equals(納付書納付額欄)) {
+                納入通知書期情報.set領収証書納付額欄(納付額.compareTo(Decimal.ZERO) <= 0 ? 星10 : new RString(納付額.toString()));
+                納入通知書期情報.set納付書納付額欄(納付額.compareTo(Decimal.ZERO) <= 0 ? 星10 : new RString(納付額.toString()));
+            }
+        }
+    }
+
+    private Map<Integer, RString> getOCRBy口座振替のOCR出力方法(SeikyuForPrinting 請求情報, OCRShutsuryokuHoho 口座振替のOCR出力方法) {
+        if (OCRShutsuryokuHoho._口座振替_ならOCR欄を_星印_でつぶす.equals(口座振替のOCR出力方法)) {
+            return getNewOCR(請求情報, new RString("＊"));
+        } else if (OCRShutsuryokuHoho._口座振替_ならOCR欄を印字する.equals(口座振替のOCR出力方法)) {
+            return 請求情報.getOcr().getOcr();
+        } else if (OCRShutsuryokuHoho._口座振替_ならOCR欄を印字しない.equals(口座振替のOCR出力方法)) {
+            return getNewOCR(請求情報, 空白);
+        }
+        return new HashMap<>();
+    }
+
+    private Map<Integer, RString> getNewOCR(SeikyuForPrinting 請求情報, RString 印字文字列) {
+        Map<Integer, RString> newOCR = new HashMap<>();
+        Map<Integer, RString> 請求情報OCR = 請求情報.getOcr().getOcr();
+        if (請求情報OCR != null && !請求情報OCR.isEmpty()) {
+            Set<Integer> 行目Keys = 請求情報OCR.keySet();
+            for (Integer 行目 : 行目Keys) {
+                newOCR.put(行目, 印字文字列);
+            }
+        }
+        return newOCR;
     }
 
     private List<RString> get各印字位置2(int 月) {
