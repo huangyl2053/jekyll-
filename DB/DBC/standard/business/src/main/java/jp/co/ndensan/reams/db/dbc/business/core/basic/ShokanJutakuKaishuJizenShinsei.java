@@ -380,8 +380,8 @@ public class ShokanJutakuKaishuJizenShinsei
      *
      * @return 判定区分
      */
-    public FlexibleDate get判定区分() {
-        return entity.getHanteiKetteiYMD();
+    public RString get判定区分() {
+        return entity.getHanteiKubun();
     }
 
     /**
