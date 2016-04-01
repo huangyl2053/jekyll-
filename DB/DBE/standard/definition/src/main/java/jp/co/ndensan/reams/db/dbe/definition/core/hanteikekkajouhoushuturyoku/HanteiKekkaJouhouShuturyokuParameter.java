@@ -6,6 +6,7 @@
 package jp.co.ndensan.reams.db.dbe.definition.core.hanteikekkajouhoushuturyoku;
 
 import java.util.List;
+import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.shinsei.ShoriJotaiKubun;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 
@@ -52,6 +53,8 @@ public final class HanteiKekkaJouhouShuturyokuParameter {
     private final boolean 完全一致フラグ;
     private final boolean 部分一致フラグ;
     private final boolean 後方一致フラグ;
+    private final RString 通常 = ShoriJotaiKubun.通常.getコード();
+    private final RString 延期 = ShoriJotaiKubun.延期.getコード();
 
     private HanteiKekkaJouhouShuturyokuParameter(boolean 二次判定日Fromフラグ,
             RString 二次判定日From,
