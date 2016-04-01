@@ -23,7 +23,7 @@
         (<include refid="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT3034ShokanShinseiMapper.noDeleted_DbT3034ShokanShinsei" />) AS dbT3034ShokanShinsei
         ON  "dbT3038ShokanKihon_hiHokenshaNo" = "dbT3034ShokanShinsei_hiHokenshaNo"
         AND "dbT3038ShokanKihon_serviceTeikyoYM" = "dbT3034ShokanShinsei_serviceTeikyoYM"
-        AND "dbT3038ShokanKihon_seiriNp" = "dbT3034ShokanShinsei_seiriNo"
+        AND "dbT3038ShokanKihon_seiriNo" = "dbT3034ShokanShinsei_seiriNo"
         AND "dbT3034ShokanShinsei_shikyuShinseiShinsaKubun" = '1'
         LEFT OUTER JOIN <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.tableName_PsmParamClassShikibetsuTaisho" />
         AS ShikibetsuTaisho
@@ -44,7 +44,7 @@
                type="jp.co.ndensan.reams.db.dbc.entity.db.relate.fukushiyogukonyuhishikyuikkatushinsa.ShokanShinseiEntity">
         <id column="dbT3038ShokanKihon_hiHokenshaNo"/>
         <id column="dbT3038ShokanKihon_serviceTeikyoYM"/>
-        <id column="dbT3038ShokanKihon_seiriNp"/>
+        <id column="dbT3038ShokanKihon_seiriNo"/>
         <id column="dbT3038ShokanKihon_jigyoshaNo"/>
         <id column="dbT3038ShokanKihon_yoshikiNo"/>
         <id column="dbT3038ShokanKihon_meisaiNo"/>

@@ -30,7 +30,7 @@
             (SELECT
                   kihon."hiHokenshaNo",
                   kihon."serviceTeikyoYM",
-                  kihon."seiriNp"
+                  kihon."seiriNo"
             FROM
                rgdb."DbT3038ShokanKihon" kihon
             INNER JOIN
@@ -38,7 +38,7 @@
                ON
                  shukei."hiHokenshaNo" = kihon."hiHokenshaNo"
                  AND shukei."serviceTeikyoYM" = kihon."serviceTeikyoYM"
-                 AND shukei."seiriNo" = kihon."seiriNp"
+                 AND shukei."seiriNo" = kihon."seiriNo"
                  AND shukei."jigyoshaNo" = kihon."jigyoshaNo"
                  AND shukei."yoshikiNo" = kihon."yoshikiNo"
                  AND shukei."meisaiNo" = kihon."meisaiNo"
@@ -46,12 +46,12 @@
             GROUP BY
                 kihon."hiHokenshaNo",
                 kihon."serviceTeikyoYM",   
-                kihon."seiriNp"
+                kihon."seiriNo"
             ) AS T1
             ON
               T1."hiHokenshaNo" = shinsei."dbT3034ShokanShinsei_hiHokenshaNo"
               AND T1."serviceTeikyoYM" = shinsei."dbT3034ShokanShinsei_serviceTeikyoYM"
-              AND T1."seiriNp" = shinsei."dbT3034ShokanShinsei_seiriNo"
+              AND T1."seiriNo" = shinsei."dbT3034ShokanShinsei_seiriNo"
         INNER JOIN
             (SELECT
                   daicho."hihokenshaNo" AS "hihokenshaNo",

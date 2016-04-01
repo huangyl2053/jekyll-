@@ -301,7 +301,7 @@ public class FukushiyoguKonyuhiShikyuKetteiKyufuJissekiHenshu {
             dbT3017entity.setShinsaYM(ketteiYMD.getYearMonth());
             dbT3017entity.setSofuYM(ketteiYMD.getYearMonth());
         }
-        dbT3017entity.setSeiriNo(shokanKihonEntity.getSeiriNp());
+        dbT3017entity.setSeiriNo(shokanKihonEntity.getSeiriNo());
         dbT3017entity.setHokenshaHoyuKyufujissekiJohoSakujoFlag(false);
         dbT3017entity.setState(EntityDataState.Added);
         給付実績基本Dac.save(dbT3017entity);
@@ -396,7 +396,7 @@ public class FukushiyoguKonyuhiShikyuKetteiKyufuJissekiHenshu {
             dbT3033entity.setShinsaYM(ketteiYMD.getYearMonth());
             dbT3033entity.setTorikomiYM(ketteiYMD.getYearMonth());
         }
-        dbT3033entity.setSeiriNo(shokanKihonEntity.getSeiriNp());
+        dbT3033entity.setSeiriNo(shokanKihonEntity.getSeiriNo());
         dbT3033entity.setState(EntityDataState.Added);
         給付実績集計Dac.save(dbT3033entity);
     }

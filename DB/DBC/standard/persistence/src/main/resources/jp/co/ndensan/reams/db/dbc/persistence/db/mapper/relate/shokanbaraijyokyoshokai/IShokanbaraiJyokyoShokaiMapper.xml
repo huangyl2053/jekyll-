@@ -10,7 +10,7 @@
                autoMapping="true">
         <id property="hiHokenshaNo" column="hiHokenshaNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.HihokenshaNoTypeHandler"/>
         <id property="serviceTeikyoYM" column="serviceTeikyoYM" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleYearMonthTypeHandler"/>
-        <id property="seiriNo" column="seiriNp" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <id property="seiriNo" column="seiriNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <id property="yoshikiNo" column="yoshikiNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <id property="jigyoshaNo" column="jigyoshaNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.JigyoshaNoTypeHandler"/>
         <id property="meisanNo" column="meisaiNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
@@ -23,7 +23,7 @@
         SELECT
         BASIC."hiHokenshaNo",
         BASIC."serviceTeikyoYM",
-        BASIC."seiriNp",
+        BASIC."seiriNo",
         BASIC."yoshikiNo",
         BASIC."jigyoshaNo",
         KAIGOB."jigyoshaName",
@@ -83,7 +83,7 @@
         WHERE
         BASIC."serviceTeikyoYM" = #{serviceTeikyoYM}
         AND BASIC."hiHokenshaNo" = #{hiHokenshaNo}
-        AND BASIC."seiriNp" = #{seiriNo}
+        AND BASIC."seiriNo" = #{seiriNo}
         AND BASIC."yoshikiNo" = #{yoshikiNo}
         ORDER BY
         BASIC."jigyoshaNo" ASC

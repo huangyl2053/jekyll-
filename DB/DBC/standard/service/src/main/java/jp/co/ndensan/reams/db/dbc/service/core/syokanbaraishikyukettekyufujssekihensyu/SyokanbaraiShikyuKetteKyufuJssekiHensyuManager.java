@@ -291,7 +291,7 @@ public class SyokanbaraiShikyuKetteKyufuJssekiHensyuManager {
                 dbT3017entity.setAtoHokenSeikyugaku(new Decimal(entity.get後保険請求額()));
                 dbT3017entity.setAtoHokenRiyoshaFutangaku(entity.get後保険負担額());
                 dbT3017entity.setShinsaYM(entity.get審査年月().getYearMonth());
-                dbT3017entity.setSeiriNo(償還払請求基本.getSeiriNp());
+                dbT3017entity.setSeiriNo(償還払請求基本.getSeiriNo());
                 dbT3017entity.setSofuYM(entity.get審査年月().getYearMonth());
                 dbT3017entity.setHokenshaHoyuKyufujissekiJohoSakujoFlag(false);
                 dbT3017entity.setState(EntityDataState.Added);

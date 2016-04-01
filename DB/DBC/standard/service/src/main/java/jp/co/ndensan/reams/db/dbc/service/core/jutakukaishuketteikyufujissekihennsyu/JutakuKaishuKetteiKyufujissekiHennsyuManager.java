@@ -146,7 +146,7 @@ public class JutakuKaishuKetteiKyufujissekiHennsyuManager {
         給付実績基本entity.setMaeHokenSeikyugaku(償還払請求基本Entity.getHokenSeikyugaku());
         給付実績基本entity.setMaeHokenRiyoshaFutangaku(償還払請求基本Entity.getRiyoshaFutangaku());
         給付実績基本entity.setShinsaYM(給付実績編集汎用Entity.getShinsaYM());
-        給付実績基本entity.setSeiriNo(償還払請求基本Entity.getSeiriNp());
+        給付実績基本entity.setSeiriNo(償還払請求基本Entity.getSeiriNo());
         給付実績基本entity.setHokenshaHoyuKyufujissekiJohoSakujoFlag(false);
         給付実績基本entity.setState(EntityDataState.Added);
         給付実績基本Dac.save(給付実績基本entity);
