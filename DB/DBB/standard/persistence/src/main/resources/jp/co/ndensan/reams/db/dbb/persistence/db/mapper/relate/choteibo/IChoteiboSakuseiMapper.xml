@@ -955,6 +955,7 @@
         WHERE
         A."choteiNendo" = #{choteiNendo}
         AND A."fukaNendo" = #{fukaNendo}
+        AND #{chushutsuStYMD} <![CDATA[<=]]> A."choteiNichiji"
         AND A."choteiNichiji" <![CDATA[<]]> #{chushutsuEdYMD}
         AND A."tkSaishutsuKampuGaku" <![CDATA[<>]]> 0
         GROUP BY
@@ -991,6 +992,7 @@
         WHERE
         A."choteiNendo" = #{choteiNendo}
         AND A."fukaNendo" = #{fukaNendo}
+        AND #{chushutsuStYMD} <![CDATA[<=]]> A."choteiNichiji"
         AND A."choteiNichiji" <![CDATA[<]]> #{chushutsuEdYMD}
         AND A."fuSaishutsuKampuGaku" <![CDATA[<>]]> 0
         GROUP BY

@@ -705,6 +705,7 @@ public class ChoteiboSakuseiDataShoriProcess extends SimpleBatchProcessBase {
         Map<String, Object> param = new HashMap<>();
         param.put(KEY_CHOTEINENDO.toString(), 調定年度);
         param.put(KEY_FUKANENDO.toString(), 賦課年度);
+        param.put(KEY_CHUSHUTSUSTYMD.toString(), parameter.getChushutsuStYMD());
         param.put(KEY_CHUSHUTSUENDYMD.toString(), 終了調定日時);
 
         List<SaishutsuKampuEntity> tmpTkEntity = choteiboSakuseiMapper.select特徴歳出還付情報(param);
