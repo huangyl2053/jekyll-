@@ -439,7 +439,11 @@ public class NinteiChosaScheduleInput {
         if (予約不可_KEY.equals(div.getWariateJokyo().getRadYoyakuKahi().getSelectedKey()) && !RString.isNullOrEmpty(temp_申請者管理番号3)) {
             申請者管理番号3 = null;
         } else {
-            申請者管理番号3 = new ShinseishoKanriNo(temp_申請者管理番号3);
+            if (RString.isNullOrEmpty(temp_申請者管理番号3)) {
+                申請者管理番号3 = null;
+            } else {
+                申請者管理番号3 = new ShinseishoKanriNo(temp_申請者管理番号3);
+            }
         }
         if (ninteichosa != null) {
             ninteichosa = ninteichosa.createBuilderForEdit().set予約可能フラグ(予約可_KEY.equals(temp_予約可否))

@@ -8,9 +8,12 @@ package jp.co.ndensan.reams.db.dbz.divcontroller.handler.commonchilddiv.yokaigon
 import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbz.business.core.shinsakaikaisai.ShinsakaiKaisai;
+import jp.co.ndensan.reams.db.dbz.business.core.shinsakaikaisai.ShinsakaiKaisaiMode;
+import jp.co.ndensan.reams.db.dbz.definition.core.shinsakai.IsShiryoSakuseiZumi;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.YokaigoNinteiShinsakaiIchiranList.YokaigoNinteiShinsakaiIchiranList.YokaigoNinteiShinsakaiIchiranListDiv;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.YokaigoNinteiShinsakaiIchiranList.YokaigoNinteiShinsakaiIchiranList.dgShinsakaiIchiran_Row;
 import jp.co.ndensan.reams.db.dbz.divcontroller.viewbox.ViewStateKeys;
+import jp.co.ndensan.reams.db.dbz.entity.db.relate.shinsakaikaisai.ShinsakaiKaisaiRelateEntity;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RTime;
@@ -111,7 +114,7 @@ public class YokaigoNinteiShinsakaiIchiranListHandler {
             row.getDataShutsuryoku().setValue(shinsakaiKaisai.getモバイルデータ出力年月日());
             //Todo QA:811 DBEのenum使用する。2016・03・04
             if (shinsakaiKaisai.is資料作成済フラグ()) {
-                row.setShiryoSakuseiKubun(資料作成済区分_作成済);
+                row.setShiryoSakuseiKubun(IsShiryoSakuseiZumi.toValue(shinsakaiKaisai.is資料作成済フラグ()).get名称());
             } else {
                 row.setShiryoSakuseiKubun(RString.EMPTY);
             }
@@ -141,6 +144,7 @@ public class YokaigoNinteiShinsakaiIchiranListHandler {
             開催番号 = 合議体名称.substring(1, 合議体名称.length() - LENGTH_4);
         }
         ViewStateHolder.put(ViewStateKeys.介護認定審査会共有一覧_開催番号, 開催番号);
+        div.setHdnSelectedGridLine(new RString(String.valueOf(div.getDgShinsakaiIchiran().getActiveRow().getId())));
     }
 
     /**
@@ -158,6 +162,57 @@ public class YokaigoNinteiShinsakaiIchiranListHandler {
             }
         }
         return list;
+    }
+
+    /**
+     * SelectedGridLineを取得する。
+     *
+     */
+    public void getSelectedGridLine() {
+        ShinsakaiKaisaiMode mode = new ShinsakaiKaisaiMode();
+        List<ShinsakaiKaisai> shinsakaiKaisaiList = new ArrayList<>();
+        ShinsakaiKaisaiRelateEntity entity = new ShinsakaiKaisaiRelateEntity();
+        List<dgShinsakaiIchiran_Row> rowList = div.getDgShinsakaiIchiran().getDataSource();
+        for (dgShinsakaiIchiran_Row row : rowList) {
+            if (row.getId() == Integer.valueOf(div.getHdnSelectedGridLine().toString())) {
+                entity.setShinsakaiKaisaiYoteiYMD(row.getKaisaiYoteiDate().getValue());
+                entity.setShinsakaiKaishiYoteiTime(new RString(row.getYoteiKaishiTime().getValue().toString()));
+                entity.setShinsakaiShuryoYoteiTime(new RString(row.getYoteiShuryoTime().getValue().toString()));
+                entity.set合議体名称(row.getShinsakaiMeisho());
+                entity.setGogitaiMei(row.getGogitaiMeisho());
+                entity.set種類(row.getShurui());
+                entity.setShinsakaiKaisaiBashoName(row.getShinsakaiKaijo());
+                entity.setShinsakaiKaisaiYMD(row.getKaisaiDay().getValue());
+                entity.setShinsakaiKaishiTime(new RString(row.getKaisaiTime().getValue().toString()));
+                entity.setShinsakaiShuryoTime(new RString(row.getShuryoTime().getValue().toString()));
+                entity.setShinsakaiYoteiTeiin(row.getYoteiTeiin().getValue());
+                entity.setShinsakaiWariateZumiNinzu(row.getWariateNinzu().getValue());
+                entity.setShinsakaiJisshiNinzu(row.getTaishoNinzu().getValue());
+                entity.set音声記録(row.getOnseiKiroku());
+                entity.setMobileDataOutputYMD(row.getDataShutsuryoku().getValue());
+                entity.setShinsakaiWariateZumiNinzu(row.getWariateNinzu().getValue());
+                entity.setShiryoSakuseiZumiFlag(is資料作成済区分(row));
+                entity.setShinsakaiShinchokuJokyo(get介護認定審査会進捗状況(row));
+                entity.setGogitaiDummyFlag(row.getDummyFlag());
+                shinsakaiKaisaiList.add(new ShinsakaiKaisai(entity));
+            }
+        }
+        mode.set審査会一覧Grid(shinsakaiKaisaiList);
+        ViewStateHolder.put(ViewStateKeys.介護認定審査会共有一覧_選択審査会一覧, mode);
+    }
+
+    private boolean is資料作成済区分(dgShinsakaiIchiran_Row row) {
+        return IsShiryoSakuseiZumi.作成済.get名称().equals(row.getShiryoSakuseiKubun());
+    }
+
+    private RString get介護認定審査会進捗状況(dgShinsakaiIchiran_Row row) {
+        if (介護認定審査会進捗状況_開催済.equals(row.getShinchokuJokyo())) {
+            return 介護認定審査会進捗状況_1;
+        } else if (介護認定審査会進捗状況_中止.equals(row.getShinchokuJokyo())) {
+            return 介護認定審査会進捗状況_9;
+        } else {
+            return 介護認定審査会進捗状況_0;
+        }
     }
 
     /**
@@ -180,6 +235,17 @@ public class YokaigoNinteiShinsakaiIchiranListHandler {
         return validationMessages;
     }
 
+    /**
+     * 該当データが存在のチェック処理です。
+     *
+     * @return ValidationMessageControlPairs
+     */
+    public ValidationMessageControlPairs 該当データが存在のチェック() {
+        ValidationMessageControlPairs validationMessages = new ValidationMessageControlPairs();
+        validationMessages.add(new ValidationMessageControlPair(YokaigoNinteiShinsakaiIchiranListMessage.該当データが存在しません));
+        return validationMessages;
+    }
+
     private RTime getRStringToRtime(RString time) {
         time = time.padZeroToLeft(LENGTH_4);
         return RTime.of(Integer.valueOf(time.substring(0, 2).toString()), Integer.valueOf(time.substring(2).toString()));
@@ -187,6 +253,7 @@ public class YokaigoNinteiShinsakaiIchiranListHandler {
 
     private enum YokaigoNinteiShinsakaiIchiranListMessage implements IValidationMessage {
 
+        該当データが存在しません(UrErrorMessages.該当データなし),
         終了日が開始日以前(UrErrorMessages.終了日が開始日以前);
 
         private final Message message;

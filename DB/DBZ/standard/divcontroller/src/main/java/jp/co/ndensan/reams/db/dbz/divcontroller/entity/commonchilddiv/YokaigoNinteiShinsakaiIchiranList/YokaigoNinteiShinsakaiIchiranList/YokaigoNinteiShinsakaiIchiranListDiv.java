@@ -38,6 +38,8 @@ public class YokaigoNinteiShinsakaiIchiranListDiv extends Panel implements IYoka
     private HyojiJokenDiv HyojiJoken;
     @JsonProperty("dgShinsakaiIchiran")
     private DataGrid<dgShinsakaiIchiran_Row> dgShinsakaiIchiran;
+    @JsonProperty("hdnSelectedGridLine")
+    private RString hdnSelectedGridLine;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -79,6 +81,24 @@ public class YokaigoNinteiShinsakaiIchiranListDiv extends Panel implements IYoka
     @JsonProperty("dgShinsakaiIchiran")
     public void setDgShinsakaiIchiran(DataGrid<dgShinsakaiIchiran_Row> dgShinsakaiIchiran) {
         this.dgShinsakaiIchiran = dgShinsakaiIchiran;
+    }
+
+    /*
+     * gethdnSelectedGridLine
+     * @return hdnSelectedGridLine
+     */
+    @JsonProperty("hdnSelectedGridLine")
+    public RString getHdnSelectedGridLine() {
+        return hdnSelectedGridLine;
+    }
+
+    /*
+     * sethdnSelectedGridLine
+     * @param hdnSelectedGridLine hdnSelectedGridLine
+     */
+    @JsonProperty("hdnSelectedGridLine")
+    public void setHdnSelectedGridLine(RString hdnSelectedGridLine) {
+        this.hdnSelectedGridLine = hdnSelectedGridLine;
     }
 
     /*
@@ -232,6 +252,11 @@ public class YokaigoNinteiShinsakaiIchiranListDiv extends Panel implements IYoka
     @Override
     public int get一覧件数() {
         return getHandler().get一覧件数();
+    }
+
+    @Override
+    public void getSelectedGridLine() {
+        getHandler().getSelectedGridLine();
     }
 
     @JsonIgnore
