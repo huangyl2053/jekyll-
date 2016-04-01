@@ -50,6 +50,7 @@ public class YoshikiIchinoniIchinosanHosei {
         RString 状態 = ViewStateHolder.get(ViewStateKeys.状態, RString.class);
         getHandler(div).set基本情報エリア(引き継ぎデータ, 状態);
         IStateEnumerations stateName = getHandler(div).initialize(引き継ぎデータ, 状態);
+        ViewStateHolder.put(ViewStateKeys.今画面状態, stateName.getName());
         return ResponseData.of(div).setState(stateName);
     }
 
@@ -95,7 +96,7 @@ public class YoshikiIchinoniIchinosanHosei {
                 ViewStateKeys.事業報告基本, JigyoHokokuGeppoParameter.class);
         RString 様式種類 = 引き継ぎデータ.get行様式種類コード();
         List<RString> list11 = ViewStateHolder.get(ViewStateKeys.様式種類_11, List.class);
-        List<RString> list12 = ViewStateHolder.get(ViewStateKeys.様式種類_12, List.class);
+        List<RString> list21 = ViewStateHolder.get(ViewStateKeys.様式種類_21, List.class);
         if (削除状態.equals(状態)) {
             if (!ResponseHolder.isReRequest()) {
                 getHandler(div).delete(引き継ぎデータ);
@@ -111,7 +112,7 @@ public class YoshikiIchinoniIchinosanHosei {
         if (null == 修正データリスト || 修正データリスト.isEmpty()) {
             throw new ApplicationException(UrErrorMessages.編集なしで更新不可.getMessage());
         }
-        if (list11.contains(様式種類) || list12.contains(様式種類)) {
+        if (list11.contains(様式種類) || list21.contains(様式種類)) {
             if (getHandler(div).is整合性チェック_NG() && !ResponseHolder.isReRequest()) {
                 WarningMessage message = new WarningMessage(UrWarningMessages.相違.getMessage().getCode(),
                         UrWarningMessages.相違.getMessage().replace(計.toString(), 合計計算結果.toString()).evaluate());
