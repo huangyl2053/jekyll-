@@ -6,7 +6,7 @@
 package jp.co.ndensan.reams.db.dbb.divcontroller.controller.dbb0320005.input;
 
 /**
- *
+ * 賦課比較Mode
  */
 enum FukaHikakuMode {
 

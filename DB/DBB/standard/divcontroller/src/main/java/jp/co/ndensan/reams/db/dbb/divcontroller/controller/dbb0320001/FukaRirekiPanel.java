@@ -5,7 +5,6 @@
  */
 package jp.co.ndensan.reams.db.dbb.divcontroller.controller.dbb0320001;
 
-import java.util.Iterator;
 import jp.co.ndensan.reams.db.dbb.business.HokenryoDankaiUtil;
 import jp.co.ndensan.reams.db.dbb.business.core.Kiwarigaku;
 import jp.co.ndensan.reams.db.dbb.business.core.basic.Fuka;
@@ -35,7 +34,6 @@ import jp.co.ndensan.reams.uz.uza.biz.AtenaMeisho;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.lang.SystemException;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Button;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 
@@ -277,16 +275,15 @@ public class FukaRirekiPanel {
         return createResponseData(rirekiDiv);
     }
 
-    private Fuka findTargetModel(IItemList<Fuka> list, dgFukaRirekiFukaRireki_Row row) {
-        for (Iterator<Fuka> iterator = list.iterator(); iterator.hasNext();) {
-            Fuka target = iterator.next();
-            if (String.valueOf(target.get履歴番号()).equals(row.getRirekiNo().toString())) {
-                return target;
-            }
-        }
-        throw new SystemException(UrErrorMessages.対象データなし.getMessage().evaluate());
-    }
-
+//    private Fuka findTargetModel(IItemList<Fuka> list, dgFukaRirekiFukaRireki_Row row) {
+//        for (Iterator<Fuka> iterator = list.iterator(); iterator.hasNext();) {
+//            Fuka target = iterator.next();
+//            if (String.valueOf(target.get履歴番号()).equals(row.getRirekiNo().toString())) {
+//                return target;
+//            }
+//        }
+//        throw new SystemException(UrErrorMessages.対象データなし.getMessage().evaluate());
+//    }
     private ResponseData<FukaRirekiPanelDiv> createResponseData(FukaRirekiPanelDiv rirekiDiv) {
         return ResponseData.of(rirekiDiv).respond();
     }

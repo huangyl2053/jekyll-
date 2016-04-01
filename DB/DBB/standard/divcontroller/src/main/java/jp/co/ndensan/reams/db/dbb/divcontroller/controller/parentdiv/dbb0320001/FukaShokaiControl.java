@@ -7,13 +7,9 @@ package jp.co.ndensan.reams.db.dbb.divcontroller.controller.parentdiv.dbb0320001
 
 import jp.co.ndensan.reams.db.dbb.business.viewstate.FukaShokaiKey;
 import jp.co.ndensan.reams.db.dbb.divcontroller.entity.parentdiv.DBB0320001.FukaShokaiControlDiv;
-//import jp.co.ndensan.reams.db.dbz.business.viewstate.FukaShokaiKey;
-import jp.co.ndensan.reams.db.dbz.definition.core.enumeratedtype.fuka.SanteiState;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.TsuchishoNo;
-//import jp.co.ndensan.reams.db.dbz.model.FukaTaishoshaKey;
-//import jp.co.ndensan.reams.db.dbz.model.fuka.FukaModel;
-//import jp.co.ndensan.reams.db.dbz.realservice.FukaManager;
+import jp.co.ndensan.reams.db.dbz.definition.core.enumeratedtype.fuka.SanteiState;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaMeisho;
 import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
@@ -107,7 +103,8 @@ public class FukaShokaiControl {
 //        div.getTxtKoseiYMD().setValue(new FlexibleDate(key.get更正日時().getDate().toString()));
 //        div.getTxtKoseiTime().setValue(key.get更正日時().getTime());
         // ここまで
-
+        // TODO 未使用のメソッド引数があります。
+        key.get履歴番号();
         return div;
     }
 

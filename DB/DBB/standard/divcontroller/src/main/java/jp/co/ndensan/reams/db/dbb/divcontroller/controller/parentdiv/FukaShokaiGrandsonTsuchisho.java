@@ -48,6 +48,13 @@ public class FukaShokaiGrandsonTsuchisho {
     private final List<List<RString>> kiwarigaku = new ArrayList<>();
     private final List<List<RString>> jiyu = new ArrayList<>();
 
+    /**
+     * 画面の初期化メソッドです。
+     *
+     * @param panel FukaShokaiGrandsonTsuchishoDiv
+     * @param div JuminFukaShokaiDiv
+     * @return 画面のResponseData
+     */
     public ResponseData<FukaShokaiGrandsonTsuchishoDiv> onLoad_FukaShokaiGrandsonTsuchisho(FukaShokaiGrandsonTsuchishoDiv panel, JuminFukaShokaiDiv div) {
         ResponseData<FukaShokaiGrandsonTsuchishoDiv> response = new ResponseData<>();
         jiyu.clear();
@@ -74,6 +81,11 @@ public class FukaShokaiGrandsonTsuchisho {
         return response;
     }
 
+    /**
+     * radKobetsuHakkoChoteiJiyuアリアのセットメソッドです。
+     *
+     * @param div KobetsuHakkoChoteiJiyuDiv
+     */
     public void set_radKobetsuHakkoChoteiJiyu(KobetsuHakkoChoteiJiyuDiv div) {
         div.getTxtChoteiJiyu1().setValue(jiyu.get(0).get(0));
         div.getTxtChoteiJiyu2().setValue(jiyu.get(0).get(1));
@@ -81,6 +93,13 @@ public class FukaShokaiGrandsonTsuchisho {
         div.getTxtChoteiJiyu4().setValue(RString.EMPTY);
     }
 
+    /**
+     * radKobetsuHakkoChoteiJiyuアリアのonChangeメソッドです。
+     *
+     * @param panel FukaShokaiGrandsonTsuchishoDiv
+     * @param div JuminFukaShokaiDiv
+     * @return 画面のResponseData
+     */
     public ResponseData<FukaShokaiGrandsonTsuchishoDiv> onChange_radKobetsuHakkoChoteiJiyu(FukaShokaiGrandsonTsuchishoDiv panel, JuminFukaShokaiDiv div) {
         ResponseData<FukaShokaiGrandsonTsuchishoDiv> response = new ResponseData<>();
 
@@ -102,6 +121,13 @@ public class FukaShokaiGrandsonTsuchisho {
         return response;
     }
 
+    /**
+     * ddlInjiKouseiAtoエリアのonChangeメソッドです。
+     *
+     * @param panel FukaShokaiGrandsonTsuchishoDiv
+     * @param div JuminFukaShokaiDiv
+     * @return 画面のResponseData
+     */
     public ResponseData<FukaShokaiGrandsonTsuchishoDiv> onChange_ddlInjiKouseiAto(FukaShokaiGrandsonTsuchishoDiv panel, JuminFukaShokaiDiv div) {
         ResponseData<FukaShokaiGrandsonTsuchishoDiv> response = new ResponseData<>();
 
@@ -121,6 +147,13 @@ public class FukaShokaiGrandsonTsuchisho {
         return response;
     }
 
+    /**
+     * ddlInjiKouseiMaeエリアのonChangeメソッドです。
+     *
+     * @param panel FukaShokaiGrandsonTsuchishoDiv
+     * @param div JuminFukaShokaiDiv
+     * @return 画面のResponseData
+     */
     public ResponseData<FukaShokaiGrandsonTsuchishoDiv> onChange_ddlInjiKouseiMae(FukaShokaiGrandsonTsuchishoDiv panel, JuminFukaShokaiDiv div) {
         ResponseData<FukaShokaiGrandsonTsuchishoDiv> response = new ResponseData<>();
 

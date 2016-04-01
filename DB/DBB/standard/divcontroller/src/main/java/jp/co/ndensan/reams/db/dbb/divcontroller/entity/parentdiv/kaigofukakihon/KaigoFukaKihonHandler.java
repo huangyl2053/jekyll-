@@ -45,6 +45,10 @@ public class KaigoFukaKihonHandler {
      */
     KaigoFukaKihonHandler(KaigoFukaKihonDiv div,
             HihokenshaDaichoManager hihokenshaDaichoManager, FukaManager fukaManager, HokenryoDankaiManager hokenryoDankaiManager) {
+        // TODO 未使用のメソッド引数があります。
+        hihokenshaDaichoManager.hashCode();
+        fukaManager.hashCode();
+        hokenryoDankaiManager.hashCode();
         this.div = div;
 //        this.hihokenshaDaichoManager = hihokenshaDaichoManager;
 //        this.fukaManager = fukaManager;

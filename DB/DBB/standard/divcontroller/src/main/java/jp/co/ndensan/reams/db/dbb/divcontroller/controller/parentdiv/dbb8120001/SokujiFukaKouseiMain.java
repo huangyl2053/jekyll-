@@ -20,6 +20,12 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxNum;
  */
 public class SokujiFukaKouseiMain {
 
+    /**
+     * 画面の初期化メソッドです。
+     *
+     * @param sokujiFukaKouseiMainDiv SokujiFukaKouseiMainDiv
+     * @return 画面のResponseData
+     */
     public ResponseData<SokujiFukaKouseiMainDiv> onLoad_SokujiFukaKouseiMainDiv(SokujiFukaKouseiMainDiv sokujiFukaKouseiMainDiv) {
         //TODO 以下の処理はラフスケッチ撮影用の仮実装。本実装時には削除する。
         setParam(sokujiFukaKouseiMainDiv);

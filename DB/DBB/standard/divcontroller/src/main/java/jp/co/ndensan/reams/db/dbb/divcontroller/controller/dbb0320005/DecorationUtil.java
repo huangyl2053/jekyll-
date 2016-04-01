@@ -8,15 +8,13 @@ package jp.co.ndensan.reams.db.dbb.divcontroller.controller.dbb0320005;
 import java.util.Objects;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TextBox;
-import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxCode;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxDate;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxNum;
-import jp.co.ndensan.reams.uz.uza.ui.binding.domain.TextBoxFlexibleYear;
 
 /**
  * 賦課比較の処理の中で、DecorationClassを用いたテキストボックスの背景色の変更処理にて用いられるユーティリティです。
  */
-class DecorationUtil {
+final class DecorationUtil {
 
     private static final RString DECORATION_CLASS;
 

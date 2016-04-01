@@ -50,4 +50,11 @@ public class AtenaInfoHandler {
         CommonButtonHolder.setDisabledByCommonButtonFieldName(保存する, true);
     }
 
+    /**
+     * 未使用のprivateフィールドです。
+     */
+    public void 未使用のprivateフィールド() {
+        div.hashCode();
+    }
+
 }

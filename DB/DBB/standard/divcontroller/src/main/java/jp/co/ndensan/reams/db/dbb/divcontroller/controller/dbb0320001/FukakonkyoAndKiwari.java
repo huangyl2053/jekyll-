@@ -37,6 +37,13 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
  */
 public class FukakonkyoAndKiwari {
 
+    private static final int MARCH = 3;
+    private static final int APRIL = 4;
+    private static final int MAY = 5;
+    private static final int AUGUST = 8;
+    private static final int POINT_OF_ROUND_DOWN = 0;
+    private static final int NUMBER_OF_MONTHS_OF_A_YEAR = 12;
+
     /**
      * コントロールdivが「生成」された際の処理です。
      *
@@ -239,9 +246,6 @@ public class FukakonkyoAndKiwari {
     }
 
     private RString calc保険料算出額(Decimal 保険料率, RString 月数) {
-        final int NUMBER_OF_MONTHS_OF_A_YEAR = 12;
-        final int POINT_OF_ROUND_DOWN = 0;
-
         if (月数.isEmpty()) {
             return RString.EMPTY;
         }
@@ -294,11 +298,6 @@ public class FukakonkyoAndKiwari {
      * @return 月数
      */
     private RString getBetweenMonths(FlexibleYearMonth from, FlexibleYearMonth to) {
-        final int MARCH = 3;
-        final int APRIL = 4;
-        final int MAY = 5;
-        final int AUGUST = 8;
-
         if (!from.isValid()) {
             return RString.EMPTY;
         }

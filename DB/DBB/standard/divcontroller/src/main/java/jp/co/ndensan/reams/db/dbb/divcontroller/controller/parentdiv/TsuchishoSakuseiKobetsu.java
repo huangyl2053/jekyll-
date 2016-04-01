@@ -24,6 +24,12 @@ public class TsuchishoSakuseiKobetsu {
     private static final RString HAKKO_YMD = new RString("DBB8110001/hakkoYMD.yml");
     private static final RString 発行日 = new RString("発行日");
 
+    /**
+     * 画面の初期化メソッドです。
+     *
+     * @param panel TsuchishoSakuseiKobetsuDiv
+     * @return 画面のResponseData
+     */
     public ResponseData<TsuchishoSakuseiKobetsuDiv> onLoad_TsuchishoSakuseiKobetsu(TsuchishoSakuseiKobetsuDiv panel) {
         ResponseData<TsuchishoSakuseiKobetsuDiv> response = new ResponseData<>();
 
@@ -82,6 +88,12 @@ public class TsuchishoSakuseiKobetsu {
         panel.getFukadaichoKobetsu().setIsPublish(false);
     }
 
+    /**
+     * dgChohyoSentaku_RowのonSelectメソッドです。
+     *
+     * @param panel TsuchishoSakuseiKobetsuDiv
+     * @return 画面のResponseData
+     */
     public ResponseData<TsuchishoSakuseiKobetsuDiv> onSelect_dgChohyoSentaku_Row(TsuchishoSakuseiKobetsuDiv panel) {
 
         ResponseData<TsuchishoSakuseiKobetsuDiv> response = new ResponseData<>();

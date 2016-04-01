@@ -5,6 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbb.divcontroller.controller.parentdiv.dbb0320004;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
@@ -37,7 +38,7 @@ public class KibetsuChoshuYuyo {
     };
 
     private Map<RString, Label> 期別テーブル = new HashMap<>();
-    private static final int TABLE_SIZE = 14;
+//    private static final int TABLE_SIZE = 14;
 
     private static final int ROWNO_3 = 3;
     private static final int ROWNO_4 = 4;
@@ -88,6 +89,8 @@ public class KibetsuChoshuYuyo {
     }
 
     private boolean are調定年度and賦課年度SameAge(Optional<Object> model) {
+        // TODO 未使用のメソッド引数があります。
+        model.hashCode();
         return true;
     }
 //    private boolean are調定年度and賦課年度SameAge(Optional<KibetsuChoshuYuyoModel> model) {
@@ -113,9 +116,10 @@ public class KibetsuChoshuYuyo {
     }
 
     private void setKibetsu(Map<RString, Integer> 期IndexMap) {
-
-        FlexibleDate[] 開始日 = new FlexibleDate[TABLE_SIZE];
-        FlexibleDate[] 終了日 = new FlexibleDate[TABLE_SIZE];
+        // TODO 未使用のメソッド引数があります。
+        期IndexMap.isEmpty();
+        List<FlexibleDate> 開始日 = new ArrayList<>();
+        List<FlexibleDate> 終了日 = new ArrayList<>();
 
 //        for (KibetsuChoshuYuyoModel model : list) {
 //
@@ -131,9 +135,9 @@ public class KibetsuChoshuYuyo {
         setTableData(TableItem.終了日, 終了日);
     }
 
-    private void setTableData(TableItem itemNo, FlexibleDate[] dataList) {
-        for (int index = 0; index < dataList.length; index++) {
-            FlexibleDate data = dataList[index];
+    private void setTableData(TableItem itemNo, List<FlexibleDate> dataList) {
+        for (int index = 0; index < dataList.size(); index++) {
+            FlexibleDate data = dataList.get(index);
             Label label = 期別テーブル.get(getTableKey(itemNo, index));
             label.setText((data != null) ? data.wareki().toDateString() : RString.EMPTY);
         }

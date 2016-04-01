@@ -20,8 +20,6 @@ import jp.co.ndensan.reams.db.dbz.definition.core.enumeratedtype.ShoriName;
 import jp.co.ndensan.reams.db.dbz.definition.core.enumeratedtype.fuka.SanteiState;
 import jp.co.ndensan.reams.db.dbz.definition.core.util.function.ExceptionSuppliers;
 import jp.co.ndensan.reams.db.dbz.definition.core.util.optional.Optional;
-import jp.co.ndensan.reams.db.dbz.definition.core.valueobject.DankaiIndex;
-import jp.co.ndensan.reams.db.dbz.definition.core.valueobject.RankKubun;
 import jp.co.ndensan.reams.db.dbz.divcontroller.util.viewstate.ViewStateKey;
 import jp.co.ndensan.reams.db.dbz.service.FukaTaishoshaKey;
 import jp.co.ndensan.reams.db.dbz.service.core.basic.ShoriDateKanriManager;
@@ -41,6 +39,8 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
  */
 public final class FukaShokaiController {
 
+    private static final RString SERIAL_NUMBER = new RString("0001");
+
     /**
      * プライベートコンストラクタです。
      */
@@ -54,9 +54,7 @@ public final class FukaShokaiController {
      * @return 賦課対象者キー
      */
     public static FukaTaishoshaKey getFukaTaishoshaKeyInViewState() {
-
-        FukaTaishoshaKey key = ViewStateHolder.get(ViewStateKey.賦課対象者, FukaTaishoshaKey.class);
-        return key;
+        return ViewStateHolder.get(ViewStateKey.賦課対象者, FukaTaishoshaKey.class);
     }
 
     /**
@@ -65,9 +63,7 @@ public final class FukaShokaiController {
      * @return 賦課照会キー
      */
     public static FukaShokaiKey getFukaShokaiKeyInViewState() {
-
-        FukaShokaiKey key = ViewStateHolder.get(DbbViewStateKey.FukaShokaiKey, FukaShokaiKey.class);
-        return key;
+        return ViewStateHolder.get(DbbViewStateKey.FukaShokaiKey, FukaShokaiKey.class);
     }
 
     /**
@@ -240,8 +236,6 @@ public final class FukaShokaiController {
      * @return 算定状態
      */
     public static SanteiState judgeSanteiState(Fuka fuka) {
-        final RString SERIAL_NUMBER = new RString("0001");
-
         Optional<ShoriDateKanri> modeloid = Optional.ofNullable(new ShoriDateKanriManager().get処理日付管理マスタ(
                 SubGyomuCode.DBB介護賦課, fuka.get賦課市町村コード(), ShoriName.本算定賦課.toRString(),
                 SERIAL_NUMBER, fuka.get賦課年度(), SERIAL_NUMBER));

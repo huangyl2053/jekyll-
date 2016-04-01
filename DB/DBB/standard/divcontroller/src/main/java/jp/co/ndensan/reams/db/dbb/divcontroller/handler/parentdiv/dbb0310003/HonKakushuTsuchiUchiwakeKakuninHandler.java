@@ -349,9 +349,11 @@ public class HonKakushuTsuchiUchiwakeKakuninHandler {
         Honsanteifuka 本算定賦課計算 = Honsanteifuka.createInstance();
         RString 打ち分け条件 = ViewStateHolder.get(ViewStateKeys.打分け方法情報キー, RString.class);
         List<TsuchishoUchiwakeJoken> jokenList = 本算定賦課計算.getutiwakehouhoujyoho2(打ち分け条件);
+        TsuchishoUchiwakeJoken joken = new TsuchishoUchiwakeJoken(打ち分け条件,
+                RDateTime.now(),
+                jokenList.get(0).get賦課処理区分());
         List<dgTsuchishoSettei_Row> dataSources = div.getDgTsuchishoSettei().getDataSource();
-        TsuchishoUchiwakeJoken joken = jokenList.get(0).createBuilderForEdit()
-                .set保存日時(RDateTime.now())
+        joken = joken.createBuilderForEdit()
                 .set選択通知書01(dataSources.get(LIST_00).getTxtTsuchisyoShitei().getSelectedKey())
                 .set選択現金口座01(dataSources.get(LIST_00).getTxtGenkinKozaShitei().getSelectedKey())
                 .set出力順グループ名01(dataSources.get(LIST_00).getTxtHakkojiGroup().getValue())

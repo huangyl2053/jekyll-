@@ -76,7 +76,7 @@ public final class FukaJohoHikakuPresenter {
         }
     }
 
-    private static abstract class FukaJohoHikakuPresenterHelper implements IFukaHikakuPresenter {
+    private abstract static class FukaJohoHikakuPresenterHelper implements IFukaHikakuPresenter {
 
         protected void decorateDifferentValues(KariSantei1Div div1, KariSantei2Div div2) {
             /* 賦課基準 */
@@ -389,7 +389,7 @@ public final class FukaJohoHikakuPresenter {
         }
     }
 
-    private static abstract class FukaJohoHikakuPresenterBase extends FukaJohoHikakuPresenterHelper {
+    private abstract static class FukaJohoHikakuPresenterBase extends FukaJohoHikakuPresenterHelper {
 
         private final FukaHikakuTargets targets;
 

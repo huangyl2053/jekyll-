@@ -7,7 +7,6 @@ package jp.co.ndensan.reams.db.dbb.divcontroller.controller.dbb0320004;
 
 import jp.co.ndensan.reams.db.dbb.business.core.basic.Gemmen;
 import jp.co.ndensan.reams.db.dbb.business.viewstate.FukaShokaiKey;
-import jp.co.ndensan.reams.db.dbb.definition.enumeratedtype.fuka.GemmenChoshuYuyoStateKubun;
 import jp.co.ndensan.reams.db.dbb.divcontroller.controller.fuka.FukaShokaiController;
 import jp.co.ndensan.reams.db.dbb.divcontroller.entity.parentdiv.DBB0320004.ChoshuYuyoDiv;
 import jp.co.ndensan.reams.db.dbb.divcontroller.entity.parentdiv.DBB0320004.GemmenChoshuYuyoDiv;
@@ -24,8 +23,7 @@ import jp.co.ndensan.reams.uz.uza.math.Decimal;
  */
 public class GemmenChoshuYuyo {
 
-    private final GemmenChoshuYuyoStateKubun 状態区分 = GemmenChoshuYuyoStateKubun.決定_承認;
-
+//    private final GemmenChoshuYuyoStateKubun 状態区分 = GemmenChoshuYuyoStateKubun.決定_承認;
     /**
      * 減免・徴収猶予データをセットします。
      *
@@ -59,8 +57,8 @@ public class GemmenChoshuYuyo {
 //                key.get通知書番号(), key.get処理日時(), 状態区分);
 
         if (modeloid.isPresent()) {
-            Gemmen model = modeloid.get();
-
+//            Gemmen model = modeloid.get();
+            modeloid.get();
 //            div.getTxtGemmenShinseiYMD().setValue(FukaMapper.toRDate(model.get減免申請年月日()));
 //            div.getTxtGemmenShinseiGaku().setValue(model.get申請減免額());
 //            div.getTxtGemmenShinseiRiyu().setValue(model.get申請事由());
@@ -88,7 +86,7 @@ public class GemmenChoshuYuyo {
      */
     private void setChoshuYuyoDiv(ChoshuYuyoDiv div, FukaShokaiKey key) {
         clearChoshuYuyoDiv(div);
-
+        key.get履歴番号();
 //        Optional<ChoshuYuyoRelateModel> modeloid = new ChoshuYuyoFinder().find徴収猶予(
 //                key.get調定年度(), key.get賦課年度(),
 //                key.get通知書番号(), key.get処理日時(), 状態区分);

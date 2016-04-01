@@ -8,7 +8,6 @@ package jp.co.ndensan.reams.db.dbb.divcontroller.controller.parentdiv;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
-
 import jp.co.ndensan.reams.db.dbb.divcontroller.entity.parentdiv.DBB0130002.HeijunkaKakuteiDiv;
 import jp.co.ndensan.reams.db.dbb.divcontroller.entity.parentdiv.dgHeijunkaKakutei_Row;
 import jp.co.ndensan.reams.db.dbz.divcontroller.helper.ControlGenerator;
@@ -31,6 +30,12 @@ public class HeijunkaKakutei {
     private static final RString SHORI_NAIYO = new RString("DBB0130002/ShoriNaiyo.yml");
     private static final Decimal SAGAKU_1000 = new Decimal("1000");
 
+    /**
+     * 画面の初期化メソッドです。
+     *
+     * @param panel HeijunkaKakuteiDiv
+     * @return 画面のResponseData
+     */
     public ResponseData<HeijunkaKakuteiDiv> onLoad_HeijunkaKakutei(HeijunkaKakuteiDiv panel) {
 
         List<HashMap> demoData = YamlLoader.DBB.loadAsList(SHORI_NAIYO);
@@ -52,6 +57,12 @@ public class HeijunkaKakutei {
         return response;
     }
 
+    /**
+     * btnSagakuSetteiボタンのonClick事件です。
+     *
+     * @param panel HeijunkaKakuteiDiv
+     * @return 画面のResponseData
+     */
     public ResponseData<HeijunkaKakuteiDiv> onClick_btnSagakuSettei(HeijunkaKakuteiDiv panel) {
         ResponseData<HeijunkaKakuteiDiv> response = new ResponseData<>();
         TextBoxNum sagaku = panel.getHeijunkaSagakuKakunin().getTxtSagaku();
@@ -65,16 +76,14 @@ public class HeijunkaKakutei {
 
     private List<dgHeijunkaKakutei_Row> createSagakuData(TextBoxNum sagaku) {
         List<dgHeijunkaKakutei_Row> arrayData = new ArrayList<>();
-        List<HashMap> demoDataList;
+        List<HashMap> demoDataList = new ArrayList<>();
 
-        if (sagaku.getValue().equals(SAGAKU_1000)) {
+        if (SAGAKU_1000.equals(sagaku.getValue())) {
             demoDataList = YamlLoader.DBB.loadAsList(HEIJUNKA_KAKITEI_1000);
-        } else if (sagaku.getValue().compareTo(SAGAKU_1000) < 0) {
+        } else if (SAGAKU_1000.compareTo(sagaku.getValue()) > 0) {
             demoDataList = YamlLoader.DBB.loadAsList(HEIJUNKA_KAKITEI_1000_UNDER);
-        } else if (sagaku.getValue().compareTo(SAGAKU_1000) > 0) {
+        } else if (SAGAKU_1000.compareTo(sagaku.getValue()) < 0) {
             demoDataList = YamlLoader.DBB.loadAsList(HEIJUNKA_KAKITEI_1000_OVER);
-        } else {
-            demoDataList = null;
         }
         for (HashMap demoData : demoDataList) {
             // コンストラクタにMapを渡して生成。

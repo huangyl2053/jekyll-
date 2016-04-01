@@ -122,6 +122,10 @@ public class FukaRirekiPanel {
     private void setDgFukaRireki(FukaRirekiPanelDiv fukaRirekiDiv, IItemList rireki, FukaNendo 賦課年度) {
         // TODO n8187久保田 画面遷移の確認のためにダミーデータを設定。
         // ここから
+        // TODO 未使用のメソッド引数があります。
+        if (rireki == null && 賦課年度 != null) {
+            賦課年度.hashCode();
+        }
         List<dgFukaRirekiFukaRireki_Row> list = new ArrayList<>();
         list.add(new dgFukaRirekiFukaRireki_Row());
         fukaRirekiDiv.getDgFukaRirekiFukaRireki().setDataSource(list);
@@ -272,7 +276,6 @@ public class FukaRirekiPanel {
 //        }
 //        throw new SystemException(UrErrorMessages.対象データなし.getMessage().evaluate());
 //    }
-
     private ResponseData<FukaRirekiPanelDiv> createResponseData(FukaRirekiPanelDiv rirekiDiv) {
         return ResponseData.of(rirekiDiv).respond();
     }

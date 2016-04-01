@@ -31,7 +31,6 @@ public class FukakonkyoAndKiwari {
 //    private static final int APRIL = 4;
 //    private static final int MAY = 5;
 //    private static final int AUGUST = 8;
-
     /**
      * コントロールdivが「生成」された際の処理です。
      *
@@ -148,6 +147,9 @@ public class FukakonkyoAndKiwari {
 ////            set年額Of仮算定(div, model);
 ////        }
 //        // ここまで
+        // TODO 未使用のメソッド引数があります。
+        model.get世帯員数();
+        key.get履歴番号();
         return div;
     }
 //

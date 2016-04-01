@@ -10,9 +10,24 @@ package jp.co.ndensan.reams.db.dbb.divcontroller.controller.dbb0320005.input;
  */
 public enum FukaHikakuSituation {
 
+    /**
+     * 比較不可
+     */
     比較不可,
+    /**
+     * 本算定And仮算定
+     */
     本算定And仮算定,
+    /**
+     * 仮算定And仮算定
+     */
     仮算定And仮算定,
+    /**
+     * 仮算定And本算定
+     */
     仮算定And本算定,
+    /**
+     * 本算定And本算定
+     */
     本算定And本算定;
 }

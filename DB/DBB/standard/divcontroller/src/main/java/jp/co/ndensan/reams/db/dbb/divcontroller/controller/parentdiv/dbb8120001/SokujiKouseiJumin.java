@@ -13,6 +13,12 @@ import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
  */
 public class SokujiKouseiJumin {
 
+    /**
+     * 画面の初期化メソッドです。
+     *
+     * @param sokujiKouseiJuminDiv SokujiKouseiJuminDiv
+     * @return 画面のResponseData
+     */
     public ResponseData<SokujiKouseiJuminDiv> onLoad_SokujiKouseiJumin(SokujiKouseiJuminDiv sokujiKouseiJuminDiv) {
         return ResponseData.of(sokujiKouseiJuminDiv).respond();
     }

@@ -25,6 +25,12 @@ public class AtenaJoho {
 
     private static final RString FUKAKIHON = new RString("FukaKihon.yml");
 
+    /**
+     * 画面のonLoadメソッドです。
+     *
+     * @param div AtenaJohoDiv
+     * @return 画面のResponseData
+     */
     public ResponseData<AtenaJohoDiv> onLoad(AtenaJohoDiv div) {
         AtenaJohoDiv atenajoho = (AtenaJohoDiv) ViewStateHolder.get("宛名情報", AtenaJohoDiv.class);
         ResponseData<AtenaJohoDiv> response = new ResponseData<>();

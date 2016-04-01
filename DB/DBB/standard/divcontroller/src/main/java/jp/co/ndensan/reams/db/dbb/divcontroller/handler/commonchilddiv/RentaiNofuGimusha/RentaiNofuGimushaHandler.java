@@ -70,9 +70,9 @@ public class RentaiNofuGimushaHandler {
         IShikibetsuTaishoGyomuHanteiKey 業務判定キー = ShikibetsuTaishoGyomuHanteiKeyFactory.createInstance(GyomuCode.DB介護保険, KensakuYusenKubun.住登内優先);
         IShikibetsuTaishoSearchKey searchKey = new ShikibetsuTaishoSearchKeyBuilder(業務判定キー, true).set識別コード(識別コード).build();
         List<IKojin> kojinList = ShikibetsuTaishoService.getKojinFinder().get個人s(searchKey);
-        if (kojinList.get(0).is日本人() == true) {
+        if (kojinList.get(0).is日本人()) {
             return kojinList.get(0).get日本人氏名().getName().value();
-        } else if (kojinList.get(0).is外国人() == true) {
+        } else if (kojinList.get(0).is外国人()) {
             return kojinList.get(0).get外国人氏名().getName().value();
         } else {
             return RString.EMPTY;

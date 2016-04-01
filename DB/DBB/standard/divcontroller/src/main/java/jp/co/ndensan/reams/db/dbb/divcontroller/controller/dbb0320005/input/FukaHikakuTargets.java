@@ -89,8 +89,8 @@ public class FukaHikakuTargets {
      * 比較対象の{@link Fuka}を返します。<br />
      * 引数に0～{@link #size() size()}-1 の範囲で数値を指定することで、そのインデックスの{@link Fuka}を返します。
      *
-     * @param index
-     * @return
+     * @param index index
+     * @return 介護賦課を管理するクラス
      */
     public Fuka get(int index) {
         return this.fukaElements.get(index);
@@ -121,10 +121,20 @@ public class FukaHikakuTargets {
         throw new ApplicationException("");
     }
 
+    /**
+     * 賦課比較の種類を返します。
+     *
+     * @return 賦課比較の種類です。
+     */
     public FukaHikakuSituation getSituation() {
         return this.situation;
     }
 
+    /**
+     * canCompareを返します。
+     *
+     * @return canCompare
+     */
     public boolean canCompare() {
         return this.situation != FukaHikakuSituation.比較不可;
     }

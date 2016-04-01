@@ -25,7 +25,6 @@ import jp.co.ndensan.reams.db.dbz.definition.core.valueobject.FukaNendo;
 import jp.co.ndensan.reams.ue.uex.business.core.NenkinTokuchoKaifuJoho;
 import jp.co.ndensan.reams.ue.uex.definition.core.KakushuKubun;
 import jp.co.ndensan.reams.ue.uex.definition.core.ShoriKekka;
-//TODO 年金特徴回付情報マネージャが未実装　実装後に追加する
 import jp.co.ndensan.reams.ue.uex.service.core.NenkinTokuchoKaifuJohoManager;
 import jp.co.ndensan.reams.ur.urz.definition.core.codemaster.CodeShubetsus;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
@@ -46,6 +45,10 @@ import jp.co.ndensan.reams.uz.uza.util.code.CodeMasterNoOption;
  * @author N3317 塚田 萌
  */
 public class Tokucho {
+
+    private static final int NUMBER_OF_DIGIT = 3;
+    private static final int INT_04 = 04;
+    private static final int INT_3 = 3;
 
     /**
      * コントロールdivが「生成」された際の処理です。
@@ -179,7 +182,7 @@ public class Tokucho {
     }
 
     private RDate toEffectiveDate(FlexibleYear 年度) {
-        return new RDate(年度.getYearValue(), 04, 01);
+        return new RDate(年度.getYearValue(), INT_04, 01);
     }
 
     /**
@@ -189,9 +192,7 @@ public class Tokucho {
      * @return 年金コード（3桁のコードを保持するコードマスタ）
      */
     private RString createNenkinCode(RString 年金コード) {
-        final int NUMBER_OF_DIGIT = 3;
-        RString 年金コード上3桁 = (年金コード != null && 年金コード.length() >= 3) ? 年金コード.substring(0, NUMBER_OF_DIGIT) : RString.EMPTY;
-        return 年金コード上3桁;
+        return (年金コード != null && 年金コード.length() >= INT_3) ? 年金コード.substring(0, NUMBER_OF_DIGIT) : RString.EMPTY;
     }
 
     private void set年金保険者突合Div(TokuchoDiv div, FukaNendo 賦課年度, RString 基礎年金番号, RString 年金コード, RString 捕捉月) {
@@ -204,8 +205,8 @@ public class Tokucho {
                 GyomuCode.DB介護保険, 賦課年度.value(), 基礎年金番号, 年金コード, 捕捉月);
 
         div.getTxtHosokuYM().setValue(new FlexibleDate(kaifuJoho.get処理年度().toDateString().concat(捕捉月)));
-        RString tokubetsuChoshuGimushaCodeMeisho = CodeMasterNoOption.getCodeMeisho(SubGyomuCode.UEX分配集約公開, CodeShubetsus.特別徴収義務者コード, kaifuJoho.getDT特別徴収義務者コード().value());
-        div.getTxtTokuChoGimusha().setValue(kaifuJoho.getDT特別徴収義務者コード().value().value().concat(tokubetsuChoshuGimushaCodeMeisho));
+        RString tokubetsuChoshuCodeMeisho = CodeMasterNoOption.getCodeMeisho(SubGyomuCode.UEX分配集約公開, CodeShubetsus.特別徴収義務者コード, kaifuJoho.getDT特別徴収義務者コード().value());
+        div.getTxtTokuChoGimusha().setValue(kaifuJoho.getDT特別徴収義務者コード().value().value().concat(tokubetsuChoshuCodeMeisho));
 
         div.getNenkinHokenshaTotsugoJoho().getTxtShimeiKana().setValue(kaifuJoho.getDTカナ氏名());
         div.getNenkinHokenshaTotsugoJoho().getTxtShimeiKanji().setValue(kaifuJoho.getDT漢字氏名());

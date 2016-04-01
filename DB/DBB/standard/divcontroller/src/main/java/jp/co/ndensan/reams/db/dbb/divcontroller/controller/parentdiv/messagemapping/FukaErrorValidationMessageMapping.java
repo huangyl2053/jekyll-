@@ -20,6 +20,9 @@ public enum FukaErrorValidationMessageMapping {
 
 //    エラー処理対象が未処理でない((IValidationMessage) InternalReportValidationMessage.更正対象が未処理状態ではないため実行不可.getMessage(), "dgFukaErrorList");
     //更正対象が未処理状態ではないため実行不可→修正対象が未処理状態ではないため実行不可 へ変更
+    /**
+     * エラー処理対象が未処理でない。
+     */
     エラー処理対象が未処理でない((IValidationMessage) InternalReportValidationMessage.修正対象が未処理状態ではないため実行不可.getMessage(), new RString("dgFukaErrorList"));
 
     private final IValidationMessage message;
@@ -30,14 +33,29 @@ public enum FukaErrorValidationMessageMapping {
         this.fieldName = fieldName;
     }
 
+    /**
+     * ValidationMessageを返します。
+     *
+     * @return IValidationMessage
+     */
     public IValidationMessage getValidationMessage() {
         return message;
     }
 
+    /**
+     * Messageを返します。
+     *
+     * @return Message
+     */
     public Message getMessage() {
         return message.getMessage();
     }
 
+    /**
+     * FieldNameを返します。
+     *
+     * @return FieldName
+     */
     public RString getFieldName() {
         return fieldName;
     }

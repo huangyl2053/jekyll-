@@ -20,6 +20,12 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 public class JuminFukaShokai {
 
     //private static final RString FUKA_SHOKAI_GAITOSHA = new RString("FukaShokaiGaitoshaData.yml");
+    /**
+     * 画面の初期化メソッドです。
+     *
+     * @param panel JuminFukaShokaiDiv
+     * @return 画面のResponseData
+     */
     public ResponseData<JuminFukaShokaiDiv> onLoad_JuminFukaShokai(JuminFukaShokaiDiv panel) {
         ResponseData<JuminFukaShokaiDiv> response = new ResponseData<>();
 
