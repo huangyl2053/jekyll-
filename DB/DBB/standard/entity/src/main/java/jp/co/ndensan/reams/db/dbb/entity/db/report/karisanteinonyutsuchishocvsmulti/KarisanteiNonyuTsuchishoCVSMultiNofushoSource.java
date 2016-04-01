@@ -88,126 +88,71 @@ public class KarisanteiNonyuTsuchishoCVSMultiNofushoSource implements IReportSou
     public RString cvsToriatsukaikigen1;
     @ReportItem(name = "funyuFukanBango1", length = 12, order = 39)
     public RString funyuFukanBango1;
-//    @ReportItem(name = "kamokumei", order = 40)
-//    public RString kamokumei;
-//    @ReportItem(name = "ryoshushoNendo2", order = 41)
-//    public RString ryoshushoNendo2;
-//    @ReportItem(name = "nendoNenbun", order = 42)
-//    public RString nendoNenbun;
-//    @ReportItem(name = "kibetsu", order = 43)
-//    public RString kibetsu;
-//    @ReportItem(name = "ryoshushoNenbun2", order = 44)
-//    public RString ryoshushoNenbun2;
-//    @ReportItem(name = "gokeigaku", length = 15, order = 45)
-//    public RString gokeigaku;
-//    @ReportItem(name = "shunoKikanBango2", length = 5, order = 46)
-//    public RString shunoKikanBango2;
-//    @ReportItem(name = "nofuBango", length = 20, order = 47)
-//    public RString nofuBango;
-//    @ReportItem(name = "kakuninBango2", length = 5, order = 48)
-//    public RString kakuninBango2;
-//    @ReportItem(name = "nofuKubun2", length = 3, order = 49)
-//    public RString nofuKubun2;
-//    @ReportItem(name = "nokigenTitle", length = 12, order = 50)
-//    public RString nokigenTitle;
-//    @ReportItem(name = "ocrId2", length = 3, order = 51)
-//    public RString ocrId2;
-//    @ReportItem(name = "tsuchishoNo", length = 20, order = 52)
-//    public RString tsuchishoNo;
-//    @ReportItem(name = "nokigenYmd", length = 16, order = 53)
-//    public RString nokigenYmd;
-//    @ReportItem(name = "hakkoYmd", length = 16, order = 54)
-//    public RString hakkoYmd;
-//    @ReportItem(name = "honzei", length = 15, order = 55)
-//    public RString honzei;
-//    @ReportItem(name = "tokusokuTesuryo", length = 5, order = 56)
-//    public RString tokusokuTesuryo;
-//    @ReportItem(name = "ocr12", length = 39, order = 57)
-//    public RString ocr12;
-//    @ReportItem(name = "ocrCut2", length = 1, order = 58)
-//    public RString ocrCut2;
-//    @ReportItem(name = "entaikin", length = 15, order = 59)
-//    public RString entaikin;
-//    @ReportItem(name = "ocr22", length = 44, order = 60)
-//    public RString ocr22;
-//    @ReportItem(name = "shimei", order = 61)
-//    public RString shimei;
-//    @ReportItem(name = "biko12", length = 30, order = 62)
-//    public RString biko12;
-//    @ReportItem(name = "biko22", length = 30, order = 63)
-//    public RString biko22;
-//    @ReportItem(name = "gimushaShimei", order = 64)
-//    public RString gimushaShimei;
-//    @ReportItem(name = "barcodeCvsBarcode2", order = 65)
-//    public RString barcodeCvsBarcode2;
-//    @ReportItem(name = "cvsBarcodeNaiyo12", length = 33, order = 66)
-//    public RString cvsBarcodeNaiyo12;
-//    @ReportItem(name = "cvsBarcodeNaiyo22", length = 33, order = 67)
-//    public RString cvsBarcodeNaiyo22;
-//    @ReportItem(name = "cvsToriatsukaikigen2", length = 16, order = 68)
-//    public RString cvsToriatsukaikigen2;
-//    @ReportItem(name = "funyuFukanBango2", length = 12, order = 69)
-//    public RString funyuFukanBango2;
-//    @ReportItem(name = "kamokumei", order = 70)
-//    public RString kamokumei;
-//    @ReportItem(name = "ryoshushoNendo3", order = 71)
-//    public RString ryoshushoNendo3;
-//    @ReportItem(name = "nendoNenbun", order = 72)
-//    public RString nendoNenbun;
-//    @ReportItem(name = "kibetsu", order = 73)
-//    public RString kibetsu;
-//    @ReportItem(name = "ryoshushoNenbun3", order = 74)
-//    public RString ryoshushoNenbun3;
-//    @ReportItem(name = "gokeigaku", length = 15, order = 75)
-//    public RString gokeigaku;
-//    @ReportItem(name = "shunoKikanBango3", length = 5, order = 76)
-//    public RString shunoKikanBango3;
-//    @ReportItem(name = "nofuBango", length = 20, order = 77)
-//    public RString nofuBango;
-//    @ReportItem(name = "kakuninBango3", length = 5, order = 78)
-//    public RString kakuninBango3;
-//    @ReportItem(name = "nofuKubun3", length = 3, order = 79)
-//    public RString nofuKubun3;
-//    @ReportItem(name = "nokigenTitle", length = 12, order = 80)
-//    public RString nokigenTitle;
-//    @ReportItem(name = "ocrId3", length = 3, order = 81)
-//    public RString ocrId3;
-//    @ReportItem(name = "tsuchishoNo", length = 20, order = 82)
-//    public RString tsuchishoNo;
-//    @ReportItem(name = "nokigenYmd", length = 16, order = 83)
-//    public RString nokigenYmd;
-//    @ReportItem(name = "hakkoYmd", length = 16, order = 84)
-//    public RString hakkoYmd;
-//    @ReportItem(name = "honzei", length = 15, order = 85)
-//    public RString honzei;
-//    @ReportItem(name = "tokusokuTesuryo", length = 5, order = 86)
-//    public RString tokusokuTesuryo;
-//    @ReportItem(name = "ocr13", length = 39, order = 87)
-//    public RString ocr13;
-//    @ReportItem(name = "ocrCut3", length = 1, order = 88)
-//    public RString ocrCut3;
-//    @ReportItem(name = "entaikin", length = 15, order = 89)
-//    public RString entaikin;
-//    @ReportItem(name = "ocr23", length = 44, order = 90)
-//    public RString ocr23;
-//    @ReportItem(name = "shimei", order = 91)
-//    public RString shimei;
-//    @ReportItem(name = "biko13", length = 30, order = 92)
-//    public RString biko13;
-//    @ReportItem(name = "biko23", length = 30, order = 93)
-//    public RString biko23;
-//    @ReportItem(name = "gimushaShimei", order = 94)
-//    public RString gimushaShimei;
-//    @ReportItem(name = "barcodeCvsBarcode3", order = 95)
-//    public RString barcodeCvsBarcode3;
-//    @ReportItem(name = "cvsBarcodeNaiyo13", length = 33, order = 96)
-//    public RString cvsBarcodeNaiyo13;
-//    @ReportItem(name = "cvsBarcodeNaiyo23", length = 33, order = 97)
-//    public RString cvsBarcodeNaiyo23;
-//    @ReportItem(name = "cvsToriatsukaikigen3", length = 16, order = 98)
-//    public RString cvsToriatsukaikigen3;
-//    @ReportItem(name = "funyuFukanBango3", length = 12, order = 99)
-//    public RString funyuFukanBango3;
+    @ReportItem(name = "ryoshushoNendo2", order = 41)
+    public RString ryoshushoNendo2;
+    @ReportItem(name = "ryoshushoNenbun2", order = 44)
+    public RString ryoshushoNenbun2;
+    @ReportItem(name = "shunoKikanBango2", length = 5, order = 46)
+    public RString shunoKikanBango2;
+    @ReportItem(name = "kakuninBango2", length = 5, order = 48)
+    public RString kakuninBango2;
+    @ReportItem(name = "nofuKubun2", length = 3, order = 49)
+    public RString nofuKubun2;
+    @ReportItem(name = "ocrId2", length = 3, order = 51)
+    public RString ocrId2;
+    @ReportItem(name = "ocr12", length = 39, order = 57)
+    public RString ocr12;
+    @ReportItem(name = "ocrCut2", length = 1, order = 58)
+    public RString ocrCut2;
+    @ReportItem(name = "ocr22", length = 44, order = 60)
+    public RString ocr22;
+    @ReportItem(name = "biko12", length = 30, order = 62)
+    public RString biko12;
+    @ReportItem(name = "biko22", length = 30, order = 63)
+    public RString biko22;
+    @ReportItem(name = "barcodeCvsBarcode2", order = 65)
+    public RString barcodeCvsBarcode2;
+    @ReportItem(name = "cvsBarcodeNaiyo12", length = 33, order = 66)
+    public RString cvsBarcodeNaiyo12;
+    @ReportItem(name = "cvsBarcodeNaiyo22", length = 33, order = 67)
+    public RString cvsBarcodeNaiyo22;
+    @ReportItem(name = "cvsToriatsukaikigen2", length = 16, order = 68)
+    public RString cvsToriatsukaikigen2;
+    @ReportItem(name = "funyuFukanBango2", length = 12, order = 69)
+    public RString funyuFukanBango2;
+
+    @ReportItem(name = "ryoshushoNendo3", order = 71)
+    public RString ryoshushoNendo3;
+    @ReportItem(name = "ryoshushoNenbun3", order = 74)
+    public RString ryoshushoNenbun3;
+    @ReportItem(name = "shunoKikanBango3", length = 5, order = 76)
+    public RString shunoKikanBango3;
+    @ReportItem(name = "kakuninBango3", length = 5, order = 78)
+    public RString kakuninBango3;
+    @ReportItem(name = "nofuKubun3", length = 3, order = 79)
+    public RString nofuKubun3;
+    @ReportItem(name = "ocrId3", length = 3, order = 81)
+    public RString ocrId3;
+    @ReportItem(name = "ocr13", length = 39, order = 87)
+    public RString ocr13;
+    @ReportItem(name = "ocrCut3", length = 1, order = 88)
+    public RString ocrCut3;
+    @ReportItem(name = "ocr23", length = 44, order = 90)
+    public RString ocr23;
+    @ReportItem(name = "biko13", length = 30, order = 92)
+    public RString biko13;
+    @ReportItem(name = "biko23", length = 30, order = 93)
+    public RString biko23;
+    @ReportItem(name = "barcodeCvsBarcode3", order = 95)
+    public RString barcodeCvsBarcode3;
+    @ReportItem(name = "cvsBarcodeNaiyo13", length = 33, order = 96)
+    public RString cvsBarcodeNaiyo13;
+    @ReportItem(name = "cvsBarcodeNaiyo23", length = 33, order = 97)
+    public RString cvsBarcodeNaiyo23;
+    @ReportItem(name = "cvsToriatsukaikigen3", length = 16, order = 98)
+    public RString cvsToriatsukaikigen3;
+    @ReportItem(name = "funyuFukanBango3", length = 12, order = 99)
+    public RString funyuFukanBango3;
 // </editor-fold>
 // <editor-fold defaultstate="collapsed" desc="User Customize Area">
     //追加コードは以下（「User Customize Area」内）に記述してください。

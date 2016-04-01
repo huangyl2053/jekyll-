@@ -6,18 +6,28 @@
 package jp.co.ndensan.reams.db.dbb.business.report;
 
 import java.util.List;
+import jp.co.ndensan.reams.uz.uza.report.IReportSource;
+import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
 
 /**
  *
  * 納入通知書関連クラス継承する抽象クラスです。
+ *
+ * @param <T>
  */
-public interface NonyuTsuchisho {
+public abstract class NonyuTsuchisho<T extends IReportSource> {
 
     /**
-     * List<NonyuTsuchisho>を作成すること処理です。
+     * writeByメソッド
+     *
+     * @param writer writer
+     */
+    public abstract void writeBy(ReportSourceWriter<T> writer);
+
+    /**
+     * devidedByPageメソッド
      *
      * @return List<NonyuTsuchisho>
      */
-    public List<NonyuTsuchisho> devidedByPage();
-
+    public abstract List<NonyuTsuchisho> devidedByPage();
 }
