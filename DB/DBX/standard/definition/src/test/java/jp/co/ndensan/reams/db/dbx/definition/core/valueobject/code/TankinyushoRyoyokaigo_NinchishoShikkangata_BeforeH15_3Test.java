@@ -1,6 +1,6 @@
 package  jp.co.ndensan.reams.db.dbx.definition.core.valueobject.code;
 
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.code.TankinyushoRyoyokaigo_NinchishoShikkangata_BeforeH15_3;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.code.TankinyushoRyoyokaigoNinchishoShikkangataBeforeH153;
 import jp.co.ndensan.reams.db.dbx.testhelper.DbxTestBase;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
@@ -15,18 +15,18 @@ import org.junit.experimental.runners.Enclosed;
 import org.junit.runner.RunWith;
 
 /**
- * TankinyushoRyoyokaigo_NinchishoShikkangata_BeforeH15_3のテストクラスです。
+ * TankinyushoRyoyokaigoNinchishoShikkangataBeforeH153のテストクラスです。
  *
  * @author LDNS 顧偉剛
  */
 @RunWith(Enclosed.class)
 public class TankinyushoRyoyokaigo_NinchishoShikkangata_BeforeH15_3Test extends DbxTestBase {
 
-    private static TankinyushoRyoyokaigo_NinchishoShikkangata_BeforeH15_3 sut;
+    private static TankinyushoRyoyokaigoNinchishoShikkangataBeforeH153 sut;
 
     @BeforeClass
     public static void setUp() {
-        sut = new TankinyushoRyoyokaigo_NinchishoShikkangata_BeforeH15_3(new RString("10"));
+        sut = new TankinyushoRyoyokaigoNinchishoShikkangataBeforeH153(new RString("10"));
     }
 
     /**
@@ -59,13 +59,13 @@ public class TankinyushoRyoyokaigo_NinchishoShikkangata_BeforeH15_3Test extends 
 
         @Test
         public void LDNS_Objectのcodeとコンストラクタのcodeが不一致の場合_equalsは_falseを返す() {
-            TankinyushoRyoyokaigo_NinchishoShikkangata_BeforeH15_3 sut2 = new TankinyushoRyoyokaigo_NinchishoShikkangata_BeforeH15_3(new RString("90"));
+            TankinyushoRyoyokaigoNinchishoShikkangataBeforeH153 sut2 = new TankinyushoRyoyokaigoNinchishoShikkangataBeforeH153(new RString("90"));
             assertFalse(sut.equals(sut2));
         }
 
         @Test
         public void LDNS_Object値とコンストラクタ値が一致の場合_equalsは_trueを返す() {
-            assertTrue(sut.equals(new TankinyushoRyoyokaigo_NinchishoShikkangata_BeforeH15_3(new RString("10"))));
+            assertTrue(sut.equals(new TankinyushoRyoyokaigoNinchishoShikkangataBeforeH153(new RString("10"))));
         }
 
     }
@@ -78,13 +78,13 @@ public class TankinyushoRyoyokaigo_NinchishoShikkangata_BeforeH15_3Test extends 
 
         @Test
         public void LDNS_codeがnullの場合_toStringは_emptyを返す() {
-            TankinyushoRyoyokaigo_NinchishoShikkangata_BeforeH15_3 sut = new TankinyushoRyoyokaigo_NinchishoShikkangata_BeforeH15_3((Code) null);
+            TankinyushoRyoyokaigoNinchishoShikkangataBeforeH153 sut = new TankinyushoRyoyokaigoNinchishoShikkangataBeforeH153((Code) null);
             assertThat(sut.toString(), is(RString.EMPTY.toString()));
         }
 
         @Test
         public void LDNS_codeが1234567の場合_toStringは_1234567を返す() {
-            TankinyushoRyoyokaigo_NinchishoShikkangata_BeforeH15_3 sut = new TankinyushoRyoyokaigo_NinchishoShikkangata_BeforeH15_3(new Code("1234567"));
+            TankinyushoRyoyokaigoNinchishoShikkangataBeforeH153 sut = new TankinyushoRyoyokaigoNinchishoShikkangataBeforeH153(new Code("1234567"));
             assertThat(sut.toString(), is("1234567"));
         }
     }
@@ -97,7 +97,7 @@ public class TankinyushoRyoyokaigo_NinchishoShikkangata_BeforeH15_3Test extends 
 
         @Test
         public void LDNS_設定した対象とコンストラクタ同じの場合_hashCodeは_同じhashCodeを返す() {
-            TankinyushoRyoyokaigo_NinchishoShikkangata_BeforeH15_3 sut2 = new TankinyushoRyoyokaigo_NinchishoShikkangata_BeforeH15_3(new RString("10"));
+            TankinyushoRyoyokaigoNinchishoShikkangataBeforeH153 sut2 = new TankinyushoRyoyokaigoNinchishoShikkangataBeforeH153(new RString("10"));
             assertThat(sut.hashCode(), is(sut2.hashCode()));
         }
     }
@@ -134,13 +134,13 @@ public class TankinyushoRyoyokaigo_NinchishoShikkangata_BeforeH15_3Test extends 
 
         @Test
         public void LDNS_入力のパラメタがnull場合_getMeishoは_emptyを返す() {
-            TankinyushoRyoyokaigo_NinchishoShikkangata_BeforeH15_3 sut = new TankinyushoRyoyokaigo_NinchishoShikkangata_BeforeH15_3((Code) null);
+            TankinyushoRyoyokaigoNinchishoShikkangataBeforeH153 sut = new TankinyushoRyoyokaigoNinchishoShikkangataBeforeH153((Code) null);
             assertThat(sut.getMeisho(new FlexibleDate("20150303")), is(RString.EMPTY));
         }
 
         @Test
         public void LDNS_入力のパラメタがnull以外の場合_getMeishoは_短期入所療養介護_認知症疾患型_平成15年3月以前を返す() {
-            TankinyushoRyoyokaigo_NinchishoShikkangata_BeforeH15_3 sut = new TankinyushoRyoyokaigo_NinchishoShikkangata_BeforeH15_3(new Code("1234567"));
+            TankinyushoRyoyokaigoNinchishoShikkangataBeforeH153 sut = new TankinyushoRyoyokaigoNinchishoShikkangataBeforeH153(new Code("1234567"));
             assertThat(sut.getMeisho(new FlexibleDate("20150303")), is(new RString("短期入所療養介護_認知症疾患型_平成15年3月以前")));
         }
     }
@@ -153,13 +153,13 @@ public class TankinyushoRyoyokaigo_NinchishoShikkangata_BeforeH15_3Test extends 
 
         @Test
         public void LDNS_codeがnull場合_getMeishoは_emptyを返す() {
-            TankinyushoRyoyokaigo_NinchishoShikkangata_BeforeH15_3 sut = new TankinyushoRyoyokaigo_NinchishoShikkangata_BeforeH15_3((Code) null);
+            TankinyushoRyoyokaigoNinchishoShikkangataBeforeH153 sut = new TankinyushoRyoyokaigoNinchishoShikkangataBeforeH153((Code) null);
             assertThat(sut.getMeisho(), is(RString.EMPTY));
         }
 
         @Test
         public void LDNS_codeがnull以外の場合_getMeishoは_短期入所療養介護_認知症疾患型_平成15年3月以前を返す() {
-            TankinyushoRyoyokaigo_NinchishoShikkangata_BeforeH15_3 sut = new TankinyushoRyoyokaigo_NinchishoShikkangata_BeforeH15_3(new Code("1234567"));
+            TankinyushoRyoyokaigoNinchishoShikkangataBeforeH153 sut = new TankinyushoRyoyokaigoNinchishoShikkangataBeforeH153(new Code("1234567"));
             assertThat(sut.getMeisho(), is(new RString("短期入所療養介護_認知症疾患型_平成15年3月以前")));
         }
     }
@@ -172,13 +172,13 @@ public class TankinyushoRyoyokaigo_NinchishoShikkangata_BeforeH15_3Test extends 
 
         @Test
         public void LDNS_入力のパラメタがnull場合_getRyakushoは_emptyを返す() {
-            TankinyushoRyoyokaigo_NinchishoShikkangata_BeforeH15_3 sut = new TankinyushoRyoyokaigo_NinchishoShikkangata_BeforeH15_3((Code) null);
+            TankinyushoRyoyokaigoNinchishoShikkangataBeforeH153 sut = new TankinyushoRyoyokaigoNinchishoShikkangataBeforeH153((Code) null);
             assertThat(sut.getRyakusho(new FlexibleDate("20150303")), is(RString.EMPTY));
         }
 
         @Test
         public void LDNS_入力のパラメタがnull以外の場合_getRyakushoは_短期入所療養介護_認知症疾患型_平成15年3月以前を返す() {
-            TankinyushoRyoyokaigo_NinchishoShikkangata_BeforeH15_3 sut = new TankinyushoRyoyokaigo_NinchishoShikkangata_BeforeH15_3(new Code("1234567"));
+            TankinyushoRyoyokaigoNinchishoShikkangataBeforeH153 sut = new TankinyushoRyoyokaigoNinchishoShikkangataBeforeH153(new Code("1234567"));
             assertThat(sut.getRyakusho(new FlexibleDate("20150303")), is(new RString("短期入所療養介護_認知症疾患型_平成15年3月以前")));
         }
     }
@@ -191,13 +191,13 @@ public class TankinyushoRyoyokaigo_NinchishoShikkangata_BeforeH15_3Test extends 
 
         @Test
         public void LDNS_codeがnull場合_getRyakushoは_emptyを返す() {
-            TankinyushoRyoyokaigo_NinchishoShikkangata_BeforeH15_3 sut = new TankinyushoRyoyokaigo_NinchishoShikkangata_BeforeH15_3((Code) null);
+            TankinyushoRyoyokaigoNinchishoShikkangataBeforeH153 sut = new TankinyushoRyoyokaigoNinchishoShikkangataBeforeH153((Code) null);
             assertThat(sut.getRyakusho(), is(RString.EMPTY));
         }
 
         @Test
         public void LDNS_codeがnull以外の場合_getRyakushoは_短期入所療養介護_認知症疾患型_平成15年3月以前を返す() {
-            TankinyushoRyoyokaigo_NinchishoShikkangata_BeforeH15_3 sut = new TankinyushoRyoyokaigo_NinchishoShikkangata_BeforeH15_3(new Code("1234567"));
+            TankinyushoRyoyokaigoNinchishoShikkangataBeforeH153 sut = new TankinyushoRyoyokaigoNinchishoShikkangataBeforeH153(new Code("1234567"));
             assertThat(sut.getRyakusho(), is(new RString("短期入所療養介護_認知症疾患型_平成15年3月以前")));
         }
     }

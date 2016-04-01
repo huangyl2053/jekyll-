@@ -1,6 +1,6 @@
 package  jp.co.ndensan.reams.db.dbx.definition.core.valueobject.code;
 
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.code.KobetsuKinokunrentaiseiUmu_Tsushokaigo_BeforeH21_3;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.code.KobetsuKinokunrentaiseiUmuTsushokaigoBforeH213;
 import jp.co.ndensan.reams.db.dbx.testhelper.DbxTestBase;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
@@ -15,18 +15,18 @@ import org.junit.experimental.runners.Enclosed;
 import org.junit.runner.RunWith;
 
 /**
- * KobetsuKinokunrentaiseiUmu_Tsushokaigo_BeforeH21_3のテストクラスです。
+ * KobetsuKinokunrentaiseiUmuTsushokaigoBforeH213のテストクラスです。
  *
  * @author LDNS 顧偉剛
  */
 @RunWith(Enclosed.class)
 public class KobetsuKinokunrentaiseiUmu_Tsushokaigo_BeforeH21_3Test extends DbxTestBase {
 
-    private static KobetsuKinokunrentaiseiUmu_Tsushokaigo_BeforeH21_3 sut;
+    private static KobetsuKinokunrentaiseiUmuTsushokaigoBforeH213 sut;
 
     @BeforeClass
     public static void setUp() {
-        sut = new KobetsuKinokunrentaiseiUmu_Tsushokaigo_BeforeH21_3(new RString("10"));
+        sut = new KobetsuKinokunrentaiseiUmuTsushokaigoBforeH213(new RString("10"));
     }
 
     /**
@@ -59,13 +59,13 @@ public class KobetsuKinokunrentaiseiUmu_Tsushokaigo_BeforeH21_3Test extends DbxT
 
         @Test
         public void LDNS_Objectのcodeとコンストラクタのcodeが不一致の場合_equalsは_falseを返す() {
-            KobetsuKinokunrentaiseiUmu_Tsushokaigo_BeforeH21_3 sut2 = new KobetsuKinokunrentaiseiUmu_Tsushokaigo_BeforeH21_3(new RString("90"));
+            KobetsuKinokunrentaiseiUmuTsushokaigoBforeH213 sut2 = new KobetsuKinokunrentaiseiUmuTsushokaigoBforeH213(new RString("90"));
             assertFalse(sut.equals(sut2));
         }
 
         @Test
         public void LDNS_Object値とコンストラクタ値が一致の場合_equalsは_trueを返す() {
-            assertTrue(sut.equals(new KobetsuKinokunrentaiseiUmu_Tsushokaigo_BeforeH21_3(new RString("10"))));
+            assertTrue(sut.equals(new KobetsuKinokunrentaiseiUmuTsushokaigoBforeH213(new RString("10"))));
         }
 
     }
@@ -78,13 +78,13 @@ public class KobetsuKinokunrentaiseiUmu_Tsushokaigo_BeforeH21_3Test extends DbxT
 
         @Test
         public void LDNS_codeがnullの場合_toStringは_emptyを返す() {
-            KobetsuKinokunrentaiseiUmu_Tsushokaigo_BeforeH21_3 sut = new KobetsuKinokunrentaiseiUmu_Tsushokaigo_BeforeH21_3((Code) null);
+            KobetsuKinokunrentaiseiUmuTsushokaigoBforeH213 sut = new KobetsuKinokunrentaiseiUmuTsushokaigoBforeH213((Code) null);
             assertThat(sut.toString(), is(RString.EMPTY.toString()));
         }
 
         @Test
         public void LDNS_codeが1234567の場合_toStringは_1234567を返す() {
-            KobetsuKinokunrentaiseiUmu_Tsushokaigo_BeforeH21_3 sut = new KobetsuKinokunrentaiseiUmu_Tsushokaigo_BeforeH21_3(new Code("1234567"));
+            KobetsuKinokunrentaiseiUmuTsushokaigoBforeH213 sut = new KobetsuKinokunrentaiseiUmuTsushokaigoBforeH213(new Code("1234567"));
             assertThat(sut.toString(), is("1234567"));
         }
     }
@@ -97,7 +97,7 @@ public class KobetsuKinokunrentaiseiUmu_Tsushokaigo_BeforeH21_3Test extends DbxT
 
         @Test
         public void LDNS_設定した対象とコンストラクタ同じの場合_hashCodeは_同じhashCodeを返す() {
-            KobetsuKinokunrentaiseiUmu_Tsushokaigo_BeforeH21_3 sut2 = new KobetsuKinokunrentaiseiUmu_Tsushokaigo_BeforeH21_3(new RString("10"));
+            KobetsuKinokunrentaiseiUmuTsushokaigoBforeH213 sut2 = new KobetsuKinokunrentaiseiUmuTsushokaigoBforeH213(new RString("10"));
             assertThat(sut.hashCode(), is(sut2.hashCode()));
         }
     }
@@ -134,13 +134,13 @@ public class KobetsuKinokunrentaiseiUmu_Tsushokaigo_BeforeH21_3Test extends DbxT
 
         @Test
         public void LDNS_入力のパラメタがnull場合_getMeishoは_emptyを返す() {
-            KobetsuKinokunrentaiseiUmu_Tsushokaigo_BeforeH21_3 sut = new KobetsuKinokunrentaiseiUmu_Tsushokaigo_BeforeH21_3((Code) null);
+            KobetsuKinokunrentaiseiUmuTsushokaigoBforeH213 sut = new KobetsuKinokunrentaiseiUmuTsushokaigoBforeH213((Code) null);
             assertThat(sut.getMeisho(new FlexibleDate("20150303")), is(RString.EMPTY));
         }
 
         @Test
         public void LDNS_入力のパラメタがnull以外の場合_getMeishoは_個別機能訓練体制の有無_通所介護_平成21年3月以前を返す() {
-            KobetsuKinokunrentaiseiUmu_Tsushokaigo_BeforeH21_3 sut = new KobetsuKinokunrentaiseiUmu_Tsushokaigo_BeforeH21_3(new Code("1234567"));
+            KobetsuKinokunrentaiseiUmuTsushokaigoBforeH213 sut = new KobetsuKinokunrentaiseiUmuTsushokaigoBforeH213(new Code("1234567"));
             assertThat(sut.getMeisho(new FlexibleDate("20150303")), is(new RString("個別機能訓練体制の有無_通所介護_平成21年3月以前")));
         }
     }
@@ -153,13 +153,13 @@ public class KobetsuKinokunrentaiseiUmu_Tsushokaigo_BeforeH21_3Test extends DbxT
 
         @Test
         public void LDNS_codeがnull場合_getMeishoは_emptyを返す() {
-            KobetsuKinokunrentaiseiUmu_Tsushokaigo_BeforeH21_3 sut = new KobetsuKinokunrentaiseiUmu_Tsushokaigo_BeforeH21_3((Code) null);
+            KobetsuKinokunrentaiseiUmuTsushokaigoBforeH213 sut = new KobetsuKinokunrentaiseiUmuTsushokaigoBforeH213((Code) null);
             assertThat(sut.getMeisho(), is(RString.EMPTY));
         }
 
         @Test
         public void LDNS_codeがnull以外の場合_getMeishoは_個別機能訓練体制の有無_通所介護_平成21年3月以前を返す() {
-            KobetsuKinokunrentaiseiUmu_Tsushokaigo_BeforeH21_3 sut = new KobetsuKinokunrentaiseiUmu_Tsushokaigo_BeforeH21_3(new Code("1234567"));
+            KobetsuKinokunrentaiseiUmuTsushokaigoBforeH213 sut = new KobetsuKinokunrentaiseiUmuTsushokaigoBforeH213(new Code("1234567"));
             assertThat(sut.getMeisho(), is(new RString("個別機能訓練体制の有無_通所介護_平成21年3月以前")));
         }
     }
@@ -172,13 +172,13 @@ public class KobetsuKinokunrentaiseiUmu_Tsushokaigo_BeforeH21_3Test extends DbxT
 
         @Test
         public void LDNS_入力のパラメタがnull場合_getRyakushoは_emptyを返す() {
-            KobetsuKinokunrentaiseiUmu_Tsushokaigo_BeforeH21_3 sut = new KobetsuKinokunrentaiseiUmu_Tsushokaigo_BeforeH21_3((Code) null);
+            KobetsuKinokunrentaiseiUmuTsushokaigoBforeH213 sut = new KobetsuKinokunrentaiseiUmuTsushokaigoBforeH213((Code) null);
             assertThat(sut.getRyakusho(new FlexibleDate("20150303")), is(RString.EMPTY));
         }
 
         @Test
         public void LDNS_入力のパラメタがnull以外の場合_getRyakushoは_個別機能訓練体制の有無_通所介護_平成21年3月以前を返す() {
-            KobetsuKinokunrentaiseiUmu_Tsushokaigo_BeforeH21_3 sut = new KobetsuKinokunrentaiseiUmu_Tsushokaigo_BeforeH21_3(new Code("1234567"));
+            KobetsuKinokunrentaiseiUmuTsushokaigoBforeH213 sut = new KobetsuKinokunrentaiseiUmuTsushokaigoBforeH213(new Code("1234567"));
             assertThat(sut.getRyakusho(new FlexibleDate("20150303")), is(new RString("個別機能訓練体制の有無_通所介護_平成21年3月以前")));
         }
     }
@@ -191,13 +191,13 @@ public class KobetsuKinokunrentaiseiUmu_Tsushokaigo_BeforeH21_3Test extends DbxT
 
         @Test
         public void LDNS_codeがnull場合_getRyakushoは_emptyを返す() {
-            KobetsuKinokunrentaiseiUmu_Tsushokaigo_BeforeH21_3 sut = new KobetsuKinokunrentaiseiUmu_Tsushokaigo_BeforeH21_3((Code) null);
+            KobetsuKinokunrentaiseiUmuTsushokaigoBforeH213 sut = new KobetsuKinokunrentaiseiUmuTsushokaigoBforeH213((Code) null);
             assertThat(sut.getRyakusho(), is(RString.EMPTY));
         }
 
         @Test
         public void LDNS_codeがnull以外の場合_getRyakushoは_個別機能訓練体制の有無_通所介護_平成21年3月以前を返す() {
-            KobetsuKinokunrentaiseiUmu_Tsushokaigo_BeforeH21_3 sut = new KobetsuKinokunrentaiseiUmu_Tsushokaigo_BeforeH21_3(new Code("1234567"));
+            KobetsuKinokunrentaiseiUmuTsushokaigoBforeH213 sut = new KobetsuKinokunrentaiseiUmuTsushokaigoBforeH213(new Code("1234567"));
             assertThat(sut.getRyakusho(), is(new RString("個別機能訓練体制の有無_通所介護_平成21年3月以前")));
         }
     }

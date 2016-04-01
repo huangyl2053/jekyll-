@@ -5,7 +5,7 @@
  */
 package  jp.co.ndensan.reams.db.dbx.definition.core.valueobject.code;
 
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.code.TankinyushoRyoyokaigo_UnitGataNinchishoShikkangata;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.code.TankinyushoRyoyokaigoUnitGataNinchishoShikkangata;
 import jp.co.ndensan.reams.db.dbx.testhelper.DbxTestBase;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
@@ -27,11 +27,11 @@ import org.junit.runner.RunWith;
 @RunWith(Enclosed.class)
 public class TankinyushoRyoyokaigo_UnitGataNinchishoShikkangataTest extends DbxTestBase {
 
-    private static TankinyushoRyoyokaigo_UnitGataNinchishoShikkangata sut;
+    private static TankinyushoRyoyokaigoUnitGataNinchishoShikkangata sut;
 
     @BeforeClass
     public static void setUp() {
-        sut = new TankinyushoRyoyokaigo_UnitGataNinchishoShikkangata(new RString("10"));
+        sut = new TankinyushoRyoyokaigoUnitGataNinchishoShikkangata(new RString("10"));
     }
 
     /**
@@ -66,13 +66,13 @@ public class TankinyushoRyoyokaigo_UnitGataNinchishoShikkangataTest extends DbxT
 
         @Test
         public void LDNS_Objectのcodeとコンストラクタのcodeが不一致の場合_equalsは_falseを返す() {
-            TankinyushoRyoyokaigo_UnitGataNinchishoShikkangata sut2 = new TankinyushoRyoyokaigo_UnitGataNinchishoShikkangata(new RString("90"));
+            TankinyushoRyoyokaigoUnitGataNinchishoShikkangata sut2 = new TankinyushoRyoyokaigoUnitGataNinchishoShikkangata(new RString("90"));
             assertFalse(sut.equals(sut2));
         }
 
         @Test
         public void LDNS_Object値とコンストラクタ値が一致の場合_equalsは_trueを返す() {
-            assertTrue(sut.equals(new TankinyushoRyoyokaigo_UnitGataNinchishoShikkangata(new RString("10"))));
+            assertTrue(sut.equals(new TankinyushoRyoyokaigoUnitGataNinchishoShikkangata(new RString("10"))));
         }
 
     }
@@ -85,13 +85,13 @@ public class TankinyushoRyoyokaigo_UnitGataNinchishoShikkangataTest extends DbxT
 
         @Test
         public void LDNS_codeがnullの場合_toStringは_emptyを返す() {
-            TankinyushoRyoyokaigo_UnitGataNinchishoShikkangata sut = new TankinyushoRyoyokaigo_UnitGataNinchishoShikkangata((Code) null);
+            TankinyushoRyoyokaigoUnitGataNinchishoShikkangata sut = new TankinyushoRyoyokaigoUnitGataNinchishoShikkangata((Code) null);
             assertThat(sut.toString(), is(RString.EMPTY.toString()));
         }
 
         @Test
         public void LDNS_codeが1234567の場合_toStringは_1234567を返す() {
-            TankinyushoRyoyokaigo_UnitGataNinchishoShikkangata sut = new TankinyushoRyoyokaigo_UnitGataNinchishoShikkangata(new Code("1234567"));
+            TankinyushoRyoyokaigoUnitGataNinchishoShikkangata sut = new TankinyushoRyoyokaigoUnitGataNinchishoShikkangata(new Code("1234567"));
             assertThat(sut.toString(), is("1234567"));
         }
     }
@@ -104,7 +104,7 @@ public class TankinyushoRyoyokaigo_UnitGataNinchishoShikkangataTest extends DbxT
 
         @Test
         public void LDNS_設定した対象とコンストラクタ同じの場合_hashCodeは_同じhashCodeを返す() {
-            TankinyushoRyoyokaigo_UnitGataNinchishoShikkangata sut2 = new TankinyushoRyoyokaigo_UnitGataNinchishoShikkangata(new RString("10"));
+            TankinyushoRyoyokaigoUnitGataNinchishoShikkangata sut2 = new TankinyushoRyoyokaigoUnitGataNinchishoShikkangata(new RString("10"));
             assertThat(sut.hashCode(), is(sut2.hashCode()));
         }
     }
@@ -143,13 +143,13 @@ public class TankinyushoRyoyokaigo_UnitGataNinchishoShikkangataTest extends DbxT
 
         @Test
         public void LDNS_指定したコードがnullの場合_getMeishoは_emptyを返す() {
-            TankinyushoRyoyokaigo_UnitGataNinchishoShikkangata sut = new TankinyushoRyoyokaigo_UnitGataNinchishoShikkangata((Code) null);
+            TankinyushoRyoyokaigoUnitGataNinchishoShikkangata sut = new TankinyushoRyoyokaigoUnitGataNinchishoShikkangata((Code) null);
             assertThat(sut.getMeisho(kijunbi), is(RString.EMPTY));
         }
 
         @Test
         public void LDNS_指定したコードが1234567の場合_getMeishoは_短期入所療養介護_ユニット型認知症疾患型型認知症を返す() {
-            TankinyushoRyoyokaigo_UnitGataNinchishoShikkangata sut = new TankinyushoRyoyokaigo_UnitGataNinchishoShikkangata(new Code("1234567"));
+            TankinyushoRyoyokaigoUnitGataNinchishoShikkangata sut = new TankinyushoRyoyokaigoUnitGataNinchishoShikkangata(new Code("1234567"));
             assertThat(sut.getMeisho(kijunbi), is(new RString("短期入所療養介護_ユニット型認知症疾患型")));
         }
     }
@@ -162,13 +162,13 @@ public class TankinyushoRyoyokaigo_UnitGataNinchishoShikkangataTest extends DbxT
 
         @Test
         public void LDNS_codeがnullの場合_getMeishoは_emptyを返す() {
-            TankinyushoRyoyokaigo_UnitGataNinchishoShikkangata sut = new TankinyushoRyoyokaigo_UnitGataNinchishoShikkangata((Code) null);
+            TankinyushoRyoyokaigoUnitGataNinchishoShikkangata sut = new TankinyushoRyoyokaigoUnitGataNinchishoShikkangata((Code) null);
             assertThat(sut.getMeisho(), is(RString.EMPTY));
         }
 
         @Test
         public void LDNS_codeが1234567の場合_getMeishoは_短期入所療養介護_ユニット型認知症疾患型を返す() {
-            TankinyushoRyoyokaigo_UnitGataNinchishoShikkangata sut = new TankinyushoRyoyokaigo_UnitGataNinchishoShikkangata(new Code("1234567"));
+            TankinyushoRyoyokaigoUnitGataNinchishoShikkangata sut = new TankinyushoRyoyokaigoUnitGataNinchishoShikkangata(new Code("1234567"));
             assertThat(sut.getMeisho(), is(new RString("短期入所療養介護_ユニット型認知症疾患型")));
         }
     }
@@ -183,14 +183,14 @@ public class TankinyushoRyoyokaigo_UnitGataNinchishoShikkangataTest extends DbxT
 
         @Test
         public void LDNS_codeがnullの場合_getRyakushoは_emptyを返す() {
-            TankinyushoRyoyokaigo_UnitGataNinchishoShikkangata sut = new TankinyushoRyoyokaigo_UnitGataNinchishoShikkangata((Code) null);
+            TankinyushoRyoyokaigoUnitGataNinchishoShikkangata sut = new TankinyushoRyoyokaigoUnitGataNinchishoShikkangata((Code) null);
             assertThat(sut.getRyakusho(kijunbi), is(RString.EMPTY));
         }
 
         @Test
         public void LDNS_codeが1234567の場合_getRyakushoは_短期入所療養介護_ユニット型認知症疾患型を返す() {
 
-            TankinyushoRyoyokaigo_UnitGataNinchishoShikkangata sut = new TankinyushoRyoyokaigo_UnitGataNinchishoShikkangata(new Code("1234567"));
+            TankinyushoRyoyokaigoUnitGataNinchishoShikkangata sut = new TankinyushoRyoyokaigoUnitGataNinchishoShikkangata(new Code("1234567"));
             assertThat(sut.getRyakusho(kijunbi), is(new RString("短期入所療養介護_ユニット型認知症疾患型")));
         }
     }
@@ -203,13 +203,13 @@ public class TankinyushoRyoyokaigo_UnitGataNinchishoShikkangataTest extends DbxT
 
         @Test
         public void LDNS_codeがnullの場合_getRyakushoは_emptyを返す() {
-            TankinyushoRyoyokaigo_UnitGataNinchishoShikkangata sut = new TankinyushoRyoyokaigo_UnitGataNinchishoShikkangata((Code) null);
+            TankinyushoRyoyokaigoUnitGataNinchishoShikkangata sut = new TankinyushoRyoyokaigoUnitGataNinchishoShikkangata((Code) null);
             assertThat(sut.getRyakusho(), is(RString.EMPTY));
         }
 
         @Test
         public void LDNS_codeが1234567の場合_getRyakushoは_短期入所療養介護_ユニット型認知症疾患型を返す() {
-            TankinyushoRyoyokaigo_UnitGataNinchishoShikkangata sut = new TankinyushoRyoyokaigo_UnitGataNinchishoShikkangata(new Code("1234567"));
+            TankinyushoRyoyokaigoUnitGataNinchishoShikkangata sut = new TankinyushoRyoyokaigoUnitGataNinchishoShikkangata(new Code("1234567"));
             assertThat(sut.getRyakusho(), is(new RString("短期入所療養介護_ユニット型認知症疾患型")));
         }
     }

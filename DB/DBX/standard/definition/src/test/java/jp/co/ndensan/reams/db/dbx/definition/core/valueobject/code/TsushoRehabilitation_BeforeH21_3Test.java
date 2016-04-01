@@ -1,6 +1,6 @@
 package  jp.co.ndensan.reams.db.dbx.definition.core.valueobject.code;
 
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.code.TsushoRehabilitation_BeforeH21_3;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.code.TsushoRehabilitationBeforeH213;
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
 import static org.junit.Assert.assertFalse;
@@ -15,18 +15,18 @@ import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 
 /**
- * TsushoRehabilitation_BeforeH21_3のテストクラスです。
+ * TsushoRehabilitationBeforeH213のテストクラスです。
  * 
  * @author LDNS 黄陽
  */
 @RunWith(Enclosed.class)
 public class TsushoRehabilitation_BeforeH21_3Test extends DbxTestBase {
 
-    private static TsushoRehabilitation_BeforeH21_3 sut;
+    private static TsushoRehabilitationBeforeH213 sut;
 
     @BeforeClass
     public static void setUp() {
-        sut = new TsushoRehabilitation_BeforeH21_3(new RString("10"));
+        sut = new TsushoRehabilitationBeforeH213(new RString("10"));
     }
 
     public static class valueテスト extends DbxTestBase {
@@ -49,13 +49,13 @@ public class TsushoRehabilitation_BeforeH21_3Test extends DbxTestBase {
 
         @Test
         public void LDNS_Objectのcodeとコンストラクタのcodeが不一致の場合_equalsは_falseを返す() {
-            TsushoRehabilitation_BeforeH21_3 sut2 = new TsushoRehabilitation_BeforeH21_3(new RString("90"));
+            TsushoRehabilitationBeforeH213 sut2 = new TsushoRehabilitationBeforeH213(new RString("90"));
             assertFalse(sut.equals(sut2));
         }
 
         @Test
         public void LDNS_Object値とコンストラクタ値が一致の場合_equalsは_trueを返す() {
-            assertTrue(sut.equals(new TsushoRehabilitation_BeforeH21_3(new RString("10"))));
+            assertTrue(sut.equals(new TsushoRehabilitationBeforeH213(new RString("10"))));
         }
 
     }
@@ -63,12 +63,12 @@ public class TsushoRehabilitation_BeforeH21_3Test extends DbxTestBase {
     public static class toStringテスト extends DbxTestBase {
         @Test
         public void LDNS_codeがnullの場合_toStringは_emptyを返す() {
-            TsushoRehabilitation_BeforeH21_3 sut = new TsushoRehabilitation_BeforeH21_3((Code) null);
+            TsushoRehabilitationBeforeH213 sut = new TsushoRehabilitationBeforeH213((Code) null);
             assertThat(sut.toString(), is(RString.EMPTY.toString()));
         }
         @Test
         public void LDNS_codeが1234567の場合_toStringは_1234567を返す() {
-            TsushoRehabilitation_BeforeH21_3 sut = new TsushoRehabilitation_BeforeH21_3(new Code("1234567"));
+            TsushoRehabilitationBeforeH213 sut = new TsushoRehabilitationBeforeH213(new Code("1234567"));
             assertThat(sut.toString(), is("1234567"));
         }
     }
@@ -76,7 +76,7 @@ public class TsushoRehabilitation_BeforeH21_3Test extends DbxTestBase {
     public static class hashCodeテスト extends DbxTestBase {
         @Test
         public void LDNS_設定した対象とコンストラクタ同じの場合_hashCodeは_同じhashCodeを返す() {
-            TsushoRehabilitation_BeforeH21_3 sut2=new TsushoRehabilitation_BeforeH21_3(new RString("10"));
+            TsushoRehabilitationBeforeH213 sut2=new TsushoRehabilitationBeforeH213(new RString("10"));
             assertThat(sut.hashCode(), is(sut2.hashCode()));
         }
     }
@@ -99,13 +99,13 @@ public class TsushoRehabilitation_BeforeH21_3Test extends DbxTestBase {
 
         @Test
         public void LDNS_入力のパラメタがnull場合_getMeishoは_emptyを返す() {
-            TsushoRehabilitation_BeforeH21_3 sut = new TsushoRehabilitation_BeforeH21_3((Code) null);
+            TsushoRehabilitationBeforeH213 sut = new TsushoRehabilitationBeforeH213((Code) null);
             assertThat(sut.getMeisho(new FlexibleDate("20150303")), is(RString.EMPTY));
         }
 
         @Test
         public void LDNS_入力のパラメタが1234567の場合_getMeishoは_通所ﾘﾊﾋﾞﾘﾃｰｼｮﾝ_平成21年3月以前を返す() {
-            TsushoRehabilitation_BeforeH21_3 sut = new TsushoRehabilitation_BeforeH21_3(new Code("1234567"));
+            TsushoRehabilitationBeforeH213 sut = new TsushoRehabilitationBeforeH213(new Code("1234567"));
             assertThat(sut.getMeisho(new FlexibleDate("20150303")), is(new RString("通所ﾘﾊﾋﾞﾘﾃｰｼｮﾝ_平成21年3月以前")));
         }
     }
@@ -114,13 +114,13 @@ public class TsushoRehabilitation_BeforeH21_3Test extends DbxTestBase {
 
         @Test
         public void LDNS_codeがnull場合_getMeishoは_emptyを返す() {
-            TsushoRehabilitation_BeforeH21_3 sut = new TsushoRehabilitation_BeforeH21_3((Code) null);
+            TsushoRehabilitationBeforeH213 sut = new TsushoRehabilitationBeforeH213((Code) null);
             assertThat(sut.getMeisho(), is(RString.EMPTY));
         }
 
         @Test
         public void LDNS_codeが1234567の場合_getMeishoは_通所ﾘﾊﾋﾞﾘﾃｰｼｮﾝ_平成21年3月以前を返す() {
-            TsushoRehabilitation_BeforeH21_3 sut = new TsushoRehabilitation_BeforeH21_3(new Code("1234567"));
+            TsushoRehabilitationBeforeH213 sut = new TsushoRehabilitationBeforeH213(new Code("1234567"));
             assertThat(sut.getMeisho(), is(new RString("通所ﾘﾊﾋﾞﾘﾃｰｼｮﾝ_平成21年3月以前")));
         }
     }
@@ -129,13 +129,13 @@ public class TsushoRehabilitation_BeforeH21_3Test extends DbxTestBase {
 
         @Test
         public void LDNS_入力のパラメタがnull場合_getRyakushoは_emptyを返す() {
-            TsushoRehabilitation_BeforeH21_3 sut = new TsushoRehabilitation_BeforeH21_3((Code) null);
+            TsushoRehabilitationBeforeH213 sut = new TsushoRehabilitationBeforeH213((Code) null);
             assertThat(sut.getRyakusho(new FlexibleDate("20150303")), is(RString.EMPTY));
         }
 
         @Test
         public void LDNS_入力のパラメタが1234567の場合_getRyakushoは_通所ﾘﾊﾋﾞﾘﾃｰｼｮﾝ_平成21年3月以前を返す() {
-            TsushoRehabilitation_BeforeH21_3 sut = new TsushoRehabilitation_BeforeH21_3(new Code("1234567"));
+            TsushoRehabilitationBeforeH213 sut = new TsushoRehabilitationBeforeH213(new Code("1234567"));
             assertThat(sut.getRyakusho(new FlexibleDate("20150303")), is(new RString("通所ﾘﾊﾋﾞﾘﾃｰｼｮﾝ_平成21年3月以前")));
         }
     }
@@ -144,13 +144,13 @@ public class TsushoRehabilitation_BeforeH21_3Test extends DbxTestBase {
 
         @Test
         public void LDNS_codeがnull場合_getRyakushoは_emptyを返す() {
-            TsushoRehabilitation_BeforeH21_3 sut = new TsushoRehabilitation_BeforeH21_3((Code) null);
+            TsushoRehabilitationBeforeH213 sut = new TsushoRehabilitationBeforeH213((Code) null);
             assertThat(sut.getRyakusho(), is(RString.EMPTY));
         }
 
         @Test
         public void LDNS_codeが1234567の場合_getRyakushoは_通所ﾘﾊﾋﾞﾘﾃｰｼｮﾝ_平成21年3月以前を返す() {
-            TsushoRehabilitation_BeforeH21_3 sut = new TsushoRehabilitation_BeforeH21_3(new Code("1234567"));
+            TsushoRehabilitationBeforeH213 sut = new TsushoRehabilitationBeforeH213(new Code("1234567"));
             assertThat(sut.getRyakusho(), is(new RString("通所ﾘﾊﾋﾞﾘﾃｰｼｮﾝ_平成21年3月以前")));
         }
     }

@@ -1,6 +1,6 @@
 package  jp.co.ndensan.reams.db.dbx.definition.core.valueobject.code;
 
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.code.Teikijunkai_zuijitaiogataHomonkaigokango;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.code.TeikijunkaiZuijitaiogataHomonkaigokango;
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
 import static org.junit.Assert.assertFalse;
@@ -22,11 +22,11 @@ import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 @RunWith(Enclosed.class)
 public class Teikijunkai_zuijitaiogataHomonkaigokangoTest extends DbxTestBase {
 
-    private static Teikijunkai_zuijitaiogataHomonkaigokango sut;
+    private static TeikijunkaiZuijitaiogataHomonkaigokango sut;
 
     @BeforeClass
     public static void setUp() {
-        sut = new Teikijunkai_zuijitaiogataHomonkaigokango(new RString("10"));
+        sut = new TeikijunkaiZuijitaiogataHomonkaigokango(new RString("10"));
     }
 
     /**
@@ -61,13 +61,13 @@ public class Teikijunkai_zuijitaiogataHomonkaigokangoTest extends DbxTestBase {
 
         @Test
         public void LDNS_Objectのcodeとコンストラクタのcodeが不一致の場合_equalsは_falseを戻す() {
-            Teikijunkai_zuijitaiogataHomonkaigokango sut2 = new Teikijunkai_zuijitaiogataHomonkaigokango(new RString("90"));
+            TeikijunkaiZuijitaiogataHomonkaigokango sut2 = new TeikijunkaiZuijitaiogataHomonkaigokango(new RString("90"));
             assertFalse(sut.equals(sut2));
         }
 
         @Test
         public void LDNS_Object値とコンストラクタ値が一致の場合_equalsは_trueを戻す() {
-            assertTrue(sut.equals(new Teikijunkai_zuijitaiogataHomonkaigokango(new RString("10"))));
+            assertTrue(sut.equals(new TeikijunkaiZuijitaiogataHomonkaigokango(new RString("10"))));
         }
 
     }
@@ -80,13 +80,13 @@ public class Teikijunkai_zuijitaiogataHomonkaigokangoTest extends DbxTestBase {
 
         @Test
         public void LDNS_codeがnullの場合_toStringは_emptyを戻す() {
-            Teikijunkai_zuijitaiogataHomonkaigokango sut = new Teikijunkai_zuijitaiogataHomonkaigokango((Code) null);
+            TeikijunkaiZuijitaiogataHomonkaigokango sut = new TeikijunkaiZuijitaiogataHomonkaigokango((Code) null);
             assertThat(sut.toString(), is(RString.EMPTY.toString()));
         }
 
         @Test
         public void LDNS_codeが1234567の場合_toStringは_1234567を戻す() {
-            Teikijunkai_zuijitaiogataHomonkaigokango sut = new Teikijunkai_zuijitaiogataHomonkaigokango(new Code("1234567"));
+            TeikijunkaiZuijitaiogataHomonkaigokango sut = new TeikijunkaiZuijitaiogataHomonkaigokango(new Code("1234567"));
             assertThat(sut.toString(), is("1234567"));
         }
     }
@@ -99,7 +99,7 @@ public class Teikijunkai_zuijitaiogataHomonkaigokangoTest extends DbxTestBase {
 
         @Test
         public void LDNS_設定した対象とコンストラクタ同じの場合_hashCodeは_同じhashCodeを戻す() {
-            Teikijunkai_zuijitaiogataHomonkaigokango sut2 = new Teikijunkai_zuijitaiogataHomonkaigokango(new RString("10"));
+            TeikijunkaiZuijitaiogataHomonkaigokango sut2 = new TeikijunkaiZuijitaiogataHomonkaigokango(new RString("10"));
             assertThat(sut.hashCode(), is(sut2.hashCode()));
         }
     }
@@ -136,13 +136,13 @@ public class Teikijunkai_zuijitaiogataHomonkaigokangoTest extends DbxTestBase {
 
         @Test
         public void LDNS_入力のパラメタがnull場合_getMeishoは_emptyを戻す() {
-            Teikijunkai_zuijitaiogataHomonkaigokango sut = new Teikijunkai_zuijitaiogataHomonkaigokango((Code) null);
+            TeikijunkaiZuijitaiogataHomonkaigokango sut = new TeikijunkaiZuijitaiogataHomonkaigokango((Code) null);
             assertThat(sut.getMeisho(new FlexibleDate("20150303")), is(RString.EMPTY));
         }
 
         @Test
         public void LDNS_入力のパラメタがnull以外の場合_getMeishoは_定期巡回_随時対応型訪問介護看護を戻す() {
-            Teikijunkai_zuijitaiogataHomonkaigokango sut = new Teikijunkai_zuijitaiogataHomonkaigokango(new Code("1234567"));
+            TeikijunkaiZuijitaiogataHomonkaigokango sut = new TeikijunkaiZuijitaiogataHomonkaigokango(new Code("1234567"));
             assertThat(sut.getMeisho(new FlexibleDate("20150303")), is(new RString("定期巡回_随時対応型訪問介護看護")));
         }
     }
@@ -155,13 +155,13 @@ public class Teikijunkai_zuijitaiogataHomonkaigokangoTest extends DbxTestBase {
 
         @Test
         public void LDNS_codeがnull場合_getMeishoは_emptyを戻す() {
-            Teikijunkai_zuijitaiogataHomonkaigokango sut = new Teikijunkai_zuijitaiogataHomonkaigokango((Code) null);
+            TeikijunkaiZuijitaiogataHomonkaigokango sut = new TeikijunkaiZuijitaiogataHomonkaigokango((Code) null);
             assertThat(sut.getMeisho(), is(RString.EMPTY));
         }
 
         @Test
         public void LDNS_codeがnull以外の場合_getMeishoは_定期巡回_随時対応型訪問介護看護を戻す() {
-            Teikijunkai_zuijitaiogataHomonkaigokango sut = new Teikijunkai_zuijitaiogataHomonkaigokango(new Code("1234567"));
+            TeikijunkaiZuijitaiogataHomonkaigokango sut = new TeikijunkaiZuijitaiogataHomonkaigokango(new Code("1234567"));
             assertThat(sut.getMeisho(), is(new RString("定期巡回_随時対応型訪問介護看護")));
         }
     }
@@ -174,13 +174,13 @@ public class Teikijunkai_zuijitaiogataHomonkaigokangoTest extends DbxTestBase {
 
         @Test
         public void LDNS_入力のパラメタがnull場合_getRyakushoは_emptyを戻す() {
-            Teikijunkai_zuijitaiogataHomonkaigokango sut = new Teikijunkai_zuijitaiogataHomonkaigokango((Code) null);
+            TeikijunkaiZuijitaiogataHomonkaigokango sut = new TeikijunkaiZuijitaiogataHomonkaigokango((Code) null);
             assertThat(sut.getRyakusho(new FlexibleDate("20150303")), is(RString.EMPTY));
         }
 
         @Test
         public void LDNS_入力のパラメタがnull以外の場合_getRyakushoは_定期巡回_随時対応型訪問介護看護を戻す() {
-            Teikijunkai_zuijitaiogataHomonkaigokango sut = new Teikijunkai_zuijitaiogataHomonkaigokango(new Code("1234567"));
+            TeikijunkaiZuijitaiogataHomonkaigokango sut = new TeikijunkaiZuijitaiogataHomonkaigokango(new Code("1234567"));
             assertThat(sut.getRyakusho(new FlexibleDate("20150303")), is(new RString("定期巡回_随時対応型訪問介護看護")));
         }
     }
@@ -193,13 +193,13 @@ public class Teikijunkai_zuijitaiogataHomonkaigokangoTest extends DbxTestBase {
 
         @Test
         public void LDNS_codeがnull場合_getRyakushoは_emptyを戻す() {
-            Teikijunkai_zuijitaiogataHomonkaigokango sut = new Teikijunkai_zuijitaiogataHomonkaigokango((Code) null);
+            TeikijunkaiZuijitaiogataHomonkaigokango sut = new TeikijunkaiZuijitaiogataHomonkaigokango((Code) null);
             assertThat(sut.getRyakusho(), is(RString.EMPTY));
         }
 
         @Test
         public void LDNS_codeがnull以外の場合_getRyakushoは_定期巡回_随時対応型訪問介護看護を戻す() {
-            Teikijunkai_zuijitaiogataHomonkaigokango sut = new Teikijunkai_zuijitaiogataHomonkaigokango(new Code("1234567"));
+            TeikijunkaiZuijitaiogataHomonkaigokango sut = new TeikijunkaiZuijitaiogataHomonkaigokango(new Code("1234567"));
             assertThat(sut.getRyakusho(), is(new RString("定期巡回_随時対応型訪問介護看護")));
         }
     }

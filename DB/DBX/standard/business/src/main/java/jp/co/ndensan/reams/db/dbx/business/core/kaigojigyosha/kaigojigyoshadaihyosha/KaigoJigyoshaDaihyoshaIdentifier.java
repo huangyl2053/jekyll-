@@ -14,6 +14,7 @@ import lombok.Value;
  * 介護事業者代表者の識別子です。
  */
 @Value
+@SuppressWarnings("PMD.UnusedPrivateField")
 public class KaigoJigyoshaDaihyoshaIdentifier implements Serializable {
 
     private static final long serialVersionUID = 1929745273131603816L;

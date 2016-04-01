@@ -5,7 +5,7 @@
  */
 package  jp.co.ndensan.reams.db.dbx.definition.core.valueobject.code;
 
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.code.NinchishotaiogataKyodoSeikatsukaigo_Tankiriyogataigai;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.code.NinchishotaiogataKyodoSeikatsukaigoTankiriyogataigai;
 import jp.co.ndensan.reams.db.dbx.testhelper.DbxTestBase;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
@@ -27,11 +27,11 @@ import org.junit.runner.RunWith;
 @RunWith(Enclosed.class)
 public class NinchishotaiogataKyodoSeikatsukaigo_TankiriyogataigaiTest extends DbxTestBase {
 
-    private static NinchishotaiogataKyodoSeikatsukaigo_Tankiriyogataigai sut;
+    private static NinchishotaiogataKyodoSeikatsukaigoTankiriyogataigai sut;
 
     @BeforeClass
     public static void setUp() {
-        sut = new NinchishotaiogataKyodoSeikatsukaigo_Tankiriyogataigai(new RString("10"));
+        sut = new NinchishotaiogataKyodoSeikatsukaigoTankiriyogataigai(new RString("10"));
     }
 
     /**
@@ -66,13 +66,13 @@ public class NinchishotaiogataKyodoSeikatsukaigo_TankiriyogataigaiTest extends D
 
         @Test
         public void LDNS_Objectのcodeとコンストラクタのcodeが不一致の場合_equalsは_falseを返す() {
-            NinchishotaiogataKyodoSeikatsukaigo_Tankiriyogataigai sut2 = new NinchishotaiogataKyodoSeikatsukaigo_Tankiriyogataigai(new RString("90"));
+            NinchishotaiogataKyodoSeikatsukaigoTankiriyogataigai sut2 = new NinchishotaiogataKyodoSeikatsukaigoTankiriyogataigai(new RString("90"));
             assertFalse(sut.equals(sut2));
         }
 
         @Test
         public void LDNS_Object値とコンストラクタ値が一致の場合_equalsは_trueを返す() {
-            assertTrue(sut.equals(new NinchishotaiogataKyodoSeikatsukaigo_Tankiriyogataigai(new RString("10"))));
+            assertTrue(sut.equals(new NinchishotaiogataKyodoSeikatsukaigoTankiriyogataigai(new RString("10"))));
         }
 
     }
@@ -85,13 +85,13 @@ public class NinchishotaiogataKyodoSeikatsukaigo_TankiriyogataigaiTest extends D
 
         @Test
         public void LDNS_codeがnullの場合_toStringは_emptyを返す() {
-            NinchishotaiogataKyodoSeikatsukaigo_Tankiriyogataigai sut = new NinchishotaiogataKyodoSeikatsukaigo_Tankiriyogataigai((Code) null);
+            NinchishotaiogataKyodoSeikatsukaigoTankiriyogataigai sut = new NinchishotaiogataKyodoSeikatsukaigoTankiriyogataigai((Code) null);
             assertThat(sut.toString(), is(RString.EMPTY.toString()));
         }
 
         @Test
         public void LDNS_codeが1234567の場合_toStringは_1234567を返す() {
-            NinchishotaiogataKyodoSeikatsukaigo_Tankiriyogataigai sut = new NinchishotaiogataKyodoSeikatsukaigo_Tankiriyogataigai(new Code("1234567"));
+            NinchishotaiogataKyodoSeikatsukaigoTankiriyogataigai sut = new NinchishotaiogataKyodoSeikatsukaigoTankiriyogataigai(new Code("1234567"));
             assertThat(sut.toString(), is("1234567"));
         }
     }
@@ -104,7 +104,7 @@ public class NinchishotaiogataKyodoSeikatsukaigo_TankiriyogataigaiTest extends D
 
         @Test
         public void LDNS_設定した対象とコンストラクタ同じの場合_hashCodeは_同じhashCodeを返す() {
-            NinchishotaiogataKyodoSeikatsukaigo_Tankiriyogataigai sut2 = new NinchishotaiogataKyodoSeikatsukaigo_Tankiriyogataigai(new RString("10"));
+            NinchishotaiogataKyodoSeikatsukaigoTankiriyogataigai sut2 = new NinchishotaiogataKyodoSeikatsukaigoTankiriyogataigai(new RString("10"));
             assertThat(sut.hashCode(), is(sut2.hashCode()));
         }
     }
@@ -143,13 +143,13 @@ public class NinchishotaiogataKyodoSeikatsukaigo_TankiriyogataigaiTest extends D
 
         @Test
         public void LDNS_指定したコードがnullの場合_getMeishoは_emptyを返す() {
-            NinchishotaiogataKyodoSeikatsukaigo_Tankiriyogataigai sut = new NinchishotaiogataKyodoSeikatsukaigo_Tankiriyogataigai((Code) null);
+            NinchishotaiogataKyodoSeikatsukaigoTankiriyogataigai sut = new NinchishotaiogataKyodoSeikatsukaigoTankiriyogataigai((Code) null);
             assertThat(sut.getMeisho(kijunbi), is(RString.EMPTY));
         }
 
         @Test
         public void LDNS_指定したコードが1234567の場合_getMeishoは_認知症対応型共同生活介護_短期利用型以外を返す() {
-            NinchishotaiogataKyodoSeikatsukaigo_Tankiriyogataigai sut = new NinchishotaiogataKyodoSeikatsukaigo_Tankiriyogataigai(new Code("1234567"));
+            NinchishotaiogataKyodoSeikatsukaigoTankiriyogataigai sut = new NinchishotaiogataKyodoSeikatsukaigoTankiriyogataigai(new Code("1234567"));
             assertThat(sut.getMeisho(kijunbi), is(new RString("認知症対応型共同生活介護_短期利用型以外")));
         }
     }
@@ -162,13 +162,13 @@ public class NinchishotaiogataKyodoSeikatsukaigo_TankiriyogataigaiTest extends D
 
         @Test
         public void LDNS_codeがnullの場合_getMeishoは_emptyを返す() {
-            NinchishotaiogataKyodoSeikatsukaigo_Tankiriyogataigai sut = new NinchishotaiogataKyodoSeikatsukaigo_Tankiriyogataigai((Code) null);
+            NinchishotaiogataKyodoSeikatsukaigoTankiriyogataigai sut = new NinchishotaiogataKyodoSeikatsukaigoTankiriyogataigai((Code) null);
             assertThat(sut.getMeisho(), is(RString.EMPTY));
         }
 
         @Test
         public void LDNS_codeが1234567の場合_getMeishoは_認知症対応型共同生活介護_短期利用型以外を返す() {
-            NinchishotaiogataKyodoSeikatsukaigo_Tankiriyogataigai sut = new NinchishotaiogataKyodoSeikatsukaigo_Tankiriyogataigai(new Code("1234567"));
+            NinchishotaiogataKyodoSeikatsukaigoTankiriyogataigai sut = new NinchishotaiogataKyodoSeikatsukaigoTankiriyogataigai(new Code("1234567"));
             assertThat(sut.getMeisho(), is(new RString("認知症対応型共同生活介護_短期利用型以外")));
         }
     }
@@ -183,14 +183,14 @@ public class NinchishotaiogataKyodoSeikatsukaigo_TankiriyogataigaiTest extends D
 
         @Test
         public void LDNS_codeがnullの場合_getRyakushoは_emptyを返す() {
-            NinchishotaiogataKyodoSeikatsukaigo_Tankiriyogataigai sut = new NinchishotaiogataKyodoSeikatsukaigo_Tankiriyogataigai((Code) null);
+            NinchishotaiogataKyodoSeikatsukaigoTankiriyogataigai sut = new NinchishotaiogataKyodoSeikatsukaigoTankiriyogataigai((Code) null);
             assertThat(sut.getRyakusho(kijunbi), is(RString.EMPTY));
         }
 
         @Test
         public void LDNS_codeが1234567の場合_getRyakushoは_認知症対応型共同生活介護_短期利用型以外を返す() {
 
-            NinchishotaiogataKyodoSeikatsukaigo_Tankiriyogataigai sut = new NinchishotaiogataKyodoSeikatsukaigo_Tankiriyogataigai(new Code("1234567"));
+            NinchishotaiogataKyodoSeikatsukaigoTankiriyogataigai sut = new NinchishotaiogataKyodoSeikatsukaigoTankiriyogataigai(new Code("1234567"));
             assertThat(sut.getRyakusho(kijunbi), is(new RString("認知症対応型共同生活介護_短期利用型以外")));
         }
     }
@@ -203,13 +203,13 @@ public class NinchishotaiogataKyodoSeikatsukaigo_TankiriyogataigaiTest extends D
 
         @Test
         public void LDNS_codeがnullの場合_getRyakushoは_emptyを返す() {
-            NinchishotaiogataKyodoSeikatsukaigo_Tankiriyogataigai sut = new NinchishotaiogataKyodoSeikatsukaigo_Tankiriyogataigai((Code) null);
+            NinchishotaiogataKyodoSeikatsukaigoTankiriyogataigai sut = new NinchishotaiogataKyodoSeikatsukaigoTankiriyogataigai((Code) null);
             assertThat(sut.getRyakusho(), is(RString.EMPTY));
         }
 
         @Test
         public void LDNS_codeが1234567の場合_getRyakushoは_認知症対応型共同生活介護_短期利用型以外を返す() {
-            NinchishotaiogataKyodoSeikatsukaigo_Tankiriyogataigai sut = new NinchishotaiogataKyodoSeikatsukaigo_Tankiriyogataigai(new Code("1234567"));
+            NinchishotaiogataKyodoSeikatsukaigoTankiriyogataigai sut = new NinchishotaiogataKyodoSeikatsukaigoTankiriyogataigai(new Code("1234567"));
             assertThat(sut.getRyakusho(), is(new RString("認知症対応型共同生活介護_短期利用型以外")));
         }
     }

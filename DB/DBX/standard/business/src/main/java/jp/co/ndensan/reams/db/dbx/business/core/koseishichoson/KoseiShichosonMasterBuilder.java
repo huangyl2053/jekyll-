@@ -428,6 +428,12 @@ public class KoseiShichosonMasterBuilder {
         return new KoseiShichosonMaster(entity, id, koseiShichosonShishoMaster);
     }
 
+    /**
+     * 構成市町村支所マスタを設定します。
+     *
+     * @param 構成市町村支所マスタ KoseiShichosonShishoMaster
+     * @return KoseiShichosonMasterBuilder
+     */
     public KoseiShichosonMasterBuilder setKoseiShichosonShishoMaster(KoseiShichosonShishoMaster 構成市町村支所マスタ) {
 
         if (hasSameIdentifier(構成市町村支所マスタ.identifier())) {
@@ -437,6 +443,12 @@ public class KoseiShichosonMasterBuilder {
         throw new IllegalArgumentException(UrErrorMessages.不正.toString());
     }
 
+    /**
+     * hasSameIdentifierを設定します。
+     *
+     * @param 構成市町村支所マスタ識別子 KoseiShichosonShishoMasterIdentifier
+     * @return hasSameIdentifier
+     */
     private boolean hasSameIdentifier(KoseiShichosonShishoMasterIdentifier 構成市町村支所マスタ識別子) {
         return (entity.getShichosonCode().equals(構成市町村支所マスタ識別子.get市町村コード()));
     }

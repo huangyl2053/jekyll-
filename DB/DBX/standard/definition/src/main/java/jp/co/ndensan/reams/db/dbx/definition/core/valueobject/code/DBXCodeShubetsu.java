@@ -164,27 +164,27 @@ public enum DBXCodeShubetsu {
     /**
      * ﾘﾊﾋﾞﾘﾃｰｼｮﾝ提供体制_総合ﾘﾊﾋﾞﾘﾃｰｼｮﾝ施設_の有無します。
      */
-    ﾘﾊﾋﾞﾘﾃｰｼｮﾝ提供体制_総合ﾘﾊﾋﾞﾘﾃｰｼｮﾝ施設_の有無("0151", RehabilitationTeikyoTaiseiUmu_SogoRehabilitationShisetsu.class),
+    ﾘﾊﾋﾞﾘﾃｰｼｮﾝ提供体制_総合ﾘﾊﾋﾞﾘﾃｰｼｮﾝ施設_の有無("0151", RehabilitationTeikyoTaiseiUmuSogoRehabilitationShisetsu.class),
     /**
      * ﾘﾊﾋﾞﾘﾃｰｼｮﾝ提供体制_理学療法Ⅱ_の有無します。
      */
-    ﾘﾊﾋﾞﾘﾃｰｼｮﾝ提供体制_理学療法Ⅱ_の有無("0152", RehabilitationTeikyoTaiseiUmu_RigakuRyoho2.class),
+    ﾘﾊﾋﾞﾘﾃｰｼｮﾝ提供体制_理学療法Ⅱ_の有無("0152", RehabilitationTeikyoTaiseiUmuRigakuRyoho2.class),
     /**
      * ﾘﾊﾋﾞﾘﾃｰｼｮﾝ提供体制_理学療法Ⅲ_の有無します。
      */
-    ﾘﾊﾋﾞﾘﾃｰｼｮﾝ提供体制_理学療法Ⅲ_の有無("0153", RehabilitationTeikyoTaiseiUmu_RigakuRyoho3.class),
+    ﾘﾊﾋﾞﾘﾃｰｼｮﾝ提供体制_理学療法Ⅲ_の有無("0153", RehabilitationTeikyoTaiseiUmuRigakuRyoho3.class),
     /**
      * ﾘﾊﾋﾞﾘﾃｰｼｮﾝ提供体制_作業療法Ⅱ_の有無します。
      */
-    ﾘﾊﾋﾞﾘﾃｰｼｮﾝ提供体制_作業療法Ⅱ_の有無("0154", RehabilitationTeikyoTaiseiUmu_SagyoRyoho2.class),
+    ﾘﾊﾋﾞﾘﾃｰｼｮﾝ提供体制_作業療法Ⅱ_の有無("0154", RehabilitationTeikyoTaiseiUmuSagyoRyoho2.class),
     /**
      * ﾘﾊﾋﾞﾘﾃｰｼｮﾝ提供体制_精神科作業療法_の有無します。
      */
-    ﾘﾊﾋﾞﾘﾃｰｼｮﾝ提供体制_精神科作業療法_の有無("0155", RehabilitationTeikyoTaiseiUmu_SeishinkaSagyoRyoho.class),
+    ﾘﾊﾋﾞﾘﾃｰｼｮﾝ提供体制_精神科作業療法_の有無("0155", RehabilitationTeikyoTaiseiUmuSeishinkaSagyoRyoho.class),
     /**
      * ﾘﾊﾋﾞﾘﾃｰｼｮﾝ提供体制_その他_の有無します。
      */
-    ﾘﾊﾋﾞﾘﾃｰｼｮﾝ提供体制_その他_の有無("0156", RehabilitationTeikyoTaiseiUmu_Sonota.class),
+    ﾘﾊﾋﾞﾘﾃｰｼｮﾝ提供体制_その他_の有無("0156", RehabilitationTeikyoTaiseiUmuSonota.class),
     /**
      * ﾘﾊﾋﾞﾘﾃｰｼｮﾝ加算状況の有無します。
      */
@@ -252,27 +252,27 @@ public enum DBXCodeShubetsu {
     /**
      * 個別ﾘﾊﾋﾞﾘﾃｰｼｮﾝ提供体制_総合ﾘﾊﾋﾞﾘﾃｰｼｮﾝ施設_の有無します。
      */
-    個別ﾘﾊﾋﾞﾘﾃｰｼｮﾝ提供体制_総合ﾘﾊﾋﾞﾘﾃｰｼｮﾝ施設_の有無("0174", KobetsuRehabilitationTeikyoTaiseiUmu_SogoRehabilitationShisetsu.class),
+    個別ﾘﾊﾋﾞﾘﾃｰｼｮﾝ提供体制_総合ﾘﾊﾋﾞﾘﾃｰｼｮﾝ施設_の有無("0174", KobetsuRehabilitationTeikyoTaiseiUmuSogoRehabilitationShisetsu.class),
     /**
      * 個別ﾘﾊﾋﾞﾘﾃｰｼｮﾝ提供体制_理学療法Ⅱ_の有無します。
      */
-    個別ﾘﾊﾋﾞﾘﾃｰｼｮﾝ提供体制_理学療法Ⅱ_の有無("0175", KobetsuRehabilitationTeikyoTaiseiUmu_RigakuRyoho2.class),
+    個別ﾘﾊﾋﾞﾘﾃｰｼｮﾝ提供体制_理学療法Ⅱ_の有無("0175", KobetsuRehabilitationTeikyoTaiseiUmuRigakuRyoho2.class),
     /**
      * 個別ﾘﾊﾋﾞﾘﾃｰｼｮﾝ提供体制_理学療法Ⅲ_の有無_平成18年3月以前します。
      */
-    個別ﾘﾊﾋﾞﾘﾃｰｼｮﾝ提供体制_理学療法Ⅲ_の有無_平成18年3月以前("0176", KobetsuRehabilitationTeikyoTaiseiUmu_RigakuRyoho3_BeforeH18_3.class),
+    個別ﾘﾊﾋﾞﾘﾃｰｼｮﾝ提供体制_理学療法Ⅲ_の有無_平成18年3月以前("0176", KobetsuRehabilitationTeikyoTaiseiUmuRigakuRyoho3BeforeH183.class),
     /**
      * 個別ﾘﾊﾋﾞﾘﾃｰｼｮﾝ提供体制_作業療法Ⅱ_の有無します。
      */
-    個別ﾘﾊﾋﾞﾘﾃｰｼｮﾝ提供体制_作業療法Ⅱ_の有無("0177", KobetsuRehabilitationTeikyoTaiseiUmu_GengoChokakuRyoho1.class),
+    個別ﾘﾊﾋﾞﾘﾃｰｼｮﾝ提供体制_作業療法Ⅱ_の有無("0177", KobetsuRehabilitationTeikyoTaiseiUmuGengoChokakuRyoho1.class),
     /**
      * 個別ﾘﾊﾋﾞﾘﾃｰｼｮﾝ提供体制_言語聴覚療法Ⅰ_の有無します。
      */
-    個別ﾘﾊﾋﾞﾘﾃｰｼｮﾝ提供体制_言語聴覚療法Ⅰ_の有無("0178", KobetsuRehabilitationTeikyoTaiseiUmu_GengoChokakuRyoho2.class),
+    個別ﾘﾊﾋﾞﾘﾃｰｼｮﾝ提供体制_言語聴覚療法Ⅰ_の有無("0178", KobetsuRehabilitationTeikyoTaiseiUmuGengoChokakuRyoho2.class),
     /**
      * 個別ﾘﾊﾋﾞﾘﾃｰｼｮﾝ提供体制_言語聴覚療法Ⅱ_の有無します。
      */
-    個別ﾘﾊﾋﾞﾘﾃｰｼｮﾝ提供体制_言語聴覚療法Ⅱ_の有無("0179", KobetsuRehabilitationTeikyoTaiseiUmu_SagyoRyoho2.class),
+    個別ﾘﾊﾋﾞﾘﾃｰｼｮﾝ提供体制_言語聴覚療法Ⅱ_の有無("0179", KobetsuRehabilitationTeikyoTaiseiUmuSagyoRyoho2.class),
     /**
      * 言語聴覚士の欠員による減算の状況の有無します。
      */
@@ -360,23 +360,23 @@ public enum DBXCodeShubetsu {
     /**
      * 個別ﾘﾊﾋﾞﾘﾃｰｼｮﾝ提供体制_理学療法Ⅰ_の有無します。
      */
-    個別ﾘﾊﾋﾞﾘﾃｰｼｮﾝ提供体制_理学療法Ⅰ_の有無("0201", KobetsuRehabilitationTeikyoTaiseiUmu_RigakuRyoho1.class),
+    個別ﾘﾊﾋﾞﾘﾃｰｼｮﾝ提供体制_理学療法Ⅰ_の有無("0201", KobetsuRehabilitationTeikyoTaiseiUmuRigakuRyoho1.class),
     /**
      * 個別ﾘﾊﾋﾞﾘﾃｰｼｮﾝ提供体制_理学療法Ⅱ_の有無_平成21年3月以前します。
      */
-    個別ﾘﾊﾋﾞﾘﾃｰｼｮﾝ提供体制_理学療法Ⅱ_の有無_平成21年3月以前("0202", KobetsuRehabilitationTeikyoTaiseiUmu_RigakuRyoho2_BeforeH21_3.class),
+    個別ﾘﾊﾋﾞﾘﾃｰｼｮﾝ提供体制_理学療法Ⅱ_の有無_平成21年3月以前("0202", KobetsuRehabilitationTeikyoTaiseiUmuRigakuRyoho2BeforeH213.class),
     /**
      * 個別ﾘﾊﾋﾞﾘﾃｰｼｮﾝ提供体制_作業療法_の有無します。
      */
-    個別ﾘﾊﾋﾞﾘﾃｰｼｮﾝ提供体制_作業療法_の有無("0203", KobetsuRehabilitationTeikyoTaiseiUmu_SagyoRyoho.class),
+    個別ﾘﾊﾋﾞﾘﾃｰｼｮﾝ提供体制_作業療法_の有無("0203", KobetsuRehabilitationTeikyoTaiseiUmuSagyoRyoho.class),
     /**
      * 個別ﾘﾊﾋﾞﾘﾃｰｼｮﾝ提供体制_言語聴覚療法_の有無します。
      */
-    個別ﾘﾊﾋﾞﾘﾃｰｼｮﾝ提供体制_言語聴覚療法_の有無("0204", KobetsuRehabilitationTeikyoTaiseiUmu_GengoChokakuRyoho.class),
+    個別ﾘﾊﾋﾞﾘﾃｰｼｮﾝ提供体制_言語聴覚療法_の有無("0204", KobetsuRehabilitationTeikyoTaiseiUmuGengoChokakuRyoho.class),
     /**
      * 個別ﾘﾊﾋﾞﾘﾃｰｼｮﾝ提供体制_その他_の有無します。
      */
-    個別ﾘﾊﾋﾞﾘﾃｰｼｮﾝ提供体制_その他_の有無("0205", KobetsuRehabilitationTeikyoTaiseiUmu_Sonota.class),
+    個別ﾘﾊﾋﾞﾘﾃｰｼｮﾝ提供体制_その他_の有無("0205", KobetsuRehabilitationTeikyoTaiseiUmuSonota.class),
     /**
      * 療養体制維持特別加算します。
      */
@@ -392,11 +392,11 @@ public enum DBXCodeShubetsu {
     /**
      * 中山間地域等における小規模事業所加算_地域に関する状況します。
      */
-    中山間地域等における小規模事業所加算_地域に関する状況("0209", ShokiboJigyoshoKasanInMountainArea_SituationAboutArea.class),
+    中山間地域等における小規模事業所加算_地域に関する状況("0209", ShokiboJigyoshoKasanInMountainAreaSituationAboutArea.class),
     /**
      * 中山間地域等における小規模事業所加算_規模に関する状況します。
      */
-    中山間地域等における小規模事業所加算_規模に関する状況("0210", ShokiboJigyoshoKasanInMountainArea_SituationAboutScale.class),
+    中山間地域等における小規模事業所加算_規模に関する状況("0210", ShokiboJigyoshoKasanInMountainAreaSituationAboutScale.class),
     /**
      * 認知症短期集中リハビリテーション加算します。
      */
@@ -488,11 +488,11 @@ public enum DBXCodeShubetsu {
     /**
      * 訪問看護_平成24年3月以前します。
      */
-    訪問看護_平成24年3月以前("0233", Homonkango_BeforeH24_3.class),
+    訪問看護_平成24年3月以前("0233", HomonkangoBeforeH243.class),
     /**
      * 訪問看護_平成24年4月以降します。
      */
-    訪問看護_平成24年4月以降("0234", Homonkango_AfterH24_4.class),
+    訪問看護_平成24年4月以降("0234", HomonkangoAfterH244.class),
     /**
      * 訪問ﾘﾊﾋﾞﾘﾃｰｼｮﾝします。
      */
@@ -500,135 +500,135 @@ public enum DBXCodeShubetsu {
     /**
      * 通所介護_平成18年3月以前します。
      */
-    通所介護_平成18年3月以前("0236", Tsushokaigo_BeforeH18_3.class),
+    通所介護_平成18年3月以前("0236", TsushokaigoBeforeH183.class),
     /**
      * 通所介護_平成18年4月以降します。
      */
-    通所介護_平成18年4月以降("0237", Tsushokaigo_AfterH18_4.class),
+    通所介護_平成18年4月以降("0237", TsushokaigoAfterH184.class),
     /**
      * 通所介護_平成21年4月以降します。
      */
-    通所介護_平成21年4月以降("0238", Tsushokaigo_AfterH21_4.class),
+    通所介護_平成21年4月以降("0238", TsushokaigoAfterH214.class),
     /**
      * 通所ﾘﾊﾋﾞﾘﾃｰｼｮﾝ_平成21年3月以前します。
      */
-    通所ﾘﾊﾋﾞﾘﾃｰｼｮﾝ_平成21年3月以前("0239", TsushoRehabilitation_BeforeH21_3.class),
+    通所ﾘﾊﾋﾞﾘﾃｰｼｮﾝ_平成21年3月以前("0239", TsushoRehabilitationBeforeH213.class),
     /**
      * 通所ﾘﾊﾋﾞﾘﾃｰｼｮﾝ_平成21年4月以降します。
      */
-    通所ﾘﾊﾋﾞﾘﾃｰｼｮﾝ_平成21年4月以降("0240", TsushoRehabilitation_AfterH21_4.class),
+    通所ﾘﾊﾋﾞﾘﾃｰｼｮﾝ_平成21年4月以降("0240", TsushoRehabilitationAfterH214.class),
     /**
      * 通所ﾘﾊﾋﾞﾘﾃｰｼｮﾝ_平成24年4月以降します。
      */
-    通所ﾘﾊﾋﾞﾘﾃｰｼｮﾝ_平成24年4月以降("0241", TsushoRehabilitation_AfterH24_4.class),
+    通所ﾘﾊﾋﾞﾘﾃｰｼｮﾝ_平成24年4月以降("0241", TsushoRehabilitationAfterH244.class),
     /**
      * 短期入所生活介護_平成15年3月以前します。
      */
-    短期入所生活介護_平成15年3月以前("0242", TankinyushoSeikatsukaigo_BeforeH15_3.class),
+    短期入所生活介護_平成15年3月以前("0242", TankinyushoSeikatsukaigoBeforeH153.class),
     /**
      * 短期入所生活介護_平成15年4月以降します。
      */
-    短期入所生活介護_平成15年4月以降("0243", TankinyushoSeikatsukaigo_AfterH15_4.class),
+    短期入所生活介護_平成15年4月以降("0243", TankinyushoSeikatsukaigoAfterH154.class),
     /**
      * 短期入所生活介護_平成17年10月以降します。
      */
-    短期入所生活介護_平成17年10月以降("0244", TankinyushoSeikatsukaigo_AfterH17_10.class),
+    短期入所生活介護_平成17年10月以降("0244", TankinyushoSeikatsukaigoAfterH1710.class),
     /**
      * 短期入所療養介護_老健_平成17年9月以前します。
      */
-    短期入所療養介護_老健_平成17年9月以前("0245", TankinyushoRyoyokaigo_Roken_BeforeH17_9.class),
+    短期入所療養介護_老健_平成17年9月以前("0245", TankinyushoRyoyokaigoRokenBeforeH179.class),
     /**
      * 短期入所療養介護_老健_平成17年10月以降します。
      */
-    短期入所療養介護_老健_平成17年10月以降("0246", TankinyushoRyoyokaigo_Roken_AfterH17_10.class),
+    短期入所療養介護_老健_平成17年10月以降("0246", TankinyushoRyoyokaigoRokenAfterH1710.class),
     /**
      * 短期入所療養介護_老健_平成20年5月以降します。
      */
-    短期入所療養介護_老健_平成20年5月以降("0247", TankinyushoRyoyokaigo_Roken_AfterH20_5.class),
+    短期入所療養介護_老健_平成20年5月以降("0247", TankinyushoRyoyokaigoRokenAfterH205.class),
     /**
      * 短期入所療養介護_診療所等_平成15年3月以前します。
      */
-    短期入所療養介護_診療所等_平成15年3月以前("0248", TankinyushoRyoyokaigo_Shinryojo_BeforeH15_3.class),
+    短期入所療養介護_診療所等_平成15年3月以前("0248", TankinyushoRyoyokaigoShinryojoBeforeH153.class),
     /**
      * 短期入所療養介護_診療所等_平成15年4月以降します。
      */
-    短期入所療養介護_診療所等_平成15年4月以降("0249", TankinyushoRyoyokaigo_Shinryojo_AfterH15_4.class),
+    短期入所療養介護_診療所等_平成15年4月以降("0249", TankinyushoRyoyokaigoShinryojoAfterH154.class),
     /**
      * 短期入所療養介護_診療所等_平成17年10月以降します。
      */
-    短期入所療養介護_診療所等_平成17年10月以降("0250", TankinyushoRyoyokaigo_Shinryojo_AfterH17_10.class),
+    短期入所療養介護_診療所等_平成17年10月以降("0250", TankinyushoRyoyokaigoShinryojoAfterH1710.class),
     /**
      * 短期入所療養介護_診療所等_平成18年7月以降します。
      */
-    短期入所療養介護_診療所等_平成18年7月以降("0251", TankinyushoRyoyokaigo_Shinryojo_AfterH18_7.class),
+    短期入所療養介護_診療所等_平成18年7月以降("0251", TankinyushoRyoyokaigoShinryojoAfterH187.class),
     /**
      * 短期入所療養介護_診療所等_平成20年5月以降します。
      */
-    短期入所療養介護_診療所等_平成20年5月以降("0252", TankinyushoRyoyokaigo_Shinryojo_AfterH20_5.class),
+    短期入所療養介護_診療所等_平成20年5月以降("0252", TankinyushoRyoyokaigoShinryojoAfterH205.class),
     /**
      * 短期入所療養介護_診療所等_平成21年4月以降します。
      */
-    短期入所療養介護_診療所等_平成21年4月以降("0253", TankinyushoRyoyokaigo_Shinryojo_AfterH21_4.class),
+    短期入所療養介護_診療所等_平成21年4月以降("0253", TankinyushoRyoyokaigoShinryojoAfterH214.class),
     /**
      * 特定施設入居者生活介護_短期利用型以外_平成18年3月以前します。
      */
-    特定施設入居者生活介護_短期利用型以外_平成18年3月以前("0254", TokuteishisetsunyukyoshaSeikatsukaigo_tankiriyogataIgai_BeforeH18_3.class),
+    特定施設入居者生活介護_短期利用型以外_平成18年3月以前("0254", TokuteishisetsunyukyoshaSeikatsukaigoTankiriyogataIgaiBeforeH183.class),
     /**
      * 特定施設入居者生活介護_短期利用型以外_平成18年4月以降します。
      */
-    特定施設入居者生活介護_短期利用型以外_平成18年4月以降("0255", TokuteishisetsunyukyoshaSeikatsukaigo_tankiriyogataIgai_AfterH18_4.class),
+    特定施設入居者生活介護_短期利用型以外_平成18年4月以降("0255", TokuteishisetsunyukyoshaSeikatsukaigoTankiriyogataIgaiAfterH184.class),
     /**
      * 特定施設入居者生活介護_短期利用型以外_平成21年4月以降します。
      */
-    特定施設入居者生活介護_短期利用型以外_平成21年4月以降("0256", TokuteishisetsunyukyoshaSeikatsukaigo_tankiriyogataIgai_AfterH21_4.class),
+    特定施設入居者生活介護_短期利用型以外_平成21年4月以降("0256", TokuteishisetsunyukyoshaSeikatsukaigoTankiriyogataIgaiAfterH214.class),
     /**
      * 特定施設入居者生活介護_短期利用型以外_平成24年4月以降します。
      */
-    特定施設入居者生活介護_短期利用型以外_平成24年4月以降("0257", TokuteishisetsunyukyoshaSeikatsukaigo_tankiriyogataIgai_AfterH24_4.class),
+    特定施設入居者生活介護_短期利用型以外_平成24年4月以降("0257", TokuteishisetsunyukyoshaSeikatsukaigoTankiriyogataIgaiAfterH244.class),
     /**
      * 介護老人福祉施設_平成15年3月以前します。
      */
-    介護老人福祉施設_平成15年3月以前("0258", Kaigorojinfukushishisetsu_BeforeH15_3.class),
+    介護老人福祉施設_平成15年3月以前("0258", KaigorojinfukushishisetsuBeforeH153.class),
     /**
      * 介護老人福祉施設_平成15年4月以降します。
      */
-    介護老人福祉施設_平成15年4月以降("0259", Kaigorojinfukushishisetsu_AfterH15_4.class),
+    介護老人福祉施設_平成15年4月以降("0259", KaigorojinfukushishisetsuAfterH154.class),
     /**
      * 介護老人福祉施設_平成17年10月以降します。
      */
-    介護老人福祉施設_平成17年10月以降("0260", Kaigorojinfukushishisetsu_AfterH17_10.class),
+    介護老人福祉施設_平成17年10月以降("0260", KaigorojinfukushishisetsuAfterH1710.class),
     /**
      * 介護老人保健施設_平成17年10月以降します。
      */
-    介護老人保健施設_平成17年10月以降("0261", Kaigorojinfukushishisetsu_AfterH17_10.class),
+    介護老人保健施設_平成17年10月以降("0261", KaigorojinfukushishisetsuAfterH1710.class),
     /**
      * 介護老人保健施設_平成18年4月以降します。
      */
-    介護老人保健施設_平成18年4月以降("0262", Kaigorojinfukushishisetsu_AfterH18_4.class),
+    介護老人保健施設_平成18年4月以降("0262", KaigorojinfukushishisetsuAfterH184.class),
     /**
      * 介護老人保健施設_平成20年5月以降します。
      */
-    介護老人保健施設_平成20年5月以降("0263", Kaigorojinfukushishisetsu_AfterH20_5.class),
+    介護老人保健施設_平成20年5月以降("0263", KaigorojinfukushishisetsuAfterH205.class),
     /**
      * 介護療養型医療施設_平成15年3月以前します。
      */
-    介護療養型医療施設_平成15年3月以前("0264", KaigoryoyogataIryoshisetsu_BeforeH15_3.class),
+    介護療養型医療施設_平成15年3月以前("0264", KaigoryoyogataIryoshisetsuBeforeH153.class),
     /**
      * 介護療養型医療施設_平成15年4月以降します。
      */
-    介護療養型医療施設_平成15年4月以降("0265", KaigoryoyogataIryoshisetsu_AfterH15_4.class),
+    介護療養型医療施設_平成15年4月以降("0265", KaigoryoyogataIryoshisetsuAfterH154.class),
     /**
      * 介護療養型医療施設_平成17年10月以降します。
      */
-    介護療養型医療施設_平成17年10月以降("0266", KaigoryoyogataIryoshisetsu_AfterH17_10.class),
+    介護療養型医療施設_平成17年10月以降("0266", KaigoryoyogataIryoshisetsuAfterH1710.class),
     /**
      * 介護療養型医療施設_平成18年7月以降します。
      */
-    介護療養型医療施設_平成18年7月以降("0267", KaigoryoyogataIryoshisetsu_AfterH18_7.class),
+    介護療養型医療施設_平成18年7月以降("0267", KaigoryoyogataIryoshisetsuAfterH187.class),
     /**
      * 介護療養型医療施設_平成20年5月以降します。
      */
-    介護療養型医療施設_平成20年5月以降("0268", KaigoryoyogataIryoshisetsu_AfterH20_5.class),
+    介護療養型医療施設_平成20年5月以降("0268", KaigoryoyogataIryoshisetsuAfterH205.class),
     /**
      * 介護予防訪問看護します。
      */
@@ -644,35 +644,35 @@ public enum DBXCodeShubetsu {
     /**
      * 介護予防短期入所療養介護_老健_平成18年4月以降します。
      */
-    介護予防短期入所療養介護_老健_平成18年4月以降("0272", KaigoyoboTankinyushoRyoyokaigo_Roken_AfterH18_4.class),
+    介護予防短期入所療養介護_老健_平成18年4月以降("0272", KaigoyoboTankinyushoRyoyokaigoRokenAfterH184.class),
     /**
      * 介護予防短期入所療養介護_老健_平成20年5月以降します。
      */
-    介護予防短期入所療養介護_老健_平成20年5月以降("0273", KaigoyoboTankinyushoRyoyokaigo_Roken_AfterH20_5.class),
+    介護予防短期入所療養介護_老健_平成20年5月以降("0273", KaigoyoboTankinyushoRyoyokaigoRokenAfterH205.class),
     /**
      * 介護予防短期入所療養介護_診療所等_平成18年4月以降します。
      */
-    介護予防短期入所療養介護_診療所等_平成18年4月以降("0274", KaigoyoboTankinyushoRyoyokaigo_Shinryojo_AfterH18_4.class),
+    介護予防短期入所療養介護_診療所等_平成18年4月以降("0274", KaigoyoboTankinyushoRyoyokaigoShinryojoAfterH184.class),
     /**
      * 介護予防短期入所療養介護_診療所等_平成18年7月以降します。
      */
-    介護予防短期入所療養介護_診療所等_平成18年7月以降("0275", KaigoyoboTankinyushoRyoyokaigo_Shinryojo_AfterH18_7.class),
+    介護予防短期入所療養介護_診療所等_平成18年7月以降("0275", KaigoyoboTankinyushoRyoyokaigoShinryojoAfterH187.class),
     /**
      * 介護予防短期入所療養介護_診療所等_平成20年5月以降します。
      */
-    介護予防短期入所療養介護_診療所等_平成20年5月以降("0276", KaigoyoboTankinyushoRyoyokaigo_Shinryojo_AfterH20_5.class),
+    介護予防短期入所療養介護_診療所等_平成20年5月以降("0276", KaigoyoboTankinyushoRyoyokaigoShinryojoAfterH205.class),
     /**
      * 介護予防短期入所療養介護_診療所等_平成21年4月以降します。
      */
-    介護予防短期入所療養介護_診療所等_平成21年4月以降("0277", KaigoyoboTankinyushoRyoyokaigo_Shinryojo_AfterH21_4.class),
+    介護予防短期入所療養介護_診療所等_平成21年4月以降("0277", KaigoyoboTankinyushoRyoyokaigoShinryojoAfterH214.class),
     /**
      * 介護予防特定施設入居者生活介護_平成24年3月以前します。
      */
-    介護予防特定施設入居者生活介護_平成24年3月以前("0278", KaigoyoboTokuteishisetsunyukyoshaSeikatsukaigo_BeforeH24_3.class),
+    介護予防特定施設入居者生活介護_平成24年3月以前("0278", KaigoyoboTokuteishisetsunyukyoshaSeikatsukaigoBeforeH243.class),
     /**
      * 介護予防特定施設入居者生活介護_平成24年4月以降します。
      */
-    介護予防特定施設入居者生活介護_平成24年4月以降("0279", KaigoyoboTokuteishisetsunyukyoshaSeikatsukaigo_AfterH24_4.class),
+    介護予防特定施設入居者生活介護_平成24年4月以降("0279", KaigoyoboTokuteishisetsunyukyoshaSeikatsukaigoAfterH244.class),
     /**
      * 夜間対応型訪問介護します。
      */
@@ -684,19 +684,19 @@ public enum DBXCodeShubetsu {
     /**
      * 地域密着型特定施設入居者生活介護_短期利用型以外_平成18年4月以降します。
      */
-    地域密着型特定施設入居者生活介護_短期利用型以外_平成18年4月以降("0282", ChiikimitchakugataTokuteishisetsunyukyoshaSeikatsukaigo_Tankiriyogataigai_AfterH18_4.class),
+    地域密着型特定施設入居者生活介護_短期利用型以外_平成18年4月以降("0282", ChiikimitchakugataTokuteishisetsunyukyoshaSeikatsukaigoTankiriyogataigaiAfterH184.class),
     /**
      * 地域密着型特定施設入居者生活介護_短期利用型以外_平成20年5月以降します。
      */
-    地域密着型特定施設入居者生活介護_短期利用型以外_平成20年5月以降("0283", ChiikimitchakugataTokuteishisetsunyukyoshaSeikatsukaigo_Tankiriyogataigai_AfterH20_5.class),
+    地域密着型特定施設入居者生活介護_短期利用型以外_平成20年5月以降("0283", ChiikimitchakugataTokuteishisetsunyukyoshaSeikatsukaigoTankiriyogataigaiAfterH205.class),
     /**
      * 地域密着型特定施設入居者生活介護_短期利用型以外_平成24年4月以降します。
      */
-    地域密着型特定施設入居者生活介護_短期利用型以外_平成24年4月以降("0284", ChiikimitchakugataTokuteishisetsunyukyoshaSeikatsukaigo_Tankiriyogataigai_AfterH24_4.class),
+    地域密着型特定施設入居者生活介護_短期利用型以外_平成24年4月以降("0284", ChiikimitchakugataTokuteishisetsunyukyoshaSeikatsukaigoTankiriyogataigaiAfterH244.class),
     /**
      * 地域密着型介護老人福祉施設_施設等の区分します。
      */
-    地域密着型介護老人福祉施設_施設等の区分("0285", ChiikimitchakugataKaigorojinfukushishisetsu_ShisetsutoKubun.class),
+    地域密着型介護老人福祉施設_施設等の区分("0285", ChiikimitchakugataKaigorojinfukushishisetsuShisetsutoKubun.class),
     /**
      * 介護予防認知症対応型通所介護します。
      */
@@ -704,7 +704,7 @@ public enum DBXCodeShubetsu {
     /**
      * 特定施設入居者生活介護_短期利用型します。
      */
-    特定施設入居者生活介護_短期利用型("0287", TokuteishisetsuNyukyoshaSeikatsukaigo_Tankiriyogata.class),
+    特定施設入居者生活介護_短期利用型("0287", TokuteishisetsuNyukyoshaSeikatsukaigoTankiriyogata.class),
     /**
      * 介護予防通所ﾘﾊﾋﾞﾘﾃｰｼｮﾝします。
      */
@@ -712,7 +712,7 @@ public enum DBXCodeShubetsu {
     /**
      * 定期巡回_随時対応型訪問介護看護します。
      */
-    定期巡回_随時対応型訪問介護看護("0289", Teikijunkai_zuijitaiogataHomonkaigokango.class),
+    定期巡回_随時対応型訪問介護看護("0289", TeikijunkaiZuijitaiogataHomonkaigokango.class),
     /**
      * 小規模多機能型居宅介護します。
      */
@@ -720,15 +720,15 @@ public enum DBXCodeShubetsu {
     /**
      * 認知症対応型共同生活介護_短期利用型以外します。
      */
-    認知症対応型共同生活介護_短期利用型以外("0291", NinchishotaiogataKyodoSeikatsukaigo_Tankiriyogataigai.class),
+    認知症対応型共同生活介護_短期利用型以外("0291", NinchishotaiogataKyodoSeikatsukaigoTankiriyogataigai.class),
     /**
      * 認知症対応型共同生活介護_短期利用型します。
      */
-    認知症対応型共同生活介護_短期利用型("0292", NinchishotaiogataKyodoSeikatsukaigo_Tankiriyogata.class),
+    認知症対応型共同生活介護_短期利用型("0292", NinchishotaiogataKyodoSeikatsukaigoTankiriyogata.class),
     /**
      * 地域密着型特定施設入居者生活介護_短期利用型します。
      */
-    地域密着型特定施設入居者生活介護_短期利用型("0293", ChiikimitchakugataTokuteishisetsunyukyoshaSeikatsukaigo_Tankiriyogata.class),
+    地域密着型特定施設入居者生活介護_短期利用型("0293", ChiikimitchakugataTokuteishisetsunyukyoshaSeikatsukaigoTankiriyogata.class),
     /**
      * 介護予防小規模多機能型居宅介護します。
      */
@@ -736,11 +736,11 @@ public enum DBXCodeShubetsu {
     /**
      * 介護予防認知症対応型共同生活介護_短期利用型以外します。
      */
-    介護予防認知症対応型共同生活介護_短期利用型以外("0295", KaigoyoboNinchishotaiogataKyodoSeikatsukaigo_Tankiriyogataigai.class),
+    介護予防認知症対応型共同生活介護_短期利用型以外("0295", KaigoyoboNinchishotaiogataKyodoSeikatsukaigoTankiriyogataigai.class),
     /**
      * 介護予防認知症対応型共同生活介護_短期利用型します。
      */
-    介護予防認知症対応型共同生活介護_短期利用型("0296", KaigoyoboNinchishotaiogataKyodoSeikatsukaigo_Tankiriyogata.class),
+    介護予防認知症対応型共同生活介護_短期利用型("0296", KaigoyoboNinchishotaiogataKyodoSeikatsukaigoTankiriyogata.class),
     /**
      * 通所介護します。
      */
@@ -752,255 +752,255 @@ public enum DBXCodeShubetsu {
     /**
      * 短期入所療養介護_平成17年9月以前します。
      */
-    短期入所療養介護_平成17年9月以前("0299", TankinyushoRyoyokaigo_BeforeH17_9.class),
+    短期入所療養介護_平成17年9月以前("0299", TankinyushoRyoyokaigoBeforeH179.class),
     /**
      * 短期入所療養介護_通常型します。
      */
-    短期入所療養介護_通常型("0300", TankinyushoRyoyokaigo_Tsujogata.class),
+    短期入所療養介護_通常型("0300", TankinyushoRyoyokaigoTsujogata.class),
     /**
      * 短期入所療養介護_療養型します。
      */
-    短期入所療養介護_療養型("0301", TankinyushoRyoyokaigo_Ryoyogata.class),
+    短期入所療養介護_療養型("0301", TankinyushoRyoyokaigoRyoyogata.class),
     /**
      * 短期入所療養介護_病院療養型_平成15年3月以前します。
      */
-    短期入所療養介護_病院療養型_平成15年3月以前("0302", TankinyushoRyoyokaigo_ByoinRyoyogata_BeforeH15_3.class),
+    短期入所療養介護_病院療養型_平成15年3月以前("0302", TankinyushoRyoyokaigoByoinRyoyogataBeforeH153.class),
     /**
      * 短期入所療養介護_病院療養型_平成15年4月以降します。
      */
-    短期入所療養介護_病院療養型_平成15年4月以降("0303", TankinyushoRyoyokaigo_ByoinRyoyogata_AfterH15_4.class),
+    短期入所療養介護_病院療養型_平成15年4月以降("0303", TankinyushoRyoyokaigoByoinRyoyogataAfterH154.class),
     /**
      * 短期入所療養介護_診療所療養型_平成15年3月以前します。
      */
-    短期入所療養介護_診療所療養型_平成15年3月以前("0304", TankinyushoRyoyokaigo_ShinryojoRyoyogata_Before_H15_3.class),
+    短期入所療養介護_診療所療養型_平成15年3月以前("0304", TankinyushoRyoyokaigoShinryojoRyoyogataBeforeH153.class),
     /**
      * 短期入所療養介護_診療所療養型_平成15年4月以降します。
      */
-    短期入所療養介護_診療所療養型_平成15年4月以降("0305", TankinyushoRyoyokaigo_ShinryojoRyoyogata_AfterH15_4.class),
+    短期入所療養介護_診療所療養型_平成15年4月以降("0305", TankinyushoRyoyokaigoShinryojoRyoyogataAfterH154.class),
     /**
      * 短期入所療養介護_認知症疾患型_平成15年3月以前します。
      */
-    短期入所療養介護_認知症疾患型_平成15年3月以前("0306", TankinyushoRyoyokaigo_NinchishoShikkangata_BeforeH15_3.class),
+    短期入所療養介護_認知症疾患型_平成15年3月以前("0306", TankinyushoRyoyokaigoNinchishoShikkangataBeforeH153.class),
     /**
      * 短期入所療養介護_認知症疾患型_平成15年4月以降します。
      */
-    短期入所療養介護_認知症疾患型_平成15年4月以降("0307", TankinyushoRyoyokaigo_NinchishoShikkangata_AfterH15_4.class),
+    短期入所療養介護_認知症疾患型_平成15年4月以降("0307", TankinyushoRyoyokaigoNinchishoShikkangataAfterH154.class),
     /**
      * 短期入所療養介護_介護力強化型_平成15年3月以前します。
      */
-    短期入所療養介護_介護力強化型_平成15年3月以前("0308", TankinyushoRyoyokaigo_KaigoryokuKyokagata_BeforeH15_3.class),
+    短期入所療養介護_介護力強化型_平成15年3月以前("0308", TankinyushoRyoyokaigoKaigoryokuKyokagataBeforeH153.class),
     /**
      * 短期入所療養介護_病院療養型します。
      */
-    短期入所療養介護_病院療養型("0309", TankinyushoRyoyokaigo_ByoinRyoyogata.class),
+    短期入所療養介護_病院療養型("0309", TankinyushoRyoyokaigoByoinRyoyogata.class),
     /**
      * 短期入所療養介護_診療所療養型します。
      */
-    短期入所療養介護_診療所療養型("0310", TankinyushoRyoyokaigo_ShinryojoRyoyogata.class),
+    短期入所療養介護_診療所療養型("0310", TankinyushoRyoyokaigoShinryojoRyoyogata.class),
     /**
      * 短期入所療養介護_認知症疾患型します。
      */
-    短期入所療養介護_認知症疾患型("0311", TankinyushoRyoyokaigo_NinchishoShikkangata.class),
+    短期入所療養介護_認知症疾患型("0311", TankinyushoRyoyokaigoNinchishoShikkangata.class),
     /**
      * 短期入所療養介護_ユニット型認知症疾患型します。
      */
-    短期入所療養介護_ユニット型認知症疾患型("0312", TankinyushoRyoyokaigo_UnitGataNinchishoShikkangata.class),
+    短期入所療養介護_ユニット型認知症疾患型("0312", TankinyushoRyoyokaigoUnitGataNinchishoShikkangata.class),
     /**
      * 短期入所療養介護_病院経過型_平成20年5月以降します。
      */
-    短期入所療養介護_病院経過型_平成20年5月以降("0313", TankinyushoRyoyokaigo_Byoinkeikagata_AfterH20_5.class),
+    短期入所療養介護_病院経過型_平成20年5月以降("0313", TankinyushoRyoyokaigoByoinkeikagataAfterH205.class),
     /**
      * 介護老人福祉施設_平成17年9月以前します。
      */
-    介護老人福祉施設_平成17年9月以前("0314", Kaigorojinfukushishisetsu_BeforeH17_9.class),
+    介護老人福祉施設_平成17年9月以前("0314", KaigorojinfukushishisetsuBeforeH179.class),
     /**
      * 介護老人保健施設_平成17年9月以前します。
      */
-    介護老人保健施設_平成17年9月以前("0315", Kaigorojinhokenshisetsu_BeforeH17_9.class),
+    介護老人保健施設_平成17年9月以前("0315", KaigorojinhokenshisetsuBeforeH179.class),
     /**
      * 介護老人保健施設_通常型します。
      */
-    介護老人保健施設_通常型("0316", Kaigorojinhokenshisetsu_NormalType.class),
+    介護老人保健施設_通常型("0316", KaigorojinhokenshisetsuNormalType.class),
     /**
      * 介護老人保健施設_療養型します。
      */
-    介護老人保健施設_療養型("0317", Kaigorojinhokenshisetsu_Ryoyogata.class),
+    介護老人保健施設_療養型("0317", KaigorojinhokenshisetsuRyoyogata.class),
     /**
      * 介護療養型医療施設_病院療養型_平成15年3月以前します。
      */
-    介護療養型医療施設_病院療養型_平成15年3月以前("0318", KaigoryoyogataIryoshisetsu_Byoinryoyogata_BeforeH15_3.class),
+    介護療養型医療施設_病院療養型_平成15年3月以前("0318", KaigoryoyogataIryoshisetsuByoinryoyogataBeforeH153.class),
     /**
      * 介護療養型医療施設_病院療養型_平成15年4月以降します。
      */
-    介護療養型医療施設_病院療養型_平成15年4月以降("0319", KaigoryoyogataIryoshisetsu_Byoinryoyogata_AfterH15_4.class),
+    介護療養型医療施設_病院療養型_平成15年4月以降("0319", KaigoryoyogataIryoshisetsuByoinryoyogataAfterH154.class),
     /**
      * 介護療養型医療施設_診療所型_平成15年3月以前します。
      */
-    介護療養型医療施設_診療所型_平成15年3月以前("0320", KaigoryoyogataIryoshisetsu_Shinryojogata_BeforeH15_3.class),
+    介護療養型医療施設_診療所型_平成15年3月以前("0320", KaigoryoyogataIryoshisetsuShinryojogataBeforeH153.class),
     /**
      * 介護療養型医療施設_診療所型_平成15年4月以降します。
      */
-    介護療養型医療施設_診療所型_平成15年4月以降("0321", KaigoryoyogataIryoshisetsu_shinryoujokata_AfterH15_4.class),
+    介護療養型医療施設_診療所型_平成15年4月以降("0321", KaigoryoyogataIryoshisetsuShinryoujokataAfterH154.class),
     /**
      * 介護療養型医療施設_認知症疾患型_平成15年3月以前します。
      */
-    介護療養型医療施設_認知症疾患型_平成15年3月以前("0322", KaigoryoyogataIryoshisetsu_NinchishoShikkangata_BeforeH15_3.class),
+    介護療養型医療施設_認知症疾患型_平成15年3月以前("0322", KaigoryoyogataIryoshisetsuNinchishoShikkangataBeforeH153.class),
     /**
      * 介護療養型医療施設_認知症疾患型_平成15年4月以降します。
      */
-    介護療養型医療施設_認知症疾患型_平成15年4月以降("0323", KaigoryoyogataIryoshisetsu_NinchishoShikkangata_AfterH15_4.class),
+    介護療養型医療施設_認知症疾患型_平成15年4月以降("0323", KaigoryoyogataIryoshisetsuNinchishoShikkangataAfterH154.class),
     /**
      * 介護療養型医療施設_介護力強化型_平成15年3月以前します。
      */
-    介護療養型医療施設_介護力強化型_平成15年3月以前("0324", KaigoryoyogataIryoshisetsu_KaigoryokuKyokagata_BeforeH15_3.class),
+    介護療養型医療施設_介護力強化型_平成15年3月以前("0324", KaigoryoyogataIryoshisetsuKaigoryokuKyokagataBeforeH153.class),
     /**
      * 介護療養型医療施設_病院療養型します。
      */
-    介護療養型医療施設_病院療養型("0325", KaigoryoyogataIryoshisetsu_Byoinryoyogata.class),
+    介護療養型医療施設_病院療養型("0325", KaigoryoyogataIryoshisetsuByoinryoyogata.class),
     /**
      * 介護療養型医療施設_診療所型します。
      */
-    介護療養型医療施設_診療所型("0326", KaigoryoyogataIryoshisetsu_Shinryojogata.class),
+    介護療養型医療施設_診療所型("0326", KaigoryoyogataIryoshisetsuShinryojogata.class),
     /**
      * 介護療養型医療施設_認知症疾患型します。
      */
-    介護療養型医療施設_認知症疾患型("0327", KaigoryoyogataIryoshisetsu_NinchishoShikkangata.class),
+    介護療養型医療施設_認知症疾患型("0327", KaigoryoyogataIryoshisetsuNinchishoShikkangata.class),
     /**
      * 介護療養型医療施設_ユニット型認知症疾患型します。
      */
-    介護療養型医療施設_ユニット型認知症疾患型("0328", KaigoryoyogataIryoshisetsu_UnitGataNinchishoShikkangata.class),
+    介護療養型医療施設_ユニット型認知症疾患型("0328", KaigoryoyogataIryoshisetsuUnitGataNinchishoShikkangata.class),
     /**
      * 介護療養型医療施設_病院経過型します。
      */
-    介護療養型医療施設_病院経過型("0329", KaigoryoyogataIryoshisetsu_Byoinkeikagata.class),
+    介護療養型医療施設_病院経過型("0329", KaigoryoyogataIryoshisetsuByoinkeikagata.class),
     /**
      * 特定施設入居者生活介護_短期利用型以外_有料老人ホームします。
      */
-    特定施設入居者生活介護_短期利用型以外_有料老人ホーム("0330", TokuteishisetsuNyukyoshaSeikatsukaigo_Tankiriyogataigai_yuryoRojinHome.class),
+    特定施設入居者生活介護_短期利用型以外_有料老人ホーム("0330", TokuteishisetsuNyukyoshaSeikatsukaigoTankiriyogataigaiYuryoRojinHome.class),
     /**
      * 特定施設入居者生活介護_短期利用型以外_軽費老人ホームします。
      */
-    特定施設入居者生活介護_短期利用型以外_軽費老人ホーム("0331", TokuteishisetsuNyukyoshaSeikatsukaigo_Tankiriyogataigai_KeihiRojinHome.class),
+    特定施設入居者生活介護_短期利用型以外_軽費老人ホーム("0331", TokuteishisetsuNyukyoshaSeikatsukaigoTankiriyogataigaiKeihiRojinHome.class),
     /**
      * 特定施設入居者生活介護_短期利用型以外_養護老人ホームします。
      */
-    特定施設入居者生活介護_短期利用型以外_養護老人ホーム("0332", TokuteishisetsuNyukyoshaSeikatsukaigo_Tankiriyogataigai_YogoRojinHome.class),
+    特定施設入居者生活介護_短期利用型以外_養護老人ホーム("0332", TokuteishisetsuNyukyoshaSeikatsukaigoTankiriyogataigaiYogoRojinHome.class),
     /**
      * 特定施設入居者生活介護_短期利用型以外_高齢者専用賃貸住宅します。
      */
-    特定施設入居者生活介護_短期利用型以外_高齢者専用賃貸住宅("0333", TokuteishisetsuNyukyoshaSeikatsukaigo_Tankiriyogataigai_KoreishaSenyoChintaijutaku.class),
+    特定施設入居者生活介護_短期利用型以外_高齢者専用賃貸住宅("0333", TokuteishisetsuNyukyoshaSeikatsukaigoTankiriyogataigaiKoreishaSenyoChintaijutaku.class),
     /**
      * 介護予防短期入所療養介護_病院療養型します。
      */
-    介護予防短期入所療養介護_病院療養型("0334", KaigoyoboTankinyushoRyoyokaigo_ByoinRyoyogata.class),
+    介護予防短期入所療養介護_病院療養型("0334", KaigoyoboTankinyushoRyoyokaigoByoinRyoyogata.class),
     /**
      * 介護予防短期入所療養介護_診療所療養型します。
      */
-    介護予防短期入所療養介護_診療所療養型("0335", KaigoyoboTankinyushoRyoyokaigo_ShinryojoRyoyogata.class),
+    介護予防短期入所療養介護_診療所療養型("0335", KaigoyoboTankinyushoRyoyokaigoShinryojoRyoyogata.class),
     /**
      * 介護予防短期入所療養介護_認知症疾患型します。
      */
-    介護予防短期入所療養介護_認知症疾患型("0336", KaigoyoboTankinyushoRyoyokaigo_NinchishoShikkangata.class),
+    介護予防短期入所療養介護_認知症疾患型("0336", KaigoyoboTankinyushoRyoyokaigoNinchishoShikkangata.class),
     /**
      * 介護予防短期入所療養介護_ユニット型認知症疾患型します。
      */
-    介護予防短期入所療養介護_ユニット型認知症疾患型("0337", KaigoyoboTankinyushoRyoyokaigo_UnitGataNinchishoShikkangata.class),
+    介護予防短期入所療養介護_ユニット型認知症疾患型("0337", KaigoyoboTankinyushoRyoyokaigoUnitGataNinchishoShikkangata.class),
     /**
      * 介護予防短期入所療養介護_病院経過型します。
      */
-    介護予防短期入所療養介護_病院経過型("0338", KaigoyoboTankinyushoRyoyokaigo_ByoinKeikagata.class),
+    介護予防短期入所療養介護_病院経過型("0338", KaigoyoboTankinyushoRyoyokaigoByoinKeikagata.class),
     /**
      * 介護予防特定施設入居者生活介護_有料老人ホームします。
      */
-    介護予防特定施設入居者生活介護_有料老人ホーム("0339", KaigoyoboTokuteishisetsuNyukyoshaSeikatsukaigo_YuryoRojinHome.class),
+    介護予防特定施設入居者生活介護_有料老人ホーム("0339", KaigoyoboTokuteishisetsuNyukyoshaSeikatsukaigoYuryoRojinHome.class),
     /**
      * 介護予防特定施設入居者生活介護_軽費老人ホームします。
      */
-    介護予防特定施設入居者生活介護_軽費老人ホーム("0340", KaigoyoboTokuteishisetsuNyukyoshaSeikatsukaigo_KeihiRojinHome.class),
+    介護予防特定施設入居者生活介護_軽費老人ホーム("0340", KaigoyoboTokuteishisetsuNyukyoshaSeikatsukaigoKeihiRojinHome.class),
     /**
      * 介護予防特定施設入居者生活介護_養護老人ホームします。
      */
-    介護予防特定施設入居者生活介護_養護老人ホーム("0341", KaigoyoboTokuteishisetsuNyukyoshaSeikatsukaigo_YogoRojinHome.class),
+    介護予防特定施設入居者生活介護_養護老人ホーム("0341", KaigoyoboTokuteishisetsuNyukyoshaSeikatsukaigoYogoRojinHome.class),
     /**
      * 介護予防特定施設入居者生活介護_高齢者専用賃貸住宅します。
      */
-    介護予防特定施設入居者生活介護_高齢者専用賃貸住宅("0342", KaigoyoboTokuteishisetsuNyukyoshaSeikatsukaigo_KoreishaSenyoChintaijutaku.class),
+    介護予防特定施設入居者生活介護_高齢者専用賃貸住宅("0342", KaigoyoboTokuteishisetsuNyukyoshaSeikatsukaigoKoreishaSenyoChintaijutaku.class),
     /**
      * 地域密着型介護老人福祉施設_人員配置区分します。
      */
-    地域密着型介護老人福祉施設_人員配置区分("0343", ChiikimitchakugataKaigoRojinfukushishisetsu_JininHaichiKubun.class),
+    地域密着型介護老人福祉施設_人員配置区分("0343", ChiikimitchakugataKaigoRojinfukushishisetsuJininHaichiKubun.class),
     /**
      * 介護予防短期入所療養介護_通常型します。
      */
-    介護予防短期入所療養介護_通常型("0344", KaigoyoboTankinyushoRyoyokaigo_NormalType.class),
+    介護予防短期入所療養介護_通常型("0344", KaigoyoboTankinyushoRyoyokaigoNormalType.class),
     /**
      * 介護予防短期入所療養介護_療養型します。
      */
-    介護予防短期入所療養介護_療養型("0345", KaigoyoboTankinyushoRyoyokaigo_Ryoyogata.class),
+    介護予防短期入所療養介護_療養型("0345", KaigoyoboTankinyushoRyoyokaigoRyoyogata.class),
     /**
      * 夜間勤務条件基準_平成15年3月以前します。
      */
-    夜間勤務条件基準_平成15年3月以前("0346", YakanKinmuJokenKijun_BeforeH15_3.class),
+    夜間勤務条件基準_平成15年3月以前("0346", YakanKinmuJokenKijunBeforeH153.class),
     /**
      * 夜間勤務条件基準_平成15年4月以降します。
      */
-    夜間勤務条件基準_平成15年4月以降("0347", YakanKinmuJokenKijun_AfterH15_4.class),
+    夜間勤務条件基準_平成15年4月以降("0347", YakanKinmuJokenKijunAfterH154.class),
     /**
      * 夜間勤務条件基準_平成21年4月以降します。
      */
-    夜間勤務条件基準_平成21年4月以降("0348", YakanKinmuJokenKijun_AfterH21_4.class),
+    夜間勤務条件基準_平成21年4月以降("0348", YakanKinmuJokenKijunAfterH214.class),
     /**
      * 療養環境基準_平成19年3月以前します。
      */
-    療養環境基準_平成19年3月以前("0349", RyoyokankyoKijun_BeforeH19_3.class),
+    療養環境基準_平成19年3月以前("0349", RyoyokankyoKijunBeforeH193.class),
     /**
      * 療養環境基準_病院療養型ユニット型_病院療養型_病院経過型_平成19年4月以降します。
      */
-    療養環境基準_病院療養型ユニット型_病院療養型_病院経過型_平成19年4月以降("0350", RyoyokankyoKijun_AfterH19_4.class),
+    療養環境基準_病院療養型ユニット型_病院療養型_病院経過型_平成19年4月以降("0350", RyoyokankyoKijunAfterH194.class),
     /**
      * 療養環境基準_病院療養型ユニット型_病院療養型_病院経過型_平成20年4月以降します。
      */
-    療養環境基準_病院療養型ユニット型_病院療養型_病院経過型_平成20年4月以降("0351", RyoyokankyoKijun_AfterH20_4.class),
+    療養環境基準_病院療養型ユニット型_病院療養型_病院経過型_平成20年4月以降("0351", RyoyokankyoKijunAfterH204.class),
     /**
      * 療養環境基準_診療所療養型ユニット型_診療所療養型します。
      */
-    療養環境基準_診療所療養型ユニット型_診療所療養型("0352", RyoyokankyoKijun_ShinryojoRyoyogataUnitGata_ShinryojoRyoyogata.class),
+    療養環境基準_診療所療養型ユニット型_診療所療養型("0352", RyoyokankyoKijunShinryojoRyoyogataUnitGataShinryojoRyoyogata.class),
     /**
      * 特定事業所加算_居宅介護支援_の有無_平成21年3月以前します。
      */
-    特定事業所加算_居宅介護支援_の有無_平成21年3月以前("0353", Tokuteijigyoshokasan_Kyotakukaigoshien_Umu_BeforeH21_3.class),
+    特定事業所加算_居宅介護支援_の有無_平成21年3月以前("0353", TokuteijigyoshokasanKyotakukaigoshienUmuBeforeH213.class),
     /**
      * 特定事業所加算_居宅介護支援_の有無_平成21年4月以降します。
      */
-    特定事業所加算_居宅介護支援_の有無_平成21年4月以降("0354", Tokuteijigyoshokasan_Kyotakukaigoshien_Umu_AfterH21_4.class),
+    特定事業所加算_居宅介護支援_の有無_平成21年4月以降("0354", TokuteijigyoshokasanKyotakukaigoshienUmuAfterH214.class),
     /**
      * 個別機能訓練体制の有無_通所介護_平成21年3月以前します。
      */
-    個別機能訓練体制の有無_通所介護_平成21年3月以前("0355", KobetsuKinokunrentaiseiUmu_Tsushokaigo_BeforeH21_3.class),
+    個別機能訓練体制の有無_通所介護_平成21年3月以前("0355", KobetsuKinokunrentaiseiUmuTsushokaigoBforeH213.class),
     /**
      * 個別機能訓練体制の有無_通所介護_平成21年4月以降します。
      */
-    個別機能訓練体制の有無_通所介護_平成21年4月以降("0356", KobetsuKinokunrentaiseiUmu_Tsushokaigo_AfterH21_4.class),
+    個別機能訓練体制の有無_通所介護_平成21年4月以降("0356", KobetsuKinokunrentaiseiUmuTsushokaigoAfterH214.class),
     /**
      * 個別機能訓練体制の有無_通所介護_平成24年4月以降します。
      */
-    個別機能訓練体制の有無_通所介護_平成24年4月以降("0357", KobetsuKinokunrentaiseiUmu_Tsushokaigo_AfterH24_4.class),
+    個別機能訓練体制の有無_通所介護_平成24年4月以降("0357", KobetsuKinokunrentaiseiUmuTsushokaigoAfterH244.class),
     /**
      * 個別機能訓練体制の有無_通所介護以外します。
      */
-    個別機能訓練体制の有無_通所介護以外("0358", KobetsuKinokunrentaiseiUmu_Tsushokaigoigai.class),
+    個別機能訓練体制の有無_通所介護以外("0358", KobetsuKinokunrentaiseiUmuTsushokaigoigai.class),
     /**
      * サービス提供体制強化加算_訪問入浴介護等します。
      */
-    サービス提供体制強化加算_訪問入浴介護等("0359", ServiceTeikyoTaiseikyokakasan_Homonnyuyokukaigo_etc.class),
+    サービス提供体制強化加算_訪問入浴介護等("0359", ServiceTeikyoTaiseikyokakasanHomonnyuyokukaigoEtc.class),
     /**
      * サービス提供体制強化加算_訪問看護等します。
      */
-    サービス提供体制強化加算_訪問看護等("0360", ServiceTeikyoTaiseikyokakasan_Homonkango_etc.class),
+    サービス提供体制強化加算_訪問看護等("0360", ServiceTeikyoTaiseikyokakasanHomonkangoEtc.class),
     /**
      * サービス提供体制強化加算_その他サービスします。
      */
-    サービス提供体制強化加算_その他サービス("0361", ServiceTeikyoTaiseikyokakasan_SonotaService.class),
+    サービス提供体制強化加算_その他サービス("0361", ServiceTeikyoTaiseikyokakasanSonotaService.class),
     /**
      * 法人等種別します。
      */

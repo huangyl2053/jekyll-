@@ -15,6 +15,7 @@ import lombok.Value;
  * 受領委任契約事業者の識別子です。
  */
 @Value
+@SuppressWarnings("PMD.UnusedPrivateField")
 public class JuryoIninKeiyakuJigyoshaIdentifier implements Serializable {
 
     private final JigyoshaNo 受領委任契約事業者番号;

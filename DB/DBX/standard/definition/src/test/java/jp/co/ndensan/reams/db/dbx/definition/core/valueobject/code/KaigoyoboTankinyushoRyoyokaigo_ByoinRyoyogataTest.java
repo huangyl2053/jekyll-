@@ -1,6 +1,6 @@
 package  jp.co.ndensan.reams.db.dbx.definition.core.valueobject.code;
 
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.code.KaigoyoboTankinyushoRyoyokaigo_ByoinRyoyogata;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.code.KaigoyoboTankinyushoRyoyokaigoByoinRyoyogata;
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
 import static org.junit.Assert.assertFalse;
@@ -15,18 +15,18 @@ import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 
 /**
- * KaigoyoboTankinyushoRyoyokaigo_ByoinRyoyogataのテストクラスです。
+ * KaigoyoboTankinyushoRyoyokaigoByoinRyoyogataのテストクラスです。
  * 
  * @author LDNS 黄陽
  */
 @RunWith(Enclosed.class)
 public class KaigoyoboTankinyushoRyoyokaigo_ByoinRyoyogataTest extends DbxTestBase {
 
-    private static KaigoyoboTankinyushoRyoyokaigo_ByoinRyoyogata sut;
+    private static KaigoyoboTankinyushoRyoyokaigoByoinRyoyogata sut;
 
     @BeforeClass
     public static void setUp() {
-        sut = new KaigoyoboTankinyushoRyoyokaigo_ByoinRyoyogata(new RString("10"));
+        sut = new KaigoyoboTankinyushoRyoyokaigoByoinRyoyogata(new RString("10"));
     }
 
     public static class valueテスト extends DbxTestBase {
@@ -49,13 +49,13 @@ public class KaigoyoboTankinyushoRyoyokaigo_ByoinRyoyogataTest extends DbxTestBa
 
         @Test
         public void LDNS_Objectのcodeとコンストラクタのcodeが不一致の場合_equalsは_falseを返す() {
-            KaigoyoboTankinyushoRyoyokaigo_ByoinRyoyogata sut2 = new KaigoyoboTankinyushoRyoyokaigo_ByoinRyoyogata(new RString("90"));
+            KaigoyoboTankinyushoRyoyokaigoByoinRyoyogata sut2 = new KaigoyoboTankinyushoRyoyokaigoByoinRyoyogata(new RString("90"));
             assertFalse(sut.equals(sut2));
         }
 
         @Test
         public void LDNS_Object値とコンストラクタ値が一致の場合_equalsは_trueを返す() {
-            assertTrue(sut.equals(new KaigoyoboTankinyushoRyoyokaigo_ByoinRyoyogata(new RString("10"))));
+            assertTrue(sut.equals(new KaigoyoboTankinyushoRyoyokaigoByoinRyoyogata(new RString("10"))));
         }
 
     }
@@ -63,12 +63,12 @@ public class KaigoyoboTankinyushoRyoyokaigo_ByoinRyoyogataTest extends DbxTestBa
     public static class toStringテスト extends DbxTestBase {
         @Test
         public void LDNS_codeがnullの場合_toStringは_emptyを返す() {
-            KaigoyoboTankinyushoRyoyokaigo_ByoinRyoyogata sut = new KaigoyoboTankinyushoRyoyokaigo_ByoinRyoyogata((Code) null);
+            KaigoyoboTankinyushoRyoyokaigoByoinRyoyogata sut = new KaigoyoboTankinyushoRyoyokaigoByoinRyoyogata((Code) null);
             assertThat(sut.toString(), is(RString.EMPTY.toString()));
         }
         @Test
         public void LDNS_codeが1234567の場合_toStringは_1234567を返す() {
-            KaigoyoboTankinyushoRyoyokaigo_ByoinRyoyogata sut = new KaigoyoboTankinyushoRyoyokaigo_ByoinRyoyogata(new Code("1234567"));
+            KaigoyoboTankinyushoRyoyokaigoByoinRyoyogata sut = new KaigoyoboTankinyushoRyoyokaigoByoinRyoyogata(new Code("1234567"));
             assertThat(sut.toString(), is("1234567"));
         }
     }
@@ -76,7 +76,7 @@ public class KaigoyoboTankinyushoRyoyokaigo_ByoinRyoyogataTest extends DbxTestBa
     public static class hashCodeテスト extends DbxTestBase {
         @Test
         public void LDNS_設定した対象とコンストラクタ同じの場合_hashCodeは_同じhashCodeを返す() {
-            KaigoyoboTankinyushoRyoyokaigo_ByoinRyoyogata sut2=new KaigoyoboTankinyushoRyoyokaigo_ByoinRyoyogata(new RString("10"));
+            KaigoyoboTankinyushoRyoyokaigoByoinRyoyogata sut2=new KaigoyoboTankinyushoRyoyokaigoByoinRyoyogata(new RString("10"));
             assertThat(sut.hashCode(), is(sut2.hashCode()));
         }
     }
@@ -99,13 +99,13 @@ public class KaigoyoboTankinyushoRyoyokaigo_ByoinRyoyogataTest extends DbxTestBa
 
         @Test
         public void LDNS_入力のパラメタがnull場合_getMeishoは_emptyを返す() {
-            KaigoyoboTankinyushoRyoyokaigo_ByoinRyoyogata sut = new KaigoyoboTankinyushoRyoyokaigo_ByoinRyoyogata((Code) null);
+            KaigoyoboTankinyushoRyoyokaigoByoinRyoyogata sut = new KaigoyoboTankinyushoRyoyokaigoByoinRyoyogata((Code) null);
             assertThat(sut.getMeisho(new FlexibleDate("20150303")), is(RString.EMPTY));
         }
 
         @Test
         public void LDNS_入力のパラメタがnull以外の場合_getMeishoは_介護予防短期入所療養介護_病院療養型を返す() {
-            KaigoyoboTankinyushoRyoyokaigo_ByoinRyoyogata sut = new KaigoyoboTankinyushoRyoyokaigo_ByoinRyoyogata(new Code("1234567"));
+            KaigoyoboTankinyushoRyoyokaigoByoinRyoyogata sut = new KaigoyoboTankinyushoRyoyokaigoByoinRyoyogata(new Code("1234567"));
             assertThat(sut.getMeisho(new FlexibleDate("20150303")), is(new RString("介護予防短期入所療養介護_病院療養型")));
         }
     }
@@ -114,13 +114,13 @@ public class KaigoyoboTankinyushoRyoyokaigo_ByoinRyoyogataTest extends DbxTestBa
 
         @Test
         public void LDNS_codeがnull場合_getMeishoは_emptyを返す() {
-            KaigoyoboTankinyushoRyoyokaigo_ByoinRyoyogata sut = new KaigoyoboTankinyushoRyoyokaigo_ByoinRyoyogata((Code) null);
+            KaigoyoboTankinyushoRyoyokaigoByoinRyoyogata sut = new KaigoyoboTankinyushoRyoyokaigoByoinRyoyogata((Code) null);
             assertThat(sut.getMeisho(), is(RString.EMPTY));
         }
 
         @Test
         public void LDNS_codeがnull以外の場合_getMeishoは_介護予防短期入所療養介護_病院療養型を返す() {
-            KaigoyoboTankinyushoRyoyokaigo_ByoinRyoyogata sut = new KaigoyoboTankinyushoRyoyokaigo_ByoinRyoyogata(new Code("1234567"));
+            KaigoyoboTankinyushoRyoyokaigoByoinRyoyogata sut = new KaigoyoboTankinyushoRyoyokaigoByoinRyoyogata(new Code("1234567"));
             assertThat(sut.getMeisho(), is(new RString("介護予防短期入所療養介護_病院療養型")));
         }
     }
@@ -129,13 +129,13 @@ public class KaigoyoboTankinyushoRyoyokaigo_ByoinRyoyogataTest extends DbxTestBa
 
         @Test
         public void LDNS_入力のパラメタがnull場合_getRyakushoは_emptyを返す() {
-            KaigoyoboTankinyushoRyoyokaigo_ByoinRyoyogata sut = new KaigoyoboTankinyushoRyoyokaigo_ByoinRyoyogata((Code) null);
+            KaigoyoboTankinyushoRyoyokaigoByoinRyoyogata sut = new KaigoyoboTankinyushoRyoyokaigoByoinRyoyogata((Code) null);
             assertThat(sut.getRyakusho(new FlexibleDate("20150303")), is(RString.EMPTY));
         }
 
         @Test
         public void LDNS_入力のパラメタがnull以外の場合_getRyakushoは_介護予防短期入所療養介護_病院療養型を返す() {
-            KaigoyoboTankinyushoRyoyokaigo_ByoinRyoyogata sut = new KaigoyoboTankinyushoRyoyokaigo_ByoinRyoyogata(new Code("1234567"));
+            KaigoyoboTankinyushoRyoyokaigoByoinRyoyogata sut = new KaigoyoboTankinyushoRyoyokaigoByoinRyoyogata(new Code("1234567"));
             assertThat(sut.getRyakusho(new FlexibleDate("20150303")), is(new RString("介護予防短期入所療養介護_病院療養型")));
         }
     }
@@ -144,13 +144,13 @@ public class KaigoyoboTankinyushoRyoyokaigo_ByoinRyoyogataTest extends DbxTestBa
 
         @Test
         public void LDNS_codeがnull場合_getRyakushoは_emptyを返す() {
-            KaigoyoboTankinyushoRyoyokaigo_ByoinRyoyogata sut = new KaigoyoboTankinyushoRyoyokaigo_ByoinRyoyogata((Code) null);
+            KaigoyoboTankinyushoRyoyokaigoByoinRyoyogata sut = new KaigoyoboTankinyushoRyoyokaigoByoinRyoyogata((Code) null);
             assertThat(sut.getRyakusho(), is(RString.EMPTY));
         }
 
         @Test
         public void LDNS_codeがnull以外の場合_getRyakushoは_介護予防短期入所療養介護_病院療養型を返す() {
-            KaigoyoboTankinyushoRyoyokaigo_ByoinRyoyogata sut = new KaigoyoboTankinyushoRyoyokaigo_ByoinRyoyogata(new Code("1234567"));
+            KaigoyoboTankinyushoRyoyokaigoByoinRyoyogata sut = new KaigoyoboTankinyushoRyoyokaigoByoinRyoyogata(new Code("1234567"));
             assertThat(sut.getRyakusho(), is(new RString("介護予防短期入所療養介護_病院療養型")));
         }
     }

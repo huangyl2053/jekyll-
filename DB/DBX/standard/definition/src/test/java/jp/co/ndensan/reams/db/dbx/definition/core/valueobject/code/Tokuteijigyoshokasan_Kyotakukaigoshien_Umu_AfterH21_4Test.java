@@ -1,6 +1,6 @@
 package  jp.co.ndensan.reams.db.dbx.definition.core.valueobject.code;
 
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.code.Tokuteijigyoshokasan_Kyotakukaigoshien_Umu_AfterH21_4;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.code.TokuteijigyoshokasanKyotakukaigoshienUmuAfterH214;
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
 import static org.junit.Assert.assertFalse;
@@ -22,11 +22,11 @@ import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 @RunWith(Enclosed.class)
 public class Tokuteijigyoshokasan_Kyotakukaigoshien_Umu_AfterH21_4Test extends DbxTestBase {
 
-    private static Tokuteijigyoshokasan_Kyotakukaigoshien_Umu_AfterH21_4 sut;
+    private static TokuteijigyoshokasanKyotakukaigoshienUmuAfterH214 sut;
 
     @BeforeClass
     public static void setUp() {
-        sut = new Tokuteijigyoshokasan_Kyotakukaigoshien_Umu_AfterH21_4(new RString("10"));
+        sut = new TokuteijigyoshokasanKyotakukaigoshienUmuAfterH214(new RString("10"));
     }
 
     /**
@@ -61,13 +61,13 @@ public class Tokuteijigyoshokasan_Kyotakukaigoshien_Umu_AfterH21_4Test extends D
 
         @Test
         public void LDNS_Objectのcodeとコンストラクタのcodeが不一致の場合_equalsは_falseを戻す() {
-            Tokuteijigyoshokasan_Kyotakukaigoshien_Umu_AfterH21_4 sut2 = new Tokuteijigyoshokasan_Kyotakukaigoshien_Umu_AfterH21_4(new RString("90"));
+            TokuteijigyoshokasanKyotakukaigoshienUmuAfterH214 sut2 = new TokuteijigyoshokasanKyotakukaigoshienUmuAfterH214(new RString("90"));
             assertFalse(sut.equals(sut2));
         }
 
         @Test
         public void LDNS_Object値とコンストラクタ値が一致の場合_equalsは_trueを戻す() {
-            assertTrue(sut.equals(new Tokuteijigyoshokasan_Kyotakukaigoshien_Umu_AfterH21_4(new RString("10"))));
+            assertTrue(sut.equals(new TokuteijigyoshokasanKyotakukaigoshienUmuAfterH214(new RString("10"))));
         }
 
     }
@@ -80,13 +80,13 @@ public class Tokuteijigyoshokasan_Kyotakukaigoshien_Umu_AfterH21_4Test extends D
 
         @Test
         public void LDNS_codeがnullの場合_toStringは_emptyを戻す() {
-            Tokuteijigyoshokasan_Kyotakukaigoshien_Umu_AfterH21_4 sut = new Tokuteijigyoshokasan_Kyotakukaigoshien_Umu_AfterH21_4((Code) null);
+            TokuteijigyoshokasanKyotakukaigoshienUmuAfterH214 sut = new TokuteijigyoshokasanKyotakukaigoshienUmuAfterH214((Code) null);
             assertThat(sut.toString(), is(RString.EMPTY.toString()));
         }
 
         @Test
         public void LDNS_codeが1234567の場合_toStringは_1234567を戻す() {
-            Tokuteijigyoshokasan_Kyotakukaigoshien_Umu_AfterH21_4 sut = new Tokuteijigyoshokasan_Kyotakukaigoshien_Umu_AfterH21_4(new Code("1234567"));
+            TokuteijigyoshokasanKyotakukaigoshienUmuAfterH214 sut = new TokuteijigyoshokasanKyotakukaigoshienUmuAfterH214(new Code("1234567"));
             assertThat(sut.toString(), is("1234567"));
         }
     }
@@ -99,7 +99,7 @@ public class Tokuteijigyoshokasan_Kyotakukaigoshien_Umu_AfterH21_4Test extends D
 
         @Test
         public void LDNS_設定した対象とコンストラクタ同じの場合_hashCodeは_同じhashCodeを戻す() {
-            Tokuteijigyoshokasan_Kyotakukaigoshien_Umu_AfterH21_4 sut2 = new Tokuteijigyoshokasan_Kyotakukaigoshien_Umu_AfterH21_4(new RString("10"));
+            TokuteijigyoshokasanKyotakukaigoshienUmuAfterH214 sut2 = new TokuteijigyoshokasanKyotakukaigoshienUmuAfterH214(new RString("10"));
             assertThat(sut.hashCode(), is(sut2.hashCode()));
         }
     }
@@ -136,13 +136,13 @@ public class Tokuteijigyoshokasan_Kyotakukaigoshien_Umu_AfterH21_4Test extends D
 
         @Test
         public void LDNS_codeがnullの場合_getMeishoは_emptyを戻す() {
-            Tokuteijigyoshokasan_Kyotakukaigoshien_Umu_AfterH21_4 sut = new Tokuteijigyoshokasan_Kyotakukaigoshien_Umu_AfterH21_4((Code) null);
+            TokuteijigyoshokasanKyotakukaigoshienUmuAfterH214 sut = new TokuteijigyoshokasanKyotakukaigoshienUmuAfterH214((Code) null);
             assertThat(sut.getMeisho(new FlexibleDate("20150303")), is(RString.EMPTY));
         }
 
         @Test
         public void LDNS_codeがnull以外の場合_getMeishoは_特定事業所加算_居宅介護支援_の有無_平成21年4月以降を戻す() {
-            Tokuteijigyoshokasan_Kyotakukaigoshien_Umu_AfterH21_4 sut = new Tokuteijigyoshokasan_Kyotakukaigoshien_Umu_AfterH21_4(new Code("1234567"));
+            TokuteijigyoshokasanKyotakukaigoshienUmuAfterH214 sut = new TokuteijigyoshokasanKyotakukaigoshienUmuAfterH214(new Code("1234567"));
             assertThat(sut.getMeisho(new FlexibleDate("20150303")), is(new RString("特定事業所加算_居宅介護支援_の有無_平成21年4月以降")));
         }
     }
@@ -155,13 +155,13 @@ public class Tokuteijigyoshokasan_Kyotakukaigoshien_Umu_AfterH21_4Test extends D
 
         @Test
         public void LDNS_codeがnullの場合_getMeishoは_emptyを戻す() {
-            Tokuteijigyoshokasan_Kyotakukaigoshien_Umu_AfterH21_4 sut = new Tokuteijigyoshokasan_Kyotakukaigoshien_Umu_AfterH21_4((Code) null);
+            TokuteijigyoshokasanKyotakukaigoshienUmuAfterH214 sut = new TokuteijigyoshokasanKyotakukaigoshienUmuAfterH214((Code) null);
             assertThat(sut.getMeisho(), is(RString.EMPTY));
         }
 
         @Test
         public void LDNS_codeがnull以外の場合_getMeishoは_特定事業所加算_居宅介護支援_の有無_平成21年4月以降を戻す() {
-            Tokuteijigyoshokasan_Kyotakukaigoshien_Umu_AfterH21_4 sut = new Tokuteijigyoshokasan_Kyotakukaigoshien_Umu_AfterH21_4(new Code("1234567"));
+            TokuteijigyoshokasanKyotakukaigoshienUmuAfterH214 sut = new TokuteijigyoshokasanKyotakukaigoshienUmuAfterH214(new Code("1234567"));
             assertThat(sut.getMeisho(), is(new RString("特定事業所加算_居宅介護支援_の有無_平成21年4月以降")));
         }
     }
@@ -174,13 +174,13 @@ public class Tokuteijigyoshokasan_Kyotakukaigoshien_Umu_AfterH21_4Test extends D
 
         @Test
         public void LDNS_codeがnullの場合_getRyakushoは_emptyを戻す() {
-            Tokuteijigyoshokasan_Kyotakukaigoshien_Umu_AfterH21_4 sut = new Tokuteijigyoshokasan_Kyotakukaigoshien_Umu_AfterH21_4((Code) null);
+            TokuteijigyoshokasanKyotakukaigoshienUmuAfterH214 sut = new TokuteijigyoshokasanKyotakukaigoshienUmuAfterH214((Code) null);
             assertThat(sut.getRyakusho(new FlexibleDate("20150303")), is(RString.EMPTY));
         }
 
         @Test
         public void LDNS_codeがnull以外の場合_getRyakushoは_特定事業所加算_居宅介護支援_の有無_平成21年4月以降を戻す() {
-            Tokuteijigyoshokasan_Kyotakukaigoshien_Umu_AfterH21_4 sut = new Tokuteijigyoshokasan_Kyotakukaigoshien_Umu_AfterH21_4(new Code("1234567"));
+            TokuteijigyoshokasanKyotakukaigoshienUmuAfterH214 sut = new TokuteijigyoshokasanKyotakukaigoshienUmuAfterH214(new Code("1234567"));
             assertThat(sut.getRyakusho(new FlexibleDate("20150303")), is(new RString("特定事業所加算_居宅介護支援_の有無_平成21年4月以降")));
         }
     }
@@ -193,13 +193,13 @@ public class Tokuteijigyoshokasan_Kyotakukaigoshien_Umu_AfterH21_4Test extends D
 
         @Test
         public void LDNS_codeがnullの場合_getRyakushoは_emptyを戻す() {
-            Tokuteijigyoshokasan_Kyotakukaigoshien_Umu_AfterH21_4 sut = new Tokuteijigyoshokasan_Kyotakukaigoshien_Umu_AfterH21_4((Code) null);
+            TokuteijigyoshokasanKyotakukaigoshienUmuAfterH214 sut = new TokuteijigyoshokasanKyotakukaigoshienUmuAfterH214((Code) null);
             assertThat(sut.getRyakusho(), is(RString.EMPTY));
         }
 
         @Test
         public void LDNS_codeがnull以外の場合_getRyakushoは_特定事業所加算_居宅介護支援_の有無_平成21年4月以降を戻す() {
-            Tokuteijigyoshokasan_Kyotakukaigoshien_Umu_AfterH21_4 sut = new Tokuteijigyoshokasan_Kyotakukaigoshien_Umu_AfterH21_4(new Code("1234567"));
+            TokuteijigyoshokasanKyotakukaigoshienUmuAfterH214 sut = new TokuteijigyoshokasanKyotakukaigoshienUmuAfterH214(new Code("1234567"));
             assertThat(sut.getRyakusho(), is(new RString("特定事業所加算_居宅介護支援_の有無_平成21年4月以降")));
         }
     }

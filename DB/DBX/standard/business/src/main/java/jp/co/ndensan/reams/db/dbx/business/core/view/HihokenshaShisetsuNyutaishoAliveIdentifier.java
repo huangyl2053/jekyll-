@@ -14,6 +14,7 @@ import lombok.Value;
  * 被保険者施設入退所Aliveの識別子です。
  */
 @Value
+@SuppressWarnings("PMD.UnusedPrivateField")
 public class HihokenshaShisetsuNyutaishoAliveIdentifier implements Serializable {
 
     private final ShikibetsuCode 識別コード;

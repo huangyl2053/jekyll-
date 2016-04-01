@@ -572,19 +572,19 @@ public class KaigoJigyoshaShiteiServiceBuilder {
     /**
      * リハビリテーション提供体制（総合リハビリテーション施設）の有無を設定します。
      *
-     * @param リハビリテーション提供体制_総合リハビリテーション施設_の有無
+     * @param 総合リハビリテーション施設_の有無 リハビリテーション提供体制_総合リハビリテーション施設_の有無
      * @return {@link KaigoJigyoshaShiteiServiceBuilder}
      */
-    public KaigoJigyoshaShiteiServiceBuilder setリハビリテーション提供体制_総合リハビリテーション施設_の有無(Code リハビリテーション提供体制_総合リハビリテーション施設_の有無) {
-        requireNonNull(リハビリテーション提供体制_総合リハビリテーション施設_の有無, UrSystemErrorMessages.値がnull.getReplacedMessage("リハビリテーション提供体制_総合リハビリテーション施設_の有無"));
-        entity.setRehaTeikyoTaisei_SogoRehaShisetsu_umu(リハビリテーション提供体制_総合リハビリテーション施設_の有無);
+    public KaigoJigyoshaShiteiServiceBuilder setリハビリテーション提供体制_総合リハビリテーション施設_の有無(Code 総合リハビリテーション施設_の有無) {
+        requireNonNull(総合リハビリテーション施設_の有無, UrSystemErrorMessages.値がnull.getReplacedMessage("リハビリテーション提供体制_総合リハビリテーション施設_の有無"));
+        entity.setRehaTeikyoTaisei_SogoRehaShisetsu_umu(総合リハビリテーション施設_の有無);
         return this;
     }
 
     /**
      * リハビリテーション提供体制（理学療法Ⅱ）の有無を設定します。
      *
-     * @param リハビリテーション提供体制_理学療法Ⅱ_の有無
+     * @param リハビリテーション提供体制_理学療法Ⅱ_の有無 Code
      * @return {@link KaigoJigyoshaShiteiServiceBuilder}
      */
     public KaigoJigyoshaShiteiServiceBuilder setリハビリテーション提供体制_理学療法Ⅱ_の有無(Code リハビリテーション提供体制_理学療法Ⅱ_の有無) {
@@ -596,7 +596,7 @@ public class KaigoJigyoshaShiteiServiceBuilder {
     /**
      * リハビリテーション提供体制（理学療法Ⅲ）の有無を設定します。
      *
-     * @param リハビリテーション提供体制_理学療法Ⅲ_の有無
+     * @param リハビリテーション提供体制_理学療法Ⅲ_の有無 Code
      * @return {@link KaigoJigyoshaShiteiServiceBuilder}
      */
     public KaigoJigyoshaShiteiServiceBuilder setリハビリテーション提供体制_理学療法Ⅲ_の有無(Code リハビリテーション提供体制_理学療法Ⅲ_の有無) {
@@ -608,7 +608,7 @@ public class KaigoJigyoshaShiteiServiceBuilder {
     /**
      * リハビリテーション提供体制（作業療法Ⅱ）の有無を設定します。
      *
-     * @param リハビリテーション提供体制_作業療法Ⅱ_の有無
+     * @param リハビリテーション提供体制_作業療法Ⅱ_の有無 Code
      * @return {@link KaigoJigyoshaShiteiServiceBuilder}
      */
     public KaigoJigyoshaShiteiServiceBuilder setリハビリテーション提供体制_作業療法Ⅱ_の有無(Code リハビリテーション提供体制_作業療法Ⅱ_の有無) {
@@ -620,7 +620,7 @@ public class KaigoJigyoshaShiteiServiceBuilder {
     /**
      * リハビリテーション提供体制（精神科作業療法）の有無を設定します。
      *
-     * @param リハビリテーション提供体制_精神科作業療法_の有無
+     * @param リハビリテーション提供体制_精神科作業療法_の有無 Code
      * @return {@link KaigoJigyoshaShiteiServiceBuilder}
      */
     public KaigoJigyoshaShiteiServiceBuilder setリハビリテーション提供体制_精神科作業療法_の有無(Code リハビリテーション提供体制_精神科作業療法_の有無) {
@@ -633,7 +633,7 @@ public class KaigoJigyoshaShiteiServiceBuilder {
     /**
      * リハビリテーション提供体制（その他）の有無を設定します。
      *
-     * @param リハビリテーション提供体制_その他_の有無
+     * @param リハビリテーション提供体制_その他_の有無 Code
      * @return {@link KaigoJigyoshaShiteiServiceBuilder}
      */
     public KaigoJigyoshaShiteiServiceBuilder setリハビリテーション提供体制_その他_の有無(Code リハビリテーション提供体制_その他_の有無) {
@@ -874,19 +874,19 @@ public class KaigoJigyoshaShiteiServiceBuilder {
     /**
      * 個別リハビリテーション提供体制（総合リハビリテーション施設）の有無を設定します。
      *
-     * @param 個別リハビリテーション提供体制_総合リハビリテーション施設_の有無
+     * @param 総合リハビリテーション施設_の有無 個別リハビリテーション提供体制_総合リハビリテーション施設_の有無
      * @return {@link KaigoJigyoshaShiteiServiceBuilder}
      */
-    public KaigoJigyoshaShiteiServiceBuilder set個別リハビリテーション提供体制_総合リハビリテーション施設_の有無(Code 個別リハビリテーション提供体制_総合リハビリテーション施設_の有無) {
-        requireNonNull(個別リハビリテーション提供体制_総合リハビリテーション施設_の有無, UrSystemErrorMessages.値がnull.getReplacedMessage("個別リハビリテーション提供体制_総合リハビリテーション施設_の有無"));
-        entity.setKobetsuRehaTeikyoTaisei_SogoRehaShisetsu_umu(個別リハビリテーション提供体制_総合リハビリテーション施設_の有無);
+    public KaigoJigyoshaShiteiServiceBuilder set個別リハビリテーション提供体制_総合リハビリテーション施設_の有無(Code 総合リハビリテーション施設_の有無) {
+        requireNonNull(総合リハビリテーション施設_の有無, UrSystemErrorMessages.値がnull.getReplacedMessage("個別リハビリテーション提供体制_総合リハビリテーション施設_の有無"));
+        entity.setKobetsuRehaTeikyoTaisei_SogoRehaShisetsu_umu(総合リハビリテーション施設_の有無);
         return this;
     }
 
     /**
      * 個別リハビリテーション提供体制（理学療法Ⅱ）の有無1を設定します。
      *
-     * @param 個別リハビリテーション提供体制_理学療法Ⅱ_の有無1
+     * @param 個別リハビリテーション提供体制_理学療法Ⅱ_の有無1 Code
      * @return {@link KaigoJigyoshaShiteiServiceBuilder}
      */
     public KaigoJigyoshaShiteiServiceBuilder set個別リハビリテーション提供体制_理学療法Ⅱ_の有無1(Code 個別リハビリテーション提供体制_理学療法Ⅱ_の有無1) {
@@ -898,7 +898,7 @@ public class KaigoJigyoshaShiteiServiceBuilder {
     /**
      * 個別リハビリテーション提供体制（理学療法Ⅲ）の有無を設定します。
      *
-     * @param 個別リハビリテーション提供体制_理学療法Ⅲ_の有無
+     * @param 個別リハビリテーション提供体制_理学療法Ⅲ_の有無 Code
      * @return {@link KaigoJigyoshaShiteiServiceBuilder}
      */
     public KaigoJigyoshaShiteiServiceBuilder set個別リハビリテーション提供体制_理学療法Ⅲ_の有無(Code 個別リハビリテーション提供体制_理学療法Ⅲ_の有無) {
@@ -911,7 +911,7 @@ public class KaigoJigyoshaShiteiServiceBuilder {
     /**
      * 個別リハビリテーション提供体制（作業療法Ⅱ）の有無を設定します。
      *
-     * @param 個別リハビリテーション提供体制_作業療法Ⅱ_の有無
+     * @param 個別リハビリテーション提供体制_作業療法Ⅱ_の有無 Code
      * @return {@link KaigoJigyoshaShiteiServiceBuilder}
      */
     public KaigoJigyoshaShiteiServiceBuilder set個別リハビリテーション提供体制_作業療法Ⅱ_の有無(Code 個別リハビリテーション提供体制_作業療法Ⅱ_の有無) {
@@ -924,7 +924,7 @@ public class KaigoJigyoshaShiteiServiceBuilder {
     /**
      * 個別リハビリテーション提供体制（言語聴覚療法Ⅰ）の有無を設定します。
      *
-     * @param 個別リハビリテーション提供体制_言語聴覚療法Ⅰ_の有無
+     * @param 個別リハビリテーション提供体制_言語聴覚療法Ⅰ_の有無 Code
      * @return {@link KaigoJigyoshaShiteiServiceBuilder}
      */
     public KaigoJigyoshaShiteiServiceBuilder set個別リハビリテーション提供体制_言語聴覚療法Ⅰ_の有無(Code 個別リハビリテーション提供体制_言語聴覚療法Ⅰ_の有無) {
@@ -938,7 +938,7 @@ public class KaigoJigyoshaShiteiServiceBuilder {
     /**
      * 個別リハビリテーション提供体制（言語聴覚療法Ⅱ）の有無を設定します。
      *
-     * @param 個別リハビリテーション提供体制_言語聴覚療法Ⅱ_の有無
+     * @param 個別リハビリテーション提供体制_言語聴覚療法Ⅱ_の有無 Code
      * @return {@link KaigoJigyoshaShiteiServiceBuilder}
      */
     public KaigoJigyoshaShiteiServiceBuilder set個別リハビリテーション提供体制_言語聴覚療法Ⅱ_の有無(Code 個別リハビリテーション提供体制_言語聴覚療法Ⅱ_の有無) {
@@ -975,7 +975,7 @@ public class KaigoJigyoshaShiteiServiceBuilder {
     /**
      * 特定事業所加算（訪問介護）の有無を設定します。
      *
-     * @param 特定事業所加算_訪問介護_の有無
+     * @param 特定事業所加算_訪問介護_の有無 Code
      * @return {@link KaigoJigyoshaShiteiServiceBuilder}
      */
     public KaigoJigyoshaShiteiServiceBuilder set特定事業所加算_訪問介護_の有無(Code 特定事業所加算_訪問介護_の有無) {
@@ -1012,7 +1012,7 @@ public class KaigoJigyoshaShiteiServiceBuilder {
     /**
      * 栄養マネジメント（改善）体制の有無を設定します。
      *
-     * @param 栄養マネジメント_改善_体制の有無
+     * @param 栄養マネジメント_改善_体制の有無 Code
      * @return {@link KaigoJigyoshaShiteiServiceBuilder}
      */
     public KaigoJigyoshaShiteiServiceBuilder set栄養マネジメント_改善_体制の有無(Code 栄養マネジメント_改善_体制の有無) {
@@ -1036,7 +1036,7 @@ public class KaigoJigyoshaShiteiServiceBuilder {
     /**
      * 事業所評価加算（申出）の有無を設定します。
      *
-     * @param 事業所評価加算_申出_の有無
+     * @param 事業所評価加算_申出_の有無 Code
      * @return {@link KaigoJigyoshaShiteiServiceBuilder}
      */
     public KaigoJigyoshaShiteiServiceBuilder set事業所評価加算_申出_の有無(Code 事業所評価加算_申出_の有無) {
@@ -1048,7 +1048,7 @@ public class KaigoJigyoshaShiteiServiceBuilder {
     /**
      * 事業所評価加算（決定）の有無を設定します。
      *
-     * @param 事業所評価加算_決定_の有無
+     * @param 事業所評価加算_決定_の有無 Code
      * @return {@link KaigoJigyoshaShiteiServiceBuilder}
      */
     public KaigoJigyoshaShiteiServiceBuilder set事業所評価加算_決定_の有無(Code 事業所評価加算_決定_の有無) {
@@ -1085,7 +1085,7 @@ public class KaigoJigyoshaShiteiServiceBuilder {
     /**
      * 特定事業所加算（居宅介護支援）の有無を設定します。
      *
-     * @param 特定事業所加算_居宅介護支援_の有無
+     * @param 特定事業所加算_居宅介護支援_の有無 Code
      * @return {@link KaigoJigyoshaShiteiServiceBuilder}
      */
     public KaigoJigyoshaShiteiServiceBuilder set特定事業所加算_居宅介護支援_の有無(Code 特定事業所加算_居宅介護支援_の有無) {
@@ -1097,7 +1097,7 @@ public class KaigoJigyoshaShiteiServiceBuilder {
     /**
      * 介護支援専門員数（専従の常勤者）を設定します。
      *
-     * @param 介護支援専門員数_専従の常勤者_
+     * @param 介護支援専門員数_専従の常勤者_ int
      * @return {@link KaigoJigyoshaShiteiServiceBuilder}
      */
     public KaigoJigyoshaShiteiServiceBuilder set介護支援専門員数_専従の常勤者_(int 介護支援専門員数_専従の常勤者_) {
@@ -1110,7 +1110,7 @@ public class KaigoJigyoshaShiteiServiceBuilder {
     /**
      * 介護支援専門員数（専従の非常勤者）を設定します。
      *
-     * @param 介護支援専門員数_専従の非常勤者_
+     * @param 介護支援専門員数_専従の非常勤者_ int
      * @return {@link KaigoJigyoshaShiteiServiceBuilder}
      */
     public KaigoJigyoshaShiteiServiceBuilder set介護支援専門員数_専従の非常勤者_(int 介護支援専門員数_専従の非常勤者_) {
@@ -1123,7 +1123,7 @@ public class KaigoJigyoshaShiteiServiceBuilder {
     /**
      * 介護支援専門員数（兼務の常勤者）を設定します。
      *
-     * @param 介護支援専門員数_兼務の常勤者_
+     * @param 介護支援専門員数_兼務の常勤者_ int
      * @return {@link KaigoJigyoshaShiteiServiceBuilder}
      */
     public KaigoJigyoshaShiteiServiceBuilder set介護支援専門員数_兼務の常勤者_(int 介護支援専門員数_兼務の常勤者_) {
@@ -1136,7 +1136,7 @@ public class KaigoJigyoshaShiteiServiceBuilder {
     /**
      * 介護支援専門員数（兼務の非常勤者）を設定します。
      *
-     * @param 介護支援専門員数_兼務の非常勤者_
+     * @param 介護支援専門員数_兼務の非常勤者_ int
      * @return {@link KaigoJigyoshaShiteiServiceBuilder}
      */
     public KaigoJigyoshaShiteiServiceBuilder set介護支援専門員数_兼務の非常勤者_(int 介護支援専門員数_兼務の非常勤者_) {
@@ -1161,7 +1161,7 @@ public class KaigoJigyoshaShiteiServiceBuilder {
     /**
      * 訪問介護員数（専従の常勤者）を設定します。
      *
-     * @param 訪問介護員数_専従の常勤者_
+     * @param 訪問介護員数_専従の常勤者_ int
      * @return {@link KaigoJigyoshaShiteiServiceBuilder}
      */
     public KaigoJigyoshaShiteiServiceBuilder set訪問介護員数_専従の常勤者_(int 訪問介護員数_専従の常勤者_) {
@@ -1174,7 +1174,7 @@ public class KaigoJigyoshaShiteiServiceBuilder {
     /**
      * 訪問介護員数（専従の非常勤者）を設定します。
      *
-     * @param 訪問介護員数_専従の非常勤者_
+     * @param 訪問介護員数_専従の非常勤者_ int
      * @return {@link KaigoJigyoshaShiteiServiceBuilder}
      */
     public KaigoJigyoshaShiteiServiceBuilder set訪問介護員数_専従の非常勤者_(int 訪問介護員数_専従の非常勤者_) {
@@ -1187,7 +1187,7 @@ public class KaigoJigyoshaShiteiServiceBuilder {
     /**
      * 訪問介護員数（兼務の常勤者）を設定します。
      *
-     * @param 訪問介護員数_兼務の常勤者_
+     * @param 訪問介護員数_兼務の常勤者_ int
      * @return {@link KaigoJigyoshaShiteiServiceBuilder}
      */
     public KaigoJigyoshaShiteiServiceBuilder set訪問介護員数_兼務の常勤者_(int 訪問介護員数_兼務の常勤者_) {
@@ -1200,7 +1200,7 @@ public class KaigoJigyoshaShiteiServiceBuilder {
     /**
      * 訪問介護員数（兼務の非常勤者）を設定します。
      *
-     * @param 訪問介護員数_兼務の非常勤者_
+     * @param 訪問介護員数_兼務の非常勤者_ int
      * @return {@link KaigoJigyoshaShiteiServiceBuilder}
      */
     public KaigoJigyoshaShiteiServiceBuilder set訪問介護員数_兼務の非常勤者_(int 訪問介護員数_兼務の非常勤者_) {
@@ -1213,7 +1213,7 @@ public class KaigoJigyoshaShiteiServiceBuilder {
     /**
      * 訪問介護員数（常勤換算後の人数）を設定します。
      *
-     * @param 訪問介護員数_常勤換算後の人数_
+     * @param 訪問介護員数_常勤換算後の人数_ int
      * @return {@link KaigoJigyoshaShiteiServiceBuilder}
      */
     public KaigoJigyoshaShiteiServiceBuilder set訪問介護員数_常勤換算後の人数_(int 訪問介護員数_常勤換算後の人数_) {
@@ -1357,7 +1357,7 @@ public class KaigoJigyoshaShiteiServiceBuilder {
     /**
      * 在宅・入所相互利用体制の有無を設定します。
      *
-     * @param 在宅_入所相互利用体制の有無
+     * @param 在宅_入所相互利用体制の有無 Code
      * @return {@link KaigoJigyoshaShiteiServiceBuilder}
      */
     public KaigoJigyoshaShiteiServiceBuilder set在宅_入所相互利用体制の有無(Code 在宅_入所相互利用体制の有無) {
@@ -1370,7 +1370,7 @@ public class KaigoJigyoshaShiteiServiceBuilder {
     /**
      * ターミナルケア体制（看取り介護体制）の有無を設定します。
      *
-     * @param ターミナルケア体制_看取り介護体制_の有無
+     * @param ターミナルケア体制_看取り介護体制_の有無 Code
      * @return {@link KaigoJigyoshaShiteiServiceBuilder}
      */
     public KaigoJigyoshaShiteiServiceBuilder setターミナルケア体制_看取り介護体制_の有無(Code ターミナルケア体制_看取り介護体制_の有無) {
@@ -1431,7 +1431,7 @@ public class KaigoJigyoshaShiteiServiceBuilder {
     /**
      * 個別リハビリテーション提供体制（理学療法Ⅰ）の有無を設定します。
      *
-     * @param 個別リハビリテーション提供体制_理学療法Ⅰ_の有無
+     * @param 個別リハビリテーション提供体制_理学療法Ⅰ_の有無 Code
      * @return {@link KaigoJigyoshaShiteiServiceBuilder}
      */
     public KaigoJigyoshaShiteiServiceBuilder set個別リハビリテーション提供体制_理学療法Ⅰ_の有無(Code 個別リハビリテーション提供体制_理学療法Ⅰ_の有無) {
@@ -1443,7 +1443,7 @@ public class KaigoJigyoshaShiteiServiceBuilder {
     /**
      * 個別リハビリテーション提供体制（理学療法Ⅱ）の有無2を設定します。
      *
-     * @param 個別リハビリテーション提供体制_理学療法Ⅱ_の有無2
+     * @param 個別リハビリテーション提供体制_理学療法Ⅱ_の有無2 Code
      * @return {@link KaigoJigyoshaShiteiServiceBuilder}
      */
     public KaigoJigyoshaShiteiServiceBuilder set個別リハビリテーション提供体制_理学療法Ⅱ_の有無2(Code 個別リハビリテーション提供体制_理学療法Ⅱ_の有無2) {
@@ -1456,7 +1456,7 @@ public class KaigoJigyoshaShiteiServiceBuilder {
     /**
      * 個別リハビリテーション提供体制（作業療法）の有無を設定します。
      *
-     * @param 個別リハビリテーション提供体制_作業療法_の有無
+     * @param 個別リハビリテーション提供体制_作業療法_の有無 Code
      * @return {@link KaigoJigyoshaShiteiServiceBuilder}
      */
     public KaigoJigyoshaShiteiServiceBuilder set個別リハビリテーション提供体制_作業療法_の有無(Code 個別リハビリテーション提供体制_作業療法_の有無) {
@@ -1468,7 +1468,7 @@ public class KaigoJigyoshaShiteiServiceBuilder {
     /**
      * 個別リハビリテーション提供体制（言語聴覚療法）の有無を設定します。
      *
-     * @param 個別リハビリテーション提供体制_言語聴覚療法_の有無
+     * @param 個別リハビリテーション提供体制_言語聴覚療法_の有無 Code
      * @return {@link KaigoJigyoshaShiteiServiceBuilder}
      */
     public KaigoJigyoshaShiteiServiceBuilder set個別リハビリテーション提供体制_言語聴覚療法_の有無(Code 個別リハビリテーション提供体制_言語聴覚療法_の有無) {
@@ -1481,7 +1481,7 @@ public class KaigoJigyoshaShiteiServiceBuilder {
     /**
      * 個別リハビリテーション提供体制（その他）の有無を設定します。
      *
-     * @param 個別リハビリテーション提供体制_その他_の有無
+     * @param 個別リハビリテーション提供体制_その他_の有無 Code
      * @return {@link KaigoJigyoshaShiteiServiceBuilder}
      */
     public KaigoJigyoshaShiteiServiceBuilder set個別リハビリテーション提供体制_その他_の有無(Code 個別リハビリテーション提供体制_その他_の有無) {
@@ -1517,19 +1517,19 @@ public class KaigoJigyoshaShiteiServiceBuilder {
     /**
      * 個別リハビリテーション提供体制（リハビリテーション指導管理）の有無を設定します。
      *
-     * @param 個別リハビリテーション提供体制_リハビリテーション指導管理_の有無
+     * @param リハビリテーション指導管理_の有無 個別リハビリテーション提供体制_リハビリテーション指導管理_の有無
      * @return {@link KaigoJigyoshaShiteiServiceBuilder}
      */
-    public KaigoJigyoshaShiteiServiceBuilder set個別リハビリテーション提供体制_リハビリテーション指導管理_の有無(Code 個別リハビリテーション提供体制_リハビリテーション指導管理_の有無) {
-        requireNonNull(個別リハビリテーション提供体制_リハビリテーション指導管理_の有無, UrSystemErrorMessages.値がnull.getReplacedMessage("個別リハビリテーション提供体制_リハビリテーション指導管理_の有無"));
-        entity.setKobetsuRehaTeikyoTaisei_RehaShidoKanri_umu(個別リハビリテーション提供体制_リハビリテーション指導管理_の有無);
+    public KaigoJigyoshaShiteiServiceBuilder set個別リハビリテーション提供体制_リハビリテーション指導管理_の有無(Code リハビリテーション指導管理_の有無) {
+        requireNonNull(リハビリテーション指導管理_の有無, UrSystemErrorMessages.値がnull.getReplacedMessage("個別リハビリテーション提供体制_リハビリテーション指導管理_の有無"));
+        entity.setKobetsuRehaTeikyoTaisei_RehaShidoKanri_umu(リハビリテーション指導管理_の有無);
         return this;
     }
 
     /**
      * ３級ヘルパー体制を設定します。
      *
-     * @param ヘルパー体制_３級
+     * @param ヘルパー体制_３級 Code
      * @return {@link KaigoJigyoshaShiteiServiceBuilder}
      */
     public KaigoJigyoshaShiteiServiceBuilder set３級ヘルパー体制(Code ヘルパー体制_３級) {
@@ -1541,7 +1541,7 @@ public class KaigoJigyoshaShiteiServiceBuilder {
     /**
      * 中山間地域等における小規模事業所加算（地域に関する状況）を設定します。
      *
-     * @param 中山間地域等における小規模事業所加算_地域に関する状況_
+     * @param 中山間地域等における小規模事業所加算_地域に関する状況_ Code
      * @return {@link KaigoJigyoshaShiteiServiceBuilder}
      */
     public KaigoJigyoshaShiteiServiceBuilder set中山間地域等における小規模事業所加算_地域に関する状況_(Code 中山間地域等における小規模事業所加算_地域に関する状況_) {
@@ -1554,7 +1554,7 @@ public class KaigoJigyoshaShiteiServiceBuilder {
     /**
      * 中山間地域等における小規模事業所加算（規模に関する状況）を設定します。
      *
-     * @param 中山間地域等における小規模事業所加算_規模に関する状況_
+     * @param 中山間地域等における小規模事業所加算_規模に関する状況_ Code
      * @return {@link KaigoJigyoshaShiteiServiceBuilder}
      */
     public KaigoJigyoshaShiteiServiceBuilder set中山間地域等における小規模事業所加算_規模に関する状況_(Code 中山間地域等における小規模事業所加算_規模に関する状況_) {
@@ -1590,7 +1590,7 @@ public class KaigoJigyoshaShiteiServiceBuilder {
     /**
      * 若年性認知症利用者（入所者・患者）受入加算を設定します。
      *
-     * @param 若年性認知症利用者_入所者_患者_受入加算
+     * @param 若年性認知症利用者_入所者_患者_受入加算 Code
      * @return {@link KaigoJigyoshaShiteiServiceBuilder}
      */
     public KaigoJigyoshaShiteiServiceBuilder set若年性認知症利用者_入所者_患者_受入加算(Code 若年性認知症利用者_入所者_患者_受入加算) {
@@ -1663,7 +1663,7 @@ public class KaigoJigyoshaShiteiServiceBuilder {
     /**
      * ２４時間通報対応加算を設定します。
      *
-     * @param 対応加算_２４時間通報
+     * @param 対応加算_２４時間通報 Code
      * @return {@link KaigoJigyoshaShiteiServiceBuilder}
      */
     public KaigoJigyoshaShiteiServiceBuilder set２４時間通報対応加算(Code 対応加算_２４時間通報) {
@@ -1771,7 +1771,7 @@ public class KaigoJigyoshaShiteiServiceBuilder {
     /**
      * 在宅復帰・在宅療養支援機能加算を設定します。
      *
-     * @param 在宅復帰_在宅療養支援機能加算
+     * @param 在宅復帰_在宅療養支援機能加算 Code
      * @return {@link KaigoJigyoshaShiteiServiceBuilder}
      */
     public KaigoJigyoshaShiteiServiceBuilder set在宅復帰_在宅療養支援機能加算(Code 在宅復帰_在宅療養支援機能加算) {

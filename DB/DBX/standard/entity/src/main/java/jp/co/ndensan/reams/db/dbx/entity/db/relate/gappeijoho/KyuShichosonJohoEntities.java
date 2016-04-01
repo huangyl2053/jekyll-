@@ -83,7 +83,7 @@ public class KyuShichosonJohoEntities implements Serializable, Iterable<DbT7056G
     /**
      * 合併市町村有無フラグを設定します。
      *
-     * @param 合併市町村有無フラグ
+     * @param 合併市町村有無フラグ boolean
      */
     public void setGappeiShichoUmuFlag(boolean 合併市町村有無フラグ) {
         gappeiShichoUmuFlag = 合併市町村有無フラグ;
@@ -94,7 +94,7 @@ public class KyuShichosonJohoEntities implements Serializable, Iterable<DbT7056G
      *
      * @return 合併市町村有無フラグ
      */
-    public boolean getGappeiShichoUmuFlag() {
+    public boolean hasGappeiShichoUmuFlag() {
         return gappeiShichoUmuFlag;
     }
     
@@ -102,10 +102,10 @@ public class KyuShichosonJohoEntities implements Serializable, Iterable<DbT7056G
     /**
      * DbT7056GappeiShichosonEntityのリストを設定します。
      *
-     * @param DbT7056GappeiShichosonEntityList
+     * @param dbT7056EntityList List<DbT7056GappeiShichosonEntity>
      */
-    public void setEntitys(List<DbT7056GappeiShichosonEntity> DbT7056GappeiShichosonEntityList) {
-        entities = DbT7056GappeiShichosonEntityList;
+    public void setEntitys(List<DbT7056GappeiShichosonEntity> dbT7056EntityList) {
+        entities = dbT7056EntityList;
     }
     
     /**

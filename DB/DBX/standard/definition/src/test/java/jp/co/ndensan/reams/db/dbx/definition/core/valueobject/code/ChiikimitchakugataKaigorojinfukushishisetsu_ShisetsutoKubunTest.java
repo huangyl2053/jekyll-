@@ -1,6 +1,6 @@
 package jp.co.ndensan.reams.db.dbx.definition.core.valueobject.code;
 
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.code.ChiikimitchakugataKaigorojinfukushishisetsu_ShisetsutoKubun;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.code.ChiikimitchakugataKaigorojinfukushishisetsuShisetsutoKubun;
 import jp.co.ndensan.reams.db.dbx.testhelper.DbxTestBase;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
@@ -15,18 +15,18 @@ import org.junit.experimental.runners.Enclosed;
 import org.junit.runner.RunWith;
 
 /**
- * ChiikimitchakugataKaigorojinfukushishisetsu_ShisetsutoKubunのテストクラスです。
+ * ChiikimitchakugataKaigorojinfukushishisetsuShisetsutoKubunのテストクラスです。
  *
  * @author LDNS 顧偉剛
  */
 @RunWith(Enclosed.class)
 public class ChiikimitchakugataKaigorojinfukushishisetsu_ShisetsutoKubunTest extends DbxTestBase {
 
-    private static ChiikimitchakugataKaigorojinfukushishisetsu_ShisetsutoKubun sut;
+    private static ChiikimitchakugataKaigorojinfukushishisetsuShisetsutoKubun sut;
 
     @BeforeClass
     public static void setUp() {
-        sut = new ChiikimitchakugataKaigorojinfukushishisetsu_ShisetsutoKubun(new RString("10"));
+        sut = new ChiikimitchakugataKaigorojinfukushishisetsuShisetsutoKubun(new RString("10"));
     }
 
     /**
@@ -59,13 +59,13 @@ public class ChiikimitchakugataKaigorojinfukushishisetsu_ShisetsutoKubunTest ext
 
         @Test
         public void LDNS_Objectのcodeとコンストラクタのcodeが不一致の場合_equalsは_falseを返す() {
-            ChiikimitchakugataKaigorojinfukushishisetsu_ShisetsutoKubun sut2 = new ChiikimitchakugataKaigorojinfukushishisetsu_ShisetsutoKubun(new RString("90"));
+            ChiikimitchakugataKaigorojinfukushishisetsuShisetsutoKubun sut2 = new ChiikimitchakugataKaigorojinfukushishisetsuShisetsutoKubun(new RString("90"));
             assertFalse(sut.equals(sut2));
         }
 
         @Test
         public void LDNS_Object値とコンストラクタ値が一致の場合_equalsは_trueを返す() {
-            assertTrue(sut.equals(new ChiikimitchakugataKaigorojinfukushishisetsu_ShisetsutoKubun(new RString("10"))));
+            assertTrue(sut.equals(new ChiikimitchakugataKaigorojinfukushishisetsuShisetsutoKubun(new RString("10"))));
         }
 
     }
@@ -78,13 +78,13 @@ public class ChiikimitchakugataKaigorojinfukushishisetsu_ShisetsutoKubunTest ext
 
         @Test
         public void LDNS_codeがnullの場合_toStringは_emptyを返す() {
-            ChiikimitchakugataKaigorojinfukushishisetsu_ShisetsutoKubun sut = new ChiikimitchakugataKaigorojinfukushishisetsu_ShisetsutoKubun((Code) null);
+            ChiikimitchakugataKaigorojinfukushishisetsuShisetsutoKubun sut = new ChiikimitchakugataKaigorojinfukushishisetsuShisetsutoKubun((Code) null);
             assertThat(sut.toString(), is(RString.EMPTY.toString()));
         }
 
         @Test
         public void LDNS_codeが1234567の場合_toStringは_1234567を返す() {
-            ChiikimitchakugataKaigorojinfukushishisetsu_ShisetsutoKubun sut = new ChiikimitchakugataKaigorojinfukushishisetsu_ShisetsutoKubun(new Code("1234567"));
+            ChiikimitchakugataKaigorojinfukushishisetsuShisetsutoKubun sut = new ChiikimitchakugataKaigorojinfukushishisetsuShisetsutoKubun(new Code("1234567"));
             assertThat(sut.toString(), is("1234567"));
         }
     }
@@ -97,7 +97,7 @@ public class ChiikimitchakugataKaigorojinfukushishisetsu_ShisetsutoKubunTest ext
 
         @Test
         public void LDNS_設定した対象とコンストラクタ同じの場合_hashCodeは_同じhashCodeを返す() {
-            ChiikimitchakugataKaigorojinfukushishisetsu_ShisetsutoKubun sut2 = new ChiikimitchakugataKaigorojinfukushishisetsu_ShisetsutoKubun(new RString("10"));
+            ChiikimitchakugataKaigorojinfukushishisetsuShisetsutoKubun sut2 = new ChiikimitchakugataKaigorojinfukushishisetsuShisetsutoKubun(new RString("10"));
             assertThat(sut.hashCode(), is(sut2.hashCode()));
         }
     }
@@ -134,13 +134,13 @@ public class ChiikimitchakugataKaigorojinfukushishisetsu_ShisetsutoKubunTest ext
 
         @Test
         public void LDNS_入力のパラメタがnull場合_getMeishoは_emptyを返す() {
-            ChiikimitchakugataKaigorojinfukushishisetsu_ShisetsutoKubun sut = new ChiikimitchakugataKaigorojinfukushishisetsu_ShisetsutoKubun((Code) null);
+            ChiikimitchakugataKaigorojinfukushishisetsuShisetsutoKubun sut = new ChiikimitchakugataKaigorojinfukushishisetsuShisetsutoKubun((Code) null);
             assertThat(sut.getMeisho(new FlexibleDate("20150303")), is(RString.EMPTY));
         }
 
         @Test
         public void LDNS_入力のパラメタがnull以外の場合_getMeishoは_地域密着型介護老人福祉施設_施設等の区分を返す() {
-            ChiikimitchakugataKaigorojinfukushishisetsu_ShisetsutoKubun sut = new ChiikimitchakugataKaigorojinfukushishisetsu_ShisetsutoKubun(new Code("1234567"));
+            ChiikimitchakugataKaigorojinfukushishisetsuShisetsutoKubun sut = new ChiikimitchakugataKaigorojinfukushishisetsuShisetsutoKubun(new Code("1234567"));
             assertThat(sut.getMeisho(new FlexibleDate("20150303")), is(new RString("地域密着型介護老人福祉施設_施設等の区分")));
         }
     }
@@ -153,13 +153,13 @@ public class ChiikimitchakugataKaigorojinfukushishisetsu_ShisetsutoKubunTest ext
 
         @Test
         public void LDNS_codeがnull場合_getMeishoは_emptyを返す() {
-            ChiikimitchakugataKaigorojinfukushishisetsu_ShisetsutoKubun sut = new ChiikimitchakugataKaigorojinfukushishisetsu_ShisetsutoKubun((Code) null);
+            ChiikimitchakugataKaigorojinfukushishisetsuShisetsutoKubun sut = new ChiikimitchakugataKaigorojinfukushishisetsuShisetsutoKubun((Code) null);
             assertThat(sut.getMeisho(), is(RString.EMPTY));
         }
 
         @Test
         public void LDNS_codeがnull以外の場合_getMeishoは_地域密着型介護老人福祉施設_施設等の区分を返す() {
-            ChiikimitchakugataKaigorojinfukushishisetsu_ShisetsutoKubun sut = new ChiikimitchakugataKaigorojinfukushishisetsu_ShisetsutoKubun(new Code("1234567"));
+            ChiikimitchakugataKaigorojinfukushishisetsuShisetsutoKubun sut = new ChiikimitchakugataKaigorojinfukushishisetsuShisetsutoKubun(new Code("1234567"));
             assertThat(sut.getMeisho(), is(new RString("地域密着型介護老人福祉施設_施設等の区分")));
         }
     }
@@ -172,13 +172,13 @@ public class ChiikimitchakugataKaigorojinfukushishisetsu_ShisetsutoKubunTest ext
 
         @Test
         public void LDNS_入力のパラメタがnull場合_getRyakushoは_emptyを返す() {
-            ChiikimitchakugataKaigorojinfukushishisetsu_ShisetsutoKubun sut = new ChiikimitchakugataKaigorojinfukushishisetsu_ShisetsutoKubun((Code) null);
+            ChiikimitchakugataKaigorojinfukushishisetsuShisetsutoKubun sut = new ChiikimitchakugataKaigorojinfukushishisetsuShisetsutoKubun((Code) null);
             assertThat(sut.getRyakusho(new FlexibleDate("20150303")), is(RString.EMPTY));
         }
 
         @Test
         public void LDNS_入力のパラメタがnull以外の場合_getRyakushoは_地域密着型介護老人福祉施設_施設等の区分を返す() {
-            ChiikimitchakugataKaigorojinfukushishisetsu_ShisetsutoKubun sut = new ChiikimitchakugataKaigorojinfukushishisetsu_ShisetsutoKubun(new Code("1234567"));
+            ChiikimitchakugataKaigorojinfukushishisetsuShisetsutoKubun sut = new ChiikimitchakugataKaigorojinfukushishisetsuShisetsutoKubun(new Code("1234567"));
             assertThat(sut.getRyakusho(new FlexibleDate("20150303")), is(new RString("地域密着型介護老人福祉施設_施設等の区分")));
         }
     }
@@ -191,13 +191,13 @@ public class ChiikimitchakugataKaigorojinfukushishisetsu_ShisetsutoKubunTest ext
 
         @Test
         public void LDNS_codeがnull場合_getRyakushoは_emptyを返す() {
-            ChiikimitchakugataKaigorojinfukushishisetsu_ShisetsutoKubun sut = new ChiikimitchakugataKaigorojinfukushishisetsu_ShisetsutoKubun((Code) null);
+            ChiikimitchakugataKaigorojinfukushishisetsuShisetsutoKubun sut = new ChiikimitchakugataKaigorojinfukushishisetsuShisetsutoKubun((Code) null);
             assertThat(sut.getRyakusho(), is(RString.EMPTY));
         }
 
         @Test
         public void LDNS_codeがnull以外の場合_getRyakushoは_地域密着型介護老人福祉施設_施設等の区分を返す() {
-            ChiikimitchakugataKaigorojinfukushishisetsu_ShisetsutoKubun sut = new ChiikimitchakugataKaigorojinfukushishisetsu_ShisetsutoKubun(new Code("1234567"));
+            ChiikimitchakugataKaigorojinfukushishisetsuShisetsutoKubun sut = new ChiikimitchakugataKaigorojinfukushishisetsuShisetsutoKubun(new Code("1234567"));
             assertThat(sut.getRyakusho(), is(new RString("地域密着型介護老人福祉施設_施設等の区分")));
         }
     }

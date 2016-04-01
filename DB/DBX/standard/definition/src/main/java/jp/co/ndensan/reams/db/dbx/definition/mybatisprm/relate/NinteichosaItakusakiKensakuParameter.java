@@ -12,6 +12,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
  * 認定調査委託先マスタを特定するためのMyBatis用パラメータクラスです。
  */
 @lombok.Getter
+@SuppressWarnings("PMD.UnusedPrivateField")
 public final class NinteichosaItakusakiKensakuParameter {
 
     private final boolean jokyoFlag;

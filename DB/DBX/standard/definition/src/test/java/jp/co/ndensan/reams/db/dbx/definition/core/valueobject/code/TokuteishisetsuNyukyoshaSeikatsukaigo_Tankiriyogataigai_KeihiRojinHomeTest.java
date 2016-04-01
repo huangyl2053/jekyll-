@@ -1,6 +1,6 @@
 package  jp.co.ndensan.reams.db.dbx.definition.core.valueobject.code;
 
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.code.TokuteishisetsuNyukyoshaSeikatsukaigo_Tankiriyogataigai_KeihiRojinHome;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.code.TokuteishisetsuNyukyoshaSeikatsukaigoTankiriyogataigaiKeihiRojinHome;
 import jp.co.ndensan.reams.db.dbx.testhelper.DbxTestBase;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
@@ -15,18 +15,18 @@ import org.junit.experimental.runners.Enclosed;
 import org.junit.runner.RunWith;
 
 /**
- * TokuteishisetsuNyukyoshaSeikatsukaigo_Tankiriyogataigai_KeihiRojinHomeのテストクラスです。
+ * TokuteishisetsuNyukyoshaSeikatsukaigoTankiriyogataigaiKeihiRojinHomeのテストクラスです。
  *
  * @author LDNS 顧偉剛
  */
 @RunWith(Enclosed.class)
 public class TokuteishisetsuNyukyoshaSeikatsukaigo_Tankiriyogataigai_KeihiRojinHomeTest extends DbxTestBase {
 
-    private static TokuteishisetsuNyukyoshaSeikatsukaigo_Tankiriyogataigai_KeihiRojinHome sut;
+    private static TokuteishisetsuNyukyoshaSeikatsukaigoTankiriyogataigaiKeihiRojinHome sut;
 
     @BeforeClass
     public static void setUp() {
-        sut = new TokuteishisetsuNyukyoshaSeikatsukaigo_Tankiriyogataigai_KeihiRojinHome(new RString("10"));
+        sut = new TokuteishisetsuNyukyoshaSeikatsukaigoTankiriyogataigaiKeihiRojinHome(new RString("10"));
     }
 
     /**
@@ -59,13 +59,13 @@ public class TokuteishisetsuNyukyoshaSeikatsukaigo_Tankiriyogataigai_KeihiRojinH
 
         @Test
         public void LDNS_Objectのcodeとコンストラクタのcodeが不一致の場合_equalsは_falseを返す() {
-            TokuteishisetsuNyukyoshaSeikatsukaigo_Tankiriyogataigai_KeihiRojinHome sut2 = new TokuteishisetsuNyukyoshaSeikatsukaigo_Tankiriyogataigai_KeihiRojinHome(new RString("90"));
+            TokuteishisetsuNyukyoshaSeikatsukaigoTankiriyogataigaiKeihiRojinHome sut2 = new TokuteishisetsuNyukyoshaSeikatsukaigoTankiriyogataigaiKeihiRojinHome(new RString("90"));
             assertFalse(sut.equals(sut2));
         }
 
         @Test
         public void LDNS_Object値とコンストラクタ値が一致の場合_equalsは_trueを返す() {
-            assertTrue(sut.equals(new TokuteishisetsuNyukyoshaSeikatsukaigo_Tankiriyogataigai_KeihiRojinHome(new RString("10"))));
+            assertTrue(sut.equals(new TokuteishisetsuNyukyoshaSeikatsukaigoTankiriyogataigaiKeihiRojinHome(new RString("10"))));
         }
 
     }
@@ -78,13 +78,13 @@ public class TokuteishisetsuNyukyoshaSeikatsukaigo_Tankiriyogataigai_KeihiRojinH
 
         @Test
         public void LDNS_codeがnullの場合_toStringは_emptyを返す() {
-            TokuteishisetsuNyukyoshaSeikatsukaigo_Tankiriyogataigai_KeihiRojinHome sut = new TokuteishisetsuNyukyoshaSeikatsukaigo_Tankiriyogataigai_KeihiRojinHome((Code) null);
+            TokuteishisetsuNyukyoshaSeikatsukaigoTankiriyogataigaiKeihiRojinHome sut = new TokuteishisetsuNyukyoshaSeikatsukaigoTankiriyogataigaiKeihiRojinHome((Code) null);
             assertThat(sut.toString(), is(RString.EMPTY.toString()));
         }
 
         @Test
         public void LDNS_codeが1234567の場合_toStringは_1234567を返す() {
-            TokuteishisetsuNyukyoshaSeikatsukaigo_Tankiriyogataigai_KeihiRojinHome sut = new TokuteishisetsuNyukyoshaSeikatsukaigo_Tankiriyogataigai_KeihiRojinHome(new Code("1234567"));
+            TokuteishisetsuNyukyoshaSeikatsukaigoTankiriyogataigaiKeihiRojinHome sut = new TokuteishisetsuNyukyoshaSeikatsukaigoTankiriyogataigaiKeihiRojinHome(new Code("1234567"));
             assertThat(sut.toString(), is("1234567"));
         }
     }
@@ -97,7 +97,7 @@ public class TokuteishisetsuNyukyoshaSeikatsukaigo_Tankiriyogataigai_KeihiRojinH
 
         @Test
         public void LDNS_設定した対象とコンストラクタ同じの場合_hashCodeは_同じhashCodeを返す() {
-            TokuteishisetsuNyukyoshaSeikatsukaigo_Tankiriyogataigai_KeihiRojinHome sut2 = new TokuteishisetsuNyukyoshaSeikatsukaigo_Tankiriyogataigai_KeihiRojinHome(new RString("10"));
+            TokuteishisetsuNyukyoshaSeikatsukaigoTankiriyogataigaiKeihiRojinHome sut2 = new TokuteishisetsuNyukyoshaSeikatsukaigoTankiriyogataigaiKeihiRojinHome(new RString("10"));
             assertThat(sut.hashCode(), is(sut2.hashCode()));
         }
     }
@@ -134,13 +134,13 @@ public class TokuteishisetsuNyukyoshaSeikatsukaigo_Tankiriyogataigai_KeihiRojinH
 
         @Test
         public void LDNS_入力のパラメタがnull場合_getMeishoは_emptyを返す() {
-            TokuteishisetsuNyukyoshaSeikatsukaigo_Tankiriyogataigai_KeihiRojinHome sut = new TokuteishisetsuNyukyoshaSeikatsukaigo_Tankiriyogataigai_KeihiRojinHome((Code) null);
+            TokuteishisetsuNyukyoshaSeikatsukaigoTankiriyogataigaiKeihiRojinHome sut = new TokuteishisetsuNyukyoshaSeikatsukaigoTankiriyogataigaiKeihiRojinHome((Code) null);
             assertThat(sut.getMeisho(new FlexibleDate("20150303")), is(RString.EMPTY));
         }
 
         @Test
         public void LDNS_入力のパラメタがnull以外の場合_getMeishoは_特定施設入居者生活介護_短期利用型以外_軽費老人ホームを返す() {
-            TokuteishisetsuNyukyoshaSeikatsukaigo_Tankiriyogataigai_KeihiRojinHome sut = new TokuteishisetsuNyukyoshaSeikatsukaigo_Tankiriyogataigai_KeihiRojinHome(new Code("1234567"));
+            TokuteishisetsuNyukyoshaSeikatsukaigoTankiriyogataigaiKeihiRojinHome sut = new TokuteishisetsuNyukyoshaSeikatsukaigoTankiriyogataigaiKeihiRojinHome(new Code("1234567"));
             assertThat(sut.getMeisho(new FlexibleDate("20150303")), is(new RString("特定施設入居者生活介護_短期利用型以外_軽費老人ホーム")));
         }
     }
@@ -153,13 +153,13 @@ public class TokuteishisetsuNyukyoshaSeikatsukaigo_Tankiriyogataigai_KeihiRojinH
 
         @Test
         public void LDNS_codeがnull場合_getMeishoは_emptyを返す() {
-            TokuteishisetsuNyukyoshaSeikatsukaigo_Tankiriyogataigai_KeihiRojinHome sut = new TokuteishisetsuNyukyoshaSeikatsukaigo_Tankiriyogataigai_KeihiRojinHome((Code) null);
+            TokuteishisetsuNyukyoshaSeikatsukaigoTankiriyogataigaiKeihiRojinHome sut = new TokuteishisetsuNyukyoshaSeikatsukaigoTankiriyogataigaiKeihiRojinHome((Code) null);
             assertThat(sut.getMeisho(), is(RString.EMPTY));
         }
 
         @Test
         public void LDNS_codeがnull以外の場合_getMeishoは_特定施設入居者生活介護_短期利用型以外_軽費老人ホームを返す() {
-            TokuteishisetsuNyukyoshaSeikatsukaigo_Tankiriyogataigai_KeihiRojinHome sut = new TokuteishisetsuNyukyoshaSeikatsukaigo_Tankiriyogataigai_KeihiRojinHome(new Code("1234567"));
+            TokuteishisetsuNyukyoshaSeikatsukaigoTankiriyogataigaiKeihiRojinHome sut = new TokuteishisetsuNyukyoshaSeikatsukaigoTankiriyogataigaiKeihiRojinHome(new Code("1234567"));
             assertThat(sut.getMeisho(), is(new RString("特定施設入居者生活介護_短期利用型以外_軽費老人ホーム")));
         }
     }
@@ -172,13 +172,13 @@ public class TokuteishisetsuNyukyoshaSeikatsukaigo_Tankiriyogataigai_KeihiRojinH
 
         @Test
         public void LDNS_入力のパラメタがnull場合_getRyakushoは_emptyを返す() {
-            TokuteishisetsuNyukyoshaSeikatsukaigo_Tankiriyogataigai_KeihiRojinHome sut = new TokuteishisetsuNyukyoshaSeikatsukaigo_Tankiriyogataigai_KeihiRojinHome((Code) null);
+            TokuteishisetsuNyukyoshaSeikatsukaigoTankiriyogataigaiKeihiRojinHome sut = new TokuteishisetsuNyukyoshaSeikatsukaigoTankiriyogataigaiKeihiRojinHome((Code) null);
             assertThat(sut.getRyakusho(new FlexibleDate("20150303")), is(RString.EMPTY));
         }
 
         @Test
         public void LDNS_入力のパラメタがnull以外の場合_getRyakushoは_特定施設入居者生活介護_短期利用型以外_軽費老人ホームを返す() {
-            TokuteishisetsuNyukyoshaSeikatsukaigo_Tankiriyogataigai_KeihiRojinHome sut = new TokuteishisetsuNyukyoshaSeikatsukaigo_Tankiriyogataigai_KeihiRojinHome(new Code("1234567"));
+            TokuteishisetsuNyukyoshaSeikatsukaigoTankiriyogataigaiKeihiRojinHome sut = new TokuteishisetsuNyukyoshaSeikatsukaigoTankiriyogataigaiKeihiRojinHome(new Code("1234567"));
             assertThat(sut.getRyakusho(new FlexibleDate("20150303")), is(new RString("特定施設入居者生活介護_短期利用型以外_軽費老人ホーム")));
         }
     }
@@ -191,13 +191,13 @@ public class TokuteishisetsuNyukyoshaSeikatsukaigo_Tankiriyogataigai_KeihiRojinH
 
         @Test
         public void LDNS_codeがnull場合_getRyakushoは_emptyを返す() {
-            TokuteishisetsuNyukyoshaSeikatsukaigo_Tankiriyogataigai_KeihiRojinHome sut = new TokuteishisetsuNyukyoshaSeikatsukaigo_Tankiriyogataigai_KeihiRojinHome((Code) null);
+            TokuteishisetsuNyukyoshaSeikatsukaigoTankiriyogataigaiKeihiRojinHome sut = new TokuteishisetsuNyukyoshaSeikatsukaigoTankiriyogataigaiKeihiRojinHome((Code) null);
             assertThat(sut.getRyakusho(), is(RString.EMPTY));
         }
 
         @Test
         public void LDNS_codeがnull以外の場合_getRyakushoは_特定施設入居者生活介護_短期利用型以外_軽費老人ホームを返す() {
-            TokuteishisetsuNyukyoshaSeikatsukaigo_Tankiriyogataigai_KeihiRojinHome sut = new TokuteishisetsuNyukyoshaSeikatsukaigo_Tankiriyogataigai_KeihiRojinHome(new Code("1234567"));
+            TokuteishisetsuNyukyoshaSeikatsukaigoTankiriyogataigaiKeihiRojinHome sut = new TokuteishisetsuNyukyoshaSeikatsukaigoTankiriyogataigaiKeihiRojinHome(new Code("1234567"));
             assertThat(sut.getRyakusho(), is(new RString("特定施設入居者生活介護_短期利用型以外_軽費老人ホーム")));
         }
     }

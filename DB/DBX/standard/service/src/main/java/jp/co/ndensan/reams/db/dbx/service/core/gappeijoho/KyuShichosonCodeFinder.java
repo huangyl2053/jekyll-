@@ -4,6 +4,7 @@ import java.util.List;
 import jp.co.ndensan.reams.db.dbx.business.config.kyotsu.gappeijohokanri.GappeiJohoKanriConfig;
 import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.DonyuKeitaiCode;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HokenshaNo;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShoKisaiHokenshaNo;
 import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT7051KoseiShichosonMasterEntity;
 import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT7055GappeiJohoEntity;
 import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT7056GappeiShichosonEntity;
@@ -148,7 +149,9 @@ public class KyuShichosonCodeFinder {
                 for (DbT7051KoseiShichosonMasterEntity koseiShichosonMasterEntity : dbT7051KoseiShichosonEntitys) {
                     DbT7056GappeiShichosonEntity gappeiShichosonEntity = new DbT7056GappeiShichosonEntity();
                     gappeiShichosonEntity.setKyuShichosonCode(koseiShichosonMasterEntity.getShichosonCode());
-                    gappeiShichosonEntity.setKyuHokenshaNo(new HokenshaNo(koseiShichosonMasterEntity.getUnyoHokenshaNo().value()));
+                    ShoKisaiHokenshaNo unyoHokenshaNo = koseiShichosonMasterEntity.getUnyoHokenshaNo();
+                    gappeiShichosonEntity.setKyuHokenshaNo(unyoHokenshaNo == null ? new HokenshaNo(RString.EMPTY)
+                            : new HokenshaNo(unyoHokenshaNo.value()));
                     gappeiShichosonEntity.setKyuShichosonMeisho(koseiShichosonMasterEntity.getShichosonMeisho());
                     entity.getEntitys().add(gappeiShichosonEntity);
                 }
@@ -184,7 +187,9 @@ public class KyuShichosonCodeFinder {
                 if (!koseiShichosonMasterEntity.getShichosonCode().equals(gappeiJohoEntity.getShichosonCode())) {
                     DbT7056GappeiShichosonEntity gappeiShichosonEntity = new DbT7056GappeiShichosonEntity();
                     gappeiShichosonEntity.setKyuShichosonCode(koseiShichosonMasterEntity.getShichosonCode());
-                    gappeiShichosonEntity.setKyuHokenshaNo(new HokenshaNo(koseiShichosonMasterEntity.getUnyoHokenshaNo().value()));
+                    ShoKisaiHokenshaNo unyoHokenshaNo = koseiShichosonMasterEntity.getUnyoHokenshaNo();
+                    gappeiShichosonEntity.setKyuHokenshaNo(unyoHokenshaNo == null ? new HokenshaNo(RString.EMPTY)
+                            : new HokenshaNo(unyoHokenshaNo.value()));
                     gappeiShichosonEntity.setKyuShichosonMeisho(koseiShichosonMasterEntity.getShichosonMeisho());
                     entity.getEntitys().add(gappeiShichosonEntity);
                 }
