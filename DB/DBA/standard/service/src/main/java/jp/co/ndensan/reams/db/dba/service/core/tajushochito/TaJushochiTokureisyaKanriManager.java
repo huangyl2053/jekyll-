@@ -13,14 +13,17 @@ import java.util.List;
 import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dba.business.core.jushochitokurei.shisetsunyutaisho.ShisetsuNyutaisho;
 import jp.co.ndensan.reams.db.dba.business.core.tajushochitokureisyakanri.TaJushochiTokureisyaKanriMaster;
+import jp.co.ndensan.reams.db.dba.business.core.tajushochitokureisyakanri.TashichosonBusiness;
 import jp.co.ndensan.reams.db.dba.definition.mybatis.param.tajushochitokureisyakanri.TaJushochiTokureisyaKanriParameter;
 import jp.co.ndensan.reams.db.dba.entity.db.relate.tajushochitokureisyakan.TaJushochiTokureisyaKanriRelateEntity;
+import jp.co.ndensan.reams.db.dba.entity.db.relate.tajushochitokureisyakan.TashichosonRelateEntity;
 import jp.co.ndensan.reams.db.dba.persistence.db.mapper.relate.tajushochitokureisyakanri.ITaJushochiTokureisyaKanriMapper;
 import jp.co.ndensan.reams.db.dba.service.core.hihokenshadaicho.HihokenshaShikakuShutokuManager;
 import jp.co.ndensan.reams.db.dba.service.core.jushochitokurei.shisetsunyutaisho.ShisetsuNyutaishoManager;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.code.KaigoTatokuKaijoJiyu;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.code.KaigoTatokuTekiyoJiyu;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
+import jp.co.ndensan.reams.db.dbz.business.core.TashichosonJushochiTokurei;
 import jp.co.ndensan.reams.db.dbz.definition.core.enumeratedtype.DaichoType;
 import jp.co.ndensan.reams.db.dbz.definition.core.jigyoshashubetsu.JigyosyaType;
 import jp.co.ndensan.reams.db.dbz.definition.core.shisetsushurui.ShisetsuType;
@@ -41,10 +44,10 @@ import jp.co.ndensan.reams.ua.uax.entity.db.basic.UaFt200FindShikibetsuTaishoEnt
 import jp.co.ndensan.reams.ur.urz.definition.core.shikibetsutaisho.JuminJotai;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.biz.GyomuCode;
+import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 import jp.co.ndensan.reams.uz.uza.util.db.SearchResult;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
@@ -163,6 +166,30 @@ public class TaJushochiTokureisyaKanriManager {
     }
 
     /**
+     * 適用情報リストを取得します。
+     *
+     * @param shikibetsuCode 識別コード
+     * @return 他住所地特例者管理 他住所地特例者管理
+     */
+    @Transaction
+    public TashichosonBusiness get他市町村住所地特例(ShikibetsuCode shikibetsuCode) {
+        requireNonNull(shikibetsuCode, UrSystemErrorMessages.値がnull.getReplacedMessage(識別コード.toString()));
+        TashichosonBusiness tashichosonBusiness = new TashichosonBusiness();
+        ITaJushochiTokureisyaKanriMapper mapper = mapperProvider.create(ITaJushochiTokureisyaKanriMapper.class);
+        TaJushochiTokureisyaKanriParameter parameter
+                = TaJushochiTokureisyaKanriParameter.createParam_TaJushochi(
+                        shikibetsuCode, DaichoType.他市町村住所地特例者.getCode(),
+                        RString.EMPTY, JigyoshaNo.EMPTY, RString.EMPTY);
+        List<TashichosonRelateEntity> entityList = mapper.get他市町村住所地特例(parameter);
+        for (TashichosonRelateEntity tashichosonEntity : entityList) {
+            List<DbT1003TashichosonJushochiTokureiEntity> tokureiEntity = tashichosonEntity.get住所地特例EntityList();
+            List<DbT1004ShisetsuNyutaishoEntity> nyutaishoEntity = tashichosonEntity.get施設入退所EntityLsit();
+            set他市町村住所地特例(tokureiEntity, nyutaishoEntity, tashichosonBusiness);
+        }
+        return tashichosonBusiness;
+    }
+
+    /**
      * 他住所地特例登録処理です。
      *
      * @param entity DbT1003TashichosonJushochiTokureiEntity
@@ -176,22 +203,15 @@ public class TaJushochiTokureisyaKanriManager {
     /**
      * 他住所地特例削除処理です。
      *
-     * @param 識別コード 識別コード
-     * @param 異動日 異動日
-     * @param 枝番 枝番
+     * @param entity DbT1003TashichosonJushochiTokureiEntity
      * @return result 削除件数
      */
     @Transaction
-    public int delTaJushochiTokurei(ShikibetsuCode 識別コード, FlexibleDate 異動日, RString 枝番) {
+    public int delTaJushochiTokurei(DbT1003TashichosonJushochiTokureiEntity entity) {
 
         int result = 0;
-        DbT1003TashichosonJushochiTokureiEntity dbT1003entity = dbT1003Dac.selectByKey(識別コード, 異動日, 枝番);
-        if (dbT1003entity != null) {
-            dbT1003entity.setLogicalDeletedFlag(true);
-            dbT1003entity.setState(EntityDataState.Modified);
-            if (dbT1003Dac.save(dbT1003entity) == 1) {
-                result = 1;
-            }
+        if (dbT1003Dac.save(entity) == 1) {
+            result = 1;
         }
         return result;
     }
@@ -286,16 +306,28 @@ public class TaJushochiTokureisyaKanriManager {
         requireNonNull(識別コード, UrSystemErrorMessages.値がnull.getReplacedMessage(識別コード.toString()));
         DbT1001HihokenshaDaichoEntity dbT1001entity = new DbT1001HihokenshaDaichoEntity();
         UaFt200FindShikibetsuTaishoEntity 宛名情報PSM = select宛名情報PSM(識別コード);
+        LasdecCode 市町村コード = LasdecCode.EMPTY;
+        LasdecCode 旧市町村コード = LasdecCode.EMPTY;
+        FlexibleDate 生年月日 = FlexibleDate.EMPTY;
+        if (宛名情報PSM != null) {
+            市町村コード = 宛名情報PSM.getGenLasdecCode();
+            旧市町村コード = 宛名情報PSM.getKyuLasdecCode();
+            生年月日 = 宛名情報PSM.getSeinengappiYMD();
+        }
         dbT1001entity.setIdoYMD(解除年月日);
         dbT1001entity.setIdoJiyuCode(他特例居住);
-        dbT1001entity.setShichosonCode(宛名情報PSM.getGenLasdecCode());
+        if (市町村コード != null && !市町村コード.isEmpty()) {
+            dbT1001entity.setShichosonCode(市町村コード);
+        }
         dbT1001entity.setShikibetsuCode(識別コード);
         dbT1001entity.setShikakuShutokuJiyuCode(他特例居住);
         dbT1001entity.setShikakuShutokuYMD(解除年月日);
         dbT1001entity.setShikakuShutokuTodokedeYMD(解除届出年月日);
-        dbT1001entity.setKyuShichosonCode(宛名情報PSM.getKyuLasdecCode());
+        if (旧市町村コード != null && !旧市町村コード.isEmpty()) {
+            dbT1001entity.setKyuShichosonCode(旧市町村コード);
+        }
         HihokenshaShikakuShutokuManager.createInstance().saveHihokenshaShutoku(
-                dbT1001entity, DateOfBirthFactory.createInstance(宛名情報PSM.getSeinengappiYMD()));
+                dbT1001entity, DateOfBirthFactory.createInstance(生年月日));
 
     }
 
@@ -318,6 +350,24 @@ public class TaJushochiTokureisyaKanriManager {
                 RString.EMPTY, JigyoshaNo.EMPTY, RString.EMPTY);
         ITaJushochiTokureisyaKanriMapper daichoJohoMapper = mapperProvider.create(ITaJushochiTokureisyaKanriMapper.class);
         return daichoJohoMapper.select宛名情報(parameter);
+    }
+
+    private void set他市町村住所地特例(
+            List<DbT1003TashichosonJushochiTokureiEntity> tokureiEntityList,
+            List<DbT1004ShisetsuNyutaishoEntity> nyutaishoEntityList,
+            TashichosonBusiness tashichosonBusiness) {
+        List<TashichosonJushochiTokurei> 住所地特例List = new ArrayList();
+        for (DbT1003TashichosonJushochiTokureiEntity tokureiEntity : tokureiEntityList) {
+            tokureiEntity.initializeMd5();
+            住所地特例List.add(new TashichosonJushochiTokurei(tokureiEntity));
+            tashichosonBusiness.set住所地特例List(住所地特例List);
+        }
+        List<jp.co.ndensan.reams.db.dbz.business.core.ShisetsuNyutaisho> 施設入退所Lsit = new ArrayList();
+        for (DbT1004ShisetsuNyutaishoEntity nyutaishoEntity : nyutaishoEntityList) {
+            nyutaishoEntity.initializeMd5();
+            施設入退所Lsit.add(new jp.co.ndensan.reams.db.dbz.business.core.ShisetsuNyutaisho(nyutaishoEntity));
+            tashichosonBusiness.set施設入退所Lsit(施設入退所Lsit);
+        }
     }
 
     private static class DateComparator implements Comparator<TaJushochiTokureisyaKanriRelateEntity>, Serializable {

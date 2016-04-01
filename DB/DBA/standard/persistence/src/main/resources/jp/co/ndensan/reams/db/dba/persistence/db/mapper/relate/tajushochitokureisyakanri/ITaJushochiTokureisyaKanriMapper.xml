@@ -191,4 +191,57 @@
         (#{tayishoYMD} <![CDATA[<=]]> tokurei."tekiyoYMD" AND #{tayishoYMD} <![CDATA[<]]> tokurei."kaijoYMD")
         )
     </select>
+    
+    
+    <select id="get他市町村住所地特例" resultMap="ResultMap_TashichosonRelateEntity"
+            parameterType="jp.co.ndensan.reams.db.dba.definition.mybatis.param.tajushochitokureisyakanri.TaJushochiTokureisyaKanriParameter" fetchSize="500">
+        SELECT
+        dbT1003.*,
+        dbT1004.*
+        FROM
+        (
+        SELECT
+        dbT1003Tashichoson.*
+        FROM
+        rgdb."DbT1003TashichosonJushochiTokurei" AS dbT1003Tashichoson,
+        (
+        SELECT
+        dbT1003Tashi."shikibetsuCode" AS "shikibetsuCode",
+        dbT1003Tashi."idoYMD" AS "idoYMD",
+        MAX(dbT1003Tashi."edaNo") AS "edaNo"
+        FROM
+        rgdb."DbT1003TashichosonJushochiTokurei" AS dbT1003Tashi
+        WHERE
+        dbT1003Tashi."shikibetsuCode" = #{shikibetsuCode}
+        AND dbT1003Tashi."logicalDeletedFlag" = FALSE
+        GROUP BY
+        dbT1003Tashi."shikibetsuCode",
+        dbT1003Tashi."idoYMD"
+        ) AS dbT1003TashichosonJushochiTokurei
+        WHERE
+        dbT1003Tashichoson."shikibetsuCode" = dbT1003TashichosonJushochiTokurei."shikibetsuCode"
+        AND dbT1003Tashichoson."idoYMD" = dbT1003TashichosonJushochiTokurei."idoYMD"
+        AND dbT1003Tashichoson."edaNo" = dbT1003TashichosonJushochiTokurei."edaNo"
+        ) AS dbT1003
+        LEFT JOIN rgdb."DbT1004ShisetsuNyutaisho" AS dbT1004
+        ON
+        dbT1004."shikibetsuCode" = dbT1003."shikibetsuCode"
+        LEFT JOIN rgur."UrT0507Hokenja" AS urT0507
+        ON
+        urT0507."hokenjaNo" = dbT1003."sochiHokenshaNo"
+        WHERE
+        dbT1004."daichoShubetsu" = #{psmShikibetsuTaisho}
+        AND urT0507."hokenjaShubetsu" = '08'
+        AND
+        ((dbT1003."kaijoYMD" IS NULL AND (dbT1004."taishoYMD" IS NULL OR dbT1003."tekiyoYMD" <![CDATA[<=]]> dbT1004."taishoYMD"))
+        OR ((dbT1003."kaijoYMD" IS NOT NULL
+        AND ((dbT1004."taishoYMD" IS NULL AND dbT1004."nyushoYMD" <![CDATA[<]]> dbT1003."kaijoYMD")
+        OR (dbT1004."nyushoYMD" <![CDATA[<]]> dbT1003."kaijoYMD" AND dbT1004."taishoYMD" <![CDATA[>]]> dbT1003."tekiyoYMD")))))
+        ORDER BY
+        dbT1003."tekiyoYMD"
+    </select>
+    <resultMap id="ResultMap_TashichosonRelateEntity" type="jp.co.ndensan.reams.db.dba.entity.db.relate.tajushochitokureisyakan.TashichosonRelateEntity" autoMapping="true">
+        <association property="住所地特例EntityList" resultMap="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT1003TashichosonJushochiTokureiMapper.ResultMap_DbT1003TashichosonJushochiTokureiEntity"/>
+        <association property="施設入退所EntityLsit" resultMap="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT1004ShisetsuNyutaishoMapper.ResultMap_DbT1004ShisetsuNyutaishoEntity"/>
+    </resultMap>
 </mapper>

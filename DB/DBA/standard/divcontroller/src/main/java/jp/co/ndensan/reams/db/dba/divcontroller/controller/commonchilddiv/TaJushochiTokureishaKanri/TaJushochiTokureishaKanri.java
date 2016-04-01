@@ -8,7 +8,6 @@ package jp.co.ndensan.reams.db.dba.divcontroller.controller.commonchilddiv.TaJus
 import jp.co.ndensan.reams.db.dba.divcontroller.entity.commonchilddiv.TaJushochiTokureishaKanri.TaJushochiTokureishaKanri.TaJushochiTokureishaKanriDiv;
 import jp.co.ndensan.reams.db.dba.divcontroller.entity.commonchilddiv.TaJushochiTokureishaKanri.TaJushochiTokureishaKanri.TaJushochiTokureishaKanriHandler;
 import jp.co.ndensan.reams.db.dba.divcontroller.entity.commonchilddiv.TaJushochiTokureishaKanri.TaJushochiTokureishaKanri.TaJushochiTokureishaKanriValidationHandler;
-import jp.co.ndensan.reams.db.dbz.definition.core.ViewStateKeys;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrQuestionMessages;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -16,16 +15,11 @@ import jp.co.ndensan.reams.uz.uza.message.MessageDialogSelectedResult;
 import jp.co.ndensan.reams.uz.uza.message.QuestionMessage;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ResponseHolder;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
-import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 
 /**
  * 他住所地特例者管理のクラス。
  */
 public class TaJushochiTokureishaKanri {
-
-    private static final RString 状態_追加 = new RString("追加");
-    private static final RString 状態_修正 = new RString("修正");
-    private static final RString 状態_削除 = new RString("削除");
 
     /**
      * 「過去の履歴を追加する」ボタンを押下する場合、他市町村住所地特例情報入力エリア全項目をクリアします。
@@ -78,7 +72,7 @@ public class TaJushochiTokureishaKanri {
      * @return ResponseData<TaJushochiTokureishaKanriDiv>
      */
     public ResponseData<TaJushochiTokureishaKanriDiv> onClick_onBlur(TaJushochiTokureishaKanriDiv requestDiv) {
-        RString 親画面状態 = ViewStateHolder.get(ViewStateKeys.モード, RString.class);
+        RString 親画面状態 = new RString(requestDiv.getMode_DisplayMode().toString());
         getHandler(requestDiv).onClick_onBlur(親画面状態);
         return ResponseData.of(requestDiv).respond();
     }
@@ -90,19 +84,15 @@ public class TaJushochiTokureishaKanri {
      * @return ResponseData<TaJushochiTokureishaKanriDiv>
      */
     public ResponseData<TaJushochiTokureishaKanriDiv> onClick_Torikeshi(TaJushochiTokureishaKanriDiv requestDiv) {
-        if (!状態_削除.equals(requestDiv.getStrate())
-                || (状態_追加.equals(requestDiv.getStrate()) && !is入力エリア空白(requestDiv))
-                || (状態_修正.equals(requestDiv.getStrate())) && getHandler(requestDiv).isデータ変更()) {
-            if (!ResponseHolder.isReRequest()) {
-                QuestionMessage message = new QuestionMessage(UrQuestionMessages.入力内容の破棄.getMessage().getCode(),
-                        UrQuestionMessages.入力内容の破棄.getMessage().evaluate());
-                return ResponseData.of(requestDiv).addMessage(message).respond();
-            }
-            if (new RString(UrQuestionMessages.入力内容の破棄.getMessage().getCode())
-                    .equals(ResponseHolder.getMessageCode())
-                    && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
-                getHandler(requestDiv).onClick_Torikeshi();
-            }
+        if (!ResponseHolder.isReRequest()) {
+            QuestionMessage message = new QuestionMessage(UrQuestionMessages.入力内容の破棄.getMessage().getCode(),
+                    UrQuestionMessages.入力内容の破棄.getMessage().evaluate());
+            return ResponseData.of(requestDiv).addMessage(message).respond();
+        }
+        if (new RString(UrQuestionMessages.入力内容の破棄.getMessage().getCode())
+                .equals(ResponseHolder.getMessageCode())
+                && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
+            getHandler(requestDiv).onClick_Torikeshi();
         }
         return ResponseData.of(requestDiv).respond();
     }
@@ -114,7 +104,7 @@ public class TaJushochiTokureishaKanri {
      * @return ResponseData<TaJushochiTokureishaKanriDiv>
      */
     public ResponseData<TaJushochiTokureishaKanriDiv> onClick_BtnKakunin(TaJushochiTokureishaKanriDiv requestDiv) {
-        RString 親画面状態 = ViewStateHolder.get(ViewStateKeys.モード, RString.class);
+        RString 親画面状態 = new RString(requestDiv.getMode_DisplayMode().toString());
         ValidationMessageControlPairs vallidation = getValidationHandler(requestDiv).validateForUpdate(親画面状態);
         if (vallidation.iterator().hasNext()) {
             return ResponseData.of(requestDiv).addValidationMessages(vallidation).respond();
@@ -139,20 +129,5 @@ public class TaJushochiTokureishaKanri {
 
     private TaJushochiTokureishaKanriValidationHandler getValidationHandler(TaJushochiTokureishaKanriDiv requestDiv) {
         return new TaJushochiTokureishaKanriValidationHandler(requestDiv);
-    }
-
-    private boolean is入力エリア空白(TaJushochiTokureishaKanriDiv requestDiv) {
-        boolean is入力エリア = false;
-        if (requestDiv.getTxtTekiyobi().getValue() == null
-                && requestDiv.getTxtTekiyoTodokedebi() == null
-                && (requestDiv.getDdlTekiyoJiyo().getSelectedValue() == null
-                || requestDiv.getDdlTekiyoJiyo().getSelectedValue().isEmpty())
-                && requestDiv.getTxtKaijyobi().getValue() == null
-                && requestDiv.getTxtKaijyoTodokedebi() == null
-                && (requestDiv.getDdlKaijyoJiyo().getSelectedValue() == null
-                || requestDiv.getDdlKaijyoJiyo().getSelectedValue().isEmpty())) {
-            is入力エリア = true;
-        }
-        return is入力エリア;
     }
 }

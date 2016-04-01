@@ -19,9 +19,9 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
  */
 public class TaJushochiTokureishaKanriValidationHandler {
 
-    private static final RString 状態_修正 = new RString("修正");
-    private static final RString 状態_適用 = new RString("適用");
-    private static final RString 状態_解除 = new RString("解除");
+    private static final RString 状態_修正 = new RString("Teisei");
+    private static final RString 状態_適用 = new RString("Tekiyo");
+    private static final RString 状態_解除 = new RString("Kaijyo");
     private static final RString 状態_削除 = new RString("削除");
     private static final RString メッセージ適用日 = new RString("適用日");
     private final TaJushochiTokureishaKanriDiv div;
@@ -53,7 +53,7 @@ public class TaJushochiTokureishaKanriValidationHandler {
                 if (div.getTxtTekiyobi().getValue() == null) {
                     validPairs.add(new ValidationMessageControlPair(RRVMessages.適用日, div.getTxtTekiyobi()));
                 } else {
-                    if (最新の適用情報.getTekiyoYMD() != null
+                    if (最新の適用情報 != null && 最新の適用情報.getTekiyoYMD().getValue() != null
                             && (!div.getTxtTekiyobi().getValue().isBefore(最新の適用情報.getTekiyoYMD().getValue()))) {
                         validPairs.add(new ValidationMessageControlPair(RRVMessages.適用日と最新の適用情報の整合性チェック, div.getTxtTekiyobi()));
                     }
@@ -92,7 +92,7 @@ public class TaJushochiTokureishaKanriValidationHandler {
                         && !div.getDgJushochiTokureiRireki().getDataSource().isEmpty()) {
                     for (dgJushochiTokureiRireki_Row row : div.getDgJushochiTokureiRireki().getDataSource()) {
                         if (div.getSelectData().equals(new RString(String.valueOf(row.getId())))
-                                || 状態_削除.equals(row.getJyoTai())) {
+                                || 状態_削除.equals(new RString(row.getRowState().toString()))) {
                             continue;
                         }
                         if (row.getKaijoYMD().getValue() == null) {
@@ -125,7 +125,7 @@ public class TaJushochiTokureishaKanriValidationHandler {
                 if (div.getTxtTekiyobi().getValue() == null) {
                     validPairs.add(new ValidationMessageControlPair(RRVMessages.適用日, div.getTxtTekiyobi()));
                 } else {
-                    if (最新の適用情報.getTekiyoYMD() != null
+                    if (最新の適用情報 != null && 最新の適用情報.getTekiyoYMD().getValue() != null
                             && (div.getTxtTekiyobi().getValue().isBefore(最新の適用情報.getTekiyoYMD().getValue()))) {
                         validPairs.add(new ValidationMessageControlPair(RRVMessages.期間が重複));
                     }
@@ -157,7 +157,7 @@ public class TaJushochiTokureishaKanriValidationHandler {
                             || div.getDdlKaijyoJiyo().getSelectedKey().isEmpty()) {
                         validPairs.add(new ValidationMessageControlPair(RRVMessages.解除事由));
                     }
-                    if (最新の適用情報.getKaijoYMD() != null
+                    if (最新の適用情報 != null && 最新の適用情報.getKaijoYMD().getValue() != null
                             && (div.getTxtKaijyobi().getValue().isBefore(最新の適用情報.getKaijoYMD().getValue()))) {
                         validPairs.add(new ValidationMessageControlPair(RRVMessages.入力値が不正, div.getTxtKaijyobi()));
                     }

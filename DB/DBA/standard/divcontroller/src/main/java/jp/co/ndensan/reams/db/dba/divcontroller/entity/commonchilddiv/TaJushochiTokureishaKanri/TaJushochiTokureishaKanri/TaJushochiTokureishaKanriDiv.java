@@ -18,6 +18,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 import java.util.HashSet;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ICommonChildDivMode;
 import jp.co.ndensan.reams.uz.uza.ui.servlets._CommonChildDivModeUtil;
+import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Button;
 import jp.co.ndensan.reams.uz.uza.ui.binding.DataGrid;
 import jp.co.ndensan.reams.uz.uza.ui.binding.DropDownList;
@@ -340,12 +341,19 @@ public class TaJushochiTokureishaKanriDiv extends Panel implements ITaJushochiTo
         return new TaJushochiTokureishaKanriHandler(this);
     }
 
+    @Override
+    public void set状態(RString mode) {
+        setMode_DisplayMode(DisplayMode.getEnum(mode.toString()));
+    }
+
     /**
      * 共通子DIVの初期化処理です。
+     *
+     * @param 識別コード 識別コード
      */
     @Override
-    public void initialize() {
-        getHandler().initialize();
+    public void initialize(ShikibetsuCode 識別コード) {
+        getHandler().initialize(識別コード);
     }
 
     /**

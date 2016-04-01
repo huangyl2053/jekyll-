@@ -7,6 +7,7 @@ package jp.co.ndensan.reams.db.dba.persistence.db.mapper.relate.tajushochitokure
 import java.util.List;
 import jp.co.ndensan.reams.db.dba.definition.mybatis.param.tajushochitokureisyakanri.TaJushochiTokureisyaKanriParameter;
 import jp.co.ndensan.reams.db.dba.entity.db.relate.tajushochitokureisyakan.TaJushochiTokureisyaKanriRelateEntity;
+import jp.co.ndensan.reams.db.dba.entity.db.relate.tajushochitokureisyakan.TashichosonRelateEntity;
 import jp.co.ndensan.reams.ua.uax.entity.db.basic.UaFt200FindShikibetsuTaishoEntity;
 
 /**
@@ -53,4 +54,12 @@ public interface ITaJushochiTokureisyaKanriMapper {
      * @return 施設入退所情報リスト件数
      */
     int select施設入退所情報リスト件数取得(jp.co.ndensan.reams.db.dba.definition.mybatis.param.tajushochitokureisya.TaJushochiTokureisyaKanriParameter 施設入退所情報リスト件数取得);
+
+    /**
+     * 他市町村住所地特例情報取得します。
+     *
+     * @param parameter TaJushochiTokureisyaKanriParameter
+     * @return TashichosonRelateEntity
+     */
+    List<TashichosonRelateEntity> get他市町村住所地特例(TaJushochiTokureisyaKanriParameter parameter);
 }
