@@ -132,7 +132,7 @@
         AND NOT EXISTS(SELECT 1 FROM rgdb."DbT4021ShiharaiHohoHenko" B
         WHERE A."hihokenshaNo" = B."hihokenshaNo"
         AND A."kanriKubun" = B."kanriKubun"
-        AND A."rirekiNo" = B."rirekiNo"
+        AND A."rirekiNo" <![CDATA[<]]> B."rirekiNo"
         )
     </select>
     <select id="get識別コード"

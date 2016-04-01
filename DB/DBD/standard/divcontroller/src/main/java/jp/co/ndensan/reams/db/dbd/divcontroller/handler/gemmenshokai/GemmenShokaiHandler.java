@@ -68,9 +68,13 @@ public class GemmenShokaiHandler {
                 div.getTxtFutanWariai().setValue(負担割合区分_１);
             } else if (負担割合区分_２割.equals(利用者負担割合明細.get負担割合区分())) {
                 div.getTxtFutanWariai().setValue(負担割合区分_２);
+            } else {
+                div.getTxtFutanWariai().setValue(RString.EMPTY);
             }
             div.getTxtFutanWariaiKaishiYMD().setValue(利用者負担割合明細.get有効開始日());
             div.getTxtFutanWariaiShuryoYMD().setValue(利用者負担割合明細.get有効終了日());
+        } else {
+            div.getTxtFutanWariai().setValue(RString.EMPTY);
         }
     }
 
