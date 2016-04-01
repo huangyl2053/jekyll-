@@ -4,19 +4,17 @@ package jp.co.ndensan.reams.db.dba.divcontroller.entity.parentdiv.DBA2020011;
  * このファイルへの変更は、再生成時には損失するため
  * 不正な動作の原因になります。
  */
-
 import com.fasterxml.jackson.annotation.JsonProperty;
-import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.ShisetsuNyutaishoRirekiKanri.IShisetsuNyutaishoRirekiKanriDiv;
-import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.ShisetsuNyutaishoRirekiKanri.ShisetsuNyutaishoRirekiKanriDiv;
+import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.KaigoKanryoMessage.KaigoKanryoMessage.IKaigoKanryoMessageDiv;
+import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.KaigoKanryoMessage.KaigoKanryoMessage.KaigoKanryoMessageDiv;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 
 /**
- * ShisetsuNyutaishoRireki のクラスファイル
- *
+ * KaigoKanryoMessageOya のクラスファイル 
+ * 
  * @author 自動生成
  */
-public class ShisetsuNyutaishoRirekiDiv extends Panel {
-
+public class KaigoKanryoMessageOyaDiv extends Panel {
     // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-01-15_09-59-03">
     /*
      * [ private の作成 ]
@@ -24,8 +22,8 @@ public class ShisetsuNyutaishoRirekiDiv extends Panel {
      * コントロール名とフィールド名を取得する
      * private + コントロール名 + フィールド名 の文字列を作成
      */
-    @JsonProperty("ccdShisetsuNyutaishoRirekiKanri")
-    private ShisetsuNyutaishoRirekiKanriDiv ccdShisetsuNyutaishoRirekiKanri;
+    @JsonProperty("ccdKaigoKanryoMessage")
+    private KaigoKanryoMessageDiv ccdKaigoKanryoMessage;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -34,12 +32,12 @@ public class ShisetsuNyutaishoRirekiDiv extends Panel {
      * フィールド名のGetterとSetter を作成
      */
     /*
-     * getccdShisetsuNyutaishoRirekiKanri
-     * @return ccdShisetsuNyutaishoRirekiKanri
+     * getccdKaigoKanryoMessage
+     * @return ccdKaigoKanryoMessage
      */
-    @JsonProperty("ccdShisetsuNyutaishoRirekiKanri")
-    public IShisetsuNyutaishoRirekiKanriDiv getCcdShisetsuNyutaishoRirekiKanri() {
-        return ccdShisetsuNyutaishoRirekiKanri;
+    @JsonProperty("ccdKaigoKanryoMessage")
+    public IKaigoKanryoMessageDiv getCcdKaigoKanryoMessage() {
+        return ccdKaigoKanryoMessage;
     }
 
     // </editor-fold>

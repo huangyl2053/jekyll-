@@ -1,122 +1,105 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package jp.co.ndensan.reams.db.dba.divcontroller.controller.parentdiv.DBA2020011;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.List;
-import jp.co.ndensan.reams.db.dba.divcontroller.controller.helper.DemoKojin;
+import jp.co.ndensan.reams.db.dba.divcontroller.entity.parentdiv.DBA2020011.DBA2020011StateName;
 import jp.co.ndensan.reams.db.dba.divcontroller.entity.parentdiv.DBA2020011.ShisetsuNyutaishoIdoDiv;
-import jp.co.ndensan.reams.db.dba.divcontroller.entity.parentdiv.DBA2020011.ShisetsuNyutaishoKanriTaishoshaSearchDiv;
-import jp.co.ndensan.reams.db.dbz.divcontroller.entity.parentdiv.shisetsunyutaishorirekikanri.ShisetsuNyutaishoRirekiKanriDiv;
-import jp.co.ndensan.reams.db.dbz.divcontroller.entity.parentdiv.shisetsunyutaishorirekikanri.dgShisetsuNyutaishoRireki_Row;
-import jp.co.ndensan.reams.db.dbz.divcontroller.helper.ControlGenerator;
-import jp.co.ndensan.reams.db.dbz.divcontroller.helper.YamlLoader;
+import jp.co.ndensan.reams.db.dba.divcontroller.handler.parentdiv.DBA2020011.ShisetsuNyutaishoIdoHandler;
+import jp.co.ndensan.reams.db.dbz.divcontroller.viewbox.ViewStateKeys;
+import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
+import jp.co.ndensan.reams.ur.urz.definition.message.UrInformationMessages;
+import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
-import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
+import jp.co.ndensan.reams.uz.uza.exclusion.LockingKey;
+import jp.co.ndensan.reams.uz.uza.exclusion.RealInitialLocker;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.ui.binding.DataGrid;
-import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxFlexibleDate;
+import jp.co.ndensan.reams.uz.uza.message.IMessageGettable;
+import jp.co.ndensan.reams.uz.uza.message.IValidationMessage;
+import jp.co.ndensan.reams.uz.uza.message.Message;
+import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPair;
+import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
+import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 
 /**
- * 施設入退所の異動履歴を表示しているDivのコントローラです。
  *
- * @author n8178 城間篤人
+ * 施設入退所異動Divのコントローラです。QA-1017,QA1018確認中 王暁冬 2016/04/01
  */
 public class ShisetsuNyutaishoIdo {
 
-    private static final RString SHISETSU_NYUTAISHO_RIREKI = new RString("DBA2020011/shisetsuNyutaisho.yml");
+    private static final LockingKey 前排他ロックキー = new LockingKey("ShisetsuNyutaishoIdo");
 
     /**
      * 該当者検索画面でグリッドから対象者を選択した際に実行されます。
      *
-     * @param idoRirekiDiv 施設入退所異動履歴Div
-     * @param searchDiv 対象者検索Div
+     * @param div 施設入退所異動Div
      * @return レスポンス
      */
-    public ResponseData onClick_btnToDecide(ShisetsuNyutaishoIdoDiv idoRirekiDiv, ShisetsuNyutaishoKanriTaishoshaSearchDiv searchDiv) {
+    public ResponseData onLoad(ShisetsuNyutaishoIdoDiv div) {
         ResponseData<ShisetsuNyutaishoIdoDiv> response = new ResponseData<>();
-        ShisetsuNyutaishoRirekiKanriDiv rirekiKanriDiv = idoRirekiDiv.getShisetsuNyutaishoKanri();
-
-        DemoKojin demoKojin = new DemoKojin("第1号");
-        RString hihokenshaNo = demoKojin.getHihokenshaNo();
-        List<HashMap> idoRirekiList = getIdoRireki(hihokenshaNo);
-
-        setIdoRirekiGrid(rirekiKanriDiv.getDgShisetsuNyutaishoRireki(), idoRirekiList);
-
-//        setDdlTaishoShisetsu(idoRirekiDiv);
-//        setRadShisetsuShurui(idoRirekiDiv);
-//        if (idoRirekiList.isEmpty()) {
-//            rirekiKanriDiv.getShisetsuNyutaishoInput().setDisabled(false);
-//            rirekiKanriDiv.getBtnUpdateShisetsuNyutaisho().setDisabled(false);
-//        } else {
-//            rirekiKanriDiv.getShisetsuNyutaishoInput().setDisabled(true);
-//            rirekiKanriDiv.getBtnUpdateShisetsuNyutaisho().setDisabled(true);
-//        }
-        response.data = idoRirekiDiv;
+        ViewStateHolder.put(ViewStateKeys.施設入退所履歴_識別コード, new ShikibetsuCode("000000000022502"));
+        ShikibetsuCode 識別コード = ViewStateHolder.get(ViewStateKeys.施設入退所履歴_識別コード, ShikibetsuCode.class);
+        new ShisetsuNyutaishoIdoHandler(div).initLoad(識別コード);
+        if (!RealInitialLocker.tryGetLock(前排他ロックキー)) {
+            div.setReadOnly(true);
+            ValidationMessageControlPairs validationMessages = new ValidationMessageControlPairs();
+            validationMessages.add(new ValidationMessageControlPair(ShisetsuNyutaishoIdoErrorMessage.排他_他のユーザが使用中));
+            return ResponseData.of(div).addValidationMessages(validationMessages).respond();
+        } else {
+            RealInitialLocker.lock(前排他ロックキー);
+        }
+        response.data = div;
         return response;
     }
 
-//    private void setRadShisetsuShurui(ShisetsuNyutaishoIdoDiv idoRirekiDiv) {
-//        ShisetsuJohoDiv shisetsuJoho = idoRirekiDiv.getShisetsuNyutaishoKanri().getShisetsuNyutaishoInput().getShisetsuJoho();
-//        List<KeyValueDataSource> sourceList = new ArrayList<>();
-//        KeyValueDataSource source1 = new KeyValueDataSource(new RString("kaigoHokenShisetsu"), new RString("介護保険施設"));
-//        KeyValueDataSource source2 = new KeyValueDataSource(new RString("other"), new RString("その他特例施設"));
-//        sourceList.add(source1);
-//        sourceList.add(source2);
-//        shisetsuJoho.getRadShisetsuShurui().setDataSource(sourceList);
-//        shisetsuJoho.getRadShisetsuShurui().setSelectedItem(new RString("kaigoHokenShisetsu"));
-//
-//        shisetsuJoho.getBtnJigyoshaInputGuide().setDisplayNone(false);
-//        shisetsuJoho.getBtnOtherTokureiShisetsuInputGuide().setDisplayNone(true);
-//        shisetsuJoho.getBtnJogaiShisetsuInputGuide().setDisplayNone(true);
-//    }
-//    private void setDdlTaishoShisetsu(ShisetsuNyutaishoIdoDiv idoRirekiDiv) {
-//        ShisetsuNyutaishoInputDiv inputDiv = idoRirekiDiv.getShisetsuNyutaishoKanri().getShisetsuNyutaishoInput();
-//        List<KeyValueDataSource> sourceList = new ArrayList<>();
-//        KeyValueDataSource source1 = new KeyValueDataSource(new RString("kannai"), new RString("管内施設"));
-//        KeyValueDataSource source2 = new KeyValueDataSource(new RString("jutoku"), new RString("住所地特例措置"));
-//        sourceList.add(source1);
-//        sourceList.add(source2);
-//        inputDiv.getDdlTaishoJoho().setDataSource(sourceList);
-//    }
-    private List<HashMap> getIdoRireki(RString hihokenshaNo) {
-        List<HashMap> gaitoshaRirekiList = YamlLoader.DBA.loadAsList(SHISETSU_NYUTAISHO_RIREKI);
-        for (HashMap gaitoshaRireki : gaitoshaRirekiList) {
-            ControlGenerator generator = new ControlGenerator(gaitoshaRireki);
-            if (generator.getAsRString("被保番号").equals(hihokenshaNo)) {
-                return (List<HashMap>) gaitoshaRireki.get("異動履歴");
-            }
-        }
-        return Collections.EMPTY_LIST;
+    /**
+     * 「対象者検索に戻る」ボタンを押下します。
+     *
+     * @param div 施設入退所異動Div
+     * @return レスポンス
+     */
+    public ResponseData onClick_commonButtonBack(ShisetsuNyutaishoIdoDiv div) {
+        RealInitialLocker.release(前排他ロックキー);
+        return ResponseData.of(div).respond();
     }
 
-    private void setIdoRirekiGrid(DataGrid<dgShisetsuNyutaishoRireki_Row> idoRirekiGrid, List<HashMap> idoRirekiList) {
-        List<dgShisetsuNyutaishoRireki_Row> dataSource = new ArrayList<>();
-        for (HashMap gaitosha : idoRirekiList) {
-            dataSource.add(createIdoRirekiRow(gaitosha));
-        }
-        idoRirekiGrid.setDataSource(dataSource);
+    /**
+     * 「資格情報を保存する」ボタンを押下します。
+     *
+     * @param div 施設入退所異動Div
+     * @return レスポンス
+     */
+    public ResponseData onClick_commonButtonUpdate(ShisetsuNyutaishoIdoDiv div) {
+        div.getShisetsuNyutaishoRireki().getCcdShisetsuNyutaishoRirekiKanri().saveShisetsuNyutaisho();
+        RealInitialLocker.release(前排他ロックキー);
+        div.getKaigoKanryoMessageOya().getCcdKaigoKanryoMessage().setSuccessMessage(
+                new RString(UrInformationMessages.保存終了.getMessage().evaluate()));
+        return ResponseData.of(div).setState(DBA2020011StateName.完了状態);
     }
 
-    private dgShisetsuNyutaishoRireki_Row createIdoRirekiRow(HashMap gaitosha) {
-        dgShisetsuNyutaishoRireki_Row row = new dgShisetsuNyutaishoRireki_Row(RString.EMPTY, new TextBoxFlexibleDate(),
-                new TextBoxFlexibleDate(), RString.EMPTY, RString.EMPTY, RString.EMPTY, RString.EMPTY, RString.EMPTY, RString.EMPTY, RString.EMPTY);
-        row.getNyushoDate().setValue(new FlexibleDate(gaitosha.get("入所日").toString()));
-//        if (gaitosha.get("退所日") != null) {
-//            row.getTaishoDate().setValue(new FlexibleDate(gaitosha.get("退所日").toString()));
-//        }
-//        row.setShisetsuCode(new RString(gaitosha.get("施設コード").toString()));
-//        row.setShisetsuMeisho(new RString(gaitosha.get("施設名称").toString()));
-//        row.setShisetsu(row.getShisetsuCode().concat(":").concat(row.getShisetsuMeisho()));
-//        row.setShisetsuShuruiKey(new RString(gaitosha.get("施設種類Key").toString()));
-//        row.setShisetsuShurui(new RString(gaitosha.get("施設種類").toString()));
-//        row.setTaishoJohoKey(new RString(gaitosha.get("対象情報Key").toString()));
-//        row.setTaishoJoho(new RString(gaitosha.get("対象情報").toString()));
-        return row;
+    /**
+     * 完了」ボタンを押下します。
+     *
+     * @param div 施設入退所異動Div
+     * @return レスポンス
+     */
+    public ResponseData onClick_commonButtonUpdateDone(ShisetsuNyutaishoIdoDiv div) {
+
+        RealInitialLocker.release(前排他ロックキー);
+        onLoad(div);
+        return ResponseData.of(div).setState(DBA2020011StateName.初期状態);
+    }
+
+    private enum ShisetsuNyutaishoIdoErrorMessage implements IValidationMessage {
+
+        排他_他のユーザが使用中(UrErrorMessages.排他_他のユーザが使用中);
+
+        private final Message message;
+
+        private ShisetsuNyutaishoIdoErrorMessage(IMessageGettable message) {
+            this.message = message.getMessage();
+        }
+
+        @Override
+        public Message getMessage() {
+            return message;
+        }
     }
 }
