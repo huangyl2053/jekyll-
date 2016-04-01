@@ -23,6 +23,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.message.InformationMessage;
 import jp.co.ndensan.reams.uz.uza.message.MessageDialogSelectedResult;
 import jp.co.ndensan.reams.uz.uza.message.QuestionMessage;
+import jp.co.ndensan.reams.uz.uza.message.WarningMessage;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ResponseHolder;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 
@@ -52,19 +53,19 @@ public class YoshikiNinonanaHosei {
      */
     public ResponseData<YoshikiNinonanaHoseiDiv> onLoad(YoshikiNinonanaHoseiDiv div) {
         YoshikiNinonanaHoseiHandler handler = getHandler(div);
-        JigyoHokokuGeppoParameter par = new JigyoHokokuGeppoParameter();
-        par.set報告年月(new RString("201503"));
-        par.set集計年月(new RString("201504"));
-        par.set保険者コード(new RString("0010"));
-        par.set市町村名称(new RString("張三"));
-        ViewStateHolder.put(ViewStateKeys.事業報告基本, par);
+//        JigyoHokokuGeppoParameter par = new JigyoHokokuGeppoParameter();
+//        par.set報告年月(new RString("201503"));
+//        par.set集計年月(new RString("201504"));
+//        par.set保険者コード(new RString("0010"));
+//        par.set市町村名称(new RString("張三"));
+//        ViewStateHolder.put(ViewStateKeys.事業報告基本, par);
         JigyoHokokuGeppoParameter 引き継ぎデータ = ViewStateHolder.get(ViewStateKeys.事業報告基本,
                 JigyoHokokuGeppoParameter.class);
-//        RString 状態 = ViewStateHolder.get(ViewStateKeys.状態, RString.class);
-        RString 状態 = new RString("修正");
+        RString 状態 = ViewStateHolder.get(ViewStateKeys.状態, RString.class);
+//        RString 状態 = new RString("修正");
         ViewStateHolder.put(ViewStateKeys.状態, 状態);
-        RString 様式種類 = new RString("039");
-//        RString 様式種類 = 引き継ぎデータ.get行様式種類コード();
+//        RString 様式種類 = new RString("039");
+        RString 様式種類 = 引き継ぎデータ.get行様式種類コード();
         handler.setViewState(引き継ぎデータ);
         handler.onLoad(引き継ぎデータ, 様式種類);
         if (削除.equals(ViewStateHolder.get(ViewStateKeys.状態, RString.class))) {
@@ -102,28 +103,13 @@ public class YoshikiNinonanaHosei {
      */
     public ResponseData<YoshikiNinonanaHoseiDiv> onClick_btnModUpdate(YoshikiNinonanaHoseiDiv div) {
 //        RString 状態 = ViewStateHolder.get(ViewStateKeys.状態, RString.class);
-        RString 様式種類 = new RString("039");
-        JigyoHokokuGeppoParameter 引き継ぎデータ = ViewStateHolder.get(
-                ViewStateKeys.事業報告基本, JigyoHokokuGeppoParameter.class);
+//        RString 様式種類 = new RString("039");
+        JigyoHokokuGeppoParameter 引き継ぎデータ = ViewStateHolder.get(ViewStateKeys.事業報告基本,
+                JigyoHokokuGeppoParameter.class);
+        RString 様式種類 = 引き継ぎデータ.get行様式種類コード();
         YoshikiNinonanaHoseiHandler handler = getHandler(div);
         if (削除.equals(ViewStateHolder.get(ViewStateKeys.状態, RString.class)) && !ResponseHolder.isReRequest()) {
-            if (様式種類.equalsIgnoreCase(様式種類_039)
-                    || 様式種類.equalsIgnoreCase(様式種類_139)
-                    || 様式種類.equalsIgnoreCase(様式種類_239)) {
-                handler.delete削除状態1(引き継ぎデータ);
-                InformationMessage message = new InformationMessage(
-                        UrInformationMessages.正常終了.getMessage().getCode(),
-                        UrInformationMessages.正常終了.getMessage().replace(MSG_SAKUJO.toString()).evaluate());
-                return ResponseData.of(div).addMessage(message).respond();
-            } else if (様式種類.equalsIgnoreCase(様式種類_040)
-                    || 様式種類.equalsIgnoreCase(様式種類_140)
-                    || 様式種類.equalsIgnoreCase(様式種類_240)) {
-                handler.delete削除状態2(引き継ぎデータ);
-                InformationMessage message = new InformationMessage(
-                        UrInformationMessages.正常終了.getMessage().getCode(),
-                        UrInformationMessages.正常終了.getMessage().replace(MSG_SAKUJO.toString()).evaluate());
-                return ResponseData.of(div).addMessage(message).respond();
-            }
+            削除状態処理(引き継ぎデータ, div);
         }
         List<JigyoHokokuTokeiData> 修正データリスト = handler.get修正データリスト(引き継ぎデータ, 様式種類);
 
@@ -131,13 +117,25 @@ public class YoshikiNinonanaHosei {
             throw new ApplicationException(UrErrorMessages.編集なしで更新不可.getMessage());
         }
 
-        if (handler.is整合性チェック_NG()) {
-            get処理実行の確認(div);
-        } else if (!ResponseHolder.isReRequest()) {
+        if (handler.is整合性チェック_NG() && !ResponseHolder.isReRequest()) {
+            WarningMessage message = new WarningMessage(UrWarningMessages.相違.getMessage().getCode(),
+                    UrWarningMessages.相違.getMessage().replace(
+                            MSG_JI.toString(), MSG_JIEGUO.toString()).evaluate());
+            return ResponseData.of(div).addMessage(message).respond();
+
+        }
+        if (new RString(UrWarningMessages.相違.getMessage().getCode()).equals(ResponseHolder.getMessageCode())
+                && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
             QuestionMessage message = new QuestionMessage(UrQuestionMessages.処理実行の確認.getMessage().getCode(),
                     UrQuestionMessages.処理実行の確認.getMessage().evaluate());
             return ResponseData.of(div).addMessage(message).respond();
         }
+        if (!ResponseHolder.isReRequest()) {
+            QuestionMessage message = new QuestionMessage(UrQuestionMessages.処理実行の確認.getMessage().getCode(),
+                    UrQuestionMessages.処理実行の確認.getMessage().evaluate());
+            return ResponseData.of(div).addMessage(message).respond();
+        }
+
         if (new RString(UrQuestionMessages.処理実行の確認.getMessage().getCode()).equals(ResponseHolder.getMessageCode())
                 && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
             handler.update(修正データリスト);
@@ -146,7 +144,6 @@ public class YoshikiNinonanaHosei {
                     UrInformationMessages.正常終了.getMessage().replace(MSG_KOUSIN.toString()).evaluate());
             return ResponseData.of(div).addMessage(message).respond();
         }
-
         if (new RString(UrInformationMessages.正常終了.getMessage().getCode()).equals(ResponseHolder.getMessageCode())
                 && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
             getMessage(div);
@@ -156,20 +153,27 @@ public class YoshikiNinonanaHosei {
         return ResponseData.of(div).respond();
     }
 
-    private ResponseData<YoshikiNinonanaHoseiDiv> get処理実行の確認(YoshikiNinonanaHoseiDiv div) {
-        if (!ResponseHolder.isReRequest()) {
-            QuestionMessage message = new QuestionMessage(UrWarningMessages.相違.getMessage().getCode(),
-                    UrWarningMessages.相違.getMessage().replace(
-                            MSG_JI.toString(), MSG_JIEGUO.toString()).evaluate());
+    private ResponseData<YoshikiNinonanaHoseiDiv> 削除状態処理(JigyoHokokuGeppoParameter 引き継ぎデータ, YoshikiNinonanaHoseiDiv div) {
+
+        RString 様式種類 = new RString("039");
+        RString 状態 = ViewStateHolder.get(ViewStateKeys.状態, RString.class);
+        YoshikiNinonanaHoseiHandler handler = getHandler(div);
+
+        if (様式種類.equalsIgnoreCase(様式種類_039)
+                || 様式種類.equalsIgnoreCase(様式種類_139)
+                || 様式種類.equalsIgnoreCase(様式種類_239)) {
+            handler.delete削除状態1(引き継ぎデータ);
+            InformationMessage message = new InformationMessage(
+                    UrInformationMessages.正常終了.getMessage().getCode(),
+                    UrInformationMessages.正常終了.getMessage().replace(MSG_SAKUJO.toString()).evaluate());
             return ResponseData.of(div).addMessage(message).respond();
         }
-        if (new RString(UrWarningMessages.相違.getMessage().getCode()).equals(ResponseHolder.getMessageCode())
-                && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
-            QuestionMessage message = new QuestionMessage(UrQuestionMessages.処理実行の確認.getMessage().getCode(),
-                    UrQuestionMessages.処理実行の確認.getMessage().evaluate());
-            return ResponseData.of(div).addMessage(message).respond();
-        }
-        return ResponseData.of(div).respond();
+        handler.delete削除状態2(引き継ぎデータ);
+        InformationMessage message = new InformationMessage(
+                UrInformationMessages.正常終了.getMessage().getCode(),
+                UrInformationMessages.正常終了.getMessage().replace(MSG_SAKUJO.toString()).evaluate());
+        return ResponseData.of(div).addMessage(message).respond();
+
     }
 
     private void getMessage(YoshikiNinonanaHoseiDiv div) {
