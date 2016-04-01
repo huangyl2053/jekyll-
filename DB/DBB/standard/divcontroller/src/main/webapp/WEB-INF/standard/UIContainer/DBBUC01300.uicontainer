@@ -18,24 +18,10 @@
     },
     {
      "id": "2",
-     "type": "ordinal",
+     "type": "end",
      "layoutSubGyomuCode": "DBB",
      "layoutName": "DBB0130001",
      "layoutTitle": "特別徴収平準化計算（特別徴収8月分）",
-     "eventName": "計算",
-     "destroy": false,
-     "condition": "",
-     "toLayoutSubGyomuCode": "DBB",
-     "toLayoutName": "DBB0130002",
-     "toLayoutTitle": "特別徴収平準化計算確定",
-     "toState": "平準化確定"
-    },
-    {
-     "id": "3",
-     "type": "end",
-     "layoutSubGyomuCode": "DBB",
-     "layoutName": "DBB0130002",
-     "layoutTitle": "特別徴収平準化計算確定",
      "eventName": "完了",
      "destroy": false,
      "condition": ""
