@@ -14,7 +14,6 @@ import jp.co.ndensan.reams.db.dbb.definition.core.ShoriKubun;
 import jp.co.ndensan.reams.db.dbb.definition.core.tsuchisho.notsu.HenshuHaniKubun;
 import jp.co.ndensan.reams.db.dbb.entity.report.karisanteihokenryononyutsuchishoginfuri.KarisanteiHokenryoNonyuTsuchishoGinfuriSource;
 import jp.co.ndensan.reams.ur.urz.entity.report.sofubutsuatesaki.SofubutsuAtesakiSource;
-import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.report.Report;
 import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
@@ -38,7 +37,7 @@ public class KarisanteiHokenryoNonyuTsuchishoGinfuriReport extends Report<Karisa
 
     /**
      *
-     * @param target
+     * @param target KarisanteiHokenryoNonyuTsuchishoGinfuriItem
      * @return KarisanteiHokenryoNonyuTsuchishoGinfuriReport
      * @throws NullPointerException 引数が{@code null}の時
      */
@@ -61,7 +60,7 @@ public class KarisanteiHokenryoNonyuTsuchishoGinfuriReport extends Report<Karisa
         if (is全部の納付額なし(納入通知書期情報リスト)) {
             return;
         }
-        RString 帳票ID = 仮算定納入通知書情報.get帳票ID().getColumnValue();
+//        RString 帳票ID = 仮算定納入通知書情報.get帳票ID().getColumnValue();
         int 銀振印字位置Para = 0;
         int 連番 = 1;
         List<NonyuTsuchiShoKiJoho> 納入通知書期情報リストEdit = new ArrayList<>();
@@ -92,7 +91,8 @@ public class KarisanteiHokenryoNonyuTsuchishoGinfuriReport extends Report<Karisa
      *
      * @return List<KarisanteiHokenryoNonyuTsuchishoGinfuriReport>
      */
-    public List<KarisanteiHokenryoNonyuTsuchishoGinfuriReport> devidedByPage() {//TODO
+    public List<KarisanteiHokenryoNonyuTsuchishoGinfuriReport> devidedByPage() {
+        // TODO
         KariSanteiNonyuTsuchiShoJoho 仮算定納入通知書情報 = target.get仮算定納入通知書情報();
         List<NonyuTsuchiShoKiJoho> 納入通知書期情報リスト = 仮算定納入通知書情報.get納入通知書期情報リスト();
         List<KarisanteiHokenryoNonyuTsuchishoGinfuriReport> reportLst = new ArrayList<>();

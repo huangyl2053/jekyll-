@@ -167,6 +167,12 @@ public class ChoshuYuyoBuilder {
         return new ChoshuYuyo(entity, id);
     }
 
+    /**
+     * ChoshuYuyoの編集を行うビルダークラスをセットメソッドです。
+     *
+     * @param createKibetsuChoshuYuyo 介護期別徴収猶予を管理するクラス
+     * @return ChoshuYuyoの編集を行うビルダークラス。
+     */
     public ChoshuYuyoBuilder setKibetsuChoshuYuyo(KibetsuChoshuYuyo createKibetsuChoshuYuyo) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }

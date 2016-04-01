@@ -26,11 +26,18 @@ import jp.co.ndensan.reams.uz.uza.math.Decimal;
 
 /**
  *
- * 保険料納入通知書（仮算定）【ブックタイプ】納付書連帳 （口振依頼あり）通知書_連帳 KarisanteiNonyuTsuchishoBookFuriKaeAriRenchoCoverEditor
+ * 保険料納入通知書（仮算定）【ブックタイプ】納付書連帳 （口振依頼あり）通知書_連帳
+ * KarisanteiNonyuTsuchishoBookFuriKaeAriRenchoCoverEditor
  */
 public class KarisanteiNonyuTsuchishoBookFuriKaeAriRenchoCoverEditor
         implements IKarisanteiNonyuTsuchishoBookFuriKaeAriRenchoCoverEditor {
 
+    private static final int INT1 = 1;
+    private static final int INT2 = 2;
+    private static final int INT3 = 3;
+    private static final int INT4 = 4;
+    private static final int INT5 = 5;
+    private static final int INT6 = 6;
     private final KariSanteiNonyuTsuchiShoJoho 仮算定納入通知書情報;
     private final List<NonyuTsuchiShoKiJoho> 納入通知書期情報リスト;
     private final EditedKariSanteiTsuchiShoKyotsu 編集後仮算定通知書共通情報;
@@ -118,15 +125,15 @@ public class KarisanteiNonyuTsuchishoBookFuriKaeAriRenchoCoverEditor
         NonyuTsuchiShoKiJoho 納入通知書期情報リストの一番目
                 = 納入通知書期情報リスト.isEmpty() ? new NonyuTsuchiShoKiJoho() : 納入通知書期情報リスト.get(0);
         NonyuTsuchiShoKiJoho 納入通知書期情報リストの二番目
-                = 納入通知書期情報リスト.size() >= 2 ? 納入通知書期情報リスト.get(1) : new NonyuTsuchiShoKiJoho();
+                = 納入通知書期情報リスト.size() >= INT2 ? 納入通知書期情報リスト.get(INT1) : new NonyuTsuchiShoKiJoho();
         NonyuTsuchiShoKiJoho 納入通知書期情報リストの三番目
-                = 納入通知書期情報リスト.size() >= 3 ? 納入通知書期情報リスト.get(2) : new NonyuTsuchiShoKiJoho();
+                = 納入通知書期情報リスト.size() >= INT3 ? 納入通知書期情報リスト.get(INT2) : new NonyuTsuchiShoKiJoho();
         NonyuTsuchiShoKiJoho 納入通知書期情報リストの四番目
-                = 納入通知書期情報リスト.size() >= 4 ? 納入通知書期情報リスト.get(3) : new NonyuTsuchiShoKiJoho();
+                = 納入通知書期情報リスト.size() >= INT4 ? 納入通知書期情報リスト.get(INT3) : new NonyuTsuchiShoKiJoho();
         NonyuTsuchiShoKiJoho 納入通知書期情報リストの五番目
-                = 納入通知書期情報リスト.size() >= 5 ? 納入通知書期情報リスト.get(4) : new NonyuTsuchiShoKiJoho();
+                = 納入通知書期情報リスト.size() >= INT5 ? 納入通知書期情報リスト.get(INT4) : new NonyuTsuchiShoKiJoho();
         NonyuTsuchiShoKiJoho 納入通知書期情報リストの六番目
-                = 納入通知書期情報リスト.size() >= 6 ? 納入通知書期情報リスト.get(5) : new NonyuTsuchiShoKiJoho();
+                = 納入通知書期情報リスト.size() >= INT6 ? 納入通知書期情報リスト.get(INT5) : new NonyuTsuchiShoKiJoho();
         PrecedingFiscalYearInformation 前年度情報
                 = null == 編集後仮算定通知書共通情報.get前年度情報() ? new PrecedingFiscalYearInformation() : 編集後仮算定通知書共通情報.get前年度情報();
         EditedKariSanteiTsuchiShoKyotsuAfterCorrection 更正後
@@ -186,15 +193,15 @@ public class KarisanteiNonyuTsuchishoBookFuriKaeAriRenchoCoverEditor
         source.kaisanMeisaishoShuryoKi = get最大の月();
         source.keisanMeisaishoNendo1 = 前年度情報.get前年度賦課年度();
         source.keisanMeisaishoShotokuDankai = RStringUtil.convert半角to全角(前年度情報.get前年度保険料段階());
-        source.keisanMeisaishoNendo2 = is算定の基礎は空白(算定の基礎, 1) ? RString.EMPTY : 前年度情報.get前年度賦課年度();
+        source.keisanMeisaishoNendo2 = is算定の基礎は空白(算定の基礎, INT1) ? RString.EMPTY : 前年度情報.get前年度賦課年度();
         source.keisanMeisaishoHokenryoRitsu
-                = is算定の基礎は空白(算定の基礎, 1) ? RString.EMPTY : new RString(前年度情報.get前年度保険料率().toString());
+                = is算定の基礎は空白(算定の基礎, INT1) ? RString.EMPTY : new RString(前年度情報.get前年度保険料率().toString());
         source.keisanMeisaishoNendo3 = is算定の基礎は空白(算定の基礎, 2) ? RString.EMPTY : 前年度情報.get前年度賦課年度();
         source.kaisanMeisaishoNenGaku
-                = is算定の基礎は空白(算定の基礎, 2) ? RString.EMPTY : new RString(前年度情報.get前年度確定介護保険料_年額().toString());
-        source.keisanMeisaishoNendo4 = is算定の基礎は空白(算定の基礎, 3) ? RString.EMPTY : 前年度情報.get前年度賦課年度();
+                = is算定の基礎は空白(算定の基礎, INT2) ? RString.EMPTY : new RString(前年度情報.get前年度確定介護保険料_年額().toString());
+        source.keisanMeisaishoNendo4 = is算定の基礎は空白(算定の基礎, INT3) ? RString.EMPTY : 前年度情報.get前年度賦課年度();
         source.keisanMeisaishoNendo2
-                = is算定の基礎は空白(算定の基礎, 3) ? RString.EMPTY : new RString(前年度情報.get前年度最終期普徴期別介護保険料().toString());
+                = is算定の基礎は空白(算定の基礎, INT3) ? RString.EMPTY : new RString(前年度情報.get前年度最終期普徴期別介護保険料().toString());
         source.keisanMeisaishoKisu = new RString(String.valueOf(編集後仮算定通知書共通情報.get普徴期数()));
         source.keisanMeisaishoGenmenGaku = new RString(更正後.get更正後介護保険料減免額().toString());
         source.kaisanMeisaishoTokuchoGokeiGaku = new RString(更正後.get更正後特徴期別金額合計().toString());
@@ -228,9 +235,9 @@ public class KarisanteiNonyuTsuchishoBookFuriKaeAriRenchoCoverEditor
         Decimal 納期別明細書特徴納付額２ = null == 更正後.get更正後特徴期別金額02() ? Decimal.ZERO : 更正後.get更正後特徴期別金額02();
         Decimal 納期別明細書特徴納付額３ = null == 更正後.get更正後特徴期別金額03() ? Decimal.ZERO : 更正後.get更正後特徴期別金額03();
         Decimal 納期別明細書特徴納付額４ = 納期別明細書特徴納付額１.add(納期別明細書特徴納付額２).add(納期別明細書特徴納付額３);
-        Decimal 納期別明細書特徴納付済額１ = get収入額(特徴収入情報リスト, 1);
-        Decimal 納期別明細書特徴納付済額２ = get収入額(特徴収入情報リスト, 2);
-        Decimal 納期別明細書特徴納付済額３ = get収入額(特徴収入情報リスト, 3);
+        Decimal 納期別明細書特徴納付済額１ = get収入額(特徴収入情報リスト, INT1);
+        Decimal 納期別明細書特徴納付済額２ = get収入額(特徴収入情報リスト, INT2);
+        Decimal 納期別明細書特徴納付済額３ = get収入額(特徴収入情報リスト, INT3);
         Decimal 納期別明細書特徴納付済額４ = 納期別明細書特徴納付済額１.add(納期別明細書特徴納付済額２).add(納期別明細書特徴納付済額３);
         Decimal 納期別明細書特徴差額１ = 納期別明細書特徴納付額１.subtract(納期別明細書特徴納付済額１);
         Decimal 納期別明細書特徴差額２ = 納期別明細書特徴納付額２.subtract(納期別明細書特徴納付済額２);
@@ -312,7 +319,7 @@ public class KarisanteiNonyuTsuchishoBookFuriKaeAriRenchoCoverEditor
         source.pagerenban4
                 = ShoriKubun.バッチ.equals(仮算定納入通知書情報.get処理区分()) ? new RString(String.valueOf(連番)).concat("-4") : new RString("1-4");
         source.noutsuRenban
-                = ShoriKubun.バッチ.equals(仮算定納入通知書情報.get処理区分()) ? new RString(String.valueOf(連番)).padLeft("0", 6) : RString.EMPTY;
+                = ShoriKubun.バッチ.equals(仮算定納入通知書情報.get処理区分()) ? new RString(String.valueOf(連番)).padLeft("0", INT6) : RString.EMPTY;
     }
 
     private RString get普徴期別金額リスト中にX期の金額(List<UniversalPhase> 普徴期別金額リスト, int 期) {
@@ -344,13 +351,13 @@ public class KarisanteiNonyuTsuchishoBookFuriKaeAriRenchoCoverEditor
     private boolean is算定の基礎は空白(SanteiNoKiso 算定の基礎, int 算定の基礎項番) {
         boolean is算定の基礎は空白 = true;
         switch (算定の基礎項番) {
-            case 1:
+            case INT1:
                 is算定の基礎は空白 = null == 算定の基礎.get基礎1();
                 break;
-            case 2:
+            case INT2:
                 is算定の基礎は空白 = null == 算定の基礎.get基礎2();
                 break;
-            case 3:
+            case INT3:
                 is算定の基礎は空白 = null == 算定の基礎.get基礎3();
                 break;
             default:

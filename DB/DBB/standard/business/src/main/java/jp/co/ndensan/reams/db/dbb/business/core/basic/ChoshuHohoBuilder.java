@@ -330,7 +330,7 @@ public class ChoshuHohoBuilder {
     /**
      * 本徴収・基礎年金番号を設定します。
      *
-     * @param 本徴収・基礎年金番号 本徴収・基礎年金番号
+     * @param 本徴収_基礎年金番号 本徴収・基礎年金番号
      * @return {@link ChoshuHohoBuilder}
      */
     public ChoshuHohoBuilder set本徴収_基礎年金番号(RString 本徴収_基礎年金番号) {
@@ -390,7 +390,7 @@ public class ChoshuHohoBuilder {
     /**
      * 翌年度仮徴収・捕捉月を設定します。
      *
-     * @param 翌年度仮徴収・捕捉月 翌年度仮徴収・捕捉月
+     * @param 翌年度仮徴収_捕捉月 翌年度仮徴収・捕捉月
      * @return {@link ChoshuHohoBuilder}
      */
     public ChoshuHohoBuilder set翌年度仮徴収_捕捉月(RString 翌年度仮徴収_捕捉月) {

@@ -15,6 +15,7 @@ import lombok.Value;
  * 介護賦課減免の識別子です。
  */
 @Value
+@SuppressWarnings("PMD.UnusedPrivateField")
 public class GemmenIdentifier implements Serializable {
 
     private final FlexibleYear 調定年度;

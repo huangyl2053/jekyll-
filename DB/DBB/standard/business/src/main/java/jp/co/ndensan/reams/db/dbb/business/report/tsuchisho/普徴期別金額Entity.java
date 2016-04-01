@@ -16,7 +16,7 @@ import jp.co.ndensan.reams.uz.uza.math.Decimal;
 @SuppressWarnings("PMD.UnusedPrivateField")
 public class 普徴期別金額Entity {
 
-    int 期;
-    Decimal 金額;
+    private int 期;
+    private Decimal 金額;
 
 }

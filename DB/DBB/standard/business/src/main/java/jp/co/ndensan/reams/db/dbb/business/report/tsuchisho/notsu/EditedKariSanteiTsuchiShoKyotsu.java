@@ -67,7 +67,8 @@ public class EditedKariSanteiTsuchiShoKyotsu {
     private RString 調定事由２;
     private RString 調定事由３;
     private RString 調定事由４;
-    private List 特徴納期情報リスト;//List<期月>
+    private List 特徴納期情報リスト;
+    //List<期月>
     private List<UniversalSignDeliveryInformation> 普徴納期情報リスト;
     private List<OrdinaryIncomeInformation> 普徴収入情報リスト;
     private int 普徴期数;

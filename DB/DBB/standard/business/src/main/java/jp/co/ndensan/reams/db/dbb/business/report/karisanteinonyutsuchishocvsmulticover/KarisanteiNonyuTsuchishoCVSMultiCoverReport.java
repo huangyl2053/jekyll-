@@ -7,7 +7,7 @@ package jp.co.ndensan.reams.db.dbb.business.report.karisanteinonyutsuchishocvsmu
 
 import java.util.ArrayList;
 import java.util.List;
-import jp.co.ndensan.reams.db.dbb.business.report.NonyuTsuchisho;
+import jp.co.ndensan.reams.db.dbb.business.report.INonyuTsuchisho;
 import jp.co.ndensan.reams.db.dbb.business.report.karisanteinonyutsuchishocvsmultinofusho.KarisanteiNonyuTsuchishoCVSMultiNofushoReport;
 import jp.co.ndensan.reams.db.dbb.business.report.tsuchisho.notsu.KariSanteiNonyuTsuchiShoJoho;
 import jp.co.ndensan.reams.db.dbb.business.report.tsuchisho.notsu.NonyuTsuchiShoKiJoho;
@@ -21,7 +21,7 @@ import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
  * 保険料納入通知書（仮算定）【コンビニマルチ収納タイプ】CoverのReportです。
  *
  */
-public class KarisanteiNonyuTsuchishoCVSMultiCoverReport extends NonyuTsuchisho<KarisanteiNonyuTsuchishoCVSMultiCoverSource> {
+public class KarisanteiNonyuTsuchishoCVSMultiCoverReport extends INonyuTsuchisho<KarisanteiNonyuTsuchishoCVSMultiCoverSource> {
 
     private final KariSanteiNonyuTsuchiShoJoho item;
     //private final RString renchoKubun = new RString("1");
@@ -63,22 +63,15 @@ public class KarisanteiNonyuTsuchishoCVSMultiCoverReport extends NonyuTsuchisho<
     /**
      * devidedByPageメソッド
      *
-     * @return List<NonyuTsuchisho>
+     * @return List<INonyuTsuchisho>
      */
     @Override
-    public List<NonyuTsuchisho> devidedByPage() {
+    public List<INonyuTsuchisho> devidedByPage() {
 
-        List<NonyuTsuchisho> reportLst = new ArrayList<>();
+        List<INonyuTsuchisho> reportLst = new ArrayList<>();
 
         if (item.get納入通知書期情報リスト() != null) {
-            boolean 作成フラグ = true;
-            for (NonyuTsuchiShoKiJoho 納入通知書期情報 : item.get納入通知書期情報リスト()) {
-                if (納入通知書期情報.get納付書納付額欄() != null
-                        && Integer.valueOf(納入通知書期情報.get納付書納付額欄().toString()) > 0) {
-                    作成フラグ = false;
-                    break;
-                }
-            }
+            boolean 作成フラグ = get作成フラグ();
             if (作成フラグ) {
                 return reportLst;
             }
@@ -115,5 +108,17 @@ public class KarisanteiNonyuTsuchishoCVSMultiCoverReport extends NonyuTsuchisho<
             }
         }
         return reportLst;
+    }
+
+    private Boolean get作成フラグ() {
+        boolean 作成フラグ = true;
+        for (NonyuTsuchiShoKiJoho 納入通知書期情報 : item.get納入通知書期情報リスト()) {
+            if (納入通知書期情報.get納付書納付額欄() != null
+                    && Integer.valueOf(納入通知書期情報.get納付書納付額欄().toString()) > 0) {
+                作成フラグ = false;
+                break;
+            }
+        }
+        return 作成フラグ;
     }
 }

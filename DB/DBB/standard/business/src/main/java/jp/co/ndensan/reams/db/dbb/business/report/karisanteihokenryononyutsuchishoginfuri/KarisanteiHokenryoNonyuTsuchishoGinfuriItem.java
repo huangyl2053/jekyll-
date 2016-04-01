@@ -9,8 +9,7 @@ import jp.co.ndensan.reams.db.dbb.business.report.tsuchisho.notsu.KariSanteiNony
 import lombok.Getter;
 
 /**
- *
- * @author wangjie2
+ * 納入通知書の帳票の作成用のクラスです。
  */
 @Getter
 @SuppressWarnings("PMD.UnusedPrivateField")
@@ -18,6 +17,11 @@ public class KarisanteiHokenryoNonyuTsuchishoGinfuriItem {
 
     private final KariSanteiNonyuTsuchiShoJoho 仮算定納入通知書情報;
 
+    /**
+     * コンストラクタです。
+     *
+     * @param 仮算定納入通知書情報 仮算定納入通知書情報
+     */
     public KarisanteiHokenryoNonyuTsuchishoGinfuriItem(KariSanteiNonyuTsuchiShoJoho 仮算定納入通知書情報) {
         this.仮算定納入通知書情報 = 仮算定納入通知書情報;
     }

@@ -9,11 +9,9 @@ import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbb.business.report.tsuchisho.notsu.KariSanteiNonyuTsuchiShoJoho;
 import jp.co.ndensan.reams.db.dbb.business.report.tsuchisho.notsu.NonyuTsuchiShoKiJoho;
-import jp.co.ndensan.reams.db.dbb.definition.core.ShoriKubun;
 import jp.co.ndensan.reams.db.dbb.definition.core.tsuchisho.notsu.HenshuHaniKubun;
 import jp.co.ndensan.reams.db.dbb.entity.report.karisanteihokenryononyutsuchishoginfuri.KarisanteiHokenryoNonyuTsuchishoGinfuriRenchoSource;
 import jp.co.ndensan.reams.ur.urz.entity.report.sofubutsuatesaki.SofubutsuAtesakiSource;
-import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.report.Report;
 import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
@@ -37,7 +35,7 @@ public class KarisanteiHokenryoNonyuTsuchishoGinfuriRenchoReport extends Report<
 
     /**
      *
-     * @param target
+     * @param target KarisanteiHokenryoNonyuTsuchishoGinfuriItem
      * @return KarisanteiHokenryoNonyuTsuchishoGinfuriReport
      * @throws NullPointerException 引数が{@code null}の時
      */
@@ -48,7 +46,7 @@ public class KarisanteiHokenryoNonyuTsuchishoGinfuriRenchoReport extends Report<
     @Override
     public void writeBy(ReportSourceWriter<KarisanteiHokenryoNonyuTsuchishoGinfuriRenchoSource> reportSourceWriter) {
         KariSanteiNonyuTsuchiShoJoho 仮算定納入通知書情報 = target.get仮算定納入通知書情報();
-        ShoriKubun 処理区分 = 仮算定納入通知書情報.get処理区分();
+//        ShoriKubun 処理区分 = 仮算定納入通知書情報.get処理区分();
         List<NonyuTsuchiShoKiJoho> 納入通知書期情報リスト = 仮算定納入通知書情報.get納入通知書期情報リスト();
         //TODO 雛形部品CompNinshoshaを作成する
 //        INinshoshaSourceBuilder iNinshoshaSourceBuilder
@@ -59,7 +57,7 @@ public class KarisanteiHokenryoNonyuTsuchishoGinfuriRenchoReport extends Report<
         if (is全部の納付額なし(納入通知書期情報リスト)) {
             return;
         }
-        RString 帳票ID = 仮算定納入通知書情報.get帳票ID().getColumnValue();
+//        RString 帳票ID = 仮算定納入通知書情報.get帳票ID().getColumnValue();
         int 銀振印字位置Para = 0;
         int 連番 = 1;
         List<NonyuTsuchiShoKiJoho> 納入通知書期情報リストEdit = new ArrayList<>();

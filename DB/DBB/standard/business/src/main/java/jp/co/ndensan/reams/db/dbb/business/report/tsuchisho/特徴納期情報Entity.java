@@ -16,5 +16,5 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 @SuppressWarnings("PMD.UnusedPrivateField")
 public class 特徴納期情報Entity {
 
-    RString 期月;//
+    private RString 期月;
 }

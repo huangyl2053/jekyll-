@@ -6,8 +6,6 @@
 package jp.co.ndensan.reams.db.dbb.business.core.basic;
 
 import java.io.Serializable;
-import jp.co.ndensan.reams.db.dbz.definition.core.valueobject.DankaiIndex;
-import jp.co.ndensan.reams.db.dbz.definition.core.valueobject.RankKubun;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import lombok.Value;
@@ -16,6 +14,7 @@ import lombok.Value;
  * 保険料段階の識別子です。
  */
 @Value
+@SuppressWarnings("PMD.UnusedPrivateField")
 public class HokenryoDankaiIdentifier implements Serializable {
 
     private final FlexibleYear 賦課年度;

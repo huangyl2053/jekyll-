@@ -237,7 +237,8 @@ public class ChoshuYuyo extends ParentModelBase<ChoshuYuyoIdentifier, DbT2006Cho
     }
 
     /**
-     * 保持する介護賦課徴収猶予を削除対象とします。<br/> {@link DbT2006ChoshuYuyoEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば削除状態にします。
+     * 保持する介護賦課徴収猶予を削除対象とします。<br/>
+     * {@link DbT2006ChoshuYuyoEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば削除状態にします。
      *
      * @return 削除対象処理実施後の{@link ChoshuYuyo}
      */
@@ -268,10 +269,16 @@ public class ChoshuYuyo extends ParentModelBase<ChoshuYuyoIdentifier, DbT2006Cho
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
+    @Override
     public ChoshuYuyo modifiedModel() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
+    /**
+     * 介護期別徴収猶予を管理するクラスリストを返します。
+     *
+     * @return 介護期別徴収猶予を管理するクラス
+     */
     public List<KibetsuChoshuYuyo> getKibetsuChoshuYuyoList() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }

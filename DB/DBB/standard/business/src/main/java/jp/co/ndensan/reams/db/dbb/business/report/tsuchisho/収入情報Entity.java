@@ -16,8 +16,8 @@ import jp.co.ndensan.reams.uz.uza.math.Decimal;
 @lombok.Setter
 @SuppressWarnings("PMD.UnusedPrivateField")
 public class 収入情報Entity {
+    //shuunyuujouhou
 
-    RString 期月;//
-    Decimal 収入額;
-
+    private RString 期月;
+    private Decimal 収入額;
 }

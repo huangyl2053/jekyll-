@@ -27,7 +27,8 @@ import jp.co.ndensan.reams.uz.uza.math.Decimal;
 
 /**
  *
- * 保険料納入通知書（仮算定）【ブックタイプ】（口振依頼なし）通知書_連帳 KarisanteiNonyuTsuchishoBookFuriKaeNashiRenchoCoverEditor
+ * 保険料納入通知書（仮算定）【ブックタイプ】（口振依頼なし）通知書_連帳
+ * KarisanteiNonyuTsuchishoBookFuriKaeNashiRenchoCoverEditor
  */
 public class KarisanteiNonyuTsuchishoBookFuriKaeNashiRenchoCoverEditor
         implements IKarisanteiNonyuTsuchishoBookFuriKaeNashiRenchoCoverEditor {
@@ -68,7 +69,7 @@ public class KarisanteiNonyuTsuchishoBookFuriKaeNashiRenchoCoverEditor
         this.連番 = 連番;
         this.ninshoshaSource = ninshoshaSource;
         this.sofubutsuAtesakiSource = sofubutsuAtesakiSource;
-        this.納付書共通 = null == this.仮算定納入通知書情報 ? null : 仮算定納入通知書情報.get納付書共通();
+        this.納付書共通 = new KariSanteiNonyuTsuchiShoJoho().equals(仮算定納入通知書情報) ? null : 仮算定納入通知書情報.get納付書共通();
     }
 
     @Override
@@ -294,7 +295,7 @@ public class KarisanteiNonyuTsuchishoBookFuriKaeNashiRenchoCoverEditor
         Decimal 納期別明細書特徴納付額４ = 納期別明細書特徴納付額１.add(納期別明細書特徴納付額２).add(納期別明細書特徴納付額３);
         Decimal 納期別明細書特徴納付済額１ = get収入額(特徴収入情報リスト, 1);
         Decimal 納期別明細書特徴納付済額２ = get収入額(特徴収入情報リスト, 2);
-        Decimal 納期別明細書特徴納付済額３ = get収入額(特徴収入情報リスト, 3);
+        Decimal 納期別明細書特徴納付済額３ = get収入額(特徴収入情報リスト, INT3);
         Decimal 納期別明細書特徴納付済額４ = 納期別明細書特徴納付済額１.add(納期別明細書特徴納付済額２).add(納期別明細書特徴納付済額３);
         Decimal 納期別明細書特徴差額１ = 納期別明細書特徴納付額１.subtract(納期別明細書特徴納付済額１);
         Decimal 納期別明細書特徴差額２ = 納期別明細書特徴納付額２.subtract(納期別明細書特徴納付済額２);
@@ -407,7 +408,7 @@ public class KarisanteiNonyuTsuchishoBookFuriKaeNashiRenchoCoverEditor
             case 2:
                 is算定の基礎は空白 = null == 算定の基礎.get基礎2();
                 break;
-            case 3:
+            case INT3:
                 is算定の基礎は空白 = null == 算定の基礎.get基礎3();
                 break;
             default:

@@ -16,6 +16,11 @@ public class CompNinshoshaEditor implements IKarisanteiHokenryoNonyuTsuchishoGin
 
     private final NinshoshaSource ninshoshaSource;
 
+    /**
+     * コンストラクタです。
+     *
+     * @param ninshoshaSource NinshoshaSource
+     */
     protected CompNinshoshaEditor(NinshoshaSource ninshoshaSource) {
         this.ninshoshaSource = ninshoshaSource;
     }

@@ -10,6 +10,9 @@ import jp.co.ndensan.reams.db.dbb.entity.report.tokubetsuchoshukaishitsuchishoka
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.report.ReportPropertyBase;
 
+/**
+ * TokubetsuChoshuKaishiTsuchishoKariOverlayB5YokoPropertyクラスです。
+ */
 public class TokubetsuChoshuKaishiTsuchishoKariOverlayB5YokoProperty
         extends ReportPropertyBase<TokubetsuChoshuKaishiTsuchishoKariOverlayB5YokoSource> {
 

@@ -28,7 +28,7 @@ public class HokenryoNonyuTsuchishoBookRenchoNofushoReport extends Report<Hokenr
 
     /**
      *
-     * @param item
+     * @param item HokenryoNonyuTsuchishoBookItem
      * @return HokenryoNonyuTsuchishoBookNofushoReport
      * @throws NullPointerException 引数が{@code null}の時
      */

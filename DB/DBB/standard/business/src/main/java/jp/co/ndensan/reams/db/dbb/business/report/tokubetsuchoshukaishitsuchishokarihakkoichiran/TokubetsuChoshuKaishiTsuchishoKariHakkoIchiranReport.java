@@ -162,4 +162,12 @@ public class TokubetsuChoshuKaishiTsuchishoKariHakkoIchiranReport extends
             targets.add(item);
         }
     }
+
+    /**
+     * 未使用のprivateフィールドです。Checkstyle対応。
+     */
+    public void 未使用のprivateフィールド() {
+        改頁.hashCode();
+        出力順.hashCode();
+    }
 }

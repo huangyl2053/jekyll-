@@ -587,6 +587,11 @@ public class Fuka extends ParentModelBase<FukaIdentifier, DbT2002FukaEntity, Fuk
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
+    /**
+     * 介護期別を管理するクラスリストを返します。
+     *
+     * @return 介護期別を管理するクラスリスト
+     */
     public List<Kibetsu> getKibetsuList() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }

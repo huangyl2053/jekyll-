@@ -36,7 +36,6 @@ import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.EraType;
 import jp.co.ndensan.reams.uz.uza.lang.FillType;
 import jp.co.ndensan.reams.uz.uza.lang.FirstYear;
-import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -53,21 +52,21 @@ public class NonyuTsuchiShoDataHenshu {
     private final RString 空白 = RString.EMPTY;
     private final RString 単位_円 = new RString("円");
     private final RString 口座振替 = new RString("口座振替");
-    private final int 整数1 = 1;
-    private final int 整数2 = 2;
-    private final int 整数3 = 3;
-    private final int 整数4 = 4;
-    private final int 整数5 = 5;
-    private final int 整数6 = 6;
-    private final int 整数7 = 7;
-    private final int 整数8 = 8;
-    private final int 整数9 = 9;
-    private final int 整数10 = 10;
-    private final int 整数11 = 11;
-    private final int 整数12 = 12;
-    private final int 整数13 = 13;
-    private final int 整数14 = 14;
-    private final RString 星10 = new RString("**********");
+    private static final int 整数1 = 1;
+    private static final int 整数2 = 2;
+    private static final int 整数3 = 3;
+    private static final int 整数4 = 4;
+    private static final int 整数5 = 5;
+    private static final int 整数6 = 6;
+    private static final int 整数7 = 7;
+    private static final int 整数8 = 8;
+    private static final int 整数9 = 9;
+    private static final int 整数10 = 10;
+    private static final int 整数11 = 11;
+    private static final int 整数12 = 12;
+    private static final int 整数13 = 13;
+    private static final int 整数14 = 14;
+    private static final RString 星10 = new RString("**********");
 
     /**
      * 仮算定納入通知書情報を作成する。
@@ -102,7 +101,7 @@ public class NonyuTsuchiShoDataHenshu {
         算定基礎情報.set基礎1(基礎1);
         算定基礎情報.set基礎2(基礎2);
         算定基礎情報.set基礎3(基礎3);
-        FlexibleDate 発行日 = 仮算定通知書情報.get発行日();
+//        FlexibleDate 発行日 = 仮算定通知書情報.get発行日();
 //        NofuShoKyotsu 納付書共通 = create納付書共通(
 //                null,
 //                null,

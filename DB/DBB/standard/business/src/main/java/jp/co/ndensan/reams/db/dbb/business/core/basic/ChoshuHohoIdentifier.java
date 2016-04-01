@@ -14,6 +14,7 @@ import lombok.Value;
  * 介護徴収方法の識別子です。
  */
 @Value
+@SuppressWarnings("PMD.UnusedPrivateField")
 public class ChoshuHohoIdentifier implements Serializable {
 
     private final FlexibleYear 賦課年度;

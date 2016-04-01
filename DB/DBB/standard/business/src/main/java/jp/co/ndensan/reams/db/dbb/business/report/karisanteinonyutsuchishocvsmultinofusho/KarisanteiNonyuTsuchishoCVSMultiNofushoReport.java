@@ -6,7 +6,7 @@
 package jp.co.ndensan.reams.db.dbb.business.report.karisanteinonyutsuchishocvsmultinofusho;
 
 import java.util.List;
-import jp.co.ndensan.reams.db.dbb.business.report.NonyuTsuchisho;
+import jp.co.ndensan.reams.db.dbb.business.report.INonyuTsuchisho;
 import jp.co.ndensan.reams.db.dbb.business.report.tsuchisho.notsu.KariSanteiNonyuTsuchiShoJoho;
 import jp.co.ndensan.reams.db.dbb.entity.db.report.karisanteinonyutsuchishocvsmulti.KarisanteiNonyuTsuchishoCVSMultiNofushoSource;
 import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
@@ -15,7 +15,7 @@ import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
  * 保険料納入通知書（仮算定）【コンビニマルチ収納タイプ】納付書のReportです。
  *
  */
-public class KarisanteiNonyuTsuchishoCVSMultiNofushoReport extends NonyuTsuchisho<KarisanteiNonyuTsuchishoCVSMultiNofushoSource> {
+public class KarisanteiNonyuTsuchishoCVSMultiNofushoReport extends INonyuTsuchisho<KarisanteiNonyuTsuchishoCVSMultiNofushoSource> {
 
     private final KariSanteiNonyuTsuchiShoJoho item;
     private final int index;
@@ -54,7 +54,7 @@ public class KarisanteiNonyuTsuchishoCVSMultiNofushoReport extends NonyuTsuchish
     }
 
     @Override
-    public List<NonyuTsuchisho> devidedByPage() {
+    public List<INonyuTsuchisho> devidedByPage() {
         throw new UnsupportedOperationException("Not supported yet.");
     }
 }

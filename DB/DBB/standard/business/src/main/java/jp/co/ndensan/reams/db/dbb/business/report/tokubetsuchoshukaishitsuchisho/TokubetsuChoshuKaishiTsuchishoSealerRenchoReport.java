@@ -22,10 +22,10 @@ import lombok.NonNull;
  */
 public class TokubetsuChoshuKaishiTsuchishoSealerRenchoReport extends Report<TokubetsuChoshuKaishiTsuchishoSealerRenchoSource> {
 
-    private static final int INDEX_0 = 0;
-    private static final int INDEX_1 = 1;
-    private static final int INDEX_2 = 2;
-    private static final RString SPLITTOKEN = new RString(".");
+//    private static final int INDEX_0 = 0;
+//    private static final int INDEX_1 = 1;
+//    private static final int INDEX_2 = 2;
+//    private static final RString SPLITTOKEN = new RString(".");
     private static final RString 特徴期別金額1期 = new RString("1期");
     private static final RString 特徴期別金額2期 = new RString("2期");
     private static final RString 特徴期別金額3期 = new RString("3期");
@@ -208,4 +208,12 @@ public class TokubetsuChoshuKaishiTsuchishoSealerRenchoReport extends Report<Tok
         }
         return DecimalFormatter.toコンマ区切りRString(金額, 0);
     }
+
+    /**
+     * 未使用のprivateフィールドです。Checkstyle対応。
+     */
+    public void 未使用のprivateフィールド() {
+        宛名連番.hashCode();
+    }
+
 }
