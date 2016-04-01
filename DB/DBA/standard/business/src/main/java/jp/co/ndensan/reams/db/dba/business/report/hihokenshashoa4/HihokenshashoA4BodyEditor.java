@@ -19,7 +19,6 @@ import jp.co.ndensan.reams.uz.uza.lang.Separator;
  */
 public class HihokenshashoA4BodyEditor implements IHihokenshashoA4Editor {
 
-    private static final RString HOUSI = new RString("*");
     private final HihokenshashoA4BodyItem item;
 
     /**
@@ -43,7 +42,7 @@ public class HihokenshashoA4BodyEditor implements IHihokenshashoA4Editor {
     }
 
     private HihokenshashoA4ReportSource bodyEdit(HihokenshashoA4ReportSource source) {
-        source.yukokigen = item.getYukokigen();
+        source.yukokigen = item.getYukokigen1();
         source.yukokigen2 = item.getYukokigen2();
         source.hihokenshanno = item.getHihokenshanno();
         source.yubinno = item.getYubinno();
@@ -62,13 +61,10 @@ public class HihokenshashoA4BodyEditor implements IHihokenshashoA4Editor {
         source.umareMm = item.getUmareMm();
         source.umareDd = item.getUmareDd();
         source.seibetsu = item.getSeibetsu();
-        RString kofuymd = item.getKofuymd();
-        source.kofuymdGengo = kofuymd;
-        if (!kofuymd.isEmpty()) {
-            source.kofuymdYy = new RDate(kofuymd.toString()).seireki().getYear();
-            source.kofuymdMm = new RDate(kofuymd.toString()).seireki().getMonth();
-            source.kofuymdDd = new RDate(kofuymd.toString()).seireki().getDay();
-        }
+        source.kofuymdGengo = item.getKofuymdGengo();
+        source.kofuymdYy = item.getKofuymdYy();
+        source.kofuymdMm = item.getKofuymdMm();
+        source.kofuymdDd = item.getKofuymdDd();
         source.saikofu1 = item.getSaikofu1();
         source.hokenshano1 = item.getHokenshano1();
         source.hokenshano2 = item.getHokenshano2();
@@ -127,17 +123,17 @@ public class HihokenshashoA4BodyEditor implements IHihokenshashoA4Editor {
         source.gyosha1 = item.getGyosha1();
         source.todokeYmd1 = item.getTodokeYmd1();
         source.gyosha2 = item.getGyosha2();
-        source.gyosha2Asa = HOUSI;
-        source.gyosha2Massho = item.getGyosha2();
+        source.gyosha2Asa = item.getGyosha2Asa();
+        source.gyosha2Massho = item.getGyosha2Massho();
         source.todokeYmd2 = item.getTodokeYmd2();
-        source.todokeYmd2Asa = HOUSI;
-        source.todokeYmd2Massho = item.getTodokeYmd2();
+        source.todokeYmd2Asa = item.getTodokeYmd2();
+        source.todokeYmd2Massho = item.getTodokeYmd2Asa();
         source.gyosha3 = item.getGyosha3();
-        source.gyosha3Asa = HOUSI;
-        source.gyosha3Massho = item.getGyosha3();
+        source.gyosha3Asa = item.getGyosha3Asa();
+        source.gyosha3Massho = item.getGyosha3Massho();
         source.todokeYmd3 = item.getTodokeYmd3();
-        source.todokeYmd3Asa = HOUSI;
-        source.todokeYmd3Massho = item.getTodokeYmd3();
+        source.todokeYmd3Asa = item.getTodokeYmd3Asa();
+        source.todokeYmd3Massho = item.getTodokeYmd3Massho();
         source.shisetsuSyu1 = item.getShisetsuSyu1();
         source.shisetsuname1 = item.getShisetsuname1();
         source.nyushochk1 = item.getNyushochk1();
@@ -161,11 +157,11 @@ public class HihokenshashoA4BodyEditor implements IHihokenshashoA4Editor {
         source.kosekiSeibetsu12 = item.getKosekiSeibetsu12();
         source.itakuGyosha1 = item.getItakuGyosha1();
         source.itakuGyosha2 = item.getItakuGyosha2();
-        source.itakuGyosha2Asa = HOUSI;
-        source.itakuGyosha2Massho = item.getItakuGyosha2();
+        source.itakuGyosha2Asa = item.getItakuGyosha2Asa();
+        source.itakuGyosha2Massho = item.getItakuGyosha2Massho();
         source.itakuGyosha3 = item.getItakuGyosha3();
-        source.itakuGyosha3Asa = HOUSI;
-        source.itakuGyosha3Massho = item.getItakuGyosha3();
+        source.itakuGyosha3Asa = item.getItakuGyosha3Asa();
+        source.itakuGyosha3Massho = item.getItakuGyosha3Massho();
         source.imageField1 = item.getImageField1();
         return source;
     }

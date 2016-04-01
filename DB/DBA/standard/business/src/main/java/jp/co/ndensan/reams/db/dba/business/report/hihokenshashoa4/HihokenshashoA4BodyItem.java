@@ -16,7 +16,7 @@ import lombok.Getter;
 @SuppressWarnings("PMD.UnusedPrivateField")
 public class HihokenshashoA4BodyItem {
 
-    private final RString yukokigen;
+    private final RString yukokigen1;
     private final RString yukokigen2;
     private final RString hihokenshanno;
     private final RString yubinno;
@@ -30,7 +30,10 @@ public class HihokenshashoA4BodyItem {
     private final RString umareMm;
     private final RString umareDd;
     private final RString seibetsu;
-    private final RString kofuymd;
+    private final RString kofuymdGengo;
+    private final RString kofuymdYy;
+    private final RString kofuymdMm;
+    private final RString kofuymdDd;
     private final RString saikofu1;
     private final RString hokenshano1;
     private final RString hokenshano2;
@@ -89,9 +92,17 @@ public class HihokenshashoA4BodyItem {
     private final RString gyosha1;
     private final RString todokeYmd1;
     private final RString gyosha2;
+    private final RString gyosha2Asa;
+    private final RString gyosha2Massho;
     private final RString todokeYmd2;
+    private final RString todokeYmd2Asa;
+    private final RString todokeYmd2Massho;
     private final RString gyosha3;
+    private final RString gyosha3Asa;
+    private final RString gyosha3Massho;
     private final RString todokeYmd3;
+    private final RString todokeYmd3Asa;
+    private final RString todokeYmd3Massho;
     private final RString shisetsuSyu1;
     private final RString shisetsuname1;
     private final RString nyushochk1;
@@ -115,14 +126,18 @@ public class HihokenshashoA4BodyItem {
     private final RString kosekiSeibetsu12;
     private final RString itakuGyosha1;
     private final RString itakuGyosha2;
+    private final RString itakuGyosha2Asa;
+    private final RString itakuGyosha2Massho;
     private final RString itakuGyosha3;
+    private final RString itakuGyosha3Asa;
+    private final RString itakuGyosha3Massho;
     private final RString imageField1;
 
     /**
      * インスタンスを生成します。
      *
-     * @param yukokigen 有効期限
-     * @param yukokigen2 有効期限
+     * @param yukokigen1 有効期限1
+     * @param yukokigen2 有効期限2
      * @param hihokenshanno 被保険者番号
      * @param yubinno 郵便番号
      * @param gyoseiku 行政区
@@ -134,7 +149,10 @@ public class HihokenshashoA4BodyItem {
      * @param umareYyyy 生年月日の年
      * @param umareMm 生年月日の月
      * @param umareDd 生年月日の日
-     * @param kofuymd 交付年月日
+     * @param kofuymdGengo 交付年月日の年号
+     * @param kofuymdYy 交付年月日の年
+     * @param kofuymdMm 交付年月日の月
+     * @param kofuymdDd 交付年月日の日
      * @param seibetsu 性別
      * @param saikofu1 再交付1
      * @param hokenshano1 保険者NO1
@@ -194,10 +212,18 @@ public class HihokenshashoA4BodyItem {
      * @param gyosha1 居宅介護事業者１
      * @param todokeYmd1 届出年月日1
      * @param gyosha2 居宅介護事業者2
+     * @param gyosha2Asa 居宅介護事業者★2
+     * @param gyosha2Massho 居宅介護事業者取消2
      * @param todokeYmd2 届出年月日2
+     * @param todokeYmd2Asa 届出年月日★2
+     * @param todokeYmd2Massho 届出年月日取消2
      * @param gyosha3 居宅介護事業者3
+     * @param gyosha3Asa 居宅介護事業者★3
      * @param todokeYmd3 届出年月日3
+     * @param gyosha3Massho 居宅介護事業者取消3
      * @param shisetsuSyu1 施設種類1
+     * @param todokeYmd3Asa 届出年月日★3
+     * @param todokeYmd3Massho 届出年月日取消3
      * @param shisetsuname1 施設名1
      * @param nyushochk1 入所チェック1
      * @param nyuinchk1 入院チェック1
@@ -220,10 +246,14 @@ public class HihokenshashoA4BodyItem {
      * @param kosekiSeibetsu12 構成性別12
      * @param itakuGyosha1 居宅介護事業者長１
      * @param itakuGyosha2 居宅介護事業者長2
+     * @param itakuGyosha2Asa 居宅介護事業者長★2
+     * @param itakuGyosha2Massho 居宅介護事業者長取消2
      * @param itakuGyosha3 居宅介護事業者長3
+     * @param itakuGyosha3Asa 居宅介護事業者長★3
+     * @param itakuGyosha3Massho 居宅介護事業者長取消3
      * @param imageField1 複合コントロール
      */
-    public HihokenshashoA4BodyItem(RString yukokigen,
+    public HihokenshashoA4BodyItem(RString yukokigen1,
             RString yukokigen2,
             RString hihokenshanno,
             RString yubinno,
@@ -237,7 +267,10 @@ public class HihokenshashoA4BodyItem {
             RString umareMm,
             RString umareDd,
             RString seibetsu,
-            RString kofuymd,
+            RString kofuymdGengo,
+            RString kofuymdYy,
+            RString kofuymdMm,
+            RString kofuymdDd,
             RString saikofu1,
             RString hokenshano1,
             RString hokenshano2,
@@ -296,9 +329,17 @@ public class HihokenshashoA4BodyItem {
             RString gyosha1,
             RString todokeYmd1,
             RString gyosha2,
+            RString gyosha2Asa,
+            RString gyosha2Massho,
             RString todokeYmd2,
+            RString todokeYmd2Asa,
+            RString todokeYmd2Massho,
             RString gyosha3,
+            RString gyosha3Asa,
+            RString gyosha3Massho,
             RString todokeYmd3,
+            RString todokeYmd3Asa,
+            RString todokeYmd3Massho,
             RString shisetsuSyu1,
             RString shisetsuname1,
             RString nyushochk1,
@@ -322,9 +363,13 @@ public class HihokenshashoA4BodyItem {
             RString kosekiSeibetsu12,
             RString itakuGyosha1,
             RString itakuGyosha2,
+            RString itakuGyosha2Asa,
+            RString itakuGyosha2Massho,
             RString itakuGyosha3,
+            RString itakuGyosha3Asa,
+            RString itakuGyosha3Massho,
             RString imageField1) {
-        this.yukokigen = yukokigen;
+        this.yukokigen1 = yukokigen1;
         this.yukokigen2 = yukokigen2;
         this.hihokenshanno = hihokenshanno;
         this.yubinno = yubinno;
@@ -338,7 +383,10 @@ public class HihokenshashoA4BodyItem {
         this.umareMm = umareMm;
         this.umareDd = umareDd;
         this.seibetsu = seibetsu;
-        this.kofuymd = kofuymd;
+        this.kofuymdGengo = kofuymdGengo;
+        this.kofuymdYy = kofuymdYy;
+        this.kofuymdMm = kofuymdMm;
+        this.kofuymdDd = kofuymdDd;
         this.saikofu1 = saikofu1;
         this.hokenshano1 = hokenshano1;
         this.hokenshano2 = hokenshano2;
@@ -397,9 +445,17 @@ public class HihokenshashoA4BodyItem {
         this.gyosha1 = gyosha1;
         this.todokeYmd1 = todokeYmd1;
         this.gyosha2 = gyosha2;
+        this.gyosha2Asa = gyosha2Asa;
+        this.gyosha2Massho = gyosha2Massho;
         this.todokeYmd2 = todokeYmd2;
+        this.todokeYmd2Asa = todokeYmd2Asa;
+        this.todokeYmd2Massho = todokeYmd2Massho;
         this.gyosha3 = gyosha3;
+        this.gyosha3Asa = gyosha3Asa;
+        this.gyosha3Massho = gyosha3Massho;
         this.todokeYmd3 = todokeYmd3;
+        this.todokeYmd3Asa = todokeYmd3Asa;
+        this.todokeYmd3Massho = todokeYmd3Massho;
         this.shisetsuSyu1 = shisetsuSyu1;
         this.shisetsuname1 = shisetsuname1;
         this.nyushochk1 = nyushochk1;
@@ -423,7 +479,11 @@ public class HihokenshashoA4BodyItem {
         this.kosekiSeibetsu12 = kosekiSeibetsu12;
         this.itakuGyosha1 = itakuGyosha1;
         this.itakuGyosha2 = itakuGyosha2;
+        this.itakuGyosha2Asa = itakuGyosha2Asa;
+        this.itakuGyosha2Massho = itakuGyosha2Massho;
         this.itakuGyosha3 = itakuGyosha3;
+        this.itakuGyosha3Asa = itakuGyosha3Asa;
+        this.itakuGyosha3Massho = itakuGyosha3Massho;
         this.imageField1 = imageField1;
     }
 }
