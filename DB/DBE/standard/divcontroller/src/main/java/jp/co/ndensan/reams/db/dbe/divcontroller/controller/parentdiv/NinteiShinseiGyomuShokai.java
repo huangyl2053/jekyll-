@@ -63,6 +63,12 @@ public class NinteiShinseiGyomuShokai {
         return response;
     }
 
+    /**
+     * onClick_chkShinseishaIchiran
+     *
+     * @param div NinteiShinseiGyomuShokaiDiv
+     * @return ResponseData
+     */
     public ResponseData onClick_chkShinseishaIchiran(NinteiShinseiGyomuShokaiDiv div) {
         ResponseData<NinteiShinseiGyomuShokaiDiv> response = new ResponseData<>();
 
@@ -76,6 +82,12 @@ public class NinteiShinseiGyomuShokai {
         return response;
     }
 
+    /**
+     * onClick_chkShinseiKyakka
+     *
+     * @param div NinteiShinseiGyomuShokaiDiv
+     * @return ResponseData
+     */
     public ResponseData onClick_chkShinseiKyakka(NinteiShinseiGyomuShokaiDiv div) {
         ResponseData<NinteiShinseiGyomuShokaiDiv> response = new ResponseData<>();
 

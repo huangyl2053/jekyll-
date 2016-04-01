@@ -36,25 +36,50 @@ public final class YokaigoNinteiShinseiDivMapper {
     }
 
     //TODO n3327 三浦凌 取り急ぎこの形で実装するが、また見直す。
+    /**
+     *
+     */
     public static class YokaigoNinteiShinseiDiv {
 
         private final HihokenshaOutlineDiv hihokensha;
         private final ShinseiJohoInputDiv shinsei;
 
+        /**
+         * YokaigoNinteiShinseiDiv
+         *
+         * @param shinsei ShinseiJohoInputDiv
+         * @param hihokensha HihokenshaOutlineDiv
+         */
         public YokaigoNinteiShinseiDiv(ShinseiJohoInputDiv shinsei, HihokenshaOutlineDiv hihokensha) {
             this.hihokensha = hihokensha;
             this.shinsei = shinsei;
         }
 
+        /**
+         * getHihokenshaOUtline
+         *
+         * @return hihokensha
+         */
         public HihokenshaOutlineDiv getHihokenshaOUtline() {
             return this.hihokensha;
         }
 
+        /**
+         * getShinseiJohoInput
+         *
+         * @return shinsei
+         */
         public ShinseiJohoInputDiv getShinseiJohoInput() {
             return this.shinsei;
         }
     }
 
+    /**
+     * toYokaigoNinteiShinsei
+     *
+     * @param div YokaigoNinteiShinseiDiv
+     * @return YokaigoNinteiShinsei
+     */
     public static YokaigoNinteiShinsei toYokaigoNinteiShinsei(YokaigoNinteiShinseiDiv div) {
         return new YokaigoNinteiShinsei(
                 Item.申請書管理番号.<ShinseishoKanriNo>extractValue(div),

@@ -1,18 +1,19 @@
 package jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.dbe1010002;
-/**
- * このコードはツールによって生成されました。
- * このファイルへの変更は、再生成時には損失するため
- * 不正な動作の原因になります。
- */
-import com.fasterxml.jackson.annotation.JsonProperty;
-import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.dbe1010002.NinteiShinseiJigyoshaDiv;
-import jp.co.ndensan.reams.uz.uza.ui.binding.*;
-import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
-import jp.co.ndensan.reams.uz.uza.ui.binding.domain.*;
 
 /**
- * NinteiShinseisha のクラスファイル 
- * 
+ * このコードはツールによって生成されました。 このファイルへの変更は、再生成時には損失するため 不正な動作の原因になります。
+ */
+import com.fasterxml.jackson.annotation.JsonProperty;
+import jp.co.ndensan.reams.uz.uza.ui.binding.ButtonDialog;
+import jp.co.ndensan.reams.uz.uza.ui.binding.DropDownList;
+import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
+import jp.co.ndensan.reams.uz.uza.ui.binding.RadioButton;
+import jp.co.ndensan.reams.uz.uza.ui.binding.TextBox;
+import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxYubinNo;
+
+/**
+ * NinteiShinseisha のクラスファイル
+ *
  * @author 自動生成
  */
 public class NinteiShinseishaDiv extends Panel {
@@ -22,6 +23,7 @@ public class NinteiShinseishaDiv extends Panel {
      * コントロール名とフィールド名を取得する
      * private + コントロール名 + フィールド名 の文字列を作成
      */
+
     @JsonProperty("radShinseishaKubun")
     private RadioButton radShinseishaKubun;
     @JsonProperty("txtShinseishaName")
@@ -54,7 +56,7 @@ public class NinteiShinseishaDiv extends Panel {
 
     @JsonProperty("radShinseishaKubun")
     public void setRadShinseishaKubun(RadioButton radShinseishaKubun) {
-        this.radShinseishaKubun=radShinseishaKubun;
+        this.radShinseishaKubun = radShinseishaKubun;
     }
 
     @JsonProperty("txtShinseishaName")
@@ -64,7 +66,7 @@ public class NinteiShinseishaDiv extends Panel {
 
     @JsonProperty("txtShinseishaName")
     public void setTxtShinseishaName(TextBox txtShinseishaName) {
-        this.txtShinseishaName=txtShinseishaName;
+        this.txtShinseishaName = txtShinseishaName;
     }
 
     @JsonProperty("txtShinseishaNameKana")
@@ -74,7 +76,7 @@ public class NinteiShinseishaDiv extends Panel {
 
     @JsonProperty("txtShinseishaNameKana")
     public void setTxtShinseishaNameKana(TextBox txtShinseishaNameKana) {
-        this.txtShinseishaNameKana=txtShinseishaNameKana;
+        this.txtShinseishaNameKana = txtShinseishaNameKana;
     }
 
     @JsonProperty("txtYubinNo")
@@ -84,7 +86,7 @@ public class NinteiShinseishaDiv extends Panel {
 
     @JsonProperty("txtYubinNo")
     public void setTxtYubinNo(TextBoxYubinNo txtYubinNo) {
-        this.txtYubinNo=txtYubinNo;
+        this.txtYubinNo = txtYubinNo;
     }
 
     @JsonProperty("txtShinseishaJusho")
@@ -94,7 +96,7 @@ public class NinteiShinseishaDiv extends Panel {
 
     @JsonProperty("txtShinseishaJusho")
     public void setTxtShinseishaJusho(TextBox txtShinseishaJusho) {
-        this.txtShinseishaJusho=txtShinseishaJusho;
+        this.txtShinseishaJusho = txtShinseishaJusho;
     }
 
     @JsonProperty("txtShinseishaTelNo")
@@ -104,7 +106,7 @@ public class NinteiShinseishaDiv extends Panel {
 
     @JsonProperty("txtShinseishaTelNo")
     public void setTxtShinseishaTelNo(TextBox txtShinseishaTelNo) {
-        this.txtShinseishaTelNo=txtShinseishaTelNo;
+        this.txtShinseishaTelNo = txtShinseishaTelNo;
     }
 
     @JsonProperty("ddlShinseishaTsuzukigara")
@@ -114,7 +116,7 @@ public class NinteiShinseishaDiv extends Panel {
 
     @JsonProperty("ddlShinseishaTsuzukigara")
     public void setDdlShinseishaTsuzukigara(DropDownList ddlShinseishaTsuzukigara) {
-        this.ddlShinseishaTsuzukigara=ddlShinseishaTsuzukigara;
+        this.ddlShinseishaTsuzukigara = ddlShinseishaTsuzukigara;
     }
 
     @JsonProperty("btnSetaiin")
@@ -124,7 +126,7 @@ public class NinteiShinseishaDiv extends Panel {
 
     @JsonProperty("btnSetaiin")
     public void setBtnSetaiin(ButtonDialog btnSetaiin) {
-        this.btnSetaiin=btnSetaiin;
+        this.btnSetaiin = btnSetaiin;
     }
 
     @JsonProperty("NinteiShinseiJigyosha")
@@ -134,7 +136,7 @@ public class NinteiShinseishaDiv extends Panel {
 
     @JsonProperty("NinteiShinseiJigyosha")
     public void setNinteiShinseiJigyosha(NinteiShinseiJigyoshaDiv NinteiShinseiJigyosha) {
-        this.NinteiShinseiJigyosha=NinteiShinseiJigyosha;
+        this.NinteiShinseiJigyosha = NinteiShinseiJigyosha;
     }
 
 }

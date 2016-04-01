@@ -1,22 +1,19 @@
 package jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.dbe2010002;
+
 /**
- * このコードはツールによって生成されました。
- * このファイルへの変更は、再生成時には損失するため
- * 不正な動作の原因になります。
+ * このコードはツールによって生成されました。 このファイルへの変更は、再生成時には損失するため 不正な動作の原因になります。
  */
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.dbe2010002.ChosaItakusakiAndChosainListDiv;
-import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.dbe2010002.RequestContentsDiv;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.ninteichosaIraiListForByHandCom.NinteichosaIraiListForByHandCom;
-import jp.co.ndensan.reams.uz.uza.ui.binding.*;
+import jp.co.ndensan.reams.uz.uza.ui.binding.Button;
+import jp.co.ndensan.reams.uz.uza.ui.binding.Space;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TableCell;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TablePanel;
-import jp.co.ndensan.reams.uz.uza.ui.binding.domain.*;
 
 /**
- * tblChosaIraiWaritsuke のクラスファイル 
- * 
+ * tblChosaIraiWaritsuke のクラスファイル
+ *
  * @author 自動生成
  */
 public class tblChosaIraiWaritsukeDiv extends TablePanel {
@@ -26,6 +23,7 @@ public class tblChosaIraiWaritsukeDiv extends TablePanel {
      * コントロール名とフィールド名を取得する
      * private + コントロール名 + フィールド名 の文字列を作成
      */
+
     @JsonProperty("celMiwaritsuke")
     private celMiwaritsukeAttblChosaIraiWaritsuke celMiwaritsuke;
     @JsonProperty("celWaritsukezumi")
@@ -90,7 +88,7 @@ public class tblChosaIraiWaritsukeDiv extends TablePanel {
 
     @JsonProperty("celMiwaritsuke")
     private void setCelMiwaritsuke(celMiwaritsukeAttblChosaIraiWaritsuke celMiwaritsuke) {
-        this.celMiwaritsuke=celMiwaritsuke;
+        this.celMiwaritsuke = celMiwaritsuke;
     }
 
     @JsonProperty("celWaritsukezumi")
@@ -100,7 +98,7 @@ public class tblChosaIraiWaritsukeDiv extends TablePanel {
 
     @JsonProperty("celWaritsukezumi")
     private void setCelWaritsukezumi(celWaritsukezumiAttblChosaIraiWaritsuke celWaritsukezumi) {
-        this.celWaritsukezumi=celWaritsukezumi;
+        this.celWaritsukezumi = celWaritsukezumi;
     }
 
     @JsonProperty("celButtons")
@@ -110,16 +108,18 @@ public class tblChosaIraiWaritsukeDiv extends TablePanel {
 
     @JsonProperty("celButtons")
     private void setCelButtons(celButtonsAttblChosaIraiWaritsuke celButtons) {
-        this.celButtons=celButtons;
+        this.celButtons = celButtons;
     }
 
 }
+
 /**
- * celMiwaritsuke のクラスファイル 
- * 
+ * celMiwaritsuke のクラスファイル
+ *
  * @author 自動生成
  */
 class celMiwaritsukeAttblChosaIraiWaritsuke extends TableCell {
+
     @JsonProperty("comMiwarituskeList")
     private NinteichosaIraiListForByHandCom comMiwarituskeList;
 
@@ -130,16 +130,18 @@ class celMiwaritsukeAttblChosaIraiWaritsuke extends TableCell {
 
     @JsonProperty("comMiwarituskeList")
     public void setComMiwarituskeList(NinteichosaIraiListForByHandCom comMiwarituskeList) {
-        this.comMiwarituskeList=comMiwarituskeList;
+        this.comMiwarituskeList = comMiwarituskeList;
     }
 
 }
+
 /**
- * celWaritsukezumi のクラスファイル 
- * 
+ * celWaritsukezumi のクラスファイル
+ *
  * @author 自動生成
  */
 class celWaritsukezumiAttblChosaIraiWaritsuke extends TableCell {
+
     @JsonProperty("ChosaItakusakiAndChosainList")
     private ChosaItakusakiAndChosainListDiv ChosaItakusakiAndChosainList;
     @JsonProperty("RequestContents")
@@ -154,7 +156,7 @@ class celWaritsukezumiAttblChosaIraiWaritsuke extends TableCell {
 
     @JsonProperty("ChosaItakusakiAndChosainList")
     public void setChosaItakusakiAndChosainList(ChosaItakusakiAndChosainListDiv ChosaItakusakiAndChosainList) {
-        this.ChosaItakusakiAndChosainList=ChosaItakusakiAndChosainList;
+        this.ChosaItakusakiAndChosainList = ChosaItakusakiAndChosainList;
     }
 
     @JsonProperty("RequestContents")
@@ -164,7 +166,7 @@ class celWaritsukezumiAttblChosaIraiWaritsuke extends TableCell {
 
     @JsonProperty("RequestContents")
     public void setRequestContents(RequestContentsDiv RequestContents) {
-        this.RequestContents=RequestContents;
+        this.RequestContents = RequestContents;
     }
 
     @JsonProperty("comWaritukezumiList")
@@ -174,16 +176,18 @@ class celWaritsukezumiAttblChosaIraiWaritsuke extends TableCell {
 
     @JsonProperty("comWaritukezumiList")
     public void setComWaritukezumiList(NinteichosaIraiListForByHandCom comWaritukezumiList) {
-        this.comWaritukezumiList=comWaritukezumiList;
+        this.comWaritukezumiList = comWaritukezumiList;
     }
 
 }
+
 /**
- * celButtons のクラスファイル 
- * 
+ * celButtons のクラスファイル
+ *
  * @author 自動生成
  */
 class celButtonsAttblChosaIraiWaritsuke extends TableCell {
+
     @JsonProperty("spaButtons1")
     private Space spaButtons1;
     @JsonProperty("btnToBind")
@@ -200,7 +204,7 @@ class celButtonsAttblChosaIraiWaritsuke extends TableCell {
 
     @JsonProperty("spaButtons1")
     public void setSpaButtons1(Space spaButtons1) {
-        this.spaButtons1=spaButtons1;
+        this.spaButtons1 = spaButtons1;
     }
 
     @JsonProperty("btnToBind")
@@ -210,7 +214,7 @@ class celButtonsAttblChosaIraiWaritsuke extends TableCell {
 
     @JsonProperty("btnToBind")
     public void setBtnToBind(Button btnToBind) {
-        this.btnToBind=btnToBind;
+        this.btnToBind = btnToBind;
     }
 
     @JsonProperty("spaButtons2")
@@ -220,7 +224,7 @@ class celButtonsAttblChosaIraiWaritsuke extends TableCell {
 
     @JsonProperty("spaButtons2")
     public void setSpaButtons2(Space spaButtons2) {
-        this.spaButtons2=spaButtons2;
+        this.spaButtons2 = spaButtons2;
     }
 
     @JsonProperty("btnToFree")
@@ -230,7 +234,7 @@ class celButtonsAttblChosaIraiWaritsuke extends TableCell {
 
     @JsonProperty("btnToFree")
     public void setBtnToFree(Button btnToFree) {
-        this.btnToFree=btnToFree;
+        this.btnToFree = btnToFree;
     }
 
 }

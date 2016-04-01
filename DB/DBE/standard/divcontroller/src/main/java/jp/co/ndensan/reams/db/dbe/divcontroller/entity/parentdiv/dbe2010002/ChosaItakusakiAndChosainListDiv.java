@@ -1,17 +1,14 @@
 package jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.dbe2010002;
+
 /**
- * このコードはツールによって生成されました。
- * このファイルへの変更は、再生成時には損失するため
- * 不正な動作の原因になります。
+ * このコードはツールによって生成されました。 このファイルへの変更は、再生成時には損失するため 不正な動作の原因になります。
  */
 import com.fasterxml.jackson.annotation.JsonProperty;
-import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.dbe2010002.ShozokuChosainListDiv;
-import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.dbe2010002.WaritsukesakiChosaItakusakiListDiv;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 
 /**
- * ChosaItakusakiAndChosainList のクラスファイル 
- * 
+ * ChosaItakusakiAndChosainList のクラスファイル
+ *
  * @author 自動生成
  */
 public class ChosaItakusakiAndChosainListDiv extends Panel {
@@ -21,6 +18,7 @@ public class ChosaItakusakiAndChosainListDiv extends Panel {
      * コントロール名とフィールド名を取得する
      * private + コントロール名 + フィールド名 の文字列を作成
      */
+
     @JsonProperty("ShozokuChosainList")
     private ShozokuChosainListDiv ShozokuChosainList;
     @JsonProperty("WaritsukesakiChosaItakusakiList")
@@ -39,7 +37,7 @@ public class ChosaItakusakiAndChosainListDiv extends Panel {
 
     @JsonProperty("ShozokuChosainList")
     public void setShozokuChosainList(ShozokuChosainListDiv ShozokuChosainList) {
-        this.ShozokuChosainList=ShozokuChosainList;
+        this.ShozokuChosainList = ShozokuChosainList;
     }
 
     @JsonProperty("WaritsukesakiChosaItakusakiList")
@@ -49,7 +47,7 @@ public class ChosaItakusakiAndChosainListDiv extends Panel {
 
     @JsonProperty("WaritsukesakiChosaItakusakiList")
     public void setWaritsukesakiChosaItakusakiList(WaritsukesakiChosaItakusakiListDiv WaritsukesakiChosaItakusakiList) {
-        this.WaritsukesakiChosaItakusakiList=WaritsukesakiChosaItakusakiList;
+        this.WaritsukesakiChosaItakusakiList = WaritsukesakiChosaItakusakiList;
     }
 
 }

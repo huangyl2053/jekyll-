@@ -1,20 +1,15 @@
 package jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.dbe2050001;
-/**
- * このコードはツールによって生成されました。
- * このファイルへの変更は、再生成時には損失するため
- * 不正な動作の原因になります。
- */
-import com.fasterxml.jackson.annotation.JsonProperty;
-import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.dbe2050001.SerachButtonsForNinteichosaIraishoTargetPersonsDiv;
-import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.dbe2050001.SerachCriteriaForNinteichosaIraishoTargetPersonsDiv;
-import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.dbe2050001.dgNinteichosaIraishoTargetPersons_Row;
-import jp.co.ndensan.reams.uz.uza.ui.binding.*;
-import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
-import jp.co.ndensan.reams.uz.uza.ui.binding.domain.*;
 
 /**
- * NinteichosaIraishoTargetPersons のクラスファイル 
- * 
+ * このコードはツールによって生成されました。 このファイルへの変更は、再生成時には損失するため 不正な動作の原因になります。
+ */
+import com.fasterxml.jackson.annotation.JsonProperty;
+import jp.co.ndensan.reams.uz.uza.ui.binding.DataGrid;
+import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
+
+/**
+ * NinteichosaIraishoTargetPersons のクラスファイル
+ *
  * @author 自動生成
  */
 public class NinteichosaIraishoTargetPersonsDiv extends Panel {
@@ -24,6 +19,7 @@ public class NinteichosaIraishoTargetPersonsDiv extends Panel {
      * コントロール名とフィールド名を取得する
      * private + コントロール名 + フィールド名 の文字列を作成
      */
+
     @JsonProperty("SerachCriteriaForNinteichosaIraishoTargetPersons")
     private SerachCriteriaForNinteichosaIraishoTargetPersonsDiv SerachCriteriaForNinteichosaIraishoTargetPersons;
     @JsonProperty("SerachButtonsForNinteichosaIraishoTargetPersons")
@@ -44,7 +40,7 @@ public class NinteichosaIraishoTargetPersonsDiv extends Panel {
 
     @JsonProperty("SerachCriteriaForNinteichosaIraishoTargetPersons")
     public void setSerachCriteriaForNinteichosaIraishoTargetPersons(SerachCriteriaForNinteichosaIraishoTargetPersonsDiv SerachCriteriaForNinteichosaIraishoTargetPersons) {
-        this.SerachCriteriaForNinteichosaIraishoTargetPersons=SerachCriteriaForNinteichosaIraishoTargetPersons;
+        this.SerachCriteriaForNinteichosaIraishoTargetPersons = SerachCriteriaForNinteichosaIraishoTargetPersons;
     }
 
     @JsonProperty("SerachButtonsForNinteichosaIraishoTargetPersons")
@@ -54,7 +50,7 @@ public class NinteichosaIraishoTargetPersonsDiv extends Panel {
 
     @JsonProperty("SerachButtonsForNinteichosaIraishoTargetPersons")
     public void setSerachButtonsForNinteichosaIraishoTargetPersons(SerachButtonsForNinteichosaIraishoTargetPersonsDiv SerachButtonsForNinteichosaIraishoTargetPersons) {
-        this.SerachButtonsForNinteichosaIraishoTargetPersons=SerachButtonsForNinteichosaIraishoTargetPersons;
+        this.SerachButtonsForNinteichosaIraishoTargetPersons = SerachButtonsForNinteichosaIraishoTargetPersons;
     }
 
     @JsonProperty("dgNinteichosaIraishoTargetPersons")
@@ -64,7 +60,7 @@ public class NinteichosaIraishoTargetPersonsDiv extends Panel {
 
     @JsonProperty("dgNinteichosaIraishoTargetPersons")
     public void setDgNinteichosaIraishoTargetPersons(DataGrid<dgNinteichosaIraishoTargetPersons_Row> dgNinteichosaIraishoTargetPersons) {
-        this.dgNinteichosaIraishoTargetPersons=dgNinteichosaIraishoTargetPersons;
+        this.dgNinteichosaIraishoTargetPersons = dgNinteichosaIraishoTargetPersons;
     }
 
 }

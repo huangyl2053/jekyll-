@@ -55,6 +55,12 @@ public class NinteichosaResultEntryTarget {
         return _createResponseData(div);
     }
 
+    /**
+     * onSelect_dgNinteichosaResultTaishosha
+     *
+     * @param div NinteichosaResultEntryTargetDiv
+     * @return ResponseData<NinteichosaResultEntryTargetDiv>
+     */
     public ResponseData<NinteichosaResultEntryTargetDiv>
             onSelect_dgNinteichosaResultTaishosha(NinteichosaResultEntryTargetDiv div) {
         List<dgNinteichosaResultTaishosha_Row> dataSource = new ArrayList<>();

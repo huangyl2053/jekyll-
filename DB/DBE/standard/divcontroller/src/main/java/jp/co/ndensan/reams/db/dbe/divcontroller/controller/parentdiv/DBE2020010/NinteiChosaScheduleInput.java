@@ -422,7 +422,7 @@ public class NinteiChosaScheduleInput {
     }
 
     private int saveスケジュール情報(NinteiChosaScheduleInputDiv div) {
-        //TODO: 前排他制限の排他Keyがありません。QA898
+        //TODO 前排他制限の排他Keyがありません。QA898
 //            if (true) {
 //                throw new ApplicationException(UrErrorMessages.排他_バッチ実行中で更新不可.getMessage());
 //            }

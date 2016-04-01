@@ -60,8 +60,8 @@ public class YokaigoNinteiShinchokuJohoShokaiHandler {
         div.getTxtShiteiHizukeTo().setDisabled(true);
         div.getSerchFromHohokensha().setDisplayNone(false);
         div.getSerchFromShinchokuJokyo().setDisplayNone(true);
-        div.getTxtMaximumDisplayNumber().setValue(BusinessConfig.get(ConfigNameDBE.データ出力件数閾値,new RDate("20000401"), SubGyomuCode.DBE認定支援,
-                new LasdecCode("000000"), new RString("データ出力件数閾値")));
+        div.getTxtMaximumDisplayNumber().setValue(BusinessConfig.get(ConfigNameDBE.データ出力件数閾値, new RDate("20000401"),
+                SubGyomuCode.DBE認定支援, new LasdecCode("000000"), new RString("データ出力件数閾値")));
         setDisable();
     }
 
@@ -113,7 +113,6 @@ public class YokaigoNinteiShinchokuJohoShokaiHandler {
         }
         div.getDgShinseiJoho().setDataSource(dg_row);
     }
-
 
     /**
      * 帳票印刷用パラメータを設定します。
@@ -209,8 +208,7 @@ public class YokaigoNinteiShinchokuJohoShokaiHandler {
         } else {
             row.getIchijiHanteiKanryouDay().setValue(flexibleDateToRDate(joho.get要介護認定一次判定完了年月日()));
         }
-        row.setIchijiHanteiKekka(joho.get要介護認定一次判定結果コード() == null ? RString.
-                EMPTY : IchijiHanteiKekkaCode09.toValue(nullToEmpty(joho.get要介護認定一次判定結果コード())).get名称());
+        row.setIchijiHanteiKekka(joho.get要介護認定一次判定結果コード() == null ? RString.EMPTY : IchijiHanteiKekkaCode09.toValue(nullToEmpty(joho.get要介護認定一次判定結果コード())).get名称());
         if (joho.get認定審査会割当完了年月日() == null || joho.get認定審査会割当完了年月日().isEmpty()) {
             row.setKaigoNinteiShinsakaiWaritsukeDay(new TextBoxDate());
         } else {
@@ -220,7 +218,7 @@ public class YokaigoNinteiShinchokuJohoShokaiHandler {
         row.setShinseishoKanriNo(nullToEmpty(joho.get申請書管理番号()));
         return row;
     }
-    
+
     private void setRow_bak(YokaigoNinteiShinchokuJoho joho, dgShinseiJoho_Row row) {
         row.setKaigoNinteiShinsakaiShiryo(joho.get介護認定審査会資料作成年月日() == null ? RString.EMPTY : joho
                 .get介護認定審査会資料作成年月日().wareki().eraType(EraType.ALPHABET)
@@ -240,7 +238,7 @@ public class YokaigoNinteiShinchokuJohoShokaiHandler {
         row.setKaigoNinteiShinsakaiGogitai(new RString(String.valueOf(joho.get合議体番号())));
         row.setKaigoNinteiShinsakaiYokaigodo((joho.get二次判定要介護状態区分コード() == null || new RString("99")
                 .equals(joho.get二次判定要介護状態区分コード())) ? RString.EMPTY : YokaigoJotaiKubun09
-                        .toValue(joho.get二次判定要介護状態区分コード()).get名称());
+                .toValue(joho.get二次判定要介護状態区分コード()).get名称());
         row.setHihokenshaYubinNo(nullToEmpty(joho.get郵便番号()));
         row.setHihokenshaJusho(nullToEmpty(joho.get住所()));
         row.setHihokenshaSeibetsu(Seibetsu.toValue(joho.get性別()).get名称());
@@ -261,10 +259,10 @@ public class YokaigoNinteiShinchokuJohoShokaiHandler {
 
     private RDate flexibleDateToRDate(FlexibleDate date) {
         return new RDate(date.wareki().eraType(EraType.ALPHABET)
-            .firstYear(FirstYear.GAN_NEN).separator(Separator.PERIOD)
-            .fillType(FillType.ZERO).toDateString().toString());
+                .firstYear(FirstYear.GAN_NEN).separator(Separator.PERIOD)
+                .fillType(FillType.ZERO).toDateString().toString());
     }
-    
+
     private RString nullToEmpty(Object obj) {
         return obj == null ? RString.EMPTY : new RString(obj.toString());
     }

@@ -22,8 +22,14 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
  */
 public class ChosainData {
 
+    /**
+     * 調査員のデモデータです。
+     */
     public static final class Chosain {
 
+        /**
+         * Chosain
+         */
         public static final Chosain EMPTY;
 
         static {
@@ -39,14 +45,29 @@ public class ChosainData {
             this.theItakusaki = itakusaki;
         }
 
+        /**
+         * codeを取得します。
+         *
+         * @return code
+         */
         public RString code() {
             return this.theCode;
         }
 
+        /**
+         * nameを取得します。
+         *
+         * @return name
+         */
         public RString name() {
             return this.theName;
         }
 
+        /**
+         * itakusakiを取得します。
+         *
+         * @return itakusaki
+         */
         public ChosaItakusaki itakusaki() {
             return this.theItakusaki;
         }

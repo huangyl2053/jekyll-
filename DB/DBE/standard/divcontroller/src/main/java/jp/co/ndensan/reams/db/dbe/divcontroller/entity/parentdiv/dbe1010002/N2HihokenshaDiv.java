@@ -1,18 +1,16 @@
 package jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.dbe1010002;
-/**
- * このコードはツールによって生成されました。
- * このファイルへの変更は、再生成時には損失するため
- * 不正な動作の原因になります。
- */
-import com.fasterxml.jackson.annotation.JsonProperty;
-import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.dbe1010002.IryohokenshaDiv;
-import jp.co.ndensan.reams.uz.uza.ui.binding.*;
-import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
-import jp.co.ndensan.reams.uz.uza.ui.binding.domain.*;
 
 /**
- * N2Hihokensha のクラスファイル 
- * 
+ * このコードはツールによって生成されました。 このファイルへの変更は、再生成時には損失するため 不正な動作の原因になります。
+ */
+import com.fasterxml.jackson.annotation.JsonProperty;
+import jp.co.ndensan.reams.uz.uza.ui.binding.DropDownList;
+import jp.co.ndensan.reams.uz.uza.ui.binding.HorizontalLine;
+import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
+
+/**
+ * N2Hihokensha のクラスファイル
+ *
  * @author 自動生成
  */
 public class N2HihokenshaDiv extends Panel {
@@ -22,6 +20,7 @@ public class N2HihokenshaDiv extends Panel {
      * コントロール名とフィールド名を取得する
      * private + コントロール名 + フィールド名 の文字列を作成
      */
+
     @JsonProperty("Iryohokensha")
     private IryohokenshaDiv Iryohokensha;
     @JsonProperty("linN2Hihokensha")
@@ -42,7 +41,7 @@ public class N2HihokenshaDiv extends Panel {
 
     @JsonProperty("Iryohokensha")
     public void setIryohokensha(IryohokenshaDiv Iryohokensha) {
-        this.Iryohokensha=Iryohokensha;
+        this.Iryohokensha = Iryohokensha;
     }
 
     @JsonProperty("linN2Hihokensha")
@@ -52,7 +51,7 @@ public class N2HihokenshaDiv extends Panel {
 
     @JsonProperty("linN2Hihokensha")
     public void setLinN2Hihokensha(HorizontalLine linN2Hihokensha) {
-        this.linN2Hihokensha=linN2Hihokensha;
+        this.linN2Hihokensha = linN2Hihokensha;
     }
 
     @JsonProperty("ddltTokuteiShippei")
@@ -62,7 +61,7 @@ public class N2HihokenshaDiv extends Panel {
 
     @JsonProperty("ddltTokuteiShippei")
     public void setDdltTokuteiShippei(DropDownList ddltTokuteiShippei) {
-        this.ddltTokuteiShippei=ddltTokuteiShippei;
+        this.ddltTokuteiShippei = ddltTokuteiShippei;
     }
 
 }

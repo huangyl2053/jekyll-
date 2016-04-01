@@ -1,18 +1,14 @@
 package jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.dbe2050001;
+
 /**
- * このコードはツールによって生成されました。
- * このファイルへの変更は、再生成時には損失するため
- * 不正な動作の原因になります。
+ * このコードはツールによって生成されました。 このファイルへの変更は、再生成時には損失するため 不正な動作の原因になります。
  */
 import com.fasterxml.jackson.annotation.JsonProperty;
-import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.dbe2050001.NinteichosaIraishoPublishingOptionsDiv;
-import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.dbe2050001.NinteichosaIraishoRelatedDatesDiv;
-import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.dbe2050001.NinteichosaIraishoTargetPersonsDiv;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TabPanel;
 
 /**
- * NinteichosaIraiIkkatuHakkoTab のクラスファイル 
- * 
+ * NinteichosaIraiIkkatuHakkoTab のクラスファイル
+ *
  * @author 自動生成
  */
 public class NinteichosaIraiIkkatuHakkoTabDiv extends TabPanel {
@@ -22,6 +18,7 @@ public class NinteichosaIraiIkkatuHakkoTabDiv extends TabPanel {
      * コントロール名とフィールド名を取得する
      * private + コントロール名 + フィールド名 の文字列を作成
      */
+
     @JsonProperty("NinteichosaIraishoPublishingOptions")
     private NinteichosaIraishoPublishingOptionsDiv NinteichosaIraishoPublishingOptions;
     @JsonProperty("NinteichosaIraishoTargetPersons")
@@ -42,7 +39,7 @@ public class NinteichosaIraiIkkatuHakkoTabDiv extends TabPanel {
 
     @JsonProperty("NinteichosaIraishoPublishingOptions")
     public void setNinteichosaIraishoPublishingOptions(NinteichosaIraishoPublishingOptionsDiv NinteichosaIraishoPublishingOptions) {
-        this.NinteichosaIraishoPublishingOptions=NinteichosaIraishoPublishingOptions;
+        this.NinteichosaIraishoPublishingOptions = NinteichosaIraishoPublishingOptions;
     }
 
     @JsonProperty("NinteichosaIraishoTargetPersons")
@@ -52,7 +49,7 @@ public class NinteichosaIraiIkkatuHakkoTabDiv extends TabPanel {
 
     @JsonProperty("NinteichosaIraishoTargetPersons")
     public void setNinteichosaIraishoTargetPersons(NinteichosaIraishoTargetPersonsDiv NinteichosaIraishoTargetPersons) {
-        this.NinteichosaIraishoTargetPersons=NinteichosaIraishoTargetPersons;
+        this.NinteichosaIraishoTargetPersons = NinteichosaIraishoTargetPersons;
     }
 
     @JsonProperty("NinteichosaIraishoRelatedDates")
@@ -62,7 +59,7 @@ public class NinteichosaIraiIkkatuHakkoTabDiv extends TabPanel {
 
     @JsonProperty("NinteichosaIraishoRelatedDates")
     public void setNinteichosaIraishoRelatedDates(NinteichosaIraishoRelatedDatesDiv NinteichosaIraishoRelatedDates) {
-        this.NinteichosaIraishoRelatedDates=NinteichosaIraishoRelatedDates;
+        this.NinteichosaIraishoRelatedDates = NinteichosaIraishoRelatedDates;
     }
 
 }

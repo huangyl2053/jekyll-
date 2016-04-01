@@ -130,7 +130,7 @@ public class NinnteiChousaKekkaTouroku1 {
      */
     public ResponseData<NinnteiChousaKekkaTouroku1Div> onChange_radGenzaiService(NinnteiChousaKekkaTouroku1Div div) {
 
-        boolean 変更あり = false;
+        boolean 変更あり;
         RString 変更前の設定値 = RString.EMPTY;
         RString 現在の設定値 = RString.EMPTY;
         RString 現在の選択 = div.getRadGenzaiservis().getSelectedKey();
@@ -377,7 +377,6 @@ public class NinnteiChousaKekkaTouroku1 {
      * @param div コントロールdiv
      * @return レスポンスデータ
      */
-    @SuppressWarnings("unchecked")
     public ResponseData<NinnteiChousaKekkaTouroku1Div> onClick_btnZenkaiCopy(NinnteiChousaKekkaTouroku1Div div) {
 
         boolean 前回基本調査項目値あり = ViewStateHolder.get(Dbe2210001Keys.前回基本調査項目値あり, Boolean.class);
@@ -413,7 +412,6 @@ public class NinnteiChousaKekkaTouroku1 {
      * @param div コントロールdiv
      * @return レスポンスデータ
      */
-    @SuppressWarnings("unchecked")
     public ResponseData<NinnteiChousaKekkaTouroku1Div> onClick_btnKiteichiSettei(NinnteiChousaKekkaTouroku1Div div) {
 
         ArrayList<KihonChosaInput> 第1群List = ViewStateHolder.get(KihonChosaInputHandler.ViewStateKey.第一群認定調査基本情報リスト, ArrayList.class);
@@ -844,7 +842,6 @@ public class NinnteiChousaKekkaTouroku1 {
         基本調査第7群更新();
     }
 
-    @SuppressWarnings("unchecked")
     private void 基本調査第1群更新() {
 
         ArrayList<KihonChosaInput> 第1群List = ViewStateHolder.get(KihonChosaInputHandler.ViewStateKey.第一群認定調査基本情報リスト, ArrayList.class);
@@ -856,7 +853,6 @@ public class NinnteiChousaKekkaTouroku1 {
         }
     }
 
-    @SuppressWarnings("unchecked")
     private void 基本調査第2群更新() {
         ArrayList<KihonChosaInput> 第2群List = ViewStateHolder.get(KihonChosaInputHandler.ViewStateKey.第二群認定調査基本情報リスト, ArrayList.class);
         if (第2群List == null || 第2群List.isEmpty()) {
@@ -867,7 +863,6 @@ public class NinnteiChousaKekkaTouroku1 {
         }
     }
 
-    @SuppressWarnings("unchecked")
     private void 基本調査第3群更新() {
         ArrayList<KihonChosaInput> 第3群List = ViewStateHolder.get(KihonChosaInputHandler.ViewStateKey.第三群認定調査基本情報リスト, ArrayList.class);
         if (第3群List == null || 第3群List.isEmpty()) {
@@ -878,7 +873,6 @@ public class NinnteiChousaKekkaTouroku1 {
         }
     }
 
-    @SuppressWarnings("unchecked")
     private void 基本調査第4群更新() {
         ArrayList<KihonChosaInput> 第4群List = ViewStateHolder.get(KihonChosaInputHandler.ViewStateKey.第四群認定調査基本情報リスト, ArrayList.class);
         if (第4群List == null || 第4群List.isEmpty()) {
@@ -889,7 +883,6 @@ public class NinnteiChousaKekkaTouroku1 {
         }
     }
 
-    @SuppressWarnings("unchecked")
     private void 基本調査第5群更新() {
         ArrayList<KihonChosaInput> 第5群List = ViewStateHolder.get(KihonChosaInputHandler.ViewStateKey.第五群認定調査基本情報リスト, ArrayList.class);
         if (第5群List == null || 第5群List.isEmpty()) {
@@ -900,7 +893,6 @@ public class NinnteiChousaKekkaTouroku1 {
         }
     }
 
-    @SuppressWarnings("unchecked")
     private void 基本調査第6群更新() {
         ArrayList<KihonChosaInput> 第6群List = ViewStateHolder.get(KihonChosaInputHandler.ViewStateKey.第六群認定調査基本情報リスト, ArrayList.class);
         if (第6群List == null || 第6群List.isEmpty()) {
@@ -911,7 +903,6 @@ public class NinnteiChousaKekkaTouroku1 {
         }
     }
 
-    @SuppressWarnings("unchecked")
     private void 基本調査第7群更新() {
 
         ArrayList<KihonChosaInput> 第7群List = ViewStateHolder.get(KihonChosaInputHandler.ViewStateKey.第七群認定調査基本情報リスト, ArrayList.class);

@@ -37,7 +37,7 @@ public class NinteiChosaScheduleHandler {
     /**
      * コンストラクタです。
      *
-     * @param ninteidiv
+     * @param ninteidiv NinteiChosaSchedulePanelDiv
      */
     public NinteiChosaScheduleHandler(NinteiChosaSchedulePanelDiv ninteidiv) {
         this.ninteidiv = ninteidiv;
@@ -143,6 +143,12 @@ public class NinteiChosaScheduleHandler {
         ninteidiv.getDgNinteiChosaSchedule().setDataSource(dgKoufuKaishuList);
     }
 
+    /**
+     * check_btnKakuninn
+     *
+     * @param ninteidiv NinteiChosaSchedulePanelDiv
+     * @return ValidationMessageControlPairs
+     */
     public ValidationMessageControlPairs check_btnKakuninn(NinteiChosaSchedulePanelDiv ninteidiv) {
         ValidationMessageControlPairs validationMessages = new ValidationMessageControlPairs();
         getValidationHandler(ninteidiv).一覧データなしチェック(validationMessages);

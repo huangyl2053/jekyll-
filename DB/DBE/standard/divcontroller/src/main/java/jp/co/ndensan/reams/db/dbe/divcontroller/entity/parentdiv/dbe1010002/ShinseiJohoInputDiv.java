@@ -1,26 +1,20 @@
 package jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.dbe1010002;
-/**
- * このコードはツールによって生成されました。
- * このファイルへの変更は、再生成時には損失するため
- * 不正な動作の原因になります。
- */
-import com.fasterxml.jackson.annotation.JsonProperty;
-import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.dbe1010002.HihokenshaShujiiDiv;
-import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.dbe1010002.KankeiIinDiv;
-import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.dbe1010002.LatestNinteiResultDiv;
-import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.dbe1010002.N2HihokenshaDiv;
-import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.dbe1010002.NinteiShinseishaDiv;
-import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.dbe1010002.NinteichosainAdvanceEntryDiv;
-import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.dbe1010002.NyuinNyushoDiv;
-import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.dbe1010002.ShichosonRenrakuJikoDiv;
-import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.dbe1010002.SinseiRiyuDiv;
-import jp.co.ndensan.reams.uz.uza.ui.binding.*;
-import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
-import jp.co.ndensan.reams.uz.uza.ui.binding.domain.*;
 
 /**
- * ShinseiJohoInput のクラスファイル 
- * 
+ * このコードはツールによって生成されました。 このファイルへの変更は、再生成時には損失するため 不正な動作の原因になります。
+ */
+import com.fasterxml.jackson.annotation.JsonProperty;
+import jp.co.ndensan.reams.uz.uza.ui.binding.Button;
+import jp.co.ndensan.reams.uz.uza.ui.binding.ButtonDialog;
+import jp.co.ndensan.reams.uz.uza.ui.binding.CheckBoxList;
+import jp.co.ndensan.reams.uz.uza.ui.binding.DropDownList;
+import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
+import jp.co.ndensan.reams.uz.uza.ui.binding.TextBox;
+import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxDate;
+
+/**
+ * ShinseiJohoInput のクラスファイル
+ *
  * @author 自動生成
  */
 public class ShinseiJohoInputDiv extends Panel {
@@ -30,6 +24,7 @@ public class ShinseiJohoInputDiv extends Panel {
      * コントロール名とフィールド名を取得する
      * private + コントロール名 + フィールド名 の文字列を作成
      */
+
     @JsonProperty("ddlShinseiKubunShinseiji")
     private DropDownList ddlShinseiKubunShinseiji;
     @JsonProperty("txtShinseiDate")
@@ -78,7 +73,7 @@ public class ShinseiJohoInputDiv extends Panel {
 
     @JsonProperty("ddlShinseiKubunShinseiji")
     public void setDdlShinseiKubunShinseiji(DropDownList ddlShinseiKubunShinseiji) {
-        this.ddlShinseiKubunShinseiji=ddlShinseiKubunShinseiji;
+        this.ddlShinseiKubunShinseiji = ddlShinseiKubunShinseiji;
     }
 
     @JsonProperty("txtShinseiDate")
@@ -88,7 +83,7 @@ public class ShinseiJohoInputDiv extends Panel {
 
     @JsonProperty("txtShinseiDate")
     public void setTxtShinseiDate(TextBoxDate txtShinseiDate) {
-        this.txtShinseiDate=txtShinseiDate;
+        this.txtShinseiDate = txtShinseiDate;
     }
 
     @JsonProperty("txtShinseiYukoKubun")
@@ -98,7 +93,7 @@ public class ShinseiJohoInputDiv extends Panel {
 
     @JsonProperty("txtShinseiYukoKubun")
     public void setTxtShinseiYukoKubun(TextBox txtShinseiYukoKubun) {
-        this.txtShinseiYukoKubun=txtShinseiYukoKubun;
+        this.txtShinseiYukoKubun = txtShinseiYukoKubun;
     }
 
     @JsonProperty("ddlChiku")
@@ -108,7 +103,7 @@ public class ShinseiJohoInputDiv extends Panel {
 
     @JsonProperty("ddlChiku")
     public void setDdlChiku(DropDownList ddlChiku) {
-        this.ddlChiku=ddlChiku;
+        this.ddlChiku = ddlChiku;
     }
 
     @JsonProperty("btnRenrakusaki")
@@ -118,7 +113,7 @@ public class ShinseiJohoInputDiv extends Panel {
 
     @JsonProperty("btnRenrakusaki")
     public void setBtnRenrakusaki(ButtonDialog btnRenrakusaki) {
-        this.btnRenrakusaki=btnRenrakusaki;
+        this.btnRenrakusaki = btnRenrakusaki;
     }
 
     @JsonProperty("SinseiRiyu")
@@ -128,7 +123,7 @@ public class ShinseiJohoInputDiv extends Panel {
 
     @JsonProperty("SinseiRiyu")
     public void setSinseiRiyu(SinseiRiyuDiv SinseiRiyu) {
-        this.SinseiRiyu=SinseiRiyu;
+        this.SinseiRiyu = SinseiRiyu;
     }
 
     @JsonProperty("NinteiShinseisha")
@@ -138,7 +133,7 @@ public class ShinseiJohoInputDiv extends Panel {
 
     @JsonProperty("NinteiShinseisha")
     public void setNinteiShinseisha(NinteiShinseishaDiv NinteiShinseisha) {
-        this.NinteiShinseisha=NinteiShinseisha;
+        this.NinteiShinseisha = NinteiShinseisha;
     }
 
     @JsonProperty("LatestNinteiResult")
@@ -148,7 +143,7 @@ public class ShinseiJohoInputDiv extends Panel {
 
     @JsonProperty("LatestNinteiResult")
     public void setLatestNinteiResult(LatestNinteiResultDiv LatestNinteiResult) {
-        this.LatestNinteiResult=LatestNinteiResult;
+        this.LatestNinteiResult = LatestNinteiResult;
     }
 
     @JsonProperty("HihokenshaShujii")
@@ -158,7 +153,7 @@ public class ShinseiJohoInputDiv extends Panel {
 
     @JsonProperty("HihokenshaShujii")
     public void setHihokenshaShujii(HihokenshaShujiiDiv HihokenshaShujii) {
-        this.HihokenshaShujii=HihokenshaShujii;
+        this.HihokenshaShujii = HihokenshaShujii;
     }
 
     @JsonProperty("N2Hihokensha")
@@ -168,7 +163,7 @@ public class ShinseiJohoInputDiv extends Panel {
 
     @JsonProperty("N2Hihokensha")
     public void setN2Hihokensha(N2HihokenshaDiv N2Hihokensha) {
-        this.N2Hihokensha=N2Hihokensha;
+        this.N2Hihokensha = N2Hihokensha;
     }
 
     @JsonProperty("NinteichosainAdvanceEntry")
@@ -178,7 +173,7 @@ public class ShinseiJohoInputDiv extends Panel {
 
     @JsonProperty("NinteichosainAdvanceEntry")
     public void setNinteichosainAdvanceEntry(NinteichosainAdvanceEntryDiv NinteichosainAdvanceEntry) {
-        this.NinteichosainAdvanceEntry=NinteichosainAdvanceEntry;
+        this.NinteichosainAdvanceEntry = NinteichosainAdvanceEntry;
     }
 
     @JsonProperty("NyuinNyusho")
@@ -188,7 +183,7 @@ public class ShinseiJohoInputDiv extends Panel {
 
     @JsonProperty("NyuinNyusho")
     public void setNyuinNyusho(NyuinNyushoDiv NyuinNyusho) {
-        this.NyuinNyusho=NyuinNyusho;
+        this.NyuinNyusho = NyuinNyusho;
     }
 
     @JsonProperty("chkEnkitsuchiHakko")
@@ -198,7 +193,7 @@ public class ShinseiJohoInputDiv extends Panel {
 
     @JsonProperty("chkEnkitsuchiHakko")
     public void setChkEnkitsuchiHakko(CheckBoxList chkEnkitsuchiHakko) {
-        this.chkEnkitsuchiHakko=chkEnkitsuchiHakko;
+        this.chkEnkitsuchiHakko = chkEnkitsuchiHakko;
     }
 
     @JsonProperty("chkJohoteikyo")
@@ -208,7 +203,7 @@ public class ShinseiJohoInputDiv extends Panel {
 
     @JsonProperty("chkJohoteikyo")
     public void setChkJohoteikyo(CheckBoxList chkJohoteikyo) {
-        this.chkJohoteikyo=chkJohoteikyo;
+        this.chkJohoteikyo = chkJohoteikyo;
     }
 
     @JsonProperty("ShichosonRenrakuJiko")
@@ -218,7 +213,7 @@ public class ShinseiJohoInputDiv extends Panel {
 
     @JsonProperty("ShichosonRenrakuJiko")
     public void setShichosonRenrakuJiko(ShichosonRenrakuJikoDiv ShichosonRenrakuJiko) {
-        this.ShichosonRenrakuJiko=ShichosonRenrakuJiko;
+        this.ShichosonRenrakuJiko = ShichosonRenrakuJiko;
     }
 
     @JsonProperty("KankeiIin")
@@ -228,7 +223,7 @@ public class ShinseiJohoInputDiv extends Panel {
 
     @JsonProperty("KankeiIin")
     public void setKankeiIin(KankeiIinDiv KankeiIin) {
-        this.KankeiIin=KankeiIin;
+        this.KankeiIin = KankeiIin;
     }
 
     @JsonProperty("btnHiddenStart")
@@ -238,7 +233,7 @@ public class ShinseiJohoInputDiv extends Panel {
 
     @JsonProperty("btnHiddenStart")
     public void setBtnHiddenStart(Button btnHiddenStart) {
-        this.btnHiddenStart=btnHiddenStart;
+        this.btnHiddenStart = btnHiddenStart;
     }
 
 }

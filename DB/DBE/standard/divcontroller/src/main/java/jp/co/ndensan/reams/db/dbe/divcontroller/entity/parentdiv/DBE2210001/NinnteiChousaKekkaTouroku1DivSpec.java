@@ -72,9 +72,9 @@ public enum NinnteiChousaKekkaTouroku1DivSpec implements IPredicate<NinnteiChous
                  * @return true:第1群に未入力項目がない、false:第1群に未入力項目がある。
                  */
                 @Override
-                @SuppressWarnings("unchecked")
                 public boolean apply(NinnteiChousaKekkaTouroku1Div div) {
-                    ArrayList<KihonChosaInput> 第1群List = ViewStateHolder.get(KihonChosaInputHandler.ViewStateKey.第一群認定調査基本情報リスト, ArrayList.class);
+                    ArrayList<KihonChosaInput> 第1群List = ViewStateHolder.
+                    get(KihonChosaInputHandler.ViewStateKey.第一群認定調査基本情報リスト, ArrayList.class);
                     if (第1群List == null) {
                         return false;
                     }
@@ -99,9 +99,9 @@ public enum NinnteiChousaKekkaTouroku1DivSpec implements IPredicate<NinnteiChous
                  * @return true:第2群に未入力項目がない、false:第2群に未入力項目がある。
                  */
                 @Override
-                @SuppressWarnings("unchecked")
                 public boolean apply(NinnteiChousaKekkaTouroku1Div div) {
-                    ArrayList<KihonChosaInput> 第2群List = ViewStateHolder.get(KihonChosaInputHandler.ViewStateKey.第二群認定調査基本情報リスト, ArrayList.class);
+                    ArrayList<KihonChosaInput> 第2群List = ViewStateHolder.
+                    get(KihonChosaInputHandler.ViewStateKey.第二群認定調査基本情報リスト, ArrayList.class);
                     if (第2群List == null || 第2群List.size() != 12) {
                         return false;
                     }
@@ -116,9 +116,9 @@ public enum NinnteiChousaKekkaTouroku1DivSpec implements IPredicate<NinnteiChous
                  * @return true:第3群に未入力項目がない、false:第3群に未入力項目がある。
                  */
                 @Override
-                @SuppressWarnings("unchecked")
                 public boolean apply(NinnteiChousaKekkaTouroku1Div div) {
-                    ArrayList<KihonChosaInput> 第3群List = ViewStateHolder.get(KihonChosaInputHandler.ViewStateKey.第三群認定調査基本情報リスト, ArrayList.class);
+                    ArrayList<KihonChosaInput> 第3群List = ViewStateHolder.
+                    get(KihonChosaInputHandler.ViewStateKey.第三群認定調査基本情報リスト, ArrayList.class);
                     if (第3群List == null || 第3群List.size() != 9) {
                         return false;
                     }
@@ -133,9 +133,9 @@ public enum NinnteiChousaKekkaTouroku1DivSpec implements IPredicate<NinnteiChous
                  * @return true:第4群に未入力項目がない、false:第4群に未入力項目がある。
                  */
                 @Override
-                @SuppressWarnings("unchecked")
                 public boolean apply(NinnteiChousaKekkaTouroku1Div div) {
-                    ArrayList<KihonChosaInput> 第4群List = ViewStateHolder.get(KihonChosaInputHandler.ViewStateKey.第四群認定調査基本情報リスト, ArrayList.class);
+                    ArrayList<KihonChosaInput> 第4群List = ViewStateHolder.
+                    get(KihonChosaInputHandler.ViewStateKey.第四群認定調査基本情報リスト, ArrayList.class);
                     if (第4群List == null || 第4群List.size() != 15) {
                         return false;
                     }
@@ -150,9 +150,9 @@ public enum NinnteiChousaKekkaTouroku1DivSpec implements IPredicate<NinnteiChous
                  * @return true:第5群のに未入力項目がない、false:第5群のに未入力項目がある。
                  */
                 @Override
-                @SuppressWarnings("unchecked")
                 public boolean apply(NinnteiChousaKekkaTouroku1Div div) {
-                    ArrayList<KihonChosaInput> 第5群List = ViewStateHolder.get(KihonChosaInputHandler.ViewStateKey.第五群認定調査基本情報リスト, ArrayList.class);
+                    ArrayList<KihonChosaInput> 第5群List = ViewStateHolder.
+                    get(KihonChosaInputHandler.ViewStateKey.第五群認定調査基本情報リスト, ArrayList.class);
                     if (第5群List == null || 第5群List.size() != 6) {
                         return false;
                     }
@@ -167,9 +167,9 @@ public enum NinnteiChousaKekkaTouroku1DivSpec implements IPredicate<NinnteiChous
                  * @return true:生活自立度に未入力項目がない、false:生活自立度に未入力項目がある。
                  */
                 @Override
-                @SuppressWarnings("unchecked")
                 public boolean apply(NinnteiChousaKekkaTouroku1Div div) {
-                    ArrayList<KihonChosaInput> 生活自立度List = ViewStateHolder.get(KihonChosaInputHandler.ViewStateKey.第七群認定調査基本情報リスト, ArrayList.class);
+                    ArrayList<KihonChosaInput> 生活自立度List = ViewStateHolder.
+                    get(KihonChosaInputHandler.ViewStateKey.第七群認定調査基本情報リスト, ArrayList.class);
 
                     boolean 障害高齢者の日常生活自立度_選択 = false;
                     boolean 認知症高齢者の日常生活自立度_選択 = false;

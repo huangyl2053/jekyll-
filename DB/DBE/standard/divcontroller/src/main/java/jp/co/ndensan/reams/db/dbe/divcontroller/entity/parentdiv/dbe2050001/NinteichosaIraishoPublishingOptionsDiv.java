@@ -1,17 +1,14 @@
 package jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.dbe2050001;
+
 /**
- * このコードはツールによって生成されました。
- * このファイルへの変更は、再生成時には損失するため
- * 不正な動作の原因になります。
+ * このコードはツールによって生成されました。 このファイルへの変更は、再生成時には損失するため 不正な動作の原因になります。
  */
 import com.fasterxml.jackson.annotation.JsonProperty;
-import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.dbe2050001.NinteichosaIraishoTypeDiv;
-import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.dbe2050001.NinteichosaRelatedReportTypeDiv;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 
 /**
- * NinteichosaIraishoPublishingOptions のクラスファイル 
- * 
+ * NinteichosaIraishoPublishingOptions のクラスファイル
+ *
  * @author 自動生成
  */
 public class NinteichosaIraishoPublishingOptionsDiv extends Panel {
@@ -21,6 +18,7 @@ public class NinteichosaIraishoPublishingOptionsDiv extends Panel {
      * コントロール名とフィールド名を取得する
      * private + コントロール名 + フィールド名 の文字列を作成
      */
+
     @JsonProperty("NinteichosaIraishoType")
     private NinteichosaIraishoTypeDiv NinteichosaIraishoType;
     @JsonProperty("NinteichosaRelatedReportType")
@@ -39,7 +37,7 @@ public class NinteichosaIraishoPublishingOptionsDiv extends Panel {
 
     @JsonProperty("NinteichosaIraishoType")
     public void setNinteichosaIraishoType(NinteichosaIraishoTypeDiv NinteichosaIraishoType) {
-        this.NinteichosaIraishoType=NinteichosaIraishoType;
+        this.NinteichosaIraishoType = NinteichosaIraishoType;
     }
 
     @JsonProperty("NinteichosaRelatedReportType")
@@ -49,7 +47,7 @@ public class NinteichosaIraishoPublishingOptionsDiv extends Panel {
 
     @JsonProperty("NinteichosaRelatedReportType")
     public void setNinteichosaRelatedReportType(NinteichosaRelatedReportTypeDiv NinteichosaRelatedReportType) {
-        this.NinteichosaRelatedReportType=NinteichosaRelatedReportType;
+        this.NinteichosaRelatedReportType = NinteichosaRelatedReportType;
     }
 
 }

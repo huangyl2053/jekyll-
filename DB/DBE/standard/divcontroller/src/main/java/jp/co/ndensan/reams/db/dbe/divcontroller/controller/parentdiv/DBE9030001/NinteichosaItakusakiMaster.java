@@ -66,7 +66,6 @@ public class NinteichosaItakusakiMaster {
     private static final RString CSV_WRITER_DELIMITER = new RString(",");
     private static final RString 市町村の合法性チェックREPLACE = new RString("市町村コード");
     private static final RString その他状態コード = new RString("その他");
-    private static final RString 割付地区名称コード種別 = new RString("5002");
     private static final RString CSVファイル名 = new RString("認定調査委託先情報.csv");
 
     /**

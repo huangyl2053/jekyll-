@@ -464,7 +464,7 @@ public class ShinsakaiKaisaiYoteiToroku {
      * 「保存する」ボタン<br/>。
      *
      * @param div ShinsakaiKaisaiYoteiTorokuDiv
-     * @return　ResponseData<ShinsakaiKaisaiYoteiTorokuDiv>
+     * @return ResponseData<ShinsakaiKaisaiYoteiTorokuDiv>
      */
     public ResponseData<ShinsakaiKaisaiYoteiTorokuDiv> onClick_Hozon(ShinsakaiKaisaiYoteiTorokuDiv div) {
         this.div = div;

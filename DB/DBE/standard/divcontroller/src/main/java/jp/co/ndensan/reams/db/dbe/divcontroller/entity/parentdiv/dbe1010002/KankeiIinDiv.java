@@ -1,20 +1,18 @@
 package jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.dbe1010002;
-/**
- * このコードはツールによって生成されました。
- * このファイルへの変更は、再生成時には損失するため
- * 不正な動作の原因になります。
- */
-import com.fasterxml.jackson.annotation.JsonProperty;
-import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.dbe1010002.EditShinsakaiIinDiv;
-import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.dbe1010002.dgKankeiIin_Row;
-import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.ui.binding.*;
-import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
-import jp.co.ndensan.reams.uz.uza.ui.binding.domain.*;
 
 /**
- * KankeiIin のクラスファイル 
- * 
+ * このコードはツールによって生成されました。 このファイルへの変更は、再生成時には損失するため 不正な動作の原因になります。
+ */
+import com.fasterxml.jackson.annotation.JsonProperty;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.ui.binding.Button;
+import jp.co.ndensan.reams.uz.uza.ui.binding.DataGrid;
+import jp.co.ndensan.reams.uz.uza.ui.binding.Label;
+import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
+
+/**
+ * KankeiIin のクラスファイル
+ *
  * @author 自動生成
  */
 public class KankeiIinDiv extends Panel {
@@ -24,6 +22,7 @@ public class KankeiIinDiv extends Panel {
      * コントロール名とフィールド名を取得する
      * private + コントロール名 + フィールド名 の文字列を作成
      */
+
     @JsonProperty("lblExplanationForKankeiIin")
     private Label lblExplanationForKankeiIin;
     @JsonProperty("btnToAddKankeiIin")
@@ -50,7 +49,7 @@ public class KankeiIinDiv extends Panel {
 
     @JsonProperty("lblExplanationForKankeiIin")
     public void setLblExplanationForKankeiIin(Label lblExplanationForKankeiIin) {
-        this.lblExplanationForKankeiIin=lblExplanationForKankeiIin;
+        this.lblExplanationForKankeiIin = lblExplanationForKankeiIin;
     }
 
     @JsonProperty("btnToAddKankeiIin")
@@ -60,7 +59,7 @@ public class KankeiIinDiv extends Panel {
 
     @JsonProperty("btnToAddKankeiIin")
     public void setBtnToAddKankeiIin(Button btnToAddKankeiIin) {
-        this.btnToAddKankeiIin=btnToAddKankeiIin;
+        this.btnToAddKankeiIin = btnToAddKankeiIin;
     }
 
     @JsonProperty("dgKankeiIin")
@@ -70,7 +69,7 @@ public class KankeiIinDiv extends Panel {
 
     @JsonProperty("dgKankeiIin")
     public void setDgKankeiIin(DataGrid<dgKankeiIin_Row> dgKankeiIin) {
-        this.dgKankeiIin=dgKankeiIin;
+        this.dgKankeiIin = dgKankeiIin;
     }
 
     @JsonProperty("EditShinsakaiIin")
@@ -80,7 +79,7 @@ public class KankeiIinDiv extends Panel {
 
     @JsonProperty("EditShinsakaiIin")
     public void setEditShinsakaiIin(EditShinsakaiIinDiv EditShinsakaiIin) {
-        this.EditShinsakaiIin=EditShinsakaiIin;
+        this.EditShinsakaiIin = EditShinsakaiIin;
     }
 
     @JsonProperty("kankeiIinGridSelectedRow")
@@ -90,7 +89,7 @@ public class KankeiIinDiv extends Panel {
 
     @JsonProperty("kankeiIinGridSelectedRow")
     public void setKankeiIinGridSelectedRow(RString kankeiIinGridSelectedRow) {
-        this.kankeiIinGridSelectedRow=kankeiIinGridSelectedRow;
+        this.kankeiIinGridSelectedRow = kankeiIinGridSelectedRow;
     }
 
     @JsonProperty("decideFlag")
@@ -100,7 +99,7 @@ public class KankeiIinDiv extends Panel {
 
     @JsonProperty("decideFlag")
     public void setDecideFlag(RString decideFlag) {
-        this.decideFlag=decideFlag;
+        this.decideFlag = decideFlag;
     }
 
 }

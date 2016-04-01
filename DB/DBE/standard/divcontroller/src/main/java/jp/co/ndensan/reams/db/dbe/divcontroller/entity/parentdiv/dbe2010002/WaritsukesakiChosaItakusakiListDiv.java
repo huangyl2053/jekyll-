@@ -1,18 +1,16 @@
 package jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.dbe2010002;
-/**
- * このコードはツールによって生成されました。
- * このファイルへの変更は、再生成時には損失するため
- * 不正な動作の原因になります。
- */
-import com.fasterxml.jackson.annotation.JsonProperty;
-import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.dbe2010002.dgChosaItakusakiList_Row;
-import jp.co.ndensan.reams.uz.uza.ui.binding.*;
-import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
-import jp.co.ndensan.reams.uz.uza.ui.binding.domain.*;
 
 /**
- * WaritsukesakiChosaItakusakiList のクラスファイル 
- * 
+ * このコードはツールによって生成されました。 このファイルへの変更は、再生成時には損失するため 不正な動作の原因になります。
+ */
+import com.fasterxml.jackson.annotation.JsonProperty;
+import jp.co.ndensan.reams.uz.uza.ui.binding.Button;
+import jp.co.ndensan.reams.uz.uza.ui.binding.DataGrid;
+import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
+
+/**
+ * WaritsukesakiChosaItakusakiList のクラスファイル
+ *
  * @author 自動生成
  */
 public class WaritsukesakiChosaItakusakiListDiv extends Panel {
@@ -22,6 +20,7 @@ public class WaritsukesakiChosaItakusakiListDiv extends Panel {
      * コントロール名とフィールド名を取得する
      * private + コントロール名 + フィールド名 の文字列を作成
      */
+
     @JsonProperty("btnToAddChosaItakusaki")
     private Button btnToAddChosaItakusaki;
     @JsonProperty("dgChosaItakusakiList")
@@ -40,7 +39,7 @@ public class WaritsukesakiChosaItakusakiListDiv extends Panel {
 
     @JsonProperty("btnToAddChosaItakusaki")
     public void setBtnToAddChosaItakusaki(Button btnToAddChosaItakusaki) {
-        this.btnToAddChosaItakusaki=btnToAddChosaItakusaki;
+        this.btnToAddChosaItakusaki = btnToAddChosaItakusaki;
     }
 
     @JsonProperty("dgChosaItakusakiList")
@@ -50,7 +49,7 @@ public class WaritsukesakiChosaItakusakiListDiv extends Panel {
 
     @JsonProperty("dgChosaItakusakiList")
     public void setDgChosaItakusakiList(DataGrid<dgChosaItakusakiList_Row> dgChosaItakusakiList) {
-        this.dgChosaItakusakiList=dgChosaItakusakiList;
+        this.dgChosaItakusakiList = dgChosaItakusakiList;
     }
 
 }

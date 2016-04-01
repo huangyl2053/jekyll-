@@ -29,6 +29,12 @@ public class ValidationHandler {
         this.nijidiv = nijidiv;
     }
 
+    /**
+     * データ空チェック
+     *
+     * @param validPairs ValidationMessageControlPairs
+     * @return ValidationMessageControlPairs
+     */
     public ValidationMessageControlPairs データ空チェック(ValidationMessageControlPairs validPairs) {
         if (nijidiv.getNijihanteiKekkaIchiran().getDgTaishoshaIchiran().getDataSource().isEmpty()) {
             validPairs.add(new ValidationMessageControlPair(RRVMessages.Validate対象者一覧未表示,
@@ -37,6 +43,12 @@ public class ValidationHandler {
         return validPairs;
     }
 
+    /**
+     * 未選択チェック
+     *
+     * @param validPairs ValidationMessageControlPairs
+     * @return ValidationMessageControlPairs
+     */
     public ValidationMessageControlPairs 未選択チェック(ValidationMessageControlPairs validPairs) {
         if (nijidiv.getNijihanteiKekkaIchiran().getDgTaishoshaIchiran().getSelectedItems().isEmpty()) {
             validPairs.add(new ValidationMessageControlPair(RRVMessages.Validate対象者一覧未選択,

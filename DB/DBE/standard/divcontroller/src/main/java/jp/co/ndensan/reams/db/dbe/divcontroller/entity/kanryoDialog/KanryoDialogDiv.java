@@ -1,19 +1,15 @@
 package jp.co.ndensan.reams.db.dbe.divcontroller.entity.kanryoDialog;
-/**
- * このコードはツールによって生成されました。
- * このファイルへの変更は、再生成時には損失するため
- * 不正な動作の原因になります。
- */
-import jp.co.ndensan.reams.db.dbe.divcontroller.entity.kanryoDialog.IKanryoDialogDiv;
-import com.fasterxml.jackson.annotation.JsonProperty;
-import jp.co.ndensan.reams.db.dbe.divcontroller.entity.kanryoDialog.SuccessInfoDiv;
-import jp.co.ndensan.reams.uz.uza.ui.binding.*;
-import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
-import jp.co.ndensan.reams.uz.uza.ui.binding.domain.*;
 
 /**
- * KanryoDialog のクラスファイル 
- * 
+ * このコードはツールによって生成されました。 このファイルへの変更は、再生成時には損失するため 不正な動作の原因になります。
+ */
+import com.fasterxml.jackson.annotation.JsonProperty;
+import jp.co.ndensan.reams.uz.uza.ui.binding.Button;
+import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
+
+/**
+ * KanryoDialog のクラスファイル
+ *
  * @author 自動生成
  */
 public class KanryoDialogDiv extends Panel implements IKanryoDialogDiv {
@@ -23,6 +19,7 @@ public class KanryoDialogDiv extends Panel implements IKanryoDialogDiv {
      * コントロール名とフィールド名を取得する
      * private + コントロール名 + フィールド名 の文字列を作成
      */
+
     @JsonProperty("SuccessInfo")
     private SuccessInfoDiv SuccessInfo;
     @JsonProperty("btnClose")
@@ -41,7 +38,7 @@ public class KanryoDialogDiv extends Panel implements IKanryoDialogDiv {
 
     @JsonProperty("SuccessInfo")
     public void setSuccessInfo(SuccessInfoDiv SuccessInfo) {
-        this.SuccessInfo=SuccessInfo;
+        this.SuccessInfo = SuccessInfo;
     }
 
     @JsonProperty("btnClose")
@@ -51,9 +48,8 @@ public class KanryoDialogDiv extends Panel implements IKanryoDialogDiv {
 
     @JsonProperty("btnClose")
     public void setBtnClose(Button btnClose) {
-        this.btnClose=btnClose;
+        this.btnClose = btnClose;
     }
 
     //--------------- この行より下にコードを追加してください -------------------
-
 }

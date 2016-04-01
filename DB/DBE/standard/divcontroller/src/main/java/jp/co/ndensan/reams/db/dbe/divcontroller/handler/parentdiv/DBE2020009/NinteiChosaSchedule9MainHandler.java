@@ -223,10 +223,9 @@ public class NinteiChosaSchedule9MainHandler {
      */
     public ChosaSchedulehyoHeadItem createHeadItemItem_事務所(List<JiMuSyoBusiness> businessList) {
 
-        if (businessList != null && !businessList.isEmpty()) {
-
-            //JiMuSyoBusiness business = businessList.get(0);
-        }
+//        if (businessList != null && !businessList.isEmpty()) {
+        //JiMuSyoBusiness business = businessList.get(0);
+//        }
         // TODO 引数が不正です。QA内部番号810
         return new ChosaSchedulehyoHeadItem(RString.EMPTY, RString.EMPTY,
                 RString.EMPTY);

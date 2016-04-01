@@ -1,18 +1,15 @@
 package jp.co.ndensan.reams.db.dbe.divcontroller.entity;
+
 /**
- * このコードはツールによって生成されました。
- * このファイルへの変更は、再生成時には損失するため
- * 不正な動作の原因になります。
+ * このコードはツールによって生成されました。 このファイルへの変更は、再生成時には損失するため 不正な動作の原因になります。
  */
-import jp.co.ndensan.reams.db.dbe.divcontroller.entity.IKaigoHihokenshaJohoDiv;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jp.co.ndensan.reams.uz.uza.ui.binding.*;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
-import jp.co.ndensan.reams.uz.uza.ui.binding.domain.*;
 
 /**
- * KaigoHihokenshaJoho のクラスファイル 
- * 
+ * KaigoHihokenshaJoho のクラスファイル
+ *
  * @author 自動生成
  */
 public class KaigoHihokenshaJohoDiv extends Panel implements IKaigoHihokenshaJohoDiv {
@@ -22,6 +19,7 @@ public class KaigoHihokenshaJohoDiv extends Panel implements IKaigoHihokenshaJoh
      * コントロール名とフィールド名を取得する
      * private + コントロール名 + フィールド名 の文字列を作成
      */
+
     @JsonProperty("txtHokenshaNo")
     private TextBox txtHokenshaNo;
     @JsonProperty("txtHokenshaMeisho")
@@ -66,7 +64,7 @@ public class KaigoHihokenshaJohoDiv extends Panel implements IKaigoHihokenshaJoh
 
     @JsonProperty("txtHokenshaNo")
     public void setTxtHokenshaNo(TextBox txtHokenshaNo) {
-        this.txtHokenshaNo=txtHokenshaNo;
+        this.txtHokenshaNo = txtHokenshaNo;
     }
 
     @JsonProperty("txtHokenshaMeisho")
@@ -76,7 +74,7 @@ public class KaigoHihokenshaJohoDiv extends Panel implements IKaigoHihokenshaJoh
 
     @JsonProperty("txtHokenshaMeisho")
     public void setTxtHokenshaMeisho(TextBox txtHokenshaMeisho) {
-        this.txtHokenshaMeisho=txtHokenshaMeisho;
+        this.txtHokenshaMeisho = txtHokenshaMeisho;
     }
 
     @JsonProperty("txtHihokenshaNo")
@@ -86,7 +84,7 @@ public class KaigoHihokenshaJohoDiv extends Panel implements IKaigoHihokenshaJoh
 
     @JsonProperty("txtHihokenshaNo")
     public void setTxtHihokenshaNo(TextBox txtHihokenshaNo) {
-        this.txtHihokenshaNo=txtHihokenshaNo;
+        this.txtHihokenshaNo = txtHihokenshaNo;
     }
 
     @JsonProperty("txtHihokenshaShimei")
@@ -96,7 +94,7 @@ public class KaigoHihokenshaJohoDiv extends Panel implements IKaigoHihokenshaJoh
 
     @JsonProperty("txtHihokenshaShimei")
     public void setTxtHihokenshaShimei(TextBox txtHihokenshaShimei) {
-        this.txtHihokenshaShimei=txtHihokenshaShimei;
+        this.txtHihokenshaShimei = txtHihokenshaShimei;
     }
 
     @JsonProperty("txtHihokenshaKubun")
@@ -106,7 +104,7 @@ public class KaigoHihokenshaJohoDiv extends Panel implements IKaigoHihokenshaJoh
 
     @JsonProperty("txtHihokenshaKubun")
     public void setTxtHihokenshaKubun(TextBox txtHihokenshaKubun) {
-        this.txtHihokenshaKubun=txtHihokenshaKubun;
+        this.txtHihokenshaKubun = txtHihokenshaKubun;
     }
 
     @JsonProperty("txtBirthDay")
@@ -116,7 +114,7 @@ public class KaigoHihokenshaJohoDiv extends Panel implements IKaigoHihokenshaJoh
 
     @JsonProperty("txtBirthDay")
     public void setTxtBirthDay(TextBoxDate txtBirthDay) {
-        this.txtBirthDay=txtBirthDay;
+        this.txtBirthDay = txtBirthDay;
     }
 
     @JsonProperty("txtNenrei")
@@ -126,7 +124,7 @@ public class KaigoHihokenshaJohoDiv extends Panel implements IKaigoHihokenshaJoh
 
     @JsonProperty("txtNenrei")
     public void setTxtNenrei(TextBox txtNenrei) {
-        this.txtNenrei=txtNenrei;
+        this.txtNenrei = txtNenrei;
     }
 
     @JsonProperty("btnShichosonRenraku")
@@ -136,7 +134,7 @@ public class KaigoHihokenshaJohoDiv extends Panel implements IKaigoHihokenshaJoh
 
     @JsonProperty("btnShichosonRenraku")
     public void setBtnShichosonRenraku(Button btnShichosonRenraku) {
-        this.btnShichosonRenraku=btnShichosonRenraku;
+        this.btnShichosonRenraku = btnShichosonRenraku;
     }
 
     @JsonProperty("txtNinteiShinseiYMD")
@@ -146,7 +144,7 @@ public class KaigoHihokenshaJohoDiv extends Panel implements IKaigoHihokenshaJoh
 
     @JsonProperty("txtNinteiShinseiYMD")
     public void setTxtNinteiShinseiYMD(TextBoxFlexibleDate txtNinteiShinseiYMD) {
-        this.txtNinteiShinseiYMD=txtNinteiShinseiYMD;
+        this.txtNinteiShinseiYMD = txtNinteiShinseiYMD;
     }
 
     @JsonProperty("txtShinseiKubun")
@@ -156,7 +154,7 @@ public class KaigoHihokenshaJohoDiv extends Panel implements IKaigoHihokenshaJoh
 
     @JsonProperty("txtShinseiKubun")
     public void setTxtShinseiKubun(TextBox txtShinseiKubun) {
-        this.txtShinseiKubun=txtShinseiKubun;
+        this.txtShinseiKubun = txtShinseiKubun;
     }
 
     @JsonProperty("txtZenkaiYokaigodo")
@@ -166,7 +164,7 @@ public class KaigoHihokenshaJohoDiv extends Panel implements IKaigoHihokenshaJoh
 
     @JsonProperty("txtZenkaiYokaigodo")
     public void setTxtZenkaiYokaigodo(TextBox txtZenkaiYokaigodo) {
-        this.txtZenkaiYokaigodo=txtZenkaiYokaigodo;
+        this.txtZenkaiYokaigodo = txtZenkaiYokaigodo;
     }
 
     @JsonProperty("txtZenYukokikanStart")
@@ -176,7 +174,7 @@ public class KaigoHihokenshaJohoDiv extends Panel implements IKaigoHihokenshaJoh
 
     @JsonProperty("txtZenYukokikanStart")
     public void setTxtZenYukokikanStart(TextBoxFlexibleDate txtZenYukokikanStart) {
-        this.txtZenYukokikanStart=txtZenYukokikanStart;
+        this.txtZenYukokikanStart = txtZenYukokikanStart;
     }
 
     @JsonProperty("lblKara2")
@@ -186,7 +184,7 @@ public class KaigoHihokenshaJohoDiv extends Panel implements IKaigoHihokenshaJoh
 
     @JsonProperty("lblKara2")
     public void setLblKara2(Label lblKara2) {
-        this.lblKara2=lblKara2;
+        this.lblKara2 = lblKara2;
     }
 
     @JsonProperty("txtZenYukokikanEnd")
@@ -196,7 +194,7 @@ public class KaigoHihokenshaJohoDiv extends Panel implements IKaigoHihokenshaJoh
 
     @JsonProperty("txtZenYukokikanEnd")
     public void setTxtZenYukokikanEnd(TextBoxFlexibleDate txtZenYukokikanEnd) {
-        this.txtZenYukokikanEnd=txtZenYukokikanEnd;
+        this.txtZenYukokikanEnd = txtZenYukokikanEnd;
     }
 
     @JsonProperty("btnRenrakusaki")
@@ -206,9 +204,8 @@ public class KaigoHihokenshaJohoDiv extends Panel implements IKaigoHihokenshaJoh
 
     @JsonProperty("btnRenrakusaki")
     public void setBtnRenrakusaki(Button btnRenrakusaki) {
-        this.btnRenrakusaki=btnRenrakusaki;
+        this.btnRenrakusaki = btnRenrakusaki;
     }
 
     //--------------- この行より下にコードを追加してください -------------------
-
 }

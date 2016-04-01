@@ -152,7 +152,7 @@ public class ShinseiJohoInput {
      * バリデーションをします。
      *
      * @param div ShinseiJohoInputDiv
-     * @param hihokenshaDiv
+     * @param hihokenshaDiv HihokenshaOutlineDiv
      * @return ResponseData
      */
     public ResponseData<ShinseiJohoInputDiv> onClick_btnValidation(ShinseiJohoInputDiv div, HihokenshaOutlineDiv hihokenshaDiv) {
@@ -515,10 +515,10 @@ public class ShinseiJohoInput {
 
         @Override
         public void init(dgSearchResult_Row hihokensha) {
-            _init(hihokensha);
+//            _init(hihokensha);
         }
 
-        private void _init(dgSearchResult_Row hihokensha) {
+//        private void _init(dgSearchResult_Row hihokensha) {
 //            YokaigoninteiShinseishaData.LatestNinteiResult latestResult
 //                    = new YokaigoninteiShinseishaData().get前回認定結果(hihokensha.getHihokenshaNo());
 //            _setUp(latestResult.yokaigodo().toRString(), latestResult.ninteiDate(),
@@ -533,8 +533,7 @@ public class ShinseiJohoInput {
 //                HihokenshaShujii.setLatestValue(shujii, hihokensha.getHihokenshaNo());
 //                setDisplayNone_buttons_toCopyLatest(false);
 //            }
-        }
-
+//        }
         private void setDisplayNone_buttons_toCopyLatest(boolean displayNone) {
             this.shujii.getBtnToCopyLatestShujii().setDisplayNone(displayNone);
             this.chosain.getBtnToCopyLatestItakusaki().setDisplayNone(displayNone);
