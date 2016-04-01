@@ -18,7 +18,8 @@ import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
  * 認定調査票_概況調査_サービスの状況を管理するクラスです。
  */
 public class NinteichosahyoServiceJokyo extends
-        ParentModelBase<NinteichosahyoServiceJokyoIdentifier, DbT5207NinteichosahyoServiceJokyoEntity, NinteichosahyoServiceJokyo> implements Serializable {
+        ParentModelBase<NinteichosahyoServiceJokyoIdentifier, DbT5207NinteichosahyoServiceJokyoEntity, NinteichosahyoServiceJokyo>
+        implements Serializable {
 
     private final DbT5207NinteichosahyoServiceJokyoEntity entity;
     private final NinteichosahyoServiceJokyoIdentifier id;

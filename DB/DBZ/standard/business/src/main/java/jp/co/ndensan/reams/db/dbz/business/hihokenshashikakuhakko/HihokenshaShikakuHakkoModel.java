@@ -19,6 +19,7 @@ import jp.co.ndensan.reams.uz.uza.math.Decimal;
  * @author N8187 久保田 英男
  */
 public class HihokenshaShikakuHakkoModel implements Serializable {
+    private static final long serialVersionUID = 6754901111853499530L;
 
     private transient Optional<FlexibleDate> 有効期限;
     private FlexibleDate 交付日;

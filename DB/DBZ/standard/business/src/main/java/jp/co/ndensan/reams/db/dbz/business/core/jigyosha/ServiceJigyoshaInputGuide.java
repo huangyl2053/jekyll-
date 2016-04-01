@@ -18,8 +18,9 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
  * 介護事業者施設オブジェクトの項目定義クラスです。
  */
 public class ServiceJigyoshaInputGuide implements Serializable {
+    private static final long serialVersionUID = -6323018880264468128L;
 
-    private ServiceJigyoshaInputGuideRelateEntity entity;
+    private transient ServiceJigyoshaInputGuideRelateEntity entity;
 
     /**
      * コンストラクタです.

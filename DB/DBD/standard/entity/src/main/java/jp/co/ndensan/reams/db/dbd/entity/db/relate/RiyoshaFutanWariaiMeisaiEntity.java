@@ -16,7 +16,7 @@ import jp.co.ndensan.reams.db.dbd.entity.db.basic.DbT3115RiyoshaFutanWariaiKonky
  */
 @lombok.Getter
 @lombok.Setter
-public class RiyoshaFutanWariaiMeisaiEntity implements Cloneable, Serializable {
+public class RiyoshaFutanWariaiMeisaiEntity implements Serializable {
 
     /**
      * -- GETTER -- 利用者負担割合明細Entityを返します。
@@ -47,8 +47,7 @@ public class RiyoshaFutanWariaiMeisaiEntity implements Cloneable, Serializable {
     /**
      * MyBatisで取得された場合に使用して下さい。<br/>
      * MyBatisで当クラス取得時は、新規追加(Added)となるため、変更無し(Unchanged)に設定します。<br/>
-     * RiyoshaFutanWariaiMeisaiEntityが持つ{@link xxxxxxEntity}と{@link xxxxxxEntity}と<br/>
-     * {@link xxxxxxEntity}のMD5値を計算し、設定します。
+     * RiyoshaFutanWariaiMeisaiEntityが持つ{@link xxxxxxEntity}と{@link xxxxxxEntity}と<br/> {@link xxxxxxEntity}のMD5値を計算し、設定します。
      */
     public void initializeMd5ToEntities() {
         this.利用者負担割合明細Entity.initializeMd5();

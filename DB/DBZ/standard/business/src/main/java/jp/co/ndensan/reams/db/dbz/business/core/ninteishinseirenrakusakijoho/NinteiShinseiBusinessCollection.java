@@ -22,6 +22,7 @@ import lombok.Setter;
 @Setter
 @SuppressWarnings("PMD.UnusedPrivateField")
 public class NinteiShinseiBusinessCollection implements Serializable {
+    private static final long serialVersionUID = 8959145199481894810L;
 
      private SubGyomuCode hdnDatabaseSubGyomuCode;
      private ShinseishoKanriNo shinseishoKanriNo;

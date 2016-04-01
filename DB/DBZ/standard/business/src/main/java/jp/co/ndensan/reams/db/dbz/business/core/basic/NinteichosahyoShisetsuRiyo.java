@@ -19,7 +19,8 @@ import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
  * 認定調査票_概況調査_施設利用を管理するクラスです。
  */
 public class NinteichosahyoShisetsuRiyo extends
-        ParentModelBase<NinteichosahyoShisetsuRiyoIdentifier, DbT5210NinteichosahyoShisetsuRiyoEntity, NinteichosahyoShisetsuRiyo> implements Serializable {
+        ParentModelBase<NinteichosahyoShisetsuRiyoIdentifier, DbT5210NinteichosahyoShisetsuRiyoEntity, NinteichosahyoShisetsuRiyo>
+        implements Serializable {
 
     private final DbT5210NinteichosahyoShisetsuRiyoEntity entity;
     private final NinteichosahyoShisetsuRiyoIdentifier id;
