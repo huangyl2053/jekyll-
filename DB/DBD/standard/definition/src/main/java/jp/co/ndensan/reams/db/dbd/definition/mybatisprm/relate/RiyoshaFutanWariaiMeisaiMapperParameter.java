@@ -7,7 +7,6 @@ package jp.co.ndensan.reams.db.dbd.definition.mybatisprm.relate;
 
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
-import jp.co.ndensan.reams.uz.uza.math.Decimal;
 
 /**
  * 利用者負担割合明細を特定するためのMyBatis用パラメータクラスです。
@@ -18,8 +17,6 @@ public final class RiyoshaFutanWariaiMeisaiMapperParameter {
 // TODO 主キーの数が足りない場合、処理を追加してください。
     private final FlexibleYear 主キー1;
     private final HihokenshaNo 主キー2;
-    private Decimal 主キー3;
-    private Decimal 主キー4;
 
     private final boolean uses主キー1;
     private final boolean uses主キー2;
@@ -88,24 +85,6 @@ public final class RiyoshaFutanWariaiMeisaiMapperParameter {
      */
     public HihokenshaNo get主キー2() {
         return 主キー2;
-    }
-
-    /**
-     * 主キー3を取得します。
-     *
-     * @return 主キー3
-     */
-    public Decimal get主キー3() {
-        return 主キー3;
-    }
-
-    /**
-     * 主キー4を取得します。
-     *
-     * @return 主キー4
-     */
-    public Decimal get主キー4() {
-        return 主キー4;
     }
 
     /**

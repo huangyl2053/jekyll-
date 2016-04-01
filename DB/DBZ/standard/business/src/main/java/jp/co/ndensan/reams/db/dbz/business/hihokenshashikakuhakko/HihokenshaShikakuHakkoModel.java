@@ -20,7 +20,7 @@ import jp.co.ndensan.reams.uz.uza.math.Decimal;
  */
 public class HihokenshaShikakuHakkoModel implements Serializable {
 
-    private Optional<FlexibleDate> 有効期限;
+    private transient Optional<FlexibleDate> 有効期限;
     private FlexibleDate 交付日;
     private RString 保険者番号;
     private RString 保険者名称;

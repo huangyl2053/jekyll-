@@ -14,7 +14,7 @@ import java.io.Serializable;
  */
 public class KoseiShichosonModel implements Serializable {
 
-    private final KoseiShichosonMasterModel masterModel;
+    private final transient KoseiShichosonMasterModel masterModel;
 
     /**
      * {@link KoseiShichosonMasterModel}からインスタンスを生成します。

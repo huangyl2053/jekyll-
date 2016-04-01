@@ -22,7 +22,7 @@ public enum HihokenshaShikakuHakkoValidationMessage implements IValidationMessag
      */
     交付事由が未選択(UrErrorMessages.必須項目);
 
-    private final Message message;
+    private final transient Message message;
 
     private HihokenshaShikakuHakkoValidationMessage(IMessageGettable message) {
         this.message = message.getMessage();

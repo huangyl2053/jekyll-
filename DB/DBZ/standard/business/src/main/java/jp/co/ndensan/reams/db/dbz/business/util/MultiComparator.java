@@ -4,6 +4,7 @@
  */
 package jp.co.ndensan.reams.db.dbz.business.util;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Comparator;
@@ -16,7 +17,7 @@ import java.util.List;
  * @param <T> 複数のcomparatorを適用する対象のオブジェクト
  */
 @Deprecated
-public class MultiComparator<T> implements Comparator<T> {
+public class MultiComparator<T> implements Comparator<T>, Serializable {
 
     private final List<Comparator<? super T>> comparatorList = new ArrayList<>();
 

@@ -17,7 +17,7 @@ public enum KaigoKanryoMessage implements IMessageGettable {
 
     更新終了(4, "更新は正常に終了しました。"),
     削除終了(5, "削除は正常に終了しました。");
-    private final Message message;
+    private final transient Message message;
 
     private KaigoKanryoMessage(int no, String message) {
         this.message = new InformationMessage(toCode("DBZI", no), message);

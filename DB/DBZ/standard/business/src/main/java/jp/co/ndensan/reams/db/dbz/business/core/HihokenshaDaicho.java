@@ -22,7 +22,7 @@ import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
  * 被保険者台帳管理を管理するクラスです。
  */
 public class HihokenshaDaicho extends ModelBase<HihokenshaDaichoIdentifier, DbT1001HihokenshaDaichoEntity, HihokenshaDaicho>
-        implements Serializable, Comparable<HihokenshaDaicho> {
+        implements Serializable {
 
     private final DbT1001HihokenshaDaichoEntity entity;
     private final HihokenshaDaichoIdentifier id;
@@ -383,11 +383,6 @@ public class HihokenshaDaicho extends ModelBase<HihokenshaDaichoIdentifier, DbT1
     @Override
     public boolean hasChanged() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public int compareTo(HihokenshaDaicho daicho) {
-        return get被保険者番号().compareTo(daicho.get被保険者番号());
     }
 
     private static final class _SerializationProxy implements Serializable {

@@ -58,7 +58,7 @@ public enum DbzErrorMessages implements IMessageGettable, IValidationMessage {
     保険者番号取得不可(44, "保険者番号が取得できません。"),
     処理日付管理マスタなし(45, "処理日付管理マスタがありません。：?");
 
-    private final Message message;
+    private final transient Message message;
 
     /**
      * コンストラクタです。

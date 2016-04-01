@@ -22,7 +22,7 @@ public enum KaigoIryoKikanCodeValidationMessage implements IValidationMessage {
      * コードがNullであること。
      */
     コードがNullであること(KaigoIryoKikanCodeErrorMessage.コードがNullであること);
-    private final Message message;
+    private final transient Message message;
 
     private KaigoIryoKikanCodeValidationMessage(IMessageGettable message, String... replacements) {
         this.message = message.getMessage().replace(replacements);
