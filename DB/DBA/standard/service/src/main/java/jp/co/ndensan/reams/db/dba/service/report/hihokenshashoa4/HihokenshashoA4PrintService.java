@@ -49,7 +49,7 @@ public class HihokenshashoA4PrintService {
                         NinshoshaDenshikoinshubetsuCode.保険者印.getコード(), null, RString.EMPTY);
                 for (HihokenshashoA4BodyItem bodyItem : bodyItemlist) {
                     bodyItem = new HihokenshashoA4BodyItem(
-                            bodyItem.getYukokigen(),
+                            bodyItem.getYukokigen1(),
                             bodyItem.getYukokigen2(),
                             bodyItem.getHihokenshanno(),
                             bodyItem.getYubinno(),
@@ -63,7 +63,10 @@ public class HihokenshashoA4PrintService {
                             bodyItem.getUmareMm(),
                             bodyItem.getUmareDd(),
                             bodyItem.getSeibetsu(),
-                            bodyItem.getKofuymd(),
+                            bodyItem.getKofuymdGengo(),
+                            bodyItem.getKofuymdYy(),
+                            bodyItem.getKofuymdMm(),
+                            bodyItem.getKofuymdDd(),
                             bodyItem.getSaikofu1(),
                             bodyItem.getHokenshano1(),
                             bodyItem.getHokenshano2(),
@@ -122,9 +125,17 @@ public class HihokenshashoA4PrintService {
                             bodyItem.getGyosha1(),
                             bodyItem.getTodokeYmd1(),
                             bodyItem.getGyosha2(),
+                            bodyItem.getGyosha2Asa(),
+                            bodyItem.getGyosha2Massho(),
                             bodyItem.getTodokeYmd2(),
+                            bodyItem.getTodokeYmd2Asa(),
+                            bodyItem.getTodokeYmd2Massho(),
                             bodyItem.getGyosha3(),
+                            bodyItem.getGyosha3Asa(),
+                            bodyItem.getGyosha3Massho(),
                             bodyItem.getTodokeYmd3(),
+                            bodyItem.getTodokeYmd3Asa(),
+                            bodyItem.getTodokeYmd3Massho(),
                             bodyItem.getShisetsuSyu1(),
                             bodyItem.getShisetsuname1(),
                             bodyItem.getNyushochk1(),
@@ -148,7 +159,11 @@ public class HihokenshashoA4PrintService {
                             bodyItem.getKosekiSeibetsu12(),
                             bodyItem.getItakuGyosha1(),
                             bodyItem.getItakuGyosha2(),
+                            bodyItem.getItakuGyosha2Asa(),
+                            bodyItem.getItakuGyosha2Massho(),
                             bodyItem.getItakuGyosha3(),
+                            bodyItem.getItakuGyosha3Asa(),
+                            bodyItem.getItakuGyosha3Massho(),
                             ninshoshaSourceBuilder.buildSource().denshiKoin);
                     for (HihokenshashoA4Report report : toReports(new HihokenshashoA4Joho(bodyItem))) {
                         ReportSourceWriter<HihokenshashoA4ReportSource> reportSourceWriter = new ReportSourceWriter(assembler);
