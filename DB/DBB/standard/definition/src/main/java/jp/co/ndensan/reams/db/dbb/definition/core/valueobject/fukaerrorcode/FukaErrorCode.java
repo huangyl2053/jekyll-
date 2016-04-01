@@ -48,7 +48,8 @@ public class FukaErrorCode implements Comparable<FukaErrorCode>, ICodeWrapValueO
     }
 
     /**
-     * DB等からコンストラクタを利用して直接マッピングされた、<br/> {@link FukaErrorCode}が持つerrorCodeについてバリデーションを実施します。
+     * DB等からコンストラクタを利用して直接マッピングされた、<br/>
+     * {@link FukaErrorCode}が持つerrorCodeについてバリデーションを実施します。
      *
      * @return {@link IValidationMessages}
      */
@@ -75,6 +76,7 @@ public class FukaErrorCode implements Comparable<FukaErrorCode>, ICodeWrapValueO
         return new FukaErrorCode(errorCode);
     }
 
+    @Override
     public Code asCode() {
         return errorCode;
     }

@@ -13,8 +13,8 @@ import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 /**
  * 介護賦課を特定するためのMyBatis用パラメータクラスです。
  */
-@SuppressWarnings("PMD.UnusedPrivateField")
 @lombok.Getter
+@SuppressWarnings("PMD.UnusedPrivateField")
 public class FukaMapperParameter {
 
     private final FlexibleYear choteiNendo;
