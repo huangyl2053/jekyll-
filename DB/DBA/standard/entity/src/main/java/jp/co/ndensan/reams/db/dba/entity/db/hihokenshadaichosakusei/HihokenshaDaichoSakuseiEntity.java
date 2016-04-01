@@ -59,6 +59,8 @@ public class HihokenshaDaichoSakuseiEntity {
     private RString iryoHokenshaMeisho;
     private RString iryoHokenKigoNo;
     private RString orderNo;
+    private RString sochiHokensha;
+    private RString kyuHokensha;
     private HihokenshaDaichoDivisionEntity 資格異動情報Entity;
     private SeikatsuHogoJukyushaDivisionEntity 生活保護情報Entity;
     private RoreiFukushiNenkinJukyushaDivisionEntity 老齢福祉情報Entity;

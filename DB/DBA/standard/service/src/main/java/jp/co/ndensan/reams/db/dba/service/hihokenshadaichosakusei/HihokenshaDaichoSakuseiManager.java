@@ -352,6 +352,9 @@ public class HihokenshaDaichoSakuseiManager {
                 hihokenshaDaichoSakuseiEntity.setIryoHokenshaMeisho(hihokenshaList.get(j).getIryoHokenshaMeisho());
                 hihokenshaDaichoSakuseiEntity.setIryoHokenKigoNo(hihokenshaList.get(j).getIryoHokenKigoNo());
                 hihokenshaDaichoSakuseiEntity.setOrderNo(hihokenshaList.get(j).getOrderNo());
+                // TODO 措置保険者タイトル,旧保険者タイトル取得方針不明 一時空白値を使用します
+                hihokenshaDaichoSakuseiEntity.setSochiHokensha(RString.EMPTY);
+                hihokenshaDaichoSakuseiEntity.setKyuHokensha(RString.EMPTY);
                 if (!分割した被保険者台帳管理List.isEmpty() && 分割した被保険者台帳管理List.get(j) != null) {
                     set資格異動情報(hihokenshaDaichoSakuseiEntity, 分割した被保険者台帳管理List.get(j));
                 } else {
