@@ -33,8 +33,8 @@ module DBZ {
                 return new UZA.Panel(this.convFiledNameSelf());
             }
 
-            public txtHanteiKijunYMD(): UZA.TextBoxDate {
-                return new UZA.TextBoxDate(this.convFiledName("txtHanteiKijunYMD"));
+            public txtHanteiKijunYMD(): UZA.TextBoxFlexibleDate {
+                return new UZA.TextBoxFlexibleDate(this.convFiledName("txtHanteiKijunYMD"));
             }
 
             public btnKensaku(): UZA.Button {
@@ -45,8 +45,8 @@ module DBZ {
                 return new UZA.Button(this.convFiledName("btnGengakuJoho"));
             }
 
-            public txtSaikoNokigen(): UZA.TextBoxDate {
-                return new UZA.TextBoxDate(this.convFiledName("txtSaikoNokigen"));
+            public txtSaikoNokigen(): UZA.TextBoxFlexibleDate {
+                return new UZA.TextBoxFlexibleDate(this.convFiledName("txtSaikoNokigen"));
             }
 
             public txtKeikaNen(): UZA.TextBox {
