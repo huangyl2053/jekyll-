@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbd.business.shiharaihohohenko;
+package jp.co.ndensan.reams.db.dbd.business.core.shiharaihohohenko;
 
 import jp.co.ndensan.reams.db.dbd.definition.enumeratedtype.core.ShiharaiHenkoTorokuKubun;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;

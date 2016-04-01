@@ -7,9 +7,9 @@ package jp.co.ndensan.reams.db.dbd.divcontroller.handler.gemmenshokai;
 
 import java.util.List;
 import jp.co.ndensan.reams.db.dbd.business.common.NursingCareInformationBusiness;
-import jp.co.ndensan.reams.db.dbd.business.common.ShiharaiHohoHenkoSummaryBusiness;
 import jp.co.ndensan.reams.db.dbd.business.core.basic.JukyushaDaicho;
 import jp.co.ndensan.reams.db.dbd.business.core.futanwariai.RiyoshaFutanWariaiMeisai;
+import jp.co.ndensan.reams.db.dbd.business.core.shiharaihohohenko.ShiharaiHohoHenkoSummary;
 import jp.co.ndensan.reams.db.dbd.definition.enumeratedtype.core.JukyuShinseiJiyu;
 import jp.co.ndensan.reams.db.dbd.divcontroller.entity.commonchilddiv.gemmenshokai.GemmenShokai.GemmenShokaiDiv;
 import jp.co.ndensan.reams.db.dbd.service.common.GemmenJokyoFinder;
@@ -80,7 +80,7 @@ public class GemmenShokaiHandler {
 
     private void onLoad給付制限情報(HihokenshaNo 被保険者番号) {
         GemmenJokyoFinder finder = GemmenJokyoFinder.createIntance();
-        ShiharaiHohoHenkoSummaryBusiness 支払方法変更情報 = finder.find支払方法変更情報(被保険者番号);
+        ShiharaiHohoHenkoSummary 支払方法変更情報 = finder.find支払方法変更情報(被保険者番号);
         div.getTxtShiharaiHohoHenkoTorokuKubun().setValue(支払方法変更情報.get支払方法変更_登録区分().get名称());
         div.getTxtShiharaiHohoHenkoKaishiYMD().setValue(支払方法変更情報.get支払方法変更_開始日());
         div.getTxtShiharaiHohoHenkoShuryoYMD().setValue(支払方法変更情報.get支払方法変更_終了日());
