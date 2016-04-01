@@ -22,7 +22,7 @@ public enum NoryokuMiteikaNinchishoKoreishaShihyoCodeValidationMessage implement
      * コードがNullであること。
      */
     コードがNullであること(NoryokuMiteikaNinchishoKoreishaShihyoCodeErrorMessage.コードがNullであること);
-    private final Message message;
+    private final transient Message message;
 
     private NoryokuMiteikaNinchishoKoreishaShihyoCodeValidationMessage(IMessageGettable message, String... replacements) {
         this.message = message.getMessage().replace(replacements);

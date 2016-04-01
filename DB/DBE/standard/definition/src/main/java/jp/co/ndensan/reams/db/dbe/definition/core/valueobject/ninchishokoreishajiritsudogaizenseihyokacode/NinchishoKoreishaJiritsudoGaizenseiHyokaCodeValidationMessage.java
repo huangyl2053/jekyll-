@@ -22,7 +22,7 @@ public enum NinchishoKoreishaJiritsudoGaizenseiHyokaCodeValidationMessage implem
      * コードがNullであること。
      */
     コードがNullであること(NinchishoKoreishaJiritsudoGaizenseiHyokaCodeErrorMessage.コードがNullであること);
-    private final Message message;
+    private final transient Message message;
 
     private NinchishoKoreishaJiritsudoGaizenseiHyokaCodeValidationMessage(IMessageGettable message, String... replacements) {
         this.message = message.getMessage().replace(replacements);

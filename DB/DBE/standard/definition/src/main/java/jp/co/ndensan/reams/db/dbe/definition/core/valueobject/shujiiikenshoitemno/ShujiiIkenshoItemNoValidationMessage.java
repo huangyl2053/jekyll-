@@ -22,7 +22,7 @@ public enum ShujiiIkenshoItemNoValidationMessage implements IValidationMessage {
      * 番号がNullであること。
      */
     番号がNullであること(ShujiiIkenshoItemNoErrorMessage.番号がNullであること);
-    private final Message message;
+    private final transient Message message;
 
     private ShujiiIkenshoItemNoValidationMessage(IMessageGettable message, String... replacements) {
         this.message = message.getMessage().replace(replacements);

@@ -22,7 +22,7 @@ public enum SuiteiKyuhuKubunCodeValidationMessage implements IValidationMessage 
      * コードがNullであること。
      */
     コードがNullであること(SuiteiKyuhuKubunCodeErrorMessage.コードがNullであること);
-    private final Message message;
+    private final transient Message message;
 
     private SuiteiKyuhuKubunCodeValidationMessage(IMessageGettable message, String... replacements) {
         this.message = message.getMessage().replace(replacements);

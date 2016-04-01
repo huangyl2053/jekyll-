@@ -22,7 +22,7 @@ public enum TokuteiShippeiCodeValidationMessage implements IValidationMessage {
      * コードがNullであること。
      */
     コードがNullであること(TokuteiShippeiCodeErrorMessage.コードがNullであること);
-    private final Message message;
+    private final transient Message message;
 
     private TokuteiShippeiCodeValidationMessage(IMessageGettable message, String... replacements) {
         this.message = message.getMessage().replace(replacements);

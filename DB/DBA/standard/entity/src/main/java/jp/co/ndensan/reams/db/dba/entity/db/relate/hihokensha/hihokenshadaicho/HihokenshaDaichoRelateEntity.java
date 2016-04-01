@@ -20,7 +20,7 @@ import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7006RoreiFukushiNenkinJukyu
  */
 @lombok.Getter
 @lombok.Setter
-public class HihokenshaDaichoRelateEntity implements Cloneable, Serializable {
+public class HihokenshaDaichoRelateEntity implements Serializable {
 
     /**
      * -- GETTER -- 被保険者台帳管理Entityを返します。
@@ -91,8 +91,7 @@ public class HihokenshaDaichoRelateEntity implements Cloneable, Serializable {
     /**
      * MyBatisで取得された場合に使用して下さい。<br/>
      * MyBatisで当クラス取得時は、新規追加(Added)となるため、変更無し(Unchanged)に設定します。<br/>
-     * HihokenshaDaichoEntityが持つ{@link xxxxxxEntity}と{@link xxxxxxEntity}と<br/>
-     * {@link xxxxxxEntity}のMD5値を計算し、設定します。
+     * HihokenshaDaichoEntityが持つ{@link xxxxxxEntity}と{@link xxxxxxEntity}と<br/> {@link xxxxxxEntity}のMD5値を計算し、設定します。
      */
     public void initializeMd5ToEntities() {
         this.被保険者台帳管理Entity.initializeMd5();
@@ -112,4 +111,5 @@ public class HihokenshaDaichoRelateEntity implements Cloneable, Serializable {
             entity.initializeMd5ToEntities();
         }
     }
+
 }

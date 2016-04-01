@@ -22,7 +22,7 @@ public enum KaigoNinteichosainNoValidationMessage implements IValidationMessage 
      * 番号がNullであること。
      */
     番号がNullであること(KaigoNinteichosainNoErrorMessage.番号がNullであること);
-    private final Message message;
+    private final transient Message message;
 
     private KaigoNinteichosainNoValidationMessage(IMessageGettable message, String... replacements) {
         this.message = message.getMessage().replace(replacements);

@@ -16,7 +16,7 @@ import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT1004ShisetsuNyutaishoEntity
  */
 @lombok.Getter
 @lombok.Setter
-public class TekiyoJogaishaEntity implements Cloneable, Serializable {
+public class TekiyoJogaishaEntity implements Serializable {
 
     /**
      * -- GETTER -- 適用除外者Entityを返します。
@@ -55,4 +55,5 @@ public class TekiyoJogaishaEntity implements Cloneable, Serializable {
             entity.initializeMd5();
         }
     }
+
 }

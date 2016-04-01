@@ -22,7 +22,7 @@ public enum ShinsakaiIinCodeValidationMessage implements IValidationMessage {
      * 桁数が8桁であること。
      */
     桁数が8桁ではないこと(ShinsakaiIinCodeErrorMessage.桁数が8桁ではないこと);
-    private final Message message;
+    private final transient Message message;
 
     private ShinsakaiIinCodeValidationMessage(IMessageGettable message, String... replacements) {
         this.message = message.getMessage().replace(replacements);
