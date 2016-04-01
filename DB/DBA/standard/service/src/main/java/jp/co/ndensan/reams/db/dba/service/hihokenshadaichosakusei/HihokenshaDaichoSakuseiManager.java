@@ -168,14 +168,8 @@ public class HihokenshaDaichoSakuseiManager {
     public SearchResult<HihokenshaDaichoSakusei> getHihokenshaDaichoSakusei(
             HihokenshaDaichoSakuseiParameter parameter) {
         requireNonNull(parameter, UrSystemErrorMessages.値がnull.getReplacedMessage(REPLACED_MESSAGE.toString()));
-        List<HihokenshaDaichoSakusei> businessList = new ArrayList<>();
         List<HihokenshaEntity> hihokenshaList = get被保険者情報(parameter);
-        List<HihokenshaDaichoSakuseiEntity> daichoSakuseiEntityList = getHihokenshaDaichoHenshu(hihokenshaList);
-        if (!daichoSakuseiEntityList.isEmpty()) {
-            for (HihokenshaDaichoSakuseiEntity daichoSakuseiEntity : daichoSakuseiEntityList) {
-                businessList.add(new HihokenshaDaichoSakusei(daichoSakuseiEntity));
-            }
-        }
+        List<HihokenshaDaichoSakusei> businessList = getHihokenshaDaichoHenshu(hihokenshaList).records();
         return SearchResult.of(businessList, 0, false);
     }
 
@@ -291,15 +285,17 @@ public class HihokenshaDaichoSakuseiManager {
      * @return hihokenshaDaichoSakuseiEntityList 被保険者台帳
      */
     @Transaction
-    public List<HihokenshaDaichoSakuseiEntity> getHihokenshaDaichoHenshu(List<HihokenshaEntity> hihokenshaList
+    public SearchResult<HihokenshaDaichoSakusei> getHihokenshaDaichoHenshu(List<HihokenshaEntity> hihokenshaList
     ) {
         requireNonNull(hihokenshaList, UrSystemErrorMessages.値がnull.getReplacedMessage("hihokenshaList"));
+        List<HihokenshaDaichoSakusei> businessList = new ArrayList<>();
         List<HihokenshaDaichoSakuseiEntity> hihokenshaDaichoSakuseiList = get被保険者台帳(hihokenshaList);
-        if (hihokenshaDaichoSakuseiList.isEmpty()) {
-            return new ArrayList<>();
+        if (!hihokenshaDaichoSakuseiList.isEmpty()) {
+            for (HihokenshaDaichoSakuseiEntity daichoSakuseiEntity : hihokenshaDaichoSakuseiList) {
+                businessList.add(new HihokenshaDaichoSakusei(daichoSakuseiEntity));
+            }
         }
-
-        return hihokenshaDaichoSakuseiList;
+        return SearchResult.of(businessList, 0, false);
     }
 
     private List<HihokenshaDaichoSakuseiEntity> get被保険者台帳(List<HihokenshaEntity> hihokenshaList) {
