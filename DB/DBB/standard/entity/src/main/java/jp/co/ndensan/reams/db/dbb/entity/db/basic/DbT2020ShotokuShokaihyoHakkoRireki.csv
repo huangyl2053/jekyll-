@@ -1,0 +1,8 @@
+﻿shoriNendo,UDD012YSeireki,FlexibleYear,,,,,照会年度,A
+shikibetsuCode,UDD001ShikibetsuCode,ShikibetsuCode,,,,,識別コード,A
+rirekiNo,int2,int,,,,,履歴番号,A
+shokaisakiLasdecCode,UDD023LasdecCode,LasdecCode,,,,,照会先地方公共団体コード,A
+setaiCode,UDD051SetaiCode,SetaiCode,,,,,世帯コード,A
+hakkoReamsLoginId,text,RString,,,,,発行ユーザーID,A
+hakkoYMD,UDD015YMD,FlexibleDate,,,,,発行日,A
+sakuseiTimestamp,UDD018YMDHMS,YMDHMS,,,,,作成日時,A

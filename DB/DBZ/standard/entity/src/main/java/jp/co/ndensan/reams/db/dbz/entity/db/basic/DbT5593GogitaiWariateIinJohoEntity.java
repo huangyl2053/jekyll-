@@ -1,24 +1,23 @@
 package jp.co.ndensan.reams.db.dbz.entity.db.basic;
 
-import java.util.Objects;
-import java.util.UUID;
-import javax.annotation.CheckForNull;
-import javax.annotation.Nonnull;
-import jp.co.ndensan.reams.uz.uza.biz.Code;
-import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
-import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
-import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.util.db.DbTableEntityBase;
 import jp.co.ndensan.reams.uz.uza.util.db.IDbAccessable;
+import jp.co.ndensan.reams.uz.uza.util.db.DbTableEntityBase;
 import jp.co.ndensan.reams.uz.uza.util.db.PrimaryKey;
 import jp.co.ndensan.reams.uz.uza.util.db.TableName;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
+import java.util.UUID;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
+import jp.co.ndensan.reams.uz.uza.biz.Code;
+import java.util.Objects;
+import javax.annotation.CheckForNull;
+import javax.annotation.Nonnull;
 
 /**
  * 合議体割当委員情報テーブルのエンティティクラスです。
  */
 public class DbT5593GogitaiWariateIinJohoEntity extends DbTableEntityBase<DbT5593GogitaiWariateIinJohoEntity> implements IDbAccessable {
 // <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.4.2">
-
     @TableName
     public static final RString TABLE_NAME = new RString("DbT5593GogitaiWariateIinJoho");
 
@@ -42,7 +41,7 @@ public class DbT5593GogitaiWariateIinJohoEntity extends DbTableEntityBase<DbT559
 
     /**
      * insertDantaiCdのgetメソッドです。
-     *
+     * 
      * @return insertDantaiCd
      */
     public RString getInsertDantaiCd() {
@@ -51,7 +50,7 @@ public class DbT5593GogitaiWariateIinJohoEntity extends DbTableEntityBase<DbT559
 
     /**
      * insertDantaiCdのsetメソッドです。
-     *
+     * 
      * @param insertDantaiCd insertDantaiCd
      */
     public void setInsertDantaiCd(RString insertDantaiCd) {
@@ -60,7 +59,7 @@ public class DbT5593GogitaiWariateIinJohoEntity extends DbTableEntityBase<DbT559
 
     /**
      * isDeletedのgetメソッドです。
-     *
+     * 
      * @return isDeleted
      */
     public boolean getIsDeleted() {
@@ -69,16 +68,17 @@ public class DbT5593GogitaiWariateIinJohoEntity extends DbTableEntityBase<DbT559
 
     /**
      * isDeletedのsetメソッドです。
-     *
+     * 
      * @param isDeleted isDeleted
      */
     public void setIsDeleted(boolean isDeleted) {
         this.isDeleted = isDeleted;
     }
 
+
     /**
      * lastUpdateReamsLoginIdのsetメソッドです。
-     *
+     * 
      * @param lastUpdateReamsLoginId lastUpdateReamsLoginId
      */
     public void setLastUpdateReamsLoginId(RString lastUpdateReamsLoginId) {
@@ -87,7 +87,7 @@ public class DbT5593GogitaiWariateIinJohoEntity extends DbTableEntityBase<DbT559
 
     /**
      * 合議体番号のgetメソッドです。
-     *
+     * 
      * @return 合議体番号
      */
     public int getGogitaiNo() {
@@ -96,7 +96,7 @@ public class DbT5593GogitaiWariateIinJohoEntity extends DbTableEntityBase<DbT559
 
     /**
      * 合議体番号のsetメソッドです。
-     *
+     * 
      * @param gogitaiNo 合議体番号
      */
     public void setGogitaiNo(@Nonnull int gogitaiNo) {
@@ -105,7 +105,7 @@ public class DbT5593GogitaiWariateIinJohoEntity extends DbTableEntityBase<DbT559
 
     /**
      * 合議体有効期間開始年月日のgetメソッドです。
-     *
+     * 
      * @return 合議体有効期間開始年月日
      */
     public FlexibleDate getGogitaiYukoKikanKaishiYMD() {
@@ -114,7 +114,7 @@ public class DbT5593GogitaiWariateIinJohoEntity extends DbTableEntityBase<DbT559
 
     /**
      * 合議体有効期間開始年月日のsetメソッドです。
-     *
+     * 
      * @param gogitaiYukoKikanKaishiYMD 合議体有効期間開始年月日
      */
     public void setGogitaiYukoKikanKaishiYMD(@Nonnull FlexibleDate gogitaiYukoKikanKaishiYMD) {
@@ -123,7 +123,7 @@ public class DbT5593GogitaiWariateIinJohoEntity extends DbTableEntityBase<DbT559
 
     /**
      * 合議体有効期間終了年月日のgetメソッドです。
-     *
+     * 
      * @return 合議体有効期間終了年月日
      */
     public FlexibleDate getGogitaiYukoKikanShuryoYMD() {
@@ -132,7 +132,7 @@ public class DbT5593GogitaiWariateIinJohoEntity extends DbTableEntityBase<DbT559
 
     /**
      * 合議体有効期間終了年月日のsetメソッドです。
-     *
+     * 
      * @param gogitaiYukoKikanShuryoYMD 合議体有効期間終了年月日
      */
     public void setGogitaiYukoKikanShuryoYMD(@Nonnull FlexibleDate gogitaiYukoKikanShuryoYMD) {
@@ -141,7 +141,7 @@ public class DbT5593GogitaiWariateIinJohoEntity extends DbTableEntityBase<DbT559
 
     /**
      * 介護認定審査会委員コードのgetメソッドです。
-     *
+     * 
      * @return 介護認定審査会委員コード
      */
     public RString getShinsakaiIinCode() {
@@ -150,7 +150,7 @@ public class DbT5593GogitaiWariateIinJohoEntity extends DbTableEntityBase<DbT559
 
     /**
      * 介護認定審査会委員コードのsetメソッドです。
-     *
+     * 
      * @param shinsakaiIinCode 介護認定審査会委員コード
      */
     public void setShinsakaiIinCode(@Nonnull RString shinsakaiIinCode) {
@@ -159,7 +159,7 @@ public class DbT5593GogitaiWariateIinJohoEntity extends DbTableEntityBase<DbT559
 
     /**
      * 合議体長区分コードのgetメソッドです。
-     *
+     * 
      * @return 合議体長区分コード
      */
     @CheckForNull
@@ -169,7 +169,7 @@ public class DbT5593GogitaiWariateIinJohoEntity extends DbTableEntityBase<DbT559
 
     /**
      * 合議体長区分コードのsetメソッドです。
-     *
+     * 
      * @param gogitaichoKubunCode 合議体長区分コード
      */
     public void setGogitaichoKubunCode(Code gogitaichoKubunCode) {
@@ -178,7 +178,7 @@ public class DbT5593GogitaiWariateIinJohoEntity extends DbTableEntityBase<DbT559
 
     /**
      * 補欠のgetメソッドです。
-     *
+     * 
      * @return 補欠
      */
     @CheckForNull
@@ -188,7 +188,7 @@ public class DbT5593GogitaiWariateIinJohoEntity extends DbTableEntityBase<DbT559
 
     /**
      * 補欠のsetメソッドです。
-     *
+     * 
      * @param substituteFlag 補欠
      */
     public void setSubstituteFlag(boolean substituteFlag) {
@@ -197,9 +197,9 @@ public class DbT5593GogitaiWariateIinJohoEntity extends DbTableEntityBase<DbT559
 
     /**
      * このエンティティの主キーが他の{@literal DbT5593GogitaiWariateIinJohoEntity}と等しいか判定します。
-     *
+     * 
      * @param other 比較するエンティティ
-     * @return
+     * @return 
      * 比較するエンティティが同じ主キーを持つ{@literal DbT5593GogitaiWariateIinJohoEntity}の場合{@literal true}、それ以外の場合は{@literal false}
      */
     @Override
@@ -221,8 +221,6 @@ public class DbT5593GogitaiWariateIinJohoEntity extends DbTableEntityBase<DbT559
 
     /**
      * {@inheritDoc}
-     *
-     * @param entity
      */
     @Override
     public void shallowCopy(DbT5593GogitaiWariateIinJohoEntity entity) {
@@ -236,7 +234,6 @@ public class DbT5593GogitaiWariateIinJohoEntity extends DbTableEntityBase<DbT559
 
     /**
      * {@inheritDoc}
-     *
      * @return {@inheritDoc}
      */
     @Override
@@ -245,4 +242,5 @@ public class DbT5593GogitaiWariateIinJohoEntity extends DbTableEntityBase<DbT559
     }
 
 // </editor-fold>
+
 }

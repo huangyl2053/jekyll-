@@ -1,0 +1,12 @@
+﻿haakuShoriID,uuid,UUID,,,,,把握処理ID,A
+hihokenshaNo,DbUDD002HihokenshaNo,HihokenshaNo,,,,,被保険者番号,A
+willBeRenewed,bool,boolean,,,,,更新認定フラグ,A
+shikibetsuCode,UDD001ShikibetsuCode,ShikibetsuCode,,,,,識別コード,A
+setaiKazeiKubun,varchar,RString,,,,,世帯課税区分,A
+honninKazeiKubun,varchar,RString,,,,,本人課税区分,A
+isRoreiFukushiNenkinJukyusha,bool,boolean,,,,,老齢受給者フラグ,A
+isSeikatsuHogoJukyusha,bool,boolean,,,,,生保受給者フラグ,A
+riyoshaFutanDankai,varchar,RString,,,,,利用者負担段階,A
+gokeiShotokuKingaku,numeric,Decimal,,,,,合計所得金額,A
+nenkinShunyuGaku,numeric,Decimal,,,,,年金収入額,A
+jigyoshaNo,DbUDD004JigyoshaNo,JigyoshaNo,,,,,事業者番号,A

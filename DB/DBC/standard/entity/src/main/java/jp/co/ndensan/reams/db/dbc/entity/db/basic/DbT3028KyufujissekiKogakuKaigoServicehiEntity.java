@@ -614,6 +614,7 @@ public class DbT3028KyufujissekiKogakuKaigoServicehiEntity extends DbTableEntity
      * 管理番号のgetメソッドです。
      * <br/>
      * <br/>高額申請管理ﾏｽﾀの"管理番号"とﾘﾝｸ
+
      * <br/>高額支給申請書更新時のみ設定される
      * 
      * @return 管理番号
@@ -627,6 +628,7 @@ public class DbT3028KyufujissekiKogakuKaigoServicehiEntity extends DbTableEntity
      * 管理番号のsetメソッドです。
      * <br/>
      * <br/>高額申請管理ﾏｽﾀの"管理番号"とﾘﾝｸ
+
      * <br/>高額支給申請書更新時のみ設定される
      * 
      * @param kanriNo 管理番号
@@ -715,5 +717,6 @@ public class DbT3028KyufujissekiKogakuKaigoServicehiEntity extends DbTableEntity
     }
 
 // </editor-fold>
+
 
 }

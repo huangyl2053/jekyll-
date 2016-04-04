@@ -1,0 +1,13 @@
+﻿shoKisaiHokenshaNo,DbUDD015ShoKisaiHokenshaNo,ShoKisaiHokenshaNo,,,,,証記載保険者番号,A
+hihokenshaNo,DbUDD002HihokenshaNo,HihokenshaNo,,,,,被保険者番号,A
+gemmenGengakuShurui,varchar,RString,,,,,減免減額種類,A
+shinseiRirekiNo,int2,int,,,,,履歴番号,A
+shinseiTodokedeDaikoKubun,varchar,RString,,,,,申請届出代行区分,A
+shinseiTodokedeshaShimei,UDD042AtenaMeisho,AtenaMeisho,,,,,申請届出者氏名,A
+shinseiTodokedeshaKanaShimei,UDD043AtenaKanaMeisho,AtenaKanaMeisho,,,,,申請届出者氏名カナ,A
+shinseiTodokedeshaTsuzukigara,varchar,RString,,,,,申請届出者続柄,A
+shinseiTodokedeDaikoJigyoshaNo,DbUDD004JigyoshaNo,JigyoshaNo,,,,,申請届出代行事業者番号,A
+jigyoshaKubun,varchar,RString,,,,,事業者区分,A
+shinseiTodokedeshaYubinNo,UDD003YubinNo,YubinNo,,,,,申請届出者郵便番号,A
+shinseiTodokedeshaJusho,UDD046AtenaJusho,AtenaJusho,,,,,申請届出者住所,A
+shinseiTodokedeshaTelNo,UDD026TelNo,TelNo,,,,,申請届出者電話番号,A

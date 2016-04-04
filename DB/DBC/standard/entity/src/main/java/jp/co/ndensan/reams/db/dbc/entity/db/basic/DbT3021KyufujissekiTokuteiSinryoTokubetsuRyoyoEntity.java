@@ -306,6 +306,7 @@ public class DbT3021KyufujissekiTokuteiSinryoTokubetsuRyoyoEntity extends DbTabl
      * 識別番号のgetメソッドです。
      * <br/>
      * <br/>介護給付費等の記載要領で示される特定診療費の識別
+
      * <br/>番号のうち、＠を除く２桁の数字
      * 
      * @return 識別番号
@@ -319,6 +320,7 @@ public class DbT3021KyufujissekiTokuteiSinryoTokubetsuRyoyoEntity extends DbTabl
      * 識別番号のsetメソッドです。
      * <br/>
      * <br/>介護給付費等の記載要領で示される特定診療費の識別
+
      * <br/>番号のうち、＠を除く２桁の数字
      * 
      * @param shikibetsuNo 識別番号
@@ -1009,6 +1011,7 @@ public class DbT3021KyufujissekiTokuteiSinryoTokubetsuRyoyoEntity extends DbTabl
     }
 
 // </editor-fold>
+
 
 
 }

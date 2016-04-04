@@ -6,7 +6,7 @@ import jp.co.ndensan.reams.uz.uza.util.db.IColumnDefinition;
  * 外部連携データ抽出情報テーブルの項目定義クラスです。
  */
 public enum DbT7211GaibuRenkeiDataoutputJoho implements IColumnDefinition {
-// <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.3.9">
+// <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.4.2">
     /**
      * insertDantaiCd
      */
@@ -41,6 +41,7 @@ public enum DbT7211GaibuRenkeiDataoutputJoho implements IColumnDefinition {
     lastUpdateReamsLoginId(2147483647, 0),
     /**
      * 申請書管理番号
+     * <br/>要介護認定申請情報
      */
     shinseishoKanriNo(2147483647, 0),
     /**

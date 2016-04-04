@@ -1592,4 +1592,5 @@ public class DbT3020KyufujissekiTokuteiSinryohiEntity extends DbTableEntityBase<
 
 // </editor-fold>
 
+
 }

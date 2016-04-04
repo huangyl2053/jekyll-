@@ -1,15 +1,12 @@
 package jp.co.ndensan.reams.db.dbz.entity.db.basic;
 
 import jp.co.ndensan.reams.uz.uza.util.db.IColumnDefinition;
-import jp.co.ndensan.reams.uz.uza.util.db.OnNextSchema;
 
 /**
  * 介護認定審査会割当情報テーブルの項目定義クラスです。
  */
-@OnNextSchema("rgdb")
 public enum DbT5502ShinsakaiWariateJoho implements IColumnDefinition {
 // <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.4.2">
-
     /**
      * insertDantaiCd
      */
@@ -97,7 +94,7 @@ public enum DbT5502ShinsakaiWariateJoho implements IColumnDefinition {
 
     /**
      * 項目の最大長のgetメソッドです。
-     *
+     * 
      * @return 項目の最大長
      */
     public int getMaxLength() {
@@ -106,7 +103,7 @@ public enum DbT5502ShinsakaiWariateJoho implements IColumnDefinition {
 
     /**
      * 小数点以下の桁数のgetメソッドです。
-     *
+     * 
      * @return 小数点以下の桁数
      */
     public int getScale() {

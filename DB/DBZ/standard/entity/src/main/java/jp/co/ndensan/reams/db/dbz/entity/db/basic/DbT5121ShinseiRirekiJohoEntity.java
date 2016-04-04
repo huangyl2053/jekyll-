@@ -1,21 +1,21 @@
 package jp.co.ndensan.reams.db.dbz.entity.db.basic;
 
-import java.util.Objects;
-import java.util.UUID;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo;
-import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
-import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.util.db.DbTableEntityBase;
 import jp.co.ndensan.reams.uz.uza.util.db.IDbAccessable;
+import jp.co.ndensan.reams.uz.uza.util.db.DbTableEntityBase;
 import jp.co.ndensan.reams.uz.uza.util.db.PrimaryKey;
 import jp.co.ndensan.reams.uz.uza.util.db.TableName;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
+import java.util.UUID;
+import java.util.Objects;
+import javax.annotation.Nonnull;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo;
 
 /**
  * 申請履歴情報テーブルのエンティティクラスです。
  */
 public class DbT5121ShinseiRirekiJohoEntity extends DbTableEntityBase<DbT5121ShinseiRirekiJohoEntity> implements IDbAccessable {
-// <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.4.1">
-
+// <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.4.2">
     @TableName
     public static final RString TABLE_NAME = new RString("DbT5121ShinseiRirekiJoho");
 
@@ -33,7 +33,7 @@ public class DbT5121ShinseiRirekiJohoEntity extends DbTableEntityBase<DbT5121Shi
 
     /**
      * insertDantaiCdのgetメソッドです。
-     *
+     * 
      * @return insertDantaiCd
      */
     public RString getInsertDantaiCd() {
@@ -42,7 +42,7 @@ public class DbT5121ShinseiRirekiJohoEntity extends DbTableEntityBase<DbT5121Shi
 
     /**
      * insertDantaiCdのsetメソッドです。
-     *
+     * 
      * @param insertDantaiCd insertDantaiCd
      */
     public void setInsertDantaiCd(RString insertDantaiCd) {
@@ -51,7 +51,7 @@ public class DbT5121ShinseiRirekiJohoEntity extends DbTableEntityBase<DbT5121Shi
 
     /**
      * isDeletedのgetメソッドです。
-     *
+     * 
      * @return isDeleted
      */
     public boolean getIsDeleted() {
@@ -60,16 +60,17 @@ public class DbT5121ShinseiRirekiJohoEntity extends DbTableEntityBase<DbT5121Shi
 
     /**
      * isDeletedのsetメソッドです。
-     *
+     * 
      * @param isDeleted isDeleted
      */
     public void setIsDeleted(boolean isDeleted) {
         this.isDeleted = isDeleted;
     }
 
+
     /**
      * lastUpdateReamsLoginIdのsetメソッドです。
-     *
+     * 
      * @param lastUpdateReamsLoginId lastUpdateReamsLoginId
      */
     public void setLastUpdateReamsLoginId(RString lastUpdateReamsLoginId) {
@@ -78,7 +79,7 @@ public class DbT5121ShinseiRirekiJohoEntity extends DbTableEntityBase<DbT5121Shi
 
     /**
      * 申請管理番号のgetメソッドです。
-     *
+     * 
      * @return 申請管理番号
      */
     public ShinseishoKanriNo getShinseishoKanriNo() {
@@ -87,16 +88,16 @@ public class DbT5121ShinseiRirekiJohoEntity extends DbTableEntityBase<DbT5121Shi
 
     /**
      * 申請管理番号のsetメソッドです。
-     *
+     * 
      * @param shinseishoKanriNo 申請管理番号
      */
-    public void setShinseishoKanriNo(ShinseishoKanriNo shinseishoKanriNo) {
+    public void setShinseishoKanriNo(@Nonnull ShinseishoKanriNo shinseishoKanriNo) {
         this.shinseishoKanriNo = shinseishoKanriNo;
     }
 
     /**
      * 前回申請管理番号のgetメソッドです。
-     *
+     * 
      * @return 前回申請管理番号
      */
     public ShinseishoKanriNo getZenkaiShinseishoKanriNo() {
@@ -105,18 +106,19 @@ public class DbT5121ShinseiRirekiJohoEntity extends DbTableEntityBase<DbT5121Shi
 
     /**
      * 前回申請管理番号のsetメソッドです。
-     *
+     * 
      * @param zenkaiShinseishoKanriNo 前回申請管理番号
      */
-    public void setZenkaiShinseishoKanriNo(ShinseishoKanriNo zenkaiShinseishoKanriNo) {
+    public void setZenkaiShinseishoKanriNo(@Nonnull ShinseishoKanriNo zenkaiShinseishoKanriNo) {
         this.zenkaiShinseishoKanriNo = zenkaiShinseishoKanriNo;
     }
 
     /**
      * このエンティティの主キーが他の{@literal DbT5121ShinseiRirekiJohoEntity}と等しいか判定します。
-     *
+     * 
      * @param other 比較するエンティティ
-     * @return 比較するエンティティが同じ主キーを持つ{@literal DbT5121ShinseiRirekiJohoEntity}の場合{@literal true}、それ以外の場合は{@literal false}
+     * @return 
+     * 比較するエンティティが同じ主キーを持つ{@literal DbT5121ShinseiRirekiJohoEntity}の場合{@literal true}、それ以外の場合は{@literal false}
      */
     @Override
     public boolean equalsPrimaryKeys(DbT5121ShinseiRirekiJohoEntity other) {
@@ -131,8 +133,6 @@ public class DbT5121ShinseiRirekiJohoEntity extends DbTableEntityBase<DbT5121Shi
 
     /**
      * {@inheritDoc}
-     *
-     * @param entity
      */
     @Override
     public void shallowCopy(DbT5121ShinseiRirekiJohoEntity entity) {
@@ -142,7 +142,6 @@ public class DbT5121ShinseiRirekiJohoEntity extends DbTableEntityBase<DbT5121Shi
 
     /**
      * {@inheritDoc}
-     *
      * @return {@inheritDoc}
      */
     @Override
@@ -151,4 +150,5 @@ public class DbT5121ShinseiRirekiJohoEntity extends DbTableEntityBase<DbT5121Shi
     }
 
 // </editor-fold>
+
 }

@@ -795,4 +795,5 @@ public class DbT3022KyufujissekiShokujiHiyoEntity extends DbTableEntityBase<DbT3
 
 // </editor-fold>
 
+
 }

@@ -2194,4 +2194,5 @@ public class DbT3017KyufujissekiKihonEntity extends DbTableEntityBase<DbT3017Kyu
 
 // </editor-fold>
 
+
 }

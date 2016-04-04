@@ -49,7 +49,10 @@ public enum DbT4021ShiharaiHohoHenko implements IColumnDefinition {
     hihokenshaNo(2147483647, 0),
     /**
      * 管理区分
-     * <br/>1：２号差止,2：１号償還払い化,3：１号給付額減額
+     * <br/>DBDEnum.支払方法変更管理区分 
+     * <br/>1：２号差止 
+     * <br/>2：１号償還払い化 
+     * <br/>3：１号給付額減額
      */
     kanriKubun(1, 0),
     /**
@@ -58,7 +61,12 @@ public enum DbT4021ShiharaiHohoHenko implements IColumnDefinition {
     rirekiNo(5, 0),
     /**
      * 登録区分
-     * <br/>01：２号予告登録者,02：２号差止登録,11：１号予告者登録,12：１号償還払い化登録,21：１号給付額減額登録
+     * <br/>DBDEnum.支払方法変更登録区分 
+     * <br/>01：２号予告登録者 
+     * <br/>02：２号差止登録 
+     * <br/>11：１号予告者登録 
+     * <br/>12：１号償還払い化登録 
+     * <br/>21：１号給付額減額登録
      */
     torokuKubun(2, 0),
     /**
@@ -71,7 +79,13 @@ public enum DbT4021ShiharaiHohoHenko implements IColumnDefinition {
     tekiyoShuryoYMD(2147483647, 0),
     /**
      * 終了区分
-     * <br/>01：差止措置終了依頼書受理,02：弁明書受理,03：終了申請書受理,04：減額免除申請書受理,98：職権,99：その他
+     * <br/>DBDEnum.支払方法変更終了区分 
+     * <br/>01：差止措置終了依頼書受理 
+     * <br/>02：弁明書受理 
+     * <br/>03：終了申請書受理 
+     * <br/>04：減額免除申請書受理 
+     * <br/>98：職権 
+     * <br/>99：その他
      */
     shuryoKubun(2, 0),
     /**
@@ -88,7 +102,7 @@ public enum DbT4021ShiharaiHohoHenko implements IColumnDefinition {
     yokoku_TsuchiHakkoYMD(2147483647, 0),
     /**
      * 予告通知書再発行フラグ
-     * <br/>1：再発行対象,0：再発行対象外
+     * <br/>true：再発行対象, false：再発行対象外
      */
     yokoku_TsuchiSaiHakkoFlag(1, 0),
     /**
@@ -101,7 +115,13 @@ public enum DbT4021ShiharaiHohoHenko implements IColumnDefinition {
     bemmei_UketsukeYMD(2147483647, 0),
     /**
      * 弁明理由コード
-     * <br/>01：公費負担医療の受給,02：災害,03：重大な障害または長期入院,04：滞納保険料の減少,05：保険料完納,99：その他
+     * <br/>DBDEnum.支払方法変更弁明理由コード 
+     * <br/>01：公費負担医療の受給 
+     * <br/>02：災害 
+     * <br/>03：重大な障害または長期入院 
+     * <br/>04：滞納保険料の減少 
+     * <br/>05：保険料完納 
+     * <br/>99：その他
      */
     bemmei_RiyuCode(2, 0),
     /**
@@ -110,7 +130,9 @@ public enum DbT4021ShiharaiHohoHenko implements IColumnDefinition {
     bemmei_ShinsaKetteiYMD(2147483647, 0),
     /**
      * 弁明審査結果区分
-     * <br/>1：申請受理,2：申請却下
+     * <br/>DBDEnum.支払方法変更弁明審査結果区分 
+     * <br/>1：申請受理 
+     * <br/>2：申請却下
      */
     bemmei_ShinsaKekkaKubun(1, 0),
     /**
@@ -123,7 +145,7 @@ public enum DbT4021ShiharaiHohoHenko implements IColumnDefinition {
     shokan_TsuchiHakkoYMD(2147483647, 0),
     /**
      * 償還払化通知書再発行フラグ
-     * <br/>1：再発行対象,0：再発行対象外
+     * <br/>true：再発行対象, false：再発行対象外
      */
     shokan_TsuchiSaiHakkoFlag(1, 0),
     /**
@@ -132,7 +154,7 @@ public enum DbT4021ShiharaiHohoHenko implements IColumnDefinition {
     hihokenshaShoTeishutsuYMD(2147483647, 0),
     /**
      * 差止対象フラグ
-     * <br/>1：差止対象,0：差止対象外
+     * <br/>true：差止対象, false：差止対象外
      */
     sashitome_Flag(1, 0),
     /**
@@ -153,7 +175,7 @@ public enum DbT4021ShiharaiHohoHenko implements IColumnDefinition {
     gemmen_TsuchiHakkoYMD(2147483647, 0),
     /**
      * 減額通知書再発行フラグ
-     * <br/>1：再発行対象,0：再発行対象外
+     * <br/>true：再発行対象, false：再発行対象外
      */
     gemmen_TsuchiSaiHakkoFlag(1, 0),
     /**
@@ -171,7 +193,17 @@ public enum DbT4021ShiharaiHohoHenko implements IColumnDefinition {
     shuryoShinsei_YMD(2147483647, 0),
     /**
      * 終了申請理由コード
-     * <br/>01：公費負担医療の受給,02：災害,03：重大な障害または長期入院,04：滞納保険料の減少（支払方法変更管理種別：2）,05：保険料完納（支払方法変更管理種別：2）,06：特別な事情（支払方法変更管理種別：3）,98：職権（支払方法変更管理種別：3）,99：その他
+     * <br/>DBDEnum.支払方法変更終了申請理由コード 
+     * <br/>01：公費負担医療の受給 
+     * <br/>02：災害 
+     * <br/>03：重大な障害または長期入院 
+     * <br/>04：滞納保険料の減少 
+     * <br/>99：その他 
+     * <br/>（支払方法変更管理区分：2）
+     * <br/>05：保険料完納 
+     * <br/>06：特別な事情 
+     * <br/>（支払方法変更管理区分：3）
+     * <br/>98：職権
      */
     shuryoShinsei_RiyuCode(2, 0),
     /**
@@ -180,16 +212,19 @@ public enum DbT4021ShiharaiHohoHenko implements IColumnDefinition {
     shuryoShinsei_ShinsaKetteiYMD(2147483647, 0),
     /**
      * 終了申請審査結果区分
-     * <br/>1：申請受理,2：申請却下
+     * <br/>DBDEnum.支払方法変更終了申請審査結果区分 
+     * <br/>1：申請受理 
+     * <br/>2：申請却下
      */
     shuryoShinsei_ShinsaKekkaKubun(1, 0),
     /**
      * 無効区分
-     * <br/>1：無効,0：有効
+     * <br/>DBDEnum.支払方法変更無効区分 0:有効 1:無効
      */
     mukoKubun(1, 0),
     /**
      * 論理削除フラグ
+     * <br/>true：論理削除
      */
     logicalDeletedFlag(1, 0);
 

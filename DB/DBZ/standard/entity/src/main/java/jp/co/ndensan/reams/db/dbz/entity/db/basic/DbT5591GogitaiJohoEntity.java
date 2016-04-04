@@ -1,23 +1,22 @@
 package jp.co.ndensan.reams.db.dbz.entity.db.basic;
 
-import java.util.Objects;
-import java.util.UUID;
-import javax.annotation.CheckForNull;
-import javax.annotation.Nonnull;
-import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
-import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
-import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.util.db.DbTableEntityBase;
 import jp.co.ndensan.reams.uz.uza.util.db.IDbAccessable;
+import jp.co.ndensan.reams.uz.uza.util.db.DbTableEntityBase;
 import jp.co.ndensan.reams.uz.uza.util.db.PrimaryKey;
 import jp.co.ndensan.reams.uz.uza.util.db.TableName;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
+import java.util.UUID;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
+import java.util.Objects;
+import javax.annotation.CheckForNull;
+import javax.annotation.Nonnull;
 
 /**
  * 合議体情報テーブルのエンティティクラスです。
  */
 public class DbT5591GogitaiJohoEntity extends DbTableEntityBase<DbT5591GogitaiJohoEntity> implements IDbAccessable {
 // <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.4.2">
-
     @TableName
     public static final RString TABLE_NAME = new RString("DbT5591GogitaiJoho");
 
@@ -46,7 +45,7 @@ public class DbT5591GogitaiJohoEntity extends DbTableEntityBase<DbT5591GogitaiJo
 
     /**
      * insertDantaiCdのgetメソッドです。
-     *
+     * 
      * @return insertDantaiCd
      */
     public RString getInsertDantaiCd() {
@@ -55,7 +54,7 @@ public class DbT5591GogitaiJohoEntity extends DbTableEntityBase<DbT5591GogitaiJo
 
     /**
      * insertDantaiCdのsetメソッドです。
-     *
+     * 
      * @param insertDantaiCd insertDantaiCd
      */
     public void setInsertDantaiCd(RString insertDantaiCd) {
@@ -64,7 +63,7 @@ public class DbT5591GogitaiJohoEntity extends DbTableEntityBase<DbT5591GogitaiJo
 
     /**
      * isDeletedのgetメソッドです。
-     *
+     * 
      * @return isDeleted
      */
     public boolean getIsDeleted() {
@@ -73,16 +72,17 @@ public class DbT5591GogitaiJohoEntity extends DbTableEntityBase<DbT5591GogitaiJo
 
     /**
      * isDeletedのsetメソッドです。
-     *
+     * 
      * @param isDeleted isDeleted
      */
     public void setIsDeleted(boolean isDeleted) {
         this.isDeleted = isDeleted;
     }
 
+
     /**
      * lastUpdateReamsLoginIdのsetメソッドです。
-     *
+     * 
      * @param lastUpdateReamsLoginId lastUpdateReamsLoginId
      */
     public void setLastUpdateReamsLoginId(RString lastUpdateReamsLoginId) {
@@ -91,7 +91,7 @@ public class DbT5591GogitaiJohoEntity extends DbTableEntityBase<DbT5591GogitaiJo
 
     /**
      * 合議体番号のgetメソッドです。
-     *
+     * 
      * @return 合議体番号
      */
     public int getGogitaiNo() {
@@ -100,7 +100,7 @@ public class DbT5591GogitaiJohoEntity extends DbTableEntityBase<DbT5591GogitaiJo
 
     /**
      * 合議体番号のsetメソッドです。
-     *
+     * 
      * @param gogitaiNo 合議体番号
      */
     public void setGogitaiNo(@Nonnull int gogitaiNo) {
@@ -109,7 +109,7 @@ public class DbT5591GogitaiJohoEntity extends DbTableEntityBase<DbT5591GogitaiJo
 
     /**
      * 合議体名称のgetメソッドです。
-     *
+     * 
      * @return 合議体名称
      */
     public RString getGogitaiMei() {
@@ -118,7 +118,7 @@ public class DbT5591GogitaiJohoEntity extends DbTableEntityBase<DbT5591GogitaiJo
 
     /**
      * 合議体名称のsetメソッドです。
-     *
+     * 
      * @param gogitaiMei 合議体名称
      */
     public void setGogitaiMei(@Nonnull RString gogitaiMei) {
@@ -127,7 +127,7 @@ public class DbT5591GogitaiJohoEntity extends DbTableEntityBase<DbT5591GogitaiJo
 
     /**
      * 合議体有効期間開始年月日のgetメソッドです。
-     *
+     * 
      * @return 合議体有効期間開始年月日
      */
     public FlexibleDate getGogitaiYukoKikanKaishiYMD() {
@@ -136,7 +136,7 @@ public class DbT5591GogitaiJohoEntity extends DbTableEntityBase<DbT5591GogitaiJo
 
     /**
      * 合議体有効期間開始年月日のsetメソッドです。
-     *
+     * 
      * @param gogitaiYukoKikanKaishiYMD 合議体有効期間開始年月日
      */
     public void setGogitaiYukoKikanKaishiYMD(@Nonnull FlexibleDate gogitaiYukoKikanKaishiYMD) {
@@ -145,7 +145,7 @@ public class DbT5591GogitaiJohoEntity extends DbTableEntityBase<DbT5591GogitaiJo
 
     /**
      * 合議体有効期間終了年月日のgetメソッドです。
-     *
+     * 
      * @return 合議体有効期間終了年月日
      */
     public FlexibleDate getGogitaiYukoKikanShuryoYMD() {
@@ -154,7 +154,7 @@ public class DbT5591GogitaiJohoEntity extends DbTableEntityBase<DbT5591GogitaiJo
 
     /**
      * 合議体有効期間終了年月日のsetメソッドです。
-     *
+     * 
      * @param gogitaiYukoKikanShuryoYMD 合議体有効期間終了年月日
      */
     public void setGogitaiYukoKikanShuryoYMD(@Nonnull FlexibleDate gogitaiYukoKikanShuryoYMD) {
@@ -163,7 +163,7 @@ public class DbT5591GogitaiJohoEntity extends DbTableEntityBase<DbT5591GogitaiJo
 
     /**
      * 合議体開始予定時刻のgetメソッドです。
-     *
+     * 
      * @return 合議体開始予定時刻
      */
     public RString getGogitaiKaishiYoteiTime() {
@@ -172,7 +172,7 @@ public class DbT5591GogitaiJohoEntity extends DbTableEntityBase<DbT5591GogitaiJo
 
     /**
      * 合議体開始予定時刻のsetメソッドです。
-     *
+     * 
      * @param gogitaiKaishiYoteiTime 合議体開始予定時刻
      */
     public void setGogitaiKaishiYoteiTime(@Nonnull RString gogitaiKaishiYoteiTime) {
@@ -181,7 +181,7 @@ public class DbT5591GogitaiJohoEntity extends DbTableEntityBase<DbT5591GogitaiJo
 
     /**
      * 合議体終了予定時刻のgetメソッドです。
-     *
+     * 
      * @return 合議体終了予定時刻
      */
     public RString getGogitaiShuryoYoteiTime() {
@@ -190,7 +190,7 @@ public class DbT5591GogitaiJohoEntity extends DbTableEntityBase<DbT5591GogitaiJo
 
     /**
      * 合議体終了予定時刻のsetメソッドです。
-     *
+     * 
      * @param gogitaiShuryoYoteiTime 合議体終了予定時刻
      */
     public void setGogitaiShuryoYoteiTime(@Nonnull RString gogitaiShuryoYoteiTime) {
@@ -199,7 +199,7 @@ public class DbT5591GogitaiJohoEntity extends DbTableEntityBase<DbT5591GogitaiJo
 
     /**
      * 介護認定審査会開催場所コードのgetメソッドです。
-     *
+     * 
      * @return 介護認定審査会開催場所コード
      */
     public RString getShinsakaiKaisaiBashoCode() {
@@ -208,7 +208,7 @@ public class DbT5591GogitaiJohoEntity extends DbTableEntityBase<DbT5591GogitaiJo
 
     /**
      * 介護認定審査会開催場所コードのsetメソッドです。
-     *
+     * 
      * @param shinsakaiKaisaiBashoCode 介護認定審査会開催場所コード
      */
     public void setShinsakaiKaisaiBashoCode(@Nonnull RString shinsakaiKaisaiBashoCode) {
@@ -217,7 +217,7 @@ public class DbT5591GogitaiJohoEntity extends DbTableEntityBase<DbT5591GogitaiJo
 
     /**
      * 介護認定審査会予定定員のgetメソッドです。
-     *
+     * 
      * @return 介護認定審査会予定定員
      */
     public int getShinsakaiYoteiTeiin() {
@@ -226,7 +226,7 @@ public class DbT5591GogitaiJohoEntity extends DbTableEntityBase<DbT5591GogitaiJo
 
     /**
      * 介護認定審査会予定定員のsetメソッドです。
-     *
+     * 
      * @param shinsakaiYoteiTeiin 介護認定審査会予定定員
      */
     public void setShinsakaiYoteiTeiin(@Nonnull int shinsakaiYoteiTeiin) {
@@ -235,7 +235,7 @@ public class DbT5591GogitaiJohoEntity extends DbTableEntityBase<DbT5591GogitaiJo
 
     /**
      * 介護認定審査会自動割当定員のgetメソッドです。
-     *
+     * 
      * @return 介護認定審査会自動割当定員
      */
     @CheckForNull
@@ -245,7 +245,7 @@ public class DbT5591GogitaiJohoEntity extends DbTableEntityBase<DbT5591GogitaiJo
 
     /**
      * 介護認定審査会自動割当定員のsetメソッドです。
-     *
+     * 
      * @param shinsakaiJidoWariateTeiin 介護認定審査会自動割当定員
      */
     public void setShinsakaiJidoWariateTeiin(int shinsakaiJidoWariateTeiin) {
@@ -254,7 +254,7 @@ public class DbT5591GogitaiJohoEntity extends DbTableEntityBase<DbT5591GogitaiJo
 
     /**
      * 介護認定審査会委員定員のgetメソッドです。
-     *
+     * 
      * @return 介護認定審査会委員定員
      */
     public int getShinsakaiIinTeiin() {
@@ -263,7 +263,7 @@ public class DbT5591GogitaiJohoEntity extends DbTableEntityBase<DbT5591GogitaiJo
 
     /**
      * 介護認定審査会委員定員のsetメソッドです。
-     *
+     * 
      * @param shinsakaiIinTeiin 介護認定審査会委員定員
      */
     public void setShinsakaiIinTeiin(@Nonnull int shinsakaiIinTeiin) {
@@ -272,7 +272,7 @@ public class DbT5591GogitaiJohoEntity extends DbTableEntityBase<DbT5591GogitaiJo
 
     /**
      * 合議体精神科医存在フラグのgetメソッドです。
-     *
+     * 
      * @return 合議体精神科医存在フラグ
      */
     @CheckForNull
@@ -282,7 +282,7 @@ public class DbT5591GogitaiJohoEntity extends DbTableEntityBase<DbT5591GogitaiJo
 
     /**
      * 合議体精神科医存在フラグのsetメソッドです。
-     *
+     * 
      * @param gogitaiSeishinkaSonzaiFlag 合議体精神科医存在フラグ
      */
     public void setGogitaiSeishinkaSonzaiFlag(boolean gogitaiSeishinkaSonzaiFlag) {
@@ -291,7 +291,7 @@ public class DbT5591GogitaiJohoEntity extends DbTableEntityBase<DbT5591GogitaiJo
 
     /**
      * 合議体ダミーフラグのgetメソッドです。
-     *
+     * 
      * @return 合議体ダミーフラグ
      */
     @CheckForNull
@@ -301,7 +301,7 @@ public class DbT5591GogitaiJohoEntity extends DbTableEntityBase<DbT5591GogitaiJo
 
     /**
      * 合議体ダミーフラグのsetメソッドです。
-     *
+     * 
      * @param gogitaiDummyFlag 合議体ダミーフラグ
      */
     public void setGogitaiDummyFlag(boolean gogitaiDummyFlag) {
@@ -310,9 +310,10 @@ public class DbT5591GogitaiJohoEntity extends DbTableEntityBase<DbT5591GogitaiJo
 
     /**
      * このエンティティの主キーが他の{@literal DbT5591GogitaiJohoEntity}と等しいか判定します。
-     *
+     * 
      * @param other 比較するエンティティ
-     * @return 比較するエンティティが同じ主キーを持つ{@literal DbT5591GogitaiJohoEntity}の場合{@literal true}、それ以外の場合は{@literal false}
+     * @return 
+     * 比較するエンティティが同じ主キーを持つ{@literal DbT5591GogitaiJohoEntity}の場合{@literal true}、それ以外の場合は{@literal false}
      */
     @Override
     public boolean equalsPrimaryKeys(DbT5591GogitaiJohoEntity other) {
@@ -349,7 +350,6 @@ public class DbT5591GogitaiJohoEntity extends DbTableEntityBase<DbT5591GogitaiJo
 
     /**
      * {@inheritDoc}
-     *
      * @return {@inheritDoc}
      */
     @Override
@@ -358,4 +358,5 @@ public class DbT5591GogitaiJohoEntity extends DbTableEntityBase<DbT5591GogitaiJo
     }
 
 // </editor-fold>
+
 }

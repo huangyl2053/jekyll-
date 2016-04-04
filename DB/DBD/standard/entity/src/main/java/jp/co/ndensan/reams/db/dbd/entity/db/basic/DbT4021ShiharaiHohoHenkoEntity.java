@@ -1,19 +1,19 @@
 package jp.co.ndensan.reams.db.dbd.entity.db.basic;
 
-import java.util.Objects;
+import jp.co.ndensan.reams.uz.uza.util.db.IDbAccessable;
+import jp.co.ndensan.reams.uz.uza.util.db.DbTableEntityBase;
+import jp.co.ndensan.reams.uz.uza.util.db.PrimaryKey;
+import jp.co.ndensan.reams.uz.uza.util.db.TableName;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import java.util.UUID;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
+import java.util.Objects;
 import javax.annotation.CheckForNull;
 import javax.annotation.Nonnull;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HokenKyufuRitsu;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShoKisaiHokenshaNo;
-import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
-import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
-import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.util.db.DbTableEntityBase;
-import jp.co.ndensan.reams.uz.uza.util.db.IDbAccessable;
-import jp.co.ndensan.reams.uz.uza.util.db.PrimaryKey;
-import jp.co.ndensan.reams.uz.uza.util.db.TableName;
 
 /**
  * 支払方法変更テーブルのエンティティクラスです。
@@ -156,7 +156,13 @@ public class DbT4021ShiharaiHohoHenkoEntity extends DbTableEntityBase<DbT4021Shi
     /**
      * 管理区分のgetメソッドです。
      * <br/>
-     * <br/>1：２号差止,2：１号償還払い化,3：１号給付額減額
+     * <br/>DBDEnum.支払方法変更管理区分 
+
+     * <br/>1：２号差止 
+
+     * <br/>2：１号償還払い化 
+
+     * <br/>3：１号給付額減額
      * 
      * @return 管理区分
      */
@@ -167,7 +173,13 @@ public class DbT4021ShiharaiHohoHenkoEntity extends DbTableEntityBase<DbT4021Shi
     /**
      * 管理区分のsetメソッドです。
      * <br/>
-     * <br/>1：２号差止,2：１号償還払い化,3：１号給付額減額
+     * <br/>DBDEnum.支払方法変更管理区分 
+
+     * <br/>1：２号差止 
+
+     * <br/>2：１号償還払い化 
+
+     * <br/>3：１号給付額減額
      * 
      * @param kanriKubun 管理区分
      */
@@ -196,7 +208,17 @@ public class DbT4021ShiharaiHohoHenkoEntity extends DbTableEntityBase<DbT4021Shi
     /**
      * 登録区分のgetメソッドです。
      * <br/>
-     * <br/>01：２号予告登録者,02：２号差止登録,11：１号予告者登録,12：１号償還払い化登録,21：１号給付額減額登録
+     * <br/>DBDEnum.支払方法変更登録区分 
+
+     * <br/>01：２号予告登録者 
+
+     * <br/>02：２号差止登録 
+
+     * <br/>11：１号予告者登録 
+
+     * <br/>12：１号償還払い化登録 
+
+     * <br/>21：１号給付額減額登録
      * 
      * @return 登録区分
      */
@@ -207,7 +229,17 @@ public class DbT4021ShiharaiHohoHenkoEntity extends DbTableEntityBase<DbT4021Shi
     /**
      * 登録区分のsetメソッドです。
      * <br/>
-     * <br/>01：２号予告登録者,02：２号差止登録,11：１号予告者登録,12：１号償還払い化登録,21：１号給付額減額登録
+     * <br/>DBDEnum.支払方法変更登録区分 
+
+     * <br/>01：２号予告登録者 
+
+     * <br/>02：２号差止登録 
+
+     * <br/>11：１号予告者登録 
+
+     * <br/>12：１号償還払い化登録 
+
+     * <br/>21：１号給付額減額登録
      * 
      * @param torokuKubun 登録区分
      */
@@ -256,7 +288,19 @@ public class DbT4021ShiharaiHohoHenkoEntity extends DbTableEntityBase<DbT4021Shi
     /**
      * 終了区分のgetメソッドです。
      * <br/>
-     * <br/>01：差止措置終了依頼書受理,02：弁明書受理,03：終了申請書受理,04：減額免除申請書受理,98：職権,99：その他
+     * <br/>DBDEnum.支払方法変更終了区分 
+
+     * <br/>01：差止措置終了依頼書受理 
+
+     * <br/>02：弁明書受理 
+
+     * <br/>03：終了申請書受理 
+
+     * <br/>04：減額免除申請書受理 
+
+     * <br/>98：職権 
+
+     * <br/>99：その他
      * 
      * @return 終了区分
      */
@@ -268,7 +312,19 @@ public class DbT4021ShiharaiHohoHenkoEntity extends DbTableEntityBase<DbT4021Shi
     /**
      * 終了区分のsetメソッドです。
      * <br/>
-     * <br/>01：差止措置終了依頼書受理,02：弁明書受理,03：終了申請書受理,04：減額免除申請書受理,98：職権,99：その他
+     * <br/>DBDEnum.支払方法変更終了区分 
+
+     * <br/>01：差止措置終了依頼書受理 
+
+     * <br/>02：弁明書受理 
+
+     * <br/>03：終了申請書受理 
+
+     * <br/>04：減額免除申請書受理 
+
+     * <br/>98：職権 
+
+     * <br/>99：その他
      * 
      * @param shuryoKubun 終了区分
      */
@@ -336,7 +392,7 @@ public class DbT4021ShiharaiHohoHenkoEntity extends DbTableEntityBase<DbT4021Shi
     /**
      * 予告通知書再発行フラグのgetメソッドです。
      * <br/>
-     * <br/>1：再発行対象,0：再発行対象外
+     * <br/>true：再発行対象, false：再発行対象外
      * 
      * @return 予告通知書再発行フラグ
      */
@@ -348,7 +404,7 @@ public class DbT4021ShiharaiHohoHenkoEntity extends DbTableEntityBase<DbT4021Shi
     /**
      * 予告通知書再発行フラグのsetメソッドです。
      * <br/>
-     * <br/>1：再発行対象,0：再発行対象外
+     * <br/>true：再発行対象, false：再発行対象外
      * 
      * @param yokoku_TsuchiSaiHakkoFlag 予告通知書再発行フラグ
      */
@@ -397,7 +453,19 @@ public class DbT4021ShiharaiHohoHenkoEntity extends DbTableEntityBase<DbT4021Shi
     /**
      * 弁明理由コードのgetメソッドです。
      * <br/>
-     * <br/>01：公費負担医療の受給,02：災害,03：重大な障害または長期入院,04：滞納保険料の減少,05：保険料完納,99：その他
+     * <br/>DBDEnum.支払方法変更弁明理由コード 
+
+     * <br/>01：公費負担医療の受給 
+
+     * <br/>02：災害 
+
+     * <br/>03：重大な障害または長期入院 
+
+     * <br/>04：滞納保険料の減少 
+
+     * <br/>05：保険料完納 
+
+     * <br/>99：その他
      * 
      * @return 弁明理由コード
      */
@@ -409,7 +477,19 @@ public class DbT4021ShiharaiHohoHenkoEntity extends DbTableEntityBase<DbT4021Shi
     /**
      * 弁明理由コードのsetメソッドです。
      * <br/>
-     * <br/>01：公費負担医療の受給,02：災害,03：重大な障害または長期入院,04：滞納保険料の減少,05：保険料完納,99：その他
+     * <br/>DBDEnum.支払方法変更弁明理由コード 
+
+     * <br/>01：公費負担医療の受給 
+
+     * <br/>02：災害 
+
+     * <br/>03：重大な障害または長期入院 
+
+     * <br/>04：滞納保険料の減少 
+
+     * <br/>05：保険料完納 
+
+     * <br/>99：その他
      * 
      * @param bemmei_RiyuCode 弁明理由コード
      */
@@ -439,7 +519,11 @@ public class DbT4021ShiharaiHohoHenkoEntity extends DbTableEntityBase<DbT4021Shi
     /**
      * 弁明審査結果区分のgetメソッドです。
      * <br/>
-     * <br/>1：申請受理,2：申請却下
+     * <br/>DBDEnum.支払方法変更弁明審査結果区分 
+
+     * <br/>1：申請受理 
+
+     * <br/>2：申請却下
      * 
      * @return 弁明審査結果区分
      */
@@ -451,7 +535,11 @@ public class DbT4021ShiharaiHohoHenkoEntity extends DbTableEntityBase<DbT4021Shi
     /**
      * 弁明審査結果区分のsetメソッドです。
      * <br/>
-     * <br/>1：申請受理,2：申請却下
+     * <br/>DBDEnum.支払方法変更弁明審査結果区分 
+
+     * <br/>1：申請受理 
+
+     * <br/>2：申請却下
      * 
      * @param bemmei_ShinsaKekkaKubun 弁明審査結果区分
      */
@@ -500,7 +588,7 @@ public class DbT4021ShiharaiHohoHenkoEntity extends DbTableEntityBase<DbT4021Shi
     /**
      * 償還払化通知書再発行フラグのgetメソッドです。
      * <br/>
-     * <br/>1：再発行対象,0：再発行対象外
+     * <br/>true：再発行対象, false：再発行対象外
      * 
      * @return 償還払化通知書再発行フラグ
      */
@@ -512,7 +600,7 @@ public class DbT4021ShiharaiHohoHenkoEntity extends DbTableEntityBase<DbT4021Shi
     /**
      * 償還払化通知書再発行フラグのsetメソッドです。
      * <br/>
-     * <br/>1：再発行対象,0：再発行対象外
+     * <br/>true：再発行対象, false：再発行対象外
      * 
      * @param shokan_TsuchiSaiHakkoFlag 償還払化通知書再発行フラグ
      */
@@ -542,7 +630,7 @@ public class DbT4021ShiharaiHohoHenkoEntity extends DbTableEntityBase<DbT4021Shi
     /**
      * 差止対象フラグのgetメソッドです。
      * <br/>
-     * <br/>1：差止対象,0：差止対象外
+     * <br/>true：差止対象, false：差止対象外
      * 
      * @return 差止対象フラグ
      */
@@ -554,7 +642,7 @@ public class DbT4021ShiharaiHohoHenkoEntity extends DbTableEntityBase<DbT4021Shi
     /**
      * 差止対象フラグのsetメソッドです。
      * <br/>
-     * <br/>1：差止対象,0：差止対象外
+     * <br/>true：差止対象, false：差止対象外
      * 
      * @param sashitome_Flag 差止対象フラグ
      */
@@ -641,7 +729,7 @@ public class DbT4021ShiharaiHohoHenkoEntity extends DbTableEntityBase<DbT4021Shi
     /**
      * 減額通知書再発行フラグのgetメソッドです。
      * <br/>
-     * <br/>1：再発行対象,0：再発行対象外
+     * <br/>true：再発行対象, false：再発行対象外
      * 
      * @return 減額通知書再発行フラグ
      */
@@ -653,7 +741,7 @@ public class DbT4021ShiharaiHohoHenkoEntity extends DbTableEntityBase<DbT4021Shi
     /**
      * 減額通知書再発行フラグのsetメソッドです。
      * <br/>
-     * <br/>1：再発行対象,0：再発行対象外
+     * <br/>true：再発行対象, false：再発行対象外
      * 
      * @param gemmen_TsuchiSaiHakkoFlag 減額通知書再発行フラグ
      */
@@ -725,7 +813,27 @@ public class DbT4021ShiharaiHohoHenkoEntity extends DbTableEntityBase<DbT4021Shi
     /**
      * 終了申請理由コードのgetメソッドです。
      * <br/>
-     * <br/>01：公費負担医療の受給,02：災害,03：重大な障害または長期入院,04：滞納保険料の減少（支払方法変更管理種別：2）,05：保険料完納（支払方法変更管理種別：2）,06：特別な事情（支払方法変更管理種別：3）,98：職権（支払方法変更管理種別：3）,99：その他
+     * <br/>DBDEnum.支払方法変更終了申請理由コード 
+
+     * <br/>01：公費負担医療の受給 
+
+     * <br/>02：災害 
+
+     * <br/>03：重大な障害または長期入院 
+
+     * <br/>04：滞納保険料の減少 
+
+     * <br/>99：その他 
+
+     * <br/>（支払方法変更管理区分：2）
+
+     * <br/>05：保険料完納 
+
+     * <br/>06：特別な事情 
+
+     * <br/>（支払方法変更管理区分：3）
+
+     * <br/>98：職権
      * 
      * @return 終了申請理由コード
      */
@@ -737,7 +845,27 @@ public class DbT4021ShiharaiHohoHenkoEntity extends DbTableEntityBase<DbT4021Shi
     /**
      * 終了申請理由コードのsetメソッドです。
      * <br/>
-     * <br/>01：公費負担医療の受給,02：災害,03：重大な障害または長期入院,04：滞納保険料の減少（支払方法変更管理種別：2）,05：保険料完納（支払方法変更管理種別：2）,06：特別な事情（支払方法変更管理種別：3）,98：職権（支払方法変更管理種別：3）,99：その他
+     * <br/>DBDEnum.支払方法変更終了申請理由コード 
+
+     * <br/>01：公費負担医療の受給 
+
+     * <br/>02：災害 
+
+     * <br/>03：重大な障害または長期入院 
+
+     * <br/>04：滞納保険料の減少 
+
+     * <br/>99：その他 
+
+     * <br/>（支払方法変更管理区分：2）
+
+     * <br/>05：保険料完納 
+
+     * <br/>06：特別な事情 
+
+     * <br/>（支払方法変更管理区分：3）
+
+     * <br/>98：職権
      * 
      * @param shuryoShinsei_RiyuCode 終了申請理由コード
      */
@@ -767,7 +895,11 @@ public class DbT4021ShiharaiHohoHenkoEntity extends DbTableEntityBase<DbT4021Shi
     /**
      * 終了申請審査結果区分のgetメソッドです。
      * <br/>
-     * <br/>1：申請受理,2：申請却下
+     * <br/>DBDEnum.支払方法変更終了申請審査結果区分 
+
+     * <br/>1：申請受理 
+
+     * <br/>2：申請却下
      * 
      * @return 終了申請審査結果区分
      */
@@ -779,7 +911,11 @@ public class DbT4021ShiharaiHohoHenkoEntity extends DbTableEntityBase<DbT4021Shi
     /**
      * 終了申請審査結果区分のsetメソッドです。
      * <br/>
-     * <br/>1：申請受理,2：申請却下
+     * <br/>DBDEnum.支払方法変更終了申請審査結果区分 
+
+     * <br/>1：申請受理 
+
+     * <br/>2：申請却下
      * 
      * @param shuryoShinsei_ShinsaKekkaKubun 終了申請審査結果区分
      */
@@ -790,7 +926,7 @@ public class DbT4021ShiharaiHohoHenkoEntity extends DbTableEntityBase<DbT4021Shi
     /**
      * 無効区分のgetメソッドです。
      * <br/>
-     * <br/>1：無効,0：有効
+     * <br/>DBDEnum.支払方法変更無効区分 0:有効 1:無効
      * 
      * @return 無効区分
      */
@@ -802,7 +938,7 @@ public class DbT4021ShiharaiHohoHenkoEntity extends DbTableEntityBase<DbT4021Shi
     /**
      * 無効区分のsetメソッドです。
      * <br/>
-     * <br/>1：無効,0：有効
+     * <br/>DBDEnum.支払方法変更無効区分 0:有効 1:無効
      * 
      * @param mukoKubun 無効区分
      */
@@ -812,6 +948,8 @@ public class DbT4021ShiharaiHohoHenkoEntity extends DbTableEntityBase<DbT4021Shi
 
     /**
      * 論理削除フラグのgetメソッドです。
+     * <br/>
+     * <br/>true：論理削除
      * 
      * @return 論理削除フラグ
      */
@@ -822,6 +960,8 @@ public class DbT4021ShiharaiHohoHenkoEntity extends DbTableEntityBase<DbT4021Shi
 
     /**
      * 論理削除フラグのsetメソッドです。
+     * <br/>
+     * <br/>true：論理削除
      * 
      * @param logicalDeletedFlag 論理削除フラグ
      */
@@ -908,5 +1048,7 @@ public class DbT4021ShiharaiHohoHenkoEntity extends DbTableEntityBase<DbT4021Shi
     }
 
 // </editor-fold>
+
+
 
 }
