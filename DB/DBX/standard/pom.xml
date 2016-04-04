@@ -22,8 +22,6 @@
         <module>service</module>
         <module>batchcontroller</module>
     </modules>
-    <properties>
-    </properties>
     <dependencyManagement>
         <dependencies>
             <dependency>
