@@ -13,12 +13,13 @@ import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT7056GappeiShichosonEntity;
 
 /**
  * 旧市町村コード情報のモデルクラスです。
- *
  */
-public class KyuShichosonJohoEntities implements Serializable, Iterable<DbT7056GappeiShichosonEntity> {
+public final class KyuShichosonJohoEntities implements Serializable, Iterable<DbT7056GappeiShichosonEntity> {
 
-    private List<DbT7056GappeiShichosonEntity> entities;
-    private boolean gappeiShichoUmuFlag;
+    private static final long serialVersionUID = 1L;
+
+    private final List<DbT7056GappeiShichosonEntity> entities;
+    private final boolean gappeiShichoUmuFlag;
 
     /**
      * コンストラクタです。
@@ -78,42 +79,5 @@ public class KyuShichosonJohoEntities implements Serializable, Iterable<DbT7056G
     @Override
     public Iterator<DbT7056GappeiShichosonEntity> iterator() {
         return this.entities.iterator();
-    }
-
-    /**
-     * 合併市町村有無フラグを設定します。
-     *
-     * @param 合併市町村有無フラグ
-     */
-    public void setGappeiShichoUmuFlag(boolean 合併市町村有無フラグ) {
-        gappeiShichoUmuFlag = 合併市町村有無フラグ;
-    }
-
-    /**
-     * 合併市町村有無フラグを返却します。
-     *
-     * @return 合併市町村有無フラグ
-     */
-    public boolean getGappeiShichoUmuFlag() {
-        return gappeiShichoUmuFlag;
-    }
-    
-    
-    /**
-     * DbT7056GappeiShichosonEntityのリストを設定します。
-     *
-     * @param DbT7056GappeiShichosonEntityList
-     */
-    public void setEntitys(List<DbT7056GappeiShichosonEntity> DbT7056GappeiShichosonEntityList) {
-        entities = DbT7056GappeiShichosonEntityList;
-    }
-    
-    /**
-     * DbT7056GappeiShichosonEntityのリストを返却します。
-     *
-     * @return DbT7056GappeiShichosonEntityのリスト
-     */
-    public List<DbT7056GappeiShichosonEntity> getEntitys() {
-        return entities;
     }
 }
