@@ -312,6 +312,7 @@ public class TaJushochiTokureishaKanriHandler {
                 rowList.add(rireki_Row);
             }
             他住所地特例Model.add(住所地特例の識別子);
+            Collections.sort(rowList, new DateComparator());
         } else if (適用モード.equals(親画面状態)) {
             dgJushochiTokureiRireki_Row row = new dgJushochiTokureiRireki_Row();
             if (div.getTxtNyusyobi().getValue() != null) {
@@ -374,7 +375,6 @@ public class TaJushochiTokureishaKanriHandler {
             div.getDdlKaijyoJiyo().setSelectedKey(RString.EMPTY);
         }
         div.setStrate(RString.EMPTY);
-        Collections.sort(rowList, new DateComparator());
         div.getDgJushochiTokureiRireki().setDataSource(rowList);
         set他市町村住所地特例情報入力エリア非活性の設定();
         clear他市町村住所地特例情報入力エリア();
