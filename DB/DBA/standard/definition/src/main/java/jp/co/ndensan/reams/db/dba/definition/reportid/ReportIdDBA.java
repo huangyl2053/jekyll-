@@ -227,7 +227,11 @@ public enum ReportIdDBA {
     /**
      * 介護保険　転入・転出未登録一覧表です。
      */
-    DBA200014(new ReportId("DBA200014_TennyuTenshutsuMitorokuIchiranhyo"), new RString("介護保険　転入・転出未登録一覧表"));
+    DBA200014(new ReportId("DBA200014_TennyuTenshutsuMitorokuIchiranhyo"), new RString("介護保険　転入・転出未登録一覧表")),
+    /**
+     * 被保険者台帳です。
+     */
+    DBA100009(new ReportId("DBA100009_HihokenshaDaicho"), new RString("被保険者台帳"));
 
     private final ReportId reportId;
     private final RString reportName;
