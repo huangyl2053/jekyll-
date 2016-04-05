@@ -285,8 +285,7 @@ public class JigyoHokokuGeppoHoseiHako {
     public int deleteJigyoHokokuGeppoData(JigyoHokokuGeppoDetalSearchParameter parameter) {
         IJigyoHokokuGeppoHoseiHakoMapper hoseiHakoMapper
                 = mapperProvider.create(IJigyoHokokuGeppoHoseiHakoMapper.class);
-        int deleteCount = hoseiHakoMapper.delete事業報告月報(parameter);
-        return deleteCount;
+        return hoseiHakoMapper.delete事業報告月報(parameter);
     }
 
     /**

@@ -115,6 +115,16 @@ public class SogoShokaiInfo {
     private static final RString YML_FUKA = new RString("dbu0600011/FukaData.yml");
     private static final RString YML_KYOKAISO_KANRI = new RString("dbu0600011/KyokaisoKanriData.yml");
     private static final RString YML_SOGO_JIGYO_TAISHOSHA = new RString("dbu0600011/SogoJigyoTaishoshaData.yml");
+    private static final RString 入所日 = new RString("入所日");
+    private static final RString 退所日 = new RString("退所日");
+    private static final RString 申請日 = new RString("申請日");
+    private static final RString 適用開始日 = new RString("適用開始日");
+    private static final RString 決定日 = new RString("決定日");
+    private static final RString 事業者名称 = new RString("事業者名称");
+    private static final RString 事業者コード = new RString("事業者コード");
+    private static final RString 提供年月 = new RString("提供年月");
+    private static final RString 申立日 = new RString("申立日");
+    private static final RString サービス提供年月 = new RString("サービス提供年月");
 
     /**
      * 画面ロード時の処理です。
@@ -626,8 +636,8 @@ public class SogoShokaiInfo {
                     map.get("解除届出日").toString(),
                     map.get("保険者").toString(),
                     map.get("被保番号").toString(),
-                    map.get("入所日").toString(),
-                    map.get("退所日").toString(),
+                    map.get(入所日.toString()).toString(),
+                    map.get(退所日.toString()).toString(),
                     map.get("施設種類").toString(),
                     map.get("入所施設").toString()
             ));
@@ -677,8 +687,8 @@ public class SogoShokaiInfo {
                     map.get("解除事由").toString(),
                     map.get("解除適用日").toString(),
                     map.get("解除届出日").toString(),
-                    map.get("入所日").toString(),
-                    map.get("退所日").toString(),
+                    map.get(入所日).toString(),
+                    map.get(退所日.toString()).toString(),
                     map.get("施設").toString()));
         }
         panel.getDgSogoShokaiShikakuJogaiList().setDataSource(list);
@@ -714,7 +724,7 @@ public class SogoShokaiInfo {
         for (int index = 0; index < mapList.size(); index++) {
             HashMap map = mapList.get(index);
             list.add(createJukyuNinteiListRow(
-                    map.get("申請日").toString(),
+                    map.get(申請日.toString()).toString(),
                     map.get("申請区分(法令)").toString(),
                     map.get("申請有効区分").toString(),
                     map.get("認定日").toString(),
@@ -730,8 +740,8 @@ public class SogoShokaiInfo {
         HashMap map = getYamlData(YML_NINTEI).get(0);
         ControlGenerator ymlData = new ControlGenerator(map);
 
-        //panel.getTxtNinteiShinseiYMD().setValue(new RDate(map.get("申請日").toString()));
-        panel.getTxtNinteiShinseiYMD().setValue(ymlData.getAsRDate("申請日"));
+        //panel.getTxtNinteiShinseiYMD().setValue(new RDate(map.get(申請日.toString()).toString()));
+        panel.getTxtNinteiShinseiYMD().setValue(ymlData.getAsRDate(申請日.toString()));
         panel.getTxtNinteiShinseiKubun().setValue(new RString(map.get("申請区分(法令)").toString()));
         panel.getTxtNinteiYukoKubun().setValue(new RString(map.get("申請有効区分").toString()));
         //panel.getTxtNinteiChosaJissiYMD().setValue(new RDate(map.get("調査実施日").toString()));
@@ -799,11 +809,11 @@ public class SogoShokaiInfo {
         for (int index = 0; index < mapList.size(); index++) {
             HashMap map = mapList.get(index);
             list.add(createJukyuGenmenGengakuListRow(
-                    map.get("適用開始日").toString(),
+                    map.get(適用開始日.toString()).toString(),
                     map.get("有効期限").toString(),
-                    map.get("決定日").toString(),
+                    map.get(決定日.toString()).toString(),
                     map.get("決定区分").toString(),
-                    map.get("申請日").toString(),
+                    map.get(申請日.toString()).toString(),
                     map.get("減免・減額種類").toString()));
         }
         panel.getDgSogoShokaiJukyuGenmenGengakuList().setDataSource(list);
@@ -813,8 +823,8 @@ public class SogoShokaiInfo {
     private void setJukyuGenmenGengakuDetailInfo(SogoShokaiGenmenGengakuInfoDiv panel) {
         HashMap map = getYamlData(YML_GENMEN_GENGAKU).get(0);
         ControlGenerator ymlData = new ControlGenerator(map);
-        //panel.getTxtGenmenShinseiYMD().setValue(new RDate(map.get("申請日").toString()));
-        panel.getTxtGenmenShinseiYMD().setValue(ymlData.getAsRDate("申請日"));
+        //panel.getTxtGenmenShinseiYMD().setValue(new RDate(map.get(申請日.toString()).toString()));
+        panel.getTxtGenmenShinseiYMD().setValue(ymlData.getAsRDate(申請日.toString()));
         panel.getTxtGenmenKyuSochiUmu().setValue(new RString(map.get("旧措置者有無").toString()));
 
         SogoShokaiGenmenGengakuTechoDiv techoDiv = panel.getSogoShokaiGenmenGengakuTecho();
@@ -833,10 +843,10 @@ public class SogoShokaiInfo {
 
         SogoShokaiGenmenGengakuFutanDiv futanDiv = panel.getSogoShokaiGenmenGengakuFutan();
         futanDiv.getTxtGenmenFutanKetteiKubun().setValue(new RString(map.get("決定区分").toString()));
-        //futanDiv.getTxtGenmenFutanKetteiYMD().setValue(new RDate(map.get("決定日").toString()));
-        futanDiv.getTxtGenmenFutanKetteiYMD().setValue(ymlData.getAsRDate("決定日"));
-        //futanDiv.getTxtGenmenFutanTekiyoKaishiYMD().setValue(new RDate(map.get("適用開始日").toString()));
-        futanDiv.getTxtGenmenFutanTekiyoKaishiYMD().setValue(ymlData.getAsRDate("適用開始日"));
+        //futanDiv.getTxtGenmenFutanKetteiYMD().setValue(new RDate(map.get(決定日.toString()).toString()));
+        futanDiv.getTxtGenmenFutanKetteiYMD().setValue(ymlData.getAsRDate(決定日.toString()));
+        //futanDiv.getTxtGenmenFutanTekiyoKaishiYMD().setValue(new RDate(map.get(適用開始日.toString()).toString()));
+        futanDiv.getTxtGenmenFutanTekiyoKaishiYMD().setValue(ymlData.getAsRDate(適用開始日.toString()));
         //futanDiv.getTxtGenmenFutanYukoKigen().setValue(new RDate(map.get("有効期限").toString()));
         futanDiv.getTxtGenmenFutanYukoKigen().setValue(ymlData.getAsRDate("有効期限"));
         futanDiv.getTxtGenmenFutanKyufuritsu().setValue(new Decimal(map.get("給付率").toString()));
@@ -882,10 +892,10 @@ public class SogoShokaiInfo {
             HashMap map = mapList.get(index);
             list.add(createJukyuShisetsuNyushoListRow(
                     map.get("施設分類").toString(),
-                    map.get("入所日").toString(),
-                    map.get("退所日").toString(),
+                    map.get(入所日.toString()).toString(),
+                    map.get(退所日.toString()).toString(),
                     map.get("施設名称").toString(),
-                    map.get("事業者名称").toString(),
+                    map.get(事業者名称.toString()).toString(),
                     map.get("所在地").toString()
             ));
         }
@@ -897,13 +907,13 @@ public class SogoShokaiInfo {
         HashMap map = getYamlData(YML_SHISETSU_NYUSHO).get(0);
         ControlGenerator ymlData = new ControlGenerator(map);
         panel.getTxtShisetsuBunrui().setValue(new RString(map.get("施設分類").toString()));
-        //panel.getTxtShisetsuNyushoYMD().setValue(new RDate(map.get("入所日").toString()));
-        panel.getTxtShisetsuNyushoYMD().setValue(ymlData.getAsRDate("入所日"));
-        //panel.getTxtShisetsuTaishoYMD().setValue(new RDate(map.get("退所日").toString()));
-        panel.getTxtShisetsuTaishoYMD().setValue(ymlData.getAsRDate("退所日"));
+        //panel.getTxtShisetsuNyushoYMD().setValue(new RDate(map.get(入所日.toString()).toString()));
+        panel.getTxtShisetsuNyushoYMD().setValue(ymlData.getAsRDate(入所日.toString()));
+        //panel.getTxtShisetsuTaishoYMD().setValue(new RDate(map.get(退所日.toString()).toString()));
+        panel.getTxtShisetsuTaishoYMD().setValue(ymlData.getAsRDate(退所日.toString()));
         panel.getTxtShisetsuName().setValue(new RString(map.get("施設名称").toString()));
-        panel.getTxtShisetsuJigyoshaNo().setValue(new RString(map.get("事業者コード").toString()));
-        panel.getTxtShisetsuJigyoshaName().setValue(new RString(map.get("事業者名称").toString()));
+        panel.getTxtShisetsuJigyoshaNo().setValue(new RString(map.get(事業者コード.toString()).toString()));
+        panel.getTxtShisetsuJigyoshaName().setValue(new RString(map.get(事業者名称.toString()).toString()));
         panel.getTxtShisetsuJigyoshaJusho().setValue(new RString(map.get("所在地").toString()));
     }
 
@@ -1013,7 +1023,7 @@ public class SogoShokaiInfo {
             HashMap map = mapList.get(index);
             list.add(createKyufuKyotakuServiceKeikakuListRow(
                     map.get("届出日").toString(),
-                    map.get("適用開始日").toString(),
+                    map.get(適用開始日.toString()).toString(),
                     map.get("適用終了日").toString(),
                     map.get("変更日").toString()
             ));
@@ -1030,14 +1040,14 @@ public class SogoShokaiInfo {
         //panel.getTxtKeikakuHenkoYMD().setValue(new RDate(map.get("変更日").toString()));
         panel.getTxtKeikakuHenkoYMD().setValue(ymlData.getAsRDate("変更日"));
         panel.getTxtKeikakuJigyoshaShurui().setValue(new RString(map.get("事業者種類").toString()));
-        panel.getTxtKeikakuJigyoshaNo().setValue(new RString(map.get("事業者コード").toString()));
-        panel.getTxtKeikakuJigyoshaName().setValue(new RString(map.get("事業者名称").toString()));
+        panel.getTxtKeikakuJigyoshaNo().setValue(new RString(map.get(事業者コード.toString()).toString()));
+        panel.getTxtKeikakuJigyoshaName().setValue(new RString(map.get(事業者名称.toString()).toString()));
         panel.getTxtKeikakuServiceShurui().setValue(new RString(map.get("サービス種類").toString()));
         panel.getTxtKeikakuSakuseiKubun().setValue(new RString(map.get("計画作成区分").toString()));
         //panel.getTxtKeikakuYM().setValue(new RDate(map.get("計画年月").toString()));
         panel.getTxtKeikakuYM().setValue(ymlData.getAsRDate("計画年月"));
-        //panel.getTxtKeikakuKikan().setFromValue(new RDate(map.get("適用開始日").toString()));
-        panel.getTxtKeikakuKikan().setFromValue(ymlData.getAsRDate("適用開始日"));
+        //panel.getTxtKeikakuKikan().setFromValue(new RDate(map.get(適用開始日.toString()).toString()));
+        panel.getTxtKeikakuKikan().setFromValue(ymlData.getAsRDate(適用開始日.toString()));
         //panel.getTxtKeikakuKikan().setToValue(new RDate(map.get("適用終了日").toString()));
         panel.getTxtKeikakuKikan().setToValue(ymlData.getAsRDate("適用終了日"));
     }
@@ -1063,9 +1073,9 @@ public class SogoShokaiInfo {
         for (int index = 0; index < mapList.size(); index++) {
             HashMap map = mapList.get(index);
             list.add(createKyufuKogakuKaigoServiceListRow(
-                    map.get("提供年月").toString(),
-                    map.get("申請日").toString(),
-                    map.get("決定日").toString()));
+                    map.get(提供年月.toString()).toString(),
+                    map.get(申請日.toString()).toString(),
+                    map.get(決定日.toString()).toString()));
         }
         panel.getDgSogoShokaiKyufuKogakuKaigoServiceList().setDataSource(list);
     }
@@ -1074,10 +1084,10 @@ public class SogoShokaiInfo {
     private void setKyufuKogakuKaigoServiceDetailInfo(SogoShokaiKogakuKaigoServicehiInfoDiv panel) {
         HashMap map = getYamlData(YML_KOGAKU_SERVICE).get(0);
         ControlGenerator ymlData = new ControlGenerator(map);
-        //panel.getTxtKogakuTeikyoYM().setValue(new RDate(map.get("提供年月").toString()));
-        panel.getTxtKogakuTeikyoYM().setValue(ymlData.getAsRDate("提供年月"));
-        //panel.getTxtKogakuShinseiYMD().setValue(new RDate(map.get("申請日").toString()));
-        panel.getTxtKogakuShinseiYMD().setValue(ymlData.getAsRDate("申請日"));
+        //panel.getTxtKogakuTeikyoYM().setValue(new RDate(map.get(提供年月.toString()).toString()));
+        panel.getTxtKogakuTeikyoYM().setValue(ymlData.getAsRDate(提供年月.toString()));
+        //panel.getTxtKogakuShinseiYMD().setValue(new RDate(map.get(申請日.toString()).toString()));
+        panel.getTxtKogakuShinseiYMD().setValue(ymlData.getAsRDate(申請日.toString()));
         //panel.getTxtKogakuShiharaigaku().setValue(new Decimal(map.get("本人支払額").toString()));
         panel.getTxtKogakuShiharaigaku().setValue(ymlData.getAsDecimal("本人支払額"));
         panel.getTxtKogakuShiharaiHoho().setValue(new RString(map.get("支払方法").toString()));
@@ -1089,8 +1099,8 @@ public class SogoShokaiInfo {
         panel.getTxtKogakuKozaNo().setValue(new RString(map.get("口座番号").toString()));
         panel.getTxtKogakuKozaMeiginin().setValue(new RString(map.get("名義人").toString()));
         panel.getTxtKogakuKozaMeigininKana().setValue(new RString(map.get("名義人カナ").toString()));
-        //panel.getTxtKogakuKetteiYMD().setValue(new RDate(map.get("決定日").toString()));
-        panel.getTxtKogakuKetteiYMD().setValue(ymlData.getAsRDate("決定日"));
+        //panel.getTxtKogakuKetteiYMD().setValue(new RDate(map.get(決定日.toString()).toString()));
+        panel.getTxtKogakuKetteiYMD().setValue(ymlData.getAsRDate(決定日.toString()));
         panel.getTxtKogakuShikyuKubun().setValue(new RString(map.get("支給・不支給区分").toString()));
         //panel.getTxtKogakuShikyugaku().setValue(new Decimal(map.get("支給金額").toString()));
         panel.getTxtKogakuShikyugaku().setValue(ymlData.getAsDecimal("支給金額"));
@@ -1142,9 +1152,9 @@ public class SogoShokaiInfo {
         for (int index = 0; index < mapList.size(); index++) {
             HashMap map = mapList.get(index);
             list.add(createKyufuShokanBaraiListRow(
-                    map.get("提供年月").toString(),
+                    map.get(提供年月.toString()).toString(),
                     map.get("サービス種類").toString(),
-                    map.get("申請日").toString(),
+                    map.get(申請日.toString()).toString(),
                     map.get("整理番号").toString(),
                     map.get("支払金額合計").toString(),
                     map.get("保険請求額合計").toString(),
@@ -1177,8 +1187,8 @@ public class SogoShokaiInfo {
     private void setFukushiYoguKonyuhiDetailInfo(SogoShokaiFukushiYoguKonyuhiInfoDiv panel, int meisaiIndex) {
         HashMap map = getYamlData(YML_YOGU_KONYUHI).get(0);
         ControlGenerator ymlData = new ControlGenerator(map);
-        //panel.getTxtTeikyoYM().setValue(new RDate(map.get("提供年月").toString()));
-        panel.getTxtTeikyoYM().setValue(ymlData.getAsRDate("提供年月"));
+        //panel.getTxtTeikyoYM().setValue(new RDate(map.get(提供年月.toString()).toString()));
+        panel.getTxtTeikyoYM().setValue(ymlData.getAsRDate(提供年月.toString()));
         panel.getTxtSeiriNo().setValue(new RString(map.get("整理番号").toString()));
         panel.getTxtKyufuritsu().setValue(new Decimal(map.get("給付率").toString()));
 
@@ -1253,9 +1263,9 @@ public class SogoShokaiInfo {
         for (int index = 0; index < mapList.size(); index++) {
             HashMap map = mapList.get(index);
             list.add(createKyufuKagoMoushitateshoListRow(
-                    map.get("申立日").toString(),
-                    map.get("事業者名称").toString(),
-                    map.get("サービス提供年月").toString(),
+                    map.get(申立日.toString()).toString(),
+                    map.get(事業者名称.toString()).toString(),
+                    map.get(サービス提供年月.toString()).toString(),
                     map.get("理由").toString()));
         }
         panel.getDgSogoShokaiKyufuKagoMoushitateshoList().setDataSource(list);
@@ -1267,13 +1277,13 @@ public class SogoShokaiInfo {
         ControlGenerator ymlData = new ControlGenerator(map);
         //panel.getTxtKagoTaishoYM().setValue(new RDate(map.get("対象年月").toString()));
         panel.getTxtKagoTaishoYM().setValue(ymlData.getAsRDate("対象年月"));
-        //panel.getTxtKagoMoshitateYMD().setValue(new RDate(map.get("申立日").toString()));
-        panel.getTxtKagoMoshitateYMD().setValue(ymlData.getAsRDate("申立日"));
-        //panel.getTxtKagoTeikyoYM().setValue(new RDate(map.get("サービス提供年月").toString()));
-        panel.getTxtKagoTeikyoYM().setValue(ymlData.getAsRDate("サービス提供年月"));
+        //panel.getTxtKagoMoshitateYMD().setValue(new RDate(map.get(申立日.toString()).toString()));
+        panel.getTxtKagoMoshitateYMD().setValue(ymlData.getAsRDate(申立日.toString()));
+        //panel.getTxtKagoTeikyoYM().setValue(new RDate(map.get(サービス提供年月.toString()).toString()));
+        panel.getTxtKagoTeikyoYM().setValue(ymlData.getAsRDate(サービス提供年月.toString()));
         panel.getTxtKagoDogetsuKago().setValue(new RString(map.get("同月過誤").toString()));
-        panel.getTxtKagoJigyoshaCode().setValue(new RString(map.get("事業者コード").toString()));
-        panel.getTxtKagoJigyoshaName().setValue(new RString(map.get("事業者名称").toString()));
+        panel.getTxtKagoJigyoshaCode().setValue(new RString(map.get(事業者コード.toString()).toString()));
+        panel.getTxtKagoJigyoshaName().setValue(new RString(map.get(事業者名称.toString()).toString()));
 
         SogoShokaiKagoMoshitateJiyuDiv jiyuDiv = panel.getSogoShokaiKagoMoshitateJiyu();
         jiyuDiv.getTxtKagoMoshitateYoshiki().setValue(new RString(map.get("様式").toString()));
@@ -1316,9 +1326,9 @@ public class SogoShokaiInfo {
         for (int index = 0; index < mapList.size(); index++) {
             HashMap map = mapList.get(index);
             list.add(createKyufuSaishinsaMoushitateshoListRow(
-                    map.get("申立日").toString(),
-                    map.get("事業者名称").toString(),
-                    map.get("サービス提供年月").toString(),
+                    map.get(申立日.toString()).toString(),
+                    map.get(事業者名称.toString()).toString(),
+                    map.get(サービス提供年月.toString()).toString(),
                     map.get("サービス名称").toString(),
                     map.get("申立単位数").toString(),
                     map.get("理由").toString()
@@ -1333,12 +1343,12 @@ public class SogoShokaiInfo {
         ControlGenerator ymlData = new ControlGenerator(map);
         //panel.getTxtSaishinsaTaishoYM().setValue(new RDate(map.get("対象年月").toString()));
         panel.getTxtSaishinsaTaishoYM().setValue(ymlData.getAsRDate("対象年月"));
-        //panel.getTxtSaishinsaMoshitateYMD().setValue(new RDate(map.get("申立日").toString()));
-        panel.getTxtSaishinsaMoshitateYMD().setValue(ymlData.getAsRDate("申立日"));
-        //panel.getTxtSaishinsaTeikyoYM().setValue(new RDate(map.get("サービス提供年月").toString()));
-        panel.getTxtSaishinsaTeikyoYM().setValue(ymlData.getAsRDate("サービス提供年月"));
-        panel.getTxtSaishinsaJigyoshaCode().setValue(new RString(map.get("事業者コード").toString()));
-        panel.getTxtSaishinsaJigyoshaName().setValue(new RString(map.get("事業者名称").toString()));
+        //panel.getTxtSaishinsaMoshitateYMD().setValue(new RDate(map.get(申立日.toString()).toString()));
+        panel.getTxtSaishinsaMoshitateYMD().setValue(ymlData.getAsRDate(申立日.toString()));
+        //panel.getTxtSaishinsaTeikyoYM().setValue(new RDate(map.get(サービス提供年月.toString()).toString()));
+        panel.getTxtSaishinsaTeikyoYM().setValue(ymlData.getAsRDate(サービス提供年月.toString()));
+        panel.getTxtSaishinsaJigyoshaCode().setValue(new RString(map.get(事業者コード.toString()).toString()));
+        panel.getTxtSaishinsaJigyoshaName().setValue(new RString(map.get(事業者名称.toString()).toString()));
         panel.getTxtSaishinsaServiceShuruiCode().setValue(new RString(map.get("サービス種類コード").toString()));
         panel.getTxtSaishinsaServiceCode().setValue(new RString(map.get("サービスコード").toString()));
         panel.getTxtSaishinsaServiceName().setValue(new RString(map.get("サービス名称").toString()));
@@ -1481,7 +1491,7 @@ public class SogoShokaiInfo {
         for (int index = 0; index < mapList.size(); index++) {
             HashMap map = mapList.get(index);
             list.add(createJuminKyokaiKanriListRow(
-                    map.get("適用開始日").toString(),
+                    map.get(適用開始日.toString()).toString(),
                     map.get("適用終了日").toString(),
                     map.get("給付額減額記載解除").toString(),
                     map.get("居住費軽減後居室種類").toString(),
@@ -1489,7 +1499,7 @@ public class SogoShokaiInfo {
                     map.get("食費軽減後負担額").toString(),
                     map.get("読替後高額介護世帯上限額").toString(),
                     map.get("保険料低減後所得段階").toString(),
-                    map.get("決定日").toString()
+                    map.get(決定日.toString()).toString()
             ));
         }
         panel.getDgSogoShokaiJuminKyokaiKanriList().setDataSource(list);

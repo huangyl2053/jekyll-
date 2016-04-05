@@ -33,7 +33,6 @@ public class Shichoson {
      * @param 市町村 市町村
      * @link ShichosonEntity}より{@link Shichoson}を生成します。
      *
-     * @param 市町村 @link ShichosonEntity}
      */
     public Shichoson(ShichosonEntity 市町村) {
         this.市町村 = 市町村;
@@ -42,10 +41,10 @@ public class Shichoson {
     /**
      * コンストラクタです。<br/>
      *
-     * @param 市町村コード
-     * @param 市町村名称
-     * @param 保険者コード
-     * @param 保険者区分
+     * @param 市町村コード LasdecCode
+     * @param 市町村名称 RString
+     * @param 保険者コード ShoKisaiHokenshaNo
+     * @param 保険者区分 TokeiTaishoKubun
      */
     public Shichoson(LasdecCode 市町村コード, RString 市町村名称, ShoKisaiHokenshaNo 保険者コード, TokeiTaishoKubun 保険者区分) {
         this.市町村 = new ShichosonEntity(市町村コード, 市町村名称, 保険者コード, 保険者区分);

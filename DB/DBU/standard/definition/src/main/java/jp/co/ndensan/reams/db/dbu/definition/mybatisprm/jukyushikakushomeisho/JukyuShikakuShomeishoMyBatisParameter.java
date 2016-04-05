@@ -18,6 +18,11 @@ import lombok.Getter;
 @Getter
 public class JukyuShikakuShomeishoMyBatisParameter extends UaFt200FindShikibetsuTaishoParam implements IMyBatisParameter {
 
+     /**
+     * パラメータを生成します。
+     *
+     * @param key IShikibetsuTaishoPSMSearchKey
+     */
     public JukyuShikakuShomeishoMyBatisParameter(IShikibetsuTaishoPSMSearchKey key) {
         super(key);
     }

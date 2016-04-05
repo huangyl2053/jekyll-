@@ -81,11 +81,6 @@ public class HiroshimaDomainReportProcess extends BatchProcessBase<HiroshimaDoma
     private List<KoikinaiTenkyoEntity> list;
 
     @Override
-    protected void beforeExecute() {
-        super.beforeExecute();
-    }
-
-    @Override
     protected void initialize() {
         list = new ArrayList<>();
         ShikibetsuTaishoPSMSearchKeyBuilder builder = new ShikibetsuTaishoPSMSearchKeyBuilder(GyomuCode.DB介護保険,

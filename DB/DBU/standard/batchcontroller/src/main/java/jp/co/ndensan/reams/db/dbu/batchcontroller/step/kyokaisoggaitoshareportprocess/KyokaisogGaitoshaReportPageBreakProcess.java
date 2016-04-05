@@ -77,7 +77,6 @@ public class KyokaisogGaitoshaReportPageBreakProcess extends BatchProcessBase<Ky
     private static final ReportId ID = new ReportId("DBA200005_KyokaisoKanriMasterList");
     private static final RString MYBATIS_SELECT_ID = new RString(
             "jp.co.ndensan.reams.db.dbu.persistence.db.mapper.relate.kyokaisogaitosha.IKkyokaisoGaitoshaMapper.getKyokaisoKanriMasterList");
-    private List<ReportOutputJokenhyoItem> lists;
     private KyokaisoKanriMasterListHeadItem headItem;
     private List<KyokaisoKanriMasterListBodyItem> bodyItemList;
     List<KyokaisogGaitoshaRelateEntity> daichoJohoList = new ArrayList<>();
@@ -89,7 +88,6 @@ public class KyokaisogGaitoshaReportPageBreakProcess extends BatchProcessBase<Ky
 
     @Override
     protected void initialize() {
-        lists = new ArrayList<>();
         kyokaisokanrimasterList = new KyokaisogGaitoshaListEntity();
         bodyItemList = new ArrayList<>();
     }
