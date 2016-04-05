@@ -15,11 +15,14 @@ import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.biz.ZenkokuJushoCode;
 
 import jp.co.ndensan.reams.db.dba.entity.db.hihokenshadaichosakusei.HihokenshaDaichoSakuseiEntity;
+import jp.co.ndensan.reams.db.dba.entity.db.hihokenshadaichosakusei.SetaiLeftEntity;
+import jp.co.ndensan.reams.db.dba.entity.db.hihokenshadaichosakusei.SetaiRightEntity;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
+ * 被保険者台帳を管理するクラスです。
  *
- *
+ * @reamsid_L DBA-0500-010  suguangjun 
  */
 public class HihokenshaDaichoSakusei {
 
@@ -428,5 +431,23 @@ public class HihokenshaDaichoSakusei {
      */
     public RString get世帯氏名5() {
         return entity.getSetaiName5();
+    }
+    
+    /**
+     * 世帯左情報を取得します。
+     *
+     * @return 世帯左情報
+     */
+    public SetaiLeftEntity get世帯左情報() {
+        return entity.get世帯左情報();
+    }
+    
+    /**
+     * 世帯右情報を取得します。
+     *
+     * @return 世帯右情報
+     */
+    public SetaiRightEntity get世帯右情報() {
+        return entity.get世帯右情報();
     }
 }
