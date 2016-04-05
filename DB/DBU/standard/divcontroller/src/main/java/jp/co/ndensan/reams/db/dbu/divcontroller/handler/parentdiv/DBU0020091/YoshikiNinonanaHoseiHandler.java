@@ -94,8 +94,7 @@ public class YoshikiNinonanaHoseiHandler {
                             div.getPnlMain().getPnlServive1().getPnlDaiyon().getTxtRiyoshaDaiyonKensu3().getValue())) {
                 return true;
             }
-        }
-        if (div.getPnlMain().getPnlServive1().getPnlDaiyon().getTxtRiyoshaDaiyonKyufugaku1().getValue() != null
+        } else if (div.getPnlMain().getPnlServive1().getPnlDaiyon().getTxtRiyoshaDaiyonKyufugaku1().getValue() != null
                 && div.getPnlMain().getPnlServive1().getPnlDaiyon().getTxtRiyoshaDaiyonKyufugaku2().getValue() != null
                 && div.getPnlMain().getPnlServive1().getPnlDaiyon().getTxtRiyoshaDaiyonKyufugaku3().getValue() != null) {
             if (!div.getPnlMain().getPnlServive1().getPnlDaiyon().getTxtRiyoshaDaiyonKyufugaku1().getValue().add(
@@ -103,15 +102,13 @@ public class YoshikiNinonanaHoseiHandler {
                             div.getPnlMain().getPnlServive1().getPnlDaiyon().getTxtRiyoshaDaiyonKyufugaku3().getValue())) {
                 return true;
             }
-        }
-        if (div.getPnlMain().getPnlServive1().getPnlDaisan().getTxtRiyoshaDaisanKensu1().getValue() != null
+        } else if (div.getPnlMain().getPnlServive1().getPnlDaisan().getTxtRiyoshaDaisanKensu1().getValue() != null
                 && div.getPnlMain().getPnlServive1().getPnlDaisan().getTxtRiyoshaDaisanKensu2().getValue() != null
-                && div.getPnlMain().getPnlServive1().getPnlDaisan().getTxtRiyoshaDaisanKensu3().getValue() != null) {
-            if (!div.getPnlMain().getPnlServive1().getPnlDaisan().getTxtRiyoshaDaisanKensu1().getValue().add(
-                    div.getPnlMain().getPnlServive1().getPnlDaisan().getTxtRiyoshaDaisanKensu2().getValue()).equals(
-                            div.getPnlMain().getPnlServive1().getPnlDaisan().getTxtRiyoshaDaisanKensu3().getValue())) {
-                return true;
-            }
+                && div.getPnlMain().getPnlServive1().getPnlDaisan().getTxtRiyoshaDaisanKensu3().getValue() != null
+                && !div.getPnlMain().getPnlServive1().getPnlDaisan().getTxtRiyoshaDaisanKensu1().getValue().add(
+                        div.getPnlMain().getPnlServive1().getPnlDaisan().getTxtRiyoshaDaisanKensu2().getValue()).equals(
+                        div.getPnlMain().getPnlServive1().getPnlDaisan().getTxtRiyoshaDaisanKensu3().getValue())) {
+            return true;
         }
         return false;
     }
@@ -125,8 +122,7 @@ public class YoshikiNinonanaHoseiHandler {
                             div.getPnlMain().getPnlServive1().getPnlDaisan().getTxtRiyoshaDaisanKyufugaku3().getValue())) {
                 return true;
             }
-        }
-        if (div.getPnlMain().getPnlServive1().getPnlDaini().getTxtRiyoshaDainiKensu1().getValue() != null
+        } else if (div.getPnlMain().getPnlServive1().getPnlDaini().getTxtRiyoshaDainiKensu1().getValue() != null
                 && div.getPnlMain().getPnlServive1().getPnlDaini().getTxtRiyoshaDainiKensu2().getValue() != null
                 && div.getPnlMain().getPnlServive1().getPnlDaini().getTxtRiyoshaDainiKensu1().getValue() != null) {
             if (!div.getPnlMain().getPnlServive1().getPnlDaini().getTxtRiyoshaDainiKensu1().getValue().add(
@@ -134,15 +130,13 @@ public class YoshikiNinonanaHoseiHandler {
                             div.getPnlMain().getPnlServive1().getPnlDaini().getTxtRiyoshaDainiKensu3().getValue())) {
                 return true;
             }
-        }
-        if (div.getPnlMain().getPnlServive1().getPnlDaini().getTxtRiyoshaDainiKyufugaku1().getValue() != null
+        } else if (div.getPnlMain().getPnlServive1().getPnlDaini().getTxtRiyoshaDainiKyufugaku1().getValue() != null
                 && div.getPnlMain().getPnlServive1().getPnlDaini().getTxtRiyoshaDainiKyufugaku2().getValue() != null
-                && div.getPnlMain().getPnlServive1().getPnlDaini().getTxtRiyoshaDainiKyufugaku3().getValue() != null) {
-            if (!div.getPnlMain().getPnlServive1().getPnlDaini().getTxtRiyoshaDainiKyufugaku1().getValue().add(
-                    div.getPnlMain().getPnlServive1().getPnlDaini().getTxtRiyoshaDainiKyufugaku2().getValue()).equals(
-                            div.getPnlMain().getPnlServive1().getPnlDaini().getTxtRiyoshaDainiKyufugaku3().getValue())) {
-                return true;
-            }
+                && div.getPnlMain().getPnlServive1().getPnlDaini().getTxtRiyoshaDainiKyufugaku3().getValue() != null
+                && !div.getPnlMain().getPnlServive1().getPnlDaini().getTxtRiyoshaDainiKyufugaku1().getValue().add(
+                        div.getPnlMain().getPnlServive1().getPnlDaini().getTxtRiyoshaDainiKyufugaku2().getValue()).equals(
+                        div.getPnlMain().getPnlServive1().getPnlDaini().getTxtRiyoshaDainiKyufugaku3().getValue())) {
+            return true;
         }
         return false;
     }
@@ -156,8 +150,7 @@ public class YoshikiNinonanaHoseiHandler {
                             div.getPnlMain().getPnlServive1().getPnlDaiitu().getTxtRiyoshaDaiichiKensu3().getValue())) {
                 return true;
             }
-        }
-        if (div.getPnlMain().getPnlServive1().getPnlDaiitu().getTxtRiyoshaDaiichiKyufugaku1().getValue() != null
+        } else if (div.getPnlMain().getPnlServive1().getPnlDaiitu().getTxtRiyoshaDaiichiKyufugaku1().getValue() != null
                 && div.getPnlMain().getPnlServive1().getPnlDaiitu().getTxtRiyoshaDaiichiKyufugaku2().getValue() != null
                 && div.getPnlMain().getPnlServive1().getPnlDaiitu().getTxtRiyoshaDaiichiKyufugaku3().getValue() != null) {
             if (!div.getPnlMain().getPnlServive1().getPnlDaiitu().getTxtRiyoshaDaiichiKyufugaku1().getValue().add(
@@ -165,15 +158,13 @@ public class YoshikiNinonanaHoseiHandler {
                             div.getPnlMain().getPnlServive1().getPnlDaiitu().getTxtRiyoshaDaiichiKyufugaku1().getValue())) {
                 return true;
             }
-        }
-        if (div.getPnlMain().getPnlServive1().getPnlGokei().getTxtGokeiKensu1().getValue() != null
+        } else if (div.getPnlMain().getPnlServive1().getPnlGokei().getTxtGokeiKensu1().getValue() != null
                 && div.getPnlMain().getPnlServive1().getPnlGokei().getTxtGokeiKensu2().getValue() != null
-                && div.getPnlMain().getPnlServive1().getPnlGokei().getTxtGokeiKensu3().getValue() != null) {
-            if (!div.getPnlMain().getPnlServive1().getPnlGokei().getTxtGokeiKensu1().getValue().add(
-                    div.getPnlMain().getPnlServive1().getPnlGokei().getTxtGokeiKensu2().getValue()).equals(
-                            div.getPnlMain().getPnlServive1().getPnlGokei().getTxtGokeiKensu3().getValue())) {
-                return true;
-            }
+                && div.getPnlMain().getPnlServive1().getPnlGokei().getTxtGokeiKensu3().getValue() != null
+                && !div.getPnlMain().getPnlServive1().getPnlGokei().getTxtGokeiKensu1().getValue().add(
+                        div.getPnlMain().getPnlServive1().getPnlGokei().getTxtGokeiKensu2().getValue()).equals(
+                        div.getPnlMain().getPnlServive1().getPnlGokei().getTxtGokeiKensu3().getValue())) {
+            return true;
         }
         return false;
     }
@@ -187,8 +178,7 @@ public class YoshikiNinonanaHoseiHandler {
                             div.getPnlMain().getPnlServive1().getPnlGokei().getTxtGokeiKyufugaku3().getValue())) {
                 return true;
             }
-        }
-        if (div.getPnlMain().getPnlServive1().getPnlSaikeiDaisan().getTxtSaikeiRiyoshaDaisanKensu1().getValue() != null
+        } else if (div.getPnlMain().getPnlServive1().getPnlSaikeiDaisan().getTxtSaikeiRiyoshaDaisanKensu1().getValue() != null
                 && div.getPnlMain().getPnlServive1().getPnlSaikeiDaisan().getTxtSaikeiRiyoshaDaisanKensu2().getValue() != null
                 && div.getPnlMain().getPnlServive1().getPnlSaikeiDaisan().getTxtSaikeiRiyoshaDaisanKensu3().getValue() != null) {
             if (!div.getPnlMain().getPnlServive1().getPnlSaikeiDaisan().getTxtSaikeiRiyoshaDaisanKensu1().getValue().add(
@@ -196,15 +186,13 @@ public class YoshikiNinonanaHoseiHandler {
                             div.getPnlMain().getPnlServive1().getPnlSaikeiDaisan().getTxtSaikeiRiyoshaDaisanKensu3().getValue())) {
                 return true;
             }
-        }
-        if (div.getPnlMain().getPnlServive1().getPnlSaikeiDaisan().getTxtSaikeiRiyoshaDaisanKyufugaku1().getValue() != null
+        } else if (div.getPnlMain().getPnlServive1().getPnlSaikeiDaisan().getTxtSaikeiRiyoshaDaisanKyufugaku1().getValue() != null
                 && div.getPnlMain().getPnlServive1().getPnlSaikeiDaisan().getTxtSaikeiRiyoshaDaisanKyufugaku2().getValue() != null
-                && div.getPnlMain().getPnlServive1().getPnlSaikeiDaisan().getTxtSaikeiRiyoshaDaisanKyufugaku3().getValue() != null) {
-            if (!div.getPnlMain().getPnlServive1().getPnlSaikeiDaisan().getTxtSaikeiRiyoshaDaisanKyufugaku1().getValue().add(
-                    div.getPnlMain().getPnlServive1().getPnlSaikeiDaisan().getTxtSaikeiRiyoshaDaisanKyufugaku2().getValue()).equals(
-                            div.getPnlMain().getPnlServive1().getPnlSaikeiDaisan().getTxtSaikeiRiyoshaDaisanKyufugaku3().getValue())) {
-                return true;
-            }
+                && div.getPnlMain().getPnlServive1().getPnlSaikeiDaisan().getTxtSaikeiRiyoshaDaisanKyufugaku3().getValue() != null
+                && !div.getPnlMain().getPnlServive1().getPnlSaikeiDaisan().getTxtSaikeiRiyoshaDaisanKyufugaku1().getValue().add(
+                        div.getPnlMain().getPnlServive1().getPnlSaikeiDaisan().getTxtSaikeiRiyoshaDaisanKyufugaku2().getValue()).equals(
+                        div.getPnlMain().getPnlServive1().getPnlSaikeiDaisan().getTxtSaikeiRiyoshaDaisanKyufugaku3().getValue())) {
+            return true;
         }
         return false;
     }
@@ -218,15 +206,13 @@ public class YoshikiNinonanaHoseiHandler {
                             div.getPnlMain().getPnlServive1().getPnlSaikeiDaini().getTxtSaikeiRiyoshaDainiKensu3().getValue())) {
                 return true;
             }
-        }
-        if (div.getPnlMain().getPnlServive1().getPnlSaikeiDaini().getTxtSaikeiRiyoshaDainiKyufugaku1().getValue() != null
+        } else if (div.getPnlMain().getPnlServive1().getPnlSaikeiDaini().getTxtSaikeiRiyoshaDainiKyufugaku1().getValue() != null
                 && div.getPnlMain().getPnlServive1().getPnlSaikeiDaini().getTxtSaikeiRiyoshaDainiKyufugaku2().getValue() != null
-                && div.getPnlMain().getPnlServive1().getPnlSaikeiDaini().getTxtSaikeiRiyoshaDainiKyufugaku3().getValue() != null) {
-            if (!div.getPnlMain().getPnlServive1().getPnlSaikeiDaini().getTxtSaikeiRiyoshaDainiKyufugaku1().getValue().add(
-                    div.getPnlMain().getPnlServive1().getPnlSaikeiDaini().getTxtSaikeiRiyoshaDainiKyufugaku2().getValue()).equals(
-                            div.getPnlMain().getPnlServive1().getPnlSaikeiDaini().getTxtSaikeiRiyoshaDainiKyufugaku3().getValue())) {
-                return true;
-            }
+                && div.getPnlMain().getPnlServive1().getPnlSaikeiDaini().getTxtSaikeiRiyoshaDainiKyufugaku3().getValue() != null
+                && !div.getPnlMain().getPnlServive1().getPnlSaikeiDaini().getTxtSaikeiRiyoshaDainiKyufugaku1().getValue().add(
+                        div.getPnlMain().getPnlServive1().getPnlSaikeiDaini().getTxtSaikeiRiyoshaDainiKyufugaku2().getValue()).equals(
+                        div.getPnlMain().getPnlServive1().getPnlSaikeiDaini().getTxtSaikeiRiyoshaDainiKyufugaku3().getValue())) {
+            return true;
         }
         return false;
     }
@@ -284,20 +270,6 @@ public class YoshikiNinonanaHoseiHandler {
         return 0 <= row;
     }
 
-//    private int deleteByParameter(JigyoHokokuGeppoParameter 引き継ぎデータ, Code 表番号, Code 集計番号) {
-//        JigyoHokokuGeppoHoseiHako finder = InstanceProvider.create(JigyoHokokuGeppoHoseiHako.class);
-//        JigyoHokokuGeppoDetalSearchParameter parameter
-//                = JigyoHokokuGeppoDetalSearchParameter.createParameterForJigyoHokokuGeppoDetal(
-//                        new FlexibleYear(new RString("2010")),
-//                        new RString("06"),
-//                        new FlexibleYear(new RString("2010")),
-//                        new RString("06"),
-//                        new RString("3"),
-//                        new LasdecCode(new RString("209008")),
-//                        表番号,
-//                        集計番号);
-//        return finder.deleteJigyoHokokuGeppoData(parameter);
-//    }
     private int deleteByParameter(JigyoHokokuGeppoParameter 引き継ぎデータ, Code 表番号, Code 集計番号) {
         JigyoHokokuGeppoHoseiHako finder = InstanceProvider.create(JigyoHokokuGeppoHoseiHako.class);
         JigyoHokokuGeppoDetalSearchParameter parameter
@@ -954,21 +926,6 @@ public class YoshikiNinonanaHoseiHandler {
         }
     }
 
-//    private List<JigyoHokokuTokeiData> get事業報告月報詳細データリスト(
-//            JigyoHokokuGeppoParameter 引き継ぎデータ, Code 表番号, Code 集計番号) {
-//        JigyoHokokuGeppoHoseiHako finder = new JigyoHokokuGeppoHoseiHako();
-//        JigyoHokokuGeppoDetalSearchParameter parameter
-//                = JigyoHokokuGeppoDetalSearchParameter.createParameterForJigyoHokokuGeppoDetal(
-//                        new FlexibleYear(new RString("2010")),
-//                        new RString("06"),
-//                        new FlexibleYear(new RString("2010")),
-//                        new RString("06"),
-//                        new RString("3"),
-//                        new LasdecCode(new RString("209008")),
-//                        表番号,
-//                        集計番号);
-//        return finder.getJigyoHokokuGeppoDetal(parameter);
-//    }
     private List<JigyoHokokuTokeiData> get事業報告月報詳細データリスト(
             JigyoHokokuGeppoParameter 引き継ぎデータ, Code 表番号, Code 集計番号) {
         JigyoHokokuGeppoHoseiHako finder = new JigyoHokokuGeppoHoseiHako();

@@ -53,18 +53,8 @@ public class YoshikiNinonanaHosei {
      */
     public ResponseData<YoshikiNinonanaHoseiDiv> onLoad(YoshikiNinonanaHoseiDiv div) {
         YoshikiNinonanaHoseiHandler handler = getHandler(div);
-//        JigyoHokokuGeppoParameter par = new JigyoHokokuGeppoParameter();
-//        par.set報告年月(new RString("201503"));
-//        par.set集計年月(new RString("201504"));
-//        par.set保険者コード(new RString("0010"));
-//        par.set市町村名称(new RString("張三"));
-//        ViewStateHolder.put(ViewStateKeys.事業報告基本, par);
         JigyoHokokuGeppoParameter 引き継ぎデータ = ViewStateHolder.get(ViewStateKeys.事業報告基本,
                 JigyoHokokuGeppoParameter.class);
-        RString 状態 = ViewStateHolder.get(ViewStateKeys.状態, RString.class);
-//        RString 状態 = new RString("修正");
-        ViewStateHolder.put(ViewStateKeys.状態, 状態);
-//        RString 様式種類 = new RString("039");
         RString 様式種類 = 引き継ぎデータ.get行様式種類コード();
         handler.setViewState(引き継ぎデータ);
         handler.onLoad(引き継ぎデータ, 様式種類);
@@ -102,14 +92,12 @@ public class YoshikiNinonanaHosei {
      * @return ResponseData<YoshikiNinonanaHoseiDiv>
      */
     public ResponseData<YoshikiNinonanaHoseiDiv> onClick_btnModUpdate(YoshikiNinonanaHoseiDiv div) {
-//        RString 状態 = ViewStateHolder.get(ViewStateKeys.状態, RString.class);
-//        RString 様式種類 = new RString("039");
         JigyoHokokuGeppoParameter 引き継ぎデータ = ViewStateHolder.get(ViewStateKeys.事業報告基本,
                 JigyoHokokuGeppoParameter.class);
         RString 様式種類 = 引き継ぎデータ.get行様式種類コード();
         YoshikiNinonanaHoseiHandler handler = getHandler(div);
         if (削除.equals(ViewStateHolder.get(ViewStateKeys.状態, RString.class)) && !ResponseHolder.isReRequest()) {
-            削除状態処理(引き継ぎデータ, div);
+            return 削除状態処理(引き継ぎデータ, div);
         }
         List<JigyoHokokuTokeiData> 修正データリスト = handler.get修正データリスト(引き継ぎデータ, 様式種類);
 
@@ -155,8 +143,7 @@ public class YoshikiNinonanaHosei {
 
     private ResponseData<YoshikiNinonanaHoseiDiv> 削除状態処理(JigyoHokokuGeppoParameter 引き継ぎデータ, YoshikiNinonanaHoseiDiv div) {
 
-        RString 様式種類 = new RString("039");
-        RString 状態 = ViewStateHolder.get(ViewStateKeys.状態, RString.class);
+        RString 様式種類 = 引き継ぎデータ.get行様式種類コード();
         YoshikiNinonanaHoseiHandler handler = getHandler(div);
 
         if (様式種類.equalsIgnoreCase(様式種類_039)
