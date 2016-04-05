@@ -1,9 +1,12 @@
 package jp.co.ndensan.reams.db.dbb.business.report.fukaerrorlist;
 
-import jp.co.ndensan.reams.uz.uza.report.IReportSource;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.report.IReportSource;
 import jp.co.ndensan.reams.uz.uza.report.source.ReportItem;
 
+/**
+ * FukaErrorListSource
+ */
 public class FukaErrorListSource implements IReportSource {
 // <editor-fold defaultstate="collapsed" desc="Generated Code">
 

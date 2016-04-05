@@ -20,6 +20,7 @@ import lombok.NonNull;
 /**
  * 特別徴収開始通知書（本算定） シーラタイプ（連帳）帳票Report
  */
+@SuppressWarnings("PMD.UnusedPrivateField")
 public class TokubetsuChoshuKaishiTsuchishoSealerRenchoReport extends Report<TokubetsuChoshuKaishiTsuchishoSealerRenchoSource> {
 
 //    private static final int INDEX_0 = 0;
@@ -207,13 +208,6 @@ public class TokubetsuChoshuKaishiTsuchishoSealerRenchoReport extends Report<Tok
             break;
         }
         return DecimalFormatter.toコンマ区切りRString(金額, 0);
-    }
-
-    /**
-     * 未使用のprivateフィールドです。Checkstyle対応。
-     */
-    public void 未使用のprivateフィールド() {
-        宛名連番.hashCode();
     }
 
 }

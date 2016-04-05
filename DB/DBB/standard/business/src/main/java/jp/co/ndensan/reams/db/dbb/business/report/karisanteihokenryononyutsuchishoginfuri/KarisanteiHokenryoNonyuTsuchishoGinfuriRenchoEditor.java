@@ -23,8 +23,8 @@ import jp.co.ndensan.reams.uz.uza.lang.RStringUtil;
 /**
  *
  * 帳票設計_DBBRP00007_3_保険料納入通知書（仮算定）【銀振タイプ】連帳
- * KarisanteiHokenryoNonyuTsuchishoGinfuriRenchoEditor
  */
+@SuppressWarnings("PMD.UnusedPrivateField")
 public class KarisanteiHokenryoNonyuTsuchishoGinfuriRenchoEditor implements IKarisanteiHokenryoNonyuTsuchishoGinfuriRenchoEditor {
 
     private static final int INT3 = 3;
@@ -759,13 +759,6 @@ public class KarisanteiHokenryoNonyuTsuchishoGinfuriRenchoEditor implements IKar
             source.nofushoRyoshuHizukein4 = RString.EMPTY;
             source.nofushoZuiji4 = RString.EMPTY;
         }
-    }
-
-    /**
-     * 未使用のprivateフィールドです。Checkstyle対応。
-     */
-    public void 未使用のprivateフィールド() {
-        納入通知書制御情報.getその他納入通知書タイプ();
     }
 
 }

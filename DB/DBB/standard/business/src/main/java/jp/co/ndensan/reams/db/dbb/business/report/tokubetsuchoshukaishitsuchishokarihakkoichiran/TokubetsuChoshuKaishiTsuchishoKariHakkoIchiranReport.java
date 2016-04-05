@@ -27,6 +27,7 @@ import lombok.NonNull;
 /**
  * 特別徴収開始通知書（仮算定）発行一覧表Report
  */
+@SuppressWarnings("PMD.UnusedPrivateField")
 public class TokubetsuChoshuKaishiTsuchishoKariHakkoIchiranReport extends
         Report<TokubetsuChoshuKaishiTsuchishoKariHakkoIchiranSource> {
 
@@ -161,13 +162,5 @@ public class TokubetsuChoshuKaishiTsuchishoKariHakkoIchiranReport extends
             item.set仮徴収額8月(DecimalFormatter.toコンマ区切りRString(entity.get更正後().get更正後特徴期別金額03(), 0));
             targets.add(item);
         }
-    }
-
-    /**
-     * 未使用のprivateフィールドです。Checkstyle対応。
-     */
-    public void 未使用のprivateフィールド() {
-        改頁.hashCode();
-        出力順.hashCode();
     }
 }
