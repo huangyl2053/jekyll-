@@ -58,8 +58,15 @@ public class KihonChosaInput3 {
      * @return 認定基本調査入力Divを持つResponseData
      */
     public ResponseData<KihonChosaInput3Div> onClick_btnConfirm(KihonChosaInput3Div div) {
-        getHandler(div).onClick_btnConfirm();
-        return ResponseData.of(div).dialogOKClose();
+        if (!ResponseHolder.isReRequest()) {
+            return ResponseData.of(div).addMessage(UrQuestionMessages.保存の確認.getMessage()).respond();
+        }
+        if (new RString(UrQuestionMessages.保存の確認.getMessage().getCode()).equals(ResponseHolder.getMessageCode())
+                && ResponseHolder.getButtonType().equals(MessageDialogSelectedResult.Yes)) {
+            getHandler(div).onClick_btnConfirm();
+            return ResponseData.of(div).dialogOKClose();
+        }
+        return ResponseData.of(div).respond();
     }
 
     /**
