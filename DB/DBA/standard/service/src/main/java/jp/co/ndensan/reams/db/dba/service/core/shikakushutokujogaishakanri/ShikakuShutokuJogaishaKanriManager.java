@@ -83,6 +83,25 @@ public class ShikakuShutokuJogaishaKanriManager {
         return SearchResult.of(businessList, 0, false);
     }
 
+    /**
+     * 資格取得除外者一覧取得します。
+     *
+     * @return SearchResult<ShikakuShutokuJogaisha>
+     */
+    @Transaction
+    public SearchResult<ShikakuShutokuJogaisha> get資格取得除外者一覧() {
+        List<DbT1009ShikakuShutokuJogaishaEntity> entityList = dac.select一覧();
+        if (entityList.isEmpty()) {
+            return SearchResult.of(Collections.<ShikakuShutokuJogaisha>emptyList(), 0, false);
+        }
+        List<ShikakuShutokuJogaisha> businessList = new ArrayList<>();
+        for (DbT1009ShikakuShutokuJogaishaEntity entity : entityList) {
+            entity.initializeMd5();
+            businessList.add(new ShikakuShutokuJogaisha(entity));
+        }
+        return SearchResult.of(businessList, 0, false);
+    }
+
     private ShikakuShutokuJogaishaKanriEntity 宛名情報(ShikibetsuCode 識別コード) {
         ShikibetsuTaishoSearchKeyBuilder key = new ShikibetsuTaishoSearchKeyBuilder(
                 ShikibetsuTaishoGyomuHanteiKeyFactory.createInstance(GyomuCode.DB介護保険, KensakuYusenKubun.住登外優先), true);

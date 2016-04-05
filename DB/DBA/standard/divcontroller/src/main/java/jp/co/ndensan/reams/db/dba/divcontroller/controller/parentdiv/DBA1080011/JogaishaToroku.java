@@ -5,6 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dba.divcontroller.controller.parentdiv.DBA1080011;
 
+import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dba.business.core.shikakushutokujogaishakanri.ShikakuShutokuJogaishaKanri;
 import static jp.co.ndensan.reams.db.dba.definition.enumeratedtype.config.ConfigKeysJukyuShikakuShomeishoHakko.資格取得除外者登録キー;
@@ -15,6 +16,8 @@ import jp.co.ndensan.reams.db.dba.divcontroller.handler.parentdiv.DBA1080011.Jog
 import jp.co.ndensan.reams.db.dba.service.core.shikakushutokujogaishakanri.ShikakuShutokuJogaishaKanriManager;
 import jp.co.ndensan.reams.db.dbz.business.core.ShikakuShutokuJogaisha;
 import jp.co.ndensan.reams.db.dbz.business.core.ShikakuShutokuJogaishaBuilder;
+import jp.co.ndensan.reams.db.dbz.business.core.ShikakuShutokuJogaishaIdentifier;
+import jp.co.ndensan.reams.db.dbz.divcontroller.viewbox.ViewStateKeys;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
@@ -25,6 +28,8 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.binding.RowState;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
+import jp.co.ndensan.reams.uz.uza.util.Models;
+import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 import jp.co.ndensan.reams.uz.uza.util.db.SearchResult;
 
 /**
@@ -45,6 +50,10 @@ public class JogaishaToroku {
             SearchResult<ShikakuShutokuJogaishaKanri> 資格取得除外者情報
                     = ShikakuShutokuJogaishaKanriManager.createInstance().getTennyuHoryuTokuteiJushoIchiran();
             getHandler(requestDiv).onLoad(資格取得除外者情報.records());
+            List<ShikakuShutokuJogaisha> 資格取得除外者一覧 = ShikakuShutokuJogaishaKanriManager.createInstance().get資格取得除外者一覧().records();
+            Models<ShikakuShutokuJogaishaIdentifier, ShikakuShutokuJogaisha> shikakuShutokuJogaisha
+                    = Models.create(資格取得除外者一覧);
+            ViewStateHolder.put(ViewStateKeys.資格取得除外者登録_資格取得除外者一覧, shikakuShutokuJogaisha);
         } else {
             getHandler(requestDiv).onLoadKen();
         }
@@ -155,29 +164,52 @@ public class JogaishaToroku {
             ValidationMessageControlPairs validationMessageControlPairs = getHandler(requestDiv).juufukuCheck();
             return ResponseData.of(requestDiv).addValidationMessages(validationMessageControlPairs).respond();
         }
+        List<ShikakuShutokuJogaisha> deleteKuJogaishaList = new ArrayList<>();
+        List<ShikakuShutokuJogaisha> updateKuJogaishaList = new ArrayList<>();
+        List<ShikakuShutokuJogaisha> insertKuJogaishaList = new ArrayList<>();
+        Models<ShikakuShutokuJogaishaIdentifier, ShikakuShutokuJogaisha> models
+                = ViewStateHolder.get(ViewStateKeys.資格取得除外者登録_資格取得除外者一覧, Models.class);
         for (int i = 0; i < dgRowList.size(); i++) {
-            ShikakuShutokuJogaisha busniess = new ShikakuShutokuJogaisha(new ShikibetsuCode(dgRowList.get(i).getShikibetsuCode()),
-                    Integer.parseInt(dgRowList.get(i).getRirekiNo().toString()));
-            ShikakuShutokuJogaishaBuilder builder = busniess.createBuilderForEdit();
-            builder.set市町村コード(new LasdecCode(dgRowList.get(i).getLasdecCode()));
-            builder.set識別コード(new ShikibetsuCode(dgRowList.get(i).getShikibetsuCode()));
-            builder.set資格取得除外年月日(dgRowList.get(i).getJogaiTekiyoDate().getValue() == null
-                    ? FlexibleDate.EMPTY : new FlexibleDate(dgRowList.get(i).getJogaiTekiyoDate().getValue().toDateString()));
-            builder.set資格取得除外理由(dgRowList.get(i).getJogaiRiyu());
-            builder.set資格取得除外解除年月日(dgRowList.get(i).getJogaiKaijyoDate().getValue() == null
-                    ? FlexibleDate.EMPTY : new FlexibleDate(dgRowList.get(i).getJogaiKaijyoDate().getValue().toDateString()));
             if (RowState.Deleted.equals(dgRowList.get(i).getRowState())) {
-                builder.set履歴番号(Integer.parseInt(dgRowList.get(i).getRirekiNo().toString()));
-                ShikakuShutokuJogaishaKanriManager.createInstance().delShikakuShutokuJogaisha(builder.build().toEntity());
+                ShikakuShutokuJogaishaIdentifier key = new ShikakuShutokuJogaishaIdentifier(new ShikibetsuCode(dgRowList.get(i).getShikibetsuCode()),
+                        Integer.parseInt(dgRowList.get(i).getRirekiNo().toString()));
+                ShikakuShutokuJogaisha shikakuShutokuJogaisha = models.get(key);
+                shikakuShutokuJogaisha.toEntity().setState(EntityDataState.Deleted);
+                deleteKuJogaishaList.add(shikakuShutokuJogaisha);
             }
             if (RowState.Added.equals(dgRowList.get(i).getRowState())) {
-                ShikakuShutokuJogaishaKanriManager.createInstance().insertShikakuShutokuJogaisha(builder.build().toEntity());
+                ShikakuShutokuJogaisha busniess = new ShikakuShutokuJogaisha(new ShikibetsuCode(dgRowList.get(i).getShikibetsuCode()),
+                        Integer.parseInt(dgRowList.get(i).getRirekiNo().toString()));
+                ShikakuShutokuJogaishaBuilder builder = busniess.createBuilderForEdit();
+                builder.set市町村コード(new LasdecCode(dgRowList.get(i).getLasdecCode()));
+                builder.set識別コード(new ShikibetsuCode(dgRowList.get(i).getShikibetsuCode()));
+                builder.set資格取得除外年月日(dgRowList.get(i).getJogaiTekiyoDate().getValue() == null
+                        ? FlexibleDate.EMPTY : new FlexibleDate(dgRowList.get(i).getJogaiTekiyoDate().getValue().toDateString()));
+                builder.set資格取得除外理由(dgRowList.get(i).getJogaiRiyu());
+                builder.set資格取得除外解除年月日(dgRowList.get(i).getJogaiKaijyoDate().getValue() == null
+                        ? FlexibleDate.EMPTY : new FlexibleDate(dgRowList.get(i).getJogaiKaijyoDate().getValue().toDateString()));
+                insertKuJogaishaList.add(builder.build());
             }
             if (RowState.Modified.equals(dgRowList.get(i).getRowState())) {
-                builder.set履歴番号(Integer.parseInt(dgRowList.get(i).getRirekiNo().toString()));
-                ShikakuShutokuJogaishaKanriManager.createInstance().updateShikakuShutokuJogaisha(builder.build().toEntity());
+                ShikakuShutokuJogaishaIdentifier key = new ShikakuShutokuJogaishaIdentifier(new ShikibetsuCode(dgRowList.get(i).getShikibetsuCode()),
+                        Integer.parseInt(dgRowList.get(i).getRirekiNo().toString()));
+                ShikakuShutokuJogaisha shikakuShutokuJogaisha = models.get(key);
+                ShikakuShutokuJogaishaBuilder shikakubuilder = shikakuShutokuJogaisha.createBuilderForEdit();
+                shikakubuilder.set市町村コード(new LasdecCode(dgRowList.get(i).getLasdecCode()));
+                shikakubuilder.set識別コード(new ShikibetsuCode(dgRowList.get(i).getShikibetsuCode()));
+                shikakubuilder.set資格取得除外年月日(dgRowList.get(i).getJogaiTekiyoDate().getValue() == null
+                        ? FlexibleDate.EMPTY : new FlexibleDate(dgRowList.get(i).getJogaiTekiyoDate().getValue().toDateString()));
+                shikakubuilder.set資格取得除外理由(dgRowList.get(i).getJogaiRiyu());
+                shikakubuilder.set資格取得除外解除年月日(dgRowList.get(i).getJogaiKaijyoDate().getValue() == null
+                        ? FlexibleDate.EMPTY : new FlexibleDate(dgRowList.get(i).getJogaiKaijyoDate().getValue().toDateString()));
+                shikakubuilder.set履歴番号(Integer.parseInt(dgRowList.get(i).getRirekiNo().toString()));
+                shikakuShutokuJogaisha.toEntity().setState(EntityDataState.Modified);
+                updateKuJogaishaList.add(shikakubuilder.build());
             }
         }
+        ShikakuShutokuJogaishaKanriManager.createInstance().delShikakuShutokuJogaisha(deleteKuJogaishaList);
+        ShikakuShutokuJogaishaKanriManager.createInstance().insertShikakuShutokuJogaisha(insertKuJogaishaList);
+        ShikakuShutokuJogaishaKanriManager.createInstance().updateShikakuShutokuJogaisha(updateKuJogaishaList);
         前排他処理();
         return ResponseData.of(requestDiv).setState(DBA1080011StateName.完了状態);
     }
@@ -189,6 +221,7 @@ public class JogaishaToroku {
 
     private boolean 重複チェック(JogaishaTorokuDiv div) {
         List<dgNenreiTotatshusha_Row> dgRowList = div.getJogaishaTorokuIchiran().getNenreiTotatsh().getDgNenreiTotatshusha().getDataSource();
+        List<ShikakuShutokuJogaisha> kuJogaishaList = new ArrayList<>();
         for (int i = 0; i < dgRowList.size(); i++) {
             if (RowState.Added.equals(dgRowList.get(i).getRowState()) || RowState.Modified.equals(dgRowList.get(i).getRowState())) {
                 ShikakuShutokuJogaisha busniess = new ShikakuShutokuJogaisha(new ShikibetsuCode(dgRowList.get(i).getShikibetsuCode()),
@@ -199,13 +232,10 @@ public class JogaishaToroku {
                         ? FlexibleDate.EMPTY : new FlexibleDate(dgRowList.get(i).getJogaiTekiyoDate().getValue().toDateString()));
                 builder.set資格取得除外解除年月日(dgRowList.get(i).getJogaiKaijyoDate().getValue() == null
                         ? FlexibleDate.EMPTY : new FlexibleDate(dgRowList.get(i).getJogaiKaijyoDate().getValue().toDateString()));
-                boolean flag = ShikakuShutokuJogaishaKanriManager.createInstance().jogaiKikanJufukuCheck(builder.build().toEntity());
-                if (flag) {
-                    return true;
-                }
+                kuJogaishaList.add(builder.build());
             }
         }
-        return false;
+        return ShikakuShutokuJogaishaKanriManager.createInstance().jogaiKikanJufukuCheck(kuJogaishaList);
     }
 
     private JogaishaTorokuHandler getHandler(JogaishaTorokuDiv requestDiv) {
