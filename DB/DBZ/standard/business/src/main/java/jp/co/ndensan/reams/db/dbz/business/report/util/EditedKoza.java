@@ -126,7 +126,6 @@ public class EditedKoza {
      *
      * @return isゆうちょ銀行
      */
-    // TODO 王暁冬 QA751 仕様書記述不一致　メソッド返却する型boolean→RString 2016/02/24
     public boolean isゆうちょ銀行() {
         return 口座 == null ? false : 口座.isゆうちょ銀行();
     }
@@ -152,7 +151,6 @@ public class EditedKoza {
      *
      * @return 存在確認
      */
-    // TODO 王暁冬 QA751 仕様書記述不一致　メソッド返却する型boolean→RString  2016/02/24
     public boolean isPresent() {
         return 口座 != null;
     }
