@@ -141,6 +141,8 @@ public final class PnlTotalRegisterHandler {
 
     /**
      * 画面データの保存
+     *
+     * @return int
      */
     public int save画面データ() {
         RString states = ViewStateHolder.get(ViewStateKeys.処理モード, RString.class);
@@ -181,6 +183,8 @@ public final class PnlTotalRegisterHandler {
 
     /**
      * 保存完了画面の入替
+     *
+     * @param result int
      */
     public void set保存完了(int result) {
         RString states = ViewStateHolder.get(ViewStateKeys.処理モード, RString.class);

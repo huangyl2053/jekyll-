@@ -1,5 +1,6 @@
 package jp.co.ndensan.reams.db.dbc.divcontroller.controller.parentdiv.dbc0300012;
 
+import static jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0300012.DBC0300012StateName.deleted;
 import static jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0300012.DBC0300012StateName.saved;
 import static jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0300012.DBC0300012TransitionEventName.検索に戻る;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0300012.PnlTotalRegisterDiv;
@@ -50,6 +51,9 @@ public class PnlTotalRegister {
         if (削除.equals(states) || 登録.equals(states)) {
             int result = handler.save画面データ();
             handler.set保存完了(result);
+            if (削除.equals(states)) {
+                return ResponseData.of(div).setState(deleted);
+            }
             return ResponseData.of(div).setState(saved);
         }
         boolean changeFlg = false;
