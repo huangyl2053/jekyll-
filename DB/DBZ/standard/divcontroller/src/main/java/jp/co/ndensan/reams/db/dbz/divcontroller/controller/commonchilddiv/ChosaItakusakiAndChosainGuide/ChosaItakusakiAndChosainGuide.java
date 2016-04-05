@@ -117,8 +117,8 @@ public class ChosaItakusakiAndChosainGuide {
                 div.getTxtMaxKensu().getValue(),
                 市町村コード,
                 ControlDataHolder.getSubGyomuCD().value(),
-                div.getDdlChosaItakusakiKubun().getSelectedKey(),
-                div.getTxtChikuCode().getDomain().value());
+                div.getTxtChikuCode().getDomain().value(),
+                div.getDdlChosaItakusakiKubun().getSelectedKey());
     }
 
     private ChosaItakusakiAndChosainGuideValidationHandler getValidationHandler(ChosaItakusakiAndChosainGuideDiv div) {
