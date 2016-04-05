@@ -22,7 +22,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 /**
  * 被保険者台帳を管理するクラスです。
  *
- * @reamsid_L DBA-0500-010  suguangjun 
+ * @reamsid_L DBA-0500-010 suguangjun
  */
 public class HihokenshaDaichoSakusei {
 
@@ -344,6 +344,24 @@ public class HihokenshaDaichoSakusei {
     }
 
     /**
+     * 措置保険者タイトルを取得します。
+     *
+     * @return 措置保険者タイトル
+     */
+    public RString get措置保険者タイトル() {
+        return entity.getSochiHokensha();
+    }
+
+    /**
+     * 旧保険者タイトルを取得します。
+     *
+     * @return 旧保険者タイトル
+     */
+    public RString get旧保険者タイトル() {
+        return entity.getKyuHokensha();
+    }
+
+    /**
      * 資格異動情報を取得します。
      *
      * @return 資格異動情報
@@ -432,7 +450,7 @@ public class HihokenshaDaichoSakusei {
     public RString get世帯氏名5() {
         return entity.getSetaiName5();
     }
-    
+
     /**
      * 世帯左情報を取得します。
      *
@@ -441,7 +459,7 @@ public class HihokenshaDaichoSakusei {
     public SetaiLeftEntity get世帯左情報() {
         return entity.get世帯左情報();
     }
-    
+
     /**
      * 世帯右情報を取得します。
      *
