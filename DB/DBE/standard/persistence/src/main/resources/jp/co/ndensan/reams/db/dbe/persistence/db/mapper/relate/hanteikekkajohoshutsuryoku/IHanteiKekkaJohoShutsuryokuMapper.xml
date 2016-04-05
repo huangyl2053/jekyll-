@@ -55,11 +55,11 @@
         </foreach>
         <if test="二次判定日FromFlag">
             AND
-            DbT5101."ninteiShinseiYMD" <![CDATA[>=]]> #{nijiHanteiYMDFrom}
+            dbT5102."nijiHanteiYMD" <![CDATA[>=]]> #{nijiHanteiYMDFrom}
         </if>
         <if test="二次判定日ToFlag">
             AND 
-            DbT5101."ninteiShinseiYMD" <![CDATA[<=]]> #{nijiHanteiYMDTo} 
+            dbT5102."nijiHanteiYMD" <![CDATA[<=]]> #{nijiHanteiYMDTo} 
         </if>																													
         ORDER BY																		
             dbT5102."shinsakaiKaisaiNo",															
