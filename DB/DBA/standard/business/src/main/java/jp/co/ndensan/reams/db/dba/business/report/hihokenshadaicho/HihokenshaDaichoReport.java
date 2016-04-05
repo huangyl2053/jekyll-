@@ -19,7 +19,6 @@ public final class HihokenshaDaichoReport extends Report<HihokenshaDaichoReportS
 
     private final List<HihokenshaDaichoSakusei> items;
     private static final int ZERO = 0;
-    private static final int FIVE = 5;
 
     private HihokenshaDaichoReport(List<HihokenshaDaichoSakusei> items) {
         this.items = items;
@@ -44,7 +43,8 @@ public final class HihokenshaDaichoReport extends Report<HihokenshaDaichoReportS
 
     private void writeChohyo(HihokenshaDaichoSakusei item, ReportSourceWriter<HihokenshaDaichoReportSource> writer) {
         IHihokenshaDaichoEditor joho = new HihokenshaDaichoEditor(item);
-        for (int i = ZERO; i < FIVE; i++) {
+
+        for (int i = ZERO; i < getMaxBreakCount(item); i++) {
             IHihokenshaDaichoEditor 老齢福祉 = new HihokenshaDaichoRoreiFukushiEditor(item.get老齢福祉情報(), i);
             IHihokenshaDaichoEditor 生活保護 = new HihokenshaDaichoSeikatsuhogoEditor(item.get生活保護情報(), i);
             IHihokenshaDaichoEditor 世帯左 = new HihokenshaDaichoSetaiLeftEditor(item, i);
@@ -56,5 +56,28 @@ public final class HihokenshaDaichoReport extends Report<HihokenshaDaichoReportS
                     生活保護, 世帯左, 世帯右, 資格移動情報, 被保険者証発行履歴情報1, 被保険者証発行履歴情報2);
             writer.writeLine(builder);
         }
+    }
+
+    private int getMaxBreakCount(HihokenshaDaichoSakusei item) {
+        int maxCount = item.get老齢福祉情報() == null ? ZERO : item.get老齢福祉情報().get老齢福祉No().size();
+        if (item.get生活保護情報() != null && maxCount < item.get生活保護情報().get生活保護No().size()) {
+            maxCount = item.get生活保護情報().get生活保護No().size();
+        }
+        if (item.get世帯左情報() != null && maxCount < item.get世帯左情報().get世帯左No().size()) {
+            maxCount = item.get世帯左情報().get世帯左No().size();
+        }
+        if (item.get世帯右情報() != null && maxCount < item.get世帯右情報().get世帯右被保険者番号().size()) {
+            maxCount = item.get世帯右情報().get世帯右被保険者番号().size();
+        }
+        if (item.get資格異動情報() != null && maxCount < item.get資格異動情報().get資格異動No().size()) {
+            maxCount = item.get資格異動情報().get資格異動No().size();
+        }
+        if (item.get被保険者証発行履歴情報１() != null && maxCount < item.get被保険者証発行履歴情報１().get証履歴No1().size()) {
+            maxCount = item.get被保険者証発行履歴情報１().get証履歴No1().size();
+        }
+        if (item.get被保険者証発行履歴情報2() != null && maxCount < item.get被保険者証発行履歴情報2().get証履歴No2().size()) {
+            maxCount = item.get被保険者証発行履歴情報2().get証履歴No2().size();
+        }
+        return maxCount;
     }
 }
