@@ -18,7 +18,6 @@ import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.lang.RYearMonth;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 
 /**
@@ -62,6 +61,7 @@ public class SeikyuGakuShukeiHandler {
             if (shokanshukei.getShukei().get審査方法区分コード() != null) {
                 row.setDefaultDataName5(ShinsaHohoKubun.toValue(shokanshukei.getShukei().get審査方法区分コード()).get名称());
             }
+            row.getDefaultDataName6().setValue(new Decimal(shokanshukei.getShukei().get利用者負担額()));
             row.setDefaultDataName7(shokanshukei.getShukei().get連番());
             rowList.add(row);
         }
@@ -146,8 +146,8 @@ public class SeikyuGakuShukeiHandler {
         div.getPanelSeikyugakuShukei().getPanelSeikyuShokai().getTxtSagakukinngakuDekikata().setValue(
                 new Decimal(shokanshukei.getShukei().get出来高請求額差額金額()));
         if (shokanshukei.getShukei().get審査年月() != null) {
-            div.getPanelSeikyugakuShukei().getPanelSeikyuShokai().getTxtShinsaYM().
-                    setDomain(new RYearMonth(shokanshukei.getShukei().get審査年月().toString()));
+            div.getPanelSeikyugakuShukei().getPanelSeikyuShokai().getTxtShinsaYM().setValue(
+                    new RDate(shokanshukei.getShukei().get審査年月().toString()));
         }
         if (shokanshukei.getShukei().get支給区分コード() != null) {
             div.getPanelSeikyugakuShukei().getPanelSeikyuShokai().getTxtShikyuKubun().

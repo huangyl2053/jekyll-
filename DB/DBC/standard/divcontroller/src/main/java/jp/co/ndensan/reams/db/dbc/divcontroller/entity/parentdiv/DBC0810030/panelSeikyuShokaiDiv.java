@@ -7,7 +7,6 @@ package jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0810030;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jp.co.ndensan.reams.uz.uza.ui.binding.*;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
-import jp.co.ndensan.reams.uz.uza.ui.binding.domain.*;
 
 /**
  * panelSeikyuShokai のクラスファイル 
@@ -63,7 +62,7 @@ public class panelSeikyuShokaiDiv extends Panel {
     @JsonProperty("line1")
     private HorizontalLine line1;
     @JsonProperty("txtShinsaYM")
-    private TextBoxYearMonth txtShinsaYM;
+    private TextBoxDate txtShinsaYM;
     @JsonProperty("txtShikyuKubun")
     private TextBox txtShikyuKubun;
     @JsonProperty("txtServiceTani")
@@ -452,7 +451,7 @@ public class panelSeikyuShokaiDiv extends Panel {
      * @return txtShinsaYM
      */
     @JsonProperty("txtShinsaYM")
-    public TextBoxYearMonth getTxtShinsaYM() {
+    public TextBoxDate getTxtShinsaYM() {
         return txtShinsaYM;
     }
 
@@ -461,7 +460,7 @@ public class panelSeikyuShokaiDiv extends Panel {
      * @param txtShinsaYM txtShinsaYM
      */
     @JsonProperty("txtShinsaYM")
-    public void setTxtShinsaYM(TextBoxYearMonth txtShinsaYM) {
+    public void setTxtShinsaYM(TextBoxDate txtShinsaYM) {
         this.txtShinsaYM = txtShinsaYM;
     }
 
