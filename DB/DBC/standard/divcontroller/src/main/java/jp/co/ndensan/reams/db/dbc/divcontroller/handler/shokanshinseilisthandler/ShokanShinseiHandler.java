@@ -33,13 +33,24 @@ public class ShokanShinseiHandler {
     private static final RString 状態_申請 = new RString("申請");
     private static final RString 照会 = new RString("照会");
 
+    /**
+     * コンストラクタです。
+     *
+     * @param div ShokanShinseiListDiv
+     */
     public ShokanShinseiHandler(ShokanShinseiListDiv div) {
         this.div = div;
     }
 
+    /**
+     * 償還払申請一覧の初期化です。
+     *
+     * @param 状態 状態
+     * @param 被保険者番号 被保険者番号
+     * @param サービス年月From サービス年月From
+     * @param サービス年月To サービス年月To
+     */
     public void onLoad(RString 状態, HihokenshaNo 被保険者番号, FlexibleYearMonth サービス年月From, FlexibleYearMonth サービス年月To) {
-        ViewStateHolder.put(ViewStateKeys.償還払申請一覧_サービス年月From, サービス年月From);
-        ViewStateHolder.put(ViewStateKeys.償還払申請一覧_サービス年月To, サービス年月To);
         ViewStateHolder.put(ViewStateKeys.償還払申請一覧_被保険者番号, 被保険者番号);
         ViewStateHolder.put(ViewStateKeys.状態, 状態);
         SearchResult<ShokanShinseiIchiran> shokandhinseiichiran;
@@ -56,8 +67,8 @@ public class ShokanShinseiHandler {
     /**
      * 画面初期化処理します。
      *
-     * @param 状態
-     * @param shokandhinseiichiran
+     * @param 状態 状態
+     * @param shokandhinseiichiran SearchResult<ShokanShinseiIchiran>
      */
     public void initialize(RString 状態, SearchResult<ShokanShinseiIchiran> shokandhinseiichiran) {
 
