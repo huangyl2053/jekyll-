@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dba.definition.mybatisprm.dbamn71001;
+package jp.co.ndensan.reams.db.dbz.definition.mybatisprm.relate;
 
 import jp.co.ndensan.reams.uz.uza.batch.parameter.IMyBatisParameter;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
@@ -25,6 +25,7 @@ public final class ParameterSetMybatisParameter implements IMyBatisParameter {
 
     /**
      * コンストラクタです。
+     *
      * @param 市町村コード 市町村コード
      * @param 処理名 処理名
      * @param 処理枝番 処理枝番
