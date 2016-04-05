@@ -64,7 +64,11 @@ public enum DbT7211GaibuRenkeiDataoutputJoho implements IColumnDefinition {
     /**
      * 審査会結果情報抽出年月日
      */
-    shinsakaiKekkaJohoChushutsuYMD(2147483647, 0);
+    shinsakaiKekkaJohoChushutsuYMD(2147483647, 0),
+    /**
+     * センター送信情報抽出年月日
+     */
+    CenterSoshinChushutsuYMD(2147483647, 0);
 
     private final int maxLength;
     private final int scale;

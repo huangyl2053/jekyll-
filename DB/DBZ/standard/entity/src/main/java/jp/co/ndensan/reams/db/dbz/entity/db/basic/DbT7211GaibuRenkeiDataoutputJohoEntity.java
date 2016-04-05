@@ -36,6 +36,7 @@ public class DbT7211GaibuRenkeiDataoutputJohoEntity extends DbTableEntityBase<Db
     private FlexibleDate ninteiChosaIkenshoKekkaJohoChushutsuYMD;
     private FlexibleDate ichijihanteiChushutsuYMD;
     private FlexibleDate shinsakaiKekkaJohoChushutsuYMD;
+    private FlexibleDate CenterSoshinChushutsuYMD;
 
     /**
      * insertDantaiCdのgetメソッドです。
@@ -205,6 +206,25 @@ public class DbT7211GaibuRenkeiDataoutputJohoEntity extends DbTableEntityBase<Db
     }
 
     /**
+     * センター送信情報抽出年月日のgetメソッドです。
+     * 
+     * @return センター送信情報抽出年月日
+     */
+    @CheckForNull
+    public FlexibleDate getCenterSoshinChushutsuYMD() {
+        return CenterSoshinChushutsuYMD;
+    }
+
+    /**
+     * センター送信情報抽出年月日のsetメソッドです。
+     * 
+     * @param CenterSoshinChushutsuYMD センター送信情報抽出年月日
+     */
+    public void setCenterSoshinChushutsuYMD(FlexibleDate CenterSoshinChushutsuYMD) {
+        this.CenterSoshinChushutsuYMD = CenterSoshinChushutsuYMD;
+    }
+
+    /**
      * このエンティティの主キーが他の{@literal DbT7211GaibuRenkeiDataoutputJohoEntity}と等しいか判定します。
      * 
      * @param other 比較するエンティティ
@@ -233,6 +253,7 @@ public class DbT7211GaibuRenkeiDataoutputJohoEntity extends DbTableEntityBase<Db
         this.ninteiChosaIkenshoKekkaJohoChushutsuYMD = entity.ninteiChosaIkenshoKekkaJohoChushutsuYMD;
         this.ichijihanteiChushutsuYMD = entity.ichijihanteiChushutsuYMD;
         this.shinsakaiKekkaJohoChushutsuYMD = entity.shinsakaiKekkaJohoChushutsuYMD;
+        this.CenterSoshinChushutsuYMD = entity.CenterSoshinChushutsuYMD;
     }
 
     /**
@@ -241,9 +262,10 @@ public class DbT7211GaibuRenkeiDataoutputJohoEntity extends DbTableEntityBase<Db
      */
     @Override
     public RString getMd5() {
-        return super.toMd5(shinseishoKanriNo, ninteiShinseiJohoChushutsuYMD, ninteiChosaKekkaJohoChushutsuYMD, ninteiChosaIkenshoKekkaJohoChushutsuYMD, ichijihanteiChushutsuYMD, shinsakaiKekkaJohoChushutsuYMD);
+        return super.toMd5(shinseishoKanriNo, ninteiShinseiJohoChushutsuYMD, ninteiChosaKekkaJohoChushutsuYMD, ninteiChosaIkenshoKekkaJohoChushutsuYMD, ichijihanteiChushutsuYMD, shinsakaiKekkaJohoChushutsuYMD, CenterSoshinChushutsuYMD);
     }
 
 // </editor-fold>
+
 
 }
