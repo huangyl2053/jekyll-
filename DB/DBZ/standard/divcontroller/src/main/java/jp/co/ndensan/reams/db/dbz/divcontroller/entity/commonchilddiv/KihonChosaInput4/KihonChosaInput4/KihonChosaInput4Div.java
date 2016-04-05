@@ -7,14 +7,12 @@ package jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.KihonChos
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import jp.co.ndensan.reams.uz.uza.ui.binding.*;
-import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo;
-import jp.co.ndensan.reams.db.dbz.divcontroller.handler.commonchilddiv.kihonchosainput4.KihonChosaInputHandler4;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Button;
 import jp.co.ndensan.reams.uz.uza.ui.binding.ButtonDialog;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Label;
+import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 import jp.co.ndensan.reams.uz.uza.ui.binding.RadioButton;
 
 /**
@@ -23,6 +21,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.RadioButton;
  * @author 自動生成
  */
 public class KihonChosaInput4Div extends Panel implements IKihonChosaInput4Div {
+
     // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-01-15_09-59-03">
     /*
      * [ private の作成 ]
@@ -126,7 +125,7 @@ public class KihonChosaInput4Div extends Panel implements IKihonChosaInput4Div {
     }
 
     @JsonIgnore
-    public void  setHiryaku(HiryakuDiv Hiryaku) {
+    public void setHiryaku(HiryakuDiv Hiryaku) {
         this.getKoudoShogai().setHiryaku(Hiryaku);
     }
 
@@ -136,7 +135,7 @@ public class KihonChosaInput4Div extends Panel implements IKihonChosaInput4Div {
     }
 
     @JsonIgnore
-    public void  setBtnHiryaku(ButtonDialog btnHiryaku) {
+    public void setBtnHiryaku(ButtonDialog btnHiryaku) {
         this.getKoudoShogai().getHiryaku().setBtnHiryaku(btnHiryaku);
     }
 
@@ -146,7 +145,7 @@ public class KihonChosaInput4Div extends Panel implements IKihonChosaInput4Div {
     }
 
     @JsonIgnore
-    public void  setRadbtnHiryaku(RadioButton radbtnHiryaku) {
+    public void setRadbtnHiryaku(RadioButton radbtnHiryaku) {
         this.getKoudoShogai().getHiryaku().setRadbtnHiryaku(radbtnHiryaku);
     }
 
@@ -156,7 +155,7 @@ public class KihonChosaInput4Div extends Panel implements IKihonChosaInput4Div {
     }
 
     @JsonIgnore
-    public void  setTukuriHanashi(TukuriHanashiDiv TukuriHanashi) {
+    public void setTukuriHanashi(TukuriHanashiDiv TukuriHanashi) {
         this.getKoudoShogai().setTukuriHanashi(TukuriHanashi);
     }
 
@@ -166,7 +165,7 @@ public class KihonChosaInput4Div extends Panel implements IKihonChosaInput4Div {
     }
 
     @JsonIgnore
-    public void  setBtnTukuriHanashi(ButtonDialog btnTukuriHanashi) {
+    public void setBtnTukuriHanashi(ButtonDialog btnTukuriHanashi) {
         this.getKoudoShogai().getTukuriHanashi().setBtnTukuriHanashi(btnTukuriHanashi);
     }
 
@@ -176,7 +175,7 @@ public class KihonChosaInput4Div extends Panel implements IKihonChosaInput4Div {
     }
 
     @JsonIgnore
-    public void  setRadTukuriHanashi(RadioButton radTukuriHanashi) {
+    public void setRadTukuriHanashi(RadioButton radTukuriHanashi) {
         this.getKoudoShogai().getTukuriHanashi().setRadTukuriHanashi(radTukuriHanashi);
     }
 
@@ -186,7 +185,7 @@ public class KihonChosaInput4Div extends Panel implements IKihonChosaInput4Div {
     }
 
     @JsonIgnore
-    public void  setKanjyo(KanjyoDiv Kanjyo) {
+    public void setKanjyo(KanjyoDiv Kanjyo) {
         this.getKoudoShogai().setKanjyo(Kanjyo);
     }
 
@@ -196,7 +195,7 @@ public class KihonChosaInput4Div extends Panel implements IKihonChosaInput4Div {
     }
 
     @JsonIgnore
-    public void  setBtnKanjyo(ButtonDialog btnKanjyo) {
+    public void setBtnKanjyo(ButtonDialog btnKanjyo) {
         this.getKoudoShogai().getKanjyo().setBtnKanjyo(btnKanjyo);
     }
 
@@ -206,7 +205,7 @@ public class KihonChosaInput4Div extends Panel implements IKihonChosaInput4Div {
     }
 
     @JsonIgnore
-    public void  setRadKanjyo(RadioButton radKanjyo) {
+    public void setRadKanjyo(RadioButton radKanjyo) {
         this.getKoudoShogai().getKanjyo().setRadKanjyo(radKanjyo);
     }
 
@@ -216,7 +215,7 @@ public class KihonChosaInput4Div extends Panel implements IKihonChosaInput4Div {
     }
 
     @JsonIgnore
-    public void  setChuyaku(ChuyakuDiv Chuyaku) {
+    public void setChuyaku(ChuyakuDiv Chuyaku) {
         this.getKoudoShogai().setChuyaku(Chuyaku);
     }
 
@@ -226,7 +225,7 @@ public class KihonChosaInput4Div extends Panel implements IKihonChosaInput4Div {
     }
 
     @JsonIgnore
-    public void  setBtnChuyaku(ButtonDialog btnChuyaku) {
+    public void setBtnChuyaku(ButtonDialog btnChuyaku) {
         this.getKoudoShogai().getChuyaku().setBtnChuyaku(btnChuyaku);
     }
 
@@ -236,7 +235,7 @@ public class KihonChosaInput4Div extends Panel implements IKihonChosaInput4Div {
     }
 
     @JsonIgnore
-    public void  setRadChuyaku(RadioButton radChuyaku) {
+    public void setRadChuyaku(RadioButton radChuyaku) {
         this.getKoudoShogai().getChuyaku().setRadChuyaku(radChuyaku);
     }
 
@@ -246,7 +245,7 @@ public class KihonChosaInput4Div extends Panel implements IKihonChosaInput4Div {
     }
 
     @JsonIgnore
-    public void  setOnajiHanashi(OnajiHanashiDiv OnajiHanashi) {
+    public void setOnajiHanashi(OnajiHanashiDiv OnajiHanashi) {
         this.getKoudoShogai().setOnajiHanashi(OnajiHanashi);
     }
 
@@ -256,7 +255,7 @@ public class KihonChosaInput4Div extends Panel implements IKihonChosaInput4Div {
     }
 
     @JsonIgnore
-    public void  setBtnOnajiHanashi(ButtonDialog btnOnajiHanashi) {
+    public void setBtnOnajiHanashi(ButtonDialog btnOnajiHanashi) {
         this.getKoudoShogai().getOnajiHanashi().setBtnOnajiHanashi(btnOnajiHanashi);
     }
 
@@ -266,7 +265,7 @@ public class KihonChosaInput4Div extends Panel implements IKihonChosaInput4Div {
     }
 
     @JsonIgnore
-    public void  setRadOnajiHanashi(RadioButton radOnajiHanashi) {
+    public void setRadOnajiHanashi(RadioButton radOnajiHanashi) {
         this.getKoudoShogai().getOnajiHanashi().setRadOnajiHanashi(radOnajiHanashi);
     }
 
@@ -276,7 +275,7 @@ public class KihonChosaInput4Div extends Panel implements IKihonChosaInput4Div {
     }
 
     @JsonIgnore
-    public void  setBigVoice(BigVoiceDiv BigVoice) {
+    public void setBigVoice(BigVoiceDiv BigVoice) {
         this.getKoudoShogai().setBigVoice(BigVoice);
     }
 
@@ -286,7 +285,7 @@ public class KihonChosaInput4Div extends Panel implements IKihonChosaInput4Div {
     }
 
     @JsonIgnore
-    public void  setBtnBigVoice(ButtonDialog btnBigVoice) {
+    public void setBtnBigVoice(ButtonDialog btnBigVoice) {
         this.getKoudoShogai().getBigVoice().setBtnBigVoice(btnBigVoice);
     }
 
@@ -296,7 +295,7 @@ public class KihonChosaInput4Div extends Panel implements IKihonChosaInput4Div {
     }
 
     @JsonIgnore
-    public void  setRadBigVoice(RadioButton radBigVoice) {
+    public void setRadBigVoice(RadioButton radBigVoice) {
         this.getKoudoShogai().getBigVoice().setRadBigVoice(radBigVoice);
     }
 
@@ -306,7 +305,7 @@ public class KihonChosaInput4Div extends Panel implements IKihonChosaInput4Div {
     }
 
     @JsonIgnore
-    public void  setTeikou(TeikouDiv Teikou) {
+    public void setTeikou(TeikouDiv Teikou) {
         this.getKoudoShogai().setTeikou(Teikou);
     }
 
@@ -316,7 +315,7 @@ public class KihonChosaInput4Div extends Panel implements IKihonChosaInput4Div {
     }
 
     @JsonIgnore
-    public void  setBtnTeikou(ButtonDialog btnTeikou) {
+    public void setBtnTeikou(ButtonDialog btnTeikou) {
         this.getKoudoShogai().getTeikou().setBtnTeikou(btnTeikou);
     }
 
@@ -326,7 +325,7 @@ public class KihonChosaInput4Div extends Panel implements IKihonChosaInput4Div {
     }
 
     @JsonIgnore
-    public void  setRadTeikou(RadioButton radTeikou) {
+    public void setRadTeikou(RadioButton radTeikou) {
         this.getKoudoShogai().getTeikou().setRadTeikou(radTeikou);
     }
 
@@ -336,7 +335,7 @@ public class KihonChosaInput4Div extends Panel implements IKihonChosaInput4Div {
     }
 
     @JsonIgnore
-    public void  setOchituki(OchitukiDiv Ochituki) {
+    public void setOchituki(OchitukiDiv Ochituki) {
         this.getKoudoShogai().setOchituki(Ochituki);
     }
 
@@ -346,7 +345,7 @@ public class KihonChosaInput4Div extends Panel implements IKihonChosaInput4Div {
     }
 
     @JsonIgnore
-    public void  setBtnOchituki(ButtonDialog btnOchituki) {
+    public void setBtnOchituki(ButtonDialog btnOchituki) {
         this.getKoudoShogai().getOchituki().setBtnOchituki(btnOchituki);
     }
 
@@ -356,7 +355,7 @@ public class KihonChosaInput4Div extends Panel implements IKihonChosaInput4Div {
     }
 
     @JsonIgnore
-    public void  setRadOchituki(RadioButton radOchituki) {
+    public void setRadOchituki(RadioButton radOchituki) {
         this.getKoudoShogai().getOchituki().setRadOchituki(radOchituki);
     }
 
@@ -366,7 +365,7 @@ public class KihonChosaInput4Div extends Panel implements IKihonChosaInput4Div {
     }
 
     @JsonIgnore
-    public void  setOutLonly(OutLonlyDiv OutLonly) {
+    public void setOutLonly(OutLonlyDiv OutLonly) {
         this.getKoudoShogai().setOutLonly(OutLonly);
     }
 
@@ -376,7 +375,7 @@ public class KihonChosaInput4Div extends Panel implements IKihonChosaInput4Div {
     }
 
     @JsonIgnore
-    public void  setBtnOutLonly(ButtonDialog btnOutLonly) {
+    public void setBtnOutLonly(ButtonDialog btnOutLonly) {
         this.getKoudoShogai().getOutLonly().setBtnOutLonly(btnOutLonly);
     }
 
@@ -386,7 +385,7 @@ public class KihonChosaInput4Div extends Panel implements IKihonChosaInput4Div {
     }
 
     @JsonIgnore
-    public void  setRadOutLonly(RadioButton radOutLonly) {
+    public void setRadOutLonly(RadioButton radOutLonly) {
         this.getKoudoShogai().getOutLonly().setRadOutLonly(radOutLonly);
     }
 
@@ -396,7 +395,7 @@ public class KihonChosaInput4Div extends Panel implements IKihonChosaInput4Div {
     }
 
     @JsonIgnore
-    public void  setShushu(ShushuDiv Shushu) {
+    public void setShushu(ShushuDiv Shushu) {
         this.getKoudoShogai().setShushu(Shushu);
     }
 
@@ -406,7 +405,7 @@ public class KihonChosaInput4Div extends Panel implements IKihonChosaInput4Div {
     }
 
     @JsonIgnore
-    public void  setBtnShushu(ButtonDialog btnShushu) {
+    public void setBtnShushu(ButtonDialog btnShushu) {
         this.getKoudoShogai().getShushu().setBtnShushu(btnShushu);
     }
 
@@ -416,7 +415,7 @@ public class KihonChosaInput4Div extends Panel implements IKihonChosaInput4Div {
     }
 
     @JsonIgnore
-    public void  setRadShushu(RadioButton radShushu) {
+    public void setRadShushu(RadioButton radShushu) {
         this.getKoudoShogai().getShushu().setRadShushu(radShushu);
     }
 
@@ -426,7 +425,7 @@ public class KihonChosaInput4Div extends Panel implements IKihonChosaInput4Div {
     }
 
     @JsonIgnore
-    public void  setKowasu(KowasuDiv Kowasu) {
+    public void setKowasu(KowasuDiv Kowasu) {
         this.getKoudoShogai().setKowasu(Kowasu);
     }
 
@@ -436,7 +435,7 @@ public class KihonChosaInput4Div extends Panel implements IKihonChosaInput4Div {
     }
 
     @JsonIgnore
-    public void  setBtnKowasu(ButtonDialog btnKowasu) {
+    public void setBtnKowasu(ButtonDialog btnKowasu) {
         this.getKoudoShogai().getKowasu().setBtnKowasu(btnKowasu);
     }
 
@@ -446,7 +445,7 @@ public class KihonChosaInput4Div extends Panel implements IKihonChosaInput4Div {
     }
 
     @JsonIgnore
-    public void  setRadKowasu(RadioButton radKowasu) {
+    public void setRadKowasu(RadioButton radKowasu) {
         this.getKoudoShogai().getKowasu().setRadKowasu(radKowasu);
     }
 
@@ -456,7 +455,7 @@ public class KihonChosaInput4Div extends Panel implements IKihonChosaInput4Div {
     }
 
     @JsonIgnore
-    public void  setMonoWasure(MonoWasureDiv MonoWasure) {
+    public void setMonoWasure(MonoWasureDiv MonoWasure) {
         this.getKoudoShogai().setMonoWasure(MonoWasure);
     }
 
@@ -466,7 +465,7 @@ public class KihonChosaInput4Div extends Panel implements IKihonChosaInput4Div {
     }
 
     @JsonIgnore
-    public void  setRadMonoWasure(RadioButton radMonoWasure) {
+    public void setRadMonoWasure(RadioButton radMonoWasure) {
         this.getKoudoShogai().getMonoWasure().setRadMonoWasure(radMonoWasure);
     }
 
@@ -476,7 +475,7 @@ public class KihonChosaInput4Div extends Panel implements IKihonChosaInput4Div {
     }
 
     @JsonIgnore
-    public void  setBtnMonoWasure(ButtonDialog btnMonoWasure) {
+    public void setBtnMonoWasure(ButtonDialog btnMonoWasure) {
         this.getKoudoShogai().getMonoWasure().setBtnMonoWasure(btnMonoWasure);
     }
 
@@ -486,7 +485,7 @@ public class KihonChosaInput4Div extends Panel implements IKihonChosaInput4Div {
     }
 
     @JsonIgnore
-    public void  setHitoriWarai(HitoriWaraiDiv HitoriWarai) {
+    public void setHitoriWarai(HitoriWaraiDiv HitoriWarai) {
         this.getKoudoShogai().setHitoriWarai(HitoriWarai);
     }
 
@@ -496,7 +495,7 @@ public class KihonChosaInput4Div extends Panel implements IKihonChosaInput4Div {
     }
 
     @JsonIgnore
-    public void  setBtnHitoriWarai(ButtonDialog btnHitoriWarai) {
+    public void setBtnHitoriWarai(ButtonDialog btnHitoriWarai) {
         this.getKoudoShogai().getHitoriWarai().setBtnHitoriWarai(btnHitoriWarai);
     }
 
@@ -506,7 +505,7 @@ public class KihonChosaInput4Div extends Panel implements IKihonChosaInput4Div {
     }
 
     @JsonIgnore
-    public void  setRadHitoriWarai(RadioButton radHitoriWarai) {
+    public void setRadHitoriWarai(RadioButton radHitoriWarai) {
         this.getKoudoShogai().getHitoriWarai().setRadHitoriWarai(radHitoriWarai);
     }
 
@@ -516,7 +515,7 @@ public class KihonChosaInput4Div extends Panel implements IKihonChosaInput4Div {
     }
 
     @JsonIgnore
-    public void  setKateKodo(KateKodoDiv KateKodo) {
+    public void setKateKodo(KateKodoDiv KateKodo) {
         this.getKoudoShogai().setKateKodo(KateKodo);
     }
 
@@ -526,7 +525,7 @@ public class KihonChosaInput4Div extends Panel implements IKihonChosaInput4Div {
     }
 
     @JsonIgnore
-    public void  setBtnKateKodo(ButtonDialog btnKateKodo) {
+    public void setBtnKateKodo(ButtonDialog btnKateKodo) {
         this.getKoudoShogai().getKateKodo().setBtnKateKodo(btnKateKodo);
     }
 
@@ -536,7 +535,7 @@ public class KihonChosaInput4Div extends Panel implements IKihonChosaInput4Div {
     }
 
     @JsonIgnore
-    public void  setRadKateKodo(RadioButton radKateKodo) {
+    public void setRadKateKodo(RadioButton radKateKodo) {
         this.getKoudoShogai().getKateKodo().setRadKateKodo(radKateKodo);
     }
 
@@ -546,7 +545,7 @@ public class KihonChosaInput4Div extends Panel implements IKihonChosaInput4Div {
     }
 
     @JsonIgnore
-    public void  setMatomeNai(MatomeNaiDiv MatomeNai) {
+    public void setMatomeNai(MatomeNaiDiv MatomeNai) {
         this.getKoudoShogai().setMatomeNai(MatomeNai);
     }
 
@@ -556,7 +555,7 @@ public class KihonChosaInput4Div extends Panel implements IKihonChosaInput4Div {
     }
 
     @JsonIgnore
-    public void  setBtnMatomeNai(ButtonDialog btnMatomeNai) {
+    public void setBtnMatomeNai(ButtonDialog btnMatomeNai) {
         this.getKoudoShogai().getMatomeNai().setBtnMatomeNai(btnMatomeNai);
     }
 
@@ -566,7 +565,7 @@ public class KihonChosaInput4Div extends Panel implements IKihonChosaInput4Div {
     }
 
     @JsonIgnore
-    public void  setRadMatomeNai(RadioButton radMatomeNai) {
+    public void setRadMatomeNai(RadioButton radMatomeNai) {
         this.getKoudoShogai().getMatomeNai().setRadMatomeNai(radMatomeNai);
     }
 
