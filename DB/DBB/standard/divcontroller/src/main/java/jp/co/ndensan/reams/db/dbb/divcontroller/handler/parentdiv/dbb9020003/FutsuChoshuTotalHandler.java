@@ -773,7 +773,6 @@ public final class FutsuChoshuTotalHandler {
      * 保存処理
      */
     public void set保存処理() {
-        update(div.getKonkaiShoriNaiyo().getDdlChoteiNendo().getSelectedKey(), ConfigNameDBB.日付関連_調定年度);
         List<Enum> 普通徴収_期別テーブル = create普通徴収_期別テーブル();
         List<Enum> 普徴期情報_月の期 = create普徴期情報_月の期();
         List<Enum> 普徴期情報_月処理区分 = create普徴期情報_月処理区分();
@@ -817,13 +816,7 @@ public final class FutsuChoshuTotalHandler {
                         new RYear(div.getKonkaiShoriNaiyo().getDdlChoteiNendo().getSelectedKey()),
                         GennenKanen.現年度,
                         Integer.parseInt(row.getTxtKi().toString()));
-                noki = noki.createBuilderForEdit().
-                        set通知書発行日(new RDate(row.getTxtHakkoYMD().getValue().toString())).
-                        set納期限(new RDate(row.getTxtNokigenYMD().getValue().toString())).
-                        set納期開始日(new RDate(row.getTxtNokigenStYMD().getValue().toString())).
-                        set納期終了日(new RDate(row.getTxtNokigenEdYMD().getValue().toString())).build();
-                new NokiManager().save納期(noki);
-
+                save納期(noki, row);
                 if (i == 数字１２) {
                     update(FOURTEEN, 普通徴収_期別テーブル.get(i));
                 } else if (i == 数字１３) {
@@ -858,6 +851,20 @@ public final class FutsuChoshuTotalHandler {
         save保存処理2();
     }
 
+    private void save納期(Noki noki, dgGenNendoKibetsuJoho_Row row) {
+        if (!noki.get通知書発行日().equals(new RDate(row.getTxtHakkoYMD().getValue().toString()))
+                || !noki.get納期限().equals(new RDate(row.getTxtNokigenYMD().getValue().toString()))
+                || !noki.get納期開始日().equals(new RDate(row.getTxtNokigenStYMD().getValue().toString()))
+                || !noki.get納期終了日().equals(new RDate(row.getTxtNokigenEdYMD().getValue().toString()))) {
+            noki = noki.createBuilderForEdit().
+                    set通知書発行日(new RDate(row.getTxtHakkoYMD().getValue().toString())).
+                    set納期限(new RDate(row.getTxtNokigenYMD().getValue().toString())).
+                    set納期開始日(new RDate(row.getTxtNokigenStYMD().getValue().toString())).
+                    set納期終了日(new RDate(row.getTxtNokigenEdYMD().getValue().toString())).build();
+            new NokiManager().save納期(noki);
+        }
+    }
+
     private void save保存処理2() {
         List<Enum> 過年度_期別テーブル = create過年度_期別テーブル();
         List<Enum> 過年度期情報_月の期 = create過年度期情報_月の期();
@@ -889,14 +896,19 @@ public final class FutsuChoshuTotalHandler {
                 NokiManager nokiManager = new NokiManager();
                 Noki noki = nokiManager.get納期(ShunoKamokuShubetsu.介護保険料_普通徴収,
                         new RYear(div.getKonkaiShoriNaiyo().getDdlChoteiNendo().getSelectedKey()),
-                        GennenKanen.現年度,
+                        GennenKanen.過年度,
                         Integer.parseInt(row.getTxtKi().toString()));
-                noki = noki.createBuilderForEdit().
-                        set通知書発行日(new RDate(row.getTxtHakkoYMD().getValue().toString())).
-                        set納期限(new RDate(row.getTxtNokigenYMD().getValue().toString())).
-                        set納期開始日(new RDate(row.getTxtNokigenStYMD().getValue().toString())).
-                        set納期終了日(new RDate(row.getTxtNokigenEtYMD().getValue().toString())).build();
-                new NokiManager().save納期(noki);
+                if (!noki.get通知書発行日().equals(new RDate(row.getTxtHakkoYMD().getValue().toString()))
+                        || !noki.get納期限().equals(new RDate(row.getTxtNokigenYMD().getValue().toString()))
+                        || !noki.get納期開始日().equals(new RDate(row.getTxtNokigenStYMD().getValue().toString()))
+                        || !noki.get納期終了日().equals(new RDate(row.getTxtNokigenEtYMD().getValue().toString()))) {
+                    noki = noki.createBuilderForEdit().
+                            set通知書発行日(new RDate(row.getTxtHakkoYMD().getValue().toString())).
+                            set納期限(new RDate(row.getTxtNokigenYMD().getValue().toString())).
+                            set納期開始日(new RDate(row.getTxtNokigenStYMD().getValue().toString())).
+                            set納期終了日(new RDate(row.getTxtNokigenEtYMD().getValue().toString())).build();
+                    new NokiManager().save納期(noki);
+                }
             } else {
                 update(RString.EMPTY, 過年度_期別テーブル.get(i));
             }
