@@ -114,7 +114,7 @@
         FROM
         rgdb."DbT1005KaigoJogaiTokureiTaishoShisetsu" as DbT1005
         WHERE
-        DbT1005".jigyoshaNo"= #{jigyoshaNo}
+        DbT1005."jigyoshaNo"= #{jigyoshaNo}
         AND
         DbT1005."jigyoshaShubetsu"= #{事業者種別}
         AND

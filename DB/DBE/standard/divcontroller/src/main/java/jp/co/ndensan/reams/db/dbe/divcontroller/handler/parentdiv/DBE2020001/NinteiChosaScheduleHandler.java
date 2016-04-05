@@ -9,12 +9,18 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import jp.co.ndensan.reams.db.dbe.business.core.chikuninteichosain.ChosaChiku;
 import jp.co.ndensan.reams.db.dbe.business.core.chikushichoson.ChikuShichosonBusiness;
 import jp.co.ndensan.reams.db.dbe.business.core.ninteichosaschedule.NinteichosaScheduleBusiness;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2020001.NinteiChosaSchedulePanelDiv;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2020001.dgNinteiChosaSchedule_Row;
+import jp.co.ndensan.reams.db.dbe.entity.db.relate.chikuninteichosain.ChosaChikuEntity;
 import jp.co.ndensan.reams.db.dbe.service.core.basic.sukejurutouroku.SukejuruTourokuFinder;
 import jp.co.ndensan.reams.db.dbz.definition.core.ViewStateKeys;
+import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
+import jp.co.ndensan.reams.uz.uza.biz.CodeShubetsu;
+import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
+import jp.co.ndensan.reams.uz.uza.lang.ApplicationException;
 import jp.co.ndensan.reams.uz.uza.lang.DayOfWeek;
 import jp.co.ndensan.reams.uz.uza.lang.FillType;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
@@ -25,6 +31,8 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.DataGridCellBgColor;
 import jp.co.ndensan.reams.uz.uza.ui.binding.KeyValueDataSource;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
+import jp.co.ndensan.reams.uz.uza.util.code.CodeMaster;
+import jp.co.ndensan.reams.uz.uza.util.code.entity.UzT0007CodeEntity;
 
 /**
  * 認定調査スケジュール登録1の取得処理。
@@ -52,13 +60,31 @@ public class NinteiChosaScheduleHandler {
         ninteidiv.getTxtSetteiYM().setValue(new FlexibleDate(RDate.getNowDate().toString()));
         List<ChikuShichosonBusiness> chikuList = SukejuruTourokuFinder.createInstance()
                 .getChikuShichosonList().records();
+        List<ChosaChiku> list = get対象地区List(chikuList);
         List<KeyValueDataSource> dataSource = new ArrayList<>();
-        for (ChikuShichosonBusiness jigyoshaInput : chikuList) {
-            dataSource.add(new KeyValueDataSource(jigyoshaInput.getChosaChikuCode().getKey(), jigyoshaInput.getChosaChikuCode().value()));
+        for (ChosaChiku chosaChiku : list) {
+            dataSource.add(new KeyValueDataSource(chosaChiku.get調査地区コード(), chosaChiku.get調査地区名称()));
         }
         ninteidiv.getSearchConditionPanel().getDdlTaishoChiku().setDataSource(dataSource);
         List<dgNinteiChosaSchedule_Row> dgKoufuKaishuList = new ArrayList<>();
         ninteidiv.getDgNinteiChosaSchedule().setDataSource(dgKoufuKaishuList);
+    }
+
+    private List<ChosaChiku> get対象地区List(List<ChikuShichosonBusiness> chikuList) {
+        List<ChosaChiku> list = new ArrayList<>();
+        for (ChikuShichosonBusiness chikuShichosonBusiness : chikuList) {
+            UzT0007CodeEntity entity = CodeMaster.getCode(SubGyomuCode.DBE認定支援,
+                    new CodeShubetsu("5002"), chikuShichosonBusiness.getChosaChikuCode());
+            ChosaChikuEntity chosaChikuEntity = new ChosaChikuEntity();
+            if (entity != null) {
+                chosaChikuEntity.setChosaChikuName(entity.getコード名称());
+                chosaChikuEntity.setChosaChikuCode(chikuShichosonBusiness.getChosaChikuCode().getColumnValue());
+                list.add(new ChosaChiku(chosaChikuEntity));
+            } else {
+                throw new ApplicationException(UrErrorMessages.コードマスタなし.getMessage());
+            }
+        }
+        return list;
     }
 
     /**

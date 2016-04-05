@@ -16,7 +16,8 @@ public enum DBC0300012StateName implements IStateEnumerations {
 
     NoChange(""),
     Default("default"),
-    saved("saved");
+    saved("saved"),
+    deleted("deleted");
 
     private final RString name;
 
