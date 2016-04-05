@@ -206,7 +206,7 @@ public class HonsanteiIdoGennendo {
         int count = 0;
         for (int i = 0; i < list.size(); i++) {
             if (年度内連番.equals(list.get(i).getNendoNaiRenban())
-                    && list.get(i).getKijunTimestamp() != null) {
+                    && list.get(i).getKijunTimestamp() != null && !list.get(i).getKijunTimestamp().isEmpty()) {
                 count = 1;
                 break;
             }
