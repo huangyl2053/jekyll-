@@ -10,7 +10,7 @@ import jp.co.ndensan.reams.db.dbz.definition.mybatis.param.gogitaijoho.gogitaijo
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5592ShinsakaiKaisaiBashoJohoEntity;
 
 /**
- * {@link jp.co.ndensan.reams.db.dbe.entity.db.basic.DbT5592ShinsakaiKaisaiBashoJohoEntity}のマッパーIFです。
+ * {@link jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5592ShinsakaiKaisaiBashoJohoEntity}のマッパーIFです。
  *
  */
 public interface IDbT5592ShinsakaiKaisaiBashoJohoMapper {
