@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 概要： DbT7124KokiKoreishaInfoマスタとエンティティのマッピング用XMLです。 -->
+<!-- 作者： n1070 久保裕是 -->
+
+<!-- どのマッパーインターフェースと対応するかを指定する -->
+<mapper namespace="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT7124KokiKoreishaInfoMapper">
+    
+    <!-- 概要： 削除されたデータ以外を全件取得するSQLです。 -->
+    <sql id="noDeleted_DbT7124KokiKoreishaInfo">
+     SELECT
+         <include refid="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT7124KokiKoreishaInfoMapper.allColumns_DbT7124KokiKoreishaInfo" />
+     FROM
+         rgdb."DbT7124KokiKoreishaInfo"
+     WHERE
+         rgdb."DbT7124KokiKoreishaInfo"."isDeleted" = FALSE
+    </sql>
+
+    <sql id="allColumns_DbT7124KokiKoreishaInfo">
+         "DbT7124KokiKoreishaInfo"."shikibetsuCd" as "dbT7124KokiKoreishaInfo_shikibetsuCd",
+         "DbT7124KokiKoreishaInfo"."rirekiNo" as "dbT7124KokiKoreishaInfo_rirekiNo",
+         "DbT7124KokiKoreishaInfo"."insertDantaiCd" as "dbT7124KokiKoreishaInfo_insertDantaiCd",
+         "DbT7124KokiKoreishaInfo"."insertTimestamp" as "dbT7124KokiKoreishaInfo_insertTimestamp",
+         "DbT7124KokiKoreishaInfo"."insertReamsLoginId" as "dbT7124KokiKoreishaInfo_insertReamsLoginId",
+         "DbT7124KokiKoreishaInfo"."insertContextId" as "dbT7124KokiKoreishaInfo_insertContextId",
+         "DbT7124KokiKoreishaInfo"."isDeleted" as "dbT7124KokiKoreishaInfo_isDeleted",
+         "DbT7124KokiKoreishaInfo"."updateCount" as "dbT7124KokiKoreishaInfo_updateCount",
+         "DbT7124KokiKoreishaInfo"."lastUpdateTimestamp" as "dbT7124KokiKoreishaInfo_lastUpdateTimestamp",
+         "DbT7124KokiKoreishaInfo"."lastUpdateReamsLoginId" as "dbT7124KokiKoreishaInfo_lastUpdateReamsLoginId",
+         "DbT7124KokiKoreishaInfo"."kokiHokenshaNoCity" as "dbT7124KokiKoreishaInfo_kokiHokenshaNoCity",
+         "DbT7124KokiKoreishaInfo"."kokiHokenshaNoKoiki" as "dbT7124KokiKoreishaInfo_kokiHokenshaNoKoiki",
+         "DbT7124KokiKoreishaInfo"."kokikoreiHihokenshaNo" as "dbT7124KokiKoreishaInfo_kokikoreiHihokenshaNo",
+         "DbT7124KokiKoreishaInfo"."shikakuShutokuJiyuCode" as "dbT7124KokiKoreishaInfo_shikakuShutokuJiyuCode",
+         "DbT7124KokiKoreishaInfo"."shikakuShutokuYMD" as "dbT7124KokiKoreishaInfo_shikakuShutokuYMD",
+         "DbT7124KokiKoreishaInfo"."shikakuSoshitsuJiyuCode" as "dbT7124KokiKoreishaInfo_shikakuSoshitsuJiyuCode",
+         "DbT7124KokiKoreishaInfo"."shikakuSoshitsuYMD" as "dbT7124KokiKoreishaInfo_shikakuSoshitsuYMD",
+         "DbT7124KokiKoreishaInfo"."hokenshaKaishiYMD" as "dbT7124KokiKoreishaInfo_hokenshaKaishiYMD",
+         "DbT7124KokiKoreishaInfo"."hokenshaShuryoYMD" as "dbT7124KokiKoreishaInfo_hokenshaShuryoYMD",
+         "DbT7124KokiKoreishaInfo"."kojinKubunCode" as "dbT7124KokiKoreishaInfo_kojinKubunCode",
+         "DbT7124KokiKoreishaInfo"."torokuKubun" as "dbT7124KokiKoreishaInfo_torokuKubun"
+    </sql>
+
+
+    <!--テーブルDbT7124KokiKoreishaInfoの項目をDbT7124KokiKoreishaInfoEntityの項目にマッピングします。-->
+    <resultMap id="ResultMap_DbT7124KokiKoreishaInfoEntity" type="jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7124KokiKoreishaInfoEntity" autoMapping="true">
+        <id property="shikibetsuCd" column="dbT7124KokiKoreishaInfo_shikibetsuCd" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.ShikibetsuCodeTypeHandler"/>
+        <id property="rirekiNo" column="dbT7124KokiKoreishaInfo_rirekiNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="insertDantaiCd" column="dbT7124KokiKoreishaInfo_insertDantaiCd" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="insertTimestamp" column="dbT7124KokiKoreishaInfo_insertTimestamp" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RDateTimeTypeHandler"/>
+        <result property="insertReamsLoginId" column="dbT7124KokiKoreishaInfo_insertReamsLoginId" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="insertContextId" column="dbT7124KokiKoreishaInfo_insertContextId" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.UUIDTypeHandler"/>
+        <result property="isDeleted" column="dbT7124KokiKoreishaInfo_isDeleted" />
+        <result property="updateCount" column="dbT7124KokiKoreishaInfo_updateCount" />
+        <result property="lastUpdateTimestamp" column="dbT7124KokiKoreishaInfo_lastUpdateTimestamp" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RDateTimeTypeHandler"/>
+        <result property="lastUpdateReamsLoginId" column="dbT7124KokiKoreishaInfo_lastUpdateReamsLoginId" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="kokiHokenshaNoCity" column="dbT7124KokiKoreishaInfo_kokiHokenshaNoCity" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="kokiHokenshaNoKoiki" column="dbT7124KokiKoreishaInfo_kokiHokenshaNoKoiki" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="kokikoreiHihokenshaNo" column="dbT7124KokiKoreishaInfo_kokikoreiHihokenshaNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="shikakuShutokuJiyuCode" column="dbT7124KokiKoreishaInfo_shikakuShutokuJiyuCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="shikakuShutokuYMD" column="dbT7124KokiKoreishaInfo_shikakuShutokuYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="shikakuSoshitsuJiyuCode" column="dbT7124KokiKoreishaInfo_shikakuSoshitsuJiyuCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="shikakuSoshitsuYMD" column="dbT7124KokiKoreishaInfo_shikakuSoshitsuYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="hokenshaKaishiYMD" column="dbT7124KokiKoreishaInfo_hokenshaKaishiYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="hokenshaShuryoYMD" column="dbT7124KokiKoreishaInfo_hokenshaShuryoYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="kojinKubunCode" column="dbT7124KokiKoreishaInfo_kojinKubunCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="torokuKubun" column="dbT7124KokiKoreishaInfo_torokuKubun" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+    </resultMap>
+
+</mapper>
