@@ -30,7 +30,6 @@ public class KaigoHokenShoriDateKanri implements Serializable {
      * @param 処理日付管理マスタ 処理日付管理マスタ
      * @link KaigoHokenShoriDateKanriEntity}より{@link KaigoHokenShoriDateKanri}を生成します。
      *
-     * @param 処理日付管理マスタ @link KaigoHokenShoriDateKanriEntity}
      */
     public KaigoHokenShoriDateKanri(KaigoHokenShoriDateKanriEntity 処理日付管理マスタ) {
         this.処理日付管理マスタ = 処理日付管理マスタ;
@@ -49,18 +48,18 @@ public class KaigoHokenShoriDateKanri implements Serializable {
     /**
      * コンストラクタです。<br/>
      *
-     * @param サブ業務コード
-     * @param 市町村コード
-     * @param 処理名
-     * @param 処理枝番
-     * @param 年度
-     * @param 年度内連番
-     * @param 基準年月日
-     * @param 基準日時
-     * @param 対象開始年月日
-     * @param 対象終了年月日
-     * @param 対象開始日時
-     * @param 対象終了日時
+     * @param サブ業務コード SubGyomuCode
+     * @param 市町村コード LasdecCode
+     * @param 処理名 JigyoHokokuNenpoShoriName
+     * @param 処理枝番 RString
+     * @param 年度 FlexibleYear
+     * @param 年度内連番 RString
+     * @param 基準年月日 FlexibleDate
+     * @param 基準日時 RDateTime
+     * @param 対象開始年月日 FlexibleDate
+     * @param 対象終了年月日 FlexibleDate
+     * @param 対象開始日時 YMDHMS
+     * @param 対象終了日時 YMDHMS
      */
     public KaigoHokenShoriDateKanri(SubGyomuCode サブ業務コード, LasdecCode 市町村コード,
             JigyoHokokuNenpoShoriName 処理名, RString 処理枝番, FlexibleYear 年度, RString 年度内連番,

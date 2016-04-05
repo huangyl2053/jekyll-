@@ -26,7 +26,7 @@ public interface IJigyoHokokuGeppoHoseiHakoMapper {
     /**
      * 事業報告月報詳細データを削除します。
      *
-     * @param parameter
+     * @param parameter JigyoHokokuGeppoDetalSearchParameter
      * @return 削除件数
      */
     int delete事業報告月報(JigyoHokokuGeppoDetalSearchParameter parameter);

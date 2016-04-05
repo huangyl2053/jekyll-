@@ -36,7 +36,7 @@ public class SogoShokaiSearch {
     public ResponseData<SogoShokaiSearchDiv> onLoad(SogoShokaiSearchDiv panel) {
         ResponseData<SogoShokaiSearchDiv> response = new ResponseData<>();
 
-        setSerachInfo(panel);
+//        setSerachInfo(panel);
 
         response.data = panel;
         return response;
@@ -63,12 +63,12 @@ public class SogoShokaiSearch {
     }
 
     // 検索条件情報を設定する
-    private void setSerachInfo(SogoShokaiSearchDiv panel) {
+//    private void setSerachInfo(SogoShokaiSearchDiv panel) {
 //        HashMap map = getYamlData(YML_SEARCH).get(0);
 //        AtenaFinderDiv kojinDiv = panel.getSogoShokaiSearchInfo().getKaigoAtenaFinder();
 //        kojinDiv.getTxtAtenaMeisho().setValue(new RString(map.get("氏名").toString()));
         //kojinDiv.getRadSearchPatternOfShimei().setSelectedItem(new RString("key0"));
-    }
+//    }
 
     // 該当者一覧情報を設定する
     private void setSearchResultInfo(SogoShokaiSearchDiv panel) {

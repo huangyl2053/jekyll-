@@ -133,9 +133,7 @@ public class SearchResultShoKaishuKanri {
 
     private void openAndClosePanel(SearchResultShoKaishuKanriDiv searchResultDiv) {
         DataGrid<dgShoKaishuJokyo_Row> grid = searchResultDiv.getSearchResultShoKaishuJokyoList().getDgShoKaishuJokyo();
-        if (grid.getDataSource().isEmpty()) {
-//            searchResultDiv.setIsOpen(false);
-        } else {
+        if (!grid.getDataSource().isEmpty()) {
             searchResultDiv.setIsOpen(true);
         }
     }

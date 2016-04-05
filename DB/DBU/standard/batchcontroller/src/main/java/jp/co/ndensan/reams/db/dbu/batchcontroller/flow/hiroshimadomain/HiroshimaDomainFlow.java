@@ -31,7 +31,7 @@ public class HiroshimaDomainFlow extends BatchFlowBase<HiroshimaDomainBatchParam
      * @return 帳票出力パラメータ
      */
     @Step(REPORT_PROCESS)
-    private IBatchFlowCommand hiroshimaDomainReportProcess() {
+    protected IBatchFlowCommand hiroshimaDomainReportProcess() {
         return loopBatch(HiroshimaDomainReportProcess.class).arguments(getParameter().toHiroshimaDomainProcessParameter()).define();
     }
 }

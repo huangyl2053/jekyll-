@@ -5,8 +5,6 @@
  */
 package jp.co.ndensan.reams.db.dbu.divcontroller.parentdiv;
 
-import jp.co.ndensan.reams.uz.uza.lang.RString;
-
 /**
  * 被保険者証一括発行Divを制御します。
  *
@@ -14,7 +12,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
  */
 public class IkkatsuHakkoTaishoList {
 
-    private static final RString BTN_HAKKO = new RString("btnHakko");
+//    private static final RString BTN_HAKKO = new RString("btnHakko");
 
 //    /**
 //     * 未発行検索条件画面-「一括作成対象を表示する」ボタン押下時の処理を表します。

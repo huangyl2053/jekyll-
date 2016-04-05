@@ -22,6 +22,9 @@ public enum ReportIdDBU {
      * 弁明書の帳票ＩＤです。
      */
     DBU100001(new ReportId("DBU100001_Bemmeisyo"), new RString("弁明書")),
+    /**
+     * 介護保険　広域内転居結果一覧表の帳票ＩＤです。
+     */
     DBA200011(new ReportId("DBA200011_KoikinaiTenkyoKekkaIchiranhyo"), new RString("介護保険　広域内転居結果一覧表"));
 
     private final ReportId reportId;
