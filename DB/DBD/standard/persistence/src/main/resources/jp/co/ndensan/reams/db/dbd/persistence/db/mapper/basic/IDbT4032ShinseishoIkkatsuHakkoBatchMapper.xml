@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 概要： DbT4032ShinseishoIkkatsuHakkoBatchマスタとエンティティのマッピング用XMLです。 -->
+<!-- 作者： n1070 久保裕是 -->
+
+<!-- どのマッパーインターフェースと対応するかを指定する -->
+<mapper namespace="jp.co.ndensan.reams.db.dbd.persistence.db.mapper.basic.IDbT4032ShinseishoIkkatsuHakkoBatchMapper">
+    
+    <!-- 概要： 削除されたデータ以外を全件取得するSQLです。 -->
+    <sql id="noDeleted_DbT4032ShinseishoIkkatsuHakkoBatch">
+     SELECT
+         <include refid="jp.co.ndensan.reams.db.dbd.persistence.db.mapper.basic.IDbT4032ShinseishoIkkatsuHakkoBatchMapper.allColumns_DbT4032ShinseishoIkkatsuHakkoBatch" />
+     FROM
+         rgdb."DbT4032ShinseishoIkkatsuHakkoBatch"
+     WHERE
+         rgdb."DbT4032ShinseishoIkkatsuHakkoBatch"."isDeleted" = FALSE
+    </sql>
+
+    <sql id="allColumns_DbT4032ShinseishoIkkatsuHakkoBatch">
+         "DbT4032ShinseishoIkkatsuHakkoBatch"."hakkoShoriID" as "dbT4032ShinseishoIkkatsuHakkoBatch_hakkoShoriID",
+         "DbT4032ShinseishoIkkatsuHakkoBatch"."insertDantaiCd" as "dbT4032ShinseishoIkkatsuHakkoBatch_insertDantaiCd",
+         "DbT4032ShinseishoIkkatsuHakkoBatch"."insertTimestamp" as "dbT4032ShinseishoIkkatsuHakkoBatch_insertTimestamp",
+         "DbT4032ShinseishoIkkatsuHakkoBatch"."insertReamsLoginId" as "dbT4032ShinseishoIkkatsuHakkoBatch_insertReamsLoginId",
+         "DbT4032ShinseishoIkkatsuHakkoBatch"."insertContextId" as "dbT4032ShinseishoIkkatsuHakkoBatch_insertContextId",
+         "DbT4032ShinseishoIkkatsuHakkoBatch"."isDeleted" as "dbT4032ShinseishoIkkatsuHakkoBatch_isDeleted",
+         "DbT4032ShinseishoIkkatsuHakkoBatch"."updateCount" as "dbT4032ShinseishoIkkatsuHakkoBatch_updateCount",
+         "DbT4032ShinseishoIkkatsuHakkoBatch"."lastUpdateTimestamp" as "dbT4032ShinseishoIkkatsuHakkoBatch_lastUpdateTimestamp",
+         "DbT4032ShinseishoIkkatsuHakkoBatch"."lastUpdateReamsLoginId" as "dbT4032ShinseishoIkkatsuHakkoBatch_lastUpdateReamsLoginId",
+         "DbT4032ShinseishoIkkatsuHakkoBatch"."haakuShoriId" as "dbT4032ShinseishoIkkatsuHakkoBatch_haakuShoriId"
+    </sql>
+
+
+    <!--テーブルDbT4032ShinseishoIkkatsuHakkoBatchの項目をDbT4032ShinseishoIkkatsuHakkoBatchEntityの項目にマッピングします。-->
+    <resultMap id="ResultMap_DbT4032ShinseishoIkkatsuHakkoBatchEntity" type="jp.co.ndensan.reams.db.dbd.entity.db.basic.DbT4032ShinseishoIkkatsuHakkoBatchEntity" autoMapping="true">
+        <id property="hakkoShoriID" column="dbT4032ShinseishoIkkatsuHakkoBatch_hakkoShoriID" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.UUIDTypeHandler"/>
+        <result property="insertDantaiCd" column="dbT4032ShinseishoIkkatsuHakkoBatch_insertDantaiCd" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="insertTimestamp" column="dbT4032ShinseishoIkkatsuHakkoBatch_insertTimestamp" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RDateTimeTypeHandler"/>
+        <result property="insertReamsLoginId" column="dbT4032ShinseishoIkkatsuHakkoBatch_insertReamsLoginId" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="insertContextId" column="dbT4032ShinseishoIkkatsuHakkoBatch_insertContextId" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.UUIDTypeHandler"/>
+        <result property="isDeleted" column="dbT4032ShinseishoIkkatsuHakkoBatch_isDeleted" />
+        <result property="updateCount" column="dbT4032ShinseishoIkkatsuHakkoBatch_updateCount" />
+        <result property="lastUpdateTimestamp" column="dbT4032ShinseishoIkkatsuHakkoBatch_lastUpdateTimestamp" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RDateTimeTypeHandler"/>
+        <result property="lastUpdateReamsLoginId" column="dbT4032ShinseishoIkkatsuHakkoBatch_lastUpdateReamsLoginId" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="haakuShoriId" column="dbT4032ShinseishoIkkatsuHakkoBatch_haakuShoriId" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.UUIDTypeHandler"/>
+    </resultMap>
+
+</mapper>

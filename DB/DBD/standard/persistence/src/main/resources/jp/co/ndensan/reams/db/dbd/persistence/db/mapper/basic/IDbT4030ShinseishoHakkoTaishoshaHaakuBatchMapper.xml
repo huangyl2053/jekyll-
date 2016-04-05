@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 概要： DbT4030ShinseishoHakkoTaishoshaHaakuBatchマスタとエンティティのマッピング用XMLです。 -->
+<!-- 作者： n1070 久保裕是 -->
+
+<!-- どのマッパーインターフェースと対応するかを指定する -->
+<mapper namespace="jp.co.ndensan.reams.db.dbd.persistence.db.mapper.basic.IDbT4030ShinseishoHakkoTaishoshaHaakuBatchMapper">
+    
+    <!-- 概要： 削除されたデータ以外を全件取得するSQLです。 -->
+    <sql id="noDeleted_DbT4030ShinseishoHakkoTaishoshaHaakuBatch">
+     SELECT
+         <include refid="jp.co.ndensan.reams.db.dbd.persistence.db.mapper.basic.IDbT4030ShinseishoHakkoTaishoshaHaakuBatchMapper.allColumns_DbT4030ShinseishoHakkoTaishoshaHaakuBatch" />
+     FROM
+         rgdb."DbT4030ShinseishoHakkoTaishoshaHaakuBatch"
+     WHERE
+         rgdb."DbT4030ShinseishoHakkoTaishoshaHaakuBatch"."isDeleted" = FALSE
+    </sql>
+
+    <sql id="allColumns_DbT4030ShinseishoHakkoTaishoshaHaakuBatch">
+         "DbT4030ShinseishoHakkoTaishoshaHaakuBatch"."haakuShoriID" as "dbT4030ShinseishoHakkoTaishoshaHaakuBatch_haakuShoriID",
+         "DbT4030ShinseishoHakkoTaishoshaHaakuBatch"."insertDantaiCd" as "dbT4030ShinseishoHakkoTaishoshaHaakuBatch_insertDantaiCd",
+         "DbT4030ShinseishoHakkoTaishoshaHaakuBatch"."insertTimestamp" as "dbT4030ShinseishoHakkoTaishoshaHaakuBatch_insertTimestamp",
+         "DbT4030ShinseishoHakkoTaishoshaHaakuBatch"."insertReamsLoginId" as "dbT4030ShinseishoHakkoTaishoshaHaakuBatch_insertReamsLoginId",
+         "DbT4030ShinseishoHakkoTaishoshaHaakuBatch"."insertContextId" as "dbT4030ShinseishoHakkoTaishoshaHaakuBatch_insertContextId",
+         "DbT4030ShinseishoHakkoTaishoshaHaakuBatch"."isDeleted" as "dbT4030ShinseishoHakkoTaishoshaHaakuBatch_isDeleted",
+         "DbT4030ShinseishoHakkoTaishoshaHaakuBatch"."updateCount" as "dbT4030ShinseishoHakkoTaishoshaHaakuBatch_updateCount",
+         "DbT4030ShinseishoHakkoTaishoshaHaakuBatch"."lastUpdateTimestamp" as "dbT4030ShinseishoHakkoTaishoshaHaakuBatch_lastUpdateTimestamp",
+         "DbT4030ShinseishoHakkoTaishoshaHaakuBatch"."lastUpdateReamsLoginId" as "dbT4030ShinseishoHakkoTaishoshaHaakuBatch_lastUpdateReamsLoginId",
+         "DbT4030ShinseishoHakkoTaishoshaHaakuBatch"."batchExecutedTimestamp" as "dbT4030ShinseishoHakkoTaishoshaHaakuBatch_batchExecutedTimestamp",
+         "DbT4030ShinseishoHakkoTaishoshaHaakuBatch"."gemmenGengakuShurui" as "dbT4030ShinseishoHakkoTaishoshaHaakuBatch_gemmenGengakuShurui",
+         "DbT4030ShinseishoHakkoTaishoshaHaakuBatch"."kijunYmd" as "dbT4030ShinseishoHakkoTaishoshaHaakuBatch_kijunYmd",
+         "DbT4030ShinseishoHakkoTaishoshaHaakuBatch"."shotokuNendo" as "dbT4030ShinseishoHakkoTaishoshaHaakuBatch_shotokuNendo"
+    </sql>
+
+
+    <!--テーブルDbT4030ShinseishoHakkoTaishoshaHaakuBatchの項目をDbT4030ShinseishoHakkoTaishoshaHaakuBatchEntityの項目にマッピングします。-->
+    <resultMap id="ResultMap_DbT4030ShinseishoHakkoTaishoshaHaakuBatchEntity" type="jp.co.ndensan.reams.db.dbd.entity.db.basic.DbT4030ShinseishoHakkoTaishoshaHaakuBatchEntity" autoMapping="true">
+        <id property="haakuShoriID" column="dbT4030ShinseishoHakkoTaishoshaHaakuBatch_haakuShoriID" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.UUIDTypeHandler"/>
+        <result property="insertDantaiCd" column="dbT4030ShinseishoHakkoTaishoshaHaakuBatch_insertDantaiCd" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="insertTimestamp" column="dbT4030ShinseishoHakkoTaishoshaHaakuBatch_insertTimestamp" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RDateTimeTypeHandler"/>
+        <result property="insertReamsLoginId" column="dbT4030ShinseishoHakkoTaishoshaHaakuBatch_insertReamsLoginId" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="insertContextId" column="dbT4030ShinseishoHakkoTaishoshaHaakuBatch_insertContextId" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.UUIDTypeHandler"/>
+        <result property="isDeleted" column="dbT4030ShinseishoHakkoTaishoshaHaakuBatch_isDeleted" />
+        <result property="updateCount" column="dbT4030ShinseishoHakkoTaishoshaHaakuBatch_updateCount" />
+        <result property="lastUpdateTimestamp" column="dbT4030ShinseishoHakkoTaishoshaHaakuBatch_lastUpdateTimestamp" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RDateTimeTypeHandler"/>
+        <result property="lastUpdateReamsLoginId" column="dbT4030ShinseishoHakkoTaishoshaHaakuBatch_lastUpdateReamsLoginId" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="batchExecutedTimestamp" column="dbT4030ShinseishoHakkoTaishoshaHaakuBatch_batchExecutedTimestamp" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.YMDHMSTypeHandler"/>
+        <result property="gemmenGengakuShurui" column="dbT4030ShinseishoHakkoTaishoshaHaakuBatch_gemmenGengakuShurui" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="kijunYmd" column="dbT4030ShinseishoHakkoTaishoshaHaakuBatch_kijunYmd" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="shotokuNendo" column="dbT4030ShinseishoHakkoTaishoshaHaakuBatch_shotokuNendo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleYearMonthTypeHandler"/>
+    </resultMap>
+
+</mapper>

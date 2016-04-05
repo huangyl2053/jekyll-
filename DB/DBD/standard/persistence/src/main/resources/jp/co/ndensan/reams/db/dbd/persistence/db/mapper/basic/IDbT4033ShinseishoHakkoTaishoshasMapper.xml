@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 概要： DbT4033ShinseishoHakkoTaishoshasマスタとエンティティのマッピング用XMLです。 -->
+<!-- 作者： n1070 久保裕是 -->
+
+<!-- どのマッパーインターフェースと対応するかを指定する -->
+<mapper namespace="jp.co.ndensan.reams.db.dbd.persistence.db.mapper.basic.IDbT4033ShinseishoHakkoTaishoshasMapper">
+    
+    <!-- 概要： 削除されたデータ以外を全件取得するSQLです。 -->
+    <sql id="noDeleted_DbT4033ShinseishoHakkoTaishoshas">
+     SELECT
+         <include refid="jp.co.ndensan.reams.db.dbd.persistence.db.mapper.basic.IDbT4033ShinseishoHakkoTaishoshasMapper.allColumns_DbT4033ShinseishoHakkoTaishoshas" />
+     FROM
+         rgdb."DbT4033ShinseishoHakkoTaishoshas"
+     WHERE
+         rgdb."DbT4033ShinseishoHakkoTaishoshas"."isDeleted" = FALSE
+    </sql>
+
+    <sql id="allColumns_DbT4033ShinseishoHakkoTaishoshas">
+         "DbT4033ShinseishoHakkoTaishoshas"."hakkoShoriID" as "dbT4033ShinseishoHakkoTaishoshas_hakkoShoriID",
+         "DbT4033ShinseishoHakkoTaishoshas"."insertDantaiCd" as "dbT4033ShinseishoHakkoTaishoshas_insertDantaiCd",
+         "DbT4033ShinseishoHakkoTaishoshas"."insertTimestamp" as "dbT4033ShinseishoHakkoTaishoshas_insertTimestamp",
+         "DbT4033ShinseishoHakkoTaishoshas"."insertReamsLoginId" as "dbT4033ShinseishoHakkoTaishoshas_insertReamsLoginId",
+         "DbT4033ShinseishoHakkoTaishoshas"."insertContextId" as "dbT4033ShinseishoHakkoTaishoshas_insertContextId",
+         "DbT4033ShinseishoHakkoTaishoshas"."isDeleted" as "dbT4033ShinseishoHakkoTaishoshas_isDeleted",
+         "DbT4033ShinseishoHakkoTaishoshas"."updateCount" as "dbT4033ShinseishoHakkoTaishoshas_updateCount",
+         "DbT4033ShinseishoHakkoTaishoshas"."lastUpdateTimestamp" as "dbT4033ShinseishoHakkoTaishoshas_lastUpdateTimestamp",
+         "DbT4033ShinseishoHakkoTaishoshas"."lastUpdateReamsLoginId" as "dbT4033ShinseishoHakkoTaishoshas_lastUpdateReamsLoginId",
+         "DbT4033ShinseishoHakkoTaishoshas"."hihokenshaNo" as "dbT4033ShinseishoHakkoTaishoshas_hihokenshaNo"
+    </sql>
+
+
+    <!--テーブルDbT4033ShinseishoHakkoTaishoshasの項目をDbT4033ShinseishoHakkoTaishoshasEntityの項目にマッピングします。-->
+    <resultMap id="ResultMap_DbT4033ShinseishoHakkoTaishoshasEntity" type="jp.co.ndensan.reams.db.dbd.entity.db.basic.DbT4033ShinseishoHakkoTaishoshasEntity" autoMapping="true">
+        <id property="hakkoShoriID" column="dbT4033ShinseishoHakkoTaishoshas_hakkoShoriID" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.UUIDTypeHandler"/>
+        <result property="insertDantaiCd" column="dbT4033ShinseishoHakkoTaishoshas_insertDantaiCd" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="insertTimestamp" column="dbT4033ShinseishoHakkoTaishoshas_insertTimestamp" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RDateTimeTypeHandler"/>
+        <result property="insertReamsLoginId" column="dbT4033ShinseishoHakkoTaishoshas_insertReamsLoginId" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="insertContextId" column="dbT4033ShinseishoHakkoTaishoshas_insertContextId" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.UUIDTypeHandler"/>
+        <result property="isDeleted" column="dbT4033ShinseishoHakkoTaishoshas_isDeleted" />
+        <result property="updateCount" column="dbT4033ShinseishoHakkoTaishoshas_updateCount" />
+        <result property="lastUpdateTimestamp" column="dbT4033ShinseishoHakkoTaishoshas_lastUpdateTimestamp" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RDateTimeTypeHandler"/>
+        <result property="lastUpdateReamsLoginId" column="dbT4033ShinseishoHakkoTaishoshas_lastUpdateReamsLoginId" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="hihokenshaNo" column="dbT4033ShinseishoHakkoTaishoshas_hihokenshaNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.HihokenshaNoTypeHandler"/>
+    </resultMap>
+
+</mapper>
