@@ -57,8 +57,9 @@ public class GemmenChoshuYuyo {
 //                key.get通知書番号(), key.get処理日時(), 状態区分);
 
         if (modeloid.isPresent()) {
-//            Gemmen model = modeloid.get();
-            modeloid.get();
+            Gemmen model = modeloid.get();
+            // TODO modelのCheckstyle対応
+            model.get取消減免額();
 //            div.getTxtGemmenShinseiYMD().setValue(FukaMapper.toRDate(model.get減免申請年月日()));
 //            div.getTxtGemmenShinseiGaku().setValue(model.get申請減免額());
 //            div.getTxtGemmenShinseiRiyu().setValue(model.get申請事由());
@@ -86,6 +87,7 @@ public class GemmenChoshuYuyo {
      */
     private void setChoshuYuyoDiv(ChoshuYuyoDiv div, FukaShokaiKey key) {
         clearChoshuYuyoDiv(div);
+        // TODO keyのCheckstyle対応
         key.get履歴番号();
 //        Optional<ChoshuYuyoRelateModel> modeloid = new ChoshuYuyoFinder().find徴収猶予(
 //                key.get調定年度(), key.get賦課年度(),

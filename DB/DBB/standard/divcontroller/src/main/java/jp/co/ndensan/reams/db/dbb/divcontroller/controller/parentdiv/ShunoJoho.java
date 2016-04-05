@@ -83,7 +83,7 @@ public class ShunoJoho {
 //                prm.getKeyData().get(HosokuInfoKey.コード2.name()),
 //                prm.getKeyData().get(HosokuInfoKey.コード3.name())
 //        );
-        // TODO 未使用のメソッド引数があります。
+        // TODO 未使用のメソッド引数があります。prmのCheckstyle対応。
         prm.getCommonChildDivID();
         ResponseData res = gyomuMethod(
                 div,

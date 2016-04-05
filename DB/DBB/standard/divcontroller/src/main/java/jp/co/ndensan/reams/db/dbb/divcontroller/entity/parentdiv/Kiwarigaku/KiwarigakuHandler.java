@@ -26,6 +26,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.Label;
  *
  * @author N8156 宮本 康
  */
+@SuppressWarnings("PMD.UnusedPrivateField")
 public class KiwarigakuHandler {
 
     private final KiwarigakuDiv div;
@@ -325,18 +326,6 @@ public class KiwarigakuHandler {
         map.put(getTableKey(TableItem.普徴納付額, 14), div.getLblFuchoNofuGakuGokei());
 
         return map;
-    }
-
-    /**
-     * 未使用のprivateフィールドです、Checkstyle対応
-     */
-    public void 未使用のprivateフィールドです() {
-        賦課計算Config.getランク終了年度();
-        日付Config.get当初年度();
-        普徴Config.get月の期();
-        過年度Config.get月の期();
-        特徴Config.get月の期();
-        期割額テーブル.hashCode();
     }
 
     private RString getTableKey(TableItem item, Integer rowNo) {

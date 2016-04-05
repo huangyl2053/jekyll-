@@ -91,6 +91,7 @@ public class KibetsuChoshuYuyo {
     }
 
     private boolean are調定年度and賦課年度SameAge(Optional<Object> model) {
+        // TODO modelのCheckstyle対応。
         model.hashCode();
         return true;
     }
@@ -130,6 +131,7 @@ public class KibetsuChoshuYuyo {
 //                終了日[期Index] = model.get徴収猶予終了年月日();
 //            }
 //        }
+        // TODO 未使用のメソッド引数があります。期IndexMapのCheckstyle対応。
         期IndexMap.isEmpty();
         setTableData(TableItem.開始日, 開始日);
         setTableData(TableItem.終了日, 終了日);

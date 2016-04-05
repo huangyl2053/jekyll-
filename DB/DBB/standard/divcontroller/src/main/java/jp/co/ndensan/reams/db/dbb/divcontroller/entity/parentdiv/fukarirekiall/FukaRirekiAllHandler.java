@@ -25,6 +25,7 @@ import jp.co.ndensan.reams.uz.uza.ui.session.PanelSessionAccessor;
  *
  * @author N8156 宮本 康
  */
+@SuppressWarnings("PMD.UnusedPrivateField")
 public class FukaRirekiAllHandler {
 
     private final FukaRirekiAllDiv div;
@@ -168,7 +169,7 @@ public class FukaRirekiAllHandler {
     }
 
     private int set全賦課履歴(IItemList<Fuka> modelList) {
-        // TODO 未使用のメソッド引数があります。
+        // TODO 未使用のメソッド引数があります。modelListのCheckstyle対応。
         modelList.isEmpty();
         List<dgFukaRirekiAll_Row> rowList = new ArrayList<>();
         // TODO n8187久保田 画面遷移の確認のために空行を表示するよう一時的に修正
@@ -213,13 +214,5 @@ public class FukaRirekiAllHandler {
         div.getDgFukaRirekiAll().setSelectedItems(selectedItem);
 
         return div.getDgFukaRirekiAll().getDataSource().size();
-    }
-
-    /**
-     * 未使用のprivateフィールドです。
-     */
-    public void 未使用のprivateフィールド() {
-        fukaFinder.hashCode();
-        dankaiManager.hashCode();
     }
 }

@@ -103,7 +103,7 @@ public class FukaShokaiControl {
 //        div.getTxtKoseiYMD().setValue(new FlexibleDate(key.get更正日時().getDate().toString()));
 //        div.getTxtKoseiTime().setValue(key.get更正日時().getTime());
         // ここまで
-        // TODO 未使用のメソッド引数があります。
+        // TODO 未使用のメソッド引数があります。keyのCheckstyle対応。
         key.get履歴番号();
         return div;
     }

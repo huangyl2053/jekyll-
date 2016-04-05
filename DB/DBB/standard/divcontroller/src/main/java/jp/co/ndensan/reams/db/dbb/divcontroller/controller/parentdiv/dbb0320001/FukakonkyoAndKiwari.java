@@ -147,7 +147,7 @@ public class FukakonkyoAndKiwari {
 ////            set年額Of仮算定(div, model);
 ////        }
 //        // ここまで
-        // TODO 未使用のメソッド引数があります。
+        // TODO 未使用のメソッド引数があります。modelとkeyのCheckstyle対応。
         model.get世帯員数();
         key.get履歴番号();
         return div;

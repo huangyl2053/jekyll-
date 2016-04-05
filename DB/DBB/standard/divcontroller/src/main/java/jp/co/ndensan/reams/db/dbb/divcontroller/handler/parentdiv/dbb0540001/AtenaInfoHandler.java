@@ -14,6 +14,7 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.CommonButtonHolder;
 /**
  * 徴収方法変更_ヘッダエリアのハンドラクラスです。
  */
+@SuppressWarnings("PMD.UnusedPrivateField")
 public class AtenaInfoHandler {
 
     private final AtenaInfoDiv div;
@@ -49,12 +50,4 @@ public class AtenaInfoHandler {
         CommonButtonHolder.setDisabledByCommonButtonFieldName(検索結果一覧へ, false);
         CommonButtonHolder.setDisabledByCommonButtonFieldName(保存する, true);
     }
-
-    /**
-     * 未使用のprivateフィールドです。
-     */
-    public void 未使用のprivateフィールド() {
-        div.hashCode();
-    }
-
 }

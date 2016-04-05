@@ -89,7 +89,7 @@ public class KibetsuChoshuYuyo {
     }
 
     private boolean are調定年度and賦課年度SameAge(Optional<Object> model) {
-        // TODO 未使用のメソッド引数があります。
+        // TODO 未使用のメソッド引数があります。modelのCheckstyle対応。
         model.hashCode();
         return true;
     }

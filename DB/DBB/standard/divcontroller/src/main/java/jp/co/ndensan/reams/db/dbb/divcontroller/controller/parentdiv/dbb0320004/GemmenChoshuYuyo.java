@@ -48,7 +48,7 @@ public class GemmenChoshuYuyo {
      */
     private void setGemmenDiv(GemmenDiv div, FukaShokaiKey key) {
         clearGemmenDiv(div);
-        // TODO 未使用のメソッド引数があります。
+        // TODO 未使用のメソッド引数があります。keyのCheckstyle対応。
         key.get履歴番号();
 //        Optional<Gemmen> modeloid = Optional.of(new GemmenManager().get介護賦課減免(
 //                key.get調定年度(), key.get賦課年度(),
@@ -84,7 +84,7 @@ public class GemmenChoshuYuyo {
      * @param key 賦課照会key
      */
     private void setChoshuYuyoDiv(ChoshuYuyoDiv div, FukaShokaiKey key) {
-        // TODO 未使用のメソッド引数があります。
+        // TODO 未使用のメソッド引数があります。keyのCheckstyle対応。
         key.get履歴番号();
         clearChoshuYuyoDiv(div);
 

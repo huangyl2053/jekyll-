@@ -122,7 +122,7 @@ public class FukaRirekiPanel {
     private void setDgFukaRireki(FukaRirekiPanelDiv fukaRirekiDiv, IItemList rireki, FukaNendo 賦課年度) {
         // TODO n8187久保田 画面遷移の確認のためにダミーデータを設定。
         // ここから
-        // TODO 未使用のメソッド引数があります。
+        // TODO 未使用のメソッド引数があります。rirekiと賦課年度のCheckstyle対応。
         if (rireki == null && 賦課年度 != null) {
             賦課年度.hashCode();
         }

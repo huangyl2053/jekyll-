@@ -101,7 +101,7 @@ public final class ViewStateKeyCreator {
 //            return SanteiState.本算定;
 //        }
 //
-        // TODO 未使用のメソッド引数があります。
+        // TODO 未使用のメソッド引数があります。fukaModelのCheckstyle対応。
         fukaModel.get世帯コード();
         return SanteiState.仮算定;
     }
@@ -116,7 +116,7 @@ public final class ViewStateKeyCreator {
 //                fukaModel.get通知書番号(), fukaModel.get処理日時(), GemmenChoshuYuyoStateKubun.決定_承認);
 //
 //        return modeloid.isPresent();
-        // TODO 未使用のメソッド引数があります。
+        // TODO 未使用のメソッド引数があります。fukaModelのCheckstyle対応。
         fukaModel.get世帯コード();
         return true;
     }
