@@ -54,8 +54,19 @@ public class TokubetsuChoshuTotal {
         }
         getHandler(div).set初期化();
         FlexibleYear 調定年度 = new FlexibleYear(div.getKonkaiShoriNaiyo().getDdlChoteiNendo().getSelectedKey());
-        getHandler(div).set初期値(調定年度);
         return 画面の状態遷移(div, 調定年度);
+    }
+
+    /**
+     * 特別徴収パネル（画面項目２～１１を載せているパネル）
+     *
+     * @param div TokubetsuChoshuTotalDiv
+     * @return ResponseData<TokubetsuChoshuTotalDiv>
+     */
+    public ResponseData<TokubetsuChoshuTotalDiv> onStateTransition(TokubetsuChoshuTotalDiv div) {
+        FlexibleYear 調定年度 = new FlexibleYear(div.getKonkaiShoriNaiyo().getDdlChoteiNendo().getSelectedKey());
+        getHandler(div).set初期値(調定年度);
+        return ResponseData.of(div).respond();
     }
 
     /**
@@ -89,16 +100,13 @@ public class TokubetsuChoshuTotal {
      * @return ResponseData<TokubetsuChoshuTotalDiv>
      */
     public ResponseData<TokubetsuChoshuTotalDiv> onChange_ddlFuchoKirikaeKeisanHoho(TokubetsuChoshuTotalDiv div) {
-        if (FutsuChoshuKirikaeKeisanHoho.重複させない.getコード().equals(div.getTokubetsuChoshu()
-                .getTplKibetsuHasuJoho().getFuchoKirikaeKeisanHoho().getDdlFuchoKirikaeKeisanHoho().getSelectedKey())
-                || FutsuChoshuKirikaeKeisanHoho.重複させる.getコード().equals(div.getTokubetsuChoshu()
-                        .getTplKibetsuHasuJoho().getFuchoKirikaeKeisanHoho()
-                        .getDdlFuchoKirikaeKeisanHoho().getSelectedKey())) {
-            div.getTokubetsuChoshu().getTabTokucho().getTplKibetsuHasuJoho().getFuchoKirikaeKeisanHoho()
-                    .getDdlFuchoKirikaeJufukuStKi().setDisabled(true);
-        } else {
+        if (FutsuChoshuKirikaeKeisanHoho.指定期以降重複させる.getコード().equals(div.getTokubetsuChoshu()
+                .getTplKibetsuHasuJoho().getFuchoKirikaeKeisanHoho().getDdlFuchoKirikaeKeisanHoho().getSelectedKey())) {
             div.getTokubetsuChoshu().getTabTokucho().getTplKibetsuHasuJoho().getFuchoKirikaeKeisanHoho()
                     .getDdlFuchoKirikaeJufukuStKi().setDisabled(false);
+        } else {
+            div.getTokubetsuChoshu().getTabTokucho().getTplKibetsuHasuJoho().getFuchoKirikaeKeisanHoho()
+                    .getDdlFuchoKirikaeJufukuStKi().setDisabled(true);
         }
         return ResponseData.of(div).respond();
     }
@@ -170,17 +178,15 @@ public class TokubetsuChoshuTotal {
      * @return ResponseData<TokubetsuChoshuTotalDiv>
      */
     private ResponseData<TokubetsuChoshuTotalDiv> 保存処理(TokubetsuChoshuTotalDiv div) {
-        getHandler(div).チェック選択制御();
         ValidationMessageControlPairs valid = getTokubetsuChoshuTotalValidationHandler(div).validate();
         if (valid.iterator().hasNext()) {
             return ResponseData.of(div).addValidationMessages(valid).respond();
         }
-        getHandler(div).納期限チェック();
+        getHandler(div).save業務コンフィグ();
         FlexibleYear 調定年度 = new FlexibleYear(div.getKonkaiShoriNaiyo().getDdlChoteiNendo().getSelectedKey());
         if (!div.getKonkaiShoriNaiyo().getDdlShichosonSelect().isVisible()) {
             getHandler(div).save納期限(調定年度);
         }
-        getHandler(div).save業務コンフィグ();
         RStringBuilder rsb = new RStringBuilder();
         rsb.append(終了メッセージ1).append(調定年度.wareki().toDateString()).append(終了メッセージ2);
         div.getKanryoMessage().getCcdKanryoMessage().setMessage(
