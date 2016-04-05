@@ -8,8 +8,12 @@ module DBZ {
 
         export class Events {
 
-            public static btn_ZenkaiShosai(): string {
-                return "btn_ZenkaiShosai";
+            public static onOkClose_btnZenkaiShosai(): string {
+                return "onOkClose_btnZenkaiShosai";
+            }
+
+            public static onCancelClose_btnZenkaiShosai(): string {
+                return "onCancelClose_btnZenkaiShosai";
             }
 
         }
@@ -49,12 +53,12 @@ module DBZ {
                 return new UZA.TextBoxFlexibleDate(this.convFiledName("txtYukoKikanFrom"));
             }
 
-            public btnZenkaiShosai(): UZA.Button {
-                return new UZA.Button(this.convFiledName("btnZenkaiShosai"));
-            }
-
             public txtYukoKikanTo(): UZA.TextBoxFlexibleDate {
                 return new UZA.TextBoxFlexibleDate(this.convFiledName("txtYukoKikanTo"));
+            }
+
+            public btnZenkaiShosai(): UZA.ButtonDialog {
+                return new UZA.ButtonDialog(this.convFiledName("btnZenkaiShosai"));
             }
 
         }
