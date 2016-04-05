@@ -8,6 +8,7 @@ package jp.co.ndensan.reams.db.dbc.divcontroller.controller.parentdiv.dbc0810011
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0810011.ShinseiSearchDiv;
 import jp.co.ndensan.reams.db.dbc.divcontroller.viewbox.ViewStateKeys;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
+import jp.co.ndensan.reams.db.dbz.service.TaishoshaKey;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
@@ -28,14 +29,12 @@ public class ShinseiSearch {
      * @return ResponseData
      */
     public ResponseData<ShinseiSearchDiv> onLoad(ShinseiSearchDiv div) {
-        // TODO ダミー値を設定
-        ViewStateHolder.put(ViewStateKeys.識別コード, new ShikibetsuCode("000000000000010"));
-        ViewStateHolder.put(ViewStateKeys.被保険者番号, new HihokenshaNo("000000003"));
+        TaishoshaKey 引継ぎデータ = ViewStateHolder.get(ViewStateKeys.資格対象者, TaishoshaKey.class);
 
-        ShikibetsuCode 識別コード = ViewStateHolder.get(ViewStateKeys.識別コード, ShikibetsuCode.class);
+        ShikibetsuCode 識別コード = 引継ぎデータ.get識別コード();
         div.getPanelAtenaShikaku().getCcdKaigoAtenalInfo().onLoad(識別コード);
 
-        HihokenshaNo 被保険者番号 = ViewStateHolder.get(ViewStateKeys.被保険者番号, HihokenshaNo.class);
+        HihokenshaNo 被保険者番号 = 引継ぎデータ.get被保険者番号();
         div.getPanelAtenaShikaku().getCcdKaigoShikakuKihon().onLoad(被保険者番号);
 
         div.getPanelShokan().getCcdShokanShinseiList().initialize(照会, 被保険者番号, FlexibleYearMonth.MIN, FlexibleYearMonth.MAX);
