@@ -162,7 +162,9 @@ public class HonsanteiIdoGennendo {
             DbT7022ShoriDateKanriEntity entity
                     = 処理日付管理Dac.selectByFourKeys(SubGyomuCode.DBB介護賦課,
                             ShoriName.異動賦課.get名称(), 処理_枝番, 調定年度);
-            entityList.add(entity);
+            if (entity != null) {
+                entityList.add(entity);
+            }
         }
         if (entityList == null || entityList.isEmpty()) {
             return new ArrayList<>();
