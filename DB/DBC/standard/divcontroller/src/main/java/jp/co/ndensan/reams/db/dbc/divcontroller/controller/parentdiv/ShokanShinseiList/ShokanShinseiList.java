@@ -38,33 +38,6 @@ public class ShokanShinseiList {
     private static final RString 照会 = new RString("照会");
 
     /**
-     * 償還払申請一覧の初期化です。
-     *
-     * @param requestdiv ShokanShinseiListDiv
-     * @return ResponseData<ShokanShinseiListDiv>
-     */
-    public ResponseData<ShokanShinseiListDiv> onLoad(ShokanShinseiListDiv requestdiv) {
-        HihokenshaNo 償還払申請一覧_被保険者番号 = ViewStateHolder.get(ViewStateKeys.償還払申請一覧_被保険者番号, HihokenshaNo.class);
-        FlexibleYearMonth 償還払申請一覧_サービス年月From = ViewStateHolder.get(ViewStateKeys.償還払申請一覧_サービス年月From, FlexibleYearMonth.class);
-        FlexibleYearMonth 償還払申請一覧_サービス年月To = ViewStateHolder.get(ViewStateKeys.償還払申請一覧_サービス年月To, FlexibleYearMonth.class);
-        RString mode = ViewStateHolder.get(ViewStateKeys.償還払申請一覧_モード, RString.class);
-        SearchResult<ShokanShinseiIchiran> shokandhinseiichiran;
-        if (照会.equals(mode)) {
-            shokandhinseiichiran = ShokanShinseiIchiranManager.
-                    createInstance().getShokanShinseiListSyokai(償還払申請一覧_被保険者番号,
-                            償還払申請一覧_サービス年月From,
-                            償還払申請一覧_サービス年月To);
-        } else {
-            shokandhinseiichiran = ShokanShinseiIchiranManager.
-                    createInstance().getShokanShinseiListShinsei(償還払申請一覧_被保険者番号,
-                            償還払申請一覧_サービス年月From,
-                            償還払申請一覧_サービス年月To);
-        }
-        getHandler(requestdiv).initialize(mode, shokandhinseiichiran);
-        return ResponseData.of(requestdiv).respond();
-    }
-
-    /**
      * 「申請を追加する」ボタン押下です。
      *
      * @param requestDiv ShokanShinseiListDiv
