@@ -24,8 +24,8 @@ module DBZ {
                 return "onSelectByModifyButton_dgShikakuShutokuRireki";
             }
 
-            public static onSelectByDeleteButton_dgShikakuShutokuRireki(): string {
-                return "onSelectByDeleteButton_dgShikakuShutokuRireki";
+            public static onClick_btnDelete(): string {
+                return "onClick_btnDelete";
             }
 
         }
