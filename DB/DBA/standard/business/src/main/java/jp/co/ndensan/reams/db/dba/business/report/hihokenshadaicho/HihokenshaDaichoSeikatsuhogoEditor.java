@@ -3,64 +3,56 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
+package jp.co.ndensan.reams.db.dba.business.report.hihokenshadaicho;
 
-package jp.co.ndensan.reams.db.dba.business.report.hihokenshashohakkoichiranhyo;
-
-import jp.co.ndensan.reams.db.dba.entity.report.hihokenshashohakkoichiranhyo.HihokenshashoHakkoIchiranhyoReportSource;
+import jp.co.ndensan.reams.db.dba.entity.db.hihokenshadaichosakusei.SeikatsuHogoJukyushaDivisionEntity;
+import jp.co.ndensan.reams.db.dba.entity.report.hihokenshadaicho.HihokenshaDaichoReportSource;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
- *
- * 被保険者証発行一覧表Editorです。
+ * 被保険者台帳_生活保護Editorです。
  */
-public class HihokenshashoHakkoIchiranHyoEditor implements IHihokenshashoHakkoIchiranHyoEditor {
-    
-    private final HihokenshashoHakkoIchiranHyoItem joho;
-    
+public class HihokenshaDaichoSeikatsuhogoEditor implements IHihokenshaDaichoEditor {
+
+    private final SeikatsuHogoJukyushaDivisionEntity entity;
+    private final int index;
+
     /**
      * コンストラクタです。
-     * @param joho 一覧表証発行者Entityリストです
+     *
+     * @param entity 生活保護のエンティティクラス
+     * @param index Index
      */
-    public HihokenshashoHakkoIchiranHyoEditor(HihokenshashoHakkoIchiranHyoItem joho) {
-        this.joho = joho;
+    public HihokenshaDaichoSeikatsuhogoEditor(SeikatsuHogoJukyushaDivisionEntity entity, int index) {
+        this.entity = entity;
+        this.index = index;
     }
 
     /**
-     * 被保険者証発行一覧表editです。
-     * @param source 被保険者証発行一覧表Source
-     * @return 要介護認定業務進捗状況一覧表
+     * 被保険者台帳ReportSourceを作成します。
+     *
+     * @param source 被保険者台帳ReportSource
+     * @return 被保険者台帳ReportSource
      */
     @Override
-    public HihokenshashoHakkoIchiranhyoReportSource edit(HihokenshashoHakkoIchiranhyoReportSource source) {
+    public HihokenshaDaichoReportSource edit(HihokenshaDaichoReportSource source) {
+        if (entity == null || entity.get生活保護No().size() < index) {
+            return source;
+        }
         return editBody(source);
     }
-    
-    private HihokenshashoHakkoIchiranhyoReportSource editBody(HihokenshashoHakkoIchiranhyoReportSource source) {
-        source.printTimeStamp = joho.getPrintTimeStamp();
-        source.shichosonName = joho.getShichosonName();
-        source.shichosonCode = joho.getShichosonCode();
-        source.shutsuryokujun1 = joho.getShutsuryokujun1();
-        source.shutsuryokujun2 = joho.getShutsuryokujun2();
-        source.shutsuryokujun3 = joho.getShutsuryokujun3();
-        source.shutsuryokujun4 = joho.getShutsuryokujun4();
-        source.shutsuryokujun5 = joho.getShutsuryokujun5();
-        source.kaipage1 = joho.getKaipage1();
-        source.kaipage2 = joho.getKaipage2();
-        source.kaipage3 = joho.getKaipage3();
-        source.kaipage4 = joho.getKaipage4();
-        source.kaipage5 = joho.getKaipage5();
-        source.kofujiyutitle = joho.getKofujiyutitle();
-        source.list_1 = joho.getList_1();
-        source.list_2 = joho.getList_2();
-        source.list_3 = joho.getList_3();
-        source.list_4 = joho.getList_4();
-        source.list_5 = joho.getList_5();
-        source.list_6 = joho.getList_6();
-        source.list_7 = joho.getList_7();
-        source.list_8 = joho.getList_8();
-        source.list_9 = joho.getList_9();
-        source.list_10 = joho.getList_10();
 
+    private HihokenshaDaichoReportSource editBody(HihokenshaDaichoReportSource source) {
+        source.listSeikatsuhogo_1 = entity.get生活保護No().get(index);
+        source.listSeikatsuhogo_2 = entity.get受給開始日().get(index) == null
+                ? RString.EMPTY : new RString(entity.get受給開始日().get(index).toString());
+        source.listSeikatsuhogo_3 = entity.get受給廃止日().get(index) == null
+                ? RString.EMPTY : new RString(entity.get受給廃止日().get(index).toString());
+        source.listSeikatsuhogo_4 = entity.get全額停止開始日().get(index) == null
+                ? RString.EMPTY : new RString(entity.get全額停止開始日().get(index).toString());
+        source.listSeikatsuhogo_5 = entity.get全額停止終了日().get(index) == null
+                ? RString.EMPTY : new RString(entity.get全額停止終了日().get(index).toString());
+        source.listSeikatsuhogo_6 = entity.get扶助種類().get(index);
         return source;
     }
-    
 }

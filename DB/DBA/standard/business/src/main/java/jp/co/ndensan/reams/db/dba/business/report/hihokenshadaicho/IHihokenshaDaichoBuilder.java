@@ -3,15 +3,13 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
+package jp.co.ndensan.reams.db.dba.business.report.hihokenshadaicho;
 
-package jp.co.ndensan.reams.db.dba.business.report.hihokenshashohakkoichiranhyo;
-
-import jp.co.ndensan.reams.db.dba.entity.report.hihokenshashohakkoichiranhyo.HihokenshashoHakkoIchiranhyoReportSource;
+import jp.co.ndensan.reams.db.dba.entity.report.hihokenshadaicho.HihokenshaDaichoReportSource;
 import jp.co.ndensan.reams.uz.uza.report.IReportBuilder;
 
 /**
- *
- * 被保険者証発行一覧表Builderのインターフェースクラスです。
+ * 被保険者台帳Builderのインターフェースクラスです。
  */
-public interface IHihokenshashoHakkoIchiranHyoBuilder extends IReportBuilder<HihokenshashoHakkoIchiranhyoReportSource> {
+public interface IHihokenshaDaichoBuilder extends IReportBuilder<HihokenshaDaichoReportSource> {
 }

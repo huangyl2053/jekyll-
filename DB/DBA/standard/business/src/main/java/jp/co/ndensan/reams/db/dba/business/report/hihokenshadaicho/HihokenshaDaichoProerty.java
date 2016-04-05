@@ -3,28 +3,25 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
-package jp.co.ndensan.reams.db.dba.business.report.hihokenshashohakkoichiranhyo;
+package jp.co.ndensan.reams.db.dba.business.report.hihokenshadaicho;
 
 import jp.co.ndensan.reams.db.dba.definition.reportid.ReportIdDBA;
-import jp.co.ndensan.reams.db.dba.entity.report.hihokenshashohakkoichiranhyo.HihokenshashoHakkoIchiranhyoReportSource;
+import jp.co.ndensan.reams.db.dba.entity.report.hihokenshadaicho.HihokenshaDaichoReportSource;
 import jp.co.ndensan.reams.uz.uza.biz.ReportId;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.report.ReportPropertyBase;
 
 /**
- * 
- * {@link HihokenshashoHakkoIchiranHyoProerty}のプロパティです。
+ * {@link HihokenshaDaichoProerty}のプロパティです。
  */
-public class HihokenshashoHakkoIchiranHyoProerty extends ReportPropertyBase<HihokenshashoHakkoIchiranhyoReportSource> {
-    
-        private static final ReportId ID = ReportIdDBA.DBA200003.getReportId();
-    
+public class HihokenshaDaichoProerty extends ReportPropertyBase<HihokenshaDaichoReportSource> {
+
+    private static final ReportId ID = ReportIdDBA.DBA100009.getReportId();
+
     /**
      * コンストラクタです。
      */
-    public HihokenshashoHakkoIchiranHyoProerty() {
+    public HihokenshaDaichoProerty() {
         super(SubGyomuCode.DBA介護資格, ID);
     }
-    // TODO Redmine：#73393 (出力順について)
 }

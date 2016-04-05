@@ -3,64 +3,74 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
+package jp.co.ndensan.reams.db.dba.business.report.hihokenshadaicho;
 
-package jp.co.ndensan.reams.db.dba.business.report.hihokenshashohakkoichiranhyo;
-
-import jp.co.ndensan.reams.db.dba.entity.report.hihokenshashohakkoichiranhyo.HihokenshashoHakkoIchiranhyoReportSource;
+import jp.co.ndensan.reams.db.dba.business.core.hihokenshadaichosakusei.HihokenshaDaichoSakusei;
+import jp.co.ndensan.reams.db.dba.entity.report.hihokenshadaicho.HihokenshaDaichoReportSource;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
- *
- * 被保険者証発行一覧表Editorです。
+ * 被保険者台帳Editorです。
  */
-public class HihokenshashoHakkoIchiranHyoEditor implements IHihokenshashoHakkoIchiranHyoEditor {
-    
-    private final HihokenshashoHakkoIchiranHyoItem joho;
-    
+public class HihokenshaDaichoEditor implements IHihokenshaDaichoEditor {
+
+    private final HihokenshaDaichoSakusei joho;
+
     /**
      * コンストラクタです。
-     * @param joho 一覧表証発行者Entityリストです
+     *
+     * @param joho 被保険者台帳リストです
      */
-    public HihokenshashoHakkoIchiranHyoEditor(HihokenshashoHakkoIchiranHyoItem joho) {
+    public HihokenshaDaichoEditor(HihokenshaDaichoSakusei joho) {
         this.joho = joho;
     }
 
     /**
-     * 被保険者証発行一覧表editです。
-     * @param source 被保険者証発行一覧表Source
-     * @return 要介護認定業務進捗状況一覧表
+     * 被保険者台帳ReportSourceを作成します。
+     *
+     * @param source 被保険者台帳ReportSource
+     * @return 被保険者台帳ReportSource
      */
     @Override
-    public HihokenshashoHakkoIchiranhyoReportSource edit(HihokenshashoHakkoIchiranhyoReportSource source) {
+    public HihokenshaDaichoReportSource edit(HihokenshaDaichoReportSource source) {
         return editBody(source);
     }
-    
-    private HihokenshashoHakkoIchiranhyoReportSource editBody(HihokenshashoHakkoIchiranhyoReportSource source) {
-        source.printTimeStamp = joho.getPrintTimeStamp();
-        source.shichosonName = joho.getShichosonName();
-        source.shichosonCode = joho.getShichosonCode();
-        source.shutsuryokujun1 = joho.getShutsuryokujun1();
-        source.shutsuryokujun2 = joho.getShutsuryokujun2();
-        source.shutsuryokujun3 = joho.getShutsuryokujun3();
-        source.shutsuryokujun4 = joho.getShutsuryokujun4();
-        source.shutsuryokujun5 = joho.getShutsuryokujun5();
-        source.kaipage1 = joho.getKaipage1();
-        source.kaipage2 = joho.getKaipage2();
-        source.kaipage3 = joho.getKaipage3();
-        source.kaipage4 = joho.getKaipage4();
-        source.kaipage5 = joho.getKaipage5();
-        source.kofujiyutitle = joho.getKofujiyutitle();
-        source.list_1 = joho.getList_1();
-        source.list_2 = joho.getList_2();
-        source.list_3 = joho.getList_3();
-        source.list_4 = joho.getList_4();
-        source.list_5 = joho.getList_5();
-        source.list_6 = joho.getList_6();
-        source.list_7 = joho.getList_7();
-        source.list_8 = joho.getList_8();
-        source.list_9 = joho.getList_9();
-        source.list_10 = joho.getList_10();
 
+    private HihokenshaDaichoReportSource editBody(HihokenshaDaichoReportSource source) {
+        source.printTimeStamp = joho.get印刷日時();
+        source.title = joho.getタイトル();
+        source.shichosonCode = joho.get市町村コード() == null ? RString.EMPTY : joho.get市町村コード().value();
+        source.shichosonName = joho.get市町村名称();
+        source.hihokenshaNoTitle = joho.get被保険者番号タイトル();
+        source.hihokenshaNo = joho.get被保険者番号() == null ? RString.EMPTY : joho.get被保険者番号().value();
+        source.shimeiKana = joho.get氏名カナ() == null ? RString.EMPTY : joho.get氏名カナ().value();
+        source.birthYMD = joho.get生年月日();
+        source.seibetsu = joho.get性別();
+        source.setaiCode = joho.get世帯コード() == null ? RString.EMPTY : joho.get世帯コード().value();
+        source.shikibetsuCode = joho.get識別コード() == null ? RString.EMPTY : joho.get識別コード().value();
+        source.shimei = joho.get氏名() == null ? RString.EMPTY : joho.get氏名().value();
+        source.chiku1CodeTitle = joho.get地区タイトル1();
+        source.chiku1Code = joho.get地区コード1() == null ? RString.EMPTY : joho.get地区コード1().value();
+        source.jotai = joho.get状態();
+        source.telNoTitle = joho.get電話番号タイトル();
+        source.jusho = joho.get住所();
+        source.chiku2CodeTitle = joho.get地区タイトル2();
+        source.chiku2Code = joho.get地区コード2() == null ? RString.EMPTY : joho.get地区コード2().value();
+        source.telNo1 = joho.get電話番号１();
+        source.jushoTitle = joho.get住所タイトル();
+        source.telNo2 = joho.get電話番号２();
+        source.chiku3CodeTitle = joho.get地区タイトル3();
+        source.chiku3Code = joho.get地区コード3() == null ? RString.EMPTY : joho.get地区コード3().value();
+        source.gyoseikuCode = joho.get行政区コード() == null ? RString.EMPTY : joho.get行政区コード().value();
+        source.gyoseikuTitle = joho.get行政区タイトル();
+        source.jushoCode = joho.get住所コード() == null ? RString.EMPTY : joho.get住所コード().value();
+        source.jigyoshaNo = joho.get事業者番号();
+        source.jigyoshaName = joho.get事業者名称() == null ? RString.EMPTY : joho.get事業者名称().value();
+        source.kigoNo = joho.get記号番号();
+        source.iryohokenShubetsu = joho.get医療保険種別();
+        source.iryohokenshaName = joho.get医療保険者名称();
+        source.sochiHokensha = joho.get措置保険者タイトル();
+        source.kyuHokensha = joho.get旧保険者タイトル();
         return source;
     }
-    
 }

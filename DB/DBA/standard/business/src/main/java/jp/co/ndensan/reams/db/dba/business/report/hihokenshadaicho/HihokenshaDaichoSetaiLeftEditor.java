@@ -3,64 +3,67 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
+package jp.co.ndensan.reams.db.dba.business.report.hihokenshadaicho;
 
-package jp.co.ndensan.reams.db.dba.business.report.hihokenshashohakkoichiranhyo;
-
-import jp.co.ndensan.reams.db.dba.entity.report.hihokenshashohakkoichiranhyo.HihokenshashoHakkoIchiranhyoReportSource;
+import jp.co.ndensan.reams.db.dba.business.core.hihokenshadaichosakusei.HihokenshaDaichoSakusei;
+import jp.co.ndensan.reams.db.dba.entity.db.hihokenshadaichosakusei.SetaiLeftEntity;
+import jp.co.ndensan.reams.db.dba.entity.report.hihokenshadaicho.HihokenshaDaichoReportSource;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
- *
- * 被保険者証発行一覧表Editorです。
+ * 被保険者台帳_老齢福祉Editorです。
  */
-public class HihokenshashoHakkoIchiranHyoEditor implements IHihokenshashoHakkoIchiranHyoEditor {
-    
-    private final HihokenshashoHakkoIchiranHyoItem joho;
-    
+public class HihokenshaDaichoSetaiLeftEditor implements IHihokenshaDaichoEditor {
+
+    private final HihokenshaDaichoSakusei joho;
+    private final int index;
+    private static final int ZERO = 0;
+    private static final int ONE = 1;
+    private static final int TWO = 2;
+    private static final int THREE = 3;
+    private static final int FOUR = 4;
+
     /**
      * コンストラクタです。
-     * @param joho 一覧表証発行者Entityリストです
+     *
+     * @param joho 被保険者台帳
+     * @param index Index
      */
-    public HihokenshashoHakkoIchiranHyoEditor(HihokenshashoHakkoIchiranHyoItem joho) {
+    public HihokenshaDaichoSetaiLeftEditor(HihokenshaDaichoSakusei joho, int index) {
         this.joho = joho;
+        this.index = index;
     }
 
     /**
-     * 被保険者証発行一覧表editです。
-     * @param source 被保険者証発行一覧表Source
-     * @return 要介護認定業務進捗状況一覧表
+     * 被保険者台帳ReportSourceを作成します。
+     *
+     * @param source 被保険者台帳ReportSource
+     * @return 被保険者台帳ReportSource
      */
     @Override
-    public HihokenshashoHakkoIchiranhyoReportSource edit(HihokenshashoHakkoIchiranhyoReportSource source) {
+    public HihokenshaDaichoReportSource edit(HihokenshaDaichoReportSource source) {
+        if (joho == null || joho.get世帯左情報().get世帯左No().size() < index) {
+            return source;
+        }
         return editBody(source);
     }
-    
-    private HihokenshashoHakkoIchiranhyoReportSource editBody(HihokenshashoHakkoIchiranhyoReportSource source) {
-        source.printTimeStamp = joho.getPrintTimeStamp();
-        source.shichosonName = joho.getShichosonName();
-        source.shichosonCode = joho.getShichosonCode();
-        source.shutsuryokujun1 = joho.getShutsuryokujun1();
-        source.shutsuryokujun2 = joho.getShutsuryokujun2();
-        source.shutsuryokujun3 = joho.getShutsuryokujun3();
-        source.shutsuryokujun4 = joho.getShutsuryokujun4();
-        source.shutsuryokujun5 = joho.getShutsuryokujun5();
-        source.kaipage1 = joho.getKaipage1();
-        source.kaipage2 = joho.getKaipage2();
-        source.kaipage3 = joho.getKaipage3();
-        source.kaipage4 = joho.getKaipage4();
-        source.kaipage5 = joho.getKaipage5();
-        source.kofujiyutitle = joho.getKofujiyutitle();
-        source.list_1 = joho.getList_1();
-        source.list_2 = joho.getList_2();
-        source.list_3 = joho.getList_3();
-        source.list_4 = joho.getList_4();
-        source.list_5 = joho.getList_5();
-        source.list_6 = joho.getList_6();
-        source.list_7 = joho.getList_7();
-        source.list_8 = joho.getList_8();
-        source.list_9 = joho.getList_9();
-        source.list_10 = joho.getList_10();
 
+    private HihokenshaDaichoReportSource editBody(HihokenshaDaichoReportSource source) {
+        SetaiLeftEntity 世帯左情報 = joho.get世帯左情報();
+        source.listSetaiLeft_1 = 世帯左情報.get世帯左No().get(index);
+        source.listSetaiLeft_2 = 世帯左情報.get世帯左識別コード().get(index) == null
+                ? RString.EMPTY : 世帯左情報.get世帯左識別コード().get(index).value();
+        if (index == ZERO) {
+            source.setaiinShimei1 = joho.get世帯氏名1();
+        } else if (index == ONE) {
+            source.setaiinShimei2 = joho.get世帯氏名2();
+        } else if (index == TWO) {
+            source.setaiinShimei3 = joho.get世帯氏名3();
+        } else if (index == THREE) {
+            source.setaiinShimei4 = joho.get世帯氏名4();
+        } else if (index == FOUR) {
+            source.setaiinShimei5 = joho.get世帯氏名5();
+        }
         return source;
     }
-    
 }
