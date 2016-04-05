@@ -81,12 +81,12 @@ public class SeikyuGakuShukei {
         if (entityList == null || entityList.isEmpty()) {
             throw new ApplicationException(UrErrorMessages.該当データなし.getMessage());
         }
-        div.getPanelSeikyuShokai().setVisible(false);
+        div.getPanelSeikyugakuShukei().getPanelSeikyuShokai().setVisible(false);
         getHandler(div).initialize(entityList);
         ShikibetsuNoKanriResult shikibetsuNoKanriEntity = ShokanbaraiJyokyoShokai.createInstance()
                 .getShikibetsubangoKanri(サービス年月, 様式番号);
         getHandler(div).setボタン表示制御処理(shikibetsuNoKanriEntity, サービス年月);
-        div.getPanelSeikyuShokai().setVisible(false);
+        div.getPanelSeikyugakuShukei().getPanelSeikyuShokai().setVisible(false);
         return createResponse(div);
     }
 
@@ -97,7 +97,7 @@ public class SeikyuGakuShukei {
      * @return ResponseData
      */
     public ResponseData<SeikyuGakuShukeiDiv> onClick_selectButton(SeikyuGakuShukeiDiv div) {
-        div.getPanelSeikyuShokai().setVisible(true);
+        div.getPanelSeikyugakuShukei().getPanelSeikyuShokai().setVisible(true);
         ServiceTeiKyoShomeishoParameter parameter = ViewStateHolder.get(
                 ViewStateKeys.基本情報パラメータ, ServiceTeiKyoShomeishoParameter.class);
         FlexibleYearMonth サービス年月 = parameter.getServiceTeikyoYM();
@@ -133,7 +133,7 @@ public class SeikyuGakuShukei {
      * @return ResponseData
      */
     public ResponseData<SeikyuGakuShukeiDiv> onClick_btnCloseUp(SeikyuGakuShukeiDiv div) {
-        div.getPanelSeikyuShokai().setVisible(false);
+        div.getPanelSeikyugakuShukei().getPanelSeikyuShokai().setVisible(false);
         return createResponse(div);
     }
 

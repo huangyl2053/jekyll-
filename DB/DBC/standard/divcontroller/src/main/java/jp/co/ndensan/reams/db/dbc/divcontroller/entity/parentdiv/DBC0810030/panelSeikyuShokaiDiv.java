@@ -7,6 +7,7 @@ package jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0810030;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jp.co.ndensan.reams.uz.uza.ui.binding.*;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
+import jp.co.ndensan.reams.uz.uza.ui.binding.domain.*;
 
 /**
  * panelSeikyuShokai のクラスファイル 
@@ -27,8 +28,8 @@ public class panelSeikyuShokaiDiv extends Panel {
     private TextBox txtServiceName;
     @JsonProperty("txtJitsuNissu")
     private TextBoxNum txtJitsuNissu;
-    @JsonProperty("rdoShinsahouhou")
-    private RadioButton rdoShinsahouhou;
+    @JsonProperty("radShinsahouhou")
+    private RadioButton radShinsahouhou;
     @JsonProperty("txtKyufuritsu")
     private TextBoxNum txtKyufuritsu;
     @JsonProperty("txtKeikakuTanyi")
@@ -59,6 +60,24 @@ public class panelSeikyuShokaiDiv extends Panel {
     private TextBoxNum txtRiyoshaFutanDekikata;
     @JsonProperty("txtSagakukinngakuDekikata")
     private TextBoxNum txtSagakukinngakuDekikata;
+    @JsonProperty("line1")
+    private HorizontalLine line1;
+    @JsonProperty("txtShinsaYM")
+    private TextBoxYearMonth txtShinsaYM;
+    @JsonProperty("txtShikyuKubun")
+    private TextBox txtShikyuKubun;
+    @JsonProperty("txtServiceTani")
+    private TextBoxNum txtServiceTani;
+    @JsonProperty("txtShiharaiKingaku")
+    private TextBoxNum txtShiharaiKingaku;
+    @JsonProperty("txtZougenten")
+    private TextBoxNum txtZougenten;
+    @JsonProperty("txtNote1")
+    private TextBoxMultiLine txtNote1;
+    @JsonProperty("txtNote2")
+    private TextBoxMultiLine txtNote2;
+    @JsonProperty("txtNote3")
+    private TextBoxMultiLine txtNote3;
     @JsonProperty("btnClose")
     private Button btnClose;
 
@@ -123,21 +142,21 @@ public class panelSeikyuShokaiDiv extends Panel {
     }
 
     /*
-     * getrdoShinsahouhou
-     * @return rdoShinsahouhou
+     * getradShinsahouhou
+     * @return radShinsahouhou
      */
-    @JsonProperty("rdoShinsahouhou")
-    public RadioButton getRdoShinsahouhou() {
-        return rdoShinsahouhou;
+    @JsonProperty("radShinsahouhou")
+    public RadioButton getRadShinsahouhou() {
+        return radShinsahouhou;
     }
 
     /*
-     * setrdoShinsahouhou
-     * @param rdoShinsahouhou rdoShinsahouhou
+     * setradShinsahouhou
+     * @param radShinsahouhou radShinsahouhou
      */
-    @JsonProperty("rdoShinsahouhou")
-    public void setRdoShinsahouhou(RadioButton rdoShinsahouhou) {
-        this.rdoShinsahouhou = rdoShinsahouhou;
+    @JsonProperty("radShinsahouhou")
+    public void setRadShinsahouhou(RadioButton radShinsahouhou) {
+        this.radShinsahouhou = radShinsahouhou;
     }
 
     /*
@@ -408,6 +427,168 @@ public class panelSeikyuShokaiDiv extends Panel {
     @JsonProperty("txtSagakukinngakuDekikata")
     public void setTxtSagakukinngakuDekikata(TextBoxNum txtSagakukinngakuDekikata) {
         this.txtSagakukinngakuDekikata = txtSagakukinngakuDekikata;
+    }
+
+    /*
+     * getline1
+     * @return line1
+     */
+    @JsonProperty("line1")
+    public HorizontalLine getLine1() {
+        return line1;
+    }
+
+    /*
+     * setline1
+     * @param line1 line1
+     */
+    @JsonProperty("line1")
+    public void setLine1(HorizontalLine line1) {
+        this.line1 = line1;
+    }
+
+    /*
+     * gettxtShinsaYM
+     * @return txtShinsaYM
+     */
+    @JsonProperty("txtShinsaYM")
+    public TextBoxYearMonth getTxtShinsaYM() {
+        return txtShinsaYM;
+    }
+
+    /*
+     * settxtShinsaYM
+     * @param txtShinsaYM txtShinsaYM
+     */
+    @JsonProperty("txtShinsaYM")
+    public void setTxtShinsaYM(TextBoxYearMonth txtShinsaYM) {
+        this.txtShinsaYM = txtShinsaYM;
+    }
+
+    /*
+     * gettxtShikyuKubun
+     * @return txtShikyuKubun
+     */
+    @JsonProperty("txtShikyuKubun")
+    public TextBox getTxtShikyuKubun() {
+        return txtShikyuKubun;
+    }
+
+    /*
+     * settxtShikyuKubun
+     * @param txtShikyuKubun txtShikyuKubun
+     */
+    @JsonProperty("txtShikyuKubun")
+    public void setTxtShikyuKubun(TextBox txtShikyuKubun) {
+        this.txtShikyuKubun = txtShikyuKubun;
+    }
+
+    /*
+     * gettxtServiceTani
+     * @return txtServiceTani
+     */
+    @JsonProperty("txtServiceTani")
+    public TextBoxNum getTxtServiceTani() {
+        return txtServiceTani;
+    }
+
+    /*
+     * settxtServiceTani
+     * @param txtServiceTani txtServiceTani
+     */
+    @JsonProperty("txtServiceTani")
+    public void setTxtServiceTani(TextBoxNum txtServiceTani) {
+        this.txtServiceTani = txtServiceTani;
+    }
+
+    /*
+     * gettxtShiharaiKingaku
+     * @return txtShiharaiKingaku
+     */
+    @JsonProperty("txtShiharaiKingaku")
+    public TextBoxNum getTxtShiharaiKingaku() {
+        return txtShiharaiKingaku;
+    }
+
+    /*
+     * settxtShiharaiKingaku
+     * @param txtShiharaiKingaku txtShiharaiKingaku
+     */
+    @JsonProperty("txtShiharaiKingaku")
+    public void setTxtShiharaiKingaku(TextBoxNum txtShiharaiKingaku) {
+        this.txtShiharaiKingaku = txtShiharaiKingaku;
+    }
+
+    /*
+     * gettxtZougenten
+     * @return txtZougenten
+     */
+    @JsonProperty("txtZougenten")
+    public TextBoxNum getTxtZougenten() {
+        return txtZougenten;
+    }
+
+    /*
+     * settxtZougenten
+     * @param txtZougenten txtZougenten
+     */
+    @JsonProperty("txtZougenten")
+    public void setTxtZougenten(TextBoxNum txtZougenten) {
+        this.txtZougenten = txtZougenten;
+    }
+
+    /*
+     * gettxtNote1
+     * @return txtNote1
+     */
+    @JsonProperty("txtNote1")
+    public TextBoxMultiLine getTxtNote1() {
+        return txtNote1;
+    }
+
+    /*
+     * settxtNote1
+     * @param txtNote1 txtNote1
+     */
+    @JsonProperty("txtNote1")
+    public void setTxtNote1(TextBoxMultiLine txtNote1) {
+        this.txtNote1 = txtNote1;
+    }
+
+    /*
+     * gettxtNote2
+     * @return txtNote2
+     */
+    @JsonProperty("txtNote2")
+    public TextBoxMultiLine getTxtNote2() {
+        return txtNote2;
+    }
+
+    /*
+     * settxtNote2
+     * @param txtNote2 txtNote2
+     */
+    @JsonProperty("txtNote2")
+    public void setTxtNote2(TextBoxMultiLine txtNote2) {
+        this.txtNote2 = txtNote2;
+    }
+
+    /*
+     * gettxtNote3
+     * @return txtNote3
+     */
+    @JsonProperty("txtNote3")
+    public TextBoxMultiLine getTxtNote3() {
+        return txtNote3;
+    }
+
+    /*
+     * settxtNote3
+     * @param txtNote3 txtNote3
+     */
+    @JsonProperty("txtNote3")
+    public void setTxtNote3(TextBoxMultiLine txtNote3) {
+        this.txtNote3 = txtNote3;
     }
 
     /*
