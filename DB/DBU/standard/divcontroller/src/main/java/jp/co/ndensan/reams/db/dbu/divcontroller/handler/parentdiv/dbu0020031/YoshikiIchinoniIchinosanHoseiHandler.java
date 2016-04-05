@@ -40,8 +40,8 @@ public class YoshikiIchinoniIchinosanHoseiHandler {
     private static final Code 集計番号_０９００ = new Code("0900");
     private static final Code 集計番号_１０２０ = new Code("1020");
     private static final Code 集計番号_１００２ = new Code("1002");
-    private static final RString 修正状態 = new RString("修正状態");
-    private static final RString 削除状態 = new RString("削除状態");
+    private static final RString 修正状態 = new RString("更新");
+    private static final RString 削除状態 = new RString("削除");
     private static final RString 食費_居住費3 = new RString("(3)食費・居住費に係る負担限度額認定（総括）");
     private static final RString 食費_居住費6 = new RString("(6)食費・居住費に係る負担限度額認定（再掲：第２号被保険者分）");
     private static final RString 利用者負担滅額4 = new RString("(4)利用者負担滅額・免除認定（総括）");

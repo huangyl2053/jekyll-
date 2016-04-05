@@ -32,8 +32,7 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
  */
 public class YoshikiIchinoniIchinosanHosei {
 
-    private static final RString 削除状態 = new RString("削除状態");
-    private static final RString 削除 = new RString("削除");
+    private static final RString 削除状態 = new RString("削除");
     private static final RString 更新 = new RString("更新");
     private static final RString 合計計算結果 = new RString("合計計算結果");
     private static final RString 計 = new RString("計");
@@ -101,7 +100,7 @@ public class YoshikiIchinoniIchinosanHosei {
             if (!ResponseHolder.isReRequest()) {
                 getHandler(div).delete(引き継ぎデータ);
                 return ResponseData.of(div).addMessage(UrInformationMessages.正常終了.getMessage()
-                        .replace(削除.toString())).respond();
+                        .replace(削除状態.toString())).respond();
             }
             if (new RString(UrInformationMessages.正常終了.getMessage().getCode())
                     .equals(ResponseHolder.getMessageCode())) {
