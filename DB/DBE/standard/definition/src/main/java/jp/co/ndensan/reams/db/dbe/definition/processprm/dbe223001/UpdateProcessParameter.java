@@ -7,7 +7,7 @@
 package jp.co.ndensan.reams.db.dbe.definition.processprm.dbe223001;
 
 import java.util.List;
-import jp.co.ndensan.reams.db.dbe.definition.mybatisprm.dbe223001.UpdateMybatisParameter;
+import jp.co.ndensan.reams.db.dbz.definition.mybatisprm.relate.UpdateMybatisParameter;
 import jp.co.ndensan.reams.uz.uza.batch.parameter.IBatchProcessParameter;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 

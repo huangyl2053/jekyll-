@@ -5,6 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbe.definition.batchprm.dbe233001;
 
+import jp.co.ndensan.reams.db.dbz.definition.mybatisprm.relate.ShujiiUpdateMybatisParameter;
 import java.util.List;
 import jp.co.ndensan.reams.uz.uza.batch.parameter.IBatchProcessParameter;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
