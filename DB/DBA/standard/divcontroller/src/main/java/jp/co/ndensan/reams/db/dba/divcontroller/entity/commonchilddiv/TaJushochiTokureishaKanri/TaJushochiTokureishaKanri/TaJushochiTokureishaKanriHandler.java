@@ -478,6 +478,15 @@ public class TaJushochiTokureishaKanriHandler {
         }
     }
 
+    /**
+     * 適用情報一覧を取得します。
+     *
+     * @return 適用情報一覧 適用情報一覧
+     */
+    public List<dgJushochiTokureiRireki_Row> get適用情報一覧() {
+        return div.getDgJushochiTokureiRireki().getDataSource();
+    }
+
     private void set一覧の設定(List<TaJushochiTokureisyaKanriMaster> 適用情報List) {
         List<dgJushochiTokureiRireki_Row> rowList = new ArrayList<>();
         for (TaJushochiTokureisyaKanriMaster master : 適用情報List) {
