@@ -384,9 +384,10 @@ public class TaJushochiTokureishaKanriHandler {
 
     /**
      * 他住所地特例者の共有子DIVの画面内容から、他市町村住所地特例情報をDBに反映します。
+     *
+     * @param 識別コード 識別コード
      */
-    public void saveTaJushochiTokurei() {
-        ShikibetsuCode 識別コード = ViewStateHolder.get(ViewStateKeys.識別コード, ShikibetsuCode.class);
+    public void saveTaJushochiTokurei(ShikibetsuCode 識別コード) {
         List<dgJushochiTokureiRireki_Row> rowList = div.getDgJushochiTokureiRireki().getDataSource();
         Models<TashichosonJushochiTokureiIdentifier, TashichosonJushochiTokurei> 他住所地特例Model
                 = ViewStateHolder.get(jp.co.ndensan.reams.db.dbz.divcontroller.viewbox.ViewStateKeys.他住所地特例者管理_他住所地特例, Models.class);

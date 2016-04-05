@@ -358,8 +358,8 @@ public class TaJushochiTokureishaKanriDiv extends Panel implements ITaJushochiTo
      * 他住所地特例者の共有子DIVの画面内容から、他市町村住所地特例情報をDBに反映します。
      */
     @Override
-    public void saveTaJushochiTokurei() {
-        getHandler().saveTaJushochiTokurei();
+    public void saveTaJushochiTokurei(ShikibetsuCode 識別コード) {
+        getHandler().saveTaJushochiTokurei(識別コード);
     }
 
     /**
