@@ -2,8 +2,10 @@ package jp.co.ndensan.reams.db.dbz.service.core.kanri;
 
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBU;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.ChohyoSeigyoKyotsu;
+import jp.co.ndensan.reams.db.dbz.business.report.util.EditedAtesaki;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7065ChohyoSeigyoKyotsuEntity;
 import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT7065ChohyoSeigyoKyotsuDac;
+import jp.co.ndensan.reams.ua.uax.business.core.atesaki.IAtesaki;
 import jp.co.ndensan.reams.ua.uax.business.core.jusho.JushoEditorBuilder;
 import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.IShikibetsuTaisho;
 import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.ShikibetsuTaishoFactory;
@@ -16,6 +18,7 @@ import jp.co.ndensan.reams.ua.uax.definition.core.enumeratedtype.JushoKangaiEdit
 import jp.co.ndensan.reams.ua.uax.definition.core.enumeratedtype.JushoKannaiEditPattern;
 import jp.co.ndensan.reams.ua.uax.definition.core.enumeratedtype.JushoPrefix;
 import jp.co.ndensan.reams.ua.uax.entity.db.basic.UaFt200FindShikibetsuTaishoEntity;
+import jp.co.ndensan.reams.ur.urz.business.core.association.Association;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.ur.urz.service.core.association.AssociationFinderFactory;
 import jp.co.ndensan.reams.uz.uza.biz.ReportId;
@@ -268,10 +271,23 @@ public class JushoHenshu {
      * @param 帳票共通情報 帳票共通情報
      * @return 編集後宛先
      */
-//    TODO 編集後宛先 仕様不一致、確認中　王暁冬
-//    public EditedAtesaki create編集後宛先(IAtesaki 宛先, Association 地方公共団体, ChohyoSeigyoKyotsu 帳票共通情報) {
-//        return new EditedAtesaki(宛先, 地方公共団体, 帳票共通情報);
-//    }
+    public EditedAtesaki create編集後宛先(
+            IAtesaki 宛先,
+            Association 地方公共団体,
+            ChohyoSeigyoKyotsu 帳票共通情報) {
+        return new EditedAtesaki(
+                宛先,
+                地方公共団体,
+                帳票共通情報,
+                null,
+                null,
+                usesCustomerBarcode(帳票共通情報),
+                getJushoKangaiEditPattern(帳票共通情報),
+                getJushoPrefix(帳票共通情報),
+                getJushoKannaiEditPattern(帳票共通情報),
+                getGyoseikuInjiKubun(帳票共通情報));
+    }
+
     private JushoKannaiEditPattern get管内住所編集パターンBy帳票自体(ChohyoSeigyoKyotsu 帳票共通情報) {
 
         if (帳票共通情報.is住所編集方書表示有無()) {
