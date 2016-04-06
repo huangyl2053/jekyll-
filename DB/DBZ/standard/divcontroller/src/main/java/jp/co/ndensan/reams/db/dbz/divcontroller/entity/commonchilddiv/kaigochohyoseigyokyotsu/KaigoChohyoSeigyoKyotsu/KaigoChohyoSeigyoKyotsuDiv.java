@@ -7,8 +7,7 @@ package jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.kaigochoh
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import jp.co.ndensan.reams.db.dbz.divcontroller.entity.parentdiv.IKaigoAtesakiJushoSetteiDiv;
-import jp.co.ndensan.reams.db.dbz.divcontroller.entity.parentdiv.KaigoAtesakiJushoSetteiDiv;
+import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.kaigoatesakijushosettei.KaigoAtesakiJushoSettei.IKaigoAtesakiJushoSetteiDiv;
 import jp.co.ndensan.reams.ur.urz.divcontroller.entity.commonchilddiv.chohyoshutsuryokujun.ChohyoShutsuryokujun.ChohyoShutsuryokujunDiv;
 import jp.co.ndensan.reams.ur.urz.divcontroller.entity.commonchilddiv.chohyoshutsuryokujun.ChohyoShutsuryokujun.IChohyoShutsuryokujunDiv;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -16,11 +15,12 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.*;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 
 /**
- * KaigoChohyoSeigyoKyotsu のクラスファイル 
- * 
+ * KaigoChohyoSeigyoKyotsu のクラスファイル
+ *
  * @author 自動生成
  */
 public class KaigoChohyoSeigyoKyotsuDiv extends Panel implements IKaigoChohyoSeigyoKyotsuDiv {
+
     // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：バージョン情報無し">
     /*
      * [ private の作成 ]
@@ -280,7 +280,7 @@ public class KaigoChohyoSeigyoKyotsuDiv extends Panel implements IKaigoChohyoSei
     }
 
     @JsonIgnore
-    public void  setHyojiCodeName(HyojiCodeNameDiv HyojiCodeName) {
+    public void setHyojiCodeName(HyojiCodeNameDiv HyojiCodeName) {
         this.getConfigInfo1().setHyojiCodeName(HyojiCodeName);
     }
 
@@ -290,7 +290,7 @@ public class KaigoChohyoSeigyoKyotsuDiv extends Panel implements IKaigoChohyoSei
     }
 
     @JsonIgnore
-    public void  setDdlHyojiCodeName1(DropDownList ddlHyojiCodeName1) {
+    public void setDdlHyojiCodeName1(DropDownList ddlHyojiCodeName1) {
         this.getConfigInfo1().getHyojiCodeName().setDdlHyojiCodeName1(ddlHyojiCodeName1);
     }
 
@@ -300,7 +300,7 @@ public class KaigoChohyoSeigyoKyotsuDiv extends Panel implements IKaigoChohyoSei
     }
 
     @JsonIgnore
-    public void  setDdlHyojiCodeName2(DropDownList ddlHyojiCodeName2) {
+    public void setDdlHyojiCodeName2(DropDownList ddlHyojiCodeName2) {
         this.getConfigInfo1().getHyojiCodeName().setDdlHyojiCodeName2(ddlHyojiCodeName2);
     }
 
@@ -310,7 +310,7 @@ public class KaigoChohyoSeigyoKyotsuDiv extends Panel implements IKaigoChohyoSei
     }
 
     @JsonIgnore
-    public void  setDdlHyojiCodeName3(DropDownList ddlHyojiCodeName3) {
+    public void setDdlHyojiCodeName3(DropDownList ddlHyojiCodeName3) {
         this.getConfigInfo1().getHyojiCodeName().setDdlHyojiCodeName3(ddlHyojiCodeName3);
     }
 
@@ -320,7 +320,7 @@ public class KaigoChohyoSeigyoKyotsuDiv extends Panel implements IKaigoChohyoSei
     }
 
     @JsonIgnore
-    public void  setRadSetaiNushiHyoji(RadioButton radSetaiNushiHyoji) {
+    public void setRadSetaiNushiHyoji(RadioButton radSetaiNushiHyoji) {
         this.getConfigInfo2().setRadSetaiNushiHyoji(radSetaiNushiHyoji);
     }
 
@@ -330,7 +330,7 @@ public class KaigoChohyoSeigyoKyotsuDiv extends Panel implements IKaigoChohyoSei
     }
 
     @JsonIgnore
-    public void  setRadDainoninHyoji(RadioButton radDainoninHyoji) {
+    public void setRadDainoninHyoji(RadioButton radDainoninHyoji) {
         this.getConfigInfo2().setRadDainoninHyoji(radDainoninHyoji);
     }
 
@@ -340,7 +340,7 @@ public class KaigoChohyoSeigyoKyotsuDiv extends Panel implements IKaigoChohyoSei
     }
 
     @JsonIgnore
-    public void  setRadKozaMask(RadioButton radKozaMask) {
+    public void setRadKozaMask(RadioButton radKozaMask) {
         this.getConfigInfo2().setRadKozaMask(radKozaMask);
     }
 
@@ -350,7 +350,7 @@ public class KaigoChohyoSeigyoKyotsuDiv extends Panel implements IKaigoChohyoSei
     }
 
     @JsonIgnore
-    public void  setRadKozaMeigininKana(RadioButton radKozaMeigininKana) {
+    public void setRadKozaMeigininKana(RadioButton radKozaMeigininKana) {
         this.getConfigInfo2().setRadKozaMeigininKana(radKozaMeigininKana);
     }
 
@@ -360,7 +360,7 @@ public class KaigoChohyoSeigyoKyotsuDiv extends Panel implements IKaigoChohyoSei
     }
 
     @JsonIgnore
-    public void  setRadMonjiKireCrtlGaibu(RadioButton radMonjiKireCrtlGaibu) {
+    public void setRadMonjiKireCrtlGaibu(RadioButton radMonjiKireCrtlGaibu) {
         this.getConfigInfo3().setRadMonjiKireCrtlGaibu(radMonjiKireCrtlGaibu);
     }
 
@@ -370,7 +370,7 @@ public class KaigoChohyoSeigyoKyotsuDiv extends Panel implements IKaigoChohyoSei
     }
 
     @JsonIgnore
-    public void  setRadMonjiKireCrtlNaibu(RadioButton radMonjiKireCrtlNaibu) {
+    public void setRadMonjiKireCrtlNaibu(RadioButton radMonjiKireCrtlNaibu) {
         this.getConfigInfo3().setRadMonjiKireCrtlNaibu(radMonjiKireCrtlNaibu);
     }
 
@@ -380,7 +380,7 @@ public class KaigoChohyoSeigyoKyotsuDiv extends Panel implements IKaigoChohyoSei
     }
 
     @JsonIgnore
-    public void  setRadMojiKireBunriCtrl(RadioButton radMojiKireBunriCtrl) {
+    public void setRadMojiKireBunriCtrl(RadioButton radMojiKireBunriCtrl) {
         this.getConfigInfo3().setRadMojiKireBunriCtrl(radMojiKireBunriCtrl);
     }
 
@@ -390,7 +390,7 @@ public class KaigoChohyoSeigyoKyotsuDiv extends Panel implements IKaigoChohyoSei
     }
 
     @JsonIgnore
-    public void  setRadDaikoPrintUmu(RadioButton radDaikoPrintUmu) {
+    public void setRadDaikoPrintUmu(RadioButton radDaikoPrintUmu) {
         this.getConfigInfo3().setRadDaikoPrintUmu(radDaikoPrintUmu);
     }
 
@@ -400,7 +400,7 @@ public class KaigoChohyoSeigyoKyotsuDiv extends Panel implements IKaigoChohyoSei
     }
 
     @JsonIgnore
-    public void  setDdlChohyoMongonYoshiki(DropDownList ddlChohyoMongonYoshiki) {
+    public void setDdlChohyoMongonYoshiki(DropDownList ddlChohyoMongonYoshiki) {
         this.getConfigInfo3().setDdlChohyoMongonYoshiki(ddlChohyoMongonYoshiki);
     }
 
@@ -410,7 +410,7 @@ public class KaigoChohyoSeigyoKyotsuDiv extends Panel implements IKaigoChohyoSei
     }
 
     @JsonIgnore
-    public void  setLin1(HorizontalLine lin1) {
+    public void setLin1(HorizontalLine lin1) {
         this.getConfigInfo4().setLin1(lin1);
     }
 
@@ -420,7 +420,7 @@ public class KaigoChohyoSeigyoKyotsuDiv extends Panel implements IKaigoChohyoSei
     }
 
     @JsonIgnore
-    public void  setBarCode(BarCodeDiv BarCode) {
+    public void setBarCode(BarCodeDiv BarCode) {
         this.getConfigInfo4().setBarCode(BarCode);
     }
 
@@ -430,7 +430,7 @@ public class KaigoChohyoSeigyoKyotsuDiv extends Panel implements IKaigoChohyoSei
     }
 
     @JsonIgnore
-    public void  setDdlBarCodeUmu(DropDownList ddlBarCodeUmu) {
+    public void setDdlBarCodeUmu(DropDownList ddlBarCodeUmu) {
         this.getConfigInfo4().getBarCode().setDdlBarCodeUmu(ddlBarCodeUmu);
     }
 
@@ -440,7 +440,7 @@ public class KaigoChohyoSeigyoKyotsuDiv extends Panel implements IKaigoChohyoSei
     }
 
     @JsonIgnore
-    public void  setDdlBarCodeHenshuHoho(DropDownList ddlBarCodeHenshuHoho) {
+    public void setDdlBarCodeHenshuHoho(DropDownList ddlBarCodeHenshuHoho) {
         this.getConfigInfo4().getBarCode().setDdlBarCodeHenshuHoho(ddlBarCodeHenshuHoho);
     }
 
@@ -450,7 +450,7 @@ public class KaigoChohyoSeigyoKyotsuDiv extends Panel implements IKaigoChohyoSei
     }
 
     @JsonIgnore
-    public void  setBtnBunshoNo(ButtonDialog btnBunshoNo) {
+    public void setBtnBunshoNo(ButtonDialog btnBunshoNo) {
         this.getCommonButtonPanel().setBtnBunshoNo(btnBunshoNo);
     }
 
@@ -460,7 +460,7 @@ public class KaigoChohyoSeigyoKyotsuDiv extends Panel implements IKaigoChohyoSei
     }
 
     @JsonIgnore
-    public void  setBtnTsuchishoTeikeibun(ButtonDialog btnTsuchishoTeikeibun) {
+    public void setBtnTsuchishoTeikeibun(ButtonDialog btnTsuchishoTeikeibun) {
         this.getCommonButtonPanel().setBtnTsuchishoTeikeibun(btnTsuchishoTeikeibun);
     }
 
@@ -470,7 +470,7 @@ public class KaigoChohyoSeigyoKyotsuDiv extends Panel implements IKaigoChohyoSei
     }
 
     @JsonIgnore
-    public void  setBtnGyomuNinshohsa(ButtonDialog btnGyomuNinshohsa) {
+    public void setBtnGyomuNinshohsa(ButtonDialog btnGyomuNinshohsa) {
         this.getCommonButtonPanel().setBtnGyomuNinshohsa(btnGyomuNinshohsa);
     }
 
@@ -480,11 +480,10 @@ public class KaigoChohyoSeigyoKyotsuDiv extends Panel implements IKaigoChohyoSei
     }
 
     @JsonIgnore
-    public void  setBtnKaigoToiawasesaki(ButtonDialog btnKaigoToiawasesaki) {
+    public void setBtnKaigoToiawasesaki(ButtonDialog btnKaigoToiawasesaki) {
         this.getCommonButtonPanel().setBtnKaigoToiawasesaki(btnKaigoToiawasesaki);
     }
 
     // </editor-fold>
     //--------------- この行より下にコードを追加してください -------------------
-
 }
