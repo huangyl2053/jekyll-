@@ -15,7 +15,7 @@ import jp.co.ndensan.reams.uz.uza.report.ReportEditorJoiner;
 public class KarisanteiHokenryoNonyuTsuchishoGinfuriBuilder implements IKarisanteiHokenryoNonyuTsuchishoGinfuriBuilder {
 
     private final IKarisanteiHokenryoNonyuTsuchishoGinfuriEditor editor;
-    //private final IKarisanteiHokenryoNonyuTsuchishoGinfuriEditor compNinshoshaEditor;
+    private final IKarisanteiHokenryoNonyuTsuchishoGinfuriEditor compNinshoshaEditor;
     private final IKarisanteiHokenryoNonyuTsuchishoGinfuriEditor compSofubutsuAtesakiEditor;
     private final IKarisanteiHokenryoNonyuTsuchishoGinfuriEditor compSofubutsuAtesaki2Editor;
     private final IKarisanteiHokenryoNonyuTsuchishoGinfuriEditor compNofushoItemEditor;
@@ -24,18 +24,19 @@ public class KarisanteiHokenryoNonyuTsuchishoGinfuriBuilder implements IKarisant
      * インスタンスを生成します。
      *
      * @param editor {@link IKarisanteiHokenryoNonyuTsuchishoGinfuriEditor}
+     * @param compNinshoshaEditor {@link IKarisanteiHokenryoNonyuTsuchishoGinfuriEditor}
      * @param compSofubutsuAtesakiEditor {@link IKarisanteiHokenryoNonyuTsuchishoGinfuriEditor}
      * @param compSofubutsuAtesaki2Editor {@link IKarisanteiHokenryoNonyuTsuchishoGinfuriEditor}
      * @param compNofushoItemEditor {@link IKarisanteiHokenryoNonyuTsuchishoGinfuriEditor}
      */
     public KarisanteiHokenryoNonyuTsuchishoGinfuriBuilder(
             IKarisanteiHokenryoNonyuTsuchishoGinfuriEditor editor,
-            //IKarisanteiHokenryoNonyuTsuchishoGinfuriEditor compNinshoshaEditor,
+            IKarisanteiHokenryoNonyuTsuchishoGinfuriEditor compNinshoshaEditor,
             IKarisanteiHokenryoNonyuTsuchishoGinfuriEditor compSofubutsuAtesakiEditor,
             IKarisanteiHokenryoNonyuTsuchishoGinfuriEditor compSofubutsuAtesaki2Editor,
             IKarisanteiHokenryoNonyuTsuchishoGinfuriEditor compNofushoItemEditor) {
         this.editor = editor;
-        //this.compNinshoshaEditor = compNinshoshaEditor;
+        this.compNinshoshaEditor = compNinshoshaEditor;
         this.compNofushoItemEditor = compNofushoItemEditor;
         this.compSofubutsuAtesakiEditor = compSofubutsuAtesakiEditor;
         this.compSofubutsuAtesaki2Editor = compSofubutsuAtesaki2Editor;
@@ -45,7 +46,7 @@ public class KarisanteiHokenryoNonyuTsuchishoGinfuriBuilder implements IKarisant
     public KarisanteiHokenryoNonyuTsuchishoGinfuriSource build() {
         return ReportEditorJoiner.from(new KarisanteiHokenryoNonyuTsuchishoGinfuriSource())
                 .join(editor)
-                //.join(compNinshoshaEditor)
+                .join(compNinshoshaEditor)
                 .join(compNofushoItemEditor)
                 .join(compSofubutsuAtesakiEditor).join(compSofubutsuAtesaki2Editor).buildSource();
     }
