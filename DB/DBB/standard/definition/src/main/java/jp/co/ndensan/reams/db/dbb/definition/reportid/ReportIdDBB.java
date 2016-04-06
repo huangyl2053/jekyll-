@@ -15,6 +15,156 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 public enum ReportIdDBB {
 
     /**
+     * 保険料納入通知書（本算定）【コンビニ角公タイプ】
+     */
+    DBB100059(new ReportId("DBB100059_NonyuTsuchishoCVSKakuko"), new RString("保険料納入通知書（本算定）【コンビニ角公タイプ】")),
+    /**
+     * 保険料納入通知書（本算定）【コンビニ角公タイプ（連帳）】
+     */
+    DBB100060(new ReportId("DBB100060_NonyuTsuchishoCVSKakukoRencho"), new RString("保険料納入通知書（本算定）【コンビニ角公タイプ（連帳）】")),
+    /**
+     * 保険料納入通知書（本算定）【コンビニマルチ収納タイプ通知書（連帳）】
+     */
+    DBB100062(new ReportId("DBB100062_NonyuTsuchishoCVSMultiRencho"),
+            new RString("保険料納入通知書（本算定）【コンビニマルチ収納タイプ通知書（連帳）】")),
+    /**
+     * 保険料納入通知書（本算定）【コンビニマルチ収納タイプ納付書】
+     */
+    DBB100061(new ReportId("DBB100061_NonyuTsuchishoCVSMulti"),
+            new RString("保険料納入通知書（本算定）【コンビニマルチ収納タイプ納付書】")),
+    /**
+     * 保険料納入通知書（本算定）【ブック（口振依頼あり通知書＋納付書）タイプ（連帳）】
+     */
+    DBB100057(new ReportId("DBB100057_NonyuTsuchishoBookFuriKaeAriRencho"),
+            new RString("保険料納入通知書（本算定）【ブック（口振依頼あり通知書＋納付書）タイプ（連帳）】")),
+    /**
+     * 保険料納入通知書（本算定）【ブック（口振依頼なし通知書＋納付書）タイプ（連帳）】
+     */
+    DBB100058(new ReportId("DBB100058_HokenryoNonyuTsuchishoBookFuriKaeNashiRencho"),
+            new RString("保険料納入通知書（本算定）【ブック（口振依頼なし通知書＋納付書）タイプ（連帳）】")),
+    /**
+     * 保険料納入通知書（本算定）【銀振4期タイプ（連帳）】
+     */
+    DBB100052(new ReportId("DBB100052_HokenryoNonyuTsuchishoGinfuriFourKiRencho"),
+            new RString("保険料納入通知書（本算定）【銀振4期タイプ（連帳）】")),
+    /**
+     * 保険料納入通知書（本算定）【銀振5期タイプ（連帳）】
+     */
+    DBB100054(new ReportId("DBB100054_HokenryoNonyuTsuchishoGinfuriFiveKiRencho"),
+            new RString("保険料納入通知書（本算定）【銀振5期タイプ（連帳）】")),
+    /**
+     * 保険料納入通知書（本算定）【期毎タイプ（連帳）】
+     */
+    DBB100046(new ReportId("DBB100046_HokenryoNonyuTsuchishoKigotoRencho"),
+            new RString("保険料納入通知書（本算定）【期毎タイプ（連帳）】")),
+    /**
+     * 保険料納入通知書（本算定）【コンビニ期毎タイプ（連帳）】
+     */
+    DBB100064(new ReportId("DBB100064_NonyuTsuchishoCVSKigotoRencho"),
+            new RString("保険料納入通知書（本算定）【コンビニ期毎タイプ（連帳）】")),
+    /**
+     * 特別徴収開始通知書（本算定）【シーラタイプ（連帳）】
+     */
+    DBB100035(new ReportId("DBB100035_TokubetsuChoshuKaishiTsuchishoSealerRencho"),
+            new RString("特別徴収開始通知書（本算定）【シーラタイプ（連帳）】")),
+    /**
+     * 特別徴収開始通知書（本算定）【B5横タイプ2（連帳）】
+     */
+    DBB100037(new ReportId("DBB100037_TokubetsuChoshuKaishiTsuchishoB52Rencho"),
+            new RString("特別徴収開始通知書（本算定）【B5横タイプ2（連帳）】")),
+    /**
+     * 特別徴収開始通知書（本算定）【B5横タイプ（連帳）】
+     */
+    DBB100033(new ReportId("DBB100033_TokubetsuChoshuKaishiTsuchishoB5Rencho"),
+            new RString("特別徴収開始通知書（本算定）【B5横タイプ（連帳）】")),
+    /**
+     * 介護保険料徴収猶予取消通知書【B5横タイプ】
+     */
+    DBB100083(new ReportId("DBB100083_KaigoHokenHokenryoChoshuyoyoTorikeshiTsuchishoB5Yoko"),
+            new RString("介護保険料徴収猶予取消通知書【B5横タイプ】")),
+    /**
+     * 介護保険料徴収猶予取消通知書【A4縦タイプ】
+     */
+    DBB100084(new ReportId("DBB100084_KaigoHokenHokenryoChoshuyoyoTorikeshiTsuchishoA4Tate"),
+            new RString("介護保険料徴収猶予取消通知書【A4縦タイプ】")),
+    /**
+     * 介護保険料減免取消通知書【B5横タイプ】
+     */
+    DBB100079(new ReportId("DBB100079_KaigoHokenHokenryoGenmenTorikeshiTsuchishoB5Yoko"), new RString("介護保険料減免取消通知書【B5横タイプ】")),
+    /**
+     * 介護保険料減免取消通知書【A4縦タイプ】
+     */
+    DBB100080(new ReportId("DBB100080_KaigoHokenHokenryoGenmenTorikeshiTsuchishoA4Tate"), new RString("介護保険料減免取消通知書【A4縦タイプ】")),
+    /**
+     * 介護保険料額決定通知書【B5横タイプ】
+     */
+    DBB100039(new ReportId("DBB100039_KaigoHokenHokenryogakuKetteiTsuchishoB5Yoko"), new RString("介護保険料額決定通知書【B5横タイプ】")),
+    /**
+     * 介護保険料額決定通知書【A4縦タイプ】
+     */
+    DBB100040(new ReportId("DBB100040_KaigoHokenHokenryogakuKetteiTsuchishoA4Tate"), new RString("介護保険料額決定通知書【A4縦タイプ】")),
+    /**
+     * 介護保険料額変更兼特別徴収中止通知書【B5横タイプ】
+     */
+    DBB100042(new ReportId("DBB100042_KaigoHokenHokenryogakuHenkoKenChushiTsuchishoB5Yoko"),
+            new RString("介護保険料額変更兼特別徴収中止通知書【B5横タイプ】")),
+    /**
+     * 介護保険料額変更兼特別徴収中止通知書【A4縦タイプ】
+     */
+    DBB100043(new ReportId("DBB100043_KaigoHokenHokenryogakuHenkoKenChushiTsuchishoA4Tate"),
+            new RString("介護保険料額変更兼特別徴収中止通知書【A4縦タイプ】")),
+    /**
+     * 特別徴収開始通知書（本算定）【B5横タイプ】
+     */
+    DBB100032(new ReportId("DBB100032_TokubetsuChoshuKaishiTsuchishoB5"), new RString("特別徴収開始通知書（本算定）【B5横タイプ】")),
+    /**
+     * 特別徴収開始通知書（本算定）【B5横タイプ2】
+     */
+    DBB100036(new ReportId("DBB100036_TokubetsuChoshuKaishiTsuchishoB52"), new RString("特別徴収開始通知書（本算定）【B5横タイプ2】")),
+    /**
+     * 特別徴収開始通知書（本算定）【A4縦・オーバレイタイプ】
+     */
+    DBB100038(new ReportId("DBB100038_TokubetsuChoshuKaishiTsuchishoOverlayA4Tate"),
+            new RString("特別徴収開始通知書（本算定）【A4縦・オーバレイタイプ】")),
+    /**
+     * 特別徴収開始通知書（本算定）【シーラタイプ】
+     */
+    DBB100034(new ReportId("DBB100034_TokubetsuChoshuKaishiTsuchishoSealer"), new RString("特別徴収開始通知書（本算定）【シーラタイプ】")),
+    /**
+     * 保険料納入通知書（本算定）【コンビニ期毎タイプ】
+     */
+    DBB100063(new ReportId("DBB100063_NonyuTsuchishoCVSKigoto"), new RString("保険料納入通知書（本算定）【コンビニ期毎タイプ】")),
+    /**
+     * 保険料納入通知書（本算定）【ブック（口振依頼あり通知書＋納付書）タイプ】
+     */
+    DBB100055(new ReportId("DBB100055_NonyuTsuchishoBookFuriKaeAri"),
+            new RString("保険料納入通知書（本算定）【ブック（口振依頼あり通知書＋納付書）タイプ】")),
+    /**
+     * 保険料納入通知書（本算定）【ブック（口振依頼なし通知書＋納付書）タイプ】
+     */
+    DBB100056(new ReportId("DBB100056_HokenryoNonyuTsuchishoBookFuriKaeNashi"),
+            new RString("保険料納入通知書（本算定）【ブック（口振依頼なし通知書＋納付書）タイプ】")),
+    /**
+     * 保険料納入通知書（本算定）【銀振4期タイプ】
+     */
+    DBB100051(new ReportId("DBB100051_HokenryoNonyuTsuchishoGinfuriFourKi"), new RString("保険料納入通知書（本算定）【銀振4期タイプ】")),
+    /**
+     * 保険料納入通知書（本算定）【銀振5期タイプ】
+     */
+    DBB100053(new ReportId("DBB100053_HokenryoNonyuTsuchishoGinfuriFiveKi"), new RString("保険料納入通知書（本算定）【銀振5期タイプ】")),
+    /**
+     * 保険料納入通知書（本算定）【期毎タイプ】
+     */
+    DBB100045(new ReportId("DBB100045_HokenryoNonyuTsuchishoKigoto"), new RString("保険料納入通知書（本算定）【期毎タイプ】")),
+    /**
+     * 仮算定額変更通知書【A4縦タイプ】
+     */
+    DBB100011(new ReportId("DBB100011_KarisanteiHenkoTsuchishoA4Tate"), new RString("仮算定額変更通知書【A4縦タイプ】")),
+    /**
+     * 仮算定額変更通知書【B5横タイプ】
+     */
+    DBB100010(new ReportId("DBB100010_KarisanteiHenkoTsuchishoB5Yoko"), new RString("仮算定額変更通知書【B5横タイプ】")),
+    /**
      * 特別徴収開始通知書（仮算定）【B5横タイプ】
      */
     DBB100003(new ReportId("DBB100003_TokubetsuChoshuKaishiTsuchishoKariB5"), new RString("特別徴収開始通知書（仮算定）【B5横タイプ】")),
