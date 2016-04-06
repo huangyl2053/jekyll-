@@ -37,7 +37,6 @@ public class ShafukuKeigenGaku {
      * @return response
      */
     public ResponseData<ShafukuKeigenGakuDiv> onLoad(ShafukuKeigenGakuDiv div) {
-        // TODO 引き継ぎデータの取得
         ServiceTeiKyoShomeishoParameter parmeter = new ServiceTeiKyoShomeishoParameter(
                 new HihokenshaNo("000000003"), new FlexibleYearMonth(new RString("201601")),
                 new RString("0000000003"), new JigyoshaNo("0000000003"), new RString("事業者名"),
@@ -52,13 +51,9 @@ public class ShafukuKeigenGaku {
         RString 明細番号 = parameter.getMeisaiNo();
         RString 証明書 = parameter.getServiceYM();
 
-        // TODO 該当者検索画面ViewState．識別コード
         ViewStateHolder.put(ViewStateKeys.識別コード, new ShikibetsuCode("123456"));
-//        ShikibetsuCode 識別コード = ViewStateHolder.get(ViewStateKeys.識別コード, ShikibetsuCode.class);
-        // TODO 申請書検索ViewSate．様式番号
         ViewStateHolder.put(ViewStateKeys.様式番号, new RString("0003"));
         RString 様式番号 = ViewStateHolder.get(ViewStateKeys.様式番号, RString.class);
-        // TODO 申請検索画面ViewState. 申請日
         ViewStateHolder.put(ViewStateKeys.申請日, new RDate("20161126"));
         RDate 申請日 = ViewStateHolder.get(ViewStateKeys.申請日, RDate.class);
         ShikibetsuCode 識別コード = new ShikibetsuCode("000000000000010");
