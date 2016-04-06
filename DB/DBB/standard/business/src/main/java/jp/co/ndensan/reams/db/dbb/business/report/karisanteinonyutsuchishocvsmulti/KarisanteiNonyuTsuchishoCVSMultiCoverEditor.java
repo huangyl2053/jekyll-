@@ -17,7 +17,6 @@ import jp.co.ndensan.reams.ur.urz.business.report.parts.ninshosha.INinshoshaSour
 import jp.co.ndensan.reams.ur.urz.business.report.parts.ninshosha.NinshoshaSourceBuilderFactory;
 import jp.co.ndensan.reams.ur.urz.definition.core.ninshosha.KenmeiFuyoKubunType;
 import jp.co.ndensan.reams.ur.urz.entity.report.parts.ninshosha.NinshoshaSource;
-import jp.co.ndensan.reams.ur.urz.entity.report.sofubutsuatesaki.SofubutsuAtesakiSource;
 import jp.co.ndensan.reams.ur.urz.service.core.association.AssociationFinderFactory;
 import jp.co.ndensan.reams.ur.urz.service.core.association.IAssociationFinder;
 import jp.co.ndensan.reams.ur.urz.service.core.ninshosha.INinshoshaManager;
@@ -310,44 +309,44 @@ public class KarisanteiNonyuTsuchishoCVSMultiCoverEditor implements IKarisanteiN
 
     private void editCompSofubutsuAtesaki(KarisanteiNonyuTsuchishoCVSMultiSource source) {
 
-        SofubutsuAtesakiSource sofubutsuAtesakiSource = new SofubutsuAtesakiSource();
-        if (item.get編集後仮算定通知書共通情報() != null
-                && item.get編集後仮算定通知書共通情報().get編集後宛先() != null) {
-            sofubutsuAtesakiSource = item.get編集後仮算定通知書共通情報().get編集後宛先().getSofubutsuAtesakiSource();
-        }
-        if (sofubutsuAtesakiSource != null) {
-            source.yubinNo = sofubutsuAtesakiSource.yubinNo;
-            source.gyoseiku = sofubutsuAtesakiSource.gyoseiku;
-            source.jusho3 = sofubutsuAtesakiSource.jusho3;
-            source.jushoText = sofubutsuAtesakiSource.jushoText;
-            source.jusho1 = sofubutsuAtesakiSource.jusho1;
-            source.jusho2 = sofubutsuAtesakiSource.jusho2;
-            source.katagakiText = sofubutsuAtesakiSource.katagakiText;
-            source.katagaki2 = sofubutsuAtesakiSource.katagaki2;
-            source.katagakiSmall2 = sofubutsuAtesakiSource.katagakiSmall2;
-            source.katagaki1 = sofubutsuAtesakiSource.katagaki1;
-            source.katagakiSmall1 = sofubutsuAtesakiSource.katagakiSmall1;
-            source.shimei2 = sofubutsuAtesakiSource.shimei2;
-            source.shimeiSmall2 = sofubutsuAtesakiSource.shimeiSmall2;
-            source.shimeiText = sofubutsuAtesakiSource.shimeiText;
-            source.meishoFuyo2 = sofubutsuAtesakiSource.meishoFuyo2;
-            source.shimeiSmall1 = sofubutsuAtesakiSource.shimeiSmall1;
-            source.dainoKubunMei = sofubutsuAtesakiSource.dainoKubunMei;
-            source.shimei1 = sofubutsuAtesakiSource.shimei1;
-            source.meishoFuyo1 = sofubutsuAtesakiSource.meishoFuyo1;
-            source.samabunShimeiText = sofubutsuAtesakiSource.samabunShimeiText;
-            source.samaBun2 = sofubutsuAtesakiSource.samaBun2;
-            source.kakkoLeft2 = sofubutsuAtesakiSource.kakkoLeft2;
-            source.samabunShimei2 = sofubutsuAtesakiSource.samabunShimei2;
-            source.samabunShimeiSmall2 = sofubutsuAtesakiSource.samabunShimeiSmall2;
-            source.kakkoRight2 = sofubutsuAtesakiSource.kakkoRight2;
-            source.kakkoLeft1 = sofubutsuAtesakiSource.kakkoLeft1;
-            source.samabunShimei1 = sofubutsuAtesakiSource.samabunShimei1;
-            source.samaBun1 = sofubutsuAtesakiSource.samaBun1;
-            source.kakkoRight1 = sofubutsuAtesakiSource.kakkoRight1;
-            source.samabunShimeiSmall1 = sofubutsuAtesakiSource.samabunShimeiSmall1;
-            source.customerBarCode = sofubutsuAtesakiSource.customerBarCode;
-        }
+//        KaigoSofubutsuAtesakiSource sofubutsuAtesakiSource =new KaigoSofubutsuAtesakiSource();
+//        if (item.get編集後仮算定通知書共通情報() != null
+//                && item.get編集後仮算定通知書共通情報().get編集後宛先() != null) {
+//            sofubutsuAtesakiSource = item.get編集後仮算定通知書共通情報().get編集後宛先().getSofubutsuAtesakiSource();
+//        }
+//        if (sofubutsuAtesakiSource != null) {
+//            source.yubinNo = sofubutsuAtesakiSource.yubinNo;
+//            source.gyoseiku = sofubutsuAtesakiSource.gyoseiku;
+//            source.jusho3 = sofubutsuAtesakiSource.jusho3;
+//            source.jushoText = sofubutsuAtesakiSource.jushoText;
+//            source.jusho1 = sofubutsuAtesakiSource.jusho1;
+//            source.jusho2 = sofubutsuAtesakiSource.jusho2;
+//            source.katagakiText = sofubutsuAtesakiSource.katagakiText;
+//            source.katagaki2 = sofubutsuAtesakiSource.katagaki2;
+//            source.katagakiSmall2 = sofubutsuAtesakiSource.katagakiSmall2;
+//            source.katagaki1 = sofubutsuAtesakiSource.katagaki1;
+//            source.katagakiSmall1 = sofubutsuAtesakiSource.katagakiSmall1;
+//            source.shimei2 = sofubutsuAtesakiSource.shimei2;
+//            source.shimeiSmall2 = sofubutsuAtesakiSource.shimeiSmall2;
+//            source.shimeiText = sofubutsuAtesakiSource.shimeiText;
+//            source.meishoFuyo2 = sofubutsuAtesakiSource.meishoFuyo2;
+//            source.shimeiSmall1 = sofubutsuAtesakiSource.shimeiSmall1;
+//            source.dainoKubunMei = sofubutsuAtesakiSource.dainoKubunMei;
+//            source.shimei1 = sofubutsuAtesakiSource.shimei1;
+//            source.meishoFuyo1 = sofubutsuAtesakiSource.meishoFuyo1;
+//            source.samabunShimeiText = sofubutsuAtesakiSource.samabunShimeiText;
+//            source.samaBun2 = sofubutsuAtesakiSource.samaBun2;
+//            source.kakkoLeft2 = sofubutsuAtesakiSource.kakkoLeft2;
+//            source.samabunShimei2 = sofubutsuAtesakiSource.samabunShimei2;
+//            source.samabunShimeiSmall2 = sofubutsuAtesakiSource.samabunShimeiSmall2;
+//            source.kakkoRight2 = sofubutsuAtesakiSource.kakkoRight2;
+//            source.kakkoLeft1 = sofubutsuAtesakiSource.kakkoLeft1;
+//            source.samabunShimei1 = sofubutsuAtesakiSource.samabunShimei1;
+//            source.samaBun1 = sofubutsuAtesakiSource.samaBun1;
+//            source.kakkoRight1 = sofubutsuAtesakiSource.kakkoRight1;
+//            source.samabunShimeiSmall1 = sofubutsuAtesakiSource.samabunShimeiSmall1;
+//            source.customerBarCode = sofubutsuAtesakiSource.customerBarCode;
+//        }
     }
 
     private void 納入通知書期情報設定(KarisanteiNonyuTsuchishoCVSMultiSource source) {
