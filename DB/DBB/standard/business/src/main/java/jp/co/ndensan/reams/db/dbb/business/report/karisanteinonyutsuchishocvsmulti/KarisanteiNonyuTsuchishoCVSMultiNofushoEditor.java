@@ -3,10 +3,10 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbb.business.report.karisanteinonyutsuchishocvsmultinofusho;
+package jp.co.ndensan.reams.db.dbb.business.report.karisanteinonyutsuchishocvsmulti;
 
 import jp.co.ndensan.reams.db.dbb.business.report.tsuchisho.notsu.KariSanteiNonyuTsuchiShoJoho;
-import jp.co.ndensan.reams.db.dbb.entity.db.report.karisanteinonyutsuchishocvsmulti.KarisanteiNonyuTsuchishoCVSMultiNofushoSource;
+import jp.co.ndensan.reams.db.dbb.entity.db.report.karisanteinonyutsuchishocvsmulti.KarisanteiNonyuTsuchishoCVSMultiSource;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
@@ -38,11 +38,11 @@ public class KarisanteiNonyuTsuchishoCVSMultiNofushoEditor implements IKarisante
     }
 
     @Override
-    public KarisanteiNonyuTsuchishoCVSMultiNofushoSource edit(KarisanteiNonyuTsuchishoCVSMultiNofushoSource source) {
+    public KarisanteiNonyuTsuchishoCVSMultiSource edit(KarisanteiNonyuTsuchishoCVSMultiSource source) {
         return editSource(source);
     }
 
-    private KarisanteiNonyuTsuchishoCVSMultiNofushoSource editSource(KarisanteiNonyuTsuchishoCVSMultiNofushoSource source) {
+    private KarisanteiNonyuTsuchishoCVSMultiSource editSource(KarisanteiNonyuTsuchishoCVSMultiSource source) {
 
         this.edit納付書1(source);
 
@@ -53,7 +53,7 @@ public class KarisanteiNonyuTsuchishoCVSMultiNofushoEditor implements IKarisante
         return source;
     }
 
-    private KarisanteiNonyuTsuchishoCVSMultiNofushoSource edit納付書1(KarisanteiNonyuTsuchishoCVSMultiNofushoSource source) {
+    private KarisanteiNonyuTsuchishoCVSMultiSource edit納付書1(KarisanteiNonyuTsuchishoCVSMultiSource source) {
 
         if (item.get納付書共通() != null) {
             source.kamokumei = item.get納付書共通().get科目名称();
@@ -117,7 +117,7 @@ public class KarisanteiNonyuTsuchishoCVSMultiNofushoEditor implements IKarisante
         return source;
     }
 
-    private KarisanteiNonyuTsuchishoCVSMultiNofushoSource edit納付書2(KarisanteiNonyuTsuchishoCVSMultiNofushoSource source) {
+    private KarisanteiNonyuTsuchishoCVSMultiSource edit納付書2(KarisanteiNonyuTsuchishoCVSMultiSource source) {
 
         if (item.get納付書共通() != null) {
             source.kamokumei = item.get納付書共通().get科目名称();
@@ -181,7 +181,7 @@ public class KarisanteiNonyuTsuchishoCVSMultiNofushoEditor implements IKarisante
         return source;
     }
 
-    private KarisanteiNonyuTsuchishoCVSMultiNofushoSource edit納付書3(KarisanteiNonyuTsuchishoCVSMultiNofushoSource source) {
+    private KarisanteiNonyuTsuchishoCVSMultiSource edit納付書3(KarisanteiNonyuTsuchishoCVSMultiSource source) {
 
         if (item.get納付書共通() != null) {
             source.kamokumei = item.get納付書共通().get科目名称();

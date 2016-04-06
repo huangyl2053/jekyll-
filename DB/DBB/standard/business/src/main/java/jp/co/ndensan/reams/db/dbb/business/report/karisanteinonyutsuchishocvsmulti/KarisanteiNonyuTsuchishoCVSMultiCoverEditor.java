@@ -3,12 +3,12 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbb.business.report.karisanteinonyutsuchishocvsmulticover;
+package jp.co.ndensan.reams.db.dbb.business.report.karisanteinonyutsuchishocvsmulti;
 
 import jp.co.ndensan.reams.db.dbb.business.report.tsuchisho.notsu.KariSanteiNonyuTsuchiShoJoho;
 import jp.co.ndensan.reams.db.dbb.definition.core.HyojiUmu;
 import jp.co.ndensan.reams.db.dbb.definition.core.ShoriKubun;
-import jp.co.ndensan.reams.db.dbb.entity.db.report.karisanteinonyutsuchishocvsmulti.KarisanteiNonyuTsuchishoCVSMultiCoverSource;
+import jp.co.ndensan.reams.db.dbb.entity.db.report.karisanteinonyutsuchishocvsmulti.KarisanteiNonyuTsuchishoCVSMultiSource;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.ChohyoSeigyoKyotsu;
 import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.kyotsu.NinshoshaDenshikoinshubetsuCode;
 import jp.co.ndensan.reams.ur.urz.business.core.association.Association;
@@ -36,7 +36,7 @@ import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
 public class KarisanteiNonyuTsuchishoCVSMultiCoverEditor implements IKarisanteiNonyuTsuchishoCVSMultiCoverEditor {
 
     private final KariSanteiNonyuTsuchiShoJoho item;
-    private ReportSourceWriter<KarisanteiNonyuTsuchishoCVSMultiCoverSource> reportSourceWriter;
+    private ReportSourceWriter<KarisanteiNonyuTsuchishoCVSMultiSource> reportSourceWriter;
 
     private static final RString HOKENRYO_RITU = new RString("保険料率");
     private static final RString NENGAKU_HOKENRYO = new RString("年額保険料");
@@ -73,11 +73,11 @@ public class KarisanteiNonyuTsuchishoCVSMultiCoverEditor implements IKarisanteiN
     }
 
     @Override
-    public KarisanteiNonyuTsuchishoCVSMultiCoverSource edit(KarisanteiNonyuTsuchishoCVSMultiCoverSource source) {
+    public KarisanteiNonyuTsuchishoCVSMultiSource edit(KarisanteiNonyuTsuchishoCVSMultiSource source) {
         return editSource(source);
     }
 
-    private KarisanteiNonyuTsuchishoCVSMultiCoverSource editSource(KarisanteiNonyuTsuchishoCVSMultiCoverSource source) {
+    private KarisanteiNonyuTsuchishoCVSMultiSource editSource(KarisanteiNonyuTsuchishoCVSMultiSource source) {
 
         this.edit宛先(source);
 
@@ -96,7 +96,7 @@ public class KarisanteiNonyuTsuchishoCVSMultiCoverEditor implements IKarisanteiN
         return source;
     }
 
-    private KarisanteiNonyuTsuchishoCVSMultiCoverSource edit宛先(KarisanteiNonyuTsuchishoCVSMultiCoverSource source) {
+    private KarisanteiNonyuTsuchishoCVSMultiSource edit宛先(KarisanteiNonyuTsuchishoCVSMultiSource source) {
 
         if (item.get編集後仮算定通知書共通情報() != null) {
             source.hyojicodeName1 = item.get編集後仮算定通知書共通情報().get表示コード１名();
@@ -141,7 +141,7 @@ public class KarisanteiNonyuTsuchishoCVSMultiCoverEditor implements IKarisanteiN
         return source;
     }
 
-    private KarisanteiNonyuTsuchishoCVSMultiCoverSource edit明細(KarisanteiNonyuTsuchishoCVSMultiCoverSource source) {
+    private KarisanteiNonyuTsuchishoCVSMultiSource edit明細(KarisanteiNonyuTsuchishoCVSMultiSource source) {
 
         if (item.get編集後仮算定通知書共通情報() != null) {
             if (item.get編集後仮算定通知書共通情報().get調定年度() != null) {
@@ -210,7 +210,7 @@ public class KarisanteiNonyuTsuchishoCVSMultiCoverEditor implements IKarisanteiN
         return source;
     }
 
-    private void edit納付書(KarisanteiNonyuTsuchishoCVSMultiCoverSource source) {
+    private void edit納付書(KarisanteiNonyuTsuchishoCVSMultiSource source) {
 
         if (item.get納付書共通() != null) {
             source.kamokumei = item.get納付書共通().get科目名称();
@@ -272,7 +272,7 @@ public class KarisanteiNonyuTsuchishoCVSMultiCoverEditor implements IKarisanteiN
         source.funyuFukanBango = RString.EMPTY;
     }
 
-    private void edit雛形部品(KarisanteiNonyuTsuchishoCVSMultiCoverSource source) {
+    private void edit雛形部品(KarisanteiNonyuTsuchishoCVSMultiSource source) {
 
         if (item.get発行日() != null) {
             ChohyoSeigyoKyotsu 帳票制御共通
@@ -308,7 +308,7 @@ public class KarisanteiNonyuTsuchishoCVSMultiCoverEditor implements IKarisanteiN
         }
     }
 
-    private void editCompSofubutsuAtesaki(KarisanteiNonyuTsuchishoCVSMultiCoverSource source) {
+    private void editCompSofubutsuAtesaki(KarisanteiNonyuTsuchishoCVSMultiSource source) {
 
         SofubutsuAtesakiSource sofubutsuAtesakiSource = new SofubutsuAtesakiSource();
         if (item.get編集後仮算定通知書共通情報() != null
@@ -350,7 +350,7 @@ public class KarisanteiNonyuTsuchishoCVSMultiCoverEditor implements IKarisanteiN
         }
     }
 
-    private void 納入通知書期情報設定(KarisanteiNonyuTsuchishoCVSMultiCoverSource source) {
+    private void 納入通知書期情報設定(KarisanteiNonyuTsuchishoCVSMultiSource source) {
 
         if (item.get納入通知書期情報リスト() != null
                 && item.get納入通知書期情報リスト().size() >= リストサイズ１) {
@@ -396,7 +396,7 @@ public class KarisanteiNonyuTsuchishoCVSMultiCoverEditor implements IKarisanteiN
         }
     }
 
-    private void 編集後個人相関設定(KarisanteiNonyuTsuchishoCVSMultiCoverSource source) {
+    private void 編集後個人相関設定(KarisanteiNonyuTsuchishoCVSMultiSource source) {
 
         if (item.get編集後仮算定通知書共通情報().get編集後個人() != null
                 && item.get編集後仮算定通知書共通情報().get編集後個人().get名称() != null
@@ -413,7 +413,7 @@ public class KarisanteiNonyuTsuchishoCVSMultiCoverEditor implements IKarisanteiN
         }
     }
 
-    private void 前年度情報相関設定(KarisanteiNonyuTsuchishoCVSMultiCoverSource source) {
+    private void 前年度情報相関設定(KarisanteiNonyuTsuchishoCVSMultiSource source) {
 
         if (item.get編集後仮算定通知書共通情報().get前年度情報() != null) {
             source.keisanMeisaishoNendo1 = item.get編集後仮算定通知書共通情報().get前年度情報().get前年度賦課年度();

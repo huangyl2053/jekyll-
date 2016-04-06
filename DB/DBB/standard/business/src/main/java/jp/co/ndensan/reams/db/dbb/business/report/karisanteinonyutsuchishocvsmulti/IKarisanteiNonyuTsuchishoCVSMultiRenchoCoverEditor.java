@@ -3,15 +3,15 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbb.business.report.karisanteinonyutsuchishocvsmultirenchocover;
+package jp.co.ndensan.reams.db.dbb.business.report.karisanteinonyutsuchishocvsmulti;
 
-import jp.co.ndensan.reams.db.dbb.entity.db.report.karisanteinonyutsuchishocvsmulti.KarisanteiNonyuTsuchishoCVSMultiRenchoCoverSource;
+import jp.co.ndensan.reams.db.dbb.entity.db.report.karisanteinonyutsuchishocvsmulti.KarisanteiNonyuTsuchishoCVSMultiSource;
 import jp.co.ndensan.reams.uz.uza.report.IReportEditor;
 
 /**
  * 保険料納入通知書（仮算定）【コンビニマルチ収納タイプ】（連帳）Coverのエディターのインターフェースクラスです
  *
  */
-public interface IKarisanteiNonyuTsuchishoCVSMultiRenchoCoverEditor extends IReportEditor<KarisanteiNonyuTsuchishoCVSMultiRenchoCoverSource> {
+public interface IKarisanteiNonyuTsuchishoCVSMultiRenchoCoverEditor extends IReportEditor<KarisanteiNonyuTsuchishoCVSMultiSource> {
 
 }
