@@ -3,7 +3,7 @@ package jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.NinteiTas
  * このコードはツールによって生成されました。
  * このファイルへの変更は、以下の状況下で不正な動作の原因になったり、
  * コードが再生成されるときに損失したりします。
- * Tue Apr 05 17:04:13 JST 2016 
+ * Wed Apr 06 15:03:59 JST 2016 
  */
 
 
@@ -97,6 +97,9 @@ public class dgNinteiTaskList_Row extends DataRow {
     private TextBoxDate getsureiShoriKanryoDay;
     private TextBoxDate centerSoshinDay;
     private TextBoxNum keikaNissu;
+    private RString shinseishoKanriNumber;
+    private RString ninteiChaosaIraiRirekiNumber;
+    private RString shujiiIkenshoIraiRirekiNumber;
 
     public dgNinteiTaskList_Row() {
         super();
@@ -173,6 +176,9 @@ public class dgNinteiTaskList_Row extends DataRow {
         this.getsureiShoriKanryoDay = new TextBoxDate();
         this.centerSoshinDay = new TextBoxDate();
         this.keikaNissu = new TextBoxNum();
+        this.shinseishoKanriNumber = RString.EMPTY;
+        this.ninteiChaosaIraiRirekiNumber = RString.EMPTY;
+        this.shujiiIkenshoIraiRirekiNumber = RString.EMPTY;
         this.setOriginalData("hokensha", hokensha);
         this.setOriginalData("ninteiShinseiDay", ninteiShinseiDay);
         this.setOriginalData("hihoNumber", hihoNumber);
@@ -246,9 +252,12 @@ public class dgNinteiTaskList_Row extends DataRow {
         this.setOriginalData("getsureiShoriKanryoDay", getsureiShoriKanryoDay);
         this.setOriginalData("centerSoshinDay", centerSoshinDay);
         this.setOriginalData("keikaNissu", keikaNissu);
+        this.setOriginalData("shinseishoKanriNumber", shinseishoKanriNumber);
+        this.setOriginalData("ninteiChaosaIraiRirekiNumber", ninteiChaosaIraiRirekiNumber);
+        this.setOriginalData("shujiiIkenshoIraiRirekiNumber", shujiiIkenshoIraiRirekiNumber);
     }
 
-    public dgNinteiTaskList_Row(RString hokensha, TextBoxDate ninteiShinseiDay, RString hihoNumber, RString hihoShimei, RString shinseiKubunShinseiji, RString shinseiKubunHorei, TextBoxDate koshinKanryoDay, TextBoxDate koshinTsuchiYMD, TextBoxDate shinseiUketsukeKanryoDay, TextBoxDate chosaIraiKanryoDay, TextBoxNum chosaIraiSaichosaCount, TextBoxDate chosaIraishoHakkoDay, TextBoxDate chousahyoOutput, TextBoxDate chosaIraiDataShutsuryokuDay, TextBoxDate chosaIraiKigen, RString chosaIraiKubun, RString konkaiChosaItakusaki, RString konkaiChosain, TextBoxNum konkaiChosaCount, RString zenkaiChosaItakusaki, RString zenkaiChosain, RString zenzenkaiChosaItakusaki, RString zenzenkaiChosain, TextBoxDate chosahyoKanryoDay, TextBoxDate chosahyoDataNyuryokuDay, TextBoxDate ikenshoIraiKanryoDay, TextBoxNum ikenshoIraiIkenCount, TextBoxDate ikenshoIraiDay, TextBoxDate ikenshoIraiIraishoHakkoDay, TextBoxDate ikenshoIraiIkenshoShutsuryokuDay, TextBoxDate ikenshoIraiKigen, TextBoxDate ikenshoNyushuKanryoDay, TextBoxDate ikenshoNyushuTeikei, RString ikenshoIraiShokai, RString konkaiShujiiIryokikan, RString konkaiShujii, RString zenkaiIryokikan, RString zenkaiShujii, RString yubinNumber, RString jusho, RString nyushoShisetsu, TextBoxDate chosaTokusokuHakkoDay, RString chosaTokusokuHoho, TextBoxNum chosaTokusokuCount, TextBoxDate chosaTokusokuLiit, RString chosaTokusokuChiku, TextBoxDate ikenshoTokusokuHakkoDay, RString ikenshoTokusokuHoho, TextBoxNum ikenshoTokusokuCount, TextBoxDate ikenshoTokusokuLimit, TextBoxDate ichijiHanteiKanryoDay, TextBoxDate ichijiHanteiKanri, TextBoxDate ichijiHantei, RString ichijiHanteiKekka, RString ichijiHanteiWarningCode, TextBoxDate maskingKanryoDay, TextBoxDate shinsakaiKanryoDay, TextBoxDate shinsakaiwaritukeDay, TextBoxDate shinsakaiKaisaiDay, TextBoxTime shinsakaiKaisaiJikan, RString yusenWaritsukesha, RString kaisaiNumber, RString gogitai, TextBoxDate nijihanteiKanryoDay, TextBoxDate nijihanteiKekkaToroku, RString nyuryokuHoho, RString nijihanteiKekka, RString nijihanteiYukoKikan, TextBoxDate nijihanteiShinsakaiKaisaiDay, RString nijihanteiKaisaiNumber, TextBoxDate getsureiShoriKanryoDay, TextBoxDate centerSoshinDay, TextBoxNum keikaNissu) {
+    public dgNinteiTaskList_Row(RString hokensha, TextBoxDate ninteiShinseiDay, RString hihoNumber, RString hihoShimei, RString shinseiKubunShinseiji, RString shinseiKubunHorei, TextBoxDate koshinKanryoDay, TextBoxDate koshinTsuchiYMD, TextBoxDate shinseiUketsukeKanryoDay, TextBoxDate chosaIraiKanryoDay, TextBoxNum chosaIraiSaichosaCount, TextBoxDate chosaIraishoHakkoDay, TextBoxDate chousahyoOutput, TextBoxDate chosaIraiDataShutsuryokuDay, TextBoxDate chosaIraiKigen, RString chosaIraiKubun, RString konkaiChosaItakusaki, RString konkaiChosain, TextBoxNum konkaiChosaCount, RString zenkaiChosaItakusaki, RString zenkaiChosain, RString zenzenkaiChosaItakusaki, RString zenzenkaiChosain, TextBoxDate chosahyoKanryoDay, TextBoxDate chosahyoDataNyuryokuDay, TextBoxDate ikenshoIraiKanryoDay, TextBoxNum ikenshoIraiIkenCount, TextBoxDate ikenshoIraiDay, TextBoxDate ikenshoIraiIraishoHakkoDay, TextBoxDate ikenshoIraiIkenshoShutsuryokuDay, TextBoxDate ikenshoIraiKigen, TextBoxDate ikenshoNyushuKanryoDay, TextBoxDate ikenshoNyushuTeikei, RString ikenshoIraiShokai, RString konkaiShujiiIryokikan, RString konkaiShujii, RString zenkaiIryokikan, RString zenkaiShujii, RString yubinNumber, RString jusho, RString nyushoShisetsu, TextBoxDate chosaTokusokuHakkoDay, RString chosaTokusokuHoho, TextBoxNum chosaTokusokuCount, TextBoxDate chosaTokusokuLiit, RString chosaTokusokuChiku, TextBoxDate ikenshoTokusokuHakkoDay, RString ikenshoTokusokuHoho, TextBoxNum ikenshoTokusokuCount, TextBoxDate ikenshoTokusokuLimit, TextBoxDate ichijiHanteiKanryoDay, TextBoxDate ichijiHanteiKanri, TextBoxDate ichijiHantei, RString ichijiHanteiKekka, RString ichijiHanteiWarningCode, TextBoxDate maskingKanryoDay, TextBoxDate shinsakaiKanryoDay, TextBoxDate shinsakaiwaritukeDay, TextBoxDate shinsakaiKaisaiDay, TextBoxTime shinsakaiKaisaiJikan, RString yusenWaritsukesha, RString kaisaiNumber, RString gogitai, TextBoxDate nijihanteiKanryoDay, TextBoxDate nijihanteiKekkaToroku, RString nyuryokuHoho, RString nijihanteiKekka, RString nijihanteiYukoKikan, TextBoxDate nijihanteiShinsakaiKaisaiDay, RString nijihanteiKaisaiNumber, TextBoxDate getsureiShoriKanryoDay, TextBoxDate centerSoshinDay, TextBoxNum keikaNissu, RString shinseishoKanriNumber, RString ninteiChaosaIraiRirekiNumber, RString shujiiIkenshoIraiRirekiNumber) {
         super();
         this.setOriginalData("hokensha", hokensha);
         this.setOriginalData("ninteiShinseiDay", ninteiShinseiDay);
@@ -323,6 +332,9 @@ public class dgNinteiTaskList_Row extends DataRow {
         this.setOriginalData("getsureiShoriKanryoDay", getsureiShoriKanryoDay);
         this.setOriginalData("centerSoshinDay", centerSoshinDay);
         this.setOriginalData("keikaNissu", keikaNissu);
+        this.setOriginalData("shinseishoKanriNumber", shinseishoKanriNumber);
+        this.setOriginalData("ninteiChaosaIraiRirekiNumber", ninteiChaosaIraiRirekiNumber);
+        this.setOriginalData("shujiiIkenshoIraiRirekiNumber", shujiiIkenshoIraiRirekiNumber);
         this.hokensha = hokensha;
         this.ninteiShinseiDay = ninteiShinseiDay;
         this.hihoNumber = hihoNumber;
@@ -396,6 +408,9 @@ public class dgNinteiTaskList_Row extends DataRow {
         this.getsureiShoriKanryoDay = getsureiShoriKanryoDay;
         this.centerSoshinDay = centerSoshinDay;
         this.keikaNissu = keikaNissu;
+        this.shinseishoKanriNumber = shinseishoKanriNumber;
+        this.ninteiChaosaIraiRirekiNumber = ninteiChaosaIraiRirekiNumber;
+        this.shujiiIkenshoIraiRirekiNumber = shujiiIkenshoIraiRirekiNumber;
     }
 
     public RString getHokensha() {
@@ -688,6 +703,18 @@ public class dgNinteiTaskList_Row extends DataRow {
 
     public TextBoxNum getKeikaNissu() {
         return keikaNissu;
+    }
+
+    public RString getShinseishoKanriNumber() {
+        return shinseishoKanriNumber;
+    }
+
+    public RString getNinteiChaosaIraiRirekiNumber() {
+        return ninteiChaosaIraiRirekiNumber;
+    }
+
+    public RString getShujiiIkenshoIraiRirekiNumber() {
+        return shujiiIkenshoIraiRirekiNumber;
     }
 
     public void setHokensha(RString hokensha) {
@@ -1053,6 +1080,21 @@ public class dgNinteiTaskList_Row extends DataRow {
     public void setKeikaNissu(TextBoxNum keikaNissu) {
         this.setOriginalData("keikaNissu", keikaNissu);
         this.keikaNissu = keikaNissu;
+    }
+
+    public void setShinseishoKanriNumber(RString shinseishoKanriNumber) {
+        this.setOriginalData("shinseishoKanriNumber", shinseishoKanriNumber);
+        this.shinseishoKanriNumber = shinseishoKanriNumber;
+    }
+
+    public void setNinteiChaosaIraiRirekiNumber(RString ninteiChaosaIraiRirekiNumber) {
+        this.setOriginalData("ninteiChaosaIraiRirekiNumber", ninteiChaosaIraiRirekiNumber);
+        this.ninteiChaosaIraiRirekiNumber = ninteiChaosaIraiRirekiNumber;
+    }
+
+    public void setShujiiIkenshoIraiRirekiNumber(RString shujiiIkenshoIraiRirekiNumber) {
+        this.setOriginalData("shujiiIkenshoIraiRirekiNumber", shujiiIkenshoIraiRirekiNumber);
+        this.shujiiIkenshoIraiRirekiNumber = shujiiIkenshoIraiRirekiNumber;
     }
 
     // </editor-fold>
