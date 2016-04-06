@@ -89,9 +89,8 @@
      FROM rgdb."DbT5101NinteiShinseiJoho") AS DbT5101NinteiShinseiJoho
          LEFT JOIN
         (
-         SELECT
-         <include refid="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT5300GeninShikkanMapper.allColumns_DbT5300GeninShikkan" />
-     FROM rgdb."DbT5300GeninShikkan") AS DbT5300GeninShikkan
+         <include refid="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT5300GeninShikkanMapper.noDeleted_DbT5300GeninShikkan" />
+        ) AS DbT5300GeninShikkan
          ON
          DbT5101NinteiShinseiJoho."dbT5101NinteiShinseiJoho_shinseishoKanriNo" = DbT5300GeninShikkan."dbT5300GeninShikkan_shinseishoKanriNo"
         INNER JOIN
