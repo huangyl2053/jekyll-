@@ -56,6 +56,11 @@ public enum ReportIdDBC {
     DBC100006(
             new ReportId("DBC100006_ShokanKetteiTsuchiShoSealer2"), new RString("償還払支給（不支給）決定通知書（ｼｰﾗﾀｲﾌﾟ2）")),
     /**
+     * 償還払不支給決定者一覧情報 の帳票ＩＤです。
+     */
+    DBC200022(
+            new ReportId("DBC200022_ShokanbaraiFushikyuKetteishaIchiran"), new RString("償還払不支給決定者一覧情報")),
+    /**
      * 償還払支給（不支給）決定通知一覧表の帳票ＩＤです。
      */
     DBC200023(
