@@ -11,13 +11,14 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 /**
  * 出力帳票entityクラスです。
  *
+ * @reamsid_L DBB-0780-120  yangchenbing
  */
 public class NonyuTsuchIchiranentity {
 
     private ReportId 帳票分類ID;
     private ReportId 帳票ID;
     private RString 帳票名;
-    private RString 改頁出力順ID;
+    private RString 出力順ID;
 
     /**
      * 帳票分類IDのgetメソッドです。
@@ -58,22 +59,22 @@ public class NonyuTsuchIchiranentity {
     }
 
     /**
-     * 改頁出力順IDのgetメソッドです。
+     * 出力順IDのgetメソッドです。
      *
-     * @return 改頁出力順ID
+     * @return 出力順ID
      */
-    public RString get改頁出力順ID() {
-        return 改頁出力順ID;
+    public RString get出力順ID() {
+        return 出力順ID;
 
     }
 
     /**
-     * 改頁出力順IDのsetメソッドです。
+     * 出力順IDのsetメソッドです。
      *
-     * @param 改頁出力順ID 改頁出力順ID
+     * @param 出力順ID 出力順ID
      */
-    public void set改頁出力順ID(RString 改頁出力順ID) {
-        this.改頁出力順ID = 改頁出力順ID;
+    public void set出力順ID(RString 出力順ID) {
+        this.出力順ID = 出力順ID;
     }
 
     /**
