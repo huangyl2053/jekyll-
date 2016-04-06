@@ -97,11 +97,11 @@ public class ShokanBaraiFushikyuKetteishaIchiranhyo {
             RString 並び順の４件目,
             RString 並び順の５件目,
             RString 改頁) {
-        RString 喪失事由コード = entity.getSangshishiyoucode();
+        RString 喪失事由コード = entity.getSoshitsuJiyuCode();
         RString ページ数 = new RString("1");
         RString サービス種類 = サービス種類表示作成(entity.getServiceShuruiCode(), entity.getServiceShuruiName());
         return new ShokanFushikyuKetteiInItem(印刷日時, ページ数, entity.getKokuhoRenkokaiName(),
-                entity.getShokisaiHokenshaNo().value(), entity.getBaoxianzheName(),
+                entity.getShokisaiHokenshaNo().value(), entity.getHokenshaName(),
                 null == 並び順の１件目 ? RString.EMPTY : 並び順の１件目,
                 null == 並び順の２件目 ? RString.EMPTY : 並び順の２件目,
                 null == 並び順の３件目 ? RString.EMPTY : 並び順の３件目,
@@ -113,11 +113,11 @@ public class ShokanBaraiFushikyuKetteishaIchiranhyo {
                 entity.getHiHokenshaNo().value(), entity.getHiHokenshaName(), entity.getJigyoshoNo().value(),
                 entity.getJigyoshoName(), entity.getServiceTeikyoYM().wareki().eraType(EraType.KANJI_RYAKU).
                 firstYear(FirstYear.GAN_NEN).separator(Separator.PERIOD).fillType(FillType.BLANK).toDateString(),
-                new RString(entity.getDanweishujiner().toString()), 喪失事由コード, entity.getBeikaoOne(), entity.getSeiriNo(),
+                new RString(entity.getTensuKingaku().toString()), 喪失事由コード, entity.getBikoOne(), entity.getSeiriNo(),
                 entity.getJushoCode().value(), entity.getJusho().value(), entity.getGyoseikuCode().value(),
-                entity.getGyoseiku(), サービス種類, entity.getSagnshishisyouYMD().wareki().eraType(EraType.KANJI_RYAKU).
+                entity.getGyoseiku(), サービス種類, entity.getSoshitsuYMD().wareki().eraType(EraType.KANJI_RYAKU).
                 firstYear(FirstYear.GAN_NEN).separator(Separator.PERIOD).fillType(FillType.BLANK).toDateString(),
-                entity.getBeikaoTwo(),
+                entity.getBikoTwo(),
                 BOOLEAN_TRUE == entity.getIsUpdate() ? RString.EMPTY : new RString("*")
         );
 
