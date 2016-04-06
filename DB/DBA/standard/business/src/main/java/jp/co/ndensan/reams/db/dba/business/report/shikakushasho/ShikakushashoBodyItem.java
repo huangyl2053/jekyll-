@@ -11,8 +11,8 @@ import lombok.Getter;
 
 /**
  * 介護保険資格者証リスト一覧表情報です。
- * 
- * @reamsid_L DBU-0490-080  suguangjun
+ *
+ * @reamsid_L DBU-0490-080 suguangjun
  */
 @Getter
 @SuppressWarnings("PMD.UnusedPrivateField")
@@ -43,10 +43,9 @@ public class ShikakushashoBodyItem {
     private final List<RString> shuruiShikyuTnisu;
     private final List<RString> shuruiShikyuTani;
     private final RString serviceRyui;
-    private final RString kyufuseigenNaiyo;
-    private final RString kyufuseigenKaishiYMD;
-    private final RString kyufuseigenShuryoYMD;
-
+    private final List<RString> kyufuseigenNaiyo;
+    private final List<RString> kyufuseigenKaishiYMD;
+    private final List<RString> kyufuseigenShuryoYMD;
     private final RString keikakuJigyoshaName1;
     private final RString keikakuTodokedeYMD1;
     private final RString keikakuJigyoshaName2;
@@ -61,23 +60,14 @@ public class ShikakushashoBodyItem {
     private final RString keikakuTodokedeYMD3;
     private final RString keikakuTodokedeYMD3Asutarisuku;
     private final RString keikakuTodokedeYMD3Masshosen;
-
-    private final RString nyushoShisetsuShurui1;
-    private final RString nyushoShisetsuName1;
-    private final RString shisetsuNyusho1;
-    private final RString shisetsuNyuin1;
-    private final RString shisetsuNyushoYMD1;
-    private final RString shisetsuTaisho1;
-    private final RString shisetsuTaiin1;
-    private final RString shisetsuTaishoYMD1;
-    private final RString nyushoShisetsuShurui2;
-    private final RString nyushoShisetsuName2;
-    private final RString shisetsuNyusho2;
-    private final RString shisetsuNyuin2;
-    private final RString shisetsuNyushoYMD2;
-    private final RString shisetsuTaisho2;
-    private final RString shisetsuTaiin2;
-    private final RString shisetsuTaishoYMD2;
+    private final RString nyushoShisetsuShurui;
+    private final List<RString> nyushoShisetsuName;
+    private final RString shisetsuNyusho;
+    private final RString shisetsuNyuin;
+    private final List<RString> shisetsuNyushoYMD;
+    private final RString shisetsuTaisho;
+    private final RString shisetsuTaiin;
+    private final List<RString> shisetsuTaishoYMD;
     private final RString hokenshaNo;
     private final RString hokenshaJusho;
     private final RString hokenshaName;
@@ -130,22 +120,14 @@ public class ShikakushashoBodyItem {
      * @param keikakuTodokedeYMD3 事業所届出年月日3
      * @param keikakuTodokedeYMD3Asutarisuku 事業所届出年月日アスタリスク3
      * @param keikakuTodokedeYMD3Masshosen 事業所届出年月日取消3
-     * @param nyushoShisetsuShurui1 介護保険施設等の種類1
-     * @param nyushoShisetsuName1 介護保険施設等の名称1
-     * @param shisetsuNyusho1 施設入所1
-     * @param shisetsuNyuin1 施設入院1
-     * @param shisetsuNyushoYMD1 介護保険施設等の入所年月日1
-     * @param shisetsuTaisho1 施設退所1
-     * @param shisetsuTaiin1 施設退院1
-     * @param shisetsuTaishoYMD1 介護保険施設等の退所年月日１
-     * @param nyushoShisetsuShurui2 介護保険施設等の種類2
-     * @param nyushoShisetsuName2 介護保険施設等の名称2
-     * @param shisetsuNyusho2 施設入所2
-     * @param shisetsuNyuin2 施設入院2
-     * @param shisetsuNyushoYMD2 介護保険施設等の入所年月日2
-     * @param shisetsuTaisho2 施設退所2
-     * @param shisetsuTaiin2 施設退院2
-     * @param shisetsuTaishoYMD2 介護保険施設等の退所年月日２
+     * @param nyushoShisetsuShurui 介護保険施設等の種類1
+     * @param nyushoShisetsuName 介護保険施設等の名称1
+     * @param shisetsuNyusho 施設入所1
+     * @param shisetsuNyuin 施設入院1
+     * @param shisetsuNyushoYMD 介護保険施設等の入所年月日1
+     * @param shisetsuTaisho 施設退所1
+     * @param shisetsuTaiin 施設退院1
+     * @param shisetsuTaishoYMD 介護保険施設等の退所年月日１
      * @param hokenshaNo 保険者番号
      * @param hokenshaJusho 保険者住所
      * @param hokenshaName 保険者名称
@@ -178,9 +160,9 @@ public class ShikakushashoBodyItem {
             List<RString> shuruiShikyuTnisu,
             List<RString> shuruiShikyuTani,
             RString serviceRyui,
-            RString kyufuseigenNaiyo,
-            RString kyufuseigenKaishiYMD,
-            RString kyufuseigenShuryoYMD,
+            List<RString> kyufuseigenNaiyo,
+            List<RString> kyufuseigenKaishiYMD,
+            List<RString> kyufuseigenShuryoYMD,
             RString keikakuJigyoshaName1,
             RString keikakuTodokedeYMD1,
             RString keikakuJigyoshaName2,
@@ -195,22 +177,14 @@ public class ShikakushashoBodyItem {
             RString keikakuTodokedeYMD3,
             RString keikakuTodokedeYMD3Asutarisuku,
             RString keikakuTodokedeYMD3Masshosen,
-            RString nyushoShisetsuShurui1,
-            RString nyushoShisetsuName1,
-            RString shisetsuNyusho1,
-            RString shisetsuNyuin1,
-            RString shisetsuNyushoYMD1,
-            RString shisetsuTaisho1,
-            RString shisetsuTaiin1,
-            RString shisetsuTaishoYMD1,
-            RString nyushoShisetsuShurui2,
-            RString nyushoShisetsuName2,
-            RString shisetsuNyusho2,
-            RString shisetsuNyuin2,
-            RString shisetsuNyushoYMD2,
-            RString shisetsuTaisho2,
-            RString shisetsuTaiin2,
-            RString shisetsuTaishoYMD2,
+            RString nyushoShisetsuShurui,
+            List<RString> nyushoShisetsuName,
+            RString shisetsuNyusho,
+            RString shisetsuNyuin,
+            List<RString> shisetsuNyushoYMD,
+            RString shisetsuTaisho,
+            RString shisetsuTaiin,
+            List<RString> shisetsuTaishoYMD,
             RString hokenshaNo,
             RString hokenshaJusho,
             RString hokenshaName,
@@ -259,22 +233,14 @@ public class ShikakushashoBodyItem {
         this.keikakuTodokedeYMD3 = keikakuTodokedeYMD3;
         this.keikakuTodokedeYMD3Asutarisuku = keikakuTodokedeYMD3Asutarisuku;
         this.keikakuTodokedeYMD3Masshosen = keikakuTodokedeYMD3Masshosen;
-        this.nyushoShisetsuShurui1 = nyushoShisetsuShurui1;
-        this.nyushoShisetsuName1 = nyushoShisetsuName1;
-        this.shisetsuNyusho1 = shisetsuNyusho1;
-        this.shisetsuNyuin1 = shisetsuNyuin1;
-        this.shisetsuNyushoYMD1 = shisetsuNyushoYMD1;
-        this.shisetsuTaisho1 = shisetsuTaisho1;
-        this.shisetsuTaiin1 = shisetsuTaiin1;
-        this.shisetsuTaishoYMD1 = shisetsuTaishoYMD1;
-        this.nyushoShisetsuShurui2 = nyushoShisetsuShurui2;
-        this.nyushoShisetsuName2 = nyushoShisetsuName2;
-        this.shisetsuNyusho2 = shisetsuNyusho2;
-        this.shisetsuNyuin2 = shisetsuNyuin2;
-        this.shisetsuNyushoYMD2 = shisetsuNyushoYMD2;
-        this.shisetsuTaisho2 = shisetsuTaisho2;
-        this.shisetsuTaiin2 = shisetsuTaiin2;
-        this.shisetsuTaishoYMD2 = shisetsuTaishoYMD2;
+        this.nyushoShisetsuShurui = nyushoShisetsuShurui;
+        this.nyushoShisetsuName = nyushoShisetsuName;
+        this.shisetsuNyusho = shisetsuNyusho;
+        this.shisetsuNyuin = shisetsuNyuin;
+        this.shisetsuNyushoYMD = shisetsuNyushoYMD;
+        this.shisetsuTaisho = shisetsuTaisho;
+        this.shisetsuTaiin = shisetsuTaiin;
+        this.shisetsuTaishoYMD = shisetsuTaishoYMD;
         this.hokenshaNo = hokenshaNo;
         this.hokenshaJusho = hokenshaJusho;
         this.hokenshaName = hokenshaName;
