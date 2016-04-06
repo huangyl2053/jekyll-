@@ -1,10 +1,13 @@
-// TODO: 業務に合わせてパスを変更してください
 package jp.co.ndensan.reams.db.dbb.entity.report.karisanteihokenryononyutsuchishoginfuri;
 
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.report.IReportSource;
 import jp.co.ndensan.reams.uz.uza.report.source.ReportItem;
 
+/**
+ *
+ * 帳票設計_DBBRP00007_3_保険料納入通知書（仮算定）【銀振タイプ】KarisanteiHokenryoNonyuTsuchishoGinfuriSource
+ */
 public class KarisanteiHokenryoNonyuTsuchishoGinfuriSource implements IReportSource {
 // <editor-fold defaultstate="collapsed" desc="Generated Code">
 

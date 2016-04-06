@@ -4,15 +4,17 @@ package jp.co.ndensan.reams.db.dbb.divcontroller.entity.parentdiv.DBB9020002;
  * このファイルへの変更は、再生成時には損失するため
  * 不正な動作の原因になります。
  */
+
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 
 /**
- * TokubetsuChoshuTotal のクラスファイル 
- * 
- * @author 自動生成
+ * TokubetsuChoshuTotal のクラスファイル
+ *
+ * @reamsid_L DBB-1770-040 cuilin
  */
 public class TokubetsuChoshuTotalDiv extends Panel {
+
     // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-01-15_09-59-03">
     /*
      * [ private の作成 ]

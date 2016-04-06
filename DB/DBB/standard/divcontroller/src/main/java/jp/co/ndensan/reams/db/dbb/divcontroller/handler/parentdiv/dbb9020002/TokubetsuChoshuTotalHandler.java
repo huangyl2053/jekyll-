@@ -67,6 +67,8 @@ import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 
 /**
  * システム管理情報（特別徴収）画面Handlerクラスです。
+ *
+ * @reamsid_L DBB-1770-040 cuilin
  */
 public final class TokubetsuChoshuTotalHandler {
 
@@ -229,7 +231,7 @@ public final class TokubetsuChoshuTotalHandler {
         } else {
             前排他キーの解除();
             throw new ApplicationException(UrErrorMessages.実行不可.getMessage()
-                    .replace(保険者構成エラーメッセージ.toString()));
+                    .replace(保険者構成エラーメッセージ.toString()).evaluate());
         }
         return false;
     }
@@ -441,8 +443,8 @@ public final class TokubetsuChoshuTotalHandler {
                 .getHeijunka8GatsuKeisanHoho().getDdlHeijunka8GatsuKeisanHoho().setSelectedKey(計算方法);
 
         List<KeyValueDataSource> radList = new ArrayList<>();
-        radList.add(new KeyValueDataSource(HeijunkaUmu.しない.getコード(), HeijunkaUmu.しない.get名称()));
         radList.add(new KeyValueDataSource(HeijunkaUmu.する.getコード(), HeijunkaUmu.する.get名称()));
+        radList.add(new KeyValueDataSource(HeijunkaUmu.しない.getコード(), HeijunkaUmu.しない.get名称()));
         div.getTokubetsuChoshu().getTabTokucho().getTplKibetsuHasuJoho().getHasuHeijunkaJoho()
                 .getHeijunka8GatsuKeisanHoho().getRad8GatsuGengakuHeijunKa().setDataSource(radList);
         div.getTokubetsuChoshu().getTabTokucho().getTplKibetsuHasuJoho().getHasuHeijunkaJoho()

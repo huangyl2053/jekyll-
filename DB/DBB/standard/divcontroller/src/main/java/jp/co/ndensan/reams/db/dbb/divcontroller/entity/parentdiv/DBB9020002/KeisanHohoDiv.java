@@ -4,17 +4,20 @@ package jp.co.ndensan.reams.db.dbb.divcontroller.entity.parentdiv.DBB9020002;
  * このファイルへの変更は、再生成時には損失するため
  * 不正な動作の原因になります。
  */
+
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import jp.co.ndensan.reams.uz.uza.ui.binding.*;
+import jp.co.ndensan.reams.uz.uza.ui.binding.DropDownList;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
+import jp.co.ndensan.reams.uz.uza.ui.binding.Space;
 
 /**
- * KeisanHoho のクラスファイル 
- * 
- * @author 自動生成
+ * KeisanHoho のクラスファイル
+ *
+ * @reamsid_L DBB-1770-040 cuilin
  */
 public class KeisanHohoDiv extends Panel {
+
     // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-01-15_09-59-03">
     /*
      * [ private の作成 ]
@@ -98,7 +101,7 @@ public class KeisanHohoDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setDdl12GatsuKaishiIraiKingakuKeisanHoho(DropDownList ddl12GatsuKaishiIraiKingakuKeisanHoho) {
+    public void setDdl12GatsuKaishiIraiKingakuKeisanHoho(DropDownList ddl12GatsuKaishiIraiKingakuKeisanHoho) {
         this.getIraiKingakuKeisanHoho().setDdl12GatsuKaishiIraiKingakuKeisanHoho(ddl12GatsuKaishiIraiKingakuKeisanHoho);
     }
 
@@ -108,7 +111,7 @@ public class KeisanHohoDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setDdl2GatsuKaishiIraiKingakuKeisanHoho(DropDownList ddl2GatsuKaishiIraiKingakuKeisanHoho) {
+    public void setDdl2GatsuKaishiIraiKingakuKeisanHoho(DropDownList ddl2GatsuKaishiIraiKingakuKeisanHoho) {
         this.getIraiKingakuKeisanHoho().setDdl2GatsuKaishiIraiKingakuKeisanHoho(ddl2GatsuKaishiIraiKingakuKeisanHoho);
     }
 
@@ -118,7 +121,7 @@ public class KeisanHohoDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setDdl4GatsuKaishiIraiKingakuKeisanHoho(DropDownList ddl4GatsuKaishiIraiKingakuKeisanHoho) {
+    public void setDdl4GatsuKaishiIraiKingakuKeisanHoho(DropDownList ddl4GatsuKaishiIraiKingakuKeisanHoho) {
         this.getIraiKingakuKeisanHoho().setDdl4GatsuKaishiIraiKingakuKeisanHoho(ddl4GatsuKaishiIraiKingakuKeisanHoho);
     }
 
@@ -128,7 +131,7 @@ public class KeisanHohoDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setDdl6GatsuKaishiIraiKingakuKeisanHoho(DropDownList ddl6GatsuKaishiIraiKingakuKeisanHoho) {
+    public void setDdl6GatsuKaishiIraiKingakuKeisanHoho(DropDownList ddl6GatsuKaishiIraiKingakuKeisanHoho) {
         this.getIraiKingakuKeisanHoho().setDdl6GatsuKaishiIraiKingakuKeisanHoho(ddl6GatsuKaishiIraiKingakuKeisanHoho);
     }
 
@@ -138,7 +141,7 @@ public class KeisanHohoDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setDdl8GatsuKaishiIraiKingakuKeisanHoho(DropDownList ddl8GatsuKaishiIraiKingakuKeisanHoho) {
+    public void setDdl8GatsuKaishiIraiKingakuKeisanHoho(DropDownList ddl8GatsuKaishiIraiKingakuKeisanHoho) {
         this.getIraiKingakuKeisanHoho().setDdl8GatsuKaishiIraiKingakuKeisanHoho(ddl8GatsuKaishiIraiKingakuKeisanHoho);
     }
 
@@ -148,7 +151,7 @@ public class KeisanHohoDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setDdl6GatsuKaishiZenhan(DropDownList ddl6GatsuKaishiZenhan) {
+    public void setDdl6GatsuKaishiZenhan(DropDownList ddl6GatsuKaishiZenhan) {
         this.getTokubetsuChoshuShinkishaZenhan().setDdl6GatsuKaishiZenhan(ddl6GatsuKaishiZenhan);
     }
 
@@ -158,7 +161,7 @@ public class KeisanHohoDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setDdl8GatsuKaishiZenhan(DropDownList ddl8GatsuKaishiZenhan) {
+    public void setDdl8GatsuKaishiZenhan(DropDownList ddl8GatsuKaishiZenhan) {
         this.getTokubetsuChoshuShinkishaZenhan().setDdl8GatsuKaishiZenhan(ddl8GatsuKaishiZenhan);
     }
 
@@ -168,7 +171,7 @@ public class KeisanHohoDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setDdl10GatsuKaishiZenhan(DropDownList ddl10GatsuKaishiZenhan) {
+    public void setDdl10GatsuKaishiZenhan(DropDownList ddl10GatsuKaishiZenhan) {
         this.getTokubetsuChoshuShinkishaZenhan().setDdl10GatsuKaishiZenhan(ddl10GatsuKaishiZenhan);
     }
 

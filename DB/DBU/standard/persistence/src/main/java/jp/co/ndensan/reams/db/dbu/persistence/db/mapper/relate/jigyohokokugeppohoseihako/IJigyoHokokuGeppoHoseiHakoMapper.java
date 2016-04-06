@@ -12,6 +12,8 @@ import jp.co.ndensan.reams.db.dbu.entity.db.jigyohokokugeppohoseihako.JigyoHokok
 
 /**
  * 事業報告（月報）補正発行のMapperクラスです。
+ *
+ * @reamsid_L DBU-1100-100 cuilin
  */
 public interface IJigyoHokokuGeppoHoseiHakoMapper {
 

@@ -14,9 +14,9 @@ import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0820028.Kink
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0820028.dgdKinkyujiShoteiList_Row;
 import jp.co.ndensan.reams.db.dbc.divcontroller.handler.dbc0820028.KinkyujiShoteiShikanPanelHandler;
 import jp.co.ndensan.reams.db.dbc.divcontroller.viewbox.ViewStateKeys;
+import jp.co.ndensan.reams.db.dbc.divcontroller.viewbox.shoukanharaihishinseikensaku.ShoukanharaihishinseikensakuParameter;
 import jp.co.ndensan.reams.db.dbc.divcontroller.viewbox.shoukanharaihishinseikensaku.ShoukanharaihishinseimeisaikensakuParameter;
 import jp.co.ndensan.reams.db.dbc.divcontroller.viewbox.shoukanharaihishinseikensaku.SikibetuNokennsakuki;
-import jp.co.ndensan.reams.db.dbc.divcontroller.viewbox.shoukanharaihishinseikensaku.ShoukanharaihishinseikensakuParameter;
 import jp.co.ndensan.reams.db.dbc.service.core.shokanbaraijyokyoshokai.ShokanbaraiJyokyoShokai;
 import jp.co.ndensan.reams.db.dbc.service.core.syokanbaraihishikyushinseikette.SyokanbaraihiShikyuShinseiKetteManager;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
@@ -40,6 +40,8 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 
 /**
  * 償還払い費支給申請決定_サービス提供証明書(緊急時・所定疾患）画面クラスです
+ *
+ * @reamsid_L DBC-1030-050 xupeng
  */
 public class KinkyujiShoteiShikanPanel {
 
@@ -466,8 +468,7 @@ public class KinkyujiShoteiShikanPanel {
      */
     public ResponseData<KinkyujiShoteiShikanPanelDiv> onClick_btnFree(KinkyujiShoteiShikanPanelDiv div) {
         if (削除.equals(ViewStateHolder.get(ViewStateKeys.処理モード, RString.class))) {
-            return ResponseData.of(div).forwardWithEventName(DBC0820028TransitionEventName.一覧に戻る)
-                    .parameter(new RString("一覧に戻る"));
+            return ResponseData.of(div).forwardWithEventName(DBC0820028TransitionEventName.一覧に戻る).respond();
         }
         boolean flag = getHandler(div).get内容変更状態();
         if (flag) {
@@ -479,14 +480,12 @@ public class KinkyujiShoteiShikanPanel {
             if (new RString(UrQuestionMessages.入力内容の破棄.getMessage().getCode())
                     .equals(ResponseHolder.getMessageCode())
                     && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
-                return ResponseData.of(div).forwardWithEventName(DBC0820028TransitionEventName.一覧に戻る)
-                        .parameter(new RString("一覧に戻る"));
+                return ResponseData.of(div).forwardWithEventName(DBC0820028TransitionEventName.一覧に戻る).respond();
             } else {
                 ResponseData.of(div).respond();
             }
         } else {
-            return ResponseData.of(div).forwardWithEventName(DBC0820028TransitionEventName.一覧に戻る)
-                    .parameter(new RString("一覧に戻る"));
+            return ResponseData.of(div).forwardWithEventName(DBC0820028TransitionEventName.一覧に戻る).respond();
         }
         return ResponseData.of(div).respond();
     }

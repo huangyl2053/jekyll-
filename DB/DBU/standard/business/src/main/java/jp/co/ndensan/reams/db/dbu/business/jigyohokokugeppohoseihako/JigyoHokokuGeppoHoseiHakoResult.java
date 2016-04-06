@@ -16,10 +16,13 @@ import jp.co.ndensan.reams.uz.uza.math.Decimal;
 
 /**
  * 事業報告集計一覧データResultクラスです。
+ *
+ * @reamsid_L DBU-1100-100 cuilin
  */
 public class JigyoHokokuGeppoHoseiHakoResult {
 
     private final JigyoHokokuGeppoHoseiHakoEntity entity;
+    private static final RString 業報告統計データ情報メッセージ = new RString("事業報告統計データ情報");
 
     /**
      * 事業報告集計一覧データEntity作成処理
@@ -27,7 +30,7 @@ public class JigyoHokokuGeppoHoseiHakoResult {
      * @param entity 事業報告集計一覧データのエンティティ
      */
     public JigyoHokokuGeppoHoseiHakoResult(JigyoHokokuGeppoHoseiHakoEntity entity) {
-        requireNonNull(entity, UrSystemErrorMessages.値がnull.getReplacedMessage("事業報告統計データ情報"));
+        requireNonNull(entity, UrSystemErrorMessages.値がnull.getReplacedMessage(業報告統計データ情報メッセージ.toString()));
         this.entity = entity;
     }
 

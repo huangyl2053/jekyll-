@@ -11,6 +11,8 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
  * 事業報告集計一覧用パラメータクラスです。
+ *
+ * @reamsid_L DBU-1100-100 cuilin
  */
 @lombok.Getter
 @SuppressWarnings("PMD.UnusedPrivateField")

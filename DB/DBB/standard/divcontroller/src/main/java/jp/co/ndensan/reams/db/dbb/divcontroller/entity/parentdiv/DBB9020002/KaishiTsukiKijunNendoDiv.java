@@ -4,17 +4,19 @@ package jp.co.ndensan.reams.db.dbb.divcontroller.entity.parentdiv.DBB9020002;
  * このファイルへの変更は、再生成時には損失するため
  * 不正な動作の原因になります。
  */
+
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import jp.co.ndensan.reams.uz.uza.ui.binding.*;
+import jp.co.ndensan.reams.uz.uza.ui.binding.DropDownList;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 
 /**
- * KaishiTsukiKijunNendo のクラスファイル 
- * 
- * @author 自動生成
+ * KaishiTsukiKijunNendo のクラスファイル
+ *
+ * @reamsid_L DBB-1770-040 cuilin
  */
 public class KaishiTsukiKijunNendoDiv extends Panel {
+
     // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-01-15_09-59-03">
     /*
      * [ private の作成 ]
@@ -78,7 +80,7 @@ public class KaishiTsukiKijunNendoDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setDdl4GatsuHosoku(DropDownList ddl4GatsuHosoku) {
+    public void setDdl4GatsuHosoku(DropDownList ddl4GatsuHosoku) {
         this.getTokuchoKaishiTsuki().setDdl4GatsuHosoku(ddl4GatsuHosoku);
     }
 
@@ -88,7 +90,7 @@ public class KaishiTsukiKijunNendoDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setDdl6GatsuHosoku(DropDownList ddl6GatsuHosoku) {
+    public void setDdl6GatsuHosoku(DropDownList ddl6GatsuHosoku) {
         this.getTokuchoKaishiTsuki().setDdl6GatsuHosoku(ddl6GatsuHosoku);
     }
 
@@ -98,7 +100,7 @@ public class KaishiTsukiKijunNendoDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setDdl8GatsuHosoku(DropDownList ddl8GatsuHosoku) {
+    public void setDdl8GatsuHosoku(DropDownList ddl8GatsuHosoku) {
         this.getTokuchoKaishiTsuki().setDdl8GatsuHosoku(ddl8GatsuHosoku);
     }
 
@@ -108,7 +110,7 @@ public class KaishiTsukiKijunNendoDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setDdl10GatsuHosoku(DropDownList ddl10GatsuHosoku) {
+    public void setDdl10GatsuHosoku(DropDownList ddl10GatsuHosoku) {
         this.getTokuchoKaishiTsuki().setDdl10GatsuHosoku(ddl10GatsuHosoku);
     }
 
@@ -118,7 +120,7 @@ public class KaishiTsukiKijunNendoDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setDdl12GatsuHosoku(DropDownList ddl12GatsuHosoku) {
+    public void setDdl12GatsuHosoku(DropDownList ddl12GatsuHosoku) {
         this.getTokuchoKaishiTsuki().setDdl12GatsuHosoku(ddl12GatsuHosoku);
     }
 
@@ -128,7 +130,7 @@ public class KaishiTsukiKijunNendoDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setDdl2GatsuHosoku(DropDownList ddl2GatsuHosoku) {
+    public void setDdl2GatsuHosoku(DropDownList ddl2GatsuHosoku) {
         this.getTokuchoKaishiTsuki().setDdl2GatsuHosoku(ddl2GatsuHosoku);
     }
 
@@ -138,7 +140,7 @@ public class KaishiTsukiKijunNendoDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setDdl4GatsuKaishiNengakuKijunNendo(DropDownList ddl4GatsuKaishiNengakuKijunNendo) {
+    public void setDdl4GatsuKaishiNengakuKijunNendo(DropDownList ddl4GatsuKaishiNengakuKijunNendo) {
         this.getNengakuKijunNendo().setDdl4GatsuKaishiNengakuKijunNendo(ddl4GatsuKaishiNengakuKijunNendo);
     }
 
@@ -148,7 +150,7 @@ public class KaishiTsukiKijunNendoDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setDdl6GatsuKaishiNengakuKijunNendo(DropDownList ddl6GatsuKaishiNengakuKijunNendo) {
+    public void setDdl6GatsuKaishiNengakuKijunNendo(DropDownList ddl6GatsuKaishiNengakuKijunNendo) {
         this.getNengakuKijunNendo().setDdl6GatsuKaishiNengakuKijunNendo(ddl6GatsuKaishiNengakuKijunNendo);
     }
 
@@ -158,7 +160,7 @@ public class KaishiTsukiKijunNendoDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setDdl8GatsuKaishiNengakuKijunNendo(DropDownList ddl8GatsuKaishiNengakuKijunNendo) {
+    public void setDdl8GatsuKaishiNengakuKijunNendo(DropDownList ddl8GatsuKaishiNengakuKijunNendo) {
         this.getNengakuKijunNendo().setDdl8GatsuKaishiNengakuKijunNendo(ddl8GatsuKaishiNengakuKijunNendo);
     }
 
