@@ -7,6 +7,8 @@ package jp.co.ndensan.reams.db.dbc.divcontroller.viewbox;
 
 /**
  * 償還払い状況照会_サービス提供証明書画面のViewStateKeys
+ *
+ * @reamsid_L DBC-9999-022 cuilin
  */
 public enum ViewStateKeys {
 

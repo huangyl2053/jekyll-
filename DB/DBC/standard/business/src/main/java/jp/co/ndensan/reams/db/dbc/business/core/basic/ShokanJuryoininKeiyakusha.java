@@ -20,6 +20,8 @@ import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 
 /**
  * 償還受領委任契約者を管理するクラスです。
+ *
+ * @reamsid_L DBC-9999-012 cuilin
  */
 public class ShokanJuryoininKeiyakusha
         extends ModelBase<ShokanJuryoininKeiyakushaIdentifier, DbT3078ShokanJuryoininKeiyakushaEntity, ShokanJuryoininKeiyakusha>
