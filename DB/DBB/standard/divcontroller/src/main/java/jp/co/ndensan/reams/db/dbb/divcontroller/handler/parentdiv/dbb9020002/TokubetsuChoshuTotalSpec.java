@@ -15,6 +15,8 @@ import jp.co.ndensan.reams.uz.uza.core.validation.IPredicate;
 
 /**
  * {@link TokubetsuChoshuTotalDiv}の仕様クラスです。 <br> {@link TokubetsuChoshuTotalDiv}における画面としての仕様を定義しています。
+ *
+ * @reamsid_L DBB-1770-040 cuilin
  */
 public enum TokubetsuChoshuTotalSpec implements IPredicate<TokubetsuChoshuTotalDiv> {
 

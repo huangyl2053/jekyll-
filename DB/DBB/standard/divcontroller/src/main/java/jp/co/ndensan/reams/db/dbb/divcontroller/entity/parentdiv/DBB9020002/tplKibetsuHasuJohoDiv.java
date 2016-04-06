@@ -7,15 +7,18 @@ package jp.co.ndensan.reams.db.dbb.divcontroller.entity.parentdiv.DBB9020002;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import jp.co.ndensan.reams.uz.uza.ui.binding.*;
+import jp.co.ndensan.reams.uz.uza.ui.binding.DataGrid;
+import jp.co.ndensan.reams.uz.uza.ui.binding.DropDownList;
+import jp.co.ndensan.reams.uz.uza.ui.binding.RadioButton;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TabPanel;
 
 /**
- * tplKibetsuHasuJoho のクラスファイル 
- * 
- * @author 自動生成
+ * tplKibetsuHasuJoho のクラスファイル
+ *
+ * @reamsid_L DBB-1770-040 cuilin
  */
 public class tplKibetsuHasuJohoDiv extends TabPanel {
+
     // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-01-15_09-59-03">
     /*
      * [ private の作成 ]
@@ -79,7 +82,7 @@ public class tplKibetsuHasuJohoDiv extends TabPanel {
     }
 
     @JsonIgnore
-    public void  setDgKibetsuJoho(DataGrid<dgKibetsuJoho_Row> dgKibetsuJoho) {
+    public void setDgKibetsuJoho(DataGrid<dgKibetsuJoho_Row> dgKibetsuJoho) {
         this.getKibetsuJohoHasu().setDgKibetsuJoho(dgKibetsuJoho);
     }
 
@@ -89,7 +92,7 @@ public class tplKibetsuHasuJohoDiv extends TabPanel {
     }
 
     @JsonIgnore
-    public void  setKibetsuHokenryo(KibetsuHokenryoDiv KibetsuHokenryo) {
+    public void setKibetsuHokenryo(KibetsuHokenryoDiv KibetsuHokenryo) {
         this.getHasuHeijunkaJoho().setKibetsuHokenryo(KibetsuHokenryo);
     }
 
@@ -99,7 +102,7 @@ public class tplKibetsuHasuJohoDiv extends TabPanel {
     }
 
     @JsonIgnore
-    public void  setDdlHasu(DropDownList ddlHasu) {
+    public void setDdlHasu(DropDownList ddlHasu) {
         this.getHasuHeijunkaJoho().getKibetsuHokenryo().setDdlHasu(ddlHasu);
     }
 
@@ -109,7 +112,7 @@ public class tplKibetsuHasuJohoDiv extends TabPanel {
     }
 
     @JsonIgnore
-    public void  setHeijunka6GatsuKeisanHoho(Heijunka6GatsuKeisanHohoDiv Heijunka6GatsuKeisanHoho) {
+    public void setHeijunka6GatsuKeisanHoho(Heijunka6GatsuKeisanHohoDiv Heijunka6GatsuKeisanHoho) {
         this.getHasuHeijunkaJoho().setHeijunka6GatsuKeisanHoho(Heijunka6GatsuKeisanHoho);
     }
 
@@ -119,7 +122,7 @@ public class tplKibetsuHasuJohoDiv extends TabPanel {
     }
 
     @JsonIgnore
-    public void  setDdlHeijunkaKeisanHoho(DropDownList ddlHeijunkaKeisanHoho) {
+    public void setDdlHeijunkaKeisanHoho(DropDownList ddlHeijunkaKeisanHoho) {
         this.getHasuHeijunkaJoho().getHeijunka6GatsuKeisanHoho().setDdlHeijunkaKeisanHoho(ddlHeijunkaKeisanHoho);
     }
 
@@ -129,7 +132,7 @@ public class tplKibetsuHasuJohoDiv extends TabPanel {
     }
 
     @JsonIgnore
-    public void  setRadGengakuHeijunKa(RadioButton radGengakuHeijunKa) {
+    public void setRadGengakuHeijunKa(RadioButton radGengakuHeijunKa) {
         this.getHasuHeijunkaJoho().getHeijunka6GatsuKeisanHoho().setRadGengakuHeijunKa(radGengakuHeijunKa);
     }
 
@@ -139,7 +142,7 @@ public class tplKibetsuHasuJohoDiv extends TabPanel {
     }
 
     @JsonIgnore
-    public void  setRadZogakuHeijunKa(RadioButton radZogakuHeijunKa) {
+    public void setRadZogakuHeijunKa(RadioButton radZogakuHeijunKa) {
         this.getHasuHeijunkaJoho().getHeijunka6GatsuKeisanHoho().setRadZogakuHeijunKa(radZogakuHeijunKa);
     }
 
@@ -149,7 +152,7 @@ public class tplKibetsuHasuJohoDiv extends TabPanel {
     }
 
     @JsonIgnore
-    public void  setHeijunka8GatsuKeisanHoho(Heijunka8GatsuKeisanHohoDiv Heijunka8GatsuKeisanHoho) {
+    public void setHeijunka8GatsuKeisanHoho(Heijunka8GatsuKeisanHohoDiv Heijunka8GatsuKeisanHoho) {
         this.getHasuHeijunkaJoho().setHeijunka8GatsuKeisanHoho(Heijunka8GatsuKeisanHoho);
     }
 
@@ -159,7 +162,7 @@ public class tplKibetsuHasuJohoDiv extends TabPanel {
     }
 
     @JsonIgnore
-    public void  setDdlHeijunka8GatsuKeisanHoho(DropDownList ddlHeijunka8GatsuKeisanHoho) {
+    public void setDdlHeijunka8GatsuKeisanHoho(DropDownList ddlHeijunka8GatsuKeisanHoho) {
         this.getHasuHeijunkaJoho().getHeijunka8GatsuKeisanHoho().setDdlHeijunka8GatsuKeisanHoho(ddlHeijunka8GatsuKeisanHoho);
     }
 
@@ -169,7 +172,7 @@ public class tplKibetsuHasuJohoDiv extends TabPanel {
     }
 
     @JsonIgnore
-    public void  setRad8GatsuGengakuHeijunKa(RadioButton rad8GatsuGengakuHeijunKa) {
+    public void setRad8GatsuGengakuHeijunKa(RadioButton rad8GatsuGengakuHeijunKa) {
         this.getHasuHeijunkaJoho().getHeijunka8GatsuKeisanHoho().setRad8GatsuGengakuHeijunKa(rad8GatsuGengakuHeijunKa);
     }
 
@@ -179,7 +182,7 @@ public class tplKibetsuHasuJohoDiv extends TabPanel {
     }
 
     @JsonIgnore
-    public void  setRad8GatsuZogakuHeijunKa(RadioButton rad8GatsuZogakuHeijunKa) {
+    public void setRad8GatsuZogakuHeijunKa(RadioButton rad8GatsuZogakuHeijunKa) {
         this.getHasuHeijunkaJoho().getHeijunka8GatsuKeisanHoho().setRad8GatsuZogakuHeijunKa(rad8GatsuZogakuHeijunKa);
     }
 
@@ -189,7 +192,7 @@ public class tplKibetsuHasuJohoDiv extends TabPanel {
     }
 
     @JsonIgnore
-    public void  setFuchoKirikaeKeisanHoho(FuchoKirikaeKeisanHohoDiv FuchoKirikaeKeisanHoho) {
+    public void setFuchoKirikaeKeisanHoho(FuchoKirikaeKeisanHohoDiv FuchoKirikaeKeisanHoho) {
         this.getHasuHeijunkaJoho().setFuchoKirikaeKeisanHoho(FuchoKirikaeKeisanHoho);
     }
 
@@ -199,7 +202,7 @@ public class tplKibetsuHasuJohoDiv extends TabPanel {
     }
 
     @JsonIgnore
-    public void  setDdlFuchoKirikaeKeisanHoho(DropDownList ddlFuchoKirikaeKeisanHoho) {
+    public void setDdlFuchoKirikaeKeisanHoho(DropDownList ddlFuchoKirikaeKeisanHoho) {
         this.getHasuHeijunkaJoho().getFuchoKirikaeKeisanHoho().setDdlFuchoKirikaeKeisanHoho(ddlFuchoKirikaeKeisanHoho);
     }
 
@@ -209,7 +212,7 @@ public class tplKibetsuHasuJohoDiv extends TabPanel {
     }
 
     @JsonIgnore
-    public void  setDdlFuchoKirikaeJufukuStKi(DropDownList ddlFuchoKirikaeJufukuStKi) {
+    public void setDdlFuchoKirikaeJufukuStKi(DropDownList ddlFuchoKirikaeJufukuStKi) {
         this.getHasuHeijunkaJoho().getFuchoKirikaeKeisanHoho().setDdlFuchoKirikaeJufukuStKi(ddlFuchoKirikaeJufukuStKi);
     }
 

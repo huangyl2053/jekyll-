@@ -24,11 +24,14 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
 
 /**
  * システム管理情報（特別徴収）画面クラスです。
+ *
+ * @reamsid_L DBB-1770-040 cuilin
  */
 public class TokubetsuChoshuTotal {
 
     private static final FlexibleYear 平成21年 = new FlexibleYear("2009");
     private static final FlexibleYear 平成17年 = new FlexibleYear("2005");
+    private static final RString 前排他メッセージ = new RString("対象の情報は他のユーザーによって作業中です。");
     private static final RString 終了メッセージ1 = new RString("調定年度：");
     private static final RString 終了メッセージ2 = new RString("年度");
     private static final RString 終了メッセージ3 = new RString("システム管理登録_特別徴収保存処理");
@@ -50,7 +53,8 @@ public class TokubetsuChoshuTotal {
     public ResponseData<TokubetsuChoshuTotalDiv> onLoad(TokubetsuChoshuTotalDiv div) {
         boolean gotLock = getHandler(div).前排他キーのセット();
         if (!gotLock) {
-            throw new ApplicationException(UrErrorMessages.排他_他のユーザが使用中.getMessage().evaluate());
+            throw new ApplicationException(UrErrorMessages.排他_他のユーザが使用中.getMessage()
+                    .replace(前排他メッセージ.toString()).evaluate());
         }
         getHandler(div).set初期化();
         FlexibleYear 調定年度 = new FlexibleYear(div.getKonkaiShoriNaiyo().getDdlChoteiNendo().getSelectedKey());
