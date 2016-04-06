@@ -14,6 +14,7 @@ import lombok.Setter;
 /**
  * 広域内転居結果一覧表作成バッチパラメータクラス
  *
+ * @reamsid_L DBU-1150-040 xupeng
  */
 @Getter
 @Setter

@@ -3,22 +3,18 @@ package jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0310011;
  * このコードはツールによって生成されました。
  * このファイルへの変更は、以下の状況下で不正な動作の原因になったり、
  * コードが再生成されるときに損失したりします。
- * Fri Mar 18 10:28:31 CST 2016 
+ * Fri Mar 18 10:28:31 CST 2016
  */
 
-
-
-import jp.co.ndensan.reams.uz.uza.ui.binding.DataRow;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.ui.binding.DataRow;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxDate;
 
-
 /**
- * dgKeyakusya_Row のクラスファイル 
- * 
- * @author 自動生成
+ * dgKeyakusya_Row のクラスファイル
+ *
+ * @reamsid_L DBC-2130-010 cuilin
  */
-
 public class dgKeyakusya_Row extends DataRow {
     // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-01-15_09-59-03">
 

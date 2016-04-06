@@ -4,17 +4,20 @@ package jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0310011;
  * このファイルへの変更は、再生成時には損失するため
  * 不正な動作の原因になります。
  */
+
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import jp.co.ndensan.reams.uz.uza.ui.binding.*;
+import jp.co.ndensan.reams.uz.uza.ui.binding.Button;
+import jp.co.ndensan.reams.uz.uza.ui.binding.DataGrid;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 
 /**
- * PnlTotalSearch のクラスファイル 
- * 
- * @author 自動生成
+ * PnlTotalSearch のクラスファイル
+ *
+ * @reamsid_L DBC-2130-010 cuilin
  */
 public class PnlTotalSearchDiv extends Panel {
+
     // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-01-15_09-59-03">
     /*
      * [ private の作成 ]
@@ -78,7 +81,7 @@ public class PnlTotalSearchDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setDgKeyakusya(DataGrid<dgKeyakusya_Row> dgKeyakusya) {
+    public void setDgKeyakusya(DataGrid<dgKeyakusya_Row> dgKeyakusya) {
         this.getPnlKeiyakusyaList().setDgKeyakusya(dgKeyakusya);
     }
 
@@ -88,7 +91,7 @@ public class PnlTotalSearchDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setBtnSearchAgain(Button btnSearchAgain) {
+    public void setBtnSearchAgain(Button btnSearchAgain) {
         this.getPnlKeiyakusyaList().setBtnSearchAgain(btnSearchAgain);
     }
 

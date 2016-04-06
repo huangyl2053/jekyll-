@@ -12,6 +12,8 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
  * 受領委任払いの契約事業者を管理する画面のパラメータです。
+ *
+ * @reamsid_L DBC-2130-010 cuilin
  */
 @lombok.Getter
 @SuppressWarnings("PMD.UnusedPrivateField")
