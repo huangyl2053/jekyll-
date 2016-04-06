@@ -6,6 +6,7 @@
 package jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.kagoketteihokenshain;
 
 import java.util.List;
+import jp.co.ndensan.reams.db.dbc.entity.db.relate.kagoketteihokenshain.KagoKetteiHokenshaInEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.kagoketteihokenshain.KagoKetteiHokenshaInMeisaiEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.kagoketteihokenshain.KagoKetteiHokenshaInShukeiEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.kagoketteihokenshain.ShihihokenshabangoTempTableEntity;
@@ -83,4 +84,10 @@ public interface IKagoKetteiHokenshaInMapper {
      */
     void insert新被保険者番号(ShihihokenshabangoTempTableEntity entity);
 
+    /**
+     * 一時テーブル取得する
+     *
+     * @return List<KagoKetteiHokenshaInEntity>
+     */
+    List<KagoKetteiHokenshaInEntity> select一時テーブル();
 }
