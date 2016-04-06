@@ -4,9 +4,9 @@ package jp.co.ndensan.reams.db.dbc.divcontroller.entity.commonchilddiv.ShokanShi
  * このファイルへの変更は、再生成時には損失するため
  * 不正な動作の原因になります。
  */
-
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.ui.binding.*;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 
 import java.util.HashSet;
@@ -27,7 +27,6 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxDate;
  * @author 自動生成
  */
 public class ShokanShinseiListDiv extends Panel implements IShokanShinseiListDiv {
-
     // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-01-15_09-59-03">
     /*
      * [ private の作成 ]
@@ -283,7 +282,7 @@ public class ShokanShinseiListDiv extends Panel implements IShokanShinseiListDiv
             DisplayType[] enumArray = DisplayType.values();
 
             for (DisplayType enumStr : enumArray) {
-                if (str.equals(enumStr.name.toString())) {
+                if (str.equals(enumStr.name.toString())) { 
                     return enumStr;
                 }
             }
@@ -298,11 +297,11 @@ public class ShokanShinseiListDiv extends Panel implements IShokanShinseiListDiv
     }
 
     public DisplayType getMode_DisplayType() {
-        return (DisplayType) _CommonChildDivModeUtil.getMode(this.modes, DisplayType.class);
+        return (DisplayType) _CommonChildDivModeUtil.getMode( this.modes, DisplayType.class );
     }
 
-    public void setMode_DisplayType(DisplayType value) {
-        _CommonChildDivModeUtil.setMode(this.modes, DisplayType.class, value);
+    public void setMode_DisplayType( DisplayType value ) {
+        _CommonChildDivModeUtil.setMode( this.modes, DisplayType.class , value );
     }
 
     // </editor-fold>

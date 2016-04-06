@@ -24,6 +24,7 @@ import jp.co.ndensan.reams.uz.uza.message.MessageDialogSelectedResult;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ResponseHolder;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 import jp.co.ndensan.reams.uz.uza.util.db.SearchResult;
+import jp.co.ndensan.reams.uz.uza.util.serialization.DataPassingConverter;
 
 /**
  * 共有子Div「償還払申請一覧」のイベントを定義した共有子Divです。
@@ -36,6 +37,29 @@ public class ShokanShinseiList {
     private static final RString 修正モード = new RString("修正");
     private static final RString 削除モード = new RString("削除");
     private static final RString 照会 = new RString("照会");
+
+    /**
+     * 償還払申請一覧の初期化。<br/>
+     *
+     * @param requestDiv ShokanShinseiListDiv
+     * @return ResponseData<ShokanShinseiListDiv>
+     */
+    public ResponseData<ShokanShinseiListDiv> onLoad(ShokanShinseiListDiv requestDiv) {
+        RString モード = requestDiv.getモード();
+        HihokenshaNo 被保険者番号 = DataPassingConverter.deserialize(requestDiv.get被保険者番号(), HihokenshaNo.class);
+        FlexibleYearMonth サービス年月From = DataPassingConverter.deserialize(requestDiv.getサービス年月From(), FlexibleYearMonth.class);
+        FlexibleYearMonth サービス年月To = DataPassingConverter.deserialize(requestDiv.getサービス年月To(), FlexibleYearMonth.class);
+
+        ResponseData<ShokanShinseiListDiv> responseData = new ResponseData<>();
+        if (!RString.isNullOrEmpty(モード) && 被保険者番号 != null
+                && サービス年月From != null && サービス年月To != null) {
+            requestDiv.initialize(モード, 被保険者番号, サービス年月From, サービス年月To);
+
+        }
+        responseData.data = requestDiv;
+
+        return responseData;
+    }
 
     /**
      * 「申請を追加する」ボタン押下です。
