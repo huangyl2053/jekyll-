@@ -10,8 +10,9 @@ import jp.co.ndensan.reams.db.dba.entity.report.shikakushasho.ShikakushashoRepor
 import jp.co.ndensan.reams.uz.uza.report.IReportEditor;
 
 /**
- *
  * 介護保険資格者証ヘッダエディターのインターフェースクラスです。
+ * 
+ * @reamsid_L DBU-0490-080  suguangjun
  */
 interface IShikakushashoEditor extends IReportEditor<ShikakushashoReportSource> {
 }

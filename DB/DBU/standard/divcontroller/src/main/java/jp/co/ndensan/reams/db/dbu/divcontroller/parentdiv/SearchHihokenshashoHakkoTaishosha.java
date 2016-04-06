@@ -7,7 +7,6 @@ package jp.co.ndensan.reams.db.dbu.divcontroller.parentdiv;
 
 //import java.util.ArrayList;
 import jp.co.ndensan.reams.db.dbu.divcontroller.entity.parentdiv.dbu0410011.SearchHihokenshashoHakkoDiv;
-//import jp.co.ndensan.reams.uz.uza.ui.binding.KeyValueDataSource;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 
 /**
@@ -27,7 +26,7 @@ public class SearchHihokenshashoHakkoTaishosha {
             SearchHihokenshashoHakkoDiv panel) {
         ResponseData<SearchHihokenshashoHakkoDiv> response = new ResponseData<>();
 
-        setInitData(panel);
+//        setInitData(panel);
 
         response.data = panel;
         return response;
@@ -52,10 +51,10 @@ public class SearchHihokenshashoHakkoTaishosha {
 
     }
 
-    /*
-     *被保険者証発行対象者検索情報を設定します。
-     */
-    private void setInitData(SearchHihokenshashoHakkoDiv panel) {
+//    /*
+//     *被保険者証発行対象者検索情報を設定します。
+//     */
+//    private void setInitData(SearchHihokenshashoHakkoDiv panel) {
 
 //        List<HashMap> hihokenshashoHakkoList = YamlLoader.DBU.loadAsList(
 //                new RString("dbu0410011/HihokenshashoHakkoTaishoshaList.yml"));
@@ -80,5 +79,5 @@ public class SearchHihokenshashoHakkoTaishosha {
 //
 //        panel.getCcdSearchHihokenshashoHakkoTaishosha().getDdlSaikinShorisha().setDataSource(dataSource);
 //        panel.getCcdSearchHihokenshashoHakkoTaishosha().getDdlSaikinShorisha().setSelectedItem(new RString("0"));
-    }
+//    }
 }

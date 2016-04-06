@@ -14,6 +14,12 @@ import jp.co.ndensan.reams.ua.uax.entity.db.basic.UaFt200FindShikibetsuTaishoEnt
  */
 public interface IJukyuShikakuShomeishoMapper {
 
+    /**
+     * 宛名識別対象PSMを取得します。
+     *
+     * @param searchkey JukyuShikakuShomeishoMyBatisParameter
+     * @return UaFt200FindShikibetsuTaishoEntity
+     */
     UaFt200FindShikibetsuTaishoEntity get宛名識別対象PSM(JukyuShikakuShomeishoMyBatisParameter searchkey);
 
 }

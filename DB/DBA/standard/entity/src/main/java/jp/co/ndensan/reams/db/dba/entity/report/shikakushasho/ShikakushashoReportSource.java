@@ -5,8 +5,9 @@ import jp.co.ndensan.reams.uz.uza.report.IReportSource;
 import jp.co.ndensan.reams.uz.uza.report.source.ReportItem;
 
 /**
- * 
  * 介護保険資格者証の帳票ReportSourceクラスです。
+ * 
+ * @reamsid_L DBU-0490-080  suguangjun
  */
 public class ShikakushashoReportSource implements IReportSource {
 // <editor-fold defaultstate="collapsed" desc="Generated Code">

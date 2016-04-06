@@ -29,7 +29,6 @@ public class KaigoHokenJigyoHokokuNenpo {
      * @param 事業報告集計一覧データ 事業報告集計一覧データ
      * @link KaigoHokenJigyoHokokuNenpoEntity}より{@link KaigoHokenJigyoHokokuNenpo}を生成します。
      *
-     * @param 事業報告集計一覧データ @link KaigoHokenJigyoHokokuNenpoEntity}
      */
     public KaigoHokenJigyoHokokuNenpo(KaigoHokenJigyoHokokuNenpoEntity 事業報告集計一覧データ) {
         this.事業報告集計一覧データ = requireNonNull(事業報告集計一覧データ,

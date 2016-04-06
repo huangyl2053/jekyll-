@@ -15,57 +15,12 @@ import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 public class ShikakuTokusoRireki {
 
     /**
-     * onLoad時の処理です。<br/>
-     *
-     * @param div {@link ShikakuTokusoRirekiDiv  資格得喪履歴Div}
-     * @return 資格得喪履歴Divを持つResponseData
-     */
-    public ResponseData<ShikakuTokusoRirekiDiv> onLoad(ShikakuTokusoRirekiDiv div) {
-        div.setMode_DisplayType(ShikakuTokusoRirekiDiv.DisplayType.getEnum(div.getMode().toString()));
-        return ResponseData.of(div).respond();
-
-    }
-
-    /**
-     * 追加ボタン押下時の処理です。<br/>
-     *
-     * @param div {@link ShikakuTokusoRirekiDiv  資格得喪履歴Div}
-     * @return 資格得喪履歴Divを持つResponseData
-     */
-    public ResponseData<ShikakuTokusoRirekiDiv> onClick_btnAdd(ShikakuTokusoRirekiDiv div) {
-
-        return ResponseData.of(div).respond();
-    }
-
-    /**
-     * 修正ボタン押下時の処理です。<br/>
-     *
-     * @param div {@link ShikakuTokusoRirekiDiv  資格得喪履歴Div}
-     * @return 資格得喪履歴Divを持つResponseData
-     */
-    public ResponseData<ShikakuTokusoRirekiDiv> onClick_btnUpdate(ShikakuTokusoRirekiDiv div) {
-
-        return ResponseData.of(div).respond();
-    }
-
-    /**
      * 削除ボタン押下時の処理です。<br/>
      *
      * @param div {@link ShikakuTokusoRirekiDiv  資格得喪履歴Div}
      * @return 資格得喪履歴Divを持つResponseData
      */
     public ResponseData<ShikakuTokusoRirekiDiv> onClick_btnDelete(ShikakuTokusoRirekiDiv div) {
-
-        return ResponseData.of(div).respond();
-    }
-
-    /**
-     * 詳細ボタン押下時の処理です。<br/>
-     *
-     * @param div {@link ShikakuTokusoRirekiDiv  資格得喪履歴Div}
-     * @return 資格得喪履歴Divを持つResponseData
-     */
-    public ResponseData<ShikakuTokusoRirekiDiv> onClick_btnSelect(ShikakuTokusoRirekiDiv div) {
 
         return ResponseData.of(div).respond();
     }

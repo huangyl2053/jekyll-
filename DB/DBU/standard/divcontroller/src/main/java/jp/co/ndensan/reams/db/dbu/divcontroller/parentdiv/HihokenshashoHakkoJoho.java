@@ -136,7 +136,24 @@ public class HihokenshashoHakkoJoho {
         //支援事業者情報
         hashMap = hihokenshashoHakkoJohoList.get(LIST_RECORD4);
         ymlData = new ControlGenerator(hashMap);
+        setJigyoshaData(panel, ymlData);
 
+        //施設入退所情報
+        hashMap = hihokenshashoHakkoJohoList.get(LIST_RECORD5);
+        ymlData = new ControlGenerator(hashMap);
+        setShisetsuTaishoData(panel, ymlData);
+
+        response.data = panel;
+        return response;
+    }
+    
+    /**
+     * 支援事業者情報を設定する。
+     *
+     * @param panel HihokenshashoHakkoJohoDiv
+     * @param ymlData ControlGenerator
+     */
+    private void setJigyoshaData(HihokenshashoHakkoJohoDiv panel, ControlGenerator ymlData) {
         panel.getHihokenshashoHakkoShosaiJoho().getTabHihokenshaShikakuShosai().
                 getTplShienJigyosha().getTblJigyosha().getTxtJigyosha1().
                 setValue(ymlData.getAsRString("jigyoshamei1"));
@@ -160,11 +177,15 @@ public class HihokenshashoHakkoJoho {
         panel.getHihokenshashoHakkoShosaiJoho().getTabHihokenshaShikakuShosai().
                 getTplShienJigyosha().getTblJigyosha().getTxtTodokedeDate3().
                 setValue(ymlData.getAsTextBoxFlexibleDate("todokedebi3").getValue());
-
-        //施設入退所情報
-        hashMap = hihokenshashoHakkoJohoList.get(LIST_RECORD5);
-        ymlData = new ControlGenerator(hashMap);
-
+    }
+    
+    /**
+     * 施設入退所情報を設定する。
+     *
+     * @param panel HihokenshashoHakkoJohoDiv
+     * @param ymlData ControlGenerator
+     */
+    private void setShisetsuTaishoData(HihokenshashoHakkoJohoDiv panel, ControlGenerator ymlData) {
         panel.getHihokenshashoHakkoShosaiJoho().getTabHihokenshaShikakuShosai().
                 getTplShisetsuNyutaisho().getTblShisetsuNyutaisho().getTxtShisetsuShurui1().
                 setValue(ymlData.getAsRString("shisetsushurui1"));
@@ -212,9 +233,6 @@ public class HihokenshashoHakkoJoho {
         panel.getHihokenshashoHakkoShosaiJoho().getTabHihokenshaShikakuShosai().
                 getTplShisetsuNyutaisho().getTblShisetsuNyutaisho().getTxtShisetsuTaishoDate3().
                 setValue(ymlData.getAsTextBoxFlexibleDate("taishobi3").getValue());
-
-        response.data = panel;
-        return response;
     }
 
     /**

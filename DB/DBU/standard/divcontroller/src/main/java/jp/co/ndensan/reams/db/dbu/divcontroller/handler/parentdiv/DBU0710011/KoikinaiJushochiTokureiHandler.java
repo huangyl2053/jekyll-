@@ -151,7 +151,7 @@ public class KoikinaiJushochiTokureiHandler {
         return batchparam;
     }
     
-    private class ComparatorByStartDateSort implements Comparator {
+    private static class ComparatorByStartDateSort implements Comparator {
 
         @Override
         public int compare(Object arg0, Object arg1) {
