@@ -93,6 +93,20 @@ public class DbT1005KaigoJogaiTokureiTaishoShisetsuDac implements ISaveable<DbT1
     }
 
     /**
+     * DbT1005KaigoJogaiTokureiTaishoShisetsuEntityを登録します。状態によってinsert/update/delete処理に振り分けられます。
+     *
+     * @param entity entity
+     * @return 登録件数
+     */
+    @Transaction
+    public int saveOrDeletePhysicalBy(DbT1005KaigoJogaiTokureiTaishoShisetsuEntity entity) {
+        requireNonNull(entity, UrSystemErrorMessages.値がnull.getReplacedMessage("介護除外住所地特例対象施設エンティティ"));
+        // TODO 物理削除であるかは業務ごとに検討してください。
+        //return DbAccessorMethodSelector.saveByForDeletePhysical(new DbAccessorNormalType(session), entity);
+        return DbAccessors.saveOrDeletePhysicalBy(new DbAccessorNormalType(session), entity);
+    }
+
+    /**
      * 主キーで介護除外住所地特例対象施設を取得します。
      *
      * @param 事業者種別 JigyoshaShubetsu
