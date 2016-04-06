@@ -25,6 +25,8 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 
 /**
  * 償還払い状況照会_申請情報照会画面クラスです
+ *
+ * @reamsid_L DBC-1010-170 xupeng
  */
 public class ShinseiDetail {
 

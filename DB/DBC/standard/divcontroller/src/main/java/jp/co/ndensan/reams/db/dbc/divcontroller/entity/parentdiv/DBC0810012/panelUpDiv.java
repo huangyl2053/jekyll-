@@ -15,7 +15,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 /**
  * panelUp のクラスファイル
  *
- * @author 自動生成
+ * @reamsid_L DBC-1010-170 xupeng
  */
 public class panelUpDiv extends Panel {
 
