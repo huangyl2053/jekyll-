@@ -51,7 +51,7 @@ public class ChosaIraiIchiranhyoHeadItem {
      * @param kikanNameText 宛名機関名
      * @param shimeiText 宛名氏名
      * @param meishoFuyo 宛名名称付与
-     * @param jigyoshaNo 事業所の番号
+     * @param jigyoshaNo 事業者番号
      * @param tsuchibun1 通知文1
      * @param tsuchibun2 通知文2
      */

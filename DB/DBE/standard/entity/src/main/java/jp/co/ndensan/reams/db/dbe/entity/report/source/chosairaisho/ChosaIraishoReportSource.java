@@ -77,16 +77,16 @@ public class ChosaIraishoReportSource implements IReportSource {
     public RString hihokenshaNo10;
     @ReportItem(name = "hihokenshaNameKana", order = 31)
     public RString hihokenshaNameKana;
-    @ReportItem(name = "birthGengoMeiji", length = 1, order = 32)
-    public RString birthGengoMeiji;
-    @ReportItem(name = "birthGengoTaisho", length = 1, order = 33)
-    public RString birthGengoTaisho;
-    @ReportItem(name = "birthGengoShowa", length = 1, order = 34)
-    public RString birthGengoShowa;
-    @ReportItem(name = "birthYMD", length = 11, order = 35)
-    public RString birthYMD;
-    @ReportItem(name = "hihokenshaName", order = 36)
+    @ReportItem(name = "hihokenshaName", order = 32)
     public RString hihokenshaName;
+    @ReportItem(name = "birthGengoMeiji", length = 1, order = 33)
+    public RString birthGengoMeiji;
+    @ReportItem(name = "birthGengoTaisho", length = 1, order = 34)
+    public RString birthGengoTaisho;
+    @ReportItem(name = "birthGengoShowa", length = 1, order = 35)
+    public RString birthGengoShowa;
+    @ReportItem(name = "birthYMD", length = 11, order = 36)
+    public RString birthYMD;
     @ReportItem(name = "seibetsuMan", length = 1, order = 37)
     public RString seibetsuMan;
     @ReportItem(name = "seibetsuWoman", length = 1, order = 38)
@@ -99,22 +99,18 @@ public class ChosaIraishoReportSource implements IReportSource {
     public RString telNo;
     @ReportItem(name = "homonChosasakiYubinNo", length = 8, order = 42)
     public RString homonChosasakiYubinNo;
-    @ReportItem(name = "homonChosasakiJusho1", length = 40, order = 43)
-    public RString homonChosasakiJusho1;
-    @ReportItem(name = "homonChosasakiJusho2", length = 40, order = 44)
-    public RString homonChosasakiJusho2;
-    @ReportItem(name = "homonChosasakiJusho3", length = 40, order = 45)
-    public RString homonChosasakiJusho3;
-    @ReportItem(name = "homonChosasakiTelNo", length = 14, order = 46)
+    @ReportItem(name = "homonChosasakiJusho", order = 43)
+    public RString homonChosasakiJusho;
+    @ReportItem(name = "homonChosasakiName", order = 44)
+    public RString homonChosasakiName;
+    @ReportItem(name = "homonChosasakiTelNo", length = 14, order = 45)
     public RString homonChosasakiTelNo;
-    @ReportItem(name = "shinseiYMD", length = 11, order = 47)
+    @ReportItem(name = "shinseiYMD", length = 11, order = 46)
     public RString shinseiYMD;
-    @ReportItem(name = "teishutsuKigen", length = 11, order = 48)
+    @ReportItem(name = "teishutsuKigen", length = 11, order = 47)
     public RString teishutsuKigen;
-    @ReportItem(name = "tsuchibun2", order = 49)
+    @ReportItem(name = "tsuchibun2", order = 48)
     public RString tsuchibun2;
-    @ReportItem(name = "remban", length = 4, order = 50)
-    public RString remban;
 // </editor-fold>
 // <editor-fold defaultstate="collapsed" desc="User Customize Area">
     //追加コードは以下（「User Customize Area」内）に記述してください。
