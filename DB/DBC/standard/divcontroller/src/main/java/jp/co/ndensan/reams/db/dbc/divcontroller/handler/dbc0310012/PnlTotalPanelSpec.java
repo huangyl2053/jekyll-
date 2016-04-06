@@ -25,6 +25,8 @@ import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 /**
  *
  * {@link PnlTotalPanelDiv}の仕様クラスです。 <br> {@link PnlTotalPanelDiv}における画面としての仕様を定義しています。
+ *
+ * @reamsid_L DBC-2130-020 cuilin
  */
 public enum PnlTotalPanelSpec implements IPredicate<PnlTotalPanelDiv> {
 
@@ -208,9 +210,7 @@ public enum PnlTotalPanelSpec implements IPredicate<PnlTotalPanelDiv> {
                 KaigoShikakuKihonDiv kaigoDiv = (KaigoShikakuKihonDiv) div.getPnlCommon().getCcdKaigoShikakuKihon();
                 ShokanJuryoininKeiyakushaFinder finder = InstanceProvider.create(ShokanJuryoininKeiyakushaFinder.class);
                 ChkKeiyakuNoParameter parameter = new ChkKeiyakuNoParameter(
-                        // TODO QA No.431(Redmine#:79680)
-                        登録.equals(状態) ? new HihokenshaNo("000000003")
-                        : new HihokenshaNo(kaigoDiv.getTxtHihokenshaNo().getValue()),
+                        new HihokenshaNo(kaigoDiv.getTxtHihokenshaNo().getValue()),
                         new FlexibleDate(div.getPnlCommon().getPnlDetail()
                                 .getTxtKeyakushinseibi().getValue().toDateString()),
                         div.getPnlCommon().getPnlDetail().getTxtKeyakujigyosyaNo().getValue(),
@@ -231,9 +231,9 @@ public enum PnlTotalPanelSpec implements IPredicate<PnlTotalPanelDiv> {
                 return true;
             }
             if (登録.equals(状態)) {
+                KaigoShikakuKihonDiv kaigoDiv = (KaigoShikakuKihonDiv) div.getPnlCommon().getCcdKaigoShikakuKihon();
                 parameter = new ChkTorokuzumiParameter(
-                        // TODO QA No.431(Redmine#:79680)
-                        new HihokenshaNo("000000003"),
+                        new HihokenshaNo(kaigoDiv.getTxtHihokenshaNo().getValue()),
                         null,
                         null,
                         null,

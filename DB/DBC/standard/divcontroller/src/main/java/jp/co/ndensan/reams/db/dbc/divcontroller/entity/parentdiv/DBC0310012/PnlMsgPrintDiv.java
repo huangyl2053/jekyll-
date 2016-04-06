@@ -13,7 +13,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 /**
  * PnlMsgPrint のクラスファイル
  *
- * @author 自動生成
+ * @reamsid_L DBC-2130-020 cuilin
  */
 public class PnlMsgPrintDiv extends Panel {
 

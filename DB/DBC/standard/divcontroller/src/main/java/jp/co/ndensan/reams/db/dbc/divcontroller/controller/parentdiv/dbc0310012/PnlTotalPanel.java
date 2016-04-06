@@ -36,13 +36,18 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 
 /**
  * 受領委任契約（福祉用具購入費・住宅改修費）登録・追加・修正・照会_登録
+ *
+ * @reamsid_L DBC-2130-020 cuilin
  */
 public class PnlTotalPanel {
 
     private static final RString 参照 = new RString("参照");
     private static final RString 削除 = new RString("削除");
     private static final RString 登録 = new RString("登録");
+    private static final RString 修正 = new RString("修正");
     private static final Decimal 九割 = new Decimal(0.9);
+    private static final Decimal 番号_0 = new Decimal(0);
+    private static final Decimal 番号_1 = new Decimal(1);
 
     /**
      * コンストラクタです。
@@ -64,12 +69,13 @@ public class PnlTotalPanel {
      * @return ResponseData<PnlTotalPanelDiv>
      */
     public ResponseData<PnlTotalPanelDiv> onLoad(PnlTotalPanelDiv div) {
-//        ViewStateHolder.put(ViewStateKeys.処理モード, 登録);
+        ViewStateHolder.put(ViewStateKeys.処理モード, 登録);
         RString 状態 = ViewStateHolder.get(ViewStateKeys.処理モード, RString.class);
         getHandler(div).createDropDownList();
         if (登録.equals(状態)) {
             div.getPnlCommon().getCcdKaigoShikakuKihon().setDisabled(false);
             div.getPnlCommon().getPnlDetail().getRdoKettekubun().setDisabled(true);
+            div.getPnlCommon().getPnlDetail().getRdoKettekubun().setSelectedKey(ShoninKubun.承認しない.getコード());
             div.getPnlCommon().getPnlDetail().getTxtFusyoninriyu().setDisabled(true);
             div.getPnlCommon().getPnlDetail().getPnlHidari().getDdlYear().setSelectedKey(RString.EMPTY);
             div.getPnlCommon().getPnlDetail().getPnlHidari().getDdlYear().setDisabled(true);
@@ -95,8 +101,6 @@ public class PnlTotalPanel {
             }
             ViewStateHolder.put(ViewStateKeys.契約者一覧情報, shokanData);
             HihokenshaNo 被保険者番号 = new HihokenshaNo(parameter.get被保番号());
-
-            ViewStateHolder.put(ViewStateKeys.識別コード, new ShikibetsuCode("000000000000010"));
             ShikibetsuCode 識別コード = ViewStateHolder.get(ViewStateKeys.識別コード, ShikibetsuCode.class);
             div.getPnlCommon().getCcdAtena().onLoad(識別コード);
             div.getPnlCommon().getCcdKaigoShikakuKihon().onLoad(被保険者番号);
@@ -161,10 +165,10 @@ public class PnlTotalPanel {
         RString code = div.getPnlCommon().getPnlDetail().getDdlKeiyakuServiceType().getSelectedKey();
         if (KeiyakuServiceShurui.住宅改修.getコード().equals(code)
                 || KeiyakuServiceShurui.予防住宅改修.getコード().equals(code)) {
-            div.getPnlCommon().getPnlDetail().getPnlHidari().getTxtBango1().setValue(new Decimal(0));
+            div.getPnlCommon().getPnlDetail().getPnlHidari().getTxtBango1().setValue(番号_0);
         } else if (KeiyakuServiceShurui.福祉用具.getコード().equals(code)
                 || KeiyakuServiceShurui.予防福祉用具.getコード().equals(code)) {
-            div.getPnlCommon().getPnlDetail().getPnlHidari().getTxtBango1().setValue(new Decimal(1));
+            div.getPnlCommon().getPnlDetail().getPnlHidari().getTxtBango1().setValue(番号_1);
         }
         return ResponseData.of(div).respond();
     }
@@ -306,15 +310,18 @@ public class PnlTotalPanel {
      * @return ResponseData<PnlTotalPanelDiv>
      */
     public ResponseData<PnlTotalPanelDiv> onClick_btnCancel(PnlTotalPanelDiv div) {
-        if (!ResponseHolder.isReRequest()) {
-            QuestionMessage message = new QuestionMessage(UrQuestionMessages.入力内容の破棄.getMessage().getCode(),
-                    UrQuestionMessages.入力内容の破棄.getMessage().evaluate());
-            return ResponseData.of(div).addMessage(message).respond();
-        }
-        if (new RString(UrQuestionMessages.入力内容の破棄.getMessage().getCode())
-                .equals(ResponseHolder.getMessageCode())
-                && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
-            return ResponseData.of(div).forwardWithEventName(DBC0310012TransitionEventName.検索に戻る).respond();
+        RString 状態 = ViewStateHolder.get(ViewStateKeys.処理モード, RString.class);
+        if (登録.equals(状態) || 修正.equals(状態)) {
+            if (!ResponseHolder.isReRequest()) {
+                QuestionMessage message = new QuestionMessage(UrQuestionMessages.入力内容の破棄.getMessage().getCode(),
+                        UrQuestionMessages.入力内容の破棄.getMessage().evaluate());
+                return ResponseData.of(div).addMessage(message).respond();
+            }
+            if (new RString(UrQuestionMessages.入力内容の破棄.getMessage().getCode())
+                    .equals(ResponseHolder.getMessageCode())
+                    && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
+                return ResponseData.of(div).forwardWithEventName(DBC0310012TransitionEventName.検索に戻る).respond();
+            }
         }
         return ResponseData.of(div).respond();
     }
