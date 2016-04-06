@@ -13,6 +13,8 @@ import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC120160.KagoKetteiHoken
 import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC120160.KagoKetteiHokenshaInTempSaveProcess;
 import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC120160.KagoKetteiHokenshaInUpdataDBProcess;
 import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC120160.KagoKetteiHokenshaInUpdataTempTableProcess;
+import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC120160.KagoKetteiHokenshaInWriteReportProcess;
+import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC120170.KohifutanshaWriteReportProcess;
 import jp.co.ndensan.reams.db.dbc.definition.batchprm.kagoketteihokenshain.KagoKetteiHokenshaInBatchParameter;
 import jp.co.ndensan.reams.uz.uza.batch.Step;
 import jp.co.ndensan.reams.uz.uza.batch.flow.BatchFlowBase;
@@ -59,7 +61,7 @@ public class DBC120160_KagoKetteiHokenshaIn
     IBatchFlowCommand csvFileCheckProcess() {
         Map<RString, Object> processParameter = new HashMap<>();
         processParameter.put(KagoKetteiHokenshaInSharedFileCopy.PARAMETER_IN_FILEPATH,
-                new RString("/home/D209007/shared/HokenshabunKagoKeteiTsuchishoJyohoTorikomi"));
+                new RString("/home/D209007/shared/sharedFiles"));
         processParameter.put(KagoKetteiHokenshaInSharedFileCopy.PARAMETER_IN_SHAREDNAME, sharedFileKey);
         return simpleBatch(KagoKetteiHokenshaInSharedFileCopy.class).arguments(processParameter).define();
     }
@@ -80,8 +82,16 @@ public class DBC120160_KagoKetteiHokenshaIn
     IBatchFlowCommand updataDBProcess() {
         Map<RString, Object> processParameter = new HashMap<>();
         processParameter.put(KagoKetteiHokenshaInUpdataDBProcess.PARAMETER_SHORIYM, getParameter().getShoriYM());
-//        processParameter.put(KagoKetteiHokenshaInUpdataDBProcess.PARAMETER_CSVFILENAME, csvFileName);
+        processParameter.put(KagoKetteiHokenshaInUpdataDBProcess.PARAMETER_CSVFILENAME, csvFileName);
         return simpleBatch(KagoKetteiHokenshaInUpdataDBProcess.class).arguments(processParameter).define();
     }
 
+    @Step(WRITE_REPORT)
+    IBatchFlowCommand writeReportProcess() {
+        Map<RString, Object> parameter = new HashMap<>();
+        parameter.put(KagoKetteiHokenshaInWriteReportProcess.PARAMETER_IN_SHORIYM, getParameter().getShoriYM());
+        parameter.put(KagoKetteiHokenshaInWriteReportProcess.PARAMETER_IN_SHUTSURYOKUJUNID,
+                getParameter().getShuturyokuJunn());
+        return loopBatch(KohifutanshaWriteReportProcess.class).arguments(parameter).define();
+    }
 }
