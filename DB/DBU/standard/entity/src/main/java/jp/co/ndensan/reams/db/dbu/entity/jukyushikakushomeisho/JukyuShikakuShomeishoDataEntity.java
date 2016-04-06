@@ -8,7 +8,6 @@ package jp.co.ndensan.reams.db.dbu.entity.jukyushikakushomeisho;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaKanaMeisho;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaMeisho;
-import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
@@ -33,7 +32,7 @@ public class JukyuShikakuShomeishoDataEntity {
     private RString 被保険者異動予定日;
     private RString 保険者番号;
     private RString 電子公印;
-    private RDate 発行日;
+    private RString 発行日;
     private RString 認証者役職名;
     private RString 認証者役職名1;
     private RString 公印文字列;
