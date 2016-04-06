@@ -11,6 +11,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 /**
  * 広域内転居結果一覧表パラメータ
  *
+ * @reamsid_L DBU-1150-040 xupeng
  */
 @lombok.Getter
 @lombok.Setter
