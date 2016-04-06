@@ -99,6 +99,7 @@ public class HonsanteiIdoGennendo {
     private final RString 現金納付者 = new RString("現金納付者");
     private final RString 口座振替者 = new RString("口座振替者");
     private final RString 口座用 = new RString("口座用");
+    private final RString 現金用 = new RString("現金用");
     private final RString 別々出力 = new RString("別々出力");
     private final RString 全件出力 = new RString("全件出力");
     private final RString する = new RString("する");
@@ -590,7 +591,7 @@ public class HonsanteiIdoGennendo {
 
         if (口座用.equals(parameter.get納入_口座振替者())) {
             result.set納入_口座振替者(oneRS);
-        } else if (口座用.equals(parameter.get納入_口座振替者())) {
+        } else if (現金用.equals(parameter.get納入_口座振替者())) {
             result.set納入_口座振替者(twoRS);
         }
         result.set納入_発行日(parameter.get納入_発行日());
