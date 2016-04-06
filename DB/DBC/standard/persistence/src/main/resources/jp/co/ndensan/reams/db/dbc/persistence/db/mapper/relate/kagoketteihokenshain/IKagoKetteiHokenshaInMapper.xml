@@ -306,4 +306,66 @@
         #{shinNo},
         #{kyuNo})
     </insert>
+    
+    <resultMap id="resultMap_KagoKetteiHokenshaInEntity" type="jp.co.ndensan.reams.db.dbc.entity.db.relate.kagoketteihokenshain.KagoKetteiHokenshaInEntity" autoMapping="true">
+        <result property="取扱年月" column="toriatsukaiYM" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleYearMonthTypeHandler"/>
+        <result property="証記載保険者番号" column="shokisaiHokenshaNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.HokenshaNoTypeHandler"/>
+        <result property="証記載保険者名" column="shokisaiHokenshaNa" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="事業所番号" column="jigyoshoNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.JigyoshaNoTypeHandler"/>
+        <result property="事業所名" column="jigyoshoName" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="被保険者番号" column="hiHokenshaNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.HihokenshaNoTypeHandler"/>
+        <result property="被保険者氏名" column="hiHokenshaSimei" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="サービス提供年月" column="serviceTeikyoYM" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleYearMonthTypeHandler"/>
+        <result property="サービス種類コード" column="serviceShuruiCode" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.ServiceShuruiCodeTypeHandler"/>
+        <result property="サービス種類名" column="serviceShuruiName" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="過誤申立事由コード" column="kagomoushitateJiyuCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.CodeTypeHandler"/>
+        <result property="過誤申立事由" column="kagomoushitateJiyu" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="単位数" column="tanisu" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="保険者負担額" column="hokenshaFutangaku" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="介護給付費の件数" column="kaigoKyufuhiKensu"/>
+        <result property="介護給付費の単位数" column="kaigoKyufuhiTanisu" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="介護給付費の保険者負担額" column="kaigoKyufuhiFutangaku" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="高額介護サービス費の件数" column="kogakuServicehiKensu"/>
+        <result property="高額介護サービス費の単位数" column="kogakuServicehiTanisu" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="高額介護サービス費の保険者負担額" column="kogakuServicehiFutangaku" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="特定入所者介護サービス費等の件数" column="tokuteiNyushoshaServicehiKensu"/>
+        <result property="特定入所者介護サービス費等の単位数" column="tokuteiNyushoshaServicehiTanisu" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="特定入所者介護サービス費等の保険者負担額" column="tokuteiNyushoshaServicehiFutangaku" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+    </resultMap>
+    
+    <select id="select一時テーブル" resultMap="resultMap_KagoKetteiHokenshaInEntity" fetchSize="500">
+        SELECT Meisai."toriatsukaiYM",
+               Meisai."shokisaiHokenshaNo",
+               Meisai."shokisaiHokenshaNa",
+               Meisai."jigyoshoNo",
+               Meisai."jigyoshoName",
+               Meisai."hiHokenshaNo",
+               Meisai."hiHokenshaSimei",
+               Meisai."serviceTeikyoYM",
+               Meisai."serviceShuruiCode",
+               Meisai."serviceShuruiName",
+               Meisai."kagomoushitateJiyuCode",
+               Meisai."kagomoushitateJiyu",
+               Meisai."tanisu",
+               Meisai."hokenshaFutangaku",
+               Shukei."kaigoKyufuhiKensu",
+               Shukei."kaigoKyufuhiTanisu",
+               Shukei."kaigoKyufuhiFutangaku",
+               Shukei."kogakuServicehiKensu",
+               Shukei."kogakuServicehiTanisu",
+               Shukei."kogakuServicehiFutangaku",
+               Shukei."tokuteiNyushoshaServicehiKensu",
+               Shukei."tokuteiNyushoshaServicehiTanisu",
+               Shukei."tokuteiNyushoshaServicehiFutangaku"
+        FROM "TEMP_TABLE_KagoKetteiTsuchishoJyohoHokenshabunMeisai" AS Meisai
+        LEFT JOIN "TEMP_TABLE_KagoKetteiTsuchishoJyohoHokenshabunShukei" AS Shukei
+        ON  Meisai."kokanShikibetsuNo" = Shukei."kokanShikibetsuNo"
+        AND Meisai."toriatsukaiYM" = Shukei."toriatsukaiYM"
+        AND Meisai."shokisaiHokenshaNo" = Shukei."shokisaiHokenshaNo"
+        AND Meisai."shokisaiHokenshaNa" = Shukei."shokisaiHokenshaNa"
+        AND Meisai."sakuseiYMD" = Shukei."sakuseiYMD"
+        AND Meisai."kokukoRengoukaiNa" = Shukei."kokukoRengoukaiNa"
+        ORDER BY Meisai."kokanShikibetsuNo"
+        
+    </select>
 </mapper>

@@ -190,24 +190,41 @@ public class HihokenshashoHakkoIchiranHyoFinder {
     private void set交付事由(IchiranyoShohakkoshaEntity ichiranyoShohakkoshaEntity,
             HihokenshashoHakkoIchiranHyoEntity hihokenshashoHakkoIchiranHyoEntity) {
         if (!hihokenshashoHakkoIchiranHyoEntity.is申請中状態フラグ()) {
-            ichiranyoShohakkoshaEntity.set交付事由_非交付理由タイトル(交付事由_非交付理由タイトル_交付事由);
-            if (new RString("1").equals(hihokenshashoHakkoIchiranHyoEntity.get受給区分())) {
-                ichiranyoShohakkoshaEntity.set交付事由(CodeMasterNoOption.getCodeMeisho(
-                        SubGyomuCode.DBA介護資格, new CodeShubetsu("0002"), new Code("02"), new FlexibleDate(RDate.getNowDate().toString())));
-            } else if ((new RString("2").equals(hihokenshashoHakkoIchiranHyoEntity.get被保険者区分コード())
-                    && (!RString.isNullOrEmpty(hihokenshashoHakkoIchiranHyoEntity.get資格取得年月日()))
-                    && (!RString.isNullOrEmpty(hihokenshashoHakkoIchiranHyoEntity.get資格喪失年月日())))
-                    || (RString.isNullOrEmpty(hihokenshashoHakkoIchiranHyoEntity.get被保険者番号()))) {
-                ichiranyoShohakkoshaEntity.set交付事由(CodeMasterNoOption.getCodeRyakusho(
-                        SubGyomuCode.DBA介護資格, new CodeShubetsu("0002"), new Code("01"), new FlexibleDate(RDate.getNowDate().toString())));
-            } else {
-                ichiranyoShohakkoshaEntity.set交付事由(CodeMasterNoOption.getCodeRyakusho(SubGyomuCode.DBA介護資格, new CodeShubetsu("0002"),
-                        new Code(isNull(hihokenshashoHakkoIchiranHyoEntity.get異動事由コード())),
-                        new FlexibleDate(RDate.getNowDate().toString())));
-            }
+            is申請中状態フラグ(ichiranyoShohakkoshaEntity, hihokenshashoHakkoIchiranHyoEntity);
         } else {
             ichiranyoShohakkoshaEntity.set交付事由_非交付理由タイトル(交付事由_非交付理由タイトル_非交付事由);
             ichiranyoShohakkoshaEntity.set非交付事由(new RString("申請中"));
+        }
+    }
+
+    private void is申請中状態フラグ(IchiranyoShohakkoshaEntity ichiranyoShohakkoshaEntity,
+            HihokenshashoHakkoIchiranHyoEntity hihokenshashoHakkoIchiranHyoEntity) {
+        ichiranyoShohakkoshaEntity.set交付事由_非交付理由タイトル(交付事由_非交付理由タイトル_交付事由);
+        if (new RString("1").equals(hihokenshashoHakkoIchiranHyoEntity.get受給区分())) {
+            RString 交付事由 = CodeMasterNoOption.getCodeMeisho(
+                    SubGyomuCode.DBA介護資格, new CodeShubetsu("0002"), new Code("02"), new FlexibleDate(RDate.getNowDate().toString()));
+            if (交付事由.isEmpty()) {
+                交付事由 = new RString("02");
+            }
+            ichiranyoShohakkoshaEntity.set交付事由(交付事由);
+        } else if ((new RString("2").equals(hihokenshashoHakkoIchiranHyoEntity.get被保険者区分コード())
+                && (!RString.isNullOrEmpty(hihokenshashoHakkoIchiranHyoEntity.get資格取得年月日()))
+                && (!RString.isNullOrEmpty(hihokenshashoHakkoIchiranHyoEntity.get資格喪失年月日())))
+                || (RString.isNullOrEmpty(hihokenshashoHakkoIchiranHyoEntity.get被保険者番号()))) {
+            RString 交付事由 = CodeMasterNoOption.getCodeRyakusho(
+                    SubGyomuCode.DBA介護資格, new CodeShubetsu("0002"), new Code("01"), new FlexibleDate(RDate.getNowDate().toString()));
+            if (交付事由.isEmpty()) {
+                交付事由 = new RString("01");
+            }
+            ichiranyoShohakkoshaEntity.set交付事由(交付事由);
+        } else {
+            RString 交付事由 = CodeMasterNoOption.getCodeRyakusho(SubGyomuCode.DBA介護資格, new CodeShubetsu("0002"),
+                    new Code(isNull(hihokenshashoHakkoIchiranHyoEntity.get異動事由コード())),
+                    new FlexibleDate(RDate.getNowDate().toString()));
+            if (交付事由.isEmpty()) {
+                交付事由 = hihokenshashoHakkoIchiranHyoEntity.get異動事由コード();
+            }
+            ichiranyoShohakkoshaEntity.set交付事由(交付事由);
         }
     }
 

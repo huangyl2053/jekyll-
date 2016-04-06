@@ -251,6 +251,10 @@ public enum ViewStateKeys {
      */
     fuSyikyuriyu2,
     /**
+     * 申請一覧検索キー
+     */
+    申請一覧検索キー,
+    /**
      * キーが「様式番号」であることを表します
      */
     様式番号List,

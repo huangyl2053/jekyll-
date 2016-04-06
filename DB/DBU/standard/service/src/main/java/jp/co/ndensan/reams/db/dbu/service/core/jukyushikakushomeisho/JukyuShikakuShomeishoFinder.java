@@ -105,7 +105,8 @@ public class JukyuShikakuShomeishoFinder {
 
         edit被保険者(outEntity, inEntity);
 
-        outEntity.set被保険者異動予定日(inEntity.get異動予定日());
+        outEntity.set被保険者異動予定日(new FlexibleDate(inEntity.get異動予定日()).wareki().eraType(EraType.KANJI)
+                .firstYear(FirstYear.GAN_NEN).separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString());
 
         edit保険者番号(outEntity, inEntity.get被保険者番号());
 
@@ -152,6 +153,9 @@ public class JukyuShikakuShomeishoFinder {
         IShikibetsuTaishoPSMSearchKey shikibetsuTaishoPSMSearchKey = key.getPSM検索キー();
         JukyuShikakuShomeishoMyBatisParameter searchKey = new JukyuShikakuShomeishoMyBatisParameter(shikibetsuTaishoPSMSearchKey);
         UaFt200FindShikibetsuTaishoEntity 宛名識別対象PSM = mapper.get宛名識別対象PSM(searchKey);
+        if (null == 宛名識別対象PSM) {
+            return;
+        }
         outEntity.set被保険者フリガナ(宛名識別対象PSM.getKanaMeisho());
         outEntity.set被保険者氏名(宛名識別対象PSM.getMeisho());
         FlexibleDate 生年月日 = 宛名識別対象PSM.getSeinengappiYMD();
@@ -357,7 +361,8 @@ public class JukyuShikakuShomeishoFinder {
                 ninshosha, association, imageFilePath, 交付日, is公印に掛ける, is公印を省略, KenmeiFuyoKubunType.付与なし);
         NinshoshaSource ninshoshaSource = builder.buildSource();
         outEntity.set電子公印(ninshoshaSource.denshiKoin);
-        outEntity.set発行日(交付日);
+        outEntity.set発行日(交付日.wareki().eraType(EraType.KANJI)
+                .firstYear(FirstYear.GAN_NEN).separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString());
         outEntity.set認証者役職名(ninshoshaSource.ninshoshaYakushokuMei);
         outEntity.set認証者役職名1(ninshoshaSource.ninshoshaYakushokuMei1);
         outEntity.set認証者役職名2(ninshoshaSource.ninshoshaYakushokuMei2);
@@ -391,11 +396,15 @@ public class JukyuShikakuShomeishoFinder {
         }
         outEntity.set要介護状態区分(inEntity.get要介護状態区分());
 
-        outEntity.set認定の有効期間の開始年月日(new FlexibleDate(inEntity.get有効期間の開始年月日())
+        FlexibleDate 有効期間の開始年月日
+                = null == inEntity.get有効期間の開始年月日() ? FlexibleDate.EMPTY : new FlexibleDate(inEntity.get有効期間の開始年月日());
+        FlexibleDate 有効期間の終了年月日
+                = null == inEntity.get有効期間の終了年月日() ? FlexibleDate.EMPTY : new FlexibleDate(inEntity.get有効期間の終了年月日());
+        outEntity.set認定の有効期間の開始年月日(有効期間の開始年月日
                 .wareki().eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN)
                 .separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString());
 
-        outEntity.set認定の有効期間の終了年月日(new FlexibleDate(inEntity.get有効期間の終了年月日())
+        outEntity.set認定の有効期間の終了年月日(有効期間の終了年月日
                 .wareki().eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN)
                 .separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString());
     }
@@ -403,7 +412,8 @@ public class JukyuShikakuShomeishoFinder {
     private void set申請状況And年月日(JukyuShikakuShomeishoDataEntity outEntity, JukyuShikakuShomeishoKaiKoEntity inEntity, FlexibleDate 認定年月日) {
         if (!inEntity.get申請日().isEmpty()) {
             outEntity.set申請状況(new RString("申請中"));
-            outEntity.set申請年月日(inEntity.get申請日());
+            outEntity.set申請年月日(new FlexibleDate(inEntity.get申請日()).wareki().eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN)
+                    .separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString());
             if (認定年月日 != null) {
                 outEntity.set認定年月日(認定年月日.wareki().eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN)
                         .separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString());

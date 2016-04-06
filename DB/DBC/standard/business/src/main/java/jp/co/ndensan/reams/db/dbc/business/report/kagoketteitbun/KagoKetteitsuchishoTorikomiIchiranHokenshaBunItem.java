@@ -47,6 +47,7 @@ public class KagoKetteitsuchishoTorikomiIchiranHokenshaBunItem {
     private RString listUpper_7;
     private RString listUpper_8;
     private RString listUpper_9;
+    private RString pageCount;
     private RString printTimeStamp;
     private RString servicehiTitle;
     private RString shoHokenshaName;

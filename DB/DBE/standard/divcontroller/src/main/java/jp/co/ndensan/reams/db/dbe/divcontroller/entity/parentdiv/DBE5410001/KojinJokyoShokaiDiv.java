@@ -4,24 +4,26 @@ package jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE5410001;
  * このファイルへの変更は、再生成時には損失するため
  * 不正な動作の原因になります。
  */
+
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.KaigoNinteiAtenaInfo.KaigoNinteiAtenaInfoDiv;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.shujiiIryokikanandshujiiinput.ShujiiIryokikanAndShujiiInput.IShujiiIryokikanAndShujiiInputDiv;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.KaigoNinteiAtenaInfo.IKaigoNinteiAtenaInfoDiv;
+import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.KaigoninteiShikakuInfo.IKaigoninteiShikakuInfoDiv;
+import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.KaigoninteiShikakuInfo.KaigoninteiShikakuInfoDiv;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.chosaitakusakiandchosaininput.ChosaItakusakiAndChosainInput.IChosaItakusakiAndChosainInputDiv;
-import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.kaigoninteishikakuinfo.KaigoninteiShikakuInfo.IKaigoninteiShikakuInfoDiv;
-import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.kaigoninteishikakuinfo.KaigoninteiShikakuInfo.KaigoninteiShikakuInfoDiv;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.binding.*;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 
 /**
- * KojinJokyoShokai のクラスファイル 
- * 
+ * KojinJokyoShokai のクラスファイル
+ *
  * @author 自動生成
  */
 public class KojinJokyoShokaiDiv extends Panel {
+
     // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-01-15_09-59-03">
     /*
      * [ private の作成 ]
@@ -437,7 +439,7 @@ public class KojinJokyoShokaiDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setTxtNinteiShinseiDay(TextBoxDate txtNinteiShinseiDay) {
+    public void setTxtNinteiShinseiDay(TextBoxDate txtNinteiShinseiDay) {
         this.getKojinShinchokuShosai().setTxtNinteiShinseiDay(txtNinteiShinseiDay);
     }
 
@@ -447,7 +449,7 @@ public class KojinJokyoShokaiDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setTxtShinseiKubunShinseiji(TextBox txtShinseiKubunShinseiji) {
+    public void setTxtShinseiKubunShinseiji(TextBox txtShinseiKubunShinseiji) {
         this.getKojinShinchokuShosai().setTxtShinseiKubunShinseiji(txtShinseiKubunShinseiji);
     }
 
@@ -457,7 +459,7 @@ public class KojinJokyoShokaiDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setTxtShinseiKubunHorei(TextBox txtShinseiKubunHorei) {
+    public void setTxtShinseiKubunHorei(TextBox txtShinseiKubunHorei) {
         this.getKojinShinchokuShosai().setTxtShinseiKubunHorei(txtShinseiKubunHorei);
     }
 
@@ -467,7 +469,7 @@ public class KojinJokyoShokaiDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setTxtNinteiKekka(TextBox txtNinteiKekka) {
+    public void setTxtNinteiKekka(TextBox txtNinteiKekka) {
         this.getKojinShinchokuShosai().setTxtNinteiKekka(txtNinteiKekka);
     }
 
@@ -477,7 +479,7 @@ public class KojinJokyoShokaiDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setTxtNinteiYukoKikanFrom(TextBoxDate txtNinteiYukoKikanFrom) {
+    public void setTxtNinteiYukoKikanFrom(TextBoxDate txtNinteiYukoKikanFrom) {
         this.getKojinShinchokuShosai().setTxtNinteiYukoKikanFrom(txtNinteiYukoKikanFrom);
     }
 
@@ -487,7 +489,7 @@ public class KojinJokyoShokaiDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setTxtNinteiYukoKikanTo(TextBoxDate txtNinteiYukoKikanTo) {
+    public void setTxtNinteiYukoKikanTo(TextBoxDate txtNinteiYukoKikanTo) {
         this.getKojinShinchokuShosai().setTxtNinteiYukoKikanTo(txtNinteiYukoKikanTo);
     }
 
@@ -497,7 +499,7 @@ public class KojinJokyoShokaiDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setTxtNinteiKikanMonth(TextBoxNum txtNinteiKikanMonth) {
+    public void setTxtNinteiKikanMonth(TextBoxNum txtNinteiKikanMonth) {
         this.getKojinShinchokuShosai().setTxtNinteiKikanMonth(txtNinteiKikanMonth);
     }
 
@@ -507,7 +509,7 @@ public class KojinJokyoShokaiDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setTxtShinseiShubetsu(TextBox txtShinseiShubetsu) {
+    public void setTxtShinseiShubetsu(TextBox txtShinseiShubetsu) {
         this.getKojinShinchokuShosai().setTxtShinseiShubetsu(txtShinseiShubetsu);
     }
 
@@ -517,7 +519,7 @@ public class KojinJokyoShokaiDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setTxtTokuteiShippei(TextBox txtTokuteiShippei) {
+    public void setTxtTokuteiShippei(TextBox txtTokuteiShippei) {
         this.getKojinShinchokuShosai().setTxtTokuteiShippei(txtTokuteiShippei);
     }
 
@@ -527,7 +529,7 @@ public class KojinJokyoShokaiDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setTxtJohoTeikyoDoi(TextBox txtJohoTeikyoDoi) {
+    public void setTxtJohoTeikyoDoi(TextBox txtJohoTeikyoDoi) {
         this.getKojinShinchokuShosai().setTxtJohoTeikyoDoi(txtJohoTeikyoDoi);
     }
 
@@ -537,7 +539,7 @@ public class KojinJokyoShokaiDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setTxtIchijiHantei(TextBox txtIchijiHantei) {
+    public void setTxtIchijiHantei(TextBox txtIchijiHantei) {
         this.getKojinShinchokuShosai().setTxtIchijiHantei(txtIchijiHantei);
     }
 
@@ -547,7 +549,7 @@ public class KojinJokyoShokaiDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setTxtKaisaiDay(TextBoxDate txtKaisaiDay) {
+    public void setTxtKaisaiDay(TextBoxDate txtKaisaiDay) {
         this.getKojinShinchokuShosai().setTxtKaisaiDay(txtKaisaiDay);
     }
 
@@ -557,7 +559,7 @@ public class KojinJokyoShokaiDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setTxtShoriKubun(TextBox txtShoriKubun) {
+    public void setTxtShoriKubun(TextBox txtShoriKubun) {
         this.getKojinShinchokuShosai().setTxtShoriKubun(txtShoriKubun);
     }
 

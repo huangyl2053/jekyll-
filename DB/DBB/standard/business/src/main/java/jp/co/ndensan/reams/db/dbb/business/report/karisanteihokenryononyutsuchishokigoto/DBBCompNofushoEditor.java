@@ -135,33 +135,27 @@ public class DBBCompNofushoEditor implements IKarisanteiHokenryoNonyuTsuchishoKi
     }
 
     private void editNofushohyojicodeName11(KarisanteiHokenryoNonyuTsuchishoKigotoSource source) {
-        source.nofushohyojicodeName11 = null;
-        //TODO 納付書共通.表示コード.表示コード名１
+        source.nofushohyojicodeName11 = 納付書共通.get表示コード().get表示コード名１();
     }
 
     private void editNofushohyojicode11(KarisanteiHokenryoNonyuTsuchishoKigotoSource source) {
-        source.nofushohyojicode11 = null;
-        //TODO 納付書共通.表示コード.表示コード１
+        source.nofushohyojicode11 = 納付書共通.get表示コード().get表示コード１();
     }
 
     private void editNofushohyojicodeName21(KarisanteiHokenryoNonyuTsuchishoKigotoSource source) {
-        source.nofushohyojicodeName21 = null;
-        //TODO 納付書共通.表示コード.表示コード名2
+        source.nofushohyojicodeName21 = 納付書共通.get表示コード().get表示コード名２();
     }
 
     private void editNofushohyojicode21(KarisanteiHokenryoNonyuTsuchishoKigotoSource source) {
-        source.nofushohyojicode21 = null;
-        //TODO 納付書共通.表示コード.表示コード2
+        source.nofushohyojicode21 = 納付書共通.get表示コード().get表示コード２();
     }
 
     private void editNofushohyojicodeName31(KarisanteiHokenryoNonyuTsuchishoKigotoSource source) {
-        source.nofushohyojicodeName31 = null;
-        //TODO 納付書共通.表示コード.表示コード名3
+        source.nofushohyojicodeName31 = 納付書共通.get表示コード().get表示コード名３();
     }
 
     private void editNofushohyojicode31(KarisanteiHokenryoNonyuTsuchishoKigotoSource source) {
-        source.nofushohyojicode31 = null;
-        //TODO 納付書共通.表示コード.表示コード3
+        source.nofushohyojicode31 = 納付書共通.get表示コード().get表示コード３();
     }
 
     private void editNofushoNokigen1(KarisanteiHokenryoNonyuTsuchishoKigotoSource source) {

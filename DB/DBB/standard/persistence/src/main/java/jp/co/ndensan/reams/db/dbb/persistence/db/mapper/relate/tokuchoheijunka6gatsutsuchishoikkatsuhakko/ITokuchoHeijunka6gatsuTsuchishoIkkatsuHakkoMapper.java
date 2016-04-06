@@ -6,7 +6,7 @@
 package jp.co.ndensan.reams.db.dbb.persistence.db.mapper.relate.tokuchoheijunka6gatsutsuchishoikkatsuhakko;
 
 import jp.co.ndensan.reams.db.dbb.definition.mybatisprm.tokuchoheijunka6gatsutsuchishoikkatsuhakko.TokuchoHeijunka6gatsuMyBatisParameter;
-import jp.co.ndensan.reams.db.dbb.entity.tokuchoheijunka6gatsu.TsuchishoIkkatsuHakkoParamEntity;
+import jp.co.ndensan.reams.db.dbb.entity.db.relate.tokuchoheijunka6gatsu.TsuchishoIkkatsuHakkoParamEntity;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**

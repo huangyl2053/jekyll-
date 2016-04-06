@@ -23,6 +23,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 @SuppressWarnings("PMD.UnusedPrivateField")
 public class IraishoIkkatsuHakkoBatchParamter extends BatchParameterBase {
 
+    private static final long serialVersionUID = 5290964985893247352L;
     private static final String IRAIFROMYMD = "iraibiFrom";
     private static final String IRAITOYMD = "iraibiTo";
     private static final String NINTEIO_CHOSA_IRAISHO = "ninteioChosaIraisho";
@@ -59,7 +60,7 @@ public class IraishoIkkatsuHakkoBatchParamter extends BatchParameterBase {
     @BatchParameter(key = NINTEI_CHOSAHYO, name = "認定調査票印刷区分")
     private RString ninteiChosahyo;
     @BatchParameter(key = NINTEICHOSAIRAILIST, name = "認定調査依頼リスト")
-    private List<GridParameter> ninteiChosaIraiList;
+    private transient List<GridParameter> ninteiChosaIraiList;
     @BatchParameter(key = NINTEI_CHOSA_IRAI_CHOHYO, name = "認定調査依頼一覧表出力区分")
     private boolean ninteiChosaIraiChohyo;
     @BatchParameter(key = NINTEI_CHOSA_IRAISHO, name = "認定調査依頼書出力区分")
@@ -87,7 +88,7 @@ public class IraishoIkkatsuHakkoBatchParamter extends BatchParameterBase {
     @BatchParameter(key = SHUJIIIKENSHO, name = "意見書印刷区分")
     private RString shujiiIkensho;
     @BatchParameter(key = SHUJIIIKENSHOSAKUSEIIRAILIST, name = "主治医意見書作成依頼リスト")
-    private List<GridParameter> shujiiIkenshoSakuseiIraiList;
+    private transient List<GridParameter> shujiiIkenshoSakuseiIraiList;
     @BatchParameter(key = IKENSHO_SAKUSEIIRAI, name = "主治医意見書作成依頼一覧表出力区分")
     private boolean ikenshoSakuseiirai;
     @BatchParameter(key = IKENSHO_SAKUSEI_SEIKYUU, name = "主治医意見書作成料請求一覧表出力区分")
