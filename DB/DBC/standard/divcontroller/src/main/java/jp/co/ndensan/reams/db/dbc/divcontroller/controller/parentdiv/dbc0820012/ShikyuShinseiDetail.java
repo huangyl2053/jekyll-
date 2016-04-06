@@ -5,6 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbc.divcontroller.controller.parentdiv.dbc0820012;
 
+import jp.co.ndensan.reams.db.dbc.business.core.basic.ShokanShinsei;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0820012.DBC0820012TransitionEventName;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0820012.ShikyuShinseiDetailDiv;
 import jp.co.ndensan.reams.db.dbc.divcontroller.handler.dbc0820012.ShikyuShinseiDetailHandler;
@@ -91,9 +92,7 @@ public class ShikyuShinseiDetail {
                 return setAdd(div, 処理モード);
             }
         } else if (MODEL_UPD.equals(処理モード)) {
-            //TODO hasChange調査の中
-//            boolean flag = getHandler(div).is変更あり(被保険者番号, サービス年月, 整理番号);
-            boolean flag = true;
+            boolean flag = getHandler(div).is変更あり();
             if (!flag) {
                 return isChange(div);
             } else {
@@ -178,16 +177,14 @@ public class ShikyuShinseiDetail {
         ShikyuShinseiDetailParameter 償還払費申請検索キー = ViewStateHolder.get(ViewStateKeys.償還払費申請検索キー,
                 ShikyuShinseiDetailParameter.class);
         HihokenshaNo 被保険者番号 = 償還払費申請検索キー.getHiHokenshaNo();
-        FlexibleYearMonth サービス年月 = ViewStateHolder.get(
-                ViewStateKeys.サービス年月, FlexibleYearMonth.class);
-        RString 整理番号 = ViewStateHolder.get(ViewStateKeys.整理番号, RString.class);
+        ShokanShinsei 償還払支給申請 = ViewStateHolder.get(ViewStateKeys.償還払支給申請詳細データ, ShokanShinsei.class);
         if (MODEL_DEL.equals(処理モード)) {
             ViewStateHolder.put(ViewStateKeys.被保険者番号, 被保険者番号);
-            //TODO 申請一覧検索キー QA内部番号314
+            ViewStateHolder.put(ViewStateKeys.申請一覧検索キー, 償還払支給申請);
             return ResponseData.of(div).forwardWithEventName(DBC0820012TransitionEventName.一覧に戻る).respond();
         }
         ShikyuShinseiDetailHandler handler = getHandler(div);
-        if (handler.is変更あり(被保険者番号, サービス年月, 整理番号)) {
+        if (handler.is変更あり()) {
             if (!ResponseHolder.isReRequest()) {
                 QuestionMessage message = new QuestionMessage(UrQuestionMessages.入力内容の破棄.getMessage().getCode(),
                         UrQuestionMessages.入力内容の破棄.getMessage().evaluate());
@@ -202,7 +199,7 @@ public class ShikyuShinseiDetail {
             }
         }
         ViewStateHolder.put(ViewStateKeys.被保険者番号, 被保険者番号);
-        //TODO 申請一覧検索キー QA内部番号314
+        ViewStateHolder.put(ViewStateKeys.申請一覧検索キー, 償還払支給申請);
         return ResponseData.of(div).forwardWithEventName(DBC0820012TransitionEventName.一覧に戻る).respond();
     }
 
