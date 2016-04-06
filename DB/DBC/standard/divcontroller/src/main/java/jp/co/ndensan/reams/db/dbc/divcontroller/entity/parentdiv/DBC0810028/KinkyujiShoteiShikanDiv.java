@@ -7,15 +7,22 @@ package jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0810028;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import jp.co.ndensan.reams.uz.uza.ui.binding.*;
+import jp.co.ndensan.reams.uz.uza.ui.binding.Button;
+import jp.co.ndensan.reams.uz.uza.ui.binding.DataGrid;
+import jp.co.ndensan.reams.uz.uza.ui.binding.Label;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
+import jp.co.ndensan.reams.uz.uza.ui.binding.TextBox;
+import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxDate;
+import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxMultiLine;
+import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxNum;
 
 /**
- * KinkyujiShoteiShikan のクラスファイル 
- * 
- * @author 自動生成
+ * KinkyujiShoteiShikan のクラスファイル
+ *
+ * @reamsid_L DBC-1010-060 xupeng
  */
 public class KinkyujiShoteiShikanDiv extends Panel {
+
     // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-01-15_09-59-03">
     /*
      * [ private の作成 ]
@@ -99,7 +106,7 @@ public class KinkyujiShoteiShikanDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setDgdKinkyujiShoteiList(DataGrid<dgdKinkyujiShoteiList_Row> dgdKinkyujiShoteiList) {
+    public void setDgdKinkyujiShoteiList(DataGrid<dgdKinkyujiShoteiList_Row> dgdKinkyujiShoteiList) {
         this.getPanelKinkyujiShoteishikkan().setDgdKinkyujiShoteiList(dgdKinkyujiShoteiList);
     }
 
@@ -109,7 +116,7 @@ public class KinkyujiShoteiShikanDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setPanelDetail(panelDetailDiv panelDetail) {
+    public void setPanelDetail(panelDetailDiv panelDetail) {
         this.getPanelKinkyujiShoteishikkan().setPanelDetail(panelDetail);
     }
 
@@ -119,7 +126,7 @@ public class KinkyujiShoteiShikanDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setPanelShobyoName(panelShobyoNameDiv panelShobyoName) {
+    public void setPanelShobyoName(panelShobyoNameDiv panelShobyoName) {
         this.getPanelKinkyujiShoteishikkan().getPanelDetail().setPanelShobyoName(panelShobyoName);
     }
 
@@ -129,7 +136,7 @@ public class KinkyujiShoteiShikanDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setTxtShoteiShikkanShobyoName1(TextBox txtShoteiShikkanShobyoName1) {
+    public void setTxtShoteiShikkanShobyoName1(TextBox txtShoteiShikkanShobyoName1) {
         this.getPanelKinkyujiShoteishikkan().getPanelDetail().getPanelShobyoName().setTxtShoteiShikkanShobyoName1(txtShoteiShikkanShobyoName1);
     }
 
@@ -139,7 +146,7 @@ public class KinkyujiShoteiShikanDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setTxtShoteiShikkanShobyoKaishiYMD1(TextBoxDate txtShoteiShikkanShobyoKaishiYMD1) {
+    public void setTxtShoteiShikkanShobyoKaishiYMD1(TextBoxDate txtShoteiShikkanShobyoKaishiYMD1) {
         this.getPanelKinkyujiShoteishikkan().getPanelDetail().getPanelShobyoName().setTxtShoteiShikkanShobyoKaishiYMD1(txtShoteiShikkanShobyoKaishiYMD1);
     }
 
@@ -149,7 +156,7 @@ public class KinkyujiShoteiShikanDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setTxtKinkyuShobyoName1(TextBox txtKinkyuShobyoName1) {
+    public void setTxtKinkyuShobyoName1(TextBox txtKinkyuShobyoName1) {
         this.getPanelKinkyujiShoteishikkan().getPanelDetail().getPanelShobyoName().setTxtKinkyuShobyoName1(txtKinkyuShobyoName1);
     }
 
@@ -159,7 +166,7 @@ public class KinkyujiShoteiShikanDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setTxtKinkyuChiryoKaishiYMD1(TextBoxDate txtKinkyuChiryoKaishiYMD1) {
+    public void setTxtKinkyuChiryoKaishiYMD1(TextBoxDate txtKinkyuChiryoKaishiYMD1) {
         this.getPanelKinkyujiShoteishikkan().getPanelDetail().getPanelShobyoName().setTxtKinkyuChiryoKaishiYMD1(txtKinkyuChiryoKaishiYMD1);
     }
 
@@ -169,7 +176,7 @@ public class KinkyujiShoteiShikanDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setTxtShoteiShikkanShobyoName2(TextBox txtShoteiShikkanShobyoName2) {
+    public void setTxtShoteiShikkanShobyoName2(TextBox txtShoteiShikkanShobyoName2) {
         this.getPanelKinkyujiShoteishikkan().getPanelDetail().getPanelShobyoName().setTxtShoteiShikkanShobyoName2(txtShoteiShikkanShobyoName2);
     }
 
@@ -179,7 +186,7 @@ public class KinkyujiShoteiShikanDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setTxtShoteiShikkanShobyoKaishiYMD2(TextBoxDate txtShoteiShikkanShobyoKaishiYMD2) {
+    public void setTxtShoteiShikkanShobyoKaishiYMD2(TextBoxDate txtShoteiShikkanShobyoKaishiYMD2) {
         this.getPanelKinkyujiShoteishikkan().getPanelDetail().getPanelShobyoName().setTxtShoteiShikkanShobyoKaishiYMD2(txtShoteiShikkanShobyoKaishiYMD2);
     }
 
@@ -189,7 +196,7 @@ public class KinkyujiShoteiShikanDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setTxtKinkyuShobyoName2(TextBox txtKinkyuShobyoName2) {
+    public void setTxtKinkyuShobyoName2(TextBox txtKinkyuShobyoName2) {
         this.getPanelKinkyujiShoteishikkan().getPanelDetail().getPanelShobyoName().setTxtKinkyuShobyoName2(txtKinkyuShobyoName2);
     }
 
@@ -199,7 +206,7 @@ public class KinkyujiShoteiShikanDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setTxtKinkyuChiryoKaishiYMD2(TextBoxDate txtKinkyuChiryoKaishiYMD2) {
+    public void setTxtKinkyuChiryoKaishiYMD2(TextBoxDate txtKinkyuChiryoKaishiYMD2) {
         this.getPanelKinkyujiShoteishikkan().getPanelDetail().getPanelShobyoName().setTxtKinkyuChiryoKaishiYMD2(txtKinkyuChiryoKaishiYMD2);
     }
 
@@ -209,7 +216,7 @@ public class KinkyujiShoteiShikanDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setTxtShoteiShikkanShobyoName3(TextBox txtShoteiShikkanShobyoName3) {
+    public void setTxtShoteiShikkanShobyoName3(TextBox txtShoteiShikkanShobyoName3) {
         this.getPanelKinkyujiShoteishikkan().getPanelDetail().getPanelShobyoName().setTxtShoteiShikkanShobyoName3(txtShoteiShikkanShobyoName3);
     }
 
@@ -219,7 +226,7 @@ public class KinkyujiShoteiShikanDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setTxtShoteiShikkanShobyoKaishiYMD3(TextBoxDate txtShoteiShikkanShobyoKaishiYMD3) {
+    public void setTxtShoteiShikkanShobyoKaishiYMD3(TextBoxDate txtShoteiShikkanShobyoKaishiYMD3) {
         this.getPanelKinkyujiShoteishikkan().getPanelDetail().getPanelShobyoName().setTxtShoteiShikkanShobyoKaishiYMD3(txtShoteiShikkanShobyoKaishiYMD3);
     }
 
@@ -229,7 +236,7 @@ public class KinkyujiShoteiShikanDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setTxtKinkyuShobyoName3(TextBox txtKinkyuShobyoName3) {
+    public void setTxtKinkyuShobyoName3(TextBox txtKinkyuShobyoName3) {
         this.getPanelKinkyujiShoteishikkan().getPanelDetail().getPanelShobyoName().setTxtKinkyuShobyoName3(txtKinkyuShobyoName3);
     }
 
@@ -239,7 +246,7 @@ public class KinkyujiShoteiShikanDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setTxtKinkyuChiryoKaishiYMD3(TextBoxDate txtKinkyuChiryoKaishiYMD3) {
+    public void setTxtKinkyuChiryoKaishiYMD3(TextBoxDate txtKinkyuChiryoKaishiYMD3) {
         this.getPanelKinkyujiShoteishikkan().getPanelDetail().getPanelShobyoName().setTxtKinkyuChiryoKaishiYMD3(txtKinkyuChiryoKaishiYMD3);
     }
 
@@ -249,7 +256,7 @@ public class KinkyujiShoteiShikanDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setPanelOshinTuyin(panelOshinTuyinDiv panelOshinTuyin) {
+    public void setPanelOshinTuyin(panelOshinTuyinDiv panelOshinTuyin) {
         this.getPanelKinkyujiShoteishikkan().getPanelDetail().setPanelOshinTuyin(panelOshinTuyin);
     }
 
@@ -259,7 +266,7 @@ public class KinkyujiShoteiShikanDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setLblOshin(Label lblOshin) {
+    public void setLblOshin(Label lblOshin) {
         this.getPanelKinkyujiShoteishikkan().getPanelDetail().getPanelOshinTuyin().setLblOshin(lblOshin);
     }
 
@@ -269,7 +276,7 @@ public class KinkyujiShoteiShikanDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setTxtOshinNissu(TextBoxNum txtOshinNissu) {
+    public void setTxtOshinNissu(TextBoxNum txtOshinNissu) {
         this.getPanelKinkyujiShoteishikkan().getPanelDetail().getPanelOshinTuyin().setTxtOshinNissu(txtOshinNissu);
     }
 
@@ -279,7 +286,7 @@ public class KinkyujiShoteiShikanDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setTxtOshinIryoKikanName(TextBox txtOshinIryoKikanName) {
+    public void setTxtOshinIryoKikanName(TextBox txtOshinIryoKikanName) {
         this.getPanelKinkyujiShoteishikkan().getPanelDetail().getPanelOshinTuyin().setTxtOshinIryoKikanName(txtOshinIryoKikanName);
     }
 
@@ -289,7 +296,7 @@ public class KinkyujiShoteiShikanDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setLblTsuin(Label lblTsuin) {
+    public void setLblTsuin(Label lblTsuin) {
         this.getPanelKinkyujiShoteishikkan().getPanelDetail().getPanelOshinTuyin().setLblTsuin(lblTsuin);
     }
 
@@ -299,7 +306,7 @@ public class KinkyujiShoteiShikanDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setTxtTsuyinNissu(TextBoxNum txtTsuyinNissu) {
+    public void setTxtTsuyinNissu(TextBoxNum txtTsuyinNissu) {
         this.getPanelKinkyujiShoteishikkan().getPanelDetail().getPanelOshinTuyin().setTxtTsuyinNissu(txtTsuyinNissu);
     }
 
@@ -309,7 +316,7 @@ public class KinkyujiShoteiShikanDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setTxtTsuinKikanName(TextBox txtTsuinKikanName) {
+    public void setTxtTsuinKikanName(TextBox txtTsuinKikanName) {
         this.getPanelKinkyujiShoteishikkan().getPanelDetail().getPanelOshinTuyin().setTxtTsuinKikanName(txtTsuinKikanName);
     }
 
@@ -319,7 +326,7 @@ public class KinkyujiShoteiShikanDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setTxtTekiyou(TextBoxMultiLine txtTekiyou) {
+    public void setTxtTekiyou(TextBoxMultiLine txtTekiyou) {
         this.getPanelKinkyujiShoteishikkan().getPanelDetail().getPanelOshinTuyin().setTxtTekiyou(txtTekiyou);
     }
 
@@ -329,7 +336,7 @@ public class KinkyujiShoteiShikanDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setPanelJiryoutensu(panelJiryoutensuDiv panelJiryoutensu) {
+    public void setPanelJiryoutensu(panelJiryoutensuDiv panelJiryoutensu) {
         this.getPanelKinkyujiShoteishikkan().getPanelDetail().setPanelJiryoutensu(panelJiryoutensu);
     }
 
@@ -339,7 +346,7 @@ public class KinkyujiShoteiShikanDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setTxtShoteiShikkanTanisu(TextBoxNum txtShoteiShikkanTanisu) {
+    public void setTxtShoteiShikkanTanisu(TextBoxNum txtShoteiShikkanTanisu) {
         this.getPanelKinkyujiShoteishikkan().getPanelDetail().getPanelJiryoutensu().setTxtShoteiShikkanTanisu(txtShoteiShikkanTanisu);
     }
 
@@ -349,7 +356,7 @@ public class KinkyujiShoteiShikanDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setTxtShoteiShikkanNissu(TextBoxNum txtShoteiShikkanNissu) {
+    public void setTxtShoteiShikkanNissu(TextBoxNum txtShoteiShikkanNissu) {
         this.getPanelKinkyujiShoteishikkan().getPanelDetail().getPanelJiryoutensu().setTxtShoteiShikkanNissu(txtShoteiShikkanNissu);
     }
 
@@ -359,7 +366,7 @@ public class KinkyujiShoteiShikanDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setTxtShoteiShikkanSubTotal(TextBoxNum txtShoteiShikkanSubTotal) {
+    public void setTxtShoteiShikkanSubTotal(TextBoxNum txtShoteiShikkanSubTotal) {
         this.getPanelKinkyujiShoteishikkan().getPanelDetail().getPanelJiryoutensu().setTxtShoteiShikkanSubTotal(txtShoteiShikkanSubTotal);
     }
 
@@ -369,7 +376,7 @@ public class KinkyujiShoteiShikanDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setTxtKinkyuChiryoKanriTanisu(TextBoxNum txtKinkyuChiryoKanriTanisu) {
+    public void setTxtKinkyuChiryoKanriTanisu(TextBoxNum txtKinkyuChiryoKanriTanisu) {
         this.getPanelKinkyujiShoteishikkan().getPanelDetail().getPanelJiryoutensu().setTxtKinkyuChiryoKanriTanisu(txtKinkyuChiryoKanriTanisu);
     }
 
@@ -379,7 +386,7 @@ public class KinkyujiShoteiShikanDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setTxtKinkyuChiryoKanriNissu(TextBoxNum txtKinkyuChiryoKanriNissu) {
+    public void setTxtKinkyuChiryoKanriNissu(TextBoxNum txtKinkyuChiryoKanriNissu) {
         this.getPanelKinkyujiShoteishikkan().getPanelDetail().getPanelJiryoutensu().setTxtKinkyuChiryoKanriNissu(txtKinkyuChiryoKanriNissu);
     }
 
@@ -389,7 +396,7 @@ public class KinkyujiShoteiShikanDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setTxtKinkyuChiryoKanriSubTotal(TextBoxNum txtKinkyuChiryoKanriSubTotal) {
+    public void setTxtKinkyuChiryoKanriSubTotal(TextBoxNum txtKinkyuChiryoKanriSubTotal) {
         this.getPanelKinkyujiShoteishikkan().getPanelDetail().getPanelJiryoutensu().setTxtKinkyuChiryoKanriSubTotal(txtKinkyuChiryoKanriSubTotal);
     }
 
@@ -399,7 +406,7 @@ public class KinkyujiShoteiShikanDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setTxtRehabilitationTanisu(TextBoxNum txtRehabilitationTanisu) {
+    public void setTxtRehabilitationTanisu(TextBoxNum txtRehabilitationTanisu) {
         this.getPanelKinkyujiShoteishikkan().getPanelDetail().getPanelJiryoutensu().setTxtRehabilitationTanisu(txtRehabilitationTanisu);
     }
 
@@ -409,7 +416,7 @@ public class KinkyujiShoteiShikanDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setTxtShujutsuTanisu(TextBoxNum txtShujutsuTanisu) {
+    public void setTxtShujutsuTanisu(TextBoxNum txtShujutsuTanisu) {
         this.getPanelKinkyujiShoteishikkan().getPanelDetail().getPanelJiryoutensu().setTxtShujutsuTanisu(txtShujutsuTanisu);
     }
 
@@ -419,7 +426,7 @@ public class KinkyujiShoteiShikanDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setTxtHoshasenChiryoTanisu(TextBoxNum txtHoshasenChiryoTanisu) {
+    public void setTxtHoshasenChiryoTanisu(TextBoxNum txtHoshasenChiryoTanisu) {
         this.getPanelKinkyujiShoteishikkan().getPanelDetail().getPanelJiryoutensu().setTxtHoshasenChiryoTanisu(txtHoshasenChiryoTanisu);
     }
 
@@ -429,7 +436,7 @@ public class KinkyujiShoteiShikanDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setTxtShochiTanisu(TextBoxNum txtShochiTanisu) {
+    public void setTxtShochiTanisu(TextBoxNum txtShochiTanisu) {
         this.getPanelKinkyujiShoteishikkan().getPanelDetail().getPanelJiryoutensu().setTxtShochiTanisu(txtShochiTanisu);
     }
 
@@ -439,7 +446,7 @@ public class KinkyujiShoteiShikanDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setTxtMasuiTanisu(TextBoxNum txtMasuiTanisu) {
+    public void setTxtMasuiTanisu(TextBoxNum txtMasuiTanisu) {
         this.getPanelKinkyujiShoteishikkan().getPanelDetail().getPanelJiryoutensu().setTxtMasuiTanisu(txtMasuiTanisu);
     }
 
@@ -449,7 +456,7 @@ public class KinkyujiShoteiShikanDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setTxtTokuteiJiryoGoukei(TextBoxNum txtTokuteiJiryoGoukei) {
+    public void setTxtTokuteiJiryoGoukei(TextBoxNum txtTokuteiJiryoGoukei) {
         this.getPanelKinkyujiShoteishikkan().getPanelDetail().getPanelJiryoutensu().setTxtTokuteiJiryoGoukei(txtTokuteiJiryoGoukei);
     }
 
@@ -459,7 +466,7 @@ public class KinkyujiShoteiShikanDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setBtnClose(Button btnClose) {
+    public void setBtnClose(Button btnClose) {
         this.getPanelKinkyujiShoteishikkan().getPanelDetail().setBtnClose(btnClose);
     }
 
