@@ -40,6 +40,8 @@ import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
 
 /**
  * 事業報告（月報）補正発行するクラスです。
+ *
+ * @reamsid_L DBU-1100-100 cuilin
  */
 public class JigyoHokokuGeppoHoseiHako {
 
@@ -49,6 +51,11 @@ public class JigyoHokokuGeppoHoseiHako {
     private static final RString 市町村識別ID_00 = new RString("00");
     private static final RString 合併旧市町村区分0 = new RString("0");
     private static final RString 合併旧市町村区分1 = new RString("1");
+    private static final RString 市町村情報メッセージ = new RString("市町村セキュリティ情報");
+    private static final RString 合併情報区分メッセージ = new RString("合併情報区分");
+    private static final RString 現市町村情報メッセージ = new RString("現市町村情報");
+    private static final RString 全市町村情報メッセージ = new RString("全市町村情報");
+    private static final RString 旧市町村コード情報メッセージ = new RString("旧市町村コード情報");
     private final MapperProvider mapperProvider;
     private final DbT7021JigyoHokokuTokeiDataDac dac;
 
@@ -89,20 +96,22 @@ public class JigyoHokokuGeppoHoseiHako {
         ShichosonSecurityJoho 市町村セキュリティ情報 = ShichosonSecurityJoho.getShichosonSecurityJoho(
                 GyomuBunrui.介護事務);
         if (!導入済.equals(市町村セキュリティ情報.get介護導入区分())) {
-            throw new ApplicationException(UrErrorMessages.存在しない.getMessage().replace("市町村セキュリティ情報"));
+            throw new ApplicationException(UrErrorMessages.存在しない.getMessage()
+                    .replace(市町村情報メッセージ.toString()));
         }
         Code 導入形態コード = 市町村セキュリティ情報.get導入形態コード();
         KoseiShichosonJoho 市町村情報 = 市町村セキュリティ情報.get市町村情報();
         GappeiCityJohoBFinder gappeiCityJohoBFinder = GappeiCityJohoBFinder.createInstance();
         RString 合併情報区分 = gappeiCityJohoBFinder.getGappeijohokubun();
         if (合併情報区分 == null || 合併情報区分.isEmpty()) {
-            throw new ApplicationException(UrErrorMessages.存在しない.getMessage().replace("合併情報区分"));
+            throw new ApplicationException(UrErrorMessages.存在しない.getMessage()
+                    .replace(合併情報区分メッセージ.toString()));
         }
         List<ShichosonCodeNameResult> 出力市町村情報 = new ArrayList<>();
         if (DonyuKeitaiCode.事務広域.getCode().equals(導入形態コード.getKey())
                 || DonyuKeitaiCode.認定広域.getCode().equals(導入形態コード.getKey())) {
             if (!市町村識別ID_00.equals(市町村情報.get市町村識別ID())) {
-                throw new ApplicationException(DbaErrorMessages.広域構成市町村からの補正処理.getMessage());
+                throw new ApplicationException(DbaErrorMessages.広域構成市町村からの補正処理.getMessage().evaluate());
             }
             if (合併情報区分_合併なし.equals(合併情報区分)) {
                 出力市町村情報.add(new ShichosonCodeNameResult(市町村情報.get市町村コード(), 市町村情報.get市町村名称(),
@@ -142,7 +151,8 @@ public class JigyoHokokuGeppoHoseiHako {
         SearchResult<KoikiZenShichosonJoho> koikiZenShichosonJoho = koikiShichosonJohoFinder.
                 getGenShichosonJoho();
         if (koikiZenShichosonJoho == null || koikiZenShichosonJoho.records().isEmpty()) {
-            throw new ApplicationException(UrErrorMessages.存在しない.getMessage().replace("現市町村情報"));
+            throw new ApplicationException(UrErrorMessages.存在しない.getMessage()
+                    .replace(現市町村情報メッセージ.toString()));
         }
         for (int i = 0; i < koikiZenShichosonJoho.records().size(); i++) {
             出力市町村情報.add(new ShichosonCodeNameResult(
@@ -163,7 +173,8 @@ public class JigyoHokokuGeppoHoseiHako {
         SearchResult<KoikiZenShichosonJoho> koikiZenShichosonJoho = koikiShichosonJohoFinder.
                 getZenShichosonJoho();
         if ((koikiZenShichosonJoho == null || koikiZenShichosonJoho.records().isEmpty())) {
-            throw new ApplicationException(UrErrorMessages.存在しない.getMessage().replace("全市町村情報"));
+            throw new ApplicationException(UrErrorMessages.存在しない.getMessage()
+                    .replace(全市町村情報メッセージ.toString()));
         }
         for (int i = 0; i < koikiZenShichosonJoho.records().size(); i++) {
             if (合併旧市町村区分0.equals(koikiZenShichosonJoho.records().get(i).get合併旧市町村区分())) {
@@ -197,7 +208,8 @@ public class JigyoHokokuGeppoHoseiHako {
                 DonyuKeitaiCode.toValue(導入形態コード.getKey()));
 
         if (kyuShichosonCodeJoho == null || kyuShichosonCodeJoho.get旧市町村コード情報List().isEmpty()) {
-            throw new ApplicationException(UrErrorMessages.存在しない.getMessage().replace("旧市町村コード情報"));
+            throw new ApplicationException(UrErrorMessages.存在しない.getMessage()
+                    .replace(旧市町村コード情報メッセージ.toString()));
         }
         for (KyuShichosonCode kyuShichosonCode : kyuShichosonCodeJoho.get旧市町村コード情報List()) {
             出力市町村情報.add(new ShichosonCodeNameResult(
