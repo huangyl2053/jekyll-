@@ -37,7 +37,7 @@ public class ShokanFushikyuKetteiInEntity implements IDbAccessable, Serializable
     @TempTableColumnOrder(3)
     private ShoKisaiHokenshaNo shokisaiHokenshaNo;
     @TempTableColumnOrder(4)
-    private RString baoxianzheName;
+    private RString hokenshaName;
     @TempTableColumnOrder(5)
     private FlexibleDate sakuseiYMD;
     @TempTableColumnOrder(6)
@@ -63,11 +63,11 @@ public class ShokanFushikyuKetteiInEntity implements IDbAccessable, Serializable
     @TempTableColumnOrder(16)
     private RString serviceShuruiName;
     @TempTableColumnOrder(17)
-    private Decimal danweishujiner;
+    private Decimal tensuKingaku;
     @TempTableColumnOrder(18)
-    private RString beikaoOne;
+    private RString bikoOne;
     @TempTableColumnOrder(19)
-    private RString beikaoTwo;
+    private RString bikoTwo;
     @TempTableColumnOrder(20)
     private ShikibetsuCode shikibetsuCode;
     @TempTableColumnOrder(21)
@@ -81,12 +81,12 @@ public class ShokanFushikyuKetteiInEntity implements IDbAccessable, Serializable
     @TempTableColumnOrder(25)
     private RString gyoseiku;
     @TempTableColumnOrder(26)
-    private RString sangshishiyoucode;
+    private RString soshitsuJiyuCode;
     @TempTableColumnOrder(27)
-    private FlexibleDate sagnshishisyouYMD;
+    private FlexibleDate soshitsuYMD;
     @TempTableColumnOrder(28)
     private Boolean isUpdate;
     @TempTableColumnOrder(29)
-    private RString zhigeiqufenCode;
+    private RString shikyuKubunCode;
 
 }
