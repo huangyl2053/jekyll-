@@ -316,16 +316,14 @@ public class DbT1001HihokenshaDaichoDac implements ISaveable<DbT1001HihokenshaDa
         requireNonNull(識別コード, UrSystemErrorMessages.値がnull.getReplacedMessage(メッセージ_識別コード.toString()));
 
         DbAccessorNormalType accessor = new DbAccessorNormalType(session);
-        List<OrderBy> orderBy = new ArrayList<>();
-        orderBy.add(new OrderBy(DbT1001HihokenshaDaicho.idoYMD, Order.DESC, NullsOrder.LAST));
-        orderBy.add(new OrderBy(DbT1001HihokenshaDaicho.edaNo, Order.DESC, NullsOrder.LAST));
 
         return accessor.select().
                 table(DbT1001HihokenshaDaicho.class).
                 where(and(
                                 eq(logicalDeletedFlag, 論理削除フラグ),
                                 eq(shikibetsuCode, 識別コード))).
-                order(_ReportDACUtility.toOrderBysArray(orderBy)).
+                order(new OrderBy(DbT1001HihokenshaDaicho.idoYMD, Order.DESC, NullsOrder.LAST),
+                        new OrderBy(DbT1001HihokenshaDaicho.edaNo, Order.DESC, NullsOrder.LAST)).
                 limit(1).
                 toObject(DbT1001HihokenshaDaichoEntity.class);
     }
