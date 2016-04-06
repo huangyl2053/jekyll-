@@ -10,7 +10,7 @@ import jp.co.ndensan.reams.db.dba.entity.report.shikakushasho.ShikakushashoRepor
 /**
  * 介護保険資格者証ボディEditorです。
  *
- * @reamsid_L DBU-0490-080  suguangjun
+ * @reamsid_L DBU-0490-080 suguangjun
  */
 public class ShikakushashoBodyEditor implements IShikakushashoEditor {
 
@@ -136,6 +136,50 @@ public class ShikakushashoBodyEditor implements IShikakushashoEditor {
             }
         }
         source.serviceRyui = item.getServiceRyui();
+        if (!item.getKyufuseigenNaiyo().isEmpty()) {
+            for (int i = 1; i <= item.getKyufuseigenNaiyo().size(); i++) {
+                if (i == 1) {
+                    source.kyufuseigenNaiyo1 = item.getKyufuseigenNaiyo().get(0);
+                }
+                if (i == NOCOUNT_2) {
+                    source.kyufuseigenNaiyo2 = item.getKyufuseigenNaiyo().get(1);
+                }
+                if (i == NOCOUNT_3) {
+                    source.kyufuseigenNaiyo3 = item.getKyufuseigenNaiyo().get(2);
+                }
+            }
+        }
+        bodyEdit3(source);
+        return source;
+    }
+
+    private ShikakushashoReportSource bodyEdit3(ShikakushashoReportSource source) {
+        if (!item.getKyufuseigenKaishiYMD().isEmpty()) {
+            for (int i = 1; i <= item.getKyufuseigenKaishiYMD().size(); i++) {
+                if (i == 1) {
+                    source.kyufuseigenKaishiYMD1 = item.getKyufuseigenKaishiYMD().get(0);
+                }
+                if (i == NOCOUNT_2) {
+                    source.kyufuseigenKaishiYMD2 = item.getKyufuseigenKaishiYMD().get(1);
+                }
+                if (i == NOCOUNT_3) {
+                    source.kyufuseigenKaishiYMD3 = item.getKyufuseigenKaishiYMD().get(2);
+                }
+            }
+        }
+        if (!item.getKyufuseigenShuryoYMD().isEmpty()) {
+            for (int i = 1; i <= item.getKyufuseigenShuryoYMD().size(); i++) {
+                if (i == 1) {
+                    source.kyufuseigenShuryoYMD1 = item.getKyufuseigenShuryoYMD().get(0);
+                }
+                if (i == NOCOUNT_2) {
+                    source.kyufuseigenShuryoYMD2 = item.getKyufuseigenShuryoYMD().get(1);
+                }
+                if (i == NOCOUNT_3) {
+                    source.kyufuseigenShuryoYMD3 = item.getKyufuseigenShuryoYMD().get(2);
+                }
+            }
+        }
         source.keikakuJigyoshaName1 = item.getKeikakuJigyoshaName1();
         source.keikakuTodokedeYMD1 = item.getKeikakuTodokedeYMD1();
         source.keikakuJigyoshaName2 = item.getKeikakuJigyoshaName2();
@@ -150,22 +194,51 @@ public class ShikakushashoBodyEditor implements IShikakushashoEditor {
         source.keikakuTodokedeYMD3 = item.getKeikakuTodokedeYMD3();
         source.keikakuTodokedeYMD3Asutarisuku = item.getKeikakuTodokedeYMD3Asutarisuku();
         source.keikakuTodokedeYMD3Masshosen = item.getKeikakuTodokedeYMD3Masshosen();
-        source.nyushoShisetsuShurui1 = item.getNyushoShisetsuShurui1();
-        source.nyushoShisetsuName1 = item.getNyushoShisetsuName1();
-        source.shisetsuNyusho1 = item.getShisetsuNyusho1();
-        source.shisetsuNyuin1 = item.getShisetsuNyuin1();
-        source.shisetsuNyushoYMD1 = item.getShisetsuNyushoYMD1();
-        source.shisetsuTaisho1 = item.getShisetsuTaisho1();
-        source.shisetsuTaiin1 = item.getShisetsuTaiin1();
-        source.shisetsuTaishoYMD1 = item.getShisetsuTaishoYMD1();
-        source.nyushoShisetsuShurui2 = item.getNyushoShisetsuShurui2();
-        source.nyushoShisetsuName2 = item.getNyushoShisetsuName2();
-        source.shisetsuNyusho2 = item.getShisetsuNyusho2();
-        source.shisetsuNyuin2 = item.getShisetsuNyuin2();
-        source.shisetsuNyushoYMD2 = item.getShisetsuNyushoYMD2();
-        source.shisetsuTaisho2 = item.getShisetsuTaisho2();
-        source.shisetsuTaiin2 = item.getShisetsuTaiin2();
-        source.shisetsuTaishoYMD2 = item.getShisetsuTaishoYMD2();
+        source.nyushoShisetsuShurui1 = item.getNyushoShisetsuShurui();
+        if (!item.getNyushoShisetsuName().isEmpty()) {
+            for (int i = 1; i <= item.getNyushoShisetsuName().size(); i++) {
+                if (i == 1) {
+                    source.nyushoShisetsuName1 = item.getNyushoShisetsuName().get(0);
+                }
+                if (i == NOCOUNT_2) {
+                    source.nyushoShisetsuName2 = item.getNyushoShisetsuName().get(1);
+                }
+            }
+        }
+        source.shisetsuNyusho1 = item.getShisetsuNyusho();
+        source.shisetsuNyuin1 = item.getShisetsuNyuin();
+        if (!item.getShisetsuNyushoYMD().isEmpty()) {
+            for (int i = 1; i <= item.getShisetsuNyushoYMD().size(); i++) {
+                if (i == 1) {
+                    source.shisetsuNyushoYMD1 = item.getShisetsuNyushoYMD().get(0);
+                }
+                if (i == NOCOUNT_2) {
+                    source.shisetsuNyushoYMD2 = item.getShisetsuNyushoYMD().get(1);
+                }
+            }
+        }
+        bodyEdit4(source);
+        return source;
+    }
+
+    private ShikakushashoReportSource bodyEdit4(ShikakushashoReportSource source) {
+        source.shisetsuTaisho1 = item.getShisetsuTaisho();
+        source.shisetsuTaiin1 = item.getShisetsuTaiin();
+        if (!item.getShisetsuTaishoYMD().isEmpty()) {
+            for (int i = 1; i <= item.getShisetsuTaishoYMD().size(); i++) {
+                if (i == 1) {
+                    source.shisetsuTaishoYMD1 = item.getShisetsuTaishoYMD().get(0);
+                }
+                if (i == NOCOUNT_2) {
+                    source.shisetsuTaishoYMD2 = item.getShisetsuTaishoYMD().get(1);
+                }
+            }
+        }
+        source.nyushoShisetsuShurui2 = item.getNyushoShisetsuShurui();
+        source.shisetsuNyusho2 = item.getShisetsuNyusho();
+        source.shisetsuNyuin2 = item.getShisetsuNyuin();
+        source.shisetsuTaisho2 = item.getShisetsuTaisho();
+        source.shisetsuTaiin2 = item.getShisetsuTaiin();
         if (item.getHokenshaNo() != null) {
             for (int i = 1; i <= item.getHokenshaNo().length(); i++) {
                 if (i == 1) {
