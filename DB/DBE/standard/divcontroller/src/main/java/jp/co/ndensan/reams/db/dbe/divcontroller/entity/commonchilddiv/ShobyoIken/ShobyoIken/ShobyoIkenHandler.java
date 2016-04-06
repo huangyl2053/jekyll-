@@ -511,6 +511,20 @@ public class ShobyoIkenHandler {
                 geninShikkan = builder2.build();
                 意見書情報 = 意見書情報.createBuilderForEdit().setGeninShikkan(geninShikkan).build();
             }
+
+            if (削除.equals(row.getJotai())) {
+                GeninShikkan 原因疾患 = 意見書情報.getGeninShikkan(new GeninShikkanIdentifier(管理番号, row.getRenBan().getValue().intValue()));
+                GeninShikkanBuilder builder = 原因疾患.createBuilderForEdit();
+                builder.set原因疾患コード(new Code(row.getGeninShikkanCode().getValue()));
+                builder.set主たる原因疾患フラグ(false);
+                if (row.getIsShutaruGeninShikkan()) {
+                    builder.set主たる原因疾患フラグ(true);
+                } else {
+                    builder.set主たる原因疾患フラグ(false);
+                }
+                原因疾患 = builder.build().deleted();
+                意見書情報 = 意見書情報.createBuilderForEdit().setGeninShikkan(原因疾患).build();
+            }
         }
         return 意見書情報;
     }
