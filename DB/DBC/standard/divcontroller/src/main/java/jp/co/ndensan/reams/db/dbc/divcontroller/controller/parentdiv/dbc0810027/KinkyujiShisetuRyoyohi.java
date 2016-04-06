@@ -26,6 +26,8 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 
 /**
  * 償還払い状況照会_緊急時施設療養費画面クラスです
+ *
+ * @reamsid_L DBC-1010-070 xupeng
  */
 public class KinkyujiShisetuRyoyohi {
 

@@ -20,6 +20,8 @@ import jp.co.ndensan.reams.uz.uza.math.Decimal;
 
 /**
  * 償還払い状況照会_緊急時施設療養費画面のハンドラクラスです
+ *
+ * @reamsid_L DBC-1010-070 xupeng
  */
 public final class KinkyujiShisetuRyoyohiHandler {
 
