@@ -1,7 +1,5 @@
 package jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv;
 
-import jp.co.ndensan.reams.db.dbz.divcontroller.entity.parentdiv.PaymentMethodDiv;
-import jp.co.ndensan.reams.db.dbz.divcontroller.entity.parentdiv.ShinseishaInfoDiv;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Button;
 import jp.co.ndensan.reams.uz.uza.ui.binding.CheckBoxList;
 import jp.co.ndensan.reams.uz.uza.ui.binding.DataGrid;

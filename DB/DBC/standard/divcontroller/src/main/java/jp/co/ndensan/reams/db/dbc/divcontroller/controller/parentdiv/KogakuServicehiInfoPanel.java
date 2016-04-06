@@ -145,16 +145,15 @@ public class KogakuServicehiInfoPanel {
         ControlGenerator ymlDt = new ControlGenerator(hashMap);
 
         //申請日～申請理由
-        panel.getKogakuServiceDetail().getTabKogakuServicehiDetail().
-                getTplShinseisha().getShinseisha().getTxtShinseiDate().setValue(
-                        ymlDt.getAsRDate("shinseiDate"));
-        panel.getKogakuServiceDetail().getTabKogakuServicehiDetail().
-                getTplShinseisha().getShinseisha().getTxtShinseishaName().setValue(
-                        ymlDt.getAsRString("shinseishaName"));
-        panel.getKogakuServiceDetail().getTabKogakuServicehiDetail().
-                getTplShinseisha().getShinseisha().getTxtJigyoshaNo().setValue(
-                        ymlDt.getAsRString("jigyoshaNo"));
-
+        // panel.getKogakuServiceDetail().getTabKogakuServicehiDetail().
+        //         getTplShinseisha().getShinseisha().getTxtShinseiDate().setValue(
+        //                 ymlDt.getAsRDate("shinseiDate"));
+        // panel.getKogakuServiceDetail().getTabKogakuServicehiDetail().
+        //        getTplShinseisha().getShinseisha().getTxtShinseishaName().setValue(
+        //                ymlDt.getAsRString("shinseishaName"));
+        // panel.getKogakuServiceDetail().getTabKogakuServicehiDetail().
+        //        getTplShinseisha().getShinseisha().getTxtJigyoshaNo().setValue(
+        //                ymlDt.getAsRString("jigyoshaNo"));
         //2014.07.01 追加
 /*        panel.getKogakuServiceDetail().getTabKogakuServicehiDetail().
          getTplShinseisha().getShinseisha().getTxtShinseiDate().setValue(
@@ -167,19 +166,18 @@ public class KogakuServicehiInfoPanel {
          panel.getKogakuServiceDetail().getTabKogakuServicehiDetail().
          getTplShinseisha().getShinseisha().getTxtShinseishaName().setValue(
          servicehiListpanel.getDgKogakuServicehiRireki().getClickedItem().getTxtHihoName()); */
-        panel.getKogakuServiceDetail().getTabKogakuServicehiDetail().
-                getTplShinseisha().getShinseisha().getTxtTelNo().setValue(
-                        ymlDt.getAsRString("telNo"));
-        panel.getKogakuServiceDetail().getTabKogakuServicehiDetail().
-                getTplShinseisha().getShinseisha().getTxtShinseishaNameKana().setValue(
-                        ymlDt.getAsRString("shinseishaNameKana"));
-        panel.getKogakuServiceDetail().getTabKogakuServicehiDetail().
-                getTplShinseisha().getShinseisha().getTxtYubinNo().setValue(
-                        ymlDt.getAsYubinNo("yubinNo"));
-        panel.getKogakuServiceDetail().getTabKogakuServicehiDetail().
-                getTplShinseisha().getShinseisha().getTxtAddress().setValue(
-                        ymlDt.getAsRString("addres"));
-
+        //  panel.getKogakuServiceDetail().getTabKogakuServicehiDetail().
+        //          getTplShinseisha().getShinseisha().getTxtTelNo().setValue(
+        //                  ymlDt.getAsRString("telNo"));
+        //  panel.getKogakuServiceDetail().getTabKogakuServicehiDetail().
+        //          getTplShinseisha().getShinseisha().getTxtShinseishaNameKana().setValue(
+        //                  ymlDt.getAsRString("shinseishaNameKana"));
+        //  panel.getKogakuServiceDetail().getTabKogakuServicehiDetail().
+        //          getTplShinseisha().getShinseisha().getTxtYubinNo().setValue(
+        //                  ymlDt.getAsYubinNo("yubinNo"));
+        //  panel.getKogakuServiceDetail().getTabKogakuServicehiDetail().
+        //          getTplShinseisha().getShinseisha().getTxtAddress().setValue(
+        //                  ymlDt.getAsRString("addres"));
         panel.getKogakuServiceDetail().getTabKogakuServicehiDetail().
                 getTplShinseisha().getTxtShiharaiTotalAmount().setValue(
                         ymlDt.getAsDecimal("shiharaiTotalAmount"));
