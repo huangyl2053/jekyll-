@@ -38,6 +38,7 @@ import jp.co.ndensan.reams.uz.uza.util.editor.DecimalFormatter;
 /**
  * 償還払い費支給申請決定_サービス提供証明書(給付費明細）
  *
+ * @reamsid_L DBC-1030-040 quxiaodong
  *
  */
 public class KyufuShiharayiMeisaiPanelHandler {
