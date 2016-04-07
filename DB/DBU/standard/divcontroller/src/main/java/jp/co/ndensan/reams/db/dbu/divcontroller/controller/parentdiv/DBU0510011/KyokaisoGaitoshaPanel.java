@@ -44,6 +44,8 @@ import jp.co.ndensan.reams.uz.uza.util.Models;
 
 /**
  * 境界層該当者台帳管理Divを制御します。
+ *
+ * @reamsid_L DBU-0430-010 linghuhang
  */
 public class KyokaisoGaitoshaPanel {
 

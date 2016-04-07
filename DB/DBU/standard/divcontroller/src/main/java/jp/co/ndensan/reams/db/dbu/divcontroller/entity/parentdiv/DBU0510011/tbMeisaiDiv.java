@@ -7,15 +7,21 @@ package jp.co.ndensan.reams.db.dbu.divcontroller.entity.parentdiv.DBU0510011;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import jp.co.ndensan.reams.uz.uza.ui.binding.*;
+import jp.co.ndensan.reams.uz.uza.ui.binding.Button;
+import jp.co.ndensan.reams.uz.uza.ui.binding.DataGrid;
+import jp.co.ndensan.reams.uz.uza.ui.binding.DropDownList;
+import jp.co.ndensan.reams.uz.uza.ui.binding.RadioButton;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TabContainer;
+import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxDate;
+import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxNum;
 
 /**
- * tbMeisai のクラスファイル 
- * 
- * @author 自動生成
+ * tbMeisai のクラスファイル
+ *
+ * @reamsid_L DBU-0430-010 linghuhang
  */
 public class tbMeisaiDiv extends TabContainer {
+
     // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-01-15_09-59-03">
     /*
      * [ private の作成 ]
@@ -79,7 +85,7 @@ public class tbMeisaiDiv extends TabContainer {
     }
 
     @JsonIgnore
-    public void  setKyufugakuGengakuKisaiKaijyo(KyufugakuGengakuKisaiKaijyoDiv KyufugakuGengakuKisaiKaijyo) {
+    public void setKyufugakuGengakuKisaiKaijyo(KyufugakuGengakuKisaiKaijyoDiv KyufugakuGengakuKisaiKaijyo) {
         this.getTabKeteiJoho().setKyufugakuGengakuKisaiKaijyo(KyufugakuGengakuKisaiKaijyo);
     }
 
@@ -89,7 +95,7 @@ public class tbMeisaiDiv extends TabContainer {
     }
 
     @JsonIgnore
-    public void  setRadKyufukakuGengakuKisaiKaijyo(RadioButton radKyufukakuGengakuKisaiKaijyo) {
+    public void setRadKyufukakuGengakuKisaiKaijyo(RadioButton radKyufukakuGengakuKisaiKaijyo) {
         this.getTabKeteiJoho().getKyufugakuGengakuKisaiKaijyo().setRadKyufukakuGengakuKisaiKaijyo(radKyufukakuGengakuKisaiKaijyo);
     }
 
@@ -99,7 +105,7 @@ public class tbMeisaiDiv extends TabContainer {
     }
 
     @JsonIgnore
-    public void  setHyojunFutanGakuPanel(HyojunFutanGakuPanelDiv HyojunFutanGakuPanel) {
+    public void setHyojunFutanGakuPanel(HyojunFutanGakuPanelDiv HyojunFutanGakuPanel) {
         this.getTabKeteiJoho().setHyojunFutanGakuPanel(HyojunFutanGakuPanel);
     }
 
@@ -109,7 +115,7 @@ public class tbMeisaiDiv extends TabContainer {
     }
 
     @JsonIgnore
-    public void  setRadHyojunFutanGaku(RadioButton radHyojunFutanGaku) {
+    public void setRadHyojunFutanGaku(RadioButton radHyojunFutanGaku) {
         this.getTabKeteiJoho().getHyojunFutanGakuPanel().setRadHyojunFutanGaku(radHyojunFutanGaku);
     }
 
@@ -119,7 +125,7 @@ public class tbMeisaiDiv extends TabContainer {
     }
 
     @JsonIgnore
-    public void  setTxtHyojunFutanKeigenAtoFutanGaku(TextBoxNum txtHyojunFutanKeigenAtoFutanGaku) {
+    public void setTxtHyojunFutanKeigenAtoFutanGaku(TextBoxNum txtHyojunFutanKeigenAtoFutanGaku) {
         this.getTabKeteiJoho().getHyojunFutanGakuPanel().setTxtHyojunFutanKeigenAtoFutanGaku(txtHyojunFutanKeigenAtoFutanGaku);
     }
 
@@ -129,7 +135,7 @@ public class tbMeisaiDiv extends TabContainer {
     }
 
     @JsonIgnore
-    public void  setRadKyojuhiFutanGakuGengaku(RadioButton radKyojuhiFutanGakuGengaku) {
+    public void setRadKyojuhiFutanGakuGengaku(RadioButton radKyojuhiFutanGakuGengaku) {
         this.getTabKeteiJoho().getHyojunFutanGakuPanel().setRadKyojuhiFutanGakuGengaku(radKyojuhiFutanGakuGengaku);
     }
 
@@ -139,7 +145,7 @@ public class tbMeisaiDiv extends TabContainer {
     }
 
     @JsonIgnore
-    public void  setDdlKyoshituShurui(DropDownList ddlKyoshituShurui) {
+    public void setDdlKyoshituShurui(DropDownList ddlKyoshituShurui) {
         this.getTabKeteiJoho().getHyojunFutanGakuPanel().setDdlKyoshituShurui(ddlKyoshituShurui);
     }
 
@@ -149,7 +155,7 @@ public class tbMeisaiDiv extends TabContainer {
     }
 
     @JsonIgnore
-    public void  setTxtKeigenAtoFutanGaku(TextBoxNum txtKeigenAtoFutanGaku) {
+    public void setTxtKeigenAtoFutanGaku(TextBoxNum txtKeigenAtoFutanGaku) {
         this.getTabKeteiJoho().getHyojunFutanGakuPanel().setTxtKeigenAtoFutanGaku(txtKeigenAtoFutanGaku);
     }
 
@@ -159,7 +165,7 @@ public class tbMeisaiDiv extends TabContainer {
     }
 
     @JsonIgnore
-    public void  setGogakuServiceJogengakuGengaku(GogakuServiceJogengakuGengakuDiv GogakuServiceJogengakuGengaku) {
+    public void setGogakuServiceJogengakuGengaku(GogakuServiceJogengakuGengakuDiv GogakuServiceJogengakuGengaku) {
         this.getTabKeteiJoho().setGogakuServiceJogengakuGengaku(GogakuServiceJogengakuGengaku);
     }
 
@@ -169,7 +175,7 @@ public class tbMeisaiDiv extends TabContainer {
     }
 
     @JsonIgnore
-    public void  setRadShokuhiFutangakuGengaku(RadioButton radShokuhiFutangakuGengaku) {
+    public void setRadShokuhiFutangakuGengaku(RadioButton radShokuhiFutangakuGengaku) {
         this.getTabKeteiJoho().getGogakuServiceJogengakuGengaku().setRadShokuhiFutangakuGengaku(radShokuhiFutangakuGengaku);
     }
 
@@ -179,7 +185,7 @@ public class tbMeisaiDiv extends TabContainer {
     }
 
     @JsonIgnore
-    public void  setTxtShokuhiGenkenAtoFutangaku(TextBoxNum txtShokuhiGenkenAtoFutangaku) {
+    public void setTxtShokuhiGenkenAtoFutangaku(TextBoxNum txtShokuhiGenkenAtoFutangaku) {
         this.getTabKeteiJoho().getGogakuServiceJogengakuGengaku().setTxtShokuhiGenkenAtoFutangaku(txtShokuhiGenkenAtoFutangaku);
     }
 
@@ -189,7 +195,7 @@ public class tbMeisaiDiv extends TabContainer {
     }
 
     @JsonIgnore
-    public void  setRadGogakuServiceJokengaku(RadioButton radGogakuServiceJokengaku) {
+    public void setRadGogakuServiceJokengaku(RadioButton radGogakuServiceJokengaku) {
         this.getTabKeteiJoho().getGogakuServiceJogengakuGengaku().setRadGogakuServiceJokengaku(radGogakuServiceJokengaku);
     }
 
@@ -199,7 +205,7 @@ public class tbMeisaiDiv extends TabContainer {
     }
 
     @JsonIgnore
-    public void  setDdlSeidaiJogengaku(DropDownList ddlSeidaiJogengaku) {
+    public void setDdlSeidaiJogengaku(DropDownList ddlSeidaiJogengaku) {
         this.getTabKeteiJoho().getGogakuServiceJogengakuGengaku().setDdlSeidaiJogengaku(ddlSeidaiJogengaku);
     }
 
@@ -209,7 +215,7 @@ public class tbMeisaiDiv extends TabContainer {
     }
 
     @JsonIgnore
-    public void  setHokenryoNofuGengaku(HokenryoNofuGengakuDiv HokenryoNofuGengaku) {
+    public void setHokenryoNofuGengaku(HokenryoNofuGengakuDiv HokenryoNofuGengaku) {
         this.getTabKeteiJoho().setHokenryoNofuGengaku(HokenryoNofuGengaku);
     }
 
@@ -219,7 +225,7 @@ public class tbMeisaiDiv extends TabContainer {
     }
 
     @JsonIgnore
-    public void  setRadHokenryoNofuGengaku(RadioButton radHokenryoNofuGengaku) {
+    public void setRadHokenryoNofuGengaku(RadioButton radHokenryoNofuGengaku) {
         this.getTabKeteiJoho().getHokenryoNofuGengaku().setRadHokenryoNofuGengaku(radHokenryoNofuGengaku);
     }
 
@@ -229,7 +235,7 @@ public class tbMeisaiDiv extends TabContainer {
     }
 
     @JsonIgnore
-    public void  setHohenryoNofuPanel(HohenryoNofuPanelDiv HohenryoNofuPanel) {
+    public void setHohenryoNofuPanel(HohenryoNofuPanelDiv HohenryoNofuPanel) {
         this.getTabKeteiJoho().getHokenryoNofuGengaku().setHohenryoNofuPanel(HohenryoNofuPanel);
     }
 
@@ -239,7 +245,7 @@ public class tbMeisaiDiv extends TabContainer {
     }
 
     @JsonIgnore
-    public void  setBtnTuikaSuru(Button btnTuikaSuru) {
+    public void setBtnTuikaSuru(Button btnTuikaSuru) {
         this.getTabKeteiJoho().getHokenryoNofuGengaku().getHohenryoNofuPanel().setBtnTuikaSuru(btnTuikaSuru);
     }
 
@@ -249,7 +255,7 @@ public class tbMeisaiDiv extends TabContainer {
     }
 
     @JsonIgnore
-    public void  setDghokenryoNofu(DataGrid<dghokenryoNofu_Row> dghokenryoNofu) {
+    public void setDghokenryoNofu(DataGrid<dghokenryoNofu_Row> dghokenryoNofu) {
         this.getTabKeteiJoho().getHokenryoNofuGengaku().getHohenryoNofuPanel().setDghokenryoNofu(dghokenryoNofu);
     }
 
@@ -259,7 +265,7 @@ public class tbMeisaiDiv extends TabContainer {
     }
 
     @JsonIgnore
-    public void  setHohenryoNofuNyuryoku(HohenryoNofuNyuryokuDiv HohenryoNofuNyuryoku) {
+    public void setHohenryoNofuNyuryoku(HohenryoNofuNyuryokuDiv HohenryoNofuNyuryoku) {
         this.getTabKeteiJoho().getHokenryoNofuGengaku().setHohenryoNofuNyuryoku(HohenryoNofuNyuryoku);
     }
 
@@ -269,7 +275,7 @@ public class tbMeisaiDiv extends TabContainer {
     }
 
     @JsonIgnore
-    public void  setTxtHohenryoNofuFromDate(TextBoxDate txtHohenryoNofuFromDate) {
+    public void setTxtHohenryoNofuFromDate(TextBoxDate txtHohenryoNofuFromDate) {
         this.getTabKeteiJoho().getHokenryoNofuGengaku().getHohenryoNofuNyuryoku().setTxtHohenryoNofuFromDate(txtHohenryoNofuFromDate);
     }
 
@@ -279,7 +285,7 @@ public class tbMeisaiDiv extends TabContainer {
     }
 
     @JsonIgnore
-    public void  setTxtHohenryoNofuToDate(TextBoxDate txtHohenryoNofuToDate) {
+    public void setTxtHohenryoNofuToDate(TextBoxDate txtHohenryoNofuToDate) {
         this.getTabKeteiJoho().getHokenryoNofuGengaku().getHohenryoNofuNyuryoku().setTxtHohenryoNofuToDate(txtHohenryoNofuToDate);
     }
 
@@ -289,7 +295,7 @@ public class tbMeisaiDiv extends TabContainer {
     }
 
     @JsonIgnore
-    public void  setDdlTekiyouSuruShutokuDankai(DropDownList ddlTekiyouSuruShutokuDankai) {
+    public void setDdlTekiyouSuruShutokuDankai(DropDownList ddlTekiyouSuruShutokuDankai) {
         this.getTabKeteiJoho().getHokenryoNofuGengaku().getHohenryoNofuNyuryoku().setDdlTekiyouSuruShutokuDankai(ddlTekiyouSuruShutokuDankai);
     }
 
@@ -299,7 +305,7 @@ public class tbMeisaiDiv extends TabContainer {
     }
 
     @JsonIgnore
-    public void  setBtnCancel(Button btnCancel) {
+    public void setBtnCancel(Button btnCancel) {
         this.getTabKeteiJoho().getHokenryoNofuGengaku().getHohenryoNofuNyuryoku().setBtnCancel(btnCancel);
     }
 
@@ -309,7 +315,7 @@ public class tbMeisaiDiv extends TabContainer {
     }
 
     @JsonIgnore
-    public void  setBtnKakutei(Button btnKakutei) {
+    public void setBtnKakutei(Button btnKakutei) {
         this.getTabKeteiJoho().getHokenryoNofuGengaku().getHohenryoNofuNyuryoku().setBtnKakutei(btnKakutei);
     }
 
@@ -319,7 +325,7 @@ public class tbMeisaiDiv extends TabContainer {
     }
 
     @JsonIgnore
-    public void  setShomeishoNaiyo(ShomeishoNaiyoDiv ShomeishoNaiyo) {
+    public void setShomeishoNaiyo(ShomeishoNaiyoDiv ShomeishoNaiyo) {
         this.getTabShomeishoJoho().setShomeishoNaiyo(ShomeishoNaiyo);
     }
 
@@ -329,7 +335,7 @@ public class tbMeisaiDiv extends TabContainer {
     }
 
     @JsonIgnore
-    public void  setTxtShiseiHaishibi(TextBoxDate txtShiseiHaishibi) {
+    public void setTxtShiseiHaishibi(TextBoxDate txtShiseiHaishibi) {
         this.getTabShomeishoJoho().getShomeishoNaiyo().setTxtShiseiHaishibi(txtShiseiHaishibi);
     }
 
@@ -339,7 +345,7 @@ public class tbMeisaiDiv extends TabContainer {
     }
 
     @JsonIgnore
-    public void  setTxtHogoFuyoKonshoGengakuKingaku(TextBoxNum txtHogoFuyoKonshoGengakuKingaku) {
+    public void setTxtHogoFuyoKonshoGengakuKingaku(TextBoxNum txtHogoFuyoKonshoGengakuKingaku) {
         this.getTabShomeishoJoho().getShomeishoNaiyo().setTxtHogoFuyoKonshoGengakuKingaku(txtHogoFuyoKonshoGengakuKingaku);
     }
 
@@ -349,7 +355,7 @@ public class tbMeisaiDiv extends TabContainer {
     }
 
     @JsonIgnore
-    public void  setTxtShomeishoKoufuDate(TextBoxDate txtShomeishoKoufuDate) {
+    public void setTxtShomeishoKoufuDate(TextBoxDate txtShomeishoKoufuDate) {
         this.getTabShomeishoJoho().getShomeishoNaiyo().setTxtShomeishoKoufuDate(txtShomeishoKoufuDate);
     }
 
@@ -359,7 +365,7 @@ public class tbMeisaiDiv extends TabContainer {
     }
 
     @JsonIgnore
-    public void  setKyokaisoGaitouSochiNaiyo(KyokaisoGaitouSochiNaiyoDiv KyokaisoGaitouSochiNaiyo) {
+    public void setKyokaisoGaitouSochiNaiyo(KyokaisoGaitouSochiNaiyoDiv KyokaisoGaitouSochiNaiyo) {
         this.getTabShomeishoJoho().setKyokaisoGaitouSochiNaiyo(KyokaisoGaitouSochiNaiyo);
     }
 
@@ -369,7 +375,7 @@ public class tbMeisaiDiv extends TabContainer {
     }
 
     @JsonIgnore
-    public void  setTxtKyufugakuJikoFutanGetsugaku(TextBoxNum txtKyufugakuJikoFutanGetsugaku) {
+    public void setTxtKyufugakuJikoFutanGetsugaku(TextBoxNum txtKyufugakuJikoFutanGetsugaku) {
         this.getTabShomeishoJoho().getKyokaisoGaitouSochiNaiyo().setTxtKyufugakuJikoFutanGetsugaku(txtKyufugakuJikoFutanGetsugaku);
     }
 
@@ -379,7 +385,7 @@ public class tbMeisaiDiv extends TabContainer {
     }
 
     @JsonIgnore
-    public void  setDdlKyojuhiGendogakuDankai(DropDownList ddlKyojuhiGendogakuDankai) {
+    public void setDdlKyojuhiGendogakuDankai(DropDownList ddlKyojuhiGendogakuDankai) {
         this.getTabShomeishoJoho().getKyokaisoGaitouSochiNaiyo().setDdlKyojuhiGendogakuDankai(ddlKyojuhiGendogakuDankai);
     }
 
@@ -389,7 +395,7 @@ public class tbMeisaiDiv extends TabContainer {
     }
 
     @JsonIgnore
-    public void  setTxtKyojuhiJikoFutanGetsugaku(TextBoxNum txtKyojuhiJikoFutanGetsugaku) {
+    public void setTxtKyojuhiJikoFutanGetsugaku(TextBoxNum txtKyojuhiJikoFutanGetsugaku) {
         this.getTabShomeishoJoho().getKyokaisoGaitouSochiNaiyo().setTxtKyojuhiJikoFutanGetsugaku(txtKyojuhiJikoFutanGetsugaku);
     }
 
@@ -399,7 +405,7 @@ public class tbMeisaiDiv extends TabContainer {
     }
 
     @JsonIgnore
-    public void  setTxtShokuhiJikoFutanGetsugaku(TextBoxNum txtShokuhiJikoFutanGetsugaku) {
+    public void setTxtShokuhiJikoFutanGetsugaku(TextBoxNum txtShokuhiJikoFutanGetsugaku) {
         this.getTabShomeishoJoho().getKyokaisoGaitouSochiNaiyo().setTxtShokuhiJikoFutanGetsugaku(txtShokuhiJikoFutanGetsugaku);
     }
 
@@ -409,7 +415,7 @@ public class tbMeisaiDiv extends TabContainer {
     }
 
     @JsonIgnore
-    public void  setDdlShokuhiGakenFutanGendogakuDankai(DropDownList ddlShokuhiGakenFutanGendogakuDankai) {
+    public void setDdlShokuhiGakenFutanGendogakuDankai(DropDownList ddlShokuhiGakenFutanGendogakuDankai) {
         this.getTabShomeishoJoho().getKyokaisoGaitouSochiNaiyo().setDdlShokuhiGakenFutanGendogakuDankai(ddlShokuhiGakenFutanGendogakuDankai);
     }
 
@@ -419,7 +425,7 @@ public class tbMeisaiDiv extends TabContainer {
     }
 
     @JsonIgnore
-    public void  setTxtKaigoHokenryoJikoFutanGetsugaku(TextBoxNum txtKaigoHokenryoJikoFutanGetsugaku) {
+    public void setTxtKaigoHokenryoJikoFutanGetsugaku(TextBoxNum txtKaigoHokenryoJikoFutanGetsugaku) {
         this.getTabShomeishoJoho().getKyokaisoGaitouSochiNaiyo().setTxtKaigoHokenryoJikoFutanGetsugaku(txtKaigoHokenryoJikoFutanGetsugaku);
     }
 
@@ -429,7 +435,7 @@ public class tbMeisaiDiv extends TabContainer {
     }
 
     @JsonIgnore
-    public void  setTxtRiyoshaFutanSeidaiGokeigaku(TextBoxNum txtRiyoshaFutanSeidaiGokeigaku) {
+    public void setTxtRiyoshaFutanSeidaiGokeigaku(TextBoxNum txtRiyoshaFutanSeidaiGokeigaku) {
         this.getTabShomeishoJoho().getKyokaisoGaitouSochiNaiyo().setTxtRiyoshaFutanSeidaiGokeigaku(txtRiyoshaFutanSeidaiGokeigaku);
     }
 
@@ -439,7 +445,7 @@ public class tbMeisaiDiv extends TabContainer {
     }
 
     @JsonIgnore
-    public void  setTxtJikoFutanGetsugakuGokeigaku(TextBoxNum txtJikoFutanGetsugakuGokeigaku) {
+    public void setTxtJikoFutanGetsugakuGokeigaku(TextBoxNum txtJikoFutanGetsugakuGokeigaku) {
         this.getTabShomeishoJoho().getKyokaisoGaitouSochiNaiyo().setTxtJikoFutanGetsugakuGokeigaku(txtJikoFutanGetsugakuGokeigaku);
     }
 

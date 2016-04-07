@@ -4,18 +4,24 @@ package jp.co.ndensan.reams.db.dbu.divcontroller.entity.parentdiv.DBU0510011;
  * このファイルへの変更は、再生成時には損失するため
  * 不正な動作の原因になります。
  */
+
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.ui.binding.*;
+import jp.co.ndensan.reams.uz.uza.ui.binding.Button;
+import jp.co.ndensan.reams.uz.uza.ui.binding.DataGrid;
+import jp.co.ndensan.reams.uz.uza.ui.binding.DropDownList;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
+import jp.co.ndensan.reams.uz.uza.ui.binding.RadioButton;
+import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxDate;
 
 /**
- * HokenryoNofuGengaku のクラスファイル 
- * 
- * @author 自動生成
+ * HokenryoNofuGengaku のクラスファイル
+ *
+ * @reamsid_L DBU-0430-010 linghuhang
  */
 public class HokenryoNofuGengakuDiv extends Panel {
+
     // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-01-15_09-59-03">
     /*
      * [ private の作成 ]
@@ -119,7 +125,7 @@ public class HokenryoNofuGengakuDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setBtnTuikaSuru(Button btnTuikaSuru) {
+    public void setBtnTuikaSuru(Button btnTuikaSuru) {
         this.getHohenryoNofuPanel().setBtnTuikaSuru(btnTuikaSuru);
     }
 
@@ -129,7 +135,7 @@ public class HokenryoNofuGengakuDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setDghokenryoNofu(DataGrid<dghokenryoNofu_Row> dghokenryoNofu) {
+    public void setDghokenryoNofu(DataGrid<dghokenryoNofu_Row> dghokenryoNofu) {
         this.getHohenryoNofuPanel().setDghokenryoNofu(dghokenryoNofu);
     }
 
@@ -139,7 +145,7 @@ public class HokenryoNofuGengakuDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setTxtHohenryoNofuFromDate(TextBoxDate txtHohenryoNofuFromDate) {
+    public void setTxtHohenryoNofuFromDate(TextBoxDate txtHohenryoNofuFromDate) {
         this.getHohenryoNofuNyuryoku().setTxtHohenryoNofuFromDate(txtHohenryoNofuFromDate);
     }
 
@@ -149,7 +155,7 @@ public class HokenryoNofuGengakuDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setTxtHohenryoNofuToDate(TextBoxDate txtHohenryoNofuToDate) {
+    public void setTxtHohenryoNofuToDate(TextBoxDate txtHohenryoNofuToDate) {
         this.getHohenryoNofuNyuryoku().setTxtHohenryoNofuToDate(txtHohenryoNofuToDate);
     }
 
@@ -159,7 +165,7 @@ public class HokenryoNofuGengakuDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setDdlTekiyouSuruShutokuDankai(DropDownList ddlTekiyouSuruShutokuDankai) {
+    public void setDdlTekiyouSuruShutokuDankai(DropDownList ddlTekiyouSuruShutokuDankai) {
         this.getHohenryoNofuNyuryoku().setDdlTekiyouSuruShutokuDankai(ddlTekiyouSuruShutokuDankai);
     }
 
@@ -169,7 +175,7 @@ public class HokenryoNofuGengakuDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setBtnCancel(Button btnCancel) {
+    public void setBtnCancel(Button btnCancel) {
         this.getHohenryoNofuNyuryoku().setBtnCancel(btnCancel);
     }
 
@@ -179,7 +185,7 @@ public class HokenryoNofuGengakuDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setBtnKakutei(Button btnKakutei) {
+    public void setBtnKakutei(Button btnKakutei) {
         this.getHohenryoNofuNyuryoku().setBtnKakutei(btnKakutei);
     }
 
