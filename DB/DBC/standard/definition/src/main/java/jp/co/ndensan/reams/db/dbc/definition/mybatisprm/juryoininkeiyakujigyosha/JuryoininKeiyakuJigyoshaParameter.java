@@ -14,35 +14,25 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
  * 受領委任契約事業者登録・追加・修正・照会MyBatisパラメータクラスです。
+ *
+ * @reamsid_L DBC-2120-030 panhe
  */
 @lombok.Getter
 @lombok.Setter
 @SuppressWarnings("PMD.UnusedPrivateField")
 public final class JuryoininKeiyakuJigyoshaParameter implements Serializable {
 
-    // 1:契約事業者番号
     private final boolean selectedBango;
-    // 2:契約事業者名称
     private final boolean selectedName;
-    // 3:契約事業者住所
     private final boolean selectedJusho;
-    // 事業者契約番号
     private final RString keiyakuJigyoshaNo;
-    // カナ名称
     private final AtenaKanaMeisho keiyakuJigyoshaKanaName;
-    // カナ名称前方一致
     private final boolean sameKanaName;
-    // 漢字名称
     private final AtenaMeisho keiyakuJigyoshaName;
-    // 漢字名称前方一致
     private final boolean sameJigyoshaName;
-    // 契約種類(01：住宅改修、02：福祉用具、03：住宅改修／福祉用具、11：償還払給付、21：高額給付費)
     private final RString keiyakuShurui;
-    // 契約事業者郵便番号
     private final YubinNo keiyakuJigyoshaYubinNo;
-    // 事業者住所
     private final AtenaJusho keiyakuJigyoshaJusho;
-    // 住所前方一致
     private final boolean sameJusho;
 
     /**

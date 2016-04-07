@@ -21,6 +21,8 @@ import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
 
 /**
  * 受領委任契約事業者のデータアクセスクラスです。
+ *
+ * @reamsid_L DBC-9999-012 panhe
  */
 public class DbT3077JuryoininKeiyakuJigyoshaDac implements ISaveable<DbT3077JuryoininKeiyakuJigyoshaEntity> {
 
