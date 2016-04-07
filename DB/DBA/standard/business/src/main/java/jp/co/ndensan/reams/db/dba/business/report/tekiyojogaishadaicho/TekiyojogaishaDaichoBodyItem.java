@@ -10,8 +10,9 @@ import lombok.Getter;
 import lombok.Setter;
 
 /**
- *
  * 適用除外者台帳ボディのITEMクラスです。
+ *
+ * @reamsid_L DBE-3000-140 lishengli
  */
 @Getter
 @Setter
