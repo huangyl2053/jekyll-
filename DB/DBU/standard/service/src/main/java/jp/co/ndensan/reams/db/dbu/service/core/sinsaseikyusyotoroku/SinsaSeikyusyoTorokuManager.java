@@ -19,6 +19,8 @@ import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
 
 /**
  * 審査請求書登録を登録するクラスです。
+ *
+ * @reamsid_L DBU-1080-080 lizhuoxuan
  */
 public class SinsaSeikyusyoTorokuManager {
 
