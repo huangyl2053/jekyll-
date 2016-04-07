@@ -37,7 +37,7 @@ public class DBC120010_KyufukanrihyoIn extends BatchFlowBase<KokuhorenJohoToriko
     private static final String GET_EDIT_INFO = "kyufuKanrihyoInBatchRegistGetEditInfoProcess";
     private static final String FILE_READ_PROCESS = "kyufuKanrihyoInBatchRegistFileReadProcess";
     private static final String CSV_OUTPUT_PROCESS = "kyufuKanrihyoInBatchRegistCsvOutputProcess";
-    private static final String KOKUHORENIFKANRI_UPDATE_CTRLRECORD = "kokuhorenIFUpdateCtrlRecordProcess";
+    private static final String KOKUHORENIF_UPDATE_RECORD = "kokuhorenIFUpdateCtrlRecordProcess";
     private static final String KOKUHORENIFKANRI_UPDATE_FINISH = "kokuhorenIFFinishUpdataProcess";
 
     private final RString 再処理 = new RString("1");
@@ -62,7 +62,7 @@ public class DBC120010_KyufukanrihyoIn extends BatchFlowBase<KokuhorenJohoToriko
         executeStep(GET_EDIT_INFO);                        //給付管理票テーブル、取込結果一覧ＣＳＶで必要な情報を一時テーブルに設定する
         executeStep(FILE_READ_PROCESS);                    //給付管理票テーブルにデータを追加する
         executeStep(CSV_OUTPUT_PROCESS);                   //給付管理票取込結果一覧表とＣＳＶを出力する
-        executeStep(KOKUHORENIFKANRI_UPDATE_CTRLRECORD);   //コントロールレコードの情報を国保連ＩＦ管理に反映させる
+        executeStep(KOKUHORENIF_UPDATE_RECORD);   //コントロールレコードの情報を国保連ＩＦ管理に反映させる
         executeStep(KOKUHORENIFKANRI_UPDATE_FINISH);       //国保連ＩＦ管理の処理状態を"処理済"に変更
 
     }
@@ -136,17 +136,18 @@ public class DBC120010_KyufukanrihyoIn extends BatchFlowBase<KokuhorenJohoToriko
     @Step(CSV_OUTPUT_PROCESS)
     IBatchFlowCommand kyufuKanrihyoInBatchRegistCsvOutputProcess() {
         Map<RString, Object> processParameter = new HashMap<>();
-        //processParameter.put(KyufuKanrihyoInBatchRegistCsvOutputProcess.INPUT_PARAM_KEY_出力順ID, Long.parseLong(getParameter().getShutsuryokujunID().toString()));
+        //processParameter.put(KyufuKanrihyoInBatchRegistCsvOutputProcess.INPUT_PARAM_KEY_出力順ID,
+//        Long.parseLong(getParameter().getShutsuryokujunID().toString()));
         processParameter.put(KyufuKanrihyoInBatchRegistCsvOutputProcess.INPUT_PARAM_KEY_出力順ID, 1L);
         return loopBatch(KyufuKanrihyoInBatchRegistCsvOutputProcess.class)
                 .arguments(processParameter)
                 .define();
     }
 
-    @Step(KOKUHORENIFKANRI_UPDATE_CTRLRECORD)
+    @Step(KOKUHORENIF_UPDATE_RECORD)
     IBatchFlowCommand kokuhorenIFUpdateCtrlRecordProcess() {
         HashMap<RString, RString> filePathList = getResult(HashMap.class, new RString(SHAREDFILE_COPY), SharedFileCopy.PARAMETER_OUT_FILEPATHLIST);
-        RString a = filePathList.keySet().iterator().next();
+        filePathList.keySet().iterator().next();
         Map<RString, Object> processParameter = new HashMap<>();
         processParameter.put(KokuhorenIFUpdateCtrlRecordProcess.PARAMETER_SHORIYM, getParameter().getShoriYM());
         processParameter.put(KokuhorenIFUpdateCtrlRecordProcess.PARAMETER_KOKANSHIKIBETSUNO, getParameter().getKokanjohoShikibetsuNo());

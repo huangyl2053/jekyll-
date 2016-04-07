@@ -12,8 +12,6 @@ import jp.co.ndensan.reams.uz.uza.batch.process.InputParameter;
 import jp.co.ndensan.reams.uz.uza.batch.process.OutputParameter;
 import jp.co.ndensan.reams.uz.uza.batch.process.SimpleBatchProcessBase;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.testhelper.DbTestHelper;
-import org.junit.BeforeClass;
 
 /**
  *
@@ -22,10 +20,29 @@ import org.junit.BeforeClass;
 public class KokuhorenIFUpdateCtrlRecordProcess extends SimpleBatchProcessBase {
 
     //パラメータ名
-    public static final RString PARAMETER_SHORIYM = new RString("shoriYM");
-    public static final RString PARAMETER_KOKANSHIKIBETSUNO = new RString("kokanShikibetsuNo");
-    public static final RString PARAMETER_FILENAME = new RString("fileName");
-    public static final RString PARAMETER_SHORINICHIJI = new RString("shoriNichiji");
+    /**
+     * shoriYM
+     */
+    public static final RString PARAMETER_SHORIYM;
+    /**
+     * kokanShikibetsuNo
+     */
+    public static final RString PARAMETER_KOKANSHIKIBETSUNO;
+    /**
+     * fileName
+     */
+    public static final RString PARAMETER_FILENAME;
+    /**
+     * shoriNichiji
+     */
+    public static final RString PARAMETER_SHORINICHIJI;
+
+    static {
+        PARAMETER_SHORIYM = new RString("shoriYM");
+        PARAMETER_KOKANSHIKIBETSUNO = new RString("kokanShikibetsuNo");
+        PARAMETER_FILENAME = new RString("fileName");
+        PARAMETER_SHORINICHIJI = new RString("shoriNichiji");
+    }
 
     //パラメータ受取変数
     InputParameter<RString> shoriYM;
