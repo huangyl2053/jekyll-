@@ -9,6 +9,8 @@ import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
 /**
  *
  * 介護認定申請基本情報の入力用クラス。
+ *
+ * @reamsid_L DBE-1300-070 wangxiaodong
  */
 public class KaigoNinteiShinseiKihonJohoInput {
 
