@@ -11,6 +11,8 @@ import lombok.Getter;
 /**
  * 軽度者に対する福祉用具貸与の取り扱いの特例に関する確認申請書2Entityリストです。
  *
+ * @reamsid_L DBA-0540-704  lijia
+ * 
  */
 @Getter
 @SuppressWarnings("PMD.UnusedPrivateField")

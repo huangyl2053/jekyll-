@@ -11,6 +11,8 @@ import jp.co.ndensan.reams.uz.uza.report.IReportBuilder;
 /**
  * 護保険給付費貸付金償還期限延長申請書Builderのインターフェースクラスです。
  *
+ * @reamsid_L DBA-0540-702  lijia
+ * 
  */
 public interface IKyufuhiKashitsukekinShokankigenEnchoShinseishoBuilder extends
         IReportBuilder<KyufuKashitsukekinShokanKigenEnchoShinseishoReportSource> {

@@ -11,6 +11,8 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 /**
  * 給付費貸付金決定情報を取得します.
  *
+ * @reamsid_L DBA-0540-440  lijia
+ * 
  */
 public class KyufuhiKashitsukeKinKetteiEntity {
 

@@ -26,6 +26,8 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 /**
  * 事業報告（年報）補正、発行_検索を表示するDivControllerです。
  *
+ * @reamsid_L DBU-1060-010  lijia
+ * 
  */
 public class PanelBase {
 

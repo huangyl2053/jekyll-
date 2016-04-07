@@ -11,6 +11,8 @@ import lombok.Getter;
 /**
  * 護保険給付費貸付金償還期限延長申請書Entityリストです。
  *
+ * @reamsid_L DBA-0540-702  lijia
+ * 
  */
 @Getter
 @SuppressWarnings("PMD.UnusedPrivateField")

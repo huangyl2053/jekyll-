@@ -6,6 +6,8 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 /**
  * 事業報告年報補正表示をViewStateす列挙型です。
  *
+ * @reamsid_L DBU-1060-010  lijia
+ * 
  */
 public enum DbuViewStateKey {
 

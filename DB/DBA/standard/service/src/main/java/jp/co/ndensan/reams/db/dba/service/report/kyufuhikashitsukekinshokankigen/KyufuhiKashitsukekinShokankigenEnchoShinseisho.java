@@ -50,6 +50,8 @@ import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 /**
  * 護保険給付費貸付金償還期限延長申請書Printクラスです。
  *
+ * @reamsid_L DBA-0540-440  lijia
+ * 
  */
 public class KyufuhiKashitsukekinShokankigenEnchoShinseisho {
 

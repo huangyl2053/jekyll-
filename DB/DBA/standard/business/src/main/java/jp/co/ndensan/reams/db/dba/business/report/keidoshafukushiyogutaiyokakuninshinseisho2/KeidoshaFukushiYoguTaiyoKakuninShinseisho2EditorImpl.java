@@ -10,6 +10,8 @@ import jp.co.ndensan.reams.db.dba.entity.report.keidoshafukushiyogutaiyokakunins
 /**
  * 軽度者に対する福祉用具貸与の取り扱いの特例に関する確認申請書2エディターです。
  *
+ * @reamsid_L DBA-0540-704  lijia
+ * 
  */
 public class KeidoshaFukushiYoguTaiyoKakuninShinseisho2EditorImpl implements IKeidoshaFukushiYoguTaiyoKakuninShinseisho2Editor {
 
