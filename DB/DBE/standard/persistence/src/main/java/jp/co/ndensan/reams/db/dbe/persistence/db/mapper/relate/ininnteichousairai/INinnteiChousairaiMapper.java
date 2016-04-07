@@ -15,6 +15,8 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
  * 認定調査依頼情報のマッパーインタフェースです。
+ *
+ * @reamsid_L DBE-0010-010 sunhaidi
  */
 public interface INinnteiChousairaiMapper {
 

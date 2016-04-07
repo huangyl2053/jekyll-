@@ -3,23 +3,19 @@ package jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2200001;
  * このコードはツールによって生成されました。
  * このファイルへの変更は、以下の状況下で不正な動作の原因になったり、
  * コードが再生成されるときに損失したりします。
- * Thu Mar 24 16:14:10 CST 2016 
+ * Thu Mar 24 16:14:10 CST 2016
  */
 
-
-
+import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.binding.DataRow;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxCode;
-import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxNum;
 
-
 /**
- * dgchosainIchiran_Row のクラスファイル 
- * 
- * @author 自動生成
+ * dgchosainIchiran_Row のクラスファイル
+ *
+ * @reamsid_L DBE-0010-010 sunhaidi
  */
-
 public class dgchosainIchiran_Row extends DataRow {
     // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-01-15_09-59-03">
 

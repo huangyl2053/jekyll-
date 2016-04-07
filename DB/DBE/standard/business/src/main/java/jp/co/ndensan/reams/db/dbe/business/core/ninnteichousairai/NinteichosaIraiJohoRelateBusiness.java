@@ -11,6 +11,8 @@ import jp.co.ndensan.reams.db.dbz.business.core.basic.NinteichosaIraiJoho;
 
 /**
  * 認定調査依頼項目を管理するクラスです。
+ *
+ * @reamsid_L DBE-0010-010 sunhaidi
  */
 public class NinteichosaIraiJohoRelateBusiness {
 

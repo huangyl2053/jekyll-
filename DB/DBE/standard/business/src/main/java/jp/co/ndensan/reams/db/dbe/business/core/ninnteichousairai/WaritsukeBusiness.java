@@ -18,6 +18,8 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
  * 割付済み申請者一覧を管理するクラスです。
+ *
+ * @reamsid_L DBE-0010-010 sunhaidi
  */
 public class WaritsukeBusiness {
 
