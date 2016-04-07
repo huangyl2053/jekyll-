@@ -13,6 +13,7 @@ import lombok.Setter;
 /**
  *
  * 他市町村住所地特例者異動の訂正のパラメータクラスです。
+ * @reamsid_L DBA-0401-010 dongyabin
  */
 @SuppressWarnings("PMD.UnusedPrivateField")
 @Setter

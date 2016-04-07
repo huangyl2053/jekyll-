@@ -19,6 +19,7 @@ import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 /**
  *
  * 他市町村住所地特例者異動の訂正のクラスです。
+ * @reamsid_L DBA-0401-010 dongyabin
  */
 public class TaShichosonJushochiTokureisyaIdoTeisei {
 
