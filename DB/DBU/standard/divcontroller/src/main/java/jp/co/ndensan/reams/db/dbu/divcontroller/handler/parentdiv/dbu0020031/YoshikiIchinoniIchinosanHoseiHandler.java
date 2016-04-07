@@ -28,6 +28,8 @@ import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 
 /**
  * 事業報告（月報）補正発行_様式１の２、様式１の３補正のハンドラクラスです。
+ *
+ * @reamsid_L DBU-1100-030 wangkanglei
  */
 public class YoshikiIchinoniIchinosanHoseiHandler {
 
@@ -622,7 +624,7 @@ public class YoshikiIchinoniIchinosanHoseiHandler {
         if (entity.get横番号().equals(Decimal.ONE)) {
             div.getPanelDaigo().getTxtKensu542().setValue(new RString(entity.get集計結果値().toString()));
         } else if (entity.get横番号().equals(NUM_2)) {
-            div.getPanelDaigo().getTxtKensu542().setValue(new RString(entity.get集計結果値().toString()));
+            div.getPanelDaigo().getTxtKensu543().setValue(new RString(entity.get集計結果値().toString()));
         }
     }
 
@@ -630,7 +632,7 @@ public class YoshikiIchinoniIchinosanHoseiHandler {
         if (entity.get横番号().equals(Decimal.ONE)) {
             div.getPanelDaigo().getTxtKensu552().setValue(new RString(entity.get集計結果値().toString()));
         } else if (entity.get横番号().equals(NUM_2)) {
-            div.getPanelDaigo().getTxtKensu552().setValue(new RString(entity.get集計結果値().toString()));
+            div.getPanelDaigo().getTxtKensu553().setValue(new RString(entity.get集計結果値().toString()));
         }
     }
 
@@ -638,7 +640,7 @@ public class YoshikiIchinoniIchinosanHoseiHandler {
         if (entity.get横番号().equals(Decimal.ONE)) {
             div.getPanelDaigo().getTxtKensu562().setValue(new RString(entity.get集計結果値().toString()));
         } else if (entity.get横番号().equals(NUM_2)) {
-            div.getPanelDaigo().getTxtKensu562().setValue(new RString(entity.get集計結果値().toString()));
+            div.getPanelDaigo().getTxtKensu563().setValue(new RString(entity.get集計結果値().toString()));
         }
     }
 
@@ -646,7 +648,7 @@ public class YoshikiIchinoniIchinosanHoseiHandler {
         if (entity.get横番号().equals(Decimal.ONE)) {
             div.getPanelDaigo().getTxtKensu572().setValue(new RString(entity.get集計結果値().toString()));
         } else if (entity.get横番号().equals(NUM_2)) {
-            div.getPanelDaigo().getTxtKensu572().setValue(new RString(entity.get集計結果値().toString()));
+            div.getPanelDaigo().getTxtKensu573().setValue(new RString(entity.get集計結果値().toString()));
         }
     }
 
@@ -654,7 +656,7 @@ public class YoshikiIchinoniIchinosanHoseiHandler {
         if (entity.get横番号().equals(Decimal.ONE)) {
             div.getPanelDaigo().getTxtKensu582().setValue(new RString(entity.get集計結果値().toString()));
         } else if (entity.get横番号().equals(NUM_2)) {
-            div.getPanelDaigo().getTxtKensu582().setValue(new RString(entity.get集計結果値().toString()));
+            div.getPanelDaigo().getTxtKensu583().setValue(new RString(entity.get集計結果値().toString()));
         }
     }
 
@@ -1050,26 +1052,23 @@ public class YoshikiIchinoniIchinosanHoseiHandler {
      * @return boolean チェック結果
      */
     public boolean is整合性チェック_NG() {
-        if (DBU0020031StateName.修正状態1.getName().equals(ViewStateHolder.get(ViewStateKeys.今画面状態, RString.class))) {
-            RString 介護老人福祉施設 = div.getPanelDaisan().getTxtShinseiKensu1().getValue();
-            RString 介護老人保健施設 = div.getPanelDaisan().getTxtShinseiKensu2().getValue();
-            RString 介護療養型医療施設 = div.getPanelDaisan().getTxtShinseiKensu3().getValue();
-            RString 地域密着型 = div.getPanelDaisan().getTxtShinseiKensu4().getValue();
-            RString その他 = div.getPanelDaisan().getTxtShinseiKensu5().getValue();
-            RString 計 = div.getPanelDaisan().getTxtShinseiKensu6().getValue();
-            Decimal 福祉施設 = (null == 介護老人福祉施設 || 介護老人福祉施設.isEmpty())
-                    ? Decimal.ZERO : new Decimal(介護老人福祉施設.toString());
-            Decimal 保健施設 = (null == 介護老人保健施設 || 介護老人保健施設.isEmpty())
-                    ? Decimal.ZERO : new Decimal(介護老人保健施設.toString());
-            Decimal 医療施設 = (null == 介護療養型医療施設 || 介護療養型医療施設.isEmpty())
-                    ? Decimal.ZERO : new Decimal(介護療養型医療施設.toString());
-            Decimal 密着型 = (null == 地域密着型 || 地域密着型.isEmpty())
-                    ? Decimal.ZERO : new Decimal(地域密着型.toString());
-            Decimal その他data = (null == その他 || その他.isEmpty()) ? Decimal.ZERO : new Decimal(その他.toString());
-            Decimal 計data = (null == 計 || 計.isEmpty()) ? Decimal.ZERO : new Decimal(計.toString());
-            return !計data.equals(福祉施設.add(保健施設).add(医療施設).add(密着型).add(その他data));
-        }
-        return false;
+        RString 介護老人福祉施設 = div.getPanelDaisan().getTxtShinseiKensu1().getValue();
+        RString 介護老人保健施設 = div.getPanelDaisan().getTxtShinseiKensu2().getValue();
+        RString 介護療養型医療施設 = div.getPanelDaisan().getTxtShinseiKensu3().getValue();
+        RString 地域密着型 = div.getPanelDaisan().getTxtShinseiKensu4().getValue();
+        RString その他 = div.getPanelDaisan().getTxtShinseiKensu5().getValue();
+        RString 計 = div.getPanelDaisan().getTxtShinseiKensu6().getValue();
+        Decimal 福祉施設 = (null == 介護老人福祉施設 || 介護老人福祉施設.isEmpty())
+                ? Decimal.ZERO : new Decimal(介護老人福祉施設.toString());
+        Decimal 保健施設 = (null == 介護老人保健施設 || 介護老人保健施設.isEmpty())
+                ? Decimal.ZERO : new Decimal(介護老人保健施設.toString());
+        Decimal 医療施設 = (null == 介護療養型医療施設 || 介護療養型医療施設.isEmpty())
+                ? Decimal.ZERO : new Decimal(介護療養型医療施設.toString());
+        Decimal 密着型 = (null == 地域密着型 || 地域密着型.isEmpty())
+                ? Decimal.ZERO : new Decimal(地域密着型.toString());
+        Decimal その他data = (null == その他 || その他.isEmpty()) ? Decimal.ZERO : new Decimal(その他.toString());
+        Decimal 計data = (null == 計 || 計.isEmpty()) ? Decimal.ZERO : new Decimal(計.toString());
+        return !計data.equals(福祉施設.add(保健施設).add(医療施設).add(密着型).add(その他data));
     }
 
     /**
