@@ -10,6 +10,8 @@ import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 
 /**
  * 前回開始終了日取得Businessクラスです。
+ *
+ * @reamsid_L DBA-0570-010 xuyannan
  */
 public class DbT7022ShoriDateKanriBusiness {
 
