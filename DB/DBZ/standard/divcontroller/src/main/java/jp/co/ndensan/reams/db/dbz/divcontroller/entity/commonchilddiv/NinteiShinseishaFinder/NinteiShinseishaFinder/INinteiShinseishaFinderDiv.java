@@ -5,6 +5,7 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
 
 /*
  * このコードはツールによって生成されました。
+ * @reamsid_L DBE-3000-010 sunhaidi
  */
 public interface INinteiShinseishaFinderDiv extends ICommonChildDivBaseProperties {
 

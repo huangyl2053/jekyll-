@@ -21,6 +21,8 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
 
 /**
  * 共有子Div「条件検索画面」のValidationHandlerクラスです。
+ *
+ * @reamsid_L DBE-3000-010 sunhaidi
  */
 public class NinteiShinseishaFinderValidationHandler {
 

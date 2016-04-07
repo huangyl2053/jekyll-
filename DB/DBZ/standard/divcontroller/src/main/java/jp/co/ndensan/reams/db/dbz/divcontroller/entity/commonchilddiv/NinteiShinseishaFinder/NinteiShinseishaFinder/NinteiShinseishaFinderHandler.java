@@ -32,6 +32,8 @@ import jp.co.ndensan.reams.uz.uza.util.code.entity.UzT0007CodeEntity;
 
 /**
  * 共有子Div「条件検索画面」のhandlerクラスです。
+ *
+ * @reamsid_L DBE-3000-010 sunhaidi
  */
 public class NinteiShinseishaFinderHandler {
 
