@@ -9,8 +9,9 @@ import jp.co.ndensan.reams.db.dba.entity.report.source.tekiyojogaishadaicho.Teki
 import jp.co.ndensan.reams.uz.uza.report.IReportBuilder;
 
 /**
- *
  * 適用除外者台帳Builderのインターフェースクラスです。
+ *
+ * @reamsid_L DBE-3000-140 lishengli
  */
 interface ITekiyojogaishaDaichoBuilder extends IReportBuilder<TekiyojogaishaDaichoReportSource> {
 

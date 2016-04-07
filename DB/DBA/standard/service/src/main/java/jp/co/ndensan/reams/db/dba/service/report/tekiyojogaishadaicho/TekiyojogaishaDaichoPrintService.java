@@ -16,6 +16,8 @@ import jp.co.ndensan.reams.uz.uza.report.SourceDataCollection;
 
 /**
  * 適用除外者台帳PrinterServiceクラスです。
+ *
+ * @reamsid_L DBE-3000-140 lishengli
  */
 public class TekiyojogaishaDaichoPrintService {
 

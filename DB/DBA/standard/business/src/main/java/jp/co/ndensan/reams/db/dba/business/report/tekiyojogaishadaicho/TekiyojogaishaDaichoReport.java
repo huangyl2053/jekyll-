@@ -12,6 +12,8 @@ import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
 
 /**
  * 適用除外者台帳のReportです。
+ *
+ * @reamsid_L DBE-3000-140 lishengli
  */
 public class TekiyojogaishaDaichoReport extends Report<TekiyojogaishaDaichoReportSource> {
 

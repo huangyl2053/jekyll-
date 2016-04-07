@@ -9,8 +9,9 @@ import jp.co.ndensan.reams.db.dba.entity.report.source.tekiyojogaishadaicho.Teki
 import jp.co.ndensan.reams.uz.uza.report.IReportEditor;
 
 /**
- *
  * 適用除外者台帳エディターのインターフェースクラスです。
+ *
+ * @reamsid_L DBE-3000-140 lishengli
  */
 interface ITekiyojogaishaDaichoEditor extends IReportEditor<TekiyojogaishaDaichoReportSource> {
 
