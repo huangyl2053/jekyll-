@@ -12,6 +12,8 @@ import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT1001HihokenshaDaichoEntity;
 /**
  *
  * 被保険者台帳管理（資格取得）のMapperクラスです。
+ *
+ * @reamsid_L DBA-0520-010 lishengli
  */
 public interface IHihokenshaShikakuShutokuMapper {
 
