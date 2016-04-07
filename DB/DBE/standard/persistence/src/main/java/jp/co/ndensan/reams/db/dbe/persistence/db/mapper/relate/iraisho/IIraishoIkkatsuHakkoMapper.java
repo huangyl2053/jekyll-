@@ -11,6 +11,8 @@ import jp.co.ndensan.reams.db.dbe.entity.db.relate.iraisho.IraishoIkkatsuHakkoRe
 
 /**
  * 依頼書一括発行のマッパーインタフェースです。
+ *
+ * @reamsid_L DBE-0080-010 duanzhanli
  */
 public interface IIraishoIkkatsuHakkoMapper {
 

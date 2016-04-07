@@ -4,19 +4,20 @@ package jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2400001;
  * このファイルへの変更は、再生成時には損失するため
  * 不正な動作の原因になります。
  */
+
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.hokenshalist.HokenshaList.HokenshaListDiv;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.hokenshalist.HokenshaList.IHokenshaListDiv;
 import jp.co.ndensan.reams.uz.uza.ui.binding.*;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 
 /**
- * ShujiiIkensho のクラスファイル 
- * 
- * @author 自動生成
+ * ShujiiIkensho のクラスファイル
+ *
+ * @reamsid_L DBE-0080-010 duanzhanli
  */
 public class ShujiiIkenshoDiv extends Panel {
+
     // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-01-15_09-59-03">
     /*
      * [ private の作成 ]
@@ -100,7 +101,7 @@ public class ShujiiIkenshoDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setTxtShujiiIkenshoSakuseiIraibiFrom(TextBoxDate txtShujiiIkenshoSakuseiIraibiFrom) {
+    public void setTxtShujiiIkenshoSakuseiIraibiFrom(TextBoxDate txtShujiiIkenshoSakuseiIraibiFrom) {
         this.getShujiiIkenshoKensakujoken().setTxtShujiiIkenshoSakuseiIraibiFrom(txtShujiiIkenshoSakuseiIraibiFrom);
     }
 
@@ -110,7 +111,7 @@ public class ShujiiIkenshoDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setTxtShujiiIkenshoSakuseiIraibiTo(TextBoxDate txtShujiiIkenshoSakuseiIraibiTo) {
+    public void setTxtShujiiIkenshoSakuseiIraibiTo(TextBoxDate txtShujiiIkenshoSakuseiIraibiTo) {
         this.getShujiiIkenshoKensakujoken().setTxtShujiiIkenshoSakuseiIraibiTo(txtShujiiIkenshoSakuseiIraibiTo);
     }
 
@@ -120,7 +121,7 @@ public class ShujiiIkenshoDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setChkShujiiikenshoSakuseiIrai(CheckBoxList chkShujiiikenshoSakuseiIrai) {
+    public void setChkShujiiikenshoSakuseiIrai(CheckBoxList chkShujiiikenshoSakuseiIrai) {
         this.getShujiiIkenshoKensakujoken().setChkShujiiikenshoSakuseiIrai(chkShujiiikenshoSakuseiIrai);
     }
 
@@ -130,7 +131,7 @@ public class ShujiiIkenshoDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setChkShujiiIkensho(CheckBoxList chkShujiiIkensho) {
+    public void setChkShujiiIkensho(CheckBoxList chkShujiiIkensho) {
         this.getShujiiIkenshoKensakujoken().setChkShujiiIkensho(chkShujiiIkensho);
     }
 
@@ -140,7 +141,7 @@ public class ShujiiIkenshoDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setBtnShujiiIkenshoKensaku(Button btnShujiiIkenshoKensaku) {
+    public void setBtnShujiiIkenshoKensaku(Button btnShujiiIkenshoKensaku) {
         this.getShujiiIkenshoKensakujoken().setBtnShujiiIkenshoKensaku(btnShujiiIkenshoKensaku);
     }
 
@@ -155,7 +156,7 @@ public class ShujiiIkenshoDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setDgShujiiIkenshoSakuseiIraiTaishoIchiran(DataGrid<dgShujiiIkenshoSakuseiIraiTaishoIchiran_Row> dgShujiiIkenshoSakuseiIraiTaishoIchiran) {
+    public void setDgShujiiIkenshoSakuseiIraiTaishoIchiran(DataGrid<dgShujiiIkenshoSakuseiIraiTaishoIchiran_Row> dgShujiiIkenshoSakuseiIraiTaishoIchiran) {
         this.getShujiiIkenshoSakuseiIraiTaishoIchiran().setDgShujiiIkenshoSakuseiIraiTaishoIchiran(dgShujiiIkenshoSakuseiIraiTaishoIchiran);
     }
 
@@ -165,7 +166,7 @@ public class ShujiiIkenshoDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setChkShujiiIkenshoShutsuryoku(CheckBoxList chkShujiiIkenshoShutsuryoku) {
+    public void setChkShujiiIkenshoShutsuryoku(CheckBoxList chkShujiiIkenshoShutsuryoku) {
         this.getShujiiIkenshoInsatsuChohyo().setChkShujiiIkenshoShutsuryoku(chkShujiiIkenshoShutsuryoku);
     }
 
@@ -175,7 +176,7 @@ public class ShujiiIkenshoDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setChkShujiiIkenshoSakuseiIraisho(CheckBoxList chkShujiiIkenshoSakuseiIraisho) {
+    public void setChkShujiiIkenshoSakuseiIraisho(CheckBoxList chkShujiiIkenshoSakuseiIraisho) {
         this.getShujiiIkenshoInsatsuChohyo().setChkShujiiIkenshoSakuseiIraisho(chkShujiiIkenshoSakuseiIraisho);
     }
 
@@ -185,7 +186,7 @@ public class ShujiiIkenshoDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setChkShujiIkenshoKinyuAndSakuseiryoSeikyu(CheckBoxList chkShujiIkenshoKinyuAndSakuseiryoSeikyu) {
+    public void setChkShujiIkenshoKinyuAndSakuseiryoSeikyu(CheckBoxList chkShujiIkenshoKinyuAndSakuseiryoSeikyu) {
         this.getShujiiIkenshoInsatsuChohyo().setChkShujiIkenshoKinyuAndSakuseiryoSeikyu(chkShujiIkenshoKinyuAndSakuseiryoSeikyu);
     }
 
@@ -195,7 +196,7 @@ public class ShujiiIkenshoDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setChkShindanMeireishoAndTeishutsuIraisho(CheckBoxList chkShindanMeireishoAndTeishutsuIraisho) {
+    public void setChkShindanMeireishoAndTeishutsuIraisho(CheckBoxList chkShindanMeireishoAndTeishutsuIraisho) {
         this.getShujiiIkenshoInsatsuChohyo().setChkShindanMeireishoAndTeishutsuIraisho(chkShindanMeireishoAndTeishutsuIraisho);
     }
 
@@ -205,7 +206,7 @@ public class ShujiiIkenshoDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setChkikenshiiraihakko(CheckBoxList Chkikenshiiraihakko) {
+    public void setChkikenshiiraihakko(CheckBoxList Chkikenshiiraihakko) {
         this.getShujiiIkenshoInsatsuChohyo().setChkikenshiiraihakko(Chkikenshiiraihakko);
     }
 

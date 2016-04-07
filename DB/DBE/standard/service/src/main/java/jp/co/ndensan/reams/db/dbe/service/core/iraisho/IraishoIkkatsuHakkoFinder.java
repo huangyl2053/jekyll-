@@ -11,14 +11,16 @@ import java.util.List;
 import jp.co.ndensan.reams.db.dbe.business.core.iraisho.IraishoIkkatsuHakkoResult;
 import jp.co.ndensan.reams.db.dbe.definition.mybatis.param.iraisho.IraishoIkkatsuHakkoParameter;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.iraisho.IraishoIkkatsuHakkoRelateEntity;
-import jp.co.ndensan.reams.db.dbe.persistence.db.util.MapperProvider;
 import jp.co.ndensan.reams.db.dbe.persistence.db.mapper.relate.iraisho.IIraishoIkkatsuHakkoMapper;
+import jp.co.ndensan.reams.db.dbe.persistence.db.util.MapperProvider;
 import jp.co.ndensan.reams.uz.uza.util.db.SearchResult;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 
 /**
  *
  * 依頼書一括発行のサービスクラスです。
+ *
+ * @reamsid_L DBE-0080-010 duanzhanli
  */
 public class IraishoIkkatsuHakkoFinder {
 
