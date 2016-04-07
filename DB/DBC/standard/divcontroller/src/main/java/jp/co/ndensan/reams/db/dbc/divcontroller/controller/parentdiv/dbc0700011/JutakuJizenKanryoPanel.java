@@ -20,9 +20,9 @@ public class JutakuJizenKanryoPanel {
     /**
      * 完了画面ロード時の処理です。
      *
-     * @param kanryoPanel
-     * @param hihoPanel
-     * @return response
+     * @param kanryoPanel JutakuJizenKanryoPanelDiv
+     * @param hihoPanel JutakuKaishuJizenShinseiHihokenshaPanelDiv
+     * @return ResponseData
      */
     public ResponseData<JutakuJizenKanryoPanelDiv> onLoad(
             JutakuJizenKanryoPanelDiv kanryoPanel, JutakuKaishuJizenShinseiHihokenshaPanelDiv hihoPanel) {

@@ -20,6 +20,12 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
  */
 public class JutakuKaishuhiShikyuKetteiTsuchishoPanel {
 
+    /**
+     * onClick_btnSearchShinsazumiメソッドです。
+     *
+     * @param panel JutakuKaishuhiShikyuKetteiTsuchishoPanelDiv
+     * @return ResponseData
+     */
     public ResponseData<JutakuKaishuhiShikyuKetteiTsuchishoPanelDiv> onClick_btnSearchShinsazumi(
             JutakuKaishuhiShikyuKetteiTsuchishoPanelDiv panel) {
         ResponseData<JutakuKaishuhiShikyuKetteiTsuchishoPanelDiv> response = new ResponseData<>();

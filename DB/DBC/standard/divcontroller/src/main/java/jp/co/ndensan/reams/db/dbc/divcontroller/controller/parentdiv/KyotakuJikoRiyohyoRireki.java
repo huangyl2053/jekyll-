@@ -34,6 +34,12 @@ public class KyotakuJikoRiyohyoRireki {
         return ResponseData.of(panel).respond();
     }
 
+    /**
+     * onClick_dgSelectButtonメソッドすで。
+     *
+     * @param panel KyotakuJikoRiyohyoRirekiDiv
+     * @return ResponseData
+     */
     public ResponseData onClick_dgSelectButton(KyotakuJikoRiyohyoRirekiDiv panel) {
         return ResponseData.of(panel).setState(利用票登録);
     }

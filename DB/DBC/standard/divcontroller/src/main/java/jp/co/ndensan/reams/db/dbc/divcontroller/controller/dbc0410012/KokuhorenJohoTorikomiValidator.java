@@ -6,8 +6,8 @@
 package jp.co.ndensan.reams.db.dbc.divcontroller.controller.dbc0410012;
 
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0410012.KokuhorenJohoTorikomiBatchKidoDiv;
-import jp.co.ndensan.reams.uz.uza.core.validation.ValidationMessagesFactory;
 import jp.co.ndensan.reams.uz.uza.core.validation.ValidateChain;
+import jp.co.ndensan.reams.uz.uza.core.validation.ValidationMessagesFactory;
 import jp.co.ndensan.reams.uz.uza.message.IValidationMessages;
 
 /**
@@ -18,10 +18,20 @@ public class KokuhorenJohoTorikomiValidator {
 
     private final KokuhorenJohoTorikomiBatchKidoDiv div;
 
+    /**
+     * コンストラクタです。
+     *
+     * @param div KokuhorenJohoTorikomiBatchKidoDiv
+     */
     public KokuhorenJohoTorikomiValidator(KokuhorenJohoTorikomiBatchKidoDiv div) {
         this.div = div;
     }
 
+    /**
+     * validateメソッドです。
+     *
+     * @return IValidationMessages
+     */
     public IValidationMessages validate() {
         IValidationMessages messages = ValidationMessagesFactory.createInstance();
         messages.add(ValidateChain.validateStart(div).ifNot(KokuhorenJohoTorikomiSpec.同月過誤もしくは通常分給付実績情報にチェックがある)

@@ -18,6 +18,12 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
  */
 public class KyufuJissekiTekiyo {
 
+    /**
+     * 画面の初期化メソッドです。
+     *
+     * @param panel KyufuJissekiTekiyoDiv
+     * @return ResponseData
+     */
     public ResponseData<KyufuJissekiTekiyoDiv> onLoad(KyufuJissekiTekiyoDiv panel) {
         ResponseData<KyufuJissekiTekiyoDiv> response = new ResponseData<>();
 

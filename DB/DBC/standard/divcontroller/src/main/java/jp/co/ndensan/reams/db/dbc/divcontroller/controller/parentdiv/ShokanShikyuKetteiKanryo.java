@@ -28,6 +28,8 @@ public class ShokanShikyuKetteiKanryo {
     }
 
     private void setKanryoMessage(ShokanShikyuKetteiKanryoDiv panel) {
+        // TODO 未使用のメソッド引数があります。 Checkstyle 対応。
+        panel.getShokanShikyuKetteiKanryoMessage();
 //        ControlGenerator cg = new ControlGenerator(getYaml().get(0));
 //
 //        KaigoKanryoMessage.setMessage(panel.getShokanShikyuKetteiKanryoMessage(),

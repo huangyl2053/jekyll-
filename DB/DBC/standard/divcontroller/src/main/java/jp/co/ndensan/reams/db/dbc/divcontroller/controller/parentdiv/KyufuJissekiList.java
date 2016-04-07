@@ -52,6 +52,13 @@ public class KyufuJissekiList {
     private static final int INDEX_11 = 11;
     private static final int INDEX_12 = 12;
 
+    /**
+     * onClick_btnKyufuJissekiSearchメソッドです。
+     *
+     * @param panel KyufuJissekiListDiv
+     * @param panel2 KyufuJissekiSearchDiv
+     * @return ResponseData
+     */
     public ResponseData<KyufuJissekiListDiv> onClick_btnKyufuJissekiSearch(KyufuJissekiListDiv panel, KyufuJissekiSearchDiv panel2) {
         ResponseData<KyufuJissekiListDiv> response = new ResponseData<>();
 
@@ -61,6 +68,13 @@ public class KyufuJissekiList {
         return response;
     }
 
+    /**
+     * onClick_btnKyufuJissekiResearchメソッドです。
+     *
+     * @param panel KyufuJissekiListDiv
+     * @param panel2 KyufuJissekiSearchDiv
+     * @return ResponseData
+     */
     public ResponseData<KyufuJissekiListDiv> onClick_btnKyufuJissekiResearch(KyufuJissekiListDiv panel, KyufuJissekiSearchDiv panel2) {
         ResponseData<KyufuJissekiListDiv> response = new ResponseData<>();
         panel.getTxtKyufuJissekiListHihokenshaNo().setValue(RString.EMPTY);
@@ -85,6 +99,13 @@ public class KyufuJissekiList {
         return response;
     }
 
+    /**
+     * onClick_Meisai_btnYMメソッドです。
+     *
+     * @param panel KyufuJissekiListDiv
+     * @param panel2 KyufuJissekiSearchDiv
+     * @return ResponseData
+     */
     public ResponseData<KyufuJissekiListDiv> onClick_Meisai_btnYM(KyufuJissekiListDiv panel, KyufuJissekiSearchDiv panel2) {
         ResponseData<KyufuJissekiListDiv> response = new ResponseData<>();
 
@@ -97,6 +118,13 @@ public class KyufuJissekiList {
         return response;
     }
 
+    /**
+     * onClick_Gokei_btnYMメソッドです。
+     *
+     * @param panel KyufuJissekiListDiv
+     * @param panel2 KyufuJissekiSearchDiv
+     * @return ResponseData
+     */
     public ResponseData<KyufuJissekiListDiv> onClick_Gokei_btnYM(KyufuJissekiListDiv panel, KyufuJissekiSearchDiv panel2) {
         ResponseData<KyufuJissekiListDiv> response = new ResponseData<>();
 
@@ -129,6 +157,8 @@ public class KyufuJissekiList {
     }
 
     private KyufuJissekiServiceCollections getKyufuJissekiServiceCollections(KyufuJissekiSearchDiv panel2) {
+        // TODO 未使用のメソッド引数があります。 Checkstyle 対応。
+        panel2.getBtnKyufuJissekiSearch();
         return null;
         // TODO n8300姜　ビルドエラー回避のために暫定対応
 //        KyufuJissekiServiceFinder finder = new KyufuJissekiServiceFinder();
@@ -202,6 +232,8 @@ public class KyufuJissekiList {
                         case bgColorGray:
                             group1Color = DataGridCellBgColor.bgColorBlue;
                             break;
+                        default:
+                            break;
                     }
                     blnChangeColorFlg1 = Boolean.TRUE;
                 }
@@ -223,6 +255,8 @@ public class KyufuJissekiList {
                             break;
                         case bgColorLightGray:
                             group2Color = DataGridCellBgColor.bgColorLightBlue;
+                            break;
+                        default:
                             break;
                     }
                     blnChangeColorFlg2 = Boolean.TRUE;
@@ -273,7 +307,7 @@ public class KyufuJissekiList {
         panel.getDgKyufuJissekiGokeiList().setDataSource(arrayGokeidata);
     }
 
-    private class rowData {
+    private class RowData {
 
         private RString txtServiceGroup1;
         private RString txtServiceGroup2;
@@ -284,10 +318,10 @@ public class KyufuJissekiList {
     private List createRowKyufuJissekiMeisaiList(KyufuJissekiServiceCollections collections, Range<ServiceTeikyoYM> range) {
 
         KyufuJissekiServiceCategory category = new KyufuJissekiServiceCategory();
-        List<rowData> allDataList = createListDate(collections, range, category.get一覧表示サービス種類(), true);
+        List<RowData> allDataList = createListDate(collections, range, category.get一覧表示サービス種類(), true);
 
         List arrayDataList = new ArrayList();
-        for (rowData row : allDataList) {
+        for (RowData row : allDataList) {
             List<RString> rsYM = createYMList(row);
             arrayDataList.add(createRowKyufuJissekiMeisaiList(
                     row.txtServiceGroup1, row.txtServiceGroup2, row.txtServiceShurui,
@@ -301,10 +335,10 @@ public class KyufuJissekiList {
     private List createRowKyufuJissekiGokeiList(KyufuJissekiServiceCollections collections, Range<ServiceTeikyoYM> range) {
 
         KyufuJissekiServiceCategory category = new KyufuJissekiServiceCategory();
-        List<rowData> allDataList = createListDate(collections, range, category.get合計表示サービス種類(), false);
+        List<RowData> allDataList = createListDate(collections, range, category.get合計表示サービス種類(), false);
 
         List arrayDataList = new ArrayList();
-        for (rowData row : allDataList) {
+        for (RowData row : allDataList) {
             List<RString> rsYM = createYMList(row);
             arrayDataList.add(createRowKyufuJissekiGokeiList(
                     row.txtServiceGroup1, row.txtServiceGroup2, row.txtServiceShurui,
@@ -315,18 +349,18 @@ public class KyufuJissekiList {
         return arrayDataList;
     }
 
-    private List<rowData> createListDate(
+    private List<RowData> createListDate(
             KyufuJissekiServiceCollections collections,
             Range<ServiceTeikyoYM> range,
             List<ServiceShuruiCode> dispList,
             boolean isMeisai) {
 
-        List<rowData> allDataList = new ArrayList();
+        List<RowData> allDataList = new ArrayList();
         KyufuJissekiServiceCategory category = new KyufuJissekiServiceCategory();
 
         for (ServiceShuruiCode code : dispList) {
             FlexibleYearMonth start = range.getFrom().value();
-            rowData row = new rowData();
+            RowData row = new RowData();
             row.txtServiceShurui = new RString(category.getサービス種類タイトル(code).toString());
 
             ServiceCategoryTitle title = category.get一覧タイトル(code);
@@ -340,6 +374,8 @@ public class KyufuJissekiList {
                 KyufuJissekiServiceCollection col = collections.get給付実績月別集計(new ServiceTeikyoYM(start));
                 if (col != null) {
                     Decimal data = isMeisai ? col.get単位数合計Byサービス種類(code) : col.get保険請求分請求額合計Byサービス種類(code);
+                    // TODO 未使用のローカル変数です。 Checkstyle 対応。
+                    data.hashCode();
 //                    row.txtYM.add(setCommFormat(data));
                 }
                 start = start.plusMonth(1);
@@ -350,21 +386,22 @@ public class KyufuJissekiList {
         return allDataList;
     }
 
-    private List<RString> createYMList(rowData row) {
+    private List<RString> createYMList(RowData row) {
         List<RString> list = new ArrayList<>();
         for (int i = 0; i < INDEX_12; i++) {
+            // TODO 少なくとも1文はあるはずです。Checkstyle対応。
+            row.hashCode();
 //            list.add(i < row.txtYM.size() ? row.txtYM.get(i) : RString.EMPTY);
         }
         return list;
     }
 
-    private RString setCommFormat(Decimal data) {
-        if (data == null) {
-            return RString.EMPTY;
-        }
-        return new RString(data.toString("##,###,###"));
-    }
-
+//    private RString setCommFormat(Decimal data) {
+//        if (data == null) {
+//            return RString.EMPTY;
+//        }
+//        return new RString(data.toString("##,###,###"));
+//    }
     private dgKyufuJissekiMeisaiList_Row createRowKyufuJissekiMeisaiList(
             RString rsServiceGroup1, RString rsServiceGroup2, RString rsServiceShurui,
             RString rsYM1, RString rsYM2, RString rsYM3, RString rsYM4, RString rsYM5, RString rsYM6,

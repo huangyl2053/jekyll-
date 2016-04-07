@@ -28,10 +28,16 @@ import jp.co.ndensan.reams.uz.uza.util.config.BusinessConfig;
  */
 public class KokuhorenJohoTorikomiBatchKido {
 
+    /**
+     * KokuhorenJohoTorikomiBatchKidoDivの初期化メソッドです。
+     *
+     * @param panel KokuhorenJohoTorikomiBatchKidoDiv
+     * @return KokuhorenJohoTorikomiBatchKidoDivの初期化画面
+     */
     public ResponseData<KokuhorenJohoTorikomiBatchKidoDiv> onLoad(KokuhorenJohoTorikomiBatchKidoDiv panel) {
 
         KokuhorenTorikomiJohoKey viewState = ViewStateHolder.get(ViewStateKey.国保連取込情報, KokuhorenTorikomiJohoKey.class);
-        getHandler(panel).initialize(panel, viewState);
+        getHandler(panel).initialize(viewState);
         return ResponseData.of(panel).respond();
     }
 
@@ -39,6 +45,12 @@ public class KokuhorenJohoTorikomiBatchKido {
         return new KokuhorenJohoTorikomiBatchKidoHandler(div);
     }
 
+    /**
+     * バッチを起動する。
+     *
+     * @param panel KokuhorenJohoTorikomiBatchKidoDiv
+     * @return バッチのパラメータ
+     */
     public ResponseData<KokuhorenJohoTorikomiBatchParameter> setBatchParameter(KokuhorenJohoTorikomiBatchKidoDiv panel) {
 
         KokuhorenJohoTorikomiBatchParameter batchparameter = new KokuhorenJohoTorikomiBatchParameter();
@@ -58,8 +70,14 @@ public class KokuhorenJohoTorikomiBatchKido {
 
     }
 
+    /**
+     * validationCheckメソッドです。
+     *
+     * @param panel KokuhorenJohoTorikomiBatchKidoDiv
+     * @return 初期化画面
+     */
     public ResponseData validationCheck(KokuhorenJohoTorikomiBatchKidoDiv panel) {
-        ValidationMessageControlPairs pairs = getHandler(panel).validate(panel);
+        ValidationMessageControlPairs pairs = getHandler(panel).validate();
         return ResponseData.of(panel).addValidationMessages(pairs).respond();
     }
 

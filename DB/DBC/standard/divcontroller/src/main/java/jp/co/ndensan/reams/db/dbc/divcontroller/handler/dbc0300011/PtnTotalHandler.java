@@ -14,8 +14,8 @@ import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0300011.PtnT
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0300011.dgKeiyakuJigyosya_Row;
 import jp.co.ndensan.reams.db.dbc.divcontroller.viewbox.ViewStateKeys;
 import jp.co.ndensan.reams.db.dbc.service.core.basic.JuryoininKeiyakuJigyoshaManager;
-import jp.co.ndensan.reams.db.dbx.service.core.dbbusinessconfig.DbBusinessConifg;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBU;
+import jp.co.ndensan.reams.db.dbx.service.core.dbbusinessconfig.DbBusinessConifg;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaJusho;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaKanaMeisho;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaMeisho;
@@ -58,7 +58,7 @@ public final class PtnTotalHandler {
     /**
      * 初期化設定
      *
-     * @param 初期フラグ
+     * @param 初期フラグ 初期フラグ
      */
     public void set初期化状態(boolean 初期フラグ) {
         RString 状態 = ViewStateHolder.get(ViewStateKeys.状態, RString.class);

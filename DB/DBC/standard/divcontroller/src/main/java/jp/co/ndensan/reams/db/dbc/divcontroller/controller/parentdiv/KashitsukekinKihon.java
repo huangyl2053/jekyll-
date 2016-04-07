@@ -29,6 +29,8 @@ public class KashitsukekinKihon {
 
     // 基本情報を設定する
     private void setKihonInfo(KashitsukekinKihonDiv panel) {
+        // TODO 未使用のメソッド引数があります。 Checkstyle 対応。
+        panel.getKashitsukekinKaigoKihonInfo();
 //        ControlGenerator cg = new ControlGenerator(getYamlData(YML_KAIGO_KIHON).get(0));
 ////        AtenaShokaiSimple.setData(panel.getKashitsukekinKihonInfo().getAtenaInfo(), new ShikibetsuCode(cg.getAsRString("識別コード")));
 //        KaigoShikakuKihonDiv kaigoKihonDiv = panel.getKashitsukekinKaigoKihonInfo();

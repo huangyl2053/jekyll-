@@ -29,13 +29,13 @@ public class ShowResultTwo {
      * 高額介護サービス費照会 並べて表示。
      *
      * @author n8223
-     * @param panel
-     * @param setaiInfopanel
-     * @return
+     * @param panel ShowResultTwoDiv
+     * @param setaiInfopanel SetaiInfoDiv
+     * @return ResponseData
      */
     public ResponseData<ShowResultTwoDiv> onClick_btnShowTwo(ShowResultTwoDiv panel, SetaiInfoDiv setaiInfopanel) {
         ResponseData<ShowResultTwoDiv> response = new ResponseData<>();
-        // 並べて表示 提供年月～世帯集約番号        
+        // 並べて表示 提供年月～世帯集約番号
         //2014.07.01 追加
         setKogakuServicehiShowResultTwo(panel, setaiInfopanel);
         //判定結果　L
@@ -50,7 +50,7 @@ public class ShowResultTwo {
     }
 
     // 並べて表示 提供年月～世帯集約番号の情報を設定する。
-    private void setKogakuServicehiShowResultTwo(ShowResultTwoDiv panel , SetaiInfoDiv setaiInfopanel) {
+    private void setKogakuServicehiShowResultTwo(ShowResultTwoDiv panel, SetaiInfoDiv setaiInfopanel) {
         List<HashMap> ymlData = ymlData("dbc0030011/KogakuServicehiShowResultTwo.yml");
         HashMap hashMap;
         ControlGenerator ymlDt;
@@ -58,7 +58,7 @@ public class ShowResultTwo {
         hashMap = ymlData.get(0);
         ymlDt = new ControlGenerator(hashMap);
 
-        // 提供年月～世帯集約番号(氏名）   
+        // 提供年月～世帯集約番号(氏名）
         panel.getTxtTeikyoYMShowTwo().setValue(ymlDt.getAsRDate("teikyoYMShowTwo"));
         panel.getTxtSetaiShuyakuNo().setValue(ymlDt.getAsRString("setaiShuyakuNo"));
         //2014.07.01 追加　朴
@@ -67,20 +67,20 @@ public class ShowResultTwo {
 //        );
 
         System.out.println("+++++++++++++++++" + setaiInfopanel.getSetaiinShotoku().getDgSetaiShotoku().getSelectedItems().toArray().length);
-                
-        //setsetaiInfopanel　所得選択された情報　2014.07.04 
+
+        //setsetaiInfopanel　所得選択された情報　2014.07.04
         // 選択行の情報を取得
         if (setaiInfopanel.getSetaiinShotoku().getDgSetaiShotoku().getSelectedItems().size() > 0) {
 
             for (int i = 0; i < setaiInfopanel.getSetaiinShotoku().getDgSetaiShotoku().getSelectedItems().size(); i++) {
                 //dgJudgementResultLR 判定結果
                 if (i == 0) {
-                  //  panel.getTxtHihoNoL().setValue(setaiInfopanel.getSetaiinShotoku().getDgSetaiShotoku().getSelectedItems().get(i).getTxtKetsugo01().replace("<br>", ""));
+                    //  panel.getTxtHihoNoL().setValue(setaiInfopanel.getSetaiinShotoku().getDgSetaiShotoku().getSelectedItems().get(i).getTxtKetsugo01().replace("<br>", ""));
                     panel.getTxtHihoNoL().setValue(setaiInfopanel.getSetaiinShotoku().getDgSetaiShotoku().getSelectedItems().get(i).getTxtHihokenshaNo());
                     panel.getTxtHihoNameR().setValue(setaiInfopanel.getSetaiinShotoku().getDgSetaiShotoku().getSelectedItems().get(i).getTxtShimei());
                 } else if (i == 1) {
                     System.out.println("++++++++++++++++++++! I " + i);
-                 //   panel.getTxtHihoNoR().setValue(setaiInfopanel.getSetaiinShotoku().getDgSetaiShotoku().getSelectedItems().get(i).getTxtKetsugo01().replace("<br>", ""));
+                    //   panel.getTxtHihoNoR().setValue(setaiInfopanel.getSetaiinShotoku().getDgSetaiShotoku().getSelectedItems().get(i).getTxtKetsugo01().replace("<br>", ""));
                     panel.getTxtHihoNoR().setValue(setaiInfopanel.getSetaiinShotoku().getDgSetaiShotoku().getSelectedItems().get(i).getTxtHihokenshaNo());
                     panel.getTxtHihoNameL().setValue(setaiInfopanel.getSetaiinShotoku().getDgSetaiShotoku().getSelectedItems().get(i).getTxtShimei());
 
@@ -94,7 +94,6 @@ public class ShowResultTwo {
             panel.getTxtHihoNoR().setValue(ymlDt.getAsRString("hihoNoR"));
             panel.getTxtHihoNameL().setValue(ymlDt.getAsRString("hihoNameL"));
         }
-
 
         hashMap = ymlData.get(1);
         ymlDt = new ControlGenerator(hashMap);
@@ -170,7 +169,7 @@ public class ShowResultTwo {
     private void hashMapResultL(ControlGenerator hashMap, List<dgJudgementResultL_Row> arrayData) {
 
         dgJudgementResultL_Row item;
-        
+
         item = createRowKogakuServicehiShowResultLData(
                 hashMap.getAsRString("jigyosha"),
                 hashMap.getAsRString("serviceShurui"),
@@ -179,7 +178,6 @@ public class ShowResultTwo {
                 hashMap.getAsRString("santeiKijunAmount"),
                 hashMap.getAsRString("shiharaizumiAmount"),
                 hashMap.getAsRString("kogakuShikyuAmount")
-
         );
         arrayData.add(item);
     }

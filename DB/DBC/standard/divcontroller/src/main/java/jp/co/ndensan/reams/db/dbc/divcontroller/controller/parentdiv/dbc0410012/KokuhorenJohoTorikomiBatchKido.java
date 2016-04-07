@@ -29,6 +29,12 @@ public class KokuhorenJohoTorikomiBatchKido {
 
 //    private final RString 同月過誤分ファイル名 = new RString("01110000");
 //    private final RString 通常分ファイル名 = new RString("11100000");
+    /**
+     * 画面の初期化メソッドです。
+     *
+     * @param panel KokuhorenJohoTorikomiBatchKidoDiv
+     * @return ResponseData
+     */
     public ResponseData<KokuhorenJohoTorikomiBatchKidoDiv> onLoad(KokuhorenJohoTorikomiBatchKidoDiv panel) {
 
 //        KokuhorenJohoTorikomiBatchKidoModel selectedrow
@@ -38,6 +44,12 @@ public class KokuhorenJohoTorikomiBatchKido {
         return ResponseData.of(panel).respond();
     }
 
+    /**
+     * バッチパラメータの設定する。
+     *
+     * @param panel KokuhorenJohoTorikomiBatchKidoDiv
+     * @return ResponseData
+     */
     public ResponseData<KokuhorenJohoTorikomiBatchParameter> setBatchParameter(KokuhorenJohoTorikomiBatchKidoDiv panel) {
 
         KokuhorenJohoTorikomiBatchParameter batchparameter = new KokuhorenJohoTorikomiBatchParameter();
@@ -57,6 +69,12 @@ public class KokuhorenJohoTorikomiBatchKido {
 
     }
 
+    /**
+     * validationCheckメソッドです。
+     *
+     * @param panel KokuhorenJohoTorikomiBatchKidoDiv
+     * @return ResponseData
+     */
     public ResponseData validationCheck(KokuhorenJohoTorikomiBatchKidoDiv panel) {
 
 //        KokuhorenJohoTorikomi business = new KokuhorenJohoTorikomi();

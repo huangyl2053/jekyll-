@@ -19,6 +19,13 @@ public class KagoMoshitatecCommonKiagoKanryoMegPanel {
 
     static final RString MESSAGE = new RString("過誤申立書を更新しました。");
 
+    /**
+     * onClick_btnSaveメソッドです。
+     *
+     * @param panel KagoMoshitatecCommonKiagoKanryoMegPanelDiv
+     * @param gaitoshaListPanel KyufuJissekiGaitoshaListPanelDiv
+     * @return ResponseData
+     */
     public ResponseData<KagoMoshitatecCommonKiagoKanryoMegPanelDiv> onClick_btnSave(KagoMoshitatecCommonKiagoKanryoMegPanelDiv panel, KyufuJissekiGaitoshaListPanelDiv gaitoshaListPanel) {
         setKagoMoshitatecCommonKiagoKanryoMessg(panel, gaitoshaListPanel);
 

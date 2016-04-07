@@ -34,14 +34,15 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxNum;
  * @author N8187 久保田 英男
  */
 public class SogoJigyohiRiyohyo {
-    
-            private static final int INDEX_3 = 3;
-            private static final int INDEX_4 = 4;
-            private static final int INDEX_6 = 6;
-            private static final int INDEX_7 = 7;
-            private static final int INDEX_9 = 9;
-            private static final int INDEX_10 = 10;
-            private static final int INDEX_11 = 11;
+
+    private static final int INDEX_3 = 3;
+    private static final int INDEX_4 = 4;
+    private static final int INDEX_6 = 6;
+    private static final int INDEX_7 = 7;
+    private static final int INDEX_9 = 9;
+    private static final int INDEX_10 = 10;
+    private static final int INDEX_11 = 11;
+    private static final RString SOGOJIGYOHIRIYOHYO = new RString("SogoJigyohiRiyohyo.yml");
 
     private enum 別票画面表示 {
 
@@ -236,7 +237,7 @@ public class SogoJigyohiRiyohyo {
      * @param panel panel
      */
     private void setSummaryData(SogoJigyohiRiyohyoDiv panel) {
-        List<HashMap> sourceList = YamlLoader.FOR_DBC.loadAsList(new RString("SogoJigyohiRiyohyo.yml"));
+        List<HashMap> sourceList = YamlLoader.FOR_DBC.loadAsList(SOGOJIGYOHIRIYOHYO);
         int yamlIndex = 2;
         ServiceRiyohyoInfoDiv info = panel.getSogoJigyohiRiyohyoInfo();
         info.getTxtTodokedeYMD().setValue(new RDate(sourceList.get(yamlIndex).get("届出日").toString()));
@@ -259,7 +260,7 @@ public class SogoJigyohiRiyohyo {
      * @param panel panel
      */
     private void setSummaryZengetsuData(SogoJigyohiRiyohyoDiv panel) {
-        List<HashMap> sourceList = YamlLoader.FOR_DBC.loadAsList(new RString("SogoJigyohiRiyohyo.yml"));
+        List<HashMap> sourceList = YamlLoader.FOR_DBC.loadAsList(SOGOJIGYOHIRIYOHYO);
         int yamlIndex = INDEX_3;
         ServiceRiyohyoInfoDiv info = panel.getSogoJigyohiRiyohyoInfo();
         info.getTxtTodokedeYMD().setValue(new RDate(sourceList.get(yamlIndex).get("届出日").toString()));
@@ -445,7 +446,7 @@ public class SogoJigyohiRiyohyo {
      * @param panel panel
      */
     private void setBeppyoGokeiKakutei(SogoJigyohiRiyohyoDiv panel) {
-        List<HashMap> sourceList = YamlLoader.FOR_DBC.loadAsList(new RString("SogoJigyohiRiyohyo.yml"));
+        List<HashMap> sourceList = YamlLoader.FOR_DBC.loadAsList(SOGOJIGYOHIRIYOHYO);
         int yamlIndex = INDEX_9;
         ServiceRiyohyoBeppyoListDiv beppyoList = panel.getSogoJigyohiRiyohyoInfo().
                 getTabServiceRiyohyo().getServiceRiyohyoBeppyo().getServiceRiyohyoBeppyoList();
@@ -562,7 +563,7 @@ public class SogoJigyohiRiyohyo {
      * @param panel panel
      */
     private void setBeppyoMeisaiDemoData(SogoJigyohiRiyohyoDiv panel) {
-        List<HashMap> sourceList = YamlLoader.FOR_DBC.loadAsList(new RString("SogoJigyohiRiyohyo.yml"));
+        List<HashMap> sourceList = YamlLoader.FOR_DBC.loadAsList(SOGOJIGYOHIRIYOHYO);
         int yamlIndex = INDEX_10;
         ServiceRiyohyoBeppyoMeisaiDiv meisai = panel.getSogoJigyohiRiyohyoInfo().
                 getTabServiceRiyohyo().getServiceRiyohyoBeppyo().getServiceRiyohyoBeppyoMeisai();
@@ -583,7 +584,7 @@ public class SogoJigyohiRiyohyo {
      * @param panel panel
      */
     private void setBeppyoGokeiDemoData(SogoJigyohiRiyohyoDiv panel) {
-        List<HashMap> sourceList = YamlLoader.FOR_DBC.loadAsList(new RString("SogoJigyohiRiyohyo.yml"));
+        List<HashMap> sourceList = YamlLoader.FOR_DBC.loadAsList(SOGOJIGYOHIRIYOHYO);
         int yamlIndex = INDEX_11;
         ServiceRiyohyoBeppyoGokeiDiv gokei = panel.getSogoJigyohiRiyohyoInfo().
                 getTabServiceRiyohyo().getServiceRiyohyoBeppyo().getServiceRiyohyoBeppyoGokei();
@@ -676,7 +677,7 @@ public class SogoJigyohiRiyohyo {
     }
 
     private dgServiceRiyohyoBeppyoList_Row create別票一覧リスト(int yamlIndex) {
-        List<HashMap> sourceList = YamlLoader.FOR_DBC.loadAsList(new RString("SogoJigyohiRiyohyo.yml"));
+        List<HashMap> sourceList = YamlLoader.FOR_DBC.loadAsList(SOGOJIGYOHIRIYOHYO);
         Button btnSelect = new Button();
         Button btnDelete = new Button();
         return create別票一覧リストアイテム(btnSelect, btnDelete,
@@ -766,7 +767,7 @@ public class SogoJigyohiRiyohyo {
     }
 
     private dgServiceRiyohyoList_Row createサービス利用票(int yamlIndex) {
-        List<HashMap> sourceList = YamlLoader.FOR_DBC.loadAsList(new RString("SogoJigyohiRiyohyo.yml"));
+        List<HashMap> sourceList = YamlLoader.FOR_DBC.loadAsList(SOGOJIGYOHIRIYOHYO);
         Button btnDelete = new Button();
         Button btnService = new Button();
         Button btnJigyosha = new Button();

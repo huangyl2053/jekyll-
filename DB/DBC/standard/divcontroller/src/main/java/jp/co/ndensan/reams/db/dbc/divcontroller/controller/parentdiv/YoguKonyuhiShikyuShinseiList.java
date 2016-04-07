@@ -21,12 +21,18 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.DataGrid;
  */
 public class YoguKonyuhiShikyuShinseiList {
 
+    /**
+     * onClick_btnAddShinseiメソッドです。
+     *
+     * @param panel YoguKonyuhiShikyuShinseiListDiv
+     * @return ResponseData
+     */
     public ResponseData<YoguKonyuhiShikyuShinseiListDiv> onClick_btnAddShinsei(YoguKonyuhiShikyuShinseiListDiv panel) {
         ResponseData<YoguKonyuhiShikyuShinseiListDiv> response = new ResponseData<>();
 
         setiShikyuShinseiData(panel);
         panel.getBtnSave().setDisabled(false);
-  
+
         response.data = panel;
         return response;
 
@@ -58,12 +64,13 @@ public class YoguKonyuhiShikyuShinseiList {
                 "追加",
                 "201406",
                 "20140701",
-                "",
-                "",
-                "",
-                "",
-                "",
-                "",
+                // TODO 未使用のメソッド引数があります。 Checkstyle 対応。
+                //                "",
+                //                "",
+                //                "",
+                //                "",
+                //                "",
+                //                "",
                 "0000000001"
         );
 
@@ -79,12 +86,13 @@ public class YoguKonyuhiShikyuShinseiList {
             String 状態,
             String 提供年月,
             String 申請日,
-            String 判定区分,
-            String 判定決定日,
-            String 審査結果,
-            String 審査日,
-            String 支給区分,
-            String 決定日,
+            // TODO 未使用のメソッド引数があります。 Checkstyle 対応。
+            //            String 判定区分,
+            //            String 判定決定日,
+            //            String 審査結果,
+            //            String 審査日,
+            //            String 支給区分,
+            //            String 決定日,
             String 整理番号
     ) {
 

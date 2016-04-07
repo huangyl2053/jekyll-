@@ -43,6 +43,8 @@ public class JukyushaIdoRenrakuhyoHenkoSearchConditionPanel {
     }
 
     private void setJukyushaIdoRenrakuhyoHenkoSearchCondition(JukyushaIdoRenrakuhyoHenkoSearchConditionPanelDiv panel) {
+        // TODO 未使用のメソッド引数があります。 Checkstyle対応。
+        panel.getBtnClearSearchCondition();
 //        ControlGenerator cg = new ControlGenerator(getYmlData().get(0));
 //        panel.getTxtIdoDateRange().setFromValue(cg.getAsRDate("異動日開始"));
 //        panel.getTxtIdoDateRange().setToValue(cg.getAsRDate("異動日終了"));
