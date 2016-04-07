@@ -21,6 +21,8 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
 
 /**
  * 住基連動登録者リスト作成クラスです。
+ *
+ * @reamsid_L DBA-0560-010 xuyannan
  */
 public class jukinentotoroku {
 
