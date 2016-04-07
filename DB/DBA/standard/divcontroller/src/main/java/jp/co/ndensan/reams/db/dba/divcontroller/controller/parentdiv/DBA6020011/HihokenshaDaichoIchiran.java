@@ -9,8 +9,9 @@ import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
- *
  * 被保険者台帳発行のクラスです。QA1001最大MainPanelない、Panel「ChohyoShutsuryokujun」と共通子DIV「URZ.ChohyoShutsuryokujun」のnameは一致
+ *
+ * @reamsid_L DBA-0510-050 wangxiaodong
  */
 public class HihokenshaDaichoIchiran {
 
