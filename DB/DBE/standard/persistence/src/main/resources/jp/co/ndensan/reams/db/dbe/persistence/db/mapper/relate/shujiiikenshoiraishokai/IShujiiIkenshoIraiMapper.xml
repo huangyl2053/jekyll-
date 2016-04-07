@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <!-- どのマッパーインターフェースと対応するかを指定する -->
-
+<!-- @reamsid_L DBE-0200-030 zhangzhiming -->
 <mapper namespace="jp.co.ndensan.reams.db.dbe.persistence.db.mapper.relate.shujiiikenshoiraishokai.IShujiiIkenshoIraiMapper">
     <resultMap id="resultMap_ShujiiIkenshoIraiEntity" type="jp.co.ndensan.reams.db.dbe.entity.db.relate.shujiiikenshoirai.ShujiiIkenshoIraiEntity" autoMapping="true">
         <result property="ninteiShinseiYMD" column="DbT5101_ninteiShinseiYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>

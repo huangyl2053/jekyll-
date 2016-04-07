@@ -16,6 +16,9 @@ import lombok.Getter;
 
 /**
  * 被保険者証一括発行のMyBatisパラメータです。
+ *
+ * @reamsid_L DBU-0420-020 duanzhanli
+ *
  */
 @SuppressWarnings("PMD.UnusedPrivateField")
 @Getter

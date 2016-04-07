@@ -21,6 +21,8 @@ import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 /**
  *
  * 被保険者証一括作成の発行するクラスです。
+ *
+ * @reamsid_L DBU-0420-010 duanzhanli
  */
 public class HihokenshaShoBatchPrmFinder {
 

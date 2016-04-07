@@ -21,6 +21,8 @@ import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 /**
  *
  * 資格履歴情報のクラスです。
+ *
+ * @reamsid_L DBZ-4560-020 wanghui
  */
 public class ShikakuTokusoJouhoFinder {
 
