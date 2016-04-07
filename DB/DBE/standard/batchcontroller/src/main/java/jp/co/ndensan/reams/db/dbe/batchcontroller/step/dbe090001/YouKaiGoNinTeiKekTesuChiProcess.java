@@ -39,6 +39,7 @@ import jp.co.ndensan.reams.uz.uza.util.config.BusinessConfig;
 /**
  *
  * 調査員一覧情報の取得バッチクラスです。
+ * @reamsid_L DBE-0220-030 wangkun
  */
 public class YouKaiGoNinTeiKekTesuChiProcess extends BatchProcessBase<YouKaiGoNinTeiKekTesuChiRelateEntity> {
 

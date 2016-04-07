@@ -19,6 +19,8 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
 
 /**
  * 年齢到達取得のHandlerクラスです。
+ * 
+ * @reamsid_L DBA-0330-050 wangkun
  */
 public class NenReiTotatsuSearchConditionHandler {
 

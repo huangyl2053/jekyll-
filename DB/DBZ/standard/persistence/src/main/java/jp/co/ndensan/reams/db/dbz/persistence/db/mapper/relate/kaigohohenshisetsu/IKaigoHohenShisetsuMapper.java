@@ -12,6 +12,8 @@ import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT1004ShisetsuNyutaishoEntity
 
 /**
  * 介護保険施設入退所者管理のマッパーインタフェースです。
+ * 
+ * @reamsid_L DBA-0360-050 wangkun
  */
 public interface IKaigoHohenShisetsuMapper {
 

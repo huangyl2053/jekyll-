@@ -27,6 +27,7 @@ import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
 /**
  * 施設入退所履歴の管理クラスです。
  *
+ * @reamsid_L DBA-0360-050 wangkun
  */
 public class KaigoHohenShisetsuNyutaishoshaKanriManager {
 

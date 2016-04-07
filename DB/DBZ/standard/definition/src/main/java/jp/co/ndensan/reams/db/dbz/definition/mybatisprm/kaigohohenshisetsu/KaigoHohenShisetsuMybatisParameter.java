@@ -11,6 +11,8 @@ import lombok.Getter;
 
 /**
  * 施設情報の検索条件。
+ * 
+ * @reamsid_L DBA-0360-050 wangkun
  */
 @SuppressWarnings("PMD.UnusedPrivateField")
 @Getter

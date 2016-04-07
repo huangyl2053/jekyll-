@@ -14,6 +14,8 @@ import lombok.Setter;
 
 /**
  * 主治医への結果通知書のMyBatis用パラメータクラスです。
+ * 
+ * @reamsid_L DBE-0220-030 wangkun
  */
 @SuppressWarnings("PMD.UnusedPrivateField")
 @Getter
