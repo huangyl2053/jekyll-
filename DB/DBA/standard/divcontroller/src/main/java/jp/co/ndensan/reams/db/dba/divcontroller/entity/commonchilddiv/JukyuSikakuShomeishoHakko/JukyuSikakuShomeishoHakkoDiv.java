@@ -19,7 +19,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxMultiLine;
 /**
  * JukyuSikakuShomeishoHakko のクラスファイル
  *
- * @author 自動生成
+ * @reamsid_L DBA-1090-011 wangkun
  */
 public class JukyuSikakuShomeishoHakkoDiv extends Panel implements IJukyuSikakuShomeishoHakkoDiv {
 

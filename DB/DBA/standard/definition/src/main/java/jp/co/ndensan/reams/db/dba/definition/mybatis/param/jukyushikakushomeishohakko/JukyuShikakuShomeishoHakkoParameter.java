@@ -6,6 +6,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 /**
  * 受給資格証明書発行情報の検索キー。
  *
+ * @reamsid_L DBA-1090-021 wangkun
  */
 @SuppressWarnings("PMD.UnusedPrivateField")
 @lombok.Getter
