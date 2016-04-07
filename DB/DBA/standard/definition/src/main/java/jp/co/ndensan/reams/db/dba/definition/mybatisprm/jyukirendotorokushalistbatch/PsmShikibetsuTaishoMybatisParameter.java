@@ -10,6 +10,8 @@ import lombok.Getter;
 
 /**
  * 宛名識別対象取得パラメータクラス。
+ *
+ * @reamsid_L DBA-0560-020 xuyannan
  */
 @SuppressWarnings("PMD.UnusedPrivateField")
 @Getter

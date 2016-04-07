@@ -15,6 +15,8 @@ import lombok.Setter;
 
 /**
  * 住基連動登録者リストのバッチ処理クラスのパラメータ。
+ *
+ * @reamsid_L DBA-0560-020 xuyannan
  */
 @SuppressWarnings("PMD.UnusedPrivateField")
 @Getter

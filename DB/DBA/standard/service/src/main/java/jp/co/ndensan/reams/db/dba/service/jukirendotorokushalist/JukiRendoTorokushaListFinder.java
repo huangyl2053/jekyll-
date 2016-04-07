@@ -19,6 +19,8 @@ import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
 
 /**
  * 住基連動登録者リスト作成クラスです。
+ *
+ * @reamsid_L DBA-0560-030 xuyannan
  */
 public class JukiRendoTorokushaListFinder {
 
