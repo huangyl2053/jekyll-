@@ -10,6 +10,8 @@ import jp.co.ndensan.reams.db.dbb.definition.mybatisprm.relate.tokuchokarisantei
 /**
  *
  * 特徴仮算定賦課確定のmapperクラスです。
+ *
+ * @reamsid_L DBB-0800-020 wanghui
  */
 public interface ITokuchokarisanteiMapper {
 

@@ -17,6 +17,8 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.KeyValueDataSource;
 
 /**
  * IkenshoShujiiIchiranHandler のクラスファイル 主治医医療機関・主治医一覧表データ検索印刷機能クラスです。
+ *
+ * @reamsid_L DBE-0260-010 zuotao
  */
 public class IkenshoShujiiIchiranHandler {
 

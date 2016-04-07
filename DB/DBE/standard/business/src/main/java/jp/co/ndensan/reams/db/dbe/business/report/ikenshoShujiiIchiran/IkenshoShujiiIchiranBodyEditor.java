@@ -13,6 +13,8 @@ import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
 
 /**
  * 主治医医療機関・主治医一覧表ボディEditorです。
+ *
+ * @reamsid_L DBE-0260-020 zuotao
  */
 class IkenshoShujiiIchiranBodyEditor implements IkenshoShujiiIchiranEditor {
 

@@ -28,6 +28,8 @@ import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
 
 /**
  * 医療機関・主治医一覧表_バッチフ処理クラスです。
+ *
+ * @reamsid_L DBE-0260-030 zuotao
  */
 public class IkenshoShujiiIchiranProcess extends BatchKeyBreakBase<IkenshoShujiiIchiranRelateEntity> {
 
