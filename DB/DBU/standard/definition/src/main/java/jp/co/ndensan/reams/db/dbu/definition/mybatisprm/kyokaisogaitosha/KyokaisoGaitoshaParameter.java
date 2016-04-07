@@ -9,6 +9,8 @@ import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaN
 
 /**
  * 境界層該当者一覧情報を特定するためのMyBatis用パラメータクラスです。
+ *
+ * @reamsid_L DBU-0430-020 linghuhang
  */
 @lombok.Getter
 @SuppressWarnings("PMD.UnusedPrivateField")

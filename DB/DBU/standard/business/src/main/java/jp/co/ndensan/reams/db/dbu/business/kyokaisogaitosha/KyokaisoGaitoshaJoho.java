@@ -13,6 +13,8 @@ import jp.co.ndensan.reams.uz.uza.math.Decimal;
 
 /**
  * 境界層該当者一覧情報を管理するビジネスです。
+ *
+ * @reamsid_L DBU-0430-020 linghuhang
  */
 public class KyokaisoGaitoshaJoho {
 
