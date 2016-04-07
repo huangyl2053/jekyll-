@@ -6,6 +6,8 @@ import jp.co.ndensan.reams.uz.uza.report.source.ReportItem;
 
 /**
  * 月別推移表（帳票）の項目を定義するクラスです。
+ *
+ * @reamsid_L DBB-0760-050 wangxiaodong
  */
 public class TsukibetsuSuiihyoReportSource implements IReportSource {
 // <editor-fold defaultstate="collapsed" desc="Generated Code">
