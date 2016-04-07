@@ -15,6 +15,8 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 /**
  *
  * 資格関連異動一覧ガイドにＤＢから検索するデータが表示するクラス。
+ *
+ * @reamsid_L DBA-0120-010 wanghui
  */
 public class SikakuKanrenIdo {
 

@@ -16,6 +16,8 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 /**
  *
  * 資格情報一覧ガイドにＤＢから検索するデータが表示するクラスです。
+ *
+ * @reamsid_L DBA-0130-010 wanghui
  */
 public class ShikakuTokuso {
 

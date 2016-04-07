@@ -14,6 +14,8 @@ import lombok.Setter;
 /**
  *
  * 境界層管理マスタリストのMyBatisパラメータ
+ *
+ * @reamsid_L DBU-1050-020 wanghui
  */
 @Getter
 @Setter

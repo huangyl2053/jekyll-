@@ -5,13 +5,15 @@
  */
 package jp.co.ndensan.reams.db.dbz.persistence.db.mapper.relate.shikakutokuso;
 
-import jp.co.ndensan.reams.db.dbz.entity.db.relate.shikakutoku.shikakutokuso.ServiceShikakuRelateEntity;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbz.definition.shikakutokuso.ShikakuTokusoParameter;
+import jp.co.ndensan.reams.db.dbz.entity.db.relate.shikakutoku.shikakutokuso.ServiceShikakuRelateEntity;
 
 /**
  *
  * 資格得喪履歴のMapperクラスです。
+ *
+ * @reamsid_L DBA-0130-010 wanghui
  */
 public interface IShikakuTokusoMapper {
 

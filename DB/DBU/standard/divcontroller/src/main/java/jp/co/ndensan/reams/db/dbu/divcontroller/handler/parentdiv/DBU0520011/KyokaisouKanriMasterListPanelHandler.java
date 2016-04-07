@@ -15,6 +15,8 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
  * 境界層管理マスタリストのHandlerクラスです。
+ *
+ * @reamsid_L DBU-1050-010 wanghui
  */
 public class KyokaisouKanriMasterListPanelHandler {
 

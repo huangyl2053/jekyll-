@@ -29,6 +29,8 @@ import jp.co.ndensan.reams.uz.uza.util.code.CodeMaster;
 /**
  *
  * ビジネス設計_DBUMN52001_境界層管理マスタリスト_帳票データ作成のクラスです。
+ *
+ * @reamsid_L DBU-1050-040 wanghui
  */
 public class KyokaisoKanriMasterListChohyoDataSakusei {
 

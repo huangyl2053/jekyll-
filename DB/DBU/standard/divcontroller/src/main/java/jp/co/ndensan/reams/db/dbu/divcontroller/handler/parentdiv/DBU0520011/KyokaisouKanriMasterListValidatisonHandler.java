@@ -17,7 +17,7 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
 /**
  * KyokaisouKanriMasterListValidationMessageバリデーションメッセージを定義している列挙型です。
  *
- * @author ludm
+ * @reamsid_L DBU-1050-010 wanghui
  */
 public class KyokaisouKanriMasterListValidatisonHandler {
 

@@ -14,6 +14,8 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 /**
  *
  * 境界層管理マスタリスト_バッチパラメータ作成クラスです。
+ *
+ * @reamsid_L DBU-1050-020 wanghui
  */
 @lombok.Getter
 @lombok.Setter

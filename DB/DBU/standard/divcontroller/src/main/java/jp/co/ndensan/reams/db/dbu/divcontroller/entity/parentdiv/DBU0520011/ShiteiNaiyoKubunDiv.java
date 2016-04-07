@@ -4,18 +4,21 @@ package jp.co.ndensan.reams.db.dbu.divcontroller.entity.parentdiv.DBU0520011;
  * このファイルへの変更は、再生成時には損失するため
  * 不正な動作の原因になります。
  */
+
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jp.co.ndensan.reams.ur.urz.divcontroller.entity.commonchilddiv.chohyoshutsuryokujun.ChohyoShutsuryokujun.ChohyoShutsuryokujunDiv;
 import jp.co.ndensan.reams.ur.urz.divcontroller.entity.commonchilddiv.chohyoshutsuryokujun.ChohyoShutsuryokujun.IChohyoShutsuryokujunDiv;
-import jp.co.ndensan.reams.uz.uza.ui.binding.*;
+import jp.co.ndensan.reams.uz.uza.ui.binding.CheckBoxList;
+import jp.co.ndensan.reams.uz.uza.ui.binding.Label;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 
 /**
- * ShiteiNaiyoKubun のクラスファイル 
- * 
- * @author 自動生成
+ * ShiteiNaiyoKubun のクラスファイル
+ *
+ * @reamsid_L DBU-1050-010 wanghui
  */
 public class ShiteiNaiyoKubunDiv extends Panel {
+
     // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2015-11-30_08-54-50">
     /*
      * [ private の作成 ]

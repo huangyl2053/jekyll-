@@ -12,6 +12,8 @@ import jp.co.ndensan.reams.db.dbz.entity.db.relate.SikakuKanrenIdoEntity;
 /**
  *
  * 資格関連異動のMapperクラスです。
+ *
+ * @reamsid_L DBA-0120-010 wanghui
  */
 public interface ISikakuKanrenIdoMapper {
 

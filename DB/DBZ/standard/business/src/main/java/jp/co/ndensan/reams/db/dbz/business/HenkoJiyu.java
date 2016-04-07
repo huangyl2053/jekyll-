@@ -10,6 +10,8 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
  * 変更事由リスト_戻る用Entityです。
+ *
+ * @reamsid_L DBA-0120-010 wanghui
  */
 @lombok.Getter
 @lombok.Setter
