@@ -12,6 +12,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 /**
  * 分割した被保険者台帳管理情報のエンティティクラスです。
  *
+ * @reamsid_L DBA-0500-010  suguangjun
  */
 @lombok.Getter
 @lombok.Setter

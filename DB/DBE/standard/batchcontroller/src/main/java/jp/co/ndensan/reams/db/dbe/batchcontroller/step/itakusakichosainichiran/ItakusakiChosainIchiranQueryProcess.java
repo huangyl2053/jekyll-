@@ -31,6 +31,7 @@ import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
 /**
  *
  * 調査員一覧情報の取得バッチクラスです。
+ * @reamsid_L DBE-0290-030 dongyabin
  */
 public class ItakusakiChosainIchiranQueryProcess extends BatchKeyBreakBase<ItakusakiChosainIchiranRelateEntity> {
 

@@ -18,7 +18,7 @@ import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
 
 /**
  * 老齢福祉年金受給者台帳管理するクラスです。
- *
+ * @reamsid_L DBA-1120-010 zhangyajing
  */
 public class RorenFukushiNenkinJohoKanriFinder {
 

@@ -14,6 +14,7 @@ import jp.co.ndensan.reams.db.dbu.entity.db.relate.koikinaijushochitokurei.Koiki
 /**
  *
  * 広域内住所地特例者情報を取得クラスです。
+ * @reamsid_L DBU-1140-020 dongyabin
  */
 public interface IKoikinaiJushochiTokureiMapper {
     

@@ -11,6 +11,8 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
  * 他住所地特例者情報Entity。
+ *
+ * @reamsid_L DBA-0560-020 xuyannan
  */
 @lombok.Getter
 @lombok.Setter

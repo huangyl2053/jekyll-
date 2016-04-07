@@ -9,8 +9,9 @@ import jp.co.ndensan.reams.db.dbe.entity.report.source.shujiiikensho.ShujiiIkens
 import jp.co.ndensan.reams.uz.uza.report.IReportBuilder;
 
 /**
- *
  * 主治医意見書作成依頼書Builderのインターフェースクラスです。
+ *
+ * @reamsid_L DBE-0050-020 sunhaidi
  */
 interface IShujiiIkenshoSakuseiIraishoBuilder extends IReportBuilder<ShujiiIkenshoSakuseiIraishoReportSource> {
 

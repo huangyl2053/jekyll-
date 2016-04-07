@@ -10,6 +10,8 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
  * 主治医意見書作成依頼一覧Editorです。
+ *
+ * @reamsid_L DBE-0080-090 zhangzhiming
  */
 public class IkenshoSakuseiIraiIchiranhyoBodyEditor implements IkenshoSakuseiIraiIchiranhyoEditor {
 

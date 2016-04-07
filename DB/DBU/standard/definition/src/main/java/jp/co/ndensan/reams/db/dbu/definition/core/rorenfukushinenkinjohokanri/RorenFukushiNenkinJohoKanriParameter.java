@@ -11,7 +11,7 @@ import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 
 /**
  * 老齢福祉年金受給者台帳管理パラメタクラスです。
- *
+ * @reamsid_L DBA-1120-010 zhangyajing
  */
 public final class RorenFukushiNenkinJohoKanriParameter {
 

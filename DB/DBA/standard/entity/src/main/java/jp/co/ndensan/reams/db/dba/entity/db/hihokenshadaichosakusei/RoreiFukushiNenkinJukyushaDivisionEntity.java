@@ -12,6 +12,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 /**
  * 分割した老齢福祉受給のエンティティクラスです。
  *
+ * @reamsid_L DBA-0500-010  suguangjun
  */
 @lombok.Getter
 @lombok.Setter

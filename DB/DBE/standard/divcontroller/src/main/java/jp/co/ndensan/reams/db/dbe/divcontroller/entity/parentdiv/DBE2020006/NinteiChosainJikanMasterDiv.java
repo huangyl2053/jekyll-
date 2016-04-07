@@ -8,15 +8,24 @@ package jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2020006;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.ui.binding.*;
+import jp.co.ndensan.reams.uz.uza.ui.binding.Button;
+import jp.co.ndensan.reams.uz.uza.ui.binding.ButtonDialog;
+import jp.co.ndensan.reams.uz.uza.ui.binding.DataGrid;
+import jp.co.ndensan.reams.uz.uza.ui.binding.DropDownList;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
+import jp.co.ndensan.reams.uz.uza.ui.binding.RadioButton;
+import jp.co.ndensan.reams.uz.uza.ui.binding.TextBox;
+import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxDate;
+import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxFlexibleDate;
+import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxTime;
 
 /**
- * NinteiChosainJikanMaster のクラスファイル 
- * 
- * @author 自動生成
+ * NinteiChosainJikanMaster のクラスファイル
+ *
+ * @reamsid_L DBE-0022-010 linghuhang
  */
 public class NinteiChosainJikanMasterDiv extends Panel {
+
     // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-01-15_09-59-03">
     /*
      * [ private の作成 ]
@@ -120,7 +129,7 @@ public class NinteiChosainJikanMasterDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setDdlTaishoChiku(DropDownList ddlTaishoChiku) {
+    public void setDdlTaishoChiku(DropDownList ddlTaishoChiku) {
         this.getMainPanel().getSearchConditionPanel().setDdlTaishoChiku(ddlTaishoChiku);
     }
 
@@ -130,7 +139,7 @@ public class NinteiChosainJikanMasterDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setTxtSettingMonth(TextBoxFlexibleDate txtSettingMonth) {
+    public void setTxtSettingMonth(TextBoxFlexibleDate txtSettingMonth) {
         this.getMainPanel().getSearchConditionPanel().setTxtSettingMonth(txtSettingMonth);
     }
 
@@ -140,7 +149,7 @@ public class NinteiChosainJikanMasterDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setBtnPrevious(Button btnPrevious) {
+    public void setBtnPrevious(Button btnPrevious) {
         this.getMainPanel().getSearchConditionPanel().setBtnPrevious(btnPrevious);
     }
 
@@ -150,7 +159,7 @@ public class NinteiChosainJikanMasterDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setBtnNext(Button btnNext) {
+    public void setBtnNext(Button btnNext) {
         this.getMainPanel().getSearchConditionPanel().setBtnNext(btnNext);
     }
 
@@ -160,7 +169,7 @@ public class NinteiChosainJikanMasterDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setTxtNinteiChosaItakusakiCode(TextBox txtNinteiChosaItakusakiCode) {
+    public void setTxtNinteiChosaItakusakiCode(TextBox txtNinteiChosaItakusakiCode) {
         this.getMainPanel().getSearchConditionPanel().setTxtNinteiChosaItakusakiCode(txtNinteiChosaItakusakiCode);
     }
 
@@ -170,7 +179,7 @@ public class NinteiChosainJikanMasterDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setTxtNinteiChosaItakusakiName(TextBox txtNinteiChosaItakusakiName) {
+    public void setTxtNinteiChosaItakusakiName(TextBox txtNinteiChosaItakusakiName) {
         this.getMainPanel().getSearchConditionPanel().setTxtNinteiChosaItakusakiName(txtNinteiChosaItakusakiName);
     }
 
@@ -180,7 +189,7 @@ public class NinteiChosainJikanMasterDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setTxtNinteiChosainCode(TextBox txtNinteiChosainCode) {
+    public void setTxtNinteiChosainCode(TextBox txtNinteiChosainCode) {
         this.getMainPanel().getSearchConditionPanel().setTxtNinteiChosainCode(txtNinteiChosainCode);
     }
 
@@ -190,7 +199,7 @@ public class NinteiChosainJikanMasterDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setTxtNinteiChosainName(TextBox txtNinteiChosainName) {
+    public void setTxtNinteiChosainName(TextBox txtNinteiChosainName) {
         this.getMainPanel().getSearchConditionPanel().setTxtNinteiChosainName(txtNinteiChosainName);
     }
 
@@ -200,7 +209,7 @@ public class NinteiChosainJikanMasterDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setBtnSearch(ButtonDialog btnSearch) {
+    public void setBtnSearch(ButtonDialog btnSearch) {
         this.getMainPanel().getSearchConditionPanel().setBtnSearch(btnSearch);
     }
 
@@ -210,7 +219,7 @@ public class NinteiChosainJikanMasterDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setDgTimeScheduleList(DataGrid<dgTimeScheduleList_Row> dgTimeScheduleList) {
+    public void setDgTimeScheduleList(DataGrid<dgTimeScheduleList_Row> dgTimeScheduleList) {
         this.getMainPanel().getSettingList().setDgTimeScheduleList(dgTimeScheduleList);
     }
 
@@ -220,7 +229,7 @@ public class NinteiChosainJikanMasterDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setTabSetting(tabSettingDiv tabSetting) {
+    public void setTabSetting(tabSettingDiv tabSetting) {
         this.getMainPanel().getSettingDetail().setTabSetting(tabSetting);
     }
 
@@ -260,7 +269,7 @@ public class NinteiChosainJikanMasterDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setBtnCreate(Button btnCreate) {
+    public void setBtnCreate(Button btnCreate) {
         this.getMainPanel().getSettingDetail().setBtnCreate(btnCreate);
     }
 
@@ -270,7 +279,7 @@ public class NinteiChosainJikanMasterDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setBtnDelete(Button btnDelete) {
+    public void setBtnDelete(Button btnDelete) {
         this.getMainPanel().getSettingDetail().setBtnDelete(btnDelete);
     }
 
@@ -280,7 +289,7 @@ public class NinteiChosainJikanMasterDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setBtnAbort(Button btnAbort) {
+    public void setBtnAbort(Button btnAbort) {
         this.getMainPanel().getSettingDetail().setBtnAbort(btnAbort);
     }
 

@@ -7,6 +7,7 @@ import jp.co.ndensan.reams.uz.uza.report.source.ReportItem;
 /**
  * 
  * 要介護認定業務進捗状況一覧表Sourceクラスです。
+ * @reamsid_L DBE-0210-020 dongyabin
  */
 public class NiteiGyomuShinchokuJokyoIchiranhyoReportSource implements IReportSource {
 // <editor-fold defaultstate="collapsed" desc="Generated Code">

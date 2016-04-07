@@ -11,7 +11,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 /**
  * KojinShinchokuShosai のクラスファイル 
  * 
- * @author 自動生成
+ * @reamsid_L DBE-0200-010  suguangjun
  */
 public class KojinShinchokuShosaiDiv extends Panel {
     // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-01-15_09-59-03">
@@ -23,6 +23,8 @@ public class KojinShinchokuShosaiDiv extends Panel {
      */
     @JsonProperty("txtNinteiShinseiDay")
     private TextBoxDate txtNinteiShinseiDay;
+    @JsonProperty("txtShinseiShubetsu")
+    private TextBox txtShinseiShubetsu;
     @JsonProperty("txtShinseiKubunShinseiji")
     private TextBox txtShinseiKubunShinseiji;
     @JsonProperty("txtShinseiKubunHorei")
@@ -35,16 +37,14 @@ public class KojinShinchokuShosaiDiv extends Panel {
     private TextBoxDate txtNinteiYukoKikanTo;
     @JsonProperty("txtNinteiKikanMonth")
     private TextBoxNum txtNinteiKikanMonth;
-    @JsonProperty("txtShinseiShubetsu")
-    private TextBox txtShinseiShubetsu;
-    @JsonProperty("txtTokuteiShippei")
-    private TextBox txtTokuteiShippei;
-    @JsonProperty("txtJohoTeikyoDoi")
-    private TextBox txtJohoTeikyoDoi;
-    @JsonProperty("txtIchijiHantei")
-    private TextBox txtIchijiHantei;
     @JsonProperty("txtKaisaiDay")
     private TextBoxDate txtKaisaiDay;
+    @JsonProperty("txtTokuteiShippei")
+    private TextBox txtTokuteiShippei;
+    @JsonProperty("txtIchijiHantei")
+    private TextBox txtIchijiHantei;
+    @JsonProperty("txtJohoTeikyoDoi")
+    private TextBox txtJohoTeikyoDoi;
     @JsonProperty("txtShoriKubun")
     private TextBox txtShoriKubun;
 
@@ -70,6 +70,24 @@ public class KojinShinchokuShosaiDiv extends Panel {
     @JsonProperty("txtNinteiShinseiDay")
     public void setTxtNinteiShinseiDay(TextBoxDate txtNinteiShinseiDay) {
         this.txtNinteiShinseiDay = txtNinteiShinseiDay;
+    }
+
+    /*
+     * gettxtShinseiShubetsu
+     * @return txtShinseiShubetsu
+     */
+    @JsonProperty("txtShinseiShubetsu") 
+    public TextBox getTxtShinseiShubetsu() {
+        return txtShinseiShubetsu;
+    }
+
+    /*
+     * settxtShinseiShubetsu
+     * @param txtShinseiShubetsu txtShinseiShubetsu
+     */
+    @JsonProperty("txtShinseiShubetsu")
+    public void setTxtShinseiShubetsu(TextBox txtShinseiShubetsu) {
+        this.txtShinseiShubetsu = txtShinseiShubetsu;
     }
 
     /*
@@ -181,21 +199,21 @@ public class KojinShinchokuShosaiDiv extends Panel {
     }
 
     /*
-     * gettxtShinseiShubetsu
-     * @return txtShinseiShubetsu
+     * gettxtKaisaiDay
+     * @return txtKaisaiDay
      */
-    @JsonProperty("txtShinseiShubetsu")
-    public TextBox getTxtShinseiShubetsu() {
-        return txtShinseiShubetsu;
+    @JsonProperty("txtKaisaiDay")
+    public TextBoxDate getTxtKaisaiDay() {
+        return txtKaisaiDay;
     }
 
     /*
-     * settxtShinseiShubetsu
-     * @param txtShinseiShubetsu txtShinseiShubetsu
+     * settxtKaisaiDay
+     * @param txtKaisaiDay txtKaisaiDay
      */
-    @JsonProperty("txtShinseiShubetsu")
-    public void setTxtShinseiShubetsu(TextBox txtShinseiShubetsu) {
-        this.txtShinseiShubetsu = txtShinseiShubetsu;
+    @JsonProperty("txtKaisaiDay")
+    public void setTxtKaisaiDay(TextBoxDate txtKaisaiDay) {
+        this.txtKaisaiDay = txtKaisaiDay;
     }
 
     /*
@@ -217,24 +235,6 @@ public class KojinShinchokuShosaiDiv extends Panel {
     }
 
     /*
-     * gettxtJohoTeikyoDoi
-     * @return txtJohoTeikyoDoi
-     */
-    @JsonProperty("txtJohoTeikyoDoi")
-    public TextBox getTxtJohoTeikyoDoi() {
-        return txtJohoTeikyoDoi;
-    }
-
-    /*
-     * settxtJohoTeikyoDoi
-     * @param txtJohoTeikyoDoi txtJohoTeikyoDoi
-     */
-    @JsonProperty("txtJohoTeikyoDoi")
-    public void setTxtJohoTeikyoDoi(TextBox txtJohoTeikyoDoi) {
-        this.txtJohoTeikyoDoi = txtJohoTeikyoDoi;
-    }
-
-    /*
      * gettxtIchijiHantei
      * @return txtIchijiHantei
      */
@@ -253,21 +253,21 @@ public class KojinShinchokuShosaiDiv extends Panel {
     }
 
     /*
-     * gettxtKaisaiDay
-     * @return txtKaisaiDay
+     * gettxtJohoTeikyoDoi
+     * @return txtJohoTeikyoDoi
      */
-    @JsonProperty("txtKaisaiDay")
-    public TextBoxDate getTxtKaisaiDay() {
-        return txtKaisaiDay;
+    @JsonProperty("txtJohoTeikyoDoi")
+    public TextBox getTxtJohoTeikyoDoi() {
+        return txtJohoTeikyoDoi;
     }
 
     /*
-     * settxtKaisaiDay
-     * @param txtKaisaiDay txtKaisaiDay
+     * settxtJohoTeikyoDoi
+     * @param txtJohoTeikyoDoi txtJohoTeikyoDoi
      */
-    @JsonProperty("txtKaisaiDay")
-    public void setTxtKaisaiDay(TextBoxDate txtKaisaiDay) {
-        this.txtKaisaiDay = txtKaisaiDay;
+    @JsonProperty("txtJohoTeikyoDoi")
+    public void setTxtJohoTeikyoDoi(TextBox txtJohoTeikyoDoi) {
+        this.txtJohoTeikyoDoi = txtJohoTeikyoDoi;
     }
 
     /*

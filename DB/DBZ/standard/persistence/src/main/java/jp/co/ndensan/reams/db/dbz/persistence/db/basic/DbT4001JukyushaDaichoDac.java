@@ -39,6 +39,8 @@ import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
 
 /**
  * 受給者台帳のデータアクセスクラスです。
+ * 
+ * @reamsid_L DBA-0540-691  suguangjun
  */
 public class DbT4001JukyushaDaichoDac implements ISaveable<DbT4001JukyushaDaichoEntity> {
 

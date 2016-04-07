@@ -14,6 +14,7 @@ import lombok.NonNull;
 /**
  *
  * 介護保険受給資格証明書交付申請書の帳票作成します。
+ * @reamsid_L DBA-0540-682 dongyabin
  */
 public final class JukyuShikakuShomeishokoufuShinseishoReport extends Report<JukyuShikakuShomeishokoufuShinseishoReportSource> {
     

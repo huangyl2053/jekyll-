@@ -16,6 +16,8 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
 
 /**
  * 認定調査スケジュール登録6のバリデーションハンドラークラスです。
+ *
+ * @reamsid_L DBE-0022-010 linghuhang
  */
 public class NinteiChosainJikanMasterValidationHandler {
 

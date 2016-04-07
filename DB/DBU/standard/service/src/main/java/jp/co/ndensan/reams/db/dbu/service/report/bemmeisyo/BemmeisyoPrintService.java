@@ -17,6 +17,8 @@ import jp.co.ndensan.reams.uz.uza.report.SourceDataCollection;
 
 /**
  * 弁明書Printerクラスです。
+ *
+ * @reamsid_L DBU-1080-150 linghuhang
  */
 public class BemmeisyoPrintService {
 

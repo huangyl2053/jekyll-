@@ -19,7 +19,7 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets._CommonChildDivModeUtil;
 /**
  * ShisetsuNyutaishoRirekiKanri のクラスファイル
  *
- * @author 自動生成
+ * @reamsid_L DBA-0360-030 linghuhang
  */
 public class ShisetsuNyutaishoRirekiKanriDiv extends Panel implements IShisetsuNyutaishoRirekiKanriDiv {
 
@@ -192,7 +192,7 @@ public class ShisetsuNyutaishoRirekiKanriDiv extends Panel implements IShisetsuN
     public void set明細表示モード(RString 明細表示) {
         setMode_明細表示モード(明細表示モード.getEnum(明細表示.toString()));
     }
-    
+
     @Override
     public void set利用モード(RString 利用モード) {
         setMode_利用(利用.getEnum(利用モード.toString()));

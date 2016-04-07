@@ -6,12 +6,13 @@ package jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE9010001;
  */
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import jp.co.ndensan.reams.uz.uza.ui.binding.*;
+import jp.co.ndensan.reams.uz.uza.ui.binding.Button;
+import jp.co.ndensan.reams.uz.uza.ui.binding.DataGrid;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 
 /**
  * ShujiiIchiran のクラスファイル 
- * 
+ * @reamsid_L DBE-0240-010 dongyabin
  * @author 自動生成
  */
 public class ShujiiIchiranDiv extends Panel {

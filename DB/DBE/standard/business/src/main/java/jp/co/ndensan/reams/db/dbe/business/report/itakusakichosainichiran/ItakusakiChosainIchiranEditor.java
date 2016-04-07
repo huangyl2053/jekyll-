@@ -12,6 +12,7 @@ import jp.co.ndensan.reams.uz.uza.report.IReportEditor;
 /**
  *
  * 認定調査委託先・認定調査員一覧表ヘッダエディターのインターフェースクラスです。
+ * @reamsid_L DBE-0290-020 dongyabin
  */
 public interface ItakusakiChosainIchiranEditor extends IReportEditor<ItakusakiChosainIchiranReportSource> {
 }

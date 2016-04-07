@@ -22,7 +22,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxNum;
 
 /**
  * ShujiiIryoKikanMaster のクラスファイル 
- * 
+ * @reamsid_L DBE-0240-010 dongyabin
  * @author 自動生成
  */
 public class ShujiiIryoKikanMasterDiv extends Panel {

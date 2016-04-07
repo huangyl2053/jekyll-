@@ -19,6 +19,7 @@ import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 /**
  *
  * 構成市町村の検索処理クラスです。
+ * @reamsid_L DBE-3000-060 dongyabin
  */
 public class KoseiShiChosonSelectorFinder {
     

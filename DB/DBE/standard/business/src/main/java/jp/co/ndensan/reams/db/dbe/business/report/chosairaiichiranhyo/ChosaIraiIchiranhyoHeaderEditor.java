@@ -16,8 +16,9 @@ import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
 import jp.co.ndensan.reams.uz.uza.lang.Separator;
 
 /**
- *
  * 認定調査依頼一覧表ヘッダEditorです。
+ *
+ * @reamsid_L DBE-0010-030 lishengli
  */
 class ChosaIraiIchiranhyoHeaderEditor implements IChosaIraiIchiranhyoEditor {
 

@@ -20,8 +20,9 @@ import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 
 /**
- *
  * 償還払決定一覧のHandlerクラスです。
+ *
+ * @reamsid_L DBC-0950-010 zuotao
  */
 public class ShokanbaraiketteiJohoHandler {
 

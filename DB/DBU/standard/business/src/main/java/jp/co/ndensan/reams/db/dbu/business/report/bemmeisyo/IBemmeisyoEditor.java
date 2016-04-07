@@ -11,6 +11,7 @@ import jp.co.ndensan.reams.uz.uza.report.IReportEditor;
 /**
  * 弁明書のインターフェースクラスです。
  *
+ * @reamsid_L DBU-1080-150 linghuhang
  */
 interface IBemmeisyoEditor extends IReportEditor<BemmeisyoReportSource> {
 }

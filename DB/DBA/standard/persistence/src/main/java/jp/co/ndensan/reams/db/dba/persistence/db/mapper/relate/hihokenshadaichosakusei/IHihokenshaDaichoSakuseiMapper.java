@@ -14,6 +14,7 @@ import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT1001HihokenshaDaichoEntity;
 /**
  * 被保険者台帳のマッパーインタフェースです。
  *
+ * @reamsid_L DBA-0500-010  suguangjun
  */
 public interface IHihokenshaDaichoSakuseiMapper {
 

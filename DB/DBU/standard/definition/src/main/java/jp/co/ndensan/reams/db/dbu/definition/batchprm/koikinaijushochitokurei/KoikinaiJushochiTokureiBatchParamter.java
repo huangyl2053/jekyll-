@@ -16,6 +16,7 @@ import lombok.Setter;
 /**
  *
  * 広域内住所地特例者一覧表_バッチパラメータクラスです。
+ * @reamsid_L DBU-1140-020 dongyabin
  */
 @Getter
 @Setter

@@ -1,26 +1,28 @@
 package jp.co.ndensan.reams.db.dbe.divcontroller.handler.parentdiv.DBE2200001;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import jp.co.ndensan.reams.db.dbe.business.core.ninnteichousairai.NinnteiChousairaiBusiness;
 import jp.co.ndensan.reams.db.dbe.business.core.ninnteichousairai.WaritsukeBusiness;
 import jp.co.ndensan.reams.db.dbe.business.report.chosairaisho.ChosaIraishoHeadItem;
+import jp.co.ndensan.reams.db.dbe.definition.core.reportid.ReportIdDBE;
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.shinsei.ChosaKubun;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2200001.NinteiChosaIraiDiv;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2200001.dgChosaItakusakiIchiran_Row;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2200001.dgMiwaritsukeShinseishaIchiran_Row;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2200001.dgWaritsukeZumiShinseishaIchiran_Row;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2200001.dgchosainIchiran_Row;
+import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBE;
 import jp.co.ndensan.reams.db.dbx.definition.core.enumeratedtype.NinteiShinseiKubunShinsei;
 import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.DonyuKeitaiCode;
 import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.GyomuBunrui;
 import jp.co.ndensan.reams.db.dbx.service.ShichosonSecurityJoho;
-import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBE;
 import jp.co.ndensan.reams.db.dbz.definition.core.seibetsu.Seibetsu;
+import jp.co.ndensan.reams.db.dbz.service.util.report.ReportUtil;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.CodeShubetsu;
+import jp.co.ndensan.reams.uz.uza.biz.KamokuCode;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.EraType;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
@@ -36,6 +38,8 @@ import jp.co.ndensan.reams.uz.uza.util.config.BusinessConfig;
 
 /**
  * 認定調査員マスタ画面のハンドラークラスです。
+ *
+ * @reamsid_L DBE-0010-010 sunhaidi
  */
 public class NinteiChosaIraiHandler {
 
@@ -55,7 +59,6 @@ public class NinteiChosaIraiHandler {
     private static final int INDEX_7 = 7;
     private static final int INDEX_8 = 8;
     private static final int INDEX_9 = 9;
-    private static final int INDEX_40 = 40;
     private final NinteiChosaIraiDiv div;
 
     /**
@@ -661,17 +664,9 @@ public class NinteiChosaIraiHandler {
                 性別男 = HOUSI;
             }
 
-            Map<Integer, RString> 通知文 = new HashMap<>();
-//                    ReportUtil.get通知文(SubGyomuCode.DBE認定支援, ReportIdDBE.DBE220001.getReportId(), KamokuCode.EMPTY, 1);
+            Map<Integer, RString> 通知文
+                    = ReportUtil.get通知文(SubGyomuCode.DBE認定支援, ReportIdDBE.DBE220001.getReportId(), KamokuCode.EMPTY, 1);
             RString homonChosasakiJusho = row.getHomonChosasakiJusho();
-            RString homonChosasakiJusho1;
-            RString homonChosasakiJusho2 = RString.EMPTY;
-            if (homonChosasakiJusho.length() < INDEX_40) {
-                homonChosasakiJusho1 = homonChosasakiJusho;
-            } else {
-                homonChosasakiJusho1 = homonChosasakiJusho.substring(0, INDEX_40);
-                homonChosasakiJusho2 = homonChosasakiJusho.substring(INDEX_40);
-            }
             ChosaIraishoHeadItem item = new ChosaIraishoHeadItem(
                     div.getTxthokkoymd().getValue().toDateString(),
                     RString.EMPTY,
@@ -691,6 +686,7 @@ public class NinteiChosaIraiHandler {
                     new RString(""),
                     new RString(""),
                     new RString(""),
+                    new RString("要介護認定調査依頼書"),
                     通知文.get(1),
                     被保険者番号リスト.get(0),
                     被保険者番号リスト.get(1),
@@ -714,14 +710,13 @@ public class NinteiChosaIraiHandler {
                     row.getJusho(),
                     row.getTelNo(),
                     row.getHomonChosasakiYubinNo(),
-                    homonChosasakiJusho1,
-                    homonChosasakiJusho2,
+                    homonChosasakiJusho,
                     row.getHomonChosasakiName(),
                     row.getHomonChosasakiTelNo(),
                     row.getNinteiShinseiYMDKoShin(),
                     row.getNinteichosaKigenYMD(),
-                    通知文.get(2),
-                    new RString(String.valueOf(renban++)));
+                    通知文.get(2)
+            );
             chosaIraishoHeadItemList.add(item);
         }
         return chosaIraishoHeadItemList;

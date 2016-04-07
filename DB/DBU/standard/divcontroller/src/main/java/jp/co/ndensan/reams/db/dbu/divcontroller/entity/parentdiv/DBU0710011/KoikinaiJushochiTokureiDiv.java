@@ -9,7 +9,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 
 /**
  * KoikinaiJushochiTokurei のクラスファイル 
- * 
+ * @reamsid_L DBU-1140-010 dongyabin
  * @author 自動生成
  */
 public class KoikinaiJushochiTokureiDiv extends Panel {

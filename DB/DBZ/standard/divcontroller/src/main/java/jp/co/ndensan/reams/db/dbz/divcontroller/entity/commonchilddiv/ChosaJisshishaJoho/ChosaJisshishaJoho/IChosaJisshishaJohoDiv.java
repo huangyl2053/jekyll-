@@ -8,6 +8,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxDate;
 
 /*
  * このコードはツールによって生成されました。
+ * @reamsid_L DBE-3000-100 dongyabin
  */
 public interface IChosaJisshishaJohoDiv extends ICommonChildDivBaseProperties {
 

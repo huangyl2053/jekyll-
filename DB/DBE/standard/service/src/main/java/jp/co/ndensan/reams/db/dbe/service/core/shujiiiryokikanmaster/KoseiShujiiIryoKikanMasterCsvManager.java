@@ -17,7 +17,7 @@ import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
 
 /**
  * 主治医医療機関情報のCSV出力クラスです。
- *
+ * @reamsid_L DBE-0240-010 dongyabin
  */
 public class KoseiShujiiIryoKikanMasterCsvManager {
 

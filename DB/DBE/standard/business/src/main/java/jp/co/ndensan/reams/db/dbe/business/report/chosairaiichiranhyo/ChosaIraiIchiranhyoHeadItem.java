@@ -9,8 +9,9 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 import lombok.Getter;
 
 /**
- *
  * 認定調査依頼一覧表ヘッダのITEMです。
+ *
+ * @reamsid_L DBE-0010-030 lishengli
  */
 @Getter
 @SuppressWarnings("PMD.UnusedPrivateField")

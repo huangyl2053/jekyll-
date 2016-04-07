@@ -17,6 +17,7 @@ import lombok.Setter;
 /**
  *
  * 認定申請連絡先情報のビジネスコレクションクラスです。
+ * @reamsid_L DBE-1300-100 dongyabin
  */
 @Getter
 @Setter

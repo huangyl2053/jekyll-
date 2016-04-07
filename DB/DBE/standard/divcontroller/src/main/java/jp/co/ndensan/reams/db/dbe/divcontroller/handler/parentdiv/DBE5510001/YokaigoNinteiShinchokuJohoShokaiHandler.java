@@ -31,6 +31,7 @@ import jp.co.ndensan.reams.uz.uza.util.db.SearchResult;
 /**
  *
  * 要介護認定進捗状況照会のハンドラークラスです。
+ * @reamsid_L DBE-0210-010 dongyabin
  */
 public class YokaigoNinteiShinchokuJohoShokaiHandler {
 

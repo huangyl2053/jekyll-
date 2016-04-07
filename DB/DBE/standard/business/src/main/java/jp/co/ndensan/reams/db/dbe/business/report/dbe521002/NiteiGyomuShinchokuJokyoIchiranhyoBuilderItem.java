@@ -12,6 +12,7 @@ import jp.co.ndensan.reams.uz.uza.report.ReportEditorJoiner;
 /**
  *
  * 要介護認定業務進捗状況一覧表Builderクラスです。
+ * @reamsid_L DBE-0210-020 dongyabin
  */
 public class NiteiGyomuShinchokuJokyoIchiranhyoBuilderItem implements INiteiGyomuShinchokuJokyoIchiranhyoBuilder {
     

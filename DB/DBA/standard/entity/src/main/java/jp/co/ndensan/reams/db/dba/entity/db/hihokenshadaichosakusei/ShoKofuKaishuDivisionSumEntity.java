@@ -12,6 +12,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 /**
  * 分割した証交付回収のエンティティクラスです。
  *
+ * @reamsid_L DBA-0500-010  suguangjun 
  */
 @lombok.Getter
 @lombok.Setter

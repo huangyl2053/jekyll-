@@ -15,6 +15,8 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
  * 認定調査スケジュール詳細情報を管理するクラスです。
+ *
+ * @reamsid_L DBE-0020-020 lishengli
  */
 public class ChikuNinteiChosain {
 

@@ -18,6 +18,7 @@ import jp.co.ndensan.reams.uz.uza.util.config.BusinessConfig;
 /**
  * 主治医意見書督促状発行のHandlerクラスです。
  *
+ * @reamsid_L DBE-0060-010 zhangzhiming
  */
 public class ShujiiIkenTokusokujoHakkoHandler {
 

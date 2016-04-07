@@ -12,6 +12,7 @@ import lombok.Getter;
 /**
  *
  * 介護保険受領委任払い契約申請書Entityリストです。
+ * @reamsid_L DBA-0540-683 dongyabin
  */
 @Getter
 @SuppressWarnings("PMD.UnusedPrivateField")

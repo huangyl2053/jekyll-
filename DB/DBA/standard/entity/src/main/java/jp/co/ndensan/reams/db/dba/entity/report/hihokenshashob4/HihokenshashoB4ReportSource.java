@@ -7,6 +7,7 @@ import jp.co.ndensan.reams.uz.uza.report.source.ReportItem;
 /**
  * 
  * 介護保険被保険者証（B4版）のReportSourceクラスです。
+ * @reamsid_L DBU-0490-060 dongyabin
  */
 public class HihokenshashoB4ReportSource implements IReportSource {
 // <editor-fold defaultstate="collapsed" desc="Generated Code">

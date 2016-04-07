@@ -10,6 +10,8 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
  * 帳票ＩＤの列挙型です。
+ *
+ * @reamsid_L DBE-9999-021 zhangzhiming
  */
 public enum ReportIdDBE {
 

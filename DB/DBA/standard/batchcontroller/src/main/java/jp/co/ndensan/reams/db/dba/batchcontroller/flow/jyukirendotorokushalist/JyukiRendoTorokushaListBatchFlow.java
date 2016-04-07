@@ -14,6 +14,8 @@ import jp.co.ndensan.reams.uz.uza.batch.flow.IBatchFlowCommand;
 
 /**
  * 住基連動登録者_バッチ処理クラスです。
+ *
+ * @reamsid_L DBA-0560-020 xuyannan
  */
 public class JyukiRendoTorokushaListBatchFlow extends BatchFlowBase<JyukiRendoTorokushaListBatchParameter> {
 

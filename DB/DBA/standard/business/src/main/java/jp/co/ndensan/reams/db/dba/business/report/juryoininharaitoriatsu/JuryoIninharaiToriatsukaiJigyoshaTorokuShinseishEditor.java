@@ -11,6 +11,7 @@ import jp.co.ndensan.reams.db.dba.entity.report.juryoininharaitoriatsu.JuryoInin
 /**
  *
  * 介護保険受領委任払い取扱事業者登録申請書のEditorです。
+ * @reamsid_L DBA-0540-684 dongyabin
  */
 public class JuryoIninharaiToriatsukaiJigyoshaTorokuShinseishEditor implements
             IJuryoIninharaiToriatsukaiJigyoshaTorokuShinseishEditor {

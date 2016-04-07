@@ -5,12 +5,13 @@ package jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.RoreiFuku
  * 不正な動作の原因になります。
  */
 import com.fasterxml.jackson.annotation.JsonProperty;
-import jp.co.ndensan.reams.uz.uza.ui.binding.*;
+import jp.co.ndensan.reams.uz.uza.ui.binding.Button;
+import jp.co.ndensan.reams.uz.uza.ui.binding.DataGrid;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 
 /**
  * panelRireki のクラスファイル 
- * 
+ * @reamsid_L DBA-0220-010 dongyabin
  * @author 自動生成
  */
 public class panelRirekiDiv extends Panel {

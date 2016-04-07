@@ -71,7 +71,8 @@ import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
 
 /**
  * 被保険者台帳のクラスです。
- *
+ * 
+ * @reamsid_L DBA-0500-010  suguangjun
  */
 public class HihokenshaDaichoSakuseiManager {
 

@@ -11,6 +11,7 @@ import jp.co.ndensan.reams.uz.uza.report.ReportEditorJoiner;
 /**
  *
  * 認定調査委託先・認定調査員一覧表Builderクラスです。
+ * @reamsid_L DBE-0290-020 dongyabin
  */
 public class ItakusakiChosainIchiranBuilderItem implements ItakusakiChosainIchiranBuilder {
 

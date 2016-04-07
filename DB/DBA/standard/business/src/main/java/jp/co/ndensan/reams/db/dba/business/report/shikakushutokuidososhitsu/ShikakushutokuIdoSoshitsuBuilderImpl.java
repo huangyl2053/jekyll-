@@ -11,7 +11,8 @@ import jp.co.ndensan.reams.uz.uza.report.ReportEditorJoiner;
 
 /**
  *
- * 介護保険資格取得・異動・喪失届Builderクラスです
+ * 介護保険資格取得・異動・喪失届Builderクラスです。
+ * @reamsid_L DBA-0540-681 dongyabin
  */
 public final class ShikakushutokuIdoSoshitsuBuilderImpl implements IShikakushutokuIdoSoshitsuBuilder {
     

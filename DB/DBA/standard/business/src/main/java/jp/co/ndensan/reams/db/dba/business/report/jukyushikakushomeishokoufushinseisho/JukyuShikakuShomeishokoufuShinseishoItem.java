@@ -12,6 +12,7 @@ import lombok.Getter;
 /**
  *
  * 介護保険受給資格証明書交付申請書のEntityクラスです。
+ * @reamsid_L DBA-0540-682 dongyabin
  */
 @Getter
 @SuppressWarnings("PMD.UnusedPrivateField")

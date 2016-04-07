@@ -34,6 +34,8 @@ import jp.co.ndensan.reams.uz.uza.util.config.BusinessConfig;
 /**
  *
  * 認定調査スケジュール登録3のハンドラークラスです。
+ *
+ * @reamsid_L DBE-0020-030 wanghui
  */
 public class MainPanelHandler {
 

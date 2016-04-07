@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <!-- 概要： 主治医意見書のマッピング用XMLです。 -->
-
-<!-- どのマッパーインターフェースと対応するかを指定する -->
+<!-- @reamsid_L DBE-0060-010 zhangzhiming -->
 <mapper namespace="jp.co.ndensan.reams.db.dbe.persistence.db.mapper.relate.shujiiikentokusokujo.IShujiiIkenTokusokujoMapper">
      <select id="select督促状件数" resultType="int"
              parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatis.param.shujiiikentokusokujo.ShujiiIkenTokusokujoParameter" 

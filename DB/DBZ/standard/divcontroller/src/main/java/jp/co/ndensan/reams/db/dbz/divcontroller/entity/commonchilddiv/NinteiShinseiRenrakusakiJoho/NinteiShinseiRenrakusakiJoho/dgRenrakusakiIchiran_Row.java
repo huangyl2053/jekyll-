@@ -8,14 +8,14 @@ package jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.NinteiShi
 
 
 
-import jp.co.ndensan.reams.uz.uza.ui.binding.DataRow;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.ui.binding.DataRow;
 
 
 /**
  * dgRenrakusakiIchiran_Row のクラスファイル 
  * 
- * @author 自動生成
+ * @reamsid_L DBE-1300-100 dongyabin
  */
 
 public class dgRenrakusakiIchiran_Row extends DataRow {

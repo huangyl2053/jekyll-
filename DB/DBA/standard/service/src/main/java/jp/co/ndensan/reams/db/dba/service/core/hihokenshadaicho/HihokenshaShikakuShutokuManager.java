@@ -33,6 +33,8 @@ import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
 /**
  *
  * 被保険者台帳管理（資格取得）情報を管理するサービスクラスです。
+ *
+ * @reamsid_L DBA-0520-010 lishengli
  */
 public class HihokenshaShikakuShutokuManager {
 
@@ -166,7 +168,7 @@ public class HihokenshaShikakuShutokuManager {
                 .createParam_HokenshaDaicho(hihokenshaNo, shikibetsuCode);
         DbT1001HihokenshaDaichoEntity entity = hokenshamapper.getSaishinDeta(parameter);
         if (entity == null) {
-            return null;
+            return new HihokenshaShutokuJyoho(new DbT1001HihokenshaDaichoEntity());
         }
         return new HihokenshaShutokuJyoho(entity);
     }

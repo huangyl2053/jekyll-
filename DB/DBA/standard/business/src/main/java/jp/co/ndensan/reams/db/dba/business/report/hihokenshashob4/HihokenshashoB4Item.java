@@ -12,6 +12,7 @@ import lombok.Getter;
 /**
  *
  * 介護保険被保険者証（B4版）Entityリストです。
+ * @reamsid_L DBU-0490-060 dongyabin
  */
 @Getter
 @SuppressWarnings("PMD.UnusedPrivateField")

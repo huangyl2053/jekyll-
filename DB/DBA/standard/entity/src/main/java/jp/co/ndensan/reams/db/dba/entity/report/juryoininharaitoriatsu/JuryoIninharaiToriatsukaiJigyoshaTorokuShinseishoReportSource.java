@@ -7,6 +7,7 @@ import jp.co.ndensan.reams.uz.uza.report.source.ReportItem;
 /**
  * 
  * 介護保険受領委任払い取扱事業者登録申請書の帳票定義クラスです。
+ * @reamsid_L DBA-0540-684 dongyabin
  */
 public class JuryoIninharaiToriatsukaiJigyoshaTorokuShinseishoReportSource implements IReportSource {
 // <editor-fold defaultstate="collapsed" desc="Generated Code">

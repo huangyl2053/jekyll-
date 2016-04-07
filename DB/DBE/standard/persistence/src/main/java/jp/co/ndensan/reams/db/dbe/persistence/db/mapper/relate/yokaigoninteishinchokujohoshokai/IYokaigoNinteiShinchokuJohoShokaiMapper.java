@@ -13,6 +13,7 @@ import jp.co.ndensan.reams.db.dbe.entity.db.relate.yokaigoninteishinchokujohosho
 /**
  *
  * 申請者一覧内容検索のインタフェイスです。
+ * @reamsid_L DBE-0210-010 dongyabin
  */
 public interface IYokaigoNinteiShinchokuJohoShokaiMapper {
     
