@@ -25,7 +25,9 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 
 /**
- * 事業報告（月報）補正発行_様式２の７補正のクラス
+ * 事業報告（月報）補正発行_様式２の７補正のクラスです。
+ *
+ * @reamsid_L DBU-1100-080 lijunjun
  */
 public class YoshikiNinonanaHoseiHandler {
 
@@ -67,7 +69,7 @@ public class YoshikiNinonanaHoseiHandler {
     }
 
     /**
-     * setViewState
+     * 画面初期化のsetViewStateメソッドます。
      *
      * @param 引き継ぎデータ JigyoHokokuGeppoParameter
      */
@@ -86,150 +88,160 @@ public class YoshikiNinonanaHoseiHandler {
     }
 
     private boolean is整合性チェック_NG_1() {
-        if (div.getPnlMain().getPnlServive1().getPnlDaiyon().getTxtRiyoshaDaiyonKensu1().getValue() != null
-                && div.getPnlMain().getPnlServive1().getPnlDaiyon().getTxtRiyoshaDaiyonKensu2().getValue() != null
-                && div.getPnlMain().getPnlServive1().getPnlDaiyon().getTxtRiyoshaDaiyonKensu3().getValue() != null) {
-            if (!div.getPnlMain().getPnlServive1().getPnlDaiyon().getTxtRiyoshaDaiyonKensu1().getValue().add(
-                    div.getPnlMain().getPnlServive1().getPnlDaiyon().getTxtRiyoshaDaiyonKensu2().getValue()).equals(
-                            div.getPnlMain().getPnlServive1().getPnlDaiyon().getTxtRiyoshaDaiyonKensu3().getValue())) {
-                return true;
-            }
-        } else if (div.getPnlMain().getPnlServive1().getPnlDaiyon().getTxtRiyoshaDaiyonKyufugaku1().getValue() != null
-                && div.getPnlMain().getPnlServive1().getPnlDaiyon().getTxtRiyoshaDaiyonKyufugaku2().getValue() != null
-                && div.getPnlMain().getPnlServive1().getPnlDaiyon().getTxtRiyoshaDaiyonKyufugaku3().getValue() != null) {
-            if (!div.getPnlMain().getPnlServive1().getPnlDaiyon().getTxtRiyoshaDaiyonKyufugaku1().getValue().add(
-                    div.getPnlMain().getPnlServive1().getPnlDaiyon().getTxtRiyoshaDaiyonKyufugaku2().getValue()).equals(
-                            div.getPnlMain().getPnlServive1().getPnlDaiyon().getTxtRiyoshaDaiyonKyufugaku3().getValue())) {
-                return true;
-            }
-        } else if (div.getPnlMain().getPnlServive1().getPnlDaisan().getTxtRiyoshaDaisanKensu1().getValue() != null
-                && div.getPnlMain().getPnlServive1().getPnlDaisan().getTxtRiyoshaDaisanKensu2().getValue() != null
-                && div.getPnlMain().getPnlServive1().getPnlDaisan().getTxtRiyoshaDaisanKensu3().getValue() != null
-                && !div.getPnlMain().getPnlServive1().getPnlDaisan().getTxtRiyoshaDaisanKensu1().getValue().add(
-                        div.getPnlMain().getPnlServive1().getPnlDaisan().getTxtRiyoshaDaisanKensu2().getValue()).equals(
-                        div.getPnlMain().getPnlServive1().getPnlDaisan().getTxtRiyoshaDaisanKensu3().getValue())) {
+        Decimal 件数_世帯合算 = div.getPnlMain().getPnlServive1().getPnlDaiyon().getTxtRiyoshaDaiyonKensu1().getValue();
+        Decimal 件数_その他 = div.getPnlMain().getPnlServive1().getPnlDaiyon().getTxtRiyoshaDaiyonKensu2().getValue();
+        Decimal 件数_計 = div.getPnlMain().getPnlServive1().getPnlDaiyon().getTxtRiyoshaDaiyonKensu3().getValue();
+        件数_世帯合算 = null == 件数_世帯合算 ? Decimal.ZERO : 件数_世帯合算;
+        件数_その他 = null == 件数_その他 ? Decimal.ZERO : 件数_その他;
+        件数_計 = null == 件数_計 ? Decimal.ZERO : 件数_計;
+        if (!件数_世帯合算.add(件数_その他).equals(件数_計)) {
             return true;
         }
-        return false;
+
+        Decimal 給付額_世帯合算 = div.getPnlMain().getPnlServive1().getPnlDaiyon().getTxtRiyoshaDaiyonKyufugaku1().getValue();
+        Decimal 給付額_その他 = div.getPnlMain().getPnlServive1().getPnlDaiyon().getTxtRiyoshaDaiyonKyufugaku2().getValue();
+        Decimal 給付額_計 = div.getPnlMain().getPnlServive1().getPnlDaiyon().getTxtRiyoshaDaiyonKyufugaku3().getValue();
+        給付額_世帯合算 = null == 給付額_世帯合算 ? Decimal.ZERO : 給付額_世帯合算;
+        給付額_その他 = null == 給付額_その他 ? Decimal.ZERO : 給付額_その他;
+        給付額_計 = null == 給付額_計 ? Decimal.ZERO : 給付額_計;
+        return !給付額_世帯合算.add(給付額_その他).equals(給付額_計);
+
     }
 
     private boolean is整合性チェック_NG_2() {
-        if (div.getPnlMain().getPnlServive1().getPnlDaisan().getTxtRiyoshaDaisanKyufugaku1().getValue() != null
-                && div.getPnlMain().getPnlServive1().getPnlDaisan().getTxtRiyoshaDaisanKyufugaku2().getValue() != null
-                && div.getPnlMain().getPnlServive1().getPnlDaisan().getTxtRiyoshaDaisanKyufugaku1().getValue() != null) {
-            if (!div.getPnlMain().getPnlServive1().getPnlDaisan().getTxtRiyoshaDaisanKyufugaku1().getValue().add(
-                    div.getPnlMain().getPnlServive1().getPnlDaisan().getTxtRiyoshaDaisanKyufugaku2().getValue()).equals(
-                            div.getPnlMain().getPnlServive1().getPnlDaisan().getTxtRiyoshaDaisanKyufugaku3().getValue())) {
-                return true;
-            }
-        } else if (div.getPnlMain().getPnlServive1().getPnlDaini().getTxtRiyoshaDainiKensu1().getValue() != null
-                && div.getPnlMain().getPnlServive1().getPnlDaini().getTxtRiyoshaDainiKensu2().getValue() != null
-                && div.getPnlMain().getPnlServive1().getPnlDaini().getTxtRiyoshaDainiKensu1().getValue() != null) {
-            if (!div.getPnlMain().getPnlServive1().getPnlDaini().getTxtRiyoshaDainiKensu1().getValue().add(
-                    div.getPnlMain().getPnlServive1().getPnlDaini().getTxtRiyoshaDainiKensu2().getValue()).equals(
-                            div.getPnlMain().getPnlServive1().getPnlDaini().getTxtRiyoshaDainiKensu3().getValue())) {
-                return true;
-            }
-        } else if (div.getPnlMain().getPnlServive1().getPnlDaini().getTxtRiyoshaDainiKyufugaku1().getValue() != null
-                && div.getPnlMain().getPnlServive1().getPnlDaini().getTxtRiyoshaDainiKyufugaku2().getValue() != null
-                && div.getPnlMain().getPnlServive1().getPnlDaini().getTxtRiyoshaDainiKyufugaku3().getValue() != null
-                && !div.getPnlMain().getPnlServive1().getPnlDaini().getTxtRiyoshaDainiKyufugaku1().getValue().add(
-                        div.getPnlMain().getPnlServive1().getPnlDaini().getTxtRiyoshaDainiKyufugaku2().getValue()).equals(
-                        div.getPnlMain().getPnlServive1().getPnlDaini().getTxtRiyoshaDainiKyufugaku3().getValue())) {
+        Decimal 件数_世帯合算 = div.getPnlMain().getPnlServive1().getPnlDaisan().getTxtRiyoshaDaisanKensu1().getValue();
+        Decimal 件数_その他 = div.getPnlMain().getPnlServive1().getPnlDaisan().getTxtRiyoshaDaisanKensu2().getValue();
+        Decimal 件数_計 = div.getPnlMain().getPnlServive1().getPnlDaisan().getTxtRiyoshaDaisanKensu3().getValue();
+        件数_世帯合算 = null == 件数_世帯合算 ? Decimal.ZERO : 件数_世帯合算;
+        件数_その他 = null == 件数_その他 ? Decimal.ZERO : 件数_その他;
+        件数_計 = null == 件数_計 ? Decimal.ZERO : 件数_計;
+        if (!件数_世帯合算.add(件数_その他).equals(件数_計)) {
             return true;
         }
-        return false;
+
+        Decimal 給付額_世帯合算 = div.getPnlMain().getPnlServive1().getPnlDaisan().getTxtRiyoshaDaisanKyufugaku1().getValue();
+        Decimal 給付額_その他 = div.getPnlMain().getPnlServive1().getPnlDaisan().getTxtRiyoshaDaisanKyufugaku2().getValue();
+        Decimal 給付額_計 = div.getPnlMain().getPnlServive1().getPnlDaisan().getTxtRiyoshaDaisanKyufugaku3().getValue();
+        給付額_世帯合算 = null == 給付額_世帯合算 ? Decimal.ZERO : 給付額_世帯合算;
+        給付額_その他 = null == 給付額_その他 ? Decimal.ZERO : 給付額_その他;
+        給付額_計 = null == 給付額_計 ? Decimal.ZERO : 給付額_計;
+        return !給付額_世帯合算.add(給付額_その他).equals(給付額_計);
     }
 
     private boolean is整合性チェック_NG_3() {
-        if (div.getPnlMain().getPnlServive1().getPnlDaiitu().getTxtRiyoshaDaiichiKensu1().getValue() != null
-                && div.getPnlMain().getPnlServive1().getPnlDaiitu().getTxtRiyoshaDaiichiKensu2().getValue() != null
-                && div.getPnlMain().getPnlServive1().getPnlDaiitu().getTxtRiyoshaDaiichiKensu3().getValue() != null) {
-            if (!div.getPnlMain().getPnlServive1().getPnlDaiitu().getTxtRiyoshaDaiichiKensu1().getValue().add(
-                    div.getPnlMain().getPnlServive1().getPnlDaiitu().getTxtRiyoshaDaiichiKensu2().getValue()).equals(
-                            div.getPnlMain().getPnlServive1().getPnlDaiitu().getTxtRiyoshaDaiichiKensu3().getValue())) {
-                return true;
-            }
-        } else if (div.getPnlMain().getPnlServive1().getPnlDaiitu().getTxtRiyoshaDaiichiKyufugaku1().getValue() != null
-                && div.getPnlMain().getPnlServive1().getPnlDaiitu().getTxtRiyoshaDaiichiKyufugaku2().getValue() != null
-                && div.getPnlMain().getPnlServive1().getPnlDaiitu().getTxtRiyoshaDaiichiKyufugaku3().getValue() != null) {
-            if (!div.getPnlMain().getPnlServive1().getPnlDaiitu().getTxtRiyoshaDaiichiKyufugaku1().getValue().add(
-                    div.getPnlMain().getPnlServive1().getPnlDaiitu().getTxtRiyoshaDaiichiKyufugaku1().getValue()).equals(
-                            div.getPnlMain().getPnlServive1().getPnlDaiitu().getTxtRiyoshaDaiichiKyufugaku1().getValue())) {
-                return true;
-            }
-        } else if (div.getPnlMain().getPnlServive1().getPnlGokei().getTxtGokeiKensu1().getValue() != null
-                && div.getPnlMain().getPnlServive1().getPnlGokei().getTxtGokeiKensu2().getValue() != null
-                && div.getPnlMain().getPnlServive1().getPnlGokei().getTxtGokeiKensu3().getValue() != null
-                && !div.getPnlMain().getPnlServive1().getPnlGokei().getTxtGokeiKensu1().getValue().add(
-                        div.getPnlMain().getPnlServive1().getPnlGokei().getTxtGokeiKensu2().getValue()).equals(
-                        div.getPnlMain().getPnlServive1().getPnlGokei().getTxtGokeiKensu3().getValue())) {
+        Decimal 件数_世帯合算 = div.getPnlMain().getPnlServive1().getPnlDaini().getTxtRiyoshaDainiKensu1().getValue();
+        Decimal 件数_その他 = div.getPnlMain().getPnlServive1().getPnlDaini().getTxtRiyoshaDainiKensu2().getValue();
+        Decimal 件数_計 = div.getPnlMain().getPnlServive1().getPnlDaini().getTxtRiyoshaDainiKensu3().getValue();
+        件数_世帯合算 = null == 件数_世帯合算 ? Decimal.ZERO : 件数_世帯合算;
+        件数_その他 = null == 件数_その他 ? Decimal.ZERO : 件数_その他;
+        件数_計 = null == 件数_計 ? Decimal.ZERO : 件数_計;
+        if (!件数_世帯合算.add(件数_その他).equals(件数_計)) {
             return true;
         }
-        return false;
+
+        Decimal 給付額_世帯合算 = div.getPnlMain().getPnlServive1().getPnlDaini().getTxtRiyoshaDainiKyufugaku1().getValue();
+        Decimal 給付額_その他 = div.getPnlMain().getPnlServive1().getPnlDaini().getTxtRiyoshaDainiKyufugaku2().getValue();
+        Decimal 給付額_計 = div.getPnlMain().getPnlServive1().getPnlDaini().getTxtRiyoshaDainiKyufugaku3().getValue();
+        給付額_世帯合算 = null == 給付額_世帯合算 ? Decimal.ZERO : 給付額_世帯合算;
+        給付額_その他 = null == 給付額_その他 ? Decimal.ZERO : 給付額_その他;
+        給付額_計 = null == 給付額_計 ? Decimal.ZERO : 給付額_計;
+        return !給付額_世帯合算.add(給付額_その他).equals(給付額_計);
     }
 
     private boolean is整合性チェック_NG_4() {
-        if (div.getPnlMain().getPnlServive1().getPnlGokei().getTxtGokeiKyufugaku1().getValue() != null
-                && div.getPnlMain().getPnlServive1().getPnlGokei().getTxtGokeiKyufugaku2().getValue() != null
-                && div.getPnlMain().getPnlServive1().getPnlGokei().getTxtGokeiKyufugaku3().getValue() != null) {
-            if (!div.getPnlMain().getPnlServive1().getPnlGokei().getTxtGokeiKyufugaku1().getValue().add(
-                    div.getPnlMain().getPnlServive1().getPnlGokei().getTxtGokeiKyufugaku2().getValue()).equals(
-                            div.getPnlMain().getPnlServive1().getPnlGokei().getTxtGokeiKyufugaku3().getValue())) {
-                return true;
-            }
-        } else if (div.getPnlMain().getPnlServive1().getPnlSaikeiDaisan().getTxtSaikeiRiyoshaDaisanKensu1().getValue() != null
-                && div.getPnlMain().getPnlServive1().getPnlSaikeiDaisan().getTxtSaikeiRiyoshaDaisanKensu2().getValue() != null
-                && div.getPnlMain().getPnlServive1().getPnlSaikeiDaisan().getTxtSaikeiRiyoshaDaisanKensu3().getValue() != null) {
-            if (!div.getPnlMain().getPnlServive1().getPnlSaikeiDaisan().getTxtSaikeiRiyoshaDaisanKensu1().getValue().add(
-                    div.getPnlMain().getPnlServive1().getPnlSaikeiDaisan().getTxtSaikeiRiyoshaDaisanKensu2().getValue()).equals(
-                            div.getPnlMain().getPnlServive1().getPnlSaikeiDaisan().getTxtSaikeiRiyoshaDaisanKensu3().getValue())) {
-                return true;
-            }
-        } else if (div.getPnlMain().getPnlServive1().getPnlSaikeiDaisan().getTxtSaikeiRiyoshaDaisanKyufugaku1().getValue() != null
-                && div.getPnlMain().getPnlServive1().getPnlSaikeiDaisan().getTxtSaikeiRiyoshaDaisanKyufugaku2().getValue() != null
-                && div.getPnlMain().getPnlServive1().getPnlSaikeiDaisan().getTxtSaikeiRiyoshaDaisanKyufugaku3().getValue() != null
-                && !div.getPnlMain().getPnlServive1().getPnlSaikeiDaisan().getTxtSaikeiRiyoshaDaisanKyufugaku1().getValue().add(
-                        div.getPnlMain().getPnlServive1().getPnlSaikeiDaisan().getTxtSaikeiRiyoshaDaisanKyufugaku2().getValue()).equals(
-                        div.getPnlMain().getPnlServive1().getPnlSaikeiDaisan().getTxtSaikeiRiyoshaDaisanKyufugaku3().getValue())) {
+        Decimal 件数_世帯合算 = div.getPnlMain().getPnlServive1().getPnlDaiitu().getTxtRiyoshaDaiichiKensu1().getValue();
+        Decimal 件数_その他 = div.getPnlMain().getPnlServive1().getPnlDaiitu().getTxtRiyoshaDaiichiKensu2().getValue();
+        Decimal 件数_計 = div.getPnlMain().getPnlServive1().getPnlDaiitu().getTxtRiyoshaDaiichiKensu3().getValue();
+        件数_世帯合算 = null == 件数_世帯合算 ? Decimal.ZERO : 件数_世帯合算;
+        件数_その他 = null == 件数_その他 ? Decimal.ZERO : 件数_その他;
+        件数_計 = null == 件数_計 ? Decimal.ZERO : 件数_計;
+        if (!件数_世帯合算.add(件数_その他).equals(件数_計)) {
             return true;
         }
-        return false;
+
+        Decimal 給付額_世帯合算 = div.getPnlMain().getPnlServive1().getPnlDaiitu().getTxtRiyoshaDaiichiKyufugaku1().getValue();
+        Decimal 給付額_その他 = div.getPnlMain().getPnlServive1().getPnlDaiitu().getTxtRiyoshaDaiichiKyufugaku2().getValue();
+        Decimal 給付額_計 = div.getPnlMain().getPnlServive1().getPnlDaiitu().getTxtRiyoshaDaiichiKyufugaku3().getValue();
+        給付額_世帯合算 = null == 給付額_世帯合算 ? Decimal.ZERO : 給付額_世帯合算;
+        給付額_その他 = null == 給付額_その他 ? Decimal.ZERO : 給付額_その他;
+        給付額_計 = null == 給付額_計 ? Decimal.ZERO : 給付額_計;
+        return !給付額_世帯合算.add(給付額_その他).equals(給付額_計);
     }
 
     private boolean is整合性チェック_NG_5() {
-        if (div.getPnlMain().getPnlServive1().getPnlSaikeiDaini().getTxtSaikeiRiyoshaDainiKensu1().getValue() != null
-                && div.getPnlMain().getPnlServive1().getPnlSaikeiDaini().getTxtSaikeiRiyoshaDainiKensu2().getValue() != null
-                && div.getPnlMain().getPnlServive1().getPnlSaikeiDaini().getTxtSaikeiRiyoshaDainiKensu3().getValue() != null) {
-            if (!div.getPnlMain().getPnlServive1().getPnlSaikeiDaini().getTxtSaikeiRiyoshaDainiKensu1().getValue().add(
-                    div.getPnlMain().getPnlServive1().getPnlSaikeiDaini().getTxtSaikeiRiyoshaDainiKensu2().getValue()).equals(
-                            div.getPnlMain().getPnlServive1().getPnlSaikeiDaini().getTxtSaikeiRiyoshaDainiKensu3().getValue())) {
-                return true;
-            }
-        } else if (div.getPnlMain().getPnlServive1().getPnlSaikeiDaini().getTxtSaikeiRiyoshaDainiKyufugaku1().getValue() != null
-                && div.getPnlMain().getPnlServive1().getPnlSaikeiDaini().getTxtSaikeiRiyoshaDainiKyufugaku2().getValue() != null
-                && div.getPnlMain().getPnlServive1().getPnlSaikeiDaini().getTxtSaikeiRiyoshaDainiKyufugaku3().getValue() != null
-                && !div.getPnlMain().getPnlServive1().getPnlSaikeiDaini().getTxtSaikeiRiyoshaDainiKyufugaku1().getValue().add(
-                        div.getPnlMain().getPnlServive1().getPnlSaikeiDaini().getTxtSaikeiRiyoshaDainiKyufugaku2().getValue()).equals(
-                        div.getPnlMain().getPnlServive1().getPnlSaikeiDaini().getTxtSaikeiRiyoshaDainiKyufugaku3().getValue())) {
+        Decimal 件数_世帯合算 = div.getPnlMain().getPnlServive1().getPnlGokei().getTxtGokeiKensu1().getValue();
+        Decimal 件数_その他 = div.getPnlMain().getPnlServive1().getPnlGokei().getTxtGokeiKensu2().getValue();
+        Decimal 件数_計 = div.getPnlMain().getPnlServive1().getPnlGokei().getTxtGokeiKensu3().getValue();
+        件数_世帯合算 = null == 件数_世帯合算 ? Decimal.ZERO : 件数_世帯合算;
+        件数_その他 = null == 件数_その他 ? Decimal.ZERO : 件数_その他;
+        件数_計 = null == 件数_計 ? Decimal.ZERO : 件数_計;
+        if (!件数_世帯合算.add(件数_その他).equals(件数_計)) {
             return true;
         }
-        return false;
+
+        Decimal 給付額_世帯合算 = div.getPnlMain().getPnlServive1().getPnlGokei().getTxtGokeiKyufugaku1().getValue();
+        Decimal 給付額_その他 = div.getPnlMain().getPnlServive1().getPnlGokei().getTxtGokeiKyufugaku2().getValue();
+        Decimal 給付額_計 = div.getPnlMain().getPnlServive1().getPnlGokei().getTxtGokeiKyufugaku3().getValue();
+        給付額_世帯合算 = null == 給付額_世帯合算 ? Decimal.ZERO : 給付額_世帯合算;
+        給付額_その他 = null == 給付額_その他 ? Decimal.ZERO : 給付額_その他;
+        給付額_計 = null == 給付額_計 ? Decimal.ZERO : 給付額_計;
+        return !給付額_世帯合算.add(給付額_その他).equals(給付額_計);
+    }
+
+    private boolean is整合性チェック_NG_6() {
+        Decimal 件数_世帯合算 = div.getPnlMain().getPnlServive1().getPnlSaikeiDaisan().getTxtSaikeiRiyoshaDaisanKensu1().getValue();
+        Decimal 件数_その他 = div.getPnlMain().getPnlServive1().getPnlSaikeiDaisan().getTxtSaikeiRiyoshaDaisanKensu2().getValue();
+        Decimal 件数_計 = div.getPnlMain().getPnlServive1().getPnlSaikeiDaisan().getTxtSaikeiRiyoshaDaisanKensu3().getValue();
+        件数_世帯合算 = null == 件数_世帯合算 ? Decimal.ZERO : 件数_世帯合算;
+        件数_その他 = null == 件数_その他 ? Decimal.ZERO : 件数_その他;
+        件数_計 = null == 件数_計 ? Decimal.ZERO : 件数_計;
+        if (!件数_世帯合算.add(件数_その他).equals(件数_計)) {
+            return true;
+        }
+
+        Decimal 給付額_世帯合算 = div.getPnlMain().getPnlServive1().getPnlSaikeiDaisan().getTxtSaikeiRiyoshaDaisanKyufugaku1().getValue();
+        Decimal 給付額_その他 = div.getPnlMain().getPnlServive1().getPnlSaikeiDaisan().getTxtSaikeiRiyoshaDaisanKyufugaku2().getValue();
+        Decimal 給付額_計 = div.getPnlMain().getPnlServive1().getPnlSaikeiDaisan().getTxtSaikeiRiyoshaDaisanKyufugaku3().getValue();
+        給付額_世帯合算 = null == 給付額_世帯合算 ? Decimal.ZERO : 給付額_世帯合算;
+        給付額_その他 = null == 給付額_その他 ? Decimal.ZERO : 給付額_その他;
+        給付額_計 = null == 給付額_計 ? Decimal.ZERO : 給付額_計;
+        return !給付額_世帯合算.add(給付額_その他).equals(給付額_計);
+    }
+
+    private boolean is整合性チェック_NG_7() {
+
+        Decimal 件数_世帯合算 = div.getPnlMain().getPnlServive1().getPnlSaikeiDaini().getTxtSaikeiRiyoshaDainiKensu1().getValue();
+        Decimal 件数_その他 = div.getPnlMain().getPnlServive1().getPnlSaikeiDaini().getTxtSaikeiRiyoshaDainiKensu2().getValue();
+        Decimal 件数_計 = div.getPnlMain().getPnlServive1().getPnlSaikeiDaini().getTxtSaikeiRiyoshaDainiKensu3().getValue();
+        件数_世帯合算 = null == 件数_世帯合算 ? Decimal.ZERO : 件数_世帯合算;
+        件数_その他 = null == 件数_その他 ? Decimal.ZERO : 件数_その他;
+        件数_計 = null == 件数_計 ? Decimal.ZERO : 件数_計;
+        if (!件数_世帯合算.add(件数_その他).equals(件数_計)) {
+            return true;
+        }
+
+        Decimal 給付額_世帯合算 = div.getPnlMain().getPnlServive1().getPnlSaikeiDaini().getTxtSaikeiRiyoshaDainiKyufugaku1().getValue();
+        Decimal 給付額_その他 = div.getPnlMain().getPnlServive1().getPnlSaikeiDaini().getTxtSaikeiRiyoshaDainiKyufugaku2().getValue();
+        Decimal 給付額_計 = div.getPnlMain().getPnlServive1().getPnlSaikeiDaini().getTxtSaikeiRiyoshaDainiKyufugaku3().getValue();
+        給付額_世帯合算 = null == 給付額_世帯合算 ? Decimal.ZERO : 給付額_世帯合算;
+        給付額_その他 = null == 給付額_その他 ? Decimal.ZERO : 給付額_その他;
+        給付額_計 = null == 給付額_計 ? Decimal.ZERO : 給付額_計;
+        return !給付額_世帯合算.add(給付額_その他).equals(給付額_計);
     }
 
     /**
-     * is整合性チェック_NG
+     * is整合性チェック_NGのメソッドます。
      *
      * @return boolean
      */
     public boolean is整合性チェック_NG() {
 
         return is整合性チェック_NG_1() || is整合性チェック_NG_2() || is整合性チェック_NG_3()
-                || is整合性チェック_NG_4() || is整合性チェック_NG_5();
+                || is整合性チェック_NG_4() || is整合性チェック_NG_5() || is整合性チェック_NG_6() || is整合性チェック_NG_7();
     }
 
     /**
-     * 画面から修正データリストをDBに更新する。
+     * 画面から修正データリストをDBに更新のメソッドます。
      *
      * @param 修正データリスト List<JigyoHokokuNenpoUpdateParameter>
      */
@@ -239,38 +251,11 @@ public class YoshikiNinonanaHoseiHandler {
     }
 
     /**
-     * 引き継ぎデータより、データ1削除する。
+     * 削除のメソッドます。
      *
      * @param 引き継ぎデータ JigyoHokokuGeppoParameter
-     * @return boolean
      */
-    public boolean delete削除状態1(JigyoHokokuGeppoParameter 引き継ぎデータ) {
-        int row = deleteByParameter(引き継ぎデータ, 表番号_06, 集計番号_0701);
-        row = row + deleteByParameter(引き継ぎデータ, 表番号_06, 集計番号_0702);
-        row = row + deleteByParameter(引き継ぎデータ, 表番号_06, 集計番号_0703);
-        row = row + deleteByParameter(引き継ぎデータ, 表番号_06, 集計番号_0704);
-        row = row + deleteByParameter(引き継ぎデータ, 表番号_06, 集計番号_0705);
-        row = row + deleteByParameter(引き継ぎデータ, 表番号_06, 集計番号_0706);
-        row = row + deleteByParameter(引き継ぎデータ, 表番号_06, 集計番号_0707);
-        return 0 <= row;
-    }
-
-    /**
-     * 引き継ぎデータより、データ2削除する。
-     *
-     * @param 引き継ぎデータ JigyoHokokuGeppoParameter
-     * @return boolean
-     */
-    public boolean delete削除状態2(JigyoHokokuGeppoParameter 引き継ぎデータ) {
-        int row = deleteByParameter(引き継ぎデータ, 表番号_07, 集計番号_0801);
-        row = row + deleteByParameter(引き継ぎデータ, 表番号_07, 集計番号_0802);
-        row = row + deleteByParameter(引き継ぎデータ, 表番号_07, 集計番号_0803);
-        row = row + deleteByParameter(引き継ぎデータ, 表番号_07, 集計番号_0804);
-        row = row + deleteByParameter(引き継ぎデータ, 表番号_07, 集計番号_0805);
-        return 0 <= row;
-    }
-
-    private int deleteByParameter(JigyoHokokuGeppoParameter 引き継ぎデータ, Code 表番号, Code 集計番号) {
+    public void deleteByParameter(JigyoHokokuGeppoParameter 引き継ぎデータ) {
         JigyoHokokuGeppoHoseiHako finder = InstanceProvider.create(JigyoHokokuGeppoHoseiHako.class);
         JigyoHokokuGeppoDetalSearchParameter parameter
                 = JigyoHokokuGeppoDetalSearchParameter.createParameterForJigyoHokokuGeppoDetal(
@@ -280,13 +265,13 @@ public class YoshikiNinonanaHoseiHandler {
                         引き継ぎデータ.get行集計対象月(),
                         引き継ぎデータ.get行統計対象区分(),
                         new LasdecCode(引き継ぎデータ.get行市町村コード()),
-                        表番号,
-                        集計番号);
-        return finder.deleteJigyoHokokuGeppoData(parameter);
+                        new Code(引き継ぎデータ.get行表番号()),
+                        new Code(引き継ぎデータ.get行集計番号()));
+        finder.deleteJigyoHokokuGeppoData(parameter);
     }
 
     /**
-     * initializeKihoneria
+     * 画面初期化initializeKihoneriaのメソッドます。
      *
      * @param 引き継ぎデータ JigyoHokokuGeppoParameter
      */
@@ -302,7 +287,7 @@ public class YoshikiNinonanaHoseiHandler {
     }
 
     /**
-     * 修正データリスト
+     * 修正データリストを取得のメソッドます。
      *
      * @param 引き継ぎデータ JigyoHokokuGeppoParameter
      * @param 様式種類 RString
@@ -312,7 +297,7 @@ public class YoshikiNinonanaHoseiHandler {
             JigyoHokokuGeppoParameter 引き継ぎデータ, RString 様式種類) {
         List<JigyoHokokuTokeiData> 修正データリスト = new ArrayList<>();
         List<JigyoHokokuTokeiData> 事業報告月報詳細データリスト = new ArrayList<>();
-        if (様式種類.equalsIgnoreCase(様式種類_039) || 様式種類.equalsIgnoreCase(様式種類_139) || 様式種類.equalsIgnoreCase(様式種類_239)) {
+        if (様式種類.equals(様式種類_039) || 様式種類.equals(様式種類_139) || 様式種類.equals(様式種類_239)) {
             List<JigyoHokokuTokeiData> 利用者負担第四段階
                     = ViewStateHolder.get(ViewStateKeys.利用者負担第四段階, List.class);
             List<JigyoHokokuTokeiData> 利用者負担第三段階
@@ -335,7 +320,7 @@ public class YoshikiNinonanaHoseiHandler {
             事業報告月報詳細データリスト.addAll(再掲利用者負担第三段階);
             事業報告月報詳細データリスト.addAll(再掲利用者負担第二段階);
             修正データリスト = get高額介護修正リスト(事業報告月報詳細データリスト, 修正データリスト);
-        } else if (様式種類.equalsIgnoreCase(様式種類_040) || 様式種類.equalsIgnoreCase(様式種類_140) || 様式種類.equalsIgnoreCase(様式種類_240)) {
+        } else if (様式種類.equals(様式種類_040) || 様式種類.equals(様式種類_140) || 様式種類.equals(様式種類_240)) {
             List<JigyoHokokuTokeiData> 現役並み所得者
                     = ViewStateHolder.get(ViewStateKeys.現役並み所得者, List.class);
             List<JigyoHokokuTokeiData> 一般
@@ -538,14 +523,14 @@ public class YoshikiNinonanaHoseiHandler {
     }
 
     /**
-     * onLoad画面初期化処理
+     * onLoad画面初期化処理のメソッドます。
      *
      * @param 引き継ぎデータ JigyoHokokuGeppoParameter
      * @param 様式種類 RString
      */
     public void onLoad(JigyoHokokuGeppoParameter 引き継ぎデータ, RString 様式種類) {
 
-        if (様式種類.equalsIgnoreCase(様式種類_039) || 様式種類.equalsIgnoreCase(様式種類_139) || 様式種類.equalsIgnoreCase(様式種類_239)) {
+        if (様式種類.equals(様式種類_039) || 様式種類.equals(様式種類_139) || 様式種類.equals(様式種類_239)) {
             List<JigyoHokokuTokeiData> 利用者負担第四段階 = get事業報告月報詳細データリスト(
                     引き継ぎデータ, 表番号_06, 集計番号_0701);
             List<JigyoHokokuTokeiData> 利用者負担第三段階 = get事業報告月報詳細データリスト(
@@ -574,7 +559,7 @@ public class YoshikiNinonanaHoseiHandler {
             ViewStateHolder.put(ViewStateKeys.高額介護_合計, (Serializable) 高額介護_合計);
             ViewStateHolder.put(ViewStateKeys.再掲利用者負担第三段階, (Serializable) 再掲利用者負担第三段階);
             ViewStateHolder.put(ViewStateKeys.再掲利用者負担第二段階, (Serializable) 再掲利用者負担第二段階);
-        } else if (様式種類.equalsIgnoreCase(様式種類_040) || 様式種類.equalsIgnoreCase(様式種類_140) || 様式種類.equalsIgnoreCase(様式種類_240)) {
+        } else if (様式種類.equals(様式種類_040) || 様式種類.equals(様式種類_140) || 様式種類.equals(様式種類_240)) {
             List<JigyoHokokuTokeiData> 現役並み所得者 = get事業報告月報詳細データリスト(
                     引き継ぎデータ, 表番号_07, 集計番号_0801);
             List<JigyoHokokuTokeiData> 一般 = get事業報告月報詳細データリスト(
