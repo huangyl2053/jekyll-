@@ -15,6 +15,8 @@ import jp.co.ndensan.reams.uz.uza.math.Decimal;
 /**
  * 審査会委員一覧情報のMyBatis用パラメータクラスです。
  *
+ * @reamsid_L DBE-3000-030  lijia
+ * 
  */
 @lombok.Getter
 @SuppressWarnings("PMD.UnusedPrivateField")

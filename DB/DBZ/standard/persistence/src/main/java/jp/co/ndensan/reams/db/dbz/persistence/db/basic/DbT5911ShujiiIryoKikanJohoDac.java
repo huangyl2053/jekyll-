@@ -24,6 +24,9 @@ import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
 
 /**
  * 主治医医療機関情報のデータアクセスクラスです。
+ * 
+ * @reamsid_L DBE-9999-021  lijia
+ * 
  */
 public class DbT5911ShujiiIryoKikanJohoDac implements ISaveable<DbT5911ShujiiIryoKikanJohoEntity> {
 

@@ -23,6 +23,9 @@ import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
 
 /**
  * その他機関情報のデータアクセスクラスです。
+ * 
+ * @reamsid_L DBE-9999-021  lijia
+ * 
  */
 public class DbT5914SonotaKikanJohoDac implements ISaveable<DbT5914SonotaKikanJohoEntity> {
 

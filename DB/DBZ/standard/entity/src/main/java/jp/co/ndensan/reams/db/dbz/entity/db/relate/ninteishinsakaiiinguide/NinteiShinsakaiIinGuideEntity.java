@@ -12,6 +12,9 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
  * 審査会委員一覧情報取得_戻る用Entityです。
+ * 
+ * @reamsid_L DBE-3000-030  lijia
+ * 
  */
 @lombok.Getter
 @lombok.Setter
