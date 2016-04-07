@@ -7,26 +7,15 @@ package jp.co.ndensan.reams.db.dbe.batchcontroller.step.homonchosairaisho;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
-import jp.co.ndensan.reams.db.dbe.business.report.chosairaiichiranhyo.ChosaIraiIchiranhyoBodyItem;
-import jp.co.ndensan.reams.db.dbe.business.report.chosairaiichiranhyo.ChosaIraiIchiranhyoHeadItem;
-import jp.co.ndensan.reams.db.dbe.business.report.chosairaiichiranhyo.ChosaIraiIchiranhyoReport;
 import jp.co.ndensan.reams.db.dbe.definition.batchprm.iraisho.GridParameter;
 import jp.co.ndensan.reams.db.dbe.definition.core.reportid.ReportIdDBE;
-import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.core.ChohyoAtesakiKeisho;
 import jp.co.ndensan.reams.db.dbe.definition.processprm.hakkoichiranhyo.HomonChosaIraishoProcessParamter;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.hakkoichiranhyo.HomonChosaIraishoRelateEntity;
-import jp.co.ndensan.reams.db.dbe.entity.report.source.chosairaiichiranhyo.ChosaIraiIchiranhyoReportSource;
 import jp.co.ndensan.reams.db.dbe.persistence.db.mapper.relate.hakkoichiranhyo.IHomonChosaIraishoMapper;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBE;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo;
-import jp.co.ndensan.reams.db.dbz.definition.core.enumeratedtype.shinsei.NinteiShinseiShinseijiKubunCode;
-import jp.co.ndensan.reams.db.dbz.definition.core.seibetsu.Seibetsu;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5201NinteichosaIraiJohoEntity;
-import jp.co.ndensan.reams.db.dbz.service.util.report.ReportUtil;
 import jp.co.ndensan.reams.ur.urz.business.core.association.Association;
 import jp.co.ndensan.reams.ur.urz.business.report.outputjokenhyo.ReportOutputJokenhyoItem;
-import jp.co.ndensan.reams.ur.urz.entity.report.parts.ninshosha.NinshoshaSource;
 import jp.co.ndensan.reams.ur.urz.service.core.association.AssociationFinderFactory;
 import jp.co.ndensan.reams.ur.urz.service.report.outputjokenhyo.IReportOutputJokenhyoPrinter;
 import jp.co.ndensan.reams.ur.urz.service.report.outputjokenhyo.OutputJokenhyoFactory;
@@ -37,36 +26,27 @@ import jp.co.ndensan.reams.uz.uza.batch.process.BatchReportFactory;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchReportWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.IBatchReader;
-import jp.co.ndensan.reams.uz.uza.biz.KamokuCode;
 import jp.co.ndensan.reams.uz.uza.biz.ReportId;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
-import jp.co.ndensan.reams.uz.uza.lang.EraType;
-import jp.co.ndensan.reams.uz.uza.lang.FillType;
-import jp.co.ndensan.reams.uz.uza.lang.FirstYear;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
-import jp.co.ndensan.reams.uz.uza.lang.RDate;
-import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
-import jp.co.ndensan.reams.uz.uza.lang.Separator;
+import jp.co.ndensan.reams.uz.uza.report.IReportSource;
 import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
 import jp.co.ndensan.reams.uz.uza.util.config.BusinessConfig;
 
 /**
  *
- * 帳票「DBE220002_認定調査依頼一覧表」の処理クラスです。
+ * 要介護認定調査票（特記事項）の帳票DBE221042出力処理クラスです。
  *
  * @reamsid_L DBA-0401-140 duanzhanli
  */
-public class IchiranhyoReportProcess extends BatchProcessBase<HomonChosaIraishoRelateEntity> {
+public class TokkijikoOCR_221042Process extends BatchProcessBase<HomonChosaIraishoRelateEntity> {
 
     private static final RString MYBATIS_SELECT_ID = new RString("jp.co.ndensan.reams.db.dbe.persistence.db.mapper."
             + "relate.hakkoichiranhyo.IHomonChosaIraishoMapper.get訪問調査依頼書");
-    private static final ReportId 帳票ID = ReportIdDBE.DBE220002.getReportId();
-    private static final RString 文字列0 = new RString("0");
-    private static final RString 文字列1 = new RString("1");
-    private static final RString 文字列2 = new RString("2");
-    private int 連番 = 1;
+    private static final ReportId 帳票ID = ReportIdDBE.DBE221042.getReportId();
+    private static final RString CONFIGVALUE = new RString("1");
     private static final RString IRAIFROMYMD = new RString("【依頼開始日】");
     private static final RString IRAITOYMD = new RString("【依頼終了日】");
     private static final RString NINTEIOCHOSAIRAISHO = new RString("【認定調査依頼書印刷区分】");
@@ -88,25 +68,17 @@ public class IchiranhyoReportProcess extends BatchProcessBase<HomonChosaIraishoR
     private static final RString NINTEICHOSAHYOOCRGAIKYOU = new RString("【認定調査差異チェック表出力区分】");
     private static final RString NINTEICHOSACHECKHYO = new RString("【認定調査依頼一覧表出力区分】");
     private static final RString ZENKONINTEICHOSAHYO = new RString("【前回認定調査結果との比較表出力区分】");
-    private RString 郵便番号;
-    private RString 住所;
-    private RString 機関名称;
-    private RString 氏名;
-    private RString 事業者番号;
     private IHomonChosaIraishoMapper iHomonChosaIraishoMapper;
-    private List<ChosaIraiIchiranhyoBodyItem> ichiranhyoBodyItemList;
     private HomonChosaIraishoProcessParamter processParamter;
-
     @BatchWriter
-    private BatchReportWriter<ChosaIraiIchiranhyoReportSource> ichiranhyoBatchReportWriter;
-    private ReportSourceWriter<ChosaIraiIchiranhyoReportSource> ichiranhyoReportSourceWriter;
+    private BatchReportWriter<IReportSource> batchReportWriter;
+    private ReportSourceWriter<IReportSource> reportSourceWriter;
     @BatchWriter
     private BatchPermanentTableWriter<DbT5201NinteichosaIraiJohoEntity> dbT5201EntityWriter;
 
     @Override
     protected void initialize() {
         iHomonChosaIraishoMapper = getMapper(IHomonChosaIraishoMapper.class);
-        ichiranhyoBodyItemList = new ArrayList<>();
     }
 
     @Override
@@ -116,75 +88,26 @@ public class IchiranhyoReportProcess extends BatchProcessBase<HomonChosaIraishoR
 
     @Override
     protected void createWriter() {
-        ichiranhyoBatchReportWriter = BatchReportFactory.createBatchReportWriter(帳票ID.value()).create();
-        ichiranhyoReportSourceWriter = new ReportSourceWriter<>(ichiranhyoBatchReportWriter);
+        batchReportWriter = BatchReportFactory.createBatchReportWriter(帳票ID.value()).create();
+        reportSourceWriter = new ReportSourceWriter<>(batchReportWriter);
         dbT5201EntityWriter = new BatchPermanentTableWriter(DbT5201NinteichosaIraiJohoEntity.class);
     }
 
     @Override
     protected void process(HomonChosaIraishoRelateEntity entity) {
-//        // 内部QA：614　Redmine：＃75422　排他制限の確認
-        郵便番号 = entity.get調査委託先住所_郵便番号();
-        住所 = entity.get調査委託先住所();
-        機関名称 = entity.get事業者名称();
-        氏名 = entity.get代表者名();
-        事業者番号 = entity.get事業者番号();
+        // 内部QA：614　Redmine：＃75422　排他制限の確認
         update認定調査依頼情報(entity);
-        ichiranhyoBodyItemList.add(setBodyItem(entity));
     }
 
     @Override
     protected void afterExecute() {
-        if (ichiranhyoBodyItemList != null && !ichiranhyoBodyItemList.isEmpty()) {
-            NinshoshaSource ninshoshaSource = ReportUtil.get認証者情報(SubGyomuCode.DBE認定支援,
-                    帳票ID,
-                    new FlexibleDate(processParamter.getHakkobi()),
-                    ichiranhyoReportSourceWriter);
-            Map<Integer, RString> 通知文Map = ReportUtil.get通知文(SubGyomuCode.DBE認定支援, 帳票ID, KamokuCode.EMPTY, 1);
-            // TODO 文書番号と印刷時点が未設定
-            ChosaIraiIchiranhyoHeadItem ichiranhyoHeadItem = new ChosaIraiIchiranhyoHeadItem(ninshoshaSource.hakkoYMD,
-                    ninshoshaSource.denshiKoin,
-                    ninshoshaSource.ninshoshaYakushokuMei,
-                    ninshoshaSource.ninshoshaYakushokuMei2,
-                    ninshoshaSource.ninshoshaYakushokuMei1,
-                    ninshoshaSource.ninshoshaShimeiKakenai,
-                    ninshoshaSource.ninshoshaShimeiKakeru,
-                    ninshoshaSource.koinMojiretsu,
-                    ninshoshaSource.koinShoryaku,
-                    郵便番号,
-                    住所,
-                    機関名称,
-                    氏名,
-                    get名称付与(),
-                    事業者番号,
-                    通知文Map.get(1),
-                    通知文Map.get(2));
-            ChosaIraiIchiranhyoReport report = ChosaIraiIchiranhyoReport.createFrom(ichiranhyoHeadItem, ichiranhyoBodyItemList);
-            report.writeBy(ichiranhyoReportSourceWriter);
-        }
         バッチ出力条件リストの出力();
-    }
-
-    private ChosaIraiIchiranhyoBodyItem setBodyItem(HomonChosaIraishoRelateEntity entity) {
-        return new ChosaIraiIchiranhyoBodyItem(
-                new RString(String.valueOf(連番++)),
-                entity.get調査員氏名(),
-                entity.get被保険者番号(),
-                get和暦(entity.get認定申請年月日()),
-                NinteiShinseiShinseijiKubunCode.toValue(entity.get認定申請区分_申請時_コード()).toRString(),
-                entity.get被保険者氏名(),
-                entity.get被保険者氏名カナ(),
-                Seibetsu.toValue(entity.get性別()).get名称(),
-                get和暦(entity.get生年月日()),
-                entity.get住所(),
-                entity.get電話番号(),
-                set提出期限(entity));
     }
 
     private void update認定調査依頼情報(HomonChosaIraishoRelateEntity entity) {
         DbT5201NinteichosaIraiJohoEntity dbT5201Entity = iHomonChosaIraishoMapper.get認定調査依頼情報(entity);
         RString 認定調査期限設定方法 = BusinessConfig.get(ConfigNameDBE.認定調査期限設定方法, SubGyomuCode.DBE認定支援);
-        if (文字列1.equals(認定調査期限設定方法)) {
+        if (CONFIGVALUE.equals(認定調査期限設定方法)) {
             switch (processParamter.getTeishutsuKigen().toString()) {
                 case "0":
                     int 期限日数 = Integer.parseInt(BusinessConfig.get(ConfigNameDBE.認定調査期限日数,
@@ -206,9 +129,6 @@ public class IchiranhyoReportProcess extends BatchProcessBase<HomonChosaIraishoR
                     break;
             }
         }
-        dbT5201Entity.setShinseishoKanriNo(new ShinseishoKanriNo(entity.get申請書管理番号()));
-        dbT5201Entity.setNinteichosaIraiRirekiNo(entity.get最大依頼履歴番号());
-        dbT5201Entity.setLogicalDeletedFlag(false);
         RString hakkobi = processParamter.getHakkobi();
         if (!RString.isNullOrEmpty(hakkobi)) {
             dbT5201Entity.setIraishoShutsuryokuYMD(new FlexibleDate(hakkobi));
@@ -220,70 +140,11 @@ public class IchiranhyoReportProcess extends BatchProcessBase<HomonChosaIraishoR
         dbT5201EntityWriter.update(dbT5201Entity);
     }
 
-    private RString get印刷日時() {
-        RStringBuilder systemDateTime = new RStringBuilder();
-        RDateTime datetime = RDate.getNowDateTime();
-        systemDateTime.append(datetime.getDate().wareki().eraType(EraType.KANJI).
-                firstYear(FirstYear.GAN_NEN).
-                separator(Separator.JAPANESE).
-                fillType(FillType.ZERO).toDateString());
-        systemDateTime.append(RString.HALF_SPACE);
-        systemDateTime.append(String.format("%02d", datetime.getHour()));
-        systemDateTime.append(new RString("時"));
-        systemDateTime.append(String.format("%02d", datetime.getMinute()));
-        systemDateTime.append(new RString("分"));
-        systemDateTime.append(String.format("%02d", datetime.getSecond()));
-        systemDateTime.append(new RString("秒"));
-        return systemDateTime.toRString();
-    }
-
-    private RString set提出期限(HomonChosaIraishoRelateEntity entity) {
-        RString 提出期限 = RString.EMPTY;
-        if (文字列1.equals(BusinessConfig.get(ConfigNameDBE.認定調査期限設定方法, SubGyomuCode.DBE認定支援))) {
-            if (文字列0.equals(processParamter.getTeishutsuKigen())) {
-                int 期限日数 = Integer.parseInt(BusinessConfig.get(ConfigNameDBE.主治医意見書作成期限日数,
-                        SubGyomuCode.DBE認定支援).toString());
-                提出期限 = entity.get認定調査依頼年月日() != null && !entity.get認定調査依頼年月日().isEmpty()
-                        ? new RString(entity.get認定調査依頼年月日().plusDay(期限日数).toString()) : RString.EMPTY;
-            } else if (文字列1.equals(processParamter.getTeishutsuKigen())) {
-                提出期限 = RString.EMPTY;
-            } else if (文字列2.equals(processParamter.getTeishutsuKigen())) {
-                提出期限 = processParamter.getKyotsuHizuke();
-            }
-        } else {
-            提出期限 = entity.get認定調査期限年月日();
-        }
-        return 提出期限;
-    }
-
-    private RString get名称付与() {
-        RString key = BusinessConfig.get(ConfigNameDBE.主治医意見書作成依頼書_宛先敬称, SubGyomuCode.DBE認定支援);
-        RString meishoFuyo = RString.EMPTY;
-        if (ChohyoAtesakiKeisho.なし.getコード().equals(key)) {
-            meishoFuyo = RString.EMPTY;
-        } else if (ChohyoAtesakiKeisho.様.getコード().equals(key)) {
-            meishoFuyo = ChohyoAtesakiKeisho.様.get名称();
-        } else if (ChohyoAtesakiKeisho.殿.getコード().equals(key)) {
-            meishoFuyo = ChohyoAtesakiKeisho.殿.get名称();
-        }
-        return meishoFuyo;
-    }
-
-    private RString get和暦(RString 日付) {
-        RString 和暦 = RString.EMPTY;
-        if (!RString.isNullOrEmpty(日付)) {
-            FlexibleDate flexibleDate = new FlexibleDate(日付);
-            和暦 = flexibleDate.wareki().eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN).
-                    separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString();
-        }
-        return 和暦;
-    }
-
     private void バッチ出力条件リストの出力() {
         Association 導入団体クラス = AssociationFinderFactory.createInstance().getAssociation();
         RString 導入団体コード = 導入団体クラス.getLasdecCode_().value();
         RString 市町村名 = 導入団体クラス.get市町村名();
-        RString 出力ページ数 = new RString(String.valueOf(ichiranhyoReportSourceWriter.pageCount().value()));
+        RString 出力ページ数 = new RString(String.valueOf(reportSourceWriter.pageCount().value()));
         RString csv出力有無 = new RString("無し");
         RString csvファイル名 = new RString("－");
         RString ジョブ番号 = new RString("56");
@@ -379,7 +240,7 @@ public class IchiranhyoReportProcess extends BatchProcessBase<HomonChosaIraishoR
                 導入団体コード,
                 市町村名,
                 ジョブ番号,
-                ReportIdDBE.DBE220001.getReportName(),
+                ReportIdDBE.DBE221042.getReportName(),
                 出力ページ数,
                 csv出力有無,
                 csvファイル名,
