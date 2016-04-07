@@ -20,8 +20,9 @@ import jp.co.ndensan.reams.uz.uza.util.db.TableName;
 import jp.co.ndensan.reams.uz.uza.util.db.annotation.TempTableColumnOrder;
 
 /**
- *
  * DbT2002FukaJohoTempTableEntity項目定義クラスです。
+ *
+ * @reamsid_L DBB-9040-070 wangxiaodong
  */
 @OnNextSchema("rgdb")
 public class DbT2002FukaJohoTempTableEntity extends DbTableEntityBase<DbT2002FukaJohoTempTableEntity> implements IDbAccessable {
