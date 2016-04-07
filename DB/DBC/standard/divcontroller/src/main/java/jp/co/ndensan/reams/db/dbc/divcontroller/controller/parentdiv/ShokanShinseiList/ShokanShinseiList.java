@@ -29,6 +29,8 @@ import jp.co.ndensan.reams.uz.uza.util.serialization.DataPassingConverter;
 /**
  * 共有子Div「償還払申請一覧」のイベントを定義した共有子Divです。
  *
+ * @reamsid_L DBC-0960-010 hezhenzhen
+ *
  */
 public class ShokanShinseiList {
 
@@ -134,9 +136,6 @@ public class ShokanShinseiList {
      */
     public ResponseData<ShokanShinseiListDiv> onClick_SelectButton(ShokanShinseiListDiv requestDiv) {
 
-        if (!ResponseHolder.isReRequest()) {
-            return ResponseData.of(requestDiv).addMessage(UrQuestionMessages.処理実行の確認.getMessage()).respond();
-        }
         get選択ボタンcheck(requestDiv);
         return ResponseData.of(requestDiv).respond();
     }

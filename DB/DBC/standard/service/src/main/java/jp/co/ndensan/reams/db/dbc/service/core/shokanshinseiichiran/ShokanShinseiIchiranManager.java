@@ -24,6 +24,8 @@ import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 /**
  * 償還払支給申請リストを取得するクラスです。
  *
+ * @reamsid_L DBC-0960-020 hezhenzhen
+ *
  */
 public class ShokanShinseiIchiranManager {
 
@@ -39,8 +41,7 @@ public class ShokanShinseiIchiranManager {
     /**
      * {@link InstanceProvider#create}にて生成した{@link ShokanShinseiIchiranManager}のインスタンスを返します。
      *
-     * @return // *
-     * {@link InstanceProvider#create}にて生成した{@link ShokanShinseiIchiranManager}のインスタンス
+     * @return // * {@link InstanceProvider#create}にて生成した{@link ShokanShinseiIchiranManager}のインスタンス
      */
     public static ShokanShinseiIchiranManager createInstance() {
         return InstanceProvider.create(ShokanShinseiIchiranManager.class);

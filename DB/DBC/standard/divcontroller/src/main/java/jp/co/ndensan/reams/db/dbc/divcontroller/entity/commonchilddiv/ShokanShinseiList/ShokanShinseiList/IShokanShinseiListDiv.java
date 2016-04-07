@@ -7,6 +7,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.ICommonChildDivBaseProperties;
 
 /*
  * このコードはツールによって生成されました。
+ * @reamsid_L DBC-0960-010 hezhenzhen
  */
 public interface IShokanShinseiListDiv extends ICommonChildDivBaseProperties {
 
