@@ -20,6 +20,8 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
  * 主治医意見書督促状発行のバッチフロークラスです。
+ *
+ * @reamsid_L DBE-0060-040 zhangzhiming
  */
 public class Dbe233001Flow extends BatchFlowBase<Dbe233001FlowParameter> {
 

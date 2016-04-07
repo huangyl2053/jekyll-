@@ -13,6 +13,8 @@ import jp.co.ndensan.reams.db.dbe.entity.db.relate.dbe233001.ShujiiIkenTokusokuj
 
 /**
  * 主治医意見書督促状発行のマッパーインタフェースです。
+ *
+ * @reamsid_L DBE-0060-040 zhangzhiming
  */
 public interface IDbe233001RelateMapper {
 

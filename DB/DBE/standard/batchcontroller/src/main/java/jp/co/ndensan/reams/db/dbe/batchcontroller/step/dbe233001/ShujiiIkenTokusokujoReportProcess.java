@@ -40,6 +40,8 @@ import jp.co.ndensan.reams.uz.uza.report.api.ReportInfo;
 
 /**
  * 主治医意見書督促状発行_バッチフ処理クラスです。
+ *
+ * @reamsid_L DBE-0060-040 zhangzhiming
  */
 public class ShujiiIkenTokusokujoReportProcess extends BatchProcessBase<ShujiiIkenTokusokujoRelateEntity> {
 
