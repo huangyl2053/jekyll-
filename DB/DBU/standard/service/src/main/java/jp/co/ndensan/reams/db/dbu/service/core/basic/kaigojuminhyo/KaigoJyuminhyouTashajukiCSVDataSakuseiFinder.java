@@ -32,8 +32,10 @@ import jp.co.ndensan.reams.uz.uza.util.db.SearchResult;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 
 /**
- *
  * 介護住民票個別事項連携情報作成【他社住基】_CSVデータ作成を管理するクラスです。
+ *
+ * @reamsid_L DBU-0350-030 zhengshukai
+ *
  */
 public class KaigoJyuminhyouTashajukiCSVDataSakuseiFinder {
 

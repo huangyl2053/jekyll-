@@ -11,8 +11,10 @@ import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
- *
  * 介護住民票個別事項連携情報作成【他社住基】12桁CSV用データEntity 介護住民票個別事項連携情報作成【他社住基】15桁CSV用データEntity
+ *
+ * @reamsid_L DBU-0350-030 zhengshukai
+ *
  */
 @lombok.Getter
 @lombok.Setter
