@@ -32,6 +32,8 @@ import jp.co.ndensan.reams.uz.uza.util.config.BusinessConfig;
 /**
  *
  * 介護認定審査会スケジュール表_バッチフ処理クラスです
+ *
+ * @reamsid_L DBE-0130-090 duanzhanli
  */
 public class KaigoNinteiShinsakaiScheduleProcess extends BatchProcessBase<KaigoNinteiShinsakaiScheduleRelateEntity> {
 

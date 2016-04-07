@@ -13,6 +13,8 @@ import lombok.Getter;
 
 /**
  * 介護認定審査会スケジュール表ですためのProcess用パラメータクラスです。
+ *
+ * @reamsid_L DBE-0130-090 duanzhanli
  */
 @SuppressWarnings("PMD.UnusedPrivateField")
 @Getter
