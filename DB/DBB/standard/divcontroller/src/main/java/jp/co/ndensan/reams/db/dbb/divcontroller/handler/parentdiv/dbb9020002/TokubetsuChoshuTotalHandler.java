@@ -171,7 +171,7 @@ public final class TokubetsuChoshuTotalHandler {
                 list.add(kv);
                 調定年度 = 調定年度.minusYear(1);
             }
-        } else if (調定年度.isBeforeOrEquals(調定開始年度)) {
+        } else {
             while (調定年度.isBeforeOrEquals(調定開始年度)) {
                 KeyValueDataSource kv = new KeyValueDataSource(調定開始年度.toDateString(),
                         調定開始年度.wareki().toDateString());
@@ -489,7 +489,7 @@ public final class TokubetsuChoshuTotalHandler {
             div.getTokubetsuChoshu().getTabTokucho().getTplKibetsuHasuJoho().getHasuHeijunkaJoho()
                     .getFuchoKirikaeKeisanHoho().getDdlFuchoKirikaeKeisanHoho()
                     .setSelectedKey(FutsuChoshuKirikaeKeisanHoho.指定期以降重複させる.getコード());
-            // TODO QA No.587
+            // TODO QA No.587(Redmine#81414)
             div.getTokubetsuChoshu().getTabTokucho().getTplKibetsuHasuJoho().getHasuHeijunkaJoho()
                     .getFuchoKirikaeKeisanHoho().getDdlFuchoKirikaeJufukuStKi().setSelectedKey(kiList.get(0).getKey());
         } else {
@@ -605,9 +605,11 @@ public final class TokubetsuChoshuTotalHandler {
         List<KeyValueDataSource> gatsu04List = new ArrayList<>();
         RDate nowDate = RDate.getNowDate();
         gatsu04List.add(new KeyValueDataSource(TokuchoNengakuKijunNendo4Gatsu.当年度.getコード(),
-                get基準年度値(TokuchoNengakuKijunNendo4Gatsu.当年度.get名称(), 調定年度)));
+                get基準年度値(TokuchoNengakuKijunNendo4Gatsu.当年度.getコード(),
+                        TokuchoNengakuKijunNendo4Gatsu.当年度.get名称(), 調定年度)));
         gatsu04List.add(new KeyValueDataSource(TokuchoNengakuKijunNendo4Gatsu.翌年度.getコード(),
-                get基準年度値(TokuchoNengakuKijunNendo4Gatsu.翌年度.get名称(), 調定年度)));
+                get基準年度値(TokuchoNengakuKijunNendo4Gatsu.翌年度.getコード(),
+                        TokuchoNengakuKijunNendo4Gatsu.翌年度.get名称(), 調定年度)));
         div.getTokubetsuChoshu().getTabTokucho().getTplTokubetsuChoshuHosoku().getKaishiTsukiKijunNendo()
                 .getNengakuKijunNendo().getDdl4GatsuKaishiNengakuKijunNendo().setDataSource(gatsu04List);
         RString key_04月開始 = DbBusinessConifg.get(ConfigNameDBB.特別徴収_年額基準年度_4月開始, nowDate,
@@ -617,9 +619,11 @@ public final class TokubetsuChoshuTotalHandler {
 
         List<KeyValueDataSource> gatsu06List = new ArrayList<>();
         gatsu06List.add(new KeyValueDataSource(TokuchoNengakuKijunNendo6Gatsu.当年度.getコード(),
-                get基準年度値(TokuchoNengakuKijunNendo6Gatsu.当年度.get名称(), 調定年度)));
+                get基準年度値(TokuchoNengakuKijunNendo6Gatsu.当年度.getコード(),
+                        TokuchoNengakuKijunNendo6Gatsu.当年度.get名称(), 調定年度)));
         gatsu06List.add(new KeyValueDataSource(TokuchoNengakuKijunNendo6Gatsu.翌年度.getコード(),
-                get基準年度値(TokuchoNengakuKijunNendo6Gatsu.翌年度.get名称(), 調定年度)));
+                get基準年度値(TokuchoNengakuKijunNendo6Gatsu.翌年度.getコード(),
+                        TokuchoNengakuKijunNendo6Gatsu.翌年度.get名称(), 調定年度)));
         div.getTokubetsuChoshu().getTabTokucho().getTplTokubetsuChoshuHosoku().getKaishiTsukiKijunNendo()
                 .getNengakuKijunNendo().getDdl6GatsuKaishiNengakuKijunNendo().setDataSource(gatsu06List);
         RString key_06月開始 = DbBusinessConifg.get(ConfigNameDBB.特別徴収_年額基準年度_6月開始, nowDate,
@@ -629,9 +633,11 @@ public final class TokubetsuChoshuTotalHandler {
 
         List<KeyValueDataSource> gatsu08List = new ArrayList<>();
         gatsu08List.add(new KeyValueDataSource(TokuchoNengakuKijunNendo8Gatsu.当年度.getコード(),
-                get基準年度値(TokuchoNengakuKijunNendo8Gatsu.当年度.get名称(), 調定年度)));
+                get基準年度値(TokuchoNengakuKijunNendo8Gatsu.当年度.getコード(),
+                        TokuchoNengakuKijunNendo8Gatsu.当年度.get名称(), 調定年度)));
         gatsu08List.add(new KeyValueDataSource(TokuchoNengakuKijunNendo8Gatsu.翌年度.getコード(),
-                get基準年度値(TokuchoNengakuKijunNendo8Gatsu.翌年度.get名称(), 調定年度)));
+                get基準年度値(TokuchoNengakuKijunNendo8Gatsu.翌年度.getコード(),
+                        TokuchoNengakuKijunNendo8Gatsu.翌年度.get名称(), 調定年度)));
         div.getTokubetsuChoshu().getTabTokucho().getTplTokubetsuChoshuHosoku().getKaishiTsukiKijunNendo()
                 .getNengakuKijunNendo().getDdl8GatsuKaishiNengakuKijunNendo().setDataSource(gatsu08List);
         RString key_08月開始 = DbBusinessConifg.get(ConfigNameDBB.特別徴収_年額基準年度_8月開始, nowDate,
@@ -640,11 +646,11 @@ public final class TokubetsuChoshuTotalHandler {
                 .getNengakuKijunNendo().getDdl8GatsuKaishiNengakuKijunNendo().setSelectedKey(key_08月開始);
     }
 
-    private RString get基準年度値(RString 定義名, FlexibleYear 調定年度) {
+    private RString get基準年度値(RString キー, RString 定義名, FlexibleYear 調定年度) {
         RStringBuilder rsb = new RStringBuilder();
         rsb.append(定義名);
         rsb.append(括弧_左);
-        rsb.append(調定年度.minusYear(1).wareki().toDateString());
+        rsb.append(調定年度.plusYear(Integer.parseInt(キー.toString()) - 1).wareki().toDateString());
         rsb.append(括弧_右);
         return rsb.toRString();
     }
@@ -674,7 +680,7 @@ public final class TokubetsuChoshuTotalHandler {
                 TokuchoIraikingakuKeisanHoho2Gatsu.年額除12乗本徴収月数除年金支給回数.get略称()));
         div.getTokubetsuChoshu().getTabTokucho().getTplTokubetsuChoshuHosoku().getKeisanHoho()
                 .getIraiKingakuKeisanHoho().getDdl2GatsuKaishiIraiKingakuKeisanHoho().setDataSource(gatsu02List);
-        RString key_02月開始 = DbBusinessConifg.get(ConfigNameDBB.特別徴収_依頼金額計算方法_12月開始, nowDate,
+        RString key_02月開始 = DbBusinessConifg.get(ConfigNameDBB.特別徴収_依頼金額計算方法_2月開始, nowDate,
                 SubGyomuCode.DBB介護賦課);
         div.getTokubetsuChoshu().getTabTokucho().getTplTokubetsuChoshuHosoku().getKeisanHoho()
                 .getIraiKingakuKeisanHoho().getDdl2GatsuKaishiIraiKingakuKeisanHoho().setSelectedKey(key_02月開始);
