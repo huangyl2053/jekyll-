@@ -21,6 +21,8 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 
 /**
  * 老人保健受給者台帳管理Divを制御します。
+ *
+ * @reamsid_L DBU-1110-010 zuotao
  */
 public class DBU0130011Main {
 
