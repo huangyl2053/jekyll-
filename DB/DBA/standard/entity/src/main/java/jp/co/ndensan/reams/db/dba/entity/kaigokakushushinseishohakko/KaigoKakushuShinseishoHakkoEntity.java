@@ -9,6 +9,9 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
  * 介護各種申請書発行情報リストEntity。
+ * 
+ * @reamsid_L DBA-0540-010  lijia
+ * 
  */
 @lombok.Getter
 @lombok.Setter
