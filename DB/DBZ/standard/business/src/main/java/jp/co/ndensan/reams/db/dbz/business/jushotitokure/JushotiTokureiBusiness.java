@@ -15,6 +15,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 /**
  * 住所地特例の一覧データを扱います。
  *
+ * @reamsid_L DBA-0150-010 zhangzhiming
  */
 public class JushotiTokureiBusiness implements Serializable {
 
