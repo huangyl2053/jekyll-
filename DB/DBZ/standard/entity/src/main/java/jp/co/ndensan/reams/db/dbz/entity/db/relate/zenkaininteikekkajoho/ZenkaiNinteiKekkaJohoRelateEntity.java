@@ -13,6 +13,7 @@ import lombok.Setter;
 /**
  *
  * 前回結果情報RelateEntityクラスです。
+ * @reamsid_L DBE-3000-020 dongyabin
  */
 @Getter
 @Setter
