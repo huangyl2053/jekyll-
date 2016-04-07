@@ -30,6 +30,8 @@ import jp.co.ndensan.reams.uz.uza.util.Models;
 
 /**
  * 施設入退所履歴のHandlerクラスです。
+ *
+ * @reamsid_L DBA-0360-030 linghuhang
  */
 public class ShisetsuNyutaishoRirekiKanriHandler {
 
