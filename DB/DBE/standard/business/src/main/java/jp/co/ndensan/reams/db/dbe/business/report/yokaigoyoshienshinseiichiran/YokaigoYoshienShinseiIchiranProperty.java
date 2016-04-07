@@ -13,6 +13,8 @@ import jp.co.ndensan.reams.uz.uza.report.ReportPropertyBase;
 /**
  *
  * 要介護認定・要支援認定等申請者一覧表のプロパティです。
+ *
+ * @reamsid_L DBE-1370-020 sunhaidi
  */
 public class YokaigoYoshienShinseiIchiranProperty extends ReportPropertyBase<YokaigoYoshienShinseiIchiranReportSource> {
 
