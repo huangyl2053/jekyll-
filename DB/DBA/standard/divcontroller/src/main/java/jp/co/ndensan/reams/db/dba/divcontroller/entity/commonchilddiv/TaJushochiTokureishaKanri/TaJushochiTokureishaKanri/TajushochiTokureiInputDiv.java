@@ -19,7 +19,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxDate;
 /**
  * TajushochiTokureiInput のクラスファイル
  *
- * @author 自動生成
+ * @reamsid_L DBA-0200-010 linghuhang
  */
 public class TajushochiTokureiInputDiv extends Panel {
 
