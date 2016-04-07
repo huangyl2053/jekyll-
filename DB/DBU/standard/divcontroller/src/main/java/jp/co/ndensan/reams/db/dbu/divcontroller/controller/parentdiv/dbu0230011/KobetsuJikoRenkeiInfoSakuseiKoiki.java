@@ -21,6 +21,8 @@ import jp.co.ndensan.reams.uz.uza.lang.ApplicationException;
 
 /**
  * 介護住民票個別事項連携情報作成【広域運用】画面Divを制御します。
+ *
+ * @reamsid_L DBU-0550-010 zhangzhiming
  */
 public class KobetsuJikoRenkeiInfoSakuseiKoiki {
 
