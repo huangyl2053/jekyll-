@@ -6,8 +6,10 @@ import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.binding.ICommonChildDivBaseProperties;
 
-/*
+/**
  * このコードはツールによって生成されました。
+ * 
+ * @reamsid_L DBE-3000-040 wangkun
  */
 public interface IKaigoNinteiShinseishaInfoDiv extends ICommonChildDivBaseProperties {
 
