@@ -14,7 +14,9 @@ import jp.co.ndensan.reams.db.dbb.entity.report.hokenryononyutsuchishobook.Hoken
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
- * 納入通知書の帳票のクラスです。
+ * 保険料納入通知書（仮算定）【ブックタイプ】納付書_連帳の帳票クラスです。
+ *
+ * @reamsid_L DBB-9110-040 wangjie2
  */
 public class HokenryoNonyuTsuchishoBookRenchoNofushoEditor implements IHokenryoNonyuTsuchishoBookRenchoNofushoEditor {
 

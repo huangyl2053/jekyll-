@@ -11,6 +11,8 @@ import jp.co.ndensan.reams.uz.uza.report.IReportEditor;
 /**
  *
  * 保険料納入通知書（仮算定）【ブックタイプ】納付書連帳 （口振依頼あり）通知書_連帳 IKarisanteiNonyuTsuchishoBookFuriKaeAriRenchoCoverEditor
+ *
+ * @reamsid_L DBB-9110-040 wangjie2
  */
 public interface IKarisanteiNonyuTsuchishoBookFuriKaeAriRenchoCoverEditor
         extends IReportEditor<KarisanteiNonyuTsuchishoBookFuriKaeAriRenchoCoverSource> {

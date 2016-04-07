@@ -8,6 +8,7 @@ package jp.co.ndensan.reams.db.dbb.business.report.hokenryononyutsuchishobook;
 import jp.co.ndensan.reams.db.dbb.entity.report.hokenryononyutsuchishobook.KarisanteiNonyuTsuchishoBookFuriKaeNashiRenchoCoverSource;
 import jp.co.ndensan.reams.uz.uza.report.Report;
 import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
+import lombok.NonNull;
 
 /**
  *
@@ -33,16 +34,22 @@ public class KarisanteiNonyuTsuchishoBookFuriKaeNashiRenchoCoverReport
      * @return KarisanteiNonyuTsuchishoBookFuriKaeNashiRenchoCoverReport
      * @throws NullPointerException 引数が{@code null}の時
      */
-    public static KarisanteiNonyuTsuchishoBookFuriKaeNashiRenchoCoverReport createFrom(HokenryoNonyuTsuchishoBookItem item) {
+    public static KarisanteiNonyuTsuchishoBookFuriKaeNashiRenchoCoverReport createFrom(@NonNull HokenryoNonyuTsuchishoBookItem item) {
         return new KarisanteiNonyuTsuchishoBookFuriKaeNashiRenchoCoverReport(item);
     }
 
     @Override
     public void writeBy(ReportSourceWriter<KarisanteiNonyuTsuchishoBookFuriKaeNashiRenchoCoverSource> writer) {
         IKarisanteiNonyuTsuchishoBookFuriKaeNashiRenchoCoverEditor editor
-                = new KarisanteiNonyuTsuchishoBookFuriKaeNashiRenchoCoverEditor(item, null, 1, null, null);
+                = new KarisanteiNonyuTsuchishoBookFuriKaeNashiRenchoCoverEditor(item, null, 1);
         IKarisanteiNonyuTsuchishoBookFuriKaeNashiRenchoCoverBuilder builder = new KarisanteiNonyuTsuchishoBookFuriKaeNashiRenchoCoverBuilder(editor);
         writer.writeLine(builder);
     }
 
+//    @Override
+//    public List<NonyuTsuchisho> devidedByPage() {
+//        List<NonyuTsuchisho> reportList = new ArrayList<>();
+//        reportList.add(this);
+//        return reportList;
+//    }
 }

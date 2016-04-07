@@ -19,6 +19,10 @@ import jp.co.ndensan.reams.db.dbb.business.report.tsuchisho.notsu.UniversalPhase
 import jp.co.ndensan.reams.db.dbb.definition.core.ShoriKubun;
 import jp.co.ndensan.reams.db.dbb.entity.report.hokenryononyutsuchishobook.KarisanteiNonyuTsuchishoBookFuriKaeNashiRenchoCoverSource;
 import jp.co.ndensan.reams.db.dbx.business.core.kanri.Kitsuki;
+import jp.co.ndensan.reams.db.dbz.business.core.kaigosofubutsuatesakisource.KaigoSofubutsuAtesakiSource;
+import jp.co.ndensan.reams.db.dbz.business.report.util.EditedAtesaki;
+import jp.co.ndensan.reams.db.dbz.business.report.util.EditedKojin;
+import jp.co.ndensan.reams.db.dbz.business.report.util.EditedKoza;
 import jp.co.ndensan.reams.ur.urz.entity.report.parts.ninshosha.NinshoshaSource;
 import jp.co.ndensan.reams.ur.urz.entity.report.sofubutsuatesaki.SofubutsuAtesakiSource;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -27,8 +31,9 @@ import jp.co.ndensan.reams.uz.uza.math.Decimal;
 
 /**
  *
- * 保険料納入通知書（仮算定）【ブックタイプ】（口振依頼なし）通知書_連帳
- * KarisanteiNonyuTsuchishoBookFuriKaeNashiRenchoCoverEditor
+ * 保険料納入通知書（仮算定）【ブックタイプ】（口振依頼なし）通知書_連帳 KarisanteiNonyuTsuchishoBookFuriKaeNashiRenchoCoverEditor
+ *
+ * @reamsid_L DBB-9110-040 wangjie2
  */
 public class KarisanteiNonyuTsuchishoBookFuriKaeNashiRenchoCoverEditor
         implements IKarisanteiNonyuTsuchishoBookFuriKaeNashiRenchoCoverEditor {
@@ -39,7 +44,6 @@ public class KarisanteiNonyuTsuchishoBookFuriKaeNashiRenchoCoverEditor
     private final List<Kitsuki> 出力期リスト;
     private final int 連番;
     private final NinshoshaSource ninshoshaSource;
-    private final SofubutsuAtesakiSource sofubutsuAtesakiSource;
     private final NofuShoKyotsu 納付書共通;
     private static final int INT3 = 3;
     private static final int INT4 = 4;
@@ -52,24 +56,19 @@ public class KarisanteiNonyuTsuchishoBookFuriKaeNashiRenchoCoverEditor
      * @param item {@link HokenryoNonyuTsuchishoBookItem}
      * @param 納入通知書期情報リスト 納入通知書期情報リスト
      * @param 連番 連番
-     * @param ninshoshaSource ninshoshaSource
-     * @param sofubutsuAtesakiSource sofubutsuAtesakiSource
      */
     protected KarisanteiNonyuTsuchishoBookFuriKaeNashiRenchoCoverEditor(
             HokenryoNonyuTsuchishoBookItem item,
             List<NonyuTsuchiShoKiJoho> 納入通知書期情報リスト,
-            int 連番,
-            NinshoshaSource ninshoshaSource,
-            SofubutsuAtesakiSource sofubutsuAtesakiSource) {
+            int 連番) {
         this.仮算定納入通知書情報 = null == item ? new KariSanteiNonyuTsuchiShoJoho() : item.get仮算定納入通知書情報();
         this.納入通知書期情報リスト = 納入通知書期情報リスト;
         this.編集後仮算定通知書共通情報 = null == 仮算定納入通知書情報.get編集後仮算定通知書共通情報()
                 ? new EditedKariSanteiTsuchiShoKyotsu() : 仮算定納入通知書情報.get編集後仮算定通知書共通情報();
         this.出力期リスト = 仮算定納入通知書情報.get出力期リスト().isEmpty() ? new ArrayList<Kitsuki>() : 仮算定納入通知書情報.get出力期リスト();
         this.連番 = 連番;
-        this.ninshoshaSource = ninshoshaSource;
-        this.sofubutsuAtesakiSource = sofubutsuAtesakiSource;
-        this.納付書共通 = new KariSanteiNonyuTsuchiShoJoho().equals(仮算定納入通知書情報) ? null : 仮算定納入通知書情報.get納付書共通();
+        this.ninshoshaSource = item.getNinshoshaSource();
+        this.納付書共通 = null == 仮算定納入通知書情報 ? new NofuShoKyotsu() : 仮算定納入通知書情報.get納付書共通();
     }
 
     @Override
@@ -82,49 +81,62 @@ public class KarisanteiNonyuTsuchishoBookFuriKaeNashiRenchoCoverEditor
     }
 
     private void editCompNinshosha(KarisanteiNonyuTsuchishoBookFuriKaeNashiRenchoCoverSource source) {
-        source.denshiKoin = ninshoshaSource.denshiKoin;
-        source.hakkoYMD = ninshoshaSource.hakkoYMD;
-        source.ninshoshaYakushokuMei = ninshoshaSource.ninshoshaYakushokuMei;
-        source.ninshoshaYakushokuMei1 = ninshoshaSource.ninshoshaYakushokuMei1;
-        source.koinMojiretsu = ninshoshaSource.koinMojiretsu;
-        source.ninshoshaShimeiKakenai = ninshoshaSource.ninshoshaShimeiKakenai;
-        source.ninshoshaShimeiKakeru = ninshoshaSource.ninshoshaShimeiKakeru;
-        source.ninshoshaYakushokuMei2 = ninshoshaSource.ninshoshaYakushokuMei2;
-        source.koinShoryaku = ninshoshaSource.koinShoryaku;
+        if (ninshoshaSource != null) {
+            source.denshiKoin = ninshoshaSource.denshiKoin;
+            source.hakkoYMD = ninshoshaSource.hakkoYMD;
+            source.ninshoshaYakushokuMei = ninshoshaSource.ninshoshaYakushokuMei;
+            source.ninshoshaYakushokuMei1 = ninshoshaSource.ninshoshaYakushokuMei1;
+            source.koinMojiretsu = ninshoshaSource.koinMojiretsu;
+            source.ninshoshaShimeiKakenai = ninshoshaSource.ninshoshaShimeiKakenai;
+            source.ninshoshaShimeiKakeru = ninshoshaSource.ninshoshaShimeiKakeru;
+            source.ninshoshaYakushokuMei2 = ninshoshaSource.ninshoshaYakushokuMei2;
+            source.koinShoryaku = ninshoshaSource.koinShoryaku;
+        }
     }
 
     private void editCompSofubutsuAtesaki(KarisanteiNonyuTsuchishoBookFuriKaeNashiRenchoCoverSource source) {
-        source.customerBarCode = sofubutsuAtesakiSource.customerBarCode;
-        source.dainoKubunMei = sofubutsuAtesakiSource.dainoKubunMei;
-        source.gyoseiku = sofubutsuAtesakiSource.gyoseiku;
-        source.jusho1 = sofubutsuAtesakiSource.jusho1;
-        source.jusho2 = sofubutsuAtesakiSource.jusho2;
-        source.jusho3 = sofubutsuAtesakiSource.jusho3;
-        source.jushoText = sofubutsuAtesakiSource.jushoText;
-        source.kakkoLeft1 = sofubutsuAtesakiSource.kakkoLeft1;
-        source.kakkoLeft2 = sofubutsuAtesakiSource.kakkoLeft2;
-        source.kakkoRight1 = sofubutsuAtesakiSource.kakkoRight1;
-        source.kakkoRight2 = sofubutsuAtesakiSource.kakkoRight2;
-        source.katagaki1 = sofubutsuAtesakiSource.katagaki1;
-        source.katagaki2 = sofubutsuAtesakiSource.katagaki2;
-        source.katagakiSmall1 = sofubutsuAtesakiSource.katagakiSmall1;
-        source.katagakiSmall2 = sofubutsuAtesakiSource.katagakiSmall2;
-        source.katagakiText = sofubutsuAtesakiSource.katagakiText;
-        source.meishoFuyo1 = sofubutsuAtesakiSource.meishoFuyo1;
-        source.meishoFuyo2 = sofubutsuAtesakiSource.meishoFuyo2;
-        source.samaBun1 = sofubutsuAtesakiSource.samaBun1;
-        source.samaBun2 = sofubutsuAtesakiSource.samaBun2;
-        source.samabunShimei1 = sofubutsuAtesakiSource.samabunShimei1;
-        source.samabunShimei2 = sofubutsuAtesakiSource.samabunShimei2;
-        source.samabunShimeiSmall1 = sofubutsuAtesakiSource.samabunShimeiSmall1;
-        source.samabunShimeiSmall2 = sofubutsuAtesakiSource.samabunShimeiSmall2;
-        source.samabunShimeiText = sofubutsuAtesakiSource.samabunShimeiText;
-        source.shimei1 = sofubutsuAtesakiSource.shimei1;
-        source.shimei2 = sofubutsuAtesakiSource.shimei2;
-        source.shimeiSmall1 = sofubutsuAtesakiSource.shimeiSmall1;
-        source.shimeiSmall2 = sofubutsuAtesakiSource.shimeiSmall2;
-        source.shimeiText = sofubutsuAtesakiSource.shimeiText;
-        source.yubinNo = sofubutsuAtesakiSource.yubinNo;
+        EditedAtesaki 編集後宛先 = null == 編集後仮算定通知書共通情報 ? null : 編集後仮算定通知書共通情報.get編集後宛先();
+        KaigoSofubutsuAtesakiSource kaigoSofubutsuAtesakiSource = null;
+        if (編集後宛先 != null) {
+            kaigoSofubutsuAtesakiSource = 編集後宛先.getSofubutsuAtesakiSource();
+        }
+        if (kaigoSofubutsuAtesakiSource != null) {
+            SofubutsuAtesakiSource sofubutsuAtesakiSource = kaigoSofubutsuAtesakiSource.get送付物宛先ソース();
+            if (sofubutsuAtesakiSource != null) {
+                source.customerBarCode = sofubutsuAtesakiSource.customerBarCode;
+                source.dainoKubunMei = sofubutsuAtesakiSource.dainoKubunMei;
+                source.gyoseiku = sofubutsuAtesakiSource.gyoseiku;
+                source.jusho1 = sofubutsuAtesakiSource.jusho1;
+                source.jusho2 = sofubutsuAtesakiSource.jusho2;
+                source.jusho3 = sofubutsuAtesakiSource.jusho3;
+                source.jushoText = sofubutsuAtesakiSource.jushoText;
+                source.kakkoLeft1 = sofubutsuAtesakiSource.kakkoLeft1;
+                source.kakkoLeft2 = sofubutsuAtesakiSource.kakkoLeft2;
+                source.kakkoRight1 = sofubutsuAtesakiSource.kakkoRight1;
+                source.kakkoRight2 = sofubutsuAtesakiSource.kakkoRight2;
+                source.katagaki1 = sofubutsuAtesakiSource.katagaki1;
+                source.katagaki2 = sofubutsuAtesakiSource.katagaki2;
+                source.katagakiSmall1 = sofubutsuAtesakiSource.katagakiSmall1;
+                source.katagakiSmall2 = sofubutsuAtesakiSource.katagakiSmall2;
+                source.katagakiText = sofubutsuAtesakiSource.katagakiText;
+                source.meishoFuyo1 = sofubutsuAtesakiSource.meishoFuyo1;
+                source.meishoFuyo2 = sofubutsuAtesakiSource.meishoFuyo2;
+                source.samaBun1 = sofubutsuAtesakiSource.samaBun1;
+                source.samaBun2 = sofubutsuAtesakiSource.samaBun2;
+                source.samabunShimei1 = sofubutsuAtesakiSource.samabunShimei1;
+                source.samabunShimei2 = sofubutsuAtesakiSource.samabunShimei2;
+                source.samabunShimeiSmall1 = sofubutsuAtesakiSource.samabunShimeiSmall1;
+                source.samabunShimeiSmall2 = sofubutsuAtesakiSource.samabunShimeiSmall2;
+                source.samabunShimeiText = sofubutsuAtesakiSource.samabunShimeiText;
+                source.shimei1 = sofubutsuAtesakiSource.shimei1;
+                source.shimei2 = sofubutsuAtesakiSource.shimei2;
+                source.shimeiSmall1 = sofubutsuAtesakiSource.shimeiSmall1;
+                source.shimeiSmall2 = sofubutsuAtesakiSource.shimeiSmall2;
+                source.shimeiText = sofubutsuAtesakiSource.shimeiText;
+                source.yubinNo = sofubutsuAtesakiSource.yubinNo;
+                //世帯主名 様方
+            }
+        }
     }
 
     private void editCompNofushoBookItem(KarisanteiNonyuTsuchishoBookFuriKaeNashiRenchoCoverSource source) {
@@ -207,15 +219,7 @@ public class KarisanteiNonyuTsuchishoBookFuriKaeNashiRenchoCoverEditor
         source.HyojicodeName1 = 編集後仮算定通知書共通情報.get表示コード１名();
         source.HyojicodeName2 = 編集後仮算定通知書共通情報.get表示コード２名();
         source.HyojicodeName3 = 編集後仮算定通知書共通情報.get表示コード３名();
-        //編集後個人
-        source.setaiCode = null;
-        source.tsuchishoNo = 編集後仮算定通知書共通情報.get通知書番号().getColumnValue();
-        //編集後口座
-        source.bankCode = null;
-        source.kozaShurui = null;
-        source.kozaNo = null;
-        source.bankName = null;
-        source.kozaMeiginin = null;
+        edit編集後個人And編集後口座(source);
         source.keisanMeisaishoNendo = RStringUtil.convert半角to全角(編集後仮算定通知書共通情報.get調定年度_年度なし());
         source.keisanMeisaishoKi1 = 納入通知書期情報リストの一番目.get期表記();
         source.keisanMeisaishoTsuki1 = 納入通知書期情報リストの一番目.get月表記();
@@ -242,10 +246,6 @@ public class KarisanteiNonyuTsuchishoBookFuriKaeNashiRenchoCoverEditor
         source.keisanMeisaishoNokigenKaishi6 = 納入通知書期情報リストの六番目.get納期開始日表記();
         source.keisanMeisaishoNokigenShuryo6 = 納入通知書期情報リストの六番目.get納期終了日表記();
         source.keisanMeisaishoTsuchishoNo = 編集後仮算定通知書共通情報.get通知書番号().getColumnValue();
-        //編集後個人
-        source.kaisanMeisaishoHihokenshaName = null;
-        source.keisanMeisaishoSetaiCode = null;
-        source.kaisanMeisaishoSetaiNushiName = null;
         source.keisanMeisaishoKaishiKi = get最小の月();
         source.kaisanMeisaishoShuryoKi = get最大の月();
         source.keisanMeisaishoNendo1 = 前年度情報.get前年度賦課年度();
@@ -270,12 +270,28 @@ public class KarisanteiNonyuTsuchishoBookFuriKaeNashiRenchoCoverEditor
         source.keisanMeisaishoKarisanteiGokeiGaku = new RString(更正後.get更正後介護保険料仮徴収額合計().toString());
         source.nokibetsuMeisaishoNendo = RStringUtil.convert半角to全角(編集後仮算定通知書共通情報.get調定年度_年度なし());
         source.nokibetsuMeisaishoTsuchishoNo = 編集後仮算定通知書共通情報.get通知書番号().getColumnValue();
-        //編集後個人
-        source.nokibetsuMeisaishoSetaiCode = null;
-        //TODO
-        source.nokibetsuMeisaishoHohokenshaName = null;
+        source.nokibetsuMeisaishoHohokenshaName = 納付書共通.get被保険者氏名().getColumnValue();
         editレイヤ１_1(source, 更正後, 納入通知書期情報リストの一番目, 納入通知書期情報リストの二番目,
                 納入通知書期情報リストの三番目, 納入通知書期情報リストの四番目, 納入通知書期情報リストの五番目, 納入通知書期情報リストの六番目);
+    }
+
+    private void edit編集後個人And編集後口座(KarisanteiNonyuTsuchishoBookFuriKaeNashiRenchoCoverSource source) {
+        EditedKojin 編集後個人 = 編集後仮算定通知書共通情報.get編集後個人();
+        EditedKoza 編集後口座 = 編集後仮算定通知書共通情報.get編集後口座();
+        if (編集後個人 != null) {
+            source.setaiCode = 編集後個人.get世帯コード().getColumnValue();
+            source.kaisanMeisaishoHihokenshaName = 編集後個人.get名称().getName().getColumnValue();
+            source.keisanMeisaishoSetaiCode = 編集後個人.get世帯コード().getColumnValue();
+            source.kaisanMeisaishoSetaiNushiName = 編集後個人.get世帯主名().getColumnValue();
+            source.nokibetsuMeisaishoSetaiCode = 編集後個人.get世帯コード().getColumnValue();
+        }
+        if (編集後口座 != null) {
+            source.bankCode = 編集後口座.get金融機関コードCombinedWith支店コード();
+            source.kozaShurui = 編集後口座.get口座種別略称();
+            source.kozaNo = 編集後口座.get口座番号Or通帳記号番号();
+            source.bankName = 編集後口座.get金融機関名CombinedWith支店名();
+            source.kozaMeiginin = 編集後口座.get口座名義人優先();
+        }
     }
 
     private void editレイヤ１_1(KarisanteiNonyuTsuchishoBookFuriKaeNashiRenchoCoverSource source,
