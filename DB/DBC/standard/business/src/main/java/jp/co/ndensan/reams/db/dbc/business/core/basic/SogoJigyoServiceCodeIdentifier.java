@@ -5,16 +5,17 @@
  */
 package jp.co.ndensan.reams.db.dbc.business.core.basic;
 
-import lombok.Value;
 import java.io.Serializable;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ServiceKomokuCode;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ServiceShuruiCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
+import lombok.Value;
 
 /**
  * 介護予防・日常生活支援総合事業サービスコードの識別子です。
  */
 @Value
+@SuppressWarnings("PMD.UnusedPrivateField")
 public class SogoJigyoServiceCodeIdentifier implements Serializable {
 
     private final ServiceShuruiCode サービス種類コード;

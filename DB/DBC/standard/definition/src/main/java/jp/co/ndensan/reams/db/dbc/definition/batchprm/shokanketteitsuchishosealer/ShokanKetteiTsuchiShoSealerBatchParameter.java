@@ -17,6 +17,7 @@ import lombok.Setter;
  */
 @Getter
 @Setter
+@SuppressWarnings("PMD.UnusedPrivateField")
 public class ShokanKetteiTsuchiShoSealerBatchParameter {
 
     private FlexibleDate hakkoYMD;

@@ -66,6 +66,8 @@ public class KyotakuJikoTodokedeDetail {
     }
 
     private void setKihonData(KyotakuJikoTodokedeDetailDiv panel) {
+        // TODO 未使用のメソッド引数があります。 Checkstyle 対応。
+        panel.getKyotakuJikoTodokedeKihon();
 //        ControlGenerator cg = new ControlGenerator(getYaml().get(0));
 //        ShikibetsuCode 識別コード = new ShikibetsuCode(cg.getAsRString("識別コード"));
 //        int rowId = 0;
@@ -74,6 +76,8 @@ public class KyotakuJikoTodokedeDetail {
     }
 
     private void setRirekiList(KyotakuJikoTodokedeDetailDiv panel) {
+        // TODO 未使用のメソッド引数があります。 Checkstyle 対応。
+        panel.getKyotakuJikoTodokedeKihon();
 //        Button btn = new Button();
 //        for (int i = 3; i < 5; i++) {
 //            ControlGenerator cg = new ControlGenerator(getYaml().get(i));
@@ -390,6 +394,9 @@ public class KyotakuJikoTodokedeDetail {
      * @param pattern pattern
      */
     private void setMeisaiData(KyotakuJikoTodokedeDetailDiv panel, 画面表示 pattern) {
+        // TODO 未使用のメソッド引数があります。 Checkstyle 対応。
+        panel.getKyotakuJikoTodokedeKihon();
+        pattern.toString();
 
 //        KyotakuJikoTodokedeMeisaiDiv meisai = panel.getTabKyotakuServiceJikoSakuseiTodokede().
 //                getTplKyotakuJikoTodokedeDetailRireki().getKyotakuJikoTodokedeMeisai();

@@ -16,6 +16,7 @@ import lombok.Value;
  * 高額合算申請書加入歴の識別子です。
  */
 @Value
+@SuppressWarnings("PMD.UnusedPrivateField")
 public class KogakuGassanShinseishoKanyurekiIdentifier implements Serializable {
 
     private final HihokenshaNo 被保険者番号;

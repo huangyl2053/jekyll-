@@ -5,18 +5,11 @@
  */
 package jp.co.ndensan.reams.db.dbc.divcontroller.controller.parentdiv.dbc0720011;
 
-import java.util.ArrayList;
-import java.util.List;
 import jp.co.ndensan.reams.db.dbc.divcontroller.controller.parentdiv.PaymentMethod;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.JutakuKaishuShinseiDetailInput.JutakuKaishuShinseiDetailInputDiv;
-import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.JutakuKaishuShinseiDetailInput.dgJutakuKaishuDetail_Row;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.JutakuKaishuShinseiPanelDiv;
-import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.dgMishinsaShikyuShinsei_Row;
-import jp.co.ndensan.reams.db.dbz.divcontroller.controller.parentdiv.KozaPayment;
-import jp.co.ndensan.reams.db.dbz.divcontroller.controller.parentdiv.ShinseishaInfo;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.ui.binding.DataGrid;
 import jp.co.ndensan.reams.uz.uza.ui.binding.RowState;
 
 /**
@@ -90,7 +83,8 @@ public class JutakuKaishuShinseiPanel {
     }
 
     /**
-     * 住宅改修費支給申請審査 申請を追加するボタン押下後、申請内容の情報を表示する（明細を追加するボタン押下後、住宅改修明細を表示、改修内容などは、クリア処理が行う）
+     * 住宅改修費支給申請審査
+     * 申請を追加するボタン押下後、申請内容の情報を表示する（明細を追加するボタン押下後、住宅改修明細を表示、改修内容などは、クリア処理が行う）
      *
      * @param panel JutakuKaishuShinseiPanelDiv
      * @return PanelDivのResponseData
@@ -107,7 +101,7 @@ public class JutakuKaishuShinseiPanel {
     /**
      * 支払い方法ラジオボタンにより表示内容を変更する。
      *
-     * @param panel
+     * @param panel JutakuKaishuShinseiPanelDiv
      * @return response
      */
     public ResponseData<JutakuKaishuShinseiPanelDiv> onClick_radPayMethod(JutakuKaishuShinseiPanelDiv panel) {
@@ -140,21 +134,18 @@ public class JutakuKaishuShinseiPanel {
 //        //口座振替申請情報（UR)
 //        setShinseiKozaInfo(panel, ymlDataName);
 //    }
-
-    private void setRowShikyuShinseiData(JutakuKaishuShinseiPanelDiv panel, dgMishinsaShikyuShinsei_Row selectedRow) {
-
-        List<dgJutakuKaishuDetail_Row> arraydata = createRowShikyuShinseiTestData(panel, selectedRow);
-        DataGrid<dgJutakuKaishuDetail_Row> grid = panel.getJutakuKaishuShinsaShinseiContents().
-                getJutakuKaishuShinseiDetailInput().getDgJutakuKaishuDetail();
-        grid.setDataSource(arraydata);
-    }
-
-    private void setJutakuOwnerData(JutakuKaishuShinseiPanelDiv panel, String ymlDataName) {
-//        //被保険者との関係
-//        panel.getJutakuKaishuShinsaShinseiContents().getTxtRelationWithHihokensha().
-//                setValue(new RString(ymlData.get(0).get("relationWithHihokensha").toString()));
-    }
-
+//    private void setRowShikyuShinseiData(JutakuKaishuShinseiPanelDiv panel, dgMishinsaShikyuShinsei_Row selectedRow) {
+//
+//        List<dgJutakuKaishuDetail_Row> arraydata = createRowShikyuShinseiTestData(panel, selectedRow);
+//        DataGrid<dgJutakuKaishuDetail_Row> grid = panel.getJutakuKaishuShinsaShinseiContents().
+//                getJutakuKaishuShinseiDetailInput().getDgJutakuKaishuDetail();
+//        grid.setDataSource(arraydata);
+//    }
+//    private void setJutakuOwnerData(JutakuKaishuShinseiPanelDiv panel, String ymlDataName) {
+////        //被保険者との関係
+////        panel.getJutakuKaishuShinsaShinseiContents().getTxtRelationWithHihokensha().
+////                setValue(new RString(ymlData.get(0).get("relationWithHihokensha").toString()));
+//    }
     private void setZizenShinseiDetailInput(JutakuKaishuShinseiDetailInputDiv div) {
 
         div.getJutakuKaishuDetailInput().getTxtKaishuContents().setValue(
@@ -171,8 +162,7 @@ public class JutakuKaishuShinseiPanel {
                 div.getDgJutakuKaishuDetail().getClickedItem().getTxtMitsumoriAmount().getValue());
     }
 
-    private void setSummary(JutakuKaishuShinseiPanelDiv panel, String ymlDataName) {
-
+//    private void setSummary(JutakuKaishuShinseiPanelDiv panel, String ymlDataName) {
 //        String payTotalMae = ymlData.get(2).get("payTotalMae").toString();
 //        String hokenSeikyuAmountMae = ymlData.get(2).get("hokenSeikyuAmountMae").toString();
 //        String riyoshaFutanAmountMae = ymlData.get(2).get("riyoshaFutanAmountMae").toString();
@@ -188,15 +178,12 @@ public class JutakuKaishuShinseiPanel {
 ////                getTxtHokenKyufuAmountMae().setValue(new Decimal(riyoshaFutanAmountMae));
 //        panel.getJutakuKaishuShinsaResetInfo().getJutakuKaishuShinsaResetInfoSummary().getJutakuKaishuShinseiKyufugakuSummary().getTblSeikyuSummary().
 //                getTxtRiyoshaFutanAmountMae().setValue(new Decimal(limitOverAmountMae));
-    }
-
-    private void setShinseishaInfo(JutakuKaishuShinseiPanelDiv panel, String ymlDataName) {
-
-        ShinseishaInfo.setData(panel.getJutakuKaishuShinsaShinseiContents().getJutakuKaishuShinseisha(), 0);
-    }
-
-    private void setShinseiReason(JutakuKaishuShinseiPanelDiv panel, String ymlDataName) {
-
+//    }
+//    private void setShinseishaInfo(JutakuKaishuShinseiPanelDiv panel, String ymlDataName) {
+//
+//        ShinseishaInfo.setData(panel.getJutakuKaishuShinsaShinseiContents().getJutakuKaishuShinseisha(), 0);
+//    }
+//    private void setShinseiReason(JutakuKaishuShinseiPanelDiv panel, String ymlDataName) {
 //        String createDate = ymlData.get(4).get("createDate").toString();
 //        String creationJigyoshaNo = ymlData.get(4).get("creationJigyoshaNo").toString();
 //        String creationJigyoshaName = ymlData.get(4).get("creationJigyoshaName").toString();
@@ -215,16 +202,14 @@ public class JutakuKaishuShinseiPanel {
 //                getTxtCreatorKanaName().setValue(new RString(creatorKanaName));
 //        panel.getJutakuKaishuShinsaShinseiContents().getJutakuKaishuShinseiReason().
 //                getTxtCreatorName().setValue(new RString(creatorName));
-    }
-
-    private void setShinseiKozaInfo(JutakuKaishuShinseiPanelDiv panel, String ymlDataName) {
-
-        panel.getJutakuKaishuShinsaShinseiContents().getJutakuKaishuShinsaKoza().getRadPayMethod().setSelectedItem(new RString("payToKoza"));
-
-        int rowId = 0;
-        KozaPayment.setData(panel.getJutakuKaishuShinsaShinseiContents().getJutakuKaishuShinsaKoza().getKozaPayment(), rowId);
-    }
-
+//    }
+//    private void setShinseiKozaInfo(JutakuKaishuShinseiPanelDiv panel, String ymlDataName) {
+//
+//        panel.getJutakuKaishuShinsaShinseiContents().getJutakuKaishuShinsaKoza().getRadPayMethod().setSelectedItem(new RString("payToKoza"));
+//
+//        int rowId = 0;
+//        KozaPayment.setData(panel.getJutakuKaishuShinsaShinseiContents().getJutakuKaishuShinsaKoza().getKozaPayment(), rowId);
+//    }
     private void setModifiedDataToList(JutakuKaishuShinseiDetailInputDiv div, int clickedRowId) {
         //TODO clickedRowIdで-1が取れてしまうので暫定対応。
         clickedRowId = 0;
@@ -244,11 +229,10 @@ public class JutakuKaishuShinseiPanel {
      住宅改修明細をセットします。
      */
 
-    private List<dgJutakuKaishuDetail_Row> createRowShikyuShinseiTestData(
-            JutakuKaishuShinseiPanelDiv panel, dgMishinsaShikyuShinsei_Row selectedRow) {
-
-        List<dgJutakuKaishuDetail_Row> arrayData = new ArrayList<>();
-
+//    private List<dgJutakuKaishuDetail_Row> createRowShikyuShinseiTestData(
+//            JutakuKaishuShinseiPanelDiv panel, dgMishinsaShikyuShinsei_Row selectedRow) {
+//
+//        List<dgJutakuKaishuDetail_Row> arrayData = new ArrayList<>();
 //        String ymlDataName = "MishinsaShikyuShinseiDgJutakKaishiDetailRow.yml";
 //
 //        String chakkoDueDate = ymlData.get(0).get("chakkoDueDate").toString();
@@ -269,8 +253,8 @@ public class JutakuKaishuShinseiPanel {
 //        );
 //
 //        arrayData.add(item);
-        return arrayData;
-    }
+//        return arrayData;
+//    }
 
     /*
      * 引数を元にデータグリッド内に挿入する支給申請データを作成します。
@@ -295,7 +279,6 @@ public class JutakuKaishuShinseiPanel {
 //
 //        return rowShikyuShinseiListData;
 //    }
-
     private void setJutakuKaishuJizenShinseiAddDetailInput(JutakuKaishuShinseiPanelDiv panel) {
 
         //改修の内容をクリア

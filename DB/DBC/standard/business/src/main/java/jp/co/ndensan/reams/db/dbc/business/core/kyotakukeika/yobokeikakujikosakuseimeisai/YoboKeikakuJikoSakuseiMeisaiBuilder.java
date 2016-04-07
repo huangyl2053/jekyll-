@@ -25,7 +25,7 @@ public class YoboKeikakuJikoSakuseiMeisaiBuilder {
     private final DbT3011YoboKeikakuJikoSakuseiMeisaiEntity entity;
     private final YoboKeikakuJikoSakuseiMeisaiIdentifier id;
     private final Models<YoboKeikakuJikoSakuseiGokeiIdentifier, YoboKeikakuJikoSakuseiGokei> yoboKeikakuJikoSakuseiGokei;
-    private final Models<YoboKeikakuJikoSakuseiTankiRiyoNissuIdentifier, YoboKeikakuJikoSakuseiTankiRiyoNissu> yoboKeikakuJikoSakuseiTankiRiyoNissu;
+    private final Models<YoboKeikakuJikoSakuseiTankiRiyoNissuIdentifier, YoboKeikakuJikoSakuseiTankiRiyoNissu> yoboJikoSakuseiTankiRiyoNissu;
 
     /**
      * {@link DbT3011YoboKeikakuJikoSakuseiMeisaiEntity}より{@link YoboKeikakuJikoSakuseiMeisai}の編集用Builderクラスを生成します。
@@ -33,19 +33,19 @@ public class YoboKeikakuJikoSakuseiMeisaiBuilder {
      * @param entity {@link DbT3011YoboKeikakuJikoSakuseiMeisaiEntity}
      * @param id {@link YoboKeikakuJikoSakuseiMeisaiIdentifier}
      * @param yoboKeikakuJikoSakuseiGokei {@link Models}
-     * @param yoboKeikakuJikoSakuseiTankiRiyoNissu {@link Models}
+     * @param yoboJikoSakuseiTankiRiyoNissu {@link Models}
      *
      */
     YoboKeikakuJikoSakuseiMeisaiBuilder(
             DbT3011YoboKeikakuJikoSakuseiMeisaiEntity entity,
             YoboKeikakuJikoSakuseiMeisaiIdentifier id,
             Models<YoboKeikakuJikoSakuseiGokeiIdentifier, YoboKeikakuJikoSakuseiGokei> yoboKeikakuJikoSakuseiGokei,
-            Models<YoboKeikakuJikoSakuseiTankiRiyoNissuIdentifier, YoboKeikakuJikoSakuseiTankiRiyoNissu> yoboKeikakuJikoSakuseiTankiRiyoNissu
+            Models<YoboKeikakuJikoSakuseiTankiRiyoNissuIdentifier, YoboKeikakuJikoSakuseiTankiRiyoNissu> yoboJikoSakuseiTankiRiyoNissu
     ) {
         this.entity = entity.clone();
         this.id = id;
         this.yoboKeikakuJikoSakuseiGokei = yoboKeikakuJikoSakuseiGokei.clone();
-        this.yoboKeikakuJikoSakuseiTankiRiyoNissu = yoboKeikakuJikoSakuseiTankiRiyoNissu.clone();
+        this.yoboJikoSakuseiTankiRiyoNissu = yoboJikoSakuseiTankiRiyoNissu.clone();
 
     }
 
@@ -222,7 +222,7 @@ public class YoboKeikakuJikoSakuseiMeisaiBuilder {
      */
     public YoboKeikakuJikoSakuseiMeisaiBuilder setYoboKeikakuJikoSakuseiTankiRiyoNissu(YoboKeikakuJikoSakuseiTankiRiyoNissu 予防給付計画自己作成短期利用日数) {
         if (hasSameIdentifier(予防給付計画自己作成短期利用日数.identifier())) {
-            yoboKeikakuJikoSakuseiTankiRiyoNissu.add(予防給付計画自己作成短期利用日数);
+            yoboJikoSakuseiTankiRiyoNissu.add(予防給付計画自己作成短期利用日数);
             return this;
         }
         throw new IllegalArgumentException(UrErrorMessages.不正.toString());
@@ -240,6 +240,6 @@ public class YoboKeikakuJikoSakuseiMeisaiBuilder {
      * @return {@link YoboKeikakuJikoSakuseiMeisai}のインスタンス
      */
     public YoboKeikakuJikoSakuseiMeisai build() {
-        return new YoboKeikakuJikoSakuseiMeisai(entity, id, yoboKeikakuJikoSakuseiGokei, yoboKeikakuJikoSakuseiTankiRiyoNissu);
+        return new YoboKeikakuJikoSakuseiMeisai(entity, id, yoboKeikakuJikoSakuseiGokei, yoboJikoSakuseiTankiRiyoNissu);
     }
 }

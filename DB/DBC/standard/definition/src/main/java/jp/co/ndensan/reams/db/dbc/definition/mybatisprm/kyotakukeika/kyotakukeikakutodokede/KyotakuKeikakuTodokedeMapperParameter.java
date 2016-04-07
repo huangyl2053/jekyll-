@@ -13,6 +13,7 @@ import jp.co.ndensan.reams.uz.uza.math.Decimal;
  * 居宅給付計画届出を特定するためのMyBatis用パラメータクラスです。
  */
 @lombok.Getter
+@SuppressWarnings("PMD.UnusedPrivateField")
 public final class KyotakuKeikakuTodokedeMapperParameter {
 
     private final HihokenshaNo 被保険者番号;

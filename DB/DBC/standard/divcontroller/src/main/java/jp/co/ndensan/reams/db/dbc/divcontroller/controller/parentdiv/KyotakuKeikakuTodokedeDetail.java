@@ -68,6 +68,8 @@ public class KyotakuKeikakuTodokedeDetail {
     }
 
     private void setKihonData(KyotakuKeikakuTodokedeDetailDiv panel) {
+        // TODO 未使用のメソッド引数があります。 Checkstyle 対応。
+        panel.getKyotakuKeikakuTodokedeKihon();
 //        ShikibetsuCode 識別コード = new ShikibetsuCode(cg.getAsRString("識別コード"));
 //        int rowId = 0;
 //        KyotakuKeikakuTodokedeKihonDiv div = panel.getKyotakuKeikakuTodokedeKihon();
@@ -75,6 +77,8 @@ public class KyotakuKeikakuTodokedeDetail {
     }
 
     private void setRirekiList(KyotakuKeikakuTodokedeDetailDiv panel) {
+        // TODO 未使用のメソッド引数があります。 Checkstyle 対応。
+        panel.getKyotakuKeikakuTodokedeKihon();
 //        Button btn = new Button();
 //        for (int i = 3; i < 5; i++) {
 //            ControlGenerator cg = new ControlGenerator(getYaml().get(i));
@@ -474,7 +478,9 @@ public class KyotakuKeikakuTodokedeDetail {
      * @param pattern pattern
      */
     private void setMeisaiData(KyotakuKeikakuTodokedeDetailDiv panel, 画面表示 pattern) {
-
+        // TODO 未使用のメソッド引数があります。 Checkstyle 対応。
+        panel.getKyotakuKeikakuTodokedeKihon();
+        pattern.hashCode();
 //        KyotakuKeikakuTodokedeMeisaiDiv meisai = panel.getTabKyotakuServiceKeikakuSakuseiIraiTodokede().
 //                getTplKyotakuKeikakuTodokedeDetailRireki().getKyotakuKeikakuTodokedeMeisai();
 //        DataGrid<dgKyotakuKeikakuTodokedeRirekiList_Row> rirekiList = panel.getTabKyotakuServiceKeikakuSakuseiIraiTodokede().

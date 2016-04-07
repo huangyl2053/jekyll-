@@ -15,6 +15,7 @@ import jp.co.ndensan.reams.db.dbc.entity.db.relate.fukushiyogukonyuhishikyuikkat
  */
 @lombok.Getter
 @lombok.Setter
+@SuppressWarnings("PMD.UnusedPrivateField")
 public class ShokanShinseiEntityResult implements Serializable {
 
     private final ShokanShinseiEntity entity;

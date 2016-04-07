@@ -32,7 +32,7 @@ public enum JutakuKaishuKeiyakuKubun {
      *
      * @return 住宅改修契約のコード
      */
-    public boolean getコード() {
+    public boolean is契約有り() {
         return code;
     }
 

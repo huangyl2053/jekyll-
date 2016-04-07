@@ -3,7 +3,7 @@ package jp.co.ndensan.reams.db.dbc.divcontroller.controller.handler.commonchildd
 import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbc.business.core.basic.JuryoininKeiyakuJigyosha;
-import jp.co.ndensan.reams.db.dbc.business.core.shiharaihohojyoho.KozaJohoPSM.KozaJohoPSM;
+import jp.co.ndensan.reams.db.dbc.business.core.shiharaihohojyoho.kozajohopsm.KozaJohoPSM;
 import jp.co.ndensan.reams.db.dbc.definition.core.shiharaihoho.ShiharaiHohoKubun;
 import jp.co.ndensan.reams.db.dbc.definition.mybatisprm.shiharaihohojyoho.KeiyakushaParameter;
 import jp.co.ndensan.reams.db.dbc.definition.mybatisprm.shiharaihohojyoho.KozaParameter;
@@ -75,7 +75,7 @@ public class ShiharaiHohoJyohoHandler {
             if (ShiharaiHohoKubun.口座払.equals(支払方法区分)) {
                 div.getRadKoza().setSelectedKey(支払方法区分.getコード());
                 口座払いエリアの初期化(ShiharaiHohoJyohoFinder.createInstance()
-                        .getKozaJyoho(new KozaParameter(支給申請情報.getKozaId(), null, null)), 支給申請情報.getKozaId());
+                        .getKozaJyoho(KozaParameter.createParam(支給申請情報.getKozaId(), null, null)), 支給申請情報.getKozaId());
             }
             if (ShiharaiHohoKubun.受領委任払.equals(支払方法区分)) {
                 div.getRadJyryoinin().setSelectedKey(支払方法区分.getコード());
@@ -543,9 +543,10 @@ public class ShiharaiHohoJyohoHandler {
                     ? KinyuKikanCode.EMPTY : 口座情報.get金融機関コード(),
                     口座情報.get支店コード() == null ? KinyuKikanShitenCode.EMPTY : 口座情報.get支店コード());
             if (kinyuKikan != null && kinyuKikanShiten != null) {
-                div.getTxtKinyuKikanName().setValue(new RString(kinyuKikan.get金融機関名称() == null
-                        ? RString.EMPTY.toString() : kinyuKikan.get金融機関名称().toString()
-                        + kinyuKikanShiten.get支店名称() == null ? RString.EMPTY.toString() : kinyuKikanShiten.get支店名称().toString()));
+                StringBuilder builder = new StringBuilder();
+                builder.append(kinyuKikan.get金融機関名称() == null ? RString.EMPTY.toString() : kinyuKikan.get金融機関名称().toString())
+                        .append(kinyuKikanShiten.get支店名称() == null ? RString.EMPTY.toString() : kinyuKikanShiten.get支店名称().toString());
+                div.getTxtKinyuKikanName().setValue(new RString(builder.toString()));
             }
             div.getTxtKinyuKikanShitenCode().setReadOnly(true);
             div.getTxtYokinShubetsu().setReadOnly(true);
@@ -602,9 +603,10 @@ public class ShiharaiHohoJyohoHandler {
             div.getTxtTenban1().setVisible(false);
             div.getTxtKinyuKikanShitenCode().setDomain(受領委任契約事業者.get支店コード());
             if (kinyuKikan != null && kinyuKikanShiten != null) {
-                div.getTxtKinyuKikanName().setValue(new RString(kinyuKikan.get金融機関名称() == null ? RString.EMPTY.toString()
-                        : kinyuKikan.get金融機関名称().toString() + kinyuKikanShiten.get支店名称() == null
-                        ? RString.EMPTY.toString() : kinyuKikanShiten.get支店名称().toString()));
+                StringBuilder builder = new StringBuilder();
+                builder.append(kinyuKikan.get金融機関名称() == null ? RString.EMPTY.toString() : kinyuKikan.get金融機関名称().toString())
+                        .append(kinyuKikanShiten.get支店名称() == null ? RString.EMPTY.toString() : kinyuKikanShiten.get支店名称().toString());
+                div.getTxtKinyuKikanName().setValue(new RString(builder.toString()));
             }
         }
         UzT0007CodeEntity uzT0007CodeEntity = 預金種別に対する略称(nullToEmpty(受領委任契約事業者.get口座種別()));
@@ -714,7 +716,7 @@ public class ShiharaiHohoJyohoHandler {
 
     private void set口座ID(SikyuSinseiJyohoParameter 支給申請情報, KamokuCode 業務内区分コード) {
         List<KozaJohoPSM> 口座IDリスト = ShiharaiHohoJyohoFinder.createInstance()
-                .getKozaIDList(new KozaParameter(0, 支給申請情報.getShikibetsuCode(), 業務内区分コード)).records();
+                .getKozaIDList(KozaParameter.createParam(0, 支給申請情報.getShikibetsuCode(), 業務内区分コード)).records();
         div.getDdlKozaID().setDataSource(set口座ID(口座IDリスト));
     }
 

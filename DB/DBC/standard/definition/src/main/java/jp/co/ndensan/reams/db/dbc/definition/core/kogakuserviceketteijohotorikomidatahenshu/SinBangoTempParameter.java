@@ -12,7 +12,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
  */
 @lombok.Getter
 @SuppressWarnings("PMD.UnusedPrivateField")
-public class SinBangoTempParameter {
+public final class SinBangoTempParameter {
 
     private final RString 新番号;
     private final RString 旧番号;

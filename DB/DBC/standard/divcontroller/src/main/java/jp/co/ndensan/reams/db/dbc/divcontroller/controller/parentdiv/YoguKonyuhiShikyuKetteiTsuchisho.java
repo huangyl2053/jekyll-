@@ -16,6 +16,12 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
  */
 public class YoguKonyuhiShikyuKetteiTsuchisho {
 
+    /**
+     * 画面の初期化メソッドです。
+     *
+     * @param panel YoguKonyuhiShikyuKetteiTsuchishoDiv
+     * @return ResponseData
+     */
     public ResponseData<YoguKonyuhiShikyuKetteiTsuchishoDiv> onLoad(YoguKonyuhiShikyuKetteiTsuchishoDiv panel) {
         ResponseData<YoguKonyuhiShikyuKetteiTsuchishoDiv> response = new ResponseData<>();
 

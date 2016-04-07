@@ -18,7 +18,7 @@ import jp.co.ndensan.reams.uz.uza.report.source.breaks.PageBreaker;
  */
 public class KogakuKyufuTaishoshaInPageBreak extends PageBreaker<KogakuKyufuTaishoshaIchiranSource> {
 
-    private final List<RString> breakKeys;
+    private final List<RString> breakKeysList;
     private ReportLineRecord<KogakuKyufuTaishoshaIchiranSource> nowSource;
 
     /**
@@ -26,13 +26,13 @@ public class KogakuKyufuTaishoshaInPageBreak extends PageBreaker<KogakuKyufuTais
      * @param breakKeys breakKeys
      */
     public KogakuKyufuTaishoshaInPageBreak(List<RString> breakKeys) {
-        this.breakKeys = new ArrayList<>();
-        this.breakKeys.addAll(breakKeys);
+        this.breakKeysList = new ArrayList<>();
+        this.breakKeysList.addAll(breakKeys);
     }
 
     @Override
     public List<RString> breakKeys() {
-        return breakKeys;
+        return breakKeysList;
     }
 
     @Override
@@ -47,13 +47,12 @@ public class KogakuKyufuTaishoshaInPageBreak extends PageBreaker<KogakuKyufuTais
                 && !nowSource.getSource().listUpper_2.equals(currentSource.getSource().listUpper_2)) {
             nowSource = currentSource;
         }
-        if (null == breakKeys || breakKeys.isEmpty()) {
+        if (null == breakKeysList || breakKeysList.isEmpty()) {
             return false;
-        } else if (KogakuKyufuTaishoshaInOutPutOrder.被保険者番号.get項目ID().equals(breakKeys.get(0))) {
-            if (!nowSource.getSource().listUpper_2.equals(nextSource.getSource().listUpper_2)
-                    && !nextSource.getSource().listUpper_2.isEmpty()) {
-                return true;
-            }
+        } else if (KogakuKyufuTaishoshaInOutPutOrder.被保険者番号.get項目ID().equals(breakKeysList.get(0))
+                && !nowSource.getSource().listUpper_2.equals(nextSource.getSource().listUpper_2)
+                && !nextSource.getSource().listUpper_2.isEmpty()) {
+            return true;
         }
         return false;
     }

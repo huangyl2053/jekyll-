@@ -225,7 +225,7 @@ public class KyufuKanrihyo200604Builder {
     /**
      * 居宅・介護予防支給限度額を設定します。
      *
-     * @param 居宅・介護予防支給限度額 居宅・介護予防支給限度額
+     * @param 居宅_介護予防支給限度額 居宅・介護予防支給限度額
      * @return {@link KyufuKanrihyo200604Builder}
      */
     public KyufuKanrihyo200604Builder set居宅_介護予防支給限度額(int 居宅_介護予防支給限度額) {
@@ -285,7 +285,7 @@ public class KyufuKanrihyo200604Builder {
     /**
      * 給付計画単位数／日数を設定します。
      *
-     * @param 給付計画単位数／日数 給付計画単位数／日数
+     * @param 給付計画単位数_日数 給付計画単位数／日数
      * @return {@link KyufuKanrihyo200604Builder}
      */
     public KyufuKanrihyo200604Builder set給付計画単位数_日数(int 給付計画単位数_日数) {
@@ -333,7 +333,7 @@ public class KyufuKanrihyo200604Builder {
     /**
      * 給付計画合計単位数/日数を設定します。
      *
-     * @param 給付計画合計単位数/日数 給付計画合計単位数/日数
+     * @param 給付計画合計単位数_日数 給付計画合計単位数/日数
      * @return {@link KyufuKanrihyo200604Builder}
      */
     public KyufuKanrihyo200604Builder set給付計画合計単位数_日数(int 給付計画合計単位数_日数) {

@@ -11,13 +11,13 @@ import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ServiceShuruiCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import lombok.Value;
 
 /**
  * 予防給付計画自己作成合計の識別子です。
  */
 @Value
+@SuppressWarnings("PMD.UnusedPrivateField")
 public class YoboKeikakuJikoSakuseiGokeiIdentifier implements Serializable {
 
     private final HihokenshaNo 被保険者番号;

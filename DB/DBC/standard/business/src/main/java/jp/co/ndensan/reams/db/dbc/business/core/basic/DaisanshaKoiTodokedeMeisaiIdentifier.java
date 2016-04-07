@@ -6,17 +6,18 @@
 package jp.co.ndensan.reams.db.dbc.business.core.basic;
 
 import java.io.Serializable;
-import lombok.Value;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ServiceShuruiCode;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
+import lombok.Value;
 
 /**
  * 介護第三者行為届出詳細の識別子です。
  */
 @Value
+@SuppressWarnings("PMD.UnusedPrivateField")
 public class DaisanshaKoiTodokedeMeisaiIdentifier implements Serializable {
 
     private final HihokenshaNo 被保険者番号;

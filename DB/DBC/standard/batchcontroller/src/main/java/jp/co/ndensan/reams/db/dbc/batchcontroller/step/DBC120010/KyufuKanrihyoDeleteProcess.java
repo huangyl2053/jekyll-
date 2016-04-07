@@ -18,7 +18,14 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 public class KyufuKanrihyoDeleteProcess extends SimpleBatchProcessBase {
 
     //パラメータ名
-    public static final RString PARAMETER_SHORIYM = new RString("shoriYM");
+    /**
+     * shoriYM
+     */
+    public static final RString PARAMETER_SHORIYM;
+
+    static {
+        PARAMETER_SHORIYM = new RString("shoriYM");
+    }
 
     //パラメータ受取変数
     InputParameter<RString> shoriYM;

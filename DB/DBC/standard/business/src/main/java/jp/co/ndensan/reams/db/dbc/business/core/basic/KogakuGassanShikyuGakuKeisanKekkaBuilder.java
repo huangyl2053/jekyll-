@@ -7,9 +7,9 @@ package jp.co.ndensan.reams.db.dbc.business.core.basic;
 
 import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3072KogakuGassanShikyuGakuKeisanKekkaEntity;
-import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HokenshaNo;
+import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaMeisho;
 import jp.co.ndensan.reams.uz.uza.biz.TelNo;
 import jp.co.ndensan.reams.uz.uza.biz.YubinNo;
@@ -228,7 +228,7 @@ public class KogakuGassanShikyuGakuKeisanKekkaBuilder {
     /**
      * 70歳以上介護等合算算定基準額を設定します。
      *
-     * @param 70歳以上介護等合算算定基準額 70歳以上介護等合算算定基準額
+     * @param 介護等合算算定基準額_70歳以上 70歳以上介護等合算算定基準額
      * @return {@link KogakuGassanShikyuGakuKeisanKekkaBuilder}
      */
     public KogakuGassanShikyuGakuKeisanKekkaBuilder set70歳以上介護等合算算定基準額(Decimal 介護等合算算定基準額_70歳以上) {
@@ -468,7 +468,7 @@ public class KogakuGassanShikyuGakuKeisanKekkaBuilder {
     /**
      * 70歳以上負担額合計を設定します。
      *
-     * @param 70歳以上負担額合計 70歳以上負担額合計
+     * @param 負担額合計_70歳以上 70歳以上負担額合計
      * @return {@link KogakuGassanShikyuGakuKeisanKekkaBuilder}
      */
     public KogakuGassanShikyuGakuKeisanKekkaBuilder set70歳以上負担額合計(Decimal 負担額合計_70歳以上) {
@@ -492,7 +492,7 @@ public class KogakuGassanShikyuGakuKeisanKekkaBuilder {
     /**
      * 70歳未満負担額合計を設定します。
      *
-     * @param 70歳未満負担額合計 70歳未満負担額合計
+     * @param 負担額合計_70歳未満 70歳未満負担額合計
      * @return {@link KogakuGassanShikyuGakuKeisanKekkaBuilder}
      */
     public KogakuGassanShikyuGakuKeisanKekkaBuilder set70歳未満負担額合計(Decimal 負担額合計_70歳未満) {
@@ -516,7 +516,7 @@ public class KogakuGassanShikyuGakuKeisanKekkaBuilder {
     /**
      * 70歳未満支給額合計を設定します。
      *
-     * @param 70歳未満支給額合計 70歳未満支給額合計
+     * @param 支給額合計_70歳未満 70歳未満支給額合計
      * @return {@link KogakuGassanShikyuGakuKeisanKekkaBuilder}
      */
     public KogakuGassanShikyuGakuKeisanKekkaBuilder set70歳未満支給額合計(Decimal 支給額合計_70歳未満) {

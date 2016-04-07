@@ -28,6 +28,7 @@ public class JukyushaIdoRenrakuhyoShinkiTorokuPanel {
      * 受給者異動連絡票新規登録 受給者異動連絡票情報をセットします。
      *
      * @param panel HihokenshaSearchPanelDiv
+     * @param panel1 SearchHihokenshaDiv
      * @return PanelDivのResponseData
      */
     public ResponseData<JukyushaIdoRenrakuhyoShinkiTorokuPanelDiv> onClick_btnToDecide(JukyushaIdoRenrakuhyoShinkiTorokuPanelDiv panel, SearchHihokenshaDiv panel1) {
@@ -46,12 +47,12 @@ public class JukyushaIdoRenrakuhyoShinkiTorokuPanel {
 
         List<HashMap> ymlData = ymlData();
 
-        //JukyushaIdoRenrakuhyoKihonJoho 受給者異動連絡票 
+        //JukyushaIdoRenrakuhyoKihonJoho 受給者異動連絡票
         panel1.getSearchResultOfHihokensha().getDgSearchResult().getClickedItem().getHihokenshaKubun();
         panel1.getSearchResultOfHihokensha().getDgSearchResult().getClickedItem().getKanaShimsei();
         panel1.getSearchResultOfHihokensha().getDgSearchResult().getClickedItem().getGender();
 
-        if (panel1.getSearchResultOfHihokensha().getDgSearchResult().getClickedItem().getShimei().equals("男")) {
+        if (new RString("男").equals(panel1.getSearchResultOfHihokensha().getDgSearchResult().getClickedItem().getShimei())) {
             panel.getJukyushaIdoRenrakuhyo().getJukyushaIdoRenrakuhyoKihonJoho().getRadHihoSex().setSelectedItem(new RString("man"));
         } else {
             panel.getJukyushaIdoRenrakuhyo().getJukyushaIdoRenrakuhyoKihonJoho().getRadHihoSex().setSelectedItem(new RString("woman"));

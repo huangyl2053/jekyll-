@@ -14,6 +14,7 @@ import lombok.Value;
  * 国保連インターフェース管理の識別子です。
  */
 @Value
+@SuppressWarnings("PMD.UnusedPrivateField")
 public class KokuhorenInterfaceKanriIdentifier implements Serializable {
 
     private final FlexibleYearMonth 処理年月;

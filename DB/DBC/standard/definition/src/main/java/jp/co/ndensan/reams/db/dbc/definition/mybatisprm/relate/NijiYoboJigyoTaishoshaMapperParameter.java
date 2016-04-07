@@ -68,18 +68,38 @@ public final class NijiYoboJigyoTaishoshaMapperParameter {
         return new NijiYoboJigyoTaishoshaMapperParameter(主キー1, 1, true, false);
     }
 
+    /**
+     * 主キー1を返します。
+     *
+     * @return 主キー1
+     */
     public HihokenshaNo get主キー1() {
         return 主キー1;
     }
 
+    /**
+     * 主キー2を返します。
+     *
+     * @return 主キー2
+     */
     public int get主キー2() {
         return 主キー2;
     }
 
+    /**
+     * uses主キー1を返します。
+     *
+     * @return uses主キー1
+     */
     public boolean isUses主キー1() {
         return uses主キー1;
     }
 
+    /**
+     * uses主キー2を返します。
+     *
+     * @return uses主キー2
+     */
     public boolean isUses主キー2() {
         return uses主キー2;
     }

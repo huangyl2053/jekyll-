@@ -5,15 +5,16 @@
  */
 package jp.co.ndensan.reams.db.dbc.business.core.basic;
 
-import lombok.Value;
 import java.io.Serializable;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ServiceShuruiCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
+import lombok.Value;
 
 /**
  * 償還払い給付種類支給限度額の識別子です。
  */
 @Value
+@SuppressWarnings("PMD.UnusedPrivateField")
 public class ShokanShuruiShikyuGendoGakuIdentifier implements Serializable {
 
     private final ServiceShuruiCode サービス種類コード;

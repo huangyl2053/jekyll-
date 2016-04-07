@@ -34,11 +34,9 @@ public class SearchHihokensha {
         ResponseData<SearchHihokenshaDiv> response = new ResponseData<>();
 
 //        panel.getSearchConditionOfHihokensha().getSearchCriteriaOfHihokensha().setIsOpen(false);
-        List<HashMap> ymlData = ymlData();
-
+//        List<HashMap> ymlData = ymlData();
 //        RString hihokenshaNo = (RString) ymlData.get(0).get("hihokenshaNo");
 //        panel.getSearchConditionOfHihokensha().getSearchCriteriaOfHihokensha().getTxtHihokenshaNo().setValue(new RString(hihokenshaNo));
-
         response.data = panel;
         return response;
     }
