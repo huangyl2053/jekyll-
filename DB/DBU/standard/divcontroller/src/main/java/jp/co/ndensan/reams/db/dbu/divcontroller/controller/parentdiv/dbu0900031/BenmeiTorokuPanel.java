@@ -8,6 +8,7 @@ package jp.co.ndensan.reams.db.dbu.divcontroller.controller.parentdiv.dbu0900031
 import jp.co.ndensan.reams.db.dbu.business.core.benmeitoroku.BenmeiTorokuMeisaiJoho;
 import jp.co.ndensan.reams.db.dbu.definition.core.benmeitoroku.BenmeiTorokuViewStateKeys;
 import jp.co.ndensan.reams.db.dbu.divcontroller.entity.parentdiv.DBU0900031.BenmeiTorokuPanelDiv;
+import jp.co.ndensan.reams.db.dbu.divcontroller.entity.parentdiv.DBU0900031.DBU0900031StateName;
 import jp.co.ndensan.reams.db.dbu.divcontroller.entity.parentdiv.DBU0900031.DBU0900031TransitionEventName;
 import jp.co.ndensan.reams.db.dbu.divcontroller.handler.dbu0900031.BenmeiTorokuPanelHandler;
 import jp.co.ndensan.reams.db.dbu.service.core.benmeitoroku.BenmeiTorokuManager;
@@ -38,13 +39,14 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 /**
  * 弁明登録情報Divを制御します。
  *
+ * @reamsid_L DBU-1080-020 lijia
+ *
  */
 public class BenmeiTorokuPanel {
 
     private static final RString 状態_登録 = new RString("登録");
     private static final RString 状態_更新 = new RString("更新");
     private static final RString 状態_削除 = new RString("削除");
-    private static final RString BUTTON_COMMONBUTTONCOMPLETE = new RString("CommonButtonComplete");
 
     private BenmeiTorokuMeisaiJoho benmeiTorokuMeisaiJoho;
     private ShikibetsuCode 識別コード;
@@ -59,22 +61,21 @@ public class BenmeiTorokuPanel {
      * @return ResponseData<ShikakukihonPanelDiv>
      */
     public ResponseData<BenmeiTorokuPanelDiv> onLoad(BenmeiTorokuPanelDiv panelDiv) {
-        //TODO ViewStateより弁明登録一覧画面からの引き継ぎ情報を取得する。
         識別コード = ViewStateHolder.get(BenmeiTorokuViewStateKeys.識別コード, ShikibetsuCode.class);
         被保険者番号 = ViewStateHolder.get(BenmeiTorokuViewStateKeys.被保険者番号, HihokenshaNo.class);
         審査請求届出日 = ViewStateHolder.get(BenmeiTorokuViewStateKeys.審査請求届出日, FlexibleDate.class);
         弁明書作成日 = ViewStateHolder.get(BenmeiTorokuViewStateKeys.弁明書作成日, FlexibleDate.class);
         RString 初期_状態 = ViewStateHolder.get(BenmeiTorokuViewStateKeys.モード, RString.class);
         //TODO 共通Div（AtenaCommonChildDiv）を呼び出しの場合、異常を発生する。
-        panelDiv.getAtenaPanel().getAtenaCommonChildDiv().onLoad(識別コード);
-        panelDiv.getShikakuKihonCommonChildDiv().initialize(被保険者番号);
-        CommonButtonHolder.setVisibleByCommonButtonFieldName(BUTTON_COMMONBUTTONCOMPLETE, false);
+        //panelDiv.getAtenaPanel().getAtenaCommonChildDiv().load(識別コード);
+        //panelDiv.getShikakuKihonCommonChildDiv().initialize(被保険者番号);
         get保存情報の取得(識別コード, 被保険者番号, 審査請求届出日, 弁明書作成日);
         if (初期_状態.equals(状態_更新)) {
             benmeiTorokuMeisaiJoho = get弁明登録明細情報の取得(識別コード, 被保険者番号, 審査請求届出日);
             ViewStateHolder.put(BenmeiTorokuViewStateKeys.弁明登録情報, benmeiTorokuMeisaiJoho);
             getHandler(panelDiv).initialize(benmeiTorokuMeisaiJoho, 初期_状態);
         } else if (初期_状態.equals(状態_削除)) {
+            CommonButtonHolder.setTextByCommonButtonFieldName(new RString("btnSave"), "削除");
             benmeiTorokuMeisaiJoho = get弁明登録明細情報の取得(識別コード, 被保険者番号, 審査請求届出日);
             if (benmeiTorokuMeisaiJoho != null) {
                 getHandler(panelDiv).initialize(benmeiTorokuMeisaiJoho, 初期_状態);
@@ -118,7 +119,7 @@ public class BenmeiTorokuPanel {
         } else if (processState.equals(状態_削除)) {
             return get弁明登録明細情報の削除処理(panelDiv);
         }
-        return ResponseData.of(panelDiv).respond();
+        return ResponseData.of(panelDiv).setState(DBU0900031StateName.完了状態);
     }
 
     private BenmeiTorokuMeisaiJoho get弁明登録明細情報の取得(
@@ -182,15 +183,15 @@ public class BenmeiTorokuPanel {
         LasdecCode shichosonCode = benmeiTorokuManager.get地方公共団体コード();
         FufukuMoshitate fufukuMoshitate = new FufukuMoshitate(識別コード, 被保険者番号, 審査請求届出日);
         FufukuMoshitateBuilder fufukuBuilder = fufukuMoshitate.createBuilderForEdit();
-        if (panelDiv.getBenmeiTorokuMeisaiPanel().getTxtdateBenmeiSyoSakuseibi().getValue() == null) {
+        if (panelDiv.getBenmeiTorokuMeisaiPanel().getTxtBenmeiSyoSakuseibi().getValue() == null) {
             弁明書作成日 = FlexibleDate.EMPTY;
         } else {
-            弁明書作成日 = new FlexibleDate(panelDiv.getBenmeiTorokuMeisaiPanel().getTxtdateBenmeiSyoSakuseibi().getValue().toDateString());
+            弁明書作成日 = new FlexibleDate(panelDiv.getBenmeiTorokuMeisaiPanel().getTxtBenmeiSyoSakuseibi().getValue().toDateString());
         }
         fufukuBuilder.set弁明書作成日(弁明書作成日);
         fufukuMoshitate = fufukuBuilder.build();
         BemmeiNaiyo bemmeiNaiyo = new BemmeiNaiyo(識別コード, 被保険者番号, 審査請求届出日,
-                new FlexibleDate(panelDiv.getBenmeiTorokuMeisaiPanel().getTxtdateBenmeiSyoSakuseibi().getValue().toDateString()));
+                new FlexibleDate(panelDiv.getBenmeiTorokuMeisaiPanel().getTxtBenmeiSyoSakuseibi().getValue().toDateString()));
         BemmeiNaiyoBuilder bemmeiNaiyoBuilder = bemmeiNaiyo.createBuilderForEdit();
         bemmeiNaiyoBuilder.set市町村コード(shichosonCode);
         if (panelDiv.getBenmeiTorokuMeisaiPanel().getTxtMultiLineShobunNaiyo().getValue() == null) {
@@ -203,14 +204,14 @@ public class BenmeiTorokuPanel {
         } else {
             bemmeiNaiyoBuilder.set弁明内容(panelDiv.getBenmeiTorokuMeisaiPanel().getTxtMultiLineBenmeiNaiyo().getValue());
         }
-        if (panelDiv.getBenmeiTorokuMeisaiPanel().getTxtDateBenmeisyoTeishutubi().getValue() == null) {
+        if (panelDiv.getBenmeiTorokuMeisaiPanel().getTxtBenmeisyoTeishutubi().getValue() == null) {
             bemmeiNaiyoBuilder.set弁明書作成日提出日(FlexibleDate.EMPTY);
         } else {
-            bemmeiNaiyoBuilder.set弁明書作成日提出日(new FlexibleDate(panelDiv.getBenmeiTorokuMeisaiPanel().getTxtDateBenmeisyoTeishutubi().getValue().toDateString()));
+            bemmeiNaiyoBuilder.set弁明書作成日提出日(new FlexibleDate(panelDiv.getBenmeiTorokuMeisaiPanel().getTxtBenmeisyoTeishutubi().getValue().toDateString()));
         }
         bemmeiNaiyo = bemmeiNaiyoBuilder.build();
         BemmeishaJoho bemmeishaJoho = new BemmeishaJoho(識別コード, 被保険者番号, 審査請求届出日,
-                new FlexibleDate(panelDiv.getBenmeiTorokuMeisaiPanel().getTxtdateBenmeiSyoSakuseibi().getValue().toDateString()), new Decimal("1"));
+                new FlexibleDate(panelDiv.getBenmeiTorokuMeisaiPanel().getTxtBenmeiSyoSakuseibi().getValue().toDateString()), new Decimal("1"));
         BemmeishaJohoBuilder bemmeishaJohoBuilder = bemmeishaJoho.createBuilderForEdit();
         bemmeishaJohoBuilder.set市町村コード(shichosonCode);
         if (panelDiv.getBenmeiTorokuMeisaiPanel().getTxtMultiLineBenmeisya().getValue() == null) {
@@ -225,22 +226,27 @@ public class BenmeiTorokuPanel {
     private ResponseData<BenmeiTorokuPanelDiv> get弁明登録明細情報の更新処理(
             BenmeiTorokuMeisaiJoho benmeiTorokuMeisaiJoho, BenmeiTorokuPanelDiv panelDiv) {
         if (get弁明登録明細の更新有り無し(benmeiTorokuMeisaiJoho, panelDiv)) {
-            if (!ResponseHolder.isReRequest()) {
-                QuestionMessage message = new QuestionMessage(UrQuestionMessages.保存の確認.getMessage().getCode(),
-                        UrQuestionMessages.保存の確認.getMessage().evaluate());
-                return ResponseData.of(panelDiv).addMessage(message).respond();
-            }
-            if (new RString(UrQuestionMessages.保存の確認.getMessage().getCode()).equals(ResponseHolder.getMessageCode())
-                    && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
-                boolean blnState = get弁明登録明細情報の削除();
-                boolean blnStateIns = get弁明登録明細情報の登録(panelDiv);
-                if (blnState && blnStateIns) {
-                    return ResponseData.of(panelDiv).addMessage(UrInformationMessages.正常終了.getMessage().replace(状態_更新.toString())).respond();
-                }
-            }
+            get更新処理(panelDiv);
         } else {
             //TODO DBZInformationMessage．DBZI00006（内容が変更されていないため、保存はできません。） 明細画面に戻る
             throw new ApplicationException(UrInformationMessages.保存終了.getMessage());
+        }
+        return ResponseData.of(panelDiv).respond();
+    }
+
+    private ResponseData<BenmeiTorokuPanelDiv> get更新処理(BenmeiTorokuPanelDiv panelDiv) {
+        if (!ResponseHolder.isReRequest()) {
+            QuestionMessage message = new QuestionMessage(UrQuestionMessages.保存の確認.getMessage().getCode(),
+                    UrQuestionMessages.保存の確認.getMessage().evaluate());
+            return ResponseData.of(panelDiv).addMessage(message).respond();
+        }
+        if (new RString(UrQuestionMessages.保存の確認.getMessage().getCode()).equals(ResponseHolder.getMessageCode())
+                && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
+            boolean blnState = is弁明登録明細情報の削除();
+            boolean blnStateIns = get弁明登録明細情報の登録(panelDiv);
+            if (blnState && blnStateIns) {
+                return ResponseData.of(panelDiv).addMessage(UrInformationMessages.正常終了.getMessage().replace(状態_更新.toString())).respond();
+            }
         }
         return ResponseData.of(panelDiv).respond();
     }
@@ -251,7 +257,7 @@ public class BenmeiTorokuPanel {
         }
         if (new RString(UrQuestionMessages.削除の確認.getMessage().getCode()).equals(ResponseHolder.getMessageCode())
                 && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
-            boolean blnState = get弁明登録明細情報の削除();
+            boolean blnState = is弁明登録明細情報の削除();
             if (blnState) {
                 return ResponseData.of(panelDiv).addMessage(UrInformationMessages.正常終了.getMessage().replace(状態_削除.toString())).respond();
             }
@@ -259,10 +265,9 @@ public class BenmeiTorokuPanel {
         return ResponseData.of(panelDiv).respond();
     }
 
-    private boolean get弁明登録明細情報の削除() {
+    private boolean is弁明登録明細情報の削除() {
         FufukuMoshitate fufukuMoshitate = ViewStateHolder.get(BenmeiTorokuViewStateKeys.不服審査申立情報, FufukuMoshitate.class);
         FufukuMoshitateBuilder fufukuBuilder = fufukuMoshitate.createBuilderForEdit();
-        //fufukuBuilder.set弁明書作成日(new FlexibleDate(""));
         fufukuMoshitate = fufukuBuilder.build();
         BemmeiNaiyo bemmeiNaiyo = ViewStateHolder.get(BenmeiTorokuViewStateKeys.弁明内容, BemmeiNaiyo.class);
         BemmeiNaiyoBuilder bemmeiNaiyoBuilder = bemmeiNaiyo.createBuilderForEdit();
@@ -312,16 +317,16 @@ public class BenmeiTorokuPanel {
 
     private RString get弁明登録明細入力の編集結果(BenmeiTorokuPanelDiv panelDiv) {
         RStringBuilder inputDiv = new RStringBuilder();
-        inputDiv.append(panelDiv.getBenmeiTorokuMeisaiPanel().getTxtdateBenmeiSyoSakuseibi().getValue().toDateString() == null
-                ? RString.EMPTY : panelDiv.getBenmeiTorokuMeisaiPanel().getTxtdateBenmeiSyoSakuseibi().getValue().toDateString());
+        inputDiv.append(panelDiv.getBenmeiTorokuMeisaiPanel().getTxtBenmeiSyoSakuseibi().getValue().toDateString() == null
+                ? RString.EMPTY : panelDiv.getBenmeiTorokuMeisaiPanel().getTxtBenmeiSyoSakuseibi().getValue().toDateString());
         inputDiv.append(panelDiv.getBenmeiTorokuMeisaiPanel().getTxtMultiLineBenmeisya().getValue() == null
                 ? RString.EMPTY : panelDiv.getBenmeiTorokuMeisaiPanel().getTxtMultiLineBenmeisya().getValue());
         inputDiv.append(panelDiv.getBenmeiTorokuMeisaiPanel().getTxtMultiLineShobunNaiyo().getValue() == null
                 ? RString.EMPTY : panelDiv.getBenmeiTorokuMeisaiPanel().getTxtMultiLineShobunNaiyo().getValue());
         inputDiv.append(panelDiv.getBenmeiTorokuMeisaiPanel().getTxtMultiLineBenmeiNaiyo().getValue() == null
                 ? RString.EMPTY : panelDiv.getBenmeiTorokuMeisaiPanel().getTxtMultiLineBenmeiNaiyo().getValue());
-        inputDiv.append(panelDiv.getBenmeiTorokuMeisaiPanel().getTxtDateBenmeisyoTeishutubi().getValue().toDateString() == null
-                ? RString.EMPTY : panelDiv.getBenmeiTorokuMeisaiPanel().getTxtDateBenmeisyoTeishutubi().getValue().toDateString());
+        inputDiv.append(panelDiv.getBenmeiTorokuMeisaiPanel().getTxtBenmeisyoTeishutubi().getValue().toDateString() == null
+                ? RString.EMPTY : panelDiv.getBenmeiTorokuMeisaiPanel().getTxtBenmeisyoTeishutubi().getValue().toDateString());
         return inputDiv.toRString();
     }
 
