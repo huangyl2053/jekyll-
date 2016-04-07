@@ -18,6 +18,8 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 
 /**
  * 受領委任契約事業者登録・追加・修正・照会_登録
+ *
+ * @reamsid_L DBC-2120-020 panhe
  */
 public class PnlTotalRegister {
 

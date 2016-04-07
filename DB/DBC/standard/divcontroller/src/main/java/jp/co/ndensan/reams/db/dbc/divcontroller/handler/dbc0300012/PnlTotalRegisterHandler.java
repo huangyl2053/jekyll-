@@ -36,6 +36,8 @@ import jp.co.ndensan.reams.uz.uza.util.code.entity.UzT0007CodeEntity;
 
 /**
  * 償還払い状況照会_申請情報検索のHandlerクラス
+ *
+ * @reamsid_L DBC-2120-020 panhe
  */
 public final class PnlTotalRegisterHandler {
 
