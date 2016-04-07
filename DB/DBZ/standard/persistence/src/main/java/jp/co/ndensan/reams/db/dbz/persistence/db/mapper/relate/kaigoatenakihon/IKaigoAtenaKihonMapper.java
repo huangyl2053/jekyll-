@@ -12,6 +12,8 @@ import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 
 /**
  * 介護資格系基本情報のマッパーインタフェースです。
+ *
+ * @reamsid_L DBA-0030-010 wangxiaodong
  */
 public interface IKaigoAtenaKihonMapper {
 
