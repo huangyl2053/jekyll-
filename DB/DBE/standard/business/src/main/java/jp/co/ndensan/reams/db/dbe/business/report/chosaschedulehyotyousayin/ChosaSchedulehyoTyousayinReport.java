@@ -12,8 +12,9 @@ import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
 import lombok.NonNull;
 
 /**
- *
  * 認定調査スケジュール表(調査員)のReportです。
+ *
+ * @reamsid_L DBE-0020-080 lishengli
  */
 public class ChosaSchedulehyoTyousayinReport extends Report<ChosaSchedulehyoTyousayinReportSource> {
 
