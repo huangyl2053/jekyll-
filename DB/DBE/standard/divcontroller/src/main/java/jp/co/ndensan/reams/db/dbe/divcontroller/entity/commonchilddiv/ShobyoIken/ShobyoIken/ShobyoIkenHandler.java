@@ -33,8 +33,9 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 import jp.co.ndensan.reams.uz.uza.util.code.CodeMaster;
 
 /**
- *
  * 傷病の意見入力のHandlerクラスです。
+ *
+ * @reamsid_L DBE-3000-130 zhengshukai
  */
 public class ShobyoIkenHandler {
 

@@ -9,8 +9,9 @@ import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
- *
  * 審査会情報照会(個人)のParameterクラスです。
+ *
+ * @reamsid_L DBE-3000-070 zhengshukai
  */
 public final class ShinsakaiJohoKojinMapperParameter {
 

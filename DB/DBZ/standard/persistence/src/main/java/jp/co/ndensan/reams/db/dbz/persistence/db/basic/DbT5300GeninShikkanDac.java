@@ -25,6 +25,8 @@ import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
 
 /**
  * 原因疾患のデータアクセスクラスです。
+ *
+ * @reamsid_L DBZ-9999-021 zhengshukai
  */
 public class DbT5300GeninShikkanDac implements ISaveable<DbT5300GeninShikkanEntity> {
 

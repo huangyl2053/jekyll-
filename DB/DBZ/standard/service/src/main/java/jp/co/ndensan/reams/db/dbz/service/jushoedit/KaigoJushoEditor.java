@@ -28,6 +28,7 @@ import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 /**
  * 介護住所編集クラス。
  *
+ * @reamsid_L DBA-1290-030 zhengshukai
  */
 public class KaigoJushoEditor {
 

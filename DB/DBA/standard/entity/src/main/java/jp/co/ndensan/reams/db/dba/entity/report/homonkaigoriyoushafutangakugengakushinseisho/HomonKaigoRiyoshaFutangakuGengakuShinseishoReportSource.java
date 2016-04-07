@@ -10,8 +10,9 @@ import jp.co.ndensan.reams.uz.uza.report.IReportSource;
 import jp.co.ndensan.reams.uz.uza.report.source.ReportItem;
 
 /**
- *
  * 訪問介護利用者負担額減額申請書の帳票データのクラスです。
+ *
+ * @reamsid_L DBA-0540-701 zhengshukai
  */
 public class HomonKaigoRiyoshaFutangakuGengakuShinseishoReportSource implements IReportSource {
 // <editor-fold defaultstate="collapsed" desc="Generated Code">
