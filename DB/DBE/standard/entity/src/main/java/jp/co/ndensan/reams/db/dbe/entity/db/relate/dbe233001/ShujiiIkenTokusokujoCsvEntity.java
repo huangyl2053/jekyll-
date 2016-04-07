@@ -12,6 +12,7 @@ import lombok.Getter;
 /**
  * 主治医意見書督促対象者一覧表Csvを定義したEntityクラスです。
  *
+ * @reamsid_L DBE-0060-040 zhangzhiming
  */
 @SuppressWarnings("PMD.UnusedPrivateField")
 @Getter

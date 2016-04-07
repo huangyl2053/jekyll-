@@ -10,8 +10,9 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 import lombok.Getter;
 
 /**
- *
  * 主治医意見書督促状発行更新のMybatisパラメータクラスです。
+ *
+ * @reamsid_L DBE-0060-040 zhangzhiming
  */
 @Getter
 @SuppressWarnings("PMD.UnusedPrivateField")

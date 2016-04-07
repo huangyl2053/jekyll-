@@ -16,8 +16,9 @@ import lombok.Getter;
 import lombok.Setter;
 
 /**
- *
  * 主治医意見書督促対象者一覧表の取得のEntityクラスです。
+ *
+ * @reamsid_L DBE-0060-040 zhangzhiming
  */
 @Getter
 @Setter
