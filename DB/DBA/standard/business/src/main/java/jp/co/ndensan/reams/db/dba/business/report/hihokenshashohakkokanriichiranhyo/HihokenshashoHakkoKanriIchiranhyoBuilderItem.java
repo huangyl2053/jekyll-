@@ -9,8 +9,9 @@ import jp.co.ndensan.reams.db.dba.entity.report.source.hihokenshashohakkokanriic
 import jp.co.ndensan.reams.uz.uza.report.ReportEditorJoiner;
 
 /**
- *
  * 被保険者証発行管理一覧表Builderクラスです。
+ *
+ * @reamsid_L DBA-0600-070 lishengli
  */
 public class HihokenshashoHakkoKanriIchiranhyoBuilderItem implements IHihokenshashoHakkoKanriIchiranhyoBuilder {
 
