@@ -16,6 +16,8 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
  * 広域全市町村クラスです。
+ *
+ * @reamsid_L DBA-0010-020 linghuhang
  */
 public class KoikiZenShichosonJoho {
 
