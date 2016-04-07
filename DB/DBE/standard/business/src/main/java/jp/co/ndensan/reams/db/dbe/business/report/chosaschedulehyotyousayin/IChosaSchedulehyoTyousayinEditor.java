@@ -9,8 +9,9 @@ import jp.co.ndensan.reams.db.dbe.entity.report.source.chosaschedulehyotyousayin
 import jp.co.ndensan.reams.uz.uza.report.IReportEditor;
 
 /**
- *
  * 認定調査スケジュール表(調査員)のインターフェースクラスです。
+ *
+ * @reamsid_L DBE-0020-080 lishengli
  */
 interface IChosaSchedulehyoTyousayinEditor extends IReportEditor<ChosaSchedulehyoTyousayinReportSource> {
 

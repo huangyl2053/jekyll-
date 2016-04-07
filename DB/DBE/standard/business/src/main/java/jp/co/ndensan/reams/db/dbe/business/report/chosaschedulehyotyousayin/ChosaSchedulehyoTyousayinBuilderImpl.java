@@ -9,8 +9,9 @@ import jp.co.ndensan.reams.db.dbe.entity.report.source.chosaschedulehyotyousayin
 import jp.co.ndensan.reams.uz.uza.report.ReportEditorJoiner;
 
 /**
- *
  * 認定調査スケジュール表(調査員)Builderクラスです。
+ *
+ * @reamsid_L DBE-0020-080 lishengli
  */
 class ChosaSchedulehyoTyousayinBuilderImpl implements IChosaSchedulehyoTyousayinBuilder {
 
