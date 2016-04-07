@@ -8,7 +8,9 @@ package jp.co.ndensan.reams.db.dbb.business.report.kaigohokenryogakuketteihenkot
 import jp.co.ndensan.reams.db.dbb.entity.report.kaigohokenryogakuketteihenkotsuchihakkoichiran.KaigoHokenryogakuSource;
 
 /**
- * 帳票設計_DBBRP43002_3_介護保険料額決定通知書発行一覧表HeaderEditor
+ * 帳票設計_DBBRP43002_5_介護保険料額変更通知書発行一覧表
+ *
+ * @reamsid_L DBB-0780-120 yangchenbing
  */
 public class HeaderEditor implements IKaigoHokenryogakuEditor {
 

@@ -11,7 +11,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 /**
  * 出力帳票entityクラスです。
  *
- * @reamsid_L DBB-0780-120  yangchenbing
+ * @reamsid_L DBB-0780-120 yangchenbing
  */
 public class NonyuTsuchIchiranentity {
 

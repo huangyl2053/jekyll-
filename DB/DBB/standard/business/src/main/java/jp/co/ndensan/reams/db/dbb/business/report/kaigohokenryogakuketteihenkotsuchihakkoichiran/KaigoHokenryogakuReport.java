@@ -19,9 +19,9 @@ import jp.co.ndensan.reams.uz.uza.util.code.CodeMaster;
 import lombok.NonNull;
 
 /**
- * 帳票設計_DBBRP43002_3_介護保険料額決定通知書発行一覧表KaigoHokenryogakuReport
+ * 帳票設計_DBBRP43002_5_介護保険料額変更通知書発行一覧表 KaigoHokenryogakuReport
  *
- * @reamsid_L DBB-0780-120  yangchenbing
+ * @reamsid_L DBB-0780-120 yangchenbing
  */
 public class KaigoHokenryogakuReport extends Report<KaigoHokenryogakuSource> {
 

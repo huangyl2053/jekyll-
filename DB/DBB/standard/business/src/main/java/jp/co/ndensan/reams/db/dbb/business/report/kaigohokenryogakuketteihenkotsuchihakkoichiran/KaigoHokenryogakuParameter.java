@@ -10,7 +10,9 @@ import jp.co.ndensan.reams.db.dbb.entity.db.basic.kaigofukatokuchoheijunka6.Shut
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
- * 帳票設計_DBBRP43002_3_介護保険料額決定通知書発行一覧表KaigoHokenryogakuParameter
+ * 帳票設計_DBBRP43002_5_介護保険料額変更通知書発行一覧表KaigoHokenryogakuParameter
+ *
+ * @reamsid_L DBB-0780-120 yangchenbing
  */
 @lombok.Getter
 @lombok.Setter

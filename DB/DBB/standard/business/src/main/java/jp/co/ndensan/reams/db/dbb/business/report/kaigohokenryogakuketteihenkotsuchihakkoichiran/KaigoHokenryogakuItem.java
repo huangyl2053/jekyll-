@@ -8,7 +8,9 @@ package jp.co.ndensan.reams.db.dbb.business.report.kaigohokenryogakuketteihenkot
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
- * 帳票設計_DBBRP43002_3_介護保険料額決定通知書発行一覧表KaigoHokenryogakuItem
+ * 帳票設計_DBBRP43002_5_介護保険料額変更通知書発行一覧表KaigoHokenryogakuItem
+ *
+ * @reamsid_L DBB-0780-120 yangchenbing
  */
 @SuppressWarnings("PMD.UnusedPrivateField")
 @lombok.Getter
