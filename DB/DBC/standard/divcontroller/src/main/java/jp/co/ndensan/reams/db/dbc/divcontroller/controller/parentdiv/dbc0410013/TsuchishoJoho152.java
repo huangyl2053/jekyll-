@@ -11,6 +11,8 @@ import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 /**
  *
  * 国保連情報受取データ取込_[152]総合事業費請求額通知書情報
+ *
+ * @reamsid_L DBC-0980-040 quxiaodong
  */
 public class TsuchishoJoho152 {
 
