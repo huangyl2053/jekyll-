@@ -13,6 +13,8 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
  * 認定調査スケジュール情報の識別子です。
+ *
+ * @reamsid_L DBZ-9999-011 linghuhang
  */
 @SuppressWarnings("PMD.UnusedPrivateField")
 @lombok.Value

@@ -32,6 +32,8 @@ import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
 
 /**
  * 介護保険施設入退所のデータアクセスクラスです。
+ *
+ * @reamsid_L DBZ-9999-021 linghuhang
  */
 public class DbT1004ShisetsuNyutaishoDac implements ISaveable<DbT1004ShisetsuNyutaishoEntity> {
 

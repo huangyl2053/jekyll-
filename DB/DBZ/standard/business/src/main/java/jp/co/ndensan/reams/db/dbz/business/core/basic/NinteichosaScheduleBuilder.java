@@ -15,6 +15,8 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
  * {@link NinteichosaSchedule}の編集を行うビルダークラスです。
+ *
+ * @reamsid_L DBZ-9999-011 linghuhang
  */
 public class NinteichosaScheduleBuilder {
 

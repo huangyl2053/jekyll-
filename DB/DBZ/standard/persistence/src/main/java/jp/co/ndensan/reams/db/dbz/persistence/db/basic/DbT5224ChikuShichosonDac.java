@@ -27,6 +27,8 @@ import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
 
 /**
  * 地区市町村のデータアクセスクラスです。
+ *
+ * @reamsid_L DBZ-9999-021 linghuhang
  */
 public class DbT5224ChikuShichosonDac implements ISaveable<DbT5224ChikuShichosonEntity> {
 

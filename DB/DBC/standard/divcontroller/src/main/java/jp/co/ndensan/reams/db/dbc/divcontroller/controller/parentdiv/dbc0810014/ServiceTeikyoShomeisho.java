@@ -41,7 +41,8 @@ public class ServiceTeikyoShomeisho {
         RString 整理番号 = ViewStateHolder.get(ViewStateKeys.償還払申請一覧_整理番号, RString.class);
         RString 様式番号 = ViewStateHolder.get(ViewStateKeys.償還払申請一覧_様式番号, RString.class);
         HihokenshaNo 被保険者番号 = ViewStateHolder.get(ViewStateKeys.償還払申請一覧_被保険者番号, HihokenshaNo.class);
-        FlexibleYearMonth サービス年月 = new FlexibleYearMonth(ViewStateHolder.get(ViewStateKeys.償還払申請一覧_サービス年月, RString.class));
+        FlexibleYearMonth サービス年月 = new FlexibleYearMonth((new RDate(ViewStateHolder.get(
+                ViewStateKeys.償還払申請一覧_サービス年月, RString.class).toString())).getYearMonth().toDateString());
 
         div.getPanelOne().getCcdKaigoAtenaInfo().onLoad(識別コード);
         if (被保険者番号 == null || 被保険者番号.isEmpty()) {
@@ -59,7 +60,7 @@ public class ServiceTeikyoShomeisho {
         // TODO 詳細画面から遷移の場合
         getHandler(div).initialize(serviceTeikyoShomeishoList);
         getHandler(div).setヘッダ_エリア(new RDate(サービス年月.toString()), 整理番号);
-        if (決定日.isEmpty()) {
+        if (決定日.isNullOrEmpty()) {
             div.getPanelTwo().getBtnShokanKeteiInfo().setDisabled(true);
         }
         return createResponse(div);

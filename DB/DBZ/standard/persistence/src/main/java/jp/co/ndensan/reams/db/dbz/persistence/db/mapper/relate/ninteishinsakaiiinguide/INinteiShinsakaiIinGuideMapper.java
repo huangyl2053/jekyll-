@@ -10,8 +10,10 @@ import jp.co.ndensan.reams.db.dbz.definition.mybatis.param.ninteishinsakaiiingui
 import jp.co.ndensan.reams.db.dbz.entity.db.relate.ninteishinsakaiiinguide.NinteiShinsakaiIinGuideEntity;
 
 /**
- *
  * 審査会委員一覧情報を取得するのマッパーインタフェースです。
+ * 
+ * @reamsid_L DBE-3000-030  lijia
+ * 
  */
 public interface INinteiShinsakaiIinGuideMapper {
 
