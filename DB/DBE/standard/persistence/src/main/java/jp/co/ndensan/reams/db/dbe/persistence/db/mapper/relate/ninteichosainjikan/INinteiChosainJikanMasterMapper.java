@@ -12,6 +12,8 @@ import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5221NinteichosaScheduleEnti
 
 /**
  * 認定調査スケジュール登録6のマッパーインタフェースです。
+ *
+ * @reamsid_L DBE-0022-010 linghuhang
  */
 public interface INinteiChosainJikanMasterMapper {
 

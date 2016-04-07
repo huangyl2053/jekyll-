@@ -12,6 +12,8 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
  * 認定調査スケジュール登録6を特定するためのMyBatis用パラメータクラスです。
+ *
+ * @reamsid_L DBE-0022-010 linghuhang
  */
 @lombok.Getter
 @SuppressWarnings("PMD.UnusedPrivateField")

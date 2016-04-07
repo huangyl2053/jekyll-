@@ -39,6 +39,8 @@ import jp.co.ndensan.reams.uz.uza.util.serialization.DataPassingConverter;
 
 /**
  * 認定調査スケジュール登録6のクラス。
+ *
+ * @reamsid_L DBE-0022-010 linghuhang
  */
 public class NinteiChosainJikanMasterHandler {
 
