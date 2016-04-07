@@ -12,6 +12,7 @@ import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT4001JukyushaDaichoEntity;
 /**
  * 受給者台帳情報を取得するのマッパーインタフェースです。
  *
+ * @reamsid_L DBZ-4550-020 zhangzhiming
  */
 public interface INinteiRirekiIchiranMapper {
 

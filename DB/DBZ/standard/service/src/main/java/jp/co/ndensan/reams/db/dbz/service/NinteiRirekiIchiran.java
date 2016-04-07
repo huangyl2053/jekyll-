@@ -18,8 +18,9 @@ import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
 
 /**
- *
  * 受給者台帳情報クラスです。
+ *
+ * @reamsid_L DBZ-4550-020 zhangzhiming
  */
 public class NinteiRirekiIchiran {
 

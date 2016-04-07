@@ -10,6 +10,7 @@ import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaN
 /**
  * 受給者台帳情報の取得するクラスです。
  *
+ * @reamsid_L DBZ-4550-020 zhangzhiming
  */
 @lombok.Getter
 @lombok.Setter
