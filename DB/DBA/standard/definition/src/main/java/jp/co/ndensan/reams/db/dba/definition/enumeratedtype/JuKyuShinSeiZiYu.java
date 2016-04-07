@@ -11,6 +11,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 /**
  * 受給申請事由の列挙型です。
  *
+ * @reamsid_L DBA-1090-021 wangkun
  */
 public enum JuKyuShinSeiZiYu implements IYokaigoJotaiKubun {
 
