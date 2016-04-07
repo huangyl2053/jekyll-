@@ -20,6 +20,8 @@ import jp.co.ndensan.reams.uz.uza.util.serialization.DataPassingConverter;
 /**
  *
  * ShikakuRirekiInfo_資格履歴情報のクラス。
+ *
+ * @reamsid_L DBZ-4560-010 wanghui
  */
 public class ShikakuRirekiInfo {
 
