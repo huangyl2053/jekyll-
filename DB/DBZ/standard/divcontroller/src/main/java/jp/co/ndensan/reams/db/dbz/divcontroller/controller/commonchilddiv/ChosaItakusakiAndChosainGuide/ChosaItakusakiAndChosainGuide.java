@@ -23,6 +23,8 @@ import jp.co.ndensan.reams.uz.uza.util.serialization.DataPassingConverter;
 /**
  *
  * 調査委託先＆調査員ガイドのクラス。
+ *
+ * @reamsid_L DBE-1300-020 wanghui
  */
 public class ChosaItakusakiAndChosainGuide {
 
@@ -84,6 +86,7 @@ public class ChosaItakusakiAndChosainGuide {
     public ResponseData<ChosaItakusakiAndChosainGuideDiv> onSelect(ChosaItakusakiAndChosainGuideDiv div) {
         ValidationMessageControlPairs validPairs = getValidationHandler(div).validateForSelectbtn();
         if (validPairs.iterator().hasNext()) {
+            div.getDgKensakuKekkaIchiran().setReadOnly(true);
             return ResponseData.of(div).addValidationMessages(validPairs).respond();
         }
         getHandler(div).onSelectbtn();
