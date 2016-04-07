@@ -40,6 +40,8 @@ import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
 /**
  *
  * 保険者入力補助サービスクラスです。
+ *
+ * @reamsid_L DBA-0180-020 lishengli
  */
 public class HokenshaNyuryokuHojoFinder {
 
