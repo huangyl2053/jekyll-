@@ -18,6 +18,8 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.ResponseHolder;
 
 /**
  * 特別医療意見のコントローラです。
+ *
+ * @reamsid_L DBE-3000-150 linghuhang
  */
 public class TokubetsuIryoIken {
 

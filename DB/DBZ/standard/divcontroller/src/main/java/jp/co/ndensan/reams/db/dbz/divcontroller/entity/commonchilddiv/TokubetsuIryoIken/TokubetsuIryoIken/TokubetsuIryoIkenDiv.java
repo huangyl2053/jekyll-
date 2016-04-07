@@ -13,7 +13,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 /**
  * TokubetsuIryoIken のクラスファイル
  *
- * @author 自動生成
+ * @reamsid_L DBE-3000-150 linghuhang
  */
 public class TokubetsuIryoIkenDiv extends Panel implements ITokubetsuIryoIkenDiv {
 
