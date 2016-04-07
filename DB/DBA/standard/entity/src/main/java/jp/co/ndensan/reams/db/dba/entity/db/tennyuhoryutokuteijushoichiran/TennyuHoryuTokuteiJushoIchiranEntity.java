@@ -14,8 +14,9 @@ import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
- *
  * 転入保留特定住所登録のエンティティクラスです。
+ *
+ * @reamsid_L DBA-0480-020 zhangzhiming
  */
 @lombok.Getter
 @lombok.Setter

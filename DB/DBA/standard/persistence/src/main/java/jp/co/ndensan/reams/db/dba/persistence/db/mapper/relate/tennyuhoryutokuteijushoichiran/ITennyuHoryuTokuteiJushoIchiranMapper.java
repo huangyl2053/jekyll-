@@ -9,8 +9,9 @@ import java.util.List;
 import jp.co.ndensan.reams.db.dba.entity.db.tennyuhoryutokuteijushoichiran.TennyuHoryuTokuteiJushoIchiranEntity;
 
 /**
- *
  * 転入保留特定住所登録のMapperクラスです。
+ *
+ * @reamsid_L DBA-0480-020 zhangzhiming
  */
 public interface ITennyuHoryuTokuteiJushoIchiranMapper {
 
