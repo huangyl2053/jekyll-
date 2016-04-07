@@ -19,6 +19,8 @@ import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 
 /**
  * 老人保健受給者台帳管理ハンドラクラスです。
+ *
+ * @reamsid_L DBU-1110-010 zuotao
  */
 public class DBU0130011MainHandler {
 
