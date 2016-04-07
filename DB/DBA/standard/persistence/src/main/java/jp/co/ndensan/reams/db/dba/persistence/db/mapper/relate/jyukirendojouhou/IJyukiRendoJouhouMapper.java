@@ -14,6 +14,8 @@ import jp.co.ndensan.reams.ua.uax.entity.db.basic.UaFt200FindShikibetsuTaishoEnt
 
 /**
  * 住基連動情報のマッパーインタフェースです。
+ *
+ * @reamsid_L DBA-0560-030 xuyannan
  */
 public interface IJyukiRendoJouhouMapper {
 

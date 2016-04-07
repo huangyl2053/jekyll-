@@ -9,6 +9,8 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
  * 住基連動登録者リスト帳票用データリストEntity。
+ *
+ * @reamsid_L DBA-0560-020 xuyannan
  */
 @lombok.Getter
 @lombok.Setter
