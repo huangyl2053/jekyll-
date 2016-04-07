@@ -9,6 +9,8 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
  * その他機関情報の取得するクラスです。
+ * 
+ * @reamsid_L DBE-3000-050 wangkun
  */
 @lombok.Getter
 @lombok.Setter
