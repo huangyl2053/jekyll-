@@ -32,6 +32,8 @@ import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
 
 /**
  * 合併市町村情報取得のサービスです。
+ *
+ * @reamsid_L DBU-0090-010 linghuhang
  */
 public class GappeiCityJohoBFinder {
 
