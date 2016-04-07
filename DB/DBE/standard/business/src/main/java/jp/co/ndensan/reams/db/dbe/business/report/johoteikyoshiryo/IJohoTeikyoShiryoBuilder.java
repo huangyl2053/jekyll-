@@ -10,6 +10,8 @@ import jp.co.ndensan.reams.uz.uza.report.IReportBuilder;
 
 /**
  * 要介護認定結果情報提供票（主治医）Builderのインターフェースクラスです。
+ * 
+ * @reamsid_L DBE-0220-020 wangkun
  */
 interface IJohoTeikyoShiryoBuilder extends IReportBuilder<JohoTeikyoShiryoReportSource> {
 }
