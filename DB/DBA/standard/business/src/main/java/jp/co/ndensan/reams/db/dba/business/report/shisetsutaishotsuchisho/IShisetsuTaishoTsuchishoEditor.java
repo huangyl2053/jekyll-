@@ -11,6 +11,9 @@ import jp.co.ndensan.reams.uz.uza.report.IReportEditor;
 /**
  *
  * 介護保険住所地特例施設退所通知書エディターのインターフェースクラスです。
+ *
+ * @reamsid_L DBA-0380-060 duanzhanli
+ *
  */
 interface IShisetsuTaishoTsuchishoEditor extends IReportEditor<ShisetsuTaishoTsuchishoReportSource> {
 
