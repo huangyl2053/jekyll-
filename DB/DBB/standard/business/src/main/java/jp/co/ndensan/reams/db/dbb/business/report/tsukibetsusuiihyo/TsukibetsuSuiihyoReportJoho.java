@@ -10,6 +10,8 @@ import java.util.List;
 /**
  *
  * 月別推移表票パラメータクラスです。
+ *
+ * @reamsid_L DBB-0760-050 wangxiaodong
  */
 @lombok.Getter
 @SuppressWarnings("PMD.UnusedPrivateField")

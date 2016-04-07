@@ -11,8 +11,9 @@ import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.report.ReportPropertyBase;
 
 /**
- *
  * 月別推移表のプロパティです。
+ *
+ * @reamsid_L DBB-0760-050 wangxiaodong
  */
 public class TsukibetsuSuiihyoProerty extends ReportPropertyBase<TsukibetsuSuiihyoReportSource> {
 

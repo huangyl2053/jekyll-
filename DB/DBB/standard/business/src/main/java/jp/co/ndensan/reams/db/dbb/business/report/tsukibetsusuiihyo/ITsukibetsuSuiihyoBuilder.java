@@ -9,8 +9,9 @@ import jp.co.ndensan.reams.db.dbb.entity.report.source.tsukibetsusuiihyo.Tsukibe
 import jp.co.ndensan.reams.uz.uza.report.IReportBuilder;
 
 /**
- *
  * 月別推移表Builderのインターフェースクラスです。
+ *
+ * @reamsid_L DBB-0760-050 wangxiaodong
  */
 public interface ITsukibetsuSuiihyoBuilder extends IReportBuilder<TsukibetsuSuiihyoReportSource> {
 

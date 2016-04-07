@@ -10,8 +10,9 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 import lombok.Getter;
 
 /**
- *
  * 月別推移表ヘッダのITEMです。
+ *
+ * @reamsid_L DBB-0760-050 wangxiaodong
  */
 @Getter
 @SuppressWarnings("PMD.UnusedPrivateField")
