@@ -10,6 +10,8 @@ import jp.co.ndensan.reams.uz.uza.math.Decimal;
 /**
  * DetalParameterです。
  *
+ * @reamsid_L DBU-1060-030 zhengshukai
+ *
  */
 @SuppressWarnings("PMD.UnusedPrivateField")
 @lombok.Getter
@@ -27,6 +29,7 @@ public final class DetalParameter {
 
     /**
      * パラメータの作成します。
+     *
      * @param 縦番号 縦番号
      * @param 横番号 横番号
      * @param 集計結果値 集計結果値

@@ -41,6 +41,8 @@ import jp.co.ndensan.reams.uz.uza.util.Models;
 /**
  * 事業報告（年報）補正、発行_様式２の８画面
  *
+ * @reamsid_L DBU-1060-030 zhengshukai
+ *
  */
 public class NenpoYoushiki2No8 {
 
