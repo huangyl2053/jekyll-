@@ -18,6 +18,8 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 /**
  *
  * DBCMNF2002_国保連情報受取データ取込_[171]介護給付費過誤決定通知書情報
+ *
+ * @reamsid_L DBC-0980-160 quxiaodong
  */
 public class TsuchishoJoho171 {
 
