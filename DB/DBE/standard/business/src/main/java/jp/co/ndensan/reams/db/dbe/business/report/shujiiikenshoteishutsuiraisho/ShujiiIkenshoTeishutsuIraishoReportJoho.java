@@ -9,6 +9,8 @@ import java.util.List;
 
 /**
  * 介護保険指定医依頼兼主治医意見書提出依頼書_帳票クラスパラメータクラスです。
+ *
+ * @reamsid_L DBE-0080-080 duanzhanli
  */
 @lombok.Getter
 @SuppressWarnings("PMD.UnusedPrivateField")

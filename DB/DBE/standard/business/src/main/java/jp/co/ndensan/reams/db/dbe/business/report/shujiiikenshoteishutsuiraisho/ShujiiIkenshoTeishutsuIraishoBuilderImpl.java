@@ -10,6 +10,8 @@ import jp.co.ndensan.reams.uz.uza.report.ReportEditorJoiner;
 
 /**
  * 介護保険指定医依頼兼主治医意見書提出依頼書Builderクラスです。
+ *
+ * @reamsid_L DBE-0080-080 duanzhanli
  */
 class ShujiiIkenshoTeishutsuIraishoBuilderImpl implements IShujiiIkenshoTeishutsuIraishoBuilder {
 
