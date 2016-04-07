@@ -17,6 +17,8 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 
 /**
  * 償還払い費支給申請決定_検索
+ *
+ * @reamsid_L DBC-1030-140 panhe
  */
 public class PnlShokanHanteiKekka {
 
