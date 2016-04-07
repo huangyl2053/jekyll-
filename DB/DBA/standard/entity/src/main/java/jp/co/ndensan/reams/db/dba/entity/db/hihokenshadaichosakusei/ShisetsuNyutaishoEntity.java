@@ -14,6 +14,8 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 /**
  * 入所施設のエンティティクラスです。
  *
+ * @reamsid_L DBA-0510-010 duanzhanli
+ *
  */
 @lombok.Getter
 @lombok.Setter

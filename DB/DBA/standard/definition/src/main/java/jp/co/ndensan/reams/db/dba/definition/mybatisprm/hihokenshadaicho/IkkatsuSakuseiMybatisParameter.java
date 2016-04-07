@@ -12,7 +12,10 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 import lombok.Getter;
 
 /**
- * 被保険者証一括発行のMyBatisパラメータです。
+ * 被保険者台帳一括作成のMyBatisパラメータです。
+ *
+ * @reamsid_L DBA-0510-010 duanzhanli
+ *
  */
 @SuppressWarnings("PMD.UnusedPrivateField")
 @Getter
