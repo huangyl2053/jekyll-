@@ -9,6 +9,9 @@ import jp.co.ndensan.reams.db.dba.entity.report.source.shisetsuhenkotsuchisho.Sh
 
 /**
  * 介護保険住所地特例施設変更通知書Editorです。
+ *
+ * @reamsid_L DBA-0380-070 duanzhanli
+ *
  */
 class ShisetsuHenkoTsuchishoEditor implements IShisetsuHenkoTsuchishoEditor {
 

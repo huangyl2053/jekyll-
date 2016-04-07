@@ -11,6 +11,9 @@ import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
 
 /**
  * 介護保険住所地特例施設変更通知書のReportです。
+ *
+ * @reamsid_L DBA-0380-070 duanzhanli
+ *
  */
 public class ShisetsuHenkoTsuchishoReport extends Report<ShisetsuHenkoTsuchishoReportSource> {
 

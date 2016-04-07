@@ -10,6 +10,9 @@ import jp.co.ndensan.reams.uz.uza.report.ReportEditorJoiner;
 
 /**
  * 介護保険住所地特例施設変更通知書Builderクラスです。
+ *
+ * @reamsid_L DBA-0380-070 duanzhanli
+ *
  */
 class ShisetsuHenkoTsuchishoBuilderImpl implements IShisetsuHenkoTsuchishoBuilder {
 
