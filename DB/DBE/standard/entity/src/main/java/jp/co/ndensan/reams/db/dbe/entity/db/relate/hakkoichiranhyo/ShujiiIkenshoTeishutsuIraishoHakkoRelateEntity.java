@@ -10,6 +10,8 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
  * 主治医意見書提出依頼書発行RelateEntityクラスです。
+ *
+ * @reamsid_L DBE-0080-130 duanzhanli
  */
 @SuppressWarnings("PMD.UnusedPrivateField")
 @lombok.Getter
