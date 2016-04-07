@@ -49,6 +49,7 @@ public class ZenkaiNinteiKekkaJohoHandler {
     public void onLoad(SubGyomuCode subGyomuCode,
             ShinseishoKanriNo shinseishoKanriNo,
             RString 参照結果) {
+        div.setHdnDatabaseSubGyomuCode(subGyomuCode.getColumnValue());
         if (new RString("1").equals(参照結果)) {
             set前回情報(subGyomuCode, shinseishoKanriNo);
         } else if (new RString("2").equals(参照結果)) {

@@ -3,7 +3,6 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package jp.co.ndensan.reams.db.dbu.batchcontroller.step.koikinaijushochitokurei;
 
 import java.util.ArrayList;
@@ -38,10 +37,11 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 /**
  *
  * 広域内住所地特例者情報の設定クラスです。
+ *
  * @reamsid_L DBU-1140-020 dongyabin
  */
 public class KoikinaiJushochiTokureiProcess extends SimpleBatchProcessBase {
-    
+
     private static final RString 直近 = new RString("1");
     private static final RString 基準日 = new RString("2");
     private static final RString 範囲 = new RString("3");
@@ -56,37 +56,37 @@ public class KoikinaiJushochiTokureiProcess extends SimpleBatchProcessBase {
 
     @Override
     protected void beforeExecute() {
-        mapper =  getMapper(IKoikinaiJushochiTokureiMapper.class);
+        mapper = getMapper(IKoikinaiJushochiTokureiMapper.class);
         super.beforeExecute();
     }
-    
+
     @Override
     protected void process() {
         set並び順と改頁();
         get市町村コードと市町村名称();
         set出力順ソート();
         // TODO QA 440 董亜彬 帳票仕様とフォームファイルがありません
-        // List<KoikinaiJushochiTokureishaIchiranhyoChohyoDataSakusei> 帳票データlist 
+        // List<KoikinaiJushochiTokureishaIchiranhyoChohyoDataSakusei> 帳票データlist
         帳票データlist = is帳票データ作成(is広域内住所地特例者一覧表情報Entity作成(get広域内住所地特例者情報()));
-        
-        
+
     }
-    
+
     @Override
     protected void afterExecute() {
         // TODO QA 440 董亜彬 帳票仕様とフォームファイルがありません
         KoikinaiJushochitokureishaIchiranhyoProperty property = new KoikinaiJushochitokureishaIchiranhyoProperty();
-        
+
     }
-    
+
     private List<KoikinaiJushochitokureishaIchiranhyoReport> toReports() {
         List<KoikinaiJushochitokureishaIchiranhyoReport> list = new ArrayList<>();
-        list.add(KoikinaiJushochitokureishaIchiranhyoReport.createFrom(
-                getHeadItem(),
-                reportJoho.getBodyItemList()));
+        // TODO QA 440 董亜彬 帳票仕様とフォームファイルがありません
+//        list.add(KoikinaiJushochitokureishaIchiranhyoReport.createFrom(
+//                getHeadItem(),
+//                reportJoho.getBodyItemList()));
         return list;
     }
-    
+
     private KoikinaiJushochitokureishaIchiranhyoHeadItem getHeadItem() {
         return new KoikinaiJushochitokureishaIchiranhyoHeadItem(基準日,
                 市町村コード,
@@ -102,7 +102,7 @@ public class KoikinaiJushochiTokureiProcess extends SimpleBatchProcessBase {
                 改頁,
                 改頁);
     }
-    
+
     private List<KoikinaiJushochiTokureiEntity> get広域内住所地特例者情報() {
         if (直近.equals(paramter.getModel())) {
             return get直近広住特適用();
@@ -113,26 +113,26 @@ public class KoikinaiJushochiTokureiProcess extends SimpleBatchProcessBase {
         }
         return new ArrayList<>();
     }
-    
+
     private List<KoikinaiJushochiTokureiEntity> get直近広住特適用() {
         List<KoikinaiJushochiTokureiRelateEntity> 直近広住特適用情報List = mapper.
                 get直近広住特適用情報(paramter.toMybatisParamter(getPsmParamter(直近)));
         return set広域内住所地特例者(直近広住特適用情報List, 直近);
     }
-    
+
     private List<KoikinaiJushochiTokureiEntity> get基準日広住特適用() {
         List<KoikinaiJushochiTokureiRelateEntity> 基準日広住特適用情報List = mapper.
                 get基準日広住特適用情報(paramter.toMybatisParamter(getPsmParamter(基準日)));
-        
+
         return set広域内住所地特例者(基準日広住特適用情報List, 基準日);
     }
-    
+
     private List<KoikinaiJushochiTokureiEntity> get範囲広住特適用() {
         List<KoikinaiJushochiTokureiRelateEntity> 範囲広住特適用情報List = mapper.
                 get範囲広住特適用情報(paramter.toMybatisParamter(getPsmParamter(範囲)));
         return set広域内住所地特例者(範囲広住特適用情報List, 範囲);
     }
-    
+
     private RString getPsmParamter(RString hanteiFlag) {
         ShikibetsuTaishoSearchKeyBuilder key = new ShikibetsuTaishoSearchKeyBuilder(
                 ShikibetsuTaishoGyomuHanteiKeyFactory.createInstance(GyomuCode.DB介護保険, KensakuYusenKubun.住登外優先), true);
@@ -158,7 +158,7 @@ public class KoikinaiJushochiTokureiProcess extends SimpleBatchProcessBase {
         UaFt200FindShikibetsuTaishoFunction uaFt200Psm = new UaFt200FindShikibetsuTaishoFunction(key.getPSM検索キー());
         return new RString(uaFt200Psm.getParameterMap().get("psmShikibetsuTaisho").toString());
     }
-    
+
     private List<KoikinaiJushochiTokureiEntity> set広域内住所地特例者(List<KoikinaiJushochiTokureiRelateEntity> 広住特適用情報List,
             RString hanteiFlag) {
         List<KoikinaiJushochiTokureiEntity> 広域内住所地特例者List = new ArrayList<>();
@@ -207,7 +207,7 @@ public class KoikinaiJushochiTokureiProcess extends SimpleBatchProcessBase {
         }
         return 広域内住所地特例者List;
     }
-    
+
     private void set広住喪失日_範囲(KoikinaiJushochiTokureiRelateEntity entity,
             KoikinaiJushochiTokureiEntity 広域内住所地特例者Entity) {
         KoikinaiJushochiTokureiRelateEntity 広域特解除情報 = mapper.get広域特解除情報(KoikinaiKaijoParamter.
@@ -219,14 +219,14 @@ public class KoikinaiJushochiTokureiProcess extends SimpleBatchProcessBase {
             if (広域特解除情報.getIdoJiyuCode().equals(広域特解除情報.getShikakuSoshitsuJiyuCode())) {
                 広域内住所地特例者Entity.set広住喪失日(nullToEmtiy(entity.getShikakuSoshitsuYMD()));
                 広域内住所地特例者Entity.set広住喪失届出日(nullToEmtiy(entity.getShikakuSoshitsuTodokedeYMD()));
-            } 
+            }
             if (広域特解除情報.getIdoJiyuCode().equals(広域特解除情報.getShikakuHenkoJiyuCode())) {
                 広域内住所地特例者Entity.set広住喪失日(nullToEmtiy(entity.getShikakuHenkoYMD()));
                 広域内住所地特例者Entity.set広住喪失届出日(nullToEmtiy(entity.getShikakuHenkoTodokedeYMD()));
             }
         }
     }
-    
+
     private void set広住喪失日_基準日(KoikinaiJushochiTokureiRelateEntity entity,
             KoikinaiJushochiTokureiEntity 広域内住所地特例者Entity) {
         KoikinaiJushochiTokureiRelateEntity 広域特解除情報 = mapper.get広域特解除情報(KoikinaiKaijoParamter.
@@ -238,18 +238,18 @@ public class KoikinaiJushochiTokureiProcess extends SimpleBatchProcessBase {
             if (広域特解除情報.getIdoJiyuCode().equals(広域特解除情報.getShikakuSoshitsuJiyuCode())) {
                 広域内住所地特例者Entity.set広住喪失日(nullToEmtiy(entity.getShikakuSoshitsuYMD()));
                 広域内住所地特例者Entity.set広住喪失届出日(nullToEmtiy(entity.getShikakuSoshitsuTodokedeYMD()));
-            } 
+            }
             if (広域特解除情報.getIdoJiyuCode().equals(広域特解除情報.getShikakuHenkoJiyuCode())) {
                 広域内住所地特例者Entity.set広住喪失日(nullToEmtiy(entity.getShikakuHenkoYMD()));
                 広域内住所地特例者Entity.set広住喪失届出日(nullToEmtiy(entity.getShikakuHenkoTodokedeYMD()));
             }
         }
     }
-    
+
     private void set並び順と改頁() {
         // TODO　QA：#73393 董亜彬　出力順取得方針不明、課題提出中
     }
-    
+
     private void get市町村コードと市町村名称() {
         if (!市町村DDL1件目コード.equals(paramter.getShichosonCode())) {
             this.市町村コード = paramter.getShichosonCode();
@@ -257,23 +257,24 @@ public class KoikinaiJushochiTokureiProcess extends SimpleBatchProcessBase {
         } else {
             Association association = AssociationFinderFactory.createInstance().getAssociation();
             this.市町村コード = new RString(
-                association.get地方公共団体コード().toString());
+                    association.get地方公共団体コード().toString());
             this.市町村名称 = association.get市町村名();
         }
     }
-    
+
     private KoikinaiJushochiTokureiItiranEntity is広域内住所地特例者一覧表情報Entity作成(List<KoikinaiJushochiTokureiEntity> entityList) {
         return new KoikinaiJushochiTokureiItiranEntity(並び順, 改頁, 市町村コード, 市町村名称, entityList);
     }
+
     private void set出力順ソート() {
         // TODO　QA：#73393 董亜彬　出力順取得方針不明、課題提出中
     }
-    
+
     private RString nullToEmtiy(Object obj) {
-        
+
         return obj == null ? RString.EMPTY : new RString(obj.toString());
     }
-    
+
     private List<KoikinaiJushochiTokureishaIchiranhyoChohyoDataSakusei> is帳票データ作成(KoikinaiJushochiTokureiItiranEntity entity) {
         return KoikinaiJushochiTokureishaIchiranhyoChohyoDataSakusei.createReportDate(entity);
     }
