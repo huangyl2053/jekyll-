@@ -12,8 +12,9 @@ import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
 
 /**
- *
  * 年金保険者判定のクラスです。
+ *
+ * @reamsid_L DBB-9040-050 wangxiaodong
  */
 public class NenkinHokenshaHantei {
 
