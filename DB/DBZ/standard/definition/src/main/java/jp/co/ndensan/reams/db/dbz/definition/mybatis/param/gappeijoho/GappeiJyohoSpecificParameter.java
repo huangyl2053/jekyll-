@@ -13,6 +13,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 /**
  * 合併市町村情報取得用パラメータクラス。
  *
+ * @reamsid_L DBU-0090-010 linghuhang
  */
 public final class GappeiJyohoSpecificParameter {
 

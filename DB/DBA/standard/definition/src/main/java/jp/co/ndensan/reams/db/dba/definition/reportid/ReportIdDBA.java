@@ -25,7 +25,7 @@ public enum ReportIdDBA {
     /**
      * 広域内住所地特例者一覧表の帳票ID。
      */
-    DBA200013(new ReportId("DBA200013"), new RString("広域内住所地特例者一覧表")),
+    DBA200013(new ReportId("DBA200013_KoikinaiJushochitokureishaIchiranhyo"), new RString("広域内住所地特例者一覧表")),
     /**
      * 被保険者証発行一覧表の帳票ＩＤです。
      */
