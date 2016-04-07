@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
+<!-- @reamsid_L DBU-1060-050 zhengshukai -->
 <mapper namespace="jp.co.ndensan.reams.db.dbu.persistence.db.mapper.relate.jigyohokokunenpo.IJigyoHokokuNenpoMapper">
 
     <resultMap id="getJigyoHokokuNenpoListResultMap" type="jp.co.ndensan.reams.db.dbu.entity.db.basic.DbT7021JigyoHokokuTokeiDataEntity" autoMapping="true">

@@ -12,6 +12,8 @@ import lombok.Getter;
 /**
  * 宛名識別対象PSM検索用パラメータです。
  *
+ * @reamsid_L DBU-1080-010 zhengshukai
+ *
  */
 @SuppressWarnings("PMD.UnusedPrivateField")
 @Getter

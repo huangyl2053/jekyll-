@@ -10,8 +10,9 @@ import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT5300GeninShikkanDac;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 
 /**
- *
  * 傷病の意見入力のFinderクラスです。
+ *
+ * @reamsid_L DBE-3000-130 zhengshukai
  */
 public class ShobyoIkenFinder {
 

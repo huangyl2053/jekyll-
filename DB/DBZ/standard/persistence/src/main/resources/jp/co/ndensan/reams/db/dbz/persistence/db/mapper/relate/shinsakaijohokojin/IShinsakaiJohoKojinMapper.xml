@@ -6,7 +6,7 @@ To change this template file, choose Tools | Templates
 and open the template in the editor.
 -->
 
-
+<!-- @reamsid_L DBE-3000-070 zhengshukai -->
 <mapper namespace="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.relate.shinsakaijohokojin.IShinsakaiJohoKojinMapper">
     <resultMap id = "KaisaiKekkaAndBashoJohoEntity" type="jp.co.ndensan.reams.db.dbz.entity.db.relate.shinsakaijohokojin.KaisaiKekkaAndBashoJohoEntity">
         <result property="介護認定審査会開催番号" column="shinsakaiKaisaiNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>

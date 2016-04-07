@@ -12,8 +12,9 @@ import jp.co.ndensan.reams.db.dbz.entity.db.relate.shinsakaijohokojin.KaisaiKekk
 import jp.co.ndensan.reams.db.dbz.entity.db.relate.shinsakaijohokojin.WariateIinAndIinJohoEntity;
 
 /**
- *
  * 審査会情報照会(個人)のMapperクラスです。
+ *
+ * @reamsid_L DBE-3000-070 zhengshukai
  */
 public interface IShinsakaiJohoKojinMapper {
 

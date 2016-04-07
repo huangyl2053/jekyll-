@@ -9,6 +9,8 @@ import jp.co.ndensan.reams.db.dbe.entity.report.source.ninteichosahyogaikyochosa
 
 /**
  * 要介護認定調査票（概況調査）のEditorです。
+ *
+ * @reamsid_L DBE-0080-030 xuyannan
  */
 public class ChosahyoGaikyochosaEditorImpl implements IChosahyoGaikyochosaEditor {
 

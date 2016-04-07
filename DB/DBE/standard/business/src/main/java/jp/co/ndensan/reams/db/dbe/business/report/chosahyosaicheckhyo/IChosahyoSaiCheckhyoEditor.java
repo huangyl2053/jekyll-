@@ -11,6 +11,8 @@ import jp.co.ndensan.reams.uz.uza.report.IReportEditor;
 /**
  *
  * 前回認定調査結果との比較表ヘッダエディターのインターフェースクラスです。
+ *
+ * @reamsid_L DBE-0080-120 duanzhanli
  */
 interface IChosahyoSaiCheckhyoEditor extends IReportEditor<ChosahyoSaiCheckhyoReportSource> {
 

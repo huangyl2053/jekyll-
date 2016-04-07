@@ -11,6 +11,7 @@ import jp.co.ndensan.reams.uz.uza.message.IMessageGettable;
 /**
  * 介護完了メッセージのHandlerクラスです。
  *
+ * @reamsid_L DBA-0020-010 wangchao
  */
 public class KaigoKanryoMessageHandler {
 

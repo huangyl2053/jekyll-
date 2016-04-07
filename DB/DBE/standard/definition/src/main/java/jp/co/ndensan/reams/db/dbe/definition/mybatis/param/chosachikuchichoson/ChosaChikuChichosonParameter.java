@@ -9,6 +9,8 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
  * 認定調査スケジュール登録7のMyBatis用パラメータクラスです。
+ *
+ * @reamsid_L DBE-0023-010 xuyannan
  */
 @lombok.Getter
 @SuppressWarnings("PMD.UnusedPrivateField")

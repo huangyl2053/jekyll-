@@ -13,6 +13,8 @@ import jp.co.ndensan.reams.uz.uza.report.ReportPropertyBase;
 /**
  *
  * {@link 前回認定調査結果との比較表のReport}のプロパティです。
+ *
+ * @reamsid_L DBE-0080-120 duanzhanli
  */
 public class ChosahyoSaiCheckhyoProperty extends ReportPropertyBase<ChosahyoSaiCheckhyoReportSource> {
 

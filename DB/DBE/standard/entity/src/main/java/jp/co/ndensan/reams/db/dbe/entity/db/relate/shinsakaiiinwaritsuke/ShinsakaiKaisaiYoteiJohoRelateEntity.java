@@ -11,6 +11,8 @@ import lombok.Setter;
 
 /**
  * 審査会開催予定情報RelateEntityクラスです。
+ *
+ * @reamsid_L DBE-0130-050 xuyannan
  */
 @Getter
 @Setter

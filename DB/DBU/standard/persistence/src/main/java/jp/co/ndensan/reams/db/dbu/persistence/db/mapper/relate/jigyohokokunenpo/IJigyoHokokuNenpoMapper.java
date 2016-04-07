@@ -12,6 +12,8 @@ import jp.co.ndensan.reams.db.dbu.entity.db.basic.DbT7021JigyoHokokuTokeiDataEnt
 /**
  * 事業報告（年報）補正、発行のMapperクラスです。
  *
+ * @reamsid_L DBU-1060-050 zhengshukai
+ *
  */
 public interface IJigyoHokokuNenpoMapper {
 

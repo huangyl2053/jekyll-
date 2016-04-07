@@ -16,6 +16,8 @@ import jp.co.ndensan.reams.uz.uza.report.SourceDataCollection;
 
 /**
  * 介護認定審査会スケジュール表かがみPrinterです。
+ *
+ * @reamsid_L DBE-0130-080 xuyannan
  */
 public class ShinsaschedulekagamiPrintService {
 

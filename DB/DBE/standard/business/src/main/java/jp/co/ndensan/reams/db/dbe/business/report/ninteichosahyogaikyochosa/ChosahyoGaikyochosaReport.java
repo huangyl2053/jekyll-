@@ -12,6 +12,8 @@ import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
 
 /**
  * 要介護認定調査票（概況調査）のReportです。
+ *
+ * @reamsid_L DBE-0080-030 xuyannan
  */
 public class ChosahyoGaikyochosaReport extends Report<ChosahyoGaikyochosaReportSource> {
 

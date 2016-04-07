@@ -18,8 +18,8 @@ import jp.co.ndensan.reams.db.dbe.definition.processprm.hakkoichiranhyo.ShujiiIk
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.hakkoichiranhyo.ShujiiIkenshoTeishutsuIraishoHakkoRelateEntity;
 import jp.co.ndensan.reams.db.dbe.entity.report.source.ikenshosakuseiiraiichiranhyo.IkenshoSakuseiIraiIchiranhyoReportSource;
 import jp.co.ndensan.reams.db.dbe.persistence.db.mapper.relate.hakkoichiranhyo.IShujiiIkenshoTeishutsuIraishoHakkoMapper;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBE;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo;
 import jp.co.ndensan.reams.db.dbz.definition.core.seibetsu.Seibetsu;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5301ShujiiIkenshoIraiJohoEntity;
 import jp.co.ndensan.reams.db.dbz.service.util.report.ReportUtil;
@@ -51,7 +51,9 @@ import jp.co.ndensan.reams.uz.uza.util.config.BusinessConfig;
 
 /**
  *
- * 帳票「主治医意見書作成依頼一覧表」の出力バッチフ処理クラスです
+ * 帳票「主治医意見書作成依頼一覧表」の出力バッチフ処理クラスです。
+ *
+ * @reamsid_L DBE-0080-130 duanzhanli
  */
 public class IkenshoSakuseiIraiIchiranhyoProcess extends BatchProcessBase<ShujiiIkenshoTeishutsuIraishoHakkoRelateEntity> {
 
@@ -236,10 +238,10 @@ public class IkenshoSakuseiIraiIchiranhyoProcess extends BatchProcessBase<Shujii
         dbT5301Entity.setShinseishoKanriNo(new ShinseishoKanriNo(entity.get申請書管理番号()));
         dbT5301Entity.setIkenshoIraiRirekiNo(entity.get最大依頼履歴番号());
         dbT5301Entity.setLogicalDeletedFlag(false);
-        RString iraiToYMD = processParamter.getIraiToYMD();
-        if (!RString.isNullOrEmpty(iraiToYMD)) {
-            dbT5301Entity.setIraishoShutsuryokuYMD(new FlexibleDate(iraiToYMD));
-            dbT5301Entity.setIkenshoShutsuryokuYMD(new FlexibleDate(iraiToYMD));
+        RString hakkobi = processParamter.getHakkobi();
+        if (!RString.isNullOrEmpty(hakkobi)) {
+            dbT5301Entity.setIraishoShutsuryokuYMD(new FlexibleDate(hakkobi));
+            dbT5301Entity.setIkenshoShutsuryokuYMD(new FlexibleDate(hakkobi));
         }
         RString 主治医意見書作成期限設定方法 = BusinessConfig.get(ConfigNameDBE.主治医意見書作成期限設定方法, SubGyomuCode.DBE認定支援);
         if (文字列1.equals(主治医意見書作成期限設定方法)) {

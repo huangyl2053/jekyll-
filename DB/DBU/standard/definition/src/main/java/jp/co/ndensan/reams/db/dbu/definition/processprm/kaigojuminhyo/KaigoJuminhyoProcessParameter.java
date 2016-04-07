@@ -13,6 +13,9 @@ import lombok.Setter;
 
 /**
  * 介護住民票個別事項連携情報作成【他社住基】のバッチ処理クラスのパラメータです。
+ * 
+ * @reamsid_L DBU-0350-020  lijia
+ * 
  */
 @SuppressWarnings("PMD.UnusedPrivateField")
 @Getter

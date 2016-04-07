@@ -4,16 +4,18 @@ package jp.co.ndensan.reams.db.dbu.divcontroller.entity.parentdiv.DBU0060031;
  * このファイルへの変更は、再生成時には損失するため
  * 不正な動作の原因になります。
  */
+
 import com.fasterxml.jackson.annotation.JsonProperty;
-import jp.co.ndensan.reams.uz.uza.ui.binding.*;
+import jp.co.ndensan.reams.uz.uza.ui.binding.DataGrid;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TabPanel;
 
 /**
- * tablitakuyobosabisujukyusuInput のクラスファイル 
- * 
- * @author 自動生成
+ * tablitakuyobosabisujukyusuInput のクラスファイル
+ *
+ * @reamsid_L DBU-1060-030 zhengshukai
  */
 public class tablitakuyobosabisujukyusuInputDiv extends TabPanel {
+
     // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2015-11-30_08-54-50">
     /*
      * [ private の作成 ]

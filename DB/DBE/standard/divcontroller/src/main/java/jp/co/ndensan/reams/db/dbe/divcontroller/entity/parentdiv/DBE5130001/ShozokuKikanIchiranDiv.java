@@ -12,7 +12,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 /**
  * ShozokuKikanIchiran のクラスファイル
  *
- * @reamsid_L DBE-0110-010  wangxiaodong
+ * @reamsid_L DBE-0110-010 wangxiaodong
  */
 public class ShozokuKikanIchiranDiv extends Panel {
 

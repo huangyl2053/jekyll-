@@ -22,8 +22,9 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPair;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
 
 /**
- *
  * 介護認定審査会開催結果登録の抽象ValidationHandlerクラスです。
+ *
+ * @reamsid_L DBE-0160-010 wangxiaodong
  */
 public class ShinsakaiKaisaiValidationHandler {
 

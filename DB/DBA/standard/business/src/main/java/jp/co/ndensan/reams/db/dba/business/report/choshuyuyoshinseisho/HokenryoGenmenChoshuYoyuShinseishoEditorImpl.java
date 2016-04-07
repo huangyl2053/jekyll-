@@ -10,6 +10,8 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
  * 介護保険料徴収猶予申請書のEditorです。
+ *
+ * @reamsid_L DBA-0540-693 xuyannan
  */
 public class HokenryoGenmenChoshuYoyuShinseishoEditorImpl implements IHokenryoGenmenChoshuYoyuShinseishoEditor {
 

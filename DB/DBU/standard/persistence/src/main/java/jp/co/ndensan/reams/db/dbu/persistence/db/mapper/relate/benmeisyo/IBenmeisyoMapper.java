@@ -11,8 +11,10 @@ import jp.co.ndensan.reams.db.dbu.entity.db.benmeisyo.BenmeiJohoResultEntity;
 import jp.co.ndensan.reams.ua.uax.entity.db.basic.UaFt200FindShikibetsuTaishoEntity;
 
 /**
- *
  * 弁明情報取得のマッパーインタフェースです。
+ *
+ * @reamsid_L DBU-1080-010 zhengshukai
+ *
  */
 public interface IBenmeisyoMapper {
 

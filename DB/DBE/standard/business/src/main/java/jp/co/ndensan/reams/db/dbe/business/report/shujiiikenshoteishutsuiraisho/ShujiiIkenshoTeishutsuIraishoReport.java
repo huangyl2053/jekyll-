@@ -12,6 +12,8 @@ import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
 
 /**
  * 介護保険指定医依頼兼主治医意見書提出依頼書のReportです。
+ *
+ * @reamsid_L DBE-0080-080 duanzhanli
  */
 public final class ShujiiIkenshoTeishutsuIraishoReport extends Report<ShujiiIkenshoTeishutsuIraishoReportSource> {
 

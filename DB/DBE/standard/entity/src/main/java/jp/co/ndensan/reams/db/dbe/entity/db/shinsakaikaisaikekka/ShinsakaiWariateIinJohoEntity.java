@@ -10,8 +10,9 @@ import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
+ * 介護認定審査会開催結果登録の審査会委員一覧検索Entityです。
  *
- * 介護認定審査会開催結果登録の審査会委員一覧検索Entity
+ * @reamsid_L DBE-0160-010 wangxiaodong
  */
 @lombok.Getter
 @lombok.Setter

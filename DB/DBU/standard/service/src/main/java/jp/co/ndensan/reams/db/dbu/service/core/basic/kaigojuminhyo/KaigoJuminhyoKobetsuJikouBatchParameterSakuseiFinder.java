@@ -20,7 +20,9 @@ import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
 
 /**
  * 介護住民票個別事項連携情報作成【他社住基】_バッチパラメータ作成するクラスです。
- *
+ * 
+ * @reamsid_L DBU-0350-040  lijia
+ * 
  */
 public class KaigoJuminhyoKobetsuJikouBatchParameterSakuseiFinder {
 

@@ -12,6 +12,8 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 /**
  * 弁明登録明細情報エンティティを作成します。
  *
+ * @reamsid_L DBU-1080-020  lijia
+ * 
  */
 @lombok.Getter
 @lombok.Setter

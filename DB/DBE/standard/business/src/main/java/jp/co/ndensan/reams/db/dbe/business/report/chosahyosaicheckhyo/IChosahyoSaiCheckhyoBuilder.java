@@ -11,6 +11,8 @@ import jp.co.ndensan.reams.uz.uza.report.IReportBuilder;
 /**
  *
  * 前回認定調査結果との比較表Builderのインターフェースクラスです。
+ *
+ * @reamsid_L DBE-0080-120 duanzhanli
  */
 interface IChosahyoSaiCheckhyoBuilder extends IReportBuilder<ChosahyoSaiCheckhyoReportSource> {
 

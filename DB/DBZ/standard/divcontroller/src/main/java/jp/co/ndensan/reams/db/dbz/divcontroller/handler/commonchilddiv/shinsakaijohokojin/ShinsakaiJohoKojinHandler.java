@@ -23,8 +23,9 @@ import jp.co.ndensan.reams.uz.uza.lang.RTime;
 import jp.co.ndensan.reams.uz.uza.util.code.CodeMaster;
 
 /**
- *
  * ShinsakaiJohoKojinのHandlerクラスです。
+ *
+ * @reamsid_L DBE-3000-070 zhengshukai
  */
 public class ShinsakaiJohoKojinHandler {
 

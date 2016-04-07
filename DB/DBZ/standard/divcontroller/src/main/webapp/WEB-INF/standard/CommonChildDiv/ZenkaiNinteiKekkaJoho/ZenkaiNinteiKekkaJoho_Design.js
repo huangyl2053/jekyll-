@@ -4,8 +4,16 @@ var DBZ;
         var Events = (function () {
             function Events() {
             }
-            Events.btn_ZenkaiShosai = function () {
-                return "btn_ZenkaiShosai";
+            Events.onOkClose_btnZenkaiShosai = function () {
+                return "onOkClose_btnZenkaiShosai";
+            };
+
+            Events.onBefore_Dialog = function () {
+                return "onBefore_Dialog";
+            };
+
+            Events.onCancelClose_btnZenkaiShosai = function () {
+                return "onCancelClose_btnZenkaiShosai";
             };
             return Events;
         })();
@@ -43,12 +51,12 @@ var DBZ;
                 return new UZA.TextBoxFlexibleDate(this.convFiledName("txtYukoKikanFrom"));
             };
 
-            Controls.prototype.btnZenkaiShosai = function () {
-                return new UZA.Button(this.convFiledName("btnZenkaiShosai"));
-            };
-
             Controls.prototype.txtYukoKikanTo = function () {
                 return new UZA.TextBoxFlexibleDate(this.convFiledName("txtYukoKikanTo"));
+            };
+
+            Controls.prototype.btnZenkaiShosai = function () {
+                return new UZA.ButtonDialog(this.convFiledName("btnZenkaiShosai"));
             };
             return Controls;
         })();

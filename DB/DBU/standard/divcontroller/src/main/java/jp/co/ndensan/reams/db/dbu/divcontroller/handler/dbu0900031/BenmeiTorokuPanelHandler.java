@@ -13,6 +13,8 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 /**
  * 弁明登録マスタ画面のハンドラクラスです。
  *
+ * @reamsid_L DBU-1080-020  lijia
+ * 
  */
 public class BenmeiTorokuPanelHandler {
 
@@ -45,11 +47,11 @@ public class BenmeiTorokuPanelHandler {
             } else {
                 panelDiv.setProcessState(状態_登録);
                 get画面初期の更新モードの表示制御();
-                panelDiv.getBenmeiTorokuMeisaiPanel().getTxtdateBenmeiSyoSakuseibi().clearValue();
+                panelDiv.getBenmeiTorokuMeisaiPanel().getTxtBenmeiSyoSakuseibi().clearValue();
                 panelDiv.getBenmeiTorokuMeisaiPanel().getTxtMultiLineBenmeisya().setValue(RString.EMPTY);
                 panelDiv.getBenmeiTorokuMeisaiPanel().getTxtMultiLineShobunNaiyo().setValue(RString.EMPTY);
                 panelDiv.getBenmeiTorokuMeisaiPanel().getTxtMultiLineBenmeiNaiyo().setValue(RString.EMPTY);
-                panelDiv.getBenmeiTorokuMeisaiPanel().getTxtDateBenmeisyoTeishutubi().clearValue();
+                panelDiv.getBenmeiTorokuMeisaiPanel().getTxtBenmeisyoTeishutubi().clearValue();
             }
         } else if (viewState.equals(状態_削除)) {
             panelDiv.setProcessState(状態_削除);
@@ -59,26 +61,26 @@ public class BenmeiTorokuPanelHandler {
     }
 
     private void get画面初期の更新モードの表示制御() {
-        panelDiv.getBenmeiTorokuMeisaiPanel().getTxtdateBenmeiSyoSakuseibi().setDisabled(false);
+        panelDiv.getBenmeiTorokuMeisaiPanel().getTxtBenmeiSyoSakuseibi().setDisabled(false);
         panelDiv.getBenmeiTorokuMeisaiPanel().getTxtMultiLineBenmeisya().setDisabled(false);
         panelDiv.getBenmeiTorokuMeisaiPanel().getTxtMultiLineShobunNaiyo().setDisabled(false);
         panelDiv.getBenmeiTorokuMeisaiPanel().getTxtMultiLineBenmeiNaiyo().setDisabled(false);
-        panelDiv.getBenmeiTorokuMeisaiPanel().getTxtDateBenmeisyoTeishutubi().setDisabled(false);
+        panelDiv.getBenmeiTorokuMeisaiPanel().getTxtBenmeisyoTeishutubi().setDisabled(false);
     }
 
     private void get画面初期の削除モードの表示制御() {
-        panelDiv.getBenmeiTorokuMeisaiPanel().getTxtdateBenmeiSyoSakuseibi().setDisabled(true);
+        panelDiv.getBenmeiTorokuMeisaiPanel().getTxtBenmeiSyoSakuseibi().setDisabled(true);
         panelDiv.getBenmeiTorokuMeisaiPanel().getTxtMultiLineBenmeisya().setDisabled(true);
         panelDiv.getBenmeiTorokuMeisaiPanel().getTxtMultiLineShobunNaiyo().setDisabled(true);
         panelDiv.getBenmeiTorokuMeisaiPanel().getTxtMultiLineBenmeiNaiyo().setDisabled(true);
-        panelDiv.getBenmeiTorokuMeisaiPanel().getTxtDateBenmeisyoTeishutubi().setDisabled(true);
+        panelDiv.getBenmeiTorokuMeisaiPanel().getTxtBenmeisyoTeishutubi().setDisabled(true);
     }
 
     private void get弁明登録明細情報のnull処理(BenmeiTorokuMeisaiJoho benmeiTorokuMeisaiJoho) {
         if (benmeiTorokuMeisaiJoho.getBemmeishoSakuseiYMD() == null) {
-            panelDiv.getBenmeiTorokuMeisaiPanel().getTxtdateBenmeiSyoSakuseibi().clearValue();
+            panelDiv.getBenmeiTorokuMeisaiPanel().getTxtBenmeiSyoSakuseibi().clearValue();
         } else {
-            panelDiv.getBenmeiTorokuMeisaiPanel().getTxtdateBenmeiSyoSakuseibi().setValue(
+            panelDiv.getBenmeiTorokuMeisaiPanel().getTxtBenmeiSyoSakuseibi().setValue(
                     new RDate(benmeiTorokuMeisaiJoho.getBemmeishoSakuseiYMD().toString()));
         }
         if (benmeiTorokuMeisaiJoho.getBemmeisha() == null) {
@@ -98,9 +100,9 @@ public class BenmeiTorokuPanelHandler {
             panelDiv.getBenmeiTorokuMeisaiPanel().getTxtMultiLineBenmeiNaiyo().setValue(benmeiTorokuMeisaiJoho.getBemmeiNaiyo());
         }
         if (benmeiTorokuMeisaiJoho.getBemmeishoTeishutsuYMD() == null) {
-            panelDiv.getBenmeiTorokuMeisaiPanel().getTxtDateBenmeisyoTeishutubi().clearValue();
+            panelDiv.getBenmeiTorokuMeisaiPanel().getTxtBenmeisyoTeishutubi().clearValue();
         } else {
-            panelDiv.getBenmeiTorokuMeisaiPanel().getTxtDateBenmeisyoTeishutubi().setValue(
+            panelDiv.getBenmeiTorokuMeisaiPanel().getTxtBenmeisyoTeishutubi().setValue(
                     new RDate(benmeiTorokuMeisaiJoho.getBemmeishoTeishutsuYMD().toString()));
         }
     }

@@ -12,8 +12,9 @@ import jp.co.ndensan.reams.db.dbe.entity.db.shinsakaikaisaikekka.ShinsakaiWariat
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
- *
  * 介護認定審査会開催結果登録
+ *
+ * @reamsid_L DBE-0160-010 wangxiaodong
  */
 public interface IShinsakaiKaisaiKekkaMapper {
 

@@ -16,6 +16,8 @@ import jp.co.ndensan.reams.uz.uza.report.SourceDataCollection;
 
 /**
  * 要介護認定調査票（概況調査）Printerクラスです。
+ *
+ * @reamsid_L DBE-0080-030 xuyannan
  */
 public class ChosahyoGaikyochosaPrintService {
 

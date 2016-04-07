@@ -18,8 +18,9 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.ResponseHolder;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
 
 /**
- *
  * 共有子Div 「ShobyoIken」のイベントを定義したDivControllerです。
+ *
+ * @reamsid_L DBE-3000-130 zhengshukai
  */
 public class ShobyoIken {
 

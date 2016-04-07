@@ -39,8 +39,9 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 import jp.co.ndensan.reams.uz.uza.util.Models;
 
 /**
- *
  * 介護認定審査会開催結果登録するクラスです。
+ *
+ * @reamsid_L DBE-0160-010 wangxiaodong
  */
 public class ShinsakaiKaisaiKekka {
 

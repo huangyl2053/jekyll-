@@ -13,8 +13,9 @@ import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
- *
  * 審査会委員情報のbusinessクラスです。
+ *
+ * @reamsid_L DBE-3000-070 zhengshukai
  */
 public class WariateIinAndIinJoho {
 

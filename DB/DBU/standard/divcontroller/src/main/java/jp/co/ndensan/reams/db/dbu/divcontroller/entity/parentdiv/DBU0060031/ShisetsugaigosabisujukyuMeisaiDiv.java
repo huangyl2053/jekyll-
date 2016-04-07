@@ -7,15 +7,16 @@ package jp.co.ndensan.reams.db.dbu.divcontroller.entity.parentdiv.DBU0060031;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import jp.co.ndensan.reams.uz.uza.ui.binding.*;
+import jp.co.ndensan.reams.uz.uza.ui.binding.DataGrid;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 
 /**
- * ShisetsugaigosabisujukyuMeisai のクラスファイル 
- * 
- * @author 自動生成
+ * ShisetsugaigosabisujukyuMeisai のクラスファイル
+ *
+ * @reamsid_L DBU-1060-030 zhengshukai
  */
 public class ShisetsugaigosabisujukyuMeisaiDiv extends Panel {
+
     // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2015-11-30_08-54-50">
     /*
      * [ private の作成 ]
@@ -59,7 +60,7 @@ public class ShisetsugaigosabisujukyuMeisaiDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setTablitakuyobosabisujukyusuInput(tablitakuyobosabisujukyusuInputDiv tablitakuyobosabisujukyusuInput) {
+    public void setTablitakuyobosabisujukyusuInput(tablitakuyobosabisujukyusuInputDiv tablitakuyobosabisujukyusuInput) {
         this.getTabShisetsugaigosabisujukyu().setTablitakuyobosabisujukyusuInput(tablitakuyobosabisujukyusuInput);
     }
 
@@ -69,7 +70,7 @@ public class ShisetsugaigosabisujukyuMeisaiDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setDgItakuyobosabisujukyusu(DataGrid<dgItakuyobosabisujukyusu_Row> dgItakuyobosabisujukyusu) {
+    public void setDgItakuyobosabisujukyusu(DataGrid<dgItakuyobosabisujukyusu_Row> dgItakuyobosabisujukyusu) {
         this.getTabShisetsugaigosabisujukyu().getTablitakuyobosabisujukyusuInput().setDgItakuyobosabisujukyusu(dgItakuyobosabisujukyusu);
     }
 
@@ -79,7 +80,7 @@ public class ShisetsugaigosabisujukyuMeisaiDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setTabChiikimitchakuyobosabisujukyuInput(tabChiikimitchakuyobosabisujukyuInputDiv tabChiikimitchakuyobosabisujukyuInput) {
+    public void setTabChiikimitchakuyobosabisujukyuInput(tabChiikimitchakuyobosabisujukyuInputDiv tabChiikimitchakuyobosabisujukyuInput) {
         this.getTabShisetsugaigosabisujukyu().setTabChiikimitchakuyobosabisujukyuInput(tabChiikimitchakuyobosabisujukyuInput);
     }
 
@@ -89,7 +90,7 @@ public class ShisetsugaigosabisujukyuMeisaiDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setDgChiikimitchakuyobosabisujukyu(DataGrid<dgChiikimitchakuyobosabisujukyu_Row> dgChiikimitchakuyobosabisujukyu) {
+    public void setDgChiikimitchakuyobosabisujukyu(DataGrid<dgChiikimitchakuyobosabisujukyu_Row> dgChiikimitchakuyobosabisujukyu) {
         this.getTabShisetsugaigosabisujukyu().getTabChiikimitchakuyobosabisujukyuInput().setDgChiikimitchakuyobosabisujukyu(dgChiikimitchakuyobosabisujukyu);
     }
 
@@ -99,7 +100,7 @@ public class ShisetsugaigosabisujukyuMeisaiDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setTabHisetsugaigosabisujukyuInput(tabHisetsugaigosabisujukyuInputDiv tabHisetsugaigosabisujukyuInput) {
+    public void setTabHisetsugaigosabisujukyuInput(tabHisetsugaigosabisujukyuInputDiv tabHisetsugaigosabisujukyuInput) {
         this.getTabShisetsugaigosabisujukyu().setTabHisetsugaigosabisujukyuInput(tabHisetsugaigosabisujukyuInput);
     }
 
@@ -109,7 +110,7 @@ public class ShisetsugaigosabisujukyuMeisaiDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setDgHisetsugaigosabisujukyu(DataGrid<dgHisetsugaigosabisujukyu_Row> dgHisetsugaigosabisujukyu) {
+    public void setDgHisetsugaigosabisujukyu(DataGrid<dgHisetsugaigosabisujukyu_Row> dgHisetsugaigosabisujukyu) {
         this.getTabShisetsugaigosabisujukyu().getTabHisetsugaigosabisujukyuInput().setDgHisetsugaigosabisujukyu(dgHisetsugaigosabisujukyu);
     }
 

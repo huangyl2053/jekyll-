@@ -45,6 +45,9 @@ import jp.co.ndensan.reams.uz.uza.spool.entities.UzUDE0835SpoolOutputType;
 
 /**
  * 介護住民票個別事項連携情報作成【他社住基】のバッチ処理のCSV出力のプロセスクラスです。
+ * 
+ * @reamsid_L DBU-0350-020  lijia
+ * 
  */
 public class KaigoJuminhyoEucCsvProcess extends BatchProcessBase<KaigoJuminhyoRelateEntity> {
 

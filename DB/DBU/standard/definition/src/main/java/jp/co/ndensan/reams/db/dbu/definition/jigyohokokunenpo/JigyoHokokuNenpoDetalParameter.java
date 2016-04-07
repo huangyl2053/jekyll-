@@ -14,6 +14,8 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 /**
  * 事業報告年報詳細データの取得処理のMyBatisパラメタークラスです。
  *
+ * @reamsid_L DBU-1060-050 zhengshukai
+ *
  */
 @lombok.Getter
 @SuppressWarnings("PMD.UnusedPrivateField")

@@ -3,22 +3,18 @@ package jp.co.ndensan.reams.db.dbu.divcontroller.entity.parentdiv.DBU0060031;
  * このコードはツールによって生成されました。
  * このファイルへの変更は、以下の状況下で不正な動作の原因になったり、
  * コードが再生成されるときに損失したりします。
- * Fri Jan 29 15:47:51 CST 2016 
+ * Fri Jan 29 15:47:51 CST 2016
  */
 
-
-
-import jp.co.ndensan.reams.uz.uza.ui.binding.DataRow;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.ui.binding.DataRow;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxNum;
 
-
 /**
- * dgHisetsugaigosabisujukyu_Row のクラスファイル 
- * 
- * @author 自動生成
+ * dgHisetsugaigosabisujukyu_Row のクラスファイル
+ *
+ * @reamsid_L DBU-1060-030 zhengshukai
  */
-
 public class dgHisetsugaigosabisujukyu_Row extends DataRow {
     // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2015-11-30_08-54-50">
 

@@ -18,6 +18,9 @@ import jp.co.ndensan.reams.uz.uza.math.Decimal;
 
 /**
  * 構成介護住民票個別事項連携情報[他社住基]Entityクラスです。
+ * 
+ * @reamsid_L DBU-0350-020  lijia
+ * 
  */
 @SuppressWarnings("PMD.UnusedPrivateField")
 @lombok.Getter

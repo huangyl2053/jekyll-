@@ -11,8 +11,9 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.util.db.IDbAccessable;
 
 /**
- *
  * 審査会委員情報のRelateEntityクラスです。
+ *
+ * @reamsid_L DBE-3000-070 zhengshukai
  */
 @lombok.Getter
 @lombok.Setter

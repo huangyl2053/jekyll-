@@ -11,6 +11,8 @@ import jp.co.ndensan.reams.db.dbu.entity.db.relate.benmeitoroku.BenmeiTorokuMeis
 /**
  * 弁明登録明細情報の取得処理を行うです。
  *
+ * @reamsid_L DBU-1080-020  lijia
+ * 
  */
 public interface IBenmeiTorokuMeisaiJohoMapper {
 

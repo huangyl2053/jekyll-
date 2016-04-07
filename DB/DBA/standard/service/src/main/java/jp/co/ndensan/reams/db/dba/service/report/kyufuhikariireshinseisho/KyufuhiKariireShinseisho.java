@@ -13,8 +13,8 @@ import jp.co.ndensan.reams.db.dba.business.report.kyufuhikariireshinseisho.Kyufu
 import jp.co.ndensan.reams.db.dba.business.report.kyufuhikariireshinseisho.KyufuhiKariireiShinseishoReport;
 import jp.co.ndensan.reams.db.dba.entity.report.kyufuhikariireshinseisho.KyufuhiKariireiShinseishoReportSource;
 import jp.co.ndensan.reams.db.dba.service.core.tokuteifutangendogakushinseisho.TokuteifutanGendogakuShinseisho;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBU;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.kyotsu.GaikokujinSeinengappiHyojihoho;
 import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.kyotsu.NinshoshaDenshikoinshubetsuCode;
 import jp.co.ndensan.reams.ur.urz.business.report.parts.ninshosha.INinshoshaSourceBuilder;
@@ -52,6 +52,8 @@ import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 
 /**
  * 介護保険給付費借入申請書のPrintクラスです。
+ *
+ * @reamsid_L DBA-0540-540 xuyannan
  */
 public class KyufuhiKariireShinseisho {
 

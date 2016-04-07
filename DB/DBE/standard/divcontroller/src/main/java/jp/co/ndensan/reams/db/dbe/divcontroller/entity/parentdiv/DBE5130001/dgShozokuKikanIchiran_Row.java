@@ -16,7 +16,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.TextBox;
 /**
  * dgShozokuKikanIchiran_Row のクラスファイル
  *
- * @reamsid_L DBE-0110-010  wangxiaodong
+ * @reamsid_L DBE-0110-010 wangxiaodong
  */
 public class dgShozokuKikanIchiran_Row extends DataRow {
     // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-01-15_09-59-03">

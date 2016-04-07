@@ -13,8 +13,8 @@ import jp.co.ndensan.reams.db.dba.business.report.homonkaigoriyoushafutangakugen
 import jp.co.ndensan.reams.db.dba.business.report.homonkaigoriyoushafutangakugengakushinseisho.HomonkaigoRiyoushaFutangakuGengakuShinseishoReport;
 import jp.co.ndensan.reams.db.dba.entity.report.homonkaigoriyoushafutangakugengakushinseisho.HomonKaigoRiyoshaFutangakuGengakuShinseishoReportSource;
 import jp.co.ndensan.reams.db.dba.service.core.tokuteifutangendogakushinseisho.TokuteifutanGendogakuShinseisho;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBU;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.kyotsu.GaikokujinSeinengappiHyojihoho;
 import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.kyotsu.NinshoshaDenshikoinshubetsuCode;
 import jp.co.ndensan.reams.ur.urz.business.report.parts.ninshosha.INinshoshaSourceBuilder;
@@ -52,6 +52,7 @@ import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 /**
  * 訪問介護利用者負担額減額申請書Printクラスです。
  *
+ * @reamsid_L DBA-0540-420 zhengshukai
  */
 public class HomonkaigoRiyoushaFutangakuGengakuShinseisho {
 
