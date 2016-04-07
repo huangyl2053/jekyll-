@@ -18,6 +18,8 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
  * 期月のリストを保持します。
+ *
+ * @reamsid_L DBB-9020-100 sunhaidi
  */
 public class KitsukiList {
 

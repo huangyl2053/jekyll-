@@ -10,6 +10,8 @@ import jp.co.ndensan.reams.db.dbb.entity.db.basic.DbT2013HokenryoDankaiEntity;
 
 /**
  * {@link jp.co.ndensan.reams.db.dbb.persistence.db.mapper.basic.IDbT2013HokenryoDankaiMapper}のマッパーIFです。
+ *
+ * @reamsid_L DBB-9020-130 sunhaidi
  */
 public interface IDbT2013HokenryoDankaiMapper {
 

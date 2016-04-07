@@ -9,6 +9,8 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
  * 月処理区分のインタフェースです。
+ *
+ * @reamsid_L DBB-9020-080 sunhaidi
  */
 public interface ITsukiShorkiKubun {
 

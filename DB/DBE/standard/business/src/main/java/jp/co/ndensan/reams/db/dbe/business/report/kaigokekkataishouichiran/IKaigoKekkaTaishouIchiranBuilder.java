@@ -9,8 +9,9 @@ import jp.co.ndensan.reams.db.dbe.entity.report.source.KekkatsuchiTaishoshaIchir
 import jp.co.ndensan.reams.uz.uza.report.IReportBuilder;
 
 /**
- *
  * 要介護認定結果通知書対象者一覧表Builderのインターフェースクラスです。
+ *
+ * @reamsid_L DBE-0190-020 lizhuoxuan
  */
 interface IKaigoKekkaTaishouIchiranBuilder extends IReportBuilder<KekkatsuchiTaishoshaIchiranReportSource> {
 

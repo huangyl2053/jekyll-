@@ -7,7 +7,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 /**
  * 普徴期情報月処理区分を表す列挙型です。
  *
- * @author LDNS
+ * @reamsid_L DBB-9020-080 sunhaidi
  */
 public enum FuchokiJohoTsukiShoriKubun implements ITsukiShorkiKubun {
 

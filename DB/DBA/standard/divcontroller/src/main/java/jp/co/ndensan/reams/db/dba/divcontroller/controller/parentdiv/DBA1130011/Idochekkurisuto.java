@@ -16,6 +16,8 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
 
 /**
  * 異動チェックリストのコントローラです。
+ *
+ * @reamsid_L DBA-0530-010 chengsanyuan
  */
 public class Idochekkurisuto {
 

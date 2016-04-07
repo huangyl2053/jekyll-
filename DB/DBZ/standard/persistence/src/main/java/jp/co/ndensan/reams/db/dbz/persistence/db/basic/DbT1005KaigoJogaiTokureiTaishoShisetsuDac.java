@@ -31,7 +31,7 @@ import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
 /**
  * 介護除外住所地特例対象施設のデータアクセスクラスです。
  *
- * @reamsid_L DBA-9999-021,wanghui
+ * @reamsid_L DBX-9999-021 wanghui
  */
 public class DbT1005KaigoJogaiTokureiTaishoShisetsuDac implements ISaveable<DbT1005KaigoJogaiTokureiTaishoShisetsuEntity> {
 

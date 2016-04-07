@@ -11,6 +11,8 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
  * 保険料段階リストクラスです。
+ *
+ * @reamsid_L DBB-9020-120 sunhaidi
  */
 public class HokenryoDankaiList {
 
