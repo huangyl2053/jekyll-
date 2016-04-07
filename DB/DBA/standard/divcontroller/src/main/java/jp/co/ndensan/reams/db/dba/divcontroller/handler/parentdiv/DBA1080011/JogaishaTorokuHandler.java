@@ -17,6 +17,7 @@ import jp.co.ndensan.reams.db.dba.service.core.shikakushutokujogaishakanri.Shika
 import jp.co.ndensan.reams.db.dbz.business.core.koikizenshichosonjoho.ShichosonCodeYoriShichoson;
 import jp.co.ndensan.reams.db.dbz.service.core.basic.koikishichosonjoho.KoikiShichosonJohoFinder;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
+import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.exclusion.LockingKey;
@@ -25,6 +26,8 @@ import jp.co.ndensan.reams.uz.uza.lang.ApplicationException;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.log.accesslog.core.ExpandedInformation;
+import jp.co.ndensan.reams.uz.uza.log.accesslog.core.PersonalData;
 import jp.co.ndensan.reams.uz.uza.ui.binding.RowState;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
@@ -32,6 +35,8 @@ import jp.co.ndensan.reams.uz.uza.util.db.SearchResult;
 
 /**
  * 資格取得除外者登録DivのHandlerクラスです。
+ *
+ * @reamsid_L DBA-0440-030 zhangzhiming
  */
 public class JogaishaTorokuHandler {
 
@@ -273,10 +278,13 @@ public class JogaishaTorokuHandler {
         return createValidationHandler(div).juufukuCheck();
     }
 
+    private PersonalData toPersonalData(ShikibetsuCode 識別コード) {
+        ExpandedInformation expandedInfo = new ExpandedInformation(new Code("01"), new RString("有り"), new RString("無し"));
+        return PersonalData.of(識別コード, expandedInfo);
+    }
+
     private void アクセスログ() {
-// TODO 技术点
-//    PersonalData
-//AccessLogger.
+//        AccessLogger.log(AccessLogType.照会, toPersonalData(new ShikibetsuCode(dgRowList.get(i).getShikibetsuCode())));
     }
 
     private void set除外対象者エリア(dgNenreiTotatshusha_Row row) {
