@@ -18,6 +18,8 @@ import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
 
 /**
  * 年齢到達登録者リスト作成クラスです。
+ *
+ * @reamsid_L DBA-0570-030 xuyannan
  */
 public class NenreiTotatsushaTorokuListFinder {
 

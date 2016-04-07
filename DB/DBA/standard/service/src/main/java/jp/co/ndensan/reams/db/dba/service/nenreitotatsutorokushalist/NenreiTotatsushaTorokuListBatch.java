@@ -20,6 +20,8 @@ import jp.co.ndensan.reams.uz.uza.lang.Separator;
 
 /**
  * 年齢到達登録者リスト帳票用データ作成クラス。
+ *
+ * @reamsid_L DBA-0570-040 xuyannan
  */
 public class NenreiTotatsushaTorokuListBatch {
 
