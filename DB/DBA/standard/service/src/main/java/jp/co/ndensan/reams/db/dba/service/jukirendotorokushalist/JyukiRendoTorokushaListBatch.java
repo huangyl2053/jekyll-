@@ -20,6 +20,8 @@ import jp.co.ndensan.reams.uz.uza.lang.Separator;
 
 /**
  * 帳票データ作成クラス。
+ *
+ * @reamsid_L DBA-0560-040 xuyannan
  */
 public class JyukiRendoTorokushaListBatch {
 

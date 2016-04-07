@@ -49,6 +49,8 @@ import jp.co.ndensan.reams.uz.uza.util.code.entity.UzT0007CodeEntity;
 
 /**
  * 住基連動登録者リストを作成します。
+ *
+ * @reamsid_L DBA-0560-020 xuyannan
  */
 public class JyukiRendoJouhouProcess extends SimpleBatchProcessBase {
 

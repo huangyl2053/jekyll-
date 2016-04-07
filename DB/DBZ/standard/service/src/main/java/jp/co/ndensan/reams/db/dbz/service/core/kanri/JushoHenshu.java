@@ -29,8 +29,9 @@ import jp.co.ndensan.reams.uz.uza.util.config.BusinessConfig;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 
 /**
- *
  * 住所編集のクラスです。
+ *
+ * @reamsid_L DBB-9030-010 wangxiaodong
  */
 public class JushoHenshu {
 

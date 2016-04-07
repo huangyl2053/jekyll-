@@ -17,6 +17,8 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
  * 処理日付管理マスタに更新します。
+ *
+ * @reamsid_L DBA-0560-020 xuyannan
  */
 public class ShoriDateKanriDBUpdateProcess extends SimpleBatchProcessBase {
 
