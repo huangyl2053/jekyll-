@@ -16,6 +16,8 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 /**
  * データEntiyのBusinessクラスです。
  *
+ * @reamsid_L DBE-3000-030  lijia
+ * 
  */
 public class NinteiShinsakaiIinGuideResult {
 

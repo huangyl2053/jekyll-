@@ -11,6 +11,8 @@ import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
 
 /**
  * 期と月を使用して文字列を編集します。
+ *
+ * @reamsid_L DBB-9020-090 sunhaidi
  */
 public class KitsukiHyoki {
 

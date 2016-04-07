@@ -16,6 +16,8 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
 
 /**
  * 介護認定審査会開催予定登録のバリデーションチェッククラスです。
+ *
+ * @reamsid_L DBE-0130-020 xuyannan
  */
 public class ShinsakaiIinWaritsukeValidationHandler {
 

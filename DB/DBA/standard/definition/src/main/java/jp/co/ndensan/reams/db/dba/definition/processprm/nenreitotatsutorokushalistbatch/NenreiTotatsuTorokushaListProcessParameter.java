@@ -15,6 +15,8 @@ import lombok.Setter;
 
 /**
  * 年齢到達登録者リストのバッチ処理クラスのパラメータ。
+ *
+ * @reamsid_L DBA-0570-020 xuyannan
  */
 @SuppressWarnings("PMD.UnusedPrivateField")
 @Getter

@@ -14,6 +14,8 @@ import jp.co.ndensan.reams.uz.uza.batch.flow.IBatchFlowCommand;
 /**
  *
  * 主治医意見書作成依頼発行一覧表_バッチフロークラスです。
+ *
+ * @reamsid_L DBE-0080-150 duanzhanli
  */
 public class ShujiiIkenshoSakuseiFlow extends BatchFlowBase<IraishoIkkatsuHakkoBatchParamter> {
 

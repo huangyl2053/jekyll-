@@ -20,6 +20,8 @@ import jp.co.ndensan.reams.uz.uza.util.config.BusinessConfig;
 
 /**
  * 更正月判定のクラスです。
+ *
+ * @reamsid_L DBB-9020-050 sunhaidi
  */
 public class KoseiTsukiHantei {
 

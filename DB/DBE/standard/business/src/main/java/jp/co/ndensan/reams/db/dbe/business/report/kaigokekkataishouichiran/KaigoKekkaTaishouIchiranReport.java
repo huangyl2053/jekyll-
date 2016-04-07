@@ -14,6 +14,8 @@ import lombok.NonNull;
 
 /**
  * 要介護認定結果通知書対象者一覧表のReportです。
+ *
+ * @reamsid_L DBE-0190-020 lizhuoxuan
  */
 public class KaigoKekkaTaishouIchiranReport extends Report<KekkatsuchiTaishoshaIchiranReportSource> {
 

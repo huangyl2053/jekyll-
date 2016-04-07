@@ -27,6 +27,9 @@ import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
 
 /**
  * 認定審査会委員ガイド情報クラスです。
+ * 
+ * @reamsid_L DBE-3000-030  lijia
+ * 
  */
 public class NinteiShinsakaiIinGuideManager {
 

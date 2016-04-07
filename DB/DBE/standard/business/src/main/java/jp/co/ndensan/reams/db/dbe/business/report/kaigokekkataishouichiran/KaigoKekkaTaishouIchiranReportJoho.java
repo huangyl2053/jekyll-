@@ -9,6 +9,8 @@ import java.util.List;
 
 /**
  * 要介護認定結果通知書対象者一覧表作成_帳票クラスパラメータクラスです。
+ *
+ * @reamsid_L DBE-0190-020 lizhuoxuan
  */
 @lombok.Getter
 @SuppressWarnings("PMD.UnusedPrivateField")

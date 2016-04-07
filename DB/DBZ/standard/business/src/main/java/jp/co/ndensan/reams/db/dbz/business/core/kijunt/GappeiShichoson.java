@@ -15,8 +15,9 @@ import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
- * 単一全合併市町村情報の取得します
+ * 単一全合併市町村情報の取得します。
  *
+ * @reamsid_L DBU-0250-010 wangxiaodong
  */
 public class GappeiShichoson implements IKoseiShichosonMaster {
 

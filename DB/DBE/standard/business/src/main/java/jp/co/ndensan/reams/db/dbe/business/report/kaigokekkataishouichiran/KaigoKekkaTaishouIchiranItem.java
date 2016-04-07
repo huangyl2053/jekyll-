@@ -9,6 +9,8 @@ import lombok.Getter;
 
 /**
  * 要介護認定結果通知書対象者一覧表のITEMです。
+ *
+ * @reamsid_L DBE-0190-020 lizhuoxuan
  */
 @Getter
 @SuppressWarnings("PMD.UnusedPrivateField")

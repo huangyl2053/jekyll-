@@ -27,7 +27,7 @@ import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
 /**
  * 介護事業者指定サービスのデータアクセスクラスです。
  *
- * @reamsid_L DBA-9999-021,wanghui
+ * @reamsid_L DBX-9999-021wanghui
  */
 public class DbT7063KaigoJigyoshaShiteiServiceDac implements ISaveable<DbT7063KaigoJigyoshaShiteiServiceEntity> {
 

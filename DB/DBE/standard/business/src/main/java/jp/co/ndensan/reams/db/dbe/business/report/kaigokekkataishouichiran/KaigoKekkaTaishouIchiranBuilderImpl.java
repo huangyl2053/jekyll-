@@ -10,6 +10,8 @@ import jp.co.ndensan.reams.uz.uza.report.ReportEditorJoiner;
 
 /**
  * 要介護認定結果通知書対象者一覧表Builderクラスです。
+ *
+ * @reamsid_L DBE-0190-020 lizhuoxuan
  */
 class KaigoKekkaTaishouIchiranBuilderImpl implements IKaigoKekkaTaishouIchiranBuilder {
 

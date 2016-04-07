@@ -17,6 +17,8 @@ import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 
 /**
  * 本算定以降判定のクラスです。
+ *
+ * @reamsid_L DBB-9020-040 sunhaidi
  */
 public class HonsanteiIkoHantei {
 

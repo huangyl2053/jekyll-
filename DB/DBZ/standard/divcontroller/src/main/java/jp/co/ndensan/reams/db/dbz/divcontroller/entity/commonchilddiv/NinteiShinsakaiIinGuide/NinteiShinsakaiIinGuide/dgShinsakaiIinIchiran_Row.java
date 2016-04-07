@@ -15,7 +15,8 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 /**
  * dgShinsakaiIinIchiran_Row のクラスファイル 
  * 
- * @author 自動生成
+ * @reamsid_L DBE-3000-030  lijia
+ * 
  */
 
 public class dgShinsakaiIinIchiran_Row extends DataRow {

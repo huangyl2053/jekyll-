@@ -13,6 +13,8 @@ import lombok.Getter;
 
 /**
  * 年齢到達登録者リストのMyBatisパラメータ。
+ *
+ * @reamsid_L DBA-0570-040 xuyannan
  */
 @SuppressWarnings("PMD.UnusedPrivateField")
 @Getter

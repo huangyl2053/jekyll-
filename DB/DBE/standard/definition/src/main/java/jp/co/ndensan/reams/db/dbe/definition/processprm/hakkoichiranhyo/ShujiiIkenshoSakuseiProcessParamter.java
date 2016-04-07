@@ -14,6 +14,8 @@ import lombok.Getter;
 
 /**
  * 主治医意見書作成依頼発行一覧表ですためのProcess用パラメータクラスです。
+ *
+ * @reamsid_L DBE-0080-150 duanzhanli
  */
 @SuppressWarnings("PMD.UnusedPrivateField")
 @Getter

@@ -13,6 +13,8 @@ import jp.co.ndensan.reams.uz.uza.batch.flow.IBatchFlowCommand;
 
 /**
  * 年齢到達登録者_バッチ処理クラスです。
+ *
+ * @reamsid_L DBA-0570-020 xuyannan
  */
 public class NenreiTotatsuTorokushaListBatchFlow extends BatchFlowBase<NenreiTotatsuTorokushaListBatchParameter> {
 

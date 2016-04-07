@@ -20,7 +20,9 @@ import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
 
 /**
- * 基準月市町村情報の取得します
+ * 基準月市町村情報の取得します。
+ *
+ * @reamsid_L DBU-0250-010 wangxiaodong
  */
 public class KijuntsukiShichosonjohoFinder {
 

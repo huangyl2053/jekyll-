@@ -28,6 +28,8 @@ import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
 
 /**
  * 境界層保険料段階のデータアクセスクラスです。
+ *
+ * @reamsid_L DBZ-9999-021 linghuhang
  */
 public class DbT1007KyokaisoHokenryoDankaiDac implements ISaveable<DbT1007KyokaisoHokenryoDankaiEntity> {
 

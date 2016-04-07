@@ -10,6 +10,8 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
  * 審査会開催予定情報ビジネスクラスです。
+ *
+ * @reamsid_L DBE-0130-020 xuyannan
  */
 public class ShinsakaiKaisaiYoteiJoho {
 
