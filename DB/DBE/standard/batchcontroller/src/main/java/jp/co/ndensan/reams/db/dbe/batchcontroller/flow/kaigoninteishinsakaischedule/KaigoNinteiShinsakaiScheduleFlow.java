@@ -16,6 +16,8 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 /**
  *
  * 介護認定審査会スケジュール表_バッチフロークラスです。
+ *
+ * @reamsid_L DBE-0130-090 duanzhanli
  */
 public class KaigoNinteiShinsakaiScheduleFlow extends BatchFlowBase<KaigoNinteiShinsakaiScheduleBatchParamter> {
 
