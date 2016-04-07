@@ -18,6 +18,8 @@ import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 
 /**
  * 福祉用具商品名入力ガイドを管理するクラスです。
+ *
+ * @reamsid_L DBC-9999-011 lizhuoxuan
  */
 public class FukushiyoguShohin
         extends ModelBase<FukushiyoguShohinIdentifier, DbT3117FukushiyoguShohinEntity, FukushiyoguShohin>
@@ -151,7 +153,8 @@ public class FukushiyoguShohin
     }
 
     /**
-     * 保持する福祉用具商品名入力ガイドを削除対象とします。<br/> {@link DbT3117FukushiyoguShohinEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば削除状態にします。
+     * 保持する福祉用具商品名入力ガイドを削除対象とします。<br/>
+     * {@link DbT3117FukushiyoguShohinEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば削除状態にします。
      *
      * @return 削除対象処理実施後の{@link ChiikiMitchakuServiceCode}
      */

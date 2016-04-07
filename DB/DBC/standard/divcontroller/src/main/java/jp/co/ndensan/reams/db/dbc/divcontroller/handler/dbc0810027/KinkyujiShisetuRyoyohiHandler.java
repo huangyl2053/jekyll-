@@ -252,39 +252,30 @@ public final class KinkyujiShisetuRyoyohiHandler {
      */
     public void setボタン表示制御処理(ShikibetsuNoKanriResult 識別番号) {
 
-        //基本情報
         if (設定不可.equals(識別番号.getEntity().get基本設定区分())) {
             div.getPanelHead().getBtnKihonInfo().setDisabled(true);
         }
-        //給付費明細
         if (設定不可.equals(識別番号.getEntity().get明細設定区分())) {
             div.getPanelHead().getBtnKyufuhiMeisai().setDisabled(true);
         }
-        //特定診療費
         if (設定不可.equals(識別番号.getEntity().get特定診療費設定区分())) {
             div.getPanelHead().getBtnTokuteiShinryohi().setDisabled(true);
         }
-        //サービス計画費
         if (設定不可.equals(識別番号.getEntity().get居宅計画費設定区分())) {
             div.getPanelHead().getBtnServiceKeikakuhi().setDisabled(true);
         }
-        // 特定入所者費用ボタン
         if (設定不可.equals(識別番号.getEntity().get特定入所者設定区分())) {
             div.getPanelHead().getBtnTokuteiNyushosya().setDisabled(true);
         }
-        // 「食事費用」ボタン
         if (設定不可.equals(識別番号.getEntity().get食事費用設定区分())) {
             div.getPanelHead().getBtnShokujiHiyo().setDisabled(true);
         }
-        // 「請求額集計」ボタン
         if (設定不可.equals(識別番号.getEntity().get集計設定区分())) {
             div.getPanelHead().getBtnSeikyugakuShukei().setDisabled(true);
         }
-        // 「社福軽減額」ボタン
         if (設定不可.equals(識別番号.getEntity().get社会福祉法人軽減設定区分())) {
             div.getPanelHead().getBtnShafukukeigengaku().setDisabled(true);
         }
-        //給付費明細（住特）
         if (設定不可.equals(識別番号.getEntity().get明細住所地特例設定区分())) {
             div.getPanelHead().getBtnKyufuhiMeisaiJyutoku().setDisabled(true);
         }

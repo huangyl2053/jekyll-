@@ -29,6 +29,8 @@ import jp.co.ndensan.reams.uz.uza.util.config.BusinessConfig;
 /**
  *
  * 依頼書一括発行のコントローラです。
+ *
+ * @reamsid_L DBE-0080-010 duanzhanli
  */
 public class IraishoIkkatsuHakko {
 

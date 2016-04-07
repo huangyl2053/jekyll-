@@ -13,6 +13,8 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 /**
  *
  * 依頼書一括発行のビジネスクラスです
+ *
+ * @reamsid_L DBE-0080-010 duanzhanli
  */
 public class IraishoIkkatsuHakkoResult {
 

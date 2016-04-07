@@ -19,6 +19,8 @@ import jp.co.ndensan.reams.uz.uza.util.Models;
 /**
  *
  * 福祉用具商品名入力ガイドの取得するクラスです。
+ *
+ * @reamsid_L DBC-0970-020 lizhuoxuan
  */
 public class FukushiyoguShohinInputGuideHandler {
 
