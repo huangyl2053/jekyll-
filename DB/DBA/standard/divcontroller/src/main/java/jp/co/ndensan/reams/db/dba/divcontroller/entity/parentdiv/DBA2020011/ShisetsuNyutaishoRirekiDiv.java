@@ -13,7 +13,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 /**
  * ShisetsuNyutaishoRireki のクラスファイル
  *
- * @author 自動生成
+ * @reamsid_L DBA-0360-040 wangxiaodong
  */
 public class ShisetsuNyutaishoRirekiDiv extends Panel {
 
