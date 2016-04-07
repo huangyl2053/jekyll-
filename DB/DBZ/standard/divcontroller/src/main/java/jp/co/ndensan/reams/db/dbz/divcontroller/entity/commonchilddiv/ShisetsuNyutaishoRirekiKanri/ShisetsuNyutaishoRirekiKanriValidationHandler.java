@@ -44,7 +44,7 @@ public class ShisetsuNyutaishoRirekiKanriValidationHandler {
         } else {
             if (div.getShisetsuNyutaishoInput().getTxtTaishoDate().getValue() != null
                     && !div.getShisetsuNyutaishoInput().getTxtTaishoDate().getValue().isEmpty()
-                    && !div.getShisetsuNyutaishoInput().getTxtNyushoDate().getValue().isBefore(div.getShisetsuNyutaishoInput().getTxtTaishoDate().getValue())) {
+                    && !div.getShisetsuNyutaishoInput().getTxtNyushoDate().getValue().isBeforeOrEquals(div.getShisetsuNyutaishoInput().getTxtTaishoDate().getValue())) {
                 validPairs.add(new ValidationMessageControlPair(
                         RRVMessages.前後関係逆転,
                         div.getShisetsuNyutaishoInput().getTxtTaishoDate(),
