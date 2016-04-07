@@ -4,6 +4,7 @@ package jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE5210001;
  * このファイルへの変更は、再生成時には損失するため
  * 不正な動作の原因になります。
  */
+
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -11,11 +12,12 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.*;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 
 /**
- * ShinsakaiKaisaiKekka のクラスファイル 
- * 
- * @author 自動生成
+ * ShinsakaiKaisaiKekka のクラスファイル
+ *
+ * @reamsid_L DBE-0160-010 wangxiaodong
  */
 public class ShinsakaiKaisaiKekkaDiv extends Panel {
+
     // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-01-15_09-59-03">
     /*
      * [ private の作成 ]
@@ -379,7 +381,7 @@ public class ShinsakaiKaisaiKekkaDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setDgShinsakaiIinIchiran(DataGrid<dgShinsakaiIinIchiran_Row> dgShinsakaiIinIchiran) {
+    public void setDgShinsakaiIinIchiran(DataGrid<dgShinsakaiIinIchiran_Row> dgShinsakaiIinIchiran) {
         this.getShinsakaiIinToroku().setDgShinsakaiIinIchiran(dgShinsakaiIinIchiran);
     }
 
@@ -389,7 +391,7 @@ public class ShinsakaiKaisaiKekkaDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setUplUploadPanel(UploadPanel uplUploadPanel) {
+    public void setUplUploadPanel(UploadPanel uplUploadPanel) {
         this.getOnseiFile().setUplUploadPanel(uplUploadPanel);
     }
 
@@ -399,7 +401,7 @@ public class ShinsakaiKaisaiKekkaDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setBtnAddOnseiFile(Button btnAddOnseiFile) {
+    public void setBtnAddOnseiFile(Button btnAddOnseiFile) {
         this.getOnseiFile().setBtnAddOnseiFile(btnAddOnseiFile);
     }
 

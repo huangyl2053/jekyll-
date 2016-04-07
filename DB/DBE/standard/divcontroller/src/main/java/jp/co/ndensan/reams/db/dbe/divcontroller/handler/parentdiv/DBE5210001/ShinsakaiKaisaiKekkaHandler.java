@@ -26,9 +26,9 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.KeyValueDataSource;
 import jp.co.ndensan.reams.uz.uza.ui.binding.propertyenum.DisplayTimeFormat;
 
 /**
- *
  * 介護認定審査会開催結果登録するクラスです。
  *
+ * @reamsid_L DBE-0160-010 wangxiaodong
  */
 public class ShinsakaiKaisaiKekkaHandler {
 
