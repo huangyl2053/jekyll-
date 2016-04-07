@@ -21,6 +21,8 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 /**
  *
  * 施設入退所異動Divのコントローラです。QA-1017,QA1018確認中 王暁冬 2016/04/01
+ *
+ * @reamsid_L DBA-0360-040 wangxiaodong
  */
 public class ShisetsuNyutaishoIdo {
 
@@ -34,7 +36,6 @@ public class ShisetsuNyutaishoIdo {
      */
     public ResponseData onLoad(ShisetsuNyutaishoIdoDiv div) {
         ResponseData<ShisetsuNyutaishoIdoDiv> response = new ResponseData<>();
-        ViewStateHolder.put(ViewStateKeys.施設入退所履歴_識別コード, new ShikibetsuCode("000000000022502"));
         ShikibetsuCode 識別コード = ViewStateHolder.get(ViewStateKeys.施設入退所履歴_識別コード, ShikibetsuCode.class);
         new ShisetsuNyutaishoIdoHandler(div).initLoad(識別コード);
         if (!RealInitialLocker.tryGetLock(前排他ロックキー)) {
