@@ -16,6 +16,8 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
 
 /**
  * 住基連動登録者のバリデーションチェッククラスです。
+ *
+ * @reamsid_L DBA-0560-010 xuyannan
  */
 public class JukinenTotorokuValidationHandler {
 
@@ -45,7 +47,6 @@ public class JukinenTotorokuValidationHandler {
         } else {
             if (!div.getBatchParamterInfo().getTxtkonkaikaishi().getValue().isValid()
                     || !div.getBatchParamterInfo().getTxtkonkaishuryo().getValue().isValid()) {
-                // TODO QA415
                 validPairs.add(new ValidationMessageControlPair(
                         new IdocheckMessages(UrErrorMessages.不正, "日付")));
             } else {
