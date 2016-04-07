@@ -11,6 +11,8 @@ import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dbx.business.config.kyotsu.hokenshajoho.ConfigKeysHokenshaJoho;
 import jp.co.ndensan.reams.db.dbx.business.config.kyotsu.jushohenshu.ConfigKeysChohyoKyotsuJushoEdit;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBB;
+import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBD;
+import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBU;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShoKisaiHokenshaNo;
 import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT7051KoseiShichosonMasterEntity;
 import jp.co.ndensan.reams.db.dbx.persistence.db.basic.DbT7051KoseiShichosonMasterDac;
@@ -18,8 +20,6 @@ import jp.co.ndensan.reams.db.dbz.business.core.koikizenshichosonjoho.KoikiZenSh
 import jp.co.ndensan.reams.db.dbz.business.core.koikizenshichosonjoho.KoseiShichoson;
 import jp.co.ndensan.reams.db.dbz.business.core.koikizenshichosonjoho.ShichosonCodeYoriShichoson;
 import jp.co.ndensan.reams.db.dbz.business.core.koikizenshichosonjoho.ShichosonShikibetsuIDniYoruShichosonJoho;
-import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBD;
-import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBU;
 import jp.co.ndensan.reams.ur.urz.business.core.association.Association;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.ur.urz.service.core.association.AssociationFinderFactory;
@@ -37,6 +37,8 @@ import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
 
 /**
  * 市町村情報_広域を取得クラスです。
+ *
+ * @reamsid_L DBA-0010-020 linghuhang
  */
 public class KoikiShichosonJohoFinder {
 
@@ -64,7 +66,8 @@ public class KoikiShichosonJohoFinder {
     /**
      * {@link InstanceProvider#create}にて生成した{@link KoikiShichosonJohoFinder}のインスタンスを返します。
      *
-     * @return {@link InstanceProvider#create}にて生成した{@link KoikiShichosonJohoFinder}のインスタンス
+     * @return
+     * {@link InstanceProvider#create}にて生成した{@link KoikiShichosonJohoFinder}のインスタンス
      */
     public static KoikiShichosonJohoFinder createInstance() {
         return InstanceProvider.create(KoikiShichosonJohoFinder.class);
@@ -120,7 +123,8 @@ public class KoikiShichosonJohoFinder {
      * 構成市町村ユーザ判定します。
      *
      * @param 識別ID 市町村識別ID
-     * @return ユーザ判定フラグ ( 市町村識別コードは’00’の合併旧市町村区分　＝'0'の場合true, 合併旧市町村区分＝'0'以外の場合false)
+     * @return ユーザ判定フラグ ( 市町村識別コードは’00’の合併旧市町村区分　＝'0'の場合true,
+     * 合併旧市町村区分＝'0'以外の場合false)
      */
     @Transaction
     public boolean isShichosonUserHandan(RString 識別ID) {
