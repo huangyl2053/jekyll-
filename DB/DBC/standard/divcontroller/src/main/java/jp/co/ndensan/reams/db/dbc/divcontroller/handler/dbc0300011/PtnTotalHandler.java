@@ -30,6 +30,8 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 
 /**
  * 受領委任契約事業者登録・追加・修正・照会_検索のHandlerクラス
+ *
+ * @reamsid_L DBC-2120-010 panhe
  */
 public final class PtnTotalHandler {
 

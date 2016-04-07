@@ -24,6 +24,8 @@ import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 
 /**
  * 受領委任契約事業者を管理するクラスです。
+ *
+ * @reamsid_L DBC-9999-012 panhe
  */
 public class JuryoininKeiyakuJigyosha
         extends ModelBase<JuryoininKeiyakuJigyoshaIdentifier, DbT3077JuryoininKeiyakuJigyoshaEntity, JuryoininKeiyakuJigyosha>
@@ -291,7 +293,8 @@ public class JuryoininKeiyakuJigyosha
     }
 
     /**
-     * 保持する受領委任契約事業者を削除対象とします。<br/> {@link DbT3077JuryoininKeiyakuJigyoshaEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば削除状態にします。
+     * 保持する受領委任契約事業者を削除対象とします。<br/>
+     * {@link DbT3077JuryoininKeiyakuJigyoshaEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば削除状態にします。
      *
      * @return 削除対象処理実施後の{@link JuryoininKeiyakuJigyosha}
      */
