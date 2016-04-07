@@ -14,9 +14,11 @@ import jp.co.ndensan.reams.uz.uza.core.ui.response.IContainerEvents;
 public enum DBC0810011TransitionEventName implements IContainerEvents {
 // <editor-fold defaultstate="collapsed" desc="Created By UI Designer ver 1.0.0">
 
-    選択("選択"),
+    福祉用具購入費支給("福祉用具購入費支給"),
     検索に戻る("検索に戻る"),
-    完了("完了");
+    住宅改修費事前申請("住宅改修費事前申請"),
+    住宅改修費支給申請("住宅改修費支給申請"),
+    償還払い費支給申請("償還払い費支給申請");
 
     private final RString name;
 
