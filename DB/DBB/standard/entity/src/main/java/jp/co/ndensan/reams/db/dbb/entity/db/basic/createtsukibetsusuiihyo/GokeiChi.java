@@ -3,7 +3,6 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package jp.co.ndensan.reams.db.dbb.entity.db.basic.createtsukibetsusuiihyo;
 
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -11,13 +10,15 @@ import lombok.Getter;
 import lombok.Setter;
 
 /**
- *
  * 合計値Entityクラスです。
+ *
+ * @reamsid_L DBB-0760-040 lishengli
  */
 @Getter
 @Setter
 @SuppressWarnings("PMD.UnusedPrivateField")
 public class GokeiChi {
+
     private RString 段階;
     private RString 徴収方法;
     private int yoGetuNinsuu;
@@ -54,5 +55,5 @@ public class GokeiChi {
     private int 歳出還付の金額;
     private int 該当段階の金額合計;
     private int 総金額合計;
-    
+
 }
