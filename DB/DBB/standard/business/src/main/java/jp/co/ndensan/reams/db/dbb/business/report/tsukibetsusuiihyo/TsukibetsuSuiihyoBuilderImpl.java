@@ -10,6 +10,8 @@ import jp.co.ndensan.reams.uz.uza.report.ReportEditorJoiner;
 
 /**
  * 月別推移表Builderクラスです。
+ *
+ * @reamsid_L DBB-0760-050 wangxiaodong
  */
 class TsukibetsuSuiihyoBuilderImpl implements ITsukibetsuSuiihyoBuilder {
 

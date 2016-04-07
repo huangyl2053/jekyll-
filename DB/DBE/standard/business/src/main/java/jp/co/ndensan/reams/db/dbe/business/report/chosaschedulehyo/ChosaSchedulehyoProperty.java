@@ -20,6 +20,8 @@ import jp.co.ndensan.reams.uz.uza.report.data.chart.ReportDynamicChart;
 
 /**
  * {@link ChosaSchedulehyoReport}のプロパティです。
+ *
+ * @reamsid_L DBE-0020-090 linghuhang
  */
 public class ChosaSchedulehyoProperty extends ReportPropertyBase<ChosaSchedulehyoReportSource> {
 
@@ -37,6 +39,7 @@ public class ChosaSchedulehyoProperty extends ReportPropertyBase<ChosaSchedulehy
             Breakers<ChosaSchedulehyoReportSource> breakers,
             BreakerCatalog<ChosaSchedulehyoReportSource> catalog) {
         return breakers.add(catalog.new SimplePageBreaker(
+
 
             PAGE_BREAK_KEYS) {
             @Override

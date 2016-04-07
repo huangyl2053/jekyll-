@@ -18,6 +18,8 @@ import jp.co.ndensan.reams.uz.uza.report.SourceDataCollection;
 
 /**
  * 月別推移表（帳票）Printerです。
+ *
+ * @reamsid_L DBB-0760-050 wangxiaodong
  */
 public class TsukibetsuSuiihyoPrintService {
 

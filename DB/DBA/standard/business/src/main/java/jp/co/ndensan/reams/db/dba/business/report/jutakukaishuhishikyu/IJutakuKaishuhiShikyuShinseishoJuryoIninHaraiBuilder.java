@@ -9,8 +9,9 @@ import jp.co.ndensan.reams.db.dba.entity.report.jutakukaishuhishikyu.JutakuKaish
 import jp.co.ndensan.reams.uz.uza.report.IReportBuilder;
 
 /**
- *
  * 介護保険居宅介護（予防）住宅改修費支給（受領委任払）申請書のBuilderのインターフェースクラスです。
+ *
+ * @reamsid_L DBA-0540-709 lishengli
  */
 public interface IJutakuKaishuhiShikyuShinseishoJuryoIninHaraiBuilder
         extends IReportBuilder<JutakuKaishuhiShikyuShinseishoJuryoIninHaraiReportSource> {
