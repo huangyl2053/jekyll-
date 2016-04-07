@@ -26,6 +26,8 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
 
 /**
  * 境界層該当者台帳管理画面のバリデーションハンドラークラスです。
+ *
+ * @reamsid_L DBU-0430-010 linghuhang
  */
 public class KyokaisoGaitoshaPanelValidationHandler {
 
