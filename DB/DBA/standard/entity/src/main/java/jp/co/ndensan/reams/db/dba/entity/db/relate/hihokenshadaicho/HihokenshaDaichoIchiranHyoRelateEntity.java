@@ -18,7 +18,10 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
  *
- * 広住特適用情報のエンティティクラスです。
+ * 被保険者台帳一覧表のエンティティクラスです。
+ *
+ * @reamsid_L DBA-0510-040 duanzhanli
+ *
  */
 @SuppressWarnings("PMD.UnusedPrivateField")
 @lombok.Getter

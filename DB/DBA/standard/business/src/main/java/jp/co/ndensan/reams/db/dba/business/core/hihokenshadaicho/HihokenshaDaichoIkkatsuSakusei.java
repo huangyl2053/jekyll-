@@ -11,6 +11,9 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 /**
  *
  * 画面から入力するデータより、バッチ用パラメータクラスを作成するクラスです。
+ *
+ * @reamsid_L DBA-0510-020 duanzhanli
+ *
  */
 @SuppressWarnings("PMD.UnusedPrivateField")
 @lombok.Getter

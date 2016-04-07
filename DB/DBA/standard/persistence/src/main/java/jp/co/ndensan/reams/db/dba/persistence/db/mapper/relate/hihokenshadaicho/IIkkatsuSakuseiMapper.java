@@ -13,6 +13,9 @@ import jp.co.ndensan.reams.ua.uax.entity.db.basic.UaFt200FindShikibetsuTaishoEnt
 /**
  *
  * 被保険者台帳一括作成のマッパーインタフェースです。
+ *
+ * @reamsid_L DBA-0510-010 duanzhanli
+ *
  */
 public interface IIkkatsuSakuseiMapper {
 
