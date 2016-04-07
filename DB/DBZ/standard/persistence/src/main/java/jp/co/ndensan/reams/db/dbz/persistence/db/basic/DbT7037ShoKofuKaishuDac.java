@@ -36,7 +36,7 @@ import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
 /**
  * 証交付回収のデータアクセスクラスです。
  * 
- * @reamsid_L DBA-0500-010  suguangjun 
+ * @reamsid_L DBZ-9999-020  suguangjun 
  */
 public class DbT7037ShoKofuKaishuDac implements ISaveable<DbT7037ShoKofuKaishuEntity> {
 
