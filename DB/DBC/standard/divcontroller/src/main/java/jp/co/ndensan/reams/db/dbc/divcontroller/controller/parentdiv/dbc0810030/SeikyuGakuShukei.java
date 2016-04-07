@@ -28,6 +28,7 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 /**
  * 償還払い状況照会_請求額集計
  *
+ * @reamsid_L DBC-1010-140 quxiaodong
  *
  */
 public class SeikyuGakuShukei {
