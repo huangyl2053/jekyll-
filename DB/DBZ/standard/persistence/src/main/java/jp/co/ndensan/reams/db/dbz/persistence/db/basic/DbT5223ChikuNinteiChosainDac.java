@@ -29,6 +29,8 @@ import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
 
 /**
  * 地区認定調査員のデータアクセスクラスです。
+ *
+ * @reamsid_L DBZ-9999-021 zhangzhiming
  */
 public class DbT5223ChikuNinteiChosainDac implements ISaveable<DbT5223ChikuNinteiChosainEntity> {
 
