@@ -32,6 +32,7 @@ import jp.co.ndensan.reams.uz.uza.util.code.entity.UzT0007CodeEntity;
 /**
  * 介護認定審査会開催場所登録Divを制御クラスです。
  *
+ * @reamsid_L DBE-0100-010  wangkun
  */
 public class NinteiShinsakaiKaisaibashoToroku {
 

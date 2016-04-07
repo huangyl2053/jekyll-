@@ -18,6 +18,8 @@ import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
 
 /**
  * 要介護認定結果通知情報を管理するクラスです。
+ * 
+ * @reamsid_L DBE-0220-010 wangkun
  */
 public class YouKaiGoNinTeiKekTesuChiFinder {
 

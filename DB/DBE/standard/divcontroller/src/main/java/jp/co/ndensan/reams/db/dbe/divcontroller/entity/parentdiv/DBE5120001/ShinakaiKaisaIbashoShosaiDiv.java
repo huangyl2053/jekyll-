@@ -15,7 +15,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.domain.*;
 /**
  * ShinakaiKaisaIbashoShosai のクラスファイル 
  * 
- * @author 自動生成
+ * @reamsid_L DBE-0100-010  wangkun
  */
 public class ShinakaiKaisaIbashoShosaiDiv extends Panel {
     // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-01-15_09-59-03">
