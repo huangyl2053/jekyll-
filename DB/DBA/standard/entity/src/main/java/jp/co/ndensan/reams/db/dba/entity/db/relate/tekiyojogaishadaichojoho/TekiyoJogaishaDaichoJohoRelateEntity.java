@@ -11,6 +11,8 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
  * 適用除外者台帳情報RelateEntityクラスです。
+ *
+ * @reamsid_L DBA-0412-010 linghuhang
  */
 @lombok.Getter
 @lombok.Setter
