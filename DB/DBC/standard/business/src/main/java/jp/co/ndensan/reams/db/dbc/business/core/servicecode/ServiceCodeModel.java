@@ -11,6 +11,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 /**
  *
  * サービスコード入力ガイドのダイアログパラメータクラスです。
+ * @reamsid_L DBA-0060-010 dongyabin
  */
 public class ServiceCodeModel implements Serializable {
 

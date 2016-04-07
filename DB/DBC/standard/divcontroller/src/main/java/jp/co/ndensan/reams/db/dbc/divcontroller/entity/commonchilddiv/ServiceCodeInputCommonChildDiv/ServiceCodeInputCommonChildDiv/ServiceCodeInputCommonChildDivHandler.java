@@ -14,6 +14,7 @@ import jp.co.ndensan.reams.uz.uza.util.serialization.DataPassingConverter;
 /**
  *
  * サービス種類検索の抽象Handlerクラスです。
+ * @reamsid_L DBA-0340-060 dongyabin
  */
 public class ServiceCodeInputCommonChildDivHandler {
     
