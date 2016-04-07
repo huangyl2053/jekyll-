@@ -9,8 +9,9 @@ import jp.co.ndensan.reams.db.dba.entity.report.source.hihokenshashohakkokanriic
 import jp.co.ndensan.reams.uz.uza.report.IReportEditor;
 
 /**
- *
  * 被保険者証発行管理一覧表ヘッダエディターのインターフェースクラスです。
+ *
+ * @reamsid_L DBA-0600-070 lishengli
  */
 interface IHihokenshashoHakkoKanriIchiranhyoEditor extends IReportEditor<HihokenshashoHakkoKanriIchiranhyoReportSource> {
 

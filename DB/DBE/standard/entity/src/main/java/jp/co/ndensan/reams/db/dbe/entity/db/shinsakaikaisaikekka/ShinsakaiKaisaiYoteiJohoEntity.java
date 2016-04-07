@@ -11,6 +11,8 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 /**
  *
  * 介護認定審査会開催結果登録のヘッドエリア内容Entity。
+ *
+ * @reamsid_L DBE-0130-040 yaodongsheng
  */
 @lombok.Getter
 @lombok.Setter

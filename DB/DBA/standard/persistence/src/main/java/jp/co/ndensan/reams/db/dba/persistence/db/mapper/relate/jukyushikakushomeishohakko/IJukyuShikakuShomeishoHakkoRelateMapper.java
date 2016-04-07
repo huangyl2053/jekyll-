@@ -11,6 +11,7 @@ import jp.co.ndensan.reams.db.dba.entity.db.relate.JukyuShikakuShomeishoHakkoRel
 /**
  * 受給資格証明書発行情報を取得のマッパーインタフェースです。
  *
+ * @reamsid_L DBA-1090-021 wangkun
  */
 public interface IJukyuShikakuShomeishoHakkoRelateMapper {
 

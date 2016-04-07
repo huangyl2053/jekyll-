@@ -36,6 +36,8 @@ import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
 
 /**
  * 被保険者台帳管理のデータアクセスクラスです。
+ *
+ * @reamsid_L DBZ-9999-021 zhangzhiming
  */
 public class DbT1001HihokenshaDaichoDac implements ISaveable<DbT1001HihokenshaDaichoEntity> {
 

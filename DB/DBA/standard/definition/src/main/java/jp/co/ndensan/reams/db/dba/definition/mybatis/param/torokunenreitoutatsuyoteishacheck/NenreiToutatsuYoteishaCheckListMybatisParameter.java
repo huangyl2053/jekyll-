@@ -11,6 +11,8 @@ import lombok.Getter;
 /**
  *
  * PSM参数のセット。
+ *
+ * @reamsid_L DBA-0580-020 yaodongsheng
  */
 @SuppressWarnings("PMD.UnusedPrivateField")
 @Getter

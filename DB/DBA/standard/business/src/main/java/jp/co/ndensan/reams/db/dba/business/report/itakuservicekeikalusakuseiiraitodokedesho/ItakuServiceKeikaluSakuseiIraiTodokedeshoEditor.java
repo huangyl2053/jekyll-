@@ -10,6 +10,8 @@ import jp.co.ndensan.reams.db.dba.entity.report.itakuservicekeikalusakuseiiraito
 /**
  *
  * 居宅（介護予防）サービス計画作成依頼（変更）届出書Editorです。
+ *
+ * @reamsid_L DBA-0540-696 yaodongsheng
  */
 public class ItakuServiceKeikaluSakuseiIraiTodokedeshoEditor implements IItakuServiceKeikaluSakuseiIraiTodokedeshoEditor {
 

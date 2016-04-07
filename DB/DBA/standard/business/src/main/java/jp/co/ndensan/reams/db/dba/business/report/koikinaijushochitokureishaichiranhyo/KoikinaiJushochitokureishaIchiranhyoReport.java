@@ -13,6 +13,8 @@ import lombok.NonNull;
 
 /**
  * 広域内住所地特例者一覧表のReportです。
+ *
+ * @reamsid_L DBU-1140-060 linghuhang
  */
 public class KoikinaiJushochitokureishaIchiranhyoReport extends Report<KoikinaiJushochitokureishaIchiranhyoReportSource> {
 

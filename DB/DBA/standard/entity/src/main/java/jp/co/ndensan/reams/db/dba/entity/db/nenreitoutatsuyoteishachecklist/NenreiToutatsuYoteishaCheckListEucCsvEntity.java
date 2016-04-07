@@ -11,6 +11,8 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 /**
  *
  * 年齢到達予定者チェックリストCSV用データEntity。
+ *
+ * @reamsid_L DBA-0580-030 yaodongsheng
  */
 @lombok.Getter
 @lombok.Setter

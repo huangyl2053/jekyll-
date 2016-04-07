@@ -10,8 +10,9 @@ import jp.co.ndensan.reams.db.dbz.definition.core.shinsakaikaisai.ShinsakaiKaisa
 import jp.co.ndensan.reams.db.dbz.entity.db.relate.shinsakaikaisai.ShinsakaiKaisaiRelateEntity;
 
 /**
- *
  * 介護認定審査会共有一覧のインタフェイスです。
+ *
+ * @reamsid_L DBE-0120-010 lishengli
  */
 public interface IShinsakaiKaisaiMapper {
 

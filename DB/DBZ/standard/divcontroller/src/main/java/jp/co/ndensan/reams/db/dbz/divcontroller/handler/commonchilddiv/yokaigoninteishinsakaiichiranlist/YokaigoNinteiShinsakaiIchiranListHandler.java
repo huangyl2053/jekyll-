@@ -25,8 +25,9 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 
 /**
- *
  * {@link YokaigoNinteiShinsakaiIchiranListDiv}のHandlerクラスです。
+ *
+ * @reamsid_L DBE-0120-010 lishengli
  */
 public class YokaigoNinteiShinsakaiIchiranListHandler {
 

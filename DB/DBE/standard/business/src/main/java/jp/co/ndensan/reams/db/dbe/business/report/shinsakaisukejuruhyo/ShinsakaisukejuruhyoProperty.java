@@ -13,6 +13,8 @@ import jp.co.ndensan.reams.uz.uza.report.ReportPropertyBase;
 /**
  *
  * {@link 介護認定審査会スケジュール表のReport}のプロパティです。
+ *
+ * @reamsid_L DBE-0130-070 yaodongsheng
  */
 public class ShinsakaisukejuruhyoProperty extends ReportPropertyBase<ShinsakaisukejuruhyoReportSource> {
 

@@ -23,6 +23,8 @@ import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
 
 /**
  * 老人保健受給者情報のデータアクセスクラスです。
+ *
+ * @reamsid_L DBZ-9999-021 zhangzhiming
  */
 public class DbT7005RojinHokenJukyushaJohoDac implements ISaveable<DbT7005RojinHokenJukyushaJohoEntity> {
 

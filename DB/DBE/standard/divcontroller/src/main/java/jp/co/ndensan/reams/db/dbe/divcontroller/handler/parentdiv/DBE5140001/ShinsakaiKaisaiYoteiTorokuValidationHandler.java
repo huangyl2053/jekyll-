@@ -27,6 +27,8 @@ import jp.co.ndensan.reams.uz.uza.util.config.BusinessConfig;
 /**
  *
  * 介護認定審査会開催予定登録1のバリデーションハンドラークラスです。
+ *
+ * @reamsid_L DBE-0130-010 yaodongsheng
  */
 public class ShinsakaiKaisaiYoteiTorokuValidationHandler {
 

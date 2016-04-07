@@ -10,6 +10,8 @@ import lombok.Getter;
 
 /**
  * 年齢到達予定者一覧表のITEMです。
+ *
+ * @reamsid_L DBA-0580-070 yaodongsheng
  */
 @Getter
 @SuppressWarnings("PMD.UnusedPrivateField")

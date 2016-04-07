@@ -10,8 +10,9 @@ import lombok.Getter;
 import lombok.Setter;
 
 /**
- *
  * 被保険者証発行管理一覧表ヘッダのITEMです。
+ *
+ * @reamsid_L DBA-0600-070 lishengli
  */
 @Getter
 @Setter

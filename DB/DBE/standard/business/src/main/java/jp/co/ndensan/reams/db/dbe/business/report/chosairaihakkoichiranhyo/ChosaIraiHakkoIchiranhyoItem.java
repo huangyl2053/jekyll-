@@ -11,6 +11,8 @@ import lombok.Setter;
 /**
  *
  * 認定調査依頼発行一覧表_帳票パラメータクラスです。
+ *
+ * @reamsid_L DBE-0080-110 yaodongsheng
  */
 @Getter
 @Setter

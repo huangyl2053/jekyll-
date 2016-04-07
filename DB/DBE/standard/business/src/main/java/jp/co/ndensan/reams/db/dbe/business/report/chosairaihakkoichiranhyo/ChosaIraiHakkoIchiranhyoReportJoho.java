@@ -9,6 +9,8 @@ import java.util.List;
 
 /**
  * 認定調査依頼発行一覧表作成_帳票クラスパラメータクラスです。
+ *
+ * @reamsid_L DBE-0080-110 yaodongsheng
  */
 @lombok.Getter
 @SuppressWarnings("PMD.UnusedPrivateField")

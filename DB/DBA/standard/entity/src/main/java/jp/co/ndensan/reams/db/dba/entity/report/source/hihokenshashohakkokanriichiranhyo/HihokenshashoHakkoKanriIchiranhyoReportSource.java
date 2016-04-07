@@ -11,6 +11,8 @@ import jp.co.ndensan.reams.uz.uza.report.source.ReportItem;
 
 /**
  * 被保険者証発行管理一覧表のReportSourceクラスです。
+ *
+ * @reamsid_L DBA-0600-070 lishengli
  */
 public class HihokenshashoHakkoKanriIchiranhyoReportSource implements IReportSource {
 // <editor-fold defaultstate="collapsed" desc="Generated Code">

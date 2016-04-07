@@ -13,6 +13,8 @@ import lombok.NonNull;
 /**
  *
  * 居宅（介護予防）サービス計画作成依頼（変更）届出書帳票作成します。
+ *
+ * @reamsid_L DBA-0540-696 yaodongsheng
  */
 public final class ItakuServiceKeikaluSakuseiIraiTodokedeshoReport extends Report<ItakuServiceKeikaluSakuseiIraiTodokedeshoReportSource> {
 

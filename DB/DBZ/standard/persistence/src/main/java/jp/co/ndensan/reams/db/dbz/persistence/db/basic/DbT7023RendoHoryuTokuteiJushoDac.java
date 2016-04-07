@@ -23,6 +23,8 @@ import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
 
 /**
  * 連動保留特定住所マスタのデータアクセスクラスです。
+ *
+ * @reamsid_L DBZ-9999-021 zhangzhiming
  */
 public class DbT7023RendoHoryuTokuteiJushoDac implements ISaveable<DbT7023RendoHoryuTokuteiJushoEntity> {
 

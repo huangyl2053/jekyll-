@@ -21,6 +21,8 @@ import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 /**
  *
  * 開催予定情報クラスです。
+ *
+ * @reamsid_L DBE-0130-040 yaodongsheng
  */
 public class ShinsakaiKaisaiYoteiJohoManager {
 

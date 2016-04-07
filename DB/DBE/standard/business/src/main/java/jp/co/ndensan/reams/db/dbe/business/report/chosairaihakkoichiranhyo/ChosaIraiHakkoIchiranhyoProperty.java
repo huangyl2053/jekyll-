@@ -20,6 +20,8 @@ import jp.co.ndensan.reams.uz.uza.report.data.chart.ReportDynamicChart;
 /**
  *
  * {@link 認定調査依頼発行一覧表のReport}のプロパティです。
+ *
+ * @reamsid_L DBE-0080-110 yaodongsheng
  */
 public class ChosaIraiHakkoIchiranhyoProperty extends ReportPropertyBase<ChosaIraiHakkoIchiranhyoReportSource> {
 
@@ -43,6 +45,7 @@ public class ChosaIraiHakkoIchiranhyoProperty extends ReportPropertyBase<ChosaIr
             Breakers<ChosaIraiHakkoIchiranhyoReportSource> breakers,
             BreakerCatalog<ChosaIraiHakkoIchiranhyoReportSource> catalog) {
         return breakers.add(catalog.new SimplePageBreaker(
+
 
 
 

@@ -20,6 +20,8 @@ import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 /**
  *
  * 年齢到達予定者チェックリストのクラス。
+ *
+ * @reamsid_L DBA-0580-010 yaodongsheng
  */
 public class NenreiToutatuYoteishaCheckList {
 

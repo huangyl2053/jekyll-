@@ -25,7 +25,8 @@ import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 
 /**
  * 被保険者証・資格者証発行を管理するクラスです。
- *
+ * 
+ * @reamsid_L DBA-1090-021 wangkun
  */
 public class JukyuShikakuShomeishoHakkoFinder {
 
@@ -62,7 +63,8 @@ public class JukyuShikakuShomeishoHakkoFinder {
      *
      * @param 受給資格証明書発行情報の検索キー 受給資格証明書発行情報の検索キー。
      *
-     * １、受給資格証明書発行情報を取得できない場合、NULLを返します。 ２、「受給者台帳」テーブルに、認定申請中データ．受給申請事由がDBD.Enum受給申請事由.指定サービス種類変更申請である場合、 NULLを返します。
+     * １、受給資格証明書発行情報を取得できない場合、NULLを返します。 
+     * ２、「受給者台帳」テーブルに、認定申請中データ．受給申請事由がDBD.Enum受給申請事由.指定サービス種類変更申請である場合、 NULLを返します。
      * ３、受給資格証明書発行情報を取得して、被保険者証・資格者証発行を表すクラスを返します。
      * @return JukyuShikakuShomeisho 被保険者証・資格者証発行の表すクラスを返します。
      */

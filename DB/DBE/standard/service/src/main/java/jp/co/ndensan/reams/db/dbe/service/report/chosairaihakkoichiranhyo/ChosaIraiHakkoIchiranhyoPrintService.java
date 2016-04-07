@@ -16,6 +16,8 @@ import jp.co.ndensan.reams.uz.uza.report.SourceDataCollection;
 
 /**
  * 認定調査依頼発行一覧表Printerです。
+ *
+ * @reamsid_L DBE-0080-110 yaodongsheng
  */
 public class ChosaIraiHakkoIchiranhyoPrintService {
 

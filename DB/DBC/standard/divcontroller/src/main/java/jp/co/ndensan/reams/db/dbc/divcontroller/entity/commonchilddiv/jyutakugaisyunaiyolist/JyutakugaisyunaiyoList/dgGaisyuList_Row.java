@@ -3,21 +3,17 @@ package jp.co.ndensan.reams.db.dbc.divcontroller.entity.commonchilddiv.jyutakuga
  * このコードはツールによって生成されました。
  * このファイルへの変更は、以下の状況下で不正な動作の原因になったり、
  * コードが再生成されるときに損失したりします。
- * Tue Jan 19 11:58:09 CST 2016 
+ * Tue Jan 19 11:58:09 CST 2016
  */
-
-
 
 import jp.co.ndensan.reams.uz.uza.ui.binding.DataRow;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
-
 /**
- * dgGaisyuList_Row のクラスファイル 
- * 
- * @author 自動生成
+ * dgGaisyuList_Row のクラスファイル。
+ *
+ * @reamsid_L DBC-0940-010 yaodongsheng
  */
-
 public class dgGaisyuList_Row extends DataRow {
     // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：バージョン情報無し">
 

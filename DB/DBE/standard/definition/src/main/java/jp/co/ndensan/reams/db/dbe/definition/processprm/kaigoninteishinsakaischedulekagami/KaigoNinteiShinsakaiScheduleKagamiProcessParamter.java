@@ -13,6 +13,8 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 /**
  *
  * 護認定審査会スケジュール表かがみですためのProcess用パラメータクラスです。
+ *
+ * @reamsid_L DBE-0130-100 yaodongsheng
  */
 @lombok.Getter
 @SuppressWarnings("PMD.UnusedPrivateField")

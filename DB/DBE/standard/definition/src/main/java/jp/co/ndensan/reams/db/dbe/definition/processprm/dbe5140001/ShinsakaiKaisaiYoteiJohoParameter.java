@@ -11,6 +11,8 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 /**
  *
  * 介護認定審査会開催予定登録1Parameterクラスです。
+ *
+ * @reamsid_L DBE-0130-010 yaodongsheng
  */
 @lombok.Setter
 @lombok.Getter

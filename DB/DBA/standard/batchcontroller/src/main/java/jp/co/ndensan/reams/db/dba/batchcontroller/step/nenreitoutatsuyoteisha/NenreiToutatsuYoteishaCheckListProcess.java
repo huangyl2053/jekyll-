@@ -62,6 +62,8 @@ import jp.co.ndensan.reams.uz.uza.spool.entities.UzUDE0835SpoolOutputType;
 /**
  *
  * 年齢到達予定者チェックリストProcessクラスです。
+ *
+ * @reamsid_L DBA-0580-020 yaodongsheng
  */
 public class NenreiToutatsuYoteishaCheckListProcess extends SimpleBatchProcessBase {
 

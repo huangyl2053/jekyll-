@@ -13,6 +13,8 @@ import lombok.Setter;
 /**
  *
  * 申請書_共通クラス部分パラメータクラスです。
+ *
+ * @reamsid_L DBA-0540-714 yaodongsheng
  */
 @Getter
 @Setter

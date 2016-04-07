@@ -11,6 +11,8 @@ import jp.co.ndensan.reams.db.dbe.entity.db.relate.shinsakaiiinjohogogitai.Shins
 /**
  *
  * 介護認定審査会委員情報のマッパーインタフェースです。
+ *
+ * @reamsid_L DBE-0130-060 yaodongsheng
  */
 public interface IShinsakaiiinJohoGogitaiMapper {
 

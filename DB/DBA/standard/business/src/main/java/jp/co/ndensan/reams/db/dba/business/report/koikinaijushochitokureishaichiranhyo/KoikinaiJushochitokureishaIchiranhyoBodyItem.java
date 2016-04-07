@@ -10,6 +10,8 @@ import lombok.Getter;
 
 /**
  * 広域内住所地特例者一覧表ボディのITEMです。
+ *
+ * @reamsid_L DBU-1140-060 linghuhang
  */
 @Getter
 @SuppressWarnings("PMD.UnusedPrivateField")
