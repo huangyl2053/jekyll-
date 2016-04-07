@@ -6,6 +6,9 @@ import jp.co.ndensan.reams.uz.uza.report.source.ReportItem;
 
 /**
  * 介護保険住所地特例施設退所通知書の帳票データのクラスです。
+ *
+ * @reamsid_L DBA-0380-060 duanzhanli
+ *
  */
 public class ShisetsuTaishoTsuchishoReportSource implements IReportSource {
 // <editor-fold defaultstate="collapsed" desc="Generated Code">
