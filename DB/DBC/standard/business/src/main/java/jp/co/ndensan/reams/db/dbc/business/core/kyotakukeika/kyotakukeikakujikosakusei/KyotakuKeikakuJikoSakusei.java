@@ -37,7 +37,7 @@ public class KyotakuKeikakuJikoSakusei
 
     private final DbT3007KyotakuKeikakuJikoSakuseiEntity entity;
     private final KyotakuKeikakuJikoSakuseiIdentifier id;
-    private final Models<KyotakuKeikakuJikosakuseiMeisaiIdentifier, KyotakuKeikakuJikosakuseiMeisai> kyotakuKeikakuJikosakuseiMeisai;
+    private final Models<KyotakuKeikakuJikosakuseiMeisaiIdentifier, KyotakuKeikakuJikosakuseiMeisai> kyotakuJikosakuseiMeisai;
     private final Models<YoboKeikakuJikoSakuseiMeisaiIdentifier, YoboKeikakuJikoSakuseiMeisai> yoboKeikakuJikoSakuseiMeisai;
 
     /**
@@ -63,7 +63,7 @@ public class KyotakuKeikakuJikoSakusei
                 対象年月,
                 履歴番号
         );
-        this.kyotakuKeikakuJikosakuseiMeisai = Models.create(new ArrayList<KyotakuKeikakuJikosakuseiMeisai>());
+        this.kyotakuJikosakuseiMeisai = Models.create(new ArrayList<KyotakuKeikakuJikosakuseiMeisai>());
         this.yoboKeikakuJikoSakuseiMeisai = Models.create(new ArrayList<YoboKeikakuJikoSakuseiMeisai>());
     }
 
@@ -80,16 +80,16 @@ public class KyotakuKeikakuJikoSakusei
                 entity.get居宅給付計画自己作成Entity().getHihokenshaNo(),
                 entity.get居宅給付計画自己作成Entity().getTaishoYM(),
                 entity.get居宅給付計画自己作成Entity().getRirekiNo());
-        List<KyotakuKeikakuJikosakuseiMeisai> kyotakuKeikakuJikosakuseiMeisaiList = new ArrayList<>();
+        List<KyotakuKeikakuJikosakuseiMeisai> kyotakakuJikosakuseiMeisaiList = new ArrayList<>();
         for (KyotakuKeikakuJikosakuseiMeisaiEntity kyotakuEntity : entity.get居宅給付計画自己作成明細Entity()) {
-            kyotakuKeikakuJikosakuseiMeisaiList.add(new KyotakuKeikakuJikosakuseiMeisai(kyotakuEntity));
+            kyotakakuJikosakuseiMeisaiList.add(new KyotakuKeikakuJikosakuseiMeisai(kyotakuEntity));
         }
-        this.kyotakuKeikakuJikosakuseiMeisai = Models.create(kyotakuKeikakuJikosakuseiMeisaiList);
-        List<YoboKeikakuJikoSakuseiMeisai> yoboKeikakuJikoSakuseiMeisaiList = new ArrayList<>();
-        for (YoboKeikakuJikoSakuseiMeisaiEntity yoboKeikakuJikoSakuseiMeisaiEntity : entity.get予防給付計画自己作成明細Entity()) {
-            yoboKeikakuJikoSakuseiMeisaiList.add(new YoboKeikakuJikoSakuseiMeisai(yoboKeikakuJikoSakuseiMeisaiEntity));
+        this.kyotakuJikosakuseiMeisai = Models.create(kyotakakuJikosakuseiMeisaiList);
+        List<YoboKeikakuJikoSakuseiMeisai> yoboJikoSakuseiMeisaiList = new ArrayList<>();
+        for (YoboKeikakuJikoSakuseiMeisaiEntity yoboJikoSakuseiMeisaiEntity : entity.get予防給付計画自己作成明細Entity()) {
+            yoboJikoSakuseiMeisaiList.add(new YoboKeikakuJikoSakuseiMeisai(yoboJikoSakuseiMeisaiEntity));
         }
-        this.yoboKeikakuJikoSakuseiMeisai = Models.create(yoboKeikakuJikoSakuseiMeisaiList);
+        this.yoboKeikakuJikoSakuseiMeisai = Models.create(yoboJikoSakuseiMeisaiList);
     }
 
     /**
@@ -101,12 +101,12 @@ public class KyotakuKeikakuJikoSakusei
     KyotakuKeikakuJikoSakusei(
             DbT3007KyotakuKeikakuJikoSakuseiEntity entity,
             KyotakuKeikakuJikoSakuseiIdentifier id,
-            Models<KyotakuKeikakuJikosakuseiMeisaiIdentifier, KyotakuKeikakuJikosakuseiMeisai> kyotakuKeikakuJikosakuseiMeisai,
+            Models<KyotakuKeikakuJikosakuseiMeisaiIdentifier, KyotakuKeikakuJikosakuseiMeisai> kyotakuuJikosakuseiMeisai,
             Models<YoboKeikakuJikoSakuseiMeisaiIdentifier, YoboKeikakuJikoSakuseiMeisai> yoboKeikakuJikoSakuseiMeisai
     ) {
         this.entity = entity;
         this.id = id;
-        this.kyotakuKeikakuJikosakuseiMeisai = kyotakuKeikakuJikosakuseiMeisai;
+        this.kyotakuJikosakuseiMeisai = kyotakuuJikosakuseiMeisai;
         this.yoboKeikakuJikoSakuseiMeisai = yoboKeikakuJikoSakuseiMeisai;
     }
 
@@ -221,11 +221,14 @@ public class KyotakuKeikakuJikoSakusei
     }
 
     /**
-     * 居宅給付計画自己作成配下の要素を削除対象とします。<br/> {@link DbT3007KyotakuKeikakuJikoSakuseiEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば削除状態にします。
-     * 居宅給付計画自己作成配下の要素である精神手帳任意項目情報の{@link Models#deleteOrRemoveAll() }を実行します。 削除処理結果となる{@link KyotakuKeikakuJikoSakusei}を返します。
+     * 居宅給付計画自己作成配下の要素を削除対象とします。<br/>
+     * {@link DbT3007KyotakuKeikakuJikoSakuseiEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば削除状態にします。
+     * 居宅給付計画自己作成配下の要素である精神手帳任意項目情報の{@link Models#deleteOrRemoveAll() }を実行します。
+     * 削除処理結果となる{@link KyotakuKeikakuJikoSakusei}を返します。
      *
      * @return 削除対象処理実施後の{@link KyotakuKeikakuJikoSakusei}
-     * @throws IllegalStateException DbT3007KyotakuKeikakuJikoSakuseiEntityのデータ状態が変更の場合
+     * @throws IllegalStateException
+     * DbT3007KyotakuKeikakuJikoSakuseiEntityのデータ状態が変更の場合
      */
     @Override
     public KyotakuKeikakuJikoSakusei deleted() {
@@ -236,16 +239,17 @@ public class KyotakuKeikakuJikoSakusei
             throw new IllegalStateException(UrErrorMessages.不正.toString());
         }
         return new KyotakuKeikakuJikoSakusei(
-                deletedEntity, id, kyotakuKeikakuJikosakuseiMeisai.deleted(), yoboKeikakuJikoSakuseiMeisai.deleted());
+                deletedEntity, id, kyotakuJikosakuseiMeisai.deleted(), yoboKeikakuJikoSakuseiMeisai.deleted());
     }
 
     @Override
     public boolean hasChanged() {
-        return hasChangedEntity() || kyotakuKeikakuJikosakuseiMeisai.hasAnyChanged() || yoboKeikakuJikoSakuseiMeisai.hasAnyChanged();
+        return hasChangedEntity() || kyotakuJikosakuseiMeisai.hasAnyChanged() || yoboKeikakuJikoSakuseiMeisai.hasAnyChanged();
     }
 
     /**
-     * 居宅給付計画自己作成のみを変更対象とします。<br/> {@link DbT3007KyotakuKeikakuJikoSakuseiEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば変更状態にします。
+     * 居宅給付計画自己作成のみを変更対象とします。<br/>
+     * {@link DbT3007KyotakuKeikakuJikoSakuseiEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば変更状態にします。
      *
      * @return 変更対象処理実施後の{@link KyotakuKeikakuJikoSakusei}
      */
@@ -256,7 +260,7 @@ public class KyotakuKeikakuJikoSakusei
             modifiedEntity.setState(EntityDataState.Modified);
         }
         return new KyotakuKeikakuJikoSakusei(
-                modifiedEntity, id, kyotakuKeikakuJikosakuseiMeisai, yoboKeikakuJikoSakuseiMeisai);
+                modifiedEntity, id, kyotakuJikosakuseiMeisai, yoboKeikakuJikoSakuseiMeisai);
     }
 
     /**
@@ -267,8 +271,8 @@ public class KyotakuKeikakuJikoSakusei
      * @throws IllegalStateException 指定の識別子に該当する精神手帳任意項目情報がない場合
      */
     public KyotakuKeikakuJikosakuseiMeisai getKyotakuKeikakuJikosakuseiMeisai(KyotakuKeikakuJikosakuseiMeisaiIdentifier id) {
-        if (kyotakuKeikakuJikosakuseiMeisai.contains(id)) {
-            return kyotakuKeikakuJikosakuseiMeisai.clone().get(id);
+        if (kyotakuJikosakuseiMeisai.contains(id)) {
+            return kyotakuJikosakuseiMeisai.clone().get(id);
         }
         //TODO メッセージの検討
         throw new IllegalArgumentException(UrErrorMessages.不正.toString());
@@ -280,7 +284,7 @@ public class KyotakuKeikakuJikoSakusei
      * @return 精神手帳任意項目情報リスト
      */
     public List<KyotakuKeikakuJikosakuseiMeisai> getKyotakuKeikakuJikosakuseiMeisaiList() {
-        return new ArrayList<>(kyotakuKeikakuJikosakuseiMeisai.values());
+        return new ArrayList<>(kyotakuJikosakuseiMeisai.values());
 
     }
 
@@ -313,7 +317,7 @@ public class KyotakuKeikakuJikoSakusei
      * @return {@link KyotakuKeikakuJikoSakusei}のシリアライズ形式
      */
     protected Object writeReplace() {
-        return new _SerializationProxy(entity, id, kyotakuKeikakuJikosakuseiMeisai, yoboKeikakuJikoSakuseiMeisai);
+        return new _SerializationProxy(entity, id, kyotakuJikosakuseiMeisai, yoboKeikakuJikoSakuseiMeisai);
     }
 
     private static final class _SerializationProxy implements Serializable {
@@ -321,23 +325,23 @@ public class KyotakuKeikakuJikoSakusei
         private static final long serialVersionUID = -710031961519711799L;
         private final DbT3007KyotakuKeikakuJikoSakuseiEntity entity;
         private final KyotakuKeikakuJikoSakuseiIdentifier id;
-        private final Models<KyotakuKeikakuJikosakuseiMeisaiIdentifier, KyotakuKeikakuJikosakuseiMeisai> kyotakuKeikakuJikosakuseiMeisai;
+        private final Models<KyotakuKeikakuJikosakuseiMeisaiIdentifier, KyotakuKeikakuJikosakuseiMeisai> kyotakuJikosakuseiMeisai;
         private final Models<YoboKeikakuJikoSakuseiMeisaiIdentifier, YoboKeikakuJikoSakuseiMeisai> yoboKeikakuJikoSakuseiMeisai;
 
         private _SerializationProxy(
                 DbT3007KyotakuKeikakuJikoSakuseiEntity entity,
                 KyotakuKeikakuJikoSakuseiIdentifier id,
-                Models<KyotakuKeikakuJikosakuseiMeisaiIdentifier, KyotakuKeikakuJikosakuseiMeisai> kyotakuKeikakuJikosakuseiMeisai,
+                Models<KyotakuKeikakuJikosakuseiMeisaiIdentifier, KyotakuKeikakuJikosakuseiMeisai> kyotakuJikosakuseiMeisai,
                 Models<YoboKeikakuJikoSakuseiMeisaiIdentifier, YoboKeikakuJikoSakuseiMeisai> yoboKeikakuJikoSakuseiMeisai
         ) {
             this.entity = entity;
             this.id = id;
-            this.kyotakuKeikakuJikosakuseiMeisai = kyotakuKeikakuJikosakuseiMeisai;
+            this.kyotakuJikosakuseiMeisai = kyotakuJikosakuseiMeisai;
             this.yoboKeikakuJikoSakuseiMeisai = yoboKeikakuJikoSakuseiMeisai;
         }
 
         private Object readResolve() {
-            return new KyotakuKeikakuJikoSakusei(this.entity, this.id, this.kyotakuKeikakuJikosakuseiMeisai, this.yoboKeikakuJikoSakuseiMeisai);
+            return new KyotakuKeikakuJikoSakusei(this.entity, this.id, this.kyotakuJikosakuseiMeisai, this.yoboKeikakuJikoSakuseiMeisai);
         }
     }
 
@@ -348,7 +352,7 @@ public class KyotakuKeikakuJikoSakusei
      * @return {@link KyotakuKeikakuJikoSakuseiBuilder}
      */
     public KyotakuKeikakuJikoSakuseiBuilder createBuilderForEdit() {
-        return new KyotakuKeikakuJikoSakuseiBuilder(entity, id, kyotakuKeikakuJikosakuseiMeisai, yoboKeikakuJikoSakuseiMeisai);
+        return new KyotakuKeikakuJikoSakuseiBuilder(entity, id, kyotakuJikosakuseiMeisai, yoboKeikakuJikoSakuseiMeisai);
     }
 
     @Override

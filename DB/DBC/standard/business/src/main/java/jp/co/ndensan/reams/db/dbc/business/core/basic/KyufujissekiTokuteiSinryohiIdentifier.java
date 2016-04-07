@@ -19,6 +19,7 @@ import lombok.Value;
  * 給付実績特定診療費の識別子です。
  */
 @Value
+@SuppressWarnings("PMD.UnusedPrivateField")
 public class KyufujissekiTokuteiSinryohiIdentifier implements Serializable {
 
     private final KokanShikibetsuNo 交換情報識別番号;

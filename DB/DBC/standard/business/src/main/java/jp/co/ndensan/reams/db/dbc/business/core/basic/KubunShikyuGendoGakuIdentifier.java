@@ -14,6 +14,7 @@ import lombok.Value;
  * 居宅サービス区分支給限度額の識別子です。
  */
 @Value
+@SuppressWarnings("PMD.UnusedPrivateField")
 public class KubunShikyuGendoGakuIdentifier implements Serializable {
 
     private final RString 要介護状態区分;

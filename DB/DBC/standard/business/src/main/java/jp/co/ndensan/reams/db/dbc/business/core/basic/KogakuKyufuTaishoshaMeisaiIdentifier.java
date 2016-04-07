@@ -17,6 +17,7 @@ import lombok.Value;
  * 高額介護サービス費給付対象者明細の識別子です。
  */
 @Value
+@SuppressWarnings("PMD.UnusedPrivateField")
 public class KogakuKyufuTaishoshaMeisaiIdentifier implements Serializable {
 
     private final HihokenshaNo 被保険者番号;

@@ -14,6 +14,7 @@ import lombok.Value;
  * 市町村特別給付サービス事業者の識別子です。
  */
 @Value
+@SuppressWarnings("PMD.UnusedPrivateField")
 public class ShichosonTokubetsuKyufuJigyoshaIdentifier implements Serializable {
 
     private final JigyoshaNo 市町村特別給付用事業者番号;

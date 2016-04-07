@@ -16,6 +16,7 @@ import lombok.Value;
  * 共同処理用受給者異動償還送付の識別子です。
  */
 @Value
+@SuppressWarnings("PMD.UnusedPrivateField")
 public class KyodoShoriyoJukyushaIdoShokanSofuIdentifier implements Serializable {
 
     private final FlexibleDate 異動年月日;

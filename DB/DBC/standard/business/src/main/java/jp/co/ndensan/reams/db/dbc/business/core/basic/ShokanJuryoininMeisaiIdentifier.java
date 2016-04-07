@@ -15,6 +15,7 @@ import lombok.Value;
  * 償還払支給受領委任払明細の識別子です。
  */
 @Value
+@SuppressWarnings("PMD.UnusedPrivateField")
 public class ShokanJuryoininMeisaiIdentifier implements Serializable {
 
     private final HihokenshaNo 被保険者番号;

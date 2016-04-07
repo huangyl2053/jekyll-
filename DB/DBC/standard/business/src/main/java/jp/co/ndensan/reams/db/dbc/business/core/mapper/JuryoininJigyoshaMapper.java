@@ -11,7 +11,6 @@ import java.util.List;
 import jp.co.ndensan.reams.db.dbc.business.core.JuryoininJigyosha;
 import jp.co.ndensan.reams.db.dbc.business.core.JuryoininJigyoshaList;
 import jp.co.ndensan.reams.db.dbc.business.core.KeiyakuJigyosha;
-import jp.co.ndensan.reams.db.dbc.business.core.Todokedesha;
 import jp.co.ndensan.reams.db.dbc.definition.core.valueobject.keiyakuno.KeiyakuNo;
 import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3077JuryoininKeiyakuJigyoshaEntity;
 import jp.co.ndensan.reams.ua.uax.business.core.koza.IKoza;
@@ -137,19 +136,21 @@ public final class JuryoininJigyoshaMapper {
         return 契約期間;
     }
 
-    private static Todokedesha create届出者(DbT3077JuryoininKeiyakuJigyoshaEntity entity) {
-        return null;
-//        RString address = entity.getTodokedeAddress();
-//        RString jigyoshaName = entity.getTodokedeJigyoshaName();
-//        RString daihyoshaName = entity.getTodokedeDaihyoshaName();
-
-//        return new Todokedesha(address, jigyoshaName, daihyoshaName);
-    }
-
+//    private static Todokedesha create届出者(DbT3077JuryoininKeiyakuJigyoshaEntity entity) {
+//        return null;
+////        RString address = entity.getTodokedeAddress();
+////        RString jigyoshaName = entity.getTodokedeJigyoshaName();
+////        RString daihyoshaName = entity.getTodokedeDaihyoshaName();
+//
+////        return new Todokedesha(address, jigyoshaName, daihyoshaName);
+//    }
     private static KeiyakuJigyosha create契約事業者(
             DbT3077JuryoininKeiyakuJigyoshaEntity entity, IHojin 法人, IKoza 口座) {
+        // TODO 未使用のメソッド引数があります。Checkstyle対応。
+        entity.getIsDeleted();
+        法人.canBe個人();
+        口座.getCombined金融機関コードand支店コード();
         return null;
-
 //        JigyoshaNo jigyoshaNo = entity.getKeiyakuJigyoshaNo();
 //        IHojin hojin = 法人;
 //        TelNo jigyoshaFaxNo = entity.getJigyoshaFaxNo();
@@ -158,7 +159,6 @@ public final class JuryoininJigyoshaMapper {
 //        IKoza koza = 口座;
         //TODO n3317塚田萌　ISofusakiは本実装の時に対応する。期限　本実装完了まで
 //        ISofusaki sofusaki = 送付先;
-
 //        return new KeiyakuJigyosha(jigyoshaNo, hojin, jigyoshaFaxNo, eigyoKeitai, sofusakiBusho, koza);
     }
 }

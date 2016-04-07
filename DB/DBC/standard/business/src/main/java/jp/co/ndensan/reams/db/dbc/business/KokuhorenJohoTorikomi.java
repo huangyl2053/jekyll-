@@ -16,11 +16,14 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.DataGridButtonState;
  */
 public class KokuhorenJohoTorikomi {
 
-    private final String 処理前 = "1";
-    private final String 起動中 = "2";
-    private final String 処理済 = "3";
-    private final String 処理無 = "9";
+    private static final RString 再処理 = new RString("再処理");
 
+    /**
+     * 処理状態を返します。
+     *
+     * @param 処理状態区分 処理状態区分
+     * @return 処理状態
+     */
     public RString get処理状態(RString 処理状態区分) {
 
         if (処理状態区分.isEmpty()) {
@@ -28,11 +31,11 @@ public class KokuhorenJohoTorikomi {
         }
 
         switch (処理状態区分.toString()) {
-            case 処理前:
+            case "1":
                 return new RString("×");
-            case 処理済:
+            case "3":
                 return new RString("○");
-            case 処理無:
+            case "9":
                 return new RString("-");
             default:
                 return new RString("-");
@@ -40,34 +43,58 @@ public class KokuhorenJohoTorikomi {
         }
     }
 
+    /**
+     * 再処理可否区分を返します。
+     *
+     * @param 再処理可否 再処理可否
+     * @return 再処理可否区分
+     */
     public RString get再処理可否区分(boolean 再処理可否) {
         if (再処理可否) {
-            return get再処理フラグコード(new RString("再処理"));
+            return get再処理フラグコード(再処理);
         } else {
             return new RString("0");
         }
     }
 
+    /**
+     * 再処理フラグ名称を返します。
+     *
+     * @param 再処理フラグコード 再処理フラグコード
+     * @return 再処理フラグ名称
+     */
     public RString get再処理フラグ名称(RString 再処理フラグコード) {
         if (再処理フラグコード.compareTo("1") == 0) {
-            return new RString("再処理");
+            return 再処理;
         } else {
             return RString.EMPTY;
         }
     }
 
+    /**
+     * 再処理フラグコードを返します。
+     *
+     * @param 再処理フラグ名称 再処理フラグ名称
+     * @return 再処理フラグコード
+     */
     public RString get再処理フラグコード(RString 再処理フラグ名称) {
         if (再処理フラグ名称 == null
                 || 再処理フラグ名称.isEmpty()) {
             return new RString("0");
         }
-        if (再処理フラグ名称.compareTo("再処理") == 0) {
+        if (再処理フラグ名称.compareTo(再処理.toString()) == 0) {
             return new RString("1");
         } else {
             return new RString("0");
         }
     }
 
+    /**
+     * 取込フラグを返します。
+     *
+     * @param 取込ファイル名 取込ファイル名
+     * @return 取込フラグ
+     */
     public RString get取込フラグ(RString 取込ファイル名) {
         if (SharedFile.searchSharedFile(取込ファイル名).isEmpty()) {
             return new RString("*");
@@ -77,14 +104,27 @@ public class KokuhorenJohoTorikomi {
 
     }
 
+    /**
+     * 選択ボタン状態を返します。
+     *
+     * @param 取込フラグ 取込フラグ
+     * @param 今月処理状態 今月処理状態
+     * @return 選択ボタン状態
+     */
     public DataGridButtonState get選択ボタン状態(RString 取込フラグ, RString 今月処理状態) {
-        if (取込フラグ.compareTo(" ") == 0 && (今月処理状態.compareTo("未処理") == 0 || 今月処理状態.compareTo("再処理") == 0 || 今月処理状態.compareTo("処理前") == 0)) {
+        if (取込フラグ.compareTo(" ") == 0 && (今月処理状態.compareTo("未処理") == 0 || 今月処理状態.compareTo(再処理.toString()) == 0 || 今月処理状態.compareTo("処理前") == 0)) {
             return DataGridButtonState.Enabled;
         } else {
             return DataGridButtonState.Disabled;
         }
     }
 
+    /**
+     * 帳票IDを返します。
+     *
+     * @param 交換識別番号 交換識別番号
+     * @return 帳票ID
+     */
     public ReportId get帳票ID(RString 交換識別番号) {
         switch (交換識別番号.toString()) {
             case "121":
@@ -121,6 +161,13 @@ public class KokuhorenJohoTorikomi {
                 return new ReportId("DBC900016_ShokanbaraiFushikyuKetteishaIchiran");
             case "37J":
                 return new ReportId("DBC900022_GassanJikofutangakuKakuninTorikomiIchiran");
+            default:
+                return get帳票Id(交換識別番号);
+        }
+    }
+
+    private ReportId get帳票Id(RString 交換識別番号) {
+        switch (交換識別番号.toString()) {
             case "37H":
                 return new ReportId("DBC900028_GassanJikofutangakuShomeishoTorikomiIchiran");
             case "386":
@@ -149,7 +196,6 @@ public class KokuhorenJohoTorikomi {
                 return new ReportId("DBC900052_KyodoJukyushaIchiran");
             case "537":
                 return new ReportId("DBC900053_JukyushaTotsugokekkaIchiran");
-
             default:
                 return null;
         }

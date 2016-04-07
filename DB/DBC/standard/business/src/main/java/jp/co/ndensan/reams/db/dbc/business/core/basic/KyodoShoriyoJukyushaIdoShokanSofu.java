@@ -22,8 +22,9 @@ import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 /**
  * 共同処理用受給者異動償還送付を管理するクラスです。
  */
-public class KyodoShoriyoJukyushaIdoShokanSofu
-        extends ModelBase<KyodoShoriyoJukyushaIdoShokanSofuIdentifier, DbT3003KyodoShoriyoJukyushaIdoShokanSofuEntity, KyodoShoriyoJukyushaIdoShokanSofu> implements Serializable {
+public class KyodoShoriyoJukyushaIdoShokanSofu extends
+        ModelBase<KyodoShoriyoJukyushaIdoShokanSofuIdentifier, DbT3003KyodoShoriyoJukyushaIdoShokanSofuEntity, KyodoShoriyoJukyushaIdoShokanSofu>
+        implements Serializable {
 
     private final DbT3003KyodoShoriyoJukyushaIdoShokanSofuEntity entity;
     private final KyodoShoriyoJukyushaIdoShokanSofuIdentifier id;
@@ -72,7 +73,8 @@ public class KyodoShoriyoJukyushaIdoShokanSofu
      * コンストラクタです。<br/>
      * DBより取得した{@link DbT3003KyodoShoriyoJukyushaIdoShokanSofuEntity}より{@link KyodoShoriyoJukyushaIdoShokanSofu}を生成します。
      *
-     * @param entity DBより取得した{@link DbT3003KyodoShoriyoJukyushaIdoShokanSofuEntity}
+     * @param entity
+     * DBより取得した{@link DbT3003KyodoShoriyoJukyushaIdoShokanSofuEntity}
      */
     public KyodoShoriyoJukyushaIdoShokanSofu(DbT3003KyodoShoriyoJukyushaIdoShokanSofuEntity entity) {
         this.entity = requireNonNull(entity, UrSystemErrorMessages.値がnull.getReplacedMessage("共同処理用受給者異動償還送付"));
@@ -221,7 +223,8 @@ public class KyodoShoriyoJukyushaIdoShokanSofu
     /**
      * 共同処理用受給者異動償還送付の識別子{@link KyodoShoriyoJukyushaIdoShokanSofuIdentifier}を返します。
      *
-     * @return 共同処理用受給者異動償還送付の識別子{@link KyodoShoriyoJukyushaIdoShokanSofuIdentifier}
+     * @return
+     * 共同処理用受給者異動償還送付の識別子{@link KyodoShoriyoJukyushaIdoShokanSofuIdentifier}
      */
     @Override
     public KyodoShoriyoJukyushaIdoShokanSofuIdentifier identifier() {
