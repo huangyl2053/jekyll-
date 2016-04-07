@@ -75,7 +75,7 @@ public class DbT3104KokuhorenInterfaceKanriDac implements ISaveable<DbT3104Kokuh
      *
      * @return DbT3104KokuhorenInterfaceKanriEntity
      */
-    public DbT3104KokuhorenInterfaceKanriEntity getMaxShoriYM() throws NullPointerException {
+    public DbT3104KokuhorenInterfaceKanriEntity getMaxShoriYM() {
 
         DbAccessorNormalType accessor = new DbAccessorNormalType(session);
 
