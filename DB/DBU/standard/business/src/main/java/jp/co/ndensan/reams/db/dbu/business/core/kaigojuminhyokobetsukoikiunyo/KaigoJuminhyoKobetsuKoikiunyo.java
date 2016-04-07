@@ -12,6 +12,8 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
  * 広域運用抽出期間情報を管理するビジネスです。
+ *
+ * @reamsid_L DBU-0550-040 zhangzhiming
  */
 public class KaigoJuminhyoKobetsuKoikiunyo {
 

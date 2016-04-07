@@ -8,8 +8,9 @@ package jp.co.ndensan.reams.db.dbu.definition.batchprm.kobetsujikorenkeiinfosaku
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
- *
  * 介護住民票個別事項連携情報パラメータクラスです。
+ *
+ * @reamsid_L DBU-0550-040 zhangzhiming
  */
 @lombok.Getter
 @lombok.Setter
