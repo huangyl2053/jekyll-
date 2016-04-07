@@ -13,7 +13,7 @@ import org.apache.ibatis.annotations.Param;
 /**
  * 介護認定審査会委員情報のマッパーインタフェースです。
  *
- * @reamsid_L DBE-0110-010  wangxiaodong
+ * @reamsid_L DBE-0110-010 wangxiaodong
  */
 public interface IShinsakaiIinJohoMapper {
 
