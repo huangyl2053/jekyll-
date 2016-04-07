@@ -10,10 +10,9 @@ import jp.co.ndensan.reams.db.dbc.business.core.basic.ShokanShinsei;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0810013.KouzaInfoDiv;
 import jp.co.ndensan.reams.db.dbc.divcontroller.handler.dbc0810013.KouzaInfoHandler;
 import jp.co.ndensan.reams.db.dbc.divcontroller.viewbox.ViewStateKeys;
-import jp.co.ndensan.reams.db.dbc.divcontroller.viewbox.dbc0810014.ServiceTeiKyoShomeishoParameter;
 import jp.co.ndensan.reams.db.dbc.service.core.shokanbaraijyokyoshokai.ShokanbaraiJyokyoShokai;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
+import jp.co.ndensan.reams.db.dbz.service.TaishoshaKey;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
@@ -35,18 +34,12 @@ public class KouzaInfo {
      * @return 償還払い状況照会_口座情報画面
      */
     public ResponseData<KouzaInfoDiv> onLoad(KouzaInfoDiv div) {
-        ServiceTeiKyoShomeishoParameter parmeter = new ServiceTeiKyoShomeishoParameter(
-                new HihokenshaNo("000000003"), new FlexibleYearMonth(new RString("201508")),
-                new RString("0123456789"), new JigyoshaNo("0000000003"), new RString("事業者名"),
-                new RString("0003"), new RString("証明書"));
-        ViewStateHolder.put(ViewStateKeys.識別コード, new ShikibetsuCode("000000000000010"));
-        ViewStateHolder.put(ViewStateKeys.基本情報パラメータ, parmeter);
-        ServiceTeiKyoShomeishoParameter parameter = ViewStateHolder.get(
-                ViewStateKeys.基本情報パラメータ, ServiceTeiKyoShomeishoParameter.class);
-        FlexibleYearMonth サービス年月 = parameter.getServiceTeikyoYM();
-        HihokenshaNo 被保険者番号 = parameter.getHiHokenshaNo();
-        RString 整理番号 = parameter.getSeiriNp();
-        ShikibetsuCode 識別コード = ViewStateHolder.get(ViewStateKeys.識別コード, ShikibetsuCode.class);
+
+        TaishoshaKey 引継ぎデータ = ViewStateHolder.get(ViewStateKeys.資格対象者, TaishoshaKey.class);
+        ShikibetsuCode 識別コード = 引継ぎデータ.get識別コード();
+        FlexibleYearMonth サービス年月 = new FlexibleYearMonth(ViewStateHolder.get(ViewStateKeys.償還払申請一覧_サービス年月, RString.class));
+        HihokenshaNo 被保険者番号 = ViewStateHolder.get(ViewStateKeys.償還払申請一覧_被保険者番号, HihokenshaNo.class);
+        RString 整理番号 = ViewStateHolder.get(ViewStateKeys.償還払申請一覧_整理番号, RString.class);
 
         div.getPanelOne().getCcdKaigoAtenaInfo().onLoad(識別コード);
         if (被保険者番号 != null && !被保険者番号.isEmpty()) {
@@ -57,7 +50,6 @@ public class KouzaInfo {
         List<ShokanShinsei> shokanShinseiList = ShokanbaraiJyokyoShokai.createInstance()
                 .getShokanbaraiShinseiJyohoDetail(被保険者番号, サービス年月, 整理番号);
         if (shokanShinseiList == null || shokanShinseiList.isEmpty()) {
-            // TODO OKをクリックすれば、申請検索画面に遷移する
             throw new ApplicationException(UrErrorMessages.該当データなし.getMessage());
         }
         getHandler(div).setヘッダ_エリア(new RDate(サービス年月.toString()), 整理番号);
