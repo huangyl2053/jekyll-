@@ -3,22 +3,18 @@ package jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.ShisetsuN
  * このコードはツールによって生成されました。
  * このファイルへの変更は、以下の状況下で不正な動作の原因になったり、
  * コードが再生成されるときに損失したりします。
- * Tue Mar 29 16:55:02 CST 2016 
+ * Tue Mar 29 16:55:02 CST 2016
  */
 
-
-
-import jp.co.ndensan.reams.uz.uza.ui.binding.DataRow;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.ui.binding.DataRow;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxFlexibleDate;
 
-
 /**
- * dgShisetsuNyutaishoRireki_Row のクラスファイル 
- * 
- * @author 自動生成
+ * dgShisetsuNyutaishoRireki_Row のクラスファイル
+ *
+ * @reamsid_L DBA-0360-030 linghuhang
  */
-
 public class dgShisetsuNyutaishoRireki_Row extends DataRow {
     // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-01-15_09-59-03">
 
