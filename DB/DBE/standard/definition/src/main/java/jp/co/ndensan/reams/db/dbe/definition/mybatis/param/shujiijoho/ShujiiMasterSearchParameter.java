@@ -10,6 +10,8 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
  * 主治医情報を特定するためのMyBatis用パラメータクラスです。
+ * 
+ * @reamsid_L DBE-0250-010  suguangjun
  */
 @SuppressWarnings("PMD.UnusedPrivateField")
 @lombok.Getter

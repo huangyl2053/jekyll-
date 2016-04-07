@@ -46,6 +46,7 @@ import jp.co.ndensan.reams.uz.uza.util.config.BusinessConfig;
 /**
  * 主治医マスタ処理のクラスです。。
  *
+ * @reamsid_L DBE-0250-010  suguangjun 
  */
 public class ShujiiMaster {
 

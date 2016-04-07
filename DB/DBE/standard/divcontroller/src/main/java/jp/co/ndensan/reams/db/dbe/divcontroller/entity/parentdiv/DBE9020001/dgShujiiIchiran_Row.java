@@ -16,7 +16,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxCode;
 /**
  * dgShujiiIchiran_Row のクラスファイル 
  * 
- * @author 自動生成
+ * @reamsid_L DBE-0250-010  suguangjun 
  */
 
 public class dgShujiiIchiran_Row extends DataRow {

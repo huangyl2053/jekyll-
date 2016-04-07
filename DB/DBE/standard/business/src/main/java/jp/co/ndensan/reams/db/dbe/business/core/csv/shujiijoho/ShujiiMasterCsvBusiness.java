@@ -9,6 +9,8 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
  * 主治医情報出力用CSVBusinessクラスです。
+ * 
+ * @reamsid_L DBE-0250-010  suguangjun 
  */
 @lombok.Getter
 @lombok.Setter

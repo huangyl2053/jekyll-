@@ -12,6 +12,8 @@ import jp.co.ndensan.reams.uz.uza.math.Decimal;
 
 /**
  * 境界層保険料段階情報を管理するビジネスです。
+ *
+ * @reamsid_L DBU-0430-020 linghuhang
  */
 public class KyokaisoHokenryo {
 
@@ -34,6 +36,7 @@ public class KyokaisoHokenryo {
     public Decimal get履歴番号() {
         return new Decimal(entity.getRirekiNo());
     }
+
     /**
      * リンク番号を取得します。
      *
@@ -42,6 +45,7 @@ public class KyokaisoHokenryo {
     public Decimal getリンク番号() {
         return new Decimal(entity.getLinkNo());
     }
+
     /**
      * 適用開始年月を取得します。
      *

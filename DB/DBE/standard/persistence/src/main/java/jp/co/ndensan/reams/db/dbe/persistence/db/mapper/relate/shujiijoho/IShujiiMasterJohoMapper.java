@@ -15,6 +15,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 /**
  * 主治医マスタのマッパーインタフェースです。
  *
+ * @reamsid_L DBE-0250-010  suguangjun 
  */
 public interface IShujiiMasterJohoMapper {
 

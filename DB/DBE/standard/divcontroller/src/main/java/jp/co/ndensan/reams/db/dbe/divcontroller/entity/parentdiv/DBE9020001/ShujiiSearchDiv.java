@@ -13,7 +13,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 /**
  * ShujiiSearch のクラスファイル 
  * 
- * @author 自動生成
+ * @reamsid_L DBE-0250-010  suguangjun 
  */
 public class ShujiiSearchDiv extends Panel {
     // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-01-15_09-59-03">
