@@ -4,15 +4,17 @@ package jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2020010;
  * このファイルへの変更は、再生成時には損失するため
  * 不正な動作の原因になります。
  */
+
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 
 /**
- * NinteiChosaScheduleInput のクラスファイル 
- * 
- * @author 自動生成
+ * NinteiChosaScheduleInput のクラスファイル
+ *
+ * @reamsid_L DBE-0020-060 lishengli
  */
 public class NinteiChosaScheduleInputDiv extends Panel {
+
     // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-01-15_09-59-03">
     /*
      * [ private の作成 ]

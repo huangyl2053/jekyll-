@@ -8,8 +8,9 @@ package jp.co.ndensan.reams.db.dbe.definition.core.ninteichosascheduleinput;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
- *
  * 調査員情報取得のParameterクラスです。
+ *
+ * @reamsid_L DBE-0020-060 lishengli
  */
 @lombok.Getter
 @SuppressWarnings("PMD.UnusedPrivateField")

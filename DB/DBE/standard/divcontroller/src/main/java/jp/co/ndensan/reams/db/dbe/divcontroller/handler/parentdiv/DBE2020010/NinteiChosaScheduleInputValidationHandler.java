@@ -15,8 +15,9 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPair;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
 
 /**
- *
  * 認定調査スケジュール登録10のValidationHandlerクラスです。
+ *
+ * @reamsid_L DBE-0020-060 lishengli
  */
 public class NinteiChosaScheduleInputValidationHandler {
 

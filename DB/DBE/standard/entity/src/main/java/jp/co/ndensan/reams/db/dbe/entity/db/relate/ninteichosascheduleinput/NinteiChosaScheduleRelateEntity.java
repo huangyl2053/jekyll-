@@ -11,8 +11,9 @@ import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
- *
  * 調査員情報のRelateEntityクラスです。
+ *
+ * @reamsid_L DBE-0020-060 lishengli
  */
 @lombok.Getter
 @lombok.Setter
