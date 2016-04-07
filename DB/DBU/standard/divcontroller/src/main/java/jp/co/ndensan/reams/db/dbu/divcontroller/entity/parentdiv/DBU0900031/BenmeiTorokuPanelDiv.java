@@ -4,23 +4,22 @@ package jp.co.ndensan.reams.db.dbu.divcontroller.entity.parentdiv.DBU0900031;
  * このファイルへの変更は、再生成時には損失するため
  * 不正な動作の原因になります。
  */
-
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.kaigoatenainfo.KaigoAtenaInfo.IKaigoAtenaInfoDiv;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.parentdiv.kaigoshikakukihon.IKaigoShikakuKihonDiv;
+import jp.co.ndensan.reams.db.dbz.divcontroller.entity.parentdiv.kaigoshikakukihon.KaigoShikakuKihonDiv;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.binding.*;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 
 /**
- * BenmeiTorokuPanel のクラスファイル
- *
- * @author 自動生成
+ * BenmeiTorokuPanel のクラスファイル 
+ * 
+ * @reamsid_L DBU-1080-020  lijia
+ * 
  */
 public class BenmeiTorokuPanelDiv extends Panel {
-
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2015-11-30_08-54-50">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-01-15_09-59-03">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -33,6 +32,8 @@ public class BenmeiTorokuPanelDiv extends Panel {
     private ShikakukihonPanelDiv ShikakukihonPanel;
     @JsonProperty("BenmeiTorokuMeisaiPanel")
     private BenmeiTorokuMeisaiPanelDiv BenmeiTorokuMeisaiPanel;
+    @JsonProperty("KaigoKanryoMessage")
+    private KaigoKanryoMessageDiv KaigoKanryoMessage;
     @JsonProperty("ProcessState")
     private RString ProcessState;
 
@@ -97,6 +98,24 @@ public class BenmeiTorokuPanelDiv extends Panel {
     }
 
     /*
+     * getKaigoKanryoMessage
+     * @return KaigoKanryoMessage
+     */
+    @JsonProperty("KaigoKanryoMessage")
+    public KaigoKanryoMessageDiv getKaigoKanryoMessage() {
+        return KaigoKanryoMessage;
+    }
+
+    /*
+     * setKaigoKanryoMessage
+     * @param KaigoKanryoMessage KaigoKanryoMessage
+     */
+    @JsonProperty("KaigoKanryoMessage")
+    public void setKaigoKanryoMessage(KaigoKanryoMessageDiv KaigoKanryoMessage) {
+        this.KaigoKanryoMessage = KaigoKanryoMessage;
+    }
+
+    /*
      * getProcessState
      * @return ProcessState
      */
@@ -118,23 +137,18 @@ public class BenmeiTorokuPanelDiv extends Panel {
      * [ ショートカットの作成 ]
      */
     @JsonIgnore
-    public IKaigoAtenaInfoDiv getAtenaCommonChildDiv() {
-        return this.getAtenaPanel().getAtenaCommonChildDiv();
+    public IKaigoShikakuKihonDiv getCcdKaigoShikakuKihon() {
+        return this.getShikakukihonPanel().getCcdKaigoShikakuKihon();
     }
 
     @JsonIgnore
-    public IKaigoShikakuKihonDiv getShikakuKihonCommonChildDiv() {
-        return this.getShikakukihonPanel().getShikakuKihonCommonChildDiv();
+    public TextBoxDate getTxtBenmeiSyoSakuseibi() {
+        return this.getBenmeiTorokuMeisaiPanel().getTxtBenmeiSyoSakuseibi();
     }
 
     @JsonIgnore
-    public TextBoxDate getTxtdateBenmeiSyoSakuseibi() {
-        return this.getBenmeiTorokuMeisaiPanel().getTxtdateBenmeiSyoSakuseibi();
-    }
-
-    @JsonIgnore
-    public void setTxtdateBenmeiSyoSakuseibi(TextBoxDate txtdateBenmeiSyoSakuseibi) {
-        this.getBenmeiTorokuMeisaiPanel().setTxtdateBenmeiSyoSakuseibi(txtdateBenmeiSyoSakuseibi);
+    public void  setTxtBenmeiSyoSakuseibi(TextBoxDate txtBenmeiSyoSakuseibi) {
+        this.getBenmeiTorokuMeisaiPanel().setTxtBenmeiSyoSakuseibi(txtBenmeiSyoSakuseibi);
     }
 
     @JsonIgnore
@@ -143,7 +157,7 @@ public class BenmeiTorokuPanelDiv extends Panel {
     }
 
     @JsonIgnore
-    public void setTxtMultiLineBenmeisya(TextBoxMultiLine txtMultiLineBenmeisya) {
+    public void  setTxtMultiLineBenmeisya(TextBoxMultiLine txtMultiLineBenmeisya) {
         this.getBenmeiTorokuMeisaiPanel().setTxtMultiLineBenmeisya(txtMultiLineBenmeisya);
     }
 
@@ -153,7 +167,7 @@ public class BenmeiTorokuPanelDiv extends Panel {
     }
 
     @JsonIgnore
-    public void setTxtMultiLineShobunNaiyo(TextBoxMultiLine txtMultiLineShobunNaiyo) {
+    public void  setTxtMultiLineShobunNaiyo(TextBoxMultiLine txtMultiLineShobunNaiyo) {
         this.getBenmeiTorokuMeisaiPanel().setTxtMultiLineShobunNaiyo(txtMultiLineShobunNaiyo);
     }
 
@@ -163,18 +177,18 @@ public class BenmeiTorokuPanelDiv extends Panel {
     }
 
     @JsonIgnore
-    public void setTxtMultiLineBenmeiNaiyo(TextBoxMultiLine txtMultiLineBenmeiNaiyo) {
+    public void  setTxtMultiLineBenmeiNaiyo(TextBoxMultiLine txtMultiLineBenmeiNaiyo) {
         this.getBenmeiTorokuMeisaiPanel().setTxtMultiLineBenmeiNaiyo(txtMultiLineBenmeiNaiyo);
     }
 
     @JsonIgnore
-    public TextBoxDate getTxtDateBenmeisyoTeishutubi() {
-        return this.getBenmeiTorokuMeisaiPanel().getTxtDateBenmeisyoTeishutubi();
+    public TextBoxDate getTxtBenmeisyoTeishutubi() {
+        return this.getBenmeiTorokuMeisaiPanel().getTxtBenmeisyoTeishutubi();
     }
 
     @JsonIgnore
-    public void setTxtDateBenmeisyoTeishutubi(TextBoxDate txtDateBenmeisyoTeishutubi) {
-        this.getBenmeiTorokuMeisaiPanel().setTxtDateBenmeisyoTeishutubi(txtDateBenmeisyoTeishutubi);
+    public void  setTxtBenmeisyoTeishutubi(TextBoxDate txtBenmeisyoTeishutubi) {
+        this.getBenmeiTorokuMeisaiPanel().setTxtBenmeisyoTeishutubi(txtBenmeisyoTeishutubi);
     }
 
     // </editor-fold>

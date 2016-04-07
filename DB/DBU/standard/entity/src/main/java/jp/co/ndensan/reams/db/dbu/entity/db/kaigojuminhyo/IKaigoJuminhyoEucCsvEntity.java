@@ -8,6 +8,8 @@ package jp.co.ndensan.reams.db.dbu.entity.db.kaigojuminhyo;
 /**
  * 他社住基CSVデータを作成します。
  *
+ * @reamsid_L DBU-0350-020  lijia
+ * 
  */
 public interface IKaigoJuminhyoEucCsvEntity {
 }

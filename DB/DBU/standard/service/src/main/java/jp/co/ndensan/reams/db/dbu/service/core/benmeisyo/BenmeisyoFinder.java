@@ -15,9 +15,9 @@ import jp.co.ndensan.reams.db.dbu.entity.db.benmeisyo.BenmeisyoTyohyoDataEntity;
 import jp.co.ndensan.reams.db.dbu.entity.db.benmeisyo.HihokenshaDateEntity;
 import jp.co.ndensan.reams.db.dbu.entity.db.benmeisyo.NinshoshaDenshiKoinDataEntity;
 import jp.co.ndensan.reams.db.dbu.persistence.db.mapper.relate.benmeisyo.IBenmeisyoMapper;
+import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBU;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.service.core.MapperProvider;
-import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBU;
 import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.kyotsu.NinshoshaDenshikoinshubetsuCode;
 import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.kyotsu.ShobunShuruiCode;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7065ChohyoSeigyoKyotsuEntity;
@@ -55,8 +55,10 @@ import jp.co.ndensan.reams.uz.uza.util.config.BusinessConfig;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 
 /**
- *
  * 弁明書のFinderクラスです。
+ *
+ * @reamsid_L DBU-1080-010 zhengshukai
+ *
  */
 public class BenmeisyoFinder {
 

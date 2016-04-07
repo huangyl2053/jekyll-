@@ -14,13 +14,16 @@ import jp.co.ndensan.reams.uz.uza.batch.flow.IBatchFlowCommand;
 
 /**
  * 介護住民票個別事項連携情報作成【他社住基】のバッチ処理クラスです。
+ * 
+ * @reamsid_L DBU-0350-020  lijia
+ * 
  */
 public class KaigoJuminhyoFlow extends BatchFlowBase<KaigoJuminhyoBatchParameter> {
 
     @Override
     protected void defineFlow() {
         executeStep(KAIGOJUMINHYO_EUC_CSV_PROCESS);
-        //executeStep(KAIGOJUMINHYO_DB_UPD_PROCESS);
+        executeStep(KAIGOJUMINHYO_DB_UPD_PROCESS);
     }
 
     private static final String KAIGOJUMINHYO_EUC_CSV_PROCESS = "kaigoJuminhyoEucCsvProcess";

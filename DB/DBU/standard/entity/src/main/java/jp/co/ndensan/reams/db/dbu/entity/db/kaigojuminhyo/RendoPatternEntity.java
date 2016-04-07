@@ -10,6 +10,8 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 /**
  * 連携パターン情報が取得です。
  *
+ * @reamsid_L DBU-0350-020  lijia
+ * 
  */
 @SuppressWarnings("PMD.UnusedPrivateField")
 @lombok.Getter

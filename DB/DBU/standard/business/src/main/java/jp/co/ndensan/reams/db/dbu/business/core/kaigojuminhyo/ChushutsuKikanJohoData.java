@@ -15,6 +15,8 @@ import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 /**
  * 抽出期間情報を設定です。
  *
+ * @reamsid_L DBU-0350-040  lijia
+ * 
  */
 public class ChushutsuKikanJohoData implements Serializable {
 

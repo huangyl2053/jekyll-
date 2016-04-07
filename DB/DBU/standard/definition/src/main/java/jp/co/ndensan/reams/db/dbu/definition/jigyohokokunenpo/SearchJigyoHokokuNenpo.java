@@ -13,6 +13,8 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 /**
  * 事業報告集計一覧データの取得処理のパラメタークラスです。
  *
+ * @reamsid_L DBU-1060-050 zhengshukai
+ *
  */
 @lombok.Getter
 @lombok.Setter
@@ -27,6 +29,7 @@ public final class SearchJigyoHokokuNenpo {
 
     /**
      * 事業報告集計一覧のパラメータの作成します
+     *
      * @param 報告年 報告年
      * @param 集計対象年 集計対象年
      * @param 市町村コード 市町村コード

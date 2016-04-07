@@ -8,6 +8,8 @@ package jp.co.ndensan.reams.db.dbu.definition.core.benmeitoroku;
 /**
  * BenmeiTorokuViewStateKeys
  *
+ * @reamsid_L DBU-1080-020  lijia
+ * 
  */
 public enum BenmeiTorokuViewStateKeys {
 

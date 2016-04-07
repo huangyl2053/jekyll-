@@ -14,6 +14,8 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 /**
  * ＣＳＶを定義したEntityクラスです。
  *
+ * @reamsid_L DBU-0350-020  lijia
+ * 
  */
 @SuppressWarnings("PMD.UnusedPrivateField")
 @lombok.Getter
