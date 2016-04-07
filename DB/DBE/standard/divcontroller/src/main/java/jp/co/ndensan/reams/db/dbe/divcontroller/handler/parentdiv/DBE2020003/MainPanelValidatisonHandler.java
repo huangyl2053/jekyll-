@@ -17,6 +17,8 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
 /**
  * MainPaneValidationMessageバリデーションメッセージを定義している列挙型です。
  *
+ * @reamsid_L DBE-0020-030 wanghui
+ *
  */
 public class MainPanelValidatisonHandler {
 

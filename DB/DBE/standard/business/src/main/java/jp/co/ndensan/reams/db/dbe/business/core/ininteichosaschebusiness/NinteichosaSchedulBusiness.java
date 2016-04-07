@@ -11,6 +11,8 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 /**
  *
  * 認定調査スケジュール登録3Businessです。
+ *
+ * @reamsid_L DBE-0020-030 wanghui
  */
 public class NinteichosaSchedulBusiness {
 
