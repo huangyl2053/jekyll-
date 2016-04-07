@@ -11,6 +11,8 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 /**
  *
  * ビジネス設計_DBUMN52001_境界層管理マスタリスト_帳票データ作成クラスです。
+ *
+ * @reamsid_L DBU-1050-010 wanghui
  */
 @SuppressWarnings("PMD.UnusedPrivateField")
 @lombok.Getter

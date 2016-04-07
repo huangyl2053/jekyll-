@@ -16,6 +16,8 @@ import jp.co.ndensan.reams.uz.uza.util.db.IDbAccessable;
 /**
  *
  * 資格得喪履歴のRelateEntityクラスです。
+ *
+ * @reamsid_L DBA-0130-010 wanghui
  */
 @lombok.Getter
 @lombok.Setter

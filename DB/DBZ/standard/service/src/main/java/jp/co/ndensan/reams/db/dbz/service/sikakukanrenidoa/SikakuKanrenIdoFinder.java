@@ -40,6 +40,8 @@ import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
 /**
  *
  * 資格関連異動クラスです。
+ *
+ * @reamsid_L DBA-0120-010 wanghui
  */
 public class SikakuKanrenIdoFinder {
 
@@ -75,8 +77,7 @@ public class SikakuKanrenIdoFinder {
     /**
      * {@link InstanceProvider#create}にて生成した{@link SikakuKanrenIdoFinder}のインスタンスを返します。
      *
-     * @return
-     * {@link InstanceProvider#create}にて生成した{@link SikakuKanrenIdoFinder}のインスタンス
+     * @return {@link InstanceProvider#create}にて生成した{@link SikakuKanrenIdoFinder}のインスタンス
      */
     public static SikakuKanrenIdoFinder createInstance() {
         return InstanceProvider.create(SikakuKanrenIdoFinder.class);

@@ -14,6 +14,8 @@ import jp.co.ndensan.reams.uz.uza.batch.flow.IBatchFlowCommand;
 /**
  *
  * バッチ設計_DBUMN52001_境界層管理マスタリストフロです。
+ *
+ * @reamsid_L DBU-1050-020 wanghui
  */
 public class KyokaisogGaitoshaFlow extends BatchFlowBase<KyokaisoKanriMasterListBatchParameter> {
 

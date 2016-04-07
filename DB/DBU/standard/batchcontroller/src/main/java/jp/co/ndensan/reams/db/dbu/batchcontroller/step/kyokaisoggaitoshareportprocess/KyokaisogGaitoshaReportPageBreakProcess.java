@@ -47,6 +47,8 @@ import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
 /**
  * バッチ設計_DBUMN52001_境界層管理マスタリストのバッチ処理クラスです。
  *
+ * @reamsid_L DBU-1050-020 wanghui
+ *
  */
 public class KyokaisogGaitoshaReportPageBreakProcess extends BatchProcessBase<KyokaisogGaitoshaRelateEntity> {
 

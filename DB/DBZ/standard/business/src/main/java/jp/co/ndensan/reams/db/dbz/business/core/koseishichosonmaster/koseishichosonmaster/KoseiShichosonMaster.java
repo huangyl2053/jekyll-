@@ -12,6 +12,8 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
  * 構成市町村マスタを取得クラスです。
+ *
+ * @reamsid_L DBA-0120-010 wanghui
  */
 public class KoseiShichosonMaster {
 

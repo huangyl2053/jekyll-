@@ -11,6 +11,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 /**
  * コードマスタから喪失事由ドロップダウンリスト 戻る用Entityです。
  *
+ * @reamsid_L DBA-0130-010 wanghui
  */
 @lombok.Getter
 @lombok.Setter
