@@ -21,8 +21,9 @@ import jp.co.ndensan.reams.uz.uza.util.db.SearchResult;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 
 /**
- *
  * 介護認定審査会開催予定登録3クラスです。
+ *
+ * @reamsid_L DBE-0130-030 yaodongsheng
  */
 public class ShinsakaiScheduleHakko {
 

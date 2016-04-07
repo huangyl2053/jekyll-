@@ -10,6 +10,8 @@ import jp.co.ndensan.reams.uz.uza.report.ReportEditorJoiner;
 
 /**
  * 介護認定審査会スケジュール表Builderクラスです。
+ *
+ * @reamsid_L DBE-0130-070 yaodongsheng
  */
 class ShinsakaisukejuruhyoBuilderImpl implements IShinsakaisukejuruhyoBuilder {
 

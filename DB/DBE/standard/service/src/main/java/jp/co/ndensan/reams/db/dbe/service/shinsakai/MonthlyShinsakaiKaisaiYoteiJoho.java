@@ -18,6 +18,8 @@ import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 /**
  *
  * 介護認定審査会開催予定登録1クラスです。
+ *
+ * @reamsid_L DBE-0130-040 yaodongsheng
  */
 public class MonthlyShinsakaiKaisaiYoteiJoho {
 

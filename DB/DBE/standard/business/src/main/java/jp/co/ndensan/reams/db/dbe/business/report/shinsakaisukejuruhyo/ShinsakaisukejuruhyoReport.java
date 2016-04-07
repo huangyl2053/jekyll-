@@ -13,6 +13,8 @@ import lombok.NonNull;
 
 /**
  * 介護認定審査会スケジュール表のReportです。
+ *
+ * @reamsid_L DBE-0130-070 yaodongsheng
  */
 public class ShinsakaisukejuruhyoReport extends Report<ShinsakaisukejuruhyoReportSource> {
 

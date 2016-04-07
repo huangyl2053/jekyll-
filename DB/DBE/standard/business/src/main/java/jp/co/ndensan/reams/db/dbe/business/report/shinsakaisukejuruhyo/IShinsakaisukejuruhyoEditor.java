@@ -11,6 +11,8 @@ import jp.co.ndensan.reams.uz.uza.report.IReportEditor;
 /**
  *
  * 介護認定審査会スケジュール表ヘッダエディターのインターフェースクラスです。
+ *
+ * @reamsid_L DBE-0130-070 yaodongsheng
  */
 interface IShinsakaisukejuruhyoEditor extends IReportEditor<ShinsakaisukejuruhyoReportSource> {
 

@@ -17,6 +17,8 @@ import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 /**
  *
  * 印刷対象介護認定審査会委員の取得処理です。
+ *
+ * @reamsid_L DBE-0130-060 yaodongsheng
  */
 public class ShinsakaiiinJohoManager {
 

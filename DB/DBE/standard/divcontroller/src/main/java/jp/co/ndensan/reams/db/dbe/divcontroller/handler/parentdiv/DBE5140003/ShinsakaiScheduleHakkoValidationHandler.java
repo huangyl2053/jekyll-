@@ -18,6 +18,8 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
 /**
  *
  * 介護認定審査会開催予定登録3のバリデーションハンドラークラスです。
+ *
+ * @reamsid_L DBE-0130-030 yaodongsheng
  */
 public class ShinsakaiScheduleHakkoValidationHandler {
 

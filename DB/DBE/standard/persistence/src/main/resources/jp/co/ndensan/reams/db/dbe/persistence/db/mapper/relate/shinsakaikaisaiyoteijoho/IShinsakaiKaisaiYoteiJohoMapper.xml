@@ -3,6 +3,7 @@
 <!-- 概要： 介護認定審査会開催予定情報のマッピング用XMLです。 -->
 
 <!-- どのマッパーインターフェースと対応するかを指定する -->
+<!-- @reamsid_L DBE-0130-040 yaodongsheng -->
 <mapper namespace="jp.co.ndensan.reams.db.dbe.persistence.db.mapper.relate.shinsakaikaisaiyoteijoho.IShinsakaiKaisaiYoteiJohoMapper">
 
     <select id="getShinsakaiKaisaiYoteiJohoEntity"

@@ -13,6 +13,8 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 /**
  *
  * 合議体情報と開催予定情報の取得処理クラスです。
+ *
+ * @reamsid_L DBE-0130-040 yaodongsheng
  */
 public interface IGogitaiJohoShinsaMapper {
 

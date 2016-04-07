@@ -15,6 +15,8 @@ import lombok.Setter;
 /**
  *
  * 年齢到達予定者チェックリストののバッチ処理クラスのパラメータです。
+ *
+ * @reamsid_L DBA-0580-020 yaodongsheng
  */
 @SuppressWarnings("PMD.UnusedPrivateField")
 @Getter

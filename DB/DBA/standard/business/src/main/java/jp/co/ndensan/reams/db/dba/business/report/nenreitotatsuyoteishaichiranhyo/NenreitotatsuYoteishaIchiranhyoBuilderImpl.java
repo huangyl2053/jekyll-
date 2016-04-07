@@ -10,6 +10,8 @@ import jp.co.ndensan.reams.uz.uza.report.ReportEditorJoiner;
 
 /**
  * 年齢到達予定者一覧表Builderクラスです。
+ *
+ * @reamsid_L DBA-0580-070 yaodongsheng
  */
 class NenreitotatsuYoteishaIchiranhyoBuilderImpl implements INenreitotatsuYoteishaIchiranhyoBuilder {
 

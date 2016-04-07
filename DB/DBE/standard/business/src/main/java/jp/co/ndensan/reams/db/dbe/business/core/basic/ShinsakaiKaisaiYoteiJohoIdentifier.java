@@ -10,6 +10,8 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
  * 介護認定審査会開催予定情報の識別子です。
+ *
+ * @reamsid_L DBE-9999-021 yaodongsheng
  */
 @SuppressWarnings("PMD.UnusedPrivateField")
 @lombok.Value

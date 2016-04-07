@@ -12,6 +12,8 @@ import jp.co.ndensan.reams.uz.uza.report.source.ReportItem;
 /**
  *
  * 認定調査依頼発行一覧表Sourceクラスです。
+ *
+ * @reamsid_L DBE-0080-110 yaodongsheng
  */
 public class ChosaIraiHakkoIchiranhyoReportSource implements IReportSource {
 // <editor-fold defaultstate="collapsed" desc="Generated Code">

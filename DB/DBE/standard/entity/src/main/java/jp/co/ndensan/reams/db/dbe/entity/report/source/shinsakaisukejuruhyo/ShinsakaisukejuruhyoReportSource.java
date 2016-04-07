@@ -6,6 +6,8 @@ import jp.co.ndensan.reams.uz.uza.report.source.ReportItem;
 
 /**
  * 介護認定審査会スケジュール表のReportSourceです。
+ *
+ * @reamsid_L DBE-0130-070 yaodongsheng
  */
 public class ShinsakaisukejuruhyoReportSource implements IReportSource {
 // <editor-fold defaultstate="collapsed" desc="Generated Code">

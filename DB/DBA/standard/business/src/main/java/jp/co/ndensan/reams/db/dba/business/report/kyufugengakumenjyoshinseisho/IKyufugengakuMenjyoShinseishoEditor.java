@@ -11,6 +11,8 @@ import jp.co.ndensan.reams.uz.uza.report.IReportEditor;
 /**
  *
  * 給付額減額免除申請書エディターのインターフェースクラスです。
+ *
+ * @reamsid_L DBA-0540-695 yaodongsheng
  */
 public interface IKyufugengakuMenjyoShinseishoEditor extends IReportEditor<KyufugengakuMenjyoShinseishoReportSource> {
 

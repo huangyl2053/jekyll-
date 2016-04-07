@@ -19,6 +19,8 @@ import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 
 /**
  * 介護認定審査会開催予定情報を管理するクラスです。
+ *
+ * @reamsid_L DBE-9999-021 yaodongsheng
  */
 public class ShinsakaiKaisaiYoteiJoho
         extends ParentModelBase<ShinsakaiKaisaiYoteiJohoIdentifier, DbT5501ShinsakaiKaisaiYoteiJohoEntity, ShinsakaiKaisaiYoteiJoho>
