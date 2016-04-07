@@ -25,6 +25,8 @@ import jp.co.ndensan.reams.uz.uza.util.db.SearchResult;
 /**
  * 償還払申請一覧のHandlerクラスです。
  *
+ * @reamsid_L DBC-0960-010 hezhenzhen
+ *
  */
 public class ShokanShinseiHandler {
 

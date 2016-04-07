@@ -13,6 +13,8 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 /**
  * 償還払支給申請RelateEntityクラスです。
  *
+ * @reamsid_L DBC-0960-020 hezhenzhen
+ *
  */
 @lombok.Getter
 @lombok.Setter

@@ -12,6 +12,9 @@ import jp.co.ndensan.reams.db.dbc.entity.db.relate.shokanshinseiichiran.ShokanSh
 
 /**
  * 償還払申請一覧のマッパーインタフェースです。
+ *
+ * @reamsid_L DBC-0960-020 hezhenzhen
+ *
  */
 public interface IShokanShinseiIchiranMapper {
 
