@@ -19,6 +19,8 @@ import jp.co.ndensan.reams.uz.uza.util.serialization.DataPassingConverter;
 /**
  *
  * 特徴仮算定賦課確定のHandlerクラスです。
+ *
+ * @reamsid_L DBB-0800-010 wanghui
  */
 public class FukaKakuteiPanelHandler {
 
