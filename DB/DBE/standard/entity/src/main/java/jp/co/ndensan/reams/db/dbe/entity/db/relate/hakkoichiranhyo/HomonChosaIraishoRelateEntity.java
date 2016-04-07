@@ -10,6 +10,8 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
  * 訪問調査依頼書発行のRelateEntityクラスです。
+ *
+ * @reamsid_L DBA-0401-140 duanzhanli
  */
 @SuppressWarnings("PMD.UnusedPrivateField")
 @lombok.Getter
