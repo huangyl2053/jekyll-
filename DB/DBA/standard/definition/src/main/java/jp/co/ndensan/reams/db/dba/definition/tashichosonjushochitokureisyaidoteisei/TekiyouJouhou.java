@@ -11,6 +11,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 /**
  *
  * 適用情報グリッドクラスです。
+ * @reamsid_L DBA-0401-010 dongyabin
  */
 public class TekiyouJouhou {
     
