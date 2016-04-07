@@ -10,6 +10,8 @@ import jp.co.ndensan.reams.uz.uza.report.IReportEditor;
 
 /**
  * 被保険者台帳エディターのインターフェースクラスです。
+ *
+ * @reamsid_L DBA-0500-040 zuotao
  */
 public interface IHihokenshaDaichoEditor extends IReportEditor<HihokenshaDaichoReportSource> {
 

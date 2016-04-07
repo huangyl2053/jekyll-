@@ -11,6 +11,8 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
  * 被保険者台帳_資格移動情報のEditorです。
+ *
+ * @reamsid_L DBA-0500-040 zuotao
  */
 public class HihokenshaDaichoShikakuIdoEditor implements IHihokenshaDaichoEditor {
 

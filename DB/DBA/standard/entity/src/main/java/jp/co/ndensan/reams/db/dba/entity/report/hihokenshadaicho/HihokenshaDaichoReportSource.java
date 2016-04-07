@@ -10,7 +10,9 @@ import jp.co.ndensan.reams.uz.uza.report.IReportSource;
 import jp.co.ndensan.reams.uz.uza.report.source.ReportItem;
 
 /**
- * 被保険者台帳のReportSource
+ * 被保険者台帳のReportSourceです。
+ *
+ * @reamsid_L DBA-0500-040 zuotao
  */
 public class HihokenshaDaichoReportSource implements IReportSource {
 // <editor-fold defaultstate="collapsed" desc="Generated Code">

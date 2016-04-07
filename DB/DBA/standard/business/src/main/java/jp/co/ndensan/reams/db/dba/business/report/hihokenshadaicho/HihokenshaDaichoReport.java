@@ -14,6 +14,8 @@ import lombok.NonNull;
 
 /**
  * 被保険者台帳作成します。
+ *
+ * @reamsid_L DBA-0500-040 zuotao
  */
 public final class HihokenshaDaichoReport extends Report<HihokenshaDaichoReportSource> {
 

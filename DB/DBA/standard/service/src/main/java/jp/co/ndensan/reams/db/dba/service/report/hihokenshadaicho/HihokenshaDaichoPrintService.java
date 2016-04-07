@@ -16,6 +16,8 @@ import jp.co.ndensan.reams.uz.uza.report.SourceDataCollection;
 
 /**
  * 被保険者台帳一覧表Printクラスです。
+ *
+ * @reamsid_L DBA-0500-040 zuotao
  */
 public class HihokenshaDaichoPrintService {
 

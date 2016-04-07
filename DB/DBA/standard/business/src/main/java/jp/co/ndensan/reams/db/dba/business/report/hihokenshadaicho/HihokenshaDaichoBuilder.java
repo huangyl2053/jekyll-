@@ -12,6 +12,8 @@ import jp.co.ndensan.reams.uz.uza.report.ReportEditorJoiner;
 
 /**
  * 被保険者台帳Builderクラスです。
+ *
+ * @reamsid_L DBA-0500-040 zuotao
  */
 public final class HihokenshaDaichoBuilder implements IHihokenshaDaichoBuilder {
 

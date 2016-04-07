@@ -10,6 +10,8 @@ import jp.co.ndensan.reams.uz.uza.report.IReportBuilder;
 
 /**
  * 被保険者台帳Builderのインターフェースクラスです。
+ *
+ * @reamsid_L DBA-0500-040 zuotao
  */
 public interface IHihokenshaDaichoBuilder extends IReportBuilder<HihokenshaDaichoReportSource> {
 }

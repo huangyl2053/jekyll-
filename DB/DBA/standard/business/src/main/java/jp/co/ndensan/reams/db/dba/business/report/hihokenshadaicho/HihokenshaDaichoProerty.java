@@ -13,6 +13,8 @@ import jp.co.ndensan.reams.uz.uza.report.ReportPropertyBase;
 
 /**
  * {@link HihokenshaDaichoProerty}のプロパティです。
+ *
+ * @reamsid_L DBA-0500-040 zuotao
  */
 public class HihokenshaDaichoProerty extends ReportPropertyBase<HihokenshaDaichoReportSource> {
 
