@@ -14,7 +14,9 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
  *
- * 被保険者台帳管理のパラメータです
+ * 被保険者台帳管理のパラメータです。
+ *
+ * @reamsid_L DBA-0520-010 lishengli
  */
 public final class HihokenshaShikakuShutokuMapperParameter {
 
