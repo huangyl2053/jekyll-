@@ -12,6 +12,7 @@ import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 /**
  * 主治医意見書作成依頼情報Divの処理を表します。
  *
+ * @reamsid_L DBE-0200-030 zhangzhiming
  */
 public class ShujiiIkenshoIraiShokai {
 

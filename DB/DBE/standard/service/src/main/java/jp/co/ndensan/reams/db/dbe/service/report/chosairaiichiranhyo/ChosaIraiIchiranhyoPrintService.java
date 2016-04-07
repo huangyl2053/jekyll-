@@ -30,8 +30,9 @@ import jp.co.ndensan.reams.uz.uza.report.SourceDataCollection;
 import jp.co.ndensan.reams.uz.uza.report.source.breaks.BreakAggregator;
 
 /**
- *
  * 認定調査依頼一覧表PrinterServiceクラスです。
+ *
+ * @reamsid_L DBE-0010-030 lishengli
  */
 public class ChosaIraiIchiranhyoPrintService {
 

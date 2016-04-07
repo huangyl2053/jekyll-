@@ -12,6 +12,8 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
  * 認定調査の情報Entityクラスです。
+ *
+ * @reamsid_L DBE-0200-030 zhangzhiming
  */
 @lombok.Setter
 @lombok.Getter

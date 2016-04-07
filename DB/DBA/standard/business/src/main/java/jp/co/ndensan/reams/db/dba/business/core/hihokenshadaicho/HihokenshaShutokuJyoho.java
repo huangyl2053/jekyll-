@@ -17,6 +17,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 /**
  * 被保険者台帳管理（資格取得）情報です。
  *
+ * @reamsid_L DBA-0520-010 lishengli
  */
 public class HihokenshaShutokuJyoho {
 

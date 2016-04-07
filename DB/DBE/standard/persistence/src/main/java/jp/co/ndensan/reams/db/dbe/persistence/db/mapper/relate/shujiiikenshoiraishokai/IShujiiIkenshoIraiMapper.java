@@ -11,6 +11,8 @@ import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaN
 
 /**
  * 認定調査情報のマッパーインタフェースです。
+ *
+ * @reamsid_L DBE-0200-030 zhangzhiming
  */
 public interface IShujiiIkenshoIraiMapper {
 

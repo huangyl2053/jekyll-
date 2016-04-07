@@ -15,6 +15,8 @@ import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5221NinteichosaScheduleEnti
 
 /**
  * 地区認定調査員情報のマッパーインタフェースです。
+ *
+ * @reamsid_L DBE-0020-020 lishengli
  */
 public interface IChosainJohoMapper {
 

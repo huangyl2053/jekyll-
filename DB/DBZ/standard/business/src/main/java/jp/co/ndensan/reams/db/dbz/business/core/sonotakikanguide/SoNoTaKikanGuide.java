@@ -10,6 +10,8 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
  * その他機関情報のビジネスクラスです。
+ * 
+ * @reamsid_L DBE-3000-050 wangkun
  */
 public class SoNoTaKikanGuide {
 

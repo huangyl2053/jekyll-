@@ -7,6 +7,8 @@ import jp.co.ndensan.reams.uz.uza.report.source.ReportItem;
 /**
  *
  * 弁明書のReportSourceクラスです。
+ *
+ * @reamsid_L DBU-1080-150 linghuhang
  */
 public class BemmeisyoReportSource implements IReportSource {
 // <editor-fold defaultstate="collapsed" desc="Generated Code">

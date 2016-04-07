@@ -24,6 +24,8 @@ import jp.co.ndensan.reams.uz.uza.util.config.BusinessConfig;
 
 /**
  * SoNoTaKikanGuideHandler のクラスファイル。
+ * 
+ * @reamsid_L DBE-3000-050 wangkun
  */
 public class SoNoTaKikanGuideHandler {
 

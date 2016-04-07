@@ -13,6 +13,8 @@ import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 
 /**
  * 認定調査スケジュール情報を管理するクラスです。
+ *
+ * @reamsid_L DBE-0020-020 lishengli
  */
 public class NinteichosaSchedule implements Serializable {
 

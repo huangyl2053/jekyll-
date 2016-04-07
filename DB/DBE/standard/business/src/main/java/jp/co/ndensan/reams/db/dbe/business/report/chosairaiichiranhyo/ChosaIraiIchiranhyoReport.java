@@ -12,8 +12,9 @@ import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
 import lombok.NonNull;
 
 /**
- *
  * 認定調査依頼一覧表のReportです。
+ *
+ * @reamsid_L DBE-0010-030 lishengli
  */
 public class ChosaIraiIchiranhyoReport extends Report<ChosaIraiIchiranhyoReportSource> {
 

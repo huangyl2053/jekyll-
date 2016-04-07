@@ -18,6 +18,8 @@ import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 
 /**
  * その他機関情報の検索処理クラスです。
+ * 
+ * @reamsid_L DBE-3000-050 wangkun
  */
 public class SoNoTaKikanGuideFinder {
     

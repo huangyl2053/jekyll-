@@ -7,6 +7,8 @@ package jp.co.ndensan.reams.db.dbu.business.report.bemmeisyo;
 
 /**
  * 弁明書作成_帳票クラスパラメータクラスです。
+ *
+ * @reamsid_L DBU-1080-150 linghuhang
  */
 @lombok.Getter
 @SuppressWarnings("PMD.UnusedPrivateField")
