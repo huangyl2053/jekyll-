@@ -11,6 +11,7 @@ import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 /**
  * 被保険者台帳パラメータクラスです。
  *
+ * @reamsid_L DBA-0500-010  suguangjun
  */
 @lombok.Getter
 @lombok.Setter
