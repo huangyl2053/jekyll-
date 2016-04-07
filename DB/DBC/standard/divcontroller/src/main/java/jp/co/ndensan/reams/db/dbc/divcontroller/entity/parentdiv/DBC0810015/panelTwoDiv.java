@@ -17,7 +17,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxDate;
 /**
  * panelTwo のクラスファイル
  *
- * @author 自動生成
+ * @reamsid_L DBC-1010-110 xuhao
  */
 public class panelTwoDiv extends Panel {
 
