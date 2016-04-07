@@ -8,8 +8,9 @@ package jp.co.ndensan.reams.db.dbe.business.report.chosairaiichiranhyo;
 import lombok.Getter;
 
 /**
- *
  * 認定調査依頼一覧表のITEMです。
+ *
+ * @reamsid_L DBE-0010-030 lishengli
  */
 @Getter
 @SuppressWarnings("PMD.UnusedPrivateField")

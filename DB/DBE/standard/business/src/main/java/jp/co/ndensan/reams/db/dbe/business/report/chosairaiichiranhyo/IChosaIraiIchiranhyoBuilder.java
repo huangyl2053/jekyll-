@@ -9,8 +9,9 @@ import jp.co.ndensan.reams.db.dbe.entity.report.source.chosairaiichiranhyo.Chosa
 import jp.co.ndensan.reams.uz.uza.report.IReportBuilder;
 
 /**
- *
  * 認定調査依頼一覧表Builderのインターフェースクラスです。
+ *
+ * @reamsid_L DBE-0010-030 lishengli
  */
 interface IChosaIraiIchiranhyoBuilder extends IReportBuilder<ChosaIraiIchiranhyoReportSource> {
 
