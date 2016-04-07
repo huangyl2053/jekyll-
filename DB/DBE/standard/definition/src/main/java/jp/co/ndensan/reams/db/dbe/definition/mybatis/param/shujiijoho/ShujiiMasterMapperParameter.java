@@ -13,6 +13,7 @@ import jp.co.ndensan.reams.uz.uza.math.Decimal;
 /**
  * 主治医マスタ用パラメータクラスです。
  *
+ * @reamsid_L DBE-0250-010  suguangjun 
  */
 @lombok.Getter
 @lombok.Setter

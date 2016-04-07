@@ -16,6 +16,7 @@ import jp.co.ndensan.reams.uz.uza.util.db.PrimaryKey;
 /**
  * 主治医マスタ用Entityクラスです。
  *
+ * @reamsid_L DBE-0250-010  suguangjun 
  */
 @lombok.Getter
 @lombok.Setter

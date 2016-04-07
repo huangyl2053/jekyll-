@@ -25,6 +25,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxCode;
 /**
  * 主治医マスタ画面のハンドラークラスです。
  *
+ * @reamsid_L DBE-0250-010  suguangjun
  */
 public class ShujiiMasterHandler {
 

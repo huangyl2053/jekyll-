@@ -16,6 +16,8 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
  * 主治医情報を管理するクラスです。
+ * 
+ * @reamsid_L DBE-0250-010  suguangjun 
  */
 public class ShujiiMaster {
 
