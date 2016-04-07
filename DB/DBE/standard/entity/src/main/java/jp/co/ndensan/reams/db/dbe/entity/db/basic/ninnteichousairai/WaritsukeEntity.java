@@ -18,8 +18,9 @@ import lombok.Getter;
 import lombok.Setter;
 
 /**
- *
  * 割付済み申請者一覧の取得のEntityクラスです。
+ *
+ * @reamsid_L DBE-0010-010 sunhaidi
  */
 @Getter
 @Setter
