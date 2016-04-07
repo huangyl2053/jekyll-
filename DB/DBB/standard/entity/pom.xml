@@ -14,27 +14,27 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
     <dependencies>
-		<!-- DBB -->
-	    <dependency>
+        <!-- DBB -->
+        <dependency>
             <groupId>${project.groupId}</groupId>
             <artifactId>DbbDefinition</artifactId>
         </dependency>
-		<!-- DBX -->
+        <!-- DBX -->
         <dependency>
             <groupId>jp.co.ndensan.reams.db.dbx</groupId>
             <artifactId>DbxEntity</artifactId>
         </dependency>
-		<!-- DBZ -->
+        <!-- DBZ -->
         <dependency>
             <groupId>jp.co.ndensan.reams.db.dbz</groupId>
             <artifactId>DbzEntity</artifactId>
         </dependency>
-		<!-- ���J�n -->
+        <!-- ???J?n -->
         <dependency>
             <groupId>jp.co.ndensan.reams.ur.urz</groupId>
             <artifactId>UrzEntity</artifactId>
         </dependency>
-        <!-- �e�X�g -->
+        <!-- ?e?X?g -->
         <dependency>
             <groupId>jp.co.ndensan.reams.db.dbz</groupId>
             <artifactId>DbzTestHelper</artifactId>
@@ -43,7 +43,7 @@
         <dependency>
             <groupId>jp.co.ndensan.reams.ca.cax</groupId>
             <artifactId>CaxEntity</artifactId>
-            <version>1.6.0</version>
+            <version>${jp.co.ndensan.reams.cax.version}</version>
             <type>jar</type>
         </dependency>
     </dependencies>

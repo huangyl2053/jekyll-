@@ -73,7 +73,6 @@
         <dependency>
             <groupId>jp.co.ndensan.reams.ca.cax</groupId>
             <artifactId>CaxBusiness</artifactId>
-            <version>${jp.co.ndensan.reams.cax.version}</version>
         </dependency>
         <!-- テスト -->
         <dependency>
@@ -108,6 +107,18 @@
         <dependency>
             <groupId>${project.groupId}</groupId>
             <artifactId>DbzEntity</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-annotations</artifactId>
+            <version>2.1.2</version>
+            <type>jar</type>
+        </dependency>
+        <dependency>
+            <groupId>org.hamcrest</groupId>
+            <artifactId>hamcrest-core</artifactId>
+            <version>1.3</version>
+            <scope>test</scope>
         </dependency>
     </dependencies>
     <build>
