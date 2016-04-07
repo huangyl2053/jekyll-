@@ -18,8 +18,9 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 
 /**
+ * 償還払い状況照会_給付費明細
  *
- *
+ * @reamsid_L DBC-1010-050 quxiaodong
  */
 public class KyufuShiharayiMeisaiHandler {
 
