@@ -52,6 +52,7 @@ public class Honsanteifuka {
     private final DbT7067ChohyoSeigyoHanyoDac 帳票制御汎用Dac;
     private static final RString 区分_ゼロ = new RString("0");
     private static final RString 区分_いち = new RString("1");
+    private static final RString 区分_に = new RString("2");
     private static final RString 通知書タイプ設定値 = new RString("001");
     private static final RString コンビニマルチ収納タイプ = new RString("301");
     private static final RString コンビニ角公タイプ = new RString("302");
@@ -633,7 +634,7 @@ public class Honsanteifuka {
         }
         result.set納入_出力期(parameter.get出力期());
         if (納入対象者_すべて.equals(parameter.get納入_対象者())) {
-            result.set納入_対象者(new RString("2"));
+            result.set納入_対象者(区分_に);
         } else if (納入対象者_現金.equals(parameter.get納入_対象者())) {
             result.set納入_対象者(区分_ゼロ);
         } else if (納入対象者_口座.equals(parameter.get納入_対象者())) {

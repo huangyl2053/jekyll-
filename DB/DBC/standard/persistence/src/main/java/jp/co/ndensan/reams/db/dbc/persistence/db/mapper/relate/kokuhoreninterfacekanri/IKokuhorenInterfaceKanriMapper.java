@@ -15,12 +15,28 @@ import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3104KokuhorenInterfaceKanri
  */
 public interface IKokuhorenInterfaceKanriMapper {
 
-    //select
+    /**
+     * selectbyKey
+     *
+     * @param parameter keyのパラメーター
+     * @return List<DbT3104KokuhorenInterfaceKanriEntity>
+     */
     List<DbT3104KokuhorenInterfaceKanriEntity> selectbyKey(Map<String, Object> parameter);
 
-    //update
+    /**
+     * update
+     *
+     * @param parameter keyのパラメーター
+     * @return Integer
+     */
     Integer shoriJotaiKubunUpdater(Map<String, Object> parameter);
 
+    /**
+     * update
+     *
+     * @param parameter keyのパラメーター
+     * @return Integer
+     */
     Integer torikomiShoriUpdater(Map<String, Object> parameter);
 
 }

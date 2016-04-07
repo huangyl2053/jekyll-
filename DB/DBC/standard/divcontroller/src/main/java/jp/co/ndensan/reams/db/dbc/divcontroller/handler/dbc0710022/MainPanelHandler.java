@@ -38,7 +38,7 @@ public final class MainPanelHandler {
      *
      * @return boolean
      */
-    public boolean get内容変更状態() {
+    public boolean is内容変更状態() {
         ShokanbaraiketteiJohoDiv shokanbaraiketteiJohoDiv = (ShokanbaraiketteiJohoDiv) div.getJutakuKaishuShinseiInfoPanel()
                 .getShokanbaraiKetteiJyohoPanel().getCcdShokanbaraiketteiJoho();
         Decimal 支払金額合計New = shokanbaraiketteiJohoDiv.getTxtShiharaikingakugoke().getValue();

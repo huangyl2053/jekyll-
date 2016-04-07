@@ -5,15 +5,16 @@
  */
 package jp.co.ndensan.reams.db.dbc.business.core.basic;
 
-import lombok.Value;
 import java.io.Serializable;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import lombok.Value;
 
 /**
  * 介護予防・日常生活支援総合事業区分支給限度額の識別子です。
  */
 @Value
+@SuppressWarnings("PMD.UnusedPrivateField")
 public class SogoJigyoKubunShikyuGendoGakuIdentifier implements Serializable {
 
     private final RString 要介護状態区分;

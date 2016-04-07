@@ -16,7 +16,8 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
  * @author Qi
  */
 @lombok.Getter
-public class ShikyuShiseiJohoKensakuKey {
+@SuppressWarnings("PMD.UnusedPrivateField")
+public final class ShikyuShiseiJohoKensakuKey {
 
     private final HihokenshaNo 被保険者番号;
     private final FlexibleYearMonth サービス提供年月;

@@ -26,7 +26,7 @@ public final class KozaParameter {
      * @param shikibetsuCode 識別コード
      * @param kamokuCode 科目コード
      */
-    public KozaParameter(long kozaId, ShikibetsuCode shikibetsuCode, KamokuCode kamokuCode) {
+    private KozaParameter(long kozaId, ShikibetsuCode shikibetsuCode, KamokuCode kamokuCode) {
         this.kozaId = kozaId;
         this.shikibetsuCode = shikibetsuCode;
         this.kamokuCode = kamokuCode;

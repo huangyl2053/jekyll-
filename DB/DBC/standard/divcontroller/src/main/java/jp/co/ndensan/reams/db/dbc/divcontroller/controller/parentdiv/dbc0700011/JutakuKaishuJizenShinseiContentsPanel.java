@@ -30,6 +30,7 @@ public class JutakuKaishuJizenShinseiContentsPanel {
      * 住宅改修費事前申請登録 事前申請内容の情報を表示する。
      *
      * @param contentsPanel 住宅改修事前申請panel
+     * @param hihoPanel JutakuKaishuJizenShinseiHihokenshaPanelDiv
      * @return ResponseData
      */
     public ResponseData<JutakuKaishuJizenShinseiContentsPanelDiv> onLoad(
@@ -54,6 +55,7 @@ public class JutakuKaishuJizenShinseiContentsPanel {
      * 住宅改修費事前申請登録 明細を追加するボタンを押下後、住宅改修明細を表示する。
      *
      * @param contentsPanel 申請panel
+     * @param hihoPanel JutakuKaishuJizenShinseiHihokenshaPanelDiv
      * @return ResponseData
      */
     public ResponseData<JutakuKaishuJizenShinseiContentsPanelDiv> onClick_btnModifyDetail(
@@ -75,6 +77,13 @@ public class JutakuKaishuJizenShinseiContentsPanel {
 
     }
 
+    /**
+     * onClick_copyToAddressメソッドです。
+     *
+     * @param panel 申請panel
+     * @param hihoPanel JutakuKaishuJizenShinseiHihokenshaPanelDiv
+     * @return ResponseData
+     */
     public ResponseData<JutakuKaishuJizenShinseiContentsPanelDiv> onClick_copyToAddress(
             JutakuKaishuJizenShinseiContentsPanelDiv panel, JutakuKaishuJizenShinseiHihokenshaPanelDiv hihoPanel) {
 
@@ -85,6 +94,13 @@ public class JutakuKaishuJizenShinseiContentsPanel {
         return ResponseData.of(panel).respond();
     }
 
+    /**
+     * onClick_btnClearメソッドです。
+     *
+     * @param panel 申請panel
+     * @param hihoPanel JutakuKaishuJizenShinseiHihokenshaPanelDiv
+     * @return ResponseData
+     */
     public ResponseData<JutakuKaishuJizenShinseiContentsPanelDiv> onClick_btnClear(
             JutakuKaishuJizenShinseiContentsPanelDiv panel, JutakuKaishuJizenShinseiHihokenshaPanelDiv hihoPanel) {
 
@@ -94,11 +110,17 @@ public class JutakuKaishuJizenShinseiContentsPanel {
         return ResponseData.of(panel).respond();
     }
 
+    /**
+     * onChange_ddlShinseishaKubunメソッドです。
+     *
+     * @param panel 申請panel
+     * @param hihoPanel JutakuKaishuJizenShinseiHihokenshaPanelDiv
+     * @return ResponseData
+     */
     public ResponseData<JutakuKaishuJizenShinseiContentsPanelDiv> onChange_ddlShinseishaKubun(
             JutakuKaishuJizenShinseiContentsPanelDiv panel, JutakuKaishuJizenShinseiHihokenshaPanelDiv hihoPanel) {
 
 //        RString 申請者区分key = new RString(panel.getJutakuKaishuJizenShinseisha().getDdlShinseishaKubun().getSelectedItem().toString());
-
 //        switch (申請者区分key) {
 //            case "myself":
 //                disableJigyosha(panel.getJutakuKaishuJizenShinseisha());
@@ -121,7 +143,8 @@ public class JutakuKaishuJizenShinseiContentsPanel {
     /**
      * 支払い方法ラジオボタンにより表示内容を変更する。
      *
-     * @param panel
+     * @param panel 申請panel
+     * @param hihoPanel JutakuKaishuJizenShinseiHihokenshaPanelDiv
      * @return response
      */
     public ResponseData<JutakuKaishuJizenShinseiContentsPanelDiv> onClick_radPayMethod(
@@ -140,7 +163,6 @@ public class JutakuKaishuJizenShinseiContentsPanel {
 //        div.getTxtTelNo().clearValue();
 //        div.getTxtYubinNo().clearValue();
 //    }
-
 //    private void disableJigyosha(ShinseishaInfoDiv div) {
 //        div.getTxtJigyoshaNo().setDisabled(true);
 //        div.getBtnJigyoshaInputGuide().setDisabled(true);
@@ -162,8 +184,9 @@ public class JutakuKaishuJizenShinseiContentsPanel {
 //        shinseishaDiv.getTxtAddress().setValue(atenaDiv.getTxtJusho().getValue());
 //        shinseishaDiv.getTxtTelNo().setValue(new RString("0123456789"));
 //    }
-
     private void setDefaultData(JutakuKaishuJizenShinseiContentsPanelDiv panel, JutakuKaishuJizenShinseiHihokenshaPanelDiv hihoPanel) {
+        // TODO 未使用のメソッド引数があります。 Checkstyle 対応。
+        hihoPanel.hashCode();
         panel.getJutakuKaishuJizenShinseisha().getTxtShinseiDate().setValue(new RDate("20140711"));
 
         panel.getJutakuKaishuJizenShinseiKoza().getRadPayMethod().setSelectedItem(new RString("payToKoza"));
@@ -176,7 +199,6 @@ public class JutakuKaishuJizenShinseiContentsPanel {
      */
 
 //    private void setJutakuOwnerData(JutakuKaishuJizenShinseiContentsPanelDiv panel) {
-
 //        /////////////////////////////////////////////////////////////////////////////////////////
 //        //JutakuData.xml Read　②
 //        String jutakuOwner = targetSource.get(2).get("jutakuOwner").toString();
@@ -193,7 +215,6 @@ public class JutakuKaishuJizenShinseiContentsPanel {
      /住宅改修明細の初期値をセットします。
      */
 //    private void setZizenShinseiDetailInput(JutakuKaishuJizenShinseiContentsPanelDiv panel) {
-
 //        /////////////////////////////////////////////////////////////////////////////////////////
 //        //JutakuData.xml Read　②
 //        String kaishuContents = targetSource.get(3).get("kaishuContents").toString();
@@ -234,7 +255,6 @@ public class JutakuKaishuJizenShinseiContentsPanel {
      住宅改修理由書の初期値をセットします。
      */
 //    private void setShinseiReason(JutakuKaishuJizenShinseiContentsPanelDiv panel) {
-
 //        /////////////////////////////////////////////////////////////////////////////////////////
 //        //JutakuData.xml Read　②
 //        String createDate = targetSource.get(6).get("createDate").toString();
@@ -257,7 +277,6 @@ public class JutakuKaishuJizenShinseiContentsPanel {
      口座振替申請情報（UR)の初期値をセットします。
      */
 //    private void setShinseiKozaInfo(JutakuKaishuJizenShinseiContentsPanelDiv panel) {
-
 //        panel.getJutakuKaishuJizenShinseiKoza().getRadPayMethod().setSelectedItem(new RString("payToKoza"));
 //
 //        /////////////////////////////////////////////////////////////////////////////////////////
@@ -279,7 +298,6 @@ public class JutakuKaishuJizenShinseiContentsPanel {
 //        panel.getJutakuKaishuJizenShinseiKoza().getKozaPayment().getTxtKozaMeigininKana().setValue(new RString(kozaMeigininKanaName));
 //        panel.getJutakuKaishuJizenShinseiKoza().getKozaPayment().getTxtKozaMeiginin().setValue(new RString(kozaMeigininName));
 //    }
-
     private List<dgJutakuKaishuDetail_Row> getShikyuShinseiInputData(JutakuKaishuDetailInputDiv div) {
 
         List<dgJutakuKaishuDetail_Row> list = new ArrayList<>();

@@ -25,6 +25,7 @@ public class JutakuKaishuJizenShinseiShinsaResultPanel {
      * 住宅改修費事前申請登録 審査結果内容の情報を表示する。
      *
      * @param panel HihokenshaSearchGaitoshaPanelDiv
+     * @param contentsPanel JutakuKaishuJizenShinseiContentsPanelDiv
      * @return PanelDivのResponseData
      */
     public ResponseData<JutakuKaishuJizenShinseiShinsaResultPanelDiv> onLoad(
@@ -44,6 +45,7 @@ public class JutakuKaishuJizenShinseiShinsaResultPanel {
      * 住宅改修費事前申請登録 明細を追加するボタンを押下後、住宅改修明細を表示する。
      *
      * @param resultPanel 結果panel
+     * @param contentsPanel JutakuKaishuJizenShinseiContentsPanelDiv
      * @return ResponseData
      */
     public ResponseData<JutakuKaishuJizenShinseiShinsaResultPanelDiv> onClick_btnModifyDetail(
@@ -59,9 +61,9 @@ public class JutakuKaishuJizenShinseiShinsaResultPanel {
     /**
      * 限度額チェックボタン押下時に「要介護状態区分３段階変更による」にチェックを入れます。
      *
-     * @param resultPanel
-     * @param contentsPanel
-     * @return
+     * @param resultPanel JutakuKaishuJizenShinseiShinsaResultPanelDiv
+     * @param contentsPanel JutakuKaishuJizenShinseiContentsPanelDiv
+     * @return ResponseData
      */
     public ResponseData<JutakuKaishuJizenShinseiShinsaResultPanelDiv> onClick_btnCheckGendogaku(
             JutakuKaishuJizenShinseiShinsaResultPanelDiv resultPanel, JutakuKaishuJizenShinseiContentsPanelDiv contentsPanel) {
@@ -81,6 +83,7 @@ public class JutakuKaishuJizenShinseiShinsaResultPanel {
      * 住宅改修費事前申請登録 判定区分を選択するとき、承認条件の内容を入力欄を不入力・入力可能。
      *
      * @param panel HihokenshaSearchGaitoshaPanelDiv
+     * @param contentsPanel JutakuKaishuJizenShinseiContentsPanelDiv
      * @return PanelDivのResponseData
      */
     public ResponseData<JutakuKaishuJizenShinseiShinsaResultPanelDiv> onClick_radJudgeKubun(
@@ -105,6 +108,8 @@ public class JutakuKaishuJizenShinseiShinsaResultPanel {
      前回・今回　初期化設定の初期値をセットします。
      */
     private void setSummary(JutakuKaishuJizenShinseiShinsaResultPanelDiv panel) {
+        // TODO 未使用のメソッド引数があります。 Checkstyle 対応。
+        panel.hashCode();
 
 //        /////////////////////////////////////////////////////////////////////////////////////////
 //        //JutakuData.xml Read　②
@@ -139,6 +144,9 @@ public class JutakuKaishuJizenShinseiShinsaResultPanel {
      今回の支払状況の値を設定します。
      */
     private void setSummaryNowData(JutakuKaishuJizenShinseiShinsaResultPanelDiv resultPanel, Decimal mitsumoriAmount) {
+        // TODO 未使用のメソッド引数があります。 Checkstyle 対応。
+        resultPanel.hashCode();
+        mitsumoriAmount.hashCode();
 
 ////        /////////////////////////////////////////////////////////////////////////////////////////
 ////        //JutakuData.xml Read　②
@@ -162,6 +170,8 @@ public class JutakuKaishuJizenShinseiShinsaResultPanel {
      審査結果の初期値をセットします。
      */
     private void setShinseiShinsaResult(JutakuKaishuJizenShinseiShinsaResultPanelDiv panel) {
+        // TODO 未使用のメソッド引数があります。 Checkstyle 対応。
+        panel.hashCode();
 
 ////        /////////////////////////////////////////////////////////////////////////////////////////
 ////        //JutakuData.xml Read　②

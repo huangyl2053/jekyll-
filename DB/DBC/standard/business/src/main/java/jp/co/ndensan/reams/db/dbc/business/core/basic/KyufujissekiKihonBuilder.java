@@ -7,17 +7,17 @@ package jp.co.ndensan.reams.db.dbc.business.core.basic;
 
 import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3017KyufujissekiKihonEntity;
-import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HokenKyufuRitsu;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.KokanShikibetsuNo;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.NyuryokuShikibetsuNo;
+import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.KokanShikibetsuNo;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.NyuryokuShikibetsuNo;
 
 /**
  * {@link KyufujissekiKihon}の編集を行うビルダークラスです。
@@ -352,7 +352,7 @@ public class KyufujissekiKihonBuilder {
     /**
      * 保険者番号（後期）を設定します。
      *
-     * @param 保険者番号_後期） 保険者番号（後期）
+     * @param 保険者番号_後期 保険者番号（後期）
      * @return {@link KyufujissekiKihonBuilder}
      */
     public KyufujissekiKihonBuilder set保険者番号_後期(RString 保険者番号_後期) {
@@ -365,7 +365,7 @@ public class KyufujissekiKihonBuilder {
     /**
      * 被保険者番号（後期）を設定します。
      *
-     * @param 被保険者番号_後期） 被保険者番号（後期）
+     * @param 被保険者番号_後期 被保険者番号（後期）
      * @return {@link KyufujissekiKihonBuilder}
      */
     public KyufujissekiKihonBuilder set被保険者番号_後期(RString 被保険者番号_後期) {
@@ -378,7 +378,7 @@ public class KyufujissekiKihonBuilder {
     /**
      * 保険者番号（国保）を設定します。
      *
-     * @param 保険者番号（国保） 保険者番号（国保）
+     * @param 保険者番号_国保 保険者番号（国保）
      * @return {@link KyufujissekiKihonBuilder}
      */
     public KyufujissekiKihonBuilder set保険者番号_国保(RString 保険者番号_国保) {
@@ -391,7 +391,7 @@ public class KyufujissekiKihonBuilder {
     /**
      * 被保険者証番号（国保）を設定します。
      *
-     * @param 被保険者証番号（国保） 被保険者証番号（国保）
+     * @param 被保険者証番号_国保 被保険者証番号（国保）
      * @return {@link KyufujissekiKihonBuilder}
      */
     public KyufujissekiKihonBuilder set被保険者証番号_国保(RString 被保険者証番号_国保) {
@@ -404,7 +404,7 @@ public class KyufujissekiKihonBuilder {
     /**
      * 個人番号（国保）を設定します。
      *
-     * @param 個人番号_国保） 個人番号_国保）
+     * @param 個人番号_国保 個人番号_国保）
      * @return {@link KyufujissekiKihonBuilder}
      */
     public KyufujissekiKihonBuilder set個人番号_国保(RString 個人番号_国保) {

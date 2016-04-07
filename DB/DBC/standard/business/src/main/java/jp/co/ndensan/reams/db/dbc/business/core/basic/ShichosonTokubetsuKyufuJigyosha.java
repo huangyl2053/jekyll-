@@ -8,24 +8,24 @@ package jp.co.ndensan.reams.db.dbc.business.core.basic;
 import java.io.Serializable;
 import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3065ShichosonTokubetsuKyufuJigyoshaEntity;
-import jp.co.ndensan.reams.db.dbz.business.core.uzclasses.ModelBase;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ServiceCode;
+import jp.co.ndensan.reams.db.dbz.business.core.uzclasses.ModelBase;
+import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
+import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.YubinNo;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.math.Decimal;
-import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
-import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 
 /**
  * 市町村特別給付サービス事業者を管理するクラスです。
  */
-public class ShichosonTokubetsuKyufuJigyosha
-        extends ModelBase<ShichosonTokubetsuKyufuJigyoshaIdentifier, DbT3065ShichosonTokubetsuKyufuJigyoshaEntity, ShichosonTokubetsuKyufuJigyosha> implements Serializable {
+public class ShichosonTokubetsuKyufuJigyosha extends
+        ModelBase<ShichosonTokubetsuKyufuJigyoshaIdentifier, DbT3065ShichosonTokubetsuKyufuJigyoshaEntity, ShichosonTokubetsuKyufuJigyosha>
+        implements Serializable {
 
     private final DbT3065ShichosonTokubetsuKyufuJigyoshaEntity entity;
     private final ShichosonTokubetsuKyufuJigyoshaIdentifier id;
@@ -59,7 +59,8 @@ public class ShichosonTokubetsuKyufuJigyosha
      * コンストラクタです。<br/>
      * DBより取得した{@link DbT3065ShichosonTokubetsuKyufuJigyoshaEntity}より{@link ShichosonTokubetsuKyufuJigyosha}を生成します。
      *
-     * @param entity DBより取得した{@link DbT3065ShichosonTokubetsuKyufuJigyoshaEntity}
+     * @param entity
+     * DBより取得した{@link DbT3065ShichosonTokubetsuKyufuJigyoshaEntity}
      */
     public ShichosonTokubetsuKyufuJigyosha(DbT3065ShichosonTokubetsuKyufuJigyoshaEntity entity) {
         this.entity = requireNonNull(entity, UrSystemErrorMessages.値がnull.getReplacedMessage("市町村特別給付サービス事業者"));
@@ -493,7 +494,8 @@ public class ShichosonTokubetsuKyufuJigyosha
     /**
      * 市町村特別給付サービス事業者の識別子{@link ShichosonTokubetsuKyufuJigyoshaIdentifier}を返します。
      *
-     * @return 市町村特別給付サービス事業者の識別子{@link ShichosonTokubetsuKyufuJigyoshaIdentifier}
+     * @return
+     * 市町村特別給付サービス事業者の識別子{@link ShichosonTokubetsuKyufuJigyoshaIdentifier}
      */
     @Override
     public ShichosonTokubetsuKyufuJigyoshaIdentifier identifier() {

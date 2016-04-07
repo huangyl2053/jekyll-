@@ -13,7 +13,7 @@ import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
  */
 @lombok.Getter
 @SuppressWarnings("PMD.UnusedPrivateField")
-public class KogakuKyufuTaishoshaInParameter {
+public final class KogakuKyufuTaishoshaInParameter {
 
     private final LasdecCode 市町村コード;
     private final HihokenshaNo 被保険者番号;

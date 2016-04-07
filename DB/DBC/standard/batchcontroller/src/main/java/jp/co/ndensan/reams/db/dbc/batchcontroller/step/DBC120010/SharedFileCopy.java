@@ -31,10 +31,29 @@ import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
 public class SharedFileCopy extends SimpleBatchProcessBase {
 
     //パラメータ名
-    public static final RString PARAMETER_IN_FILEPATH = new RString("filePath");
-    public static final RString PARAMETER_IN_SHAREDNAME = new RString("sharedName");
-    public static final RString PARAMETER_IN_ICCHIJOKEN = new RString("icchiJoken");
-    public static final RString PARAMETER_OUT_FILEPATHLIST = new RString("filePathList");
+    /**
+     * filePath
+     */
+    public static final RString PARAMETER_IN_FILEPATH;
+    /**
+     * sharedName
+     */
+    public static final RString PARAMETER_IN_SHAREDNAME;
+    /**
+     * icchiJoken
+     */
+    public static final RString PARAMETER_IN_ICCHIJOKEN;
+    /**
+     * filePathList
+     */
+    public static final RString PARAMETER_OUT_FILEPATHLIST;
+
+    static {
+        PARAMETER_IN_FILEPATH = new RString("filePath");
+        PARAMETER_IN_SHAREDNAME = new RString("sharedName");
+        PARAMETER_IN_ICCHIJOKEN = new RString("icchiJoken");
+        PARAMETER_OUT_FILEPATHLIST = new RString("filePathList");
+    }
 
     //パラメータ受取変数
     InputParameter<RString> filePath;
@@ -44,7 +63,11 @@ public class SharedFileCopy extends SimpleBatchProcessBase {
     //パラメータ引渡変数
     OutputParameter<HashMap<RString, RString>> filePathList;
 
+    /**
+     * 拡張子CSV
+     */
     public final RString 拡張子CSV = new RString("csv");
+    private static final int NUMBER3 = 3;
 
     @Override
     protected void process() {
@@ -57,12 +80,13 @@ public class SharedFileCopy extends SimpleBatchProcessBase {
         RString atoSharedName;
         for (UzT0885SharedFileEntryEntity sharedfile : sharedFiles) {
             atoSharedName = sharedfile.getSharedFileName();
-            if (atoSharedName.compareTo(maeSharedName) == 0) {
-            } else {
+            if (atoSharedName.compareTo(maeSharedName) != 0) {
                 SharedFile.copyToLocal(FilesystemName.fromString(atoSharedName), FilesystemPath.fromString(filePath.getValue()));
-                fileList.put(sharedfile.getSharedFileName(), getFileFullPath(filePath.getValue().concat(sharedfile.getLocalFileName()), atoSharedName));
+                fileList.put(sharedfile.getSharedFileName(),
+                        getFileFullPath(filePath.getValue().concat(sharedfile.getLocalFileName()), atoSharedName));
                 maeSharedName = atoSharedName;
             }
+
         }
 
         filePathList = new OutputParameter<>();
@@ -73,7 +97,7 @@ public class SharedFileCopy extends SimpleBatchProcessBase {
     private RString getFileFullPath(RString checkFilePath, RString checkSharedName) {
 
         // TODO ファイル指定で共有ファイルに指定できればいいのだが、現状でフォルダ指定でしか出来ないため、その考慮
-        if (checkSharedName.substringReturnAsPossible(checkFilePath.length() - 3, checkFilePath.length()).equalsIgnoreCase(拡張子CSV)) {
+        if (checkSharedName.substringReturnAsPossible(checkFilePath.length() - NUMBER3, checkFilePath.length()).equalsIgnoreCase(拡張子CSV)) {
             return checkFilePath.concat(checkSharedName);
         } else {
             String[] fileNameList = new File(checkFilePath.toString()).list(getFileExtensionFilter(".csv"));

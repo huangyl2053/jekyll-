@@ -14,6 +14,7 @@ import lombok.Value;
  * 上乗せ償還払い給付種類支給限度額の識別子です。
  */
 @Value
+@SuppressWarnings("PMD.UnusedPrivateField")
 public class UwanoseShokanShuruiShikyuGendoGakuIdentifier implements Serializable {
 
     private final ServiceShuruiCode サービス種類コード;

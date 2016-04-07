@@ -211,7 +211,7 @@ public class MainPanel {
                 && shokanbaraiketteiJohoDiv.getTxtFushikyuriyu2().getValue().toString().trim().equals("")) {
             throw new ApplicationException(UrErrorMessages.該当データなし.getMessage());
         }
-        boolean flag = getHandler(div).get内容変更状態();
+        boolean flag = getHandler(div).is内容変更状態();
         if (flag) {
             if (!ResponseHolder.isReRequest()) {
                 QuestionMessage message = new QuestionMessage(UrQuestionMessages.保存の確認.getMessage().getCode(),

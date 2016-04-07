@@ -16,6 +16,7 @@ import lombok.Value;
  * 受給者異動送付の識別子です。
  */
 @Value
+@SuppressWarnings("PMD.UnusedPrivateField")
 public class JukyushaIdoRenrakuhyoIdentifier implements Serializable {
 
     private final FlexibleDate 異動年月日;

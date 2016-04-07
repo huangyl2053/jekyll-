@@ -16,6 +16,7 @@ import lombok.Value;
  * 償還払請求食事費用差額支給の識別子です。
  */
 @Value
+@SuppressWarnings("PMD.UnusedPrivateField")
 public class ShokanShokujiHiyoSagakuShikyuIdentifier implements Serializable {
 
     private final HihokenshaNo 被保険者番号;

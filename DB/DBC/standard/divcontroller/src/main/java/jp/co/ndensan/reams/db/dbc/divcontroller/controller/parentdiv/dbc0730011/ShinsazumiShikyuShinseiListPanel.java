@@ -141,8 +141,8 @@ public class ShinsazumiShikyuShinseiListPanel {
                 new TextBoxNum(),
                 new TextBoxNum(),
                 new TextBoxNum(),
-                Boolean.valueOf(false),
-                Boolean.valueOf(false),
+                Boolean.FALSE,
+                Boolean.FALSE,
                 new TextBoxDate(),
                 RString.EMPTY,
                 new TextBoxCode()

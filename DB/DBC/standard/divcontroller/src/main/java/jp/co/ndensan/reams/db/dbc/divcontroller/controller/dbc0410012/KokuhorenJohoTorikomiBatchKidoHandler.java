@@ -38,43 +38,41 @@ public class KokuhorenJohoTorikomiBatchKidoHandler {
     /**
      * Divの初期化を行います。
      *
-     * @param panel 国保連取込情報バッチ起動画面
      * @param viewState ViewState情報
      */
-    public void initialize(KokuhorenJohoTorikomiBatchKidoDiv panel, KokuhorenTorikomiJohoKey viewState) {
-        setDisplay(panel, viewState);
-        panel.getLblTitle().setText(viewState.get処理名());
+    public void initialize(KokuhorenTorikomiJohoKey viewState) {
+        setDisplay(viewState);
+        div.getLblTitle().setText(viewState.get処理名());
     }
 
     /**
      * Divの初期化を行います。
      *
-     * @param panel 国保連取込情報バッチ起動画面
      * @return バリデーションチェック結果
      */
-    public ValidationMessageControlPairs validate(KokuhorenJohoTorikomiBatchKidoDiv panel) {
+    public ValidationMessageControlPairs validate() {
         ValidationMessageControlPairs pairs = new ValidationMessageControlPairs();
-        IValidationMessages messages = new KokuhorenJohoTorikomiValidator(panel).validate();
+        IValidationMessages messages = new KokuhorenJohoTorikomiValidator(div).validate();
 
         pairs.add(new ValidationMessageControlDictionaryBuilder()
-                .add(KokuhorenJohoValidationMessage.処理対象情報が未選択, panel.getChkDogetsuKagobun(), panel.getChkTsujobun()).build().check(messages));
+                .add(KokuhorenJohoValidationMessage.処理対象情報が未選択, div.getChkDogetsuKagobun(), div.getChkTsujobun()).build().check(messages));
         pairs.add(new ValidationMessageControlDictionaryBuilder()
-                .add(KokuhorenJohoValidationMessage.出力順序未指定, panel.getPnlShutsuryokuJun()).build().check(messages));
+                .add(KokuhorenJohoValidationMessage.出力順序未指定, div.getPnlShutsuryokuJun()).build().check(messages));
         return pairs;
     }
 
-    private void setDisplay(KokuhorenJohoTorikomiBatchKidoDiv panel, KokuhorenTorikomiJohoKey viewState) {
-        setVisible(viewState.get交換情報識別番号().value(), panel);
-        setDisplayData(viewState, panel);
+    private void setDisplay(KokuhorenTorikomiJohoKey viewState) {
+        setVisible(viewState.get交換情報識別番号().value());
+        setDisplayData(viewState);
         if (viewState.get再処理区分().equals(new RString("1"))) {
-            panel.getTxtSaishoriKubun().setValue(new RString("再処理"));
+            div.getTxtSaishoriKubun().setValue(new RString("再処理"));
         }
     }
 
-    private void setVisible(RString 交換識別番号, KokuhorenJohoTorikomiBatchKidoDiv panel) {
+    private void setVisible(RString 交換識別番号) {
         switch (交換識別番号.toString()) {
             case "111":
-                panel.getPnlShoritaishoJoho().setDisplayNone(false);
+                div.getPnlShoritaishoJoho().setDisplayNone(false);
                 break;
             case "151":
             case "152":
@@ -82,13 +80,23 @@ public class KokuhorenJohoTorikomiBatchKidoHandler {
             case "741":
             case "121":
             case "122":
-                panel.getPnlShutsuryokuJun().setDisplayNone(true);
+                div.getPnlShutsuryokuJun().setDisplayNone(true);
+                break;
             case "5C3":
             case "112":
             case "161":
             case "171":
             case "172":
             case "651":
+                div.getPnlShoritaishoJoho().setDisplayNone(true);
+                break;
+            default:
+                setVisiblePrivate(交換識別番号);
+        }
+    }
+
+    private void setVisiblePrivate(RString 交換識別番号) {
+        switch (交換識別番号.toString()) {
             case "652":
             case "641":
             case "533":
@@ -104,25 +112,30 @@ public class KokuhorenJohoTorikomiBatchKidoHandler {
             case "38P":
             case "175":
             case "162":
-                panel.getPnlShoritaishoJoho().setDisplayNone(true);
+                div.getPnlShoritaishoJoho().setDisplayNone(true);
+                break;
             default:
+                break;
         }
     }
 
-    private void setDisplayData(KokuhorenTorikomiJohoKey selectedrow, KokuhorenJohoTorikomiBatchKidoDiv panel) {
+    private void setDisplayData(KokuhorenTorikomiJohoKey selectedrow) {
         KokuhorenJohoTorikomi business = new KokuhorenJohoTorikomi();
         switch (selectedrow.get交換情報識別番号().value().toString()) {
             case "111":
                 if (SharedFile.searchSharedFile(同月過誤分ファイル名).isEmpty()) {
-                    panel.getPnlShoritaishoJoho().getChkDogetsuKagobun().setSelectedItems(Collections.EMPTY_LIST);
+                    div.getPnlShoritaishoJoho().getChkDogetsuKagobun().setSelectedItems(Collections.EMPTY_LIST);
                 } else {
-                    panel.getPnlShoritaishoJoho().getChkDogetsuKagobun().setSelectedItems(panel.getPnlShoritaishoJoho().getChkTsujobun().getDataSource());
+                    div.getPnlShoritaishoJoho().getChkDogetsuKagobun()
+                            .setSelectedItems(div.getPnlShoritaishoJoho().getChkTsujobun().getDataSource());
                 }
                 if (SharedFile.searchSharedFile(通常分ファイル名).isEmpty()) {
-                    panel.getPnlShoritaishoJoho().getChkTsujobun().setSelectedItems(Collections.EMPTY_LIST);
+                    div.getPnlShoritaishoJoho().getChkTsujobun().setSelectedItems(Collections.EMPTY_LIST);
                 } else {
-                    panel.getPnlShoritaishoJoho().getChkTsujobun().setSelectedItems(panel.getPnlShoritaishoJoho().getChkTsujobun().getDataSource());
+                    div.getPnlShoritaishoJoho().getChkTsujobun()
+                            .setSelectedItems(div.getPnlShoritaishoJoho().getChkTsujobun().getDataSource());
                 }
+                break;
             case "5C3":
             case "112":
             case "161":
@@ -133,6 +146,17 @@ public class KokuhorenJohoTorikomiBatchKidoHandler {
             case "641":
             case "533":
             case "114":
+                div.getPnlShutsuryokuJun().getCcdShutsuryokuJun()
+                        .load(SubGyomuCode.DBC介護給付, business.get帳票ID(selectedrow.get交換情報識別番号().value()));
+                break;
+            default:
+                setDisplayDataPrivate(selectedrow);
+        }
+    }
+
+    private void setDisplayDataPrivate(KokuhorenTorikomiJohoKey selectedrow) {
+        KokuhorenJohoTorikomi business = new KokuhorenJohoTorikomi();
+        switch (selectedrow.get交換情報識別番号().value().toString()) {
             case "221":
             case "222":
             case "331":
@@ -144,17 +168,21 @@ public class KokuhorenJohoTorikomiBatchKidoHandler {
             case "38P":
             case "175":
             case "162":
-                panel.getPnlShutsuryokuJun().getCcdShutsuryokuJun().load(SubGyomuCode.DBC介護給付, business.get帳票ID(selectedrow.get交換情報識別番号().value()));
+                div.getPnlShutsuryokuJun().getCcdShutsuryokuJun()
+                        .load(SubGyomuCode.DBC介護給付, business.get帳票ID(selectedrow.get交換情報識別番号().value()));
+                break;
             case "151":
             case "152":
             case "632":
             case "741":
             case "121":
             case "122":
-                panel.getPnlChushutsuJoken().getTxtShoriJoken().setValue(new RDate(selectedrow.get処理年月().toString()));
-                panel.getPnlChushutsuJoken().getTxtSaishoriKubun().setValue(business.get再処理フラグ名称(selectedrow.get再処理区分()));
-                panel.getPnlChushutsuJoken().getTxtKokanShikibetsuNo().setValue(selectedrow.get交換情報識別番号().value());
+                div.getPnlChushutsuJoken().getTxtShoriJoken().setValue(new RDate(selectedrow.get処理年月().toString()));
+                div.getPnlChushutsuJoken().getTxtSaishoriKubun().setValue(business.get再処理フラグ名称(selectedrow.get再処理区分()));
+                div.getPnlChushutsuJoken().getTxtKokanShikibetsuNo().setValue(selectedrow.get交換情報識別番号().value());
+                break;
             default:
+                break;
         }
     }
 

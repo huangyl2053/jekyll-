@@ -5,10 +5,10 @@
  */
 package jp.co.ndensan.reams.db.dbc.divcontroller.controller.parentdiv;
 
-import static jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC1800000.DBC1800000StateName.申請登録;
 import java.util.List;
-import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC1800000.KashitsukeShinseiTorokuDiv;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.commonchilddiv.KyufuhiKashitsukekinList.dgKyufuhiKashitsukekinList_Row;
+import static jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC1800000.DBC1800000StateName.申請登録;
+import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC1800000.KashitsukeShinseiTorokuDiv;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 
 /**
@@ -20,6 +20,12 @@ import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
  */
 public class KashitsukeShinseiToroku {
 
+    /**
+     * 画面の初期化メソッドです。
+     *
+     * @param panel KashitsukeShinseiTorokuDiv
+     * @return ResponseData
+     */
     public ResponseData<KashitsukeShinseiTorokuDiv> onLoad(KashitsukeShinseiTorokuDiv panel) {
         List<dgKyufuhiKashitsukekinList_Row> dgRowList = panel.getKashitsukeShinseiList().getKashitsukeShinseiListInfo().getDgKyufuhiKashitsukekinList().getDataSource();
         dgRowList.add(new dgKyufuhiKashitsukekinList_Row());
@@ -27,6 +33,12 @@ public class KashitsukeShinseiToroku {
         return ResponseData.of(panel).respond();
     }
 
+    /**
+     * toTorokuDivメソッドです。
+     *
+     * @param panel KashitsukeShinseiTorokuDiv
+     * @return ResponseData
+     */
     public ResponseData<KashitsukeShinseiTorokuDiv> toTorokuDiv(KashitsukeShinseiTorokuDiv panel) {
 
         return ResponseData.of(panel).setState(申請登録);

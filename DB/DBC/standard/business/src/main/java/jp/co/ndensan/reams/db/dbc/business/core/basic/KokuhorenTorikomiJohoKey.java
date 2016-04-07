@@ -27,6 +27,7 @@ public class KokuhorenTorikomiJohoKey implements Serializable {
      *
      * @param 処理年月 処理年月
      * @param 交換情報識別番号 交換情報識別番号
+     * @param 処理名 処理名
      * @param 再処理区分 再処理区分
      * @param バッチID バッチID
      * @throws NullPointerException 引数がnullの時

@@ -14,7 +14,6 @@ import jp.co.ndensan.reams.db.dbz.divcontroller.entity.parentdiv.SetaiShotokuIch
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.parentdiv.SetaiShotokuIchiran.dgSetaiShotoku_Row;
 import jp.co.ndensan.reams.db.dbz.divcontroller.helper.ControlGenerator;
 import jp.co.ndensan.reams.db.dbz.divcontroller.helper.YamlLoader;
-import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Button;
@@ -46,20 +45,25 @@ public class SetaiInfo {
     private static final int INDEX_17 = 17;
     private static final int INDEX_18 = 18;
 
+    private static final RString ONCLICK = new RString("onClick");
     private static final RString SETAISHOTOKU = new RString("dbc0030011/SetaiShotoku.yml");
     private static final RString OTHER = new RString("dbc0030011/other.yml");
 
+    /**
+     * onClick_btnShowSeteiJohoメソッドです。
+     *
+     * @param panel SetaiInfoDiv
+     * @return ResponseData
+     */
     public ResponseData<SetaiInfoDiv> onClick_btnShowSeteiJoho(SetaiInfoDiv panel) {
         ResponseData<SetaiInfoDiv> response = new ResponseData<>();
 
         //2014.07.04 朴　宛名・介護基本 対応
-        ShikibetsuCode 識別コード = new ShikibetsuCode("000000000000019");
-
-        int rowId = 0;
+//        ShikibetsuCode 識別コード = new ShikibetsuCode("000000000000019");
+//        int rowId = 0;
 //        KaigoShikakuKihon.setData(panel.getCommonKaigAtenChildDiv1(),
 //                panel.getCommonKaigoShiChildDiv2(), 識別コード, rowId);
-
-        RString mode = new RString("onClick");
+        RString mode = ONCLICK;
         loadSetaiinShotoku(panel, mode);
 
         List<HashMap> other = YamlLoader.DBC.loadAsList(OTHER);
@@ -256,10 +260,16 @@ public class SetaiInfo {
     }
 
     //再表示ボタン　2014.07.04
+    /**
+     * onClick_Saihyojiメソッドです。
+     *
+     * @param panel SetaiInfoDiv
+     * @return ResponseData
+     */
     public ResponseData<SetaiInfoDiv> onClick_Saihyoji(SetaiInfoDiv panel) {
         ResponseData<SetaiInfoDiv> response = new ResponseData<>();
 
-        RString mode = new RString("onClick");
+        RString mode = ONCLICK;
 
         panel.getSetaiinShotoku().getDgSetaiShotoku().getDataSource().clear();
         loadSetaiinShotoku(panel, mode);
@@ -269,6 +279,12 @@ public class SetaiInfo {
 
     }
 
+    /**
+     * onChange_chkSetaiIchiranAllメソッドです。
+     *
+     * @param panel SetaiInfoDiv
+     * @return ResponseData
+     */
     public ResponseData<SetaiInfoDiv> onChange_chkSetaiIchiranAll(SetaiInfoDiv panel) {
         ResponseData<SetaiInfoDiv> response = new ResponseData<>();
 
@@ -308,7 +324,7 @@ public class SetaiInfo {
         } else {
             gridSetting.getColumn("txtSonzaiUmuChokkin").setVisible(false);
             gridSetting.getColumn("txtSonzaiUmuKijunbi").setVisible(false);
-            mode = new RString("onClick");
+            mode = ONCLICK;
         }
 
         return mode;
@@ -322,8 +338,7 @@ public class SetaiInfo {
      */
     private RString setComma(int intData) {
         NumberFormat isComma = NumberFormat.getNumberInstance();
-        RString commaData = new RString(isComma.format(intData));
-        return commaData;
+        return new RString(isComma.format(intData));
     }
 
     /**

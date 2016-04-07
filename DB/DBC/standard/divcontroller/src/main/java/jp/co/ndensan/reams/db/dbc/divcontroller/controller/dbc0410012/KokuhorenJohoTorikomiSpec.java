@@ -15,6 +15,9 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.CheckBoxList;
  */
 public enum KokuhorenJohoTorikomiSpec implements IPredicate<KokuhorenJohoTorikomiBatchKidoDiv> {
 
+    /**
+     * 同月過誤もしくは通常分給付実績情報にチェックがある
+     */
     同月過誤もしくは通常分給付実績情報にチェックがある {
                 /**
                  * 処理対象情報が選択可能状態であり、同月過誤もしくは通常分給付実績情報にチェックがある場合にtrueを返す。
@@ -30,6 +33,9 @@ public enum KokuhorenJohoTorikomiSpec implements IPredicate<KokuhorenJohoTorikom
                     || !(同月過誤分給付実績情報.getSelectedItems().isEmpty() && 通常分給付実績情報.getSelectedItems().isEmpty());
                 }
             },
+    /**
+     * 出力順が有効である場合に出力順が設定されている
+     */
     出力順が有効である場合に出力順が設定されている {
                 /**
                  * 出力順が有効である場合に出力順が設定されている場合にtrueを返す。

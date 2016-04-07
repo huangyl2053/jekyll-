@@ -26,7 +26,7 @@ public class JutakuKaishuShinsei {
     private static final RString 画面モード_支給申請 = new RString("支給申請モード");
     private static final RString 画面モード_事前申請 = new RString("事前申請モード");
     private static final RString 申請区分事前申請 = new RString("1");
-    private static final RString 申請区分取消 = new RString("9");
+//    private static final RString 申請区分取消 = new RString("9");
 
     /**
      * 画面ロードメソッド
@@ -62,7 +62,7 @@ public class JutakuKaishuShinsei {
         JutakuKaishuShinseiHandler handler = getHandler(div);
         handler.setAddMode();
         //TODO 引き継ぎデータEntity.画面モード
-        RString 画面モード = new RString("支給申請モード");
+        RString 画面モード = 画面モード_支給申請;
         if (画面モード_支給申請.equalsIgnoreCase(画面モード)) {
             // TODO QA 466 住宅改修費支給申請登録画面へ遷移する。
             return ResponseData.of(div).forwardWithEventName(DBC0710011TransitionEventName.検索条件).respond();
@@ -82,7 +82,7 @@ public class JutakuKaishuShinsei {
     public ResponseData<JutakuKaishuShinseiDiv> onClick_btnModify(JutakuKaishuShinseiDiv div) {
         JutakuKaishuShinseiHandler handler = getHandler(div);
         //TODO 引き継ぎデータEntity.画面モード
-        RString 画面モード = new RString("支給申請モード");
+        RString 画面モード = 画面モード_支給申請;
         handler.setModifyMode(画面モード);
         if (画面モード_支給申請.equalsIgnoreCase(画面モード)) {
             // TODO QA 466 住宅改修費支給申請登録画面へ遷移する。
@@ -103,7 +103,7 @@ public class JutakuKaishuShinsei {
     public ResponseData<JutakuKaishuShinseiDiv> onClick_btnDelete(JutakuKaishuShinseiDiv div) {
         JutakuKaishuShinseiHandler handler = getHandler(div);
         //TODO 引き継ぎデータEntity.画面モード
-        RString 画面モード = new RString("支給申請モード");
+        RString 画面モード = 画面モード_支給申請;
         handler.setDeleteMode();
         RString 申請区分 = div.getJutakuKaishuShinseiList().getDgJutakuKaishuShinseiList().getClickedItem()
                 .getTxtShinseiKubun();
@@ -125,16 +125,16 @@ public class JutakuKaishuShinsei {
      * @return 本画面
      */
     public ResponseData<JutakuKaishuShinseiDiv> onClick_btnCancel(JutakuKaishuShinseiDiv div) {
-        RString 申請区分 = div.getJutakuKaishuShinseiList().getDgJutakuKaishuShinseiList().getClickedItem()
-                .getTxtShinseiKubun();
-        if (申請区分取消.equals(申請区分)) {
-            // TODO QA番号：468
+//        RString 申請区分 = div.getJutakuKaishuShinseiList().getDgJutakuKaishuShinseiList().getClickedItem()
+//                .getTxtShinseiKubun();
+        // TODO QA番号：468
+//        if (申請区分取消.equals(申請区分)) {
 //            throw new ApplicationException(DbcErrorMessages.該当データが既に取消.getMessage());
-        }
+//        }
         JutakuKaishuShinseiHandler handler = getHandler(div);
         handler.setCancelMode();
         //TODO 引き継ぎデータEntity.画面モード
-        RString 画面モード = new RString("支給申請モード");
+        RString 画面モード = 画面モード_支給申請;
         if (画面モード_支給申請.equalsIgnoreCase(画面モード)) {
             // TODO QA 466 住宅改修費支給申請登録画面へ遷移する。
             return ResponseData.of(div).forwardWithEventName(DBC0710011TransitionEventName.検索条件).respond();

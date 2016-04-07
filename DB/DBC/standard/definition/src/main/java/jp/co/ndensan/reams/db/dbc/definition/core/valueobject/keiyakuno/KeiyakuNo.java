@@ -24,6 +24,9 @@ public class KeiyakuNo implements IValueObject<RString>, Comparable<KeiyakuNo>, 
 
     private final RString 契約番号;
 
+    /**
+     * KeiyakuNoのEMPTY値
+     */
     public static final KeiyakuNo EMPTY;
 
     /**

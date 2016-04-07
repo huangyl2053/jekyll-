@@ -6,15 +6,16 @@
 package jp.co.ndensan.reams.db.dbc.business.core.basic;
 
 import java.io.Serializable;
-import lombok.Value;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
+import lombok.Value;
 
 /**
  * 再審査決定明細の識別子です。
  */
 @Value
+@SuppressWarnings("PMD.UnusedPrivateField")
 public class SaishinsaKetteiMeisaiIdentifier implements Serializable {
 
     private final FlexibleYearMonth 取扱年月;

@@ -1,7 +1,7 @@
 package jp.co.ndensan.reams.db.dbc.divcontroller.controller.commonchilddiv.ShiharaiHohoJyoho;
 
 import jp.co.ndensan.reams.db.dbc.business.core.basic.JuryoininKeiyakuJigyosha;
-import jp.co.ndensan.reams.db.dbc.business.core.shiharaihohojyoho.KozaJohoPSM.KozaJohoPSM;
+import jp.co.ndensan.reams.db.dbc.business.core.shiharaihohojyoho.kozajohopsm.KozaJohoPSM;
 import jp.co.ndensan.reams.db.dbc.definition.mybatisprm.shiharaihohojyoho.KeiyakushaParameter;
 import jp.co.ndensan.reams.db.dbc.definition.mybatisprm.shiharaihohojyoho.KozaParameter;
 import jp.co.ndensan.reams.db.dbc.definition.mybatisprm.shiharaihohojyoho.SikyuSinseiJyohoParameter;
@@ -128,7 +128,7 @@ public class ShiharaiHohoJyoho {
         ShiharaiHohoJyohoHandler handler = getHandler(div);
         getHandler(div).clear口座払い();
         KozaJohoPSM kozaJohoPSM = ShiharaiHohoJyohoFinder.createInstance().
-                getKozaJyoho(new KozaParameter(Long.parseLong(div.getDdlKozaID().getSelectedKey().toString()), null, null));
+                getKozaJyoho(KozaParameter.createParam(Long.parseLong(div.getDdlKozaID().getSelectedKey().toString()), null, null));
         handler.口座払いエリアの初期化(kozaJohoPSM, Long.parseLong(div.getDdlKozaID().getSelectedKey().toString()));
         response.data = div;
         return response;
