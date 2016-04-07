@@ -9,6 +9,8 @@ import jp.co.ndensan.reams.db.dba.entity.report.source.joseikinKyufuShinseisho.J
 
 /**
  * 介護保険助成金給付申請書Editorです。
+ *
+ * @reamsid_L DBA-0540-686 houtp
  */
 public class JoseikinKyufuShinseishoEditor implements IJoseikinKyufuShinseishoEditor {
 

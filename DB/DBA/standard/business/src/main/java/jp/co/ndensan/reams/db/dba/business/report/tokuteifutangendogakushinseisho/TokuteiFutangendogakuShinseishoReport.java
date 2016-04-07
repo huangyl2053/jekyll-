@@ -11,6 +11,8 @@ import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
 
 /**
  * 介護保険特定負担限度額申請書のReportです。
+ *
+ * @reamsid_L DBA-0540-688 houtp
  */
 public class TokuteiFutangendogakuShinseishoReport extends Report<TokuteiFutangendogakuShinseishoReportSource> {
 

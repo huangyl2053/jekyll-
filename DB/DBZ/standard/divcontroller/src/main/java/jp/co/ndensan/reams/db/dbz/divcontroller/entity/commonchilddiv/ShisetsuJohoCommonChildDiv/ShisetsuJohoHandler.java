@@ -19,6 +19,8 @@ import jp.co.ndensan.reams.uz.uza.util.db.SearchResult;
 
 /**
  * 施設情報のHandlerクラスです。
+ *
+ * @reamsid_L DBA-0190-010 houtp
  */
 public class ShisetsuJohoHandler {
 

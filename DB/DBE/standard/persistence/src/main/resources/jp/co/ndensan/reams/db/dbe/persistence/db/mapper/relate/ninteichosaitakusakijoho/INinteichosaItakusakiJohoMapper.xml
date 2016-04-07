@@ -3,6 +3,7 @@
 <!-- 概要： 認定調査依頼のマッピング用XMLです。 -->
 
 <!-- どのマッパーインターフェースと対応するかを指定する -->
+ <!-- @reamsid_L DBE-0020-050 houtp -->
 <mapper namespace="jp.co.ndensan.reams.db.dbe.persistence.db.mapper.relate.ninteichosaitakusakijoho.INinteichosaItakusakiJohoMapper">
     <resultMap id="result_ChikuShichosonRelateEntity" type="jp.co.ndensan.reams.db.dbe.entity.db.relate.ninteichosaitakusakijoho.ChikuShichosonRelateEntity">
         <result property="shichosonCode" column="Temp_shichosonCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.LasdecCodeTypeHandler"/>

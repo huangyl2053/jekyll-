@@ -8,15 +8,15 @@ package jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2020004;
 
 
 
-import jp.co.ndensan.reams.uz.uza.ui.binding.DataRow;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Button;
+import jp.co.ndensan.reams.uz.uza.ui.binding.DataRow;
 
 
 /**
  * dgListOfJichikuMemo_Row のクラスファイル 
  * 
- * @author 自動生成
+ * @reamsid_L DBE-0020-040 houtp
  */
 
 public class dgListOfJichikuMemo_Row extends DataRow {

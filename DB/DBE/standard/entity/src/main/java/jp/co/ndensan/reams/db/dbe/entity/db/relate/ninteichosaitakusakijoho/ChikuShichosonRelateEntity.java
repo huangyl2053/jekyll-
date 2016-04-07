@@ -11,6 +11,8 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 /**
  *
  * 調査地区DDL戻るのEntity。
+ *
+ * @reamsid_L DBE-0020-050 houtp
  */
 @lombok.Getter
 @lombok.Setter

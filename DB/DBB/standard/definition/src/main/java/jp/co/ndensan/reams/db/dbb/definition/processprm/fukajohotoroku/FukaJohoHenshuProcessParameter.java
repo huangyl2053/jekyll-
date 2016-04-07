@@ -6,6 +6,8 @@ import lombok.Setter;
 
 /**
  * 賦課の情報を一括登録するバッチデータ作成用Processパラメータです。
+ *
+ * @reamsid_L DBB-9040-070 wangxiaodong
  */
 @Getter
 @Setter

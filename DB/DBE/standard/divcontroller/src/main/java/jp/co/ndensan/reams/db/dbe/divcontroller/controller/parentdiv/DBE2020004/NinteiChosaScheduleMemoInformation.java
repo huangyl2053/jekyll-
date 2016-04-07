@@ -32,6 +32,8 @@ import jp.co.ndensan.reams.uz.uza.util.Models;
 
 /**
  * 認定調査スケジュール登録4のコントローラです。
+ *
+ * @reamsid_L DBE-0020-040 houtp
  */
 public class NinteiChosaScheduleMemoInformation {
 

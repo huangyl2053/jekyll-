@@ -10,6 +10,8 @@ import jp.co.ndensan.reams.uz.uza.report.ReportEditorJoiner;
 
 /**
  * 介護保険被保険者証交付申請書（第2号被保険者）Builderクラスです。
+ *
+ * @reamsid_L DBA-0540-140 houtp
  */
 public class HihokenshashokoufuShinseishoBuilder implements IHihokenshashokoufuShinseishoBuilder {
 

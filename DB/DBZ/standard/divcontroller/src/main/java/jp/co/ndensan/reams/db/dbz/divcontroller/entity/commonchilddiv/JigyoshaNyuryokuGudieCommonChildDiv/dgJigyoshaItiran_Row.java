@@ -8,15 +8,15 @@ package jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.JigyoshaN
 
 
 
-import jp.co.ndensan.reams.uz.uza.ui.binding.DataRow;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.ui.binding.DataRow;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxDate;
 
 
 /**
  * dgJigyoshaItiran_Row のクラスファイル 
  * 
- * @author 自動生成
+ * @reamsid_L DBA-0140-010 houtp
  */
 
 public class dgJigyoshaItiran_Row extends DataRow {

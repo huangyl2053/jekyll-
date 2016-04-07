@@ -36,6 +36,8 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 
 /**
  * 認定調査スケジュール登録9のコントローラです。
+ *
+ * @reamsid_L DBE-0020-050 houtp
  */
 public class NinteiChosaSchedule9Main {
 

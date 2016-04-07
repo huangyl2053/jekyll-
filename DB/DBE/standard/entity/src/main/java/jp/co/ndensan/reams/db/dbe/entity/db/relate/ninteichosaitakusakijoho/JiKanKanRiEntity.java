@@ -13,6 +13,8 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 /**
  *
  * 時間管理の場合で認定調査スケジュール情報戻るのEntity。
+ *
+ * @reamsid_L DBE-0020-050 houtp
  */
 @lombok.Getter
 @lombok.Setter

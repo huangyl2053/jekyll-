@@ -42,6 +42,8 @@ import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 /**
  *
  * 申請書_共通クラス部分クラスです。
+ *
+ * @reamsid_L DBA-0540-688 houtp
  */
 public class TokuteifutanGendogakuShinseisho {
 

@@ -12,6 +12,8 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 /**
  *
  * 県コードオブジェクトの項目定義クラスです。
+ *
+ * @reamsid_L DBA-0140-010 houtp
  */
 public class KenCodeJigyoshaInputGuide  implements Serializable {
 

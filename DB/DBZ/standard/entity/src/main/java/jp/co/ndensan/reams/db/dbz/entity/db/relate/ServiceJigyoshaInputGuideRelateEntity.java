@@ -15,6 +15,8 @@ import jp.co.ndensan.reams.uz.uza.util.db.IDbAccessable;
 
 /**
  * 介護事業者施設オブジェクトの項目定義クラスです。
+ *
+ * @reamsid_L DBA-0140-030 houtp
  */
 @lombok.Getter
 @lombok.Setter

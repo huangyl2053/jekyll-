@@ -10,6 +10,8 @@ import jp.co.ndensan.reams.uz.uza.report.IReportEditor;
 
 /**
  * 介護保険特定負担限度額申請書のインターフェースクラスです。
+ *
+ * @reamsid_L DBA-0540-688 houtp
  */
 public interface ITokuteiFutangendogakuShinseishoEditor extends IReportEditor<TokuteiFutangendogakuShinseishoReportSource> {
 }

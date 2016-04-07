@@ -19,8 +19,8 @@ import jp.co.ndensan.reams.db.dbe.entity.db.relate.ninteichosaitakusakijoho.Chik
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.ninteichosaitakusakijoho.JiKanKanRiEntity;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.ninteichosaitakusakijoho.JiMuSyoEntity;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.ninteichosaitakusakijoho.NinteichosaScheduleRelateEntity;
-import jp.co.ndensan.reams.db.dbe.persistence.db.util.MapperProvider;
 import jp.co.ndensan.reams.db.dbe.persistence.db.mapper.relate.ninteichosaitakusakijoho.INinteichosaItakusakiJohoMapper;
+import jp.co.ndensan.reams.db.dbe.persistence.db.util.MapperProvider;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.ChosainJoho;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.NinteichosaItakusakiJoho;
 import jp.co.ndensan.reams.db.dbz.definition.core.valueobject.ninteishinsei.ChosaItakusakiCode;
@@ -37,6 +37,8 @@ import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
 /**
  *
  * 認定調査スケジュール登録9クラスです。
+ *
+ * @reamsid_L DBE-0020-050 houtp
  */
 public class NinteichosaItakusakiJohoFinder {
 

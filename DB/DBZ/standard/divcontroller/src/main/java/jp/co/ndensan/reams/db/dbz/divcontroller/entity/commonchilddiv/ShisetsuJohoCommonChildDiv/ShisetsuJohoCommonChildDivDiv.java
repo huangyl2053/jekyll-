@@ -20,7 +20,7 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets._CommonChildDivModeUtil;
 /**
  * ShisetsuJohoCommonChildDiv のクラスファイル
  *
- * @author 自動生成
+ * @reamsid_L DBA-0190-010 houtp
  */
 public class ShisetsuJohoCommonChildDivDiv extends Panel implements IShisetsuJohoCommonChildDiv {
 
