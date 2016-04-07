@@ -20,6 +20,8 @@ import jp.co.ndensan.reams.uz.uza.report.data.chart.ReportDynamicChart;
 
 /**
  * {@link KojinShinchokuJokyohyoReport}のプロパティです。
+ *
+ * @reamsid_L DBE-0200-040 zhangzhiming
  */
 public class KojinShinchokuJokyohyoProperty extends ReportPropertyBase<KojinShinchokuJokyohyoReportSource> {
 
