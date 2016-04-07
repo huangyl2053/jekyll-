@@ -12,6 +12,8 @@ import jp.co.ndensan.reams.ua.uax.entity.db.basic.UaFt200FindShikibetsuTaishoEnt
 
 /**
  * 他住所地特例者管理のマッパーインタフェースです。
+ *
+ * @reamsid_L DBA-0200-020 linghuhang
  */
 public interface ITaJushochiTokureisyaKanriMapper {
 

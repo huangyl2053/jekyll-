@@ -55,6 +55,8 @@ import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
 /**
  *
  * 他住所地特例者管理の取得処理です。
+ *
+ * @reamsid_L DBA-0200-020 linghuhang
  */
 public class TaJushochiTokureisyaKanriManager {
 
