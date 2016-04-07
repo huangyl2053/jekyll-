@@ -11,6 +11,8 @@ import jp.co.ndensan.reams.db.dbe.entity.db.relate.hanteikekkajohoshutsuryoku.Ha
 
 /**
  * 判定結果情報出力(保険者）のマッパーインタフェースです。
+ *
+ * @reamsid_L DBE-0190-030 duanzhanli
  */
 public interface IHanteiKekkaJohoShutsuryokuMapper {
 
