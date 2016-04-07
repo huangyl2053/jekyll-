@@ -7,8 +7,9 @@ import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
 import lombok.NonNull;
 
 /**
- *
  * {@link HihokenshaDaichoHakkoIchiranhyoReportSource}のプロパティです。
+ *
+ * @reamsid_L DBA-0510-070 wangxiaodong
  */
 public final class HihokenshaDaichoHakkoIchiranhyoReport extends Report<HihokenshaDaichoHakkoIchiranhyoReportSource> {
 

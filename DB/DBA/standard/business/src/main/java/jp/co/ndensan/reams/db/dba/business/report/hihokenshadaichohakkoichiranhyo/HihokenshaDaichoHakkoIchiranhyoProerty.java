@@ -6,8 +6,9 @@ import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.report.ReportPropertyBase;
 
 /**
- *
  * {@link HihokenshaDaichoHakkoIchiranhyoReportSource}のプロパティです。
+ *
+ * @reamsid_L DBA-0510-070 wangxiaodong
  */
 public class HihokenshaDaichoHakkoIchiranhyoProerty extends ReportPropertyBase<HihokenshaDaichoHakkoIchiranhyoReportSource> {
 

@@ -6,6 +6,8 @@ import jp.co.ndensan.reams.uz.uza.report.source.ReportItem;
 
 /**
  * 被保険者台帳一覧表のReportSource
+ *
+ * @reamsid_L DBA-0510-070 wangxiaodong
  */
 public class HihokenshaDaichoHakkoIchiranhyoReportSource implements IReportSource {
 // <editor-fold defaultstate="collapsed" desc="Generated Code">
