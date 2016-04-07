@@ -9,8 +9,9 @@ import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
- *
  * 適用除外情報のパラメータクラスです。
+ *
+ * @reamsid_L DBA-0410-010 zhangzhiming
  */
 @lombok.Getter
 @lombok.Setter
