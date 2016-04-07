@@ -3,8 +3,9 @@ package jp.co.ndensan.reams.db.dba.business.report.hihokenshadaichohakkoichiranh
 import jp.co.ndensan.reams.db.dba.entity.report.hihokenshadaichohakkoichiranhyo.HihokenshaDaichoHakkoIchiranhyoReportSource;
 
 /**
- *
  * 被保険者台帳一覧表エディターのインターフェースクラスです。
+ *
+ * @reamsid_L DBA-0510-070 wangxiaodong
  */
 public class HihokenshaDaichoHakkoIchiranhyoBodyEditor implements IHihokenshaDaichoHakkoIchiranhyoEditor {
 

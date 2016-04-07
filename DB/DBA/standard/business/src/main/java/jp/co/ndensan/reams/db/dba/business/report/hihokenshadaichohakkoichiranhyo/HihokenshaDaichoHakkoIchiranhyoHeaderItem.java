@@ -5,8 +5,9 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 import lombok.Getter;
 
 /**
- *
  * 被保険者台帳一覧表ヘッダーItemクラスです。
+ *
+ * @reamsid_L DBA-0510-070 wangxiaodong
  */
 @Getter
 @SuppressWarnings("PMD.UnusedPrivateField")
