@@ -12,7 +12,9 @@ import jp.co.ndensan.reams.uz.uza.batch.flow.BatchFlowBase;
 import jp.co.ndensan.reams.uz.uza.batch.flow.IBatchFlowCommand;
 
 /**
- * 医療機関・主治医一覧表_バッチフロークラスです
+ * 医療機関・主治医一覧表_バッチフロークラスです。
+ *
+ * @reamsid_L DBE-0260-030 zuotao
  */
 public class IkenshoShujiiIchiranFlow extends BatchFlowBase<IkenshoShujiiIchiranParameter> {
 

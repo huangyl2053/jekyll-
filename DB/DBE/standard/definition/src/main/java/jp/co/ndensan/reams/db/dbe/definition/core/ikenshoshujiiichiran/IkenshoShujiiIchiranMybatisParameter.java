@@ -13,6 +13,8 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 /**
  *
  * 医療機関・主治医一覧表作成_バッチ処理クラスパラメータクラスです。
+ *
+ * @reamsid_L DBE-0260-030 zuotao
  */
 @lombok.Getter
 @SuppressWarnings("PMD.UnusedPrivateField")

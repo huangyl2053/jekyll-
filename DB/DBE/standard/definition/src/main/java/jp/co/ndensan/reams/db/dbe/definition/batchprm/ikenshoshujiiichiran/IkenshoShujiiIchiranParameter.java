@@ -14,6 +14,8 @@ import lombok.Setter;
 
 /**
  * 医療機関・主治医一覧表作成_バッチフロークラスパラメータクラスです。
+ *
+ * @reamsid_L DBE-0260-030 zuotao
  */
 @Setter
 @Getter

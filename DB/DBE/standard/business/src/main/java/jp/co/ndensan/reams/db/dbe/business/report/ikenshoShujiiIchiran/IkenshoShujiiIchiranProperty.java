@@ -20,6 +20,8 @@ import jp.co.ndensan.reams.uz.uza.report.data.chart.ReportDynamicChart;
 
 /**
  * {@link IkenshoShujiiIchiranReport}のプロパティです。
+ *
+ * @reamsid_L DBE-0260-020 zuotao
  */
 public class IkenshoShujiiIchiranProperty extends ReportPropertyBase<ShujiiIryokikanShujiiIchiranhyoReportSource> {
 
@@ -38,6 +40,7 @@ public class IkenshoShujiiIchiranProperty extends ReportPropertyBase<ShujiiIryok
             Breakers<ShujiiIryokikanShujiiIchiranhyoReportSource> breakers,
             BreakerCatalog<ShujiiIryokikanShujiiIchiranhyoReportSource> catalog) {
         return breakers.add(catalog.new SimplePageBreaker(
+
 
             PAGE_BREAK_KEYS) {
             @Override

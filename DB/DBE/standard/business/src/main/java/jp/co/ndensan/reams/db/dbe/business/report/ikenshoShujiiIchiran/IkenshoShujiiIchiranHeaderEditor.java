@@ -20,6 +20,8 @@ import jp.co.ndensan.reams.uz.uza.lang.Separator;
 
 /**
  * 主治医医療機関・主治医一覧表ヘッダEditorです。
+ *
+ * @reamsid_L DBE-0260-020 zuotao
  */
 class IkenshoShujiiIchiranHeaderEditor implements IkenshoShujiiIchiranEditor {
 
