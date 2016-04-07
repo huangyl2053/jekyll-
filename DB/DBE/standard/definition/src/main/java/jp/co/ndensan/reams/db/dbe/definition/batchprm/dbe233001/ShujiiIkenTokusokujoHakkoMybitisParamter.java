@@ -11,6 +11,8 @@ import lombok.Getter;
 
 /**
  * 主治医意見書督促対象者一覧表を特定するためのMyBatis用パラメータクラスです。
+ *
+ * @reamsid_L DBE-0060-040 zhangzhiming
  */
 @SuppressWarnings("PMD.UnusedPrivateField")
 @Getter
