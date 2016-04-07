@@ -9,6 +9,8 @@ import java.util.List;
 
 /**
  * 主治医意見書作成依頼一覧_帳票クラスパラメータクラスです。
+ *
+ * @reamsid_L DBE-0080-090 zhangzhiming
  */
 @lombok.Getter
 @SuppressWarnings("PMD.UnusedPrivateField")

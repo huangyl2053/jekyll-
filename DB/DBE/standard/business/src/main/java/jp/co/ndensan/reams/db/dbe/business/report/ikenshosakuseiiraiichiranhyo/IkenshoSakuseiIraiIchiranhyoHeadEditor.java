@@ -9,6 +9,8 @@ import jp.co.ndensan.reams.db.dbe.entity.report.source.ikenshosakuseiiraiichiran
 
 /**
  * 主治医意見書作成依頼一覧Editorです。
+ *
+ * @reamsid_L DBE-0080-090 zhangzhiming
  */
 public class IkenshoSakuseiIraiIchiranhyoHeadEditor implements IkenshoSakuseiIraiIchiranhyoEditor {
 

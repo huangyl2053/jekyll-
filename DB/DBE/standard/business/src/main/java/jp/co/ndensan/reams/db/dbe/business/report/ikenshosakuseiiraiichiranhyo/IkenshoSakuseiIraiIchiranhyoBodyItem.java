@@ -11,6 +11,7 @@ import lombok.Getter;
 /**
  * 主治医意見書作成依頼一覧のITEMです。
  *
+ * @reamsid_L DBE-0080-090 zhangzhiming
  */
 @Getter
 @SuppressWarnings("PMD.UnusedPrivateField")
