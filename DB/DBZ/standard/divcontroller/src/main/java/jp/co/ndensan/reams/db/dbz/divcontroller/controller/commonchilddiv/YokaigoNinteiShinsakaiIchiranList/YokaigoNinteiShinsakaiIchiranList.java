@@ -18,8 +18,9 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 
 /**
- *
  * 介護認定審査会共有一覧のDivControllerです。
+ *
+ * @reamsid_L DBE-0120-010 lishengli
  */
 public class YokaigoNinteiShinsakaiIchiranList {
 

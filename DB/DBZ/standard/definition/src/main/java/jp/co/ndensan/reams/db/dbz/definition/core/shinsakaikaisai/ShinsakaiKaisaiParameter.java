@@ -8,8 +8,9 @@ package jp.co.ndensan.reams.db.dbz.definition.core.shinsakaikaisai;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
- *
  * 介護認定審査会共有一覧のパラメータクラス。
+ *
+ * @reamsid_L DBE-0120-010 lishengli
  */
 @lombok.Getter
 @SuppressWarnings("PMD.UnusedPrivateField")

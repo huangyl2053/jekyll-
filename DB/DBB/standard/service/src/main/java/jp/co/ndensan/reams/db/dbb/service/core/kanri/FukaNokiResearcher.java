@@ -14,8 +14,9 @@ import jp.co.ndensan.reams.uz.uza.util.config.BusinessConfig;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 
 /**
- *
  * 賦課納期取得のクラスです。
+ *
+ * @reamsid_L DBB-9040-010 wangxiaodong
  */
 public class FukaNokiResearcher {
 
