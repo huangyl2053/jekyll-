@@ -27,7 +27,7 @@ public class KyufuJissekiGaitoshaListPanel {
      * 介護給付費過誤申立書登録 給付実積該当一覧の内容をセットします。
      *
      * @param panel KyufuJissekiGaitoshaListPanelDiv
-     * @param srchpanel
+     * @param srchpanel SearchToKyufujissekiPanelDiv
      * @return PanelDivのResponseData
      */
     public ResponseData<KyufuJissekiGaitoshaListPanelDiv> onClick_btnSearch(
@@ -44,7 +44,7 @@ public class KyufuJissekiGaitoshaListPanel {
      */
     private void setKyufuJissekiGaitoshaList(
             KyufuJissekiGaitoshaListPanelDiv panel, SearchToKyufujissekiPanelDiv srchpanel) {
-        List<dgHihokenshaSearchGaitosha_Row> arraydata = createRowKyufuJissekiGaitoshaTestData(srchpanel);
+        List<dgHihokenshaSearchGaitosha_Row> arraydata = createRowKyufuJissekiGaitoshaTestData();
 
         DataGrid<dgHihokenshaSearchGaitosha_Row> grid = panel.getDgHihokenshaSearchGaitosha();
         grid.setDataSource(arraydata);
@@ -53,7 +53,7 @@ public class KyufuJissekiGaitoshaListPanel {
     /*
      * 介護給付費過誤申立書登録 (YMLDATA)給付実積該当一覧のデータを設定する。
      */
-    private List<dgHihokenshaSearchGaitosha_Row> createRowKyufuJissekiGaitoshaTestData(SearchToKyufujissekiPanelDiv srchpanel) {
+    private List<dgHihokenshaSearchGaitosha_Row> createRowKyufuJissekiGaitoshaTestData() {
         List<dgHihokenshaSearchGaitosha_Row> arrayData = new ArrayList<>();
         arrayData.add(new dgHihokenshaSearchGaitosha_Row());
         return arrayData;
@@ -106,6 +106,7 @@ public class KyufuJissekiGaitoshaListPanel {
      * 介護給付費過誤申立書登録 過誤申立書情報を確定するボタンを押下後、申立者作成の内容をチェック有り。
      *
      * @param panel KyufuJissekiGaitoshaListPanelDiv
+     * @param srchpanel SearchToKyufujissekiPanelDiv
      * @return PanelDivのResponseData
      */
     public ResponseData<KyufuJissekiGaitoshaListPanelDiv> onClick_btnSettle(
@@ -128,6 +129,7 @@ public class KyufuJissekiGaitoshaListPanel {
      * 介護給付費過誤申立書登録 過誤申立書情報をやめるボタンを押下後、申立者作成の内容をチェックなし。
      *
      * @param panel KyufuJissekiGaitoshaListPanelDiv
+     * @param srchpanel SearchToKyufujissekiPanelDiv
      * @return PanelDivのResponseData
      */
     public ResponseData<KyufuJissekiGaitoshaListPanelDiv> onClick_btnCancel(

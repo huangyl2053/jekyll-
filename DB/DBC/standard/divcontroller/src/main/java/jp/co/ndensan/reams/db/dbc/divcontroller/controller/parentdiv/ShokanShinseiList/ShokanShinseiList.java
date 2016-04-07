@@ -205,14 +205,15 @@ public class ShokanShinseiList {
             throw new ApplicationException(
                     UrErrorMessages.期間が不正.getMessage());
         }
-        if ((requestDiv.getTxtServiceYMFrom().getValue() != null && !RString.EMPTY.equals(requestDiv.getTxtServiceYMFrom().getValue().toDateString()))
-                && (requestDiv.getTxtServiceYMTo().getValue() != null && !RString.EMPTY.equals(requestDiv.getTxtServiceYMTo().getValue().toDateString()))) {
-            if (requestDiv.getTxtServiceYMTo().getValue().getYearMonth().isBefore(requestDiv.getTxtServiceYMFrom().getValue().getYearMonth())) {
-                throw new ApplicationException(
-                        UrErrorMessages.期間が不正_追加メッセージあり２.getMessage().replace(
-                                requestDiv.getTxtServiceYMFrom().getValue().getYearMonth().toString(),
-                                requestDiv.getTxtServiceYMTo().getValue().getYearMonth().toString()));
-            }
+        if ((requestDiv.getTxtServiceYMFrom().getValue() != null
+                && !RString.EMPTY.equals(requestDiv.getTxtServiceYMFrom().getValue().toDateString()))
+                && (requestDiv.getTxtServiceYMTo().getValue() != null
+                && !RString.EMPTY.equals(requestDiv.getTxtServiceYMTo().getValue().toDateString()))
+                && requestDiv.getTxtServiceYMTo().getValue().getYearMonth().isBefore(requestDiv.getTxtServiceYMFrom().getValue().getYearMonth())) {
+            throw new ApplicationException(
+                    UrErrorMessages.期間が不正_追加メッセージあり２.getMessage().replace(
+                            requestDiv.getTxtServiceYMFrom().getValue().getYearMonth().toString(),
+                            requestDiv.getTxtServiceYMTo().getValue().getYearMonth().toString()));
         }
     }
 

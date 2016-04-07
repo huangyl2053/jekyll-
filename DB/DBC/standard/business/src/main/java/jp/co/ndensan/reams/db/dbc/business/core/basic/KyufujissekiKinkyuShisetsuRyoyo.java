@@ -24,8 +24,9 @@ import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 /**
  * 給付実績緊急時施設療養を管理するクラスです。
  */
-public class KyufujissekiKinkyuShisetsuRyoyo
-        extends ModelBase<KyufujissekiKinkyuShisetsuRyoyoIdentifier, DbT3019KyufujissekiKinkyuShisetsuRyoyoEntity, KyufujissekiKinkyuShisetsuRyoyo> implements Serializable {
+public class KyufujissekiKinkyuShisetsuRyoyo extends
+        ModelBase<KyufujissekiKinkyuShisetsuRyoyoIdentifier, DbT3019KyufujissekiKinkyuShisetsuRyoyoEntity, KyufujissekiKinkyuShisetsuRyoyo>
+        implements Serializable {
 
     private final DbT3019KyufujissekiKinkyuShisetsuRyoyoEntity entity;
     private final KyufujissekiKinkyuShisetsuRyoyoIdentifier id;

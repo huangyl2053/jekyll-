@@ -157,7 +157,7 @@ public class ShinsazumiShikyuShinseiListPanel {
         rowShinsazumiShinseiListData.getTxtHiyoTotalAmount().setValue(new Decimal(費用額合計.toString()));
         rowShinsazumiShinseiListData.getTxtShinsaDate().setValue(new RDate(審査日.toString()));
 
-        if (("1111111114").equals(被保番号)) {
+        if (new RString("1111111114").equals(被保番号)) {
             rowShinsazumiShinseiListData.setTxt3DankaiReset(Boolean.TRUE);
         }
 

@@ -17,7 +17,6 @@ import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.tblTankiNyushoJ
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.ui.binding.DataGrid;
 
 /**
@@ -113,13 +112,12 @@ public class TankiNyushoJikoSakusei {
     /*
      文字列(数字)を金額フォーマットに変更する。
      */
-    private String stringToKingakuFormat(String str) {
-        if (str.isEmpty()) {
-            return str;
-        }
-        return new Decimal(str).toString("##,###,###");
-    }
-
+//    private String stringToKingakuFormat(String str) {
+//        if (str.isEmpty()) {
+//            return str;
+//        }
+//        return new Decimal(str).toString("##,###,###");
+//    }
     /**
      * 短期入所（自己作成）のデータグリッドで選択した計画を表示する際の処理。
      *

@@ -88,7 +88,7 @@ public class SogoJigyohiRiyohyoRireki {
             String txtTodokedeKubun, String txtTekiyoKaishiYMD, String txtTekiyoShuryoYMD, String txtIraiJigyosha) {
         // TODO 未使用のメソッド引数があります。 Checkstyle 対応。
         btn.hashCode();
-        txtTodokedeYMDInvisible.hashCode();
+        txtTodokedeYMDInvisible.length();
 
 //        TextBoxDate txtBoxTodokedeYMDInvisible = new TextBoxDate();
 //        txtBoxTodokedeYMDInvisible.setValue(new RDate(txtTodokedeYMDInvisible));

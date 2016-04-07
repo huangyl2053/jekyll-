@@ -93,11 +93,11 @@ public class JutakuKaishuJizenShinseiShinsaResultPanel {
         RString selRadJudgeKubun = new RString(panel.getRadJudgeKubun().getSelectedItem().toString());
 
         //判定区分を選択するとき shonin 承認
-        if (("shonin").equals(selRadJudgeKubun)) {
+        if (new RString("shonin").equals(selRadJudgeKubun)) {
             panel.getTxtShoninCondition().setDisabled(false);
             panel.getTxtFushoninReason().setDisabled(true);
             //判定区分を選択するとき fushonin 不承認
-        } else if (("fushonin").equals(selRadJudgeKubun)) {
+        } else if (new RString("fushonin").equals(selRadJudgeKubun)) {
             panel.getTxtFushoninReason().setDisabled(false);
             panel.getTxtShoninCondition().setDisabled(true);
         }

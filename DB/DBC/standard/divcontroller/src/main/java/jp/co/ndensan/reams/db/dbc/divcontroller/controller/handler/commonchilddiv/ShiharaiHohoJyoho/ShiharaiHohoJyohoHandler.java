@@ -528,9 +528,10 @@ public class ShiharaiHohoJyohoHandler {
                     ? KinyuKikanCode.EMPTY : 口座情報.get金融機関コード(),
                     new KinyuKikanShitenCode(口座情報.get店番() == null ? RString.EMPTY : 口座情報.get店番()));
             if (kinyuKikan != null && kinyuKikanShiten != null) {
-                div.getTxtKinyuKikanName().setValue(new RString(kinyuKikan.get金融機関名称() == null
-                        ? RString.EMPTY.toString() : kinyuKikan.get金融機関名称().toString()
-                        + kinyuKikanShiten.get支店名称() == null ? RString.EMPTY.toString() : kinyuKikanShiten.get支店名称().toString()));
+                StringBuilder builder = new StringBuilder();
+                builder.append(kinyuKikan.get金融機関名称() == null ? RString.EMPTY.toString() : kinyuKikan.get金融機関名称().toString())
+                        .append(kinyuKikanShiten.get支店名称() == null ? RString.EMPTY.toString() : kinyuKikanShiten.get支店名称().toString());
+                div.getTxtKinyuKikanName().setValue(new RString(builder.toString()));
             }
             div.getTxtTenban().setVisible(true);
             div.getTxtTenban().setValue(口座情報.get店番() == null ? RString.EMPTY : 口座情報.get店番());
@@ -593,9 +594,10 @@ public class ShiharaiHohoJyohoHandler {
             div.getTxtTenban1().setVisible(true);
             div.getTxtTenban1().setValue(受領委任契約事業者.get支店コード() == null ? RString.EMPTY : 受領委任契約事業者.get支店コード().value());
             if (kinyuKikan != null && kinyuKikanShiten != null) {
-                div.getTxtKinyuKikanName().setValue(new RString(kinyuKikan.get金融機関名称() == null ? RString.EMPTY.toString()
-                        : kinyuKikan.get金融機関名称().toString() + kinyuKikanShiten.get支店名称() == null
-                        ? RString.EMPTY.toString() : kinyuKikanShiten.get支店名称().toString()));
+                StringBuilder builder = new StringBuilder();
+                builder.append(kinyuKikan.get金融機関名称() == null ? RString.EMPTY.toString() : kinyuKikan.get金融機関名称().toString())
+                        .append(kinyuKikanShiten.get支店名称() == null ? RString.EMPTY.toString() : kinyuKikanShiten.get支店名称().toString());
+                div.getTxtKinyuKikanName().setValue(new RString(builder.toString()));
             }
         } else {
             div.getTxtKinyuKikanShitenCode1().setVisible(true);

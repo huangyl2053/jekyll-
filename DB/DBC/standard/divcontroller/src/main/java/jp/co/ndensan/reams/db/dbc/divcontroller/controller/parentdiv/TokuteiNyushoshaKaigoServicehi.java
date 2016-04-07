@@ -113,13 +113,13 @@ public class TokuteiNyushoshaKaigoServicehi {
 //        return detailKeyInfo != null ? finder.get給付実績(detailKeyInfo) : null;
         return null;
     }
-
-    private String setCommFormat(String str) {
-        if (str.isEmpty()) {
-            return str;
-        }
-        return new Decimal(str).toString("##,###,###");
-    }
+//
+//    private String setCommFormat(String str) {
+//        if (str.isEmpty()) {
+//            return str;
+//        }
+//        return new Decimal(str).toString("##,###,###");
+//    }
 
     private RString setCommFormat(Decimal data) {
         if (data == null) {

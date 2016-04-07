@@ -21,12 +21,12 @@ public class SearchToKyufujissekiPanel {
      * @return ResponseData
      */
     public ResponseData onLoad(SearchToKyufujissekiPanelDiv panel) {
-        setSearchData(panel);
+        setSearchData();
 
         return ResponseData.of(panel).respond();
     }
 
-    private void setSearchData(SearchToKyufujissekiPanelDiv panel) {
+    private void setSearchData() {
 
 //        //事業者NO
 //        panel.getTxtJigyoshaNo().setValue(new RString(

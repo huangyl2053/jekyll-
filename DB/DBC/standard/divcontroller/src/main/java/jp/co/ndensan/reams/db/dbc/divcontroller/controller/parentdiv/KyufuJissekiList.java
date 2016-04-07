@@ -307,7 +307,7 @@ public class KyufuJissekiList {
         panel.getDgKyufuJissekiGokeiList().setDataSource(arrayGokeidata);
     }
 
-    private class RowData {
+    private static class RowData {
 
         private RString txtServiceGroup1;
         private RString txtServiceGroup2;

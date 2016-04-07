@@ -324,7 +324,7 @@ public class ShikyuGendogakuKyotakuServiceDetailPanel {
             ShikyuGendogakuKyotakuServiceDetailPanelDiv panel, ShikyuGendogakuKyotakuServiceListPanelDiv panel1) {
         ResponseData<ShikyuGendogakuKyotakuServiceDetailPanelDiv> response = new ResponseData<>();
 
-        if (panel1.getDgShikyuGendogakuKyotakuService().getClickedItem().getTxtKubunOrShurui().toString().equals(SHIKYUKUN)) {
+        if (SHIKYUKUN.equals(panel1.getDgShikyuGendogakuKyotakuService().getClickedItem().getTxtKubunOrShurui())) {
             setViewPutState(panel,
                     SHIKYUKUN,
                     MODIFIEDFLG,
@@ -337,7 +337,7 @@ public class ShikyuGendogakuKyotakuServiceDetailPanel {
             panel.getShuruiShikyuGendogaku().setDisplayNone(true);
             panel.getShuruiShikyuGendogaku().setVisible(true);
 
-        } else if (panel1.getDgShikyuGendogakuKyotakuService().getClickedItem().getTxtKubunOrShurui().toString().equals(SHURUIKUN)) {
+        } else if (SHURUIKUN.equals(panel1.getDgShikyuGendogakuKyotakuService().getClickedItem().getTxtKubunOrShurui())) {
             setViewPutState(panel,
                     SHURUIKUN,
                     MODIFIEDFLG,
