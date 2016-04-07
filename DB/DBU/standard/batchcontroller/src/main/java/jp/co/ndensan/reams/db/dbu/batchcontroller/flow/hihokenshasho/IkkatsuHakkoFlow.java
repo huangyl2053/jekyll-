@@ -17,6 +17,9 @@ import jp.co.ndensan.reams.uz.uza.batch.flow.IBatchFlowCommand;
 
 /**
  * 被保険者証一括発行_バッチフロークラスです
+ *
+ * @reamsid_L DBU-0420-020 duanzhanli
+ *
  */
 public class IkkatsuHakkoFlow extends BatchFlowBase<IkkatsuHakkoBatchParameter> {
 

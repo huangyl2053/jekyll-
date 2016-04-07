@@ -16,6 +16,9 @@ import jp.co.ndensan.reams.uz.uza.util.config.BusinessConfig;
 /**
  *
  * 介護保険被保険者証一括作成クラスです。
+ *
+ * @reamsid_L DBU-0420-030 duanzhanli
+ *
  */
 @SuppressWarnings("PMD.UnusedPrivateField")
 @lombok.Getter
