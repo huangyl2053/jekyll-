@@ -37,7 +37,7 @@ import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
 /**
  * 構成市町村マスタのデータアクセスクラスです。
  * 
- * @reamsid_L DBA-0500-010  suguangjun 
+ * @reamsid_L DBX-9999-020  suguangjun 
  */
 public class DbT7051KoseiShichosonMasterDac {
 
