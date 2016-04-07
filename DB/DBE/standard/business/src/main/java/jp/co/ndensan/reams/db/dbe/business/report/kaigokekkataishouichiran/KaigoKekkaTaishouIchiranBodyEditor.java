@@ -16,6 +16,8 @@ import jp.co.ndensan.reams.uz.uza.lang.Separator;
 
 /**
  * 要介護認定結果通知書対象者一覧表ボディEditorです。
+ *
+ * @reamsid_L DBE-0190-020 lizhuoxuan
  */
 class KaigoKekkaTaishouIchiranBodyEditor implements IKaigoKekkaTaishouIchiranEditor {
 
