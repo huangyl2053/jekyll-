@@ -18,7 +18,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxMultiLine;
 /**
  * ShoKaishuKirokuKanri のクラスファイル
  *
- * @author 自動生成
+ * @reamsid_L DBA-1070-020 lizhuoxuan
  */
 public class ShoKaishuKirokuKanriDiv extends Panel implements IShoKaishuKirokuKanriDiv {
 

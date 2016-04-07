@@ -15,6 +15,8 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
 
 /**
  * 証交付回収情報のチェッククラスです。
+ *
+ * @reamsid_L DBA-1070-020 lizhuoxuan
  */
 public class ValidationHandler {
 
