@@ -16,6 +16,8 @@ import jp.co.ndensan.reams.uz.uza.report.SourceDataCollection;
 
 /**
  * 主治医医療機関・主治医一覧表Printerです。
+ *
+ * @reamsid_L DBE-0260-020 zuotao
  */
 public class IkenshoShujiiIchiranPrintService {
 
@@ -25,7 +27,7 @@ public class IkenshoShujiiIchiranPrintService {
      * @param ichiranReportJoho 医療機関・主治医一覧表作成_帳票クラスパラメータクラス
      * @return {@link SourceDataCollection}
      */
-   public SourceDataCollection print(IkenshoShujiiIchiranReportJoho ichiranReportJoho) {
+    public SourceDataCollection print(IkenshoShujiiIchiranReportJoho ichiranReportJoho) {
         IkenshoShujiiIchiranProperty property = new IkenshoShujiiIchiranProperty();
         return new Printer<ShujiiIryokikanShujiiIchiranhyoReportSource>().spool(property, toReports(ichiranReportJoho));
     }

@@ -12,7 +12,9 @@ import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.ApplicationException;
 
 /**
- * IkenshoShujiiIchiranHandler のクラスファイル 主治医医療機関・主治医一覧表データ検索印刷機能
+ * IkenshoShujiiIchiran のクラスファイルです。
+ *
+ * @reamsid_L DBE-0260-010 zuotao
  */
 public class IkenshoShujiiIchiran {
 

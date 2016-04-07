@@ -11,6 +11,8 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 /**
  *
  * 特徴仮算定賦課確定のMyBatis用パラメータクラスです。
+ *
+ * @reamsid_L DBB-0800-020 wanghui
  */
 @lombok.Getter
 @lombok.Setter

@@ -9,6 +9,8 @@ import lombok.Getter;
 
 /**
  * 主治医医療機関・主治医一覧表のITEMです。
+ *
+ * @reamsid_L DBE-0260-020 zuotao
  */
 @Getter
 @SuppressWarnings("PMD.UnusedPrivateField")

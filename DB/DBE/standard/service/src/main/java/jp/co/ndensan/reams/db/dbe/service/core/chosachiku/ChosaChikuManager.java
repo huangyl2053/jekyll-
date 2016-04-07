@@ -11,8 +11,8 @@ import java.util.List;
 import jp.co.ndensan.reams.db.dbe.business.core.chosachiku.ChosaChikuBusiness;
 import jp.co.ndensan.reams.db.dbe.definition.mybatis.param.chosachiku.ChosaChikuMapperParameter;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.chosachiku.ChosaChikuEntity;
-import jp.co.ndensan.reams.db.dbe.persistence.db.util.MapperProvider;
 import jp.co.ndensan.reams.db.dbe.persistence.db.mapper.relate.chosachiku.IChosaChikuMapper;
+import jp.co.ndensan.reams.db.dbe.persistence.db.util.MapperProvider;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.ChikuNinteiChosain;
 import jp.co.ndensan.reams.db.dbz.definition.core.valueobject.ninteishinsei.ChosaItakusakiCode;
 import jp.co.ndensan.reams.db.dbz.definition.core.valueobject.ninteishinsei.ChosainCode;
@@ -33,6 +33,8 @@ import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
 
 /**
  * 地区認定調査員情報を管理するクラスです。
+ *
+ * @reamsid_L DBE-0021-010 zhangzhiming
  */
 public class ChosaChikuManager {
 
