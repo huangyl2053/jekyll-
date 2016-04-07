@@ -14,8 +14,9 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.Separator;
 
 /**
- *
  * 介護保険被保険者証ボディEditorです。
+ * 
+ * @reamsid_L DBU-0490-070  suguangjun
  */
 public class HihokenshashoA4BodyEditor implements IHihokenshashoA4Editor {
 

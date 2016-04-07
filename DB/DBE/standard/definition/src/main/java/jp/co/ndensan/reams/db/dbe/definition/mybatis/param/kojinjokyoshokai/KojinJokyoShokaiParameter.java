@@ -9,7 +9,8 @@ import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoK
 
 /**
  * 要介護認定個人状況照会のMyBatis用パラメータクラスです。
- *
+ * 
+ * @reamsid_L DBE-0200-010  suguangjun 
  */
 @lombok.Getter
 @lombok.Setter

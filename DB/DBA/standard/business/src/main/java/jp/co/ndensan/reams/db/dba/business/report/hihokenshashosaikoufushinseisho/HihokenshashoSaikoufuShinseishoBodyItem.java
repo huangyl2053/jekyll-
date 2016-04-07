@@ -9,8 +9,9 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 import lombok.Getter;
 
 /**
- *
  * 介護保険被保険者証等再交付申請書情報です。
+ * 
+ * @reamsid_L DBA-0540-689  suguangjun
  */
 @Getter
 @SuppressWarnings("PMD.UnusedPrivateField")

@@ -19,8 +19,9 @@ import jp.co.ndensan.reams.uz.uza.report.ReportPropertyBase;
 import jp.co.ndensan.reams.uz.uza.report.data.chart.ReportDynamicChart;
 
 /**
- *
  * {@link HihokenshashoA4ReportSource}のプロパティです。
+ * 
+ * @reamsid_L DBU-0490-070  suguangjun
  */
 public class HihokenshashoA4Proerty extends ReportPropertyBase<HihokenshashoA4ReportSource> {
 

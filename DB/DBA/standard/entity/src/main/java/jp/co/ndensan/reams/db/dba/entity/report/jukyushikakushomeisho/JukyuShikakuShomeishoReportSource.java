@@ -5,8 +5,9 @@ import jp.co.ndensan.reams.uz.uza.report.IReportSource;
 import jp.co.ndensan.reams.uz.uza.report.source.ReportItem;
 
 /**
- *
  * 受給資格証明書のReportSource
+ * 
+ * @reamsid_L DBU-0490-090  suguangjun 
  */
 public class JukyuShikakuShomeishoReportSource implements IReportSource {
 // <editor-fold defaultstate="collapsed" desc="Generated Code">

@@ -13,6 +13,7 @@ import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE5410001.Koji
 import jp.co.ndensan.reams.db.dbe.divcontroller.handler.parentdiv.DBE5410001.KojinJokyoShokaiHandler;
 import jp.co.ndensan.reams.db.dbe.service.core.basic.kojinjokyoshokai.KojinJokyoShokaiFinder;
 import jp.co.ndensan.reams.db.dbe.service.report.kojinshinchokujokyohyo.KojinShinchokuJokyohyoPrintService;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo;
 import jp.co.ndensan.reams.db.dbz.business.core.ninteishinseirenrakusakijoho.NinteiShinseiBusinessCollection;
 import jp.co.ndensan.reams.db.dbz.business.core.servicetype.ninteishinsei.NinteiShinseiCodeModel;
@@ -28,6 +29,8 @@ import jp.co.ndensan.reams.uz.uza.util.serialization.DataPassingConverter;
 
 /**
  * 要介護認定個人状況照会処理のクラスです。
+ * 
+ * @reamsid_L DBE-0200-010  suguangjun
  */
 public class KojinJokyoShokai {
 
@@ -100,7 +103,8 @@ public class KojinJokyoShokai {
      * @return ResponseData<KojinJokyoShokaiDiv>
      */
     public ResponseData<KojinJokyoShokaiDiv> onClick_btnShujiiIkenshoSakuseiIraiShokai(KojinJokyoShokaiDiv div) {
-        // TODO  内部QA：866 Redmine：#74276(画面遷移方式が知らない、現時点対応不可)
+        // TODO  内部QA：923 Redmine：#74276(被保番号が知らない、現時点対応不可)
+        //div.setHihokenshano(new RString("123456"));
         return ResponseData.of(div).respond();
     }
 
@@ -111,7 +115,8 @@ public class KojinJokyoShokai {
      * @return ResponseData<KojinJokyoShokaiDiv>
      */
     public ResponseData<KojinJokyoShokaiDiv> onClick_btnNinteiChosaIraiShokai(KojinJokyoShokaiDiv div) {
-        // TODO  内部QA：866 Redmine：#74276(画面遷移方式が知らない、現時点対応不可)
+        // TODO  内部QA：923 Redmine：#74276(被保番号が知らない、現時点対応不可)
+        ViewStateHolder.put(ViewStateKeys.被保険者番号, new HihokenshaNo("123456"));
         return ResponseData.of(div).respond();
     }
 

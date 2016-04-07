@@ -58,8 +58,9 @@ import jp.co.ndensan.reams.uz.uza.util.db.IPsmCriteria;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 
 /**
- *
  * 介護保険利用者負担額減額・免除申請書Printerです。
+ * 
+ * @reamsid_L DBA-0540-220  suguangjun 
  */
 public class RiyoshaFutangakuGengakuMenjyoShinseisho {
 

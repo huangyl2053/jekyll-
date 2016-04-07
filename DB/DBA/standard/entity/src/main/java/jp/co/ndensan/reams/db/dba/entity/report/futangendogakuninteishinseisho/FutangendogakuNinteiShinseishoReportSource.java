@@ -5,8 +5,9 @@ import jp.co.ndensan.reams.uz.uza.report.IReportSource;
 import jp.co.ndensan.reams.uz.uza.report.source.ReportItem;
 
 /**
- *
  * 介護保険負担限度額認定申請書のReportSource
+ * 
+ * @reamsid_L DBA-0540-690  suguangjun 
  */
 public class FutangendogakuNinteiShinseishoReportSource implements IReportSource {
 // <editor-fold defaultstate="collapsed" desc="Generated Code">

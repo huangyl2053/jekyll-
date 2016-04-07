@@ -10,8 +10,9 @@ import jp.co.ndensan.reams.db.dba.entity.report.jukyushikakushomeisho.JukyuShika
 import jp.co.ndensan.reams.uz.uza.report.IReportEditor;
 
 /**
- *
  * 受給資格証明書ヘッダエディターのインターフェースクラスです。
+ * 
+ * @reamsid_L DBU-0490-090  suguangjun 
  */
 interface IJukyuShikakuShomeishoEditor extends IReportEditor<JukyuShikakuShomeishoReportSource> {
 }

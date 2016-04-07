@@ -11,8 +11,9 @@ import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
 import lombok.NonNull;
 
 /**
- *
  * 介護保険負担限度額認定申請書のReportです。
+ *
+ * @reamsid_L DBA-0540-690  suguangjun
  */
 public final class FutangendogakuNinteiShinseishoReport extends Report<FutangendogakuNinteiShinseishoReportSource> {
 

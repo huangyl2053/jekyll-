@@ -9,8 +9,9 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 import lombok.Getter;
 
 /**
- *
  * 介護保険被保険者証リスト一覧表情報です。
+ * 
+ * @reamsid_L DBU-0490-070  suguangjun 
  */
 @Getter
 @SuppressWarnings("PMD.UnusedPrivateField")

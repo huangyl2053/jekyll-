@@ -5,8 +5,9 @@ import jp.co.ndensan.reams.uz.uza.report.IReportSource;
 import jp.co.ndensan.reams.uz.uza.report.source.ReportItem;
 
 /**
- *
  * 介護保険利用者負担額減額・免除申請書のReportSource
+ *
+ * @reamsid_L DBA-0540-691  suguangjun 
  */
 public class RiyoshaFutangakuGengakuMenjyoShinseishoReportSource implements IReportSource {
 // <editor-fold defaultstate="collapsed" desc="Generated Code">

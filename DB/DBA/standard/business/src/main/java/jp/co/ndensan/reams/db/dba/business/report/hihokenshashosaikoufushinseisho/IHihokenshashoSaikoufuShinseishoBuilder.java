@@ -9,8 +9,9 @@ import jp.co.ndensan.reams.db.dba.entity.report.hihokenshashosaikoufushinseisho.
 import jp.co.ndensan.reams.uz.uza.report.IReportBuilder;
 
 /**
- *
  * 介護保険被保険者証等再交付申請書Builderのインターフェースです。
+ * 
+ * @reamsid_L DBA-0540-689  suguangjun 
  */
 interface IHihokenshashoSaikoufuShinseishoBuilder extends IReportBuilder<HihokenshashoSaikoufuShinseishoReportSource> {
 }

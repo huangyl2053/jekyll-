@@ -10,8 +10,8 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.KaigoNinteiAtenaInfo.KaigoNinteiAtenaInfoDiv;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.shujiiIryokikanandshujiiinput.ShujiiIryokikanAndShujiiInput.IShujiiIryokikanAndShujiiInputDiv;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.KaigoNinteiAtenaInfo.IKaigoNinteiAtenaInfoDiv;
-import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.KaigoninteiShikakuInfo.IKaigoninteiShikakuInfoDiv;
-import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.KaigoninteiShikakuInfo.KaigoninteiShikakuInfoDiv;
+import jp.co.ndensan.reams.db.dbz.divcontroller.entity.parentdiv.kaigoninteishikakuinfo.IKaigoninteiShikakuInfoDiv;
+import jp.co.ndensan.reams.db.dbz.divcontroller.entity.parentdiv.kaigoninteishikakuinfo.KaigoninteiShikakuInfoDiv;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.chosaitakusakiandchosaininput.ChosaItakusakiAndChosainInput.IChosaItakusakiAndChosainInputDiv;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.binding.*;
@@ -20,7 +20,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 /**
  * KojinJokyoShokai のクラスファイル
  *
- * @author 自動生成
+ * @reamsid_L DBE-0200-010  suguangjun
  */
 public class KojinJokyoShokaiDiv extends Panel {
 

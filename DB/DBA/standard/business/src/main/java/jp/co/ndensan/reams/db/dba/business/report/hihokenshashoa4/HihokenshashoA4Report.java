@@ -11,8 +11,9 @@ import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
 import lombok.NonNull;
 
 /**
- *
  * 介護保険被保険者証のReportです。
+ * 
+ * @reamsid_L DBU-0490-070  suguangjun
  */
 public final class HihokenshashoA4Report extends Report<HihokenshashoA4ReportSource> {
 
