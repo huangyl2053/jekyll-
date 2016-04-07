@@ -14,6 +14,8 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
  * 依頼書一括発行_バッチフロークラスです。
+ *
+ * @reamsid_L DBE-0080-180 duanzhanli
  */
 public class IraishoIkkatsuHakkoFlow extends BatchFlowBase<IraishoIkkatsuHakkoBatchParamter> {
 
