@@ -44,8 +44,6 @@ public class ShisetsutourukuPanel {
     private static final RString 修正 = new RString("修正状態");
     private static final RString 削除 = new RString("削除状態");
     private static final RString 照会 = new RString("照会状態");
-    private static final RString 事業者番号 = new RString("12");
-    private static final FlexibleDate 有効開始日 = new FlexibleDate("20160406");
     private static final RString 事業者種別 = new RString("21");
     private RString 変更区分;
     private final KaigoJigyoshaShisetsuKanriManager manager;
@@ -64,10 +62,6 @@ public class ShisetsutourukuPanel {
      * @return ResponseData<ShisetsutourukuPanel>
      */
     public ResponseData<ShisetsutourukuPanelDiv> onLoad(ShisetsutourukuPanelDiv div) {
-        ViewStateHolder.put(ViewStateKeys.サービス登録_事業者番号, 事業者番号);
-        ViewStateHolder.put(ViewStateKeys.サービス登録_サービス種類コード, 事業者種別);
-        ViewStateHolder.put(ViewStateKeys.サービス登録_有効開始日, 有効開始日);
-        ViewStateHolder.put(ViewStateKeys.状態, 削除);
         if (追加.equals(ViewStateHolder.get(ViewStateKeys.状態, RString.class))) {
             getHandler(div).initialize();
             return ResponseData.of(div).setState(DBA2010012StateName.追加状態);
@@ -201,12 +195,11 @@ public class ShisetsutourukuPanel {
     private KaigoJigyoshaShisetsuKanriMapperParameter 事業者情報取得paramter(ShisetsutourukuPanelDiv div) {
 
         return KaigoJigyoshaShisetsuKanriMapperParameter
-                .createParam(事業者種別,
+                .createParam(div.getJigyoshaShurui().getRadServiceShurui().getSelectedKey(),
                         ViewStateHolder.get(ViewStateKeys.サービス登録_有効開始日, FlexibleDate.class),
                         ViewStateHolder.get(ViewStateKeys.サービス登録_事業者番号, RString.class),
                         ViewStateHolder.get(ViewStateKeys.サービス登録_サービス種類コード, RString.class),
                         FlexibleDate.EMPTY);
-
     }
 
     private ResponseData<ShisetsutourukuPanelDiv> get事業者情報の検索処理(ShisetsutourukuPanelDiv div) {
@@ -286,7 +279,6 @@ public class ShisetsutourukuPanel {
             変更区分 = new RString("2");
             manager.updateJigyoshaJoho(null, 事業者種別, 事業者情報, 変更区分);
         }
-        //manager.insertJigyoshaJoho(null, 事業者種別, 事業者情報);
         if (new RString(UrQuestionMessages.保存の確認.getMessage().getCode()).equals(ResponseHolder.getMessageCode())
                 && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
             div.getKaigoKanryo().getCcdKaigoKanryoMessage().setMessage(new RString(UrInformationMessages.正常終了.getMessage()
