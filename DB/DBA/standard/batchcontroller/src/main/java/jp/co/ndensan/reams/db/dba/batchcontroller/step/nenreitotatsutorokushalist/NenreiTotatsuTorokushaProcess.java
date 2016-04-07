@@ -48,6 +48,8 @@ import jp.co.ndensan.reams.uz.uza.util.code.entity.UzT0007CodeEntity;
 
 /**
  * 年齢到達登録者リストを作成します。
+ *
+ * @reamsid_L DBA-0570-020 xuyannan
  */
 public class NenreiTotatsuTorokushaProcess extends BatchProcessBase<NenreiTotatsushaJouhouEntity> {
 

@@ -13,6 +13,8 @@ import jp.co.ndensan.reams.ua.uax.entity.db.basic.UaFt200FindShikibetsuTaishoEnt
 
 /**
  * 年齢到達登録者のマッパーインタフェースです。
+ *
+ * @reamsid_L DBA-0570-020 xuyannan
  */
 public interface INenreiTotatsuTorokushaMapper {
 

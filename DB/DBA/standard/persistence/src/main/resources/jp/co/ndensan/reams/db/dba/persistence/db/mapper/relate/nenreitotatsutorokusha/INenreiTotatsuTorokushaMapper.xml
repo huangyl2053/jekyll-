@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
+<!-- @reamsid_L DBA-0570-020 xuyannan -->
 <!-- どのマッパーインターフェースと対応するかを指定する -->
 <mapper namespace="jp.co.ndensan.reams.db.dba.persistence.db.mapper.relate.nenreitotatsutorokusha.INenreiTotatsuTorokushaMapper">
     <!--テーブルDbT1001HihokenshaDaichoの項目をDbT1001HihokenshaDaichoEntityの項目にマッピングします。-->
