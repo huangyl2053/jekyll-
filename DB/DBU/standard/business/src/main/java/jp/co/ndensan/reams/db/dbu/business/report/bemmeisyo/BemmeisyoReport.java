@@ -11,6 +11,8 @@ import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
 
 /**
  * 弁明書のReportです。
+ *
+ * @reamsid_L DBU-1080-150 linghuhang
  */
 public class BemmeisyoReport extends Report<BemmeisyoReportSource> {
 
