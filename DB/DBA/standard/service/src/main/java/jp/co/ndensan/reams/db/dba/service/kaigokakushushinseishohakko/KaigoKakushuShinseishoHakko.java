@@ -21,6 +21,7 @@ import jp.co.ndensan.reams.db.dba.service.report.futangendogakuninteishinseisho.
 import jp.co.ndensan.reams.db.dba.service.report.hokenryogenmenchoshuyoyushinseisho.KaigoHokenryoGenmenShinseisho;
 import jp.co.ndensan.reams.db.dba.service.report.homonkaigoriyoushafutangakugengakushinseisho.HomonkaigoRiyoushaFutangakuGengakuShinseisho;
 import jp.co.ndensan.reams.db.dba.service.report.jukyushikakushomeishokoufushinseisho.KaigoHokenJukyushikakuShomeishoKofuShinseisho;
+import jp.co.ndensan.reams.db.dba.service.report.juryoininharaikeiyakushinseisho.JuryoIninbaraiKeiyakuShinseisho;
 import jp.co.ndensan.reams.db.dba.service.report.juryoininharaitoriatsu.JuryoIninbaraiToriatsukaiJigyoshaTorokuShinseisho;
 import jp.co.ndensan.reams.db.dba.service.report.jyushochitokureitekiyohenko.JushochiTokureiTekiyoHenkoShuryoTodoke;
 import jp.co.ndensan.reams.db.dba.service.report.keidoshafukushiyogutoriatsukaikakuninshinseisho.KeidoshaFukushiyoguToriatsukaiKakuninShinseisho;
@@ -36,6 +37,7 @@ import jp.co.ndensan.reams.db.dba.service.report.shakaifukushihojinfutan.ShakaiF
 import jp.co.ndensan.reams.db.dba.service.report.shiharaihohohenkoshuryoshinseisho.ShiharaiHohoHenkoShuryoShinseisho;
 import jp.co.ndensan.reams.db.dba.service.report.shikakushutokuidososhitsu.ShikakuShutokuIdoSoshitsuTodoke;
 import jp.co.ndensan.reams.db.dba.service.report.shoukanbaraijuryoininbaraishinseishochohyo.ShoukanbaraiJuryoIninbaraiShinseishoChohyo;
+import jp.co.ndensan.reams.db.dba.service.report.yokaigoninteikubunhenkoshinseisho.YokaigoNinteikubunHenkoShinseisho;
 import jp.co.ndensan.reams.db.dba.service.riyoshafutangakugengakumenjyoshinseisho.RiyoshaFutangakuGengakuMenjyoShinseisho;
 import jp.co.ndensan.reams.db.dba.service.shokanharaishikyushinseisho.ShoukanbaraiShikyuShinseishoChohyo;
 import jp.co.ndensan.reams.db.dba.service.tokubetsuchiikikasanhomonkaigo.TokubetsuChiikiKasanHomonKaigoFutanGengakuKakunin;
@@ -49,6 +51,8 @@ import jp.co.ndensan.reams.uz.uza.log.RLogger;
 /**
  * 介護各種申請書発行のクラスです。
  *
+ * @reamsid_L DBA-0540-010  lijia
+ * 
  */
 public class KaigoKakushuShinseishoHakko {
 
@@ -84,6 +88,8 @@ public class KaigoKakushuShinseishoHakko {
     private static final RString DBC800018_種類 = new RString("介護保険給付費借入申請書");
     private static final RString DBC800019_種類 = new RString("介護保険給付費貸付金償還期限延長申請書");
     private static final RString DBC800020_種類 = new RString("第三者行為による被害届（介護保険用）");
+    private static final RString DBD501002_種類 = new RString("要介護認定区分変更申請書");
+    private static final RString DBC800002_種類 = new RString("介護保険受領委任払い契約申請書");
     private static final RString 資格 = new RString("資格");
     private static final RString 賦課 = new RString("賦課");
     private static final RString 認定 = new RString("認定");
@@ -107,6 +113,7 @@ public class KaigoKakushuShinseishoHakko {
         } else {
             set業務資格の帳票発行(kaigoKakushuShinseishoHakkoEntityList, 識別コード, 被保険者番号);
             set業務賦課の帳票発行(kaigoKakushuShinseishoHakkoEntityList, 識別コード, 被保険者番号);
+            set業務認定の帳票発行(kaigoKakushuShinseishoHakkoEntityList, 識別コード, 被保険者番号);
             set業務受給の帳票発行(kaigoKakushuShinseishoHakkoEntityList, 識別コード, 被保険者番号);
             set業務給付の帳票発行(kaigoKakushuShinseishoHakkoEntityList, 識別コード, 被保険者番号);
         }
@@ -159,6 +166,18 @@ public class KaigoKakushuShinseishoHakko {
                 KaigoHokenryoNofugakuShomeishoKofuShinseisho kaigoHokenryoNofugakuShomeishoKofuShinseisho
                         = new KaigoHokenryoNofugakuShomeishoKofuShinseisho();
                 kaigoHokenryoNofugakuShomeishoKofuShinseisho.createKaigoHokenryoNofugakuShomeishoKofuShinseishoChohyo(識別コード, 被保険者番号);
+            }
+        }
+    }
+
+    private void set業務認定の帳票発行(
+            List<KaigoKakushuShinseishoHakkoEntity> kaigoKakushuShinseishoHakkoEntityList,
+            ShikibetsuCode 識別コード,
+            HihokenshaNo 被保険者番号) {
+        for (KaigoKakushuShinseishoHakkoEntity entity : kaigoKakushuShinseishoHakkoEntityList) {
+            if (ShinseishoChohyoShurui.要介護認定区分変更申請書.getコード().equals(entity.get申請書ID())) {
+                YokaigoNinteikubunHenkoShinseisho yokaigoNinteikubunHenkoShinseisho = new YokaigoNinteikubunHenkoShinseisho();
+                yokaigoNinteikubunHenkoShinseisho.createYokaigoNinteikubunHenkoShinseishoChohyo(識別コード, 被保険者番号);
             }
         }
     }
@@ -222,6 +241,12 @@ public class KaigoKakushuShinseishoHakko {
                 JuryoIninbaraiToriatsukaiJigyoshaTorokuShinseisho juryoIninbaraiToriatsukaiJigyoshaTorokuShinseisho
                         = new JuryoIninbaraiToriatsukaiJigyoshaTorokuShinseisho();
                 juryoIninbaraiToriatsukaiJigyoshaTorokuShinseisho.createJuryoIninbaraiToriatsukaiJigyoshaTorokuShinseishoChohyo();
+            }
+            if (ShinseishoChohyoShurui.介護保険受領委任払い契約申請書.getコード().equals(entity.get申請書ID())) {
+                JuryoIninbaraiKeiyakuShinseisho juryoIninbaraiKeiyakuShinseisho
+                        = new JuryoIninbaraiKeiyakuShinseisho();
+                // TODO 入力引数を不一致。
+                //juryoIninbaraiKeiyakuShinseisho.createJuryoIninbaraiKeiyakuShinseishoChohyo(資格);
             }
             if (ShinseishoChohyoShurui.居宅_介護予防_サービス計画作成依頼_変更_届出書.getコード().equals(entity.get申請書ID())) {
                 KyotakuServiceKeikakuSakuseiIraiTodokedesho kyotakuServiceKeikakuSakuseiIraiTodokedesho
@@ -305,6 +330,7 @@ public class KaigoKakushuShinseishoHakko {
 
         get業務資格情報の取得();
         get業務賦課情報の取得();
+        get業務認定情報の取得();
         get業務受給情報の取得();
         get業務給付情報の取得();
         return kaigoKakushuShinseishoHakkoEntityList;
@@ -369,6 +395,17 @@ public class KaigoKakushuShinseishoHakko {
             kaigoKakushuShinseishoHakkoEntity.set申請書ID(ShinseishoChohyoShurui.介護保険料納付額証明書交付申請書.getコード());
             kaigoKakushuShinseishoHakkoEntity.set業務(賦課);
             kaigoKakushuShinseishoHakkoEntity.set申請書(ShinseishoChohyoShurui.介護保険料納付額証明書交付申請書.get名称());
+            kaigoKakushuShinseishoHakkoEntityList.add(kaigoKakushuShinseishoHakkoEntity);
+        }
+        return kaigoKakushuShinseishoHakkoEntityList;
+    }
+
+    private List<KaigoKakushuShinseishoHakkoEntity> get業務認定情報の取得() {
+        if (DBD501002_種類.equals(ShinseishoChohyoShurui.要介護認定区分変更申請書.get名称())) {
+            KaigoKakushuShinseishoHakkoEntity kaigoKakushuShinseishoHakkoEntity = new KaigoKakushuShinseishoHakkoEntity();
+            kaigoKakushuShinseishoHakkoEntity.set申請書ID(ShinseishoChohyoShurui.要介護認定区分変更申請書.getコード());
+            kaigoKakushuShinseishoHakkoEntity.set業務(認定);
+            kaigoKakushuShinseishoHakkoEntity.set申請書(ShinseishoChohyoShurui.要介護認定区分変更申請書.get名称());
             kaigoKakushuShinseishoHakkoEntityList.add(kaigoKakushuShinseishoHakkoEntity);
         }
         return kaigoKakushuShinseishoHakkoEntityList;
@@ -444,6 +481,15 @@ public class KaigoKakushuShinseishoHakko {
             kaigoKakushuShinseishoHakkoEntity.set業務(給付);
             kaigoKakushuShinseishoHakkoEntity.set申請書(
                     ShinseishoChohyoShurui.介護保険受領委任払い取扱事業者登録申請書.get名称());
+            kaigoKakushuShinseishoHakkoEntityList.add(kaigoKakushuShinseishoHakkoEntity);
+        }
+        if (DBC800002_種類.equals(ShinseishoChohyoShurui.介護保険受領委任払い契約申請書.get名称())) {
+            KaigoKakushuShinseishoHakkoEntity kaigoKakushuShinseishoHakkoEntity = new KaigoKakushuShinseishoHakkoEntity();
+            kaigoKakushuShinseishoHakkoEntity.set申請書ID(
+                    ShinseishoChohyoShurui.介護保険受領委任払い契約申請書.getコード());
+            kaigoKakushuShinseishoHakkoEntity.set業務(給付);
+            kaigoKakushuShinseishoHakkoEntity.set申請書(
+                    ShinseishoChohyoShurui.介護保険受領委任払い契約申請書.get名称());
             kaigoKakushuShinseishoHakkoEntityList.add(kaigoKakushuShinseishoHakkoEntity);
         }
         if (DBC800004_種類.equals(ShinseishoChohyoShurui.居宅_介護予防_サービス計画作成依頼_変更_届出書.get名称())) {

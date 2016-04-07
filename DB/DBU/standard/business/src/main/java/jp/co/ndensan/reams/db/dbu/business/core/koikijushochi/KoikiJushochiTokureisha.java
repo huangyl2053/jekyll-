@@ -14,7 +14,9 @@ import jp.co.ndensan.reams.uz.uza.util.config.BusinessConfig;
 
 /**
  *
- * 広住特者住民コードSQL取得するクラスです
+ * 広住特者住民コードSQL取得するクラスです。
+ *
+ * @reamsid_L DBU-0080-010 wangxiaodong
  */
 public class KoikiJushochiTokureisha {
 
