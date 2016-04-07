@@ -10,6 +10,8 @@ import jp.co.ndensan.reams.uz.uza.report.IReportBuilder;
 
 /**
  * 介護保険料徴収猶予申請書Builderのインターフェースクラスです。
+ *
+ * @reamsid_L DBA-0540-693 xuyannan
  */
 public interface IHokenryoGenmenChoshuYoyuShinseishoBuilder extends
         IReportBuilder<HokenryoGenmenChoshuYoyuShinseishoReportSource> {

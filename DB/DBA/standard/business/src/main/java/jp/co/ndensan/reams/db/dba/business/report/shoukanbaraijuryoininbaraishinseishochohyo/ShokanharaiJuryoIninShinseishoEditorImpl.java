@@ -9,6 +9,8 @@ import jp.co.ndensan.reams.db.dba.entity.report.shoukanbaraijuryoininbaraishinse
 
 /**
  * 介護保険償還払受領委任払申請書のEditorです。
+ *
+ * @reamsid_L DBA-0540-707 xuyannan
  */
 public class ShokanharaiJuryoIninShinseishoEditorImpl implements IShokanharaiJuryoIninShinseishoEditor {
 

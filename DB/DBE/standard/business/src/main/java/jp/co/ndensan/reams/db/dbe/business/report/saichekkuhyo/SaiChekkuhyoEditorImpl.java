@@ -34,6 +34,8 @@ import jp.co.ndensan.reams.uz.uza.lang.Separator;
 
 /**
  * 要介護認定調査票差異チェック票のEditorです。
+ *
+ * @reamsid_L DBE-0080-060 xuyannan
  */
 public class SaiChekkuhyoEditorImpl implements ISaiChekkuhyoEditor {
 

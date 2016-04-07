@@ -10,6 +10,8 @@ import jp.co.ndensan.reams.uz.uza.report.IReportEditor;
 
 /**
  * 介護保険料徴収猶予申請書エディターのインターフェースクラスです。
+ *
+ * @reamsid_L DBA-0540-693 xuyannan
  */
 public interface IHokenryoGenmenChoshuYoyuShinseishoEditor extends
         IReportEditor<HokenryoGenmenChoshuYoyuShinseishoReportSource> {

@@ -10,6 +10,8 @@ import jp.co.ndensan.reams.uz.uza.report.ReportEditorJoiner;
 
 /**
  * 介護保険料徴収猶予申請書Builderクラスです。
+ *
+ * @reamsid_L DBA-0540-693 xuyannan
  */
 public class HokenryoGenmenChoshuYoyuShinseishoBuilderImpl implements IHokenryoGenmenChoshuYoyuShinseishoBuilder {
 

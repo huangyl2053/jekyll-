@@ -6,6 +6,8 @@ import jp.co.ndensan.reams.uz.uza.report.source.ReportItem;
 
 /**
  * 要介護認定調査票差異チェック票のReportSource
+ *
+ * @reamsid_L DBE-0080-060 xuyannan
  */
 public class SaiChekkuhyoReportSource implements IReportSource {
 // <editor-fold defaultstate="collapsed" desc="Generated Code">

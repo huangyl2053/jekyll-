@@ -11,6 +11,8 @@ import lombok.Setter;
 
 /**
  * 介護認定審査会委員RelateEntityクラスです。
+ *
+ * @reamsid_L DBE-0130-050 xuyannan
  */
 @Getter
 @Setter

@@ -10,6 +10,8 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
  * 調査地区市町村情報ビジネスクラスです。
+ *
+ * @reamsid_L DBE-0023-010 xuyannan
  */
 public class ChosaChikuChichosonBusiness {
 

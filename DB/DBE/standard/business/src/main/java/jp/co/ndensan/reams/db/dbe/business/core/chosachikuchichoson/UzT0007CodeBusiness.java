@@ -14,6 +14,8 @@ import jp.co.ndensan.reams.uz.uza.util.code.entity.UzT0007CodeEntity;
 
 /**
  * 調査地区情報ビジネスクラスです。
+ *
+ * @reamsid_L DBE-0023-010 xuyannan
  */
 public class UzT0007CodeBusiness {
 

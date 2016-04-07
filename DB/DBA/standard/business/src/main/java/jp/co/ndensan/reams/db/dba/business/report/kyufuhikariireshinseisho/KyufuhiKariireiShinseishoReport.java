@@ -11,6 +11,8 @@ import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
 
 /**
  * 介護保険給付費借入申請書の帳票を作成します。
+ *
+ * @reamsid_L DBA-0540-708 xuyannan
  */
 public class KyufuhiKariireiShinseishoReport extends Report<KyufuhiKariireiShinseishoReportSource> {
 
