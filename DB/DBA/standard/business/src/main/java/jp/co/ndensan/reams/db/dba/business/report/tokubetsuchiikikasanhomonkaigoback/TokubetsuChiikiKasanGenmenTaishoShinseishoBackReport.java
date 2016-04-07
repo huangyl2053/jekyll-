@@ -11,8 +11,9 @@ import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
 import lombok.NonNull;
 
 /**
- *
  * 特別地域加算減免・訪問介護等利用者負担減額対象確認申請書のReportです。
+ * 
+ * @reamsid_L DBA-0540-700  suguangjun
  */
 public final class TokubetsuChiikiKasanGenmenTaishoShinseishoBackReport extends
         Report<TokubetsuChiikiKasanGenmenTaishoShinseishoBackReportSource> {

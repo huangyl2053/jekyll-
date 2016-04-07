@@ -11,8 +11,9 @@ import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.report.ReportPropertyBase;
 
 /**
- *
  * {@link TokubetsuChiikiKasanGenmenTaishoShinseishoReportSource}のプロパティです。
+ * 
+ * @reamsid_L DBA-0540-700  suguangjun
  */
 public class TokubetsuChiikiKasanGenmenTaishoShinseishoProerty extends ReportPropertyBase<TokubetsuChiikiKasanGenmenTaishoShinseishoReportSource> {
 

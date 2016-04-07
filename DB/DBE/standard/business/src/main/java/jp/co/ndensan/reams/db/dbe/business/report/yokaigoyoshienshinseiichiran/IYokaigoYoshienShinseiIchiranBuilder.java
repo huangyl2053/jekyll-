@@ -10,6 +10,8 @@ import jp.co.ndensan.reams.uz.uza.report.IReportBuilder;
 
 /**
  * 要介護認定・要支援認定等申請者一覧表Builderのインターフェースクラスです。
+ *
+ * @reamsid_L DBE-1370-020 sunhaidi
  */
 interface IYokaigoYoshienShinseiIchiranBuilder extends IReportBuilder<YokaigoYoshienShinseiIchiranReportSource> {
 

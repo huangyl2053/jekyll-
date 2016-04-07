@@ -6,6 +6,8 @@ import jp.co.ndensan.reams.uz.uza.report.source.ReportItem;
 
 /**
  * 要介護認定・要支援認定等申請者一覧表のReportSourceクラスです。
+ *
+ * @reamsid_L DBE-1370-020 sunhaidi
  */
 public class YokaigoYoshienShinseiIchiranReportSource implements IReportSource {
 // <editor-fold defaultstate="collapsed" desc="Generated Code">
