@@ -10,8 +10,9 @@ import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
- *
  * 広域運用抽出期間情報のエンティティクラスです。
+ *
+ * @reamsid_L DBU-0550-040 zhangzhiming
  */
 @lombok.Getter
 @lombok.Setter

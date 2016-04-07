@@ -10,8 +10,9 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RTime;
 
 /**
- *
  * 介護住民票個別事項連携情報作成【広域運用】作成画面divです。
+ *
+ * @reamsid_L DBU-0550-040 zhangzhiming
  */
 @lombok.Getter
 @lombok.Setter
