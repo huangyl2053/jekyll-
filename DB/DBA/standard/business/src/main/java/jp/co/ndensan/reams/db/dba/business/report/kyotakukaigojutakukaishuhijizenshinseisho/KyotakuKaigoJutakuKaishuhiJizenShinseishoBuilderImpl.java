@@ -11,6 +11,8 @@ import jp.co.ndensan.reams.uz.uza.report.ReportEditorJoiner;
 /**
  * 介護保険居宅介護（予防）住宅改修費事前（受領委任払）申請書Builderクラスです。
  *
+ * @reamsid_L DBA-0540-703  lijia
+ * 
  */
 public class KyotakuKaigoJutakuKaishuhiJizenShinseishoBuilderImpl implements IKyotakuKaigoJutakuKaishuhiJizenShinseishoBuilder {
 

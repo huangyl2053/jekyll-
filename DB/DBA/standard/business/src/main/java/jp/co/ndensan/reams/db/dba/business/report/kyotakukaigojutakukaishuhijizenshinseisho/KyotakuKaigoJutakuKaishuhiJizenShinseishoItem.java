@@ -11,6 +11,8 @@ import lombok.Getter;
 /**
  * 介護保険居宅介護（予防）住宅改修費事前（受領委任払）申請書Entityリストです。
  *
+ * @reamsid_L DBA-0540-703  lijia
+ * 
  */
 @Getter
 @SuppressWarnings("PMD.UnusedPrivateField")
