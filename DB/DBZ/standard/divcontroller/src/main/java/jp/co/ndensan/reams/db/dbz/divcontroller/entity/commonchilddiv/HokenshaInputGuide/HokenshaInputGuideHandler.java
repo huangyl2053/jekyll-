@@ -14,8 +14,9 @@ import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
 import jp.co.ndensan.reams.uz.uza.ui.binding.KeyValueDataSource;
 
 /**
- *
  * {@link HokenshaInputGuideDiv}のHandlerクラスです。
+ *
+ * @reamsid_L DBA-0180-010 lishengli
  */
 public class HokenshaInputGuideHandler {
 

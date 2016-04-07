@@ -14,6 +14,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 /**
  * 保険者情報です。
  *
+ * @reamsid_L DBA-0180-020 lishengli
  */
 public class Hokensha {
 
