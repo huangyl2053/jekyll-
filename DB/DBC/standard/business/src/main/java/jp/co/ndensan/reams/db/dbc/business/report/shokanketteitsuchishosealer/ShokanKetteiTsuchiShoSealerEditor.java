@@ -10,6 +10,8 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
  * 償還払支給（不支給）決定通知書（ｼｰﾗﾀｲﾌﾟ）Editorです。
+ *
+ * @reamsid_L DBC-1000-130 zhangzhiming
  */
 public class ShokanKetteiTsuchiShoSealerEditor implements IShokanKetteiTsuchiShoSealerEditor {
 
