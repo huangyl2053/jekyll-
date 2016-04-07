@@ -9,8 +9,9 @@ import jp.co.ndensan.reams.db.dba.definition.core.yokaigoninteikubunhenkoshinsei
 import jp.co.ndensan.reams.ua.uax.entity.db.basic.UaFt200FindShikibetsuTaishoEntity;
 
 /**
- *
  * 要介護認定区分変更申請書Mapperクラスです。
+ *
+ * @reamsid_L DBA-0540-640 lishengli
  */
 public interface IYokaigoNinteikubunHenkoShinseishoMapper {
 

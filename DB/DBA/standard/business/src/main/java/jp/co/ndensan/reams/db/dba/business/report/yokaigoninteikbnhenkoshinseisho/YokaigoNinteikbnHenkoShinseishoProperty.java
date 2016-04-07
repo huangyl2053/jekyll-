@@ -12,8 +12,9 @@ import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.report.ReportPropertyBase;
 
 /**
- *
  * 要介護認定区分変更申請書のプロパティです。
+ *
+ * @reamsid_L DBA-0540-713 lishengli
  */
 public class YokaigoNinteikbnHenkoShinseishoProperty
         extends ReportPropertyBase<YokaigoNinteikbnHenkoShinseishoReportSource> {

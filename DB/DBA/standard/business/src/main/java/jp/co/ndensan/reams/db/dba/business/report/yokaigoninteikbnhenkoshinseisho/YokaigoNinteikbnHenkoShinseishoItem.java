@@ -9,8 +9,9 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 import lombok.Getter;
 
 /**
- *
  * 要介護認定区分変更申請書のITEMです。
+ *
+ * @reamsid_L DBA-0540-713 lishengli
  */
 @Getter
 @SuppressWarnings("PMD.UnusedPrivateField")
