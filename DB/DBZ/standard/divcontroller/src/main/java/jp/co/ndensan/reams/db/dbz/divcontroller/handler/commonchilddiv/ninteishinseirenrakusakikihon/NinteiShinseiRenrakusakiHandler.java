@@ -18,8 +18,9 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.binding.KeyValueDataSource;
 
 /**
- *
  * 認定申請連絡先Handlerクラスです。
+ * 
+ * @reamsid_L DBE-3000-080  suguangjun
  */
 public class NinteiShinseiRenrakusakiHandler {
 

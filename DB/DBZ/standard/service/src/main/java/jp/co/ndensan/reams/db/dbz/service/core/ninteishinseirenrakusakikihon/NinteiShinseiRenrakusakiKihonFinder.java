@@ -16,8 +16,9 @@ import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
 
 /**
- *
  * 認定申請連絡先のクラスです。
+ * 
+ * @reamsid_L DBE-3000-080  suguangjun 
  */
 public class NinteiShinseiRenrakusakiKihonFinder {
 
