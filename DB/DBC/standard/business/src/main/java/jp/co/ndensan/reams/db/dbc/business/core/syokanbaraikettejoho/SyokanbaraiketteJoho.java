@@ -12,6 +12,8 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
  * 償還払決定情報クラスです。
+ *
+ * @reamsid_L DBC-0950-010 zuotao
  */
 public class SyokanbaraiketteJoho {
 
