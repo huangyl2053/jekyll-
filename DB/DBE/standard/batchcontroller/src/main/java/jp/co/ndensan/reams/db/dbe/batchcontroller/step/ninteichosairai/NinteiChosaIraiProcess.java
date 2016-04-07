@@ -25,7 +25,9 @@ import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
 
 /**
  *
- * 認定調査依頼発行一覧表_バッチフ処理クラスです
+ * 認定調査依頼発行一覧表_バッチフ処理クラスです。
+ *
+ * @reamsid_L DBE-0080-160 duanzhanli
  */
 public class NinteiChosaIraiProcess extends BatchProcessBase<NinteiChosaIraiRelateEntity> {
 

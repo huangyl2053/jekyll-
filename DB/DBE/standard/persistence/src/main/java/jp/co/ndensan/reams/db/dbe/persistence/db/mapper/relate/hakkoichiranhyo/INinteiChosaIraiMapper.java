@@ -11,6 +11,8 @@ import jp.co.ndensan.reams.db.dbe.entity.db.relate.hakkoichiranhyo.NinteiChosaIr
 
 /**
  * 認定調査依頼発行一覧表のマッパーインタフェースです。
+ *
+ * @reamsid_L DBE-0080-160 duanzhanli
  */
 public interface INinteiChosaIraiMapper {
 

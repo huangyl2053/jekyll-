@@ -8,7 +8,9 @@ package jp.co.ndensan.reams.db.dbe.definition.batchprm.iraisho;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
- * 依頼書一括発行のパラメータクラス
+ * 依頼書一括発行のパラメータクラスです。
+ *
+ * @reamsid_L DBE-0080-160 duanzhanli
  */
 @lombok.Getter
 @lombok.Setter
