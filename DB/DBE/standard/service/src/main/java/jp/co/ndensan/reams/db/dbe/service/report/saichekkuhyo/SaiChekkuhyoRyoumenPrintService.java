@@ -16,6 +16,8 @@ import jp.co.ndensan.reams.uz.uza.report.SourceDataCollection;
 
 /**
  * 要介護認定調査票差異チェック票Printerです。
+ *
+ * @reamsid_L DBE-0080-060 xuyannan
  */
 public class SaiChekkuhyoRyoumenPrintService {
 

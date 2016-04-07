@@ -10,6 +10,8 @@ import lombok.Getter;
 
 /**
  * 要介護認定調査票（概況調査）のItemです。
+ *
+ * @reamsid_L DBE-0080-030 xuyannan
  */
 @Getter
 @SuppressWarnings("PMD.UnusedPrivateField")

@@ -9,6 +9,8 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
  * 主治医医療機関＆主治医情報検索パラメータークラス
+ *
+ * @reamsid_L DBE-1300-130 xuyannan
  */
 @lombok.Getter
 @SuppressWarnings("PMD.UnusedPrivateField")

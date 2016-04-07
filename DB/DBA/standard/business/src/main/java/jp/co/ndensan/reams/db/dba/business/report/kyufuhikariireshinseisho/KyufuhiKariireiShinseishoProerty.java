@@ -12,6 +12,8 @@ import jp.co.ndensan.reams.uz.uza.report.ReportPropertyBase;
 
 /**
  * 介護保険給付費借入申請書のプロパティです。
+ *
+ * @reamsid_L DBA-0540-708 xuyannan
  */
 public class KyufuhiKariireiShinseishoProerty extends ReportPropertyBase<KyufuhiKariireiShinseishoReportSource> {
 

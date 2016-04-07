@@ -10,6 +10,8 @@ import lombok.Getter;
 
 /**
  * 介護保険料徴収猶予申請書のEntityリストです。
+ *
+ * @reamsid_L DBA-0540-693 xuyannan
  */
 @Getter
 @SuppressWarnings("PMD.UnusedPrivateField")

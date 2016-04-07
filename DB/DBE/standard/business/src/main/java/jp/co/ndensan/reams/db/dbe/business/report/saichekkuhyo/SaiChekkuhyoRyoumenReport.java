@@ -12,6 +12,8 @@ import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
 
 /**
  * 要介護認定調査票差異チェック票のReportです。
+ *
+ * @reamsid_L DBE-0080-060 xuyannan
  */
 public class SaiChekkuhyoRyoumenReport extends Report<SaiChekkuhyoReportSource> {
 

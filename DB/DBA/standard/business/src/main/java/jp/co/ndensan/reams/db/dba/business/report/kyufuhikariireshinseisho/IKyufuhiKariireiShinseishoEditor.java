@@ -10,6 +10,8 @@ import jp.co.ndensan.reams.uz.uza.report.IReportEditor;
 
 /**
  * 介護保険給付費借入申請書エディターのインターフェースクラスです。
+ *
+ * @reamsid_L DBA-0540-708 xuyannan
  */
 public interface IKyufuhiKariireiShinseishoEditor extends IReportEditor<KyufuhiKariireiShinseishoReportSource> {
 

@@ -10,6 +10,8 @@ import jp.co.ndensan.reams.uz.uza.report.IReportBuilder;
 
 /**
  * 介護保険償還払受領委任払申請書Builderのインターフェースクラスです。
+ *
+ * @reamsid_L DBA-0540-707 xuyannan
  */
 public interface IShokanharaiJuryoIninShinseishoBuilder extends
         IReportBuilder<ShokanharaiJuryoIninShinseishoReportSource> {

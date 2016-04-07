@@ -31,6 +31,8 @@ import jp.co.ndensan.reams.uz.uza.util.Models;
 
 /**
  * 認定調査スケジュール登録7のコントローラです。
+ *
+ * @reamsid_L DBE-0023-010 xuyannan
  */
 public class NinteiChosaSchedule7Main {
 

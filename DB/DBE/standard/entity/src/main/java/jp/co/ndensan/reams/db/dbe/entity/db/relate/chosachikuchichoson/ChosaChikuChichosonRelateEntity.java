@@ -9,6 +9,8 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
  * 調査地区市町村情報を定義したEntityクラスです。
+ *
+ * @reamsid_L DBE-0023-010 xuyannan
  */
 @SuppressWarnings("PMD.UnusedPrivateField")
 @lombok.Getter

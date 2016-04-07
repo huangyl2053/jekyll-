@@ -12,6 +12,8 @@ import jp.co.ndensan.reams.uz.uza.report.ReportPropertyBase;
 
 /**
  * 介護認定審査会スケジュール表かがみのプロパティです。
+ *
+ * @reamsid_L DBE-0130-080 xuyannan
  */
 public class ShinsaschedulekagamiProperty extends ReportPropertyBase<ShinsaschedulekagamiReportSource> {
 

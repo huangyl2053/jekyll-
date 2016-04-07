@@ -10,6 +10,8 @@ import jp.co.ndensan.reams.uz.uza.report.IReportBuilder;
 
 /**
  * 要介護認定調査票（特記事項）Builderのインターフェースクラスです。
+ *
+ * @reamsid_L DBE-0080-040 xuyannan
  */
 public interface IChosahyoTokkijikoBuilder extends IReportBuilder<ChosahyoTokkijikoReportSource> {
 

@@ -6,6 +6,8 @@ import jp.co.ndensan.reams.uz.uza.report.source.ReportItem;
 
 /**
  * 介護保険償還払受領委任払申請書のReportSource
+ *
+ * @reamsid_L DBA-0540-707 xuyannan
  */
 public class ShokanharaiJuryoIninShinseishoReportSource implements IReportSource {
 // <editor-fold defaultstate="collapsed" desc="Generated Code">
