@@ -5,6 +5,8 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.IDialogDiv;
 
 /*
  * このコードはツールによって生成されました。
+ * 
+ * @reamsid_L DBA-0070-010 chengsanyuan
  */
 public interface IServiceTypeCommonChildDiv extends ICommonChildDivBaseProperties, IDialogDiv {
 

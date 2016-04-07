@@ -20,6 +20,7 @@ import jp.co.ndensan.reams.uz.uza.util.db.SearchResult;
  *
  * サービス種類検索のコントローラです。
  *
+ * @reamsid_L DBA-0070-010 chengsanyuan
  */
 public class ServiceTypeInputCommonChildDiv {
 

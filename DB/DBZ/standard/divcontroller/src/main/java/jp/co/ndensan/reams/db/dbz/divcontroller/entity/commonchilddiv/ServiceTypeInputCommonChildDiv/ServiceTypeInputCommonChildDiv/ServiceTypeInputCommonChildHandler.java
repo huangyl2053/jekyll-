@@ -12,6 +12,7 @@ import jp.co.ndensan.reams.db.dbx.business.core.kaigoserviceshurui.kaigoservices
  *
  * サービス種類検索の抽象Handlerクラスです。
  *
+ * @reamsid_L DBA-0070-010 chengsanyuan
  */
 public class ServiceTypeInputCommonChildHandler {
 
