@@ -7,15 +7,18 @@ package jp.co.ndensan.reams.db.dbu.divcontroller.entity.parentdiv.DBU0020091;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import jp.co.ndensan.reams.uz.uza.ui.binding.*;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
+import jp.co.ndensan.reams.uz.uza.ui.binding.TextBox;
+import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxDate;
+import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxNum;
 
 /**
- * pnlMain のクラスファイル 
- * 
- * @author 自動生成
+ * pnlMain のクラスファイル
+ *
+ * @reamsid_L DBU-1100-080 lijunjun
  */
 public class pnlMainDiv extends Panel {
+
     // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-01-15_09-59-03">
     /*
      * [ private の作成 ]
@@ -159,7 +162,7 @@ public class pnlMainDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setTbp1(tbp1Div tbp1) {
+    public void setTbp1(tbp1Div tbp1) {
         this.getPnlServive1().getPnlDaiyon().setTbp1(tbp1);
     }
 
@@ -199,7 +202,7 @@ public class pnlMainDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setTbp2(tbp2Div tbp2) {
+    public void setTbp2(tbp2Div tbp2) {
         this.getPnlServive1().getPnlDaisan().setTbp2(tbp2);
     }
 
@@ -239,7 +242,7 @@ public class pnlMainDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setTbp3(tbp3Div tbp3) {
+    public void setTbp3(tbp3Div tbp3) {
         this.getPnlServive1().getPnlDaini().setTbp3(tbp3);
     }
 
@@ -279,7 +282,7 @@ public class pnlMainDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setTbp4(tbp4Div tbp4) {
+    public void setTbp4(tbp4Div tbp4) {
         this.getPnlServive1().getPnlDaiitu().setTbp4(tbp4);
     }
 
@@ -319,7 +322,7 @@ public class pnlMainDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setTbp5(tbp5Div tbp5) {
+    public void setTbp5(tbp5Div tbp5) {
         this.getPnlServive1().getPnlGokei().setTbp5(tbp5);
     }
 
@@ -359,7 +362,7 @@ public class pnlMainDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setTbp6(tbp6Div tbp6) {
+    public void setTbp6(tbp6Div tbp6) {
         this.getPnlServive1().getPnlSaikeiDaisan().setTbp6(tbp6);
     }
 
@@ -399,7 +402,7 @@ public class pnlMainDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setTbp7(tbp7Div tbp7) {
+    public void setTbp7(tbp7Div tbp7) {
         this.getPnlServive1().getPnlSaikeiDaini().setTbp7(tbp7);
     }
 
@@ -439,7 +442,7 @@ public class pnlMainDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setTbpA(tbpADiv tbpA) {
+    public void setTbpA(tbpADiv tbpA) {
         this.getPnlService2().getPnlA().setTbpA(tbpA);
     }
 
@@ -459,7 +462,7 @@ public class pnlMainDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setTbpI(tbpIDiv tbpI) {
+    public void setTbpI(tbpIDiv tbpI) {
         this.getPnlService2().getPnlI().setTbpI(tbpI);
     }
 
@@ -479,7 +482,7 @@ public class pnlMainDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setTbpU(tbpUDiv tbpU) {
+    public void setTbpU(tbpUDiv tbpU) {
         this.getPnlService2().getPnlU().setTbpU(tbpU);
     }
 
@@ -499,7 +502,7 @@ public class pnlMainDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setTbpE(tbpEDiv tbpE) {
+    public void setTbpE(tbpEDiv tbpE) {
         this.getPnlService2().getPnlE().setTbpE(tbpE);
     }
 
@@ -519,7 +522,7 @@ public class pnlMainDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setTbpO(tbpODiv tbpO) {
+    public void setTbpO(tbpODiv tbpO) {
         this.getPnlService2().getPnlO().setTbpO(tbpO);
     }
 

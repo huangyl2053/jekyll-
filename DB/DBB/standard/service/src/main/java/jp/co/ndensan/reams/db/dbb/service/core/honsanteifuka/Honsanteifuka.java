@@ -276,10 +276,19 @@ public class Honsanteifuka {
         List<BatchTyouhyouResult> resultList = new ArrayList<>();
         for (TyouhyouParameter parameter : parameterList) {
             if (特徴開始通知書_帳票分類ID.equals(parameter.get帳票分類ID())) {
-                resultList.add(get特徴開始通知書_帳票ID(parameter));
+                BatchTyouhyouResult 特徴開始通知書_帳票ID = get特徴開始通知書_帳票ID(parameter);
+                if (特徴開始通知書_帳票ID != null) {
+                    resultList.add(特徴開始通知書_帳票ID);
+                }
             } else if (決定変更通知書_帳票分類ID.equals(parameter.get帳票分類ID())) {
-                resultList.add(get決定通知書_帳票ID(調定年度, parameter));
-                resultList.add(get変更通知書_帳票ID(調定年度, parameter));
+                BatchTyouhyouResult 決定通知書_帳票ID = get決定通知書_帳票ID(調定年度, parameter);
+                if (決定通知書_帳票ID != null) {
+                    resultList.add(決定通知書_帳票ID);
+                }
+                BatchTyouhyouResult 変更通知書_帳票ID = get変更通知書_帳票ID(調定年度, parameter);
+                if (変更通知書_帳票ID != null) {
+                    resultList.add(変更通知書_帳票ID);
+                }
             } else if (納入通知書_帳票分類ID.equals(parameter.get帳票分類ID())) {
                 BatchTyouhyouEntity 納入通知書 = get納入通知書_帳票ID(調定年度, 算定期, parameter);
                 if (納入通知書 == null) {
@@ -604,7 +613,7 @@ public class Honsanteifuka {
         List<BatchTyouhyouResult> resultList
                 = getChohyoID(parameter.get調定年度(), parameter.get算定期(), parameter.get出力帳票一覧List());
         List<HonsanteifukaBatchTyouhyou> honsanteifukaBatchTyouhyouList = new ArrayList<>();
-        if (resultList != null && !resultList.isEmpty()) {
+        if (resultList == null || resultList.isEmpty()) {
             return null;
         }
         for (BatchTyouhyouResult result : resultList) {

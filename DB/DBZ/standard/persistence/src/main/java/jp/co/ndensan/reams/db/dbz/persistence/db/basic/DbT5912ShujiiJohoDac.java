@@ -25,6 +25,8 @@ import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
 
 /**
  * 主治医情報のデータアクセスクラスです。
+ *
+ * @reamsid_L DBZ-9999-021 chengsanyuan
  */
 public class DbT5912ShujiiJohoDac implements ISaveable<DbT5912ShujiiJohoEntity> {
 

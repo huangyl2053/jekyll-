@@ -10,6 +10,8 @@ import jp.co.ndensan.reams.uz.uza.report.ReportEditorJoiner;
 
 /**
  * 要介護認定調査票（基本調査）のBuilderクラスです。
+ *
+ * @reamsid_L DBE-0080-020 zuotao
  */
 public class ChosahyoKihonchosaKatamenBuilder implements IChosahyoKihonchosaKatamenBuilder {
 

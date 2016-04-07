@@ -43,6 +43,8 @@ import jp.co.ndensan.reams.uz.uza.util.db.SearchResult;
 
 /**
  * 主治医意見書登録のコントローラです。
+ *
+ * @reamsid_L DBE-0070-010 chengsanyuan
  */
 public class ShujiiIkenshoToroku {
 

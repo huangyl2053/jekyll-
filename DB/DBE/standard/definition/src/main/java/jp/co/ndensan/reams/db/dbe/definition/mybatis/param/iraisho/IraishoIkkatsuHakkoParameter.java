@@ -13,6 +13,8 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
  * 依頼書一括発行のパラメータクラス
+ *
+ * @reamsid_L DBE-0080-010 duanzhanli
  */
 @lombok.Getter
 @SuppressWarnings("PMD.UnusedPrivateField")

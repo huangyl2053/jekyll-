@@ -32,6 +32,8 @@ import jp.co.ndensan.reams.uz.uza.lang.Separator;
 
 /**
  * 前回認定調査結果との比較表Editorです。
+ *
+ * @reamsid_L DBE-0080-120 duanzhanli
  */
 class ChosahyoSaiCheckhyoEditor implements IChosahyoSaiCheckhyoEditor {
 

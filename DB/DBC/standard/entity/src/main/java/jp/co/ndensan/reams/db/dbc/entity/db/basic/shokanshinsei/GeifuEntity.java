@@ -15,10 +15,11 @@ import lombok.Setter;
 /**
  * 給付実績編集汎用Entityのクラス
  *
- * @author 李俊俊
+ * @reamsid_L DBC-0992-170 lijunjun
  */
 @Getter
 @Setter
+@SuppressWarnings("PMD.UnusedPrivateField")
 public class GeifuEntity {
 
     ShikibetsuCode shikibetsuCode;

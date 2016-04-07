@@ -36,6 +36,8 @@ import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
 
 /**
  * 賦課エラー一覧のデータアクセスクラスです。
+ *
+ * @reamsid_L DBB-9999-021 zuotao
  */
 public class DbT2010FukaErrorListDac implements ISaveable<DbT2010FukaErrorListEntity> {
 

@@ -11,6 +11,8 @@ import jp.co.ndensan.reams.uz.uza.report.source.ReportItem;
 
 /**
  * 住宅改修事前申請承認結果通知書のReportSourceです。
+ *
+ * @reamsid_L DBC-0990-100 zuotao
  */
 public class JutakukaishuJizenShinseiShoninKekkaTsuchishoReportSource implements IReportSource {
 // <editor-fold defaultstate="collapsed" desc="Generated Code">

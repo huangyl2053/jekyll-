@@ -16,6 +16,8 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 /**
  *
  * 保険料納入通知書（仮算定）【ブックタイプ】納付書 HokenryoNonyuTsuchishoBookNofushoEditor
+ *
+ * @reamsid_L DBB-9110-040 wangjie2
  */
 public class HokenryoNonyuTsuchishoBookNofushoEditor implements IHokenryoNonyuTsuchishoBookNofushoEditor {
 
@@ -58,7 +60,6 @@ public class HokenryoNonyuTsuchishoBookNofushoEditor implements IHokenryoNonyuTs
         edit印字位置4(source);
         edit印字位置5(source);
         source.eRenban = RString.EMPTY;
-        //フレームワーク(帳票基盤）が計算したpageCountを設定
         source.ePage = null;
         source.eHokensyaName = new RString(仮算定納入通知書情報.get編集後仮算定通知書共通情報().get保険者名().getText());
         return source;

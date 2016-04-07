@@ -14,6 +14,8 @@ import lombok.Setter;
 
 /**
  * 介護認定資格情報RelateEntityクラスです。
+ *
+ * @reamsid_L DBE-1300-060 lizhuoxuan
  */
 @SuppressWarnings("PMD.UnusedPrivateField")
 @Getter

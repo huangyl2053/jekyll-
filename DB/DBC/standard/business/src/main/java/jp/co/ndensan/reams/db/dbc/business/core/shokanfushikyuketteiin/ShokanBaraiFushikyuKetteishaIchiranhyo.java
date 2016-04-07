@@ -26,7 +26,6 @@ public class ShokanBaraiFushikyuKetteishaIchiranhyo {
 
     private static final RString PAGECOUNT_1 = new RString("1");
     private static final RString DATA_1 = new RString("該当データがありません");
-    private static final Boolean BOOLEAN_TRUE = true;
 
     private RString 印刷日時;
 
@@ -118,7 +117,7 @@ public class ShokanBaraiFushikyuKetteishaIchiranhyo {
                 entity.getGyoseiku(), サービス種類, entity.getSoshitsuYMD().wareki().eraType(EraType.KANJI_RYAKU).
                 firstYear(FirstYear.GAN_NEN).separator(Separator.PERIOD).fillType(FillType.BLANK).toDateString(),
                 entity.getBikoTwo(),
-                BOOLEAN_TRUE == entity.getIsUpdate() ? RString.EMPTY : new RString("*")
+                entity.getIsUpdate() ? RString.EMPTY : new RString("*")
         );
 
     }

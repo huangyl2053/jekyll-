@@ -10,6 +10,9 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 /**
  *
  * dgIryohokenIchiran_Row のクラスファイル。
+ *
+ * @reamsid_L DBA-0230-010 hezhenzhen
+ *
  */
 public class IryohokenRirekiCommonChildDivDate {
 

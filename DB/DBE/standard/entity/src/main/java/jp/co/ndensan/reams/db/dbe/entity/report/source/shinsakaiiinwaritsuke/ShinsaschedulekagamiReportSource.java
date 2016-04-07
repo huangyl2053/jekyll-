@@ -6,6 +6,8 @@ import jp.co.ndensan.reams.uz.uza.report.source.ReportItem;
 
 /**
  * 介護認定審査会スケジュール表かがみのReportSourceです。
+ *
+ * @reamsid_L DBE-0130-080 xuyannan
  */
 public class ShinsaschedulekagamiReportSource implements IReportSource {
     //TODO 業務に合わせてパスを変更してください

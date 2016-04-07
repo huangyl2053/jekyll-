@@ -9,6 +9,8 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 /**
  *
  * 主治医意見書登録のビジネスクラスです
+ *
+ * @reamsid_L DBE-0070-010 chengsanyuan
  */
 public class ShujiiIkenshoTorokuResult {
 

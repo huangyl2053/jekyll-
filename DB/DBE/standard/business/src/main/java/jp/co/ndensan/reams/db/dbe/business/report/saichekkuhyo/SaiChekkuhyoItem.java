@@ -10,6 +10,8 @@ import lombok.Getter;
 
 /**
  * 要介護認定調査票差異チェック票パラメータクラスです。
+ *
+ * @reamsid_L DBE-0080-060 xuyannan
  */
 @Getter
 @SuppressWarnings("PMD.UnusedPrivateField")

@@ -10,6 +10,8 @@ import jp.co.ndensan.reams.uz.uza.report.IReportEditor;
 
 /**
  * 主治医意見書作成依頼発行一覧表ヘッダエディターのインターフェースクラスです。
+ *
+ * @reamsid_L DBE-0080-100 lizhuoxuan
  */
 interface ISyujiyikenshosakuseyiraihakouEditor extends IReportEditor<IkenshoSakuseiIraiHakkoIchiranhyoReportSource> {
 

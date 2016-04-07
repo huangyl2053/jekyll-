@@ -21,6 +21,8 @@ import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 /**
  * 他市町村住所地特例者管理を管理するクラスです。
  *
+ * @reamsid_L DBA-0400-050 hezhenzhen
+ *
  */
 public class TaJushochiTokureisyaKanriManager {
 

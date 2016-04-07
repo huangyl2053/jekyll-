@@ -11,6 +11,8 @@ import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5912ShujiiJohoEntity;
 
 /**
  * 主治医意見書登録RelateEntityクラスです。
+ *
+ * @reamsid_L DBE-0070-010 chengsanyuan
  */
 @lombok.Getter
 @lombok.Setter

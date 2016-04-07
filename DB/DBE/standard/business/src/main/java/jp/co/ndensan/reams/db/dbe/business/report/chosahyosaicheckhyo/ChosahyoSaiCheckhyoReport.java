@@ -12,6 +12,8 @@ import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
 
 /**
  * 前回認定調査結果との比較表のReportです。
+ *
+ * @reamsid_L DBE-0080-120 duanzhanli
  */
 public final class ChosahyoSaiCheckhyoReport extends Report<ChosahyoSaiCheckhyoReportSource> {
 

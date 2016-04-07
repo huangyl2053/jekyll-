@@ -11,6 +11,8 @@ import jp.co.ndensan.reams.uz.uza.report.ReportEditorJoiner;
 /**
  * 主治医意見書督促対象者一覧表Builderのインターフェースクラスです。
  *
+ * @reamsid_L DBE-0060-030 hezhenzhen
+ *
  */
 class NinteiChosaTokusokuTaishoshaIchiranhyoBulider implements INinteiChosaTokusokuTaishoshaIchiranhyoBuilder {
 

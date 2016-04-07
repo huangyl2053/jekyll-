@@ -19,6 +19,8 @@ import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
 /**
  * 医療保険履歴のクラスです。
  *
+ * @reamsid_L DBA-0230-020 hezhenzhen
+ *
  */
 public class IryohokenKanyuJokyoManager {
 

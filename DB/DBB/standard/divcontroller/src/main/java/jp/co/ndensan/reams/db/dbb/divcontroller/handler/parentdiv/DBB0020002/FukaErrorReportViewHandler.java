@@ -33,6 +33,8 @@ import jp.co.ndensan.reams.uz.uza.util.code.CodeMaster;
 
 /**
  * 賦課エラー一覧のHandlerクラスです。
+ *
+ * @reamsid_L DBB-0720-010 zuotao
  */
 public class FukaErrorReportViewHandler {
 

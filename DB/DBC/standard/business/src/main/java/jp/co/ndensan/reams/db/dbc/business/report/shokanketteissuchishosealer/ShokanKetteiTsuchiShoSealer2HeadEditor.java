@@ -10,6 +10,8 @@ import jp.co.ndensan.reams.db.dbc.entity.report.source.shokanketteitsuchishoseal
 /**
  * 償還払支給（不支給）決定通知書（ｼｰﾗﾀｲﾌﾟ2）のEditorです。
  *
+ * @reamsid_L DBC-1000-140 hezhenzhen
+ *
  */
 public class ShokanKetteiTsuchiShoSealer2HeadEditor implements IShokanKetteiTsuchiShoSealer2Editor {
 

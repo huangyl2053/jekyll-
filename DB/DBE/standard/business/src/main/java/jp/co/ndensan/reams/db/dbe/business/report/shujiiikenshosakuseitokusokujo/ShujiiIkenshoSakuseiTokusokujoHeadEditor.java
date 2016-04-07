@@ -15,6 +15,8 @@ import jp.co.ndensan.reams.uz.uza.lang.Separator;
 /**
  * 主治医意見書提出督促状のEditorです。
  *
+ * @reamsid_L DBE-0060-020 hezhenzhen
+ *
  */
 public class ShujiiIkenshoSakuseiTokusokujoHeadEditor implements IShujiiIkenshoSakuseiTokusokujoEditor {
 

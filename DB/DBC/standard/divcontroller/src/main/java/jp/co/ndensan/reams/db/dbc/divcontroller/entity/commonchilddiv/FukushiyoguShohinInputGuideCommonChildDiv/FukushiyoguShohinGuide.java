@@ -31,8 +31,9 @@ import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 import jp.co.ndensan.reams.uz.uza.util.serialization.DataPassingConverter;
 
 /**
- *
  * 福祉用具商品名入力ガイドの取得処理。
+ *
+ * @reamsid_L DBC-0970-020 lizhuoxuan
  */
 public class FukushiyoguShohinGuide {
 

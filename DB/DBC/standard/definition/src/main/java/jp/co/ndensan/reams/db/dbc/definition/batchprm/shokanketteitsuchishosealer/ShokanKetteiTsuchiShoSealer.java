@@ -10,7 +10,9 @@ import lombok.Getter;
 import lombok.Setter;
 
 /**
- * _償還払い支給（不支給）決定通知書の帳票用パラメータクラスです。
+ * 償還払い支給（不支給）決定通知書の帳票用パラメータクラスです。
+ *
+ * @reamsid_L DBC-1000-030 zuotao
  */
 @Getter
 @Setter

@@ -10,6 +10,8 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 /**
  *
  * 合議体情報一括作成のエラーメッセージを定義する列挙型です。
+ *
+ * @reamsid_L DBE-0090-020 chengsanyuan
  */
 public enum GogitaiJohoIkkatuSakuseiErrorMessage {
 

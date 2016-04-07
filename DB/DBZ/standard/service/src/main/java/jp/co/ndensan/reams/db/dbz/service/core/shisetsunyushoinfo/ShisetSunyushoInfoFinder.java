@@ -22,6 +22,8 @@ import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 /**
  * 施設入所情報取得です。
  *
+ * @reamsid_L DBE-3000-180 hezhenzhen
+ *
  */
 public class ShisetSunyushoInfoFinder {
 

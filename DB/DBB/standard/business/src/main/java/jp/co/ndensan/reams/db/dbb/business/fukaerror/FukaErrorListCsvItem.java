@@ -18,6 +18,8 @@ import jp.co.ndensan.reams.uz.uza.util.code.CodeMaster;
 
 /**
  * CSV出力のクラスです。
+ *
+ * @reamsid_L DBB-0720-010 zuotao
  */
 public class FukaErrorListCsvItem extends InternalReportItem implements IInternalReportItem {
 

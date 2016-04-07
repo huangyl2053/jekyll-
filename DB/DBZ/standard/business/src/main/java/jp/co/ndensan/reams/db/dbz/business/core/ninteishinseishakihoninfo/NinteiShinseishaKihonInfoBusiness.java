@@ -21,6 +21,8 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 /**
  * 認定申請者基本情報のBusinessクラスです。
  *
+ * @reamsid_L DBE-3000-190 hezhenzhen
+ *
  */
 public class NinteiShinseishaKihonInfoBusiness {
 

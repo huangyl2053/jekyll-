@@ -12,6 +12,8 @@ import jp.co.ndensan.reams.uz.uza.report.ReportPropertyBase;
 
 /**
  * 償還払い支給（不支給）決定通知書(支払予定日あり）のプロパティです。
+ *
+ * @reamsid_L DBC-1000-110 zuotao
  */
 public class ShokanKetteiTsuchiShoShiharaiYoteiBiYijiAriProperty
         extends ReportPropertyBase<ShokanKetteiTsuchiShoShiharaiYoteiBiYijiAriRepotSource> {

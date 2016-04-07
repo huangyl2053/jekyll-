@@ -10,6 +10,8 @@ import lombok.Getter;
 
 /**
  * 償還払支給（不支給）決定通知書（受領委任払い・被保険者用）のITEMです。
+ *
+ * @reamsid_L DBC-1000-120 zuotao
  */
 @Getter
 @SuppressWarnings("PMD.UnusedPrivateField")

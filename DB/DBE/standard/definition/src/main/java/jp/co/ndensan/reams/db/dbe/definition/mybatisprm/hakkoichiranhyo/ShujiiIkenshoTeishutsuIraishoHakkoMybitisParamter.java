@@ -14,6 +14,8 @@ import lombok.Getter;
 
 /**
  * 主治医意見書提出依頼書発行ですためのMyBatis用パラメータクラスです。
+ *
+ * @reamsid_L DBE-0080-130 duanzhanli
  */
 @SuppressWarnings("PMD.UnusedPrivateField")
 @Getter

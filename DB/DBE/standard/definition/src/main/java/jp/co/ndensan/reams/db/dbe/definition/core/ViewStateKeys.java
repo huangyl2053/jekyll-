@@ -7,6 +7,8 @@ package jp.co.ndensan.reams.db.dbe.definition.core;
 
 /**
  * ViewState用検索キーです。
+ *
+ * @reamsid_L DBE-9999-021 chengsanyuan
  */
 public enum ViewStateKeys {
 

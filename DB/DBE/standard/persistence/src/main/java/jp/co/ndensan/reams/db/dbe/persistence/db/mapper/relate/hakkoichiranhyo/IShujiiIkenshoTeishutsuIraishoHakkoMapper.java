@@ -12,6 +12,8 @@ import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5301ShujiiIkenshoIraiJohoEn
 
 /**
  * 主治医意見書提出依頼書発行のマッパーインタフェースです。
+ *
+ * @reamsid_L DBE-0080-130 duanzhanli
  */
 public interface IShujiiIkenshoTeishutsuIraishoHakkoMapper {
 

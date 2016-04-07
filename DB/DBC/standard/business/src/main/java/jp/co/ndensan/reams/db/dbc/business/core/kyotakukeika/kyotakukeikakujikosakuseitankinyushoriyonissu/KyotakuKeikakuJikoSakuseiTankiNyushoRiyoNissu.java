@@ -20,8 +20,8 @@ import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 /**
  * 居宅給付計画自己作成短期入所利用日数を管理するクラスです。
  */
-public class KyotakuKeikakuJikoSakuseiTankiNyushoRiyoNissu extends ModelBase<
-        KyotakuKeikakuJikoSakuseiTankiNyushoRiyoNissuIdentifier, DbT3010KyotakuKeikakuJikoSakuseiTankiNyushoRiyoNissuEntity, KyotakuKeikakuJikoSakuseiTankiNyushoRiyoNissu>
+public class KyotakuKeikakuJikoSakuseiTankiNyushoRiyoNissu extends
+        ModelBase<KyotakuKeikakuJikoSakuseiTankiNyushoRiyoNissuIdentifier, DbT3010KyotakuKeikakuJikoSakuseiTankiNyushoRiyoNissuEntity, KyotakuKeikakuJikoSakuseiTankiNyushoRiyoNissu>
         implements Serializable {
 
     private final DbT3010KyotakuKeikakuJikoSakuseiTankiNyushoRiyoNissuEntity entity;

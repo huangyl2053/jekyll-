@@ -13,6 +13,8 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
  * 合議体情報作成RelateEntityクラスです。
+ *
+ * @reamsid_L DBE-0090-010 chengsanyuan
  */
 @lombok.Getter
 @lombok.Setter

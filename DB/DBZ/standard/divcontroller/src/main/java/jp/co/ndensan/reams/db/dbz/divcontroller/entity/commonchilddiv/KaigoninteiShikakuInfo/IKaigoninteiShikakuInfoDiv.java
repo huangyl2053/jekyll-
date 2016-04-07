@@ -3,8 +3,10 @@ package jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.Kaigonint
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.binding.ICommonChildDivBaseProperties;
 
-/*
+/**
  * このコードはツールによって生成されました。
+ *
+ * @reamsid_L DBE-1300-060 lizhuoxuan
  */
 public interface IKaigoninteiShikakuInfoDiv extends ICommonChildDivBaseProperties {
 

@@ -6,6 +6,8 @@ import jp.co.ndensan.reams.uz.uza.report.source.ReportItem;
 
 /**
  * 介護保険給付費借入申請書のReportSource
+ *
+ * @reamsid_L DBA-0540-708 xuyannan
  */
 public class KyufuhiKariireiShinseishoReportSource implements IReportSource {
 // <editor-fold defaultstate="collapsed" desc="Generated Code">

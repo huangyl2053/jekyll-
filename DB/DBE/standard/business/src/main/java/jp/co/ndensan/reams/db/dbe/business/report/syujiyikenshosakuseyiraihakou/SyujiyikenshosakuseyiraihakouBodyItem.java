@@ -11,6 +11,8 @@ import lombok.Setter;
 
 /**
  * 主治医意見書作成依頼発行一覧表ボディのITEMです。
+ *
+ * @reamsid_L DBE-0080-100 lizhuoxuan
  */
 @Getter
 @Setter

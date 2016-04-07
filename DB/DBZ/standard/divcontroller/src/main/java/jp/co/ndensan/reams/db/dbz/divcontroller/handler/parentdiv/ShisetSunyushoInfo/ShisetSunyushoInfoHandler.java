@@ -13,7 +13,9 @@ import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
- * 施設入所情報のダイアログのDivControllerです
+ * 施設入所情報のダイアログのDivControllerです。
+ *
+ * @reamsid_L DBE-3000-180 hezhenzhen
  *
  */
 public class ShisetSunyushoInfoHandler {

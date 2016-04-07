@@ -36,6 +36,8 @@ import jp.co.ndensan.reams.uz.uza.util.code.entity.UzT0007CodeEntity;
 
 /**
  * 認定調査スケジュール登録1の取得処理。
+ *
+ * @reamsid_L DBE-0020-010 lizhuoxuan
  */
 public class NinteiChosaScheduleHandler {
 

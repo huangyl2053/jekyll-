@@ -10,6 +10,8 @@ import jp.co.ndensan.reams.uz.uza.report.IReportBuilder;
 
 /**
  * 住宅改修事前申請承認結果通知書Builderのインターフェースクラスです。
+ *
+ * @reamsid_L DBC-0990-100 zuotao
  */
 public interface IJutakukaishuJizenShinseiShoninKekkaTsuchishoBuilder
         extends IReportBuilder<JutakukaishuJizenShinseiShoninKekkaTsuchishoReportSource> {

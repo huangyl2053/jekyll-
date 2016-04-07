@@ -167,7 +167,7 @@ public class ShichosonTokubetuKyufuService extends
      *
      * @return 市町村特別給付用給付率引下有フラグ
      */
-    public boolean get市町村特別給付用給付率引下有フラグ() {
+    public boolean is市町村特別給付用給付率引下有フラグ() {
         return entity.getKyufuritsuHikisageAriFlag();
     }
 

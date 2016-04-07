@@ -17,6 +17,8 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
 
 /**
  * 共有子Div「ShinsakaiJohoKojin」の抽象ValidationHandlerクラスです。
+ *
+ * @reamsid_L DBE-3000-070 zhengshukai
  */
 public class ShinsakaiJohoKojinValidationHandler {
 

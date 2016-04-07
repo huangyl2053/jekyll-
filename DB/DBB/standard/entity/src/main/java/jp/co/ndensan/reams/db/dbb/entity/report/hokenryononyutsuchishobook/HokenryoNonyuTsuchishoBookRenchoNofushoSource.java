@@ -1,10 +1,15 @@
-// TODO: 業務に合わせてパスを変更してください
 package jp.co.ndensan.reams.db.dbb.entity.report.hokenryononyutsuchishobook;
 
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.report.IReportSource;
 import jp.co.ndensan.reams.uz.uza.report.source.ReportItem;
 
+/**
+ *
+ * 保険料納入通知書（仮算定）【ブックタイプ】納付書連帳帳票Sourceです。
+ *
+ * @reamsid_L DBB-9110-040 wangjie2
+ */
 public class HokenryoNonyuTsuchishoBookRenchoNofushoSource implements IReportSource {
 // <editor-fold defaultstate="collapsed" desc="Generated Code">
 

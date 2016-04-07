@@ -12,6 +12,8 @@ import jp.co.ndensan.reams.uz.uza.util.db.IDbAccessable;
 
 /**
  * 開催結果情報と開催場所情報のRelateEntityクラスです。
+ *
+ * @reamsid_L DBE-3000-070 zhengshukai
  */
 @lombok.Getter
 @lombok.Setter

@@ -12,6 +12,8 @@ import jp.co.ndensan.reams.uz.uza.report.ReportPropertyBase;
 
 /**
  * 介護保険料徴収猶予申請書のプロパティです。
+ *
+ * @reamsid_L DBA-0540-693 xuyannan
  */
 public class HokenryoGenmenChoshuYoyuShinseishoProerty extends
         ReportPropertyBase<HokenryoGenmenChoshuYoyuShinseishoReportSource> {

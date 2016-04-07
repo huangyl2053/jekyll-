@@ -37,6 +37,8 @@ import jp.co.ndensan.reams.uz.uza.workflow.parameter.FlowParameterAccessor;
 
 /**
  * 賦課エラー修正画面の、エラー一覧を表示するパネルについての処理を行うクラスです。
+ *
+ * @reamsid_L DBB-0720-010 zuotao
  */
 @SuppressWarnings("checkstyle:illegaltoken")
 public class FukaErrorReportView {

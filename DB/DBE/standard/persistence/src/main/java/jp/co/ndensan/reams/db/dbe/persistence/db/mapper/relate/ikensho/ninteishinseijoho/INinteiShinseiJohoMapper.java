@@ -10,6 +10,8 @@ import jp.co.ndensan.reams.db.dbe.entity.db.relate.ikensho.ninteishinseijoho.Nin
 
 /**
  * 要介護認定申請情報のマッパーインタフェースです。
+ *
+ * @reamsid_L DBE-9999-011 chengsanyuan
  */
 public interface INinteiShinseiJohoMapper {
 

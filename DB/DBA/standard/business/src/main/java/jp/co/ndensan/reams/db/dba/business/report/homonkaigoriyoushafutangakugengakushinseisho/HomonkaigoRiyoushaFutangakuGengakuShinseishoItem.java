@@ -11,6 +11,7 @@ import lombok.Getter;
 /**
  * 訪問介護利用者負担額減額申請書Entityリストです。
  *
+ * @reamsid_L DBA-0540-701 zhengshukai
  */
 @Getter
 @SuppressWarnings("PMD.UnusedPrivateField")

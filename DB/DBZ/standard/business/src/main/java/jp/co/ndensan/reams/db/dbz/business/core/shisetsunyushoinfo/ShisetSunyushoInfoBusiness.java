@@ -15,6 +15,8 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 /**
  * 施設入所情報マスタを取得クラスです。
  *
+ * @reamsid_L DBE-3000-180 hezhenzhen
+ *
  */
 public class ShisetSunyushoInfoBusiness {
 

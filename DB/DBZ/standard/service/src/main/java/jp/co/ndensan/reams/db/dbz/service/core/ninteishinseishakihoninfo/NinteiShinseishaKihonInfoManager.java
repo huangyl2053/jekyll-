@@ -18,6 +18,8 @@ import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 /**
  * 認定申請者基本情報取得です。
  *
+ * @reamsid_L DBE-3000-190 hezhenzhen
+ *
  */
 public class NinteiShinseishaKihonInfoManager {
 

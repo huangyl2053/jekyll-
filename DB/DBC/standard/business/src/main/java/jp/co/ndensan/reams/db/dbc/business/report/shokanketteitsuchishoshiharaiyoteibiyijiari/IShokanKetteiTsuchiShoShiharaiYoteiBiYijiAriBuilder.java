@@ -10,6 +10,8 @@ import jp.co.ndensan.reams.uz.uza.report.IReportBuilder;
 
 /**
  * 償還払い支給（不支給）決定通知書(支払予定日あり）Builderのインターフェースクラスです。
+ *
+ * @reamsid_L DBC-1000-110 zuotao
  */
 public interface IShokanKetteiTsuchiShoShiharaiYoteiBiYijiAriBuilder
         extends IReportBuilder<ShokanKetteiTsuchiShoShiharaiYoteiBiYijiAriRepotSource> {

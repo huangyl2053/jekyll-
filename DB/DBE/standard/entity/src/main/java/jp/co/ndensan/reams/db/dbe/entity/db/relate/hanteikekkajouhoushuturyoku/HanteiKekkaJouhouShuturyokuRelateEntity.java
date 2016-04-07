@@ -11,6 +11,8 @@ import lombok.Setter;
 
 /**
  * 判定結果情報出力（保険者）RelateEntityクラスです。
+ *
+ * @reamsid_L DBE-0190-010 lizhuoxuan
  */
 @SuppressWarnings("PMD.UnusedPrivateField")
 @Getter

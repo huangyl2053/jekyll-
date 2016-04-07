@@ -11,14 +11,16 @@ import java.util.List;
 import jp.co.ndensan.reams.db.dbe.business.core.shinsakayijidouwaritsuke.ShinsaKayiJidouWaritsukeBusiness;
 import jp.co.ndensan.reams.db.dbe.definition.kaigoninteishinsakai.KaigoNinteiShinsakaiParameter;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.shinsakayijidouwaritsuke.ShinsaKayiJidouWaritsukeRelateEntity;
-import jp.co.ndensan.reams.db.dbe.persistence.db.util.MapperProvider;
 import jp.co.ndensan.reams.db.dbe.persistence.db.mapper.relate.shinsakayijidouwaritsuke.IShinsaKayiJidouWaritsukeMapper;
+import jp.co.ndensan.reams.db.dbe.persistence.db.util.MapperProvider;
 import jp.co.ndensan.reams.uz.uza.util.db.SearchResult;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
 
 /**
  * 審査会自動割付クラスです。
+ *
+ * @reamsid_L DBE-1350-030 lizhuoxuan
  */
 public class ShinsaKayiJidouWaritsukeFinder {
 
@@ -43,7 +45,8 @@ public class ShinsaKayiJidouWaritsukeFinder {
     /**
      * {@link InstanceProvider#create}にて生成した{@link ShinsaKayiJidouWaritsukeFinder}のインスタンスを返します。
      *
-     * @return {@link InstanceProvider#create}にて生成した{@link ShinsaKayiJidouWaritsukeFinder}のインスタンス
+     * @return
+     * {@link InstanceProvider#create}にて生成した{@link ShinsaKayiJidouWaritsukeFinder}のインスタンス
      */
     public static ShinsaKayiJidouWaritsukeFinder createInstance() {
         return InstanceProvider.create(ShinsaKayiJidouWaritsukeFinder.class);

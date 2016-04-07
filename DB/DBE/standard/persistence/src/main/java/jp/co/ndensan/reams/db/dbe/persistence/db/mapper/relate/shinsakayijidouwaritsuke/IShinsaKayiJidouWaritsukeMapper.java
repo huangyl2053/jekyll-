@@ -11,6 +11,8 @@ import jp.co.ndensan.reams.db.dbe.entity.db.relate.shinsakayijidouwaritsuke.Shin
 
 /**
  * 審査会自動割付のマッパーインタフェースです。
+ *
+ * @reamsid_L DBE-1350-030 lizhuoxuan
  */
 public interface IShinsaKayiJidouWaritsukeMapper {
 

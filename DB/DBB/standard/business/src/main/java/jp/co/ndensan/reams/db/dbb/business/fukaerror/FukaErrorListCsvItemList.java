@@ -16,6 +16,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 /**
  * 賦課エラー一覧情報CSVのリストクラスです。
  *
+ * @reamsid_L DBB-0720-010 zuotao
  */
 public class FukaErrorListCsvItemList implements Iterable<FukaErrorListCsvItem> {
 

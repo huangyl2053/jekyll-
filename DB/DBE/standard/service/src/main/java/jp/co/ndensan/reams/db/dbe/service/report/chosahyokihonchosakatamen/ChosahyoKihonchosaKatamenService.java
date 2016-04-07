@@ -17,6 +17,7 @@ import jp.co.ndensan.reams.uz.uza.report.SourceDataCollection;
 /**
  * 要介護認定調査票（基本調査）のPrinterです。
  *
+ * @reamsid_L DBE-0080-020 zuotao
  */
 public class ChosahyoKihonchosaKatamenService {
 

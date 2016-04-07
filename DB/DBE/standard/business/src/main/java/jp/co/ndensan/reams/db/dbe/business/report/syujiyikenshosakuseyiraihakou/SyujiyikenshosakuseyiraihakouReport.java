@@ -15,6 +15,8 @@ import lombok.NonNull;
 
 /**
  * 主治医意見書作成依頼発行一覧表のReportです。
+ *
+ * @reamsid_L DBE-0080-100 lizhuoxuan
  */
 public class SyujiyikenshosakuseyiraihakouReport extends Report<IkenshoSakuseiIraiHakkoIchiranhyoReportSource> {
 

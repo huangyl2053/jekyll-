@@ -13,6 +13,8 @@ import jp.co.ndensan.reams.uz.uza.report.ReportPropertyBase;
 /**
  * 主治医意見書督促対象者一覧表のプロパティです。
  *
+ * @reamsid_L DBE-0060-030 hezhenzhen
+ *
  */
 public class NinteiChosaTokusokuTaishoshaIchiranhyoProperty extends ReportPropertyBase<NinteiChosaTokusokuTaishoshaIchiranhyoReportSource> {
 

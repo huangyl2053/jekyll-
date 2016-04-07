@@ -13,6 +13,8 @@ import jp.co.ndensan.reams.uz.uza.batch.flow.IBatchFlowCommand;
 
 /**
  * 合議体情報一括作成_バッチフロークラスです
+ *
+ * @reamsid_L DBE-0090-020 chengsanyuan
  */
 public class GogitaiJohoSakuseiFlow extends BatchFlowBase<GogitaiJohoSakuseiBatchParamter> {
 

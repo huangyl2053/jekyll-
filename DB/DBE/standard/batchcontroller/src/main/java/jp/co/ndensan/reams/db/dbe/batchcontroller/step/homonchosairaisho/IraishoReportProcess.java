@@ -49,7 +49,9 @@ import jp.co.ndensan.reams.uz.uza.util.config.BusinessConfig;
 
 /**
  *
- * 帳票「DBE220001_認定調査依頼書」の処理クラスです
+ * 帳票「DBE220001_認定調査依頼書」の処理クラスです。
+ *
+ * @reamsid_L DBA-0401-140 duanzhanli
  */
 public class IraishoReportProcess extends BatchProcessBase<HomonChosaIraishoRelateEntity> {
 
@@ -212,9 +214,7 @@ public class IraishoReportProcess extends BatchProcessBase<HomonChosaIraishoRela
                 entity.get訪問調査先電話番号(),
                 entity.get認定申請年月日(),
                 set提出期限(entity),
-                通知文Map.get(2),
-                // TODO 内部QA785　Redmine#77454　帳票項目設定を変更したので、帳票設計書もあわせて変更
-                new RString(String.valueOf(連番++)));
+                通知文Map.get(2));
     }
 
     private RString set提出期限(HomonChosaIraishoRelateEntity entity) {

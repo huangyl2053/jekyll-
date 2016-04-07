@@ -11,6 +11,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 /**
  * 訪問介護利用者負担額減額申請書エディターです。
  *
+ * @reamsid_L DBA-0540-701 zhengshukai
  */
 public class HomonkaigoRiyoushaFutangakuGengakuShinseishoEditorImpl implements IHomonkaigoRiyoushaFutangakuGengakuShinseishoEditor {
 

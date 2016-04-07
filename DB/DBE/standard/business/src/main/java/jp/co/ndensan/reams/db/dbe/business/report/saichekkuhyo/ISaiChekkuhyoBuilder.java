@@ -10,6 +10,8 @@ import jp.co.ndensan.reams.uz.uza.report.IReportBuilder;
 
 /**
  * 要介護認定調査票差異チェック票Builderのインターフェースクラスです。
+ *
+ * @reamsid_L DBE-0080-060 xuyannan
  */
 public interface ISaiChekkuhyoBuilder extends IReportBuilder<SaiChekkuhyoReportSource> {
 

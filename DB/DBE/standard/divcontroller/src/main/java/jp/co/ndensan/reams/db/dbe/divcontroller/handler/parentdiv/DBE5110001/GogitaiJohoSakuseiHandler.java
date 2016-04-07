@@ -33,6 +33,7 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.CommonButtonHolder;
 /**
  * 合議体情報作成の抽象Handlerクラスです。
  *
+ * @reamsid_L DBE-0090-010 chengsanyuan
  */
 public class GogitaiJohoSakuseiHandler {
 

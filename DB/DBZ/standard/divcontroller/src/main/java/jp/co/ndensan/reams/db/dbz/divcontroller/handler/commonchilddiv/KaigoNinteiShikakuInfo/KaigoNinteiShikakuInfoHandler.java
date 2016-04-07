@@ -23,6 +23,8 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
  * 介護認定資格情報の取得するクラスです。
+ *
+ * @reamsid_L DBE-1300-060 lizhuoxuan
  */
 public class KaigoNinteiShikakuInfoHandler {
 

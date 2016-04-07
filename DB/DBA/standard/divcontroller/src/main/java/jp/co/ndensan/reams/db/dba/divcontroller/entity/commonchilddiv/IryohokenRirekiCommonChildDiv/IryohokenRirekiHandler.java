@@ -28,6 +28,8 @@ import jp.co.ndensan.reams.uz.uza.util.db.SearchResult;
 /**
  * 医療保険履歴のHandlerクラスです。
  *
+ * @reamsid_L DBA-0230-010 hezhenzhen
+ *
  */
 public class IryohokenRirekiHandler {
 

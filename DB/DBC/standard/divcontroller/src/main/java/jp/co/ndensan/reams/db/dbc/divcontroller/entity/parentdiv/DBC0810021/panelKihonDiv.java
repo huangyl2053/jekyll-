@@ -4,17 +4,25 @@ package jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0810021;
  * このファイルへの変更は、再生成時には損失するため
  * 不正な動作の原因になります。
  */
+
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import jp.co.ndensan.reams.uz.uza.ui.binding.*;
+import jp.co.ndensan.reams.uz.uza.ui.binding.Button;
+import jp.co.ndensan.reams.uz.uza.ui.binding.CheckBoxList;
+import jp.co.ndensan.reams.uz.uza.ui.binding.DropDownList;
+import jp.co.ndensan.reams.uz.uza.ui.binding.HorizontalLine;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
+import jp.co.ndensan.reams.uz.uza.ui.binding.TextBox;
+import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxCode;
+import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxNum;
 
 /**
- * panelKihon のクラスファイル 
- * 
- * @author 自動生成
+ * panelKihon のクラスファイル
+ *
+ * @reamsid_L DBC-1010-030 wangkanglei
  */
 public class panelKihonDiv extends Panel {
+
     // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2015-11-16_12-38-19">
     /*
      * [ private の作成 ]
@@ -118,7 +126,7 @@ public class panelKihonDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setDdlKeikakuSakuseiKubun(DropDownList ddlKeikakuSakuseiKubun) {
+    public void setDdlKeikakuSakuseiKubun(DropDownList ddlKeikakuSakuseiKubun) {
         this.getPanelKyotaku().setDdlKeikakuSakuseiKubun(ddlKeikakuSakuseiKubun);
     }
 
@@ -128,7 +136,7 @@ public class panelKihonDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setChkKyusochi(CheckBoxList chkKyusochi) {
+    public void setChkKyusochi(CheckBoxList chkKyusochi) {
         this.getPanelKyotaku().setChkKyusochi(chkKyusochi);
     }
 
@@ -138,7 +146,7 @@ public class panelKihonDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setTxtJigyosha(TextBoxCode txtJigyosha) {
+    public void setTxtJigyosha(TextBoxCode txtJigyosha) {
         this.getPanelKyotaku().setTxtJigyosha(txtJigyosha);
     }
 
@@ -148,7 +156,7 @@ public class panelKihonDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setBtnSearch(Button btnSearch) {
+    public void setBtnSearch(Button btnSearch) {
         this.getPanelKyotaku().setBtnSearch(btnSearch);
     }
 
@@ -158,7 +166,7 @@ public class panelKihonDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setTxtJigyoshaName(TextBox txtJigyoshaName) {
+    public void setTxtJigyoshaName(TextBox txtJigyoshaName) {
         this.getPanelKyotaku().setTxtJigyoshaName(txtJigyoshaName);
     }
 
@@ -168,7 +176,7 @@ public class panelKihonDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setTxtHokenKyufuritsu(TextBoxNum txtHokenKyufuritsu) {
+    public void setTxtHokenKyufuritsu(TextBoxNum txtHokenKyufuritsu) {
         this.getPanelKyotaku().setTxtHokenKyufuritsu(txtHokenKyufuritsu);
     }
 

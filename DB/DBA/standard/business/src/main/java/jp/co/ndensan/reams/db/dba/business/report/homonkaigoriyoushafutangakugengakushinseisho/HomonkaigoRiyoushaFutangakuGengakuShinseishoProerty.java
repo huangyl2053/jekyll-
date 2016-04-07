@@ -13,6 +13,7 @@ import jp.co.ndensan.reams.uz.uza.report.ReportPropertyBase;
 /**
  * HomonkaigoRiyoushaFutangakuGengakuShinseishoProertyのプロパティです。
  *
+ * @reamsid_L DBA-0540-701 zhengshukai
  */
 public class HomonkaigoRiyoushaFutangakuGengakuShinseishoProerty extends ReportPropertyBase<HomonKaigoRiyoshaFutangakuGengakuShinseishoReportSource> {
 

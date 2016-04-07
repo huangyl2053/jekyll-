@@ -17,6 +17,8 @@ import jp.co.ndensan.reams.uz.uza.lang.Separator;
 
 /**
  * 主治医意見書作成依頼発行一覧表ヘッダEditorです。
+ *
+ * @reamsid_L DBE-0080-100 lizhuoxuan
  */
 class SyujiyikenshosakuseyiraihakouHeaderEditor implements ISyujiyikenshosakuseyiraihakouEditor {
 

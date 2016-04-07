@@ -15,6 +15,8 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
 
 /**
  * 認定調査スケジュール登録1のチェッククラスです。
+ *
+ * @reamsid_L DBE-0020-010 lizhuoxuan
  */
 public class ValidationHandler {
 

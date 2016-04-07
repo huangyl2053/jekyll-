@@ -13,8 +13,9 @@ import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
- *
  * 開催結果情報と開催場所情報のbusinessクラスです。
+ *
+ * @reamsid_L DBE-3000-070 zhengshukai
  */
 public class KaisaiKekkaAndBashoJoho {
 

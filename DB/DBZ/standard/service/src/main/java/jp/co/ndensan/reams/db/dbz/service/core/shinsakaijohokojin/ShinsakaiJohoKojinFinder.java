@@ -20,6 +20,8 @@ import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 
 /**
  * 審査会情報照会(個人)のクラスです。
+ *
+ * @reamsid_L DBE-3000-070 zhengshukai
  */
 public class ShinsakaiJohoKojinFinder {
 

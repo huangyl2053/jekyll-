@@ -6,6 +6,8 @@ import jp.co.ndensan.reams.uz.uza.report.source.ReportItem;
 
 /**
  * 要介護認定調査票（概況調査）のReportSourceです。
+ *
+ * @reamsid_L DBE-0080-030 xuyannan
  */
 public class ChosahyoGaikyochosaReportSource implements IReportSource {
 // <editor-fold defaultstate="collapsed" desc="Generated Code">

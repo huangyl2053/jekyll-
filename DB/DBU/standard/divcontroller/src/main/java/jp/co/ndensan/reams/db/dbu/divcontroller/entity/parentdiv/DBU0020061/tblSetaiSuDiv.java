@@ -4,18 +4,21 @@ package jp.co.ndensan.reams.db.dbu.divcontroller.entity.parentdiv.DBU0020061;
  * このファイルへの変更は、再生成時には損失するため
  * 不正な動作の原因になります。
  */
+
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import jp.co.ndensan.reams.uz.uza.ui.binding.*;
+import jp.co.ndensan.reams.uz.uza.ui.binding.Label;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TableCell;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TablePanel;
+import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxNum;
 
 /**
- * tblSetaiSu のクラスファイル 
- * 
- * @author 自動生成
+ * tblSetaiSu のクラスファイル
+ *
+ * @reamsid_L DBU-1100-020 lijunjun
  */
 public class tblSetaiSuDiv extends TablePanel {
+
     // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2015-11-16_12-38-19">
     /*
      * [ private の作成 ]
@@ -281,9 +284,10 @@ public class tblSetaiSuDiv extends TablePanel {
 
     // </editor-fold>
 }
+
 /**
- * TableCell31 のクラスファイル 
- * 
+ * TableCell31 のクラスファイル
+ *
  * @author 自動生成
  */
 class TableCell31AttblSetaiSu extends TableCell {
@@ -291,12 +295,14 @@ class TableCell31AttblSetaiSu extends TableCell {
 
     // </editor-fold>
 }
+
 /**
- * TableCell32 のクラスファイル 
- * 
+ * TableCell32 のクラスファイル
+ *
  * @author 自動生成
  */
 class TableCell32AttblSetaiSu extends TableCell {
+
     // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2015-11-16_12-38-19">
     @JsonProperty("lblTonenZoTennyu")
     private Label lblTonenZoTennyu;
@@ -321,12 +327,14 @@ class TableCell32AttblSetaiSu extends TableCell {
 
     // </editor-fold>
 }
+
 /**
- * TableCell33 のクラスファイル 
- * 
+ * TableCell33 のクラスファイル
+ *
  * @author 自動生成
  */
 class TableCell33AttblSetaiSu extends TableCell {
+
     // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2015-11-16_12-38-19">
     @JsonProperty("lblTonenZoShokkenfukkatsu")
     private Label lblTonenZoShokkenfukkatsu;
@@ -351,12 +359,14 @@ class TableCell33AttblSetaiSu extends TableCell {
 
     // </editor-fold>
 }
+
 /**
- * TableCell40 のクラスファイル 
- * 
+ * TableCell40 のクラスファイル
+ *
  * @author 自動生成
  */
 class TableCell40AttblSetaiSu extends TableCell {
+
     // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2015-11-16_12-38-19">
     @JsonProperty("lblTonenZorokugosaitotatsu")
     private Label lblTonenZorokugosaitotatsu;
@@ -381,12 +391,14 @@ class TableCell40AttblSetaiSu extends TableCell {
 
     // </editor-fold>
 }
+
 /**
- * TableCell41 のクラスファイル 
- * 
+ * TableCell41 のクラスファイル
+ *
  * @author 自動生成
  */
 class TableCell41AttblSetaiSu extends TableCell {
+
     // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2015-11-16_12-38-19">
     @JsonProperty("lblTonenZoTekiyojogaihi")
     private Label lblTonenZoTekiyojogaihi;
@@ -411,12 +423,14 @@ class TableCell41AttblSetaiSu extends TableCell {
 
     // </editor-fold>
 }
+
 /**
- * TableCell34 のクラスファイル 
- * 
+ * TableCell34 のクラスファイル
+ *
  * @author 自動生成
  */
 class TableCell34AttblSetaiSu extends TableCell {
+
     // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2015-11-16_12-38-19">
     @JsonProperty("lblKei")
     private Label lblKei;
@@ -441,12 +455,14 @@ class TableCell34AttblSetaiSu extends TableCell {
 
     // </editor-fold>
 }
+
 /**
- * TableCell35 のクラスファイル 
- * 
+ * TableCell35 のクラスファイル
+ *
  * @author 自動生成
  */
 class TableCell35AttblSetaiSu extends TableCell {
+
     // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2015-11-16_12-38-19">
     @JsonProperty("txtTonenZoTennyu")
     private TextBoxNum txtTonenZoTennyu;
@@ -471,12 +487,14 @@ class TableCell35AttblSetaiSu extends TableCell {
 
     // </editor-fold>
 }
+
 /**
- * TableCell36 のクラスファイル 
- * 
+ * TableCell36 のクラスファイル
+ *
  * @author 自動生成
  */
 class TableCell36AttblSetaiSu extends TableCell {
+
     // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2015-11-16_12-38-19">
     @JsonProperty("txtTonenZoShokkenfukkatsu")
     private TextBoxNum txtTonenZoShokkenfukkatsu;
@@ -501,12 +519,14 @@ class TableCell36AttblSetaiSu extends TableCell {
 
     // </editor-fold>
 }
+
 /**
- * TableCell44 のクラスファイル 
- * 
+ * TableCell44 のクラスファイル
+ *
  * @author 自動生成
  */
 class TableCell44AttblSetaiSu extends TableCell {
+
     // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2015-11-16_12-38-19">
     @JsonProperty("txtTonenZorokugosaitotatsu")
     private TextBoxNum txtTonenZorokugosaitotatsu;
@@ -531,12 +551,14 @@ class TableCell44AttblSetaiSu extends TableCell {
 
     // </editor-fold>
 }
+
 /**
- * TableCell45 のクラスファイル 
- * 
+ * TableCell45 のクラスファイル
+ *
  * @author 自動生成
  */
 class TableCell45AttblSetaiSu extends TableCell {
+
     // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2015-11-16_12-38-19">
     @JsonProperty("txtTonenZoTekiyojogaihi")
     private TextBoxNum txtTonenZoTekiyojogaihi;

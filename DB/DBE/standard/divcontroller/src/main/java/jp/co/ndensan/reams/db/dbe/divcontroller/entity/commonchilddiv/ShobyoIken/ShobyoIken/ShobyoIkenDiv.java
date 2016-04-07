@@ -7,27 +7,24 @@ package jp.co.ndensan.reams.db.dbe.divcontroller.entity.commonchilddiv.ShobyoIke
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import jp.co.ndensan.reams.ur.urz.divcontroller.entity.commonchilddiv.CodeInput.CodeInputDiv;
 import jp.co.ndensan.reams.ur.urz.divcontroller.entity.commonchilddiv.CodeInput.ICodeInputDiv;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.ui.binding.*;
-import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Button;
-import jp.co.ndensan.reams.uz.uza.ui.binding.ButtonDialog;
 import jp.co.ndensan.reams.uz.uza.ui.binding.DataGrid;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Label;
+import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 import jp.co.ndensan.reams.uz.uza.ui.binding.RadioButton;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TextBox;
-import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxCode;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxDate;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxMultiLine;
 
 /**
  * ShobyoIken のクラスファイル
  *
- * @author 自動生成
+ * @reamsid_L DBE-3000-130 zhengshukai
  */
 public class ShobyoIkenDiv extends Panel implements IShobyoIkenDiv {
+
     // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-01-15_09-59-03">
     /*
      * [ private の作成 ]
@@ -291,7 +288,7 @@ public class ShobyoIkenDiv extends Panel implements IShobyoIkenDiv {
     }
 
     @JsonIgnore
-    public void  setTxtShindanName1(TextBox txtShindanName1) {
+    public void setTxtShindanName1(TextBox txtShindanName1) {
         this.getShindanName().setTxtShindanName1(txtShindanName1);
     }
 
@@ -301,7 +298,7 @@ public class ShobyoIkenDiv extends Panel implements IShobyoIkenDiv {
     }
 
     @JsonIgnore
-    public void  setTxtShindanYMD1(TextBoxDate txtShindanYMD1) {
+    public void setTxtShindanYMD1(TextBoxDate txtShindanYMD1) {
         this.getShindanName().setTxtShindanYMD1(txtShindanYMD1);
     }
 
@@ -311,7 +308,7 @@ public class ShobyoIkenDiv extends Panel implements IShobyoIkenDiv {
     }
 
     @JsonIgnore
-    public void  setTxtShindanName2(TextBox txtShindanName2) {
+    public void setTxtShindanName2(TextBox txtShindanName2) {
         this.getShindanName().setTxtShindanName2(txtShindanName2);
     }
 
@@ -321,7 +318,7 @@ public class ShobyoIkenDiv extends Panel implements IShobyoIkenDiv {
     }
 
     @JsonIgnore
-    public void  setTxtShindanYMD2(TextBoxDate txtShindanYMD2) {
+    public void setTxtShindanYMD2(TextBoxDate txtShindanYMD2) {
         this.getShindanName().setTxtShindanYMD2(txtShindanYMD2);
     }
 
@@ -331,7 +328,7 @@ public class ShobyoIkenDiv extends Panel implements IShobyoIkenDiv {
     }
 
     @JsonIgnore
-    public void  setTxtShindanName(TextBox txtShindanName) {
+    public void setTxtShindanName(TextBox txtShindanName) {
         this.getShindanName().setTxtShindanName(txtShindanName);
     }
 
@@ -341,7 +338,7 @@ public class ShobyoIkenDiv extends Panel implements IShobyoIkenDiv {
     }
 
     @JsonIgnore
-    public void  setTxtShindanYMD3(TextBoxDate txtShindanYMD3) {
+    public void setTxtShindanYMD3(TextBoxDate txtShindanYMD3) {
         this.getShindanName().setTxtShindanYMD3(txtShindanYMD3);
     }
 
@@ -351,7 +348,7 @@ public class ShobyoIkenDiv extends Panel implements IShobyoIkenDiv {
     }
 
     @JsonIgnore
-    public void  setGeninShikkanPanel(geninShikkanPanelDiv geninShikkanPanel) {
+    public void setGeninShikkanPanel(geninShikkanPanelDiv geninShikkanPanel) {
         this.getShindanName().setGeninShikkanPanel(geninShikkanPanel);
     }
 
@@ -361,7 +358,7 @@ public class ShobyoIkenDiv extends Panel implements IShobyoIkenDiv {
     }
 
     @JsonIgnore
-    public void  setBtnAdd(Button btnAdd) {
+    public void setBtnAdd(Button btnAdd) {
         this.getShindanName().getGeninShikkanPanel().setBtnAdd(btnAdd);
     }
 
@@ -371,7 +368,7 @@ public class ShobyoIkenDiv extends Panel implements IShobyoIkenDiv {
     }
 
     @JsonIgnore
-    public void  setDgGenyin(DataGrid<dgGenyin_Row> dgGenyin) {
+    public void setDgGenyin(DataGrid<dgGenyin_Row> dgGenyin) {
         this.getShindanName().getGeninShikkanPanel().setDgGenyin(dgGenyin);
     }
 
@@ -381,7 +378,7 @@ public class ShobyoIkenDiv extends Panel implements IShobyoIkenDiv {
     }
 
     @JsonIgnore
-    public void  setGeninShikkanShosai(geninShikkanShosaiDiv geninShikkanShosai) {
+    public void setGeninShikkanShosai(geninShikkanShosaiDiv geninShikkanShosai) {
         this.getShindanName().getGeninShikkanPanel().setGeninShikkanShosai(geninShikkanShosai);
     }
 
@@ -396,7 +393,7 @@ public class ShobyoIkenDiv extends Panel implements IShobyoIkenDiv {
     }
 
     @JsonIgnore
-    public void  setRadIsShutaruGeninShikkan(RadioButton radIsShutaruGeninShikkan) {
+    public void setRadIsShutaruGeninShikkan(RadioButton radIsShutaruGeninShikkan) {
         this.getShindanName().getGeninShikkanPanel().getGeninShikkanShosai().setRadIsShutaruGeninShikkan(radIsShutaruGeninShikkan);
     }
 
@@ -406,7 +403,7 @@ public class ShobyoIkenDiv extends Panel implements IShobyoIkenDiv {
     }
 
     @JsonIgnore
-    public void  setBtnNo(Button btnNo) {
+    public void setBtnNo(Button btnNo) {
         this.getShindanName().getGeninShikkanPanel().getGeninShikkanShosai().setBtnNo(btnNo);
     }
 
@@ -416,7 +413,7 @@ public class ShobyoIkenDiv extends Panel implements IShobyoIkenDiv {
     }
 
     @JsonIgnore
-    public void  setBtnOK(Button btnOK) {
+    public void setBtnOK(Button btnOK) {
         this.getShindanName().getGeninShikkanPanel().getGeninShikkanShosai().setBtnOK(btnOK);
     }
 
@@ -426,7 +423,7 @@ public class ShobyoIkenDiv extends Panel implements IShobyoIkenDiv {
     }
 
     @JsonIgnore
-    public void  setRadShojoAnteisei(RadioButton radShojoAnteisei) {
+    public void setRadShojoAnteisei(RadioButton radShojoAnteisei) {
         this.getShojoAnteisei().setRadShojoAnteisei(radShojoAnteisei);
     }
 
@@ -436,7 +433,7 @@ public class ShobyoIkenDiv extends Panel implements IShobyoIkenDiv {
     }
 
     @JsonIgnore
-    public void  setTxtFuanteiShosaiJokyo(TextBox txtFuanteiShosaiJokyo) {
+    public void setTxtFuanteiShosaiJokyo(TextBox txtFuanteiShosaiJokyo) {
         this.getShojoAnteisei().setTxtFuanteiShosaiJokyo(txtFuanteiShosaiJokyo);
     }
 
@@ -446,7 +443,7 @@ public class ShobyoIkenDiv extends Panel implements IShobyoIkenDiv {
     }
 
     @JsonIgnore
-    public void  setLblChiryoNaiyo(Label lblChiryoNaiyo) {
+    public void setLblChiryoNaiyo(Label lblChiryoNaiyo) {
         this.getSeikatsuKinoGenin().setLblChiryoNaiyo(lblChiryoNaiyo);
     }
 
@@ -456,7 +453,7 @@ public class ShobyoIkenDiv extends Panel implements IShobyoIkenDiv {
     }
 
     @JsonIgnore
-    public void  setTxtNaiyo(TextBoxMultiLine txtNaiyo) {
+    public void setTxtNaiyo(TextBoxMultiLine txtNaiyo) {
         this.getSeikatsuKinoGenin().setTxtNaiyo(txtNaiyo);
     }
 
