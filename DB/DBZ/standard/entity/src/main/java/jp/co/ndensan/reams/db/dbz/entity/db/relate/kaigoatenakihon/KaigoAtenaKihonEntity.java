@@ -14,6 +14,8 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
  * 介護資格系基本情報Entityクラスです。
+ *
+ * @reamsid_L DBA-0030-010 wangxiaodong
  */
 @lombok.Getter
 @lombok.Setter
