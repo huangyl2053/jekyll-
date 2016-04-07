@@ -12,7 +12,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 /**
  * KyotakuServiceKeikakuInfo のクラスファイル 
  * 
- * @author 自動生成
+ * @reamsid_L DBE-3000-170  suguangjun
  */
 public class KyotakuServiceKeikakuInfoDiv extends Panel implements IKyotakuServiceKeikakuInfoDiv {
     // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-01-15_09-59-03">

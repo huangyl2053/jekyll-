@@ -13,8 +13,9 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 
 /**
- *
  * 居宅サービス計画情報を取得するのエンティティクラスです。
+ * 
+ * @reamsid_L DBE-3000-170  suguangjun 
  */
 @lombok.Getter
 @lombok.Setter

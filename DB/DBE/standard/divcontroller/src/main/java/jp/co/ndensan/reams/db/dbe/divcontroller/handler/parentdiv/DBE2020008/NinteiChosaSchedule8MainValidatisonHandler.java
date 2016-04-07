@@ -21,6 +21,7 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
 /**
  * MainPaneValidationMessageバリデーションメッセージを定義している列挙型です。
  *
+ * @reamsid_L DBE-0024-010  suguangjun 
  */
 public class NinteiChosaSchedule8MainValidatisonHandler {
 

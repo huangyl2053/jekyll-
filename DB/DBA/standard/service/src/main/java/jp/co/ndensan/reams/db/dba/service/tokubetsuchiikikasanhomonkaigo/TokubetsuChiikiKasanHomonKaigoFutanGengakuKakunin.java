@@ -50,8 +50,9 @@ import jp.co.ndensan.reams.uz.uza.util.config.BusinessConfig;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 
 /**
- *
  * 特別地域加算減免・訪問介護等利用者負担減額対象確認申請書Printerです。
+ * 
+ * @reamsid_L DBA-0540-400  suguangjun 
  */
 public class TokubetsuChiikiKasanHomonKaigoFutanGengakuKakunin {
 

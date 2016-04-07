@@ -9,8 +9,9 @@ import jp.co.ndensan.reams.db.dbz.definition.core.kyotakuservicekeikakuinfo.Kyot
 import jp.co.ndensan.reams.db.dbz.entity.db.relate.kyotakuservicekeikakuinfo.KyotakuServiceKeikakuInfoRelateEntity;
 
 /**
- *
  * 居宅サービス計画情報のマッパーインタフェースです。
+ * 
+ * @reamsid_L DBE-3000-170  suguangjun 
  */
 public interface IKyotakuServiceKeikakuInfoMapper {
 

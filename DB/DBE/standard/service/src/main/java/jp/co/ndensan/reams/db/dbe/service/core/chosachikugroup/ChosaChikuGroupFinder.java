@@ -25,6 +25,7 @@ import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
 /**
  * 認定調査スケジュール登録8クラスです。
  *
+ * @reamsid_L DBE-0024-010  suguangjun 
  */
 public class ChosaChikuGroupFinder {
 
