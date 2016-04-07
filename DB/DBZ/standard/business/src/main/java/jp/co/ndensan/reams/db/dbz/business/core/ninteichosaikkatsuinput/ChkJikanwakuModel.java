@@ -8,8 +8,9 @@ package jp.co.ndensan.reams.db.dbz.business.core.ninteichosaikkatsuinput;
 import java.io.Serializable;
 
 /**
- *
  * 調査時間一括設定のダイアログパラメータクラスです。
+ *
+ * @reamsid_L DBE-3000-210 zhengshukai
  */
 public class ChkJikanwakuModel implements Serializable {
 
