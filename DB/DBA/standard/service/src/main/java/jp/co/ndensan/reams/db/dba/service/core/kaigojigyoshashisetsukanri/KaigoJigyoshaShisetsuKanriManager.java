@@ -9,18 +9,17 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import static java.util.Objects.requireNonNull;
-import jp.co.ndensan.reams.db.dba.business.core.kaigojigyoshashisetsukanrio.KaigoJigyoshaShisetsuKanriBusiness;
 import jp.co.ndensan.reams.db.dba.business.core.kaigojigyoshashisetsukanrio.KaigoJogaiTokureiBusiness;
 import jp.co.ndensan.reams.db.dba.definition.mybatisprm.kaigojigyoshashisetsukanrio.KaigoJigyoshaParameter;
 import jp.co.ndensan.reams.db.dba.definition.mybatisprm.kaigojigyoshashisetsukanrio.KaigoJigyoshaShisetsuKanriMapperParameter;
 import jp.co.ndensan.reams.db.dba.definition.mybatisprm.kaigojigyoshashisetsukanrio.KaigoJogaiTokureiParameter;
 import jp.co.ndensan.reams.db.dba.entity.db.relate.kaigojigyoshashisetsukanrio.KaigoJigyoshaRelateEntity;
-import jp.co.ndensan.reams.db.dba.entity.db.relate.kaigojigyoshashisetsukanrio.KaigoJigyoshaShisetsuKanriRelateEntity;
 import jp.co.ndensan.reams.db.dba.entity.db.relate.kaigojigyoshashisetsukanrio.KaigoJogaiTokureiRelateEntity;
 import jp.co.ndensan.reams.db.dba.persistence.db.mapper.relate.kaigojigyoshashisetsukanri.IKaigoJigyoshaShisetsuKanriMapper;
 import jp.co.ndensan.reams.db.dbx.business.core.kaigojigyosha.kaigojigyosha.KaigoJigyosha;
 import jp.co.ndensan.reams.db.dbx.business.core.kaigojigyosha.kaigojigyoshashiteiservice.KaigoJigyoshaShiteiService;
 import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT7063KaigoJigyoshaShiteiServiceEntity;
+import jp.co.ndensan.reams.db.dbx.entity.db.relate.kaigojigyosha.kaigojigyosha.KaigoJigyoshaEntity;
 import jp.co.ndensan.reams.db.dbx.persistence.db.basic.DbT7063KaigoJigyoshaShiteiServiceDac;
 import jp.co.ndensan.reams.db.dbx.service.core.kaigojigyosha.kaigojigyosha.KaigoJigyoshaManager;
 import jp.co.ndensan.reams.db.dbz.business.core.KaigoJogaiTokureiTaishoShisetsu;
@@ -38,6 +37,8 @@ import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
 /**
  *
  * 介護事業者・施設管理Managerクラスです。
+ *
+ * @reamsid_L DBA-0340-010 wanghui
  */
 public class KaigoJigyoshaShisetsuKanriManager {
 
@@ -135,15 +136,15 @@ public class KaigoJigyoshaShisetsuKanriManager {
      * @return 事業者情報取得
      */
     @Transaction
-    public SearchResult<KaigoJigyoshaShisetsuKanriBusiness> getJigyoshaJoho(KaigoJigyoshaShisetsuKanriMapperParameter parameter) {
-        List<KaigoJigyoshaShisetsuKanriBusiness> serviceShuruiList = new ArrayList<>();
+    public SearchResult<KaigoJigyosha> getJigyoshaJoho(KaigoJigyoshaShisetsuKanriMapperParameter parameter) {
+        List<KaigoJigyosha> serviceShuruiList = new ArrayList<>();
         IKaigoJigyoshaShisetsuKanriMapper iKaigoJigyoshaShisetsuKanri = mapperProvider.create(IKaigoJigyoshaShisetsuKanriMapper.class);
-        List<KaigoJigyoshaShisetsuKanriRelateEntity> サービス一覧情報 = iKaigoJigyoshaShisetsuKanri.getJigyoshaJoho(parameter);
+        List<KaigoJigyoshaEntity> サービス一覧情報 = iKaigoJigyoshaShisetsuKanri.getJigyoshaJoho(parameter);
         if (サービス一覧情報 == null || サービス一覧情報.isEmpty()) {
-            return SearchResult.of(Collections.<KaigoJigyoshaShisetsuKanriBusiness>emptyList(), 0, false);
+            return SearchResult.of(Collections.<KaigoJigyosha>emptyList(), 0, false);
         }
-        for (KaigoJigyoshaShisetsuKanriRelateEntity entity : サービス一覧情報) {
-            serviceShuruiList.add(new KaigoJigyoshaShisetsuKanriBusiness(entity));
+        for (KaigoJigyoshaEntity entity : サービス一覧情報) {
+            serviceShuruiList.add(new KaigoJigyosha(entity));
         }
         return SearchResult.of(serviceShuruiList, 0, false);
     }
@@ -202,8 +203,10 @@ public class KaigoJigyoshaShisetsuKanriManager {
     @Transaction
     public boolean checkKikanGorisei(KaigoJogaiTokureiParameter parameter) {
         boolean 有効期間合理性フラグ = false;
-        if (parameter.getYukoKaishiYMD().isBeforeOrEquals(parameter.getYukoShuryoYMD())) {
-            有効期間合理性フラグ = true;
+        if (parameter != null && !parameter.getYukoShuryoYMD().isEmpty()) {
+            if (parameter.getYukoKaishiYMD().isBeforeOrEquals(parameter.getYukoShuryoYMD())) {
+                有効期間合理性フラグ = true;
+            }
         }
         return 有効期間合理性フラグ;
     }
@@ -248,8 +251,11 @@ public class KaigoJigyoshaShisetsuKanriManager {
             }
             return manager.save(事業者登録情報);
         } else {
-            介護除外住所地特例対象施設 = 介護除外住所地特例対象施設.createBuilderForEdit()
-                    .set有効終了年月日(介護除外住所地特例対象施設.get有効開始年月日().minusDay(1)).build();
+            if (介護除外住所地特例対象施設.get有効終了年月日() == null
+                    || 介護除外住所地特例対象施設.get有効終了年月日().isEmpty()) {
+                介護除外住所地特例対象施設 = 介護除外住所地特例対象施設.createBuilderForEdit()
+                        .set有効終了年月日(介護除外住所地特例対象施設.get有効開始年月日().minusDay(1)).build();
+            }
             return 対象施設.save介護除外住所地特例対象施設(介護除外住所地特例対象施設);
         }
     }

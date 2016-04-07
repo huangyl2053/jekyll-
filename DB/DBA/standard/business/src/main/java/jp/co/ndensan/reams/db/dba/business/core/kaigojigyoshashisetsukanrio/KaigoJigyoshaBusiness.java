@@ -11,6 +11,8 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 /**
  *
  * 介護事業者・施設管理のBusinessクラスです。
+ *
+ * @reamsid_L DBA-0340-010 wanghui
  */
 public class KaigoJigyoshaBusiness {
 

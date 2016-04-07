@@ -5,12 +5,14 @@ import jp.co.ndensan.reams.db.dba.definition.mybatisprm.kaigojigyoshashisetsukan
 import jp.co.ndensan.reams.db.dba.definition.mybatisprm.kaigojigyoshashisetsukanrio.KaigoJigyoshaShisetsuKanriMapperParameter;
 import jp.co.ndensan.reams.db.dba.definition.mybatisprm.kaigojigyoshashisetsukanrio.KaigoJogaiTokureiParameter;
 import jp.co.ndensan.reams.db.dba.entity.db.relate.kaigojigyoshashisetsukanrio.KaigoJigyoshaRelateEntity;
-import jp.co.ndensan.reams.db.dba.entity.db.relate.kaigojigyoshashisetsukanrio.KaigoJigyoshaShisetsuKanriRelateEntity;
 import jp.co.ndensan.reams.db.dba.entity.db.relate.kaigojigyoshashisetsukanrio.KaigoJogaiTokureiRelateEntity;
+import jp.co.ndensan.reams.db.dbx.entity.db.relate.kaigojigyosha.kaigojigyosha.KaigoJigyoshaEntity;
 
 /**
  *
  * 介護事業者・施設管理のマッパーインタフェースです。
+ *
+ * @reamsid_L DBA-0340-010 wanghui
  */
 public interface IKaigoJigyoshaShisetsuKanriMapper {
 
@@ -20,7 +22,7 @@ public interface IKaigoJigyoshaShisetsuKanriMapper {
      * @param parameter KaigoJigyoshaShisetsuKanriMapperParameter
      * @return 事業者情報取得
      */
-    List<KaigoJigyoshaShisetsuKanriRelateEntity> getJigyoshaJoho(KaigoJigyoshaShisetsuKanriMapperParameter parameter);
+    List<KaigoJigyoshaEntity> getJigyoshaJoho(KaigoJigyoshaShisetsuKanriMapperParameter parameter);
 
     /**
      * サービス一覧情報取得を取得します。
