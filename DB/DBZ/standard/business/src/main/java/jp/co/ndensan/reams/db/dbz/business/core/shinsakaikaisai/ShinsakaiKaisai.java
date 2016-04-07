@@ -11,8 +11,9 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 
 /**
- *
  * 審査会一覧情報クラスです。
+ *
+ * @reamsid_L DBE-0120-010 lishengli
  */
 public class ShinsakaiKaisai {
 

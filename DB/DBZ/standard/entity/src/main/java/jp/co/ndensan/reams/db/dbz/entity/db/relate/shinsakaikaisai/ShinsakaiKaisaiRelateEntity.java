@@ -12,8 +12,9 @@ import lombok.Getter;
 import lombok.Setter;
 
 /**
- *
  * 審査会一覧情報RelateEntityクラスです。
+ *
+ * @reamsid_L DBE-0120-010 lishengli
  */
 @Getter
 @Setter

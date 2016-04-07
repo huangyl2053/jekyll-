@@ -20,8 +20,9 @@ import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
 
 /**
- *
  * 介護認定審査会共有一覧の検索クラスです。
+ *
+ * @reamsid_L DBE-0120-010 lishengli
  */
 public class ShinsakaiKaisaiFinder {
 
