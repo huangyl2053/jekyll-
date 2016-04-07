@@ -16,6 +16,8 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 /**
  *
  * 国保連情報受取データ取込_[175]総合事業費過誤決定通知書情報
+ *
+ * @reamsid_L DBC-0980-180 quxiaodong
  */
 public class TsuchishoJoho175 {
 
