@@ -69,11 +69,9 @@ public class ServiceTeikyoShomeishoHandler {
      */
     public void putViewStateHolder() {
         dgdServiceTeikyoShomeisyo_Row row = div.getPanelShinseiNaiyo().getDgdServiceTeikyoShomeisyo().getClickedItem();
-        ServiceTeiKyoShomeishoParameter parameter = ViewStateHolder.get(
-                ViewStateKeys.基本情報パラメータ, ServiceTeiKyoShomeishoParameter.class);
-        HihokenshaNo 被保険者番号 = parameter.getHiHokenshaNo();
-        FlexibleYearMonth サービス年月 = parameter.getServiceTeikyoYM();
-        RString 整理番号 = parameter.getSeiriNp();
+        FlexibleYearMonth サービス年月 = new FlexibleYearMonth(ViewStateHolder.get(ViewStateKeys.償還払申請一覧_サービス年月, RString.class));
+        HihokenshaNo 被保険者番号 = ViewStateHolder.get(ViewStateKeys.償還払申請一覧_被保険者番号, HihokenshaNo.class);
+        RString 整理番号 = ViewStateHolder.get(ViewStateKeys.償還払申請一覧_整理番号, RString.class);
         JigyoshaNo 事業者番号 = new JigyoshaNo(row.getData1());
         RString 事業者名 = row.getData2();
         RString 明細番号 = row.getData3();
