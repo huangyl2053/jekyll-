@@ -10,6 +10,8 @@ import jp.co.ndensan.reams.ua.uax.entity.db.basic.UaFt200FindShikibetsuTaishoEnt
 
 /**
  * 老人保健受給者情報のマッパーインタフェースです。
+ *
+ * @reamsid_L DBU-1110-020 zhangzhiming
  */
 public interface IRoujinHokenJukyushaDaichoKanriMapper {
 
