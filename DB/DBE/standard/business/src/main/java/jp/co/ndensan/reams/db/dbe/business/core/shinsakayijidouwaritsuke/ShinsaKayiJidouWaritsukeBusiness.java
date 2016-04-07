@@ -10,6 +10,8 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
  * 審査会自動割付を管理するクラスです。
+ *
+ * @reamsid_L DBE-1350-030 lizhuoxuan
  */
 public class ShinsaKayiJidouWaritsukeBusiness {
 

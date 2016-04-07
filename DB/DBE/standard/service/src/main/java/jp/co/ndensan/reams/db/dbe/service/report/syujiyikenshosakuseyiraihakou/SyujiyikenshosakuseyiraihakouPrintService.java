@@ -16,6 +16,8 @@ import jp.co.ndensan.reams.uz.uza.report.SourceDataCollection;
 
 /**
  * 主治医意見書作成依頼発行一覧表Printerです。
+ *
+ * @reamsid_L DBE-0080-100 lizhuoxuan
  */
 public class SyujiyikenshosakuseyiraihakouPrintService {
 

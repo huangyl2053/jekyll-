@@ -14,6 +14,8 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
 
 /**
  * 判定結果情報出力(保険者)取得処理。
+ *
+ * @reamsid_L DBE-0190-010 lizhuoxuan
  */
 public class NijihanteiKekkaOutput {
 

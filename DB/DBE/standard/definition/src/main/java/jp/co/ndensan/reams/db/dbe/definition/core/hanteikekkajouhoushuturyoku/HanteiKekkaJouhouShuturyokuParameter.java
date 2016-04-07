@@ -12,6 +12,8 @@ import jp.co.ndensan.reams.uz.uza.math.Decimal;
 
 /**
  * 判定結果情報出力（保険者）クラスパラメータクラス。
+ *
+ * @reamsid_L DBE-0190-010 lizhuoxuan
  */
 @SuppressWarnings("PMD.UnusedPrivateField")
 @lombok.Getter

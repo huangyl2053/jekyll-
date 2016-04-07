@@ -10,6 +10,8 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
  * 判定結果情報出力（保険者）を管理するクラスです。
+ *
+ * @reamsid_L DBE-0190-010 lizhuoxuan
  */
 public class HanteiKekkaJouhouShuturyokuBusiness {
 

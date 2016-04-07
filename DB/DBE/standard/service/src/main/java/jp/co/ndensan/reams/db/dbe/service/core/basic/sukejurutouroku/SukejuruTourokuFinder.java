@@ -12,8 +12,8 @@ import jp.co.ndensan.reams.db.dbe.business.core.chikushichoson.ChikuShichosonBus
 import jp.co.ndensan.reams.db.dbe.business.core.ninteichosaschedule.NinteichosaScheduleBusiness;
 import jp.co.ndensan.reams.db.dbe.definition.mybatis.param.ninteichousasukejuru.NinteiChousaSukejuruParameter;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.ninteichousasukejuru.NinteiChousaSukejuruRelateEntity;
-import jp.co.ndensan.reams.db.dbe.persistence.db.util.MapperProvider;
 import jp.co.ndensan.reams.db.dbe.persistence.db.mapper.relate.ninteichosasche.INinteichosaScheduleMapper;
+import jp.co.ndensan.reams.db.dbe.persistence.db.util.MapperProvider;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5224ChikuShichosonEntity;
 import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT5224ChikuShichosonDac;
 import jp.co.ndensan.reams.uz.uza.util.db.SearchResult;
@@ -22,6 +22,8 @@ import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
 
 /**
  * 認定調査スケジュール登録1を管理するクラスです。
+ *
+ * @reamsid_L DBE-0020-010 lizhuoxuan
  */
 public class SukejuruTourokuFinder {
 

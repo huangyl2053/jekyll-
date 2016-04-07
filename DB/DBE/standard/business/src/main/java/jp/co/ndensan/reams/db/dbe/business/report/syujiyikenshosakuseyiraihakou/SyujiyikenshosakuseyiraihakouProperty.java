@@ -19,8 +19,9 @@ import jp.co.ndensan.reams.uz.uza.report.ReportPropertyBase;
 import jp.co.ndensan.reams.uz.uza.report.data.chart.ReportDynamicChart;
 
 /**
- *
  * {@link SyujiyikenshosakuseyiraihakouReport}のプロパティです。
+ *
+ * @reamsid_L DBE-0080-100 lizhuoxuan
  */
 public class SyujiyikenshosakuseyiraihakouProperty extends ReportPropertyBase<IkenshoSakuseiIraiHakkoIchiranhyoReportSource> {
 
@@ -44,6 +45,7 @@ public class SyujiyikenshosakuseyiraihakouProperty extends ReportPropertyBase<Ik
             Breakers<IkenshoSakuseiIraiHakkoIchiranhyoReportSource> breakers,
             BreakerCatalog<IkenshoSakuseiIraiHakkoIchiranhyoReportSource> catalog) {
         return breakers.add(catalog.new SimplePageBreaker(
+
 
             PAGE_BREAK_KEYS) {
             @Override

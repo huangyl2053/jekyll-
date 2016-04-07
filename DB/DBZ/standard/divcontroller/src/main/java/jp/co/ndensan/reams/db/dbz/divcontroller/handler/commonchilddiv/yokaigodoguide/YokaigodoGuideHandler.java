@@ -20,6 +20,8 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
 /**
  *
  * 要介護度ガイドの取得するクラスです。
+ *
+ * @reamsid_L DBZ-4540-010 lizhuoxuan
  */
 public class YokaigodoGuideHandler {
 

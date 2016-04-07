@@ -10,6 +10,8 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
  * 償還払い支給（不支給）決定通知書作成画面divEntityクラスです。
+ *
+ * @reamsid_L DBC-1000-070 lizhuoxuan
  */
 @lombok.Getter
 @lombok.Setter

@@ -15,6 +15,8 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
 
 /**
  * 要介護度ガイドのチェッククラスです。
+ *
+ * @reamsid_L DBZ-4540-010 lizhuoxuan
  */
 public class ValidationHandler {
 

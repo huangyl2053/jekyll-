@@ -30,6 +30,8 @@ import jp.co.ndensan.reams.uz.uza.util.config.BusinessConfig;
 
 /**
  * 判定結果情報出力(保険者)の取得するクラスです。
+ *
+ * @reamsid_L DBE-0190-010 lizhuoxuan
  */
 public class NijihanteiKekkaOutputHandler {
 

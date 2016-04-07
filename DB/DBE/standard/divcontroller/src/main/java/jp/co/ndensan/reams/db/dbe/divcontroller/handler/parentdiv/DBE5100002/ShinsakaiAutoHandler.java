@@ -18,6 +18,8 @@ import jp.co.ndensan.reams.uz.uza.lang.RTime;
 
 /**
  * 審査会自動割付の取得するクラスです。
+ *
+ * @reamsid_L DBE-1350-030 lizhuoxuan
  */
 public class ShinsakaiAutoHandler {
 

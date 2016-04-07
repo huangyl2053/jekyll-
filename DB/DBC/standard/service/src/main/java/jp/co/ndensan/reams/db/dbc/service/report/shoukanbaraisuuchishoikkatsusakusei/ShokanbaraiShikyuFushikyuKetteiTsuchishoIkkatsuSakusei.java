@@ -12,6 +12,8 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 /**
  *
  * 償還払い支給不支給決定通知書作成画面入力するデータより、バッチ用パラメータクラスを作成する。
+ *
+ * @reamsid_L DBC-1000-070 lizhuoxuan
  */
 public class ShokanbaraiShikyuFushikyuKetteiTsuchishoIkkatsuSakusei {
 

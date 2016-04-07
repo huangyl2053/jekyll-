@@ -8,8 +8,9 @@ package jp.co.ndensan.reams.db.dbz.definition.mybatisprm.kaigoninteiatenainfo;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
- *
  * 介護認定宛名情報のMyBatis用パラメータクラスです。
+ *
+ * @reamsid_L DBE-1300-050 lizhuoxuan
  */
 @SuppressWarnings("PMD.UnusedPrivateField")
 @lombok.Getter
