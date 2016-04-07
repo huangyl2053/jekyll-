@@ -7,15 +7,17 @@ package jp.co.ndensan.reams.db.dbu.divcontroller.entity.parentdiv.DBU0060041;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import jp.co.ndensan.reams.uz.uza.ui.binding.*;
+import jp.co.ndensan.reams.uz.uza.ui.binding.Label;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TabContainer;
+import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxNum;
 
 /**
- * tabShokuhikyojunofutannintei のクラスファイル 
- * 
- * @author 自動生成
+ * tabShokuhikyojunofutannintei のクラスファイル
+ *
+ * @reamsid_L DBU-1060-040 zhengshukai
  */
 public class tabShokuhikyojunofutanninteiDiv extends TabContainer {
+
     // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2015-11-30_08-54-50">
     /*
      * [ private の作成 ]
@@ -79,7 +81,7 @@ public class tabShokuhikyojunofutanninteiDiv extends TabContainer {
     }
 
     @JsonIgnore
-    public void  setTblhokenryoshuno(tblhokenryoshunoDiv tblhokenryoshuno) {
+    public void setTblhokenryoshuno(tblhokenryoshunoDiv tblhokenryoshuno) {
         this.getTblhokenryoshunojokyo().setTblhokenryoshuno(tblhokenryoshuno);
     }
 
@@ -364,7 +366,7 @@ public class tabShokuhikyojunofutanninteiDiv extends TabContainer {
     }
 
     @JsonIgnore
-    public void  setTblhokenkyufushiharaijokyo(tblhokenkyufushiharaijokyoDiv tblhokenkyufushiharaijokyo) {
+    public void setTblhokenkyufushiharaijokyo(tblhokenkyufushiharaijokyoDiv tblhokenkyufushiharaijokyo) {
         this.getTblhokenkyufushiharai().setTblhokenkyufushiharaijokyo(tblhokenkyufushiharaijokyo);
     }
 
