@@ -11,7 +11,8 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 /**
  * HoseitaishoYoshikiIchiran のクラスファイル 
  * 
- * @author 自動生成
+ * @reamsid_L DBU-1060-010  lijia
+ * 
  */
 public class HoseitaishoYoshikiIchiranDiv extends Panel {
     // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2015-11-30_08-54-50">

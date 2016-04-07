@@ -13,6 +13,9 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.KeyValueDataSource;
 
 /**
  * 事業報告（年報）補正、発行_検索のHandlerクラスです。
+ * 
+ * @reamsid_L DBU-1060-010  lijia
+ * 
  */
 public class PanelBaseHandler {
 

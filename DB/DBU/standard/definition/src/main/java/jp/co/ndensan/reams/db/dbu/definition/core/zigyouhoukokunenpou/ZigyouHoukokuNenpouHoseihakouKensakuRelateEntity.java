@@ -5,6 +5,9 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
  * 遷移画面と事業状況報告（年報）補正検索画面は渡す項目Entityクラスです。
+ * 
+ * @reamsid_L DBU-1060-010  lijia
+ * 
  */
 @lombok.Getter
 @lombok.Setter
