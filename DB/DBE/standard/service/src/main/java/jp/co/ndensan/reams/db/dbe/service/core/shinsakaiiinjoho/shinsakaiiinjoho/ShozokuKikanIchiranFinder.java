@@ -17,6 +17,8 @@ import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
 
 /**
  * 所属機関一覧情報を取得するクラスです。
+ *
+ * @reamsid_L DBE-0110-010  wangxiaodong
  */
 public class ShozokuKikanIchiranFinder {
 

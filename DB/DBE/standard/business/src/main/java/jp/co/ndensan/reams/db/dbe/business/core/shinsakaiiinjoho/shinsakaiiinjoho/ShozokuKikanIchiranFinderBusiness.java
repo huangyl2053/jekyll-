@@ -14,6 +14,8 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
  * 所属機関一覧情報を取得するビジネスクラスです。
+ *
+ * @reamsid_L DBE-0110-010  wangxiaodong
  */
 public class ShozokuKikanIchiranFinderBusiness implements Serializable {
 

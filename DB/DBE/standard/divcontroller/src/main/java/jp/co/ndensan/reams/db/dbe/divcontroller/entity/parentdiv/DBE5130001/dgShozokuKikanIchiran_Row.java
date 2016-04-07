@@ -3,10 +3,8 @@ package jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE5130001;
  * このコードはツールによって生成されました。
  * このファイルへの変更は、以下の状況下で不正な動作の原因になったり、
  * コードが再生成されるときに損失したりします。
- * Thu Mar 10 09:41:38 CST 2016 
+ * Thu Mar 10 09:41:38 CST 2016
  */
-
-
 
 import jp.co.ndensan.reams.uz.uza.ui.binding.DataRow;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Button;
@@ -15,13 +13,11 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxCode;
 import jp.co.ndensan.reams.uz.uza.ui.binding.ButtonDialog;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TextBox;
 
-
 /**
- * dgShozokuKikanIchiran_Row のクラスファイル 
- * 
- * @author 自動生成
+ * dgShozokuKikanIchiran_Row のクラスファイル
+ *
+ * @reamsid_L DBE-0110-010  wangxiaodong
  */
-
 public class dgShozokuKikanIchiran_Row extends DataRow {
     // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-01-15_09-59-03">
 

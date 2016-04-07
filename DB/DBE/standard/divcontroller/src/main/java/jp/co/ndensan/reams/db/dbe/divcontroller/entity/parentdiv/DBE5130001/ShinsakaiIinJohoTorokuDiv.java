@@ -16,7 +16,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.domain.*;
 /**
  * ShinsakaiIinJohoToroku のクラスファイル
  *
- * @author 自動生成
+ * @reamsid_L DBE-0110-010  wangxiaodong
  */
 public class ShinsakaiIinJohoTorokuDiv extends Panel {
 
