@@ -9,6 +9,9 @@ import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbV2002FukaEntity;
 
 /**
  * {@link jp.co.ndensan.reams.db.dbb.persistence.db.mapper.basic.IDbT2002FukaMapper}のマッパーIFです。
+ *
+ * @reamsid_L DBB-9060-010 duanzhanli
+ *
  */
 public interface IDbV2002FukaMapper {
 

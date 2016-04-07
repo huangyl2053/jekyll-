@@ -11,8 +11,9 @@ import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.report.ReportPropertyBase;
 
 /**
- *
  * {@link HihokenshashoHakkoKanriIchiranhyoReportSource}のプロパティです。
+ *
+ * @reamsid_L DBA-0600-070 lishengli
  */
 public class HihokenshashoHakkoKanriIchiranhyoProperty extends ReportPropertyBase<HihokenshashoHakkoKanriIchiranhyoReportSource> {
 

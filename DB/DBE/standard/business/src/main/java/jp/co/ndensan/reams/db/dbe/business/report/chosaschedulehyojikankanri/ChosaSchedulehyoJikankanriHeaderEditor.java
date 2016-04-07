@@ -16,8 +16,9 @@ import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
 import jp.co.ndensan.reams.uz.uza.lang.Separator;
 
 /**
- *
  * 認定調査スケジュール表(時間管理)ヘッダEditorです。
+ *
+ * @reamsid_L DBE-0020-100 lishengli
  */
 public class ChosaSchedulehyoJikankanriHeaderEditor implements IChosaSchedulehyoJikankanriEditor {
 

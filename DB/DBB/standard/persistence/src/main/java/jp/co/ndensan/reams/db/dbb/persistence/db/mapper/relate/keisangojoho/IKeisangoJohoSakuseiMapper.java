@@ -12,6 +12,9 @@ import jp.co.ndensan.reams.db.dbb.entity.db.relate.keisangojoho.KeisangoJohoSaku
 
 /**
  * 計算後情報作成のマッパーインタフェースです。
+ *
+ * @reamsid_L DBB-9060-010 duanzhanli
+ *
  */
 public interface IKeisangoJohoSakuseiMapper {
 

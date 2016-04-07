@@ -29,8 +29,9 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 
 /**
- *
  * 生活サービス意見入力のHandlerクラスです。
+ * 
+ * @reamsid_L DBE-3000-110 wangkun
  */
 public class SeikatsuServiceIkenHandler {
 

@@ -7,6 +7,8 @@ package jp.co.ndensan.reams.db.dbz.definition.core;
 
 /**
  * ViewStateKeys
+ *
+ * @reamsid_L DBC-0970-010 lizhuoxuan
  */
 public enum ViewStateKeys {
 

@@ -14,6 +14,9 @@ import jp.co.ndensan.reams.uz.uza.batch.flow.IBatchFlowCommand;
 /**
  *
  * 計算後情報作成_バッチフロークラスです。
+ *
+ * @reamsid_L DBB-9060-010 duanzhanli
+ *
  */
 public class KeisangoJohoSakuseiFlow extends BatchFlowBase<KeisangoJohoSakuseiBatchParamter> {
 

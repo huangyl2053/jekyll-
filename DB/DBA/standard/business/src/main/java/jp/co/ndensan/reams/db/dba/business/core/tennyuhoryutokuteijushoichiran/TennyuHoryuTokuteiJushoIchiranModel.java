@@ -15,8 +15,9 @@ import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
- *
  * 転入保留特定住所登録の取得するクラスです。
+ *
+ * @reamsid_L DBA-0480-020 zhangzhiming
  */
 public class TennyuHoryuTokuteiJushoIchiranModel {
 

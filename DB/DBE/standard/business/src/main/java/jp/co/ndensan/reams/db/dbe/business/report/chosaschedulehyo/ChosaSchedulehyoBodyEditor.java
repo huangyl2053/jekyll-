@@ -9,6 +9,8 @@ import jp.co.ndensan.reams.db.dbe.entity.report.chosaschedulehyo.ChosaSchedulehy
 
 /**
  * 認定調査スケジュール表(事務所)ボディEditorです。
+ *
+ * @reamsid_L DBE-0020-090 linghuhang
  */
 class ChosaSchedulehyoBodyEditor implements IChosaSchedulehyoEditor {
 

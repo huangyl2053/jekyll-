@@ -21,7 +21,10 @@ import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
- * 被保険者証一括発行_バッチフ処理クラスです
+ * 被保険者証一括発行_バッチフ処理クラスです。
+ *
+ * @reamsid_L DBU-0420-020 duanzhanli
+ *
  */
 public class TaishoShutokuProcess extends SimpleBatchProcessBase {
 

@@ -9,8 +9,9 @@ import jp.co.ndensan.reams.db.dba.entity.report.hokenryogenmenchoshuyoyushinseis
 import jp.co.ndensan.reams.uz.uza.report.IReportBuilder;
 
 /**
- *
  * 介護保険料減免申請書Builderのインターフェースです。
+ * 
+ * @reamsid_L DBA-0540-692  suguangjun 
  */
 interface IHokenryoGenmenChoshuYoyuShinseishoBuilder extends IReportBuilder<HokenryoGenmenChoshuYoyuShinseishoReportSource> {
 }

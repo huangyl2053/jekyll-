@@ -29,8 +29,9 @@ import jp.co.ndensan.reams.uz.uza.report.SourceDataCollection;
 import jp.co.ndensan.reams.uz.uza.report.source.breaks.BreakAggregator;
 
 /**
- *
  * 介護保険診断命令書PrinterServiceクラスです。
+ *
+ * @reamsid_L DBE-0080-070 wangxiaodong
  */
 public class KaigohokenShindanMeireishoPrintService {
 

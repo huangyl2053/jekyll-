@@ -11,6 +11,8 @@ import jp.co.ndensan.reams.uz.uza.report.IReportEditor;
 /**
  *
  * 主治医意見書作成料請求書ヘッダエディターのインターフェースクラスです。
+ *
+ * @reamsid_L DBE-0050-040 sunhaidi
  */
 public interface IShujiiIkenshoSakuseiRyoSeikyushoEditor extends IReportEditor<ShujiiIkenshoSakuseiRyoSeikyushoReportSource> {
 

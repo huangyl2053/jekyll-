@@ -33,8 +33,9 @@ import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
 import jp.co.ndensan.reams.uz.uza.report.util.barcode.CustomerBarCode;
 
 /**
- *
  * 編集後宛先のクラスです。
+ *
+ * @reamsid_L DBB-9040-130 wangxiaodong
  */
 public class EditedAtesaki {
 

@@ -4,8 +4,9 @@ import jp.co.ndensan.reams.db.dbz.business.core.setainusihyojijoho.SetainusiHyoj
 import jp.co.ndensan.reams.ur.urz.entity.report.sofubutsuatesaki.SofubutsuAtesakiSource;
 
 /**
- *
  * 介護用送付物宛先ソースを格納するクラスです。
+ *
+ * @reamsid_L DBB-9040-130 wangxiaodong
  */
 @lombok.Getter
 @SuppressWarnings("PMD.UnusedPrivateField")

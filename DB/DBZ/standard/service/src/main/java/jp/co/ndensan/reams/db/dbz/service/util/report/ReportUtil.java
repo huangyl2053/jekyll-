@@ -46,6 +46,8 @@ import jp.co.ndensan.reams.uz.uza.util.Saiban;
 
 /**
  * 帳票共通クラスです。
+ *
+ * @reamsid_L DBE-0050-040 sunhaidi
  */
 public final class ReportUtil {
 

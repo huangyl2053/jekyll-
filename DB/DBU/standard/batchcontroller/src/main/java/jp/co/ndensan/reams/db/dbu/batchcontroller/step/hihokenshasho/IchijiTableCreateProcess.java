@@ -29,6 +29,9 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
  * 一時テーブルの作成_バッチフ処理クラスです。
+ *
+ * @reamsid_L DBU-0420-020 duanzhanli
+ *
  */
 public class IchijiTableCreateProcess extends SimpleBatchProcessBase {
 

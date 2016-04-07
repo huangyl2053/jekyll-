@@ -10,6 +10,8 @@ import jp.co.ndensan.reams.uz.uza.report.ReportEditorJoiner;
 
 /**
  * 境界層管理マスタリストBuilderクラスです。
+ *
+ * @reamsid_L DBU-1050-060 linghuhang
  */
 class KyokaisoKanriMasterListBuilderImpl implements IKyokaisoKanriMasterListBuilder {
 

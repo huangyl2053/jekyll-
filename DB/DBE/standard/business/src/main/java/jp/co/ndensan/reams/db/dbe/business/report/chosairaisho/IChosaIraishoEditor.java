@@ -9,8 +9,9 @@ import jp.co.ndensan.reams.db.dbe.entity.report.source.chosairaisho.ChosaIraisho
 import jp.co.ndensan.reams.uz.uza.report.IReportEditor;
 
 /**
- *
  * 要介護認定調査依頼書ヘッダエディターのインターフェースクラスです。
+ *
+ * @reamsid_L DBE-0010-020 lishengli
  */
 interface IChosaIraishoEditor extends IReportEditor<ChosaIraishoReportSource> {
 

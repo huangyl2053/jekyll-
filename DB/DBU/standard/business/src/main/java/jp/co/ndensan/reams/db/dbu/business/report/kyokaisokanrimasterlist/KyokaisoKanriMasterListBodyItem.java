@@ -11,6 +11,8 @@ import lombok.Getter;
 
 /**
  * 境界層管理マスタリストボディのITEMです。
+ *
+ * @reamsid_L DBU-1050-060 linghuhang
  */
 @Getter
 @SuppressWarnings("PMD.UnusedPrivateField")

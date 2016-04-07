@@ -13,6 +13,8 @@ import lombok.NonNull;
 
 /**
  * 月別推移表のReportです。
+ *
+ * @reamsid_L DBB-0760-050 wangxiaodong
  */
 public class TsukibetsuSuiihyoReport extends Report<TsukibetsuSuiihyoReportSource> {
 

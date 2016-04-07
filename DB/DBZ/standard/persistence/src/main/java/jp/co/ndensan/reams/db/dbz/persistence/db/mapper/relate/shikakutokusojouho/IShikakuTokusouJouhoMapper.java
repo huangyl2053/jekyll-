@@ -12,6 +12,8 @@ import jp.co.ndensan.reams.db.dbz.entity.db.relate.shikakutokusojouho.ShikakuTok
 /**
  *
  * 資格履歴情報のMapperクラスです。
+ *
+ * @reamsid_L DBZ-4560-020 wanghui
  */
 public interface IShikakuTokusouJouhoMapper {
 

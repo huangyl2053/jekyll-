@@ -13,6 +13,8 @@ import jp.co.ndensan.reams.uz.uza.report.ReportPropertyBase;
 
 /**
  * {@link KyokaisoKanriMasterListReport}のプロパティです。
+ *
+ * @reamsid_L DBU-1050-060 linghuhang
  */
 public class KyokaisoKanriMasterListProperty extends ReportPropertyBase<KyokaisoKanriMasterListReportSource> {
 

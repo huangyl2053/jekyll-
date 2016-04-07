@@ -29,6 +29,7 @@ import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
 /**
  * 老人保健受給者情報管理するクラスです。
  *
+ * @reamsid_L DBU-1110-020 zhangzhiming
  */
 public class RoujinHokenJukyushaDaichoKanriManager {
 

@@ -18,7 +18,10 @@ import lombok.Getter;
 import lombok.Setter;
 
 /**
- * 被保険者証一括発行のバッチ処理クラスのパラメータ
+ * 被保険者証一括発行のバッチ処理クラスのパラメータです。
+ *
+ * @reamsid_L DBU-0420-020 duanzhanli
+ *
  */
 @SuppressWarnings("PMD.UnusedPrivateField")
 @Getter

@@ -11,6 +11,8 @@ import jp.co.ndensan.reams.uz.uza.report.source.ReportItem;
 
 /**
  * 要介護認定個人進捗状況票Sourceクラスです。
+ *
+ * @reamsid_L DBE-0200-040 zhangzhiming
  */
 public class KojinShinchokuJokyohyoReportSource implements IReportSource {
 // <editor-fold defaultstate="collapsed" desc="Generated Code">

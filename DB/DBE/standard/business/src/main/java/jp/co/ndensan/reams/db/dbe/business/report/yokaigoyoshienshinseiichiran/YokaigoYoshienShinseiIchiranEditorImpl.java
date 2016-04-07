@@ -23,6 +23,8 @@ import jp.co.ndensan.reams.uz.uza.lang.Separator;
 
 /**
  * 要介護認定・要支援認定等申請者一覧表Editorです。
+ *
+ * @reamsid_L DBE-1370-020 sunhaidi
  */
 public class YokaigoYoshienShinseiIchiranEditorImpl implements IYokaigoYoshienShinseiIchiranEditor {
 

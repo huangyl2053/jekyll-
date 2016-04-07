@@ -8,8 +8,9 @@ package jp.co.ndensan.reams.db.dbb.business.report.tsukibetsusuiihyo;
 import jp.co.ndensan.reams.db.dbb.entity.report.source.tsukibetsusuiihyo.TsukibetsuSuiihyoReportSource;
 
 /**
- *
  * 月別推移表ヘッダのEditorです。
+ *
+ * @reamsid_L DBB-0760-050 wangxiaodong
  */
 public class TsukibetsuSuiihyoHeaderEditorImpl implements ITsukibetsuSuiihyoEditor {
 

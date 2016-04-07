@@ -13,6 +13,8 @@ import jp.co.ndensan.reams.uz.uza.report.ReportPropertyBase;
 /**
  *
  * {@link 主治医意見書作成料請求書のReport}のプロパティです。
+ *
+ * @reamsid_L DBE-0050-040 sunhaidi
  */
 public class ShujiiIkenshoSakuseiRyoSeikyushoProperty extends ReportPropertyBase<ShujiiIkenshoSakuseiRyoSeikyushoReportSource> {
 

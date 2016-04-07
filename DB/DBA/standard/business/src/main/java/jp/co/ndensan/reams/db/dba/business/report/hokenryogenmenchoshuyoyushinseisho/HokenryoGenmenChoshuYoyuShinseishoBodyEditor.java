@@ -9,8 +9,9 @@ import jp.co.ndensan.reams.db.dba.entity.report.hokenryogenmenchoshuyoyushinseis
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
- *
  * 介護保険料減免申請書ボディEditorです。
+ * 
+ * @reamsid_L DBA-0540-692  suguangjun
  */
 public class HokenryoGenmenChoshuYoyuShinseishoBodyEditor implements IHokenryoGenmenChoshuYoyuShinseishoEditor {
 

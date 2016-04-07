@@ -9,8 +9,9 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 import lombok.Getter;
 
 /**
- *
  * 要介護認定調査依頼書ヘッダのITEMです。
+ *
+ * @reamsid_L DBE-0010-020 lishengli
  */
 @Getter
 @SuppressWarnings("PMD.UnusedPrivateField")

@@ -9,8 +9,9 @@ import jp.co.ndensan.reams.db.dba.entity.report.yokaigoninteikbnhenkoshinseisho.
 import jp.co.ndensan.reams.uz.uza.report.IReportBuilder;
 
 /**
- *
  * 要介護認定区分変更申請書のBuilderのインターフェースクラスです。
+ *
+ * @reamsid_L DBA-0540-713 lishengli
  */
 public interface IYokaigoNinteikbnHenkoShinseishoBuilder
         extends IReportBuilder<YokaigoNinteikbnHenkoShinseishoReportSource> {

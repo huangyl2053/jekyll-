@@ -14,6 +14,8 @@ import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
 /**
  *
  * 主治医意見書作成料請求書のReportです。
+ *
+ * @reamsid_L DBE-0050-040 sunhaidi
  */
 public class ShujiiIkenshoSakuseiRyoSeikyushoReport extends Report<ShujiiIkenshoSakuseiRyoSeikyushoReportSource> {
 

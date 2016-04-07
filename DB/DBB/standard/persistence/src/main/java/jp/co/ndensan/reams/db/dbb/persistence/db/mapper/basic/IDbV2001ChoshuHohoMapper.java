@@ -9,6 +9,9 @@ import jp.co.ndensan.reams.db.dbb.entity.db.basic.DbV2001ChoshuHohoEntity;
 
 /**
  * {@link jp.co.ndensan.reams.db.dbb.persistence.db.mapper.basic.IDbT2002FukaMapper}のマッパーIFです。
+ *
+ * @reamsid_L DBB-9060-010 duanzhanli
+ *
  */
 public interface IDbV2001ChoshuHohoMapper {
 

@@ -8,8 +8,9 @@ package jp.co.ndensan.reams.db.dba.business.report.hihokenshashohakkokanriichira
 import jp.co.ndensan.reams.db.dba.entity.report.source.hihokenshashohakkokanriichiranhyo.HihokenshashoHakkoKanriIchiranhyoReportSource;
 
 /**
- *
  * 被保険者証発行管理一覧表ヘッダEditorクラスです。
+ *
+ * @reamsid_L DBA-0600-070 lishengli
  */
 public class HihokenshashoHakkoKanriIchiranhyoHeaderEditor implements IHihokenshashoHakkoKanriIchiranhyoEditor {
 

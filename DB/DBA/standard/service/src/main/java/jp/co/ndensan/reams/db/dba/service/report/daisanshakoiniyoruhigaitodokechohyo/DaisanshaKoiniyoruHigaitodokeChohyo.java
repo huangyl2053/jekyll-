@@ -43,8 +43,9 @@ import jp.co.ndensan.reams.uz.uza.util.config.BusinessConfig;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 
 /**
- *
  * 第三者行為による被害届（介護保険用）Printerです。
+ * 
+ * @reamsid_L DBA-0540-380  suguangjun 
  */
 public class DaisanshaKoiniyoruHigaitodokeChohyo {
 

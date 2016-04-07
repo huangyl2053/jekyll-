@@ -33,6 +33,8 @@ import jp.co.ndensan.reams.uz.uza.util.config.BusinessConfig;
 
 /**
  * 要介護認定申請検索のハンドラークラスです。
+ *
+ * @reamsid_L DBE-1370-010 sunhaidi
  */
 public class ShinseiKensakuHandler {
 

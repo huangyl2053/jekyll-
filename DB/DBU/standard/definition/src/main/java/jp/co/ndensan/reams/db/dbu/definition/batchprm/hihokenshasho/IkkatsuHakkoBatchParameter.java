@@ -13,7 +13,9 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RTime;
 
 /**
- * 被保険者証一括発行のバッチのパラメータです
+ * 被保険者証一括発行のバッチのパラメータです。
+ *
+ * @reamsid_L DBU-0420-020 duanzhanli
  *
  */
 @SuppressWarnings("PMD.UnusedPrivateField")

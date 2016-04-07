@@ -22,6 +22,8 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.CommonButtonHolder;
 
 /**
  * 介護住民票個別事項連携情報作成【広域運用】画面のハンドラークラスです。
+ *
+ * @reamsid_L DBU-0550-010 zhangzhiming
  */
 public class KaigoJyuminhyouHandler {
 

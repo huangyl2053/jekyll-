@@ -20,6 +20,8 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
  * 宛名識別対象RelateEntityクラスです。
+ *
+ * @reamsid_L DBA-0412-010 linghuhang
  */
 @lombok.Getter
 @lombok.Setter
