@@ -10,6 +10,9 @@ import jp.co.ndensan.reams.db.dbu.entity.db.relate.kaigojuminhyo.KaigoJuminhyoRe
 
 /**
  * 介護住民票個別事項連携情報のマッパーインタフェースです。
+ * 
+ * @reamsid_L DBU-0350-020  lijia
+ * 
  */
 public interface IKaigoJuminhyoMapper {
 

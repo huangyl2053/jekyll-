@@ -11,6 +11,9 @@ import lombok.Getter;
 
 /**
  * 介護住民票個別事項連携情報を特定するためのMyBatis用パラメータクラスです。
+ * 
+ * @reamsid_L DBU-0350-020  lijia
+ * 
  */
 @SuppressWarnings("PMD.UnusedPrivateField")
 @Getter
