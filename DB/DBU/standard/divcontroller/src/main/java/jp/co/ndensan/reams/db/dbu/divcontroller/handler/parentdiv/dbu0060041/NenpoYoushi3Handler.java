@@ -21,6 +21,9 @@ import jp.co.ndensan.reams.uz.uza.util.Models;
 
 /**
  * 事業報告（年報）補正、発行_様式３画面のハンドラクラスです。
+ *
+ * @reamsid_L DBU-1060-040 zhengshukai
+ *
  */
 public class NenpoYoushi3Handler {
 

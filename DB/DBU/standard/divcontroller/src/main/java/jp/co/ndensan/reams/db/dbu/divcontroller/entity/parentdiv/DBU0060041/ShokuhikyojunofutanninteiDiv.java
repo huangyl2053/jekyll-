@@ -7,15 +7,17 @@ package jp.co.ndensan.reams.db.dbu.divcontroller.entity.parentdiv.DBU0060041;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import jp.co.ndensan.reams.uz.uza.ui.binding.*;
+import jp.co.ndensan.reams.uz.uza.ui.binding.Label;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
+import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxNum;
 
 /**
- * Shokuhikyojunofutannintei のクラスファイル 
- * 
- * @author 自動生成
+ * Shokuhikyojunofutannintei のクラスファイル
+ *
+ * @reamsid_L DBU-1060-040 zhengshukai
  */
 public class ShokuhikyojunofutanninteiDiv extends Panel {
+
     // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2015-11-30_08-54-50">
     /*
      * [ private の作成 ]
@@ -59,7 +61,7 @@ public class ShokuhikyojunofutanninteiDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setTblhokenryoshunojokyo(tblhokenryoshunojokyoDiv tblhokenryoshunojokyo) {
+    public void setTblhokenryoshunojokyo(tblhokenryoshunojokyoDiv tblhokenryoshunojokyo) {
         this.getTabShokuhikyojunofutannintei().setTblhokenryoshunojokyo(tblhokenryoshunojokyo);
     }
 
@@ -69,7 +71,7 @@ public class ShokuhikyojunofutanninteiDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setTblhokenryoshuno(tblhokenryoshunoDiv tblhokenryoshuno) {
+    public void setTblhokenryoshuno(tblhokenryoshunoDiv tblhokenryoshuno) {
         this.getTabShokuhikyojunofutannintei().getTblhokenryoshunojokyo().setTblhokenryoshuno(tblhokenryoshuno);
     }
 
@@ -354,7 +356,7 @@ public class ShokuhikyojunofutanninteiDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setTblhokenkyufushiharai(tblhokenkyufushiharaiDiv tblhokenkyufushiharai) {
+    public void setTblhokenkyufushiharai(tblhokenkyufushiharaiDiv tblhokenkyufushiharai) {
         this.getTabShokuhikyojunofutannintei().setTblhokenkyufushiharai(tblhokenkyufushiharai);
     }
 
@@ -364,7 +366,7 @@ public class ShokuhikyojunofutanninteiDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setTblhokenkyufushiharaijokyo(tblhokenkyufushiharaijokyoDiv tblhokenkyufushiharaijokyo) {
+    public void setTblhokenkyufushiharaijokyo(tblhokenkyufushiharaijokyoDiv tblhokenkyufushiharaijokyo) {
         this.getTabShokuhikyojunofutannintei().getTblhokenkyufushiharai().setTblhokenkyufushiharaijokyo(tblhokenkyufushiharaijokyo);
     }
 

@@ -4,18 +4,21 @@ package jp.co.ndensan.reams.db.dbu.divcontroller.entity.parentdiv.DBU0060041;
  * このファイルへの変更は、再生成時には損失するため
  * 不正な動作の原因になります。
  */
+
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import jp.co.ndensan.reams.uz.uza.ui.binding.*;
+import jp.co.ndensan.reams.uz.uza.ui.binding.Label;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TableCell;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TablePanel;
+import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxNum;
 
 /**
- * tblhokenkyufushiharaijokyo のクラスファイル 
- * 
- * @author 自動生成
+ * tblhokenkyufushiharaijokyo のクラスファイル
+ *
+ * @reamsid_L DBU-1060-040 zhengshukai
  */
 public class tblhokenkyufushiharaijokyoDiv extends TablePanel {
+
     // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2015-11-30_08-54-50">
     /*
      * [ private の作成 ]
@@ -1236,12 +1239,14 @@ public class tblhokenkyufushiharaijokyoDiv extends TablePanel {
 
     // </editor-fold>
 }
+
 /**
- * cellgubun のクラスファイル 
- * 
+ * cellgubun のクラスファイル
+ *
  * @author 自動生成
  */
 class cellgubunAttblhokenkyufushiharaijokyo extends TableCell {
+
     // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2015-11-30_08-54-50">
     @JsonProperty("lblgubun")
     private Label lblgubun;
@@ -1266,12 +1271,14 @@ class cellgubunAttblhokenkyufushiharaijokyo extends TableCell {
 
     // </editor-fold>
 }
+
 /**
- * cellShiharaigi のクラスファイル 
- * 
+ * cellShiharaigi のクラスファイル
+ *
  * @author 自動生成
  */
 class cellShiharaigiAttblhokenkyufushiharaijokyo extends TableCell {
+
     // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2015-11-30_08-54-50">
     @JsonProperty("lblShiharaigi")
     private Label lblShiharaigi;
@@ -1296,12 +1303,14 @@ class cellShiharaigiAttblhokenkyufushiharaijokyo extends TableCell {
 
     // </editor-fold>
 }
+
 /**
- * cellShiharaizu のクラスファイル 
- * 
+ * cellShiharaizu のクラスファイル
+ *
  * @author 自動生成
  */
 class cellShiharaizuAttblhokenkyufushiharaijokyo extends TableCell {
+
     // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2015-11-30_08-54-50">
     @JsonProperty("lblShiharaizu")
     private Label lblShiharaizu;
@@ -1326,12 +1335,14 @@ class cellShiharaizuAttblhokenkyufushiharaijokyo extends TableCell {
 
     // </editor-fold>
 }
+
 /**
- * cellchoshu のクラスファイル 
- * 
+ * cellchoshu のクラスファイル
+ *
  * @author 自動生成
  */
 class cellchoshuAttblhokenkyufushiharaijokyo extends TableCell {
+
     // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2015-11-30_08-54-50">
     @JsonProperty("lblchoshu")
     private Label lblchoshu;
@@ -1356,12 +1367,14 @@ class cellchoshuAttblhokenkyufushiharaijokyo extends TableCell {
 
     // </editor-fold>
 }
+
 /**
- * cellreinyu のクラスファイル 
- * 
+ * cellreinyu のクラスファイル
+ *
  * @author 自動生成
  */
 class cellreinyuAttblhokenkyufushiharaijokyo extends TableCell {
+
     // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2015-11-30_08-54-50">
     @JsonProperty("lblreinyu")
     private Label lblreinyu;
@@ -1386,12 +1399,14 @@ class cellreinyuAttblhokenkyufushiharaijokyo extends TableCell {
 
     // </editor-fold>
 }
+
 /**
- * celllmishiharaigaku のクラスファイル 
- * 
+ * celllmishiharaigaku のクラスファイル
+ *
  * @author 自動生成
  */
 class celllmishiharaigakuAttblhokenkyufushiharaijokyo extends TableCell {
+
     // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2015-11-30_08-54-50">
     @JsonProperty("lblmishiharaigaku")
     private Label lblmishiharaigaku;
@@ -1416,12 +1431,14 @@ class celllmishiharaigakuAttblhokenkyufushiharaijokyo extends TableCell {
 
     // </editor-fold>
 }
+
 /**
- * cellkaigoSer のクラスファイル 
- * 
+ * cellkaigoSer のクラスファイル
+ *
  * @author 自動生成
  */
 class cellkaigoSerAttblhokenkyufushiharaijokyo extends TableCell {
+
     // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2015-11-30_08-54-50">
     @JsonProperty("lblkaigoSer")
     private Label lblkaigoSer;
@@ -1446,12 +1463,14 @@ class cellkaigoSerAttblhokenkyufushiharaijokyo extends TableCell {
 
     // </editor-fold>
 }
+
 /**
- * cellShiharaigi1 のクラスファイル 
- * 
+ * cellShiharaigi1 のクラスファイル
+ *
  * @author 自動生成
  */
 class cellShiharaigi1Attblhokenkyufushiharaijokyo extends TableCell {
+
     // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2015-11-30_08-54-50">
     @JsonProperty("txtShiharaigi1")
     private TextBoxNum txtShiharaigi1;
@@ -1476,12 +1495,14 @@ class cellShiharaigi1Attblhokenkyufushiharaijokyo extends TableCell {
 
     // </editor-fold>
 }
+
 /**
- * cellShiharaizu1 のクラスファイル 
- * 
+ * cellShiharaizu1 のクラスファイル
+ *
  * @author 自動生成
  */
 class cellShiharaizu1Attblhokenkyufushiharaijokyo extends TableCell {
+
     // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2015-11-30_08-54-50">
     @JsonProperty("txtShiharaizu1")
     private TextBoxNum txtShiharaizu1;
@@ -1506,12 +1527,14 @@ class cellShiharaizu1Attblhokenkyufushiharaijokyo extends TableCell {
 
     // </editor-fold>
 }
+
 /**
- * cellChoshu1 のクラスファイル 
- * 
+ * cellChoshu1 のクラスファイル
+ *
  * @author 自動生成
  */
 class cellChoshu1Attblhokenkyufushiharaijokyo extends TableCell {
+
     // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2015-11-30_08-54-50">
     @JsonProperty("txtChoshu1")
     private TextBoxNum txtChoshu1;
@@ -1536,12 +1559,14 @@ class cellChoshu1Attblhokenkyufushiharaijokyo extends TableCell {
 
     // </editor-fold>
 }
+
 /**
- * cellReinyu1 のクラスファイル 
- * 
+ * cellReinyu1 のクラスファイル
+ *
  * @author 自動生成
  */
 class cellReinyu1Attblhokenkyufushiharaijokyo extends TableCell {
+
     // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2015-11-30_08-54-50">
     @JsonProperty("txtReinyu1")
     private TextBoxNum txtReinyu1;
@@ -1566,12 +1591,14 @@ class cellReinyu1Attblhokenkyufushiharaijokyo extends TableCell {
 
     // </editor-fold>
 }
+
 /**
- * cellmishiharaigaku1 のクラスファイル 
- * 
+ * cellmishiharaigaku1 のクラスファイル
+ *
  * @author 自動生成
  */
 class cellmishiharaigaku1Attblhokenkyufushiharaijokyo extends TableCell {
+
     // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2015-11-30_08-54-50">
     @JsonProperty("txtlmishiharaigaku1")
     private TextBoxNum txtlmishiharaigaku1;
@@ -1596,12 +1623,14 @@ class cellmishiharaigaku1Attblhokenkyufushiharaijokyo extends TableCell {
 
     // </editor-fold>
 }
+
 /**
- * cellkaigoyoboSer のクラスファイル 
- * 
+ * cellkaigoyoboSer のクラスファイル
+ *
  * @author 自動生成
  */
 class cellkaigoyoboSerAttblhokenkyufushiharaijokyo extends TableCell {
+
     // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2015-11-30_08-54-50">
     @JsonProperty("lblkaigoyoboSer")
     private Label lblkaigoyoboSer;
@@ -1626,12 +1655,14 @@ class cellkaigoyoboSerAttblhokenkyufushiharaijokyo extends TableCell {
 
     // </editor-fold>
 }
+
 /**
- * cellShiharaigi2 のクラスファイル 
- * 
+ * cellShiharaigi2 のクラスファイル
+ *
  * @author 自動生成
  */
 class cellShiharaigi2Attblhokenkyufushiharaijokyo extends TableCell {
+
     // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2015-11-30_08-54-50">
     @JsonProperty("txtShiharaigi2")
     private TextBoxNum txtShiharaigi2;
@@ -1656,12 +1687,14 @@ class cellShiharaigi2Attblhokenkyufushiharaijokyo extends TableCell {
 
     // </editor-fold>
 }
+
 /**
- * cellShiharaizu2 のクラスファイル 
- * 
+ * cellShiharaizu2 のクラスファイル
+ *
  * @author 自動生成
  */
 class cellShiharaizu2Attblhokenkyufushiharaijokyo extends TableCell {
+
     // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2015-11-30_08-54-50">
     @JsonProperty("txtShiharaizu2")
     private TextBoxNum txtShiharaizu2;
@@ -1686,12 +1719,14 @@ class cellShiharaizu2Attblhokenkyufushiharaijokyo extends TableCell {
 
     // </editor-fold>
 }
+
 /**
- * cellChoshu2 のクラスファイル 
- * 
+ * cellChoshu2 のクラスファイル
+ *
  * @author 自動生成
  */
 class cellChoshu2Attblhokenkyufushiharaijokyo extends TableCell {
+
     // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2015-11-30_08-54-50">
     @JsonProperty("txtChoshu2")
     private TextBoxNum txtChoshu2;
@@ -1716,12 +1751,14 @@ class cellChoshu2Attblhokenkyufushiharaijokyo extends TableCell {
 
     // </editor-fold>
 }
+
 /**
- * cellReinyu2 のクラスファイル 
- * 
+ * cellReinyu2 のクラスファイル
+ *
  * @author 自動生成
  */
 class cellReinyu2Attblhokenkyufushiharaijokyo extends TableCell {
+
     // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2015-11-30_08-54-50">
     @JsonProperty("txtReinyu2")
     private TextBoxNum txtReinyu2;
@@ -1746,12 +1783,14 @@ class cellReinyu2Attblhokenkyufushiharaijokyo extends TableCell {
 
     // </editor-fold>
 }
+
 /**
- * cellmishiharaigaku2 のクラスファイル 
- * 
+ * cellmishiharaigaku2 のクラスファイル
+ *
  * @author 自動生成
  */
 class cellmishiharaigaku2Attblhokenkyufushiharaijokyo extends TableCell {
+
     // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2015-11-30_08-54-50">
     @JsonProperty("txtlmishiharaigaku2")
     private TextBoxNum txtlmishiharaigaku2;
@@ -1776,12 +1815,14 @@ class cellmishiharaigaku2Attblhokenkyufushiharaijokyo extends TableCell {
 
     // </editor-fold>
 }
+
 /**
- * cellkogakukaigoSer のクラスファイル 
- * 
+ * cellkogakukaigoSer のクラスファイル
+ *
  * @author 自動生成
  */
 class cellkogakukaigoSerAttblhokenkyufushiharaijokyo extends TableCell {
+
     // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2015-11-30_08-54-50">
     @JsonProperty("lblkogakukaigoSer")
     private Label lblkogakukaigoSer;
@@ -1806,12 +1847,14 @@ class cellkogakukaigoSerAttblhokenkyufushiharaijokyo extends TableCell {
 
     // </editor-fold>
 }
+
 /**
- * cellShiharaigi3 のクラスファイル 
- * 
+ * cellShiharaigi3 のクラスファイル
+ *
  * @author 自動生成
  */
 class cellShiharaigi3Attblhokenkyufushiharaijokyo extends TableCell {
+
     // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2015-11-30_08-54-50">
     @JsonProperty("txtShiharaigi3")
     private TextBoxNum txtShiharaigi3;
@@ -1836,12 +1879,14 @@ class cellShiharaigi3Attblhokenkyufushiharaijokyo extends TableCell {
 
     // </editor-fold>
 }
+
 /**
- * cellShiharaizu3 のクラスファイル 
- * 
+ * cellShiharaizu3 のクラスファイル
+ *
  * @author 自動生成
  */
 class cellShiharaizu3Attblhokenkyufushiharaijokyo extends TableCell {
+
     // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2015-11-30_08-54-50">
     @JsonProperty("txtShiharaizu3")
     private TextBoxNum txtShiharaizu3;
@@ -1866,12 +1911,14 @@ class cellShiharaizu3Attblhokenkyufushiharaijokyo extends TableCell {
 
     // </editor-fold>
 }
+
 /**
- * cellChoshu3 のクラスファイル 
- * 
+ * cellChoshu3 のクラスファイル
+ *
  * @author 自動生成
  */
 class cellChoshu3Attblhokenkyufushiharaijokyo extends TableCell {
+
     // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2015-11-30_08-54-50">
     @JsonProperty("txtChoshu3")
     private TextBoxNum txtChoshu3;
@@ -1896,12 +1943,14 @@ class cellChoshu3Attblhokenkyufushiharaijokyo extends TableCell {
 
     // </editor-fold>
 }
+
 /**
- * cellReinyu3 のクラスファイル 
- * 
+ * cellReinyu3 のクラスファイル
+ *
  * @author 自動生成
  */
 class cellReinyu3Attblhokenkyufushiharaijokyo extends TableCell {
+
     // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2015-11-30_08-54-50">
     @JsonProperty("txtReinyu3")
     private TextBoxNum txtReinyu3;
@@ -1926,12 +1975,14 @@ class cellReinyu3Attblhokenkyufushiharaijokyo extends TableCell {
 
     // </editor-fold>
 }
+
 /**
- * cellmishiharaigaku3 のクラスファイル 
- * 
+ * cellmishiharaigaku3 のクラスファイル
+ *
  * @author 自動生成
  */
 class cellmishiharaigaku3Attblhokenkyufushiharaijokyo extends TableCell {
+
     // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2015-11-30_08-54-50">
     @JsonProperty("txtlmishiharaigaku3")
     private TextBoxNum txtlmishiharaigaku3;
@@ -1956,12 +2007,14 @@ class cellmishiharaigaku3Attblhokenkyufushiharaijokyo extends TableCell {
 
     // </editor-fold>
 }
+
 /**
- * cellkogakuiryo のクラスファイル 
- * 
+ * cellkogakuiryo のクラスファイル
+ *
  * @author 自動生成
  */
 class cellkogakuiryoAttblhokenkyufushiharaijokyo extends TableCell {
+
     // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2015-11-30_08-54-50">
     @JsonProperty("lblkogakuiryo")
     private Label lblkogakuiryo;
@@ -1986,12 +2039,14 @@ class cellkogakuiryoAttblhokenkyufushiharaijokyo extends TableCell {
 
     // </editor-fold>
 }
+
 /**
- * cellShiharaigi4 のクラスファイル 
- * 
+ * cellShiharaigi4 のクラスファイル
+ *
  * @author 自動生成
  */
 class cellShiharaigi4Attblhokenkyufushiharaijokyo extends TableCell {
+
     // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2015-11-30_08-54-50">
     @JsonProperty("txtShiharaigi4")
     private TextBoxNum txtShiharaigi4;
@@ -2016,12 +2071,14 @@ class cellShiharaigi4Attblhokenkyufushiharaijokyo extends TableCell {
 
     // </editor-fold>
 }
+
 /**
- * cellShiharaizu4 のクラスファイル 
- * 
+ * cellShiharaizu4 のクラスファイル
+ *
  * @author 自動生成
  */
 class cellShiharaizu4Attblhokenkyufushiharaijokyo extends TableCell {
+
     // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2015-11-30_08-54-50">
     @JsonProperty("txtShiharaizu4")
     private TextBoxNum txtShiharaizu4;
@@ -2046,12 +2103,14 @@ class cellShiharaizu4Attblhokenkyufushiharaijokyo extends TableCell {
 
     // </editor-fold>
 }
+
 /**
- * cellChoshu4 のクラスファイル 
- * 
+ * cellChoshu4 のクラスファイル
+ *
  * @author 自動生成
  */
 class cellChoshu4Attblhokenkyufushiharaijokyo extends TableCell {
+
     // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2015-11-30_08-54-50">
     @JsonProperty("txtChoshu4")
     private TextBoxNum txtChoshu4;
@@ -2076,12 +2135,14 @@ class cellChoshu4Attblhokenkyufushiharaijokyo extends TableCell {
 
     // </editor-fold>
 }
+
 /**
- * cellReinyu4 のクラスファイル 
- * 
+ * cellReinyu4 のクラスファイル
+ *
  * @author 自動生成
  */
 class cellReinyu4Attblhokenkyufushiharaijokyo extends TableCell {
+
     // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2015-11-30_08-54-50">
     @JsonProperty("txtReinyu4")
     private TextBoxNum txtReinyu4;
@@ -2106,12 +2167,14 @@ class cellReinyu4Attblhokenkyufushiharaijokyo extends TableCell {
 
     // </editor-fold>
 }
+
 /**
- * cellmishiharaigaku4 のクラスファイル 
- * 
+ * cellmishiharaigaku4 のクラスファイル
+ *
  * @author 自動生成
  */
 class cellmishiharaigaku4Attblhokenkyufushiharaijokyo extends TableCell {
+
     // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2015-11-30_08-54-50">
     @JsonProperty("txtlmishiharaigaku4")
     private TextBoxNum txtlmishiharaigaku4;
@@ -2136,12 +2199,14 @@ class cellmishiharaigaku4Attblhokenkyufushiharaijokyo extends TableCell {
 
     // </editor-fold>
 }
+
 /**
- * celltokuteinyusho のクラスファイル 
- * 
+ * celltokuteinyusho のクラスファイル
+ *
  * @author 自動生成
  */
 class celltokuteinyushoAttblhokenkyufushiharaijokyo extends TableCell {
+
     // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2015-11-30_08-54-50">
     @JsonProperty("lbltokuteinyusho")
     private Label lbltokuteinyusho;
@@ -2166,12 +2231,14 @@ class celltokuteinyushoAttblhokenkyufushiharaijokyo extends TableCell {
 
     // </editor-fold>
 }
+
 /**
- * cellShiharaigi5 のクラスファイル 
- * 
+ * cellShiharaigi5 のクラスファイル
+ *
  * @author 自動生成
  */
 class cellShiharaigi5Attblhokenkyufushiharaijokyo extends TableCell {
+
     // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2015-11-30_08-54-50">
     @JsonProperty("txtShiharaigi5")
     private TextBoxNum txtShiharaigi5;
@@ -2196,12 +2263,14 @@ class cellShiharaigi5Attblhokenkyufushiharaijokyo extends TableCell {
 
     // </editor-fold>
 }
+
 /**
- * cellShiharaizu5 のクラスファイル 
- * 
+ * cellShiharaizu5 のクラスファイル
+ *
  * @author 自動生成
  */
 class cellShiharaizu5Attblhokenkyufushiharaijokyo extends TableCell {
+
     // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2015-11-30_08-54-50">
     @JsonProperty("txtShiharaizu5")
     private TextBoxNum txtShiharaizu5;
@@ -2226,12 +2295,14 @@ class cellShiharaizu5Attblhokenkyufushiharaijokyo extends TableCell {
 
     // </editor-fold>
 }
+
 /**
- * cellchoshu5 のクラスファイル 
- * 
+ * cellchoshu5 のクラスファイル
+ *
  * @author 自動生成
  */
 class cellchoshu5Attblhokenkyufushiharaijokyo extends TableCell {
+
     // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2015-11-30_08-54-50">
     @JsonProperty("txtChoshu5")
     private TextBoxNum txtChoshu5;
@@ -2256,12 +2327,14 @@ class cellchoshu5Attblhokenkyufushiharaijokyo extends TableCell {
 
     // </editor-fold>
 }
+
 /**
- * cellReinyu5 のクラスファイル 
- * 
+ * cellReinyu5 のクラスファイル
+ *
  * @author 自動生成
  */
 class cellReinyu5Attblhokenkyufushiharaijokyo extends TableCell {
+
     // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2015-11-30_08-54-50">
     @JsonProperty("txtReinyu5")
     private TextBoxNum txtReinyu5;
@@ -2286,12 +2359,14 @@ class cellReinyu5Attblhokenkyufushiharaijokyo extends TableCell {
 
     // </editor-fold>
 }
+
 /**
- * cellmishiharaigaku5 のクラスファイル 
- * 
+ * cellmishiharaigaku5 のクラスファイル
+ *
  * @author 自動生成
  */
 class cellmishiharaigaku5Attblhokenkyufushiharaijokyo extends TableCell {
+
     // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2015-11-30_08-54-50">
     @JsonProperty("txtlmishiharaigaku5")
     private TextBoxNum txtlmishiharaigaku5;
@@ -2316,12 +2391,14 @@ class cellmishiharaigaku5Attblhokenkyufushiharaijokyo extends TableCell {
 
     // </editor-fold>
 }
+
 /**
- * cellsonota のクラスファイル 
- * 
+ * cellsonota のクラスファイル
+ *
  * @author 自動生成
  */
 class cellsonotaAttblhokenkyufushiharaijokyo extends TableCell {
+
     // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2015-11-30_08-54-50">
     @JsonProperty("lblsonota")
     private Label lblsonota;
@@ -2346,12 +2423,14 @@ class cellsonotaAttblhokenkyufushiharaijokyo extends TableCell {
 
     // </editor-fold>
 }
+
 /**
- * cellShiharaigi6 のクラスファイル 
- * 
+ * cellShiharaigi6 のクラスファイル
+ *
  * @author 自動生成
  */
 class cellShiharaigi6Attblhokenkyufushiharaijokyo extends TableCell {
+
     // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2015-11-30_08-54-50">
     @JsonProperty("txtShiharaigi6")
     private TextBoxNum txtShiharaigi6;
@@ -2376,12 +2455,14 @@ class cellShiharaigi6Attblhokenkyufushiharaijokyo extends TableCell {
 
     // </editor-fold>
 }
+
 /**
- * cellShiharaizu6 のクラスファイル 
- * 
+ * cellShiharaizu6 のクラスファイル
+ *
  * @author 自動生成
  */
 class cellShiharaizu6Attblhokenkyufushiharaijokyo extends TableCell {
+
     // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2015-11-30_08-54-50">
     @JsonProperty("txtShiharaizu6")
     private TextBoxNum txtShiharaizu6;
@@ -2406,12 +2487,14 @@ class cellShiharaizu6Attblhokenkyufushiharaijokyo extends TableCell {
 
     // </editor-fold>
 }
+
 /**
- * cellChoshu6 のクラスファイル 
- * 
+ * cellChoshu6 のクラスファイル
+ *
  * @author 自動生成
  */
 class cellChoshu6Attblhokenkyufushiharaijokyo extends TableCell {
+
     // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2015-11-30_08-54-50">
     @JsonProperty("txtChoshu6")
     private TextBoxNum txtChoshu6;
@@ -2436,12 +2519,14 @@ class cellChoshu6Attblhokenkyufushiharaijokyo extends TableCell {
 
     // </editor-fold>
 }
+
 /**
- * cellReinyu6 のクラスファイル 
- * 
+ * cellReinyu6 のクラスファイル
+ *
  * @author 自動生成
  */
 class cellReinyu6Attblhokenkyufushiharaijokyo extends TableCell {
+
     // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2015-11-30_08-54-50">
     @JsonProperty("txtReinyu6")
     private TextBoxNum txtReinyu6;
@@ -2466,12 +2551,14 @@ class cellReinyu6Attblhokenkyufushiharaijokyo extends TableCell {
 
     // </editor-fold>
 }
+
 /**
- * cellmishiharaigaku6 のクラスファイル 
- * 
+ * cellmishiharaigaku6 のクラスファイル
+ *
  * @author 自動生成
  */
 class cellmishiharaigaku6Attblhokenkyufushiharaijokyo extends TableCell {
+
     // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2015-11-30_08-54-50">
     @JsonProperty("txtlmishiharaigaku6")
     private TextBoxNum txtlmishiharaigaku6;
@@ -2496,12 +2583,14 @@ class cellmishiharaigaku6Attblhokenkyufushiharaijokyo extends TableCell {
 
     // </editor-fold>
 }
+
 /**
- * cellkeii のクラスファイル 
- * 
+ * cellkeii のクラスファイル
+ *
  * @author 自動生成
  */
 class cellkeiiAttblhokenkyufushiharaijokyo extends TableCell {
+
     // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2015-11-30_08-54-50">
     @JsonProperty("lblkeii")
     private Label lblkeii;
@@ -2526,12 +2615,14 @@ class cellkeiiAttblhokenkyufushiharaijokyo extends TableCell {
 
     // </editor-fold>
 }
+
 /**
- * cellShiharaigi7 のクラスファイル 
- * 
+ * cellShiharaigi7 のクラスファイル
+ *
  * @author 自動生成
  */
 class cellShiharaigi7Attblhokenkyufushiharaijokyo extends TableCell {
+
     // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2015-11-30_08-54-50">
     @JsonProperty("txtShiharaigi7")
     private TextBoxNum txtShiharaigi7;
@@ -2556,12 +2647,14 @@ class cellShiharaigi7Attblhokenkyufushiharaijokyo extends TableCell {
 
     // </editor-fold>
 }
+
 /**
- * cellShiharaizu7 のクラスファイル 
- * 
+ * cellShiharaizu7 のクラスファイル
+ *
  * @author 自動生成
  */
 class cellShiharaizu7Attblhokenkyufushiharaijokyo extends TableCell {
+
     // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2015-11-30_08-54-50">
     @JsonProperty("txtShiharaizu7")
     private TextBoxNum txtShiharaizu7;
@@ -2586,12 +2679,14 @@ class cellShiharaizu7Attblhokenkyufushiharaijokyo extends TableCell {
 
     // </editor-fold>
 }
+
 /**
- * cellChoshu7 のクラスファイル 
- * 
+ * cellChoshu7 のクラスファイル
+ *
  * @author 自動生成
  */
 class cellChoshu7Attblhokenkyufushiharaijokyo extends TableCell {
+
     // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2015-11-30_08-54-50">
     @JsonProperty("txtChoshu7")
     private TextBoxNum txtChoshu7;
@@ -2616,12 +2711,14 @@ class cellChoshu7Attblhokenkyufushiharaijokyo extends TableCell {
 
     // </editor-fold>
 }
+
 /**
- * cellReinyu7 のクラスファイル 
- * 
+ * cellReinyu7 のクラスファイル
+ *
  * @author 自動生成
  */
 class cellReinyu7Attblhokenkyufushiharaijokyo extends TableCell {
+
     // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2015-11-30_08-54-50">
     @JsonProperty("txtReinyu7")
     private TextBoxNum txtReinyu7;
@@ -2646,12 +2743,14 @@ class cellReinyu7Attblhokenkyufushiharaijokyo extends TableCell {
 
     // </editor-fold>
 }
+
 /**
- * cellmishiharaigaku7 のクラスファイル 
- * 
+ * cellmishiharaigaku7 のクラスファイル
+ *
  * @author 自動生成
  */
 class cellmishiharaigaku7Attblhokenkyufushiharaijokyo extends TableCell {
+
     // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2015-11-30_08-54-50">
     @JsonProperty("txtlmishiharaigaku7")
     private TextBoxNum txtlmishiharaigaku7;

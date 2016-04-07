@@ -10,6 +10,8 @@ import jp.co.ndensan.reams.uz.uza.math.Decimal;
 /**
  * 事業報告（年報）補正、発行_様式３画面のパラメータです。
  *
+ * @reamsid_L DBU-1060-040 zhengshukai
+ *
  */
 @SuppressWarnings("PMD.UnusedPrivateField")
 @lombok.Getter
