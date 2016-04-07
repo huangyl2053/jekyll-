@@ -10,8 +10,9 @@ import jp.co.ndensan.reams.db.dba.entity.db.tennyutenshutsuhoryutaishosha.Tennyu
 import jp.co.ndensan.reams.db.dba.entity.db.tennyutenshutsuhoryutaishosha.TenshutsuHoryuTaishoshaEntity;
 
 /**
- *
  * 転入転出保留対象者管理のMapperクラスです。
+ *
+ * @reamsid_L DBA-0470-010 wangxiaodong
  */
 public interface ITennyuTenshutsuHoryuTaishoshaMapper {
 
