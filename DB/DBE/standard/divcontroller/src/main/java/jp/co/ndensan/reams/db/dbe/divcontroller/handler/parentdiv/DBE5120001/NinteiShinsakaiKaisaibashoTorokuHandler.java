@@ -22,6 +22,7 @@ import jp.co.ndensan.reams.uz.uza.util.Models;
 /**
  * 介護認定審査会開催場所登録画面でのバリデーションを管理するハンドラークラスです。
  *
+ * @reamsid_L DBE-0100-010  wangkun
  */
 public class NinteiShinsakaiKaisaibashoTorokuHandler {
 
@@ -275,8 +276,8 @@ public class NinteiShinsakaiKaisaibashoTorokuHandler {
         div.getTxtKaisaibashoJusho().clearValue();
         div.getTxtTelNumber().clearDomain();
         div.getDdlKaisaiBashoJokyo().setSelectedIndex(0);
-        div.getCcdKaisaiChikuCode().load(コード種別);
         div.getCcdKaisaiChikuCode().clearDisplayedValues();
+        div.getCcdKaisaiChikuCode().applyNoOptionCodeMaster().load(コード種別);
     }
 
     private void get開催地区内容(dgKaisaibashoIchiran_Row clickedItem) {

@@ -15,7 +15,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 /**
  * dgResultList_Row のクラスファイル 
  * 
- * @author 自動生成
+ * @reamsid_L DBE-0220-010 wangkun
  */
 
 public class dgResultList_Row extends DataRow {

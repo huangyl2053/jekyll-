@@ -13,6 +13,8 @@ import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5301ShujiiIkenshoIraiJohoEn
 
 /**
  * 要介護認定結果情報のマッパーインタフェースです。
+ * 
+ * @reamsid_L DBE-0220-010 wangkun
  */
 public interface IYouKaiGoNinTeiKekTesuChiMapper {
 

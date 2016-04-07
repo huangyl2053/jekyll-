@@ -9,6 +9,8 @@ import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 
 /**
  * 合議体情報を特定するためのMyBatis用パラメータクラスです。
+ * 
+ * @reamsid_L DBE-0100-010  wangkun
  */
 @lombok.Getter
 @SuppressWarnings("PMD.UnusedPrivateField")

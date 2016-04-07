@@ -17,6 +17,8 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
  * 要介護認定結果通知情報ビジネスクラスです。
+ * 
+ * @reamsid_L DBE-0220-010 wangkun
  */
 public class YouKaiGoNinTeiKekTesuChi  implements Serializable {
 
