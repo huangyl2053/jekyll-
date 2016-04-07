@@ -29,6 +29,8 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 
 /**
  * 事業報告（月報）補正発行_様式１の２、様式１の３補正のクラスです。
+ *
+ * @reamsid_L DBU-1100-030 wangkanglei
  */
 public class YoshikiIchinoniIchinosanHosei {
 
@@ -49,7 +51,6 @@ public class YoshikiIchinoniIchinosanHosei {
         RString 状態 = ViewStateHolder.get(ViewStateKeys.状態, RString.class);
         getHandler(div).set基本情報エリア(引き継ぎデータ, 状態);
         IStateEnumerations stateName = getHandler(div).initialize(引き継ぎデータ, 状態);
-        ViewStateHolder.put(ViewStateKeys.今画面状態, stateName.getName());
         return ResponseData.of(div).setState(stateName);
     }
 
@@ -99,12 +100,9 @@ public class YoshikiIchinoniIchinosanHosei {
         if (削除状態.equals(状態)) {
             if (!ResponseHolder.isReRequest()) {
                 getHandler(div).delete(引き継ぎデータ);
-                return ResponseData.of(div).addMessage(UrInformationMessages.正常終了.getMessage()
-                        .replace(削除状態.toString())).respond();
-            }
-            if (new RString(UrInformationMessages.正常終了.getMessage().getCode())
-                    .equals(ResponseHolder.getMessageCode())) {
-                return ResponseData.of(div).respond();
+                div.getKanryoMessage().getCcdKaigoKanryoMessage().setSuccessMessage(new RString(
+                        UrInformationMessages.正常終了.getMessage().replace(削除状態.toString()).evaluate()));
+                return ResponseData.of(div).setState(DBU0020031StateName.完了状態);
             }
         }
         List<JigyoHokokuTokeiData> 修正データリスト = getHandler(div).get修正データリスト(引き継ぎデータ);
@@ -132,11 +130,8 @@ public class YoshikiIchinoniIchinosanHosei {
         if (new RString(UrQuestionMessages.処理実行の確認.getMessage().getCode()).equals(ResponseHolder.getMessageCode())
                 && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
             getHandler(div).update(修正データリスト);
-            return ResponseData.of(div).addMessage(UrInformationMessages.正常終了.getMessage()
-                    .replace(更新.toString())).respond();
-        }
-        if (new RString(UrInformationMessages.正常終了.getMessage().getCode()).equals(ResponseHolder.getMessageCode())
-                && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
+            div.getKanryoMessage().getCcdKaigoKanryoMessage().setSuccessMessage(
+                    new RString(UrInformationMessages.正常終了.getMessage().replace(更新.toString()).evaluate()));
             return ResponseData.of(div).setState(DBU0020031StateName.完了状態);
         }
         return ResponseData.of(div).respond();

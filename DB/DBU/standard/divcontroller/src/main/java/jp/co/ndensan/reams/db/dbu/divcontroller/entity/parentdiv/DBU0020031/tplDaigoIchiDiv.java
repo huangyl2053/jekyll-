@@ -4,18 +4,20 @@ package jp.co.ndensan.reams.db.dbu.divcontroller.entity.parentdiv.DBU0020031;
  * このファイルへの変更は、再生成時には損失するため
  * 不正な動作の原因になります。
  */
+
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import jp.co.ndensan.reams.uz.uza.ui.binding.*;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TableCell;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TablePanel;
+import jp.co.ndensan.reams.uz.uza.ui.binding.TextBox;
 
 /**
- * tplDaigoIchi のクラスファイル 
- * 
- * @author 自動生成
+ * tplDaigoIchi のクラスファイル
+ *
+ * @reamsid_L DBU-1100-030 wangkanglei
  */
 public class tplDaigoIchiDiv extends TablePanel {
+
     // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-01-15_09-59-03">
     /*
      * [ private の作成 ]
@@ -401,9 +403,10 @@ public class tplDaigoIchiDiv extends TablePanel {
 
     // </editor-fold>
 }
+
 /**
- * cel311 のクラスファイル 
- * 
+ * cel311 のクラスファイル
+ *
  * @author 自動生成
  */
 class cel311AttplDaigoIchi extends TableCell {
@@ -411,12 +414,14 @@ class cel311AttplDaigoIchi extends TableCell {
 
     // </editor-fold>
 }
+
 /**
- * cel322 のクラスファイル 
- * 
+ * cel322 のクラスファイル
+ *
  * @author 自動生成
  */
 class cel322AttplDaigoIchi extends TableCell {
+
     // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-01-15_09-59-03">
     @JsonProperty("txtKensu522")
     private TextBox txtKensu522;
@@ -441,9 +446,10 @@ class cel322AttplDaigoIchi extends TableCell {
 
     // </editor-fold>
 }
+
 /**
- * cel331 のクラスファイル 
- * 
+ * cel331 のクラスファイル
+ *
  * @author 自動生成
  */
 class cel331AttplDaigoIchi extends TableCell {
@@ -451,12 +457,14 @@ class cel331AttplDaigoIchi extends TableCell {
 
     // </editor-fold>
 }
+
 /**
- * cel332 のクラスファイル 
- * 
+ * cel332 のクラスファイル
+ *
  * @author 自動生成
  */
 class cel332AttplDaigoIchi extends TableCell {
+
     // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-01-15_09-59-03">
     @JsonProperty("txtKensu532")
     private TextBox txtKensu532;
@@ -481,12 +489,14 @@ class cel332AttplDaigoIchi extends TableCell {
 
     // </editor-fold>
 }
+
 /**
- * cel333 のクラスファイル 
- * 
+ * cel333 のクラスファイル
+ *
  * @author 自動生成
  */
 class cel333AttplDaigoIchi extends TableCell {
+
     // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-01-15_09-59-03">
     @JsonProperty("txtKensu533")
     private TextBox txtKensu533;
@@ -511,12 +521,14 @@ class cel333AttplDaigoIchi extends TableCell {
 
     // </editor-fold>
 }
+
 /**
- * cel342 のクラスファイル 
- * 
+ * cel342 のクラスファイル
+ *
  * @author 自動生成
  */
 class cel342AttplDaigoIchi extends TableCell {
+
     // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-01-15_09-59-03">
     @JsonProperty("txtKensu542")
     private TextBox txtKensu542;
@@ -541,12 +553,14 @@ class cel342AttplDaigoIchi extends TableCell {
 
     // </editor-fold>
 }
+
 /**
- * cel343 のクラスファイル 
- * 
+ * cel343 のクラスファイル
+ *
  * @author 自動生成
  */
 class cel343AttplDaigoIchi extends TableCell {
+
     // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-01-15_09-59-03">
     @JsonProperty("txtKensu543")
     private TextBox txtKensu543;
@@ -571,12 +585,14 @@ class cel343AttplDaigoIchi extends TableCell {
 
     // </editor-fold>
 }
+
 /**
- * cel352 のクラスファイル 
- * 
+ * cel352 のクラスファイル
+ *
  * @author 自動生成
  */
 class cel352AttplDaigoIchi extends TableCell {
+
     // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-01-15_09-59-03">
     @JsonProperty("txtKensu552")
     private TextBox txtKensu552;
@@ -601,12 +617,14 @@ class cel352AttplDaigoIchi extends TableCell {
 
     // </editor-fold>
 }
+
 /**
- * cel353 のクラスファイル 
- * 
+ * cel353 のクラスファイル
+ *
  * @author 自動生成
  */
 class cel353AttplDaigoIchi extends TableCell {
+
     // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-01-15_09-59-03">
     @JsonProperty("txtKensu553")
     private TextBox txtKensu553;
@@ -631,12 +649,14 @@ class cel353AttplDaigoIchi extends TableCell {
 
     // </editor-fold>
 }
+
 /**
- * cel362 のクラスファイル 
- * 
+ * cel362 のクラスファイル
+ *
  * @author 自動生成
  */
 class cel362AttplDaigoIchi extends TableCell {
+
     // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-01-15_09-59-03">
     @JsonProperty("txtKensu562")
     private TextBox txtKensu562;
@@ -661,12 +681,14 @@ class cel362AttplDaigoIchi extends TableCell {
 
     // </editor-fold>
 }
+
 /**
- * cel363 のクラスファイル 
- * 
+ * cel363 のクラスファイル
+ *
  * @author 自動生成
  */
 class cel363AttplDaigoIchi extends TableCell {
+
     // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-01-15_09-59-03">
     @JsonProperty("txtKensu563")
     private TextBox txtKensu563;
@@ -691,12 +713,14 @@ class cel363AttplDaigoIchi extends TableCell {
 
     // </editor-fold>
 }
+
 /**
- * cel372 のクラスファイル 
- * 
+ * cel372 のクラスファイル
+ *
  * @author 自動生成
  */
 class cel372AttplDaigoIchi extends TableCell {
+
     // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-01-15_09-59-03">
     @JsonProperty("txtKensu572")
     private TextBox txtKensu572;
@@ -721,12 +745,14 @@ class cel372AttplDaigoIchi extends TableCell {
 
     // </editor-fold>
 }
+
 /**
- * cel373 のクラスファイル 
- * 
+ * cel373 のクラスファイル
+ *
  * @author 自動生成
  */
 class cel373AttplDaigoIchi extends TableCell {
+
     // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-01-15_09-59-03">
     @JsonProperty("txtKensu573")
     private TextBox txtKensu573;
@@ -751,12 +777,14 @@ class cel373AttplDaigoIchi extends TableCell {
 
     // </editor-fold>
 }
+
 /**
- * cel382 のクラスファイル 
- * 
+ * cel382 のクラスファイル
+ *
  * @author 自動生成
  */
 class cel382AttplDaigoIchi extends TableCell {
+
     // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-01-15_09-59-03">
     @JsonProperty("txtKensu582")
     private TextBox txtKensu582;
@@ -781,12 +809,14 @@ class cel382AttplDaigoIchi extends TableCell {
 
     // </editor-fold>
 }
+
 /**
- * cel383 のクラスファイル 
- * 
+ * cel383 のクラスファイル
+ *
  * @author 自動生成
  */
 class cel383AttplDaigoIchi extends TableCell {
+
     // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-01-15_09-59-03">
     @JsonProperty("txtKensu583")
     private TextBox txtKensu583;
