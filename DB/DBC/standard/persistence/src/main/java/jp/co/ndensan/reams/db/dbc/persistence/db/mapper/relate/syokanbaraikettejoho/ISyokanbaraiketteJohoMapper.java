@@ -13,6 +13,8 @@ import jp.co.ndensan.reams.db.dbc.entity.db.relate.syokanbaraiketejoho.Syokanbar
 
 /**
  * 償還払決定一覧情報を取得するマッパーインタフェースです。
+ *
+ * @reamsid_L DBC-0950-010 zuotao
  */
 public interface ISyokanbaraiketteJohoMapper {
 

@@ -12,6 +12,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 /**
  * 償還払決定一覧検索用MyBatisパラメータクラスです。
  *
+ * @reamsid_L DBC-0950-010 zuotao
  */
 @lombok.Getter
 @SuppressWarnings("PMD.UnusedPrivateField")

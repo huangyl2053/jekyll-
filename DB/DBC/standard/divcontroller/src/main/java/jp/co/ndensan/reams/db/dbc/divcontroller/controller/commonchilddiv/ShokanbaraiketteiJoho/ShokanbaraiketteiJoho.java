@@ -11,6 +11,8 @@ import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 
 /**
  * 償還払決定一覧クラスです。
+ *
+ * @reamsid_L DBC-0950-010 zuotao
  */
 public class ShokanbaraiketteiJoho {
 
