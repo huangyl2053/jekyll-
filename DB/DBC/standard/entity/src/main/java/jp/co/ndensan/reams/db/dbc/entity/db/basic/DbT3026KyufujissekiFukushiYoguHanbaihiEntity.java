@@ -523,4 +523,5 @@ public class DbT3026KyufujissekiFukushiYoguHanbaihiEntity extends DbTableEntityB
 
 // </editor-fold>
 
+
 }

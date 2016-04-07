@@ -8,7 +8,7 @@ package jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5511ShinsakaiKaisaiKekkaJohoEntity;
 
 /**
- * {@link jp.co.ndensan.reams.db.dbe.entity.db.basic.DbT5511ShinsakaiKaisaiKekkaJohoEntity}のマッパーIFです。
+ * {@link jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5511ShinsakaiKaisaiKekkaJohoEntity}のマッパーIFです。
  *
  */
 public interface IDbT5511ShinsakaiKaisaiKekkaJohoMapper {

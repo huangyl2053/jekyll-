@@ -10,7 +10,7 @@ import jp.co.ndensan.reams.db.dbz.definition.param.sonotakikanguide.SoNoTaKikanG
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5914SonotaKikanJohoEntity;
 
 /**
- * {@link jp.co.ndensan.reams.db.dbe.entity.db.basic.DbT5914SonotaKikanJohoEntity}のマッパーIFです。
+ * {@link jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5914SonotaKikanJohoEntity}のマッパーIFです。
  *
  * @reamsid_L DBE-3000-050 wangkun
  */

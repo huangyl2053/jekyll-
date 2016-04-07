@@ -8,7 +8,7 @@ package jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5595KaigoNinteiShinsakaiIinShozokuKikanJohoEntity;
 
 /**
- * {@link jp.co.ndensan.reams.db.dbe.entity.db.basic.DbT5595KaigoNinteiShinsakaiIinShozokuKikanJohoEntity}のマッパーIFです。
+ * {@link jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5595KaigoNinteiShinsakaiIinShozokuKikanJohoEntity}のマッパーIFです。
  *
  * @author nXXXX ○○○○
  */

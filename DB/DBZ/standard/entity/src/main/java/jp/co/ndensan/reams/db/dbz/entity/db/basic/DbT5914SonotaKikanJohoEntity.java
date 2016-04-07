@@ -1,24 +1,25 @@
 package jp.co.ndensan.reams.db.dbz.entity.db.basic;
 
-import java.util.Objects;
-import java.util.UUID;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShoKisaiHokenshaNo;
-import jp.co.ndensan.reams.uz.uza.biz.ChikuCode;
-import jp.co.ndensan.reams.uz.uza.biz.TelNo;
-import jp.co.ndensan.reams.uz.uza.biz.YubinNo;
-import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
-import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.util.db.DbTableEntityBase;
 import jp.co.ndensan.reams.uz.uza.util.db.IDbAccessable;
+import jp.co.ndensan.reams.uz.uza.util.db.DbTableEntityBase;
 import jp.co.ndensan.reams.uz.uza.util.db.PrimaryKey;
 import jp.co.ndensan.reams.uz.uza.util.db.TableName;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
+import java.util.UUID;
+import jp.co.ndensan.reams.uz.uza.biz.YubinNo;
+import jp.co.ndensan.reams.uz.uza.biz.TelNo;
+import jp.co.ndensan.reams.uz.uza.biz.ChikuCode;
+import java.util.Objects;
+import javax.annotation.CheckForNull;
+import javax.annotation.Nonnull;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShoKisaiHokenshaNo;
 
 /**
  * その他機関情報テーブルのエンティティクラスです。
  */
 public class DbT5914SonotaKikanJohoEntity extends DbTableEntityBase<DbT5914SonotaKikanJohoEntity> implements IDbAccessable {
-// <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.3.9">
-
+// <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.4.2">
     @TableName
     public static final RString TABLE_NAME = new RString("DbT5914SonotaKikanJoho");
 
@@ -48,7 +49,7 @@ public class DbT5914SonotaKikanJohoEntity extends DbTableEntityBase<DbT5914Sonot
 
     /**
      * insertDantaiCdのgetメソッドです。
-     *
+     * 
      * @return insertDantaiCd
      */
     public RString getInsertDantaiCd() {
@@ -57,7 +58,7 @@ public class DbT5914SonotaKikanJohoEntity extends DbTableEntityBase<DbT5914Sonot
 
     /**
      * insertDantaiCdのsetメソッドです。
-     *
+     * 
      * @param insertDantaiCd insertDantaiCd
      */
     public void setInsertDantaiCd(RString insertDantaiCd) {
@@ -66,7 +67,7 @@ public class DbT5914SonotaKikanJohoEntity extends DbTableEntityBase<DbT5914Sonot
 
     /**
      * isDeletedのgetメソッドです。
-     *
+     * 
      * @return isDeleted
      */
     public boolean getIsDeleted() {
@@ -75,16 +76,17 @@ public class DbT5914SonotaKikanJohoEntity extends DbTableEntityBase<DbT5914Sonot
 
     /**
      * isDeletedのsetメソッドです。
-     *
+     * 
      * @param isDeleted isDeleted
      */
     public void setIsDeleted(boolean isDeleted) {
         this.isDeleted = isDeleted;
     }
 
+
     /**
      * lastUpdateReamsLoginIdのsetメソッドです。
-     *
+     * 
      * @param lastUpdateReamsLoginId lastUpdateReamsLoginId
      */
     public void setLastUpdateReamsLoginId(RString lastUpdateReamsLoginId) {
@@ -93,7 +95,7 @@ public class DbT5914SonotaKikanJohoEntity extends DbTableEntityBase<DbT5914Sonot
 
     /**
      * 証記載保険者番号のgetメソッドです。
-     *
+     * 
      * @return 証記載保険者番号
      */
     public ShoKisaiHokenshaNo getShoKisaiHokenshaNo() {
@@ -102,16 +104,16 @@ public class DbT5914SonotaKikanJohoEntity extends DbTableEntityBase<DbT5914Sonot
 
     /**
      * 証記載保険者番号のsetメソッドです。
-     *
+     * 
      * @param shoKisaiHokenshaNo 証記載保険者番号
      */
-    public void setShoKisaiHokenshaNo(ShoKisaiHokenshaNo shoKisaiHokenshaNo) {
+    public void setShoKisaiHokenshaNo(@Nonnull ShoKisaiHokenshaNo shoKisaiHokenshaNo) {
         this.shoKisaiHokenshaNo = shoKisaiHokenshaNo;
     }
 
     /**
      * その他機関コードのgetメソッドです。
-     *
+     * 
      * @return その他機関コード
      */
     public RString getSonotaKikanCode() {
@@ -120,25 +122,26 @@ public class DbT5914SonotaKikanJohoEntity extends DbTableEntityBase<DbT5914Sonot
 
     /**
      * その他機関コードのsetメソッドです。
-     *
+     * 
      * @param sonotaKikanCode その他機関コード
      */
-    public void setSonotaKikanCode(RString sonotaKikanCode) {
+    public void setSonotaKikanCode(@Nonnull RString sonotaKikanCode) {
         this.sonotaKikanCode = sonotaKikanCode;
     }
 
     /**
      * 機関名称のgetメソッドです。
-     *
+     * 
      * @return 機関名称
      */
+    @CheckForNull
     public RString getKikanMeisho() {
         return kikanMeisho;
     }
 
     /**
      * 機関名称のsetメソッドです。
-     *
+     * 
      * @param kikanMeisho 機関名称
      */
     public void setKikanMeisho(RString kikanMeisho) {
@@ -147,16 +150,17 @@ public class DbT5914SonotaKikanJohoEntity extends DbTableEntityBase<DbT5914Sonot
 
     /**
      * 機関名称カナのgetメソッドです。
-     *
+     * 
      * @return 機関名称カナ
      */
+    @CheckForNull
     public RString getKikanMeishoKana() {
         return kikanMeishoKana;
     }
 
     /**
      * 機関名称カナのsetメソッドです。
-     *
+     * 
      * @param kikanMeishoKana 機関名称カナ
      */
     public void setKikanMeishoKana(RString kikanMeishoKana) {
@@ -165,16 +169,17 @@ public class DbT5914SonotaKikanJohoEntity extends DbTableEntityBase<DbT5914Sonot
 
     /**
      * 郵便番号のgetメソッドです。
-     *
+     * 
      * @return 郵便番号
      */
+    @CheckForNull
     public YubinNo getYubinNo() {
         return yubinNo;
     }
 
     /**
      * 郵便番号のsetメソッドです。
-     *
+     * 
      * @param yubinNo 郵便番号
      */
     public void setYubinNo(YubinNo yubinNo) {
@@ -183,16 +188,17 @@ public class DbT5914SonotaKikanJohoEntity extends DbTableEntityBase<DbT5914Sonot
 
     /**
      * 住所のgetメソッドです。
-     *
+     * 
      * @return 住所
      */
+    @CheckForNull
     public RString getJusho() {
         return jusho;
     }
 
     /**
      * 住所のsetメソッドです。
-     *
+     * 
      * @param jusho 住所
      */
     public void setJusho(RString jusho) {
@@ -201,16 +207,17 @@ public class DbT5914SonotaKikanJohoEntity extends DbTableEntityBase<DbT5914Sonot
 
     /**
      * 住所カナのgetメソッドです。
-     *
+     * 
      * @return 住所カナ
      */
+    @CheckForNull
     public RString getJushoKana() {
         return jushoKana;
     }
 
     /**
      * 住所カナのsetメソッドです。
-     *
+     * 
      * @param jushoKana 住所カナ
      */
     public void setJushoKana(RString jushoKana) {
@@ -219,16 +226,17 @@ public class DbT5914SonotaKikanJohoEntity extends DbTableEntityBase<DbT5914Sonot
 
     /**
      * 電話番号のgetメソッドです。
-     *
+     * 
      * @return 電話番号
      */
+    @CheckForNull
     public TelNo getTelNo() {
         return telNo;
     }
 
     /**
      * 電話番号のsetメソッドです。
-     *
+     * 
      * @param telNo 電話番号
      */
     public void setTelNo(TelNo telNo) {
@@ -239,9 +247,10 @@ public class DbT5914SonotaKikanJohoEntity extends DbTableEntityBase<DbT5914Sonot
      * 調査委託区分のgetメソッドです。
      * <br/>
      * <br/>Enum（DBE：調査委託区分）
-     *
+     * 
      * @return 調査委託区分
      */
+    @CheckForNull
     public RString getChosaItakuKubun() {
         return chosaItakuKubun;
     }
@@ -250,7 +259,7 @@ public class DbT5914SonotaKikanJohoEntity extends DbTableEntityBase<DbT5914Sonot
      * 調査委託区分のsetメソッドです。
      * <br/>
      * <br/>Enum（DBE：調査委託区分）
-     *
+     * 
      * @param chosaItakuKubun 調査委託区分
      */
     public void setChosaItakuKubun(RString chosaItakuKubun) {
@@ -259,16 +268,17 @@ public class DbT5914SonotaKikanJohoEntity extends DbTableEntityBase<DbT5914Sonot
 
     /**
      * 割付定員のgetメソッドです。
-     *
+     * 
      * @return 割付定員
      */
+    @CheckForNull
     public int getWaritsukeTeiin() {
         return waritsukeTeiin;
     }
 
     /**
      * 割付定員のsetメソッドです。
-     *
+     * 
      * @param waritsukeTeiin 割付定員
      */
     public void setWaritsukeTeiin(int waritsukeTeiin) {
@@ -279,9 +289,10 @@ public class DbT5914SonotaKikanJohoEntity extends DbTableEntityBase<DbT5914Sonot
      * 割付地区のgetメソッドです。
      * <br/>
      * <br/>Code（DBE：5002）
-     *
+     * 
      * @return 割付地区
      */
+    @CheckForNull
     public ChikuCode getWaritsukeChiku() {
         return waritsukeChiku;
     }
@@ -290,7 +301,7 @@ public class DbT5914SonotaKikanJohoEntity extends DbTableEntityBase<DbT5914Sonot
      * 割付地区のsetメソッドです。
      * <br/>
      * <br/>Code（DBE：5002）
-     *
+     * 
      * @param waritsukeChiku 割付地区
      */
     public void setWaritsukeChiku(ChikuCode waritsukeChiku) {
@@ -301,9 +312,10 @@ public class DbT5914SonotaKikanJohoEntity extends DbTableEntityBase<DbT5914Sonot
      * 機関の区分のgetメソッドです。
      * <br/>
      * <br/>Enum（DBE：機関の区分）
-     *
+     * 
      * @return 機関の区分
      */
+    @CheckForNull
     public RString getKikanKubun() {
         return kikanKubun;
     }
@@ -312,7 +324,7 @@ public class DbT5914SonotaKikanJohoEntity extends DbTableEntityBase<DbT5914Sonot
      * 機関の区分のsetメソッドです。
      * <br/>
      * <br/>Enum（DBE：機関の区分）
-     *
+     * 
      * @param kikanKubun 機関の区分
      */
     public void setKikanKubun(RString kikanKubun) {
@@ -323,7 +335,7 @@ public class DbT5914SonotaKikanJohoEntity extends DbTableEntityBase<DbT5914Sonot
      * 廃止フラグのgetメソッドです。
      * <br/>
      * <br/>Enum（DBE：廃止フラグ）旧「状況フラグ」
-     *
+     * 
      * @return 廃止フラグ
      */
     public boolean getHaishiFlag() {
@@ -334,18 +346,19 @@ public class DbT5914SonotaKikanJohoEntity extends DbTableEntityBase<DbT5914Sonot
      * 廃止フラグのsetメソッドです。
      * <br/>
      * <br/>Enum（DBE：廃止フラグ）旧「状況フラグ」
-     *
+     * 
      * @param haishiFlag 廃止フラグ
      */
-    public void setHaishiFlag(boolean haishiFlag) {
+    public void setHaishiFlag(@Nonnull boolean haishiFlag) {
         this.haishiFlag = haishiFlag;
     }
 
     /**
      * このエンティティの主キーが他の{@literal DbT5914SonotaKikanJohoEntity}と等しいか判定します。
-     *
+     * 
      * @param other 比較するエンティティ
-     * @@return 比較するエンティティが同じ主キーを持つ{@literal DbT5914SonotaKikanJohoEntity}の場合{@literal true}、それ以外の場合は{@literal false}
+     * @return 
+     * 比較するエンティティが同じ主キーを持つ{@literal DbT5914SonotaKikanJohoEntity}の場合{@literal true}、それ以外の場合は{@literal false}
      */
     @Override
     public boolean equalsPrimaryKeys(DbT5914SonotaKikanJohoEntity other) {
@@ -383,7 +396,6 @@ public class DbT5914SonotaKikanJohoEntity extends DbTableEntityBase<DbT5914Sonot
 
     /**
      * {@inheritDoc}
-     *
      * @return {@inheritDoc}
      */
     @Override
@@ -392,4 +404,5 @@ public class DbT5914SonotaKikanJohoEntity extends DbTableEntityBase<DbT5914Sonot
     }
 
 // </editor-fold>
+
 }

@@ -13,12 +13,13 @@ import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT7056GappeiShichosonEntity;
 
 /**
  * 旧市町村コード情報のモデルクラスです。
- *
  */
-public class KyuShichosonJohoEntities implements Serializable, Iterable<DbT7056GappeiShichosonEntity> {
+public final class KyuShichosonJohoEntities implements Serializable, Iterable<DbT7056GappeiShichosonEntity> {
 
-    private List<DbT7056GappeiShichosonEntity> entities;
-    private boolean gappeiShichoUmuFlag;
+    private static final long serialVersionUID = 1L;
+
+    private final List<DbT7056GappeiShichosonEntity> entities;
+    private final boolean gappeiShichoUmuFlag;
 
     /**
      * コンストラクタです。

@@ -1,0 +1,5 @@
+﻿haakuShoriID,uuid,UUID,,,,,把握処理ID,A
+batchExecutedTimestamp,UDD018YMDHMS,YMDHMS,,,,,バッチ処理日時,A
+gemmenGengakuShurui,varchar,RString,,,,,減免減額種類,A
+kijunYmd,UDD015YMD,FlexibleDate,,,,,基準日,A
+shotokuNendo,UDD014YM,FlexibleYearMonth,,,,,所得年度,A

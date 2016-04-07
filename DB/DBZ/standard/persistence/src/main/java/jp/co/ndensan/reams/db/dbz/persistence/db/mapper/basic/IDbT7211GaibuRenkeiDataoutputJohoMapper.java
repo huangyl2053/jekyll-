@@ -8,6 +8,7 @@ package jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7211GaibuRenkeiDataoutputJohoEntity;
 
 /**
+ *  * {@link jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7211GaibuRenkeiDataoutputJohoEntity}のマッパーIFです。
  *
  * @author LDNS xuxf
  */

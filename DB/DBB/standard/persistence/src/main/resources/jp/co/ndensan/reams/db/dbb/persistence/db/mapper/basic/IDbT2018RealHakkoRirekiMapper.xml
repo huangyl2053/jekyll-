@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 概要： DbT2018RealHakkoRirekiマスタとエンティティのマッピング用XMLです。 -->
+<!-- 作者： n1070 久保裕是 -->
+
+<!-- どのマッパーインターフェースと対応するかを指定する -->
+<mapper namespace="jp.co.ndensan.reams.db.dbb.persistence.db.mapper.basic.IDbT2018RealHakkoRirekiMapper">
+    
+    <!-- 概要： 削除されたデータ以外を全件取得するSQLです。 -->
+    <sql id="noDeleted_DbT2018RealHakkoRireki">
+     SELECT
+         <include refid="jp.co.ndensan.reams.db.dbb.persistence.db.mapper.basic.IDbT2018RealHakkoRirekiMapper.allColumns_DbT2018RealHakkoRireki" />
+     FROM
+         rgdb."DbT2018RealHakkoRireki"
+     WHERE
+         rgdb."DbT2018RealHakkoRireki"."isDeleted" = FALSE
+    </sql>
+
+    <sql id="allColumns_DbT2018RealHakkoRireki">
+         "DbT2018RealHakkoRireki"."choteiNendo" as "dbT2018RealHakkoRireki_choteiNendo",
+         "DbT2018RealHakkoRireki"."fukaNendo" as "dbT2018RealHakkoRireki_fukaNendo",
+         "DbT2018RealHakkoRireki"."tsuchishoNo" as "dbT2018RealHakkoRireki_tsuchishoNo",
+         "DbT2018RealHakkoRireki"."chohyoBunruiID" as "dbT2018RealHakkoRireki_chohyoBunruiID",
+         "DbT2018RealHakkoRireki"."tsuchishoPrintTimeStamp" as "dbT2018RealHakkoRireki_tsuchishoPrintTimeStamp",
+         "DbT2018RealHakkoRireki"."insertDantaiCd" as "dbT2018RealHakkoRireki_insertDantaiCd",
+         "DbT2018RealHakkoRireki"."insertTimestamp" as "dbT2018RealHakkoRireki_insertTimestamp",
+         "DbT2018RealHakkoRireki"."insertReamsLoginId" as "dbT2018RealHakkoRireki_insertReamsLoginId",
+         "DbT2018RealHakkoRireki"."insertContextId" as "dbT2018RealHakkoRireki_insertContextId",
+         "DbT2018RealHakkoRireki"."isDeleted" as "dbT2018RealHakkoRireki_isDeleted",
+         "DbT2018RealHakkoRireki"."updateCount" as "dbT2018RealHakkoRireki_updateCount",
+         "DbT2018RealHakkoRireki"."lastUpdateTimestamp" as "dbT2018RealHakkoRireki_lastUpdateTimestamp",
+         "DbT2018RealHakkoRireki"."lastUpdateReamsLoginId" as "dbT2018RealHakkoRireki_lastUpdateReamsLoginId",
+         "DbT2018RealHakkoRireki"."hihokenshaNo" as "dbT2018RealHakkoRireki_hihokenshaNo",
+         "DbT2018RealHakkoRireki"."shikibetsuCode" as "dbT2018RealHakkoRireki_shikibetsuCode"
+    </sql>
+
+
+    <!--テーブルDbT2018RealHakkoRirekiの項目をDbT2018RealHakkoRirekiEntityの項目にマッピングします。-->
+    <resultMap id="ResultMap_DbT2018RealHakkoRirekiEntity" type="jp.co.ndensan.reams.db.dbb.entity.db.basic.DbT2018RealHakkoRirekiEntity" autoMapping="true">
+        <id property="choteiNendo" column="dbT2018RealHakkoRireki_choteiNendo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleYearTypeHandler"/>
+        <id property="fukaNendo" column="dbT2018RealHakkoRireki_fukaNendo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleYearTypeHandler"/>
+        <id property="tsuchishoNo" column="dbT2018RealHakkoRireki_tsuchishoNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.TsuchishoNoTypeHandler"/>
+        <id property="chohyoBunruiID" column="dbT2018RealHakkoRireki_chohyoBunruiID" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.ReportIdTypeHandler"/>
+        <id property="tsuchishoPrintTimeStamp" column="dbT2018RealHakkoRireki_tsuchishoPrintTimeStamp" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.YMDHMSTypeHandler"/>
+        <result property="insertDantaiCd" column="dbT2018RealHakkoRireki_insertDantaiCd" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="insertTimestamp" column="dbT2018RealHakkoRireki_insertTimestamp" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RDateTimeTypeHandler"/>
+        <result property="insertReamsLoginId" column="dbT2018RealHakkoRireki_insertReamsLoginId" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="insertContextId" column="dbT2018RealHakkoRireki_insertContextId" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.UUIDTypeHandler"/>
+        <result property="isDeleted" column="dbT2018RealHakkoRireki_isDeleted" />
+        <result property="updateCount" column="dbT2018RealHakkoRireki_updateCount" />
+        <result property="lastUpdateTimestamp" column="dbT2018RealHakkoRireki_lastUpdateTimestamp" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RDateTimeTypeHandler"/>
+        <result property="lastUpdateReamsLoginId" column="dbT2018RealHakkoRireki_lastUpdateReamsLoginId" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="hihokenshaNo" column="dbT2018RealHakkoRireki_hihokenshaNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.HihokenshaNoTypeHandler"/>
+        <result property="shikibetsuCode" column="dbT2018RealHakkoRireki_shikibetsuCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.ShikibetsuCodeTypeHandler"/>
+    </resultMap>
+
+</mapper>

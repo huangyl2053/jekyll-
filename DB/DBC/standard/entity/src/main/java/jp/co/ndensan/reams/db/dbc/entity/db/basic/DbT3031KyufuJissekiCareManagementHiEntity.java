@@ -772,4 +772,5 @@ public class DbT3031KyufuJissekiCareManagementHiEntity extends DbTableEntityBase
 
 // </editor-fold>
 
+
 }

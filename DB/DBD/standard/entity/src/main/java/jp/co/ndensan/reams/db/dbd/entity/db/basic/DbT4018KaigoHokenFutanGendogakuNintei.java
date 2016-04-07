@@ -73,52 +73,55 @@ public enum DbT4018KaigoHokenFutanGendogakuNintei implements IColumnDefinition {
     hihokenshaNo(2147483647, 0),
     /**
      * 履歴番号
+     * <br/>新規履歴：0, 以降の申請・決定：最大履歴番号+1
      */
     rirekiNo(5, 0),
     /**
      * 旧措置者区分
-     * <br/>・空白
-     * <br/>・旧措置
-     * <br/>・負担軽減
+     * <br/>DBDEnum.旧措置区分
+     * <br/>"":空白
+     * <br/> 1:旧措置者
+     * <br/> 2:旧措置者実質的負担軽減者
      */
     kyusochishaKubun(1, 0),
     /**
      * 申請理由区分
-     * <br/>世帯非課税８０万以下
-     * <br/>世帯非課税８０万超　
-     * <br/>生保、
-     * <br/>世帯非課税
-     * <br/>老齢
-     * <br/>特例減額措置
-     * <br/>その他
+     * <br/>DBDEnum.申請理由区分 
+     * <br/>01:世帯非課税８０万以下 
+     * <br/>02:世帯非課税８０万超 　
+     * <br/>03:生保 
+     * <br/>04:世帯非課税 
+     * <br/>05:老齢 
+     * <br/>06:特例減額措置 
+     * <br/>99:その他
      */
     shinseiRiyuKubun(2, 0),
     /**
      * 利用者負担段階
-     * <br/>・第一段階
-     * <br/>・第二段階
-     * <br/>・第三段階
-     * <br/>・課税層第三段階
+     * <br/>DBDEnum.利用者負担段階
+     * <br/>1:第一段階
+     * <br/>2:第二段階
+     * <br/>3:第三段階
+     * <br/>4:課税層第三段階
      */
     riyoshaFutanDankai(1, 0),
     /**
      * 境界層該当者区分
-     * <br/>1：該当者
-     * <br/>0：非該当者
+     * <br/>trueの場合、境界層該当者
      */
     kyokaisoGaitoshaKubun(1, 0),
     /**
      * 激変緩和措置対象者区分
-     * <br/>1：激変緩和対象者
-     * <br/>0：激変緩和対象者以外
+     * <br/>trueの場合、激変緩和対象者
      */
     gekihenKanwaSochiTaishoshaKubun(1, 0),
     /**
      * 居室種別
-     * <br/>1：ユニット型個室
-     * <br/>2：ユニット型準個室
-     * <br/>3：従来型個室
-     * <br/>4：多床室
+     * <br/>DBDEnum.居室種別
+     * <br/>1：ユニット型個室
+     * <br/>2：ユニット型準個室
+     * <br/>3：従来型個室
+     * <br/>4：多床室
      * <br/>5：従来型個室（老健）
      */
     kyoshitsuShubetsu(1, 0),
@@ -148,6 +151,7 @@ public enum DbT4018KaigoHokenFutanGendogakuNintei implements IColumnDefinition {
     tashoshitsu(5, 0),
     /**
      * 配偶者の有無
+     * <br/>trueの場合、配偶者あり。
      */
     haigushaUmuFlag(1, 0),
     /**
@@ -186,8 +190,10 @@ public enum DbT4018KaigoHokenFutanGendogakuNintei implements IColumnDefinition {
     haigushaShikibetsuCd(2147483647, 0),
     /**
      * 預貯金申告区分
-     * <br/>預貯金、有価証券等の金額の合計が1000万円（夫婦は2000万円）
-     * <br/>1:以下、0:より大きい
+     * <br/>預貯金、有価証券等の金額の合計が1000万円（夫婦は2000万円）かどうかの区分。
+     * <br/>DBDEnum.預貯金申告区分
+     * <br/>0:超過
+     * <br/>1:以下
      */
     yochokinShinkokuKubun(1, 0),
     /**
@@ -201,7 +207,12 @@ public enum DbT4018KaigoHokenFutanGendogakuNintei implements IColumnDefinition {
     /**
      * その他金額
      */
-    sonotaKingaku(15, 0);
+    sonotaKingaku(15, 0),
+    /**
+     * 一括認定バッチ処理日時
+     * <br/>バッチによる一括認定時に、バッチの処理日時を設定
+     */
+    ninteiBatchExecutedTimestamp(2147483647, 0);
 
     private final int maxLength;
     private final int scale;

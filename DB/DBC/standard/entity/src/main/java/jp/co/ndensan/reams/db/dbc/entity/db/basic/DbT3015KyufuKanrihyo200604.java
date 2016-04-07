@@ -62,8 +62,7 @@ public enum DbT3015KyufuKanrihyo200604 implements IColumnDefinition {
     kyufuMeisaiLineNo(2, 0),
     /**
      * 証記載保険者番号
-     * <br/>当該被保険者の証記載保険者番号を設定。
-
+     * <br/>当該被保険者の証記載保険者番号を設定。
      * <br/>国保連IF上にはないため、広域の場合は被保険者台帳ﾏｽﾀより市町村ｺｰﾄﾞを判定し保険者番号を求め設定する。
      */
     shokisaiHokenshaNo(2147483647, 0),

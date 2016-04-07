@@ -82,7 +82,7 @@ public enum DbT3021KyufujissekiTokuteiSinryoTokubetsuRyoyo implements IColumnDef
     shobyoName(50, 0),
     /**
      * 識別番号
-     * <br/>介護給付費等の記載要領で示される特定診療費の識別
+     * <br/>介護給付費等の記載要領で示される特定診療費の識別
      * <br/>番号のうち、＠を除く２桁の数字
      */
     shikibetsuNo(2, 0),

@@ -1,4 +1,4 @@
-﻿shoKisaiHokenshaNo,DbUDD015ShoKisaiHokenshaNo,DbUDD015ShoKisaiHokenshaNo,,,,,証記載保険者番号,A
+﻿shoKisaiHokenshaNo,DbUDD015ShoKisaiHokenshaNo,ShoKisaiHokenshaNo,,,,,証記載保険者番号,A
 sonotaKikanCode,varchar,RString,,,,,その他機関コード,A
 kikanMeisho,varchar,RString,,,,,機関名称,A
 kikanMeishoKana,varchar,RString,,,,,機関名称カナ,A

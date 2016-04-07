@@ -18,6 +18,7 @@ import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShoKisaiHok
 import jp.co.ndensan.reams.db.dbz.testhelper.DbcTestDacBase;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 import static org.hamcrest.CoreMatchers.is;
@@ -229,7 +230,7 @@ public class DbT3001JukyushaIdoRenrakuhyoDacTest extends DbcTestDacBase {
                     DEFAULT_証記載保険者番号,
                     DEFAULT_被保険者番号,
                     DEFAULT_履歴番号);
-            updateRecord.setFutangaku(75);
+            updateRecord.setFutangaku(new Decimal(75));
 
             sut.save(updateRecord);
 

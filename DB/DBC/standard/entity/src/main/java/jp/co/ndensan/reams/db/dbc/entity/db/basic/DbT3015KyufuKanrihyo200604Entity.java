@@ -2,14 +2,12 @@ package jp.co.ndensan.reams.db.dbc.entity.db.basic;
 
 import jp.co.ndensan.reams.uz.uza.util.db.IDbAccessable;
 import jp.co.ndensan.reams.uz.uza.util.db.DbTableEntityBase;
-import jp.co.ndensan.reams.uz.uza.util.db.PrimaryKey;
 import jp.co.ndensan.reams.uz.uza.util.db.TableName;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import java.util.UUID;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
-import java.util.Objects;
 import javax.annotation.CheckForNull;
 import javax.annotation.Nonnull;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
@@ -34,15 +32,10 @@ public class DbT3015KyufuKanrihyo200604Entity extends DbTableEntityBase<DbT3015K
     private int updateCount = 0;
     private RDateTime lastUpdateTimestamp;
     private RString lastUpdateReamsLoginId;
-    @PrimaryKey
     private FlexibleYearMonth shinsaYM;
-    @PrimaryKey
     private FlexibleYearMonth serviceTeikyoYM;
-    @PrimaryKey
     private HihokenshaNo hiHokenshaNo;
-    @PrimaryKey
     private RString kyufuShubetsuKubunCode;
-    @PrimaryKey
     private RString kyufuMeisaiLineNo;
     private HokenshaNo shokisaiHokenshaNo;
     private JigyoshaNo kyotakushienJigyoshoNo;
@@ -721,21 +714,6 @@ public class DbT3015KyufuKanrihyo200604Entity extends DbTableEntityBase<DbT3015K
         if (other == null) {
             return false;
         }
-        if (!Objects.equals(this.shinsaYM, other.shinsaYM)) {
-            return false;
-        }
-        if (!Objects.equals(this.serviceTeikyoYM, other.serviceTeikyoYM)) {
-            return false;
-        }
-        if (!Objects.equals(this.hiHokenshaNo, other.hiHokenshaNo)) {
-            return false;
-        }
-        if (!Objects.equals(this.kyufuShubetsuKubunCode, other.kyufuShubetsuKubunCode)) {
-            return false;
-        }
-        if (!Objects.equals(this.kyufuMeisaiLineNo, other.kyufuMeisaiLineNo)) {
-            return false;
-        }
         return true;
     }
 
@@ -786,6 +764,7 @@ public class DbT3015KyufuKanrihyo200604Entity extends DbTableEntityBase<DbT3015K
     }
 
 // </editor-fold>
+
 
 
 }

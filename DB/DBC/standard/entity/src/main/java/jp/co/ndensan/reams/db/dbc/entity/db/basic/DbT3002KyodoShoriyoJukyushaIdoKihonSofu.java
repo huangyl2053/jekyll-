@@ -40,9 +40,17 @@ public enum DbT3002KyodoShoriyoJukyushaIdoKihonSofu implements IColumnDefinition
      */
     lastUpdateReamsLoginId(2147483647, 0),
     /**
+     * 被保険者番号
+     */
+    hiHokenshaNo(2147483647, 0),
+    /**
      * 異動年月日
      */
     idoYMD(2147483647, 0),
+    /**
+     * 履歴番号
+     */
+    rirekiNo(5, 0),
     /**
      * 異動区分コード
      * <br/>1:新規,2:変更,3:終了
@@ -58,14 +66,6 @@ public enum DbT3002KyodoShoriyoJukyushaIdoKihonSofu implements IColumnDefinition
      * <br/>Not（地方公共団体コード（導入団体）⇒保険者番号）
      */
     shoKisaiHokenshaNo(2147483647, 0),
-    /**
-     * 被保険者番号
-     */
-    hiHokenshaNo(2147483647, 0),
-    /**
-     * 履歴番号
-     */
-    rirekiNo(5, 0),
     /**
      * 被保険者氏名
      * <br/>氏名（漢字）
@@ -100,7 +100,20 @@ public enum DbT3002KyodoShoriyoJukyushaIdoKihonSofu implements IColumnDefinition
     /**
      * 送付年月
      */
-    sofuYM(2147483647, 0);
+    sofuYM(2147483647, 0),
+    /**
+     * 訂正区分コード
+     * <br/>2：修正、3：削除
+     */
+    teiseiKubunCode(1, 0),
+    /**
+     * 訂正年月日
+     */
+    teiseiYMD(2147483647, 0),
+    /**
+     * 論理削除フラグ
+     */
+    logicalDeletedFlag(1, 0);
 
     private final int maxLength;
     private final int scale;

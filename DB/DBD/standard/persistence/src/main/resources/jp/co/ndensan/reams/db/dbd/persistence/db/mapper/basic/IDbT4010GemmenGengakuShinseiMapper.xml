@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 概要： DbT4010GemmenGengakuShinseiマスタとエンティティのマッピング用XMLです。 -->
+<!-- 作者： n1070 久保裕是 -->
+
+<!-- どのマッパーインターフェースと対応するかを指定する -->
+<mapper namespace="jp.co.ndensan.reams.db.dbd.persistence.db.mapper.basic.IDbT4010GemmenGengakuShinseiMapper">
+    
+    <!-- 概要： 削除されたデータ以外を全件取得するSQLです。 -->
+    <sql id="noDeleted_DbT4010GemmenGengakuShinsei">
+     SELECT
+         <include refid="jp.co.ndensan.reams.db.dbd.persistence.db.mapper.basic.IDbT4010GemmenGengakuShinseiMapper.allColumns_DbT4010GemmenGengakuShinsei" />
+     FROM
+         rgdb."DbT4010GemmenGengakuShinsei"
+     WHERE
+         rgdb."DbT4010GemmenGengakuShinsei"."isDeleted" = FALSE
+    </sql>
+
+    <sql id="allColumns_DbT4010GemmenGengakuShinsei">
+         "DbT4010GemmenGengakuShinsei"."shoKisaiHokenshaNo" as "dbT4010GemmenGengakuShinsei_shoKisaiHokenshaNo",
+         "DbT4010GemmenGengakuShinsei"."hihokenshaNo" as "dbT4010GemmenGengakuShinsei_hihokenshaNo",
+         "DbT4010GemmenGengakuShinsei"."gemmenGengakuShurui" as "dbT4010GemmenGengakuShinsei_gemmenGengakuShurui",
+         "DbT4010GemmenGengakuShinsei"."shinseiRirekiNo" as "dbT4010GemmenGengakuShinsei_shinseiRirekiNo",
+         "DbT4010GemmenGengakuShinsei"."insertDantaiCd" as "dbT4010GemmenGengakuShinsei_insertDantaiCd",
+         "DbT4010GemmenGengakuShinsei"."insertTimestamp" as "dbT4010GemmenGengakuShinsei_insertTimestamp",
+         "DbT4010GemmenGengakuShinsei"."insertReamsLoginId" as "dbT4010GemmenGengakuShinsei_insertReamsLoginId",
+         "DbT4010GemmenGengakuShinsei"."insertContextId" as "dbT4010GemmenGengakuShinsei_insertContextId",
+         "DbT4010GemmenGengakuShinsei"."isDeleted" as "dbT4010GemmenGengakuShinsei_isDeleted",
+         "DbT4010GemmenGengakuShinsei"."updateCount" as "dbT4010GemmenGengakuShinsei_updateCount",
+         "DbT4010GemmenGengakuShinsei"."lastUpdateTimestamp" as "dbT4010GemmenGengakuShinsei_lastUpdateTimestamp",
+         "DbT4010GemmenGengakuShinsei"."lastUpdateReamsLoginId" as "dbT4010GemmenGengakuShinsei_lastUpdateReamsLoginId",
+         "DbT4010GemmenGengakuShinsei"."shinseiTodokedeDaikoKubun" as "dbT4010GemmenGengakuShinsei_shinseiTodokedeDaikoKubun",
+         "DbT4010GemmenGengakuShinsei"."shinseiTodokedeshaShimei" as "dbT4010GemmenGengakuShinsei_shinseiTodokedeshaShimei",
+         "DbT4010GemmenGengakuShinsei"."shinseiTodokedeshaKanaShimei" as "dbT4010GemmenGengakuShinsei_shinseiTodokedeshaKanaShimei",
+         "DbT4010GemmenGengakuShinsei"."shinseiTodokedeshaTsuzukigara" as "dbT4010GemmenGengakuShinsei_shinseiTodokedeshaTsuzukigara",
+         "DbT4010GemmenGengakuShinsei"."shinseiTodokedeDaikoJigyoshaNo" as "dbT4010GemmenGengakuShinsei_shinseiTodokedeDaikoJigyoshaNo",
+         "DbT4010GemmenGengakuShinsei"."jigyoshaKubun" as "dbT4010GemmenGengakuShinsei_jigyoshaKubun",
+         "DbT4010GemmenGengakuShinsei"."shinseiTodokedeshaYubinNo" as "dbT4010GemmenGengakuShinsei_shinseiTodokedeshaYubinNo",
+         "DbT4010GemmenGengakuShinsei"."shinseiTodokedeshaJusho" as "dbT4010GemmenGengakuShinsei_shinseiTodokedeshaJusho",
+         "DbT4010GemmenGengakuShinsei"."shinseiTodokedeshaTelNo" as "dbT4010GemmenGengakuShinsei_shinseiTodokedeshaTelNo"
+    </sql>
+
+
+    <!--テーブルDbT4010GemmenGengakuShinseiの項目をDbT4010GemmenGengakuShinseiEntityの項目にマッピングします。-->
+    <resultMap id="ResultMap_DbT4010GemmenGengakuShinseiEntity" type="jp.co.ndensan.reams.db.dbd.entity.db.basic.DbT4010GemmenGengakuShinseiEntity" autoMapping="true">
+        <id property="shoKisaiHokenshaNo" column="dbT4010GemmenGengakuShinsei_shoKisaiHokenshaNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.ShoKisaiHokenshaNoTypeHandler"/>
+        <id property="hihokenshaNo" column="dbT4010GemmenGengakuShinsei_hihokenshaNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.HihokenshaNoTypeHandler"/>
+        <id property="gemmenGengakuShurui" column="dbT4010GemmenGengakuShinsei_gemmenGengakuShurui" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <id property="shinseiRirekiNo" column="dbT4010GemmenGengakuShinsei_shinseiRirekiNo" />
+        <result property="insertDantaiCd" column="dbT4010GemmenGengakuShinsei_insertDantaiCd" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="insertTimestamp" column="dbT4010GemmenGengakuShinsei_insertTimestamp" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RDateTimeTypeHandler"/>
+        <result property="insertReamsLoginId" column="dbT4010GemmenGengakuShinsei_insertReamsLoginId" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="insertContextId" column="dbT4010GemmenGengakuShinsei_insertContextId" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.UUIDTypeHandler"/>
+        <result property="isDeleted" column="dbT4010GemmenGengakuShinsei_isDeleted" />
+        <result property="updateCount" column="dbT4010GemmenGengakuShinsei_updateCount" />
+        <result property="lastUpdateTimestamp" column="dbT4010GemmenGengakuShinsei_lastUpdateTimestamp" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RDateTimeTypeHandler"/>
+        <result property="lastUpdateReamsLoginId" column="dbT4010GemmenGengakuShinsei_lastUpdateReamsLoginId" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="shinseiTodokedeDaikoKubun" column="dbT4010GemmenGengakuShinsei_shinseiTodokedeDaikoKubun" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="shinseiTodokedeshaShimei" column="dbT4010GemmenGengakuShinsei_shinseiTodokedeshaShimei" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.AtenaMeishoTypeHandler"/>
+        <result property="shinseiTodokedeshaKanaShimei" column="dbT4010GemmenGengakuShinsei_shinseiTodokedeshaKanaShimei" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.AtenaKanaMeishoTypeHandler"/>
+        <result property="shinseiTodokedeshaTsuzukigara" column="dbT4010GemmenGengakuShinsei_shinseiTodokedeshaTsuzukigara" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="shinseiTodokedeDaikoJigyoshaNo" column="dbT4010GemmenGengakuShinsei_shinseiTodokedeDaikoJigyoshaNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.JigyoshaNoTypeHandler"/>
+        <result property="jigyoshaKubun" column="dbT4010GemmenGengakuShinsei_jigyoshaKubun" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="shinseiTodokedeshaYubinNo" column="dbT4010GemmenGengakuShinsei_shinseiTodokedeshaYubinNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.YubinNoTypeHandler"/>
+        <result property="shinseiTodokedeshaJusho" column="dbT4010GemmenGengakuShinsei_shinseiTodokedeshaJusho" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.AtenaJushoTypeHandler"/>
+        <result property="shinseiTodokedeshaTelNo" column="dbT4010GemmenGengakuShinsei_shinseiTodokedeshaTelNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.TelNoTypeHandler"/>
+    </resultMap>
+
+</mapper>

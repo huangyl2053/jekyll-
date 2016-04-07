@@ -380,4 +380,5 @@ public class DbT5150RenrakusakiJohoEntity extends DbTableEntityBase<DbT5150Renra
 
 // </editor-fold>
 
+
 }

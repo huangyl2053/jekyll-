@@ -150,7 +150,7 @@ public enum DbT3028KyufujissekiKogakuKaigoServicehi implements IColumnDefinition
     sakuseiKubun(1, 0),
     /**
      * 管理番号
-     * <br/>高額申請管理ﾏｽﾀの"管理番号"とﾘﾝｸ
+     * <br/>高額申請管理ﾏｽﾀの"管理番号"とﾘﾝｸ
      * <br/>高額支給申請書更新時のみ設定される
      */
     kanriNo(4, 0),

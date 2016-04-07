@@ -1407,4 +1407,5 @@ public class DbT3033KyufujissekiShukeiEntity extends DbTableEntityBase<DbT3033Ky
 
 // </editor-fold>
 
+
 }
