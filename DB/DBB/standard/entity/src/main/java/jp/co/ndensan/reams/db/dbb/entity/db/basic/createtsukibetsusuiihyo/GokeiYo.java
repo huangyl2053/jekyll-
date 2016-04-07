@@ -11,8 +11,9 @@ import lombok.Getter;
 import lombok.Setter;
 
 /**
- *
  * 合計用Entityクラスです。
+ *
+ * @reamsid_L DBB-0760-040 lishengli
  */
 @Getter
 @Setter
