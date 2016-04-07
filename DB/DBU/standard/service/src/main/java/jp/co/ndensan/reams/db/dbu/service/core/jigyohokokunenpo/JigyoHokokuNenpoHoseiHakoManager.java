@@ -42,6 +42,8 @@ import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
 /**
  * 事業報告（年報）補正、発行のManagerクラスです。
  *
+ * @reamsid_L DBU-1060-050 zhengshukai
+ *
  */
 public class JigyoHokokuNenpoHoseiHakoManager {
 

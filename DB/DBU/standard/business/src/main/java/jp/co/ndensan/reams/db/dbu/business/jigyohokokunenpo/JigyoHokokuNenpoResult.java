@@ -17,6 +17,8 @@ import jp.co.ndensan.reams.uz.uza.math.Decimal;
 /**
  * 事業報告統計データEntiyのBusinessクラスです。
  *
+ * @reamsid_L DBU-1060-050 zhengshukai
+ *
  */
 public class JigyoHokokuNenpoResult {
 
