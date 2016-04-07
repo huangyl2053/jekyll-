@@ -42,6 +42,8 @@ import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 
 /**
  * 償還払決定一覧を管理するクラスです。
+ *
+ * @reamsid_L DBC-0950-010 zuotao
  */
 public class SyokanbaraiketteJohoManager {
 
