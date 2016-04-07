@@ -26,6 +26,8 @@ import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
 
 /**
  * 保険料段階のデータアクセスクラスです。
+ *
+ * @reamsid_L DBB-9020-130 sunhaidi
  */
 public class DbT2013HokenryoDankaiDac implements ISaveable<DbT2013HokenryoDankaiEntity> {
 

@@ -19,6 +19,8 @@ import jp.co.ndensan.reams.uz.uza.util.config.BusinessConfig;
 
 /**
  * 月期対応取得_普徴のクラスです。
+ *
+ * @reamsid_L DBB-9020-020 sunhaidi
  */
 public class FuchoKiUtil {
 

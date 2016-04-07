@@ -12,6 +12,8 @@ import jp.co.ndensan.reams.uz.uza.math.Decimal;
 
 /**
  * 保険料段階のクラスです。
+ *
+ * @reamsid_L DBB-9020-110 sunhaidi
  */
 public class HokenryoDankai {
 

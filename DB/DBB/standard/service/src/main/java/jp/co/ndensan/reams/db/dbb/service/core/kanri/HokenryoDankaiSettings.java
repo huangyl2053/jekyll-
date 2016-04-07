@@ -19,6 +19,8 @@ import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
 
 /**
  * 保険料段階取得のクラスです。
+ *
+ * @reamsid_L DBB-9020-130 sunhaidi
  */
 public class HokenryoDankaiSettings {
 

@@ -19,6 +19,8 @@ import jp.co.ndensan.reams.uz.uza.util.config.BusinessConfig;
 
 /**
  * 現年随時判定のクラスです。
+ *
+ * @reamsid_L DBB-9020-140 sunhaidi
  */
 public class GennenZuijiHantei {
 
