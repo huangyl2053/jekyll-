@@ -10,6 +10,8 @@ import jp.co.ndensan.reams.uz.uza.report.ReportEditorJoiner;
 
 /**
  * 前回認定調査結果との比較表Builderクラスです。
+ *
+ * @reamsid_L DBE-0080-120 duanzhanli
  */
 class ChosahyoSaiCheckhyoBuilderImpl implements IChosahyoSaiCheckhyoBuilder {
 

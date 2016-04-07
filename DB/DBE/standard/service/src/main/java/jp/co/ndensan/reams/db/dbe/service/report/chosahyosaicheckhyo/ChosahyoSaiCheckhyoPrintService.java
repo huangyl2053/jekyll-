@@ -16,6 +16,8 @@ import jp.co.ndensan.reams.uz.uza.report.SourceDataCollection;
 
 /**
  * 前回認定調査結果との比較表Printerです。
+ *
+ * @reamsid_L DBE-0080-120 duanzhanli
  */
 public class ChosahyoSaiCheckhyoPrintService {
 

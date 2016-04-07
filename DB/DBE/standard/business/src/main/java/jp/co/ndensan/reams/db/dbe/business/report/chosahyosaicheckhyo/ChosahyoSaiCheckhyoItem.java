@@ -12,6 +12,8 @@ import lombok.Setter;
 /**
  *
  * 前回認定調査結果との比較表_帳票パラメータクラスです。
+ *
+ * @reamsid_L DBE-0080-120 duanzhanli
  */
 @Getter
 @Setter
