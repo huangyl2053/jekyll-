@@ -12,6 +12,8 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 /**
  * 施設入所情報を取得するのParameterクラスです。
  *
+ * @reamsid_L DBE-3000-180 hezhenzhen
+ *
  */
 @lombok.Getter
 @SuppressWarnings("PMD.UnusedPrivateField")

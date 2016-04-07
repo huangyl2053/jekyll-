@@ -10,6 +10,9 @@ import jp.co.ndensan.reams.uz.uza.report.ReportEditorJoiner;
 
 /**
  * 償還払支給（不支給）決定通知一覧表覧表Builderクラスです。
+ *
+ * @reamsid_L DBC-1000-150 hezhenzhen
+ *
  */
 public class ShokanbaraiShikyuFushikyuKetteiTsuchiIchiranBuilder implements IShokanbaraiShikyuFushikyuKetteiTsuchiIchiranBuilder {
 

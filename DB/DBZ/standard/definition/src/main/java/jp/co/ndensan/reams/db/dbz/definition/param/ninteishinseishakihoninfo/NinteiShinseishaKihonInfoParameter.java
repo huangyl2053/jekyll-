@@ -10,6 +10,8 @@ import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoK
 /**
  * 認定申請者基本情報を取得するのParameterクラスです。
  *
+ * @reamsid_L DBE-3000-190 hezhenzhen
+ *
  */
 @lombok.Getter
 @SuppressWarnings("PMD.UnusedPrivateField")

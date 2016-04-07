@@ -5,12 +5,14 @@
  */
 package jp.co.ndensan.reams.db.dbe.entity.report.source.ninteichosatokusokutaishoshaichiranhyo;
 
-import jp.co.ndensan.reams.uz.uza.report.IReportSource;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.report.IReportSource;
 import jp.co.ndensan.reams.uz.uza.report.source.ReportItem;
 
 /**
  * 主治医意見書督促対象者一覧表のReportSourceです。
+ *
+ * @reamsid_L DBE-0060-030 hezhenzhen
  *
  */
 public class NinteiChosaTokusokuTaishoshaIchiranhyoReportSource implements IReportSource {

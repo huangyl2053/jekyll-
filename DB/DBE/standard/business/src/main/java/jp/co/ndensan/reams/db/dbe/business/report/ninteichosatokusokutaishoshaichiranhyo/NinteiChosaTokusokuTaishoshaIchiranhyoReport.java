@@ -13,6 +13,8 @@ import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
 /**
  * 主治医意見書督促対象者一覧表のReportです。
  *
+ * @reamsid_L DBE-0060-030 hezhenzhen
+ *
  */
 public class NinteiChosaTokusokuTaishoshaIchiranhyoReport extends Report<NinteiChosaTokusokuTaishoshaIchiranhyoReportSource> {
 

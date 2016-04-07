@@ -18,6 +18,8 @@ import jp.co.ndensan.reams.uz.uza.lang.Separator;
 /**
  * 主治医意見書督促対象者一覧表のEditorです。
  *
+ * @reamsid_L DBE-0060-030 hezhenzhen
+ *
  */
 public class NinteiChosaTokusokuTaishoshaIchiranhyoEditor implements INinteiChosaTokusokuTaishoshaIchiranhyoEditor {
 

@@ -9,6 +9,9 @@ import jp.co.ndensan.reams.db.dbc.entity.report.source.shokanbaraishikyufushikyu
 
 /**
  * 償還払支給（不支給）決定通知一覧表覧表のEditorです。
+ *
+ * @reamsid_L DBC-1000-150 hezhenzhen
+ *
  */
 public class ShokanbaraiShikyuFushikyuKetteiTsuchiIchiranEditor implements IShokanbaraiShikyuFushikyuKetteiTsuchiIchiranEditor {
 

@@ -12,6 +12,8 @@ import jp.co.ndensan.reams.uz.uza.report.source.ReportItem;
 /**
  * 主治医意見書提出督促状のReportSourceです。
  *
+ * @reamsid_L DBE-0060-020 hezhenzhen
+ *
  */
 public class ShujiiIkenshoSakuseiTokusokujoReportSource implements IReportSource {
 // <editor-fold defaultstate="collapsed" desc="Generated Code">

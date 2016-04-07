@@ -14,6 +14,8 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 /**
  * 施設入所情報RelateEntityクラスです。
  *
+ * @reamsid_L DBE-3000-180 hezhenzhen
+ *
  */
 @lombok.Getter
 @lombok.Setter

@@ -13,6 +13,8 @@ import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
 /**
  * 主治医意見書提出督促状のReportです。
  *
+ * @reamsid_L DBE-0060-020 hezhenzhen
+ *
  */
 public class ShujiiIkenshoSakuseiTokusokujoReport extends Report<ShujiiIkenshoSakuseiTokusokujoReportSource> {
 

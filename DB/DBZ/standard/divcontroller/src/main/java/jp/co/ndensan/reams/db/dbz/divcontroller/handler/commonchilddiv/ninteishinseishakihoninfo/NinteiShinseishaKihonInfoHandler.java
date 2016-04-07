@@ -17,7 +17,9 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 
 /**
- * 認定申請者基本情報のダイアログのDivControllerです
+ * 認定申請者基本情報のダイアログのDivControllerです。
+ *
+ * @reamsid_L DBE-3000-190 hezhenzhen
  *
  */
 public class NinteiShinseishaKihonInfoHandler {

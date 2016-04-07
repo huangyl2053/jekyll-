@@ -34,6 +34,8 @@ import jp.co.ndensan.reams.uz.uza.util.code.entity.UzT0007CodeEntity;
 /**
  * 共有子Div「医療保険履歴」のイベントを定義した共有子Divです。
  *
+ * @reamsid_L DBA-0230-010 hezhenzhen
+ *
  */
 public class IryohokenRirekiCommonChildDiv {
 
@@ -42,7 +44,6 @@ public class IryohokenRirekiCommonChildDiv {
     private static final RString 状態_削除 = new RString("削除");
     private static final RString 状態_選択 = new RString("選択");
     private RString 医療保険情報_識別コード;
-    private RString 医療保険情報_市町村コード;
 
     /**
      * 初期化します。
@@ -51,7 +52,6 @@ public class IryohokenRirekiCommonChildDiv {
      * @return ResponseData<IryohokenRirekiCommonChildDivDiv>
      */
     public ResponseData<IryohokenRirekiCommonChildDivDiv> onLoad(IryohokenRirekiCommonChildDivDiv requestDiv) {
-
         ResponseData<IryohokenRirekiCommonChildDivDiv> responseData = new ResponseData<>();
 
         List<UzT0007CodeEntity> entityList = CodeMaster.getCode(new CodeShubetsu(new RString("0001")));
@@ -61,10 +61,11 @@ public class IryohokenRirekiCommonChildDiv {
             keyvalueList.add(new KeyValueDataSource(codeEntity.getコード().getKey(), codeEntity.getコード名称()));
         }
         医療保険情報_識別コード = ViewStateHolder.get(ViewStateKeys.医療保険情報_識別コード, RString.class);
-        医療保険情報_市町村コード = ViewStateHolder.get(ViewStateKeys.医療保険情報_市町村コード, RString.class);
         RString mode = ViewStateHolder.get(ViewStateKeys.医療保険情報_モード, RString.class);
-        requestDiv.getPnlIryohokenJoho().getDdlSyubetsu().setDataSource(keyvalueList);
-        createHandlerOf(requestDiv).initialize(mode, 医療保険情報_識別コード);
+        if (!RString.isNullOrEmpty(医療保険情報_識別コード) && !RString.isNullOrEmpty(mode)) {
+            requestDiv.getPnlIryohokenJoho().getDdlSyubetsu().setDataSource(keyvalueList);
+            createHandlerOf(requestDiv).initialize(mode, 医療保険情報_識別コード);
+        }
         responseData.data = requestDiv;
         return responseData;
     }
@@ -105,9 +106,7 @@ public class IryohokenRirekiCommonChildDiv {
      * @return createResponseData 状態_選択
      */
     public ResponseData<IryohokenRirekiCommonChildDivDiv> onClick_SelectButton(IryohokenRirekiCommonChildDivDiv requestDiv) {
-
         return createResponseData(setPnlIryohokenJohoData(状態_選択, requestDiv));
-
     }
 
     /**
@@ -117,7 +116,6 @@ public class IryohokenRirekiCommonChildDiv {
      * @return createResponseData
      */
     public ResponseData<IryohokenRirekiCommonChildDivDiv> onClick_ModifyButton(IryohokenRirekiCommonChildDivDiv requestDiv) {
-
         requestDiv.getPnlIryohokenJoho().setStatus(状態_修正);
         return createResponseData(setPnlIryohokenJohoData(状態_修正, requestDiv));
     }
@@ -129,7 +127,6 @@ public class IryohokenRirekiCommonChildDiv {
      * @return createResponseData
      */
     public ResponseData<IryohokenRirekiCommonChildDivDiv> onClick_DeleteButton(IryohokenRirekiCommonChildDivDiv requestDiv) {
-
         requestDiv.getPnlIryohokenJoho().setStatus(状態_削除);
         return createResponseData(setPnlIryohokenJohoData(状態_削除, requestDiv));
     }
@@ -177,7 +174,6 @@ public class IryohokenRirekiCommonChildDiv {
             保険者名.append(requestDiv.getPnlIryohokenJoho().getTxtHokensyaMeisho().getValue());
             ichiran_Row.setDefaultDataName10(保険者名.toRString());
             ichiran_Row.setDefaultDataName0(医療保険情報_識別コード);
-            ichiran_Row.setDefaultDataName1(医療保険情報_市町村コード);
             ichiran_Row.setDefaultDataName2(状態_追加);
             list.add(count, ichiran_Row);
             加入日と脱退日の有効性チェック(list, count);
@@ -221,7 +217,6 @@ public class IryohokenRirekiCommonChildDiv {
     }
 
     private void setState(dgIryohokenIchiran_Row ichiran_Row, IryohokenRirekiCommonChildDivDiv requestDiv) {
-
         if (状態_修正.equals(requestDiv.getPnlIryohokenJoho().getStatus()) && !状態_追加.equals(ichiran_Row.getDefaultDataName2())) {
             ichiran_Row.setDefaultDataName2(状態_修正);
         }
@@ -239,7 +234,6 @@ public class IryohokenRirekiCommonChildDiv {
      * @return
      */
     private void 加入日と脱退日の有効性チェック(List<dgIryohokenIchiran_Row> dgIryohokenIchiranlist, int index) {
-
         List<IryohokenRirekiCommonChildDivDate> childDivDate = new ArrayList<>();
         dgIryohokenIchiran_Row ichiran_Row = dgIryohokenIchiranlist.get(index);
 

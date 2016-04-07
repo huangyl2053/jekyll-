@@ -12,6 +12,8 @@ import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
 /**
  * 償還払支給（不支給）決定通知書（ｼｰﾗﾀｲﾌﾟ2）のReportです。
  *
+ * @reamsid_L DBC-1000-140 hezhenzhen
+ *
  */
 public class ShokanKetteiTsuchiShoSealer2Report extends Report<ShokanKetteiTsuchiShoSealer2ReportSource> {
 

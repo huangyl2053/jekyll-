@@ -11,6 +11,8 @@ import jp.co.ndensan.reams.db.dbz.entity.db.relate.shisetsunyushoinfo.ninteishin
 /**
  * 認定申請者基本情報を取得するのマッパーインタフェースです。
  *
+ * @reamsid_L DBE-3000-190 hezhenzhen
+ *
  */
 public interface INinteiShinseishaKihonInfoMapper {
 
