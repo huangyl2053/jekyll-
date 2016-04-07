@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <!-- どのマッパーインターフェースと対応するかを指定する -->
+<!-- @reamsid_L DBA-0530-010 chengsanyuan -->
+
 <mapper namespace="jp.co.ndensan.reams.db.dba.persistence.db.mapper.relate.idochecklist.IIdoCheckListMapper">
 
     <resultMap id="resultMap_getIdoInfoEntity" type="jp.co.ndensan.reams.db.dba.entity.db.relate.idochecklist.IdoInfoEntity" autoMapping="true">

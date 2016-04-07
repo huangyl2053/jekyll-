@@ -14,6 +14,8 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 /**
  *
  * 他市町村住所地特例のエンティティクラスです。
+ *
+ * @reamsid_L DBA-0530-020 chengsanyuan
  */
 @lombok.Getter
 @lombok.Setter

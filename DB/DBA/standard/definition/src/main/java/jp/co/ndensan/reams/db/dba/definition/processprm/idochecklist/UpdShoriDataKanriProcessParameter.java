@@ -10,6 +10,8 @@ import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 
 /**
  * 異動チェックリストのパラメータクラスです。
+ *
+ * @reamsid_L DBA-0530-020 chengsanyuan
  */
 @lombok.Getter
 @lombok.Setter

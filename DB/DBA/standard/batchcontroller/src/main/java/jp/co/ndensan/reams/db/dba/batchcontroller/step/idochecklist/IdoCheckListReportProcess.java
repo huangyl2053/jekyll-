@@ -59,6 +59,8 @@ import jp.co.ndensan.reams.uz.uza.util.code.entity.UzT0007CodeEntity;
 
 /**
  * 異動チェックリスト帳票データ作成のプロセスクラス
+ *
+ * @reamsid_L DBA-0530-020 chengsanyuan
  */
 public class IdoCheckListReportProcess extends BatchProcessBase<RString> {
 

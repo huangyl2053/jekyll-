@@ -22,6 +22,8 @@ import jp.co.ndensan.reams.uz.uza.lang.Separator;
 /**
  * 異動チェックリスト帳票用データを作成Businessクラスです。
  *
+ * @reamsid_L DBA-0530-020 chengsanyuan
+ *
  */
 public class IdoCheckListBatch {
 
