@@ -17,6 +17,8 @@ import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
 
 /**
  * 調査員情報のCSV出力クラスです。
+ *
+ * @reamsid_L DBE-0280-010 sunhaidi
  */
 public class NinteiChosainMasterManager {
 

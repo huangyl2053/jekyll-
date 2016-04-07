@@ -26,6 +26,8 @@ import jp.co.ndensan.reams.uz.uza.util.code.entity.UzT0007CodeEntity;
 
 /**
  * 認定調査員マスタ画面のハンドラークラスです。
+ *
+ * @reamsid_L DBE-0280-010 sunhaidi
  */
 public class NinteiChosainMasterHandler {
 

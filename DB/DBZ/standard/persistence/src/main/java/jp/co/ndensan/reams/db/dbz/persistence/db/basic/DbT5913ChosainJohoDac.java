@@ -27,6 +27,8 @@ import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
 
 /**
  * 調査員情報のデータアクセスクラスです。
+ *
+ * @reamsid_L DBE-0280-010 sunhaidi
  */
 public class DbT5913ChosainJohoDac implements ISaveable<DbT5913ChosainJohoEntity> {
 

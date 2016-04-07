@@ -19,6 +19,8 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
 
 /**
  * 認定調査員マスタ画面のバリデーションハンドラークラスです。
+ *
+ * @reamsid_L DBE-0280-010 sunhaidi
  */
 public class NinteiChosainMasterValidationHandler {
 

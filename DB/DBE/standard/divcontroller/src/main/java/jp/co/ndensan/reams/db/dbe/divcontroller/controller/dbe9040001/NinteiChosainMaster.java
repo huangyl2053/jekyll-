@@ -48,6 +48,8 @@ import jp.co.ndensan.reams.uz.uza.util.serialization.DataPassingConverter;
 
 /**
  * 認定調査員マスタ処理のクラスです。
+ *
+ * @reamsid_L DBE-0280-010 sunhaidi
  */
 public class NinteiChosainMaster {
 

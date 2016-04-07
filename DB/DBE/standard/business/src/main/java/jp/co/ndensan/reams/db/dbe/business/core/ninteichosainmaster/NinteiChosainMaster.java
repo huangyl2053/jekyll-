@@ -16,6 +16,8 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
  * 調査員情報を管理するクラスです。
+ *
+ * @reamsid_L DBE-0280-010 sunhaidi
  */
 public class NinteiChosainMaster {
 

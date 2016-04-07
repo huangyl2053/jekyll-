@@ -7,6 +7,8 @@ package jp.co.ndensan.reams.db.dbz.divcontroller.viewbox;
 
 /**
  * ViewStateKeys
+ *
+ * @reamsid_L DBZ-9999-021 sunhaidi
  */
 public enum ViewStateKeys {
 

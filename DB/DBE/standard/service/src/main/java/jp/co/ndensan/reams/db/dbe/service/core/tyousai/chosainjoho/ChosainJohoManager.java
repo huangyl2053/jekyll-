@@ -20,6 +20,8 @@ import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
 
 /**
  * 調査員情報を管理するクラスです。
+ *
+ * @reamsid_L DBZ-9999-011 sunhaidi
  */
 public class ChosainJohoManager {
 
