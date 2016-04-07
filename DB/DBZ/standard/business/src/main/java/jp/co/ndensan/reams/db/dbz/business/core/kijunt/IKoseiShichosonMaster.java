@@ -16,6 +16,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 /**
  * リスト(市町村情報)の取得します
  *
+ * @reamsid_L DBU-0250-010 wangxiaodong
  */
 public interface IKoseiShichosonMaster {
 
