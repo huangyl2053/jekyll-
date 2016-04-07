@@ -18,7 +18,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxNum;
 /**
  * PnlKyufuhiMeisaiTouroku のクラスファイル
  *
- * @author 自動生成
+ * @reamsid_L DBC-1030-030 quxiaodong
  */
 public class PnlKyufuhiMeisaiTourokuDiv extends Panel {
 
