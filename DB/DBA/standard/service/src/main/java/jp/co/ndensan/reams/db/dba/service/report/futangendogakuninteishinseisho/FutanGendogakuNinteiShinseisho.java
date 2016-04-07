@@ -50,8 +50,9 @@ import jp.co.ndensan.reams.uz.uza.util.config.BusinessConfig;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 
 /**
- *
  * 介護保険負担限度額認定申請書Printerです。
+ * 
+ * @reamsid_L DBA-0540-200  suguangjun
  */
 public class FutanGendogakuNinteiShinseisho {
 

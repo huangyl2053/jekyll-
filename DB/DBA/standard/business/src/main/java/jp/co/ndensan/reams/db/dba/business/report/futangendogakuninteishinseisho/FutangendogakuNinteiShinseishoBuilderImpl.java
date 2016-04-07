@@ -9,8 +9,9 @@ import jp.co.ndensan.reams.db.dba.entity.report.futangendogakuninteishinseisho.F
 import jp.co.ndensan.reams.uz.uza.report.ReportEditorJoiner;
 
 /**
- *
  * 介護保険負担限度額認定申請書Builderクラスです。
+ * 
+ * @reamsid_L DBA-0540-690  suguangjun 
  */
 public class FutangendogakuNinteiShinseishoBuilderImpl implements IFutangendogakuNinteiShinseishoBuilder {
 

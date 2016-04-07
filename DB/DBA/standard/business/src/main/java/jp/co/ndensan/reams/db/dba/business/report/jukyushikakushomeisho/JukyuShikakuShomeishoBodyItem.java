@@ -9,8 +9,9 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 import lombok.Getter;
 
 /**
- *
  * 受給資格証明書情報です。
+ * 
+ * @reamsid_L DBU-0490-090  suguangjun 
  */
 @Getter
 @SuppressWarnings("PMD.UnusedPrivateField")

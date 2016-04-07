@@ -9,8 +9,9 @@ import jp.co.ndensan.reams.db.dba.entity.report.riyoshafutangakugengakumenjyoshi
 import jp.co.ndensan.reams.uz.uza.report.IReportEditor;
 
 /**
- *
  * 介護保険利用者負担額減額・免除申請書ヘッダエディターのインターフェースクラスです。
+ * 
+ * @reamsid_L DBA-0540-691  suguangjun 
  */
 interface IRiyoshaFutangakuGengakuMenjyoShinseishoEditor extends IReportEditor<RiyoshaFutangakuGengakuMenjyoShinseishoReportSource> {
 }

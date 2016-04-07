@@ -16,6 +16,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 /**
  * 要介護認定個人状況照会用Entityクラスです。
  * 
+ * @reamsid_L DBE-0200-010  suguangjun 
  */
 @lombok.Getter
 @lombok.Setter

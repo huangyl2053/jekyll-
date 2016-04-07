@@ -9,8 +9,9 @@ package jp.co.ndensan.reams.db.dba.business.report.jukyushikakushomeisho;
 import lombok.Getter;
 
 /**
- *
  * 受給資格証明書クラスパラメータクラスです。
+ * 
+ * @reamsid_L DBU-0490-090  suguangjun 
  */
 @Getter
 @SuppressWarnings("PMD.UnusedPrivateField")

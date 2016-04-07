@@ -9,8 +9,9 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 import lombok.Getter;
 
 /**
- *
  * 介護保険利用者負担額減額・免除申請書情報です。
+ * 
+ * @reamsid_L DBA-0540-691  suguangjun
  */
 @Getter
 @SuppressWarnings("PMD.UnusedPrivateField")

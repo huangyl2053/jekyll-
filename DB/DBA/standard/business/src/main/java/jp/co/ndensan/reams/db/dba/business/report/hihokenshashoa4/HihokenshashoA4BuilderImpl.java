@@ -9,8 +9,9 @@ import jp.co.ndensan.reams.db.dba.entity.report.hihokenshashoa4.HihokenshashoA4R
 import jp.co.ndensan.reams.uz.uza.report.ReportEditorJoiner;
 
 /**
- *
  * 介護保険被保険者証Builderクラスです。
+ * 
+ * @reamsid_L DBU-0490-070  suguangjun
  */
 public class HihokenshashoA4BuilderImpl implements IHihokenshashoA4Builder {
 

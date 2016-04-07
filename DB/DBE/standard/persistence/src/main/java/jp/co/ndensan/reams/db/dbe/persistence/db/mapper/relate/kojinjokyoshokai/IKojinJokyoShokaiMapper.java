@@ -11,6 +11,8 @@ import jp.co.ndensan.reams.db.dbe.entity.db.relate.kojinjokyoshokai.KojinJokyoSh
 
 /**
  * 要介護認定個人状況照会のマッパーインタフェースです。
+ * 
+ * @reamsid_L DBE-0200-010  suguangjun 
  */
 public interface IKojinJokyoShokaiMapper {
 

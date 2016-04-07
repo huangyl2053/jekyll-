@@ -20,6 +20,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 /**
  * 要介護認定個人状況を管理するクラスです。
  * 
+ * @reamsid_L DBE-0200-010  suguangjun 
  */
 public class KojinJokyoShokai {
     

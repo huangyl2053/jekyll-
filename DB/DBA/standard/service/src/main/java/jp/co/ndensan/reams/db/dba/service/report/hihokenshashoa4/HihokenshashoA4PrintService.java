@@ -29,8 +29,9 @@ import jp.co.ndensan.reams.uz.uza.report.SourceDataCollection;
 import jp.co.ndensan.reams.uz.uza.report.source.breaks.BreakAggregator;
 
 /**
- *
  * 介護保険被保険者証Printクラスです。
+ * 
+ * @reamsid_L DBU-0490-070  suguangjun 
  */
 public class HihokenshashoA4PrintService {
 

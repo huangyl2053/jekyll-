@@ -11,8 +11,9 @@ import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.report.ReportPropertyBase;
 
 /**
- *
  * {@link FutangendogakuNinteiShinseishoReportSource}のプロパティです。
+ * 
+ * @reamsid_L DBA-0540-690  suguangjun 
  */
 public class FutangendogakuNinteiShinseishoProerty extends ReportPropertyBase<FutangendogakuNinteiShinseishoReportSource> {
 

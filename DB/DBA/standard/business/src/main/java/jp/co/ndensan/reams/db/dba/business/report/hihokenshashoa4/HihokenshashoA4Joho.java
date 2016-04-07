@@ -9,8 +9,9 @@ package jp.co.ndensan.reams.db.dba.business.report.hihokenshashoa4;
 import lombok.Getter;
 
 /**
- *
  * 介護保険被保険者証作成_帳票クラスパラメータクラスです。
+ * 
+ * @reamsid_L DBU-0490-070  suguangjun
  */
 @Getter
 @SuppressWarnings("PMD.UnusedPrivateField")

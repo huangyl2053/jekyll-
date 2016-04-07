@@ -10,8 +10,9 @@ import jp.co.ndensan.reams.db.dba.entity.report.hihokenshashoa4.HihokenshashoA4R
 import jp.co.ndensan.reams.uz.uza.report.IReportEditor;
 
 /**
- *
  * 介護保険被保険者証ヘッダエディターのインターフェースクラスです。
+ * 
+ * @reamsid_L DBU-0490-070  suguangjun 
  */
 interface IHihokenshashoA4Editor extends IReportEditor<HihokenshashoA4ReportSource> {
 }

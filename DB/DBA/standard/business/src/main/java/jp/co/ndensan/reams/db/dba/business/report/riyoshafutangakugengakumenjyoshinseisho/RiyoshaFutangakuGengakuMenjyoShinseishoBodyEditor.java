@@ -9,8 +9,9 @@ import jp.co.ndensan.reams.db.dba.entity.report.riyoshafutangakugengakumenjyoshi
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
- *
  * 介護保険利用者負担額減額・免除申請書ボディEditorです。
+ * 
+ * @reamsid_L DBA-0540-691  suguangjun
  */
 public class RiyoshaFutangakuGengakuMenjyoShinseishoBodyEditor implements IRiyoshaFutangakuGengakuMenjyoShinseishoEditor {
 

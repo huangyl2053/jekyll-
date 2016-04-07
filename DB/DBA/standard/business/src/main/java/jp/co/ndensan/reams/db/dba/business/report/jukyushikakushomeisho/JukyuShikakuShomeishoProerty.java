@@ -11,8 +11,9 @@ import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.report.ReportPropertyBase;
 
 /**
- *
  * {@link JukyuShikakuShomeishoReportSource}のプロパティです。
+ * 
+ * @reamsid_L DBU-0490-090  suguangjun 
  */
 public class JukyuShikakuShomeishoProerty extends ReportPropertyBase<JukyuShikakuShomeishoReportSource> {
 

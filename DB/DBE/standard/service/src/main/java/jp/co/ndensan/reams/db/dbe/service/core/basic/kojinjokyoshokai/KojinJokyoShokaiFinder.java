@@ -21,6 +21,7 @@ import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
 /**
  * 要介護認定個人状況照会クラスです。
  * 
+ * @reamsid_L DBE-0200-010  suguangjun
  */
 public class KojinJokyoShokaiFinder {
 

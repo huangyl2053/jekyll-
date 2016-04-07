@@ -24,6 +24,8 @@ import jp.co.ndensan.reams.uz.uza.report.source.breaks.BreakAggregator;
 
 /**
  * 受給資格証明書Printerです。
+ * 
+ * @reamsid_L DBU-0490-090  suguangjun 
  */
 public class JukyuShikakuShomeishoPrintService {
 

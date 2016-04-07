@@ -8,8 +8,9 @@ package jp.co.ndensan.reams.db.dba.business.report.hihokenshashosaikoufushinseis
 import jp.co.ndensan.reams.db.dba.entity.report.hihokenshashosaikoufushinseisho.HihokenshashoSaikoufuShinseishoReportSource;
 
 /**
- *
  * 介護保険被保険者証等再交付申請書ボディEditorです。
+ * 
+ * @reamsid_L DBA-0540-689  suguangjun 
  */
 public class HihokenshashoSaikoufuShinseishoBodyEditor implements IHihokenshashoSaikoufuShinseishoEditor {
 

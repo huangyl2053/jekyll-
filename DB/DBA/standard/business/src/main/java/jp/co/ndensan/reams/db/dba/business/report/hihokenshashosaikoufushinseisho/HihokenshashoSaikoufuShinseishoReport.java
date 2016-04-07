@@ -11,8 +11,9 @@ import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
 import lombok.NonNull;
 
 /**
- *
  * 介護保険被保険者証等再交付申請書のReportです。
+ * 
+ * @reamsid_L DBA-0540-689  suguangjun
  */
 public final class HihokenshashoSaikoufuShinseishoReport extends Report<HihokenshashoSaikoufuShinseishoReportSource> {
 
