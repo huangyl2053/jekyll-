@@ -10,6 +10,8 @@ import jp.co.ndensan.reams.uz.uza.report.IReportEditor;
 
 /**
  * 広域内住所地特例者一覧表のインターフェースクラスです。
+ *
+ * @reamsid_L DBU-1140-060 linghuhang
  */
 interface IKoikinaiJushochitokureishaIchiranhyoEditor extends IReportEditor<KoikinaiJushochitokureishaIchiranhyoReportSource> {
 }
