@@ -19,8 +19,9 @@ import jp.co.ndensan.reams.uz.uza.util.db.SearchResult;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 
 /**
- *
  * 表示コードのクラスです。
+ *
+ * @reamsid_L DBB-9030-020 wangxiaodong
  */
 public class HyojiCodeResearcher {
 
