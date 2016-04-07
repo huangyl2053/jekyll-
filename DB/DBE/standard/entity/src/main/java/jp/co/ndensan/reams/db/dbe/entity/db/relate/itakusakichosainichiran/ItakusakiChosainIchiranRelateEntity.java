@@ -14,6 +14,7 @@ import lombok.Setter;
 /**
  *
  * 調査員一覧情報の取得のEntityクラスです。
+ * @reamsid_L DBE-0290-030 dongyabin
  */
 @Getter
 @Setter

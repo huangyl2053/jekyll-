@@ -12,6 +12,7 @@ import lombok.Getter;
 /**
  *
  * 介護保険住所地特例適用・変更・終了届のEntityリストです。
+ * @reamsid_L DBA-0540-685 dongyabin
  */
 @Getter
 @SuppressWarnings("PMD.UnusedPrivateField")

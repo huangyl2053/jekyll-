@@ -26,8 +26,7 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
 
 /**
  * 老齢福祉年金画面のハンドラークラスです。
- *
- *
+ * @reamsid_L DBA-0220-010 dongyabin
  */
 public class RoreiFukushiNenkinShokaiHandler {
 

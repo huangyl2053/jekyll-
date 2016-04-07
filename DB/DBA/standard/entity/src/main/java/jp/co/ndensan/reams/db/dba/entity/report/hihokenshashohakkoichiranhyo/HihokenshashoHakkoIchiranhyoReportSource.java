@@ -6,6 +6,7 @@ import jp.co.ndensan.reams.uz.uza.report.source.ReportItem;
 
 /**
  * 被保険者証発行一覧表Sourceクラスです。
+ * @reamsid_L DBU-0420-060 dongyabin
  */
 public class HihokenshashoHakkoIchiranhyoReportSource implements IReportSource {
 // <editor-fold defaultstate="collapsed" desc="Generated Code">

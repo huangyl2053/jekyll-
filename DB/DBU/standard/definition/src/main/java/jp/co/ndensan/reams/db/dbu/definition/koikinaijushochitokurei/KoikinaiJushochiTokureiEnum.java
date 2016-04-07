@@ -11,6 +11,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 /**
  *
  * 広域内住所地特例者一覧表のReportIdの列挙型です。
+ * @reamsid_L DBU-1140-020 dongyabin
  */
 public enum KoikinaiJushochiTokureiEnum {
 

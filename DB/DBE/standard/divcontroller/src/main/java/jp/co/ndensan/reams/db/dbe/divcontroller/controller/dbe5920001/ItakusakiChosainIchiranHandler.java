@@ -15,6 +15,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 /**
  *
  * 認定調査委託先・認定調査員一覧表のHandlerクラスです。
+ * @reamsid_L DBE-0290-010 dongyabin
  */
 public class ItakusakiChosainIchiranHandler {
 

@@ -11,6 +11,7 @@ import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 
 /**
  * 老齢福祉年金受給者の識別子です。
+ * @reamsid_L DBA-0220-020 dongyabin
  */
 @SuppressWarnings("PMD.UnusedPrivateField")
 @lombok.Value

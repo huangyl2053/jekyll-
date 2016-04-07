@@ -15,6 +15,7 @@ import lombok.NonNull;
 /**
  *
  * 要介護認定業務進捗状況一覧表のReportです。
+ * @reamsid_L DBE-0210-020 dongyabin
  */
 public final class NiteiGyomuShinchokuJokyoIchiranhyoReport extends Report<NiteiGyomuShinchokuJokyoIchiranhyoReportSource> {
     

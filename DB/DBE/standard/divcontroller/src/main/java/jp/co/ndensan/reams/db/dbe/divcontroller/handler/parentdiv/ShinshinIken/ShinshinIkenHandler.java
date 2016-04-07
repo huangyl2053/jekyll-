@@ -35,6 +35,7 @@ import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 /**
  *
  * 心身の意見入力のHandlerクラスです。
+ * @reamsid_L DBE-3000-120 dongyabin
  */
 public class ShinshinIkenHandler {
 

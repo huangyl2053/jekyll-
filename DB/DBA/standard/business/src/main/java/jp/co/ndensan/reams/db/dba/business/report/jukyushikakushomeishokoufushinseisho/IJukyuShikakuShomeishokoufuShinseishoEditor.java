@@ -12,6 +12,7 @@ import jp.co.ndensan.reams.uz.uza.report.IReportEditor;
 /**
  *
  * 介護保険受給資格証明書交付申請書のエディターインターフェースです。
+ * @reamsid_L DBA-0540-682 dongyabin
  */
 public interface IJukyuShikakuShomeishokoufuShinseishoEditor extends IReportEditor<JukyuShikakuShomeishokoufuShinseishoReportSource> {
     

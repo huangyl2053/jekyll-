@@ -12,6 +12,7 @@ import jp.co.ndensan.reams.uz.uza.report.IReportEditor;
 /**
  *
  * 要介護認定業務進捗状況一覧表ヘッダエディターのインターフェースクラスです。
+ * @reamsid_L DBE-0210-020 dongyabin
  */
 interface INiteiGyomuShinchokuJokyoIchiranhyoEditor extends IReportEditor<NiteiGyomuShinchokuJokyoIchiranhyoReportSource> {
 }

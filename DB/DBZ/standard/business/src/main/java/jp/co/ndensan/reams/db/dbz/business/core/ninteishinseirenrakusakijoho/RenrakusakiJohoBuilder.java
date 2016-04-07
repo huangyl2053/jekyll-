@@ -18,6 +18,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
  * {@link RenrakusakiJoho}の編集を行うビルダークラスです。
+ * @reamsid_L DBE-1300-100 dongyabin
  */
 public class RenrakusakiJohoBuilder {
 

@@ -11,6 +11,7 @@ import jp.co.ndensan.reams.uz.uza.report.IReportBuilder;
 /**
  *
  * 認定調査委託先・認定調査員一覧表Builderのインターフェースクラスです。
+ * @reamsid_L DBE-0290-020 dongyabin
  */
 public interface ItakusakiChosainIchiranBuilder extends IReportBuilder<ItakusakiChosainIchiranReportSource> {
 }

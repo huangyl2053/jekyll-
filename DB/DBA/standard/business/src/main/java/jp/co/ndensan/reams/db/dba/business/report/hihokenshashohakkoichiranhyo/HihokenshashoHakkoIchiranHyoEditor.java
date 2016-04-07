@@ -11,6 +11,7 @@ import jp.co.ndensan.reams.db.dba.entity.report.hihokenshashohakkoichiranhyo.Hih
 /**
  *
  * 被保険者証発行一覧表Editorです。
+ * @reamsid_L DBU-0420-060 dongyabin
  */
 public class HihokenshashoHakkoIchiranHyoEditor implements IHihokenshashoHakkoIchiranHyoEditor {
     

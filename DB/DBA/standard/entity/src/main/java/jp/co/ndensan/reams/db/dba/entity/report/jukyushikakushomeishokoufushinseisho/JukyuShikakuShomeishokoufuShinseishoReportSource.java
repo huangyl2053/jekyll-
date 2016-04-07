@@ -7,6 +7,7 @@ import jp.co.ndensan.reams.uz.uza.report.source.ReportItem;
 /**
  * 
  * 介護保険受給資格証明書交付申請書の帳票項目クラスです。
+ * @reamsid_L DBA-0540-682 dongyabin
  */
 public class JukyuShikakuShomeishokoufuShinseishoReportSource implements IReportSource {
 // <editor-fold defaultstate="collapsed" desc="Generated Code">

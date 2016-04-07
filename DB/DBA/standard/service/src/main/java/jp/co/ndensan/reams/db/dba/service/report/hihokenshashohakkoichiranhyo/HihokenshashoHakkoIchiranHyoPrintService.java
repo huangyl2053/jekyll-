@@ -18,6 +18,7 @@ import jp.co.ndensan.reams.uz.uza.report.SourceDataCollection;
 /**
  *
  * 被保険者証発行一覧表Printクラスです。
+ * @reamsid_L DBU-0420-060 dongyabin
  */
 public class HihokenshashoHakkoIchiranHyoPrintService {
     

@@ -13,6 +13,7 @@ import lombok.Setter;
 /**
  *
  * 調査実施者情報の親画面から受け取ったパラメータです。
+ * @reamsid_L DBE-3000-100 dongyabin
  */
 @Getter
 @Setter

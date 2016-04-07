@@ -13,6 +13,7 @@ import lombok.Setter;
 /**
  *
  * 広域内住所地特例者Entityクラスです。
+ * KoikinaiJushochiTokureiEntity.java
  */
 @Getter
 @Setter

@@ -15,6 +15,7 @@ import jp.co.ndensan.reams.uz.uza.report.ReportPropertyBase;
 /**
  * 
  * {@link NiteiGyomuShinchokuJokyoIchiranhyoReport}のプロパティです。
+ * @reamsid_L DBE-0210-020 dongyabin
  */
 public class NiteiGyomuShinchokuJokyoIchiranhyoProerty extends ReportPropertyBase<NiteiGyomuShinchokuJokyoIchiranhyoReportSource> {
     

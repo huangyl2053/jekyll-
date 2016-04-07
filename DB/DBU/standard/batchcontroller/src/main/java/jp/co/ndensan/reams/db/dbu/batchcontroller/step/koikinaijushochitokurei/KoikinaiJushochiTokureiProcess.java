@@ -8,6 +8,9 @@ package jp.co.ndensan.reams.db.dbu.batchcontroller.step.koikinaijushochitokurei;
 
 import java.util.ArrayList;
 import java.util.List;
+import jp.co.ndensan.reams.db.dba.business.report.koikinaijushochitokureishaichiranhyo.KoikinaiJushochitokureishaIchiranhyoHeadItem;
+import jp.co.ndensan.reams.db.dba.business.report.koikinaijushochitokureishaichiranhyo.KoikinaiJushochitokureishaIchiranhyoProperty;
+import jp.co.ndensan.reams.db.dba.business.report.koikinaijushochitokureishaichiranhyo.KoikinaiJushochitokureishaIchiranhyoReport;
 import jp.co.ndensan.reams.db.dbu.business.koikinaijushochitokurei.KoikinaiJushochiTokureishaIchiranhyoChohyoDataSakusei;
 import jp.co.ndensan.reams.db.dbu.definition.koikinaijushochitokurei.KoikinaiJushochiTokureiEntity;
 import jp.co.ndensan.reams.db.dbu.definition.koikinaijushochitokurei.KoikinaiJushochiTokureiItiranEntity;
@@ -35,6 +38,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 /**
  *
  * 広域内住所地特例者情報の設定クラスです。
+ * @reamsid_L DBU-1140-020 dongyabin
  */
 public class KoikinaiJushochiTokureiProcess extends SimpleBatchProcessBase {
     
@@ -48,6 +52,7 @@ public class KoikinaiJushochiTokureiProcess extends SimpleBatchProcessBase {
     private RString 市町村名称;
     private RString 並び順;
     private RString 改頁;
+    private List<KoikinaiJushochiTokureishaIchiranhyoChohyoDataSakusei> 帳票データlist;
 
     @Override
     protected void beforeExecute() {
@@ -62,7 +67,7 @@ public class KoikinaiJushochiTokureiProcess extends SimpleBatchProcessBase {
         set出力順ソート();
         // TODO QA 440 董亜彬 帳票仕様とフォームファイルがありません
         // List<KoikinaiJushochiTokureishaIchiranhyoChohyoDataSakusei> 帳票データlist 
-        is帳票データ作成(is広域内住所地特例者一覧表情報Entity作成(get広域内住所地特例者情報()));
+        帳票データlist = is帳票データ作成(is広域内住所地特例者一覧表情報Entity作成(get広域内住所地特例者情報()));
         
         
     }
@@ -70,6 +75,32 @@ public class KoikinaiJushochiTokureiProcess extends SimpleBatchProcessBase {
     @Override
     protected void afterExecute() {
         // TODO QA 440 董亜彬 帳票仕様とフォームファイルがありません
+        KoikinaiJushochitokureishaIchiranhyoProperty property = new KoikinaiJushochitokureishaIchiranhyoProperty();
+        
+    }
+    
+    private List<KoikinaiJushochitokureishaIchiranhyoReport> toReports() {
+        List<KoikinaiJushochitokureishaIchiranhyoReport> list = new ArrayList<>();
+        list.add(KoikinaiJushochitokureishaIchiranhyoReport.createFrom(
+                getHeadItem(),
+                reportJoho.getBodyItemList()));
+        return list;
+    }
+    
+    private KoikinaiJushochitokureishaIchiranhyoHeadItem getHeadItem() {
+        return new KoikinaiJushochitokureishaIchiranhyoHeadItem(基準日,
+                市町村コード,
+                市町村名称,
+                並び順,
+                並び順,
+                並び順,
+                並び順,
+                並び順,
+                改頁,
+                改頁,
+                改頁,
+                改頁,
+                改頁);
     }
     
     private List<KoikinaiJushochiTokureiEntity> get広域内住所地特例者情報() {

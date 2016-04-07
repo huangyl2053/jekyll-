@@ -11,7 +11,7 @@ import jp.co.ndensan.reams.uz.uza.math.Decimal;
 
 /**
  * 主治医医療機関情報を特定するためのMyBatis用パラメータクラスです。
- *
+ * @reamsid_L DBE-0240-010 dongyabin
  */
 @SuppressWarnings("PMD.UnusedPrivateField")
 @lombok.Getter

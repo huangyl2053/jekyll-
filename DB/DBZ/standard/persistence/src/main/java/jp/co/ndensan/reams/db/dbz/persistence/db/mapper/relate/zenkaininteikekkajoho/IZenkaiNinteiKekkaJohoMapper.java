@@ -15,6 +15,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 /**
  *
  * 前回結果情報検索のインタフェイスです。
+ * @reamsid_L DBE-3000-020 dongyabin
  */
 public interface IZenkaiNinteiKekkaJohoMapper {
     

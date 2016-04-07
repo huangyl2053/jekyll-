@@ -15,6 +15,7 @@ import lombok.NonNull;
 /**
  *
  * 介護保険被保険者証（B4版）帳票作成します。
+ * @reamsid_L DBU-0490-060 dongyabin
  */
 public final class HihokenshashoB4Report extends Report<HihokenshashoB4ReportSource> {
     

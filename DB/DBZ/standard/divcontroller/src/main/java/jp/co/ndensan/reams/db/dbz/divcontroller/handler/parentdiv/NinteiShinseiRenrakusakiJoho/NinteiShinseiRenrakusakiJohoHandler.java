@@ -17,6 +17,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 /**
  *
  * 認定申請連絡先情報のHandlerクラスです。
+ * @reamsid_L DBE-1300-100 dongyabin
  */
 public class NinteiShinseiRenrakusakiJohoHandler {
     

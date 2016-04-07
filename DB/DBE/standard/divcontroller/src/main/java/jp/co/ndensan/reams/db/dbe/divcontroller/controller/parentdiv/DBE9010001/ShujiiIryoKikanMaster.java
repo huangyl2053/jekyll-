@@ -41,7 +41,7 @@ import jp.co.ndensan.reams.uz.uza.util.Models;
 
 /**
  * 認定調査員マスタ処理のクラスです。
- *
+ * @reamsid_L DBE-0240-010 dongyabin
  */
 public class ShujiiIryoKikanMaster {
 

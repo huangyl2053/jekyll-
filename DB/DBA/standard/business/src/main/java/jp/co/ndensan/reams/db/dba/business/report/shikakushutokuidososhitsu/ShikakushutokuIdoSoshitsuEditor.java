@@ -11,24 +11,25 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
  *
- * 被保険者証発行一覧表Editorです。
+ * 介護保険資格取得・異動・喪失届Editorです。
+ * @reamsid_L DBA-0540-681 dongyabin
  */
-    public class ShikakushutokuIdoSoshitsuEditor implements IShikakushutokuIdoSoshitsuEditor {
-    
+public class ShikakushutokuIdoSoshitsuEditor implements IShikakushutokuIdoSoshitsuEditor {
+
     private final ShikakushutokuIdoSoshitsuItem joho;
     
     /**
      * コンストラクタです。
-     * @param joho 一覧表証発行者Entityリストです
+     * @param joho 介護保険資格取得・異動・喪失届Entityリストです
      */
     public ShikakushutokuIdoSoshitsuEditor(ShikakushutokuIdoSoshitsuItem joho) {
         this.joho = joho;
     }
 
     /**
-     * 被保険者証発行一覧表editです。
-     * @param source 被保険者証発行一覧表Source
-     * @return 要介護認定業務進捗状況一覧表
+     * 介護保険資格取得・異動・喪失届editです。
+     * @param source 介護保険資格取得・異動・喪失届Source
+     * @return 介護保険資格取得・異動・喪失届
      */
     @Override
     public ShikakushutokuIdoSoshitsuReportSource edit(ShikakushutokuIdoSoshitsuReportSource source) {

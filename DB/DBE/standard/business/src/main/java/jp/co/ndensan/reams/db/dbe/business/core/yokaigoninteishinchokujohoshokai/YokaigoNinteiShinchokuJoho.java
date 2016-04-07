@@ -9,6 +9,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 /**
  * 
  * 要介護認定進捗状況照会ビジネスクラスです。
+ * @reamsid_L DBE-0210-010 dongyabin
  */
 public class YokaigoNinteiShinchokuJoho implements Serializable {
 

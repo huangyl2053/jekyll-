@@ -11,7 +11,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
  * 新旧被保険者番号変換するビジネスです。
- *
+ * @reamsid_L DBU-0310-010 zhangyajing
  */
 public class NewOldHihokenshabango {
 
