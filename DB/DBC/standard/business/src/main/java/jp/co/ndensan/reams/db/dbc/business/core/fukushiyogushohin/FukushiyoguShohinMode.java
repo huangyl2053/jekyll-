@@ -9,8 +9,9 @@ import java.io.Serializable;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
- *
  * 福祉用具商品名入力ガイドの項目定義クラスです。
+ *
+ * @reamsid_L DBC-0970-020 lizhuoxuan
  */
 @lombok.Getter
 @lombok.Setter

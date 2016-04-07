@@ -4,18 +4,23 @@ package jp.co.ndensan.reams.db.dbc.divcontroller.entity.commonchilddiv.Fukushiyo
  * このファイルへの変更は、再生成時には損失するため
  * 不正な動作の原因になります。
  */
+
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.ui.binding.*;
+import jp.co.ndensan.reams.uz.uza.ui.binding.Button;
+import jp.co.ndensan.reams.uz.uza.ui.binding.DataGrid;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
+import jp.co.ndensan.reams.uz.uza.ui.binding.TextBox;
+import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxDate;
 
 /**
- * FukushiyoguShohinGuide のクラスファイル 
- * 
- * @author 自動生成
+ * FukushiyoguShohinGuide のクラスファイル
+ *
+ * @reamsid_L DBC-0970-020 lizhuoxuan
  */
 public class FukushiyoguShohinGuideDiv extends Panel implements IFukushiyoguShohinGuideDiv {
+
     // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2015-11-30_08-54-50">
     /*
      * [ private の作成 ]
@@ -199,7 +204,7 @@ public class FukushiyoguShohinGuideDiv extends Panel implements IFukushiyoguShoh
     }
 
     @JsonIgnore
-    public void  setTxtKanriKaishiDay(TextBoxDate txtKanriKaishiDay) {
+    public void setTxtKanriKaishiDay(TextBoxDate txtKanriKaishiDay) {
         this.getPanInput().setTxtKanriKaishiDay(txtKanriKaishiDay);
     }
 
@@ -209,7 +214,7 @@ public class FukushiyoguShohinGuideDiv extends Panel implements IFukushiyoguShoh
     }
 
     @JsonIgnore
-    public void  setTxtKanriShuryoDay(TextBoxDate txtKanriShuryoDay) {
+    public void setTxtKanriShuryoDay(TextBoxDate txtKanriShuryoDay) {
         this.getPanInput().setTxtKanriShuryoDay(txtKanriShuryoDay);
     }
 
@@ -219,7 +224,7 @@ public class FukushiyoguShohinGuideDiv extends Panel implements IFukushiyoguShoh
     }
 
     @JsonIgnore
-    public void  setTxtShohinmei(TextBox txtShohinmei) {
+    public void setTxtShohinmei(TextBox txtShohinmei) {
         this.getPanInput().setTxtShohinmei(txtShohinmei);
     }
 
@@ -229,7 +234,7 @@ public class FukushiyoguShohinGuideDiv extends Panel implements IFukushiyoguShoh
     }
 
     @JsonIgnore
-    public void  setTxtHinmokuCode(TextBox txtHinmokuCode) {
+    public void setTxtHinmokuCode(TextBox txtHinmokuCode) {
         this.getPanInput().setTxtHinmokuCode(txtHinmokuCode);
     }
 
@@ -239,11 +244,10 @@ public class FukushiyoguShohinGuideDiv extends Panel implements IFukushiyoguShoh
     }
 
     @JsonIgnore
-    public void  setTxtSeizoJigyoshamei(TextBox txtSeizoJigyoshamei) {
+    public void setTxtSeizoJigyoshamei(TextBox txtSeizoJigyoshamei) {
         this.getPanInput().setTxtSeizoJigyoshamei(txtSeizoJigyoshamei);
     }
 
     // </editor-fold>
     //--------------- この行より下にコードを追加してください -------------------
-
 }

@@ -28,6 +28,8 @@ import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
 
 /**
  * 基準収入額適用管理のデータアクセスクラスです。
+ *
+ * @reamsid_L DBC-9999-021 lizhuoxuan
  */
 public class DbT3117FukushiyoguShohinDac implements ISaveable<DbT3117FukushiyoguShohinEntity> {
 
