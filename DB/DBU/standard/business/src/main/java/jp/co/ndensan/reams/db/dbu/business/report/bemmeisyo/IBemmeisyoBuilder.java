@@ -10,6 +10,8 @@ import jp.co.ndensan.reams.uz.uza.report.IReportBuilder;
 
 /**
  * 弁明書Builderのインターフェースクラスです。
+ *
+ * @reamsid_L DBU-1080-150 linghuhang
  */
 interface IBemmeisyoBuilder extends IReportBuilder<BemmeisyoReportSource> {
 }
