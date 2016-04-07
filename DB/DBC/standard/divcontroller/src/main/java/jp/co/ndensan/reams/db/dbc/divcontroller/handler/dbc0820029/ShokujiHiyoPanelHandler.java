@@ -37,6 +37,8 @@ import jp.co.ndensan.reams.uz.uza.util.Saiban;
 
 /**
  * 償還払い費支給申請決定_サービス提供証明書(食事費用）の画面クラスです。
+ *
+ * @reamsid_L DBC-1030-090 lijunjun
  */
 public class ShokujiHiyoPanelHandler {
 
@@ -317,19 +319,19 @@ public class ShokujiHiyoPanelHandler {
      * setヘッダーエリアのメソッド
      *
      * @param サービス提供年月 FlexibleYearMonth
-     * @param 申請日 RString
+     * @param 申請日 RDate
      * @param 事業者番号 JigyoshaNo
      * @param 明細番号 RString
      * @param 証明書 RString
      */
     public void setヘッダーエリア(
             FlexibleYearMonth サービス提供年月,
-            RString 申請日,
+            RDate 申請日,
             JigyoshaNo 事業者番号,
             RString 明細番号,
             RString 証明書) {
         div.getPanelHead().getTxtServiceTeikyoYM().setValue(new RDate(サービス提供年月.toString()));
-        div.getPanelHead().getTxtShinseiYMD().setValue(new RDate(申請日.toString()));
+        div.getPanelHead().getTxtShinseiYMD().setValue(申請日);
         div.getPanelHead().getTxtJigyoshaBango().setValue(事業者番号.getColumnValue());
         div.getPanelHead().getTxtMeisaiBango().setValue(明細番号);
         div.getPanelHead().getTxtShomeisho().setValue(証明書);

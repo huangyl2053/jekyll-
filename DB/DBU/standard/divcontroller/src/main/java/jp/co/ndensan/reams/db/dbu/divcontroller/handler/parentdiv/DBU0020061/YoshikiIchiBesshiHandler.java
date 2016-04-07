@@ -25,6 +25,8 @@ import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 
 /**
  * 事業報告（月報）補正発行_様式１(別紙)のクラス
+ *
+ * @reamsid_L DBU-1100-020 lijunjun
  */
 public final class YoshikiIchiBesshiHandler {
 

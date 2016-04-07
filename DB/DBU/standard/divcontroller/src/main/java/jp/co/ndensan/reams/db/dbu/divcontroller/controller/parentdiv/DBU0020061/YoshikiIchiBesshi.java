@@ -33,6 +33,8 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 
 /**
  * 事業報告（月報）補正発行_様式１(別紙)のクラス
+ *
+ * @reamsid_L DBU-1100-020 lijunjun
  */
 public class YoshikiIchiBesshi {
 
@@ -51,14 +53,6 @@ public class YoshikiIchiBesshi {
         YoshikiIchiBesshiHandler handler = getHandler(div);
         JigyoHokokuGeppoParameter 引き継ぎデータ = ViewStateHolder.get(ViewStateKeys.事業報告基本,
                 JigyoHokokuGeppoParameter.class);
-//        JigyoHokokuGeppoParameter par = new JigyoHokokuGeppoParameter();
-//        par.set報告年月(new RString("201503"));
-//        par.set集計年月(new RString("201504"));
-//        par.set保険者コード(new RString("0010"));
-//        par.set市町村名称(new RString("張三"));
-//        ViewStateHolder.put(ViewStateKeys.被保険者, par);
-//        JigyoHokokuGeppoParameter 引き継ぎデータ = ViewStateHolder.get(ViewStateKeys.被保険者,
-//                JigyoHokokuGeppoParameter.class);
         RString 状態 = ViewStateHolder.get(ViewStateKeys.状態, RString.class);
         handler.setViewState(引き継ぎデータ, 状態);
         List<JigyoHokokuTokeiData> 更新前データリスト = handler.get更新前データリスト(引き継ぎデータ);

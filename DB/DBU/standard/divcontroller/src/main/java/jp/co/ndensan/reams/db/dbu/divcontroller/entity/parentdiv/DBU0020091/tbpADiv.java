@@ -4,18 +4,20 @@ package jp.co.ndensan.reams.db.dbu.divcontroller.entity.parentdiv.DBU0020091;
  * このファイルへの変更は、再生成時には損失するため
  * 不正な動作の原因になります。
  */
+
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import jp.co.ndensan.reams.uz.uza.ui.binding.*;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TableCell;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TablePanel;
+import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxNum;
 
 /**
- * tbpA のクラスファイル 
- * 
- * @author 自動生成
+ * tbpA のクラスファイル
+ *
+ * @reamsid_L DBU-1100-080 lijunjun
  */
 public class tbpADiv extends TablePanel {
+
     // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-01-15_09-59-03">
     /*
      * [ private の作成 ]
@@ -106,9 +108,10 @@ public class tbpADiv extends TablePanel {
 
     // </editor-fold>
 }
+
 /**
- * celA11 のクラスファイル 
- * 
+ * celA11 のクラスファイル
+ *
  * @author 自動生成
  */
 class celA11AttbpA extends TableCell {
@@ -116,12 +119,14 @@ class celA11AttbpA extends TableCell {
 
     // </editor-fold>
 }
+
 /**
- * celA12 のクラスファイル 
- * 
+ * celA12 のクラスファイル
+ *
  * @author 自動生成
  */
 class celA12AttbpA extends TableCell {
+
     // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-01-15_09-59-03">
     @JsonProperty("txtGenekiKensu")
     private TextBoxNum txtGenekiKensu;
@@ -146,12 +151,14 @@ class celA12AttbpA extends TableCell {
 
     // </editor-fold>
 }
+
 /**
- * celA22 のクラスファイル 
- * 
+ * celA22 のクラスファイル
+ *
  * @author 自動生成
  */
 class celA22AttbpA extends TableCell {
+
     // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-01-15_09-59-03">
     @JsonProperty("txtGenekiKyufugaku")
     private TextBoxNum txtGenekiKyufugaku;

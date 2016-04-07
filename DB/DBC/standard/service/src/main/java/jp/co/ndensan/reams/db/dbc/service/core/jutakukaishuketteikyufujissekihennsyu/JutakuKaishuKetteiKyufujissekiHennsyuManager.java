@@ -48,6 +48,8 @@ import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 
 /**
  * 住宅改修費支給決定給付実績編集のクラス
+ *
+ * @reamsid_L DBC-0992-170 lijunjun
  */
 public class JutakuKaishuKetteiKyufujissekiHennsyuManager {
 
