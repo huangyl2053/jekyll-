@@ -9,6 +9,8 @@ import jp.co.ndensan.reams.db.dba.definition.mybatisprm.checknyutaisyokikanby.Sh
 
 /**
  * 介護保険適用除外者のマッパーインタフェースです。
+ *
+ * @reamsid_L DBA-0410-010 zhangzhiming
  */
 public interface ITekiyoJogaishaKanriMapper {
 

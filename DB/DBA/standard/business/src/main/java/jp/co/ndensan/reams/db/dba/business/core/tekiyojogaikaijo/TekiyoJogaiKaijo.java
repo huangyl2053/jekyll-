@@ -9,8 +9,9 @@ import java.io.Serializable;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 
 /**
- *
  * 適用除外情報のパラメータクラスです。
+ *
+ * @reamsid_L DBA-0410-010 zhangzhiming
  */
 @lombok.Getter
 @lombok.Setter

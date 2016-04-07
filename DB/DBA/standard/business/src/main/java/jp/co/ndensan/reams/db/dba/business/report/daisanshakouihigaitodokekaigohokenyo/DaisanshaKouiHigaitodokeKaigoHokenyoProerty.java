@@ -11,8 +11,9 @@ import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.report.ReportPropertyBase;
 
 /**
- *
  * {@link DaisanshaKouiHigaitodokeKaigoHokenyoProerty}のプロパティです。
+ * 
+ * @reamsid_L DBA-0540-699  suguangjun
  */
 public class DaisanshaKouiHigaitodokeKaigoHokenyoProerty extends ReportPropertyBase<DaisanshaKouiHigaitodokeKaigoHokenyoReportSource> {
 

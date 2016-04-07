@@ -19,6 +19,8 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
  * 介護連絡先情報を管理するクラスです。
+ * 
+ * @reamsid_L DBE-3000-080  suguangjun 
  */
 public class NinteiShinseiRenrakusakiKihon {
 

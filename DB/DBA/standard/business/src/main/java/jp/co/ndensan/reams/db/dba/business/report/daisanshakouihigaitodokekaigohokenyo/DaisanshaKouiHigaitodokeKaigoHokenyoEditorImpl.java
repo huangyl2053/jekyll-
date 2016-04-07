@@ -8,8 +8,9 @@ package jp.co.ndensan.reams.db.dba.business.report.daisanshakouihigaitodokekaigo
 import jp.co.ndensan.reams.db.dba.entity.report.daisanshakouihigaitodokekaigohokenyo.DaisanshaKouiHigaitodokeKaigoHokenyoReportSource;
 
 /**
- *
  * 第三者行為による被害届（介護保険用）のEditorです。
+ * 
+ * @reamsid_L DBA-0540-699  suguangjun
  */
 public class DaisanshaKouiHigaitodokeKaigoHokenyoEditorImpl implements IDaisanshaKouiHigaitodokeKaigoHokenyoEditor {
 

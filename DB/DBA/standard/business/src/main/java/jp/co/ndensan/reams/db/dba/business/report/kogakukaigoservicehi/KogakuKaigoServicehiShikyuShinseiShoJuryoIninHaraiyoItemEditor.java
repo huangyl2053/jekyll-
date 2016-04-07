@@ -8,8 +8,9 @@ package jp.co.ndensan.reams.db.dba.business.report.kogakukaigoservicehi;
 import jp.co.ndensan.reams.db.dba.entity.report.kogakukaigoservicehi.KogakuKaigoServicehiShikyuShinseiShoJuryoIninHaraiyoReportSource;
 
 /**
- *
  * 介護保険高額介護（予防）サービス費支給（受領委任払）申請書のEditorです。
+ *
+ * @reamsid_L DBA-0540-711 lishengli
  */
 public class KogakuKaigoServicehiShikyuShinseiShoJuryoIninHaraiyoItemEditor
         implements IKogakuKaigoServicehiShikyuShinseiShoJuryoIninHaraiyoEditor {

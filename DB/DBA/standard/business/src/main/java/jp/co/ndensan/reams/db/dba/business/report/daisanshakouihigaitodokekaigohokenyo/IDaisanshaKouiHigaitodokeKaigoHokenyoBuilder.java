@@ -9,8 +9,9 @@ import jp.co.ndensan.reams.db.dba.entity.report.daisanshakouihigaitodokekaigohok
 import jp.co.ndensan.reams.uz.uza.report.IReportBuilder;
 
 /**
- *
  * 第三者行為による被害届（介護保険用）Builderのインターフェースクラスです。
+ * 
+ * @reamsid_L DBA-0540-699  suguangjun 
  */
 public interface IDaisanshaKouiHigaitodokeKaigoHokenyoBuilder extends IReportBuilder<DaisanshaKouiHigaitodokeKaigoHokenyoReportSource> {
 }

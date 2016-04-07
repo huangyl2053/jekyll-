@@ -9,8 +9,9 @@ import jp.co.ndensan.reams.db.dba.entity.report.kogakukaigoservicehi.KogakuKaigo
 import jp.co.ndensan.reams.uz.uza.report.IReportBuilder;
 
 /**
- *
  * 介護保険高額介護（予防）サービス費支給（受領委任払）申請書のBuilderのインターフェースクラスです。
+ *
+ * @reamsid_L DBA-0540-711 lishengli
  */
 public interface IKogakuKaigoServicehiShikyuShinseiShoJuryoIninHaraiyoBuilder
         extends IReportBuilder<KogakuKaigoServicehiShikyuShinseiShoJuryoIninHaraiyoReportSource> {
