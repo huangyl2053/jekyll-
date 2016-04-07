@@ -12,6 +12,8 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
  * 構成市町村情報を取得。
+ *
+ * @reamsid_L DBA-0170-020 linghuhang
  */
 public class KoseiShichosonMaster {
 
