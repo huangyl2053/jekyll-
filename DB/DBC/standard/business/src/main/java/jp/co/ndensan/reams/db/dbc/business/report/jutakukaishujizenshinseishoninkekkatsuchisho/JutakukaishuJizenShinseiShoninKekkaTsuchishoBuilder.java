@@ -10,6 +10,8 @@ import jp.co.ndensan.reams.uz.uza.report.ReportEditorJoiner;
 
 /**
  * 住宅改修事前申請承認結果通知書Builderクラスです。
+ *
+ * @reamsid_L DBC-0990-100 zuotao
  */
 public class JutakukaishuJizenShinseiShoninKekkaTsuchishoBuilder implements IJutakukaishuJizenShinseiShoninKekkaTsuchishoBuilder {
 

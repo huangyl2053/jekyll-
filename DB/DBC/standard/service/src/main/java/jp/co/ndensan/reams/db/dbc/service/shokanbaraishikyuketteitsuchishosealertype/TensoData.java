@@ -12,6 +12,8 @@ import lombok.Getter;
 
 /**
  * 伝送データEntityです。
+ *
+ * @reamsid_L DBC-1000-030 zuotao
  */
 @Getter
 @SuppressWarnings("PMD.UnusedPrivateField")

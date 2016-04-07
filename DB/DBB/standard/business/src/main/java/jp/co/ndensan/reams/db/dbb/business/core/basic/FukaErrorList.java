@@ -23,6 +23,8 @@ import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 
 /**
  * 賦課エラー一覧を管理するクラスです。
+ *
+ * @reamsid_L DBB-9999-011 zuotao
  */
 public class FukaErrorList extends ModelBase<FukaErrorListIdentifier, DbT2010FukaErrorListEntity, FukaErrorList> implements Serializable {
 
@@ -209,8 +211,7 @@ public class FukaErrorList extends ModelBase<FukaErrorListIdentifier, DbT2010Fuk
     }
 
     /**
-     * 保持する賦課エラー一覧を削除対象とします。<br/>
-     * {@link DbT2010FukaErrorListEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば削除状態にします。
+     * 保持する賦課エラー一覧を削除対象とします。<br/> {@link DbT2010FukaErrorListEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば削除状態にします。
      *
      * @return 削除対象処理実施後の{@link FukaErrorList}
      */

@@ -10,6 +10,8 @@ import lombok.Getter;
 
 /**
  * 要介護認定調査票（基本調査）のITEMです。
+ *
+ * @reamsid_L DBE-0080-020 zuotao
  */
 @Getter
 @SuppressWarnings("PMD.UnusedPrivateField")

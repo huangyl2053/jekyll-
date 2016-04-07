@@ -32,6 +32,8 @@ import jp.co.ndensan.reams.uz.uza.report.source.breaks.BreakAggregator;
 
 /**
  * 住宅改修事前申請承認結果通知書Printerです。
+ *
+ * @reamsid_L DBC-0990-100 zuotao
  */
 public class JutakukaishuJizenShinseiShoninKekkaTsuchishoService {
 

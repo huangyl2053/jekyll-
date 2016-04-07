@@ -54,6 +54,8 @@ import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
 
 /**
  * 償還払い支給（不支給）決定通知書（ｼｰﾗﾀｲﾌﾟ）のビジネスです。
+ *
+ * @reamsid_L DBC-1000-030 zuotao
  */
 public class ShokanBaraiShikyuKetteiTsuchishoSealerType1 {
 
@@ -294,7 +296,7 @@ public class ShokanBaraiShikyuKetteiTsuchishoSealerType1 {
         ketteiTsuchiShoSealer.setTaishoYM(business.get提供年月() == null ? RString.EMPTY : business.get提供年月().wareki().firstYear(
                 FirstYear.GAN_NEN).separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString());
 
-        // QA696 帳票フォームにで、項目「種類」なし
+        // TODO QA696 帳票フォームにで、項目「種類」なし
         ketteiTsuchiShoSealer.setKyufuShurui1(business.get種類());
         ketteiTsuchiShoSealer.setKyufuShurui2(business.get種類());
         ketteiTsuchiShoSealer.setKyufuShurui3(business.get種類());
@@ -391,6 +393,7 @@ public class ShokanBaraiShikyuKetteiTsuchishoSealerType1 {
         return 種別タイトル;
     }
 
+    // TODO QA696 帳票制御汎用関連確認
     private RString get帳票制御汎用(ChohyoSeigyoHanyoManager 帳票制御汎用Manager, RString 項目名) {
         RString 設定値 = RString.EMPTY;
         ChohyoSeigyoHanyo chohyoSeigyoHanyo = 帳票制御汎用Manager.get帳票制御汎用(SubGyomuCode.DBC介護給付, ReportIdDBC.DBC100002_2.getReportId(),

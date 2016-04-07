@@ -22,6 +22,8 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 
 /**
  * 審査会一覧のコントローラです。
+ *
+ * @reamsid_L DBE-1350-010 zuotao
  */
 public class KaigoNinteiShinsakai {
 

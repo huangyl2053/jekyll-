@@ -9,6 +9,8 @@ import jp.co.ndensan.reams.db.dbe.entity.report.source.chosahyokihonchosakatamen
 
 /**
  * 要介護認定調査票（基本調査）のEditorです。
+ *
+ * @reamsid_L DBE-0080-020 zuotao
  */
 public class ChosahyoKihonchosaKatamenEditor implements IChosahyoKihonchosaKatamenEditor {
 

@@ -11,6 +11,8 @@ import jp.co.ndensan.reams.uz.uza.report.source.ReportItem;
 
 /**
  * 要介護認定調査票（基本調査）ReportSourceクラスです。
+ *
+ * @reamsid_L DBE-0080-020 zuotao
  */
 public class ChosahyoKihonchosaKatamenReportSource implements IReportSource {
 // <editor-fold defaultstate="collapsed" desc="Generated Code">

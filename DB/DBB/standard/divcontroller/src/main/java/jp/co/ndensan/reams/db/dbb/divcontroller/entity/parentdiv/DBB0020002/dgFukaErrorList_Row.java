@@ -3,22 +3,18 @@ package jp.co.ndensan.reams.db.dbb.divcontroller.entity.parentdiv.DBB0020002;
  * このコードはツールによって生成されました。
  * このファイルへの変更は、以下の状況下で不正な動作の原因になったり、
  * コードが再生成されるときに損失したりします。
- * Tue Jan 19 16:46:18 CST 2016 
+ * Tue Jan 19 16:46:18 CST 2016
  */
 
-
-
-import jp.co.ndensan.reams.uz.uza.ui.binding.DataRow;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.ui.binding.DataRow;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxDate;
 
-
 /**
- * dgFukaErrorList_Row のクラスファイル 
- * 
- * @author 自動生成
+ * dgFukaErrorList_Row のクラスファイル
+ *
+ * @reamsid_L DBB-0720-010 zuotao
  */
-
 public class dgFukaErrorList_Row extends DataRow {
     // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2015-11-30_08-54-50">
 

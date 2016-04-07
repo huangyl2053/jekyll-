@@ -15,6 +15,8 @@ import jp.co.ndensan.reams.uz.uza.math.Decimal;
 
 /**
  * 償還払支給（不支給）決定通知書情報Entityクラスです。
+ *
+ * @reamsid_L DBC-1000-030 zuotao
  */
 @lombok.Setter
 @lombok.Getter
