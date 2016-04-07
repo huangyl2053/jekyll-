@@ -38,6 +38,7 @@ import jp.co.ndensan.reams.uz.uza.util.serialization.DataPassingConverter;
 /**
  * 地区認定調査員情報のHandlerクラスです。
  *
+ * @reamsid_L DBE-0021-010 zhangzhiming
  */
 public class MainPanelHandler {
 

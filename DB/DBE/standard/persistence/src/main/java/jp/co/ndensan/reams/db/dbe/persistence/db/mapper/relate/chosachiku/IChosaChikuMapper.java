@@ -11,6 +11,8 @@ import jp.co.ndensan.reams.db.dbe.entity.db.relate.chosachiku.ChosaChikuEntity;
 
 /**
  * 地区認定調査員情報のマッパーインタフェースです。
+ *
+ * @reamsid_L DBE-0021-010 zhangzhiming
  */
 public interface IChosaChikuMapper {
 
