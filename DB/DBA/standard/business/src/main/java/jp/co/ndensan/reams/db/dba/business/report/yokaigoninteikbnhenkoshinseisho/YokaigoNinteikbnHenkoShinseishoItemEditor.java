@@ -8,8 +8,9 @@ package jp.co.ndensan.reams.db.dba.business.report.yokaigoninteikbnhenkoshinseis
 import jp.co.ndensan.reams.db.dba.entity.report.yokaigoninteikbnhenkoshinseisho.YokaigoNinteikbnHenkoShinseishoReportSource;
 
 /**
- *
  * 要介護認定区分変更申請書のITEMのEditorです。
+ *
+ * @reamsid_L DBA-0540-713 lishengli
  */
 public class YokaigoNinteikbnHenkoShinseishoItemEditor
         implements IYokaigoNinteikbnHenkoShinseishoEditor {

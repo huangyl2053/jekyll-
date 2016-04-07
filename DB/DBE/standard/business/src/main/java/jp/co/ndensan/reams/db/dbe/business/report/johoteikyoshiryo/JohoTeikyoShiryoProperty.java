@@ -21,6 +21,8 @@ import jp.co.ndensan.reams.uz.uza.report.data.chart.ReportDynamicChart;
 
 /**
  * 要介護認定結果情報提供票（主治医）のプロパティです。
+ * 
+ * @reamsid_L DBE-0220-020 wangkun
  */
 public class JohoTeikyoShiryoProperty extends ReportPropertyBase<JohoTeikyoShiryoReportSource> {
 
