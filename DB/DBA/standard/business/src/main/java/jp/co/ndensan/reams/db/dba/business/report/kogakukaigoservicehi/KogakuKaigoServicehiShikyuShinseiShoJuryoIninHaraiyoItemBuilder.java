@@ -9,8 +9,9 @@ import jp.co.ndensan.reams.db.dba.entity.report.kogakukaigoservicehi.KogakuKaigo
 import jp.co.ndensan.reams.uz.uza.report.ReportEditorJoiner;
 
 /**
- *
  * 介護保険高額介護（予防）サービス費支給（受領委任払）申請書のBuilderクラスです。
+ *
+ * @reamsid_L DBA-0540-711 lishengli
  */
 public class KogakuKaigoServicehiShikyuShinseiShoJuryoIninHaraiyoItemBuilder
         implements IKogakuKaigoServicehiShikyuShinseiShoJuryoIninHaraiyoBuilder {

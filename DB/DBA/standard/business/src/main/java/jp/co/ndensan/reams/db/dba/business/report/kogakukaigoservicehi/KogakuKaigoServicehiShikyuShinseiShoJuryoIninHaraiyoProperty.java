@@ -12,8 +12,9 @@ import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.report.ReportPropertyBase;
 
 /**
- *
  * 介護保険高額介護（予防）サービス費支給（受領委任払）申請書のプロパティです。
+ *
+ * @reamsid_L DBA-0540-711 lishengli
  */
 public class KogakuKaigoServicehiShikyuShinseiShoJuryoIninHaraiyoProperty
         extends ReportPropertyBase<KogakuKaigoServicehiShikyuShinseiShoJuryoIninHaraiyoReportSource> {
