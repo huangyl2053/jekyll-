@@ -5,6 +5,10 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.report.IReportSource;
 import jp.co.ndensan.reams.uz.uza.report.source.ReportItem;
 
+/**
+ *
+ * 特別地域加算減免・訪問介護等利用者負担減額対象確認申請書のReportSource
+ */
 public class TokubetsuChiikiKasanGenmenTaishoShinseishoBackReportSource implements IReportSource {
 // <editor-fold defaultstate="collapsed" desc="Generated Code">
 
