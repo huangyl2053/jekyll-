@@ -24,6 +24,8 @@ import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
 
 /**
  * 老齢福祉年金受給者のデータアクセスクラスです。
+ * 
+ * @reamsid_L DBA-0500-010  suguangjun
  */
 public class DbT7006RoreiFukushiNenkinJukyushaDac implements ISaveable<DbT7006RoreiFukushiNenkinJukyushaEntity> {
 
