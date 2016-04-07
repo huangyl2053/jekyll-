@@ -3,22 +3,18 @@ package jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2020003;
  * このコードはツールによって生成されました。
  * このファイルへの変更は、以下の状況下で不正な動作の原因になったり、
  * コードが再生成されるときに損失したりします。
- * Wed Mar 16 15:45:19 CST 2016 
+ * Wed Mar 16 15:45:19 CST 2016
  */
 
-
-
-import jp.co.ndensan.reams.uz.uza.ui.binding.DataRow;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.ui.binding.DataRow;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxFlexibleDate;
 
-
 /**
- * dgResultList_Row のクラスファイル 
- * 
- * @author 自動生成
+ * dgResultList_Row のクラスファイル
+ *
+ * @reamsid_L DBE-0020-030 wanghui
  */
-
 public class dgResultList_Row extends DataRow {
     // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-01-15_09-59-03">
 
