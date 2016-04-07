@@ -3,19 +3,19 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dba.service.core.hihousyosai;
+package jp.co.ndensan.reams.db.dbz.service.core.hihousyosai;
 
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import static java.util.Objects.requireNonNull;
-import jp.co.ndensan.reams.db.dba.business.core.HihokenshaDaicho;
-import jp.co.ndensan.reams.db.dba.business.shichoson.Shichoson;
 import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.DonyuKeitaiCode;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT7051KoseiShichosonMasterEntity;
 import jp.co.ndensan.reams.db.dbx.persistence.db.basic.DbT7051KoseiShichosonMasterDac;
+import jp.co.ndensan.reams.db.dbz.business.core.hihousyosai.HihokenshaDaicho;
 import jp.co.ndensan.reams.db.dbz.business.core.koseishichosonmaster.koseishichosonmaster.KoseiShichosonMaster;
+import jp.co.ndensan.reams.db.dbz.business.shichoson.Shichoson;
 import jp.co.ndensan.reams.db.dbz.definition.core.shikakukubun.ShikakuKubun;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT1001HihokenshaDaichoEntity;
 import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT1001HihokenshaDaichoDac;
@@ -31,6 +31,8 @@ import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
 
 /**
  * 被保詳細のクラスです。
+ *
+ * @reamsid_L DBA-0170-020 linghuhang
  */
 public class HihousyosaiFinder {
 
