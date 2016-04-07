@@ -29,6 +29,8 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 /**
  *
  * 審査請求書登録_登録のクラス。
+ *
+ * @reamsid_L DBU-1080-060 houtp
  */
 public class SinsaSeikyusyoMeisaiPanel {
 

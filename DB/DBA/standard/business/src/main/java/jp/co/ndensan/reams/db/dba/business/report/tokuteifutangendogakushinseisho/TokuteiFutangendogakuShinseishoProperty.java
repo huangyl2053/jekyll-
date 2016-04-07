@@ -12,6 +12,8 @@ import jp.co.ndensan.reams.uz.uza.report.ReportPropertyBase;
 
 /**
  * 介護保険特定負担限度額申請書のプロパティです。
+ *
+ * @reamsid_L DBA-0540-688 houtp
  */
 public class TokuteiFutangendogakuShinseishoProperty
         extends ReportPropertyBase<TokuteiFutangendogakuShinseishoReportSource> {

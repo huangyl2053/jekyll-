@@ -17,7 +17,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 /**
  * AtenaPanel のクラスファイル
  *
- * @author 自動生成
+ * @reamsid_L DBU-1080-060 houtp
  */
 public class AtenaPanelDiv extends Panel {
 

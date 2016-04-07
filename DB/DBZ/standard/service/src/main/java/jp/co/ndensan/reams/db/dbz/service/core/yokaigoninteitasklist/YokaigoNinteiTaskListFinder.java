@@ -37,6 +37,8 @@ import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 
 /**
  * タスク一覧共有画面の検索処理クラスです。
+ *
+ * @reamsid_L DBE-3000-160 houtp
  */
 public class YokaigoNinteiTaskListFinder {
     

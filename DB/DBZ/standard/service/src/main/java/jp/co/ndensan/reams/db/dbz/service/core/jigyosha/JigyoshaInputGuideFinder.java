@@ -34,6 +34,8 @@ import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 /**
  *
  * 事業者・施設選択入力ガイドするクラスです。
+ *
+ * @reamsid_L DBA-0140-030 houtp
  */
 public class JigyoshaInputGuideFinder {
 

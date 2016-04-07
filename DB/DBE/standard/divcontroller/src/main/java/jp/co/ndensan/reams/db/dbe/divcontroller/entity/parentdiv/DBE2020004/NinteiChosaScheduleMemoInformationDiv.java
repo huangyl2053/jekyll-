@@ -20,7 +20,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxMultiLine;
 /**
  * NinteiChosaScheduleMemoInformation のクラスファイル 
  * 
- * @author 自動生成
+ * @reamsid_L DBE-0020-040 houtp
  */
 public class NinteiChosaScheduleMemoInformationDiv extends Panel {
     // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-01-15_09-59-03">

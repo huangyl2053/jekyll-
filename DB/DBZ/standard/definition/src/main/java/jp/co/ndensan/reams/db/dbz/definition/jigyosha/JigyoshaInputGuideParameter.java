@@ -13,6 +13,8 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
  * 介護事業者施設オブジェクトパラメータクラス。
+ *
+ * @reamsid_L DBA-0140-010 houtp
  */
 public final class JigyoshaInputGuideParameter {
 

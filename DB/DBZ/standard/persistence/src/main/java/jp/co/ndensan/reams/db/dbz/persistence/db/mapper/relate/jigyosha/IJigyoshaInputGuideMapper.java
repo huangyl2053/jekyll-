@@ -12,6 +12,8 @@ import jp.co.ndensan.reams.db.dbz.entity.db.relate.ServiceJigyoshaInputGuideRela
 /**
  *
  * 対象事業者取得のクラス。
+ *
+ * @reamsid_L DBA-0140-010 houtp
  */
 public interface IJigyoshaInputGuideMapper {
 

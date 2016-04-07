@@ -18,6 +18,8 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 /**
  *
  * 認定調査スケジュール登録9のマッパーインタフェースです。
+ *
+ * @reamsid_L DBE-0020-050 houtp
  */
 public interface INinteichosaItakusakiJohoMapper {
 

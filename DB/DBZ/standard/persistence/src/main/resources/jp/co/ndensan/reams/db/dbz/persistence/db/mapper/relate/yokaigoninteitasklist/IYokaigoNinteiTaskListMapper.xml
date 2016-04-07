@@ -3,6 +3,7 @@
 <!-- 概要： 介護認定審査会開催予定情報のマッピング用XMLです。 -->
 
 <!-- どのマッパーインターフェースと対応するかを指定する -->
+ <!-- @reamsid_L DBE-3000-160 houtp -->
 <mapper namespace="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.relate.yokaigoninteitasklist.IYokaigoNinteiTaskListMapper">
 
     <resultMap id="resultMap_KoShiTaisyoRelateEntity" type="jp.co.ndensan.reams.db.dbz.entity.db.relate.yokaigoninteitasklist.KoShiTaisyoRelateEntity" autoMapping="true">

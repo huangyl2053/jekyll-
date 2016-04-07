@@ -17,6 +17,8 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
  * タスク一覧共有画面を管理するクラスです。
+ *
+ * @reamsid_L DBE-3000-160 houtp
  */
 public class IKnSyoiRaiBusiness {
 

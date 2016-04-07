@@ -20,6 +20,8 @@ import jp.co.ndensan.reams.db.dbz.entity.db.relate.yokaigoninteitasklist.ShinSaK
 
 /**
  * 要介護認定申請情報＆構成市町村マスタ検索のインタフェイスです。
+ *
+ * @reamsid_L DBE-3000-160 houtp
  */
 public interface IYokaigoNinteiTaskListMapper {
 

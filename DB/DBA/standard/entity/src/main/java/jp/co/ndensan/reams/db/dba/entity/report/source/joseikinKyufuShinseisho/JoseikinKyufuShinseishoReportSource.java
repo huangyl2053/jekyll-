@@ -7,6 +7,8 @@ import jp.co.ndensan.reams.uz.uza.report.source.ReportItem;
 /**
  *
  * 介護保険助成金給付申請書の帳票データのクラスです。
+ *
+ * @reamsid_L DBA-0540-686 houtp
  */
 public class JoseikinKyufuShinseishoReportSource implements IReportSource {
 // <editor-fold defaultstate="collapsed" desc="Generated Code">

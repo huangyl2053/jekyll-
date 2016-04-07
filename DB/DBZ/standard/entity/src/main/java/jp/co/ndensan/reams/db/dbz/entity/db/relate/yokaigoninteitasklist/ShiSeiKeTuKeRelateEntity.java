@@ -15,6 +15,8 @@ import lombok.Setter;
 
 /**
  * 要介護認定申請情報＆構成市町村マスタ＆要介護認定完了情報＆認定調査依頼情報RelateEntityクラスです。
+ *
+ * @reamsid_L DBE-3000-160 houtp
  */
 @Getter
 @Setter

@@ -13,6 +13,8 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 /**
  *
  * 介護サービス種類オブジェクトの項目定義クラスです。
+ *
+ * @reamsid_L DBA-0140-010 houtp
  */
 public class ServiceShuruiJigyoshaInputGuide implements Serializable {
 
