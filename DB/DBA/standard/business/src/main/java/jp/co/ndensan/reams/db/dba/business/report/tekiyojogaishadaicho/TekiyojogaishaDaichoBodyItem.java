@@ -43,15 +43,15 @@ public class TekiyojogaishaDaichoBodyItem {
      * @param listUpper_2 適用届出年月日
      * @param listUpper_3 適用除外適用事由コード
      * @param listUpper_4 適用除外適用事由名称
-     * @param listUpper_5 解除年月日
-     * @param listUpper_6 解除届出年月日
-     * @param listUpper_7 適用除外解除事由コード
-     * @param listLower_1 適用除外解除事由名称
-     * @param listLower_2 入所年月日
-     * @param listLower_3 退所年月日
-     * @param listLower_4 事業者名称
-     * @param listLower_5 事業者住所
-     * @param listLower_6 電話番号
+     * @param listUpper_5 入所年月日
+     * @param listUpper_6 事業者名称
+     * @param listUpper_7 電話番号
+     * @param listLower_1 解除年月日
+     * @param listLower_2 解除届出年月日
+     * @param listLower_3 適用除外解除事由コード
+     * @param listLower_4 適用除外解除事由名称
+     * @param listLower_5 退所年月日
+     * @param listLower_6 事業者住所
      * @param listLower_7 郵便番号
      */
     public TekiyojogaishaDaichoBodyItem(
