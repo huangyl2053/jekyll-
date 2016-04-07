@@ -11,6 +11,8 @@ import jp.co.ndensan.reams.uz.uza.math.Decimal;
 /**
  *
  * 認定調査スケジュール登録3クラスパラメータクラス。
+ *
+ * @reamsid_L DBE-0020-030 wanghui
  */
 @SuppressWarnings("PMD.UnusedPrivateField")
 @lombok.Getter

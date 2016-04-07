@@ -18,7 +18,9 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 
 /**
  *
- * 認定調査スケジュール登録3のコントローラです。
+ * 認定調査スケジュール登録3のコントローラです。\
+ *
+ * @reamsid_L DBE-0020-030 wanghui
  */
 public class NinteiChosaSchedule3Main {
 

@@ -13,6 +13,8 @@ import jp.co.ndensan.reams.db.dbe.entity.db.relate.ninteichosaschedule.INinteich
 /**
  *
  * 認定調査スケジュール登録3のマッパーインタフェースです。
+ *
+ * @reamsid_L DBE-0020-030 wanghui
  */
 public interface INinteichosaSchedule {
 
