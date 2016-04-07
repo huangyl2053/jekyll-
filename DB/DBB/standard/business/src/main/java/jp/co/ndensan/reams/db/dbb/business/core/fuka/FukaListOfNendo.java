@@ -14,8 +14,9 @@ import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 
 /**
- *
  * 年度分賦課リストクラスです。
+ *
+ * @reamsid_L DBB-9040-100 lishengli
  */
 public class FukaListOfNendo {
 

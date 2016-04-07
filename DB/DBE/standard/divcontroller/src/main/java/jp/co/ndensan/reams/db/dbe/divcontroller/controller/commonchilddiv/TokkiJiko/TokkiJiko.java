@@ -28,8 +28,9 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.ResponseHolder;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 
 /**
- *
  * 特記事項入力のクラスです。
+ *
+ * @reamsid_L DBE-3000-140 lishengli
  */
 public class TokkiJiko {
 
