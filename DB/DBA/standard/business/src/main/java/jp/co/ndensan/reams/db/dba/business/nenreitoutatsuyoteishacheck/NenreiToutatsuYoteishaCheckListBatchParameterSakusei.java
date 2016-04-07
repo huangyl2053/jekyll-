@@ -13,6 +13,8 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 /**
  *
  * 年齢到達予定者チェックリスト_バッチパラメータ作成します。
+ *
+ * @reamsid_L DBA-0580-040 yaodongsheng
  */
 public class NenreiToutatsuYoteishaCheckListBatchParameterSakusei {
 

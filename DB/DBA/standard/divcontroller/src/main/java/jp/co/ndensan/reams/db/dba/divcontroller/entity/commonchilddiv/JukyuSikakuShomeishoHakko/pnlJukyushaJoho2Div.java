@@ -11,7 +11,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 /**
  * pnlJukyushaJoho2 のクラスファイル 
  * 
- * @author 自動生成
+ * @reamsid_L DBA-1090-011 wangkun
  */
 public class pnlJukyushaJoho2Div extends Panel {
     // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：Uz-master-57">

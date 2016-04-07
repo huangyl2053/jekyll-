@@ -14,6 +14,8 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
  * {@link ShinsakaiKaisaiYoteiJoho}の編集を行うビルダークラスです。
+ *
+ * @reamsid_L DBE-9999-021 yaodongsheng
  */
 public class ShinsakaiKaisaiYoteiJohoBuilder {
 

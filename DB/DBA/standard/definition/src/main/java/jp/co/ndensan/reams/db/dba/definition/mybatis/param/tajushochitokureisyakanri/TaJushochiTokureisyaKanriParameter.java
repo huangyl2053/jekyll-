@@ -11,6 +11,8 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
  * 他住所地特例者管理のMyBatis用パラメータクラスです。
+ *
+ * @reamsid_L DBA-0200-020 linghuhang
  */
 @lombok.Getter
 @SuppressWarnings("PMD.UnusedPrivateField")

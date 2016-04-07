@@ -12,6 +12,8 @@ import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT7062KaigoJigyoshaDaihyoshaE
 /**
  *
  * 介護事業者・施設管理のBusinessクラスです。
+ *
+ * @reamsid_L DBA-0340-010 wanghui
  */
 public class KaigoJigyoshaShisetsuKanriBusiness {
 

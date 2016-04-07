@@ -15,6 +15,8 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
  * 被保険者証・資格者証パラメタクラスです。
+ *
+ * @reamsid_L DBU-0490-020 zhangzhiming
  */
 @lombok.Getter
 @lombok.Setter

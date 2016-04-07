@@ -11,6 +11,8 @@ import jp.co.ndensan.reams.db.dbe.entity.db.relate.kaigoninteishinsakaischedule.
 
 /**
  * 介護認定審査会スケジュール表のマッパーインタフェースです。
+ *
+ * @reamsid_L DBE-0130-090 duanzhanli
  */
 public interface IKaigoNinteiShinsakaiScheduleMapper {
 

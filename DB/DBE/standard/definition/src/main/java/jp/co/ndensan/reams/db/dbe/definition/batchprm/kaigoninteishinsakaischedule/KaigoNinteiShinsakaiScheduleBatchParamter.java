@@ -17,6 +17,8 @@ import lombok.Setter;
 /**
  *
  * 介護認定審査会スケジュール表ですためのバッチ用パラメータクラスです。
+ *
+ * @reamsid_L DBE-0130-090 yaodongsheng
  */
 @Getter
 @Setter

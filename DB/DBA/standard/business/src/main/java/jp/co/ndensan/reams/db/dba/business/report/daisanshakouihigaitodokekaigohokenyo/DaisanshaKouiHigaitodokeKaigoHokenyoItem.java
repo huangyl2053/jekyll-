@@ -9,8 +9,9 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 import lombok.Getter;
 
 /**
- *
  * 第三者行為による被害届（介護保険用）のEntityリストです。
+ * 
+ * @reamsid_L DBA-0540-699  suguangjun 
  */
 @Getter
 @SuppressWarnings("PMD.UnusedPrivateField")

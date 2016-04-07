@@ -9,6 +9,8 @@ import java.util.List;
 
 /**
  * 年齢到達予定者一覧表作成_帳票クラスパラメータクラスです。
+ *
+ * @reamsid_L DBA-0580-070 yaodongsheng
  */
 @lombok.Getter
 @SuppressWarnings("PMD.UnusedPrivateField")

@@ -21,6 +21,8 @@ import jp.co.ndensan.reams.uz.uza.lang.Separator;
 /**
  *
  * 年齢到達予定者チェックリスト_帳票データ作成します。
+ *
+ * @reamsid_L DBA-0580-050 yaodongsheng
  */
 public class NenreiTotatsuYoteishaCheckListChohyo {
 
@@ -28,8 +30,8 @@ public class NenreiTotatsuYoteishaCheckListChohyo {
     private static final int INDEX_2 = 2;
     private static final int INDEX_3 = 3;
     private static final int INDEX_4 = 4;
-    private static NenreitotatsuYoteishaIchiranhyoItem item;
-    private static NenreitotatsuYoteishaIchiranhyoHeadItem headItem;
+    private NenreitotatsuYoteishaIchiranhyoItem item;
+    private NenreitotatsuYoteishaIchiranhyoHeadItem headItem;
     private final List<NenreitotatsuYoteishaIchiranhyoBodyItem> bodyItemList = new ArrayList<>();
 
     /**

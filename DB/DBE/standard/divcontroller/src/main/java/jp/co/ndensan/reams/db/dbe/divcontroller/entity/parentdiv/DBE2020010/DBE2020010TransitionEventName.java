@@ -1,7 +1,7 @@
 package jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2020010;
 
-import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.IContainerEvents;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
  * このコードはツールによって生成されました。</br>
@@ -9,7 +9,7 @@ import jp.co.ndensan.reams.uz.uza.core.ui.response.IContainerEvents;
  * 不正な動作の原因になります。</br>
  * DBE2020010のイベント名定義クラスです</br>
  *
- * @author 自動生成
+ * @reamsid_L DBE-0020-060 lishengli
  */
 public enum DBE2020010TransitionEventName implements IContainerEvents {
 // <editor-fold defaultstate="collapsed" desc="Created By UI Designer ver 1.0.0">

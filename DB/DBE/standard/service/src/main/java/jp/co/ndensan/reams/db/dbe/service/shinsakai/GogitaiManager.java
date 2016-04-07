@@ -17,6 +17,8 @@ import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 /**
  *
  * 合議体情報の取得処理クラスです。
+ *
+ * @reamsid_L DBE-0130-040 yaodongsheng
  */
 public class GogitaiManager {
 

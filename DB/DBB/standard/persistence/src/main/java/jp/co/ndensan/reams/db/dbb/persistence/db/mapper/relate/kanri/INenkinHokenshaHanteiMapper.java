@@ -9,6 +9,8 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
  * 年金保険者判定のマッパーインタフェースです。
+ *
+ * @reamsid_L DBB-9040-050 wangxiaodong
  */
 public interface INenkinHokenshaHanteiMapper {
 

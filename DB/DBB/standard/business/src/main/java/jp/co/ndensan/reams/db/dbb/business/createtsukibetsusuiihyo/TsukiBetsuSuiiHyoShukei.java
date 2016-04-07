@@ -12,8 +12,9 @@ import jp.co.ndensan.reams.db.dbb.entity.db.basic.createtsukibetsusuiihyo.GokeiY
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
- *
  * 月別推移表集計（編集(バッチ)）のクラスです。
+ *
+ * @reamsid_L DBB-0760-040 lishengli
  */
 public class TsukiBetsuSuiiHyoShukei {
 

@@ -11,6 +11,8 @@ import jp.co.ndensan.reams.uz.uza.report.ReportEditorJoiner;
 /**
  *
  * 居宅（介護予防）サービス計画作成依頼（変更）届出書Builderクラスです。
+ *
+ * @reamsid_L DBA-0540-696 yaodongsheng
  */
 public final class ItakuServiceKeikaluSakuseiIraiTodokedeshoBuilderImpl implements IItakuServiceKeikaluSakuseiIraiTodokedeshoBuilder {
 

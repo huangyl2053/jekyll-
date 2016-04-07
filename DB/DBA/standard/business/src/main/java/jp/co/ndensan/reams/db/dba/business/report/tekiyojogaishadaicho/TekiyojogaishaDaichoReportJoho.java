@@ -9,6 +9,8 @@ import java.util.List;
 
 /**
  * 適用除外者台帳クラスパラメータクラスです。
+ *
+ * @reamsid_L DBE-3000-140 lishengli
  */
 @lombok.Getter
 @SuppressWarnings("PMD.UnusedPrivateField")

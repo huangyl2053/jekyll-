@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package jp.co.ndensan.reams.db.dba.batchcontroller.flow.nenreitoutatsuyoteisha;
 
 import jp.co.ndensan.reams.db.dba.batchcontroller.step.nenreitoutatsuyoteisha.NenreiToutatsuYoteishaCheckListProcess;
@@ -14,6 +9,8 @@ import jp.co.ndensan.reams.uz.uza.batch.flow.IBatchFlowCommand;
 /**
  *
  * 年齢到達予定者チェックリスト_バッチフロークラスです。
+ *
+ * @reamsid_L DBA-0580-020 yaodongsheng
  */
 public class NenreiToutatsuYoteishaCheckListFlow extends BatchFlowBase<INenreiToutatsuYoteishaCheckListBatchParameter> {
 

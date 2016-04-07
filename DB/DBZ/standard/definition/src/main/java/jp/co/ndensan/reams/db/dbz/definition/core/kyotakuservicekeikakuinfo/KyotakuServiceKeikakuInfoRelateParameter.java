@@ -9,8 +9,9 @@ import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaN
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 
 /**
- *
  * 居宅サービス計画情報のパラメータクラス。
+ * 
+ * @reamsid_L DBE-3000-170  suguangjun
  */
 @lombok.Getter
 @SuppressWarnings("PMD.UnusedPrivateField")

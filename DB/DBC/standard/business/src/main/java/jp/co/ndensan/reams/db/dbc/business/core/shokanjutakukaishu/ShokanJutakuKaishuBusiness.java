@@ -16,6 +16,8 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 /**
  *
  * 住宅改修内容一覧を取得するクラスです。
+ *
+ * @reamsid_L DBC-0940-010 yaodongsheng
  */
 public class ShokanJutakuKaishuBusiness {
 

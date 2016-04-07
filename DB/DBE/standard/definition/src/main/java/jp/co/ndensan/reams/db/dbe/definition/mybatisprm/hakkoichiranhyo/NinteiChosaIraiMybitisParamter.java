@@ -14,6 +14,8 @@ import lombok.Getter;
 
 /**
  * 認定調査依頼発行一覧表ですためのMyBatis用パラメータクラスです。
+ *
+ * @reamsid_L DBE-0080-160 duanzhanli
  */
 @SuppressWarnings("PMD.UnusedPrivateField")
 @Getter

@@ -11,6 +11,8 @@ import lombok.Getter;
 /**
  *
  * 給付額減額免除申請書Itemです。
+ *
+ * @reamsid_L DBA-0540-695 yaodongsheng
  */
 @Getter
 @SuppressWarnings("PMD.UnusedPrivateField")

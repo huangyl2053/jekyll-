@@ -19,6 +19,8 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
  * 要介護認定申請検索Businessクラスです。
+ *
+ * @reamsid_L DBE-1370-010 sunhaidi
  */
 public class ShinseiKensakuBusiness implements Serializable {
 

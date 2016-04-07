@@ -12,6 +12,8 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 /**
  *
  * 合議体情報と介護認定審査会委員情報のRelateBusinessクラスです。
+ *
+ * @reamsid_L DBE-0130-040 yaodongsheng
  */
 public class GogitaiJohoShinsaRelateBusiness {
 

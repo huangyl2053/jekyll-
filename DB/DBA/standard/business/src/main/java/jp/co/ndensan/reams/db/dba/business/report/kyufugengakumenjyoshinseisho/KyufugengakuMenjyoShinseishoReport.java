@@ -13,6 +13,8 @@ import lombok.NonNull;
 /**
  *
  * 給付額減額免除申請書帳票作成します。
+ *
+ * @reamsid_L DBA-0540-695 yaodongsheng
  */
 public final class KyufugengakuMenjyoShinseishoReport extends Report<KyufugengakuMenjyoShinseishoReportSource> {
 

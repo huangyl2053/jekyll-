@@ -7,6 +7,8 @@ import jp.co.ndensan.reams.uz.uza.report.source.ReportItem;
 /**
  *
  * 給付額減額免除申請書ReportSourceです。
+ *
+ * @reamsid_L DBA-0540-695 yaodongsheng
  */
 public class KyufugengakuMenjyoShinseishoReportSource implements IReportSource {
 // <editor-fold defaultstate="collapsed" desc="Generated Code">

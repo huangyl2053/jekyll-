@@ -16,6 +16,8 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
 
 /**
  * 他住所地特例管理のバリデーションハンドラークラスです。
+ *
+ * @reamsid_L DBA-0200-010 linghuhang
  */
 public class TaJushochiTokureishaKanriValidationHandler {
 

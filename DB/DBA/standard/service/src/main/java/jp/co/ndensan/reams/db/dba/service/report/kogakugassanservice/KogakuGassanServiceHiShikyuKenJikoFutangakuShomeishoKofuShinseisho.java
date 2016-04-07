@@ -13,8 +13,8 @@ import jp.co.ndensan.reams.db.dba.business.report.kogakugassankaigo.KogakuGassan
 import jp.co.ndensan.reams.db.dba.business.report.kogakugassankaigo.KogakuGassanKaigoServicehiShikyuKofuShinseishoReport;
 import jp.co.ndensan.reams.db.dba.entity.report.kogakugassankaigo.KogakuGassanKaigoServicehiShikyuKofuShinseishoReportSource;
 import jp.co.ndensan.reams.db.dba.service.core.tokuteifutangendogakushinseisho.TokuteifutanGendogakuShinseisho;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBU;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.kyotsu.GaikokujinSeinengappiHyojihoho;
 import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.kyotsu.NinshoshaDenshikoinshubetsuCode;
 import jp.co.ndensan.reams.ur.urz.business.report.parts.ninshosha.INinshoshaSourceBuilder;
@@ -43,8 +43,9 @@ import jp.co.ndensan.reams.uz.uza.util.config.BusinessConfig;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 
 /**
- *
  * 高額医療合算介護（介護予防）サービス費支給兼自己負担額証明書交付申請書のPrintServiceです。
+ *
+ * @reamsid_L DBA-0540-620 lishengli
  */
 public class KogakuGassanServiceHiShikyuKenJikoFutangakuShomeishoKofuShinseisho {
 

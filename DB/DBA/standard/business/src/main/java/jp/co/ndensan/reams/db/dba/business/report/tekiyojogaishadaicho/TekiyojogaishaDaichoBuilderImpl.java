@@ -9,8 +9,9 @@ import jp.co.ndensan.reams.db.dba.entity.report.source.tekiyojogaishadaicho.Teki
 import jp.co.ndensan.reams.uz.uza.report.ReportEditorJoiner;
 
 /**
- *
  * 適用除外者台帳Builderクラスです。
+ *
+ * @reamsid_L DBE-3000-140 lishengli
  */
 class TekiyojogaishaDaichoBuilderImpl implements ITekiyojogaishaDaichoBuilder {
 

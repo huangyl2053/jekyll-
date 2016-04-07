@@ -9,8 +9,9 @@ import java.util.List;
 import lombok.Getter;
 
 /**
- *
  * 被保険者証発行管理一覧表_帳票クラスパラメータクラスです。
+ *
+ * @reamsid_L DBA-0600-070 lishengli
  */
 @Getter
 @SuppressWarnings("PMD.UnusedPrivateField")

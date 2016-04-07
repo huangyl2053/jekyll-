@@ -9,6 +9,8 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
  * 異動チェックリストタイトルを表す列挙型です。
+ *
+ * @reamsid_L DBA-0530-020 chengsanyuan
  */
 public enum IdochecklistTitle {
 

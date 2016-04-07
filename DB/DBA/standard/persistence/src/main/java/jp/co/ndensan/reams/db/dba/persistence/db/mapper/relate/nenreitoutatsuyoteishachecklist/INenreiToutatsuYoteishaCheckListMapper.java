@@ -19,6 +19,8 @@ import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 /**
  *
  * 年齢到達予定者チェックリストのマッパーインタフェースです。
+ *
+ * @reamsid_L DBA-0580-020 yaodongsheng
  */
 public interface INenreiToutatsuYoteishaCheckListMapper {
 

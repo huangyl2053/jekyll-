@@ -9,6 +9,8 @@ import java.util.List;
 
 /**
  * 広域内住所地特例者一覧表作成_帳票クラスパラメータクラスです。
+ *
+ * @reamsid_L DBU-1140-060 linghuhang
  */
 @lombok.Getter
 @SuppressWarnings("PMD.UnusedPrivateField")

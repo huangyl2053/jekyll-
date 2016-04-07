@@ -16,6 +16,8 @@ import jp.co.ndensan.reams.uz.uza.util.db.SearchResult;
 /**
  *
  * 住宅改修内容一覧のHandlerクラスです。
+ *
+ * @reamsid_L DBC-0940-010 yaodongsheng
  */
 public class JyutakugaisyunaiyoListHandler {
 

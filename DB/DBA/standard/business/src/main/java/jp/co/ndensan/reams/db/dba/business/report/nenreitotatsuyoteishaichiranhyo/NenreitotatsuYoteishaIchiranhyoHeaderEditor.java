@@ -9,6 +9,8 @@ import jp.co.ndensan.reams.db.dba.entity.report.nenreitotatsuyoteishaichiranhyo.
 
 /**
  * 年齢到達予定者一覧表ヘッダEditorです。
+ *
+ * @reamsid_L DBA-0580-070 yaodongsheng
  */
 class NenreitotatsuYoteishaIchiranhyoHeaderEditor implements INenreitotatsuYoteishaIchiranhyoEditor {
 

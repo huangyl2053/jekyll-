@@ -9,8 +9,9 @@ import jp.co.ndensan.reams.db.dba.entity.report.kogakugassankaigo.KogakuGassanKa
 import jp.co.ndensan.reams.uz.uza.report.ReportEditorJoiner;
 
 /**
- *
  * 高額医療合算介護（介護予防）サービス費支給兼自己負担額証明書交付申請書のBuilderクラスです。
+ *
+ * @reamsid_L DBA-0540-712 lishengli
  */
 public class KogakuGassanKaigoServicehiShikyuKofuShinseishoItemBuilder
         implements IKogakuGassanKaigoServicehiShikyuKofuShinseishoBuilder {

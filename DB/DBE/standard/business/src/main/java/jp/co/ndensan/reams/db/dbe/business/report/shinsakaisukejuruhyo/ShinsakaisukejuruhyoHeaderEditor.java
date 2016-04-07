@@ -11,14 +11,12 @@ import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
 
 /**
  * 介護認定審査会スケジュール表ヘッダEditorです。
+ *
+ * @reamsid_L DBE-0130-070 yaodongsheng
  */
 class ShinsakaisukejuruhyoHeaderEditor implements IShinsakaisukejuruhyoEditor {
 
     private static final RString タイトル後 = new RString("　審査会スケジュール");
-    private static final RString DATE_時 = new RString("時");
-    private static final RString DATE_分 = new RString("分");
-    private static final RString DATE_秒 = new RString("秒");
-    private static final RString DATE_作成 = new RString("作成");
     private final ShinsakaisukejuruhyoHeadItem item;
 
     /**

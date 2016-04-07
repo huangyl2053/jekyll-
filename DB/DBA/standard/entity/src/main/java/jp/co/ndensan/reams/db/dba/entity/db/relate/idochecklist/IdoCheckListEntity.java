@@ -12,6 +12,8 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
  * 異動チェックリスト情報クラスです
+ *
+ * @reamsid_L DBA-0530-020 chengsanyuan
  */
 @lombok.Getter
 @lombok.Setter

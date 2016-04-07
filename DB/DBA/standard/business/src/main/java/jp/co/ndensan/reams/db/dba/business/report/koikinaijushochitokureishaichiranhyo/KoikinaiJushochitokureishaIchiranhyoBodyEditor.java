@@ -9,6 +9,8 @@ import jp.co.ndensan.reams.db.dba.entity.report.koikinaijushochitokureishaichira
 
 /**
  * 広域内住所地特例者一覧表ボディEditorです。
+ *
+ * @reamsid_L DBU-1140-060 linghuhang
  */
 class KoikinaiJushochitokureishaIchiranhyoBodyEditor implements IKoikinaiJushochitokureishaIchiranhyoEditor {
 

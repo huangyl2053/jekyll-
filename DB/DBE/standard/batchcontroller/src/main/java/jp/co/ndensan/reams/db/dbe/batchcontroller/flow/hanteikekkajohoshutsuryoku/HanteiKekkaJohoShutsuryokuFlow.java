@@ -14,6 +14,8 @@ import jp.co.ndensan.reams.uz.uza.batch.flow.IBatchFlowCommand;
 /**
  *
  * 判定結果情報出力(保険者)のバッチ処理クラスです。
+ *
+ * @reamsid_L DBE-0190-030 duanzhanli
  */
 public class HanteiKekkaJohoShutsuryokuFlow extends BatchFlowBase<HanteiKekkaJohoShutsuryokuBatchParamter> {
 

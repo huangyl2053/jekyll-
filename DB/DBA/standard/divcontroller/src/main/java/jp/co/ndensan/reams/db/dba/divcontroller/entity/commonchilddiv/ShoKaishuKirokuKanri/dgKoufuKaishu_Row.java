@@ -12,7 +12,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.DataRow;
 /**
  * dgKoufuKaishu_Row のクラスファイル
  *
- * @author 自動生成
+ * @reamsid_L DBA-1070-020 lizhuoxuan
  */
 public class dgKoufuKaishu_Row extends DataRow {
     // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：バージョン情報無し">

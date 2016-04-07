@@ -20,6 +20,7 @@ import jp.co.ndensan.reams.db.dbx.service.ShichosonSecurityJoho;
 import jp.co.ndensan.reams.db.dbz.business.core.koikizenshichosonjoho.KoikiZenShichosonJoho;
 import jp.co.ndensan.reams.db.dbz.service.core.MapperProvider;
 import jp.co.ndensan.reams.db.dbz.service.core.basic.koikishichosonjoho.KoikiShichosonJohoFinder;
+import jp.co.ndensan.reams.db.dbz.service.jushoedit.KaigoJushoEditor;
 import jp.co.ndensan.reams.ua.uax.business.core.psm.UaFt200FindShikibetsuTaishoFunction;
 import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.search.ShikibetsuTaishoGyomuHanteiKeyFactory;
 import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.search.ShikibetsuTaishoSearchKeyBuilder;
@@ -31,6 +32,7 @@ import jp.co.ndensan.reams.uz.uza.biz.CodeShubetsu;
 import jp.co.ndensan.reams.uz.uza.biz.GyomuCode;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
+import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.biz.YubinNo;
 import jp.co.ndensan.reams.uz.uza.lang.EraType;
 import jp.co.ndensan.reams.uz.uza.lang.FillType;
@@ -48,6 +50,8 @@ import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
 
 /**
  * 適用除外者台帳するクラスです。
+ *
+ * @reamsid_L DBA-0412-010 linghuhang
  */
 public class TekiyoJogaishaDaichoJohoFinder {
 
@@ -67,6 +71,7 @@ public class TekiyoJogaishaDaichoJohoFinder {
     private static final RString 行政区 = new RString("行政区");
     private static final RString 転入前住所 = new RString("転入前住所");
     private static final RString 連絡先 = new RString("連絡先");
+    private final RString 帳票分類ID = new RString("DBA100010_TekiyojogaishaDaicho");
     private final MapperProvider mapperProvider;
 
     /**
@@ -274,6 +279,8 @@ public class TekiyoJogaishaDaichoJohoFinder {
     }
 
     private RString get住所の編集(RString 住所, int 住所_LENGTH) {
+        new KaigoJushoEditor().create編集後住所(null, SubGyomuCode.DBB介護賦課, 帳票分類ID);
+
         if (住所_LENGTH_40 < 住所_LENGTH && 住所_LENGTH <= 住所_LENGTH_80) {
             RStringBuilder stringBuffer = new RStringBuilder();
             stringBuffer.append(住所.substringEmptyOnError(0, 住所_LENGTH_40))

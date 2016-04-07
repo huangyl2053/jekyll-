@@ -8,8 +8,9 @@ package jp.co.ndensan.reams.db.dba.business.report.tekiyojogaishadaicho;
 import jp.co.ndensan.reams.db.dba.entity.report.source.tekiyojogaishadaicho.TekiyojogaishaDaichoReportSource;
 
 /**
- *
  * 適用除外者台帳ボディEditorです。
+ *
+ * @reamsid_L DBE-3000-140 lishengli
  */
 class TekiyojogaishaDaichoBodyEditor implements ITekiyojogaishaDaichoEditor {
 

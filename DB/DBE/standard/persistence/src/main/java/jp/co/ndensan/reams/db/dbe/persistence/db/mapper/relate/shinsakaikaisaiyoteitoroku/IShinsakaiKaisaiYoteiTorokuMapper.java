@@ -10,6 +10,8 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 /**
  *
  * 介護認定審査会開催予定登録1のマッパーインタフェースです。
+ *
+ * @reamsid_L DBE-0130-010 yaodongsheng
  */
 public interface IShinsakaiKaisaiYoteiTorokuMapper {
 

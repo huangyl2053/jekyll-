@@ -22,8 +22,9 @@ import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.util.code.CodeMaster;
 
 /**
- *
  * 認定調査スケジュール登録8のハンドラークラスです。
+ * 
+ * @reamsid_L DBE-0024-010  suguangjun 
  */
 public class NinteiChosaSchedule8MainHandler {
 

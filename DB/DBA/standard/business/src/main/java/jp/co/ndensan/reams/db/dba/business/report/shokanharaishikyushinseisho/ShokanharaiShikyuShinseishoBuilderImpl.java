@@ -11,6 +11,8 @@ import jp.co.ndensan.reams.uz.uza.report.ReportEditorJoiner;
 /**
  *
  * 介護保険償還払支給申請書Builderクラスです。
+ *
+ * @reamsid_L DBA-0540-706 yaodongsheng
  */
 public final class ShokanharaiShikyuShinseishoBuilderImpl implements IShokanharaiShikyuShinseishoBuilder {
 

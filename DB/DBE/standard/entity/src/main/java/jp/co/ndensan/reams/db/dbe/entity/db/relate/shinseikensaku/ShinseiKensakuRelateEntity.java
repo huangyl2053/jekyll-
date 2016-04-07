@@ -20,6 +20,8 @@ import lombok.Setter;
 
 /**
  * 要介護認定申請検索RelateEntityクラスです。
+ *
+ * @reamsid_L DBE-1370-010 sunhaidi
  */
 @Getter
 @Setter

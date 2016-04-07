@@ -19,8 +19,9 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 import jp.co.ndensan.reams.uz.uza.util.config.BusinessConfig;
 
 /**
- *
  * 認定調査スケジュール登録10のHandlerクラスです。
+ *
+ * @reamsid_L DBE-0020-060 lishengli
  */
 public class NinteiChosaScheduleInputHandler {
 

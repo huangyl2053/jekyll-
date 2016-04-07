@@ -9,6 +9,8 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
  * 出力対象者明細一覧用RelateEntityクラスです。
+ *
+ * @reamsid_L DBE-0130-090 duanzhanli
  */
 @SuppressWarnings("PMD.UnusedPrivateField")
 @lombok.Getter

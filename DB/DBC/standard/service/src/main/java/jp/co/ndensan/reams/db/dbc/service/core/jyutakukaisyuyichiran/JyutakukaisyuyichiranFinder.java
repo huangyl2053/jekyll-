@@ -18,6 +18,8 @@ import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 
 /**
  * 住宅改修一覧の取得クラスです。
+ *
+ * @reamsid_L DBC-0940-020 yaodongsheng
  */
 public class JyutakukaisyuyichiranFinder {
 

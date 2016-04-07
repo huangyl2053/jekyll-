@@ -5,6 +5,8 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
  * 介護認定審査会開催場所情報テーブルのエンティティクラスです。
+ * 
+ * @reamsid_L DBA-1090-021 wangkun
  */
 @lombok.Getter
 @lombok.Setter

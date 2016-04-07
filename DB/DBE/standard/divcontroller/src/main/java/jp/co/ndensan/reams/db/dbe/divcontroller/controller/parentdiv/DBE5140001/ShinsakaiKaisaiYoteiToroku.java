@@ -59,6 +59,8 @@ import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 /**
  *
  * 介護認定審査会開催予定登録1のコントローラです。
+ *
+ * @reamsid_L DBE-0130-010 yaodongsheng
  */
 public class ShinsakaiKaisaiYoteiToroku {
 

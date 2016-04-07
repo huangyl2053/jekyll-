@@ -6,6 +6,8 @@ import jp.co.ndensan.reams.uz.uza.report.source.ReportItem;
 
 /**
  * 広域内住所地特例者一覧表のReportSource
+ *
+ * @reamsid_L DBU-1140-060 linghuhang
  */
 public class KoikinaiJushochitokureishaIchiranhyoReportSource implements IReportSource {
 // <editor-fold defaultstate="collapsed" desc="Generated Code">

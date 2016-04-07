@@ -14,6 +14,8 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
  * 適用除外者台帳情報を管理するクラスです。
+ *
+ * @reamsid_L DBA-0412-010 linghuhang
  */
 public class TekiyoJogaishaDaichoJoho {
 

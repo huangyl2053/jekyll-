@@ -11,6 +11,8 @@ import jp.co.ndensan.reams.uz.uza.report.ReportEditorJoiner;
 /**
  *
  * 給付額減額免除申請書Builderクラスです。
+ *
+ * @reamsid_L DBA-0540-695 yaodongsheng
  */
 public final class KyufugengakuMenjyoShinseishoBuilderImpl implements IKyufugengakuMenjyoShinseishoBuilder {
 

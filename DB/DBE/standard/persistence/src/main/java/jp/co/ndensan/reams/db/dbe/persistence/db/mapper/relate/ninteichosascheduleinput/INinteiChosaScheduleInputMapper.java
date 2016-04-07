@@ -10,8 +10,9 @@ import jp.co.ndensan.reams.db.dbe.entity.db.relate.ninteichosascheduleinput.Nint
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5221NinteichosaScheduleEntity;
 
 /**
- *
  * 調査員情報取得のMapperクラスです。
+ *
+ * @reamsid_L DBE-0020-060 lishengli
  */
 public interface INinteiChosaScheduleInputMapper {
 

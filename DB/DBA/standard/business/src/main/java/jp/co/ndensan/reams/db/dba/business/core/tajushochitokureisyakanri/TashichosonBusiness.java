@@ -11,6 +11,8 @@ import jp.co.ndensan.reams.db.dbz.business.core.TashichosonJushochiTokurei;
 
 /**
  * 他住所地特例者管理のbusinessクラスです。
+ *
+ * @reamsid_L DBA-0200-020 linghuhang
  */
 @lombok.Setter
 @lombok.Getter

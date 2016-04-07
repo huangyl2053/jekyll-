@@ -18,8 +18,9 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.ResponseHolder;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 
 /**
- *
  * 市町村連絡事項共有子Divです。
+ * 
+ * @reamsid_L DBE-1300-090  suguangjun 
  */
 public class NinteiShinseiShichosonRenrakuJiko {
 

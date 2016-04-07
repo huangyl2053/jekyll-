@@ -11,6 +11,8 @@ import jp.co.ndensan.reams.uz.uza.report.IReportBuilder;
 /**
  *
  * 年齢到達予定者一覧表Builderのインターフェースクラスです。
+ *
+ * @reamsid_L DBA-0580-070 yaodongsheng
  */
 interface INenreitotatsuYoteishaIchiranhyoBuilder extends IReportBuilder<NenreitotatsuYoteishaIchiranhyoReportSource> {
 

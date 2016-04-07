@@ -11,6 +11,8 @@ import jp.co.ndensan.reams.uz.uza.report.IReportBuilder;
 /**
  *
  * 給付額減額免除申請書Builderのインターフェースクラスです。
+ *
+ * @reamsid_L DBA-0540-695 yaodongsheng
  */
 public interface IKyufugengakuMenjyoShinseishoBuilder extends IReportBuilder<KyufugengakuMenjyoShinseishoReportSource> {
 }

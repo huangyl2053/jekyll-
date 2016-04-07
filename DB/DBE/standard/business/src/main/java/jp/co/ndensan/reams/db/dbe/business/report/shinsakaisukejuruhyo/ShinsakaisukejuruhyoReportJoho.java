@@ -9,6 +9,8 @@ import java.util.List;
 
 /**
  * 介護認定審査会スケジュール表_帳票クラスパラメータクラスです。
+ *
+ * @reamsid_L DBE-0130-070 yaodongsheng
  */
 @lombok.Getter
 @SuppressWarnings("PMD.UnusedPrivateField")

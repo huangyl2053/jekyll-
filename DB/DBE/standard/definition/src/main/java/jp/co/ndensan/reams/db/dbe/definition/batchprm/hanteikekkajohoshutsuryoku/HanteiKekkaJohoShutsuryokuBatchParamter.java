@@ -16,6 +16,8 @@ import lombok.Setter;
 /**
  *
  * 判定結果情報出力(保険者)を特定するためのバッチ用パラメータクラスです。
+ *
+ * @reamsid_L DBE-0190-030 duanzhanli
  */
 @Getter
 @Setter

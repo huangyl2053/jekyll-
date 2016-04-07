@@ -18,6 +18,8 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
 
 /**
  * 他住所地特例者管理のクラス。
+ *
+ * @reamsid_L DBA-0200-010 linghuhang
  */
 public class TaJushochiTokureishaKanri {
 

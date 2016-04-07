@@ -47,6 +47,8 @@ import jp.co.ndensan.reams.uz.uza.util.code.entity.UzT0007CodeEntity;
 
 /**
  * 他住所地特例者管理のクラス。
+ *
+ * @reamsid_L DBA-0200-010 linghuhang
  */
 public class TaJushochiTokureishaKanriHandler {
 
@@ -154,13 +156,9 @@ public class TaJushochiTokureishaKanriHandler {
         set他市町村住所地特例情報入力エリア活性の設定();
         dgJushochiTokureiRireki_Row 選択データ = div.getDgJushochiTokureiRireki().getActiveRow();
         set他市町村住所地特例情報入力エリア(選択データ, new RString(div.getMode_DisplayMode().toString()));
-        if (選択データ.getKaijoYMD() == null) {
+        if (選択データ.getKaijoYMD().getValue() == null) {
             div.getTxtKaijyobi().setDisabled(true);
-        }
-        if (選択データ.getKaijoTodokedeYMD() == null) {
             div.getTxtKaijyoTodokedebi().setDisabled(true);
-        }
-        if (選択データ.getKaijoJiyuCode() == null || 選択データ.getKaijoJiyuCode().isEmpty()) {
             div.getDdlKaijyoJiyo().setDisabled(true);
         }
     }
@@ -172,6 +170,7 @@ public class TaJushochiTokureishaKanriHandler {
         div.setStrate(状態_削除);
         set他市町村住所地特例情報入力エリア非活性の設定();
         div.getBtnKakunin().setDisabled(false);
+        div.getBtnTorikeshi().setDisabled(false);
         set他市町村住所地特例情報入力エリア(div.getDgJushochiTokureiRireki().getActiveRow(), new RString(div.getMode_DisplayMode().toString()));
     }
 
@@ -203,28 +202,6 @@ public class TaJushochiTokureishaKanriHandler {
      */
     public void onClick_Torikeshi() {
         clear他市町村住所地特例情報入力エリア();
-    }
-
-    /**
-     * 修正対象のデータから変更します。
-     *
-     * @return 修正対象のデータから変更結果 true/変更、false/変更しない。
-     */
-    public boolean isデータ変更() {
-        dgJushochiTokureiRireki_Row 選択データ
-                = div.getDgJushochiTokureiRireki().getDataSource().get(Integer.parseInt(div.getSelectData().toString()));
-        if ((選択データ.getKaijoYMD().getValue() == null && div.getTxtKaijyobi().getValue() != null)
-                || ((選択データ.getSochiHihokenshaNo() == null
-                || 選択データ.getSochiHihokenshaNo().isEmpty()) && div.getTxtHihoNo().getValue() != null)) {
-            return true;
-        }
-        return !選択データ.getTekiyoYMD().getValue().equals(div.getTxtTekiyobi().getValue())
-                || !選択データ.getTekiyoTodokedeYMD().getValue().equals(div.getTxtTekiyoTodokedebi().getValue())
-                || !選択データ.getTekiyoJiyuCode().equals(div.getDdlTekiyoJiyo().getSelectedValue())
-                || !選択データ.getKaijoYMD().getValue().equals(div.getTxtKaijyobi().getValue())
-                || !選択データ.getKaijoTodokedeYMD().getValue().equals(div.getTxtKaijyoTodokedebi().getValue())
-                || !選択データ.getKaijoJiyuCode().equals(div.getDdlKaijyoJiyo().getSelectedValue())
-                || !選択データ.getSochiHihokenshaNo().equals(div.getTxtHihoNo().getValue());
     }
 
     /**
@@ -274,12 +251,12 @@ public class TaJushochiTokureishaKanriHandler {
                 if (div.getCcdHokensha().getHokenjaNo() != null) {
                     rireki_Row.setSochiHokensha(div.getCcdHokensha().getHokenjaNo());
                 }
-                if (RString.isNullOrEmpty(div.getStrate())) {
+                if (RowState.Unchanged.equals(rireki_Row.getRowState())) {
                     rireki_Row.setRowState(RowState.Modified);
                 }
             }
             if (状態_削除.equals(div.getStrate())) {
-                if (RString.isNullOrEmpty(div.getStrate())) {
+                if (RowState.Unchanged.equals(rireki_Row.getRowState())) {
                     rireki_Row.setRowState(RowState.Deleted);
                 } else {
                     rowList.remove(rireki_Row);
@@ -577,7 +554,6 @@ public class TaJushochiTokureishaKanriHandler {
             div.getTajushochiTokureiInput().setHiddenInputEdaNo(kanriMaster.getEdaNo());
             div.getTxtHihoNo().setValue(kanriMaster.getSochiHihokenshaNo());
             div.getCcdHokensha().setHokenjaNo(kanriMaster.getSochiHokensha());
-            div.getCcdHokensha().setHokenjaName(kanriMaster.getSochiHokenshaNo());
         }
     }
 
