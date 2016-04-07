@@ -3,14 +3,15 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dba.business.shichoson;
+package jp.co.ndensan.reams.db.dbz.business.shichoson;
 
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
- *
  * 旧市町村コード取得のクラスです。
+ *
+ * @reamsid_L DBA-0170-020 linghuhang
  */
 public class Shichoson {
 
