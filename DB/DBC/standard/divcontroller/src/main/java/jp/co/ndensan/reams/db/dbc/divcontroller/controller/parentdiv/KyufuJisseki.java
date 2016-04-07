@@ -68,6 +68,12 @@ public class KyufuJisseki {
 
     private static final int INDEX_6 = 6;
 
+    /**
+     * 画面の初期化メソッドです。
+     *
+     * @param panel KyufuJissekiDiv
+     * @return ResponseData
+     */
     public ResponseData<KyufuJissekiDiv> dispKyufuJisseki(KyufuJissekiDiv panel) {
         ResponseData<KyufuJissekiDiv> response = new ResponseData<>();
 
@@ -471,6 +477,8 @@ public class KyufuJisseki {
     }
 
     private jp.co.ndensan.reams.db.dbc.business.core.KyufuJisseki get給付実績(KyufuJissekiKeyInfo keyInfo) {
+        // TODO 未使用のメソッド引数があります。 Checkstyle 対応。
+        keyInfo.getサービス提供年月();
         return null;
 // TODO n8300姜　ビルドエラー回避のために暫定対応
 //        KyufuJissekiFinder finder = new KyufuJissekiFinder();

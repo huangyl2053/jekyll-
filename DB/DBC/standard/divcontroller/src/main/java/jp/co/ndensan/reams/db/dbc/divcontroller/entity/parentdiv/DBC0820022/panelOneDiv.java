@@ -15,7 +15,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 /**
  * panelOne のクラスファイル
  *
- * @author 自動生成
+ * @reamsid_L DBC-1030-040 quxiaodong
  */
 public class panelOneDiv extends Panel {
 

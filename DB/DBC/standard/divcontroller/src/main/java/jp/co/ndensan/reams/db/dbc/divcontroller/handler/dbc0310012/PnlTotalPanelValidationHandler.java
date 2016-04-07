@@ -11,6 +11,7 @@ import jp.co.ndensan.reams.ua.uax.divcontroller.controller.testdriver.TestJukiAt
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.uz.uza.core.validation.ValidateChain;
 import jp.co.ndensan.reams.uz.uza.core.validation.ValidationMessagesFactory;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.message.IMessageGettable;
 import jp.co.ndensan.reams.uz.uza.message.IValidationMessage;
 import jp.co.ndensan.reams.uz.uza.message.IValidationMessages;
@@ -19,10 +20,21 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
 
 /**
  * 受領委任契約（福祉用具購入費・住宅改修費）登録・追加・修正・照会_登録画面入力のチェックHandler。
+ *
+ * @reamsid_L DBC-2130-020 cuilin
  */
 public class PnlTotalPanelValidationHandler {
 
     private final PnlTotalPanelDiv div;
+    private static final RString 契約申請受付日 = new RString("契約申請受付日");
+    private static final RString 契約申請日 = new RString("契約申請日");
+    private static final RString 契約事業者番号 = new RString("契約事業者番号");
+    private static final RString 決定区分 = new RString("決定区分");
+    private static final RString 不承認理由 = new RString("不承認理由");
+    private static final RString 年度 = new RString("年度");
+    private static final RString 番号 = new RString("番号");
+    private static final RString 受領委任契約番号 = new RString("受領委任契約番号");
+    private static final RString 償還受領委任契約者 = new RString("償還受領委任契約者");
 
     /**
      * コンストラクタです。
@@ -115,17 +127,17 @@ public class PnlTotalPanelValidationHandler {
 
     private static enum PnlTotalPanelValidationMessages implements IValidationMessage {
 
-        契約申請受付日未入力(UrErrorMessages.必須, "契約申請受付日"),
-        契約申請日未入力(UrErrorMessages.必須, "契約申請日"),
-        契約事業者番号未入力(UrErrorMessages.必須, "契約事業者番号"),
-        決定区分未入力(UrErrorMessages.必須, "決定区分"),
-        不承認理由未入力(UrErrorMessages.必須, "不承認理由"),
-        年度未入力(UrErrorMessages.必須, "年度"),
-        番号1未入力(UrErrorMessages.必須, "番号"),
-        番号2未入力(UrErrorMessages.必須, "番号"),
+        契約申請受付日未入力(UrErrorMessages.必須, 契約申請受付日.toString()),
+        契約申請日未入力(UrErrorMessages.必須, 契約申請日.toString()),
+        契約事業者番号未入力(UrErrorMessages.必須, 契約事業者番号.toString()),
+        決定区分未入力(UrErrorMessages.必須, 決定区分.toString()),
+        不承認理由未入力(UrErrorMessages.必須, 不承認理由.toString()),
+        年度未入力(UrErrorMessages.必須, 年度.toString()),
+        番号1未入力(UrErrorMessages.必須, 番号.toString()),
+        番号2未入力(UrErrorMessages.必須, 番号.toString()),
         金額不整合チェック(UrErrorMessages.入力値が不正),
-        受領委任契約番号重複チェック(UrErrorMessages.既に存在, "受領委任契約番号"),
-        存在チェック(UrErrorMessages.既に登録済, "償還受領委任契約者");
+        受領委任契約番号重複チェック(UrErrorMessages.既に存在, 受領委任契約番号.toString()),
+        存在チェック(UrErrorMessages.既に登録済, 償還受領委任契約者.toString());
         private final Message message;
 
         PnlTotalPanelValidationMessages(IMessageGettable message, String... replacements) {

@@ -16,6 +16,7 @@ import lombok.Value;
  * 給付費貸付金償還期限変更の識別子です。
  */
 @Value
+@SuppressWarnings("PMD.UnusedPrivateField")
 public class KyufuhiKashitsukekinShokanKigenHenkoIdentifier implements Serializable {
 
     private final HihokenshaNo 被保険者番号;

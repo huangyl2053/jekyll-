@@ -41,6 +41,8 @@ public class KyufuKanrihyoKihon {
     }
 
     private void setAtenaData(KyufuKanrihyoKihonDiv panel) {
+        // TODO 未使用のメソッド引数があります。 Checkstyle 対応。
+        panel.getKyufuKanrihyoKaigoAtena();
 //        ControlGenerator cg = new ControlGenerator(getYaml().get(0));
 //        AtenaShokaiSimple.setData(panel.getKyufuKanrihyoKaigoAtena().getAtenaInfo(), new ShikibetsuCode(cg.getAsRString("識別コード")));
     }

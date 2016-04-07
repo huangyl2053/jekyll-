@@ -19,7 +19,7 @@ public class KyotakuServiceSearch {
     /**
      * 画面ロード時の処理。
      *
-     * @param panel
+     * @param panel KyotakuServiceSearchDiv
      * @return ResponseData
      */
     public ResponseData getOnLoad(KyotakuServiceSearchDiv panel) {
@@ -36,7 +36,7 @@ public class KyotakuServiceSearch {
     /**
      * 検索ボタン押下時の処理。
      *
-     * @param panel
+     * @param panel KyotakuServiceSearchDiv
      * @return ResponseData
      */
     public ResponseData onClick_SearchIchiran(KyotakuServiceSearchDiv panel) {

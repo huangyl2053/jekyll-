@@ -18,7 +18,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
  */
 @lombok.Getter
 @SuppressWarnings("PMD.UnusedPrivateField")
-public class ShikibetsuCodeTempParameter {
+public final class ShikibetsuCodeTempParameter {
 
     private final ShikibetsuCode 識別コード;
     private final RString 全国住所コード;

@@ -13,6 +13,8 @@ import jp.co.ndensan.reams.uz.uza.lang.RTime;
 
 /**
  * 調定簿作成を管理するクラスです。
+ *
+ * @reamsid_L DBB-0770-020 cuilin
  */
 public class ChoteiboSakuseiManager {
 

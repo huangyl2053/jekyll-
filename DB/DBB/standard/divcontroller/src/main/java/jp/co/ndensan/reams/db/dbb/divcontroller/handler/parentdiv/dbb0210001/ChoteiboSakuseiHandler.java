@@ -21,6 +21,8 @@ import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 
 /**
  * 調定簿作成のHandlerクラスです。
+ *
+ * @reamsid_L DBB-0770-010 cuilin
  */
 public final class ChoteiboSakuseiHandler {
 

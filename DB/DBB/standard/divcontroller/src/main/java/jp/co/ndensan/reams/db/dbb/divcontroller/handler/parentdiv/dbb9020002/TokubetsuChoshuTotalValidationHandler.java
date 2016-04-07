@@ -20,6 +20,8 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
 
 /**
  * システム管理情報（特別徴収）のバリデーションハンドラークラスです。
+ *
+ * @reamsid_L DBB-1770-040 cuilin
  */
 public class TokubetsuChoshuTotalValidationHandler {
 

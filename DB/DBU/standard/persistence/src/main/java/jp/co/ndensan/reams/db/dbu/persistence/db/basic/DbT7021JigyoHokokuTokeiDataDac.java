@@ -42,8 +42,11 @@ import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
 
 /**
  * 事業報告統計データのデータアクセスクラスです。
+ *
+ * @reamsid_L DBU-9999-012 cuilin
  */
 public class DbT7021JigyoHokokuTokeiDataDac implements ISaveable<DbT7021JigyoHokokuTokeiDataEntity> {
+
     private static final RString MONTH_00 = new RString("00");
     private static final RString HYONO_09 = new RString("09");
     @InjectSession

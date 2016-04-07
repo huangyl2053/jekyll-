@@ -174,19 +174,19 @@ public class NonyuTsuchIchiranReport extends Report<NonyuTsuchIchiranSource> {
     private void 出力帳票entityss(NonyuTsuchIchiranItem item1) {
         if (バッチパラメータ.get出力帳票entity() != null) {
             if (バッチパラメータ.get出力帳票entity().size() > NUM0) {
-                item1.setShutsuryokujun1(バッチパラメータ.get出力帳票entity().get(NUM0).get改頁出力順ID());
+                item1.setShutsuryokujun1(バッチパラメータ.get出力帳票entity().get(NUM0).get出力順ID());
             }
             if (バッチパラメータ.get出力帳票entity().size() > NUM1) {
-                item1.setShutsuryokujun2(バッチパラメータ.get出力帳票entity().get(NUM1).get改頁出力順ID());
+                item1.setShutsuryokujun2(バッチパラメータ.get出力帳票entity().get(NUM1).get出力順ID());
             }
             if (バッチパラメータ.get出力帳票entity().size() > NUM2) {
-                item1.setShutsuryokujun3(バッチパラメータ.get出力帳票entity().get(NUM2).get改頁出力順ID());
+                item1.setShutsuryokujun3(バッチパラメータ.get出力帳票entity().get(NUM2).get出力順ID());
             }
             if (バッチパラメータ.get出力帳票entity().size() > NUM3) {
-                item1.setShutsuryokujun4(バッチパラメータ.get出力帳票entity().get(NUM3).get改頁出力順ID());
+                item1.setShutsuryokujun4(バッチパラメータ.get出力帳票entity().get(NUM3).get出力順ID());
             }
             if (バッチパラメータ.get出力帳票entity().size() > NUM4) {
-                item1.setShutsuryokujun5(バッチパラメータ.get出力帳票entity().get(NUM4).get改頁出力順ID());
+                item1.setShutsuryokujun5(バッチパラメータ.get出力帳票entity().get(NUM4).get出力順ID());
             }
         }
     }

@@ -40,6 +40,8 @@ import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
 
 /**
  * 処理日付管理マスタのデータアクセスクラスです。
+ *
+ * @reamsid_L DBB-9999-012 cuilin
  */
 public class DbT7022ShoriDateKanriDac implements ISaveable<DbT7022ShoriDateKanriEntity> {
 

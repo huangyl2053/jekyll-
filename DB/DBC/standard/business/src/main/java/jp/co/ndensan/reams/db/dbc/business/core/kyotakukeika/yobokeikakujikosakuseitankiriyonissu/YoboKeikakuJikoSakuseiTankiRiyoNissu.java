@@ -20,8 +20,8 @@ import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 /**
  * 予防給付計画自己作成短期利用日数を管理するクラスです。
  */
-public class YoboKeikakuJikoSakuseiTankiRiyoNissu
-        extends ModelBase<YoboKeikakuJikoSakuseiTankiRiyoNissuIdentifier, DbT3013YoboKeikakuJikoSakuseiTankiRiyoNissuEntity, YoboKeikakuJikoSakuseiTankiRiyoNissu>
+public class YoboKeikakuJikoSakuseiTankiRiyoNissu extends ModelBase<
+        YoboKeikakuJikoSakuseiTankiRiyoNissuIdentifier, DbT3013YoboKeikakuJikoSakuseiTankiRiyoNissuEntity, YoboKeikakuJikoSakuseiTankiRiyoNissu>
         implements Serializable {
 
     private final DbT3013YoboKeikakuJikoSakuseiTankiRiyoNissuEntity entity;
@@ -56,7 +56,8 @@ public class YoboKeikakuJikoSakuseiTankiRiyoNissu
      * コンストラクタです。<br/>
      * DBより取得した{@link DbT3013YoboKeikakuJikoSakuseiTankiRiyoNissuEntity}より{@link YoboKeikakuJikoSakuseiTankiRiyoNissu}を生成します。
      *
-     * @param entity DBより取得した{@link DbT3013YoboKeikakuJikoSakuseiTankiRiyoNissuEntity}
+     * @param entity
+     * DBより取得した{@link DbT3013YoboKeikakuJikoSakuseiTankiRiyoNissuEntity}
      */
     public YoboKeikakuJikoSakuseiTankiRiyoNissu(DbT3013YoboKeikakuJikoSakuseiTankiRiyoNissuEntity entity) {
         this.entity = requireNonNull(entity, UrSystemErrorMessages.値がnull.getReplacedMessage("予防給付計画自己作成短期利用日数"));
@@ -138,7 +139,8 @@ public class YoboKeikakuJikoSakuseiTankiRiyoNissu
     /**
      * 予防給付計画自己作成短期利用日数の識別子{@link YoboKeikakuJikoSakuseiTankiRiyoNissuIdentifier}を返します。
      *
-     * @return 予防給付計画自己作成短期利用日数の識別子{@link YoboKeikakuJikoSakuseiTankiRiyoNissuIdentifier}
+     * @return
+     * 予防給付計画自己作成短期利用日数の識別子{@link YoboKeikakuJikoSakuseiTankiRiyoNissuIdentifier}
      */
     @Override
     public YoboKeikakuJikoSakuseiTankiRiyoNissuIdentifier identifier() {

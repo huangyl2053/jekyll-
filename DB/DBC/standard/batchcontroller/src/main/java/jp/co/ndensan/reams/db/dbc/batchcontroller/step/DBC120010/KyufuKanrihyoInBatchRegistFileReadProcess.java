@@ -26,26 +26,30 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
  */
 public class KyufuKanrihyoInBatchRegistFileReadProcess extends BatchProcessBase<DbTKyufukanrihyoDataTempTableEntity> {
 
-    public static final RString PARAMETER_SHORINENGETSU = new RString("shoriNengetsu");
+    /**
+     * shoriNengetsu
+     */
+    public static final RString PARAMETER_SHORINENGETSU;
+
+    static {
+        PARAMETER_SHORINENGETSU = new RString("shoriNengetsu");
+    }
 
     //パラメータ受取変数
     InputParameter<RString> shoriNengetsu;
 
     //IBatchWriterを実装したクラス
     @BatchWriter
-    BatchPermanentTableWriter KyufuKanrihyo200004Writer;
+    BatchPermanentTableWriter kyufuKanrihyo200004Writer;
 
     //IBatchWriterを実装したクラス
     @BatchWriter
-    BatchPermanentTableWriter KyufuKanrihyo200604Writer;
+    BatchPermanentTableWriter kyufuKanrihyo200604Writer;
 
     //IBatchWriterを実装したクラス
     @BatchWriter
-    BatchEntityCreatedTempTableWriter KyufukanrihyoDataTempTableWriter;
+    BatchEntityCreatedTempTableWriter kyufukanrihyoWriter;
 //    BatchPermanentTableWriter KyufukanrihyoDataTempTableWriter;
-
-    private final String 旧レイアウト = "1121";
-    private final String 新レイアウト = "1122";
 
     @Override
     protected IBatchReader createReader() {
@@ -56,13 +60,13 @@ public class KyufuKanrihyoInBatchRegistFileReadProcess extends BatchProcessBase<
     @Override
     protected void createWriter() {
 
-        KyufuKanrihyo200004Writer
+        kyufuKanrihyo200004Writer
                 = new BatchPermanentTableWriter(DbT3014KyufuKanrihyo200004Entity.class);
 
-        KyufuKanrihyo200604Writer
+        kyufuKanrihyo200604Writer
                 = new BatchPermanentTableWriter(DbT3015KyufuKanrihyo200604Entity.class);
 
-        KyufukanrihyoDataTempTableWriter
+        kyufukanrihyoWriter
                 = new BatchEntityCreatedTempTableWriter(DbTKyufukanrihyoDataTempTableEntity.TABLE_NAME, DbTKyufukanrihyoDataTempTableEntity.class);
     }
 
@@ -71,11 +75,11 @@ public class KyufuKanrihyoInBatchRegistFileReadProcess extends BatchProcessBase<
         KyufuKanrihyoInBatch business = new KyufuKanrihyoInBatch();
 
         switch (line.getKokanjohoShikibetsuNo().toString()) {
-            case 旧レイアウト:
-                KyufuKanrihyo200004Writer.insert(business.createKyufuKanrihyo200004Record(line, shoriNengetsu.getValue()));
+            case "1121":
+                kyufuKanrihyo200004Writer.insert(business.createKyufuKanrihyo200004Record(line, shoriNengetsu.getValue()));
                 break;
-            case 新レイアウト:
-                KyufuKanrihyo200604Writer.insert(business.createKyufuKanrihyo200604Record(line, shoriNengetsu.getValue()));
+            case "1122":
+                kyufuKanrihyo200604Writer.insert(business.createKyufuKanrihyo200604Record(line, shoriNengetsu.getValue()));
                 break;
             default:
             //読み捨て

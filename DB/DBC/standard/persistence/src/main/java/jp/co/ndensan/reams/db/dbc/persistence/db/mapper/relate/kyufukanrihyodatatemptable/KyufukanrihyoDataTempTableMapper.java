@@ -19,7 +19,7 @@ import jp.co.ndensan.reams.uz.uza.util.di.InjectSession;
 public class KyufukanrihyoDataTempTableMapper implements IKyufukanrihyoDataTempTableMapper {
 
     @InjectSession
-    SqlSession session;
+    private SqlSession session;
 
     @Override
     public void updateHihoNoHenkanShichosonCode1(Map<String, Object> param) {

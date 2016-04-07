@@ -4,17 +4,20 @@ package jp.co.ndensan.reams.db.dbb.divcontroller.entity.parentdiv.DBB9020002;
  * このファイルへの変更は、再生成時には損失するため
  * 不正な動作の原因になります。
  */
+
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import jp.co.ndensan.reams.uz.uza.ui.binding.*;
+import jp.co.ndensan.reams.uz.uza.ui.binding.DropDownList;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
+import jp.co.ndensan.reams.uz.uza.ui.binding.RadioButton;
 
 /**
- * HasuHeijunkaJoho のクラスファイル 
- * 
- * @author 自動生成
+ * HasuHeijunkaJoho のクラスファイル
+ *
+ * @reamsid_L DBB-1770-040 cuilin
  */
 public class HasuHeijunkaJohoDiv extends Panel {
+
     // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-01-15_09-59-03">
     /*
      * [ private の作成 ]
@@ -118,7 +121,7 @@ public class HasuHeijunkaJohoDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setDdlHasu(DropDownList ddlHasu) {
+    public void setDdlHasu(DropDownList ddlHasu) {
         this.getKibetsuHokenryo().setDdlHasu(ddlHasu);
     }
 
@@ -128,7 +131,7 @@ public class HasuHeijunkaJohoDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setDdlHeijunkaKeisanHoho(DropDownList ddlHeijunkaKeisanHoho) {
+    public void setDdlHeijunkaKeisanHoho(DropDownList ddlHeijunkaKeisanHoho) {
         this.getHeijunka6GatsuKeisanHoho().setDdlHeijunkaKeisanHoho(ddlHeijunkaKeisanHoho);
     }
 
@@ -138,7 +141,7 @@ public class HasuHeijunkaJohoDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setRadGengakuHeijunKa(RadioButton radGengakuHeijunKa) {
+    public void setRadGengakuHeijunKa(RadioButton radGengakuHeijunKa) {
         this.getHeijunka6GatsuKeisanHoho().setRadGengakuHeijunKa(radGengakuHeijunKa);
     }
 
@@ -148,7 +151,7 @@ public class HasuHeijunkaJohoDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setRadZogakuHeijunKa(RadioButton radZogakuHeijunKa) {
+    public void setRadZogakuHeijunKa(RadioButton radZogakuHeijunKa) {
         this.getHeijunka6GatsuKeisanHoho().setRadZogakuHeijunKa(radZogakuHeijunKa);
     }
 
@@ -158,7 +161,7 @@ public class HasuHeijunkaJohoDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setDdlHeijunka8GatsuKeisanHoho(DropDownList ddlHeijunka8GatsuKeisanHoho) {
+    public void setDdlHeijunka8GatsuKeisanHoho(DropDownList ddlHeijunka8GatsuKeisanHoho) {
         this.getHeijunka8GatsuKeisanHoho().setDdlHeijunka8GatsuKeisanHoho(ddlHeijunka8GatsuKeisanHoho);
     }
 
@@ -168,7 +171,7 @@ public class HasuHeijunkaJohoDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setRad8GatsuGengakuHeijunKa(RadioButton rad8GatsuGengakuHeijunKa) {
+    public void setRad8GatsuGengakuHeijunKa(RadioButton rad8GatsuGengakuHeijunKa) {
         this.getHeijunka8GatsuKeisanHoho().setRad8GatsuGengakuHeijunKa(rad8GatsuGengakuHeijunKa);
     }
 
@@ -178,7 +181,7 @@ public class HasuHeijunkaJohoDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setRad8GatsuZogakuHeijunKa(RadioButton rad8GatsuZogakuHeijunKa) {
+    public void setRad8GatsuZogakuHeijunKa(RadioButton rad8GatsuZogakuHeijunKa) {
         this.getHeijunka8GatsuKeisanHoho().setRad8GatsuZogakuHeijunKa(rad8GatsuZogakuHeijunKa);
     }
 
@@ -188,7 +191,7 @@ public class HasuHeijunkaJohoDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setDdlFuchoKirikaeKeisanHoho(DropDownList ddlFuchoKirikaeKeisanHoho) {
+    public void setDdlFuchoKirikaeKeisanHoho(DropDownList ddlFuchoKirikaeKeisanHoho) {
         this.getFuchoKirikaeKeisanHoho().setDdlFuchoKirikaeKeisanHoho(ddlFuchoKirikaeKeisanHoho);
     }
 
@@ -198,7 +201,7 @@ public class HasuHeijunkaJohoDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setDdlFuchoKirikaeJufukuStKi(DropDownList ddlFuchoKirikaeJufukuStKi) {
+    public void setDdlFuchoKirikaeJufukuStKi(DropDownList ddlFuchoKirikaeJufukuStKi) {
         this.getFuchoKirikaeKeisanHoho().setDdlFuchoKirikaeJufukuStKi(ddlFuchoKirikaeJufukuStKi);
     }
 

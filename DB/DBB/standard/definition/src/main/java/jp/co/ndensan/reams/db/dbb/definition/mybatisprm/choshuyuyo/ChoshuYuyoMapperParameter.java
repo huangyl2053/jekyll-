@@ -15,7 +15,7 @@ import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
  */
 @lombok.Getter
 @SuppressWarnings("PMD.UnusedPrivateField")
-public class ChoshuYuyoMapperParameter {
+public final class ChoshuYuyoMapperParameter {
 
     private final FlexibleYear choteiNendo;
     private final FlexibleYear fukaNendo;

@@ -4,17 +4,23 @@ package jp.co.ndensan.reams.db.dbb.divcontroller.entity.parentdiv.DBB0210001;
  * このファイルへの変更は、再生成時には損失するため
  * 不正な動作の原因になります。
  */
+
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import jp.co.ndensan.reams.uz.uza.ui.binding.*;
+import jp.co.ndensan.reams.uz.uza.ui.binding.DropDownList;
+import jp.co.ndensan.reams.uz.uza.ui.binding.HorizontalLine;
+import jp.co.ndensan.reams.uz.uza.ui.binding.Label;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
+import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxDate;
+import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxTime;
 
 /**
- * ChoteiboSakusei のクラスファイル 
- * 
- * @author 自動生成
+ * ChoteiboSakusei のクラスファイル
+ *
+ * @reamsid_L DBB-0770-010 cuilin
  */
 public class ChoteiboSakuseiDiv extends Panel {
+
     // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2015-11-16_12-38-19">
     /*
      * [ private の作成 ]
@@ -58,7 +64,7 @@ public class ChoteiboSakuseiDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setDdlShoriNendo(DropDownList ddlShoriNendo) {
+    public void setDdlShoriNendo(DropDownList ddlShoriNendo) {
         this.getChoteiboSakuseiParameter().setDdlShoriNendo(ddlShoriNendo);
     }
 
@@ -68,7 +74,7 @@ public class ChoteiboSakuseiDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setLin1(HorizontalLine lin1) {
+    public void setLin1(HorizontalLine lin1) {
         this.getChoteiboSakuseiParameter().setLin1(lin1);
     }
 
@@ -78,7 +84,7 @@ public class ChoteiboSakuseiDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setLblChushutsuStYMD(Label lblChushutsuStYMD) {
+    public void setLblChushutsuStYMD(Label lblChushutsuStYMD) {
         this.getChoteiboSakuseiParameter().setLblChushutsuStYMD(lblChushutsuStYMD);
     }
 
@@ -88,7 +94,7 @@ public class ChoteiboSakuseiDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setLblChushutsuStTime(Label lblChushutsuStTime) {
+    public void setLblChushutsuStTime(Label lblChushutsuStTime) {
         this.getChoteiboSakuseiParameter().setLblChushutsuStTime(lblChushutsuStTime);
     }
 
@@ -98,7 +104,7 @@ public class ChoteiboSakuseiDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setLblChushutsuEdYMD(Label lblChushutsuEdYMD) {
+    public void setLblChushutsuEdYMD(Label lblChushutsuEdYMD) {
         this.getChoteiboSakuseiParameter().setLblChushutsuEdYMD(lblChushutsuEdYMD);
     }
 
@@ -108,7 +114,7 @@ public class ChoteiboSakuseiDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setLblChushutsuEdTime(Label lblChushutsuEdTime) {
+    public void setLblChushutsuEdTime(Label lblChushutsuEdTime) {
         this.getChoteiboSakuseiParameter().setLblChushutsuEdTime(lblChushutsuEdTime);
     }
 
@@ -118,7 +124,7 @@ public class ChoteiboSakuseiDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setTxtChushutsuStYMD(TextBoxDate txtChushutsuStYMD) {
+    public void setTxtChushutsuStYMD(TextBoxDate txtChushutsuStYMD) {
         this.getChoteiboSakuseiParameter().setTxtChushutsuStYMD(txtChushutsuStYMD);
     }
 
@@ -128,7 +134,7 @@ public class ChoteiboSakuseiDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setTxtChushutsuStTime(TextBoxTime txtChushutsuStTime) {
+    public void setTxtChushutsuStTime(TextBoxTime txtChushutsuStTime) {
         this.getChoteiboSakuseiParameter().setTxtChushutsuStTime(txtChushutsuStTime);
     }
 
@@ -138,7 +144,7 @@ public class ChoteiboSakuseiDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setLblFugou(Label lblFugou) {
+    public void setLblFugou(Label lblFugou) {
         this.getChoteiboSakuseiParameter().setLblFugou(lblFugou);
     }
 
@@ -148,7 +154,7 @@ public class ChoteiboSakuseiDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setTxtChushutsuEdYMD(TextBoxDate txtChushutsuEdYMD) {
+    public void setTxtChushutsuEdYMD(TextBoxDate txtChushutsuEdYMD) {
         this.getChoteiboSakuseiParameter().setTxtChushutsuEdYMD(txtChushutsuEdYMD);
     }
 
@@ -158,7 +164,7 @@ public class ChoteiboSakuseiDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setTxtChushutsuEdTime(TextBoxTime txtChushutsuEdTime) {
+    public void setTxtChushutsuEdTime(TextBoxTime txtChushutsuEdTime) {
         this.getChoteiboSakuseiParameter().setTxtChushutsuEdTime(txtChushutsuEdTime);
     }
 

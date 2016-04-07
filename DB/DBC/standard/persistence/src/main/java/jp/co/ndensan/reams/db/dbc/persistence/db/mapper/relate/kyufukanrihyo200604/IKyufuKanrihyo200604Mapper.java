@@ -18,6 +18,11 @@ public interface IKyufuKanrihyo200604Mapper {
 //    List<DbT3015KyufuKanrihyo200604Entity> selectAll();
     //update
 //    int updateKyufuKanrihyo200604(DbT3015KyufuKanrihyo200604Entity updateData);
-    //delete
+    /**
+     * delete
+     *
+     * @param shoriYM shoriYM
+     * @return int
+     */
     int deleteKyufuKanrihyo200604(@Param("shoriYM") RString shoriYM);
 }

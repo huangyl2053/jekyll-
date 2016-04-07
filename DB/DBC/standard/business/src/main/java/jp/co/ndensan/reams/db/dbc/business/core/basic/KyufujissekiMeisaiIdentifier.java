@@ -21,6 +21,7 @@ import lombok.Value;
  * 給付実績明細の識別子です。
  */
 @Value
+@SuppressWarnings("PMD.UnusedPrivateField")
 public class KyufujissekiMeisaiIdentifier implements Serializable {
 
     private final KokanShikibetsuNo 交換情報識別番号;

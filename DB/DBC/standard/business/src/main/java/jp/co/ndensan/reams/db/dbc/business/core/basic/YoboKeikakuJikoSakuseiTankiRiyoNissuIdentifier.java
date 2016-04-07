@@ -14,6 +14,7 @@ import lombok.Value;
  * 予防給付計画自己作成短期利用日数の識別子です。
  */
 @Value
+@SuppressWarnings("PMD.UnusedPrivateField")
 public class YoboKeikakuJikoSakuseiTankiRiyoNissuIdentifier implements Serializable {
 
     private final HihokenshaNo 被保険者番号;

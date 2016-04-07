@@ -21,13 +21,13 @@ import jp.co.ndensan.reams.db.dbx.business.core.kanri.Kitsuki;
 import jp.co.ndensan.reams.db.dbx.business.core.kanri.KitsukiList;
 import jp.co.ndensan.reams.db.dbx.business.core.kanri.TokuchoKiUtil;
 import jp.co.ndensan.reams.db.dbx.definition.core.fucho.FuchokiJohoTsukiShoriKubun;
+import jp.co.ndensan.reams.db.dbz.business.core.kaigosofubutsuatesakisource.KaigoSofubutsuAtesakiSource;
 import jp.co.ndensan.reams.db.dbz.business.report.parts.kaigotoiawasesaki.CompKaigoToiawasesakiSource;
 import jp.co.ndensan.reams.db.dbz.business.report.parts.kaigotoiawasesaki.IKaigoToiawasesakiSourceBuilder;
 import jp.co.ndensan.reams.db.dbz.business.report.util.EditedAtesaki;
 import jp.co.ndensan.reams.ur.urz.business.core.ninshosha.Ninshosha;
 import jp.co.ndensan.reams.ur.urz.business.report.parts.ninshosha.NinshoshaSourceBuilderFactory;
 import jp.co.ndensan.reams.ur.urz.entity.report.parts.ninshosha.NinshoshaSource;
-import jp.co.ndensan.reams.ur.urz.entity.report.sofubutsuatesaki.SofubutsuAtesakiSource;
 import jp.co.ndensan.reams.ur.urz.service.core.ninshosha.INinshoshaManager;
 import jp.co.ndensan.reams.ur.urz.service.core.ninshosha._NinshoshaManager;
 import jp.co.ndensan.reams.uz.uza.biz.GyomuCode;
@@ -237,39 +237,42 @@ public class GenmenKetteiTsuchiShoPrintService {
         item.set内線番号(buildSource.naisenNo);
 
         EditedAtesaki 編集後宛先 = new EditedAtesaki(減免決定通知書情報.get宛先(),
-                減免決定通知書情報.get帳票制御共通(), null, null);
-        SofubutsuAtesakiSource source = 編集後宛先.getSofubutsuAtesakiSource();
-        item.set郵便番号No(source.yubinNo);
-        item.set行政区(source.gyoseiku);
-        item.set住所3(source.jusho3);
-        item.set住所(source.jushoText);
-        item.set住所1(source.jusho1);
-        item.set住所2(source.jusho2);
-        item.set方書(source.katagakiText);
-        item.set方書2(source.katagaki2);
-        item.set方書Small2(source.katagakiSmall2);
-        item.set方書1(source.katagaki1);
-        item.set方書Small1(source.katagakiSmall1);
-        item.set右括弧2(source.kakkoRight2);
-        item.set右括弧1(source.kakkoRight1);
-        item.set氏名2(source.shimei2);
-        item.set氏名Small2(source.shimeiSmall2);
-        item.set氏名(source.shimeiText);
-        item.set名称付与2(source.meishoFuyo2);
-        item.set氏名Small1(source.shimeiSmall1);
-        item.set代納区分名(source.dainoKubunMei);
-        item.set氏名1(source.shimei1);
-        item.set名称付与1(source.meishoFuyo1);
-        item.set様分氏名(source.samabunShimeiText);
-        item.set様分氏名Small2(source.samabunShimeiSmall2);
-        item.set様分2(source.samaBun2);
-        item.set左括弧2(source.kakkoLeft2);
-        item.set様分氏名2(source.samabunShimei2);
-        item.set左括弧1(source.kakkoLeft1);
-        item.set様分氏名1(source.samabunShimei1);
-        item.set様分1(source.samaBun1);
-        item.set様分氏名Small1(source.samabunShimeiSmall1);
-        item.setカスタマバーコード(source.customerBarCode);
+                減免決定通知書情報.get地方公共団体(),
+                減免決定通知書情報.get帳票制御共通(),
+                null, null, true, null, null, null, null);
+        KaigoSofubutsuAtesakiSource source = 編集後宛先.getSofubutsuAtesakiSource();
+        item.set郵便番号No(source.get送付物宛先ソース().yubinNo);
+        item.set行政区(source.get送付物宛先ソース().gyoseiku);
+        item.set住所3(source.get送付物宛先ソース().jusho3);
+        item.set住所(source.get送付物宛先ソース().jushoText);
+        item.set住所1(source.get送付物宛先ソース().jusho1);
+
+        item.set住所2(source.get送付物宛先ソース().jusho2);
+        item.set方書(source.get送付物宛先ソース().katagakiText);
+        item.set方書2(source.get送付物宛先ソース().katagaki2);
+        item.set方書Small2(source.get送付物宛先ソース().katagakiSmall2);
+        item.set方書1(source.get送付物宛先ソース().katagaki1);
+        item.set方書Small1(source.get送付物宛先ソース().katagakiSmall1);
+        item.set右括弧2(source.get送付物宛先ソース().kakkoRight2);
+        item.set右括弧1(source.get送付物宛先ソース().kakkoRight1);
+        item.set氏名2(source.get送付物宛先ソース().shimei2);
+        item.set氏名Small2(source.get送付物宛先ソース().shimeiSmall2);
+        item.set氏名(source.get送付物宛先ソース().shimeiText);
+        item.set名称付与2(source.get送付物宛先ソース().meishoFuyo2);
+        item.set氏名Small1(source.get送付物宛先ソース().shimeiSmall1);
+        item.set代納区分名(source.get送付物宛先ソース().dainoKubunMei);
+        item.set氏名1(source.get送付物宛先ソース().shimei1);
+        item.set名称付与1(source.get送付物宛先ソース().meishoFuyo1);
+        item.set様分氏名(source.get送付物宛先ソース().samabunShimeiText);
+        item.set様分氏名Small2(source.get送付物宛先ソース().samabunShimeiSmall2);
+        item.set様分2(source.get送付物宛先ソース().samaBun2);
+        item.set左括弧2(source.get送付物宛先ソース().kakkoLeft2);
+        item.set様分氏名2(source.get送付物宛先ソース().samabunShimei2);
+        item.set左括弧1(source.get送付物宛先ソース().kakkoLeft1);
+        item.set様分氏名1(source.get送付物宛先ソース().samabunShimei1);
+        item.set様分1(source.get送付物宛先ソース().samaBun1);
+        item.set様分氏名Small1(source.get送付物宛先ソース().samabunShimeiSmall1);
+        item.setカスタマバーコード(source.get送付物宛先ソース().customerBarCode);
         // TODO 世帯主名
         // TODO 様方
     }

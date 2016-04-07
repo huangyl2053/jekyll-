@@ -6,11 +6,11 @@
 package jp.co.ndensan.reams.db.dbc.divcontroller.controller.parentdiv;
 
 import java.util.List;
-import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC1810000.KashitsukeHenkanListDiv;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.commonchilddiv.KyufuhiKashitsukekinList.dgKyufuhiKashitsukekinList_Row;
+import static jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC1810000.DBC1810000StateName.徴収登録;
+import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC1810000.KashitsukeHenkanListDiv;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.ui.binding.DataGrid;
-import static jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC1810000.DBC1810000StateName.徴収登録;
 
 /**
  * 給付費貸付金返還徴収登録の給付費貸付金一覧のコントロールです。
@@ -31,6 +31,12 @@ public class KashitsukeHenkanList {
         return ResponseData.of(panel).respond();
     }
 
+    /**
+     * toTorokuDivメソッドです。
+     *
+     * @param panel KashitsukeHenkanListDiv
+     * @return ResponseData
+     */
     public ResponseData<KashitsukeHenkanListDiv> toTorokuDiv(KashitsukeHenkanListDiv panel) {
 
         return ResponseData.of(panel).setState(徴収登録);

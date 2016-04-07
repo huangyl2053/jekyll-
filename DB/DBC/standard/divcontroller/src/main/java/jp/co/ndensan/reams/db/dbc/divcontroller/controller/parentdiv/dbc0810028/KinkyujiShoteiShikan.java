@@ -26,6 +26,8 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 
 /**
  * 償還払い状況照会_緊急時・所定疾患画面クラスです
+ *
+ * @reamsid_L DBC-1010-060 xupeng
  */
 public class KinkyujiShoteiShikan {
 

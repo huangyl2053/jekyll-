@@ -27,6 +27,8 @@ public class KyotakuKeikakuTodokedeKanryo {
     }
 
     private void setKanryoMessage(KyotakuKeikakuTodokedeKanryoDiv panel) {
+        // TODO 未使用のメソッド引数があります。 Checkstyle 対応。
+        panel.getKyotakuKeikakuTodokedeKanryoMessage();
         //TODO n3317塚田　Yamlを使わないよう変更
 //        KaigoKanryoMessage.setMessage(panel.getKyotakuKeikakuTodokedeKanryoMessage(),
 //                cg.getAsRString("完了メッセージ"), cg.getAsRString("識別コード"), cg.getAsRString("氏名"));

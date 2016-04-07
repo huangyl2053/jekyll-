@@ -11,6 +11,8 @@ import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 /**
  *
  * 国保連情報受取データ取込_[151]介護給付費等請求額通知書情報 controller
+ *
+ * @reamsid_L DBC-0980-030 quxiaodong
  */
 public class TsuchishoJoho151 {
 

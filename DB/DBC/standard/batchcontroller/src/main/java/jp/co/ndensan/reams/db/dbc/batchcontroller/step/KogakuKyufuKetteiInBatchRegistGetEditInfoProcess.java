@@ -43,10 +43,10 @@ public class KogakuKyufuKetteiInBatchRegistGetEditInfoProcess extends BatchProce
     private static final RString READ_DATA_ID = new RString("jp.co.ndensan.reams.db.dbc.persistence.db.mapper."
             + "relate.kogakuserviceketteijohotorikomidatahenshu."
             + "IKogakuServiceKetteiJohoTorikomiDataHenshuMapper.select被保険者番号");
-    private static final ShikibetsuCode READ_DATA_ID_1 = new ShikibetsuCode(
-            "jp.co.ndensan.reams.db.dbc.persistence.db.mapper."
-            + "relate.kogakuserviceketteijohotorikomidatahenshu."
-            + "IKogakuServiceKetteiJohoTorikomiDataHenshuMapper.select一時デーブルから識別コード");
+//    private static final ShikibetsuCode READ_DATA_ID_1 = new ShikibetsuCode(
+//            "jp.co.ndensan.reams.db.dbc.persistence.db.mapper."
+//            + "relate.kogakuserviceketteijohotorikomidatahenshu."
+//            + "IKogakuServiceKetteiJohoTorikomiDataHenshuMapper.select一時デーブルから識別コード");
 
     private IKogakuServiceKetteiJohoTorikomiDataHenshuMapper mapper;
 

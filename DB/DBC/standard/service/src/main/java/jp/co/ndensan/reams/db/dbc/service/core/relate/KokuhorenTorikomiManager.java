@@ -26,6 +26,7 @@ import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 /**
  * 国保連取込情報を管理するクラスです。
  */
+@SuppressWarnings("PMD.UnusedPrivateField")
 public class KokuhorenTorikomiManager {
 
     private final MapperProvider mapperProvider;
@@ -128,11 +129,11 @@ public class KokuhorenTorikomiManager {
     /**
      * * 指定した処理年月の国保連IF管理をリストで取得します。
      *
-     * @param 処理年月 RString
+     * @param 処理年月 処理年月
+     * @param 交換識別番号 交換識別番号
      * @return List<KokuhorenTorikomiJohoModel>
      */
     private KokuhorenTorikomiJoho find国保連IF管理(RYearMonth 処理年月, RString 交換識別番号) {
-        KokuhorenTorikomiJoho entity = 国保連取込情報Manager.get国保連取り込み情報(new FlexibleYearMonth(処理年月.toDateString()), 交換識別番号);
-        return entity;
+        return 国保連取込情報Manager.get国保連取り込み情報(new FlexibleYearMonth(処理年月.toDateString()), 交換識別番号);
     }
 }

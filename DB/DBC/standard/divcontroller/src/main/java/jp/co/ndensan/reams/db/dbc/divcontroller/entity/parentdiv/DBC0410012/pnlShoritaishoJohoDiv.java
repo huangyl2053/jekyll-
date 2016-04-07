@@ -4,17 +4,20 @@ package jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0410012;
  * このファイルへの変更は、再生成時には損失するため
  * 不正な動作の原因になります。
  */
+
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import jp.co.ndensan.reams.uz.uza.ui.binding.*;
+import jp.co.ndensan.reams.uz.uza.ui.binding.CheckBoxList;
+import jp.co.ndensan.reams.uz.uza.ui.binding.Label;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 
 /**
- * pnlShoritaishoJoho のクラスファイル 
- * 
- * @author 自動生成
+ * pnlShoritaishoJoho のクラスファイル
+ *
+ * @reamsid_L DBC-0980-030 quxiaodong
  */
 public class pnlShoritaishoJohoDiv extends Panel {
+
     // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：Uz-master-63">
     /*
      * [ private の作成 ]
@@ -118,7 +121,7 @@ public class pnlShoritaishoJohoDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setLblKakuninJiko1(Label lblKakuninJiko1) {
+    public void setLblKakuninJiko1(Label lblKakuninJiko1) {
         this.getKakuninJiko().setLblKakuninJiko1(lblKakuninJiko1);
     }
 
@@ -128,7 +131,7 @@ public class pnlShoritaishoJohoDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setLblKakuninJiko2(Label lblKakuninJiko2) {
+    public void setLblKakuninJiko2(Label lblKakuninJiko2) {
         this.getKakuninJiko().setLblKakuninJiko2(lblKakuninJiko2);
     }
 
@@ -138,7 +141,7 @@ public class pnlShoritaishoJohoDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setLblKakuninJiko3(Label lblKakuninJiko3) {
+    public void setLblKakuninJiko3(Label lblKakuninJiko3) {
         this.getKakuninJiko().setLblKakuninJiko3(lblKakuninJiko3);
     }
 

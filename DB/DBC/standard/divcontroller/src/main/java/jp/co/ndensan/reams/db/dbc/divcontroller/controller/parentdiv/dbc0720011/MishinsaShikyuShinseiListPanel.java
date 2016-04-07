@@ -10,15 +10,10 @@ import java.util.List;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.MishinsaShikyuShinseiListPanelDiv;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.dgMishinsaShikyuShinsei_Row;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
-import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.ui.binding.DataGrid;
 import jp.co.ndensan.reams.uz.uza.ui.binding.KeyValueDataSource;
 import jp.co.ndensan.reams.uz.uza.ui.binding.RowState;
-import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxCode;
-import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxDate;
-import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxNum;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.CommonButtonHolder;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 
@@ -30,6 +25,7 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 public class MishinsaShikyuShinseiListPanel {
 
     private static final int 不承認 = 3;
+
     /**
      * 住宅改修費支給申請審査 未審査支給申請一覧の内容をセットします。
      *
@@ -67,7 +63,7 @@ public class MishinsaShikyuShinseiListPanel {
      * 住宅改修費支給申請審査 選択された未審査支給申請一覧情報をもとに、 支給申請内容を一括審査するボタンを押下後、審査結果の内容をセットされる。
      *
      * @param panel MishinsaShikyuShinseiListPanelDiv
-     * @return
+     * @return ResponseData
      */
     public ResponseData<MishinsaShikyuShinseiListPanelDiv> onClick_btnShinsa(MishinsaShikyuShinseiListPanelDiv panel) {
 
@@ -87,6 +83,12 @@ public class MishinsaShikyuShinseiListPanel {
         return ResponseData.of(panel).respond();
     }
 
+    /**
+     * onSelectByModifyButtonメソッドです。
+     *
+     * @param panel MishinsaShikyuShinseiListPanelDiv
+     * @return ResponseData
+     */
     public ResponseData<MishinsaShikyuShinseiListPanelDiv> onSelectByModifyButton(MishinsaShikyuShinseiListPanelDiv panel) {
 
         dgMishinsaShikyuShinsei_Row selectedRow = panel.getDgMishinsaShikyuShinsei().getClickedItem();
@@ -99,7 +101,7 @@ public class MishinsaShikyuShinseiListPanel {
      * 住宅改修費支給申請審査 申請内容の画面で、3段階リセットをチェックしたから、戻るとき、相違有り：3段階リセットの行で、３段階チェックを設定する。
      *
      * @param panel MishinsaShikyuShinseiListPanelDiv
-     * @return
+     * @return ResponseData
      */
     public ResponseData<MishinsaShikyuShinseiListPanelDiv> onClick_btnModifyShinseiContents(
             MishinsaShikyuShinseiListPanelDiv panel) {
@@ -201,45 +203,45 @@ public class MishinsaShikyuShinseiListPanel {
     /*
      *引数を元にデータグリッド内に挿入する個人データを作成します。
      */
-    private dgMishinsaShikyuShinsei_Row createRowishinsaShikyuShinseiListData(
-            RString 支給申請日,
-            RString 提供年月,
-            RString 被保番号,
-            RString 氏名,
-            RString 保険給付額,
-            RString 利用者負担額,
-            RString 費用額合計,
-            RString 転居,
-            RString 段階3,
-            RString 整理番号) {
-
-        dgMishinsaShikyuShinsei_Row rowMishinsaShinseiListData;
-        rowMishinsaShinseiListData = new dgMishinsaShikyuShinsei_Row(
-                new TextBoxDate(),
-                new TextBoxDate(),
-                RString.EMPTY,
-                RString.EMPTY,
-                new TextBoxNum(),
-                new TextBoxNum(),
-                new TextBoxNum(), false, false,
-                RString.EMPTY,
-                new TextBoxCode()
-        );
-
-        rowMishinsaShinseiListData.getTxtShikyuShinseiDate().setValue(new RDate(支給申請日.toString()));
-        rowMishinsaShinseiListData.getTxtTeikyoYM().setValue(new RDate(提供年月.toString()));
-        rowMishinsaShinseiListData.setTxtHihoNo(new RString(被保番号.toString()));
-        rowMishinsaShinseiListData.setTxtHihokenshaName(new RString(氏名.toString()));
-        rowMishinsaShinseiListData.getTxtHokenKyufuAmount().setValue(new Decimal(保険給付額.toString()));
-        rowMishinsaShinseiListData.getTxtRiyoshaFutanAmount().setValue(new Decimal(利用者負担額.toString()));
-        rowMishinsaShinseiListData.getTxtHiyoTotalAmount().setValue(new Decimal(費用額合計.toString()));
-        rowMishinsaShinseiListData.setTxtTenkyoReset(Boolean.valueOf(転居.toString()));
-        rowMishinsaShinseiListData.setTxt3DankaiReset(Boolean.valueOf(段階3.toString()));
-        rowMishinsaShinseiListData.getTxtSeiriNo().setValue(new RString(整理番号.toString()));
-
-        return rowMishinsaShinseiListData;
-
-    }
+//    private dgMishinsaShikyuShinsei_Row createRowishinsaShikyuShinseiListData(
+//            RString 支給申請日,
+//            RString 提供年月,
+//            RString 被保番号,
+//            RString 氏名,
+//            RString 保険給付額,
+//            RString 利用者負担額,
+//            RString 費用額合計,
+//            RString 転居,
+//            RString 段階3,
+//            RString 整理番号) {
+//
+//        dgMishinsaShikyuShinsei_Row rowMishinsaShinseiListData;
+//        rowMishinsaShinseiListData = new dgMishinsaShikyuShinsei_Row(
+//                new TextBoxDate(),
+//                new TextBoxDate(),
+//                RString.EMPTY,
+//                RString.EMPTY,
+//                new TextBoxNum(),
+//                new TextBoxNum(),
+//                new TextBoxNum(), false, false,
+//                RString.EMPTY,
+//                new TextBoxCode()
+//        );
+//
+//        rowMishinsaShinseiListData.getTxtShikyuShinseiDate().setValue(new RDate(支給申請日.toString()));
+//        rowMishinsaShinseiListData.getTxtTeikyoYM().setValue(new RDate(提供年月.toString()));
+//        rowMishinsaShinseiListData.setTxtHihoNo(new RString(被保番号.toString()));
+//        rowMishinsaShinseiListData.setTxtHihokenshaName(new RString(氏名.toString()));
+//        rowMishinsaShinseiListData.getTxtHokenKyufuAmount().setValue(new Decimal(保険給付額.toString()));
+//        rowMishinsaShinseiListData.getTxtRiyoshaFutanAmount().setValue(new Decimal(利用者負担額.toString()));
+//        rowMishinsaShinseiListData.getTxtHiyoTotalAmount().setValue(new Decimal(費用額合計.toString()));
+//        rowMishinsaShinseiListData.setTxtTenkyoReset(Boolean.valueOf(転居.toString()));
+//        rowMishinsaShinseiListData.setTxt3DankaiReset(Boolean.valueOf(段階3.toString()));
+//        rowMishinsaShinseiListData.getTxtSeiriNo().setValue(new RString(整理番号.toString()));
+//
+//        return rowMishinsaShinseiListData;
+//
+//    }
 
     /*
      * エラーMESSAGE

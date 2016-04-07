@@ -7,15 +7,17 @@ package jp.co.ndensan.reams.db.dbb.divcontroller.entity.parentdiv.DBB9020002;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import jp.co.ndensan.reams.uz.uza.ui.binding.*;
+import jp.co.ndensan.reams.uz.uza.ui.binding.DropDownList;
+import jp.co.ndensan.reams.uz.uza.ui.binding.Space;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TabPanel;
 
 /**
- * tplTokubetsuChoshuHosoku のクラスファイル 
- * 
- * @author 自動生成
+ * tplTokubetsuChoshuHosoku のクラスファイル
+ *
+ * @reamsid_L DBB-1770-040 cuilin
  */
 public class tplTokubetsuChoshuHosokuDiv extends TabPanel {
+
     // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-01-15_09-59-03">
     /*
      * [ private の作成 ]
@@ -79,7 +81,7 @@ public class tplTokubetsuChoshuHosokuDiv extends TabPanel {
     }
 
     @JsonIgnore
-    public void  setTokuchoKaishiTsuki(TokuchoKaishiTsukiDiv TokuchoKaishiTsuki) {
+    public void setTokuchoKaishiTsuki(TokuchoKaishiTsukiDiv TokuchoKaishiTsuki) {
         this.getKaishiTsukiKijunNendo().setTokuchoKaishiTsuki(TokuchoKaishiTsuki);
     }
 
@@ -89,7 +91,7 @@ public class tplTokubetsuChoshuHosokuDiv extends TabPanel {
     }
 
     @JsonIgnore
-    public void  setDdl4GatsuHosoku(DropDownList ddl4GatsuHosoku) {
+    public void setDdl4GatsuHosoku(DropDownList ddl4GatsuHosoku) {
         this.getKaishiTsukiKijunNendo().getTokuchoKaishiTsuki().setDdl4GatsuHosoku(ddl4GatsuHosoku);
     }
 
@@ -99,7 +101,7 @@ public class tplTokubetsuChoshuHosokuDiv extends TabPanel {
     }
 
     @JsonIgnore
-    public void  setDdl6GatsuHosoku(DropDownList ddl6GatsuHosoku) {
+    public void setDdl6GatsuHosoku(DropDownList ddl6GatsuHosoku) {
         this.getKaishiTsukiKijunNendo().getTokuchoKaishiTsuki().setDdl6GatsuHosoku(ddl6GatsuHosoku);
     }
 
@@ -109,7 +111,7 @@ public class tplTokubetsuChoshuHosokuDiv extends TabPanel {
     }
 
     @JsonIgnore
-    public void  setDdl8GatsuHosoku(DropDownList ddl8GatsuHosoku) {
+    public void setDdl8GatsuHosoku(DropDownList ddl8GatsuHosoku) {
         this.getKaishiTsukiKijunNendo().getTokuchoKaishiTsuki().setDdl8GatsuHosoku(ddl8GatsuHosoku);
     }
 
@@ -119,7 +121,7 @@ public class tplTokubetsuChoshuHosokuDiv extends TabPanel {
     }
 
     @JsonIgnore
-    public void  setDdl10GatsuHosoku(DropDownList ddl10GatsuHosoku) {
+    public void setDdl10GatsuHosoku(DropDownList ddl10GatsuHosoku) {
         this.getKaishiTsukiKijunNendo().getTokuchoKaishiTsuki().setDdl10GatsuHosoku(ddl10GatsuHosoku);
     }
 
@@ -129,7 +131,7 @@ public class tplTokubetsuChoshuHosokuDiv extends TabPanel {
     }
 
     @JsonIgnore
-    public void  setDdl12GatsuHosoku(DropDownList ddl12GatsuHosoku) {
+    public void setDdl12GatsuHosoku(DropDownList ddl12GatsuHosoku) {
         this.getKaishiTsukiKijunNendo().getTokuchoKaishiTsuki().setDdl12GatsuHosoku(ddl12GatsuHosoku);
     }
 
@@ -139,7 +141,7 @@ public class tplTokubetsuChoshuHosokuDiv extends TabPanel {
     }
 
     @JsonIgnore
-    public void  setDdl2GatsuHosoku(DropDownList ddl2GatsuHosoku) {
+    public void setDdl2GatsuHosoku(DropDownList ddl2GatsuHosoku) {
         this.getKaishiTsukiKijunNendo().getTokuchoKaishiTsuki().setDdl2GatsuHosoku(ddl2GatsuHosoku);
     }
 
@@ -149,7 +151,7 @@ public class tplTokubetsuChoshuHosokuDiv extends TabPanel {
     }
 
     @JsonIgnore
-    public void  setNengakuKijunNendo(NengakuKijunNendoDiv NengakuKijunNendo) {
+    public void setNengakuKijunNendo(NengakuKijunNendoDiv NengakuKijunNendo) {
         this.getKaishiTsukiKijunNendo().setNengakuKijunNendo(NengakuKijunNendo);
     }
 
@@ -159,7 +161,7 @@ public class tplTokubetsuChoshuHosokuDiv extends TabPanel {
     }
 
     @JsonIgnore
-    public void  setDdl4GatsuKaishiNengakuKijunNendo(DropDownList ddl4GatsuKaishiNengakuKijunNendo) {
+    public void setDdl4GatsuKaishiNengakuKijunNendo(DropDownList ddl4GatsuKaishiNengakuKijunNendo) {
         this.getKaishiTsukiKijunNendo().getNengakuKijunNendo().setDdl4GatsuKaishiNengakuKijunNendo(ddl4GatsuKaishiNengakuKijunNendo);
     }
 
@@ -169,7 +171,7 @@ public class tplTokubetsuChoshuHosokuDiv extends TabPanel {
     }
 
     @JsonIgnore
-    public void  setDdl6GatsuKaishiNengakuKijunNendo(DropDownList ddl6GatsuKaishiNengakuKijunNendo) {
+    public void setDdl6GatsuKaishiNengakuKijunNendo(DropDownList ddl6GatsuKaishiNengakuKijunNendo) {
         this.getKaishiTsukiKijunNendo().getNengakuKijunNendo().setDdl6GatsuKaishiNengakuKijunNendo(ddl6GatsuKaishiNengakuKijunNendo);
     }
 
@@ -179,7 +181,7 @@ public class tplTokubetsuChoshuHosokuDiv extends TabPanel {
     }
 
     @JsonIgnore
-    public void  setDdl8GatsuKaishiNengakuKijunNendo(DropDownList ddl8GatsuKaishiNengakuKijunNendo) {
+    public void setDdl8GatsuKaishiNengakuKijunNendo(DropDownList ddl8GatsuKaishiNengakuKijunNendo) {
         this.getKaishiTsukiKijunNendo().getNengakuKijunNendo().setDdl8GatsuKaishiNengakuKijunNendo(ddl8GatsuKaishiNengakuKijunNendo);
     }
 
@@ -189,7 +191,7 @@ public class tplTokubetsuChoshuHosokuDiv extends TabPanel {
     }
 
     @JsonIgnore
-    public void  setIraiKingakuKeisanHoho(IraiKingakuKeisanHohoDiv IraiKingakuKeisanHoho) {
+    public void setIraiKingakuKeisanHoho(IraiKingakuKeisanHohoDiv IraiKingakuKeisanHoho) {
         this.getKeisanHoho().setIraiKingakuKeisanHoho(IraiKingakuKeisanHoho);
     }
 
@@ -199,7 +201,7 @@ public class tplTokubetsuChoshuHosokuDiv extends TabPanel {
     }
 
     @JsonIgnore
-    public void  setDdl12GatsuKaishiIraiKingakuKeisanHoho(DropDownList ddl12GatsuKaishiIraiKingakuKeisanHoho) {
+    public void setDdl12GatsuKaishiIraiKingakuKeisanHoho(DropDownList ddl12GatsuKaishiIraiKingakuKeisanHoho) {
         this.getKeisanHoho().getIraiKingakuKeisanHoho().setDdl12GatsuKaishiIraiKingakuKeisanHoho(ddl12GatsuKaishiIraiKingakuKeisanHoho);
     }
 
@@ -209,7 +211,7 @@ public class tplTokubetsuChoshuHosokuDiv extends TabPanel {
     }
 
     @JsonIgnore
-    public void  setDdl2GatsuKaishiIraiKingakuKeisanHoho(DropDownList ddl2GatsuKaishiIraiKingakuKeisanHoho) {
+    public void setDdl2GatsuKaishiIraiKingakuKeisanHoho(DropDownList ddl2GatsuKaishiIraiKingakuKeisanHoho) {
         this.getKeisanHoho().getIraiKingakuKeisanHoho().setDdl2GatsuKaishiIraiKingakuKeisanHoho(ddl2GatsuKaishiIraiKingakuKeisanHoho);
     }
 
@@ -219,7 +221,7 @@ public class tplTokubetsuChoshuHosokuDiv extends TabPanel {
     }
 
     @JsonIgnore
-    public void  setDdl4GatsuKaishiIraiKingakuKeisanHoho(DropDownList ddl4GatsuKaishiIraiKingakuKeisanHoho) {
+    public void setDdl4GatsuKaishiIraiKingakuKeisanHoho(DropDownList ddl4GatsuKaishiIraiKingakuKeisanHoho) {
         this.getKeisanHoho().getIraiKingakuKeisanHoho().setDdl4GatsuKaishiIraiKingakuKeisanHoho(ddl4GatsuKaishiIraiKingakuKeisanHoho);
     }
 
@@ -229,7 +231,7 @@ public class tplTokubetsuChoshuHosokuDiv extends TabPanel {
     }
 
     @JsonIgnore
-    public void  setDdl6GatsuKaishiIraiKingakuKeisanHoho(DropDownList ddl6GatsuKaishiIraiKingakuKeisanHoho) {
+    public void setDdl6GatsuKaishiIraiKingakuKeisanHoho(DropDownList ddl6GatsuKaishiIraiKingakuKeisanHoho) {
         this.getKeisanHoho().getIraiKingakuKeisanHoho().setDdl6GatsuKaishiIraiKingakuKeisanHoho(ddl6GatsuKaishiIraiKingakuKeisanHoho);
     }
 
@@ -239,7 +241,7 @@ public class tplTokubetsuChoshuHosokuDiv extends TabPanel {
     }
 
     @JsonIgnore
-    public void  setDdl8GatsuKaishiIraiKingakuKeisanHoho(DropDownList ddl8GatsuKaishiIraiKingakuKeisanHoho) {
+    public void setDdl8GatsuKaishiIraiKingakuKeisanHoho(DropDownList ddl8GatsuKaishiIraiKingakuKeisanHoho) {
         this.getKeisanHoho().getIraiKingakuKeisanHoho().setDdl8GatsuKaishiIraiKingakuKeisanHoho(ddl8GatsuKaishiIraiKingakuKeisanHoho);
     }
 
@@ -249,7 +251,7 @@ public class tplTokubetsuChoshuHosokuDiv extends TabPanel {
     }
 
     @JsonIgnore
-    public void  setSpaceTokucho(Space spaceTokucho) {
+    public void setSpaceTokucho(Space spaceTokucho) {
         this.getKeisanHoho().setSpaceTokucho(spaceTokucho);
     }
 
@@ -259,7 +261,7 @@ public class tplTokubetsuChoshuHosokuDiv extends TabPanel {
     }
 
     @JsonIgnore
-    public void  setTokubetsuChoshuShinkishaZenhan(TokubetsuChoshuShinkishaZenhanDiv TokubetsuChoshuShinkishaZenhan) {
+    public void setTokubetsuChoshuShinkishaZenhan(TokubetsuChoshuShinkishaZenhanDiv TokubetsuChoshuShinkishaZenhan) {
         this.getKeisanHoho().setTokubetsuChoshuShinkishaZenhan(TokubetsuChoshuShinkishaZenhan);
     }
 
@@ -269,7 +271,7 @@ public class tplTokubetsuChoshuHosokuDiv extends TabPanel {
     }
 
     @JsonIgnore
-    public void  setDdl6GatsuKaishiZenhan(DropDownList ddl6GatsuKaishiZenhan) {
+    public void setDdl6GatsuKaishiZenhan(DropDownList ddl6GatsuKaishiZenhan) {
         this.getKeisanHoho().getTokubetsuChoshuShinkishaZenhan().setDdl6GatsuKaishiZenhan(ddl6GatsuKaishiZenhan);
     }
 
@@ -279,7 +281,7 @@ public class tplTokubetsuChoshuHosokuDiv extends TabPanel {
     }
 
     @JsonIgnore
-    public void  setDdl8GatsuKaishiZenhan(DropDownList ddl8GatsuKaishiZenhan) {
+    public void setDdl8GatsuKaishiZenhan(DropDownList ddl8GatsuKaishiZenhan) {
         this.getKeisanHoho().getTokubetsuChoshuShinkishaZenhan().setDdl8GatsuKaishiZenhan(ddl8GatsuKaishiZenhan);
     }
 
@@ -289,7 +291,7 @@ public class tplTokubetsuChoshuHosokuDiv extends TabPanel {
     }
 
     @JsonIgnore
-    public void  setDdl10GatsuKaishiZenhan(DropDownList ddl10GatsuKaishiZenhan) {
+    public void setDdl10GatsuKaishiZenhan(DropDownList ddl10GatsuKaishiZenhan) {
         this.getKeisanHoho().getTokubetsuChoshuShinkishaZenhan().setDdl10GatsuKaishiZenhan(ddl10GatsuKaishiZenhan);
     }
 

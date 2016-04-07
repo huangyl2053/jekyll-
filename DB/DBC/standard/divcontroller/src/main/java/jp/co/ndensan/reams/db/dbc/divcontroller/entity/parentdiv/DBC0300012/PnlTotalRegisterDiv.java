@@ -17,7 +17,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.domain.*;
 /**
  * PnlTotalRegister のクラスファイル
  *
- * @author 自動生成
+ * @reamsid_L DBC-2120-020 panhe
  */
 public class PnlTotalRegisterDiv extends Panel {
 

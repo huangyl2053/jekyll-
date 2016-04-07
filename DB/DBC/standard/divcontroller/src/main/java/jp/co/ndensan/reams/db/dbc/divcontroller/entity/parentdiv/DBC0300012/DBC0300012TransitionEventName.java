@@ -9,7 +9,7 @@ import jp.co.ndensan.reams.uz.uza.core.ui.response.IContainerEvents;
  * 不正な動作の原因になります。</br>
  * DBC0300012のイベント名定義クラスです</br>
  *
- * @author 自動生成
+ * @reamsid_L DBC-2120-020 panhe
  */
 public enum DBC0300012TransitionEventName implements IContainerEvents {
 // <editor-fold defaultstate="collapsed" desc="Created By UI Designer ver 1.0.0">

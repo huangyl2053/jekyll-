@@ -49,7 +49,7 @@ import jp.co.ndensan.reams.uz.uza.util.editor.DecimalFormatter;
 /**
  * 介護保険料徴収猶予決定通知書帳票PrintService
  */
-public class KaigoHokenryoChoshuyuyoKetteiTsuchishoB5YokoPrintService {
+public class KaigoHokenryoChoshuyuyoKetteiTsuchishoPrintService {
 
     private static final int ONE = 1;
     private static final int ZERO = 0;
@@ -198,9 +198,9 @@ public class KaigoHokenryoChoshuyuyoKetteiTsuchishoB5YokoPrintService {
         }
 
         EditedAtesaki 編集後宛先 = new EditedAtesaki(徴収猶予決定通知書情報.get宛先(),
-                徴収猶予決定通知書情報.get帳票制御共通(), null, null);
+                null, 徴収猶予決定通知書情報.get帳票制御共通(), null,
+                null, true, null, null, null, null);
         item = editCompSofubutsuAtesakiItem(item, 編集後宛先);
-
         INinshoshaManager iNinshoshaManager = NinshoshaFinderFactory.createInstance();
         Ninshosha ninshosha = iNinshoshaManager.get帳票認証者(GyomuCode.DB介護保険, 種別コード);
 
@@ -426,8 +426,7 @@ public class KaigoHokenryoChoshuyuyoKetteiTsuchishoB5YokoPrintService {
 
     private KaigoHokenryoChoshuyuyoKetteiTsuchishoItem editCompSofubutsuAtesakiItem(
             KaigoHokenryoChoshuyuyoKetteiTsuchishoItem item, EditedAtesaki 編集後宛先) {
-
-        SofubutsuAtesakiSource source = 編集後宛先.getSofubutsuAtesakiSource();
+        SofubutsuAtesakiSource source = 編集後宛先.getSofubutsuAtesakiSource().get送付物宛先ソース();
         item.setYubinNo(source.yubinNo);
         item.setGyoseiku(source.gyoseiku);
         item.setJusho3(source.jusho3);

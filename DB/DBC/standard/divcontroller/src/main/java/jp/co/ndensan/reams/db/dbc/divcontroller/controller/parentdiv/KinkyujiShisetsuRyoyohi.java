@@ -22,6 +22,12 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.Button;
  */
 public class KinkyujiShisetsuRyoyohi {
 
+    /**
+     * 画面の初期化メソッドです。
+     *
+     * @param panel KinkyujiShisetsuRyoyohiDiv
+     * @return ResponseData
+     */
     public ResponseData<KinkyujiShisetsuRyoyohiDiv> onLoad(KinkyujiShisetsuRyoyohiDiv panel) {
         ResponseData<KinkyujiShisetsuRyoyohiDiv> response = new ResponseData<>();
 

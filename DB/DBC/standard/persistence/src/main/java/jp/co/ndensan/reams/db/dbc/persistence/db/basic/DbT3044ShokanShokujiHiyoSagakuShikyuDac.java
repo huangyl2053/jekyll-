@@ -46,7 +46,7 @@ public class DbT3044ShokanShokujiHiyoSagakuShikyuDac implements ISaveable<DbT304
      * @param 事業者番号 JigyoshaNo
      * @param 様式番号 YoshikiNo
      * @param 明細番号 MeisaiNo
-     * @param 連番　Renban
+     * @param 連番 Renban
      * @return DbT3044ShokanShokujiHiyoSagakuShikyuEntity
      * @throws NullPointerException 引数のいずれかがnullの場合
      */

@@ -20,6 +20,7 @@ import jp.co.ndensan.reams.uz.uza.lang.Separator;
 /**
  * 広域内転居結果一覧表帳票データ作成
  *
+ * @reamsid_L DBU-1150-050 quxiaodong
  *
  */
 public class KoikinaiTenkyoResultListChohyoDataSakusei {

@@ -17,6 +17,8 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
 
 /**
  * 調定簿作成Divのコントローラです。
+ *
+ * @reamsid_L DBB-0770-010 cuilin
  */
 public class ChoteiboSakusei {
 

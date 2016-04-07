@@ -13,7 +13,8 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 /**
  * HihokenshaNoDataParameter
  */
-public class HihokenshaNoDataParameter {
+@SuppressWarnings("PMD.UnusedPrivateField")
+public final class HihokenshaNoDataParameter {
 
     private final HihokenshaNo 被保険者番号;
     private final ShikibetsuCode 識別コード;

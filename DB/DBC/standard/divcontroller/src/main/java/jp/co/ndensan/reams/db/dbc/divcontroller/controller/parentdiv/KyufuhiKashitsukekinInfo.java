@@ -51,6 +51,8 @@ public class KyufuhiKashitsukekinInfo {
     private static final int INDEX_13 = 13;
     private static final int INDEX_14 = 14;
     private static final int INDEX_15 = 15;
+    private static final RString 郵便番号 = new RString("郵便番号");
+    private static final RString 電話番号 = new RString("電話番号");
 
     private List<HashMap> getYaml() {
         return YamlLoader.DBC.loadAsList(new RString("KyufuhiKashitsukekinInfo/KyufuhiKashitsukekinInfo.yml"));
@@ -128,9 +130,9 @@ public class KyufuhiKashitsukekinInfo {
         div.getTxtHoshoninSeiYMD().setValue(cg.getAsRDate("生年月日"));
         div.getTxtHoshoninSeibetsu().setValue(cg.getAsRString("性別"));
         div.getTxtHoshoninKankei().setValue(cg.getAsRString("申請者との関係"));
-        div.getTxtHoshoninYubinNo().setValue(cg.getAsYubinNo("郵便番号"));
+        div.getTxtHoshoninYubinNo().setValue(cg.getAsYubinNo(郵便番号.toString()));
         div.getTxtHoshoninJusho().setValue(cg.getAsRString("住所"));
-        div.getTxtHoshoninTelNo().setValue(cg.getAsRString("電話番号"));
+        div.getTxtHoshoninTelNo().setValue(cg.getAsRString(電話番号.toString()));
     }
 
     private void setShinseiKinmuData(tplKashitsukekinShinseiDiv tpl) {
@@ -139,7 +141,7 @@ public class KyufuhiKashitsukekinInfo {
         KashitsukeShinseiHoshoninKinmuDiv div = tpl.getKashitsukeShinseiHoshonin().getKashitsukeShinseiHoshoninKinmu();
         div.getTxtHoshoninKinmuName().setValue(cg.getAsRString("名称"));
         div.getTxtHoshoninKinmuJusho().setValue(cg.getAsRString("所在地"));
-        div.getTxtHoshoninKinmuTelNo().setValue(cg.getAsRString("電話番号"));
+        div.getTxtHoshoninKinmuTelNo().setValue(cg.getAsRString(電話番号.toString()));
     }
 
     private void setShinseiTeishutsuData(tplKashitsukekinShinseiDiv tpl) {
@@ -245,9 +247,9 @@ public class KyufuhiKashitsukekinInfo {
         KashitsukekinKariukeninDiv div = tpl.getKashitsukekinKariukenin();
         div.getTxtKariukeninName().setValue(cg.getAsRString("氏名"));
         div.getTxtKariukeninKana().setValue(cg.getAsRString("カナ"));
-        div.getTxtKariukeninYubinNo().setValue(cg.getAsYubinNo("郵便番号"));
+        div.getTxtKariukeninYubinNo().setValue(cg.getAsYubinNo(郵便番号.toString()));
         div.getTxtKariukeninJusho().setValue(cg.getAsRString("住所"));
-        div.getTxtKariukeninTelNo().setValue(cg.getAsRString("電話番号"));
+        div.getTxtKariukeninTelNo().setValue(cg.getAsRString(電話番号.toString()));
     }
 
     private void setKariukeHoshoData(tplKashitsukekinKariukeDiv tpl) {
@@ -256,9 +258,9 @@ public class KyufuhiKashitsukekinInfo {
         KashitsukekinKariukeHoshoDiv div = tpl.getKashitsukekinKariukeHosho();
         div.getTxtKariukeHoshoName().setValue(cg.getAsRString("氏名"));
         div.getTxtKariukeHoshoKana().setValue(cg.getAsRString("カナ"));
-        div.getTxtKariukeHoshoYubinNo().setValue(cg.getAsYubinNo("郵便番号"));
+        div.getTxtKariukeHoshoYubinNo().setValue(cg.getAsYubinNo(郵便番号.toString()));
         div.getTxtKariukeHoshoJusho().setValue(cg.getAsRString("住所"));
-        div.getTxtKariukeHoshoTelNo().setValue(cg.getAsRString("電話番号"));
+        div.getTxtKariukeHoshoTelNo().setValue(cg.getAsRString(電話番号.toString()));
     }
 
     private void setHenkoData(KyufuhiKashitsukekinInfoDiv panel) {
@@ -282,9 +284,9 @@ public class KyufuhiKashitsukekinInfo {
         KashitsukekinHenkoKariukeDiv div = tpl.getKashitsukekinHenkoKariuke();
         div.getTxtHenkoKariukeninName().setValue(cg.getAsRString("氏名"));
         div.getTxtHenkoKariukeninKana().setValue(cg.getAsRString("カナ"));
-        div.getTxtHenkoKariukeninYubinNo().setValue(cg.getAsYubinNo("郵便番号"));
+        div.getTxtHenkoKariukeninYubinNo().setValue(cg.getAsYubinNo(郵便番号.toString()));
         div.getTxtHenkoKariukeninJusho().setValue(cg.getAsRString("住所"));
-        div.getTxtHenkoKariukeninTelNo().setValue(cg.getAsRString("電話番号"));
+        div.getTxtHenkoKariukeninTelNo().setValue(cg.getAsRString(電話番号.toString()));
     }
 
     private void setHenkoKetteiData(tplKashitsukekinHenkoDiv tpl) {

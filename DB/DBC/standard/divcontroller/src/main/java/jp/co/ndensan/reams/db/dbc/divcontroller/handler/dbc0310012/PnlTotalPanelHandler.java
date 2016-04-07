@@ -16,6 +16,7 @@ import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0310012.PnlT
 import jp.co.ndensan.reams.db.dbc.divcontroller.viewbox.ViewStateKeys;
 import jp.co.ndensan.reams.db.dbc.service.core.shokanjuryoininkeiyakusha.ShokanJuryoininKeiyakushaFinder;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
+import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.kaigoshikakukihon.KaigoShikakuKihon.KaigoShikakuKihonDiv;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -29,6 +30,8 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 
 /**
  * 受領委任契約（福祉用具購入費・住宅改修費）登録・追加・修正・照会_登録画面のHandlerクラス
+ *
+ * @reamsid_L DBC-2130-020 cuilin
  */
 public class PnlTotalPanelHandler {
 
@@ -38,6 +41,9 @@ public class PnlTotalPanelHandler {
     private static final RString 削除 = new RString("削除");
     private static final RString 登録 = new RString("登録");
     private static final RString 保存する = new RString("btnUpdate");
+    private static final RString 承認通知書再発行区分キー_0 = new RString("0");
+    private static final RString 承認通知書再発行区分キー_1 = new RString("1");
+    private static final RString 承認通知書再発行区分 = new RString("承認通知書再発行区分");
     private static final RYear 過年度 = new RYear(2000);
     private static final int 四 = 4;
     private static final int 五 = 5;
@@ -224,7 +230,7 @@ public class PnlTotalPanelHandler {
         div.getPnlCommon().getPnlDetail().getPnlHidari().getDdlYear().setDataSource(yearList);
 
         List<KeyValueDataSource> checkBoxList = new ArrayList<>();
-        checkBoxList.add(new KeyValueDataSource(new RString("1"), new RString("承認通知書再発行区分")));
+        checkBoxList.add(new KeyValueDataSource(承認通知書再発行区分キー_1, 承認通知書再発行区分));
         div.getPnlCommon().getPnlDetail().getPnlHidari().getChkSaihakoukubun().setDataSource(checkBoxList);
     }
 
@@ -237,11 +243,9 @@ public class PnlTotalPanelHandler {
         ShokanJuryoininKeiyakushaFinder finder = ShokanJuryoininKeiyakushaFinder.createInstance();
         ShokanJuryoininKeiyakusha shokan;
         if (登録.equals(状態)) {
-//            KaigoShikakuKihonDiv kaigoDiv = (KaigoShikakuKihonDiv) div.getPnlCommon().getCcdKaigoShikakuKihon();
+            KaigoShikakuKihonDiv kaigoDiv = (KaigoShikakuKihonDiv) div.getPnlCommon().getCcdKaigoShikakuKihon();
             shokan = new ShokanJuryoininKeiyakusha(
-                    // TODO QA No.431(Redmine#:79680)
-                    // new HihokenshaNo(kaigoDiv.getTxtHihokenshaNo().getValue()),
-                    new HihokenshaNo("000000003"),
+                    new HihokenshaNo(kaigoDiv.getTxtHihokenshaNo().getValue()),
                     new FlexibleDate(div.getPnlCommon().getPnlDetail().getTxtKeyakushinseibi().getValue().toDateString()),
                     div.getPnlCommon().getPnlDetail().getTxtKeyakujigyosyaNo().getValue(),
                     div.getPnlCommon().getPnlDetail().getDdlKeiyakuServiceType().getSelectedKey());
@@ -306,11 +310,7 @@ public class PnlTotalPanelHandler {
                 rsb.append(div.getPnlCommon().getPnlDetail().getPnlHidari().getTxtBango2().getValue());
                 builder.set契約番号(rsb.toRString());
                 builder.set不承認理由(null);
-                if (div.getPnlCommon().getPnlDetail().getPnlHidari().getChkSaihakoukubun().isAllSelected()) {
-                    builder.set承認結果通知書再発行区分(new RString("1"));
-                } else {
-                    builder.set承認結果通知書再発行区分(new RString("0"));
-                }
+                builder.set承認結果通知書再発行区分(get承認結果通知書再発行区分());
                 builder.set費用額合計(div.getPnlCommon().getPnlDetail().getPnlKyufuhi()
                         .getTxtHiyogakugokei().getValue());
                 builder.set保険対象費用額(div.getPnlCommon().getPnlDetail().getPnlKyufuhi()
@@ -327,5 +327,13 @@ public class PnlTotalPanelHandler {
             builder.set備考(div.getPnlCommon().getPnlDetail().getPnlFoot().getTxtBikou().getValue());
         }
         return builder.build();
+    }
+
+    private RString get承認結果通知書再発行区分() {
+        if (div.getPnlCommon().getPnlDetail().getPnlHidari().getChkSaihakoukubun().isAllSelected()) {
+            return 承認通知書再発行区分キー_1;
+        } else {
+            return 承認通知書再発行区分キー_0;
+        }
     }
 }
