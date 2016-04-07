@@ -12,8 +12,9 @@ import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
- *
  * 調査時間一括設定のダイアログパラメータクラスです。
+ *
+ * @reamsid_L DBE-3000-210 zhengshukai
  */
 public class NinteiChosaIkkatsuInputModel implements Serializable {
 

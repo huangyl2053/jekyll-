@@ -27,8 +27,10 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
 import jp.co.ndensan.reams.uz.uza.util.serialization.DataPassingConverter;
 
 /**
- *
  * 共有子Div 「NinteiChosaIkkatsuInput」のイベントを定義したDivControllerです。
+ *
+ * @reamsid_L DBE-3000-210 zhengshukai
+ *
  */
 public class NinteiChosaIkkatsuInput {
 
