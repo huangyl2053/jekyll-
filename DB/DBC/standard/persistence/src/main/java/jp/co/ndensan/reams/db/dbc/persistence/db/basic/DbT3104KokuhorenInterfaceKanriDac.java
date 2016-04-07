@@ -25,6 +25,8 @@ import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
 
 /**
  * 国保連インターフェース管理のデータアクセスクラスです。
+ *
+ * @reamsid_L DBC-0980-520 quxiaodong
  */
 public class DbT3104KokuhorenInterfaceKanriDac implements ISaveable<DbT3104KokuhorenInterfaceKanriEntity> {
 
