@@ -9,8 +9,9 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 import lombok.Getter;
 
 /**
- *
  * 介護保険居宅介護（予防）福祉用具購入費支給（受領委任払）申請書のITEMです。
+ *
+ * @reamsid_L DBA-0540-710 lishengli
  */
 @Getter
 @SuppressWarnings("PMD.UnusedPrivateField")
