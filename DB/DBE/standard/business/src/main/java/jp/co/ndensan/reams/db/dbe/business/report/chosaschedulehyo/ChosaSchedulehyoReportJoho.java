@@ -9,6 +9,8 @@ import java.util.List;
 
 /**
  * 認定調査スケジュール表(事務所)作成_帳票クラスパラメータクラスです。
+ *
+ * @reamsid_L DBE-0020-090 linghuhang
  */
 @lombok.Getter
 @SuppressWarnings("PMD.UnusedPrivateField")

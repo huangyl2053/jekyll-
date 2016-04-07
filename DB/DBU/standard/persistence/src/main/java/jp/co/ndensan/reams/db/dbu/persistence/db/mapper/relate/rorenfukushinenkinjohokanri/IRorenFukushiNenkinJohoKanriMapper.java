@@ -9,7 +9,7 @@ import jp.co.ndensan.reams.db.dbu.definition.core.rorenfukushinenkinjohokanri.Ro
 
 /**
  * 老齢福祉年金受給者台帳管理のマッパーインタフェースです。
- *
+ * @reamsid_L DBA-1120-010 zhangyajing
  */
 public interface IRorenFukushiNenkinJohoKanriMapper {
 

@@ -7,15 +7,22 @@ package jp.co.ndensan.reams.db.dbu.divcontroller.entity.parentdiv.DBU0230011;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import jp.co.ndensan.reams.uz.uza.ui.binding.*;
+import jp.co.ndensan.reams.uz.uza.ui.binding.Button;
+import jp.co.ndensan.reams.uz.uza.ui.binding.CheckBoxList;
+import jp.co.ndensan.reams.uz.uza.ui.binding.DataGrid;
+import jp.co.ndensan.reams.uz.uza.ui.binding.Label;
 import jp.co.ndensan.reams.uz.uza.ui.binding.PanelBatchParameter;
+import jp.co.ndensan.reams.uz.uza.ui.binding.TextBox;
+import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxDate;
+import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxTime;
 
 /**
- * KobetsuJikoRenkeiInfoSakuseiKoikiBP のクラスファイル 
- * 
- * @author 自動生成
+ * KobetsuJikoRenkeiInfoSakuseiKoikiBP のクラスファイル
+ *
+ * @reamsid_L DBU-0550-010 zhangzhiming
  */
 public class KobetsuJikoRenkeiInfoSakuseiKoikiBPDiv extends PanelBatchParameter {
+
     // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：バージョン情報無し">
     /*
      * [ private の作成 ]
@@ -79,7 +86,7 @@ public class KobetsuJikoRenkeiInfoSakuseiKoikiBPDiv extends PanelBatchParameter 
     }
 
     @JsonIgnore
-    public void  setTxtSofuShichoShon(TextBox txtSofuShichoShon) {
+    public void setTxtSofuShichoShon(TextBox txtSofuShichoShon) {
         this.getKonkaiInfoInput().setTxtSofuShichoShon(txtSofuShichoShon);
     }
 
@@ -89,7 +96,7 @@ public class KobetsuJikoRenkeiInfoSakuseiKoikiBPDiv extends PanelBatchParameter 
     }
 
     @JsonIgnore
-    public void  setTblkonkaiInfoInput(tblkonkaiInfoInputDiv tblkonkaiInfoInput) {
+    public void setTblkonkaiInfoInput(tblkonkaiInfoInputDiv tblkonkaiInfoInput) {
         this.getKonkaiInfoInput().setTblkonkaiInfoInput(tblkonkaiInfoInput);
     }
 
@@ -124,7 +131,7 @@ public class KobetsuJikoRenkeiInfoSakuseiKoikiBPDiv extends PanelBatchParameter 
     }
 
     @JsonIgnore
-    public void  setChkZenken(CheckBoxList chkZenken) {
+    public void setChkZenken(CheckBoxList chkZenken) {
         this.getKonkaiInfoInput().getTblkonkaiInfoInput().getZenken().setChkZenken(chkZenken);
     }
 

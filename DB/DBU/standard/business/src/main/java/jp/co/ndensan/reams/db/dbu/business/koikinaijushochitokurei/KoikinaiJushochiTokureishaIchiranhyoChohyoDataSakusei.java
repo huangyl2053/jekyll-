@@ -28,6 +28,7 @@ import lombok.Setter;
 /**
  *
  * 域内住所地特例者一覧表バッチから取った入力パラメータにより、帳票用データを作成します。
+ * @reamsid_L DBU-1140-040 dongyabin
  */
 @Getter
 @Setter

@@ -15,6 +15,8 @@ import lombok.NonNull;
 
 /**
  * 認定調査依頼発行一覧表のReportです。
+ *
+ * @reamsid_L DBE-0080-110 yaodongsheng
  */
 public class ChosaIraiHakkoIchiranhyoReport extends Report<ChosaIraiHakkoIchiranhyoReportSource> {
 

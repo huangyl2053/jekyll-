@@ -11,6 +11,8 @@ import lombok.Setter;
 /**
  *
  * 介護認定審査会スケジュール表_帳票パラメータクラスです。
+ *
+ * @reamsid_L DBE-0130-070 yaodongsheng
  */
 @Getter
 @Setter

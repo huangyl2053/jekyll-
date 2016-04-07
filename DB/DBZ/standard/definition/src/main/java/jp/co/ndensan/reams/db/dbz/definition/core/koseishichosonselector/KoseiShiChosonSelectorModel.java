@@ -14,6 +14,7 @@ import lombok.Setter;
 /**
  *
  * 構成市町村選択の画面Modelクラスです。
+ * @reamsid_L DBE-3000-060 dongyabin
  */
 @Getter
 @Setter

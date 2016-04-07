@@ -21,6 +21,7 @@ import jp.co.ndensan.reams.uz.uza.report.data.chart.ReportDynamicChart;
 
 /**
  * {@link ItakusakiChosainIchiranReport}のプロパティです。
+ * @reamsid_L DBE-0290-020 dongyabin
  */
 public class ItakusakiChosainIchiranProerty extends ReportPropertyBase<ItakusakiChosainIchiranReportSource> {
 

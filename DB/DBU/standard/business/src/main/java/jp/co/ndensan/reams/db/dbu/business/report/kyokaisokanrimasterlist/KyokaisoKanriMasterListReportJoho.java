@@ -9,6 +9,8 @@ import java.util.List;
 
 /**
  * 境界層管理マスタリスト作成_帳票クラスパラメータクラスです。
+ *
+ * @reamsid_L DBU-1050-060 linghuhang
  */
 @lombok.Getter
 @SuppressWarnings("PMD.UnusedPrivateField")

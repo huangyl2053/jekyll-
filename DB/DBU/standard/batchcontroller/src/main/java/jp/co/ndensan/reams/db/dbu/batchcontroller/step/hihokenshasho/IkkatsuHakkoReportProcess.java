@@ -12,6 +12,9 @@ import jp.co.ndensan.reams.uz.uza.batch.process.SimpleBatchProcessBase;
 
 /**
  * 被保険者証一括発行_バッチフ処理クラスです。
+ *
+ * @reamsid_L DBU-0420-020 duanzhanli
+ *
  */
 public class IkkatsuHakkoReportProcess extends SimpleBatchProcessBase {
 

@@ -14,6 +14,7 @@ import lombok.Getter;
 /**
  *
  * 調査委託先・調査員一覧表のMybatisパラメータクラスです。
+ * @reamsid_L DBE-0290-030 dongyabin
  */
 @Getter
 @SuppressWarnings("PMD.UnusedPrivateField")

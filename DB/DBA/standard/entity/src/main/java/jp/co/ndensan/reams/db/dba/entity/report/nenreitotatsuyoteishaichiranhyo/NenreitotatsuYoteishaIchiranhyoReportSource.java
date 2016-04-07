@@ -7,6 +7,8 @@ import jp.co.ndensan.reams.uz.uza.report.source.ReportItem;
 /**
  *
  * 年齢到達予定者一覧表Sourceクラスです。
+ *
+ * @reamsid_L DBA-0580-070 yaodongsheng
  */
 public class NenreitotatsuYoteishaIchiranhyoReportSource implements IReportSource {
 // <editor-fold defaultstate="collapsed" desc="Generated Code">

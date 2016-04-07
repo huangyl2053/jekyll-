@@ -11,6 +11,7 @@ import lombok.Getter;
 /**
  * 介護保険診断命令書のITEMです。
  *
+ * @reamsid_L DBE-0080-070 wangxiaodong
  */
 @Getter
 @SuppressWarnings("PMD.UnusedPrivateField")

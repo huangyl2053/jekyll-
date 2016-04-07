@@ -4,18 +4,20 @@ package jp.co.ndensan.reams.db.dbu.divcontroller.entity.parentdiv.DBU0020031;
  * このファイルへの変更は、再生成時には損失するため
  * 不正な動作の原因になります。
  */
+
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import jp.co.ndensan.reams.uz.uza.ui.binding.*;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TableCell;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TablePanel;
+import jp.co.ndensan.reams.uz.uza.ui.binding.TextBox;
 
 /**
- * tplDaiyon のクラスファイル 
- * 
- * @author 自動生成
+ * tplDaiyon のクラスファイル
+ *
+ * @reamsid_L DBU-1100-030 wangkanglei
  */
 public class tplDaiyonDiv extends TablePanel {
+
     // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-01-15_09-59-03">
     /*
      * [ private の作成 ]
@@ -181,9 +183,10 @@ public class tplDaiyonDiv extends TablePanel {
 
     // </editor-fold>
 }
+
 /**
- * cel211 のクラスファイル 
- * 
+ * cel211 のクラスファイル
+ *
  * @author 自動生成
  */
 class cel211AttplDaiyon extends TableCell {
@@ -191,12 +194,14 @@ class cel211AttplDaiyon extends TableCell {
 
     // </editor-fold>
 }
+
 /**
- * cel222 のクラスファイル 
- * 
+ * cel222 のクラスファイル
+ *
  * @author 自動生成
  */
 class cel222AttplDaiyon extends TableCell {
+
     // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-01-15_09-59-03">
     @JsonProperty("txtShinseiKensuRiyosha")
     private TextBox txtShinseiKensuRiyosha;
@@ -221,12 +226,14 @@ class cel222AttplDaiyon extends TableCell {
 
     // </editor-fold>
 }
+
 /**
- * cel232 のクラスファイル 
- * 
+ * cel232 のクラスファイル
+ *
  * @author 自動生成
  */
 class cel232AttplDaiyon extends TableCell {
+
     // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-01-15_09-59-03">
     @JsonProperty("txtGengakuNinteiKensuRiyosha")
     private TextBox txtGengakuNinteiKensuRiyosha;
@@ -251,12 +258,14 @@ class cel232AttplDaiyon extends TableCell {
 
     // </editor-fold>
 }
+
 /**
- * cel242 のクラスファイル 
- * 
+ * cel242 のクラスファイル
+ *
  * @author 自動生成
  */
 class cel242AttplDaiyon extends TableCell {
+
     // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-01-15_09-59-03">
     @JsonProperty("txtNinteiKensuGenzaiGengakuRiyosha")
     private TextBox txtNinteiKensuGenzaiGengakuRiyosha;
@@ -281,12 +290,14 @@ class cel242AttplDaiyon extends TableCell {
 
     // </editor-fold>
 }
+
 /**
- * cel252 のクラスファイル 
- * 
+ * cel252 のクラスファイル
+ *
  * @author 自動生成
  */
 class cel252AttplDaiyon extends TableCell {
+
     // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-01-15_09-59-03">
     @JsonProperty("txtMenjoNinteiKensuRiyosha")
     private TextBox txtMenjoNinteiKensuRiyosha;
@@ -311,12 +322,14 @@ class cel252AttplDaiyon extends TableCell {
 
     // </editor-fold>
 }
+
 /**
- * cel262 のクラスファイル 
- * 
+ * cel262 のクラスファイル
+ *
  * @author 自動生成
  */
 class cel262AttplDaiyon extends TableCell {
+
     // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-01-15_09-59-03">
     @JsonProperty("txtNinteiKensuGenzaiMenjoRiyosha")
     private TextBox txtNinteiKensuGenzaiMenjoRiyosha;

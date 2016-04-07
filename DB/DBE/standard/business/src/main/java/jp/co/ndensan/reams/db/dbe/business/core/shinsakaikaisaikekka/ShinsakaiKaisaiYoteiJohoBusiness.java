@@ -12,6 +12,8 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 /**
  *
  * 介護認定審査会開催結果登録のヘッドエリア内容Businessです。
+ *
+ * @reamsid_L DBE-0130-040 yaodongsheng
  */
 public class ShinsakaiKaisaiYoteiJohoBusiness {
 

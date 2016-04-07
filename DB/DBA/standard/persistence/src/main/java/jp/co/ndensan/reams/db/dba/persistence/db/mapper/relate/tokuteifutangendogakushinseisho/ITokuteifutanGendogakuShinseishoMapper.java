@@ -15,6 +15,8 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 /**
  *
  * 申請書_共通クラス部分Mapperクラスです。
+ *
+ * @reamsid_L DBA-0540-714 yaodongsheng
  */
 public interface ITokuteifutanGendogakuShinseishoMapper {
 

@@ -12,6 +12,8 @@ import jp.co.ndensan.reams.uz.uza.report.ReportPropertyBase;
 
 /**
  * {@link BemmeisyoReport}のプロパティです。
+ *
+ * @reamsid_L DBU-1080-150 linghuhang
  */
 public class BemmeisyoProperty extends ReportPropertyBase<BemmeisyoReportSource> {
 

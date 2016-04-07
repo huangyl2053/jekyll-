@@ -13,6 +13,8 @@ import lombok.NonNull;
 
 /**
  * 年齢到達予定者一覧表のReportです。
+ *
+ * @reamsid_L DBA-0580-070 yaodongsheng
  */
 public class NenreitotatsuYoteishaIchiranhyoReport extends Report<NenreitotatsuYoteishaIchiranhyoReportSource> {
 

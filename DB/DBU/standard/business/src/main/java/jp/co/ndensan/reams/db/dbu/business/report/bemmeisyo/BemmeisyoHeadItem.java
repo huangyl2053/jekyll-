@@ -11,6 +11,8 @@ import lombok.Getter;
 
 /**
  * 弁明書ヘッダのITEMです。
+ *
+ * @reamsid_L DBU-1080-150 linghuhang
  */
 @Getter
 @SuppressWarnings("PMD.UnusedPrivateField")

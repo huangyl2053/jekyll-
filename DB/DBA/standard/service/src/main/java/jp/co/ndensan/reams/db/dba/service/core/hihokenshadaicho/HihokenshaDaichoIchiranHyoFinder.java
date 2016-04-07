@@ -37,6 +37,9 @@ import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
 
 /**
  * 被保険者台帳一括作成バッチより、被保険者台帳一覧表帳票用DataEntityを作成します。
+ *
+ * @reamsid_L DBA-0510-040 duanzhanli
+ *
  */
 public class HihokenshaDaichoIchiranHyoFinder {
 

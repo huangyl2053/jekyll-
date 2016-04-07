@@ -21,8 +21,9 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.Separator;
 
 /**
- *
  * 編集後個人のクラスです。
+ *
+ * @reamsid_L DBB-9040-120 wangxiaodong
  */
 public class EditedKojin {
 

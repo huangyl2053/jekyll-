@@ -12,7 +12,7 @@ import lombok.Setter;
 
 /**
  * 新旧被保険者番号変換のパラメタクラスです。
- *
+ * @reamsid_L DBU-0310-010 zhangyajing
  */
 @Getter
 @Setter

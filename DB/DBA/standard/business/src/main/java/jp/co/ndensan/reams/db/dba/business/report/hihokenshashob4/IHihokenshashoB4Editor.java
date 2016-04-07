@@ -12,6 +12,7 @@ import jp.co.ndensan.reams.uz.uza.report.IReportEditor;
 /**
  *
  * 介護保険被保険者証（B4版）ヘッダエディターのインターフェースクラスです。
+ * @reamsid_L DBU-0490-060 dongyabin
  */
 public interface IHihokenshashoB4Editor extends IReportEditor<HihokenshashoB4ReportSource> {
     

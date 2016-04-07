@@ -13,6 +13,8 @@ import lombok.NonNull;
 /**
  *
  * 介護保険償還払支給申請書帳票作成します。
+ *
+ * @reamsid_L DBA-0540-706 yaodongsheng
  */
 public final class ShokanharaiShikyuShinseishoReport extends Report<ShokanharaiShikyuShinseishoReportSource> {
 

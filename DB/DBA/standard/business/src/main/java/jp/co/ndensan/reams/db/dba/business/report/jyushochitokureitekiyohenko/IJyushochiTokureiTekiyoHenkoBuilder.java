@@ -12,6 +12,7 @@ import jp.co.ndensan.reams.uz.uza.report.IReportBuilder;
 /**
  *
  * 介護保険住所地特例適用・変更・終了届Builderのインターフェースクラスです。
+ * @reamsid_L DBA-0540-685 dongyabin
  */
 public interface IJyushochiTokureiTekiyoHenkoBuilder extends IReportBuilder<JyushochiTokureiTekiyoHenkoReportSource> {
 }

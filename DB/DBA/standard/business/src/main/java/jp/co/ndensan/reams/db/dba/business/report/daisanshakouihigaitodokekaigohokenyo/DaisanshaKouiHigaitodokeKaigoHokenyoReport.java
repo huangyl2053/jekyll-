@@ -11,8 +11,9 @@ import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
 import lombok.NonNull;
 
 /**
- *
  * 第三者行為による被害届（介護保険用）の帳票を作成します。
+ * 
+ * @reamsid_L DBA-0540-699  suguangjun 
  */
 public final class DaisanshaKouiHigaitodokeKaigoHokenyoReport extends Report<DaisanshaKouiHigaitodokeKaigoHokenyoReportSource> {
 

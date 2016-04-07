@@ -17,6 +17,7 @@ import jp.co.ndensan.reams.uz.uza.util.db.PrimaryKey;
 /**
  *
  *  広住特適用情報のエンティティクラスです。
+ * @reamsid_L DBU-1140-020 dongyabin
  */
 @SuppressWarnings("PMD.UnusedPrivateField")
 @lombok.Getter

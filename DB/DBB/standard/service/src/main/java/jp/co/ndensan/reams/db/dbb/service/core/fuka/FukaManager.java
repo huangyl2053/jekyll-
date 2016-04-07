@@ -30,6 +30,8 @@ import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
 
 /**
  * 介護賦課を管理するクラスです。
+ *
+ * @reamsid_L DBB-9040-090 wangxiaodong
  */
 public class FukaManager {
 

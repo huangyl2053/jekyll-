@@ -25,6 +25,8 @@ import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
 /**
  *
  * 被保険者番号付番の処理サービスクラスです。
+ *
+ * @reamsid_L DBU-0320-010 linghuhang
  */
 public class HihokenshanotsukibanFinder {
 

@@ -38,8 +38,10 @@ import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
- *
  * 被保険者台帳一括作成_バッチフ処理クラスです
+ *
+ * @reamsid_L DBA-0510-010 duanzhanli
+ *
  */
 public class IkkatsuSakuseiProcess extends BatchProcessBase<DbT1001HihokenshaDaichoEntity> {
 

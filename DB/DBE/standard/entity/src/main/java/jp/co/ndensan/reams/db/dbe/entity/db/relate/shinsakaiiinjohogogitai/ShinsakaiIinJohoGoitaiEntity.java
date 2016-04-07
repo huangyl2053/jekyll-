@@ -10,6 +10,8 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 /**
  *
  * 介護認定審査会委員情報Entityです。
+ *
+ * @reamsid_L DBE-0130-060 yaodongsheng
  */
 @lombok.Setter
 @lombok.Getter

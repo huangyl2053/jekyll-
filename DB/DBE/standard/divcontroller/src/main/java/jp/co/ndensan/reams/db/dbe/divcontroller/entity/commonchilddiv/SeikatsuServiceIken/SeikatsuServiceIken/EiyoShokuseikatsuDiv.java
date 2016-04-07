@@ -11,7 +11,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 /**
  * EiyoShokuseikatsu のクラスファイル 
  * 
- * @author 自動生成
+ * @reamsid_L DBE-3000-110 wangkun
  */
 public class EiyoShokuseikatsuDiv extends Panel {
     // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-01-15_09-59-03">

@@ -9,8 +9,9 @@ import jp.co.ndensan.reams.db.dbe.entity.report.source.chosairaisho.ChosaIraisho
 import jp.co.ndensan.reams.uz.uza.report.ReportEditorJoiner;
 
 /**
- *
  * 要介護認定調査依頼書Builderクラスです。
+ *
+ * @reamsid_L DBE-0010-020 lishengli
  */
 class ChosaIraishoBuilderImpl implements IChosaIraishoBuilder {
 

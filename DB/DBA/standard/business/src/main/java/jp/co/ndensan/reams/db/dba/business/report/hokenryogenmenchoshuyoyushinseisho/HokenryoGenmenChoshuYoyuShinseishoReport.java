@@ -11,8 +11,9 @@ import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
 import lombok.NonNull;
 
 /**
- *
  * 介護保険料減免申請書のReportです。
+ * 
+ * @reamsid_L DBA-0540-692  suguangjun 
  */
 public final class HokenryoGenmenChoshuYoyuShinseishoReport extends Report<HokenryoGenmenChoshuYoyuShinseishoReportSource> {
 

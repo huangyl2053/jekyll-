@@ -25,6 +25,8 @@ import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 
 /**
  * 特別医療意見のHandlerクラスです。
+ *
+ * @reamsid_L DBE-3000-150 linghuhang
  */
 public class TokubetsuIryoIkenHandler {
 

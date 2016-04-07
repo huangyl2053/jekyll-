@@ -25,6 +25,8 @@ import jp.co.ndensan.reams.uz.uza.util.config.BusinessConfig;
 /**
  *
  * 資格履歴情報のクラスです。
+ *
+ * @reamsid_L DBZ-4560-010 wanghui
  */
 public class ShikakuRirekiInfoHandler {
 

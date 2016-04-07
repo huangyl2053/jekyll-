@@ -19,6 +19,8 @@ import jp.co.ndensan.reams.uz.uza.report.data.chart.ReportDynamicChart;
 
 /**
  * 年齢到達予定者一覧表のプロパティです。
+ *
+ * @reamsid_L DBA-0580-070 yaodongsheng
  */
 public class NenreitotatsuYoteishaIchiranhyoProperty extends ReportPropertyBase<NenreitotatsuYoteishaIchiranhyoReportSource> {
 
@@ -51,6 +53,7 @@ public class NenreitotatsuYoteishaIchiranhyoProperty extends ReportPropertyBase<
             Breakers<NenreitotatsuYoteishaIchiranhyoReportSource> breakers,
             BreakerCatalog<NenreitotatsuYoteishaIchiranhyoReportSource> catalog) {
         return breakers.add(catalog.new SimplePageBreaker(
+
             PAGE_BREAK_KEYS) {
             @Override
             public ReportLineRecord<NenreitotatsuYoteishaIchiranhyoReportSource> occuredBreak(

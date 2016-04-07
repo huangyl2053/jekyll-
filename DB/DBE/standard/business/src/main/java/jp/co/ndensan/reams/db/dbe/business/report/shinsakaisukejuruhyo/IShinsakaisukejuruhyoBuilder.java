@@ -11,6 +11,8 @@ import jp.co.ndensan.reams.uz.uza.report.IReportBuilder;
 /**
  *
  * 介護認定審査会スケジュール表Builderのインターフェースクラスです。
+ *
+ * @reamsid_L DBE-0130-070 yaodongsheng
  */
 interface IShinsakaisukejuruhyoBuilder extends IReportBuilder<ShinsakaisukejuruhyoReportSource> {
 

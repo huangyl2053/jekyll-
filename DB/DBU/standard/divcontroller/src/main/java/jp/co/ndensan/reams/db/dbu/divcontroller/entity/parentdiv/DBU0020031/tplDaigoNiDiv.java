@@ -4,18 +4,20 @@ package jp.co.ndensan.reams.db.dbu.divcontroller.entity.parentdiv.DBU0020031;
  * このファイルへの変更は、再生成時には損失するため
  * 不正な動作の原因になります。
  */
+
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import jp.co.ndensan.reams.uz.uza.ui.binding.*;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TableCell;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TablePanel;
+import jp.co.ndensan.reams.uz.uza.ui.binding.TextBox;
 
 /**
- * tplDaigoNi のクラスファイル 
- * 
- * @author 自動生成
+ * tplDaigoNi のクラスファイル
+ *
+ * @reamsid_L DBU-1100-030 wangkanglei
  */
 public class tplDaigoNiDiv extends TablePanel {
+
     // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-01-15_09-59-03">
     /*
      * [ private の作成 ]
@@ -181,9 +183,10 @@ public class tplDaigoNiDiv extends TablePanel {
 
     // </editor-fold>
 }
+
 /**
- * cel411 のクラスファイル 
- * 
+ * cel411 のクラスファイル
+ *
  * @author 自動生成
  */
 class cel411AttplDaigoNi extends TableCell {
@@ -191,12 +194,14 @@ class cel411AttplDaigoNi extends TableCell {
 
     // </editor-fold>
 }
+
 /**
- * TableCell1 のクラスファイル 
- * 
+ * TableCell1 のクラスファイル
+ *
  * @author 自動生成
  */
 class TableCell1AttplDaigoNi extends TableCell {
+
     // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-01-15_09-59-03">
     @JsonProperty("txtShinseiKensu")
     private TextBox txtShinseiKensu;
@@ -221,12 +226,14 @@ class TableCell1AttplDaigoNi extends TableCell {
 
     // </editor-fold>
 }
+
 /**
- * TableCell2 のクラスファイル 
- * 
+ * TableCell2 のクラスファイル
+ *
  * @author 自動生成
  */
 class TableCell2AttplDaigoNi extends TableCell {
+
     // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-01-15_09-59-03">
     @JsonProperty("txtGengakuNinteiKensu")
     private TextBox txtGengakuNinteiKensu;
@@ -251,12 +258,14 @@ class TableCell2AttplDaigoNi extends TableCell {
 
     // </editor-fold>
 }
+
 /**
- * TableCell3 のクラスファイル 
- * 
+ * TableCell3 のクラスファイル
+ *
  * @author 自動生成
  */
 class TableCell3AttplDaigoNi extends TableCell {
+
     // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-01-15_09-59-03">
     @JsonProperty("txtNinteiKensuGenzaiGengaku")
     private TextBox txtNinteiKensuGenzaiGengaku;
@@ -281,12 +290,14 @@ class TableCell3AttplDaigoNi extends TableCell {
 
     // </editor-fold>
 }
+
 /**
- * TableCell4 のクラスファイル 
- * 
+ * TableCell4 のクラスファイル
+ *
  * @author 自動生成
  */
 class TableCell4AttplDaigoNi extends TableCell {
+
     // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-01-15_09-59-03">
     @JsonProperty("txtMenjoNinteiKensu")
     private TextBox txtMenjoNinteiKensu;
@@ -311,12 +322,14 @@ class TableCell4AttplDaigoNi extends TableCell {
 
     // </editor-fold>
 }
+
 /**
- * TableCell5 のクラスファイル 
- * 
+ * TableCell5 のクラスファイル
+ *
  * @author 自動生成
  */
 class TableCell5AttplDaigoNi extends TableCell {
+
     // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-01-15_09-59-03">
     @JsonProperty("txtNinteiKensuGenzaiMenjo")
     private TextBox txtNinteiKensuGenzaiMenjo;

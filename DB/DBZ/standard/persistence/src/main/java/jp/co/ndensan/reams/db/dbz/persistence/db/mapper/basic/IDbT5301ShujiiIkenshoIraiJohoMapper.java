@@ -12,7 +12,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
  *
- * @author LDNS chenty
+ * @reamsid_L DBE-0060-040 zhangzhiming
  */
 public interface IDbT5301ShujiiIkenshoIraiJohoMapper {
 

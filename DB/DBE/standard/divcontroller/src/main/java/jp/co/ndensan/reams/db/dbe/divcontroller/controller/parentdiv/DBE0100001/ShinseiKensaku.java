@@ -29,6 +29,8 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 
 /**
  * 要介護認定申請検索のクラスです。
+ *
+ * @reamsid_L DBE-1370-010 sunhaidi
  */
 public class ShinseiKensaku {
 

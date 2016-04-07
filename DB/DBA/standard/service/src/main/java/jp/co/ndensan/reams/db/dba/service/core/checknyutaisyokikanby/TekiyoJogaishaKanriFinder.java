@@ -17,6 +17,8 @@ import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
 
 /**
  * 介護保険適用除外者を管理するクラスです。
+ *
+ * @reamsid_L DBA-0410-010 zhangzhiming
  */
 public class TekiyoJogaishaKanriFinder {
 

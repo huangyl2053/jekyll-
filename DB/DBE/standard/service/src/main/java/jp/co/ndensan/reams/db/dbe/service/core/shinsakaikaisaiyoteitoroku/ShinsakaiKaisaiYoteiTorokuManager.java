@@ -23,6 +23,8 @@ import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
 /**
  *
  * 介護認定審査会開催予定登録1のManagerです。
+ *
+ * @reamsid_L DBE-0130-010 yaodongsheng
  */
 public class ShinsakaiKaisaiYoteiTorokuManager {
 

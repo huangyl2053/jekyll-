@@ -15,6 +15,8 @@ import jp.co.ndensan.reams.uz.uza.util.db.IDbAccessable;
 /**
  *
  * ShikakuRirekiInfo_資格履歴情報のRelateEntityクラスです。
+ *
+ * @reamsid_L DBZ-4560-020 wanghui
  */
 @lombok.Getter
 @lombok.Setter

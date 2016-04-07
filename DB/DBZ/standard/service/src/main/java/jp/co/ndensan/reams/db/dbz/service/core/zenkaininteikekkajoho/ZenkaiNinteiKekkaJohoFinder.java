@@ -24,6 +24,7 @@ import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 /**
  *
  * 前回結果情報のサービスクラスです。
+ * @reamsid_L DBE-3000-020 dongyabin
  */
 public class ZenkaiNinteiKekkaJohoFinder {
     

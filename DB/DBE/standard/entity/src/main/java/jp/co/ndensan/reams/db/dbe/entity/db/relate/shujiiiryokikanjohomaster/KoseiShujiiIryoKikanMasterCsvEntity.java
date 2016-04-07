@@ -10,6 +10,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
  * 主治医医療機関情報出力用CSVEntityクラスです。
+ * @reamsid_L DBE-0240-010 dongyabin
  */
 @lombok.Getter
 @SuppressWarnings("PMD.UnusedPrivateField")

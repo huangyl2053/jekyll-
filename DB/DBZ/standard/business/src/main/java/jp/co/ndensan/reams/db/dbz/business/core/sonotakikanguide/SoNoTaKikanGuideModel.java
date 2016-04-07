@@ -11,6 +11,8 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 /**
  *
  * その他機関選択ガイドのダイアログパラメータクラスです。
+ * 
+ * @reamsid_L DBE-3000-050 wangkun
  */
 @lombok.Getter
 @lombok.Setter

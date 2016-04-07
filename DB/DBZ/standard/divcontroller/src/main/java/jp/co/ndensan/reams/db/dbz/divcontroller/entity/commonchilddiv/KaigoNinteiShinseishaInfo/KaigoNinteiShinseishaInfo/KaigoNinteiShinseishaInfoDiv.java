@@ -24,7 +24,7 @@ import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 /**
  * KaigoNinteiShinseishaInfo のクラスファイル
  *
- * @author 自動生成
+ * @reamsid_L DBE-3000-040 wangkun
  */
 public class KaigoNinteiShinseishaInfoDiv extends Panel implements IKaigoNinteiShinseishaInfoDiv {
     // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-01-15_09-59-03">

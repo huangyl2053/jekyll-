@@ -14,6 +14,8 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 /**
  *
  * 介護保険被保険者証一括作成Handlerクラスです。
+ *
+ * @reamsid_L DBU-0420-010 duanzhanli
  */
 public class HihokenshaShoBatchPrmHandler {
 

@@ -14,6 +14,7 @@ import lombok.NonNull;
 /**
  *
  * 介護保険住所地特例適用・変更・終了届の帳票を作成します。
+ * @reamsid_L DBA-0540-685 dongyabin
  */
 public final class JyushochiTokureiTekiyoHenkoReport extends Report<JyushochiTokureiTekiyoHenkoReportSource> {
     

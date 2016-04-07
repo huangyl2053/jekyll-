@@ -15,7 +15,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 /**
  * dgSonotaKikanIchiran_Row のクラスファイル 
  * 
- * @author 自動生成
+ * @reamsid_L DBE-3000-050 wangkun
  */
 
 public class dgSonotaKikanIchiran_Row extends DataRow {

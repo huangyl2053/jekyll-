@@ -14,8 +14,9 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.Separator;
 
 /**
- *
  * 要介護認定調査依頼書ヘッダEditorです。
+ *
+ * @reamsid_L DBE-0010-020 lishengli
  */
 class ChosaIraishoHeaderEditor implements IChosaIraishoEditor {
 

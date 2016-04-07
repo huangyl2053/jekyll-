@@ -14,8 +14,9 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.Separator;
 
 /**
- *
  * 介護保険診断命令書ヘッダEditorです。
+ *
+ * @reamsid_L DBE-0080-070 wangxiaodong
  */
 public class KaigohokenShindanMeireishoHeaderEditor implements IKaigohokenShindanMeireishoEditor {
 

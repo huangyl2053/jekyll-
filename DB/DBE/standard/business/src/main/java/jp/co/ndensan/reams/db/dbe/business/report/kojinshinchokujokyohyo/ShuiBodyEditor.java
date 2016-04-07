@@ -9,6 +9,8 @@ import jp.co.ndensan.reams.db.dbe.entity.report.source.kojinshinchokujokyohyo.Ko
 
 /**
  * 要介護認定個人進捗状況票Editorです。
+ *
+ * @reamsid_L DBE-0200-040 zhangzhiming
  */
 class ShuiBodyEditor implements IKojinShinchokuJokyohyoEditor {
 

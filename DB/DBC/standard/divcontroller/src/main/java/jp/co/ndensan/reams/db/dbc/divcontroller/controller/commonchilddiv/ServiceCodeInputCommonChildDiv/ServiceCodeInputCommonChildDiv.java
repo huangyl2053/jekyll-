@@ -19,6 +19,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RDate;
 /**
  *
  * サービスコードのフォーカスアウトです。
+ * @reamsid_L DBA-0060-010 dongyabin
  */
 public class ServiceCodeInputCommonChildDiv {
     

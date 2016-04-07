@@ -18,6 +18,7 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.ResponseHolder;
 /**
  * 生活サービス意見入力のクラスです。
  *
+ * @reamsid_L DBE-3000-110 wangkun
  */
 public class SeikatsuServiceIken {
 

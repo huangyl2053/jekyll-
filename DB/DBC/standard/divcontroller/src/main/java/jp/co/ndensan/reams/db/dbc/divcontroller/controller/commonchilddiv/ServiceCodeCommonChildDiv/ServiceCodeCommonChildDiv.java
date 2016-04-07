@@ -12,15 +12,14 @@ import jp.co.ndensan.reams.db.dbc.divcontroller.entity.commonchilddiv.ServiceCod
 import jp.co.ndensan.reams.db.dbx.business.core.kaigoserviceshurui.kaigoservicenaiyou.KaigoServiceNaiyou;
 import jp.co.ndensan.reams.db.dbx.definition.mybatis.param.servicecode.SabisuKodoParameter;
 import jp.co.ndensan.reams.db.dbx.service.core.kaigoserviceshurui.kaigoservicenaiyou.KaigoServiceNaiyouManager;
-import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
-import jp.co.ndensan.reams.uz.uza.lang.ApplicationException;
 import jp.co.ndensan.reams.uz.uza.lang.FillType;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 
 /**
  *
  * サービスコード検索一覧のコントローラです。
+ * @reamsid_L DBA-0060-010 dongyabin
  */
 public class ServiceCodeCommonChildDiv {
 
@@ -70,7 +69,7 @@ public class ServiceCodeCommonChildDiv {
      * @return ResponseData<ServiceCodeCommonChildDivDiv>
      */
     public ResponseData<ServiceCodeCommonChildDivDiv> onClick_btnYameru(ServiceCodeCommonChildDivDiv div) {
-        return ResponseData.of(div).respond();
+        return ResponseData.of(div).dialogOKClose();
     }
     /**
      * 「確定する」ボタンをクリック場合、画面遷移が表示します。
@@ -80,10 +79,10 @@ public class ServiceCodeCommonChildDiv {
      */
     public ResponseData<ServiceCodeCommonChildDivDiv> onClick_btnKakutei(ServiceCodeCommonChildDivDiv div) {
         if (div.getDgCodeIchiran().getClickedItem() == null) {
-            throw new ApplicationException(UrErrorMessages.対象行を選択.getMessage());
+            return ResponseData.of(div).addValidationMessages(getHandler(div).addMessage()).respond();
         }
         getHandler(div).onClick_btnKakutei();
-        return ResponseData.of(div).respond();
+        return ResponseData.of(div).dialogOKClose();
     }
 
     private ServiceCodeCommonChildDivHandler getHandler(ServiceCodeCommonChildDivDiv div) {

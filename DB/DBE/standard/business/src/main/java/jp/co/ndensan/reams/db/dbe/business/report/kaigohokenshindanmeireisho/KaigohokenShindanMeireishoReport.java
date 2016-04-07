@@ -10,8 +10,9 @@ import jp.co.ndensan.reams.uz.uza.report.Report;
 import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
 
 /**
- *
  * 介護保険診断命令書のReportです。
+ *
+ * @reamsid_L DBE-0080-070 wangxiaodong
  */
 public class KaigohokenShindanMeireishoReport extends Report<KaigohokenShindanMeireishoReportSource> {
 

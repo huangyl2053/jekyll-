@@ -10,8 +10,9 @@ import jp.co.ndensan.reams.uz.uza.report.Report;
 import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
 
 /**
- *
  * 要介護認定区分変更申請書のReportです。
+ *
+ * @reamsid_L DBA-0540-713 lishengli
  */
 public class YokaigoNinteikbnHenkoShinseishoReport
         extends Report<YokaigoNinteikbnHenkoShinseishoReportSource> {

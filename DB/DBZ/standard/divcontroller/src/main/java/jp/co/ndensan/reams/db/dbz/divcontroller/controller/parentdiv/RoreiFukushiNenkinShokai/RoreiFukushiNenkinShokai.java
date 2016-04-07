@@ -23,7 +23,7 @@ import jp.co.ndensan.reams.uz.uza.util.Models;
 
 /**
  * 老齢福祉年金受給情報共有子Div処理のクラスです。
- *
+ * @reamsid_L DBA-0220-010 dongyabin
  */
 public class RoreiFukushiNenkinShokai {
 

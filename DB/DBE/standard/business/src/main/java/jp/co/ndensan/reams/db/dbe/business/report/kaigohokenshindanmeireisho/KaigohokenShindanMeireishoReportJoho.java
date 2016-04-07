@@ -6,8 +6,9 @@
 package jp.co.ndensan.reams.db.dbe.business.report.kaigohokenshindanmeireisho;
 
 /**
- *
  * 介護保険診断命令書_帳票パラメータクラスです。
+ *
+ * @reamsid_L DBE-0080-070 wangxiaodong
  */
 @lombok.Getter
 @SuppressWarnings("PMD.UnusedPrivateField")

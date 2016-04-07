@@ -18,6 +18,8 @@ import jp.co.ndensan.reams.uz.uza.util.db.annotation.TempTableColumnOrder;
 /**
  * DbTKeisangoJohoTempTableEntity項目定義クラスです。
  *
+ * @reamsid_L DBB-9060-010 duanzhanli
+ *
  */
 @SuppressWarnings("PMD.UnusedPrivateField")
 @lombok.Getter

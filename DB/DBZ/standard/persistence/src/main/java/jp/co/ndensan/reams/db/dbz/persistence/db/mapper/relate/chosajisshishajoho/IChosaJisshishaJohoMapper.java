@@ -14,6 +14,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 /**
  *
  * 調査実施者情報の検索します。
+ * @reamsid_L DBE-3000-100 dongyabin
  */
 public interface IChosaJisshishaJohoMapper {
     

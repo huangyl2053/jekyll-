@@ -19,6 +19,8 @@ import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
 /**
  *
  * 年齢到達予定者チェックリストDBManagerです。
+ *
+ * @reamsid_L DBA-0580-010 yaodongsheng
  */
 public class NenreiToutatuYoteishaCheckListManager {
 

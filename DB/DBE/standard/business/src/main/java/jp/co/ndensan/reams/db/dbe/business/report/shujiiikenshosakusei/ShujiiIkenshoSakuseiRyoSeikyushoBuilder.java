@@ -10,6 +10,8 @@ import jp.co.ndensan.reams.db.dbe.entity.report.source.shujiiikenshosakusei.Shuj
 /**
  *
  * 主治医意見書作成料請求書Builderクラスです。
+ *
+ * @reamsid_L DBE-0050-040 sunhaidi
  */
 public class ShujiiIkenshoSakuseiRyoSeikyushoBuilder implements IShujiiIkenshoSakuseiRyoSeikyushoBuilder {
 

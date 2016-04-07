@@ -9,8 +9,9 @@ import jp.co.ndensan.reams.db.dba.entity.report.daisanshakouihigaitodokekaigohok
 import jp.co.ndensan.reams.uz.uza.report.IReportEditor;
 
 /**
- *
  * 第三者行為による被害届（介護保険用）エディターのインターフェースクラスです。
+ * 
+ * @reamsid_L DBA-0540-699  suguangjun 
  */
 public interface IDaisanshaKouiHigaitodokeKaigoHokenyoEditor extends IReportEditor<DaisanshaKouiHigaitodokeKaigoHokenyoReportSource> {
 }

@@ -10,8 +10,9 @@ import jp.co.ndensan.reams.uz.uza.report.Report;
 import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
 
 /**
- *
  * 高額医療合算介護（介護予防）サービス費支給兼自己負担額証明書交付申請書のReportです。
+ *
+ * @reamsid_L DBA-0540-712 lishengli
  */
 public class KogakuGassanKaigoServicehiShikyuKofuShinseishoReport
         extends Report<KogakuGassanKaigoServicehiShikyuKofuShinseishoReportSource> {

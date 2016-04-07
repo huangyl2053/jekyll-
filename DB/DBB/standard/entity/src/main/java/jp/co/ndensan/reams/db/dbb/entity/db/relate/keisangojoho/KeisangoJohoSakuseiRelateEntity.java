@@ -15,6 +15,9 @@ import jp.co.ndensan.reams.db.dbz.entity.db.basic.UrT0705ChoteiKyotsuEntity;
 
 /**
  * 計算後情報作成のRelateEntityクラスです。
+ *
+ * @reamsid_L DBB-9060-010 duanzhanli
+ *
  */
 @SuppressWarnings("PMD.UnusedPrivateField")
 @lombok.Getter

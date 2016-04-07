@@ -20,6 +20,7 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
 /**
  *
  * 心身の意見入力のクラスです。
+ * @reamsid_L DBE-3000-120 dongyabin
  */
 public class ShinshinIken {
     

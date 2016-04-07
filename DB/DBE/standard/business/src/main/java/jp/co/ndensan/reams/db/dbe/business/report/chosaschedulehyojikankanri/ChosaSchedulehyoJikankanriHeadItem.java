@@ -9,8 +9,9 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 import lombok.Getter;
 
 /**
- *
  * 認定調査スケジュール表(時間管理)ヘッダのITEMです。
+ *
+ * @reamsid_L DBE-0020-100 lishengli
  */
 @Getter
 @SuppressWarnings("PMD.UnusedPrivateField")

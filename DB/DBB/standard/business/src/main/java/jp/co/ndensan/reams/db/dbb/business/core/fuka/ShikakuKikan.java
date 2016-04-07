@@ -12,8 +12,9 @@ import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 
 /**
+ * 資格期間を判定クラスです。
  *
- * 資格期間判定クラス。
+ * @reamsid_L DBB-9040-040 wangxiaodong
  */
 public class ShikakuKikan {
 

@@ -4,17 +4,24 @@ package jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2020003;
  * このファイルへの変更は、再生成時には損失するため
  * 不正な動作の原因になります。
  */
+
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import jp.co.ndensan.reams.uz.uza.ui.binding.*;
+import jp.co.ndensan.reams.uz.uza.ui.binding.Button;
+import jp.co.ndensan.reams.uz.uza.ui.binding.DropDownList;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
+import jp.co.ndensan.reams.uz.uza.ui.binding.RadioButton;
+import jp.co.ndensan.reams.uz.uza.ui.binding.TextBox;
+import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxFlexibleDate;
+import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxKana;
 
 /**
- * SearchConditionPanel のクラスファイル 
- * 
- * @author 自動生成
+ * SearchConditionPanel のクラスファイル
+ *
+ * @reamsid_L DBE-0020-030 wanghui
  */
 public class SearchConditionPanelDiv extends Panel {
+
     // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-01-15_09-59-03">
     /*
      * [ private の作成 ]
@@ -378,7 +385,7 @@ public class SearchConditionPanelDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setRadScheduleEdit(RadioButton radScheduleEdit) {
+    public void setRadScheduleEdit(RadioButton radScheduleEdit) {
         this.getScheduleEdit().setRadScheduleEdit(radScheduleEdit);
     }
 
@@ -388,7 +395,7 @@ public class SearchConditionPanelDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setRadScheduleShokai(RadioButton radScheduleShokai) {
+    public void setRadScheduleShokai(RadioButton radScheduleShokai) {
         this.getScheduleShokai().setRadScheduleShokai(radScheduleShokai);
     }
 
@@ -398,7 +405,7 @@ public class SearchConditionPanelDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setRadMiteishaKanri(RadioButton radMiteishaKanri) {
+    public void setRadMiteishaKanri(RadioButton radMiteishaKanri) {
         this.getMiteishaKanri().setRadMiteishaKanri(radMiteishaKanri);
     }
 
@@ -408,7 +415,7 @@ public class SearchConditionPanelDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setDdlNinteiChosaItakusaki(DropDownList ddlNinteiChosaItakusaki) {
+    public void setDdlNinteiChosaItakusaki(DropDownList ddlNinteiChosaItakusaki) {
         this.getNinteiChosaJoken().setDdlNinteiChosaItakusaki(ddlNinteiChosaItakusaki);
     }
 
@@ -418,7 +425,7 @@ public class SearchConditionPanelDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setDdlNinteiChosain(DropDownList ddlNinteiChosain) {
+    public void setDdlNinteiChosain(DropDownList ddlNinteiChosain) {
         this.getNinteiChosaJoken().setDdlNinteiChosain(ddlNinteiChosain);
     }
 
@@ -428,7 +435,7 @@ public class SearchConditionPanelDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setTxtNinteiChosaYMDFrom(TextBoxFlexibleDate txtNinteiChosaYMDFrom) {
+    public void setTxtNinteiChosaYMDFrom(TextBoxFlexibleDate txtNinteiChosaYMDFrom) {
         this.getNinteiChosaJoken().setTxtNinteiChosaYMDFrom(txtNinteiChosaYMDFrom);
     }
 
@@ -438,7 +445,7 @@ public class SearchConditionPanelDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setTxtNinteiChosaYMDTo(TextBoxFlexibleDate txtNinteiChosaYMDTo) {
+    public void setTxtNinteiChosaYMDTo(TextBoxFlexibleDate txtNinteiChosaYMDTo) {
         this.getNinteiChosaJoken().setTxtNinteiChosaYMDTo(txtNinteiChosaYMDTo);
     }
 

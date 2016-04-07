@@ -17,6 +17,8 @@ import jp.co.ndensan.reams.uz.uza.lang.Separator;
 /**
  *
  * 年齢到達予定者チェックリスト_CSVデータ作成です。
+ *
+ * @reamsid_L DBA-0580-030 yaodongsheng
  */
 public class NenreiToutatsuYoteishaCheckListCsv {
 

@@ -52,6 +52,8 @@ import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 /**
  *
  * 介護保険償還払支給申請書クラスです。
+ *
+ * @reamsid_L DBA-0540-500 yaodongsheng
  */
 public class ShoukanbaraiShikyuShinseishoChohyo {
 

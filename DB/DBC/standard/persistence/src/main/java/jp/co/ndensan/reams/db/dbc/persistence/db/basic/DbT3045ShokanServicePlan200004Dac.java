@@ -35,6 +35,8 @@ import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
 
 /**
  * 償還払請求サービス計画200004のデータアクセスクラスです。
+ *
+ * @reamsid_L DBC-9999-021 zuotao
  */
 public class DbT3045ShokanServicePlan200004Dac implements ISaveable<DbT3045ShokanServicePlan200004Entity> {
 

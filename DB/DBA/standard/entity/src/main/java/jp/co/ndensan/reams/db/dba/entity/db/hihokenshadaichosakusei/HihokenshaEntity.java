@@ -24,6 +24,8 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 /**
  * 被保険者のエンティティクラスです。
  *
+ * @reamsid_L DBA-0510-010 duanzhanli
+ *
  */
 @lombok.Getter
 @lombok.Setter

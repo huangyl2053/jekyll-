@@ -12,6 +12,8 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
  * 県コードオブジェクトです。
+ *
+ * @reamsid_L DBA-0180-020 lishengli
  */
 public class KenCodeJigyoshaInputGuide {
 

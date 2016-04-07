@@ -12,6 +12,8 @@ import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
 
 /**
  * 介護認定審査会スケジュール表ディEditorです。
+ *
+ * @reamsid_L DBE-0130-070 yaodongsheng
  */
 class ShinsakaisukejuruhyoBodyEditor implements IShinsakaisukejuruhyoEditor {
 

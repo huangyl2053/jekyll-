@@ -37,6 +37,7 @@ import jp.co.ndensan.reams.uz.uza.report.source.breaks.BreakAggregator;
 /**
  *
  * 介護保険受領委任払い契約申請書Printクラスです。
+ * @reamsid_L DBA-0540-060 dongyabin
  */
 public class JuryoIninbaraiKeiyakuShinseisho {
 

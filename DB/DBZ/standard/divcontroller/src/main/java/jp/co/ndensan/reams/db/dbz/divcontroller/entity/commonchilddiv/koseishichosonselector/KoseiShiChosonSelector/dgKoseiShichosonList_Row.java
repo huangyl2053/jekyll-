@@ -8,14 +8,14 @@ package jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.koseishic
 
 
 
-import jp.co.ndensan.reams.uz.uza.ui.binding.DataRow;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.ui.binding.DataRow;
 
 
 /**
  * dgKoseiShichosonList_Row のクラスファイル 
  * 
- * @author 自動生成
+ * @reamsid_L DBE-3000-060 dongyabin
  */
 
 public class dgKoseiShichosonList_Row extends DataRow {

@@ -16,6 +16,8 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 /**
  *
  * 特徴仮算定賦課確定コントローラです。
+ *
+ * @reamsid_L DBB-0800-010 wanghui
  */
 public class FukaKakutei {
 

@@ -12,6 +12,8 @@ import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 /**
  *
  * ShikakuRirekiInfo_資格履歴情報のbusinessクラスです。
+ *
+ * @reamsid_L DBZ-4560-010 wanghui
  */
 @lombok.Getter
 @lombok.Setter

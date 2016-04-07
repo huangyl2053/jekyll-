@@ -12,6 +12,7 @@ import lombok.Getter;
 /**
  *
  * 広域内住所地特例者一覧表の広域特解除情報を取得処理のMyBatisパラメータクラスです。
+ * @reamsid_L DBU-1140-020 dongyabin
  */
 @SuppressWarnings("PMD.UnusedPrivateField")
 @Getter

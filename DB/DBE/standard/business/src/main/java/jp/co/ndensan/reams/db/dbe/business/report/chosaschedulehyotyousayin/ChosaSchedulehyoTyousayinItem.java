@@ -8,8 +8,9 @@ package jp.co.ndensan.reams.db.dbe.business.report.chosaschedulehyotyousayin;
 import lombok.Getter;
 
 /**
- *
  * 認定調査スケジュール表(調査員)のITEMです。
+ *
+ * @reamsid_L DBE-0020-080 lishengli
  */
 @Getter
 @SuppressWarnings("PMD.UnusedPrivateField")

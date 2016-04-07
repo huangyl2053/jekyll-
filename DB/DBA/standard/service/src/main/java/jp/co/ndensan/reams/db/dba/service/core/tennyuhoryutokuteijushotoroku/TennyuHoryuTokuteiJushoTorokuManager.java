@@ -27,8 +27,9 @@ import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
 
 /**
- *
  * 転入保留特定住所登録処理です。
+ *
+ * @reamsid_L DBA-0480-020 zhangzhiming
  */
 public class TennyuHoryuTokuteiJushoTorokuManager {
 

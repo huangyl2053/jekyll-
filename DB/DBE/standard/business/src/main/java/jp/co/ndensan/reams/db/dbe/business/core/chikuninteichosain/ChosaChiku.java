@@ -10,6 +10,8 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
  * 調査地区情報を管理するクラスです。
+ *
+ * @reamsid_L DBE-0020-020 lishengli
  */
 public class ChosaChiku {
 

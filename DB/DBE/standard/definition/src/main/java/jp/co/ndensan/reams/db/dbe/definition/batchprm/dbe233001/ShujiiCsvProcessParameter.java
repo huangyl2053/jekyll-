@@ -10,6 +10,8 @@ import jp.co.ndensan.reams.uz.uza.batch.parameter.IBatchProcessParameter;
 /**
  *
  * 主治医意見書督促対象者一覧表CSV作成_バッチ処理クラスパラメータクラスです。
+ *
+ * @reamsid_L DBE-0060-040 zhangzhiming
  */
 @lombok.Getter
 @lombok.Setter

@@ -9,8 +9,9 @@ import jp.co.ndensan.reams.db.dbe.entity.report.source.ikenshosakuseiiraiichiran
 import jp.co.ndensan.reams.uz.uza.report.IReportBuilder;
 
 /**
- *
  * 主治医意見書作成依頼一覧Builderのインターフェースクラスです。
+ *
+ * @reamsid_L DBE-0080-090 zhangzhiming
  */
 interface IkenshoSakuseiIraiIchiranhyoBuilder extends IReportBuilder<IkenshoSakuseiIraiIchiranhyoReportSource> {
 

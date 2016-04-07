@@ -11,6 +11,8 @@ import jp.co.ndensan.reams.db.dba.entity.db.relate.tekiyojogaishadaichojoho.Teki
 
 /**
  * 適用除外者台帳のマッパーインタフェースです。
+ *
+ * @reamsid_L DBA-0412-010 linghuhang
  */
 public interface ITekiyoJogaiShisetuJyohoMapper {
 

@@ -26,6 +26,9 @@ import jp.co.ndensan.reams.uz.uza.util.db.IDbAccessable;
 
 /**
  * 被保険者証一括発行情報のエンティティクラスです。
+ *
+ * @reamsid_L DBU-0420-020 duanzhanli
+ *
  */
 @SuppressWarnings("PMD.UnusedPrivateField")
 @lombok.Getter

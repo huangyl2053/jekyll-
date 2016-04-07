@@ -11,6 +11,8 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 /**
  *
  * {@link HokenshaJohoDiv}のHandlerクラスです。
+ *
+ * @reamsid_L DBA-0180-010 lishengli
  */
 public class HokenshaJohoHandler {
 

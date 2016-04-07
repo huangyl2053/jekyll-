@@ -18,6 +18,7 @@ import jp.co.ndensan.reams.uz.uza.lang.Separator;
 /**
  *
  * 要介護認定業務進捗状況一覧表ヘッダEditorです。
+ * @reamsid_L DBE-0210-020 dongyabin
  */
 public class NiteiGyomuShinchokuJokyoIchiranhyoHeadEditor implements INiteiGyomuShinchokuJokyoIchiranhyoEditor {
     

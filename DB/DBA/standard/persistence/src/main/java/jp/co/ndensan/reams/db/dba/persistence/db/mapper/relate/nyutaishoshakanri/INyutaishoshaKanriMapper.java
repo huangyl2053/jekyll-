@@ -9,6 +9,9 @@ import jp.co.ndensan.reams.db.dba.definition.mybatisprm.nyutaishoshakanri.Nyutai
 
 /**
  * 介護保険施設入退所者管理のマッパーインタフェースです。
+ *
+ * @reamsid_L DBA-0360-010 duanzhanli
+ *
  */
 public interface INyutaishoshaKanriMapper {
 

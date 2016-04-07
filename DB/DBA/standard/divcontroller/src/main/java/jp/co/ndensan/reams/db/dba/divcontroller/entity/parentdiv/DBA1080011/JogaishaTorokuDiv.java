@@ -13,7 +13,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 /**
  * JogaishaToroku のクラスファイル
  *
- * @author 自動生成
+ * @reamsid_L DBA-0440-030 zhangzhiming
  */
 public class JogaishaTorokuDiv extends Panel {
 

@@ -5,8 +5,9 @@ import jp.co.ndensan.reams.uz.uza.report.IReportSource;
 import jp.co.ndensan.reams.uz.uza.report.source.ReportItem;
 
 /**
- *
  * 第三者行為による被害届（介護保険用）のReportSource
+ * 
+ * @reamsid_L DBA-0540-699  suguangjun
  */
 public class DaisanshaKouiHigaitodokeKaigoHokenyoReportSource implements IReportSource {
 // <editor-fold defaultstate="collapsed" desc="Generated Code">

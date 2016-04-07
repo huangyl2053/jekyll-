@@ -13,6 +13,8 @@ import lombok.Getter;
 
 /**
  * 住基連動登録者リストのMyBatisパラメータ。
+ *
+ * @reamsid_L DBA-0560-020 xuyannan
  */
 @SuppressWarnings("PMD.UnusedPrivateField")
 @Getter

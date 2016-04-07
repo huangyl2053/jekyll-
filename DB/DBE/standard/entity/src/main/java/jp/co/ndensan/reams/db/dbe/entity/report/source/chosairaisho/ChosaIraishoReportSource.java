@@ -11,6 +11,8 @@ import jp.co.ndensan.reams.uz.uza.report.source.ReportItem;
 
 /**
  * 要介護認定調査依頼書Sourceクラスです。
+ *
+ * @reamsid_L DBE-0010-020 lishengli
  */
 public class ChosaIraishoReportSource implements IReportSource {
 // <editor-fold defaultstate="collapsed" desc="Generated Code">

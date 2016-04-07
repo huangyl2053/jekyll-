@@ -25,6 +25,8 @@ import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
 
 /**
  * 適用除外者のデータアクセスクラスです。
+ *
+ * @reamsid_L DBZ-9999-021 zhangzhiming
  */
 public class DbT1002TekiyoJogaishaDac implements ISaveable<DbT1002TekiyoJogaishaEntity> {
 

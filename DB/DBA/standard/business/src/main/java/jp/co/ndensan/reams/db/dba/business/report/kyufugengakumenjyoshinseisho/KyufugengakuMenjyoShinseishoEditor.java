@@ -11,6 +11,8 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 /**
  *
  * 給付額減額免除申請書Editorです。
+ *
+ * @reamsid_L DBA-0540-695 yaodongsheng
  */
 public class KyufugengakuMenjyoShinseishoEditor implements IKyufugengakuMenjyoShinseishoEditor {
 

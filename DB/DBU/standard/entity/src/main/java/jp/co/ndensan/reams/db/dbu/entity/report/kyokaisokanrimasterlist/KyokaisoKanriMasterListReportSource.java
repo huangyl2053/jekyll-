@@ -7,6 +7,8 @@ import jp.co.ndensan.reams.uz.uza.report.source.ReportItem;
 /**
  *
  * 境界層管理マスタリストのReportSourceクラスです。
+ *
+ * @reamsid_L DBU-1050-060 linghuhang
  */
 public class KyokaisoKanriMasterListReportSource implements IReportSource {
 // <editor-fold defaultstate="collapsed" desc="Generated Code">

@@ -22,12 +22,13 @@ import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
 /**
  *
  * 調査委託先＆調査員ガイドのクラスです。
+ *
+ * @reamsid_L DBE-1300-020 wanghui
  */
 public class KijuntsukiShichosonjohoFinder {
 
     private final MapperProvider mapperProvider;
     private static final RString サブ業務コード_DBD = new RString("DBD");
-    
 
     /**
      * コンストラクタです。

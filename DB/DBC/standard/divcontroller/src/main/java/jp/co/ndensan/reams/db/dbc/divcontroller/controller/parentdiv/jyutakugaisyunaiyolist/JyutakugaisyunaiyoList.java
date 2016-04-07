@@ -28,6 +28,8 @@ import jp.co.ndensan.reams.uz.uza.util.db.SearchResult;
 /**
  *
  * 共有子Div「住宅改修内容一覧」のイベントを定義した共有子Divです。
+ *
+ * @reamsid_L DBC-0940-010 yaodongsheng
  */
 public class JyutakugaisyunaiyoList {
 

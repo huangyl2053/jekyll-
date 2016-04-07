@@ -16,8 +16,9 @@ import jp.co.ndensan.reams.uz.uza.report.Printer;
 import jp.co.ndensan.reams.uz.uza.report.SourceDataCollection;
 
 /**
- *
  * 要介護認定調査依頼書PrinterServiceクラスです。
+ *
+ * @reamsid_L DBE-0010-020 lishengli
  */
 public class ChosaIraishoPrintService {
 

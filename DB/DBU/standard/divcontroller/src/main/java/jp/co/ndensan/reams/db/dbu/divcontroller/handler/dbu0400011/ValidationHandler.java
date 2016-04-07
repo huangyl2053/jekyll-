@@ -16,6 +16,9 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
 /**
  *
  * 介護保険被保険者証一括作成チェッククラスです。
+ *
+ * @reamsid_L DBU-0420-010 duanzhanli
+ *
  */
 public class ValidationHandler {
 

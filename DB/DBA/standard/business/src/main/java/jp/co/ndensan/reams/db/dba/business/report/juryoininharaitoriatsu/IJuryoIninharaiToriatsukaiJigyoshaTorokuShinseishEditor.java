@@ -12,6 +12,7 @@ import jp.co.ndensan.reams.uz.uza.report.IReportEditor;
 /**
  *
  * 介護保険受領委任払い取扱事業者登録申請書のインターフェースクラスです。
+ * @reamsid_L DBA-0540-684 dongyabin
  */
 public interface IJuryoIninharaiToriatsukaiJigyoshaTorokuShinseishEditor extends 
         IReportEditor<JuryoIninharaiToriatsukaiJigyoshaTorokuShinseishoReportSource> {

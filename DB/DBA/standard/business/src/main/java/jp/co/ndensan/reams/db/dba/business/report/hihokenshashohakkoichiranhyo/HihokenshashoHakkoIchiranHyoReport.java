@@ -15,6 +15,7 @@ import lombok.NonNull;
 /**
  *
  * 被保険者証発行一覧表帳票作成します。
+ * @reamsid_L DBU-0420-060 dongyabin
  */
 public final class HihokenshashoHakkoIchiranHyoReport extends Report<HihokenshashoHakkoIchiranhyoReportSource> {
     

@@ -9,6 +9,9 @@ import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7037ShoKofuKaishuEntity;
 /**
  *
  * 被保険者証一括発行のマッパーインタフェースです。
+ *
+ * @reamsid_L DBU-0420-020 duanzhanli
+ *
  */
 public interface IIkkatsuHakkoMapper {
 

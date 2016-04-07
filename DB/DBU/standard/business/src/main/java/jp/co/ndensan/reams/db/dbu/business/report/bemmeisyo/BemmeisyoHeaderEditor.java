@@ -9,6 +9,8 @@ import jp.co.ndensan.reams.db.dbu.entity.report.bemmeisyo.BemmeisyoReportSource;
 
 /**
  * 弁明書ヘッダEditorです。
+ *
+ * @reamsid_L DBU-1080-150 linghuhang
  */
 class BemmeisyoHeaderEditor implements IBemmeisyoEditor {
 

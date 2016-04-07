@@ -14,6 +14,9 @@ import jp.co.ndensan.reams.uz.uza.batch.flow.IBatchFlowCommand;
 /**
  *
  * 被保険者台帳一括作成_バッチフロークラスです。
+ *
+ * @reamsid_L DBA-0510-010 duanzhanli
+ *
  */
 public class IkkatsuSakuseiFlow extends BatchFlowBase<IkkatsuSakuseiBatchParameter> {
 

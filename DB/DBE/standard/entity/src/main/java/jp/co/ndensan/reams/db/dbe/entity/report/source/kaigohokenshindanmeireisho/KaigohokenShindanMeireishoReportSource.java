@@ -5,8 +5,9 @@ import jp.co.ndensan.reams.uz.uza.report.IReportSource;
 import jp.co.ndensan.reams.uz.uza.report.source.ReportItem;
 
 /**
+ * 介護保険診断命令書のReportSource
  *
- * 介護保険診断命令書のSource
+ * @reamsid_L DBE-0080-070 wangxiaodong
  */
 public class KaigohokenShindanMeireishoReportSource implements IReportSource {
 // <editor-fold defaultstate="collapsed" desc="Generated Code">

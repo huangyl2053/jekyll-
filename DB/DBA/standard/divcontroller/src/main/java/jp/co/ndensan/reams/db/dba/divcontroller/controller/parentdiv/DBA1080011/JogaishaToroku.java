@@ -33,8 +33,9 @@ import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 import jp.co.ndensan.reams.uz.uza.util.db.SearchResult;
 
 /**
- *
  * 資格取得除外者登録のクラスです。
+ *
+ * @reamsid_L DBA-0440-030 zhangzhiming
  */
 public class JogaishaToroku {
 

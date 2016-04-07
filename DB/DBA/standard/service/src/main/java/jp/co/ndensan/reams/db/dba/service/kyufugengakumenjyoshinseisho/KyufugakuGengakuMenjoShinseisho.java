@@ -47,6 +47,8 @@ import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 /**
  *
  * 給付額減額免除申請書クラスです。
+ *
+ * @reamsid_L DBA-0540-300 yaodongsheng
  */
 public class KyufugakuGengakuMenjoShinseisho {
 

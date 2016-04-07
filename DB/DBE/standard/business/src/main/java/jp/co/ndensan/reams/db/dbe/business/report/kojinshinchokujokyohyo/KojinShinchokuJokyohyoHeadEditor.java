@@ -18,6 +18,8 @@ import jp.co.ndensan.reams.uz.uza.lang.Wareki;
 
 /**
  * 要介護認定個人進捗状況票ヘッダEditorです。
+ *
+ * @reamsid_L DBE-0200-040 zhangzhiming
  */
 class KojinShinchokuJokyohyoHeadEditor implements IKojinShinchokuJokyohyoEditor {
 

@@ -34,6 +34,8 @@ import jp.co.ndensan.reams.uz.uza.report.api.ReportInfo;
 
 /**
  * 主治医意見書督促対象者一覧表の作成クラスです。
+ *
+ * @reamsid_L DBE-0060-040 zhangzhiming
  */
 public class ShujiiIkenTokusokujoHakkoReportProcess extends BatchProcessBase<ShujiiIkenTokusokujoHakkoRelateEntity> {
 

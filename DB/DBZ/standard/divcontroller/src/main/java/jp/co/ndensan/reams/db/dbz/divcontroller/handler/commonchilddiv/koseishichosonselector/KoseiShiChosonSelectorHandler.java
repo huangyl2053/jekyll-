@@ -24,6 +24,7 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 /**
  *
  * 構成市町村選択の抽象Handlerクラスです。
+ * @reamsid_L DBE-3000-060 dongyabin
  */
 public class KoseiShiChosonSelectorHandler {
     

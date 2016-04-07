@@ -10,6 +10,8 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
  * 要介護認定申請検索のMyBatis用パラメータクラスです。
+ *
+ * @reamsid_L DBE-1370-010 sunhaidi
  */
 @lombok.Getter
 @lombok.Setter

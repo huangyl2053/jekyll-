@@ -19,7 +19,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.TextBox;
 /**
  * ShinseiKensaku のクラスファイル
  *
- * @author 自動生成
+ * @reamsid_L DBE-1370-010 sunhaidi
  */
 public class ShinseiKensakuDiv extends Panel {
 

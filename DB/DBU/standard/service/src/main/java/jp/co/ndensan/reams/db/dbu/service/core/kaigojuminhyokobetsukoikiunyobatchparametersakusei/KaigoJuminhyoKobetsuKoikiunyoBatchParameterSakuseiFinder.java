@@ -21,8 +21,9 @@ import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
 
 /**
- *
  * 広域運用抽出期間情報リスト取得するクラスです。
+ *
+ * @reamsid_L DBU-0550-040 zhangzhiming
  */
 public class KaigoJuminhyoKobetsuKoikiunyoBatchParameterSakuseiFinder {
 

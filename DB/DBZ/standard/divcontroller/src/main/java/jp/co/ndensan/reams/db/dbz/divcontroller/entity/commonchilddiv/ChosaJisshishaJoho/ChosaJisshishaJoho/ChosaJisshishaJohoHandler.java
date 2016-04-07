@@ -22,6 +22,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.KeyValueDataSource;
 /**
  *
  * 調査実施者情報の処理クラスです。
+ * @reamsid_L DBE-3000-100 dongyabin
  */
 public class ChosaJisshishaJohoHandler {
     
@@ -51,14 +52,18 @@ public class ChosaJisshishaJohoHandler {
     }
     
     private void setInput(ChosaJisshishaJohoModel key) {
-        div.getTxtChosaJisshiDate().setValue(RDate.getNowDate());
+        
+        div.getTxtChosaJisshiDate().setValue(key.get調査実施日().isEmpty() ? RDate.getNowDate() : new RDate(key.get調査実施日().toString()));
         List<KeyValueDataSource> chosaJisshiBasho = new ArrayList<>();
         for (ChosaJisshiBashoCode code : ChosaJisshiBashoCode.values()) {
             KeyValueDataSource data = new KeyValueDataSource(code.getコード(), code.get名称());
             chosaJisshiBasho.add(data);
         }
         div.getDdlChosaJisshiBasho().setDataSource(chosaJisshiBasho);
-        div.getTxtJisshiBashoMeisho().setValue(RString.EMPTY);
+        if (key.get調査実施場所() != null && !key.get調査実施場所().isEmpty()) {
+            div.getDdlChosaJisshiBasho().setSelectedValue(key.get調査実施場所());
+        }
+        div.getTxtJisshiBashoMeisho().setValue(key.get実施場所名称());
         List<NinteichosaItakusakiJoho> ninteichosaItakusakiJohoList = service.getSyozokuKikan(key.
                 get申請書管理番号()).records();
         List<KeyValueDataSource> shozokuKikan = new ArrayList<>();
@@ -68,6 +73,9 @@ public class ChosaJisshishaJohoHandler {
             shozokuKikan.add(date);
         }
         div.getDdlShozokuKikan().setDataSource(shozokuKikan);
+        if (key.get所属機関()!= null && !key.get所属機関().isEmpty()) {
+            div.getDdlShozokuKikan().setSelectedValue(key.get所属機関());
+        }
         List<ChosainJoho> chosainJohoList = service.getKinyusha(key
                 .get申請書管理番号()).records();
         List<KeyValueDataSource> kinyusha = new ArrayList<>();
@@ -77,10 +85,8 @@ public class ChosaJisshishaJohoHandler {
             kinyusha.add(data);
         }
         div.getDdlKinyusha().setDataSource(kinyusha);
-        List<ChosainJoho> chosainJohoEmptyList = service.getKinyushaEmpty(key
-                .get申請書管理番号()).records();
-        if (!chosainJohoEmptyList.isEmpty()) {
-            div.getDdlKinyusha().setSelectedKey(chosainJohoEmptyList.get(0).get認定調査員コード().getColumnValue());
+        if (key.get記入者()!= null && !key.get記入者().isEmpty()) {
+            div.getDdlShozokuKikan().setSelectedValue(key.get記入者());
         }
         List<NinteiShinseiJoho> ninteiShinseiJoho = service.get調査区分(key.
                 get申請書管理番号()).records();

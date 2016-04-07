@@ -11,6 +11,8 @@ import jp.co.ndensan.reams.uz.uza.report.source.ReportItem;
 
 /**
  * 認定調査スケジュール表(時間管理)Sourceクラスです。
+ *
+ * @reamsid_L DBE-0020-100 lishengli
  */
 public class ChosaSchedulehyoJikankanriReportSource implements IReportSource {
 // <editor-fold defaultstate="collapsed" desc="Generated Code">

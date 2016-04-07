@@ -20,6 +20,8 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
 
 /**
  * 年齢到達登録者リスト作成クラスです。
+ *
+ * @reamsid_L DBA-0570-010 xuyannan
  */
 public class nenreitotatsutoroku {
 

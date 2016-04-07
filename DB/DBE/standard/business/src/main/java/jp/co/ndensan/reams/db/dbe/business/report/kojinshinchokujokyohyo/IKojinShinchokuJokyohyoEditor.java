@@ -11,6 +11,7 @@ import jp.co.ndensan.reams.uz.uza.report.IReportEditor;
 /**
  * 要介護認定個人進捗状況票ヘッダエディターのインターフェースクラスです。
  *
+ * @reamsid_L DBE-0200-040 zhangzhiming
  */
 interface IKojinShinchokuJokyohyoEditor extends IReportEditor<KojinShinchokuJokyohyoReportSource> {
 }

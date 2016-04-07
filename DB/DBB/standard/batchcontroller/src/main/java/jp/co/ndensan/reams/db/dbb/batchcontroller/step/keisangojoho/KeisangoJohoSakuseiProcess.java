@@ -44,7 +44,10 @@ import jp.co.ndensan.reams.uz.uza.math.Decimal;
 
 /**
  *
- * 計算後情報作成です_バッチフ処理クラスです
+ * 計算後情報作成です_バッチフ処理クラスです。
+ *
+ * @reamsid_L DBB-9060-010 duanzhanli
+ *
  */
 public class KeisangoJohoSakuseiProcess extends BatchProcessBase<KeisangoJohoSakuseiRelateEntity> {
 

@@ -23,6 +23,7 @@ import jp.co.ndensan.reams.uz.uza.util.db.SearchResult;
 /**
  *
  * 広域内住所地特例者一覧表Handlerクラスです。
+ * @reamsid_L DBU-1140-040 dongyabin
  */
 public class KoikinaiJushochiTokureiHandler {
 

@@ -27,6 +27,7 @@ import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 /**
  *
  * 調査実施者情報の検索処理クラスです。
+ * @reamsid_L DBE-3000-100 dongyabin
  */
 public class ChosaJisshishaJohoFinder {
     

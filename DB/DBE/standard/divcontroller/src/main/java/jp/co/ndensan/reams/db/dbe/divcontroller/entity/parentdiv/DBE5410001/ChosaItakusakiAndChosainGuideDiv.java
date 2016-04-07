@@ -13,7 +13,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 /**
  * ChosaItakusakiAndChosainGuide のクラスファイル
  *
- * @author 自動生成
+ * @reamsid_L DBE-0200-010  suguangjun
  */
 public class ChosaItakusakiAndChosainGuideDiv extends Panel {
 
