@@ -11,6 +11,9 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
  * 資格訂正情報Entity
+ *
+ * @reamsid_L DBA-0521-030 zhengshukai
+ *
  */
 @lombok.Getter
 @lombok.Setter

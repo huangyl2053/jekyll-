@@ -12,6 +12,9 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
  * 医療保険情報
+ *
+ * @reamsid_L DBA-0521-030 zhengshukai
+ *
  */
 @lombok.Getter
 @lombok.Setter
