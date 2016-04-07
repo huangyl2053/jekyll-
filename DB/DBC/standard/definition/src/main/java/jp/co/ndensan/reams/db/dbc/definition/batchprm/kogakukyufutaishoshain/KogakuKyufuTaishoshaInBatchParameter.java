@@ -17,6 +17,7 @@ import lombok.Setter;
  */
 @Getter
 @Setter
+@SuppressWarnings("PMD.UnusedPrivateField")
 public class KogakuKyufuTaishoshaInBatchParameter extends BatchParameterBase {
 
     @BatchParameter(key = "処理年月", name = "処理年月")

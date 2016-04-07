@@ -14,6 +14,7 @@ import lombok.Setter;
  */
 @Getter
 @Setter
+@SuppressWarnings("PMD.UnusedPrivateField")
 public class ShokanKetteiTsuchiShoSealer {
 
     private RString tsuban;
