@@ -24,8 +24,9 @@ import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
 
 /**
- *
  * 資格取得除外者管理の取得します。
+ *
+ * @reamsid_L DBA-0440-030 zhangzhiming
  */
 public class ShikakuShutokuJogaishaKanriManager {
 

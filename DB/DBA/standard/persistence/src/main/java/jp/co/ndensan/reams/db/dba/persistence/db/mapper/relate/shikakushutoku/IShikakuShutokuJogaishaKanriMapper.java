@@ -12,8 +12,9 @@ import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT1009ShikakuShutokuJogaishaE
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 
 /**
- *
  * 資格取得除外者管理のMapperクラス。
+ *
+ * @reamsid_L DBA-0440-030 zhangzhiming
  */
 public interface IShikakuShutokuJogaishaKanriMapper {
 

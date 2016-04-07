@@ -15,8 +15,9 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPair;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
 
 /**
- *
  * 資格取得除外者登録の抽象ValidationHandlerクラスです。
+ *
+ * @reamsid_L DBA-0440-030 zhangzhiming
  */
 public class JogaishaValidationHandler {
 

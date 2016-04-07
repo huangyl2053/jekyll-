@@ -20,7 +20,7 @@ import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 /**
  * 地区認定調査員を管理するクラスです。
  *
- * @reamsid_L DBE-0021-010 zhangzhiming
+ * @reamsid_L DBE-9999-011 zhangzhiming
  */
 public class ChikuNinteiChosain extends
         ParentModelBase<ChikuNinteiChosainIdentifier, DbT5223ChikuNinteiChosainEntity, ChikuNinteiChosain>
