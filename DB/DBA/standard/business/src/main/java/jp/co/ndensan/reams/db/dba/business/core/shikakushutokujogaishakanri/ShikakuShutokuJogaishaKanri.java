@@ -15,8 +15,9 @@ import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
+ * 資格取得除外者一覧取得します。
  *
- * 資格取得除外者一覧取得します
+ * @reamsid_L DBA-0440-010 wangxiaodong
  */
 public class ShikakuShutokuJogaishaKanri {
 
