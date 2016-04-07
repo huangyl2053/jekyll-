@@ -18,6 +18,8 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
  * 広域合併情報取得結果のクラスです。
+ *
+ * @reamsid_L DBU-0090-010 linghuhang
  */
 public class KouikiGappeiJyoho {
 

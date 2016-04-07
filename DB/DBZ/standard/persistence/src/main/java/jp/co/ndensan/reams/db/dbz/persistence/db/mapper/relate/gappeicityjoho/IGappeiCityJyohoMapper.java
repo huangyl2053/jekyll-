@@ -12,6 +12,8 @@ import jp.co.ndensan.reams.db.dbz.entity.db.relate.gappeijoho.KouikiGappeiJyohoR
 
 /**
  * 合併市町村情報取得用データアクセスクラスです。
+ *
+ * @reamsid_L DBU-0090-010 linghuhang
  */
 public interface IGappeiCityJyohoMapper {
 
