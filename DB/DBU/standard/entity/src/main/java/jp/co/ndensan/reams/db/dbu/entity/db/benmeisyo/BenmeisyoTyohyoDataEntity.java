@@ -12,8 +12,10 @@ import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
- *
  * 弁明書の帳票出力用データEntityです。
+ *
+ * @reamsid_L DBU-1080-010 zhengshukai
+ *
  */
 @lombok.Getter
 @lombok.Setter

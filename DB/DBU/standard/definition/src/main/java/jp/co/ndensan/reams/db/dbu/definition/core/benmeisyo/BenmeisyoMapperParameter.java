@@ -12,8 +12,10 @@ import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import lombok.Getter;
 
 /**
- *
  * 弁明情報検索用パラメータです。
+ *
+ * @reamsid_L DBU-1080-010 zhengshukai
+ *
  */
 @SuppressWarnings("PMD.UnusedPrivateField")
 @Getter

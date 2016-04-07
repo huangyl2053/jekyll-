@@ -8,8 +8,10 @@ package jp.co.ndensan.reams.db.dbu.entity.db.benmeisyo;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
- *
  * 認証者・電子公印Entityです。
+ *
+ * @reamsid_L DBU-1080-010 zhengshukai
+ *
  */
 @lombok.Getter
 @lombok.Setter
