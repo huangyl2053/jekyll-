@@ -15,6 +15,7 @@ import jp.co.ndensan.reams.uz.uza.batch.flow.IBatchFlowCommand;
 /**
  *
  * 広域内住所地特例者一覧表_処理クラスです。
+ * @reamsid_L DBU-1140-020 dongyabin
  */
 public class KoikinaiJushochiTokureiFlow extends BatchFlowBase<KoikinaiJushochiTokureiBatchParamter> {
     

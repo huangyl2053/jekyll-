@@ -14,6 +14,8 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
  * 決定情報クラスです。
+ *
+ * @reamsid_L DBC-0950-010 zuotao
  */
 public class KetteJoho implements Serializable {
 

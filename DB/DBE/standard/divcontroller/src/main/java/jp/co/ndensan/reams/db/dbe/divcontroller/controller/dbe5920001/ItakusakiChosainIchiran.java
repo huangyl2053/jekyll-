@@ -14,6 +14,7 @@ import jp.co.ndensan.reams.uz.uza.lang.ApplicationException;
 /**
  *
  * 認定調査委託先・認定調査員一覧表のクラスです。
+ * @reamsid_L DBE-0290-010 dongyabin
  */
 public class ItakusakiChosainIchiran {
 

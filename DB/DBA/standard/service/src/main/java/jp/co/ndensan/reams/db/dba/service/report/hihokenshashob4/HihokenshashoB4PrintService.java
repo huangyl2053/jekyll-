@@ -19,6 +19,7 @@ import jp.co.ndensan.reams.uz.uza.report.SourceDataCollection;
 /**
  *
  * 介護保険被保険者証（B4版）Printクラスです。
+ * @reamsid_L DBU-0490-060 dongyabin
  */
 public class HihokenshashoB4PrintService {
     

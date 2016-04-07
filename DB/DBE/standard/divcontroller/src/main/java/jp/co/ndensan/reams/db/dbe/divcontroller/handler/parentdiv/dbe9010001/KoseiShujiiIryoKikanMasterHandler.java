@@ -11,8 +11,8 @@ import jp.co.ndensan.reams.db.dbe.business.core.shujiiiryokikanjohomaster.KoseiS
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE9010001.ShujiiIryoKikanMasterDiv;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE9010001.ShujiiJohoInputDiv;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE9010001.dgShujiiIchiran_Row;
-import jp.co.ndensan.reams.db.dbz.business.core.basic.ShujiiIryoKikanJoho;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBE;
+import jp.co.ndensan.reams.db.dbz.business.core.basic.ShujiiIryoKikanJoho;
 import jp.co.ndensan.reams.ur.urz.definition.core.iryokikan.IryoKikanCode;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaJusho;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaMeisho;
@@ -29,7 +29,7 @@ import jp.co.ndensan.reams.uz.uza.util.config.BusinessConfig;
 
 /**
  * 主治医医療機関マスタ画面のハンドラークラスです。
- *
+ * @reamsid_L DBE-0240-010 dongyabin
  */
 public class KoseiShujiiIryoKikanMasterHandler {
 

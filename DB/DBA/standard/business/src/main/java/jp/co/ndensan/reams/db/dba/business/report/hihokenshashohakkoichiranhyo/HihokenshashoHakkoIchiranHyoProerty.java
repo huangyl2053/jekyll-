@@ -15,6 +15,7 @@ import jp.co.ndensan.reams.uz.uza.report.ReportPropertyBase;
 /**
  * 
  * {@link HihokenshashoHakkoIchiranHyoProerty}のプロパティです。
+ * @reamsid_L DBU-0420-060 dongyabin
  */
 public class HihokenshashoHakkoIchiranHyoProerty extends ReportPropertyBase<HihokenshashoHakkoIchiranhyoReportSource> {
     

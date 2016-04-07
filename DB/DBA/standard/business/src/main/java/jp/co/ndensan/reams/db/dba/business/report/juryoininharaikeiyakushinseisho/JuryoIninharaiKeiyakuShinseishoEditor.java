@@ -11,8 +11,9 @@ import jp.co.ndensan.reams.db.dba.entity.report.juryoininharaikeiyakushinseisho.
 /**
  *
  * 介護保険受領委任払い契約申請書Editorです。
+ * @reamsid_L DBA-0540-683 dongyabin
  */
-    public class JuryoIninharaiKeiyakuShinseishoEditor implements IJuryoIninharaiKeiyakuShinseishoEditor {
+public class JuryoIninharaiKeiyakuShinseishoEditor implements IJuryoIninharaiKeiyakuShinseishoEditor {
     
     private final JuryoIninharaiKeiyakuShinseishoItem joho;
     

@@ -27,6 +27,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
  * 要介護認定申請情報を管理するクラスです。
+ * @reamsid_L DBE-3000-100 dongyabin
  */
 public class NinteiShinseiJoho {
 

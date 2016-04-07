@@ -18,6 +18,7 @@ import jp.co.ndensan.reams.uz.uza.util.db.SearchResult;
 
 /**
  * 広域内住所地特例者一覧表Divを制御します。
+ * @reamsid_L DBU-1140-010 dongyabin
  */
 public class KoikinaiJushochiTokurei {
 

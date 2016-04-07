@@ -12,6 +12,7 @@ import jp.co.ndensan.reams.uz.uza.report.ReportEditorJoiner;
 /**
  *
  * 介護保険受給資格証明書交付申請書のBuilderクラスです
+ * @reamsid_L DBA-0540-682 dongyabin
  */
 public final class JukyuShikakuShomeishokoufuShinseishoBuilderImpl implements IJukyuShikakuShomeishokoufuShinseishoBuilder {
     

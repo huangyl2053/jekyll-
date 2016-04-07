@@ -13,6 +13,7 @@ import lombok.Setter;
 /**
  *
  * 介護保険被保険者証（B4版）BodyEntityリストです。
+ * @reamsid_L DBU-0490-060 dongyabin
  */
 @Getter
 @Setter

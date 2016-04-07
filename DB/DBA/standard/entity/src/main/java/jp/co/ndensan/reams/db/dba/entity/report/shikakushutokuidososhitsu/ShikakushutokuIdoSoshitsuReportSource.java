@@ -7,6 +7,7 @@ import jp.co.ndensan.reams.uz.uza.report.source.ReportItem;
 /**
  * 
  * 介護保険資格取得・異動・喪失届の帳票ReportSourceクラスです。
+ * @reamsid_L DBA-0540-681 dongyabin
  */
 public class ShikakushutokuIdoSoshitsuReportSource implements IReportSource {
 // <editor-fold defaultstate="collapsed" desc="Generated Code">

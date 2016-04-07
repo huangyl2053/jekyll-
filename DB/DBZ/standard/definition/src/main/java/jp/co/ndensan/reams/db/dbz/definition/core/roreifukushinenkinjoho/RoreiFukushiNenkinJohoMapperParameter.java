@@ -13,6 +13,7 @@ import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 
 /**
  * MyBatis用パラメータクラスです。
+ * @reamsid_L DBA-0220-020 dongyabin
  */
 public final class RoreiFukushiNenkinJohoMapperParameter {
 

@@ -12,6 +12,7 @@ import jp.co.ndensan.reams.uz.uza.report.IReportEditor;
 /**
  *
  * 介護保険資格取得・異動・喪失届エディターのインターフェースクラスです。
+ * @reamsid_L DBA-0540-681 dongyabin
  */
 public interface IShikakushutokuIdoSoshitsuEditor extends IReportEditor<ShikakushutokuIdoSoshitsuReportSource> {
     

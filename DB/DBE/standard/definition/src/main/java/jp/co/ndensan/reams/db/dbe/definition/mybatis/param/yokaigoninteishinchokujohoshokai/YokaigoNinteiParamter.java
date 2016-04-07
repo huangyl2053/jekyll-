@@ -14,6 +14,7 @@ import lombok.Getter;
 /**
  *
  * 申請者一覧内容検索のパラメータです。
+ * @reamsid_L DBE-0210-010 dongyabin
  */
 @Getter
 @SuppressWarnings("PMD.UnusedPrivateField")

@@ -11,6 +11,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 /**
  *
  * 帳票IDを定義する列挙型です。
+ * @reamsid_L DBE-0290-010 dongyabin
  */
 public enum ItakusakiChosainIchiranReportId {
 

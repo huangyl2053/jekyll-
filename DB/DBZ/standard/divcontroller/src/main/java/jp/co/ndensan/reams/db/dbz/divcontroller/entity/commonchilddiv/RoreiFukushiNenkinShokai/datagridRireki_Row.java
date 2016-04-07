@@ -8,14 +8,14 @@ package jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.RoreiFuku
 
 
 
-import jp.co.ndensan.reams.uz.uza.ui.binding.DataRow;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.ui.binding.DataRow;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxDate;
 
 
 /**
  * datagridRireki_Row のクラスファイル 
- * 
+ * @reamsid_L DBA-0220-010 dongyabin
  * @author 自動生成
  */
 

@@ -16,6 +16,7 @@ import lombok.Setter;
 /**
  * ShujiiIkenTokusokujoHakkoDivのTempDataクラスです。
  *
+ * @reamsid_L DBE-0060-010 zhangzhiming
  */
 @SuppressWarnings("PMD.UnusedPrivateField")
 @Getter

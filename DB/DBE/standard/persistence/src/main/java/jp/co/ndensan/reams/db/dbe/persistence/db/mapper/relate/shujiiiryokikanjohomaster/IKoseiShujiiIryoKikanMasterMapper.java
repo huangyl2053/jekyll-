@@ -13,7 +13,7 @@ import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5911ShujiiIryoKikanJohoEnti
 
 /**
  * 主治医医療機関情報のマッパーインタフェースです。
- *
+ * @reamsid_L DBE-0240-010 dongyabin
  */
 public interface IKoseiShujiiIryoKikanMasterMapper {
 

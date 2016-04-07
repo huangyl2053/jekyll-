@@ -12,6 +12,7 @@ import jp.co.ndensan.reams.uz.uza.report.IReportEditor;
 /**
  *
  * 被保険者証発行一覧表ヘッダエディターのインターフェースクラスです。
+ * @reamsid_L DBU-0420-060 dongyabin
  */
 public interface IHihokenshashoHakkoIchiranHyoEditor extends IReportEditor<HihokenshashoHakkoIchiranhyoReportSource> {
     

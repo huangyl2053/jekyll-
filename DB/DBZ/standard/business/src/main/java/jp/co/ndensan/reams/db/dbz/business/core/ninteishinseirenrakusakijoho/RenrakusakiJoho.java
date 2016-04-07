@@ -24,6 +24,7 @@ import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 
 /**
  * 介護連絡先情報を管理するクラスです。
+ * @reamsid_L DBE-1300-100 dongyabin
  */
 public class RenrakusakiJoho extends ModelBase<RenrakusakiJohoIdentifier, DbT4150RenrakusakiJohoEntity, RenrakusakiJoho> implements Serializable {
 

@@ -7,6 +7,7 @@ import jp.co.ndensan.reams.uz.uza.report.source.ReportItem;
 /**
  * 
  * 介護保険住所地特例適用・変更・終了届の帳票定義クラスです。
+ * @reamsid_L DBA-0540-685 dongyabin
  */
 public class JyushochiTokureiTekiyoHenkoReportSource implements IReportSource {
 // <editor-fold defaultstate="collapsed" desc="Generated Code">

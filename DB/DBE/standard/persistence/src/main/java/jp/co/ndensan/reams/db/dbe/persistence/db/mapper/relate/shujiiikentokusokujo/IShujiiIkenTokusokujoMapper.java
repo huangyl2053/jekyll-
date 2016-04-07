@@ -9,6 +9,8 @@ import jp.co.ndensan.reams.db.dbe.definition.mybatis.param.shujiiikentokusokujo.
 
 /**
  * 主治医意見書のマッパーインタフェースです。
+ *
+ * @reamsid_L DBE-0060-010 zhangzhiming
  */
 public interface IShujiiIkenTokusokujoMapper {
 

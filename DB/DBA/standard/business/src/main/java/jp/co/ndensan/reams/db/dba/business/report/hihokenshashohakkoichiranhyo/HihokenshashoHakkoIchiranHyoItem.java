@@ -12,6 +12,7 @@ import lombok.Getter;
 /**
  *
  * 一覧表証発行者Entityリストです。
+ * @reamsid_L DBU-0420-060 dongyabin
  */
 @Getter
 @SuppressWarnings("PMD.UnusedPrivateField")

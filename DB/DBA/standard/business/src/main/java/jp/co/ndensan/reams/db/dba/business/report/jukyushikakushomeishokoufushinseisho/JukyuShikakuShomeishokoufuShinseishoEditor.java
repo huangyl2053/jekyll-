@@ -12,8 +12,9 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 /**
  *
  * 介護保険受給資格証明書交付申請書のEditorです。
+ * @reamsid_L DBA-0540-682 dongyabin
  */
-    public class JukyuShikakuShomeishokoufuShinseishoEditor implements IJukyuShikakuShomeishokoufuShinseishoEditor {
+public class JukyuShikakuShomeishokoufuShinseishoEditor implements IJukyuShikakuShomeishokoufuShinseishoEditor {
     
     private final JukyuShikakuShomeishokoufuShinseishoItem joho;
     
