@@ -26,6 +26,8 @@ import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
 
 /**
  * 他市町村住所地特例のデータアクセスクラスです。
+ *
+ * @reamsid_L DBZ-9999-021 linghuhang
  */
 public class DbT1003TashichosonJushochiTokureiDac implements ISaveable<DbT1003TashichosonJushochiTokureiEntity> {
 
