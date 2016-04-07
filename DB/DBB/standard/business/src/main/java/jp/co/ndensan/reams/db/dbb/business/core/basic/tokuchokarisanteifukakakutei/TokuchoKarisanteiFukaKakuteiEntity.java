@@ -11,6 +11,8 @@ import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 /**
  *
  * 特徴仮算定賦課確定の戻るEntity。
+ *
+ * @reamsid_L DBB-0800-020 wanghui
  */
 public class TokuchoKarisanteiFukaKakuteiEntity {
 
