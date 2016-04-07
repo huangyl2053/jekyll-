@@ -12,6 +12,8 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 /**
  *
  * データ出力終了メッセージのコントローラです。
+ *
+ * @reamsid_L DBZ-4480-010 chengsanyuan
  */
 public class DataOutputInfomation {
 

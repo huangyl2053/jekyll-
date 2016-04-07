@@ -10,6 +10,8 @@ import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 
 /**
  * 主治医意見書登録のパラメータクラス
+ *
+ * @reamsid_L DBE-0070-010 chengsanyuan
  */
 @lombok.Getter
 @SuppressWarnings("PMD.UnusedPrivateField")

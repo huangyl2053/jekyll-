@@ -38,6 +38,8 @@ import jp.co.ndensan.reams.uz.uza.spool.entities.UzUDE0835SpoolOutputType;
 
 /**
  * 合議体情報一括作成_バッチフ処理クラスです
+ *
+ * @reamsid_L DBE-0090-020 chengsanyuan
  */
 public class GogitaiJohoIkkatuSakuseiProcess extends BatchProcessBase<GogitaiJohoSakuseiCSVEntity> {
 

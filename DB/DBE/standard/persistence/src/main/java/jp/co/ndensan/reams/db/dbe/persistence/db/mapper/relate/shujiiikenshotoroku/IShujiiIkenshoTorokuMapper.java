@@ -10,6 +10,8 @@ import jp.co.ndensan.reams.db.dbe.entity.db.relate.shujiiikenshotoroku.ShujiiIke
 
 /**
  * 主治医意見書登録のマッパーインタフェースです。
+ *
+ * @reamsid_L DBE-0070-010 chengsanyuan
  */
 public interface IShujiiIkenshoTorokuMapper {
 
