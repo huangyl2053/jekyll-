@@ -10,6 +10,9 @@ import jp.co.ndensan.reams.uz.uza.report.ReportEditorJoiner;
 
 /**
  * 介護保険他市町村住所地特例者連絡票Builderクラスです。
+ *
+ * @reamsid_L DBA-0380-080 duanzhanli
+ *
  */
 class TashichosonJushochitokureishaRenrakuhyoBuilderImpl implements ITashichosonJushochitokureishaRenrakuhyoBuilder {
 

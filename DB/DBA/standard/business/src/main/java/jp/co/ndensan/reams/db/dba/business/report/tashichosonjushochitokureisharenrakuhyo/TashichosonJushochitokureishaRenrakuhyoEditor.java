@@ -9,6 +9,9 @@ import jp.co.ndensan.reams.db.dba.entity.report.source.tashichosonjushochitokure
 
 /**
  * 介護保険他市町村住所地特例者連絡票Editorです。
+ *
+ * @reamsid_L DBA-0380-080 duanzhanli
+ *
  */
 class TashichosonJushochitokureishaRenrakuhyoEditor implements ITashichosonJushochitokureishaRenrakuhyoEditor {
 

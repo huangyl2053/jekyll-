@@ -6,6 +6,9 @@ import jp.co.ndensan.reams.uz.uza.report.source.ReportItem;
 
 /**
  * 介護保険他市町村住所地特例者連絡票の帳票データのクラスです。
+ *
+ * @reamsid_L DBA-0380-080 duanzhanli
+ *
  */
 public class TashichosonJushochitokureishaRenrakuhyoReportSource implements IReportSource {
 // <editor-fold defaultstate="collapsed" desc="Generated Code">

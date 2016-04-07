@@ -12,6 +12,9 @@ import lombok.Setter;
 /**
  *
  * 介護保険他市町村住所地特例者連絡票_帳票パラメータクラスです。
+ *
+ * @reamsid_L DBA-0380-080 duanzhanli
+ *
  */
 @Getter
 @Setter
