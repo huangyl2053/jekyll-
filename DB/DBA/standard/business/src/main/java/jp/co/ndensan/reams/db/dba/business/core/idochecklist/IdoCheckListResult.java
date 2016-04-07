@@ -10,6 +10,8 @@ import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 
 /**
  * 異動チェックリスト情報Businessクラスです。
+ *
+ * @reamsid_L DBA-0530-010 chengsanyuan
  */
 public class IdoCheckListResult {
 

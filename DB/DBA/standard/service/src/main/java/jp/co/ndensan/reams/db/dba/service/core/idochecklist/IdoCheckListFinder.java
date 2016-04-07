@@ -8,9 +8,9 @@ package jp.co.ndensan.reams.db.dba.service.core.idochecklist;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-import jp.co.ndensan.reams.db.dba.definition.batchprm.idochecklist.IdoCheckListBatchParameter;
 import jp.co.ndensan.reams.db.dba.business.core.idochecklist.IdoCheckListParameter;
 import jp.co.ndensan.reams.db.dba.business.core.idochecklist.IdoCheckListResult;
+import jp.co.ndensan.reams.db.dba.definition.batchprm.idochecklist.IdoCheckListBatchParameter;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7022ShoriDateKanriEntity;
 import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT7022ShoriDateKanriDac;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
@@ -22,6 +22,8 @@ import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 
 /**
  * 異動チェックリストのサービスクラスです。
+ *
+ * @reamsid_L DBA-0530-010 chengsanyuan
  */
 public class IdoCheckListFinder {
 
