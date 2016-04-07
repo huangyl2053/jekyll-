@@ -12,8 +12,9 @@ import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.report.ReportPropertyBase;
 
 /**
- *
  * 介護保険居宅介護（予防）福祉用具購入費支給（受領委任払）申請書のプロパティです。
+ *
+ * @reamsid_L DBA-0540-710 lishengli
  */
 public class FukushiYoguKonyuhiShinseishoJuryoIninHaraiProperty
         extends ReportPropertyBase<FukushiYoguKonyuhiShinseishoJuryoIninHaraiReportSource> {

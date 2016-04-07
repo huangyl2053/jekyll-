@@ -9,8 +9,9 @@ import jp.co.ndensan.reams.db.dba.entity.report.fukushiyogukonyuhi.FukushiYoguKo
 import jp.co.ndensan.reams.uz.uza.report.ReportEditorJoiner;
 
 /**
- *
  * 介護保険居宅介護（予防）福祉用具購入費支給（受領委任払）申請書のBuilderクラスです。
+ *
+ * @reamsid_L DBA-0540-710 lishengli
  */
 public class FukushiYoguKonyuhiShinseishoJuryoIninHaraiItemBuilder
         implements IFukushiYoguKonyuhiShinseishoJuryoIninHaraiBuilder {
