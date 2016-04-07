@@ -13,6 +13,8 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
  * 証交付回収情報のエンティティクラスです。
+ *
+ * @reamsid_L DBA-1070-020 lizhuoxuan
  */
 @lombok.Getter
 @lombok.Setter

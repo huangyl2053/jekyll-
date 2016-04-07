@@ -20,6 +20,8 @@ import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
 
 /**
  * 証交付回収情報の取得処理です。
+ *
+ * @reamsid_L DBA-1070-020 lizhuoxuan
  */
 public class ShoKofuKaishuJohoManager {
 
