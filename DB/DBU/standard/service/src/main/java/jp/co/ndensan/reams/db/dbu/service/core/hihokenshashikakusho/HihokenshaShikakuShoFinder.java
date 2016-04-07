@@ -28,8 +28,9 @@ import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
 
 /**
- *
  * 被保険者証・資格者証データ取得するクラスです。
+ *
+ * @reamsid_L DBU-0490-020 zhangzhiming
  */
 public class HihokenshaShikakuShoFinder {
 
