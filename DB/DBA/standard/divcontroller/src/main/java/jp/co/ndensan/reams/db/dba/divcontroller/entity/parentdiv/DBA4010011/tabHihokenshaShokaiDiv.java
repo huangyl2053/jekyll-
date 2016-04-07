@@ -5,7 +5,7 @@ package jp.co.ndensan.reams.db.dba.divcontroller.entity.parentdiv.DBA4010011;
  */
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import jp.co.ndensan.reams.db.dba.divcontroller.entity.parentdiv.ShikakuTokusoRirekiDiv;
+import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.ShikakuTokusoRireki.ShikakuTokusoRirekiDiv;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.parentdiv.iryohokenrireki.IryoHokenRirekiDiv;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.parentdiv.shisetsunyutaishorirekikanri.ShisetsuNyutaishoRirekiKanriDiv;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.parentdiv.shokaishukirokukanri.ShoKaishuKirokuKanriDiv;
