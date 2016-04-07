@@ -15,6 +15,9 @@ import lombok.Setter;
 /**
  *
  * 計算後情報作成ですためのバッチ用パラメータクラスです。
+ *
+ * @reamsid_L DBB-9060-010 duanzhanli
+ *
  */
 @Getter
 @Setter

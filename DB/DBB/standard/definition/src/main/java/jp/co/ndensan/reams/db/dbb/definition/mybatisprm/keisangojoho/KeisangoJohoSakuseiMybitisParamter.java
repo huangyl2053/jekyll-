@@ -11,6 +11,9 @@ import lombok.Getter;
 
 /**
  * 計算後情報作成ですためのMyBatis用パラメータクラスです。
+ *
+ * @reamsid_L DBB-9060-010 duanzhanli
+ *
  */
 @SuppressWarnings("PMD.UnusedPrivateField")
 @Getter
