@@ -39,6 +39,8 @@ import jp.co.ndensan.reams.uz.uza.util.Saiban;
 /**
  *
  * 償還払い費支給申請決定_サービス提供証明書(給付費明細(住特））
+ *
+ * @reamsid_L DBC-1030-030 quxiaodong
  */
 public class KyuhuhiMeisaiJutokuPanelHandler {
 
