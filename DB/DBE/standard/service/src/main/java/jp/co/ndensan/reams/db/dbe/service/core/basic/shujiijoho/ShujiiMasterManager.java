@@ -17,6 +17,8 @@ import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
 
 /**
  * 主治医情報のCSV出力クラスです。
+ * 
+ * @reamsid_L DBE-0250-010  suguangjun 
  */
 public class ShujiiMasterManager {
 

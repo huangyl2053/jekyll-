@@ -20,6 +20,7 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
 /**
  * 主治医マスタ画面のバリデーションハンドラークラスです。
  * 
+ * @reamsid_L DBE-0250-010  suguangjun
  */
 public class ShujiiMasterValidationHandler {
 

@@ -11,6 +11,8 @@ import jp.co.ndensan.reams.db.dbe.entity.db.relate.basic.ikenshoshujiiichiran.Ik
 
 /**
  * 主治医医療機関・主治医一覧表のマッパーインタフェースです。
+ *
+ * @reamsid_L DBE-0260-030 zuotao
  */
 public interface IkenshoShujiiIchiranRelateMapper {
 
