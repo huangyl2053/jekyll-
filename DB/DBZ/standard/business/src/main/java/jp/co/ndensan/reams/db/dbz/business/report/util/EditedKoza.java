@@ -10,8 +10,9 @@ import jp.co.ndensan.reams.ua.uax.business.core.koza.IKoza;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
- *
  * 編集後口座のクラスです。
+ *
+ * @reamsid_L DBB-9040-140 wangxiaodong
  */
 public class EditedKoza {
 
