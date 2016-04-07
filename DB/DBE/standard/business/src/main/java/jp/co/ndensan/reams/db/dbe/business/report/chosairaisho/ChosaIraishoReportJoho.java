@@ -8,8 +8,9 @@ package jp.co.ndensan.reams.db.dbe.business.report.chosairaisho;
 import java.util.List;
 
 /**
- *
  * 要介護認定調査依頼書作成_帳票パラメータクラスです。
+ *
+ * @reamsid_L DBE-0010-020 lishengli
  */
 @lombok.Getter
 @SuppressWarnings("PMD.UnusedPrivateField")

@@ -11,8 +11,9 @@ import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.report.ReportPropertyBase;
 
 /**
- *
  * {@link 要介護認定調査依頼書のReport}のプロパティです。
+ *
+ * @reamsid_L DBE-0010-020 lishengli
  */
 public class ChosaIraishoProperty extends ReportPropertyBase<ChosaIraishoReportSource> {
 
