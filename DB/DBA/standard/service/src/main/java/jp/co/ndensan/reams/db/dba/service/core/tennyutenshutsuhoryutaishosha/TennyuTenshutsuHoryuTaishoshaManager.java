@@ -29,8 +29,9 @@ import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
 
 /**
- *
  * 転入転出保留対象者管理のmanagerクラスです。
+ *
+ * @reamsid_L DBA-0470-010 wangxiaodong
  */
 public class TennyuTenshutsuHoryuTaishoshaManager {
 

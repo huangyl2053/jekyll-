@@ -20,8 +20,9 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 
 /**
+ * 転入 広域保留対象者情報の取得処理の取得します。
  *
- * 転入 広域保留対象者情報の取得処理の取得します
+ * @reamsid_L DBA-0470-010 wangxiaodong
  */
 public class TenshutsuHoryuTaishoshaBusiness implements ITennyuTenshutsuHoryuTaishosha {
 

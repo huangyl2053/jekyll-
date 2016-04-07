@@ -17,6 +17,8 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 /**
  *
  * 依頼書一括発行のバッチパラメータクラスです。
+ *
+ * @reamsid_L DBE-0080-160 duanzhanli
  */
 @lombok.Getter
 @lombok.Setter

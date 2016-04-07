@@ -14,6 +14,8 @@ import jp.co.ndensan.reams.uz.uza.batch.flow.IBatchFlowCommand;
 /**
  *
  * 認定調査依頼発行一覧表_バッチフロークラスです。
+ *
+ * @reamsid_L DBE-0080-160 duanzhanli
  */
 public class NinteiChosaIraiFlow extends BatchFlowBase<IraishoIkkatsuHakkoBatchParamter> {
 
