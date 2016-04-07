@@ -9,8 +9,9 @@ import java.util.List;
 import lombok.Getter;
 
 /**
- *
  * 介護住民票個別事項連携情報_バッチパラメータクラスです。
+ *
+ * @reamsid_L DBU-0550-010 zhangzhiming
  */
 @Getter
 @SuppressWarnings("PMD.UnusedPrivateField")

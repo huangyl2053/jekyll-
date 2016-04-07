@@ -7,15 +7,21 @@ package jp.co.ndensan.reams.db.dbu.divcontroller.entity.parentdiv.DBU0230011;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import jp.co.ndensan.reams.uz.uza.ui.binding.*;
+import jp.co.ndensan.reams.uz.uza.ui.binding.Button;
+import jp.co.ndensan.reams.uz.uza.ui.binding.CheckBoxList;
+import jp.co.ndensan.reams.uz.uza.ui.binding.Label;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
+import jp.co.ndensan.reams.uz.uza.ui.binding.TextBox;
+import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxDate;
+import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxTime;
 
 /**
- * KonkaiInfoInput のクラスファイル 
- * 
- * @author 自動生成
+ * KonkaiInfoInput のクラスファイル
+ *
+ * @reamsid_L DBU-0550-010 zhangzhiming
  */
 public class KonkaiInfoInputDiv extends Panel {
+
     // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：バージョン情報無し">
     /*
      * [ private の作成 ]
@@ -104,7 +110,7 @@ public class KonkaiInfoInputDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setChkZenken(CheckBoxList chkZenken) {
+    public void setChkZenken(CheckBoxList chkZenken) {
         this.getTblkonkaiInfoInput().getZenken().setChkZenken(chkZenken);
     }
 
