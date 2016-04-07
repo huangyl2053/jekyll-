@@ -10,6 +10,8 @@ import jp.co.ndensan.reams.uz.uza.report.ReportEditorJoiner;
 
 /**
  * 要介護認定個人進捗状況票Builderクラスです。
+ *
+ * @reamsid_L DBE-0200-040 zhangzhiming
  */
 class KojinShinchokuJokyohyoBuilderImpl implements IKojinShinchokuJokyohyoBuilder {
 

@@ -13,6 +13,8 @@ import lombok.NonNull;
 
 /**
  * 要介護認定個人進捗状況票のReportです。
+ *
+ * @reamsid_L DBE-0200-040 zhangzhiming
  */
 public class KojinShinchokuJokyohyoReport extends Report<KojinShinchokuJokyohyoReportSource> {
 

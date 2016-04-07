@@ -22,6 +22,8 @@ import jp.co.ndensan.reams.uz.uza.report.SourceDataCollection;
 
 /**
  * 要介護認定個人進捗状況票Printerです。
+ *
+ * @reamsid_L DBE-0200-040 zhangzhiming
  */
 public class KojinShinchokuJokyohyoPrintService {
 
