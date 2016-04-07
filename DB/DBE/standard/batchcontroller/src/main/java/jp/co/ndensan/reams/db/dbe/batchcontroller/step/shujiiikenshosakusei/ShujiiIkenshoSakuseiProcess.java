@@ -25,7 +25,9 @@ import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
 
 /**
  *
- * 主治医意見書作成依頼発行一覧表_バッチフ処理クラスです
+ * 主治医意見書作成依頼発行一覧表_バッチフ処理クラスです。
+ *
+ * @reamsid_L DBE-0080-150 duanzhanli
  */
 public class ShujiiIkenshoSakuseiProcess extends BatchProcessBase<ShujiiIkenshoSakuseiRelateEntity> {
 

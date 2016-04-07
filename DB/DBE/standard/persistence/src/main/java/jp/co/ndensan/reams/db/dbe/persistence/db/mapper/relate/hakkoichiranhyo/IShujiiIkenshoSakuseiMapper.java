@@ -11,6 +11,8 @@ import jp.co.ndensan.reams.db.dbe.entity.db.relate.hakkoichiranhyo.ShujiiIkensho
 
 /**
  * 認定調査依頼発行一覧表のマッパーインタフェースです。
+ *
+ * @reamsid_L DBE-0080-150 duanzhanli
  */
 public interface IShujiiIkenshoSakuseiMapper {
 
