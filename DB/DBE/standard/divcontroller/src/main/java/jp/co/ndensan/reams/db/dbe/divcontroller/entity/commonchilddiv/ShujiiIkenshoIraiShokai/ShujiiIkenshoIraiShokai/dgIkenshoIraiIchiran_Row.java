@@ -3,22 +3,18 @@ package jp.co.ndensan.reams.db.dbe.divcontroller.entity.commonchilddiv.ShujiiIke
  * このコードはツールによって生成されました。
  * このファイルへの変更は、以下の状況下で不正な動作の原因になったり、
  * コードが再生成されるときに損失したりします。
- * Wed Jan 27 13:43:23 CST 2016 
+ * Wed Jan 27 13:43:23 CST 2016
  */
 
-
-
-import jp.co.ndensan.reams.uz.uza.ui.binding.DataRow;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.ui.binding.DataRow;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxDate;
 
-
 /**
- * dgIkenshoIraiIchiran_Row のクラスファイル 
- * 
- * @author 自動生成
+ * dgIkenshoIraiIchiran_Row のクラスファイル
+ *
+ * @reamsid_L DBE-0200-030 zhangzhiming
  */
-
 public class dgIkenshoIraiIchiran_Row extends DataRow {
     // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：バージョン情報無し">
 

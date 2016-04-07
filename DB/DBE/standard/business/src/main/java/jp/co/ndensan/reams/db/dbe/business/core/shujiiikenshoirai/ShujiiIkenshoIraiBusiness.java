@@ -14,6 +14,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 /**
  * 認定調査の情報インターフェースです。
  *
+ * @reamsid_L DBE-0200-030 zhangzhiming
  */
 public class ShujiiIkenshoIraiBusiness {
 
