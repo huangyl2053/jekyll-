@@ -25,6 +25,8 @@ import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
 
 /**
  * 各種コード変換テーブルのデータアクセスクラスです。
+ *
+ * @reamsid_L DBZ-9999-021 zhengshukai
  */
 public class DbT7027KakushuCodeHenkanDac implements ISaveable<DbT7027KakushuCodeHenkanEntity> {
 

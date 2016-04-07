@@ -16,8 +16,10 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 
 /**
- *
  * 介護住民票個別事項連携情報のエンティティクラスです。
+ *
+ * @reamsid_L DBU-0350-030 zhengshukai
+ *
  */
 @lombok.Getter
 @lombok.Setter
