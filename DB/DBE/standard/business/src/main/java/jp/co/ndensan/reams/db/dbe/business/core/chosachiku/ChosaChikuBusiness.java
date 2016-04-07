@@ -12,6 +12,8 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
  * 地区認定調査員情報ビジネスクラスです。
+ *
+ * @reamsid_L DBE-0021-010 zhangzhiming
  */
 public class ChosaChikuBusiness {
 

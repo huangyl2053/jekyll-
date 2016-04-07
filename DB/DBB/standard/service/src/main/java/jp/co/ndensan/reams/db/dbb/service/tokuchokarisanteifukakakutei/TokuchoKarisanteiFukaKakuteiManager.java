@@ -25,7 +25,9 @@ import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
 
 /**
  *
- * 特徴仮算定賦課確定のクラスです
+ * 特徴仮算定賦課確定のクラスです。
+ *
+ * @reamsid_L DBB-0800-020 wanghui
  */
 public class TokuchoKarisanteiFukaKakuteiManager {
 

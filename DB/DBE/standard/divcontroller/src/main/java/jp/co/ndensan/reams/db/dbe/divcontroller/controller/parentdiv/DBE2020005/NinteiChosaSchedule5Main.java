@@ -25,6 +25,7 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
 /**
  * 地区認定調査員情報のコントローラです。
  *
+ * @reamsid_L DBE-0021-010 zhangzhiming
  */
 public class NinteiChosaSchedule5Main {
 
