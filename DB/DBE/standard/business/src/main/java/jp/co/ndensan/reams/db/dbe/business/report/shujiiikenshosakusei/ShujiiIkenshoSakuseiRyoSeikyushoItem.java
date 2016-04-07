@@ -10,6 +10,8 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 /**
  *
  * 主治医意見書作成料請求書パラメータクラスです。
+ *
+ * @reamsid_L DBE-0050-040 sunhaidi
  */
 @lombok.Getter
 @lombok.Setter

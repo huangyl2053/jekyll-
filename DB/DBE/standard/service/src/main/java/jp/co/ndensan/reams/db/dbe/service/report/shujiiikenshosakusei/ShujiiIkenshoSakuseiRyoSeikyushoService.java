@@ -17,6 +17,7 @@ import jp.co.ndensan.reams.uz.uza.report.SourceDataCollection;
 /**
  * 主治医意見書作成料請求書Printerです。
  *
+ * @reamsid_L DBE-0050-040 sunhaidi
  */
 public class ShujiiIkenshoSakuseiRyoSeikyushoService {
 

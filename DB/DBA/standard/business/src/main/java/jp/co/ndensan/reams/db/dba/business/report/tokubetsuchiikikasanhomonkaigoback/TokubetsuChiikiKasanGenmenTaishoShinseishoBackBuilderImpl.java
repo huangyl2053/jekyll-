@@ -9,8 +9,9 @@ import jp.co.ndensan.reams.db.dba.entity.report.tokubetsuchiikikasanhomonkaigoba
 import jp.co.ndensan.reams.uz.uza.report.ReportEditorJoiner;
 
 /**
- *
  * 特別地域加算減免・訪問介護等利用者負担減額対象確認申請書Builderクラスです。
+ * 
+ * @reamsid_L DBA-0540-700  suguangjun 
  */
 public class TokubetsuChiikiKasanGenmenTaishoShinseishoBackBuilderImpl implements ITokubetsuChiikiKasanGenmenTaishoShinseishoBackBuilder {
 
