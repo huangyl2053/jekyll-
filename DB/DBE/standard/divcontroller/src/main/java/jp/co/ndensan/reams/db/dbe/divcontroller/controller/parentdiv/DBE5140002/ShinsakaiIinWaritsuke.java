@@ -32,6 +32,8 @@ import jp.co.ndensan.reams.uz.uza.util.Models;
 
 /**
  * 介護認定審査会割当委員情報更新のコントローラです。
+ *
+ * @reamsid_L DBE-0130-020 xuyannan
  */
 public class ShinsakaiIinWaritsuke {
 
