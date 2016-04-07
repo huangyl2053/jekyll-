@@ -12,8 +12,9 @@ import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5225ChosaChikuGroupEntity;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
- *
  * 認定調査スケジュール登録8のマッパーインタフェースです。
+ * 
+ * @reamsid_L DBE-0024-010  suguangjun 
  */
 public interface IChosaChikuGroupRelateMapper {
 

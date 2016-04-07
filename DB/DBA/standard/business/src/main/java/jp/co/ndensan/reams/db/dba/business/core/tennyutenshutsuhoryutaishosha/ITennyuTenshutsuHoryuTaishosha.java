@@ -16,8 +16,9 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 
 /**
- *
  * 転出転入保留対象者情報の取得します。
+ *
+ * @reamsid_L DBA-0470-010 wangxiaodong
  */
 public interface ITennyuTenshutsuHoryuTaishosha {
 

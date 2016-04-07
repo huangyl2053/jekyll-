@@ -16,8 +16,9 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 
 /**
- *
  * 転出保留対象者管理
+ *
+ * @reamsid_L DBA-0470-010 wangxiaodong
  */
 public class TennyushutsuHoryuTaishoshaEntity {
 

@@ -10,6 +10,8 @@ import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 
 /**
  * 認定調査スケジュール登録8のMyBatis用パラメータクラスです。
+ * 
+ * @reamsid_L DBE-0024-010  suguangjun
  */
 @lombok.Getter
 @SuppressWarnings("PMD.UnusedPrivateField")

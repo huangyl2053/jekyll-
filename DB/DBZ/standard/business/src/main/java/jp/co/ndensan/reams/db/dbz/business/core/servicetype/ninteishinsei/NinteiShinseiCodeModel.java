@@ -9,8 +9,9 @@ import java.io.Serializable;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
- *
  * 市町村連絡事項のダイアログパラメータクラスです。
+ * 
+ * @reamsid_L DBE-1300-090  suguangjun 
  */
 @lombok.Getter
 @lombok.Setter

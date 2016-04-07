@@ -11,8 +11,9 @@ import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
- *
  * 認定調査スケジュール登録8情報RelateEntityクラスです。
+ * 
+ * @reamsid_L DBE-0024-010  suguangjun 
  */
 @lombok.Getter
 @lombok.Setter

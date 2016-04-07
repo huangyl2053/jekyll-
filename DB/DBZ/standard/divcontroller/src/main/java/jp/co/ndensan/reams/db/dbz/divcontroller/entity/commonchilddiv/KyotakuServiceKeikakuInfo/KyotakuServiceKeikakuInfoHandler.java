@@ -16,6 +16,8 @@ import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 /**
  *
  * 居宅サービス計画情報Handlerクラスです。
+ * 
+ * @reamsid_L DBE-3000-170  suguangjun
  */
 public class KyotakuServiceKeikakuInfoHandler {
 
