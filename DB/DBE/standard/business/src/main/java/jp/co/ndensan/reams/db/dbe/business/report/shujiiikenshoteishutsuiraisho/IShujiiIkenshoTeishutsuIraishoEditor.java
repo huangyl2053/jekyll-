@@ -11,6 +11,8 @@ import jp.co.ndensan.reams.uz.uza.report.IReportEditor;
 /**
  *
  * 介護保険指定医依頼兼主治医意見書提出依頼書ヘッダエディターのインターフェースクラスです。
+ *
+ * @reamsid_L DBE-0080-080 duanzhanli
  */
 interface IShujiiIkenshoTeishutsuIraishoEditor extends IReportEditor<ShujiiIkenshoTeishutsuIraishoReportSource> {
 
