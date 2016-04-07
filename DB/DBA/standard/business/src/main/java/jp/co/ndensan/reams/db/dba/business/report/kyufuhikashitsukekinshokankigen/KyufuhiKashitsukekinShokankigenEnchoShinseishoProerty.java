@@ -13,6 +13,8 @@ import jp.co.ndensan.reams.uz.uza.report.ReportPropertyBase;
 /**
  * KyufuhiKashitsukekinShokankigenEnchoShinseishoProertyのプロパティです。
  *
+ * @reamsid_L DBA-0540-702  lijia
+ * 
  */
 public class KyufuhiKashitsukekinShokankigenEnchoShinseishoProerty extends
         ReportPropertyBase<KyufuKashitsukekinShokanKigenEnchoShinseishoReportSource> {

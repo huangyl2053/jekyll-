@@ -9,6 +9,9 @@ import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaN
 
 /**
  * 給付費貸付金決定情報のマッパーインタフェースです。
+ * 
+ * @reamsid_L DBA-0540-440  lijia
+ * 
  */
 public interface IKyufuhiKashitsukeKinKetteiMapper {
 
