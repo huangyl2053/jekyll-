@@ -16,6 +16,8 @@ import jp.co.ndensan.reams.uz.uza.report.SourceDataCollection;
 
 /**
  * 境界層管理マスタリストPrinterです。
+ *
+ * @reamsid_L DBU-1050-060 linghuhang
  */
 public class KyokaisoKanriMasterListPrintService {
 

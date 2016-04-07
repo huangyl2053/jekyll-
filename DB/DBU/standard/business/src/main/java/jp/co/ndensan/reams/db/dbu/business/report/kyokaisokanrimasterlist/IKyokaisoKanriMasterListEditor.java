@@ -11,6 +11,7 @@ import jp.co.ndensan.reams.uz.uza.report.IReportEditor;
 /**
  * 境界層管理マスタリストのインターフェースクラスです。
  *
+ * @reamsid_L DBU-1050-060 linghuhang
  */
 interface IKyokaisoKanriMasterListEditor extends IReportEditor<KyokaisoKanriMasterListReportSource> {
 }
