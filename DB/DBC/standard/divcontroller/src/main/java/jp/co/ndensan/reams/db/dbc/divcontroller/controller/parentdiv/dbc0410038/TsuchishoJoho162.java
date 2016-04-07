@@ -16,6 +16,8 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 /**
  *
  * 国保連情報受取データ取込_[162]総合事業費審査決定請求明細表情報
+ *
+ * @reamsid_L DBC-0980-150 quxiaodong
  */
 public class TsuchishoJoho162 {
 
