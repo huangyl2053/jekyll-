@@ -15,6 +15,8 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
  * 主治医意見書督促状情報テーブルの更新処理のクラスです。
+ *
+ * @reamsid_L DBE-0060-040 zhangzhiming
  */
 public class ShujiiUpadteDataProcess extends BatchProcessBase<RString> {
 

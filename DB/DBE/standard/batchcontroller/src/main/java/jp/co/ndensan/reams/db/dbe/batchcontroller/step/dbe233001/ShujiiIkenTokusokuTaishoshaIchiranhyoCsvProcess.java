@@ -29,6 +29,8 @@ import jp.co.ndensan.reams.uz.uza.lang.Separator;
 
 /**
  * 主治医意見書督促対象者一覧表csvの作成クラスです。
+ *
+ * @reamsid_L DBE-0060-040 zhangzhiming
  */
 public class ShujiiIkenTokusokuTaishoshaIchiranhyoCsvProcess extends BatchProcessBase {
 

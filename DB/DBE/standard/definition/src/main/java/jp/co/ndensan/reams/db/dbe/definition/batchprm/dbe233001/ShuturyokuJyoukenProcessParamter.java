@@ -13,6 +13,8 @@ import jp.co.ndensan.reams.uz.uza.math.Decimal;
 
 /**
  * 出力条件表を特定するためのProcess用パラメータクラスです。
+ *
+ * @reamsid_L DBE-0060-040 zhangzhiming
  */
 @SuppressWarnings("PMD.UnusedPrivateField")
 @lombok.Getter
