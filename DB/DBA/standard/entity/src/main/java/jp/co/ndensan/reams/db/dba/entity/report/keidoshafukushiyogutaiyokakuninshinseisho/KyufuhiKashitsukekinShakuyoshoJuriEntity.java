@@ -11,6 +11,8 @@ import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 /**
  * 給付費貸付金借用書受理情報を取得します.
  *
+ * @reamsid_L DBA-0540-440  lijia
+ * 
  */
 public class KyufuhiKashitsukekinShakuyoshoJuriEntity {
 
