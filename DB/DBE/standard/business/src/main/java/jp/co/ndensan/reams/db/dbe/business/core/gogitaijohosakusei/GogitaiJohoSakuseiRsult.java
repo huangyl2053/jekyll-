@@ -18,6 +18,8 @@ import jp.co.ndensan.reams.uz.uza.lang.Separator;
 
 /**
  * 合議体情報作成のビジネスクラスです
+ *
+ * @reamsid_L DBE-0090-010 chengsanyuan
  */
 public class GogitaiJohoSakuseiRsult implements Serializable {
 

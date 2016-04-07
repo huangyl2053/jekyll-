@@ -10,6 +10,8 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
  * 合議体情報作成のパラメータクラス
+ *
+ * @reamsid_L DBE-0090-010 chengsanyuan
  */
 @lombok.Getter
 @SuppressWarnings("PMD.UnusedPrivateField")
