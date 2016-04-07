@@ -10,8 +10,9 @@ import lombok.Getter;
 import lombok.Setter;
 
 /**
- *
  * 認定調査スケジュール表(時間管理)ボディのITEMです。
+ *
+ * @reamsid_L DBE-0020-100 lishengli
  */
 @Getter
 @Setter
