@@ -7,9 +7,9 @@ package jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.ChosaItak
 
 import java.util.ArrayList;
 import java.util.List;
+import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBU;
 import jp.co.ndensan.reams.db.dbz.business.core.inkijuntsukishichosonjoho.KijuntsukiShichosonjoho;
 import jp.co.ndensan.reams.db.dbz.business.core.inkijuntsukishichosonjoho.KijuntsukiShichosonjohoiDataPassModel;
-import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBU;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.chosain.ChosaItakuKubunCode;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -21,6 +21,8 @@ import jp.co.ndensan.reams.uz.uza.util.serialization.DataPassingConverter;
 
 /**
  * 調査委託先＆調査員ガイドDivのHandlerクラスです。
+ *
+ * @reamsid_L DBE-1300-020 wanghui
  */
 public class ChosaItakusakiAndChosainGuideHandler {
 
@@ -72,7 +74,7 @@ public class ChosaItakusakiAndChosainGuideHandler {
         div.getTxtChosainCodeTo().clearValue();
         div.getTxtChosainName().clearValue();
         div.getTxtChosainKanaShimei().clearValue();
-        div.getTxtMaxKensu().clearValue();  
+        div.getTxtMaxKensu().clearValue();
     }
 
     /**
@@ -100,6 +102,7 @@ public class ChosaItakusakiAndChosainGuideHandler {
                         ? new RString("有効") : new RString("無効")));
                 if (!business.is状況フラグ() || !business.is調査員状況フラグ()) {
                     kensakuKekkaIchiran_Row.setRowBgColor(DataGridCellBgColor.bgColorGray);
+                    div.getDgKensakuKekkaIchiran().setReadOnly(true);
                 }
                 kensakuKekkaIchiranGridList.add(kensakuKekkaIchiran_Row);
             }

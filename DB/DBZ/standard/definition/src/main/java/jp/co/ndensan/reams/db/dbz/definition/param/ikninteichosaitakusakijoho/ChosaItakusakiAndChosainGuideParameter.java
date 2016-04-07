@@ -11,6 +11,8 @@ import jp.co.ndensan.reams.uz.uza.math.Decimal;
 /**
  *
  * 調査委託先＆調査員ガイドのParameterクラスです。
+ *
+ * @reamsid_L DBE-1300-020 wanghui
  */
 @SuppressWarnings("PMD.UnusedPrivateField")
 @lombok.Getter
