@@ -52,6 +52,9 @@ import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 
 /**
  * 被保険者台帳管理（資格訂正）を管理するクラスです。
+ *
+ * @reamsid_L DBA-0521-030 zhengshukai
+ *
  */
 public class HihokenshaShikakuTeiseiManager {
 

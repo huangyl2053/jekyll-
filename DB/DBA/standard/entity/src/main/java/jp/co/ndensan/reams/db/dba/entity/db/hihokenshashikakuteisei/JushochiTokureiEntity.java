@@ -10,6 +10,9 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
  * 住所地特例入力情報（List<住所地特例Entity>）
+ *
+ * @reamsid_L DBA-0521-030 zhengshukai
+ *
  */
 @lombok.Getter
 @lombok.Setter
