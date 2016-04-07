@@ -22,6 +22,8 @@ import jp.co.ndensan.reams.uz.uza.util.serialization.DataPassingConverter;
 /**
  *
  * 共有子Div 条件検索画面「NinteiShinseishaFinder」のイベントを定義したDivControllerです。
+ *
+ * @reamsid_L DBE-3000-010 sunhaidi
  */
 public class NinteiShinseishaFinder {
 

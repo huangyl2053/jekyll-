@@ -9,6 +9,8 @@ import jp.co.ndensan.reams.db.dbe.entity.report.source.yokaigoyoshienshinseiichi
 
 /**
  * 要介護認定・要支援認定等申請者一覧表Builderクラスです。
+ *
+ * @reamsid_L DBE-1370-020 sunhaidi
  */
 public class YokaigoYoshienShinseiIchiranBuilderImpl implements IYokaigoYoshienShinseiIchiranBuilder {
 

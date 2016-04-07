@@ -11,6 +11,8 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
  * 要介護認定・要支援認定等申請者一覧表のITEMです。
+ *
+ * @reamsid_L DBE-1370-020 sunhaidi
  */
 @lombok.Getter
 @lombok.Setter
