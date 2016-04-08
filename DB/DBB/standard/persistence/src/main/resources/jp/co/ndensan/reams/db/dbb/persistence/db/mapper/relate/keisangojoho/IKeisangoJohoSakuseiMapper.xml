@@ -297,7 +297,7 @@
     <select id="get計算後情報_最新4" resultMap="resultMap_getKeisangoJohoSakusei"
             parameterType="jp.co.ndensan.reams.db.dbb.definition.mybatisprm.keisangojoho.KeisangoJohoSakuseiMybitisParamter" fetchSize="500">
         SELECT
-            <include refid="jp.co.ndensan.reams.db.dbb.persistence.db.mapper.basic.IDbV2002FukaMapper.allColumns_DbV2002Fuka"/>,
+            <include refid="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbV2002FukaMapper.allColumns_DbV2002Fuka"/>,
             <include refid="jp.co.ndensan.reams.db.dbb.persistence.db.mapper.basic.IDbT2003KibetsuMapper.allColumns_DbT2003Kibetsu"/>,
             <include refid="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IUrT0705ChoteiKyotsuMapper.allColumns_UrT0705ChoteiKyotsu"/>,
             <include refid="jp.co.ndensan.reams.db.dbb.persistence.db.mapper.basic.IDbV2001ChoshuHohoMapper.allColumns_DbV2001ChoshuHoho"/>,
