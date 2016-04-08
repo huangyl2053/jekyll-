@@ -138,7 +138,7 @@ public class ShujiiIkenshoSakuseiIrai {
      */
     public ResponseData<ShujiiIkenshoSakuseiIraiDiv> onClick_btnSearch(ShujiiIkenshoSakuseiIraiDiv div) {
 
-        RString 被保険者番号 = div.getCcdNinteishinseishaFinder().getNinteiShinseishaFinderDiv().getTxtHihokenshaNumber().getValue();
+        RString 被保険者番号 = div.getCcdHihokenshaFinder().get被保険者番号();
         // QA894　最大表示件数の確認
         ShujiiIkenshoSakuseiIraiManager manager = ShujiiIkenshoSakuseiIraiManager.createInstance();
         ShujiiIkenshoSakuseiIraiParameter param = ShujiiIkenshoSakuseiIraiParameter.createShujiiIkenshoSakuseiIraiParameter(被保険者番号);
