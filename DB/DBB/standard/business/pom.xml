@@ -65,7 +65,7 @@
             <groupId>dom4j</groupId>
             <artifactId>dom4j</artifactId>
             <version>1.6.1</version>
-            <scope>test</scope>
+            <type>jar</type>
         </dependency>
     </dependencies>
 </project>
