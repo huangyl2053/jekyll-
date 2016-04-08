@@ -5,7 +5,7 @@
 
 -->
 <mapper namespace="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.kogakuserviceketteijoho.IKogakuServiceKetteiJohoTorikomiDataHenshuMapper">
-    
+
     <resultMap id="resultMap_YishiEntity" type="jp.co.ndensan.reams.db.dbc.entity.db.basic.YishiEntity" autoMapping="true">
         <result property="決定者受取年月" column="決定者受取年月" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleYearMonthTypeHandler"/>
         <result property="証記載保険者番号" column="証記載保険者番号" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.HokenshaNoTypeHandler"/>
@@ -17,7 +17,7 @@
         <result property="決定年月" column="決定年月" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleYearMonthTypeHandler"/>
         <result property="高額支給額" column="高額支給額" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
     </resultMap>
-    
+
     <select id="select一時TBLデータ" resultMap="resultMap_YishiEntity" fetchSize="500">
         SELECT {処理年月} AS 決定者受取年月,
         KETTEI."証記載保険者番号" AS 証記載保険者番号,
@@ -31,54 +31,54 @@
         KETTEI.
         FROM "TABLE_KOGAKUKYUFUKETTEI" AS KETTEI
     </select>
-    
-    
+
+
     <resultMap id="resultMap_HihokenshaNo" type="jp.co.ndensan.reams.db.dbc.entity.db.relate.kogakukyufuketteiin.KogakuKyufuKetteiInTempTableEntity" autoMapping="true">
         <result property="被保険者番号" column="hihokenshaNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.HihokenshaNoTypeHandler"/>
     </resultMap>
-    
+
     <select id="select被保険者番号" resultMap="resultMap_HihokenshaNo" fetchSize="500">
-        SELECT DISTINCT 
+        SELECT DISTINCT
         KETTEI."hihokenshaNo"
         FROM "TABLE_KOGAKUKYUFUKETTEI" AS KETTEI
     </select>
-        
-        
+
+
     <resultMap id="resultMap_ShichosonCode" type="jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT1001HihokenshaDaichoEntity" autoMapping="true">
         <result property="市町村コード" column="shichosonCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.LasdecCodeTypeHandler"/>
     </resultMap>
-        
-    <select id="select市町村コード" resultMap="resultMap_ShichosonCode" 
+
+    <select id="select市町村コード" resultMap="resultMap_ShichosonCode"
             parameterType="jp.co.ndensan.reams.db.dbc.definition.mybatisprm.kagoketteikohifutanshain.ShichosonHihokenshaParameter">
-        SELECT 
+        SELECT
         DACHI."shichosonCode"
         FROM rgdb."DbT1001HihokenshaDaicho" AS DACHI
         WHERE DACHI."hihokenshaNo"=#{被保険者番号}
         AND DACHI."logicalDeletedFlag"<![CDATA[<>]]> TRUE
         ORDER BY DACHI."hihokenshaNo" DESC,
-              DACHI."idoYMD" DESC,
-              DACHI."edaNo" DESC
-     LIMIT(1)
+        DACHI."idoYMD" DESC,
+        DACHI."edaNo" DESC
+        LIMIT(1)
     </select>
-    
-   <resultMap id="resultMap_DbT7026ShinKyuHihokenshaNoHenkanEntity" 
-               type="jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7026ShinKyuHihokenshaNoHenkanEntity"
-               autoMapping="true">
+
+    <resultMap id="resultMap_DbT7026ShinKyuHihokenshaNoHenkanEntity"
+              type="jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7026ShinKyuHihokenshaNoHenkanEntity"
+              autoMapping="true">
         <result property="新番号" column="shinNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="旧番号" column="kyuNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
     </resultMap>
-   
-    <select id="select新番号" resultMap="resultMap_DbT7026ShinKyuHihokenshaNoHenkanEntity" 
-    parameterType="jp.co.ndensan.reams.db.dbc.definition.mybatisprm.kagoketteikohifutanshain.ShichosonHihokenshaParameter">
-        SELECT 
+
+    <select id="select新番号" resultMap="resultMap_DbT7026ShinKyuHihokenshaNoHenkanEntity"
+            parameterType="jp.co.ndensan.reams.db.dbc.definition.mybatisprm.kagoketteikohifutanshain.ShichosonHihokenshaParameter">
+        SELECT
         HENKAN."shinNo",
         HENKAN."kyuNo"
         FROM rgdb."DbT7026ShinKyuHihokenshaNoHenkan" AS HENKAN
         WHERE HENKAN."shichosonCode"= #{市町村コード}
         AND HENKAN."kyuNo"=#{被保険者番号}
     </select>
-    
-    <resultMap id="resultMap_DbT1001HihokenshaDaichoEntity" 
+
+    <resultMap id="resultMap_DbT1001HihokenshaDaichoEntity"
                type="jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT1001HihokenshaDaichoEntity"
                autoMapping="true">
         <result property="被保険者番号" column="hihokenshaNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.HihokenshaNoTypeHandler"/>
@@ -86,7 +86,7 @@
         <result property="資格喪失事由コード" column="shikakuSoshitsuJiyuCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="資格喪失年月日" column="shikakuSoshitsuYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
     </resultMap>
- 
+
     <select id="select被保険者情報" resultMap="resultMap_DbT1001HihokenshaDaichoEntity">
         SELECT DACHI."hihokenshaNo",
         DACHI."shikibetsuCode",
@@ -94,25 +94,25 @@
         DACHI."shikakuSoshitsuYMD"
         FROM rgdb."DbT1001HihokenshaDaicho" AS DACHI
         WHERE DACHI"hihokenshaNo"="TABLE_KOGAKUKYUFUKETTEI"."hihokenshaNo";
-        AND DACHI."logicalDeletedFlag"<>true
+        AND DACHI."logicalDeletedFlag"!=true
         ORDER BY DACHI."hihokenshaNo" DESC,
         DACHI."idoYMD" DESC,
         DACHI."edaNo" DESC
-       LIMIT(1)
+        LIMIT(1)
     </select>
-    
+
     <resultMap id="resultMap_ShikibetsuCode"
                type="jp.co.ndensan.reams.db.dbc.entity.db.relate.kogakukyufuketteiin.KogakuKyufuKetteiInTempTableEntity"
                autoMapping="true">
         <result property="識別コード" column="shikibetsuCode" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.ShikibetsuCodeTypeHandler"/>
     </resultMap>
- 
+
     <select id="select一時デーブルから識別コード" resultMap="resultMap_ShikibetsuCode" fetchSize="500">
         SELECT DISTINCT
         KETTEI."shikibetsuCode"
         FROM "TABLE_KOGAKUKYUFUKETTEI" AS KETTEI
     </select>
-    
+
     <resultMap id="resultMap_PSM"
                type="jp.co.ndensan.reams.db.dbc.entity.db.relate.kogakukyufuketteiin.PSMEntity"
                autoMapping="true">
@@ -125,22 +125,22 @@
         <result property="カナ名称" column="atenaKanaMeisho" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.AtenaKanaMeishoTypeHandler"/>
         <result property="名称" column="atenaMeisho" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.AtenaMeishoTypeHandler"/>
     </resultMap>
-    
+
     <select id="select宛名識別対象PSM"
             resultMap="resultMap_PSM"
             parameterType="jp.co.ndensan.reams.db.dbc.definition.mybatisprm.kagoketteikohifutanshain.PSMParameter">
         SELECT ShikibetsuTaisho."shikibetsuCode",
-               ShikibetsuTaisho."zenkokuJushoCode",
-               ShikibetsuTaisho."YubinNo",
-               ShikibetsuTaisho."wuchi",
-               ShikibetsuTaisho."gyoseikuCode",
-               ShikibetsuTaisho."gyoseiku",
-               ShikibetsuTaisho."atenaKanaMeisho",
-               ShikibetsuTaisho."atenaMeisho"
+        ShikibetsuTaisho."zenkokuJushoCode",
+        ShikibetsuTaisho."YubinNo",
+        ShikibetsuTaisho."wuchi",
+        ShikibetsuTaisho."gyoseikuCode",
+        ShikibetsuTaisho."gyoseiku",
+        ShikibetsuTaisho."atenaKanaMeisho",
+        ShikibetsuTaisho."atenaMeisho"
         FROM <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.tableName_PsmParamClassShikibetsuTaisho" />
         AS ShikibetsuTaisho
     </select>
-    
+
     <update id="update高額サービス費決定情報一時TBL1"
             parameterType="jp.co.ndensan.reams.db.dbc.definition.core.kogakuserviceketteijohotorikomidatahenshu.SinBangoTempParameter">
         UPDATE "TABLE_KOGAKUKYUFUKETTEI"
@@ -148,8 +148,8 @@
         FROM　"TABLE_KOGAKUKYUFUKETTEI" AS KETTEI
         WHERE "hihokenshaNo" = KETTEI."旧番号"
     </update>
-  
-    <update id="update高額サービス費決定情報一時TBL2" 
+
+    <update id="update高額サービス費決定情報一時TBL2"
             parameterType="jp.co.ndensan.reams.db.dbc.definition.core.kogakuserviceketteijohotorikomidatahenshu.HihokenshaNoDataParameter">
         UPDATE "TABLE_KOGAKUKYUFUKETTEI"
         WHERE "hihokenshaNo"=#{被保険者番号};
@@ -157,10 +157,10 @@
         "shikakuSoshitsuJiyu"=#{喪失事由コード};
         "shikakuSoshitsuYMD"=#{資格喪失年月日};
     </update>
-    
-    
-    <update id="update高額サービス費決定情報一時TBL3" 
-    parameterType="jp.co.ndensan.reams.db.dbc.definition.mybatisprm.kagoketteikohifutanshain.ShikibetsuCodeTempParameter">
+
+
+    <update id="update高額サービス費決定情報一時TBL3"
+            parameterType="jp.co.ndensan.reams.db.dbc.definition.mybatisprm.kagoketteikohifutanshain.ShikibetsuCodeTempParameter">
         UPDATE "TABLE_KOGAKUKYUFUKETTEI"
         WHERE "shikibetsuCode"=#{識別コード}
         SET "zenkokuJushoCode"=#{全国住所コード}
@@ -171,92 +171,92 @@
         "atenaKanaMeisho"=#{氏名カナ}
         "atenaMeisho"=#{氏名}
     </update>
-    
-    
+
+
     <insert id="creat高額サービス費決定情報一時テーブル">
         CREATE TEMP TABLE "TABLE_KOGAKUKYUFUKETTEI"
         (
-            "kokanJohoShikibetsuNo" character(2),
-            "chohyoRecordShubetsuHeader" character(1),
-            "shoKisaiHokenshaNo" rgdb."DbUDD003HokenshaNo",
-            "hokensha" character(2),
-            "sakuseiYMD" rshare."UDD015YMD",
-            "guobaolianhe" character(2),
-            "chohyoRecordShubetsu" character(2),
-            "no" integer,
-            "hihokenshaNo" rgdb."DbUDD003HokenshaNo",
-            "hihokenshaShimei" rshare."UDD042AtenaMeisho",
-            "serviceTeikyoYM" rshare."UDD014YM",
-            "riyoshaFutangaku" Decimal,
-            "shikyuKubunCode" character(1) ,
-            "ketteiYM" rshare."UDD014YM",
-            "kogakuShikyuGaku" Decimal ,
-            "shiharaiHohoKubunCode" character(2),
-            "shiharaiBasho" character(2),
-            "yukoFromYMD" rshare."UDD015YMD",
-            "shuryoYMD" rshare."UDD015YMD",
-            "zhouFromD" character(3),
-            "zhoutoD" character(3),
-            "kaishiTime" character(2),
-            "endTime" character(2),
-            "kinyuKikanCode" rshare."UDD030KinyuKikanCode",
-            "kinyuKikanName" character(2),
-            "kinyuKikanzhidianCode" rshare."UDD031KinyuKikanShitenCode",
-            "kinyuKikanzhidianName" character(2),
-            "kozaZhongMu" character(2),
-            "kozaZhongMuName" character(2),
-            "kozaNo" character(2),
-            "kozaMeiginin" rshare."UDD042AtenaMeisho",
-            "shikibetsuCode" rshare."UDD001ShikibetsuCode",
-            "shikakuSoshitsuJiyu" character(2),
-            "shikakuSoshitsuYMD" rshare."UDD015YMD",
-            "zenkokuJushoCode" character(2),
-            "YubinNo" rshare."UDD003YubinNo",
-            "wuchi" rshare."UDD046AtenaJusho" ,
-            "gyoseikuCode" rshare."UDD008GyoseikuCode",
-            "gyoseiku" character(2),
-            "atenaKanaMeisho" rshare."UDD043AtenaKanaMeisho",
-            "atenaMeisho" rshare."UDD042AtenaMeisho"
+        "kokanJohoShikibetsuNo" character(2),
+        "chohyoRecordShubetsuHeader" character(1),
+        "shoKisaiHokenshaNo" rgdb."DbUDD003HokenshaNo",
+        "hokensha" character(2),
+        "sakuseiYMD" rshare."UDD015YMD",
+        "guobaolianhe" character(2),
+        "chohyoRecordShubetsu" character(2),
+        "no" integer,
+        "hihokenshaNo" rgdb."DbUDD003HokenshaNo",
+        "hihokenshaShimei" rshare."UDD042AtenaMeisho",
+        "serviceTeikyoYM" rshare."UDD014YM",
+        "riyoshaFutangaku" Decimal,
+        "shikyuKubunCode" character(1) ,
+        "ketteiYM" rshare."UDD014YM",
+        "kogakuShikyuGaku" Decimal ,
+        "shiharaiHohoKubunCode" character(2),
+        "shiharaiBasho" character(2),
+        "yukoFromYMD" rshare."UDD015YMD",
+        "shuryoYMD" rshare."UDD015YMD",
+        "zhouFromD" character(3),
+        "zhoutoD" character(3),
+        "kaishiTime" character(2),
+        "endTime" character(2),
+        "kinyuKikanCode" rshare."UDD030KinyuKikanCode",
+        "kinyuKikanName" character(2),
+        "kinyuKikanzhidianCode" rshare."UDD031KinyuKikanShitenCode",
+        "kinyuKikanzhidianName" character(2),
+        "kozaZhongMu" character(2),
+        "kozaZhongMuName" character(2),
+        "kozaNo" character(2),
+        "kozaMeiginin" rshare."UDD042AtenaMeisho",
+        "shikibetsuCode" rshare."UDD001ShikibetsuCode",
+        "shikakuSoshitsuJiyu" character(2),
+        "shikakuSoshitsuYMD" rshare."UDD015YMD",
+        "zenkokuJushoCode" character(2),
+        "YubinNo" rshare."UDD003YubinNo",
+        "wuchi" rshare."UDD046AtenaJusho" ,
+        "gyoseikuCode" rshare."UDD008GyoseikuCode",
+        "gyoseiku" character(2),
+        "atenaKanaMeisho" rshare."UDD043AtenaKanaMeisho",
+        "atenaMeisho" rshare."UDD042AtenaMeisho"
         )
     </insert>
-    
+
     <insert id="insert高額サービス費決定情報一時テーブル"
             parameterType="jp.co.ndensan.reams.db.dbc.entity.db.relate.kogakukyufuketteiin.KogakuKyufuKetteiInTempTableEntity">
         INSERT INTO "TABLE_KOGAKUKYUFUKETTEI"
         VALUES (
-            #{交換情報識別番号},
-            #{帳票レコード種別ヘッダ部},
-            #{証記載保険者番号},
-            #{保険者名},
-            #{作成年月日},
-            #{国保連合会名},
-            #{帳票レコード種別},
-            #{No},
-            #{被保険者氏名},
-            #{サービス提供年月},
-            #{利用者負担額},
-            #{支給区分コード},
-            #{決定年月},
-            #{高額支給額},
-            #{支払方法区分コード},
-            #{支払場所},
-            #{開始年月日},
-            #{終了年月日},
-            #{開始曜日},
-            #{終了曜日},
-            #{開始時間},
-            #{終了時間},
-            #{金融機関コード},
-            #{金融機関名},
-            #{金融機関支店コード},
-            #{金融機関支店名},
-            #{口座種目},
-            #{口座種目名},
-            #{口座番号},
-            #{口座名義人カナ}
+        #{交換情報識別番号},
+        #{帳票レコード種別ヘッダ部},
+        #{証記載保険者番号},
+        #{保険者名},
+        #{作成年月日},
+        #{国保連合会名},
+        #{帳票レコード種別},
+        #{No},
+        #{被保険者氏名},
+        #{サービス提供年月},
+        #{利用者負担額},
+        #{支給区分コード},
+        #{決定年月},
+        #{高額支給額},
+        #{支払方法区分コード},
+        #{支払場所},
+        #{開始年月日},
+        #{終了年月日},
+        #{開始曜日},
+        #{終了曜日},
+        #{開始時間},
+        #{終了時間},
+        #{金融機関コード},
+        #{金融機関名},
+        #{金融機関支店コード},
+        #{金融機関支店名},
+        #{口座種目},
+        #{口座種目名},
+        #{口座番号},
+        #{口座名義人カナ}
         )
     </insert>
-    
+
     <resultMap id="resultMap_GaoesabisifeiyilanEntity"
                type="jp.co.ndensan.reams.db.dbc.entity.db.basic.GaoesabisifeiyilanEntity"
                autoMapping="true">
@@ -282,7 +282,7 @@
         <result property="証記載保険者番号" column="証記載保険者番号" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.HokenshaNoTypeHandler"/>
         <result property="保険者名" column="保険者名" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.RStringTypeHandler"/>
     </resultMap>
-    
+
     <select id="select一時TBLから高額サービス費決定情報一覧リスト"
             resultMap="resultMap_GaoesabisifeiyilanEntity"
             fetchSize="500">
@@ -313,9 +313,9 @@
         KETTEI."保険者名" AS 保険者名,
         FROM "TABLE_KOGAKUKYUFUKETTEI" AS KETTEI
     </select>
-    
-    
-    
-    
+
+
+
+
 </mapper>
 

@@ -126,7 +126,7 @@
     </update>
 
     <!-- 一時データ取得 -->
-    <select id="getTempData" resultType="jp.co.ndensan.reams.db.dbc.entity.basic.DbTKyufukanrihyoDataTempTableEntity" parameterType="java.util.Map" fetchSize="500">
+    <select id="getTempData" resultType="jp.co.ndensan.reams.db.dbc.entity.db.basic.DbTKyufukanrihyoDataTempTableEntity" parameterType="java.util.Map" fetchSize="500">
         SELECT
         "recordShubetsu",
         "renban",
