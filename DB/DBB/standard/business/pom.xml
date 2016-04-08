@@ -61,5 +61,11 @@
             <groupId>jp.co.ndensan.reams.ue.uex</groupId>
             <artifactId>UexBusiness</artifactId>
         </dependency>
+        <dependency>
+            <groupId>dom4j</groupId>
+            <artifactId>dom4j</artifactId>
+            <version>1.6.1</version>
+            <scope>test</scope>
+        </dependency>
     </dependencies>
 </project>

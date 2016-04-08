@@ -18,8 +18,8 @@ public final class KyuShichosonJohoEntities implements Serializable, Iterable<Db
 
     private static final long serialVersionUID = 1L;
 
-    private final List<DbT7056GappeiShichosonEntity> entities;
-    private final boolean gappeiShichoUmuFlag;
+    private List<DbT7056GappeiShichosonEntity> entities;
+    private boolean gappeiShichoUmuFlag;
 
     /**
      * コンストラクタです。
@@ -98,8 +98,7 @@ public final class KyuShichosonJohoEntities implements Serializable, Iterable<Db
     public boolean hasGappeiShichoUmuFlag() {
         return gappeiShichoUmuFlag;
     }
-    
-    
+
     /**
      * DbT7056GappeiShichosonEntityのリストを設定します。
      *
@@ -108,7 +107,7 @@ public final class KyuShichosonJohoEntities implements Serializable, Iterable<Db
     public void setEntitys(List<DbT7056GappeiShichosonEntity> dbT7056EntityList) {
         entities = dbT7056EntityList;
     }
-    
+
     /**
      * DbT7056GappeiShichosonEntityのリストを返却します。
      *

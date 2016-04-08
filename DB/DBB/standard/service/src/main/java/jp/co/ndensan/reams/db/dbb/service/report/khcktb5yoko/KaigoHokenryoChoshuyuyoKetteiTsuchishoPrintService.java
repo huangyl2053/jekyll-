@@ -181,7 +181,7 @@ public class KaigoHokenryoChoshuyuyoKetteiTsuchishoPrintService {
                 new RString(徴収猶予決定通知書情報.get宛名().get行政区画().getChiku1().getコード().toString()),
                 new RString(徴収猶予決定通知書情報.get宛名().get行政区画().getChiku2().getコード().toString()),
                 new RString(徴収猶予決定通知書情報.get宛名().get行政区画().getChiku3().getコード().toString()),
-                new RString(徴収猶予決定通知書情報.get納組情報().getNokumiCode().toString()));
+                new RString(徴収猶予決定通知書情報.get納組情報().getNokumi().getNokumiCode().toString()));
 
         item = editItem表示コード(表示コード, item, 文書番号, 徴収猶予決定通知書情報, 通知書定型文);
 
