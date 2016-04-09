@@ -7,7 +7,7 @@ package jp.co.ndensan.reams.db.dba.divcontroller.entity.parentdiv.DBA1010011;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import jp.co.ndensan.reams.db.dbz.divcontroller.entity.parentdiv.shisetsunyutaishorirekikanri.IShisetsuNyutaishoRirekiKanriDiv;
+import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.ShisetsuNyutaishoRirekiKanri.IShisetsuNyutaishoRirekiKanriDiv;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TabContainer;
 
 /**
@@ -17,7 +17,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.TabContainer;
  */
 public class tabInputsDiv extends TabContainer {
 
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：Uz-master-49">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-01-15_09-59-03">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -32,8 +32,6 @@ public class tabInputsDiv extends TabContainer {
     private tplRofukuNenkinDiv tplRofukuNenkin;
     @JsonProperty("tplShisetsuNyutaisho")
     private tplShisetsuNyutaishoDiv tplShisetsuNyutaisho;
-    @JsonProperty("tplSeikatsuHogo")
-    private tplSeikatsuHogoDiv tplSeikatsuHogo;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -41,77 +39,99 @@ public class tabInputsDiv extends TabContainer {
      * コントロール名とフィールド名を取得する
      * フィールド名のGetterとSetter を作成
      */
+    /*
+     * gettplShikakuJoho
+     * @return tplShikakuJoho
+     */
     @JsonProperty("tplShikakuJoho")
     public tplShikakuJohoDiv getTplShikakuJoho() {
         return tplShikakuJoho;
     }
 
+    /*
+     * settplShikakuJoho
+     * @param tplShikakuJoho tplShikakuJoho
+     */
     @JsonProperty("tplShikakuJoho")
     public void setTplShikakuJoho(tplShikakuJohoDiv tplShikakuJoho) {
         this.tplShikakuJoho = tplShikakuJoho;
     }
 
+    /*
+     * gettplIryoHoken
+     * @return tplIryoHoken
+     */
     @JsonProperty("tplIryoHoken")
     public tplIryoHokenDiv getTplIryoHoken() {
         return tplIryoHoken;
     }
 
+    /*
+     * settplIryoHoken
+     * @param tplIryoHoken tplIryoHoken
+     */
     @JsonProperty("tplIryoHoken")
     public void setTplIryoHoken(tplIryoHokenDiv tplIryoHoken) {
         this.tplIryoHoken = tplIryoHoken;
     }
 
+    /*
+     * gettplRofukuNenkin
+     * @return tplRofukuNenkin
+     */
     @JsonProperty("tplRofukuNenkin")
     public tplRofukuNenkinDiv getTplRofukuNenkin() {
         return tplRofukuNenkin;
     }
 
+    /*
+     * settplRofukuNenkin
+     * @param tplRofukuNenkin tplRofukuNenkin
+     */
     @JsonProperty("tplRofukuNenkin")
     public void setTplRofukuNenkin(tplRofukuNenkinDiv tplRofukuNenkin) {
         this.tplRofukuNenkin = tplRofukuNenkin;
     }
 
+    /*
+     * gettplShisetsuNyutaisho
+     * @return tplShisetsuNyutaisho
+     */
     @JsonProperty("tplShisetsuNyutaisho")
     public tplShisetsuNyutaishoDiv getTplShisetsuNyutaisho() {
         return tplShisetsuNyutaisho;
     }
 
+    /*
+     * settplShisetsuNyutaisho
+     * @param tplShisetsuNyutaisho tplShisetsuNyutaisho
+     */
     @JsonProperty("tplShisetsuNyutaisho")
     public void setTplShisetsuNyutaisho(tplShisetsuNyutaishoDiv tplShisetsuNyutaisho) {
         this.tplShisetsuNyutaisho = tplShisetsuNyutaisho;
-    }
-
-    @JsonProperty("tplSeikatsuHogo")
-    public tplSeikatsuHogoDiv getTplSeikatsuHogo() {
-        return tplSeikatsuHogo;
-    }
-
-    @JsonProperty("tplSeikatsuHogo")
-    public void setTplSeikatsuHogo(tplSeikatsuHogoDiv tplSeikatsuHogo) {
-        this.tplSeikatsuHogo = tplSeikatsuHogo;
     }
 
     /*
      * [ ショートカットの作成 ]
      */
     @JsonIgnore
-    public ShikakuTokusoRirekiPanelDiv getShikakuTokusoRirekiPanel() {
-        return this.getTplShikakuJoho().getShikakuTokusoRirekiPanel();
+    public ShikakuTokusoRirekiMainDiv getShikakuTokusoRirekiMain() {
+        return this.getTplShikakuJoho().getShikakuTokusoRirekiMain();
     }
 
     @JsonIgnore
-    public void setShikakuTokusoRirekiPanel(ShikakuTokusoRirekiPanelDiv ShikakuTokusoRirekiPanel) {
-        this.getTplShikakuJoho().setShikakuTokusoRirekiPanel(ShikakuTokusoRirekiPanel);
+    public void setShikakuTokusoRirekiMain(ShikakuTokusoRirekiMainDiv ShikakuTokusoRirekiMain) {
+        this.getTplShikakuJoho().setShikakuTokusoRirekiMain(ShikakuTokusoRirekiMain);
     }
 
     @JsonIgnore
-    public IryoHokenRirekiPanelDiv getIryoHokenRirekiPanel() {
-        return this.getTplIryoHoken().getIryoHokenRirekiPanel();
+    public IryoHokenRirekiMainDiv getIryoHokenRirekiMain() {
+        return this.getTplIryoHoken().getIryoHokenRirekiMain();
     }
 
     @JsonIgnore
-    public void setIryoHokenRirekiPanel(IryoHokenRirekiPanelDiv IryoHokenRirekiPanel) {
-        this.getTplIryoHoken().setIryoHokenRirekiPanel(IryoHokenRirekiPanel);
+    public void setIryoHokenRirekiMain(IryoHokenRirekiMainDiv IryoHokenRirekiMain) {
+        this.getTplIryoHoken().setIryoHokenRirekiMain(IryoHokenRirekiMain);
     }
 
     @JsonIgnore
@@ -135,28 +155,8 @@ public class tabInputsDiv extends TabContainer {
     }
 
     @JsonIgnore
-    public ShisetsuNyutaishoInputDiv getShisetsuNyutaishoInput() {
-        return this.getTplShisetsuNyutaisho().getShisetsuNyutaishoRireki().getShisetsuNyutaishoInput();
-    }
-
-    @JsonIgnore
-    public void setShisetsuNyutaishoInput(ShisetsuNyutaishoInputDiv ShisetsuNyutaishoInput) {
-        this.getTplShisetsuNyutaisho().getShisetsuNyutaishoRireki().setShisetsuNyutaishoInput(ShisetsuNyutaishoInput);
-    }
-
-    @JsonIgnore
     public IShisetsuNyutaishoRirekiKanriDiv getCcdShisetsuNyutaishoRirekiKanri() {
         return this.getTplShisetsuNyutaisho().getShisetsuNyutaishoRireki().getCcdShisetsuNyutaishoRirekiKanri();
-    }
-
-    @JsonIgnore
-    public SeikatsuHogoDiv getSeikatsuHogo() {
-        return this.getTplSeikatsuHogo().getSeikatsuHogo();
-    }
-
-    @JsonIgnore
-    public void setSeikatsuHogo(SeikatsuHogoDiv SeikatsuHogo) {
-        this.getTplSeikatsuHogo().setSeikatsuHogo(SeikatsuHogo);
     }
 
     // </editor-fold>

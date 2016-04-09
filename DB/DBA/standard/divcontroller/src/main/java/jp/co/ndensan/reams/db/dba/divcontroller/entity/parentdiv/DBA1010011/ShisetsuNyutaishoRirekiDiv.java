@@ -6,8 +6,8 @@ package jp.co.ndensan.reams.db.dba.divcontroller.entity.parentdiv.DBA1010011;
  */
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import jp.co.ndensan.reams.db.dbz.divcontroller.entity.parentdiv.shisetsunyutaishorirekikanri.IShisetsuNyutaishoRirekiKanriDiv;
-import jp.co.ndensan.reams.db.dbz.divcontroller.entity.parentdiv.shisetsunyutaishorirekikanri.ShisetsuNyutaishoRirekiKanriDiv;
+import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.ShisetsuNyutaishoRirekiKanri.IShisetsuNyutaishoRirekiKanriDiv;
+import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.ShisetsuNyutaishoRirekiKanri.ShisetsuNyutaishoRirekiKanriDiv;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 
 /**
@@ -17,15 +17,13 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
  */
 public class ShisetsuNyutaishoRirekiDiv extends Panel {
 
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：Uz-master-49">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-01-15_09-59-03">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
      * コントロール名とフィールド名を取得する
      * private + コントロール名 + フィールド名 の文字列を作成
      */
-    @JsonProperty("ShisetsuNyutaishoInput")
-    private ShisetsuNyutaishoInputDiv ShisetsuNyutaishoInput;
     @JsonProperty("ccdShisetsuNyutaishoRirekiKanri")
     private ShisetsuNyutaishoRirekiKanriDiv ccdShisetsuNyutaishoRirekiKanri;
 
@@ -35,16 +33,10 @@ public class ShisetsuNyutaishoRirekiDiv extends Panel {
      * コントロール名とフィールド名を取得する
      * フィールド名のGetterとSetter を作成
      */
-    @JsonProperty("ShisetsuNyutaishoInput")
-    public ShisetsuNyutaishoInputDiv getShisetsuNyutaishoInput() {
-        return ShisetsuNyutaishoInput;
-    }
-
-    @JsonProperty("ShisetsuNyutaishoInput")
-    public void setShisetsuNyutaishoInput(ShisetsuNyutaishoInputDiv ShisetsuNyutaishoInput) {
-        this.ShisetsuNyutaishoInput = ShisetsuNyutaishoInput;
-    }
-
+    /*
+     * getccdShisetsuNyutaishoRirekiKanri
+     * @return ccdShisetsuNyutaishoRirekiKanri
+     */
     @JsonProperty("ccdShisetsuNyutaishoRirekiKanri")
     public IShisetsuNyutaishoRirekiKanriDiv getCcdShisetsuNyutaishoRirekiKanri() {
         return ccdShisetsuNyutaishoRirekiKanri;
