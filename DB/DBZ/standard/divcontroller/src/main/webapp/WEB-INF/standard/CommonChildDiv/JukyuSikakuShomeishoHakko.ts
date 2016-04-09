@@ -1,5 +1,5 @@
 /// <reference path='JukyuSikakuShomeishoHakko_Design.ts' />
-module DBA
+module DBZ
 {
     export module JukyuSikakuShomeishoHakko
     {
@@ -26,7 +26,7 @@ module DBA
     }
 }
 
-module DBA
+module DBZ
 {
     export module JukyuSikakuShomeishoHakko
     {

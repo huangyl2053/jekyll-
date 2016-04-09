@@ -1,11 +1,11 @@
-package jp.co.ndensan.reams.db.dba.entity.db.relate;
+package jp.co.ndensan.reams.db.dbz.entity.db.relate;
 
-import jp.co.ndensan.reams.uz.uza.util.db.IDbAccessable;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.util.db.IDbAccessable;
 
 /**
  * 介護認定審査会開催場所情報テーブルのエンティティクラスです。
- * 
+ *
  * @reamsid_L DBA-1090-021 wangkun
  */
 @lombok.Getter

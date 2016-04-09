@@ -3,18 +3,18 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dba.service.core.jukyushikakushomeishohakko;
+package jp.co.ndensan.reams.db.dbz.service.core.jukyushikakushomeishohakko;
 
 import java.util.ArrayList;
 import java.util.List;
-import jp.co.ndensan.reams.db.dba.business.core.jukyushikakushomeishohakko.JukyuShikakuShomeishoModel;
-import jp.co.ndensan.reams.db.dba.definition.enumeratedtype.JuKyuShinSeiZiYu;
-import jp.co.ndensan.reams.db.dba.definition.enumeratedtype.YokaigoJotaiKubun09;
-import jp.co.ndensan.reams.db.dba.definition.enumeratedtype.config.ConfigKeysJukyuShikakuShomeishoHakko;
-import jp.co.ndensan.reams.db.dba.definition.enumeratedtype.core.YukoMukoKubun;
-import jp.co.ndensan.reams.db.dba.definition.mybatis.param.jukyushikakushomeishohakko.JukyuShikakuShomeishoHakkoParameter;
-import jp.co.ndensan.reams.db.dba.entity.db.relate.JukyuShikakuShomeishoHakkoRelateEntity;
-import jp.co.ndensan.reams.db.dba.persistence.db.mapper.relate.jukyushikakushomeishohakko.IJukyuShikakuShomeishoHakkoRelateMapper;
+import jp.co.ndensan.reams.db.dbz.business.core.jukyushikakushomeishohakko.JukyuShikakuShomeishoModel;
+import jp.co.ndensan.reams.db.dbz.definition.core.yokaigojotaikubun.YokaigoJotaiKubun09;
+import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.JuKyuShinSeiZiYu;
+import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.config.ConfigKeysJukyuShikakuShomeishoHakko;
+import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.core.YukoMukoKubun;
+import jp.co.ndensan.reams.db.dbz.definition.mybatis.param.jukyushikakushomeishohakko.JukyuShikakuShomeishoHakkoParameter;
+import jp.co.ndensan.reams.db.dbz.entity.db.relate.JukyuShikakuShomeishoHakkoRelateEntity;
+import jp.co.ndensan.reams.db.dbz.persistence.db.mapper.relate.jukyushikakushomeishohakko.IJukyuShikakuShomeishoHakkoRelateMapper;
 import jp.co.ndensan.reams.db.dbz.service.core.MapperProvider;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
@@ -24,8 +24,8 @@ import jp.co.ndensan.reams.uz.uza.util.config.BusinessConfig;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 
 /**
- * 被保険者証・資格者証発行を管理するクラスです。
- * 
+ * 受給資格証明書を管理するクラスです。
+ *
  * @reamsid_L DBA-1090-021 wangkun
  */
 public class JukyuShikakuShomeishoHakkoFinder {
@@ -63,8 +63,7 @@ public class JukyuShikakuShomeishoHakkoFinder {
      *
      * @param 受給資格証明書発行情報の検索キー 受給資格証明書発行情報の検索キー。
      *
-     * １、受給資格証明書発行情報を取得できない場合、NULLを返します。 
-     * ２、「受給者台帳」テーブルに、認定申請中データ．受給申請事由がDBD.Enum受給申請事由.指定サービス種類変更申請である場合、 NULLを返します。
+     * １、受給資格証明書発行情報を取得できない場合、NULLを返します。 ２、「受給者台帳」テーブルに、認定申請中データ．受給申請事由がDBD.Enum受給申請事由.指定サービス種類変更申請である場合、 NULLを返します。
      * ３、受給資格証明書発行情報を取得して、被保険者証・資格者証発行を表すクラスを返します。
      * @return JukyuShikakuShomeisho 被保険者証・資格者証発行の表すクラスを返します。
      */
@@ -200,7 +199,7 @@ public class JukyuShikakuShomeishoHakkoFinder {
                 .getNinTeiChouSaJou(JukyuShikakuShomeishoHakkoParameter.
                         createSelectBy申請書管理番号(ninTeiShinSeiChuDataEntity.getShinseishoKanriNo()));
         RStringBuilder workBiko = new RStringBuilder(RString.EMPTY);
-         // TODO 汪坤 QA38 DBD.Enum受給申請事由とDBD.Enum受給資格証明書申請種類文言のクラスが未提供ですので、
+        // TODO 汪坤 QA38 DBD.Enum受給申請事由とDBD.Enum受給資格証明書申請種類文言のクラスが未提供ですので、
         // とりあえず全てJuKyuShinSeiZiYuで仮定義しています
         RString jukyuShinseiJiyu = ninTeiShinSeiChuDataEntity.getJukyuShinseiJiyu();
         if (JuKyuShinSeiZiYu.初回申請.getCode().equals(jukyuShinseiJiyu)
@@ -231,7 +230,7 @@ public class JukyuShikakuShomeishoHakkoFinder {
                             .toDateString())
                     .append(MATAHA)
                     .append(YokaigoJotaiKubun09.toValue(jukyuShikakuShomeishoHakkoRe.getYokaigoJotaiKubunCode())
-                            .getName())
+                            .get名称())
                     .append(MIGIKAKO);
         }
         if (JuKyuShinSeiZiYu.指定サービス種類変更申請.getCode()

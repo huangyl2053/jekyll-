@@ -1,5 +1,5 @@
-var DBA;
-(function (DBA) {
+var DBZ;
+(function (DBZ) {
     (function (JukyuSikakuShomeishoHakko) {
         var Events = (function () {
             function Events() {
@@ -17,11 +17,11 @@ var DBA;
             };
 
             Controls.prototype.convFiledNameSelf = function () {
-                return this._myName + "_" + DBA.JukyuSikakuShomeishoHakko.Controls.myType();
+                return this._myName + "_" + DBZ.JukyuSikakuShomeishoHakko.Controls.myType();
             };
 
             Controls.prototype.convFiledName = function (fieldName) {
-                return this._myName + "_" + DBA.JukyuSikakuShomeishoHakko.Controls.myType() + "_" + fieldName;
+                return this._myName + "_" + DBZ.JukyuSikakuShomeishoHakko.Controls.myType() + "_" + fieldName;
             };
 
             Controls.prototype.JukyuSikakuShomeishoHakko = function () {
@@ -78,6 +78,6 @@ var DBA;
             return Controls;
         })();
         JukyuSikakuShomeishoHakko.Controls = Controls;
-    })(DBA.JukyuSikakuShomeishoHakko || (DBA.JukyuSikakuShomeishoHakko = {}));
-    var JukyuSikakuShomeishoHakko = DBA.JukyuSikakuShomeishoHakko;
-})(DBA || (DBA = {}));
+    })(DBZ.JukyuSikakuShomeishoHakko || (DBZ.JukyuSikakuShomeishoHakko = {}));
+    var JukyuSikakuShomeishoHakko = DBZ.JukyuSikakuShomeishoHakko;
+})(DBZ || (DBZ = {}));

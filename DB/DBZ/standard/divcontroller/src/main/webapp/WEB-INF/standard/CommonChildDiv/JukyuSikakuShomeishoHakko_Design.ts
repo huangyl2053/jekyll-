@@ -2,7 +2,7 @@
 /// <reference path="../d.ts/UzViewControls.d.ts" />
 /// <reference path="../d.ts/UzaConverter.d.ts" />
 
-module DBA {
+module DBZ {
 
      export module JukyuSikakuShomeishoHakko {
 
@@ -22,11 +22,11 @@ module DBA {
             }
 
             public convFiledNameSelf(): string {
-                return this._myName + "_" + DBA.JukyuSikakuShomeishoHakko.Controls.myType();
+                return this._myName + "_" + DBZ.JukyuSikakuShomeishoHakko.Controls.myType();
             }
 
             public convFiledName(fieldName: string): string {
-                return this._myName + "_" + DBA.JukyuSikakuShomeishoHakko.Controls.myType() + "_" + fieldName;
+                return this._myName + "_" + DBZ.JukyuSikakuShomeishoHakko.Controls.myType() + "_" + fieldName;
             }
 
             public JukyuSikakuShomeishoHakko(): UZA.Panel {

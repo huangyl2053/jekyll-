@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <!-- @reamsid_L DBA-1090-021 wangkun -->
-<mapper namespace="jp.co.ndensan.reams.db.dba.persistence.db.mapper.relate.jukyushikakushomeishohakko.IJukyuShikakuShomeishoHakkoRelateMapper">
+<mapper namespace="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.relate.jukyushikakushomeishohakko.IJukyuShikakuShomeishoHakkoRelateMapper">
 
-    <resultMap id="resultMap_JukyuShikakuShomeishoHakkoRelateEntity" type="jp.co.ndensan.reams.db.dba.entity.db.relate.JukyuShikakuShomeishoHakkoRelateEntity" autoMapping="true">
+    <resultMap id="resultMap_JukyuShikakuShomeishoHakkoRelateEntity" type="jp.co.ndensan.reams.db.dbz.entity.db.relate.JukyuShikakuShomeishoHakkoRelateEntity" autoMapping="true">
         <result property="hihokenshaNo"           column="hihokenshaNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
         <result property="idoYMD"                 column="idoYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
         <result property="yokaigoJotaiKubunCode"  column="yokaigoJotaiKubunCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
@@ -46,7 +46,7 @@
         <result property="serviceShuruiRyakusho" column="serviceShuruiRyakusho" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
     </resultMap>
 
-    <select id="getJukyuShikakuShomeishoHakko" resultMap="resultMap_JukyuShikakuShomeishoHakkoRelateEntity" parameterType="jp.co.ndensan.reams.db.dba.definition.mybatis.param.jukyushikakushomeishohakko.JukyuShikakuShomeishoHakkoParameter" fetchSize="500">
+    <select id="getJukyuShikakuShomeishoHakko" resultMap="resultMap_JukyuShikakuShomeishoHakkoRelateEntity" parameterType="jp.co.ndensan.reams.db.dbz.definition.mybatis.param.jukyushikakushomeishohakko.JukyuShikakuShomeishoHakkoParameter" fetchSize="500">
         SELECT TB1."hihokenshaNo"   AS  "hihokenshaNo"
         ,COALESCE(D."tenshutsuKakuteiIdoYMD",D."tenshutsuYoteiIdoYMD") AS "idoYMD"
         ,TB1."yokaigoJotaiKubunCode"  AS "yokaigoJotaiKubunCode"
@@ -81,7 +81,7 @@
         ON   TB1."shinseishoKanriNo" = D."shikibetsuCode";
     </select>
 
-    <select id="getServiceCode" resultMap="resultMap_JukyuShikakuShomeishoHakkoRelateEntity" parameterType="jp.co.ndensan.reams.db.dba.definition.mybatis.param.jukyushikakushomeishohakko.JukyuShikakuShomeishoHakkoParameter" fetchSize="500">
+    <select id="getServiceCode" resultMap="resultMap_JukyuShikakuShomeishoHakkoRelateEntity" parameterType="jp.co.ndensan.reams.db.dbz.definition.mybatis.param.jukyushikakushomeishohakko.JukyuShikakuShomeishoHakkoParameter" fetchSize="500">
         SELECT
         Jukyusha."shiteiServiceShurui01" AS "shiteiServiceShurui01",
         Jukyusha."shiteiServiceShurui02" AS "shiteiServiceShurui02",
@@ -125,7 +125,7 @@
         DESC LIMIT 1
     </select>
 
-    <select id="getServiceMei" resultMap="resultMap_JukyuShikakuShomeishoHakkoRelateEntity" parameterType="jp.co.ndensan.reams.db.dba.definition.mybatis.param.jukyushikakushomeishohakko.JukyuShikakuShomeishoHakkoParameter" fetchSize="500">
+    <select id="getServiceMei" resultMap="resultMap_JukyuShikakuShomeishoHakkoRelateEntity" parameterType="jp.co.ndensan.reams.db.dbz.definition.mybatis.param.jukyushikakushomeishohakko.JukyuShikakuShomeishoHakkoParameter" fetchSize="500">
         SELECT
         DbT7130."serviceShuruiMeisho",
         DbT7130."serviceShuruiRyakusho"
@@ -139,7 +139,7 @@
         OR DbT7130."serviceShuruiCd" IS NULL)
     </select>
 
-    <select id="getNinTeiShinSeiChuData" resultMap="resultMap_JukyuShikakuShomeishoHakkoRelateEntity" parameterType="jp.co.ndensan.reams.db.dba.definition.mybatis.param.jukyushikakushomeishohakko.JukyuShikakuShomeishoHakkoParameter" fetchSize="500">
+    <select id="getNinTeiShinSeiChuData" resultMap="resultMap_JukyuShikakuShomeishoHakkoRelateEntity" parameterType="jp.co.ndensan.reams.db.dbz.definition.mybatis.param.jukyushikakushomeishohakko.JukyuShikakuShomeishoHakkoParameter" fetchSize="500">
         SELECT
         TB2."jukyuShinseiJiyu" AS "jukyuShinseiJiyu"
         ,TB2."shinseishoKanriNo" AS "shinseishoKanriNo"
@@ -156,7 +156,7 @@
         DESC LIMIT 1
     </select>
 
-    <select id="getNinTeiChouSaJou" resultMap="resultMap_JukyuShikakuShomeishoHakkoRelateEntity" parameterType="jp.co.ndensan.reams.db.dba.definition.mybatis.param.jukyushikakushomeishohakko.JukyuShikakuShomeishoHakkoParameter" fetchSize="500">
+    <select id="getNinTeiChouSaJou" resultMap="resultMap_JukyuShikakuShomeishoHakkoRelateEntity" parameterType="jp.co.ndensan.reams.db.dbz.definition.mybatis.param.jukyushikakushomeishohakko.JukyuShikakuShomeishoHakkoParameter" fetchSize="500">
         SELECT
         E."ninteichosaJisshiYMD" AS "ninteichosaJisshiYMD"
         FROM

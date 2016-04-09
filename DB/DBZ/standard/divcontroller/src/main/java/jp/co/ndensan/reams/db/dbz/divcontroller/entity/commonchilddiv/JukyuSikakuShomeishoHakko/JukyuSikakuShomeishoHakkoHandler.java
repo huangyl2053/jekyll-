@@ -3,16 +3,16 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dba.divcontroller.entity.commonchilddiv.JukyuSikakuShomeishoHakko;
+package jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.JukyuSikakuShomeishoHakko;
 
-import jp.co.ndensan.reams.db.dba.business.core.jukyushikakushomeishohakko.JukyuShikakuShomeishoModel;
-import jp.co.ndensan.reams.db.dba.definition.mybatis.param.jukyushikakushomeishohakko.JukyuShikakuShomeishoHakkoParameter;
-import jp.co.ndensan.reams.db.dba.service.core.jukyushikakushomeishohakko.JukyuShikakuShomeishoHakkoFinder;
+import jp.co.ndensan.reams.db.dbz.business.core.jukyushikakushomeishohakko.JukyuShikakuShomeishoModel;
+import jp.co.ndensan.reams.db.dbz.definition.mybatis.param.jukyushikakushomeishohakko.JukyuShikakuShomeishoHakkoParameter;
+import jp.co.ndensan.reams.db.dbz.service.core.jukyushikakushomeishohakko.JukyuShikakuShomeishoHakkoFinder;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 
 /**
- * 被保険者証・資格者証発行を編集するクラスです。
- * 
+ * 受給資格証明書を編集するクラスです。
+ *
  * @reamsid_L DBA-1090-011 wangkun
  */
 public class JukyuSikakuShomeishoHakkoHandler {

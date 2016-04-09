@@ -1,4 +1,4 @@
-package jp.co.ndensan.reams.db.dba.definition.mybatis.param.jukyushikakushomeishohakko;
+package jp.co.ndensan.reams.db.dbz.definition.mybatis.param.jukyushikakushomeishohakko;
 
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;

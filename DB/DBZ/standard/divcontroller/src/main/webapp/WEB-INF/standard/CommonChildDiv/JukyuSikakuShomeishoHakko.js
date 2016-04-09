@@ -1,5 +1,5 @@
-var DBA;
-(function (DBA) {
+var DBZ;
+(function (DBZ) {
     (function (JukyuSikakuShomeishoHakko) {
         var ModeController = (function () {
             function ModeController(fieldName) {
@@ -16,12 +16,12 @@ var DBA;
             return ModeController;
         })();
         JukyuSikakuShomeishoHakko.ModeController = ModeController;
-    })(DBA.JukyuSikakuShomeishoHakko || (DBA.JukyuSikakuShomeishoHakko = {}));
-    var JukyuSikakuShomeishoHakko = DBA.JukyuSikakuShomeishoHakko;
-})(DBA || (DBA = {}));
+    })(DBZ.JukyuSikakuShomeishoHakko || (DBZ.JukyuSikakuShomeishoHakko = {}));
+    var JukyuSikakuShomeishoHakko = DBZ.JukyuSikakuShomeishoHakko;
+})(DBZ || (DBZ = {}));
 
-var DBA;
-(function (DBA) {
+var DBZ;
+(function (DBZ) {
     (function (JukyuSikakuShomeishoHakko) {
         var PublicProperties = (function () {
             function PublicProperties(fieldName) {
@@ -36,6 +36,6 @@ var DBA;
             return PublicProperties;
         })();
         JukyuSikakuShomeishoHakko.PublicProperties = PublicProperties;
-    })(DBA.JukyuSikakuShomeishoHakko || (DBA.JukyuSikakuShomeishoHakko = {}));
-    var JukyuSikakuShomeishoHakko = DBA.JukyuSikakuShomeishoHakko;
-})(DBA || (DBA = {}));
+    })(DBZ.JukyuSikakuShomeishoHakko || (DBZ.JukyuSikakuShomeishoHakko = {}));
+    var JukyuSikakuShomeishoHakko = DBZ.JukyuSikakuShomeishoHakko;
+})(DBZ || (DBZ = {}));

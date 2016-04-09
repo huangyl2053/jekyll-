@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dba.definition.enumeratedtype;
+package jp.co.ndensan.reams.db.dbz.definition.enumeratedtype;
 
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -13,7 +13,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
  *
  * @reamsid_L DBA-1090-021 wangkun
  */
-public enum JuKyuShinSeiZiYu implements IYokaigoJotaiKubun {
+public enum JuKyuShinSeiZiYu {
 
     /**
      * 要介護状態区分が「非該当」であることを表します。<br />
@@ -78,12 +78,20 @@ public enum JuKyuShinSeiZiYu implements IYokaigoJotaiKubun {
 
     private final RString code;
 
-    @Override
+    /**
+     * コードの取得します。
+     *
+     * @return コード
+     */
     public RString getCode() {
         return code;
     }
 
-    @Override
+    /**
+     * 名称の取得します。
+     *
+     * @return 名称
+     */
     public RString getName() {
         return name;
     }
