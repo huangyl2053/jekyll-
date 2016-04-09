@@ -3,7 +3,7 @@
 <!-- 概要： 要介護認定主治医意見書情報のマッピング用XMLです。 -->
 
 <!-- どのマッパーインターフェースと対応するかを指定する -->
-<mapper namespace="jp.co.ndensan.reams.db.dbe.persistence.db.mapper.relate.ikensho.shujiiIkenshoJoho.IShujiiIkenshoJohoMapper">
+<mapper namespace="jp.co.ndensan.reams.db.dbe.persistence.db.mapper.relate.ikensho.shujiiikenshojoho.IShujiiIkenshoJohoMapper">
 
     <select id="select要介護認定主治医意見書情報ByKey" resultMap="resultMap_ShujiiIkenshoJohoEntity" fetchSize="500">
         <include refid="selectShujiiIkenshoJohoEntity" />
@@ -51,7 +51,7 @@
         </where>
     </sql>
 
-   <resultMap id="resultMap_ShujiiIkenshoJohoEntity" type="jp.co.ndensan.reams.db.dbe.entity.db.relate.ikensho.shujiiIkenshoJoho.ShujiiIkenshoJohoEntity" autoMapping="true">
+   <resultMap id="resultMap_ShujiiIkenshoJohoEntity" type="jp.co.ndensan.reams.db.dbe.entity.db.relate.ikensho.shujiiikenshojoho.ShujiiIkenshoJohoEntity" autoMapping="true">
         <id property="要介護認定主治医意見書情報Entity.shinseishoKanriNo" column="dbT5302ShujiiIkenshoJoho_shinseishoKanriNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.ShinseishoKanriNoTypeHandler"/>
         <id property="要介護認定主治医意見書情報Entity.ikenshoIraiRirekiNo" column="dbT5302ShujiiIkenshoJoho_ikenshoIraiRirekiNo"/>
         <association property="要介護認定主治医意見書情報Entity" resultMap="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT5302ShujiiIkenshoJohoMapper.ResultMap_DbT5302ShujiiIkenshoJohoEntity"/>

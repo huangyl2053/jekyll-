@@ -8,7 +8,7 @@ package jp.co.ndensan.reams.db.dbe.entity.db.relate.ikensho.shujiiikenshoiraijoh
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
-import jp.co.ndensan.reams.db.dbe.entity.db.relate.ikensho.shujiiIkenshoJoho.ShujiiIkenshoJohoEntity;
+import jp.co.ndensan.reams.db.dbe.entity.db.relate.ikensho.shujiiikenshojoho.ShujiiIkenshoJohoEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5301ShujiiIkenshoIraiJohoEntity;
 
 /**
