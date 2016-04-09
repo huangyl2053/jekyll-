@@ -6,8 +6,8 @@ package jp.co.ndensan.reams.db.dbe.business.core.ninteichosaresult;
 
 import jp.co.ndensan.reams.db.dbe.business.core.ninteichosairai.NinteichosaIrai;
 import jp.co.ndensan.reams.db.dbe.business.core.kaigoninteichosain.KaigoNinteichosain;
-import jp.co.ndensan.reams.db.dbe.business.core.YokaigoNintei.YokaigoNinteiProgress;
-import jp.co.ndensan.reams.db.dbe.business.core.YokaigoNintei.YokaigoNinteiShinsei;
+import jp.co.ndensan.reams.db.dbe.business.core.yokaigonintei.YokaigoNinteiProgress;
+import jp.co.ndensan.reams.db.dbe.business.core.yokaigonintei.YokaigoNinteiShinsei;
 import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.kojin.IKojin;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;

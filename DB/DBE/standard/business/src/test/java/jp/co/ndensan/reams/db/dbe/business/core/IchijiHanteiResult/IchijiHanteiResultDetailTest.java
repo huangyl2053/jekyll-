@@ -4,10 +4,10 @@
  */
 package jp.co.ndensan.reams.db.dbe.business.core.IchijiHanteiResult;
 
-import jp.co.ndensan.reams.db.dbe.business.core.YokaigoNintei.YokaigoNinteiChukanHyokaKomokuTokuten;
+import jp.co.ndensan.reams.db.dbe.business.core.yokaigonintei.YokaigoNinteiChukanHyokaKomokuTokuten;
 import jp.co.ndensan.reams.db.dbe.business.core.NoryokuMiteikaNinchishoKoreishaShihyoKomoku;
 import jp.co.ndensan.reams.db.dbe.business.core.SuiteiKyuhuKubun;
-import jp.co.ndensan.reams.db.dbe.business.core.YokaigoNintei.YokaigoNinteiKijunTime;
+import jp.co.ndensan.reams.db.dbe.business.core.yokaigonintei.YokaigoNinteiKijunTime;
 import jp.co.ndensan.reams.db.dbe.business.core.ichijihanteiresult.IchijiHanteiResultDetail;
 import jp.co.ndensan.reams.db.dbe.business.core.ninchishokoreishajiritsudo.NinchishoKoreishaJiritsudoGaizenseiHyokaKomoku;
 import jp.co.ndensan.reams.db.dbe.business.core.ichijihanteiresult.IchijiHanteiResultKomoku;

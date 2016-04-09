@@ -5,8 +5,8 @@
 package jp.co.ndensan.reams.db.dbe.business.core.NinteichosaResult;
 
 import jp.co.ndensan.reams.db.dbe.business.core.ninteichosaresult.NinteichosaKekkaTorikomiTaishosha;
-import jp.co.ndensan.reams.db.dbe.business.core.YokaigoNintei.YokaigoNinteiProgress;
-import jp.co.ndensan.reams.db.dbe.business.core.YokaigoNintei.YokaigoNinteiShinsei;
+import jp.co.ndensan.reams.db.dbe.business.core.yokaigonintei.YokaigoNinteiProgress;
+import jp.co.ndensan.reams.db.dbe.business.core.yokaigonintei.YokaigoNinteiShinsei;
 import jp.co.ndensan.reams.db.dbe.business.core.ninteichosairai.NinteichosaIrai;
 import jp.co.ndensan.reams.db.dbe.business.core.kaigoninteichosain.KaigoNinteichosain;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbeTestBase;

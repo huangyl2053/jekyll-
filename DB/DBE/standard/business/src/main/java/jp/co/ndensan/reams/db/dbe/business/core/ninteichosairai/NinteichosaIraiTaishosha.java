@@ -5,7 +5,7 @@
 package jp.co.ndensan.reams.db.dbe.business.core.ninteichosairai;
 
 import static java.util.Objects.requireNonNull;
-import jp.co.ndensan.reams.db.dbe.business.core.YokaigoNintei.YokaigoNinteiProgress;
+import jp.co.ndensan.reams.db.dbe.business.core.yokaigonintei.YokaigoNinteiProgress;
 import jp.co.ndensan.reams.db.dbx.business.core.IKaigoJigyosha;
 import jp.co.ndensan.reams.db.dbx.business.core.INinteiChosain;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;

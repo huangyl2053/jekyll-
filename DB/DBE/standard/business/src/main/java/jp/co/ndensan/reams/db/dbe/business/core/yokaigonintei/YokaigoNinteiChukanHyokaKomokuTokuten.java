@@ -2,7 +2,7 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbe.business.core.YokaigoNintei;
+package jp.co.ndensan.reams.db.dbe.business.core.yokaigonintei;
 
 import java.util.EnumMap;
 import java.util.Map;
