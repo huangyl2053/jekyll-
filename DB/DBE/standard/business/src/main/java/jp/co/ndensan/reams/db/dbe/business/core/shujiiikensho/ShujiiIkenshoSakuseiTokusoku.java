@@ -2,7 +2,7 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbe.business.core.ShujiiIkensho;
+package jp.co.ndensan.reams.db.dbe.business.core.shujiiikensho;
 
 import jp.co.ndensan.reams.db.dbe.definition.core.enumeratedtype.IkenshoSakuseiTokusokuHoho;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
