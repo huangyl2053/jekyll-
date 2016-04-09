@@ -25,7 +25,7 @@ public class ShisetsuNyutaishoRirekiKanriValidationHandler {
     /**
      * コンストラクタです。
      *
-     * @param div 施設入退所履歴Div
+     * @param div 施設入退所履歴DivKyokaisoGaitoshaPanelHandler
      */
     public ShisetsuNyutaishoRirekiKanriValidationHandler(ShisetsuNyutaishoRirekiKanriDiv div) {
         this.div = div;
@@ -44,7 +44,8 @@ public class ShisetsuNyutaishoRirekiKanriValidationHandler {
         } else {
             if (div.getShisetsuNyutaishoInput().getTxtTaishoDate().getValue() != null
                     && !div.getShisetsuNyutaishoInput().getTxtTaishoDate().getValue().isEmpty()
-                    && !div.getShisetsuNyutaishoInput().getTxtNyushoDate().getValue().isBeforeOrEquals(div.getShisetsuNyutaishoInput().getTxtTaishoDate().getValue())) {
+                    && !div.getShisetsuNyutaishoInput().getTxtNyushoDate().getValue().
+                    isBeforeOrEquals(div.getShisetsuNyutaishoInput().getTxtTaishoDate().getValue())) {
                 validPairs.add(new ValidationMessageControlPair(
                         RRVMessages.前後関係逆転,
                         div.getShisetsuNyutaishoInput().getTxtTaishoDate(),

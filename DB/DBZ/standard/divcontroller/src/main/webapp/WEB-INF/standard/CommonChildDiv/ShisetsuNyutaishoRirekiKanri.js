@@ -325,7 +325,7 @@ var DBZ;
                     this.controls.dgShisetsuNyutaishoRireki().gridSetting = gridSetting;
                     this.controls.dgShisetsuNyutaishoRireki()._control.afterPropertiesSet();
 
-                    this.controls.ccdShisetsuJoho().State().JigyoshaInputGuideMode();
+                    this.controls.ccdShisetsuJoho().State().OtherTokureiMode();
 
                     var gridSetting = this.controls.dgShisetsuNyutaishoRireki().gridSetting;
 
