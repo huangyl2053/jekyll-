@@ -2,7 +2,7 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbe.business.core.NinteichosaResult;
+package jp.co.ndensan.reams.db.dbe.business.core.ninteichosaresult;
 
 import jp.co.ndensan.reams.db.dbe.business.core.ninteichosairai.NinteichosaIrai;
 import jp.co.ndensan.reams.db.dbe.business.core.kaigoninteichosain.KaigoNinteichosain;
