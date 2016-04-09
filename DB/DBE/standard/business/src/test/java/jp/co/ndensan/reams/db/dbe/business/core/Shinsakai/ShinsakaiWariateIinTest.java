@@ -5,7 +5,7 @@
 package jp.co.ndensan.reams.db.dbe.business.core.Shinsakai;
 
 import jp.co.ndensan.reams.db.dbe.business.core.ShinsainKubun;
-import jp.co.ndensan.reams.db.dbe.business.core.Gogitai.GogitaichoKubun;
+import jp.co.ndensan.reams.db.dbe.business.core.gogitai.GogitaichoKubun;
 import jp.co.ndensan.reams.db.dbe.business.helper.ShinsakaiMockBusinessCreator;
 import jp.co.ndensan.reams.db.dbe.definition.core.enumeratedtype.ShinsakaiIinShukketsuKubun;
 import jp.co.ndensan.reams.db.dbe.definition.core.valueobject.timestring.TimeString;

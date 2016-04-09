@@ -6,8 +6,8 @@ package jp.co.ndensan.reams.db.dbe.business.helper;
 
 import java.util.ArrayList;
 import java.util.List;
-import jp.co.ndensan.reams.db.dbe.business.core.Gogitai.GogitaiDetail;
-import jp.co.ndensan.reams.db.dbe.business.core.Gogitai.GogitaichoKubun;
+import jp.co.ndensan.reams.db.dbe.business.core.gogitai.GogitaiDetail;
+import jp.co.ndensan.reams.db.dbe.business.core.gogitai.GogitaichoKubun;
 import jp.co.ndensan.reams.db.dbe.business.core.JogaiShinsakaiIin.JogaiShinsakaiIin;
 import jp.co.ndensan.reams.db.dbe.business.core.ShinsainKubun;
 import jp.co.ndensan.reams.db.dbe.business.core.Shinsakai.Shinsakai;

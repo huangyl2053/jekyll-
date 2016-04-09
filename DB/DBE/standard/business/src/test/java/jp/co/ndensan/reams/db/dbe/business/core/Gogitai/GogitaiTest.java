@@ -4,6 +4,10 @@
  */
 package jp.co.ndensan.reams.db.dbe.business.core.Gogitai;
 
+import jp.co.ndensan.reams.db.dbe.business.core.gogitai.GogitaiDetail;
+import jp.co.ndensan.reams.db.dbe.business.core.gogitai.Gogitai;
+import jp.co.ndensan.reams.db.dbe.business.core.gogitai.GogitaiWariateIinList;
+import jp.co.ndensan.reams.db.dbe.business.core.gogitai.GogitaiWariateIin;
 import jp.co.ndensan.reams.db.dbe.business.core.Shinsakai.ShinsakaiKaisaiBasho;
 import jp.co.ndensan.reams.db.dbe.business.core.Shinsakai.ShinsakaiIin;
 import java.util.ArrayList;

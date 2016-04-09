@@ -4,6 +4,9 @@
  */
 package jp.co.ndensan.reams.db.dbe.business.core.Gogitai;
 
+import jp.co.ndensan.reams.db.dbe.business.core.gogitai.GogitaiDetail;
+import jp.co.ndensan.reams.db.dbe.business.core.gogitai.Gogitai;
+import jp.co.ndensan.reams.db.dbe.business.core.gogitai.GogitaiList;
 import jp.co.ndensan.reams.db.dbe.business.core.Shinsakai.ShinsakaiKaisaiBasho;
 import java.util.ArrayList;
 import java.util.Collections;

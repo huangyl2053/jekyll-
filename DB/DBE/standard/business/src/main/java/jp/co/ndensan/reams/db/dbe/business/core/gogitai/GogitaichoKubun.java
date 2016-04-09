@@ -2,7 +2,7 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbe.business.core.Gogitai;
+package jp.co.ndensan.reams.db.dbe.business.core.gogitai;
 
 import jp.co.ndensan.reams.db.dbe.definition.core.valueobject.gogitaichokubuncode.GogitaichoKubunCode;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
