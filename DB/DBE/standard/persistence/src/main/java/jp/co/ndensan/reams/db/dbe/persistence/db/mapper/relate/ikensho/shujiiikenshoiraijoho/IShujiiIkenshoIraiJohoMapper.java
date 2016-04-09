@@ -2,11 +2,11 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbe.persistence.db.mapper.relate.ikensho.shujiiIkenshoIraiJoho;
+package jp.co.ndensan.reams.db.dbe.persistence.db.mapper.relate.ikensho.shujiiikenshoiraijoho;
 
 import java.util.List;
-import jp.co.ndensan.reams.db.dbe.definition.mybatis.param.ikensho.shujiiIkenshoIraiJoho.ShujiiIkenshoIraiJohoMapperParameter;
-import jp.co.ndensan.reams.db.dbe.entity.db.relate.ikensho.shujiiIkenshoIraiJoho.ShujiiIkenshoIraiJohoEntity;
+import jp.co.ndensan.reams.db.dbe.definition.mybatis.param.ikensho.shujiiikenshoiraijoho.ShujiiIkenshoIraiJohoMapperParameter;
+import jp.co.ndensan.reams.db.dbe.entity.db.relate.ikensho.shujiiikenshoiraijoho.ShujiiIkenshoIraiJohoEntity;
 
 /**
  * 主治医意見書作成依頼情報のマッパーインタフェースです。

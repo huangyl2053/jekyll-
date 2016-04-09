@@ -4,7 +4,7 @@
 <!-- @reamsid_L DBE-9999-011 chengsanyuan -->
 
 <!-- どのマッパーインターフェースと対応するかを指定する -->
-<mapper namespace="jp.co.ndensan.reams.db.dbe.persistence.db.mapper.relate.ikensho.shujiiIkenshoIraiJoho.IShujiiIkenshoIraiJohoMapper">
+<mapper namespace="jp.co.ndensan.reams.db.dbe.persistence.db.mapper.relate.ikensho.shujiiikenshoiraijoho.IShujiiIkenshoIraiJohoMapper">
 
     <select id="select主治医意見書作成依頼情報ByKey" resultMap="resultMap_ShujiiIkenshoIraiJohoEntity" fetchSize="500">
         <include refid="selectShujiiIkenshoIraiJohoEntity" />
@@ -63,7 +63,7 @@
     </sql>
 
     <!-- TODO RelateEntityの形に合わせてマッピング定義を修正してください。 -->
-    <resultMap id="resultMap_ShujiiIkenshoIraiJohoEntity" type="jp.co.ndensan.reams.db.dbe.entity.db.relate.ikensho.shujiiIkenshoIraiJoho.ShujiiIkenshoIraiJohoEntity" autoMapping="true">
+    <resultMap id="resultMap_ShujiiIkenshoIraiJohoEntity" type="jp.co.ndensan.reams.db.dbe.entity.db.relate.ikensho.shujiiikenshoiraijoho.ShujiiIkenshoIraiJohoEntity" autoMapping="true">
         <id property="主治医意見書作成依頼情報Entity.shinseishoKanriNo" column="dbT5301ShujiiIkenshoIraiJoho_shinseishoKanriNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.ShinseishoKanriNoTypeHandler"/>
         <id property="主治医意見書作成依頼情報Entity.ikenshoIraiRirekiNo" column="dbT5301ShujiiIkenshoIraiJoho_ikenshoIraiRirekiNo"/>
         <association property="主治医意見書作成依頼情報Entity" resultMap="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT5301ShujiiIkenshoIraiJohoMapper.ResultMap_DbT5301ShujiiIkenshoIraiJohoEntity"/>
