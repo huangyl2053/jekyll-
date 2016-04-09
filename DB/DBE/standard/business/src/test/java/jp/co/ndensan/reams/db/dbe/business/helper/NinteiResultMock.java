@@ -10,9 +10,9 @@ import jp.co.ndensan.reams.db.dbe.business.core.ninteiresult.NinteiShinsakaiIken
 import jp.co.ndensan.reams.db.dbe.business.core.ninteiresult.NinteiTorikeshi;
 import jp.co.ndensan.reams.db.dbe.business.core.ninteiresult.NinteiYukoKikan;
 import jp.co.ndensan.reams.db.dbe.business.core.TokuteiShippei;
-import jp.co.ndensan.reams.db.dbe.business.core.YokaigoJotai.YokaigoJotai;
-import jp.co.ndensan.reams.db.dbe.business.core.YokaigoJotai.YokaigoJotaiKubun;
-import jp.co.ndensan.reams.db.dbe.business.core.YokaigoJotai.YokaigoJotaizoRei;
+import jp.co.ndensan.reams.db.dbe.business.core.yokaigojotai.YokaigoJotai;
+import jp.co.ndensan.reams.db.dbe.business.core.yokaigojotai.YokaigoJotaiKubun;
+import jp.co.ndensan.reams.db.dbe.business.core.yokaigojotai.YokaigoJotaizoRei;
 import jp.co.ndensan.reams.db.dbe.definition.core.enumeratedtype.NinteiResultIdoJiyuKubun;
 import jp.co.ndensan.reams.db.dbe.definition.core.enumeratedtype.ShinsakaiIkenType;
 import jp.co.ndensan.reams.db.dbe.definition.core.enumeratedtype.ShisetsuNyushoKubun;
