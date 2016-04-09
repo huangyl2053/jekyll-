@@ -5,7 +5,7 @@
 package jp.co.ndensan.reams.db.dbe.business.core.gogitai;
 
 import java.util.Objects;
-import jp.co.ndensan.reams.db.dbe.business.core.Shinsakai.ShinsakaiKaisaiBasho;
+import jp.co.ndensan.reams.db.dbe.business.core.shinsakai.ShinsakaiKaisaiBasho;
 import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dbe.definition.core.enumeratedtype.GogitaiDummyKubun;
 import jp.co.ndensan.reams.db.dbe.definition.core.enumeratedtype.GogitaiSeishinkaIshiSonzaiKubun;

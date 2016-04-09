@@ -5,7 +5,7 @@
 package jp.co.ndensan.reams.db.dbe.business.core.Gogitai;
 
 import jp.co.ndensan.reams.db.dbe.business.core.ShinsainKubun;
-import jp.co.ndensan.reams.db.dbe.business.core.Shinsakai.ShinsakaiIin;
+import jp.co.ndensan.reams.db.dbe.business.core.shinsakai.ShinsakaiIin;
 import jp.co.ndensan.reams.db.dbe.business.core.gogitai.GogitaiWariateIin;
 import jp.co.ndensan.reams.db.dbe.business.core.gogitai.GogitaichoKubun;
 import jp.co.ndensan.reams.db.dbe.business.core.gogitai.GogitaiDetail;

@@ -1,4 +1,4 @@
-package jp.co.ndensan.reams.db.dbe.business.core.Shinsakai;
+package jp.co.ndensan.reams.db.dbe.business.core.shinsakai;
 
 import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;

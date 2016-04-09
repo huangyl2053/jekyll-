@@ -2,7 +2,7 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbe.business.core.Shinsakai;
+package jp.co.ndensan.reams.db.dbe.business.core.shinsakai;
 
 import java.util.Iterator;
 import java.util.List;
