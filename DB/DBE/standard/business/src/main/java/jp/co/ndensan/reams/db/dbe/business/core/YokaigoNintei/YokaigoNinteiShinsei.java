@@ -4,7 +4,7 @@
  */
 package jp.co.ndensan.reams.db.dbe.business.core.YokaigoNintei;
 
-import jp.co.ndensan.reams.db.dbe.business.core.NinteiResult.NinteiResultSimple;
+import jp.co.ndensan.reams.db.dbe.business.core.ninteiresult.NinteiResultSimple;
 import jp.co.ndensan.reams.db.dbe.business.core.NinteiShinsei.NinteiShinseiRiyu;
 import jp.co.ndensan.reams.db.dbe.business.core.NinteiShinseiTorisage.NinteiShinseiTorisage;
 import jp.co.ndensan.reams.db.dbe.definition.core.enumeratedtype.ShinsakaiYusenWaritsukeKubun;

@@ -4,11 +4,11 @@
  */
 package jp.co.ndensan.reams.db.dbe.business.helper;
 
-import jp.co.ndensan.reams.db.dbe.business.core.NinteiResult.NinteiResult;
-import jp.co.ndensan.reams.db.dbe.business.core.NinteiResult.NinteiResultIdo;
-import jp.co.ndensan.reams.db.dbe.business.core.NinteiResult.NinteiShinsakaiIken;
-import jp.co.ndensan.reams.db.dbe.business.core.NinteiResult.NinteiTorikeshi;
-import jp.co.ndensan.reams.db.dbe.business.core.NinteiResult.NinteiYukoKikan;
+import jp.co.ndensan.reams.db.dbe.business.core.ninteiresult.NinteiResult;
+import jp.co.ndensan.reams.db.dbe.business.core.ninteiresult.NinteiResultIdo;
+import jp.co.ndensan.reams.db.dbe.business.core.ninteiresult.NinteiShinsakaiIken;
+import jp.co.ndensan.reams.db.dbe.business.core.ninteiresult.NinteiTorikeshi;
+import jp.co.ndensan.reams.db.dbe.business.core.ninteiresult.NinteiYukoKikan;
 import jp.co.ndensan.reams.db.dbe.business.core.TokuteiShippei;
 import jp.co.ndensan.reams.db.dbe.business.core.YokaigoJotai.YokaigoJotai;
 import jp.co.ndensan.reams.db.dbe.business.core.YokaigoJotai.YokaigoJotaiKubun;

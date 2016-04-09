@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbe.business.core.NinteiResult;
+package jp.co.ndensan.reams.db.dbe.business.core.ninteiresult;
 
 import jp.co.ndensan.reams.db.dbe.business.core.YokaigoJotai.YokaigoJotaiKubun;
 import jp.co.ndensan.reams.db.dbe.definition.core.valueobject.NinteiYukoKikanTsukisu;

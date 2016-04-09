@@ -6,8 +6,8 @@
 package jp.co.ndensan.reams.db.dbe.business.core.NinteiResult;
 
 import jp.co.ndensan.reams.db.dbe.business.core.YokaigoJotai.YokaigoJotaiKubun;
-import jp.co.ndensan.reams.db.dbe.business.core.NinteiResult.NinteiResultSimple;
-import jp.co.ndensan.reams.db.dbe.business.core.NinteiResult.NinteiYukoKikan;
+import jp.co.ndensan.reams.db.dbe.business.core.ninteiresult.NinteiResultSimple;
+import jp.co.ndensan.reams.db.dbe.business.core.ninteiresult.NinteiYukoKikan;
 import jp.co.ndensan.reams.db.dbe.definition.core.valueobject.NinteiYukoKikanTsukisu;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbzTestBase;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
