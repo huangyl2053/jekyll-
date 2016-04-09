@@ -4,7 +4,7 @@
  */
 package jp.co.ndensan.reams.db.dbe.business.core.NinteichosaTokkijiko;
 
-import jp.co.ndensan.reams.db.dbe.business.core.NinteichosaTokkijiko.NinteichosaTokkijiko;
+import jp.co.ndensan.reams.db.dbe.business.core.ninteichosatokkijiko.NinteichosaTokkijiko;
 import jp.co.ndensan.reams.db.dbe.definition.core.valueobject.NinteichosaIraiRirekiNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
