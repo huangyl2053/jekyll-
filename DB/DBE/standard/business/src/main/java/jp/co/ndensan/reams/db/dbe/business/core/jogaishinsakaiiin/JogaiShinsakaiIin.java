@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbe.business.core.JogaiShinsakaiIin;
+package jp.co.ndensan.reams.db.dbe.business.core.jogaishinsakaiiin;
 
 import jp.co.ndensan.reams.db.dbe.business.core.Shinsakai.ShinsakaiIin;
 import static java.util.Objects.requireNonNull;

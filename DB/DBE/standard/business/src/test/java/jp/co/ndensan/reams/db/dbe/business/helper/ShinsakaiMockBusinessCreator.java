@@ -8,7 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbe.business.core.gogitai.GogitaiDetail;
 import jp.co.ndensan.reams.db.dbe.business.core.gogitai.GogitaichoKubun;
-import jp.co.ndensan.reams.db.dbe.business.core.JogaiShinsakaiIin.JogaiShinsakaiIin;
+import jp.co.ndensan.reams.db.dbe.business.core.jogaishinsakaiiin.JogaiShinsakaiIin;
 import jp.co.ndensan.reams.db.dbe.business.core.ShinsainKubun;
 import jp.co.ndensan.reams.db.dbe.business.core.Shinsakai.Shinsakai;
 import jp.co.ndensan.reams.db.dbe.business.core.Shinsakai.ShinsakaiDetail;
