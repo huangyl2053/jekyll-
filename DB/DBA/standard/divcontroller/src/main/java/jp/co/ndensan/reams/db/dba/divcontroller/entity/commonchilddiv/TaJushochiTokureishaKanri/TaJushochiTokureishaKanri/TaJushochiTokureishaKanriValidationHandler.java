@@ -136,7 +136,8 @@ public class TaJushochiTokureishaKanriValidationHandler {
                         || div.getDdlTekiyoJiyo().getSelectedKey().isEmpty()) {
                     validPairs.add(new ValidationMessageControlPair(RRVMessages.適用事由, div.getDdlTekiyoJiyo()));
                 }
-                if (div.getTxtTekiyobi().getValue().isBefore(div.getTxtTekiyoTodokedebi().getValue())) {
+                if (div.getTxtTekiyobi().getValue() != null && div.getTxtTekiyoTodokedebi().getValue() != null
+                        && div.getTxtTekiyobi().getValue().isBefore(div.getTxtTekiyoTodokedebi().getValue())) {
                     validPairs.add(new ValidationMessageControlPair(RRVMessages.適用日と適用届出日の整合性チェック, div.getTxtTekiyobi(), div.getTxtTekiyoTodokedebi()));
                 }
                 if (div.getCcdShisetsuJoho().getNyuryokuShisetsuKodo() != null
