@@ -14,7 +14,7 @@ import jp.co.ndensan.reams.db.dbe.business.core.IchijiHanteiResult.IchijiHanteiR
 import jp.co.ndensan.reams.db.dbe.business.core.IchijiHanteiResult.NichijoSeikatsuJiritsudoKumiawase;
 import jp.co.ndensan.reams.db.dbe.business.core.IchijiHanteiResult.IchijiHanteiResultSofu;
 import jp.co.ndensan.reams.db.dbe.business.core.IchijiHanteiResult.JotaiAnteiseiKubun;
-import jp.co.ndensan.reams.db.dbe.business.core.IchijiHanteiKeikoku.IchijiHanteiKeikokuList;
+import jp.co.ndensan.reams.db.dbe.business.core.ichijihanteikeikoku.IchijiHanteiKeikokuList;
 import jp.co.ndensan.reams.db.dbe.business.helper.IchijiHanteiTestBusinessCreator;
 import jp.co.ndensan.reams.db.dbe.definition.core.enumeratedtype.IchijiHanteiResultSofuKubun;
 import jp.co.ndensan.reams.db.dbe.definition.core.enumeratedtype.KariIchijiHanteiKubun;
