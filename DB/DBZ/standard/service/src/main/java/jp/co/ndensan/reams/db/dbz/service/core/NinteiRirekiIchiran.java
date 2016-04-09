@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbz.service;
+package jp.co.ndensan.reams.db.dbz.service.core;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -12,7 +12,6 @@ import jp.co.ndensan.reams.db.dbz.business.core.ninteirirekiichiran.NinteiRireki
 import jp.co.ndensan.reams.db.dbz.definition.param.ninteirirekiichiran.NinteiRirekiIchiranParameter;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT4001JukyushaDaichoEntity;
 import jp.co.ndensan.reams.db.dbz.persistence.db.mapper.relate.ninteirirekiichiran.INinteiRirekiIchiranMapper;
-import jp.co.ndensan.reams.db.dbz.service.core.MapperProvider;
 import jp.co.ndensan.reams.uz.uza.util.db.SearchResult;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
