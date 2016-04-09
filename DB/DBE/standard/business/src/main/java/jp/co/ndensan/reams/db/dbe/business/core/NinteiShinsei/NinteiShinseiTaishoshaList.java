@@ -5,7 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbe.business.core.NinteiShinsei;
 
-import jp.co.ndensan.reams.db.dbe.business.core.Minashi2Gosha.Minashi2GoshaList;
+import jp.co.ndensan.reams.db.dbe.business.core.minashi2gosha.Minashi2GoshaList;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
