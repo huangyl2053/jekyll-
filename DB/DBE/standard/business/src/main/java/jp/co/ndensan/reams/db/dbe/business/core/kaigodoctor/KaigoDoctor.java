@@ -2,7 +2,7 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbe.business.core.KaigoDoctor;
+package jp.co.ndensan.reams.db.dbe.business.core.kaigodoctor;
 
 /**
  * 介護医師の情報を扱うクラスです。

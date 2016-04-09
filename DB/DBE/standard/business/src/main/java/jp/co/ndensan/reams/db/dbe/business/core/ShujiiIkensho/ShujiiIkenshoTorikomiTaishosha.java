@@ -4,7 +4,7 @@
  */
 package jp.co.ndensan.reams.db.dbe.business.core.ShujiiIkensho;
 
-import jp.co.ndensan.reams.db.dbe.business.core.KaigoDoctor.KaigoDoctor;
+import jp.co.ndensan.reams.db.dbe.business.core.kaigodoctor.KaigoDoctor;
 import jp.co.ndensan.reams.db.dbe.business.core.YokaigoNintei.YokaigoNinteiProgress;
 import jp.co.ndensan.reams.db.dbe.business.core.YokaigoNintei.YokaigoNinteiShinsei;
 import static java.util.Objects.requireNonNull;
