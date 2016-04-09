@@ -3,15 +3,15 @@
 <!-- 概要： 合議体割当委員情報のマッピング用XMLです。 -->
 
 <!-- どのマッパーインターフェースと対応するかを指定する -->
-<mapper namespace="jp.co.ndensan.reams.db.dbe.persistence.db.mapper.relate.gogitaijoho.gogitaiWariateIinJoho.IGogitaiWariateIinJohoMapper">
+<mapper namespace="jp.co.ndensan.reams.db.dbe.persistence.db.mapper.relate.gogitaijoho.gogitaiwariateiinjoho.IGogitaiWariateIinJohoMapper">
 
     <select id="select合議体割当委員情報ByKey" resultMap="resultMap_GogitaiWariateIinJohoRelateEntity" 
-            parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatis.param.gogitaijoho.gogitaiWariateIinJoho.GogitaiWariateIinJohoMapperParameter" fetchSize="500">
+            parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatis.param.gogitaijoho.gogitaiwariateiinjoho.GogitaiWariateIinJohoMapperParameter" fetchSize="500">
         <include refid="selectGogitaiWariateIinJohoRelateEntity" />
     </select>
 
     <select id="select合議体割当委員情報リストBy主キー1" resultMap="resultMap_GogitaiWariateIinJohoRelateEntity" 
-            parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatis.param.gogitaijoho.gogitaiWariateIinJoho.GogitaiWariateIinJohoMapperParameter" fetchSize="500">
+            parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatis.param.gogitaijoho.gogitaiwariateiinjoho.GogitaiWariateIinJohoMapperParameter" fetchSize="500">
         <include refid="selectGogitaiWariateIinJohoRelateEntity" />
     </select>
 
@@ -38,7 +38,7 @@
         </where>
     </sql>
 
-    <resultMap id="resultMap_GogitaiWariateIinJohoRelateEntity" type="jp.co.ndensan.reams.db.dbe.entity.db.relate.gogitaijoho.gogitaiWariateIinJoho.GogitaiWariateIinJohoRelateEntity" autoMapping="true">
+    <resultMap id="resultMap_GogitaiWariateIinJohoRelateEntity" type="jp.co.ndensan.reams.db.dbe.entity.db.relate.gogitaijoho.gogitaiwariateiinjoho.GogitaiWariateIinJohoRelateEntity" autoMapping="true">
         <id column="dbT5593GogitaiWariateIinJoho_gogitaiNo"/>
         <id column="dbT5593GogitaiWariateIinJoho_gogitaiYukoKikanKaishiYMD"/>
         <id column="dbT5593GogitaiWariateIinJoho_shinsakaiIinCode" />
