@@ -5,6 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbz.business.core.shinsakaikaisai;
 
+import java.io.Serializable;
 import jp.co.ndensan.reams.db.dbz.entity.db.relate.shinsakaikaisai.ShinsakaiKaisaiRelateEntity;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -15,7 +16,7 @@ import jp.co.ndensan.reams.uz.uza.math.Decimal;
  *
  * @reamsid_L DBE-0120-010 lishengli
  */
-public class ShinsakaiKaisai {
+public class ShinsakaiKaisai implements Serializable {
 
     private final ShinsakaiKaisaiRelateEntity entity;
 
