@@ -5,7 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbe.business.helper;
 
-import jp.co.ndensan.reams.db.dbe.business.core.Shujii.IShujii;
+import jp.co.ndensan.reams.db.dbe.business.core.shujii.IShujii;
 import jp.co.ndensan.reams.db.dbe.business.core.ShujiiIryoKikan.IShujiiIryoKikan;
 import jp.co.ndensan.reams.db.dbe.business.core.kaigodoctor.KaigoDoctor;
 import jp.co.ndensan.reams.db.dbe.business.core.kaigoiryokikan.KaigoIryoKikan;

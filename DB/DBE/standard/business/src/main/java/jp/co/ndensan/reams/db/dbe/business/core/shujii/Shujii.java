@@ -2,7 +2,7 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbe.business.core.Shujii;
+package jp.co.ndensan.reams.db.dbe.business.core.shujii;
 
 import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dbe.definition.core.enumeratedtype.IshiJokyo;
