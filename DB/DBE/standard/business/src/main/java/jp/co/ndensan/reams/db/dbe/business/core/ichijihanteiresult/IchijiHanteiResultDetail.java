@@ -7,7 +7,7 @@ package jp.co.ndensan.reams.db.dbe.business.core.ichijihanteiresult;
 import jp.co.ndensan.reams.db.dbe.business.core.ichijihanteikeikoku.IchijiHanteiKeikokuList;
 import java.util.EnumMap;
 import java.util.Map;
-import jp.co.ndensan.reams.db.dbe.business.core.NinchishoKoreishaJiritsudo.NinchishoKoreishaJiritsudoGaizenseiHyokaKomoku;
+import jp.co.ndensan.reams.db.dbe.business.core.ninchishokoreishajiritsudo.NinchishoKoreishaJiritsudoGaizenseiHyokaKomoku;
 import jp.co.ndensan.reams.db.dbe.business.core.NoryokuMiteikaNinchishoKoreishaShihyoKomoku;
 import jp.co.ndensan.reams.db.dbe.business.core.SuiteiKyuhuKubun;
 import jp.co.ndensan.reams.db.dbe.business.core.YokaigoNintei.YokaigoNinteiChukanHyokaKomokuTokuten;
