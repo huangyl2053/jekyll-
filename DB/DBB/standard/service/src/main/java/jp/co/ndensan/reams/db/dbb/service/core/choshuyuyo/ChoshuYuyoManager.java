@@ -19,6 +19,8 @@ import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
 
 /**
  * 介護賦課徴収猶予を管理するクラスです。
+ *
+ * @reamsid_L DBB-9999-011 sunhaidi
  */
 public class ChoshuYuyoManager {
 
@@ -55,8 +57,7 @@ public class ChoshuYuyoManager {
     /**
      * {@link InstanceProvider#create}にて生成した{@link ChoshuYuyoManager}のインスタンスを返します。
      *
-     * @return
-     * {@link InstanceProvider#create}にて生成した{@link ChoshuYuyoManager}のインスタンス
+     * @return {@link InstanceProvider#create}にて生成した{@link ChoshuYuyoManager}のインスタンス
      */
     public static ChoshuYuyoManager createInstance() {
         return InstanceProvider.create(ChoshuYuyoManager.class);

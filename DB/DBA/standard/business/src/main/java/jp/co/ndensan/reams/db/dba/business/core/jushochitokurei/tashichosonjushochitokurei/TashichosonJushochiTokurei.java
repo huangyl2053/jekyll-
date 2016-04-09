@@ -29,6 +29,8 @@ import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 
 /**
  * 他市町村住所地特例を管理するクラスです。
+ *
+ * @reamsid_L DBA-9999-011 sunhaidi
  */
 public class TashichosonJushochiTokurei
         extends ParentModelBase<

@@ -12,6 +12,8 @@ import jp.co.ndensan.reams.db.dbc.entity.db.relate.jutakukaishujyusyo.JutakuKais
 /**
  * 住宅住所変更、住宅改修住宅住所取得
  *
+ * @reamsid_L DBC-9999-011 sunhaidi
+ *
  */
 public interface IJutakuKaishuIJyusyoChofukuHannteiMapper {
 

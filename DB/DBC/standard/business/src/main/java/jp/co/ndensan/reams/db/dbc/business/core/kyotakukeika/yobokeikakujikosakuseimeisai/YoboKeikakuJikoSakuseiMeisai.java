@@ -34,6 +34,8 @@ import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 
 /**
  * 予防給付計画自己作成明細を管理するクラスです。
+ *
+ * @reamsid_L DBC-9999-011 sunhaidi
  */
 public class YoboKeikakuJikoSakuseiMeisai
         extends ParentModelBase<YoboKeikakuJikoSakuseiMeisaiIdentifier, DbT3011YoboKeikakuJikoSakuseiMeisaiEntity, YoboKeikakuJikoSakuseiMeisai>
@@ -322,14 +324,11 @@ public class YoboKeikakuJikoSakuseiMeisai
     }
 
     /**
-     * 予防給付計画自己作成明細配下の要素を削除対象とします。<br/>
-     * {@link DbT3011YoboKeikakuJikoSakuseiMeisaiEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば削除状態にします。
-     * 予防給付計画自己作成明細配下の要素である予防給付計画自己作成合計の{@link Models#deleteOrRemoveAll() }を実行します。
-     * 削除処理結果となる{@link YoboKeikakuJikoSakuseiMeisai}を返します。
+     * 予防給付計画自己作成明細配下の要素を削除対象とします。<br/> {@link DbT3011YoboKeikakuJikoSakuseiMeisaiEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば削除状態にします。
+     * 予防給付計画自己作成明細配下の要素である予防給付計画自己作成合計の{@link Models#deleteOrRemoveAll() }を実行します。 削除処理結果となる{@link YoboKeikakuJikoSakuseiMeisai}を返します。
      *
      * @return 削除対象処理実施後の{@link YoboKeikakuJikoSakuseiMeisai}
-     * @throws IllegalStateException
-     * DbT3011YoboKeikakuJikoSakuseiMeisaiEntityのデータ状態が変更の場合
+     * @throws IllegalStateException DbT3011YoboKeikakuJikoSakuseiMeisaiEntityのデータ状態が変更の場合
      */
     @Override
     public YoboKeikakuJikoSakuseiMeisai deleted() {
@@ -349,8 +348,7 @@ public class YoboKeikakuJikoSakuseiMeisai
     }
 
     /**
-     * 予防給付計画自己作成明細のみを変更対象とします。<br/>
-     * {@link DbT3011YoboKeikakuJikoSakuseiMeisaiEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば変更状態にします。
+     * 予防給付計画自己作成明細のみを変更対象とします。<br/> {@link DbT3011YoboKeikakuJikoSakuseiMeisaiEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば変更状態にします。
      *
      * @return 変更対象処理実施後の{@link YoboKeikakuJikoSakuseiMeisai}
      */

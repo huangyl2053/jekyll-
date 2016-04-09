@@ -34,6 +34,8 @@ import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 
 /**
  * 居宅給付計画届出を管理するクラスです。
+ *
+ * @reamsid_L DBC-9999-011 sunhaidi
  */
 public class KyotakuKeikakuTodokede
         extends ParentModelBase<KyotakuKeikakuTodokedeIdentifier, DbT3005KyotakuKeikakuTodokedeEntity, KyotakuKeikakuTodokede>
@@ -242,14 +244,11 @@ public class KyotakuKeikakuTodokede
     }
 
     /**
-     * 居宅給付計画届出配下の要素を削除対象とします。<br/>
-     * {@link DbT3005KyotakuKeikakuTodokedeEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば削除状態にします。
-     * 居宅給付計画届出配下の要素である居宅給付計画自己作成の{@link Models#deleteOrRemoveAll() }を実行します。
-     * 削除処理結果となる{@link KyotakuKeikakuTodokede}を返します。
+     * 居宅給付計画届出配下の要素を削除対象とします。<br/> {@link DbT3005KyotakuKeikakuTodokedeEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば削除状態にします。
+     * 居宅給付計画届出配下の要素である居宅給付計画自己作成の{@link Models#deleteOrRemoveAll() }を実行します。 削除処理結果となる{@link KyotakuKeikakuTodokede}を返します。
      *
      * @return 削除対象処理実施後の{@link KyotakuKeikakuTodokede}
-     * @throws IllegalStateException
-     * DbT3005KyotakuKeikakuTodokedeEntityのデータ状態が変更の場合
+     * @throws IllegalStateException DbT3005KyotakuKeikakuTodokedeEntityのデータ状態が変更の場合
      */
     @Override
     public KyotakuKeikakuTodokede deleted() {
@@ -269,8 +268,7 @@ public class KyotakuKeikakuTodokede
     }
 
     /**
-     * 居宅給付計画届出のみを変更対象とします。<br/>
-     * {@link DbT3005KyotakuKeikakuTodokedeEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば変更状態にします。
+     * 居宅給付計画届出のみを変更対象とします。<br/> {@link DbT3005KyotakuKeikakuTodokedeEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば変更状態にします。
      *
      * @return 変更対象処理実施後の{@link KyotakuKeikakuTodokede}
      */

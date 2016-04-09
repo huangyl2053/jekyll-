@@ -27,6 +27,8 @@ import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 
 /**
  * 適用除外者を管理するクラスです。
+ *
+ * @reamsid_L DBA-9999-011 sunhaidi
  */
 public class TekiyoJogaisha extends ParentModelBase<TekiyoJogaishaIdentifier, DbT1002TekiyoJogaishaEntity, TekiyoJogaisha> implements Serializable {
 

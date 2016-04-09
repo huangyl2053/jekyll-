@@ -33,6 +33,8 @@ import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 
 /**
  * 生活保護受給者を管理するクラスです。
+ *
+ * @reamsid_L DBA-9999-011 sunhaidi
  */
 public class SeikatsuHogoJukyusha
         extends ModelBase<SeikatsuHogoJukyushaIdentifier, UrT0508SeikatsuHogoJukyushaEntity, SeikatsuHogoJukyusha>

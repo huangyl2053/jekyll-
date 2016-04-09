@@ -14,6 +14,8 @@ import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT3011YoboKeikakuJikoSakuseiM
 
 /**
  * 予防給付計画自己作成明細RelateEntityクラスです。
+ *
+ * @reamsid_L DBC-9999-011 sunhaidi
  */
 @lombok.Getter
 @lombok.Setter

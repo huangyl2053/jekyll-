@@ -23,6 +23,8 @@ import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
 
 /**
  * 予防給付計画自己作成合計を管理するクラスです。
+ *
+ * @reamsid_L DBC-9999-011 sunhaidi
  */
 public class YoboKeikakuJikoSakuseiGokeiManager {
 
@@ -57,7 +59,7 @@ public class YoboKeikakuJikoSakuseiGokeiManager {
      */
     @Transaction
     public YoboKeikakuJikoSakuseiGokei get予防給付計画自己作成合計(
-             HihokenshaNo 被保険者番号,
+            HihokenshaNo 被保険者番号,
             FlexibleYearMonth 対象年月,
             Decimal 履歴番号,
             RString 居宅サービス区分,

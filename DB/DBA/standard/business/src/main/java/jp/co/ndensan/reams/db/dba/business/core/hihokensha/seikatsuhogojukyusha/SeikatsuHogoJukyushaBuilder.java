@@ -22,6 +22,8 @@ import jp.co.ndensan.reams.uz.uza.util.Models;
 
 /**
  * {@link SeikatsuHogoJukyusha}の編集を行うビルダークラスです。
+ *
+ * @reamsid_L DBA-9999-011 sunhaidi
  */
 public class SeikatsuHogoJukyushaBuilder {
 

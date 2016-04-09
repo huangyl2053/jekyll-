@@ -10,6 +10,8 @@ import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 
 /**
  * 介護保険施設入退所の識別子です。
+ *
+ * @reamsid_L DBA-9999-011 sunhaidi
  */
 @SuppressWarnings("PMD.UnusedPrivateField")
 @lombok.Value

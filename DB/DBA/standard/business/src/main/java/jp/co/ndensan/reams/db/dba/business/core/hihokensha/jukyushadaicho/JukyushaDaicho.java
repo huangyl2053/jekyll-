@@ -25,6 +25,8 @@ import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 
 /**
  * 受給者台帳を管理するクラスです。
+ *
+ * @reamsid_L DBA-9999-011 sunhaidi
  */
 public class JukyushaDaicho extends ModelBase<JukyushaDaichoIdentifier, DbT4001JukyushaDaichoEntity, JukyushaDaicho> implements Serializable {
 
