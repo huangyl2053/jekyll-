@@ -9,12 +9,18 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.ICommonChildDivBaseProperties;
  * @reamsid_L DBA-0220-010 dongyabin
  */
 public interface IRoreiFukushiNenkinShokaiDiv extends ICommonChildDivBaseProperties {
-    
+
     /**
      * 画面を初期化します。
+     *
      * @param shikibetsuCode 識別コード
      * @param hihokenshaNo 被保険者番号
      */
-    public void initialize(ShikibetsuCode shikibetsuCode , HihokenshaNo hihokenshaNo);
+    public void initialize(ShikibetsuCode shikibetsuCode, HihokenshaNo hihokenshaNo);
+
+    /**
+     * 画面データをデータベースに格納します。
+     */
+    public void click_Save();
 
 }
