@@ -3,13 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dba.entity.db.hihokenshadaichosakusei;
+package jp.co.ndensan.reams.db.dba.entity.db.relate.hihokenshadaichosakusei;
 
-import java.util.List;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
-import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT1001HihokenshaDaichoEntity;
-import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7006RoreiFukushiNenkinJukyushaEntity;
-import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7037ShoKofuKaishuEntity;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaKanaMeisho;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaMeisho;
 import jp.co.ndensan.reams.uz.uza.biz.ChikuCode;
@@ -18,19 +14,17 @@ import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.SetaiCode;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.biz.ZenkokuJushoCode;
-import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
- * 被保険者のエンティティクラスです。
+ * 被保険者台帳のエンティティクラスです。
  *
- * @reamsid_L DBA-0510-010 duanzhanli
- *
+ * @reamsid_L DBA-0500-010  suguangjun
  */
 @lombok.Getter
 @lombok.Setter
 @SuppressWarnings("PMD.UnusedPrivateField")
-public class HihokenshaEntity {
+public class HihokenshaDaichoSakuseiEntity {
 
     private RString printDate;
     private RString page;
@@ -40,7 +34,7 @@ public class HihokenshaEntity {
     private RString hihokenshaNoTitle;
     private HihokenshaNo hihokenshaNo;
     private AtenaKanaMeisho kanaMeisho;
-    private FlexibleDate seinengappiYMD;
+    private RString seinengappiYMD;
     private RString seibetsuCode;
     private SetaiCode setaiCode;
     private ShikibetsuCode shikibetsuCode;
@@ -56,8 +50,6 @@ public class HihokenshaEntity {
     private RString telephoneNo1;
     private RString telephoneNo2;
     private RString jushoTitle;
-    private RString sochiHokenshaTitle;
-    private RString kyuHokenshaTitle;
     private RString jusho;
     private ZenkokuJushoCode zenkokuJushoCode;
     private RString gyoseikuTitle;
@@ -68,9 +60,19 @@ public class HihokenshaEntity {
     private RString iryoHokenshaMeisho;
     private RString iryoHokenKigoNo;
     private RString orderNo;
-    private List<DbT1001HihokenshaDaichoEntity> dbT1001HihokenshaDaichoEntityList;
-    private List<ShisetsuNyutaishoEntity> shisetsuNyutaishoEntityList;
-    private List<DbT7006RoreiFukushiNenkinJukyushaEntity> dbT7006RoreiFukushiNenkinJukyushaEntityList;
-    private List<DbT7037ShoKofuKaishuEntity> dbT7037ShoKofuKaishuEntityList;
+    private RString sochiHokensha;
+    private RString kyuHokensha;
+    private HihokenshaDaichoDivisionEntity 資格異動情報Entity;
+    private SeikatsuHogoJukyushaDivisionEntity 生活保護情報Entity;
+    private RoreiFukushiNenkinJukyushaDivisionEntity 老齢福祉情報Entity;
+    private ShoKofuKaishuDivisionSumEntity 被保険者証発行履歴情報１;
+    private ShoKofuKaishuDivisionSumEntity 被保険者証発行履歴情報２;
+    private RString setaiName1;
+    private RString setaiName2;
+    private RString setaiName3;
+    private RString setaiName4;
+    private RString setaiName5;
     // TODO 蘇広俊 世帯情報取得方針不明、QA170提出中
+    private SetaiLeftEntity 世帯左情報;
+    private SetaiRightEntity 世帯右情報;
 }

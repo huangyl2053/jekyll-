@@ -85,7 +85,7 @@
            DbT1001."dbT1001HihokenshaDaicho_shikakuShutokuYMD"
     </select>
     
-    <resultMap id="ResultMap_ShisetsuNyutaishoEntity" type="jp.co.ndensan.reams.db.dba.entity.db.hihokenshadaichosakusei.ShisetsuNyutaishoEntity" autoMapping="true">
+    <resultMap id="ResultMap_ShisetsuNyutaishoEntity" type="jp.co.ndensan.reams.db.dba.entity.db.relate.hihokenshadaichosakusei.ShisetsuNyutaishoEntity" autoMapping="true">
         <result property="shikibetsuCode" column="shikibetsuCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.ShikibetsuCodeTypeHandler"/>
         <result property="jukyuKaishiYMD" column="jukyuKaishiYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
         <result property="jukyuHaishiYMD" column="jukyuHaishiYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
@@ -176,7 +176,7 @@
             "dbT7037ShoKofuKaishu_rirekiNo"
     </select>
     
-    <resultMap id="get市町村名称_resultMap" type="jp.co.ndensan.reams.db.dba.entity.db.hihokenshadaichosakusei.HihokenshaEntity" autoMapping="true">
+    <resultMap id="get市町村名称_resultMap" type="jp.co.ndensan.reams.db.dba.entity.db.relate.hihokenshadaichosakusei.HihokenshaEntity" autoMapping="true">
         <result property="shichosonMeisho" column="shichosonMeisho" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
     </resultMap>
     <select id="get市町村名称" resultMap="get市町村名称_resultMap" parameterType="jp.co.ndensan.reams.db.dba.definition.mybatisprm.hihokenshadaicho.IkkatsuSakuseiMybatisParameter" fetchSize="500">
