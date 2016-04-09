@@ -4,7 +4,7 @@
  */
 package jp.co.ndensan.reams.db.dbe.business.core.kaigoninteichosain;
 
-import jp.co.ndensan.reams.db.dbe.business.core.NinteichosaIrai.NinteichosaItakusaki;
+import jp.co.ndensan.reams.db.dbe.business.core.ninteichosairai.NinteichosaItakusaki;
 import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dbe.definition.core.enumeratedtype.ChosainJokyo;
 import jp.co.ndensan.reams.db.dbe.definition.core.valueobject.kaigoninteichosainno.KaigoNinteichosainNo;

@@ -4,6 +4,8 @@
  */
 package jp.co.ndensan.reams.db.dbe.business.core.NinteichosaIrai;
 
+import jp.co.ndensan.reams.db.dbe.business.core.ninteichosairai.NinteichosaItakusaki;
+import jp.co.ndensan.reams.db.dbe.business.core.ninteichosairai.NinteichosaIraiTaishosha;
 import jp.co.ndensan.reams.db.dbe.business.core.YokaigoNintei.YokaigoNinteiProgress;
 import jp.co.ndensan.reams.db.dbx.business.core.INinteiChosain;
 import jp.co.ndensan.reams.db.dbx.business.core.kaigojigyosha.kaigojigyosha.KaigoJigyosha;
