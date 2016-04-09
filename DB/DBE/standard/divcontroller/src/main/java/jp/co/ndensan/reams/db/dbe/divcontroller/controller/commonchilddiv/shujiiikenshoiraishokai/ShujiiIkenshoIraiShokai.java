@@ -22,8 +22,8 @@ public class ShujiiIkenshoIraiShokai {
      * @param div 主治医意見書作成依頼情報Div
      * @return ResponseData
      */
-    public ResponseData onLoad(ShujiiIkenshoIraiShokaiDiv div) {
-        createHandlerOf(div).onLoad();
+    public ResponseData initialize(ShujiiIkenshoIraiShokaiDiv div) {
+        createHandlerOf(div).initialize();
         return ResponseData.of(div).respond();
     }
 
