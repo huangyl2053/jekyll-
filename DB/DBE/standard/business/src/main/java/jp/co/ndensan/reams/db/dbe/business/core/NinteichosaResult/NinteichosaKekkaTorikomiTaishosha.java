@@ -5,7 +5,7 @@
 package jp.co.ndensan.reams.db.dbe.business.core.NinteichosaResult;
 
 import jp.co.ndensan.reams.db.dbe.business.core.NinteichosaIrai.NinteichosaIrai;
-import jp.co.ndensan.reams.db.dbe.business.core.KaigoNinteichosain.KaigoNinteichosain;
+import jp.co.ndensan.reams.db.dbe.business.core.kaigoninteichosain.KaigoNinteichosain;
 import jp.co.ndensan.reams.db.dbe.business.core.YokaigoNintei.YokaigoNinteiProgress;
 import jp.co.ndensan.reams.db.dbe.business.core.YokaigoNintei.YokaigoNinteiShinsei;
 import static java.util.Objects.requireNonNull;

@@ -4,6 +4,8 @@
  */
 package jp.co.ndensan.reams.db.dbe.business.core.KaigoNinteichosain;
 
+import jp.co.ndensan.reams.db.dbe.business.core.kaigoninteichosain.KaigoNinteichosain;
+import jp.co.ndensan.reams.db.dbe.business.core.kaigoninteichosain.KaigoNinteichosainCollection;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
