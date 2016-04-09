@@ -2,7 +2,7 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbe.business.core.IchijiHanteiResult;
+package jp.co.ndensan.reams.db.dbe.business.core.ichijihanteiresult;
 
 import jp.co.ndensan.reams.db.dbe.definition.core.valueobject.ichijihanteikekkacode.IchijiHanteiKekkaCode;
 import jp.co.ndensan.reams.db.dbz.business.core.KaigoCodeAssignedItem;

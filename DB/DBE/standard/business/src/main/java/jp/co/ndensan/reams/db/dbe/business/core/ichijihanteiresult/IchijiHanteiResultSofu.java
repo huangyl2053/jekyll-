@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbe.business.core.IchijiHanteiResult;
+package jp.co.ndensan.reams.db.dbe.business.core.ichijihanteiresult;
 
 import jp.co.ndensan.reams.db.dbe.definition.core.enumeratedtype.IchijiHanteiResultSofuKubun;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
