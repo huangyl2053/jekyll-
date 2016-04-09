@@ -1,5 +1,5 @@
-var DBA;
-(function (DBA) {
+var DBZ;
+(function (DBZ) {
     (function (IryohokenRirekiCommonChildDiv) {
         var ModeController = (function () {
             function ModeController(fieldName) {
@@ -16,12 +16,12 @@ var DBA;
             return ModeController;
         })();
         IryohokenRirekiCommonChildDiv.ModeController = ModeController;
-    })(DBA.IryohokenRirekiCommonChildDiv || (DBA.IryohokenRirekiCommonChildDiv = {}));
-    var IryohokenRirekiCommonChildDiv = DBA.IryohokenRirekiCommonChildDiv;
-})(DBA || (DBA = {}));
+    })(DBZ.IryohokenRirekiCommonChildDiv || (DBZ.IryohokenRirekiCommonChildDiv = {}));
+    var IryohokenRirekiCommonChildDiv = DBZ.IryohokenRirekiCommonChildDiv;
+})(DBZ || (DBZ = {}));
 
-var DBA;
-(function (DBA) {
+var DBZ;
+(function (DBZ) {
     (function (IryohokenRirekiCommonChildDiv) {
         var PublicProperties = (function () {
             function PublicProperties(fieldName) {
@@ -36,6 +36,6 @@ var DBA;
             return PublicProperties;
         })();
         IryohokenRirekiCommonChildDiv.PublicProperties = PublicProperties;
-    })(DBA.IryohokenRirekiCommonChildDiv || (DBA.IryohokenRirekiCommonChildDiv = {}));
-    var IryohokenRirekiCommonChildDiv = DBA.IryohokenRirekiCommonChildDiv;
-})(DBA || (DBA = {}));
+    })(DBZ.IryohokenRirekiCommonChildDiv || (DBZ.IryohokenRirekiCommonChildDiv = {}));
+    var IryohokenRirekiCommonChildDiv = DBZ.IryohokenRirekiCommonChildDiv;
+})(DBZ || (DBZ = {}));

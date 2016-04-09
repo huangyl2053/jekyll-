@@ -1,5 +1,5 @@
-var DBA;
-(function (DBA) {
+var DBZ;
+(function (DBZ) {
     (function (IryohokenRirekiCommonChildDiv) {
         var Events = (function () {
             function Events() {
@@ -40,11 +40,11 @@ var DBA;
             };
 
             Controls.prototype.convFiledNameSelf = function () {
-                return this._myName + "_" + DBA.IryohokenRirekiCommonChildDiv.Controls.myType();
+                return this._myName + "_" + DBZ.IryohokenRirekiCommonChildDiv.Controls.myType();
             };
 
             Controls.prototype.convFiledName = function (fieldName) {
-                return this._myName + "_" + DBA.IryohokenRirekiCommonChildDiv.Controls.myType() + "_" + fieldName;
+                return this._myName + "_" + DBZ.IryohokenRirekiCommonChildDiv.Controls.myType() + "_" + fieldName;
             };
 
             Controls.prototype.IryohokenRirekiCommonChildDiv = function () {
@@ -101,6 +101,6 @@ var DBA;
             return Controls;
         })();
         IryohokenRirekiCommonChildDiv.Controls = Controls;
-    })(DBA.IryohokenRirekiCommonChildDiv || (DBA.IryohokenRirekiCommonChildDiv = {}));
-    var IryohokenRirekiCommonChildDiv = DBA.IryohokenRirekiCommonChildDiv;
-})(DBA || (DBA = {}));
+    })(DBZ.IryohokenRirekiCommonChildDiv || (DBZ.IryohokenRirekiCommonChildDiv = {}));
+    var IryohokenRirekiCommonChildDiv = DBZ.IryohokenRirekiCommonChildDiv;
+})(DBZ || (DBZ = {}));

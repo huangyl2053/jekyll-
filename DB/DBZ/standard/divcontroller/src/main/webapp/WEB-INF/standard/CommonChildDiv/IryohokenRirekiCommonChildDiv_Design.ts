@@ -2,7 +2,7 @@
 /// <reference path="../d.ts/UzViewControls.d.ts" />
 /// <reference path="../d.ts/UzaConverter.d.ts" />
 
-module DBA {
+module DBZ {
 
      export module IryohokenRirekiCommonChildDiv {
 
@@ -46,11 +46,11 @@ module DBA {
             }
 
             public convFiledNameSelf(): string {
-                return this._myName + "_" + DBA.IryohokenRirekiCommonChildDiv.Controls.myType();
+                return this._myName + "_" + DBZ.IryohokenRirekiCommonChildDiv.Controls.myType();
             }
 
             public convFiledName(fieldName: string): string {
-                return this._myName + "_" + DBA.IryohokenRirekiCommonChildDiv.Controls.myType() + "_" + fieldName;
+                return this._myName + "_" + DBZ.IryohokenRirekiCommonChildDiv.Controls.myType() + "_" + fieldName;
             }
 
             public IryohokenRirekiCommonChildDiv(): UZA.Panel {
