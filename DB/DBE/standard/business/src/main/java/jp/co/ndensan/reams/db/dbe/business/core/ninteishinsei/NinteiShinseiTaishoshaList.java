@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbe.business.core.NinteiShinsei;
+package jp.co.ndensan.reams.db.dbe.business.core.ninteishinsei;
 
 import jp.co.ndensan.reams.db.dbe.business.core.minashi2gosha.Minashi2GoshaList;
 import java.util.ArrayList;

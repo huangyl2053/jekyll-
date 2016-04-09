@@ -8,7 +8,7 @@ package jp.co.ndensan.reams.db.dbe.divcontroller.controller.parentdiv;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-import jp.co.ndensan.reams.db.dbe.business.core.NinteiShinsei.NinteiShinseiJohoValidate;
+import jp.co.ndensan.reams.db.dbe.business.core.ninteishinsei.NinteiShinseiJohoValidate;
 import jp.co.ndensan.reams.db.dbe.business.core.Shinsakai.ShinsakaiIin;
 import jp.co.ndensan.reams.db.dbe.business.core.Shinsakai.ShinsakaiIinKoza;
 import jp.co.ndensan.reams.db.dbe.business.core.Shinsakai.ShinsakaiIinShikaku;

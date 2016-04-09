@@ -6,7 +6,7 @@
 package jp.co.ndensan.reams.db.dbe.business.helper;
 
 import jp.co.ndensan.reams.db.dbe.business.core.ninteiresult.NinteiResultSimple;
-import jp.co.ndensan.reams.db.dbe.business.core.NinteiShinsei.NinteiShinseiRiyu;
+import jp.co.ndensan.reams.db.dbe.business.core.ninteishinsei.NinteiShinseiRiyu;
 import jp.co.ndensan.reams.db.dbe.business.core.NinteiShinseiTorisage.NinteiShinseiTorisage;
 import jp.co.ndensan.reams.db.dbe.business.core.TorisageRiyu;
 import jp.co.ndensan.reams.db.dbe.business.core.YokaigoNintei.YokaigoNinteiShinsei;
