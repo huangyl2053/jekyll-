@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dba.definition.mybatisprm.tekiyojogaisha.tekiyojogaisha;
+package jp.co.ndensan.reams.db.dba.definition.mybatisprm.tekiyojogaisha;
 
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
@@ -11,6 +11,8 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
  * 適用除外者を特定するためのMyBatis用パラメータクラスです。
+ *
+ * @reamsid_L DBA-0210-020 dingyi
  */
 @lombok.Getter
 @SuppressWarnings("PMD.UnusedPrivateField")
@@ -65,23 +67,6 @@ public final class TekiyoJogaishaMapperParameter {
         this.解除日あり = 解除日あり;
         this.解除日なし = 解除日なし;
         this.psmShikibetsuTaisho = psmShikibetsuTaisho;
-    }
-
-    /**
-     * キー検索用のパラメータを生成します。
-     *
-     * @param 識別コード 識別コード
-     * @param 異動日 異動日
-     * @param 枝番 枝番
-     * @return 適用除外者検索パラメータ
-     */
-    public static TekiyoJogaishaMapperParameter createSelectByKeyParam(
-            ShikibetsuCode 識別コード,
-            FlexibleDate 異動日,
-            RString 枝番) {
-        return new TekiyoJogaishaMapperParameter(
-                識別コード, 異動日, 枝番, true, true, true,
-                FlexibleDate.MAX, FlexibleDate.MAX, true, true, true, RString.EMPTY);
     }
 
     /**
@@ -143,23 +128,23 @@ public final class TekiyoJogaishaMapperParameter {
     }
 
     /**
-     * 施設情検索用のパラメータを生成します。
+     * 施設情報検索用のパラメータを生成します。
      *
      * @param 識別コード 識別コード
      * @param kaijoYMD FlexibleDate
      * @param tekiyoYMD FlexibleDate
      * @return 適用除外者を特定するためのパラメータ
      */
-    public static TekiyoJogaishaMapperParameter createParam_get施設情(
+    public static TekiyoJogaishaMapperParameter createParam_get施設情報(
             ShikibetsuCode 識別コード,
             FlexibleDate kaijoYMD,
             FlexibleDate tekiyoYMD) {
         boolean 解除日あり = false;
         boolean 解除日なし = false;
         if (kaijoYMD == null || kaijoYMD.isEmpty()) {
-            解除日あり = true;
-        } else {
             解除日なし = true;
+        } else {
+            解除日あり = true;
         }
         return new TekiyoJogaishaMapperParameter(識別コード, FlexibleDate.MAX,
                 RString.EMPTY, true, true, true, kaijoYMD, tekiyoYMD, true, 解除日あり, 解除日なし, RString.EMPTY);

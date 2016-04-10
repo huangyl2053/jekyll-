@@ -5,7 +5,7 @@
 package jp.co.ndensan.reams.db.dba.persistence.db.mapper.relate.tekiyojogaisha.tekiyojogaisha;
 
 import java.util.List;
-import jp.co.ndensan.reams.db.dba.definition.mybatisprm.tekiyojogaisha.tekiyojogaisha.TekiyoJogaishaMapperParameter;
+import jp.co.ndensan.reams.db.dba.definition.mybatisprm.tekiyojogaisha.TekiyoJogaishaMapperParameter;
 import jp.co.ndensan.reams.db.dba.entity.db.relate.tekiyojogaisha.tekiyojogaisha.TekiyoJogaishaEntity;
 import jp.co.ndensan.reams.db.dba.entity.db.relate.tekiyojogaisha.tekiyojogaisha.TekiyoJogaishaRelateEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT1002TekiyoJogaishaEntity;
@@ -15,6 +15,8 @@ import jp.co.ndensan.reams.uz.uza.math.Decimal;
 
 /**
  * 適用除外者のマッパーインタフェースです。
+ *
+ * @reamsid_L DBA-0210-020 dingyi
  */
 public interface ITekiyoJogaishaMapper {
 
@@ -64,7 +66,7 @@ public interface ITekiyoJogaishaMapper {
      * @param 適用除外者検索条件 適用除外者を特定するためのMyBatis用パラメータ
      * @return List<TekiyoJogaishaRelateEntity>
      */
-    List<TekiyoJogaishaRelateEntity> get施設情(TekiyoJogaishaMapperParameter 適用除外者検索条件);
+    List<TekiyoJogaishaRelateEntity> get施設情報(TekiyoJogaishaMapperParameter 適用除外者検索条件);
 
     /**
      * 施設情報の取得します。

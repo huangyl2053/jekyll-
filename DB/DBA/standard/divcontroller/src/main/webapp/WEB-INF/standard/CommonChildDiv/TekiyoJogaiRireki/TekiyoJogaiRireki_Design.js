@@ -1,9 +1,28 @@
-var DBZ;
-(function (DBZ) {
+var DBA;
+(function (DBA) {
     (function (TekiyoJogaiRireki) {
         var Events = (function () {
             function Events() {
             }
+            Events.onClick_Selected = function () {
+                return "onClick_Selected";
+            };
+
+            Events.onClick_Update = function () {
+                return "onClick_Update";
+            };
+
+            Events.onClick_Delete = function () {
+                return "onClick_Delete";
+            };
+
+            Events.onClick_BtnKakunin = function () {
+                return "onClick_BtnKakunin";
+            };
+
+            Events.onClick_Torikeshi = function () {
+                return "onClick_Torikeshi";
+            };
             return Events;
         })();
         TekiyoJogaiRireki.Events = Events;
@@ -17,11 +36,11 @@ var DBZ;
             };
 
             Controls.prototype.convFiledNameSelf = function () {
-                return this._myName + "_" + DBZ.TekiyoJogaiRireki.Controls.myType();
+                return this._myName + "_" + DBA.TekiyoJogaiRireki.Controls.myType();
             };
 
             Controls.prototype.convFiledName = function (fieldName) {
-                return this._myName + "_" + DBZ.TekiyoJogaiRireki.Controls.myType() + "_" + fieldName;
+                return this._myName + "_" + DBA.TekiyoJogaiRireki.Controls.myType() + "_" + fieldName;
             };
 
             Controls.prototype.TekiyoJogaiRireki = function () {
@@ -126,6 +145,6 @@ var DBZ;
             return Controls;
         })();
         TekiyoJogaiRireki.Controls = Controls;
-    })(DBZ.TekiyoJogaiRireki || (DBZ.TekiyoJogaiRireki = {}));
-    var TekiyoJogaiRireki = DBZ.TekiyoJogaiRireki;
-})(DBZ || (DBZ = {}));
+    })(DBA.TekiyoJogaiRireki || (DBA.TekiyoJogaiRireki = {}));
+    var TekiyoJogaiRireki = DBA.TekiyoJogaiRireki;
+})(DBA || (DBA = {}));

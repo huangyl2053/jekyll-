@@ -1,47 +1,38 @@
-/// <reference path='TekiyoJogaiRireki_Design.ts' />
-module DBZ
-{
-    export module TekiyoJogaiRireki
-    {
-        export class ModeController {
-            private controls: Controls;
-            private fieldName: string;
-
-            constructor(fieldName: string) {
+var DBA;
+(function (DBA) {
+    (function (TekiyoJogaiRireki) {
+        var ModeController = (function () {
+            function ModeController(fieldName) {
                 this.fieldName = fieldName;
-                this.controls = new Controls(fieldName);
+                this.controls = new TekiyoJogaiRireki.Controls(fieldName);
             }
-
-            public Properties() {
+            ModeController.prototype.Properties = function () {
                 return new UZA.CommonChildDiv(this.fieldName);
-            }
+            };
 
-            public PublicProperties() {
-                return new PublicProperties(this.fieldName);
-            }
-            
-            public priorities(): Array<string> {
+            ModeController.prototype.PublicProperties = function () {
+                return new TekiyoJogaiRireki.PublicProperties(this.fieldName);
+            };
+
+            ModeController.prototype.priorities = function () {
                 return [
                     "DisplayMode"
                 ];
-            }
-            
-            public DisplayMode() {
-                return new Modes.DisplayMode(this.controls);
-            }
-            
-        }
+            };
 
-        export module Modes {
-              
-              export class DisplayMode {
-                private controls: Controls;
-                
-                constructor(controls: Controls) {
+            ModeController.prototype.DisplayMode = function () {
+                return new Modes.DisplayMode(this.controls);
+            };
+            return ModeController;
+        })();
+        TekiyoJogaiRireki.ModeController = ModeController;
+
+        (function (Modes) {
+            var DisplayMode = (function () {
+                function DisplayMode(controls) {
                     this.controls = controls;
                 }
-
-                 public 適用登録モード(): void {
+                DisplayMode.prototype.適用登録モード = function () {
                     this.controls.btnAdd().displayNone = false;
                     this.controls.panelTekiyoRireki().displayNone = false;
                     this.controls.panelTekiyoInput().displayNone = true;
@@ -55,9 +46,9 @@ module DBZ
                     this.controls.datagridTekiyoJogai().gridSetting.isShowRowState = false;
                     this.controls.datagridTekiyoJogai()._control.afterPropertiesSet();
                     this.controls.panelTekiyoInput().disabled = false;
-                }
+                };
 
-                 public 解除モード(): void {
+                DisplayMode.prototype.解除モード = function () {
                     this.controls.btnAdd().displayNone = true;
                     this.controls.panelTekiyoRireki().displayNone = false;
                     this.controls.panelTekiyoInput().displayNone = true;
@@ -71,9 +62,9 @@ module DBZ
                     this.controls.datagridTekiyoJogai().gridSetting.isShowRowState = false;
                     this.controls.datagridTekiyoJogai()._control.afterPropertiesSet();
                     this.controls.panelTekiyoInput().disabled = false;
-                }
+                };
 
-                 public 施設変更モード(): void {
+                DisplayMode.prototype.施設変更モード = function () {
                     this.controls.btnAdd().displayNone = true;
                     this.controls.panelTekiyoRireki().displayNone = true;
                     this.controls.panelTekiyoInput().displayNone = false;
@@ -87,9 +78,9 @@ module DBZ
                     this.controls.datagridTekiyoJogai().gridSetting.isShowRowState = false;
                     this.controls.datagridTekiyoJogai()._control.afterPropertiesSet();
                     this.controls.panelTekiyoInput().disabled = true;
-                }
+                };
 
-                 public 訂正履歴モード(): void {
+                DisplayMode.prototype.訂正履歴モード = function () {
                     this.controls.btnAdd().displayNone = false;
                     this.controls.panelTekiyoRireki().displayNone = false;
                     this.controls.panelTekiyoInput().displayNone = false;
@@ -103,9 +94,9 @@ module DBZ
                     this.controls.datagridTekiyoJogai().gridSetting.isShowRowState = true;
                     this.controls.datagridTekiyoJogai()._control.afterPropertiesSet();
                     this.controls.panelTekiyoInput().disabled = false;
-                }
+                };
 
-                 public 照会モード(): void {
+                DisplayMode.prototype.照会モード = function () {
                     this.controls.btnAdd().displayNone = true;
                     this.controls.panelTekiyoRireki().displayNone = false;
                     this.controls.panelTekiyoInput().displayNone = false;
@@ -119,30 +110,32 @@ module DBZ
                     this.controls.datagridTekiyoJogai().gridSetting.isShowRowState = false;
                     this.controls.datagridTekiyoJogai()._control.afterPropertiesSet();
                     this.controls.panelTekiyoInput().disabled = true;
-                }
-			}
-        }
-    }
-}
+                };
+                return DisplayMode;
+            })();
+            Modes.DisplayMode = DisplayMode;
+        })(TekiyoJogaiRireki.Modes || (TekiyoJogaiRireki.Modes = {}));
+        var Modes = TekiyoJogaiRireki.Modes;
+    })(DBA.TekiyoJogaiRireki || (DBA.TekiyoJogaiRireki = {}));
+    var TekiyoJogaiRireki = DBA.TekiyoJogaiRireki;
+})(DBA || (DBA = {}));
 
-module DBZ
-{
-    export module TekiyoJogaiRireki{
-        export class PublicProperties {
-            private controls: Controls;
-            private fieldName: string;
-
-            constructor(fieldName: string) {
+var DBA;
+(function (DBA) {
+    (function (TekiyoJogaiRireki) {
+        var PublicProperties = (function () {
+            function PublicProperties(fieldName) {
                 this.fieldName = fieldName;
-                this.controls = new Controls(fieldName);
+                this.controls = new TekiyoJogaiRireki.Controls(fieldName);
             }
-
-            public getEditTypes(): UZA.EditTypeForPublicProperty {
+            PublicProperties.prototype.getEditTypes = function () {
                 var editTypes = new UZA.EditTypeForPublicProperty();
 
                 return editTypes;
-            }
-        }
-    }
-}
-
+            };
+            return PublicProperties;
+        })();
+        TekiyoJogaiRireki.PublicProperties = PublicProperties;
+    })(DBA.TekiyoJogaiRireki || (DBA.TekiyoJogaiRireki = {}));
+    var TekiyoJogaiRireki = DBA.TekiyoJogaiRireki;
+})(DBA || (DBA = {}));
