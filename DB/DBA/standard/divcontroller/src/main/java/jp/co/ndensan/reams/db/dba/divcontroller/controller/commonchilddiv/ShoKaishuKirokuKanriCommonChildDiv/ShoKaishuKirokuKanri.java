@@ -50,25 +50,16 @@ public class ShoKaishuKirokuKanri {
      * @return ResponseData<ShoKaishuKirokuKanriDiv>
      */
     public ResponseData<ShoKaishuKirokuKanriDiv> onClick_BtnSenTaKu(ShoKaishuKirokuKanriDiv requestDiv) {
-        requestDiv.getPanelInput().setVisible(true);
+        requestDiv.setMode_DisplayMode(ShoKaishuKirokuKanriDiv.DisplayMode.照会_選択);
         dgKoufuKaishu_Row dgKoufuKaishuRow = requestDiv.getDgKoufuKaishu().getSelectedItems().get(0);
         requestDiv.getPanelInput().getTxtKoufuType().setValue(dgKoufuKaishuRow.getKoufuType());
         requestDiv.getPanelInput().getTxtKoufuDate().setValue(new RDate(dgKoufuKaishuRow.getKoufuDate().toString()));
-        requestDiv.getPanelInput().getTxtKoufuDate().setReadOnly(true);
         requestDiv.getPanelInput().getTxtYukouKigen().setValue(new RDate(dgKoufuKaishuRow.getYukoKigen().toString()));
-        requestDiv.getPanelInput().getTxtYukouKigen().setReadOnly(true);
         requestDiv.getPanelInput().getDdlKoufuJiyu().setSelectedValue(dgKoufuKaishuRow.getKoufuJiyu());
-        requestDiv.getPanelInput().getDdlKoufuJiyu().setReadOnly(true);
         requestDiv.getPanelInput().getTxaKoufuRiyu().setValue(dgKoufuKaishuRow.getKofuRiyu());
-        requestDiv.getPanelInput().getTxaKoufuRiyu().setReadOnly(true);
         requestDiv.getPanelInput().getTxtKaisyuDate().setValue(new RDate(dgKoufuKaishuRow.getKaishuDate().toString()));
-        requestDiv.getPanelInput().getTxtKaisyuDate().setReadOnly(true);
         requestDiv.getPanelInput().getDdlKaisyuJiyu().setSelectedValue(dgKoufuKaishuRow.getKaishuJiyu());
-        requestDiv.getPanelInput().getDdlKaisyuJiyu().setReadOnly(true);
         requestDiv.getPanelInput().getTxaKaishuRiyu().setValue(dgKoufuKaishuRow.getKaishuRiyu());
-        requestDiv.getPanelInput().getTxaKaishuRiyu().setReadOnly(true);
-        requestDiv.getBtnCancel().setVisible(false);
-        requestDiv.getBtnConfirm().setVisible(false);
         return createResponseData(requestDiv);
     }
 
@@ -111,21 +102,9 @@ public class ShoKaishuKirokuKanri {
 
         if (状態_削除.equals(状態)) {
 
-            requestDiv.getPanelInput().getTxtKoufuDate().setReadOnly(true);
-            requestDiv.getPanelInput().getTxtYukouKigen().setReadOnly(true);
-            requestDiv.getPanelInput().getDdlKoufuJiyu().setReadOnly(true);
-            requestDiv.getPanelInput().getTxaKoufuRiyu().setReadOnly(true);
-            requestDiv.getPanelInput().getTxtKaisyuDate().setReadOnly(true);
-            requestDiv.getPanelInput().getDdlKaisyuJiyu().setReadOnly(true);
-            requestDiv.getPanelInput().getTxaKaishuRiyu().setReadOnly(true);
+            requestDiv.setMode_DisplayMode(ShoKaishuKirokuKanriDiv.DisplayMode.修正);
         } else {
-            requestDiv.getPanelInput().getTxtKoufuDate().setReadOnly(false);
-            requestDiv.getPanelInput().getTxtYukouKigen().setReadOnly(false);
-            requestDiv.getPanelInput().getDdlKoufuJiyu().setReadOnly(false);
-            requestDiv.getPanelInput().getTxaKoufuRiyu().setReadOnly(false);
-            requestDiv.getPanelInput().getTxtKaisyuDate().setReadOnly(false);
-            requestDiv.getPanelInput().getDdlKaisyuJiyu().setReadOnly(false);
-            requestDiv.getPanelInput().getTxaKaishuRiyu().setReadOnly(false);
+            requestDiv.setMode_DisplayMode(ShoKaishuKirokuKanriDiv.DisplayMode.削除);
         }
         return requestDiv;
     }

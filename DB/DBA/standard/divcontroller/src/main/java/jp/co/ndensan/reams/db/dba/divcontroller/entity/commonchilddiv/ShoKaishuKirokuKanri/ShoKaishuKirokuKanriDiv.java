@@ -4,13 +4,17 @@ package jp.co.ndensan.reams.db.dba.divcontroller.entity.commonchilddiv.ShoKaishu
  * このファイルへの変更は、再生成時には損失するため
  * 不正な動作の原因になります。
  */
-
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import jp.co.ndensan.reams.uz.uza.ui.binding.*;
+import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
+
+import java.util.HashSet;
+import jp.co.ndensan.reams.uz.uza.ui.servlets.ICommonChildDivMode;
+import jp.co.ndensan.reams.uz.uza.ui.servlets._CommonChildDivModeUtil;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Button;
 import jp.co.ndensan.reams.uz.uza.ui.binding.DataGrid;
 import jp.co.ndensan.reams.uz.uza.ui.binding.DropDownList;
-import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TextBox;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxDate;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxMultiLine;
@@ -21,8 +25,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxMultiLine;
  * @reamsid_L DBA-1070-020 lizhuoxuan
  */
 public class ShoKaishuKirokuKanriDiv extends Panel implements IShoKaishuKirokuKanriDiv {
-
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：バージョン情報無し">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -77,6 +80,51 @@ public class ShoKaishuKirokuKanriDiv extends Panel implements IShoKaishuKirokuKa
     }
 
     /*
+     * [共有子DIVモード]
+     */
+    @JsonProperty("modes")
+    private HashSet<Mode> modes;
+
+    public static enum DisplayMode implements ICommonChildDivMode {
+
+        照会("照会"),
+        照会_選択("照会_選択"),
+        修正("修正"),
+        削除("削除");
+
+        private final String name;
+
+        private DisplayMode(final String name) {
+            this.name = name;
+        }
+
+        public static DisplayMode getEnum(String str) {
+            DisplayMode[] enumArray = DisplayMode.values();
+
+            for (DisplayMode enumStr : enumArray) {
+                if (str.equals(enumStr.name.toString())) { 
+                    return enumStr;
+                }
+            }
+            return null;
+        }
+
+        @Override
+        public String toString() {
+            return this.name;
+        }
+
+    }
+
+    public DisplayMode getMode_DisplayMode() {
+        return (DisplayMode) _CommonChildDivModeUtil.getMode( this.modes, DisplayMode.class );
+    }
+
+    public void setMode_DisplayMode( DisplayMode value ) {
+        _CommonChildDivModeUtil.setMode( this.modes, DisplayMode.class , value );
+    }
+
+    /*
      * [ ショートカットの作成 ]
      */
     @JsonIgnore
@@ -85,7 +133,7 @@ public class ShoKaishuKirokuKanriDiv extends Panel implements IShoKaishuKirokuKa
     }
 
     @JsonIgnore
-    public void setDgKoufuKaishu(DataGrid<dgKoufuKaishu_Row> dgKoufuKaishu) {
+    public void  setDgKoufuKaishu(DataGrid<dgKoufuKaishu_Row> dgKoufuKaishu) {
         this.getPanelKoufuList().setDgKoufuKaishu(dgKoufuKaishu);
     }
 
@@ -95,7 +143,7 @@ public class ShoKaishuKirokuKanriDiv extends Panel implements IShoKaishuKirokuKa
     }
 
     @JsonIgnore
-    public void setTxtKoufuType(TextBox txtKoufuType) {
+    public void  setTxtKoufuType(TextBox txtKoufuType) {
         this.getPanelInput().setTxtKoufuType(txtKoufuType);
     }
 
@@ -105,7 +153,7 @@ public class ShoKaishuKirokuKanriDiv extends Panel implements IShoKaishuKirokuKa
     }
 
     @JsonIgnore
-    public void setTxtKoufuDate(TextBoxDate txtKoufuDate) {
+    public void  setTxtKoufuDate(TextBoxDate txtKoufuDate) {
         this.getPanelInput().setTxtKoufuDate(txtKoufuDate);
     }
 
@@ -115,7 +163,7 @@ public class ShoKaishuKirokuKanriDiv extends Panel implements IShoKaishuKirokuKa
     }
 
     @JsonIgnore
-    public void setTxtYukouKigen(TextBoxDate txtYukouKigen) {
+    public void  setTxtYukouKigen(TextBoxDate txtYukouKigen) {
         this.getPanelInput().setTxtYukouKigen(txtYukouKigen);
     }
 
@@ -125,7 +173,7 @@ public class ShoKaishuKirokuKanriDiv extends Panel implements IShoKaishuKirokuKa
     }
 
     @JsonIgnore
-    public void setDdlKoufuJiyu(DropDownList ddlKoufuJiyu) {
+    public void  setDdlKoufuJiyu(DropDownList ddlKoufuJiyu) {
         this.getPanelInput().setDdlKoufuJiyu(ddlKoufuJiyu);
     }
 
@@ -135,7 +183,7 @@ public class ShoKaishuKirokuKanriDiv extends Panel implements IShoKaishuKirokuKa
     }
 
     @JsonIgnore
-    public void setTxaKoufuRiyu(TextBoxMultiLine txaKoufuRiyu) {
+    public void  setTxaKoufuRiyu(TextBoxMultiLine txaKoufuRiyu) {
         this.getPanelInput().setTxaKoufuRiyu(txaKoufuRiyu);
     }
 
@@ -145,7 +193,7 @@ public class ShoKaishuKirokuKanriDiv extends Panel implements IShoKaishuKirokuKa
     }
 
     @JsonIgnore
-    public void setTxtKaisyuDate(TextBoxDate txtKaisyuDate) {
+    public void  setTxtKaisyuDate(TextBoxDate txtKaisyuDate) {
         this.getPanelInput().setTxtKaisyuDate(txtKaisyuDate);
     }
 
@@ -155,7 +203,7 @@ public class ShoKaishuKirokuKanriDiv extends Panel implements IShoKaishuKirokuKa
     }
 
     @JsonIgnore
-    public void setDdlKaisyuJiyu(DropDownList ddlKaisyuJiyu) {
+    public void  setDdlKaisyuJiyu(DropDownList ddlKaisyuJiyu) {
         this.getPanelInput().setDdlKaisyuJiyu(ddlKaisyuJiyu);
     }
 
@@ -165,7 +213,7 @@ public class ShoKaishuKirokuKanriDiv extends Panel implements IShoKaishuKirokuKa
     }
 
     @JsonIgnore
-    public void setTxaKaishuRiyu(TextBoxMultiLine txaKaishuRiyu) {
+    public void  setTxaKaishuRiyu(TextBoxMultiLine txaKaishuRiyu) {
         this.getPanelInput().setTxaKaishuRiyu(txaKaishuRiyu);
     }
 
@@ -175,7 +223,7 @@ public class ShoKaishuKirokuKanriDiv extends Panel implements IShoKaishuKirokuKa
     }
 
     @JsonIgnore
-    public void setBtnConfirm(Button btnConfirm) {
+    public void  setBtnConfirm(Button btnConfirm) {
         this.getPanelInput().setBtnConfirm(btnConfirm);
     }
 
@@ -185,10 +233,11 @@ public class ShoKaishuKirokuKanriDiv extends Panel implements IShoKaishuKirokuKa
     }
 
     @JsonIgnore
-    public void setBtnCancel(Button btnCancel) {
+    public void  setBtnCancel(Button btnCancel) {
         this.getPanelInput().setBtnCancel(btnCancel);
     }
 
     // </editor-fold>
     //--------------- この行より下にコードを追加してください -------------------
+
 }

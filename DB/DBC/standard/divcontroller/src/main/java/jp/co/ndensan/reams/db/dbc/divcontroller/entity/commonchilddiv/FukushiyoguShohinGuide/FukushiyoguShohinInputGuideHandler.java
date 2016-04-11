@@ -86,7 +86,7 @@ public class FukushiyoguShohinInputGuideHandler {
             div.getPanInput().getTxtHinmokuCode().clearValue();
         }
         if (追加.equals(状態) || 修正.equals(状態)) {
-            div.getPanInput().getTxtKanriKaishiDay().setReadOnly(false);
+            div.getPanInput().getTxtKanriKaishiDay().setReadOnly(true);
             div.getPanInput().getTxtKanriShuryoDay().setReadOnly(false);
             div.getPanInput().getTxtShohinmei().setReadOnly(false);
             div.getPanInput().getTxtSeizoJigyoshamei().setReadOnly(false);

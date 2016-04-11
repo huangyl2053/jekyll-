@@ -11,6 +11,16 @@ module DBA
                 this.fieldName = fieldName;
                 this.controls = new Controls(fieldName);
             }
+            
+            public priorities(): Array {
+                return [
+                    "DisplayMode"
+                ];
+            }
+            
+            public DisplayMode() {
+                return new Modes.DisplayMode(this.controls);
+            }
 
             public Properties() {
                 return new UZA.CommonChildDiv(this.fieldName);
@@ -22,6 +32,50 @@ module DBA
         }
 
         export module Modes {
+        	export class DisplayMode {
+        		private controls: Controls;
+
+                constructor(controls: Controls) {
+                    this.controls = controls;
+                }
+                
+                public 照会(): void {
+                    this.controls.panelKoufuList().displayNone = false;
+                    this.controls.dgKoufuKaishu().gridSetting.isShowSelectButtonColumn = true;
+                    this.controls.dgKoufuKaishu().gridSetting.isShowModifyButtonColumn = false;
+                    this.controls.dgKoufuKaishu().gridSetting.isShowDeleteButtonColumn = false;
+                    this.controls.dgKoufuKaishu()._control.afterPropertiesSet();
+                    this.controls.panelInput().displayNone = true;
+                }
+                
+                public 照会_選択(): void {
+                    this.controls.panelKoufuList().displayNone = false;
+                    this.controls.dgKoufuKaishu().gridSetting.isShowSelectButtonColumn = true;
+                    this.controls.dgKoufuKaishu().gridSetting.isShowModifyButtonColumn = false;
+                    this.controls.dgKoufuKaishu().gridSetting.isShowDeleteButtonColumn = false;
+                    this.controls.dgKoufuKaishu()._control.afterPropertiesSet();
+                    this.controls.panelInput().displayNone = false;
+                }
+                
+                public 修正(): void {
+                    this.controls.panelKoufuList().displayNone = false;
+                    this.controls.dgKoufuKaishu().gridSetting.isShowSelectButtonColumn = false;
+                    this.controls.dgKoufuKaishu().gridSetting.isShowModifyButtonColumn = true;
+                    this.controls.dgKoufuKaishu().gridSetting.isShowDeleteButtonColumn = true;
+                    this.controls.dgKoufuKaishu()._control.afterPropertiesSet();
+                    this.controls.panelInput().displayNone = false;
+                }
+                public 削除(): void {
+                    this.controls.panelKoufuList().displayNone = false;
+                    this.controls.dgKoufuKaishu().gridSetting.isShowSelectButtonColumn = false;
+                    this.controls.dgKoufuKaishu().gridSetting.isShowModifyButtonColumn = true;
+                    this.controls.dgKoufuKaishu().gridSetting.isShowDeleteButtonColumn = true;
+                    this.controls.dgKoufuKaishu()._control.afterPropertiesSet();
+
+                }
+			}
+
+        	
         }
     }
 }
