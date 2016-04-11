@@ -30,6 +30,8 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 
 /**
  * 福祉用具購入費支給申請審査 未審査支給申請一覧のHandlerです。
+ *
+ * @reamsid_L DBC-1021-090 gongliang
  */
 public class YoguKonyuhiShikyuShinseiMishinsaSearchHandler {
 
@@ -37,6 +39,7 @@ public class YoguKonyuhiShikyuShinseiMishinsaSearchHandler {
     private final RString 審査 = new RString("審査");
     private final RString 承認する = new RString("承認する");
     private final RString 却下する = new RString("却下する");
+    private final RString 決定日 = new RString("決定日");
 
     /**
      * YoguKonyuhiShikyuShinseiMishinsaSearchHandler
@@ -113,7 +116,7 @@ public class YoguKonyuhiShikyuShinseiMishinsaSearchHandler {
      */
     public void 決定日入力チェック(RDate 決定日) {
         if (決定日 == null) {
-            throw new ApplicationException(UrErrorMessages.必須.getMessage().replace("決定日"));
+            throw new ApplicationException(UrErrorMessages.必須.getMessage().replace(決定日.toString()));
         }
     }
 

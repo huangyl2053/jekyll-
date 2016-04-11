@@ -21,6 +21,7 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.ResponseHolder;
 /**
  * 福祉用具購入費支給申請審査 未審査支給申請一覧のパネルです。
  *
+ * @reamsid_L DBC-1021-090 gongliang
  */
 public class YoguKonyuhiShikyuShinseiMishinsaSearchPanel {
 
