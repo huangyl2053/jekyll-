@@ -53,9 +53,9 @@ public class IkenshoShujiiIchiranProcess extends BatchKeyBreakBase<IkenshoShujii
     private static final RString 主治医医療機関コードTO = new RString("【主治医医療機関コードTo】");
     private static final RString 主治医コードFROM = new RString("【主治医コードFrom】");
     private static final RString 主治医コードTO = new RString("【主治医コードTo】");
-    private static final RString 状況 = new RString("【市町村コード】");
-    private static final RString 並び順 = new RString("【市町村コード】");
-    private static final RString 改頁 = new RString("【市町村コード】");
+    private static final RString 状況 = new RString("【状況】");
+    private static final RString 並び順 = new RString("【並び順】");
+    private static final RString 改頁 = new RString("【改頁】");
     private static final RString ジョブ番号 = new RString("【ジョブ番号】");
 
     IkenshoShujiiIchiranHeadItem headItem;
