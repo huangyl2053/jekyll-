@@ -9,7 +9,7 @@ import jp.co.ndensan.reams.uz.uza.core.ui.response.IStateEnumerations;
  * 不正な動作の原因になります。</br>
  * DBU0900031の状態名定義クラスです
  *
- * @reamsid_L DBU-1080-020  lijia
+ * @reamsid_L DBU-1080-020 lijia
  * 
  */
 public enum DBU0900031StateName implements IStateEnumerations {

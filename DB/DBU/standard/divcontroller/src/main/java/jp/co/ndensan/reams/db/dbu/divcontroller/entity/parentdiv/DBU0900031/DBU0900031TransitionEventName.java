@@ -9,7 +9,7 @@ import jp.co.ndensan.reams.uz.uza.core.ui.response.IContainerEvents;
  * 不正な動作の原因になります。</br>
  * DBU0900031のイベント名定義クラスです</br>
  *
- * @reamsid_L DBU-1080-020  lijia
+ * @reamsid_L DBU-1080-020 lijia
  * 
  */
 public enum DBU0900031TransitionEventName implements IContainerEvents {

@@ -99,7 +99,7 @@ public class BenmeiTorokuPanelHandler {
         } else {
             panelDiv.getBenmeiTorokuMeisaiPanel().getTxtMultiLineBenmeiNaiyo().setValue(benmeiTorokuMeisaiJoho.getBemmeiNaiyo());
         }
-        if (benmeiTorokuMeisaiJoho.getBemmeishoTeishutsuYMD() == null) {
+        if (benmeiTorokuMeisaiJoho.getBemmeishoTeishutsuYMD() == null || benmeiTorokuMeisaiJoho.getBemmeishoTeishutsuYMD().isEmpty()) {
             panelDiv.getBenmeiTorokuMeisaiPanel().getTxtBenmeisyoTeishutubi().clearValue();
         } else {
             panelDiv.getBenmeiTorokuMeisaiPanel().getTxtBenmeisyoTeishutubi().setValue(

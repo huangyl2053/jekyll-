@@ -12,8 +12,8 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 /**
  * AtenaPanel のクラスファイル 
  * 
- * @reamsid_L DBU-1080-020  lijia
- * 
+ * @reamsid_L DBU-1080-020 lijia
+ *
  */
 public class AtenaPanelDiv extends Panel {
     // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-01-15_09-59-03">
