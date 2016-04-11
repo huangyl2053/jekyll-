@@ -16,7 +16,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 /**
  * KaigoGekihenKanwaSettei のクラスファイル
  *
- * @author 自動生成
+ * @reamsid_L DBB-1770-020 wangkanglei
  */
 public class KaigoGekihenKanwaSetteiDiv extends Panel implements IKaigoGekihenKanwaSetteiDiv {
 

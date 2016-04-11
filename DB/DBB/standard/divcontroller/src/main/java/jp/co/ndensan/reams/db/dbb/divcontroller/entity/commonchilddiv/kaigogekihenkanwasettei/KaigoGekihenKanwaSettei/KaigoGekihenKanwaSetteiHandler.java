@@ -14,6 +14,8 @@ import jp.co.ndensan.reams.uz.uza.util.serialization.DataPassingConverter;
 
 /**
  * KaigoGekihenKanwaSettei_激変緩和ダイアログのハンドラクラスです。
+ *
+ * @reamsid_L DBB-1770-020 wangkanglei
  */
 public class KaigoGekihenKanwaSetteiHandler {
 
