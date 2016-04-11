@@ -100,7 +100,6 @@ public class SeikyuGakuShukeiHandler {
     public void selectButton(List<ShokanShukeiResult> shkanList, ShokanKihon entity) {
 
         ShokanShukeiResult shokanshukei = shkanList.get(0);
-
         div.getPanelSeikyugakuShukei().getPanelSeikyuShokai().getTxtServiceShurui()
                 .setValue(shokanshukei.getShukei().getサービス種類コード().value());
         div.getPanelSeikyugakuShukei().getPanelSeikyuShokai().getTxtServiceName().
