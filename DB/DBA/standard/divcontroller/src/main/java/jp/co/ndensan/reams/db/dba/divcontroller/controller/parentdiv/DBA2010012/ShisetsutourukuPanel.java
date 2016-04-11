@@ -15,6 +15,7 @@ import jp.co.ndensan.reams.db.dba.divcontroller.handler.parentdiv.DBA2010012.Shi
 import jp.co.ndensan.reams.db.dba.service.core.kaigojigyoshashisetsukanri.KaigoJigyoshaShisetsuKanriManager;
 import jp.co.ndensan.reams.db.dbz.business.core.KaigoJogaiTokureiTaishoShisetsu;
 import jp.co.ndensan.reams.db.dbz.business.core.KaigoJogaiTokureiTaishoShisetsuBuilder;
+import jp.co.ndensan.reams.db.dbz.business.core.jigyosha.JigyoshaMode;
 import jp.co.ndensan.reams.db.dbz.divcontroller.viewbox.ViewStateKeys;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrInformationMessages;
@@ -62,26 +63,28 @@ public class ShisetsutourukuPanel {
      * @return ResponseData<ShisetsutourukuPanel>
      */
     public ResponseData<ShisetsutourukuPanelDiv> onLoad(ShisetsutourukuPanelDiv div) {
-        if (追加.equals(ViewStateHolder.get(ViewStateKeys.状態, RString.class))) {
+        if (追加.equals(ViewStateHolder.get(ViewStateKeys.介護事業者_状態, RString.class))) {
             getHandler(div).initialize();
             return ResponseData.of(div).setState(DBA2010012StateName.追加状態);
         }
-        if (修正.equals(ViewStateHolder.get(ViewStateKeys.状態, RString.class))) {
+        if (修正.equals(ViewStateHolder.get(ViewStateKeys.介護事業者_状態, RString.class))) {
             getHandler(div).initialize();
             List<KaigoJogaiTokureiTaishoShisetsu> list = manager.selectByKoseiShichosonMasterList(事業者情報取得paramter(div)).records();
             getHandler(div).set施設情報エリア(list);
             get事業者情報の検索処理(div);
             return ResponseData.of(div).setState(DBA2010012StateName.修正状態);
         }
-        if (削除.equals(ViewStateHolder.get(ViewStateKeys.状態, RString.class))) {
+        if (削除.equals(ViewStateHolder.get(ViewStateKeys.介護事業者_状態, RString.class))) {
             getHandler(div).initialize();
             List<KaigoJogaiTokureiTaishoShisetsu> list = manager.selectByKoseiShichosonMasterList(事業者情報取得paramter(div)).records();
             getHandler(div).set施設情報エリア(list);
             get事業者情報の検索処理(div);
             return ResponseData.of(div).setState(DBA2010012StateName.削除状態);
         }
-        if (照会.equals(ViewStateHolder.get(ViewStateKeys.状態, RString.class))) {
+        if (照会.equals(ViewStateHolder.get(ViewStateKeys.介護事業者_状態, RString.class))) {
             getHandler(div).initialize();
+            List<KaigoJogaiTokureiTaishoShisetsu> list = manager.selectByKoseiShichosonMasterList(事業者情報取得paramter(div)).records();
+            getHandler(div).set施設情報エリア(list);
             return ResponseData.of(div).setState(DBA2010012StateName.照会状態);
         }
         ViewStateHolder.put(ViewStateKeys.サービス登録_有効開始日, div.getTxtShisetsuYukoKaishiYMD().getValue());
@@ -174,8 +177,9 @@ public class ShisetsutourukuPanel {
     }
 
     private void set有効期間合理性チェック(ShisetsutourukuPanelDiv div) {
+        JigyoshaMode mode = ViewStateHolder.get(ViewStateKeys.介護事業者_介護事業者情報, JigyoshaMode.class);
         KaigoJigyoshaParameter paramter = KaigoJigyoshaParameter
-                .createParam(ViewStateHolder.get(ViewStateKeys.サービス登録_事業者番号, RString.class),
+                .createParam(mode.getJigyoshaNo() == null ? RString.EMPTY : mode.getJigyoshaNo().value(),
                         div.getTxtShisetsuYukoKaishiYMD().getValue(),
                         ViewStateHolder.get(ViewStateKeys.サービス登録_サービス種類コード, RString.class),
                         div.getTxtShisetsuYukoShuryoYMD().getValue());
@@ -193,11 +197,11 @@ public class ShisetsutourukuPanel {
     }
 
     private KaigoJigyoshaShisetsuKanriMapperParameter 事業者情報取得paramter(ShisetsutourukuPanelDiv div) {
-
+        JigyoshaMode mode = ViewStateHolder.get(ViewStateKeys.介護事業者_介護事業者情報, JigyoshaMode.class);
         return KaigoJigyoshaShisetsuKanriMapperParameter
                 .createParam(div.getJigyoshaShurui().getRadServiceShurui().getSelectedKey(),
-                        ViewStateHolder.get(ViewStateKeys.サービス登録_有効開始日, FlexibleDate.class),
-                        ViewStateHolder.get(ViewStateKeys.サービス登録_事業者番号, RString.class),
+                        new FlexibleDate(mode.getYukoKaishiYMD()),
+                        mode.getJigyoshaNo() == null ? RString.EMPTY : mode.getJigyoshaNo().value(),
                         ViewStateHolder.get(ViewStateKeys.サービス登録_サービス種類コード, RString.class),
                         FlexibleDate.EMPTY);
     }

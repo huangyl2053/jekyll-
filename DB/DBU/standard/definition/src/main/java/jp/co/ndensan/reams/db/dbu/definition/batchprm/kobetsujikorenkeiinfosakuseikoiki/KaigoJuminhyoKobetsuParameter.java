@@ -6,7 +6,6 @@
 package jp.co.ndensan.reams.db.dbu.definition.batchprm.kobetsujikorenkeiinfosakuseikoiki;
 
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
-import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RTime;
 
 /**
@@ -19,7 +18,6 @@ import jp.co.ndensan.reams.uz.uza.lang.RTime;
 @SuppressWarnings("PMD.UnusedPrivateField")
 public class KaigoJuminhyoKobetsuParameter {
 
-    private RString sakiShichoson;
     private RDate konkaiStSakuseiYMD;
     private RTime konkaiStSakuseiTime;
 }

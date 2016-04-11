@@ -85,6 +85,8 @@ public class PnlTotalSearchHandler {
                     get(ConfigNameDBU.検索制御_最大取得件数, RDate.getNowDate(),
                             SubGyomuCode.DBU介護統計報告).toString()));
         }
+        div.getPnlSearch().setDisplayNone(false);
+        div.getPnlKeiyakusyaList().setDisplayNone(true);
         div.getPnlKeiyakusyaList().getBtnSearchAgain().setDisabled(true);
     }
 
@@ -159,7 +161,9 @@ public class PnlTotalSearchHandler {
      */
     public List<ShokanJuryoininKeiyakusha> get契約者一覧(ShokanJuryoininKeiyakushaParameter parameter) {
         ShokanJuryoininKeiyakushaFinder finder = ShokanJuryoininKeiyakushaFinder.createInstance();
-        return finder.getShokanJuryoininKeiyakushaList(parameter);
+        // TODO
+//        return finder.getShokanJuryoininKeiyakushaList(parameter);
+        return null;
     }
 
     /**

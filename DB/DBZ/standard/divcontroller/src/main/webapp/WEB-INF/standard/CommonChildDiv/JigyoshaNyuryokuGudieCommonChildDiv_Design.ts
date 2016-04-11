@@ -28,6 +28,14 @@ module DBZ {
                 return "select_BtnSenTaKu";
             }
 
+            public static select_BtnSilyuuseyi(): string {
+                return "select_BtnSilyuuseyi";
+            }
+
+            public static select_BtnSakujo(): string {
+                return "select_BtnSakujo";
+            }
+
         }
 
         export class Controls {

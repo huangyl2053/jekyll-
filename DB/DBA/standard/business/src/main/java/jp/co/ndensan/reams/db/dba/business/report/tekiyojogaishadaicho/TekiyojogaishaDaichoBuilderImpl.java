@@ -15,20 +15,16 @@ import jp.co.ndensan.reams.uz.uza.report.ReportEditorJoiner;
  */
 class TekiyojogaishaDaichoBuilderImpl implements ITekiyojogaishaDaichoBuilder {
 
-    private final ITekiyojogaishaDaichoEditor headerEditor;
-    private final ITekiyojogaishaDaichoEditor bodyEditor;
+    private final TekiyojogaishaDaichoEditor editor;
 
     /**
      * インスタンスを生成します。
      *
-     * @param headerEditor {@link ITekiyojogaishaDaichoEditor}
-     * @param bodyEditor {@link ITekiyojogaishaDaichoEditor}
+     * @param editor {@link TekiyojogaishaDaichoEditor}
      */
     public TekiyojogaishaDaichoBuilderImpl(
-            ITekiyojogaishaDaichoEditor headerEditor,
-            ITekiyojogaishaDaichoEditor bodyEditor) {
-        this.headerEditor = headerEditor;
-        this.bodyEditor = bodyEditor;
+            TekiyojogaishaDaichoEditor editor) {
+        this.editor = editor;
     }
 
     /**
@@ -38,6 +34,6 @@ class TekiyojogaishaDaichoBuilderImpl implements ITekiyojogaishaDaichoBuilder {
      */
     @Override
     public TekiyojogaishaDaichoReportSource build() {
-        return ReportEditorJoiner.from(new TekiyojogaishaDaichoReportSource()).join(headerEditor).join(bodyEditor).buildSource();
+        return ReportEditorJoiner.from(new TekiyojogaishaDaichoReportSource()).join(editor).buildSource();
     }
 }

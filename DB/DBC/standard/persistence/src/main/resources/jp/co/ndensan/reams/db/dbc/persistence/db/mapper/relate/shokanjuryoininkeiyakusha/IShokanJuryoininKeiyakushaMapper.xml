@@ -4,46 +4,52 @@
 
 <!-- どのマッパーインターフェースと対応するかを指定する -->
 <mapper namespace="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.shokanjuryoininkeiyakusha.IShokanJuryoininKeiyakushaMapper">
-    
+
+    <resultMap id="resultMap_ShokanJuryoininKeiyakusha" type="jp.co.ndensan.reams.db.dbc.entity.db.relate.shokanjuryoininkeiyakusha.ShokanJuryoininKeiyakushaEntity" autoMapping="true">
+        <association property="dbt3078entity" resultMap="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT3078ShokanJuryoininKeiyakushaMapper.ResultMap_DbT3078ShokanJuryoininKeiyakushaEntity"/>
+        <association property="dbt3077entity" resultMap="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT3077JuryoininKeiyakuJigyoshaMapper.ResultMap_DbT3077JuryoininKeiyakuJigyoshaEntity"/>
+    </resultMap>    
     <select id="get契約事業者一覧"
-            resultType="jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3078ShokanJuryoininKeiyakushaEntity"
+            resultMap="resultMap_ShokanJuryoininKeiyakusha"
             parameterType="jp.co.ndensan.reams.db.dbc.definition.mybatisprm.shokanjuryoininkeiyakusha.ShokanJuryoininKeiyakushaListParameter" 
             fetchSize="500">
-        SELECT *
+        SELECT
+            A.*,
+            B.*
         FROM
-            rgdb."DbT3078ShokanJuryoininKeiyakusha" A
+            (<include refid="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT3078ShokanJuryoininKeiyakushaMapper.noDeleted_DbT3078ShokanJuryoininKeiyakusha" />) A
         INNER JOIN
-            rgdb."DbT3077JuryoininKeiyakuJigyosha" B
+            (<include refid="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT3077JuryoininKeiyakuJigyoshaMapper.noDeleted_DbT3077JuryoininKeiyakuJigyosha" />) B
             ON
-              A."keiyakuJigyoshaNo" = B."keiyakuJigyoshaNo"
+              A."dbT3078ShokanJuryoininKeiyakusha_keiyakuJigyoshaNo" = B."dbT3077JuryoininKeiyakuJigyosha_keiyakuJigyoshaNo"
         WHERE
            1=1
            <if test="被保険者番号!=null">
-           AND A."hihokenshaNo" = #{被保険者番号}
+           AND A."dbT3078ShokanJuryoininKeiyakusha_hihokenshaNo" = #{被保険者番号}
            </if> 
            <if test="契約申請日FROM!=null">
-           AND A."shinseiYMD" <![CDATA[>=]]> #{契約申請日FROM}
+           AND A."dbT3078ShokanJuryoininKeiyakusha_shinseiYMD" <![CDATA[>=]]> #{契約申請日FROM}
            </if> 
            <if test="契約申請日TO!=null">
-           AND A."shinseiYMD" <![CDATA[<=]]> #{契約申請日TO}
+           AND A."dbT3078ShokanJuryoininKeiyakusha_shinseiYMD" <![CDATA[<=]]> #{契約申請日TO}
            </if>     
            <if test="契約決定日FROM!=null">
-           AND A."ketteiYMD" <![CDATA[>=]]> #{契約決定日FROM}
+           AND A."dbT3078ShokanJuryoininKeiyakusha_ketteiYMD" <![CDATA[>=]]> #{契約決定日FROM}
            </if> 
            <if test="契約決定日TO!=null">
-           AND A."ketteiYMD" <![CDATA[<=]]> #{契約決定日TO}
+           AND A."dbT3078ShokanJuryoininKeiyakusha_ketteiYMD" <![CDATA[<=]]> #{契約決定日TO}
            </if>   
            <if test="契約事業者番号!=null">
-           AND A."keiyakuJigyoshaNo" = #{契約事業者番号}
+           AND A."dbT3078ShokanJuryoininKeiyakusha_keiyakuJigyoshaNo" = #{契約事業者番号}
            </if>  
            <if test="契約サービス種類!=null">
-           AND A."keiyakuServiceShurui" = #{契約サービス種類}
+           AND A."dbT3078ShokanJuryoininKeiyakusha_keiyakuServiceShurui" = #{契約サービス種類}
            </if> 
            <if test="契約年度!=null">
-           AND SUBSTRING(A."keiyakuNo",1,4) = #{契約年度}
+           AND SUBSTRING(A."dbT3078ShokanJuryoininKeiyakusha_keiyakuNo",1,4) = #{契約年度}
            </if> 
            <if test="契約番号!=null">
-           AND A."keiyakuNo" = #{契約番号}
+           AND A."dbT3078ShokanJuryoininKeiyakusha_keiyakuNo" = #{契約番号}
            </if> 
     </select>
 </mapper>

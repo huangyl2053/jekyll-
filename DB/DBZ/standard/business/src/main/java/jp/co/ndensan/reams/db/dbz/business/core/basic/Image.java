@@ -17,6 +17,8 @@ import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 
 /**
  * イメージ情報を管理するクラスです。
+ *
+ * @reamsid_L DBZ-9999-011 chengsanyuan
  */
 public class Image extends ParentModelBase<ImageIdentifier, DbT5115ImageEntity, Image> implements Serializable {
 

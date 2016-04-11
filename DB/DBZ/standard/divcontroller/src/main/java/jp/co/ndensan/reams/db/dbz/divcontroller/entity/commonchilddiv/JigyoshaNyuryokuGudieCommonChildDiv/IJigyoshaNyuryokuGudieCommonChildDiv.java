@@ -10,4 +10,8 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.ICommonChildDivBaseProperties;
 public interface IJigyoshaNyuryokuGudieCommonChildDiv extends ICommonChildDivBaseProperties {
 
     public abstract void initialize(JigyoshaMode mode);
+
+    public abstract void select_BtnSenTaKu();
+
+    JigyoshaNyuryokuGudieCommonChildDivDiv getJigyoshaNyuryokuGudieCommonChildDiv();
 }

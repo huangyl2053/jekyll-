@@ -17,37 +17,30 @@ import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
  */
 public class TekiyojogaishaDaichoReport extends Report<TekiyojogaishaDaichoReportSource> {
 
-    private final List<TekiyojogaishaDaichoBodyItem> bodyItemList;
-    private final TekiyojogaishaDaichoHeadItem headItem;
+    private final List<TekiyojogaishaDaichoItem> itemList;
 
     /**
      * インスタンスを生成します。
      *
-     * @param headItem 適用除外者台帳ヘッダのITEM
      * @param itemList 適用除外者台帳ボディのITEMリスト
      * @return 適用除外者台帳のReport
      */
     public static TekiyojogaishaDaichoReport createFrom(
-            TekiyojogaishaDaichoHeadItem headItem,
-            List<TekiyojogaishaDaichoBodyItem> itemList) {
+            List<TekiyojogaishaDaichoItem> itemList) {
 
         return new TekiyojogaishaDaichoReport(
-                headItem,
                 itemList);
     }
 
     /**
      * インスタンスを生成します。
      *
-     * @param headItem 適用除外者台帳ヘッダのITEM
      * @param itemList 適用除外者台帳のITEMリスト
      */
     protected TekiyojogaishaDaichoReport(
-            TekiyojogaishaDaichoHeadItem headItem,
-            List<TekiyojogaishaDaichoBodyItem> itemList) {
+            List<TekiyojogaishaDaichoItem> itemList) {
 
-        this.headItem = headItem;
-        this.bodyItemList = itemList;
+        this.itemList = itemList;
     }
 
     /**
@@ -56,10 +49,9 @@ public class TekiyojogaishaDaichoReport extends Report<TekiyojogaishaDaichoRepor
      */
     @Override
     public void writeBy(ReportSourceWriter<TekiyojogaishaDaichoReportSource> reportSourceWriter) {
-        for (TekiyojogaishaDaichoBodyItem bodyItem : bodyItemList) {
-            ITekiyojogaishaDaichoEditor headerEditor = new TekiyojogaishaDaichoHeaderEditor(headItem);
-            ITekiyojogaishaDaichoEditor bodyEditor = new TekiyojogaishaDaichoBodyEditor(bodyItem);
-            ITekiyojogaishaDaichoBuilder builder = new TekiyojogaishaDaichoBuilderImpl(headerEditor, bodyEditor);
+        for (TekiyojogaishaDaichoItem item : itemList) {
+            TekiyojogaishaDaichoEditor editor = new TekiyojogaishaDaichoEditor(item);
+            ITekiyojogaishaDaichoBuilder builder = new TekiyojogaishaDaichoBuilderImpl(editor);
             reportSourceWriter.writeLine(builder);
         }
     }

@@ -5,6 +5,8 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
  * 異動リスト異動情報区分を表す列挙型です。
+ *
+ * @reamsid_L DBA-9999-023 liangbc
  */
 public enum IdoListIdojohoKubun {
 
