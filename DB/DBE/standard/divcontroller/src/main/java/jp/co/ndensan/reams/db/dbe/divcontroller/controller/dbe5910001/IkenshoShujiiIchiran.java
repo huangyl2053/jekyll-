@@ -21,7 +21,7 @@ public class IkenshoShujiiIchiran {
     /**
      * 主治医医療機関・主治医一覧表初期化の設定します。
      *
-     * @param div IchijiHanteiKekkaInfoDiv
+     * @param div IkenshoShujiiIchiranDiv
      * @return ResponseData
      */
     public ResponseData<IkenshoShujiiIchiranDiv> onLoad(IkenshoShujiiIchiranDiv div) {
@@ -35,7 +35,7 @@ public class IkenshoShujiiIchiran {
     /**
      * 主治医医療機関・主治医一覧表出力順変更の設定します。
      *
-     * @param div IchijiHanteiKekkaInfoDiv
+     * @param div IkenshoShujiiIchiranDiv
      * @return ResponseData
      */
     public ResponseData<IkenshoShujiiIchiranDiv> onChange_ddlOutputSort(IkenshoShujiiIchiranDiv div) {
@@ -49,7 +49,7 @@ public class IkenshoShujiiIchiran {
     /**
      * 医療機関コードと主治医コードの大小関係を比較です。
      *
-     * @param div IchijiHanteiKekkaInfoDiv
+     * @param div IkenshoShujiiIchiranDiv
      * @return ResponseData<IkenshoShujiiIchiranDiv>
      */
     public ResponseData<IkenshoShujiiIchiranDiv> onClick_Check(IkenshoShujiiIchiranDiv div) {
@@ -70,7 +70,7 @@ public class IkenshoShujiiIchiran {
     /**
      * 一覧表を発行するボタンが押下され、バッチパラメータを作成します。
      *
-     * @param div IchijiHanteiKekkaInfoDiv
+     * @param div IkenshoShujiiIchiranDiv
      * @return ResponseData
      */
     public ResponseData<IkenshoShujiiIchiranParameter> onClick_btnReportPublish(IkenshoShujiiIchiranDiv div) {
