@@ -12,6 +12,8 @@ import jp.co.ndensan.reams.db.dbb.entity.report.kaigohokenryogakuketteihenkotsuc
 import jp.co.ndensan.reams.ur.urz.definition.core.codemaster.URZCodeShubetsu;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
+import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.report.Report;
 import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
@@ -38,6 +40,7 @@ public class KaigoHokenryogakuReport extends Report<KaigoHokenryogakuSource> {
     private static final int SIZE = 18;
     private final List<KaigoHokenryogakuItem> targets;
     private final List<RString> 改頁項目リスト;
+    private static final RString eightRS = new RString("18");
 
     /**
      * コンストラクタです。
@@ -82,6 +85,7 @@ public class KaigoHokenryogakuReport extends Report<KaigoHokenryogakuSource> {
     }
 
     /**
+     * 帳の切符の印刷の方法
      *
      * @param reportSourceWriter reportSourceWriter
      */
@@ -146,7 +150,7 @@ public class KaigoHokenryogakuReport extends Report<KaigoHokenryogakuSource> {
         if ((i + 1) % SIZE != 0) {
             item1.setListUpper_1(new RString(Integer.valueOf((i + 1) % SIZE).toString()));
         } else {
-            item1.setListUpper_1(new RString("18"));
+            item1.setListUpper_1(eightRS);
         }
         if (編集後本算定通知書共通情報.get(i).get通知書番号() != null) {
             item1.setListUpper_2(new RString(編集後本算定通知書共通情報.get(i).get通知書番号().toString()));
@@ -187,8 +191,8 @@ public class KaigoHokenryogakuReport extends Report<KaigoHokenryogakuSource> {
                 && 編集後本算定通知書共通情報.get(i).get更正後().get生活保護扶助種類().toString() != null) {
             生活保護扶助名称 = CodeMaster.getCode(SubGyomuCode.URZ業務共通_共通系,
                     URZCodeShubetsu.扶助種類コード.getCodeShubetsu(),
-                    new Code(編集後本算定通知書共通情報.get(i).get更正後().get生活保護扶助種類().toString()))
-                    .getコード名称();
+                    new Code(編集後本算定通知書共通情報.get(i).get更正後().get生活保護扶助種類().toString()),
+                    new FlexibleDate(RDate.getNowDate().toString())).getコード名称();
         }
         item1.setListUpper_12(生活保護扶助名称);
     }
