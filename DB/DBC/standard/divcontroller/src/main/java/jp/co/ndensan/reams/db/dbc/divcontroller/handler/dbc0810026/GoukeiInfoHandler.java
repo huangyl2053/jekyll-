@@ -16,6 +16,8 @@ import jp.co.ndensan.reams.uz.uza.math.Decimal;
 
 /**
  * 償還払い状況照会_合計情報のハンドラクラスです。
+ *
+ * @reamsid_L DBC-1010-090 xuhao
  */
 public class GoukeiInfoHandler {
 
