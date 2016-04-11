@@ -66,7 +66,7 @@ public class ShisetsuNyutaishoRirekiKanriValidationHandler {
         入所日(UrErrorMessages.必須, "入所日"),
         入所施設コード(UrErrorMessages.必須, "入所施設コード"),
         施設種類(UrErrorMessages.必須, "施設種類"),
-        前後関係逆転(UrErrorMessages.前後関係逆転, "退所日", "入所日");
+        前後関係逆転(UrErrorMessages.前後関係逆転, "入所日", "退所日");
         private final Message message;
 
         private RRVMessages(IMessageGettable message, String... replacements) {
