@@ -15,7 +15,7 @@ import jp.co.ndensan.reams.db.dbe.entity.db.relate.ikensho.ninteishinseijoho.Nin
 import jp.co.ndensan.reams.db.dbe.persistence.db.mapper.relate.ikensho.ninteishinseijoho.INinteiShinseiJohoMapper;
 import jp.co.ndensan.reams.db.dbe.persistence.db.util.MapperProvider;
 import jp.co.ndensan.reams.db.dbe.service.core.ikensho.geninshikkan.GeninShikkanManager;
-import jp.co.ndensan.reams.db.dbe.service.core.ikensho.shujiiIkenshoIraiJoho.ShujiiIkenshoIraiJohoManager;
+import jp.co.ndensan.reams.db.dbe.service.core.ikensho.shujiiikenshoiraijoho.ShujiiIkenshoIraiJohoManager;
 import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT5101NinteiShinseiJohoDac;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;

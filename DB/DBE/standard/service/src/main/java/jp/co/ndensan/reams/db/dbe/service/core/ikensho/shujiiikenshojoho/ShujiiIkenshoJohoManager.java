@@ -2,7 +2,7 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbe.service.core.ikensho.shujiiIkenshoJoho;
+package jp.co.ndensan.reams.db.dbe.service.core.ikensho.shujiiikenshojoho;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -12,8 +12,8 @@ import jp.co.ndensan.reams.db.dbe.business.core.ikensho.shujiiikenshojoho.Shujii
 import jp.co.ndensan.reams.db.dbe.business.core.ikensho.shujiiikenshokinyuitem.ShujiiIkenshoKinyuItem;
 import jp.co.ndensan.reams.db.dbe.definition.mybatis.param.ikensho.shujiiikenshojoho.ShujiiIkenshoJohoMapperParameter;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.ikensho.shujiiikenshojoho.ShujiiIkenshoJohoEntity;
-import jp.co.ndensan.reams.db.dbe.persistence.db.util.MapperProvider;
 import jp.co.ndensan.reams.db.dbe.persistence.db.mapper.relate.ikensho.shujiiikenshojoho.IShujiiIkenshoJohoMapper;
+import jp.co.ndensan.reams.db.dbe.persistence.db.util.MapperProvider;
 import jp.co.ndensan.reams.db.dbe.service.core.ikensho.shujiiikenshoikenitem.ShujiiIkenshoIkenItemManager;
 import jp.co.ndensan.reams.db.dbe.service.core.ikensho.shujiiikenshokinyuitem.ShujiiIkenshoKinyuItemManager;
 import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT5302ShujiiIkenshoJohoDac;
@@ -23,6 +23,8 @@ import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
 
 /**
  * 要介護認定主治医意見書情報を管理するクラスです。
+ *
+ * @reamsid_L DBE-9999-011 sunhaidi
  */
 public class ShujiiIkenshoJohoManager {
 
@@ -64,8 +66,7 @@ public class ShujiiIkenshoJohoManager {
     /**
      * {@link InstanceProvider#create}にて生成した{@link ShujiiIkenshoJohoManager}のインスタンスを返します。
      *
-     * @return
-     * {@link InstanceProvider#create}にて生成した{@link ShujiiIkenshoJohoManager}のインスタンス
+     * @return {@link InstanceProvider#create}にて生成した{@link ShujiiIkenshoJohoManager}のインスタンス
      */
     public static ShujiiIkenshoJohoManager createInstance() {
         return InstanceProvider.create(ShujiiIkenshoJohoManager.class);
@@ -75,8 +76,7 @@ public class ShujiiIkenshoJohoManager {
      * 主キーに合致する要介護認定主治医意見書情報を返します。
      *
      * @param 要介護認定主治医意見書情報検索条件 要介護認定主治医意見書情報検索条件
-     * @return ShujiiIkenshoJoho 【　※ツールの都合上、このカッコ部は手動で削除して下さい 要介護認定主治医意見書情報】
-     * nullが返る可能性があります。
+     * @return ShujiiIkenshoJoho 【　※ツールの都合上、このカッコ部は手動で削除して下さい 要介護認定主治医意見書情報】 nullが返る可能性があります。
      */
     @Transaction
     public ShujiiIkenshoJoho get要介護認定主治医意見書情報(ShujiiIkenshoJohoMapperParameter 要介護認定主治医意見書情報検索条件) {

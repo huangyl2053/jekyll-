@@ -26,6 +26,8 @@ import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 
 /**
  * 介護認定審査会割当委員情報を管理するクラスです。
+ *
+ * @reamsid_L DBE-9999-011 sunhaidi
  */
 public class ShinsakaiWariateIinJoho
         extends ModelBase<ShinsakaiWariateIinJohoIdentifier, DbT5503ShinsakaiWariateIinJohoEntity, ShinsakaiWariateIinJoho>
