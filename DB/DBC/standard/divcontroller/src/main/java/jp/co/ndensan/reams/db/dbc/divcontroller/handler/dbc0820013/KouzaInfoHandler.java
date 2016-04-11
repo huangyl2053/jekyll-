@@ -30,6 +30,8 @@ import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 
 /**
  * 償還払い費支給申請決定_口座情報画面
+ *
+ * @reamsid_L DBC-1030-150 gongliang
  */
 public class KouzaInfoHandler {
 

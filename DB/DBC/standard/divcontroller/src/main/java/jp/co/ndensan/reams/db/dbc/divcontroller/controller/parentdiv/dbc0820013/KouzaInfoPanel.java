@@ -30,6 +30,8 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 
 /**
  * 償還払い費支給申請決定_口座情報のクラスです。
+ *
+ * @reamsid_L DBC-1030-150 gongliang
  */
 public class KouzaInfoPanel {
 
