@@ -12,6 +12,8 @@ import lombok.Getter;
 
 /**
  * QualificationsParamter
+ *
+ * @reamsid_L DBB-0690-020 xuhao
  */
 @SuppressWarnings("PMD.UnusedPrivateField")
 @Getter

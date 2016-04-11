@@ -10,6 +10,8 @@ import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
 
 /**
  * 発行帳票情報
+ *
+ * @reamsid_L DBB-0690-020 xuhao
  */
 @lombok.Getter
 @lombok.Setter

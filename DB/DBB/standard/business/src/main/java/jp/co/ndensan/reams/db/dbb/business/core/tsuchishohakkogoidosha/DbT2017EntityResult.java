@@ -10,6 +10,8 @@ import jp.co.ndensan.reams.ua.uax.business.core.idoruiseki.ShikibetsuTaishoIdoJo
 
 /**
  * 対象データ
+ *
+ * @reamsid_L DBB-0690-020 xuhao
  */
 @SuppressWarnings("PMD.UnusedPrivateField")
 @lombok.Getter
