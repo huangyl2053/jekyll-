@@ -11,6 +11,8 @@ import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 
 /**
  * 調定簿作成のMyBatisパラメータ
+ *
+ * @reamsid_L DBB-0770-030 zhangrui
  */
 @SuppressWarnings("PMD.UnusedPrivateField")
 @lombok.Getter

@@ -10,6 +10,8 @@ import lombok.Getter;
 
 /**
  * 調定簿作成帳票期月普徴の場合Item
+ *
+ * @reamsid_L DBB-0770-050 zhangrui
  */
 @Getter
 @SuppressWarnings("PMD.UnusedPrivateField")

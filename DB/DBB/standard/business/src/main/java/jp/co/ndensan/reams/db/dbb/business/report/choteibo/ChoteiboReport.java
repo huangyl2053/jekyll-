@@ -13,6 +13,8 @@ import lombok.NonNull;
 
 /**
  * 調定簿帳票出力
+ *
+ * @reamsid_L DBB-0770-050 zhangrui
  */
 public class ChoteiboReport extends Report<ChoteiboSource> {
 

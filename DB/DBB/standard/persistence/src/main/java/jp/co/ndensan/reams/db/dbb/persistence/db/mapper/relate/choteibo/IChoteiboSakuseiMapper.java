@@ -34,6 +34,8 @@ import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7022ShoriDateKanriEntity;
 
 /**
  * 調定簿作成のマッパーインタフェースです。
+ *
+ * @reamsid_L DBB-0770-030 zhangrui
  */
 public interface IChoteiboSakuseiMapper {
 
