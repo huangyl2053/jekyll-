@@ -11,6 +11,8 @@ import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 
 /**
  * 主治医意見書作成依頼情報を特定するためのMyBatis用パラメータクラスです。
+ *
+ * @reamsid_L DBE-9999-011 sunhaidi
  */
 @lombok.Getter
 @SuppressWarnings("PMD.UnusedPrivateField")

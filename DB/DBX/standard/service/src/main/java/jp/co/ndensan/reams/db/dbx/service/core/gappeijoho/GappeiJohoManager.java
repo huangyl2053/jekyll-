@@ -19,6 +19,8 @@ import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
 
 /**
  * 合併情報を管理するクラスです。
+ *
+ * @reamsid_L DBX-9999-011 sunhaidi
  */
 public class GappeiJohoManager {
 
@@ -55,8 +57,7 @@ public class GappeiJohoManager {
     /**
      * {@link InstanceProvider#create}にて生成した{@link GappeiJohoManager}のインスタンスを返します。
      *
-     * @return
-     * {@link InstanceProvider#create}にて生成した{@link GappeiJohoManager}のインスタンス
+     * @return {@link InstanceProvider#create}にて生成した{@link GappeiJohoManager}のインスタンス
      */
     public static GappeiJohoManager createInstance() {
         return InstanceProvider.create(GappeiJohoManager.class);

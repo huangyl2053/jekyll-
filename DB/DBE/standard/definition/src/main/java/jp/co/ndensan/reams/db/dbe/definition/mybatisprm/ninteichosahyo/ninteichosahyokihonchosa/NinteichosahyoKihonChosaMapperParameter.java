@@ -11,6 +11,8 @@ import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 
 /**
  * 認定調査票（基本調査）を特定するためのMyBatis用パラメータクラスです。
+ *
+ * @reamsid_L DBE-9999-011 sunhaidi
  */
 @lombok.Getter
 @SuppressWarnings("PMD.UnusedPrivateField")

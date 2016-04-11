@@ -11,6 +11,8 @@ import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 
 /**
  * 介護サービス種類の識別子です。
+ *
+ * @reamsid_L DBX-9999-011 sunhaidi
  */
 @SuppressWarnings("PMD.UnusedPrivateField")
 @lombok.Value

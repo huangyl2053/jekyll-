@@ -11,6 +11,8 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
  * 被保険者台帳管理を特定するためのMyBatis用パラメータクラスです。
+ *
+ * @reamsid_L DBA-9999-011 sunhaidi
  */
 @lombok.Getter
 @lombok.Setter

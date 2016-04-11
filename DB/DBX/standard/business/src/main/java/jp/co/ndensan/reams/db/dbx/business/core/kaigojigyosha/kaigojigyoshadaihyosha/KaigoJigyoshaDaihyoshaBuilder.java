@@ -17,6 +17,8 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
  * {@link KaigoJigyoshaDaihyosha}の編集を行うビルダークラスです。
+ *
+ * @reamsid_L DBX-9999-011 sunhaidi
  */
 public class KaigoJigyoshaDaihyoshaBuilder {
 
