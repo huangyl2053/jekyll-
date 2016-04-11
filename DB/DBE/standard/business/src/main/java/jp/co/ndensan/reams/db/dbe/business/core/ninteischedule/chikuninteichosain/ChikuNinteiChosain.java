@@ -26,6 +26,8 @@ import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 
 /**
  * 地区認定調査員を管理するクラスです。
+ *
+ * @reamsid_L DBE-9999-011 sunhaidi
  */
 public class ChikuNinteiChosain
         extends ModelBase<ChikuNinteiChosainIdentifier, DbT5223ChikuNinteiChosainEntity, ChikuNinteiChosain>

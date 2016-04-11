@@ -25,6 +25,8 @@ import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 
 /**
  * 認定調査票（基本調査素点）を管理するクラスです。
+ *
+ * @reamsid_L DBE-9999-011 sunhaidi
  */
 public class NinteichosahyoKihonChosaScore
         extends ModelBase<NinteichosahyoKihonChosaScoreIdentifier, DbT5204NinteichosahyoKihonChosaScoreEntity, NinteichosahyoKihonChosaScore>

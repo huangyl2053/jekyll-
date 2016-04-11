@@ -82,6 +82,24 @@ public class RankJohoManager {
     }
 
     /**
+     * 賦課年度より、ランク情報を全件返します。
+     *
+     * @param 賦課年度 FlexibleYear
+     * @return List<RankJoho>
+     */
+    @Transaction
+    public List<RankJoho> getランク情報一覧By賦課年度(FlexibleYear 賦課年度) {
+        List<RankJoho> businessList = new ArrayList<>();
+
+        for (DbT2011RankJohoEntity entity : dac.selectBy賦課年度(賦課年度)) {
+            entity.initializeMd5();
+            businessList.add(new RankJoho(entity));
+        }
+
+        return businessList;
+    }
+
+    /**
      * ランク情報{@link RankJoho}を保存します。
      *
      * @param ランク情報 {@link RankJoho}

@@ -28,6 +28,8 @@ import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 
 /**
  * 認定調査依頼情報を管理するクラスです。
+ *
+ * @reamsid_L DBE-9999-011 sunhaidi
  */
 public class NinteichosaIraiJoho
         extends ModelBase<NinteichosaIraiJohoIdentifier, DbT5201NinteichosaIraiJohoEntity, NinteichosaIraiJoho>

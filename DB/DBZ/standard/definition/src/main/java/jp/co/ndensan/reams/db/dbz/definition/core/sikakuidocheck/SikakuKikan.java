@@ -10,6 +10,7 @@ import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 /**
  * 資格期間のデータアクセスクラスです。
  *
+ * @reamsid_L DBU-0110-010 xuyannan
  */
 @lombok.Getter
 @lombok.Setter

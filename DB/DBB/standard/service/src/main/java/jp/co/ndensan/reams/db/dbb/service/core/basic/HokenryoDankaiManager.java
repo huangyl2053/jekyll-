@@ -94,6 +94,30 @@ public class HokenryoDankaiManager {
     }
 
     /**
+     * 引数のキーに合致する保険料段階を返します。
+     *
+     * @param 賦課年度 賦課年度
+     * @param ランク区分 ランク区分
+     * @return HokenryoDankai
+     */
+    @Transaction
+    public List<HokenryoDankai> get保険料段階一覧Byランク区分(
+            FlexibleYear 賦課年度,
+            RString ランク区分) {
+        requireNonNull(賦課年度, UrSystemErrorMessages.値がnull.getReplacedMessage("賦課年度"));
+        requireNonNull(ランク区分, UrSystemErrorMessages.値がnull.getReplacedMessage("ランク区分"));
+
+        List<HokenryoDankai> businessList = new ArrayList<>();
+
+        for (DbT2013HokenryoDankaiEntity entity : dac.selectByランク区分(賦課年度, ランク区分)) {
+            entity.initializeMd5();
+            businessList.add(new HokenryoDankai(entity));
+        }
+
+        return businessList;
+    }
+
+    /**
      * 保険料段階を全件返します。
      *
      * @return List<HokenryoDankai>

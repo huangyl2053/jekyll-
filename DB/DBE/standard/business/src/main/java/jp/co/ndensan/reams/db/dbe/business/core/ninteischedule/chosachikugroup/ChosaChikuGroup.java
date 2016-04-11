@@ -19,6 +19,8 @@ import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 
 /**
  * 調査地区グループマスタを管理するクラスです。
+ *
+ * @reamsid_L DBE-9999-011 sunhaidi
  */
 public class ChosaChikuGroup extends ModelBase<ChosaChikuGroupIdentifier, DbT5225ChosaChikuGroupEntity, ChosaChikuGroup> implements Serializable {
 
@@ -146,8 +148,7 @@ public class ChosaChikuGroup extends ModelBase<ChosaChikuGroupIdentifier, DbT522
     }
 
     /**
-     * 調査地区グループマスタのみを変更対象とします。<br/>
-     * {@link DbT5225ChosaChikuGroupEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば変更状態にします。
+     * 調査地区グループマスタのみを変更対象とします。<br/> {@link DbT5225ChosaChikuGroupEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば変更状態にします。
      *
      * @return 変更対象処理実施後の{@link ChosaChikuGroup}
      */
@@ -160,8 +161,7 @@ public class ChosaChikuGroup extends ModelBase<ChosaChikuGroupIdentifier, DbT522
     }
 
     /**
-     * 保持する調査地区グループマスタを削除対象とします。<br/>
-     * {@link DbT5225ChosaChikuGroupEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば削除状態にします。
+     * 保持する調査地区グループマスタを削除対象とします。<br/> {@link DbT5225ChosaChikuGroupEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば削除状態にします。
      *
      * @return 削除対象処理実施後の{@link ChosaChikuGroup}
      */

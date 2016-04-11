@@ -35,6 +35,8 @@ import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
 
 /**
  * 合併市町村のデータアクセスクラスです。
+ *
+ * @reamsid_L DBA-9999-021 xuyannan
  */
 public class DbT7056GappeiShichosonDac implements ISaveable<DbT7056GappeiShichosonEntity> {
 

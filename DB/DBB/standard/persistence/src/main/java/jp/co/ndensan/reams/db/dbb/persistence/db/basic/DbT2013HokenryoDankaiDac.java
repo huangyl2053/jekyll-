@@ -105,6 +105,31 @@ public class DbT2013HokenryoDankaiDac implements ISaveable<DbT2013HokenryoDankai
     }
 
     /**
+     * 引数のキーに合致する保険料段階を返します。
+     *
+     * @param 賦課年度 FukaNendo
+     * @param ランク区分 ランク区分
+     * @return DbT2013HokenryoDankaiEntity
+     * @throws NullPointerException 引数のいずれかがnullの場合
+     */
+    @Transaction
+    public List<DbT2013HokenryoDankaiEntity> selectByランク区分(
+            FlexibleYear 賦課年度,
+            RString ランク区分) throws NullPointerException {
+        requireNonNull(賦課年度, UrSystemErrorMessages.値がnull.getReplacedMessage("賦課年度"));
+        requireNonNull(ランク区分, UrSystemErrorMessages.値がnull.getReplacedMessage("ランク区分"));
+
+        DbAccessorNormalType accessor = new DbAccessorNormalType(session);
+
+        return accessor.select().
+                table(DbT2013HokenryoDankai.class).
+                where(and(
+                                eq(fukaNendo, 賦課年度),
+                                eq(rankuKubun, ランク区分))).
+                toList(DbT2013HokenryoDankaiEntity.class);
+    }
+
+    /**
      * DbT2013HokenryoDankaiEntityを登録します。状態によってinsert/update/delete処理に振り分けられます。
      *
      * @param entity entity

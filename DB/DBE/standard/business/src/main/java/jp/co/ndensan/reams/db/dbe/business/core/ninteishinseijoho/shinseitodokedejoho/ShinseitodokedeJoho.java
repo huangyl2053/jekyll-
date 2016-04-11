@@ -21,8 +21,12 @@ import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 
 /**
  * 申請届出情報を管理するクラスです。
+ *
+ * @reamsid_L DBE-9999-011 sunhaidi
  */
-public class ShinseitodokedeJoho extends ModelBase<ShinseitodokedeJohoIdentifier, DbT5120ShinseitodokedeJohoEntity, ShinseitodokedeJoho> implements Serializable {
+public class ShinseitodokedeJoho
+        extends ModelBase<ShinseitodokedeJohoIdentifier, DbT5120ShinseitodokedeJohoEntity, ShinseitodokedeJoho>
+        implements Serializable {
 
     private final DbT5120ShinseitodokedeJohoEntity entity;
     private final ShinseitodokedeJohoIdentifier id;
@@ -177,8 +181,7 @@ public class ShinseitodokedeJoho extends ModelBase<ShinseitodokedeJohoIdentifier
     }
 
     /**
-     * 申請届出情報のみを変更対象とします。<br/>
-     * {@link DbT5120ShinseitodokedeJohoEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば変更状態にします。
+     * 申請届出情報のみを変更対象とします。<br/> {@link DbT5120ShinseitodokedeJohoEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば変更状態にします。
      *
      * @return 変更対象処理実施後の{@link ShinseitodokedeJoho}
      */
@@ -192,8 +195,7 @@ public class ShinseitodokedeJoho extends ModelBase<ShinseitodokedeJohoIdentifier
     }
 
     /**
-     * 保持する申請届出情報を削除対象とします。<br/>
-     * {@link DbT5120ShinseitodokedeJohoEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば削除状態にします。
+     * 保持する申請届出情報を削除対象とします。<br/> {@link DbT5120ShinseitodokedeJohoEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば削除状態にします。
      *
      * @return 削除対象処理実施後の{@link ShinseitodokedeJoho}
      */

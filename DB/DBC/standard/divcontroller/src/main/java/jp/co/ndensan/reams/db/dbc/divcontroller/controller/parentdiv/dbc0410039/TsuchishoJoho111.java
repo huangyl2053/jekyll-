@@ -21,25 +21,30 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPair;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
 
 /**
- * 国保連情報受取データ取込_[111]給付実績情報のクラスです
+ * 国保連情報受取データ取込_[111]給付実績情報のクラスです。
+ *
+ * @reamsid_L DBC-0980-280 wangkanglei
  */
 public class TsuchishoJoho111 {
 
+    private static final RString 帳票ID = new RString("DBC200007_KyufujissekiTorikomiIchiran");
+    private static final RString 対象ファイル = new RString("11100000.CSVと01110000.CSV");
+
     /**
-     * 画面初期化
+     * 画面初期化のメソッドます。
      *
      * @param div TsuchishoJoho111Div
      * @return ResponseData
      */
     public ResponseData<TsuchishoJoho111Div> onLoad(TsuchishoJoho111Div div) {
         ChohyoBunruiKanri code = ChohyoBunruiKanriManager.createInstance().get帳票分類管理(SubGyomuCode.DBC介護給付,
-                new ReportId(new RString("DBC200007_KyufujissekiTorikomiIchiran")));
+                new ReportId(帳票ID));
         div.getCcdKokurenJohoTorikomi().onLoadModeKakuninMsgJoken3(SubGyomuCode.DBC介護給付, code.get帳票分類ID());
         return ResponseData.of(div).respond();
     }
 
     /**
-     * 「実行する」ボタン事件
+     * 「実行する」ボタン事件のメソッドます。
      *
      * @param div TsuchishoJoho111Div
      * @return ResponseData
@@ -50,7 +55,7 @@ public class TsuchishoJoho111 {
     }
 
     /**
-     * csv対象存在チェック
+     * csv対象存在チェックのメソッドます。
      *
      * @param div TsuchishoJoho111Div
      * @return ResponseData
@@ -60,7 +65,7 @@ public class TsuchishoJoho111 {
         if (処理対象情報 == null || 処理対象情報.isEmpty()) {
             ValidationMessageControlPairs pairs = new ValidationMessageControlPairs();
             pairs.add(new ValidationMessageControlPair(new IdocheckMessages(
-                    UrErrorMessages.対象ファイルが存在しない, "11100000.CSVと01110000.CSV")));
+                    UrErrorMessages.対象ファイルが存在しない, 対象ファイル.toString())));
             return ResponseData.of(div).addValidationMessages(pairs).respond();
         }
         return ResponseData.of(div).respond();

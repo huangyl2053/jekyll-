@@ -24,6 +24,7 @@ import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 /**
  * 資格異動チェック処理クラスです。
  *
+ * @reamsid_L DBU-0110-010 xuyannan
  */
 public class SikakuIdoCheckManager {
 

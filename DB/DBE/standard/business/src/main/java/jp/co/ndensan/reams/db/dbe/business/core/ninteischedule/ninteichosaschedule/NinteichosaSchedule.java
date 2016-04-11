@@ -35,6 +35,8 @@ import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 
 /**
  * 認定調査スケジュール情報を管理するクラスです。
+ *
+ * @reamsid_L DBE-9999-011 sunhaidi
  */
 public class NinteichosaSchedule
         extends ParentModelBase<NinteichosaScheduleIdentifier, DbT5221NinteichosaScheduleEntity, NinteichosaSchedule>
