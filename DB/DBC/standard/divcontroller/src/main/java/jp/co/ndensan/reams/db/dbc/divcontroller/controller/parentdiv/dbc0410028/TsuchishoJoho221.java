@@ -17,6 +17,8 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
  * 国保連情報受取データ取込_[221]償還払支給決定者一覧情報
+ *
+ * @reamsid_L DBC-0980-190 xuhao
  */
 public class TsuchishoJoho221 {
 
