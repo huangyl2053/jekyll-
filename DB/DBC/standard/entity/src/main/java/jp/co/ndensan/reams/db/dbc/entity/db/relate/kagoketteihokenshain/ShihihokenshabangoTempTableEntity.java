@@ -11,6 +11,8 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
  * 新被保険者番号一時テーブルEntity
+ *
+ * @reamsid_L DBC-0980-320 xupeng
  */
 @lombok.Setter
 @lombok.Getter

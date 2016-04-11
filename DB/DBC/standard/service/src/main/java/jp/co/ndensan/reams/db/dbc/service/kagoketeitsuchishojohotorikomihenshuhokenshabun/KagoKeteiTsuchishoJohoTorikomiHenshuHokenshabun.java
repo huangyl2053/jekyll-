@@ -19,6 +19,8 @@ import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 
 /**
  * 過誤決定通知書情報取込（保険者分）データ編集
+ *
+ * @reamsid_L DBC-0980-320 xupeng
  */
 public class KagoKeteiTsuchishoJohoTorikomiHenshuHokenshabun {
 
@@ -43,8 +45,7 @@ public class KagoKeteiTsuchishoJohoTorikomiHenshuHokenshabun {
     /**
      * {@link InstanceProvider#create}にて生成した{@link KagoKeteiTsuchishoJohoTorikomiHenshuHokenshabun}のインスタンスを返します。
      *
-     * @return // *
-     * {@link InstanceProvider#create}にて生成した{@link KagoKeteiTsuchishoJohoTorikomiHenshuHokenshabun}のインスタンス
+     * @return // * {@link InstanceProvider#create}にて生成した{@link KagoKeteiTsuchishoJohoTorikomiHenshuHokenshabun}のインスタンス
      */
     public static KagoKeteiTsuchishoJohoTorikomiHenshuHokenshabun createInstance() {
         return InstanceProvider.create(KagoKeteiTsuchishoJohoTorikomiHenshuHokenshabun.class);
