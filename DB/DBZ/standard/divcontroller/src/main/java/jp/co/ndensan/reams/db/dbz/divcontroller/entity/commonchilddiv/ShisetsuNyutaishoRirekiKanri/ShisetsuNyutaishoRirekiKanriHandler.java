@@ -224,7 +224,7 @@ public class ShisetsuNyutaishoRirekiKanriHandler {
             }
             row.setShisetsuCode(div.getShisetsuNyutaishoInput().getCcdShisetsuJoho().getNyuryokuShisetsuKodo());
             row.setShisetsuMeisho(div.getShisetsuNyutaishoInput().getCcdShisetsuJoho().getNyuryokuShisetsuMeisho());
-            if (RString.isNullOrEmpty(row.getState())) {
+            if (削除.equals(row.getState()) || !追加.equals(row.getState())) {
                 row.setState(更新);
                 int 履歴番号 = Integer.parseInt(row.getRirekiNo().toString());
                 ShisetsuNyutaishoIdentifier 介護保険施設入退所の識別子 = new ShisetsuNyutaishoIdentifier(識別コード, 履歴番号);
@@ -232,7 +232,7 @@ public class ShisetsuNyutaishoRirekiKanriHandler {
                 施設入退所情報Model.add(修正の処理(介護保険施設入退所の識別子, 施設入退所情報Model));
             }
         } else if (削除.equals(div.getInputMode())) {
-            if (RString.isNullOrEmpty(row.getState())) {
+            if (!追加.equals(row.getState())) {
                 row.setState(削除);
                 int 履歴番号 = Integer.parseInt(row.getRirekiNo().toString());
                 ShisetsuNyutaishoIdentifier 介護保険施設入退所の識別子 = new ShisetsuNyutaishoIdentifier(識別コード, 履歴番号);
