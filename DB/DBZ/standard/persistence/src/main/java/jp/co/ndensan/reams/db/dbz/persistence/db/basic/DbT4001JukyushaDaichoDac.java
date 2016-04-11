@@ -39,8 +39,8 @@ import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
 
 /**
  * 受給者台帳のデータアクセスクラスです。
- * 
- * @reamsid_L DBA-0540-691  suguangjun
+ *
+ * @reamsid_L DBA-0540-691 suguangjun
  */
 public class DbT4001JukyushaDaichoDac implements ISaveable<DbT4001JukyushaDaichoEntity> {
 
@@ -125,7 +125,7 @@ public class DbT4001JukyushaDaichoDac implements ISaveable<DbT4001JukyushaDaicho
      * @throws NullPointerException 引数のいずれかがnullの場合
      */
     @Transaction
-    public DbT4001JukyushaDaichoEntity select受給者台帳(HihokenshaNo 被保険者番号) throws NullPointerException {
+    public List<DbT4001JukyushaDaichoEntity> select受給者台帳(HihokenshaNo 被保険者番号) throws NullPointerException {
         requireNonNull(被保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage(メッセージ_被保険者番号.toString()));
 
         DbAccessorNormalType accessor = new DbAccessorNormalType(session);
@@ -135,8 +135,8 @@ public class DbT4001JukyushaDaichoDac implements ISaveable<DbT4001JukyushaDaicho
                 where(and(
                                 eq(hihokenshaNo, 被保険者番号),
                                 not(eq(logicalDeletedFlag, true)))).
-                order(by(rirekiNo, Order.DESC), by(edaban, Order.DESC)).limit(1).
-                toObject(DbT4001JukyushaDaichoEntity.class);
+                order(by(rirekiNo, Order.DESC), by(edaban, Order.DESC)).
+                toList(DbT4001JukyushaDaichoEntity.class);
     }
 
     /**
