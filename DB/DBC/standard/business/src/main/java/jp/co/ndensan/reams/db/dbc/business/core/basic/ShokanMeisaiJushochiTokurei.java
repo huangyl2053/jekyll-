@@ -59,7 +59,7 @@ public class ShokanMeisaiJushochiTokurei
         this.entity = new DbT3107ShokanMeisaiJushochiTokureiEntity();
         this.entity.setHiHokenshaNo(被保険者番号);
         this.entity.setServiceTeikyoYM(サービス提供年月);
-        this.entity.setSeiriNp(整理番号);
+        this.entity.setSeiriNo(整理番号);
         this.entity.setJigyoshaNo(事業者番号);
         this.entity.setYoshikiNo(様式番号);
         this.entity.setMeisaiNo(明細番号);
@@ -86,7 +86,7 @@ public class ShokanMeisaiJushochiTokurei
         this.id = new ShokanMeisaiJushochiTokureiIdentifier(
                 entity.getHiHokenshaNo(),
                 entity.getServiceTeikyoYM(),
-                entity.getSeiriNp(),
+                entity.getSeiriNo(),
                 entity.getJigyoshaNo(),
                 entity.getYoshikiNo(),
                 entity.getMeisaiNo(),
@@ -133,7 +133,7 @@ public class ShokanMeisaiJushochiTokurei
      * @return 整理番号
      */
     public RString get整理番号() {
-        return entity.getSeiriNp();
+        return entity.getSeiriNo();
     }
 
     /**

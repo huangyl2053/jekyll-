@@ -331,7 +331,7 @@ public class SyokanbaraiShikyuKetteKyufuJssekiHensyuManager {
                 dbT3018entity.setAtoNissuKaisu(償還払請求明細.getNissuKaisu());
                 dbT3018entity.setAtoServiceTanisu(new Decimal(償還払請求明細.getServiceTanisu()));
                 dbT3018entity.setShinsaYM(entity.get審査年月().getYearMonth());
-                dbT3018entity.setSeiriNo(償還払請求明細.getSeiriNp());
+                dbT3018entity.setSeiriNo(償還払請求明細.getSeiriNo());
                 dbT3018entity.setState(EntityDataState.Added);
                 給付実績明細Dac.save(dbT3018entity);
             }
@@ -371,7 +371,7 @@ public class SyokanbaraiShikyuKetteKyufuJssekiHensyuManager {
                 dbT3106entity.setAtoNissuKaisu(new Decimal(住所地特例.getNissuKaisu()));
                 dbT3106entity.setAtoServiceTanisu(住所地特例.getServiceTanisu());
                 dbT3106entity.setShinsaYM(entity.get審査年月().getYearMonth());
-                dbT3106entity.setSeiriNo(住所地特例.getSeiriNp());
+                dbT3106entity.setSeiriNo(住所地特例.getSeiriNo());
                 dbT3106entity.setState(EntityDataState.Added);
                 住所地特例Dac.save(dbT3106entity);
             }
@@ -610,7 +610,7 @@ public class SyokanbaraiShikyuKetteKyufuJssekiHensyuManager {
                 dbT3022entity.setAtoSyokujiTeikyohiSeikyugaku(
                         償還払請求食事費用.getShokujiTeikyohiSeikyugaku());
                 dbT3022entity.setShinsaYM(entity.get審査年月().getYearMonth());
-                dbT3022entity.setSeiriNo(償還払請求食事費用.getSeiriNp());
+                dbT3022entity.setSeiriNo(償還払請求食事費用.getSeiriNo());
                 dbT3022entity.setState(EntityDataState.Added);
                 給付実績食事費用Dac.save(dbT3022entity);
             }

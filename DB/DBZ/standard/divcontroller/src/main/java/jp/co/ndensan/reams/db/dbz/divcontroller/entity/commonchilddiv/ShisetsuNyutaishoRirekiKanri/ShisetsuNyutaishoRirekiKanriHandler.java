@@ -120,11 +120,11 @@ public class ShisetsuNyutaishoRirekiKanriHandler {
         div.getShisetsuNyutaishoInput().getCcdShisetsuJoho().setDisabled(false);
         div.getShisetsuNyutaishoInput().getTxtNyushoDate().setValue(row.getNyushoDate().getValue());
         div.getShisetsuNyutaishoInput().getTxtTaishoDate().setValue(row.getTaishoDate().getValue());
-        if (台帳種別表示機能.equals(new RString(div.getMode_利用().toString()))) {
-            div.getShisetsuNyutaishoInput().getCcdShisetsuJoho().set台帳種別(row.getDaichoShubetsuKey());
-        }
         if (!適用除外者対象機能.equals(new RString(div.getMode_利用().toString()))) {
             div.getShisetsuNyutaishoInput().getCcdShisetsuJoho().set施設種類(row.getShisetsuShuruiKey());
+        }
+        if (台帳種別表示機能.equals(new RString(div.getMode_利用().toString()))) {
+            div.getShisetsuNyutaishoInput().getCcdShisetsuJoho().set台帳種別(row.getDaichoShubetsuKey());
         }
         div.getShisetsuNyutaishoInput().getCcdShisetsuJoho().setNyuryokuShisetsuKodo(row.getShisetsuCode());
         div.getShisetsuNyutaishoInput().getCcdShisetsuJoho().setShisetsuMeisho(row.getShisetsu());
@@ -144,11 +144,11 @@ public class ShisetsuNyutaishoRirekiKanriHandler {
         div.getShisetsuNyutaishoInput().getCcdShisetsuJoho().setDisabled(true);
         div.getShisetsuNyutaishoInput().getTxtNyushoDate().setValue(row.getNyushoDate().getValue());
         div.getShisetsuNyutaishoInput().getTxtTaishoDate().setValue(row.getTaishoDate().getValue());
-        if (台帳種別表示機能.equals(new RString(div.getMode_利用().toString()))) {
-            div.getShisetsuNyutaishoInput().getCcdShisetsuJoho().set台帳種別(row.getDaichoShubetsuKey());
-        }
         if (!適用除外者対象機能.equals(new RString(div.getMode_利用().toString()))) {
             div.getShisetsuNyutaishoInput().getCcdShisetsuJoho().set施設種類(row.getShisetsuShuruiKey());
+        }
+        if (台帳種別表示機能.equals(new RString(div.getMode_利用().toString()))) {
+            div.getShisetsuNyutaishoInput().getCcdShisetsuJoho().set台帳種別(row.getDaichoShubetsuKey());
         }
         div.getShisetsuNyutaishoInput().getCcdShisetsuJoho().setNyuryokuShisetsuKodo(row.getShisetsuCode());
         div.getShisetsuNyutaishoInput().getCcdShisetsuJoho().setShisetsuMeisho(row.getShisetsu());
@@ -194,13 +194,14 @@ public class ShisetsuNyutaishoRirekiKanriHandler {
             newRow.getNyushoDate().setValue(div.getShisetsuNyutaishoInput().getTxtNyushoDate().getValue());
             newRow.getTaishoDate().setValue(div.getShisetsuNyutaishoInput().getTxtTaishoDate().getValue());
             newRow.setShisetsu(div.getShisetsuNyutaishoInput().getCcdShisetsuJoho().getNyuryokuShisetsuMeisho());
-            if (台帳種別表示機能.equals(new RString(div.getMode_利用().toString()))) {
-                newRow.setDaichoShubetsu(get台帳種別(div.getShisetsuNyutaishoInput().getCcdShisetsuJoho().getDaichoShubetsu()));
-                newRow.setDaichoShubetsuKey(div.getShisetsuNyutaishoInput().getCcdShisetsuJoho().getDaichoShubetsu());
-            }
             if (!適用除外者対象機能.equals(new RString(div.getMode_利用().toString()))) {
                 newRow.setShisetsuShurui(get施設種類(div.getShisetsuNyutaishoInput().getCcdShisetsuJoho().get施設種類()));
                 newRow.setShisetsuShuruiKey(div.getShisetsuNyutaishoInput().getCcdShisetsuJoho().get施設種類());
+            }
+            if (台帳種別表示機能.equals(new RString(div.getMode_利用().toString()))) {
+                newRow.setDaichoShubetsu(get台帳種別(div.getShisetsuNyutaishoInput().getCcdShisetsuJoho().getDaichoShubetsu()));
+                newRow.setDaichoShubetsuKey(div.getShisetsuNyutaishoInput().getCcdShisetsuJoho().getDaichoShubetsu());
+                施設種類(newRow.getDaichoShubetsuKey(), newRow);
             }
             newRow.setShisetsuCode(div.getShisetsuNyutaishoInput().getCcdShisetsuJoho().getNyuryokuShisetsuKodo());
             newRow.setShisetsuMeisho(div.getShisetsuNyutaishoInput().getCcdShisetsuJoho().getNyuryokuShisetsuMeisho());
@@ -212,13 +213,14 @@ public class ShisetsuNyutaishoRirekiKanriHandler {
             row.getNyushoDate().setValue(div.getShisetsuNyutaishoInput().getTxtNyushoDate().getValue());
             row.getTaishoDate().setValue(div.getShisetsuNyutaishoInput().getTxtTaishoDate().getValue());
             row.setShisetsu(div.getShisetsuNyutaishoInput().getCcdShisetsuJoho().getNyuryokuShisetsuMeisho());
-            if (台帳種別表示機能.equals(new RString(div.getMode_利用().toString()))) {
-                row.setDaichoShubetsu(get台帳種別(div.getShisetsuNyutaishoInput().getCcdShisetsuJoho().getDaichoShubetsu()));
-                row.setDaichoShubetsuKey(div.getShisetsuNyutaishoInput().getCcdShisetsuJoho().getDaichoShubetsu());
-            }
             if (!適用除外者対象機能.equals(new RString(div.getMode_利用().toString()))) {
                 row.setShisetsuShurui(get施設種類(div.getShisetsuNyutaishoInput().getCcdShisetsuJoho().get施設種類()));
                 row.setShisetsuShuruiKey(div.getShisetsuNyutaishoInput().getCcdShisetsuJoho().get施設種類());
+            }
+            if (台帳種別表示機能.equals(new RString(div.getMode_利用().toString()))) {
+                row.setDaichoShubetsu(get台帳種別(div.getShisetsuNyutaishoInput().getCcdShisetsuJoho().getDaichoShubetsu()));
+                row.setDaichoShubetsuKey(div.getShisetsuNyutaishoInput().getCcdShisetsuJoho().getDaichoShubetsu());
+                施設種類(newRow.getDaichoShubetsuKey(), newRow);
             }
             row.setShisetsuCode(div.getShisetsuNyutaishoInput().getCcdShisetsuJoho().getNyuryokuShisetsuKodo());
             row.setShisetsuMeisho(div.getShisetsuNyutaishoInput().getCcdShisetsuJoho().getNyuryokuShisetsuMeisho());
@@ -288,6 +290,7 @@ public class ShisetsuNyutaishoRirekiKanriHandler {
             row.setDaichoShubetsuKey(施設入退所.get台帳種別());
             row.setShisetsuShuruiKey(施設入退所.get入所施設種類());
             row.setRirekiNo(new RString(施設入退所.get履歴番号().toString()));
+            施設種類(施設入退所.get台帳種別(), row);
             rowList.add(row);
 
         }
@@ -467,6 +470,12 @@ public class ShisetsuNyutaishoRirekiKanriHandler {
         div.getShisetsuNyutaishoInput().getBtnShisetsuNyutaishoKakutei().setDisabled(false);
         div.getShisetsuNyutaishoInput().getBtnShisetsuNyutaishoTorikeshi().setDisabled(false);
         div.getShisetsuNyutaishoInput().getCcdShisetsuJoho().clear();
+    }
+
+    private void 施設種類(RString 台帳種別, dgShisetsuNyutaishoRireki_Row row) {
+        if (DaichoType.適用除外者.getコード().equals(台帳種別)) {
+            row.setShisetsuShurui(RString.EMPTY);
+        }
     }
 
     private static class RirekiNoDateComparator implements Comparator<dgShisetsuNyutaishoRireki_Row>, Serializable {

@@ -4,17 +4,19 @@ package jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0410035;
  * このファイルへの変更は、再生成時には損失するため
  * 不正な動作の原因になります。
  */
+
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.commonchilddiv.KaigoKyufuKokuhorenJohoTorikomi.IKaigoKyufuKokuhorenJohoTorikomiDiv;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.commonchilddiv.KaigoKyufuKokuhorenJohoTorikomi.KaigoKyufuKokuhorenJohoTorikomiDiv;
 import jp.co.ndensan.reams.uz.uza.ui.binding.PanelBatchParameter;
 
 /**
- * TsuchishoJoho38B38G のクラスファイル 
- * 
- * @author 自動生成
+ * TsuchishoJoho38B38G のクラスファイル
+ *
+ * TsuchishoJoho38B38GDiv.java
  */
 public class TsuchishoJoho38B38GDiv extends PanelBatchParameter {
+
     // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-01-15_09-59-03">
     /*
      * [ private の作成 ]

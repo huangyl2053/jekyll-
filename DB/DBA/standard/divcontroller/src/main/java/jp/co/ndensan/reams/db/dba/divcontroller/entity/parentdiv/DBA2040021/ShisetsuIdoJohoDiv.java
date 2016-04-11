@@ -25,7 +25,7 @@ public class ShisetsuIdoJohoDiv extends Panel {
      * private + コントロール名 + フィールド名 の文字列を作成
      */
     @JsonProperty("ccdShisetsuNyutaishoRirekiKanri")
-    private ShisetsuNyutaishoRirekiKanriDiv ccdShisetsuNyutaishoRirekiKanri;
+    private ShisetsuNyutaishoRirekiKanriDiv ccdShisetsuNyutaishoRireki;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -39,7 +39,7 @@ public class ShisetsuIdoJohoDiv extends Panel {
      */
     @JsonProperty("ccdShisetsuNyutaishoRirekiKanri")
     public IShisetsuNyutaishoRirekiKanriDiv getCcdShisetsuNyutaishoRirekiKanri() {
-        return ccdShisetsuNyutaishoRirekiKanri;
+        return ccdShisetsuNyutaishoRireki;
     }
 
     // </editor-fold>

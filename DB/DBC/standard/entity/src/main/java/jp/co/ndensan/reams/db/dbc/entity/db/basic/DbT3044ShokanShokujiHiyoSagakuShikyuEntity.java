@@ -19,6 +19,7 @@ import jp.co.ndensan.reams.uz.uza.util.db.TableName;
  */
 public class DbT3044ShokanShokujiHiyoSagakuShikyuEntity extends DbTableEntityBase<DbT3044ShokanShokujiHiyoSagakuShikyuEntity> implements IDbAccessable {
 // <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.4.2">
+
     @TableName
     public static final RString TABLE_NAME = new RString("DbT3044ShokanShokujiHiyoSagakuShikyu");
 
@@ -35,7 +36,7 @@ public class DbT3044ShokanShokujiHiyoSagakuShikyuEntity extends DbTableEntityBas
     @PrimaryKey
     private FlexibleYearMonth serviceTeikyoYM;
     @PrimaryKey
-    private RString seiriNp;
+    private RString seiriNo;
     @PrimaryKey
     private JigyoshaNo jigyoshaNo;
     @PrimaryKey
@@ -52,7 +53,7 @@ public class DbT3044ShokanShokujiHiyoSagakuShikyuEntity extends DbTableEntityBas
 
     /**
      * insertDantaiCdのgetメソッドです。
-     * 
+     *
      * @return insertDantaiCd
      */
     public RString getInsertDantaiCd() {
@@ -61,7 +62,7 @@ public class DbT3044ShokanShokujiHiyoSagakuShikyuEntity extends DbTableEntityBas
 
     /**
      * insertDantaiCdのsetメソッドです。
-     * 
+     *
      * @param insertDantaiCd insertDantaiCd
      */
     public void setInsertDantaiCd(RString insertDantaiCd) {
@@ -70,7 +71,7 @@ public class DbT3044ShokanShokujiHiyoSagakuShikyuEntity extends DbTableEntityBas
 
     /**
      * isDeletedのgetメソッドです。
-     * 
+     *
      * @return isDeleted
      */
     public boolean getIsDeleted() {
@@ -79,17 +80,16 @@ public class DbT3044ShokanShokujiHiyoSagakuShikyuEntity extends DbTableEntityBas
 
     /**
      * isDeletedのsetメソッドです。
-     * 
+     *
      * @param isDeleted isDeleted
      */
     public void setIsDeleted(boolean isDeleted) {
         this.isDeleted = isDeleted;
     }
 
-
     /**
      * lastUpdateReamsLoginIdのsetメソッドです。
-     * 
+     *
      * @param lastUpdateReamsLoginId lastUpdateReamsLoginId
      */
     public void setLastUpdateReamsLoginId(RString lastUpdateReamsLoginId) {
@@ -98,7 +98,7 @@ public class DbT3044ShokanShokujiHiyoSagakuShikyuEntity extends DbTableEntityBas
 
     /**
      * 被保険者番号のgetメソッドです。
-     * 
+     *
      * @return 被保険者番号
      */
     public HihokenshaNo getHiHokenshaNo() {
@@ -107,7 +107,7 @@ public class DbT3044ShokanShokujiHiyoSagakuShikyuEntity extends DbTableEntityBas
 
     /**
      * 被保険者番号のsetメソッドです。
-     * 
+     *
      * @param hiHokenshaNo 被保険者番号
      */
     public void setHiHokenshaNo(@Nonnull HihokenshaNo hiHokenshaNo) {
@@ -116,7 +116,7 @@ public class DbT3044ShokanShokujiHiyoSagakuShikyuEntity extends DbTableEntityBas
 
     /**
      * サービス提供年月のgetメソッドです。
-     * 
+     *
      * @return サービス提供年月
      */
     public FlexibleYearMonth getServiceTeikyoYM() {
@@ -125,7 +125,7 @@ public class DbT3044ShokanShokujiHiyoSagakuShikyuEntity extends DbTableEntityBas
 
     /**
      * サービス提供年月のsetメソッドです。
-     * 
+     *
      * @param serviceTeikyoYM サービス提供年月
      */
     public void setServiceTeikyoYM(@Nonnull FlexibleYearMonth serviceTeikyoYM) {
@@ -134,25 +134,25 @@ public class DbT3044ShokanShokujiHiyoSagakuShikyuEntity extends DbTableEntityBas
 
     /**
      * 整理番号のgetメソッドです。
-     * 
+     *
      * @return 整理番号
      */
-    public RString getSeiriNp() {
-        return seiriNp;
+    public RString getSeiriNo() {
+        return seiriNo;
     }
 
     /**
      * 整理番号のsetメソッドです。
-     * 
-     * @param seiriNp 整理番号
+     *
+     * @param seiriNo 整理番号
      */
-    public void setSeiriNp(@Nonnull RString seiriNp) {
-        this.seiriNp = seiriNp;
+    public void setSeiriNo(@Nonnull RString seiriNo) {
+        this.seiriNo = seiriNo;
     }
 
     /**
      * 事業者番号のgetメソッドです。
-     * 
+     *
      * @return 事業者番号
      */
     public JigyoshaNo getJigyoshaNo() {
@@ -161,7 +161,7 @@ public class DbT3044ShokanShokujiHiyoSagakuShikyuEntity extends DbTableEntityBas
 
     /**
      * 事業者番号のsetメソッドです。
-     * 
+     *
      * @param jigyoshaNo 事業者番号
      */
     public void setJigyoshaNo(@Nonnull JigyoshaNo jigyoshaNo) {
@@ -170,7 +170,7 @@ public class DbT3044ShokanShokujiHiyoSagakuShikyuEntity extends DbTableEntityBas
 
     /**
      * 様式番号のgetメソッドです。
-     * 
+     *
      * @return 様式番号
      */
     public RString getYoshikiNo() {
@@ -179,7 +179,7 @@ public class DbT3044ShokanShokujiHiyoSagakuShikyuEntity extends DbTableEntityBas
 
     /**
      * 様式番号のsetメソッドです。
-     * 
+     *
      * @param yoshikiNo 様式番号
      */
     public void setYoshikiNo(@Nonnull RString yoshikiNo) {
@@ -188,7 +188,7 @@ public class DbT3044ShokanShokujiHiyoSagakuShikyuEntity extends DbTableEntityBas
 
     /**
      * 明細番号のgetメソッドです。
-     * 
+     *
      * @return 明細番号
      */
     public RString getMeisaiNo() {
@@ -197,7 +197,7 @@ public class DbT3044ShokanShokujiHiyoSagakuShikyuEntity extends DbTableEntityBas
 
     /**
      * 明細番号のsetメソッドです。
-     * 
+     *
      * @param meisaiNo 明細番号
      */
     public void setMeisaiNo(@Nonnull RString meisaiNo) {
@@ -206,7 +206,7 @@ public class DbT3044ShokanShokujiHiyoSagakuShikyuEntity extends DbTableEntityBas
 
     /**
      * 連番のgetメソッドです。
-     * 
+     *
      * @return 連番
      */
     public RString getRenban() {
@@ -215,7 +215,7 @@ public class DbT3044ShokanShokujiHiyoSagakuShikyuEntity extends DbTableEntityBas
 
     /**
      * 連番のsetメソッドです。
-     * 
+     *
      * @param renban 連番
      */
     public void setRenban(@Nonnull RString renban) {
@@ -224,7 +224,7 @@ public class DbT3044ShokanShokujiHiyoSagakuShikyuEntity extends DbTableEntityBas
 
     /**
      * 差額金額のgetメソッドです。
-     * 
+     *
      * @return 差額金額
      */
     @CheckForNull
@@ -234,7 +234,7 @@ public class DbT3044ShokanShokujiHiyoSagakuShikyuEntity extends DbTableEntityBas
 
     /**
      * 差額金額のsetメソッドです。
-     * 
+     *
      * @param sagakuKingaku 差額金額
      */
     public void setSagakuKingaku(int sagakuKingaku) {
@@ -243,7 +243,7 @@ public class DbT3044ShokanShokujiHiyoSagakuShikyuEntity extends DbTableEntityBas
 
     /**
      * 支給区分コードのgetメソッドです。
-     * 
+     *
      * @return 支給区分コード
      */
     @CheckForNull
@@ -253,7 +253,7 @@ public class DbT3044ShokanShokujiHiyoSagakuShikyuEntity extends DbTableEntityBas
 
     /**
      * 支給区分コードのsetメソッドです。
-     * 
+     *
      * @param shikyuKubunCode 支給区分コード
      */
     public void setShikyuKubunCode(RString shikyuKubunCode) {
@@ -262,7 +262,7 @@ public class DbT3044ShokanShokujiHiyoSagakuShikyuEntity extends DbTableEntityBas
 
     /**
      * 点数／金額のgetメソッドです。
-     * 
+     *
      * @return 点数／金額
      */
     @CheckForNull
@@ -272,7 +272,7 @@ public class DbT3044ShokanShokujiHiyoSagakuShikyuEntity extends DbTableEntityBas
 
     /**
      * 点数／金額のsetメソッドです。
-     * 
+     *
      * @param tensuKingaku 点数／金額
      */
     public void setTensuKingaku(int tensuKingaku) {
@@ -281,7 +281,7 @@ public class DbT3044ShokanShokujiHiyoSagakuShikyuEntity extends DbTableEntityBas
 
     /**
      * 支給金額のgetメソッドです。
-     * 
+     *
      * @return 支給金額
      */
     @CheckForNull
@@ -291,7 +291,7 @@ public class DbT3044ShokanShokujiHiyoSagakuShikyuEntity extends DbTableEntityBas
 
     /**
      * 支給金額のsetメソッドです。
-     * 
+     *
      * @param shikyuKingaku 支給金額
      */
     public void setShikyuKingaku(int shikyuKingaku) {
@@ -300,7 +300,7 @@ public class DbT3044ShokanShokujiHiyoSagakuShikyuEntity extends DbTableEntityBas
 
     /**
      * 支給・不支給理由のgetメソッドです。
-     * 
+     *
      * @return 支給・不支給理由
      */
     @CheckForNull
@@ -310,7 +310,7 @@ public class DbT3044ShokanShokujiHiyoSagakuShikyuEntity extends DbTableEntityBas
 
     /**
      * 支給・不支給理由のsetメソッドです。
-     * 
+     *
      * @param shikyuFushikyuRiyu 支給・不支給理由
      */
     public void setShikyuFushikyuRiyu(RString shikyuFushikyuRiyu) {
@@ -319,10 +319,9 @@ public class DbT3044ShokanShokujiHiyoSagakuShikyuEntity extends DbTableEntityBas
 
     /**
      * このエンティティの主キーが他の{@literal DbT3044ShokanShokujiHiyoSagakuShikyuEntity}と等しいか判定します。
-     * 
+     *
      * @param other 比較するエンティティ
-     * @return 
-     * 比較するエンティティが同じ主キーを持つ{@literal DbT3044ShokanShokujiHiyoSagakuShikyuEntity}の場合{@literal true}、それ以外の場合は{@literal false}
+     * @return 比較するエンティティが同じ主キーを持つ{@literal DbT3044ShokanShokujiHiyoSagakuShikyuEntity}の場合{@literal true}、それ以外の場合は{@literal false}
      */
     @Override
     public boolean equalsPrimaryKeys(DbT3044ShokanShokujiHiyoSagakuShikyuEntity other) {
@@ -335,7 +334,7 @@ public class DbT3044ShokanShokujiHiyoSagakuShikyuEntity extends DbTableEntityBas
         if (!Objects.equals(this.serviceTeikyoYM, other.serviceTeikyoYM)) {
             return false;
         }
-        if (!Objects.equals(this.seiriNp, other.seiriNp)) {
+        if (!Objects.equals(this.seiriNo, other.seiriNo)) {
             return false;
         }
         if (!Objects.equals(this.jigyoshaNo, other.jigyoshaNo)) {
@@ -360,7 +359,7 @@ public class DbT3044ShokanShokujiHiyoSagakuShikyuEntity extends DbTableEntityBas
     public void shallowCopy(DbT3044ShokanShokujiHiyoSagakuShikyuEntity entity) {
         this.hiHokenshaNo = entity.hiHokenshaNo;
         this.serviceTeikyoYM = entity.serviceTeikyoYM;
-        this.seiriNp = entity.seiriNp;
+        this.seiriNo = entity.seiriNo;
         this.jigyoshaNo = entity.jigyoshaNo;
         this.yoshikiNo = entity.yoshikiNo;
         this.meisaiNo = entity.meisaiNo;
@@ -374,13 +373,13 @@ public class DbT3044ShokanShokujiHiyoSagakuShikyuEntity extends DbTableEntityBas
 
     /**
      * {@inheritDoc}
+     *
      * @return {@inheritDoc}
      */
     @Override
     public RString getMd5() {
-        return super.toMd5(hiHokenshaNo, serviceTeikyoYM, seiriNp, jigyoshaNo, yoshikiNo, meisaiNo, renban, sagakuKingaku, shikyuKubunCode, tensuKingaku, shikyuKingaku, shikyuFushikyuRiyu);
+        return super.toMd5(hiHokenshaNo, serviceTeikyoYM, seiriNo, jigyoshaNo, yoshikiNo, meisaiNo, renban, sagakuKingaku, shikyuKubunCode, tensuKingaku, shikyuKingaku, shikyuFushikyuRiyu);
     }
 
 // </editor-fold>
-
 }

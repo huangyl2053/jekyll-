@@ -321,7 +321,7 @@ public class DbT3039ShokanMeisaiDacTest extends DbcTestDacBase {
             DbT3039ShokanMeisaiEntity entity = DbT3039ShokanMeisaiEntityGenerator.createDbT3039ShokanMeisaiEntity();
             entity.setHiHokenshaNo(被保険者番号);
             entity.setServiceTeikyoYM(サービス提供年月);
-            entity.setSeiriNp(整理番号);
+            entity.setSeiriNo(整理番号);
             entity.setJigyoshaNo(事業者番号);
             entity.setYoshikiNo(様式番号);
             entity.setMeisaiNo(明細番号);

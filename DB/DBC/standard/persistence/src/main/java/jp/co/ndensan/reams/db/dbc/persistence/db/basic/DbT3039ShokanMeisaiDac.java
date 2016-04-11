@@ -11,7 +11,7 @@ import static jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3039ShokanMeisai.hiH
 import static jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3039ShokanMeisai.jigyoshaNo;
 import static jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3039ShokanMeisai.meisaiNo;
 import static jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3039ShokanMeisai.renban;
-import static jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3039ShokanMeisai.seiriNp;
+import static jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3039ShokanMeisai.seiriNo;
 import static jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3039ShokanMeisai.serviceShuruiCode;
 import static jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3039ShokanMeisai.serviceTeikyoYM;
 import static jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3039ShokanMeisai.yoshikiNo;
@@ -89,7 +89,7 @@ public class DbT3039ShokanMeisaiDac implements ISaveable<DbT3039ShokanMeisaiEnti
                 where(and(
                                 eq(hiHokenshaNo, 被保険者番号),
                                 eq(serviceTeikyoYM, サービス提供年月),
-                                eq(seiriNp, 整理番号),
+                                eq(seiriNo, 整理番号),
                                 eq(jigyoshaNo, 事業者番号),
                                 eq(yoshikiNo, 様式番号),
                                 eq(meisaiNo, 明細番号),
@@ -175,7 +175,7 @@ public class DbT3039ShokanMeisaiDac implements ISaveable<DbT3039ShokanMeisaiEnti
                 where(and(
                                 eq(hiHokenshaNo, 被保険者番号),
                                 eq(serviceTeikyoYM, サービス提供年月),
-                                eq(seiriNp, 整理番号),
+                                eq(seiriNo, 整理番号),
                                 eq(jigyoshaNo, 事業者番号),
                                 eq(yoshikiNo, 様式番号),
                                 eq(meisaiNo, 明細番号),
@@ -219,7 +219,7 @@ public class DbT3039ShokanMeisaiDac implements ISaveable<DbT3039ShokanMeisaiEnti
                 where(and(
                                 eq(hiHokenshaNo, 被保険者番号),
                                 eq(serviceTeikyoYM, サービス提供年月),
-                                eq(seiriNp, 整理番号),
+                                eq(seiriNo, 整理番号),
                                 eq(jigyoshaNo, 事業者番号),
                                 eq(yoshikiNo, 様式番号),
                                 eq(meisaiNo, 明細番号),
@@ -262,7 +262,7 @@ public class DbT3039ShokanMeisaiDac implements ISaveable<DbT3039ShokanMeisaiEnti
                 where(and(
                                 eq(hiHokenshaNo, 被保険者番号),
                                 eq(serviceTeikyoYM, サービス提供年月),
-                                eq(seiriNp, 整理番号),
+                                eq(seiriNo, 整理番号),
                                 eq(jigyoshaNo, 事業者番号),
                                 eq(yoshikiNo, 様式番号),
                                 eq(meisaiNo, 明細番号),
@@ -310,12 +310,12 @@ public class DbT3039ShokanMeisaiDac implements ISaveable<DbT3039ShokanMeisaiEnti
             iTrueFalseCriteria = and(
                     eq(hiHokenshaNo, 被保険者番号),
                     eq(serviceTeikyoYM, サービス提供年月),
-                    eq(seiriNp, 整理番号));
+                    eq(seiriNo, 整理番号));
         } else {
             iTrueFalseCriteria = and(
                     eq(hiHokenshaNo, 被保険者番号),
                     eq(serviceTeikyoYM, サービス提供年月),
-                    eq(seiriNp, 整理番号),
+                    eq(seiriNo, 整理番号),
                     eq(jigyoshaNo, 事業者番号),
                     eq(yoshikiNo, 様式番号),
                     eq(meisaiNo, 明細番号));

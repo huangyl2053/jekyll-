@@ -10,7 +10,6 @@ import jp.co.ndensan.reams.uz.uza.biz.AtenaBanchi;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaJusho;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaMeisho;
 import jp.co.ndensan.reams.uz.uza.biz.BanchiCode;
-import jp.co.ndensan.reams.uz.uza.biz.ChoikiCode;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
@@ -65,7 +64,7 @@ public class TennyuHoryuTokuteiJushoIchiranModel {
      *
      * @return 住所コード
      */
-    public ChoikiCode get住所コード() {
+    public RString get住所コード() {
         return entity.getJushoCode();
     }
 

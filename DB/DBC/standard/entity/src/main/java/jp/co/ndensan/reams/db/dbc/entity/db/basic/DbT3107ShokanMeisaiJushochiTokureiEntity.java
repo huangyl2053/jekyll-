@@ -39,7 +39,7 @@ public class DbT3107ShokanMeisaiJushochiTokureiEntity extends DbTableEntityBase<
     @PrimaryKey
     private FlexibleYearMonth serviceTeikyoYM;
     @PrimaryKey
-    private RString seiriNp;
+    private RString seiriNo;
     @PrimaryKey
     private JigyoshaNo jigyoshaNo;
     @PrimaryKey
@@ -142,17 +142,17 @@ public class DbT3107ShokanMeisaiJushochiTokureiEntity extends DbTableEntityBase<
      *
      * @return 整理番号
      */
-    public RString getSeiriNp() {
-        return seiriNp;
+    public RString getSeiriNo() {
+        return seiriNo;
     }
 
     /**
      * 整理番号のsetメソッドです。
      *
-     * @param seiriNp 整理番号
+     * @param seiriNo 整理番号
      */
-    public void setSeiriNp(@Nonnull RString seiriNp) {
-        this.seiriNp = seiriNp;
+    public void setSeiriNo(@Nonnull RString seiriNo) {
+        this.seiriNo = seiriNo;
     }
 
     /**
@@ -378,7 +378,7 @@ public class DbT3107ShokanMeisaiJushochiTokureiEntity extends DbTableEntityBase<
         if (!Objects.equals(this.serviceTeikyoYM, other.serviceTeikyoYM)) {
             return false;
         }
-        if (!Objects.equals(this.seiriNp, other.seiriNp)) {
+        if (!Objects.equals(this.seiriNo, other.seiriNo)) {
             return false;
         }
         if (!Objects.equals(this.jigyoshaNo, other.jigyoshaNo)) {
@@ -403,7 +403,7 @@ public class DbT3107ShokanMeisaiJushochiTokureiEntity extends DbTableEntityBase<
     public void shallowCopy(DbT3107ShokanMeisaiJushochiTokureiEntity entity) {
         this.hiHokenshaNo = entity.hiHokenshaNo;
         this.serviceTeikyoYM = entity.serviceTeikyoYM;
-        this.seiriNp = entity.seiriNp;
+        this.seiriNo = entity.seiriNo;
         this.jigyoshaNo = entity.jigyoshaNo;
         this.yoshikiNo = entity.yoshikiNo;
         this.meisaiNo = entity.meisaiNo;
@@ -424,7 +424,7 @@ public class DbT3107ShokanMeisaiJushochiTokureiEntity extends DbTableEntityBase<
      */
     @Override
     public RString getMd5() {
-        return super.toMd5(hiHokenshaNo, serviceTeikyoYM, seiriNp, jigyoshaNo, yoshikiNo, meisaiNo, renban, serviceShuruiCode, serviceKomokuCode, tanisu, nissuKaisu, serviceTanisu, shisetsuShozaiHokenshaNo, tekiyo);
+        return super.toMd5(hiHokenshaNo, serviceTeikyoYM, seiriNo, jigyoshaNo, yoshikiNo, meisaiNo, renban, serviceShuruiCode, serviceKomokuCode, tanisu, nissuKaisu, serviceTanisu, shisetsuShozaiHokenshaNo, tekiyo);
     }
 
 // </editor-fold>
