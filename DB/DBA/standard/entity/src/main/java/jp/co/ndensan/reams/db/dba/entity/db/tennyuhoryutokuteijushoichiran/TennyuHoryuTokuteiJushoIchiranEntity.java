@@ -9,7 +9,6 @@ import jp.co.ndensan.reams.uz.uza.biz.AtenaBanchi;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaJusho;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaMeisho;
 import jp.co.ndensan.reams.uz.uza.biz.BanchiCode;
-import jp.co.ndensan.reams.uz.uza.biz.ChoikiCode;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
@@ -26,7 +25,7 @@ public class TennyuHoryuTokuteiJushoIchiranEntity {
     private RString kanriNo;
     private LasdecCode shichosonCode;
     private RString shichosonMeisho;
-    private ChoikiCode jushoCode;
+    private RString jushoCode;
     private AtenaJusho jusho;
     private BanchiCode banchiCode1;
     private BanchiCode banchiCode2;
