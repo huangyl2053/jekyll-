@@ -23,7 +23,9 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 
 /**
+ * CSVデータより、エンティティを作成する。
  *
+ * @reamsid_L DBB-0890-040 zhangrui
  */
 public class KagoKetteiKohifutanshaInEntityCreater {
 

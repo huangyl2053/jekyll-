@@ -23,6 +23,8 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
  * 介護給付費過誤決定通知書情報取込（公費負担者分）のバッチ処理フロー
+ *
+ * @reamsid_L DBB-0890-040 zhangrui
  */
 public class DBC120170_KagoKetteiKohifutanshaIn
         extends BatchFlowBase<DBC120170_KagoKetteiKohifutanshaInBatchParameter> {
