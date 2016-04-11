@@ -8,15 +8,23 @@ package jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0820023;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.ui.binding.*;
+import jp.co.ndensan.reams.uz.uza.ui.binding.Button;
+import jp.co.ndensan.reams.uz.uza.ui.binding.ButtonDialog;
+import jp.co.ndensan.reams.uz.uza.ui.binding.DataGrid;
+import jp.co.ndensan.reams.uz.uza.ui.binding.Label;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
+import jp.co.ndensan.reams.uz.uza.ui.binding.TextBox;
+import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxCode;
+import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxMultiLine;
+import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxNum;
 
 /**
- * TokuteiShinryohiPanel のクラスファイル 
- * 
- * @author 自動生成
+ * TokuteiShinryohiPanel のクラスファイル
+ *
+ * @reamsid_L DBC-1030-110 wangkanglei
  */
 public class TokuteiShinryohiPanelDiv extends Panel {
+
     // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-01-15_09-59-03">
     /*
      * [ private の作成 ]
@@ -220,7 +228,7 @@ public class TokuteiShinryohiPanelDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setBtnAdd(Button btnAdd) {
+    public void setBtnAdd(Button btnAdd) {
         this.getPanelThree().setBtnAdd(btnAdd);
     }
 
@@ -230,7 +238,7 @@ public class TokuteiShinryohiPanelDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setDgdTokuteiShinryohi(DataGrid<dgdTokuteiShinryohi_Row> dgdTokuteiShinryohi) {
+    public void setDgdTokuteiShinryohi(DataGrid<dgdTokuteiShinryohi_Row> dgdTokuteiShinryohi) {
         this.getPanelThree().setDgdTokuteiShinryohi(dgdTokuteiShinryohi);
     }
 
@@ -240,7 +248,7 @@ public class TokuteiShinryohiPanelDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setDdgToteishinryoTokubetushinryo(DataGrid<ddgToteishinryoTokubetushinryo_Row> ddgToteishinryoTokubetushinryo) {
+    public void setDdgToteishinryoTokubetushinryo(DataGrid<ddgToteishinryoTokubetushinryo_Row> ddgToteishinryoTokubetushinryo) {
         this.getPanelThree().setDdgToteishinryoTokubetushinryo(ddgToteishinryoTokubetushinryo);
     }
 
@@ -250,7 +258,7 @@ public class TokuteiShinryohiPanelDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setPanelFour(panelFourDiv panelFour) {
+    public void setPanelFour(panelFourDiv panelFour) {
         this.getPanelThree().setPanelFour(panelFour);
     }
 
@@ -260,7 +268,7 @@ public class TokuteiShinryohiPanelDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setTxtShobyoMei(TextBox txtShobyoMei) {
+    public void setTxtShobyoMei(TextBox txtShobyoMei) {
         this.getPanelThree().getPanelFour().setTxtShobyoMei(txtShobyoMei);
     }
 
@@ -270,7 +278,7 @@ public class TokuteiShinryohiPanelDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setTxtShidouKanri(TextBoxNum txtShidouKanri) {
+    public void setTxtShidouKanri(TextBoxNum txtShidouKanri) {
         this.getPanelThree().getPanelFour().setTxtShidouKanri(txtShidouKanri);
     }
 
@@ -280,7 +288,7 @@ public class TokuteiShinryohiPanelDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setTxtRibabiriteishon(TextBoxNum txtRibabiriteishon) {
+    public void setTxtRibabiriteishon(TextBoxNum txtRibabiriteishon) {
         this.getPanelThree().getPanelFour().setTxtRibabiriteishon(txtRibabiriteishon);
     }
 
@@ -290,7 +298,7 @@ public class TokuteiShinryohiPanelDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setTxtSeishinkaSenmon(TextBoxNum txtSeishinkaSenmon) {
+    public void setTxtSeishinkaSenmon(TextBoxNum txtSeishinkaSenmon) {
         this.getPanelThree().getPanelFour().setTxtSeishinkaSenmon(txtSeishinkaSenmon);
     }
 
@@ -300,7 +308,7 @@ public class TokuteiShinryohiPanelDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setTxtTanjyunXline(TextBoxNum txtTanjyunXline) {
+    public void setTxtTanjyunXline(TextBoxNum txtTanjyunXline) {
         this.getPanelThree().getPanelFour().setTxtTanjyunXline(txtTanjyunXline);
     }
 
@@ -310,7 +318,7 @@ public class TokuteiShinryohiPanelDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setTxtSochi(TextBoxNum txtSochi) {
+    public void setTxtSochi(TextBoxNum txtSochi) {
         this.getPanelThree().getPanelFour().setTxtSochi(txtSochi);
     }
 
@@ -320,7 +328,7 @@ public class TokuteiShinryohiPanelDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setTxtTejyutsu(TextBoxNum txtTejyutsu) {
+    public void setTxtTejyutsu(TextBoxNum txtTejyutsu) {
         this.getPanelThree().getPanelFour().setTxtTejyutsu(txtTejyutsu);
     }
 
@@ -330,7 +338,7 @@ public class TokuteiShinryohiPanelDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setBtnKeisan(Button btnKeisan) {
+    public void setBtnKeisan(Button btnKeisan) {
         this.getPanelThree().getPanelFour().setBtnKeisan(btnKeisan);
     }
 
@@ -340,7 +348,7 @@ public class TokuteiShinryohiPanelDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setTxtGoukei(TextBoxNum txtGoukei) {
+    public void setTxtGoukei(TextBoxNum txtGoukei) {
         this.getPanelThree().getPanelFour().setTxtGoukei(txtGoukei);
     }
 
@@ -350,7 +358,7 @@ public class TokuteiShinryohiPanelDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setTxtMutiTekiyo(TextBoxMultiLine txtMutiTekiyo) {
+    public void setTxtMutiTekiyo(TextBoxMultiLine txtMutiTekiyo) {
         this.getPanelThree().getPanelFour().setTxtMutiTekiyo(txtMutiTekiyo);
     }
 
@@ -360,7 +368,7 @@ public class TokuteiShinryohiPanelDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setBtnConfirm(Button btnConfirm) {
+    public void setBtnConfirm(Button btnConfirm) {
         this.getPanelThree().getPanelFour().setBtnConfirm(btnConfirm);
     }
 
@@ -370,7 +378,7 @@ public class TokuteiShinryohiPanelDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setBtnCancel(Button btnCancel) {
+    public void setBtnCancel(Button btnCancel) {
         this.getPanelThree().getPanelFour().setBtnCancel(btnCancel);
     }
 
@@ -380,7 +388,7 @@ public class TokuteiShinryohiPanelDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setBtnClear(Button btnClear) {
+    public void setBtnClear(Button btnClear) {
         this.getPanelThree().getPanelFour().setBtnClear(btnClear);
     }
 
@@ -390,7 +398,7 @@ public class TokuteiShinryohiPanelDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setPanelFive(panelFiveDiv panelFive) {
+    public void setPanelFive(panelFiveDiv panelFive) {
         this.getPanelThree().setPanelFive(panelFive);
     }
 
@@ -400,7 +408,7 @@ public class TokuteiShinryohiPanelDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setTxtShobyoMeiDown(TextBox txtShobyoMeiDown) {
+    public void setTxtShobyoMeiDown(TextBox txtShobyoMeiDown) {
         this.getPanelThree().getPanelFive().setTxtShobyoMeiDown(txtShobyoMeiDown);
     }
 
@@ -410,7 +418,7 @@ public class TokuteiShinryohiPanelDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setTxtShikibetsuCode(TextBoxCode txtShikibetsuCode) {
+    public void setTxtShikibetsuCode(TextBoxCode txtShikibetsuCode) {
         this.getPanelThree().getPanelFive().setTxtShikibetsuCode(txtShikibetsuCode);
     }
 
@@ -420,7 +428,7 @@ public class TokuteiShinryohiPanelDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setBtnJigyosha(ButtonDialog btnJigyosha) {
+    public void setBtnJigyosha(ButtonDialog btnJigyosha) {
         this.getPanelThree().getPanelFive().setBtnJigyosha(btnJigyosha);
     }
 
@@ -430,7 +438,7 @@ public class TokuteiShinryohiPanelDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setTxtName(TextBox txtName) {
+    public void setTxtName(TextBox txtName) {
         this.getPanelThree().getPanelFive().setTxtName(txtName);
     }
 
@@ -440,7 +448,7 @@ public class TokuteiShinryohiPanelDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setTxtTanyi(TextBox txtTanyi) {
+    public void setTxtTanyi(TextBox txtTanyi) {
         this.getPanelThree().getPanelFive().setTxtTanyi(txtTanyi);
     }
 
@@ -450,7 +458,7 @@ public class TokuteiShinryohiPanelDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setLblComment1(Label lblComment1) {
+    public void setLblComment1(Label lblComment1) {
         this.getPanelThree().getPanelFive().setLblComment1(lblComment1);
     }
 
@@ -460,7 +468,7 @@ public class TokuteiShinryohiPanelDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setLblComment2(Label lblComment2) {
+    public void setLblComment2(Label lblComment2) {
         this.getPanelThree().getPanelFive().setLblComment2(lblComment2);
     }
 
@@ -470,7 +478,7 @@ public class TokuteiShinryohiPanelDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setTxtKaiyisuNisu(TextBoxNum txtKaiyisuNisu) {
+    public void setTxtKaiyisuNisu(TextBoxNum txtKaiyisuNisu) {
         this.getPanelThree().getPanelFive().setTxtKaiyisuNisu(txtKaiyisuNisu);
     }
 
@@ -480,7 +488,7 @@ public class TokuteiShinryohiPanelDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setBtnCal(Button btnCal) {
+    public void setBtnCal(Button btnCal) {
         this.getPanelThree().getPanelFive().setBtnCal(btnCal);
     }
 
@@ -490,7 +498,7 @@ public class TokuteiShinryohiPanelDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setTxtGoukeiTanyi(TextBoxNum txtGoukeiTanyi) {
+    public void setTxtGoukeiTanyi(TextBoxNum txtGoukeiTanyi) {
         this.getPanelThree().getPanelFive().setTxtGoukeiTanyi(txtGoukeiTanyi);
     }
 
@@ -500,7 +508,7 @@ public class TokuteiShinryohiPanelDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setTxtTekiyoDown(TextBox txtTekiyoDown) {
+    public void setTxtTekiyoDown(TextBox txtTekiyoDown) {
         this.getPanelThree().getPanelFive().setTxtTekiyoDown(txtTekiyoDown);
     }
 
@@ -510,7 +518,7 @@ public class TokuteiShinryohiPanelDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setBtnConfirm2(Button btnConfirm2) {
+    public void setBtnConfirm2(Button btnConfirm2) {
         this.getPanelThree().getPanelFive().setBtnConfirm2(btnConfirm2);
     }
 
@@ -520,7 +528,7 @@ public class TokuteiShinryohiPanelDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setBtnCancel2(Button btnCancel2) {
+    public void setBtnCancel2(Button btnCancel2) {
         this.getPanelThree().getPanelFive().setBtnCancel2(btnCancel2);
     }
 
@@ -530,7 +538,7 @@ public class TokuteiShinryohiPanelDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setBtnClear2(Button btnClear2) {
+    public void setBtnClear2(Button btnClear2) {
         this.getPanelThree().getPanelFive().setBtnClear2(btnClear2);
     }
 

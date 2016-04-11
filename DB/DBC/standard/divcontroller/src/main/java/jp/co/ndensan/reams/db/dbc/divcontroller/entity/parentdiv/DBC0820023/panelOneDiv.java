@@ -13,7 +13,7 @@ import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.kaigoshika
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 
 /**
- * panelOne のクラスファイル
+ * @reamsid_L DBC-1030-110 wangkanglei
  *
  * @author 自動生成
  */

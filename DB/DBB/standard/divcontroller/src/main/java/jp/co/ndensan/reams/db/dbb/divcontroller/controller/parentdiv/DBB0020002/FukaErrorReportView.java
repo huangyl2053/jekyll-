@@ -45,7 +45,6 @@ public class FukaErrorReportView {
 
     private static final RString BATCHID_FUKAERROR = new RString("FukaErrorBatchId");
     private static final RString REPORTID_FUKAERROR = new RString("DBB400001_FukaErrorIchiran");
-    // TODO QA502 バッチ起動日時キーは提供しない
     private static final RString BATCHSTARTINGDATETIME = new RString("FukaErrorBatchStartingDateTime");
 
     /**

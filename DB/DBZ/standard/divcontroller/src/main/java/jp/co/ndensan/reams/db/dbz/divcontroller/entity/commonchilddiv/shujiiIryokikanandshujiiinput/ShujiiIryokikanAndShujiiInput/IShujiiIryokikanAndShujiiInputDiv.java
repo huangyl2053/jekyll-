@@ -63,4 +63,9 @@ public interface IShujiiIryokikanAndShujiiInputDiv extends ICommonChildDivBasePr
      * @return TRUE:指定医有り FALSE:指定医なし
      */
     boolean hasShiteii();
+
+    /**
+     * テキストボックスのクリア
+     */
+    void clear();
 }

@@ -451,4 +451,9 @@ public class ShujiiIryokikanAndShujiiInputDiv extends Panel implements IShujiiIr
     public boolean hasShiteii() {
         return this.getChkShiteii().getSelectedKeys().contains(new RString("key0"));
     }
+
+    @Override
+    public void clear() {
+        createHandler().clear();
+    }
 }

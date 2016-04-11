@@ -18,13 +18,12 @@ import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0820023.Toku
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0820023.ddgToteishinryoTokubetushinryo_Row;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0820023.dgdTokuteiShinryohi_Row;
 import jp.co.ndensan.reams.db.dbc.divcontroller.viewbox.ViewStateKeys;
-import jp.co.ndensan.reams.db.dbc.divcontroller.viewbox.shoukanharaihishinseikensaku.ShoukanharaihishinseimeisaikensakuParameter;
 import jp.co.ndensan.reams.db.dbc.divcontroller.viewbox.shoukanharaihishinseikensaku.ShoukanharaihishinseikensakuParameter;
+import jp.co.ndensan.reams.db.dbc.divcontroller.viewbox.shoukanharaihishinseikensaku.ShoukanharaihishinseimeisaikensakuParameter;
 import jp.co.ndensan.reams.db.dbc.service.core.shokanbaraijyokyoshokai.ShokanbaraiJyokyoShokai;
 import jp.co.ndensan.reams.db.dbc.service.core.syokanbaraihishikyushinseikette.SyokanbaraihiShikyuShinseiKetteManager;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
-import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.kyotsu.SaibanHanyokeyName;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.CodeShubetsu;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
@@ -38,12 +37,13 @@ import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.ui.binding.RowState;
 import jp.co.ndensan.reams.uz.uza.ui.binding.propertyenum.IconName;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
-import jp.co.ndensan.reams.uz.uza.util.Saiban;
 import jp.co.ndensan.reams.uz.uza.util.code.CodeMaster;
 import jp.co.ndensan.reams.uz.uza.util.code.entity.UzT0007CodeEntity;
 
 /**
  * 償還払い費支給申請決定_サービス提供証明書(特定診療費）のハンドラクラスです。
+ *
+ * @reamsid_L DBC-1030-110 wangkanglei
  */
 public class TokuteiShinryohiPanelHandler {
 
@@ -78,9 +78,13 @@ public class TokuteiShinryohiPanelHandler {
     private static final int NUMBER_５４４ = 544;
     private static final int NUMBER_５７６ = 576;
     private static final int NUMBER_６０８ = 608;
+    private static final RString STR_0001 = new RString("0001");
+    private static final RString STR_0025 = new RString("0025");
+    private static final RString STR_0026 = new RString("0026");
+    private static final RString FORMAT = new RString("%02d");
 
     /**
-     * TokuteiShinryohiPanelHandler
+     * コンストラクタです。
      *
      * @param div TokuteiShinryohiPanelDiv
      */
@@ -89,7 +93,7 @@ public class TokuteiShinryohiPanelHandler {
     }
 
     /**
-     * 申請共通エリアの設定
+     * 申請共通エリア設定のメソッドます。
      *
      * @param サービス年月 サービス年月
      * @param 事業者番号 事業者番号
@@ -111,7 +115,7 @@ public class TokuteiShinryohiPanelHandler {
     }
 
     /**
-     * ボタンを制御の設定
+     * ボタンを制御設定のメソッドます。
      *
      * @param shikibetsuNoKanri ShikibetsuNoKanri
      */
@@ -311,7 +315,7 @@ public class TokuteiShinryohiPanelHandler {
     }
 
     /**
-     * 特定診療費一覧グリッドの設定
+     * 特定診療費一覧グリッド設定のメソッドます。
      *
      * @param shokanTokuteiShinryohiList List<ShokanTokuteiShinryohi>
      */
@@ -356,7 +360,7 @@ public class TokuteiShinryohiPanelHandler {
     }
 
     /**
-     * 特定診療費登録の設定
+     * 特定診療費登録設定のメソッドます。
      *
      * @param row ddgToteishinryoTokubetushinryo_Row
      */
@@ -389,7 +393,7 @@ public class TokuteiShinryohiPanelHandler {
     }
 
     /**
-     * 計算結果
+     * 計算結果のメソッドます。
      */
     public void click計算結果() {
         Decimal data = Decimal.ZERO;
@@ -415,7 +419,7 @@ public class TokuteiShinryohiPanelHandler {
     }
 
     /**
-     * 特定診療費登録のクリアする
+     * 特定診療費登録のクリアするのメソッドます。
      */
     public void clear特定診療費登録() {
         div.getTxtShobyoMei().clearValue();
@@ -430,7 +434,7 @@ public class TokuteiShinryohiPanelHandler {
     }
 
     /**
-     * 選択行のデータ
+     * 選択行のデータのメソッドます。
      *
      * @return row ddgToteishinryoTokubetushinryo_Row
      */
@@ -440,7 +444,7 @@ public class TokuteiShinryohiPanelHandler {
     }
 
     /**
-     * 「確定する」ボタン
+     * 「確定する」ボタンのメソッドます。
      *
      * @param ddgRow ddgToteishinryoTokubetushinryo_Row
      */
@@ -542,7 +546,7 @@ public class TokuteiShinryohiPanelHandler {
     }
 
     /**
-     * 特定診療費_特別診療費一覧グリッド
+     * 特定診療費_特別診療費一覧グリッドのメソッドます。
      *
      * @param list List<ShokanTokuteiShinryoTokubetsuRyoyo>
      */
@@ -563,7 +567,7 @@ public class TokuteiShinryohiPanelHandler {
     }
 
     /**
-     * 特定診療費_特別診療費登録
+     * 特定診療費_特別診療費登録のメソッドます。
      *
      * @param row dgdTokuteiShinryohi_Row
      */
@@ -579,7 +583,7 @@ public class TokuteiShinryohiPanelHandler {
     }
 
     /**
-     * set識別項目
+     * set識別項目のメソッドます。
      *
      * @param hiddenSelectCode RString
      */
@@ -596,7 +600,7 @@ public class TokuteiShinryohiPanelHandler {
                 div.getTxtTanyi().setValue(new RString(serviceCode.toEntity().getTaniSu().toString()));
             }
             if (serviceCode.toEntity().getSanteiTani() != null) {
-                UzT0007CodeEntity code1 = CodeMaster.getCode(SubGyomuCode.DBC介護給付, new CodeShubetsu(new RString("0025")),
+                UzT0007CodeEntity code1 = CodeMaster.getCode(SubGyomuCode.DBC介護給付, new CodeShubetsu(STR_0025),
                         new Code(serviceCode.toEntity().getSanteiTani()), date);
                 RStringBuilder builder1 = new RStringBuilder();
                 builder1.append(code1.getコード名称());
@@ -607,7 +611,7 @@ public class TokuteiShinryohiPanelHandler {
                 div.getLblComment1().setText(RString.EMPTY);
             }
             if (serviceCode.toEntity().getSanteiSeiyakuKikan() != null) {
-                UzT0007CodeEntity code2 = CodeMaster.getCode(SubGyomuCode.DBC介護給付, new CodeShubetsu(new RString("0026")),
+                UzT0007CodeEntity code2 = CodeMaster.getCode(SubGyomuCode.DBC介護給付, new CodeShubetsu(STR_0026),
                         new Code(serviceCode.toEntity().getSanteiSeiyakuKikan()), date);
                 RStringBuilder builder2 = new RStringBuilder();
                 builder2.append(code2.getコード名称());
@@ -624,7 +628,7 @@ public class TokuteiShinryohiPanelHandler {
     }
 
     /**
-     * 計算結果2
+     * 計算結果2のメソッドます。
      */
     public void click計算結果2() {
         Decimal data = Decimal.ZERO;
@@ -636,14 +640,14 @@ public class TokuteiShinryohiPanelHandler {
     }
 
     /**
-     * 特定診療費_特別診療費登録
+     * 特定診療費_特別診療費登録のメソッドます。
      */
     public void clear特定診療費_特別診療費登録() {
         div.getTxtShobyoMeiDown().clearValue();
         div.getTxtShikibetsuCode().clearValue();
         div.getTxtName().clearValue();
-        div.getLblComment1().setText(new RString(""));
-        div.getLblComment2().setText(new RString(""));
+        div.getLblComment1().setText(RString.EMPTY);
+        div.getLblComment2().setText(RString.EMPTY);
         div.getTxtTanyi().clearValue();
         div.getTxtKaiyisuNisu().clearValue();
         div.getTxtGoukeiTanyi().clearValue();
@@ -651,7 +655,7 @@ public class TokuteiShinryohiPanelHandler {
     }
 
     /**
-     * 選択行のデータ２
+     * 選択行のデータ２のメソッドます。
      *
      * @return row dgdTokuteiShinryohi_Row
      */
@@ -660,7 +664,7 @@ public class TokuteiShinryohiPanelHandler {
     }
 
     /**
-     * 「確定する」ボタン
+     * 「確定する」ボタンのメソッドます。
      *
      * @param row dgdTokuteiShinryohi_Row
      */
@@ -758,7 +762,7 @@ public class TokuteiShinryohiPanelHandler {
     }
 
     /**
-     * 内容変更状態
+     * 内容変更状態のメソッドます。
      *
      * @param サービス年月 サービス年月
      * @return boolean
@@ -796,7 +800,7 @@ public class TokuteiShinryohiPanelHandler {
     }
 
     /**
-     * 保存処理
+     * 保存処理のメソッドます。
      *
      * @return RString
      */
@@ -810,7 +814,7 @@ public class TokuteiShinryohiPanelHandler {
         RString 様式番号 = meisaiPar.get様式番号();
         RString 明細番号 = meisaiPar.get明細番号();
         if (明細番号 == null || 明細番号.isEmpty()) {
-            明細番号 = new RString("0001");
+            明細番号 = STR_0001;
         }
         List<ShokanTokuteiShinryohi> entityList1 = new ArrayList<>();
         List<ShokanTokuteiShinryoTokubetsuRyoyo> entityList2 = new ArrayList<>();
@@ -821,9 +825,9 @@ public class TokuteiShinryohiPanelHandler {
                     サービス年月, 整理番号, 事業者番号, 様式番号, 明細番号);
         } else {
             if (サービス年月.isBeforeOrEquals(平成１５年３月)) {
-                entityList1 = save特定診療費(entityList1, 被保険者番号, サービス年月, 事業者番号, 様式番号, 明細番号);
+                entityList1 = save特定診療費(entityList1, 被保険者番号, サービス年月, 事業者番号, 整理番号, 様式番号, 明細番号);
             } else if (平成１５年４月.isBeforeOrEquals(サービス年月)) {
-                entityList2 = save特定診療費_特別診療費(entityList2, 被保険者番号, サービス年月, 事業者番号,
+                entityList2 = save特定診療費_特別診療費(entityList2, 被保険者番号, サービス年月, 事業者番号, 整理番号,
                         様式番号, 明細番号);
             }
             SyokanbaraihiShikyuShinseiKetteManager.createInstance().updShokanTokuteiShinryohi(entityList1,
@@ -836,6 +840,7 @@ public class TokuteiShinryohiPanelHandler {
             HihokenshaNo 被保険者番号,
             FlexibleYearMonth サービス年月,
             JigyoshaNo 事業者番号,
+            RString 整理番号,
             RString 様式番号,
             RString 明細番号) {
         int max連番 = 0;
@@ -859,16 +864,14 @@ public class TokuteiShinryohiPanelHandler {
                 entityList1.add(entityDeleted);
             } else if (RowState.Added.equals(ddg.getRowState())) {
                 max連番 = max連番 + 1;
-                RString 新整理番号 = Saiban.get(SubGyomuCode.DBC介護給付, SaibanHanyokeyName.償還整理番号.
-                        getコード()).nextString();
                 ShokanTokuteiShinryohi entityAdded = new ShokanTokuteiShinryohi(
                         被保険者番号,
                         サービス年月,
-                        新整理番号,
+                        整理番号,
                         事業者番号,
                         様式番号,
                         明細番号,
-                        new RString(String.format("%02d", max連番))).createBuilderForEdit().build();
+                        new RString(String.format(FORMAT.toString(), max連番))).createBuilderForEdit().build();
                 entityAdded = buildShokanTokuteiShinryohi(entityAdded, ddg);
                 entityList1.add(entityAdded);
             } else {
@@ -884,6 +887,7 @@ public class TokuteiShinryohiPanelHandler {
             HihokenshaNo 被保険者番号,
             FlexibleYearMonth サービス年月,
             JigyoshaNo 事業者番号,
+            RString 整理番号,
             RString 様式番号,
             RString 明細番号) {
         int max連番 = 0;
@@ -908,16 +912,14 @@ public class TokuteiShinryohiPanelHandler {
                 entityList2.add(entityDeleted);
             } else if (RowState.Added.equals(dgdRow.getRowState())) {
                 max連番 = max連番 + 1;
-                RString 新整理番号 = Saiban.get(SubGyomuCode.DBC介護給付, SaibanHanyokeyName.償還整理番号.
-                        getコード()).nextString();
                 ShokanTokuteiShinryoTokubetsuRyoyo entityAdded = new ShokanTokuteiShinryoTokubetsuRyoyo(
                         被保険者番号,
                         サービス年月,
-                        新整理番号,
+                        整理番号,
                         事業者番号,
                         様式番号,
                         明細番号,
-                        new RString(String.format("%02d", max連番))).createBuilderForEdit().build();
+                        new RString(String.format(FORMAT.toString(), max連番))).createBuilderForEdit().build();
                 entityAdded = buildShokanTokuteiShinryoTokubetsuRyoyo(entityAdded, dgdRow);
                 entityList2.add(entityAdded);
             } else {
@@ -934,9 +936,11 @@ public class TokuteiShinryohiPanelHandler {
         entity = entity.createBuilderForEdit().set傷病名(dgdRow.getDefaultDataName1())
                 .set識別番号(dgdRow.getDefaultDataName2()).build();
         if (dgdRow.getDefaultDataName3().getValue() != null) {
-            entity = entity.createBuilderForEdit().set単位数(dgdRow.getDefaultDataName3().getValue().intValue()).build();
+            entity = entity.createBuilderForEdit()
+                    .set単位数(dgdRow.getDefaultDataName3().getValue().intValue())
+                    .setサービス単位数(dgdRow.getDefaultDataName3().getValue().intValue()).build();
         } else {
-            entity = entity.createBuilderForEdit().set単位数(0).build();
+            entity = entity.createBuilderForEdit().set単位数(0).setサービス単位数(0).build();
         }
         if (dgdRow.getDefaultDataName4().getValue() != null) {
             entity = entity.createBuilderForEdit().set回数(dgdRow.getDefaultDataName4().getValue().intValue()).build();
@@ -1310,7 +1314,7 @@ public class TokuteiShinryohiPanelHandler {
     }
 
     /**
-     * パラメータ設定
+     * パラメータ設定のメソッドます。
      */
     public void putViewState() {
         ViewStateHolder.put(ViewStateKeys.処理モード, ViewStateHolder.get(ViewStateKeys.処理モード, RString.class));
@@ -1327,7 +1331,7 @@ public class TokuteiShinryohiPanelHandler {
     }
 
     /**
-     * readOnly特定診療費登録
+     * readOnly特定診療費登録のメソッドます。
      *
      * @param flag boolean
      */
@@ -1344,7 +1348,7 @@ public class TokuteiShinryohiPanelHandler {
     }
 
     /**
-     * readOnly特定診療費_特別診療費登録
+     * readOnly特定診療費_特別診療費登録のメソッドます。
      *
      * @param flag boolean
      */
