@@ -7,24 +7,23 @@ package jp.co.ndensan.reams.db.dbe.batchcontroller.step.homonchosairaisho;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
-import jp.co.ndensan.reams.db.dbe.business.report.chosairaisho.ChosaIraishoHeadItem;
-import jp.co.ndensan.reams.db.dbe.business.report.chosairaisho.ChosaIraishoReport;
+import jp.co.ndensan.reams.db.dbe.business.report.saichekkuhyo.SaiChekkuhyoItem;
+import jp.co.ndensan.reams.db.dbe.business.report.saichekkuhyo.SaiChekkuhyoReport;
 import jp.co.ndensan.reams.db.dbe.definition.batchprm.iraisho.GridParameter;
 import jp.co.ndensan.reams.db.dbe.definition.core.reportid.ReportIdDBE;
-import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.core.ChohyoAtesakiKeisho;
 import jp.co.ndensan.reams.db.dbe.definition.processprm.hakkoichiranhyo.HomonChosaIraishoProcessParamter;
+import jp.co.ndensan.reams.db.dbe.entity.db.relate.hakkoichiranhyo.ChosahyoSaiCheckhyoRelateEntity;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.hakkoichiranhyo.HomonChosaIraishoRelateEntity;
-import jp.co.ndensan.reams.db.dbe.entity.report.source.chosairaisho.ChosaIraishoReportSource;
+import jp.co.ndensan.reams.db.dbe.entity.report.source.saichekkuhyo.SaiChekkuhyoReportSource;
 import jp.co.ndensan.reams.db.dbe.persistence.db.mapper.relate.hakkoichiranhyo.IHomonChosaIraishoMapper;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBE;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo;
-import jp.co.ndensan.reams.db.dbz.definition.core.seibetsu.Seibetsu;
+import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.ichijihantei.IchijiHanteiKekkaCode02;
+import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.ichijihantei.IchijiHanteiKekkaCode06;
+import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.ichijihantei.IchijiHanteiKekkaCode09;
+import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.ichijihantei.IchijiHanteiKekkaCode99;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5201NinteichosaIraiJohoEntity;
-import jp.co.ndensan.reams.db.dbz.service.util.report.ReportUtil;
 import jp.co.ndensan.reams.ur.urz.business.core.association.Association;
 import jp.co.ndensan.reams.ur.urz.business.report.outputjokenhyo.ReportOutputJokenhyoItem;
-import jp.co.ndensan.reams.ur.urz.entity.report.parts.ninshosha.NinshoshaSource;
 import jp.co.ndensan.reams.ur.urz.service.core.association.AssociationFinderFactory;
 import jp.co.ndensan.reams.ur.urz.service.report.outputjokenhyo.IReportOutputJokenhyoPrinter;
 import jp.co.ndensan.reams.ur.urz.service.report.outputjokenhyo.OutputJokenhyoFactory;
@@ -35,46 +34,26 @@ import jp.co.ndensan.reams.uz.uza.batch.process.BatchReportFactory;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchReportWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.IBatchReader;
-import jp.co.ndensan.reams.uz.uza.biz.KamokuCode;
 import jp.co.ndensan.reams.uz.uza.biz.ReportId;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
-import jp.co.ndensan.reams.uz.uza.biz.YubinNo;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
 import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
-import jp.co.ndensan.reams.uz.uza.report.util.barcode.CustomerBarCode;
-import jp.co.ndensan.reams.uz.uza.report.util.barcode.CustomerBarCodeResult;
 import jp.co.ndensan.reams.uz.uza.util.config.BusinessConfig;
 
 /**
  *
- * 帳票「DBE220001_認定調査依頼書」の処理クラスです。
+ * 帳票「認定調査票差異チェック票_DBE292002」の出力処理クラスです。
  *
  * @reamsid_L DBA-0401-140 duanzhanli
  */
-public class IraishoReportProcess extends BatchProcessBase<HomonChosaIraishoRelateEntity> {
+public class SaiChekkuhyo_292002Process extends BatchProcessBase<HomonChosaIraishoRelateEntity> {
 
     private static final RString MYBATIS_SELECT_ID = new RString("jp.co.ndensan.reams.db.dbe.persistence.db.mapper."
-            + "relate.hakkoichiranhyo.IHomonChosaIraishoMapper.get訪問調査依頼書");
-    private static final ReportId 帳票ID = ReportIdDBE.DBE220001.getReportId();
-    private static final RString CONFIGVALUE = new RString("1");
-    private static final RString 年号_明治 = new RString("明");
-    private static final RString 年号_大正 = new RString("大");
-    private static final RString 年号_昭和 = new RString("昭");
-    private static final RString 記号_星 = new RString("*");
-    private static final RString 文字列0 = new RString("0");
+            + "relate.hakkoichiranhyo.IHomonChosaIraishoMapper.get認定調査結果");
+    private static final ReportId 帳票ID = ReportIdDBE.DBE292001.getReportId();
     private static final RString 文字列1 = new RString("1");
-    private static final RString 文字列2 = new RString("2");
-    private int 宛名連番 = 1;
-    private static final int INT3 = 3;
-    private static final int INT4 = 4;
-    private static final int INT5 = 5;
-    private static final int INT6 = 6;
-    private static final int INT7 = 7;
-    private static final int INT8 = 8;
-    private static final int INT9 = 9;
-    private static final int INT10 = 10;
     private static final RString IRAIFROMYMD = new RString("【依頼開始日】");
     private static final RString IRAITOYMD = new RString("【依頼終了日】");
     private static final RString NINTEIOCHOSAIRAISHO = new RString("【認定調査依頼書印刷区分】");
@@ -96,34 +75,25 @@ public class IraishoReportProcess extends BatchProcessBase<HomonChosaIraishoRela
     private static final RString NINTEICHOSAHYOOCRGAIKYOU = new RString("【認定調査差異チェック表出力区分】");
     private static final RString NINTEICHOSACHECKHYO = new RString("【認定調査依頼一覧表出力区分】");
     private static final RString ZENKONINTEICHOSAHYO = new RString("【前回認定調査結果との比較表出力区分】");
-    private static RString 被保険者番号1 = RString.EMPTY;
-    private static RString 被保険者番号2 = RString.EMPTY;
-    private static RString 被保険者番号3 = RString.EMPTY;
-    private static RString 被保険者番号4 = RString.EMPTY;
-    private static RString 被保険者番号5 = RString.EMPTY;
-    private static RString 被保険者番号6 = RString.EMPTY;
-    private static RString 被保険者番号7 = RString.EMPTY;
-    private static RString 被保険者番号8 = RString.EMPTY;
-    private static RString 被保険者番号9 = RString.EMPTY;
-    private static RString 被保険者番号10 = RString.EMPTY;
+    private static final RString IFSHIKIBETSUCODE99A = new RString("99A");
+    private static final RString IFSHIKIBETSUCODE02A = new RString("02A");
+    private static final RString IFSHIKIBETSUCODE06A = new RString("06A");
+    private static final RString IFSHIKIBETSUCODE09A = new RString("09A");
+    private RString shinseishoKanriNo = RString.EMPTY;
+    private List<ChosahyoSaiCheckhyoRelateEntity> checkEntityList;
     private IHomonChosaIraishoMapper iHomonChosaIraishoMapper;
-    private List<ChosaIraishoHeadItem> itemList;
     private HomonChosaIraishoProcessParamter processParamter;
-    private RString 誕生日明治;
-    private RString 誕生日大正;
-    private RString 誕生日昭和;
-    private RString 性別_男;
-    private RString 性別_女;
+
     @BatchWriter
-    private BatchReportWriter<ChosaIraishoReportSource> iraishoBatchReportWriter;
-    private ReportSourceWriter<ChosaIraishoReportSource> iraishoReportSourceWriter;
+    private BatchReportWriter<SaiChekkuhyoReportSource> batchReportWriter;
+    private ReportSourceWriter<SaiChekkuhyoReportSource> reportSourceWriter;
     @BatchWriter
     private BatchPermanentTableWriter<DbT5201NinteichosaIraiJohoEntity> dbT5201EntityWriter;
 
     @Override
     protected void initialize() {
         iHomonChosaIraishoMapper = getMapper(IHomonChosaIraishoMapper.class);
-        itemList = new ArrayList<>();
+        checkEntityList = new ArrayList<>();
     }
 
     @Override
@@ -133,175 +103,151 @@ public class IraishoReportProcess extends BatchProcessBase<HomonChosaIraishoRela
 
     @Override
     protected void createWriter() {
-        iraishoBatchReportWriter = BatchReportFactory.createBatchReportWriter(帳票ID.value()).create();
-        iraishoReportSourceWriter = new ReportSourceWriter<>(iraishoBatchReportWriter);
+        batchReportWriter = BatchReportFactory.createBatchReportWriter(帳票ID.value()).create();
+        reportSourceWriter = new ReportSourceWriter<>(batchReportWriter);
         dbT5201EntityWriter = new BatchPermanentTableWriter(DbT5201NinteichosaIraiJohoEntity.class);
     }
 
     @Override
     protected void process(HomonChosaIraishoRelateEntity entity) {
-        // 内部QA：614　Redmine：＃75422　排他制限の確認
+//        内部QA：614　Redmine：＃75422　排他制限の確認
+        getcheckEntityList(entity);
         update認定調査依頼情報(entity);
-        itemList.add(setChosaIraishoHeadItem(entity));
     }
 
     @Override
     protected void afterExecute() {
+        List<SaiChekkuhyoItem> itemList = new ArrayList<>();
+        for (ChosahyoSaiCheckhyoRelateEntity checkEntity : checkEntityList) {
+            itemList.add(setItem(checkEntity));
+        }
+        if (checkEntityList != null && !checkEntityList.isEmpty()) {
+            SaiChekkuhyoReport report = SaiChekkuhyoReport.createFrom(itemList);
+            report.writeBy(reportSourceWriter);
+        }
         バッチ出力条件リストの出力();
-        if (itemList != null && !itemList.isEmpty()) {
-            ChosaIraishoReport report = ChosaIraishoReport.createFrom(itemList);
-            report.writeBy(iraishoReportSourceWriter);
+    }
+
+    private void getcheckEntityList(HomonChosaIraishoRelateEntity entity) {
+        ChosahyoSaiCheckhyoRelateEntity checkEntity = new ChosahyoSaiCheckhyoRelateEntity();
+        checkEntity.set被保険者番号(entity.get被保険者番号());
+        checkEntity.set被保険者氏名(entity.get被保険者氏名());
+        checkEntity.set前回二次判定日(entity.get二次判定年月日());
+        checkEntity.set生年月日(entity.get生年月日());
+        checkEntity.set年齢(entity.get年齢());
+        checkEntity.set前回一次判定結果(get判定結果(entity.get厚労省IF識別コード(), entity.get要介護認定一次判定結果コード()));
+        checkEntity.set前回二次判定結果(get判定結果(entity.get厚労省IF識別コード(), entity.get二次判定要介護状態区分コード()));
+        if (entity.get申請書管理番号() != null && !shinseishoKanriNo.equals(entity.get申請書管理番号())) {
+            shinseishoKanriNo = entity.get申請書管理番号();
+            checkEntityList.add(checkEntity);
         }
     }
 
-    private ChosaIraishoHeadItem setChosaIraishoHeadItem(HomonChosaIraishoRelateEntity entity) {
-        Map<Integer, RString> 通知文Map = ReportUtil.get通知文(SubGyomuCode.DBE認定支援, 帳票ID, KamokuCode.EMPTY, 1);
-        NinshoshaSource ninshoshaSource = ReportUtil.get認証者情報(SubGyomuCode.DBE認定支援,
-                帳票ID,
-                new FlexibleDate(processParamter.getHakkobi()),
-                iraishoReportSourceWriter);
-        if (entity.get生年月日() != null && !entity.get生年月日().isEmpty()) {
-            get年号(new FlexibleDate(entity.get生年月日()));
-        }
-        get性別(entity.get性別());
-        get被保険者番号(entity);
-        getカスタマーバーコード(entity);
-        return new ChosaIraishoHeadItem(ninshoshaSource.hakkoYMD,
-                ninshoshaSource.denshiKoin,
-                ninshoshaSource.ninshoshaYakushokuMei,
-                ninshoshaSource.ninshoshaYakushokuMei2,
-                ninshoshaSource.ninshoshaYakushokuMei1,
-                ninshoshaSource.koinMojiretsu,
-                ninshoshaSource.ninshoshaShimeiKakeru,
-                ninshoshaSource.ninshoshaShimeiKakenai,
-                ninshoshaSource.koinShoryaku,
-                ReportUtil.get文書番号(SubGyomuCode.DBE認定支援, 帳票ID, FlexibleDate.getNowDate()),
-                entity.get調査委託先住所_郵便番号(),
-                entity.get調査委託先住所(),
-                entity.get事業者名称(),
-                entity.get調査員氏名(),
-                get名称付与(),
-                getカスタマーバーコード(entity),
+    private SaiChekkuhyoItem setItem(ChosahyoSaiCheckhyoRelateEntity entity) {
+        return new SaiChekkuhyoItem(
+                entity.get前回一次判定結果(),
                 entity.get被保険者番号(),
-                get宛名連番(),
-                通知文Map.get(1),
-                被保険者番号1,
-                被保険者番号2,
-                被保険者番号3,
-                被保険者番号4,
-                被保険者番号5,
-                被保険者番号6,
-                被保険者番号7,
-                被保険者番号8,
-                被保険者番号9,
-                被保険者番号10,
-                entity.get被保険者氏名カナ(),
-                誕生日明治,
-                誕生日大正,
-                誕生日昭和,
-                entity.get生年月日(),
                 entity.get被保険者氏名(),
-                性別_男,
-                性別_女,
-                entity.get郵便番号() != null ? new YubinNo(entity.get郵便番号()).getEditedYubinNo() : RString.EMPTY,
-                entity.get住所(),
-                entity.get電話番号(),
-                entity.get訪問調査先郵便番号() != null ? new YubinNo(entity.get訪問調査先郵便番号()).getEditedYubinNo() : RString.EMPTY,
-                entity.get訪問調査先住所(),
+                entity.get年齢(),
+                entity.get前回二次判定結果(),
+                entity.get前回二次判定日(),
+                entity.get生年月日(),
                 RString.EMPTY,
-                entity.get訪問調査先名称(),
-                entity.get訪問調査先電話番号(),
-                entity.get認定申請年月日(),
-                set提出期限(entity),
-                通知文Map.get(2));
+                RString.EMPTY,
+                RString.EMPTY,
+                RString.EMPTY,
+                RString.EMPTY,
+                RString.EMPTY,
+                RString.EMPTY,
+                RString.EMPTY,
+                RString.EMPTY,
+                RString.EMPTY,
+                RString.EMPTY,
+                RString.EMPTY,
+                RString.EMPTY,
+                RString.EMPTY,
+                RString.EMPTY,
+                RString.EMPTY,
+                RString.EMPTY,
+                RString.EMPTY,
+                RString.EMPTY,
+                RString.EMPTY,
+                RString.EMPTY,
+                RString.EMPTY,
+                RString.EMPTY,
+                RString.EMPTY,
+                RString.EMPTY,
+                RString.EMPTY,
+                RString.EMPTY,
+                RString.EMPTY,
+                RString.EMPTY,
+                RString.EMPTY,
+                RString.EMPTY,
+                RString.EMPTY,
+                RString.EMPTY,
+                RString.EMPTY,
+                RString.EMPTY,
+                RString.EMPTY,
+                RString.EMPTY,
+                RString.EMPTY,
+                RString.EMPTY,
+                RString.EMPTY,
+                RString.EMPTY,
+                RString.EMPTY,
+                RString.EMPTY,
+                RString.EMPTY,
+                RString.EMPTY,
+                RString.EMPTY,
+                RString.EMPTY,
+                RString.EMPTY,
+                RString.EMPTY,
+                RString.EMPTY,
+                RString.EMPTY,
+                RString.EMPTY,
+                RString.EMPTY,
+                RString.EMPTY,
+                RString.EMPTY,
+                RString.EMPTY,
+                RString.EMPTY,
+                RString.EMPTY,
+                RString.EMPTY,
+                RString.EMPTY,
+                RString.EMPTY,
+                RString.EMPTY,
+                RString.EMPTY,
+                RString.EMPTY,
+                RString.EMPTY,
+                RString.EMPTY,
+                RString.EMPTY,
+                RString.EMPTY,
+                RString.EMPTY,
+                RString.EMPTY,
+                RString.EMPTY,
+                RString.EMPTY,
+                RString.EMPTY,
+                RString.EMPTY,
+                RString.EMPTY,
+                RString.EMPTY);
     }
 
-    private RString set提出期限(HomonChosaIraishoRelateEntity entity) {
-        RString 提出期限 = RString.EMPTY;
-        if (文字列1.equals(BusinessConfig.get(ConfigNameDBE.認定調査期限設定方法, SubGyomuCode.DBE認定支援))) {
-            if (文字列0.equals(processParamter.getTeishutsuKigen())) {
-                int 期限日数 = Integer.parseInt(BusinessConfig.get(ConfigNameDBE.主治医意見書作成期限日数,
-                        SubGyomuCode.DBE認定支援).toString());
-                提出期限 = entity.get認定調査依頼年月日() != null && !entity.get認定調査依頼年月日().isEmpty()
-                        ? new RString(entity.get認定調査依頼年月日().plusDay(期限日数).toString()) : RString.EMPTY;
-            } else if (文字列1.equals(processParamter.getTeishutsuKigen())) {
-                提出期限 = RString.EMPTY;
-            } else if (文字列2.equals(processParamter.getTeishutsuKigen())) {
-                提出期限 = processParamter.getKyotsuHizuke();
-            }
-        } else {
-            提出期限 = entity.get認定調査期限年月日();
+    private RString get判定結果(RString 厚労省IF識別コード, RString 判定結果コード) {
+        RString 判定結果 = RString.EMPTY;
+        if (IFSHIKIBETSUCODE99A.equals(厚労省IF識別コード)) {
+            判定結果 = IchijiHanteiKekkaCode99.toValue(判定結果コード).get名称();
+        } else if (IFSHIKIBETSUCODE09A.equals(厚労省IF識別コード)) {
+            判定結果 = IchijiHanteiKekkaCode09.toValue(判定結果コード).get名称();
+        } else if (IFSHIKIBETSUCODE06A.equals(厚労省IF識別コード)) {
+            判定結果 = IchijiHanteiKekkaCode06.toValue(判定結果コード).get名称();
+        } else if (IFSHIKIBETSUCODE02A.equals(厚労省IF識別コード)) {
+            判定結果 = IchijiHanteiKekkaCode02.toValue(判定結果コード).get名称();
         }
-        return 提出期限;
-    }
-
-    private RString get宛名連番() {
-        RStringBuilder builder = new RStringBuilder();
-        builder.append("*");
-        builder.append((new RString(String.valueOf(宛名連番++))).padLeft(文字列0, INT6));
-        builder.append("#");
-        return builder.toRString();
-    }
-
-    private RString get名称付与() {
-        RString key = BusinessConfig.get(ConfigNameDBE.主治医意見書作成依頼書_宛先敬称, SubGyomuCode.DBE認定支援);
-        RString meishoFuyo = RString.EMPTY;
-        if (ChohyoAtesakiKeisho.なし.getコード().equals(key)) {
-            meishoFuyo = RString.EMPTY;
-        } else if (ChohyoAtesakiKeisho.様.getコード().equals(key)) {
-            meishoFuyo = ChohyoAtesakiKeisho.様.get名称();
-        } else if (ChohyoAtesakiKeisho.殿.getコード().equals(key)) {
-            meishoFuyo = ChohyoAtesakiKeisho.殿.get名称();
-        }
-        return meishoFuyo;
-    }
-
-    private void get性別(RString 性別コード) {
-        if (性別コード.equals(Seibetsu.男.getコード())) {
-            性別_女 = 記号_星;
-        } else if (性別コード.equals(Seibetsu.女.getコード())) {
-            性別_男 = 記号_星;
-        }
-    }
-
-    private void get被保険者番号(HomonChosaIraishoRelateEntity entity) {
-        RString 被保険者番号 = entity.get被保険者番号();
-        if (!RString.isNullOrEmpty(被保険者番号) && INT10 <= 被保険者番号.length()) {
-            被保険者番号1 = 被保険者番号.substring(0, 1);
-            被保険者番号2 = 被保険者番号.substring(1, 2);
-            被保険者番号3 = 被保険者番号.substring(2, INT3);
-            被保険者番号4 = 被保険者番号.substring(INT3, INT4);
-            被保険者番号5 = 被保険者番号.substring(INT4, INT5);
-            被保険者番号6 = 被保険者番号.substring(INT5, INT6);
-            被保険者番号7 = 被保険者番号.substring(INT6, INT7);
-            被保険者番号8 = 被保険者番号.substring(INT7, INT8);
-            被保険者番号9 = 被保険者番号.substring(INT8, INT9);
-            被保険者番号10 = 被保険者番号.substring(INT9, INT10);
-        }
-    }
-
-    private void get年号(FlexibleDate 生年月日) {
-        RString 年号 = 生年月日.wareki().toDateString();
-        if (年号.startsWith(年号_明治)) {
-            誕生日大正 = 記号_星;
-            誕生日昭和 = 記号_星;
-        } else if (年号.startsWith(年号_大正)) {
-            誕生日明治 = 記号_星;
-            誕生日昭和 = 記号_星;
-        } else if (年号.startsWith(年号_昭和)) {
-            誕生日明治 = 記号_星;
-            誕生日大正 = 記号_星;
-        } else {
-            誕生日明治 = 記号_星;
-            誕生日大正 = 記号_星;
-            誕生日昭和 = 記号_星;
-        }
+        return 判定結果;
     }
 
     private void update認定調査依頼情報(HomonChosaIraishoRelateEntity entity) {
         DbT5201NinteichosaIraiJohoEntity dbT5201Entity = iHomonChosaIraishoMapper.get認定調査依頼情報(entity);
         RString 認定調査期限設定方法 = BusinessConfig.get(ConfigNameDBE.認定調査期限設定方法, SubGyomuCode.DBE認定支援);
-        if (CONFIGVALUE.equals(認定調査期限設定方法)) {
+        if (文字列1.equals(認定調査期限設定方法)) {
             switch (processParamter.getTeishutsuKigen().toString()) {
                 case "0":
                     int 期限日数 = Integer.parseInt(BusinessConfig.get(ConfigNameDBE.認定調査期限日数,
@@ -323,9 +269,6 @@ public class IraishoReportProcess extends BatchProcessBase<HomonChosaIraishoRela
                     break;
             }
         }
-        dbT5201Entity.setShinseishoKanriNo(new ShinseishoKanriNo(entity.get申請書管理番号()));
-        dbT5201Entity.setNinteichosaIraiRirekiNo(entity.get最大依頼履歴番号());
-        dbT5201Entity.setLogicalDeletedFlag(false);
         RString hakkobi = processParamter.getHakkobi();
         if (!RString.isNullOrEmpty(hakkobi)) {
             dbT5201Entity.setIraishoShutsuryokuYMD(new FlexibleDate(hakkobi));
@@ -337,25 +280,11 @@ public class IraishoReportProcess extends BatchProcessBase<HomonChosaIraishoRela
         dbT5201EntityWriter.update(dbT5201Entity);
     }
 
-    private RString getカスタマーバーコード(HomonChosaIraishoRelateEntity entity) {
-        RString カスタマーバーコード = RString.EMPTY;
-        CustomerBarCode barCode = new CustomerBarCode();
-        RString 郵便番号 = entity.get調査委託先住所_郵便番号();
-        RString 住所 = entity.get調査委託先住所();
-        if (!RString.isNullOrEmpty(郵便番号) && !RString.isNullOrEmpty(住所)) {
-            CustomerBarCodeResult result = barCode.convertCustomerBarCode(郵便番号, 住所);
-            if (result != null) {
-                カスタマーバーコード = result.getCustomerBarCode();
-            }
-        }
-        return カスタマーバーコード;
-    }
-
     private void バッチ出力条件リストの出力() {
         Association 導入団体クラス = AssociationFinderFactory.createInstance().getAssociation();
         RString 導入団体コード = 導入団体クラス.getLasdecCode_().value();
         RString 市町村名 = 導入団体クラス.get市町村名();
-        RString 出力ページ数 = new RString(String.valueOf(iraishoReportSourceWriter.pageCount().value()));
+        RString 出力ページ数 = new RString(String.valueOf(reportSourceWriter.pageCount().value()));
         RString csv出力有無 = new RString("無し");
         RString csvファイル名 = new RString("－");
         RString ジョブ番号 = new RString("56");
@@ -451,7 +380,7 @@ public class IraishoReportProcess extends BatchProcessBase<HomonChosaIraishoRela
                 導入団体コード,
                 市町村名,
                 ジョブ番号,
-                ReportIdDBE.DBE220001.getReportName(),
+                ReportIdDBE.DBE292001.getReportName(),
                 出力ページ数,
                 csv出力有無,
                 csvファイル名,

@@ -10,12 +10,17 @@ import jp.co.ndensan.reams.db.dbe.batchcontroller.step.homonchosairaisho.Chosahy
 import jp.co.ndensan.reams.db.dbe.batchcontroller.step.homonchosairaisho.ChosahyoKihonchosaKatamenProcess;
 import jp.co.ndensan.reams.db.dbe.batchcontroller.step.homonchosairaisho.ChosahyoKihonchosaProcess;
 import jp.co.ndensan.reams.db.dbe.batchcontroller.step.homonchosairaisho.ChosahyoKihonchosaRyomenProcess;
+import jp.co.ndensan.reams.db.dbe.batchcontroller.step.homonchosairaisho.ChosahyoSaiCheckhyoReportProcess;
 import jp.co.ndensan.reams.db.dbe.batchcontroller.step.homonchosairaisho.ChosahyoTokkijiko_221021Process;
 import jp.co.ndensan.reams.db.dbe.batchcontroller.step.homonchosairaisho.ChosahyoTokkijiko_221022Process;
 import jp.co.ndensan.reams.db.dbe.batchcontroller.step.homonchosairaisho.ChosahyoTokkijiko_221023Process;
 import jp.co.ndensan.reams.db.dbe.batchcontroller.step.homonchosairaisho.ChosahyoTokkijiko_221024Process;
 import jp.co.ndensan.reams.db.dbe.batchcontroller.step.homonchosairaisho.IchiranhyoReportProcess;
 import jp.co.ndensan.reams.db.dbe.batchcontroller.step.homonchosairaisho.IraishoReportProcess;
+import jp.co.ndensan.reams.db.dbe.batchcontroller.step.homonchosairaisho.SaiChekkuhyo_292001Process;
+import jp.co.ndensan.reams.db.dbe.batchcontroller.step.homonchosairaisho.SaiChekkuhyo_292002Process;
+import jp.co.ndensan.reams.db.dbe.batchcontroller.step.homonchosairaisho.SaiChekkuhyo_292003Process;
+import jp.co.ndensan.reams.db.dbe.batchcontroller.step.homonchosairaisho.SaiChekkuhyo_292004Process;
 import jp.co.ndensan.reams.db.dbe.batchcontroller.step.homonchosairaisho.TokkijikoOCR_221041Process;
 import jp.co.ndensan.reams.db.dbe.batchcontroller.step.homonchosairaisho.TokkijikoOCR_221042Process;
 import jp.co.ndensan.reams.db.dbe.batchcontroller.step.homonchosairaisho.TokkijikoOCR_221043Process;
@@ -69,10 +74,15 @@ public class HomonChosaIraishoFlow extends BatchFlowBase<IraishoIkkatsuHakkoBatc
     private static final String TOKKIJIKOOCR43 = "tokkijikoOCR43";
     private static final String CHOSAHYOGAIKYOCHOSA01 = "chosahyoGaikyochosa01";
     private static final String CHOSAHYOGAIKYOCHOSA11 = "chosahyoGaikyochosa11";
+    private static final String SAICHEKKUHYO1 = "SaiChekkuhyo1";
+    private static final String SAICHEKKUHYO2 = "SaiChekkuhyo2";
+    private static final String SAICHEKKUHYO3 = "SaiChekkuhyo3";
+    private static final String SAICHEKKUHYO4 = "SaiChekkuhyo4";
+    private static final String CHOSAHYOSAICHECKHYO = "chosahyoSaiCheckhyo";
 
     @Override
     protected void defineFlow() {
-        executeStep(ICHIRANHYOREPORT_PROCESS);
+        executeStep(CHOSAHYOSAICHECKHYO);
         if (getParameter().isNinteiChosaIraiChohyo()) {
             executeStep(CHOSAIRAISHOREPORT_PROCESS);
         }
@@ -94,10 +104,26 @@ public class HomonChosaIraishoFlow extends BatchFlowBase<IraishoIkkatsuHakkoBatc
         if (getParameter().isNinteiChosahyoOCRGaikyou()) {
             call認定調査票OCR_概況調査();
         }
+        if (getParameter().isNinteiChosaCheckHyo()) {
+            call認定調査差異チェック表();
+        }
+        if (getParameter().isZenkoNinteiChosahyo()) {
+            executeStep(CHOSAHYOSAICHECKHYO);
+        }
         if (getParameter().isNinteiChosaIraisyo()) {
             executeStep(ICHIRANHYOREPORT_PROCESS);
         }
 
+    }
+
+    private void call認定調査差異チェック表() {
+        if (CONFIGVALUE1.equals(BusinessConfig.get(ConfigNameDBE.認定調査票差異チェック票_印刷タイプ, SubGyomuCode.DBE認定支援))) {
+            executeStep(SAICHEKKUHYO1);
+        } else if (CONFIGVALUE2.equals(BusinessConfig.get(ConfigNameDBE.認定調査票差異チェック票_印刷タイプ, SubGyomuCode.DBE認定支援))) {
+            executeStep(SAICHEKKUHYO2);
+            executeStep(SAICHEKKUHYO3);
+            executeStep(SAICHEKKUHYO4);
+        }
     }
 
     private void call認定調査票OCR_概況調査() {
@@ -175,25 +201,23 @@ public class HomonChosaIraishoFlow extends BatchFlowBase<IraishoIkkatsuHakkoBatc
     }
 
     private void call認定調査票_特記事項() {
-        if (CONFIGVALUE2.equals(BusinessConfig.get(ConfigNameDBE.認定調査票_特記事項_用紙タイプ, SubGyomuCode.DBE認定支援))) {
-            if (CONFIGVALUE1.equals(BusinessConfig.get(ConfigNameDBE.認定調査票_特記事項_印刷タイプ, SubGyomuCode.DBE認定支援))) {
-                getExecuteStep(BusinessConfig.get(ConfigNameDBE.認定調査票_特記事項_印刷フォーム白紙カラー片面1,
-                        SubGyomuCode.DBE認定支援));
-                getExecuteStep(BusinessConfig.get(ConfigNameDBE.認定調査票_特記事項_印刷フォーム白紙カラー片面2,
-                        SubGyomuCode.DBE認定支援));
-                getExecuteStep(BusinessConfig.get(ConfigNameDBE.認定調査票_特記事項_印刷フォーム白紙カラー片面3,
-                        SubGyomuCode.DBE認定支援));
-            }
+        if (CONFIGVALUE2.equals(BusinessConfig.get(ConfigNameDBE.認定調査票_特記事項_用紙タイプ, SubGyomuCode.DBE認定支援))
+                && CONFIGVALUE1.equals(BusinessConfig.get(ConfigNameDBE.認定調査票_特記事項_印刷タイプ, SubGyomuCode.DBE認定支援))) {
+            getExecuteStep(BusinessConfig.get(ConfigNameDBE.認定調査票_特記事項_印刷フォーム白紙カラー片面1,
+                    SubGyomuCode.DBE認定支援));
+            getExecuteStep(BusinessConfig.get(ConfigNameDBE.認定調査票_特記事項_印刷フォーム白紙カラー片面2,
+                    SubGyomuCode.DBE認定支援));
+            getExecuteStep(BusinessConfig.get(ConfigNameDBE.認定調査票_特記事項_印刷フォーム白紙カラー片面3,
+                    SubGyomuCode.DBE認定支援));
         }
-        if (CONFIGVALUE3.equals(BusinessConfig.get(ConfigNameDBE.認定調査票_特記事項_用紙タイプ, SubGyomuCode.DBE認定支援))) {
-            if (CONFIGVALUE1.equals(BusinessConfig.get(ConfigNameDBE.認定調査票_特記事項_印刷タイプ, SubGyomuCode.DBE認定支援))) {
-                getExecuteStep(BusinessConfig.get(ConfigNameDBE.認定調査票_特記事項_印刷フォーム白紙モノクロ片面1,
-                        SubGyomuCode.DBE認定支援));
-                getExecuteStep(BusinessConfig.get(ConfigNameDBE.認定調査票_特記事項_印刷フォーム白紙モノクロ片面2,
-                        SubGyomuCode.DBE認定支援));
-                getExecuteStep(BusinessConfig.get(ConfigNameDBE.認定調査票_特記事項_印刷フォーム白紙モノクロ片面3,
-                        SubGyomuCode.DBE認定支援));
-            }
+        if (CONFIGVALUE3.equals(BusinessConfig.get(ConfigNameDBE.認定調査票_特記事項_用紙タイプ, SubGyomuCode.DBE認定支援))
+                && CONFIGVALUE1.equals(BusinessConfig.get(ConfigNameDBE.認定調査票_特記事項_印刷タイプ, SubGyomuCode.DBE認定支援))) {
+            getExecuteStep(BusinessConfig.get(ConfigNameDBE.認定調査票_特記事項_印刷フォーム白紙モノクロ片面1,
+                    SubGyomuCode.DBE認定支援));
+            getExecuteStep(BusinessConfig.get(ConfigNameDBE.認定調査票_特記事項_印刷フォーム白紙モノクロ片面2,
+                    SubGyomuCode.DBE認定支援));
+            getExecuteStep(BusinessConfig.get(ConfigNameDBE.認定調査票_特記事項_印刷フォーム白紙モノクロ片面3,
+                    SubGyomuCode.DBE認定支援));
         }
         if (CONFIGVALUE4.equals(BusinessConfig.get(ConfigNameDBE.認定調査票_特記事項_用紙タイプ, SubGyomuCode.DBE認定支援))) {
             if (CONFIGVALUE1.equals(BusinessConfig.get(ConfigNameDBE.認定調査票_特記事項_印刷タイプ, SubGyomuCode.DBE認定支援))) {
@@ -413,4 +437,60 @@ public class HomonChosaIraishoFlow extends BatchFlowBase<IraishoIkkatsuHakkoBatc
         return loopBatch(ChosahyoGaikyochosa_221011Process.class)
                 .arguments(getParameter().toHomonChosaIraishoProcessParamter()).define();
     }
+
+    /**
+     * 前回認定調査結果との比較表のDBE293001ReportProcessです。
+     *
+     * @return ChosahyoSaiCheckhyoReportProcess
+     */
+    @Step(CHOSAHYOSAICHECKHYO)
+    protected IBatchFlowCommand chosahyoSaiCheckhyoReportProcess() {
+        return loopBatch(ChosahyoSaiCheckhyoReportProcess.class)
+                .arguments(getParameter().toHomonChosaIraishoProcessParamter()).define();
+    }
+
+    /**
+     * 認定調査票差異チェック票のDBE292001ReportProcessです。
+     *
+     * @return SaiChekkuhyo_292001Process
+     */
+    @Step(SAICHEKKUHYO1)
+    protected IBatchFlowCommand saiChekkuhyo1() {
+        return loopBatch(SaiChekkuhyo_292001Process.class)
+                .arguments(getParameter().toHomonChosaIraishoProcessParamter()).define();
+    }
+
+    /**
+     * 認定調査票差異チェック票のDBE292002ReportProcessです。
+     *
+     * @return SaiChekkuhyo_292002Process
+     */
+    @Step(SAICHEKKUHYO2)
+    protected IBatchFlowCommand saiChekkuhyo2() {
+        return loopBatch(SaiChekkuhyo_292002Process.class)
+                .arguments(getParameter().toHomonChosaIraishoProcessParamter()).define();
+    }
+
+    /**
+     * 認定調査票差異チェック票のDBE292002ReportProcessです。
+     *
+     * @return SaiChekkuhyo_292003Process
+     */
+    @Step(SAICHEKKUHYO3)
+    protected IBatchFlowCommand saiChekkuhyo3() {
+        return loopBatch(SaiChekkuhyo_292003Process.class)
+                .arguments(getParameter().toHomonChosaIraishoProcessParamter()).define();
+    }
+
+    /**
+     * 認定調査票差異チェック票のDBE292004ReportProcessです。
+     *
+     * @return SaiChekkuhyo_292004Process
+     */
+    @Step(SAICHEKKUHYO4)
+    protected IBatchFlowCommand saiChekkuhyo4() {
+        return loopBatch(SaiChekkuhyo_292004Process.class)
+                .arguments(getParameter().toHomonChosaIraishoProcessParamter()).define();
+    }
+
 }
