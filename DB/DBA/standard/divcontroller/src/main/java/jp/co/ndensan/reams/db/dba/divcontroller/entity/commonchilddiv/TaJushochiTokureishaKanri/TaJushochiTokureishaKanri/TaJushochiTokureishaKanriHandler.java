@@ -363,6 +363,9 @@ public class TaJushochiTokureishaKanriHandler {
                     = new TashichosonJushochiTokurei(識別コード, new FlexibleDate(div.getTxtTekiyobi().getValue().toString()), 枝番);
             他住所地特例Model.add(住所地特例の識別子);
             保険施設入退所Model.add(taisho);
+            div.getPanShisetsuJoho().setDisabled(true);
+            div.getCcdShisetsuJoho().clear();
+            div.getCcdShisetsuJoho().initialize();
         } else if (解除モード.equals(親画面状態)) {
             dgJushochiTokureiRireki_Row row = new dgJushochiTokureiRireki_Row();
             if (div.getDgJushochiTokureiRireki().getDataSource() != null
@@ -423,7 +426,7 @@ public class TaJushochiTokureishaKanriHandler {
             }
             if (RowState.Added.equals(row.getRowState())) {
                 TashichosonJushochiTokureiIdentifier 住所地特例の識別子
-                        = new TashichosonJushochiTokureiIdentifier(識別コード, new FlexibleDate(row.getKaijoYMD().toString()), 枝番);
+                        = new TashichosonJushochiTokureiIdentifier(識別コード, new FlexibleDate(row.getKaijoYMD().getValue().toString()), 枝番);
                 TaJushochiTokureisyaKanriManager.createInstance().regTaJushochiTokurei(set他住所地特例(他住所地特例Model.get(住所地特例の識別子), row).toEntity());
             } else if (RowState.Modified.equals(row.getRowState())) {
                 TashichosonJushochiTokureiIdentifier 更新前住所地特例の識別子
@@ -441,18 +444,18 @@ public class TaJushochiTokureishaKanriHandler {
                 if (RString.isNullOrEmpty(画面喪失)) {
                     TaJushochiTokureisyaKanriManager.createInstance().saveHihokenshaSositu(
                             new KaigoTatokuTekiyoJiyu(row.getTekiyoJiyu()),
-                            new FlexibleDate(row.getTekiyoYMD().toString()),
-                            new FlexibleDate(row.getTekiyoTodokedeYMD().toString()),
+                            new FlexibleDate(row.getTekiyoYMD().getValue().toString()),
+                            new FlexibleDate(row.getTekiyoTodokedeYMD().getValue().toString()),
                             識別コード);
                 } else {
                     throw new ApplicationException(DbaErrorMessages.住所地特例として未適用.getMessage());
                 }
                 TashichosonJushochiTokureiIdentifier 更新前住所地特例の識別子
-                        = new TashichosonJushochiTokureiIdentifier(識別コード, new FlexibleDate(row.getTekiyoYMD().toString()), row.getEdaNo());
+                        = new TashichosonJushochiTokureiIdentifier(識別コード, new FlexibleDate(row.getTekiyoYMD().getValue().toString()), row.getEdaNo());
                 TaJushochiTokureisyaKanriManager.createInstance().delTaJushochiTokurei(他住所地特例Model.get(更新前住所地特例の識別子).
                         createBuilderForEdit().set論理削除フラグ(true).build().toEntity());
                 TashichosonJushochiTokureiIdentifier 住所地特例の識別子
-                        = new TashichosonJushochiTokureiIdentifier(識別コード, new FlexibleDate(row.getTekiyoYMD().toString()), 枝番);
+                        = new TashichosonJushochiTokureiIdentifier(識別コード, new FlexibleDate(row.getTekiyoYMD().getValue().toString()), 枝番);
                 TaJushochiTokureisyaKanriManager.createInstance().regTaJushochiTokurei(set適用状態他住所地特例(他住所地特例Model.get(住所地特例の識別子), row).toEntity());
 
                 int rirekiNo = Integer.parseInt(履歴番号.toString());
@@ -461,30 +464,30 @@ public class TaJushochiTokureishaKanriHandler {
                 TaJushochiTokureisyaKanriManager.createInstance().regShisetsuNyutaisho(set適用状態介護保険施設入退所(保険施設入退所Model.get(taisho), row).toEntity());
             } else if (状態_解除.equals(new RString(div.getMode_DisplayMode().toString()))) {
                 TashichosonJushochiTokureiIdentifier 住所地特例の識別子
-                        = new TashichosonJushochiTokureiIdentifier(識別コード, new FlexibleDate(row.getKaijoYMD().toString()), 枝番);
+                        = new TashichosonJushochiTokureiIdentifier(識別コード, new FlexibleDate(row.getKaijoYMD().getValue().toString()), 枝番);
                 TaJushochiTokureisyaKanriManager.createInstance().regTaJushochiTokurei(set解除状態他住所地特例(他住所地特例Model.get(住所地特例の識別子), row).toEntity());
                 TashichosonJushochiTokureiIdentifier 更新前住所地特例の識別子
-                        = new TashichosonJushochiTokureiIdentifier(識別コード, new FlexibleDate(row.getKaijoYMD().toString()), row.getEdaNo());
+                        = new TashichosonJushochiTokureiIdentifier(識別コード, new FlexibleDate(row.getKaijoYMD().getValue().toString()), row.getEdaNo());
                 TaJushochiTokureisyaKanriManager.createInstance().delTaJushochiTokurei(他住所地特例Model.get(更新前住所地特例の識別子).
                         createBuilderForEdit().set論理削除フラグ(true).build().toEntity());
                 ShisetsuNyutaishoIdentifier taisho = new ShisetsuNyutaishoIdentifier(識別コード, Integer.parseInt(row.getRirekiNo().toString()));
                 TaJushochiTokureisyaKanriManager.createInstance().updShisetsuNyutaisho(set解除状態介護保険施設入退所(保険施設入退所Model.get(taisho), row).toEntity());
                 if (他特例解除.equals(row.getKaijoJiyu())) {
-                    if (!TaJushochiTokureisyaKanriManager.createInstance().checkAge(識別コード, new FlexibleDate(row.getKaijoYMD().toString()))) {
+                    if (!TaJushochiTokureisyaKanriManager.createInstance().checkAge(識別コード, new FlexibleDate(row.getKaijoYMD().getValue().toString()))) {
                         if (new RString(DbaQuestionMessages.資格取得確認.getMessage().getCode())
                                 .equals(ResponseHolder.getMessageCode())
                                 && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
                             TaJushochiTokureisyaKanriManager.createInstance().saveHihokenshaShutoku(
                                     new KaigoTatokuKaijoJiyu(row.getKaijoJiyu()),
-                                    new FlexibleDate(row.getKaijoYMD().toString()),
-                                    new FlexibleDate(row.getKaijoTodokedeYMD().toString()),
+                                    new FlexibleDate(row.getKaijoYMD().getValue().toString()),
+                                    new FlexibleDate(row.getKaijoTodokedeYMD().getValue().toString()),
                                     識別コード);
                         }
                     } else {
                         TaJushochiTokureisyaKanriManager.createInstance().saveHihokenshaShutoku(
                                 new KaigoTatokuKaijoJiyu(row.getKaijoJiyu()),
-                                new FlexibleDate(row.getKaijoYMD().toString()),
-                                new FlexibleDate(row.getKaijoTodokedeYMD().toString()),
+                                new FlexibleDate(row.getKaijoYMD().getValue().toString()),
+                                new FlexibleDate(row.getKaijoTodokedeYMD().getValue().toString()),
                                 識別コード);
                     }
                 }
@@ -781,6 +784,7 @@ public class TaJushochiTokureishaKanriHandler {
     }
 
     private void clear他市町村住所地特例情報入力エリア() {
+        div.getTxtNyusyobi().clearValue();
         div.getTxtTekiyobi().clearValue();
         div.getTxtTekiyoTodokedebi().clearValue();
         div.getDdlTekiyoJiyo().setSelectedKey(RString.EMPTY);

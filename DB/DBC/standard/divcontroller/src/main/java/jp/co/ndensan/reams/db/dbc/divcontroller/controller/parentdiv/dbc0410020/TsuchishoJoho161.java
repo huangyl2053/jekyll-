@@ -15,6 +15,8 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
  * 国保連情報受取データ取込_[161]介護給付費等審査決定請求明細表情報
+ *
+ * @reamsid_L DBC-0980-140 xuhao
  */
 public class TsuchishoJoho161 {
 

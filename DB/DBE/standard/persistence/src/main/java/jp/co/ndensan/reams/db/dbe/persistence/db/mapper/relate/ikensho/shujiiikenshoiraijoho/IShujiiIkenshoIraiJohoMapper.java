@@ -10,6 +10,8 @@ import jp.co.ndensan.reams.db.dbe.entity.db.relate.ikensho.shujiiikenshoiraijoho
 
 /**
  * 主治医意見書作成依頼情報のマッパーインタフェースです。
+ *
+ * @reamsid_L DBE-9999-011 sunhaidi
  */
 public interface IShujiiIkenshoIraiJohoMapper {
 

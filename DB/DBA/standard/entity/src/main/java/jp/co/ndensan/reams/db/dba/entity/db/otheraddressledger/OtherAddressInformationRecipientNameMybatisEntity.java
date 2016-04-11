@@ -18,6 +18,8 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
  * 宛名識別対象PSMのエンティティクラスです。
+ *
+ * @reamsid_L DBA-0402-020 wangjie2
  */
 @lombok.Getter
 @lombok.Setter

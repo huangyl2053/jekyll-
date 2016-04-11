@@ -17,6 +17,8 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
  * 国保連情報受取データ取込_[331]高額介護サービス費給付対象者一覧表情報
+ *
+ * @reamsid_L DBC-0980-210 xuhao
  */
 public class TsuchishoJoho331 {
 

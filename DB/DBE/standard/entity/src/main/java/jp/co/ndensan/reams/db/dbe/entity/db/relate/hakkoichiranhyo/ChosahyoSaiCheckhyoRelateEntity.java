@@ -21,6 +21,9 @@ public class ChosahyoSaiCheckhyoRelateEntity {
     private RString 被保険者氏名;
     private RString 前回一次判定結果;
     private RString 前回二次判定結果;
+    private RString 前回二次判定日;
+    private RString 生年月日;
+    private RString 年齢;
     private RString 今回一次判定結果;
     private RString 審査会日;
     private RString 合議体番号;

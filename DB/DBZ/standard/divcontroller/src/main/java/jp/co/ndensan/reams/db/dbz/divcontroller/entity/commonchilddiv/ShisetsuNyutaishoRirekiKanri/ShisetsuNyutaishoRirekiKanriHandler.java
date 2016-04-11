@@ -220,7 +220,7 @@ public class ShisetsuNyutaishoRirekiKanriHandler {
             if (台帳種別表示機能.equals(new RString(div.getMode_利用().toString()))) {
                 row.setDaichoShubetsu(get台帳種別(div.getShisetsuNyutaishoInput().getCcdShisetsuJoho().getDaichoShubetsu()));
                 row.setDaichoShubetsuKey(div.getShisetsuNyutaishoInput().getCcdShisetsuJoho().getDaichoShubetsu());
-                施設種類(newRow.getDaichoShubetsuKey(), newRow);
+                施設種類(row.getDaichoShubetsuKey(), row);
             }
             row.setShisetsuCode(div.getShisetsuNyutaishoInput().getCcdShisetsuJoho().getNyuryokuShisetsuKodo());
             row.setShisetsuMeisho(div.getShisetsuNyutaishoInput().getCcdShisetsuJoho().getNyuryokuShisetsuMeisho());

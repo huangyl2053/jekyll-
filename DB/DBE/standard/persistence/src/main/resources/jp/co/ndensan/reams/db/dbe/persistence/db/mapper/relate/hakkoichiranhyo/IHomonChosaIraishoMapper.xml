@@ -213,9 +213,12 @@
    <select id="get認定調査結果" resultMap="resultMap_getHomonChosaIraisho"
            parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatisprm.hakkoichiranhyo.HomonChosaIraishoMybitisParamter" fetchSize="500">
         SELECT
+        DISTINCT
             DbT5101."shinseishoKanriNo"
             , DbT5101."hihokenshaNo"
             , DbT5101."hihokenshaName"
+            , DbT5101."seinengappiYMD"
+            , DbT5101."age"
             , ninteiChosaSaioIraiRirekiNo."ninteichosaIraiRirekiNo"
             , C."ninchishoNichijoSeikatsuJiritsudoCode" AS 前回認知症高齢者自立度
             , C."shogaiNichijoSeikatsuJiritsudoCode" AS 前回障害高齢者自立度

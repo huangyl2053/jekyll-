@@ -19,6 +19,8 @@ import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
 
 /**
  * 調査地区グループマスタを管理するクラスです。
+ *
+ * @reamsid_L DBE-9999-011 sunhaidi
  */
 public class ChosaChikuGroupManager {
 
@@ -99,7 +101,7 @@ public class ChosaChikuGroupManager {
         }
         return 1 == dac.save(調査地区グループマスタ.toEntity());
     }
-    
+
     /**
      * 調査地区グループマスタ{@link ChosaChikuGroup}を保存します。
      *

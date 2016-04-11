@@ -15,9 +15,9 @@ import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0820023.ddgT
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0820023.dgdTokuteiShinryohi_Row;
 import jp.co.ndensan.reams.db.dbc.divcontroller.handler.dbc0820023.TokuteiShinryohiPanelHandler;
 import jp.co.ndensan.reams.db.dbc.divcontroller.viewbox.ViewStateKeys;
+import jp.co.ndensan.reams.db.dbc.divcontroller.viewbox.shoukanharaihishinseikensaku.ShoukanharaihishinseikensakuParameter;
 import jp.co.ndensan.reams.db.dbc.divcontroller.viewbox.shoukanharaihishinseikensaku.ShoukanharaihishinseimeisaikensakuParameter;
 import jp.co.ndensan.reams.db.dbc.divcontroller.viewbox.shoukanharaihishinseikensaku.SikibetuNokennsakuki;
-import jp.co.ndensan.reams.db.dbc.divcontroller.viewbox.shoukanharaihishinseikensaku.ShoukanharaihishinseikensakuParameter;
 import jp.co.ndensan.reams.db.dbc.service.core.shokanbaraijyokyoshokai.ShokanbaraiJyokyoShokai;
 import jp.co.ndensan.reams.db.dbc.service.core.syokanbaraihishikyushinseikette.SyokanbaraihiShikyuShinseiKetteManager;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
@@ -42,6 +42,8 @@ import jp.co.ndensan.reams.uz.uza.util.serialization.DataPassingConverter;
 
 /**
  * 償還払い費支給申請決定_サービス提供証明書(特定診療費）のクラスです。
+ *
+ * @reamsid_L DBC-1030-110 wangkanglei
  */
 public class TokuteiShinryohiPanel {
 
@@ -53,7 +55,7 @@ public class TokuteiShinryohiPanel {
     private static final RString 申請を保存する = new RString("Element3");
 
     /**
-     * 画面初期化
+     * 画面初期化のメソッドます。
      *
      * @param div TokuteiShinryohiPanelDiv
      * @return ResponseData
@@ -166,7 +168,7 @@ public class TokuteiShinryohiPanel {
     }
 
     /**
-     * 追加ボタンする
+     * 追加ボタンのメソッドます。
      *
      * @param div TokuteiShinryohiPanelDiv
      * @return ResponseData
@@ -188,7 +190,7 @@ public class TokuteiShinryohiPanel {
     }
 
     /**
-     * グリッド(平成１５年３月以前)エリアの修正ボタン
+     * グリッド(平成１５年３月以前)エリアの修正ボタンのメソッドます。
      *
      * @param div TokuteiShinryohiPanelDiv
      * @return ResponseData
@@ -204,7 +206,7 @@ public class TokuteiShinryohiPanel {
     }
 
     /**
-     * グリッド(平成１５年３月以前)エリアの削除ボタン
+     * グリッド(平成１５年３月以前)エリアの削除ボタンのメソッドます。
      *
      * @param div TokuteiShinryohiPanelDiv
      * @return ResponseData
@@ -220,7 +222,7 @@ public class TokuteiShinryohiPanel {
     }
 
     /**
-     * グリッド(平成１５年４月以降)の修正ボタン
+     * グリッド(平成１５年４月以降)の修正ボタンのメソッドます。
      *
      * @param div TokuteiShinryohiPanelDiv
      * @return ResponseData
@@ -236,7 +238,7 @@ public class TokuteiShinryohiPanel {
     }
 
     /**
-     * グリッド(平成１５年４月以降)の削除ボタン
+     * グリッド(平成１５年４月以降)の削除ボタンのメソッドます。
      *
      * @param div TokuteiShinryohiPanelDiv
      * @return ResponseData
@@ -252,7 +254,7 @@ public class TokuteiShinryohiPanel {
     }
 
     /**
-     * 特定診療費登録エリアの「計算する」ボタン
+     * 特定診療費登録エリアの「計算する」ボタンのメソッドます。
      *
      * @param div TokuteiShinryohiPanelDiv
      * @return ResponseData
@@ -263,7 +265,7 @@ public class TokuteiShinryohiPanel {
     }
 
     /**
-     * 特定診療費登録エリアの「クリアする」ボタン
+     * 特定診療費登録エリアの「クリアする」ボタンのメソッドます。
      *
      * @param div TokuteiShinryohiPanelDiv
      * @return ResponseData
@@ -274,7 +276,7 @@ public class TokuteiShinryohiPanel {
     }
 
     /**
-     * 特定診療費登録エリアの「取消する」ボタン
+     * 特定診療費登録エリアの「取消する」ボタンのメソッドます。
      *
      * @param div TokuteiShinryohiPanelDiv
      * @return ResponseData
@@ -286,7 +288,7 @@ public class TokuteiShinryohiPanel {
     }
 
     /**
-     * 特定診療費登録エリアの「確定する」ボタン
+     * 特定診療費登録エリアの「確定する」ボタンのメソッドます。
      *
      * @param div TokuteiShinryohiPanelDiv
      * @return ResponseData
@@ -303,7 +305,7 @@ public class TokuteiShinryohiPanel {
     }
 
     /**
-     * 特定診療費・特別診療費登録エリアの「計算する」ボタン
+     * 特定診療費・特別診療費登録エリアの「計算する」ボタンのメソッドます。
      *
      * @param div TokuteiShinryohiPanelDiv
      * @return ResponseData
@@ -314,7 +316,7 @@ public class TokuteiShinryohiPanel {
     }
 
     /**
-     * 特定診療費・特別診療費登録エリアの「クリアする」ボタン
+     * 特定診療費・特別診療費登録エリアの「クリアする」ボタンのメソッドます。
      *
      * @param div TokuteiShinryohiPanelDiv
      * @return ResponseData
@@ -325,7 +327,7 @@ public class TokuteiShinryohiPanel {
     }
 
     /**
-     * 特定診療費・特別診療費登録エリアの「取消する」ボタン
+     * 特定診療費・特別診療費登録エリアの「取消する」ボタンのメソッドます。
      *
      * @param div TokuteiShinryohiPanelDiv
      * @return ResponseData
@@ -337,7 +339,7 @@ public class TokuteiShinryohiPanel {
     }
 
     /**
-     * 特定診療費・特別診療費登録エリアの「確定する」ボタン
+     * 特定診療費・特別診療費登録エリアの「確定する」ボタンのメソッドます。
      *
      * @param div TokuteiShinryohiPanelDiv
      * @return ResponseData
@@ -354,7 +356,7 @@ public class TokuteiShinryohiPanel {
     }
 
     /**
-     * 共通エリア「取消する」ボタン
+     * 共通エリア「取消する」ボタンのメソッドます。
      *
      * @param div TokuteiShinryohiPanelDiv
      * @return ResponseData
@@ -388,7 +390,7 @@ public class TokuteiShinryohiPanel {
     }
 
     /**
-     * 「申請を保存する」ボタン
+     * 「申請を保存する」ボタンのメソッドます。
      *
      * @param div TokuteiShinryohiPanelDiv
      * @return ResponseData
@@ -449,7 +451,7 @@ public class TokuteiShinryohiPanel {
     }
 
     /**
-     * 「基本情報」ボタン
+     * 「基本情報」ボタンのメソッドます。
      *
      * @param div TokuteiShinryohiPanelDiv
      * @return ResponseData
@@ -460,7 +462,7 @@ public class TokuteiShinryohiPanel {
     }
 
     /**
-     * 「給付費明細」ボタン
+     * 「給付費明細」ボタンのメソッドます。
      *
      * @param div TokuteiShinryohiPanelDiv
      * @return ResponseData
@@ -471,7 +473,7 @@ public class TokuteiShinryohiPanel {
     }
 
     /**
-     * 「サービス計画費」ボタン
+     * 「サービス計画費」ボタンのメソッドます。
      *
      * @param div TokuteiShinryohiPanelDiv
      * @return ResponseData
@@ -482,7 +484,7 @@ public class TokuteiShinryohiPanel {
     }
 
     /**
-     * 「特定入所者費用」ボタン
+     * 「特定入所者費用」ボタンのメソッドます。
      *
      * @param div TokuteiShinryohiPanelDiv
      * @return ResponseData
@@ -493,7 +495,7 @@ public class TokuteiShinryohiPanel {
     }
 
     /**
-     * 「合計情報」ボタン
+     * 「合計情報」ボタンのメソッドます。
      *
      * @param div TokuteiShinryohiPanelDiv
      * @return ResponseData
@@ -504,7 +506,7 @@ public class TokuteiShinryohiPanel {
     }
 
     /**
-     * 「給付費明細（住特）」ボタン
+     * 「給付費明細（住特）」ボタンのメソッドます。
      *
      * @param div TokuteiShinryohiPanelDiv
      * @return ResponseData
@@ -515,7 +517,7 @@ public class TokuteiShinryohiPanel {
     }
 
     /**
-     * 「緊急時・所定疾患」ボタン
+     * 「緊急時・所定疾患」ボタンのメソッドます。
      *
      * @param div TokuteiShinryohiPanelDiv
      * @return ResponseData
@@ -526,7 +528,7 @@ public class TokuteiShinryohiPanel {
     }
 
     /**
-     * 「緊急時施設療養費」ボタン
+     * 「緊急時施設療養費」ボタンのメソッドます。
      *
      * @param div TokuteiShinryohiPanelDiv
      * @return ResponseData
@@ -537,7 +539,7 @@ public class TokuteiShinryohiPanel {
     }
 
     /**
-     * 「食事費用」ボタン
+     * 「食事費用」ボタンのメソッドます。
      *
      * @param div TokuteiShinryohiPanelDiv
      * @return ResponseData
@@ -548,7 +550,7 @@ public class TokuteiShinryohiPanel {
     }
 
     /**
-     * 「請求額集計」ボタン
+     * 「請求額集計」ボタンのメソッドます。
      *
      * @param div TokuteiShinryohiPanelDiv
      * @return ResponseData
@@ -559,7 +561,7 @@ public class TokuteiShinryohiPanel {
     }
 
     /**
-     * 「社福軽減額」ボタン
+     * 「社福軽減額」ボタンのメソッドます。
      *
      * @param div TokuteiShinryohiPanelDiv
      * @return ResponseData
@@ -570,7 +572,7 @@ public class TokuteiShinryohiPanel {
     }
 
     /**
-     * 「識別コード入力補助ボタン」ボタン
+     * 「識別コード入力補助ボタン」ボタンのメソッドます。
      *
      * @param div TokuteiShinryohiPanelDiv
      * @return ResponseData
@@ -585,7 +587,7 @@ public class TokuteiShinryohiPanel {
     }
 
     /**
-     * onOkClose_btnJigyosha
+     * onOkClose_btnJigyoshaのメソッドます。
      *
      * @param div TokuteiShinryohiPanelDiv
      * @return ResponseData

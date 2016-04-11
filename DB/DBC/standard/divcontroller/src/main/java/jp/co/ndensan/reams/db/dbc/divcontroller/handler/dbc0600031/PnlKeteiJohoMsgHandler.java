@@ -13,7 +13,9 @@ import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 
 /**
+ * 福祉用具購入費支給申請_決定情報登録 Handler
  *
+ * @reamsid_L DBC-1020-010 yangchenbing
  */
 public final class PnlKeteiJohoMsgHandler {
 
@@ -24,6 +26,7 @@ public final class PnlKeteiJohoMsgHandler {
     }
 
     /**
+     * 戻り対象
      *
      * @param div div
      * @return PnlKeteiJohoMsgHandler

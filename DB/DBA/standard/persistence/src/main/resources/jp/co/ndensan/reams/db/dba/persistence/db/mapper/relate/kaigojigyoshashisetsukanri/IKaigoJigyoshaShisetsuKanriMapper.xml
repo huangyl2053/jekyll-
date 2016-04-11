@@ -4,12 +4,12 @@
 <!--@reamsid_L DBA-0340-010 wanghui  -->
 <mapper namespace="jp.co.ndensan.reams.db.dba.persistence.db.mapper.relate.kaigojigyoshashisetsukanri.IKaigoJigyoshaShisetsuKanriMapper">
 
-    <!--テーブルDbT7060KaigoJigyoshaの項目をDbT7060KaigoJigyoshaEntityの項目にマッピングします。-->
-    <resultMap id="resultMap_getShikakuJohoEntity" type="jp.co.ndensan.reams.db.dba.entity.db.relate.kaigojigyoshashisetsukanrio.KaigoJigyoshaShisetsuKanriRelateEntity" autoMapping="true">
-       <id property="dbT7060KaigoJigyoshaEntity.jigyoshaNo" column="dbT7060KaigoJigyoshaEntity.jigyoshaNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
-       <id property="dbT7060KaigoJigyoshaEntity.yukoKaishiYMD" column="dbT7060KaigoJigyoshaEntity.yukoKaishiYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
-        <association property="dbT7060KaigoJigyoshaEntity" resultMap="jp.co.ndensan.reams.db.dbx.persistence.db.mapper.basic.IDbT7060KaigoJigyoshaMapper.ResultMap_DbT7060KaigoJigyoshaEntity"/>
-        <association property="dbT7062KaigoJigyoshaDaihyoshaEntity" resultMap="jp.co.ndensan.reams.db.dbx.persistence.db.mapper.basic.IDbT7062KaigoJigyoshaDaihyoshaMapper.ResultMap_DbT7062KaigoJigyoshaDaihyoshaEntity"/>
+     <!--テーブルDbT7060KaigoJigyoshaの項目をDbT7060KaigoJigyoshaEntityの項目にマッピングします。-->
+    <resultMap id="resultMap_getShikakuJohoEntity" type="jp.co.ndensan.reams.db.dbx.entity.db.relate.kaigojigyosha.kaigojigyosha.KaigoJigyoshaEntity" autoMapping="true">
+       <id property="介護事業者Entity.jigyoshaNo" column="dbT7060KaigoJigyoshaEntity.jigyoshaNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+       <id property="介護事業者Entity.yukoKaishiYMD" column="dbT7060KaigoJigyoshaEntity.yukoKaishiYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <association property="介護事業者Entity" resultMap="jp.co.ndensan.reams.db.dbx.persistence.db.mapper.basic.IDbT7060KaigoJigyoshaMapper.ResultMap_DbT7060KaigoJigyoshaEntity"/>
+        <association property="介護事業者代表者Entity" resultMap="jp.co.ndensan.reams.db.dbx.persistence.db.mapper.basic.IDbT7062KaigoJigyoshaDaihyoshaMapper.ResultMap_DbT7062KaigoJigyoshaDaihyoshaEntity"/>
     </resultMap>
     <resultMap id="resultMap_getKaigoJigyoshaRelateEntity" type="jp.co.ndensan.reams.db.dba.entity.db.relate.kaigojigyoshashisetsukanrio.KaigoJigyoshaRelateEntity" autoMapping="true">
         <result property="yukoKaishiYMD" column="DbT7060_yukoKaishiYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>

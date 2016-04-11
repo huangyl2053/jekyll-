@@ -34,7 +34,9 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.ResponseHolder;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 
 /**
- * 福祉用具購入費支給申請_決定情報登録
+ * 画面設計_DBCMN51001_福祉用具購入費支給申請_決定情報登録
+ *
+ * @reamsid_L DBC-1020-010 yangchenbing
  */
 public class PnlKeteiJohoMsg {
 
@@ -58,8 +60,8 @@ public class PnlKeteiJohoMsg {
         ViewStateHolder.put(ViewStateKeys.事業者番号, new RString("df"));
         ViewStateHolder.put(ViewStateKeys.給付率, new Decimal(1));
         ViewStateHolder.put(ViewStateKeys.証明書, new RString("証明書"));
-        //ShikibetsuCode 識別コード = ViewStateHolder.get(ViewStateKeys.識別コード, ShikibetsuCode.class);
-        //div.getKaigoCommonPanel().getCcdAtenaInfo().onLoad(識別コード);
+        ShikibetsuCode 識別コード = ViewStateHolder.get(ViewStateKeys.識別コード, ShikibetsuCode.class);
+        div.getKaigoCommonPanel().getCcdAtenaInfo().onLoad(識別コード);
         HihokenshaNo 被保険者番号 = ViewStateHolder.get(ViewStateKeys.被保険者番号, HihokenshaNo.class);
         FlexibleYearMonth サービス年月1 = ViewStateHolder.get(ViewStateKeys.サービス年月, FlexibleYearMonth.class);
         Decimal 給付率1 = ViewStateHolder.get(ViewStateKeys.給付率, Decimal.class);
@@ -220,7 +222,8 @@ public class PnlKeteiJohoMsg {
                 FukushiYoguKonyuhiShikyuShiseiKetteDivEntity entity = FukushiYoguKonyuhiShikyuShiseiKetteDivEntity.createEntity(
                         ViewStateHolder.get(ViewStateKeys.処理モード, RString.class), shokanhanteikekka, shokanshukei);
                 f.updKetteJoho(entity);
-                div.getCcdMessage().setMessage(new RString(UrInformationMessages.保存終了.getMessage().evaluate()), RString.EMPTY, RString.EMPTY, true);
+                div.getCcdMessage().setMessage(new RString(UrInformationMessages.保存終了.getMessage().evaluate()),
+                        RString.EMPTY, RString.EMPTY, true);
                 return ResponseData.of(div).setState(DBC0600031StateName.successSaved);
             }
         }

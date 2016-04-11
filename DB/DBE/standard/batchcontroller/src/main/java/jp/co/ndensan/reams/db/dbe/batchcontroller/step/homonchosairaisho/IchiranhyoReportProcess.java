@@ -44,8 +44,6 @@ import jp.co.ndensan.reams.uz.uza.lang.EraType;
 import jp.co.ndensan.reams.uz.uza.lang.FillType;
 import jp.co.ndensan.reams.uz.uza.lang.FirstYear;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
-import jp.co.ndensan.reams.uz.uza.lang.RDate;
-import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
 import jp.co.ndensan.reams.uz.uza.lang.Separator;
@@ -141,7 +139,6 @@ public class IchiranhyoReportProcess extends BatchProcessBase<HomonChosaIraishoR
                     new FlexibleDate(processParamter.getHakkobi()),
                     ichiranhyoReportSourceWriter);
             Map<Integer, RString> 通知文Map = ReportUtil.get通知文(SubGyomuCode.DBE認定支援, 帳票ID, KamokuCode.EMPTY, 1);
-            // TODO 文書番号と印刷時点が未設定
             ChosaIraiIchiranhyoHeadItem ichiranhyoHeadItem = new ChosaIraiIchiranhyoHeadItem(ninshoshaSource.hakkoYMD,
                     ninshoshaSource.denshiKoin,
                     ninshoshaSource.ninshoshaYakushokuMei,
@@ -218,23 +215,6 @@ public class IchiranhyoReportProcess extends BatchProcessBase<HomonChosaIraishoR
             dbT5201Entity.setChosahyoTouShutsuryokuYMD(FlexibleDate.EMPTY);
         }
         dbT5201EntityWriter.update(dbT5201Entity);
-    }
-
-    private RString get印刷日時() {
-        RStringBuilder systemDateTime = new RStringBuilder();
-        RDateTime datetime = RDate.getNowDateTime();
-        systemDateTime.append(datetime.getDate().wareki().eraType(EraType.KANJI).
-                firstYear(FirstYear.GAN_NEN).
-                separator(Separator.JAPANESE).
-                fillType(FillType.ZERO).toDateString());
-        systemDateTime.append(RString.HALF_SPACE);
-        systemDateTime.append(String.format("%02d", datetime.getHour()));
-        systemDateTime.append(new RString("時"));
-        systemDateTime.append(String.format("%02d", datetime.getMinute()));
-        systemDateTime.append(new RString("分"));
-        systemDateTime.append(String.format("%02d", datetime.getSecond()));
-        systemDateTime.append(new RString("秒"));
-        return systemDateTime.toRString();
     }
 
     private RString set提出期限(HomonChosaIraishoRelateEntity entity) {

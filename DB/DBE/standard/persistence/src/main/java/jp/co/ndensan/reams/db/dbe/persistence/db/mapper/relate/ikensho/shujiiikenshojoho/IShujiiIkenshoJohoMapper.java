@@ -10,6 +10,8 @@ import jp.co.ndensan.reams.db.dbe.entity.db.relate.ikensho.shujiiikenshojoho.Shu
 
 /**
  * 要介護認定主治医意見書情報のマッパーインタフェースです。
+ *
+ * @reamsid_L DBE-9999-011 sunhaidi
  */
 public interface IShujiiIkenshoJohoMapper {
 

@@ -13,6 +13,8 @@ import jp.co.ndensan.reams.db.dba.entity.db.otheraddressledger.OtherAddressInfor
 
 /**
  * 他市町村住所地特例者情報のMapperクラスです。
+ *
+ * @reamsid_L DBA-0402-020 wangjie2
  */
 public interface IOtherAddressInformationMapper {
 

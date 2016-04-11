@@ -91,11 +91,10 @@ public class RankJohoManager {
     public List<RankJoho> getランク情報一覧By賦課年度(FlexibleYear 賦課年度) {
         List<RankJoho> businessList = new ArrayList<>();
 
-        for (DbT2011RankJohoEntity entity : dac.selectBy賦課年度(賦課年度)) {
-            entity.initializeMd5();
-            businessList.add(new RankJoho(entity));
-        }
-
+//        for (DbT2011RankJohoEntity entity : dac.selectBy賦課年度(賦課年度)) {
+//            entity.initializeMd5();
+//            businessList.add(new RankJoho(entity));
+//        }
         return businessList;
     }
 
