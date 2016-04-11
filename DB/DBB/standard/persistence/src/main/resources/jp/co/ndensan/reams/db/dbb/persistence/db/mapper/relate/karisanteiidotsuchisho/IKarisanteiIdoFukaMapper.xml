@@ -1,0 +1,433 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 概要： 調定簿作成のマッピング用XMLです。 -->
+<!-- @reamsid_L DBB-0890-040 zhangrui -->
+
+<mapper namespace="jp.co.ndensan.reams.db.dbb.persistence.db.mapper.relate.karisanteiidotsuchisho.IKarisanteiIdoFukaMapper">
+    <!--
+    <insert id="delete異動賦課情報一時テーブル">
+        DELETE FROM "DbTIdofukaJohoTemp"
+    </insert>
+    <insert id="insert異動賦課情報一時テーブルFROM計算後情報"
+            parameterType="java.util.Map">
+        INSERT INTO "DbTIdofukaJohoTemp"
+        SELECT 
+            計算後情報.*,
+            宛名.*,
+            年金特徴回付情報.*,
+            宛先.*,
+            納組.*,
+            口座,*,
+            宛先代納."kanjiShimei"
+        FROM
+            rgdb."DbT2015KeisangoJoho" AS 計算後情報
+        INNER JOIN rgua."UaFt200FindShikibetsuTaisho"('','',false,'DB',false,'','','','','','','','','','','',true,
+            '','','','','','','',true,'','','','','','','','','','','',true,true,true,true,true,true,true,true,true,
+            true,true,'','','','','','','','',true,'','',true,true,true,'','','','','','','','','','','','','','','',
+            '','','','{}') AS 宛名
+        ON 宛名."shikibetsuCode" = 計算後情報."shikibetsuCode"
+        INNER JOIN rgua."UaFt250FindAtesaki"('DB','DBB','',null,'','',null,null,null,null,'') AS 宛先
+        ON 宛先."shikibetsuCode" = 計算後情報."shikibetsuCode"
+        INNER JOIN rgua."UaFt250FindAtesaki"('DB','DBB','',true,'','',true,null,null,null,'') AS 宛先代納
+        ON 宛先代納."shikibetsuCode" = 計算後情報."shikibetsuCode"
+        LEFT JOIN rshare."UrFt703FindNokumi"(NULL, NULL, 'DB', 'DBB', NULL, NULL, NULL) AS 納組
+        ON 納組."shikibetsuCode" = 計算後情報."shikibetsuCode"
+        LEFT JOIN rshare."UrFt700FindKoza"('DB', 'DBB', NULL, NULL, NULL, NULL) AS 口座
+        ON 口座."shikibetsuCode" = 計算後情報."shikibetsuCode"
+        INNER JOIN rgdb."UeT0511NenkinTokuchoKaifuJoho" AS 年金特徴回付情報
+        ON  計算後情報."kariNenkinNo" = 年金特徴回付情報."kisoNenkinNo"
+        AND 計算後情報."kariNenkinCode" = 年金特徴回付情報."nenkinCode"
+        AND 計算後情報."kariHosokuM" = 年金特徴回付情報."hosokuTsuki"
+        AND 年金特徴回付情報."tsuchiNaiyoCode" IN (#{特別徴収対象者情報}, #{特別徴収追加候補者情報})
+        AND 年金特徴回付情報."shoriNendo" = #{調定年度}
+        WHERE 計算後情報."choteiNendo" = #{調定年度}
+        AND   計算後情報."fukaNendo" = #{賦課年度}
+        AND   計算後情報."koseiZengoKubun" = #{更正前後区分}
+        AND   計算後情報."sakuseiShoriName" = #{作成処理名}
+        AND   計算後情報."choteiNichiji" = #{調定日時}
+    </insert>
+    <insert id="insert異動賦課情報一時テーブルFROM計算後情報一時"
+            parameterType="java.util.Map">
+        INSERT INTO "DbTIdofukaJohoTemp"
+        SELECT 
+            計算後情報一時.*,
+            宛名.*,
+            年金特徴回付情報.*,
+            宛先.*,
+            納組.*,
+            口座,*,
+            宛先代納."kanjiShimei"
+        FROM
+            "DbT2015KeisangoJohoTemp" AS 計算後情報一時
+        INNER JOIN rgua."UaFt200FindShikibetsuTaisho"('','',false,'DB',false,'','','','','','','','','','','',true,
+            '','','','','','','',true,'','','','','','','','','','','',true,true,true,true,true,true,true,true,true,
+            true,true,'','','','','','','','',true,'','',true,true,true,'','','','','','','','','','','','','','','',
+            '','','','{}') AS 宛名
+        ON 宛名."shikibetsuCode" = 計算後情報一時."shikibetsuCode"
+        INNER JOIN rgua."UaFt250FindAtesaki"('DB','DBB','',null,'','',null,null,null,null,'') AS 宛先
+        ON 宛先."shikibetsuCode" = 計算後情報一時."shikibetsuCode"
+        INNER JOIN rgua."UaFt250FindAtesaki"('DB','DBB','',true,'','',true,null,null,null,'') AS 宛先代納
+        ON 宛先代納."shikibetsuCode" = 計算後情報一時."shikibetsuCode"
+        LEFT JOIN rshare."UrFt703FindNokumi"(NULL, NULL, 'DB', 'DBB', NULL, NULL, NULL) AS 納組
+        ON 納組."shikibetsuCode" = 計算後情報一時."shikibetsuCode"
+        LEFT JOIN rshare."UrFt700FindKoza"('DB', 'DBB', NULL, NULL, NULL, NULL) AS 口座
+        ON 口座."shikibetsuCode" = 計算後情報一時."shikibetsuCode"
+        INNER JOIN rgdb."UeT0511NenkinTokuchoKaifuJoho" AS 年金特徴回付情報
+        ON  計算後情報一時."kariNenkinNo" = 年金特徴回付情報."kisoNenkinNo"
+        AND 計算後情報一時."kariNenkinCode" = 年金特徴回付情報."nenkinCode"
+        AND 計算後情報一時."kariHosokuM" = 年金特徴回付情報."hosokuTsuki"
+        AND 年金特徴回付情報."tsuchiNaiyoCode" IN (#{特別徴収対象者情報}, #{特別徴収追加候補者情報})
+        AND 年金特徴回付情報."shoriNendo" = #{調定年度}
+        WHERE 計算後情報一時."choteiNendo" = #{調定年度}
+        AND   計算後情報一時."fukaNendo" = #{賦課年度}
+        AND   計算後情報一時."koseiZengoKubun" = #{更正前後区分}
+        AND   計算後情報一時."sakuseiShoriName" = #{仮算定異動賦課}
+        AND   計算後情報一時."choteiNichiji" = #{調定日時}
+    </insert>
+    <insert id="update異動賦課情報一時テーブルFROM計算後情報">
+        
+    </insert>
+    <insert id="update異動賦課情報一時テーブルFROM計算後情報一時">
+        
+    </insert>
+    <insert id="update異動賦課情報一時テーブル更正前対象者情報">
+        
+    </insert>
+    <insert id="update異動賦課情報一時テーブル生活保護区分"
+            parameterType="java.util.Map">
+        UPDATE "DbTIdofukaJohoTemp"
+        SET "DbTIdofukaJohoTemp"."seikatsuHogoKubun" = #{生活保護区分}
+        WHERE "DbTIdofukaJohoTemp"."seihoKaishiYMD" IS NOT NULL
+    </insert>
+    <insert id="delete全件賦課情報一時テーブル">
+        DELETE FROM "DbTZenkenfukaJohoTemp"
+    </insert>
+    <insert id="insert全件賦課情報一時テーブルFROM計算後情報一時"
+            parameterType="java.util.Map">
+        INSERT INTO "DbTZenkenfukaJohoTemp"
+        SELECT 
+            計算後情報一時.*,
+            宛名.*,
+            年金特徴回付情報.*,
+            宛先.*,
+            納組.*,
+            口座,*,
+            宛先代納."kanjiShimei"
+        FROM
+            "DbT2015KeisangoJohoTemp" AS 計算後情報一時
+        INNER JOIN rgua."UaFt200FindShikibetsuTaisho"('','',false,'DB',false,'','','','','','','','','','','',true,
+            '','','','','','','',true,'','','','','','','','','','','',true,true,true,true,true,true,true,true,true,
+            true,true,'','','','','','','','',true,'','',true,true,true,'','','','','','','','','','','','','','','',
+            '','','','{}') AS 宛名
+        ON 宛名."shikibetsuCode" = 計算後情報一時."shikibetsuCode"
+        INNER JOIN rgua."UaFt250FindAtesaki"('DB','DBB','',null,'','',null,null,null,null,'') AS 宛先
+        ON 宛先."shikibetsuCode" = 計算後情報一時."shikibetsuCode"
+        INNER JOIN rgua."UaFt250FindAtesaki"('DB','DBB','',true,'','',true,null,null,null,'') AS 宛先代納
+        ON 宛先代納."shikibetsuCode" = 計算後情報一時."shikibetsuCode"
+        LEFT JOIN rshare."UrFt703FindNokumi"(NULL, NULL, 'DB', 'DBB', NULL, NULL, NULL) AS 納組
+        ON 納組."shikibetsuCode" = 計算後情報一時."shikibetsuCode"
+        LEFT JOIN rshare."UrFt700FindKoza"('DB', 'DBB', NULL, NULL, NULL, NULL) AS 口座
+        ON 口座."shikibetsuCode" = 計算後情報一時."shikibetsuCode"
+        INNER JOIN rgdb."UeT0511NenkinTokuchoKaifuJoho" AS 年金特徴回付情報
+        ON  計算後情報一時."kariNenkinNo" = 年金特徴回付情報."kisoNenkinNo"
+        AND 計算後情報一時."kariNenkinCode" = 年金特徴回付情報."nenkinCode"
+        AND 計算後情報一時."kariHosokuM" = 年金特徴回付情報."hosokuTsuki"
+        AND 年金特徴回付情報."tsuchiNaiyoCode" IN (#{特別徴収対象者情報}, #{特別徴収追加候補者情報})
+        AND 年金特徴回付情報."shoriNendo" = #{調定年度}
+        WHERE 計算後情報一時."choteiNendo" = #{調定年度}
+        AND   計算後情報一時."fukaNendo" = #{賦課年度}
+        AND   計算後情報一時."koseiZengoKubun" = #{更正前後区分}
+        AND   計算後情報一時."sakuseiShoriName" = #{仮算定異動賦課}
+        AND   計算後情報一時."choteiNichiji" = #{調定日時}
+    </insert>
+    <insert id="update全件賦課情報一時テーブルFROM計算後情報一時">
+        
+    </insert>
+    <insert id="update全件賦課情報一時テーブル更正前対象者情報">
+        
+    </insert>
+    <insert id="update全件賦課情報一時テーブル生活保護区分"
+            parameterType="java.util.Map">
+        UPDATE "DbTZenkenfukaJohoTemp"
+        SET "DbTZenkenfukaJohoTemp"."seikatsuHogoKubun" = #{生活保護区分}
+        WHERE "DbTZenkenfukaJohoTemp"."seihoKaishiYMD" IS NOT NULL
+    </insert>
+    <select id="selectCount異動賦課情報一時テーブル" resultClass="java.lang.Integer">
+        SELECT COUNT(*) FROM "DbTIdofukaJohoTemp"
+    </select>
+    <select id="selectCount全件賦課情報一時テーブル" resultClass="java.lang.Integer">
+        SELECT COUNT(*) FROM "DbTZenkenfukaJohoTemp"
+    </select>
+    <select id="selectAll異動賦課情報一時テーブル" resultMap="" parameterType="java.util.Map">
+        SELECT "DbTIdofukaJohoTemp".* FROM "DbTIdofukaJohoTemp"
+        WHERE  "DbTIdofukaJohoTemp"."" = '1'
+        ORDER BY #{出力順}
+    </select>
+    <insert id="insert通知書発行後異動者">
+        
+    </insert>
+    <select id="select全項目From全件賦課情報一時テーブル"
+            parameterType="jp.co.ndensan.reams.db.dbb.definition.mybatisprm.karisanteiidotsuchisho.IdoOrZenkenFukaSelectParameter">
+        SELECT * FROM "DbTZenkenfukaJohoTemp" AS 一時テーブル
+        WHERE 1==1 AND (
+        <if test="is出力期_1()">
+            一時テーブル."fuKibetsuGaku01" <![CDATA[>]]> 0 OR
+        </if>
+        <if test="is出力期_2()">
+            一時テーブル."fuKibetsuGaku02" <![CDATA[>]]> 0 OR
+        </if>
+        <if test="is出力期_3()">
+            一時テーブル."fuKibetsuGaku03" <![CDATA[>]]> 0 OR
+        </if>
+        <if test="is出力期_4()">
+            一時テーブル."fuKibetsuGaku04" <![CDATA[>]]> 0 OR
+        </if>
+        <if test="is出力期_5()">
+            一時テーブル."fuKibetsuGaku05" <![CDATA[>]]> 0 OR
+        </if>
+        <if test="is出力期_6()">
+            一時テーブル."fuKibetsuGaku06" <![CDATA[>]]> 0 OR
+        </if>
+        <if test="is出力期_7()">
+            一時テーブル."fuKibetsuGaku07" <![CDATA[>]]> 0 OR
+        </if>
+        <if test="is出力期_8()">
+            一時テーブル."fuKibetsuGaku08" <![CDATA[>]]> 0 OR
+        </if>
+        <if test="is出力期_9()">
+            一時テーブル."fuKibetsuGaku09" <![CDATA[>]]> 0 OR
+        </if>
+        <if test="is出力期_10()">
+            一時テーブル."fuKibetsuGaku10" <![CDATA[>]]> 0 OR
+        </if>
+        <if test="is出力期_11()">
+            一時テーブル."fuKibetsuGaku11" <![CDATA[>]]> 0 OR
+        </if>
+        <if test="is出力期_12()">
+            一時テーブル."fuKibetsuGaku12" <![CDATA[>]]> 0 OR
+        </if>
+        <if test="is出力期_13()">
+            一時テーブル."fuKibetsuGaku13" <![CDATA[>]]> 0 OR
+        </if>
+        <if test="is出力期_14()">
+            一時テーブル."fuKibetsuGaku14" <![CDATA[>]]> 0
+        </if>
+        )
+        <if test="is対象者区分_現金納付者() || is対象者区分_口座振替者()">
+            AND 一時テーブル."kozaKubun" = #{口座区分}
+        </if>
+        <if test="is処理対象N_全件対象() && is通知書プリント条件N_差引き保険料１円以上()">
+            AND <include refid="kibetsuGakuShunyuGaku" />
+        </if>
+        <if test="is処理対象N_異動分対象()">
+            <if test="is通知書プリント条件N_全被保険者()">
+                AND (<include refid="kibetsuGakuZengo" />)
+                AND <include refid="kibetsuGakuShunyuGaku" />
+            </if>
+            <if test="is通知書プリント条件N_差引き保険料１円以上()">
+                AND ( <include refid="kibetsuGakuShunyuGaku" />
+                    OR (<include refid="kibetsuGakuZengo" />)
+                )
+            </if>
+            <if test="is通知書プリント条件N_保険料変更有り()">
+                AND <include refid="kibetsuGakuShunyuGaku" />
+                AND 一時テーブル."kakuteiHokenryo" <![CDATA[<>]]> 一時テーブル."kakuteiHokenryo"
+            </if>
+        </if>
+        <if test="is生活保護対象者_する()">
+            ORDER BY 一時テーブル.生保区分 DESC, 一時テーブル."kozaKubun" ASC, #{出力順}
+        </if>
+        <if test="is生活保護対象者_しない()">
+            ORDER BY 一時テーブル."kozaKubun" ASC, #{出力順}
+        </if>
+    </select>
+    <sql id="kibetsuGakuShunyuGaku">
+        (
+            <if test="is出力期_1">
+                一時テーブル."fuKibetsuGaku01" + 
+            </if>
+            <if test="is出力期_2()">
+                一時テーブル."fuKibetsuGaku02" + 
+            </if>
+            <if test="is出力期_3()">
+                一時テーブル."fuKibetsuGaku03" + 
+            </if>
+            <if test="is出力期_4()">
+                一時テーブル."fuKibetsuGaku04" + 
+            </if>
+            <if test="is出力期_5()">
+                一時テーブル."fuKibetsuGaku05" + 
+            </if>
+            <if test="is出力期_6()">
+                一時テーブル."fuKibetsuGaku06" + 
+            </if>
+            <if test="is出力期_7()">
+                一時テーブル."fuKibetsuGaku07" + 
+            </if>
+            <if test="is出力期_8()">
+                一時テーブル."fuKibetsuGaku08" + 
+            </if>
+            <if test="is出力期_9()">
+                一時テーブル."fuKibetsuGaku09" + 
+            </if>
+            <if test="is出力期_10()">
+                一時テーブル."fuKibetsuGaku10" + 
+            </if>
+            <if test="is出力期_11()">
+                一時テーブル."fuKibetsuGaku11" + 
+            </if>
+            <if test="is出力期_12()">
+                一時テーブル."fuKibetsuGaku12" + 
+            </if>
+            <if test="is出力期_13()">
+                一時テーブル."fuKibetsuGaku13" + 
+            </if>
+            <if test="is出力期_14()">
+                一時テーブル."fuKibetsuGaku14"
+            </if>
+        ) - (
+            <if test="is出力期_1()">
+                一時テーブル."fuShunyuGaku01" + 
+            </if>
+            <if test="is出力期_2()">
+                一時テーブル."fuShunyuGaku02" + 
+            </if>
+            <if test="is出力期_3()">
+                一時テーブル."fuShunyuGaku03" + 
+            </if>
+            <if test="is出力期_4()">
+                一時テーブル."fuShunyuGaku04" + 
+            </if>
+            <if test="is出力期_5()">
+                一時テーブル."fuShunyuGaku05" + 
+            </if>
+            <if test="is出力期_6()">
+                一時テーブル."fuShunyuGaku06" + 
+            </if>
+            <if test="is出力期_7()">
+                一時テーブル."fuShunyuGaku07" + 
+            </if>
+            <if test="is出力期_8()">
+                一時テーブル."fuShunyuGaku08" + 
+            </if>
+            <if test="is出力期_9()">
+                一時テーブル."fuShunyuGaku09" + 
+            </if>
+            <if test="is出力期_10()">
+                一時テーブル."fuShunyuGaku10" + 
+            </if>
+            <if test="is出力期_11()">
+                一時テーブル."fuShunyuGaku11" + 
+            </if>
+            <if test="is出力期_12()">
+                一時テーブル."fuShunyuGaku12" + 
+            </if>
+            <if test="is出力期_13()">
+                一時テーブル."fuShunyuGaku13" + 
+            </if>
+            <if test="is出力期_14()">
+                一時テーブル."fuShunyuGaku14"
+            </if>
+        ) <![CDATA[>=]]> 1 AND
+    </sql>
+    <sql id="kibetsuGakuZengo">
+        一時テーブル."kozaKubun" <![CDATA[<>]]> 一時テーブル."kozaKubun"
+     OR(
+        一時テーブル."tkKibetsuGaku01" <![CDATA[<>]]> 一時テーブル."tkKibetsuGaku01" OR
+        一時テーブル."tkKibetsuGaku02" <![CDATA[<>]]> 一時テーブル."tkKibetsuGaku02" OR
+        一時テーブル."tkKibetsuGaku03" <![CDATA[<>]]> 一時テーブル."tkKibetsuGaku03" OR
+        一時テーブル."tkKibetsuGaku04" <![CDATA[<>]]> 一時テーブル."tkKibetsuGaku04" OR
+        一時テーブル."tkKibetsuGaku05" <![CDATA[<>]]> 一時テーブル."tkKibetsuGaku05" OR
+        一時テーブル."tkKibetsuGaku06" <![CDATA[<>]]> 一時テーブル."tkKibetsuGaku06" OR
+        一時テーブル."fuKibetsuGaku01" <![CDATA[<>]]> 一時テーブル."fuKibetsuGaku01" OR
+        一時テーブル."fuKibetsuGaku02" <![CDATA[<>]]> 一時テーブル."fuKibetsuGaku02" OR
+        一時テーブル."fuKibetsuGaku03" <![CDATA[<>]]> 一時テーブル."fuKibetsuGaku03" OR
+        一時テーブル."fuKibetsuGaku04" <![CDATA[<>]]> 一時テーブル."fuKibetsuGaku04" OR
+        一時テーブル."fuKibetsuGaku05" <![CDATA[<>]]> 一時テーブル."fuKibetsuGaku05" OR
+        一時テーブル."fuKibetsuGaku06" <![CDATA[<>]]> 一時テーブル."fuKibetsuGaku06" OR
+        一時テーブル."fuKibetsuGaku07" <![CDATA[<>]]> 一時テーブル."fuKibetsuGaku07" OR
+        一時テーブル."fuKibetsuGaku08" <![CDATA[<>]]> 一時テーブル."fuKibetsuGaku08" OR
+        一時テーブル."fuKibetsuGaku09" <![CDATA[<>]]> 一時テーブル."fuKibetsuGaku09" OR
+        一時テーブル."fuKibetsuGaku10" <![CDATA[<>]]> 一時テーブル."fuKibetsuGaku10" OR
+        一時テーブル."fuKibetsuGaku11" <![CDATA[<>]]> 一時テーブル."fuKibetsuGaku11" OR
+        一時テーブル."fuKibetsuGaku12" <![CDATA[<>]]> 一時テーブル."fuKibetsuGaku12" OR
+        一時テーブル."fuKibetsuGaku13" <![CDATA[<>]]> 一時テーブル."fuKibetsuGaku13" OR
+        一時テーブル."fuKibetsuGaku14" <![CDATA[<>]]> 一時テーブル."fuKibetsuGaku14")
+    </sql>
+    <select id="select全項目From異動賦課情報一時テーブル"
+            parameterType="jp.co.ndensan.reams.db.dbb.definition.mybatisprm.karisanteiidotsuchisho.IdoOrZenkenFukaSelectParameter">
+        SELECT * FROM "DbTIdofukaJohoTemp" AS 一時テーブル
+        WHERE 1==1 AND (
+        <if test="is出力期_1()">
+            一時テーブル."fuKibetsuGaku01" <![CDATA[>]]> 0 OR
+        </if>
+        <if test="is出力期_2()">
+            一時テーブル."fuKibetsuGaku02" <![CDATA[>]]> 0 OR
+        </if>
+        <if test="is出力期_3()">
+            一時テーブル."fuKibetsuGaku03" <![CDATA[>]]> 0 OR
+        </if>
+        <if test="is出力期_4()">
+            一時テーブル."fuKibetsuGaku04" <![CDATA[>]]> 0 OR
+        </if>
+        <if test="is出力期_5()">
+            一時テーブル."fuKibetsuGaku05" <![CDATA[>]]> 0 OR
+        </if>
+        <if test="is出力期_6()">
+            一時テーブル."fuKibetsuGaku06" <![CDATA[>]]> 0 OR
+        </if>
+        <if test="is出力期_7()">
+            一時テーブル."fuKibetsuGaku07" <![CDATA[>]]> 0 OR
+        </if>
+        <if test="is出力期_8()">
+            一時テーブル."fuKibetsuGaku08" <![CDATA[>]]> 0 OR
+        </if>
+        <if test="is出力期_9()">
+            一時テーブル."fuKibetsuGaku09" <![CDATA[>]]> 0 OR
+        </if>
+        <if test="is出力期_10()">
+            一時テーブル."fuKibetsuGaku10" <![CDATA[>]]> 0 OR
+        </if>
+        <if test="is出力期_11()">
+            一時テーブル."fuKibetsuGaku11" <![CDATA[>]]> 0 OR
+        </if>
+        <if test="is出力期_12()">
+            一時テーブル."fuKibetsuGaku12" <![CDATA[>]]> 0 OR
+        </if>
+        <if test="is出力期_13()">
+            一時テーブル."fuKibetsuGaku13" <![CDATA[>]]> 0 OR
+        </if>
+        <if test="is出力期_14()">
+            一時テーブル."fuKibetsuGaku14" <![CDATA[>]]> 0
+        </if>
+        )
+        <if test="is対象者区分_現金納付者() || is対象者区分_口座振替者()">
+            AND 一時テーブル."kozaKubun" = #{口座区分}
+        </if>
+        <if test="is処理対象N_全件対象() && is通知書プリント条件N_差引き保険料１円以上()">
+            AND <include refid="kibetsuGakuShunyuGaku" />
+        </if>
+        <if test="is処理対象N_異動分対象()">
+            <if test="is通知書プリント条件N_全被保険者()">
+                AND (<include refid="kibetsuGakuZengo" />)
+                AND <include refid="kibetsuGakuShunyuGaku" />
+            </if>
+            <if test="is通知書プリント条件N_差引き保険料１円以上()">
+                AND ( <include refid="kibetsuGakuShunyuGaku" />
+                    OR (<include refid="kibetsuGakuZengo" />)
+                )
+            </if>
+            <if test="is通知書プリント条件N_保険料変更有り()">
+                AND <include refid="kibetsuGakuShunyuGaku" />
+                AND 一時テーブル."kakuteiHokenryo" <![CDATA[<>]]> 一時テーブル."kakuteiHokenryo"
+            </if>
+        </if>
+        <if test="is生活保護対象者_する()">
+            ORDER BY 一時テーブル.生保区分 DESC, 一時テーブル."kozaKubun" ASC, #{出力順}
+        </if>
+        <if test="is生活保護対象者_しない()">
+            ORDER BY 一時テーブル."kozaKubun" ASC, #{出力順}
+        </if>
+    </select>
+    -->
+</mapper>
