@@ -15,6 +15,8 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
  * 国保連情報受取データ取込_[38B・38G]高額合算支給（不支給）決定通知書情報
+ *
+ * @reamsid_L DBC-0980-100 xuhao
  */
 public class TsuchishoJoho38B38G {
 
