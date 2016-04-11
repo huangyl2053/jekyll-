@@ -10,6 +10,8 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
  * 介護認定審査会委員情報の識別子です。
+ *
+ * @reamsid_L DBE-9999-011 sunhaidi
  */
 @SuppressWarnings("PMD.UnusedPrivateField")
 @lombok.Value

@@ -13,6 +13,8 @@ import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5594ShinsakaiIinJohoEntity;
 
 /**
  * 合議体割当委員情報RelateEntityクラスです。
+ *
+ * @reamsid_L DBE-9999-011 sunhaidi
  */
 @lombok.Getter
 public class GogitaiWariateIinJohoRelateEntity implements Serializable {
