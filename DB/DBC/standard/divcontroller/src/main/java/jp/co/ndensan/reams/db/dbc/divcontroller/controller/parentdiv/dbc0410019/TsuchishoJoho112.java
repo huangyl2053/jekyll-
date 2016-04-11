@@ -15,6 +15,8 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
  * 国保連情報受取データ取込_[112]給付管理票情報
+ *
+ * @reamsid_L DBC-0980-120 xuhao
  */
 public class TsuchishoJoho112 {
 
