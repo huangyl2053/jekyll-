@@ -29,7 +29,9 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.KeyValueDataSource;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 
 /**
- * 事業報告（月報）補正発行検索.
+ * 事業報告（月報）補正発行検索。
+ *
+ * @reamsid_L DBU-1100-010 huangyanan
  */
 public class JigyoJokyoHokokuHoseiKensaku {
 
