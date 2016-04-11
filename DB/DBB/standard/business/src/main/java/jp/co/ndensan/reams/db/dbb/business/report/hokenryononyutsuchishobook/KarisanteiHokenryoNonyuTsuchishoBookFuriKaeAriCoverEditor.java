@@ -30,7 +30,8 @@ import jp.co.ndensan.reams.uz.uza.math.Decimal;
 
 /**
  *
- * 保険料納入通知書（仮算定）【ブックタイプ】（口振依頼あり）通知書 KarisanteiHokenryoNonyuTsuchishoBookFuriKaeAriCoverEditor
+ * 保険料納入通知書（仮算定）【ブックタイプ】（口振依頼あり）通知書
+ * KarisanteiHokenryoNonyuTsuchishoBookFuriKaeAriCoverEditor
  *
  * @reamsid_L DBB-9110-040 wangjie2
  */
@@ -219,10 +220,8 @@ public class KarisanteiHokenryoNonyuTsuchishoBookFuriKaeAriCoverEditor
 
     private void editNokibetsuMeisaishoHohokenshaName(KarisanteiHokenryoNonyuTsuchishoBookFuriKaeAriCoverSource source) {
         NofuShoKyotsu 納付書共通 = null == 仮算定納入通知書情報.get納付書共通() ? new NofuShoKyotsu() : 仮算定納入通知書情報.get納付書共通();
-        if (仮算定納入通知書情報 != null) {
-            if (納付書共通 != null) {
-                source.nokibetsuMeisaishoHohokenshaName = 納付書共通.get被保険者氏名().getColumnValue();
-            }
+        if (仮算定納入通知書情報 != null && 納付書共通 != null) {
+            source.nokibetsuMeisaishoHohokenshaName = 納付書共通.get被保険者氏名().getColumnValue();
         }
     }
 

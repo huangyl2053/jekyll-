@@ -34,7 +34,7 @@ public class KyufuJissekiGaitoshaListPanel {
             KyufuJissekiGaitoshaListPanelDiv panel, SearchToKyufujissekiPanelDiv srchpanel) {
 
         //給付実積該当一覧の内容を設定する。
-        setKyufuJissekiGaitoshaList(panel, srchpanel);
+        setKyufuJissekiGaitoshaList(panel);
 
         return ResponseData.of(panel).respond();
     }
@@ -42,8 +42,7 @@ public class KyufuJissekiGaitoshaListPanel {
     /*
      * 介護給付費過誤申立書登録 給付実積該当一覧のデータを設定する。
      */
-    private void setKyufuJissekiGaitoshaList(
-            KyufuJissekiGaitoshaListPanelDiv panel, SearchToKyufujissekiPanelDiv srchpanel) {
+    private void setKyufuJissekiGaitoshaList(KyufuJissekiGaitoshaListPanelDiv panel) {
         List<dgHihokenshaSearchGaitosha_Row> arraydata = createRowKyufuJissekiGaitoshaTestData();
 
         DataGrid<dgHihokenshaSearchGaitosha_Row> grid = panel.getDgHihokenshaSearchGaitosha();

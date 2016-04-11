@@ -21,9 +21,9 @@ public class KarisanteiNonyuTsuchishoCVSMultiReport extends INonyuTsuchisho<Kari
 
     private final KariSanteiNonyuTsuchiShoJoho item;
     //private final RString renchoKubun = new RString("1");
-    private static final int INT_2 = 2;
-    private static final int INT_5 = 5;
-    private static final int INT_8 = 8;
+//    private static final int INT_2 = 2;
+//    private static final int INT_5 = 5;
+//    private static final int INT_8 = 8;
 
     /**
      * インスタンスを生成します。
