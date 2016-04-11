@@ -34,15 +34,16 @@ import jp.co.ndensan.reams.db.dbd.entity.db.basic.DbT4014RiyoshaFutangakuGengaku
 import jp.co.ndensan.reams.db.dbd.entity.db.basic.DbT4021ShiharaiHohoHenkoEntity;
 import jp.co.ndensan.reams.db.dbd.persistence.db.basic.DbT4014RiyoshaFutangakuGengakuDac;
 import jp.co.ndensan.reams.db.dbd.persistence.db.basic.DbT4021ShiharaiHohoHenkoDac;
+import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBU;
 import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.DonyuKeitaiCode;
 import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.GyomuBunrui;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HokenKyufuRitsu;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ServiceShuruiCode;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShoKisaiHokenshaNo;
+import jp.co.ndensan.reams.db.dbx.definition.message.DbxErrorMessages;
 import jp.co.ndensan.reams.db.dbx.service.ShichosonSecurityJoho;
 import jp.co.ndensan.reams.db.dbx.service.core.dbbusinessconfig.DbBusinessConifg;
-import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBU;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT1001HihokenshaDaichoEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT4001JukyushaDaichoEntity;
 import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT1001HihokenshaDaichoDac;
@@ -77,6 +78,24 @@ public class JutakuKaishuJizenShinsei {
     private final DbT4021ShiharaiHohoHenkoDac hohoHenkoDac;
     private final DbT4014RiyoshaFutangakuGengakuDac 負担額減額Dac;
     private static final int 区分 = 6;
+    private static final RString キー = new RString("hiHokenshaNo");
+    private static final RString モード_修正 = new RString("修正");
+    private static final RString 単一市町村情報_メッセージ = new RString("介護共通の保険者情報");
+    private static final RString 市町村情報_メッセージ = new RString("市町村情報");
+    private static final RString 様式番号編集_メッセージ = new RString("?:要介護対象");
+    private static final RString 様式番号_21D1 = new RString("21D1");
+    private static final RString 様式番号_21D2 = new RString("21D2");
+    private static final Code 区分コード_01 = new Code("01");
+    private static final Code 区分コード_11 = new Code("11");
+    private static final Code 区分コード_12 = new Code("12");
+    private static final Code 区分コード_13 = new Code("13");
+    private static final Code 区分コード_21 = new Code("21");
+    private static final Code 区分コード_22 = new Code("22");
+    private static final Code 区分コード_23 = new Code("23");
+    private static final Code 区分コード_24 = new Code("24");
+    private static final Code 区分コード_25 = new Code("25");
+    private static final ServiceShuruiCode 種類コード_42 = new ServiceShuruiCode("42");
+    private static final ServiceShuruiCode 種類コード_45 = new ServiceShuruiCode("45");
 
     /**
      * コンストラクタです。
@@ -170,40 +189,38 @@ public class JutakuKaishuJizenShinsei {
         RString 制度改正施行年月日
                 = DbBusinessConifg.get(ConfigNameDBU.制度改正施行日_平成１８年０４月改正, RDate.getNowDate(), SubGyomuCode.DBU介護統計報告);
         FlexibleYearMonth 制度改正施行年月 = new FlexibleYearMonth(制度改正施行年月日.substring(0, 区分));
-        if (new Code("01").equals(jyoho.get要介護認定状態区分コード())) {
+        if (区分コード_01.equals(jyoho.get要介護認定状態区分コード())) {
             if (jyoho.is旧措置者フラグ()) {
-                return new ServiceShuruiCode("45");
+                return 種類コード_45;
             } else {
                 return null;
             }
         }
         if (サービス提供年月.isBefore(制度改正施行年月)) {
-            switch (jyoho.get要介護認定状態区分コード().value().toString()) {
-                case "11":
-                    return new ServiceShuruiCode("45");
-                case "21":
-                case "22":
-                case "23":
-                case "24":
-                case "25":
-                    return new ServiceShuruiCode("42");
-                default:
-                    return null;
+            if (区分コード_11.equals(jyoho.get要介護認定状態区分コード())) {
+                return 種類コード_45;
+            } else if (区分コード_21.equals(jyoho.get要介護認定状態区分コード())
+                    || 区分コード_22.equals(jyoho.get要介護認定状態区分コード())
+                    || 区分コード_23.equals(jyoho.get要介護認定状態区分コード())
+                    || 区分コード_24.equals(jyoho.get要介護認定状態区分コード())
+                    || 区分コード_25.equals(jyoho.get要介護認定状態区分コード())) {
+                return 種類コード_42;
+            } else {
+                return null;
             }
         }
-        switch (jyoho.get要介護認定状態区分コード().value().toString()) {
-            case "12":
-            case "13":
-                return new ServiceShuruiCode("45");
-            case "11":
-            case "21":
-            case "22":
-            case "23":
-            case "24":
-            case "25":
-                return new ServiceShuruiCode("42");
-            default:
-                return null;
+        if (区分コード_12.equals(jyoho.get要介護認定状態区分コード())
+                || 区分コード_13.equals(jyoho.get要介護認定状態区分コード())) {
+            return 種類コード_45;
+        } else if (区分コード_11.equals(jyoho.get要介護認定状態区分コード())
+                || 区分コード_21.equals(jyoho.get要介護認定状態区分コード())
+                || 区分コード_22.equals(jyoho.get要介護認定状態区分コード())
+                || 区分コード_23.equals(jyoho.get要介護認定状態区分コード())
+                || 区分コード_24.equals(jyoho.get要介護認定状態区分コード())
+                || 区分コード_25.equals(jyoho.get要介護認定状態区分コード())) {
+            return 種類コード_42;
+        } else {
+            return null;
         }
     }
 
@@ -241,7 +258,7 @@ public class JutakuKaishuJizenShinsei {
      */
     public ShiharaiKekkaResult getNewJutakuKaishuHi(HihokenshaNo 被保険者番号) {
         Map<String, Object> parameter = new HashMap<>();
-        parameter.put("hiHokenshaNo", 被保険者番号);
+        parameter.put(キー.toString(), 被保険者番号);
         IJutakuKaishuJizenShinseiMapper mapper = mapperProvider.create(IJutakuKaishuJizenShinseiMapper.class);
         List<NewJutakuKaishuHiEntity> list = mapper.get最新住宅改修住所(parameter);
         if (list == null || list.isEmpty()) {
@@ -335,24 +352,24 @@ public class JutakuKaishuJizenShinsei {
                 = DbBusinessConifg.get(ConfigNameDBU.制度改正施行日_平成１８年０４月改正, RDate.getNowDate(), SubGyomuCode.DBU介護統計報告);
         FlexibleYearMonth 制度改正施行日 = new FlexibleYearMonth(制度改正施行年月日.substring(0, 区分));
         if (サービス提供年月.isBefore(制度改正施行日)) {
-            return new RString("21D1");
+            return 様式番号_21D1;
         }
         Code 要介護認定状態区分コード = jyoho.get要介護認定状態区分コード();
         boolean 旧措置者フラグ = jyoho.is旧措置者フラグ();
-        if ((new Code("01").equals(要介護認定状態区分コード) && 旧措置者フラグ)
-                || new Code("12").equals(要介護認定状態区分コード)
-                || new Code("13").equals(要介護認定状態区分コード)) {
-            return new RString("21D2");
+        if ((区分コード_01.equals(要介護認定状態区分コード) && 旧措置者フラグ)
+                || 区分コード_12.equals(要介護認定状態区分コード)
+                || 区分コード_13.equals(要介護認定状態区分コード)) {
+            return 様式番号_21D2;
         }
-        if (new Code("11").equals(要介護認定状態区分コード)
-                || new Code("21").equals(要介護認定状態区分コード)
-                || new Code("22").equals(要介護認定状態区分コード)
-                || new Code("23").equals(要介護認定状態区分コード)
-                || new Code("24").equals(要介護認定状態区分コード)
-                || new Code("25").equals(要介護認定状態区分コード)) {
-            return new RString("21D1");
+        if (区分コード_11.equals(要介護認定状態区分コード)
+                || 区分コード_21.equals(要介護認定状態区分コード)
+                || 区分コード_22.equals(要介護認定状態区分コード)
+                || 区分コード_23.equals(要介護認定状態区分コード)
+                || 区分コード_24.equals(要介護認定状態区分コード)
+                || 区分コード_25.equals(要介護認定状態区分コード)) {
+            return 様式番号_21D1;
         }
-        throw new ApplicationException(UrErrorMessages.存在しない.getMessage().replace("?:要介護対象"));
+        throw new ApplicationException(UrErrorMessages.存在しない.getMessage().replace(様式番号編集_メッセージ.toString()));
     }
 
     /**
@@ -396,10 +413,18 @@ public class JutakuKaishuJizenShinsei {
         Code 導入形態コード = 市町村情報セキュリティ情報.get導入形態コード();
         KoikiShichosonJohoFinder finder = KoikiShichosonJohoFinder.createInstance();
         if ((new Code(DonyuKeitaiCode.事務単一.getCode()).equals(導入形態コード))) {
+            if (finder.koseiShichosonJoho() == null) {
+                throw new ApplicationException(DbxErrorMessages.業務コンフィグなし
+                        .getMessage().replace(単一市町村情報_メッセージ.toString()).evaluate());
+            }
             return finder.koseiShichosonJoho().records().get(0).get証記載保険者番号();
         }
         if ((new Code(DonyuKeitaiCode.事務広域.getCode()).equals(導入形態コード))
                 || (new Code(DonyuKeitaiCode.事務構成市町村.getCode()).equals(導入形態コード))) {
+            if (finder.shichosonCodeYoriShichosonJoho(市町村コード) == null) {
+                throw new ApplicationException(UrErrorMessages.対象データなし
+                        .getMessage().replace(市町村情報_メッセージ.toString()).evaluate());
+            }
             return finder.shichosonCodeYoriShichosonJoho(市町村コード).records().get(0).get証記載保険者番号();
         }
         return null;
@@ -415,11 +440,15 @@ public class JutakuKaishuJizenShinsei {
     @Transaction
     public boolean saveDBDate(ShokanJutakuKaishuJizenShinsei shinsei, List<ShokanJutakuKaishu> kaishuList) {
 
-        jizenShinseiDac.save(shinsei.toEntity());
+        DbT3035ShokanJutakuKaishuJizenShinseiEntity entity = shinsei.toEntity();
+        entity.setState(EntityDataState.Added);
+        jizenShinseiDac.save(entity);
 
         if (kaishuList != null && !kaishuList.isEmpty()) {
             for (ShokanJutakuKaishu kaishu : kaishuList) {
-                jutakuKaishuDac.save(kaishu.toEntity());
+                DbT3049ShokanJutakuKaishuEntity dbt3049entity = kaishu.toEntity();
+                dbt3049entity.setState(EntityDataState.Added);
+                jutakuKaishuDac.save(dbt3049entity);
             }
         }
         return true;
@@ -437,12 +466,16 @@ public class JutakuKaishuJizenShinsei {
     public boolean updDBDate(ShokanJutakuKaishuJizenShinsei shinsei,
             List<ShokanJutakuKaishu> kaishuList, RString mode) {
 
-        jizenShinseiDac.save(shinsei.toEntity());
+        DbT3035ShokanJutakuKaishuJizenShinseiEntity entity = shinsei.toEntity();
+        entity.setState(EntityDataState.Modified);
+        jizenShinseiDac.save(entity);
 
-        if (new RString("修正").equals(mode) && (kaishuList != null && !kaishuList.isEmpty())) {
+        if (モード_修正.equals(mode) && (kaishuList != null && !kaishuList.isEmpty())) {
             for (ShokanJutakuKaishu kaishu : kaishuList) {
                 if (EntityDataState.Deleted.equals(kaishu.toEntity().getState())) {
-                    jutakuKaishuDac.delete(kaishu.toEntity());
+                    DbT3049ShokanJutakuKaishuEntity dbt3049entity = kaishu.toEntity();
+                    dbt3049entity.setState(EntityDataState.Deleted);
+                    jutakuKaishuDac.delete(dbt3049entity);
                 } else {
                     jutakuKaishuDac.save(kaishu.toEntity());
                 }
@@ -461,11 +494,15 @@ public class JutakuKaishuJizenShinsei {
     @Transaction
     public boolean delDBDate(ShokanJutakuKaishuJizenShinsei shinsei, List<ShokanJutakuKaishu> kaishuList) {
 
-        jizenShinseiDac.delete(shinsei.toEntity());
+        DbT3035ShokanJutakuKaishuJizenShinseiEntity entity = shinsei.toEntity();
+        entity.setState(EntityDataState.Deleted);
+        jizenShinseiDac.delete(entity);
 
         if (kaishuList != null && !kaishuList.isEmpty()) {
             for (ShokanJutakuKaishu kaishu : kaishuList) {
-                jutakuKaishuDac.delete(kaishu.toEntity());
+                DbT3049ShokanJutakuKaishuEntity dbt3049entity = kaishu.toEntity();
+                dbt3049entity.setState(EntityDataState.Deleted);
+                jutakuKaishuDac.delete(dbt3049entity);
             }
         }
         return true;
