@@ -4,19 +4,22 @@ package jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.KihonChos
  * このファイルへの変更は、再生成時には損失するため
  * 不正な動作の原因になります。
  */
+
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.ui.binding.*;
+import jp.co.ndensan.reams.uz.uza.ui.binding.ButtonDialog;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
+import jp.co.ndensan.reams.uz.uza.ui.binding.RadioButton;
 
 /**
- * KoudoShogai のクラスファイル 
- * 
- * @author 自動生成
+ * KoudoShogai のクラスファイル
+ *
+ * @reamsid_L DBE-3000-093 wangjie2
  */
 public class KoudoShogaiDiv extends Panel {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-01-15_09-59-03">
+
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -379,7 +382,7 @@ public class KoudoShogaiDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setBtnHiryaku(ButtonDialog btnHiryaku) {
+    public void setBtnHiryaku(ButtonDialog btnHiryaku) {
         this.getHiryaku().setBtnHiryaku(btnHiryaku);
     }
 
@@ -389,7 +392,7 @@ public class KoudoShogaiDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setRadbtnHiryaku(RadioButton radbtnHiryaku) {
+    public void setRadbtnHiryaku(RadioButton radbtnHiryaku) {
         this.getHiryaku().setRadbtnHiryaku(radbtnHiryaku);
     }
 
@@ -399,7 +402,7 @@ public class KoudoShogaiDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setBtnTukuriHanashi(ButtonDialog btnTukuriHanashi) {
+    public void setBtnTukuriHanashi(ButtonDialog btnTukuriHanashi) {
         this.getTukuriHanashi().setBtnTukuriHanashi(btnTukuriHanashi);
     }
 
@@ -409,7 +412,7 @@ public class KoudoShogaiDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setRadTukuriHanashi(RadioButton radTukuriHanashi) {
+    public void setRadTukuriHanashi(RadioButton radTukuriHanashi) {
         this.getTukuriHanashi().setRadTukuriHanashi(radTukuriHanashi);
     }
 
@@ -419,7 +422,7 @@ public class KoudoShogaiDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setBtnKanjyo(ButtonDialog btnKanjyo) {
+    public void setBtnKanjyo(ButtonDialog btnKanjyo) {
         this.getKanjyo().setBtnKanjyo(btnKanjyo);
     }
 
@@ -429,7 +432,7 @@ public class KoudoShogaiDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setRadKanjyo(RadioButton radKanjyo) {
+    public void setRadKanjyo(RadioButton radKanjyo) {
         this.getKanjyo().setRadKanjyo(radKanjyo);
     }
 
@@ -439,7 +442,7 @@ public class KoudoShogaiDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setBtnChuyaku(ButtonDialog btnChuyaku) {
+    public void setBtnChuyaku(ButtonDialog btnChuyaku) {
         this.getChuyaku().setBtnChuyaku(btnChuyaku);
     }
 
@@ -449,7 +452,7 @@ public class KoudoShogaiDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setRadChuyaku(RadioButton radChuyaku) {
+    public void setRadChuyaku(RadioButton radChuyaku) {
         this.getChuyaku().setRadChuyaku(radChuyaku);
     }
 
@@ -459,7 +462,7 @@ public class KoudoShogaiDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setBtnOnajiHanashi(ButtonDialog btnOnajiHanashi) {
+    public void setBtnOnajiHanashi(ButtonDialog btnOnajiHanashi) {
         this.getOnajiHanashi().setBtnOnajiHanashi(btnOnajiHanashi);
     }
 
@@ -469,7 +472,7 @@ public class KoudoShogaiDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setRadOnajiHanashi(RadioButton radOnajiHanashi) {
+    public void setRadOnajiHanashi(RadioButton radOnajiHanashi) {
         this.getOnajiHanashi().setRadOnajiHanashi(radOnajiHanashi);
     }
 
@@ -479,7 +482,7 @@ public class KoudoShogaiDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setBtnBigVoice(ButtonDialog btnBigVoice) {
+    public void setBtnBigVoice(ButtonDialog btnBigVoice) {
         this.getBigVoice().setBtnBigVoice(btnBigVoice);
     }
 
@@ -489,7 +492,7 @@ public class KoudoShogaiDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setRadBigVoice(RadioButton radBigVoice) {
+    public void setRadBigVoice(RadioButton radBigVoice) {
         this.getBigVoice().setRadBigVoice(radBigVoice);
     }
 
@@ -499,7 +502,7 @@ public class KoudoShogaiDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setBtnTeikou(ButtonDialog btnTeikou) {
+    public void setBtnTeikou(ButtonDialog btnTeikou) {
         this.getTeikou().setBtnTeikou(btnTeikou);
     }
 
@@ -509,7 +512,7 @@ public class KoudoShogaiDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setRadTeikou(RadioButton radTeikou) {
+    public void setRadTeikou(RadioButton radTeikou) {
         this.getTeikou().setRadTeikou(radTeikou);
     }
 
@@ -519,7 +522,7 @@ public class KoudoShogaiDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setBtnOchituki(ButtonDialog btnOchituki) {
+    public void setBtnOchituki(ButtonDialog btnOchituki) {
         this.getOchituki().setBtnOchituki(btnOchituki);
     }
 
@@ -529,7 +532,7 @@ public class KoudoShogaiDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setRadOchituki(RadioButton radOchituki) {
+    public void setRadOchituki(RadioButton radOchituki) {
         this.getOchituki().setRadOchituki(radOchituki);
     }
 
@@ -539,7 +542,7 @@ public class KoudoShogaiDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setBtnOutLonly(ButtonDialog btnOutLonly) {
+    public void setBtnOutLonly(ButtonDialog btnOutLonly) {
         this.getOutLonly().setBtnOutLonly(btnOutLonly);
     }
 
@@ -549,7 +552,7 @@ public class KoudoShogaiDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setRadOutLonly(RadioButton radOutLonly) {
+    public void setRadOutLonly(RadioButton radOutLonly) {
         this.getOutLonly().setRadOutLonly(radOutLonly);
     }
 
@@ -559,7 +562,7 @@ public class KoudoShogaiDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setBtnShushu(ButtonDialog btnShushu) {
+    public void setBtnShushu(ButtonDialog btnShushu) {
         this.getShushu().setBtnShushu(btnShushu);
     }
 
@@ -569,7 +572,7 @@ public class KoudoShogaiDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setRadShushu(RadioButton radShushu) {
+    public void setRadShushu(RadioButton radShushu) {
         this.getShushu().setRadShushu(radShushu);
     }
 
@@ -579,7 +582,7 @@ public class KoudoShogaiDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setBtnKowasu(ButtonDialog btnKowasu) {
+    public void setBtnKowasu(ButtonDialog btnKowasu) {
         this.getKowasu().setBtnKowasu(btnKowasu);
     }
 
@@ -589,18 +592,8 @@ public class KoudoShogaiDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setRadKowasu(RadioButton radKowasu) {
+    public void setRadKowasu(RadioButton radKowasu) {
         this.getKowasu().setRadKowasu(radKowasu);
-    }
-
-    @JsonIgnore
-    public RadioButton getRadMonoWasure() {
-        return this.getMonoWasure().getRadMonoWasure();
-    }
-
-    @JsonIgnore
-    public void  setRadMonoWasure(RadioButton radMonoWasure) {
-        this.getMonoWasure().setRadMonoWasure(radMonoWasure);
     }
 
     @JsonIgnore
@@ -609,8 +602,18 @@ public class KoudoShogaiDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setBtnMonoWasure(ButtonDialog btnMonoWasure) {
+    public void setBtnMonoWasure(ButtonDialog btnMonoWasure) {
         this.getMonoWasure().setBtnMonoWasure(btnMonoWasure);
+    }
+
+    @JsonIgnore
+    public RadioButton getRadMonoWasure() {
+        return this.getMonoWasure().getRadMonoWasure();
+    }
+
+    @JsonIgnore
+    public void setRadMonoWasure(RadioButton radMonoWasure) {
+        this.getMonoWasure().setRadMonoWasure(radMonoWasure);
     }
 
     @JsonIgnore
@@ -619,7 +622,7 @@ public class KoudoShogaiDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setBtnHitoriWarai(ButtonDialog btnHitoriWarai) {
+    public void setBtnHitoriWarai(ButtonDialog btnHitoriWarai) {
         this.getHitoriWarai().setBtnHitoriWarai(btnHitoriWarai);
     }
 
@@ -629,7 +632,7 @@ public class KoudoShogaiDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setRadHitoriWarai(RadioButton radHitoriWarai) {
+    public void setRadHitoriWarai(RadioButton radHitoriWarai) {
         this.getHitoriWarai().setRadHitoriWarai(radHitoriWarai);
     }
 
@@ -639,7 +642,7 @@ public class KoudoShogaiDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setBtnKateKodo(ButtonDialog btnKateKodo) {
+    public void setBtnKateKodo(ButtonDialog btnKateKodo) {
         this.getKateKodo().setBtnKateKodo(btnKateKodo);
     }
 
@@ -649,7 +652,7 @@ public class KoudoShogaiDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setRadKateKodo(RadioButton radKateKodo) {
+    public void setRadKateKodo(RadioButton radKateKodo) {
         this.getKateKodo().setRadKateKodo(radKateKodo);
     }
 
@@ -659,7 +662,7 @@ public class KoudoShogaiDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setBtnMatomeNai(ButtonDialog btnMatomeNai) {
+    public void setBtnMatomeNai(ButtonDialog btnMatomeNai) {
         this.getMatomeNai().setBtnMatomeNai(btnMatomeNai);
     }
 
@@ -669,7 +672,7 @@ public class KoudoShogaiDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setRadMatomeNai(RadioButton radMatomeNai) {
+    public void setRadMatomeNai(RadioButton radMatomeNai) {
         this.getMatomeNai().setRadMatomeNai(radMatomeNai);
     }
 

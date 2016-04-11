@@ -4,10 +4,6 @@ var DBZ;
         var Events = (function () {
             function Events() {
             }
-            Events.onClick_btnOpenDialog = function () {
-                return "onClick_btnOpenDialog";
-            };
-
             Events.onClick_btnConfirm = function () {
                 return "onClick_btnConfirm";
             };
@@ -183,12 +179,12 @@ var DBZ;
                 return new UZA.Panel(this.convFiledName("MonoWasure"));
             };
 
-            Controls.prototype.radMonoWasure = function () {
-                return new UZA.RadioButton(this.convFiledName("radMonoWasure"));
-            };
-
             Controls.prototype.btnMonoWasure = function () {
                 return new UZA.ButtonDialog(this.convFiledName("btnMonoWasure"));
+            };
+
+            Controls.prototype.radMonoWasure = function () {
+                return new UZA.RadioButton(this.convFiledName("radMonoWasure"));
             };
 
             Controls.prototype.HitoriWarai = function () {

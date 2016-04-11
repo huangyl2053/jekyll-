@@ -23,6 +23,8 @@ import jp.co.ndensan.reams.uz.uza.util.serialization.DataPassingConverter;
 /**
  *
  * 共有子Div「認定基本調査入力」の第五群社会生活への適用の状態を変更するクラスです。
+ *
+ * @reamsid_L DBE-3000-094 wangjie2
  */
 public class KihonChosaInputHandler5 {
 

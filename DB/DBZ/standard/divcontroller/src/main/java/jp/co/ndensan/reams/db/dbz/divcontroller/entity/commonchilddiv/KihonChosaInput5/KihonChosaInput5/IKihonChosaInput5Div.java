@@ -7,6 +7,8 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.IDialogDiv;
 
 /*
  * このコードはツールによって生成されました。
+ *
+ * @reamsid_L DBE-3000-094 wangjie2
  */
 public interface IKihonChosaInput5Div extends ICommonChildDivBaseProperties, IDialogDiv {
 
