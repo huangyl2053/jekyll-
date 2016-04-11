@@ -13,6 +13,7 @@ import jp.co.ndensan.reams.db.dba.business.core.tekiyojogaisha.tekiyojogaisha.Te
 import jp.co.ndensan.reams.db.dba.business.core.tekiyojogaisha.tekiyojogaisha.TekiyoJogaishaRelate;
 import jp.co.ndensan.reams.db.dba.definition.core.shikakuidojiyu.ShikakuShutokuJiyu;
 import jp.co.ndensan.reams.db.dba.definition.mybatisprm.tekiyojogaisha.TekiyoJogaishaMapperParameter;
+import jp.co.ndensan.reams.db.dba.entity.db.relate.tekiyojogaisha.tekiyojogaisha.TekiyoJogaishaKanriRelateEntity;
 import jp.co.ndensan.reams.db.dba.entity.db.relate.tekiyojogaisha.tekiyojogaisha.TekiyoJogaishaRelateEntity;
 import jp.co.ndensan.reams.db.dba.persistence.db.mapper.relate.tekiyojogaisha.tekiyojogaisha.ITekiyoJogaishaMapper;
 import jp.co.ndensan.reams.db.dba.service.core.hihokenshadaicho.HihokenshaShikakuShutokuManager;
@@ -169,16 +170,32 @@ public class TekiyoJogaishaManager {
     }
 
     /**
-     * 適用除外者情報と施設入退所情報の取得処理をします。
+     * 適用除外者と施設入退所情報の取得処理をします。
      *
      * @param shikibetsuCode 識別コード
      * @param ronrisakujyoFlg 論理削除フラグ
-     * @return SearchResult<TekiyoJogaishaRelate> 適用除外者の管理情報
+     * @return TekiyoJogaishaBusiness 適用除外者管理情報
      */
     @Transaction
-    public TekiyoJogaishaBusiness get適用除外者施設入退所情報(ShikibetsuCode shikibetsuCode, boolean ronrisakujyoFlg) {
+    public TekiyoJogaishaBusiness get適用除外者と施設入退所情報(ShikibetsuCode shikibetsuCode, boolean ronrisakujyoFlg) {
         requireNonNull(shikibetsuCode, UrSystemErrorMessages.値がnull.getReplacedMessage(識別コード.toString()));
         TekiyoJogaishaBusiness tekiyoJogaishaBusiness = new TekiyoJogaishaBusiness();
+        TekiyoJogaishaMapperParameter 適用除外者Parameter = TekiyoJogaishaMapperParameter.
+                createParam_get適用除外者(shikibetsuCode, ronrisakujyoFlg);
+        ITekiyoJogaishaMapper mapper = mapperProvider.create(ITekiyoJogaishaMapper.class);
+        List<TekiyoJogaishaKanriRelateEntity> 適用除外者管理情報List = mapper.get適用除外者と施設入退所情報(適用除外者Parameter);
+        List<TekiyoJogaisha> 適用除外者List = new ArrayList();
+        List<jp.co.ndensan.reams.db.dbz.business.core.ShisetsuNyutaisho> 施設入退所Lsit = new ArrayList();
+        for (TekiyoJogaishaKanriRelateEntity entity : 適用除外者管理情報List) {
+            DbT1002TekiyoJogaishaEntity 適用除外者Entity = entity.get適用除外者Entity();
+            適用除外者Entity.initializeMd5();
+            適用除外者List.add(new TekiyoJogaisha(適用除外者Entity));
+            DbT1004ShisetsuNyutaishoEntity 施設入退所Entity = entity.get施設入退所Entity();
+            施設入退所Entity.initializeMd5();
+            施設入退所Lsit.add(new jp.co.ndensan.reams.db.dbz.business.core.ShisetsuNyutaisho(施設入退所Entity));
+        }
+        tekiyoJogaishaBusiness.set適用除外者List(適用除外者List);
+        tekiyoJogaishaBusiness.set施設入退所Lsit(施設入退所Lsit);
         return tekiyoJogaishaBusiness;
     }
 
@@ -305,63 +322,6 @@ public class TekiyoJogaishaManager {
     private RString get年齢(IDateOfBirth dateOfBirth, FlexibleDate shikakuShutokuYMD) {
         AgeCalculator ageCalculator = new AgeCalculator(dateOfBirth, JuminJotai.住民, FlexibleDate.MAX, AgeArrivalDay.前日, shikakuShutokuYMD);
         return ageCalculator.get年齢();
-    }
-
-    /**
-     * 介護保険施設入退所の取得処理します。
-     *
-     * @param shikibetsuCode 識別コード
-     * @param ronrisakujyoFlg 論理削除フラグ
-     * @return SearchResult<ShisetsuNyutaisho> 介護保険施設入退所の管理情報
-     */
-    @Transaction
-    public SearchResult<ShisetsuNyutaisho> getShisetsuNyutaisho(ShikibetsuCode shikibetsuCode, boolean ronrisakujyoFlg) {
-        List<ShisetsuNyutaisho> tekiyoJogaishaList = new ArrayList<>();
-        TekiyoJogaishaMapperParameter 適用除外者Parameter = TekiyoJogaishaMapperParameter.
-                createParam_get適用除外者(shikibetsuCode, ronrisakujyoFlg);
-        ITekiyoJogaishaMapper mapper = mapperProvider.create(ITekiyoJogaishaMapper.class);
-        List<DbT1002TekiyoJogaishaEntity> 適用除外者List = mapper.getTekiyoJogaisha(適用除外者Parameter);
-        if (適用除外者List == null || 適用除外者List.isEmpty()) {
-            return SearchResult.of(Collections.<ShisetsuNyutaisho>emptyList(), 0, false);
-        }
-        for (DbT1002TekiyoJogaishaEntity dbT1002entity : 適用除外者List) {
-            TekiyoJogaishaMapperParameter 施設情Parameter = TekiyoJogaishaMapperParameter.createParam_get施設情報(
-                    dbT1002entity.getShikibetsuCode(),
-                    dbT1002entity.getKaijoYMD(),
-                    dbT1002entity.getTekiyoYMD());
-            List<DbT1004ShisetsuNyutaishoEntity> 施設情List = mapper.getShisetsuNyutaisho(施設情Parameter);
-            if (施設情List != null && !施設情List.isEmpty()) {
-                for (DbT1004ShisetsuNyutaishoEntity dbT1004entity : 施設情List) {
-                    dbT1004entity.initializeMd5();
-                    tekiyoJogaishaList.add(new ShisetsuNyutaisho(dbT1004entity));
-                }
-            }
-        }
-        return SearchResult.of(tekiyoJogaishaList, 0, false);
-    }
-
-    /**
-     * 適用除外者の取得処理します。
-     *
-     * @param shikibetsuCode 識別コード
-     * @param ronrisakujyoFlg 論理削除フラグ
-     * @return SearchResult<TekiyoJogaishaRelate> 適用除外者の管理情報
-     */
-    @Transaction
-    public SearchResult<TekiyoJogaisha> getTekiyoJogaisha(ShikibetsuCode shikibetsuCode, boolean ronrisakujyoFlg) {
-        List<TekiyoJogaisha> tekiyoJogaishaList = new ArrayList<>();
-        TekiyoJogaishaMapperParameter 適用除外者Parameter = TekiyoJogaishaMapperParameter.
-                createParam_get適用除外者(shikibetsuCode, ronrisakujyoFlg);
-        ITekiyoJogaishaMapper mapper = mapperProvider.create(ITekiyoJogaishaMapper.class);
-        List<DbT1002TekiyoJogaishaEntity> 適用除外者List = mapper.getTekiyoJogaisha(適用除外者Parameter);
-        if (適用除外者List == null || 適用除外者List.isEmpty()) {
-            return SearchResult.of(Collections.<ShisetsuNyutaisho>emptyList(), 0, false);
-        }
-        for (DbT1002TekiyoJogaishaEntity dbT1002entity : 適用除外者List) {
-            dbT1002entity.initializeMd5();
-            tekiyoJogaishaList.add(new TekiyoJogaisha(dbT1002entity));
-        }
-        return SearchResult.of(tekiyoJogaishaList, 0, false);
     }
 
 }

@@ -19,6 +19,6 @@ import jp.co.ndensan.reams.db.dbz.business.core.TekiyoJogaisha;
 @SuppressWarnings("PMD.UnusedPrivateField")
 public class TekiyoJogaishaBusiness {
 
-    private List<TekiyoJogaisha> 住所地特例List;
+    private List<TekiyoJogaisha> 適用除外者List;
     private List<ShisetsuNyutaisho> 施設入退所Lsit;
 }

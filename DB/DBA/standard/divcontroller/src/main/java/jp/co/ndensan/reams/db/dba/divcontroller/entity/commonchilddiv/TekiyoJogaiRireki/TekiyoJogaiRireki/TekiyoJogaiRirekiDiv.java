@@ -48,6 +48,8 @@ public class TekiyoJogaiRirekiDiv extends Panel implements ITekiyoJogaiRirekiDiv
     private Button btnInputClear;
     @JsonProperty("stauts")
     private RString stauts;
+    @JsonProperty("hiddenInputShikibetsuCode")
+    private RString hiddenInputShikibetsuCode;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -179,6 +181,24 @@ public class TekiyoJogaiRirekiDiv extends Panel implements ITekiyoJogaiRirekiDiv
     @JsonProperty("stauts")
     public void setStauts(RString stauts) {
         this.stauts = stauts;
+    }
+
+    /*
+     * gethiddenInputShikibetsuCode
+     * @return hiddenInputShikibetsuCode
+     */
+    @JsonProperty("hiddenInputShikibetsuCode")
+    public RString getHiddenInputShikibetsuCode() {
+        return hiddenInputShikibetsuCode;
+    }
+
+    /*
+     * sethiddenInputShikibetsuCode
+     * @param hiddenInputShikibetsuCode hiddenInputShikibetsuCode
+     */
+    @JsonProperty("hiddenInputShikibetsuCode")
+    public void setHiddenInputShikibetsuCode(RString hiddenInputShikibetsuCode) {
+        this.hiddenInputShikibetsuCode = hiddenInputShikibetsuCode;
     }
 
     /*
