@@ -9,6 +9,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import java.util.HashSet;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.ShisetsuJohoCommonChildDiv.IShisetsuJohoCommonChildDiv;
+import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Button;
 import jp.co.ndensan.reams.uz.uza.ui.binding.DataGrid;
@@ -336,4 +337,36 @@ public class TekiyoJogaiRirekiDiv extends Panel implements ITekiyoJogaiRirekiDiv
 
     // </editor-fold>
     //--------------- この行より下にコードを追加してください -------------------
+    private TekiyoJogaiRirekiHandler getHandler() {
+        return new TekiyoJogaiRirekiHandler(this);
+    }
+
+    /* 状態の設定します。
+     *
+     * @param mode mode
+     */
+    @Override
+    public void set状態(RString mode) {
+        setMode_DisplayMode(TekiyoJogaiRirekiDiv.DisplayMode.getEnum(mode.toString()));
+    }
+
+    /**
+     * 適用除外者管理に初期化を設定します。
+     *
+     * @param 識別コード 識別コード
+     */
+    @Override
+    public void initialize(ShikibetsuCode 識別コード) {
+        getHandler().initialize(識別コード);
+    }
+
+    /**
+     * 適用除外者管理の共有子DIVの画面内容から、適用除外者情報をDBに反映します。
+     *
+     * @param 識別コード 識別コード
+     */
+    @Override
+    public void saveTekiyoJogaisha(ShikibetsuCode 識別コード) {
+        getHandler().saveTekiyoJogaisha(識別コード);
+    }
 }

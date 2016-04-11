@@ -212,10 +212,10 @@ public class TekiyoJogaiRirekiHandler {
      */
     public void onClick_BtnKakunin(datagridTekiyoJogai_Row 選択データ, RString 画面状態) {
         // TODO
-//        Models<TekiyoJogaishaIdentifier, TekiyoJogaisha> 適用除外者Model
-//                = ViewStateHolder.get(jp.co.ndensan.reams.db.dbz.divcontroller.viewbox.ViewStateKeys.適用除外者管理_適用除外者情報, Models.class);
-//        Models<ShisetsuNyutaishoIdentifier, ShisetsuNyutaisho> 保険施設入退所Model
-//                = ViewStateHolder.get(jp.co.ndensan.reams.db.dbz.divcontroller.viewbox.ViewStateKeys.適用除外者管理_保険施設入退所情報, Models.class);
+        Models<TekiyoJogaishaIdentifier, TekiyoJogaisha> 適用除外者Model
+                = ViewStateHolder.get(jp.co.ndensan.reams.db.dbz.divcontroller.viewbox.ViewStateKeys.適用除外者管理_適用除外者情報, Models.class);
+        Models<ShisetsuNyutaishoIdentifier, ShisetsuNyutaisho> 保険施設入退所Model
+                = ViewStateHolder.get(jp.co.ndensan.reams.db.dbz.divcontroller.viewbox.ViewStateKeys.適用除外者管理_保険施設入退所情報, Models.class);
         List<datagridTekiyoJogai_Row> rowList = div.getDatagridTekiyoJogai().getDataSource();
 
         if (rowList == null || rowList.isEmpty()) {
@@ -302,14 +302,10 @@ public class TekiyoJogaiRirekiHandler {
     public void saveTekiyoJogaisha(ShikibetsuCode 識別コード) {
         List<datagridTekiyoJogai_Row> rowList = div.getDatagridTekiyoJogai().getDataSource();
         // TODO
-//        Models<TekiyoJogaishaIdentifier, TekiyoJogaisha> 適用除外者Model
-//                = ViewStateHolder.get(jp.co.ndensan.reams.db.dbz.divcontroller.viewbox.ViewStateKeys.適用除外者管理_適用除外者情報, Models.class);
-//        Models<ShisetsuNyutaishoIdentifier, ShisetsuNyutaisho> 保険施設入退所Model
-//                = ViewStateHolder.get(jp.co.ndensan.reams.db.dbz.divcontroller.viewbox.ViewStateKeys.適用除外者管理_保険施設入退所情報, Models.class);
         Models<TekiyoJogaishaIdentifier, TekiyoJogaisha> 適用除外者Model
-                = ViewStateHolder.get(jp.co.ndensan.reams.db.dbz.divcontroller.viewbox.ViewStateKeys.他住所地特例者管理_他住所地特例, Models.class);
+                = ViewStateHolder.get(jp.co.ndensan.reams.db.dbz.divcontroller.viewbox.ViewStateKeys.適用除外者管理_適用除外者情報, Models.class);
         Models<ShisetsuNyutaishoIdentifier, ShisetsuNyutaisho> 保険施設入退所Model
-                = ViewStateHolder.get(jp.co.ndensan.reams.db.dbz.divcontroller.viewbox.ViewStateKeys.他住所地特例者管理_保険施設入退所, Models.class);
+                = ViewStateHolder.get(jp.co.ndensan.reams.db.dbz.divcontroller.viewbox.ViewStateKeys.適用除外者管理_保険施設入退所情報, Models.class);
         for (datagridTekiyoJogai_Row row : rowList) {
             RString 最大枝番 = TekiyoJogaishaManager.createInstance().get最大の枝番(
                     識別コード, new FlexibleDate(row.getIdoYMD()));
@@ -423,7 +419,11 @@ public class TekiyoJogaiRirekiHandler {
             } else {
                 row.getTaiShoDate().clearValue();
             }
-            row.setNyuShoShisetu(適用除外者情報.get事業者名称().getColumnValue());
+            if (適用除外者情報.get事業者名称() != null && !適用除外者情報.get事業者名称().isEmpty()) {
+                row.setNyuShoShisetu(適用除外者情報.get事業者名称().getColumnValue());
+            } else {
+                row.setNyuShoShisetu(RString.EMPTY);
+            }
             row.setDaichoShubetsu(適用除外者情報.get台帳種別());
             row.setShisetsuShurui(適用除外者情報.get入所施設種類());
             row.setRirekiNo(new RString(適用除外者情報.get履歴番号().toString()));
@@ -431,9 +431,21 @@ public class TekiyoJogaiRirekiHandler {
             row.setIdoJiyuCode(適用除外者情報.get異動事由コード());
             row.setEdaNo(適用除外者情報.get枝番());
             row.setShichosonCode(適用除外者情報.get市町村コード());
-            row.setNyushoTsuchiHakkoYMD(new RString(適用除外者情報.get入所通知発行日().toString()));
-            row.setTaishoTsuchiHakkoYMD(new RString(適用除外者情報.get退所通知発行日().toString()));
-            row.setHenkoTsuchiHakkoYMD(new RString(適用除外者情報.get変更通知発行日().toString()));
+            if (適用除外者情報.get入所通知発行日() != null && !適用除外者情報.get入所通知発行日().isEmpty()) {
+                row.setNyushoTsuchiHakkoYMD(new RString(適用除外者情報.get入所通知発行日().toString()));
+            } else {
+                row.setNyushoTsuchiHakkoYMD(RString.EMPTY);
+            }
+            if (適用除外者情報.get退所通知発行日() != null && !適用除外者情報.get退所通知発行日().isEmpty()) {
+                row.setTaishoTsuchiHakkoYMD(new RString(適用除外者情報.get退所通知発行日().toString()));
+            } else {
+                row.setTaishoTsuchiHakkoYMD(RString.EMPTY);
+            }
+            if (適用除外者情報.get変更通知発行日() != null && !適用除外者情報.get変更通知発行日().isEmpty()) {
+                row.setHenkoTsuchiHakkoYMD(new RString(適用除外者情報.get変更通知発行日().toString()));
+            } else {
+                row.setHenkoTsuchiHakkoYMD(RString.EMPTY);
+            }
             rowList.add(row);
         }
         div.getDatagridTekiyoJogai().setDataSource(rowList);

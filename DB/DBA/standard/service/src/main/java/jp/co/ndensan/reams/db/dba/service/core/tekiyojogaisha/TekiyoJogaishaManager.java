@@ -7,7 +7,9 @@ package jp.co.ndensan.reams.db.dba.service.core.tekiyojogaisha;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dba.business.core.jushochitokurei.shisetsunyutaisho.ShisetsuNyutaisho;
+import jp.co.ndensan.reams.db.dba.business.core.tekiyojogaisha.tekiyojogaisha.TekiyoJogaishaBusiness;
 import jp.co.ndensan.reams.db.dba.business.core.tekiyojogaisha.tekiyojogaisha.TekiyoJogaishaRelate;
 import jp.co.ndensan.reams.db.dba.definition.core.shikakuidojiyu.ShikakuShutokuJiyu;
 import jp.co.ndensan.reams.db.dba.definition.mybatisprm.tekiyojogaisha.TekiyoJogaishaMapperParameter;
@@ -36,6 +38,7 @@ import jp.co.ndensan.reams.ua.uax.definition.core.enumeratedtype.shikibetsutaish
 import jp.co.ndensan.reams.ua.uax.entity.db.basic.UaFt200FindShikibetsuTaishoEntity;
 import jp.co.ndensan.reams.ur.urz.business.core.association.Association;
 import jp.co.ndensan.reams.ur.urz.definition.core.shikibetsutaisho.JuminJotai;
+import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.ur.urz.service.core.association.AssociationFinderFactory;
 import jp.co.ndensan.reams.uz.uza.biz.GyomuCode;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
@@ -56,11 +59,10 @@ import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
 public class TekiyoJogaishaManager {
 
     private static final int AGE_65 = 65;
-    private static final RString 枝番 = new RString("0001");
+    private static final RString 識別コード = new RString("識別コード");
     private final MapperProvider mapperProvider;
     private final DbT1002TekiyoJogaishaDac 適用除外者Dac;
     private final ShisetsuNyutaishoManager 介護保険施設入退所Manager;
-    private static int saveCount = 0;
     private static boolean 退所日ありフラグ;
 
     /**
@@ -123,6 +125,7 @@ public class TekiyoJogaishaManager {
      */
     @Transaction
     public SearchResult<TekiyoJogaishaRelate> getTekiyoJogaishaLst(ShikibetsuCode shikibetsuCode, boolean ronrisakujyoFlg) {
+        requireNonNull(shikibetsuCode, UrSystemErrorMessages.値がnull.getReplacedMessage(識別コード.toString()));
         List<TekiyoJogaishaRelate> tekiyoJogaishaRelateList = new ArrayList<>();
         TekiyoJogaishaMapperParameter 適用除外者Parameter = TekiyoJogaishaMapperParameter.
                 createParam_get適用除外者(shikibetsuCode, ronrisakujyoFlg);
@@ -163,6 +166,20 @@ public class TekiyoJogaishaManager {
             }
         }
         return SearchResult.of(tekiyoJogaishaRelateList, 0, false);
+    }
+
+    /**
+     * 適用除外者情報と施設入退所情報の取得処理をします。
+     *
+     * @param shikibetsuCode 識別コード
+     * @param ronrisakujyoFlg 論理削除フラグ
+     * @return SearchResult<TekiyoJogaishaRelate> 適用除外者の管理情報
+     */
+    @Transaction
+    public TekiyoJogaishaBusiness get適用除外者施設入退所情報(ShikibetsuCode shikibetsuCode, boolean ronrisakujyoFlg) {
+        requireNonNull(shikibetsuCode, UrSystemErrorMessages.値がnull.getReplacedMessage(識別コード.toString()));
+        TekiyoJogaishaBusiness tekiyoJogaishaBusiness = new TekiyoJogaishaBusiness();
+        return tekiyoJogaishaBusiness;
     }
 
     /**

@@ -27,9 +27,7 @@ public class TekiyoJogaiRirekiValidationHandler {
     private static final RString 状態_削除 = new RString("削除モード");
     private static final RString 状態_適用登録 = new RString("適用登録モード");
     private static final RString 状態_解除 = new RString("解除モード");
-    private static final RString 状態_施設変更 = new RString("施設変更モード");
     private static final RString 状態_訂正履歴 = new RString("訂正履歴モード");
-    private static final RString 状態_照会 = new RString("照会モード");
     private static final RString メッセージ適用日 = new RString("適用日");
     private final TekiyoJogaiRirekiDiv div;
 
