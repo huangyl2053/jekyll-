@@ -30,6 +30,7 @@ import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 /**
  * 本算定異動（現年度）のビジネスクラスです。
  *
+ * @reamsid_L DBB-0880-020 lijunjun
  */
 public class HonsanteiIdoGennendo {
 

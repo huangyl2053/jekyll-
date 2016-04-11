@@ -12,6 +12,8 @@ import lombok.Setter;
 
 /**
  * バッチ出力帳票一覧のクラスです。
+ *
+ * @reamsid_L DBB-0880-020 lijunjun
  */
 @Setter
 @Getter

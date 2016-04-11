@@ -34,6 +34,8 @@ import jp.co.ndensan.reams.uz.uza.util.editor.DecimalFormatter;
 
 /**
  * 償還払い状況照会_特定診療費画面のハンドラクラスです。
+ *
+ * @reamsid_L DBC-1010-150 wangkanglei
  */
 public class TokuteiShinryohiHandler {
 
@@ -44,9 +46,12 @@ public class TokuteiShinryohiHandler {
     private static final RString 設定可_任意 = new RString("2");
     private static final FlexibleYearMonth 平成２４年４月 = new FlexibleYearMonth("201204");
     private static final RString 改行 = new RString("\n");
+    private static final RString STR_0025 = new RString("0025");
+    private static final RString STR_0026 = new RString("0026");
+    private static final int NUM_0 = 0;
 
     /**
-     * TokuteiShinryohiHandler
+     * コンストラクタです。
      *
      * @param div TokuteiShinryohiDiv
      */
@@ -55,7 +60,7 @@ public class TokuteiShinryohiHandler {
     }
 
     /**
-     * ヘッダーエリアの設定
+     * ヘッダーエリアの設定のメソッドます。
      *
      * @param サービス年月 サービス年月
      * @param 事業者番号 事業者番号
@@ -66,18 +71,18 @@ public class TokuteiShinryohiHandler {
     public void setヘッダーエリア(
             FlexibleYearMonth サービス年月,
             JigyoshaNo 事業者番号,
-            RString 申請日,
+            RDate 申請日,
             RString 明細番号,
             RString 証明書) {
         div.getPanelTwo().getTxtServiceTeikyoYM().setValue(new RDate(サービス年月.toString()));
-        div.getPanelTwo().getTxtShinseiYMD().setValue(new RDate(申請日.toString()));
+        div.getPanelTwo().getTxtShinseiYMD().setValue(申請日);
         div.getPanelTwo().getTxtJigyoshaBango().setValue(事業者番号.getColumnValue());
         div.getPanelTwo().getTxtMeisaibango().setValue(明細番号);
         div.getPanelTwo().getTxtShomeisho().setValue(証明書);
     }
 
     /**
-     * ボタン表示制御処理
+     * ボタン表示制御処理のメソッドます。
      *
      * @param entity ShikibetsuNoKanri
      * @param サービス年月 サービス年月
@@ -123,7 +128,7 @@ public class TokuteiShinryohiHandler {
     }
 
     /**
-     * 特定診療費_特別診療費一覧グリッドの設定
+     * 特定診療費_特別診療費一覧グリッドの設定のメソッドます。
      *
      * @param list List<ShokanTokuteiShinryoTokubetsuRyoyo>
      */
@@ -133,9 +138,9 @@ public class TokuteiShinryohiHandler {
             dgdTokuteiShinryohi_Row row = new dgdTokuteiShinryohi_Row();
             row.setShobyoName(entity.get傷病名());
             row.setShikibetsuNo(entity.get識別番号());
-            row.setTani(DecimalFormatter.toコンマ区切りRString(new Decimal(entity.get単位数()), 0));
-            row.setKaisu(DecimalFormatter.toコンマ区切りRString(new Decimal(entity.get回数()), 0));
-            row.setGokeiTani(DecimalFormatter.toコンマ区切りRString(new Decimal(entity.get合計単位数()), 0));
+            row.setTani(DecimalFormatter.toコンマ区切りRString(new Decimal(entity.get単位数()), NUM_0));
+            row.setKaisu(DecimalFormatter.toコンマ区切りRString(new Decimal(entity.get回数()), NUM_0));
+            row.setGokeiTani(DecimalFormatter.toコンマ区切りRString(new Decimal(entity.get合計単位数()), NUM_0));
             row.setRemban(entity.get連番());
             dataSource.add(row);
         }
@@ -143,7 +148,7 @@ public class TokuteiShinryohiHandler {
     }
 
     /**
-     * 特定診療費一覧グリッドの設定
+     * 特定診療費一覧グリッドの設定のメソッドます。
      *
      * @param shokanTokuteiShinryohiList List<ShokanTokuteiShinryohi>
      */
@@ -152,13 +157,13 @@ public class TokuteiShinryohiHandler {
         for (ShokanTokuteiShinryohi entity : shokanTokuteiShinryohiList) {
             ddgToteishinryoTokubetushinryo_Row row = new ddgToteishinryoTokubetushinryo_Row();
             row.setShobyouName(entity.get傷病名());
-            row.setShidouKanri(DecimalFormatter.toコンマ区切りRString(new Decimal(entity.get指導管理料等単位数()), 0));
-            row.setRihabiri(DecimalFormatter.toコンマ区切りRString(new Decimal(entity.getリハビリテーション単位数()), 0));
-            row.setSeishinka(DecimalFormatter.toコンマ区切りRString(new Decimal(entity.get精神科専門療法単位数()), 0));
-            row.setEkusuLine(DecimalFormatter.toコンマ区切りRString(new Decimal(entity.get単純エックス線単位数()), 0));
-            row.setSochi(DecimalFormatter.toコンマ区切りRString(new Decimal(entity.get措置単位数()), 0));
-            row.setTejyutsu(DecimalFormatter.toコンマ区切りRString(new Decimal(entity.get手術単位数()), 0));
-            row.setGoukeyiTanyi(DecimalFormatter.toコンマ区切りRString(new Decimal(entity.get合計単位数()), 0));
+            row.setShidouKanri(DecimalFormatter.toコンマ区切りRString(new Decimal(entity.get指導管理料等単位数()), NUM_0));
+            row.setRihabiri(DecimalFormatter.toコンマ区切りRString(new Decimal(entity.getリハビリテーション単位数()), NUM_0));
+            row.setSeishinka(DecimalFormatter.toコンマ区切りRString(new Decimal(entity.get精神科専門療法単位数()), NUM_0));
+            row.setEkusuLine(DecimalFormatter.toコンマ区切りRString(new Decimal(entity.get単純エックス線単位数()), NUM_0));
+            row.setSochi(DecimalFormatter.toコンマ区切りRString(new Decimal(entity.get措置単位数()), NUM_0));
+            row.setTejyutsu(DecimalFormatter.toコンマ区切りRString(new Decimal(entity.get手術単位数()), NUM_0));
+            row.setGoukeyiTanyi(DecimalFormatter.toコンマ区切りRString(new Decimal(entity.get合計単位数()), NUM_0));
             row.setRemban(entity.get連番());
             dataSource.add(row);
         }
@@ -166,7 +171,7 @@ public class TokuteiShinryohiHandler {
     }
 
     /**
-     * 特定診療費_特別診療費パネルの設定
+     * 特定診療費_特別診療費パネルの設定のメソッドます。
      *
      * @param list List<ShokanTokuteiShinryoTokubetsuRyoyo>
      * @param サービス年月 サービス年月
@@ -179,14 +184,14 @@ public class TokuteiShinryohiHandler {
                 .getTokuteiShinryoServiceCodeInfo(
                         new ShikibetsuCode(entity.get識別番号()),
                         サービス年月,
-                        ViewStateHolder.get(ViewStateKeys.様式番号, RString.class));
+                        ViewStateHolder.get(ViewStateKeys.償還払申請一覧_様式番号, RString.class));
         div.getPanelThree().getPanelFive().getTxtShobyoMeiDown().setValue(entity.get傷病名());
         div.getPanelThree().getPanelFive().getTxtShikibetsuNo().setValue(entity.get識別番号());
         if (serviceCode != null && serviceCode.toEntity().getServiceMeisho() != null) {
             FlexibleDate date = new FlexibleDate(RDate.getNowDate().toDateString());
             div.getPanelThree().getPanelFive().getTxtName().setValue(serviceCode.toEntity().getServiceMeisho());
             if (serviceCode.toEntity().getSanteiTani() != null) {
-                UzT0007CodeEntity code1 = CodeMaster.getCode(SubGyomuCode.DBC介護給付, new CodeShubetsu(new RString("0025")),
+                UzT0007CodeEntity code1 = CodeMaster.getCode(SubGyomuCode.DBC介護給付, new CodeShubetsu(STR_0025),
                         new Code(serviceCode.toEntity().getSanteiTani()), date);
                 RStringBuilder builder1 = new RStringBuilder();
                 builder1.append(code1.getコード名称());
@@ -197,7 +202,7 @@ public class TokuteiShinryohiHandler {
                 div.getPanelThree().getPanelFive().getLblComment1().setText(RString.EMPTY);
             }
             if (serviceCode.toEntity().getSanteiSeiyakuKikan() != null) {
-                UzT0007CodeEntity code2 = CodeMaster.getCode(SubGyomuCode.DBC介護給付, new CodeShubetsu(new RString("0026")),
+                UzT0007CodeEntity code2 = CodeMaster.getCode(SubGyomuCode.DBC介護給付, new CodeShubetsu(STR_0026),
                         new Code(serviceCode.toEntity().getSanteiSeiyakuKikan()), date);
                 RStringBuilder builder2 = new RStringBuilder();
                 builder2.append(code2.getコード名称());
@@ -211,14 +216,15 @@ public class TokuteiShinryohiHandler {
             div.getPanelThree().getPanelFive().getLblComment1().setText(RString.EMPTY);
             div.getPanelThree().getPanelFive().getLblComment2().setText(RString.EMPTY);
         }
-        div.getPanelThree().getPanelFive().getTxtTanyi().setValue(DecimalFormatter.toコンマ区切りRString(new Decimal(entity.get単位数()), 0));
+        div.getPanelThree().getPanelFive().getTxtTanyi().setValue(
+                DecimalFormatter.toコンマ区切りRString(new Decimal(entity.get単位数()), NUM_0));
         div.getPanelThree().getPanelFive().getTxtKaiyisuNisu().setValue(new Decimal(entity.get回数()));
         div.getPanelThree().getPanelFive().getTxtGoukeiTanyi().setValue(new Decimal(entity.get合計単位数()));
         div.getPanelThree().getPanelFive().getTxtTekiyoDown().setValue(entity.get摘要());
     }
 
     /**
-     * 特定診療費パネルの設定
+     * 特定診療費パネルの設定のメソッドます。
      *
      * @param list List<ShokanTokuteiShinryohi>
      */

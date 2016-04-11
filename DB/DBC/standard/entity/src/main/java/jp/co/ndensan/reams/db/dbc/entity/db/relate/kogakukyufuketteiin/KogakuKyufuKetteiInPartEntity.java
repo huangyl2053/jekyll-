@@ -12,7 +12,9 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 
 /**
- * 一時TBLのデータを取得する、
+ * 一時TBLのデータを取得する.
+ *
+ * @reamsid_L DBC-0980-400 lijunjun
  */
 @lombok.Getter
 @lombok.Setter

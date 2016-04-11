@@ -16,8 +16,9 @@ import lombok.Getter;
 import lombok.Setter;
 
 /**
- *
  * 本算定異動（現年度）バッチ用のパラメータです。
+ *
+ * @reamsid_L DBB-0880-020 lijunjun
  */
 @Getter
 @Setter

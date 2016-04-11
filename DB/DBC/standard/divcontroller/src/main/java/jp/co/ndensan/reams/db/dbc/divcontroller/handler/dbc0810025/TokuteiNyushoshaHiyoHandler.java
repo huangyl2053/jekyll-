@@ -28,6 +28,8 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 
 /**
  * 償還払い状況照会_特定入所者費用のハンドラクラスです。
+ *
+ * @reamsid_L DBC-1010-160 wangkanglei
  */
 public class TokuteiNyushoshaHiyoHandler {
 
@@ -38,7 +40,7 @@ public class TokuteiNyushoshaHiyoHandler {
     private static final int SIX = 6;
 
     /**
-     * TokuteiNyushoshaHiyoHandler
+     * コンストラクタです。
      *
      * @param div TokuteiNyushoshaHiyoDiv
      */
@@ -47,7 +49,7 @@ public class TokuteiNyushoshaHiyoHandler {
     }
 
     /**
-     * ヘッダーエリアの設定
+     * ヘッダーエリアの設定のメソッドます。
      *
      * @param サービス年月 サービス年月
      * @param 事業者番号 事業者番号
@@ -58,18 +60,18 @@ public class TokuteiNyushoshaHiyoHandler {
     public void setヘッダーエリア(
             FlexibleYearMonth サービス年月,
             JigyoshaNo 事業者番号,
-            RString 申請日,
+            RDate 申請日,
             RString 明細番号,
             RString 証明書) {
         div.getPanelHead().getTxtServiceTeikyoYM().setValue(new RDate(サービス年月.toString()));
-        div.getPanelHead().getTxtShinseiYMD().setValue(new RDate(申請日.toString()));
+        div.getPanelHead().getTxtShinseiYMD().setValue(申請日);
         div.getPanelHead().getTxtJigyoshaBango().setValue(事業者番号.getColumnValue());
         div.getPanelHead().getTxtMeisaiBango().setValue(明細番号);
         div.getPanelHead().getTxtShomeisho().setValue(証明書);
     }
 
     /**
-     * ボタン表示制御処理
+     * ボタン表示制御処理のメソッドます。
      *
      * @param entity ShikibetsuNoKanri
      * @param サービス年月 サービス年月
@@ -115,7 +117,7 @@ public class TokuteiNyushoshaHiyoHandler {
     }
 
     /**
-     * 特定入所者費用一覧グリッドの設定
+     * 特定入所者費用一覧グリッドの設定のメソッドます。
      *
      * @param list List<ShokanTokuteiNyushoshaKaigoServiceHiyo>
      */
@@ -123,9 +125,14 @@ public class TokuteiNyushoshaHiyoHandler {
         List<dgdTokuteiYichiran_Row> dataSource = new ArrayList<>();
         for (ShokanTokuteiNyushoshaKaigoServiceHiyo entity : list) {
             dgdTokuteiYichiran_Row row = new dgdTokuteiYichiran_Row();
-            RStringBuilder builder = new RStringBuilder();
-            builder.append(entity.getサービス種類コード().value()).append(entity.getサービス項目コード().value());
-            row.setDefaultDataName1(builder.toRString());
+            if (entity.getサービス種類コード() != null
+                    && !entity.getサービス種類コード().isEmpty()
+                    && entity.getサービス項目コード() != null
+                    && !entity.getサービス項目コード().isEmpty()) {
+                RStringBuilder builder = new RStringBuilder();
+                builder.append(entity.getサービス種類コード().value()).append(entity.getサービス項目コード().value());
+                row.setDefaultDataName1(builder.toRString());
+            }
             row.getDefaultDataName2().setValue(new Decimal(entity.get費用単価()));
             row.getDefaultDataName3().setValue(new Decimal(entity.get負担限度額()));
             row.getDefaultDataName4().setValue(new Decimal(entity.get日数()));
@@ -133,7 +140,9 @@ public class TokuteiNyushoshaHiyoHandler {
             row.getDefaultDataName6().setValue(new Decimal(entity.get保険分請求額()));
             row.getDefaultDataName7().setValue(new Decimal(entity.get利用者負担額()));
             row.getTaniKingaku().setValue(new Decimal(entity.get点数_金額()));
-            if (!entity.get支給区分コード().isEmpty() && ShikyuFushikyuKubun.toValue(entity.get支給区分コード()) != null) {
+            if (entity.get支給区分コード() != null
+                    && !entity.get支給区分コード().isEmpty()
+                    && ShikyuFushikyuKubun.toValue(entity.get支給区分コード()) != null) {
                 row.setShikyuKubun(ShikyuFushikyuKubun.toValue(entity.get支給区分コード()).get名称());
             }
             row.getShiharaiKingaku().setValue(new Decimal(entity.get支給金額()));
@@ -145,7 +154,7 @@ public class TokuteiNyushoshaHiyoHandler {
     }
 
     /**
-     * 特定入所者費用一覧の合計エリアの設定
+     * 特定入所者費用一覧の合計エリアの設定のメソッドます。
      *
      * @param entity ShokanTokuteiNyushoshaKaigoServiceHiyo
      */
@@ -157,7 +166,7 @@ public class TokuteiNyushoshaHiyoHandler {
     }
 
     /**
-     * 特定入所者費用照会パネルの設定
+     * 特定入所者費用照会パネルの設定のメソッドます。
      */
     public void set特定入所者費用照会パネル() {
         dgdTokuteiYichiran_Row row = div.getPanelTokutei().getDgdTokuteiYichiran().getClickedItem();
