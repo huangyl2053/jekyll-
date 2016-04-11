@@ -9,7 +9,9 @@ import jp.co.ndensan.reams.db.dbb.entity.db.report.khcktb5yoko.KaigoHokenryoChos
 import jp.co.ndensan.reams.uz.uza.report.ReportEditorJoiner;
 
 /**
- * 介護保険料徴収猶予決定通知書A4縦タイプ帳票Buider
+ * 介護保険料徴収猶予決定通知書A4縦タイプ帳票Buider。
+ *
+ * @reamsid_L DBC-0740-040 sunhui
  */
 public class KaigoHokenryoChoshuyuyoKetteiTsuchishoA4TateBuider
         implements IKaigoHokenryoChoshuyuyoKetteiTsuchishoA4TateBuider {

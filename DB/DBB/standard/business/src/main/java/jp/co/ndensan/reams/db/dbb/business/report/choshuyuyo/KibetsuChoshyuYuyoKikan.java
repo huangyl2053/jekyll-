@@ -9,6 +9,8 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
  * 期別徴収猶予期間のEntity
+ *
+ * @reamsid_L DBC-0740-040 sunhui
  */
 @lombok.Getter
 @lombok.Setter

@@ -9,6 +9,8 @@ import jp.co.ndensan.reams.db.dbb.entity.db.report.khcktb5yoko.KaigoHokenryoChos
 
 /**
  * 介護保険料徴収猶予決定通知書A4縦タイプCompKaigoToiawasesakiEditor
+ *
+ * @reamsid_L DBC-0740-040 sunhui
  */
 public class CompKaigoToiawasesakiA4Editor implements IKaigoHokenryoChoshuyuyoKetteiTsuchishoA4TateEditor {
 

@@ -13,6 +13,8 @@ import lombok.NonNull;
 
 /**
  * 介護保険料徴収猶予決定通知書帳票B5横タイプReport
+ *
+ * @reamsid_L DBC-0740-040 sunhui
  */
 public class KaigoHokenryoChoshuyuyoKetteiTsuchishoB5YokoReport extends Report<KaigoHokenryoChoshuyuyoKetteiTsuchishoB5YokoSource> {
 

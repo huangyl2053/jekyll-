@@ -6,6 +6,8 @@ import jp.co.ndensan.reams.uz.uza.report.source.ReportItem;
 
 /**
  * 介護保険料徴収猶予決定通知書B5横タイプ帳票Sourceです。
+ *
+ * @reamsid_L DBC-0740-040 sunhui
  */
 public class KaigoHokenryoChoshuyuyoKetteiTsuchishoB5YokoSource implements IReportSource {
 // <editor-fold defaultstate="collapsed" desc="Generated Code">

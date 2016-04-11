@@ -10,6 +10,8 @@ import jp.co.ndensan.reams.uz.uza.report.ReportEditorJoiner;
 
 /**
  * 介護保険料徴収猶予決定通知書B5横タイプ帳票Buider
+ *
+ * @reamsid_L DBC-0740-040 sunhui
  */
 public class KaigoHokenryoChoshuyuyoKetteiTsuchishoB5YokoBuider
         implements IKaigoHokenryoChoshuyuyoKetteiTsuchishoB5YokoBuider {

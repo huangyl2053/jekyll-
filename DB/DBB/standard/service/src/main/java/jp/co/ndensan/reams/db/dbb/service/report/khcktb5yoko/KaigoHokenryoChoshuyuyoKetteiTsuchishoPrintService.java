@@ -24,10 +24,12 @@ import jp.co.ndensan.reams.db.dbx.business.core.kanri.Kitsuki;
 import jp.co.ndensan.reams.db.dbx.business.core.kanri.KitsukiList;
 import jp.co.ndensan.reams.db.dbx.business.core.kanri.TokuchoKiUtil;
 import jp.co.ndensan.reams.db.dbx.definition.core.fucho.FuchokiJohoTsukiShoriKubun;
+import jp.co.ndensan.reams.db.dbx.definition.core.fuka.Tsuki;
 import jp.co.ndensan.reams.db.dbz.business.report.parts.kaigotoiawasesaki.CompKaigoToiawasesakiSource;
 import jp.co.ndensan.reams.db.dbz.business.report.parts.kaigotoiawasesaki.IKaigoToiawasesakiSourceBuilder;
 import jp.co.ndensan.reams.db.dbz.business.report.util.EditedAtesaki;
 import jp.co.ndensan.reams.db.dbz.definition.core.enumeratedtype.ChoshuHohoKibetsu;
+import jp.co.ndensan.reams.ur.urz.business.core.date.DateEditor;
 import jp.co.ndensan.reams.ur.urz.business.core.ninshosha.Ninshosha;
 import jp.co.ndensan.reams.ur.urz.business.report.parts.ninshosha.NinshoshaSourceBuilderFactory;
 import jp.co.ndensan.reams.ur.urz.entity.report.parts.ninshosha.NinshoshaSource;
@@ -47,7 +49,9 @@ import jp.co.ndensan.reams.uz.uza.report.SourceDataCollection;
 import jp.co.ndensan.reams.uz.uza.util.editor.DecimalFormatter;
 
 /**
- * 介護保険料徴収猶予決定通知書帳票PrintService
+ * 介護保険料徴収猶予決定通知書帳票PrintServiceです。
+ *
+ * @reamsid_L DBC-0740-040 sunhui
  */
 public class KaigoHokenryoChoshuyuyoKetteiTsuchishoPrintService {
 
@@ -75,7 +79,7 @@ public class KaigoHokenryoChoshuyuyoKetteiTsuchishoPrintService {
     private static final RString 普徴期_3 = new RString("3");
     private static final RString 普徴期翌年度_4 = new RString("13");
     private static final RString 随時 = new RString("随時");
-    private static final RString 空文字列 = new RString("");
+    private static final RString 波線 = new RString("～");
     private static final RString 種別コード = new RString("DBB100081_KaigoHokenHokenryoChoshuyoyoKetteiTsuchishoDaihyo");
 
     @BatchWriter
@@ -183,7 +187,7 @@ public class KaigoHokenryoChoshuyuyoKetteiTsuchishoPrintService {
                 new RString(徴収猶予決定通知書情報.get宛名().get行政区画().getChiku3().getコード().toString()),
                 new RString(徴収猶予決定通知書情報.get納組情報().getNokumi().getNokumiCode().toString()));
 
-        item = editItem表示コード(表示コード, item, 文書番号, 徴収猶予決定通知書情報, 通知書定型文);
+        editItem表示コード(表示コード, item, 文書番号, 徴収猶予決定通知書情報, 通知書定型文);
 
         TokuchoKiUtil 月期対応取得_特徴 = new TokuchoKiUtil();
         期月リスト_特徴 = 月期対応取得_特徴.get期月リスト();
@@ -194,13 +198,13 @@ public class KaigoHokenryoChoshuyuyoKetteiTsuchishoPrintService {
             期別徴収猶予期間List = get期別徴収猶予期間リストを生成する(
                     徴収猶予決定通知書情報, 期月リスト_特徴, 期月リスト_普徴, index);
             随時リスト = get随時リストを生成する(随時リスト, 期月リスト_普徴, index);
-            item = edit期別と随時リスト(item, 期別徴収猶予期間List, 随時リスト, index);
+            edit期別と随時リスト(item, 期別徴収猶予期間List, 随時リスト, index);
         }
 
         EditedAtesaki 編集後宛先 = new EditedAtesaki(徴収猶予決定通知書情報.get宛先(),
                 null, 徴収猶予決定通知書情報.get帳票制御共通(), null,
                 null, true, null, null, null, null);
-        item = editCompSofubutsuAtesakiItem(item, 編集後宛先);
+        editCompSofubutsuAtesakiItem(item, 編集後宛先);
         INinshoshaManager iNinshoshaManager = NinshoshaFinderFactory.createInstance();
         Ninshosha ninshosha = iNinshoshaManager.get帳票認証者(GyomuCode.DB介護保険, 種別コード);
 
@@ -209,9 +213,9 @@ public class KaigoHokenryoChoshuyuyoKetteiTsuchishoPrintService {
         RString イメージファイルパス = reportSourceWriter.getImageFolderPath();
         NinshoshaSource sourceBuilder = NinshoshaSourceBuilderFactory.createInstance(
                 ninshosha, 徴収猶予決定通知書情報.get地方公共団体(), イメージファイルパス, 発行日).buildSource();
-        item = editCompNinshoshaItem(item, sourceBuilder);
+        editCompNinshoshaItem(item, sourceBuilder);
 
-        item = editCompKaigoToiawasesakiItem(item, 介護問合せ先ソースビルダー);
+        editCompKaigoToiawasesakiItem(item, 介護問合せ先ソースビルダー);
 
         itemList.add(item);
         return itemList;
@@ -221,19 +225,17 @@ public class KaigoHokenryoChoshuyuyoKetteiTsuchishoPrintService {
             KaigoHokenryoChoshuyuyoKetteiTsuchishoB5YokoJoho 徴収猶予決定通知書情報,
             KitsukiList 期月リスト_特徴, KitsukiList 期月リスト_普徴, int index) {
 
-        KibetsuChoshyuYuyoKikan 期別徴収猶予期間;
+        KibetsuChoshyuYuyoKikan 期別徴収猶予期間 = new KibetsuChoshyuYuyoKikan();
         List<KibetsuChoshyuYuyoKikan> 期別徴収猶予期間List = new ArrayList<>();
         Kitsuki 特徴期月 = 期月リスト_特徴.get期の最初月(index);
         Kitsuki 普徴期月 = 期月リスト_普徴.get期の最初月(index);
         if (特徴期月.isPresent()) {
-            期別徴収猶予期間 = new KibetsuChoshyuYuyoKikan();
             期別徴収猶予期間.set特徴期(edit2桁文字列(特徴期月.get期()));
             期別徴収猶予期間.set特徴月(editInt2桁文字列(特徴期月.get月AsInt()));
             期別徴収猶予期間.set特徴期別金額(DecimalFormatter
                     .toコンマ区切りRString(get期と特徴期別金額の対応(徴収猶予決定通知書情報, 特徴期月.get期()), 0));
             期別徴収猶予期間List.add(期別徴収猶予期間);
         } else {
-            期別徴収猶予期間 = new KibetsuChoshyuYuyoKikan();
             期別徴収猶予期間.set特徴期(RString.EMPTY);
             期別徴収猶予期間.set特徴月(RString.EMPTY);
             期別徴収猶予期間.set特徴期別金額(RString.EMPTY);
@@ -241,15 +243,13 @@ public class KaigoHokenryoChoshuyuyoKetteiTsuchishoPrintService {
         }
 
         if (普徴期月.isPresent()) {
-            期別徴収猶予期間 = new KibetsuChoshyuYuyoKikan();
             期別徴収猶予期間.set普徴期(edit2桁文字列(普徴期月.get期()));
             期別徴収猶予期間.set普徴月(editInt2桁文字列(普徴期月.get月AsInt()));
             期別徴収猶予期間.set普徴期別金額(DecimalFormatter
-                    .toコンマ区切りRString(get月と普徴期別金額の対応(徴収猶予決定通知書情報, 普徴期月.get期()), 0));
+                    .toコンマ区切りRString(get月と普徴期別金額の対応(徴収猶予決定通知書情報, 普徴期月.get月()), 0));
             期別徴収猶予期間.set徴収猶予期間(get徴収猶予期間(徴収猶予決定通知書情報, 普徴期月));
             期別徴収猶予期間List.add(期別徴収猶予期間);
         } else {
-            期別徴収猶予期間 = new KibetsuChoshyuYuyoKikan();
             期別徴収猶予期間.set普徴期(RString.EMPTY);
             期別徴収猶予期間.set普徴月(RString.EMPTY);
             期別徴収猶予期間.set普徴期別金額(RString.EMPTY);
@@ -262,11 +262,11 @@ public class KaigoHokenryoChoshuyuyoKetteiTsuchishoPrintService {
     private List<RString> get随時リストを生成する(List<RString> 随時リスト, KitsukiList 期月リスト_普徴, int index) {
 
         Kitsuki 普徴期月 = 期月リスト_普徴.get期の最初月(index);
-        if (普徴期月.get月処理区分().equals(FuchokiJohoTsukiShoriKubun.随時)
-                || 普徴期月.get月処理区分().equals(FuchokiJohoTsukiShoriKubun.現年随時)) {
+        if (FuchokiJohoTsukiShoriKubun.随時.equals(普徴期月.get月処理区分())
+                || FuchokiJohoTsukiShoriKubun.現年随時.equals(普徴期月.get月処理区分())) {
             随時リスト.add(随時);
         } else {
-            随時リスト.add(空文字列);
+            随時リスト.add(RString.EMPTY);
         }
         return 随時リスト;
     }
@@ -278,10 +278,10 @@ public class KaigoHokenryoChoshuyuyoKetteiTsuchishoPrintService {
         return 期;
     }
 
-    private RString editInt2桁文字列(int 期) {
-        RString 月AsInt = new RString(String.valueOf(期));
-        if (期 < TEN && 期 >= ZERO) {
-            月AsInt = new RString(RSTR_0 + String.valueOf(期));
+    private RString editInt2桁文字列(int 月) {
+        RString 月AsInt = new RString(String.valueOf(月));
+        if (月 < TEN && 月 >= ZERO) {
+            月AsInt = new RString(RSTR_0 + String.valueOf(月));
         }
         return 月AsInt;
     }
@@ -305,33 +305,34 @@ public class KaigoHokenryoChoshuyuyoKetteiTsuchishoPrintService {
     }
 
     private Decimal get月と普徴期別金額の対応(
-            KaigoHokenryoChoshuyuyoKetteiTsuchishoB5YokoJoho 徴収猶予決定通知書情報, RString 期) {
+            KaigoHokenryoChoshuyuyoKetteiTsuchishoB5YokoJoho 徴収猶予決定通知書情報, Tsuki 月) {
 
-        if (普徴期_4.equals(期)) {
+        RString 普徴月 = new RString(月.toString());
+        if (普徴期_4.equals(普徴月)) {
             return 徴収猶予決定通知書情報.get徴収猶予の情報().get普徴期別金額01();
-        } else if (普徴期_5.equals(期)) {
+        } else if (普徴期_5.equals(普徴月)) {
             return 徴収猶予決定通知書情報.get徴収猶予の情報().get普徴期別金額02();
-        } else if (普徴期_6.equals(期)) {
+        } else if (普徴期_6.equals(普徴月)) {
             return 徴収猶予決定通知書情報.get徴収猶予の情報().get普徴期別金額03();
-        } else if (普徴期_7.equals(期)) {
+        } else if (普徴期_7.equals(普徴月)) {
             return 徴収猶予決定通知書情報.get徴収猶予の情報().get普徴期別金額04();
-        } else if (普徴期_8.equals(期)) {
+        } else if (普徴期_8.equals(普徴月)) {
             return 徴収猶予決定通知書情報.get徴収猶予の情報().get普徴期別金額05();
-        } else if (普徴期_9.equals(期)) {
+        } else if (普徴期_9.equals(普徴月)) {
             return 徴収猶予決定通知書情報.get徴収猶予の情報().get普徴期別金額06();
-        } else if (普徴期_10.equals(期)) {
+        } else if (普徴期_10.equals(普徴月)) {
             return 徴収猶予決定通知書情報.get徴収猶予の情報().get普徴期別金額07();
-        } else if (普徴期_11.equals(期)) {
+        } else if (普徴期_11.equals(普徴月)) {
             return 徴収猶予決定通知書情報.get徴収猶予の情報().get普徴期別金額08();
-        } else if (普徴期_12.equals(期)) {
+        } else if (普徴期_12.equals(普徴月)) {
             return 徴収猶予決定通知書情報.get徴収猶予の情報().get普徴期別金額09();
-        } else if (普徴期_1.equals(期)) {
+        } else if (普徴期_1.equals(普徴月)) {
             return 徴収猶予決定通知書情報.get徴収猶予の情報().get普徴期別金額10();
-        } else if (普徴期_2.equals(期)) {
+        } else if (普徴期_2.equals(普徴月)) {
             return 徴収猶予決定通知書情報.get徴収猶予の情報().get普徴期別金額11();
-        } else if (普徴期_3.equals(期)) {
+        } else if (普徴期_3.equals(普徴月)) {
             return 徴収猶予決定通知書情報.get徴収猶予の情報().get普徴期別金額12();
-        } else if (普徴期翌年度_4.equals(期)) {
+        } else if (普徴期翌年度_4.equals(普徴月)) {
             return 徴収猶予決定通知書情報.get徴収猶予の情報().get普徴期別金額13();
         } else {
             return 徴収猶予決定通知書情報.get徴収猶予の情報().get普徴期別金額14();
@@ -345,17 +346,16 @@ public class KaigoHokenryoChoshuyuyoKetteiTsuchishoPrintService {
         RString 徴収方法 = choshuYuyoJoho.get介護期別徴収猶予().getChoshuHoho();
         RString 期 = new RString(String.valueOf(choshuYuyoJoho.get介護期別徴収猶予().getKi()));
         if (徴収方法.equals(new RString(ChoshuHohoKibetsu.普通徴収.toString())) && 普徴期月.get期().equals(期)) {
-            徴収猶予期間 = new RString(choshuYuyoJoho.get介護期別徴収猶予().getYuyoStartYMD().toString() + "～"
-                    + choshuYuyoJoho.get介護期別徴収猶予().getYuyoEndYMD().toString());
+            徴収猶予期間 = new RString(DateEditor.to西暦(choshuYuyoJoho.get介護期別徴収猶予().getYuyoStartYMD()).toString()
+                    + 波線.toString() + DateEditor.to西暦(choshuYuyoJoho.get介護期別徴収猶予().getYuyoEndYMD()).toString());
         } else {
             徴収猶予期間 = RString.EMPTY;
         }
         return 徴収猶予期間;
     }
 
-    private KaigoHokenryoChoshuyuyoKetteiTsuchishoItem editItem表示コード(HyojiCodes 表示コード,
-            KaigoHokenryoChoshuyuyoKetteiTsuchishoItem item, RString 文書番号,
-            KaigoHokenryoChoshuyuyoKetteiTsuchishoB5YokoJoho 徴収猶予決定通知書情報, RString 通知書定型文) {
+    private void editItem表示コード(HyojiCodes 表示コード, KaigoHokenryoChoshuyuyoKetteiTsuchishoItem item,
+            RString 文書番号, KaigoHokenryoChoshuyuyoKetteiTsuchishoB5YokoJoho 徴収猶予決定通知書情報, RString 通知書定型文) {
 
         item.setBunshoNo(文書番号);
         item.setChoteiNendo(徴収猶予決定通知書情報.get徴収猶予の情報().get調定年度());
@@ -376,12 +376,10 @@ public class KaigoHokenryoChoshuyuyoKetteiTsuchishoPrintService {
         item.setKetteiRiyu2(徴収猶予決定通知書情報.get徴収猶予の情報().get徴収猶予取消事由());
         item.setBikoTitle(通知書定型文);
         item.setBiko(通知書定型文);
-        return item;
     }
 
-    private KaigoHokenryoChoshuyuyoKetteiTsuchishoItem edit期別と随時リスト(
-            KaigoHokenryoChoshuyuyoKetteiTsuchishoItem item, List<KibetsuChoshyuYuyoKikan> 期別徴収猶予期間List,
-            List<RString> 随時リスト, int index) {
+    private void edit期別と随時リスト(KaigoHokenryoChoshuyuyoKetteiTsuchishoItem item,
+            List<KibetsuChoshyuYuyoKikan> 期別徴収猶予期間List, List<RString> 随時リスト, int index) {
 
         item.setListKibetsu_1(期別徴収猶予期間List.get(index).get特徴期());
         item.setListKibetsu_2(期別徴収猶予期間List.get(index).get特徴月());
@@ -391,10 +389,9 @@ public class KaigoHokenryoChoshuyuyoKetteiTsuchishoPrintService {
         item.setListKibetsu_6(期別徴収猶予期間List.get(index).get普徴期別金額());
         item.setListKibetsu_7(期別徴収猶予期間List.get(index).get徴収猶予期間());
         item.setListZuiji_1(随時リスト.get(index));
-        return item;
     }
 
-    private KaigoHokenryoChoshuyuyoKetteiTsuchishoItem editCompNinshoshaItem(
+    private void editCompNinshoshaItem(
             KaigoHokenryoChoshuyuyoKetteiTsuchishoItem item, NinshoshaSource sourceBuilder) {
 
         item.setHakkoYMD(sourceBuilder.hakkoYMD);
@@ -406,10 +403,9 @@ public class KaigoHokenryoChoshuyuyoKetteiTsuchishoPrintService {
         item.setNinshoshaShimeiKakenai(sourceBuilder.ninshoshaShimeiKakenai);
         item.setNinshoshaShimeiKakeru(sourceBuilder.ninshoshaShimeiKakeru);
         item.setKoinShoryaku(sourceBuilder.koinShoryaku);
-        return item;
     }
 
-    private KaigoHokenryoChoshuyuyoKetteiTsuchishoItem editCompKaigoToiawasesakiItem(
+    private void editCompKaigoToiawasesakiItem(
             KaigoHokenryoChoshuyuyoKetteiTsuchishoItem item,
             IKaigoToiawasesakiSourceBuilder 介護問合せ先ソースビルダー) {
 
@@ -421,11 +417,9 @@ public class KaigoHokenryoChoshuyuyoKetteiTsuchishoPrintService {
         item.setTelNo(buildSource.telNo);
         item.setNaisenLabel(buildSource.naisenLabel);
         item.setNaisenNo(buildSource.naisenNo);
-        return item;
     }
 
-    private KaigoHokenryoChoshuyuyoKetteiTsuchishoItem editCompSofubutsuAtesakiItem(
-            KaigoHokenryoChoshuyuyoKetteiTsuchishoItem item, EditedAtesaki 編集後宛先) {
+    private void editCompSofubutsuAtesakiItem(KaigoHokenryoChoshuyuyoKetteiTsuchishoItem item, EditedAtesaki 編集後宛先) {
         SofubutsuAtesakiSource source = 編集後宛先.getSofubutsuAtesakiSource().get送付物宛先ソース();
         item.setYubinNo(source.yubinNo);
         item.setGyoseiku(source.gyoseiku);
@@ -461,6 +455,5 @@ public class KaigoHokenryoChoshuyuyoKetteiTsuchishoPrintService {
         // TODO QA:581
 //        item.setSetainusimei(source.setainusimei);
 //        item.setSamaKata(source.samaKata);
-        return item;
     }
 }
