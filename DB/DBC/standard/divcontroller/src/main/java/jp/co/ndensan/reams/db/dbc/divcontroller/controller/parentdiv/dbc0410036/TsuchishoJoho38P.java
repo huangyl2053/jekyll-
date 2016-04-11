@@ -15,6 +15,8 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
  * 国保連情報受取データ取込_[38P]高額合算給付実績情報
+ *
+ * @reamsid_L DBC-0980-110 xuhao
  */
 public class TsuchishoJoho38P {
 
