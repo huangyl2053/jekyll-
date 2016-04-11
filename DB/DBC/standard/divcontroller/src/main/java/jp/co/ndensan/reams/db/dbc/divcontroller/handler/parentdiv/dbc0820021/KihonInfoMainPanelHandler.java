@@ -55,6 +55,7 @@ public class KihonInfoMainPanelHandler {
     private static final RString KEY = new RString("key0");
     private static final RString 有 = new RString("2");
     private static final int 日数 = 30;
+    private static final int NUM_1 = 1;
     private static final FlexibleYearMonth 平成２１年３月 = new FlexibleYearMonth("200903");
     private static final FlexibleYearMonth 平成２１年４月 = new FlexibleYearMonth("200904");
     private static final RString コード_0001 = new RString("0001");
@@ -824,7 +825,7 @@ public class KihonInfoMainPanelHandler {
         RDate 入所_院年月日 = div.getPanelKihon().getPanelShisetuNyutaisyoInfo().getTxtNyushoYMD().getValue();
         RDate 退所_院年月日 = div.getPanelKihon().getPanelShisetuNyutaisyoInfo().getTxtTaishoYMD().getValue();
         if (入所_院年月日 != null && 退所_院年月日 != null) {
-            int 期間_日数 = 退所_院年月日.getBetweenDays(入所_院年月日);
+            int 期間_日数 = 退所_院年月日.plusDay(NUM_1).getBetweenDays(入所_院年月日);
             if (期間_日数 > 日数) {
                 // TODO 526
                 pairs.add(new ValidationMessageControlPair(new KihonInfoMainPanelHandler.IdocheckMessages(

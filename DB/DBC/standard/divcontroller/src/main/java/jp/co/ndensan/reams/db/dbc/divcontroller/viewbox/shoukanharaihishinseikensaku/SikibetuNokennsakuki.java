@@ -11,7 +11,9 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 import lombok.Getter;
 
 /**
- * 識別番号検索キーのParameter
+ * 識別番号検索キーのParameter。
+ *
+ * @reamsid_L DBC-1030-110 wangkanglei
  */
 @SuppressWarnings("PMD.UnusedPrivateField")
 @Getter
