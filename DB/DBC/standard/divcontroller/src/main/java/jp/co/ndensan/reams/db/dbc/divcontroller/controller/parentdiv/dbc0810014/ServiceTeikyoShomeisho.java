@@ -24,6 +24,8 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 
 /**
  * 償還払い状況照会_サービス提供証明書のクラスです。
+ *
+ * @reamsid_L DBC-1010-020 gongliang
  */
 public class ServiceTeikyoShomeisho {
 
