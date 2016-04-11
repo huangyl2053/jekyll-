@@ -1,7 +1,7 @@
 package jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0810032;
 
-import jp.co.ndensan.reams.uz.uza.core.ui.response.IContainerEvents;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.core.ui.response.IContainerEvents;
 
 /**
  * このコードはツールによって生成されました。</br>
@@ -9,7 +9,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
  * 不正な動作の原因になります。</br>
  * DBC0810032のイベント名定義クラスです</br>
  *
- * @reamsid_L DBC-1010-040 quxiaodong
+ * @author 自動生成
  */
 public enum DBC0810032TransitionEventName implements IContainerEvents {
 // <editor-fold defaultstate="collapsed" desc="Created By UI Designer ver 1.0.0">
@@ -21,12 +21,12 @@ public enum DBC0810032TransitionEventName implements IContainerEvents {
     サービス計画費("サービス計画費"),
     特定入所者費用("特定入所者費用"),
     合計費用("合計費用"),
-    給付費明細住特("給付費明細（住特）"),
-    緊急時施設療養費("緊急時施設療養費"),
+    給付費明細_住特	("給付費明細_住特	"),
+    緊急時施設療養型("緊急時施設療養型"),
     食事("食事"),
     請求額集計("請求額集計"),
     社福軽減額("社福軽減額"),
-    緊急時所定疾患("緊急時・所定疾患");
+    緊急時_所定疾患("緊急時_所定疾患");
 
     private final RString name;
 

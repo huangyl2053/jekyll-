@@ -27,7 +27,6 @@ public class KyufuShiharayiMeisaiJyuTokuHandler {
     private final KyufuShiharayiMeisaiJyuTokuDiv div;
     private static final RString 設定不可 = new RString("0");
     private static final RString 設定可_任意 = new RString("2");
-    private static final FlexibleYearMonth 平成２１年４月 = new FlexibleYearMonth("200904");
     private static final FlexibleYearMonth 平成２４年４月 = new FlexibleYearMonth("201204");
     private static final int NUM = 6;
 
@@ -100,7 +99,6 @@ public class KyufuShiharayiMeisaiJyuTokuHandler {
             row.setTekiyo(shme.getEntity().get摘要());
             row.setServicename(shme.getServiceName());
             rowList.add(row);
-
         }
         div.getDgdKyufuhiMeisai().setDataSource(rowList);
 
