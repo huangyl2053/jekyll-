@@ -17,6 +17,7 @@ import jp.co.ndensan.reams.db.dbc.divcontroller.viewbox.dbc0810014.ServiceTeiKyo
 import jp.co.ndensan.reams.db.dbc.service.core.shokanbaraijyokyoshokai.ShokanbaraiJyokyoShokai;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
+import jp.co.ndensan.reams.db.dbz.service.TaishoshaKey;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
@@ -27,6 +28,8 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 
 /**
  * 償還払い状況照会_サービス計画費のクラスです。
+ *
+ * @reamsid_L DBC-1010-010 gongliang
  */
 public class ServiceKeikakuHi {
 
@@ -42,24 +45,18 @@ public class ServiceKeikakuHi {
      */
     public ResponseData<ServiceKeikakuHiDiv> onLoad(ServiceKeikakuHiDiv div) {
 
-        ServiceTeiKyoShomeishoParameter parmeter = new ServiceTeiKyoShomeishoParameter(
-                new HihokenshaNo("000000003"), new FlexibleYearMonth(new RString("201501")),
-                new RString("1111"), new JigyoshaNo("3333"), new RString("事業者名"),
-                new RString("4444"), new RString("証明書"));
-        ViewStateHolder.put(ViewStateKeys.基本情報パラメータ, parmeter);
-        ViewStateHolder.put(ViewStateKeys.識別コード, new ShikibetsuCode("000000000000010"));
-        ViewStateHolder.put(ViewStateKeys.様式番号, new RString("2222"));
         ServiceTeiKyoShomeishoParameter parameter = ViewStateHolder.get(
                 ViewStateKeys.基本情報パラメータ, ServiceTeiKyoShomeishoParameter.class);
+        TaishoshaKey 引継ぎデータ = ViewStateHolder.get(ViewStateKeys.資格対象者, TaishoshaKey.class);
+        ShikibetsuCode 識別コード = 引継ぎデータ.get識別コード();
         HihokenshaNo 被保険者番号 = parameter.getHiHokenshaNo();
         FlexibleYearMonth サービス年月 = parameter.getServiceTeikyoYM();
         RString 整理番号 = parameter.getSeiriNp();
         JigyoshaNo 事業者番号 = parameter.getJigyoshaNo();
         RString 明細番号 = parameter.getMeisaiNo();
         RString 証明書 = parameter.getServiceYM();
-        ShikibetsuCode 識別コード = ViewStateHolder.get(ViewStateKeys.識別コード, ShikibetsuCode.class);
-        RString 様式番号 = ViewStateHolder.get(ViewStateKeys.様式番号, RString.class);
-        RString 申請日 = new RString("20160118");
+        RString 様式番号 = ViewStateHolder.get(ViewStateKeys.償還払申請一覧_様式番号, RString.class);
+        RString 申請日 = ViewStateHolder.get(ViewStateKeys.償還払申請一覧_申請日, RString.class);
 
         ShikibetsuNoKanriResult shikibetsuNoKanriEntity = ShokanbaraiJyokyoShokai.createInstance()
                 .getShikibetsubangoKanri(サービス年月, 様式番号);
@@ -146,7 +143,7 @@ public class ServiceKeikakuHi {
         RString 整理番号 = parameter.getSeiriNp();
         JigyoshaNo 事業者番号 = parameter.getJigyoshaNo();
         RString 明細番号 = parameter.getMeisaiNo();
-        RString 様式番号 = ViewStateHolder.get(ViewStateKeys.様式番号, RString.class);
+        RString 様式番号 = ViewStateHolder.get(ViewStateKeys.償還払申請一覧_様式番号, RString.class);
         RString 連番 = div.getPanelServiceKeikakuhiUp1().getDgdYichiran().getClickedItem().getDefaultDataName7();
 
         List<ShokanServicePlan200904Result> entity200904List = ShokanbaraiJyokyoShokai.createInstance()
