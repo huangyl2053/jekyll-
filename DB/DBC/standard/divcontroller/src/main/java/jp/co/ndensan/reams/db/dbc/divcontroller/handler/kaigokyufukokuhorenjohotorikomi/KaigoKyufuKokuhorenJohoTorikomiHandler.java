@@ -21,12 +21,16 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 
 /**
  * 国保連情報受取データ取込_共有子DIVのハンドラクラスです。
+ *
+ * @reamsid_L DBC-0980-290 wangkanglei
  */
 public class KaigoKyufuKokuhorenJohoTorikomiHandler {
 
     private final KaigoKyufuKokuhorenJohoTorikomiDiv div;
-    private final RString 同月過誤分ファイル名 = new RString("01110000");
-    private final RString 通常分ファイル名 = new RString("11100000");
+    private static final RString 同月過誤分ファイル名 = new RString("01110000");
+    private static final RString 通常分ファイル名 = new RString("11100000");
+    private static final RString KEY_0 = new RString("key0");
+    private static final RString KEY_1 = new RString("key1");
 
     /**
      * コンストラクタです。
@@ -38,7 +42,7 @@ public class KaigoKyufuKokuhorenJohoTorikomiHandler {
     }
 
     /**
-     * of
+     * コンストラクタです。
      *
      * @param div 画面DIV
      * @return KaigoKyufuKokuhorenJohoTorikomiHandler
@@ -48,7 +52,7 @@ public class KaigoKyufuKokuhorenJohoTorikomiHandler {
     }
 
     /**
-     * Mode1画面初期化
+     * Mode1画面初期化のメソッドます。
      */
     public void onLoadMode1() {
         KokuhorenDataTorikomiViewStateClass parmater = ViewStateHolder.get(ViewStateHolderName.国保連取込情報,
@@ -60,7 +64,7 @@ public class KaigoKyufuKokuhorenJohoTorikomiHandler {
     }
 
     /**
-     * ModeShutsuryokujunJoken2画面初期化
+     * ModeShutsuryokujunJoken2画面初期化のメソッドます。
      *
      * @param サブ業務コード SubGyomuCode
      * @param 帳票ID ReportId
@@ -71,7 +75,7 @@ public class KaigoKyufuKokuhorenJohoTorikomiHandler {
     }
 
     /**
-     * ModeKakuninMsgJoken3画面初期化
+     * ModeKakuninMsgJoken3画面初期化のメソッドます。
      *
      * @param サブ業務コード SubGyomuCode
      * @param 帳票ID ReportId
@@ -80,10 +84,10 @@ public class KaigoKyufuKokuhorenJohoTorikomiHandler {
         onLoadModeShutsuryokujunJoken2(サブ業務コード, 帳票ID);
         List<RString> key = new ArrayList<>();
         if (!SharedFile.searchSharedFile(通常分ファイル名).isEmpty()) {
-            key.add(new RString("key1"));
+            key.add(KEY_1);
         }
         if (!SharedFile.searchSharedFile(同月過誤分ファイル名).isEmpty()) {
-            key.add(new RString("key0"));
+            key.add(KEY_0);
         }
         div.getShoriTaishoJoho().getChkTsuJobun().setSelectedItemsByKey(key);
     }
