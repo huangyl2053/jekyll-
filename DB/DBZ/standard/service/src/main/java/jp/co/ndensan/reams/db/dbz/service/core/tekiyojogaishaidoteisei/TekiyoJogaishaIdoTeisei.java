@@ -15,6 +15,8 @@ import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 
 /**
  * 適用除外者異動の訂正のクラスです。
+ *
+ * @reamsid_L DBA-0411-030 wangjie2
  */
 public class TekiyoJogaishaIdoTeisei {
 
@@ -23,7 +25,7 @@ public class TekiyoJogaishaIdoTeisei {
     /**
      * 適用除外者異動の訂正します。
      *
-     * @param informationEntityLst informationEntityLst
+     * @param informationEntityLst 適用除外情報リスト
      * @return 結果フラグ
      */
     public boolean checkTekiyoJogaiKikanByTeiseiMode(List<InformationEntity> informationEntityLst) {
