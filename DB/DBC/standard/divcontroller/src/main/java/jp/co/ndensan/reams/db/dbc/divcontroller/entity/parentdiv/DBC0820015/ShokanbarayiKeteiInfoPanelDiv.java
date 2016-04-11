@@ -13,7 +13,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 /**
  * ShokanbarayiKeteiInfoPanel のクラスファイル
  *
- * @author 自動生成
+ * @reamsid_L DBC-1030-180 xuhao
  */
 public class ShokanbarayiKeteiInfoPanelDiv extends Panel {
 

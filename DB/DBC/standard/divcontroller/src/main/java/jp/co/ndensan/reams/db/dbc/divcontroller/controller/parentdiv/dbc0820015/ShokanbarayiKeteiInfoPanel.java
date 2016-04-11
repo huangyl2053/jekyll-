@@ -5,12 +5,15 @@
  */
 package jp.co.ndensan.reams.db.dbc.divcontroller.controller.parentdiv.dbc0820015;
 
+import java.util.List;
+import jp.co.ndensan.reams.db.dbc.business.core.syokanbaraikettejoho.KetteJoho;
 import jp.co.ndensan.reams.db.dbc.definition.enumeratedtype.config.ConfigNameDBC;
+import jp.co.ndensan.reams.db.dbc.divcontroller.entity.commonchilddiv.ShokanbaraiketteiJoho.ShokanbaraiketteiJoho.dgSyokanbaraikete_Row;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0820015.ShokanbarayiKeteiInfoPanelDiv;
 import jp.co.ndensan.reams.db.dbc.divcontroller.handler.dbc0820015.ShokanbarayiKeteiInfoPanelHandler;
 import jp.co.ndensan.reams.db.dbc.divcontroller.viewbox.ViewStateKeys;
-import jp.co.ndensan.reams.db.dbc.divcontroller.viewbox.shoukanharaihishinseikensaku.SikibetuNokennsakuki;
 import jp.co.ndensan.reams.db.dbc.divcontroller.viewbox.shoukanharaihishinseikensaku.ShoukanharaihishinseikensakuParameter;
+import jp.co.ndensan.reams.db.dbc.divcontroller.viewbox.shoukanharaihishinseikensaku.SikibetuNokennsakuki;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
 import jp.co.ndensan.reams.db.dbz.definition.message.DbzInformationMessages;
@@ -34,14 +37,19 @@ import jp.co.ndensan.reams.uz.uza.util.config.BusinessConfig;
 
 /**
  * 償還払い費支給申請決定_償還払決定情報
+ *
+ * @reamsid_L DBC-1030-180 xuhao
  */
 public class ShokanbarayiKeteiInfoPanel {
 
     private static final RString 修正 = new RString("修正");
     private static final RString 削除 = new RString("削除");
     private static final RString 登録 = new RString("登録");
-    private static final RString 新規 = new RString("新規");
+    private static final RString 照会 = new RString("照会");
     private static final RString 申請を保存する = new RString("Element3");
+    private static final RString 業務区分 = new RString("03");
+    private static List<dgSyokanbaraikete_Row> 償還払決定一覧;
+    private static KetteJoho 決定情報;
 
     /**
      * onLoad
@@ -70,8 +78,6 @@ public class ShokanbarayiKeteiInfoPanel {
                 new FlexibleYearMonth(new RString("200501")));
         ViewStateHolder.put(ViewStateKeys.識別番号検索キー, key);
         ViewStateHolder.put(ViewStateKeys.申請日, new RDate("20151129"));
-        RString 業務区分 = new RString("03");
-        RString 画面モード = new RString("モード_修正");
         ShikibetsuCode 識別コード = new ShikibetsuCode("000000000000010");
         div.getPanelOne().getCcdKaigoAtenaInfo().onLoad(識別コード);
         if (!被保険者番号.isEmpty()) {
@@ -79,30 +85,37 @@ public class ShokanbarayiKeteiInfoPanel {
         } else {
             div.getPanelOne().getCcdKaigoShikakuKihon().setVisible(false);
         }
-        div.getCcdShokanbaraiketteiJoho().loadInitialize(
-                被保険者番号, サービス年月, 整理番号, 業務区分, 画面モード);
         div.getPanelTwo().getTxtServiceTeikyoYM().setValue(new RDate(サービス年月.wareki().toDateString().toString()));
         div.getPanelTwo().getTxtSeiriBango().setValue(整理番号);
+        ViewStateHolder.put(ViewStateKeys.処理モード, 登録);
         if (登録.equals(ViewStateHolder.get(ViewStateKeys.処理モード, RString.class))) {
             RString 償還 = BusinessConfig.get(ConfigNameDBC.国保連共同処理受託区分_償還, SubGyomuCode.DBC介護給付);
             if (new RString("受託あり").equals(償還)) {
                 div.getPanelTwo().getBtnShokanbariKeteiInfo().setDisabled(true);
             }
+            div.getCcdShokanbaraiketteiJoho().loadInitialize(
+                    被保険者番号, サービス年月, 整理番号, 業務区分, 登録);
             div.getPanelTwo().getBtnKouza().setDisabled(true);
-            div.getPanelTwo().getTxtShoriMode().setValue(新規);
+            div.getPanelTwo().getTxtShoriMode().setValue(修正);
         }
         if (修正.equals(ViewStateHolder.get(ViewStateKeys.処理モード, RString.class))) {
             div.getPanelTwo().getBtnKouza().setDisabled(true);
             div.getPanelTwo().getTxtServiceTeikyoYM().setValue(new RDate(サービス年月.wareki()
                     .toDateString().toString()));
+            div.getCcdShokanbaraiketteiJoho().loadInitialize(
+                    被保険者番号, サービス年月, 整理番号, 業務区分, 修正);
             div.getPanelTwo().getTxtSeiriBango().setValue(整理番号);
             div.getPanelTwo().getTxtShoriMode().setValue(修正);
         }
         if (削除.equals(ViewStateHolder.get(ViewStateKeys.処理モード, RString.class))) {
-            CommonButtonHolder.setDisabledByCommonButtonFieldName(new RString("申請を保存する"), true);
+            CommonButtonHolder.setDisabledByCommonButtonFieldName(申請を保存する, true);
+            div.getCcdShokanbaraiketteiJoho().loadInitialize(
+                    被保険者番号, サービス年月, 整理番号, 業務区分, 照会);
             div.getPanelTwo().getBtnShinsei().setDisabled(true);
             div.getPanelTwo().getTxtShoriMode().setValue(削除);
         }
+        償還払決定一覧 = div.getCcdShokanbaraiketteiJoho().getShokanbaraiketteiJohoDiv().getDgSyokanbaraikete().getDataSource();
+        決定情報 = ViewStateHolder.get(jp.co.ndensan.reams.db.dbz.definition.core.ViewStateKeys.決定情報, KetteJoho.class);
         return ResponseData.of(div).respond();
     }
 
@@ -144,7 +157,7 @@ public class ShokanbarayiKeteiInfoPanel {
      */
     public ResponseData<ShokanbarayiKeteiInfoPanelDiv> onClick_btnServiceTeikyoShomeisyo(
             ShokanbarayiKeteiInfoPanelDiv div) {
-        if (getHandler(div).getチェック処理()) {
+        if (getHandler(div).isチェック処理()) {
             getHandler(div).putViewState();
             RString 画面モード = div.getPanelTwo().getTxtShoriMode().getValue();
             ViewStateHolder.put(ViewStateKeys.画面モード, 画面モード);
@@ -161,7 +174,16 @@ public class ShokanbarayiKeteiInfoPanel {
      * @return 画面DIV
      */
     public ResponseData<ShokanbarayiKeteiInfoPanelDiv> onClick_CommonCancel(ShokanbarayiKeteiInfoPanelDiv div) {
-        boolean flag = getHandler(div).get内容変更状態();
+        ShoukanharaihishinseikensakuParameter paramter = ViewStateHolder.get(ViewStateKeys.償還払費申請検索キー,
+                ShoukanharaihishinseikensakuParameter.class);
+        HihokenshaNo 被保険者番号 = paramter.getHiHokenshaNo();
+        FlexibleYearMonth サービス年月 = paramter.getServiceTeikyoYM();
+        RString 整理番号 = paramter.getSeiriNp();
+        RString モード = 修正;
+        if (削除.equals(ViewStateHolder.get(ViewStateKeys.処理モード, RString.class))) {
+            モード = 照会;
+        }
+        boolean flag = getHandler(div).get内容変更状態(償還払決定一覧, 決定情報);
         if (flag) {
             if (!ResponseHolder.isReRequest()) {
                 QuestionMessage message = new QuestionMessage(UrQuestionMessages.入力内容の破棄.getMessage().getCode(),
@@ -171,6 +193,8 @@ public class ShokanbarayiKeteiInfoPanel {
             if (new RString(UrQuestionMessages.入力内容の破棄.getMessage().getCode())
                     .equals(ResponseHolder.getMessageCode())
                     && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
+                div.getCcdShokanbaraiketteiJoho().loadInitialize(
+                        被保険者番号, サービス年月, 整理番号, 業務区分, モード);
                 return ResponseData.of(div).respond();
             } else {
                 return ResponseData.of(div).respond();
@@ -187,8 +211,7 @@ public class ShokanbarayiKeteiInfoPanel {
      * @return 画面DIV
      */
     public ResponseData<ShokanbarayiKeteiInfoPanelDiv> onClick_CommonSave(ShokanbarayiKeteiInfoPanelDiv div) {
-        boolean flag = true;
-        getHandler(div).get内容変更状態();
+        boolean flag = getHandler(div).get内容変更状態(償還払決定一覧, 決定情報);
         if (削除.equals(ViewStateHolder.get(ViewStateKeys.処理モード, RString.class))) {
             if (!ResponseHolder.isReRequest()) {
                 getHandler(div).削除Save();
@@ -202,7 +225,8 @@ public class ShokanbarayiKeteiInfoPanel {
         } else if (flag) {
             if (!ResponseHolder.isReRequest()) {
                 getHandler(div).登録Save();
-                return ResponseData.of(div).addMessage(UrInformationMessages.正常終了.getMessage()).respond();
+                return ResponseData.of(div).addMessage(UrInformationMessages.正常終了.getMessage()
+                        .replace(登録.toString())).respond();
             }
             if (ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
                 CommonButtonHolder.setDisabledByCommonButtonFieldName(申請を保存する, true);
