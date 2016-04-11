@@ -3,21 +3,17 @@ package jp.co.ndensan.reams.db.dbb.divcontroller.entity.parentdiv.DBB0540001;
  * このコードはツールによって生成されました。
  * このファイルへの変更は、以下の状況下で不正な動作の原因になったり、
  * コードが再生成されるときに損失したりします。
- * Thu Mar 17 19:52:00 CST 2016 
+ * Thu Mar 17 19:52:00 CST 2016
  */
-
-
 
 import jp.co.ndensan.reams.uz.uza.ui.binding.DataRow;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TextBox;
 
-
 /**
- * choshuHouhou_Row のクラスファイル 
- * 
- * @author 自動生成
+ * choshuHouhou_Row のクラスファイル
+ *
+ * @reamsid_L DBB-1760-010 sunhui
  */
-
 public class choshuHouhou_Row extends DataRow {
     // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2015-11-16_12-38-19">
 

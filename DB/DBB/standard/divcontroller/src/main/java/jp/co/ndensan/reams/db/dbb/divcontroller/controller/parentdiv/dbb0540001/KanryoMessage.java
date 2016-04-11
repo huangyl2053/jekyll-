@@ -11,6 +11,8 @@ import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 
 /**
  * 徴収方法変更_介護完了メッセージエリアのクラスです。
+ *
+ * @reamsid_L DBB-1760-010 sunhui
  */
 public class KanryoMessage {
 

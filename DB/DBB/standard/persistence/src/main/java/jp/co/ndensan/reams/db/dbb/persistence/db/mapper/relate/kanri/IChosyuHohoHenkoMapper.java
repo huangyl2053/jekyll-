@@ -9,7 +9,9 @@ import jp.co.ndensan.reams.db.dbb.definition.mybatisprm.kanri.ChosyuHohoHenkoMap
 import jp.co.ndensan.reams.db.dbb.entity.db.relate.choshuhoho.ChoshuHohoEntity;
 
 /**
- * 徴収方法変更、徴収方法取得
+ * 徴収方法変更、徴収方法取得。
+ *
+ * @reamsid_L DBB-1760-030 sunhui
  */
 public interface IChosyuHohoHenkoMapper {
 

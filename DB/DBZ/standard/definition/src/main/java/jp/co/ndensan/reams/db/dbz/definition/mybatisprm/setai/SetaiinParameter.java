@@ -12,6 +12,8 @@ import lombok.Getter;
 
 /**
  * 世帯員取得のMyBatisパラメータクラスです。
+ *
+ * @reamsid_L DBB-1750-030 sunhui
  */
 @Getter
 @SuppressWarnings("PMD.UnusedPrivateField")

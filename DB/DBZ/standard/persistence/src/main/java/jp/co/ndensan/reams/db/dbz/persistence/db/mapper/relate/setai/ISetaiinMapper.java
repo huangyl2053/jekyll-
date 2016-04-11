@@ -11,6 +11,8 @@ import jp.co.ndensan.reams.ua.uax.entity.db.basic.UaFt200FindShikibetsuTaishoEnt
 
 /**
  * 世帯員取得データ作成 Mapper
+ *
+ * @reamsid_L DBB-1750-030 sunhui
  */
 public interface ISetaiinMapper {
 
