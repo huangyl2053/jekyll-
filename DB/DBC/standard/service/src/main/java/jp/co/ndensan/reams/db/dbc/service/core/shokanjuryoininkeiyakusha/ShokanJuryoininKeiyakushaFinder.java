@@ -11,8 +11,10 @@ import jp.co.ndensan.reams.db.dbc.business.core.basic.ShokanJuryoininKeiyakusha;
 import jp.co.ndensan.reams.db.dbc.business.core.shokanjuryoininkeiyakusha.ChkKeiyakuNoParameter;
 import jp.co.ndensan.reams.db.dbc.business.core.shokanjuryoininkeiyakusha.ChkTorokuzumiParameter;
 import jp.co.ndensan.reams.db.dbc.business.core.shokanjuryoininkeiyakusha.ShokanJuryoininKeiyakushaParameter;
+import jp.co.ndensan.reams.db.dbc.business.core.shokanjuryoininkeiyakusha.ShokanJuryoininKeiyakushaResult;
 import jp.co.ndensan.reams.db.dbc.definition.mybatisprm.shokanjuryoininkeiyakusha.ShokanJuryoininKeiyakushaListParameter;
 import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3078ShokanJuryoininKeiyakushaEntity;
+import jp.co.ndensan.reams.db.dbc.entity.db.relate.shokanjuryoininkeiyakusha.ShokanJuryoininKeiyakushaEntity;
 import jp.co.ndensan.reams.db.dbc.persistence.db.basic.DbT3078ShokanJuryoininKeiyakushaDac;
 import jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.shokanjuryoininkeiyakusha.IShokanJuryoininKeiyakushaMapper;
 import jp.co.ndensan.reams.db.dbc.service.core.MapperProvider;
@@ -38,6 +40,8 @@ import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
  */
 public class ShokanJuryoininKeiyakushaFinder {
 
+    private static final RString モード_修正 = new RString("修正");
+    private static final RString モード_登録 = new RString("登録");
     private final MapperProvider mapperProvider;
     private final DbT1001HihokenshaDaichoDac 被保険者台帳管理Dac;
     private final DbT3078ShokanJuryoininKeiyakushaDac 償還受領委任契約者Dac;
@@ -80,23 +84,26 @@ public class ShokanJuryoininKeiyakushaFinder {
      * 契約者一覧取得
      *
      * @param parameter parameter
-     * @return List<ShokanJuryoininKeiyakusha>
+     * @return List<ShokanJuryoininKeiyakushaResult>
      */
-    public List<ShokanJuryoininKeiyakusha> getShokanJuryoininKeiyakushaList(ShokanJuryoininKeiyakushaParameter parameter) {
+    public List<ShokanJuryoininKeiyakushaResult> getShokanJuryoininKeiyakushaList(ShokanJuryoininKeiyakushaParameter parameter) {
 
-        List<ShokanJuryoininKeiyakusha> kushaList = new ArrayList<>();
-        ShokanJuryoininKeiyakushaListParameter param
-                = ShokanJuryoininKeiyakushaListParameter.createSelectByKeyParam(parameter.get被保険者番号(),
-                        parameter.get契約申請日FROM(), parameter.get契約申請日TO(), parameter.get契約決定日FROM(),
-                        parameter.get契約決定日TO(), parameter.get契約事業者番号(), parameter.get契約サービス種類(),
-                        parameter.get契約年度(), parameter.get契約番号());
+        List<ShokanJuryoininKeiyakushaResult> kushaList = new ArrayList<>();
+        ShokanJuryoininKeiyakushaListParameter param = null;
+        if (parameter != null) {
+            param = ShokanJuryoininKeiyakushaListParameter.createSelectByKeyParam(parameter.get被保険者番号(),
+                    parameter.get契約申請日FROM(), parameter.get契約申請日TO(), parameter.get契約決定日FROM(),
+                    parameter.get契約決定日TO(), parameter.get契約事業者番号(), parameter.get契約サービス種類(),
+                    parameter.get契約年度(), parameter.get契約番号());
+        }
         IShokanJuryoininKeiyakushaMapper mapper = mapperProvider.create(IShokanJuryoininKeiyakushaMapper.class);
-        List<DbT3078ShokanJuryoininKeiyakushaEntity> entityList = mapper.get契約事業者一覧(param);
+        List<ShokanJuryoininKeiyakushaEntity> entityList = mapper.get契約事業者一覧(param);
         if (entityList == null || entityList.isEmpty()) {
             return kushaList;
         }
-        for (DbT3078ShokanJuryoininKeiyakushaEntity entity : entityList) {
-            DbT1001HihokenshaDaichoEntity dbt1001entity = 被保険者台帳管理Dac.get被保険者証資格証発行情報(entity.getHihokenshaNo());
+        for (ShokanJuryoininKeiyakushaEntity entity : entityList) {
+            DbT1001HihokenshaDaichoEntity dbt1001entity
+                    = 被保険者台帳管理Dac.get被保険者証資格証発行情報(entity.getDbt3078entity().getHihokenshaNo());
             if (dbt1001entity != null) {
                 IAtesakiGyomuHanteiKey 宛先業務判定キー
                         = AtesakiGyomuHanteiKeyFactory.createInstace(GyomuCode.DB介護保険, SubGyomuCode.DBC介護給付);
@@ -104,10 +111,11 @@ public class ShokanJuryoininKeiyakushaFinder {
                         .set識別コード(dbt1001entity.getShikibetsuCode())
                         .build();
                 List<IAtesaki> 宛先s = ShikibetsuTaishoService.getAtesakiFinder().get宛先s(searchKey);
-                //QA.334(Redmine#:78267)
-                entity.setBiko(宛先s.get(0).get備考());
+                if (宛先s != null && !宛先s.isEmpty()) {
+                    entity.set氏名(宛先s.get(0).get宛先本人名称());
+                }
             }
-            kushaList.add(new ShokanJuryoininKeiyakusha(entity));
+            kushaList.add(new ShokanJuryoininKeiyakushaResult(entity));
         }
         return kushaList;
     }
@@ -188,10 +196,10 @@ public class ShokanJuryoininKeiyakushaFinder {
         if (entityList == null || entityList.isEmpty()) {
             return true;
         }
-        if (new RString("登録").equals(parameter.get画面モード())) {
+        if (モード_登録.equals(parameter.get画面モード())) {
             return false;
         }
-        if (!new RString("修正").equals(parameter.get画面モード())) {
+        if (!モード_修正.equals(parameter.get画面モード())) {
             return true;
         }
         for (DbT3078ShokanJuryoininKeiyakushaEntity entity : entityList) {
@@ -219,10 +227,10 @@ public class ShokanJuryoininKeiyakushaFinder {
         if (entity == null) {
             return true;
         }
-        if (new RString("登録").equals(parameter.get画面モード())) {
+        if (モード_登録.equals(parameter.get画面モード())) {
             return false;
         }
-        if (!new RString("修正").equals(parameter.get画面モード())) {
+        if (!モード_修正.equals(parameter.get画面モード())) {
             return true;
         }
         return (entity.getHihokenshaNo().equals(parameter.get被保険者番号())
