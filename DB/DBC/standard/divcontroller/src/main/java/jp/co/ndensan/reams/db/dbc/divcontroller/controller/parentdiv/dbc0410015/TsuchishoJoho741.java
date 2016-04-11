@@ -9,12 +9,14 @@ import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0410015.Tsuc
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 
 /**
- * 国保連情報受取データ取込_[741]請求明細・給付管理票返戻（保留）一覧表情報のクラスです
+ * 国保連情報受取データ取込_[741]請求明細・給付管理票返戻（保留）一覧表情報のクラスです。
+ *
+ * @reamsid_L DBC-0980-060 wangkanglei
  */
 public class TsuchishoJoho741 {
 
     /**
-     * 画面初期化
+     * 画面初期化のメソッドます。
      *
      * @param div TsuchishoJoho741Div
      * @return ResponseData
@@ -25,7 +27,7 @@ public class TsuchishoJoho741 {
     }
 
     /**
-     * 「実行する」ボタン事件
+     * 「実行する」ボタン事件のメソッドます。
      *
      * @param div TsuchishoJoho741Div
      * @return ResponseData
