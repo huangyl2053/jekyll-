@@ -7,15 +7,19 @@ package jp.co.ndensan.reams.db.dbb.divcontroller.entity.parentdiv.DBB9020003;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import jp.co.ndensan.reams.uz.uza.ui.binding.*;
+import jp.co.ndensan.reams.uz.uza.ui.binding.DataGrid;
+import jp.co.ndensan.reams.uz.uza.ui.binding.DropDownList;
+import jp.co.ndensan.reams.uz.uza.ui.binding.RadioButton;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TabContainer;
+import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxMultiLine;
 
 /**
- * tabFuCho のクラスファイル 
- * 
- * @author 自動生成
+ * tabFuCho のクラスファイル
+ *
+ * @reamsid_L DBB-1770-050 xupeng
  */
 public class tabFuChoDiv extends TabContainer {
+
     // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-01-15_09-59-03">
     /*
      * [ private の作成 ]
@@ -79,7 +83,7 @@ public class tabFuChoDiv extends TabContainer {
     }
 
     @JsonIgnore
-    public void  setKibetsuJoho(KibetsuJohoDiv KibetsuJoho) {
+    public void setKibetsuJoho(KibetsuJohoDiv KibetsuJoho) {
         this.getTplGenNendo().setKibetsuJoho(KibetsuJoho);
     }
 
@@ -89,7 +93,7 @@ public class tabFuChoDiv extends TabContainer {
     }
 
     @JsonIgnore
-    public void  setDgGenNendoKibetsuJoho(DataGrid<dgGenNendoKibetsuJoho_Row> dgGenNendoKibetsuJoho) {
+    public void setDgGenNendoKibetsuJoho(DataGrid<dgGenNendoKibetsuJoho_Row> dgGenNendoKibetsuJoho) {
         this.getTplGenNendo().getKibetsuJoho().setDgGenNendoKibetsuJoho(dgGenNendoKibetsuJoho);
     }
 
@@ -99,7 +103,7 @@ public class tabFuChoDiv extends TabContainer {
     }
 
     @JsonIgnore
-    public void  setKibetsuHasu(KibetsuHasuDiv KibetsuHasu) {
+    public void setKibetsuHasu(KibetsuHasuDiv KibetsuHasu) {
         this.getTplGenNendo().setKibetsuHasu(KibetsuHasu);
     }
 
@@ -109,7 +113,7 @@ public class tabFuChoDiv extends TabContainer {
     }
 
     @JsonIgnore
-    public void  setDdlHasu(DropDownList ddlHasu) {
+    public void setDdlHasu(DropDownList ddlHasu) {
         this.getTplGenNendo().getKibetsuHasu().setDdlHasu(ddlHasu);
     }
 
@@ -119,7 +123,7 @@ public class tabFuChoDiv extends TabContainer {
     }
 
     @JsonIgnore
-    public void  setZanteiKeisanHoho(ZanteiKeisanHohoDiv ZanteiKeisanHoho) {
+    public void setZanteiKeisanHoho(ZanteiKeisanHohoDiv ZanteiKeisanHoho) {
         this.getTplGenNendo().setZanteiKeisanHoho(ZanteiKeisanHoho);
     }
 
@@ -129,7 +133,7 @@ public class tabFuChoDiv extends TabContainer {
     }
 
     @JsonIgnore
-    public void  setDdlFukaHoho(DropDownList ddlFukaHoho) {
+    public void setDdlFukaHoho(DropDownList ddlFukaHoho) {
         this.getTplGenNendo().getZanteiKeisanHoho().setDdlFukaHoho(ddlFukaHoho);
     }
 
@@ -139,7 +143,7 @@ public class tabFuChoDiv extends TabContainer {
     }
 
     @JsonIgnore
-    public void  setTxtFukaHohoHelp(TextBoxMultiLine txtFukaHohoHelp) {
+    public void setTxtFukaHohoHelp(TextBoxMultiLine txtFukaHohoHelp) {
         this.getTplGenNendo().getZanteiKeisanHoho().setTxtFukaHohoHelp(txtFukaHohoHelp);
     }
 
@@ -149,7 +153,7 @@ public class tabFuChoDiv extends TabContainer {
     }
 
     @JsonIgnore
-    public void  setDdlIdoHoho(DropDownList ddlIdoHoho) {
+    public void setDdlIdoHoho(DropDownList ddlIdoHoho) {
         this.getTplGenNendo().getZanteiKeisanHoho().setDdlIdoHoho(ddlIdoHoho);
     }
 
@@ -159,7 +163,7 @@ public class tabFuChoDiv extends TabContainer {
     }
 
     @JsonIgnore
-    public void  setRadHasuChosei(RadioButton radHasuChosei) {
+    public void setRadHasuChosei(RadioButton radHasuChosei) {
         this.getTplGenNendo().getZanteiKeisanHoho().setRadHasuChosei(radHasuChosei);
     }
 
@@ -169,7 +173,7 @@ public class tabFuChoDiv extends TabContainer {
     }
 
     @JsonIgnore
-    public void  setRadHeichoSha(RadioButton radHeichoSha) {
+    public void setRadHeichoSha(RadioButton radHeichoSha) {
         this.getTplGenNendo().getZanteiKeisanHoho().setRadHeichoSha(radHeichoSha);
     }
 
@@ -179,7 +183,7 @@ public class tabFuChoDiv extends TabContainer {
     }
 
     @JsonIgnore
-    public void  setKaNendo(KaNendoDiv KaNendo) {
+    public void setKaNendo(KaNendoDiv KaNendo) {
         this.getTplKaNendo().setKaNendo(KaNendo);
     }
 
@@ -189,7 +193,7 @@ public class tabFuChoDiv extends TabContainer {
     }
 
     @JsonIgnore
-    public void  setDgKaNendoKibetsuJoho(DataGrid<dgKaNendoKibetsuJoho_Row> dgKaNendoKibetsuJoho) {
+    public void setDgKaNendoKibetsuJoho(DataGrid<dgKaNendoKibetsuJoho_Row> dgKaNendoKibetsuJoho) {
         this.getTplKaNendo().getKaNendo().setDgKaNendoKibetsuJoho(dgKaNendoKibetsuJoho);
     }
 

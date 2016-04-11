@@ -4,17 +4,22 @@ package jp.co.ndensan.reams.db.dbb.divcontroller.entity.parentdiv.DBB9020003;
  * このファイルへの変更は、再生成時には損失するため
  * 不正な動作の原因になります。
  */
+
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import jp.co.ndensan.reams.uz.uza.ui.binding.*;
+import jp.co.ndensan.reams.uz.uza.ui.binding.DataGrid;
+import jp.co.ndensan.reams.uz.uza.ui.binding.DropDownList;
+import jp.co.ndensan.reams.uz.uza.ui.binding.RadioButton;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TabPanel;
+import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxMultiLine;
 
 /**
- * tplGenNendo のクラスファイル 
- * 
- * @author 自動生成
+ * tplGenNendo のクラスファイル
+ *
+ * @reamsid_L DBB-1770-050 xupeng
  */
 public class tplGenNendoDiv extends TabPanel {
+
     // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-01-15_09-59-03">
     /*
      * [ private の作成 ]
@@ -98,7 +103,7 @@ public class tplGenNendoDiv extends TabPanel {
     }
 
     @JsonIgnore
-    public void  setDgGenNendoKibetsuJoho(DataGrid<dgGenNendoKibetsuJoho_Row> dgGenNendoKibetsuJoho) {
+    public void setDgGenNendoKibetsuJoho(DataGrid<dgGenNendoKibetsuJoho_Row> dgGenNendoKibetsuJoho) {
         this.getKibetsuJoho().setDgGenNendoKibetsuJoho(dgGenNendoKibetsuJoho);
     }
 
@@ -108,7 +113,7 @@ public class tplGenNendoDiv extends TabPanel {
     }
 
     @JsonIgnore
-    public void  setDdlHasu(DropDownList ddlHasu) {
+    public void setDdlHasu(DropDownList ddlHasu) {
         this.getKibetsuHasu().setDdlHasu(ddlHasu);
     }
 
@@ -118,7 +123,7 @@ public class tplGenNendoDiv extends TabPanel {
     }
 
     @JsonIgnore
-    public void  setDdlFukaHoho(DropDownList ddlFukaHoho) {
+    public void setDdlFukaHoho(DropDownList ddlFukaHoho) {
         this.getZanteiKeisanHoho().setDdlFukaHoho(ddlFukaHoho);
     }
 
@@ -128,7 +133,7 @@ public class tplGenNendoDiv extends TabPanel {
     }
 
     @JsonIgnore
-    public void  setTxtFukaHohoHelp(TextBoxMultiLine txtFukaHohoHelp) {
+    public void setTxtFukaHohoHelp(TextBoxMultiLine txtFukaHohoHelp) {
         this.getZanteiKeisanHoho().setTxtFukaHohoHelp(txtFukaHohoHelp);
     }
 
@@ -138,7 +143,7 @@ public class tplGenNendoDiv extends TabPanel {
     }
 
     @JsonIgnore
-    public void  setDdlIdoHoho(DropDownList ddlIdoHoho) {
+    public void setDdlIdoHoho(DropDownList ddlIdoHoho) {
         this.getZanteiKeisanHoho().setDdlIdoHoho(ddlIdoHoho);
     }
 
@@ -148,7 +153,7 @@ public class tplGenNendoDiv extends TabPanel {
     }
 
     @JsonIgnore
-    public void  setRadHasuChosei(RadioButton radHasuChosei) {
+    public void setRadHasuChosei(RadioButton radHasuChosei) {
         this.getZanteiKeisanHoho().setRadHasuChosei(radHasuChosei);
     }
 
@@ -158,7 +163,7 @@ public class tplGenNendoDiv extends TabPanel {
     }
 
     @JsonIgnore
-    public void  setRadHeichoSha(RadioButton radHeichoSha) {
+    public void setRadHeichoSha(RadioButton radHeichoSha) {
         this.getZanteiKeisanHoho().setRadHeichoSha(radHeichoSha);
     }
 

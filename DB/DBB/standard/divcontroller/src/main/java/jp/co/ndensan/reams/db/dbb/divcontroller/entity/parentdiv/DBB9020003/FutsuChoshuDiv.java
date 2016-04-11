@@ -7,15 +7,19 @@ package jp.co.ndensan.reams.db.dbb.divcontroller.entity.parentdiv.DBB9020003;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import jp.co.ndensan.reams.uz.uza.ui.binding.*;
+import jp.co.ndensan.reams.uz.uza.ui.binding.DataGrid;
+import jp.co.ndensan.reams.uz.uza.ui.binding.DropDownList;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
+import jp.co.ndensan.reams.uz.uza.ui.binding.RadioButton;
+import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxMultiLine;
 
 /**
- * FutsuChoshu のクラスファイル 
- * 
- * @author 自動生成
+ * FutsuChoshu のクラスファイル
+ *
+ * @reamsid_L DBB-1770-050 xupeng
  */
 public class FutsuChoshuDiv extends Panel {
+
     // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-01-15_09-59-03">
     /*
      * [ private の作成 ]
@@ -59,7 +63,7 @@ public class FutsuChoshuDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setTplGenNendo(tplGenNendoDiv tplGenNendo) {
+    public void setTplGenNendo(tplGenNendoDiv tplGenNendo) {
         this.getTabFuCho().setTplGenNendo(tplGenNendo);
     }
 
@@ -69,7 +73,7 @@ public class FutsuChoshuDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setKibetsuJoho(KibetsuJohoDiv KibetsuJoho) {
+    public void setKibetsuJoho(KibetsuJohoDiv KibetsuJoho) {
         this.getTabFuCho().getTplGenNendo().setKibetsuJoho(KibetsuJoho);
     }
 
@@ -79,7 +83,7 @@ public class FutsuChoshuDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setDgGenNendoKibetsuJoho(DataGrid<dgGenNendoKibetsuJoho_Row> dgGenNendoKibetsuJoho) {
+    public void setDgGenNendoKibetsuJoho(DataGrid<dgGenNendoKibetsuJoho_Row> dgGenNendoKibetsuJoho) {
         this.getTabFuCho().getTplGenNendo().getKibetsuJoho().setDgGenNendoKibetsuJoho(dgGenNendoKibetsuJoho);
     }
 
@@ -89,7 +93,7 @@ public class FutsuChoshuDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setKibetsuHasu(KibetsuHasuDiv KibetsuHasu) {
+    public void setKibetsuHasu(KibetsuHasuDiv KibetsuHasu) {
         this.getTabFuCho().getTplGenNendo().setKibetsuHasu(KibetsuHasu);
     }
 
@@ -99,7 +103,7 @@ public class FutsuChoshuDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setDdlHasu(DropDownList ddlHasu) {
+    public void setDdlHasu(DropDownList ddlHasu) {
         this.getTabFuCho().getTplGenNendo().getKibetsuHasu().setDdlHasu(ddlHasu);
     }
 
@@ -109,7 +113,7 @@ public class FutsuChoshuDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setZanteiKeisanHoho(ZanteiKeisanHohoDiv ZanteiKeisanHoho) {
+    public void setZanteiKeisanHoho(ZanteiKeisanHohoDiv ZanteiKeisanHoho) {
         this.getTabFuCho().getTplGenNendo().setZanteiKeisanHoho(ZanteiKeisanHoho);
     }
 
@@ -119,7 +123,7 @@ public class FutsuChoshuDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setDdlFukaHoho(DropDownList ddlFukaHoho) {
+    public void setDdlFukaHoho(DropDownList ddlFukaHoho) {
         this.getTabFuCho().getTplGenNendo().getZanteiKeisanHoho().setDdlFukaHoho(ddlFukaHoho);
     }
 
@@ -129,7 +133,7 @@ public class FutsuChoshuDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setTxtFukaHohoHelp(TextBoxMultiLine txtFukaHohoHelp) {
+    public void setTxtFukaHohoHelp(TextBoxMultiLine txtFukaHohoHelp) {
         this.getTabFuCho().getTplGenNendo().getZanteiKeisanHoho().setTxtFukaHohoHelp(txtFukaHohoHelp);
     }
 
@@ -139,7 +143,7 @@ public class FutsuChoshuDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setDdlIdoHoho(DropDownList ddlIdoHoho) {
+    public void setDdlIdoHoho(DropDownList ddlIdoHoho) {
         this.getTabFuCho().getTplGenNendo().getZanteiKeisanHoho().setDdlIdoHoho(ddlIdoHoho);
     }
 
@@ -149,7 +153,7 @@ public class FutsuChoshuDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setRadHasuChosei(RadioButton radHasuChosei) {
+    public void setRadHasuChosei(RadioButton radHasuChosei) {
         this.getTabFuCho().getTplGenNendo().getZanteiKeisanHoho().setRadHasuChosei(radHasuChosei);
     }
 
@@ -159,7 +163,7 @@ public class FutsuChoshuDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setRadHeichoSha(RadioButton radHeichoSha) {
+    public void setRadHeichoSha(RadioButton radHeichoSha) {
         this.getTabFuCho().getTplGenNendo().getZanteiKeisanHoho().setRadHeichoSha(radHeichoSha);
     }
 
@@ -169,7 +173,7 @@ public class FutsuChoshuDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setTplKaNendo(tplKaNendoDiv tplKaNendo) {
+    public void setTplKaNendo(tplKaNendoDiv tplKaNendo) {
         this.getTabFuCho().setTplKaNendo(tplKaNendo);
     }
 
@@ -179,7 +183,7 @@ public class FutsuChoshuDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setKaNendo(KaNendoDiv KaNendo) {
+    public void setKaNendo(KaNendoDiv KaNendo) {
         this.getTabFuCho().getTplKaNendo().setKaNendo(KaNendo);
     }
 
@@ -189,7 +193,7 @@ public class FutsuChoshuDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setDgKaNendoKibetsuJoho(DataGrid<dgKaNendoKibetsuJoho_Row> dgKaNendoKibetsuJoho) {
+    public void setDgKaNendoKibetsuJoho(DataGrid<dgKaNendoKibetsuJoho_Row> dgKaNendoKibetsuJoho) {
         this.getTabFuCho().getTplKaNendo().getKaNendo().setDgKaNendoKibetsuJoho(dgKaNendoKibetsuJoho);
     }
 
