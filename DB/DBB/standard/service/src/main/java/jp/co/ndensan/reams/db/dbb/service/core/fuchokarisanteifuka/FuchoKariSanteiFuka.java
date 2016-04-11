@@ -29,6 +29,8 @@ import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 
 /**
  * ビジネス設計_DBBBZ34001_普徴仮算定賦課のクラスです
+ *
+ * @reamsid_L DBC-0710-020 gongliang
  */
 public class FuchoKariSanteiFuka {
 
