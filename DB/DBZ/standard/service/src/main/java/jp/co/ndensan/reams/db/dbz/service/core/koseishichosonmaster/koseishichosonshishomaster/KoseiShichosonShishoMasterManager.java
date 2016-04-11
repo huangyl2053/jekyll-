@@ -14,6 +14,8 @@ import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
 
 /**
  * 構成市町村支所マスタを管理するクラスです。
+ *
+ * @reamsid_L DBZ-9999-011 sunhaidi
  */
 public class KoseiShichosonShishoMasterManager {
 

@@ -14,6 +14,8 @@ import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT7063KaigoJigyoshaShiteiServ
 
 /**
  * 介護事業者RelateEntityクラスです。
+ *
+ * @reamsid_L DBX-9999-011 sunhaidi
  */
 @lombok.Getter
 @lombok.Setter
