@@ -3,21 +3,17 @@ package jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2020007;
  * このコードはツールによって生成されました。
  * このファイルへの変更は、以下の状況下で不正な動作の原因になったり、
  * コードが再生成されるときに損失したりします。
- * Fri Mar 18 10:37:04 CST 2016 
+ * Fri Mar 18 10:37:04 CST 2016
  */
 
-
-
-import jp.co.ndensan.reams.uz.uza.ui.binding.DataRow;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-
+import jp.co.ndensan.reams.uz.uza.ui.binding.DataRow;
 
 /**
- * dgChosaChikuChichosonList_Row のクラスファイル 
- * 
- * @author 自動生成
+ * dgChosaChikuChichosonList_Row のクラスファイル
+ *
+ * @reamsid_L DBE-0023-010 xuyannan
  */
-
 public class dgChosaChikuChichosonList_Row extends DataRow {
     // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：バージョン情報無し">
 

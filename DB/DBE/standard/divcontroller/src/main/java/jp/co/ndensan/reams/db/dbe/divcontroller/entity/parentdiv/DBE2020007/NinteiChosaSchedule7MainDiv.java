@@ -4,19 +4,23 @@ package jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2020007;
  * このファイルへの変更は、再生成時には損失するため
  * 不正な動作の原因になります。
  */
+
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.KaigoKanryoMessage.KaigoKanryoMessage.IKaigoKanryoMessageDiv;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.KaigoKanryoMessage.KaigoKanryoMessage.KaigoKanryoMessageDiv;
-import jp.co.ndensan.reams.uz.uza.ui.binding.*;
+import jp.co.ndensan.reams.uz.uza.ui.binding.Button;
+import jp.co.ndensan.reams.uz.uza.ui.binding.DataGrid;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
+import jp.co.ndensan.reams.uz.uza.ui.binding.TextBox;
 
 /**
- * NinteiChosaSchedule7Main のクラスファイル 
- * 
- * @author 自動生成
+ * NinteiChosaSchedule7Main のクラスファイル
+ *
+ * @reamsid_L DBE-0023-010 xuyannan
  */
 public class NinteiChosaSchedule7MainDiv extends Panel {
+
     // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：バージョン情報無し">
     /*
      * [ private の作成 ]
@@ -111,7 +115,7 @@ public class NinteiChosaSchedule7MainDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setDgChosaChikuList(DataGrid<dgChosaChikuList_Row> dgChosaChikuList) {
+    public void setDgChosaChikuList(DataGrid<dgChosaChikuList_Row> dgChosaChikuList) {
         this.getChosaChikuPanel().setDgChosaChikuList(dgChosaChikuList);
     }
 
@@ -121,7 +125,7 @@ public class NinteiChosaSchedule7MainDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setTxtChosaChikuCode(TextBox txtChosaChikuCode) {
+    public void setTxtChosaChikuCode(TextBox txtChosaChikuCode) {
         this.getChosaChikuShichosonPanel().setTxtChosaChikuCode(txtChosaChikuCode);
     }
 
@@ -131,7 +135,7 @@ public class NinteiChosaSchedule7MainDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setTxtChosaChikuName(TextBox txtChosaChikuName) {
+    public void setTxtChosaChikuName(TextBox txtChosaChikuName) {
         this.getChosaChikuShichosonPanel().setTxtChosaChikuName(txtChosaChikuName);
     }
 
@@ -141,7 +145,7 @@ public class NinteiChosaSchedule7MainDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setBtnInsert(Button btnInsert) {
+    public void setBtnInsert(Button btnInsert) {
         this.getChosaChikuShichosonPanel().setBtnInsert(btnInsert);
     }
 
@@ -151,7 +155,7 @@ public class NinteiChosaSchedule7MainDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setDgChosaChikuChichosonList(DataGrid<dgChosaChikuChichosonList_Row> dgChosaChikuChichosonList) {
+    public void setDgChosaChikuChichosonList(DataGrid<dgChosaChikuChichosonList_Row> dgChosaChikuChichosonList) {
         this.getChosaChikuShichosonPanel().setDgChosaChikuChichosonList(dgChosaChikuChichosonList);
     }
 
