@@ -22,6 +22,8 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
  * 他市町村住所地特例者台帳のエンティティクラスです。
+ *
+ * @reamsid_L DBA-0402-020 wangjie2
  */
 @lombok.Getter
 @lombok.Setter

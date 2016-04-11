@@ -44,6 +44,8 @@ import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 
 /**
  * 他市町村住所地特例者台帳のクラスです。
+ *
+ * @reamsid_L DBA-0402-020 wangjie2
  */
 public class TashichosonJushochiTokureiDaicho {
 
