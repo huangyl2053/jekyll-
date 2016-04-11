@@ -22,6 +22,10 @@ import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBE;
 import jp.co.ndensan.reams.db.dbz.definition.core.ninteichosahyou.NinteichosaKomokuMapping09B;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.chosain.NinchishoNichijoSeikatsuJiritsudoCode;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.chosain.ShogaiNichijoSeikatsuJiritsudoCode;
+import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.ichijihantei.IchijiHanteiKekkaCode02;
+import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.ichijihantei.IchijiHanteiKekkaCode06;
+import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.ichijihantei.IchijiHanteiKekkaCode09;
+import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.ichijihantei.IchijiHanteiKekkaCode99;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5201NinteichosaIraiJohoEntity;
 import jp.co.ndensan.reams.ur.urz.business.core.association.Association;
 import jp.co.ndensan.reams.ur.urz.business.report.outputjokenhyo.ReportOutputJokenhyoItem;
@@ -55,7 +59,6 @@ public class ChosahyoSaiCheckhyoReportProcess extends BatchProcessBase<HomonChos
             + "relate.hakkoichiranhyo.IHomonChosaIraishoMapper.get認定調査結果");
     private static final ReportId 帳票ID = ReportIdDBE.DBE293001.getReportId();
     private static final RString 文字列1 = new RString("1");
-    private static final RString 文字列2 = new RString("2");
     private static final RString TITLE = new RString("調査票差異チェック票");
     private static final RString IRAIFROMYMD = new RString("【依頼開始日】");
     private static final RString IRAITOYMD = new RString("【依頼終了日】");
@@ -80,7 +83,11 @@ public class ChosahyoSaiCheckhyoReportProcess extends BatchProcessBase<HomonChos
     private static final RString ZENKONINTEICHOSAHYO = new RString("【前回認定調査結果との比較表出力区分】");
     private static final RString UESANKAKU = new RString("▲");
     private static final RString SHITASANKAKU = new RString("▼");
-    private RString shinseishoKanriNo;
+    private static final RString IFSHIKIBETSUCODE99A = new RString("99A");
+    private static final RString IFSHIKIBETSUCODE02A = new RString("02A");
+    private static final RString IFSHIKIBETSUCODE06A = new RString("06A");
+    private static final RString IFSHIKIBETSUCODE09A = new RString("09A");
+    private RString shinseishoKanriNo = RString.EMPTY;
     private List<ChosahyoSaiCheckhyoRelateEntity> checkEntityList;
     private IHomonChosaIraishoMapper iHomonChosaIraishoMapper;
     private HomonChosaIraishoProcessParamter processParamter;
@@ -141,11 +148,15 @@ public class ChosahyoSaiCheckhyoReportProcess extends BatchProcessBase<HomonChos
         checkEntity.set合議体番号(entity.get合議体番号());
         checkEntity.set被保険者番号(entity.get被保険者番号());
         checkEntity.set被保険者氏名(entity.get被保険者氏名());
+        checkEntity.set前回一次判定結果(get判定結果(entity.get厚労省IF識別コード(), entity.get要介護認定一次判定結果コード()));
+        checkEntity.set今回一次判定結果(get判定結果(entity.get厚労省IF識別コード(), entity.get今回一次判定結果コード()));
+        checkEntity.set前回二次判定結果(get判定結果(entity.get厚労省IF識別コード(), entity.get二次判定要介護状態区分コード()));
         checkEntity.set今回認知症高齢者自立度(NinchishoNichijoSeikatsuJiritsudoCode.toValue(entity.get今回認知症高齢者自立度()).get名称());
         checkEntity.set今回障害高齢者自立度(ShogaiNichijoSeikatsuJiritsudoCode.toValue(entity.get今回障害高齢者自立度()).get名称());
         checkEntity.set前回認知症高齢者自立度(NinchishoNichijoSeikatsuJiritsudoCode.toValue(entity.get前回認知症高齢者自立度()).get名称());
         checkEntity.set前回障害高齢者自立度(ShogaiNichijoSeikatsuJiritsudoCode.toValue(entity.get前回障害高齢者自立度()).get名称());
-        if (!shinseishoKanriNo.equals(entity.get申請書管理番号())) {
+        if (entity.get申請書管理番号() != null && !shinseishoKanriNo.equals(entity.get申請書管理番号())) {
+            shinseishoKanriNo = entity.get申請書管理番号();
             checkEntityList.add(checkEntity);
         }
     }
@@ -155,11 +166,11 @@ public class ChosahyoSaiCheckhyoReportProcess extends BatchProcessBase<HomonChos
         item.setTitle(TITLE);
         item.setHihokenshaNo(entity.get被保険者番号());
         item.setHihokenshaNo(entity.get被保険者氏名());
-        //前回一次判定結果
-        //今回一次判定結果
+        item.setZenkaiIchijihanteikekka(entity.get前回一次判定結果());
+        item.setKonkaiIchijihanteikekka(entity.get今回一次判定結果());
         item.setShinsakaiYMD(entity.get審査会日());
         item.setGogitaiNo(entity.get合議体番号());
-        //前回二次判定結果
+        item.setZenkaiNijihanteikekka(entity.get前回二次判定結果());
         setZenkaiChosakekka(item, entity.get前回連番Map());
         item.setZenkaiChosakekkaNo75(entity.get前回障害高齢者自立度());
         item.setZenkaiChosakekkaNo76(entity.get前回認知症高齢者自立度());
@@ -405,12 +416,26 @@ public class ChosahyoSaiCheckhyoReportProcess extends BatchProcessBase<HomonChos
 
     private RString set軽重FLG(RString 前回, RString 今回) {
         RString 軽重FLG = RString.EMPTY;
-        if (文字列1.equals(前回) && 文字列2.equals(今回)) {
+        if (!RString.isNullOrEmpty(前回) && 前回.compareTo(今回) < 0) {
             軽重FLG = UESANKAKU;
-        } else if (文字列2.equals(前回) && 文字列1.equals(今回)) {
+        } else if (!RString.isNullOrEmpty(今回) && 今回.compareTo(前回) < 0) {
             軽重FLG = SHITASANKAKU;
         }
         return 軽重FLG;
+    }
+
+    private RString get判定結果(RString 厚労省IF識別コード, RString 判定結果コード) {
+        RString 判定結果 = RString.EMPTY;
+        if (IFSHIKIBETSUCODE99A.equals(厚労省IF識別コード)) {
+            判定結果 = IchijiHanteiKekkaCode99.toValue(判定結果コード).get名称();
+        } else if (IFSHIKIBETSUCODE09A.equals(厚労省IF識別コード)) {
+            判定結果 = IchijiHanteiKekkaCode09.toValue(判定結果コード).get名称();
+        } else if (IFSHIKIBETSUCODE06A.equals(厚労省IF識別コード)) {
+            判定結果 = IchijiHanteiKekkaCode06.toValue(判定結果コード).get名称();
+        } else if (IFSHIKIBETSUCODE02A.equals(厚労省IF識別コード)) {
+            判定結果 = IchijiHanteiKekkaCode02.toValue(判定結果コード).get名称();
+        }
+        return 判定結果;
     }
 
     private void update認定調査依頼情報(HomonChosaIraishoRelateEntity entity) {
