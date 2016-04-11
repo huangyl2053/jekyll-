@@ -10,6 +10,8 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
  * 新番号と旧番号の一時テーブルに対するテーブルのエンティティ
+ *
+ * @reamsid_L DBC-0980-390 lijunjun
  */
 @lombok.Getter
 @lombok.Setter

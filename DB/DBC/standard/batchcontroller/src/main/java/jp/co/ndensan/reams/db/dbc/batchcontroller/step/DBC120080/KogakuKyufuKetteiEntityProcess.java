@@ -29,6 +29,8 @@ import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
 
 /**
  * 高額サービス費決定情報Entity作成
+ *
+ * @reamsid_L DBC-0980-390 lijunjun
  */
 public class KogakuKyufuKetteiEntityProcess extends SimpleBatchProcessBase {
 

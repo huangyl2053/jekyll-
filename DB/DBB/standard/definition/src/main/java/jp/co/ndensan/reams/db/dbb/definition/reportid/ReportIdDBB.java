@@ -15,6 +15,10 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 public enum ReportIdDBB {
 
     /**
+     * 本算定結果一覧表
+     */
+    DBB200009(new ReportId("DBB200009_HonsanteiKekkaIcihiran"), new RString("本算定結果一覧表")),
+    /**
      * 保険料納入通知書（本算定）【コンビニ角公タイプ】
      */
     DBB100059(new ReportId("DBB100059_NonyuTsuchishoCVSKakuko"), new RString("保険料納入通知書（本算定）【コンビニ角公タイプ】")),

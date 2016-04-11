@@ -30,6 +30,8 @@ import jp.co.ndensan.reams.uz.uza.util.editor.DecimalFormatter;
 
 /**
  * 償還払い状況照会_食事費用画面のハンドラクラスです。
+ *
+ * @reamsid_L DBC-1010-120 wangkanglei
  */
 public class ShokujiHiyoHandler {
 
@@ -38,9 +40,10 @@ public class ShokujiHiyoHandler {
     private static final RString 設定可_任意 = new RString("2");
     private static final FlexibleYearMonth 平成２４年４月 = new FlexibleYearMonth("201204");
     private static final int SIX = 6;
+    private static final int NUM_2 = 2;
 
     /**
-     * ShokujiHiyoHandler
+     * コンストラクタです。
      *
      * @param div ShokujiHiyoDiv
      */
@@ -49,7 +52,7 @@ public class ShokujiHiyoHandler {
     }
 
     /**
-     * ヘッダーエリアの設定
+     * ヘッダーエリアの設定のメソッドます。
      *
      * @param サービス年月 サービス年月
      * @param 事業者番号 事業者番号
@@ -60,18 +63,18 @@ public class ShokujiHiyoHandler {
     public void setヘッダーエリア(
             FlexibleYearMonth サービス年月,
             JigyoshaNo 事業者番号,
-            RString 申請日,
+            RDate 申請日,
             RString 明細番号,
             RString 証明書) {
         div.getPanelHead().getTxtServiceTeikyoYM().setValue(new RDate(サービス年月.toString()));
-        div.getPanelHead().getTxtShinseiYMD().setValue(new RDate(申請日.toString()));
+        div.getPanelHead().getTxtShinseiYMD().setValue(申請日);
         div.getPanelHead().getTxtJigyoshaBango().setValue(事業者番号.getColumnValue());
         div.getPanelHead().getTxtMeisaiBango().setValue(明細番号);
         div.getPanelHead().getTxtShomeisho().setValue(証明書);
     }
 
     /**
-     * ボタン表示制御処理
+     * ボタン表示制御処理のメソッドます。
      *
      * @param entity ShikibetsuNoKanri
      * @param サービス年月 サービス年月
@@ -117,7 +120,7 @@ public class ShokujiHiyoHandler {
     }
 
     /**
-     * 食事費用一覧グリッドの設定
+     * 食事費用一覧グリッドの設定のメソッドます。
      *
      * @param list List<ShokanMeisai>
      * @param shokanShokujiHiyoList List<ShokanShokujiHiyo>
@@ -141,7 +144,7 @@ public class ShokujiHiyoHandler {
     }
 
     /**
-     * 食事費用合計設定パネルの設定
+     * 食事費用合計設定パネルの設定のメソッドます。
      *
      * @param entity ShokanShokujiHiyo
      */
@@ -155,7 +158,7 @@ public class ShokujiHiyoHandler {
     }
 
     /**
-     * 食事費用パネル１の設定
+     * 食事費用パネル１の設定のメソッドます。
      *
      * @param entity ShokanShokujiHiyo
      */
@@ -181,13 +184,13 @@ public class ShokujiHiyoHandler {
     }
 
     /**
-     * 食事費用パネル２の設定
+     * 食事費用パネル２の設定のメソッドます。
      */
     public void set食事費用パネル２() {
         dgdShokuji_Row row = div.getPanelShokuji().getPanelShoikujiList().getDgdShokuji().getClickedItem();
-        RString serviceCodeShuruyi = row.getDefaultDataName2().substring(0, 2);
+        RString serviceCodeShuruyi = row.getDefaultDataName2().substring(0, NUM_2);
         div.getPanelShokuji().getPanelDetail2().getTxtServiceCodeShurui().setValue(serviceCodeShuruyi);
-        RString serviceCodeKoumoku = row.getDefaultDataName2().substring(2, SIX);
+        RString serviceCodeKoumoku = row.getDefaultDataName2().substring(NUM_2, SIX);
         div.getPanelShokuji().getPanelDetail2().getTxtServiceItemCode().setValue(serviceCodeKoumoku);
         List<KaigoServiceNaiyou> list = ShokanbaraiJyokyoShokai.createInstance().getServiceCodeInfo(
                 new KaigoServiceShuruiCode(serviceCodeShuruyi),

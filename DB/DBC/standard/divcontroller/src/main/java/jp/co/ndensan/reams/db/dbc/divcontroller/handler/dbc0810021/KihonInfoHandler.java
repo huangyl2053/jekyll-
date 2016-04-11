@@ -192,7 +192,7 @@ public class KihonInfoHandler {
         list.add(STR_21A1);
         list.add(STR_21A2);
         list.add(STR_21A3);
-        RString 様式番号 = ViewStateHolder.get(ViewStateKeys.様式番号, RString.class);
+        RString 様式番号 = ViewStateHolder.get(ViewStateKeys.償還払申請一覧_様式番号, RString.class);
         if (平成２１年４月.isBeforeOrEquals(サービス年月) && list.contains(様式番号)) {
             div.getPanelKihon().getPanelServiceKikan().getDdlCyushiRiyu().setVisible(false);
         } else {

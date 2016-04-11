@@ -10,6 +10,8 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
  * 支給申請一覧検索用パラメータ
+ *
+ * @reamsid_L DBC-1020-040 zhangrui
  */
 @lombok.Getter
 @SuppressWarnings("PMD.UnusedPrivateField")

@@ -10,6 +10,8 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
  * 高額サービス費決定情報Entity
+ *
+ * @reamsid_L DBC-0980-410 lijunjun
  */
 @lombok.Getter
 @lombok.Setter

@@ -20,11 +20,13 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
  * ファイルのデータを一時デーブルに設定する
+ *
+ * @reamsid_L DBC-0980-390 lijunjun
  */
 public class KogakuKyufuKetteiInBatchRegistTempSaveProcess extends BatchProcessBase<RString> {
 
     /**
-     * filePath
+     * ファイルパス
      */
     public static final RString PARAMETER_FILEPATH;
 
@@ -44,7 +46,6 @@ public class KogakuKyufuKetteiInBatchRegistTempSaveProcess extends BatchProcessB
     private KogakuKyufuKetteiInEntityCreater creater;
     private KogakuKyufuKetteiInHeaderCSVEntity csvHeader;
     private List<KogakuKyufuKetteiInMeisaiCSVEntity> csvMeisaiList;
-    private List<KogakuKyufuKetteiInTempTableEntity> list;
 
     @Override
     protected void initialize() {
@@ -52,7 +53,6 @@ public class KogakuKyufuKetteiInBatchRegistTempSaveProcess extends BatchProcessB
         mapper = getMapper(IKogakuServiceKetteiJohoTorikomiDataHenshuMapper.class);
         creater = new KogakuKyufuKetteiInEntityCreater();
         csvMeisaiList = new ArrayList<>();
-        list = new ArrayList<>();
     }
 
     @Override
@@ -78,18 +78,16 @@ public class KogakuKyufuKetteiInBatchRegistTempSaveProcess extends BatchProcessB
         } else if (レコード種別明細部.equals(レコード種別)) {
             csvMeisaiList.add(creater.createCsvMeisai(data));
         }
-        for (KogakuKyufuKetteiInMeisaiCSVEntity csvMeisai : csvMeisaiList) {
-            if (csvHeader.get証記載保険者番号().equals(csvMeisai.get被保険者番号())) {
-                KogakuKyufuKetteiInTempTableEntity entity = creater.createMeisaiEntity(csvHeader, csvMeisai);
-                list.add(entity);
-            }
-        }
+
     }
 
     @Override
     protected void afterExecute() {
         for (KogakuKyufuKetteiInMeisaiCSVEntity csvMeisai : csvMeisaiList) {
-            mapper.insert高額サービス費決定情報一時テーブル(creater.createMeisaiEntity(csvHeader, csvMeisai));
+            if (csvHeader.get証記載保険者番号().equals(csvMeisai.get被保険者番号())) {
+                KogakuKyufuKetteiInTempTableEntity entity = creater.createEntity(csvHeader, csvMeisai);
+                mapper.insert高額サービス費決定情報一時テーブル(entity);
+            }
         }
     }
 }

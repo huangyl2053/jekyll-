@@ -12,6 +12,7 @@ import lombok.Setter;
 /**
  * 本算定異動（現年度）の 処理区分設定
  *
+ * @reamsid_L DBB-0880-020 lijunjun
  */
 @Setter
 @Getter

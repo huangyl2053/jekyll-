@@ -16,6 +16,8 @@ import jp.co.ndensan.reams.uz.uza.math.Decimal;
 
 /**
  * 支給申請一覧取得RelateEntity結果
+ *
+ * @reamsid_L DBC-1020-040 zhangrui
  */
 public class FukushiyouguKonyuhiShikyuShinseiResult implements Serializable {
 

@@ -21,6 +21,8 @@ import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7026ShinKyuHihokenshaNoHenk
 
 /**
  * 高額サービス費決定情報取込みのMapper
+ *
+ * @reamsid_L DBC-0980-400 lijunjun
  */
 public interface IKogakuServiceKetteiJohoTorikomiDataHenshuMapper {
 

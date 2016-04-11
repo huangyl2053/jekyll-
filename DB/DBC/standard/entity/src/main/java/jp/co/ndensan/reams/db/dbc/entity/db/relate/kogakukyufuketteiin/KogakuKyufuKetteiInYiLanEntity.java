@@ -18,6 +18,8 @@ import jp.co.ndensan.reams.uz.uza.math.Decimal;
 
 /**
  * 高額サービス費決定情報一覧Entity
+ *
+ * @reamsid_L DBC-0980-410 lijunjun
  */
 @lombok.Getter
 @lombok.Setter

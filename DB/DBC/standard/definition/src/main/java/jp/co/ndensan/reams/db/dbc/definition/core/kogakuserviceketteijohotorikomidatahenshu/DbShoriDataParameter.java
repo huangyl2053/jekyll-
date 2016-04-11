@@ -13,6 +13,8 @@ import lombok.Setter;
 
 /**
  * 高額サービス費決定情報取込データ編集
+ *
+ * @reamsid_L DBC-0980-400 lijunjun
  */
 @Getter
 @Setter

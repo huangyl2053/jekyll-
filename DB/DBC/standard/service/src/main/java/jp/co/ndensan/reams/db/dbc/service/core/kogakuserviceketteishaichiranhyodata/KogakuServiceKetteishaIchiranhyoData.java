@@ -21,6 +21,8 @@ import jp.co.ndensan.reams.uz.uza.lang.Separator;
 
 /**
  * 高額サービス費支給（不支給）決定者一覧表
+ *
+ * @reamsid_L DBC-0980-410 lijunjun
  */
 public class KogakuServiceKetteishaIchiranhyoData {
 
@@ -90,14 +92,6 @@ public class KogakuServiceKetteishaIchiranhyoData {
             帳票データ.set改頁４(高額サービス費決定情報Entity.get改頁4());
             帳票データ.set改頁５(高額サービス費決定情報Entity.get改頁5());
             帳票データ.set印刷日時(印刷日時Builder.toRString());
-//            ReportManager manager = new ReportManager();
-//            manager.reportAssembler(new RString(
-//                    "DBC200015_KogakuShikyuFushikyuKetteishaIchiran"), SubGyomuCode.DBC介護給付);
-//            帳票データ.setページ数(manager.reportAssembler(new RString(
-//                    "DBC200015_KogakuShikyuFushikyuKetteishaIchiran"), SubGyomuCode.DBC介護給付)
-//                    .create().getPageCount());
-            // TODO 共通クラスReportAssemblerのgetPageCountメソッドから取得する。
-//            帳票データ.setページ数(1);
             帳票データ.set通知書番号(entity.get通知書番号());
             帳票データ.set被保険者番号(new RString(entity.get被保険者番号().toString()));
             帳票データ.set氏名カナ(new RString(entity.get氏名カナ().toString()));

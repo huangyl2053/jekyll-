@@ -22,6 +22,8 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
  * 福祉用具購入費支給申請明細登録画面Entity
+ *
+ * @reamsid_L DBC-1020-040 zhangrui
  */
 @lombok.Getter
 @lombok.Setter

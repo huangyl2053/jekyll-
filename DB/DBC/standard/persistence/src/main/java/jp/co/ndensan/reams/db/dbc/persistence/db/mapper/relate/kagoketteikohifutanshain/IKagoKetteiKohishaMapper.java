@@ -15,6 +15,8 @@ import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT1001HihokenshaDaichoEntity;
 
 /**
  * 介護給付費過誤決定通知書情報取込（公費負担者分）DB操作です。
+ *
+ * @reamsid_L DBC-0980-440 zhangrui
  */
 public interface IKagoKetteiKohishaMapper {
 

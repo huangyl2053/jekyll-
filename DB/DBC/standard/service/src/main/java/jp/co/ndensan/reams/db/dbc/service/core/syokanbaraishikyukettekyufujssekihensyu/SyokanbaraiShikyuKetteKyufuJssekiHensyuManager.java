@@ -194,7 +194,7 @@ public class SyokanbaraiShikyuKetteKyufuJssekiHensyuManager {
         }
 
         ShikibetsuTaishoPSMSearchKeyBuilder builder
-                = new ShikibetsuTaishoPSMSearchKeyBuilder(GyomuCode.DB介護保険, KensakuYusenKubun.未定義);
+                = new ShikibetsuTaishoPSMSearchKeyBuilder(GyomuCode.DB介護保険, KensakuYusenKubun.住登外優先);
         builder.set識別コード(識別コード);
         IShikibetsuTaishoPSMSearchKey key = builder.build();
         SyokanbaraiShikyuKetteKyufuJssekiHensyuParameter parameter
