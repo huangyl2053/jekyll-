@@ -4,7 +4,7 @@
  * and open the template in the editor.
  */
 
-package jp.co.ndensan.reams.db.dba.definition.tashichosonjushochitokureisyaidoteisei;
+package jp.co.ndensan.reams.db.dba.definition.core.tashichosonjushochitokureisyaidoteisei;
 
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 

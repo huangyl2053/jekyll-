@@ -3,11 +3,11 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dba.service.TaShichosonJushochiTokureisyaIdoTeisei;
+package jp.co.ndensan.reams.db.dba.service.core.tashichosonjushochitokureisyaidoteisei;
 
 import java.util.List;
-import jp.co.ndensan.reams.db.dba.definition.tashichosonjushochitokureisyaidoteisei.TaShichosonJushochiTokureisyaIdoTeiseiParamter;
-import jp.co.ndensan.reams.db.dba.definition.tashichosonjushochitokureisyaidoteisei.TekiyouJouhou;
+import jp.co.ndensan.reams.db.dba.definition.core.tashichosonjushochitokureisyaidoteisei.TaShichosonJushochiTokureisyaIdoTeiseiParamter;
+import jp.co.ndensan.reams.db.dba.definition.core.tashichosonjushochitokureisyaidoteisei.TekiyouJouhou;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT1004ShisetsuNyutaishoEntity;
 import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT1004ShisetsuNyutaishoDac;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
@@ -19,6 +19,7 @@ import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 /**
  *
  * 他市町村住所地特例者異動の訂正のクラスです。
+ *
  * @reamsid_L DBA-0401-010 dongyabin
  */
 public class TaShichosonJushochiTokureisyaIdoTeisei {
@@ -70,11 +71,11 @@ public class TaShichosonJushochiTokureisyaIdoTeisei {
             }
         }
     }
-    
+
     private boolean 適用日_判断(FlexibleDate taishoYMD, FlexibleDate 適用日) {
         return taishoYMD.isBeforeOrEquals(適用日);
     }
-    
+
     private boolean 解除日_判断(FlexibleDate taishoYMD, FlexibleDate 解除日) {
         return taishoYMD.isBefore(解除日);
     }
