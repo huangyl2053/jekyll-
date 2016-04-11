@@ -54,6 +54,8 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
  * 調定簿作成一時テーブルのデータ処理
+ *
+ * @reamsid_L DBB-0770-030 zhangrui
  */
 public class ChoteiboSakuseiDataShoriProcess extends SimpleBatchProcessBase {
 
@@ -774,9 +776,9 @@ public class ChoteiboSakuseiDataShoriProcess extends SimpleBatchProcessBase {
 
         List<KibetsuShokeiEntity> kibetsuShokeiList = choteiboSakuseiMapper.select普徴期別小計情報(param);
         List<KibetsuShokeiGokeiEntity> kibetsuShokeiGokeiList = choteiboSakuseiMapper.select期別小計の合計情報(param);
-        FuchoKiUtil 月期対応取得_普徴 = new FuchoKiUtil();
+        FuchoKiUtil 月期対応取得_普徴 = new FuchoKiUtil(当年度);
         KitsukiList 期月リスト_普徴 = 月期対応取得_普徴.get期月リスト();
-        KanendoKiUtil 月期対応取得_過年度 = new KanendoKiUtil();
+        KanendoKiUtil 月期対応取得_過年度 = new KanendoKiUtil(当年度);
         KitsukiList 期月リスト_過年度 = 月期対応取得_過年度.get期月リスト();
         GokeiBubunEntity gokeiBubunEntity = new GokeiBubunEntity();
         gokeiBubunEntity.setChoshuHouhou(ChoshuHohoKibetsu.普通徴収.code());
@@ -861,7 +863,17 @@ public class ChoteiboSakuseiDataShoriProcess extends SimpleBatchProcessBase {
 
         List<DangatsuDankaiDataEntity> dangatsuDankaiDataList = choteiboSakuseiMapper.select当月末の段階のデータ(param);
         for (DangatsuDankaiDataEntity entity : dangatsuDankaiDataList) {
-            choteiboSakuseiMapper.update当月末の段階のデータ(entity);
+            GokeiBubunEntity gokeiBubunEntity = new GokeiBubunEntity();
+            gokeiBubunEntity.setChoshuHouhou(entity.getChoshuHouhou());
+            gokeiBubunEntity.setDankai(entity.getDankai());
+            gokeiBubunEntity.setDogetsuFlag(entity.getDogetsuFlag());
+            gokeiBubunEntity.setDogetsusueChoteigakuCount(entity.getDogetsusueChoteigakuCount());
+            gokeiBubunEntity.setDogetsusueKensuCount(entity.getDogetsusueKensuCount());
+            gokeiBubunEntity.setFueChoteigakuCount(entity.getFueChoteigakuCount());
+            gokeiBubunEntity.setFueKensuCount(entity.getFueKensuCount());
+            gokeiBubunEntity.setGenChoteigakuCount(entity.getGenChoteigakuCount());
+            gokeiBubunEntity.setGenKensuCount(entity.getGenKensuCount());
+            choteiboSakuseiMapper.insertTmpGokeiBubun(gokeiBubunEntity);
         }
     }
 
@@ -887,7 +899,13 @@ public class ChoteiboSakuseiDataShoriProcess extends SimpleBatchProcessBase {
 
         List<ZengatsuDankaiDataEntity> zengatsuDankaiDataList = choteiboSakuseiMapper.select前月末の段階のデータ(param);
         for (ZengatsuDankaiDataEntity entity : zengatsuDankaiDataList) {
-            choteiboSakuseiMapper.update前月末の段階のデータ(entity);
+            GokeiBubunEntity gokeiBubunEntity = new GokeiBubunEntity();
+            gokeiBubunEntity.setChoshuHouhou(entity.getChoshuHouhou());
+            gokeiBubunEntity.setDankai(entity.getDankai());
+            gokeiBubunEntity.setDogetsuFlag(entity.getDogetsuFlag());
+            gokeiBubunEntity.setZengetsusueChoteigakuCount(entity.getZengetsusueChoteigakuCount());
+            gokeiBubunEntity.setZengetsusueKensuCount(entity.getZengetsusueKensuCount());
+            choteiboSakuseiMapper.insertTmpGokeiBubun(gokeiBubunEntity);
         }
     }
 
@@ -971,7 +989,21 @@ public class ChoteiboSakuseiDataShoriProcess extends SimpleBatchProcessBase {
 
         List<SonotaBubunDataEntity> sonotaBubunDataList = choteiboSakuseiMapper.selectその他部分のデータ(param);
         for (SonotaBubunDataEntity entity : sonotaBubunDataList) {
-            choteiboSakuseiMapper.updateその他部分のデータ(entity);
+            GokeiBubunSoukeiEntity gokeiBubunSoukeiEntity = new GokeiBubunSoukeiEntity();
+            gokeiBubunSoukeiEntity.setChoshuHouhou(entity.getChoshuHouhou());
+            gokeiBubunSoukeiEntity.setDogetsuFlag(entity.getDogetsuFlag());
+            gokeiBubunSoukeiEntity.setZengetsusueChoteigakuSoukei(entity.getZengetsusueChoteigakuSoukei());
+            gokeiBubunSoukeiEntity.setZengetsusueKensuSoukei(entity.getZengetsusueKensuSoukei());
+            gokeiBubunSoukeiEntity.setFueZennbuChoteigakuSoukei(entity.getFueZennbuChoteigakuSoukei());
+            gokeiBubunSoukeiEntity.setFueZennbuKennsuuSoukei(entity.getFueZennbuKennsuuSoukei());
+            gokeiBubunSoukeiEntity.setGenZennbuChoteigakuSoukei(entity.getGenZennbuChoteigakuSoukei());
+            gokeiBubunSoukeiEntity.setGenZennbuKennsuuSoukei(entity.getGenZennbuKennsuuSoukei());
+            gokeiBubunSoukeiEntity.setDogetsusueChoteigakuSoukei(entity.getDogetsusueChoteigakuSoukei());
+            gokeiBubunSoukeiEntity.setDogetsusueKensuSoukei(entity.getDogetsusueKensuSoukei());
+            gokeiBubunSoukeiEntity.setTokuchosyaKensuSoukei(entity.getTokuchosyaKensuSoukei());
+            gokeiBubunSoukeiEntity.setFuchosyaKensuSoukei(entity.getFuchosyaKensuSoukei());
+            gokeiBubunSoukeiEntity.setNaiheisyaKensuSoukei(entity.getNaiheisyaKensuSoukei());
+            choteiboSakuseiMapper.insertTmpGokeiBubunSoukei(gokeiBubunSoukeiEntity);
         }
     }
 }

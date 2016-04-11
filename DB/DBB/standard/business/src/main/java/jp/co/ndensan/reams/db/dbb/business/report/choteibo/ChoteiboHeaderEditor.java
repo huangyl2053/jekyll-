@@ -9,6 +9,8 @@ import jp.co.ndensan.reams.db.dbb.entity.report.choteibo.ChoteiboSource;
 
 /**
  * 調定簿帳票ヘッダ編集
+ *
+ * @reamsid_L DBB-0770-050 zhangrui
  */
 class ChoteiboHeaderEditor implements IChoteiboEditor {
 
@@ -32,16 +34,11 @@ class ChoteiboHeaderEditor implements IChoteiboEditor {
     @Override
     public ChoteiboSource edit(ChoteiboSource source) {
         editPrintTimeStamp(source);
-        editMidashi(source);
         editGengo(source);
         editNendo(source);
         editHokenshaNo(source);
         editHokenshaName(source);
         return source;
-    }
-
-    private void editMidashi(ChoteiboSource source) {
-        source.midashi = item.getMidashi();
     }
 
     private void editGengo(ChoteiboSource source) {

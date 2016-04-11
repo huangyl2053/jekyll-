@@ -10,6 +10,8 @@ import jp.co.ndensan.reams.uz.uza.report.IReportBuilder;
 
 /**
  * 調定簿帳票編集
+ *
+ * @reamsid_L DBB-0770-050 zhangrui
  */
 interface IChoteiboBuilder extends IReportBuilder<ChoteiboSource> {
 
