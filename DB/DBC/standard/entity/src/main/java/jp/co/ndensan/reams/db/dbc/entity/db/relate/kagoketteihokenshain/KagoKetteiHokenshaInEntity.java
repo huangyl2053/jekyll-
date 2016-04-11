@@ -17,6 +17,8 @@ import jp.co.ndensan.reams.uz.uza.math.Decimal;
 
 /**
  * 過誤決定通知書情報取込一覧表情報（保険者分）Entity
+ *
+ * @reamsid_L DBC-0980-320 xupeng
  */
 @lombok.Getter
 @lombok.Setter

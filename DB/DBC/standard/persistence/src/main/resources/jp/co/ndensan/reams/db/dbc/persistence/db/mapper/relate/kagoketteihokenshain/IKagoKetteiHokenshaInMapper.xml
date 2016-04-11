@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
+<!-- @reamsid_L DBC-0980-320 xupeng -->
 <mapper namespace="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.kagoketteihokenshain.IKagoKetteiHokenshaInMapper">
 
     <!--過誤決定通知書（保険者分）情報（明細）一時テーブルを作成します-->
@@ -243,26 +244,29 @@
             Shukei."shokisaiHokenshaNo",
             Shukei."sakuseiYMD" ) AS TEMP
     </insert>
-    
-    <select id="get市町村コード" resultType="jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT1001HihokenshaDaichoEntity">
-        SELECT 
-        Daicho."hihokenshaNo",
-        Daicho."shichosonCode" 
-        FROM 
-        rgdb."DbT1001HihokenshaDaicho" Daicho
-        WHERE 
-        Daicho."hihokenshaNo" IN (
-        SELECT 
-        DISTINCT temp."hiHokenshaNo" 
-        FROM 
-        "TEMP_TABLE_KagoKetteiTsuchishoJyohoHokenshabunMeisai" temp) 
-        AND Daicho."isDeleted" <![CDATA[<>]]> TRUE 
-        ORDER BY Daicho."hihokenshaNo" DESC,
-        Daicho."idoYMD" DESC,
-        Daicho."edaNo" DESC
+
+    <select id="select被保険者番号From一時テーブル" resultMap="resultMap_KagoKetteiTsuchishoJyohoHokenshabunMeisaiEntity" fetchSize="500">
+        SELECT DISTINCT temp."hiHokenshaNo"
+        FROM "TEMP_TABLE_KagoKetteiTsuchishoJyohoHokenshabunMeisai" AS temp
+    </select>
+        
+    <select id="get市町村コード"
+            resultMap="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT1001HihokenshaDaichoMapper.ResultMap_DbT1001HihokenshaDaichoEntity"
+            parameterType="jp.co.ndensan.reams.db.dbc.definition.mybatisprm.kagoketteihokenshain.KagoKetteiHokenshaInParameter">
+     SELECT
+         <include refid="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT1001HihokenshaDaichoMapper.allColumns_DbT1001HihokenshaDaicho" />
+     FROM
+         rgdb."DbT1001HihokenshaDaicho"
+     WHERE
+         rgdb."DbT1001HihokenshaDaicho"."hihokenshaNo" = #{被保険者番号}
+     AND rgdb."DbT1001HihokenshaDaicho"."isDeleted" <![CDATA[<>]]> TRUE
+     ORDER BY rgdb."DbT1001HihokenshaDaicho"."hihokenshaNo" DESC,
+              rgdb."DbT1001HihokenshaDaicho"."idoYMD" DESC,
+              rgdb."DbT1001HihokenshaDaicho"."edaNo" DESC
+     LIMIT(1)
     </select>
     
-    <select id="get新被保険者番号" parameterType="jp.co.ndensan.reams.uz.uza.biz.LasdecCode" 
+    <select id="get新被保険者番号" parameterType="jp.co.ndensan.reams.db.dbc.definition.mybatisprm.kagoketteihokenshain.KagoKetteiHokenshaInParameter" 
         resultType="jp.co.ndensan.reams.db.dbc.entity.db.relate.kagoketteihokenshain.ShihihokenshabangoTempTableEntity">
         SELECT 
         Henkan."shichosonCode",
@@ -270,12 +274,8 @@
         Henkan."kyuNo" 
         FROM 
         rgdb."DbT7026ShinKyuHihokenshaNoHenkan" Henkan 
-        WHERE Henkan."shichosonCode"=#{shichosonCode} 
-        AND Henkan."kyuNo" IN (
-        SELECT 
-        DISTINCT temp."hiHokenshaNo" 
-        FROM 
-        "TEMP_TABLE_KagoKetteiTsuchishoJyohoHokenshabunMeisai" temp)
+        WHERE Henkan."shichosonCode" = #{市町村コード} 
+        AND Henkan."kyuNo" = #{被保険者番号}
     </select>
     
     <update id="update保険者分情報_明細">
