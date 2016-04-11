@@ -16,6 +16,8 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 
 /**
  * 徴収方法変更_世帯所得情報一覧エリアのクラスです。
+ *
+ * @reamsid_L DBB-1760-010 sunhui
  */
 public class ChoshuInfo {
 

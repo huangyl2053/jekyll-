@@ -22,6 +22,7 @@ import jp.co.ndensan.reams.db.dbz.service.core.MapperProvider;
 import jp.co.ndensan.reams.db.dbz.service.core.basic.HihokenshaDaichoManager;
 import jp.co.ndensan.reams.db.dbz.service.core.basic.KaigoSetaiManager;
 import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.IShikibetsuTaisho;
+import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.ShikibetsuTaishoFactory;
 import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.kojin.IKojin;
 import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.kojin.IKojins;
 import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.search.ShikibetsuTaishoPSMSearchKeyBuilder;
@@ -44,6 +45,8 @@ import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
 
 /**
  * 世帯員を管理するクラスです。
+ *
+ * @reamsid_L DBB-1750-030 sunhui
  */
 public class SetaiinFinder {
 
@@ -296,6 +299,9 @@ public class SetaiinFinder {
         SetaiinParameter parameter = new SetaiinParameter(searchKey);
         ISetaiinMapper mapper = mapperProvider.create(ISetaiinMapper.class);
         List<UaFt200FindShikibetsuTaishoEntity> resultList = mapper.get宛名識別対象PSM(parameter);
+        if (resultList.isEmpty()) {
+            return new ArrayList<>();
+        }
 
         Collections.sort(resultList, new Comparator<UaFt200FindShikibetsuTaishoEntity>() {
             @Override
@@ -307,9 +313,9 @@ public class SetaiinFinder {
         });
 
         for (UaFt200FindShikibetsuTaishoEntity 宛名識別対象Entity : resultList) {
-            IShikibetsuTaishoFinder 識別対象Finder = ShikibetsuTaishoService.getShikibetsuTaishoFinder();
-            IShikibetsuTaisho 宛名識別対象 = 識別対象Finder.get識別対象(GyomuCode.DB介護保険,
-                    宛名識別対象Entity.getShikibetsuCode(), KensakuYusenKubun.住登外優先);
+
+            IShikibetsuTaisho 宛名識別対象 = ShikibetsuTaishoFactory.createShikibetsuTaisho(宛名識別対象Entity);
+
             if (識別コード.equals(宛名識別対象Entity.getShikibetsuCode())) {
                 IShikibetsuTaisho 識別対象 = 宛名識別対象;
                 RString 本人区分 = RSTR_ONE;

@@ -9,6 +9,8 @@ import jp.co.ndensan.reams.db.dbc.entity.report.source.shokanbaraishikyuketteish
 
 /**
  * 償還払支給決定者一覧表帳票HeaderEditor
+ *
+ * @reamsid_L DBC-0980-480 sunhui
  */
 public class HeaderEditor implements IShokanbaraiShikyuKetteishaIchiranEditor {
 

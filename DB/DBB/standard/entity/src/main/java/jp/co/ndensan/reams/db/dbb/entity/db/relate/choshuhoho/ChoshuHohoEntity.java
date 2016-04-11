@@ -10,6 +10,8 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
  * 介護徴収方法RelateEntityクラスです。
+ *
+ * @reamsid_L DBB-1760-030 sunhui
  */
 @lombok.Getter
 @lombok.Setter

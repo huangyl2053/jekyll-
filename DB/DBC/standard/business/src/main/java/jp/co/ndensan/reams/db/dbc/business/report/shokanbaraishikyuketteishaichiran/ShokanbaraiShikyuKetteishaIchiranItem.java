@@ -11,6 +11,8 @@ import lombok.Setter;
 
 /**
  * 償還払支給決定者一覧表帳票Item
+ *
+ * @reamsid_L DBC-0980-480 sunhui
  */
 @Getter
 @Setter

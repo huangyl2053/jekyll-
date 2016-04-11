@@ -10,6 +10,8 @@ import jp.co.ndensan.reams.uz.uza.report.IReportBuilder;
 
 /**
  * 償還払支給決定者一覧表Builderのインターフェースクラスです。
+ *
+ * @reamsid_L DBC-0980-480 sunhui
  */
 public interface IShokanbaraiShikyuKetteishaIchiranBuilder
         extends IReportBuilder<ShokanbaraiShikyuKetteishaIchiranSource> {

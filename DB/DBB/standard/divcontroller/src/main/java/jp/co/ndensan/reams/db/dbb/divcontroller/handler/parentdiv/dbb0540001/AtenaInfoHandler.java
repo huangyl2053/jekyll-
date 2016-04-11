@@ -13,6 +13,8 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.CommonButtonHolder;
 
 /**
  * 徴収方法変更_ヘッダエリアのハンドラクラスです。
+ *
+ * @reamsid_L DBB-1760-010 sunhui
  */
 @SuppressWarnings("PMD.UnusedPrivateField")
 public class AtenaInfoHandler {

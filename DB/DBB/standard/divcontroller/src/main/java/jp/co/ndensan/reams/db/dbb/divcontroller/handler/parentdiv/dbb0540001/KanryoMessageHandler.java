@@ -9,6 +9,8 @@ import jp.co.ndensan.reams.db.dbb.divcontroller.entity.parentdiv.DBB0540001.Kanr
 
 /**
  * 徴収方法変更_介護完了メッセージエリアのハンドラクラスです。
+ *
+ * @reamsid_L DBB-1760-010 sunhui
  */
 public class KanryoMessageHandler {
 

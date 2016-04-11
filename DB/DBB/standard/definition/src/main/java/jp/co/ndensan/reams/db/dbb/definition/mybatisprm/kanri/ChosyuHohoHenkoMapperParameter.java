@@ -9,7 +9,9 @@ import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaN
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 
 /**
- * 徴収方法変更のMyBatis用パラメータクラスです
+ * 徴収方法変更のMyBatis用パラメータクラスです。
+ *
+ * @reamsid_L DBB-1760-030 sunhui
  */
 @lombok.Getter
 @SuppressWarnings("PMD.UnusedPrivateField")

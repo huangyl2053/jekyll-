@@ -29,6 +29,8 @@ import jp.co.ndensan.reams.uz.uza.util.code.CodeMasterNoOption;
 
 /**
  * 徴収方法変更_世帯所得情報一覧エリアのハンドラクラスです。
+ *
+ * @reamsid_L DBB-1760-010 sunhui
  */
 public class ChoshuInfoHandler {
 
@@ -61,8 +63,27 @@ public class ChoshuInfoHandler {
     private static final RString 名_10 = new RString("txt10Gatsu");
     private static final RString 名_11 = new RString("txt11Gatsu");
     private static final RString 名_12 = new RString("txt12Gatsu");
+    private static final RString 月_1 = new RString("01月");
+    private static final RString 月_2 = new RString("02月");
+    private static final RString 月_3 = new RString("03月");
+    private static final RString 月_4 = new RString("04月");
+    private static final RString 月_5 = new RString("05月");
+    private static final RString 月_6 = new RString("06月");
+    private static final RString 月_7 = new RString("07月");
+    private static final RString 月_8 = new RString("08月");
+    private static final RString 月_9 = new RString("09月");
+    private static final RString 月_10 = new RString("10月");
+    private static final RString 月_11 = new RString("11月");
+    private static final RString 月_12 = new RString("12月");
     private static final RString 前の名_3 = new RString("txtZen3Gatsu");
     private static final RString 翌の名_4 = new RString("txtYoku4Gatsu");
+    private static final RString 選択 = new RString("kuhaku");
+    private static final RString 現在の行 = new RString("現在");
+    private static final RString 変更後の行 = new RString("変更後");
+    private static final RString コード_0 = new RString("0");
+    private static final RString コード_1 = new RString("1");
+    private static final RString コード_2 = new RString("2");
+    private static final RString コード_3 = new RString("3");
 
     /**
      * ChoshuInfoHandler
@@ -98,12 +119,12 @@ public class ChoshuInfoHandler {
             div.getTxtHokensha().setValue(null);
         }
 
-        div.getDdlFucho().setSelectedKey(new RString("kuhaku"));
+        div.getDdlFucho().setSelectedKey(選択);
 
         List<choshuHouhou_Row> rows = new ArrayList<>();
         choshuHouhou_Row row現在 = new choshuHouhou_Row();
         choshuHouhou_Row row変更後 = new choshuHouhou_Row();
-        row現在.getTxtHenkouMaeAto().setValue(new RString("現在"));
+        row現在.getTxtHenkouMaeAto().setValue(現在の行);
         row現在.getTxtZen3Gatsu().setValue(ChoshuHoho.toValue(serviceResult.getChoshuHoho3gat()).get名称());
         row現在.getTxt4Gatsu().setValue(ChoshuHoho.toValue(serviceResult.getHoho().get徴収方法4月()).get名称());
         row現在.getTxt5Gatsu().setValue(ChoshuHoho.toValue(serviceResult.getHoho().get徴収方法5月()).get名称());
@@ -133,7 +154,7 @@ public class ChoshuInfoHandler {
         row現在.setCellBgColor(名_3.toString(), setBgColor(serviceResult.getHoho().get徴収方法3月()));
         row現在.setCellBgColor(翌の名_4.toString(), setBgColor(serviceResult.getHoho().get徴収方法翌4月()));
         rows.add(row現在);
-        row変更後.getTxtHenkouMaeAto().setValue(new RString("変更後"));
+        row変更後.getTxtHenkouMaeAto().setValue(変更後の行);
         row変更後.getTxtZen3Gatsu().setValue(ChoshuHoho.toValue(serviceResult.getChoshuHoho3gat()).get名称());
         row変更後.getTxt4Gatsu().setValue(ChoshuHoho.toValue(serviceResult.getHoho().get徴収方法4月()).get名称());
         row変更後.getTxt5Gatsu().setValue(ChoshuHoho.toValue(serviceResult.getHoho().get徴収方法5月()).get名称());
@@ -172,7 +193,7 @@ public class ChoshuInfoHandler {
      */
     public void change普通徴収に切り替える月DDL() {
 
-        RString kuhaku = new RString("kuhaku");
+        RString kuhaku = 選択;
         if (kuhaku.equals(div.getDdlFucho().getSelectedKey())) {
             edit空白を選択した場合();
             CommonButtonHolder.setDisabledByCommonButtonFieldName(保存する, true);
@@ -201,13 +222,13 @@ public class ChoshuInfoHandler {
     private DataGridCellBgColor setBgColor(RString コード) {
 
         DataGridCellBgColor bgColor = DataGridCellBgColor.bgColorLightGreen;
-        if (コード.equals(new RString("0"))) {
+        if (コード.equals(コード_0)) {
             bgColor = DataGridCellBgColor.bgColorLightYellow;
-        } else if (コード.equals(new RString("3"))) {
+        } else if (コード.equals(コード_3)) {
             bgColor = DataGridCellBgColor.bgColorLightRed;
-        } else if (コード.equals(new RString("2"))) {
+        } else if (コード.equals(コード_2)) {
             bgColor = DataGridCellBgColor.bgColorLightGreen;
-        } else if (コード.equals(new RString("1"))) {
+        } else if (コード.equals(コード_1)) {
             bgColor = DataGridCellBgColor.bgColorLightGreen;
         }
         return bgColor;
@@ -285,19 +306,19 @@ public class ChoshuInfoHandler {
 
     private void set背景色も普通徴収の色に変更04To09(RString gatsu) {
 
-        if (new RString("04月").equals(gatsu)) {
+        if (月_4.equals(gatsu)) {
             div.getChoshuHouhou().getDataSource().get(1).getTxt4Gatsu().setValue(
-                    ChoshuHoho.toValue(new RString("3")).get名称());
+                    ChoshuHoho.toValue(コード_3).get名称());
             div.getChoshuHouhou().getDataSource().get(1).getTxt5Gatsu().setValue(
-                    ChoshuHoho.toValue(new RString("3")).get名称());
+                    ChoshuHoho.toValue(コード_3).get名称());
             div.getChoshuHouhou().getDataSource().get(1).getTxt6Gatsu().setValue(
-                    ChoshuHoho.toValue(new RString("3")).get名称());
+                    ChoshuHoho.toValue(コード_3).get名称());
             div.getChoshuHouhou().getDataSource().get(1).getTxt7Gatsu().setValue(
-                    ChoshuHoho.toValue(new RString("3")).get名称());
+                    ChoshuHoho.toValue(コード_3).get名称());
             div.getChoshuHouhou().getDataSource().get(1).getTxt8Gatsu().setValue(
-                    ChoshuHoho.toValue(new RString("3")).get名称());
+                    ChoshuHoho.toValue(コード_3).get名称());
             div.getChoshuHouhou().getDataSource().get(1).getTxt9Gatsu().setValue(
-                    ChoshuHoho.toValue(new RString("3")).get名称());
+                    ChoshuHoho.toValue(コード_3).get名称());
             div.getChoshuHouhou().getDataSource().get(1).setCellBgColor(
                     名_4.toString(), DataGridCellBgColor.bgColorLightRed);
             div.getChoshuHouhou().getDataSource().get(1).setCellBgColor(
@@ -310,17 +331,17 @@ public class ChoshuInfoHandler {
                     名_8.toString(), DataGridCellBgColor.bgColorLightRed);
             div.getChoshuHouhou().getDataSource().get(1).setCellBgColor(
                     名_9.toString(), DataGridCellBgColor.bgColorLightRed);
-        } else if (new RString("05月").equals(gatsu)) {
+        } else if (月_5.equals(gatsu)) {
             div.getChoshuHouhou().getDataSource().get(1).getTxt5Gatsu().setValue(
-                    ChoshuHoho.toValue(new RString("3")).get名称());
+                    ChoshuHoho.toValue(コード_3).get名称());
             div.getChoshuHouhou().getDataSource().get(1).getTxt6Gatsu().setValue(
-                    ChoshuHoho.toValue(new RString("3")).get名称());
+                    ChoshuHoho.toValue(コード_3).get名称());
             div.getChoshuHouhou().getDataSource().get(1).getTxt7Gatsu().setValue(
-                    ChoshuHoho.toValue(new RString("3")).get名称());
+                    ChoshuHoho.toValue(コード_3).get名称());
             div.getChoshuHouhou().getDataSource().get(1).getTxt8Gatsu().setValue(
-                    ChoshuHoho.toValue(new RString("3")).get名称());
+                    ChoshuHoho.toValue(コード_3).get名称());
             div.getChoshuHouhou().getDataSource().get(1).getTxt9Gatsu().setValue(
-                    ChoshuHoho.toValue(new RString("3")).get名称());
+                    ChoshuHoho.toValue(コード_3).get名称());
             div.getChoshuHouhou().getDataSource().get(1).setCellBgColor(
                     名_5.toString(), DataGridCellBgColor.bgColorLightRed);
             div.getChoshuHouhou().getDataSource().get(1).setCellBgColor(
@@ -331,15 +352,15 @@ public class ChoshuInfoHandler {
                     名_8.toString(), DataGridCellBgColor.bgColorLightRed);
             div.getChoshuHouhou().getDataSource().get(1).setCellBgColor(
                     名_9.toString(), DataGridCellBgColor.bgColorLightRed);
-        } else if (new RString("06月").equals(gatsu)) {
+        } else if (月_6.equals(gatsu)) {
             div.getChoshuHouhou().getDataSource().get(1).getTxt6Gatsu().setValue(
-                    ChoshuHoho.toValue(new RString("3")).get名称());
+                    ChoshuHoho.toValue(コード_3).get名称());
             div.getChoshuHouhou().getDataSource().get(1).getTxt7Gatsu().setValue(
-                    ChoshuHoho.toValue(new RString("3")).get名称());
+                    ChoshuHoho.toValue(コード_3).get名称());
             div.getChoshuHouhou().getDataSource().get(1).getTxt8Gatsu().setValue(
-                    ChoshuHoho.toValue(new RString("3")).get名称());
+                    ChoshuHoho.toValue(コード_3).get名称());
             div.getChoshuHouhou().getDataSource().get(1).getTxt9Gatsu().setValue(
-                    ChoshuHoho.toValue(new RString("3")).get名称());
+                    ChoshuHoho.toValue(コード_3).get名称());
             div.getChoshuHouhou().getDataSource().get(1).setCellBgColor(
                     名_6.toString(), DataGridCellBgColor.bgColorLightRed);
             div.getChoshuHouhou().getDataSource().get(1).setCellBgColor(
@@ -348,31 +369,31 @@ public class ChoshuInfoHandler {
                     名_8.toString(), DataGridCellBgColor.bgColorLightRed);
             div.getChoshuHouhou().getDataSource().get(1).setCellBgColor(
                     名_9.toString(), DataGridCellBgColor.bgColorLightRed);
-        } else if (new RString("07月").equals(gatsu)) {
+        } else if (月_7.equals(gatsu)) {
             div.getChoshuHouhou().getDataSource().get(1).getTxt7Gatsu().setValue(
-                    ChoshuHoho.toValue(new RString("3")).get名称());
+                    ChoshuHoho.toValue(コード_3).get名称());
             div.getChoshuHouhou().getDataSource().get(1).getTxt8Gatsu().setValue(
-                    ChoshuHoho.toValue(new RString("3")).get名称());
+                    ChoshuHoho.toValue(コード_3).get名称());
             div.getChoshuHouhou().getDataSource().get(1).getTxt9Gatsu().setValue(
-                    ChoshuHoho.toValue(new RString("3")).get名称());
+                    ChoshuHoho.toValue(コード_3).get名称());
             div.getChoshuHouhou().getDataSource().get(1).setCellBgColor(
                     名_7.toString(), DataGridCellBgColor.bgColorLightRed);
             div.getChoshuHouhou().getDataSource().get(1).setCellBgColor(
                     名_8.toString(), DataGridCellBgColor.bgColorLightRed);
             div.getChoshuHouhou().getDataSource().get(1).setCellBgColor(
                     名_9.toString(), DataGridCellBgColor.bgColorLightRed);
-        } else if (new RString("08月").equals(gatsu)) {
+        } else if (月_8.equals(gatsu)) {
             div.getChoshuHouhou().getDataSource().get(1).getTxt8Gatsu().setValue(
-                    ChoshuHoho.toValue(new RString("3")).get名称());
+                    ChoshuHoho.toValue(コード_3).get名称());
             div.getChoshuHouhou().getDataSource().get(1).getTxt9Gatsu().setValue(
-                    ChoshuHoho.toValue(new RString("3")).get名称());
+                    ChoshuHoho.toValue(コード_3).get名称());
             div.getChoshuHouhou().getDataSource().get(1).setCellBgColor(
                     名_8.toString(), DataGridCellBgColor.bgColorLightRed);
             div.getChoshuHouhou().getDataSource().get(1).setCellBgColor(
                     名_9.toString(), DataGridCellBgColor.bgColorLightRed);
-        } else if (new RString("09月").equals(gatsu)) {
+        } else if (月_9.equals(gatsu)) {
             div.getChoshuHouhou().getDataSource().get(1).getTxt9Gatsu().setValue(
-                    ChoshuHoho.toValue(new RString("3")).get名称());
+                    ChoshuHoho.toValue(コード_3).get名称());
             div.getChoshuHouhou().getDataSource().get(1).setCellBgColor(
                     名_9.toString(), DataGridCellBgColor.bgColorLightRed);
         } else {
@@ -381,19 +402,19 @@ public class ChoshuInfoHandler {
     }
 
     private void set背景色も普通徴収の色に変更10To03(RString gatsu) {
-        if (new RString("10月").equals(gatsu)) {
+        if (月_10.equals(gatsu)) {
             div.getChoshuHouhou().getDataSource().get(1).getTxt10Gatsu().setValue(
-                    ChoshuHoho.toValue(new RString("3")).get名称());
+                    ChoshuHoho.toValue(コード_3).get名称());
             div.getChoshuHouhou().getDataSource().get(1).getTxt11Gatsu().setValue(
-                    ChoshuHoho.toValue(new RString("3")).get名称());
+                    ChoshuHoho.toValue(コード_3).get名称());
             div.getChoshuHouhou().getDataSource().get(1).getTxt12Gatsu().setValue(
-                    ChoshuHoho.toValue(new RString("3")).get名称());
+                    ChoshuHoho.toValue(コード_3).get名称());
             div.getChoshuHouhou().getDataSource().get(1).getTxt1Gatsu().setValue(
-                    ChoshuHoho.toValue(new RString("3")).get名称());
+                    ChoshuHoho.toValue(コード_3).get名称());
             div.getChoshuHouhou().getDataSource().get(1).getTxt2Gatsu().setValue(
-                    ChoshuHoho.toValue(new RString("3")).get名称());
+                    ChoshuHoho.toValue(コード_3).get名称());
             div.getChoshuHouhou().getDataSource().get(1).getTxt3Gatsu().setValue(
-                    ChoshuHoho.toValue(new RString("3")).get名称());
+                    ChoshuHoho.toValue(コード_3).get名称());
             div.getChoshuHouhou().getDataSource().get(1).setCellBgColor(
                     名_10.toString(), DataGridCellBgColor.bgColorLightRed);
             div.getChoshuHouhou().getDataSource().get(1).setCellBgColor(
@@ -406,17 +427,17 @@ public class ChoshuInfoHandler {
                     名_2.toString(), DataGridCellBgColor.bgColorLightRed);
             div.getChoshuHouhou().getDataSource().get(1).setCellBgColor(
                     名_3.toString(), DataGridCellBgColor.bgColorLightRed);
-        } else if (new RString("11月").equals(gatsu)) {
+        } else if (月_11.equals(gatsu)) {
             div.getChoshuHouhou().getDataSource().get(1).getTxt11Gatsu().setValue(
-                    ChoshuHoho.toValue(new RString("3")).get名称());
+                    ChoshuHoho.toValue(コード_3).get名称());
             div.getChoshuHouhou().getDataSource().get(1).getTxt12Gatsu().setValue(
-                    ChoshuHoho.toValue(new RString("3")).get名称());
+                    ChoshuHoho.toValue(コード_3).get名称());
             div.getChoshuHouhou().getDataSource().get(1).getTxt1Gatsu().setValue(
-                    ChoshuHoho.toValue(new RString("3")).get名称());
+                    ChoshuHoho.toValue(コード_3).get名称());
             div.getChoshuHouhou().getDataSource().get(1).getTxt2Gatsu().setValue(
-                    ChoshuHoho.toValue(new RString("3")).get名称());
+                    ChoshuHoho.toValue(コード_3).get名称());
             div.getChoshuHouhou().getDataSource().get(1).getTxt3Gatsu().setValue(
-                    ChoshuHoho.toValue(new RString("3")).get名称()
+                    ChoshuHoho.toValue(コード_3).get名称()
             );
             div.getChoshuHouhou().getDataSource().get(1).setCellBgColor(
                     名_11.toString(), DataGridCellBgColor.bgColorLightRed);
@@ -428,15 +449,15 @@ public class ChoshuInfoHandler {
                     名_2.toString(), DataGridCellBgColor.bgColorLightRed);
             div.getChoshuHouhou().getDataSource().get(1).setCellBgColor(
                     名_3.toString(), DataGridCellBgColor.bgColorLightRed);
-        } else if (new RString("12月").equals(gatsu)) {
+        } else if (月_12.equals(gatsu)) {
             div.getChoshuHouhou().getDataSource().get(1).getTxt12Gatsu().setValue(
-                    ChoshuHoho.toValue(new RString("3")).get名称());
+                    ChoshuHoho.toValue(コード_3).get名称());
             div.getChoshuHouhou().getDataSource().get(1).getTxt1Gatsu().setValue(
-                    ChoshuHoho.toValue(new RString("3")).get名称());
+                    ChoshuHoho.toValue(コード_3).get名称());
             div.getChoshuHouhou().getDataSource().get(1).getTxt2Gatsu().setValue(
-                    ChoshuHoho.toValue(new RString("3")).get名称());
+                    ChoshuHoho.toValue(コード_3).get名称());
             div.getChoshuHouhou().getDataSource().get(1).getTxt3Gatsu().setValue(
-                    ChoshuHoho.toValue(new RString("3")).get名称());
+                    ChoshuHoho.toValue(コード_3).get名称());
             div.getChoshuHouhou().getDataSource().get(1).setCellBgColor(
                     名_12.toString(), DataGridCellBgColor.bgColorLightRed);
             div.getChoshuHouhou().getDataSource().get(1).setCellBgColor(
@@ -445,31 +466,31 @@ public class ChoshuInfoHandler {
                     名_2.toString(), DataGridCellBgColor.bgColorLightRed);
             div.getChoshuHouhou().getDataSource().get(1).setCellBgColor(
                     名_3.toString(), DataGridCellBgColor.bgColorLightRed);
-        } else if (new RString("01月").equals(gatsu)) {
+        } else if (月_1.equals(gatsu)) {
             div.getChoshuHouhou().getDataSource().get(1).getTxt1Gatsu().setValue(
-                    ChoshuHoho.toValue(new RString("3")).get名称());
+                    ChoshuHoho.toValue(コード_3).get名称());
             div.getChoshuHouhou().getDataSource().get(1).getTxt2Gatsu().setValue(
-                    ChoshuHoho.toValue(new RString("3")).get名称());
+                    ChoshuHoho.toValue(コード_3).get名称());
             div.getChoshuHouhou().getDataSource().get(1).getTxt3Gatsu().setValue(
-                    ChoshuHoho.toValue(new RString("3")).get名称());
+                    ChoshuHoho.toValue(コード_3).get名称());
             div.getChoshuHouhou().getDataSource().get(1).setCellBgColor(
                     名_1.toString(), DataGridCellBgColor.bgColorLightRed);
             div.getChoshuHouhou().getDataSource().get(1).setCellBgColor(
                     名_2.toString(), DataGridCellBgColor.bgColorLightRed);
             div.getChoshuHouhou().getDataSource().get(1).setCellBgColor(
                     名_3.toString(), DataGridCellBgColor.bgColorLightRed);
-        } else if (new RString("02月").equals(gatsu)) {
+        } else if (月_2.equals(gatsu)) {
             div.getChoshuHouhou().getDataSource().get(1).getTxt2Gatsu().setValue(
-                    ChoshuHoho.toValue(new RString("3")).get名称());
+                    ChoshuHoho.toValue(コード_3).get名称());
             div.getChoshuHouhou().getDataSource().get(1).getTxt3Gatsu().setValue(
-                    ChoshuHoho.toValue(new RString("3")).get名称());
+                    ChoshuHoho.toValue(コード_3).get名称());
             div.getChoshuHouhou().getDataSource().get(1).setCellBgColor(
                     名_2.toString(), DataGridCellBgColor.bgColorLightRed);
             div.getChoshuHouhou().getDataSource().get(1).setCellBgColor(
                     名_3.toString(), DataGridCellBgColor.bgColorLightRed);
-        } else if (new RString("03月").equals(gatsu)) {
+        } else if (月_3.equals(gatsu)) {
             div.getChoshuHouhou().getDataSource().get(1).getTxt3Gatsu().setValue(
-                    ChoshuHoho.toValue(new RString("3")).get名称());
+                    ChoshuHoho.toValue(コード_3).get名称());
             div.getChoshuHouhou().getDataSource().get(1).setCellBgColor(
                     名_3.toString(), DataGridCellBgColor.bgColorLightRed);
         }
@@ -479,7 +500,7 @@ public class ChoshuInfoHandler {
 
         choshuHouhou_Row row現在 = div.getChoshuHouhou().getDataSource().get(0);
         choshuHouhou_Row row変更後 = div.getChoshuHouhou().getDataSource().get(1);
-        RString getなし名称 = ChoshuHoho.toValue(new RString("0")).get名称();
+        RString getなし名称 = ChoshuHoho.toValue(コード_0).get名称();
         if (getなし名称.equals(row現在.getTxtZen3Gatsu().getValue())) {
             row変更後.getTxtZen3Gatsu().setValue(getなし名称);
             row変更後.setCellBgColor(前の名_3.toString(), row現在.getCellBgColor(前の名_3.toString()));
@@ -548,7 +569,7 @@ public class ChoshuInfoHandler {
         choshuHouhou_Row row現在 = div.getChoshuHouhou().getDataSource().get(0);
         choshuHouhou_Row row変更後 = div.getChoshuHouhou().getDataSource().get(1);
         boolean flag = false;
-        RString getなし名称 = ChoshuHoho.toValue(new RString("0")).get名称();
+        RString getなし名称 = ChoshuHoho.toValue(コード_0).get名称();
         if (getなし名称.equals(row現在.getTxtZen3Gatsu().getValue())
                 && !getなし名称.equals(row変更後.getTxtZen3Gatsu().getValue())) {
             return true;
@@ -669,13 +690,13 @@ public class ChoshuInfoHandler {
 
         RString 徴収方法のコード = null;
         if (ChoshuHoho.資格なし.get名称().equals(徴収方法の名称)) {
-            徴収方法のコード = new RString("0");
+            徴収方法のコード = コード_0;
         } else if (ChoshuHoho.特別徴収_厚生労働省.get名称().equals(徴収方法の名称)) {
-            徴収方法のコード = new RString("1");
+            徴収方法のコード = コード_1;
         } else if (ChoshuHoho.特別徴収_地共済.get名称().equals(徴収方法の名称)) {
-            徴収方法のコード = new RString("2");
+            徴収方法のコード = コード_2;
         } else if (ChoshuHoho.普通徴収.get名称().equals(徴収方法の名称)) {
-            徴収方法のコード = new RString("3");
+            徴収方法のコード = コード_3;
         }
         return 徴収方法のコード;
     }
@@ -809,10 +830,10 @@ public class ChoshuInfoHandler {
     private boolean judge(RString 現在, RString 変更後) {
 
         boolean flag = false;
-        if (!((ChoshuHoho.toValue(new RString("1")).get名称().equals(現在)
-                || ChoshuHoho.toValue(new RString("2")).get名称().equals(現在))
-                && (ChoshuHoho.toValue(new RString("0")).get名称().equals(変更後)
-                || ChoshuHoho.toValue(new RString("3")).get名称().equals(変更後)))) {
+        if (!((ChoshuHoho.toValue(コード_1).get名称().equals(現在)
+                || ChoshuHoho.toValue(コード_2).get名称().equals(現在))
+                && (ChoshuHoho.toValue(コード_0).get名称().equals(変更後)
+                || ChoshuHoho.toValue(コード_3).get名称().equals(変更後)))) {
             return true;
         }
         return flag;
