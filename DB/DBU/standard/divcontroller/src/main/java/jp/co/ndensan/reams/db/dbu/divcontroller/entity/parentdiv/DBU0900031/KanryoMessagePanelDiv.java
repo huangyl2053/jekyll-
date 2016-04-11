@@ -5,17 +5,17 @@ package jp.co.ndensan.reams.db.dbu.divcontroller.entity.parentdiv.DBU0900031;
  * 不正な動作の原因になります。
  */
 import com.fasterxml.jackson.annotation.JsonProperty;
-import jp.co.ndensan.reams.db.dbz.divcontroller.entity.parentdiv.kaigoshikakukihon.IKaigoShikakuKihonDiv;
-import jp.co.ndensan.reams.db.dbz.divcontroller.entity.parentdiv.kaigoshikakukihon.KaigoShikakuKihonDiv;
+import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.KaigoKanryoMessage.KaigoKanryoMessage.IKaigoKanryoMessageDiv;
+import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.KaigoKanryoMessage.KaigoKanryoMessage.KaigoKanryoMessageDiv;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 
 /**
- * ShikakukihonPanel のクラスファイル 
+ * KanryoMessagePanel のクラスファイル 
  * 
  * @reamsid_L DBU-1080-020 lijia
  *
  */
-public class ShikakukihonPanelDiv extends Panel {
+public class KanryoMessagePanelDiv extends Panel {
     // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-01-15_09-59-03">
     /*
      * [ private の作成 ]
@@ -23,8 +23,8 @@ public class ShikakukihonPanelDiv extends Panel {
      * コントロール名とフィールド名を取得する
      * private + コントロール名 + フィールド名 の文字列を作成
      */
-    @JsonProperty("ccdKaigoShikakuKihon")
-    private KaigoShikakuKihonDiv ccdKaigoShikakuKihon;
+    @JsonProperty("ccdKaigoKanryoMessage")
+    private KaigoKanryoMessageDiv ccdKaigoKanryoMessage;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -33,12 +33,12 @@ public class ShikakukihonPanelDiv extends Panel {
      * フィールド名のGetterとSetter を作成
      */
     /*
-     * getccdKaigoShikakuKihon
-     * @return ccdKaigoShikakuKihon
+     * getccdKaigoKanryoMessage
+     * @return ccdKaigoKanryoMessage
      */
-    @JsonProperty("ccdKaigoShikakuKihon")
-    public IKaigoShikakuKihonDiv getCcdKaigoShikakuKihon() {
-        return ccdKaigoShikakuKihon;
+    @JsonProperty("ccdKaigoKanryoMessage")
+    public IKaigoKanryoMessageDiv getCcdKaigoKanryoMessage() {
+        return ccdKaigoKanryoMessage;
     }
 
     // </editor-fold>

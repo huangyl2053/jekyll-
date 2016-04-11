@@ -6,9 +6,7 @@ package jp.co.ndensan.reams.db.dbu.divcontroller.entity.parentdiv.DBU0900031;
  */
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.KaigoKanryoMessage.KaigoKanryoMessage.KaigoKanryoMessageDiv;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.parentdiv.kaigoshikakukihon.IKaigoShikakuKihonDiv;
-import jp.co.ndensan.reams.db.dbz.divcontroller.entity.parentdiv.kaigoshikakukihon.KaigoShikakuKihonDiv;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.binding.*;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
@@ -16,8 +14,8 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 /**
  * BenmeiTorokuPanel のクラスファイル 
  * 
- * @reamsid_L DBU-1080-020  lijia
- * 
+ * @reamsid_L DBU-1080-020 lijia
+ *
  */
 public class BenmeiTorokuPanelDiv extends Panel {
     // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-01-15_09-59-03">
@@ -33,8 +31,8 @@ public class BenmeiTorokuPanelDiv extends Panel {
     private ShikakukihonPanelDiv ShikakukihonPanel;
     @JsonProperty("BenmeiTorokuMeisaiPanel")
     private BenmeiTorokuMeisaiPanelDiv BenmeiTorokuMeisaiPanel;
-    @JsonProperty("KaigoKanryoMessage")
-    private KaigoKanryoMessageDiv KaigoKanryoMessage;
+    @JsonProperty("KanryoMessagePanel")
+    private KanryoMessagePanelDiv KanryoMessagePanel;
     @JsonProperty("ProcessState")
     private RString ProcessState;
 
@@ -99,21 +97,21 @@ public class BenmeiTorokuPanelDiv extends Panel {
     }
 
     /*
-     * getKaigoKanryoMessage
-     * @return KaigoKanryoMessage
+     * getKanryoMessagePanel
+     * @return KanryoMessagePanel
      */
-    @JsonProperty("KaigoKanryoMessage")
-    public KaigoKanryoMessageDiv getKaigoKanryoMessage() {
-        return KaigoKanryoMessage;
+    @JsonProperty("KanryoMessagePanel")
+    public KanryoMessagePanelDiv getKanryoMessagePanel() {
+        return KanryoMessagePanel;
     }
 
     /*
-     * setKaigoKanryoMessage
-     * @param KaigoKanryoMessage KaigoKanryoMessage
+     * setKanryoMessagePanel
+     * @param KanryoMessagePanel KanryoMessagePanel
      */
-    @JsonProperty("KaigoKanryoMessage")
-    public void setKaigoKanryoMessage(KaigoKanryoMessageDiv KaigoKanryoMessage) {
-        this.KaigoKanryoMessage = KaigoKanryoMessage;
+    @JsonProperty("KanryoMessagePanel")
+    public void setKanryoMessagePanel(KanryoMessagePanelDiv KanryoMessagePanel) {
+        this.KanryoMessagePanel = KanryoMessagePanel;
     }
 
     /*

@@ -28,7 +28,6 @@ import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
 public class KaigoJuminhyoKobetsuKoikiunyoBatchParameterSakuseiFinder {
 
     private final MapperProvider mapperProvider;
-    private static final int 位置_結束 = 6;
 
     /**
      * コンストラクタ。
@@ -86,7 +85,6 @@ public class KaigoJuminhyoKobetsuKoikiunyoBatchParameterSakuseiFinder {
         List<KobetsuKoikiunyoParameter> batchParameterList = new ArrayList<>();
         for (KaigoJuminhyoKobetsuParameter list : kobetsuLsit) {
             KobetsuKoikiunyoParameter batchParameter = new KobetsuKoikiunyoParameter();
-            batchParameter.setShichosonCode(list.getSakiShichoson().substring(0, 位置_結束));
             batchParameter.setDateTo(RDate.getNowDate().toDateString());
             RStringBuilder taishoShuryo = new RStringBuilder();
             taishoShuryo.append(list.getKonkaiStSakuseiYMD());

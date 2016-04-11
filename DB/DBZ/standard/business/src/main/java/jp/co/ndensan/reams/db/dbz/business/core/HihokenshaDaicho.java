@@ -8,7 +8,6 @@ package jp.co.ndensan.reams.db.dbz.business.core;
 import java.io.Serializable;
 import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
-import jp.co.ndensan.reams.db.dbz.business.core.uzclasses.ModelBase;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT1001HihokenshaDaichoEntity;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
@@ -16,10 +15,13 @@ import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.util.ModelBase;
 import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 
 /**
  * 被保険者台帳管理を管理するクラスです。
+ *
+ * @reamsid_L DBA-1300-050 chengsanyuan
  */
 public class HihokenshaDaicho extends ModelBase<HihokenshaDaichoIdentifier, DbT1001HihokenshaDaichoEntity, HihokenshaDaicho>
         implements Serializable {
@@ -354,7 +356,8 @@ public class HihokenshaDaicho extends ModelBase<HihokenshaDaichoIdentifier, DbT1
     }
 
     /**
-     * 保持する被保険者台帳管理を削除対象とします。<br/> {@link DbT1001HihokenshaDaichoEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば削除状態にします。
+     * 保持する被保険者台帳管理を削除対象とします。<br/>
+     * {@link DbT1001HihokenshaDaichoEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば削除状態にします。
      *
      * @return 削除対象処理実施後の{@link HihokenshaDaicho}
      */
@@ -371,6 +374,21 @@ public class HihokenshaDaicho extends ModelBase<HihokenshaDaichoIdentifier, DbT1
     }
 
     /**
+     * 被保険者台帳管理のみを変更対象とします。<br/>
+     * {@link DbT1001HihokenshaDaichoEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば変更状態にします。
+     *
+     * @return 変更対象処理実施後の{@link HihokenshaDaicho}
+     */
+    public HihokenshaDaicho modifiedModel() {
+        DbT1001HihokenshaDaichoEntity modifiedEntity = entity.clone();
+        if (modifiedEntity.getState().equals(EntityDataState.Unchanged)) {
+            modifiedEntity.setState(EntityDataState.Modified);
+        }
+        return new HihokenshaDaicho(
+                modifiedEntity, id);
+    }
+
+    /**
      * {@link HihokenshaDaicho}のシリアライズ形式を提供します。
      *
      * @return {@link HihokenshaDaicho}のシリアライズ形式
@@ -382,7 +400,7 @@ public class HihokenshaDaicho extends ModelBase<HihokenshaDaichoIdentifier, DbT1
 
     @Override
     public boolean hasChanged() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return hasChangedEntity();
     }
 
     private static final class _SerializationProxy implements Serializable {

@@ -16,20 +16,16 @@ import java.util.List;
 @SuppressWarnings("PMD.UnusedPrivateField")
 public class TekiyojogaishaDaichoReportJoho {
 
-    private final TekiyojogaishaDaichoHeadItem headItem;
-    private final List<TekiyojogaishaDaichoBodyItem> bodyItemList;
+    private final List<TekiyojogaishaDaichoItem> itemList;
 
     /**
      * コンストラクタを作成します。
      *
-     * @param headItem 適用除外者台帳ヘッダ
-     * @param bodyItemList 適用除外者台帳ボディリスト
+     * @param itemList 適用除外者台帳ボディリスト
      */
     public TekiyojogaishaDaichoReportJoho(
-            TekiyojogaishaDaichoHeadItem headItem,
-            List<TekiyojogaishaDaichoBodyItem> bodyItemList) {
+            List<TekiyojogaishaDaichoItem> itemList) {
 
-        this.headItem = headItem;
-        this.bodyItemList = bodyItemList;
+        this.itemList = itemList;
     }
 }

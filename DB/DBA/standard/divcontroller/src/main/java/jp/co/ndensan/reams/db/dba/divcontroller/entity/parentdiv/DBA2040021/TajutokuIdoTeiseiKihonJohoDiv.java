@@ -1,21 +1,22 @@
-package jp.co.ndensan.reams.db.dbu.divcontroller.entity.parentdiv.DBU0900031;
+package jp.co.ndensan.reams.db.dba.divcontroller.entity.parentdiv.DBA2040021;
 /*
  * このコードはツールによって生成されました。
  * このファイルへの変更は、再生成時には損失するため
  * 不正な動作の原因になります。
  */
+
 import com.fasterxml.jackson.annotation.JsonProperty;
-import jp.co.ndensan.reams.db.dbz.divcontroller.entity.parentdiv.kaigoshikakukihon.IKaigoShikakuKihonDiv;
-import jp.co.ndensan.reams.db.dbz.divcontroller.entity.parentdiv.kaigoshikakukihon.KaigoShikakuKihonDiv;
+import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.kaigoatenainfo.KaigoAtenaInfo.IKaigoAtenaInfoDiv;
+import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.kaigoatenainfo.KaigoAtenaInfo.KaigoAtenaInfoDiv;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 
 /**
- * ShikakukihonPanel のクラスファイル 
- * 
- * @reamsid_L DBU-1080-020 lijia
+ * TajutokuIdoTeiseiKihonJoho のクラスファイル
  *
+ * @reamsid_L DBA-0401-030 duanzhanli
  */
-public class ShikakukihonPanelDiv extends Panel {
+public class TajutokuIdoTeiseiKihonJohoDiv extends Panel {
+
     // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-01-15_09-59-03">
     /*
      * [ private の作成 ]
@@ -23,8 +24,8 @@ public class ShikakukihonPanelDiv extends Panel {
      * コントロール名とフィールド名を取得する
      * private + コントロール名 + フィールド名 の文字列を作成
      */
-    @JsonProperty("ccdKaigoShikakuKihon")
-    private KaigoShikakuKihonDiv ccdKaigoShikakuKihon;
+    @JsonProperty("ccdKaigoAtenaJoho")
+    private KaigoAtenaInfoDiv ccdKaigoAtenaJoho;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -33,12 +34,12 @@ public class ShikakukihonPanelDiv extends Panel {
      * フィールド名のGetterとSetter を作成
      */
     /*
-     * getccdKaigoShikakuKihon
-     * @return ccdKaigoShikakuKihon
+     * getccdKaigoAtenaJoho
+     * @return ccdKaigoAtenaJoho
      */
-    @JsonProperty("ccdKaigoShikakuKihon")
-    public IKaigoShikakuKihonDiv getCcdKaigoShikakuKihon() {
-        return ccdKaigoShikakuKihon;
+    @JsonProperty("ccdKaigoAtenaJoho")
+    public IKaigoAtenaInfoDiv getCcdKaigoAtenaJoho() {
+        return ccdKaigoAtenaJoho;
     }
 
     // </editor-fold>

@@ -3,23 +3,19 @@ package jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0410011;
  * このコードはツールによって生成されました。
  * このファイルへの変更は、以下の状況下で不正な動作の原因になったり、
  * コードが再生成されるときに損失したりします。
- * Mon Mar 21 14:37:29 CST 2016 
+ * Mon Mar 21 14:37:29 CST 2016
  */
 
-
-
-import jp.co.ndensan.reams.uz.uza.ui.binding.DataRow;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxNum;
+import jp.co.ndensan.reams.uz.uza.ui.binding.DataRow;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxDate;
-
+import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxNum;
 
 /**
- * dgKokuhorenTorikomiList_Row のクラスファイル 
- * 
- * @author 自動生成
+ * dgKokuhorenTorikomiList_Row のクラスファイル
+ *
+ * @reamsid_L DBC-0980-460 wangkanglei
  */
-
 public class dgKokuhorenTorikomiList_Row extends DataRow {
     // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-01-15_09-59-03">
 

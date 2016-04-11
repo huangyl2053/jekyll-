@@ -21,6 +21,8 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
 
 /**
  * 画面入力のチェックHandler。
+ *
+ * @reamsid_L DBC-0980-460 wangkanglei
  */
 public class KokuhorenTorikomiListValidationHandler {
 

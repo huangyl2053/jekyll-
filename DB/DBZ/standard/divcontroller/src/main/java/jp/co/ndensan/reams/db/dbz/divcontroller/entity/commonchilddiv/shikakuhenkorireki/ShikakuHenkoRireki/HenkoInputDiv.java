@@ -4,19 +4,23 @@ package jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.shikakuhe
  * このファイルへの変更は、再生成時には損失するため
  * 不正な動作の原因になります。
  */
+
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.ui.binding.*;
+import jp.co.ndensan.reams.uz.uza.ui.binding.Button;
+import jp.co.ndensan.reams.uz.uza.ui.binding.DropDownList;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
+import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxFlexibleDate;
 
 /**
- * HenkoInput のクラスファイル 
- * 
- * @author 自動生成
+ * HenkoInput のクラスファイル
+ *
+ * @reamsid_L DBA-1300-050 chengsanyuan
  */
 public class HenkoInputDiv extends Panel {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2015-11-30_08-54-50">
+
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -219,7 +223,7 @@ public class HenkoInputDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setDdlHenkoSochimotoHokensha(DropDownList ddlHenkoSochimotoHokensha) {
+    public void setDdlHenkoSochimotoHokensha(DropDownList ddlHenkoSochimotoHokensha) {
         this.getHenkoHokenshaJoho().setDdlHenkoSochimotoHokensha(ddlHenkoSochimotoHokensha);
     }
 
@@ -229,7 +233,7 @@ public class HenkoInputDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setDdlHenkoKyuHokensha(DropDownList ddlHenkoKyuHokensha) {
+    public void setDdlHenkoKyuHokensha(DropDownList ddlHenkoKyuHokensha) {
         this.getHenkoHokenshaJoho().setDdlHenkoKyuHokensha(ddlHenkoKyuHokensha);
     }
 
@@ -239,7 +243,7 @@ public class HenkoInputDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setDdlJuminJoho(DropDownList ddlJuminJoho) {
+    public void setDdlJuminJoho(DropDownList ddlJuminJoho) {
         this.getHenkoHokenshaJoho().setDdlJuminJoho(ddlJuminJoho);
     }
 

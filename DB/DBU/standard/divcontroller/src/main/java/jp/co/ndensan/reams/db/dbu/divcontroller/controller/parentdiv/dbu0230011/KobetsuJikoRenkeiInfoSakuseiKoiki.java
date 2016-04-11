@@ -117,7 +117,6 @@ public class KobetsuJikoRenkeiInfoSakuseiKoiki {
                 KaigoJuminhyoKobetsuParameter kobetsu = new KaigoJuminhyoKobetsuParameter();
                 kobetsu.setKonkaiStSakuseiTime(row.getTxtKonkaiStSakuseiTime().getValue());
                 kobetsu.setKonkaiStSakuseiYMD(row.getTxtKonkaiStSakuseiYMD().getValue());
-                kobetsu.setSakiShichoson(row.getTxtSakiShichoson().getValue());
                 kobetsuLsit.add(kobetsu);
             }
         }
