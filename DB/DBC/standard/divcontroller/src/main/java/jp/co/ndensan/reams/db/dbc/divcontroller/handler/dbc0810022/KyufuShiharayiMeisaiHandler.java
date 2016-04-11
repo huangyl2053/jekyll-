@@ -27,7 +27,6 @@ public class KyufuShiharayiMeisaiHandler {
     private final KyufuShiharayiMeisaiDiv div;
     private static final RString 設定不可 = new RString("0");
     private static final RString 設定可_任意 = new RString("2");
-//    private static final FlexibleYearMonth 平成２１年４月 = new FlexibleYearMonth("200904");
     private static final FlexibleYearMonth 平成２４年４月 = new FlexibleYearMonth("201204");
     private static final int NUM = 6;
 
@@ -87,9 +86,6 @@ public class KyufuShiharayiMeisaiHandler {
      * @param shList List
      */
     public void initialize(List<ShokanMeisaiResult> shList) {
-//        div.getPanelTwo().getTxtJigyoshaBango().setValue(new RString("001"));
-//        div.getPanelTwo().getTxtMeisaiBango().setValue(new RString("002"));
-//        div.getPanelTwo().getTxtShomeisho().setValue(new RString("証明書証明書証明書証明書証明書"));
         List<dgdKyufuhiMeisai_Row> rowList = new ArrayList<>();
         for (ShokanMeisaiResult shme : shList) {
             dgdKyufuhiMeisai_Row row = new dgdKyufuhiMeisai_Row();
