@@ -20,6 +20,8 @@ import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 
 /**
  * 通知書発行情報を管理するクラスです。
+ *
+ * @reamsid_L DBE-9999-011 sunhaidi
  */
 public class TsuchishoHakkoJoho
         extends ModelBase<TsuchishoHakkoJohoIdentifier, DbT5122TsuchishoHakkoJohoEntity, TsuchishoHakkoJoho>

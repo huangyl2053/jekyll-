@@ -20,6 +20,8 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
  * CSVファイルのデータを読む込み、償還払支給決定情報一時TBLに登録のクラスです。
+ *
+ * @reamsid_L DBC-0980-330 gongliang
  */
 public class RegistTempSaveProcess extends BatchProcessBase<RString> {
 

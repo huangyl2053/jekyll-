@@ -16,6 +16,8 @@ import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT1001HihokenshaDaichoEntity;
 
 /**
  * 償還払支給決定情報DB操作です。
+ *
+ * @reamsid_L DBC-0980-350 gongliang
  */
 public interface IShokanBaraiShikyuKetteiJohoMapper {
 

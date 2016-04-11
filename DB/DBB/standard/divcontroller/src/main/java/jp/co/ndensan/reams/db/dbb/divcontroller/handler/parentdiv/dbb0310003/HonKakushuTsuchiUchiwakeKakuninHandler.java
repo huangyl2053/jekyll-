@@ -22,6 +22,8 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 
 /**
  * 打ち分け方法確認のHandler
+ *
+ * @reamsid_L DBC-0780-020 gongliang
  */
 public class HonKakushuTsuchiUchiwakeKakuninHandler {
 

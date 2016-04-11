@@ -22,6 +22,7 @@ import jp.co.ndensan.reams.uz.uza.util.db.SearchResult;
 /**
  * 広域内転居結果一覧表Handlerクラスです。
  *
+ * @reamsid_L DBU-1150-010 gongliang
  */
 public class BatchParamterInfoHandler {
 

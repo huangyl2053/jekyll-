@@ -15,7 +15,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 /**
  * panelCcd のクラスファイル
  *
- * @author 自動生成
+ * @reamsid_L DBC-1030-010 gongliang
  */
 public class panelCcdDiv extends Panel {
 

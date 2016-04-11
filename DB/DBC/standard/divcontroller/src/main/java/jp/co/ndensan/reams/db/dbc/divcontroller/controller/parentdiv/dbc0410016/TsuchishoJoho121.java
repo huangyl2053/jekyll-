@@ -10,6 +10,8 @@ import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 
 /**
  * 国保連情報受取データ取込_[121]資格照合表情報のクラスです。
+ *
+ * @reamsid_L DBC-0980-010 gongliang
  */
 public class TsuchishoJoho121 {
 

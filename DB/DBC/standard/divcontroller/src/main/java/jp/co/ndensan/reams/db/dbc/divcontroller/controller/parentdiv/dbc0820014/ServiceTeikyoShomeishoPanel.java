@@ -27,6 +27,8 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 
 /**
  * 償還払い費支給申請決定_サービス提供証明書クラスです。
+ *
+ * @reamsid_L DBC-1030-130 gongliang
  */
 public class ServiceTeikyoShomeishoPanel {
 

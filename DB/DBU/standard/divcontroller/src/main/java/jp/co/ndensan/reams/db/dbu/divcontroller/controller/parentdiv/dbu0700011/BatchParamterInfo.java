@@ -21,6 +21,7 @@ import jp.co.ndensan.reams.uz.uza.util.db.SearchResult;
 /**
  * 広域内転居結果一覧表作成画面Divを制御します。
  *
+ * @reamsid_L DBU-1150-010 gongliang
  */
 public class BatchParamterInfo {
 
@@ -53,7 +54,7 @@ public class BatchParamterInfo {
         } else if (!shohiValue.isEmpty() && !kaishihiValue.isEmpty() && shohiValue.isBefore(kaishihiValue)) {
             CommonButtonHolder.setDisabledByCommonButtonFieldName(実行ボタン, true);
             throw new ApplicationException(UrErrorMessages.期間が不正.getMessage());
-        } 
+        }
         return ResponseData.of(div).respond();
     }
 

@@ -12,7 +12,9 @@ import lombok.Getter;
 import lombok.Setter;
 
 /**
- * 実際に値を格納するクラス名
+ * 実際に値を格納するクラス名。
+ *
+ * @reamsid_L DBC-0980-290 wangkanglei
  */
 @SuppressWarnings("PMD.UnusedPrivateField")
 @Getter

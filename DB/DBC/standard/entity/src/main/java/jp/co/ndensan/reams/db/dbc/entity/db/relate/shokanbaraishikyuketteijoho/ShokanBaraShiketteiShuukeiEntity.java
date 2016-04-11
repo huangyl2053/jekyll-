@@ -15,6 +15,8 @@ import jp.co.ndensan.reams.uz.uza.math.Decimal;
 
 /**
  * 償還払請求集計一時テーブルのエンティティ。
+ *
+ * @reamsid_L DBC-0980-350 gongliang
  */
 @lombok.Setter
 @lombok.Getter

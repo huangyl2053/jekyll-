@@ -22,6 +22,8 @@ import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 
 /**
  * 要介護認定結果情報を管理するクラスです。
+ *
+ * @reamsid_L DBE-9999-011 sunhaidi
  */
 public class NinteiKekkaJoho extends ModelBase<NinteiKekkaJohoIdentifier, DbT5102NinteiKekkaJohoEntity, NinteiKekkaJoho> implements Serializable {
 
@@ -225,8 +227,7 @@ public class NinteiKekkaJoho extends ModelBase<NinteiKekkaJohoIdentifier, DbT510
     }
 
     /**
-     * 要介護認定結果情報のみを変更対象とします。<br/>
-     * {@link DbT5102NinteiKekkaJohoEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば変更状態にします。
+     * 要介護認定結果情報のみを変更対象とします。<br/> {@link DbT5102NinteiKekkaJohoEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば変更状態にします。
      *
      * @return 変更対象処理実施後の{@link NinteiKekkaJoho}
      */
@@ -240,8 +241,7 @@ public class NinteiKekkaJoho extends ModelBase<NinteiKekkaJohoIdentifier, DbT510
     }
 
     /**
-     * 保持する要介護認定結果情報を削除対象とします。<br/>
-     * {@link DbT5102NinteiKekkaJohoEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば削除状態にします。
+     * 保持する要介護認定結果情報を削除対象とします。<br/> {@link DbT5102NinteiKekkaJohoEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば削除状態にします。
      *
      * @return 削除対象処理実施後の{@link NinteiKekkaJoho}
      */

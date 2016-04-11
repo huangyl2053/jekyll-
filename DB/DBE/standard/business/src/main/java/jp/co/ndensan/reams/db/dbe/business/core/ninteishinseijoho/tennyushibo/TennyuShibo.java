@@ -20,6 +20,8 @@ import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 
 /**
  * 転入・死亡情報を管理するクラスです。
+ *
+ * @reamsid_L DBE-9999-011 sunhaidi
  */
 public class TennyuShibo extends ModelBase<TennyuShiboIdentifier, DbT5129TennyuShiboEntity, TennyuShibo> implements Serializable {
 

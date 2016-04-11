@@ -9,16 +9,18 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.ICommonChildDivBaseProperties;
 
 /*
  * このコードはツールによって生成されました。
+ *
+ * @reamsid_L DBC-0980-290 wangkanglei
  */
 public interface IKaigoKyufuKokuhorenJohoTorikomiDiv extends ICommonChildDivBaseProperties {
 
     /**
-     * onLoadMode1
+     * Mode1のメソッドます。
      */
     public void onLoadMode1();
 
     /**
-     * onLoadModeShutsuryokujunJoken2
+     * ModeShutsuryokujunJoken2のメソッドます。
      *
      * @param サブ業務コード SubGyomuCode
      * @param 帳票ID ReportId
@@ -26,7 +28,7 @@ public interface IKaigoKyufuKokuhorenJohoTorikomiDiv extends ICommonChildDivBase
     public void onLoadModeShutsuryokujunJoken2(SubGyomuCode サブ業務コード, ReportId 帳票ID);
 
     /**
-     * onLoadModeKakuninMsgJoken3
+     * ModeKakuninMsgJoken3のメソッドます。
      *
      * @param サブ業務コード SubGyomuCode
      * @param 帳票ID ReportId
@@ -34,28 +36,28 @@ public interface IKaigoKyufuKokuhorenJohoTorikomiDiv extends ICommonChildDivBase
     public void onLoadModeKakuninMsgJoken3(SubGyomuCode サブ業務コード, ReportId 帳票ID);
 
     /**
-     * get処理対象情報
+     * get処理対象情報のメソッドます。
      *
      * @return list
      */
     public List<RString> get処理対象情報();
 
     /**
-     * get処理年月
+     * get処理年月のメソッドます。
      *
      * @return RDate
      */
     public RDate get処理年月();
 
     /**
-     * get再処理区分
+     * get再処理区分のメソッドます。
      *
      * @return RString
      */
     public RString get再処理区分();
 
     /**
-     * get出力順ID
+     * get出力順IDのメソッドます。
      *
      * @return long
      */

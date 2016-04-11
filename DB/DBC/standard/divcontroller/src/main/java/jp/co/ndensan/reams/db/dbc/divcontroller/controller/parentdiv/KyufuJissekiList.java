@@ -282,14 +282,17 @@ public class KyufuJissekiList {
         }
 
         List<DataGridColumn> colMeisaiList = panel.getDgKyufuJissekiMeisaiList().getGridSetting().getColumns();
+        setcolMeisaiList(colMeisaiList);
+        panel.getDgKyufuJissekiMeisaiList().setDataSource(arrayMeisaidata);
+    }
+
+    private void setcolMeisaiList(List<DataGridColumn> colMeisaiList) {
         for (int i = 0; i < colMeisaiList.size(); i++) {
             colMeisaiList.get(i).setVisible(true);
             if (colMeisaiList.get(i).getDataName().toString().equals("txtYM3")) {
                 break;
             }
         }
-
-        panel.getDgKyufuJissekiMeisaiList().setDataSource(arrayMeisaidata);
     }
 
     private void setGokeiData(KyufuJissekiListDiv panel, KyufuJissekiServiceCollections collections, Range<ServiceTeikyoYM> serviceTeikyoYMRange) {

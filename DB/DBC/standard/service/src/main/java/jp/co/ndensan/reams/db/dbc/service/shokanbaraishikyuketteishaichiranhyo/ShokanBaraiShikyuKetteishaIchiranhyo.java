@@ -27,6 +27,8 @@ import jp.co.ndensan.reams.uz.uza.lang.Separator;
 
 /**
  * 償還払支給決定者一覧ビジネスクラス。
+ *
+ * @reamsid_L DBC-0980-340 gongliang
  */
 public class ShokanBaraiShikyuKetteishaIchiranhyo {
 

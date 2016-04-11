@@ -28,6 +28,8 @@ import jp.co.ndensan.reams.uz.uza.util.code.CodeMaster;
 
 /**
  * 償還払い状況照会_サービス計画費のハンドラクラスです。
+ *
+ * @reamsid_L DBC-1010-010 gongliang
  */
 public class ServiceKeikakuHiHandler {
 

@@ -10,6 +10,8 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
  * 普徴仮算定賦課出力帳票entity
+ *
+ * @reamsid_L DBC-0710-020 gongliang
  */
 @lombok.Getter
 @lombok.Setter

@@ -23,6 +23,8 @@ import lombok.Setter;
 
 /**
  * 償還払支給決定情報一時TBL一覧表エンティティです。
+ *
+ * @reamsid_L DBC-0980-350 gongliang
  */
 @Getter
 @Setter

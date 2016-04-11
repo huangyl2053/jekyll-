@@ -33,6 +33,8 @@ import jp.co.ndensan.reams.uz.uza.util.config.BusinessConfig;
 
 /**
  * 償還払い費支給申請決定_サービス提供証明書のHandlerです。
+ *
+ * @reamsid_L DBC-1030-130 gongliang
  */
 public class ServiceTeikyoShomeishoPanelHandler {
 

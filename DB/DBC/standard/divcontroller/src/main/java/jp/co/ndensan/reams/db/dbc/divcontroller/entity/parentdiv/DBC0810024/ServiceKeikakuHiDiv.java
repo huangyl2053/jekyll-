@@ -7,15 +7,24 @@ package jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0810024;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import jp.co.ndensan.reams.uz.uza.ui.binding.*;
+import jp.co.ndensan.reams.uz.uza.ui.binding.Button;
+import jp.co.ndensan.reams.uz.uza.ui.binding.DataGrid;
+import jp.co.ndensan.reams.uz.uza.ui.binding.HorizontalLine;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
+import jp.co.ndensan.reams.uz.uza.ui.binding.RadioButton;
+import jp.co.ndensan.reams.uz.uza.ui.binding.TextBox;
+import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxCode;
+import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxDate;
+import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxMultiLine;
+import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxNum;
 
 /**
- * ServiceKeikakuHi のクラスファイル 
- * 
- * @author 自動生成
+ * ServiceKeikakuHi のクラスファイル
+ *
+ * @reamsid_L DBC-1010-010 gongliang
  */
 public class ServiceKeikakuHiDiv extends Panel {
+
     // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-01-15_09-59-03">
     /*
      * [ private の作成 ]
@@ -119,7 +128,7 @@ public class ServiceKeikakuHiDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setTxtJigyoshaKubun(TextBoxCode txtJigyoshaKubun) {
+    public void setTxtJigyoshaKubun(TextBoxCode txtJigyoshaKubun) {
         this.getPanelServiceKeikakuhiUp1().setTxtJigyoshaKubun(txtJigyoshaKubun);
     }
 
@@ -129,7 +138,7 @@ public class ServiceKeikakuHiDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setRdoShinsahouhou(RadioButton rdoShinsahouhou) {
+    public void setRdoShinsahouhou(RadioButton rdoShinsahouhou) {
         this.getPanelServiceKeikakuhiUp1().setRdoShinsahouhou(rdoShinsahouhou);
     }
 
@@ -139,7 +148,7 @@ public class ServiceKeikakuHiDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setTxtTodokedeYMD(TextBoxDate txtTodokedeYMD) {
+    public void setTxtTodokedeYMD(TextBoxDate txtTodokedeYMD) {
         this.getPanelServiceKeikakuhiUp1().setTxtTodokedeYMD(txtTodokedeYMD);
     }
 
@@ -149,7 +158,7 @@ public class ServiceKeikakuHiDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setTxtTantoKaigoshien(TextBoxCode txtTantoKaigoshien) {
+    public void setTxtTantoKaigoshien(TextBoxCode txtTantoKaigoshien) {
         this.getPanelServiceKeikakuhiUp1().setTxtTantoKaigoshien(txtTantoKaigoshien);
     }
 
@@ -159,7 +168,7 @@ public class ServiceKeikakuHiDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setTxtTanyiTanka(TextBoxNum txtTanyiTanka) {
+    public void setTxtTanyiTanka(TextBoxNum txtTanyiTanka) {
         this.getPanelServiceKeikakuhiUp1().setTxtTanyiTanka(txtTanyiTanka);
     }
 
@@ -169,7 +178,7 @@ public class ServiceKeikakuHiDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setHlThree(HorizontalLine hlThree) {
+    public void setHlThree(HorizontalLine hlThree) {
         this.getPanelServiceKeikakuhiUp1().setHlThree(hlThree);
     }
 
@@ -179,7 +188,7 @@ public class ServiceKeikakuHiDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setDgdYichiran(DataGrid<dgdYichiran_Row> dgdYichiran) {
+    public void setDgdYichiran(DataGrid<dgdYichiran_Row> dgdYichiran) {
         this.getPanelServiceKeikakuhiUp1().setDgdYichiran(dgdYichiran);
     }
 
@@ -189,7 +198,7 @@ public class ServiceKeikakuHiDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setTxtGokeiTanyi(TextBoxNum txtGokeiTanyi) {
+    public void setTxtGokeiTanyi(TextBoxNum txtGokeiTanyi) {
         this.getPanelServiceKeikakuhiUp1().setTxtGokeiTanyi(txtGokeiTanyi);
     }
 
@@ -199,7 +208,7 @@ public class ServiceKeikakuHiDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setTxtSeikyugaku(TextBoxNum txtSeikyugaku) {
+    public void setTxtSeikyugaku(TextBoxNum txtSeikyugaku) {
         this.getPanelServiceKeikakuhiUp1().setTxtSeikyugaku(txtSeikyugaku);
     }
 
@@ -209,7 +218,7 @@ public class ServiceKeikakuHiDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setPanelServiceKeikakuhiUp(panelServiceKeikakuhiUpDiv panelServiceKeikakuhiUp) {
+    public void setPanelServiceKeikakuhiUp(panelServiceKeikakuhiUpDiv panelServiceKeikakuhiUp) {
         this.getPanelServiceKeikakuhiUp1().setPanelServiceKeikakuhiUp(panelServiceKeikakuhiUp);
     }
 
@@ -219,7 +228,7 @@ public class ServiceKeikakuHiDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setTxtServiceCode1(TextBoxCode txtServiceCode1) {
+    public void setTxtServiceCode1(TextBoxCode txtServiceCode1) {
         this.getPanelServiceKeikakuhiUp1().getPanelServiceKeikakuhiUp().setTxtServiceCode1(txtServiceCode1);
     }
 
@@ -229,7 +238,7 @@ public class ServiceKeikakuHiDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setTxtServiceCode2(TextBoxCode txtServiceCode2) {
+    public void setTxtServiceCode2(TextBoxCode txtServiceCode2) {
         this.getPanelServiceKeikakuhiUp1().getPanelServiceKeikakuhiUp().setTxtServiceCode2(txtServiceCode2);
     }
 
@@ -239,7 +248,7 @@ public class ServiceKeikakuHiDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setTxtServiceName(TextBox txtServiceName) {
+    public void setTxtServiceName(TextBox txtServiceName) {
         this.getPanelServiceKeikakuhiUp1().getPanelServiceKeikakuhiUp().setTxtServiceName(txtServiceName);
     }
 
@@ -249,7 +258,7 @@ public class ServiceKeikakuHiDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setTxtTanyiUp(TextBoxNum txtTanyiUp) {
+    public void setTxtTanyiUp(TextBoxNum txtTanyiUp) {
         this.getPanelServiceKeikakuhiUp1().getPanelServiceKeikakuhiUp().setTxtTanyiUp(txtTanyiUp);
     }
 
@@ -259,7 +268,7 @@ public class ServiceKeikakuHiDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setTxtKaisu(TextBoxNum txtKaisu) {
+    public void setTxtKaisu(TextBoxNum txtKaisu) {
         this.getPanelServiceKeikakuhiUp1().getPanelServiceKeikakuhiUp().setTxtKaisu(txtKaisu);
     }
 
@@ -269,7 +278,7 @@ public class ServiceKeikakuHiDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setTxtServiceTanyiSu(TextBoxNum txtServiceTanyiSu) {
+    public void setTxtServiceTanyiSu(TextBoxNum txtServiceTanyiSu) {
         this.getPanelServiceKeikakuhiUp1().getPanelServiceKeikakuhiUp().setTxtServiceTanyiSu(txtServiceTanyiSu);
     }
 
@@ -279,7 +288,7 @@ public class ServiceKeikakuHiDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setTxtTekiyoUp(TextBox txtTekiyoUp) {
+    public void setTxtTekiyoUp(TextBox txtTekiyoUp) {
         this.getPanelServiceKeikakuhiUp1().getPanelServiceKeikakuhiUp().setTxtTekiyoUp(txtTekiyoUp);
     }
 
@@ -289,7 +298,7 @@ public class ServiceKeikakuHiDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setHrFree(HorizontalLine hrFree) {
+    public void setHrFree(HorizontalLine hrFree) {
         this.getPanelServiceKeikakuhiUp1().getPanelServiceKeikakuhiUp().setHrFree(hrFree);
     }
 
@@ -299,7 +308,7 @@ public class ServiceKeikakuHiDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setTxtShinsaYM(TextBoxDate txtShinsaYM) {
+    public void setTxtShinsaYM(TextBoxDate txtShinsaYM) {
         this.getPanelServiceKeikakuhiUp1().getPanelServiceKeikakuhiUp().setTxtShinsaYM(txtShinsaYM);
     }
 
@@ -309,7 +318,7 @@ public class ServiceKeikakuHiDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setTxtShikyuKubun(TextBox txtShikyuKubun) {
+    public void setTxtShikyuKubun(TextBox txtShikyuKubun) {
         this.getPanelServiceKeikakuhiUp1().getPanelServiceKeikakuhiUp().setTxtShikyuKubun(txtShikyuKubun);
     }
 
@@ -319,7 +328,7 @@ public class ServiceKeikakuHiDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setTxtServiceTanyi(TextBoxNum txtServiceTanyi) {
+    public void setTxtServiceTanyi(TextBoxNum txtServiceTanyi) {
         this.getPanelServiceKeikakuhiUp1().getPanelServiceKeikakuhiUp().setTxtServiceTanyi(txtServiceTanyi);
     }
 
@@ -329,7 +338,7 @@ public class ServiceKeikakuHiDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setTxtShihanayiKingaku(TextBoxNum txtShihanayiKingaku) {
+    public void setTxtShihanayiKingaku(TextBoxNum txtShihanayiKingaku) {
         this.getPanelServiceKeikakuhiUp1().getPanelServiceKeikakuhiUp().setTxtShihanayiKingaku(txtShihanayiKingaku);
     }
 
@@ -339,7 +348,7 @@ public class ServiceKeikakuHiDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setTxtZougenten(TextBoxNum txtZougenten) {
+    public void setTxtZougenten(TextBoxNum txtZougenten) {
         this.getPanelServiceKeikakuhiUp1().getPanelServiceKeikakuhiUp().setTxtZougenten(txtZougenten);
     }
 
@@ -349,7 +358,7 @@ public class ServiceKeikakuHiDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setTxtNote1(TextBoxMultiLine txtNote1) {
+    public void setTxtNote1(TextBoxMultiLine txtNote1) {
         this.getPanelServiceKeikakuhiUp1().getPanelServiceKeikakuhiUp().setTxtNote1(txtNote1);
     }
 
@@ -359,7 +368,7 @@ public class ServiceKeikakuHiDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setTxtNote2(TextBoxMultiLine txtNote2) {
+    public void setTxtNote2(TextBoxMultiLine txtNote2) {
         this.getPanelServiceKeikakuhiUp1().getPanelServiceKeikakuhiUp().setTxtNote2(txtNote2);
     }
 
@@ -369,7 +378,7 @@ public class ServiceKeikakuHiDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setTxtNote3(TextBoxMultiLine txtNote3) {
+    public void setTxtNote3(TextBoxMultiLine txtNote3) {
         this.getPanelServiceKeikakuhiUp1().getPanelServiceKeikakuhiUp().setTxtNote3(txtNote3);
     }
 
@@ -379,7 +388,7 @@ public class ServiceKeikakuHiDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setBtnClose(Button btnClose) {
+    public void setBtnClose(Button btnClose) {
         this.getPanelServiceKeikakuhiUp1().getPanelServiceKeikakuhiUp().setBtnClose(btnClose);
     }
 
@@ -389,7 +398,7 @@ public class ServiceKeikakuHiDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setTxtShiteiJigyoshaKubunCode(TextBoxCode txtShiteiJigyoshaKubunCode) {
+    public void setTxtShiteiJigyoshaKubunCode(TextBoxCode txtShiteiJigyoshaKubunCode) {
         this.getPanelServiceKeikakuhiDown().setTxtShiteiJigyoshaKubunCode(txtShiteiJigyoshaKubunCode);
     }
 
@@ -399,7 +408,7 @@ public class ServiceKeikakuHiDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setTxtTodokedeDate(TextBoxDate txtTodokedeDate) {
+    public void setTxtTodokedeDate(TextBoxDate txtTodokedeDate) {
         this.getPanelServiceKeikakuhiDown().setTxtTodokedeDate(txtTodokedeDate);
     }
 
@@ -409,7 +418,7 @@ public class ServiceKeikakuHiDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setRdoShinsaHouhou(RadioButton rdoShinsaHouhou) {
+    public void setRdoShinsaHouhou(RadioButton rdoShinsaHouhou) {
         this.getPanelServiceKeikakuhiDown().setRdoShinsaHouhou(rdoShinsaHouhou);
     }
 
@@ -419,7 +428,7 @@ public class ServiceKeikakuHiDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setTxtServiceCodeDown1(TextBoxCode txtServiceCodeDown1) {
+    public void setTxtServiceCodeDown1(TextBoxCode txtServiceCodeDown1) {
         this.getPanelServiceKeikakuhiDown().setTxtServiceCodeDown1(txtServiceCodeDown1);
     }
 
@@ -429,7 +438,7 @@ public class ServiceKeikakuHiDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setTxtServiceCodeDown2(TextBoxCode txtServiceCodeDown2) {
+    public void setTxtServiceCodeDown2(TextBoxCode txtServiceCodeDown2) {
         this.getPanelServiceKeikakuhiDown().setTxtServiceCodeDown2(txtServiceCodeDown2);
     }
 
@@ -439,7 +448,7 @@ public class ServiceKeikakuHiDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setTxtServiceNamedown(TextBox txtServiceNamedown) {
+    public void setTxtServiceNamedown(TextBox txtServiceNamedown) {
         this.getPanelServiceKeikakuhiDown().setTxtServiceNamedown(txtServiceNamedown);
     }
 
@@ -449,7 +458,7 @@ public class ServiceKeikakuHiDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setTxtTanyiDown(TextBoxNum txtTanyiDown) {
+    public void setTxtTanyiDown(TextBoxNum txtTanyiDown) {
         this.getPanelServiceKeikakuhiDown().setTxtTanyiDown(txtTanyiDown);
     }
 
@@ -459,7 +468,7 @@ public class ServiceKeikakuHiDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setTxtSeikyugakuDown(TextBoxNum txtSeikyugakuDown) {
+    public void setTxtSeikyugakuDown(TextBoxNum txtSeikyugakuDown) {
         this.getPanelServiceKeikakuhiDown().setTxtSeikyugakuDown(txtSeikyugakuDown);
     }
 
@@ -469,7 +478,7 @@ public class ServiceKeikakuHiDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setTxtTanyisuTanka(TextBoxNum txtTanyisuTanka) {
+    public void setTxtTanyisuTanka(TextBoxNum txtTanyisuTanka) {
         this.getPanelServiceKeikakuhiDown().setTxtTanyisuTanka(txtTanyisuTanka);
     }
 
@@ -479,7 +488,7 @@ public class ServiceKeikakuHiDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setTxtTantoukayigoshien(TextBoxCode txtTantoukayigoshien) {
+    public void setTxtTantoukayigoshien(TextBoxCode txtTantoukayigoshien) {
         this.getPanelServiceKeikakuhiDown().setTxtTantoukayigoshien(txtTantoukayigoshien);
     }
 
@@ -489,7 +498,7 @@ public class ServiceKeikakuHiDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setTxtTekiyo(TextBox txtTekiyo) {
+    public void setTxtTekiyo(TextBox txtTekiyo) {
         this.getPanelServiceKeikakuhiDown().setTxtTekiyo(txtTekiyo);
     }
 
@@ -499,7 +508,7 @@ public class ServiceKeikakuHiDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setHlthree(HorizontalLine hlthree) {
+    public void setHlthree(HorizontalLine hlthree) {
         this.getPanelServiceKeikakuhiDown().setHlthree(hlthree);
     }
 
@@ -509,7 +518,7 @@ public class ServiceKeikakuHiDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setTxtShinsaYmdown(TextBoxDate txtShinsaYmdown) {
+    public void setTxtShinsaYmdown(TextBoxDate txtShinsaYmdown) {
         this.getPanelServiceKeikakuhiDown().setTxtShinsaYmdown(txtShinsaYmdown);
     }
 
@@ -519,7 +528,7 @@ public class ServiceKeikakuHiDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setTxtShikyuKubundown(TextBox txtShikyuKubundown) {
+    public void setTxtShikyuKubundown(TextBox txtShikyuKubundown) {
         this.getPanelServiceKeikakuhiDown().setTxtShikyuKubundown(txtShikyuKubundown);
     }
 
@@ -529,7 +538,7 @@ public class ServiceKeikakuHiDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setTxtServiceTanyidown(TextBoxNum txtServiceTanyidown) {
+    public void setTxtServiceTanyidown(TextBoxNum txtServiceTanyidown) {
         this.getPanelServiceKeikakuhiDown().setTxtServiceTanyidown(txtServiceTanyidown);
     }
 
@@ -539,7 +548,7 @@ public class ServiceKeikakuHiDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setTxtShiharaiKingaku(TextBoxNum txtShiharaiKingaku) {
+    public void setTxtShiharaiKingaku(TextBoxNum txtShiharaiKingaku) {
         this.getPanelServiceKeikakuhiDown().setTxtShiharaiKingaku(txtShiharaiKingaku);
     }
 
@@ -549,7 +558,7 @@ public class ServiceKeikakuHiDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setTxtZougentendown(TextBoxNum txtZougentendown) {
+    public void setTxtZougentendown(TextBoxNum txtZougentendown) {
         this.getPanelServiceKeikakuhiDown().setTxtZougentendown(txtZougentendown);
     }
 
@@ -559,7 +568,7 @@ public class ServiceKeikakuHiDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setTxtNote1down(TextBoxMultiLine txtNote1down) {
+    public void setTxtNote1down(TextBoxMultiLine txtNote1down) {
         this.getPanelServiceKeikakuhiDown().setTxtNote1down(txtNote1down);
     }
 
@@ -569,7 +578,7 @@ public class ServiceKeikakuHiDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setTxtNote2down(TextBoxMultiLine txtNote2down) {
+    public void setTxtNote2down(TextBoxMultiLine txtNote2down) {
         this.getPanelServiceKeikakuhiDown().setTxtNote2down(txtNote2down);
     }
 
@@ -579,7 +588,7 @@ public class ServiceKeikakuHiDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setTxtNote3down(TextBoxMultiLine txtNote3down) {
+    public void setTxtNote3down(TextBoxMultiLine txtNote3down) {
         this.getPanelServiceKeikakuhiDown().setTxtNote3down(txtNote3down);
     }
 

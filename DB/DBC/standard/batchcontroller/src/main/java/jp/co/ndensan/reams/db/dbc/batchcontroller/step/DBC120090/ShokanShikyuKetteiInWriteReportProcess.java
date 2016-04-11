@@ -7,6 +7,8 @@ package jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC120090;
 
 /**
  * DBの更新Processです。
+ *
+ * @reamsid_L DBC-0980-330 gongliang
  */
 //public class ShokanShikyuKetteiInWriteReportProcess extends BatchProcessBase<> {
 //
