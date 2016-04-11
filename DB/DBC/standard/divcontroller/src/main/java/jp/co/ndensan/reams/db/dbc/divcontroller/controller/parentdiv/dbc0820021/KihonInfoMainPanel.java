@@ -42,6 +42,7 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 /**
  * 償還払支給申請_サービス提供証明書_基本情報画面のクラスです。
  *
+ * @reamsid_L DBC-1030-020 wangkanglei
  */
 public class KihonInfoMainPanel {
 
@@ -50,6 +51,7 @@ public class KihonInfoMainPanel {
     private static final RString 基本情報 = new RString("基本情報");
     private static final RString 日数 = new RString("入所(院)実日数＋外泊日数");
     private static final RString 期間日数 = new RString("入所(院)日・退所(院)日の間に収まる日数");
+    private static final int NUM_1 = 1;
 
     /**
      * 画面初期化処理のメソッドます。
@@ -219,7 +221,7 @@ public class KihonInfoMainPanel {
             if (退所_院年月日 == null) {
                 退所_院年月日 = RDate.MAX;
             }
-            int 期間_日数 = 退所_院年月日.getBetweenDays(入所_院年月日);
+            int 期間_日数 = 退所_院年月日.plusDay(NUM_1).getBetweenDays(入所_院年月日);
             Decimal 外泊日数 = div.getPanelKihon().getPanelShisetuNyutaisyoInfo().getTxtGaigakuNissu().getValue();
             Decimal 入所_院実日数 = div.getPanelKihon().getPanelShisetuNyutaisyoInfo().getTxtNyushoJitsuNissu().getValue();
             if (外泊日数 == null) {

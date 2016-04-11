@@ -14,7 +14,9 @@ import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import lombok.Getter;
 
 /**
- * 償還払費申請検索キーのParameter
+ * 償還払費申請検索キーのParameter。
+ *
+ * @reamsid_L DBC-1030-020 wangkanglei
  */
 @SuppressWarnings("PMD.UnusedPrivateField")
 @Getter
