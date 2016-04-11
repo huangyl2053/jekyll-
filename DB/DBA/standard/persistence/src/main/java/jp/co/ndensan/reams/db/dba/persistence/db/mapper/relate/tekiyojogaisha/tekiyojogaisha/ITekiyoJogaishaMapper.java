@@ -8,7 +8,6 @@ import java.util.List;
 import jp.co.ndensan.reams.db.dba.definition.mybatisprm.tekiyojogaisha.TekiyoJogaishaMapperParameter;
 import jp.co.ndensan.reams.db.dba.entity.db.relate.tekiyojogaisha.tekiyojogaisha.TekiyoJogaishaKanriRelateEntity;
 import jp.co.ndensan.reams.db.dba.entity.db.relate.tekiyojogaisha.tekiyojogaisha.TekiyoJogaishaRelateEntity;
-import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT1002TekiyoJogaishaEntity;
 import jp.co.ndensan.reams.ua.uax.entity.db.basic.UaFt200FindShikibetsuTaishoEntity;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 
@@ -34,14 +33,6 @@ public interface ITekiyoJogaishaMapper {
      * @return UaFt200FindShikibetsuTaishoEntity
      */
     UaFt200FindShikibetsuTaishoEntity select宛名情報(TekiyoJogaishaMapperParameter 適用除外者検索条件);
-
-    /**
-     * 最大の枝番取得します。
-     *
-     * @param 適用除外者検索条件 適用除外者を特定するためのMyBatis用パラメータ
-     * @return DbT1002TekiyoJogaishaEntity
-     */
-    DbT1002TekiyoJogaishaEntity get最大の枝番(TekiyoJogaishaMapperParameter 適用除外者検索条件);
 
     /**
      * 適用除外者の取得します。

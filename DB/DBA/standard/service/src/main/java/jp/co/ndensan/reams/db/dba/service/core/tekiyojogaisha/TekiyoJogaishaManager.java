@@ -102,22 +102,6 @@ public class TekiyoJogaishaManager {
     }
 
     /**
-     * 適用除外者最大枝番の取得処理をします。
-     *
-     * @param shikibetsuCode 識別コード
-     * @param idoYMD 異動日
-     * @return 最大の枝番
-     */
-    @Transaction
-    public RString get最大の枝番(ShikibetsuCode shikibetsuCode, FlexibleDate idoYMD) {
-        TekiyoJogaishaMapperParameter parameter = TekiyoJogaishaMapperParameter.createParam_get最大の枝番(
-                shikibetsuCode, idoYMD);
-        ITekiyoJogaishaMapper mapper = mapperProvider.create(ITekiyoJogaishaMapper.class);
-        DbT1002TekiyoJogaishaEntity entity = mapper.get最大の枝番(parameter);
-        return entity.getEdaNo();
-    }
-
-    /**
      * 適用除外者の取得処理をします。
      *
      * @param shikibetsuCode 識別コード

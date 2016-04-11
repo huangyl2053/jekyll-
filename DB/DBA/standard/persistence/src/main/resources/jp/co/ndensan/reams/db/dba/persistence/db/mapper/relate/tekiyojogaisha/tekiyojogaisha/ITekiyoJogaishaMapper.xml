@@ -82,17 +82,6 @@
             ShisetsuNyutaisho."nyushoYMD" DESC
     </select>
     
-    <select id="get最大の枝番" parameterType="jp.co.ndensan.reams.db.dba.definition.mybatisprm.tekiyojogaisha.TekiyoJogaishaMapperParameter" 
-            resultMap="ResultMap_get最大の枝番" fetchSize="500">
-        SELECT 
-            MAX(TekiyoJogaisha."edaNo") AS "TekiyoJogaisha_edaNo"
-        FROM 
-            rgdb."DbT1002TekiyoJogaisha" AS TekiyoJogaisha
-        WHERE
-            TekiyoJogaisha."shikibetsuCode" = #{識別コード}
-            AND TekiyoJogaisha."idoYMD" = #{異動日}
-    </select>
-    
     <select id="getMax履歴番号" parameterType="jp.co.ndensan.reams.db.dba.definition.mybatisprm.tekiyojogaisha.TekiyoJogaishaMapperParameter" 
             resultType="Decimal" fetchSize="500">
         SELECT 

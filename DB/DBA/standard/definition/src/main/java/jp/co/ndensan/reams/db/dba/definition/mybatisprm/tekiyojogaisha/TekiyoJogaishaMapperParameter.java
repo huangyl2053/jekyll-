@@ -98,21 +98,6 @@ public final class TekiyoJogaishaMapperParameter {
     }
 
     /**
-     * 最大の枝番検索用のパラメータを生成します。
-     *
-     * @param 識別コード 識別コード
-     * @param 異動日 異動日
-     * @return 適用除外者を特定するためのパラメータ
-     */
-    public static TekiyoJogaishaMapperParameter createParam_get最大の枝番(
-            ShikibetsuCode 識別コード,
-            FlexibleDate 異動日) {
-        return new TekiyoJogaishaMapperParameter(
-                識別コード, 異動日, RString.EMPTY, true, true, true,
-                FlexibleDate.MAX, FlexibleDate.MAX, true, true, true, RString.EMPTY);
-    }
-
-    /**
      * 適用除外者索用のパラメータを生成します。
      *
      * @param 識別コード ShikibetsuCode
