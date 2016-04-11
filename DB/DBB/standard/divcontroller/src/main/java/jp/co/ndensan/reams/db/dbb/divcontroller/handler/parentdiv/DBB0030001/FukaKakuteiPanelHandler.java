@@ -13,6 +13,9 @@ import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
 import jp.co.ndensan.reams.uz.uza.lang.ApplicationException;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
+import jp.co.ndensan.reams.uz.uza.ui.binding.propertyenum.DisplayTimeFormat;
+import jp.co.ndensan.reams.uz.uza.ui.servlets.CommonButtonHolder;
 import jp.co.ndensan.reams.uz.uza.util.config.BusinessConfig;
 import jp.co.ndensan.reams.uz.uza.util.serialization.DataPassingConverter;
 
@@ -36,6 +39,7 @@ public class FukaKakuteiPanelHandler {
     private static final RString 本算定賦課処理の結果を確定します = new RString("本算定賦課処理の結果を確定します。");
     private static final RString 本算定 = new RString("本算定異動（現年度）賦課処理の結果を確定します。");
     private static final RString 確定処理 = new RString("確定処理");
+    private static final RString BtnFukaKakutei = new RString("btnFukaKakutei");
 
     /**
      * コンストラクタ。
@@ -63,12 +67,17 @@ public class FukaKakuteiPanelHandler {
      */
     public boolean 処理名_特徴仮算定賦課(YMDHMS 特徴仮算定賦課の基準日時, YMDHMS 特徴仮算定賦課確定の基準日時) {
         if (特徴仮算定賦課の基準日時 == null) {
+            CommonButtonHolder.setDisabledByCommonButtonFieldName(BtnFukaKakutei, true);
             throw new ApplicationException(UrErrorMessages.実行不可.getMessage().replace((確定処理).toString()).evaluate());
         } else {
             if (特徴仮算定賦課確定の基準日時 == null) {
+                RStringBuilder 日時 = new RStringBuilder();
+                日時.append(特徴仮算定賦課の基準日時.getRDateTime().getDate().wareki().toDateString());
+                日時.append(new RString(" "));
+                日時.append(特徴仮算定賦課の基準日時.getRDateTime().getTime().toFormattedTimeString(DisplayTimeFormat.HH_mm_ss).toString());
                 div.getFukaKakuteiBatchParameter().getLblFukaKeisanKakuteiMsg().setText(特別徴収仮算定賦課処理の結果を確定します);
                 div.getFukaKakuteiBatchParameter().getFukaKeisanShoriNaiyo().getTxtFukaKeisanShoriNichiji().
-                        setValue(new RString(特徴仮算定賦課の基準日時.wareki().toString()));
+                        setValue(日時.toRString());
                 div.getFukaKakuteiBatchParameter().set処理名(特徴仮算定賦課確定);
                 return true;
             }
@@ -85,12 +94,17 @@ public class FukaKakuteiPanelHandler {
      */
     public boolean 処理名_普徴仮算定賦課(YMDHMS 普徴仮算定賦課の最大基準日時, YMDHMS 普徴仮算定賦課確定の基準日時) {
         if (普徴仮算定賦課の最大基準日時 == null) {
+            CommonButtonHolder.setDisabledByCommonButtonFieldName(BtnFukaKakutei, true);
             throw new ApplicationException(UrErrorMessages.実行不可.getMessage().replace((確定処理).toString()).evaluate());
         } else {
             if (普徴仮算定賦課確定の基準日時 == null) {
+                RStringBuilder 日時 = new RStringBuilder();
+                日時.append(普徴仮算定賦課の最大基準日時.getRDateTime().getDate().wareki().toDateString());
+                日時.append(new RString(" "));
+                日時.append(普徴仮算定賦課の最大基準日時.getRDateTime().getTime().toFormattedTimeString(DisplayTimeFormat.HH_mm_ss).toString());
                 div.getFukaKakuteiBatchParameter().getLblFukaKeisanKakuteiMsg().setText(普通徴収仮算定賦課処理の結果を確定します);
                 div.getFukaKakuteiBatchParameter().getFukaKeisanShoriNaiyo().getTxtFukaKeisanShoriNichiji().
-                        setValue(new RString(普徴仮算定賦課の最大基準日時.wareki().toString()));
+                        setValue(日時.toRString());
                 div.getFukaKakuteiBatchParameter().set処理名(DataPassingConverter.serialize(普徴仮算定賦課確定));
                 return true;
             }
@@ -107,18 +121,27 @@ public class FukaKakuteiPanelHandler {
      */
     public boolean 処理名_仮算定異動賦課(YMDHMS 仮算定異動賦課の基準日, YMDHMS 仮算定異動賦課確定の最大基準日時) {
         if (仮算定異動賦課の基準日 == null) {
+            CommonButtonHolder.setDisabledByCommonButtonFieldName(BtnFukaKakutei, true);
             throw new ApplicationException(UrErrorMessages.実行不可.getMessage().replace((確定処理).toString()).evaluate());
         } else {
             if (仮算定異動賦課確定の最大基準日時 == null) {
+                RStringBuilder 日時 = new RStringBuilder();
+                日時.append(仮算定異動賦課の基準日.getRDateTime().getDate().wareki().toDateString());
+                日時.append(new RString(" "));
+                日時.append(仮算定異動賦課の基準日.getRDateTime().getTime().toFormattedTimeString(DisplayTimeFormat.HH_mm_ss).toString());
                 div.getFukaKakuteiBatchParameter().getLblFukaKeisanKakuteiMsg().setText(仮算定異動賦課処理の結果を確定します);
                 div.getFukaKakuteiBatchParameter().getFukaKeisanShoriNaiyo().getTxtFukaKeisanShoriNichiji().
-                        setValue(new RString(仮算定異動賦課の基準日.toString()));
+                        setValue(日時.toRString());
                 div.getFukaKakuteiBatchParameter().set処理名(DataPassingConverter.serialize(仮算定異動賦課確定));
                 return true;
             } else if (仮算定異動賦課の基準日.isBeforeOrEquals(仮算定異動賦課確定の最大基準日時)) {
+                RStringBuilder 日時 = new RStringBuilder();
+                日時.append(仮算定異動賦課の基準日.getRDateTime().getDate().wareki().toDateString());
+                日時.append(new RString(" "));
+                日時.append(仮算定異動賦課の基準日.getRDateTime().getTime().toFormattedTimeString(DisplayTimeFormat.HH_mm_ss).toString());
                 div.getFukaKakuteiBatchParameter().getLblFukaKeisanKakuteiMsg().setText(仮算定異動賦課処理の結果を確定します);
                 div.getFukaKakuteiBatchParameter().getFukaKeisanShoriNaiyo().getTxtFukaKeisanShoriNichiji().
-                        setValue(new RString(仮算定異動賦課の基準日.wareki().toString()));
+                        setValue(日時.toRString());
                 div.getFukaKakuteiBatchParameter().set処理名(DataPassingConverter.serialize(仮算定異動賦課確定));
                 return true;
             }
@@ -135,12 +158,17 @@ public class FukaKakuteiPanelHandler {
      */
     public boolean 処理名_本算定賦課(YMDHMS 本算定賦課の基準日時, YMDHMS 本算定賦課確定の基準日時) {
         if (本算定賦課の基準日時 == null) {
+            CommonButtonHolder.setDisabledByCommonButtonFieldName(BtnFukaKakutei, true);
             throw new ApplicationException(UrErrorMessages.実行不可.getMessage().replace((確定処理).toString()).evaluate());
         } else {
             if (本算定賦課確定の基準日時 == null) {
+                RStringBuilder 日時 = new RStringBuilder();
+                日時.append(本算定賦課の基準日時.getRDateTime().getDate().wareki().toDateString());
+                日時.append(new RString(" "));
+                日時.append(本算定賦課の基準日時.getRDateTime().getTime().toFormattedTimeString(DisplayTimeFormat.HH_mm_ss).toString());
                 div.getFukaKakuteiBatchParameter().getLblFukaKeisanKakuteiMsg().setText(本算定賦課処理の結果を確定します);
                 div.getFukaKakuteiBatchParameter().getFukaKeisanShoriNaiyo().getTxtFukaKeisanShoriNichiji().
-                        setValue(new RString(本算定賦課の基準日時.wareki().toString()));
+                        setValue(日時.toRString());
                 div.getFukaKakuteiBatchParameter().set処理名(DataPassingConverter.serialize(本算定賦課確定));
                 return true;
             }
@@ -157,18 +185,27 @@ public class FukaKakuteiPanelHandler {
      */
     public boolean 処理名_異動賦課(YMDHMS 異動賦課の基準日時, YMDHMS 異動賦課確定の最大基準日時) {
         if (異動賦課の基準日時 == null) {
+            CommonButtonHolder.setDisabledByCommonButtonFieldName(BtnFukaKakutei, true);
             throw new ApplicationException(UrErrorMessages.実行不可.getMessage().replace((確定処理).toString()).evaluate());
         } else {
             if (異動賦課確定の最大基準日時 == null) {
+                RStringBuilder 日時 = new RStringBuilder();
+                日時.append(異動賦課の基準日時.getRDateTime().getDate().wareki().toDateString());
+                日時.append(new RString(" "));
+                日時.append(異動賦課の基準日時.getRDateTime().getTime().toFormattedTimeString(DisplayTimeFormat.HH_mm_ss).toString());
                 div.getFukaKakuteiBatchParameter().getLblFukaKeisanKakuteiMsg().setText(本算定);
                 div.getFukaKakuteiBatchParameter().getFukaKeisanShoriNaiyo().getTxtFukaKeisanShoriNichiji().
-                        setValue(new RString(異動賦課の基準日時.wareki().toString()));
+                        setValue(日時.toRString());
                 div.getFukaKakuteiBatchParameter().set処理名(DataPassingConverter.serialize(異動賦課確定));
                 return true;
             } else if (異動賦課確定の最大基準日時.isBeforeOrEquals(異動賦課の基準日時)) {
+                RStringBuilder 日時 = new RStringBuilder();
+                日時.append(異動賦課の基準日時.getRDateTime().getDate().wareki().toDateString());
+                日時.append(new RString(" "));
+                日時.append(異動賦課の基準日時.getRDateTime().getTime().toFormattedTimeString(DisplayTimeFormat.HH_mm_ss).toString());
                 div.getFukaKakuteiBatchParameter().getLblFukaKeisanKakuteiMsg().setText(本算定);
                 div.getFukaKakuteiBatchParameter().getFukaKeisanShoriNaiyo().getTxtFukaKeisanShoriNichiji().
-                        setValue(new RString(異動賦課の基準日時.wareki().toString()));
+                        setValue(日時.toRString());
                 div.getFukaKakuteiBatchParameter().set処理名(DataPassingConverter.serialize(異動賦課確定));
                 return true;
             } else if (異動賦課の基準日時.isBefore(異動賦課確定の最大基準日時)) {

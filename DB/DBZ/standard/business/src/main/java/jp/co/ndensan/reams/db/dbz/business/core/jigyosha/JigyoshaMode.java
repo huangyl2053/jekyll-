@@ -25,5 +25,6 @@ public class JigyoshaMode implements Serializable {
     private KaigoJigyoshaNo jigyoshaNo;
     private AtenaMeisho jigyoshaName;
     private RString jigyoshaShubetsu;
+    private RString yukoKaishiYMD;
     private List<GunshiCodeJigyoshaInputGuide> gunshiCodeJigyoshaInputGuide;
 }

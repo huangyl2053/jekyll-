@@ -14,7 +14,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxYubinNo;
 /**
  * CommonShisetsuSearch のクラスファイル
  *
- * @author 自動生成
+ * @reamsid_L DBA-0340-030 wanghui
  */
 public class CommonShisetsuSearchDiv extends Panel {
     /*
