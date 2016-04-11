@@ -15,16 +15,14 @@ import jp.co.ndensan.reams.db.dbc.business.core.syokanbaraihishikyushinseikette.
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0820025.TokuteiNyushoshaHiyoPanelDiv;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0820025.dgdTokuteiYichiran_Row;
 import jp.co.ndensan.reams.db.dbc.divcontroller.viewbox.ViewStateKeys;
-import jp.co.ndensan.reams.db.dbc.divcontroller.viewbox.shoukanharaihishinseikensaku.ShoukanharaihishinseimeisaikensakuParameter;
 import jp.co.ndensan.reams.db.dbc.divcontroller.viewbox.shoukanharaihishinseikensaku.ShoukanharaihishinseikensakuParameter;
+import jp.co.ndensan.reams.db.dbc.divcontroller.viewbox.shoukanharaihishinseikensaku.ShoukanharaihishinseimeisaikensakuParameter;
 import jp.co.ndensan.reams.db.dbc.service.core.syokanbaraihishikyushinseikette.SyokanbaraihiShikyuShinseiKetteManager;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ServiceKomokuCode;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ServiceShuruiCode;
-import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.kyotsu.SaibanHanyokeyName;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.ServiceCodeInputCommonChildDiv.ServiceCodeInputCommonChildDivDiv;
-import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -33,10 +31,11 @@ import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.ui.binding.RowState;
 import jp.co.ndensan.reams.uz.uza.ui.binding.propertyenum.IconName;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
-import jp.co.ndensan.reams.uz.uza.util.Saiban;
 
 /**
  * 償還払い費支給申請決定_サービス提供証明書(特定入所者費用）のハンドラクラスです。
+ *
+ * @reamsid_L DBC-1030-120 wangkanglei
  */
 public class TokuteiNyushoshaHiyoPanelHandler {
 
@@ -48,9 +47,10 @@ public class TokuteiNyushoshaHiyoPanelHandler {
     private static final RString 削除 = new RString("削除");
     private static final RString 登録 = new RString("登録");
     private static final int SIX = 6;
+    private static final RString FORMAT = new RString("%02d");
 
     /**
-     * TokuteiNyushoshaHiyoPanelHandler
+     * コンストラクタです。
      *
      * @param div TokuteiNyushoshaHiyoPanelDiv
      */
@@ -59,7 +59,7 @@ public class TokuteiNyushoshaHiyoPanelHandler {
     }
 
     /**
-     * 申請共通エリア
+     * 申請共通エリアのメソッドます。
      *
      * @param サービス年月 FlexibleYearMonth
      * @param 事業者番号 JigyoshaNo
@@ -81,7 +81,7 @@ public class TokuteiNyushoshaHiyoPanelHandler {
     }
 
     /**
-     * ボタンを制御
+     * ボタンを制御のメソッドます。
      *
      * @param shikibetsuNoKanri ShikibetsuNoKanri
      */
@@ -280,7 +280,7 @@ public class TokuteiNyushoshaHiyoPanelHandler {
     }
 
     /**
-     * 特定入所者費用一覧グリッドの設定
+     * 特定入所者費用一覧グリッド設定のメソッドます。
      *
      * @param list List<ShokanTokuteiNyushoshaKaigoServiceHiyo>
      */
@@ -310,7 +310,7 @@ public class TokuteiNyushoshaHiyoPanelHandler {
     }
 
     /**
-     * 特定入所者費用一覧の合計エリアの設定
+     * 特定入所者費用一覧の合計エリア設定のメソッドます。
      */
     public void set特定入所者費用一覧の合計エリア() {
         List<dgdTokuteiYichiran_Row> rowList = div.getPanelTokutei().getDgdTokuteiYichiran().getDataSource();
@@ -351,7 +351,7 @@ public class TokuteiNyushoshaHiyoPanelHandler {
     }
 
     /**
-     * 特定入所者費登録エリアの設定
+     * 特定入所者費登録エリア設定のメソッドます。
      *
      * @param row dgdTokuteiYichiran_Row
      */
@@ -374,7 +374,7 @@ public class TokuteiNyushoshaHiyoPanelHandler {
     }
 
     /**
-     * 特定入所者費登録エリアのclear
+     * 特定入所者費登録エリアclearのメソッドます。
      */
     public void clear特定入所者費登録エリア() {
         ServiceCodeInputCommonChildDivDiv serviceCodeInputDiv = (ServiceCodeInputCommonChildDivDiv) div.getPanelTokutei()
@@ -390,7 +390,7 @@ public class TokuteiNyushoshaHiyoPanelHandler {
     }
 
     /**
-     * 特定入所者費登録エリアのcancel
+     * 特定入所者費登録エリアcancelのメソッドます。
      */
     public void cancel特定入所者費登録エリア() {
         clear特定入所者費登録エリア();
@@ -398,7 +398,7 @@ public class TokuteiNyushoshaHiyoPanelHandler {
     }
 
     /**
-     * 計算結果
+     * 計算結果のメソッドます。
      */
     public void click計算結果() {
         if (div.getPanelTokutei().getPanelMeisai().getTxtHyojyuntanka().getValue() != null
@@ -412,7 +412,7 @@ public class TokuteiNyushoshaHiyoPanelHandler {
     }
 
     /**
-     * 選択行のデータ
+     * 選択行のデータのメソッドます。
      *
      * @return dgdTokuteiYichiran_Row
      */
@@ -422,7 +422,7 @@ public class TokuteiNyushoshaHiyoPanelHandler {
     }
 
     /**
-     * 特定入所者費登録エリアの「確定する」ボタン
+     * 特定入所者費登録エリアの「確定する」ボタンのメソッドます。
      *
      * @param dgdRow dgdTokuteiYichiran_Row
      */
@@ -531,7 +531,7 @@ public class TokuteiNyushoshaHiyoPanelHandler {
     }
 
     /**
-     * 内容変更状態
+     * 内容変更状態のメソッドます。
      *
      * @return boolean
      */
@@ -547,7 +547,7 @@ public class TokuteiNyushoshaHiyoPanelHandler {
     }
 
     /**
-     * 「申請を保存する」ボタン
+     * 「申請を保存する」ボタンのメソッドます。
      */
     public void 保存処理() {
         ShoukanharaihishinseimeisaikensakuParameter meisaiPar = ViewStateHolder.get(ViewStateKeys.償還払費申請明細検索キー,
@@ -573,8 +573,8 @@ public class TokuteiNyushoshaHiyoPanelHandler {
                     連番 = Integer.valueOf(entity.get連番().toString());
                 }
             }
-            特定入所者費用List = save特定入所者費用(map, 特定入所者費用List, 被保険者番号, サービス年月, 事業者番号, 様式番号,
-                    明細番号, 連番);
+            特定入所者費用List = save特定入所者費用(map, 特定入所者費用List, 被保険者番号, サービス年月, 事業者番号, 整理番号,
+                    様式番号, 明細番号, 連番);
             int 合計 = div.getPanelTokutei().getTxtHiyogakuTotal().getValue().intValue();
             ShokanKihonParameter parameter = ShokanKihonParameter.createSelectByKeyParam(
                     被保険者番号, サービス年月, 整理番号, 事業者番号, 様式番号, 明細番号, 合計);
@@ -589,6 +589,7 @@ public class TokuteiNyushoshaHiyoPanelHandler {
             HihokenshaNo 被保険者番号,
             FlexibleYearMonth サービス年月,
             JigyoshaNo 事業者番号,
+            RString 整理番号,
             RString 様式番号,
             RString 明細番号,
             int 連番) {
@@ -603,16 +604,14 @@ public class TokuteiNyushoshaHiyoPanelHandler {
                 特定入所者費用List.add(entityDeleted);
             } else if (RowState.Added.equals(dgdRow.getRowState())) {
                 連番 = 連番 + 1;
-                RString 新整理番号 = Saiban.get(SubGyomuCode.DBC介護給付, SaibanHanyokeyName.償還整理番号.
-                        getコード()).nextString();
                 ShokanTokuteiNyushoshaKaigoServiceHiyo entityAdded = new ShokanTokuteiNyushoshaKaigoServiceHiyo(
                         被保険者番号,
                         サービス年月,
-                        新整理番号,
+                        整理番号,
                         事業者番号,
                         様式番号,
                         明細番号,
-                        new RString(String.format("%02d", 連番))).createBuilderForEdit().build();
+                        new RString(String.format(FORMAT.toString(), 連番))).createBuilderForEdit().build();
                 entityAdded = buildShokanTokuteiNyushoshaKaigoServiceHiyo(entityAdded, dgdRow);
                 特定入所者費用List.add(entityAdded);
             }
@@ -683,7 +682,7 @@ public class TokuteiNyushoshaHiyoPanelHandler {
     }
 
     /**
-     * パラメータ設定
+     * パラメータ設定のメソッドます。
      */
     public void putViewState() {
         ViewStateHolder.put(ViewStateKeys.処理モード, ViewStateHolder.get(ViewStateKeys.処理モード, RString.class));
@@ -700,7 +699,7 @@ public class TokuteiNyushoshaHiyoPanelHandler {
     }
 
     /**
-     * readOnly特定入所者費登録エリア
+     * readOnly特定入所者費登録エリアのメソッドます。
      *
      * @param flag boolean
      */
