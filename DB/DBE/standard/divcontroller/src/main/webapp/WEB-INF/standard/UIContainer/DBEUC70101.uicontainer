@@ -1,0 +1,32 @@
+﻿{
+ "uiContainerName": "DBEUC70101",
+ "displayWizard": false,
+ "subGyomuCode": "DBE",
+ "steps": [
+  {
+   "id": 1,
+   "name": "報告資料発行",
+   "transitionList": [
+    {
+     "id": "1",
+     "type": "start",
+     "condition": "",
+     "toLayoutSubGyomuCode": "DBE",
+     "toLayoutName": "DBE7010001",
+     "toLayoutTitle": "報告資料",
+     "toState": "default"
+    },
+    {
+     "id": "2",
+     "type": "end",
+     "layoutSubGyomuCode": "DBE",
+     "layoutName": "DBE7010001",
+     "layoutTitle": "報告資料",
+     "eventName": "完了処理",
+     "destroy": false,
+     "condition": ""
+    }
+   ]
+  }
+ ]
+}
