@@ -11,6 +11,8 @@ import jp.co.ndensan.reams.uz.uza.math.Decimal;
 
 /**
  * 償還払支払結果Entity結果
+ *
+ * @reamsid_L DBC-1020-040 zhangrui
  */
 public class SokanbaraiShiharaiKekkaResult implements Serializable {
 

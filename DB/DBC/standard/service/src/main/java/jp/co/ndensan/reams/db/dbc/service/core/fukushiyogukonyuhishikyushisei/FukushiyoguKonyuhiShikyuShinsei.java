@@ -73,6 +73,8 @@ import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
 
 /**
  * 福祉用具購入費支給申請のビジネスです。
+ *
+ * @reamsid_L DBC-1020-040 zhangrui
  */
 public class FukushiyoguKonyuhiShikyuShinsei {
 
