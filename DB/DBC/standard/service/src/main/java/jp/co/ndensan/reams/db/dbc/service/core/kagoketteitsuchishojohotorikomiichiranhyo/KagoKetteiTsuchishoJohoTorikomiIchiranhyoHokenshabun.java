@@ -26,6 +26,8 @@ import jp.co.ndensan.reams.uz.uza.util.editor.DecimalFormatter;
 
 /**
  * 過誤決定通知書情報取込一覧表（保険者分）帳票用データ作成です
+ *
+ * @reamsid_L DBC-0980-310 xupeng
  */
 public class KagoKetteiTsuchishoJohoTorikomiIchiranhyoHokenshabun {
 
