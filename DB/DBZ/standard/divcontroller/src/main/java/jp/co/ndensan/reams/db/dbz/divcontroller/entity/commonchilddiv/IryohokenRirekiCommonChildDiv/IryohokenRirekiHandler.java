@@ -1,7 +1,7 @@
- /*
+/*
  * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ * To change this template file, choose Tools | Templates and open the
+ * template in the editor.
  */
 package jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.IryohokenRirekiCommonChildDiv;
 
@@ -16,6 +16,7 @@ import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.CodeShubetsu;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
+import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
@@ -130,22 +131,28 @@ public class IryohokenRirekiHandler {
         List<dgIryohokenIchiran_Row> 医療保険情報List = requestDiv.getDgIryohokenIchiran().getDataSource();
         Models<IryohokenKanyuJokyoIdentifier, IryohokenKanyuJokyo> 医療保険情報
                 = (Models<IryohokenKanyuJokyoIdentifier, IryohokenKanyuJokyo>) ViewStateHolder.get(
-                        ViewStateKeys.介護認定審査会委員情報更新, Models.class);
+                        ViewStateKeys.医療保険情報, Models.class);
 
         List<IryohokenKanyuJokyo> 医療保険情報更新List = new ArrayList<>();
         for (dgIryohokenIchiran_Row row : 医療保険情報List) {
-            IryohokenKanyuJokyo kanyuJokyo = 医療保険情報.get(new IryohokenKanyuJokyoIdentifier(new ShikibetsuCode(row.getDefaultDataName1()),
+            IryohokenKanyuJokyo kanyuJokyo = 医療保険情報.get(new IryohokenKanyuJokyoIdentifier(new ShikibetsuCode(row.getDefaultDataName0()),
                     row.getDefaultDataName9().getValue().intValue()));
             IryohokenKanyuJokyoBuilder builder = kanyuJokyo.createBuilderForEdit();
             if (状態_追加.equals(row.getDefaultDataName2())) {
-                builder.set医療保険加入年月日(new FlexibleDate(row.getDefaultDataName3()));
-                builder.set医療保険種別コード(row.getDefaultDataName5());
-                builder.set医療保険者名称(row.getDefaultDataName6());
+                builder.set医療保険加入年月日(new FlexibleDate(new RDate(row.getDefaultDataName3().toString()).toDateString()));
+                builder.set医療保険脱退年月日(new FlexibleDate(new RDate(row.getDefaultDataName4().toString()).toDateString()));
+                builder.set医療保険種別コード(row.getDefaultDataName11());
+                builder.set医療保険者番号(row.getDefaultDataName12());
+                builder.set医療保険者名称(row.getDefaultDataName13());
+                builder.set医療保険記号番号(row.getDefaultDataName7());
                 kanyuJokyo.toEntity().setState(EntityDataState.Added);
             } else if (状態_修正.equals(row.getDefaultDataName2())) {
-                builder.set医療保険加入年月日(new FlexibleDate(row.getDefaultDataName3()));
-                builder.set医療保険種別コード(row.getDefaultDataName5());
-                builder.set医療保険者名称(row.getDefaultDataName6());
+                builder.set医療保険加入年月日(new FlexibleDate(new RDate(row.getDefaultDataName3().toString()).toDateString()));
+                builder.set医療保険脱退年月日(new FlexibleDate(new RDate(row.getDefaultDataName4().toString()).toDateString()));
+                builder.set医療保険種別コード(row.getDefaultDataName11());
+                builder.set医療保険者番号(row.getDefaultDataName12());
+                builder.set医療保険者名称(row.getDefaultDataName13());
+                builder.set医療保険記号番号(row.getDefaultDataName7());
                 kanyuJokyo.toEntity().setState(EntityDataState.Modified);
             } else if (状態_削除.equals(row.getDefaultDataName2())) {
                 kanyuJokyo.toEntity().setState(EntityDataState.Deleted);

@@ -173,6 +173,10 @@ public class IryohokenRirekiCommonChildDiv {
             保険者名.append(new RString(":"));
             保険者名.append(requestDiv.getPnlIryohokenJoho().getTxtHokensyaMeisho().getValue());
             ichiran_Row.setDefaultDataName10(保険者名.toRString());
+            ichiran_Row.setDefaultDataName11(requestDiv.getPnlIryohokenJoho().getDdlSyubetsu().getSelectedKey());
+            ichiran_Row.setDefaultDataName12(requestDiv.getPnlIryohokenJoho().getTxtHokensyaKodo().getValue());
+            ichiran_Row.setDefaultDataName13(requestDiv.getPnlIryohokenJoho().getTxtHokensyaMeisho().getValue());
+
             ichiran_Row.setDefaultDataName0(医療保険情報_識別コード);
             ichiran_Row.setDefaultDataName2(状態_追加);
             list.add(count, ichiran_Row);
@@ -198,6 +202,9 @@ public class IryohokenRirekiCommonChildDiv {
                 ichiran_Row.setDefaultDataName8(requestDiv.getPnlIryohokenJoho().getTxtHokensyaKodo().getValue());
                 ichiran_Row.setDefaultDataName6(requestDiv.getPnlIryohokenJoho().getTxtHokensyaMeisho().getValue());
                 ichiran_Row.setDefaultDataName7(requestDiv.getPnlIryohokenJoho().getTxtKigoBango().getValue());
+                ichiran_Row.setDefaultDataName11(requestDiv.getPnlIryohokenJoho().getDdlSyubetsu().getSelectedKey());
+                ichiran_Row.setDefaultDataName12(requestDiv.getPnlIryohokenJoho().getTxtHokensyaKodo().getValue());
+                ichiran_Row.setDefaultDataName13(requestDiv.getPnlIryohokenJoho().getTxtHokensyaMeisho().getValue());
                 RStringBuilder 保険者名 = new RStringBuilder();
                 保険者名.append(requestDiv.getPnlIryohokenJoho().getTxtHokensyaKodo().getValue());
                 保険者名.append(new RString(":"));
