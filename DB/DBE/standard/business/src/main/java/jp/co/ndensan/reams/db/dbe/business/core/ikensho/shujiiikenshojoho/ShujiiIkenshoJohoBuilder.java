@@ -20,6 +20,8 @@ import jp.co.ndensan.reams.uz.uza.util.Models;
 
 /**
  * {@link ShujiiIkenshoJoho}の編集を行うビルダークラスです。
+ *
+ * @reamsid_L DBE-9999-011 sunhaidi
  */
 public class ShujiiIkenshoJohoBuilder {
 

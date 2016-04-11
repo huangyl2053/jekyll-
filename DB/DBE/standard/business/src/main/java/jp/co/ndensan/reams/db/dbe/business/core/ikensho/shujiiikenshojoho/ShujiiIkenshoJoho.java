@@ -30,6 +30,8 @@ import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 
 /**
  * 要介護認定主治医意見書情報を管理するクラスです。
+ *
+ * @reamsid_L DBE-9999-011 sunhaidi
  */
 public class ShujiiIkenshoJoho
         extends ModelBase<ShujiiIkenshoJohoIdentifier, DbT5302ShujiiIkenshoJohoEntity, ShujiiIkenshoJoho>

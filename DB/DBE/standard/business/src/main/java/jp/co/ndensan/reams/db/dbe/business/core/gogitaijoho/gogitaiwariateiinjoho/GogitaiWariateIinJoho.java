@@ -26,6 +26,8 @@ import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 
 /**
  * 合議体割当委員情報を管理するクラスです。
+ *
+ * @reamsid_L DBE-9999-011 sunhaidi
  */
 public class GogitaiWariateIinJoho
         extends ModelBase<GogitaiWariateIinJohoIdentifier, DbT5593GogitaiWariateIinJohoEntity, GogitaiWariateIinJoho>

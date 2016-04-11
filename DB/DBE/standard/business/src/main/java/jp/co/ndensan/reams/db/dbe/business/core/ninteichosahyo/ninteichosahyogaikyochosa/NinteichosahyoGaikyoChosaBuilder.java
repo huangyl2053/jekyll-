@@ -32,6 +32,8 @@ import jp.co.ndensan.reams.uz.uza.util.Models;
 
 /**
  * {@link NinteichosahyoGaikyoChosa}の編集を行うビルダークラスです。
+ *
+ * @reamsid_L DBE-9999-011 sunhaidi
  */
 public class NinteichosahyoGaikyoChosaBuilder {
 
@@ -53,12 +55,9 @@ public class NinteichosahyoGaikyoChosaBuilder {
      * @param gaikyoTokki {@link Models<GaikyoTokkiIdentifier, GaikyoTokki>}
      * @param ninteichosahyoKihonChosa {@link Models<NinteichosahyoKihonChosaIdentifier, NinteichosahyoKihonChosa>}
      * @param ninteichosahyoKinyuItem {@link Models<NinteichosahyoKinyuItemIdentifier, NinteichosahyoKinyuItem>}
-     * @param ninteichosahyoServiceJokyo
-     * {@link Models<NinteichosahyoServiceJokyoIdentifier, NinteichosahyoServiceJokyo>}
-     * @param ninteichosahyoServiceJokyoFlag
-     * {@link Models<NinteichosahyoServiceJokyoFlagIdentifier, NinteichosahyoServiceJokyoFlag>}
-     * @param ninteichosahyoShisetsuRiyo
-     * {@link Models<NinteichosahyoShisetsuRiyoIdentifier, NinteichosahyoShisetsuRiyo>}
+     * @param ninteichosahyoServiceJokyo {@link Models<NinteichosahyoServiceJokyoIdentifier, NinteichosahyoServiceJokyo>}
+     * @param ninteichosahyoServiceJokyoFlag {@link Models<NinteichosahyoServiceJokyoFlagIdentifier, NinteichosahyoServiceJokyoFlag>}
+     * @param ninteichosahyoShisetsuRiyo {@link Models<NinteichosahyoShisetsuRiyoIdentifier, NinteichosahyoShisetsuRiyo>}
      * @param ninteichosahyoTokkijiko {@link Models<NinteichosahyoTokkijikoIdentifier, NinteichosahyoTokkijiko>}
      *
      */
