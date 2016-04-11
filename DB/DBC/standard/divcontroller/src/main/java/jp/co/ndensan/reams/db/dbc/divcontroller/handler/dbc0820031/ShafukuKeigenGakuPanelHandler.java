@@ -34,6 +34,8 @@ import jp.co.ndensan.reams.uz.uza.util.Saiban;
 
 /**
  * 償還払い費支給申請決定_サービス提供証明書(社福軽減額）のクラスです。
+ *
+ * @reamsid_L DBC-1030-080 xuhao
  */
 public final class ShafukuKeigenGakuPanelHandler {
 
