@@ -13,6 +13,8 @@ import lombok.Getter;
 
 /**
  * 償還払費申請検索キーParameter
+ *
+ * @reamsid_L DBC-1030-160 xupeng
  */
 @SuppressWarnings("PMD.UnusedPrivateField")
 @Getter
