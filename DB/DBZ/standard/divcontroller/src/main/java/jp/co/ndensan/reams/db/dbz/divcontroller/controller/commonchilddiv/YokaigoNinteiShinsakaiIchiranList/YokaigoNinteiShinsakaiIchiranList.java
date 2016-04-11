@@ -42,6 +42,7 @@ public class YokaigoNinteiShinsakaiIchiranList {
      * @return 介護認定審査会共有一覧Divを持つResponseData
      */
     public ResponseData<YokaigoNinteiShinsakaiIchiranListDiv> onClick_BtnKensaku(YokaigoNinteiShinsakaiIchiranListDiv div) {
+        div.getDgShinsakaiIchiran().getDataSource().clear();
         モード = ViewStateHolder.get(ViewStateKeys.モード, RString.class);
         RDate 表示期間From = div.getTxtHyojiKikanFrom().getValue();
         RDate 表示期間To = div.getTxtHyojiKikanTo().getValue();

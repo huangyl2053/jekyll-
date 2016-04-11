@@ -14,7 +14,6 @@ import jp.co.ndensan.reams.db.dbz.definition.core.shinsakai.ShinsakaiShinchokuJo
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.YokaigoNinteiShinsakaiIchiranList.YokaigoNinteiShinsakaiIchiranList.YokaigoNinteiShinsakaiIchiranListDiv;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.YokaigoNinteiShinsakaiIchiranList.YokaigoNinteiShinsakaiIchiranList.dgShinsakaiIchiran_Row;
 import jp.co.ndensan.reams.db.dbz.divcontroller.viewbox.ViewStateKeys;
-import jp.co.ndensan.reams.db.dbz.entity.db.relate.shinsakaikaisai.ShinsakaiKaisaiRelateEntity;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RTime;
@@ -167,34 +166,37 @@ public class YokaigoNinteiShinsakaiIchiranListHandler {
     public void getSelectedGridLine() {
         ShinsakaiKaisaiMode mode = new ShinsakaiKaisaiMode();
         List<ShinsakaiKaisai> shinsakaiKaisaiList = new ArrayList<>();
-        ShinsakaiKaisaiRelateEntity entity = new ShinsakaiKaisaiRelateEntity();
         List<dgShinsakaiIchiran_Row> rowList = div.getDgShinsakaiIchiran().getDataSource();
-        for (dgShinsakaiIchiran_Row row : rowList) {
-            if (row.getId() == Integer.valueOf(div.getHdnSelectedGridLine().toString())) {
-                entity.setShinsakaiKaisaiYoteiYMD(row.getKaisaiYoteiDate().getValue());
-                entity.setShinsakaiKaishiYoteiTime(new RString(row.getYoteiKaishiTime().getValue().toString()));
-                entity.setShinsakaiShuryoYoteiTime(new RString(row.getYoteiShuryoTime().getValue().toString()));
-                entity.set合議体名称(row.getShinsakaiMeisho());
-                entity.setGogitaiMei(row.getGogitaiMeisho());
-                entity.set種類(row.getShurui());
-                entity.setShinsakaiKaisaiBashoName(row.getShinsakaiKaijo());
-                entity.setShinsakaiKaisaiYMD(row.getKaisaiDay().getValue());
-                entity.setShinsakaiKaishiTime(new RString(row.getKaisaiTime().getValue().toString()));
-                entity.setShinsakaiShuryoTime(new RString(row.getShuryoTime().getValue().toString()));
-                entity.setShinsakaiYoteiTeiin(row.getYoteiTeiin().getValue());
-                entity.setShinsakaiWariateZumiNinzu(row.getWariateNinzu().getValue());
-                entity.setShinsakaiJisshiNinzu(row.getTaishoNinzu().getValue());
-                entity.set音声記録(row.getOnseiKiroku());
-                entity.setMobileDataOutputYMD(row.getDataShutsuryoku().getValue());
-                entity.setShinsakaiWariateZumiNinzu(row.getWariateNinzu().getValue());
-                entity.setShiryoSakuseiZumiFlag(is資料作成済区分(row));
-                entity.setShinsakaiShinchokuJokyo(get介護認定審査会進捗状況(row));
-                entity.setGogitaiDummyFlag(row.getDummyFlag());
-                shinsakaiKaisaiList.add(new ShinsakaiKaisai(entity));
+        if (rowList != null && !rowList.isEmpty() && !RString.isNullOrEmpty(div.getHdnSelectedGridLine())) {
+            for (dgShinsakaiIchiran_Row row : rowList) {
+                if (row.getId() == Integer.valueOf(div.getHdnSelectedGridLine().toString())) {
+                    ShinsakaiKaisai shinsakaiKaisai = new ShinsakaiKaisai();
+                    shinsakaiKaisai = shinsakaiKaisai.createBuilderForEdit().set介護認定審査会開催予定年月日(row.getKaisaiYoteiDate().getValue())
+                            .set介護認定審査会開始予定時刻(new RString(row.getYoteiKaishiTime().getValue().toString()))
+                            .set介護認定審査会終了予定時刻(new RString(row.getYoteiShuryoTime().getValue().toString()))
+                            .set編集合議体名称(row.getShinsakaiMeisho())
+                            .set合議体名称(row.getGogitaiMeisho())
+                            .set種類(row.getShurui())
+                            .set介護認定審査会開催場所名称(row.getShinsakaiKaijo())
+                            .set介護認定審査会開催年月日(row.getKaisaiDay().getValue())
+                            .set介護認定審査会開始時刻(new RString(row.getKaisaiTime().getValue().toString()))
+                            .set介護認定審査会終了時刻(new RString(row.getShuryoTime().getValue().toString()))
+                            .set介護認定審査会予定定員(row.getYoteiTeiin().getValue())
+                            .set介護認定審査会割当済み人数(row.getWariateNinzu().getValue())
+                            .set介護認定審査会実施人数(row.getTaishoNinzu().getValue())
+                            .set音声記録(row.getOnseiKiroku())
+                            .setモバイルデータ出力年月日(row.getDataShutsuryoku().getValue())
+                            .set資料作成済フラグ(is資料作成済区分(row))
+                            .set介護認定審査会進捗状況(get介護認定審査会進捗状況(row))
+                            .setダミーフラグ(row.getDummyFlag()).build();
+                    shinsakaiKaisaiList.add(shinsakaiKaisai);
+                }
             }
+            mode.set審査会一覧Grid(shinsakaiKaisaiList);
+            ViewStateHolder.put(ViewStateKeys.介護認定審査会共有一覧_選択審査会一覧, mode);
+        } else {
+            ViewStateHolder.put(ViewStateKeys.介護認定審査会共有一覧_選択審査会一覧, null);
         }
-        mode.set審査会一覧Grid(shinsakaiKaisaiList);
-        ViewStateHolder.put(ViewStateKeys.介護認定審査会共有一覧_選択審査会一覧, mode);
     }
 
     private boolean is資料作成済区分(dgShinsakaiIchiran_Row row) {

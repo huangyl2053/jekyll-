@@ -30,6 +30,13 @@ public class ShinsakaiKaisai implements Serializable {
     }
 
     /**
+     * コンストラクタです.
+     */
+    public ShinsakaiKaisai() {
+        entity = new ShinsakaiKaisaiRelateEntity();
+    }
+
+    /**
      * 介護認定審査会開催予定年月日を取得します。
      *
      * @return 介護認定審査会開催予定年月日
@@ -189,5 +196,14 @@ public class ShinsakaiKaisai implements Serializable {
      */
     public boolean isダミーフラグ() {
         return entity.isGogitaiDummyFlag();
+    }
+
+    /**
+     * このクラスの編集を行うBuilderを取得します。
+     *
+     * @return Builder
+     */
+    public ShinsakaiKaisaiBuilder createBuilderForEdit() {
+        return new ShinsakaiKaisaiBuilder(entity);
     }
 }
