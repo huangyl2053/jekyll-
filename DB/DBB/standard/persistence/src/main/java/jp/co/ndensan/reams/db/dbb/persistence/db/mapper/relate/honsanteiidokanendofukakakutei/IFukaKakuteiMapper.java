@@ -15,7 +15,9 @@ import jp.co.ndensan.reams.ur.urc.entity.db.basic.shuno.chotei.UrT0707ChoteiJoky
 import jp.co.ndensan.reams.ur.urc.entity.db.basic.shuno.shunokanri.UrT0700ShunoKanriEntity;
 
 /**
- * 本算定異動（過年度）賦課確定（削除込）用マッパーです
+ * 本算定異動（過年度）賦課確定（削除込）用マッパーです。
+ *
+ * @reamsid_L DBB-0680-020 wangkanglei
  */
 public interface IFukaKakuteiMapper {
 

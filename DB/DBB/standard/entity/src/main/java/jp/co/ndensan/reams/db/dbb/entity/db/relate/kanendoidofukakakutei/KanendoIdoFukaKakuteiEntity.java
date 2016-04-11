@@ -14,7 +14,9 @@ import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.util.db.IDbAccessable;
 
 /**
- * 過年度異動賦課確定情報
+ * 過年度異動賦課確定情報のクラスです。
+ *
+ * @reamsid_L DBB-0680-020 wangkanglei
  */
 @lombok.Getter
 @lombok.Setter
