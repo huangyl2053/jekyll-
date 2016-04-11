@@ -24,6 +24,8 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 
 /**
  * 償還払い状況照会_口座情報のクラス
+ *
+ * @reamsid_L DBC-1010-080 gongliang
  */
 public class KouzaInfo {
 

@@ -11,6 +11,8 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
  * 償還払い状況照会_口座情報コンストラクタです。
+ *
+ * @reamsid_L DBC-1010-080 gongliang
  */
 public class KouzaInfoHandler {
 
