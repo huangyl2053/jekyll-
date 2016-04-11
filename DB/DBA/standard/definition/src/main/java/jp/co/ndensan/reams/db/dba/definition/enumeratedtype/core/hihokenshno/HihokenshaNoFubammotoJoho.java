@@ -6,6 +6,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 /**
  * 被保険者番号付番元情報を表す列挙型です。
  *
+ * @reamsid_L DBA-9999-023 liangbc
  */
 public enum HihokenshaNoFubammotoJoho {
 
