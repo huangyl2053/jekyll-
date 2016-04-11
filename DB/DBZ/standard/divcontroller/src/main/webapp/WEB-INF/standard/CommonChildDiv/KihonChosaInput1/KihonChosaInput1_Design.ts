@@ -8,10 +8,6 @@ module DBZ {
 
         export class Events {
 
-            public static onClick_btnOpenDialog(): string {
-                return "onClick_btnOpenDialog";
-            }
-
             public static onClick_chkMahiChange(): string {
                 return "onClick_chkMahiChange";
             }

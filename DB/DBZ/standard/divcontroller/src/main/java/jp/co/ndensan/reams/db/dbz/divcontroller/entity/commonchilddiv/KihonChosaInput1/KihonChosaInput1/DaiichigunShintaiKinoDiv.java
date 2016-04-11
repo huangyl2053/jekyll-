@@ -4,19 +4,23 @@ package jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.KihonChos
  * このファイルへの変更は、再生成時には損失するため
  * 不正な動作の原因になります。
  */
+
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.ui.binding.*;
+import jp.co.ndensan.reams.uz.uza.ui.binding.ButtonDialog;
+import jp.co.ndensan.reams.uz.uza.ui.binding.CheckBoxList;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
+import jp.co.ndensan.reams.uz.uza.ui.binding.RadioButton;
 
 /**
- * DaiichigunShintaiKino のクラスファイル 
- * 
- * @author 自動生成
+ * DaiichigunShintaiKino のクラスファイル
+ *
+ * @reamsid_L DBE-3000-090 wangjie2
  */
 public class DaiichigunShintaiKinoDiv extends Panel {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-01-15_09-59-03">
+
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -339,7 +343,7 @@ public class DaiichigunShintaiKinoDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setBtnMahi(ButtonDialog btnMahi) {
+    public void setBtnMahi(ButtonDialog btnMahi) {
         this.getMahi().setBtnMahi(btnMahi);
     }
 
@@ -349,7 +353,7 @@ public class DaiichigunShintaiKinoDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setChkMahi(CheckBoxList chkMahi) {
+    public void setChkMahi(CheckBoxList chkMahi) {
         this.getMahi().setChkMahi(chkMahi);
     }
 
@@ -359,7 +363,7 @@ public class DaiichigunShintaiKinoDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setBtnKoshuku(ButtonDialog btnKoshuku) {
+    public void setBtnKoshuku(ButtonDialog btnKoshuku) {
         this.getKoshuku().setBtnKoshuku(btnKoshuku);
     }
 
@@ -369,7 +373,7 @@ public class DaiichigunShintaiKinoDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setChkKoshuku(CheckBoxList chkKoshuku) {
+    public void setChkKoshuku(CheckBoxList chkKoshuku) {
         this.getKoshuku().setChkKoshuku(chkKoshuku);
     }
 
@@ -379,7 +383,7 @@ public class DaiichigunShintaiKinoDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setBtnNeKaeri(ButtonDialog btnNeKaeri) {
+    public void setBtnNeKaeri(ButtonDialog btnNeKaeri) {
         this.getNeKaeri().setBtnNeKaeri(btnNeKaeri);
     }
 
@@ -389,7 +393,7 @@ public class DaiichigunShintaiKinoDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setRadNeKaeri(RadioButton radNeKaeri) {
+    public void setRadNeKaeri(RadioButton radNeKaeri) {
         this.getNeKaeri().setRadNeKaeri(radNeKaeri);
     }
 
@@ -399,7 +403,7 @@ public class DaiichigunShintaiKinoDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setBtnOkiAgari(ButtonDialog btnOkiAgari) {
+    public void setBtnOkiAgari(ButtonDialog btnOkiAgari) {
         this.getOkiAgari().setBtnOkiAgari(btnOkiAgari);
     }
 
@@ -409,7 +413,7 @@ public class DaiichigunShintaiKinoDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setRadOkiAgari(RadioButton radOkiAgari) {
+    public void setRadOkiAgari(RadioButton radOkiAgari) {
         this.getOkiAgari().setRadOkiAgari(radOkiAgari);
     }
 
@@ -419,7 +423,7 @@ public class DaiichigunShintaiKinoDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setBtnZai(ButtonDialog btnZai) {
+    public void setBtnZai(ButtonDialog btnZai) {
         this.getZai().setBtnZai(btnZai);
     }
 
@@ -429,7 +433,7 @@ public class DaiichigunShintaiKinoDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setRadZai(RadioButton radZai) {
+    public void setRadZai(RadioButton radZai) {
         this.getZai().setRadZai(radZai);
     }
 
@@ -439,7 +443,7 @@ public class DaiichigunShintaiKinoDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setBtnRyoAshi(ButtonDialog btnRyoAshi) {
+    public void setBtnRyoAshi(ButtonDialog btnRyoAshi) {
         this.getRyoAshi().setBtnRyoAshi(btnRyoAshi);
     }
 
@@ -449,7 +453,7 @@ public class DaiichigunShintaiKinoDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setRadRyoAshi(RadioButton radRyoAshi) {
+    public void setRadRyoAshi(RadioButton radRyoAshi) {
         this.getRyoAshi().setRadRyoAshi(radRyoAshi);
     }
 
@@ -459,7 +463,7 @@ public class DaiichigunShintaiKinoDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setBtnBuko(ButtonDialog btnBuko) {
+    public void setBtnBuko(ButtonDialog btnBuko) {
         this.getBuko().setBtnBuko(btnBuko);
     }
 
@@ -469,7 +473,7 @@ public class DaiichigunShintaiKinoDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setRadBuko(RadioButton radBuko) {
+    public void setRadBuko(RadioButton radBuko) {
         this.getBuko().setRadBuko(radBuko);
     }
 
@@ -479,7 +483,7 @@ public class DaiichigunShintaiKinoDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setBtnTachiAgari(ButtonDialog btnTachiAgari) {
+    public void setBtnTachiAgari(ButtonDialog btnTachiAgari) {
         this.getTachiAgari().setBtnTachiAgari(btnTachiAgari);
     }
 
@@ -489,7 +493,7 @@ public class DaiichigunShintaiKinoDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setRadTachiAgari(RadioButton radTachiAgari) {
+    public void setRadTachiAgari(RadioButton radTachiAgari) {
         this.getTachiAgari().setRadTachiAgari(radTachiAgari);
     }
 
@@ -499,7 +503,7 @@ public class DaiichigunShintaiKinoDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setBtnKataAshi(ButtonDialog btnKataAshi) {
+    public void setBtnKataAshi(ButtonDialog btnKataAshi) {
         this.getKataAshi().setBtnKataAshi(btnKataAshi);
     }
 
@@ -509,7 +513,7 @@ public class DaiichigunShintaiKinoDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setRadKataAshi(RadioButton radKataAshi) {
+    public void setRadKataAshi(RadioButton radKataAshi) {
         this.getKataAshi().setRadKataAshi(radKataAshi);
     }
 
@@ -519,7 +523,7 @@ public class DaiichigunShintaiKinoDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setBtnSenshin(ButtonDialog btnSenshin) {
+    public void setBtnSenshin(ButtonDialog btnSenshin) {
         this.getSenshin().setBtnSenshin(btnSenshin);
     }
 
@@ -529,7 +533,7 @@ public class DaiichigunShintaiKinoDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setRadSenshin(RadioButton radSenshin) {
+    public void setRadSenshin(RadioButton radSenshin) {
         this.getSenshin().setRadSenshin(radSenshin);
     }
 
@@ -539,7 +543,7 @@ public class DaiichigunShintaiKinoDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setBtnTumeKiri(ButtonDialog btnTumeKiri) {
+    public void setBtnTumeKiri(ButtonDialog btnTumeKiri) {
         this.getTumeKiri().setBtnTumeKiri(btnTumeKiri);
     }
 
@@ -549,7 +553,7 @@ public class DaiichigunShintaiKinoDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setRadTumeKiri(RadioButton radTumeKiri) {
+    public void setRadTumeKiri(RadioButton radTumeKiri) {
         this.getTumeKiri().setRadTumeKiri(radTumeKiri);
     }
 
@@ -559,7 +563,7 @@ public class DaiichigunShintaiKinoDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setBtnShiryoku(ButtonDialog btnShiryoku) {
+    public void setBtnShiryoku(ButtonDialog btnShiryoku) {
         this.getShiryoku().setBtnShiryoku(btnShiryoku);
     }
 
@@ -569,7 +573,7 @@ public class DaiichigunShintaiKinoDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setRadShiryoku(RadioButton radShiryoku) {
+    public void setRadShiryoku(RadioButton radShiryoku) {
         this.getShiryoku().setRadShiryoku(radShiryoku);
     }
 
@@ -579,7 +583,7 @@ public class DaiichigunShintaiKinoDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setBtnChoryoku(ButtonDialog btnChoryoku) {
+    public void setBtnChoryoku(ButtonDialog btnChoryoku) {
         this.getChoryoku().setBtnChoryoku(btnChoryoku);
     }
 
@@ -589,7 +593,7 @@ public class DaiichigunShintaiKinoDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setRadChoryoku(RadioButton radChoryoku) {
+    public void setRadChoryoku(RadioButton radChoryoku) {
         this.getChoryoku().setRadChoryoku(radChoryoku);
     }
 

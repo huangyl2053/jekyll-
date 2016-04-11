@@ -8,10 +8,6 @@ module DBZ {
 
         export class Events {
 
-            public static onClick_btnOpenDialog(): string {
-                return "onClick_btnOpenDialog";
-            }
-
             public static onClick_btnConfirm(): string {
                 return "onClick_btnConfirm";
             }
@@ -189,12 +185,12 @@ module DBZ {
                 return new UZA.Panel(this.convFiledName("MonoWasure"));
             }
 
-            public radMonoWasure(): UZA.RadioButton {
-                return new UZA.RadioButton(this.convFiledName("radMonoWasure"));
-            }
-
             public btnMonoWasure(): UZA.ButtonDialog {
                 return new UZA.ButtonDialog(this.convFiledName("btnMonoWasure"));
+            }
+
+            public radMonoWasure(): UZA.RadioButton {
+                return new UZA.RadioButton(this.convFiledName("radMonoWasure"));
             }
 
             public HitoriWarai(): UZA.Panel {

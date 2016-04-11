@@ -4,10 +4,6 @@ var DBZ;
         var Events = (function () {
             function Events() {
             }
-            Events.onClick_btnOpenDialog = function () {
-                return "onClick_btnOpenDialog";
-            };
-
             Events.onClick_btnConfirm = function () {
                 return "onClick_btnConfirm";
             };

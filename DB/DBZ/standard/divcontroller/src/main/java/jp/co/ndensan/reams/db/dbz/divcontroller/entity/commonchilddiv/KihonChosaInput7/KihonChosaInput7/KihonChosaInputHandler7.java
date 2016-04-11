@@ -25,6 +25,8 @@ import jp.co.ndensan.reams.uz.uza.util.serialization.DataPassingConverter;
 /**
  *
  * 共有子Div「認定基本調査入力」の自立度の状態を変更するクラスです。
+ *
+ * @reamsid_L DBE-3000-096 wangjie2
  */
 public class KihonChosaInputHandler7 {
 

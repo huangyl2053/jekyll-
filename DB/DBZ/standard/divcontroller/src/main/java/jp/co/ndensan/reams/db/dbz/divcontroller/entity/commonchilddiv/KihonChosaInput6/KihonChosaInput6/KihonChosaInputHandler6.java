@@ -22,6 +22,8 @@ import jp.co.ndensan.reams.uz.uza.util.serialization.DataPassingConverter;
 /**
  *
  * 共有子Div「認定基本調査入力」の特別な医療の状態を変更するクラスです。
+ *
+ * @reamsid_L DBE-3000-095 wangjie2
  */
 public class KihonChosaInputHandler6 {
 
@@ -260,7 +262,7 @@ public class KihonChosaInputHandler6 {
         RString 調査項目 = 認定調査基本情報.get調査項目();
         RString 特記事項番号 = 認定調査基本情報.get認定調査特記事項番号();
         if (連番 >= 整数63 && 連番 <= 整数71) {
-            div.getBtnShochiNaiyo().setDisabled(true);
+            div.getBtnShochiNaiyo().setDisabled(!認定調査基本情報.get特記事項有無());
         }
         if (調査項目ある.equals(調査項目)) {
             if (連番 == 整数63) {
