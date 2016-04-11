@@ -57,6 +57,8 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.DataGridButtonState;
 
 /**
  * {@link KokuhorenTorikomiListDiv}のHandlerクラスです。
+ *
+ * @reamsid_L DBC-0980-460 wangkanglei
  */
 public class KokuhorenTorikomiListHandler {
 
@@ -447,7 +449,7 @@ public class KokuhorenTorikomiListHandler {
     }
 
     /**
-     * getParamter
+     * getParamterのメソッドます。
      *
      * @param 交換情報識別番号 RString
      * @return RString

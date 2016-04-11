@@ -23,12 +23,14 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 
 /**
- * 国保連情報データ取込のクラスです
+ * 国保連情報データ取込のクラスです。
+ *
+ * @reamsid_L DBC-0980-460 wangkanglei
  */
 public class KokuhorenTorikomiList {
 
     /**
-     * 初期化
+     * 初期化のメソッドます。
      *
      * @param div KokuhorenTorikomiListDiv
      * @return response
@@ -62,7 +64,7 @@ public class KokuhorenTorikomiList {
     }
 
     /**
-     * onSelect_dgKokuhorenTorikomiList_Row
+     * 「選択」アイコンのメソッドます。
      *
      * @param div KokuhorenTorikomiListDiv
      * @return ResponseData
@@ -70,6 +72,7 @@ public class KokuhorenTorikomiList {
     public ResponseData<KokuhorenTorikomiListDiv> onSelect_dgKokuhorenTorikomiList_Row(
             KokuhorenTorikomiListDiv div) {
         dgKokuhorenTorikomiList_Row row = div.getDgKokuhorenTorikomiList().getClickedItem();
+        // TODO QA
         KokuhorenDataTorikomiViewStateClass parmater = new KokuhorenDataTorikomiViewStateClass(
                 div.getTxtShoriYM().getValue().getYearMonth(),
                 new RString("1"));
@@ -81,7 +84,7 @@ public class KokuhorenTorikomiList {
     }
 
     /**
-     * 「スケジュール設定」ボタン
+     * 「スケジュール設定」ボタンのメソッドます。
      *
      * @param div KokuhorenTorikomiListDiv
      * @return ResponseData
