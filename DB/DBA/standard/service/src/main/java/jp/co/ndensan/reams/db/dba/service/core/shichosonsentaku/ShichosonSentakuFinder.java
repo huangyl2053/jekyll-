@@ -16,6 +16,7 @@ import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 /**
  * 市町村選択には、旧市町村選択情報を取得する、構成市町村選択情報を取得する機能を提供します。
  *
+ * @reamsid_L DBA-0100-020 xuyannan
  */
 public class ShichosonSentakuFinder {
 

@@ -15,6 +15,7 @@ import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 /**
  * 資格異動チェックの処理します。
  *
+ * @reamsid_L DBU-0110-010 xuyannan
  */
 public interface ISikakuIdoCheckMapper {
 

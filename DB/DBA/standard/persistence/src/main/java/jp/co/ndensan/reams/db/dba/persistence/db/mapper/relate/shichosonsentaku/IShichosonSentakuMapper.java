@@ -7,6 +7,8 @@ import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 /**
  *
  * 市町村遷移のマッパーインタフェースです。
+ *
+ * @reamsid_L DBA-0100-020 xuyannan
  */
 public interface IShichosonSentakuMapper {
 
