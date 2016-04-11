@@ -8,6 +8,8 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
 
 /*
  * このコードはツールによって生成されました。
+ *
+ * @reamsid_L DBC-4470-010 wangkanglei
  */
 public interface IPaymentDateDiv extends ICommonChildDivBaseProperties {
 

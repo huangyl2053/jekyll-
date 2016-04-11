@@ -98,12 +98,10 @@ public class YoshikiIchinoniIchinosanHosei {
         List<RString> list11 = ViewStateHolder.get(ViewStateKeys.様式種類_11, List.class);
         List<RString> list21 = ViewStateHolder.get(ViewStateKeys.様式種類_21, List.class);
         if (削除状態.equals(状態)) {
-            if (!ResponseHolder.isReRequest()) {
-                getHandler(div).delete(引き継ぎデータ);
-                div.getKanryoMessage().getCcdKaigoKanryoMessage().setSuccessMessage(new RString(
-                        UrInformationMessages.正常終了.getMessage().replace(削除状態.toString()).evaluate()));
-                return ResponseData.of(div).setState(DBU0020031StateName.完了状態);
-            }
+            getHandler(div).delete(引き継ぎデータ);
+            div.getKanryoMessage().getCcdKaigoKanryoMessage().setSuccessMessage(new RString(
+                    UrInformationMessages.正常終了.getMessage().replace(削除状態.toString()).evaluate()));
+            return ResponseData.of(div).setState(DBU0020031StateName.完了状態);
         }
         List<JigyoHokokuTokeiData> 修正データリスト = getHandler(div).get修正データリスト(引き継ぎデータ);
         if (null == 修正データリスト || 修正データリスト.isEmpty()) {
