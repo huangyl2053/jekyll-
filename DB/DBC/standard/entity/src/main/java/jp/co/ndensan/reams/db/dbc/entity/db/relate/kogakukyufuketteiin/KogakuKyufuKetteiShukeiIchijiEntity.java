@@ -8,7 +8,9 @@ package jp.co.ndensan.reams.db.dbc.entity.db.relate.kogakukyufuketteiin;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
+ * KogakuKyufuKetteiShukeiIchijiEntityのクラス
  *
+ * @reamsid_L DBC-0980-390 lijunjun
  */
 @lombok.Getter
 @lombok.Setter

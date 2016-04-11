@@ -12,6 +12,8 @@ import jp.co.ndensan.reams.uz.uza.math.Decimal;
 
 /**
  * 一時テーブルに対するMapperパラメータ
+ *
+ * @reamsid_L DBC-0980-390 lijunjun
  */
 @lombok.Getter
 @SuppressWarnings("PMD.UnusedPrivateField")

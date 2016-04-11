@@ -37,6 +37,8 @@ import jp.co.ndensan.reams.uz.uza.util.code.entity.UzT0007CodeEntity;
 
 /**
  * 一時テーブルにデータの編集
+ *
+ * @reamsid_L DBC-0980-390 lijunjun
  */
 public class KogakuKyufuKetteiInBatchRegistGetEditInfoProcess extends BatchProcessBase<KogakuKyufuKetteiInTempTableEntity> {
 

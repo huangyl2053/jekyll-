@@ -9,7 +9,9 @@ import jp.co.ndensan.reams.ua.uax.definition.mybatisprm.shikibetsutaisho.IShikib
 import jp.co.ndensan.reams.ua.uax.definition.mybatisprm.shikibetsutaisho.UaFt200FindShikibetsuTaishoParam;
 
 /**
- * PSMParameter
+ * PSMのクラス
+ *
+ * @reamsid_L DBC-0980-390 lijunjun
  */
 public class PSMParameter extends UaFt200FindShikibetsuTaishoParam {
 

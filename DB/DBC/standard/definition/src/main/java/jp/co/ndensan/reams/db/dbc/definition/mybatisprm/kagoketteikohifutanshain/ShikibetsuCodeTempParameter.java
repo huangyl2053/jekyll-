@@ -14,7 +14,9 @@ import jp.co.ndensan.reams.uz.uza.biz.YubinNo;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
- * ShikibetsuCodeTempParameter
+ * ShikibetsuCodeTempのクラス
+ *
+ * @reamsid_L DBC-0980-390 lijunjun
  */
 @lombok.Getter
 @SuppressWarnings("PMD.UnusedPrivateField")
