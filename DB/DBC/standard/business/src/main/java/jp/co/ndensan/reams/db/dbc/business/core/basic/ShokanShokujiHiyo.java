@@ -57,7 +57,7 @@ extends ModelBase<ShokanShokujiHiyoIdentifier,
         this.entity = new DbT3043ShokanShokujiHiyoEntity();
         this.entity.setHiHokenshaNo(被保険者番号);
         this.entity.setServiceTeikyoYM(サービス提供年月);
-        this.entity.setSeiriNp(整理番号);
+        this.entity.setSeiriNo(整理番号);
         this.entity.setJigyoshaNo(事業者番号);
         this.entity.setYoshikiNo(様式番号);
         this.entity.setMeisaiNo(明細番号);
@@ -84,7 +84,7 @@ extends ModelBase<ShokanShokujiHiyoIdentifier,
         this.id = new ShokanShokujiHiyoIdentifier(
                 entity.getHiHokenshaNo(),
                 entity.getServiceTeikyoYM(),
-                entity.getSeiriNp(),
+                entity.getSeiriNo(),
                 entity.getJigyoshaNo(),
                 entity.getYoshikiNo(),
                 entity.getMeisaiNo(),
@@ -130,7 +130,7 @@ extends ModelBase<ShokanShokujiHiyoIdentifier,
      * @return 整理番号
      */
     public RString get整理番号() {
-        return entity.getSeiriNp();
+        return entity.getSeiriNo();
     }
 
     /**

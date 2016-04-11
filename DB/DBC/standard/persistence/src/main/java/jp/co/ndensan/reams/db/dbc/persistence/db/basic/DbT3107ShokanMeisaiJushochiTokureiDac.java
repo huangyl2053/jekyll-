@@ -10,7 +10,7 @@ import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3107ShokanMeisaiJushochiTok
 import static jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3107ShokanMeisaiJushochiTokurei.hiHokenshaNo;
 import static jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3107ShokanMeisaiJushochiTokurei.jigyoshaNo;
 import static jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3107ShokanMeisaiJushochiTokurei.meisaiNo;
-import static jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3107ShokanMeisaiJushochiTokurei.seiriNp;
+import static jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3107ShokanMeisaiJushochiTokurei.seiriNo;
 import static jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3107ShokanMeisaiJushochiTokurei.serviceTeikyoYM;
 import static jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3107ShokanMeisaiJushochiTokurei.yoshikiNo;
 import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3107ShokanMeisaiJushochiTokureiEntity;
@@ -68,7 +68,7 @@ public class DbT3107ShokanMeisaiJushochiTokureiDac implements ISaveable<DbT3107S
                 where(and(
                                 eq(hiHokenshaNo, 被保険者番号),
                                 eq(serviceTeikyoYM, サービス提供年月),
-                                eq(seiriNp, 整理番号),
+                                eq(seiriNo, 整理番号),
                                 eq(jigyoshaNo, 事業者番号),
                                 eq(yoshikiNo, 様式番号))).
                 toObject(DbT3107ShokanMeisaiJushochiTokureiEntity.class);
@@ -148,7 +148,7 @@ public class DbT3107ShokanMeisaiJushochiTokureiDac implements ISaveable<DbT3107S
                 where(and(
                                 eq(hiHokenshaNo, 被保険者番号),
                                 eq(serviceTeikyoYM, サービス提供年月),
-                                eq(seiriNp, 整理番号),
+                                eq(seiriNo, 整理番号),
                                 eq(jigyoshaNo, 事業者番号),
                                 eq(yoshikiNo, 様式番号),
                                 eq(meisaiNo, 明細番号))).getCount();
@@ -195,12 +195,12 @@ public class DbT3107ShokanMeisaiJushochiTokureiDac implements ISaveable<DbT3107S
             iTrueFalseCriteria = and(
                     eq(hiHokenshaNo, 被保険者番号),
                     eq(serviceTeikyoYM, サービス提供年月),
-                    eq(seiriNp, 整理番号));
+                    eq(seiriNo, 整理番号));
         } else {
             iTrueFalseCriteria = and(
                     eq(hiHokenshaNo, 被保険者番号),
                     eq(serviceTeikyoYM, サービス提供年月),
-                    eq(seiriNp, 整理番号),
+                    eq(seiriNo, 整理番号),
                     eq(jigyoshaNo, 事業者番号),
                     eq(yoshikiNo, 様式番号),
                     eq(meisaiNo, 明細番号));
