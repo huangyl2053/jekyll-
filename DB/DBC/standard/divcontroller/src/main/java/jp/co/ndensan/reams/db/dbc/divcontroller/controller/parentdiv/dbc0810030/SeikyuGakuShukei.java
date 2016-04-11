@@ -17,6 +17,7 @@ import jp.co.ndensan.reams.db.dbc.divcontroller.viewbox.dbc0810014.ServiceTeiKyo
 import jp.co.ndensan.reams.db.dbc.service.core.shokanbaraijyokyoshokai.ShokanbaraiJyokyoShokai;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
+import jp.co.ndensan.reams.db.dbz.service.TaishoshaKey;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
@@ -40,28 +41,18 @@ public class SeikyuGakuShukei {
      * @return ResponseData
      */
     public ResponseData<SeikyuGakuShukeiDiv> onLoad(SeikyuGakuShukeiDiv div) {
-
-        ServiceTeiKyoShomeishoParameter parmeter = new ServiceTeiKyoShomeishoParameter(
-                new HihokenshaNo("000000033"), new FlexibleYearMonth(new RString("201601")),
-                new RString("0000000003"), new JigyoshaNo("0000000004"), new RString("事業者名"),
-                new RString("0004"), new RString("証明書"));
-        ViewStateHolder.put(ViewStateKeys.基本情報パラメータ, parmeter);
         ServiceTeiKyoShomeishoParameter parameter = ViewStateHolder.get(
                 ViewStateKeys.基本情報パラメータ, ServiceTeiKyoShomeishoParameter.class);
-
         FlexibleYearMonth サービス年月 = parameter.getServiceTeikyoYM();
         HihokenshaNo 被保険者番号 = parameter.getHiHokenshaNo();
         RString 整理番号 = parameter.getSeiriNp();
-
         RString 明細番号 = parameter.getMeisaiNo();
         RString 証明書 = parameter.getServiceYM();
         JigyoshaNo 事業者番号 = parameter.getJigyoshaNo();
-        ViewStateHolder.put(ViewStateKeys.識別コード, new ShikibetsuCode(new RString("000000000000010")));
-        ShikibetsuCode 識別コード = ViewStateHolder.get(
-                ViewStateKeys.識別コード, ShikibetsuCode.class);
-        ViewStateHolder.put(ViewStateKeys.様式番号, new RString("0005"));
-        RString 様式番号 = ViewStateHolder.get(ViewStateKeys.様式番号, RString.class);
-        ViewStateHolder.put(ViewStateKeys.申請日, new RString("20151124"));
+        RString 様式番号 = ViewStateHolder.get(ViewStateKeys.償還払申請一覧_様式番号, RString.class);
+        RString 申請日 = ViewStateHolder.get(ViewStateKeys.償還払申請一覧_申請日, RString.class);
+        TaishoshaKey 引継ぎデータ = ViewStateHolder.get(ViewStateKeys.資格対象者, TaishoshaKey.class);
+        ShikibetsuCode 識別コード = 引継ぎデータ.get識別コード();
         div.getPanelCcd().getCcdKaigoAtenaInfo().onLoad(識別コード);
         if (!被保険者番号.isEmpty()) {
             div.getPanelCcd().getCcdKaigoShikakuKihon().onLoad(被保険者番号);
@@ -69,9 +60,7 @@ public class SeikyuGakuShukei {
             div.getPanelCcd().getCcdKaigoShikakuKihon().setVisible(false);
 
         }
-        getHandler(div).setヘッダーエリア(サービス年月, 事業者番号,
-                ViewStateHolder.get(ViewStateKeys.申請日, RString.class), 明細番号, 証明書);
-
+        getHandler(div).setヘッダーエリア(サービス年月, 事業者番号, 申請日, 明細番号, 証明書);
         List<ShokanShukeiResult> entityList = ShokanbaraiJyokyoShokai.createInstance().getSeikyuShukeiData(
                 被保険者番号,
                 サービス年月,
@@ -104,7 +93,7 @@ public class SeikyuGakuShukei {
         FlexibleYearMonth サービス年月 = parameter.getServiceTeikyoYM();
         HihokenshaNo 被保険者番号 = parameter.getHiHokenshaNo();
         RString 整理番号 = parameter.getSeiriNp();
-        RString 様式番号 = ViewStateHolder.get(ViewStateKeys.様式番号, RString.class);
+        RString 様式番号 = ViewStateHolder.get(ViewStateKeys.償還払申請一覧_様式番号, RString.class);
         RString 明細番号 = parameter.getMeisaiNo();
         JigyoshaNo 事業者番号 = parameter.getJigyoshaNo();
         dgdSeikyugakushukei_Row row = div.getPanelSeikyugakuShukei().getDgdSeikyugakushukei().getClickedItem();
