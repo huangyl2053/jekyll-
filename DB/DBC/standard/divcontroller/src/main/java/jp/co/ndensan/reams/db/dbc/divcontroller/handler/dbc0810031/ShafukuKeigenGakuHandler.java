@@ -18,6 +18,8 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.KeyValueDataSource;
 
 /**
  * 償還払い状況照会_社福軽減額ハンドラクラスです。
+ *
+ * @reamsid_L DBC-1010-100 xuhao
  */
 public class ShafukuKeigenGakuHandler {
 
