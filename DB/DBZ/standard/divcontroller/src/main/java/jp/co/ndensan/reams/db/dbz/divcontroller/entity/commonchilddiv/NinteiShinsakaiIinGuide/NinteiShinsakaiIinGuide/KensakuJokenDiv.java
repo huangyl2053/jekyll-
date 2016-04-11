@@ -4,18 +4,11 @@ package jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.NinteiShi
  * このファイルへの変更は、再生成時には損失するため
  * 不正な動作の原因になります。
  */
-
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.hokenshalist.HokenshaList.IHokenshaListDiv;
-import jp.co.ndensan.reams.uz.uza.ui.binding.Button;
-import jp.co.ndensan.reams.uz.uza.ui.binding.CheckBoxList;
-import jp.co.ndensan.reams.uz.uza.ui.binding.DropDownList;
-import jp.co.ndensan.reams.uz.uza.ui.binding.Label;
+import jp.co.ndensan.reams.uz.uza.ui.binding.*;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
-import jp.co.ndensan.reams.uz.uza.ui.binding.TextBox;
-import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxCode;
-import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxNum;
 
 /**
  * KensakuJoken のクラスファイル
@@ -24,7 +17,6 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxNum;
  * 
  */
 public class KensakuJokenDiv extends Panel {
-
     // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-01-15_09-59-03">
     /*
      * [ private の作成 ]
@@ -148,7 +140,7 @@ public class KensakuJokenDiv extends Panel {
     }
 
     @JsonIgnore
-    public void setTxtShinsakaiIinCodeFrom(TextBoxCode txtShinsakaiIinCodeFrom) {
+    public void  setTxtShinsakaiIinCodeFrom(TextBoxCode txtShinsakaiIinCodeFrom) {
         this.getKensakuJokenInput().setTxtShinsakaiIinCodeFrom(txtShinsakaiIinCodeFrom);
     }
 
@@ -158,7 +150,7 @@ public class KensakuJokenDiv extends Panel {
     }
 
     @JsonIgnore
-    public void setTxtShinsakaiIinCodeTo(TextBoxCode txtShinsakaiIinCodeTo) {
+    public void  setTxtShinsakaiIinCodeTo(TextBoxCode txtShinsakaiIinCodeTo) {
         this.getKensakuJokenInput().setTxtShinsakaiIinCodeTo(txtShinsakaiIinCodeTo);
     }
 
@@ -168,7 +160,7 @@ public class KensakuJokenDiv extends Panel {
     }
 
     @JsonIgnore
-    public void setTxtShinsakaiIinName(TextBox txtShinsakaiIinName) {
+    public void  setTxtShinsakaiIinName(TextBox txtShinsakaiIinName) {
         this.getKensakuJokenInput().setTxtShinsakaiIinName(txtShinsakaiIinName);
     }
 
@@ -178,7 +170,7 @@ public class KensakuJokenDiv extends Panel {
     }
 
     @JsonIgnore
-    public void setDdlSeibetsu(DropDownList ddlSeibetsu) {
+    public void  setDdlSeibetsu(DropDownList ddlSeibetsu) {
         this.getKensakuJokenInput().setDdlSeibetsu(ddlSeibetsu);
     }
 
@@ -188,7 +180,7 @@ public class KensakuJokenDiv extends Panel {
     }
 
     @JsonIgnore
-    public void setDdlShinsainShikakuCode(DropDownList ddlShinsainShikakuCode) {
+    public void  setDdlShinsainShikakuCode(DropDownList ddlShinsainShikakuCode) {
         this.getKensakuJokenInput().setDdlShinsainShikakuCode(ddlShinsainShikakuCode);
     }
 
@@ -203,7 +195,7 @@ public class KensakuJokenDiv extends Panel {
     }
 
     @JsonIgnore
-    public void setLblShozoku(Label lblShozoku) {
+    public void  setLblShozoku(Label lblShozoku) {
         this.getShosaiJoken().setLblShozoku(lblShozoku);
     }
 
@@ -213,7 +205,7 @@ public class KensakuJokenDiv extends Panel {
     }
 
     @JsonIgnore
-    public void setDdlIryoKikan(DropDownList ddlIryoKikan) {
+    public void  setDdlIryoKikan(DropDownList ddlIryoKikan) {
         this.getShosaiJoken().setDdlIryoKikan(ddlIryoKikan);
     }
 
@@ -223,7 +215,7 @@ public class KensakuJokenDiv extends Panel {
     }
 
     @JsonIgnore
-    public void setDdlKaigoJigyosha(DropDownList ddlKaigoJigyosha) {
+    public void  setDdlKaigoJigyosha(DropDownList ddlKaigoJigyosha) {
         this.getShosaiJoken().setDdlKaigoJigyosha(ddlKaigoJigyosha);
     }
 
@@ -233,7 +225,7 @@ public class KensakuJokenDiv extends Panel {
     }
 
     @JsonIgnore
-    public void setDdlSonotaJigyosha(DropDownList ddlSonotaJigyosha) {
+    public void  setDdlSonotaJigyosha(DropDownList ddlSonotaJigyosha) {
         this.getShosaiJoken().setDdlSonotaJigyosha(ddlSonotaJigyosha);
     }
 
@@ -243,7 +235,7 @@ public class KensakuJokenDiv extends Panel {
     }
 
     @JsonIgnore
-    public void setChkKiken(CheckBoxList chkKiken) {
+    public void  setChkKiken(CheckBoxList chkKiken) {
         this.getShosaiJoken().setChkKiken(chkKiken);
     }
 
@@ -253,7 +245,7 @@ public class KensakuJokenDiv extends Panel {
     }
 
     @JsonIgnore
-    public void setChkHaishi(CheckBoxList chkHaishi) {
+    public void  setChkHaishi(CheckBoxList chkHaishi) {
         this.getShosaiJoken().setChkHaishi(chkHaishi);
     }
 
