@@ -6,6 +6,7 @@
 package jp.co.ndensan.reams.db.dbe.definition.mybatis.param.shujiiikentokusokujo;
 
 import jp.co.ndensan.reams.db.dbe.definition.core.valueobject.shujiiikentokusokujohakko.ShujiiIkenTokusokujoHakkoTempData;
+import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.ShoriJotaiKubun;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
@@ -32,6 +33,8 @@ public final class ShujiiIkenTokusokujoParameter {
     private final boolean uses印刷期間;
     private final boolean uses印刷期間From;
     private final boolean uses印刷期間To;
+    private final RString 取下 = ShoriJotaiKubun.取下.getコード();
+    private final RString 却下 = ShoriJotaiKubun.却下.getコード();
 
     private ShujiiIkenTokusokujoParameter(
             FlexibleDate 基準日,

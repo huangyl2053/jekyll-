@@ -102,8 +102,13 @@ public class ShujiiIkenshoTokusokujoHakkoDiv extends Panel {
      * [ ショートカットの作成 ]
      */
     @JsonIgnore
-    public IHokenshaListDiv getCcdHokenshaList() {
-        return this.getHakkoJoken().getCcdHokenshaList();
+    public RadioButton getRadChohyoSentaku() {
+        return this.getHakkoJoken().getRadChohyoSentaku();
+    }
+
+    @JsonIgnore
+    public void setRadChohyoSentaku(RadioButton radChohyoSentaku) {
+        this.getHakkoJoken().setRadChohyoSentaku(radChohyoSentaku);
     }
 
     @JsonIgnore
@@ -117,13 +122,8 @@ public class ShujiiIkenshoTokusokujoHakkoDiv extends Panel {
     }
 
     @JsonIgnore
-    public RadioButton getRadChohyoSentaku() {
-        return this.getHakkoJoken().getRadChohyoSentaku();
-    }
-
-    @JsonIgnore
-    public void setRadChohyoSentaku(RadioButton radChohyoSentaku) {
-        this.getHakkoJoken().setRadChohyoSentaku(radChohyoSentaku);
+    public IHokenshaListDiv getCcdHokenshaList() {
+        return this.getHakkoJoken().getCcdHokenshaList();
     }
 
     @JsonIgnore

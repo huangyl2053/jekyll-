@@ -26,12 +26,12 @@ public class HakkoJokenDiv extends Panel {
      * コントロール名とフィールド名を取得する
      * private + コントロール名 + フィールド名 の文字列を作成
      */
-    @JsonProperty("ccdHokenshaList")
-    private HokenshaListDiv ccdHokenshaList;
-    @JsonProperty("txtKijunDay")
-    private TextBoxFlexibleDate txtKijunDay;
     @JsonProperty("radChohyoSentaku")
     private RadioButton radChohyoSentaku;
+    @JsonProperty("txtKijunDay")
+    private TextBoxFlexibleDate txtKijunDay;
+    @JsonProperty("ccdHokenshaList")
+    private HokenshaListDiv ccdHokenshaList;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -40,12 +40,21 @@ public class HakkoJokenDiv extends Panel {
      * フィールド名のGetterとSetter を作成
      */
     /*
-     * getccdHokenshaList
-     * @return ccdHokenshaList
+     * getradChohyoSentaku
+     * @return radChohyoSentaku
      */
-    @JsonProperty("ccdHokenshaList")
-    public IHokenshaListDiv getCcdHokenshaList() {
-        return ccdHokenshaList;
+    @JsonProperty("radChohyoSentaku")
+    public RadioButton getRadChohyoSentaku() {
+        return radChohyoSentaku;
+    }
+
+    /*
+     * setradChohyoSentaku
+     * @param radChohyoSentaku radChohyoSentaku
+     */
+    @JsonProperty("radChohyoSentaku")
+    public void setRadChohyoSentaku(RadioButton radChohyoSentaku) {
+        this.radChohyoSentaku = radChohyoSentaku;
     }
 
     /*
@@ -67,21 +76,12 @@ public class HakkoJokenDiv extends Panel {
     }
 
     /*
-     * getradChohyoSentaku
-     * @return radChohyoSentaku
+     * getccdHokenshaList
+     * @return ccdHokenshaList
      */
-    @JsonProperty("radChohyoSentaku")
-    public RadioButton getRadChohyoSentaku() {
-        return radChohyoSentaku;
-    }
-
-    /*
-     * setradChohyoSentaku
-     * @param radChohyoSentaku radChohyoSentaku
-     */
-    @JsonProperty("radChohyoSentaku")
-    public void setRadChohyoSentaku(RadioButton radChohyoSentaku) {
-        this.radChohyoSentaku = radChohyoSentaku;
+    @JsonProperty("ccdHokenshaList")
+    public IHokenshaListDiv getCcdHokenshaList() {
+        return ccdHokenshaList;
     }
 
     // </editor-fold>
