@@ -35,10 +35,21 @@ import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
  */
 public class HihokenshashikakusoshitsuManager {
 
+    private static final int 年齢_65 = 65;
+
     /**
      * コンストラクタです。
      */
     public HihokenshashikakusoshitsuManager() {
+    }
+
+    /**
+     * {@link InstanceProvider#create}にて生成した{@link HihokenshashoHakkoKanriboFinder}のインスタンスを返します。
+     *
+     * @return HihokenshashoHakkoKanriboFinder
+     */
+    public static HihokenshashikakusoshitsuManager createInstance() {
+        return InstanceProvider.create(HihokenshashikakusoshitsuManager.class);
     }
 
     /**
@@ -81,39 +92,18 @@ public class HihokenshashikakusoshitsuManager {
      * @param sikakuKikanList List<SikakuKikan>
      * @return エラーコード
      */
-    public RString ShikakuSoshitsuTorokuCheck(ShikibetsuCode 識別コード, HihokenshaNo 被保険者番号,
+    public RString shikakuSoshitsuTorokuCheck(ShikibetsuCode 識別コード, HihokenshaNo 被保険者番号,
             FlexibleDate 喪失年月日, IDateOfBirth 当該識別対象の生年月日, List<TokusoRireki> tokusoRirekiList, List<SikakuKikan> sikakuKikanList) {
-        RString errorCode;
         HihokenshaShikakuShutokuManager manager = HihokenshaShikakuShutokuManager.createInstance();
         HihokenshaShutokuJyoho hihokenshaShutokuJyoho = manager.getSaishinDeta(識別コード, 被保険者番号);
 
         if (hihokenshaShutokuJyoho != null) {
-            FlexibleDate 第1号資格取得年月日 = hihokenshaShutokuJyoho.get第1号資格取得年月日();
-            if (第1号資格取得年月日 == null || 第1号資格取得年月日.isEmpty()) {
-                AgeCalculator agecalculator = new AgeCalculator(当該識別対象の生年月日,
-                        JuminJotai.住民, FlexibleDate.MAX, AgeArrivalDay.前日, 喪失年月日);
-                if (Integer.valueOf(agecalculator.get年齢().toString()) >= 65) {
-                    errorCode = new RString(DbaErrorMessages.年齢到達取得異動未登録.getMessage().getCode());
-                    return errorCode;
-                }
-            }
-            if (喪失年月日.isBefore(hihokenshaShutokuJyoho.get資格取得年月日())) {
-                errorCode = new RString(DbzErrorMessages.期間が不正_未来日付不可.getMessage().getCode());
-                return errorCode;
-            }
-            SikakuIdoCheckManager sikakuIdoCheckManager = SikakuIdoCheckManager.createInstance();
-            errorCode = sikakuIdoCheckManager.sikakuKikanRirekiChofukuCheck(sikakuKikanList);
-            if (!errorCode.isEmpty()) {
-                return errorCode;
-            }
-            errorCode = sikakuIdoCheckManager.tokusouTanoKikanChofukuCheck(tokusoRirekiList, 識別コード);
-            if (!errorCode.isEmpty()) {
-                return errorCode;
-            }
+            return 年齢到達取得異動未登録Check(識別コード, 喪失年月日, 当該識別対象の生年月日,
+                    hihokenshaShutokuJyoho, tokusoRirekiList, sikakuKikanList);
         } else {
-            errorCode = new RString(DbaErrorMessages.資格喪失登録不可.getMessage().getCode());
+            return new RString(DbaErrorMessages.資格喪失登録不可.getMessage().getCode());
         }
-        return errorCode;
+
     }
 
     /**
@@ -123,7 +113,7 @@ public class HihokenshashikakusoshitsuManager {
      * @param 被保険者番号 被保険者番号
      * @return エラーコード
      */
-    public RString ShikakuSoshitsuCheck(ShikibetsuCode 識別コード, HihokenshaNo 被保険者番号) {
+    public RString shikakuSoshitsuCheck(ShikibetsuCode 識別コード, HihokenshaNo 被保険者番号) {
         RString errorCode = RString.EMPTY;
         HihokenshaShikakuShutokuManager manager = HihokenshaShikakuShutokuManager.createInstance();
         HihokenshaShutokuJyoho hihokenshaShutokuJyoho = manager.getSaishinDeta(識別コード, 被保険者番号);
@@ -138,6 +128,36 @@ public class HihokenshashikakusoshitsuManager {
             }
         } else {
             errorCode = new RString(DbaErrorMessages.資格喪失登録不可.getMessage().getCode());
+        }
+        return errorCode;
+    }
+
+    private RString 年齢到達取得異動未登録Check(ShikibetsuCode 識別コード, FlexibleDate 喪失年月日, IDateOfBirth 当該識別対象の生年月日,
+            HihokenshaShutokuJyoho hihokenshaShutokuJyoho, List<TokusoRireki> tokusoRirekiList, List<SikakuKikan> sikakuKikanList) {
+        FlexibleDate 第1号資格取得年月日 = hihokenshaShutokuJyoho.get第1号資格取得年月日();
+        RString errorCode;
+        if (第1号資格取得年月日 == null || 第1号資格取得年月日.isEmpty()) {
+            AgeCalculator agecalculator = new AgeCalculator(当該識別対象の生年月日,
+                    JuminJotai.住民, FlexibleDate.MAX, AgeArrivalDay.前日, 喪失年月日);
+            if (Integer.valueOf(agecalculator.get年齢().toString()) >= 年齢_65) {
+                errorCode = new RString(DbaErrorMessages.年齢到達取得異動未登録.getMessage().getCode());
+                return errorCode;
+            }
+        }
+
+        if (喪失年月日.isBefore(hihokenshaShutokuJyoho.get資格取得年月日())) {
+            errorCode = new RString(DbzErrorMessages.期間が不正_未来日付不可.getMessage().getCode());
+            return errorCode;
+        }
+
+        SikakuIdoCheckManager sikakuIdoCheckManager = SikakuIdoCheckManager.createInstance();
+        errorCode = sikakuIdoCheckManager.sikakuKikanRirekiChofukuCheck(sikakuKikanList);
+        if (!errorCode.isEmpty()) {
+            return errorCode;
+        }
+        errorCode = sikakuIdoCheckManager.tokusouTanoKikanChofukuCheck(tokusoRirekiList, 識別コード);
+        if (!errorCode.isEmpty()) {
+            return errorCode;
         }
         return errorCode;
     }
