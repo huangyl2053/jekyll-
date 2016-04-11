@@ -13,6 +13,8 @@ import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 
 /**
  * {@link RoreiFukushiNenkinJukyusha}の編集を行うビルダークラスです。
+ *
+ * @reamsid_L DBA-9999-011 sunhaidi
  */
 public class RoreiFukushiNenkinJukyushaBuilder {
 

@@ -16,25 +16,29 @@ import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
- * 国保連情報受取データ取込_[351]高額介護サービス費支給（不支給）決定者一覧表情報のクラスです
+ * 国保連情報受取データ取込_[351]高額介護サービス費支給（不支給）決定者一覧表情報のクラスです。
+ *
+ * @reamsid_L DBC-0980-220 wangkanglei
  */
 public class TsuchishoJoho351 {
 
+    private static final RString 帳票ID = new RString("DBC200015_KogakuShikyuFushikyuKetteishaIchiran");
+
     /**
-     * 画面初期化
+     * 画面初期化のメソッドます。
      *
      * @param div TsuchishoJoho351Div
      * @return ResponseData
      */
     public ResponseData<TsuchishoJoho351Div> onLoad(TsuchishoJoho351Div div) {
         ChohyoBunruiKanri code = ChohyoBunruiKanriManager.createInstance().get帳票分類管理(SubGyomuCode.DBC介護給付,
-                new ReportId(new RString("DBC200015_KogakuShikyuFushikyuKetteishaIchiran")));
+                new ReportId(帳票ID));
         div.getCcdKokurenJohoTorikomi().onLoadModeShutsuryokujunJoken2(SubGyomuCode.DBC介護給付, code.get帳票分類ID());
         return ResponseData.of(div).respond();
     }
 
     /**
-     * 「実行する」ボタン事件
+     * 「実行する」ボタン事件のメソッドます。
      *
      * @param div TsuchishoJoho351Div
      * @return ResponseData

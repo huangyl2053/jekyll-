@@ -13,6 +13,8 @@ import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT1004ShisetsuNyutaishoEntity
 
 /**
  * 他市町村住所地特例RelateEntityクラスです。
+ *
+ * @reamsid_L DBA-9999-011 sunhaidi
  */
 @lombok.Getter
 @lombok.Setter

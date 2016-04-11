@@ -6,7 +6,7 @@
 package jp.co.ndensan.reams.db.dba.business.report.hihokenshadaicho;
 
 import jp.co.ndensan.reams.db.dba.business.core.hihokenshadaichosakusei.HihokenshaDaichoSakusei;
-import jp.co.ndensan.reams.db.dba.entity.db.hihokenshadaichosakusei.SetaiLeftEntity;
+import jp.co.ndensan.reams.db.dba.entity.db.relate.hihokenshadaichosakusei.SetaiLeftEntity;
 import jp.co.ndensan.reams.db.dba.entity.report.hihokenshadaicho.HihokenshaDaichoReportSource;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 

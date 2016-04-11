@@ -21,7 +21,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 public class ShujiiUpadteDataProcess extends BatchProcessBase<RString> {
 
     private static final RString MYBATIS_SELECT_ID = new RString(
-            "jp.co.ndensan.reams.db.dbe.persistence.db.mapper.basic.IDbT5301ShujiiIkenshoIraiJohoMapper."
+            "jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT5301ShujiiIkenshoIraiJohoMapper."
             + "getListForProcess");
     private ShujiiUpdateProcessParameter processParameter;
     private IDbT5301ShujiiIkenshoIraiJohoMapper mapper;

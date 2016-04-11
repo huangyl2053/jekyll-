@@ -11,7 +11,7 @@ import jp.co.ndensan.reams.db.dba.divcontroller.entity.parentdiv.DBA1140011.Batc
 import jp.co.ndensan.reams.db.dba.divcontroller.entity.parentdiv.DBA1140011.DBA1140011TransitionEventName;
 import jp.co.ndensan.reams.db.dba.divcontroller.entity.parentdiv.DBA1140011.jukinentotorokuDiv;
 import jp.co.ndensan.reams.db.dba.divcontroller.handler.parentdiv.DBA1140011.JukinenTotorokuValidationHandler;
-import jp.co.ndensan.reams.db.dba.service.jukirendotorokushalist.JukiRendoTorokushaListFinder;
+import jp.co.ndensan.reams.db.dba.service.core.jukirendotorokushalist.JukiRendoTorokushaListFinder;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;

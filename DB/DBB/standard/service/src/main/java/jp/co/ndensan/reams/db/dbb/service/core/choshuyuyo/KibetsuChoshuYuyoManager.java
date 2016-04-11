@@ -14,6 +14,8 @@ import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
 
 /**
  * 介護期別徴収猶予を管理するクラスです。
+ *
+ * @reamsid_L DBB-9999-011 sunhaidi
  */
 public class KibetsuChoshuYuyoManager {
 

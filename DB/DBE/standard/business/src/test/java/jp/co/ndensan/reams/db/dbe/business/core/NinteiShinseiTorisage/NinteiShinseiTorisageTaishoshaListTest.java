@@ -5,9 +5,9 @@
 package jp.co.ndensan.reams.db.dbe.business.core.NinteiShinseiTorisage;
 
 import jp.co.ndensan.reams.db.dbe.business.core.TorisageRiyu;
-import jp.co.ndensan.reams.db.dbe.business.core.NinteiShinseiTorisage.NinteiShinseiTorisage;
-import jp.co.ndensan.reams.db.dbe.business.core.NinteiShinseiTorisage.NinteiShinseiTorisageTaishosha;
-import jp.co.ndensan.reams.db.dbe.business.core.NinteiShinseiTorisage.NinteiShinseiTorisageTaishoshaList;
+import jp.co.ndensan.reams.db.dbe.business.core.ninteishinseitorisage.NinteiShinseiTorisage;
+import jp.co.ndensan.reams.db.dbe.business.core.ninteishinseitorisage.NinteiShinseiTorisageTaishosha;
+import jp.co.ndensan.reams.db.dbe.business.core.ninteishinseitorisage.NinteiShinseiTorisageTaishoshaList;
 import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbe.definition.core.enumeratedtype.ShinsaKeizokuKubun;

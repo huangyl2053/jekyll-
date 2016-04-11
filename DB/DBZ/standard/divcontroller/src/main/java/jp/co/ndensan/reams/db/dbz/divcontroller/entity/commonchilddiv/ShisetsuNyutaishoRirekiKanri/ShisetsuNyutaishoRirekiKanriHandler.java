@@ -14,8 +14,8 @@ import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
 import jp.co.ndensan.reams.db.dbz.business.core.ShisetsuNyutaisho;
 import jp.co.ndensan.reams.db.dbz.business.core.ShisetsuNyutaishoIdentifier;
 import jp.co.ndensan.reams.db.dbz.business.core.kaigohohenshisetsu.KaigoHohenShisetsuBusiness;
-import jp.co.ndensan.reams.db.dbz.definition.core.enumeratedtype.DaichoType;
-import jp.co.ndensan.reams.db.dbz.definition.core.enumeratedtype.ShisetsuType;
+import jp.co.ndensan.reams.db.dbz.definition.core.daichokubun.DaichoType;
+import jp.co.ndensan.reams.db.dbz.definition.core.shisetsushurui.ShisetsuType;
 import jp.co.ndensan.reams.db.dbz.divcontroller.viewbox.ViewStateKeys;
 import jp.co.ndensan.reams.db.dbz.service.kaigohohenshisetsunyutaishoshakanri.KaigoHohenShisetsuNyutaishoshaKanriManager;
 import jp.co.ndensan.reams.ur.urz.business.core.association.Association;
@@ -301,8 +301,8 @@ public class ShisetsuNyutaishoRirekiKanriHandler {
         List<KeyValueDataSource> dataSource = new ArrayList();
         for (DaichoType daicho : DaichoType.values()) {
             KeyValueDataSource keyValue = new KeyValueDataSource();
-            keyValue.setKey(daicho.getCode());
-            keyValue.setValue(daicho.getName());
+            keyValue.setKey(daicho.getコード());
+            keyValue.setValue(daicho.get名称());
             dataSource.add(keyValue);
         }
         return dataSource;
@@ -322,8 +322,8 @@ public class ShisetsuNyutaishoRirekiKanriHandler {
         List<KeyValueDataSource> dataSource = new ArrayList();
         for (ShisetsuType shisetsu : ShisetsuType.values()) {
             KeyValueDataSource keyValue = new KeyValueDataSource();
-            keyValue.setKey(shisetsu.getCode());
-            keyValue.setValue(shisetsu.getName());
+            keyValue.setKey(shisetsu.getコード());
+            keyValue.setValue(shisetsu.get名称());
             dataSource.add(keyValue);
         }
         return dataSource;

@@ -5,7 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbe.service.core.ichijihanteikekkajohosearch;
 
-import jp.co.ndensan.reams.db.dbe.business.core.Shinsakai.ninteishinseijoho.NinteiShinseiJoho;
+import jp.co.ndensan.reams.db.dbe.business.core.shinsakai.ninteishinseijoho.NinteiShinseiJoho;
 import jp.co.ndensan.reams.db.dbe.business.core.ichijihanteikekkajohosearch.IchijiHanteiKekkaJohoSearchBusiness;
 import jp.co.ndensan.reams.db.dbe.definition.message.DbeErrorMessages;
 import jp.co.ndensan.reams.db.dbe.entity.ichijihanteikekkajohosearch.IchijiHanteiKekkaJohoSearchEntity;

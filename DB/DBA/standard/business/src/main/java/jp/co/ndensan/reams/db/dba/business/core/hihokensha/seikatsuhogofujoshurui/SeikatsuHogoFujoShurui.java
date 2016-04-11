@@ -20,6 +20,8 @@ import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 
 /**
  * 生活保護扶助種類を管理するクラスです。
+ *
+ * @reamsid_L DBA-9999-011 sunhaidi
  */
 public class SeikatsuHogoFujoShurui
         extends ModelBase<SeikatsuHogoFujoShuruiIdentifier, UrT0526SeikatsuHogoFujoShuruiEntity, SeikatsuHogoFujoShurui>

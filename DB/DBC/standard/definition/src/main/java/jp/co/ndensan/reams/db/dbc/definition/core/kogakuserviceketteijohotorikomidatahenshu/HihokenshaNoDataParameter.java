@@ -11,7 +11,9 @@ import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
- * HihokenshaNoDataParameter
+ * HihokenshaNoDataのパラメタ
+ *
+ * @reamsid_L DBC-0980-390 lijunjun
  */
 @SuppressWarnings("PMD.UnusedPrivateField")
 public final class HihokenshaNoDataParameter {

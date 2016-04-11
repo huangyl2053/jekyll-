@@ -19,6 +19,8 @@ import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 
 /**
  * 老齢福祉年金受給者を管理するクラスです。
+ *
+ * @reamsid_L DBA-9999-011 sunhaidi
  */
 public class RoreiFukushiNenkinJukyusha
         extends
@@ -133,8 +135,7 @@ public class RoreiFukushiNenkinJukyusha
     }
 
     /**
-     * 老齢福祉年金受給者のみを変更対象とします。<br/>
-     * {@link DbT7006RoreiFukushiNenkinJukyushaEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば変更状態にします。
+     * 老齢福祉年金受給者のみを変更対象とします。<br/> {@link DbT7006RoreiFukushiNenkinJukyushaEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば変更状態にします。
      *
      * @return 変更対象処理実施後の{@link RoreiFukushiNenkinJukyusha}
      */
@@ -148,8 +149,7 @@ public class RoreiFukushiNenkinJukyusha
     }
 
     /**
-     * 保持する老齢福祉年金受給者を削除対象とします。<br/>
-     * {@link DbT7006RoreiFukushiNenkinJukyushaEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば削除状態にします。
+     * 保持する老齢福祉年金受給者を削除対象とします。<br/> {@link DbT7006RoreiFukushiNenkinJukyushaEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば削除状態にします。
      *
      * @return 削除対象処理実施後の{@link RoreiFukushiNenkinJukyusha}
      */

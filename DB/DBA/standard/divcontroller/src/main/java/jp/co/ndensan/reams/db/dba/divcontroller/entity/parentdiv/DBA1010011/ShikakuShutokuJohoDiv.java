@@ -7,7 +7,7 @@ package jp.co.ndensan.reams.db.dba.divcontroller.entity.parentdiv.DBA1010011;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import jp.co.ndensan.reams.db.dbz.divcontroller.entity.parentdiv.shisetsunyutaishorirekikanri.IShisetsuNyutaishoRirekiKanriDiv;
+import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.ShisetsuNyutaishoRirekiKanri.IShisetsuNyutaishoRirekiKanriDiv;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 
@@ -18,7 +18,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
  */
 public class ShikakuShutokuJohoDiv extends Panel {
 
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：Uz-master-49">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-01-15_09-59-03">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -44,61 +44,109 @@ public class ShikakuShutokuJohoDiv extends Panel {
      * コントロール名とフィールド名を取得する
      * フィールド名のGetterとSetter を作成
      */
+    /*
+     * gettabInputs
+     * @return tabInputs
+     */
     @JsonProperty("tabInputs")
     public tabInputsDiv getTabInputs() {
         return tabInputs;
     }
 
+    /*
+     * settabInputs
+     * @param tabInputs tabInputs
+     */
     @JsonProperty("tabInputs")
     public void setTabInputs(tabInputsDiv tabInputs) {
         this.tabInputs = tabInputs;
     }
 
+    /*
+     * getshikakuInputMode
+     * @return shikakuInputMode
+     */
     @JsonProperty("shikakuInputMode")
     public RString getShikakuInputMode() {
         return shikakuInputMode;
     }
 
+    /*
+     * setshikakuInputMode
+     * @param shikakuInputMode shikakuInputMode
+     */
     @JsonProperty("shikakuInputMode")
     public void setShikakuInputMode(RString shikakuInputMode) {
         this.shikakuInputMode = shikakuInputMode;
     }
 
+    /*
+     * getiryoHokenInputMode
+     * @return iryoHokenInputMode
+     */
     @JsonProperty("iryoHokenInputMode")
     public RString getIryoHokenInputMode() {
         return iryoHokenInputMode;
     }
 
+    /*
+     * setiryoHokenInputMode
+     * @param iryoHokenInputMode iryoHokenInputMode
+     */
     @JsonProperty("iryoHokenInputMode")
     public void setIryoHokenInputMode(RString iryoHokenInputMode) {
         this.iryoHokenInputMode = iryoHokenInputMode;
     }
 
+    /*
+     * getshikakuSelectRow
+     * @return shikakuSelectRow
+     */
     @JsonProperty("shikakuSelectRow")
     public RString getShikakuSelectRow() {
         return shikakuSelectRow;
     }
 
+    /*
+     * setshikakuSelectRow
+     * @param shikakuSelectRow shikakuSelectRow
+     */
     @JsonProperty("shikakuSelectRow")
     public void setShikakuSelectRow(RString shikakuSelectRow) {
         this.shikakuSelectRow = shikakuSelectRow;
     }
 
+    /*
+     * getiryoHokenSelectRow
+     * @return iryoHokenSelectRow
+     */
     @JsonProperty("iryoHokenSelectRow")
     public RString getIryoHokenSelectRow() {
         return iryoHokenSelectRow;
     }
 
+    /*
+     * setiryoHokenSelectRow
+     * @param iryoHokenSelectRow iryoHokenSelectRow
+     */
     @JsonProperty("iryoHokenSelectRow")
     public void setIryoHokenSelectRow(RString iryoHokenSelectRow) {
         this.iryoHokenSelectRow = iryoHokenSelectRow;
     }
 
+    /*
+     * getdateOfBirth
+     * @return dateOfBirth
+     */
     @JsonProperty("dateOfBirth")
     public RString getDateOfBirth() {
         return dateOfBirth;
     }
 
+    /*
+     * setdateOfBirth
+     * @param dateOfBirth dateOfBirth
+     */
     @JsonProperty("dateOfBirth")
     public void setDateOfBirth(RString dateOfBirth) {
         this.dateOfBirth = dateOfBirth;
@@ -118,13 +166,13 @@ public class ShikakuShutokuJohoDiv extends Panel {
     }
 
     @JsonIgnore
-    public ShikakuTokusoRirekiPanelDiv getShikakuTokusoRirekiPanel() {
-        return this.getTabInputs().getTplShikakuJoho().getShikakuTokusoRirekiPanel();
+    public ShikakuTokusoRirekiMainDiv getShikakuTokusoRirekiMain() {
+        return this.getTabInputs().getTplShikakuJoho().getShikakuTokusoRirekiMain();
     }
 
     @JsonIgnore
-    public void setShikakuTokusoRirekiPanel(ShikakuTokusoRirekiPanelDiv ShikakuTokusoRirekiPanel) {
-        this.getTabInputs().getTplShikakuJoho().setShikakuTokusoRirekiPanel(ShikakuTokusoRirekiPanel);
+    public void setShikakuTokusoRirekiMain(ShikakuTokusoRirekiMainDiv ShikakuTokusoRirekiMain) {
+        this.getTabInputs().getTplShikakuJoho().setShikakuTokusoRirekiMain(ShikakuTokusoRirekiMain);
     }
 
     @JsonIgnore
@@ -138,13 +186,13 @@ public class ShikakuShutokuJohoDiv extends Panel {
     }
 
     @JsonIgnore
-    public IryoHokenRirekiPanelDiv getIryoHokenRirekiPanel() {
-        return this.getTabInputs().getTplIryoHoken().getIryoHokenRirekiPanel();
+    public IryoHokenRirekiMainDiv getIryoHokenRirekiMain() {
+        return this.getTabInputs().getTplIryoHoken().getIryoHokenRirekiMain();
     }
 
     @JsonIgnore
-    public void setIryoHokenRirekiPanel(IryoHokenRirekiPanelDiv IryoHokenRirekiPanel) {
-        this.getTabInputs().getTplIryoHoken().setIryoHokenRirekiPanel(IryoHokenRirekiPanel);
+    public void setIryoHokenRirekiMain(IryoHokenRirekiMainDiv IryoHokenRirekiMain) {
+        this.getTabInputs().getTplIryoHoken().setIryoHokenRirekiMain(IryoHokenRirekiMain);
     }
 
     @JsonIgnore
@@ -188,38 +236,8 @@ public class ShikakuShutokuJohoDiv extends Panel {
     }
 
     @JsonIgnore
-    public ShisetsuNyutaishoInputDiv getShisetsuNyutaishoInput() {
-        return this.getTabInputs().getTplShisetsuNyutaisho().getShisetsuNyutaishoRireki().getShisetsuNyutaishoInput();
-    }
-
-    @JsonIgnore
-    public void setShisetsuNyutaishoInput(ShisetsuNyutaishoInputDiv ShisetsuNyutaishoInput) {
-        this.getTabInputs().getTplShisetsuNyutaisho().getShisetsuNyutaishoRireki().setShisetsuNyutaishoInput(ShisetsuNyutaishoInput);
-    }
-
-    @JsonIgnore
     public IShisetsuNyutaishoRirekiKanriDiv getCcdShisetsuNyutaishoRirekiKanri() {
         return this.getTabInputs().getTplShisetsuNyutaisho().getShisetsuNyutaishoRireki().getCcdShisetsuNyutaishoRirekiKanri();
-    }
-
-    @JsonIgnore
-    public tplSeikatsuHogoDiv getTplSeikatsuHogo() {
-        return this.getTabInputs().getTplSeikatsuHogo();
-    }
-
-    @JsonIgnore
-    public void setTplSeikatsuHogo(tplSeikatsuHogoDiv tplSeikatsuHogo) {
-        this.getTabInputs().setTplSeikatsuHogo(tplSeikatsuHogo);
-    }
-
-    @JsonIgnore
-    public SeikatsuHogoDiv getSeikatsuHogo() {
-        return this.getTabInputs().getTplSeikatsuHogo().getSeikatsuHogo();
-    }
-
-    @JsonIgnore
-    public void setSeikatsuHogo(SeikatsuHogoDiv SeikatsuHogo) {
-        this.getTabInputs().getTplSeikatsuHogo().setSeikatsuHogo(SeikatsuHogo);
     }
 
     // </editor-fold>

@@ -62,8 +62,8 @@
                         GROUP BY shinsakaiOnseiJoho."shinsakaiKaisaiNo"	) AS TB1
                 ON TB1."shinsakaiKaisaiNo" = shinsakaiKaisaiYoteiJoho."shinsakaiKaisaiNo"
         WHERE shinsakaiKaisaiYoteiJoho."isDeleted" = false
-                AND shinsakaiKaisaiKekkaJoho."shinsakaiKaisaiYMD" <![CDATA[>=]]> #{表示期間From}
-         	AND shinsakaiKaisaiKekkaJoho."shinsakaiKaisaiYMD" <![CDATA[<=]]> #{表示期間To}
+                AND shinsakaiKaisaiYoteiJoho."shinsakaiKaisaiYoteiYMD" <![CDATA[>=]]> #{表示期間From}
+         	AND shinsakaiKaisaiYoteiJoho."shinsakaiKaisaiYoteiYMD" <![CDATA[<=]]> #{表示期間To}
         <if test="is割付未完了のみ">
             AND shinsakaiKaisaiYoteiJoho."ShinsakaiShinchokuJokyo" = '0'
         </if>

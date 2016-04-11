@@ -4,7 +4,7 @@
  */
 package jp.co.ndensan.reams.db.dbe.business.core.YokaigoNinteiShinsei;
 
-import jp.co.ndensan.reams.db.dbe.business.core.YokaigoNintei.YokaigoNinteiChukanHyokaKomokuTokuten;
+import jp.co.ndensan.reams.db.dbe.business.core.yokaigonintei.YokaigoNinteiChukanHyokaKomokuTokuten;
 import java.util.EnumMap;
 import java.util.Map;
 import jp.co.ndensan.reams.db.dbe.definition.core.enumeratedtype.ChukanHyokaKomoku;

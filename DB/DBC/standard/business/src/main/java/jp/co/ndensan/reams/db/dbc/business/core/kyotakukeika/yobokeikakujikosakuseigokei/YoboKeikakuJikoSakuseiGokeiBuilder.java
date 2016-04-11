@@ -12,6 +12,8 @@ import jp.co.ndensan.reams.uz.uza.math.Decimal;
 
 /**
  * {@link YoboKeikakuJikoSakuseiGokei}の編集を行うビルダークラスです。
+ *
+ * @reamsid_L DBC-9999-011 sunhaidi
  */
 public class YoboKeikakuJikoSakuseiGokeiBuilder {
 
@@ -33,6 +35,7 @@ public class YoboKeikakuJikoSakuseiGokeiBuilder {
         this.id = id;
 
     }
+
     /**
      * 給付計画単位数を設定します。
      *

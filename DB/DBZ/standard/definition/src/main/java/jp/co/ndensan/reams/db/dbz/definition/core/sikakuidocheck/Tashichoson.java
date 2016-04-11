@@ -10,6 +10,7 @@ import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 /**
  * 他市町村のデータアクセスクラスです。
  *
+ * @reamsid_L DBU-0110-010 xuyannan
  */
 @lombok.Getter
 @lombok.Setter

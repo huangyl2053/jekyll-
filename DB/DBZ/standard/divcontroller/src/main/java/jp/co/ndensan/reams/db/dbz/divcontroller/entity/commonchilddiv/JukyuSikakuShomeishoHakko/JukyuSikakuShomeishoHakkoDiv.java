@@ -8,14 +8,21 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jp.co.ndensan.reams.uz.uza.ui.binding.*;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
+import jp.co.ndensan.reams.db.dbz.definition.mybatis.param.jukyushikakushomeishohakko.JukyuShikakuShomeishoHakkoParameter;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.ui.binding.CheckBoxList;
+import jp.co.ndensan.reams.uz.uza.ui.binding.Label;
+import jp.co.ndensan.reams.uz.uza.ui.binding.TextBox;
+import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxDateRange;
+import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxMultiLine;
 
 /**
- * JukyuSikakuShomeishoHakko のクラスファイル 
- * 
- * @author 自動生成
+ * JukyuSikakuShomeishoHakko のクラスファイル
+ *
+ * @reamsid_L DBA-1090-011 wangkun
  */
 public class JukyuSikakuShomeishoHakkoDiv extends Panel implements IJukyuSikakuShomeishoHakkoDiv {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：バージョン情報無し">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-01-15_09-59-03">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -174,5 +181,18 @@ public class JukyuSikakuShomeishoHakkoDiv extends Panel implements IJukyuSikakuS
 
     // </editor-fold>
     //--------------- この行より下にコードを追加してください -------------------
+    private JukyuSikakuShomeishoHakkoHandler getHandler() {
+        return new JukyuSikakuShomeishoHakkoHandler(this);
+    }
+    private static final RString 有効区分 = new RString("1");
 
+    /**
+     * 共通子DIVの初期化処理です。
+     *
+     * @param 被保険者番号 被保険者番号
+     */
+    @Override
+    public void initialize(RString 被保険者番号) {
+        getHandler().initialize(JukyuShikakuShomeishoHakkoParameter.createSelectBy被保険者番号(被保険者番号, 有効区分));
+    }
 }

@@ -22,6 +22,8 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 
 /**
  * 画面入力のチェックHandler。
+ *
+ * @reamsid_L DBC-1030-160 xupeng
  */
 public class ShikyuShinseiDetailValidationHandler {
 

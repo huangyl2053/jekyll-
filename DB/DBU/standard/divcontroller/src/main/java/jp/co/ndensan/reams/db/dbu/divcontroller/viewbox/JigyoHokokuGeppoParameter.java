@@ -10,6 +10,8 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
  * 遷移画面と事業状況報告（月報）補正検索画面は渡す項目Entityクラスです。
+ *
+ * @reamsid_L DBU-1100-010 huangyanan
  */
 @lombok.Getter
 @lombok.Setter

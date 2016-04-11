@@ -24,6 +24,8 @@ import jp.co.ndensan.reams.uz.uza.math.Decimal;
 
 /**
  * 高額サービス費決定情報一時TBLの登録
+ *
+ * @reamsid_L DBC-0980-390 lijunjun
  */
 public class KogakuKyufuKetteiInEntityCreater {
 
@@ -36,7 +38,7 @@ public class KogakuKyufuKetteiInEntityCreater {
      * @param csvMesai KogakuKyufuKetteiInMeisaiCSVEntity
      * @return KogakuKyufuKetteiInTempTableEntity
      */
-    public KogakuKyufuKetteiInTempTableEntity createMeisaiEntity(
+    public KogakuKyufuKetteiInTempTableEntity createEntity(
             KogakuKyufuKetteiInHeaderCSVEntity csvHeader,
             KogakuKyufuKetteiInMeisaiCSVEntity csvMesai) {
         KogakuKyufuKetteiInTempTableEntity entity = new KogakuKyufuKetteiInTempTableEntity();

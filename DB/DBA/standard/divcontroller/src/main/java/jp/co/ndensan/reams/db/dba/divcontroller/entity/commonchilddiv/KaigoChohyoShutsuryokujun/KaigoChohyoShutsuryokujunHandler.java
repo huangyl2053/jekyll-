@@ -5,7 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dba.divcontroller.entity.commonchilddiv.KaigoChohyoShutsuryokujun;
 
-import jp.co.ndensan.reams.db.dba.service.kaigochohyoshutsuryokujun.KaigoChohyoShutsuryokujun;
+import jp.co.ndensan.reams.db.dba.service.core.kaigochohyoshutsuryokujun.KaigoChohyoShutsuryokujun;
 import jp.co.ndensan.reams.ur.urz.divcontroller.entity.commonchilddiv.chohyoshutsuryokujun.ChohyoShutsuryokujun.ChohyoShutsuryokujunDiv;
 import jp.co.ndensan.reams.ur.urz.divcontroller.entity.commonchilddiv.chohyoshutsuryokujun.ChohyoShutsuryokujun.ChohyoShutsuryokujunDiv.DisplayNone;
 import jp.co.ndensan.reams.uz.uza.biz.ReportId;

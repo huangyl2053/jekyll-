@@ -30,6 +30,8 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 
 /**
  * 償還払支給申請の支給申請を登録する画面Controllerです。
+ *
+ * @reamsid_L DBC-1030-160 xupeng
  */
 public class ShikyuShinseiDetail {
 

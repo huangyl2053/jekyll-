@@ -13,6 +13,8 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
  * 画面div用パラメータのクラスです。
+ *
+ * @reamsid_L DBB-0880-020 lijunjun
  */
 @lombok.Getter
 @lombok.Setter

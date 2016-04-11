@@ -51,8 +51,9 @@ public class Honsanteifuka {
     private final DbT2014TsuchishoUchiwakeJokenDac 通知書打ち分け条件Dac;
     private final DbT7067ChohyoSeigyoHanyoDac 帳票制御汎用Dac;
     private static final RString 区分_ゼロ = new RString("0");
-    private static final RString 区分_いち = new RString("1");
-    private static final RString 区分_に = new RString("2");
+    private static final RString 区分_イチ = new RString("1");
+    private static final RString 区分_二 = new RString("2");
+    private static final RString キー = new RString("uchiwakeJoken");
     private static final RString 通知書タイプ設定値 = new RString("001");
     private static final RString コンビニマルチ収納タイプ = new RString("301");
     private static final RString コンビニ角公タイプ = new RString("302");
@@ -161,7 +162,7 @@ public class Honsanteifuka {
         List<DbT7022ShoriDateKanriEntity> entityList = new ArrayList<>();
         if (区分_ゼロ.equals(遷移元区分)) {
             entityList = 処理日付管理Dac.select処理状況_賦課(調定年度);
-        } else if (区分_いち.equals(遷移元区分)) {
+        } else if (区分_イチ.equals(遷移元区分)) {
             entityList = 処理日付管理Dac.select処理状況_通知書作成(調定年度);
         }
         if (entityList == null || entityList.isEmpty()) {
@@ -196,11 +197,11 @@ public class Honsanteifuka {
      * 打分け方法情報の取得処理２メソッドです。
      *
      * @param 打分け方法 打分け方法
-     * @return List<DbT2014TsuchishoUchiwakeJokenEntity>
+     * @return List<TsuchishoUchiwakeJoken>
      */
     public List<TsuchishoUchiwakeJoken> getutiwakehouhoujyoho2(RString 打分け方法) {
         Map<String, Object> parameter = new HashMap<>();
-        parameter.put("uchiwakeJoken", 打分け方法);
+        parameter.put(キー.toString(), 打分け方法);
         IHonsanteifukaMapper mapper = mapperProvider.create(IHonsanteifukaMapper.class);
         List<DbT2014TsuchishoUchiwakeJokenEntity> entityList = mapper.get打分け方法情報一覧(parameter);
         if (entityList == null || entityList.isEmpty()) {
@@ -486,10 +487,10 @@ public class Honsanteifuka {
             return getブックタイプ_帳票ID(調定年度, 項目名, 納通連帳区分, 帳票タイプ);
         } else if (定値_コンビニ収納.equals(項目名) && 区分_ゼロ.equals(帳票タイプ.get設定値())) {
             return getその他納入通知書_帳票ID(調定年度, 項目名, 納通連帳区分, 帳票タイプ);
-        } else if (定値_コンビニ収納.equals(項目名) && 区分_いち.equals(帳票タイプ.get設定値())) {
+        } else if (定値_コンビニ収納.equals(項目名) && 区分_イチ.equals(帳票タイプ.get設定値())) {
             if (区分_ゼロ.equals(納通連帳区分)) {
                 return ReportIdDBB.DBB100063.getReportId();
-            } else if (区分_いち.equals(納通連帳区分)) {
+            } else if (区分_イチ.equals(納通連帳区分)) {
                 return ReportIdDBB.DBB100064.getReportId();
             }
         }
@@ -500,19 +501,19 @@ public class Honsanteifuka {
         if (定値_期毎.equals(項目名) && 通知書タイプ設定値.equals(帳票タイプ.get設定値())) {
             if (区分_ゼロ.equals(納通連帳区分)) {
                 return ReportIdDBB.DBB100045.getReportId();
-            } else if (区分_いち.equals(納通連帳区分)) {
+            } else if (区分_イチ.equals(納通連帳区分)) {
                 return ReportIdDBB.DBB100046.getReportId();
             }
         } else if (定値_銀振型5期.equals(項目名) && 通知書タイプ設定値.equals(帳票タイプ.get設定値())) {
             if (区分_ゼロ.equals(納通連帳区分)) {
                 return ReportIdDBB.DBB100053.getReportId();
-            } else if (区分_いち.equals(納通連帳区分)) {
+            } else if (区分_イチ.equals(納通連帳区分)) {
                 return ReportIdDBB.DBB100054.getReportId();
             }
         } else if (定値_銀振型4期.equals(項目名) && 通知書タイプ設定値.equals(帳票タイプ.get設定値())) {
             if (区分_ゼロ.equals(納通連帳区分)) {
                 return ReportIdDBB.DBB100051.getReportId();
-            } else if (区分_いち.equals(納通連帳区分)) {
+            } else if (区分_イチ.equals(納通連帳区分)) {
                 return ReportIdDBB.DBB100052.getReportId();
             }
         }
@@ -567,13 +568,13 @@ public class Honsanteifuka {
         if (区分_ゼロ.equals(帳票制御汎用.get設定値())) {
             if (区分_ゼロ.equals(納通連帳区分)) {
                 return ReportIdDBB.DBB100056.getReportId();
-            } else if (区分_いち.equals(納通連帳区分)) {
+            } else if (区分_イチ.equals(納通連帳区分)) {
                 return ReportIdDBB.DBB100058.getReportId();
             }
-        } else if (区分_いち.equals(帳票制御汎用.get設定値())) {
+        } else if (区分_イチ.equals(帳票制御汎用.get設定値())) {
             if (区分_ゼロ.equals(納通連帳区分)) {
                 return ReportIdDBB.DBB100055.getReportId();
-            } else if (区分_いち.equals(納通連帳区分)) {
+            } else if (区分_イチ.equals(納通連帳区分)) {
                 return ReportIdDBB.DBB100057.getReportId();
             }
         }
@@ -590,13 +591,13 @@ public class Honsanteifuka {
         if (コンビニマルチ収納タイプ.equals(帳票制御汎用.get設定値())) {
             if (区分_ゼロ.equals(納通連帳区分)) {
                 return ReportIdDBB.DBB100061.getReportId();
-            } else if (区分_いち.equals(納通連帳区分)) {
+            } else if (区分_イチ.equals(納通連帳区分)) {
                 return ReportIdDBB.DBB100062.getReportId();
             }
         } else if (コンビニ角公タイプ.equals(帳票制御汎用.get設定値())) {
             if (区分_ゼロ.equals(納通連帳区分)) {
                 return ReportIdDBB.DBB100059.getReportId();
-            } else if (区分_いち.equals(納通連帳区分)) {
+            } else if (区分_イチ.equals(納通連帳区分)) {
                 return ReportIdDBB.DBB100060.getReportId();
             }
         }
@@ -631,7 +632,7 @@ public class Honsanteifuka {
         result.set資格基準日(parameter.get資格基準日());
         result.set出力帳票一覧(honsanteifukaBatchTyouhyouList);
         if (特徴出力対象_本算定.equals(parameter.get特徴_出力対象())) {
-            result.set特徴_出力対象(区分_いち);
+            result.set特徴_出力対象(区分_イチ);
         }
         result.set特徴_発行日(parameter.get特徴_発行日());
         result.set決定変更_文書番号(parameter.get文書番号());
@@ -639,26 +640,26 @@ public class Honsanteifuka {
         if (納入出力方法_別々出力.equals(parameter.get納入_出力方法())) {
             result.set納入_出力方法(区分_ゼロ);
         } else if (納入出力方法_全件出力.equals(parameter.get納入_出力方法())) {
-            result.set納入_出力方法(区分_いち);
+            result.set納入_出力方法(区分_イチ);
         }
         result.set納入_出力期(parameter.get出力期());
         if (納入対象者_すべて.equals(parameter.get納入_対象者())) {
-            result.set納入_対象者(区分_に);
+            result.set納入_対象者(区分_二);
         } else if (納入対象者_現金.equals(parameter.get納入_対象者())) {
             result.set納入_対象者(区分_ゼロ);
         } else if (納入対象者_口座.equals(parameter.get納入_対象者())) {
-            result.set納入_対象者(区分_いち);
+            result.set納入_対象者(区分_イチ);
         }
         result.set納入_発行日(parameter.get納入_発行日());
         if (区分_する.equals(parameter.get生活保護対象者())) {
             result.set納入_出力対象(区分_ゼロ);
         } else if (区分_しない.equals(parameter.get生活保護対象者())) {
-            result.set納入_出力対象(区分_いち);
+            result.set納入_出力対象(区分_イチ);
         }
         if (区分_する.equals(parameter.get納入_ページごとに山分け())) {
             result.set納入_ページごとに山分け(区分_ゼロ);
         } else if (区分_しない.equals(parameter.get納入_ページごとに山分け())) {
-            result.set納入_ページごとに山分け(区分_いち);
+            result.set納入_ページごとに山分け(区分_イチ);
         }
         result.set打分け条件情報(parameter.get打分け条件情報());
         result.set処理日時(new FlexibleDate(RDate.getNowTime().toString()));

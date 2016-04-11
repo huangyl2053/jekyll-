@@ -30,6 +30,8 @@ import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 
 /**
  * 居宅給付計画自己作成を管理するクラスです。
+ *
+ * @reamsid_L DBC-9999-011 sunhaidi
  */
 public class KyotakuKeikakuJikoSakusei
         extends ParentModelBase<KyotakuKeikakuJikoSakuseiIdentifier, DbT3007KyotakuKeikakuJikoSakuseiEntity, KyotakuKeikakuJikoSakusei>
@@ -221,14 +223,11 @@ public class KyotakuKeikakuJikoSakusei
     }
 
     /**
-     * 居宅給付計画自己作成配下の要素を削除対象とします。<br/>
-     * {@link DbT3007KyotakuKeikakuJikoSakuseiEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば削除状態にします。
-     * 居宅給付計画自己作成配下の要素である精神手帳任意項目情報の{@link Models#deleteOrRemoveAll() }を実行します。
-     * 削除処理結果となる{@link KyotakuKeikakuJikoSakusei}を返します。
+     * 居宅給付計画自己作成配下の要素を削除対象とします。<br/> {@link DbT3007KyotakuKeikakuJikoSakuseiEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば削除状態にします。
+     * 居宅給付計画自己作成配下の要素である精神手帳任意項目情報の{@link Models#deleteOrRemoveAll() }を実行します。 削除処理結果となる{@link KyotakuKeikakuJikoSakusei}を返します。
      *
      * @return 削除対象処理実施後の{@link KyotakuKeikakuJikoSakusei}
-     * @throws IllegalStateException
-     * DbT3007KyotakuKeikakuJikoSakuseiEntityのデータ状態が変更の場合
+     * @throws IllegalStateException DbT3007KyotakuKeikakuJikoSakuseiEntityのデータ状態が変更の場合
      */
     @Override
     public KyotakuKeikakuJikoSakusei deleted() {
@@ -248,8 +247,7 @@ public class KyotakuKeikakuJikoSakusei
     }
 
     /**
-     * 居宅給付計画自己作成のみを変更対象とします。<br/>
-     * {@link DbT3007KyotakuKeikakuJikoSakuseiEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば変更状態にします。
+     * 居宅給付計画自己作成のみを変更対象とします。<br/> {@link DbT3007KyotakuKeikakuJikoSakuseiEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば変更状態にします。
      *
      * @return 変更対象処理実施後の{@link KyotakuKeikakuJikoSakusei}
      */

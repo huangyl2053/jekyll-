@@ -21,7 +21,9 @@ import jp.co.ndensan.reams.uz.uza.util.config.BusinessConfig;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 
 /**
- * 徴収方法更新
+ * 徴収方法更新のクラスです。
+ *
+ * @reamsid_L DBB-9070-010 huangyanan
  */
 public class ChoshuHohoKoshin {
 

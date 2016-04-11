@@ -13,7 +13,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.TabPanel;
  * @author 自動生成
  */
 public class tplRofukuNenkinDiv extends TabPanel {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：Uz-master-49">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-01-15_09-59-03">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -29,14 +29,22 @@ public class tplRofukuNenkinDiv extends TabPanel {
      * コントロール名とフィールド名を取得する
      * フィールド名のGetterとSetter を作成
      */
+    /*
+     * getRohukuNenkin
+     * @return RohukuNenkin
+     */
     @JsonProperty("RohukuNenkin")
     public RohukuNenkinDiv getRohukuNenkin() {
         return RohukuNenkin;
     }
 
+    /*
+     * setRohukuNenkin
+     * @param RohukuNenkin RohukuNenkin
+     */
     @JsonProperty("RohukuNenkin")
     public void setRohukuNenkin(RohukuNenkinDiv RohukuNenkin) {
-        this.RohukuNenkin=RohukuNenkin;
+        this.RohukuNenkin = RohukuNenkin;
     }
 
     // </editor-fold>

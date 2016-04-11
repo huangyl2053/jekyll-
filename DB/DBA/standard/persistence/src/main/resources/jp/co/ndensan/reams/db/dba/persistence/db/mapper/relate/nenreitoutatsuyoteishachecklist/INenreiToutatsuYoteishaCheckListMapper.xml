@@ -3,7 +3,7 @@
 <!-- @reamsid_L DBA-0580-020 yaodongsheng -->
 <mapper namespace="jp.co.ndensan.reams.db.dba.persistence.db.mapper.relate.nenreitoutatsuyoteishachecklist.INenreiToutatsuYoteishaCheckListMapper">
 
-    <resultMap id="resultMap_NenreiToutatsuYoteishaCheckListEntity" type="jp.co.ndensan.reams.db.dba.entity.db.nenreitoutatsuyoteishachecklist.NenreiToutatsuYoteishaCheckListEntity" autoMapping="true">
+    <resultMap id="resultMap_NenreiToutatsuYoteishaCheckListEntity" type="jp.co.ndensan.reams.db.dba.entity.db.relate.nenreitoutatsuyoteishachecklist.NenreiToutatsuYoteishaCheckListEntity" autoMapping="true">
         <result property="shikibetsuCode"                  column="PSM_shikibetsuCode"		typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.ShikibetsuCodeTypeHandler" />
         <result property="meisho"    column="PSM_meisho"   typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
         <result property="kanaMeisho"    column="PSM_kanaMeisho"   typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />

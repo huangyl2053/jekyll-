@@ -57,6 +57,8 @@ import jp.co.ndensan.reams.uz.uza.util.config.BusinessConfig;
 
 /**
  * システム管理情報（普通徴収）
+ *
+ * @reamsid_L DBB-1770-050 xupeng
  */
 public final class FutsuChoshuTotalHandler {
 

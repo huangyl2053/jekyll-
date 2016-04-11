@@ -13,6 +13,8 @@ import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 
 /**
  * 生活保護扶助種類の識別子です。
+ *
+ * @reamsid_L DBA-9999-011 sunhaidi
  */
 @SuppressWarnings("PMD.UnusedPrivateField")
 @lombok.Value

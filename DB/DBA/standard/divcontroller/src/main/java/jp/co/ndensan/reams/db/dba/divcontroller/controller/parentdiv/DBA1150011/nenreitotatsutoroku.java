@@ -10,7 +10,7 @@ import jp.co.ndensan.reams.db.dba.definition.batchprm.nenreitotatsutorokushalist
 import jp.co.ndensan.reams.db.dba.divcontroller.entity.parentdiv.DBA1150011.BatchParamterInfoDiv;
 import jp.co.ndensan.reams.db.dba.divcontroller.entity.parentdiv.DBA1150011.nenreitotatsutorokuDiv;
 import jp.co.ndensan.reams.db.dba.divcontroller.handler.parentdiv.DBA1150011.NenreiTotatsuTorokuValidationHandler;
-import jp.co.ndensan.reams.db.dba.service.nenreitotatsutorokushalist.NenreiTotatsushaTorokuListFinder;
+import jp.co.ndensan.reams.db.dba.service.core.nenreitotatsutorokushalist.NenreiTotatsushaTorokuListFinder;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;

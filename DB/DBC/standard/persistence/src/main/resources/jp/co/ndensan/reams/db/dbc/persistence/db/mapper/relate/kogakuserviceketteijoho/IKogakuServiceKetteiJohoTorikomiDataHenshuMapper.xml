@@ -1,9 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<!--
+<!-- @reamsid_L DBC-0980-400 lijunjun -->
 
-
--->
 <mapper namespace="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.kogakuserviceketteijoho.IKogakuServiceKetteiJohoTorikomiDataHenshuMapper">
 
     <resultMap id="resultMap_KogakuKyufuKetteiInPartEntity" type="jp.co.ndensan.reams.db.dbc.entity.db.relate.kogakukyufuketteiin.KogakuKyufuKetteiInPartEntity" autoMapping="true">
@@ -23,7 +21,7 @@
         KETTEI."証記載保険者番号" AS 証記載保険者番号,
         KETTEI."被保険者番号" AS 被保険者番号,
         KETTEI."サービス提供年月" AS サービス提供年月
-        KETTEI."No" AS 通知書番号,
+        KETTEI."no" AS 通知書番号,
         KETTEI."利用者負担額" AS 利用者負担額,
         KETTEI."支給区分コード" AS 支給区分コード,
         KETTEI."決定年月" AS 決定年月,
@@ -172,7 +170,7 @@
         "atenaMeisho"=#{氏名}
     </update>
 
-
+    <!-- 高額サービス費決定情報取込み一時テーブルのCREATE-->
     <insert id="creat高額サービス費決定情報一時テーブル">
         CREATE TEMP TABLE "TABLE_KOGAKUKYUFUKETTEI"
         (
@@ -220,6 +218,7 @@
         )
     </insert>
 
+    <!-- 高額サービス費決定情報一時TBLの登録　-->
     <insert id="insert高額サービス費決定情報一時テーブル"
             parameterType="jp.co.ndensan.reams.db.dbc.entity.db.relate.kogakukyufuketteiin.KogakuKyufuKetteiInTempTableEntity">
         INSERT INTO "TABLE_KOGAKUKYUFUKETTEI"
@@ -231,7 +230,7 @@
         #{作成年月日},
         #{国保連合会名},
         #{帳票レコード種別},
-        #{No},
+        #{no},
         #{被保険者氏名},
         #{サービス提供年月},
         #{利用者負担額},
@@ -253,7 +252,16 @@
         #{口座種目},
         #{口座種目名},
         #{口座番号},
-        #{口座名義人カナ}
+        #{口座名義人カナ},
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null
         )
     </insert>
 

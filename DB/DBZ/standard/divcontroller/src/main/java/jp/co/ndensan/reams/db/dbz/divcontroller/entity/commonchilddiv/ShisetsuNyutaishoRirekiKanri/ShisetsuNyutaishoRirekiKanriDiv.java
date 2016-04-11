@@ -6,15 +6,16 @@ package jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.ShisetsuN
  */
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import java.util.HashSet;
-import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
+
+import java.util.HashSet;
+import jp.co.ndensan.reams.uz.uza.ui.servlets.ICommonChildDivMode;
+import jp.co.ndensan.reams.uz.uza.ui.servlets._CommonChildDivModeUtil;
+import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Button;
 import jp.co.ndensan.reams.uz.uza.ui.binding.DataGrid;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Mode;
-import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
-import jp.co.ndensan.reams.uz.uza.ui.servlets.ICommonChildDivMode;
-import jp.co.ndensan.reams.uz.uza.ui.servlets._CommonChildDivModeUtil;
 
 /**
  * ShisetsuNyutaishoRirekiKanri のクラスファイル
@@ -182,31 +183,6 @@ public class ShisetsuNyutaishoRirekiKanriDiv extends Panel implements IShisetsuN
      */
     @JsonProperty("modes")
     private HashSet<Mode> modes;
-
-    @Override
-    public void set表示モード(RString 表示) {
-        setMode_表示モード(表示モード.getEnum(表示.toString()));
-    }
-
-    @Override
-    public void set明細表示モード(RString 明細表示) {
-        setMode_明細表示モード(明細表示モード.getEnum(明細表示.toString()));
-    }
-
-    @Override
-    public void set利用モード(RString 利用モード) {
-        setMode_利用(利用.getEnum(利用モード.toString()));
-    }
-
-    @Override
-    public void set表示widthサイズ(RString 表示サイズ) {
-        setMode_表示widthサイズ(表示widthサイズ.getEnum(表示サイズ.toString()));
-    }
-
-    @Override
-    public void set表示heightサイズ(RString 表示サイズ) {
-        setMode_表示heightサイズ(表示heightサイズ.getEnum(表示サイズ.toString()));
-    }
 
     public static enum 表示widthサイズ implements ICommonChildDivMode {
 
@@ -431,4 +407,30 @@ public class ShisetsuNyutaishoRirekiKanriDiv extends Panel implements IShisetsuN
     public void saveShisetsuNyutaisho() {
         getHandler().saveShisetsuNyutaisho();
     }
+
+    @Override
+    public void set表示モード(RString 表示) {
+        setMode_表示モード(表示モード.getEnum(表示.toString()));
+    }
+
+    @Override
+    public void set明細表示モード(RString 明細表示) {
+        setMode_明細表示モード(明細表示モード.getEnum(明細表示.toString()));
+    }
+
+    @Override
+    public void set利用モード(RString 利用モード) {
+        setMode_利用(利用.getEnum(利用モード.toString()));
+    }
+
+    @Override
+    public void set表示widthサイズ(RString widthサイズ) {
+        setMode_表示widthサイズ(表示widthサイズ.getEnum(widthサイズ.toString()));
+    }
+
+    @Override
+    public void set表示heightサイズ(RString heightサイズ) {
+        setMode_表示heightサイズ(表示heightサイズ.getEnum(heightサイズ.toString()));
+    }
+
 }

@@ -10,6 +10,8 @@ import jp.co.ndensan.reams.uz.uza.util.serialization.DataPassingConverter;
 
 /**
  * サービス種類検索の抽象Handlerクラスです。
+ *
+ * @reamsid_L DBA-0100-010 xuyannan
  */
 public class ShichosonSelectorHandler {
 

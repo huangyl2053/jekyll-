@@ -49,6 +49,5 @@ public class JukyuShikakuShomeishoDataEntity {
     private RString 認定審査会の意見等;
     private RString 備考;
     private RString 連番;
-    private RString 交付年月日;
 
 }

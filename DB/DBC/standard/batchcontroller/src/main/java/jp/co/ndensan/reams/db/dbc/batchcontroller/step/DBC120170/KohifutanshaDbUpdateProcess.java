@@ -14,6 +14,8 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
  * 一時テーブルより、DBの更新を行う
+ *
+ * @reamsid_L DBB-0890-040 zhangrui
  */
 public class KohifutanshaDbUpdateProcess extends SimpleBatchProcessBase {
 

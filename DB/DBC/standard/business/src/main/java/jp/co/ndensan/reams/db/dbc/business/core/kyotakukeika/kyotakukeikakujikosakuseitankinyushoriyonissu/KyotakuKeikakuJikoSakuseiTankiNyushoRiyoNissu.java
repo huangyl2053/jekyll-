@@ -19,9 +19,13 @@ import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 
 /**
  * 居宅給付計画自己作成短期入所利用日数を管理するクラスです。
+ *
+ * @reamsid_L DBC-9999-011 sunhaidi
  */
 public class KyotakuKeikakuJikoSakuseiTankiNyushoRiyoNissu extends
-        ModelBase<KyotakuKeikakuJikoSakuseiTankiNyushoRiyoNissuIdentifier, DbT3010KyotakuKeikakuJikoSakuseiTankiNyushoRiyoNissuEntity, KyotakuKeikakuJikoSakuseiTankiNyushoRiyoNissu>
+        ModelBase<KyotakuKeikakuJikoSakuseiTankiNyushoRiyoNissuIdentifier,
+        DbT3010KyotakuKeikakuJikoSakuseiTankiNyushoRiyoNissuEntity,
+        KyotakuKeikakuJikoSakuseiTankiNyushoRiyoNissu>
         implements Serializable {
 
     private final DbT3010KyotakuKeikakuJikoSakuseiTankiNyushoRiyoNissuEntity entity;
@@ -56,8 +60,7 @@ public class KyotakuKeikakuJikoSakuseiTankiNyushoRiyoNissu extends
      * コンストラクタです。<br/>
      * DBより取得した{@link DbT3010KyotakuKeikakuJikoSakuseiTankiNyushoRiyoNissuEntity}より{@link KyotakuKeikakuJikoSakuseiTankiNyushoRiyoNissu}を生成します。
      *
-     * @param entity
-     * DBより取得した{@link DbT3010KyotakuKeikakuJikoSakuseiTankiNyushoRiyoNissuEntity}
+     * @param entity DBより取得した{@link DbT3010KyotakuKeikakuJikoSakuseiTankiNyushoRiyoNissuEntity}
      */
     public KyotakuKeikakuJikoSakuseiTankiNyushoRiyoNissu(DbT3010KyotakuKeikakuJikoSakuseiTankiNyushoRiyoNissuEntity entity) {
         this.entity = requireNonNull(entity, UrSystemErrorMessages.値がnull.getReplacedMessage("居宅給付計画自己作成短期入所利用日数"));
@@ -70,8 +73,7 @@ public class KyotakuKeikakuJikoSakuseiTankiNyushoRiyoNissu extends
     /**
      * シリアライズ、ビルダー用コンストラクタです。
      *
-     * @param entity
-     * {@link DbT3010KyotakuKeikakuJikoSakuseiTankiNyushoRiyoNissuEntity}
+     * @param entity {@link DbT3010KyotakuKeikakuJikoSakuseiTankiNyushoRiyoNissuEntity}
      * @param id {@link KyotakuKeikakuJikoSakuseiTankiNyushoRiyoNissuIdentifier}
      */
     KyotakuKeikakuJikoSakuseiTankiNyushoRiyoNissu(
@@ -130,8 +132,7 @@ public class KyotakuKeikakuJikoSakuseiTankiNyushoRiyoNissu extends
     /**
      * {@link DbT3010KyotakuKeikakuJikoSakuseiTankiNyushoRiyoNissuEntity}のクローンを返します。
      *
-     * @return
-     * {@link DbT3010KyotakuKeikakuJikoSakuseiTankiNyushoRiyoNissuEntity}のクローン
+     * @return {@link DbT3010KyotakuKeikakuJikoSakuseiTankiNyushoRiyoNissuEntity}のクローン
      */
     @Override
     public DbT3010KyotakuKeikakuJikoSakuseiTankiNyushoRiyoNissuEntity toEntity() {
@@ -141,8 +142,7 @@ public class KyotakuKeikakuJikoSakuseiTankiNyushoRiyoNissu extends
     /**
      * 居宅給付計画自己作成短期入所利用日数の識別子{@link KyotakuKeikakuJikoSakuseiTankiNyushoRiyoNissuIdentifier}を返します。
      *
-     * @return
-     * 居宅給付計画自己作成短期入所利用日数の識別子{@link KyotakuKeikakuJikoSakuseiTankiNyushoRiyoNissuIdentifier}
+     * @return 居宅給付計画自己作成短期入所利用日数の識別子{@link KyotakuKeikakuJikoSakuseiTankiNyushoRiyoNissuIdentifier}
      */
     @Override
     public KyotakuKeikakuJikoSakuseiTankiNyushoRiyoNissuIdentifier identifier() {

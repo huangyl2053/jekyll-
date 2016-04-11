@@ -14,25 +14,29 @@ import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
- * 国保連情報受取データ取込_[5C3]共同処理用受給者情報更新結果のクラスです
+ * 国保連情報受取データ取込_[5C3]共同処理用受給者情報更新結果のクラスです。
+ *
+ * @reamsid_L DBC-0980-070 wangkanglei
  */
 public class TsuchishoJoho5C3 {
 
+    private static final RString 帳票ID = new RString("DBC200056_KyodoJukyushaKoshinkekkaIchiran");
+
     /**
-     * 画面初期化
+     * 画面初期化のメソッドます。
      *
      * @param div TsuchishoJoho5C3Div
      * @return ResponseData
      */
     public ResponseData<TsuchishoJoho5C3Div> onLoad(TsuchishoJoho5C3Div div) {
         ChohyoBunruiKanri code = ChohyoBunruiKanriManager.createInstance().get帳票分類管理(SubGyomuCode.DBC介護給付,
-                new ReportId(new RString("DBC200056_KyodoJukyushaKoshinkekkaIchiran")));
+                new ReportId(帳票ID));
         div.getCcdKokurenJohoTorikomi().onLoadModeShutsuryokujunJoken2(SubGyomuCode.DBC介護給付, code.get帳票分類ID());
         return ResponseData.of(div).respond();
     }
 
     /**
-     * 「実行する」ボタン事件
+     * 「実行する」ボタン事件のメソッドます。
      *
      * @param div TsuchishoJoho5C3Div
      * @return ResponseData

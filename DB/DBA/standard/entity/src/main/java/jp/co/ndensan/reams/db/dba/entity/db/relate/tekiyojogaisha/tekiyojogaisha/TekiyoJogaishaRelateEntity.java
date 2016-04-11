@@ -15,6 +15,8 @@ import jp.co.ndensan.reams.uz.uza.math.Decimal;
 /**
  *
  * 適用除外者RelateEntityクラスです。
+ *
+ * @reamsid_L DBA-0210-020 dingyi
  */
 @lombok.Getter
 @lombok.Setter
@@ -24,6 +26,8 @@ public class TekiyoJogaishaRelateEntity {
     private ShikibetsuCode shikibetsuCode;
     private FlexibleDate idoYMD;
     private RString edaNo;
+    private RString idoJiyuCode;
+    private RString shichosonCode;
     private FlexibleDate tekiyoYMD;
     private FlexibleDate tekiyoTodokedeYMD;
     private RString tekiyoJogaiTekiyoJiyuCode;
@@ -36,4 +40,8 @@ public class TekiyoJogaishaRelateEntity {
     private FlexibleDate taishoYMD;
     private JigyoshaNo nyushoShisetsuCode;
     private AtenaMeisho jigyoshaMeisho;
+    private FlexibleDate nyushoTsuchiHakkoYMD;
+    private FlexibleDate taishoTsuchiHakkoYMD;
+    private FlexibleDate henkoTsuchiHakkoYMD;
+    private RString nyushoShisetsuShurui;
 }

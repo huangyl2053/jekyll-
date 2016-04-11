@@ -18,6 +18,8 @@ import jp.co.ndensan.reams.uz.uza.math.Decimal;
 
 /**
  * 過誤決定通知書情報取込一覧表（公費負担者分）Entityです。
+ *
+ * @reamsid_L DBC-0980-440 zhangrui
  */
 @lombok.Getter
 @lombok.Setter

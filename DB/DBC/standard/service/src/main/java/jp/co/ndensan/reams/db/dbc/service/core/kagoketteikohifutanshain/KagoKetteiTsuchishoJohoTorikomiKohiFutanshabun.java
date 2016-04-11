@@ -24,6 +24,8 @@ import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
 
 /**
  * 介護給付費過誤決定通知書情報の更新
+ *
+ * @reamsid_L DBC-0980-440 zhangrui
  */
 public class KagoKetteiTsuchishoJohoTorikomiKohiFutanshabun {
 

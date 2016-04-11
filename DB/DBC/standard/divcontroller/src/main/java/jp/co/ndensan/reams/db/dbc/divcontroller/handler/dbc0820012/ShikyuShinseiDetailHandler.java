@@ -43,6 +43,8 @@ import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 
 /**
  * 償還払支給申請の支給申請を登録する画面のHandler
+ *
+ * @reamsid_L DBC-1030-160 xupeng
  */
 public final class ShikyuShinseiDetailHandler {
 

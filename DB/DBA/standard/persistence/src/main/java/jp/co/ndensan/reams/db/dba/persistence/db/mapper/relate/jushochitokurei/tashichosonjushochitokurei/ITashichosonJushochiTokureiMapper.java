@@ -9,6 +9,8 @@ import jp.co.ndensan.reams.db.dba.entity.db.relate.jushochitokurei.tashichosonju
 
 /**
  * 他市町村住所地特例のマッパーインタフェースです。
+ *
+ * @reamsid_L DBA-9999-011 sunhaidi
  */
 public interface ITashichosonJushochiTokureiMapper {
 

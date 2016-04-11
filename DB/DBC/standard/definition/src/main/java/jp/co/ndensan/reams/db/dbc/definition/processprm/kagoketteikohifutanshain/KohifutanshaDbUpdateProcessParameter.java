@@ -11,6 +11,8 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
  * Processパラメータです。
+ *
+ * @reamsid_L DBC-0980-440 zhangrui
  */
 @lombok.Getter
 @lombok.Setter

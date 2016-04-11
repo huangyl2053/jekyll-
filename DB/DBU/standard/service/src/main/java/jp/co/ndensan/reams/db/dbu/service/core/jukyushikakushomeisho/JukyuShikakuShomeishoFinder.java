@@ -116,7 +116,6 @@ public class JukyuShikakuShomeishoFinder {
         outEntity.set認定審査会の意見等(inEntity.get認定審査会の意見等());
         outEntity.set備考(inEntity.get備考());
         outEntity.set連番(null);
-        outEntity.set交付年月日(inEntity.get交付年月日());
 
         return outEntity;
     }
@@ -308,7 +307,7 @@ public class JukyuShikakuShomeishoFinder {
         if (new Code("112").equals(導入形態コード) || new Code("120").equals(導入形態コード)) {
             SearchResult<KoikiZenShichosonJoho> koikiZenShichosonJohoSearchResult = koikiShichosonJohoFinder.koseiShichosonJoho();
             if (!koikiZenShichosonJohoSearchResult.records().isEmpty()) {
-                outEntity.set保険者番号(new RString(koikiZenShichosonJohoSearchResult.records().get(0).get証記載保険者番号().toString()));
+                outEntity.set保険者番号(koikiZenShichosonJohoSearchResult.records().get(0).get証記載保険者番号().getColumnValue());
             }
         } else if (new Code("111").equals(導入形態コード)) {
             List<DbT1001HihokenshaDaichoEntity> dbT1001HihokenshaDaichoEntityList = dbT1001Dac.get被保険者台帳管理情報(被保険者番号);
@@ -316,7 +315,7 @@ public class JukyuShikakuShomeishoFinder {
                 edit広域の場合保険者番号(dbT1001HihokenshaDaichoEntityList, koikiShichosonJohoFinder, outEntity);
             }
         }
-        if (outEntity.get保険者番号().isEmpty()) {
+        if (null == outEntity.get保険者番号() || outEntity.get保険者番号().isEmpty()) {
             throw new ApplicationException(DbzErrorMessages.保険者番号取得不可.getMessage());
         }
     }
@@ -328,13 +327,13 @@ public class JukyuShikakuShomeishoFinder {
             SearchResult<ShichosonCodeYoriShichoson> shichosonCodeYoriShichosonSearchResult
                     = koikiShichosonJohoFinder.shichosonCodeYoriShichosonJoho(措置元市町村コード);
             if (shichosonCodeYoriShichosonSearchResult != null) {
-                outEntity.set保険者番号(new RString(shichosonCodeYoriShichosonSearchResult.records().get(0).get証記載保険者番号().toString()));
+                outEntity.set保険者番号(shichosonCodeYoriShichosonSearchResult.records().get(0).get証記載保険者番号().getColumnValue());
             }
         } else {
             SearchResult<ShichosonCodeYoriShichoson> shichosonCodeYoriShichosonSearchResult
                     = koikiShichosonJohoFinder.shichosonCodeYoriShichosonJoho(dbT1001HihokenshaDaichoEntityList.get(0).getShichosonCode());
             if (shichosonCodeYoriShichosonSearchResult != null) {
-                outEntity.set保険者番号(new RString(shichosonCodeYoriShichosonSearchResult.records().get(0).get証記載保険者番号().toString()));
+                outEntity.set保険者番号(shichosonCodeYoriShichosonSearchResult.records().get(0).get証記載保険者番号().getColumnValue());
             }
         }
     }
@@ -381,14 +380,18 @@ public class JukyuShikakuShomeishoFinder {
     private void get申請状況情報(JukyuShikakuShomeishoDataEntity outEntity, JukyuShikakuShomeishoKaiKoEntity inEntity) {
 
         DbT4001JukyushaDaichoDac dbT4001Dac = InstanceProvider.create(DbT4001JukyushaDaichoDac.class);
-        DbT4001JukyushaDaichoEntity dbT4001JukyushaDaichoEntity = dbT4001Dac.select受給者台帳(inEntity.get被保険者番号());
+        List<DbT4001JukyushaDaichoEntity> dbT4001EntityList = dbT4001Dac.select受給者台帳(inEntity.get被保険者番号());
+        DbT4001JukyushaDaichoEntity dbT4001JukyushaDaichoEntity = null;
+        if (!dbT4001EntityList.isEmpty()) {
+            dbT4001JukyushaDaichoEntity = dbT4001EntityList.get(0);
+        }
         if (dbT4001JukyushaDaichoEntity != null) {
             if (new RString("0").equals(dbT4001JukyushaDaichoEntity.getShinseiJokyoKubun())) {
                 DbT5121ShinseiRirekiJohoDac dbT5121Dac = InstanceProvider.create(DbT5121ShinseiRirekiJohoDac.class);
                 List<DbT5121ShinseiRirekiJohoEntity> dbT5121ShinseiRirekiJohoEntityList
                         = dbT5121Dac.select前回申請管理番号(dbT4001JukyushaDaichoEntity.getShinseishoKanriNo());
 
-                FlexibleDate 認定年月日 = get認定年月日(dbT4001JukyushaDaichoEntity, dbT5121ShinseiRirekiJohoEntityList);
+                FlexibleDate 認定年月日 = get認定年月日(dbT4001EntityList, dbT5121ShinseiRirekiJohoEntityList);
                 set申請状況And年月日(outEntity, inEntity, 認定年月日);
             } else if (new RString("1").equals(dbT4001JukyushaDaichoEntity.getShinseiJokyoKubun())) {
                 set申請状況And年月日(outEntity, inEntity, dbT4001JukyushaDaichoEntity);
@@ -410,7 +413,7 @@ public class JukyuShikakuShomeishoFinder {
     }
 
     private void set申請状況And年月日(JukyuShikakuShomeishoDataEntity outEntity, JukyuShikakuShomeishoKaiKoEntity inEntity, FlexibleDate 認定年月日) {
-        if (!inEntity.get申請日().isEmpty()) {
+        if (inEntity.get申請日() != null && !inEntity.get申請日().isEmpty()) {
             outEntity.set申請状況(new RString("申請中"));
             outEntity.set申請年月日(new FlexibleDate(inEntity.get申請日()).wareki().eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN)
                     .separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString());
@@ -423,7 +426,7 @@ public class JukyuShikakuShomeishoFinder {
 
     private void set申請状況And年月日(JukyuShikakuShomeishoDataEntity outEntity,
             JukyuShikakuShomeishoKaiKoEntity inEntity, DbT4001JukyushaDaichoEntity dbT4001JukyushaDaichoEntity) {
-        if (inEntity.get申請日().isEmpty()) {
+        if (null == inEntity.get申請日() || inEntity.get申請日().isEmpty()) {
             outEntity.set申請状況(new RString("認定済"));
             outEntity.set申請年月日(RString.EMPTY);
             FlexibleDate ninteiYMD = dbT4001JukyushaDaichoEntity.getNinteiYMD();
@@ -434,13 +437,16 @@ public class JukyuShikakuShomeishoFinder {
         }
     }
 
-    private FlexibleDate get認定年月日(DbT4001JukyushaDaichoEntity dbT4001JukyushaDaichoEntity,
+    private FlexibleDate get認定年月日(List<DbT4001JukyushaDaichoEntity> dbT4001EntityList,
             List<DbT5121ShinseiRirekiJohoEntity> dbT5121ShinseiRirekiJohoEntityList) {
         FlexibleDate 認定年月日 = null;
-        for (DbT5121ShinseiRirekiJohoEntity dbT5121ShinseiRirekiJohoEntity : dbT5121ShinseiRirekiJohoEntityList) {
-            if (dbT4001JukyushaDaichoEntity.getShinseishoKanriNo().equals(dbT5121ShinseiRirekiJohoEntity.getZenkaiShinseishoKanriNo())) {
-                認定年月日 = dbT4001JukyushaDaichoEntity.getNinteiYMD();
-                break;
+        if (!dbT5121ShinseiRirekiJohoEntityList.isEmpty()) {
+            DbT5121ShinseiRirekiJohoEntity dbT5121ShinseiRirekiJohoEntity = dbT5121ShinseiRirekiJohoEntityList.get(0);
+            for (DbT4001JukyushaDaichoEntity dbT4001Entity : dbT4001EntityList) {
+                if (dbT4001Entity.getShinseishoKanriNo().equals(dbT5121ShinseiRirekiJohoEntity.getZenkaiShinseishoKanriNo())) {
+                    認定年月日 = dbT4001Entity.getNinteiYMD();
+                    break;
+                }
             }
         }
         return 認定年月日;

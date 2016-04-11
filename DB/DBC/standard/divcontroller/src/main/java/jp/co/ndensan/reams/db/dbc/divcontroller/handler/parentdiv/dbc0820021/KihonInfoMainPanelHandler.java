@@ -39,6 +39,8 @@ import jp.co.ndensan.reams.uz.uza.util.code.entity.UzT0007CodeEntity;
 
 /**
  * 償還払支給申請_サービス提供証明書_基本情報画面のハンドラクラスです。
+ *
+ * @reamsid_L DBC-1030-020 wangkanglei
  */
 public class KihonInfoMainPanelHandler {
 

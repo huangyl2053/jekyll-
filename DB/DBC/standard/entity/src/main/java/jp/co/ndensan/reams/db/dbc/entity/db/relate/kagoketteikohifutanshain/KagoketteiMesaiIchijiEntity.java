@@ -18,6 +18,8 @@ import jp.co.ndensan.reams.uz.uza.math.Decimal;
 
 /**
  * 一時テーブルに対するテーブルのエンティティ
+ *
+ * @reamsid_L DBC-0980-440 zhangrui
  */
 @lombok.Getter
 @lombok.Setter

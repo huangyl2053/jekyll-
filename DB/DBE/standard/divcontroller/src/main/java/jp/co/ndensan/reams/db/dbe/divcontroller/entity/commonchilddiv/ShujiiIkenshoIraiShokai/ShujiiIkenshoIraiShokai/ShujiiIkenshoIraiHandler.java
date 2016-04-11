@@ -39,7 +39,7 @@ public class ShujiiIkenshoIraiHandler {
      * 主治医意見書作成依頼情報を設定します。
      *
      */
-    public void onLoad() {
+    public void initialize() {
         HihokenshaNo hihokenshano = new HihokenshaNo(div.getHihokenshano());
         div.getCcdKaigoShikakuKihon().initialize(hihokenshano);
         ShujiiIkenshoIraiShokaiFinder finder = ShujiiIkenshoIraiShokaiFinder.createInstance();

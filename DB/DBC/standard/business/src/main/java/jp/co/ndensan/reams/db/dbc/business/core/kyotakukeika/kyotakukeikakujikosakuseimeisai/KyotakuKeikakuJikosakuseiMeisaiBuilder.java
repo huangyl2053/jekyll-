@@ -19,6 +19,8 @@ import jp.co.ndensan.reams.uz.uza.math.Decimal;
 
 /**
  * {@link KyotakuKeikakuJikosakuseiMeisai}の編集を行うビルダークラスです。
+ *
+ * @reamsid_L DBC-9999-011 sunhaidi
  */
 public class KyotakuKeikakuJikosakuseiMeisaiBuilder {
 
@@ -215,8 +217,7 @@ public class KyotakuKeikakuJikosakuseiMeisaiBuilder {
      * キーが一致する場合は居宅給付計画自己作成短期入所利用日数リストに居宅給付計画自己作成短期入所利用日数{@link KyotakuKeikakuJikoSakuseiTankiNyushoRiyoNissu}をセットします。<br>
      * キーが一致しない場合、新たに追加します。<br>
      *
-     * @param 居宅給付計画自己作成短期入所利用日数
-     * {@link KyotakuKeikakuJikoSakuseiTankiNyushoRiyoNissu}
+     * @param 居宅給付計画自己作成短期入所利用日数 {@link KyotakuKeikakuJikoSakuseiTankiNyushoRiyoNissu}
      * @return Builder
      * @throws IllegalStateException キーが一致しない場合
      */

@@ -14,6 +14,8 @@ import jp.co.ndensan.reams.ur.urd.entity.db.basic.seikatsuhogo.UrT0528SeikatsuHo
 
 /**
  * 生活保護受給者RelateEntityクラスです。
+ *
+ * @reamsid_L DBA-9999-011 sunhaidi
  */
 @lombok.Getter
 @lombok.Setter

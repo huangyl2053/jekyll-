@@ -9,8 +9,9 @@ import jp.co.ndensan.reams.uz.uza.biz.ReportId;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
- *
  * 帳票ＩＤの列挙型です。
+ *
+ * @reamsid_L DBA-9999-021 xuyannan
  */
 public enum ReportIdDBA {
 
@@ -231,7 +232,11 @@ public enum ReportIdDBA {
     /**
      * 被保険者台帳です。
      */
-    DBA100009(new ReportId("DBA100009_HihokenshaDaicho"), new RString("被保険者台帳"));
+    DBA100009(new ReportId("DBA100009_HihokenshaDaicho"), new RString("被保険者台帳")),
+    /**
+     * 他市町村住所地特例者台帳の帳票ＩＤです。
+     */
+    DBA100011(new ReportId("DBA100011_TashichosonJushochitokureishaDaicho"), new RString("他市町村住所地特例者台帳"));
 
     private final ReportId reportId;
     private final RString reportName;

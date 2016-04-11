@@ -16,16 +16,20 @@ import jp.co.ndensan.reams.db.dbc.divcontroller.viewbox.dbc0810014.ServiceTeiKyo
 import jp.co.ndensan.reams.db.dbc.service.core.shokanbaraijyokyoshokai.ShokanbaraiJyokyoShokai;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
+import jp.co.ndensan.reams.db.dbz.service.TaishoshaKey;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.ApplicationException;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
+import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 
 /**
  * 償還払い状況照会_食事費用画面のクラスです。
+ *
+ * @reamsid_L DBC-1010-120 wangkanglei
  */
 public class ShokujiHiyo {
 
@@ -35,18 +39,13 @@ public class ShokujiHiyo {
     private static final FlexibleYearMonth 平成17年10月 = new FlexibleYearMonth("200510");
 
     /**
-     * 画面初期化
+     * 画面初期化のメソッドます。
      *
      * @param div ShokujiHiyoDiv
      * @return ResponseData
      */
     public ResponseData<ShokujiHiyoDiv> onLoad(ShokujiHiyoDiv div) {
-        // TODO 引き継ぎデータの取得
-        ServiceTeiKyoShomeishoParameter parmeter = new ServiceTeiKyoShomeishoParameter(
-                new HihokenshaNo("000000003"), new FlexibleYearMonth(new RString("200501")),
-                new RString("0000000003"), new JigyoshaNo("0000000003"), new RString("事業者名"),
-                new RString("0003"), new RString("証明書"));
-        ViewStateHolder.put(ViewStateKeys.基本情報パラメータ, parmeter);
+
         ServiceTeiKyoShomeishoParameter parameter = ViewStateHolder.get(
                 ViewStateKeys.基本情報パラメータ, ServiceTeiKyoShomeishoParameter.class);
         FlexibleYearMonth サービス年月 = parameter.getServiceTeikyoYM();
@@ -56,15 +55,10 @@ public class ShokujiHiyo {
         RString 明細番号 = parameter.getMeisaiNo();
         RString 証明書 = parameter.getServiceYM();
         ViewStateHolder.put(ViewStateKeys.サービス年月, parameter.getServiceTeikyoYM());
-
-        // TODO 該当者検索画面ViewState．識別コード
-        ViewStateHolder.put(ViewStateKeys.識別コード, new ShikibetsuCode("000000000000010"));
-        ShikibetsuCode 識別コード = ViewStateHolder.get(ViewStateKeys.識別コード, ShikibetsuCode.class);
-        // TODO 申請書検索ViewSate．様式番号
-        ViewStateHolder.put(ViewStateKeys.様式番号, new RString("0003"));
-        RString 様式番号 = ViewStateHolder.get(ViewStateKeys.様式番号, RString.class);
-        // TODO 申請検索画面ViewState. 申請日
-        ViewStateHolder.put(ViewStateKeys.申請日, new RString("20151124"));
+        TaishoshaKey 引継ぎデータ = ViewStateHolder.get(ViewStateKeys.資格対象者, TaishoshaKey.class);
+        ShikibetsuCode 識別コード = 引継ぎデータ.get識別コード();
+        RString 様式番号 = ViewStateHolder.get(ViewStateKeys.償還払申請一覧_様式番号, RString.class);
+        RDate 申請日 = new RDate(ViewStateHolder.get(ViewStateKeys.償還払申請一覧_申請日, RString.class).toString());
 
         div.getPanelCcd().getCcdKaigoAtenaInfo().onLoad(識別コード);
         if (!被保険者番号.isEmpty()) {
@@ -72,8 +66,7 @@ public class ShokujiHiyo {
         } else {
             div.getPanelCcd().getCcdKaigoShikakuKihon().setVisible(false);
         }
-        getHandler(div).setヘッダーエリア(サービス年月, 事業者番号,
-                ViewStateHolder.get(ViewStateKeys.申請日, RString.class), 明細番号, 証明書);
+        getHandler(div).setヘッダーエリア(サービス年月, 事業者番号, 申請日, 明細番号, 証明書);
 
         if (平成１５年４月.isBeforeOrEquals(サービス年月) && サービス年月.isBeforeOrEquals(平成17年９月)) {
             div.getPanelShokuji().getPanelShoikujiList().setVisible(true);
@@ -132,7 +125,7 @@ public class ShokujiHiyo {
     }
 
     /**
-     * 食事費用合計設定パネルの「閉じる」ボタン
+     * 食事費用合計設定パネルの「閉じる」ボタンのメソッドます。
      *
      * @param div ShokujiHiyoDiv
      * @return ResponseData
@@ -143,7 +136,7 @@ public class ShokujiHiyo {
     }
 
     /**
-     * 食事費用パネル２の「閉じる」ボタン
+     * 食事費用パネル２の「閉じる」ボタンのメソッドます。
      *
      * @param div ShokujiHiyoDiv
      * @return ResponseData
@@ -154,7 +147,7 @@ public class ShokujiHiyo {
     }
 
     /**
-     * 食事費用一覧グリッドの「選択」ボタン
+     * 食事費用一覧グリッドの「選択」ボタンのメソッドます。
      *
      * @param div ShokujiHiyoDiv
      * @return ResponseData

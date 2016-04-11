@@ -29,6 +29,8 @@ import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 
 /**
  * 事業報告（月報）補正発行_様式１補正画面のHandlerです。
+ *
+ * @reamsid_L DBU-1100-060 zhangrui
  */
 public class JigyoHokokuGeppoYoshikiIchiHoseiHandler {
 

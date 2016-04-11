@@ -9,7 +9,6 @@ import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5121ShinseiRirekiJoho;
 import static jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5121ShinseiRirekiJoho.shinseishoKanriNo;
-import static jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5121ShinseiRirekiJoho.zenkaiShinseishoKanriNo;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5121ShinseiRirekiJohoEntity;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.core.mybatis.SqlSession;
@@ -94,7 +93,7 @@ public class DbT5121ShinseiRirekiJohoDac implements ISaveable<DbT5121ShinseiRire
         return accessor.select().
                 table(DbT5121ShinseiRirekiJoho.class).
                 where(
-                        eq(zenkaiShinseishoKanriNo, 申請管理番号)).
+                        eq(shinseishoKanriNo, 申請管理番号)).
                 toList(DbT5121ShinseiRirekiJohoEntity.class);
     }
 }

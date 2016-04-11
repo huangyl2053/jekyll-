@@ -21,6 +21,8 @@ import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 
 /**
  * 居宅給付計画事業者作成を管理するクラスです。
+ *
+ * @reamsid_L DBC-9999-011 sunhaidi
  */
 public class KyotakuKeikakuJigyoshaSakusei
         extends ModelBase<KyotakuKeikakuJigyoshaSakuseiIdentifier, DbT3006KyotakuKeikakuJigyoshaSakuseiEntity, KyotakuKeikakuJigyoshaSakusei>

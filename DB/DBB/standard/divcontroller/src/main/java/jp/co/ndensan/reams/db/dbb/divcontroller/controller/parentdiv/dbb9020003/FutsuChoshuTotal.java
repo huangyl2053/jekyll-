@@ -18,6 +18,8 @@ import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
 
 /**
  * 画面設計_DBB9020003_システム管理情報（普通徴収）
+ *
+ * @reamsid_L DBB-1770-050 xupeng
  */
 public class FutsuChoshuTotal {
 

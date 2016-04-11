@@ -51,7 +51,6 @@ public final class KinkyujiShisetuRyoyohiPanelHandler {
     private static final RString 削除 = new RString("削除");
     private static final RString 登録 = new RString("登録");
     private static final RString 登録_削除 = new RString("登録_削除");
-    private static final RString 改行 = new RString("\n");
     private static final int 位置１ = 32;
     private static final int 位置２ = 64;
     private static final int 位置３ = 96;

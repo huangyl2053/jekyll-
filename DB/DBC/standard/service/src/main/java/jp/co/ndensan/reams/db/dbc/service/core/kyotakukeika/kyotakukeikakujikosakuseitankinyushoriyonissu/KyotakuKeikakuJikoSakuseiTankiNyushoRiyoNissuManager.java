@@ -19,6 +19,8 @@ import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
 
 /**
  * 居宅給付計画自己作成短期入所利用日数を管理するクラスです。
+ *
+ * @reamsid_L DBC-9999-011 sunhaidi
  */
 public class KyotakuKeikakuJikoSakuseiTankiNyushoRiyoNissuManager {
 
@@ -50,7 +52,7 @@ public class KyotakuKeikakuJikoSakuseiTankiNyushoRiyoNissuManager {
      */
     @Transaction
     public KyotakuKeikakuJikoSakuseiTankiNyushoRiyoNissu get居宅給付計画自己作成短期入所利用日数(
-             HihokenshaNo 被保険者番号,
+            HihokenshaNo 被保険者番号,
             FlexibleYearMonth 対象年月,
             int 履歴番号) {
         requireNonNull(被保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage("被保険者番号"));
