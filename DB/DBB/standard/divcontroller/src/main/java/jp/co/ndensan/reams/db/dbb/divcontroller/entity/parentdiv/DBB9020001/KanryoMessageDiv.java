@@ -1,4 +1,4 @@
-package jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0410025;
+package jp.co.ndensan.reams.db.dbb.divcontroller.entity.parentdiv.DBB9020001;
 /*
  * このコードはツールによって生成されました。
  * このファイルへの変更は、再生成時には損失するため
@@ -6,16 +6,16 @@ package jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0410025;
  */
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import jp.co.ndensan.reams.db.dbc.divcontroller.entity.commonchilddiv.KaigoKyufuKokuhorenJohoTorikomi.IKaigoKyufuKokuhorenJohoTorikomiDiv;
-import jp.co.ndensan.reams.db.dbc.divcontroller.entity.commonchilddiv.KaigoKyufuKokuhorenJohoTorikomi.KaigoKyufuKokuhorenJohoTorikomiDiv;
-import jp.co.ndensan.reams.uz.uza.ui.binding.PanelBatchParameter;
+import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.KaigoKanryoMessage.KaigoKanryoMessage.IKaigoKanryoMessageDiv;
+import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.KaigoKanryoMessage.KaigoKanryoMessage.KaigoKanryoMessageDiv;
+import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 
 /**
- * TsuchishoJoho641 のクラスファイル
+ * KanryoMessage のクラスファイル
  *
- * @reamsid_L DBC-0980-250 wangkanglei
+ * @reamsid_L DBB-1770-010 zhangrui
  */
-public class TsuchishoJoho641Div extends PanelBatchParameter {
+public class KanryoMessageDiv extends Panel {
 
     // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-01-15_09-59-03">
     /*
@@ -24,8 +24,8 @@ public class TsuchishoJoho641Div extends PanelBatchParameter {
      * コントロール名とフィールド名を取得する
      * private + コントロール名 + フィールド名 の文字列を作成
      */
-    @JsonProperty("ccdKokurenJohoTorikomi")
-    private KaigoKyufuKokuhorenJohoTorikomiDiv ccdKokurenJohoTorikomi;
+    @JsonProperty("ccdKaigoKanryoMessage")
+    private KaigoKanryoMessageDiv ccdKaigoKanryoMessage;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -34,12 +34,12 @@ public class TsuchishoJoho641Div extends PanelBatchParameter {
      * フィールド名のGetterとSetter を作成
      */
     /*
-     * getccdKokurenJohoTorikomi
-     * @return ccdKokurenJohoTorikomi
+     * getccdKaigoKanryoMessage
+     * @return ccdKaigoKanryoMessage
      */
-    @JsonProperty("ccdKokurenJohoTorikomi")
-    public IKaigoKyufuKokuhorenJohoTorikomiDiv getCcdKokurenJohoTorikomi() {
-        return ccdKokurenJohoTorikomi;
+    @JsonProperty("ccdKaigoKanryoMessage")
+    public IKaigoKanryoMessageDiv getCcdKaigoKanryoMessage() {
+        return ccdKaigoKanryoMessage;
     }
 
     // </editor-fold>
