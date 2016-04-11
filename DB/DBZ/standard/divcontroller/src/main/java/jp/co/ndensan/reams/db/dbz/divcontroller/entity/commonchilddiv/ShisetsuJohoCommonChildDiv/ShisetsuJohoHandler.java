@@ -6,8 +6,8 @@ import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
 import jp.co.ndensan.reams.db.dbz.business.core.shisetujyoho.KaigoJigyoshaInputGuide;
 import jp.co.ndensan.reams.db.dbz.business.core.shisetujyoho.KaigoJogaiTokureiTaishoShisetsuInputGuide;
 import jp.co.ndensan.reams.db.dbz.definition.core.ViewStateKeys;
-import jp.co.ndensan.reams.db.dbz.definition.core.enumeratedtype.DaichoType;
-import jp.co.ndensan.reams.db.dbz.definition.core.enumeratedtype.ShisetsuType;
+import jp.co.ndensan.reams.db.dbz.definition.core.daichokubun.DaichoType;
+import jp.co.ndensan.reams.db.dbz.definition.core.shisetsushurui.ShisetsuType;
 import jp.co.ndensan.reams.db.dbz.service.core.shisetsu.ShisetsuJohoInputGuideFinder;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.uz.uza.lang.ApplicationException;
@@ -53,8 +53,8 @@ public class ShisetsuJohoHandler {
         if (台帳種別表示有り.equals(ViewStateHolder.get(ViewStateKeys.台帳種別表示, RString.class))) {
 
             div.getDdlDaichoShubetsu().setDataSource(ドロップダウンの設定());
-            div.getDdlDaichoShubetsu().setSelectedKey(DaichoType.被保険者.getCode());
-            div.getRadKaigoHokenShisetsu().setSelectedKey(ShisetsuType.介護保険施設.getCode());
+            div.getDdlDaichoShubetsu().setSelectedKey(DaichoType.被保険者.getコード());
+            div.getRadKaigoHokenShisetsu().setSelectedKey(ShisetsuType.介護保険施設.getコード());
             div.getRadOtherTokureiShisetsu().getDisabledItem().clear();
             div.getRadTekiyoJyogaiShisetsu().getDisabledItem().clear();
         }
@@ -67,7 +67,7 @@ public class ShisetsuJohoHandler {
             div.getRadOtherTokureiShisetsu().setVisible(true);
             div.getRadTekiyoJyogaiShisetsu().setVisible(true);
             div.getDdlDaichoShubetsu().setVisible(false);
-            div.getRadKaigoHokenShisetsu().setSelectedKey(ShisetsuType.介護保険施設.getCode());
+            div.getRadKaigoHokenShisetsu().setSelectedKey(ShisetsuType.介護保険施設.getコード());
             div.getRadOtherTokureiShisetsu().getDisabledItem().clear();
             div.getRadTekiyoJyogaiShisetsu().getDisabledItem().clear();
         }
@@ -75,7 +75,7 @@ public class ShisetsuJohoHandler {
         if (台帳種別表示無し.equals(ViewStateHolder.get(ViewStateKeys.台帳種別表示, RString.class))) {
             if (被保険者.equals(ViewStateHolder.get(ViewStateKeys.被保険者, RString.class))) {
                 div.getRadTekiyoJyogaiShisetsu().setVisible(false);
-                div.getRadKaigoHokenShisetsu().setSelectedKey(ShisetsuType.介護保険施設.getCode());
+                div.getRadKaigoHokenShisetsu().setSelectedKey(ShisetsuType.介護保険施設.getコード());
                 div.getDdlDaichoShubetsu().setVisible(false);
                 div.getRadOtherTokureiShisetsu().getDisabledItem().clear();
                 div.getRadTekiyoJyogaiShisetsu().getDisabledItem().clear();
@@ -84,7 +84,7 @@ public class ShisetsuJohoHandler {
 
                 div.getRadTekiyoJyogaiShisetsu().setVisible(false);
                 div.getDdlDaichoShubetsu().setVisible(false);
-                div.getRadKaigoHokenShisetsu().setSelectedKey(ShisetsuType.介護保険施設.getCode());
+                div.getRadKaigoHokenShisetsu().setSelectedKey(ShisetsuType.介護保険施設.getコード());
                 div.getRadOtherTokureiShisetsu().getDisabledItem().clear();
                 div.getRadTekiyoJyogaiShisetsu().getDisabledItem().clear();
             }
@@ -104,23 +104,23 @@ public class ShisetsuJohoHandler {
      */
     public void onChange() {
 
-        if (DaichoType.被保険者.getCode().equals(div.getDdlDaichoShubetsu().getSelectedKey())) {
+        if (DaichoType.被保険者.getコード().equals(div.getDdlDaichoShubetsu().getSelectedKey())) {
             div.getRadKaigoHokenShisetsu().setVisible(true);
             div.getRadOtherTokureiShisetsu().setVisible(true);
             div.getRadTekiyoJyogaiShisetsu().setVisible(false);
-            div.getRadKaigoHokenShisetsu().setSelectedKey(ShisetsuType.介護保険施設.getCode());
+            div.getRadKaigoHokenShisetsu().setSelectedKey(ShisetsuType.介護保険施設.getコード());
             div.getRadOtherTokureiShisetsu().getDisabledItem().clear();
             div.getRadTekiyoJyogaiShisetsu().getDisabledItem().clear();
         }
-        if (DaichoType.他市町村住所地特例者.getCode().equals(div.getDdlDaichoShubetsu().getSelectedKey())) {
+        if (DaichoType.他市町村住所地特例者.getコード().equals(div.getDdlDaichoShubetsu().getSelectedKey())) {
             div.getRadKaigoHokenShisetsu().setVisible(true);
             div.getRadOtherTokureiShisetsu().setVisible(true);
             div.getRadTekiyoJyogaiShisetsu().setVisible(false);
-            div.getRadKaigoHokenShisetsu().setSelectedKey(ShisetsuType.介護保険施設.getCode());
+            div.getRadKaigoHokenShisetsu().setSelectedKey(ShisetsuType.介護保険施設.getコード());
             div.getRadOtherTokureiShisetsu().getDisabledItem().clear();
             div.getRadTekiyoJyogaiShisetsu().getDisabledItem().clear();
         }
-        if (DaichoType.適用除外者.getCode().equals(div.getDdlDaichoShubetsu().getSelectedKey())) {
+        if (DaichoType.適用除外者.getコード().equals(div.getDdlDaichoShubetsu().getSelectedKey())) {
             div.getRadKaigoHokenShisetsu().setVisible(false);
             div.getRadOtherTokureiShisetsu().setVisible(false);
             div.getRadTekiyoJyogaiShisetsu().setVisible(false);
@@ -180,7 +180,7 @@ public class ShisetsuJohoHandler {
             div.getRadTekiyoJyogaiShisetsu().getDisabledItem().clear();
             ShisetsuJohoInputGuideFinder shisetsuJoho = new ShisetsuJohoInputGuideFinder();
             SearchResult<KaigoJogaiTokureiTaishoShisetsuInputGuide> kaigoJogaiTokureiTaisho = shisetsuJoho.
-                    getKaigoJogaiTokureiTaishoShisetsuInputGuide(ShisetsuType.住所地特例対象施設.getCode(),
+                    getKaigoJogaiTokureiTaishoShisetsuInputGuide(ShisetsuType.住所地特例対象施設.getコード(),
                             new JigyoshaNo(div.getTxtNyuryokuShisetsuKodo().getValue()), FlexibleDate.getNowDate());
             if (!kaigoJogaiTokureiTaisho.records().isEmpty()) {
 
@@ -203,7 +203,7 @@ public class ShisetsuJohoHandler {
             div.getRadOtherTokureiShisetsu().getDisabledItem().clear();
             ShisetsuJohoInputGuideFinder shisetsuJoho = new ShisetsuJohoInputGuideFinder();
             SearchResult<KaigoJogaiTokureiTaishoShisetsuInputGuide> kaigoJogaiTokureiTaisho = shisetsuJoho.
-                    getKaigoJogaiTokureiTaishoShisetsuInputGuide(ShisetsuType.適用除外施設.getCode(),
+                    getKaigoJogaiTokureiTaishoShisetsuInputGuide(ShisetsuType.適用除外施設.getコード(),
                             new JigyoshaNo(div.getTxtNyuryokuShisetsuKodo().getValue()), FlexibleDate.getNowDate());
             if (!kaigoJogaiTokureiTaisho.records().isEmpty()) {
 
@@ -222,8 +222,8 @@ public class ShisetsuJohoHandler {
         for (DaichoType type : DaichoType.values()) {
 
             KeyValueDataSource dataSource = new KeyValueDataSource();
-            dataSource.setKey(type.getCode());
-            dataSource.setValue(type.getName());
+            dataSource.setKey(type.getコード());
+            dataSource.setValue(type.get名称());
             dataSourceList.add(dataSource);
         }
         return dataSourceList;
@@ -291,7 +291,7 @@ public class ShisetsuJohoHandler {
                 && (div.getRadTekiyoJyogaiShisetsu().getSelectedKey() == null
                 || div.getRadTekiyoJyogaiShisetsu().getSelectedKey().isEmpty())) {
 
-            return ShisetsuType.適用除外施設.getCode();
+            return ShisetsuType.適用除外施設.getコード();
         }
         return RString.EMPTY;
     }
@@ -303,13 +303,13 @@ public class ShisetsuJohoHandler {
      */
     public void set施設種類(RString key) {
 
-        if (ShisetsuType.介護保険施設.getCode().equals(key)) {
+        if (ShisetsuType.介護保険施設.getコード().equals(key)) {
             div.getRadKaigoHokenShisetsu().setSelectedKey(key);
         }
-        if (ShisetsuType.住所地特例対象施設.getCode().equals(key)) {
+        if (ShisetsuType.住所地特例対象施設.getコード().equals(key)) {
             div.getRadOtherTokureiShisetsu().setSelectedKey(key);
         }
-        if (ShisetsuType.適用除外施設.getCode().equals(key)) {
+        if (ShisetsuType.適用除外施設.getコード().equals(key)) {
             div.getRadTekiyoJyogaiShisetsu().setSelectedKey(key);
         }
     }
@@ -321,13 +321,13 @@ public class ShisetsuJohoHandler {
      */
     public void set台帳種別(RString key) {
 
-        if (DaichoType.被保険者.getCode().equals(key)) {
+        if (DaichoType.被保険者.getコード().equals(key)) {
             div.getDdlDaichoShubetsu().setSelectedKey(key);
         }
-        if (DaichoType.他市町村住所地特例者.getCode().equals(key)) {
+        if (DaichoType.他市町村住所地特例者.getコード().equals(key)) {
             div.getDdlDaichoShubetsu().setSelectedKey(key);
         }
-        if (DaichoType.適用除外者.getCode().equals(key)) {
+        if (DaichoType.適用除外者.getコード().equals(key)) {
             div.getDdlDaichoShubetsu().setSelectedKey(key);
         }
     }
