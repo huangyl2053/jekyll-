@@ -345,7 +345,7 @@ public class KaigoHokenryoChoshuyuyoKetteiTsuchishoPrintService {
         ChoshuYuyoJoho choshuYuyoJoho = 徴収猶予決定通知書情報.get徴収猶予の情報();
         RString 徴収方法 = choshuYuyoJoho.get介護期別徴収猶予().getChoshuHoho();
         RString 期 = new RString(String.valueOf(choshuYuyoJoho.get介護期別徴収猶予().getKi()));
-        if (徴収方法.equals(new RString(ChoshuHohoKibetsu.普通徴収.toString())) && 普徴期月.get期().equals(期)) {
+        if (new RString(ChoshuHohoKibetsu.普通徴収.toString()).equals(徴収方法) && 普徴期月.get期().equals(期)) {
             徴収猶予期間 = new RString(DateEditor.to西暦(choshuYuyoJoho.get介護期別徴収猶予().getYuyoStartYMD()).toString()
                     + 波線.toString() + DateEditor.to西暦(choshuYuyoJoho.get介護期別徴収猶予().getYuyoEndYMD()).toString());
         } else {
