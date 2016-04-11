@@ -4,18 +4,20 @@ package jp.co.ndensan.reams.db.dbu.divcontroller.entity.parentdiv.DBU0020021;
  * このファイルへの変更は、再生成時には損失するため
  * 不正な動作の原因になります。
  */
+
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import jp.co.ndensan.reams.uz.uza.ui.binding.*;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TableCell;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TablePanel;
+import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxNum;
 
 /**
- * tplFirstHihokensyaUtiwake のクラスファイル 
- * 
- * @author 自動生成
+ * tplFirstHihokensyaUtiwake のクラスファイル
+ *
+ * @reamsid_L DBU-1100-060 zhangrui
  */
 public class tplFirstHihokensyaUtiwakeDiv extends TablePanel {
+
     // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：バージョン情報無し">
     /*
      * [ private の作成 ]
@@ -656,9 +658,10 @@ public class tplFirstHihokensyaUtiwakeDiv extends TablePanel {
 
     // </editor-fold>
 }
+
 /**
- * celFirstHihokensyaUtiwakeR2C1 のクラスファイル 
- * 
+ * celFirstHihokensyaUtiwakeR2C1 のクラスファイル
+ *
  * @author 自動生成
  */
 class celFirstHihokensyaUtiwakeR2C1AttplFirstHihokensyaUtiwake extends TableCell {
@@ -666,12 +669,14 @@ class celFirstHihokensyaUtiwakeR2C1AttplFirstHihokensyaUtiwake extends TableCell
 
     // </editor-fold>
 }
+
 /**
- * celFirstHihokensyaUtiwakeR2C3 のクラスファイル 
- * 
+ * celFirstHihokensyaUtiwakeR2C3 のクラスファイル
+ *
  * @author 自動生成
  */
 class celFirstHihokensyaUtiwakeR2C3AttplFirstHihokensyaUtiwake extends TableCell {
+
     // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：バージョン情報無し">
     @JsonProperty("txtToGetsuZoTennyu")
     private TextBoxNum txtToGetsuZoTennyu;
@@ -696,12 +701,14 @@ class celFirstHihokensyaUtiwakeR2C3AttplFirstHihokensyaUtiwake extends TableCell
 
     // </editor-fold>
 }
+
 /**
- * celFirstHihokensyaUtiwakeR2C4 のクラスファイル 
- * 
+ * celFirstHihokensyaUtiwakeR2C4 のクラスファイル
+ *
  * @author 自動生成
  */
 class celFirstHihokensyaUtiwakeR2C4AttplFirstHihokensyaUtiwake extends TableCell {
+
     // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：バージョン情報無し">
     @JsonProperty("txtToGetsuzoShokukenFukatsu")
     private TextBoxNum txtToGetsuzoShokukenFukatsu;
@@ -726,12 +733,14 @@ class celFirstHihokensyaUtiwakeR2C4AttplFirstHihokensyaUtiwake extends TableCell
 
     // </editor-fold>
 }
+
 /**
- * celFirstHihokensyaUtiwakeR2C5 のクラスファイル 
- * 
+ * celFirstHihokensyaUtiwakeR2C5 のクラスファイル
+ *
  * @author 自動生成
  */
 class celFirstHihokensyaUtiwakeR2C5AttplFirstHihokensyaUtiwake extends TableCell {
+
     // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：バージョン情報無し">
     @JsonProperty("txtToGetsuNenreiToutatsu")
     private TextBoxNum txtToGetsuNenreiToutatsu;
@@ -756,12 +765,14 @@ class celFirstHihokensyaUtiwakeR2C5AttplFirstHihokensyaUtiwake extends TableCell
 
     // </editor-fold>
 }
+
 /**
- * celFirstHihokensyaUtiwakeR2C6 のクラスファイル 
- * 
+ * celFirstHihokensyaUtiwakeR2C6 のクラスファイル
+ *
  * @author 自動生成
  */
 class celFirstHihokensyaUtiwakeR2C6AttplFirstHihokensyaUtiwake extends TableCell {
+
     // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：バージョン情報無し">
     @JsonProperty("txtToGetsuZoTekiyojogaihi")
     private TextBoxNum txtToGetsuZoTekiyojogaihi;
@@ -786,12 +797,14 @@ class celFirstHihokensyaUtiwakeR2C6AttplFirstHihokensyaUtiwake extends TableCell
 
     // </editor-fold>
 }
+
 /**
- * celFirstHihokensyaUtiwakeR2C7 のクラスファイル 
- * 
+ * celFirstHihokensyaUtiwakeR2C7 のクラスファイル
+ *
  * @author 自動生成
  */
 class celFirstHihokensyaUtiwakeR2C7AttplFirstHihokensyaUtiwake extends TableCell {
+
     // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：バージョン情報無し">
     @JsonProperty("txtToGetsuZoSonota")
     private TextBoxNum txtToGetsuZoSonota;
@@ -816,12 +829,14 @@ class celFirstHihokensyaUtiwakeR2C7AttplFirstHihokensyaUtiwake extends TableCell
 
     // </editor-fold>
 }
+
 /**
- * celFirstHihokensyaUtiwakeR2C8 のクラスファイル 
- * 
+ * celFirstHihokensyaUtiwakeR2C8 のクラスファイル
+ *
  * @author 自動生成
  */
 class celFirstHihokensyaUtiwakeR2C8AttplFirstHihokensyaUtiwake extends TableCell {
+
     // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：バージョン情報無し">
     @JsonProperty("txtToGetsuZoKei")
     private TextBoxNum txtToGetsuZoKei;
@@ -846,12 +861,14 @@ class celFirstHihokensyaUtiwakeR2C8AttplFirstHihokensyaUtiwake extends TableCell
 
     // </editor-fold>
 }
+
 /**
- * celFirstHihokensyaUtiwakeR4C3 のクラスファイル 
- * 
+ * celFirstHihokensyaUtiwakeR4C3 のクラスファイル
+ *
  * @author 自動生成
  */
 class celFirstHihokensyaUtiwakeR4C3AttplFirstHihokensyaUtiwake extends TableCell {
+
     // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：バージョン情報無し">
     @JsonProperty("txtToGetsuJitokuTekiyo")
     private TextBoxNum txtToGetsuJitokuTekiyo;
@@ -876,12 +893,14 @@ class celFirstHihokensyaUtiwakeR4C3AttplFirstHihokensyaUtiwake extends TableCell
 
     // </editor-fold>
 }
+
 /**
- * celFirstHihokensyaUtiwakeR4C4 のクラスファイル 
- * 
+ * celFirstHihokensyaUtiwakeR4C4 のクラスファイル
+ *
  * @author 自動生成
  */
 class celFirstHihokensyaUtiwakeR4C4AttplFirstHihokensyaUtiwake extends TableCell {
+
     // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：バージョン情報無し">
     @JsonProperty("txtToGetsuzoJitokuReiTennyu")
     private TextBoxNum txtToGetsuzoJitokuReiTennyu;
@@ -906,12 +925,14 @@ class celFirstHihokensyaUtiwakeR4C4AttplFirstHihokensyaUtiwake extends TableCell
 
     // </editor-fold>
 }
+
 /**
- * celFirstHihokensyaUtiwakeR4C5 のクラスファイル 
- * 
+ * celFirstHihokensyaUtiwakeR4C5 のクラスファイル
+ *
  * @author 自動生成
  */
 class celFirstHihokensyaUtiwakeR4C5AttplFirstHihokensyaUtiwake extends TableCell {
+
     // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：バージョン情報無し">
     @JsonProperty("txtToGetsuzoTatokureiKyoju")
     private TextBoxNum txtToGetsuzoTatokureiKyoju;
@@ -936,12 +957,14 @@ class celFirstHihokensyaUtiwakeR4C5AttplFirstHihokensyaUtiwake extends TableCell
 
     // </editor-fold>
 }
+
 /**
- * celFirstHihokensyaUtiwakeR4C6 のクラスファイル 
- * 
+ * celFirstHihokensyaUtiwakeR4C6 のクラスファイル
+ *
  * @author 自動生成
  */
 class celFirstHihokensyaUtiwakeR4C6AttplFirstHihokensyaUtiwake extends TableCell {
+
     // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：バージョン情報無し">
     @JsonProperty("txtToGetsuzoGaikokujinShisei")
     private TextBoxNum txtToGetsuzoGaikokujinShisei;
@@ -966,12 +989,14 @@ class celFirstHihokensyaUtiwakeR4C6AttplFirstHihokensyaUtiwake extends TableCell
 
     // </editor-fold>
 }
+
 /**
- * celFirstHihokensyaUtiwakeR4C7 のクラスファイル 
- * 
+ * celFirstHihokensyaUtiwakeR4C7 のクラスファイル
+ *
  * @author 自動生成
  */
 class celFirstHihokensyaUtiwakeR4C7AttplFirstHihokensyaUtiwake extends TableCell {
+
     // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：バージョン情報無し">
     @JsonProperty("txtToGetsuzoKika")
     private TextBoxNum txtToGetsuzoKika;
@@ -996,12 +1021,14 @@ class celFirstHihokensyaUtiwakeR4C7AttplFirstHihokensyaUtiwake extends TableCell
 
     // </editor-fold>
 }
+
 /**
- * celFirstHihokensyaUtiwakeR4C8 のクラスファイル 
- * 
+ * celFirstHihokensyaUtiwakeR4C8 のクラスファイル
+ *
  * @author 自動生成
  */
 class celFirstHihokensyaUtiwakeR4C8AttplFirstHihokensyaUtiwake extends TableCell {
+
     // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：バージョン情報無し">
     @JsonProperty("txtToGetsuzoIgai")
     private TextBoxNum txtToGetsuzoIgai;
@@ -1026,12 +1053,14 @@ class celFirstHihokensyaUtiwakeR4C8AttplFirstHihokensyaUtiwake extends TableCell
 
     // </editor-fold>
 }
+
 /**
- * celFirstHihokensyaUtiwakeR6C3 のクラスファイル 
- * 
+ * celFirstHihokensyaUtiwakeR6C3 のクラスファイル
+ *
  * @author 自動生成
  */
 class celFirstHihokensyaUtiwakeR6C3AttplFirstHihokensyaUtiwake extends TableCell {
+
     // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：バージョン情報無し">
     @JsonProperty("txtToGetsuGenTenshuchu")
     private TextBoxNum txtToGetsuGenTenshuchu;
@@ -1056,12 +1085,14 @@ class celFirstHihokensyaUtiwakeR6C3AttplFirstHihokensyaUtiwake extends TableCell
 
     // </editor-fold>
 }
+
 /**
- * celFirstHihokensyaUtiwakeR6C4 のクラスファイル 
- * 
+ * celFirstHihokensyaUtiwakeR6C4 のクラスファイル
+ *
  * @author 自動生成
  */
 class celFirstHihokensyaUtiwakeR6C4AttplFirstHihokensyaUtiwake extends TableCell {
+
     // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：バージョン情報無し">
     @JsonProperty("txtToGetsuGenShokkensoshitsu")
     private TextBoxNum txtToGetsuGenShokkensoshitsu;
@@ -1086,12 +1117,14 @@ class celFirstHihokensyaUtiwakeR6C4AttplFirstHihokensyaUtiwake extends TableCell
 
     // </editor-fold>
 }
+
 /**
- * celFirstHihokensyaUtiwakeR6C5 のクラスファイル 
- * 
+ * celFirstHihokensyaUtiwakeR6C5 のクラスファイル
+ *
  * @author 自動生成
  */
 class celFirstHihokensyaUtiwakeR6C5AttplFirstHihokensyaUtiwake extends TableCell {
+
     // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：バージョン情報無し">
     @JsonProperty("txtToGetsuGenShibo")
     private TextBoxNum txtToGetsuGenShibo;
@@ -1116,12 +1149,14 @@ class celFirstHihokensyaUtiwakeR6C5AttplFirstHihokensyaUtiwake extends TableCell
 
     // </editor-fold>
 }
+
 /**
- * celFirstHihokensyaUtiwakeR6C6 のクラスファイル 
- * 
+ * celFirstHihokensyaUtiwakeR6C6 のクラスファイル
+ *
  * @author 自動生成
  */
 class celFirstHihokensyaUtiwakeR6C6AttplFirstHihokensyaUtiwake extends TableCell {
+
     // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：バージョン情報無し">
     @JsonProperty("txtToGetsuGenTekiyojogai")
     private TextBoxNum txtToGetsuGenTekiyojogai;
@@ -1146,12 +1181,14 @@ class celFirstHihokensyaUtiwakeR6C6AttplFirstHihokensyaUtiwake extends TableCell
 
     // </editor-fold>
 }
+
 /**
- * celFirstHihokensyaUtiwakeR6C7 のクラスファイル 
- * 
+ * celFirstHihokensyaUtiwakeR6C7 のクラスファイル
+ *
  * @author 自動生成
  */
 class celFirstHihokensyaUtiwakeR6C7AttplFirstHihokensyaUtiwake extends TableCell {
+
     // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：バージョン情報無し">
     @JsonProperty("txtToGetsuGenSonota")
     private TextBoxNum txtToGetsuGenSonota;
@@ -1176,12 +1213,14 @@ class celFirstHihokensyaUtiwakeR6C7AttplFirstHihokensyaUtiwake extends TableCell
 
     // </editor-fold>
 }
+
 /**
- * celFirstHihokensyaUtiwakeR6C8 のクラスファイル 
- * 
+ * celFirstHihokensyaUtiwakeR6C8 のクラスファイル
+ *
  * @author 自動生成
  */
 class celFirstHihokensyaUtiwakeR6C8AttplFirstHihokensyaUtiwake extends TableCell {
+
     // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：バージョン情報無し">
     @JsonProperty("txtToGetsuGenKei")
     private TextBoxNum txtToGetsuGenKei;
@@ -1206,12 +1245,14 @@ class celFirstHihokensyaUtiwakeR6C8AttplFirstHihokensyaUtiwake extends TableCell
 
     // </editor-fold>
 }
+
 /**
- * celFirstHihokensyaUtiwakeR8C3 のクラスファイル 
- * 
+ * celFirstHihokensyaUtiwakeR8C3 のクラスファイル
+ *
  * @author 自動生成
  */
 class celFirstHihokensyaUtiwakeR8C3AttplFirstHihokensyaUtiwake extends TableCell {
+
     // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：バージョン情報無し">
     @JsonProperty("txtToGetsuGenJitokuKaijyo")
     private TextBoxNum txtToGetsuGenJitokuKaijyo;
@@ -1236,12 +1277,14 @@ class celFirstHihokensyaUtiwakeR8C3AttplFirstHihokensyaUtiwake extends TableCell
 
     // </editor-fold>
 }
+
 /**
- * celFirstHihokensyaUtiwakeR8C4 のクラスファイル 
- * 
+ * celFirstHihokensyaUtiwakeR8C4 のクラスファイル
+ *
  * @author 自動生成
  */
 class celFirstHihokensyaUtiwakeR8C4AttplFirstHihokensyaUtiwake extends TableCell {
+
     // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：バージョン情報無し">
     @JsonProperty("txtToGetsuGenJitokuTennyu")
     private TextBoxNum txtToGetsuGenJitokuTennyu;
@@ -1266,12 +1309,14 @@ class celFirstHihokensyaUtiwakeR8C4AttplFirstHihokensyaUtiwake extends TableCell
 
     // </editor-fold>
 }
+
 /**
- * celFirstHihokensyaUtiwakeR8C5 のクラスファイル 
- * 
+ * celFirstHihokensyaUtiwakeR8C5 のクラスファイル
+ *
  * @author 自動生成
  */
 class celFirstHihokensyaUtiwakeR8C5AttplFirstHihokensyaUtiwake extends TableCell {
+
     // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：バージョン情報無し">
     @JsonProperty("txtToGetsuGenTatokureiTekiyo")
     private TextBoxNum txtToGetsuGenTatokureiTekiyo;
@@ -1296,12 +1341,14 @@ class celFirstHihokensyaUtiwakeR8C5AttplFirstHihokensyaUtiwake extends TableCell
 
     // </editor-fold>
 }
+
 /**
- * celFirstHihokensyaUtiwakeR8C6 のクラスファイル 
- * 
+ * celFirstHihokensyaUtiwakeR8C6 のクラスファイル
+ *
  * @author 自動生成
  */
 class celFirstHihokensyaUtiwakeR8C6AttplFirstHihokensyaUtiwake extends TableCell {
+
     // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：バージョン情報無し">
     @JsonProperty("txtToGetsuGenKokusekiSoshitsu")
     private TextBoxNum txtToGetsuGenKokusekiSoshitsu;
@@ -1326,12 +1373,14 @@ class celFirstHihokensyaUtiwakeR8C6AttplFirstHihokensyaUtiwake extends TableCell
 
     // </editor-fold>
 }
+
 /**
- * celFirstHihokensyaUtiwakeR8C7 のクラスファイル 
- * 
+ * celFirstHihokensyaUtiwakeR8C7 のクラスファイル
+ *
  * @author 自動生成
  */
 class celFirstHihokensyaUtiwakeR8C7AttplFirstHihokensyaUtiwake extends TableCell {
+
     // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：バージョン情報無し">
     @JsonProperty("txtToGetsuGenKika")
     private TextBoxNum txtToGetsuGenKika;
@@ -1356,12 +1405,14 @@ class celFirstHihokensyaUtiwakeR8C7AttplFirstHihokensyaUtiwake extends TableCell
 
     // </editor-fold>
 }
+
 /**
- * celFirstHihokensyaUtiwakeR8C8 のクラスファイル 
- * 
+ * celFirstHihokensyaUtiwakeR8C8 のクラスファイル
+ *
  * @author 自動生成
  */
 class celFirstHihokensyaUtiwakeR8C8AttplFirstHihokensyaUtiwake extends TableCell {
+
     // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：バージョン情報無し">
     @JsonProperty("txtToGetsuGenIgai")
     private TextBoxNum txtToGetsuGenIgai;

@@ -28,6 +28,8 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 
 /**
  * 事業報告（月報）補正発行_様式１補正画面です。
+ *
+ * @reamsid_L DBU-1100-060 zhangrui
  */
 public class JigyoHokokuGeppoYoshikiIchiHosei {
 
