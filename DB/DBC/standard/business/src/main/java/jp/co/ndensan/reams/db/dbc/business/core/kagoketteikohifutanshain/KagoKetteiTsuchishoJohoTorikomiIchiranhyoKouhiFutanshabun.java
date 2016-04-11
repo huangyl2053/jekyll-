@@ -24,6 +24,8 @@ import jp.co.ndensan.reams.uz.uza.util.editor.DecimalFormatter;
 
 /**
  * 過誤決定通知書情報取込一覧表（公費負担者分）帳票データ作成です。
+ *
+ * @reamsid_L DBC-0980-430 zhangrui
  */
 public class KagoKetteiTsuchishoJohoTorikomiIchiranhyoKouhiFutanshabun {
 
