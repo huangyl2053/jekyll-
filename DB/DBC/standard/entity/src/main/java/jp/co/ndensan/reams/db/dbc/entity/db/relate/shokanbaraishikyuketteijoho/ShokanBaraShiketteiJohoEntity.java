@@ -12,6 +12,8 @@ import lombok.Setter;
 
 /**
  * 償還払支給決定情報Entityです。
+ *
+ * @reamsid_L DBC-0980-350 gongliang
  */
 @Getter
 @Setter

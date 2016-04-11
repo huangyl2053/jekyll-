@@ -10,6 +10,8 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
  * 償還払支給決定情報取込のヘッダ部。
+ *
+ * @reamsid_L DBC-0980-350 gongliang
  */
 public class ShokanShikyuKetteiInHeaderCSVEntity {
 

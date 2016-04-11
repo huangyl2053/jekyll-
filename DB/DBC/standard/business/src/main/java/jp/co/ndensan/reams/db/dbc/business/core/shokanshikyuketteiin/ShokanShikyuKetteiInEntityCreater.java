@@ -23,6 +23,8 @@ import jp.co.ndensan.reams.uz.uza.math.Decimal;
 
 /**
  * 償還払支給決定情報取込のEntityCreater。
+ *
+ * @reamsid_L DBC-0980-350 gongliang
  */
 public class ShokanShikyuKetteiInEntityCreater {
 

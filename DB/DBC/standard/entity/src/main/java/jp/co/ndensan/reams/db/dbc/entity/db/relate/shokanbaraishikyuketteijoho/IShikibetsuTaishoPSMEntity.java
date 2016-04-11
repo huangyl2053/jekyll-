@@ -14,6 +14,8 @@ import lombok.Setter;
 
 /**
  * 取得した宛名情報Entity
+ *
+ * @reamsid_L DBC-0980-350 gongliang
  */
 @Getter
 @Setter

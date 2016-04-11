@@ -22,6 +22,8 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
  * 償還払支給決定情報取込のバッチです。
+ *
+ * @reamsid_L DBC-0980-330 gongliang
  */
 public class DBC120090_ShokanShikyuKetteiInFlow extends BatchFlowBase<DBC120090_ShokanShikyuKetteiInBacthParameter> {
 

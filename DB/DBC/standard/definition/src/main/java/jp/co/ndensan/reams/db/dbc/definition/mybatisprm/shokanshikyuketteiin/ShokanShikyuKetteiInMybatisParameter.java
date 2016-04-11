@@ -13,6 +13,8 @@ import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 
 /**
  * 新番号の取得のMybatisパラメタてす。
+ *
+ * @reamsid_L DBC-0980-330 gongliang
  */
 @lombok.Getter
 @SuppressWarnings("PMD.UnusedPrivateField")

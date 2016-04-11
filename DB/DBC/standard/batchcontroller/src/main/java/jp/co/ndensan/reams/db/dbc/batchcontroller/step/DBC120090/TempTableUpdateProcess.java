@@ -14,6 +14,8 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
  * 一時TBLより、DBの更新を実行する。
+ *
+ * @reamsid_L DBC-0980-330 gongliang
  */
 public class TempTableUpdateProcess extends SimpleBatchProcessBase {
 
