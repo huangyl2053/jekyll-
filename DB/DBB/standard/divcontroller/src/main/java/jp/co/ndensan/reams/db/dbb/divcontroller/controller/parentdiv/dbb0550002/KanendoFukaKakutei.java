@@ -28,15 +28,18 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.ResponseHolder;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 
 /**
- * 本算定異動（過年度）賦課確定（削除込)
+ * 本算定異動（過年度）賦課確定（削除込)のクラスです。
+ *
+ * @reamsid_L DBB-0680-010 wangkanglei
  */
 public class KanendoFukaKakutei {
 
     private static final RString 確定処理 = new RString("btnKakutei");
     private static final RString 賦課対象外を削除 = new RString("btnDeleteTaishoGai");
+    private static final RString 過年度異動賦課 = new RString("過年度異動賦課のデータがない");
 
     /**
-     * コントロールdivが「生成」された際の処理です。(オンロード)<br/>
+     * コントロールdivが「生成」された際の処理です。
      *
      * @param div コントロールdiv
      * @return ResponseData
@@ -49,14 +52,14 @@ public class KanendoFukaKakutei {
         ShoriDateKanri 異動処理日付 = fukaKakutei.getIdoKijunbi(div.getTxtChoteiNendo().getDomain());
         if (異動処理日付 == null) {
             throw new ApplicationException(DbzErrorMessages.理由付き確定不可.getMessage()
-                    .replace("過年度異動賦課のデータがない"));
+                    .replace(過年度異動賦課.toString()));
         } else {
             return initialize(fukaKakutei, div, 異動処理日付);
         }
     }
 
     /**
-     * initialize
+     * 画面初期化のメソッドます。
      *
      * @param fukaKakutei HonsanteiIdoKanendoFukaKakutei
      * @param div KanendoFukaKakuteiDiv
@@ -72,7 +75,7 @@ public class KanendoFukaKakutei {
         } else {
             if (異動処理日付.get基準日時().isBefore(確定処理日付.get基準日時())) {
                 throw new ApplicationException(DbzErrorMessages.理由付き確定不可.getMessage()
-                        .replace("過年度異動賦課のデータがない"));
+                        .replace(過年度異動賦課.toString()));
             } else {
                 getKanendoFukaKakuteiHandler(div).setヘッダ(異動処理日付);
             }
@@ -94,7 +97,7 @@ public class KanendoFukaKakutei {
     }
 
     /**
-     * 確定処理を実行する
+     * 確定処理を実行のメソッドます。
      *
      * @param div KanendoFukaKakuteiDiv
      * @return ResponseData<KanendoFukaKakuteiDiv>
@@ -111,7 +114,7 @@ public class KanendoFukaKakutei {
     }
 
     /**
-     * チェックボックス制御を実行する
+     * チェックボックス制御を実行のメソッドます。
      *
      * @param div KanendoFukaKakuteiDiv
      * @return ResponseData<KanendoFukaKakuteiDiv>
@@ -122,19 +125,19 @@ public class KanendoFukaKakutei {
     }
 
     /**
-     * 「選択」ボタンを実行する
+     * 「選択」ボタンを実行のメソッドます。
      *
      * @param div KanendoFukaKakuteiDiv
      * @return ResponseData<KanendoFukaKakuteiDiv>
      */
     public ResponseData<KanendoFukaKakuteiDiv> onClick_dgKanendoFukaIchiran(KanendoFukaKakuteiDiv div) {
-        // 介護保険料賦課比較画面（DBB0320005）画面へ遷移する
+        // TODO 介護保険料賦課比較画面（DBB0320005）画面へ遷移する
         getKanendoFukaKakuteiHandler(div).setViewState();
         return ResponseData.of(div).respond();
     }
 
     /**
-     * 賦課対象外の削除を実行する
+     * 賦課対象外の削除を実行のメソッドます。
      *
      * @param div KanendoFukaKakuteiDiv
      * @return ResponseData<KanendoFukaKakuteiDiv>
@@ -150,12 +153,6 @@ public class KanendoFukaKakutei {
         return ResponseData.of(div).respond();
     }
 
-    /**
-     * handlerの取得を実行する
-     *
-     * @param div KanendoFukaKakuteiDiv
-     * @return KanendoFukaKakuteiHandler
-     */
     private KanendoFukaKakuteiHandler getKanendoFukaKakuteiHandler(KanendoFukaKakuteiDiv div) {
         return new KanendoFukaKakuteiHandler(div);
     }

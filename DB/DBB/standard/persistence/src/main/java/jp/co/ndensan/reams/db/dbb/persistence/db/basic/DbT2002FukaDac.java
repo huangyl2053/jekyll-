@@ -33,6 +33,8 @@ import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
 
 /**
  * 介護賦課のデータアクセスクラスです。
+ *
+ * @reamsid_L DBB-0680-020 wangkanglei
  */
 public class DbT2002FukaDac implements ISaveable<DbT2002FukaEntity> {
 

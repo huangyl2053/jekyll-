@@ -26,7 +26,9 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 
 /**
- * 本算定異動（過年度）賦課確定（削除込)
+ * 本算定異動（過年度）賦課確定（削除込)のハンドラクラスです。
+ *
+ * @reamsid_L DBB-0680-010 wangkanglei
  */
 public class KanendoFukaKakuteiHandler {
 
@@ -35,6 +37,34 @@ public class KanendoFukaKakuteiHandler {
     private static final RString 改行 = new RString("<br>");
     private static final RString スペース = RString.HALF_SPACE;
     private static final RString ゼロ = new RString("0");
+    private static final RString 月分_1 = new RString("1月分");
+    private static final RString 月分_2 = new RString("2月分");
+    private static final RString 月分_3 = new RString("3月分");
+    private static final RString 月分_4 = new RString("4月分");
+    private static final RString 月分_5 = new RString("5月分");
+    private static final RString 月分_6 = new RString("6月分");
+    private static final RString 月分_7 = new RString("7月分");
+    private static final RString 月分_8 = new RString("8月分");
+    private static final RString 月分_9 = new RString("9月分");
+    private static final RString 月分_10 = new RString("10月分");
+    private static final RString 月分_11 = new RString("11月分");
+    private static final RString 月分_12 = new RString("12月分");
+    private static final RString 翌年度_4 = new RString("翌年度4月分");
+    private static final RString 翌年度_5 = new RString("翌年度5月分");
+    private static final int NUM_1 = 1;
+    private static final int NUM_2 = 2;
+    private static final int NUM_3 = 3;
+    private static final int NUM_4 = 4;
+    private static final int NUM_5 = 5;
+    private static final int NUM_6 = 6;
+    private static final int NUM_7 = 7;
+    private static final int NUM_8 = 8;
+    private static final int NUM_9 = 9;
+    private static final int NUM_10 = 10;
+    private static final int NUM_11 = 11;
+    private static final int NUM_12 = 12;
+    private static final int NUM_14 = 14;
+    private static final int NUM_15 = 15;
 
     private final KanendoFukaKakuteiDiv div;
 
@@ -48,7 +78,7 @@ public class KanendoFukaKakuteiHandler {
     }
 
     /**
-     * setヘッダ
+     * setヘッダのメソッドます。
      *
      * @param 異動処理日付 ShoriDateKanri
      */
@@ -86,54 +116,54 @@ public class KanendoFukaKakuteiHandler {
     }
 
     /**
-     * 処理対象に設定
+     * 処理対象に設定のメソッドます。
      *
      * @param entity KanendoIdoFukaKakutei
      */
     public void set処理対象(KanendoIdoFukaKakutei entity) {
         if (entity.getFukaKakuteiEntity().get更正月() != null) {
-            switch (entity.getFukaKakuteiEntity().get更正月().toString()) {
-                case "01":
-                    div.getTxtShoriTsuki().setValue(new RString("1月分"));
+            switch (Integer.valueOf(entity.getFukaKakuteiEntity().get更正月().toString())) {
+                case NUM_1:
+                    div.getTxtShoriTsuki().setValue(月分_1);
                     break;
-                case "02":
-                    div.getTxtShoriTsuki().setValue(new RString("2月分"));
+                case NUM_2:
+                    div.getTxtShoriTsuki().setValue(月分_2);
                     break;
-                case "03":
-                    div.getTxtShoriTsuki().setValue(new RString("3月分"));
+                case NUM_3:
+                    div.getTxtShoriTsuki().setValue(月分_3);
                     break;
-                case "04":
-                    div.getTxtShoriTsuki().setValue(new RString("4月分"));
+                case NUM_4:
+                    div.getTxtShoriTsuki().setValue(月分_4);
                     break;
-                case "05":
-                    div.getTxtShoriTsuki().setValue(new RString("5月分"));
+                case NUM_5:
+                    div.getTxtShoriTsuki().setValue(月分_5);
                     break;
-                case "06":
-                    div.getTxtShoriTsuki().setValue(new RString("6月分"));
+                case NUM_6:
+                    div.getTxtShoriTsuki().setValue(月分_6);
                     break;
-                case "07":
-                    div.getTxtShoriTsuki().setValue(new RString("7月分"));
+                case NUM_7:
+                    div.getTxtShoriTsuki().setValue(月分_7);
                     break;
-                case "08":
-                    div.getTxtShoriTsuki().setValue(new RString("8月分"));
+                case NUM_8:
+                    div.getTxtShoriTsuki().setValue(月分_8);
                     break;
-                case "09":
-                    div.getTxtShoriTsuki().setValue(new RString("9月分"));
+                case NUM_9:
+                    div.getTxtShoriTsuki().setValue(月分_9);
                     break;
-                case "10":
-                    div.getTxtShoriTsuki().setValue(new RString("10月分"));
+                case NUM_10:
+                    div.getTxtShoriTsuki().setValue(月分_10);
                     break;
-                case "11":
-                    div.getTxtShoriTsuki().setValue(new RString("11月分"));
+                case NUM_11:
+                    div.getTxtShoriTsuki().setValue(月分_11);
                     break;
-                case "12":
-                    div.getTxtShoriTsuki().setValue(new RString("12月分"));
+                case NUM_12:
+                    div.getTxtShoriTsuki().setValue(月分_12);
                     break;
-                case "14":
-                    div.getTxtShoriTsuki().setValue(new RString("翌年度4月分"));
+                case NUM_14:
+                    div.getTxtShoriTsuki().setValue(翌年度_4);
                     break;
-                case "15":
-                    div.getTxtShoriTsuki().setValue(new RString("翌年度5月分"));
+                case NUM_15:
+                    div.getTxtShoriTsuki().setValue(翌年度_5);
                     break;
                 default:
                     div.getTxtShoriTsuki().setValue(RString.EMPTY);
@@ -144,7 +174,7 @@ public class KanendoFukaKakuteiHandler {
     }
 
     /**
-     * 過年度異動賦課対象一覧に設定
+     * 過年度異動賦課対象一覧に設定のメソッドます。
      *
      * @param 異動賦課対象List List<KanendoIdoFukaKakutei>
      */
@@ -168,15 +198,16 @@ public class KanendoFukaKakuteiHandler {
             row.getTxtChoteiNendo().setValue(更正前調定年度
                     .concat(改行).concat(entity.getFukaKakuteiEntity().get調定年度().wareki().toDateString()));
             row.getTxtChoteiNendoAto().setValue(new RDate(entity.getFukaKakuteiEntity().get調定年度().toString()));
-            row.getTxtChoteiNendo().setToolTip(new RString("上段：賦課更正前、下段：賦課更正後"));
+
             // TODO QA418    賦課年度
-//            row.getTxtFukaNendo().setValue(entity.getFukaKakuteiEntity().get更正前賦課年度().wareki().toDateString()
-//                    .concat(new RString("<br>"))
-//                    .concat(entity.getFukaKakuteiEntity().get賦課年度().wareki().toDateString()));
+            RString 更正前賦課年度 = RString.EMPTY;
             if (entity.getFukaKakuteiEntity().get更正前賦課年度() != null) {
-                row.getTxtFukaNendo().setValue(new RDate(entity.getFukaKakuteiEntity().get更正前賦課年度().toString()));
+                更正前賦課年度 = entity.getFukaKakuteiEntity().get更正前賦課年度().wareki().toDateString();
+                row.getTxtFukaNendoMae().setValue(new RDate(entity.getFukaKakuteiEntity().get更正前賦課年度().toString()));
             }
-            row.getTxtFukaNendo().setValue(new RDate(entity.getFukaKakuteiEntity().get賦課年度().toString()));
+            row.getTxtFukaNendo().setValue(更正前賦課年度
+                    .concat(改行).concat(entity.getFukaKakuteiEntity().get賦課年度().wareki().toDateString()));
+            row.getTxtFukaNendoAto().setValue(new RDate(entity.getFukaKakuteiEntity().get賦課年度().toString()));
             RString 更正前確定介護保険料 = RString.EMPTY;
             RString 確定介護保険料 = RString.EMPTY;
             if (entity.getFukaKakuteiEntity().get更正前確定介護保険料() != null) {
@@ -245,7 +276,7 @@ public class KanendoFukaKakuteiHandler {
     }
 
     /**
-     * 確定処理を実行する
+     * 確定処理を実行のメソッドます。
      */
     public void setKakutei() {
         HonsanteiIdoKanendoFukaKakutei fukaKakutei = InstanceProvider.create(HonsanteiIdoKanendoFukaKakutei.class);
@@ -259,7 +290,7 @@ public class KanendoFukaKakuteiHandler {
     }
 
     /**
-     * チェックボックス制御を実行する
+     * チェックボックス制御を実行のメソッドます。
      */
     public void onChange() {
         div.setDeleteDataCount(new RString(String.valueOf(div.getKaNendoIdoFukaIchiran().getDgKanendoFukaIchiran()
@@ -274,7 +305,7 @@ public class KanendoFukaKakuteiHandler {
     }
 
     /**
-     * 賦課対象外の削除を実行する
+     * 賦課対象外の削除を実行のメソッドます。
      */
     public void deleteTaishoGai() {
         List<KanendoIdoFukaKakutei> fukaKakuteiList = new ArrayList<>();
@@ -296,7 +327,7 @@ public class KanendoFukaKakuteiHandler {
             // TODO QA418    賦課年度
             if (row.getTxtFukaNendo().getValue() != null) {
                 fukaKakuteiEntity.set賦課年度(
-                        new FlexibleYear(row.getTxtFukaNendo().getValue().getYear().toString()));
+                        new FlexibleYear(row.getTxtFukaNendoAto().getValue().getYear().toString()));
             }
             fukaKakuteiList.add(fukaKakuteiEntity);
         }
@@ -316,7 +347,7 @@ public class KanendoFukaKakuteiHandler {
     }
 
     /**
-     * viewStateへの設定
+     * viewStateへの設定のメソッドます。
      */
     public void setViewState() {
         dgKanendoFukaIchiran_Row row = div.getKaNendoIdoFukaIchiran().getDgKanendoFukaIchiran().getClickedItem();
