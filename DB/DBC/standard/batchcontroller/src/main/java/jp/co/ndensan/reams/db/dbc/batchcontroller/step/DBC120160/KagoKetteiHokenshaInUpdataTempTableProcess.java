@@ -5,59 +5,60 @@
  */
 package jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC120160;
 
-import java.util.ArrayList;
-import java.util.List;
+import jp.co.ndensan.reams.db.dbc.definition.mybatisprm.kagoketteihokenshain.KagoKetteiHokenshaInParameter;
+import jp.co.ndensan.reams.db.dbc.entity.db.relate.kagoketteihokenshain.KagoKetteiHokenshaInMeisaiEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.kagoketteihokenshain.ShihihokenshabangoTempTableEntity;
 import jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.kagoketteihokenshain.IKagoKetteiHokenshaInMapper;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT1001HihokenshaDaichoEntity;
-import jp.co.ndensan.reams.uz.uza.batch.process.BatchEntityCreatedTempTableWriter;
-import jp.co.ndensan.reams.uz.uza.batch.process.BatchWriter;
-import jp.co.ndensan.reams.uz.uza.batch.process.SimpleBatchProcessBase;
+import jp.co.ndensan.reams.uz.uza.batch.process.BatchDbReader;
+import jp.co.ndensan.reams.uz.uza.batch.process.BatchProcessBase;
+import jp.co.ndensan.reams.uz.uza.batch.process.IBatchReader;
+import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
  * 一時テーブルのデータの編集
+ *
+ * @reamsid_L DBC-0980-300 xupeng
  */
-public class KagoKetteiHokenshaInUpdataTempTableProcess extends SimpleBatchProcessBase {
+public class KagoKetteiHokenshaInUpdataTempTableProcess extends BatchProcessBase<KagoKetteiHokenshaInMeisaiEntity> {
+
+    private static final RString READ_DATA_ID = new RString("jp.co.ndensan.reams.db.dbc.persistence.db.mapper."
+            + "relate.kagoketteihokenshain."
+            + "IKagoKetteiHokenshaInMapper.select被保険者番号From一時テーブル");
 
     private IKagoKetteiHokenshaInMapper mapper;
-    @BatchWriter
-    BatchEntityCreatedTempTableWriter tempTableWriter;
+
+    @Override
+    protected void initialize() {
+        super.initialize();
+        mapper = getMapper(IKagoKetteiHokenshaInMapper.class);
+    }
 
     @Override
     protected void beforeExecute() {
-        mapper = getMapper(IKagoKetteiHokenshaInMapper.class);
         mapper.create新被保険者番号();
     }
 
     @Override
-    protected void process() {
+    protected IBatchReader createReader() {
+        return new BatchDbReader(READ_DATA_ID);
+    }
 
-        List<DbT1001HihokenshaDaichoEntity> list = mapper.get市町村コード();
-        if (list.isEmpty()) {
-            return;
+    @Override
+    protected void process(KagoKetteiHokenshaInMeisaiEntity entity) {
+        KagoKetteiHokenshaInParameter parameter = KagoKetteiHokenshaInParameter.createParameter(entity.getHiHokenshaNo());
+        DbT1001HihokenshaDaichoEntity 被保険者台帳管理 = mapper.get市町村コード(parameter);
+        if (null != 被保険者台帳管理) {
+            LasdecCode 市町村コード = 被保険者台帳管理.getShichosonCode();
+            parameter = KagoKetteiHokenshaInParameter.createParameter(entity.getHiHokenshaNo(), 市町村コード);
+            ShihihokenshabangoTempTableEntity ichijiEntity = mapper.get新被保険者番号(parameter);
+            mapper.insert新被保険者番号(ichijiEntity);
         }
+    }
 
-        List<DbT1001HihokenshaDaichoEntity> list2 = new ArrayList<>();
-        DbT1001HihokenshaDaichoEntity dbT1001Entity = list.get(0);
-        list2.add(dbT1001Entity);
-
-        for (DbT1001HihokenshaDaichoEntity result : list) {
-            if (!result.getHihokenshaNo().equals(dbT1001Entity.getHihokenshaNo())) {
-                list2.add(result);
-                dbT1001Entity = result;
-            }
-        }
-
-        for (DbT1001HihokenshaDaichoEntity result : list2) {
-            List<ShihihokenshabangoTempTableEntity> shi = mapper.get新被保険者番号(result.getShichosonCode());
-            if (shi.isEmpty()) {
-                continue;
-            }
-            for (ShihihokenshabangoTempTableEntity entity : shi) {
-                mapper.insert新被保険者番号(entity);
-            }
-        }
-
+    @Override
+    protected void afterExecute() {
         mapper.update保険者分情報_明細();
     }
 

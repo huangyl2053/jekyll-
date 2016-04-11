@@ -23,6 +23,8 @@ import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
 
 /**
  * 国保連から来たファイルのデータの取得処理
+ *
+ * @reamsid_L DBC-0980-300 xupeng
  */
 public class KagoKetteiHokenshaInSharedFileCopy extends SimpleBatchProcessBase {
 

@@ -14,6 +14,8 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
  * DBの更新
+ *
+ * @reamsid_L DBC-0980-300 xupeng
  */
 public class KagoKetteiHokenshaInUpdataDBProcess extends SimpleBatchProcessBase {
 

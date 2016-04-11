@@ -30,6 +30,8 @@ import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
 
 /**
  * 帳票用Entityリスト作成と作成したdataを帳票に出力する。
+ *
+ * @reamsid_L DBC-0980-300 xupeng
  */
 public class KagoKetteiHokenshaInWriteReportProcess extends BatchKeyBreakBase<KagoKetteiHokenshaInEntity> {
 
