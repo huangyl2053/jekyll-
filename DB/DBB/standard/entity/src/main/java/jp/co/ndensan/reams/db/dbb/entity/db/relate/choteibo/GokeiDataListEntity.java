@@ -10,6 +10,8 @@ import java.util.List;
 
 /**
  * 年度合計データリストEntityクラスです。
+ *
+ * @reamsid_L DBB-0770-030 zhangrui
  */
 @lombok.Getter
 @lombok.Setter

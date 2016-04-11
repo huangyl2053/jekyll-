@@ -14,6 +14,8 @@ import jp.co.ndensan.reams.uz.uza.batch.flow.IBatchFlowCommand;
 
 /**
  * 調定簿作成Flowクラスです。
+ *
+ * @reamsid_L DBB-0770-030 zhangrui
  */
 public class DBB0210001_ChoteiboSakusei extends BatchFlowBase<ChoteiboBatchParameter> {
 

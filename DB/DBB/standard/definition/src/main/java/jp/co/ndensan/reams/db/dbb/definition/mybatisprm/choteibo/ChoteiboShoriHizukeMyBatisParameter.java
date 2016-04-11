@@ -12,6 +12,8 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
  * 調定簿作成処理日付のMyBatisパラメータ
+ *
+ * @reamsid_L DBB-0770-030 zhangrui
  */
 @lombok.Getter
 @SuppressWarnings("PMD.UnusedPrivateField")

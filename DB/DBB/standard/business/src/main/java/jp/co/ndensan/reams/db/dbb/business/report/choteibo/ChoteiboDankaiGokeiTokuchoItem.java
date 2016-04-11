@@ -10,6 +10,8 @@ import lombok.Getter;
 
 /**
  * 調定簿作成帳票段階合計特徴Item
+ *
+ * @reamsid_L DBB-0770-050 zhangrui
  */
 @Getter
 @SuppressWarnings("PMD.UnusedPrivateField")

@@ -11,7 +11,9 @@ import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.util.db.IDbAccessable;
 
 /**
- * 合計部分一時テーブルEntityです
+ * 合計部分一時テーブルEntityです。
+ *
+ * @reamsid_L DBB-0770-030 zhangrui
  */
 @lombok.Getter
 @lombok.Setter

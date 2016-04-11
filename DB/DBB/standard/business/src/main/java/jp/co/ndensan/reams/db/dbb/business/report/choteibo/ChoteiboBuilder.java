@@ -9,7 +9,9 @@ import jp.co.ndensan.reams.db.dbb.entity.report.choteibo.ChoteiboSource;
 import jp.co.ndensan.reams.uz.uza.report.ReportEditorJoiner;
 
 /**
+ * 帳票の編集Editorです。
  *
+ * @reamsid_L DBB-0770-050 zhangrui
  */
 class ChoteiboBuilder implements IChoteiboBuilder {
 
@@ -18,6 +20,14 @@ class ChoteiboBuilder implements IChoteiboBuilder {
     private final IChoteiboEditor dankaiEditor;
     private final IChoteiboEditor dankaiGokeiEditor;
 
+    /**
+     * コンストラクタです。
+     *
+     * @param headerEditor ヘッダ編集
+     * @param kitsukiEditor 期別編集
+     * @param dankaiEditor 段階編集
+     * @param dankaiGokeiEditor 段階合計編集
+     */
     public ChoteiboBuilder(
             IChoteiboEditor headerEditor,
             IChoteiboEditor kitsukiEditor,
