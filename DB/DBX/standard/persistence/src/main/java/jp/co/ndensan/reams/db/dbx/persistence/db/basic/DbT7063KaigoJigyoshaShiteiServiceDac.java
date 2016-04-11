@@ -137,4 +137,17 @@ public class DbT7063KaigoJigyoshaShiteiServiceDac implements ISaveable<DbT7063Ka
                                 eq(yukoKaishiYMD, 有効開始日)))
                 .toList(DbT7063KaigoJigyoshaShiteiServiceEntity.class);
     }
+
+    /**
+     * 主キーで介護事業者指定サービスを削除します。
+     *
+     * @param entity 介護事業者指定サービス
+     * @return 削除件数
+     * @throws NullPointerException 引数のいずれかがnullの場合
+     */
+    @Transaction
+    public int delete(DbT7063KaigoJigyoshaShiteiServiceEntity entity) throws NullPointerException {
+        requireNonNull(entity, UrSystemErrorMessages.値がnull.getReplacedMessage("介護事業者指定サービス"));
+        return DbAccessors.saveOrDeletePhysicalBy(new DbAccessorNormalType(session), entity);
+    }
 }
