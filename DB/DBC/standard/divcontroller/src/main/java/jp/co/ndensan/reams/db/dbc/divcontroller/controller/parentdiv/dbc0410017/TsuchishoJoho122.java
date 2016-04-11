@@ -10,6 +10,8 @@ import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 
 /**
  * 国保連情報受取データ取込_(122)総合事業費資格総合表情報のクラスです。
+ *
+ * @reamsid_L DBC-0980-020 gongliang
  */
 public class TsuchishoJoho122 {
 
