@@ -309,7 +309,7 @@ public class DbT3043ShokanShokujiHiyoDacTest extends DbcTestDacBase {
             DbT3043ShokanShokujiHiyoEntity entity = DbT3043ShokanShokujiHiyoEntityGenerator.createDbT3043ShokanShokujiHiyoEntity();
             entity.setHiHokenshaNo(被保険者番号);
             entity.setServiceTeikyoYM(サービス提供年月);
-            entity.setSeiriNp(整理番号);
+            entity.setSeiriNo(整理番号);
             entity.setJigyoshaNo(事業者番号);
             entity.setYoshikiNo(様式番号);
             entity.setMeisaiNo(明細番号);
