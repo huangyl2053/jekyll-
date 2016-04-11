@@ -35,8 +35,7 @@ public class TekiyojogaishaDaichoPrintService {
     private static List<TekiyojogaishaDaichoReport> toReports(TekiyojogaishaDaichoReportJoho reportJoho) {
         List<TekiyojogaishaDaichoReport> list = new ArrayList<>();
         list.add(TekiyojogaishaDaichoReport.createFrom(
-                reportJoho.getHeadItem(),
-                reportJoho.getBodyItemList()));
+                reportJoho.getItemList()));
         return list;
     }
 }

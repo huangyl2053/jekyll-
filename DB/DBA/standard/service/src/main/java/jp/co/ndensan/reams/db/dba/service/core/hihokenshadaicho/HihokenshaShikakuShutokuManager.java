@@ -74,8 +74,7 @@ public class HihokenshaShikakuShutokuManager {
     /**
      * {@link InstanceProvider#create}にて生成した{@link HihokenshaShikakuShutokuManager}のインスタンスを返します。
      *
-     * @return
-     * {@link InstanceProvider#create}にて生成した{@link HihokenshaShikakuShutokuManager}のインスタンス
+     * @return {@link InstanceProvider#create}にて生成した{@link HihokenshaShikakuShutokuManager}のインスタンス
      */
     public static HihokenshaShikakuShutokuManager createInstance() {
         return InstanceProvider.create(HihokenshaShikakuShutokuManager.class);
@@ -168,7 +167,7 @@ public class HihokenshaShikakuShutokuManager {
                 .createParam_HokenshaDaicho(hihokenshaNo, shikibetsuCode);
         DbT1001HihokenshaDaichoEntity entity = hokenshamapper.getSaishinDeta(parameter);
         if (entity == null) {
-            return new HihokenshaShutokuJyoho(new DbT1001HihokenshaDaichoEntity());
+            return null;
         }
         return new HihokenshaShutokuJyoho(entity);
     }
