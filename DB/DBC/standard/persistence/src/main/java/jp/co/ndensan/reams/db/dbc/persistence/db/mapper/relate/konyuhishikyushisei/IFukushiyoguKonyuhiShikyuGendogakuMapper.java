@@ -16,6 +16,8 @@ import jp.co.ndensan.reams.uz.uza.biz.Code;
 
 /**
  * 福祉用具購入費支給申請Mapperです。
+ *
+ * @reamsid_L DBC-1020-040 zhangrui
  */
 public interface IFukushiyoguKonyuhiShikyuGendogakuMapper {
 

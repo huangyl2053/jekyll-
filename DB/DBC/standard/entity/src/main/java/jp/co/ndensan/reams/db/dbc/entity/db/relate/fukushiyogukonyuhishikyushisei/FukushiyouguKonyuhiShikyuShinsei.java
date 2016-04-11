@@ -15,6 +15,8 @@ import jp.co.ndensan.reams.uz.uza.math.Decimal;
 
 /**
  * 支給申請一覧取得RelateEntityクラスです。
+ *
+ * @reamsid_L DBC-1020-040 zhangrui
  */
 @lombok.Getter
 @lombok.Setter
