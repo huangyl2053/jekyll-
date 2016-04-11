@@ -44,7 +44,7 @@ public class ShinseiDetail {
         RString 整理番号 = ViewStateHolder.get(
                 ViewStateKeys.償還払申請一覧_整理番号, RString.class);
         RString 決定日 = ViewStateHolder.get(ViewStateKeys.償還払申請一覧_決定日, RString.class);
-        if (決定日 == null) {
+        if (決定日.isNullOrEmpty()) {
             div.getPanelHead().getBtnShokanBaraiKeteiInfo().setDisabled(true);
         }
 
@@ -58,7 +58,6 @@ public class ShinseiDetail {
         ShinseiDetailHandler handler = getHandler(div);
         handler.initPanelHead(サービス年月, 整理番号);
 
-        //償還払支給申請詳細データ取得
         ShokanbaraiJyokyoShokai finder = ShokanbaraiJyokyoShokai.createInstance();
         List<ShokanShinsei> businessList = finder.getShokanbaraiShinseiJyohoDetail(
                 被保険者番号, サービス年月, 整理番号);
