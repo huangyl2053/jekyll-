@@ -111,8 +111,7 @@ public class SetaiShotokuKazeiHantei {
      */
     @Transaction
     public void getJuminShotokuJoho() {
-        ISetaiShotokuKazeiHanteiMapper mapper = mapperProvider.create(ISetaiShotokuKazeiHanteiMapper.class
-        );
+        ISetaiShotokuKazeiHanteiMapper mapper = mapperProvider.create(ISetaiShotokuKazeiHanteiMapper.class);
         List<DbV2502KaigoShotokuEntity> 介護所得list = mapper.select介護所得();
         if (介護所得list != null && !介護所得list.isEmpty()) {
             for (DbV2502KaigoShotokuEntity 介護所得entity : 介護所得list) {

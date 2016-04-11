@@ -13,9 +13,12 @@ import lombok.Setter;
 
 /**
  * 高額介護サービス費給付対象者headCsvField
+ *
+ * @reamsid_L DBB-0890-040 zhangrui
  */
 @Getter
 @Setter
+@SuppressWarnings("PMD.UnusedPrivateField")
 public class DbTKogakuKyufuCSVDataHeadEntity {
 
     @CsvField(order = 10, name = "交換情報識別番号")
