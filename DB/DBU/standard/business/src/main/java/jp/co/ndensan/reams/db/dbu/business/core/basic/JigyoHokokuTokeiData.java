@@ -20,6 +20,8 @@ import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 
 /**
  * 事業報告統計データを管理するクラスです。
+ *
+ * @reamsid_L DBU-1100-030 wangkanglei
  */
 public class JigyoHokokuTokeiData
         extends ModelBase<JigyoHokokuTokeiDataIdentifier, DbT7021JigyoHokokuTokeiDataEntity, JigyoHokokuTokeiData> implements Serializable {
