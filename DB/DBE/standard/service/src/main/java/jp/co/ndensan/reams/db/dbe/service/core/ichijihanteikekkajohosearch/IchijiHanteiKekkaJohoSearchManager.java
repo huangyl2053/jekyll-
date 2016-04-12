@@ -5,8 +5,8 @@
  */
 package jp.co.ndensan.reams.db.dbe.service.core.ichijihanteikekkajohosearch;
 
-import jp.co.ndensan.reams.db.dbe.business.core.shinsakai.ninteishinseijoho.NinteiShinseiJoho;
 import jp.co.ndensan.reams.db.dbe.business.core.ichijihanteikekkajohosearch.IchijiHanteiKekkaJohoSearchBusiness;
+import jp.co.ndensan.reams.db.dbe.business.core.shinsakai.ninteishinseijoho.NinteiShinseiJoho;
 import jp.co.ndensan.reams.db.dbe.definition.message.DbeErrorMessages;
 import jp.co.ndensan.reams.db.dbe.entity.ichijihanteikekkajohosearch.IchijiHanteiKekkaJohoSearchEntity;
 import jp.co.ndensan.reams.db.dbe.persistence.db.mapper.relate.ichijihanteikekkajohosearch.IchijiHanteiKekkaJohoSearchMapper;
@@ -22,6 +22,8 @@ import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
 /**
  *
  * 一次判定結果情報取得クラスです。
+ *
+ * @reamsid_L DBE-3000-240 wangjie2
  */
 public class IchijiHanteiKekkaJohoSearchManager {
 
