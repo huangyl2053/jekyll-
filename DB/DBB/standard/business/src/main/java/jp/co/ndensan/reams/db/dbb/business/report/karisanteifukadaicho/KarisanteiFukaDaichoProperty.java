@@ -16,6 +16,8 @@ import jp.co.ndensan.reams.uz.uza.report.ReportPropertyBase;
 /**
  *
  * KarisanteiFukaDaichoPropertyのプロパティです。
+ *
+ * @reamsid_L DBC-1020-010 yangchenbing
  */
 public class KarisanteiFukaDaichoProperty extends ReportPropertyBase<KarisanteiFukaDaichoSource> {
 

@@ -13,6 +13,8 @@ import lombok.NonNull;
 
 /**
  * 帳票設計_DBBRP00006_2_賦課台帳（仮算定）
+ *
+ * @reamsid_L DBC-1020-010 yangchenbing
  */
 public class KarisanteiFukaDaichoReport extends Report<KarisanteiFukaDaichoSource> {
 

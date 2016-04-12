@@ -10,6 +10,8 @@ import jp.co.ndensan.reams.uz.uza.report.IReportEditor;
 
 /**
  * 賦課台帳（仮算定）帳票 IKarisanteiFukaDaichoEditor
+ *
+ * @reamsid_L DBC-1020-010 yangchenbing
  */
 public interface IKarisanteiFukaDaichoEditor extends IReportEditor<KarisanteiFukaDaichoSource> {
 

@@ -9,6 +9,8 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
  * 帳票設計_DBBRP00006_2_賦課台帳（仮算定）
+ *
+ * @reamsid_L DBC-1020-010 yangchenbing
  */
 @SuppressWarnings("PMD.UnusedPrivateField")
 @lombok.Getter

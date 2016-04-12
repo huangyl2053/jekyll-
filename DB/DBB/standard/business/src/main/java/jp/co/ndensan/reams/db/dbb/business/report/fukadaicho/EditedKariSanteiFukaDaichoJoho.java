@@ -10,6 +10,8 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
  * 賦課台帳（仮算定）
+ *
+ * @reamsid_L DBC-1020-010 yangchenbing
  */
 @lombok.Getter
 @lombok.Setter
