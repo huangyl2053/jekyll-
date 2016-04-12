@@ -20,6 +20,8 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 
 /**
  * 福祉用具購入費支給申請_検索
+ *
+ * @reamsid_L DBC-1020-010 yangchenbing
  */
 public class PnlTotal {
 
