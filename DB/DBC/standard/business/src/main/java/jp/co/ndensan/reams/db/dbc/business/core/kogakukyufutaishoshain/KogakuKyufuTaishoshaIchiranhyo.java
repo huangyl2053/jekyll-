@@ -24,6 +24,7 @@ import jp.co.ndensan.reams.uz.uza.util.editor.DecimalFormatter;
 /**
  * 高額介護サービス費給付対象者一覧表帳票ソースデータ作成
  *
+ * @reamsid_L DBC-0980-370 chenaoqi
  */
 public class KogakuKyufuTaishoshaIchiranhyo {
 
