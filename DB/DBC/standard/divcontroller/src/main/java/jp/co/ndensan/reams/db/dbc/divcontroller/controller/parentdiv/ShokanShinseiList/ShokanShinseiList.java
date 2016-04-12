@@ -236,6 +236,8 @@ public class ShokanShinseiList {
         ViewStateHolder.put(ViewStateKeys.償還払申請一覧_被保険者番号, new HihokenshaNo(dgShinseiList.getHiHokenshaNo()));
         ViewStateHolder.put(ViewStateKeys.償還払申請一覧_整理番号, dgShinseiList.getSeiriNo());
         ViewStateHolder.put(ViewStateKeys.償還払申請一覧_様式番号, dgShinseiList.getYoshikiNo());
+        ViewStateHolder.put(ViewStateKeys.償還払申請一覧_決定日, dgShinseiList.getKetteiYMD());
+        ViewStateHolder.put(ViewStateKeys.償還払申請一覧_申請日, dgShinseiList.getShinseiYMD());
 
     }
 

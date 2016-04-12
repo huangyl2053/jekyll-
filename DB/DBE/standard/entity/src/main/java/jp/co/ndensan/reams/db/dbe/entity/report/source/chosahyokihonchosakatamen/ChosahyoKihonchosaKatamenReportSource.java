@@ -7,6 +7,7 @@ package jp.co.ndensan.reams.db.dbe.entity.report.source.chosahyokihonchosakatame
 
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.report.IReportSource;
+import jp.co.ndensan.reams.uz.uza.report.source.ReportExpandedInfo;
 import jp.co.ndensan.reams.uz.uza.report.source.ReportItem;
 
 /**
@@ -41,24 +42,34 @@ public class ChosahyoKihonchosaKatamenReportSource implements IReportSource {
     public RString hokenshaNo5;
     @ReportItem(name = "hokenshaNo6", length = 2, order = 12)
     public RString hokenshaNo6;
+    @ReportExpandedInfo(id = "X")
     @ReportItem(name = "hihokenshaNo1", length = 2, order = 13)
     public RString hihokenshaNo1;
+    @ReportExpandedInfo(id = "X")
     @ReportItem(name = "hihokenshaNo2", length = 2, order = 14)
     public RString hihokenshaNo2;
+    @ReportExpandedInfo(id = "X")
     @ReportItem(name = "hihokenshaNo3", length = 2, order = 15)
     public RString hihokenshaNo3;
+    @ReportExpandedInfo(id = "X")
     @ReportItem(name = "hihokenshaNo4", length = 2, order = 16)
     public RString hihokenshaNo4;
+    @ReportExpandedInfo(id = "X")
     @ReportItem(name = "hihokenshaNo5", length = 2, order = 17)
     public RString hihokenshaNo5;
+    @ReportExpandedInfo(id = "X")
     @ReportItem(name = "hihokenshaNo6", length = 2, order = 18)
     public RString hihokenshaNo6;
+    @ReportExpandedInfo(id = "X")
     @ReportItem(name = "hihokenshaNo7", length = 2, order = 19)
     public RString hihokenshaNo7;
     @ReportItem(name = "hihokenshaNo8", length = 2, order = 20)
+    @ReportExpandedInfo(id = "X")
     public RString hihokenshaNo8;
+    @ReportExpandedInfo(id = "X")
     @ReportItem(name = "hihokenshaNo9", length = 2, order = 21)
     public RString hihokenshaNo9;
+    @ReportExpandedInfo(id = "X")
     @ReportItem(name = "hihokenshaNo10", length = 2, order = 22)
     public RString hihokenshaNo10;
 // </editor-fold>
