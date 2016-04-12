@@ -21,6 +21,8 @@ import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT7060KaigoJigyoshaEntity;
 
 /**
  * 償還払い状況照会
+ *
+ * @reamsid_L DBC-1010-180 panhe
  */
 public interface IShokanbaraiJyokyoShokaiMapper {
 

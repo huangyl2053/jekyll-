@@ -22,6 +22,8 @@ import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 
 /**
  * 償還払請求基本を管理するクラスです。
+ *
+ * @reamsid_L DBC-9999-012 panhe
  */
 public class ShokanKihon extends ModelBase<ShokanKihonIdentifier, DbT3038ShokanKihonEntity, ShokanKihon> implements Serializable {
 

@@ -21,11 +21,11 @@ import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 
 /**
  * 償還払請求特定入所者介護サービス費用を管理するクラスです。
+ *
+ * @reamsid_L DBC-9999-012 panhe
  */
-public class ShokanTokuteiNyushoshaKaigoServiceHiyo 
-extends ModelBase<ShokanTokuteiNyushoshaKaigoServiceHiyoIdentifier, 
-        DbT3050ShokanTokuteiNyushoshaKaigoServiceHiyoEntity, 
-        ShokanTokuteiNyushoshaKaigoServiceHiyo> implements Serializable {
+public class ShokanTokuteiNyushoshaKaigoServiceHiyo extends ModelBase<ShokanTokuteiNyushoshaKaigoServiceHiyoIdentifier, 
+        DbT3050ShokanTokuteiNyushoshaKaigoServiceHiyoEntity, ShokanTokuteiNyushoshaKaigoServiceHiyo> implements Serializable {
 
     private final DbT3050ShokanTokuteiNyushoshaKaigoServiceHiyoEntity entity;
     private final ShokanTokuteiNyushoshaKaigoServiceHiyoIdentifier id;
@@ -79,8 +79,7 @@ extends ModelBase<ShokanTokuteiNyushoshaKaigoServiceHiyoIdentifier,
      * コンストラクタです。<br/>
      * DBより取得した{@link DbT3050ShokanTokuteiNyushoshaKaigoServiceHiyoEntity}より{@link ShokanTokuteiNyushoshaKaigoServiceHiyo}を生成します。
      *
-     * @param entity
-     * DBより取得した{@link DbT3050ShokanTokuteiNyushoshaKaigoServiceHiyoEntity}
+     * @param entity DBより取得した{@link DbT3050ShokanTokuteiNyushoshaKaigoServiceHiyoEntity}
      */
     public ShokanTokuteiNyushoshaKaigoServiceHiyo(DbT3050ShokanTokuteiNyushoshaKaigoServiceHiyoEntity entity) {
         this.entity = requireNonNull(entity, UrSystemErrorMessages.値がnull.getReplacedMessage("償還払請求特定入所者介護サービス費用"));
@@ -329,8 +328,7 @@ extends ModelBase<ShokanTokuteiNyushoshaKaigoServiceHiyoIdentifier,
     /**
      * 償還払請求特定入所者介護サービス費用の識別子{@link ShokanTokuteiNyushoshaKaigoServiceHiyoIdentifier}を返します。
      *
-     * @return
-     * 償還払請求特定入所者介護サービス費用の識別子{@link ShokanTokuteiNyushoshaKaigoServiceHiyoIdentifier}
+     * @return 償還払請求特定入所者介護サービス費用の識別子{@link ShokanTokuteiNyushoshaKaigoServiceHiyoIdentifier}
      */
     @Override
     public ShokanTokuteiNyushoshaKaigoServiceHiyoIdentifier identifier() {

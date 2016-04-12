@@ -13,6 +13,8 @@ import lombok.Value;
 
 /**
  * 償還払支給申請の識別子です。
+ *
+ * @reamsid_L DBC-9999-012 panhe
  */
 @Value
 @SuppressWarnings("PMD.UnusedPrivateField")

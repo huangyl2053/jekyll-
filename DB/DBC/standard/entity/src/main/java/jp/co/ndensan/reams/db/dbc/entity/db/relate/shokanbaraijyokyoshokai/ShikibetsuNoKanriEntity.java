@@ -10,6 +10,8 @@ import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3118ShikibetsuNoKanriEntity
 
 /**
  * サービス提供証明書のオブジェクトクラスです。
+ *
+ * @reamsid_L DBC-1010-180 panhe
  */
 @lombok.Getter
 @lombok.Setter

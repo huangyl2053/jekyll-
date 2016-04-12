@@ -15,6 +15,8 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
  * {@link ShokanTokuteiShinryoTokubetsuRyoyo}の編集を行うビルダークラスです。
+ *
+ * @reamsid_L DBC-9999-012 panhe
  */
 public class ShokanTokuteiShinryoTokubetsuRyoyoBuilder {
 

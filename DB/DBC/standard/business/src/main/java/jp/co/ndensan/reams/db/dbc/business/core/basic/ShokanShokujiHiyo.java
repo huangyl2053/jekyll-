@@ -19,11 +19,11 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
  * 償還払請求食事費用を管理するクラスです。
+ *
+ * @reamsid_L DBC-9999-012 panhe
  */
-public class ShokanShokujiHiyo 
-extends ModelBase<ShokanShokujiHiyoIdentifier, 
-        DbT3043ShokanShokujiHiyoEntity, 
-        ShokanShokujiHiyo> implements Serializable {
+public class ShokanShokujiHiyo
+        extends ModelBase<ShokanShokujiHiyoIdentifier, DbT3043ShokanShokujiHiyoEntity, ShokanShokujiHiyo> implements Serializable {
 
     private final DbT3043ShokanShokujiHiyoEntity entity;
     private final ShokanShokujiHiyoIdentifier id;
@@ -168,7 +168,6 @@ extends ModelBase<ShokanShokujiHiyoIdentifier,
     public RString get連番() {
         return entity.getRenban();
     }
-
 
     /**
      * 基本提供日数を返します。

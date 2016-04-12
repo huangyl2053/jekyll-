@@ -9,6 +9,8 @@ import jp.co.ndensan.reams.db.dbx.business.core.kaigojigyosha.kaigojigyosha.Kaig
 
 /**
  * 介護事業者情報取得の返却結果
+ *
+ * @reamsid_L DBC-1010-180 panhe
  */
 @lombok.Getter
 @lombok.Setter
