@@ -19,7 +19,7 @@
     <sql id="allColumns_DbT3044ShokanShokujiHiyoSagakuShikyu">
          "DbT3044ShokanShokujiHiyoSagakuShikyu"."hiHokenshaNo" as "dbT3044ShokanShokujiHiyoSagakuShikyu_hiHokenshaNo",
          "DbT3044ShokanShokujiHiyoSagakuShikyu"."serviceTeikyoYM" as "dbT3044ShokanShokujiHiyoSagakuShikyu_serviceTeikyoYM",
-         "DbT3044ShokanShokujiHiyoSagakuShikyu"."seiriNp" as "dbT3044ShokanShokujiHiyoSagakuShikyu_seiriNp",
+         "DbT3044ShokanShokujiHiyoSagakuShikyu"."seiriNo" as "dbT3044ShokanShokujiHiyoSagakuShikyu_seiriNo",
          "DbT3044ShokanShokujiHiyoSagakuShikyu"."jigyoshaNo" as "dbT3044ShokanShokujiHiyoSagakuShikyu_jigyoshaNo",
          "DbT3044ShokanShokujiHiyoSagakuShikyu"."yoshikiNo" as "dbT3044ShokanShokujiHiyoSagakuShikyu_yoshikiNo",
          "DbT3044ShokanShokujiHiyoSagakuShikyu"."meisaiNo" as "dbT3044ShokanShokujiHiyoSagakuShikyu_meisaiNo",
@@ -44,7 +44,7 @@
     <resultMap id="ResultMap_DbT3044ShokanShokujiHiyoSagakuShikyuEntity" type="jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3044ShokanShokujiHiyoSagakuShikyuEntity" autoMapping="true">
         <id property="hiHokenshaNo" column="dbT3044ShokanShokujiHiyoSagakuShikyu_hiHokenshaNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.HihokenshaNoTypeHandler"/>
         <id property="serviceTeikyoYM" column="dbT3044ShokanShokujiHiyoSagakuShikyu_serviceTeikyoYM" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleYearMonthTypeHandler"/>
-        <id property="seiriNp" column="dbT3044ShokanShokujiHiyoSagakuShikyu_seiriNp" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <id property="seiriNo" column="dbT3044ShokanShokujiHiyoSagakuShikyu_seiriNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <id property="jigyoshaNo" column="dbT3044ShokanShokujiHiyoSagakuShikyu_jigyoshaNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.JigyoshaNoTypeHandler"/>
         <id property="yoshikiNo" column="dbT3044ShokanShokujiHiyoSagakuShikyu_yoshikiNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <id property="meisaiNo" column="dbT3044ShokanShokujiHiyoSagakuShikyu_meisaiNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>

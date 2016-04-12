@@ -290,7 +290,7 @@
         FROM   "TABLE_SHOKANSHUKEIKETTEIIN" AS TEMP
         WHERE  a."hiHokenshaNo" = TEMP."hihokenshaNo"
         AND    a."serviceTeikyoYM" = TEMP."serviceTeikyoYM"
-        AND    a."seiriNp" = TEMP."seiriNo"
+        AND    a."seiriNo" = TEMP."seiriNo"
         AND    a."jigyoshaNo" = TEMP."jigyoshoNo"
         AND    TEMP."serviceShuruiCode" IS NULL
     </update>
