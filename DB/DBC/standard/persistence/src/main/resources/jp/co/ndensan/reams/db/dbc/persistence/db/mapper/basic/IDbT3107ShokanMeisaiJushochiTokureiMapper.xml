@@ -19,7 +19,7 @@
     <sql id="allColumns_DbT3107ShokanMeisaiJushochiTokurei">
         "DbT3107ShokanMeisaiJushochiTokurei"."hiHokenshaNo" as "dbT3107ShokanMeisaiJushochiTokurei_hiHokenshaNo",
         "DbT3107ShokanMeisaiJushochiTokurei"."serviceTeikyoYM" as "dbT3107ShokanMeisaiJushochiTokurei_serviceTeikyoYM",
-        "DbT3107ShokanMeisaiJushochiTokurei"."seiriNp" as "dbT3107ShokanMeisaiJushochiTokurei_seiriNp",
+        "DbT3107ShokanMeisaiJushochiTokurei"."seiriNo" as "dbT3107ShokanMeisaiJushochiTokurei_seiriNo",
         "DbT3107ShokanMeisaiJushochiTokurei"."jigyoshaNo" as "dbT3107ShokanMeisaiJushochiTokurei_jigyoshaNo",
         "DbT3107ShokanMeisaiJushochiTokurei"."yoshikiNo" as "dbT3107ShokanMeisaiJushochiTokurei_yoshikiNo",
         "DbT3107ShokanMeisaiJushochiTokurei"."meisaiNo" as "dbT3107ShokanMeisaiJushochiTokurei_meisaiNo",
@@ -46,7 +46,7 @@
     <resultMap id="ResultMap_DbT3107ShokanMeisaiJushochiTokureiEntity" type="jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3107ShokanMeisaiJushochiTokureiEntity" autoMapping="true">
         <id property="hiHokenshaNo" column="dbT3107ShokanMeisaiJushochiTokurei_hiHokenshaNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.HihokenshaNoTypeHandler"/>
         <id property="serviceTeikyoYM" column="dbT3107ShokanMeisaiJushochiTokurei_serviceTeikyoYM" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleYearMonthTypeHandler"/>
-        <id property="seiriNp" column="dbT3107ShokanMeisaiJushochiTokurei_seiriNp" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <id property="seiriNo" column="dbT3107ShokanMeisaiJushochiTokurei_seiriNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <id property="jigyoshaNo" column="dbT3107ShokanMeisaiJushochiTokurei_jigyoshaNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.JigyoshaNoTypeHandler"/>
         <id property="yoshikiNo" column="dbT3107ShokanMeisaiJushochiTokurei_yoshikiNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <id property="meisaiNo" column="dbT3107ShokanMeisaiJushochiTokurei_meisaiNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>

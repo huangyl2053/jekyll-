@@ -154,7 +154,7 @@
         WHERE
         ShokanShinsei."hiHokenshaNo" = TEMPA."hiHokenshaNo"
         AND ShokanShinsei."serviceTeikyoYM" = TEMPA."serviceTeikyoYM"
-        AND ShokanShinsei."seiriNo" = TEMPA."seiriNp"
+        AND ShokanShinsei."seiriNo" = TEMPA."seiriNo"
     </select>
         
     <resultMap id="Result_ShibaraiKekka" type="jp.co.ndensan.reams.db.dbc.entity.db.relate.fukushiyogukonyuhishikyushisei.SokanbaraiShiharaiKekka" autoMapping="true">
