@@ -229,18 +229,18 @@ public class TekiyoJogaiRirekiHandler {
         FlexibleDate 異動日 = new FlexibleDate(選択データ.getIdoYMD());
         RString 最大枝番;
         RString 最新履歴番号;
-        RString 枝番 = new RString("0001");
-        RString 履歴番号 = new RString("1");
+        RString 枝番;
+        RString 履歴番号;
         if (rowList != null && !rowList.isEmpty()) {
             最大枝番 = rowList.get(0).getEdaNo();
             最新履歴番号 = rowList.get(0).getRirekiNo();
             int rirekiNoMax = Integer.parseInt(最新履歴番号.toString());
-            if (!RString.isNullOrEmpty(最大枝番)) {
-                枝番 = new RString(String.valueOf(Integer.valueOf(最大枝番.toString()) + 1)).padZeroToLeft(PADZERO);
-            }
+            枝番 = new RString(String.valueOf(Integer.valueOf(最大枝番.toString()) + 1)).padZeroToLeft(PADZERO);
             履歴番号 = new RString(String.valueOf(rirekiNoMax + 1));
         } else {
             rowList = new ArrayList();
+            枝番 = new RString("0001");
+            履歴番号 = new RString("1");
         }
         if (状態_修正.equals(画面状態) || 状態_訂正履歴.equals(画面状態)) {
             if (!状態_削除.equals(選択データ.getStatus())) {
@@ -324,6 +324,8 @@ public class TekiyoJogaiRirekiHandler {
         Collections.sort(rowList, new DateComparator());
         div.getDatagridTekiyoJogai().setDataSource(rowList);
         div.setStauts(RString.EMPTY);
+        ViewStateHolder.put(jp.co.ndensan.reams.db.dbz.divcontroller.viewbox.ViewStateKeys.適用除外者管理_適用除外者情報, 適用除外者Model);
+        ViewStateHolder.put(jp.co.ndensan.reams.db.dbz.divcontroller.viewbox.ViewStateKeys.適用除外者管理_保険施設入退所情報, 保険施設入退所Model);
     }
 
     /**
