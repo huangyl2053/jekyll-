@@ -15,7 +15,6 @@ import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
-import org.dom4j.Text;
 
 /**
  *
@@ -72,7 +71,7 @@ public class EditedKariSanteiTsuchiShoKyotsu {
     private List<UniversalSignDeliveryInformation> 普徴納期情報リスト;
     private List<OrdinaryIncomeInformation> 普徴収入情報リスト;
     private int 普徴期数;
-    private Text 保険者名;
+    private RString 保険者名;
     private List<OrdinaryIncomeInformation> 特徴収入情報リスト;
 
 }

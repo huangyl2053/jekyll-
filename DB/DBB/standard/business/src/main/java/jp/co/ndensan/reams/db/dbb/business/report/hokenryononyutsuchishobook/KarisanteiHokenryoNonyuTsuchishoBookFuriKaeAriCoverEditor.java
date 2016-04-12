@@ -30,8 +30,7 @@ import jp.co.ndensan.reams.uz.uza.math.Decimal;
 
 /**
  *
- * 保険料納入通知書（仮算定）【ブックタイプ】（口振依頼あり）通知書
- * KarisanteiHokenryoNonyuTsuchishoBookFuriKaeAriCoverEditor
+ * 保険料納入通知書（仮算定）【ブックタイプ】（口振依頼あり）通知書 KarisanteiHokenryoNonyuTsuchishoBookFuriKaeAriCoverEditor
  *
  * @reamsid_L DBB-9110-040 wangjie2
  */
@@ -342,7 +341,7 @@ public class KarisanteiHokenryoNonyuTsuchishoBookFuriKaeAriCoverEditor
         source.pagerenban4
                 = ShoriKubun.バッチ.equals(仮算定納入通知書情報.get処理区分()) ? new RString(String.valueOf(連番)).concat("-4") : new RString("1-4");
         source.renban = ShoriKubun.バッチ.equals(仮算定納入通知書情報.get処理区分()) ? new RString(String.valueOf(連番)).padLeft("0", INT6) : RString.EMPTY;
-        source.hokenshaName = new RString(編集後仮算定通知書共通情報.get保険者名().getText());
+        source.hokenshaName = 編集後仮算定通知書共通情報.get保険者名();
     }
 
     private Decimal get調定額(NonyuTsuchiShoKiJoho 納入通知書期情報) {

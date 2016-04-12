@@ -11,6 +11,8 @@ import jp.co.ndensan.reams.uz.uza.report.IReportEditor;
 /**
  *
  * 帳票設計_DBBRP00007_2_保険料納入通知書（仮算定）【期毎タイプ】連帳 IKarisanteiHokenryoNonyuTsuchishoKigotoRenchoEditor
+ *
+ * @reamsid_L DBB-9110-020 wangjie2
  */
 public interface IKarisanteiHokenryoNonyuTsuchishoKigotoRenchoEditor
         extends IReportEditor<KarisanteiHokenryoNonyuTsuchishoKigotoRenchoSource> {

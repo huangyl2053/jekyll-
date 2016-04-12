@@ -438,7 +438,7 @@ public class KarisanteiHokenryoNonyuTsuchishoGinfuriEditor implements IKarisante
     }
 
     private void editHokenshaName(KarisanteiHokenryoNonyuTsuchishoGinfuriSource source) {
-        source.hokenshaName = new RString(編集後仮算定通知書共通情報.get保険者名().getText());
+        source.hokenshaName = 編集後仮算定通知書共通情報.get保険者名();
     }
 
     private void editRenban(KarisanteiHokenryoNonyuTsuchishoGinfuriSource source) {

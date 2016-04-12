@@ -61,7 +61,7 @@ public class HokenryoNonyuTsuchishoBookNofushoEditor implements IHokenryoNonyuTs
         edit印字位置5(source);
         source.eRenban = RString.EMPTY;
         source.ePage = null;
-        source.eHokensyaName = new RString(仮算定納入通知書情報.get編集後仮算定通知書共通情報().get保険者名().getText());
+        source.eHokensyaName = 仮算定納入通知書情報.get編集後仮算定通知書共通情報().get保険者名();
         return source;
     }
 

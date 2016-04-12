@@ -15,6 +15,8 @@ import jp.co.ndensan.reams.ur.urz.entity.report.sofubutsuatesaki.SofubutsuAtesak
 /**
  *
  * 帳票設計_DBBRP00007_2_保険料納入通知書（仮算定）【期毎タイプ】CompSofubutsuAtesakiEditor
+ *
+ * @reamsid_L DBB-9110-020 wangjie2
  */
 public class CompSofubutsuAtesakiEditor implements IKarisanteiHokenryoNonyuTsuchishoKigotoEditor {
 

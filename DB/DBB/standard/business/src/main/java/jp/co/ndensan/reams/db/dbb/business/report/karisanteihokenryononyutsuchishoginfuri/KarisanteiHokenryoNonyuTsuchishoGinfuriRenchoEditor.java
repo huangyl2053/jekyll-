@@ -631,7 +631,7 @@ public class KarisanteiHokenryoNonyuTsuchishoGinfuriRenchoEditor implements IKar
     }
 
     private void editHokenshaName(KarisanteiHokenryoNonyuTsuchishoGinfuriRenchoSource source) {
-        source.hihokenshaName = new RString(編集後仮算定通知書共通情報.get保険者名().getText());
+        source.hihokenshaName = 編集後仮算定通知書共通情報.get保険者名();
     }
 
     private void editERenban(KarisanteiHokenryoNonyuTsuchishoGinfuriRenchoSource source) {

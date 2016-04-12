@@ -6,7 +6,9 @@ import jp.co.ndensan.reams.uz.uza.report.source.ReportItem;
 
 /**
  *
- * 帳票設計_DBBRP00007_2_保険料納入通知書（仮算定）【期毎タイプ】KarisanteiHokenryoNonyuTsuchishoKigotoSource
+ * 帳票設計_DBBRP00007_2_保険料納入通知書（仮算定）【期毎タイプ】Sourceです。
+ *
+ * @reamsid_L DBB-9110-020 wangjie2
  */
 @SuppressWarnings("PMD.UnusedPrivateField")
 public class KarisanteiHokenryoNonyuTsuchishoKigotoSource implements IReportSource {

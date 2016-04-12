@@ -11,6 +11,8 @@ import lombok.Getter;
 /**
  *
  * 帳票設計_DBBRP00007_2_保険料納入通知書（仮算定）【期毎タイプ】 DBBCompRyoshushoItem
+ *
+ * @reamsid_L DBB-9110-020 wangjie2
  */
 @Getter
 @SuppressWarnings("PMD.UnusedPrivateField")

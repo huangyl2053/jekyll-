@@ -17,6 +17,8 @@ import jp.co.ndensan.reams.db.dbb.definition.core.HyojiUmu;
 import jp.co.ndensan.reams.db.dbb.definition.core.ShoriKubun;
 import jp.co.ndensan.reams.db.dbb.entity.report.KarisanteiNonyuTsuchishoCVSKigoto.KarisanteiNonyuTsuchishoCVSKigotoSource;
 import jp.co.ndensan.reams.db.dbx.business.core.kanri.Kitsuki;
+import jp.co.ndensan.reams.db.dbz.business.report.util.EditedAtesaki;
+import jp.co.ndensan.reams.ur.urz.entity.report.parts.ninshosha.NinshoshaSource;
 import jp.co.ndensan.reams.ur.urz.entity.report.sofubutsuatesaki.SofubutsuAtesakiSource;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RStringUtil;
@@ -32,8 +34,8 @@ public class KarisanteiNonyuTsuchishoCVSKigotoEditor implements IKarisanteiNonyu
     private final EditedKariSanteiTsuchiShoKyotsu 編集後仮算定通知書共通情報;
     private final List<NonyuTsuchiShoKiJoho> 納入通知書期情報リスト;
     private final int 連番;
-    //private final NinshoshaSource ninshoshaSource;
-    private final SofubutsuAtesakiSource sofubutsuAtesakiSource;
+    private final NinshoshaSource ninshoshaSource;
+    private final EditedAtesaki 編集後宛先;
     private static final int INT6 = 6;
 
     /**
@@ -41,13 +43,10 @@ public class KarisanteiNonyuTsuchishoCVSKigotoEditor implements IKarisanteiNonyu
      *
      * @param item {@link KarisanteiNonyuTsuchishoCVSKigotoItem}
      * @param 連番 連番
-     * @param sofubutsuAtesakiSource sofubutsuAtesakiSource
      */
     protected KarisanteiNonyuTsuchishoCVSKigotoEditor(
             KarisanteiNonyuTsuchishoCVSKigotoItem item,
-            int 連番,
-            SofubutsuAtesakiSource sofubutsuAtesakiSource) {
-        //NinshoshaSource ninshoshaSource,
+            int 連番) {
         this.仮算定納入通知書情報
                 = null == item.get仮算定納入通知書情報() ? new KariSanteiNonyuTsuchiShoJoho() : item.get仮算定納入通知書情報();
         this.編集後仮算定通知書共通情報 = null == 仮算定納入通知書情報.get編集後仮算定通知書共通情報()
@@ -55,63 +54,72 @@ public class KarisanteiNonyuTsuchishoCVSKigotoEditor implements IKarisanteiNonyu
         this.納入通知書期情報リスト = 仮算定納入通知書情報.get納入通知書期情報リスト().isEmpty()
                 ? new ArrayList<NonyuTsuchiShoKiJoho>() : 仮算定納入通知書情報.get納入通知書期情報リスト();
         this.連番 = 連番;
-        //this.ninshoshaSource = ninshoshaSource;
-        this.sofubutsuAtesakiSource = sofubutsuAtesakiSource;
+        this.ninshoshaSource = item.getNinshoshaSource();
+        this.編集後宛先 = null == 編集後仮算定通知書共通情報 ? null : 編集後仮算定通知書共通情報.get編集後宛先();
     }
 
     @Override
     public KarisanteiNonyuTsuchishoCVSKigotoSource edit(KarisanteiNonyuTsuchishoCVSKigotoSource source) {
         editレイヤ１(source);
-        //editCompNinshosha(source);
+        editCompNinshosha(source);
         editCompSofubutsuAtesaki(source);
         return source;
     }
 
     private void editCompSofubutsuAtesaki(KarisanteiNonyuTsuchishoCVSKigotoSource source) {
-        source.customerBarCode = sofubutsuAtesakiSource.customerBarCode;
-        source.dainoKubunMei = sofubutsuAtesakiSource.dainoKubunMei;
-        source.gyoseiku = sofubutsuAtesakiSource.gyoseiku;
-        source.jusho1 = sofubutsuAtesakiSource.jusho1;
-        source.jusho2 = sofubutsuAtesakiSource.jusho2;
-        source.jusho3 = sofubutsuAtesakiSource.jusho3;
-        source.jushoText = sofubutsuAtesakiSource.jushoText;
-        source.kakkoLeft1 = sofubutsuAtesakiSource.kakkoLeft1;
-        source.kakkoLeft2 = sofubutsuAtesakiSource.kakkoLeft2;
-        source.kakkoRight1 = sofubutsuAtesakiSource.kakkoRight1;
-        source.kakkoRight2 = sofubutsuAtesakiSource.kakkoRight2;
-        source.katagaki1 = sofubutsuAtesakiSource.katagaki1;
-        source.katagaki2 = sofubutsuAtesakiSource.katagaki2;
-        source.katagakiSmall1 = sofubutsuAtesakiSource.katagakiSmall1;
-        source.katagakiSmall2 = sofubutsuAtesakiSource.katagakiSmall2;
-        source.katagakiText = sofubutsuAtesakiSource.katagakiText;
-        source.meishoFuyo1 = sofubutsuAtesakiSource.meishoFuyo1;
-        source.meishoFuyo2 = sofubutsuAtesakiSource.meishoFuyo2;
-        source.samaBun1 = sofubutsuAtesakiSource.samaBun1;
-        source.samaBun2 = sofubutsuAtesakiSource.samaBun2;
-        source.samabunShimei1 = sofubutsuAtesakiSource.samabunShimei1;
-        source.samabunShimei2 = sofubutsuAtesakiSource.samabunShimei2;
-        source.samabunShimeiSmall1 = sofubutsuAtesakiSource.samabunShimeiSmall1;
-        source.samabunShimeiSmall2 = sofubutsuAtesakiSource.samabunShimeiSmall2;
-        source.samabunShimeiText = sofubutsuAtesakiSource.samabunShimeiText;
-        source.shimei1 = sofubutsuAtesakiSource.shimei1;
-        source.shimei2 = sofubutsuAtesakiSource.shimei2;
-        source.shimeiSmall1 = sofubutsuAtesakiSource.shimeiSmall1;
-        source.shimeiSmall2 = sofubutsuAtesakiSource.shimeiSmall2;
-        source.shimeiText = sofubutsuAtesakiSource.shimeiText;
-        source.yubinNo = sofubutsuAtesakiSource.yubinNo;
+        SofubutsuAtesakiSource sofubutsuAtesakiSource = null;
+        if (編集後宛先 != null) {
+            sofubutsuAtesakiSource = 編集後宛先.getSofubutsuAtesakiSource().get送付物宛先ソース();
+        }
+        if (sofubutsuAtesakiSource != null) {
+            source.customerBarCode = sofubutsuAtesakiSource.customerBarCode;
+            source.dainoKubunMei = sofubutsuAtesakiSource.dainoKubunMei;
+            source.gyoseiku = sofubutsuAtesakiSource.gyoseiku;
+            source.jusho1 = sofubutsuAtesakiSource.jusho1;
+            source.jusho2 = sofubutsuAtesakiSource.jusho2;
+            source.jusho3 = sofubutsuAtesakiSource.jusho3;
+            source.jushoText = sofubutsuAtesakiSource.jushoText;
+            source.kakkoLeft1 = sofubutsuAtesakiSource.kakkoLeft1;
+            source.kakkoLeft2 = sofubutsuAtesakiSource.kakkoLeft2;
+            source.kakkoRight1 = sofubutsuAtesakiSource.kakkoRight1;
+            source.kakkoRight2 = sofubutsuAtesakiSource.kakkoRight2;
+            source.katagaki1 = sofubutsuAtesakiSource.katagaki1;
+            source.katagaki2 = sofubutsuAtesakiSource.katagaki2;
+            source.katagakiSmall1 = sofubutsuAtesakiSource.katagakiSmall1;
+            source.katagakiSmall2 = sofubutsuAtesakiSource.katagakiSmall2;
+            source.katagakiText = sofubutsuAtesakiSource.katagakiText;
+            source.meishoFuyo1 = sofubutsuAtesakiSource.meishoFuyo1;
+            source.meishoFuyo2 = sofubutsuAtesakiSource.meishoFuyo2;
+            source.samaBun1 = sofubutsuAtesakiSource.samaBun1;
+            source.samaBun2 = sofubutsuAtesakiSource.samaBun2;
+            source.samabunShimei1 = sofubutsuAtesakiSource.samabunShimei1;
+            source.samabunShimei2 = sofubutsuAtesakiSource.samabunShimei2;
+            source.samabunShimeiSmall1 = sofubutsuAtesakiSource.samabunShimeiSmall1;
+            source.samabunShimeiSmall2 = sofubutsuAtesakiSource.samabunShimeiSmall2;
+            source.samabunShimeiText = sofubutsuAtesakiSource.samabunShimeiText;
+            source.shimei1 = sofubutsuAtesakiSource.shimei1;
+            source.shimei2 = sofubutsuAtesakiSource.shimei2;
+            source.shimeiSmall1 = sofubutsuAtesakiSource.shimeiSmall1;
+            source.shimeiSmall2 = sofubutsuAtesakiSource.shimeiSmall2;
+            source.shimeiText = sofubutsuAtesakiSource.shimeiText;
+            source.yubinNo = sofubutsuAtesakiSource.yubinNo;
+        }
     }
 
-//    private void editCompNinshosha(KarisanteiNonyuTsuchishoCVSKigotoSource source) {
-//        source.denshiKoin = ninshoshaSource.denshiKoin;
-//        source.hakkoYMD = ninshoshaSource.hakkoYMD;
-//        source.ninshoshaYakushokuMei = ninshoshaSource.ninshoshaYakushokuMei;
-//        source.ninshoshaYakushokuMei1 = ninshoshaSource.ninshoshaYakushokuMei1;
-//        source.koinMojiretsu = ninshoshaSource.koinMojiretsu;
-//        source.ninshoshaYakushokuMei2 = ninshoshaSource.ninshoshaYakushokuMei2;
-//        source.ninshoshaShimeiKakenai = ninshoshaSource.ninshoshaShimeiKakenai;
-//        source.ninshoshaShimeiKakeru = ninshoshaSource.ninshoshaShimeiKakeru;
-//        source.koinShoryaku = ninshoshaSource.koinShoryaku;
-//    }
+    private void editCompNinshosha(KarisanteiNonyuTsuchishoCVSKigotoSource source) {
+        if (ninshoshaSource != null) {
+            source.denshiKoin = ninshoshaSource.denshiKoin;
+            source.hakkoYMD = ninshoshaSource.hakkoYMD;
+            source.ninshoshaYakushokuMei = ninshoshaSource.ninshoshaYakushokuMei;
+            source.ninshoshaYakushokuMei1 = ninshoshaSource.ninshoshaYakushokuMei1;
+            source.koinMojiretsu = ninshoshaSource.koinMojiretsu;
+            source.ninshoshaYakushokuMei2 = ninshoshaSource.ninshoshaYakushokuMei2;
+            source.ninshoshaShimeiKakenai = ninshoshaSource.ninshoshaShimeiKakenai;
+            source.ninshoshaShimeiKakeru = ninshoshaSource.ninshoshaShimeiKakeru;
+            source.koinShoryaku = ninshoshaSource.koinShoryaku;
+        }
+    }
+
     private void editレイヤ１(KarisanteiNonyuTsuchishoCVSKigotoSource source) {
         boolean isバッチ = ShoriKubun.バッチ.equals(仮算定納入通知書情報.get処理区分());
         NonyuTsuchiShoKiJoho 納入通知書期情報 = 納入通知書期情報リスト.isEmpty() ? new NonyuTsuchiShoKiJoho() : 納入通知書期情報リスト.get(0);
@@ -202,7 +210,7 @@ public class KarisanteiNonyuTsuchishoCVSKigotoEditor implements IKarisanteiNonyu
         source.notsuRenban2 = isバッチ ? new RString(String.valueOf(連番)).padLeft("0", INT6) : RString.EMPTY;
         source.pageCount2 = new RString(String.valueOf(連番)).concat("-2");
         source.renban = isバッチ ? new RString(String.valueOf(連番)) : RString.EMPTY;
-        source.hokenshaName = new RString(編集後仮算定通知書共通情報.get保険者名().getText());
+        source.hokenshaName = 編集後仮算定通知書共通情報.get保険者名();
         source.notsuRenban3 = isバッチ ? new RString(String.valueOf(連番)).padLeft("0", INT6) : RString.EMPTY;
         source.pageCount3 = new RString(String.valueOf(連番)).concat("-3");
     }
