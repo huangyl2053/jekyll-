@@ -38,7 +38,7 @@ public class HihokenshaDaichoSeikatsuhogoEditor implements IHihokenshaDaichoEdit
      */
     @Override
     public HihokenshaDaichoReportSource edit(HihokenshaDaichoReportSource source) {
-        if (entity == null || entity.get生活保護No().size() < index) {
+        if (entity == null || entity.get生活保護No().size() <= index) {
             return source;
         }
         return editBody(source);

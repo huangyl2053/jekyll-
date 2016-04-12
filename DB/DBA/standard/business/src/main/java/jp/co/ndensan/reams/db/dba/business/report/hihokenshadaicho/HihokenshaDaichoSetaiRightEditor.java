@@ -38,7 +38,7 @@ public class HihokenshaDaichoSetaiRightEditor implements IHihokenshaDaichoEditor
      */
     @Override
     public HihokenshaDaichoReportSource edit(HihokenshaDaichoReportSource source) {
-        if (entity == null || entity.get世帯右被保険者番号().size() < index) {
+        if (entity == null || entity.get世帯右被保険者番号().size() <= index) {
             return source;
         }
         return editBody(source);

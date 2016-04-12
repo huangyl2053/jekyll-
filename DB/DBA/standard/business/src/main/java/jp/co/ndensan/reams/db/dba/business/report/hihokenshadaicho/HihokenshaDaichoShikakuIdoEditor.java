@@ -38,7 +38,7 @@ public class HihokenshaDaichoShikakuIdoEditor implements IHihokenshaDaichoEditor
      */
     @Override
     public HihokenshaDaichoReportSource edit(HihokenshaDaichoReportSource source) {
-        if (entity == null || entity.get資格異動No().size() < index) {
+        if (entity == null || entity.get資格異動No().size() <= index) {
             return source;
         }
         return editBody(source);

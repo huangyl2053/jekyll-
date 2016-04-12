@@ -38,7 +38,7 @@ public class HihokenshaDaichoShoRireki2Editor implements IHihokenshaDaichoEditor
      */
     @Override
     public HihokenshaDaichoReportSource edit(HihokenshaDaichoReportSource source) {
-        if (entity == null || entity.get証履歴No2().size() < index) {
+        if (entity == null || entity.get証履歴No2().size() <= index) {
             return source;
         }
         return editBody(source);

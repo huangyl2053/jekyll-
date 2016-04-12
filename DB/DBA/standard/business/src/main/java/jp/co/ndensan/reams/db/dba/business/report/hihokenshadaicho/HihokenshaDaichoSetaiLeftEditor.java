@@ -44,7 +44,7 @@ public class HihokenshaDaichoSetaiLeftEditor implements IHihokenshaDaichoEditor 
      */
     @Override
     public HihokenshaDaichoReportSource edit(HihokenshaDaichoReportSource source) {
-        if (joho.get世帯左情報() == null || joho.get世帯左情報().get世帯左No().size() < index) {
+        if (joho.get世帯左情報() == null || joho.get世帯左情報().get世帯左No().size() <= index) {
             return source;
         }
         return editBody(source);

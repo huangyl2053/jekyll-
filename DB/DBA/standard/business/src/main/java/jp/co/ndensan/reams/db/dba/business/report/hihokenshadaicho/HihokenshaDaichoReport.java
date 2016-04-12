@@ -37,7 +37,7 @@ public final class HihokenshaDaichoReport extends Report<HihokenshaDaichoReportS
     }
 
     @Override
-    protected void writeBy(ReportSourceWriter<HihokenshaDaichoReportSource> writer) {
+    public void writeBy(ReportSourceWriter<HihokenshaDaichoReportSource> writer) {
         for (HihokenshaDaichoSakusei item : items) {
             writeChohyo(item, writer);
         }
