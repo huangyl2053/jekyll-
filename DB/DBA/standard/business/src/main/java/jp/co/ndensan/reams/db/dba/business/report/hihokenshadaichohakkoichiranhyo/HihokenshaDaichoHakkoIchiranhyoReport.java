@@ -46,7 +46,7 @@ public final class HihokenshaDaichoHakkoIchiranhyoReport extends Report<Hihokens
      * @param writer 被保険者台帳一覧表Sourceクラス
      */
     @Override
-    protected void writeBy(ReportSourceWriter<HihokenshaDaichoHakkoIchiranhyoReportSource> writer) {
+    public void writeBy(ReportSourceWriter<HihokenshaDaichoHakkoIchiranhyoReportSource> writer) {
         for (HihokenshaDaichoHakkoIchiranhyoBodyItem item : bodyItemList) {
             HihokenshaDaichoHakkoIchiranhyoHeaderEditor header = new HihokenshaDaichoHakkoIchiranhyoHeaderEditor(headerItem);
             HihokenshaDaichoHakkoIchiranhyoBodyEditor body = new HihokenshaDaichoHakkoIchiranhyoBodyEditor(item);
