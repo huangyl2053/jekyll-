@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- @reamsid_L DBA-0600-020 zhangguopeng -->
 <mapper namespace="jp.co.ndensan.reams.db.dba.persistence.db.mapper.relate.hihokenshashohakkokanribo.IHihokenshashoHakkoKanriboMapper">
 
     <resultMap id="resultMap_get証発行管理リスト情報" type="jp.co.ndensan.reams.db.dba.entity.db.relate.hihokenshashohakkokanribo.AkasiHakouKanriEntity" autoMapping="true">

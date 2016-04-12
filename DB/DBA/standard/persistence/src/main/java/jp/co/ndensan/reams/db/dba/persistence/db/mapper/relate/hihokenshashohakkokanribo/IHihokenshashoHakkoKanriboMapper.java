@@ -12,6 +12,8 @@ import jp.co.ndensan.reams.db.dba.entity.db.relate.hihokenshashohakkokanribo.Aka
 /**
  *
  * 被保険者証発行管理簿のマッパーインタフェースです。
+ *
+ * @reamsid_L DBA-0600-020 zhangguopeng
  */
 public interface IHihokenshashoHakkoKanriboMapper {
 

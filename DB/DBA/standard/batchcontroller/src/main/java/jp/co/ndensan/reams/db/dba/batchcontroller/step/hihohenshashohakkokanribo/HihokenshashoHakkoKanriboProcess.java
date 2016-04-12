@@ -48,6 +48,8 @@ import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
 /**
  *
  * 被保険者証発行管理簿_バッチ処理クラスです
+ *
+ * @reamsid_L DBA-0600-020 zhangguopeng
  */
 public class HihokenshashoHakkoKanriboProcess extends SimpleBatchProcessBase {
 
