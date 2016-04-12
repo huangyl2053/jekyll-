@@ -23,6 +23,8 @@ import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
 /**
  *
  * 被保険者証発行管理簿のクラスです。
+ *
+ * @reamsid_L DBA-0600-030 zhangguopeng
  */
 public class HihokenshashoHakkoKanriboFinder {
 
