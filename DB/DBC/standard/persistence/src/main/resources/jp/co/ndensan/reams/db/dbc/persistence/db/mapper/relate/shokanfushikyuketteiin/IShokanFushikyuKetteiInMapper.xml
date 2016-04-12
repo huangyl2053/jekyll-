@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
+<!-- @reamsid_L DBC-2590-030 xuhao -->
 <mapper namespace="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.shokanfushikyuketteiin.IShokanFushikyuKetteiInMapper">
 
     <resultMap id="resultMap_Hihokensha" type="jp.co.ndensan.reams.db.dbc.entity.db.relate.shokanfushikyuketteiin.ShokanFushikyuKetteiInEntity" autoMapping="true">

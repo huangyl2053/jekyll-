@@ -10,6 +10,8 @@ import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 
 /**
  * 新被保険者番号一時テーブルに対するMapperパラメータ
+ *
+ * @reamsid_L DBC-2590-030 xuhao
  */
 @lombok.Getter
 @SuppressWarnings("PMD.UnusedPrivateField")

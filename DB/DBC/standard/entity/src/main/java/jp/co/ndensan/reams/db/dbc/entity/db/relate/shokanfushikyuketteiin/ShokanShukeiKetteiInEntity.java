@@ -14,6 +14,8 @@ import jp.co.ndensan.reams.uz.uza.math.Decimal;
 
 /**
  * 償還払請求集計一時テーブル Entity
+ *
+ * @reamsid_L DBC-2590-030 xuhao
  */
 @lombok.Getter
 @lombok.Setter

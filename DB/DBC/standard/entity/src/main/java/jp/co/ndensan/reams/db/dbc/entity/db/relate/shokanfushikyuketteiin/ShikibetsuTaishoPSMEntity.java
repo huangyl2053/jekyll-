@@ -16,6 +16,8 @@ import lombok.Setter;
 
 /**
  * 取得した宛名情報Entity
+ *
+ * @reamsid_L DBC-2590-030 xuhao
  */
 @Getter
 @Setter
