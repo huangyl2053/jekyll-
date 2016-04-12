@@ -11,8 +11,6 @@ import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5101NinteiShinseiJohoEntity
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5502ShinsakaiWariateJohoEntity;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.uz.uza.batch.BatchInterruptedException;
-import jp.co.ndensan.reams.uz.uza.batch.process.BatchPermanentTableWriter;
-import jp.co.ndensan.reams.uz.uza.batch.process.BatchWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.SimpleBatchProcessBase;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
@@ -22,7 +20,7 @@ import jp.co.ndensan.reams.uz.uza.util.config.BusinessConfig;
 import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
 
 /**
- * 対象者自動割付の取得バッチクラスです。
+ * 対象者自動割付の取得バッチクラスです。TODO 2016/04/12 AccessLog出力を実装しない
  *
  * @reamsid_L DBE-1350-040 wangxiaodong
  */
@@ -38,11 +36,6 @@ public class TaisyosyaJidoWaritsukeProcess extends SimpleBatchProcessBase {
     private List<Integer> shinsakaiWaritsukeNinsu;
     private List<Integer> shinsakaiJidoWariateTeiin;
 
-    @BatchWriter
-    private BatchPermanentTableWriter<DbT5502ShinsakaiWariateJohoEntity> dbT5502EntityWriter;
-    @BatchWriter
-    private BatchPermanentTableWriter<DbT5501ShinsakaiKaisaiYoteiJohoEntity> dbT5501EntityWriter;
-
     @Override
     protected void beforeExecute() {
         mapper = getMapper(ITaisyosyaJidoWaritsukeRelateMapper.class);
@@ -51,8 +44,6 @@ public class TaisyosyaJidoWaritsukeProcess extends SimpleBatchProcessBase {
         shinsakaiJidoWariateTeiin = paramter.getShinsakaiJidoWariateTeiin();
         shinsakaiKaisaiNo = paramter.getShinsakaiKaisaiNo();
         shinsakaiKaisaiYMD = paramter.getKaisaiYMD();
-        dbT5501EntityWriter = new BatchPermanentTableWriter(DbT5501ShinsakaiKaisaiYoteiJohoEntity.class);
-        dbT5502EntityWriter = new BatchPermanentTableWriter(DbT5502ShinsakaiWariateJohoEntity.class);
     }
 
     @Override
@@ -69,20 +60,21 @@ public class TaisyosyaJidoWaritsukeProcess extends SimpleBatchProcessBase {
             int 割付人数 = 0;
             boolean isExeNext = false;
             DbT5501ShinsakaiKaisaiYoteiJohoEntity 開催予定情報 = mapper.selectYoteiJohoForUpdate(shinsakaiKaisaiNo.get(i));
-            for (TaisyosyaJidoWaritsukeEntity 対象者 : taisyosya) {
+            for (int j = 0; j < taisyosya.size(); j++) {
                 if (!(shinsakaiWaritsukeNinsu.get(i) < shinsakaiJidoWariateTeiin.get(i))) {
                     isExeNext = true;
                     break;
                 }
-                TaisyosyaJidoWaritsukeMybatisParameter parameter = getParameter(shinsakaiKaisaiNo.get(i), 対象者);
+                TaisyosyaJidoWaritsukeMybatisParameter parameter = getParameter(shinsakaiKaisaiNo.get(i), taisyosya.get(j));
                 if (0 < mapper.selectCountShinsakaiWariateIinJoho(parameter)) {
                     continue;
                 }
                 if (0 < mapper.selectCountShinsakaiWariateIinJoho(parameter)) {
                     continue;
                 }
-                insert介護認定審査会割付情報(shinsakaiKaisaiNo.get(i), 対象者, shinsakaiKaisaiYMD.get(i));
+                insert介護認定審査会割付情報(shinsakaiKaisaiNo.get(i), taisyosya.get(j), shinsakaiKaisaiYMD.get(i));
                 割付人数++;
+                taisyosya.remove(j);
                 if (!(shinsakaiWaritsukeNinsu.get(i) + 割付人数 < shinsakaiJidoWariateTeiin.get(i))) {
                     break;
                 }
@@ -90,7 +82,7 @@ public class TaisyosyaJidoWaritsukeProcess extends SimpleBatchProcessBase {
             if (!isExeNext) {
                 開催予定情報.setShinsakaiShinchokuJokyo(進捗状況_未開催);
                 開催予定情報.setShinsakaiWariateZumiNinzu(開催予定情報.getShinsakaiWariateZumiNinzu() + 割付人数);
-                dbT5501EntityWriter.update(開催予定情報);
+                mapper.updateDbT5501ShinsakaiKaisaiYoteiJoho(開催予定情報);
             }
         }
     }
@@ -120,6 +112,6 @@ public class TaisyosyaJidoWaritsukeProcess extends SimpleBatchProcessBase {
         dbT5502Entity.setShinsakaiShiryoSakuseiYMD(FlexibleDate.EMPTY);
         dbT5502Entity.setShinsakaiShiryoSofuYMD(FlexibleDate.EMPTY);
         dbT5502Entity.setHanteiKekkaCode(Code.EMPTY);
-        dbT5502EntityWriter.insert(dbT5502Entity);
+        mapper.insertDbT5502ShinsakaiWariateJoho(dbT5502Entity);
     }
 }

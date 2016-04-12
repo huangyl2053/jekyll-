@@ -5,6 +5,7 @@ import jp.co.ndensan.reams.db.dbe.definition.mybatisprm.taisyosyajidowaritsuke.T
 import jp.co.ndensan.reams.db.dbe.entity.db.basic.DbT5501ShinsakaiKaisaiYoteiJohoEntity;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.taisyosyajidowaritsuke.TaisyosyaJidoWaritsukeEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5101NinteiShinseiJohoEntity;
+import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5502ShinsakaiWariateJohoEntity;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
@@ -60,5 +61,21 @@ public interface ITaisyosyaJidoWaritsukeRelateMapper {
      * @return 割付済の審査順
      */
     int selectMaxShinsakaiOrder(RString shinsakaiKaisaiNo);
+
+    /**
+     * 介護認定審査会割付情報を格納します。
+     *
+     * @param entity 介護認定審査会割当情報エンティティ
+     * @return insert 件数
+     */
+    int insertDbT5502ShinsakaiWariateJoho(DbT5502ShinsakaiWariateJohoEntity entity);
+
+    /**
+     * 介護認定審査会割付情報を格納します。
+     *
+     * @param entity 介護認定審査会開催予定情報エンティティ
+     * @return update 件数
+     */
+    int updateDbT5501ShinsakaiKaisaiYoteiJoho(DbT5501ShinsakaiKaisaiYoteiJohoEntity entity);
 
 }

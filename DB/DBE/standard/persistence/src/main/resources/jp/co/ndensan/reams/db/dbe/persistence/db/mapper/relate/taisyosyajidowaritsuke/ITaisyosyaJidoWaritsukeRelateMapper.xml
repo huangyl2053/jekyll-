@@ -104,14 +104,6 @@
             fetchSize="500">
         SELECT
         dbT5501."shinsakaiKaisaiNo" as "shinsakaiKaisaiNo",
-        dbT5501."insertDantaiCd" as "insertDantaiCd",
-        dbT5501."insertTimestamp" as "insertTimestamp",
-        dbT5501."insertReamsLoginId" as "insertReamsLoginId",
-        dbT5501."insertContextId" as "insertContextId",
-        dbT5501."isDeleted" as "isDeleted",
-        dbT5501."updateCount" as "updateCount",
-        dbT5501."lastUpdateTimestamp" as "lastUpdateTimestamp",
-        dbT5501."lastUpdateReamsLoginId" as "lastUpdateReamsLoginId",
         dbT5501."shinsakaiKaisaiYoteiYMD" as "shinsakaiKaisaiYoteiYMD",
         dbT5501."shinsakaiKaishiYoteiTime" as "shinsakaiKaishiYoteiTime",
         dbT5501."shinsakaiShuryoYoteiTime" as "shinsakaiShuryoYoteiTime",
@@ -166,7 +158,7 @@
 
     <select id="selectCountShinsakaiIinJogaiJoho"
             parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatisprm.taisyosyajidowaritsuke.TaisyosyaJidoWaritsukeMybatisParameter"
-            resultType="int" 
+            resultType="int"
             fetchSize="500">
         SELECT COUNT(0)
         FROM rgdb."DbT5590ShinsakaiIinJogaiJoho" DbT5590
@@ -184,6 +176,42 @@
         FROM rgdb."DbT5502ShinsakaiWariateJoho" DbT5502
         WHERE DbT5502."shinsakaiKaisaiNo" = #{shinsakaiKaisaiNo}
     </select>
+
+    <insert id="insertDbT5502ShinsakaiWariateJoho"
+            parameterType="jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5502ShinsakaiWariateJohoEntity" >
+        INSERT INTO rgdb."DbT5502ShinsakaiWariateJoho"
+        ("shinsakaiKaisaiNo"
+        ,"shinseishoKanriNo"
+        ,"shinsakaiKaisaiYMD"
+        ,"shinsakaiWariateYMD"
+        ,"shinsakaiOrder"
+        ,"shinsakaiOrderKakuteiFlag"
+        ,"shinsakaiJidoWaritsukeFlag"
+        ,"shinsakaiShiryoSakuseiYMD"
+        ,"shinsakaiShiryoSofuYMD"
+        ,"hanteiKekkaCode")
+        VALUES
+        (#{shinsakaiKaisaiNo}
+        ,#{shinseishoKanriNo}
+        ,#{shinsakaiKaisaiYMD}
+        ,#{shinsakaiWariateYMD}
+        ,#{shinsakaiOrder}
+        ,#{shinsakaiOrderKakuteiFlag}
+        ,#{shinsakaiJidoWaritsukeFlag}
+        ,#{shinsakaiShiryoSakuseiYMD}
+        ,#{shinsakaiShiryoSofuYMD}
+        ,#{hanteiKekkaCode})
+    </insert>
+
+    <update id="updateDbT5501ShinsakaiKaisaiYoteiJoho"
+            parameterType="jp.co.ndensan.reams.db.dbe.entity.db.basic.DbT5501ShinsakaiKaisaiYoteiJohoEntity" >
+        UPDATE rgdb."DbT5501ShinsakaiKaisaiYoteiJoho"
+        SET
+        "ShinsakaiShinchokuJokyo" = #{ShinsakaiShinchokuJokyo},
+        "shinsakaiWariateZumiNinzu" = #{shinsakaiWariateZumiNinzu}
+        WHERE
+        "shinsakaiKaisaiNo" = #{shinsakaiKaisaiNo}
+    </update>
 
     <resultMap id="resultMap_Dbe510001Entity" type="jp.co.ndensan.reams.db.dbe.entity.db.relate.taisyosyajidowaritsuke.TaisyosyaJidoWaritsukeEntity" autoMapping="true">
         <result property="yusenWaritsukeKubunCode" column="shinsakaiYusenWaritsukeKubunCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.CodeTypeHandler" />
