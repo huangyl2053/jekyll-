@@ -10,6 +10,8 @@ import lombok.Getter;
 
 /**
  * 介護認定審査会対象者申請者オブザーバーチェックパラメータクラス。
+ *
+ * @reamsid_L DBE-0140-010 liangbc
  */
 @Getter
 @SuppressWarnings("PMD.UnusedPrivateField")

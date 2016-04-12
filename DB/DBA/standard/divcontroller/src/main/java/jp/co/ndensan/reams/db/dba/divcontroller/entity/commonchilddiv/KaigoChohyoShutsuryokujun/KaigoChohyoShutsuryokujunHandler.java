@@ -14,6 +14,8 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
  * 介護帳票出力順の共有子Divのハンドルクラスです。
+ *
+ * @reamsid_L DBA-0021-010 liangbc
  */
 public class KaigoChohyoShutsuryokujunHandler {
 

@@ -5,8 +5,10 @@ import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.binding.ICommonChildDivBaseProperties;
 
-/*
+/**
  * このコードはツールによって生成されました。
+ *
+ * @reamsid_L DBA-0030-012 liangbc
  */
 public interface IKaigoShikakuKihonDiv extends ICommonChildDivBaseProperties {
 

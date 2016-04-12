@@ -27,6 +27,8 @@ import lombok.Setter;
 
 /**
  * 旧市町村コード情報の取得処理のクラスです。
+ *
+ * @reamsid_L DBU-0040-010 liangbc
  */
 @Getter
 @Setter

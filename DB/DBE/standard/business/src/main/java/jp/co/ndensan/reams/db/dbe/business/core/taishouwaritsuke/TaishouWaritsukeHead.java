@@ -15,6 +15,8 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
  * 介護認定審査会対象者割付ヘッドエリア
+ *
+ * @reamsid_L DBE-0140-010 liangbc
  */
 public class TaishouWaritsukeHead {
 

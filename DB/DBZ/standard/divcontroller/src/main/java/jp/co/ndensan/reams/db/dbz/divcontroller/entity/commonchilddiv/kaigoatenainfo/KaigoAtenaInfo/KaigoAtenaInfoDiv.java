@@ -23,7 +23,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 /**
  * KaigoAtenaInfo のクラスファイル
  *
- * @author 自動生成
+ * @reamsid_L DBA-0030-011 liangbc
  */
 public class KaigoAtenaInfoDiv extends Panel implements IKaigoAtenaInfoDiv {
 

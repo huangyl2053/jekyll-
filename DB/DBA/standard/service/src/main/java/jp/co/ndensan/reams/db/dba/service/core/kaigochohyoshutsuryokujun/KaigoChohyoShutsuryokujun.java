@@ -11,6 +11,8 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
  * 介護帳票出力順のビジネスクラス
+ *
+ * @reamsid_L DBA-0021-020 liangbc
  */
 public class KaigoChohyoShutsuryokujun {
 

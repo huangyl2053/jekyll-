@@ -17,6 +17,8 @@ import lombok.Setter;
 
 /**
  * 介護認定審査会候補者一覧エリア
+ *
+ * @reamsid_L DBE-0140-010 liangbc
  */
 @Setter
 @Getter

@@ -18,6 +18,8 @@ import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 
 /**
  * 認定調査票（特記情報）を管理するクラスです。
+ *
+ * @reamsid_L DBE-3000-200 liangbc
  */
 public class NinteichosahyoTokkijiko extends
         ParentModelBase<NinteichosahyoTokkijikoIdentifier, DbT5205NinteichosahyoTokkijikoEntity, NinteichosahyoTokkijiko> implements Serializable {

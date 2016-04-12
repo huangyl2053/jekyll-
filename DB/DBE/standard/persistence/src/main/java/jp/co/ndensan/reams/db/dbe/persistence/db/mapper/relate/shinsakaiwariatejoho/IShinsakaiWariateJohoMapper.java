@@ -11,6 +11,8 @@ import jp.co.ndensan.reams.db.dbe.entity.db.relate.shinsakai.shinsakaiwariatejoh
 
 /**
  * 介護認定審査会割当情報のマッパーインタフェースです。
+ *
+ * @reamsid_L DBE-0140-010 liangbc
  */
 public interface IShinsakaiWariateJohoMapper {
 

@@ -11,6 +11,8 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.ICommonChildDivBaseProperties;
 
 /**
  * 介護帳票出力順の共有子Divのインタフェースクラスです。
+ *
+ * @reamsid_L DBA-0021-010 liangbc
  */
 public interface IKaigoChohyoShutsuryokujunDiv extends ICommonChildDivBaseProperties {
 

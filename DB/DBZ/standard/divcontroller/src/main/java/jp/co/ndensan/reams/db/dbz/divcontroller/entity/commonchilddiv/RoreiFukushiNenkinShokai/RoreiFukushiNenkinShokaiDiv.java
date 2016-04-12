@@ -295,6 +295,7 @@ public class RoreiFukushiNenkinShokaiDiv extends Panel implements IRoreiFukushiN
     /**
      * 画面データをデータベースに格納します。
      */
+    @Override
     public void click_Save() {
         Models<RoreiFukushiNenkinJukyushaIdentifier, RoreiFukushiNenkinJukyusha> roreiFukushiNenkinJukyusha
                 = ViewStateHolder.get(ViewStateKeys.老齢福祉年金情報_老齢福祉年金情報検索結果一覧, Models.class);
