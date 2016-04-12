@@ -6,6 +6,8 @@ import jp.co.ndensan.reams.uz.uza.report.source.ReportItem;
 
 /**
  * 認定調査スケジュール表(事務所)Sourceクラスです。
+ *
+ * @reamsid_L DBE-0020-090 zhangguopeng
  */
 public class ChosaSchedulehyoReportSource implements IReportSource {
 // <editor-fold defaultstate="collapsed" desc="Generated Code">
