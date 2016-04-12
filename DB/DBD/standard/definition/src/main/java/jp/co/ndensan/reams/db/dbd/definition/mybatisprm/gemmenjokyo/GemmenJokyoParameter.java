@@ -11,6 +11,8 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
  * 減免照会（画面）のMyBatis用パラメータクラスです。
+ *
+ * @reamsid_L DBD-4342-020 wangjie2
  */
 @lombok.Setter
 @lombok.Getter

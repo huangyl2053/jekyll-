@@ -6,9 +6,9 @@
 package jp.co.ndensan.reams.db.dbd.persistence.db.mapper.relate.gemmenjokyo;
 
 import java.util.List;
-import jp.co.ndensan.reams.db.dbd.entity.db.basic.DbT3114RiyoshaFutanWariaiMeisaiEntity;
 import jp.co.ndensan.reams.db.dbd.definition.mybatisprm.gemmenjokyo.GemmenJokyoParameter;
 import jp.co.ndensan.reams.db.dbd.entity.common.NursingCareInformationCodeEntity;
+import jp.co.ndensan.reams.db.dbd.entity.db.basic.DbT3114RiyoshaFutanWariaiMeisaiEntity;
 import jp.co.ndensan.reams.db.dbd.entity.db.basic.DbT4021ShiharaiHohoHenkoEntity;
 import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbV1001HihokenshaDaichoEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT4001JukyushaDaichoEntity;
@@ -17,6 +17,8 @@ import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7006RoreiFukushiNenkinJukyu
 /**
  *
  * 減免照会（画面） Mapper
+ *
+ * @reamsid_L DBD-4342-020 wangjie2
  */
 public interface IGemmenJokyoMapper {
 

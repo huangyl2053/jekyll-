@@ -11,6 +11,8 @@ import jp.co.ndensan.reams.db.dbd.business.core.basic.ShakaiFukushiHojinRiyoshaF
 /**
  *
  * 各種減免情報です。
+ *
+ * @reamsid_L DBD-4342-020 wangjie2
  */
 public class VariousReductionInformation {
 

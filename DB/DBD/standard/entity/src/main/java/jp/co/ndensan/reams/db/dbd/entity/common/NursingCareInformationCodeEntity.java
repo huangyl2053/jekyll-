@@ -12,6 +12,8 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 /**
  *
  * 要介護認定情報コードです。
+ *
+ * @reamsid_L DBD-4342-020 wangjie2
  */
 @lombok.Getter
 @lombok.Setter

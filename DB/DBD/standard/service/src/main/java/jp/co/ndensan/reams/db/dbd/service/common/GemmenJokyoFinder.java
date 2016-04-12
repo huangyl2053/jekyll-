@@ -39,6 +39,8 @@ import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
 /**
  *
  * 減免照会（画面）です。
+ *
+ * @reamsid_L DBD-4342-020 wangjie2
  */
 public class GemmenJokyoFinder {
 

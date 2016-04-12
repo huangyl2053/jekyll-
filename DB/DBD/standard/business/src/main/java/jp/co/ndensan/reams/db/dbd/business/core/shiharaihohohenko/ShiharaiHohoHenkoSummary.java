@@ -11,6 +11,8 @@ import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 /**
  *
  * 支払方法変更概況です。
+ *
+ * @reamsid_L DBD-4342-020 wangjie2
  */
 @lombok.Setter
 @lombok.Getter
