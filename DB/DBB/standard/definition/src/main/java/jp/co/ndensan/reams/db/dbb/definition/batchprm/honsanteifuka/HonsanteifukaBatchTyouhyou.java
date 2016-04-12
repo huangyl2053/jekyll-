@@ -13,6 +13,8 @@ import lombok.Setter;
 /**
  *
  * 出力帳票一覧用のパラメータです。
+ *
+ * @reamsid_L DBB-0780-030 xicongwang
  */
 @Getter
 @Setter

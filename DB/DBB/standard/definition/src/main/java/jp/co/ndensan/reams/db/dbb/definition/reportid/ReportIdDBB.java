@@ -11,6 +11,8 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 /**
  *
  * 帳票ＩＤの列挙型です。
+ *
+ * @reamsid_L DBC-9999-022 xicongwang
  */
 public enum ReportIdDBB {
 

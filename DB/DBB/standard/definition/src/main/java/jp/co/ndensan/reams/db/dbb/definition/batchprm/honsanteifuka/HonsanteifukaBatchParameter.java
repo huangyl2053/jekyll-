@@ -17,6 +17,8 @@ import lombok.Setter;
 /**
  *
  * 本算定賦課計算バッチ用のパラメータです。
+ *
+ * @reamsid_L DBB-0780-030 xicongwang
  */
 @Getter
 @Setter

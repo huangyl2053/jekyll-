@@ -43,6 +43,8 @@ import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 
 /**
  * 本算定賦課計算のビジネスクラスです。
+ *
+ * @reamsid_L DBB-0780-030 xicongwang
  */
 public class Honsanteifuka {
 

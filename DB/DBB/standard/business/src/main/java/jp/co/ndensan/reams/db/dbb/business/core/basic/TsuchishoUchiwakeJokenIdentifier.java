@@ -11,6 +11,8 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
  * 通知書打ち分け条件の識別子です。
+ *
+ * @reamsid_L DBC-9999-012 xicongwang
  */
 @SuppressWarnings("PMD.UnusedPrivateField")
 @lombok.Value
