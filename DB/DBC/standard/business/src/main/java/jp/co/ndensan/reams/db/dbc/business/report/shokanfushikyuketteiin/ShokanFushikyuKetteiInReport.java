@@ -13,6 +13,8 @@ import lombok.NonNull;
 
 /**
  * 帳票設計_DBC200022_償還払不支給決定者一覧表 ShokanFushikyuKetteiInReport
+ *
+ * @reamsid_L DBC-2590-040 xuhao
  */
 public class ShokanFushikyuKetteiInReport extends Report<ShokanbaraiFushikyuKetteishaIchiranSource> {
 

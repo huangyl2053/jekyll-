@@ -5,7 +5,9 @@ import jp.co.ndensan.reams.uz.uza.report.IReportSource;
 import jp.co.ndensan.reams.uz.uza.report.source.ReportItem;
 
 /**
- * ShokanbaraiFushikyuKetteishaIchiranSource
+ * 帳票設計_DBC200022_償還払不支給決定者一覧表 ShokanbaraiFushikyuKetteishaIchiranSource
+ *
+ * @reamsid_L DBC-2590-040 xuhao
  */
 public class ShokanbaraiFushikyuKetteishaIchiranSource implements IReportSource {
 // <editor-fold defaultstate="collapsed" desc="Generated Code">
