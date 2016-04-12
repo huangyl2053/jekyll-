@@ -5,13 +5,13 @@ package jp.co.ndensan.reams.db.dba.divcontroller.entity.parentdiv.DBA2010014;
  * 不正な動作の原因になります。
  */
 import com.fasterxml.jackson.annotation.JsonProperty;
-import jp.co.ndensan.reams.uz.uza.ui.binding.*;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
+import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxNum;
 
 /**
  * HomonKaigoIn のクラスファイル 
  * 
- * @author 自動生成
+ * @reamsid_L DBA-0340-060 dongyabin
  */
 public class HomonKaigoInDiv extends Panel {
     // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-01-15_09-59-03">

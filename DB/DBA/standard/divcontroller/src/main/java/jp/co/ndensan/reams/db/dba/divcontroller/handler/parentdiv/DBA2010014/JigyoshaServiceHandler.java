@@ -4,10 +4,11 @@
  * and open the template in the editor.
  */
 
-package jp.co.ndensan.reams.db.dba.divcontroller.entity.parentdiv.DBA2010014;
+package jp.co.ndensan.reams.db.dba.divcontroller.handler.parentdiv.DBA2010014;
 
 import java.util.ArrayList;
 import java.util.List;
+import jp.co.ndensan.reams.db.dba.divcontroller.entity.parentdiv.DBA2010014.JigyoshaServiceDiv;
 import jp.co.ndensan.reams.db.dbx.business.core.kaigojigyosha.kaigojigyoshashiteiservice.KaigoJigyoshaShiteiService;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaJusho;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaKanaMeisho;
