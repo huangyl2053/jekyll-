@@ -25,7 +25,7 @@ public class FutsuChoshuTotal {
 
     private static final RString メッセージ = new RString("システム管理登録_普通徴収保存処理は正常に行われました");
     private static final RString MSG = new RString("調定年度：");
-    private static final RString MSG2 = new RString("年度");
+    private static final RString MSG_NENNDO = new RString("年度");
 
     /**
      * システム管理情報（普通徴収）画面初期化する
@@ -90,7 +90,7 @@ public class FutsuChoshuTotal {
     public ResponseData<FutsuChoshuTotalDiv> onChange_ddlNofushoKata2(FutsuChoshuTotalDiv div) {
         List<dgKaNendoKibetsuJoho_Row> list = div.getFutsuChoshu().getDgKaNendoKibetsuJoho().getDataSource();
         dgKaNendoKibetsuJoho_Row row = div.getFutsuChoshu().getDgKaNendoKibetsuJoho().getClickedItem();
-        list.set(div.getFutsuChoshu().getDgKaNendoKibetsuJoho().getClickedRowId(), getHandler(div).set納付書の型変更2(row));
+        list.set(div.getFutsuChoshu().getDgKaNendoKibetsuJoho().getClickedRowId(), getHandler(div).set納付書の型変更_過年度(row));
         div.getFutsuChoshu().getDgKaNendoKibetsuJoho().setDataSource(list);
         return ResponseData.of(div).respond();
     }
@@ -140,7 +140,7 @@ public class FutsuChoshuTotal {
         getHandler(div).選択数チェック();
         getHandler(div).set保存処理();
         RStringBuilder message = new RStringBuilder(MSG);
-        message.append(div.getKonkaiShoriNaiyo().getDdlChoteiNendo().getSelectedValue()).append(MSG2);
+        message.append(div.getKonkaiShoriNaiyo().getDdlChoteiNendo().getSelectedValue()).append(MSG_NENNDO);
         div.getKanryoMessage().getCcdKaigoKanryoMessage().setMessage(message.toRString(), メッセージ, RString.EMPTY, true);
         return ResponseData.of(div).setState(DBB9020003StateName.完了);
     }
