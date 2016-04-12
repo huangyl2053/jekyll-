@@ -6,6 +6,8 @@
 package jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.HokenshaJoho;
 
 import jp.co.ndensan.reams.db.dbz.business.core.hokensha.Hokensha;
+import jp.co.ndensan.reams.db.dbz.service.core.hokensha.HokenshaNyuryokuHojoFinder;
+import jp.co.ndensan.reams.ur.urz.definition.core.hokenja.HokenjaNo;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
@@ -25,6 +27,23 @@ public class HokenshaJohoHandler {
      */
     public HokenshaJohoHandler(HokenshaJohoDiv div) {
         this.div = div;
+    }
+
+    /**
+     * 保険者入力補助の初期化です。
+     *
+     * @param 保険者番号 保険者番号
+     */
+    public void intialize(HokenjaNo 保険者番号) {
+        if (保険者番号 != null) {
+            Hokensha hokensha = HokenshaNyuryokuHojoFinder.createInstance().getHokensha(保険者番号);
+            div.getTxtHokenshaNo().setValue(保険者番号.getColumnValue());
+            if (hokensha != null) {
+                div.getTxtHokenshaMeisho().setValue(hokensha.get保険者名());
+            } else {
+                div.getTxtHokenshaMeisho().setValue(new RString(""));
+            }
+        }
     }
 
     /**

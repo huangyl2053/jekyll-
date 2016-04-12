@@ -6,6 +6,7 @@ package jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.HokenshaJ
  */
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import jp.co.ndensan.reams.ur.urz.definition.core.hokenja.HokenjaNo;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.binding.ButtonDialog;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
@@ -97,6 +98,16 @@ public class HokenshaJohoDiv extends Panel implements IHokenshaJohoDiv {
     //--------------- この行より下にコードを追加してください -------------------
     private HokenshaJohoHandler getHandler() {
         return new HokenshaJohoHandler(this);
+    }
+
+    /**
+     * 共通子DIVの初期化です。
+     *
+     * @param 保険者番号 保険者番号
+     */
+    @Override
+    public void intialize(HokenjaNo 保険者番号) {
+        getHandler().intialize(保険者番号);
     }
 
     /**
