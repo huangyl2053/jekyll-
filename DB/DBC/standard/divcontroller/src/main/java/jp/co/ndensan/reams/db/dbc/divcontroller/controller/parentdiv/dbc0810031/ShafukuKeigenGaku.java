@@ -83,17 +83,6 @@ public class ShafukuKeigenGaku {
     }
 
     /**
-     * onClick_btnClose
-     *
-     * @param div 画面DIV
-     * @return 画面DIV
-     */
-    public ResponseData<ShafukuKeigenGakuDiv> onClick_btnClose(ShafukuKeigenGakuDiv div) {
-        div.getPanelShafukukenngengaku().getPanelShakaiFukushiShokai().setVisible(false);
-        return ResponseData.of(div).respond();
-    }
-
-    /**
      * onClick_selectButton
      *
      * @param div 画面DIV

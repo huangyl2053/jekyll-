@@ -11,6 +11,8 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
  * 新被保険者番号一時テーブルに対するテーブルのエンティティ
+ *
+ * @reamsid_L DBC-2590-030 xuhao
  */
 @lombok.Getter
 @lombok.Setter

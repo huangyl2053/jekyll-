@@ -13,6 +13,8 @@ import lombok.Setter;
 
 /**
  * 発行後異動者一覧情報 通知書発行後異動対象者一覧表を出力するために、帳票出力用のデータを格納する。
+ *
+ * @reamsid_L DBB-0690-020 xuhao
  */
 @Getter
 @Setter

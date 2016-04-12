@@ -11,6 +11,8 @@ import lombok.Getter;
 
 /**
  * 異動者情報
+ *
+ * @reamsid_L DBB-0690-020 xuhao
  */
 @SuppressWarnings("PMD.UnusedPrivateField")
 @Getter

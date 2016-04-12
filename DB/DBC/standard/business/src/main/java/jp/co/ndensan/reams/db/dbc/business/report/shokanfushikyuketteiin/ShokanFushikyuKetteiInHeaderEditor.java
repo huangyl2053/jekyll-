@@ -8,7 +8,9 @@ package jp.co.ndensan.reams.db.dbc.business.report.shokanfushikyuketteiin;
 import jp.co.ndensan.reams.db.dbc.entity.report.source.shokanfushikyuketteiin.ShokanbaraiFushikyuKetteishaIchiranSource;
 
 /**
+ * 帳票設計_DBC200022_償還払不支給決定者一覧表 ShokanFushikyuKetteiInHeaderEditor
  *
+ * @reamsid_L DBC-2590-040 xuhao
  */
 public class ShokanFushikyuKetteiInHeaderEditor implements IShokanFushikyuKetteiInEditor {
 

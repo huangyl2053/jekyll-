@@ -27,6 +27,8 @@ import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 
 /**
  * 介護サービス種類を管理するクラスです。
+ *
+ * @reamsid_L DBX-9999-011 sunhaidi
  */
 public class KaigoServiceShurui
         extends ParentModelBase<KaigoServiceShuruiIdentifier, DbT7130KaigoServiceShuruiEntity, KaigoServiceShurui>

@@ -29,24 +29,24 @@
     <select id="getJigyoshaJoho" resultMap="resultMap_getShikakuJohoEntity"
             parameterType="jp.co.ndensan.reams.db.dba.definition.mybatisprm.kaigojigyoshashisetsukanrio.KaigoJigyoshaShisetsuKanriMapperParameter" fetchSize="500">
         SELECT
-        DbT7060.*,
-        DbT7062.*
+        <include refid="jp.co.ndensan.reams.db.dbx.persistence.db.mapper.basic.IDbT7060KaigoJigyoshaMapper.allColumns_DbT7060KaigoJigyosha" />,
+        <include refid="jp.co.ndensan.reams.db.dbx.persistence.db.mapper.basic.IDbT7062KaigoJigyoshaDaihyoshaMapper.allColumns_DbT7062KaigoJigyoshaDaihyosha" />
         FROM
-        rgdb."DbT7060KaigoJigyosha" as DbT7060
+        rgdb."DbT7060KaigoJigyosha"
         INNER JOIN
-        rgdb."DbT7062KaigoJigyoshaDaihyosha" as DbT7062
+        rgdb."DbT7062KaigoJigyoshaDaihyosha"
         ON
-        DbT7060."jigyoshaNo" =  DbT7062."jigyoshaNo"
+        rgdb."DbT7060KaigoJigyosha"."jigyoshaNo" =  rgdb."DbT7062KaigoJigyoshaDaihyosha"."jigyoshaNo"
         AND
-        DbT7060."yukoKaishiYMD" = DbT7062."yukoKaishiYMD"
+        rgdb."DbT7060KaigoJigyosha"."yukoKaishiYMD" = rgdb."DbT7062KaigoJigyoshaDaihyosha"."yukoKaishiYMD"
         AND
-        DbT7062."isDeleted"<![CDATA[<>]]> TRUE
+        rgdb."DbT7062KaigoJigyoshaDaihyosha"."isDeleted"<![CDATA[<>]]> TRUE
         WHERE
-        DbT7060."jigyoshaNo" = #{jigyoshaNo}
+        rgdb."DbT7060KaigoJigyosha"."jigyoshaNo" = #{jigyoshaNo}
         AND
-        DbT7060."yukoKaishiYMD" = #{yukoKaishiYMD}
+        rgdb."DbT7060KaigoJigyosha"."yukoKaishiYMD" = #{yukoKaishiYMD}
         AND
-        DbT7060."isDeleted"<![CDATA[<>]]> TRUE
+        rgdb."DbT7060KaigoJigyosha"."isDeleted"<![CDATA[<>]]> TRUE
     </select>
     <select id="getServiceItiranJoho" resultMap="resultMap_getKaigoJogaiTokureiRelateEntity"
              parameterType="jp.co.ndensan.reams.db.dba.definition.mybatisprm.kaigojigyoshashisetsukanrio.KaigoJogaiTokureiParameter" fetchSize="500">

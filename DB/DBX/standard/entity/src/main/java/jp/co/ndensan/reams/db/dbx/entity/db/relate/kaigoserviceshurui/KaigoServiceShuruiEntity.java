@@ -13,37 +13,30 @@ import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT7131KaigoServiceNaiyouEntit
 
 /**
  * 介護サービス種類RelateEntityクラスです。
+ *
+ * @reamsid_L DBX-9999-011 sunhaidi
  */
 @lombok.Getter
 @lombok.Setter
 public class KaigoServiceShuruiEntity implements Cloneable, Serializable {
 
-
     /**
-     * -- GETTER --
-     * 介護サービス種類Entityを返します。
+     * -- GETTER -- 介護サービス種類Entityを返します。
      *
-     * @return 介護サービス種類Entity
-     * -- SETTER --
-     * 介護サービス種類Entityを設定します。
+     * @return 介護サービス種類Entity -- SETTER -- 介護サービス種類Entityを設定します。
      *
      * @param 介護サービス種類Entity 介護サービス種類Entity
      */
     private DbT7130KaigoServiceShuruiEntity 介護サービス種類Entity;
 
     /**
-     * -- GETTER --
-     * 介護サービス内容EntityListを返します。
+     * -- GETTER -- 介護サービス内容EntityListを返します。
      *
-     * @return 介護サービス内容EntityList
-     * -- SETTER --
-     * 介護サービス内容EntityListを設定します。
+     * @return 介護サービス内容EntityList -- SETTER -- 介護サービス内容EntityListを設定します。
      *
      * @param 介護サービス内容EntityList 介護サービス内容EntityList
      */
     private List<DbT7131KaigoServiceNaiyouEntity> 介護サービス内容Entity;
-
-
 
     /**
      * コンストラクタです。

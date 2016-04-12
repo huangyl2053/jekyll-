@@ -14,6 +14,8 @@ import lombok.Getter;
 
 /**
  * 通知書発行後異動把握viewStateのParameter
+ *
+ * @reamsid_L DBB-0690-010 xuhao
  */
 @SuppressWarnings("PMD.UnusedPrivateField")
 @Getter

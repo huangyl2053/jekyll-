@@ -144,6 +144,7 @@ public class KaigoJigyoshaShisetsuKanriManager {
             return SearchResult.of(Collections.<KaigoJigyosha>emptyList(), 0, false);
         }
         for (KaigoJigyoshaEntity entity : サービス一覧情報) {
+            entity.initializeMd5ToEntities();
             serviceShuruiList.add(new KaigoJigyosha(entity));
         }
         return SearchResult.of(serviceShuruiList, 0, false);

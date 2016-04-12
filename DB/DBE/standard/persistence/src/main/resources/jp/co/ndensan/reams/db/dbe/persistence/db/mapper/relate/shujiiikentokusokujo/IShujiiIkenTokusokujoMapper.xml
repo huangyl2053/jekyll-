@@ -42,8 +42,8 @@
                 AND dbT5105."ninteiShinsakaiKanryoYMD" IS NULL
                 AND dbT5105."centerSoshinYMD" IS NULL
             WHERE 
-                dbT5101."shoriJotaiKubun" <![CDATA[<>]]> '2'
-                AND dbT5101."shoriJotaiKubun" <![CDATA[<>]]> '1'
+                dbT5101."shoriJotaiKubun" <![CDATA[<>]]> #{取下}
+                AND dbT5101."shoriJotaiKubun" <![CDATA[<>]]> #{却下}
             <if test="uses保険者コード">
                 AND dbT5101."shoKisaiHokenshaNo" = #{保険者コード}
             </if>
@@ -98,8 +98,8 @@
                 AND dbT5105."ninteiShinsakaiKanryoYMD" IS NULL
                 AND dbT5105."centerSoshinYMD" IS NULL
             WHERE 
-                dbT5101."shoriJotaiKubun" <![CDATA[<>]]> '2'
-                AND dbT5101."shoriJotaiKubun" <![CDATA[<>]]> '1'
+                dbT5101."shoriJotaiKubun" <![CDATA[<>]]> #{取下}
+                AND dbT5101."shoriJotaiKubun" <![CDATA[<>]]> #{却下}
             <if test="uses保険者コード">
                 AND dbT5101."shoKisaiHokenshaNo" = #{保険者コード}
             </if>

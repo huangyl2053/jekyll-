@@ -21,6 +21,8 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.propertyenum.DisplayTimeFormat;
 
 /**
  * バッチで作成した帳票Entityリストより、償還払不支給決定者一覧表帳票データを作成する
+ *
+ * @reamsid_L DBC-2590-020 xuhao
  */
 public class ShokanBaraiFushikyuKetteishaIchiranhyo {
 
@@ -97,6 +99,7 @@ public class ShokanBaraiFushikyuKetteishaIchiranhyo {
             RString 並び順の５件目,
             RString 改頁) {
         RString 喪失事由コード = entity.getSoshitsuJiyuCode();
+        // TODO QA555 Redmine#80882
         RString ページ数 = new RString("1");
         RString サービス種類 = サービス種類表示作成(entity.getServiceShuruiCode(), entity.getServiceShuruiName());
         return new ShokanFushikyuKetteiInItem(印刷日時, ページ数, entity.getKokuhoRenkokaiName(),

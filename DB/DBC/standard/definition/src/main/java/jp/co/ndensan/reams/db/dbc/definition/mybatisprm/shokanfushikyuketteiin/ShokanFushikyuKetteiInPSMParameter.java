@@ -9,12 +9,14 @@ import jp.co.ndensan.reams.ua.uax.definition.mybatisprm.shikibetsutaisho.IShikib
 import jp.co.ndensan.reams.ua.uax.definition.mybatisprm.shikibetsutaisho.UaFt200FindShikibetsuTaishoParam;
 
 /**
- * psm Parameter
+ * 宛名識別対象PSMにデータの取得Parameter
+ *
+ * @reamsid_L DBC-2590-030 xuhao
  */
 public class ShokanFushikyuKetteiInPSMParameter extends UaFt200FindShikibetsuTaishoParam {
 
     /**
-     * ShokanFushikyuKetteiInPSMParameter
+     * 宛名識別対象PSMにデータの取得Parameter
      *
      * @param searchKey IShikibetsuTaishoPSMSearchKey
      */
@@ -23,7 +25,7 @@ public class ShokanFushikyuKetteiInPSMParameter extends UaFt200FindShikibetsuTai
     }
 
     /**
-     * createSelectByKeyParam
+     * 宛名識別対象PSMにデータの取得Parameter
      *
      * @param searchKey IShikibetsuTaishoPSMSearchKey
      * @return ShokanFushikyuKetteiInPSMParameter

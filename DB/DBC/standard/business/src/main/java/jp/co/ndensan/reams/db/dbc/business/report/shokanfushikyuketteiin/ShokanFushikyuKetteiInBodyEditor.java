@@ -9,6 +9,8 @@ import jp.co.ndensan.reams.db.dbc.entity.report.source.shokanfushikyuketteiin.Sh
 
 /**
  * 帳票設計_DBC200022_償還払不支給決定者一覧表 ShokanFushikyuKetteiInBodyEditor
+ *
+ * @reamsid_L DBC-2590-040 xuhao
  */
 public class ShokanFushikyuKetteiInBodyEditor implements IShokanFushikyuKetteiInEditor {
 

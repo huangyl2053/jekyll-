@@ -14,7 +14,7 @@ import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT7052KoseiShichosonShishoMas
 /**
  * 構成市町村マスタRelateEntityクラスです。
  *
- * @reamsid_L DBE-9999-011 sunhaidi
+ * @reamsid_L DBX-9999-011 sunhaidi
  */
 @lombok.Getter
 @lombok.Setter

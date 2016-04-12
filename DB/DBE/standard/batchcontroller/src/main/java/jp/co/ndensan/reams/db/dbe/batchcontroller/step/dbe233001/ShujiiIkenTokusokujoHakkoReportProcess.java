@@ -60,11 +60,13 @@ public class ShujiiIkenTokusokujoHakkoReportProcess extends BatchProcessBase<Shu
     static {
         OUT_DATA_LIST = new RString("outDataList");
     }
-    private OutputParameter<List<NinteiChosaTokusokuTaishoshaIchiranhyoItem>> outDataList;
+    private OutputParameter<List<RString>> outDataList;
+    private List<RString> shinseishoKanriNoList;
 
     @Override
     protected void initialize() {
         itemList = new ArrayList();
+        shinseishoKanriNoList = new ArrayList<>();
         outDataList = new OutputParameter<>();
         super.initialize();
     }
@@ -82,7 +84,7 @@ public class ShujiiIkenTokusokujoHakkoReportProcess extends BatchProcessBase<Shu
 
     @Override
     protected void process(ShujiiIkenTokusokujoHakkoRelateEntity entity) {
-
+        shinseishoKanriNoList.add(entity.getTemp_申請書管理番号().getColumnValue());
         item = new NinteiChosaTokusokuTaishoshaIchiranhyoItem(entity.getTemp_市町村コード() == null ? RString.EMPTY : entity.getTemp_市町村コード()
                 .getColumnValue(),
                 entity.getTemp_市町村名称(),
@@ -104,7 +106,7 @@ public class ShujiiIkenTokusokujoHakkoReportProcess extends BatchProcessBase<Shu
         set出力条件表();
         NinteiChosaTokusokuTaishoshaIchiranhyoReport report = NinteiChosaTokusokuTaishoshaIchiranhyoReport.createFrom(itemList);
         report.writeBy(reportSourceWriter);
-        outDataList.setValue(itemList);
+        outDataList.setValue(shinseishoKanriNoList);
     }
 
     private void set出力条件表() {

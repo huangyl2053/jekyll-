@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbz.entity.relate.kaigoninteishikakuinfo;
+package jp.co.ndensan.reams.db.dbz.entity.db.relate.kaigoninteishikakuinfo;
 
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
@@ -31,6 +31,4 @@ public class KaigoNinteiShikakuInfoRelateEntity {
     private Code 要介護認定状態区分コード;
     private FlexibleDate 認定有効期間開始年月日;
     private FlexibleDate 認定有効期間終了年月日;
-//    private ShoKisaiHokenshaNo 保険者番号;
-//    private RString 保険者名称;
 }

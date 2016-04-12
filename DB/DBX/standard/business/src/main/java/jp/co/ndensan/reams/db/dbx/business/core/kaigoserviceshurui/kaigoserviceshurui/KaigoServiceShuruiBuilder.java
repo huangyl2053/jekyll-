@@ -18,6 +18,8 @@ import jp.co.ndensan.reams.uz.uza.util.Models;
 
 /**
  * {@link KaigoServiceShurui}の編集を行うビルダークラスです。
+ *
+ * @reamsid_L DBX-9999-011 sunhaidi
  */
 public class KaigoServiceShuruiBuilder {
 

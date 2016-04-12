@@ -16,6 +16,8 @@ import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT1001HihokenshaDaichoEntity;
 
 /**
  * 償還払不支給決定情報取込データ編集 DB操作です。
+ *
+ * @reamsid_L DBC-2590-030 xuhao
  */
 public interface IShokanFushikyuKetteiInMapper {
 

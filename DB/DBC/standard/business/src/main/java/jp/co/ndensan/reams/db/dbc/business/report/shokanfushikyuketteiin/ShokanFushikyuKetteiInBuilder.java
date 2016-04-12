@@ -10,6 +10,8 @@ import jp.co.ndensan.reams.uz.uza.report.ReportEditorJoiner;
 
 /**
  * 帳票設計_DBC200022_償還払不支給決定者一覧表 ShokanFushikyuKetteiInBuilder
+ *
+ * @reamsid_L DBC-2590-040 xuhao
  */
 public class ShokanFushikyuKetteiInBuilder implements IShokanFushikyuKetteiInBuilder {
 

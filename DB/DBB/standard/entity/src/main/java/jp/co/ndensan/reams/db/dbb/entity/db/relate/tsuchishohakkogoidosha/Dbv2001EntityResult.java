@@ -10,6 +10,8 @@ import jp.co.ndensan.reams.db.dbb.entity.db.basic.DbV2001ChoshuHohoEntity;
 
 /**
  * 対象データ
+ *
+ * @reamsid_L DBB-0690-020 xuhao
  */
 @SuppressWarnings("PMD.UnusedPrivateField")
 @lombok.Getter

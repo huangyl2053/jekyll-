@@ -12,6 +12,8 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
  * 償還払不支給決定情報取込 のバッチパラメータです。
+ *
+ * @reamsid_L DBC-2590-010 xuhao
  */
 @lombok.Getter
 @lombok.Setter

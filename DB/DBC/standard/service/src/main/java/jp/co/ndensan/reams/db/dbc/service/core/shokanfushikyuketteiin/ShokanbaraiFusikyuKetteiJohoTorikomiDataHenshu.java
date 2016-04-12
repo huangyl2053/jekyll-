@@ -25,7 +25,9 @@ import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
 
 /**
+ * 償還払不支給決定情報の更新
  *
+ * @reamsid_L DBC-2590-030 xuhao
  */
 public class ShokanbaraiFusikyuKetteiJohoTorikomiDataHenshu {
 
@@ -66,11 +68,12 @@ public class ShokanbaraiFusikyuKetteiJohoTorikomiDataHenshu {
     }
 
     /**
-     * updateShokanbaraiFusikyuKetteiJoho
+     * 償還払不支給決定情報の更新
      *
      * @param 処理年月 処理年月
      * @param csvFileNameList csvFileNameList
      */
+    @Transaction
     public void updateShokanbaraiFusikyuKetteiJoho(
             FlexibleYearMonth 処理年月,
             List<RString> csvFileNameList) {
@@ -80,7 +83,7 @@ public class ShokanbaraiFusikyuKetteiJohoTorikomiDataHenshu {
         update償還払請求食事費用(mapper);
         update償還払請求サービス計画費(mapper);
         update償還払請求特定入所者介護サービス費用(mapper);
-        // TODO QA 更新DB無の処理
+        // TODO QA489 Redmine#80355
         update国保連インターフェース管理(処理年月, csvFileNameList);
 
     }
@@ -103,7 +106,7 @@ public class ShokanbaraiFusikyuKetteiJohoTorikomiDataHenshu {
             entity.setServiceTeikyoYM(償還払支給判定結果.getServiceTeikyoYM());
             entity.setSeiriNo(償還払支給判定結果.getSeiriNo());
             entity.setLastUpdateReamsLoginId(new RString(システム日付.toString()));
-            // QA 556
+            // TODO QA556 Redmine#80883
             entity.setShoKisaiHokenshaNo(new ShoKisaiHokenshaNo("666666"));
 //            entity.setShoKisaiHokenshaNo(償還払支給判定結果.getShokisaiHokenshaNo());
             entity.setKetteiYMD(償還払支給判定結果.getSakuseiYMD());
