@@ -6,19 +6,22 @@ package jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.NinteiShi
  */
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import java.util.HashSet;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.ui.binding.*;
+import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
+import jp.co.ndensan.reams.uz.uza.ui.binding.domain.*;
+
+import java.util.HashSet;
+import jp.co.ndensan.reams.uz.uza.ui.servlets.ICommonChildDivMode;
+import jp.co.ndensan.reams.uz.uza.ui.servlets._CommonChildDivModeUtil;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Button;
 import jp.co.ndensan.reams.uz.uza.ui.binding.DataGrid;
 import jp.co.ndensan.reams.uz.uza.ui.binding.DropDownList;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Mode;
-import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TextBox;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxCode;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxYubinNo;
 import jp.co.ndensan.reams.uz.uza.ui.binding.domain.TextBoxTelNo;
-import jp.co.ndensan.reams.uz.uza.ui.servlets.ICommonChildDivMode;
-import jp.co.ndensan.reams.uz.uza.ui.servlets._CommonChildDivModeUtil;
 
 /**
  * NinteiShinseiRenrakusakiJoho のクラスファイル 
@@ -26,7 +29,7 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets._CommonChildDivModeUtil;
  * @reamsid_L DBE-1300-100 dongyabin
  */
 public class NinteiShinseiRenrakusakiJohoDiv extends Panel implements INinteiShinseiRenrakusakiJohoDiv {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-01-15_09-59-03">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -41,12 +44,12 @@ public class NinteiShinseiRenrakusakiJohoDiv extends Panel implements INinteiShi
     private Button btnModoru;
     @JsonProperty("btnKakutei")
     private Button btnKakutei;
-    @JsonProperty("ShinseishoKanriNo")
-    private RString ShinseishoKanriNo;
-    @JsonProperty("hdnDatabaseSubGyomuCode")
-    private RString hdnDatabaseSubGyomuCode;
     @JsonProperty("NinteiShinseiBusinessCollection")
     private RString NinteiShinseiBusinessCollection;
+    @JsonProperty("hdnReadOnly")
+    private RString hdnReadOnly;
+    @JsonProperty("hdnShoriType")
+    private RString hdnShoriType;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -127,42 +130,6 @@ public class NinteiShinseiRenrakusakiJohoDiv extends Panel implements INinteiShi
     }
 
     /*
-     * getShinseishoKanriNo
-     * @return ShinseishoKanriNo
-     */
-    @JsonProperty("ShinseishoKanriNo")
-    public RString getShinseishoKanriNo() {
-        return ShinseishoKanriNo;
-    }
-
-    /*
-     * setShinseishoKanriNo
-     * @param ShinseishoKanriNo ShinseishoKanriNo
-     */
-    @JsonProperty("ShinseishoKanriNo")
-    public void setShinseishoKanriNo(RString ShinseishoKanriNo) {
-        this.ShinseishoKanriNo = ShinseishoKanriNo;
-    }
-
-    /*
-     * gethdnDatabaseSubGyomuCode
-     * @return hdnDatabaseSubGyomuCode
-     */
-    @JsonProperty("hdnDatabaseSubGyomuCode")
-    public RString getHdnDatabaseSubGyomuCode() {
-        return hdnDatabaseSubGyomuCode;
-    }
-
-    /*
-     * sethdnDatabaseSubGyomuCode
-     * @param hdnDatabaseSubGyomuCode hdnDatabaseSubGyomuCode
-     */
-    @JsonProperty("hdnDatabaseSubGyomuCode")
-    public void setHdnDatabaseSubGyomuCode(RString hdnDatabaseSubGyomuCode) {
-        this.hdnDatabaseSubGyomuCode = hdnDatabaseSubGyomuCode;
-    }
-
-    /*
      * getNinteiShinseiBusinessCollection
      * @return NinteiShinseiBusinessCollection
      */
@@ -178,6 +145,42 @@ public class NinteiShinseiRenrakusakiJohoDiv extends Panel implements INinteiShi
     @JsonProperty("NinteiShinseiBusinessCollection")
     public void setNinteiShinseiBusinessCollection(RString NinteiShinseiBusinessCollection) {
         this.NinteiShinseiBusinessCollection = NinteiShinseiBusinessCollection;
+    }
+
+    /*
+     * gethdnReadOnly
+     * @return hdnReadOnly
+     */
+    @JsonProperty("hdnReadOnly")
+    public RString getHdnReadOnly() {
+        return hdnReadOnly;
+    }
+
+    /*
+     * sethdnReadOnly
+     * @param hdnReadOnly hdnReadOnly
+     */
+    @JsonProperty("hdnReadOnly")
+    public void setHdnReadOnly(RString hdnReadOnly) {
+        this.hdnReadOnly = hdnReadOnly;
+    }
+
+    /*
+     * gethdnShoriType
+     * @return hdnShoriType
+     */
+    @JsonProperty("hdnShoriType")
+    public RString getHdnShoriType() {
+        return hdnShoriType;
+    }
+
+    /*
+     * sethdnShoriType
+     * @param hdnShoriType hdnShoriType
+     */
+    @JsonProperty("hdnShoriType")
+    public void setHdnShoriType(RString hdnShoriType) {
+        this.hdnShoriType = hdnShoriType;
     }
 
     /*
