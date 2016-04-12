@@ -32,6 +32,8 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
 
 /**
  * 介護認定審査会対象者割付クラスです。
+ *
+ * @reamsid_L DBE-0140-010 liangbc
  */
 public class TaishouWaritsuke {
 

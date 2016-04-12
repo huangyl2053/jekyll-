@@ -7,6 +7,8 @@ package jp.co.ndensan.reams.db.dbe.definition.enumeratedtype;
 
 /**
  * DBEカスタムコンフィグkey
+ *
+ * @reamsid_L DBA-9999-023 liangbc
  */
 public enum DbeBusinessConfigKey {
 

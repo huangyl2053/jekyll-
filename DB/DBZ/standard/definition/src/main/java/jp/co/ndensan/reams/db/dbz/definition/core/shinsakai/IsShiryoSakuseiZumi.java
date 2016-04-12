@@ -6,7 +6,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 /**
  * 資料作成済区分を表す列挙型です。
  *
- * @author LDNS
+ * @reamsid_L DBA-9999-023 liangbc
  */
 public enum IsShiryoSakuseiZumi {
 

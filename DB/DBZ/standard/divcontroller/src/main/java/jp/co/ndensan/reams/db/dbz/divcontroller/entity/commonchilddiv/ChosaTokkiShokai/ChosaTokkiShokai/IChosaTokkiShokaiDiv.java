@@ -6,8 +6,10 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.binding.ICommonChildDivBaseProperties;
 import jp.co.ndensan.reams.uz.uza.ui.binding.IDialogDiv;
 
-/*
+/**
  * このコードはツールによって生成されました。
+ *
+ * @reamsid_L DBE-3000-200 liangbc
  */
 public interface IChosaTokkiShokaiDiv extends ICommonChildDivBaseProperties, IDialogDiv {
 

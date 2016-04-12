@@ -15,6 +15,8 @@ import jp.co.ndensan.reams.uz.uza.util.config.BusinessConfig;
 
 /**
  * DB介護の業務コンフィグ取得手段、業務コンフィグ変更手段を提供するクラスです。
+ *
+ * @reamsid_L DBA-9999-023 liangbc
  */
 public final class DbBusinessConifg {
 

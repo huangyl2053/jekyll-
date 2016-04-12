@@ -45,6 +45,7 @@ import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 /**
  * 認定調査委託先マスタ画面でのバリデーションを管理するハンドラークラスです。
  *
+ * @reamsid_L DBE-0270-010 liangbc
  */
 public class NinteichosaItakusakiMasterHandler {
 

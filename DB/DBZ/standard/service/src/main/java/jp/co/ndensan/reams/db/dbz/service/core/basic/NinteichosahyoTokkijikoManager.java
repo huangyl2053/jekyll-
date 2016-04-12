@@ -20,6 +20,8 @@ import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
 
 /**
  * 認定調査票_特記情報を管理するクラスです。
+ *
+ * @reamsid_L DBE-3000-200 liangbc
  */
 public class NinteichosahyoTokkijikoManager {
 
