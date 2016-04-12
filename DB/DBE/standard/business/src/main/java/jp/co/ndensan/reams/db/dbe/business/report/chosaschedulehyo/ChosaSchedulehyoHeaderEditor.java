@@ -18,6 +18,8 @@ import jp.co.ndensan.reams.uz.uza.lang.Separator;
 
 /**
  * 認定調査スケジュール表(事務所)ヘッダEditorです。
+ *
+ * @reamsid_L DBE-0020-090 zhangguopeng
  */
 class ChosaSchedulehyoHeaderEditor implements IChosaSchedulehyoEditor {
 
