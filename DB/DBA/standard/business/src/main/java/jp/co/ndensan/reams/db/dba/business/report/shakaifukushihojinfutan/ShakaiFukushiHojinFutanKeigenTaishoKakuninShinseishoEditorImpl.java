@@ -10,6 +10,8 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
  * 社会福祉法人等利用者負担軽減対象確認申請書ヘッダEditorです。
+ *
+ * @reamsid_L DBA-0540-698 zhangguopeng
  */
 class ShakaiFukushiHojinFutanKeigenTaishoKakuninShinseishoEditorImpl implements IShakaiFukushiHojinFutanKeigenTaishoKakuninShinseishoEditor {
 
@@ -18,8 +20,7 @@ class ShakaiFukushiHojinFutanKeigenTaishoKakuninShinseishoEditorImpl implements 
     /**
      * インスタンスを生成します。
      *
-     * @param item
-     * {@link ShakaiFukushiHojinFutanKeigenTaishoKakuninShinseishoItem}
+     * @param item {@link ShakaiFukushiHojinFutanKeigenTaishoKakuninShinseishoItem}
      */
     protected ShakaiFukushiHojinFutanKeigenTaishoKakuninShinseishoEditorImpl(
             ShakaiFukushiHojinFutanKeigenTaishoKakuninShinseishoItem item) {

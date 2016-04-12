@@ -5,8 +5,9 @@ import jp.co.ndensan.reams.uz.uza.report.IReportSource;
 import jp.co.ndensan.reams.uz.uza.report.source.ReportItem;
 
 /**
- *
  * 社会福祉法人等利用者負担軽減対象確認申請書のReportSource
+ *
+ * @reamsid_L DBA-0540-698 zhangguopeng
  */
 public class ShakaiFukushiHojinFutanKeigenTaishoKakuninShinseishoReportSource implements IReportSource {
 // <editor-fold defaultstate="collapsed" desc="Generated Code">
