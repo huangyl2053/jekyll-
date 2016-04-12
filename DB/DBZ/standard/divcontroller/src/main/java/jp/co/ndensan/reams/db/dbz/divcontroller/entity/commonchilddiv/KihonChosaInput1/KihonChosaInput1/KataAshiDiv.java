@@ -14,7 +14,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.RadioButton;
 /**
  * KataAshi のクラスファイル
  *
- * @reamsid_L DBE-3000-090 wangjie2
+ * @@author 自動生成
  */
 public class KataAshiDiv extends Panel {
 

@@ -14,7 +14,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.RadioButton;
 /**
  * TukuriHanashi のクラスファイル
  *
- * @reamsid_L DBE-3000-093 wangjie2
+ * @author 自動生成
  */
 public class TukuriHanashiDiv extends Panel {
 

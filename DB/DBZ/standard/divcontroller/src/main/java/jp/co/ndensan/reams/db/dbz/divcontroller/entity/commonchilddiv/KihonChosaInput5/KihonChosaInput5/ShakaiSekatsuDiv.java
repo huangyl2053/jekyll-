@@ -15,7 +15,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.RadioButton;
 /**
  * ShakaiSekatsu のクラスファイル
  *
- * @reamsid_L DBE-3000-094 wangjie2
+ * @author 自動生成
  */
 public class ShakaiSekatsuDiv extends Panel {
 

@@ -14,7 +14,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.RadioButton;
 /**
  * Sengan のクラスファイル
  *
- * @reamsid_L DBE-3000-091 wangjie2
+ * @author 自動生成
  */
 public class SenganDiv extends Panel {
 

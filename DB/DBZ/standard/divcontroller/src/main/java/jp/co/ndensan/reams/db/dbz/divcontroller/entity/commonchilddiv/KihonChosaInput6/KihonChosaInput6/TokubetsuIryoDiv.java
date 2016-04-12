@@ -15,7 +15,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 /**
  * TokubetsuIryo のクラスファイル
  *
- * @reamsid_L DBE-3000-095 wangjie2
+ * @author 自動生成
  */
 public class TokubetsuIryoDiv extends Panel {
 

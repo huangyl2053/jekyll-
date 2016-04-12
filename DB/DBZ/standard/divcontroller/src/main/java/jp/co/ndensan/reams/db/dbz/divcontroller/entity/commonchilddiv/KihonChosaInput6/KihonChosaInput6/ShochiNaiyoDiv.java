@@ -14,7 +14,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 /**
  * ShochiNaiyo のクラスファイル
  *
- * @reamsid_L DBE-3000-095 wangjie2
+ * @author 自動生成
  */
 public class ShochiNaiyoDiv extends Panel {
 

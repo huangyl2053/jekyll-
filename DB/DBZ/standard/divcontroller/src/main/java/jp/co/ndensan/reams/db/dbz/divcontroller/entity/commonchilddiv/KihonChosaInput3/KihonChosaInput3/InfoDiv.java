@@ -14,7 +14,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.RadioButton;
 /**
  * Info のクラスファイル
  *
- * @reamsid_L DBE-3000-092 wangjie2
+ * @author 自動生成
  */
 public class InfoDiv extends Panel {
 

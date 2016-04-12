@@ -16,7 +16,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.RadioButton;
 /**
  * DaiichigunShintaiKino のクラスファイル
  *
- * @reamsid_L DBE-3000-090 wangjie2
+ * @author 自動生成
  */
 public class DaiichigunShintaiKinoDiv extends Panel {
 

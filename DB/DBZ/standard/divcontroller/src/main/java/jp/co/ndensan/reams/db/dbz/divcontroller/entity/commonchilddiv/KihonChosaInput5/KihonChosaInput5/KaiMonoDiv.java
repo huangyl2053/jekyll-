@@ -14,7 +14,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.RadioButton;
 /**
  * KaiMono のクラスファイル
  *
- * @reamsid_L DBE-3000-094 wangjie2
+ * @author 自動生成
  */
 public class KaiMonoDiv extends Panel {
 
