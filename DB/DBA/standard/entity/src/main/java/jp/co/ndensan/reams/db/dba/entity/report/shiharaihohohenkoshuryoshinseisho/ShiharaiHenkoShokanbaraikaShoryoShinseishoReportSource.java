@@ -7,6 +7,8 @@ import jp.co.ndensan.reams.uz.uza.report.source.ReportItem;
 /**
  *
  * 支払方法変更（償還払い化）終了申請書のReportSource
+ *
+ * @reamsid_L DBA-0540-697 zhangguopeng
  */
 public class ShiharaiHenkoShokanbaraikaShoryoShinseishoReportSource implements IReportSource {
 // <editor-fold defaultstate="collapsed" desc="Generated Code">

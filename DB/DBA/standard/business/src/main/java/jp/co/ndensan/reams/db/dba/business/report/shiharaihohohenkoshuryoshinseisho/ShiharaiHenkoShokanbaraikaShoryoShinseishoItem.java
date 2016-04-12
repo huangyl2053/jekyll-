@@ -11,6 +11,8 @@ import lombok.Getter;
 
 /**
  * 支払方法変更（償還払い化）終了申請書ヘッダのITEMです。
+ *
+ * @reamsid_L DBA-0540-697 zhangguopeng
  */
 @Getter
 @SuppressWarnings("PMD.UnusedPrivateField")

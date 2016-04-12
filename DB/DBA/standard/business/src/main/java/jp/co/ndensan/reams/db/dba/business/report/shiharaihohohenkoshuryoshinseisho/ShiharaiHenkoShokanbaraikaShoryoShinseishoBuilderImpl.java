@@ -10,6 +10,8 @@ import jp.co.ndensan.reams.uz.uza.report.ReportEditorJoiner;
 
 /**
  * 支払方法変更（償還払い化）終了申請書Builderクラスです。
+ *
+ * @reamsid_L DBA-0540-697 zhangguopeng
  */
 class ShiharaiHenkoShokanbaraikaShoryoShinseishoBuilderImpl implements IShiharaiHenkoShokanbaraikaShoryoShinseishoBuilder {
 
@@ -18,10 +20,8 @@ class ShiharaiHenkoShokanbaraikaShoryoShinseishoBuilderImpl implements IShiharai
     /**
      * インスタンスを生成します。
      *
-     * @param headerEditor
-     * {@link IShiharaiHenkoShokanbaraikaShoryoShinseishoEditor}
-     * @param bodyEditor
-     * {@link IShiharaiHenkoShokanbaraikaShoryoShinseishoEditor}
+     * @param headerEditor {@link IShiharaiHenkoShokanbaraikaShoryoShinseishoEditor}
+     * @param bodyEditor {@link IShiharaiHenkoShokanbaraikaShoryoShinseishoEditor}
      */
     public ShiharaiHenkoShokanbaraikaShoryoShinseishoBuilderImpl(
             IShiharaiHenkoShokanbaraikaShoryoShinseishoEditor editor) {
