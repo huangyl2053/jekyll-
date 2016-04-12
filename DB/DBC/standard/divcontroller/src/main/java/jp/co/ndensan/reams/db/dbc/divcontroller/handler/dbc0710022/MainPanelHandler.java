@@ -14,7 +14,7 @@ import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 
 /**
- *
+ * @reamsid_L DBC-1020-010 yangchenbing
  */
 public final class MainPanelHandler {
 

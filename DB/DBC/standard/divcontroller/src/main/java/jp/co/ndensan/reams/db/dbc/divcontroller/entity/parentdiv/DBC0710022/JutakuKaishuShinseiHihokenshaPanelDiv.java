@@ -16,6 +16,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
  * JutakuKaishuShinseiHihokenshaPanel のクラスファイル
  *
  * @author 自動生成
+ * @reamsid_L DBC-1020-010 yangchenbing
  */
 public class JutakuKaishuShinseiHihokenshaPanelDiv extends Panel {
 

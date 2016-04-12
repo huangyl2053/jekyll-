@@ -4,17 +4,20 @@ package jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0710022;
  * このファイルへの変更は、再生成時には損失するため
  * 不正な動作の原因になります。
  */
+
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.commonchilddiv.ShokanbaraiketteiJoho.ShokanbaraiketteiJoho.IShokanbaraiketteiJohoDiv;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.commonchilddiv.ShokanbaraiketteiJoho.ShokanbaraiketteiJoho.ShokanbaraiketteiJohoDiv;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 
 /**
- * ShokanbaraiKetteiJyohoPanel のクラスファイル 
- * 
+ * ShokanbaraiKetteiJyohoPanel のクラスファイル
+ *
  * @author 自動生成
+ * @reamsid_L DBC-1020-010 yangchenbing
  */
 public class ShokanbaraiKetteiJyohoPanelDiv extends Panel {
+
     // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2015-11-16_12-38-19">
     /*
      * [ private の作成 ]
