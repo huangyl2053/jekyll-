@@ -137,15 +137,6 @@ public class NinteichosaSchedulBusiness {
     }
 
     /**
-     * 証記載保険者番号を返します。
-     *
-     * @return 証記載保険者番号
-     */
-    public RString get証記載保険者番号() {
-        return entity.getShoKisaiHokenshaNo();
-    }
-
-    /**
      * 認定調査委託先コードを返します。
      *
      * @return 認定調査委託先コード
@@ -182,39 +173,12 @@ public class NinteichosaSchedulBusiness {
     }
 
     /**
-     * get認定調査委託先を返します。
+     * 証記載保険者番号を返します。
      *
-     * @return 予約可能フラグ
+     * @return 証記載保険者番号
      */
-    public RString get認定調査委託先() {
-        return entity.getNinteiChosaItakusakiCode2();
-    }
-
-    /**
-     * 認定調査委託先名称を返します。
-     *
-     * @return 認定調査委託先名称
-     */
-    public RString get認定調査委託先名称() {
-        return entity.getJigyoshaMeisho();
-    }
-
-    /**
-     * 認定調査員を返します。
-     *
-     * @return 認定調査員
-     */
-    public RString get認定調査員() {
-        return entity.getNinteiChosainCode2();
-    }
-
-    /**
-     * 認定調査員氏名を返します。
-     *
-     * @return 認定調査員氏名
-     */
-    public RString get認定調査員氏名() {
-        return entity.getChosainShimei();
+    public RString get証記載保険者番号() {
+        return entity.getShoKisaiHokenshaNo();
     }
 
 }
