@@ -11,6 +11,8 @@ import lombok.Setter;
 
 /**
  * 住宅住所変更 住宅改修住宅住所
+ *
+ * @reamsid_L DBC-1020-010 yangchenbing
  */
 @SuppressWarnings("PMD.UnusedPrivateField")
 @Getter
