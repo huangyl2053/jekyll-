@@ -30,6 +30,8 @@ import jp.co.ndensan.reams.uz.uza.util.config.BusinessConfig;
 /**
  *
  * 月別推移表のHandlerクラスです。
+ *
+ * @reamsid_L DBB-0760-010 zhangguopeng
  */
 public class TsukibetsuSuiihyoSakuseiHandler {
 
@@ -59,24 +61,19 @@ public class TsukibetsuSuiihyoSakuseiHandler {
     public void onload() {
         ShichosonSecurityJoho shichosonSecurityJoho = ShichosonSecurityJoho.getShichosonSecurityJoho(
                 GyomuBunrui.介護事務);
-        if (new Code(SHICHOSONCODE_120).equals(shichosonSecurityJoho.get導入形態コード())
-                || new Code(SHICHOSONCODE_220).equals(shichosonSecurityJoho.get導入形態コード())) {
-            // 状態１　初期化状態（単一保険者）
-            setヘッダエリア();
-            set抽出条件エリア();
-            // div.getCcdChikuShichosonSelect().
-            // 選択対象==全て
-        }
-        if (new Code(SHICHOSONCODE_111).equals(shichosonSecurityJoho.get導入形態コード())
-                || new Code(SHICHOSONCODE_112).equals(shichosonSecurityJoho.get導入形態コード())
-                || new Code(SHICHOSONCODE_211).equals(shichosonSecurityJoho.get導入形態コード())) {
-            // 状態２　初期化状態（広域保険者）
+        if (new Code(SHICHOSONCODE_111).equals(shichosonSecurityJoho.get導入形態コード())) {
+            // 状態１　初期化状態（広域保険者）
             setヘッダエリア();
             set抽出条件エリア();
             // 市町村==全市町村
+        } else if (new Code(SHICHOSONCODE_112).equals(shichosonSecurityJoho.get導入形態コード())
+                || new Code(SHICHOSONCODE_220).equals(shichosonSecurityJoho.get導入形態コード())) {
+            // 状態２　初期化状態（単一保険者）
+            setヘッダエリア();
+            set抽出条件エリア();
+//            div.getCcdChikuShichosonSelect().
+            // 選択対象==全て
         }
-
-        // TODO ビジネス設計_DBUMN00000_市町村情報セキュリティ取得.xlsxの「市町村セキュリティ情報を取得する」を呼び出す この機能は4次協同設計です。
     }
 
     /**
@@ -87,7 +84,7 @@ public class TsukibetsuSuiihyoSakuseiHandler {
      */
     public CreateTsukibetsuSuiihyoBatchParameter batchParameter(TsukibetsuSuiihyoSakuseiDiv div) {
         CreateTsukibetsuSuiihyoBatchParameter batchParameter = new CreateTsukibetsuSuiihyoBatchParameter();
-        batchParameter.setChoteiNendo(new FlexibleYear(div.getTxtChoteiNendo().getValue().getYear().toString()));
+        batchParameter.setChoteiNendo(new FlexibleYear(div.getDdlChoteiNendo().getSelectedValue()));
         RStringBuilder buf = new RStringBuilder();
         buf.append(div.getTxtChoteiKijunYMD().getValue());
         buf.append(RTime.now().toString());
@@ -119,7 +116,7 @@ public class TsukibetsuSuiihyoSakuseiHandler {
     }
 
     private void setヘッダエリア() {
-        div.getTxtChoteiNendo().setValue(new RDate(BusinessConfig.get(ConfigNameDBB.日付関連_調定年度).toString()));
+        div.getDdlChoteiNendo().setSelectedValue((BusinessConfig.get(ConfigNameDBB.日付関連_調定年度)));
         div.getTxtChoteiKijunYMD().setValue(RDate.getNowDate());
     }
 

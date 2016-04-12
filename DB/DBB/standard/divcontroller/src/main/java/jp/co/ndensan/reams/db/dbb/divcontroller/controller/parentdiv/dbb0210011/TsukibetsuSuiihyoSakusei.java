@@ -18,6 +18,8 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
 /**
  *
  * 月別推移表Divのコントローラです。
+ *
+ * @reamsid_L DBB-0760-010 zhangguopeng
  */
 public class TsukibetsuSuiihyoSakusei {
 
@@ -37,8 +39,7 @@ public class TsukibetsuSuiihyoSakusei {
     /**
      * 月別推移表作成を「実行する」を押下チェックする。<br/>
      *
-     * @param div
-     * {@link KobetsuJikoRenkeiInfoSakuseiDiv 介護住民票個別事項連携情報作成【他社住基】情報Div}
+     * @param div {@link KobetsuJikoRenkeiInfoSakuseiDiv 介護住民票個別事項連携情報作成【他社住基】情報Div}
      * @return 介護住民票個別事項連携情報作成【他社住基】情報Divを持つResponseData
      */
     public ResponseData<TsukibetsuSuiihyoSakuseiDiv> onClick_btnJikkouBefore(TsukibetsuSuiihyoSakuseiDiv div) {
