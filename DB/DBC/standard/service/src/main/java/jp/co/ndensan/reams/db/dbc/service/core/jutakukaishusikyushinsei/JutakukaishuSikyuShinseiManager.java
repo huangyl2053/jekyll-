@@ -60,9 +60,17 @@ import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
 
 /**
  * 住宅改修費支給申請
+ *
+ * @reamsid_L DBC-0992-150 xicongwang
  */
 public class JutakukaishuSikyuShinseiManager {
 
+    private static final RString キー = new RString("hiHokenshaNo");
+    private static final RString モード_審査 = new RString("審査");
+    private static final RString モード_取消 = new RString("取消");
+    private static final RString 区分_コード1 = new RString("1");
+    private static final RString 区分_コード2 = new RString("2");
+    private static final RString 区分_コード3 = new RString("3");
     private final MapperProvider mapperProvider;
     private final DbT3036ShokanHanteiKekkaDac 償還払支給判定結果Dac;
     private final DbT3038ShokanKihonDac 償還払請求基本Dac;
@@ -106,7 +114,7 @@ public class JutakukaishuSikyuShinseiManager {
     public List<JutakukaishuSikyuShinseiResult> getShokanShikyuShinseiList(HihokenshaNo 被保険者番号) {
 
         Map<String, Object> parameter = new HashMap<>();
-        parameter.put("hiHokenshaNo", 被保険者番号);
+        parameter.put(キー.toString(), 被保険者番号);
         IJutakukaishuSikyuShinseiMapper mapper = mapperProvider.create(IJutakukaishuSikyuShinseiMapper.class);
         List<JutakukaishuSikyuShinseiEntity> 住宅改修費支給申請情報List = mapper.get住宅改修費支給申請情報(parameter);
         List<JutakukaishuSikyuShinseiEntity> 住宅改修費事前申請情報List = mapper.get住宅改修費事前申請情報(parameter);
@@ -157,7 +165,7 @@ public class JutakukaishuSikyuShinseiManager {
     public List<JutakukaishuJizenShinseiResult> getShokanJizenShinseiList(HihokenshaNo 被保険者番号) {
 
         Map<String, Object> parameter = new HashMap<>();
-        parameter.put("hiHokenshaNo", 被保険者番号);
+        parameter.put(キー.toString(), 被保険者番号);
         IJutakukaishuSikyuShinseiMapper mapper = mapperProvider.create(IJutakukaishuSikyuShinseiMapper.class);
         List<JutakukaishuJizenShinseiEntity> 事前申請一覧List = mapper.get事前申請一覧(parameter);
         if (事前申請一覧List == null || 事前申請一覧List.isEmpty()) {
@@ -311,8 +319,7 @@ public class JutakukaishuSikyuShinseiManager {
             RString 画面モード, ShikibetsuCode 識別コード, HokenshaNo 証記載保険者番号,
             ShokanShinsei dbt3034, ShokanKihon dbt3038, List<ShokanJutakuKaishu> dbt3049List,
             ShokanShukei dbt3053, ShokanHanteiKekka dbt3036) {
-        RString モード_審査 = new RString("審査");
-        RString モード_取消 = new RString("取消");
+
         償還払支給申請Dac.save(dbt3034.toEntity());
 
         if (モード_取消.equals(画面モード)) {
@@ -350,7 +357,7 @@ public class JutakukaishuSikyuShinseiManager {
             kyufuentity.setShikibetsuCode(識別コード);
             kyufuentity.setShoKisaiHokenshaNo(証記載保険者番号);
             kyufuentity.setShinsaYM(new FlexibleYearMonth(RDate.getNowDate().getYearMonth().toDateString()));
-            kyufuentity.setKyufuSakuseiKubunCode(new RString("1"));
+            kyufuentity.setKyufuSakuseiKubunCode(区分_コード1);
             ShokanKihon kihon = getShokanKihon(被保険者番号, サービス提供年月, 整理番号);
             DbT3038ShokanKihonEntity entity = null;
             if (kihon != null) {
@@ -421,7 +428,7 @@ public class JutakukaishuSikyuShinseiManager {
         kyufuentity.setShikibetsuCode(識別コード);
         kyufuentity.setShoKisaiHokenshaNo(証記載保険者番号);
         kyufuentity.setShinsaYM(決定日.getYearMonth());
-        kyufuentity.setKyufuSakuseiKubunCode(new RString("3"));
+        kyufuentity.setKyufuSakuseiKubunCode(区分_コード3);
         ShokanKihon kihon = getShokanKihon(被保険者番号, サービス提供年月, 整理番号);
         DbT3038ShokanKihonEntity entity = null;
         if (kihon != null) {
@@ -490,20 +497,20 @@ public class JutakukaishuSikyuShinseiManager {
         if (kekka == null) {
             if (支給.equals(parameter.get支給区分())) {
                 kyufuentity.setShinsaYM(parameter.get決定日().getYearMonth());
-                kyufuentity.setKyufuSakuseiKubunCode(new RString("1"));
+                kyufuentity.setKyufuSakuseiKubunCode(区分_コード1);
             }
         } else {
             if (不支給.equals(dbt3036entity.getShikyuHushikyuKetteiKubun()) && 支給.equals(parameter.get支給区分())) {
                 kyufuentity.setShinsaYM(parameter.get決定日().getYearMonth());
-                kyufuentity.setKyufuSakuseiKubunCode(new RString("1"));
+                kyufuentity.setKyufuSakuseiKubunCode(区分_コード1);
             } else if (支給.equals(dbt3036entity.getShikyuHushikyuKetteiKubun())
                     && 不支給.equals(parameter.get支給区分())) {
                 kyufuentity.setShinsaYM(parameter.get決定日().getYearMonth());
-                kyufuentity.setKyufuSakuseiKubunCode(new RString("3"));
+                kyufuentity.setKyufuSakuseiKubunCode(区分_コード3);
             } else if (支給.equals(dbt3036entity.getShikyuHushikyuKetteiKubun())
                     && 支給.equals(parameter.get支給区分())) {
                 kyufuentity.setShinsaYM(parameter.get決定日().getYearMonth());
-                kyufuentity.setKyufuSakuseiKubunCode(new RString("2"));
+                kyufuentity.setKyufuSakuseiKubunCode(区分_コード2);
             }
         }
 

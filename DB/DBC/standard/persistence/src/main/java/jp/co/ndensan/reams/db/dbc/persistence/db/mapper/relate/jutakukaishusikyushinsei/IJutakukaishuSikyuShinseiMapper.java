@@ -14,6 +14,8 @@ import jp.co.ndensan.reams.db.dbc.entity.db.relate.jutakukaishusikyushinsei.Juta
 
 /**
  * 支給申請一覧取得のマッパーインタフェースです。
+ *
+ * @reamsid_L DBC-0992-150 xicongwang
  */
 public interface IJutakukaishuSikyuShinseiMapper {
 

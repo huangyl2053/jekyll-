@@ -28,6 +28,8 @@ import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
 
 /**
  * 償還払支給判定結果のデータアクセスクラスです。
+ *
+ * @reamsid_L DBC-9999-012 xicongwang
  */
 public class DbT3036ShokanHanteiKekkaDac implements ISaveable<DbT3036ShokanHanteiKekkaEntity> {
 

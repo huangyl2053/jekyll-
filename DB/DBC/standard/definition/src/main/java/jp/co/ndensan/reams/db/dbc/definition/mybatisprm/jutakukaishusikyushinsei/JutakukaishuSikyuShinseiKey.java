@@ -11,6 +11,8 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
  * 償還払支給申請情報取得MyBatisパラメータクラスです。
+ *
+ * @reamsid_L DBC-0992-150 xicongwang
  */
 @lombok.Getter
 @lombok.Setter

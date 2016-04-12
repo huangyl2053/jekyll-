@@ -16,6 +16,8 @@ import jp.co.ndensan.reams.uz.uza.math.Decimal;
 /**
  *
  * 償還払決定情報更新パラメータクラスです。
+ *
+ * @reamsid_L DBC-0992-150 xicongwang
  */
 @lombok.Getter
 @lombok.Setter
