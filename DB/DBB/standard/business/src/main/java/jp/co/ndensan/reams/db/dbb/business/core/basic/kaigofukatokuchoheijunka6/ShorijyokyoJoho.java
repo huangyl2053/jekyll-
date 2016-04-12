@@ -12,6 +12,8 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
  * 介護徴収方法を管理するクラスです。
+ *
+ * @reamsid_L DBB-0820-010 xuyue
  */
 public class ShorijyokyoJoho {
 

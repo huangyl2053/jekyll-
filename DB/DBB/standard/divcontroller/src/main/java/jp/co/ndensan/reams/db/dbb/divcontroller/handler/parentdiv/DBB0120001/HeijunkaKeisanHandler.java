@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbb.divcontroller.handler.parentdiv.dbb0120001;
+package jp.co.ndensan.reams.db.dbb.divcontroller.handler.parentdiv.DBB0120001;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -35,6 +35,7 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.ResponseHolder;
 /**
  * 特徴平準化（特徴6月分）のHandlerクラスです。
  *
+ * @reamsid_L DBB-0820-010 xuyue
  */
 public class HeijunkaKeisanHandler {
 

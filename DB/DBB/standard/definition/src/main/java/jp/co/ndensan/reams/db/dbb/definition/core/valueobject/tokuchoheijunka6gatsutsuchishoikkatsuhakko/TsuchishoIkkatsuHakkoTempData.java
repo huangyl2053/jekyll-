@@ -14,6 +14,7 @@ import lombok.Setter;
 /**
  * HeijunkaKeisanDivのTempDataクラスです。
  *
+ * @reamsid_L DBB-0820-010 xuyue
  */
 @SuppressWarnings("PMD.UnusedPrivateField")
 @Getter

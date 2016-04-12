@@ -8,13 +8,15 @@ package jp.co.ndensan.reams.db.dbb.divcontroller.controller.parentdiv.dbb0120001
 import jp.co.ndensan.reams.db.dbb.definition.batchprm.dbbbt35003.Dbbbt35003FlowParameter;
 import jp.co.ndensan.reams.db.dbb.definition.core.valueobject.tokuchoheijunka6gatsutsuchishoikkatsuhakko.TsuchishoIkkatsuHakkoTempData;
 import jp.co.ndensan.reams.db.dbb.divcontroller.entity.parentdiv.DBB0120001.HeijunkaKeisanDiv;
-import jp.co.ndensan.reams.db.dbb.divcontroller.handler.parentdiv.dbb0120001.HeijunkaKeisanHandler;
-import jp.co.ndensan.reams.db.dbb.divcontroller.handler.parentdiv.dbb0120001.HeijunkaKeisanValidationHandler;
+import jp.co.ndensan.reams.db.dbb.divcontroller.handler.parentdiv.DBB0120001.HeijunkaKeisanHandler;
+import jp.co.ndensan.reams.db.dbb.divcontroller.handler.parentdiv.DBB0120001.HeijunkaKeisanValidationHandler;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
 
 /**
  * 特徴平準化（特徴6月分）コントロールdivです。
+ *
+ * @reamsid_L DBB-0820-010 xuyue
  */
 public class HeijunkaKeisan {
 
