@@ -43,7 +43,6 @@ public class PnlKeteiJohoMsg {
     private static final RString 削除 = new RString("削除");
     private static final RString 登録 = new RString("登録");
     private static final RString 修正 = new RString("修正");
-    private static final RString 参照 = new RString("参照");
     private static final RString モード_修正 = new RString("修正");
     private static final RString モード_照会 = new RString("照会");
 
@@ -65,15 +64,15 @@ public class PnlKeteiJohoMsg {
         div.getKaigoCommonPanel().getCcdShikakuKihon().onLoad(被保険者番号);
         div.getYoguKonyuhiShikyuShinseiContentsPanel().getTxtTeikyoYM().setValue(new RDate(サービス年月.toString()));
         div.getYoguKonyuhiShikyuShinseiContentsPanel().getTxtKyufuritsu().setValue(給付率);
-        div.getYoguKonyuhiShikyuShinseiContentsPanel().getTxtSyomeisyo().setValue(事業者番号);
+        div.getYoguKonyuhiShikyuShinseiContentsPanel().getTxtSyomeisyo().setValue(証明書);
         div.getYoguKonyuhiShikyuShinseiContentsPanel().getTxtSeiriNo().setValue(整理番号);
-        div.getYoguKonyuhiShikyuShinseiContentsPanel().getTxtJigyoshaNo().setValue(証明書);
+        div.getYoguKonyuhiShikyuShinseiContentsPanel().getTxtJigyoshaNo().setValue(事業者番号);
         if (登録.equals(ViewStateHolder.get(ViewStateKeys.処理モード, RString.class)) || 修正.equals(
                 ViewStateHolder.get(ViewStateKeys.処理モード, RString.class))) {
             div.getCcdKetteiList().loadInitialize(被保険者番号, サービス年月, 整理番号,
                     new RString("02"), モード_修正);
         } else {
-            div.getCcdKetteiList().loadInitialize(new HihokenshaNo("000000001"), サービス年月,
+            div.getCcdKetteiList().loadInitialize(被保険者番号, サービス年月,
                     整理番号, new RString("02"), モード_照会);
             div.getCcdKetteiList().getShokanbaraiketteiJohoDiv().getModifiedInfos().get(0).getValueStatement().getFieldName();
         }

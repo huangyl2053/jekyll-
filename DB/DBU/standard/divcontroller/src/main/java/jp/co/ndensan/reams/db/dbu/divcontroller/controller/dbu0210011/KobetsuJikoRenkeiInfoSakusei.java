@@ -21,14 +21,15 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
 /**
  *
  * 介護住民票個別事項連携情報作成【他社住基】情報Divを制御します。
+ *
+ * @reamsid_L DBU-0350-010 zhangguopeng
  */
 public class KobetsuJikoRenkeiInfoSakusei {
 
     /**
      * 介護住民票個別事項連携情報作成【他社住基】を画面初期化処理しました。
      *
-     * @param div
-     * {@link KobetsuJikoRenkeiInfoSakuseiDiv 介護住民票個別事項連携情報作成【他社住基】情報Div}
+     * @param div {@link KobetsuJikoRenkeiInfoSakuseiDiv 介護住民票個別事項連携情報作成【他社住基】情報Div}
      * @return 介護住民票個別事項連携情報作成【他社住基】情報Divを持つResponseData
      */
     public ResponseData<KobetsuJikoRenkeiInfoSakuseiDiv> onLoad(KobetsuJikoRenkeiInfoSakuseiDiv div) {
@@ -41,8 +42,7 @@ public class KobetsuJikoRenkeiInfoSakusei {
     /**
      * 介護住民票個別事項連携情報作成【他社住基】を「全件作成する」を押下する。<br/>
      *
-     * @param div
-     * {@link KobetsuJikoRenkeiInfoSakuseiDiv 介護住民票個別事項連携情報作成【他社住基】情報Div}
+     * @param div {@link KobetsuJikoRenkeiInfoSakuseiDiv 介護住民票個別事項連携情報作成【他社住基】情報Div}
      * @return 介護住民票個別事項連携情報作成【他社住基】情報Divを持つResponseData
      */
     public ResponseData<KobetsuJikoRenkeiInfoSakuseiDiv> onClick_chkZenken(KobetsuJikoRenkeiInfoSakuseiDiv div) {
@@ -63,8 +63,7 @@ public class KobetsuJikoRenkeiInfoSakusei {
     /**
      * 介護住民票個別事項連携情報作成【他社住基】を「今回開始日時を修正する]」を押下する。<br/>
      *
-     * @param div
-     * {@link KobetsuJikoRenkeiInfoSakuseiDiv 介護住民票個別事項連携情報作成【他社住基】情報Div}
+     * @param div {@link KobetsuJikoRenkeiInfoSakuseiDiv 介護住民票個別事項連携情報作成【他社住基】情報Div}
      * @return 介護住民票個別事項連携情報作成【他社住基】情報Divを持つResponseData
      */
     public ResponseData<KobetsuJikoRenkeiInfoSakuseiDiv> onClick_chkKikanHenko(KobetsuJikoRenkeiInfoSakuseiDiv div) {
@@ -81,8 +80,7 @@ public class KobetsuJikoRenkeiInfoSakusei {
     /**
      * 介護住民票個別事項連携情報作成【他社住基】を「実行する」を押下チェックする。<br/>
      *
-     * @param div
-     * {@link KobetsuJikoRenkeiInfoSakuseiDiv 介護住民票個別事項連携情報作成【他社住基】情報Div}
+     * @param div {@link KobetsuJikoRenkeiInfoSakuseiDiv 介護住民票個別事項連携情報作成【他社住基】情報Div}
      * @return 介護住民票個別事項連携情報作成【他社住基】情報Divを持つResponseData
      */
     public ResponseData<KobetsuJikoRenkeiInfoSakuseiDiv> onClick_btnJikkoBefore(KobetsuJikoRenkeiInfoSakuseiDiv div) {
@@ -103,8 +101,7 @@ public class KobetsuJikoRenkeiInfoSakusei {
     /**
      * 介護住民票個別事項連携情報作成【他社住基】を「実行する」を押下する。<br/>
      *
-     * @param div
-     * {@link KobetsuJikoRenkeiInfoSakuseiDiv 介護住民票個別事項連携情報作成【他社住基】情報Div}
+     * @param div {@link KobetsuJikoRenkeiInfoSakuseiDiv 介護住民票個別事項連携情報作成【他社住基】情報Div}
      * @return 介護住民票個別事項連携情報作成【他社住基】情報Divを持つResponseData
      */
     public ResponseData onClick_btnJikko(KobetsuJikoRenkeiInfoSakuseiDiv div) {
