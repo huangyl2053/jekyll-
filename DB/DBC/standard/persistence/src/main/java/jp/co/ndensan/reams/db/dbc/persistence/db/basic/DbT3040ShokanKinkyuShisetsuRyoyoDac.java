@@ -34,6 +34,8 @@ import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
 
 /**
  * 償還払請求緊急時施設療養のデータアクセスクラスです。
+ *
+ * @reamsid_L DBC-9999-012 xicongwang
  */
 public class DbT3040ShokanKinkyuShisetsuRyoyoDac implements ISaveable<DbT3040ShokanKinkyuShisetsuRyoyoEntity> {
 

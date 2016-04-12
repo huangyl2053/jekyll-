@@ -15,6 +15,7 @@ import jp.co.ndensan.reams.uz.uza.math.Decimal;
 
 /**
  *
+ * @reamsid_L DBC-1030-200 xicongwang
  */
 public class ServiceKeikakuHiRealtEntity {
 

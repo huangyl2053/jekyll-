@@ -32,6 +32,8 @@ import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
 
 /**
  * 償還払請求社会福祉法人軽減額のデータアクセスクラスです。
+ *
+ * @reamsid_L DBC-9999-012 xicongwang
  */
 public class DbT3051ShokanShakaiFukushiHojinKeigengakuDac implements ISaveable<DbT3051ShokanShakaiFukushiHojinKeigengakuEntity> {
 

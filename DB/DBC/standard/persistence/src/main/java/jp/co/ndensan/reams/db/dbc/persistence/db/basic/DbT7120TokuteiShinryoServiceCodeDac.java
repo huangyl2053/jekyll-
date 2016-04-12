@@ -31,6 +31,8 @@ import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
 
 /**
  * 特定診療サービスコードのデータアクセスクラスです。
+ *
+ * @reamsid_L DBC-9999-012 xicongwang
  */
 public class DbT7120TokuteiShinryoServiceCodeDac implements ISaveable<DbT7120TokuteiShinryoServiceCodeEntity> {
 

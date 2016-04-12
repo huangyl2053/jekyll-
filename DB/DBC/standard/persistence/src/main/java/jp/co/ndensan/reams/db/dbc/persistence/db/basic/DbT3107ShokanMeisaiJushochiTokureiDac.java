@@ -31,6 +31,8 @@ import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
 
 /**
  * 償還払請求明細・住所地特例のデータアクセスクラスです。
+ *
+ * @reamsid_L DBC-9999-012 xicongwang
  */
 public class DbT3107ShokanMeisaiJushochiTokureiDac implements ISaveable<DbT3107ShokanMeisaiJushochiTokureiEntity> {
 

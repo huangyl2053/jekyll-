@@ -22,6 +22,8 @@ import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 
 /**
  * 償還払請求明細・住所地特例を管理するクラスです。
+ *
+ * @reamsid_L DBC-9999-012 xicongwang
  */
 public class ShokanMeisaiJushochiTokurei
         extends ModelBase<ShokanMeisaiJushochiTokureiIdentifier, DbT3107ShokanMeisaiJushochiTokureiEntity, ShokanMeisaiJushochiTokurei>
