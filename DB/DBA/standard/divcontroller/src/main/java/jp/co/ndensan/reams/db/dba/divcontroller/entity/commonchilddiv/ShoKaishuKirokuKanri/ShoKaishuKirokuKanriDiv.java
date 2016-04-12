@@ -12,9 +12,12 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 import java.util.HashSet;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ICommonChildDivMode;
 import jp.co.ndensan.reams.uz.uza.ui.servlets._CommonChildDivModeUtil;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Button;
 import jp.co.ndensan.reams.uz.uza.ui.binding.DataGrid;
 import jp.co.ndensan.reams.uz.uza.ui.binding.DropDownList;
+import jp.co.ndensan.reams.uz.uza.ui.binding.Mode;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TextBox;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxDate;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxMultiLine;
@@ -87,10 +90,10 @@ public class ShoKaishuKirokuKanriDiv extends Panel implements IShoKaishuKirokuKa
 
     public static enum DisplayMode implements ICommonChildDivMode {
 
-        照会("照会"),
-        照会_選択("照会_選択"),
-        修正("修正"),
-        削除("削除");
+        shokai("shokai"),
+        shokai_selected("shokai_selected"),
+        koshin("koshin"),
+        sakujyo("sakujyo");
 
         private final String name;
 
@@ -239,5 +242,9 @@ public class ShoKaishuKirokuKanriDiv extends Panel implements IShoKaishuKirokuKa
 
     // </editor-fold>
     //--------------- この行より下にコードを追加してください -------------------
+    @Override
+    public void initialize(RString 状態, HihokenshaNo 被保険者番号) {
+        new ShoKaishuKirokuKanriHandler(this).initialize(状態, 被保険者番号);
+    }
 
 }
