@@ -385,6 +385,7 @@ public class JiGyoSyaHandler {
 
         JigyoshaInputGuideFinder jigyosha = new JigyoshaInputGuideFinder();
         List<KeyValueDataSource> dataSource = new ArrayList();
+        List<RString> list = new ArrayList<>();
         SearchResult<KenCodeJigyoshaInputGuide> kenCodeJigyoshaInputGuide = jigyosha.getKenCodeJigyoshaInputGuide();
 
         if (!kenCodeJigyoshaInputGuide.records().isEmpty()) {
@@ -395,7 +396,10 @@ public class JiGyoSyaHandler {
                 KeyValue.setKey(entity.get都道府県住所コード());
                 KeyValue.setValue(entity.get都道府県住所コード().concat(new RString(":")).concat(entity.get都道府県名()));
 
-                dataSource.add(KeyValue);
+                if (!list.contains(entity.get都道府県住所コード())) {
+                    dataSource.add(KeyValue);
+                }
+                list.add(entity.get都道府県住所コード());
             }
         }
         return dataSource;
