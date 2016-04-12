@@ -69,8 +69,9 @@ import jp.co.ndensan.reams.uz.uza.util.db.SearchResult;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 
 /**
- *
  * 受給資格証明書のビジネスクラスです。
+ *
+ * @reamsid_L DBU-0490-050 wangchao
  */
 public class JukyuShikakuShomeishoFinder {
 

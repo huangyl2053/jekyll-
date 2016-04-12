@@ -11,8 +11,9 @@ import jp.co.ndensan.reams.uz.uza.biz.AtenaMeisho;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
- *
  * 受給資格証明書の帳票出力用データEntity
+ *
+ * @reamsid_L DBU-0490-050 wangchao
  */
 @lombok.Getter
 @lombok.Setter

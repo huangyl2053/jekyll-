@@ -9,8 +9,9 @@ import jp.co.ndensan.reams.db.dbu.definition.mybatisprm.jukyushikakushomeisho.Ju
 import jp.co.ndensan.reams.ua.uax.entity.db.basic.UaFt200FindShikibetsuTaishoEntity;
 
 /**
- *
  * 受給資格証明書データ作成 Mapper
+ *
+ * @reamsid_L DBU-0490-050 wangchao
  */
 public interface IJukyuShikakuShomeishoMapper {
 
