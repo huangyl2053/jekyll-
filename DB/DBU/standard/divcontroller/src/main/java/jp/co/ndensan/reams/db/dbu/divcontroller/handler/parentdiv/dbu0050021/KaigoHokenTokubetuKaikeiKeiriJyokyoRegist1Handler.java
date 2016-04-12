@@ -17,7 +17,6 @@ import jp.co.ndensan.reams.db.dbu.business.kaigohokentokubetukaikeikeirijyokyore
 import jp.co.ndensan.reams.db.dbu.divcontroller.controller.parentdiv.dbu0050011.TaishokensakuJyouken;
 import jp.co.ndensan.reams.db.dbu.divcontroller.entity.parentdiv.DBU0050021.DBU0050021StateName;
 import jp.co.ndensan.reams.db.dbu.divcontroller.entity.parentdiv.DBU0050021.KaigoHokenTokubetuKaikeiKeiriJyokyoRegist1Div;
-import jp.co.ndensan.reams.db.dbu.divcontroller.entity.parentdiv.DBU0050021.YoshikiyonMeisaiDiv;
 import jp.co.ndensan.reams.db.dbu.service.core.kaigohokentokubetukaikeikeirijyokyoregist.KaigoHokenTokubetuKaikeiKeiriJyokyoRegistManager;
 import jp.co.ndensan.reams.db.dbx.definition.core.hokensha.TokeiTaishoKubun;
 import jp.co.ndensan.reams.db.dbx.definition.core.util.ObjectUtil;
@@ -35,7 +34,6 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.KeyValueDataSource;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TextBox;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxCode;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxFlexibleDate;
-import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxNum;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.CommonButtonHolder;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ResponseHolder;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
@@ -67,7 +65,7 @@ public class KaigoHokenTokubetuKaikeiKeiriJyokyoRegist1Handler {
     private static final Decimal DECIMAL_0 = new Decimal("0");
     private static final RString DOUBLE_ZEOR = new RString("00");
     private final RString 状態1 = new RString("状態1");
-    private final RString 状態1_確定 = new RString("状態1");
+    private final RString 状態1_確定 = new RString("状態1_確定");
     private final RString 状態2 = new RString("状態2");
     private final RString 状態3 = new RString("状態3");
     private final Code 表番号_09 = new Code("09");
@@ -130,63 +128,6 @@ public class KaigoHokenTokubetuKaikeiKeiriJyokyoRegist1Handler {
     private final RString 歳入歳出差引残額横縦番号 = new RString("33_1");
     private final RString うち基金繰入額横縦番号 = new RString("34_1");
     private final RString 介護給付費準備基金保有額横縦番号 = new RString("35_1");
-    private final TextBoxNum 保険料;
-    private final TextBoxNum 総務費;
-    private final TextBoxNum 認定負担金;
-    private final TextBoxNum 介護サービス等諸費;
-    private final TextBoxNum その他;
-    private final TextBoxNum 介護予防サービス等諸費;
-    private final TextBoxNum 使用料;
-    private final TextBoxNum 高額介護サービス等費;
-    private final TextBoxNum 手数料;
-    private final TextBoxNum 高額医療合算介護サービス等費;
-    private final TextBoxNum 介護給付費負担金;
-    private final TextBoxNum 特定入所者介護サービス等費;
-    private final TextBoxNum 調整交付金;
-    private final TextBoxNum 審査支払手数料;
-    private final TextBoxNum 地域支援事業交付金_介護予防事業;
-    private final TextBoxNum 市町村特別給付費;
-    private final TextBoxNum 地域支援事業交付金_包括的支援事業;
-    private final TextBoxNum その他_保険給付費;
-    private final TextBoxNum その他_国庫支出金;
-    private final TextBoxNum 介護予防事業費;
-    private final TextBoxNum 介護給付費交付金;
-    private final TextBoxNum 包括的支援事業_任意事業_地域支援事業;
-    private final TextBoxNum 地域支援事業支援交付金;
-    private final TextBoxNum 財政安定化基金拠出金;
-    private final TextBoxNum 都道府県負担金;
-    private final TextBoxNum 相互財政安定化事業負担金;
-    private final TextBoxNum 財政安定化基金支出金;
-    private final TextBoxNum 保健福祉事業費;
-    private final TextBoxNum 都道府県支出金_地域支援事業交付金;
-    private final TextBoxNum 基金積立金;
-    private final TextBoxNum 地域支援事業交付金_任意事業;
-    private final TextBoxNum 財政安定化基金償還金;
-    private final TextBoxNum その他_都道府県支出金;
-    private final TextBoxNum その他_公債費;
-    private final TextBoxNum 相互財政安定化事業交付金;
-    private final TextBoxNum 予備費;
-    private final TextBoxNum 財産収入;
-    private final TextBoxNum 介護サービス事業勘定繰出金;
-    private final TextBoxNum 寄附金;
-    private final TextBoxNum 他会計繰出金;
-    private final TextBoxNum 一般会計繰入金;
-    private final TextBoxNum その他_諸支出金;
-    private final TextBoxNum 総務費に係る一般会計繰入金;
-    private final TextBoxNum 介護給付費準備基金繰入金;
-    private final TextBoxNum 介護サービス事業勘定繰入金;
-    private final TextBoxNum 地域支援事業繰入金_介護予防事業;
-    private final TextBoxNum 地域支援事業繰入金_任意事業;
-    private final TextBoxNum その他_繰入金;
-    private final TextBoxNum 繰越金;
-    private final TextBoxNum 財政安定化基金貸付金;
-    private final TextBoxNum その他_市町村債;
-    private final TextBoxNum 諸収入;
-    private final TextBoxNum 合計１;
-    private final TextBoxNum 合計２;
-    private final TextBoxNum 歳入歳出差引残額;
-    private final TextBoxNum うち基金繰入額;
-    private final TextBoxNum 介護給付費準備基金保有額;
 
     /**
      * コンストラクタです。
@@ -195,64 +136,6 @@ public class KaigoHokenTokubetuKaikeiKeiriJyokyoRegist1Handler {
      */
     public KaigoHokenTokubetuKaikeiKeiriJyokyoRegist1Handler(KaigoHokenTokubetuKaikeiKeiriJyokyoRegist1Div div) {
         this.div = div;
-        YoshikiyonMeisaiDiv yoshikiyonMeisaiDiv = div.getHihokenshabango().getYoshikiyonMeisai();
-        保険料 = yoshikiyonMeisaiDiv.getTxthokenryo();
-        総務費 = yoshikiyonMeisaiDiv.getTxtsaishutsusomu();
-        認定負担金 = yoshikiyonMeisaiDiv.getTxtnintei();
-        介護サービス等諸費 = yoshikiyonMeisaiDiv.getTxtlsabisunadoshohi();
-        その他 = yoshikiyonMeisaiDiv.getTxtfuntansonota();
-        介護予防サービス等諸費 = yoshikiyonMeisaiDiv.getTxtyobonadoshohi();
-        使用料 = yoshikiyonMeisaiDiv.getTxtshiyoo();
-        高額介護サービス等費 = yoshikiyonMeisaiDiv.getTxtkogakukaigo();
-        手数料 = yoshikiyonMeisaiDiv.getTxttesu();
-        高額医療合算介護サービス等費 = yoshikiyonMeisaiDiv.getTxtlkogakuiryo();
-        介護給付費負担金 = yoshikiyonMeisaiDiv.getTxtkyufu();
-        特定入所者介護サービス等費 = yoshikiyonMeisaiDiv.getTxttokuteinyusho();
-        調整交付金 = yoshikiyonMeisaiDiv.getTxtchosei();
-        審査支払手数料 = yoshikiyonMeisaiDiv.getTxtshinsashiharai();
-        地域支援事業交付金_介護予防事業 = yoshikiyonMeisaiDiv.getTxtkaigoyobo();
-        市町村特別給付費 = yoshikiyonMeisaiDiv.getTxtshichosontokubetsukyufu();
-        地域支援事業交付金_包括的支援事業 = yoshikiyonMeisaiDiv.getTxthokatsu();
-        その他_保険給付費 = yoshikiyonMeisaiDiv.getTxtkyusonota();
-        その他_国庫支出金 = yoshikiyonMeisaiDiv.getTxtkokkosonota();
-        介護予防事業費 = yoshikiyonMeisaiDiv.getTxtchiikikaigoyobo();
-        介護給付費交付金 = yoshikiyonMeisaiDiv.getTxtkyufukofukin();
-        包括的支援事業_任意事業_地域支援事業 = yoshikiyonMeisaiDiv.getTxtchiikihokatsujigyo();
-        地域支援事業支援交付金 = yoshikiyonMeisaiDiv.getTxtchiikishienkofukin();
-        財政安定化基金拠出金 = yoshikiyonMeisaiDiv.getTxtzaisanantei();
-        都道府県負担金 = yoshikiyonMeisaiDiv.getTxttodofukenfutankin();
-        相互財政安定化事業負担金 = yoshikiyonMeisaiDiv.getTxtkokkozaisan();
-        財政安定化基金支出金 = yoshikiyonMeisaiDiv.getTxtzaiseiantei();
-        保健福祉事業費 = yoshikiyonMeisaiDiv.getTxthokenfukushi();
-        都道府県支出金_地域支援事業交付金 = yoshikiyonMeisaiDiv.getTxtchiikishienyobo();
-        基金積立金 = yoshikiyonMeisaiDiv.getTxtkikin();
-        地域支援事業交付金_任意事業 = yoshikiyonMeisaiDiv.getTxtchiikishienhokatsu();
-        財政安定化基金償還金 = yoshikiyonMeisaiDiv.getTxtv();
-        その他_都道府県支出金 = yoshikiyonMeisaiDiv.getTxttodofukensonota();
-        その他_公債費 = yoshikiyonMeisaiDiv.getTxtkosaikosaisonota();
-        相互財政安定化事業交付金 = yoshikiyonMeisaiDiv.getTxtzaisanshunyu();
-        予備費 = yoshikiyonMeisaiDiv.getTxtyobihi();
-        財産収入 = yoshikiyonMeisaiDiv.getTxtzaisanshuny();
-        介護サービス事業勘定繰出金 = yoshikiyonMeisaiDiv.getTxtkaigosabisukanjo();
-        寄附金 = yoshikiyonMeisaiDiv.getTxtkifukin();
-        他会計繰出金 = yoshikiyonMeisaiDiv.getTxttakaikei();
-        一般会計繰入金 = yoshikiyonMeisaiDiv.getTxtippankaikei();
-        その他_諸支出金 = yoshikiyonMeisaiDiv.getTxtshoshishutsusonota();
-        総務費に係る一般会計繰入金 = yoshikiyonMeisaiDiv.getTxtsomuhi();
-        介護給付費準備基金繰入金 = yoshikiyonMeisaiDiv.getTxtjumbikikin();
-        介護サービス事業勘定繰入金 = yoshikiyonMeisaiDiv.getTxtchiikishienkaigoyobo();
-        地域支援事業繰入金_介護予防事業 = yoshikiyonMeisaiDiv.getTxttiikikaigoyobo();
-        地域支援事業繰入金_任意事業 = yoshikiyonMeisaiDiv.getTxtkurichiikishienhokatsu();
-        その他_繰入金 = yoshikiyonMeisaiDiv.getTxtkurinyukinsonota();
-        繰越金 = yoshikiyonMeisaiDiv.getTxtkurikoshikin();
-        財政安定化基金貸付金 = yoshikiyonMeisaiDiv.getTxtsaizaiseiantei();
-        その他_市町村債 = yoshikiyonMeisaiDiv.getTxtsaisonota();
-        諸収入 = yoshikiyonMeisaiDiv.getTxtshoshunyu();
-        合計１ = yoshikiyonMeisaiDiv.getTxtsainyugokei();
-        合計２ = yoshikiyonMeisaiDiv.getTxtsaishutsugoukei();
-        歳入歳出差引残額 = yoshikiyonMeisaiDiv.getTxtsainyushutsusa();
-        うち基金繰入額 = yoshikiyonMeisaiDiv.getTxtuchikikinkurigaku();
-        介護給付費準備基金保有額 = yoshikiyonMeisaiDiv.getTxtkaigokyufuhijunhoyu();
     }
 
     /**
@@ -410,7 +293,7 @@ public class KaigoHokenTokubetuKaikeiKeiriJyokyoRegist1Handler {
             set詳細データエリア(詳細データ);
         }
         if (状態2.equals(状態) || 状態3.equals(状態) || 状態1.equals(状態) || 状態1_確定.equals(状態)) {
-            Boolean isReadOnly = 状態3.equals(状態);
+            Boolean isReadOnly = 状態3.equals(状態) || 状態1.equals(状態);
             is詳細データエリアReadOnly(isReadOnly);
         }
     }
@@ -590,126 +473,183 @@ public class KaigoHokenTokubetuKaikeiKeiriJyokyoRegist1Handler {
 
     private void set画面入力詳細データエリ1(Map<RString, Decimal> 画面入力詳細データエリ) {
         画面入力詳細データエリ.put(保険料横縦番号,
-                保険料.getValue() == null ? DECIMAL_0 : 保険料.getValue());
+                div.getHihokenshabango().getYoshikiyonMeisai().getTxthokenryo().getValue() == null
+                ? DECIMAL_0 : div.getHihokenshabango().getYoshikiyonMeisai().getTxthokenryo().getValue());
         画面入力詳細データエリ.put(総務費横縦番号,
-                総務費.getValue() == null ? DECIMAL_0 : 総務費.getValue());
+                div.getHihokenshabango().getYoshikiyonMeisai().getTxtsaishutsusomu().getValue() == null
+                ? DECIMAL_0 : div.getHihokenshabango().getYoshikiyonMeisai().getTxtsaishutsusomu().getValue());
         画面入力詳細データエリ.put(認定負担金横縦番号,
-                認定負担金.getValue() == null ? DECIMAL_0 : 認定負担金.getValue());
+                div.getHihokenshabango().getYoshikiyonMeisai().getTxtnintei().getValue() == null
+                ? DECIMAL_0 : div.getHihokenshabango().getYoshikiyonMeisai().getTxtnintei().getValue());
         画面入力詳細データエリ.put(介護サービス等諸費横縦番号,
-                介護サービス等諸費.getValue() == null ? DECIMAL_0 : 介護サービス等諸費.getValue());
-        画面入力詳細データエリ.put(その他横縦番号, その他.getValue() == null ? DECIMAL_0 : その他.getValue());
+                div.getHihokenshabango().getYoshikiyonMeisai().getTxtlsabisunadoshohi().getValue() == null
+                ? DECIMAL_0 : div.getHihokenshabango().getYoshikiyonMeisai().getTxtlsabisunadoshohi().getValue());
+        画面入力詳細データエリ.put(その他横縦番号, div.getHihokenshabango().getYoshikiyonMeisai().getTxtfuntansonota().getValue() == null ? DECIMAL_0
+                : div.getHihokenshabango().getYoshikiyonMeisai().getTxtfuntansonota().getValue());
         画面入力詳細データエリ.put(介護予防サービス等諸費横縦番号,
-                介護予防サービス等諸費.getValue() == null ? DECIMAL_0 : 介護予防サービス等諸費.getValue());
+                div.getHihokenshabango().getYoshikiyonMeisai().getTxtyobonadoshohi().getValue() == null
+                ? DECIMAL_0 : div.getHihokenshabango().getYoshikiyonMeisai().getTxtyobonadoshohi().getValue());
         画面入力詳細データエリ.put(使用料横縦番号,
-                使用料.getValue() == null ? DECIMAL_0 : 使用料.getValue());
+                div.getHihokenshabango().getYoshikiyonMeisai().getTxtshiyoo().getValue() == null
+                ? DECIMAL_0 : div.getHihokenshabango().getYoshikiyonMeisai().getTxtshiyoo().getValue());
         画面入力詳細データエリ.put(高額介護サービス等費横縦番号,
-                高額介護サービス等費.getValue() == null ? DECIMAL_0 : 高額介護サービス等費.getValue());
+                div.getHihokenshabango().getYoshikiyonMeisai().getTxtkogakukaigo().getValue() == null
+                ? DECIMAL_0 : div.getHihokenshabango().getYoshikiyonMeisai().getTxtkogakukaigo().getValue());
         画面入力詳細データエリ.put(手数料横縦番号,
-                手数料.getValue() == null ? DECIMAL_0 : 手数料.getValue());
+                div.getHihokenshabango().getYoshikiyonMeisai().getTxttesu().getValue() == null
+                ? DECIMAL_0 : div.getHihokenshabango().getYoshikiyonMeisai().getTxttesu().getValue());
         画面入力詳細データエリ.put(高額医療合算介護サービス等費横縦番号,
-                高額医療合算介護サービス等費.getValue() == null ? DECIMAL_0 : 高額医療合算介護サービス等費.getValue());
-        画面入力詳細データエリ.put(介護給付費負担金横縦番号, 介護給付費負担金.getValue() == null ? DECIMAL_0 : 介護給付費負担金.getValue());
+                div.getHihokenshabango().getYoshikiyonMeisai().getTxtlkogakuiryo().getValue() == null
+                ? DECIMAL_0 : div.getHihokenshabango().getYoshikiyonMeisai().getTxtlkogakuiryo().getValue());
+        画面入力詳細データエリ.put(介護給付費負担金横縦番号, div.getHihokenshabango().getYoshikiyonMeisai().getTxtkyufu().getValue() == null
+                ? DECIMAL_0 : div.getHihokenshabango().getYoshikiyonMeisai().getTxtkyufu().getValue());
         画面入力詳細データエリ.put(特定入所者介護サービス等費横縦番号,
-                特定入所者介護サービス等費.getValue() == null ? DECIMAL_0 : 特定入所者介護サービス等費.getValue());
+                div.getHihokenshabango().getYoshikiyonMeisai().getTxttokuteinyusho().getValue() == null
+                ? DECIMAL_0 : div.getHihokenshabango().getYoshikiyonMeisai().getTxttokuteinyusho().getValue());
         画面入力詳細データエリ.put(調整交付金横縦番号,
-                調整交付金.getValue() == null ? DECIMAL_0 : 調整交付金.getValue());
+                div.getHihokenshabango().getYoshikiyonMeisai().getTxtchosei().getValue() == null
+                ? DECIMAL_0 : div.getHihokenshabango().getYoshikiyonMeisai().getTxtchosei().getValue());
         画面入力詳細データエリ.put(審査支払手数料横縦番号,
-                審査支払手数料.getValue() == null ? DECIMAL_0 : 審査支払手数料.getValue());
+                div.getHihokenshabango().getYoshikiyonMeisai().getTxtshinsashiharai().getValue() == null
+                ? DECIMAL_0 : div.getHihokenshabango().getYoshikiyonMeisai().getTxtshinsashiharai().getValue());
         画面入力詳細データエリ.put(地域支援事業交付金_介護予防事業横縦番号,
-                地域支援事業交付金_介護予防事業.getValue() == null ? DECIMAL_0 : 地域支援事業交付金_介護予防事業.getValue());
+                div.getHihokenshabango().getYoshikiyonMeisai().getTxtkaigoyobo().getValue() == null
+                ? DECIMAL_0 : div.getHihokenshabango().getYoshikiyonMeisai().getTxtkaigoyobo().getValue());
         画面入力詳細データエリ.put(市町村特別給付費横縦番号,
-                市町村特別給付費.getValue() == null ? DECIMAL_0 : 市町村特別給付費.getValue());
+                div.getHihokenshabango().getYoshikiyonMeisai().getTxtshichosontokubetsukyufu().getValue() == null
+                ? DECIMAL_0 : div.getHihokenshabango().getYoshikiyonMeisai().getTxtshichosontokubetsukyufu().getValue());
         画面入力詳細データエリ.put(地域支援事業交付金_包括的支援事業横縦番号,
-                地域支援事業交付金_包括的支援事業.getValue() == null ? DECIMAL_0 : 地域支援事業交付金_包括的支援事業.getValue());
+                div.getHihokenshabango().getYoshikiyonMeisai().getTxthokatsu().getValue() == null
+                ? DECIMAL_0 : div.getHihokenshabango().getYoshikiyonMeisai().getTxthokatsu().getValue());
         画面入力詳細データエリ.put(その他_保険給付費横縦番号,
-                その他_保険給付費.getValue() == null ? DECIMAL_0 : その他_保険給付費.getValue());
+                div.getHihokenshabango().getYoshikiyonMeisai().getTxtkyusonota().getValue() == null
+                ? DECIMAL_0 : div.getHihokenshabango().getYoshikiyonMeisai().getTxtkyusonota().getValue());
     }
 
     private void set画面入力詳細データエリ2(Map<RString, Decimal> 画面入力詳細データエリ) {
         画面入力詳細データエリ.put(その他_国庫支出金横縦番号,
-                その他_国庫支出金.getValue() == null ? DECIMAL_0 : その他_国庫支出金.getValue());
+                div.getHihokenshabango().getYoshikiyonMeisai().getTxtkokkosonota().getValue() == null
+                ? DECIMAL_0 : div.getHihokenshabango().getYoshikiyonMeisai().getTxtkokkosonota().getValue());
         画面入力詳細データエリ.put(介護予防事業費横縦番号,
-                介護予防事業費.getValue() == null ? DECIMAL_0 : 介護予防事業費.getValue());
+                div.getHihokenshabango().getYoshikiyonMeisai().getTxtchiikikaigoyobo().getValue() == null
+                ? DECIMAL_0 : div.getHihokenshabango().getYoshikiyonMeisai().getTxtchiikikaigoyobo().getValue());
         画面入力詳細データエリ.put(介護給付費交付金横縦番号,
-                介護給付費交付金.getValue() == null ? DECIMAL_0 : 介護給付費交付金.getValue());
+                div.getHihokenshabango().getYoshikiyonMeisai().getTxtkyufukofukin().getValue() == null
+                ? DECIMAL_0 : div.getHihokenshabango().getYoshikiyonMeisai().getTxtkyufukofukin().getValue());
         画面入力詳細データエリ.put(包括的支援事業_任意事業_地域支援事業横縦番号,
-                包括的支援事業_任意事業_地域支援事業.getValue() == null ? DECIMAL_0 : 包括的支援事業_任意事業_地域支援事業.getValue());
+                div.getHihokenshabango().getYoshikiyonMeisai().getTxtchiikihokatsujigyo().getValue() == null
+                ? DECIMAL_0 : div.getHihokenshabango().getYoshikiyonMeisai().getTxtchiikihokatsujigyo().getValue());
         画面入力詳細データエリ.put(地域支援事業支援交付金横縦番号,
-                地域支援事業支援交付金.getValue() == null ? DECIMAL_0 : 地域支援事業支援交付金.getValue());
+                div.getHihokenshabango().getYoshikiyonMeisai().getTxtchiikishienkofukin().getValue() == null
+                ? DECIMAL_0 : div.getHihokenshabango().getYoshikiyonMeisai().getTxtchiikishienkofukin().getValue());
         画面入力詳細データエリ.put(財政安定化基金拠出金横縦番号,
-                財政安定化基金拠出金.getValue() == null ? DECIMAL_0 : 財政安定化基金拠出金.getValue());
+                div.getHihokenshabango().getYoshikiyonMeisai().getTxtzaisanantei().getValue() == null
+                ? DECIMAL_0 : div.getHihokenshabango().getYoshikiyonMeisai().getTxtzaisanantei().getValue());
         画面入力詳細データエリ.put(都道府県負担金横縦番号,
-                都道府県負担金.getValue() == null ? DECIMAL_0 : 都道府県負担金.getValue());
+                div.getHihokenshabango().getYoshikiyonMeisai().getTxttodofukenfutankin().getValue() == null
+                ? DECIMAL_0 : div.getHihokenshabango().getYoshikiyonMeisai().getTxttodofukenfutankin().getValue());
         画面入力詳細データエリ.put(相互財政安定化事業負担金横縦番号,
-                相互財政安定化事業負担金.getValue() == null ? DECIMAL_0 : 相互財政安定化事業負担金.getValue());
+                div.getHihokenshabango().getYoshikiyonMeisai().getTxtkokkozaisan().getValue() == null
+                ? DECIMAL_0 : div.getHihokenshabango().getYoshikiyonMeisai().getTxtkokkozaisan().getValue());
         画面入力詳細データエリ.put(財政安定化基金支出金横縦番号,
-                財政安定化基金支出金.getValue() == null ? DECIMAL_0 : 財政安定化基金支出金.getValue());
+                div.getHihokenshabango().getYoshikiyonMeisai().getTxtzaiseiantei().getValue() == null
+                ? DECIMAL_0 : div.getHihokenshabango().getYoshikiyonMeisai().getTxtzaiseiantei().getValue());
         画面入力詳細データエリ.put(保健福祉事業費横縦番号,
-                保健福祉事業費.getValue() == null ? DECIMAL_0 : 保健福祉事業費.getValue());
+                div.getHihokenshabango().getYoshikiyonMeisai().getTxthokenfukushi().getValue() == null
+                ? DECIMAL_0 : div.getHihokenshabango().getYoshikiyonMeisai().getTxthokenfukushi().getValue());
         画面入力詳細データエリ.put(都道府県支出金_地域支援事業交付金横縦番号,
-                都道府県支出金_地域支援事業交付金.getValue() == null ? DECIMAL_0 : 都道府県支出金_地域支援事業交付金.getValue());
+                div.getHihokenshabango().getYoshikiyonMeisai().getTxtchiikishienyobo().getValue() == null
+                ? DECIMAL_0 : div.getHihokenshabango().getYoshikiyonMeisai().getTxtchiikishienyobo().getValue());
         画面入力詳細データエリ.put(基金積立金横縦番号,
-                基金積立金.getValue() == null ? DECIMAL_0 : 基金積立金.getValue());
+                div.getHihokenshabango().getYoshikiyonMeisai().getTxtkikin().getValue() == null
+                ? DECIMAL_0 : div.getHihokenshabango().getYoshikiyonMeisai().getTxtkikin().getValue());
         画面入力詳細データエリ.put(地域支援事業交付金_任意事業横縦番号,
-                地域支援事業交付金_任意事業.getValue() == null ? DECIMAL_0 : 地域支援事業交付金_任意事業.getValue());
+                div.getHihokenshabango().getYoshikiyonMeisai().getTxtchiikishienhokatsu().getValue() == null
+                ? DECIMAL_0 : div.getHihokenshabango().getYoshikiyonMeisai().getTxtchiikishienhokatsu().getValue());
         画面入力詳細データエリ.put(財政安定化基金償還金横縦番号,
-                財政安定化基金償還金.getValue() == null ? DECIMAL_0 : 財政安定化基金償還金.getValue());
+                div.getHihokenshabango().getYoshikiyonMeisai().getTxtv().getValue() == null
+                ? DECIMAL_0 : div.getHihokenshabango().getYoshikiyonMeisai().getTxtv().getValue());
         画面入力詳細データエリ.put(その他_都道府県支出金横縦番号,
-                その他_都道府県支出金.getValue() == null ? DECIMAL_0 : その他_都道府県支出金.getValue());
+                div.getHihokenshabango().getYoshikiyonMeisai().getTxttodofukensonota().getValue() == null
+                ? DECIMAL_0 : div.getHihokenshabango().getYoshikiyonMeisai().getTxttodofukensonota().getValue());
         画面入力詳細データエリ.put(その他_公債費横縦番号,
-                その他_公債費.getValue() == null ? DECIMAL_0 : その他_公債費.getValue());
+                div.getHihokenshabango().getYoshikiyonMeisai().getTxtkosaikosaisonota().getValue() == null
+                ? DECIMAL_0 : div.getHihokenshabango().getYoshikiyonMeisai().getTxtkosaikosaisonota().getValue());
         画面入力詳細データエリ.put(相互財政安定化事業交付金横縦番号,
-                相互財政安定化事業交付金.getValue() == null ? DECIMAL_0 : 相互財政安定化事業交付金.getValue());
+                div.getHihokenshabango().getYoshikiyonMeisai().getTxtzaisanshunyu().getValue() == null
+                ? DECIMAL_0 : div.getHihokenshabango().getYoshikiyonMeisai().getTxtzaisanshunyu().getValue());
         画面入力詳細データエリ.put(予備費横縦番号,
-                予備費.getValue() == null ? DECIMAL_0 : 予備費.getValue());
+                div.getHihokenshabango().getYoshikiyonMeisai().getTxtyobihi().getValue() == null
+                ? DECIMAL_0 : div.getHihokenshabango().getYoshikiyonMeisai().getTxtyobihi().getValue());
     }
 
     private void set画面入力詳細データエリ3(Map<RString, Decimal> 画面入力詳細データエリ) {
         画面入力詳細データエリ.put(財産収入横縦番号,
-                財産収入.getValue() == null ? DECIMAL_0 : 財産収入.getValue());
+                div.getHihokenshabango().getYoshikiyonMeisai().getTxtzaisanshuny().getValue() == null
+                ? DECIMAL_0 : div.getHihokenshabango().getYoshikiyonMeisai().getTxtzaisanshuny().getValue());
         画面入力詳細データエリ.put(介護サービス事業勘定繰出金横縦番号,
-                介護サービス事業勘定繰出金.getValue() == null ? DECIMAL_0 : 介護サービス事業勘定繰出金.getValue());
+                div.getHihokenshabango().getYoshikiyonMeisai().getTxtkaigosabisukanjo().getValue() == null
+                ? DECIMAL_0 : div.getHihokenshabango().getYoshikiyonMeisai().getTxtkaigosabisukanjo().getValue());
         画面入力詳細データエリ.put(寄附金横縦番号,
-                寄附金.getValue() == null ? DECIMAL_0 : 寄附金.getValue());
+                div.getHihokenshabango().getYoshikiyonMeisai().getTxtkifukin().getValue() == null
+                ? DECIMAL_0 : div.getHihokenshabango().getYoshikiyonMeisai().getTxtkifukin().getValue());
         画面入力詳細データエリ.put(他会計繰出金横縦番号,
-                他会計繰出金.getValue() == null ? DECIMAL_0 : 他会計繰出金.getValue());
+                div.getHihokenshabango().getYoshikiyonMeisai().getTxttakaikei().getValue() == null
+                ? DECIMAL_0 : div.getHihokenshabango().getYoshikiyonMeisai().getTxttakaikei().getValue());
         画面入力詳細データエリ.put(一般会計繰入金横縦番号,
-                一般会計繰入金.getValue() == null ? DECIMAL_0 : 一般会計繰入金.getValue());
+                div.getHihokenshabango().getYoshikiyonMeisai().getTxtippankaikei().getValue() == null
+                ? DECIMAL_0 : div.getHihokenshabango().getYoshikiyonMeisai().getTxtippankaikei().getValue());
         画面入力詳細データエリ.put(その他_諸支出金横縦番号,
-                その他_諸支出金.getValue() == null ? DECIMAL_0 : その他_諸支出金.getValue());
+                div.getHihokenshabango().getYoshikiyonMeisai().getTxtshoshishutsusonota().getValue() == null
+                ? DECIMAL_0 : div.getHihokenshabango().getYoshikiyonMeisai().getTxtshoshishutsusonota().getValue());
         画面入力詳細データエリ.put(総務費に係る一般会計繰入金横縦番号,
-                総務費に係る一般会計繰入金.getValue() == null ? DECIMAL_0 : 総務費に係る一般会計繰入金.getValue());
+                div.getHihokenshabango().getYoshikiyonMeisai().getTxtsomuhi().getValue() == null
+                ? DECIMAL_0 : div.getHihokenshabango().getYoshikiyonMeisai().getTxtsomuhi().getValue());
         画面入力詳細データエリ.put(介護給付費準備基金繰入金横縦番号,
-                介護給付費準備基金繰入金.getValue() == null ? DECIMAL_0 : 介護給付費準備基金繰入金.getValue());
+                div.getHihokenshabango().getYoshikiyonMeisai().getTxtjumbikikin().getValue() == null
+                ? DECIMAL_0 : div.getHihokenshabango().getYoshikiyonMeisai().getTxtjumbikikin().getValue());
         画面入力詳細データエリ.put(介護サービス事業勘定繰入金横縦番号,
-                介護サービス事業勘定繰入金.getValue() == null ? DECIMAL_0 : 介護サービス事業勘定繰入金.getValue());
+                div.getHihokenshabango().getYoshikiyonMeisai().getTxtchiikishienkaigoyobo().getValue() == null
+                ? DECIMAL_0 : div.getHihokenshabango().getYoshikiyonMeisai().getTxtchiikishienkaigoyobo().getValue());
         画面入力詳細データエリ.put(地域支援事業繰入金_介護予防事業横縦番号,
-                地域支援事業繰入金_介護予防事業.getValue() == null ? DECIMAL_0 : 地域支援事業繰入金_介護予防事業.getValue());
+                div.getHihokenshabango().getYoshikiyonMeisai().getTxttiikikaigoyobo().getValue() == null
+                ? DECIMAL_0 : div.getHihokenshabango().getYoshikiyonMeisai().getTxttiikikaigoyobo().getValue());
         画面入力詳細データエリ.put(地域支援事業繰入金_任意事業横縦番号,
-                地域支援事業繰入金_任意事業.getValue() == null ? DECIMAL_0 : 地域支援事業繰入金_任意事業.getValue());
+                div.getHihokenshabango().getYoshikiyonMeisai().getTxtkurichiikishienhokatsu().getValue() == null
+                ? DECIMAL_0 : div.getHihokenshabango().getYoshikiyonMeisai().getTxtkurichiikishienhokatsu().getValue());
         画面入力詳細データエリ.put(その他_繰入金横縦番号,
-                その他_繰入金.getValue() == null ? DECIMAL_0 : その他_繰入金.getValue());
+                div.getHihokenshabango().getYoshikiyonMeisai().getTxtkurinyukinsonota().getValue() == null
+                ? DECIMAL_0 : div.getHihokenshabango().getYoshikiyonMeisai().getTxtkurinyukinsonota().getValue());
     }
 
     private void set画面入力詳細データエリ4(Map<RString, Decimal> 画面入力詳細データエリ) {
         画面入力詳細データエリ.put(繰越金横縦番号,
-                繰越金.getValue() == null ? DECIMAL_0 : 繰越金.getValue());
+                div.getHihokenshabango().getYoshikiyonMeisai().getTxtkurikoshikin().getValue() == null
+                ? DECIMAL_0 : div.getHihokenshabango().getYoshikiyonMeisai().getTxtkurikoshikin().getValue());
         画面入力詳細データエリ.put(財政安定化基金貸付金横縦番号,
-                財政安定化基金貸付金.getValue() == null ? DECIMAL_0 : 財政安定化基金貸付金.getValue());
+                div.getHihokenshabango().getYoshikiyonMeisai().getTxtsaizaiseiantei().getValue() == null
+                ? DECIMAL_0 : div.getHihokenshabango().getYoshikiyonMeisai().getTxtsaizaiseiantei().getValue());
         画面入力詳細データエリ.put(その他_市町村債横縦番号,
-                その他_市町村債.getValue() == null ? DECIMAL_0 : その他_市町村債.getValue());
+                div.getHihokenshabango().getYoshikiyonMeisai().getTxtsaisonota().getValue() == null
+                ? DECIMAL_0 : div.getHihokenshabango().getYoshikiyonMeisai().getTxtsaisonota().getValue());
         画面入力詳細データエリ.put(諸収入横縦番号,
-                諸収入.getValue() == null ? DECIMAL_0 : 諸収入.getValue());
+                div.getHihokenshabango().getYoshikiyonMeisai().getTxtshoshunyu().getValue() == null
+                ? DECIMAL_0 : div.getHihokenshabango().getYoshikiyonMeisai().getTxtshoshunyu().getValue());
         画面入力詳細データエリ.put(合計１横縦番号,
-                合計１.getValue() == null ? DECIMAL_0 : 合計１.getValue());
+                div.getHihokenshabango().getYoshikiyonMeisai().getTxtsainyugokei().getValue() == null
+                ? DECIMAL_0 : div.getHihokenshabango().getYoshikiyonMeisai().getTxtsainyugokei().getValue());
         画面入力詳細データエリ.put(合計２横縦番号,
-                合計２.getValue() == null ? DECIMAL_0 : 合計２.getValue());
+                div.getHihokenshabango().getYoshikiyonMeisai().getTxtsaishutsugoukei().getValue() == null
+                ? DECIMAL_0 : div.getHihokenshabango().getYoshikiyonMeisai().getTxtsaishutsugoukei().getValue());
         画面入力詳細データエリ.put(歳入歳出差引残額横縦番号,
-                歳入歳出差引残額.getValue() == null ? DECIMAL_0 : 歳入歳出差引残額.getValue());
+                div.getHihokenshabango().getYoshikiyonMeisai().getTxtsainyushutsusa().getValue() == null
+                ? DECIMAL_0 : div.getHihokenshabango().getYoshikiyonMeisai().getTxtsainyushutsusa().getValue());
         画面入力詳細データエリ.put(うち基金繰入額横縦番号,
-                うち基金繰入額.getValue() == null ? DECIMAL_0 : うち基金繰入額.getValue());
+                div.getHihokenshabango().getYoshikiyonMeisai().getTxtuchikikinkurigaku().getValue() == null
+                ? DECIMAL_0 : div.getHihokenshabango().getYoshikiyonMeisai().getTxtuchikikinkurigaku().getValue());
         画面入力詳細データエリ.put(介護給付費準備基金保有額横縦番号,
-                介護給付費準備基金保有額.getValue() == null ? DECIMAL_0 : 介護給付費準備基金保有額.getValue());
+                div.getHihokenshabango().getYoshikiyonMeisai().getTxtkaigokyufuhijunhoyu().getValue() == null
+                ? DECIMAL_0 : div.getHihokenshabango().getYoshikiyonMeisai().getTxtkaigokyufuhijunhoyu().getValue());
     }
 
     /**
@@ -755,179 +695,179 @@ public class KaigoHokenTokubetuKaikeiKeiriJyokyoRegist1Handler {
     }
 
     private void set詳細データエリア(KaigoHokenJigyoHokokuNenpo 詳細データ) {
-        保険料.setValue(
+        div.getHihokenshabango().getYoshikiyonMeisai().getTxthokenryo().setValue(
                 new Decimal(ObjectUtil.defaultIfNull(詳細データ.get詳細データエリア().get(保険料横縦番号), new RString("0")).toString()));
-        総務費.setValue(
+        div.getHihokenshabango().getYoshikiyonMeisai().getTxtsaishutsusomu().setValue(
                 new Decimal(ObjectUtil.defaultIfNull(詳細データ.get詳細データエリア().get(総務費横縦番号), new RString("0")).toString()));
-        認定負担金.setValue(new Decimal(ObjectUtil.defaultIfNull(
+        div.getHihokenshabango().getYoshikiyonMeisai().getTxtnintei().setValue(new Decimal(ObjectUtil.defaultIfNull(
                 詳細データ.get詳細データエリア().get(認定負担金横縦番号), new RString("0")).toString()));
-        介護サービス等諸費.setValue(new Decimal(ObjectUtil.defaultIfNull(
+        div.getHihokenshabango().getYoshikiyonMeisai().getTxtlsabisunadoshohi().setValue(new Decimal(ObjectUtil.defaultIfNull(
                 詳細データ.get詳細データエリア().get(介護サービス等諸費横縦番号), new RString("0")).toString()));
-        その他.setValue(new Decimal(ObjectUtil.defaultIfNull(
+        div.getHihokenshabango().getYoshikiyonMeisai().getTxtfuntansonota().setValue(new Decimal(ObjectUtil.defaultIfNull(
                 詳細データ.get詳細データエリア().get(その他横縦番号), new RString("0")).toString()));
-        介護予防サービス等諸費.setValue(new Decimal(ObjectUtil.defaultIfNull(
+        div.getHihokenshabango().getYoshikiyonMeisai().getTxtyobonadoshohi().setValue(new Decimal(ObjectUtil.defaultIfNull(
                 詳細データ.get詳細データエリア().get(介護予防サービス等諸費横縦番号), new RString("0")).toString()));
-        使用料.setValue(new Decimal(ObjectUtil.defaultIfNull(
+        div.getHihokenshabango().getYoshikiyonMeisai().getTxtshiyoo().setValue(new Decimal(ObjectUtil.defaultIfNull(
                 詳細データ.get詳細データエリア().get(使用料横縦番号), new RString("0")).toString()));
-        高額介護サービス等費.setValue(new Decimal(ObjectUtil.defaultIfNull(
+        div.getHihokenshabango().getYoshikiyonMeisai().getTxtkogakukaigo().setValue(new Decimal(ObjectUtil.defaultIfNull(
                 詳細データ.get詳細データエリア().get(高額介護サービス等費横縦番号), new RString("0")).toString()));
-        手数料.setValue(new Decimal(ObjectUtil.defaultIfNull(
+        div.getHihokenshabango().getYoshikiyonMeisai().getTxttesu().setValue(new Decimal(ObjectUtil.defaultIfNull(
                 詳細データ.get詳細データエリア().get(手数料横縦番号), new RString("0")).toString()));
-        高額医療合算介護サービス等費.setValue(new Decimal(ObjectUtil.defaultIfNull(
+        div.getHihokenshabango().getYoshikiyonMeisai().getTxtlkogakuiryo().setValue(new Decimal(ObjectUtil.defaultIfNull(
                 詳細データ.get詳細データエリア().get(高額医療合算介護サービス等費横縦番号), new RString("0")).toString()));
-        介護給付費負担金.setValue(new Decimal(ObjectUtil.defaultIfNull(
+        div.getHihokenshabango().getYoshikiyonMeisai().getTxtkyufu().setValue(new Decimal(ObjectUtil.defaultIfNull(
                 詳細データ.get詳細データエリア().get(介護給付費負担金横縦番号), new RString("0")).toString()));
-        特定入所者介護サービス等費.setValue(new Decimal(ObjectUtil.defaultIfNull(
+        div.getHihokenshabango().getYoshikiyonMeisai().getTxttokuteinyusho().setValue(new Decimal(ObjectUtil.defaultIfNull(
                 詳細データ.get詳細データエリア().get(特定入所者介護サービス等費横縦番号), new RString("0")).toString()));
-        調整交付金.setValue(new Decimal(ObjectUtil.defaultIfNull(
+        div.getHihokenshabango().getYoshikiyonMeisai().getTxtchosei().setValue(new Decimal(ObjectUtil.defaultIfNull(
                 詳細データ.get詳細データエリア().get(調整交付金横縦番号), new RString("0")).toString()));
-        審査支払手数料.setValue(new Decimal(ObjectUtil.defaultIfNull(
+        div.getHihokenshabango().getYoshikiyonMeisai().getTxtshinsashiharai().setValue(new Decimal(ObjectUtil.defaultIfNull(
                 詳細データ.get詳細データエリア().get(審査支払手数料横縦番号), new RString("0")).toString()));
-        地域支援事業交付金_介護予防事業.setValue(new Decimal(ObjectUtil.defaultIfNull(
+        div.getHihokenshabango().getYoshikiyonMeisai().getTxtkaigoyobo().setValue(new Decimal(ObjectUtil.defaultIfNull(
                 詳細データ.get詳細データエリア().get(地域支援事業交付金_介護予防事業横縦番号), new RString("0")).toString()));
-        市町村特別給付費.setValue(new Decimal(ObjectUtil.defaultIfNull(
+        div.getHihokenshabango().getYoshikiyonMeisai().getTxtshichosontokubetsukyufu().setValue(new Decimal(ObjectUtil.defaultIfNull(
                 詳細データ.get詳細データエリア().get(市町村特別給付費横縦番号), new RString("0")).toString()));
-        地域支援事業交付金_包括的支援事業.setValue(new Decimal(ObjectUtil.defaultIfNull(
+        div.getHihokenshabango().getYoshikiyonMeisai().getTxthokatsu().setValue(new Decimal(ObjectUtil.defaultIfNull(
                 詳細データ.get詳細データエリア().get(地域支援事業交付金_包括的支援事業横縦番号), new RString("0")).toString()));
-        その他_保険給付費.setValue(new Decimal(ObjectUtil.defaultIfNull(
+        div.getHihokenshabango().getYoshikiyonMeisai().getTxtkyusonota().setValue(new Decimal(ObjectUtil.defaultIfNull(
                 詳細データ.get詳細データエリア().get(その他_保険給付費横縦番号), new RString("0")).toString()));
-        その他_国庫支出金.setValue(new Decimal(ObjectUtil.defaultIfNull(
+        div.getHihokenshabango().getYoshikiyonMeisai().getTxtkokkosonota().setValue(new Decimal(ObjectUtil.defaultIfNull(
                 詳細データ.get詳細データエリア().get(その他_国庫支出金横縦番号), new RString("0")).toString()));
-        介護予防事業費.setValue(new Decimal(ObjectUtil.defaultIfNull(
+        div.getHihokenshabango().getYoshikiyonMeisai().getTxtchiikikaigoyobo().setValue(new Decimal(ObjectUtil.defaultIfNull(
                 詳細データ.get詳細データエリア().get(介護予防事業費横縦番号), new RString("0")).toString()));
-        介護給付費交付金.setValue(new Decimal(ObjectUtil.defaultIfNull(
+        div.getHihokenshabango().getYoshikiyonMeisai().getTxtkyufukofukin().setValue(new Decimal(ObjectUtil.defaultIfNull(
                 詳細データ.get詳細データエリア().get(介護給付費交付金横縦番号), new RString("0")).toString()));
-        包括的支援事業_任意事業_地域支援事業.setValue(new Decimal(ObjectUtil.defaultIfNull(
+        div.getHihokenshabango().getYoshikiyonMeisai().getTxtchiikihokatsujigyo().setValue(new Decimal(ObjectUtil.defaultIfNull(
                 詳細データ.get詳細データエリア().get(包括的支援事業_任意事業_地域支援事業横縦番号), new RString("0")).toString()));
-        地域支援事業支援交付金.setValue(new Decimal(ObjectUtil.defaultIfNull(
+        div.getHihokenshabango().getYoshikiyonMeisai().getTxtchiikishienkofukin().setValue(new Decimal(ObjectUtil.defaultIfNull(
                 詳細データ.get詳細データエリア().get(地域支援事業支援交付金横縦番号), new RString("0")).toString()));
-        財政安定化基金拠出金.setValue(new Decimal(ObjectUtil.defaultIfNull(
+        div.getHihokenshabango().getYoshikiyonMeisai().getTxtzaisanantei().setValue(new Decimal(ObjectUtil.defaultIfNull(
                 詳細データ.get詳細データエリア().get(保険料横縦番号), new RString("0")).toString()));
-        都道府県負担金.setValue(new Decimal(ObjectUtil.defaultIfNull(
+        div.getHihokenshabango().getYoshikiyonMeisai().getTxttodofukenfutankin().setValue(new Decimal(ObjectUtil.defaultIfNull(
                 詳細データ.get詳細データエリア().get(財政安定化基金拠出金横縦番号), new RString("0")).toString()));
-        相互財政安定化事業負担金.setValue(new Decimal(ObjectUtil.defaultIfNull(
+        div.getHihokenshabango().getYoshikiyonMeisai().getTxtkokkozaisan().setValue(new Decimal(ObjectUtil.defaultIfNull(
                 詳細データ.get詳細データエリア().get(相互財政安定化事業負担金横縦番号), new RString("0")).toString()));
-        財政安定化基金支出金.setValue(new Decimal(ObjectUtil.defaultIfNull(
+        div.getHihokenshabango().getYoshikiyonMeisai().getTxtzaiseiantei().setValue(new Decimal(ObjectUtil.defaultIfNull(
                 詳細データ.get詳細データエリア().get(財政安定化基金支出金横縦番号), new RString("0")).toString()));
-        保健福祉事業費.setValue(new Decimal(ObjectUtil.defaultIfNull(
+        div.getHihokenshabango().getYoshikiyonMeisai().getTxthokenfukushi().setValue(new Decimal(ObjectUtil.defaultIfNull(
                 詳細データ.get詳細データエリア().get(保健福祉事業費横縦番号), new RString("0")).toString()));
-        都道府県支出金_地域支援事業交付金.setValue(new Decimal(ObjectUtil.defaultIfNull(
+        div.getHihokenshabango().getYoshikiyonMeisai().getTxtchiikishienyobo().setValue(new Decimal(ObjectUtil.defaultIfNull(
                 詳細データ.get詳細データエリア().get(都道府県支出金_地域支援事業交付金横縦番号), new RString("0")).toString()));
-        基金積立金.setValue(new Decimal(ObjectUtil.defaultIfNull(
+        div.getHihokenshabango().getYoshikiyonMeisai().getTxtkikin().setValue(new Decimal(ObjectUtil.defaultIfNull(
                 詳細データ.get詳細データエリア().get(基金積立金横縦番号), new RString("0")).toString()));
-        地域支援事業交付金_任意事業.setValue(new Decimal(ObjectUtil.defaultIfNull(
+        div.getHihokenshabango().getYoshikiyonMeisai().getTxtchiikishienhokatsu().setValue(new Decimal(ObjectUtil.defaultIfNull(
                 詳細データ.get詳細データエリア().get(地域支援事業交付金_任意事業横縦番号), new RString("0")).toString()));
-        財政安定化基金償還金.setValue(new Decimal(ObjectUtil.defaultIfNull(
+        div.getHihokenshabango().getYoshikiyonMeisai().getTxtv().setValue(new Decimal(ObjectUtil.defaultIfNull(
                 詳細データ.get詳細データエリア().get(財政安定化基金償還金横縦番号), new RString("0")).toString()));
-        その他_都道府県支出金.setValue(new Decimal(ObjectUtil.defaultIfNull(
+        div.getHihokenshabango().getYoshikiyonMeisai().getTxttodofukensonota().setValue(new Decimal(ObjectUtil.defaultIfNull(
                 詳細データ.get詳細データエリア().get(その他_都道府県支出金横縦番号), new RString("0")).toString()));
-        その他_公債費.setValue(new Decimal(ObjectUtil.defaultIfNull(
+        div.getHihokenshabango().getYoshikiyonMeisai().getTxtkosaikosaisonota().setValue(new Decimal(ObjectUtil.defaultIfNull(
                 詳細データ.get詳細データエリア().get(その他_公債費横縦番号), new RString("0")).toString()));
-        相互財政安定化事業交付金.setValue(new Decimal(ObjectUtil.defaultIfNull(
+        div.getHihokenshabango().getYoshikiyonMeisai().getTxtzaisanshunyu().setValue(new Decimal(ObjectUtil.defaultIfNull(
                 詳細データ.get詳細データエリア().get(相互財政安定化事業交付金横縦番号), new RString("0")).toString()));
-        予備費.setValue(new Decimal(ObjectUtil.defaultIfNull(
+        div.getHihokenshabango().getYoshikiyonMeisai().getTxtyobihi().setValue(new Decimal(ObjectUtil.defaultIfNull(
                 詳細データ.get詳細データエリア().get(予備費横縦番号), new RString("0")).toString()));
-        財産収入.setValue(new Decimal(ObjectUtil.defaultIfNull(
+        div.getHihokenshabango().getYoshikiyonMeisai().getTxtzaisanshuny().setValue(new Decimal(ObjectUtil.defaultIfNull(
                 詳細データ.get詳細データエリア().get(財産収入横縦番号), new RString("0")).toString()));
-        介護サービス事業勘定繰出金.setValue(new Decimal(ObjectUtil.defaultIfNull(
+        div.getHihokenshabango().getYoshikiyonMeisai().getTxtkaigosabisukanjo().setValue(new Decimal(ObjectUtil.defaultIfNull(
                 詳細データ.get詳細データエリア().get(介護サービス事業勘定繰出金横縦番号), new RString("0")).toString()));
-        寄附金.setValue(new Decimal(ObjectUtil.defaultIfNull(
+        div.getHihokenshabango().getYoshikiyonMeisai().getTxtkifukin().setValue(new Decimal(ObjectUtil.defaultIfNull(
                 詳細データ.get詳細データエリア().get(寄附金横縦番号), new RString("0")).toString()));
-        他会計繰出金.setValue(new Decimal(ObjectUtil.defaultIfNull(
+        div.getHihokenshabango().getYoshikiyonMeisai().getTxttakaikei().setValue(new Decimal(ObjectUtil.defaultIfNull(
                 詳細データ.get詳細データエリア().get(他会計繰出金横縦番号), new RString("0")).toString()));
-        一般会計繰入金.setValue(new Decimal(ObjectUtil.defaultIfNull(
+        div.getHihokenshabango().getYoshikiyonMeisai().getTxtippankaikei().setValue(new Decimal(ObjectUtil.defaultIfNull(
                 詳細データ.get詳細データエリア().get(一般会計繰入金横縦番号), new RString("0")).toString()));
-        その他_諸支出金.setValue(new Decimal(ObjectUtil.defaultIfNull(
+        div.getHihokenshabango().getYoshikiyonMeisai().getTxtshoshishutsusonota().setValue(new Decimal(ObjectUtil.defaultIfNull(
                 詳細データ.get詳細データエリア().get(その他_諸支出金横縦番号), new RString("0")).toString()));
-        総務費に係る一般会計繰入金.setValue(new Decimal(ObjectUtil.defaultIfNull(
+        div.getHihokenshabango().getYoshikiyonMeisai().getTxtsomuhi().setValue(new Decimal(ObjectUtil.defaultIfNull(
                 詳細データ.get詳細データエリア().get(総務費に係る一般会計繰入金横縦番号), new RString("0")).toString()));
-        介護給付費準備基金繰入金.setValue(new Decimal(ObjectUtil.defaultIfNull(
+        div.getHihokenshabango().getYoshikiyonMeisai().getTxtjumbikikin().setValue(new Decimal(ObjectUtil.defaultIfNull(
                 詳細データ.get詳細データエリア().get(介護給付費準備基金繰入金横縦番号), new RString("0")).toString()));
-        介護サービス事業勘定繰入金.setValue(new Decimal(ObjectUtil.defaultIfNull(
+        div.getHihokenshabango().getYoshikiyonMeisai().getTxtchiikishienkaigoyobo().setValue(new Decimal(ObjectUtil.defaultIfNull(
                 詳細データ.get詳細データエリア().get(介護サービス事業勘定繰入金横縦番号), new RString("0")).toString()));
-        地域支援事業繰入金_介護予防事業.setValue(new Decimal(ObjectUtil.defaultIfNull(
+        div.getHihokenshabango().getYoshikiyonMeisai().getTxttiikikaigoyobo().setValue(new Decimal(ObjectUtil.defaultIfNull(
                 詳細データ.get詳細データエリア().get(地域支援事業繰入金_介護予防事業横縦番号), new RString("0")).toString()));
-        地域支援事業繰入金_任意事業.setValue(new Decimal(ObjectUtil.defaultIfNull(
+        div.getHihokenshabango().getYoshikiyonMeisai().getTxtkurichiikishienhokatsu().setValue(new Decimal(ObjectUtil.defaultIfNull(
                 詳細データ.get詳細データエリア().get(地域支援事業繰入金_任意事業横縦番号), new RString("0")).toString()));
-        その他_繰入金.setValue(new Decimal(ObjectUtil.defaultIfNull(
+        div.getHihokenshabango().getYoshikiyonMeisai().getTxtkurinyukinsonota().setValue(new Decimal(ObjectUtil.defaultIfNull(
                 詳細データ.get詳細データエリア().get(その他_繰入金横縦番号), new RString("0")).toString()));
-        繰越金.setValue(new Decimal(ObjectUtil.defaultIfNull(
+        div.getHihokenshabango().getYoshikiyonMeisai().getTxtkurikoshikin().setValue(new Decimal(ObjectUtil.defaultIfNull(
                 詳細データ.get詳細データエリア().get(繰越金横縦番号), new RString("0")).toString()));
-        財政安定化基金貸付金.setValue(new Decimal(ObjectUtil.defaultIfNull(
+        div.getHihokenshabango().getYoshikiyonMeisai().getTxtsaizaiseiantei().setValue(new Decimal(ObjectUtil.defaultIfNull(
                 詳細データ.get詳細データエリア().get(財政安定化基金貸付金横縦番号), new RString("0")).toString()));
-        その他_市町村債.setValue(new Decimal(ObjectUtil.defaultIfNull(
+        div.getHihokenshabango().getYoshikiyonMeisai().getTxtsaisonota().setValue(new Decimal(ObjectUtil.defaultIfNull(
                 詳細データ.get詳細データエリア().get(その他_市町村債横縦番号), new RString("0")).toString()));
-        諸収入.setValue(new Decimal(ObjectUtil.defaultIfNull(
+        div.getHihokenshabango().getYoshikiyonMeisai().getTxtshoshunyu().setValue(new Decimal(ObjectUtil.defaultIfNull(
                 詳細データ.get詳細データエリア().get(諸収入横縦番号), new RString("0")).toString()));
-        合計１.setValue(new Decimal(ObjectUtil.defaultIfNull(
+        div.getHihokenshabango().getYoshikiyonMeisai().getTxtsainyugokei().setValue(new Decimal(ObjectUtil.defaultIfNull(
                 詳細データ.get詳細データエリア().get(合計１横縦番号), new RString("0")).toString()));
-        合計２.setValue(new Decimal(ObjectUtil.defaultIfNull(
+        div.getHihokenshabango().getYoshikiyonMeisai().getTxtsaishutsugoukei().setValue(new Decimal(ObjectUtil.defaultIfNull(
                 詳細データ.get詳細データエリア().get(合計２横縦番号), new RString("0")).toString()));
-        歳入歳出差引残額.setValue(new Decimal(ObjectUtil.defaultIfNull(
+        div.getHihokenshabango().getYoshikiyonMeisai().getTxtsainyushutsusa().setValue(new Decimal(ObjectUtil.defaultIfNull(
                 詳細データ.get詳細データエリア().get(歳入歳出差引残額横縦番号), new RString("0")).toString()));
-        うち基金繰入額.setValue(new Decimal(ObjectUtil.defaultIfNull(
+        div.getHihokenshabango().getYoshikiyonMeisai().getTxtuchikikinkurigaku().setValue(new Decimal(ObjectUtil.defaultIfNull(
                 詳細データ.get詳細データエリア().get(うち基金繰入額横縦番号), new RString("0")).toString()));
-        介護給付費準備基金保有額.setValue(new Decimal(ObjectUtil.defaultIfNull(
+        div.getHihokenshabango().getYoshikiyonMeisai().getTxtkaigokyufuhijunhoyu().setValue(new Decimal(ObjectUtil.defaultIfNull(
                 詳細データ.get詳細データエリア().get(介護給付費準備基金保有額横縦番号), new RString("0")).toString()));
     }
 
     private void is詳細データエリアReadOnly(Boolean isReadOnly) {
-        保険料.setReadOnly(isReadOnly);
-        総務費.setReadOnly(isReadOnly);
-        認定負担金.setReadOnly(isReadOnly);
-        介護サービス等諸費.setReadOnly(isReadOnly);
-        その他.setReadOnly(isReadOnly);
-        介護予防サービス等諸費.setReadOnly(isReadOnly);
-        使用料.setReadOnly(isReadOnly);
-        高額介護サービス等費.setReadOnly(isReadOnly);
-        手数料.setReadOnly(isReadOnly);
-        高額医療合算介護サービス等費.setReadOnly(isReadOnly);
-        介護給付費負担金.setReadOnly(isReadOnly);
-        特定入所者介護サービス等費.setReadOnly(isReadOnly);
-        調整交付金.setReadOnly(isReadOnly);
-        審査支払手数料.setReadOnly(isReadOnly);
-        地域支援事業交付金_介護予防事業.setReadOnly(isReadOnly);
-        市町村特別給付費.setReadOnly(isReadOnly);
-        地域支援事業交付金_包括的支援事業.setReadOnly(isReadOnly);
-        その他_保険給付費.setReadOnly(isReadOnly);
-        その他_国庫支出金.setReadOnly(isReadOnly);
-        介護予防事業費.setReadOnly(isReadOnly);
-        介護給付費交付金.setReadOnly(isReadOnly);
-        包括的支援事業_任意事業_地域支援事業.setReadOnly(isReadOnly);
-        地域支援事業支援交付金.setReadOnly(isReadOnly);
-        財政安定化基金拠出金.setReadOnly(isReadOnly);
-        都道府県負担金.setReadOnly(isReadOnly);
-        相互財政安定化事業負担金.setReadOnly(isReadOnly);
-        財政安定化基金支出金.setReadOnly(isReadOnly);
-        保健福祉事業費.setReadOnly(isReadOnly);
-        都道府県支出金_地域支援事業交付金.setReadOnly(isReadOnly);
-        基金積立金.setReadOnly(isReadOnly);
-        地域支援事業交付金_任意事業.setReadOnly(isReadOnly);
-        財政安定化基金償還金.setReadOnly(isReadOnly);
-        その他_都道府県支出金.setReadOnly(isReadOnly);
-        その他_公債費.setReadOnly(isReadOnly);
-        相互財政安定化事業交付金.setReadOnly(isReadOnly);
-        予備費.setReadOnly(isReadOnly);
-        財産収入.setReadOnly(isReadOnly);
-        介護サービス事業勘定繰出金.setReadOnly(isReadOnly);
-        寄附金.setReadOnly(isReadOnly);
-        他会計繰出金.setReadOnly(isReadOnly);
-        一般会計繰入金.setReadOnly(isReadOnly);
-        その他_諸支出金.setReadOnly(isReadOnly);
-        総務費に係る一般会計繰入金.setReadOnly(isReadOnly);
-        介護給付費準備基金繰入金.setReadOnly(isReadOnly);
-        介護サービス事業勘定繰入金.setReadOnly(isReadOnly);
-        地域支援事業繰入金_介護予防事業.setReadOnly(isReadOnly);
-        地域支援事業繰入金_任意事業.setReadOnly(isReadOnly);
-        その他_繰入金.setReadOnly(isReadOnly);
-        繰越金.setReadOnly(isReadOnly);
-        財政安定化基金貸付金.setReadOnly(isReadOnly);
-        その他_市町村債.setReadOnly(isReadOnly);
-        諸収入.setReadOnly(isReadOnly);
-        合計１.setReadOnly(isReadOnly);
-        合計２.setReadOnly(isReadOnly);
-        歳入歳出差引残額.setReadOnly(isReadOnly);
-        うち基金繰入額.setReadOnly(isReadOnly);
-        介護給付費準備基金保有額.setReadOnly(isReadOnly);
+        div.getHihokenshabango().getYoshikiyonMeisai().getTxthokenryo().setReadOnly(isReadOnly);
+        div.getHihokenshabango().getYoshikiyonMeisai().getTxtsaishutsusomu().setReadOnly(isReadOnly);
+        div.getHihokenshabango().getYoshikiyonMeisai().getTxtnintei().setReadOnly(isReadOnly);
+        div.getHihokenshabango().getYoshikiyonMeisai().getTxtlsabisunadoshohi().setReadOnly(isReadOnly);
+        div.getHihokenshabango().getYoshikiyonMeisai().getTxtfuntansonota().setReadOnly(isReadOnly);
+        div.getHihokenshabango().getYoshikiyonMeisai().getTxtyobonadoshohi().setReadOnly(isReadOnly);
+        div.getHihokenshabango().getYoshikiyonMeisai().getTxtshiyoo().setReadOnly(isReadOnly);
+        div.getHihokenshabango().getYoshikiyonMeisai().getTxtkogakukaigo().setReadOnly(isReadOnly);
+        div.getHihokenshabango().getYoshikiyonMeisai().getTxttesu().setReadOnly(isReadOnly);
+        div.getHihokenshabango().getYoshikiyonMeisai().getTxtlkogakuiryo().setReadOnly(isReadOnly);
+        div.getHihokenshabango().getYoshikiyonMeisai().getTxtkyufu().setReadOnly(isReadOnly);
+        div.getHihokenshabango().getYoshikiyonMeisai().getTxttokuteinyusho().setReadOnly(isReadOnly);
+        div.getHihokenshabango().getYoshikiyonMeisai().getTxtchosei().setReadOnly(isReadOnly);
+        div.getHihokenshabango().getYoshikiyonMeisai().getTxtshinsashiharai().setReadOnly(isReadOnly);
+        div.getHihokenshabango().getYoshikiyonMeisai().getTxtkaigoyobo().setReadOnly(isReadOnly);
+        div.getHihokenshabango().getYoshikiyonMeisai().getTxtshichosontokubetsukyufu().setReadOnly(isReadOnly);
+        div.getHihokenshabango().getYoshikiyonMeisai().getTxthokatsu().setReadOnly(isReadOnly);
+        div.getHihokenshabango().getYoshikiyonMeisai().getTxtkyusonota().setReadOnly(isReadOnly);
+        div.getHihokenshabango().getYoshikiyonMeisai().getTxtkokkosonota().setReadOnly(isReadOnly);
+        div.getHihokenshabango().getYoshikiyonMeisai().getTxtchiikikaigoyobo().setReadOnly(isReadOnly);
+        div.getHihokenshabango().getYoshikiyonMeisai().getTxtkyufukofukin().setReadOnly(isReadOnly);
+        div.getHihokenshabango().getYoshikiyonMeisai().getTxtchiikihokatsujigyo().setReadOnly(isReadOnly);
+        div.getHihokenshabango().getYoshikiyonMeisai().getTxtchiikishienkofukin().setReadOnly(isReadOnly);
+        div.getHihokenshabango().getYoshikiyonMeisai().getTxtzaisanantei().setReadOnly(isReadOnly);
+        div.getHihokenshabango().getYoshikiyonMeisai().getTxttodofukenfutankin().setReadOnly(isReadOnly);
+        div.getHihokenshabango().getYoshikiyonMeisai().getTxtkokkozaisan().setReadOnly(isReadOnly);
+        div.getHihokenshabango().getYoshikiyonMeisai().getTxtzaiseiantei().setReadOnly(isReadOnly);
+        div.getHihokenshabango().getYoshikiyonMeisai().getTxthokenfukushi().setReadOnly(isReadOnly);
+        div.getHihokenshabango().getYoshikiyonMeisai().getTxtchiikishienyobo().setReadOnly(isReadOnly);
+        div.getHihokenshabango().getYoshikiyonMeisai().getTxtkikin().setReadOnly(isReadOnly);
+        div.getHihokenshabango().getYoshikiyonMeisai().getTxtchiikishienhokatsu().setReadOnly(isReadOnly);
+        div.getHihokenshabango().getYoshikiyonMeisai().getTxtv().setReadOnly(isReadOnly);
+        div.getHihokenshabango().getYoshikiyonMeisai().getTxttodofukensonota().setReadOnly(isReadOnly);
+        div.getHihokenshabango().getYoshikiyonMeisai().getTxtkosaikosaisonota().setReadOnly(isReadOnly);
+        div.getHihokenshabango().getYoshikiyonMeisai().getTxtzaisanshunyu().setReadOnly(isReadOnly);
+        div.getHihokenshabango().getYoshikiyonMeisai().getTxtyobihi().setReadOnly(isReadOnly);
+        div.getHihokenshabango().getYoshikiyonMeisai().getTxtzaisanshuny().setReadOnly(isReadOnly);
+        div.getHihokenshabango().getYoshikiyonMeisai().getTxtkaigosabisukanjo().setReadOnly(isReadOnly);
+        div.getHihokenshabango().getYoshikiyonMeisai().getTxtkifukin().setReadOnly(isReadOnly);
+        div.getHihokenshabango().getYoshikiyonMeisai().getTxttakaikei().setReadOnly(isReadOnly);
+        div.getHihokenshabango().getYoshikiyonMeisai().getTxtippankaikei().setReadOnly(isReadOnly);
+        div.getHihokenshabango().getYoshikiyonMeisai().getTxtshoshishutsusonota().setReadOnly(isReadOnly);
+        div.getHihokenshabango().getYoshikiyonMeisai().getTxtsomuhi().setReadOnly(isReadOnly);
+        div.getHihokenshabango().getYoshikiyonMeisai().getTxtjumbikikin().setReadOnly(isReadOnly);
+        div.getHihokenshabango().getYoshikiyonMeisai().getTxtchiikishienkaigoyobo().setReadOnly(isReadOnly);
+        div.getHihokenshabango().getYoshikiyonMeisai().getTxttiikikaigoyobo().setReadOnly(isReadOnly);
+        div.getHihokenshabango().getYoshikiyonMeisai().getTxtkurichiikishienhokatsu().setReadOnly(isReadOnly);
+        div.getHihokenshabango().getYoshikiyonMeisai().getTxtkurinyukinsonota().setReadOnly(isReadOnly);
+        div.getHihokenshabango().getYoshikiyonMeisai().getTxtkurikoshikin().setReadOnly(isReadOnly);
+        div.getHihokenshabango().getYoshikiyonMeisai().getTxtsaizaiseiantei().setReadOnly(isReadOnly);
+        div.getHihokenshabango().getYoshikiyonMeisai().getTxtsaisonota().setReadOnly(isReadOnly);
+        div.getHihokenshabango().getYoshikiyonMeisai().getTxtshoshunyu().setReadOnly(isReadOnly);
+        div.getHihokenshabango().getYoshikiyonMeisai().getTxtsainyugokei().setReadOnly(isReadOnly);
+        div.getHihokenshabango().getYoshikiyonMeisai().getTxtsaishutsugoukei().setReadOnly(isReadOnly);
+        div.getHihokenshabango().getYoshikiyonMeisai().getTxtsainyushutsusa().setReadOnly(isReadOnly);
+        div.getHihokenshabango().getYoshikiyonMeisai().getTxtuchikikinkurigaku().setReadOnly(isReadOnly);
+        div.getHihokenshabango().getYoshikiyonMeisai().getTxtkaigokyufuhijunhoyu().setReadOnly(isReadOnly);
     }
 }
