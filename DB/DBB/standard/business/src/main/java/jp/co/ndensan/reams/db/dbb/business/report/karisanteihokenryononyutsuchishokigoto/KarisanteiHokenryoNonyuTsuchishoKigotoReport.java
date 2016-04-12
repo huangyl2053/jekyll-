@@ -19,6 +19,8 @@ import lombok.NonNull;
 /**
  *
  * 帳票設計_DBBRP00007_2_保険料納入通知書（仮算定）【期毎タイプ】
+ *
+ * @reamsid_L DBB-9110-020 wangjie2
  */
 public class KarisanteiHokenryoNonyuTsuchishoKigotoReport
         extends Report<KarisanteiHokenryoNonyuTsuchishoKigotoSource> {
@@ -91,11 +93,11 @@ public class KarisanteiHokenryoNonyuTsuchishoKigotoReport
 //     * @return List<NonyuTsuchisho>
 //     */
 //    @Override
-//    public List<NonyuTsuchisho> devidedByPage() {
+//    public List<INonyuTsuchisho> devidedByPage() {
 //        //TODO QA #76236
 //        KariSanteiNonyuTsuchiShoJoho 仮算定納入通知書情報 = target.get仮算定納入通知書情報();
 //        List<NonyuTsuchiShoKiJoho> 納入通知書期情報リスト = 仮算定納入通知書情報.get納入通知書期情報リスト();
-//        List<NonyuTsuchisho> reportLst = new ArrayList<>();
+//        List<INonyuTsuchisho> reportLst = new ArrayList<>();
 //        for (NonyuTsuchiShoKiJoho 納入通知書期情報 : 納入通知書期情報リスト) {
 //            KariSanteiNonyuTsuchiShoJoho 仮算定納入通知書情報Report = new KariSanteiNonyuTsuchiShoJoho();
 //            clone仮算定納入通知書情報(仮算定納入通知書情報Report);
