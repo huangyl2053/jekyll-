@@ -26,7 +26,9 @@ import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
+ * 一時テーブルの更新
  *
+ * @reamsid_L DBC-2590-010 xuhao
  */
 public class ShokanFushikyuTableUpdateProcess extends BatchProcessBase<ShokanFushikyuKetteiInEntity> {
 

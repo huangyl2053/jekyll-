@@ -29,7 +29,9 @@ import jp.co.ndensan.reams.uz.uza.report.BreakerCatalog;
 import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
 
 /**
+ * 帳票に引き渡す
  *
+ * @reamsid_L DBC-2590-010 xuhao
  */
 public class ShokanFushikyuWriteReportProcess extends BatchKeyBreakBase<ShokanFushikyuKetteiInEntity> {
 
@@ -112,7 +114,6 @@ public class ShokanFushikyuWriteReportProcess extends BatchKeyBreakBase<ShokanFu
     @Override
     protected void afterExecute() {
         ShokanBaraiFushikyuKetteishaIchiranhyo business = new ShokanBaraiFushikyuKetteishaIchiranhyo();
-        // TODO 並び順
         IOutputOrder 並び順 = ChohyoShutsuryokujunFinderFactory.createInstance()
                 .get出力順(SubGyomuCode.DBC介護給付, ReportIdDBC.DBC200022.getReportId(), shutsuryokujunID.getValue());
         List<RString> 改頁項目リスト = new ArrayList<>();

@@ -14,6 +14,8 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
  * 一時テーブルより、DBの更新を行う
+ *
+ * @reamsid_L DBC-2590-010 xuhao
  */
 public class ShokanFushikyuDbUpdateProcess extends SimpleBatchProcessBase {
 

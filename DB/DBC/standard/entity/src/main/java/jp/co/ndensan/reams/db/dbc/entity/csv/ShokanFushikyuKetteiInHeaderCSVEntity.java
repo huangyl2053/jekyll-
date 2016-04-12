@@ -10,6 +10,8 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
  * 償還払不支給決定情報のヘッダ部。
+ *
+ * @reamsid_L DBC-2590-010 xuhao
  */
 public class ShokanFushikyuKetteiInHeaderCSVEntity {
 

@@ -23,7 +23,9 @@ import jp.co.ndensan.reams.uz.uza.batch.flow.IBatchFlowCommand;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
+ * バッチ設計_DBCMNF2002-222_償還払不支給決定情報取込
  *
+ * @reamsid_L DBC-2590-010 xuhao
  */
 public class DBC120100_ShokanFushikyuKetteiIn extends BatchFlowBase<DBC120100_ShokanFushikyuKetteiInBatchParameter> {
 

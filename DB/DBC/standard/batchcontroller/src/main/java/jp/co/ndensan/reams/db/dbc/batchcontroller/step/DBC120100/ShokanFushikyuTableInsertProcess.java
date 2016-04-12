@@ -22,6 +22,8 @@ import jp.co.ndensan.reams.uz.uza.util.db.IDbAccessable;
 
 /**
  * ファイルのデータを一時テーブルに設定する。
+ *
+ * @reamsid_L DBC-2590-010 xuhao
  */
 public class ShokanFushikyuTableInsertProcess extends BatchProcessBase<RString> {
 

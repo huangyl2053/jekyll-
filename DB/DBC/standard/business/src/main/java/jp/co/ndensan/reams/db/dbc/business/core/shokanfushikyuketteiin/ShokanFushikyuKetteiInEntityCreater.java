@@ -21,7 +21,9 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 
 /**
+ * CSVデータより、償還払不支給決定情報一時テーブルエンティティを作成する。
  *
+ * @reamsid_L DBC-2590-010 xuhao
  */
 public class ShokanFushikyuKetteiInEntityCreater {
 
