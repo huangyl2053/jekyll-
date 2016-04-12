@@ -34,6 +34,8 @@ import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
 
 /**
  * 償還払請求住宅改修のデータアクセスクラスです。
+ *
+ * @reamsid_L DBC-9999-012 xicongwang
  */
 public class DbT3049ShokanJutakuKaishuDac implements ISaveable<DbT3049ShokanJutakuKaishuEntity> {
 

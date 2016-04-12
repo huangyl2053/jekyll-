@@ -11,6 +11,8 @@ import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 
 /**
  * 未審査支給申請一覧取得用MyBatisパラメータクラスです。
+ *
+ * @reamsid_L DBC-0991-040 xicongwang
  */
 @lombok.Getter
 @lombok.Setter
