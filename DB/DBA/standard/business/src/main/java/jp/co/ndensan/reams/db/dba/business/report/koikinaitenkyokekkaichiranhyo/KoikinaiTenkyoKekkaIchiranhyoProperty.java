@@ -12,6 +12,8 @@ import jp.co.ndensan.reams.uz.uza.report.ReportPropertyBase;
 
 /**
  * {@link KoikinaiTenkyoKekkaIchiranhyoReportSource}のプロパティです。
+ *
+ * @reamsid_L DBU-1150-070 zhangguopeng
  */
 public class KoikinaiTenkyoKekkaIchiranhyoProperty extends ReportPropertyBase<KoikinaiTenkyoKekkaIchiranhyoReportSource> {
 
