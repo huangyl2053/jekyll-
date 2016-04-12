@@ -10,6 +10,8 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 /**
  *
  * 証発行管理リスト帳票用データリストクラスです。
+ *
+ * @reamsid_L DBA-0600-040 zhangguopeng
  */
 @lombok.Getter
 @lombok.Setter

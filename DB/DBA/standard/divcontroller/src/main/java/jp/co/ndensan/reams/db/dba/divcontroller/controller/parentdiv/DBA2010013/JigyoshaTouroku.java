@@ -49,7 +49,7 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 public class JigyoshaTouroku {
 
     private static final RString 状態_追加 = new RString("追加");
-    private static final RString 状態_更新 = new RString("更新");
+    private static final RString 状態_修正 = new RString("修正");
     private static final RString 状態_削除 = new RString("削除");
     private static final RString 状態_照会 = new RString("照会");
     private KaigoJigyoshaShisetsuKanriMapperParameter 事業者登録パラメータ;
@@ -64,12 +64,6 @@ public class JigyoshaTouroku {
      * @return ResponseData<JigyoshaToutokuDiv> 事業者登録Div
      */
     public ResponseData<JigyoshaToutokuDiv> onLoad(JigyoshaToutokuDiv div) {
-
-        ViewStateHolder.put(ViewStateKeys.事業者登録_画面状態, new RString("削除"));
-        ViewStateHolder.put(ViewStateKeys.事業者登録_事業者番号, new RString("555523"));
-        ViewStateHolder.put(ViewStateKeys.事業者登録_事業者種類コード, new RString("11"));
-        ViewStateHolder.put(ViewStateKeys.事業者登録_有効開始日, new FlexibleDate("20160330"));
-
         RString 初期_状態 = ViewStateHolder.get(ViewStateKeys.事業者登録_画面状態, RString.class);
         RString 事業者番号 = ViewStateHolder.get(ViewStateKeys.事業者登録_事業者番号, RString.class);
         FlexibleDate 有効開始日 = ViewStateHolder.get(ViewStateKeys.事業者登録_有効開始日, FlexibleDate.class);
@@ -80,7 +74,7 @@ public class JigyoshaTouroku {
         if (初期_状態.equals(状態_追加)) {
             getHandler(div).initialize(初期_状態);
             return ResponseData.of(div).setState(DBA2010013StateName.追加状態);
-        } else if (初期_状態.equals(状態_更新)) {
+        } else if (初期_状態.equals(状態_修正)) {
             getHandler(div).initialize(初期_状態);
             get事業者情報の検索処理(div);
             return ResponseData.of(div).setState(DBA2010013StateName.修正状態);
@@ -150,6 +144,7 @@ public class JigyoshaTouroku {
      * @return ResponseData<JigyoshaToutokuDiv> 事業者登録Div
      */
     public ResponseData<JigyoshaToutokuDiv> onClick_btnAddService(JigyoshaToutokuDiv div) {
+        ViewStateHolder.put(ViewStateKeys.サービス登録_画面状態, 状態_追加);
         set画面引数の設定();
         return ResponseData.of(div).forwardWithEventName(DBA2010013TransitionEventName.サービス追加).respond();
     }
@@ -161,6 +156,7 @@ public class JigyoshaTouroku {
      * @return ResponseData<JigyoshaToutokuDiv> 事業者登録Div
      */
     public ResponseData<JigyoshaToutokuDiv> onClick_btnModify(JigyoshaToutokuDiv div) {
+        ViewStateHolder.put(ViewStateKeys.サービス登録_画面状態, 状態_修正);
         set画面引数の設定();
         return ResponseData.of(div).forwardWithEventName(DBA2010013TransitionEventName.サービス修正).respond();
     }
@@ -172,12 +168,12 @@ public class JigyoshaTouroku {
      * @return ResponseData<JigyoshaToutokuDiv> 事業者登録Div
      */
     public ResponseData<JigyoshaToutokuDiv> onClick_btnDelete(JigyoshaToutokuDiv div) {
+        ViewStateHolder.put(ViewStateKeys.サービス登録_画面状態, 状態_削除);
         set画面引数の設定();
         return ResponseData.of(div).forwardWithEventName(DBA2010013TransitionEventName.サービス削除).respond();
     }
 
     private void set画面引数の設定() {
-        ViewStateHolder.put(ViewStateKeys.サービス登録_画面状態, ViewStateHolder.get(ViewStateKeys.事業者登録_画面状態, RString.class));
         ViewStateHolder.put(ViewStateKeys.サービス登録_事業者番号, ViewStateHolder.get(ViewStateKeys.事業者登録_事業者番号, RString.class));
         ViewStateHolder.put(ViewStateKeys.サービス登録_サービス種類コード, ViewStateHolder.get(ViewStateKeys.事業者登録_事業者種類コード, RString.class));
         ViewStateHolder.put(ViewStateKeys.サービス登録_有効開始日, ViewStateHolder.get(ViewStateKeys.事業者登録_有効開始日, FlexibleDate.class));
@@ -201,7 +197,7 @@ public class JigyoshaTouroku {
                     && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
                 get事業者情報の登録処理(事業者番号, div);
             }
-        } else if (初期_状態.equals(状態_更新)) {
+        } else if (初期_状態.equals(状態_修正)) {
             if (!ResponseHolder.isReRequest()) {
                 return ResponseData.of(div).addMessage(UrQuestionMessages.保存の確認.getMessage()).respond();
             }
