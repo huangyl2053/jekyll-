@@ -10,6 +10,8 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
  * 支払方法機能区分を表す列挙型です。
+ *
+ * @reamsid_L DBC-4470-010 wangkanglei
  */
 public enum ShiharaiHohoKinoKubun {
 

@@ -21,6 +21,8 @@ import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
 
 /**
  * 帳票制御汎用を管理するクラスです。
+ *
+ * @reamsid_L DBC-4470-010 wangkanglei
  */
 public class ChohyoSeigyoHanyoManager {
 

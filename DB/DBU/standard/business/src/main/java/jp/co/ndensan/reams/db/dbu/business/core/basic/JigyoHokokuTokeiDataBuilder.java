@@ -16,6 +16,8 @@ import jp.co.ndensan.reams.uz.uza.math.Decimal;
 
 /**
  * {@link JigyoHokokuTokeiData}の編集を行うビルダークラスです。
+ *
+ * @reamsid_L DBU-1100-030 wangkanglei
  */
 public class JigyoHokokuTokeiDataBuilder {
 
