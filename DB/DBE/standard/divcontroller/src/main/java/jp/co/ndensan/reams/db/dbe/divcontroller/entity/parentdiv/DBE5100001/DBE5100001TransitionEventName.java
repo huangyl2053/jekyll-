@@ -15,7 +15,12 @@ public enum DBE5100001TransitionEventName implements IContainerEvents {
 // <editor-fold defaultstate="collapsed" desc="Created By UI Designer ver 1.0.0">
 
     審査会選択("審査会選択"),
-    処理完了("処理完了");
+    処理完了("処理完了"),
+    個人別状況照会へ遷移する("個人別状況照会へ遷移する"),
+    データ出力を実行する("データ出力を実行する"),
+    審査会対象者割付へ遷移する("審査会対象者割付へ遷移する"),
+    自動割付を実行する("自動割付を実行する"),
+    データ取込みを実行する("データ取込みを実行する");
 
     private final RString name;
 
