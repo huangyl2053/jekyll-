@@ -1,5 +1,6 @@
 package jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.ShisetsuNyutaishoRirekiKanri;
 
+import java.util.List;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.binding.ICommonChildDivBaseProperties;
@@ -57,4 +58,11 @@ public interface IShisetsuNyutaishoRirekiKanriDiv extends ICommonChildDivBasePro
      * 施設入退所履歴の共有子DIVの画面内容から、施設入退所履歴情報をDBに反映します。
      */
     public void saveShisetsuNyutaisho();
+
+    /**
+     * 施設入退所履歴の一覧を取得する。
+     *
+     * @return List<dgShisetsuNyutaishoRireki_Row> 施設入退所履歴の一覧
+     */
+    public List<dgShisetsuNyutaishoRireki_Row> get施設入退所履歴一覧();
 }
