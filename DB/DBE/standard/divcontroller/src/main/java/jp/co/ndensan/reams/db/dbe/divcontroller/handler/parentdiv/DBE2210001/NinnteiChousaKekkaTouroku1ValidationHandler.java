@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbe.divcontroller.handler.parentdiv.dbe2210001;
+package jp.co.ndensan.reams.db.dbe.divcontroller.handler.parentdiv.DBE2210001;
 
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2210001.NinnteiChousaKekkaTouroku1Div;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2210001.NinnteiChousaKekkaTouroku1DivSpec;
@@ -19,6 +19,8 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
 
 /**
  * 認定調査結果登録1のバリデーションハンドラークラスです。
+ *
+ * @reamsid_L DBE-0040-010 xuyue
  */
 public class NinnteiChousaKekkaTouroku1ValidationHandler {
 
@@ -29,7 +31,6 @@ public class NinnteiChousaKekkaTouroku1ValidationHandler {
      * @param div NinnteiChousaKekkaTouroku1Div
      * @return バリデーション結果
      */
-    @SuppressWarnings("unchecked")
     public ValidationMessageControlPairs validateFor調査実施日の必須入力(ValidationMessageControlPairs pairs, NinnteiChousaKekkaTouroku1Div div) {
 
         IValidationMessages messages = ValidationMessagesFactory.createInstance();
@@ -48,7 +49,6 @@ public class NinnteiChousaKekkaTouroku1ValidationHandler {
      * @param div NinnteiChousaKekkaTouroku1Div
      * @return バリデーション結果
      */
-    @SuppressWarnings("unchecked")
     public ValidationMessageControlPairs validateFor実施場所の必須入力(ValidationMessageControlPairs pairs, NinnteiChousaKekkaTouroku1Div div) {
 
         IValidationMessages messages = ValidationMessagesFactory.createInstance();
@@ -67,7 +67,6 @@ public class NinnteiChousaKekkaTouroku1ValidationHandler {
      * @param div NinnteiChousaKekkaTouroku1Div
      * @return バリデーション結果
      */
-    @SuppressWarnings("unchecked")
     public ValidationMessageControlPairs validateFor所属機関の必須入力(ValidationMessageControlPairs pairs, NinnteiChousaKekkaTouroku1Div div) {
 
         IValidationMessages messages = ValidationMessagesFactory.createInstance();
@@ -86,7 +85,6 @@ public class NinnteiChousaKekkaTouroku1ValidationHandler {
      * @param div NinnteiChousaKekkaTouroku1Div
      * @return バリデーション結果
      */
-    @SuppressWarnings("unchecked")
     public ValidationMessageControlPairs validateFor記入者の必須入力(ValidationMessageControlPairs pairs, NinnteiChousaKekkaTouroku1Div div) {
 
         IValidationMessages messages = ValidationMessagesFactory.createInstance();
@@ -105,7 +103,6 @@ public class NinnteiChousaKekkaTouroku1ValidationHandler {
      * @param div NinnteiChousaKekkaTouroku1Div
      * @return バリデーション結果
      */
-    @SuppressWarnings("unchecked")
     public ValidationMessageControlPairs validateFor第1群の必須入力(ValidationMessageControlPairs pairs, NinnteiChousaKekkaTouroku1Div div) {
 
         IValidationMessages messages = ValidationMessagesFactory.createInstance();
@@ -124,7 +121,6 @@ public class NinnteiChousaKekkaTouroku1ValidationHandler {
      * @param div NinnteiChousaKekkaTouroku1Div
      * @return バリデーション結果
      */
-    @SuppressWarnings("unchecked")
     public ValidationMessageControlPairs validateFor第2群の必須入力(ValidationMessageControlPairs pairs, NinnteiChousaKekkaTouroku1Div div) {
 
         IValidationMessages messages = ValidationMessagesFactory.createInstance();
@@ -143,7 +139,6 @@ public class NinnteiChousaKekkaTouroku1ValidationHandler {
      * @param div NinnteiChousaKekkaTouroku1Div
      * @return バリデーション結果
      */
-    @SuppressWarnings("unchecked")
     public ValidationMessageControlPairs validateFor第3群の必須入力(ValidationMessageControlPairs pairs, NinnteiChousaKekkaTouroku1Div div) {
 
         IValidationMessages messages = ValidationMessagesFactory.createInstance();
@@ -162,7 +157,6 @@ public class NinnteiChousaKekkaTouroku1ValidationHandler {
      * @param div NinnteiChousaKekkaTouroku1Div
      * @return バリデーション結果
      */
-    @SuppressWarnings("unchecked")
     public ValidationMessageControlPairs validateFor第4群の必須入力(ValidationMessageControlPairs pairs, NinnteiChousaKekkaTouroku1Div div) {
 
         IValidationMessages messages = ValidationMessagesFactory.createInstance();
@@ -181,7 +175,6 @@ public class NinnteiChousaKekkaTouroku1ValidationHandler {
      * @param div NinnteiChousaKekkaTouroku1Div
      * @return バリデーション結果
      */
-    @SuppressWarnings("unchecked")
     public ValidationMessageControlPairs validateFor第5群の必須入力(ValidationMessageControlPairs pairs, NinnteiChousaKekkaTouroku1Div div) {
 
         IValidationMessages messages = ValidationMessagesFactory.createInstance();
@@ -200,7 +193,6 @@ public class NinnteiChousaKekkaTouroku1ValidationHandler {
      * @param div NinnteiChousaKekkaTouroku1Div
      * @return バリデーション結果
      */
-    @SuppressWarnings("unchecked")
     public ValidationMessageControlPairs validateFor生活自立度の必須入力(ValidationMessageControlPairs pairs, NinnteiChousaKekkaTouroku1Div div) {
 
         IValidationMessages messages = ValidationMessagesFactory.createInstance();

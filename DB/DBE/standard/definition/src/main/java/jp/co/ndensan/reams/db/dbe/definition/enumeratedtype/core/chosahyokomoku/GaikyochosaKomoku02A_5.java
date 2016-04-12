@@ -6,7 +6,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 /**
  * 在宅利用-5-02Aを表す列挙型です。
  *
- * @reamsid_L DBE-9999-020 xuyue
+ * @reamsid_L DBE-0040-010 xuyue
  */
 public enum GaikyochosaKomoku02A_5 {
 

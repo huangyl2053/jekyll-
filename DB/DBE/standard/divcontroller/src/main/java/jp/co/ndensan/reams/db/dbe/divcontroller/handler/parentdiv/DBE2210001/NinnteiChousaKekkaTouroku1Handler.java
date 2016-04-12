@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbe.divcontroller.handler.parentdiv.dbe2210001;
+package jp.co.ndensan.reams.db.dbe.divcontroller.handler.parentdiv.DBE2210001;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -146,6 +146,8 @@ import jp.co.ndensan.reams.uz.uza.util.config.BusinessConfig;
 
 /**
  * 認定調査結果登録1のクラスです。
+ *
+ * @reamsid_L DBE-0040-010 xuyue
  */
 public class NinnteiChousaKekkaTouroku1Handler {
 
@@ -946,18 +948,9 @@ public class NinnteiChousaKekkaTouroku1Handler {
         ShinseishoKanriNo temp_申請書管理番号 = ViewStateHolder.get(ViewStateKeys.申請書管理番号, ShinseishoKanriNo.class);
 
         ArrayList<KihonChosaInput> 第1群List = new ArrayList<>();
-        ArrayList<KihonChosaInput> 第2群List = new ArrayList<>();
-        ArrayList<KihonChosaInput> 第3群List = new ArrayList<>();
-        ArrayList<KihonChosaInput> 第4群List = new ArrayList<>();
-        ArrayList<KihonChosaInput> 第5群List = new ArrayList<>();
         ArrayList<KihonChosaInput> 特別な医療List = new ArrayList<>();
         ArrayList<KihonChosaInput> 自立度List = new ArrayList<>();
-        RString 第1群 = RString.EMPTY;
-        RString 第2群 = RString.EMPTY;
-        RString 第3群 = RString.EMPTY;
-        RString 第4群 = RString.EMPTY;
-        RString 第5群 = RString.EMPTY;
-        RString 特別な医療 = RString.EMPTY;
+
         RString 自立度 = RString.EMPTY;
 
         boolean 前回基本調査項目値あり = false;
@@ -1049,8 +1042,26 @@ public class NinnteiChousaKekkaTouroku1Handler {
             }
         }
 
-        第1群List = new ArrayList<>();
-        特別な医療List = new ArrayList<>();
+        基本調査初期データの保存(認定調査基本情報リスト, 自立度List, 前回基本調査項目値あり, 自立度);
+    }
+
+    private void 基本調査初期データの保存(List<KihonChosaInput> 認定調査基本情報リスト, ArrayList<KihonChosaInput> 自立度List,
+            boolean 前回基本調査項目値あり, RString 自立度) {
+
+        ArrayList<KihonChosaInput> 第1群List = new ArrayList<>();
+        ArrayList<KihonChosaInput> 第2群List = new ArrayList<>();
+        ArrayList<KihonChosaInput> 第3群List = new ArrayList<>();
+        ArrayList<KihonChosaInput> 第4群List = new ArrayList<>();
+        ArrayList<KihonChosaInput> 第5群List = new ArrayList<>();
+        ArrayList<KihonChosaInput> 特別な医療List = new ArrayList<>();
+
+        RString 第1群 = RString.EMPTY;
+        RString 第2群 = RString.EMPTY;
+        RString 第3群 = RString.EMPTY;
+        RString 第4群 = RString.EMPTY;
+        RString 第5群 = RString.EMPTY;
+        RString 特別な医療 = RString.EMPTY;
+
         KihonChosaInputBuilder joho;
         for (KihonChosaInput 基本情報 : 認定調査基本情報リスト) {
             if (!前回基本調査項目値あり && ((基本情報.get前回調査項目() != null && !基本情報.get前回調査項目().isEmpty()))) {
@@ -1120,6 +1131,12 @@ public class NinnteiChousaKekkaTouroku1Handler {
         ViewStateHolder.put(Dbe2210001Keys.初期の基本調査, 初期の基本調査);
     }
 
+    /**
+     * 予防給付サービスの連番リストを取得します。
+     *
+     * @param temp_厚労省IF識別コード 厚労省IF識別コード
+     * @return 予防給付サービスの連番リスト
+     */
     public List<Integer> get予防給付サービス連番List(RString temp_厚労省IF識別コード) {
         List<Integer> 連番List = new ArrayList<>();
 
@@ -1144,6 +1161,12 @@ public class NinnteiChousaKekkaTouroku1Handler {
         return 連番List;
     }
 
+    /**
+     * 介護給付サービスの連番リストを取得します。
+     *
+     * @param temp_厚労省IF識別コード 厚労省IF識別コード
+     * @return 介護給付サービスの連番リスト
+     */
     public List<Integer> get介護給付サービス連番List(RString temp_厚労省IF識別コード) {
         List<Integer> 連番List = new ArrayList<>();
 
@@ -1176,6 +1199,12 @@ public class NinnteiChousaKekkaTouroku1Handler {
         return 連番List;
     }
 
+    /**
+     * 施設利用の連番リストを取得します。
+     *
+     * @param temp_厚労省IF識別コード 厚労省IF識別コード
+     * @return 施設利用の連番リスト
+     */
     public List<Integer> get施設利用連番List(RString temp_厚労省IF識別コード) {
 
         List<Integer> 連番List = new ArrayList<>();

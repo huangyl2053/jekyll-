@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbe.divcontroller.controller.dbe2210001;
+package jp.co.ndensan.reams.db.dbe.divcontroller.controller.parentdiv.DBE2210001;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -19,9 +19,9 @@ import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2210001.dgRi
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2210001.dgRiyoShisetsu_Row;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2210001.tplShisetsuDiv;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2210001.tplZaitakuDiv;
-import jp.co.ndensan.reams.db.dbe.divcontroller.handler.parentdiv.dbe2210001.NinnteiChousaKekkaTouroku1Handler;
-import jp.co.ndensan.reams.db.dbe.divcontroller.handler.parentdiv.dbe2210001.NinnteiChousaKekkaTouroku1Handler.Dbe2210001Keys;
-import jp.co.ndensan.reams.db.dbe.divcontroller.handler.parentdiv.dbe2210001.NinnteiChousaKekkaTouroku1ValidationHandler;
+import jp.co.ndensan.reams.db.dbe.divcontroller.handler.parentdiv.DBE2210001.NinnteiChousaKekkaTouroku1Handler;
+import jp.co.ndensan.reams.db.dbe.divcontroller.handler.parentdiv.DBE2210001.NinnteiChousaKekkaTouroku1Handler.Dbe2210001Keys;
+import jp.co.ndensan.reams.db.dbe.divcontroller.handler.parentdiv.DBE2210001.NinnteiChousaKekkaTouroku1ValidationHandler;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBE;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo;
@@ -84,6 +84,8 @@ import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
 
 /**
  * 認定調査結果登録1のクラスです。
+ *
+ * @reamsid_L DBE-0040-010 xuyue
  */
 public class NinnteiChousaKekkaTouroku1 {
 
@@ -383,7 +385,6 @@ public class NinnteiChousaKekkaTouroku1 {
      * @param div コントロールdiv
      * @return レスポンスデータ
      */
-    @SuppressWarnings("unchecked")
     public ResponseData<NinnteiChousaKekkaTouroku1Div> onClick_btnZenkaiCopy(NinnteiChousaKekkaTouroku1Div div) {
 
         boolean 前回基本調査項目値あり = ViewStateHolder.get(Dbe2210001Keys.前回基本調査項目値あり, Boolean.class);
@@ -419,7 +420,6 @@ public class NinnteiChousaKekkaTouroku1 {
      * @param div コントロールdiv
      * @return レスポンスデータ
      */
-    @SuppressWarnings("unchecked")
     public ResponseData<NinnteiChousaKekkaTouroku1Div> onClick_btnKiteichiSettei(NinnteiChousaKekkaTouroku1Div div) {
 
         ArrayList<KihonChosaInput> 第1群List = ViewStateHolder.get(KihonChosaInputHandler1.ViewStateKey.第一群認定調査基本情報リスト, ArrayList.class);

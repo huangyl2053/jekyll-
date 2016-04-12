@@ -10,6 +10,8 @@ import jp.co.ndensan.reams.db.dbe.entity.ninnteichousakekkatouroku1.TempDataEnti
 
 /**
  * 認定調査結果登録1のマッパーインタフェースです。
+ *
+ * @reamsid_L DBE-0040-010 xuyue
  */
 public interface IDbe2210001RelateMapper {
 
