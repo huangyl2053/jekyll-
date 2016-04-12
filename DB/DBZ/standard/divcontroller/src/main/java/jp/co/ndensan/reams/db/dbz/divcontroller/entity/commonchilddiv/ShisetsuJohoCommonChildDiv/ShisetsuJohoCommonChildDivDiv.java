@@ -7,6 +7,7 @@ package jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.ShisetsuJ
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import java.util.HashSet;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.binding.ButtonDialog;
 import jp.co.ndensan.reams.uz.uza.ui.binding.DropDownList;
@@ -349,5 +350,15 @@ public class ShisetsuJohoCommonChildDivDiv extends Panel implements IShisetsuJoh
     @Override
     public void setShisetsuMeisho(RString meisho) {
         getHandler().setShisetsuMeisho(meisho);
+    }
+
+    /**
+     * 入所施設名称の設定.
+     *
+     * @param 入所施設コード 入所施設コード
+     */
+    @Override
+    public void get入所施設名称(JigyoshaNo 入所施設コード) {
+        getHandler().get入所施設名称(入所施設コード);
     }
 }
