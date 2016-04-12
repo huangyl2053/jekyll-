@@ -10,7 +10,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
  * DBC0600011のイベント名定義クラスです</br>
  *
  * @author 自動生成
- * @reamsid_L DBC-1020-010 yangchenbing
+ * @reamsid_L DBC-1020-020 yangchenbing
  */
 public enum DBC0600011TransitionEventName implements IContainerEvents {
 // <editor-fold defaultstate="collapsed" desc="Created By UI Designer ver 1.0.0">

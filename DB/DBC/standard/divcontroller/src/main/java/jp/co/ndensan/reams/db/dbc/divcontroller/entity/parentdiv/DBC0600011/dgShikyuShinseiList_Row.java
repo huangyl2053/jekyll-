@@ -13,7 +13,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.DataRow;
  * dgShikyuShinseiList_Row のクラスファイル
  *
  * @author 自動生成
- * @reamsid_L DBC-1020-010 yangchenbing
+ * @reamsid_L DBC-1020-020 yangchenbing
  */
 public class dgShikyuShinseiList_Row extends DataRow {
     // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-01-15_09-59-03">

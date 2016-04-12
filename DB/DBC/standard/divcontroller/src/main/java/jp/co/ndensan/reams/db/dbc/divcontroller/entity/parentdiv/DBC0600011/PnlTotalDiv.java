@@ -12,7 +12,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
  * PnlTotal のクラスファイル
  *
  * @author 自動生成
- * @reamsid_L DBC-1020-010 yangchenbing
+ * @reamsid_L DBC-1020-020 yangchenbing
  */
 public class PnlTotalDiv extends Panel {
 
