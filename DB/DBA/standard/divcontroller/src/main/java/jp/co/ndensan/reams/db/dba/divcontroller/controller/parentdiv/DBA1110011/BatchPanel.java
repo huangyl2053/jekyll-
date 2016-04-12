@@ -29,6 +29,8 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
 /**
  *
  * 被保険者証発行管理簿Divを制御します。
+ *
+ * @reamsid_L DBA-0600-010 zhangguopeng
  */
 public class BatchPanel {
 
