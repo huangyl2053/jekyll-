@@ -10,6 +10,8 @@ import jp.co.ndensan.reams.uz.uza.core.validation.IPredicate;
 
 /**
  * 住宅改修費支給申請一括審査・決定画面JutakuKaishuhiShikyuShinseiPanelSpec
+ *
+ * @reamsid_L DBC-0991-030 surun
  */
 public enum JutakuKaishuhiShikyuShinseiPanelSpec implements IPredicate<JutakuKaishuhiShikyuShinseiPanelDiv> {
 

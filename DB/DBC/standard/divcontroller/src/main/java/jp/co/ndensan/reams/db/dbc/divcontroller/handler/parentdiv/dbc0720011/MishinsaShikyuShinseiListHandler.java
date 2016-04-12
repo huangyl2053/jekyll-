@@ -19,6 +19,8 @@ import jp.co.ndensan.reams.uz.uza.math.Decimal;
 
 /**
  * MishinsaShikyuShinseiListHandler
+ *
+ * @reamsid_L DBC-0991-030 surun
  */
 public final class MishinsaShikyuShinseiListHandler {
 

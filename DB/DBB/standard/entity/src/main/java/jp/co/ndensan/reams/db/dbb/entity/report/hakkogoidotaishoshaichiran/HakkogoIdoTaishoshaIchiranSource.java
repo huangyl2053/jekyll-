@@ -5,7 +5,9 @@ import jp.co.ndensan.reams.uz.uza.report.IReportSource;
 import jp.co.ndensan.reams.uz.uza.report.source.ReportItem;
 
 /**
- *  通知書発行後異動把握帳票Source
+ * 通知書発行後異動把握帳票Source
+ *
+ * @reamsid_L DBB-0690-030 surun
  */
 public class HakkogoIdoTaishoshaIchiranSource implements IReportSource {
 // <editor-fold defaultstate="collapsed" desc="Generated Code">

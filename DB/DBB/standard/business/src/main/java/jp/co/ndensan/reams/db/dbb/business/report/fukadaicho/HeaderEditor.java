@@ -9,6 +9,8 @@ import jp.co.ndensan.reams.db.dbb.entity.report.fukadaicho.FukaDaichoSource;
 
 /**
  * 賦課台帳（本算定）帳票HeaderEditor
+ *
+ * @reamsid_L DBB-9100-030 surun
  */
 class HeaderEditor implements IFukaDaichoEditor {
 

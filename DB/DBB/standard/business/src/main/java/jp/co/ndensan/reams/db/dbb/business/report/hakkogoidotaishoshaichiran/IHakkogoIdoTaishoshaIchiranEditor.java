@@ -10,6 +10,8 @@ import jp.co.ndensan.reams.uz.uza.report.IReportEditor;
 
 /**
  * 通知書発行後異動把握帳票IHakkogoIdoTaishoshaIchiranEditor
+ *
+ * @reamsid_L DBB-0690-030 surun
  */
 public interface IHakkogoIdoTaishoshaIchiranEditor extends IReportEditor<HakkogoIdoTaishoshaIchiranSource> {
 

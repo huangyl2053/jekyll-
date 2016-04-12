@@ -15,6 +15,8 @@ import jp.co.ndensan.reams.uz.uza.message.IValidationMessages;
 
 /**
  * SearchConditionToMishinsaShikyuShinseiPanelValidator
+ *
+ * @reamsid_L DBC-0991-030 surun
  */
 public class SearchConditionToMishinsaShikyuShinseiPanelValidator implements IValidatable {
 

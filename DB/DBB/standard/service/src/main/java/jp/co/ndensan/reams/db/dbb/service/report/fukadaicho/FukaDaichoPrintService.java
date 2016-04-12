@@ -18,6 +18,8 @@ import jp.co.ndensan.reams.uz.uza.report.SourceDataCollection;
 
 /**
  * 賦課台帳（本算定）帳票PrintService
+ *
+ * @reamsid_L DBB-9100-030 surun
  */
 public class FukaDaichoPrintService {
 

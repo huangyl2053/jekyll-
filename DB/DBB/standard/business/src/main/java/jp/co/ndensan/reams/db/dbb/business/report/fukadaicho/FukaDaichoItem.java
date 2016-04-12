@@ -11,6 +11,8 @@ import lombok.Setter;
 
 /**
  * 賦課台帳（本算定）帳票 FukaDaichoItem
+ *
+ * @reamsid_L DBB-9100-030 surun
  */
 @Getter
 @Setter

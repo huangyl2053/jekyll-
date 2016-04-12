@@ -21,6 +21,8 @@ import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
 /**
  * 住宅改修費要介護状態３段階変更判定
  *
+ * @reamsid_L DBC-0992-160 surun
+ *
  */
 public class JutakuKaishuYaokaigoJyotaiSandannkaiHanteiManager {
 

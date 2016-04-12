@@ -10,6 +10,8 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
  * 異動内容を表す列挙型です。
+ *
+ * @reamsid_L DBB-0690-030 surun
  */
 public enum IdoNaiyo {
 
