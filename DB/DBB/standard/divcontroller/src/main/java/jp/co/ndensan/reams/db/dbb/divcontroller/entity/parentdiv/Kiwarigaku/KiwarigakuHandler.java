@@ -37,7 +37,7 @@ public class KiwarigakuHandler {
         月, 特徴期, 特徴期別額, 特徴納付額, 普徴期, 普徴期別額, 普徴納付額;
     };
 
-    private Map<RString, Label> 期割額テーブル = new HashMap<>();
+    private final Map<RString, Label> 期割額テーブル;
 //    private static final int TABLE_SIZE = 15;
 
 //    private static final RString SUFFIX_月 = new RString("月");

@@ -172,7 +172,7 @@ public class Tokucho {
         TokuchoHosokuConfig config = new TokuchoHosokuConfig();
         RString 開始月 = config.get(configKey, toEffectiveDate(年度));
         if (is開始月between01to08(開始月)) {
-            年度.plusYear(1);
+            年度 = 年度.plusYear(1);
         }
         return 年度.toDateString().concat(開始月);
     }

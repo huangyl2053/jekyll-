@@ -7,7 +7,7 @@ package jp.co.ndensan.reams.db.dbb.divcontroller.entity.commonchilddiv.rentainof
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import jp.co.ndensan.reams.db.dbb.divcontroller.handler.commonchilddiv.RentaiNofuGimusha.RentaiNofuGimushaHandler;
+import jp.co.ndensan.reams.db.dbb.divcontroller.handler.commonchilddiv.rentainofugimusha.RentaiNofuGimushaHandler;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.uz.uza.ui.binding.*;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
