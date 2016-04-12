@@ -8,8 +8,9 @@ package jp.co.ndensan.reams.db.dbc.business.report.kagoketteitbun;
 import jp.co.ndensan.reams.db.dbc.entity.report.source.kagoketteitbun.KagoKetteitsuchishoTorikomiIchiranHokenshaBunSource;
 
 /**
- *
  * 過誤決定通知書情報取込一覧表（保険者分） 帳票BodyEditor
+ *
+ * @reamsid_L DBC-0980-470 lijunjun
  */
 public class BodyEditor implements IKagoKetteitsuchishoTorikomiIchiranHokenshaBunEditor {
 

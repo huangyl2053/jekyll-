@@ -9,8 +9,9 @@ import jp.co.ndensan.reams.db.dbc.entity.report.source.kagoketteitbun.KagoKettei
 import jp.co.ndensan.reams.uz.uza.report.ReportEditorJoiner;
 
 /**
+ * 過誤決定通知書情報取込一覧表（保険者分） 帳票
  *
- * 過誤決定通知書情報取込一覧表（保険者分） 帳票Builder
+ * @reamsid_L DBC-0980-470 lijunjun
  */
 public class KagoKetteitsuchishoTorikomiIchiranHokenshaBunBuilder implements IKagoKetteitsuchishoTorikomiIchiranHokenshaBunBuilder {
 

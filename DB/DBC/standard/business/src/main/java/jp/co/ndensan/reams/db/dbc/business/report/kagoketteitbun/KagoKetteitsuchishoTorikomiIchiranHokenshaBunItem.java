@@ -10,8 +10,9 @@ import lombok.Getter;
 import lombok.Setter;
 
 /**
+ * 過誤決定通知書情報取込一覧表（保険者分）
  *
- * @author admin
+ * @reamsid_L DBC-0980-470 lijunjun
  */
 @Getter
 @Setter
