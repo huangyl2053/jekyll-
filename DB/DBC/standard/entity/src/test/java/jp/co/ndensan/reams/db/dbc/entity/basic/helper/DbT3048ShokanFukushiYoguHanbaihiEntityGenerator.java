@@ -14,6 +14,8 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
  * 償還払請求福祉用具販売費エンティティのテスト用インスタンスを作成する補助クラスです。
+ * 
+ * @reamsid_L DBC-1020-070 chenaoqi
  */
 public final class DbT3048ShokanFukushiYoguHanbaihiEntityGenerator {
 

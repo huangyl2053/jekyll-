@@ -38,6 +38,8 @@ import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
 
 /**
  * 償還払請求福祉用具販売費のデータアクセスクラスです。
+ * 
+ * @reamsid_L DBC-1020-070 chenaoqi
  */
 public class DbT3048ShokanFukushiYoguHanbaihiDac implements ISaveable<DbT3048ShokanFukushiYoguHanbaihiEntity> {
 
