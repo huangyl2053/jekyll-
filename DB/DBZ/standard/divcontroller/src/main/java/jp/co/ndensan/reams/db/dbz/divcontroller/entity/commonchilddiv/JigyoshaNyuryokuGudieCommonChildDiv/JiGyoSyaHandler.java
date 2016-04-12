@@ -322,7 +322,7 @@ public class JiGyoSyaHandler {
             IAssociationFinder finder = AssociationFinderFactory.createInstance();
             div.getJigyoshaItirann().getDgJigyoshaItiran().getGridSetting().getColumns().get(4).setVisible(true);
             div.getTaishoJigyoshaKensaku().getTxtMaxHyojiKensu().setValue(new Decimal(BusinessConfig.
-                    get(ConfigNameDBU.検索制御_最大取得件数上限, SubGyomuCode.DBU介護統計報告).toString()));
+                    get(ConfigNameDBU.検索制御_最大取得件数, SubGyomuCode.DBU介護統計報告).toString()));
             div.getKennsakuJyokenn().getTxtJIgyoshaNo().clearValue();
             div.getKennsakuJyokenn().getTxtYukouKaishibi().clearFromValue();
             div.getKennsakuJyokenn().getTxtYukouKaishibi().clearToValue();
@@ -348,7 +348,7 @@ public class JiGyoSyaHandler {
             div.getJigyoshaItirann().getDgJigyoshaItiran().getGridSetting().getColumns().get(4).setVisible(false);
             div.getOtherTokureiShisetsu().getRadKannaiKanngaiKubun().setSelectedKey(管内管外区分_全て);
             div.getTaishoJigyoshaKensaku().getTxtMaxHyojiKensu().setValue(new Decimal(BusinessConfig.
-                    get(ConfigNameDBU.検索制御_最大取得件数上限, SubGyomuCode.DBU介護統計報告).toString()));
+                    get(ConfigNameDBU.検索制御_最大取得件数, SubGyomuCode.DBU介護統計報告).toString()));
             div.getKennsakuJyokenn().getTxtJIgyoshaNo().clearValue();
             div.getKennsakuJyokenn().getTxtYukouKaishibi().clearFromValue();
             div.getKennsakuJyokenn().getTxtYukouKaishibi().clearToValue();
@@ -366,7 +366,7 @@ public class JiGyoSyaHandler {
 
             div.getJigyoshaItirann().getDgJigyoshaItiran().getGridSetting().getColumns().get(4).setVisible(false);
             div.getTaishoJigyoshaKensaku().getTxtMaxHyojiKensu().setValue(new Decimal(BusinessConfig.
-                    get(ConfigNameDBU.検索制御_最大取得件数上限, SubGyomuCode.DBU介護統計報告).toString()));
+                    get(ConfigNameDBU.検索制御_最大取得件数, SubGyomuCode.DBU介護統計報告).toString()));
             div.getKennsakuJyokenn().getTxtJIgyoshaNo().clearValue();
             div.getKennsakuJyokenn().getTxtYukouKaishibi().clearFromValue();
             div.getKennsakuJyokenn().getTxtYukouKaishibi().clearToValue();
