@@ -37,7 +37,7 @@ public class ShokanbarayiKeteiInfo {
         HihokenshaNo 被保険者番号 = ViewStateHolder.get(ViewStateKeys.償還払申請一覧_被保険者番号, HihokenshaNo.class);
         RString 整理番号 = ViewStateHolder.get(ViewStateKeys.償還払申請一覧_整理番号, RString.class);
         RString 業務区分 = new RString("03");
-        RString 画面モード = new RString("モード_照会");
+        RString 画面モード = new RString("照会");
 
         TaishoshaKey 引継ぎデータ = ViewStateHolder.get(ViewStateKeys.資格対象者, TaishoshaKey.class);
         ShikibetsuCode 識別コード = 引継ぎデータ.get識別コード();
