@@ -15,6 +15,7 @@ import jp.co.ndensan.reams.db.dbe.persistence.db.mapper.relate.ninteichosainjika
 import jp.co.ndensan.reams.db.dbx.business.core.shichosonsecurity.ShichosonSecurityJoho;
 import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.GyomuBunrui;
 import jp.co.ndensan.reams.db.dbx.service.core.shichosonsecurity.ShichosonSecurityJohoFinder;
+import jp.co.ndensan.reams.db.dbz.business.core.basic.ChikuShichoson;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.NinteichosaSchedule;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5221NinteichosaScheduleEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5224ChikuShichosonEntity;
@@ -84,16 +85,20 @@ public class NinteiChosainJikanMasterManager {
      * @return SearchResult<DbT5224ChikuShichosonEntity>
      */
     @Transaction
-    public SearchResult<DbT5224ChikuShichosonEntity> getChikuShichosonList() {
+    public SearchResult<ChikuShichoson> getChikuShichosonList() {
+        List<ChikuShichoson> chikuShichoson = new ArrayList<>();
         List<DbT5224ChikuShichosonEntity> dbT5224EntityList = new ArrayList();
         ShichosonSecurityJoho 自市町村情報 = finder.getShichosonSecurityJoho(GyomuBunrui.介護認定);
         if (自市町村情報 != null && 自市町村情報.get市町村情報().get市町村コード() != null) {
             dbT5224EntityList = dbt5224dac.selectByShichosonCode(自市町村情報.get市町村情報().get市町村コード());
         }
         if (dbT5224EntityList == null || dbT5224EntityList.isEmpty()) {
-            return SearchResult.of(Collections.<DbT5224ChikuShichosonEntity>emptyList(), 0, false);
+            return SearchResult.of(Collections.<ChikuShichoson>emptyList(), 0, false);
         }
-        return SearchResult.of(dbT5224EntityList, 0, false);
+        for (DbT5224ChikuShichosonEntity entity : dbT5224EntityList) {
+            chikuShichoson.add(new ChikuShichoson(entity));
+        }
+        return SearchResult.of(chikuShichoson, 0, false);
     }
 
     /**
