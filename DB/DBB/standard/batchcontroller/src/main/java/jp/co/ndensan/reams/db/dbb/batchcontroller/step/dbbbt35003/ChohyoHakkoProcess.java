@@ -10,6 +10,8 @@ import jp.co.ndensan.reams.uz.uza.batch.process.SimpleBatchProcessBase;
 
 /**
  * 帳票の発行クラスです。
+ *
+ * @reamsid_L DBB-0820-030 xuyue
  */
 public class ChohyoHakkoProcess extends SimpleBatchProcessBase {
 

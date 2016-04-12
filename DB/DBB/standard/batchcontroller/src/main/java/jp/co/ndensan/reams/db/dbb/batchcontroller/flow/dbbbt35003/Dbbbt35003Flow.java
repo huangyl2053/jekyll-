@@ -14,6 +14,8 @@ import jp.co.ndensan.reams.uz.uza.batch.flow.IBatchFlowCommand;
 
 /**
  * 特徴平準化（特徴6月分）通知書一括発行のバッチフロークラスです。
+ *
+ * @reamsid_L DBB-0820-030 xuyue
  */
 public class Dbbbt35003Flow extends BatchFlowBase<Dbbbt35003FlowParameter> {
 

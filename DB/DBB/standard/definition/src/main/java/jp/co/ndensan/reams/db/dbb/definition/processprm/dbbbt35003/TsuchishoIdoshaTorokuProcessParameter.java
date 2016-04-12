@@ -8,8 +8,9 @@ package jp.co.ndensan.reams.db.dbb.definition.processprm.dbbbt35003;
 import jp.co.ndensan.reams.uz.uza.batch.parameter.IBatchProcessParameter;
 
 /**
- *
  * 通知書発行後異動者の登録_バッチ処理クラスパラメータクラスです。
+ *
+ * @reamsid_L DBB-0820-030 xuyue
  */
 @lombok.Getter
 @lombok.Setter
