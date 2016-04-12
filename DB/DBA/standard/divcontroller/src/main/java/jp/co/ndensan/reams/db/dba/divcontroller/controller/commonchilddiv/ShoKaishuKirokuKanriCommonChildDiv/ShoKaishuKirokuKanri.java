@@ -31,26 +31,13 @@ public class ShoKaishuKirokuKanri {
     private static final RString 状態_削除 = new RString("削除");
 
     /**
-     * 証回収記録管理一覧。<br/>
-     *
-     * @param requestDiv 証回収記録管理一覧Div
-     * @return ResponseData<ShoKaishuKirokuKanriDiv>
-     */
-    public ResponseData<ShoKaishuKirokuKanriDiv> onLoad(ShoKaishuKirokuKanriDiv requestDiv) {
-        ResponseData<ShoKaishuKirokuKanriDiv> responseData = new ResponseData<>();
-        createHandlerOf(requestDiv).initialize();
-        responseData.data = requestDiv;
-        return responseData;
-    }
-
-    /**
      * 選択ボタン。<br/>
      *
      * @param requestDiv 証回収記録管理一覧Div
      * @return ResponseData<ShoKaishuKirokuKanriDiv>
      */
     public ResponseData<ShoKaishuKirokuKanriDiv> onClick_BtnSenTaKu(ShoKaishuKirokuKanriDiv requestDiv) {
-        requestDiv.setMode_DisplayMode(ShoKaishuKirokuKanriDiv.DisplayMode.照会_選択);
+        requestDiv.setMode_DisplayMode(ShoKaishuKirokuKanriDiv.DisplayMode.shokai_selected);
         dgKoufuKaishu_Row dgKoufuKaishuRow = requestDiv.getDgKoufuKaishu().getSelectedItems().get(0);
         requestDiv.getPanelInput().getTxtKoufuType().setValue(dgKoufuKaishuRow.getKoufuType());
         requestDiv.getPanelInput().getTxtKoufuDate().setValue(new RDate(dgKoufuKaishuRow.getKoufuDate().toString()));
@@ -81,14 +68,12 @@ public class ShoKaishuKirokuKanri {
      * @return ResponseData<ShoKaishuKirokuKanriDiv>
      */
     public ResponseData<ShoKaishuKirokuKanriDiv> onClick_DeleteButton(ShoKaishuKirokuKanriDiv requestDiv) {
-
         ViewStateHolder.put(ViewStateKeys.状態, 状態_削除);
         return createResponseData(状態の修正(requestDiv, 状態_削除));
     }
 
     private ShoKaishuKirokuKanriDiv 状態の修正(ShoKaishuKirokuKanriDiv requestDiv, RString 状態) {
         dgKoufuKaishu_Row dgKoufuKaishuRow = requestDiv.getDgKoufuKaishu().getSelectedItems().get(0);
-
         requestDiv.getPanelInput().getTxtKoufuType().setValue(dgKoufuKaishuRow.getKoufuType());
         requestDiv.getPanelInput().getTxtKoufuDate().setValue(new RDate(dgKoufuKaishuRow.getKoufuDate().toString()));
         requestDiv.getPanelInput().getTxtYukouKigen().setValue(new RDate(dgKoufuKaishuRow.getYukoKigen().toString()));
@@ -97,14 +82,12 @@ public class ShoKaishuKirokuKanri {
         requestDiv.getPanelInput().getTxtKaisyuDate().setValue(new RDate(dgKoufuKaishuRow.getKaishuDate().toString()));
         requestDiv.getPanelInput().getDdlKaisyuJiyu().setSelectedValue(dgKoufuKaishuRow.getKaishuJiyu());
         requestDiv.getPanelInput().getTxaKaishuRiyu().setValue(dgKoufuKaishuRow.getKaishuRiyu());
-        requestDiv.getBtnCancel().setDisabled(false);
-        requestDiv.getBtnConfirm().setDisabled(false);
 
         if (状態_削除.equals(状態)) {
 
-            requestDiv.setMode_DisplayMode(ShoKaishuKirokuKanriDiv.DisplayMode.修正);
+            requestDiv.setMode_DisplayMode(ShoKaishuKirokuKanriDiv.DisplayMode.sakujyo);
         } else {
-            requestDiv.setMode_DisplayMode(ShoKaishuKirokuKanriDiv.DisplayMode.削除);
+            requestDiv.setMode_DisplayMode(ShoKaishuKirokuKanriDiv.DisplayMode.koshin);
         }
         return requestDiv;
     }

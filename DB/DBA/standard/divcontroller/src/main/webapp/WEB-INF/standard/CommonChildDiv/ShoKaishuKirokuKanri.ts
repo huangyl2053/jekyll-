@@ -39,7 +39,7 @@ module DBA
                     this.controls = controls;
                 }
                 
-                public 照会(): void {
+                public shokai(): void {
                     this.controls.panelKoufuList().displayNone = false;
                     this.controls.dgKoufuKaishu().gridSetting.isShowSelectButtonColumn = true;
                     this.controls.dgKoufuKaishu().gridSetting.isShowModifyButtonColumn = false;
@@ -47,31 +47,59 @@ module DBA
                     this.controls.dgKoufuKaishu()._control.afterPropertiesSet();
                     this.controls.panelInput().displayNone = true;
                 }
-                
-                public 照会_選択(): void {
+
+                public shokai_selected(): void {
                     this.controls.panelKoufuList().displayNone = false;
                     this.controls.dgKoufuKaishu().gridSetting.isShowSelectButtonColumn = true;
                     this.controls.dgKoufuKaishu().gridSetting.isShowModifyButtonColumn = false;
                     this.controls.dgKoufuKaishu().gridSetting.isShowDeleteButtonColumn = false;
                     this.controls.dgKoufuKaishu()._control.afterPropertiesSet();
-                    this.controls.panelInput().displayNone = false;
+                    this.controls.txtKoufuType().disabled = true;
+                    this.controls.txtKoufuDate().disabled = true;
+                    this.controls.txtYukouKigen().disabled = true;
+                    this.controls.ddlKoufuJiyu().disabled = true;
+                    this.controls.txaKoufuRiyu().disabled = true;
+                    this.controls.txtKaisyuDate().disabled = true;
+                    this.controls.ddlKaisyuJiyu().disabled = true;
+                    this.controls.txaKaishuRiyu().disabled = true;
+                    this.controls.btnCancel().displayNone = true;
+                    this.controls.btnConfirm().displayNone = true;
                 }
-                
-                public 修正(): void {
-                    this.controls.panelKoufuList().displayNone = false;
-                    this.controls.dgKoufuKaishu().gridSetting.isShowSelectButtonColumn = false;
-                    this.controls.dgKoufuKaishu().gridSetting.isShowModifyButtonColumn = true;
-                    this.controls.dgKoufuKaishu().gridSetting.isShowDeleteButtonColumn = true;
-                    this.controls.dgKoufuKaishu()._control.afterPropertiesSet();
-                    this.controls.panelInput().displayNone = false;
-                }
-                public 削除(): void {
-                    this.controls.panelKoufuList().displayNone = false;
-                    this.controls.dgKoufuKaishu().gridSetting.isShowSelectButtonColumn = false;
-                    this.controls.dgKoufuKaishu().gridSetting.isShowModifyButtonColumn = true;
-                    this.controls.dgKoufuKaishu().gridSetting.isShowDeleteButtonColumn = true;
-                    this.controls.dgKoufuKaishu()._control.afterPropertiesSet();
 
+                public koshin(): void {
+                    this.controls.panelKoufuList().displayNone = false;
+                    this.controls.dgKoufuKaishu().gridSetting.isShowSelectButtonColumn = false;
+                    this.controls.dgKoufuKaishu().gridSetting.isShowModifyButtonColumn = true;
+                    this.controls.dgKoufuKaishu().gridSetting.isShowDeleteButtonColumn = true;
+                    this.controls.dgKoufuKaishu()._control.afterPropertiesSet();
+                    this.controls.txtKoufuType().disabled = true;
+                    this.controls.txtKoufuDate().disabled = false;
+                    this.controls.txtYukouKigen().disabled = false;
+                    this.controls.ddlKoufuJiyu().disabled = false;
+                    this.controls.txaKoufuRiyu().disabled = false;
+                    this.controls.txtKaisyuDate().disabled = false;
+                    this.controls.ddlKaisyuJiyu().disabled = false;
+                    this.controls.txaKaishuRiyu().disabled = false;
+                    this.controls.btnCancel().disabled = false;
+                    this.controls.btnConfirm().disabled = false;
+                }
+
+                public sakujyo(): void {
+                    this.controls.panelKoufuList().displayNone = false;
+                    this.controls.dgKoufuKaishu().gridSetting.isShowSelectButtonColumn = false;
+                    this.controls.dgKoufuKaishu().gridSetting.isShowModifyButtonColumn = true;
+                    this.controls.dgKoufuKaishu().gridSetting.isShowDeleteButtonColumn = true;
+                    this.controls.dgKoufuKaishu()._control.afterPropertiesSet();
+                    this.controls.txtKoufuType().disabled = true;
+                    this.controls.txtKoufuDate().disabled = true;
+                    this.controls.txtYukouKigen().disabled = true;
+                    this.controls.ddlKoufuJiyu().disabled = true;
+                    this.controls.txaKoufuRiyu().disabled = true;
+                    this.controls.txtKaisyuDate().disabled = true;
+                    this.controls.ddlKaisyuJiyu().disabled = true;
+                    this.controls.txaKaishuRiyu().disabled = true;
+                    this.controls.btnCancel().disabled = false;
+                    this.controls.btnConfirm().disabled = false;
                 }
 			}
 

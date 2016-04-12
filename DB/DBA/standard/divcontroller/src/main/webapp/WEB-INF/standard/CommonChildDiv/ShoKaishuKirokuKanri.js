@@ -32,7 +32,7 @@ var DBA;
                 function DisplayMode(controls) {
                     this.controls = controls;
                 }
-                DisplayMode.prototype.照会 = function () {
+                DisplayMode.prototype.shokai = function () {
                     this.controls.panelKoufuList().displayNone = false;
                     this.controls.dgKoufuKaishu().gridSetting.isShowSelectButtonColumn = true;
                     this.controls.dgKoufuKaishu().gridSetting.isShowModifyButtonColumn = false;
@@ -41,29 +41,58 @@ var DBA;
                     this.controls.panelInput().displayNone = true;
                 };
 
-                DisplayMode.prototype.照会_選択 = function () {
+                DisplayMode.prototype.shokai_selected = function () {
                     this.controls.panelKoufuList().displayNone = false;
                     this.controls.dgKoufuKaishu().gridSetting.isShowSelectButtonColumn = true;
                     this.controls.dgKoufuKaishu().gridSetting.isShowModifyButtonColumn = false;
                     this.controls.dgKoufuKaishu().gridSetting.isShowDeleteButtonColumn = false;
                     this.controls.dgKoufuKaishu()._control.afterPropertiesSet();
-                    this.controls.panelInput().displayNone = false;
+                    this.controls.txtKoufuType().disabled = true;
+                    this.controls.txtKoufuDate().disabled = true;
+                    this.controls.txtYukouKigen().disabled = true;
+                    this.controls.ddlKoufuJiyu().disabled = true;
+                    this.controls.txaKoufuRiyu().disabled = true;
+                    this.controls.txtKaisyuDate().disabled = true;
+                    this.controls.ddlKaisyuJiyu().disabled = true;
+                    this.controls.txaKaishuRiyu().disabled = true;
+                    this.controls.btnCancel().displayNone = true;
+                    this.controls.btnConfirm().displayNone = true;
                 };
 
-                DisplayMode.prototype.修正 = function () {
+                DisplayMode.prototype.koshin = function () {
                     this.controls.panelKoufuList().displayNone = false;
                     this.controls.dgKoufuKaishu().gridSetting.isShowSelectButtonColumn = false;
                     this.controls.dgKoufuKaishu().gridSetting.isShowModifyButtonColumn = true;
                     this.controls.dgKoufuKaishu().gridSetting.isShowDeleteButtonColumn = true;
                     this.controls.dgKoufuKaishu()._control.afterPropertiesSet();
-                    this.controls.panelInput().displayNone = false;
+                    this.controls.txtKoufuType().disabled = true;
+                    this.controls.txtKoufuDate().disabled = false;
+                    this.controls.txtYukouKigen().disabled = false;
+                    this.controls.ddlKoufuJiyu().disabled = false;
+                    this.controls.txaKoufuRiyu().disabled = false;
+                    this.controls.txtKaisyuDate().disabled = false;
+                    this.controls.ddlKaisyuJiyu().disabled = false;
+                    this.controls.txaKaishuRiyu().disabled = false;
+                    this.controls.btnCancel().disabled = false;
+                    this.controls.btnConfirm().disabled = false;
                 };
-                DisplayMode.prototype.削除 = function () {
+
+                DisplayMode.prototype.sakujyo = function () {
                     this.controls.panelKoufuList().displayNone = false;
                     this.controls.dgKoufuKaishu().gridSetting.isShowSelectButtonColumn = false;
                     this.controls.dgKoufuKaishu().gridSetting.isShowModifyButtonColumn = true;
                     this.controls.dgKoufuKaishu().gridSetting.isShowDeleteButtonColumn = true;
                     this.controls.dgKoufuKaishu()._control.afterPropertiesSet();
+                    this.controls.txtKoufuType().disabled = true;
+                    this.controls.txtKoufuDate().disabled = true;
+                    this.controls.txtYukouKigen().disabled = true;
+                    this.controls.ddlKoufuJiyu().disabled = true;
+                    this.controls.txaKoufuRiyu().disabled = true;
+                    this.controls.txtKaisyuDate().disabled = true;
+                    this.controls.ddlKaisyuJiyu().disabled = true;
+                    this.controls.txaKaishuRiyu().disabled = true;
+                    this.controls.btnCancel().disabled = false;
+                    this.controls.btnConfirm().disabled = false;
                 };
                 return DisplayMode;
             })();

@@ -10,12 +10,10 @@ import java.util.List;
 import jp.co.ndensan.reams.db.dba.business.ShoKofuKaishuJohoModel;
 import jp.co.ndensan.reams.db.dba.service.core.shokofukaishujoho.ShoKofuKaishuJohoManager;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
-import jp.co.ndensan.reams.db.dbz.definition.core.ViewStateKeys;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.CodeShubetsu;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.binding.KeyValueDataSource;
-import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 import jp.co.ndensan.reams.uz.uza.util.code.CodeMaster;
 import jp.co.ndensan.reams.uz.uza.util.code.entity.UzT0007CodeEntity;
 
@@ -45,14 +43,17 @@ public class ShoKaishuKirokuKanriHandler {
 
     /**
      * 証交付回収情報を検索する。
+     *
+     * @param 状態 状態
+     * @param 被保険者番号 被保険者番号
      */
-    public void initialize() {
+    public void initialize(RString 状態, HihokenshaNo 被保険者番号) {
 
         div.getPanelInput().getDdlKoufuJiyu().setDataSource(getCode(new CodeShubetsu(CODESHUBETSU_0116)));
         div.getPanelInput().getDdlKaisyuJiyu().setDataSource(getCode(new CodeShubetsu(CODESHUBETSU_0015)));
-        if (状態_照会.equals(ViewStateHolder.get(ViewStateKeys.状態, RString.class))) {
+        if (状態_照会.equals(状態)) {
             List<ShoKofuKaishuJohoModel> businessList = ShoKofuKaishuJohoManager.createInstance()
-                    .getShoKofuKaishuJohoList(new HihokenshaNo(ViewStateHolder.get(ViewStateKeys.被保険者番号, RString.class)), False).records();
+                    .getShoKofuKaishuJohoList(被保険者番号, False).records();
             List<dgKoufuKaishu_Row> dgKoufuKaishuList = new ArrayList();
             if (businessList != null && !businessList.isEmpty()) {
 
@@ -76,9 +77,9 @@ public class ShoKaishuKirokuKanriHandler {
             div.getDgKoufuKaishu().getGridSetting().setIsShowModifyButtonColumn(False);
             div.getDgKoufuKaishu().getGridSetting().setIsShowRowState(False);
         }
-        if (状態_更新.equals(ViewStateHolder.get(ViewStateKeys.状態, RString.class))) {
+        if (状態_更新.equals(状態)) {
             List<ShoKofuKaishuJohoModel> businessList = ShoKofuKaishuJohoManager.createInstance().
-                    getShoKofuKaishuJohoList(new HihokenshaNo(ViewStateHolder.get(ViewStateKeys.被保険者番号, RString.class)), False).records();
+                    getShoKofuKaishuJohoList(被保険者番号, False).records();
             List<dgKoufuKaishu_Row> dgKoufuKaishuList = new ArrayList();
             if (businessList != null && !businessList.isEmpty()) {
 
