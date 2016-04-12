@@ -19,6 +19,8 @@ import jp.co.ndensan.reams.uz.uza.math.Decimal;
 
 /**
  * {@link ShokanShinsei}の編集を行うビルダークラスです。
+ *
+ * @reamsid_L DBC-9999-012 xicongwang
  */
 public class ShokanShinseiBuilder {
 
@@ -267,7 +269,7 @@ public class ShokanShinseiBuilder {
         entity.setJutakuJushoHenko(住宅住所変更);
         return this;
     }
-    
+
     /**
      * 要介護状態３段階変更を設定します。
      *
@@ -278,7 +280,7 @@ public class ShokanShinseiBuilder {
         entity.setYokaigo3DankaiHenko(要介護状態３段階変更);
         return this;
     }
-    
+
     /**
      * 審査結果を設定します。
      *
@@ -289,7 +291,7 @@ public class ShokanShinseiBuilder {
         entity.setShinsaKekka(審査結果);
         return this;
     }
-    
+
     /**
      * 審査年月日を設定します。
      *
@@ -300,7 +302,7 @@ public class ShokanShinseiBuilder {
         entity.setShinsaYMD(審査年月日);
         return this;
     }
-    
+
     /**
      * 審査方法区分を設定します。
      *

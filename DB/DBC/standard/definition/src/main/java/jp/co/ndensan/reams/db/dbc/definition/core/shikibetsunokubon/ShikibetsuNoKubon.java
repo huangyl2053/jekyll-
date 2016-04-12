@@ -11,6 +11,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 /**
  * 識別番号区分を表す列挙型です。
  *
+ * @reamsid_L DBC-1030-210 xicongwang
  */
 public enum ShikibetsuNoKubon {
 
