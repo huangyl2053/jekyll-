@@ -13,6 +13,8 @@ import lombok.NonNull;
 
 /**
  * 広域内転居結果一覧表のReportです。
+ *
+ * @reamsid_L DBU-1150-070 zhangguopeng
  */
 public class KoikinaiTenkyoKekkaIchiranhyoReport extends Report<KoikinaiTenkyoKekkaIchiranhyoReportSource> {
 
