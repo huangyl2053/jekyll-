@@ -32,7 +32,7 @@ public class ShisetsuNyutaishoIdoHandler {
      * @param 識別コード 識別コード
      */
     public void initLoad(ShikibetsuCode 識別コード) {
-        div.getKaigoKanryoMessageOya().setDisplayNone(true);
+
         div.getKihonJoho().getCcdKaigoAtenaInfo().onLoad(識別コード);
         init介護資格系基本情報(識別コード);
         init施設入退所異動エリア(識別コード);
