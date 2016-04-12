@@ -17,6 +17,8 @@ import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 
 /**
  * 識別番号管理を管理するクラスです。
+ *
+ * @reamsid_L DBC-9999-012 xicongwang
  */
 public class ShikibetsuNoKanri extends ModelBase<ShikibetsuNoKanriIdentifier, DbT3118ShikibetsuNoKanriEntity, ShikibetsuNoKanri>
         implements Serializable {

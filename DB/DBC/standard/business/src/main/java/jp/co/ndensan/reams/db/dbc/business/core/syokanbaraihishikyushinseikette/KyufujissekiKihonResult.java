@@ -10,6 +10,8 @@ import jp.co.ndensan.reams.db.dbc.entity.db.relate.syokanbaraihishikyushinseiket
 
 /**
  * 給付実績基本情報リストのオブジェクトクラスです。
+ *
+ * @reamsid_L DBC-1030-200 xicongwang
  */
 @lombok.Getter
 @lombok.Setter

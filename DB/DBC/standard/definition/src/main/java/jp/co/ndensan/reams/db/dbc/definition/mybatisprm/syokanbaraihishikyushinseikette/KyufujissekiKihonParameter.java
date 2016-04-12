@@ -13,6 +13,8 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 /**
  *
  * 社福軽減額サービス種類一覧MyBatisパラメータクラスです。
+ *
+ * @reamsid_L DBC-1030-200 xicongwang
  */
 @lombok.Getter
 @lombok.Setter

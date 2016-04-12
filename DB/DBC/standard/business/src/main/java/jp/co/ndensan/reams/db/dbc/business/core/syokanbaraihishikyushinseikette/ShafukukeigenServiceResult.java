@@ -10,6 +10,8 @@ import jp.co.ndensan.reams.db.dbc.entity.db.relate.syokanbaraihishikyushinseiket
 
 /**
  * 社福軽減額サービス種類一覧のオブジェクトクラスです。
+ *
+ * @reamsid_L DBC-1030-200 xicongwang
  */
 @lombok.Getter
 @lombok.Setter

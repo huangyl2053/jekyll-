@@ -11,6 +11,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 /**
  * 決定情報登録更新MyBatisパラメータクラスです。
  *
+ * @reamsid_L DBC-1030-200 xicongwang
  */
 @lombok.Getter
 @lombok.Setter

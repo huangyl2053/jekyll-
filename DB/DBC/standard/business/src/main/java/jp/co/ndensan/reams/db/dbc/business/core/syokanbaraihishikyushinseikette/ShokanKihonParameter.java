@@ -13,6 +13,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 /**
  * 償還払い費支給申請決定処理パラメータクラスです。
  *
+ * @reamsid_L DBC-1030-200 xicongwang
  */
 @lombok.Getter
 @lombok.Setter

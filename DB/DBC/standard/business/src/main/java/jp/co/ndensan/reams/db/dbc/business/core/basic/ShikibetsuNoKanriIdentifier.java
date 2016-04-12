@@ -12,6 +12,8 @@ import lombok.Value;
 
 /**
  * 識別番号管理の識別子です。
+ *
+ * @reamsid_L DBC-9999-012 xicongwang
  */
 @Value
 @SuppressWarnings("PMD.UnusedPrivateField")
