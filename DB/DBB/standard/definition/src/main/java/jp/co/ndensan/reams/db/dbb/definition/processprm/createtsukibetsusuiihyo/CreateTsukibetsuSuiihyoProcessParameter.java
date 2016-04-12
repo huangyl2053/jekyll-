@@ -14,7 +14,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
  *
  * 月別推移表作成のバッチ処理クラスのパラメータです。
  *
- * @reamsid_L DBB-0760-010 zhangguopeng
+ * @reamsid_L DBB-0760-020 zhangguopeng
  */
 @lombok.Getter
 @lombok.Setter
