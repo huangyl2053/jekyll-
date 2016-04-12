@@ -13,6 +13,8 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
  * 契約者一覧取得用画面検索DIVのクラスです。
+ *
+ * @reamsid_L DBC-2130-030 xicongwang
  */
 @lombok.Getter
 @lombok.Setter

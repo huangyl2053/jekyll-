@@ -37,6 +37,8 @@ import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 
 /**
  * 受領委任契約（福祉用具購入費・住宅改修費）登録・追加・修正・照会
+ *
+ * @reamsid_L DBC-2130-030 xicongwang
  */
 public class ShokanJuryoininKeiyakushaFinder {
 

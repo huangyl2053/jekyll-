@@ -10,6 +10,8 @@ import jp.co.ndensan.reams.db.dbc.entity.db.relate.shokanjuryoininkeiyakusha.Sho
 
 /**
  * 契約者一覧のクラスです。
+ *
+ * @reamsid_L DBC-2130-030 xicongwang
  */
 @lombok.Getter
 @lombok.Setter

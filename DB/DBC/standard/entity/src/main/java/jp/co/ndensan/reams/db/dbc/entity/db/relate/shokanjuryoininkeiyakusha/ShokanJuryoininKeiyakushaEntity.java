@@ -13,6 +13,7 @@ import jp.co.ndensan.reams.ur.urz.definition.core.shikibetsutaisho.IName;
 /**
  * 契約者一覧Entityクラスです。
  *
+ * @reamsid_L DBC-2130-030 xicongwang
  */
 @lombok.Setter
 @lombok.Getter

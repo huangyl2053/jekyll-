@@ -11,6 +11,8 @@ import jp.co.ndensan.reams.db.dbc.entity.db.relate.shokanjuryoininkeiyakusha.Sho
 
 /**
  * 受領委任契約（福祉用具購入費・住宅改修費）登録・追加・修正・照会のマッパーインタフェースです。
+ *
+ * @reamsid_L DBC-2130-030 xicongwang
  */
 public interface IShokanJuryoininKeiyakushaMapper {
 
