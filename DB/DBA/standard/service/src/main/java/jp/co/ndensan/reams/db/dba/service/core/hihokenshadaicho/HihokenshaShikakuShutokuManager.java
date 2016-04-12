@@ -14,6 +14,7 @@ import jp.co.ndensan.reams.db.dba.definition.core.shikakuidojiyu.ShikakuShutokuJ
 import jp.co.ndensan.reams.db.dba.definition.mybatis.param.hihokenshadaicho.HihokenshaShikakuShutokuMapperParameter;
 import jp.co.ndensan.reams.db.dba.persistence.db.mapper.relate.hihokenshadaicho.IHihokenshaShikakuShutokuMapper;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
+import jp.co.ndensan.reams.db.dbz.business.core.HihokenshaDaicho;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT1001HihokenshaDaichoEntity;
 import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT1001HihokenshaDaichoDac;
 import jp.co.ndensan.reams.db.dbz.service.core.MapperProvider;
@@ -108,13 +109,14 @@ public class HihokenshaShikakuShutokuManager {
     /**
      * 被保険者台帳管理（資格取得）登録処理します。
      *
-     * @param entity 被保険者台帳管理テーブルのエンティティ
+     * @param hihokenshaDaicho 被保険者台帳管理
      * @param 生年月日 当該識別対象の生年月日
      */
     @Transaction
-    public void saveHihokenshaShutoku(DbT1001HihokenshaDaichoEntity entity, IDateOfBirth 生年月日) {
-        requireNonNull(entity, UrSystemErrorMessages.値がnull.getReplacedMessage("被保険者台帳管理（資格取得）Entity"));
+    public void saveHihokenshaShutoku(HihokenshaDaicho hihokenshaDaicho, IDateOfBirth 生年月日) {
+        requireNonNull(hihokenshaDaicho, UrSystemErrorMessages.値がnull.getReplacedMessage("被保険者台帳管理"));
         requireNonNull(生年月日, UrSystemErrorMessages.値がnull.getReplacedMessage("当該識別対象の生年月日"));
+        DbT1001HihokenshaDaichoEntity entity = hihokenshaDaicho.toEntity();
         HihokenshaNo hihokenshaNo = HihokenshanotsukibanFinder.createInstance().getHihokenshanotsukiban(entity.getShikibetsuCode());
         RString age = get年齢(生年月日, entity.getShikakuShutokuYMD());
         if (Integer.parseInt(age.toString()) >= AGE_65) {

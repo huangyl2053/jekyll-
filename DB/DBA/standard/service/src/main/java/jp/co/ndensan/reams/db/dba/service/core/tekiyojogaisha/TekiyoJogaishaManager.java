@@ -18,6 +18,7 @@ import jp.co.ndensan.reams.db.dba.entity.db.relate.tekiyojogaisha.tekiyojogaisha
 import jp.co.ndensan.reams.db.dba.persistence.db.mapper.relate.tekiyojogaisha.tekiyojogaisha.ITekiyoJogaishaMapper;
 import jp.co.ndensan.reams.db.dba.service.core.hihokenshadaicho.HihokenshaShikakuShutokuManager;
 import jp.co.ndensan.reams.db.dba.service.core.jushochitokurei.shisetsunyutaisho.ShisetsuNyutaishoManager;
+import jp.co.ndensan.reams.db.dbz.business.core.HihokenshaDaicho;
 import jp.co.ndensan.reams.db.dbz.business.core.TekiyoJogaisha;
 import jp.co.ndensan.reams.db.dbz.definition.core.enumeratedtype.DaichoType;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT1001HihokenshaDaichoEntity;
@@ -287,7 +288,7 @@ public class TekiyoJogaishaManager {
             entity.setShikakuShutokuYMD(解除年月日);
             entity.setShikakuShutokuTodokedeYMD(解除届出年月日);
             entity.setKyuShichosonCode(shikibetsuTaisho.get旧全国地方公共団体コード());
-            HihokenshaShikakuShutokuManager.createInstance().saveHihokenshaShutoku(entity, shikibetsuTaisho.get生年月日());
+            HihokenshaShikakuShutokuManager.createInstance().saveHihokenshaShutoku(new HihokenshaDaicho(entity), shikibetsuTaisho.get生年月日());
         }
     }
 

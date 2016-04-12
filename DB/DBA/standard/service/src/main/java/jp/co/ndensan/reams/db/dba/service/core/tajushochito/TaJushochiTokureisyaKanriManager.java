@@ -21,6 +21,7 @@ import jp.co.ndensan.reams.db.dba.service.core.hihokenshadaicho.HihokenshaShikak
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.code.KaigoTatokuKaijoJiyu;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.code.KaigoTatokuTekiyoJiyu;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
+import jp.co.ndensan.reams.db.dbz.business.core.HihokenshaDaicho;
 import jp.co.ndensan.reams.db.dbz.business.core.TashichosonJushochiTokurei;
 import jp.co.ndensan.reams.db.dbz.definition.core.enumeratedtype.DaichoType;
 import jp.co.ndensan.reams.db.dbz.definition.core.jigyoshashubetsu.JigyosyaType;
@@ -92,8 +93,7 @@ public class TaJushochiTokureisyaKanriManager {
     /**
      * {@link InstanceProvider#create}にて生成した{@link TaJushochiTokureisyaKanriManager}のインスタンスを返します。
      *
-     * @return
-     * {@link InstanceProvider#create}にて生成した{@link TaJushochiTokureisyaKanriManager}のインスタンス
+     * @return {@link InstanceProvider#create}にて生成した{@link TaJushochiTokureisyaKanriManager}のインスタンス
      */
     public static TaJushochiTokureisyaKanriManager createInstance() {
         return InstanceProvider.create(TaJushochiTokureisyaKanriManager.class);
@@ -320,7 +320,7 @@ public class TaJushochiTokureisyaKanriManager {
             dbT1001entity.setKyuShichosonCode(旧市町村コード);
         }
         HihokenshaShikakuShutokuManager.createInstance().saveHihokenshaShutoku(
-                dbT1001entity, DateOfBirthFactory.createInstance(生年月日));
+                new HihokenshaDaicho(dbT1001entity), DateOfBirthFactory.createInstance(生年月日));
 
     }
 
