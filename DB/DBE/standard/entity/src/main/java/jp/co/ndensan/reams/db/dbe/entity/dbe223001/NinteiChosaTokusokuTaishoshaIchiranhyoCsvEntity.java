@@ -12,6 +12,7 @@ import lombok.Getter;
 /**
  * 認定調査督促対象者一覧表Csvを定義したEntityクラスです。
  *
+ * @reamsid_L DBE-0030-040 xuyue
  */
 @SuppressWarnings("PMD.UnusedPrivateField")
 @Getter

@@ -16,6 +16,8 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
  * 認定調査督促状発行のマッパーインタフェースです。
+ *
+ * @reamsid_L DBE-0030-040 xuyue
  */
 public interface IDbe223001RelateMapper {
 

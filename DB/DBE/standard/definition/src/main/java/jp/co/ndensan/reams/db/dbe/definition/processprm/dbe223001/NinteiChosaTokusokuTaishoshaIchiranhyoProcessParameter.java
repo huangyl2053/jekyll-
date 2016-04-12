@@ -12,8 +12,9 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 
 /**
- *
  * 認定調査督促対象者一覧表作成_バッチ処理クラスパラメータクラスです。
+ *
+ * @reamsid_L DBE-0030-040 xuyue
  */
 @SuppressWarnings("PMD.UnusedPrivateField")
 @lombok.Getter

@@ -46,6 +46,8 @@ import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
 
 /**
  * 要介護認定調査督促状の作成クラスです。
+ *
+ * @reamsid_L DBE-0030-040 xuyue
  */
 public class NinteiChosaTokusokujoReportProcess extends BatchProcessBase<NinteiChosaTokusokujoRelateEntity> {
 
