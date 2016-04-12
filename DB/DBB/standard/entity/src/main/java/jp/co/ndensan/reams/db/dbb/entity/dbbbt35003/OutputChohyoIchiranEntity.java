@@ -13,6 +13,7 @@ import lombok.Setter;
 /**
  * 画面側からの出力帳票一覧データを定義したEntityクラスです。
  *
+ * @reamsid_L DBB-0820-030 xuyue
  */
 @SuppressWarnings("PMD.UnusedPrivateField")
 @Setter
@@ -22,5 +23,5 @@ public class OutputChohyoIchiranEntity {
     private RString chohyoName;
     private RString shutsuryokujun;
     private TextBoxNum hdnHyojijun;
- 
+
 }

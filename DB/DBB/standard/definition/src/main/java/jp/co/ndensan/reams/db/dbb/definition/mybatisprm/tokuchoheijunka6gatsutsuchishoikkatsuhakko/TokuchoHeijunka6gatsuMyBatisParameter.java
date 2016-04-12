@@ -5,13 +5,15 @@
  */
 package jp.co.ndensan.reams.db.dbb.definition.mybatisprm.tokuchoheijunka6gatsutsuchishoikkatsuhakko;
 
+import java.util.List;
 import jp.co.ndensan.reams.db.dbz.definition.core.kyotsu.ShoriName;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
+ * 特徴平準化（特徴6月分）通知書一括発行(バッチ) SQLパラメータクラスです。
  *
- * TokuchoHeijunka6gatsuTsuchishoIkkatsuHakko sqlparameter
+ * @reamsid_L DBB-0820-040 xuyue
  */
 @lombok.Getter
 @lombok.Setter
@@ -20,6 +22,7 @@ public class TokuchoHeijunka6gatsuMyBatisParameter {
 
     private SubGyomuCode サブ業務コード;
     private RString 調定年度;
+    private List<RString> 通知内容コード;
     private ShoriName 処理名;
     //TODO UE特徴分配.Enum.通知内容コード.特別徴収対象者情報, UE特徴分配.Enum.通知内容コード.特別徴収追加候補者情報
     //TODO DBB介護賦課．Enum．徴収方法期別．特別徴収
@@ -27,7 +30,7 @@ public class TokuchoHeijunka6gatsuMyBatisParameter {
 
     private RString 帳票作成日時;
     private RString 出力順ID;
+    private RString 出力順;
     private RString 出力対象区分;
     private RString 帳票ID;
-
 }

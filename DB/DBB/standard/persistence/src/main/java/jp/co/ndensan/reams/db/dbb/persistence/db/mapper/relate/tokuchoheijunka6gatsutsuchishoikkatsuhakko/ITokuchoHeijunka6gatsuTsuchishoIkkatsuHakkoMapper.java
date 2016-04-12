@@ -5,13 +5,17 @@
  */
 package jp.co.ndensan.reams.db.dbb.persistence.db.mapper.relate.tokuchoheijunka6gatsutsuchishoikkatsuhakko;
 
+import java.util.List;
 import jp.co.ndensan.reams.db.dbb.definition.mybatisprm.tokuchoheijunka6gatsutsuchishoikkatsuhakko.TokuchoHeijunka6gatsuMyBatisParameter;
 import jp.co.ndensan.reams.db.dbb.entity.db.relate.tokuchoheijunka6gatsu.TsuchishoIkkatsuHakkoParamEntity;
+import jp.co.ndensan.reams.db.dbb.entity.db.relate.tokuchoheijunka6gatsutsuchishoikkatsuhakko.DbT2002FukaTempEntity;
+import jp.co.ndensan.reams.db.dbb.entity.dbbbt35003.ChohyoHakkoEntity;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
- *
  * 特徴平準化（特徴6月分）通知書一括発行(バッチ) Mapper
+ *
+ * @reamsid_L DBB-0820-040 xuyue
  */
 public interface ITokuchoHeijunka6gatsuTsuchishoIkkatsuHakkoMapper {
 
@@ -29,6 +33,14 @@ public interface ITokuchoHeijunka6gatsuTsuchishoIkkatsuHakkoMapper {
      * @param param パラメータ
      */
     void select特徴平準化_6月分更新後とリアルのデータ(TokuchoHeijunka6gatsuMyBatisParameter param);
+
+    /**
+     * 出力対象情報の取得を行います。
+     *
+     * @param param 帳票発行のパラメータ
+     * @return 仮算定額変更通知書対象List<仮算定額変更情報一時テーブルentity>
+     */
+    List<DbT2002FukaTempEntity> select出力対象情報(ChohyoHakkoEntity param);
 
     /**
      * 計算後情報テーブルの更新前後区分が「更正前」のデータにより、仮算定額変更情報一時テーブルの計算後情報「更正前」情報を更新する。
@@ -84,4 +96,9 @@ public interface ITokuchoHeijunka6gatsuTsuchishoIkkatsuHakkoMapper {
      * 入力の出力対象区分によって、出力対象データを抽出する。
      */
     void insert入力の出力対象区分によって();
+
+    /**
+     * 入力の出力対象区分によって、出力対象データを抽出する。
+     */
+    void insert通知書発行後異動者(TokuchoHeijunka6gatsuMyBatisParameter param);
 }

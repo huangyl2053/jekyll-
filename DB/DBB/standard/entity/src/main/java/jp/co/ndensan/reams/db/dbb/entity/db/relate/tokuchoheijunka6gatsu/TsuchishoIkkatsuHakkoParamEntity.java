@@ -10,8 +10,9 @@ import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
- *
  * 特徴平準化（特徴6月分）SQLのパラメータです。
+ *
+ * @reamsid_L DBB-0820-040 xuyue
  */
 @lombok.Getter
 @lombok.Setter
