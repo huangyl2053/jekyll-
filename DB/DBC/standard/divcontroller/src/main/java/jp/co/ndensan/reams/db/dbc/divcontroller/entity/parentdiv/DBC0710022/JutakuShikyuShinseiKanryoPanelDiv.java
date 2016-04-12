@@ -14,7 +14,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
  * JutakuShikyuShinseiKanryoPanel のクラスファイル
  *
  * @author 自動生成
- * @reamsid_L DBC-1020-010 yangchenbing
+ * @reamsid_L DBC-992-110 yangchenbing
  */
 public class JutakuShikyuShinseiKanryoPanelDiv extends Panel {
 

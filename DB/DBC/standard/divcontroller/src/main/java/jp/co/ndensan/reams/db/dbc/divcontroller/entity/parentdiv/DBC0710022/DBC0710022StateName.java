@@ -10,7 +10,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
  * DBC0710022の状態名定義クラスです
  *
  * @author 自動生成
- * @reamsid_L DBC-1020-010 yangchenbing
+ * @reamsid_L DBC-992-110 yangchenbing
  */
 public enum DBC0710022StateName implements IStateEnumerations {
 // <editor-fold defaultstate="collapsed" desc="Created By UI Designer ver 1.0.0">
