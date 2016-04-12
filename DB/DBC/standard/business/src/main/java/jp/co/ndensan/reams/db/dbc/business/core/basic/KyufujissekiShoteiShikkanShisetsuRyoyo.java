@@ -25,7 +25,9 @@ import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
  * 給付実績所定疾患施設療養費等を管理するクラスです。
  */
 public class KyufujissekiShoteiShikkanShisetsuRyoyo extends
-        ModelBase<KyufujissekiShoteiShikkanShisetsuRyoyoIdentifier, DbT3032KyufujissekiShoteiShikkanShisetsuRyoyoEntity, KyufujissekiShoteiShikkanShisetsuRyoyo>
+        ModelBase<KyufujissekiShoteiShikkanShisetsuRyoyoIdentifier, 
+        DbT3032KyufujissekiShoteiShikkanShisetsuRyoyoEntity,
+        KyufujissekiShoteiShikkanShisetsuRyoyo>
         implements Serializable {
 
     private final DbT3032KyufujissekiShoteiShikkanShisetsuRyoyoEntity entity;

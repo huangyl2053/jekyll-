@@ -14,6 +14,7 @@ import jp.co.ndensan.reams.db.dbc.divcontroller.viewbox.ViewStateKeys;
 import jp.co.ndensan.reams.db.dbc.divcontroller.viewbox.dbc0810014.ServiceTeiKyoShomeishoParameter;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
+import jp.co.ndensan.reams.uz.uza.biz.AtenaMeisho;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -46,10 +47,12 @@ public class ServiceTeikyoShomeishoHandler {
         List<dgdServiceTeikyoShomeisyo_Row> rowList = new ArrayList<>();
         for (ServiceTeikyoShomeishoResult serviceTeikyoShomeishoEntity : serviceTeikyoShomeishoList) {
             dgdServiceTeikyoShomeisyo_Row row = new dgdServiceTeikyoShomeisyo_Row();
-            row.setData1(new RString(serviceTeikyoShomeishoEntity.getServiceTeikyoShomeisho().getJigyoshaNo().getColumnValue().toString()));
-            row.setData2(new RString(serviceTeikyoShomeishoEntity.getServiceTeikyoShomeisho().getJigyoshaName().toString()));
-            row.setData3(new RString(serviceTeikyoShomeishoEntity.getServiceTeikyoShomeisho().getMeisanNo().toString()));
-            row.setData4(new RString(serviceTeikyoShomeishoEntity.getServiceTeikyoShomeisho().getServiesTeikyoSyomeisyo().toString()));
+            JigyoshaNo jigyoshaNo = serviceTeikyoShomeishoEntity.getServiceTeikyoShomeisho().getJigyoshaNo();
+            AtenaMeisho jigyoshaName = serviceTeikyoShomeishoEntity.getServiceTeikyoShomeisho().getJigyoshaName();
+            row.setData1(jigyoshaNo == null ? RString.EMPTY : new RString(jigyoshaNo.getColumnValue().toString()));
+            row.setData2(jigyoshaName == null ? RString.EMPTY : jigyoshaName.value());
+            row.setData3(serviceTeikyoShomeishoEntity.getServiceTeikyoShomeisho().getMeisanNo());
+            row.setData4(serviceTeikyoShomeishoEntity.getServiceTeikyoShomeisho().getServiesTeikyoSyomeisyo());
             rowList.add(row);
         }
         div.getDgdServiceTeikyoShomeisyo().setDataSource(rowList);
