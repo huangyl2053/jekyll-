@@ -10,7 +10,9 @@ import jp.co.ndensan.reams.uz.uza.report.ReportEditorJoiner;
 
 /**
  * 認定調査督促対象者一覧表Builderクラスです。
- */                                                                       
+ *
+ * @reamsid_L DBE-0030-030 xuyue
+ */
 class NinteiChosaTokusokuTaishoshaIchiranhyoBuilderImpl implements INinteiChosaTokusokuTaishoshaIchiranhyoBuilder {
 
     private final INinteiChosaTokusokuTaishoshaIchiranhyoEditor headerEditor;

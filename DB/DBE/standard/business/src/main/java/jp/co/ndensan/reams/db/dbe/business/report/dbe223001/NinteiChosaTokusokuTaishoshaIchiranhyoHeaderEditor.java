@@ -16,6 +16,8 @@ import jp.co.ndensan.reams.uz.uza.lang.Separator;
 
 /**
  * 認定調査督促対象者一覧表ヘッダEditorです。
+ *
+ * @reamsid_L DBE-0030-030 xuyue
  */
 class NinteiChosaTokusokuTaishoshaIchiranhyoHeaderEditor implements INinteiChosaTokusokuTaishoshaIchiranhyoEditor {
 

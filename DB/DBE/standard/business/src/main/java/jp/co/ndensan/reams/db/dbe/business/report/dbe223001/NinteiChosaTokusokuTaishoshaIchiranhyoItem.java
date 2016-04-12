@@ -11,6 +11,8 @@ import lombok.Getter;
 /**
  *
  * 認定調査督促対象者一覧表情報です。
+ *
+ * @reamsid_L DBE-0030-030 xuyue
  */
 @Getter
 @SuppressWarnings("PMD.UnusedPrivateField")

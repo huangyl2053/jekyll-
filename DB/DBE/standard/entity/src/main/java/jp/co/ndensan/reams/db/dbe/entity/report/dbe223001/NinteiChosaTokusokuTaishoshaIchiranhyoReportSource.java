@@ -6,6 +6,8 @@ import jp.co.ndensan.reams.uz.uza.report.source.ReportItem;
 
 /**
  * 帳票「要介護認定調査督促状」の項目を定義するクラスです。
+ *
+ * @reamsid_L DBE-0030-030 xuyue
  */
 public class NinteiChosaTokusokuTaishoshaIchiranhyoReportSource implements IReportSource {
 // <editor-fold defaultstate="collapsed" desc="Generated Code">
