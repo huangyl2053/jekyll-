@@ -16,7 +16,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 /**
  * NinteiChosaIraiShokai のクラスファイル
  *
- * @author 自動生成
+ * @reamsid_L DBE-0200-020 zhangguopeng
  */
 public class NinteiChosaIraiShokaiDiv extends Panel implements INinteiChosaIraiShokaiDiv {
 

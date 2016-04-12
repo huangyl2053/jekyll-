@@ -12,6 +12,8 @@ import jp.co.ndensan.reams.db.dbz.entity.db.relate.ninteichosairaishokai.NinteiC
 /**
  *
  * 認定調査情報を取得するのマッパーインタフェースです。
+ *
+ * @reamsid_L DBE-0200-020 zhangguopeng
  */
 public interface INinteiChosaIraiShokaiMapper {
 

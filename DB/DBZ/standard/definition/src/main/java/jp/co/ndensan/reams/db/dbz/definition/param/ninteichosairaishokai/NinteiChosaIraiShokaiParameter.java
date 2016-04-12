@@ -11,6 +11,8 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 /**
  *
  * 認定調査情報を取得するのParameterクラスです。
+ *
+ * @reamsid_L DBE-0200-020 zhangguopeng
  */
 public final class NinteiChosaIraiShokaiParameter {
 

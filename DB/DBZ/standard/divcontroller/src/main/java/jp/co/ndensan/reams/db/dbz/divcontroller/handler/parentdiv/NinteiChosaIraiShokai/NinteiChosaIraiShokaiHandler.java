@@ -25,6 +25,8 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.KeyValueDataSource;
 /**
  *
  * {@link NinteiChosaIraiShokaiDiv}のHandlerクラスです。
+ *
+ * @reamsid_L DBE-0200-020 zhangguopeng
  */
 public class NinteiChosaIraiShokaiHandler {
 
