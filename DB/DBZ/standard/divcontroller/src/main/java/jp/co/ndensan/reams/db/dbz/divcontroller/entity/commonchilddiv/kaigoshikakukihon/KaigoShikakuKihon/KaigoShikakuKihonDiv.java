@@ -34,7 +34,7 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets._CommonChildDivModeUtil;
 /**
  * KaigoShikakuKihon のクラスファイル
  *
- * @author 自動生成
+ * @reamsid_L DBA-0030-012 liangbc
  */
 public class KaigoShikakuKihonDiv extends Panel implements IKaigoShikakuKihonDiv {
 

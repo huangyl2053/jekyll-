@@ -19,6 +19,8 @@ import jp.co.ndensan.reams.uz.uza.util.serialization.DataPassingConverter;
 
 /**
  * 認定調査特記事項照会のDivControllerです。
+ *
+ * @reamsid_L DBE-3000-200 liangbc
  */
 public class ChosaTokkiShokai {
 

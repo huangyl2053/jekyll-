@@ -30,6 +30,8 @@ import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 
 /**
  * 認定調査委託先情報を管理するクラスです。
+ *
+ * @reamsid_L DBA-9999-023 liangbc
  */
 public class NinteichosaItakusakiJoho extends
         ModelBase<NinteichosaItakusakiJohoIdentifier, DbT5910NinteichosaItakusakiJohoEntity, NinteichosaItakusakiJoho> implements Serializable {

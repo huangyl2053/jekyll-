@@ -6,7 +6,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 /**
  * 償還払不支給決定者一覧情報コンフィグキーを表す列挙型です。
  *
- * @author LDNS
+ * @reamsid_L DBA-9999-023 liangbc
  */
 public enum ConfigKeysFuSikyuKetteishaIchiran {
 

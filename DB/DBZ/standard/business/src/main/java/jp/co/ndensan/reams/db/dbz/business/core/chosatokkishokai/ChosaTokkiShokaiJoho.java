@@ -13,6 +13,8 @@ import lombok.Setter;
 
 /**
  * 認定調査特記事項照会情報
+ *
+ * @reamsid_L DBE-3000-200 liangbc
  */
 @Getter
 @Setter

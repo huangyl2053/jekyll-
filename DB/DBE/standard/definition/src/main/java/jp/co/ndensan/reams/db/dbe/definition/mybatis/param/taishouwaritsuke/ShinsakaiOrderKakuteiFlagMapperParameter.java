@@ -13,6 +13,8 @@ import lombok.Getter;
 
 /**
  * select介護認定審査会割当情報ByKey_審査順確定フラグ非一致パラメータクラス。
+ *
+ * @reamsid_L DBE-0140-010 liangbc
  */
 @Getter
 @SuppressWarnings("PMD.UnusedPrivateField")

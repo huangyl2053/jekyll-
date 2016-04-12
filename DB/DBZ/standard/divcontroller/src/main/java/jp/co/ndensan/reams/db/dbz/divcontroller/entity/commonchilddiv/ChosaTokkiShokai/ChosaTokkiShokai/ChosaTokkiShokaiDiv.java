@@ -41,7 +41,7 @@ import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 /**
  * ChosaTokkiShokai のクラスファイル
  *
- * @author 自動生成
+ * @reamsid_L DBE-3000-200 liangbc
  */
 public class ChosaTokkiShokaiDiv extends Panel implements IChosaTokkiShokaiDiv {
 

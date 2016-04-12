@@ -6,7 +6,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 /**
  * 総合事業費審査決定請求明細表情報コンフィグキーを表す列挙型です。
  *
- * @author LDNS
+ * @reamsid_L DBA-9999-023 liangbc
  */
 public enum ConfigKeysSogoJigyoShinsaKetteiSeikyumeisaihyo {
 

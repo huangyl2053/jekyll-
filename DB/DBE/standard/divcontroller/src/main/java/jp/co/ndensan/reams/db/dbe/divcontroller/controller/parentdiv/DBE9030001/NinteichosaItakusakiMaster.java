@@ -56,6 +56,8 @@ import jp.co.ndensan.reams.uz.uza.util.serialization.DataPassingConverter;
 
 /**
  * 認定調査委託先マスタのクラスです
+ *
+ * @reamsid_L DBE-0270-010 liangbc
  */
 public class NinteichosaItakusakiMaster {
 

@@ -6,8 +6,10 @@ import jp.co.ndensan.reams.uz.uza.biz.YubinNo;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.binding.ICommonChildDivBaseProperties;
 
-/*
+/**
  * このコードはツールによって生成されました。
+ *
+ * @reamsid_L DBA-0030-011 liangbc
  */
 public interface IKaigoAtenaInfoDiv extends ICommonChildDivBaseProperties {
 
