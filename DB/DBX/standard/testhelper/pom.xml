@@ -9,13 +9,6 @@
     <artifactId>DbxTestHelper</artifactId>
     <packaging>jar</packaging>
     <name>DbxTestHelper</name>
-    <dependencies>
-        <dependency>
-            <groupId>org.hamcrest</groupId>
-            <artifactId>hamcrest-core</artifactId>
-            <version>1.3</version>
-        </dependency>
-    </dependencies>
     <properties>
         <endorsed.dir>${project.build.directory}/endorsed</endorsed.dir>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>

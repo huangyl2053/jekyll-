@@ -67,11 +67,5 @@
             <version>${project.version}</version>
             <type>test-jar</type>
         </dependency>
-        <dependency>
-            <groupId>com.google.guava</groupId>
-            <artifactId>guava-jdk5</artifactId>
-            <version>14.0.1</version>
-            <scope>test</scope>
-        </dependency>
     </dependencies>
 </project>
