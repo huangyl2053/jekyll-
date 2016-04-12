@@ -44,6 +44,8 @@ public class PnlKeteiJohoMsg {
     private static final RString 登録 = new RString("登録");
     private static final RString 修正 = new RString("修正");
     private static final RString 参照 = new RString("参照");
+    private static final RString モード_修正 = new RString("修正");
+    private static final RString モード_照会 = new RString("照会");
 
     /**
      * onLoad事件
@@ -52,35 +54,27 @@ public class PnlKeteiJohoMsg {
      * @return 福祉用具購入費支給申請の決定情報登録
      */
     public ResponseData<PnlKeteiJohoMsgDiv> onLoad(PnlKeteiJohoMsgDiv div) {
-        ViewStateHolder.put(ViewStateKeys.処理モード, 修正);
-        ViewStateHolder.put(ViewStateKeys.識別コード, new ShikibetsuCode("000000000000010"));
-        ViewStateHolder.put(ViewStateKeys.被保険者番号, new HihokenshaNo("000000003"));
-        ViewStateHolder.put(ViewStateKeys.サービス年月, new FlexibleYearMonth(new RString("201601")));
-        ViewStateHolder.put(ViewStateKeys.整理番号, new RString("0000000003"));
-        ViewStateHolder.put(ViewStateKeys.事業者番号, new RString("df"));
-        ViewStateHolder.put(ViewStateKeys.給付率, new Decimal(1));
-        ViewStateHolder.put(ViewStateKeys.証明書, new RString("証明書"));
         ShikibetsuCode 識別コード = ViewStateHolder.get(ViewStateKeys.識別コード, ShikibetsuCode.class);
         div.getKaigoCommonPanel().getCcdAtenaInfo().onLoad(識別コード);
         HihokenshaNo 被保険者番号 = ViewStateHolder.get(ViewStateKeys.被保険者番号, HihokenshaNo.class);
-        FlexibleYearMonth サービス年月1 = ViewStateHolder.get(ViewStateKeys.サービス年月, FlexibleYearMonth.class);
-        Decimal 給付率1 = ViewStateHolder.get(ViewStateKeys.給付率, Decimal.class);
-        RString 事業者番号1 = ViewStateHolder.get(ViewStateKeys.事業者番号, RString.class);
-        RString 整理番号1 = ViewStateHolder.get(ViewStateKeys.整理番号, RString.class);
-        RString 証明書1 = ViewStateHolder.get(ViewStateKeys.証明書, RString.class);
+        FlexibleYearMonth サービス年月 = ViewStateHolder.get(ViewStateKeys.サービス年月, FlexibleYearMonth.class);
+        Decimal 給付率 = ViewStateHolder.get(ViewStateKeys.給付率, Decimal.class);
+        RString 事業者番号 = ViewStateHolder.get(ViewStateKeys.事業者番号, RString.class);
+        RString 整理番号 = ViewStateHolder.get(ViewStateKeys.整理番号, RString.class);
+        RString 証明書 = ViewStateHolder.get(ViewStateKeys.証明書, RString.class);
         div.getKaigoCommonPanel().getCcdShikakuKihon().onLoad(被保険者番号);
-        div.getYoguKonyuhiShikyuShinseiContentsPanel().getTxtTeikyoYM().setValue(new RDate(サービス年月1.toString()));
-        div.getYoguKonyuhiShikyuShinseiContentsPanel().getTxtKyufuritsu().setValue(給付率1);
-        div.getYoguKonyuhiShikyuShinseiContentsPanel().getTxtSyomeisyo().setValue(事業者番号1);
-        div.getYoguKonyuhiShikyuShinseiContentsPanel().getTxtSeiriNo().setValue(整理番号1);
-        div.getYoguKonyuhiShikyuShinseiContentsPanel().getTxtJigyoshaNo().setValue(証明書1);
+        div.getYoguKonyuhiShikyuShinseiContentsPanel().getTxtTeikyoYM().setValue(new RDate(サービス年月.toString()));
+        div.getYoguKonyuhiShikyuShinseiContentsPanel().getTxtKyufuritsu().setValue(給付率);
+        div.getYoguKonyuhiShikyuShinseiContentsPanel().getTxtSyomeisyo().setValue(事業者番号);
+        div.getYoguKonyuhiShikyuShinseiContentsPanel().getTxtSeiriNo().setValue(整理番号);
+        div.getYoguKonyuhiShikyuShinseiContentsPanel().getTxtJigyoshaNo().setValue(証明書);
         if (登録.equals(ViewStateHolder.get(ViewStateKeys.処理モード, RString.class)) || 修正.equals(
                 ViewStateHolder.get(ViewStateKeys.処理モード, RString.class))) {
-            div.getCcdKetteiList().loadInitialize(被保険者番号, サービス年月1, 整理番号1,
-                    new RString("03"), new RString("モード_修正"));
+            div.getCcdKetteiList().loadInitialize(被保険者番号, サービス年月, 整理番号,
+                    new RString("02"), モード_修正);
         } else {
-            div.getCcdKetteiList().loadInitialize(new HihokenshaNo("000000001"), サービス年月1,
-                    整理番号1, new RString("02"), 参照);
+            div.getCcdKetteiList().loadInitialize(new HihokenshaNo("000000001"), サービス年月,
+                    整理番号, new RString("02"), モード_照会);
             div.getCcdKetteiList().getShokanbaraiketteiJohoDiv().getModifiedInfos().get(0).getValueStatement().getFieldName();
         }
         ViewStateHolder.put(ViewStateKeys.支払金額合計, div.getCcdKetteiList().getShokanbaraiketteiJohoDiv()
