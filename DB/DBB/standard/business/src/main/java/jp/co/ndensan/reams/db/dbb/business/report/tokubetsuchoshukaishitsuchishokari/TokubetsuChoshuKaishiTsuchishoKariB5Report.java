@@ -136,7 +136,7 @@ public class TokubetsuChoshuKaishiTsuchishoKariB5Report extends
         target.set保険料額８月１(DecimalFormatter.toコンマ区切りRString(仮算定特徴開始通知書情報.get編集後仮算定通知書共通情報()
                 .get更正後().get更正後特徴期別金額03(), 0));
         // TODO 保険者名称
-        target.set保険者名称(new RString(仮算定特徴開始通知書情報.get編集後仮算定通知書共通情報().get保険者名().getText()));
+        target.set保険者名称(仮算定特徴開始通知書情報.get編集後仮算定通知書共通情報().get保険者名());
 
         // TODO 处理详细2 雛形部品CompSofubutsuAtesakiを作成する
         //EditedAtesaki 編集後宛先 = new EditedAtesaki(仮算定特徴開始通知書情報.get宛先情報(), 仮算定特徴開始通知書情報.get地方公共団体(),

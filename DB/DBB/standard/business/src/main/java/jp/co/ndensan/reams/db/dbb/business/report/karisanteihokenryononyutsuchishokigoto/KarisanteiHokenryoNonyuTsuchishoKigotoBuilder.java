@@ -11,6 +11,8 @@ import jp.co.ndensan.reams.uz.uza.report.ReportEditorJoiner;
 /**
  *
  * 保険料納入通知書（仮算定）【期毎タイプ】帳票 KarisanteiHokenryoNonyuTsuchishoKigotoBuilder
+ *
+ * @reamsid_L DBB-9110-020 wangjie2
  */
 public class KarisanteiHokenryoNonyuTsuchishoKigotoBuilder implements IKarisanteiHokenryoNonyuTsuchishoKigotoBuilder {
 

@@ -10,7 +10,9 @@ import jp.co.ndensan.reams.uz.uza.report.IReportBuilder;
 
 /**
  *
- * 賦課台帳（仮算定）帳票 IKarisanteiHokenryoNonyuTsuchishoKigotoBuilder
+ * 保険料納入通知書（仮算定）【期毎タイプ】帳票IKarisanteiHokenryoNonyuTsuchishoKigotoBuilder
+ *
+ * @reamsid_L DBB-9110-020 wangjie2
  */
 public interface IKarisanteiHokenryoNonyuTsuchishoKigotoBuilder extends IReportBuilder<KarisanteiHokenryoNonyuTsuchishoKigotoSource> {
 

@@ -23,6 +23,8 @@ import jp.co.ndensan.reams.uz.uza.lang.RStringUtil;
 /**
  *
  * 帳票設計_DBBRP00007_2_保険料納入通知書（仮算定）【期毎タイプ】KarisanteiHokenryoNonyuTsuchishoKigotoEditor
+ *
+ * @reamsid_L DBB-9110-020 wangjie2
  */
 public class KarisanteiHokenryoNonyuTsuchishoKigotoEditor implements IKarisanteiHokenryoNonyuTsuchishoKigotoEditor {
 
@@ -443,7 +445,7 @@ public class KarisanteiHokenryoNonyuTsuchishoKigotoEditor implements IKarisantei
     }
 
     private void editHokenshaName(KarisanteiHokenryoNonyuTsuchishoKigotoSource source) {
-        source.hokenshaName = new RString(編集後仮算定通知書共通情報.get保険者名().getText());
+        source.hokenshaName = 編集後仮算定通知書共通情報.get保険者名();
     }
 
     private RString get納期開始日(List<UniversalSignDeliveryInformation> 普徴納期情報リスト, int 期) {
