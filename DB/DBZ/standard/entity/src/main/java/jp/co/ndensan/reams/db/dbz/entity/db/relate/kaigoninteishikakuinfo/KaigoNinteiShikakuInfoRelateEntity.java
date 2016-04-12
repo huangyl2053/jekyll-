@@ -31,6 +31,4 @@ public class KaigoNinteiShikakuInfoRelateEntity {
     private Code 要介護認定状態区分コード;
     private FlexibleDate 認定有効期間開始年月日;
     private FlexibleDate 認定有効期間終了年月日;
-//    private ShoKisaiHokenshaNo 保険者番号;
-//    private RString 保険者名称;
 }
