@@ -193,7 +193,7 @@
         </if>
     </select>
 
-    <select id="selectAll" resultType="jp.co.ndensan.reams.db.dbc.entity.basic.DbTKyufukanrihyoDataTempTableEntity"  fetchSize="500">
+    <select id="selectAll" resultType="jp.co.ndensan.reams.db.dbc.entity.db.basic.DbTKyufukanrihyoDataTempTableEntity"  fetchSize="500">
         select * from "DbTKyufukanrihyoDataTempTable"
     </select>
 
