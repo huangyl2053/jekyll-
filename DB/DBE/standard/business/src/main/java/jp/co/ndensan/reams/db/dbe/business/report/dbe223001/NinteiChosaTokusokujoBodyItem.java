@@ -9,8 +9,9 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 import lombok.Getter;
 
 /**
- *
  * 要介護認定調査督促状表情報です。
+ *
+ * @reamsid_L DBE-0030-020 xuyue
  */
 @Getter
 @SuppressWarnings("PMD.UnusedPrivateField")
