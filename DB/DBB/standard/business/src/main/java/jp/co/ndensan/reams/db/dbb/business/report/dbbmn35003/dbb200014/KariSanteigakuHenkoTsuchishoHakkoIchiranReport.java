@@ -13,6 +13,8 @@ import lombok.NonNull;
 
 /**
  * 仮算定額変更通知書発行一覧表のReportです。
+ *
+ * @reamsid_L DBB-0820-060 xuyue
  */
 public class KariSanteigakuHenkoTsuchishoHakkoIchiranReport extends Report<KariSanteigakuHenkoTsuchishoHakkoIchiranReportSource> {
 

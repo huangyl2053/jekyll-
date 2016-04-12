@@ -16,6 +16,8 @@ import jp.co.ndensan.reams.uz.uza.lang.Separator;
 
 /**
  * 仮算定額変更通知書発行一覧表ヘッダEditorです。
+ *
+ * @reamsid_L DBB-0820-060 xuyue
  */
 class KariSanteigakuHenkoTsuchishoHakkoIchiranHeaderEditor implements IKariSanteigakuHenkoTsuchishoHakkoIchiranEditor {
 

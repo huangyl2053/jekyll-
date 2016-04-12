@@ -16,6 +16,8 @@ import jp.co.ndensan.reams.uz.uza.lang.Separator;
 
 /**
  * 特別徴収平準化_仮算定額変更通知書_発行一覧表ヘッダEditorです。
+ *
+ * @reamsid_L DBB-0820-060 xuyue
  */
 class TokuChoHeijunkaKariSanteigakuHakkoIchiranHeaderEditor implements ITokuChoHeijunkaKariSanteigakuHakkoIchiranEditor {
 

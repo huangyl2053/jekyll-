@@ -10,6 +10,8 @@ import jp.co.ndensan.reams.uz.uza.report.ReportEditorJoiner;
 
 /**
  * 仮算定額変更通知書発行一覧表Builderクラスです。
+ *
+ * @reamsid_L DBB-0820-060 xuyue
  */
 class KariSanteigakuHenkoTsuchishoHakkoIchiranBuilderImpl implements IKariSanteigakuHenkoTsuchishoHakkoIchiranBuilder {
 
