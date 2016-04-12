@@ -3,14 +3,15 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbb.business.report.karisanteinonyutsuchishocvskakukocover;
+package jp.co.ndensan.reams.db.dbb.business.report.karisanteinonyutsuchishocvskakuko;
 
-import jp.co.ndensan.reams.db.dbb.entity.db.report.karisanteinonyutsuchishocvskakuko.KarisanteiNonyuTsuchishoCVSKakukoCoverSource;
+import jp.co.ndensan.reams.db.dbb.entity.db.report.karisanteinonyutsuchishocvskakuko.KarisanteiNonyuTsuchishoCVSKakukoSource;
 import jp.co.ndensan.reams.uz.uza.report.ReportEditorJoiner;
 
 /**
  * 保険料納入通知書（仮算定）【コンビニ角公タイプ】CoverのBuilder
  *
+ * @reamsid_L DBB-9110-060 huangh
  */
 public class KarisanteiNonyuTsuchishoCVSKakukoCoverBuilder implements IKarisanteiNonyuTsuchishoCVSKakukoCoverBuilder {
 
@@ -28,11 +29,11 @@ public class KarisanteiNonyuTsuchishoCVSKakukoCoverBuilder implements IKarisante
     /**
      * 帳票ソースをビルドします。
      *
-     * @return {@link KarisanteiNonyuTsuchishoCVSKakukoCoverSource}
+     * @return {@link KarisanteiNonyuTsuchishoCVSKakukoSource}
      */
     @Override
-    public KarisanteiNonyuTsuchishoCVSKakukoCoverSource build() {
-        return ReportEditorJoiner.from(new KarisanteiNonyuTsuchishoCVSKakukoCoverSource())
+    public KarisanteiNonyuTsuchishoCVSKakukoSource build() {
+        return ReportEditorJoiner.from(new KarisanteiNonyuTsuchishoCVSKakukoSource())
                 .join(coverEditor).buildSource();
     }
 

@@ -3,14 +3,15 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbb.business.report.karisanteinonyutsuchishocvskakukonofusho;
+package jp.co.ndensan.reams.db.dbb.business.report.karisanteinonyutsuchishocvskakuko;
 
-import jp.co.ndensan.reams.db.dbb.entity.db.report.karisanteinonyutsuchishocvskakuko.KarisanteiNonyuTsuchishoCVSKakukoNofushoSource;
+import jp.co.ndensan.reams.db.dbb.entity.db.report.karisanteinonyutsuchishocvskakuko.KarisanteiNonyuTsuchishoCVSKakukoSource;
 import jp.co.ndensan.reams.uz.uza.report.ReportEditorJoiner;
 
 /**
  * 保険料納入通知書（仮算定）【コンビニ角公タイプ】納付書のBuilder
  *
+ * @reamsid_L DBB-9110-060 huangh
  */
 public class KarisanteiNonyuTsuchishoCVSKakukoNofushoBuilder implements IKarisanteiNonyuTsuchishoCVSKakukoNofushoBuilder {
 
@@ -33,8 +34,8 @@ public class KarisanteiNonyuTsuchishoCVSKakukoNofushoBuilder implements IKarisan
      * @return {@link KarisanteiNonyuTsuchishoCVSKakukoNofushoSource}
      */
     @Override
-    public KarisanteiNonyuTsuchishoCVSKakukoNofushoSource build() {
-        return ReportEditorJoiner.from(new KarisanteiNonyuTsuchishoCVSKakukoNofushoSource()).join(nofushoEditor).buildSource();
+    public KarisanteiNonyuTsuchishoCVSKakukoSource build() {
+        return ReportEditorJoiner.from(new KarisanteiNonyuTsuchishoCVSKakukoSource()).join(nofushoEditor).buildSource();
 
     }
 

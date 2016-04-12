@@ -11,6 +11,7 @@ import jp.co.ndensan.reams.db.dbb.entity.db.report.nonyutsuchishocvskigoto.Nonyu
 /**
  * 保険料納入通知書（本算定）【コンビニ期毎タイプ】連帳のEditorです。
  *
+ * @reamsid_L DBB-9110-130 huangh
  */
 public class NonyuTsuchishoCVSKigotoRenchoEditor implements INonyuTsuchishoCVSKigotoRenchoEditor {
 

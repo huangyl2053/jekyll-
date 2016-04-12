@@ -5,10 +5,13 @@
  */
 package jp.co.ndensan.reams.db.dbe.divcontroller.controller.dbe2210003;
 
+import java.util.HashMap;
+import jp.co.ndensan.reams.db.dbe.business.core.gaikyotokkiyichirannyuroku.GaikyoTokkiYichiranNyurokuBusiness;
 import jp.co.ndensan.reams.db.dbe.definition.core.ViewStateKeys;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2210003.DBE2210003TransitionEventName;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2210003.GaikyoTokkiYichiranNyurokuDiv;
 import jp.co.ndensan.reams.db.dbe.divcontroller.handler.parentdiv.DBE2210003.GaikyoTokkiYichiranNyurokuHandler;
+import jp.co.ndensan.reams.db.dbe.divcontroller.handler.parentdiv.DBE2210003.ValidationHandler;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrInformationMessages;
@@ -22,14 +25,21 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.message.ErrorMessage;
 import jp.co.ndensan.reams.uz.uza.message.MessageDialogSelectedResult;
 import jp.co.ndensan.reams.uz.uza.message.QuestionMessage;
+import jp.co.ndensan.reams.uz.uza.ui.binding.TextBox;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ResponseHolder;
+import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
+import jp.co.ndensan.reams.uz.uza.util.serialization.DataPassingConverter;
 
 /**
  * 認定調査結果登録3のクラス。
  *
+ * @reamsid_L DBE-0040-030 huangh
  */
 public class GaikyoTokkiYichiranNyuroku {
+
+    private HashMap<RString, GaikyoTokkiYichiranNyurokuBusiness> gaikyoTokkiNyurokuMap = new HashMap<>();
+    private int 当前ページ数 = 1;
 
     private static final int INT3 = 3;
     private static final int INT4 = 4;
@@ -85,8 +95,28 @@ public class GaikyoTokkiYichiranNyuroku {
      * @param div GaikyoTokkiYichiranNyurokuDiv
      * @return ResponseData<GaikyoTokkiNyurokuDiv>
      */
+    @SuppressWarnings("unchecked")
     public ResponseData<GaikyoTokkiYichiranNyurokuDiv> onBlur_ChosaKomokuNo1(GaikyoTokkiYichiranNyurokuDiv div) {
         GaikyoTokkiYichiranNyurokuHandler handler = new GaikyoTokkiYichiranNyurokuHandler(div);
+
+        gaikyoTokkiNyurokuMap = DataPassingConverter.deserialize(div.getTokkiNyuryoku().getHiddenGaikyoTokkiNyurokuMap(), HashMap.class);
+        当前ページ数 = Integer.valueOf(div.getTokkiNyuryoku().getHiddenPageNo().toString());
+        RString key1 = new RString(String.valueOf(当前ページ数).concat("1"));
+
+        if ((gaikyoTokkiNyurokuMap.get(key1) != null)
+                && gaikyoTokkiNyurokuMap.get(key1).getTemp_認定調査特記事項番号()
+                .equals(div.getTokkiNyuryoku().getTxtFirstChosaKomokuNo().getValue())) {
+            return ResponseData.of(div).respond();
+        }
+
+        ValidationMessageControlPairs validationMessages
+                = onBlur_ChosaKomokuNoCheck(gaikyoTokkiNyurokuMap, key1, div.getTokkiNyuryoku().getTxtFirstChosaKomokuNo());
+
+        if (validationMessages.iterator().hasNext()) {
+            this.値回復(gaikyoTokkiNyurokuMap, key1, div.getTokkiNyuryoku().getTxtFirstChosaKomokuNo());
+            return ResponseData.of(div).addValidationMessages(validationMessages).respond();
+        }
+
         handler.onBlur_ChosaKomokuNo1();
 
         return ResponseData.of(div).respond();
@@ -98,8 +128,28 @@ public class GaikyoTokkiYichiranNyuroku {
      * @param div GaikyoTokkiYichiranNyurokuDiv
      * @return ResponseData<GaikyoTokkiNyurokuDiv>
      */
+    @SuppressWarnings("unchecked")
     public ResponseData<GaikyoTokkiYichiranNyurokuDiv> onBlur_ChosaKomokuNo2(GaikyoTokkiYichiranNyurokuDiv div) {
         GaikyoTokkiYichiranNyurokuHandler handler = new GaikyoTokkiYichiranNyurokuHandler(div);
+
+        gaikyoTokkiNyurokuMap = DataPassingConverter.deserialize(div.getTokkiNyuryoku().getHiddenGaikyoTokkiNyurokuMap(), HashMap.class);
+        当前ページ数 = Integer.valueOf(div.getTokkiNyuryoku().getHiddenPageNo().toString());
+        RString key2 = new RString(String.valueOf(当前ページ数).concat("2"));
+
+        if ((gaikyoTokkiNyurokuMap.get(key2) != null)
+                && gaikyoTokkiNyurokuMap.get(key2).getTemp_認定調査特記事項番号()
+                .equals(div.getTokkiNyuryoku().getTxtSecondChosaKomokuNo().getValue())) {
+            return ResponseData.of(div).respond();
+        }
+
+        ValidationMessageControlPairs validationMessages
+                = onBlur_ChosaKomokuNoCheck(gaikyoTokkiNyurokuMap, key2, div.getTokkiNyuryoku().getTxtSecondChosaKomokuNo());
+
+        if (validationMessages.iterator().hasNext()) {
+            this.値回復(gaikyoTokkiNyurokuMap, key2, div.getTokkiNyuryoku().getTxtSecondChosaKomokuNo());
+            return ResponseData.of(div).addValidationMessages(validationMessages).respond();
+        }
+
         handler.onBlur_ChosaKomokuNo2();
 
         return ResponseData.of(div).respond();
@@ -111,8 +161,28 @@ public class GaikyoTokkiYichiranNyuroku {
      * @param div GaikyoTokkiYichiranNyurokuDiv
      * @return ResponseData<GaikyoTokkiNyurokuDiv>
      */
+    @SuppressWarnings("unchecked")
     public ResponseData<GaikyoTokkiYichiranNyurokuDiv> onBlur_ChosaKomokuNo3(GaikyoTokkiYichiranNyurokuDiv div) {
         GaikyoTokkiYichiranNyurokuHandler handler = new GaikyoTokkiYichiranNyurokuHandler(div);
+
+        gaikyoTokkiNyurokuMap = DataPassingConverter.deserialize(div.getTokkiNyuryoku().getHiddenGaikyoTokkiNyurokuMap(), HashMap.class);
+        当前ページ数 = Integer.valueOf(div.getTokkiNyuryoku().getHiddenPageNo().toString());
+        RString key3 = new RString(String.valueOf(当前ページ数).concat("3"));
+
+        if ((gaikyoTokkiNyurokuMap.get(key3) != null)
+                && gaikyoTokkiNyurokuMap.get(key3).getTemp_認定調査特記事項番号()
+                .equals(div.getTokkiNyuryoku().getTxtThirdChosaKomokuNo().getValue())) {
+            return ResponseData.of(div).respond();
+        }
+
+        ValidationMessageControlPairs validationMessages
+                = onBlur_ChosaKomokuNoCheck(gaikyoTokkiNyurokuMap, key3, div.getTokkiNyuryoku().getTxtThirdChosaKomokuNo());
+
+        if (validationMessages.iterator().hasNext()) {
+            this.値回復(gaikyoTokkiNyurokuMap, key3, div.getTokkiNyuryoku().getTxtThirdChosaKomokuNo());
+            return ResponseData.of(div).addValidationMessages(validationMessages).respond();
+        }
+
         handler.onBlur_ChosaKomokuNo3();
 
         return ResponseData.of(div).respond();
@@ -124,8 +194,28 @@ public class GaikyoTokkiYichiranNyuroku {
      * @param div GaikyoTokkiYichiranNyurokuDiv
      * @return ResponseData<GaikyoTokkiNyurokuDiv>
      */
+    @SuppressWarnings("unchecked")
     public ResponseData<GaikyoTokkiYichiranNyurokuDiv> onBlur_ChosaKomokuNo4(GaikyoTokkiYichiranNyurokuDiv div) {
         GaikyoTokkiYichiranNyurokuHandler handler = new GaikyoTokkiYichiranNyurokuHandler(div);
+
+        gaikyoTokkiNyurokuMap = DataPassingConverter.deserialize(div.getTokkiNyuryoku().getHiddenGaikyoTokkiNyurokuMap(), HashMap.class);
+        当前ページ数 = Integer.valueOf(div.getTokkiNyuryoku().getHiddenPageNo().toString());
+        RString key4 = new RString(String.valueOf(当前ページ数).concat("4"));
+
+        if ((gaikyoTokkiNyurokuMap.get(key4) != null)
+                && gaikyoTokkiNyurokuMap.get(key4).getTemp_認定調査特記事項番号()
+                .equals(div.getTokkiNyuryoku().getTxtFourthChosaKomokuNo().getValue())) {
+            return ResponseData.of(div).respond();
+        }
+
+        ValidationMessageControlPairs validationMessages
+                = onBlur_ChosaKomokuNoCheck(gaikyoTokkiNyurokuMap, key4, div.getTokkiNyuryoku().getTxtFourthChosaKomokuNo());
+
+        if (validationMessages.iterator().hasNext()) {
+            this.値回復(gaikyoTokkiNyurokuMap, key4, div.getTokkiNyuryoku().getTxtFourthChosaKomokuNo());
+            return ResponseData.of(div).addValidationMessages(validationMessages).respond();
+        }
+
         handler.onBlur_ChosaKomokuNo4();
 
         return ResponseData.of(div).respond();
@@ -137,8 +227,28 @@ public class GaikyoTokkiYichiranNyuroku {
      * @param div GaikyoTokkiYichiranNyurokuDiv
      * @return ResponseData<GaikyoTokkiNyurokuDiv>
      */
+    @SuppressWarnings("unchecked")
     public ResponseData<GaikyoTokkiYichiranNyurokuDiv> onBlur_ChosaKomokuNo5(GaikyoTokkiYichiranNyurokuDiv div) {
         GaikyoTokkiYichiranNyurokuHandler handler = new GaikyoTokkiYichiranNyurokuHandler(div);
+
+        gaikyoTokkiNyurokuMap = DataPassingConverter.deserialize(div.getTokkiNyuryoku().getHiddenGaikyoTokkiNyurokuMap(), HashMap.class);
+        当前ページ数 = Integer.valueOf(div.getTokkiNyuryoku().getHiddenPageNo().toString());
+        RString key5 = new RString(String.valueOf(当前ページ数).concat("5"));
+
+        if ((gaikyoTokkiNyurokuMap.get(key5) != null)
+                && gaikyoTokkiNyurokuMap.get(key5).getTemp_認定調査特記事項番号()
+                .equals(div.getTokkiNyuryoku().getTxtFifthChosaKomokuNo().getValue())) {
+            return ResponseData.of(div).respond();
+        }
+
+        ValidationMessageControlPairs validationMessages
+                = onBlur_ChosaKomokuNoCheck(gaikyoTokkiNyurokuMap, key5, div.getTokkiNyuryoku().getTxtFifthChosaKomokuNo());
+
+        if (validationMessages.iterator().hasNext()) {
+            this.値回復(gaikyoTokkiNyurokuMap, key5, div.getTokkiNyuryoku().getTxtFifthChosaKomokuNo());
+            return ResponseData.of(div).addValidationMessages(validationMessages).respond();
+        }
+
         handler.onBlur_ChosaKomokuNo5();
 
         return ResponseData.of(div).respond();
@@ -371,5 +481,30 @@ public class GaikyoTokkiYichiranNyuroku {
         LockingKey 排他キー = new LockingKey(SubGyomuCode.DBE認定支援.getGyomuCode().getColumnValue().concat(new RString("ShinseishoKanriNo"))
                 .concat(temp_申請書管理番号.getColumnValue()));
         RealInitialLocker.release(排他キー);
+    }
+
+    private ValidationMessageControlPairs onBlur_ChosaKomokuNoCheck(
+            HashMap<RString, GaikyoTokkiYichiranNyurokuBusiness> map,
+            RString key,
+            TextBox texBox) {
+        ValidationMessageControlPairs validationMessages = new ValidationMessageControlPairs();
+        ValidationHandler handler = new ValidationHandler();
+
+        handler.特記事項番号入力チェック(validationMessages, texBox);
+        handler.既存同じ特記事項番号チェック(validationMessages, map, key, texBox);
+        handler.連番最大値超過チェック(validationMessages, map, key, texBox);
+        return validationMessages;
+    }
+
+    private void 値回復(
+            HashMap<RString, GaikyoTokkiYichiranNyurokuBusiness> map,
+            RString key,
+            TextBox textBox) {
+
+        if (map.get(key) != null) {
+            textBox.setValue(gaikyoTokkiNyurokuMap.get(key).getTemp_認定調査特記事項番号());
+        } else {
+            textBox.clearValue();
+        }
     }
 }

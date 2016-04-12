@@ -3,42 +3,26 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbb.business.report.karisanteinonyutsuchishocvsmulti;
+package jp.co.ndensan.reams.db.dbb.business.report.karisanteinonyutsuchishocvskakuko;
 
 import jp.co.ndensan.reams.db.dbb.business.report.tsuchisho.notsu.KariSanteiNonyuTsuchiShoJoho;
 import jp.co.ndensan.reams.db.dbb.definition.core.HyojiUmu;
 import jp.co.ndensan.reams.db.dbb.definition.core.ShoriKubun;
-import jp.co.ndensan.reams.db.dbb.entity.db.report.karisanteinonyutsuchishocvsmulti.KarisanteiNonyuTsuchishoCVSMultiSource;
-import jp.co.ndensan.reams.db.dbz.business.core.basic.ChohyoSeigyoKyotsu;
+import jp.co.ndensan.reams.db.dbb.entity.db.report.karisanteinonyutsuchishocvskakuko.KarisanteiNonyuTsuchishoCVSKakukoSource;
 import jp.co.ndensan.reams.db.dbz.business.core.kaigosofubutsuatesakisource.KaigoSofubutsuAtesakiSource;
-import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.kyotsu.NinshoshaDenshikoinshubetsuCode;
-import jp.co.ndensan.reams.ur.urz.business.core.association.Association;
-import jp.co.ndensan.reams.ur.urz.business.core.ninshosha.Ninshosha;
-import jp.co.ndensan.reams.ur.urz.business.report.parts.ninshosha.INinshoshaSourceBuilder;
-import jp.co.ndensan.reams.ur.urz.business.report.parts.ninshosha.NinshoshaSourceBuilderFactory;
-import jp.co.ndensan.reams.ur.urz.definition.core.ninshosha.KenmeiFuyoKubunType;
-import jp.co.ndensan.reams.ur.urz.entity.report.parts.ninshosha.NinshoshaSource;
 import jp.co.ndensan.reams.ur.urz.entity.report.sofubutsuatesaki.SofubutsuAtesakiSource;
-import jp.co.ndensan.reams.ur.urz.service.core.association.AssociationFinderFactory;
-import jp.co.ndensan.reams.ur.urz.service.core.association.IAssociationFinder;
-import jp.co.ndensan.reams.ur.urz.service.core.ninshosha.INinshoshaManager;
-import jp.co.ndensan.reams.ur.urz.service.core.ninshosha.NinshoshaFinderFactory;
-import jp.co.ndensan.reams.uz.uza.biz.GyomuCode;
-import jp.co.ndensan.reams.uz.uza.biz.ReportId;
-import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
-import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
 
 /**
- * 保険料納入通知書（仮算定）【コンビニマルチ収納タイプ】（連帳）CoverのEditorです。
+ * 保険料納入通知書（仮算定）【コンビニ角公タイプ】（連帳）CoverのEditorです。
  *
- * @reamsid_L DBB-9110-050 huangh
+ * @reamsid_L DBB-9110-060 huangh
  */
-public class KarisanteiNonyuTsuchishoCVSMultiRenchoCoverEditor implements IKarisanteiNonyuTsuchishoCVSMultiRenchoCoverEditor {
+public class KarisanteiNonyuTsuchishoCVSKakukoRenchoCoverEditor implements IKarisanteiNonyuTsuchishoCVSKakukoRenchoCoverEditor {
 
     private final KariSanteiNonyuTsuchiShoJoho item;
-    private ReportSourceWriter<KarisanteiNonyuTsuchishoCVSMultiSource> reportSourceWriter;
+    private ReportSourceWriter<KarisanteiNonyuTsuchishoCVSKakukoSource> reportSourceWriter;
 
     private static final RString HOKENRYO_RITU = new RString("保険料率");
     private static final RString NENGAKU_HOKENRYO = new RString("年額保険料");
@@ -70,16 +54,18 @@ public class KarisanteiNonyuTsuchishoCVSMultiRenchoCoverEditor implements IKaris
      *
      * @param item {@link KariSanteiNonyuTsuchiShoJoho}
      */
-    protected KarisanteiNonyuTsuchishoCVSMultiRenchoCoverEditor(KariSanteiNonyuTsuchiShoJoho item) {
+    protected KarisanteiNonyuTsuchishoCVSKakukoRenchoCoverEditor(KariSanteiNonyuTsuchiShoJoho item) {
         this.item = item;
     }
 
     @Override
-    public KarisanteiNonyuTsuchishoCVSMultiSource edit(KarisanteiNonyuTsuchishoCVSMultiSource source) {
-        return editSource(source);
+    public KarisanteiNonyuTsuchishoCVSKakukoSource edit(KarisanteiNonyuTsuchishoCVSKakukoSource source) {
+        editSource(source);
+        source.layout = KarisanteiNonyuTsuchishoCVSKakukoSource.Layouts.DBB100027_KarisanteiNonyuTsuchishoCVSMultiRenchoCover;
+        return source;
     }
 
-    private KarisanteiNonyuTsuchishoCVSMultiSource editSource(KarisanteiNonyuTsuchishoCVSMultiSource source) {
+    private KarisanteiNonyuTsuchishoCVSKakukoSource editSource(KarisanteiNonyuTsuchishoCVSKakukoSource source) {
 
         this.edit宛先(source);
 
@@ -92,7 +78,7 @@ public class KarisanteiNonyuTsuchishoCVSMultiRenchoCoverEditor implements IKaris
         this.edit納付書1(source);
 
         this.edit納付書2(source);
-
+        //TODO
         this.edit雛形部品(source);
 
         this.editCompSofubutsuAtesaki(source);
@@ -100,7 +86,7 @@ public class KarisanteiNonyuTsuchishoCVSMultiRenchoCoverEditor implements IKaris
         return source;
     }
 
-    private KarisanteiNonyuTsuchishoCVSMultiSource edit宛先(KarisanteiNonyuTsuchishoCVSMultiSource source) {
+    private KarisanteiNonyuTsuchishoCVSKakukoSource edit宛先(KarisanteiNonyuTsuchishoCVSKakukoSource source) {
 
         if (item.get編集後仮算定通知書共通情報() != null) {
             source.hyojicodeName1 = item.get編集後仮算定通知書共通情報().get表示コード１名();
@@ -140,7 +126,7 @@ public class KarisanteiNonyuTsuchishoCVSMultiRenchoCoverEditor implements IKaris
         return source;
     }
 
-    private KarisanteiNonyuTsuchishoCVSMultiSource edit明細(KarisanteiNonyuTsuchishoCVSMultiSource source) {
+    private KarisanteiNonyuTsuchishoCVSKakukoSource edit明細(KarisanteiNonyuTsuchishoCVSKakukoSource source) {
 
         if (item.get編集後仮算定通知書共通情報() != null) {
             if (item.get編集後仮算定通知書共通情報().get調定年度() != null) {
@@ -204,7 +190,7 @@ public class KarisanteiNonyuTsuchishoCVSMultiRenchoCoverEditor implements IKaris
         return source;
     }
 
-    private void edit納付書1(KarisanteiNonyuTsuchishoCVSMultiSource source) {
+    private void edit納付書1(KarisanteiNonyuTsuchishoCVSKakukoSource source) {
 
         if (item.get納付書共通() != null) {
             source.kamokumei = item.get納付書共通().get科目名称();
@@ -215,6 +201,7 @@ public class KarisanteiNonyuTsuchishoCVSMultiRenchoCoverEditor implements IKaris
         if (item.get納入通知書期情報リスト() != null) {
             if (item.get納入通知書期情報リスト().get(0) != null) {
                 source.shunoKikanBango = item.get納入通知書期情報リスト().get(0).get収納機関番号表示用();
+                //TODO
                 source.nofuBango = item.get納入通知書期情報リスト().get(0).get納付番号();
                 source.kakuninBango = item.get納入通知書期情報リスト().get(0).get確認番号();
                 source.nofuKubun = item.get納入通知書期情報リスト().get(0).get納付区分();
@@ -266,7 +253,7 @@ public class KarisanteiNonyuTsuchishoCVSMultiRenchoCoverEditor implements IKaris
         source.funyuFukanBango = RString.EMPTY;
     }
 
-    private KarisanteiNonyuTsuchishoCVSMultiSource edit納付書2(KarisanteiNonyuTsuchishoCVSMultiSource source) {
+    private KarisanteiNonyuTsuchishoCVSKakukoSource edit納付書2(KarisanteiNonyuTsuchishoCVSKakukoSource source) {
 
         if (item.get納付書共通() != null) {
             source.kamokumei = item.get納付書共通().get科目名称();
@@ -277,6 +264,7 @@ public class KarisanteiNonyuTsuchishoCVSMultiRenchoCoverEditor implements IKaris
         if (item.get納入通知書期情報リスト() != null) {
             if (item.get納入通知書期情報リスト().get(1) != null) {
                 source.shunoKikanBango2 = item.get納入通知書期情報リスト().get(1).get収納機関番号表示用();
+                //TODO
                 source.nofuBango = item.get納入通知書期情報リスト().get(1).get納付番号();
                 source.kakuninBango2 = item.get納入通知書期情報リスト().get(1).get確認番号();
                 source.nofuKubun2 = item.get納入通知書期情報リスト().get(1).get納付区分();
@@ -330,43 +318,43 @@ public class KarisanteiNonyuTsuchishoCVSMultiRenchoCoverEditor implements IKaris
         return source;
     }
 
-    private void edit雛形部品(KarisanteiNonyuTsuchishoCVSMultiSource source) {
+    private void edit雛形部品(KarisanteiNonyuTsuchishoCVSKakukoSource source) {
 
-        if (item.get発行日() != null) {
-            ChohyoSeigyoKyotsu 帳票制御共通
-                    = new ChohyoSeigyoKyotsu(SubGyomuCode.DBB介護賦課, new ReportId("DBB100026_KarisanteiNonyuTsuchishoCVSMultiCover"));
-            INinshoshaManager ninshoshaManager = NinshoshaFinderFactory.createInstance();
-            Ninshosha ninshosha = ninshoshaManager.get帳票認証者(
-                    GyomuCode.DB介護保険,
-                    NinshoshaDenshikoinshubetsuCode.保険者印.getコード(),
-                    item.get発行日());
-            IAssociationFinder associationFinder = AssociationFinderFactory.createInstance();
-            Association association = associationFinder.getAssociation();
-            INinshoshaSourceBuilder iNinshoshaSourceBuilder = NinshoshaSourceBuilderFactory.createInstance(
-                    ninshosha,
-                    association,
-                    reportSourceWriter.getImageFolderPath(),
-                    new RDate(item.get発行日().toString()),
-                    new RString("1").equals(帳票制御共通.get首長名印字位置()),
-                    !帳票制御共通.is電子公印印字有無(),
-                    KenmeiFuyoKubunType.付与なし);
-            NinshoshaSource ninshoshaSource = iNinshoshaSourceBuilder.buildSource();
-
-            if (ninshoshaSource != null) {
-                source.denshiKoin = ninshoshaSource.denshiKoin;
-                source.hakkoYMD = ninshoshaSource.hakkoYMD;
-                source.ninshoshaYakushokuMei = ninshoshaSource.ninshoshaYakushokuMei;
-                source.ninshoshaYakushokuMei1 = ninshoshaSource.ninshoshaYakushokuMei1;
-                source.koinMojiretsu = ninshoshaSource.koinMojiretsu;
-                source.ninshoshaYakushokuMei2 = ninshoshaSource.ninshoshaYakushokuMei2;
-                source.ninshoshaShimeiKakenai = ninshoshaSource.ninshoshaShimeiKakenai;
-                source.ninshoshaShimeiKakeru = ninshoshaSource.ninshoshaShimeiKakeru;
-                source.koinShoryaku = ninshoshaSource.koinShoryaku;
-            }
-        }
+//        if (item.get発行日() != null) {
+//            ChohyoSeigyoKyotsu 帳票制御共通
+//                    = new ChohyoSeigyoKyotsu(SubGyomuCode.DBB介護賦課, new ReportId("DBB100026_KarisanteiNonyuTsuchishoCVSMultiCover"));
+//            INinshoshaManager ninshoshaManager = NinshoshaFinderFactory.createInstance();
+//            Ninshosha ninshosha = ninshoshaManager.get帳票認証者(
+//                    GyomuCode.DB介護保険,
+//                    NinshoshaDenshikoinshubetsuCode.保険者印.getコード(),
+//                    item.get発行日());
+//            IAssociationFinder associationFinder = AssociationFinderFactory.createInstance();
+//            Association association = associationFinder.getAssociation();
+//            INinshoshaSourceBuilder iNinshoshaSourceBuilder = NinshoshaSourceBuilderFactory.createInstance(
+//                    ninshosha,
+//                    association,
+//                    reportSourceWriter.getImageFolderPath(),
+//                    new RDate(item.get発行日().toString()),
+//                    new RString("1").equals(帳票制御共通.get首長名印字位置()),
+//                    !帳票制御共通.is電子公印印字有無(),
+//                    KenmeiFuyoKubunType.付与なし);
+//            NinshoshaSource ninshoshaSource = iNinshoshaSourceBuilder.buildSource();
+//
+//            if (ninshoshaSource != null) {
+//                source.denshiKoin = ninshoshaSource.denshiKoin;
+//                source.hakkoYMD = ninshoshaSource.hakkoYMD;
+//                source.ninshoshaYakushokuMei = ninshoshaSource.ninshoshaYakushokuMei;
+//                source.ninshoshaYakushokuMei1 = ninshoshaSource.ninshoshaYakushokuMei1;
+//                source.koinMojiretsu = ninshoshaSource.koinMojiretsu;
+//                source.ninshoshaYakushokuMei2 = ninshoshaSource.ninshoshaYakushokuMei2;
+//                source.ninshoshaShimeiKakenai = ninshoshaSource.ninshoshaShimeiKakenai;
+//                source.ninshoshaShimeiKakeru = ninshoshaSource.ninshoshaShimeiKakeru;
+//                source.koinShoryaku = ninshoshaSource.koinShoryaku;
+//            }
+//        }
     }
 
-    private void editCompSofubutsuAtesaki(KarisanteiNonyuTsuchishoCVSMultiSource source) {
+    private void editCompSofubutsuAtesaki(KarisanteiNonyuTsuchishoCVSKakukoSource source) {
 
         KaigoSofubutsuAtesakiSource kaigoSofubutsuAtesakiSource = null;
         if (item.get編集後仮算定通知書共通情報() != null
@@ -410,7 +398,7 @@ public class KarisanteiNonyuTsuchishoCVSMultiRenchoCoverEditor implements IKaris
         }
     }
 
-    private void 納入通知書期情報設定(KarisanteiNonyuTsuchishoCVSMultiSource source) {
+    private void 納入通知書期情報設定(KarisanteiNonyuTsuchishoCVSKakukoSource source) {
 
         if (item.get納入通知書期情報リスト() != null
                 && item.get納入通知書期情報リスト().size() >= リストサイズ１) {
@@ -456,7 +444,7 @@ public class KarisanteiNonyuTsuchishoCVSMultiRenchoCoverEditor implements IKaris
         }
     }
 
-    private void 編集後個人相関設定(KarisanteiNonyuTsuchishoCVSMultiSource source) {
+    private void 編集後個人相関設定(KarisanteiNonyuTsuchishoCVSKakukoSource source) {
 
         if (item.get編集後仮算定通知書共通情報().get編集後個人() != null
                 && item.get編集後仮算定通知書共通情報().get編集後個人().get名称() != null
@@ -473,7 +461,7 @@ public class KarisanteiNonyuTsuchishoCVSMultiRenchoCoverEditor implements IKaris
         }
     }
 
-    private void 前年度情報相関設定(KarisanteiNonyuTsuchishoCVSMultiSource source) {
+    private void 前年度情報相関設定(KarisanteiNonyuTsuchishoCVSKakukoSource source) {
 
         if (item.get編集後仮算定通知書共通情報().get前年度情報() != null) {
             source.keisanMeisaishoNendo1 = item.get編集後仮算定通知書共通情報().get前年度情報().get前年度賦課年度();

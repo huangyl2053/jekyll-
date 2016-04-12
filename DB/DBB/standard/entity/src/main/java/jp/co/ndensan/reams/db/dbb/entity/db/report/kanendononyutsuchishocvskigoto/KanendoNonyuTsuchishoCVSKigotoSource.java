@@ -8,8 +8,9 @@ package jp.co.ndensan.reams.db.dbb.entity.db.report.kanendononyutsuchishocvskigo
 import jp.co.ndensan.reams.uz.uza.report.IReportSource;
 
 /**
+ * 保険料納入通知書（本算定）【コンビニ期毎タイプ】の項目を定義するクラスです
  *
- * @author huangh
+ * @reamsid_L DBB-9110-190 huangh
  */
 public class KanendoNonyuTsuchishoCVSKigotoSource implements IReportSource {
 

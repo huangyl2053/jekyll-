@@ -11,6 +11,7 @@ import jp.co.ndensan.reams.db.dbb.entity.db.report.nonyutsuchishocvsmulti.NonyuT
 /**
  * 保険料納入通知書（本算定）【コンビニマルチ収納タイプ】納付書のEditorです。
  *
+ * @reamsid_L DBB-9110-110 huangh
  */
 public class NonyuTsuchishoCVSMultiRenchoNofushoEditor implements INonyuTsuchishoCVSMultiRenchoNofushoEditor {
 

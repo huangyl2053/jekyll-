@@ -14,6 +14,8 @@ import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
  * 納入通知書関連クラス継承する抽象クラスです。
  *
  * @param <T>
+ *
+ * @reamsid_L DBB-9999-023 huangh
  */
 public abstract class INonyuTsuchisho<T extends IReportSource> {
 
@@ -27,7 +29,7 @@ public abstract class INonyuTsuchisho<T extends IReportSource> {
     /**
      * devidedByPageメソッド
      *
-     * @return List<NonyuTsuchisho>
+     * @return List<INonyuTsuchisho>
      */
     public abstract List<INonyuTsuchisho> devidedByPage();
 }

@@ -11,6 +11,7 @@ import jp.co.ndensan.reams.db.dbb.entity.db.report.nonyutsuchishocvskakuko.Nonyu
 /**
  * 保険料納入通知書（本算定）【コンビニ角公タイプ】CoverのEditorです。
  *
+ * @reamsid_L DBB-9110-120 huangh
  */
 public class NonyuTsuchishoCVSKakukoCoverEditor implements INonyuTsuchishoCVSKakukoCoverEditor {
 

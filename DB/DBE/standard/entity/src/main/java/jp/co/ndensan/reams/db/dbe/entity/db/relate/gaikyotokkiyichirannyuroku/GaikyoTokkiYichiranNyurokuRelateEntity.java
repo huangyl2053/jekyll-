@@ -10,6 +10,8 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
  * 特記事項入力情報作成RelateEntityクラスです。
+ *
+ * @reamsid_L DBE-0040-030 huangh
  */
 @lombok.Getter
 @lombok.Setter

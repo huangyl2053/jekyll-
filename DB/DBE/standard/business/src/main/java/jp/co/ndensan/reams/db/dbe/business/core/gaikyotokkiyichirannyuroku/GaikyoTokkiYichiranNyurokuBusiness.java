@@ -11,6 +11,8 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
  * 特記事項入力情報作成のクラスです。
+ *
+ * @reamsid_L DBE-0040-030 huangh
  */
 public class GaikyoTokkiYichiranNyurokuBusiness implements Serializable {
 

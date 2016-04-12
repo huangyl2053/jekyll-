@@ -16,6 +16,7 @@ import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
 /**
  * 保険料納入通知書（仮算定）【コンビニマルチ収納タイプ】CoverのReportです。
  *
+ * @reamsid_L DBB-9110-050 huangh
  */
 public class KarisanteiNonyuTsuchishoCVSMultiReport extends INonyuTsuchisho<KarisanteiNonyuTsuchishoCVSMultiSource> {
 

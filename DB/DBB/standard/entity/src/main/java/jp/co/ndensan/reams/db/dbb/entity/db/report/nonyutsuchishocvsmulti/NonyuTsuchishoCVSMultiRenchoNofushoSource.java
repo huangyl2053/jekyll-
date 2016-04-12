@@ -6,6 +6,8 @@ import jp.co.ndensan.reams.uz.uza.report.source.ReportItem;
 
 /**
  * 帳票　保険料納入通知書（本算定）【コンビニマルチ収納タイプ】納付書連帳の項目を定義するクラスです。
+ *
+ * @reamsid_L DBB-9110-110 huangh
  */
 public class NonyuTsuchishoCVSMultiRenchoNofushoSource implements IReportSource {
 // <editor-fold defaultstate="collapsed" desc="Generated Code">

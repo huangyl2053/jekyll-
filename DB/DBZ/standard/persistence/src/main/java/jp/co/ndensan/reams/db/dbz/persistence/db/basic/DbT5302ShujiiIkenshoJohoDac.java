@@ -22,6 +22,8 @@ import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
 
 /**
  * 要介護認定主治医意見書情報のデータアクセスクラスです。
+ *
+ * @reamsid_L DBZ-9999-013 huangh
  */
 public class DbT5302ShujiiIkenshoJohoDac implements ISaveable<DbT5302ShujiiIkenshoJohoEntity> {
 

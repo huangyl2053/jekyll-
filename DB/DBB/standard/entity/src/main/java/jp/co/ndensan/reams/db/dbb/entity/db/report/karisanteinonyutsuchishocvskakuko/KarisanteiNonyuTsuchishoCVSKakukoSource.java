@@ -1,16 +1,21 @@
-package jp.co.ndensan.reams.db.dbb.entity.db.report.karisanteinonyutsuchishocvsmulti;
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package jp.co.ndensan.reams.db.dbb.entity.db.report.karisanteinonyutsuchishocvskakuko;
 
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.report.IReportSource;
 import jp.co.ndensan.reams.uz.uza.report.source.ReportItem;
 
 /**
- * 帳票　保険料納入通知書（仮算定）【コンビニマルチ収納タイプ】の項目を定義するクラスです。
  *
- * @reamsid_L DBB-9110-050 huangh
+ * 保険料納入通知書（仮算定）【コンビニ角公タイプ】の項目を定義するクラスです。
+ *
+ * @reamsid_L DBB-9110-060 huangh
  */
-public class KarisanteiNonyuTsuchishoCVSMultiSource implements IReportSource {
-// <editor-fold defaultstate="collapsed" desc="Generated Code">
+public class KarisanteiNonyuTsuchishoCVSKakukoSource implements IReportSource {
 
     @ReportItem(name = "listList1_1", length = 2, order = 1)
     public RString listList1_1;
@@ -458,12 +463,7 @@ public class KarisanteiNonyuTsuchishoCVSMultiSource implements IReportSource {
     public RString ryoshushoNendo4;
     @ReportItem(name = "ryoshushoNenbun4", order = 50)
     public RString ryoshushoNenbun4;
-// </editor-fold>
-// <editor-fold defaultstate="collapsed" desc="User Customize Area">
-    //追加コードは以下（「User Customize Area」内）に記述してください。
-    //帳票ソースデータクラスを再作成する場合は、「User Customize Area」内のソースコードは記述されません。
-    //再作成した後、当箇所に記述したコードを再作成された帳票ソースデータクラスの「User Customize Area」内にコピー＆ペーストする必要があります。
-// </editor-fold>
+
     @ReportItem(name = "layout", order = 999) //このソースファイルの中で最後になりそうなorderを振った。ソースファイルになった時に他の項目に紛れず見やすい。
     public Layouts layout;                    //型は独自に作成したenumにしている。
 
@@ -472,11 +472,10 @@ public class KarisanteiNonyuTsuchishoCVSMultiSource implements IReportSource {
      */
     public enum Layouts {
 
-        AFAPRE506_KijitsumaeTohyoroku1mai1(1),
-        AFAPRE506_KijitsumaeTohyoroku1mai2(2),
-        AFAPRE506_KijitsumaeTohyoroku3mai1(3),
-        AFAPRE506_KijitsumaeTohyoroku3mai2(4),
-        AFAPRE506_KijitsumaeTohyoroku3mai3(5);
+        DBB100026_KarisanteiNonyuTsuchishoCVSMultiCover(1),
+        DBB100026_NonyuTsuchishoCVSMultiNofusho(2),
+        DBB100027_KarisanteiNonyuTsuchishoCVSMultiRenchoCover(3),
+        DBB100027_NonyuTsuchishoCVSMultiRenchoNofusho(4);
         private final int formGroupIndex;
 
         private Layouts(int formGroupIndex) {

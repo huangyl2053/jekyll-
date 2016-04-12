@@ -3,18 +3,18 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbb.business.report.karisanteinonyutsuchishocvsmulti;
+package jp.co.ndensan.reams.db.dbb.business.report.karisanteinonyutsuchishocvskakuko;
 
 import jp.co.ndensan.reams.db.dbb.business.report.tsuchisho.notsu.KariSanteiNonyuTsuchiShoJoho;
-import jp.co.ndensan.reams.db.dbb.entity.db.report.karisanteinonyutsuchishocvsmulti.KarisanteiNonyuTsuchishoCVSMultiSource;
+import jp.co.ndensan.reams.db.dbb.entity.db.report.karisanteinonyutsuchishocvskakuko.KarisanteiNonyuTsuchishoCVSKakukoSource;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
- * 保険料納入通知書（仮算定）【コンビニマルチ収納タイプ】納付書のEditorです。
+ * 保険料納入通知書（仮算定）【コンビニ角公タイプ】納付書のEditorです。
  *
- * @reamsid_L DBB-9110-050 huangh
+ * @reamsid_L DBB-9110-060 huangh
  */
-public class KarisanteiNonyuTsuchishoCVSMultiNofushoEditor implements IKarisanteiNonyuTsuchishoCVSMultiNofushoEditor {
+public class KarisanteiNonyuTsuchishoCVSKakukoNofushoEditor implements IKarisanteiNonyuTsuchishoCVSKakukoNofushoEditor {
 
     private final KariSanteiNonyuTsuchiShoJoho item;
     private final int index;
@@ -33,17 +33,19 @@ public class KarisanteiNonyuTsuchishoCVSMultiNofushoEditor implements IKarisante
      * @param item {@link KariSanteiNonyuTsuchiShoJoho}
      * @param index index
      */
-    protected KarisanteiNonyuTsuchishoCVSMultiNofushoEditor(KariSanteiNonyuTsuchiShoJoho item, int index) {
+    protected KarisanteiNonyuTsuchishoCVSKakukoNofushoEditor(KariSanteiNonyuTsuchiShoJoho item, int index) {
         this.item = item;
         this.index = index;
     }
 
     @Override
-    public KarisanteiNonyuTsuchishoCVSMultiSource edit(KarisanteiNonyuTsuchishoCVSMultiSource source) {
-        return editSource(source);
+    public KarisanteiNonyuTsuchishoCVSKakukoSource edit(KarisanteiNonyuTsuchishoCVSKakukoSource source) {
+        editSource(source);
+        source.layout = KarisanteiNonyuTsuchishoCVSKakukoSource.Layouts.DBB100026_NonyuTsuchishoCVSMultiNofusho;
+        return source;
     }
 
-    private KarisanteiNonyuTsuchishoCVSMultiSource editSource(KarisanteiNonyuTsuchishoCVSMultiSource source) {
+    private KarisanteiNonyuTsuchishoCVSKakukoSource editSource(KarisanteiNonyuTsuchishoCVSKakukoSource source) {
 
         this.edit納付書1(source);
 
@@ -54,7 +56,7 @@ public class KarisanteiNonyuTsuchishoCVSMultiNofushoEditor implements IKarisante
         return source;
     }
 
-    private KarisanteiNonyuTsuchishoCVSMultiSource edit納付書1(KarisanteiNonyuTsuchishoCVSMultiSource source) {
+    private KarisanteiNonyuTsuchishoCVSKakukoSource edit納付書1(KarisanteiNonyuTsuchishoCVSKakukoSource source) {
 
         if (item.get納付書共通() != null) {
             source.kamokumei = item.get納付書共通().get科目名称();
@@ -65,6 +67,7 @@ public class KarisanteiNonyuTsuchishoCVSMultiNofushoEditor implements IKarisante
         if (item.get納入通知書期情報リスト() != null) {
             if (item.get納入通知書期情報リスト().get(index) != null) {
                 source.shunoKikanBango1 = item.get納入通知書期情報リスト().get(index).get収納機関番号表示用();
+                //TODO
                 source.nofuBango = item.get納入通知書期情報リスト().get(index).get納付番号();
                 source.kakuninBango1 = item.get納入通知書期情報リスト().get(index).get確認番号();
                 source.nofuKubun1 = item.get納入通知書期情報リスト().get(index).get納付区分();
@@ -118,7 +121,7 @@ public class KarisanteiNonyuTsuchishoCVSMultiNofushoEditor implements IKarisante
         return source;
     }
 
-    private KarisanteiNonyuTsuchishoCVSMultiSource edit納付書2(KarisanteiNonyuTsuchishoCVSMultiSource source) {
+    private KarisanteiNonyuTsuchishoCVSKakukoSource edit納付書2(KarisanteiNonyuTsuchishoCVSKakukoSource source) {
 
         if (item.get納付書共通() != null) {
             source.kamokumei = item.get納付書共通().get科目名称();
@@ -129,6 +132,7 @@ public class KarisanteiNonyuTsuchishoCVSMultiNofushoEditor implements IKarisante
         if (item.get納入通知書期情報リスト() != null) {
             if (item.get納入通知書期情報リスト().get(index + 1) != null) {
                 source.shunoKikanBango2 = item.get納入通知書期情報リスト().get(index + 1).get収納機関番号表示用();
+                //TODO
                 source.nofuBango = item.get納入通知書期情報リスト().get(index + 1).get納付番号();
                 source.kakuninBango2 = item.get納入通知書期情報リスト().get(index + 1).get確認番号();
                 source.nofuKubun2 = item.get納入通知書期情報リスト().get(index + 1).get納付区分();
@@ -182,7 +186,7 @@ public class KarisanteiNonyuTsuchishoCVSMultiNofushoEditor implements IKarisante
         return source;
     }
 
-    private KarisanteiNonyuTsuchishoCVSMultiSource edit納付書3(KarisanteiNonyuTsuchishoCVSMultiSource source) {
+    private KarisanteiNonyuTsuchishoCVSKakukoSource edit納付書3(KarisanteiNonyuTsuchishoCVSKakukoSource source) {
 
         if (item.get納付書共通() != null) {
             source.kamokumei = item.get納付書共通().get科目名称();
@@ -193,6 +197,7 @@ public class KarisanteiNonyuTsuchishoCVSMultiNofushoEditor implements IKarisante
         if (item.get納入通知書期情報リスト() != null) {
             if (item.get納入通知書期情報リスト().get(index + 1) != null) {
                 source.shunoKikanBango3 = item.get納入通知書期情報リスト().get(index + 2).get収納機関番号表示用();
+                //TODO
                 source.nofuBango = item.get納入通知書期情報リスト().get(index + 2).get納付番号();
                 source.kakuninBango3 = item.get納入通知書期情報リスト().get(index + 2).get確認番号();
                 source.nofuKubun3 = item.get納入通知書期情報リスト().get(index + 2).get納付区分();

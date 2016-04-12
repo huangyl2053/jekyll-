@@ -6,6 +6,8 @@ import jp.co.ndensan.reams.uz.uza.report.source.ReportItem;
 
 /**
  * 帳票　保険料納入通知書（本算定）【コンビニ期毎タイプ】Coverの項目を定義するクラスです。
+ *
+ * @reamsid_L DBB-9110-130 huangh
  */
 public class NonyuTsuchishoCVSKigotoSource implements IReportSource {
 // <editor-fold defaultstate="collapsed" desc="Generated Code">

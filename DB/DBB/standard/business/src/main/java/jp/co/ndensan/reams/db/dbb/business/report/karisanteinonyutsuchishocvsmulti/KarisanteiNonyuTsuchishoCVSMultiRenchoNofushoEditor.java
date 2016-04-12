@@ -12,6 +12,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 /**
  * 保険料納入通知書（仮算定）【コンビニマルチ収納タイプ】納付書のEditorです。
  *
+ * @reamsid_L DBB-9110-050 huangh
  */
 public class KarisanteiNonyuTsuchishoCVSMultiRenchoNofushoEditor implements IKarisanteiNonyuTsuchishoCVSMultiRenchoNofushoEditor {
 

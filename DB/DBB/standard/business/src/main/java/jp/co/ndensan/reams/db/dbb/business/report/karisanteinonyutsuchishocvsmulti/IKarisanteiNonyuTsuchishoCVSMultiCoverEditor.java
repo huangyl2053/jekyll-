@@ -11,6 +11,7 @@ import jp.co.ndensan.reams.uz.uza.report.IReportEditor;
 /**
  * 保険料納入通知書（仮算定）【コンビニマルチ収納タイプ】Coverのエディターのインターフェースクラスです
  *
+ * @reamsid_L DBB-9110-050 huangh
  */
 public interface IKarisanteiNonyuTsuchishoCVSMultiCoverEditor extends IReportEditor<KarisanteiNonyuTsuchishoCVSMultiSource> {
 
