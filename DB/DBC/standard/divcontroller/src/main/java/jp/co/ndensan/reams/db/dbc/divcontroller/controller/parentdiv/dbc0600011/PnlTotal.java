@@ -7,6 +7,7 @@ package jp.co.ndensan.reams.db.dbc.divcontroller.controller.parentdiv.dbc0600011
 
 import java.util.List;
 import jp.co.ndensan.reams.db.dbc.business.core.fukushiyogukonyuhishikyushisei.FukushiyouguKonyuhiShikyuShinseiResult;
+import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0600011.DBC0600011TransitionEventName;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0600011.PnlTotalDiv;
 import jp.co.ndensan.reams.db.dbc.divcontroller.handler.dbc0600011.PnlTotalHandler;
 import jp.co.ndensan.reams.db.dbc.divcontroller.viewbox.ViewStateKeys;
@@ -62,7 +63,7 @@ public class PnlTotal {
     public ResponseData<PnlTotalDiv> onClick_btnAddShikyuShinsei(PnlTotalDiv div) {
         ViewStateHolder.put(ViewStateKeys.状態, 登録);
         ViewStateHolder.put(ViewStateKeys.被保険者番号, 被保険者番号);
-        return ResponseData.of(div).respond();
+        return ResponseData.of(div).forwardWithEventName(DBC0600011TransitionEventName.明細情報).respond();
     }
 
     /**
@@ -73,7 +74,7 @@ public class PnlTotal {
      */
     public ResponseData<PnlTotalDiv> onClick_byselectbutton(PnlTotalDiv div) {
         getHandler(div).putViewStateHolder(参照, 被保険者番号);
-        return ResponseData.of(div).respond();
+        return ResponseData.of(div).forwardWithEventName(DBC0600011TransitionEventName.明細情報).respond();
     }
 
     /**
@@ -90,7 +91,7 @@ public class PnlTotal {
         if (登録状態.equals(差額登録)) {
             getHandler(div).putViewStateHolder(差額登録, 被保険者番号);
         }
-        return ResponseData.of(div).respond();
+        return ResponseData.of(div).forwardWithEventName(DBC0600011TransitionEventName.明細情報).respond();
     }
 
     /**
@@ -101,7 +102,7 @@ public class PnlTotal {
      */
     public ResponseData<PnlTotalDiv> onClick_dgShikyuShinseiList_delete(PnlTotalDiv div) {
         getHandler(div).putViewStateHolder(削除, 被保険者番号);
-        return ResponseData.of(div).respond();
+        return ResponseData.of(div).forwardWithEventName(DBC0600011TransitionEventName.明細情報).respond();
     }
 
     /**
@@ -111,7 +112,7 @@ public class PnlTotal {
      * @return 福祉用具購入費支給申請の一覧画面
      */
     public ResponseData<PnlTotalDiv> onClick_btnBackToIchiran(PnlTotalDiv div) {
-        return ResponseData.of(div).respond();
+        return ResponseData.of(div).forwardWithEventName(DBC0600011TransitionEventName.一覧に戻る).respond();
     }
 
     /**
@@ -121,7 +122,7 @@ public class PnlTotal {
      * @return 福祉用具購入費支給申請の検索へ遷移
      */
     public ResponseData<PnlTotalDiv> onClick_btnBackToKensaku(PnlTotalDiv div) {
-        return ResponseData.of(div).respond();
+        return ResponseData.of(div).forwardWithEventName(DBC0600011TransitionEventName.検索に戻る).respond();
     }
 
     private PnlTotalHandler getHandler(PnlTotalDiv div) {
