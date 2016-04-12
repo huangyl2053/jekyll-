@@ -10,6 +10,8 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 /**
  *
  * 償還支給申請登録
+ *
+ * @reamsid_L DBC-9999-022 xicongwang
  */
 public enum ConfigNameDBC {
 

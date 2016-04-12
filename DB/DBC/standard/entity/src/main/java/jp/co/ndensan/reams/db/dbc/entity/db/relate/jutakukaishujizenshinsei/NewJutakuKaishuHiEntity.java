@@ -11,6 +11,8 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
  * 最新住宅改修の住宅住所Entityクラスです。
+ *
+ * NewJutakuKaishuHiEntity
  */
 @lombok.Getter
 @lombok.Setter

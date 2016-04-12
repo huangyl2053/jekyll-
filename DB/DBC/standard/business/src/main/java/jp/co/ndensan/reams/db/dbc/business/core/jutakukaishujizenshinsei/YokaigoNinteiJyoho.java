@@ -9,6 +9,8 @@ import jp.co.ndensan.reams.uz.uza.biz.Code;
 
 /**
  * 要介護認定情報のオブジェクトクラスです。
+ *
+ * @reamsid_L DBC-0990-080 xicongwang
  */
 @lombok.Getter
 @lombok.Setter

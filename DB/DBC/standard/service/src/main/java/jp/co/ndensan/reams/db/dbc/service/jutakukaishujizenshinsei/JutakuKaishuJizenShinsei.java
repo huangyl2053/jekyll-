@@ -65,6 +65,8 @@ import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
 /**
  *
  * 住宅改修費事前申請クラスです
+ *
+ * @reamsid_L DBC-0990-080 xicongwang
  */
 public class JutakuKaishuJizenShinsei {
 

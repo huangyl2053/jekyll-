@@ -11,6 +11,8 @@ import jp.co.ndensan.reams.uz.uza.math.Decimal;
 
 /**
  * 最新住宅改修の住宅住所Entityクラスです。
+ *
+ * @reamsid_L DBC-0990-080 xicongwang
  */
 @lombok.Getter
 @lombok.Setter
