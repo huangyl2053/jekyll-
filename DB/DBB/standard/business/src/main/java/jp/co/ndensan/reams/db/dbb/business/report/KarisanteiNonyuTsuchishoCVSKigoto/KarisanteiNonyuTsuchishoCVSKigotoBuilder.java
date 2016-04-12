@@ -11,6 +11,8 @@ import jp.co.ndensan.reams.uz.uza.report.ReportEditorJoiner;
 /**
  *
  * 保険料納入通知書（仮算定）【コンビニ期毎タイプ】KarisanteiNonyuTsuchishoCVSKigotoBuilder
+ *
+ * @reamsid_L DBB-9110-070 wangjie2
  */
 public class KarisanteiNonyuTsuchishoCVSKigotoBuilder implements IKarisanteiNonyuTsuchishoCVSKigotoBuilder {
 

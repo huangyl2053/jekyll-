@@ -1,10 +1,15 @@
-// TODO: 業務に合わせてパスを変更してください
 package jp.co.ndensan.reams.db.dbb.entity.report.KarisanteiNonyuTsuchishoCVSKigoto;
 
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.report.IReportSource;
 import jp.co.ndensan.reams.uz.uza.report.source.ReportItem;
 
+/**
+ *
+ * 保険料納入通知書（仮算定）【コンビニ期毎タイプ】 KarisanteiNonyuTsuchishoCVSKigotoSource
+ *
+ * @reamsid_L DBB-9110-070 wangjie2
+ */
 public class KarisanteiNonyuTsuchishoCVSKigotoSource implements IReportSource {
 // <editor-fold defaultstate="collapsed" desc="Generated Code">
 

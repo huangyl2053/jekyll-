@@ -27,6 +27,8 @@ import jp.co.ndensan.reams.uz.uza.math.Decimal;
 /**
  *
  * 保険料納入通知書（仮算定）【コンビニ期毎タイプ】KarisanteiNonyuTsuchishoCVSKigotoEditor
+ *
+ * @reamsid_L DBB-9110-070 wangjie2
  */
 public class KarisanteiNonyuTsuchishoCVSKigotoEditor implements IKarisanteiNonyuTsuchishoCVSKigotoEditor {
 
