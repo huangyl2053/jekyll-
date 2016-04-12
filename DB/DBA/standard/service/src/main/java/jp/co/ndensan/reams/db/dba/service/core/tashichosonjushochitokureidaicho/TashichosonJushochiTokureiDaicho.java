@@ -97,7 +97,7 @@ public class TashichosonJushochiTokureiDaicho {
         List<OtherAddressInfEntity> 他市町村住所地特例者情報 = get他市町村住所地特例者情報(識別コード);
         LasdecCode 市町村コード = 他市町村住所地特例者情報.get(0).get市町村コード();
         RString 市町村名称 = get市町村名称(市町村コード);
-        int pageNo = ONEPAGE;
+        int pageNo = 1;
         for (OtherAddressInfEntity otherAddInfEntity : 他市町村住所地特例者情報) {
             OtherAddressLedgerEntity otherAddressLedger = new OtherAddressLedgerEntity();
             set他市町村住所地特例者台帳情報(otherAddressLedger, otherAddInfEntity, 宛名情報.get(0), 市町村名称, 市町村コード, pageNo);
@@ -274,7 +274,6 @@ public class TashichosonJushochiTokureiDaicho {
         他市町村住所地特例者情報.set適用年月日(otherAddressInfFromDBEntity.get適用年月日());
         他市町村住所地特例者情報.set郵便番号(otherAddressInfFromDBEntity.get郵便番号());
         他市町村住所地特例者情報.set電話番号(otherAddressInfFromDBEntity.get電話番号());
-        他市町村住所地特例者情報.set他被保番号(otherAddressInfFromDBEntity.get措置被保険者番号());
     }
 
     /**
