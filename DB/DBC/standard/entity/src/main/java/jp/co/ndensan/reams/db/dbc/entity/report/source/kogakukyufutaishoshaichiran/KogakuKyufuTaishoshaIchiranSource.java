@@ -11,6 +11,8 @@ import jp.co.ndensan.reams.uz.uza.report.source.ReportItem;
 
 /**
  * 高額介護サービス費給付対象者一覧表帳票Source
+ *
+ * @reamsid_L DBC-0980-490 surun
  */
 public class KogakuKyufuTaishoshaIchiranSource implements IReportSource {
 // <editor-fold defaultstate="collapsed" desc="Generated Code">

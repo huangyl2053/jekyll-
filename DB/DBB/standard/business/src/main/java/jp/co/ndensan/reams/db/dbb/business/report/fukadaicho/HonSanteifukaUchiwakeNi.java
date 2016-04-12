@@ -11,6 +11,8 @@ import lombok.Setter;
 
 /**
  * 本算定賦課内訳２
+ *
+ * @reamsid_L DBB-9100-030 surun
  */
 @Getter
 @Setter

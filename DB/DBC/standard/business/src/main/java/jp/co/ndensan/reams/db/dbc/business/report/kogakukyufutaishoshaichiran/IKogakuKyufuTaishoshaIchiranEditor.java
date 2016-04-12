@@ -10,6 +10,8 @@ import jp.co.ndensan.reams.uz.uza.report.IReportEditor;
 
 /**
  * 高額介護サービス費給付対象者一覧表帳票IEditor
+ *
+ * @reamsid_L DBC-0980-490 surun
  */
 public interface IKogakuKyufuTaishoshaIchiranEditor extends IReportEditor<KogakuKyufuTaishoshaIchiranSource> {
 

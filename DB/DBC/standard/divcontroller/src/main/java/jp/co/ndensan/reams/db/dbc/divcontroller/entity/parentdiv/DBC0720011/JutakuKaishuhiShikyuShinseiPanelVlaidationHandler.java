@@ -16,6 +16,8 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
 
 /**
  * 住宅改修費支給申請一括審査・決定画面 チェッククラスです
+ *
+ * @reamsid_L DBC-0991-030 surun
  */
 public class JutakuKaishuhiShikyuShinseiPanelVlaidationHandler {
 

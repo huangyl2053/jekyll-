@@ -11,6 +11,8 @@ import jp.co.ndensan.reams.uz.uza.biz.Code;
 
 /**
  * 要介護状態３段階変更の判定のマッパーインタフェースです。
+ *
+ * @reamsid_L DBC-0992-160 surun
  */
 public interface IJutakuKaishuYaokaigoJyotaiSandannkaiHanteiMapper {
 

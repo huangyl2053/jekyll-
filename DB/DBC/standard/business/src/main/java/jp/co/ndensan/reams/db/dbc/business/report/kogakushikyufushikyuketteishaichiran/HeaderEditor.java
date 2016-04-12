@@ -9,6 +9,8 @@ import jp.co.ndensan.reams.db.dbc.entity.report.source.kogakushikyufushikyukette
 
 /**
  * 高額サービス費支給（不支給）決定者一覧表帳票HeaderEditor
+ *
+ * @reamsid_L DBC-0980-500 surun
  */
 public class HeaderEditor implements IKogakuShikyuFushikyuKetteishaIchiranEditor {
 

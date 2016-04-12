@@ -3,7 +3,6 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package jp.co.ndensan.reams.db.dbb.business.report.fukadaicho;
 
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -11,12 +10,15 @@ import lombok.Getter;
 import lombok.Setter;
 
 /**
- *  特徴期
+ * 特徴期
+ *
+ * @reamsid_L DBB-9100-030 surun
  */
 @Getter
 @Setter
 @SuppressWarnings("PMD.UnusedPrivateField")
 public class TokubetsuChoshuKi {
+
     private RString 特徴期１;
     private RString 特徴期２;
     private RString 特徴期３;

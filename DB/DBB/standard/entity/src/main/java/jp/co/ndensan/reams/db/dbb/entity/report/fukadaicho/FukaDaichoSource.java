@@ -1,4 +1,3 @@
-
 package jp.co.ndensan.reams.db.dbb.entity.report.fukadaicho;
 
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -7,6 +6,8 @@ import jp.co.ndensan.reams.uz.uza.report.source.ReportItem;
 
 /**
  * 賦課台帳（本算定）帳票Source
+ *
+ * @reamsid_L DBB-9100-030 surun
  */
 public class FukaDaichoSource implements IReportSource {
 // <editor-fold defaultstate="collapsed" desc="Generated Code">

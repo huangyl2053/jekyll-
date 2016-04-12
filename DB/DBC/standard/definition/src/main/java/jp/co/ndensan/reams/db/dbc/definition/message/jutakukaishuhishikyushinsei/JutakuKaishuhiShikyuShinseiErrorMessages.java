@@ -14,6 +14,8 @@ import jp.co.ndensan.reams.uz.uza.message.Message;
 
 /**
  * 住宅改修費支給申請一括審査・決定 Messages
+ *
+ * @reamsid_L DBC-0991-030 surun
  */
 public enum JutakuKaishuhiShikyuShinseiErrorMessages implements IValidationMessage {
 

@@ -28,11 +28,13 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.propertyenum.DisplayTimeFormat;
 
 /**
  * DBBRP32001_通知書発行後異動把握帳票PrintService
+ *
+ * @reamsid_L DBB-0690-030 surun
  */
 public class HakkogoIdoTaishoshaIchiranPrintService {
 
     private static final RString NENDO = new RString("年度");
-    
+
     /**
      * printメソッド
      *
@@ -68,7 +70,7 @@ public class HakkogoIdoTaishoshaIchiranPrintService {
      * @param 発行後異動者一覧情報 TsuchiShoHakkogoIdoshaListJoho
      * @param 導入団体クラス Association
      * @param 帳票作成日時 YMDHMS
-     * @return  List<HakkogoIdoTaishoshaIchiranItem>
+     * @return List<HakkogoIdoTaishoshaIchiranItem>
      */
     private List<HakkogoIdoTaishoshaIchiranItem> setItems(
             TsuchiShoHakkogoIdoshaListJoho 発行後異動者一覧情報,
@@ -103,7 +105,7 @@ public class HakkogoIdoTaishoshaIchiranPrintService {
                 item.setListIdosha_4(tsuchiShoHakkoGoIdosha.get通知書番号().value());
                 item.setListIdosha_5(tsuchiShoHakkoGoIdosha.get氏名().getName().value());
                 item.setListIdosha_6(tsuchiShoHakkoGoIdosha.get異動日().wareki().eraType(EraType.ALPHABET).firstYear(FirstYear.GAN_NEN)
-                    .separator(Separator.PERIOD).fillType(FillType.ZERO).toDateString());
+                        .separator(Separator.PERIOD).fillType(FillType.ZERO).toDateString());
                 item.setListIdosha_7(tsuchiShoHakkoGoIdosha.get異動内容().get名称());
                 item.setTitle(ReportIdDBB.DBB200028.getReportName());
                 targets.add(item);

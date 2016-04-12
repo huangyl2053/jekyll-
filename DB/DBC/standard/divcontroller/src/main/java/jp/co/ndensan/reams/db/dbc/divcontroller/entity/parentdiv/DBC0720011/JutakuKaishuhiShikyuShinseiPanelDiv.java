@@ -12,6 +12,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
  * JutakuKaishuhiShikyuShinseiPanel のクラスファイル
  *
  * @author 自動生成
+ * @reamsid_L DBC-0991-030 surun
  */
 public class JutakuKaishuhiShikyuShinseiPanelDiv extends Panel {
 

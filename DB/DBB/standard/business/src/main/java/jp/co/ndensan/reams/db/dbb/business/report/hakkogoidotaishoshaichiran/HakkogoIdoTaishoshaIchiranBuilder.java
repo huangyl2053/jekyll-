@@ -10,6 +10,8 @@ import jp.co.ndensan.reams.uz.uza.report.ReportEditorJoiner;
 
 /**
  * 通知書発行後異動把握帳票HakkogoIdoTaishoshaIchiranBuilder
+ *
+ * @reamsid_L DBB-0690-030 surun
  */
 public class HakkogoIdoTaishoshaIchiranBuilder implements IHakkogoIdoTaishoshaIchiranBuilder {
 

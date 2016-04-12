@@ -8,7 +8,9 @@ package jp.co.ndensan.reams.db.dbb.business.report.fukadaicho;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
- *  普徴期
+ * 普徴期
+ *
+ * @reamsid_L DBB-9100-030 surun
  */
 @lombok.Getter
 @lombok.Setter

@@ -13,6 +13,8 @@ import lombok.NonNull;
 
 /**
  * 高額介護サービス費給付対象者一覧表帳票Report
+ *
+ * @reamsid_L DBC-0980-490 surun
  */
 public class KogakuKyufuTaishoshaIchiranReport extends Report<KogakuKyufuTaishoshaIchiranSource> {
 

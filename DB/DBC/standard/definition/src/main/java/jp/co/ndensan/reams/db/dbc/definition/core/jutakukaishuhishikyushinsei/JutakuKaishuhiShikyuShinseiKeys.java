@@ -7,6 +7,8 @@ package jp.co.ndensan.reams.db.dbc.definition.core.jutakukaishuhishikyushinsei;
 
 /**
  * 画面設計　住宅改修費支給申請一括審査・決定 JutakuKaishuhiShikyuShinseiKeys
+ *
+ * @reamsid_L DBC-0991-030 surun
  */
 public enum JutakuKaishuhiShikyuShinseiKeys {
 

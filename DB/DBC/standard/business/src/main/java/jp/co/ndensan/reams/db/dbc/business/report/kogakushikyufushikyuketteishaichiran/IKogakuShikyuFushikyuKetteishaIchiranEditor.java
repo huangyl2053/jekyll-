@@ -10,6 +10,8 @@ import jp.co.ndensan.reams.uz.uza.report.IReportEditor;
 
 /**
  * 高額サービス費支給（不支給）決定者一覧表帳票IEditor
+ *
+ * @reamsid_L DBC-0980-500 surun
  */
 public interface IKogakuShikyuFushikyuKetteishaIchiranEditor extends
         IReportEditor<KogakuShikyuFushikyuKetteishaIchiranSource> {

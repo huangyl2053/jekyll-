@@ -6,8 +6,7 @@
 package jp.co.ndensan.reams.db.dbc.business.report.kagoketteikohifutanshain;
 
 import java.util.List;
-import jp.co.ndensan.reams.db.dbc.entity.report.source.kagoketteikohifutanshain
-        .KagoKetteiKohifutanshaInSource;
+import jp.co.ndensan.reams.db.dbc.entity.report.source.kagoketteikohifutanshain.KagoKetteiKohifutanshaInSource;
 import jp.co.ndensan.reams.uz.uza.report.Report;
 import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
 import lombok.NonNull;
@@ -15,6 +14,8 @@ import lombok.NonNull;
 /**
  *
  * 誤決定通知書情報取込一覧表（公費負担者分）帳票Report
+ *
+ * @reamsid_L DBC-0980-510 surun
  */
 public class KagoKetteiKohifutanshaInReport extends
         Report<KagoKetteiKohifutanshaInSource> {
@@ -24,8 +25,7 @@ public class KagoKetteiKohifutanshaInReport extends
     /**
      * コンストラクタです
      *
-     * @param targets
-     * List<KagoKetteitsuchishoTorikomiIchiranKohifutanshaBunItem>
+     * @param targets List<KagoKetteitsuchishoTorikomiIchiranKohifutanshaBunItem>
      */
     protected KagoKetteiKohifutanshaInReport(List<KagoKetteiKohifutanshaInItem> targets) {
         this.targets = targets;
@@ -34,8 +34,7 @@ public class KagoKetteiKohifutanshaInReport extends
     /**
      * createFormメソッド
      *
-     * @param targets
-     * List<KagoKetteitsuchishoTorikomiIchiranKohifutanshaBunItem>
+     * @param targets List<KagoKetteitsuchishoTorikomiIchiranKohifutanshaBunItem>
      * @return KagoKetteiKohifutanshaInReport
      */
     public static KagoKetteiKohifutanshaInReport createForm(
@@ -48,8 +47,8 @@ public class KagoKetteiKohifutanshaInReport extends
         for (KagoKetteiKohifutanshaInItem target : targets) {
             IKagoKetteiKohifutanshaInEditor headerEditor = new HeaderEditor(target);
             IKagoKetteiKohifutanshaInEditor bodyEditor = new BodyEditor(target);
-            IKagoKetteiKohifutanshaInBuilder builder = 
-                    new KagoKetteiKohifutanshaInBuilder(headerEditor, bodyEditor);
+            IKagoKetteiKohifutanshaInBuilder builder
+                    = new KagoKetteiKohifutanshaInBuilder(headerEditor, bodyEditor);
             writer.writeLine(builder);
         }
     }
