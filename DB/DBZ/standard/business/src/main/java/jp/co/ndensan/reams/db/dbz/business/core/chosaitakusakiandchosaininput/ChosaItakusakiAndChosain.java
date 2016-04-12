@@ -10,6 +10,8 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 /**
  *
  * 調査委託先＆調査員入力ビジネスクラスです。
+ *
+ * @reamsid_L DBE-1300-030 zhangguopeng
  */
 @lombok.Getter
 @lombok.Setter

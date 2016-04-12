@@ -22,7 +22,7 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets._CommonChildDivModeUtil;
 /**
  * ChosaItakusakiAndChosainInput のクラスファイル
  *
- * @author 自動生成
+ * @reamsid_L DBE-1300-030 zhangguopeng
  */
 public class ChosaItakusakiAndChosainInputDiv extends Panel implements IChosaItakusakiAndChosainInputDiv {
 
