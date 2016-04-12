@@ -21,6 +21,8 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 
 /**
  * 償還払い状況照会_申請情報検索
+ *
+ * @reamsid_L DBC-1010-130 panhe
  */
 public class ShinseiSearch {
 

@@ -9,6 +9,8 @@ import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0810011.Shin
 
 /**
  * 償還払い状況照会_申請情報検索のHandlerクラス
+ *
+ * @reamsid_L DBC-1010-130 panhe
  */
 public final class ShinseiSearchHandler {
 
