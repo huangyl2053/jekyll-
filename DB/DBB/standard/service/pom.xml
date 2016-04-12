@@ -89,5 +89,17 @@
             <groupId>jp.co.ndensan.reams.ux.uxx</groupId>
             <artifactId>UxxService</artifactId>
         </dependency>
+        <dependency>
+            <groupId>jp.co.ndensan.reams.db.dbd</groupId>
+            <artifactId>DbdPersistence</artifactId>
+            <version>1.0-SNAPSHOT</version>
+            <type>jar</type>
+        </dependency>
+        <dependency>
+            <groupId>jp.co.ndensan.reams.db.dbz</groupId>
+            <artifactId>DbzService</artifactId>
+            <version>1.0-SNAPSHOT</version>
+            <type>jar</type>
+        </dependency>
     </dependencies>
 </project>

@@ -358,4 +358,24 @@ public class DbT4001JukyushaDaichoDac implements ISaveable<DbT4001JukyushaDaicho
                 limit(1).
                 toObject(DbT4001JukyushaDaichoEntity.class);
     }
+
+    /**
+     * 受給者台帳情報を取得する。
+     *
+     * @param 被保険者番号 被保険者番号
+     * @return DbT4001JukyushaDaichoEntity 受給者台帳のデータ
+     * @throws NullPointerException 引数のいずれかがnullの場合
+     */
+    @Transaction
+    public List<DbT4001JukyushaDaichoEntity> select受給者台帳情報(HihokenshaNo 被保険者番号) throws NullPointerException {
+        requireNonNull(被保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage(メッセージ_被保険者番号.toString()));
+
+        DbAccessorNormalType accessor = new DbAccessorNormalType(session);
+
+        return accessor.select().
+                table(DbT4001JukyushaDaicho.class).
+                where(
+                        eq(hihokenshaNo, 被保険者番号)).
+                toList(DbT4001JukyushaDaichoEntity.class);
+    }
 }
