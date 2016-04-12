@@ -31,6 +31,8 @@ import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
 
 /**
  * 処理詳細_認定調査督促対象者一覧表の作成クラスです。
+ *
+ * @reamsid_L DBE-0030-040 xuyue
  */
 public class NinteiChosaTokusokuTaishoshaIchiranhyoReportProcess extends BatchProcessBase<NinteiChosaTokusokuTaishoshaIchiranhyoRelateEntity> {
 

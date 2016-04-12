@@ -25,6 +25,8 @@ import jp.co.ndensan.reams.uz.uza.lang.Separator;
 
 /**
  * 認定調査督促対象者一覧表csvの作成クラスです。
+ *
+ * @reamsid_L DBE-0030-040 xuyue
  */
 public class NinteiChosaTokusokuTaishoshaIchiranhyoCsvProcess extends SimpleBatchProcessBase {
 

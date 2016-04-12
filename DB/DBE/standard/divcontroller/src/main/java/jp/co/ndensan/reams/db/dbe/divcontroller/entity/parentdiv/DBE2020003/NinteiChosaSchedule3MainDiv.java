@@ -7,23 +7,16 @@ package jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2020003;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import jp.co.ndensan.reams.uz.uza.ui.binding.Button;
-import jp.co.ndensan.reams.uz.uza.ui.binding.DataGrid;
-import jp.co.ndensan.reams.uz.uza.ui.binding.DropDownList;
+import jp.co.ndensan.reams.uz.uza.ui.binding.*;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
-import jp.co.ndensan.reams.uz.uza.ui.binding.RadioButton;
-import jp.co.ndensan.reams.uz.uza.ui.binding.TextBox;
-import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxFlexibleDate;
-import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxKana;
 
 /**
- * NinteiChosaSchedule3Main のクラスファイル
- *
- * @reamsid_L DBE-0020-030 wanghui
+ * NinteiChosaSchedule3Main のクラスファイル 
+ * 
+ * @author 自動生成
  */
 public class NinteiChosaSchedule3MainDiv extends Panel {
-
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-01-15_09-59-03">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -86,7 +79,7 @@ public class NinteiChosaSchedule3MainDiv extends Panel {
     }
 
     @JsonIgnore
-    public void setScheduleEdit(ScheduleEditDiv ScheduleEdit) {
+    public void  setScheduleEdit(ScheduleEditDiv ScheduleEdit) {
         this.getSearchConditionPanel().setScheduleEdit(ScheduleEdit);
     }
 
@@ -96,7 +89,7 @@ public class NinteiChosaSchedule3MainDiv extends Panel {
     }
 
     @JsonIgnore
-    public void setRadScheduleEdit(RadioButton radScheduleEdit) {
+    public void  setRadScheduleEdit(RadioButton radScheduleEdit) {
         this.getSearchConditionPanel().getScheduleEdit().setRadScheduleEdit(radScheduleEdit);
     }
 
@@ -106,7 +99,7 @@ public class NinteiChosaSchedule3MainDiv extends Panel {
     }
 
     @JsonIgnore
-    public void setScheduleShokai(ScheduleShokaiDiv ScheduleShokai) {
+    public void  setScheduleShokai(ScheduleShokaiDiv ScheduleShokai) {
         this.getSearchConditionPanel().setScheduleShokai(ScheduleShokai);
     }
 
@@ -116,7 +109,7 @@ public class NinteiChosaSchedule3MainDiv extends Panel {
     }
 
     @JsonIgnore
-    public void setRadScheduleShokai(RadioButton radScheduleShokai) {
+    public void  setRadScheduleShokai(RadioButton radScheduleShokai) {
         this.getSearchConditionPanel().getScheduleShokai().setRadScheduleShokai(radScheduleShokai);
     }
 
@@ -126,7 +119,7 @@ public class NinteiChosaSchedule3MainDiv extends Panel {
     }
 
     @JsonIgnore
-    public void setMiteishaKanri(MiteishaKanriDiv MiteishaKanri) {
+    public void  setMiteishaKanri(MiteishaKanriDiv MiteishaKanri) {
         this.getSearchConditionPanel().setMiteishaKanri(MiteishaKanri);
     }
 
@@ -136,7 +129,7 @@ public class NinteiChosaSchedule3MainDiv extends Panel {
     }
 
     @JsonIgnore
-    public void setRadMiteishaKanri(RadioButton radMiteishaKanri) {
+    public void  setRadMiteishaKanri(RadioButton radMiteishaKanri) {
         this.getSearchConditionPanel().getMiteishaKanri().setRadMiteishaKanri(radMiteishaKanri);
     }
 
@@ -146,7 +139,7 @@ public class NinteiChosaSchedule3MainDiv extends Panel {
     }
 
     @JsonIgnore
-    public void setDdlTaishoChiku(DropDownList ddlTaishoChiku) {
+    public void  setDdlTaishoChiku(DropDownList ddlTaishoChiku) {
         this.getSearchConditionPanel().setDdlTaishoChiku(ddlTaishoChiku);
     }
 
@@ -156,7 +149,7 @@ public class NinteiChosaSchedule3MainDiv extends Panel {
     }
 
     @JsonIgnore
-    public void setDdlHokensha(DropDownList ddlHokensha) {
+    public void  setDdlHokensha(DropDownList ddlHokensha) {
         this.getSearchConditionPanel().setDdlHokensha(ddlHokensha);
     }
 
@@ -166,7 +159,7 @@ public class NinteiChosaSchedule3MainDiv extends Panel {
     }
 
     @JsonIgnore
-    public void setTxtHihokenshaNo(TextBox txtHihokenshaNo) {
+    public void  setTxtHihokenshaNo(TextBox txtHihokenshaNo) {
         this.getSearchConditionPanel().setTxtHihokenshaNo(txtHihokenshaNo);
     }
 
@@ -176,7 +169,7 @@ public class NinteiChosaSchedule3MainDiv extends Panel {
     }
 
     @JsonIgnore
-    public void setTxtShikibetsuCode(TextBox txtShikibetsuCode) {
+    public void  setTxtShikibetsuCode(TextBox txtShikibetsuCode) {
         this.getSearchConditionPanel().setTxtShikibetsuCode(txtShikibetsuCode);
     }
 
@@ -186,7 +179,7 @@ public class NinteiChosaSchedule3MainDiv extends Panel {
     }
 
     @JsonIgnore
-    public void setTxtShimei(TextBox txtShimei) {
+    public void  setTxtShimei(TextBox txtShimei) {
         this.getSearchConditionPanel().setTxtShimei(txtShimei);
     }
 
@@ -196,7 +189,7 @@ public class NinteiChosaSchedule3MainDiv extends Panel {
     }
 
     @JsonIgnore
-    public void setTxtKanaShimei(TextBoxKana txtKanaShimei) {
+    public void  setTxtKanaShimei(TextBoxKana txtKanaShimei) {
         this.getSearchConditionPanel().setTxtKanaShimei(txtKanaShimei);
     }
 
@@ -206,7 +199,7 @@ public class NinteiChosaSchedule3MainDiv extends Panel {
     }
 
     @JsonIgnore
-    public void setTxtBirthDay(TextBoxFlexibleDate txtBirthDay) {
+    public void  setTxtBirthDay(TextBoxFlexibleDate txtBirthDay) {
         this.getSearchConditionPanel().setTxtBirthDay(txtBirthDay);
     }
 
@@ -216,7 +209,7 @@ public class NinteiChosaSchedule3MainDiv extends Panel {
     }
 
     @JsonIgnore
-    public void setTxtNinteiShinseiYMDFrom(TextBoxFlexibleDate txtNinteiShinseiYMDFrom) {
+    public void  setTxtNinteiShinseiYMDFrom(TextBoxFlexibleDate txtNinteiShinseiYMDFrom) {
         this.getSearchConditionPanel().setTxtNinteiShinseiYMDFrom(txtNinteiShinseiYMDFrom);
     }
 
@@ -226,7 +219,7 @@ public class NinteiChosaSchedule3MainDiv extends Panel {
     }
 
     @JsonIgnore
-    public void setTxtNinteiShinseiYMDTo(TextBoxFlexibleDate txtNinteiShinseiYMDTo) {
+    public void  setTxtNinteiShinseiYMDTo(TextBoxFlexibleDate txtNinteiShinseiYMDTo) {
         this.getSearchConditionPanel().setTxtNinteiShinseiYMDTo(txtNinteiShinseiYMDTo);
     }
 
@@ -236,7 +229,7 @@ public class NinteiChosaSchedule3MainDiv extends Panel {
     }
 
     @JsonIgnore
-    public void setTxtMemo(TextBox txtMemo) {
+    public void  setTxtMemo(TextBox txtMemo) {
         this.getSearchConditionPanel().setTxtMemo(txtMemo);
     }
 
@@ -246,7 +239,7 @@ public class NinteiChosaSchedule3MainDiv extends Panel {
     }
 
     @JsonIgnore
-    public void setNinteiChosaJoken(NinteiChosaJokenDiv NinteiChosaJoken) {
+    public void  setNinteiChosaJoken(NinteiChosaJokenDiv NinteiChosaJoken) {
         this.getSearchConditionPanel().setNinteiChosaJoken(NinteiChosaJoken);
     }
 
@@ -256,7 +249,7 @@ public class NinteiChosaSchedule3MainDiv extends Panel {
     }
 
     @JsonIgnore
-    public void setDdlNinteiChosaItakusaki(DropDownList ddlNinteiChosaItakusaki) {
+    public void  setDdlNinteiChosaItakusaki(DropDownList ddlNinteiChosaItakusaki) {
         this.getSearchConditionPanel().getNinteiChosaJoken().setDdlNinteiChosaItakusaki(ddlNinteiChosaItakusaki);
     }
 
@@ -266,7 +259,7 @@ public class NinteiChosaSchedule3MainDiv extends Panel {
     }
 
     @JsonIgnore
-    public void setDdlNinteiChosain(DropDownList ddlNinteiChosain) {
+    public void  setDdlNinteiChosain(DropDownList ddlNinteiChosain) {
         this.getSearchConditionPanel().getNinteiChosaJoken().setDdlNinteiChosain(ddlNinteiChosain);
     }
 
@@ -276,7 +269,7 @@ public class NinteiChosaSchedule3MainDiv extends Panel {
     }
 
     @JsonIgnore
-    public void setTxtNinteiChosaYMDFrom(TextBoxFlexibleDate txtNinteiChosaYMDFrom) {
+    public void  setTxtNinteiChosaYMDFrom(TextBoxFlexibleDate txtNinteiChosaYMDFrom) {
         this.getSearchConditionPanel().getNinteiChosaJoken().setTxtNinteiChosaYMDFrom(txtNinteiChosaYMDFrom);
     }
 
@@ -286,7 +279,7 @@ public class NinteiChosaSchedule3MainDiv extends Panel {
     }
 
     @JsonIgnore
-    public void setTxtNinteiChosaYMDTo(TextBoxFlexibleDate txtNinteiChosaYMDTo) {
+    public void  setTxtNinteiChosaYMDTo(TextBoxFlexibleDate txtNinteiChosaYMDTo) {
         this.getSearchConditionPanel().getNinteiChosaJoken().setTxtNinteiChosaYMDTo(txtNinteiChosaYMDTo);
     }
 
@@ -296,7 +289,7 @@ public class NinteiChosaSchedule3MainDiv extends Panel {
     }
 
     @JsonIgnore
-    public void setTxtMaxRow(TextBox txtMaxRow) {
+    public void  setTxtMaxRow(TextBox txtMaxRow) {
         this.getSearchConditionPanel().setTxtMaxRow(txtMaxRow);
     }
 
@@ -306,7 +299,7 @@ public class NinteiChosaSchedule3MainDiv extends Panel {
     }
 
     @JsonIgnore
-    public void setBtnSearch(Button btnSearch) {
+    public void  setBtnSearch(Button btnSearch) {
         this.getSearchConditionPanel().setBtnSearch(btnSearch);
     }
 
@@ -316,7 +309,7 @@ public class NinteiChosaSchedule3MainDiv extends Panel {
     }
 
     @JsonIgnore
-    public void setBtnClear(Button btnClear) {
+    public void  setBtnClear(Button btnClear) {
         this.getSearchConditionPanel().setBtnClear(btnClear);
     }
 
@@ -326,7 +319,7 @@ public class NinteiChosaSchedule3MainDiv extends Panel {
     }
 
     @JsonIgnore
-    public void setDgResultList(DataGrid<dgResultList_Row> dgResultList) {
+    public void  setDgResultList(DataGrid<dgResultList_Row> dgResultList) {
         this.getResultListPanel().setDgResultList(dgResultList);
     }
 

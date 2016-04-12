@@ -25,9 +25,9 @@ public class JigyoshaShisetsuKanri {
     private final RString その他特例施設モード = new RString("12");
     private final RString 適用除外施設モード = new RString("21");
     private static final RString 修正 = new RString("修正");
-    private static final RString 介護_修正 = new RString("修正状態");
-    private static final RString 介護_削除 = new RString("削除状態");
-    private static final RString 介護_照会 = new RString("照会状態");
+    private static final RString 介護_修正 = new RString("修正");
+    private static final RString 介護_削除 = new RString("削除");
+    private static final RString 介護_照会 = new RString("照会");
     private final RString サービス事業者 = new RString("サービス事業者");
     private final RString その他特例施設 = new RString("その他特例施設");
     private final RString 適用除外施設 = new RString("適用除外施設");
@@ -56,7 +56,7 @@ public class JigyoshaShisetsuKanri {
      * @param div 施設管理Div
      * @return ResponseData<JigyoshaShisetsuKanriDiv> 施設管理Div
      */
-    public ResponseData<JigyoshaShisetsuKanriDiv> onclick_BtnRadJigyoshaShurui(JigyoshaShisetsuKanriDiv div) {
+    public ResponseData<JigyoshaShisetsuKanriDiv> onChange_BtnRadJigyoshaShurui(JigyoshaShisetsuKanriDiv div) {
 
         JigyoshaMode mode = new JigyoshaMode();
         mode.setJigyoshaShubetsu(div.getJigyoshaShurui().getRadJigyoshaShurui().getSelectedKey());

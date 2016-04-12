@@ -104,7 +104,7 @@
         )
         )
         AND
-        DbT7060."isDeleted"<![CDATA[=]]>TRUE
+        DbT7060."isDeleted"<![CDATA[<>]]>TRUE
     </select>
     <select id="getCheckKikanJufukui" resultMap="resultMap_getKaigoJigyoshaRelateEntity"
              parameterType="jp.co.ndensan.reams.db.dba.definition.mybatisprm.kaigojigyoshashisetsukanrio.KaigoJigyoshaParameter" fetchSize="500">

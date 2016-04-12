@@ -22,6 +22,8 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
  * 認定調査督促状発行のバッチフロークラスです。
+ *
+ * @reamsid_L DBE-0030-040 xuyue
  */
 public class Dbe223001Flow extends BatchFlowBase<Dbe223001FlowParameter> {
 

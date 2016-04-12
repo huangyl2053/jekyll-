@@ -9,8 +9,9 @@ import jp.co.ndensan.reams.db.dbz.definition.mybatisprm.relate.UpdateMybatisPara
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5201NinteichosaIraiJohoEntity;
 
 /**
+ * DbT5201NinteichosaIraiJohoのマッパーIFです。
  *
- * @author LDNS chenty
+ * @reamsid_L DBE-0030-040 xuyue
  */
 public interface IDbT5201NinteichosaIraiJohoMapper {
 

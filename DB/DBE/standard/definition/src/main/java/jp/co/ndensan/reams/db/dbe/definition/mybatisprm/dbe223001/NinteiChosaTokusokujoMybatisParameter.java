@@ -13,8 +13,9 @@ import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import lombok.Getter;
 
 /**
- *
  * 要介護認定調査督促状のMybatisパラメータクラスです。
+ *
+ * @reamsid_L DBE-0030-040 xuyue
  */
 @Getter
 @SuppressWarnings("PMD.UnusedPrivateField")

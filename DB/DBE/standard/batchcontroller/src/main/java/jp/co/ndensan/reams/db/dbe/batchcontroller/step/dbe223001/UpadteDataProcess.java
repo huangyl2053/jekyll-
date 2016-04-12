@@ -14,6 +14,8 @@ import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
 
 /**
  * 認定調査依頼情報テーブルの更新処理のクラスです。
+ *
+ * @reamsid_L DBE-0030-040 xuyue
  */
 public class UpadteDataProcess extends SimpleBatchProcessBase {
 

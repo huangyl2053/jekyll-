@@ -13,8 +13,9 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 
 /**
- *
  * 要介護認定調査督促状作成_バッチ処理クラスパラメータクラスです。
+ *
+ * @reamsid_L DBE-0030-040 xuyue
  */
 @lombok.Getter
 @lombok.Setter
