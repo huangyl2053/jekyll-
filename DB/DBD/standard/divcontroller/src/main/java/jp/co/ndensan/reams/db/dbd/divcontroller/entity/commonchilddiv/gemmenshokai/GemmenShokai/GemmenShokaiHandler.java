@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbd.divcontroller.handler.gemmenshokai;
+package jp.co.ndensan.reams.db.dbd.divcontroller.entity.commonchilddiv.gemmenshokai.GemmenShokai;
 
 import java.util.List;
 import jp.co.ndensan.reams.db.dbd.business.common.NursingCareInformationBusiness;
@@ -11,7 +11,6 @@ import jp.co.ndensan.reams.db.dbd.business.core.basic.JukyushaDaicho;
 import jp.co.ndensan.reams.db.dbd.business.core.futanwariai.RiyoshaFutanWariaiMeisai;
 import jp.co.ndensan.reams.db.dbd.business.core.shiharaihohohenko.ShiharaiHohoHenkoSummary;
 import jp.co.ndensan.reams.db.dbd.definition.enumeratedtype.core.JukyuShinseiJiyu;
-import jp.co.ndensan.reams.db.dbd.divcontroller.entity.commonchilddiv.gemmenshokai.GemmenShokai.GemmenShokaiDiv;
 import jp.co.ndensan.reams.db.dbd.service.common.GemmenJokyoFinder;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.RoreiFukushiNenkinJukyusha;
@@ -26,6 +25,8 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 /**
  *
  * 【共有子Div】 減免照会ハンドラクラスです。
+ *
+ * @reamsid_L DBD-3660-010 wangjie2
  */
 public class GemmenShokaiHandler {
 
