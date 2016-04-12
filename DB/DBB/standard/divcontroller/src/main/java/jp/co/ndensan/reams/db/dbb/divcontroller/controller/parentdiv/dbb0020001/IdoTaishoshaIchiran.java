@@ -45,6 +45,8 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 
 /**
  * 画面設計_DBBGM32001_通知書発行後異動把握
+ *
+ * @reamsid_L DBB-0690-010 xuhao
  */
 public class IdoTaishoshaIchiran {
 

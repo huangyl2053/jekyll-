@@ -30,6 +30,8 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 
 /**
  * IdoTaishoshaIchiranHandler
+ *
+ * @reamsid_L DBB-0690-010 xuhao
  */
 public final class IdoTaishoshaIchiranHandler {
 
