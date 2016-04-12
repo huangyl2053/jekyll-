@@ -28,6 +28,8 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
  * 給付実績編集用entityクラスです。
+ *
+ * @reamsid_L DBC-1030-210 xicongwang
  */
 public class KyufujissekiEntity {
 

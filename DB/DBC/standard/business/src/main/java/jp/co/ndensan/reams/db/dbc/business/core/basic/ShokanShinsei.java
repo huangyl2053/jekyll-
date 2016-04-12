@@ -23,6 +23,8 @@ import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 
 /**
  * 償還払支給申請を管理するクラスです。
+ *
+ * @reamsid_L DBC-9999-012 xicongwang
  */
 public class ShokanShinsei extends ModelBase<ShokanShinseiIdentifier, DbT3034ShokanShinseiEntity, ShokanShinsei> implements Serializable {
 

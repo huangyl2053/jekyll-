@@ -77,6 +77,8 @@ import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 
 /**
  * 償還払支給決定給付実績編集クラスです。
+ *
+ * @reamsid_L DBC-1030-210 xicongwang
  */
 public class SyokanbaraiShikyuKetteKyufuJssekiHensyuManager {
 
@@ -100,6 +102,28 @@ public class SyokanbaraiShikyuKetteKyufuJssekiHensyuManager {
     private static final RString モード_差額登録 = new RString("差額登録");
     private static final RString モード_削除 = new RString("削除");
     private static final RString モード_審査 = new RString("審査");
+    private static final RString 区分コード1 = new RString("1");
+    private static final RString 区分コード2 = new RString("2");
+    private static final RString 区分コード3 = new RString("3");
+    private static final RString 定値_最新番号 = new RString("最新番号");
+    private static final RString 定値_認定有効期間 = new RString("認定有効期間");
+    private static final RString 定値_交換情報識別番号 = new RString("交換情報識別番号");
+    private static final RString 定値_種別コード1 = new RString("01");
+    private static final RString 定値_種別コード2 = new RString("02");
+    private static final RString 定値_種別コード3 = new RString("03");
+    private static final RString 定値_種別コード4 = new RString("04");
+    private static final RString 定値_種別コード5 = new RString("05");
+    private static final RString 定値_種別コード6 = new RString("06");
+    private static final RString 定値_種別コード10 = new RString("10");
+    private static final RString 定値_種別コード11 = new RString("11");
+    private static final RString 定値_種別コード12 = new RString("12");
+    private static final RString 定値_種別コード13 = new RString("13");
+    private static final RString 定値_種別コード14 = new RString("14");
+    private static final FlexibleYearMonth サービス提供年月_200603 = new FlexibleYearMonth("200603");
+    private static final FlexibleYearMonth サービス提供年月_200903 = new FlexibleYearMonth("200903");
+    private static final FlexibleYearMonth サービス提供年月_200604 = new FlexibleYearMonth("200604");
+    private static final FlexibleYearMonth サービス提供年月_200904 = new FlexibleYearMonth("200904");
+    private static final RString 定値_フォーマット = new RString("%02d");
 
     /**
      * コンストラクタです。
@@ -150,28 +174,28 @@ public class SyokanbaraiShikyuKetteKyufuJssekiHensyuManager {
         RString 給付実績情報作成区分コード;
         if (モード_登録.equals(画面モード)
                 && ShikyuFushikyuKubun.支給.getコード().equals(entity.get支給区分())) {
-            給付実績情報作成区分コード = new RString("1");
+            給付実績情報作成区分コード = 区分コード1;
             給付実績追加(識別コード, 給付実績情報作成区分コード, entity);
         } else if (モード_修正.equals(画面モード) || モード_差額登録.equals(画面モード)) {
             if (ShikyuFushikyuKubun.不支給.getコード().equals(修正前支給区分)
                     && ShikyuFushikyuKubun.支給.getコード().equals(entity.get支給区分())) {
-                給付実績情報作成区分コード = new RString("1");
+                給付実績情報作成区分コード = 区分コード1;
                 給付実績追加(識別コード, 給付実績情報作成区分コード, entity);
             } else if (ShikyuFushikyuKubun.支給.getコード().equals(修正前支給区分)
                     && ShikyuFushikyuKubun.支給.getコード().equals(entity.get支給区分())) {
-                給付実績情報作成区分コード = new RString("2");
+                給付実績情報作成区分コード = 区分コード2;
                 給付実績追加(識別コード, 給付実績情報作成区分コード, entity);
             } else if (ShikyuFushikyuKubun.支給.getコード().equals(修正前支給区分)
                     && ShikyuFushikyuKubun.不支給.getコード().equals(entity.get支給区分())) {
-                給付実績情報作成区分コード = new RString("3");
+                給付実績情報作成区分コード = 区分コード3;
                 給付実績追加(識別コード, 給付実績情報作成区分コード, entity);
             }
         } else if (モード_削除.equals(画面モード)
                 && ShikyuFushikyuKubun.支給.getコード().equals(entity.get支給区分())) {
-            給付実績情報作成区分コード = new RString("3");
+            給付実績情報作成区分コード = 区分コード3;
             給付実績追加(識別コード, 給付実績情報作成区分コード, entity);
         } else if (モード_審査.equals(画面モード)) {
-            給付実績情報作成区分コード = new RString("1");
+            給付実績情報作成区分コード = 区分コード1;
             給付実績追加(識別コード, 給付実績情報作成区分コード, entity);
         }
     }
@@ -190,7 +214,7 @@ public class SyokanbaraiShikyuKetteKyufuJssekiHensyuManager {
                 SaibanHanyokeyName.実績管理番号.getコード()).nextString();
         if (通し番号 == null) {
             throw new ApplicationException(UrErrorMessages.存在しない
-                    .getMessage().replace("最新番号").evaluate());
+                    .getMessage().replace(定値_最新番号.toString()).evaluate());
         }
 
         ShikibetsuTaishoPSMSearchKeyBuilder builder
@@ -212,7 +236,7 @@ public class SyokanbaraiShikyuKetteKyufuJssekiHensyuManager {
         DbT4001JukyushaDaichoEntity dbT4001entity = 受給者台帳Dac.select認定有効期間(entity.get被保険者番号());
         if (dbT4001entity == null) {
             throw new ApplicationException(UrErrorMessages.存在しない
-                    .getMessage().replace("認定有効期間").evaluate());
+                    .getMessage().replace(定値_認定有効期間.toString()).evaluate());
         }
 
         RString 識別番号区分 = ShikibetsuNoKubon.交換情報識別番号.getコード();
@@ -221,7 +245,7 @@ public class SyokanbaraiShikyuKetteKyufuJssekiHensyuManager {
                 = 識別番号管理Dac.select交換情報識別番号(識別番号区分, 適用年月);
         if (dbT3118entity == null) {
             throw new ApplicationException(UrErrorMessages.存在しない
-                    .getMessage().replace("交換情報識別番号").evaluate());
+                    .getMessage().replace(定値_交換情報識別番号.toString()).evaluate());
         }
 
         KokanShikibetsuNo 交換情報識別番号 = new KokanShikibetsuNo(dbT3118entity.getShikibetsuNo());
@@ -263,12 +287,12 @@ public class SyokanbaraiShikyuKetteKyufuJssekiHensyuManager {
             for (DbT3038ShokanKihonEntity 償還払請求基本 : 償還払請求基本List) {
                 dbT3017entity.setKokanShikibetsuNo(交換情報識別番号);
                 dbT3017entity.setInputShikibetsuNo(new NyuryokuShikibetsuNo(償還払請求基本.getYoshikiNo()));
-                dbT3017entity.setRecodeShubetsuCode(new RString("01"));
+                dbT3017entity.setRecodeShubetsuCode(定値_種別コード1);
                 dbT3017entity.setKyufuSakuseiKubunCode(給付実績情報作成区分コード);
                 dbT3017entity.setShokisaiHokenshaNo(new HokenshaNo(entity.get証記載保険者番号().getColumnValue()));
                 dbT3017entity.setHiHokenshaNo(償還払請求基本.getHiHokenshaNo());
                 dbT3017entity.setServiceTeikyoYM(償還払請求基本.getServiceTeikyoYM());
-                dbT3017entity.setKyufuJissekiKubunCode(new RString("2"));
+                dbT3017entity.setKyufuJissekiKubunCode(区分コード2);
                 dbT3017entity.setJigyoshoNo(償還払請求基本.getJigyoshaNo());
                 dbT3017entity.setToshiNo(通し番号);
                 dbT3017entity.setUmareYMD(生年月日YND);
@@ -315,7 +339,7 @@ public class SyokanbaraiShikyuKetteKyufuJssekiHensyuManager {
             for (DbT3039ShokanMeisaiEntity 償還払請求明細 : 償還払請求明細List) {
                 dbT3018entity.setKokanJohoShikibetsuNo(交換情報識別番号);
                 dbT3018entity.setInputShikibetsuNo(new NyuryokuShikibetsuNo(償還払請求明細.getYoshikiNo()));
-                dbT3018entity.setRecodeShubetsuCode(new RString("02"));
+                dbT3018entity.setRecodeShubetsuCode(定値_種別コード2);
                 dbT3018entity.setShokisaiHokenshaNo(new HokenshaNo(entity.get証記載保険者番号().getColumnValue()));
                 dbT3018entity.setHiHokenshaNo(償還払請求明細.getHiHokenshaNo());
                 dbT3018entity.setServiceTeikyoYM(償還払請求明細.getServiceTeikyoYM());
@@ -354,7 +378,7 @@ public class SyokanbaraiShikyuKetteKyufuJssekiHensyuManager {
             for (DbT3107ShokanMeisaiJushochiTokureiEntity 住所地特例 : 住所地特例List) {
                 dbT3106entity.setKokanJohoShikibetsuNo(交換情報識別番号);
                 dbT3106entity.setInputShikibetsuNo(new NyuryokuShikibetsuNo(住所地特例.getYoshikiNo()));
-                dbT3106entity.setRecodeShubetsuCode(new RString("14"));
+                dbT3106entity.setRecodeShubetsuCode(定値_種別コード14);
                 dbT3106entity.setShokisaiHokenshaNo(new HokenshaNo(entity.get証記載保険者番号().getColumnValue()));
                 dbT3106entity.setHiHokenshaNo(住所地特例.getHiHokenshaNo());
                 dbT3106entity.setServiceTeikyoYM(住所地特例.getServiceTeikyoYM());
@@ -398,7 +422,7 @@ public class SyokanbaraiShikyuKetteKyufuJssekiHensyuManager {
                 連番 = 連番 + 1;
                 dbT3019entity.setKokanJohoShikibetsuNo(交換情報識別番号);
                 dbT3019entity.setInputShikibetsuNo(new NyuryokuShikibetsuNo(償還払請求緊急時施設療養.getYoshikiNo()));
-                dbT3019entity.setRecodeShubetsuCode(new RString("03"));
+                dbT3019entity.setRecodeShubetsuCode(定値_種別コード3);
                 dbT3019entity.setShokisaiHokenshaNo(new HokenshaNo(entity.get証記載保険者番号().getColumnValue()));
                 dbT3019entity.setHiHokenshaNo(償還払請求緊急時施設療養.getHiHokenshaNo());
                 dbT3019entity.setServiceTeikyoYM(償還払請求緊急時施設療養.getServiceTeikyoYM());
@@ -481,7 +505,7 @@ public class SyokanbaraiShikyuKetteKyufuJssekiHensyuManager {
                 連番 = 連番 + 1;
                 dbT3020entity.setKokanJohoShikibetsuNo(交換情報識別番号);
                 dbT3020entity.setInputShikibetsuNo(new NyuryokuShikibetsuNo(償還払請求特定診療費.getYoshikiNo()));
-                dbT3020entity.setRecodeShubetsuCode(new RString("04"));
+                dbT3020entity.setRecodeShubetsuCode(定値_種別コード4);
                 dbT3020entity.setShokisaiHokenshaNo(new HokenshaNo(entity.get証記載保険者番号().getColumnValue()));
                 dbT3020entity.setHiHokenshaNo(償還払請求特定診療費.getHiHokenshaNo());
                 dbT3020entity.setServiceTeikyoYM(償還払請求特定診療費.getServiceTeikyoYM());
@@ -544,7 +568,7 @@ public class SyokanbaraiShikyuKetteKyufuJssekiHensyuManager {
                 連番 = 連番 + 1;
                 dbT3021entity.setKokanJohoShikibetsuNo(交換情報識別番号);
                 dbT3021entity.setInputShikibetsuNo(new NyuryokuShikibetsuNo(特別療養費.getYoshikiNo()));
-                dbT3021entity.setRecodeShubetsuCode(new RString("04"));
+                dbT3021entity.setRecodeShubetsuCode(定値_種別コード4);
                 dbT3021entity.setShokisaiHokenshaNo(new HokenshaNo(entity.get証記載保険者番号().getColumnValue()));
                 dbT3021entity.setHiHokenshaNo(特別療養費.getHiHokenshaNo());
                 dbT3021entity.setServiceTeikyoYM(特別療養費.getServiceTeikyoYM());
@@ -586,7 +610,7 @@ public class SyokanbaraiShikyuKetteKyufuJssekiHensyuManager {
             for (DbT3043ShokanShokujiHiyoEntity 償還払請求食事費用 : 償還払請求食事費用List) {
                 dbT3022entity.setKokanJohoShikibetsuNo(交換情報識別番号);
                 dbT3022entity.setInputShikibetsuNo(new NyuryokuShikibetsuNo(償還払請求食事費用.getYoshikiNo()));
-                dbT3022entity.setRecodeShubetsuCode(new RString("05"));
+                dbT3022entity.setRecodeShubetsuCode(定値_種別コード5);
                 dbT3022entity.setShokisaiHokenshaNo(new HokenshaNo(entity.get証記載保険者番号().getColumnValue()));
                 dbT3022entity.setHiHokenshaNo(償還払請求食事費用.getHiHokenshaNo());
                 dbT3022entity.setServiceTeikyoYM(償還払請求食事費用.getServiceTeikyoYM());
@@ -633,14 +657,14 @@ public class SyokanbaraiShikyuKetteKyufuJssekiHensyuManager {
         if (給付実績居宅サービス計画費List == null || 給付実績居宅サービス計画費List.isEmpty()) {
             return;
         }
-        if (サービス提供年月.isBeforeOrEquals(new FlexibleYearMonth("200603"))) {
+        if (サービス提供年月.isBeforeOrEquals(サービス提供年月_200603)) {
             for (ServiceKeikakuHiRealtEntity 給付実績居宅サービス計画費 : 給付実績居宅サービス計画費List) {
                 if (給付実績居宅サービス計画費.get償還払請求サービス計画200004() != null) {
                     連番 = 連番 + 1;
                     dbT3025entity.setKokanJohoShikibetsuNo(交換情報識別番号);
                     dbT3025entity.setInputShikibetsuNo(new NyuryokuShikibetsuNo(
                             給付実績居宅サービス計画費.get償還払請求サービス計画200004().getYoshikiNo()));
-                    dbT3025entity.setRecodeShubetsuCode(new RString("06"));
+                    dbT3025entity.setRecodeShubetsuCode(定値_種別コード6);
                     dbT3025entity.setShokisaiHokenshaNo(new HokenshaNo(entity.get証記載保険者番号().getColumnValue()));
                     dbT3025entity.setHiHokenshaNo(
                             給付実績居宅サービス計画費.get償還払請求サービス計画200004().getHiHokenshaNo());
@@ -672,15 +696,15 @@ public class SyokanbaraiShikyuKetteKyufuJssekiHensyuManager {
                     給付実績居宅サービス計画費Dac.save(dbT3025entity);
                 }
             }
-        } else if (サービス提供年月.isBeforeOrEquals(new FlexibleYearMonth("200903"))
-                && new FlexibleYearMonth("200604").isBeforeOrEquals(サービス提供年月)) {
+        } else if (サービス提供年月.isBeforeOrEquals(サービス提供年月_200903)
+                && サービス提供年月_200604.isBeforeOrEquals(サービス提供年月)) {
             for (ServiceKeikakuHiRealtEntity 給付実績居宅サービス計画費 : 給付実績居宅サービス計画費List) {
                 if (給付実績居宅サービス計画費.get償還払請求サービス計画200604() != null) {
                     連番 = 連番 + 1;
                     dbT3025entity.setKokanJohoShikibetsuNo(交換情報識別番号);
                     dbT3025entity.setInputShikibetsuNo(new NyuryokuShikibetsuNo(
                             給付実績居宅サービス計画費.get償還払請求サービス計画200604().getYoshikiNo()));
-                    dbT3025entity.setRecodeShubetsuCode(new RString("06"));
+                    dbT3025entity.setRecodeShubetsuCode(定値_種別コード6);
                     dbT3025entity.setShokisaiHokenshaNo(new HokenshaNo(entity.get証記載保険者番号().getColumnValue()));
                     dbT3025entity.setHiHokenshaNo(
                             給付実績居宅サービス計画費.get償還払請求サービス計画200604().getHiHokenshaNo());
@@ -716,14 +740,14 @@ public class SyokanbaraiShikyuKetteKyufuJssekiHensyuManager {
                     給付実績居宅サービス計画費Dac.save(dbT3025entity);
                 }
             }
-        } else if (new FlexibleYearMonth("200904").isBeforeOrEquals(サービス提供年月)) {
+        } else if (サービス提供年月_200904.isBeforeOrEquals(サービス提供年月)) {
             for (ServiceKeikakuHiRealtEntity 給付実績居宅サービス計画費 : 給付実績居宅サービス計画費List) {
                 if (給付実績居宅サービス計画費.get償還払請求サービス計画200904() != null) {
                     連番 = 連番 + 1;
                     dbT3025entity.setKokanJohoShikibetsuNo(交換情報識別番号);
                     dbT3025entity.setInputShikibetsuNo(new NyuryokuShikibetsuNo(
                             給付実績居宅サービス計画費.get償還払請求サービス計画200904().getYoshikiNo()));
-                    dbT3025entity.setRecodeShubetsuCode(new RString("06"));
+                    dbT3025entity.setRecodeShubetsuCode(定値_種別コード6);
                     dbT3025entity.setShokisaiHokenshaNo(new HokenshaNo(entity.get証記載保険者番号().getColumnValue()));
                     dbT3025entity.setHiHokenshaNo(給付実績居宅サービス計画費.
                             get償還払請求サービス計画200904().getHiHokenshaNo());
@@ -796,7 +820,7 @@ public class SyokanbaraiShikyuKetteKyufuJssekiHensyuManager {
                 dbT3029entity.setKokanJohoShikibetsuNo(交換情報識別番号);
                 dbT3029entity.setInputShikibetsuNo(
                         new NyuryokuShikibetsuNo(償還払請求特定入所者介護サービス費用.getYoshikiNo()));
-                dbT3029entity.setRecodeShubetsuCode(new RString("11"));
+                dbT3029entity.setRecodeShubetsuCode(定値_種別コード11);
                 dbT3029entity.setShokisaiHokenshaNo(new HokenshaNo(entity.get証記載保険者番号().getColumnValue()));
                 dbT3029entity.setHiHokenshaNo(償還払請求特定入所者介護サービス費用.getHiHokenshaNo());
                 dbT3029entity.setServiceTeikyoYM(償還払請求特定入所者介護サービス費用.getServiceTeikyoYM());
@@ -859,7 +883,7 @@ public class SyokanbaraiShikyuKetteKyufuJssekiHensyuManager {
                 dbT3030entity.setKokanJohoShikibetsuNo(交換情報識別番号);
                 dbT3030entity.setInputShikibetsuNo(
                         new NyuryokuShikibetsuNo(償還払請求社会福祉法人軽減額.getYoshikiNo()));
-                dbT3030entity.setRecodeShubetsuCode(new RString("12"));
+                dbT3030entity.setRecodeShubetsuCode(定値_種別コード12);
                 dbT3030entity.setShokisaiHokenshaNo(new HokenshaNo(entity.get証記載保険者番号().getColumnValue()));
                 dbT3030entity.setHiHokenshaNo(償還払請求社会福祉法人軽減額.getHiHokenshaNo());
                 dbT3030entity.setServiceTeikyoYM(償還払請求社会福祉法人軽減額.getServiceTeikyoYM());
@@ -908,7 +932,7 @@ public class SyokanbaraiShikyuKetteKyufuJssekiHensyuManager {
                 dbT3032entity.setKokanJohoShikibetsuNo(交換情報識別番号);
                 dbT3032entity.setInputShikibetsuNo(
                         new NyuryokuShikibetsuNo(償還払請求所定疾患施設療養費等.getYoshikiNo()));
-                dbT3032entity.setRecodeShubetsuCode(new RString("13"));
+                dbT3032entity.setRecodeShubetsuCode(定値_種別コード13);
                 dbT3032entity.setShokisaiHokenshaNo(new HokenshaNo(entity.get証記載保険者番号().getColumnValue()));
                 dbT3032entity.setHiHokenshaNo(償還払請求所定疾患施設療養費等.getHiHokenshaNo());
                 dbT3032entity.setServiceTeikyoYM(償還払請求所定疾患施設療養費等.getServiceTeikyoYM());
@@ -1011,7 +1035,7 @@ public class SyokanbaraiShikyuKetteKyufuJssekiHensyuManager {
             for (DbT3053ShokanShukeiEntity 償還払請求集計 : 償還払請求集計List) {
                 dbT3033entity.setKokanJohoShikibetsuNo(交換情報識別番号);
                 dbT3033entity.setInputShikibetsuNo(new NyuryokuShikibetsuNo(償還払請求集計.getYoshikiNo()));
-                dbT3033entity.setRecodeShubetsuCode(new RString("10"));
+                dbT3033entity.setRecodeShubetsuCode(定値_種別コード10);
                 dbT3033entity.setShokisaiHokenshaNo(new HokenshaNo(entity.get証記載保険者番号().getColumnValue()));
                 dbT3033entity.setHiHokenshaNo(償還払請求集計.getHiHokenshaNo());
                 dbT3033entity.setServiceTeikyoYM(償還払請求集計.getServiceTeikyoYM());
@@ -1056,7 +1080,7 @@ public class SyokanbaraiShikyuKetteKyufuJssekiHensyuManager {
      */
     private ServiceShuruiCode nullTOEmpty(ServiceShuruiCode 項目) {
         if (項目 == null || 項目.isEmpty()) {
-            return new ServiceShuruiCode("");
+            return new ServiceShuruiCode(RString.EMPTY);
         }
         return 項目;
     }
@@ -1069,7 +1093,7 @@ public class SyokanbaraiShikyuKetteKyufuJssekiHensyuManager {
      */
     private ServiceKomokuCode nullTOEmpty(ServiceKomokuCode 項目) {
         if (項目 == null || 項目.isEmpty()) {
-            return new ServiceKomokuCode("");
+            return new ServiceKomokuCode(RString.EMPTY);
         }
         return 項目;
     }
@@ -1082,7 +1106,7 @@ public class SyokanbaraiShikyuKetteKyufuJssekiHensyuManager {
      */
     private RString nullTOEmpty(RString 項目) {
         if (項目 == null || 項目.isEmpty()) {
-            return new RString("");
+            return RString.EMPTY;
         }
         return 項目;
     }
@@ -1095,7 +1119,7 @@ public class SyokanbaraiShikyuKetteKyufuJssekiHensyuManager {
      */
     private Decimal nullTOEmpty(Decimal 項目) {
         if (項目 == null) {
-            return new Decimal(0);
+            return Decimal.ZERO;
         }
         return 項目;
     }
@@ -1108,7 +1132,7 @@ public class SyokanbaraiShikyuKetteKyufuJssekiHensyuManager {
      */
     private FlexibleDate nullTOEmpty(FlexibleDate 項目) {
         if (項目 == null || 項目.isEmpty()) {
-            return new FlexibleDate("");
+            return new FlexibleDate(RString.EMPTY);
         }
         return 項目;
     }

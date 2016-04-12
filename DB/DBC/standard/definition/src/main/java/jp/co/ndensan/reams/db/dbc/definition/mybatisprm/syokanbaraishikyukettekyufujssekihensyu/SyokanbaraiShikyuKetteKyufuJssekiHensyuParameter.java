@@ -11,6 +11,7 @@ import jp.co.ndensan.reams.ua.uax.definition.mybatisprm.shikibetsutaisho.UaFt200
 /**
  * 宛名取得PSM取得用MyBatisパラメータクラスです。
  *
+ * @reamsid_L DBC-1030-210 xicongwang
  */
 public class SyokanbaraiShikyuKetteKyufuJssekiHensyuParameter extends UaFt200FindShikibetsuTaishoParam {
 
