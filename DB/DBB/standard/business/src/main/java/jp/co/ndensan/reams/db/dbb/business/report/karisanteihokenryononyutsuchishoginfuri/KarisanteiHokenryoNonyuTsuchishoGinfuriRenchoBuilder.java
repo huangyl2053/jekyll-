@@ -11,6 +11,8 @@ import jp.co.ndensan.reams.uz.uza.report.ReportEditorJoiner;
 /**
  *
  * 帳票設計_DBBRP00007_3_保険料納入通知書（仮算定）【銀振タイプ】連帳 KarisanteiHokenryoNonyuTsuchishoGinfuriRenchoBuilder
+ *
+ * @reamsid_L DBB-9110-030 wangjie2
  */
 public class KarisanteiHokenryoNonyuTsuchishoGinfuriRenchoBuilder implements IKarisanteiHokenryoNonyuTsuchishoGinfuriRenchoBuilder {
 

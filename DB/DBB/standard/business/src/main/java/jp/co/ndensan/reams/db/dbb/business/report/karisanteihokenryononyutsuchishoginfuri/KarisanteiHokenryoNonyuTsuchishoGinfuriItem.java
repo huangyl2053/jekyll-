@@ -11,6 +11,8 @@ import lombok.Getter;
 
 /**
  * 納入通知書の帳票の作成用のクラスです。
+ *
+ * @reamsid_L DBB-9110-030 wangjie2
  */
 @Getter
 @SuppressWarnings("PMD.UnusedPrivateField")

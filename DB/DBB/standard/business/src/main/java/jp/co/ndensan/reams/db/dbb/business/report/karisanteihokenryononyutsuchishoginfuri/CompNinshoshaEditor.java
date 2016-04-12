@@ -11,6 +11,8 @@ import jp.co.ndensan.reams.ur.urz.entity.report.parts.ninshosha.NinshoshaSource;
 /**
  *
  * 帳票設計_DBBRP00007_3_保険料納入通知書（仮算定）【銀振タイプ】CompNinshoshaEditor
+ *
+ * @reamsid_L DBB-9110-030 wangjie2
  */
 public class CompNinshoshaEditor implements IKarisanteiHokenryoNonyuTsuchishoGinfuriEditor {
 
