@@ -13,7 +13,7 @@ import jp.co.ndensan.reams.db.dba.definition.mybatisprm.kaigojigyoshashisetsukan
 import jp.co.ndensan.reams.db.dba.divcontroller.entity.parentdiv.DBA2010014.DBA2010014StateName;
 import jp.co.ndensan.reams.db.dba.divcontroller.entity.parentdiv.DBA2010014.DBA2010014TransitionEventName;
 import jp.co.ndensan.reams.db.dba.divcontroller.entity.parentdiv.DBA2010014.JigyoshaServiceDiv;
-import jp.co.ndensan.reams.db.dba.divcontroller.entity.parentdiv.DBA2010014.JigyoshaServiceHandler;
+import jp.co.ndensan.reams.db.dba.divcontroller.handler.parentdiv.DBA2010014.JigyoshaServiceHandler;
 import jp.co.ndensan.reams.db.dba.service.core.jigyoshaservice.JigyoshaServiceManager;
 import jp.co.ndensan.reams.db.dba.service.core.kaigojigyoshashisetsukanri.KaigoJigyoshaShisetsuKanriManager;
 import jp.co.ndensan.reams.db.dbx.business.core.kaigojigyosha.kaigojigyoshashiteiservice.KaigoJigyoshaShiteiService;
@@ -109,10 +109,9 @@ public class JigyoshaService {
         }
         if (new RString(UrQuestionMessages.保存の確認.getMessage().getCode())
                 .equals(ResponseHolder.getMessageCode())
-                && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
-            if (click_hai(div)) {
-                return ResponseData.of(div).forwardWithEventName(DBA2010014TransitionEventName.再検索する).respond();
-            }
+                && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes
+                && click_hai(div)) {
+            return ResponseData.of(div).forwardWithEventName(DBA2010014TransitionEventName.再検索する).respond();
         }
         return ResponseData.of(div).respond();
     }

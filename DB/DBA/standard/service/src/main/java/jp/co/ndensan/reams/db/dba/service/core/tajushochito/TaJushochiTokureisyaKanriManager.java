@@ -11,7 +11,6 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 import static java.util.Objects.requireNonNull;
-import jp.co.ndensan.reams.db.dba.business.core.jushochitokurei.shisetsunyutaisho.ShisetsuNyutaisho;
 import jp.co.ndensan.reams.db.dba.business.core.tajushochitokureisyakanri.TaJushochiTokureisyaKanriMaster;
 import jp.co.ndensan.reams.db.dba.business.core.tajushochitokureisyakanri.TashichosonBusiness;
 import jp.co.ndensan.reams.db.dba.definition.mybatis.param.tajushochitokureisyakanri.TaJushochiTokureisyaKanriParameter;
@@ -19,7 +18,6 @@ import jp.co.ndensan.reams.db.dba.entity.db.relate.tajushochitokureisyakan.TaJus
 import jp.co.ndensan.reams.db.dba.entity.db.relate.tajushochitokureisyakan.TashichosonRelateEntity;
 import jp.co.ndensan.reams.db.dba.persistence.db.mapper.relate.tajushochitokureisyakanri.ITaJushochiTokureisyaKanriMapper;
 import jp.co.ndensan.reams.db.dba.service.core.hihokenshadaicho.HihokenshaShikakuShutokuManager;
-import jp.co.ndensan.reams.db.dba.service.core.jushochitokurei.shisetsunyutaisho.ShisetsuNyutaishoManager;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.code.KaigoTatokuKaijoJiyu;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.code.KaigoTatokuTekiyoJiyu;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
@@ -31,6 +29,7 @@ import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT1001HihokenshaDaichoEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT1003TashichosonJushochiTokureiEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT1004ShisetsuNyutaishoEntity;
 import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT1003TashichosonJushochiTokureiDac;
+import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT1004ShisetsuNyutaishoDac;
 import jp.co.ndensan.reams.db.dbz.service.core.MapperProvider;
 import jp.co.ndensan.reams.ua.uax.business.core.dateofbirth.AgeCalculator;
 import jp.co.ndensan.reams.ua.uax.business.core.dateofbirth.DateOfBirthFactory;
@@ -65,7 +64,7 @@ public class TaJushochiTokureisyaKanriManager {
     private static final RString 識別コード = new RString("識別コード");
     private final MapperProvider mapperProvider;
     private final DbT1003TashichosonJushochiTokureiDac dbT1003Dac;
-    private final ShisetsuNyutaishoManager 介護保険施設入退所Manager;
+    private final DbT1004ShisetsuNyutaishoDac 介護保険施設入退所Manager;
 
     /**
      * コンストラクタです。
@@ -73,7 +72,7 @@ public class TaJushochiTokureisyaKanriManager {
     TaJushochiTokureisyaKanriManager() {
         this.mapperProvider = InstanceProvider.create(MapperProvider.class);
         this.dbT1003Dac = InstanceProvider.create(DbT1003TashichosonJushochiTokureiDac.class);
-        this.介護保険施設入退所Manager = new ShisetsuNyutaishoManager();
+        this.介護保険施設入退所Manager = InstanceProvider.create(DbT1004ShisetsuNyutaishoDac.class);
     }
 
     /**
@@ -83,7 +82,7 @@ public class TaJushochiTokureisyaKanriManager {
      */
     TaJushochiTokureisyaKanriManager(MapperProvider mapperProvider,
             DbT1003TashichosonJushochiTokureiDac dbT1003Dac,
-            ShisetsuNyutaishoManager 介護保険施設入退所Manager) {
+            DbT1004ShisetsuNyutaishoDac 介護保険施設入退所Manager) {
         this.mapperProvider = mapperProvider;
         this.dbT1003Dac = dbT1003Dac;
         this.介護保険施設入退所Manager = 介護保険施設入退所Manager;
@@ -244,11 +243,7 @@ public class TaJushochiTokureisyaKanriManager {
      */
     @Transaction
     public int regShisetsuNyutaisho(DbT1004ShisetsuNyutaishoEntity entity) {
-        int result = 0;
-        if (介護保険施設入退所Manager.save介護保険施設入退所(new ShisetsuNyutaisho(entity))) {
-            result = 1;
-        }
-        return result;
+        return 介護保険施設入退所Manager.save(entity);
     }
 
     /**
@@ -259,11 +254,7 @@ public class TaJushochiTokureisyaKanriManager {
      */
     @Transaction
     public int updShisetsuNyutaisho(DbT1004ShisetsuNyutaishoEntity entity) {
-        int result = 0;
-        if (介護保険施設入退所Manager.save介護保険施設入退所(new ShisetsuNyutaisho(entity))) {
-            result = 1;
-        }
-        return result;
+        return 介護保険施設入退所Manager.save(entity);
     }
 
     /**

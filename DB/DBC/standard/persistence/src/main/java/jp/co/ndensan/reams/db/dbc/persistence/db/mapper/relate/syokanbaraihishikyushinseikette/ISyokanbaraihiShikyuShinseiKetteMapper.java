@@ -13,6 +13,8 @@ import jp.co.ndensan.reams.db.dbc.entity.db.relate.syokanbaraihishikyushinseiket
 
 /**
  * 社福軽減額サービス種類のマッパーインタフェースです。
+ *
+ * @reamsid_L DBC-1030-200 xicongwang
  */
 public interface ISyokanbaraihiShikyuShinseiKetteMapper {
 

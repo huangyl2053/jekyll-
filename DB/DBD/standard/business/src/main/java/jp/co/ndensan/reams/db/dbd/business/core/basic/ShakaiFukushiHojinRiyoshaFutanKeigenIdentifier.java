@@ -11,6 +11,8 @@ import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShoKisaiHok
 
 /**
  * 社会福祉法人等利用者負担軽減の識別子です。
+ *
+ * @reamsid_L DBC-9999-012 xicongwang
  */
 @SuppressWarnings("PMD.UnusedPrivateField")
 @lombok.Value

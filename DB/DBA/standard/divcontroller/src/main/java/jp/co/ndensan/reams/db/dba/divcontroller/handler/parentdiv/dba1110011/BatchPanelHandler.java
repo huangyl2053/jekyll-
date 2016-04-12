@@ -21,6 +21,8 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 /**
  *
  * 被保険者証発行管理簿ハンドラクラスです。
+ *
+ * @reamsid_L DBA-0600-010 zhangguopeng
  */
 public class BatchPanelHandler {
 

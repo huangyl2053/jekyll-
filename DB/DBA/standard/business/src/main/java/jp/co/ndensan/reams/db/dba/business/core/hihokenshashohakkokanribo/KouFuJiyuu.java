@@ -14,6 +14,8 @@ import jp.co.ndensan.reams.uz.uza.util.code.entity.UzT0007CodeEntity;
 /**
  *
  * 交付事由です。
+ *
+ * @reamsid_L DBA-0600-030 zhangguopeng
  */
 public class KouFuJiyuu {
 

@@ -7,7 +7,12 @@ package jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2210001;
 
 import java.util.ArrayList;
 import jp.co.ndensan.reams.db.dbz.business.kihonchosainput.KihonChosaInput;
-import jp.co.ndensan.reams.db.dbz.divcontroller.handler.commonchilddiv.kihonchosainput.KihonChosaInputHandler;
+import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.KihonChosaInput1.KihonChosaInput1.KihonChosaInputHandler1;
+import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.KihonChosaInput2.KihonChosaInput2.KihonChosaInputHandler2;
+import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.KihonChosaInput3.KihonChosaInput3.KihonChosaInputHandler3;
+import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.KihonChosaInput4.KihonChosaInput4.KihonChosaInputHandler4;
+import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.KihonChosaInput5.KihonChosaInput5.KihonChosaInputHandler5;
+import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.KihonChosaInput7.KihonChosaInput7.KihonChosaInputHandler7;
 import jp.co.ndensan.reams.uz.uza.core.validation.IPredicate;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 
@@ -74,7 +79,7 @@ public enum NinnteiChousaKekkaTouroku1DivSpec implements IPredicate<NinnteiChous
                 @Override
                 public boolean apply(NinnteiChousaKekkaTouroku1Div div) {
                     ArrayList<KihonChosaInput> 第1群List = ViewStateHolder.
-                    get(KihonChosaInputHandler.ViewStateKey.第一群認定調査基本情報リスト, ArrayList.class);
+                    get(KihonChosaInputHandler1.ViewStateKey.第一群認定調査基本情報リスト, ArrayList.class);
                     if (第1群List == null) {
                         return false;
                     }
@@ -101,7 +106,7 @@ public enum NinnteiChousaKekkaTouroku1DivSpec implements IPredicate<NinnteiChous
                 @Override
                 public boolean apply(NinnteiChousaKekkaTouroku1Div div) {
                     ArrayList<KihonChosaInput> 第2群List = ViewStateHolder.
-                    get(KihonChosaInputHandler.ViewStateKey.第二群認定調査基本情報リスト, ArrayList.class);
+                    get(KihonChosaInputHandler2.ViewStateKey.第二群認定調査基本情報リスト, ArrayList.class);
                     if (第2群List == null || 第2群List.size() != 12) {
                         return false;
                     }
@@ -118,7 +123,7 @@ public enum NinnteiChousaKekkaTouroku1DivSpec implements IPredicate<NinnteiChous
                 @Override
                 public boolean apply(NinnteiChousaKekkaTouroku1Div div) {
                     ArrayList<KihonChosaInput> 第3群List = ViewStateHolder.
-                    get(KihonChosaInputHandler.ViewStateKey.第三群認定調査基本情報リスト, ArrayList.class);
+                    get(KihonChosaInputHandler3.ViewStateKey.第三群認定調査基本情報リスト, ArrayList.class);
                     if (第3群List == null || 第3群List.size() != 9) {
                         return false;
                     }
@@ -135,7 +140,7 @@ public enum NinnteiChousaKekkaTouroku1DivSpec implements IPredicate<NinnteiChous
                 @Override
                 public boolean apply(NinnteiChousaKekkaTouroku1Div div) {
                     ArrayList<KihonChosaInput> 第4群List = ViewStateHolder.
-                    get(KihonChosaInputHandler.ViewStateKey.第四群認定調査基本情報リスト, ArrayList.class);
+                    get(KihonChosaInputHandler4.ViewStateKey.第四群認定調査基本情報リスト, ArrayList.class);
                     if (第4群List == null || 第4群List.size() != 15) {
                         return false;
                     }
@@ -152,7 +157,7 @@ public enum NinnteiChousaKekkaTouroku1DivSpec implements IPredicate<NinnteiChous
                 @Override
                 public boolean apply(NinnteiChousaKekkaTouroku1Div div) {
                     ArrayList<KihonChosaInput> 第5群List = ViewStateHolder.
-                    get(KihonChosaInputHandler.ViewStateKey.第五群認定調査基本情報リスト, ArrayList.class);
+                    get(KihonChosaInputHandler5.ViewStateKey.第五群認定調査基本情報リスト, ArrayList.class);
                     if (第5群List == null || 第5群List.size() != 6) {
                         return false;
                     }
@@ -169,7 +174,7 @@ public enum NinnteiChousaKekkaTouroku1DivSpec implements IPredicate<NinnteiChous
                 @Override
                 public boolean apply(NinnteiChousaKekkaTouroku1Div div) {
                     ArrayList<KihonChosaInput> 生活自立度List = ViewStateHolder.
-                    get(KihonChosaInputHandler.ViewStateKey.第七群認定調査基本情報リスト, ArrayList.class);
+                    get(KihonChosaInputHandler7.ViewStateKey.第七群認定調査基本情報リスト, ArrayList.class);
 
                     boolean 障害高齢者の日常生活自立度_選択 = false;
                     boolean 認知症高齢者の日常生活自立度_選択 = false;

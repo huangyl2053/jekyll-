@@ -18,6 +18,8 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
 /**
  *
  * 介護住民票個別事項連携情報作成【他社住基】ハンドラクラスです。
+ *
+ * @reamsid_L DBU-0350-010 zhangguopeng
  */
 public class KobetsuJikoRenkeiInfoSakuseiHandler {
 

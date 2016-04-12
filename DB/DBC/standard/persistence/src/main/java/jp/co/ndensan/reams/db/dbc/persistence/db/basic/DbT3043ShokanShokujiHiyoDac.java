@@ -34,6 +34,8 @@ import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
 
 /**
  * 償還払請求食事費用のデータアクセスクラスです。
+ *
+ * @reamsid_L DBC-9999-012 xicongwang
  */
 public class DbT3043ShokanShokujiHiyoDac implements ISaveable<DbT3043ShokanShokujiHiyoEntity> {
 

@@ -4,6 +4,8 @@ import jp.co.ndensan.reams.uz.uza.util.db.IColumnDefinition;
 
 /**
  * 標準負担額減免テーブルの項目定義クラスです。
+ *
+ * @reamsid_L DBC-9999-012 xicongwang
  */
 public enum DbT4012HyojunFutangakuGemmen implements IColumnDefinition {
 // <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.4.2">

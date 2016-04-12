@@ -27,6 +27,8 @@ import jp.co.ndensan.reams.uz.uza.util.code.CodeMaster;
 /**
  *
  * 被保険者証発行管理簿_帳票データ作成のクラスです。
+ *
+ * @reamsid_L DBA-0600-050 zhangguopeng
  */
 @lombok.Getter
 @SuppressWarnings("PMD.UnusedPrivateField")

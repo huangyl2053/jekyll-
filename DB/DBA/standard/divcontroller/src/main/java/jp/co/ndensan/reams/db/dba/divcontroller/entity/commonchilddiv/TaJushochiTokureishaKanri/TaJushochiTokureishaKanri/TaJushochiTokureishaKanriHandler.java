@@ -245,8 +245,8 @@ public class TaJushochiTokureishaKanriHandler {
         FlexibleDate 異動日 = new FlexibleDate(div.getTajushochiTokureiInput().getHiddenInputIdoYMD());
         RString 最大枝番;
         RString 最新履歴番号;
-        RString 枝番 = new RString("1");
-        RString 履歴番号 = new RString("1");
+        RString 枝番;
+        RString 履歴番号;
         if (rowList != null && !rowList.isEmpty()) {
             最大枝番 = rowList.get(0).getEdaNo();
             最新履歴番号 = rowList.get(0).getRirekiNo();
@@ -256,6 +256,8 @@ public class TaJushochiTokureishaKanriHandler {
             履歴番号 = new RString(String.valueOf(rirekiNoMax + 1));
         } else {
             rowList = new ArrayList();
+            枝番 = new RString("1");
+            履歴番号 = new RString("1");
         }
 
         if ((訂正モード.equals(親画面状態))) {
@@ -402,6 +404,8 @@ public class TaJushochiTokureishaKanriHandler {
         clear他市町村住所地特例情報入力エリア();
         div.getBtnKakunin().setDisabled(true);
         div.getBtnTorikeshi().setDisabled(true);
+        ViewStateHolder.put(jp.co.ndensan.reams.db.dbz.divcontroller.viewbox.ViewStateKeys.他住所地特例者管理_他住所地特例, 他住所地特例Model);
+        ViewStateHolder.put(jp.co.ndensan.reams.db.dbz.divcontroller.viewbox.ViewStateKeys.他住所地特例者管理_保険施設入退所, 保険施設入退所Model);
     }
 
     /**
@@ -462,12 +466,12 @@ public class TaJushochiTokureishaKanriHandler {
                 int 最大履歴番号 = rirekiNo + 1;
                 ShisetsuNyutaishoIdentifier taisho = new ShisetsuNyutaishoIdentifier(識別コード, 最大履歴番号);
                 TaJushochiTokureisyaKanriManager.createInstance().regShisetsuNyutaisho(set適用状態介護保険施設入退所(保険施設入退所Model.get(taisho), row).toEntity());
-            } else if (状態_解除.equals(new RString(div.getMode_DisplayMode().toString()))) {
+            } else if (解除モード.equals(new RString(div.getMode_DisplayMode().toString()))) {
                 TashichosonJushochiTokureiIdentifier 住所地特例の識別子
                         = new TashichosonJushochiTokureiIdentifier(識別コード, new FlexibleDate(row.getKaijoYMD().getValue().toString()), 枝番);
                 TaJushochiTokureisyaKanriManager.createInstance().regTaJushochiTokurei(set解除状態他住所地特例(他住所地特例Model.get(住所地特例の識別子), row).toEntity());
                 TashichosonJushochiTokureiIdentifier 更新前住所地特例の識別子
-                        = new TashichosonJushochiTokureiIdentifier(識別コード, new FlexibleDate(row.getKaijoYMD().getValue().toString()), row.getEdaNo());
+                        = new TashichosonJushochiTokureiIdentifier(識別コード, new FlexibleDate(row.getIdoYMD().toString()), row.getEdaNo());
                 TaJushochiTokureisyaKanriManager.createInstance().delTaJushochiTokurei(他住所地特例Model.get(更新前住所地特例の識別子).
                         createBuilderForEdit().set論理削除フラグ(true).build().toEntity());
                 ShisetsuNyutaishoIdentifier taisho = new ShisetsuNyutaishoIdentifier(識別コード, Integer.parseInt(row.getRirekiNo().toString()));
@@ -752,7 +756,7 @@ public class TaJushochiTokureishaKanriHandler {
             ShisetsuNyutaisho taisho,
             dgJushochiTokureiRireki_Row row) {
         return taisho.createBuilderForEdit()
-                .set退所年月日(new FlexibleDate(row.getTaishoYMD().toString()))
+                .set退所年月日(new FlexibleDate(row.getTaishoYMD().getValue().toString()))
                 .set退所処理年月日(new FlexibleDate(RDate.getNowDateTime().getDate().toDateString()))
                 .build();
     }

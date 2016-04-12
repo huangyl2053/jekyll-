@@ -44,6 +44,7 @@ import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
 import jp.co.ndensan.reams.uz.uza.lang.Separator;
+import jp.co.ndensan.reams.uz.uza.ui.binding.DataGridButtonState;
 import jp.co.ndensan.reams.uz.uza.ui.binding.KeyValueDataSource;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxFlexibleDate;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
@@ -114,6 +115,10 @@ public class ShikakuHenkoRirekiHandler {
             div.getBtnAdd().setDisabled(true);
             div.setMode_ShoriNichijiDisplayMode(ShikakuHenkoRirekiDiv.ShoriNichijiDisplayMode.VisibleFalse);
             div.setMode_MeisaiMode(ShikakuHenkoRirekiDiv.MeisaiMode.toroku);
+            for (dgHenko_Row row : div.getDgHenko().getDataSource()) {
+                row.setDeleteButtonState(DataGridButtonState.Disabled);
+                row.setModifyButtonState(DataGridButtonState.Disabled);
+            }
             div.setInputMode(ViewExecutionStatus.Add.getValue());
         } else if (ShikakuHenkoRirekiDiv.DisplayType.teiseitoroku.equals(div.getMode_DisplayType())) {
             div.setMode_ShoriNichijiDisplayMode(ShikakuHenkoRirekiDiv.ShoriNichijiDisplayMode.VisibleFalse);

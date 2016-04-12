@@ -16,6 +16,8 @@ import jp.co.ndensan.reams.uz.uza.lang.Separator;
 /**
  *
  * 被保険者証発行管理簿_CSVデータ作成のクラスです。
+ *
+ * @reamsid_L DBA-0600-040 zhangguopeng
  */
 @lombok.Getter
 @SuppressWarnings("PMD.UnusedPrivateField")

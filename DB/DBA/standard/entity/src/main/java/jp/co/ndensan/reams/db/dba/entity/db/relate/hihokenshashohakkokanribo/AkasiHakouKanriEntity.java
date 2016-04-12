@@ -14,6 +14,8 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 /**
  *
  * 証発行管理リストです。
+ *
+ * @reamsid_L DBA-0600-020 zhangguopeng
  */
 @lombok.Getter
 @lombok.Setter

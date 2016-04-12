@@ -184,7 +184,6 @@ public class ShisetsuNyutaishoRirekiKanriHandler {
         dgShisetsuNyutaishoRireki_Row newRow = new dgShisetsuNyutaishoRireki_Row();
         int 最大履歴番号 = 1;
         if (listRow != null && !listRow.isEmpty()) {
-            Collections.sort(listRow, new ShisetsuNyutaishoRirekiKanriHandler.RirekiNoDateComparator());
             最大履歴番号 = Integer.parseInt(listRow.get(0).getRirekiNo().toString()) + 1;
         } else {
             listRow = new ArrayList();
@@ -244,6 +243,7 @@ public class ShisetsuNyutaishoRirekiKanriHandler {
         }
         ViewStateHolder.put(ViewStateKeys.施設入退所履歴_施設入退所情報, Models.create(施設入退所情報Model));
         div.setInputMode(RString.EMPTY);
+        Collections.sort(listRow, new ShisetsuNyutaishoRirekiKanriHandler.RirekiNoDateComparator());
         div.getDgShisetsuNyutaishoRireki().setDataSource(listRow);
         onClick_btnShisetsuNyutaishoTorikeshi();
     }

@@ -18,6 +18,8 @@ import jp.co.ndensan.reams.uz.uza.math.Decimal;
 /**
  *
  * 一括審査・決定情報更新クラスです。
+ *
+ * @reamsid_L DBC-0991-040 xicongwang
  */
 @lombok.Getter
 @lombok.Setter

@@ -12,6 +12,8 @@ import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 
 /**
  * 未審査支給申請情報用クラスです。
+ *
+ * @reamsid_L DBC-0991-040 xicongwang
  */
 @lombok.Setter
 @lombok.Getter

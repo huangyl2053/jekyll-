@@ -16,6 +16,8 @@ import jp.co.ndensan.reams.uz.uza.math.Decimal;
 
 /**
  * 給付実績基本情報リストのオブジェクトクラスです。
+ *
+ * @reamsid_L DBC-1030-200 xicongwang
  */
 @lombok.Getter
 @lombok.Setter

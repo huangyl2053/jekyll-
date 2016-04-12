@@ -17,6 +17,8 @@ import lombok.Setter;
 /**
  *
  * 被保険者証発行管理簿_バッチ用のパラメータです。
+ *
+ * @reamsid_L DBA-0600-020 zhangguopeng
  */
 @Getter
 @Setter

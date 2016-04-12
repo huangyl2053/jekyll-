@@ -16,6 +16,8 @@ import jp.co.ndensan.reams.uz.uza.util.db.TableName;
 
 /**
  * 標準負担額減免テーブルのエンティティクラスです。
+ *
+ * @reamsid_L DBC-9999-012 xicongwang
  */
 public class DbT4012HyojunFutangakuGemmenEntity extends DbTableEntityBase<DbT4012HyojunFutangakuGemmenEntity> implements IDbAccessable {
 // <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.4.2">

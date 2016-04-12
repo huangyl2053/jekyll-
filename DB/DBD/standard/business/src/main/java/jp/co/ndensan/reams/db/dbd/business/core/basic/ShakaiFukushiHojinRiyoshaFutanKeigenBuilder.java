@@ -15,6 +15,8 @@ import jp.co.ndensan.reams.uz.uza.math.Decimal;
 
 /**
  * {@link ShakaiFukushiHojinRiyoshaFutanKeigen}の編集を行うビルダークラスです。
+ *
+ * @reamsid_L DBC-9999-012 xicongwang
  */
 public class ShakaiFukushiHojinRiyoshaFutanKeigenBuilder {
 
