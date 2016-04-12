@@ -7,15 +7,19 @@ package jp.co.ndensan.reams.db.dbu.divcontroller.entity.parentdiv.DBU0210011;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import jp.co.ndensan.reams.uz.uza.ui.binding.*;
+import jp.co.ndensan.reams.uz.uza.ui.binding.CheckBoxList;
+import jp.co.ndensan.reams.uz.uza.ui.binding.Label;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
+import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxDate;
+import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxTime;
 
 /**
- * ChushutsuKikan のクラスファイル 
- * 
- * @author 自動生成
+ * ChushutsuKikan のクラスファイル
+ *
+ * @reamsid_L DBU-0350-010 zhangguopeng
  */
 public class ChushutsuKikanDiv extends Panel {
+
     // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：バージョン情報無し">
     /*
      * [ private の作成 ]
@@ -84,7 +88,7 @@ public class ChushutsuKikanDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setChkZenken(CheckBoxList chkZenken) {
+    public void setChkZenken(CheckBoxList chkZenken) {
         this.getTblChushutsuKikan().getZenken().setChkZenken(chkZenken);
     }
 
