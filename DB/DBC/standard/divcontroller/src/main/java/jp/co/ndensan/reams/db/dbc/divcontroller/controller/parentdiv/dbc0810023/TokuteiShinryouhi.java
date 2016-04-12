@@ -9,7 +9,7 @@ import java.util.List;
 import jp.co.ndensan.reams.db.dbc.business.core.basic.ShokanTokuteiShinryoTokubetsuRyoyo;
 import jp.co.ndensan.reams.db.dbc.business.core.basic.ShokanTokuteiShinryohi;
 import jp.co.ndensan.reams.db.dbc.business.core.shokanbaraijyokyoshokai.ShikibetsuNoKanriResult;
-import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0810023.TokuteiShinryohiDiv;
+import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0810023.TokuteiShinryouhiDiv;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0810023.ddgToteishinryoTokubetushinryo_Row;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0810023.dgdTokuteiShinryohi_Row;
 import jp.co.ndensan.reams.db.dbc.divcontroller.handler.dbc0810023.TokuteiShinryohiHandler;
@@ -33,7 +33,7 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
  *
  * @reamsid_L DBC-1010-150 wangkanglei
  */
-public class TokuteiShinryohi {
+public class TokuteiShinryouhi {
 
     private static final FlexibleYearMonth 平成１５年３月 = new FlexibleYearMonth("200303");
     private static final FlexibleYearMonth 平成１５年４月 = new FlexibleYearMonth("200304");
@@ -41,10 +41,10 @@ public class TokuteiShinryohi {
     /**
      * 画面初期化のメソッドます。
      *
-     * @param div TokuteiShinryohiDiv
+     * @param div TokuteiShinryouhiDiv
      * @return ResponseData
      */
-    public ResponseData<TokuteiShinryohiDiv> onLoad(TokuteiShinryohiDiv div) {
+    public ResponseData<TokuteiShinryouhiDiv> onLoad(TokuteiShinryouhiDiv div) {
 
         ServiceTeiKyoShomeishoParameter parameter = ViewStateHolder.get(
                 ViewStateKeys.基本情報パラメータ, ServiceTeiKyoShomeishoParameter.class);
@@ -104,10 +104,10 @@ public class TokuteiShinryohi {
     /**
      * 特定診療費一覧グリッドの「選択」ボタンのメソッドます。
      *
-     * @param div TokuteiShinryohiDiv
+     * @param div TokuteiShinryouhiDiv
      * @return ResponseData
      */
-    public ResponseData<TokuteiShinryohiDiv> onClick_dgdTokuteiShinryohi(TokuteiShinryohiDiv div) {
+    public ResponseData<TokuteiShinryouhiDiv> onClick_dgdTokuteiShinryohi(TokuteiShinryouhiDiv div) {
         ServiceTeiKyoShomeishoParameter parameter = ViewStateHolder.get(
                 ViewStateKeys.基本情報パラメータ, ServiceTeiKyoShomeishoParameter.class);
         dgdTokuteiShinryohi_Row row = div.getPanelThree().getDgdTokuteiShinryohi().getClickedItem();
@@ -133,10 +133,10 @@ public class TokuteiShinryohi {
     /**
      * 特定診療費・特別診療費一覧グリッドの「選択」ボタンのメソッドます。
      *
-     * @param div TokuteiShinryohiDiv
+     * @param div TokuteiShinryouhiDiv
      * @return ResponseData
      */
-    public ResponseData<TokuteiShinryohiDiv> onClick_ddgToteishinryoTokubetushinryo(TokuteiShinryohiDiv div) {
+    public ResponseData<TokuteiShinryouhiDiv> onClick_ddgToteishinryoTokubetushinryo(TokuteiShinryouhiDiv div) {
         ServiceTeiKyoShomeishoParameter parameter = ViewStateHolder.get(
                 ViewStateKeys.基本情報パラメータ, ServiceTeiKyoShomeishoParameter.class);
         ddgToteishinryoTokubetushinryo_Row row = div.getPanelThree().getDdgToteishinryoTokubetushinryo().getClickedItem();
@@ -161,10 +161,10 @@ public class TokuteiShinryohi {
     /**
      * 「閉じる」ボタン上のメソッドます。
      *
-     * @param div TokuteiShinryohiDiv
+     * @param div TokuteiShinryouhiDiv
      * @return ResponseData
      */
-    public ResponseData<TokuteiShinryohiDiv> onClick_btnCloseUp(TokuteiShinryohiDiv div) {
+    public ResponseData<TokuteiShinryouhiDiv> onClick_btnCloseUp(TokuteiShinryouhiDiv div) {
         div.getPanelThree().getPanelFour().setVisible(false);
         return createResponse(div);
     }
@@ -172,19 +172,19 @@ public class TokuteiShinryohi {
     /**
      * 「閉じる」ボタン下のメソッドます。
      *
-     * @param div TokuteiShinryohiDiv
+     * @param div TokuteiShinryouhiDiv
      * @return ResponseData
      */
-    public ResponseData<TokuteiShinryohiDiv> onClick_btnCloseDown(TokuteiShinryohiDiv div) {
+    public ResponseData<TokuteiShinryouhiDiv> onClick_btnCloseDown(TokuteiShinryouhiDiv div) {
         div.getPanelThree().getPanelFive().setVisible(false);
         return createResponse(div);
     }
 
-    private TokuteiShinryohiHandler getHandler(TokuteiShinryohiDiv div) {
+    private TokuteiShinryohiHandler getHandler(TokuteiShinryouhiDiv div) {
         return new TokuteiShinryohiHandler(div);
     }
 
-    private ResponseData<TokuteiShinryohiDiv> createResponse(TokuteiShinryohiDiv div) {
+    private ResponseData<TokuteiShinryouhiDiv> createResponse(TokuteiShinryouhiDiv div) {
         return ResponseData.of(div).respond();
     }
 }

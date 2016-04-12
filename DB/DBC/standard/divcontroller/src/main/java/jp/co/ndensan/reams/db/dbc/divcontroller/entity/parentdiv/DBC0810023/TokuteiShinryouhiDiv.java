@@ -9,13 +9,13 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 
 /**
- * TokuteiShinryohi のクラスファイル
+ * TokuteiShinryouhi のクラスファイル
  *
  * @reamsid_L DBC-1010-150 wangkanglei
  */
-public class TokuteiShinryohiDiv extends Panel {
+public class TokuteiShinryouhiDiv extends Panel {
 
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2015-11-16_12-38-19">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い

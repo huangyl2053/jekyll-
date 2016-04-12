@@ -11,7 +11,7 @@ import jp.co.ndensan.reams.db.dbc.business.core.basic.ShikibetsuNoKanri;
 import jp.co.ndensan.reams.db.dbc.business.core.basic.ShokanTokuteiShinryoTokubetsuRyoyo;
 import jp.co.ndensan.reams.db.dbc.business.core.basic.ShokanTokuteiShinryohi;
 import jp.co.ndensan.reams.db.dbc.business.core.basic.TokuteiShinryoServiceCode;
-import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0810023.TokuteiShinryohiDiv;
+import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0810023.TokuteiShinryouhiDiv;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0810023.ddgToteishinryoTokubetushinryo_Row;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0810023.dgdTokuteiShinryohi_Row;
 import jp.co.ndensan.reams.db.dbc.divcontroller.viewbox.ViewStateKeys;
@@ -39,7 +39,7 @@ import jp.co.ndensan.reams.uz.uza.util.editor.DecimalFormatter;
  */
 public class TokuteiShinryohiHandler {
 
-    private final TokuteiShinryohiDiv div;
+    private final TokuteiShinryouhiDiv div;
     private static final RString 設定不可 = new RString("0");
     private static final RString 単位 = new RString("単位");
     private static final RString 回まで = new RString("回まで");
@@ -53,9 +53,9 @@ public class TokuteiShinryohiHandler {
     /**
      * コンストラクタです。
      *
-     * @param div TokuteiShinryohiDiv
+     * @param div TokuteiShinryouhiDiv
      */
-    public TokuteiShinryohiHandler(TokuteiShinryohiDiv div) {
+    public TokuteiShinryohiHandler(TokuteiShinryouhiDiv div) {
         this.div = div;
     }
 
