@@ -45,6 +45,7 @@ public class PnlKeteiJohoMsg {
     private static final RString 修正 = new RString("修正");
     private static final RString モード_修正 = new RString("修正");
     private static final RString モード_照会 = new RString("照会");
+    private static final RString 業務区分 = new RString("02");
 
     /**
      * onLoad事件
@@ -69,11 +70,9 @@ public class PnlKeteiJohoMsg {
         div.getYoguKonyuhiShikyuShinseiContentsPanel().getTxtJigyoshaNo().setValue(事業者番号);
         if (登録.equals(ViewStateHolder.get(ViewStateKeys.処理モード, RString.class)) || 修正.equals(
                 ViewStateHolder.get(ViewStateKeys.処理モード, RString.class))) {
-            div.getCcdKetteiList().loadInitialize(被保険者番号, サービス年月, 整理番号,
-                    new RString("02"), モード_修正);
+            div.getCcdKetteiList().loadInitialize(被保険者番号, サービス年月, 整理番号, 業務区分, モード_修正);
         } else {
-            div.getCcdKetteiList().loadInitialize(被保険者番号, サービス年月,
-                    整理番号, new RString("02"), モード_照会);
+            div.getCcdKetteiList().loadInitialize(被保険者番号, サービス年月, 整理番号, 業務区分, モード_照会);
             div.getCcdKetteiList().getShokanbaraiketteiJohoDiv().getModifiedInfos().get(0).getValueStatement().getFieldName();
         }
         ViewStateHolder.put(ViewStateKeys.支払金額合計, div.getCcdKetteiList().getShokanbaraiketteiJohoDiv()
