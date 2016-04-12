@@ -241,15 +241,17 @@ public class NenreiToutatsuYoteishaCheckListProcess extends SimpleBatchProcessBa
             } else {
                 entity.setJutosyakubun(RString.EMPTY);
             }
+            entity.setSeikatsu(RString.EMPTY);
             List<UrT0508SeikatsuHogoJukyushaEntity> urT0508Seika = nenreiCheckListMapper
                     .getSeikatsuHogojyu(entity.getShikibetsuCode());
-            if (!urT0508Seika.isEmpty() && urT0508Seika.get(0).getJukyuKaishiYMD()
-                    .isBeforeOrEquals(entity.getNenreiyotainichi())
-                    && entity.getNenreiyotainichi().isBeforeOrEquals(
-                            urT0508Seika.get(0).getJukyuHaishiYMD())) {
-                entity.setSeikatsu(生活);
-            } else {
-                entity.setSeikatsu(RString.EMPTY);
+            for (UrT0508SeikatsuHogoJukyushaEntity urT0508Sei : urT0508Seika) {
+                if (urT0508Sei.getJukyuKaishiYMD()
+                        .isBeforeOrEquals(entity.getNenreiyotainichi())
+                        && entity.getNenreiyotainichi().isBeforeOrEquals(
+                                urT0508Sei.getJukyuHaishiYMD())) {
+                    entity.setSeikatsu(生活);
+                    break;
+                }
             }
             if (被保険者区分コード.equals(entity.getHihokennshaKubunCode())) {
                 entity.setJyotei(状態_被保険者);
