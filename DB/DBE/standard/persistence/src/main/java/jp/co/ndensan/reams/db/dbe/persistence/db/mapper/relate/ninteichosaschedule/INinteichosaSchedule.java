@@ -8,6 +8,8 @@ package jp.co.ndensan.reams.db.dbe.persistence.db.mapper.relate.ninteichosasched
 import java.util.List;
 import jp.co.ndensan.reams.db.dbe.definition.core.ninteichosaschedule.INinteiKanryoJohoMybatisParameter;
 import jp.co.ndensan.reams.db.dbe.definition.core.ninteichosaschedule.INinteichosaScheduleMybatisParameter;
+import jp.co.ndensan.reams.db.dbe.entity.db.relate.ninteichosaschedule.ChikuNinteiChosainRelateEntity;
+import jp.co.ndensan.reams.db.dbe.entity.db.relate.ninteichosaschedule.ChikuShichosonRelateEntity;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.ninteichosaschedule.INinteichosaScheduleRelateEntity;
 
 /**
@@ -56,7 +58,7 @@ public interface INinteichosaSchedule {
      * @param parametere INinteiKanryoJohoMybatisParameter
      * @return INinteichosaScheduleRelateEntity 検索結果の{@link INinteichosaScheduleRelateEntity}
      */
-    List<INinteichosaScheduleRelateEntity> select保険者ドロップダウンリスト(INinteiKanryoJohoMybatisParameter parametere);
+    List<ChikuShichosonRelateEntity> select保険者ドロップダウンリスト(INinteiKanryoJohoMybatisParameter parametere);
 
     /**
      * 認定調査委託先ドロと認定調査員ップダウンリスト値取得。
@@ -64,5 +66,5 @@ public interface INinteichosaSchedule {
      * @param parametere INinteiKanryoJohoMybatisParameter
      * @return INinteichosaScheduleRelateEntity 検索結果の{@link INinteichosaScheduleRelateEntity}
      */
-    List<INinteichosaScheduleRelateEntity> select認定調査委託先ドロップダウンリスト(INinteichosaScheduleMybatisParameter parametere);
+    List<ChikuNinteiChosainRelateEntity> select認定調査委託先ドロップダウンリスト(INinteichosaScheduleMybatisParameter parametere);
 }

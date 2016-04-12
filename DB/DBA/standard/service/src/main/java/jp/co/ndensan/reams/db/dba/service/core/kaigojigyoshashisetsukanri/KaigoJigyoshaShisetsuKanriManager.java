@@ -124,6 +124,7 @@ public class KaigoJigyoshaShisetsuKanriManager {
             return SearchResult.of(Collections.<KaigoJigyoshaShiteiService>emptyList(), 0, false);
         }
         for (DbT7063KaigoJigyoshaShiteiServiceEntity entity : 事業者サービス情報取得) {
+            entity.initializeMd5();
             serviceShuruiList.add(new KaigoJigyoshaShiteiService(entity));
         }
         return SearchResult.of(serviceShuruiList, 0, false);
@@ -244,7 +245,7 @@ public class KaigoJigyoshaShisetsuKanriManager {
     public boolean updateJigyoshaJoho(KaigoJigyosha 事業者登録情報,
             RString 事業者種別,
             KaigoJogaiTokureiTaishoShisetsu 介護除外住所地特例対象施設, RString 変更区分) {
-        if (事業者種別.equals(介護保険施設)) {
+        if (介護保険施設.equals(事業者種別)) {
             if ((変更区分_新履歴.equals(変更区分)) && (事業者登録情報.get有効終了日() == null
                     || 事業者登録情報.get有効終了日().isEmpty())) {
                 事業者登録情報 = 事業者登録情報.createBuilderForEdit()

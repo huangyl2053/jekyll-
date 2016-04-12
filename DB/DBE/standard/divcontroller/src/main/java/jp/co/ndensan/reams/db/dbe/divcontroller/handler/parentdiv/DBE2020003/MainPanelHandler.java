@@ -7,6 +7,8 @@ package jp.co.ndensan.reams.db.dbe.divcontroller.handler.parentdiv.DBE2020003;
 
 import java.util.ArrayList;
 import java.util.List;
+import jp.co.ndensan.reams.db.dbe.business.core.ininteichosaschebusiness.ChikuNinteiChosainBusiness;
+import jp.co.ndensan.reams.db.dbe.business.core.ininteichosaschebusiness.ChikuShichosonBusiness;
 import jp.co.ndensan.reams.db.dbe.business.core.ininteichosaschebusiness.NinteichosaSchedulBusiness;
 import jp.co.ndensan.reams.db.dbe.definition.core.ninteichosaschedule.INinteiKanryoJohoMybatisParameter;
 import jp.co.ndensan.reams.db.dbe.definition.core.ninteichosaschedule.INinteichosaScheduleMybatisParameter;
@@ -64,7 +66,6 @@ public class MainPanelHandler {
      */
     public void initialize() {
         div.getDdlTaishoChiku().setDataSource(調査地区ドロップダウンリスト());
-        //TODO 内部QA748 DBE．データ表示件数閾値より取得しない。
         div.getSearchConditionPanel().getDdlTaishoChiku()
                 .setSelectedKey(ViewStateHolder.get(ViewStateKeys.認定調査スケジュール登録_地区コード, RString.class));
         div.getTxtMaxRow().setValue(new RString(BusinessConfig.
@@ -161,6 +162,7 @@ public class MainPanelHandler {
             row.setNinteiChosainCode(entity.get認定調査員コード());
             row.setYoyakuKaoFlag(entity.get予約可能フラグ());
             row.setNinteiChosaJikanWaku(entity.get認定調査時間枠());
+            row.setShoKisaiHokenshaNo(entity.get証記載保険者番号());
             rowList.add(row);
         }
         div.getResultListPanel().getDgResultList().setDataSource(rowList);
@@ -190,9 +192,6 @@ public class MainPanelHandler {
      * 保険者ドロップダウンリスト値取得を検索する。
      */
     public void set保険者DDL() {
-        //TDTO 内部QA757保険者の取得方法は明確ではありません。
-//        IUrControlData controlData = UrControlDataFactory.createInstance();
-//        loginId = controlData.getLoginInfo().getUserId();
         INinteiKanryoJohoMybatisParameter mybatisParameter = INinteiKanryoJohoMybatisParameter.createParam(RString.EMPTY,
                 RString.EMPTY,
                 RString.EMPTY,
@@ -206,16 +205,15 @@ public class MainPanelHandler {
                 RString.EMPTY,
                 div.getSearchConditionPanel().getDdlTaishoChiku().getSelectedKey(),
                 Decimal.ZERO);
-        List<NinteichosaSchedulBusiness> 保険者ドロップダウンリスト = NinteichosaScheduleFinder.createInstance()
+        List<ChikuShichosonBusiness> 保険者ドロップダウンリスト = NinteichosaScheduleFinder.createInstance()
                 .get保険者ドロップダウン(mybatisParameter).records();
         List<KeyValueDataSource> dataList = new ArrayList<>();
-        for (NinteichosaSchedulBusiness entitiy : 保険者ドロップダウンリスト) {
+        for (ChikuShichosonBusiness entitiy : 保険者ドロップダウンリスト) {
             KeyValueDataSource dataSource = new KeyValueDataSource();
-            dataSource.setKey(entitiy.get証記載保険者番号());
-            dataSource.setValue(entitiy.get証記載保険者番号());
+            dataSource.setKey(entitiy.get市町村コード());
+            dataSource.setValue(entitiy.get市町村名称());
             dataList.add(dataSource);
         }
-        //div.getDdlHokensha().setSelectedKey(loginId);
         div.getDdlHokensha().setDataSource(dataList);
     }
 
@@ -260,10 +258,10 @@ public class MainPanelHandler {
                 RString.EMPTY,
                 Decimal.ZERO,
                 市町村コード);
-        List<NinteichosaSchedulBusiness> 認定調査委託先リスト = NinteichosaScheduleFinder.createInstance()
+        List<ChikuNinteiChosainBusiness> 認定調査委託先リスト = NinteichosaScheduleFinder.createInstance()
                 .get認定調査委託先ロップダウン(mybatisParameter).records();
         List<KeyValueDataSource> dataList = new ArrayList<>();
-        for (NinteichosaSchedulBusiness entitiy : 認定調査委託先リスト) {
+        for (ChikuNinteiChosainBusiness entitiy : 認定調査委託先リスト) {
             KeyValueDataSource dataSource = new KeyValueDataSource();
             dataSource.setKey(entitiy.get認定調査委託先());
             dataSource.setValue(entitiy.get認定調査委託先().concat(new RString(" ").concat(entitiy.get認定調査委託先名称())));
@@ -273,9 +271,9 @@ public class MainPanelHandler {
         div.getDdlNinteiChosain().setDataSource(認定調査員(認定調査委託先リスト));
     }
 
-    private List<KeyValueDataSource> 認定調査員(List<NinteichosaSchedulBusiness> 認定調査員リスト) {
+    private List<KeyValueDataSource> 認定調査員(List<ChikuNinteiChosainBusiness> 認定調査員リスト) {
         List<KeyValueDataSource> dataList = new ArrayList<>();
-        for (NinteichosaSchedulBusiness entity : 認定調査員リスト) {
+        for (ChikuNinteiChosainBusiness entity : 認定調査員リスト) {
             KeyValueDataSource dataSource = new KeyValueDataSource();
             dataSource.setKey(entity.get認定調査員());
             dataSource.setValue(entity.get認定調査員().concat(new RString(" ").concat(entity.get認定調査員氏名())));

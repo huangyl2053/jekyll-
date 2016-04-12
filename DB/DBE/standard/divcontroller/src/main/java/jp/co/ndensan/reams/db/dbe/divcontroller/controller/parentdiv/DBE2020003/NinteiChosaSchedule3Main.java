@@ -140,7 +140,7 @@ public class NinteiChosaSchedule3Main {
         ViewStateHolder.put(ViewStateKeys.認定調査スケジュール登録_予約可否, div.getDgResultList().getSelectedItems().get(0).getYoyakuKaoFlag());
         ViewStateHolder.put(ViewStateKeys.認定調査スケジュール登録_予約状況, div.getDgResultList().getSelectedItems().get(0).getJokyo());
         ViewStateHolder.put(ViewStateKeys.認定調査スケジュール登録_申請書管理番号3, div.getDgResultList().getSelectedItems().get(0).getShinseishoKanriNo());
-        ViewStateHolder.put(ViewStateKeys.認定調査スケジュール登録_保険者, div.getDdlHokensha().getSelectedKey());
+        ViewStateHolder.put(ViewStateKeys.認定調査スケジュール登録_保険者, div.getDgResultList().getSelectedItems().get(0).getShoKisaiHokenshaNo());
         ViewStateHolder.put(ViewStateKeys.認定調査スケジュール登録_調査員状況02, div.getDgResultList().getSelectedItems().get(0).getJokyo());
         ViewStateHolder.put(ViewStateKeys.認定調査スケジュール登録_画面番号, 画面番号);
         return ResponseData.of(div).respond();

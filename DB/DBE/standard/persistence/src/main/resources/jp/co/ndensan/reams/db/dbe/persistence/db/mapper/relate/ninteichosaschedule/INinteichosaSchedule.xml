@@ -21,13 +21,18 @@
         <result property="ninteiChosainCode" column="DbT5221_ninteiChosainCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
         <result property="ninteiChosaJikanWaku" column="DbT5221_ninteiChosaJikanWaku" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
         <result property="yoyakuKaoFlag" column="DbT5221_yoyakuKaoFlag" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
-        <result property="ninteiChosaItakusakiCode2" column="DbT5223_ninteiChosaItakusakiCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
-        <result property="jigyoshaMeisho" column="DbT5910_jigyoshaMeisho" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
-        <result property="ninteiChosainCode2" column="DbT5223_ninteiChosainCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
-        <result property="chosainShimei" column="DbT5913ChosainJoho_chosainShimei" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
-
+        <result property="shoKisaiHokenshaNo" column="DbT5101_shoKisaiHokenshaNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
     </resultMap>
-
+    <resultMap id="resultMap_ChikuShichosonRelateEntity" type="jp.co.ndensan.reams.db.dbe.entity.db.relate.ninteichosaschedule.ChikuShichosonRelateEntity" autoMapping="true">
+      <result property="shichosonCode" column="DbT5224_shichosonCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+      <result property="shichosonMeisho" column="DbT7051_shichosonMeisho" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />   
+    </resultMap>
+    <resultMap id="resultMap_ChikuNinteiChosainRelateEntity" type="jp.co.ndensan.reams.db.dbe.entity.db.relate.ninteichosaschedule.ChikuNinteiChosainRelateEntity" autoMapping="true">
+      <result property="ninteiChosaItakusakiCode" column="DbT5223_ninteiChosaItakusakiCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+      <result property="jigyoshaMeisho" column="DbT5910_jigyoshaMeisho" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+      <result property="ninteiChosainCode" column="DbT5223_ninteiChosainCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+      <result property="chosainShimei" column="DbT5913ChosainJoho_chosainShimei" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />   
+    </resultMap>
     <select id="selectNinteichosaScheduleList"
             resultMap="resultMap_INinteichosaScheduleRelateEntity"
             parameterType="jp.co.ndensan.reams.db.dbe.definition.core.ninteichosaschedule.INinteichosaScheduleMybatisParameter" fetchSize="500">
@@ -47,7 +52,8 @@
         DbT5221."ninteiChosaItakusakiCode" as "DbT5221_ninteiChosaItakusakiCode",
         DbT5221."ninteiChosainCode" as "DbT5221_ninteiChosainCode",
         DbT5221."ninteiChosaJikanWaku" as "DbT5221_ninteiChosaJikanWaku",
-        DbT5221."yoyakuKaoFlag" as "DbT5221_yoyakuKaoFlag"
+        DbT5221."yoyakuKaoFlag" as "DbT5221_yoyakuKaoFlag",
+        DbT5101."shoKisaiHokenshaNo" as "DbT5101_shoKisaiHokenshaNo"
         FROM
         rgdb."DbT5101NinteiShinseiJoho" as  DbT5101
         INNER JOIN
@@ -503,10 +509,11 @@
         </if>
     </select>
     <select id="select保険者ドロップダウンリスト"
-             resultMap="resultMap_INinteichosaScheduleRelateEntity"
-             parameterType="jp.co.ndensan.reams.db.dbe.definition.core.ninteichosaschedule.INinteiKanryoJohoMybatisParameter" fetchSize="500">
+             resultMap="resultMap_ChikuShichosonRelateEntity"
+             parameterType="jp.co.ndensan.reams.db.dbe.definition.core.ninteichosaschedule.INinteiKanryoJohoMybatisParamete" fetchSize="500">
         SELECT
-        DbT7051."shoKisaiHokenshaNo" as "DbT7051_shoKisaiHokenshaNo"
+        DbT5224."shichosonCode" as "DbT5224_shichosonCode",
+        DbT7051."shichosonMeisho" as "DbT7051_shichosonMeisho"
         FROM
         rgdb."DbT7051KoseiShichosonMaster" as DbT7051, rgdb."DbT5224ChikuShichoson" as DbT5224
         WHERE
@@ -515,7 +522,7 @@
         DbT5224."chosaChikuCode" = #{対象地区}
     </select>
     <select id="select認定調査委託先ドロップダウンリスト"
-             resultMap="resultMap_INinteichosaScheduleRelateEntity"
+             resultMap="resultMap_ChikuNinteiChosainRelateEntity"
              parameterType="jp.co.ndensan.reams.db.dbe.definition.core.ninteichosaschedule.INinteiKanryoJohoMybatisParameter" fetchSize="500">
         SELECT
         DbT5223."ninteiChosaItakusakiCode" as "DbT5223_ninteiChosaItakusakiCode",
@@ -542,6 +549,5 @@
         DbT5223."isDeleted" <![CDATA[<>]]> TRUE
         ORDER BY
         DbT5223."ninteiChosaItakusakiCode" desc, DbT5223."ninteiChosainCode" desc
-
     </select>
 </mapper>

@@ -3,20 +3,24 @@ package jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2020003;
  * このコードはツールによって生成されました。
  * このファイルへの変更は、以下の状況下で不正な動作の原因になったり、
  * コードが再生成されるときに損失したりします。
- * Wed Mar 16 15:45:19 CST 2016
+ * Tue Apr 12 11:59:51 CST 2016 
  */
 
-import jp.co.ndensan.reams.uz.uza.lang.RString;
+
+
 import jp.co.ndensan.reams.uz.uza.ui.binding.DataRow;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxFlexibleDate;
 
+
 /**
- * dgResultList_Row のクラスファイル
- *
- * @reamsid_L DBE-0020-030 wanghui
+ * dgResultList_Row のクラスファイル 
+ * 
+ * @author 自動生成
  */
+
 public class dgResultList_Row extends DataRow {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-01-15_09-59-03">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
 
     private RString hokensha;
     private RString hihokenshaNo;
@@ -34,6 +38,7 @@ public class dgResultList_Row extends DataRow {
     private RString ninteiChosainCode;
     private RString ninteiChosaJikanWaku;
     private RString yoyakuKaoFlag;
+    private RString shoKisaiHokenshaNo;
 
     public dgResultList_Row() {
         super();
@@ -53,6 +58,7 @@ public class dgResultList_Row extends DataRow {
         this.ninteiChosainCode = RString.EMPTY;
         this.ninteiChosaJikanWaku = RString.EMPTY;
         this.yoyakuKaoFlag = RString.EMPTY;
+        this.shoKisaiHokenshaNo = RString.EMPTY;
         this.setOriginalData("hokensha", hokensha);
         this.setOriginalData("hihokenshaNo", hihokenshaNo);
         this.setOriginalData("name", name);
@@ -69,9 +75,10 @@ public class dgResultList_Row extends DataRow {
         this.setOriginalData("ninteiChosainCode", ninteiChosainCode);
         this.setOriginalData("ninteiChosaJikanWaku", ninteiChosaJikanWaku);
         this.setOriginalData("yoyakuKaoFlag", yoyakuKaoFlag);
+        this.setOriginalData("shoKisaiHokenshaNo", shoKisaiHokenshaNo);
     }
 
-    public dgResultList_Row(RString hokensha, RString hihokenshaNo, RString name, RString kanaName, RString seibetsu, TextBoxFlexibleDate birthDay, TextBoxFlexibleDate ninteiChosaYmd, RString jokyo, TextBoxFlexibleDate ninteiShinseiYmd, RString shinseiKubun, RString taishoshaMemo, RString shinseishoKanriNo, RString ninteiChosaItakusakiCode, RString ninteiChosainCode, RString ninteiChosaJikanWaku, RString yoyakuKaoFlag) {
+    public dgResultList_Row(RString hokensha, RString hihokenshaNo, RString name, RString kanaName, RString seibetsu, TextBoxFlexibleDate birthDay, TextBoxFlexibleDate ninteiChosaYmd, RString jokyo, TextBoxFlexibleDate ninteiShinseiYmd, RString shinseiKubun, RString taishoshaMemo, RString shinseishoKanriNo, RString ninteiChosaItakusakiCode, RString ninteiChosainCode, RString ninteiChosaJikanWaku, RString yoyakuKaoFlag, RString shoKisaiHokenshaNo) {
         super();
         this.setOriginalData("hokensha", hokensha);
         this.setOriginalData("hihokenshaNo", hihokenshaNo);
@@ -89,6 +96,7 @@ public class dgResultList_Row extends DataRow {
         this.setOriginalData("ninteiChosainCode", ninteiChosainCode);
         this.setOriginalData("ninteiChosaJikanWaku", ninteiChosaJikanWaku);
         this.setOriginalData("yoyakuKaoFlag", yoyakuKaoFlag);
+        this.setOriginalData("shoKisaiHokenshaNo", shoKisaiHokenshaNo);
         this.hokensha = hokensha;
         this.hihokenshaNo = hihokenshaNo;
         this.name = name;
@@ -105,6 +113,7 @@ public class dgResultList_Row extends DataRow {
         this.ninteiChosainCode = ninteiChosainCode;
         this.ninteiChosaJikanWaku = ninteiChosaJikanWaku;
         this.yoyakuKaoFlag = yoyakuKaoFlag;
+        this.shoKisaiHokenshaNo = shoKisaiHokenshaNo;
     }
 
     public RString getHokensha() {
@@ -169,6 +178,10 @@ public class dgResultList_Row extends DataRow {
 
     public RString getYoyakuKaoFlag() {
         return yoyakuKaoFlag;
+    }
+
+    public RString getShoKisaiHokenshaNo() {
+        return shoKisaiHokenshaNo;
     }
 
     public void setHokensha(RString hokensha) {
@@ -249,6 +262,11 @@ public class dgResultList_Row extends DataRow {
     public void setYoyakuKaoFlag(RString yoyakuKaoFlag) {
         this.setOriginalData("yoyakuKaoFlag", yoyakuKaoFlag);
         this.yoyakuKaoFlag = yoyakuKaoFlag;
+    }
+
+    public void setShoKisaiHokenshaNo(RString shoKisaiHokenshaNo) {
+        this.setOriginalData("shoKisaiHokenshaNo", shoKisaiHokenshaNo);
+        this.shoKisaiHokenshaNo = shoKisaiHokenshaNo;
     }
 
     // </editor-fold>
