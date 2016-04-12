@@ -48,10 +48,6 @@ public class JigyoshaService {
      * @return ResponseData<JigyoshaServiceDiv>
      */
     public ResponseData<JigyoshaServiceDiv> onLoad(JigyoshaServiceDiv div) {
-        ViewStateHolder.put(ViewStateKeys.サービス登録_画面状態, 状態_修正);
-        ViewStateHolder.put(ViewStateKeys.サービス登録_事業者番号, new RString("034001"));
-        ViewStateHolder.put(ViewStateKeys.サービス登録_サービス種類コード, new RString("26"));
-        ViewStateHolder.put(ViewStateKeys.サービス登録_有効開始日, new FlexibleDate("20160401"));
         RString 画面状態 = ViewStateHolder.get(ViewStateKeys.サービス登録_画面状態, RString.class);
         if (状態_追加.equals(画面状態)) {
             getHandler(div).set状態_追加();
