@@ -109,10 +109,9 @@ public class JigyoshaService {
         }
         if (new RString(UrQuestionMessages.保存の確認.getMessage().getCode())
                 .equals(ResponseHolder.getMessageCode())
-                && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
-            if (click_hai(div)) {
-                return ResponseData.of(div).forwardWithEventName(DBA2010014TransitionEventName.再検索する).respond();
-            }
+                && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes
+                && click_hai(div)) {
+            return ResponseData.of(div).forwardWithEventName(DBA2010014TransitionEventName.再検索する).respond();
         }
         return ResponseData.of(div).respond();
     }
