@@ -24,6 +24,8 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.ResponseHolder;
 /**
  *
  * 特別徴収対象者登録情報Divを制御します。
+ *
+ * @reamsid_L DBB-0670-010 wangjie2
  */
 public class KaigoAtenaJoho {
 

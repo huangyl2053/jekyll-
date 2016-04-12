@@ -18,6 +18,7 @@ import jp.co.ndensan.reams.db.dbz.definition.core.enumeratedtype.ShoriName;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrInformationMessages;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.CodeShubetsu;
+import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.ApplicationException;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
@@ -30,6 +31,8 @@ import jp.co.ndensan.reams.uz.uza.util.db.SearchResult;
 /**
  *
  * 特別徴収対象者登録ハンドラクラスです。
+ *
+ * @reamsid_L DBB-0670-010 wangjie2
  */
 public class KaigoAtenaJohoHandler {
 
@@ -63,11 +66,11 @@ public class KaigoAtenaJohoHandler {
      * @return 該当者一覧画面へ遷移フラグ
      */
     public Boolean onload() {
-        //HihokenshaNo 被保険者番号 = ViewStateHolder.get(DBB2710011ViewStateKey.被保険者番号, HihokenshaNo.class);
+        HihokenshaNo 被保険者番号 = ViewStateHolder.get(DBB2710011ViewStateKey.被保険者番号, HihokenshaNo.class);
         FlexibleYear 賦課年度 = ViewStateHolder.get(DBB2710011ViewStateKey.賦課年度, FlexibleYear.class);
+        div.getCcdKaigoAtenaInfo().onLoad(new ShikibetsuCode(被保険者番号.getColumnValue()));
         //TODO QA #75192
         TokubetuChosyutaisyosyaTorokuManager 特別徴収対象者登録Manager = TokubetuChosyutaisyosyaTorokuManager.createInstance();
-        //引数：viewStateの賦課年度（遷移元に設定される）
         RString 年度内処理済み連番 = 特別徴収対象者登録Manager.getShorizumiRenban(賦課年度);
         div.setYearofprocessedsequence(年度内処理済み連番);
 //        GyomuCode 被保険者番号GyomuCode = new GyomuCode(被保険者番号.getColumnValue());
@@ -112,7 +115,7 @@ public class KaigoAtenaJohoHandler {
         div.getNenkinJohoKensaku().getBtnNenkinInfoKensaku().setDisabled(資格喪失フラグ);
         ChoshuHoho 最新介護徴収方法情報データ
                 = 最新介護徴収方法情報データLst.isEmpty()
-                ? new ChoshuHoho(null, null, 0) : 最新介護徴収方法情報データLst.get(0);
+                ? new ChoshuHoho(FlexibleYear.EMPTY, HihokenshaNo.EMPTY, 0) : 最新介護徴収方法情報データLst.get(0);
         //if (!資格喪失フラグ) {
         //RString 捕捉月 = get捕捉月(年度内処理済み連番, 最新介護徴収方法情報データ);
         //TokuchoStartMonth 特別徴収開始月 = get特別徴収開始月(捕捉月);
@@ -220,7 +223,7 @@ public class KaigoAtenaJohoHandler {
      */
     private RString get年金名称(RString 年金コード) {
         return CodeMaster.getCodeMeisho(SubGyomuCode.DBB介護賦課, new CodeShubetsu("0046"),
-                new Code(年金コード.substring(0, INT3)));
+                new Code(年金コード.length() > INT3 ? 年金コード.substring(0, INT3) : 年金コード));
     }
 
     /**
