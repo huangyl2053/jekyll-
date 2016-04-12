@@ -10,7 +10,7 @@ import jp.co.ndensan.reams.db.dbb.entity.report.karisanteifukadaicho.KarisanteiF
 /**
  * 賦課台帳（仮算定）帳票 BodyEditor
  *
- * @reamsid_L DBC-1020-010 yangchenbing
+ * @reamsid_L DBB-9100-020 yangchenbing
  */
 public class BodyEditor implements IKarisanteiFukaDaichoEditor {
 

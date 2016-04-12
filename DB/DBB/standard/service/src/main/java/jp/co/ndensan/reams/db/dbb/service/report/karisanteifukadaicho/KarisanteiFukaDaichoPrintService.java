@@ -19,7 +19,7 @@ import jp.co.ndensan.reams.uz.uza.report.SourceDataCollection;
 /**
  * 帳票設計_DBBRP00006_2_賦課台帳（仮算定）
  *
- * @reamsid_L DBC-1020-010 yangchenbing
+ * @reamsid_L DBB-9100-020 yangchenbing
  */
 public class KarisanteiFukaDaichoPrintService {
 
