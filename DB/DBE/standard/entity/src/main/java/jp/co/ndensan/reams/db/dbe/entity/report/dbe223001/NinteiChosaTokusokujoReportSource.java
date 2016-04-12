@@ -6,6 +6,8 @@ import jp.co.ndensan.reams.uz.uza.report.source.ReportItem;
 
 /**
  * 帳票「認定調査督促対象者一覧表」の項目を定義するクラスです。
+ *
+ * @reamsid_L DBE-0030-020 xuyue
  */
 public class NinteiChosaTokusokujoReportSource implements IReportSource {
 // <editor-fold defaultstate="collapsed" desc="Generated Code">

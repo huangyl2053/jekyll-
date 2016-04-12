@@ -10,6 +10,8 @@ import jp.co.ndensan.reams.uz.uza.report.ReportEditorJoiner;
 
 /**
  * 要介護認定調査督促状Builderクラスです。
+ *
+ * @reamsid_L DBE-0030-020 xuyue
  */
 class NinteiChosaTokusokujoBuilderImpl implements INinteiChosaTokusokujoBuilder {
 

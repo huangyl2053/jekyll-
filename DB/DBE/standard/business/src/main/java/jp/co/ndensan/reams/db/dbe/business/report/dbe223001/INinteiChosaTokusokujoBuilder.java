@@ -9,8 +9,9 @@ import jp.co.ndensan.reams.db.dbe.entity.report.dbe223001.NinteiChosaTokusokujoR
 import jp.co.ndensan.reams.uz.uza.report.IReportBuilder;
 
 /**
- *
  * 要介護認定調査督促状Builderのインターフェースクラスです。
+ *
+ * @reamsid_L DBE-0030-020 xuyue
  */
 interface INinteiChosaTokusokujoBuilder extends IReportBuilder<NinteiChosaTokusokujoReportSource> {
 }

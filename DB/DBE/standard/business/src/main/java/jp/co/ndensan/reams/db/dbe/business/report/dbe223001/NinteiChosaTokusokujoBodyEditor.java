@@ -8,8 +8,9 @@ package jp.co.ndensan.reams.db.dbe.business.report.dbe223001;
 import jp.co.ndensan.reams.db.dbe.entity.report.dbe223001.NinteiChosaTokusokujoReportSource;
 
 /**
- *
  * 要介護認定調査督促状のEditorです。
+ *
+ * @reamsid_L DBE-0030-020 xuyue
  */
 public class NinteiChosaTokusokujoBodyEditor implements INinteiChosaTokusokujoEditor {
 
