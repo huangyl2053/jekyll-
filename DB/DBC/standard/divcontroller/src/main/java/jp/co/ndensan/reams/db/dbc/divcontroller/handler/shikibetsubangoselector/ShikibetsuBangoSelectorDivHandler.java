@@ -20,6 +20,8 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
  * 識別番号選択のHandlerクラス
+ *
+ * @reamsid_L DBC-1030-170 panhe
  */
 public class ShikibetsuBangoSelectorDivHandler {
 

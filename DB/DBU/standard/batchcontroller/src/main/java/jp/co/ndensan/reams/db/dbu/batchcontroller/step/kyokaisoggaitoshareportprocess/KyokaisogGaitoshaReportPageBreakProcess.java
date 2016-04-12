@@ -133,7 +133,7 @@ public class KyokaisogGaitoshaReportPageBreakProcess extends BatchProcessBase<Ky
 
     @Override
     protected void createWriter() {
-        batchReportWriter = BatchReportFactory.createBatchReportWriter(ID.value()).create();
+        batchReportWriter = BatchReportFactory.createBatchReportWriter(ReportIdDBU.DBA200005.getReportId().value()).create();
         reportSourceWriter = new ReportSourceWriter<>(batchReportWriter);
     }
 
@@ -292,8 +292,10 @@ public class KyokaisogGaitoshaReportPageBreakProcess extends BatchProcessBase<Ky
                     dataSakuseiEntity.get改頁4(),
                     dataSakuseiEntity.get改頁5());
         }
-        KyokaisoKanriMasterListReport report = KyokaisoKanriMasterListReport.createFrom(headItem, bodyItemList);
-        report.writeBy(reportSourceWriter);
-        outputJokenhyoFactory(帳票データ.size());
+        if (bodyItemList != null || !bodyItemList.isEmpty()) {
+            KyokaisoKanriMasterListReport report = KyokaisoKanriMasterListReport.createFrom(headItem, bodyItemList);
+            report.writeBy(reportSourceWriter);
+            outputJokenhyoFactory(帳票データ.size());
+        }
     }
 }
