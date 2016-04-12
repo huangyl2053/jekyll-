@@ -10,13 +10,13 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.*;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 
 /**
- * shinsakaiScheduleSrch のクラスファイル
+ * ShinsakaiScheduleSrch のクラスファイル。
  *
  * @reamsid_L DBE-0130-030 yaodongsheng
  */
-public class shinsakaiScheduleSrchDiv extends Panel {
+public class ShinsakaiScheduleSrchDiv extends Panel {
 
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：バージョン情報無し">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -29,6 +29,8 @@ public class shinsakaiScheduleSrchDiv extends Panel {
     private CheckBoxList chkShinsakaiSchedule;
     @JsonProperty("chkShinsakaiScheduleKagami")
     private CheckBoxList chkShinsakaiScheduleKagami;
+    @JsonProperty("chkShinsakaiScheduleNenkan")
+    private CheckBoxList chkShinsakaiScheduleNenkan;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -88,6 +90,24 @@ public class shinsakaiScheduleSrchDiv extends Panel {
     @JsonProperty("chkShinsakaiScheduleKagami")
     public void setChkShinsakaiScheduleKagami(CheckBoxList chkShinsakaiScheduleKagami) {
         this.chkShinsakaiScheduleKagami = chkShinsakaiScheduleKagami;
+    }
+
+    /*
+     * getchkShinsakaiScheduleNenkan
+     * @return chkShinsakaiScheduleNenkan
+     */
+    @JsonProperty("chkShinsakaiScheduleNenkan")
+    public CheckBoxList getChkShinsakaiScheduleNenkan() {
+        return chkShinsakaiScheduleNenkan;
+    }
+
+    /*
+     * setchkShinsakaiScheduleNenkan
+     * @param chkShinsakaiScheduleNenkan chkShinsakaiScheduleNenkan
+     */
+    @JsonProperty("chkShinsakaiScheduleNenkan")
+    public void setChkShinsakaiScheduleNenkan(CheckBoxList chkShinsakaiScheduleNenkan) {
+        this.chkShinsakaiScheduleNenkan = chkShinsakaiScheduleNenkan;
     }
 
     // </editor-fold>
