@@ -1,3 +1,8 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
 package jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.core.chosahyokomoku;
 
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
@@ -8,7 +13,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
  *
  * @reamsid_L DBD-9999-023 wangchao
  */
-public enum NinteichosaKomoku09B {
+public enum NinteichosaKomoku09A {
 
     /**
      * 特記事項番号:1-1 群番号:1 群内順序:1 調査特記事項番号:101 前回基本調査項目コード:001 名称:麻痺等の有無
@@ -298,7 +303,7 @@ public enum NinteichosaKomoku09B {
     private final RString 前回基本調査項目コード;
     private final RString 名称;
 
-    private NinteichosaKomoku09B(String 特記事項番号, String 群番号, String 群内順序,
+    private NinteichosaKomoku09A(String 特記事項番号, String 群番号, String 群内順序,
             String 調査特記事項番, String 前回基本調査項目コード, String 名称) {
         this.特記事項番号 = new RString(特記事項番号);
         this.群番号 = new RString(群番号);
@@ -369,8 +374,8 @@ public enum NinteichosaKomoku09B {
      * @return {@code code} に対応する認定調査特記事項マッピング
      * @throws IllegalArgumentException IllegalArgumentException
      */
-    public static NinteichosaKomoku09B toValue(RString code) throws IllegalArgumentException {
-        for (NinteichosaKomoku09B target : NinteichosaKomoku09B.values()) {
+    public static NinteichosaKomoku09A toValue(RString code) throws IllegalArgumentException {
+        for (NinteichosaKomoku09A target : NinteichosaKomoku09A.values()) {
             if (target.get特記事項番号().equals(code)) {
                 return target;
             }
