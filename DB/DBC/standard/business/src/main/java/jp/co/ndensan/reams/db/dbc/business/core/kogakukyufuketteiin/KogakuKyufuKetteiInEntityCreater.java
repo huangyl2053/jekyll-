@@ -50,7 +50,7 @@ public class KogakuKyufuKetteiInEntityCreater {
         entity.set国保連合会名(trim囲み文字(csvHeader.get国保連合会名()));
 
         entity.set帳票レコード種別(trim囲み文字(csvMesai.get帳票レコード種別()));
-        entity.setNo(Integer.parseInt(trim囲み文字(csvMesai.getNo()).toString()));
+        entity.setNo(trim囲み文字(csvMesai.getNo()));
         entity.set被保険者番号(new HihokenshaNo(trim囲み文字(csvMesai.get被保険者番号())));
         entity.set被保険者氏名漢字(new AtenaMeisho(trim囲み文字(csvMesai.get被保険者氏名())));
         entity.setサービス提供年月(new FlexibleYearMonth(trim囲み文字(csvMesai.getサービス提供年月())));

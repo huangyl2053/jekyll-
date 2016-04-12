@@ -5,6 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbc.definition.core.kogakuserviceketteijohotorikomidatahenshu;
 
+import java.io.Serializable;
 import java.util.List;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -19,7 +20,7 @@ import lombok.Setter;
 @Getter
 @Setter
 @SuppressWarnings("PMD.UnusedPrivateField")
-public class DbShoriDataParameter {
+public class DbShoriDataParameter implements Serializable {
 
     private final FlexibleYearMonth 処理年月;
     private final List<RString> ファイル名リスト;
