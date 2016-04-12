@@ -13,13 +13,12 @@ import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE5410001.Koji
 import jp.co.ndensan.reams.db.dbe.divcontroller.handler.parentdiv.DBE5410001.KojinJokyoShokaiHandler;
 import jp.co.ndensan.reams.db.dbe.service.core.basic.kojinjokyoshokai.KojinJokyoShokaiFinder;
 import jp.co.ndensan.reams.db.dbe.service.report.kojinshinchokujokyohyo.KojinShinchokuJokyohyoPrintService;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo;
 import jp.co.ndensan.reams.db.dbz.business.core.ninteishinseirenrakusakijoho.NinteiShinseiBusinessCollection;
+import jp.co.ndensan.reams.db.dbz.business.core.ninteishinseirenrakusakijoho.RenrakusakiJoho;
 import jp.co.ndensan.reams.db.dbz.business.core.servicetype.ninteishinsei.NinteiShinseiCodeModel;
 import jp.co.ndensan.reams.db.dbz.divcontroller.viewbox.ViewStateKeys;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
-import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.ApplicationException;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -29,13 +28,13 @@ import jp.co.ndensan.reams.uz.uza.util.serialization.DataPassingConverter;
 
 /**
  * 要介護認定個人状況照会処理のクラスです。
- * 
- * @reamsid_L DBE-0200-010  suguangjun
+ *
+ * @reamsid_L DBE-0200-010 suguangjun
  */
 public class KojinJokyoShokai {
 
     private static final RString 照会モード = new RString("ShokaiMode");
-    
+
     /**
      * 画面初期化処理です。
      *
@@ -62,10 +61,13 @@ public class KojinJokyoShokai {
      */
     public ResponseData<KojinJokyoShokaiDiv> onClick_btnRenrakusaki(KojinJokyoShokaiDiv div) {
         RString 申請書管理番号 = ViewStateHolder.get(ViewStateKeys.要介護認定申請検索_申請書管理番号, RString.class);
-        NinteiShinseiBusinessCollection collection = new NinteiShinseiBusinessCollection();
-        collection.setHdnDatabaseSubGyomuCode(SubGyomuCode.DBE認定支援);
-        collection.setShinseishoKanriNo(new ShinseishoKanriNo(申請書管理番号));
-        div.setNinteiShinseiBusinessCollection(DataPassingConverter.serialize(collection));
+        KojinJokyoShokaiParameter parameter = KojinJokyoShokaiParameter.createSelectByKeyParam(new ShinseishoKanriNo(申請書管理番号));
+        KojinJokyoShokaiFinder kojinJokyoShokaiFinder = KojinJokyoShokaiFinder.createInstance();
+        List<RenrakusakiJoho> rakusakiJohoList = kojinJokyoShokaiFinder.getRenrakusakiJoho(parameter).records();
+        NinteiShinseiBusinessCollection data = new NinteiShinseiBusinessCollection();
+        data.setDbdBusiness(rakusakiJohoList);
+        div.setNinteiShinseiBusinessCollection(DataPassingConverter.serialize(data));
+        div.setHdnRenrakusakiReadOnly(new RString("1"));
         return ResponseData.of(div).respond();
     }
 
@@ -103,8 +105,7 @@ public class KojinJokyoShokai {
      * @return ResponseData<KojinJokyoShokaiDiv>
      */
     public ResponseData<KojinJokyoShokaiDiv> onClick_btnShujiiIkenshoSakuseiIraiShokai(KojinJokyoShokaiDiv div) {
-        // TODO  内部QA：923 Redmine：#74276(被保番号が知らない、現時点対応不可)
-        //div.setHihokenshano(new RString("123456"));
+        div.setHihokenshano(div.getHihokenshano());
         return ResponseData.of(div).respond();
     }
 
@@ -115,8 +116,7 @@ public class KojinJokyoShokai {
      * @return ResponseData<KojinJokyoShokaiDiv>
      */
     public ResponseData<KojinJokyoShokaiDiv> onClick_btnNinteiChosaIraiShokai(KojinJokyoShokaiDiv div) {
-        // TODO  内部QA：923 Redmine：#74276(被保番号が知らない、現時点対応不可)
-        ViewStateHolder.put(ViewStateKeys.被保険者番号, new HihokenshaNo("123456"));
+        ViewStateHolder.put(ViewStateKeys.被保険者番号, div.getHihokenshano());
         return ResponseData.of(div).respond();
     }
 
@@ -166,6 +166,7 @@ public class KojinJokyoShokai {
      * @return ResponseData<KojinJokyoShokaiDiv>
      */
     public ResponseData<KojinJokyoShokaiDiv> onClick_btnToShinchokuJyokyo(KojinJokyoShokaiDiv div) {
+        ViewStateHolder.put(ViewStateKeys.保険者番号, div.getShoKisaiHokenshaNo());
         return ResponseData.of(div).forwardWithEventName(DBE5410001TransitionEventName.進捗状況照会に遷移する).respond();
     }
 

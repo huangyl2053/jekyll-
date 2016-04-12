@@ -4,17 +4,21 @@ package jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE5410001;
  * このファイルへの変更は、再生成時には損失するため
  * 不正な動作の原因になります。
  */
+
 import com.fasterxml.jackson.annotation.JsonProperty;
-import jp.co.ndensan.reams.uz.uza.ui.binding.*;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
+import jp.co.ndensan.reams.uz.uza.ui.binding.TextBox;
+import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxDate;
+import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxNum;
 
 /**
- * KojinShinchokuShosai のクラスファイル 
- * 
- * @reamsid_L DBE-0200-010  suguangjun
+ * KojinShinchokuShosai のクラスファイル
+ *
+ * @reamsid_L DBE-0200-010 suguangjun
  */
 public class KojinShinchokuShosaiDiv extends Panel {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-01-15_09-59-03">
+
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -76,7 +80,7 @@ public class KojinShinchokuShosaiDiv extends Panel {
      * gettxtShinseiShubetsu
      * @return txtShinseiShubetsu
      */
-    @JsonProperty("txtShinseiShubetsu") 
+    @JsonProperty("txtShinseiShubetsu")
     public TextBox getTxtShinseiShubetsu() {
         return txtShinseiShubetsu;
     }

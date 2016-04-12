@@ -6,6 +6,7 @@
 package jp.co.ndensan.reams.db.dba.business.report.shikakushasho;
 
 import jp.co.ndensan.reams.db.dba.entity.report.shikakushasho.ShikakushashoReportSource;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
  * 介護保険資格者証ボディEditorです。
@@ -20,6 +21,9 @@ public class ShikakushashoBodyEditor implements IShikakushashoEditor {
     private static final int NOCOUNT_4 = 4;
     private static final int NOCOUNT_5 = 5;
     private static final int NOCOUNT_6 = 6;
+    private static final RString SHINSEICHU_1 = new RString("1");
+    private static final RString SHINSEICHU_2 = new RString("2");
+    private static final RString HOUSI = new RString("*");
 
     private final ShikakushashoBodyItem item;
 
@@ -53,6 +57,9 @@ public class ShikakushashoBodyEditor implements IShikakushashoEditor {
         source.birthGengoMeiji = item.getBirthGengoMeiji();
         source.birthGengoTaisho = item.getBirthGengoTaisho();
         source.birthGengoShowa = item.getBirthGengoShowa();
+        RString seibetsu = item.getSeibetsu();
+        source.seibetsuMan = seibetsu.equals(SHINSEICHU_1) ? RString.EMPTY : HOUSI;
+        source.seibetsuWoman = seibetsu.equals(SHINSEICHU_2) ? RString.EMPTY : HOUSI;
         source.birthYMD = item.getBirthYMD();
         source.kofuYMD = item.getKofuYMD();
         source.yokaigoJotaiKubun = item.getYokaigoJotaiKubun();

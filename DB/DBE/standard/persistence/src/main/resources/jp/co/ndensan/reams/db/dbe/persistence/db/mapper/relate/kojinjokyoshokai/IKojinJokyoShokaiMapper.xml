@@ -19,6 +19,8 @@
         <result property="maskingKanryoYMD" column="DbT5105Nintei_maskingKanryoYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler" />
         <result property="ninteiShinsakaiWariateKanryoYMD" column="DbT5105Nintei_ninteiShinsakaiWariateKanryoYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler" />
         <result property="ninteiShinsakaiKanryoYMD" column="DbT5105Nintei_ninteiShinsakaiKanryoYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler" />
+        <result property="shoKisaiHokenshaNo" column="DbT5101Nintei_shoKisaiHokenshaNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="hihokenshaNo" column="DbT5101Nintei_hihokenshaNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
         <result property="ninteiShinseiYMD" column="DbT5101Nintei_ninteiShinseiYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler" />
         <result property="ninteiShinseiShinseijiKubunCode" column="DbT5101Nintei_ninteiShinseiShinseijiKubunCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.CodeTypeHandler" />
         <result property="ninteiShinseiHoreiKubunCode" column="DbT5101Nintei_ninteiShinseiHoreiKubunCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.CodeTypeHandler" />
@@ -33,7 +35,7 @@
         <result property="shinsakaiKaisaiYMD" column="DbT5511Shinsa_shinsakaiKaisaiYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler" />
         <result property="shoriJotaiKubun" column="DbT5101Nintei_shoriJotaiKubun" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.CodeTypeHandler" />
 
-        <result property="hihokenshaNo" column="DbT5101Nintei_hihokenshaNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.HihokenshaNoTypeHandler" />
+        <result property="hihokenshaNo" column="DbT5101Nintei_hihokenshaNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
         <result property="shinseiKubun" column="DbT5101Nintei_ninteiShinseiShinseijiKubunCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.CodeTypeHandler" />
 	<result property="hihokenshaNameKana" column="DbT5101Nintei_hihokenshaKana" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
 	<result property="shinseiYMD" column="DbT5101Nintei_ninteiShinseiYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler" />
@@ -160,7 +162,9 @@
 		DbT5105Nintei."ichijiHanteiKanryoYMD" AS "DbT5105Nintei_ichijiHanteiKanryoYMD",																
 		DbT5105Nintei."maskingKanryoYMD" AS "DbT5105Nintei_maskingKanryoYMD",																
 		DbT5105Nintei."ninteiShinsakaiWariateKanryoYMD" AS "DbT5105Nintei_ninteiShinsakaiWariateKanryoYMD",																
-		DbT5105Nintei."ninteiShinsakaiKanryoYMD" AS "DbT5105Nintei_ninteiShinsakaiKanryoYMD",																
+		DbT5105Nintei."ninteiShinsakaiKanryoYMD" AS "DbT5105Nintei_ninteiShinsakaiKanryoYMD",	
+       		DbT5101Nintei."shoKisaiHokenshaNo" AS "DbT5101Nintei_shoKisaiHokenshaNo",
+                DbT5101Nintei."hihokenshaNo" AS "DbT5101Nintei_hihokenshaNo",
 		DbT5101Nintei."ninteiShinseiYMD" AS "DbT5101Nintei_ninteiShinseiYMD",																
 		DbT5101Nintei."ninteiShinseiShinseijiKubunCode" AS "DbT5101Nintei_ninteiShinseiShinseijiKubunCode",																		
                 DbT5101Nintei."ninteiShinseiHoreiKubunCode" AS "DbT5101Nintei_ninteiShinseiHoreiKubunCode",																
@@ -498,5 +502,42 @@
 			ON NinteiKanryoJoho2."shinseishoKanriNo" = NinteiShinseiJoho2."shinseishoKanriNo"						
     WHERE												
 	DbT5101Nintei."shinseishoKanriNo"=#{shinseishoKanriNo}											
+    </select>
+    
+    <resultMap id="resultMap_RenrakusakiJohoEntity" type="jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5150RenrakusakiJohoEntity" autoMapping="true">
+        <id property="shinseishoKanriNo" column="dbT5150Renra_shinseishoKanriNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.ShinseishoKanriNoTypeHandler"/>
+        <id property="renban" column="dbT5150Renra_renban" />
+        <result property="renrakusakiKubunNo" column="dbT5150Renra_renrakusakiKubunNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="shishoCode" column="dbT5150Renra_shishoCode" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.ShishoCodeTypeHandler"/>
+        <result property="renrakusakiShimei" column="dbT5150Renra_renrakusakiShimei" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="renrakusakiKanaSimei" column="dbT5150Renra_renrakusakiKanaSimei" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.AtenaKanaMeishoTypeHandler"/>
+        <result property="renrakusakiTuzukigara" column="dbT5150Renra_renrakusakiTuzukigara" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="renrakusakiYubinNo" column="dbT5150Renra_renrakusakiYubinNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.YubinNoTypeHandler"/>
+        <result property="renrakusakiJusho" column="dbT5150Renra_renrakusakiJusho" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.AtenaJushoTypeHandler"/>
+        <result property="renrakusakiTelNo" column="dbT5150Renra_renrakusakiTelNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.TelNoTypeHandler"/>
+        <result property="renrakusakiKeitaiTelNo" column="dbT5150Renra_renrakusakiKeitaiTelNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.TelNoTypeHandler"/>
+        <result property="priority" column="dbT5150Renra_priority" />
+    </resultMap>
+    
+    <select id="selectRenrakusakiJoho"
+            resultMap="resultMap_RenrakusakiJohoEntity" 
+            parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatis.param.kojinjokyoshokai.KojinJokyoShokaiParameter" fetchSize="500">
+        SELECT 
+        DbT5150Renra."shinseishoKanriNo" AS "dbT5150Renra_shinseishoKanriNo",
+        DbT5150Renra.renban AS "dbT5150Renra_renban",
+        DbT5150Renra."renrakusakiKubunNo" AS "dbT5150Renra_renrakusakiKubunNo",
+        DbT5150Renra."shishoCode" AS "dbT5150Renra_shishoCode", 
+        DbT5150Renra."renrakusakiShimei" AS "dbT5150Renra_renrakusakiShimei",
+        DbT5150Renra."renrakusakiKanaSimei" AS "dbT5150Renra_renrakusakiKanaSimei",
+        DbT5150Renra."renrakusakiTuzukigara" AS "dbT5150Renra_renrakusakiTuzukigara",
+        DbT5150Renra."renrakusakiYubinNo" AS "dbT5150Renra_renrakusakiYubinNo",
+        DbT5150Renra."renrakusakiJusho" AS "dbT5150Renra_renrakusakiJusho",
+        DbT5150Renra."renrakusakiTelNo" AS "dbT5150Renra_renrakusakiTelNo",
+        DbT5150Renra."renrakusakiKeitaiTelNo" AS "dbT5150Renra_renrakusakiKeitaiTelNo",
+        DbT5150Renra.priority AS "dbT5150Renra_priority"
+        FROM
+        rgdb."DbT5150RenrakusakiJoho" AS DbT5150Renra
+        WHERE
+        DbT5150Renra."shinseishoKanriNo" = #{shinseishoKanriNo}	
     </select>
 </mapper>

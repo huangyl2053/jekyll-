@@ -1,7 +1,7 @@
 package jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE5410001;
 
-import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.IStateEnumerations;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
  * このコードはツールによって生成されました。</br>
@@ -9,7 +9,7 @@ import jp.co.ndensan.reams.uz.uza.core.ui.response.IStateEnumerations;
  * 不正な動作の原因になります。</br>
  * DBE5410001の状態名定義クラスです
  *
- * @reamsid_L DBE-0200-010  suguangjun
+ * @reamsid_L DBE-0200-010 suguangjun
  */
 public enum DBE5410001StateName implements IStateEnumerations {
 // <editor-fold defaultstate="collapsed" desc="Created By UI Designer ver 1.0.0">
