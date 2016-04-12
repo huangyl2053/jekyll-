@@ -12,10 +12,82 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
  *
  * 帳票ＩＤの列挙型です。
  *
- * @reamsid_L DBC-9999-022 xicongwang
+ * @reamsid_L DBB-9999-022 xicongwang
  */
 public enum ReportIdDBB {
 
+    /**
+     * 保険料納入通知書（本算定過年度）【コンビニ期毎タイプ】
+     */
+    DBB100076(new ReportId("DBB100076_KanendoNonyuTsuchishoCVSKigoto"),
+            new RString("保険料納入通知書（本算定過年度）【コンビニ期毎タイプ】")),
+    /**
+     * 保険料納入通知書（本算定過年度）【コンビニ角公タイプ】
+     */
+    DBB100073(new ReportId("DBB100073_KanendoNonyuTsuchishoCVSKakuko"),
+            new RString("保険料納入通知書（本算定過年度）【コンビニ角公タイプ】")),
+    /**
+     * 保険料納入通知書（本算定過年度）【コンビニマルチ収納タイプ通知書】
+     */
+    DBB100075(new ReportId("DBB100075_KanendoNonyuTsuchishoCVSMulti"),
+            new RString("保険料納入通知書（本算定過年度）【コンビニマルチ収納タイプ通知書】")),
+    /**
+     * 保険料納入通知書（本算定過年度）【ブック（口振依頼あり通知書＋納付書）タイプ】
+     */
+    DBB100071(new ReportId("DBB100071_KanendoNonyuTsuchishoBookFuriKaeAri"),
+            new RString("保険料納入通知書（本算定過年度）【ブック（口振依頼あり通知書＋納付書）タイプ】")),
+    /**
+     * 保険料納入通知書（本算定過年度）【ブック（口振依頼なし通知書＋納付書）タイプ】
+     */
+    DBB100072(new ReportId("DBB100072_KanendoNonyuTsuchishoBookFuriKaeNashi"),
+            new RString("保険料納入通知書（本算定過年度）【ブック（口振依頼なし通知書＋納付書）タイプ】")),
+    /**
+     * 保険料納入通知書（本算定過年度）【銀振4期タイプ】
+     */
+    DBB100069(new ReportId("DBB100069_KanendoHokenryoNonyuTsuchishoGinfuriFourKi"),
+            new RString("保険料納入通知書（本算定過年度）【銀振4期タイプ】")),
+    /**
+     * 保険料納入通知書（本算定過年度）【銀振5期タイプ】
+     */
+    DBB100070(new ReportId("DBB100070_KanendoHokenryoNonyuTsuchishoGinfuriFiveKi"),
+            new RString("保険料納入通知書（本算定過年度）【銀振5期タイプ】")),
+    /**
+     * 保険料納入通知書（本算定過年度）【期毎タイプ】
+     */
+    DBB100066(new ReportId("DBB100066_KanendoHokenryoNonyuTsuchishoKigoto"), new RString("保険料納入通知書（本算定過年度）【期毎タイプ】")),
+    /**
+     * 保険料納入通知書（仮算定）【期毎タイプ】
+     */
+    DBB100014(new ReportId("DBB100014_KarisanteiHokenryoNonyuTsuchishoKigoto"), new RString("保険料納入通知書（仮算定）【期毎タイプ】")),
+    /**
+     * 保険料納入通知書（仮算定）【銀振4期タイプ】
+     */
+    DBB100018(new ReportId("DBB100018_KarisanteiHokenryoNonyuTsuchishoGinfuri"), new RString("保険料納入通知書（仮算定）【銀振4期タイプ】")),
+    /**
+     * 保険料納入通知書（仮算定）【ブック（口振依頼なし通知書＋納付書）タイプ】
+     */
+    DBB100021(new ReportId("DBB100021_KarisanteiHokenryoNonyuTsuchishoBookFuriKaeNashi"),
+            new RString("保険料納入通知書（仮算定）【ブック（口振依頼なし通知書＋納付書）タイプ】")),
+    /**
+     * 保険料納入通知書（仮算定）【ブック（口振依頼あり通知書＋納付書）タイプ】
+     */
+    DBB100020(new ReportId("DBB100020_KarisanteiHokenryoNonyuTsuchishoBookFuriKaeAri"),
+            new RString("保険料納入通知書（仮算定）【ブック（口振依頼あり通知書＋納付書）タイプ】")),
+    /**
+     * 保険料納入通知書（仮算定）【コンビニマルチ収納タイプ通知書】
+     */
+    DBB100026(new ReportId("DBB100026_KarisanteiNonyuTsuchishoCVSMulti"),
+            new RString("保険料納入通知書（仮算定）【コンビニマルチ収納タイプ通知書】")),
+    /**
+     * 保険料納入通知書（仮算定）【コンビニ角公タイプ】
+     */
+    DBB100024(new ReportId("DBB100024_KarisanteiNonyuTsuchishoCVSKakuko"),
+            new RString("保険料納入通知書（仮算定）【コンビニ角公タイプ】")),
+    /**
+     * 保険料納入通知書（仮算定）【コンビニ期毎タイプ】
+     */
+    DBB100028(new ReportId("DBB100028_KarisanteiNonyuTsuchishoCVSKigoto"),
+            new RString("保険料納入通知書（仮算定）【コンビニ期毎タイプ】")),
     /**
      * 本算定結果一覧表
      */
