@@ -10,6 +10,8 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
  * 支払方法変更（償還払い化）終了申請書ヘッダEditorです。
+ *
+ * @reamsid_L DBA-0540-697 zhangguopeng
  */
 class ShiharaiHenkoShokanbaraikaShoryoShinseishoEditorImpl implements IShiharaiHenkoShokanbaraikaShoryoShinseishoEditor {
 

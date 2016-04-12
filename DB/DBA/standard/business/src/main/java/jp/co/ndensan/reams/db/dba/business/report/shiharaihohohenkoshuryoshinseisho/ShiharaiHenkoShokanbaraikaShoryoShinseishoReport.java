@@ -11,6 +11,8 @@ import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
 
 /**
  * 支払方法変更（償還払い化）終了申請書のReportです。
+ *
+ * @reamsid_L DBA-0540-697 zhangguopeng
  */
 public class ShiharaiHenkoShokanbaraikaShoryoShinseishoReport extends Report<ShiharaiHenkoShokanbaraikaShoryoShinseishoReportSource> {
 

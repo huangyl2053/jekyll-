@@ -11,6 +11,8 @@ import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
 
 /**
  * 社会福祉法人等利用者負担軽減対象確認申請書のReportです。
+ *
+ * @reamsid_L DBA-0540-698 zhangguopeng
  */
 public class ShakaiFukushiHojinFutanKeigenTaishoKakuninShinseishoReport extends
         Report<ShakaiFukushiHojinFutanKeigenTaishoKakuninShinseishoReportSource> {
