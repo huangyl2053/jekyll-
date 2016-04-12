@@ -7,7 +7,13 @@ package jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2210001;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.KihonChosaInput.KihonChosaInput.IKihonChosaInputDiv;
+import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.KihonChosaInput1.KihonChosaInput1.IKihonChosaInput1Div;
+import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.KihonChosaInput2.KihonChosaInput2.IKihonChosaInput2Div;
+import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.KihonChosaInput3.KihonChosaInput3.IKihonChosaInput3Div;
+import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.KihonChosaInput4.KihonChosaInput4.IKihonChosaInput4Div;
+import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.KihonChosaInput5.KihonChosaInput5.IKihonChosaInput5Div;
+import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.KihonChosaInput6.KihonChosaInput6.IKihonChosaInput6Div;
+import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.KihonChosaInput7.KihonChosaInput7.IKihonChosaInput7Div;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TabContainer;
 
 /**
@@ -175,37 +181,37 @@ public class tabKihonChosaShuruiDiv extends TabContainer {
      * [ ショートカットの作成 ]
      */
     @JsonIgnore
-    public IKihonChosaInputDiv getCcdIchigunKihonChosa() {
+    public IKihonChosaInput1Div getCcdIchigunKihonChosa() {
         return this.getTplIchigun().getCcdIchigunKihonChosa();
     }
 
     @JsonIgnore
-    public IKihonChosaInputDiv getCcdNigunKihonChosa() {
+    public IKihonChosaInput2Div getCcdNigunKihonChosa() {
         return this.getTplNigun().getCcdNigunKihonChosa();
     }
 
     @JsonIgnore
-    public IKihonChosaInputDiv getCcdSangunKihonChosa() {
+    public IKihonChosaInput3Div getCcdSangunKihonChosa() {
         return this.getTplSangun().getCcdSangunKihonChosa();
     }
 
     @JsonIgnore
-    public IKihonChosaInputDiv getCcdYongunKihonChosa() {
+    public IKihonChosaInput4Div getCcdYongunKihonChosa() {
         return this.getTplYongun().getCcdYongunKihonChosa();
     }
 
     @JsonIgnore
-    public IKihonChosaInputDiv getCcdGogun() {
+    public IKihonChosaInput5Div getCcdGogun() {
         return this.getTplGogun().getCcdGogun();
     }
 
     @JsonIgnore
-    public IKihonChosaInputDiv getCcdTokubetsuIryoKihonChosa() {
+    public IKihonChosaInput6Div getCcdTokubetsuIryoKihonChosa() {
         return this.getTplTokubetsuIryo().getCcdTokubetsuIryoKihonChosa();
     }
 
     @JsonIgnore
-    public IKihonChosaInputDiv getCcdSeikatsuJiritsudoKihonchosa() {
+    public IKihonChosaInput7Div getCcdSeikatsuJiritsudoKihonchosa() {
         return this.getTplSeikatsuJiritsudo().getCcdSeikatsuJiritsudoKihonchosa();
     }
 
