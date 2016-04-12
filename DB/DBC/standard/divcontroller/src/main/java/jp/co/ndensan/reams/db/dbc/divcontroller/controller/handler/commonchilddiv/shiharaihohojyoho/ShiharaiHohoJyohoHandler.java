@@ -1,4 +1,4 @@
-package jp.co.ndensan.reams.db.dbc.divcontroller.controller.handler.commonchilddiv.ShiharaiHohoJyoho;
+package jp.co.ndensan.reams.db.dbc.divcontroller.controller.handler.commonchilddiv.shiharaihohojyoho;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -527,12 +527,7 @@ public class ShiharaiHohoJyohoHandler {
             KinyuKikanShiten kinyuKikanShiten = 支店コードまたは店番に対する名称(口座情報.get金融機関コード() == null
                     ? KinyuKikanCode.EMPTY : 口座情報.get金融機関コード(),
                     new KinyuKikanShitenCode(口座情報.get店番() == null ? RString.EMPTY : 口座情報.get店番()));
-            if (kinyuKikan != null && kinyuKikanShiten != null) {
-                StringBuilder builder = new StringBuilder();
-                builder.append(kinyuKikan.get金融機関名称() == null ? RString.EMPTY.toString() : kinyuKikan.get金融機関名称().toString())
-                        .append(kinyuKikanShiten.get支店名称() == null ? RString.EMPTY.toString() : kinyuKikanShiten.get支店名称().toString());
-                div.getTxtKinyuKikanName().setValue(new RString(builder.toString()));
-            }
+            口座払いエリアの初期化Private(kinyuKikan, kinyuKikanShiten);
             div.getTxtTenban().setVisible(true);
             div.getTxtTenban().setValue(口座情報.get店番() == null ? RString.EMPTY : 口座情報.get店番());
             div.getTxtKinyuKikanShitenCode().setVisible(false);
@@ -543,12 +538,7 @@ public class ShiharaiHohoJyohoHandler {
             KinyuKikanShiten kinyuKikanShiten = 支店コードまたは店番に対する名称(口座情報.get金融機関コード() == null
                     ? KinyuKikanCode.EMPTY : 口座情報.get金融機関コード(),
                     口座情報.get支店コード() == null ? KinyuKikanShitenCode.EMPTY : 口座情報.get支店コード());
-            if (kinyuKikan != null && kinyuKikanShiten != null) {
-                StringBuilder builder = new StringBuilder();
-                builder.append(kinyuKikan.get金融機関名称() == null ? RString.EMPTY.toString() : kinyuKikan.get金融機関名称().toString())
-                        .append(kinyuKikanShiten.get支店名称() == null ? RString.EMPTY.toString() : kinyuKikanShiten.get支店名称().toString());
-                div.getTxtKinyuKikanName().setValue(new RString(builder.toString()));
-            }
+            口座払いエリアの初期化Private(kinyuKikan, kinyuKikanShiten);
             div.getTxtKinyuKikanShitenCode().setReadOnly(true);
             div.getTxtYokinShubetsu().setReadOnly(true);
             div.getTxtTenban().setVisible(false);
@@ -593,23 +583,13 @@ public class ShiharaiHohoJyohoHandler {
             div.getTxtYokinShubetsu1().setVisible(false);
             div.getTxtTenban1().setVisible(true);
             div.getTxtTenban1().setValue(受領委任契約事業者.get支店コード() == null ? RString.EMPTY : 受領委任契約事業者.get支店コード().value());
-            if (kinyuKikan != null && kinyuKikanShiten != null) {
-                StringBuilder builder = new StringBuilder();
-                builder.append(kinyuKikan.get金融機関名称() == null ? RString.EMPTY.toString() : kinyuKikan.get金融機関名称().toString())
-                        .append(kinyuKikanShiten.get支店名称() == null ? RString.EMPTY.toString() : kinyuKikanShiten.get支店名称().toString());
-                div.getTxtKinyuKikanName().setValue(new RString(builder.toString()));
-            }
+            口座払いエリアの初期化Private(kinyuKikan, kinyuKikanShiten);
         } else {
             div.getTxtKinyuKikanShitenCode1().setVisible(true);
             div.getTxtYokinShubetsu1().setVisible(true);
             div.getTxtTenban1().setVisible(false);
             div.getTxtKinyuKikanShitenCode().setDomain(受領委任契約事業者.get支店コード());
-            if (kinyuKikan != null && kinyuKikanShiten != null) {
-                StringBuilder builder = new StringBuilder();
-                builder.append(kinyuKikan.get金融機関名称() == null ? RString.EMPTY.toString() : kinyuKikan.get金融機関名称().toString())
-                        .append(kinyuKikanShiten.get支店名称() == null ? RString.EMPTY.toString() : kinyuKikanShiten.get支店名称().toString());
-                div.getTxtKinyuKikanName().setValue(new RString(builder.toString()));
-            }
+            口座払いエリアの初期化Private(kinyuKikan, kinyuKikanShiten);
         }
         UzT0007CodeEntity uzT0007CodeEntity = 預金種別に対する略称(nullToEmpty(受領委任契約事業者.get口座種別()));
         if (uzT0007CodeEntity != null) {
@@ -620,6 +600,15 @@ public class ShiharaiHohoJyohoHandler {
                 ? AtenaKanaMeisho.EMPTY : 受領委任契約事業者.get口座名義人カナ());
         div.getTxtMeigininKanji1().setDomain(受領委任契約事業者.get口座名義人() == null
                 ? AtenaMeisho.EMPTY : 受領委任契約事業者.get口座名義人());
+    }
+
+    private void 口座払いエリアの初期化Private(KinyuKikan kinyuKikan, KinyuKikanShiten kinyuKikanShiten) {
+        if (kinyuKikan != null && kinyuKikanShiten != null) {
+            StringBuilder builder = new StringBuilder();
+            builder.append(kinyuKikan.get金融機関名称() == null ? RString.EMPTY.toString() : kinyuKikan.get金融機関名称().toString())
+                    .append(kinyuKikanShiten.get支店名称() == null ? RString.EMPTY.toString() : kinyuKikanShiten.get支店名称().toString());
+            div.getTxtKinyuKikanName().setValue(new RString(builder.toString()));
+        }
     }
 
     private UzT0007CodeEntity 預金種別に対する略称(RString 口座種別) {

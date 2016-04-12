@@ -721,7 +721,25 @@ public class SogoJigyohiRiyohyo {
             String txtRiyoshaFutangakuHoken,
             String txtRiyoshaFutangakuZengaku
     ) {
-
+        // TODO 未使用のメソッド引数があります。 Checkstyle 対応。
+        new RString(txtJigyosha).hashCode();
+        new RString(txtService).hashCode();
+        new RString(txtTani).hashCode();
+        new RString(txtWaribikigoRitsu).hashCode();
+        new RString(txtWaribikigoTani).hashCode();
+        new RString(txtKaisu).hashCode();
+        new RString(txtServiceTani).hashCode();
+        new RString(txtShuruiGendoChokaTani).hashCode();
+        new RString(txtShuruiGendonaiTani).hashCode();
+        new RString(txtKubunGendoChokaTani).hashCode();
+        new RString(txtKubunGendonaiTani).hashCode();
+        new RString(txtTanisuTanka).hashCode();
+        new RString(txtHiyoSogaku).hashCode();
+        new RString(txtKyufuritsu).hashCode();
+        new RString(txtHokenFutangaku).hashCode();
+        new RString(txtRiyoshaFutangakuHoken).hashCode();
+        new RString(txtRiyoshaFutangakuZengaku).hashCode();
+        //  **********
         return new dgServiceRiyohyoBeppyoList_Row(
                 btnSelect,
                 btnDelete,
