@@ -11,6 +11,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 /**
  * 宛名取得PSM取得Entityクラスです。
  *
+ * @reamsid_L DBC-1030-210 xicongwang
  */
 @lombok.Getter
 @lombok.Setter
