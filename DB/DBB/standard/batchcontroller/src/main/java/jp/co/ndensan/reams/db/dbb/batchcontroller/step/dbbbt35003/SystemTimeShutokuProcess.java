@@ -13,20 +13,22 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
  * システム日時の取得クラスです。
+ *
+ * @reamsid_L DBB-0820-030 xuyue
  */
 public class SystemTimeShutokuProcess extends SimpleBatchProcessBase {
-    
+
     /**
      * OutputParameter用キー systemTime
      */
     public static final RString SYSTEM_TIME;
-    
-   static {
+
+    static {
         SYSTEM_TIME = new RString("systemTime");
     }
-   private OutputParameter<RDateTime> systemTime;
-   RDateTime バッチ起動時処理日時_年月日時分秒;
-   
+    private OutputParameter<RDateTime> systemTime;
+    RDateTime バッチ起動時処理日時_年月日時分秒;
+
     @Override
     protected void beforeExecute() {
         systemTime = new OutputParameter<>();

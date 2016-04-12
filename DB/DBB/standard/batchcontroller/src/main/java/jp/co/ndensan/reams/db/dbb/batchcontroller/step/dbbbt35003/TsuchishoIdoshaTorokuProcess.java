@@ -5,6 +5,8 @@ import jp.co.ndensan.reams.uz.uza.batch.process.SimpleBatchProcessBase;
 
 /**
  * 通知書発行後異動者の登録クラスです。
+ *
+ * @reamsid_L DBB-0820-030 xuyue
  */
 public class TsuchishoIdoshaTorokuProcess extends SimpleBatchProcessBase {
 
