@@ -102,15 +102,15 @@
             <if test = "isJigyoshaName">
                 <if test = "isZennpouitti">
                     AND
-                    dbT7060Kaigo."jigyoshaName" =  #{jigyoshaName}
+                    (dbT7060Kaigo."jigyoshaName" =  #{jigyoshaName}
                     OR
-                    dbT7060Kaigo."jigyoshaNameKana" =  #{jigyoshaName}
+                    dbT7060Kaigo."jigyoshaNameKana" =  #{jigyoshaName})
                 </if>
                 <if test = "!isZennpouitti">
                     AND
-                    dbT7060Kaigo."jigyoshaName" LIKE  #{jigyoshaName} || '%'
+                    (dbT7060Kaigo."jigyoshaName" LIKE  #{jigyoshaName} || '%'
                     OR
-                    dbT7060Kaigo."jigyoshaNameKana" LIKE   #{jigyoshaName} || '%'
+                    dbT7060Kaigo."jigyoshaNameKana" LIKE   #{jigyoshaName} || '%')
                 </if>
             </if>
             <if test = "isYubinNo">
@@ -187,15 +187,15 @@
             <if test = "isJigyoshaName">
                 <if test = "isZennpouitti">
                     AND
-                    dbT1005Kaigo."jigyoshaMeisho" =  #{jigyoshaName}
+                    (dbT1005Kaigo."jigyoshaMeisho" =  #{jigyoshaName}
                     OR
-                    dbT1005Kaigo."jigyoshaKanaMeisho" =  #{jigyoshaName}
+                    dbT1005Kaigo."jigyoshaKanaMeisho" =  #{jigyoshaName})
                 </if>
                 <if test = "!isZennpouitti">
                     AND
-                    dbT1005Kaigo."jigyoshaMeisho" LIKE  #{jigyoshaName} || '%'
+                    (dbT1005Kaigo."jigyoshaMeisho" LIKE  #{jigyoshaName} || '%'
                     OR
-                    dbT1005Kaigo."jigyoshaKanaMeisho" LIKE   #{jigyoshaName} || '%'
+                    dbT1005Kaigo."jigyoshaKanaMeisho" LIKE   #{jigyoshaName} || '%')
                 </if>
             </if>
             <if test = "isYubinNo">
@@ -260,15 +260,15 @@
             <if test = "isJigyoshaName">
                 <if test = "isZennpouitti">
                     AND
-                    dbT1005Kaigo."jigyoshaMeisho" =  #{jigyoshaName}
+                    (dbT1005Kaigo."jigyoshaMeisho" =  #{jigyoshaName}
                     OR
-                    dbT1005Kaigo."jigyoshaKanaMeisho" =  #{jigyoshaName}
+                    dbT1005Kaigo."jigyoshaKanaMeisho" =  #{jigyoshaName})
                 </if>
                 <if test = "!isZennpouitti">
                     AND
-                    dbT1005Kaigo."jigyoshaMeisho" LIKE  #{jigyoshaName} || '%'
+                    (dbT1005Kaigo."jigyoshaMeisho" LIKE  #{jigyoshaName} || '%'
                     OR
-                    dbT1005Kaigo."jigyoshaKanaMeisho" LIKE   #{jigyoshaName} || '%'
+                    dbT1005Kaigo."jigyoshaKanaMeisho" LIKE   #{jigyoshaName} || '%')
                 </if>
             </if>
             <if test = "isYubinNo">
