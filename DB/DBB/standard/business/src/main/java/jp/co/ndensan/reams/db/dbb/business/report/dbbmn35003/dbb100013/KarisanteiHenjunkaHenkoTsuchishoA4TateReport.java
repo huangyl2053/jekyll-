@@ -13,6 +13,8 @@ import lombok.NonNull;
 
 /**
  * 特別徴収平準化【A4縦タイプ】のReportです。
+ *
+ * @reamsid_L DBB-0820-050 xuyue
  */
 public class KarisanteiHenjunkaHenkoTsuchishoA4TateReport extends Report<KarisanteiHenjunkaHenkoTsuchishoA4TateReportSource> {
 

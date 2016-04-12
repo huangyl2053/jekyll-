@@ -1,12 +1,13 @@
 package jp.co.ndensan.reams.db.dbb.entity.report.dbbmn35003.dbb100011;
 
-
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.report.IReportSource;
 import jp.co.ndensan.reams.uz.uza.report.source.ReportItem;
 
 /**
  * 帳票「仮算定額変更【A4縦タイプ】」の項目を定義するクラスです。
+ *
+ * @reamsid_L DBB-0820-050 xuyue
  */
 public class KarisanteiHenkoTsuchishoA4TateReportSource implements IReportSource {
 // <editor-fold defaultstate="collapsed" desc="Generated Code">

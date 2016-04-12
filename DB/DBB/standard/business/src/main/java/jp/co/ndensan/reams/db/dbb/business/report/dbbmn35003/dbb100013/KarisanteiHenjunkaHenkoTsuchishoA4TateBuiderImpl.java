@@ -10,6 +10,8 @@ import jp.co.ndensan.reams.uz.uza.report.ReportEditorJoiner;
 
 /**
  * 特別徴収平準化【A4縦タイプ】Builderクラスです。
+ *
+ * @reamsid_L DBB-0820-050 xuyue
  */
 class KarisanteiHenjunkaHenkoTsuchishoA4TateBuiderImpl implements IKarisanteiHenjunkaHenkoTsuchishoA4TateBuilder {
 

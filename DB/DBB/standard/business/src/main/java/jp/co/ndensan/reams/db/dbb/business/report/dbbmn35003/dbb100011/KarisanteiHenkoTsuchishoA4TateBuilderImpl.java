@@ -10,6 +10,8 @@ import jp.co.ndensan.reams.uz.uza.report.ReportEditorJoiner;
 
 /**
  * 仮算定額変更【A4縦タイプ】Builderクラスです。
+ *
+ * @reamsid_L DBB-0820-050 xuyue
  */
 class KarisanteiHenkoTsuchishoA4TateBuilderImpl implements IKarisanteiHenkoTsuchishoA4TateBuilder {
 

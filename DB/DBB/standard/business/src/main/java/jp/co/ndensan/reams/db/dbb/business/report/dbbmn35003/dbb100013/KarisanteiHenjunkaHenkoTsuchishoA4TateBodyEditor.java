@@ -9,6 +9,8 @@ import jp.co.ndensan.reams.db.dbb.entity.report.dbbmn35003.dbb100013.KarisanteiH
 
 /**
  * 特別徴収平準化【A4縦タイプ】ボディEditorです。
+ *
+ * @reamsid_L DBB-0820-050 xuyue
  */
 class KarisanteiHenjunkaHenkoTsuchishoA4TateBodyEditor implements IKarisanteiHenjunkaHenkoTsuchishoA4TateEditor {
 

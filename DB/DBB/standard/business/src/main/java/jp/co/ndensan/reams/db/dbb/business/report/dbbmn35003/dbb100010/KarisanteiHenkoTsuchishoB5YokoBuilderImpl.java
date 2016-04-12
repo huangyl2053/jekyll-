@@ -10,6 +10,8 @@ import jp.co.ndensan.reams.uz.uza.report.ReportEditorJoiner;
 
 /**
  * 仮算定額変更【B5横タイプ】Builderクラスです。
+ *
+ * @reamsid_L DBB-0820-050 xuyue
  */
 class KarisanteiHenkoTsuchishoB5YokoBuilderImpl implements IKarisanteiHenkoTsuchishoB5YokoBuilder {
 

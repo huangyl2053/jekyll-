@@ -7,9 +7,10 @@ package jp.co.ndensan.reams.db.dbb.business.report.dbbmn35003.dbb100010;
 
 import jp.co.ndensan.reams.db.dbb.entity.report.dbbmn35003.dbb100010.KarisanteiHenkoTsuchishoB5YokoReportSource;
 
-
 /**
  * 仮算定額変更【B5横タイプ】ヘッダEditorです。
+ *
+ * @reamsid_L DBB-0820-050 xuyue
  */
 class KarisanteiHenkoTsuchishoB5YokoHeaderEditor implements IKarisanteiHenkoTsuchishoB5YokoEditor {
 

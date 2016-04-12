@@ -13,6 +13,8 @@ import lombok.NonNull;
 
 /**
  * 仮算定額変更【A4縦タイプ】のReportです。
+ *
+ * @reamsid_L DBB-0820-050 xuyue
  */
 public class KarisanteiHenkoTsuchishoA4TateReport extends Report<KarisanteiHenkoTsuchishoA4TateReportSource> {
 
