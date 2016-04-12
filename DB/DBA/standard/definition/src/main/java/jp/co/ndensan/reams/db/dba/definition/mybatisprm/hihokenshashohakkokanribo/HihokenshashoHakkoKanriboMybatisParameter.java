@@ -13,6 +13,8 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 /**
  *
  * 被保険者証発行管理簿_マッパー用のパラメータです。
+ *
+ * @reamsid_L DBA-0600-020 zhangguopeng
  */
 @lombok.Getter
 @SuppressWarnings("PMD.UnusedPrivateField")

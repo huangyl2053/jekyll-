@@ -14,6 +14,8 @@ import jp.co.ndensan.reams.uz.uza.batch.flow.IBatchFlowCommand;
 /**
  *
  * 被保険者証発行管理簿_バッチフロークラスです。
+ *
+ * @reamsid_L DBA-0600-020 zhangguopeng
  */
 public class HihokenshashoHakkoKanriboFlow extends BatchFlowBase<HihokenshashoHakkoKanriboBatchParameter> {
 
