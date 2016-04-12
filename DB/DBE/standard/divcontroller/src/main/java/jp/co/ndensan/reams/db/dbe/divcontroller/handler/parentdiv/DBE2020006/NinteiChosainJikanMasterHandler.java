@@ -12,11 +12,11 @@ import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2020006.Nint
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2020006.dgTimeScheduleList_Row;
 import jp.co.ndensan.reams.db.dbe.service.core.basic.ninteichosainjikan.NinteiChosainJikanMasterManager;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBE;
+import jp.co.ndensan.reams.db.dbz.business.core.basic.ChikuShichoson;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.NinteichosaSchedule;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.NinteichosaScheduleIdentifier;
 import jp.co.ndensan.reams.db.dbz.business.core.ninteichosaikkatsuinput.NinteiChosaIkkatsuInputModel;
 import jp.co.ndensan.reams.db.dbz.divcontroller.viewbox.ViewStateKeys;
-import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5224ChikuShichosonEntity;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.CodeShubetsu;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
@@ -1399,10 +1399,10 @@ public class NinteiChosainJikanMasterHandler {
 
     private List<KeyValueDataSource> get調査地区ドロップダウンリスト() {
         List<KeyValueDataSource> dataSource = new ArrayList();
-        List<DbT5224ChikuShichosonEntity> dbT5224entityList = NinteiChosainJikanMasterManager.createInstance().
+        List<ChikuShichoson> chikuShichosonList = NinteiChosainJikanMasterManager.createInstance().
                 getChikuShichosonList().records();
-        for (DbT5224ChikuShichosonEntity dbt5224entity : dbT5224entityList) {
-            dataSource.add(調査地区ドロップダウンリスト(dbt5224entity.getChosaChikuCode()));
+        for (ChikuShichoson chikuShichoson : chikuShichosonList) {
+            dataSource.add(調査地区ドロップダウンリスト(chikuShichoson.get調査地区コード()));
         }
         return dataSource;
     }
