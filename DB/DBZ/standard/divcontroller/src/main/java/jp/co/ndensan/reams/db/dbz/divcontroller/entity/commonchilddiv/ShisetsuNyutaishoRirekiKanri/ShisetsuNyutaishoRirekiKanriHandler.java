@@ -276,6 +276,15 @@ public class ShisetsuNyutaishoRirekiKanriHandler {
         }
     }
 
+    /**
+     * 施設入退所履歴の一覧を取得します。
+     *
+     * @return List<dgShisetsuNyutaishoRireki_Row> 施設入退所履歴の一覧
+     */
+    public List<dgShisetsuNyutaishoRireki_Row> get施設入退所履歴一覧() {
+        return div.getDgShisetsuNyutaishoRireki().getDataSource();
+    }
+
     private void 一覧の設定(List<KaigoHohenShisetsuBusiness> 施設入退所情報) {
         List<dgShisetsuNyutaishoRireki_Row> rowList = new ArrayList<>();
         for (KaigoHohenShisetsuBusiness 施設入退所 : 施設入退所情報) {
