@@ -44,9 +44,12 @@ import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
 
 /**
  * 住宅改修費支給申請一括審査・決定
+ *
+ * @reamsid_L DBC-0991-040 xicongwang
  */
 public class JutakukaishuSikyuShinseiIkkatuShinsaManager {
 
+    private static final RString 区分_コード = new RString("1");
     private final MapperProvider mapperProvider;
     private final DbT3049ShokanJutakuKaishuDac 償還払請求住宅改修Dac;
     private final DbT3034ShokanShinseiDac 償還払支給申請Dac;
@@ -164,7 +167,7 @@ public class JutakukaishuSikyuShinseiIkkatuShinsaManager {
                 kyufuentity.setShikibetsuCode(parameter.get識別コード());
                 kyufuentity.setShoKisaiHokenshaNo(parameter.get証記載保険者番号());
                 kyufuentity.setShinsaYM(parameter.get決定年月日().getYearMonth());
-                kyufuentity.setKyufuSakuseiKubunCode(new RString("1"));
+                kyufuentity.setKyufuSakuseiKubunCode(区分_コード);
 
                 List<ShokanJutakuKaishu> 住宅改修List
                         = getShokanJutakuKaishuList(parameter.get被保険者番号(),
