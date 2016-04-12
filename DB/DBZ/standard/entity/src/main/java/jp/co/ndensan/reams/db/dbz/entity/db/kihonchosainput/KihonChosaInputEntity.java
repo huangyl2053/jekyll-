@@ -12,6 +12,8 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 /**
  *
  * 認定調査基本情報Entityです。
+ *
+ * @reamsid_L DBE-3000-090 wangjie2
  */
 @lombok.Getter
 @lombok.Setter

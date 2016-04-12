@@ -15,6 +15,8 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 /**
  *
  * 認定調査基本情報を管理するビジネスです。
+ *
+ * @reamsid_L DBE-3000-090 wangjie2
  */
 public class KihonChosaInput implements Serializable {
 
