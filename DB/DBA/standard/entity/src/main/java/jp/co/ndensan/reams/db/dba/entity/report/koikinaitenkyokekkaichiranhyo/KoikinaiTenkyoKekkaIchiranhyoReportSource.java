@@ -7,6 +7,8 @@ import jp.co.ndensan.reams.uz.uza.report.source.ReportItem;
 /**
  *
  * 広域内転居結果一覧表のReportSource
+ *
+ * @reamsid_L DBU-1150-070 zhangguopeng
  */
 public class KoikinaiTenkyoKekkaIchiranhyoReportSource implements IReportSource {
 // <editor-fold defaultstate="collapsed" desc="Generated Code">

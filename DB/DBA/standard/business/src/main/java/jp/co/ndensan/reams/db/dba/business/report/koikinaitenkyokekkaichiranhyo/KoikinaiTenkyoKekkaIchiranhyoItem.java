@@ -9,6 +9,8 @@ import lombok.Getter;
 
 /**
  * 広域内転居結果一覧表のITEMです。
+ *
+ * @reamsid_L DBU-1150-070 zhangguopeng
  */
 @Getter
 @SuppressWarnings("PMD.UnusedPrivateField")
