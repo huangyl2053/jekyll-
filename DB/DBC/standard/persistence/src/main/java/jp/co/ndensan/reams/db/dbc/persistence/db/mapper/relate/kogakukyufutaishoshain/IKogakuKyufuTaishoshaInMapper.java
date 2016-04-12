@@ -14,6 +14,8 @@ import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7026ShinKyuHihokenshaNoHenk
 
 /**
  * 高額介護サービス費給付対象者取込みDB操作です。
+ *
+ * @reamsid_L DBC-0980-380 chenaoqi
  */
 public interface IKogakuKyufuTaishoshaInMapper {
 

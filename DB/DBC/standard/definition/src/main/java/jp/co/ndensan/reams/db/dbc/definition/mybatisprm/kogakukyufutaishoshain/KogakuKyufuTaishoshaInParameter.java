@@ -10,6 +10,8 @@ import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 
 /**
  * 新被保険者番号テーブルに対するMapperパラメータ
+ *
+ * @reamsid_L DBC-0980-360 chenaoqi
  */
 @lombok.Getter
 @SuppressWarnings("PMD.UnusedPrivateField")

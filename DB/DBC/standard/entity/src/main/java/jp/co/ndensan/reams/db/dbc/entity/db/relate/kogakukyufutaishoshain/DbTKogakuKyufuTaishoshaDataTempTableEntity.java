@@ -20,6 +20,7 @@ import jp.co.ndensan.reams.uz.uza.util.db.annotation.TempTableColumnOrder;
 /**
  * 高額介護サービス費給付対象者一時テーブルのEntity
  *
+ * @reamsid_L DBC-0980-370 chenaoqi
  */
 @lombok.Setter
 @lombok.Getter

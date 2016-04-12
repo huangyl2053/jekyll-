@@ -14,7 +14,7 @@ import jp.co.ndensan.reams.uz.uza.batch.flow.IBatchFlowCommand;
 /**
  * 広域内転居結果一覧表_バッチフ処理クラスです
  *
- * @author 陳奥奇
+ * @reamsid_L DBU-1150-020 chenaoqi
  */
 public class HiroshimaDomainFlow extends BatchFlowBase<HiroshimaDomainBatchParameter> {
 

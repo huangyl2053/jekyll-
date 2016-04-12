@@ -12,7 +12,7 @@ import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 /**
  * 福祉用具購入費支給申請一括審査・決定パラメータ
  *
- * @author 陳奥奇
+ * @reamsid_L DBC-1021-100 chenaoqi
  */
 @lombok.Getter
 @SuppressWarnings("PMD.UnusedPrivateField")

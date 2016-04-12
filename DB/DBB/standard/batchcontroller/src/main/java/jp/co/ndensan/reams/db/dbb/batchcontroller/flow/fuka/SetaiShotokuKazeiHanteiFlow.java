@@ -13,6 +13,8 @@ import jp.co.ndensan.reams.uz.uza.batch.flow.IBatchFlowCommand;
 
 /**
  * 世帯員把握（バッチ）のバッチフロークラスです。
+ *
+ * @reamsid_L DBB-0640-010 chenaoqi
  */
 public class SetaiShotokuKazeiHanteiFlow extends BatchFlowBase<SetaiShotokuKazeiHanteiBatchParameter> {
 

@@ -51,6 +51,7 @@ import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 /**
  * 福祉用具購入費支給決定給付実績編集
  *
+ * @reamsid_L DBC-1020-050 chenaoqi
  */
 public class FukushiyoguKonyuhiShikyuKetteiKyufuJissekiHenshu {
 

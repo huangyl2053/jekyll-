@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbc.service.core.kogakukyufutaishoshain;
+package jp.co.ndensan.reams.db.dbc.service.core.kogakukyufutaishoshatorikomidatahenshu;
 
 import java.util.List;
 import jp.co.ndensan.reams.db.dbc.definition.core.saishori.SaiShoriKubun;
@@ -21,6 +21,8 @@ import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 
 /**
  * 高額介護サービス費給付対象者取込データ編集
+ *
+ * @reamsid_L DBC-0980-380 chenaoqi
  */
 public class KogakuKyufuTaishoshaTorikomiDataHenshu {
 

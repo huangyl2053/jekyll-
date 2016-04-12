@@ -38,6 +38,7 @@ import jp.co.ndensan.reams.uz.uza.report.source.breaks.PageBreaker;
 /**
  * 高額介護サービス費給付対象者取込の帳票出力
  *
+ * @reamsid_L DBC-0980-360 chenaoqi
  */
 public class KogakuKyufuTaishoshaInWriteReportProcess extends BatchKeyBreakBase<DbTKogakuKyufuTaishoshaDataTempTableEntity> {
 
@@ -56,7 +57,8 @@ public class KogakuKyufuTaishoshaInWriteReportProcess extends BatchKeyBreakBase<
     }
 
     private static final RString KAI_PAGE_HIHOKENSHA = new RString("hokenshaNo");
-    List<KogakuKyufuTaishoshaInEntity> resultList;
+
+    private List<KogakuKyufuTaishoshaInEntity> resultList;
     private static final RString READ_DATA_ID = new RString("jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate."
             + "kogakukyufutaishoshain.IKogakuKyufuTaishoshaInMapper.select一時テーブル");
 

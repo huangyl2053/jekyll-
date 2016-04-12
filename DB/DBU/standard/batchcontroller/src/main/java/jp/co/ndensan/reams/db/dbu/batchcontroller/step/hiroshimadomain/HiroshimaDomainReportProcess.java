@@ -58,7 +58,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.propertyenum.DisplayTimeFormat;
 /**
  * 広域内転居結果一覧表_バッチフ処理クラスです
  *
- *
+ * @reamsid_L DBU-1150-020 chenaoqi
  */
 public class HiroshimaDomainReportProcess extends BatchProcessBase<HiroshimaDomainRelateEntity> {
 

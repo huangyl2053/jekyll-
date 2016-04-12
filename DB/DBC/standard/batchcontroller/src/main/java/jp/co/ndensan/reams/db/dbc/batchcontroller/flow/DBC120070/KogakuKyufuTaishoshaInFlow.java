@@ -24,6 +24,8 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
  * 高額介護サービス費給付対象者取込みのバッチ処理フロー
+ *
+ * @reamsid_L DBC-0980-360 chenaoqi
  */
 public class KogakuKyufuTaishoshaInFlow extends BatchFlowBase<KogakuKyufuTaishoshaInBatchParameter> {
 

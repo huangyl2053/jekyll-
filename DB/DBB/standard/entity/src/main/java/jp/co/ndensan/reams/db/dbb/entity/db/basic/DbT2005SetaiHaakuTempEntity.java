@@ -15,6 +15,8 @@ import jp.co.ndensan.reams.uz.uza.util.db.TableName;
 
 /**
  * 世帯員把握テーブルのエンティティクラスです。
+ *
+ * @reamsid_L DBB-0640-020 chenaoqi
  */
 public class DbT2005SetaiHaakuTempEntity extends DbTableEntityBase<DbT2005SetaiHaakuTempEntity> implements IDbAccessable {
 // <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.4.2">

@@ -9,6 +9,8 @@ import jp.co.ndensan.reams.db.dbb.entity.db.relate.tokuchokarisanteifuka.BatchTo
 
 /**
  * バッチ出力帳票一覧Entityクラスです。
+ *
+ * @reamsid_L DBB-0790-020 chenaoqi
  */
 @lombok.Getter
 @lombok.Setter

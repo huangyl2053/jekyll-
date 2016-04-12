@@ -4,9 +4,12 @@ import jp.co.ndensan.reams.uz.uza.util.db.IColumnDefinition;
 
 /**
  * 世帯員所得情報一時テーブルの項目定義クラスです。
+ *
+ * @reamsid_L DBB-0640-020 chenaoqi
  */
 public enum DbT2019SetaiSudeTemp implements IColumnDefinition {
 // <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.4.2">
+
     /**
      * 被保険者番号
      */
@@ -37,13 +40,13 @@ public enum DbT2019SetaiSudeTemp implements IColumnDefinition {
     honninKubun(1, 0),
     /**
      * 課税区分（住民税減免前）
-     * <br/>1：課税　2：非課税　3：未申告　4：調査中　5：課税取消　
+     * <br/>1：課税　2：非課税　3：未申告　4：調査中　5：課税取消
      * <br/>※保険料賦課の際に参照する
      */
     kazeiKubun(1, 0),
     /**
      * 課税区分（住民税減免後）
-     * <br/>1：課税　2：非課税　3：未申告　4：調査中　5：課税取消　
+     * <br/>1：課税　2：非課税　3：未申告　4：調査中　5：課税取消
      * <br/>※給付（高額等）で参照する
      */
     kazeiKubunGemmenGo(1, 0),
@@ -82,7 +85,7 @@ public enum DbT2019SetaiSudeTemp implements IColumnDefinition {
 
     /**
      * 項目の最大長のgetメソッドです。
-     * 
+     *
      * @return 項目の最大長
      */
     public int getMaxLength() {
@@ -91,7 +94,7 @@ public enum DbT2019SetaiSudeTemp implements IColumnDefinition {
 
     /**
      * 小数点以下の桁数のgetメソッドです。
-     * 
+     *
      * @return 小数点以下の桁数
      */
     public int getScale() {

@@ -6,7 +6,7 @@
 package jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC120070;
 
 import java.util.List;
-import jp.co.ndensan.reams.db.dbc.service.core.kogakukyufutaishoshain.KogakuKyufuTaishoshaTorikomiDataHenshu;
+import jp.co.ndensan.reams.db.dbc.service.core.kogakukyufutaishoshatorikomidatahenshu.KogakuKyufuTaishoshaTorikomiDataHenshu;
 import jp.co.ndensan.reams.uz.uza.batch.process.InputParameter;
 import jp.co.ndensan.reams.uz.uza.batch.process.SimpleBatchProcessBase;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
@@ -14,6 +14,8 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
  * 高額介護サービス費給付対象者取込のDB登録・更新
+ *
+ * @reamsid_L DBC-0980-360 chenaoqi
  */
 public class KogakuKyufuTaishoshaInUpdateProcess extends SimpleBatchProcessBase {
 

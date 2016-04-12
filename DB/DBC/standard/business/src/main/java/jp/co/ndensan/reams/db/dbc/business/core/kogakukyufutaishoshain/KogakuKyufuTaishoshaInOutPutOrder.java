@@ -10,6 +10,8 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
  * 高額介護サービス費給付対象者取込みenum
+ *
+ * @reamsid_L DBC-0980-360 chenaoqi
  */
 public enum KogakuKyufuTaishoshaInOutPutOrder implements IReportItems {
 

@@ -45,7 +45,7 @@ import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 /**
  * 福祉用具購入費支給申請一括審査・決定
  *
- * @author 陳奥奇
+ * @reamsid_L DBC-1021-100 chenaoqi
  */
 public class FukushiyoguKonyuhiShikyuIkkatuShinsa {
 

@@ -18,6 +18,8 @@ import jp.co.ndensan.reams.uz.uza.util.config.BusinessConfig;
 
 /**
  * 世帯員把握（バッチ）クラスです。
+ *
+ * @reamsid_L DBB-0640-010 chenaoqi
  */
 public class SetaiShotokuKazeiHanteiUpdateProcess extends SimpleBatchProcessBase {
 

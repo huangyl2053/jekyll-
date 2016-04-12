@@ -12,7 +12,7 @@ import jp.co.ndensan.reams.db.dbu.entity.db.relate.hiroshimadomain.HiroshimaDoma
 /**
  * 広域内転居結果一覧表のマッパーインタフェースです。
  *
- *
+ * @reamsid_L DBU-1150-020 chenaoqi
  */
 public interface IHiroshimaDomainMapper {
 

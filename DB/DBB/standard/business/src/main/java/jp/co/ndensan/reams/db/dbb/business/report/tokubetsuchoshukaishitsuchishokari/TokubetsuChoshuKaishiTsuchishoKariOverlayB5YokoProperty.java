@@ -12,6 +12,8 @@ import jp.co.ndensan.reams.uz.uza.report.ReportPropertyBase;
 
 /**
  * TokubetsuChoshuKaishiTsuchishoKariOverlayB5YokoPropertyクラスです。
+ *
+ * @reamsid_L DBB-0790-050 chenaoqi
  */
 public class TokubetsuChoshuKaishiTsuchishoKariOverlayB5YokoProperty
         extends ReportPropertyBase<TokubetsuChoshuKaishiTsuchishoKariOverlayB5YokoSource> {

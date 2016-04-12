@@ -26,6 +26,7 @@ import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
 /**
  * 世帯所得・課税判定（バッチ）
  *
+ * @reamsid_L DBB-0640-020 chenaoqi
  */
 public class SetaiShotokuKazeiHantei {
 

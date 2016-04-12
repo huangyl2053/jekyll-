@@ -13,8 +13,9 @@ import jp.co.ndensan.reams.uz.uza.report.ReportLineRecord;
 import jp.co.ndensan.reams.uz.uza.report.source.breaks.PageBreaker;
 
 /**
- *
  * 高額介護サービス費給付対象者取込みPageBreak
+ *
+ * @reamsid_L DBC-0980-360 chenaoqi
  */
 public class KogakuKyufuTaishoshaInPageBreak extends PageBreaker<KogakuKyufuTaishoshaIchiranSource> {
 

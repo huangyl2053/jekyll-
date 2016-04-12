@@ -13,6 +13,8 @@ import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT1001HihokenshaDaichoEntity;
 
 /**
  * 未審査申請一覧取得
+ *
+ * @reamsid_L DBC-1021-100 chenaoqi
  */
 public interface IFukushiyoguKonyuhiShikyuIkkatuShinsaMapper {
 

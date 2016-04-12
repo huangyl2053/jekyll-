@@ -27,6 +27,8 @@ import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 /**
  * ビジネス設計_DBBBZ33001_特徴仮算定賦課
  *
+ * @reamsid_L DBB-0790-020 chenaoqi
+ *
  */
 public class TokuchoKariSanteiFuka {
 

@@ -12,6 +12,7 @@ import jp.co.ndensan.reams.uz.uza.math.Decimal;
 /**
  * 償還払（居宅）支給限度額判定
  *
+ * @reamsid_L DBC-1030-190 chenaoqi
  */
 public class ShokanbaraiJutakuShikyuGendogakuHanteiCheck {
 
