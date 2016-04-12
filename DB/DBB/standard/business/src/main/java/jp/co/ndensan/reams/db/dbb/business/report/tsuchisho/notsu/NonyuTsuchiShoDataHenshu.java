@@ -46,6 +46,8 @@ import jp.co.ndensan.reams.uz.uza.util.config.BusinessConfig;
 /**
  *
  * 納入通知書データ編集のクラスです。
+ *
+ * @reamsid_L DBB-9110-010 wangjie2
  */
 public class NonyuTsuchiShoDataHenshu {
 
