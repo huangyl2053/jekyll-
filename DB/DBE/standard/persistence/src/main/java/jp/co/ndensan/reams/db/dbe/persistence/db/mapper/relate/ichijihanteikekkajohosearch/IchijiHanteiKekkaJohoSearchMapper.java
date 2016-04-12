@@ -14,6 +14,8 @@ import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5211NinteichosahyoChosaItem
 /**
  *
  * 一次判定結果情報取得 Mapper
+ *
+ * @reamsid_L DBE-3000-240 wangjie2
  */
 public interface IchijiHanteiKekkaJohoSearchMapper {
 

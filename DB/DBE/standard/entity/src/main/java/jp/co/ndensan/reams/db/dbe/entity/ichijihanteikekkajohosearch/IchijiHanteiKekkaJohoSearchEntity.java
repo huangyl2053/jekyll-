@@ -11,6 +11,8 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 /**
  *
  * 一次判定結果情報です。
+ *
+ * @reamsid_L DBE-3000-240 wangjie2
  */
 @lombok.Getter
 @lombok.Setter
