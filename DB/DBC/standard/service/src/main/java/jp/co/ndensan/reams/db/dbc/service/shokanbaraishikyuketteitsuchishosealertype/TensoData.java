@@ -17,7 +17,7 @@ import lombok.Getter;
  */
 @Getter
 @SuppressWarnings("PMD.UnusedPrivateField")
-public class TensoData {
+public final class TensoData {
 
     private final List<ShokanKetteiTsuchiShoSealer> 帳票ソースデータ;
     private final IDaikoPrint 代行プリント送付票;

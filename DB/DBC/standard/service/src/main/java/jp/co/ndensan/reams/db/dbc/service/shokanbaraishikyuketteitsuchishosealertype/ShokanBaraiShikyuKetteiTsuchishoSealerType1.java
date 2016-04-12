@@ -6,6 +6,7 @@
 package jp.co.ndensan.reams.db.dbc.service.shokanbaraishikyuketteitsuchishosealertype;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 import jp.co.ndensan.reams.db.dbc.business.core.shokanketteitsuchishoshiharai.ShokanKetteiTsuchiShoShiharai;
@@ -217,7 +218,7 @@ public class ShokanBaraiShikyuKetteiTsuchishoSealerType1 {
                 ReportIdDBC.DBC100004.getReportName(),
                 ReportIdDBC.DBC100004.getReportId().value(),
                 帳票名, ページ数, 抽出条件,
-                出力順項目, 改ページ項目, null);
+                出力順項目, 改ページ項目, Collections.<RString>emptyList());
         IDaikoPrint daikoPrint = DaikoPrintFactory.createInstance(daikoPrintItem);
         return new TensoData(帳票ソースデータ, daikoPrint);
     }
@@ -362,17 +363,17 @@ public class ShokanBaraiShikyuKetteiTsuchishoSealerType1 {
         ketteiTsuchiShoSealer.setMochimono1(get帳票制御汎用(帳票制御汎用Manager, 帳票制御汎用キー_持ち物内容文言１));
         ketteiTsuchiShoSealer.setMochimono2(get帳票制御汎用(帳票制御汎用Manager, 帳票制御汎用キー_持ち物内容文言２));
         ketteiTsuchiShoSealer.setMochimono3(get帳票制御汎用(帳票制御汎用Manager, 帳票制御汎用キー_持ち物内容文言３));
-        被保険者番号 = 被保険者番号.padRight(RString.HALF_SPACE, TEN);
-        ketteiTsuchiShoSealer.setHihokenshaNo1(被保険者番号.substring(ZERO, ONE));
-        ketteiTsuchiShoSealer.setHihokenshaNo2(被保険者番号.substring(ONE, TWO));
-        ketteiTsuchiShoSealer.setHihokenshaNo3(被保険者番号.substring(TWO, THREE));
-        ketteiTsuchiShoSealer.setHihokenshaNo4(被保険者番号.substring(THREE, FOUR));
-        ketteiTsuchiShoSealer.setHihokenshaNo5(被保険者番号.substring(FOUR, FIVE));
-        ketteiTsuchiShoSealer.setHihokenshaNo6(被保険者番号.substring(FIVE, SIX));
-        ketteiTsuchiShoSealer.setHihokenshaNo7(被保険者番号.substring(SIX, SEVEN));
-        ketteiTsuchiShoSealer.setHihokenshaNo8(被保険者番号.substring(SEVEN, EIGHT));
-        ketteiTsuchiShoSealer.setHihokenshaNo9(被保険者番号.substring(EIGHT, NINE));
-        ketteiTsuchiShoSealer.setHihokenshaNo10(被保険者番号.substring(NINE));
+        RString temp_被保険者番号 = 被保険者番号.padRight(RString.HALF_SPACE, TEN);
+        ketteiTsuchiShoSealer.setHihokenshaNo1(temp_被保険者番号.substring(ZERO, ONE));
+        ketteiTsuchiShoSealer.setHihokenshaNo2(temp_被保険者番号.substring(ONE, TWO));
+        ketteiTsuchiShoSealer.setHihokenshaNo3(temp_被保険者番号.substring(TWO, THREE));
+        ketteiTsuchiShoSealer.setHihokenshaNo4(temp_被保険者番号.substring(THREE, FOUR));
+        ketteiTsuchiShoSealer.setHihokenshaNo5(temp_被保険者番号.substring(FOUR, FIVE));
+        ketteiTsuchiShoSealer.setHihokenshaNo6(temp_被保険者番号.substring(FIVE, SIX));
+        ketteiTsuchiShoSealer.setHihokenshaNo7(temp_被保険者番号.substring(SIX, SEVEN));
+        ketteiTsuchiShoSealer.setHihokenshaNo8(temp_被保険者番号.substring(SEVEN, EIGHT));
+        ketteiTsuchiShoSealer.setHihokenshaNo9(temp_被保険者番号.substring(EIGHT, NINE));
+        ketteiTsuchiShoSealer.setHihokenshaNo10(temp_被保険者番号.substring(NINE));
         return setKetteiTsuchiShoSealer(ketteiTsuchiShoSealer, ninshoshaSource, business, atesaki);
     }
 

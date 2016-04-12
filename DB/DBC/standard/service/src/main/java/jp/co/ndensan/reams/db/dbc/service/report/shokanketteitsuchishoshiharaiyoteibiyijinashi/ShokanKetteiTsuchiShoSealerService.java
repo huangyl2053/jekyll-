@@ -10,23 +10,10 @@ import java.util.List;
 import jp.co.ndensan.reams.db.dbc.business.report.shokanketteitsuchishosealer.ShokanKetteiTsuchiShoSealerItem;
 import jp.co.ndensan.reams.db.dbc.business.report.shokanketteitsuchishosealer.ShokanKetteiTsuchiShoSealerProperty;
 import jp.co.ndensan.reams.db.dbc.business.report.shokanketteitsuchishosealer.ShokanKetteiTsuchiShoSealerReport;
+import jp.co.ndensan.reams.db.dbc.definition.batchprm.shokanketteitsuchishosealer.ShokanKetteiTsuchiShoSealer;
 import jp.co.ndensan.reams.db.dbc.entity.report.source.shokanketteitsuchishoshiharaiyotei.ShokanKetteiTsuchiShoSealerReportSource;
-import jp.co.ndensan.reams.ur.urz.business.report.parts.ninshosha.INinshoshaSourceBuilder;
-import jp.co.ndensan.reams.ur.urz.entity.report.parts.ninshosha.NinshoshaSource;
-import jp.co.ndensan.reams.ur.urz.service.report.parts.ninshosha.INinshoshaSourceBuilderCreator;
-import jp.co.ndensan.reams.ur.urz.service.report.sourcebuilder.ReportSourceBuilders;
-import jp.co.ndensan.reams.uz.uza.biz.GyomuCode;
-import jp.co.ndensan.reams.uz.uza.lang.RDate;
-import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.report.IReportProperty;
-import jp.co.ndensan.reams.uz.uza.report.IReportSource;
-import jp.co.ndensan.reams.uz.uza.report.Report;
-import jp.co.ndensan.reams.uz.uza.report.ReportAssembler;
-import jp.co.ndensan.reams.uz.uza.report.ReportAssemblerBuilder;
-import jp.co.ndensan.reams.uz.uza.report.ReportManager;
-import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
+import jp.co.ndensan.reams.uz.uza.report.Printer;
 import jp.co.ndensan.reams.uz.uza.report.SourceDataCollection;
-import jp.co.ndensan.reams.uz.uza.report.source.breaks.BreakAggregator;
 
 /**
  * 償還払支給（不支給）決定通知書（ｼｰﾗﾀｲﾌﾟ）Printerです。
@@ -41,49 +28,24 @@ public class ShokanKetteiTsuchiShoSealerService {
      * @param itemList 償還払支給（不支給）決定通知書（ｼｰﾗﾀｲﾌﾟ）_帳票クラスパラメータクラス
      * @return {@link SourceDataCollection}
      */
-    public SourceDataCollection print(List<ShokanKetteiTsuchiShoSealerItem> itemList) {
+    public SourceDataCollection print(List<ShokanKetteiTsuchiShoSealer> itemList) {
 
         ShokanKetteiTsuchiShoSealerProperty property = new ShokanKetteiTsuchiShoSealerProperty();
-        try (ReportManager reportManager = new ReportManager()) {
-            try (ReportAssembler<ShokanKetteiTsuchiShoSealerReportSource> assembler = createAssembler(property, reportManager)) {
-                INinshoshaSourceBuilderCreator builderCreator = ReportSourceBuilders.ninshoshaSourceBuilder();
-                INinshoshaSourceBuilder builder = builderCreator.create(GyomuCode.DB介護保険, RString.EMPTY,
-                        RDate.getNowDate(), assembler.getImageFolderPath());
-                for (ShokanKetteiTsuchiShoSealerReport report : toReports(itemList, builder.buildSource())) {
-                    ReportSourceWriter<ShokanKetteiTsuchiShoSealerReportSource> reportWriter = new ReportSourceWriter(assembler);
-                    report.writeBy(reportWriter);
-                }
-            }
-            return reportManager.publish();
-        }
+        return new Printer<ShokanKetteiTsuchiShoSealerReportSource>().spool(property, toReports(itemList));
     }
 
-    private List<ShokanKetteiTsuchiShoSealerReport> toReports(
-            List<ShokanKetteiTsuchiShoSealerItem> itemList, NinshoshaSource ninshoshaSource) {
+    private static List<ShokanKetteiTsuchiShoSealerReport> toReports(List<ShokanKetteiTsuchiShoSealer> itemList) {
         List<ShokanKetteiTsuchiShoSealerReport> list = new ArrayList<>();
-        List<ShokanKetteiTsuchiShoSealerItem> newItemList = new ArrayList<>();
-        for (ShokanKetteiTsuchiShoSealerItem item : itemList) {
-            newItemList.add(setShokanKetteiTsuchiShoSealerReport(item, ninshoshaSource));
+        List<ShokanKetteiTsuchiShoSealerItem> item1list = new ArrayList<>();
+        for (ShokanKetteiTsuchiShoSealer item : itemList) {
+            item1list.add(setShokanKetteiTsuchiShoSealerReport(item));
         }
-        list.add(ShokanKetteiTsuchiShoSealerReport.createFrom(newItemList));
+        list.add(ShokanKetteiTsuchiShoSealerReport.createFrom(item1list));
         return list;
     }
 
-    private static <T extends IReportSource, R extends Report<T>> ReportAssembler<T>
-            createAssembler(IReportProperty<T> property, ReportManager manager) {
-
-        ReportAssemblerBuilder builder = manager.reportAssembler(property.reportId().value(), property.subGyomuCode());
-        for (BreakAggregator<? super T, ?> breaks : property.breakers()) {
-            builder.addBreak(breaks);
-        }
-        builder.isHojinNo(property.containsHojinNo());
-        builder.isKojinNo(property.containsKojinNo());
-        return builder.<T>create();
-    }
-
-    private ShokanKetteiTsuchiShoSealerItem
-            setShokanKetteiTsuchiShoSealerReport(ShokanKetteiTsuchiShoSealerItem item,
-                    NinshoshaSource ninshoshaSource) {
+    private static ShokanKetteiTsuchiShoSealerItem
+            setShokanKetteiTsuchiShoSealerReport(ShokanKetteiTsuchiShoSealer item) {
 
         return new ShokanKetteiTsuchiShoSealerItem(
                 item.getTsuban(),
@@ -124,15 +86,15 @@ public class ShokanKetteiTsuchiShoSealerService {
                 item.getBangoTitle(),
                 item.getKouzaNo(),
                 item.getKouzaMeigi(),
-                ninshoshaSource.hakkoYMD,
-                ninshoshaSource.denshiKoin,
-                ninshoshaSource.ninshoshaYakushokuMei,
-                ninshoshaSource.ninshoshaYakushokuMei1,
-                ninshoshaSource.koinMojiretsu,
-                ninshoshaSource.ninshoshaYakushokuMei2,
-                ninshoshaSource.ninshoshaShimeiKakenai,
-                ninshoshaSource.ninshoshaShimeiKakeru,
-                ninshoshaSource.koinShoryaku,
+                item.getHakkoYMD(),
+                item.getDenshiKoin(),
+                item.getNinshoshaYakushokuMei(),
+                item.getNinshoshaYakushokuMei1(),
+                item.getKoinMojiretsu(),
+                item.getNinshoshaYakushokuMei2(),
+                item.getNinshoshaShimeiKakenai(),
+                item.getNinshoshaShimeiKakeru(),
+                item.getKoinShoryaku(),
                 item.getYubinNo(),
                 item.getGyoseiku1(),
                 item.getJusho4(),
