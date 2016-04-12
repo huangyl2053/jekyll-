@@ -13,8 +13,9 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 
 /**
- *
  * 住宅改修事前申請データMyBatisパラメータクラスです。
+ *
+ * @reamsid_L DBC-0990-070 xicongwang
  */
 @lombok.Getter
 @lombok.Setter

@@ -11,6 +11,7 @@ import jp.co.ndensan.reams.db.dbc.entity.db.relate.jutakukaishujizenshinseitsuch
 /**
  * 事業者情報取得
  *
+ * @reamsid_L DBC-0990-070 xicongwang
  */
 public interface IJutakuKaishuJizenShinseiTsuchishoMapper {
 
