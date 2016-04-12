@@ -15,6 +15,8 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 
 /**
  * このコードはツールによって生成されました。 このファイルへの変更は、再生成時には損失するため 不正な動作の原因になります。
+ *
+ * @reamsid_L DBA-0021-010 liangbc
  */
 public class KaigoChohyoShutsuryokujunDiv extends Panel implements IKaigoChohyoShutsuryokujunDiv {
 

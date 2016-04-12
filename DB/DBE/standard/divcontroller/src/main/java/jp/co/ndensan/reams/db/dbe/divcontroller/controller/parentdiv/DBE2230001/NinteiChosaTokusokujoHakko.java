@@ -17,6 +17,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RDate;
 /**
  * 認定調査督促状発行のコントローラです。
  *
+ * @reamsid_L DBE-0030-010 liangbc
  */
 public class NinteiChosaTokusokujoHakko {
 

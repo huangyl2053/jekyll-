@@ -6,7 +6,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 /**
  * 給付実績情報作成区分を表す列挙型です。
  *
- * @author LDNS
+ * @reamsid_L DBA-9999-023 liangbc
  */
 public enum KyufuSakuseiKubun {
 

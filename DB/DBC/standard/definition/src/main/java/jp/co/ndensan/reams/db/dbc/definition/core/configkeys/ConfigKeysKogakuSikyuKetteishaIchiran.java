@@ -6,7 +6,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 /**
  * 高額介護サービス費支給不支給決定者一覧表情報コンフィグキーを表す列挙型です。
  *
- * @author LDNS
+ * @reamsid_L DBA-9999-023 liangbc
  */
 public enum ConfigKeysKogakuSikyuKetteishaIchiran {
 

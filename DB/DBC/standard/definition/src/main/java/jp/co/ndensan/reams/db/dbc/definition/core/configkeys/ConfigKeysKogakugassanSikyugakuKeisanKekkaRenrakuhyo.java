@@ -6,7 +6,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 /**
  * 高額合算支給額計算結果連絡票情報コンフィグキーを表す列挙型です。
  *
- * @author LDNS
+ * @reamsid_L DBA-9999-023 liangbc
  */
 public enum ConfigKeysKogakugassanSikyugakuKeisanKekkaRenrakuhyo {
 

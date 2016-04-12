@@ -15,6 +15,7 @@ import jp.co.ndensan.reams.uz.uza.util.config.BusinessConfig;
 /**
  * 介護Config取得のビジネスクラスです。
  *
+ * @reamsid_L DBE-0270-010 liangbc
  */
 public class KaigoConfigListShutoku {
 

@@ -54,6 +54,8 @@ import jp.co.ndensan.reams.uz.uza.util.config.BusinessConfig;
 
 /**
  * 介護認定審査会対象者割付クラスです。
+ *
+ * @reamsid_L DBE-0140-010 liangbc
  */
 public class TaishouWaritsukeHandler {
 

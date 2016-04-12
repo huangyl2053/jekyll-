@@ -18,6 +18,7 @@ import jp.co.ndensan.reams.uz.uza.util.config.BusinessConfig;
 /**
  * 認定調査督促状発行のHandlerクラスです。
  *
+ * @reamsid_L DBE-0030-010 liangbc
  */
 public class NinteiChosaTokusokujoHakkoHandler {
 

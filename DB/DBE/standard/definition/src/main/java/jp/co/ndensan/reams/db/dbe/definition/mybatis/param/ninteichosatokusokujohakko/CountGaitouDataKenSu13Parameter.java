@@ -11,6 +11,8 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
  * 認定調査督促状発行のMyBatis用パラメータクラスです。
+ *
+ * @reamsid_L DBE-0030-010 liangbc
  */
 @lombok.Getter
 @SuppressWarnings("PMD.UnusedPrivateField")

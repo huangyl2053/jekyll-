@@ -11,6 +11,8 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
  * 介護資格基本commonchilddiv
+ *
+ * @reamsid_L DBA-0030-012 liangbc
  */
 public class KaigoShikakuKihon {
 
