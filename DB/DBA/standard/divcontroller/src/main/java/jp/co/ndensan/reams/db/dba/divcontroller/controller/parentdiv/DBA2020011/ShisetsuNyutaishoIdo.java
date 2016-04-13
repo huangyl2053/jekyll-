@@ -8,6 +8,7 @@ import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.ShisetsuNy
 import jp.co.ndensan.reams.db.dbz.divcontroller.viewbox.ViewStateKeys;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrInformationMessages;
+import jp.co.ndensan.reams.ur.urz.definition.message.UrQuestionMessages;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.exclusion.LockingKey;
@@ -17,11 +18,12 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.message.IMessageGettable;
 import jp.co.ndensan.reams.uz.uza.message.IValidationMessage;
 import jp.co.ndensan.reams.uz.uza.message.Message;
+import jp.co.ndensan.reams.uz.uza.message.MessageDialogSelectedResult;
+import jp.co.ndensan.reams.uz.uza.ui.servlets.ResponseHolder;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 
 /**
- *
- * 施設入退所異動Divのコントローラです。QA-1017,QA1018確認中 王暁冬 2016/04/01
+ * 施設入退所異動Divのコントローラです。QA-1017確認中 王暁冬 2016/04/01
  *
  * @reamsid_L DBA-0360-040 wangxiaodong
  */
@@ -37,6 +39,7 @@ public class ShisetsuNyutaishoIdo {
      */
     public ResponseData onLoad(ShisetsuNyutaishoIdoDiv div) {
         ResponseData<ShisetsuNyutaishoIdoDiv> response = new ResponseData<>();
+
         ShikibetsuCode 識別コード = ViewStateHolder.get(ViewStateKeys.施設入退所履歴_識別コード, ShikibetsuCode.class);
         new ShisetsuNyutaishoIdoHandler(div).initLoad(識別コード);
         if (!RealInitialLocker.tryGetLock(前排他ロックキー)) {
@@ -70,11 +73,18 @@ public class ShisetsuNyutaishoIdo {
         if (is履歴期間重複(div)) {
             throw new ApplicationException(UrErrorMessages.期間が不正_追加メッセージあり２.getMessage().replace("入所日").replace("退所日"));
         }
-        div.getShisetsuNyutaishoRireki().getCcdShisetsuNyutaishoRirekiKanri().saveShisetsuNyutaisho();
-        RealInitialLocker.release(前排他ロックキー);
-        div.getKaigoKanryoMessageOya().getCcdKaigoKanryoMessage().setSuccessMessage(
-                new RString(UrInformationMessages.保存終了.getMessage().evaluate()));
-        return ResponseData.of(div).setState(DBA2020011StateName.完了状態);
+        if (!ResponseHolder.isReRequest()) {
+            return ResponseData.of(div).addMessage(UrQuestionMessages.処理実行の確認.getMessage()).respond();
+        }
+        if (new RString(UrQuestionMessages.処理実行の確認.getMessage().getCode()).equals(ResponseHolder.getMessageCode())
+                && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
+            div.getShisetsuNyutaishoRireki().getCcdShisetsuNyutaishoRirekiKanri().saveShisetsuNyutaisho();
+            RealInitialLocker.release(前排他ロックキー);
+            div.getKaigoKanryoMessageOya().getCcdKaigoKanryoMessage().setSuccessMessage(
+                    new RString(UrInformationMessages.保存終了.getMessage().evaluate()));
+            return ResponseData.of(div).setState(DBA2020011StateName.完了状態);
+        }
+        return ResponseData.of(div).respond();
     }
 
     /**
