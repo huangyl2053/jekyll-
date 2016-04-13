@@ -30,6 +30,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.message.MessageDialogSelectedResult;
 import jp.co.ndensan.reams.uz.uza.message.QuestionMessage;
+import jp.co.ndensan.reams.uz.uza.ui.servlets.CommonButtonHolder;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ResponseHolder;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 
@@ -43,9 +44,12 @@ public class PnlKeteiJohoMsg {
     private static final RString 削除 = new RString("削除");
     private static final RString 登録 = new RString("登録");
     private static final RString 修正 = new RString("修正");
+    private static final RString 参照 = new RString("参照");
     private static final RString モード_修正 = new RString("修正");
     private static final RString モード_照会 = new RString("照会");
+    private static final RString 保存 = new RString("Element10");
     private static final RString 業務区分 = new RString("02");
+    private static final RString 連番 = new RString("1");
 
     /**
      * onLoad事件
@@ -62,6 +66,9 @@ public class PnlKeteiJohoMsg {
         RString 事業者番号 = ViewStateHolder.get(ViewStateKeys.事業者番号, RString.class);
         RString 整理番号 = ViewStateHolder.get(ViewStateKeys.整理番号, RString.class);
         RString 証明書 = ViewStateHolder.get(ViewStateKeys.証明書, RString.class);
+        if (参照.equals(ViewStateHolder.get(ViewStateKeys.処理モード, RString.class))) {
+            CommonButtonHolder.setVisibleByCommonButtonFieldName(保存, false);
+        }
         div.getKaigoCommonPanel().getCcdShikakuKihon().onLoad(被保険者番号);
         div.getYoguKonyuhiShikyuShinseiContentsPanel().getTxtTeikyoYM().setValue(new RDate(サービス年月.toString()));
         div.getYoguKonyuhiShikyuShinseiContentsPanel().getTxtKyufuritsu().setValue(給付率);
@@ -73,7 +80,6 @@ public class PnlKeteiJohoMsg {
             div.getCcdKetteiList().loadInitialize(被保険者番号, サービス年月, 整理番号, 業務区分, モード_修正);
         } else {
             div.getCcdKetteiList().loadInitialize(被保険者番号, サービス年月, 整理番号, 業務区分, モード_照会);
-            div.getCcdKetteiList().getShokanbaraiketteiJohoDiv().getModifiedInfos().get(0).getValueStatement().getFieldName();
         }
         ViewStateHolder.put(ViewStateKeys.支払金額合計, div.getCcdKetteiList().getShokanbaraiketteiJohoDiv()
                 .getTxtShiharaikingakugoke().getValue());
@@ -190,16 +196,16 @@ public class PnlKeteiJohoMsg {
         RString 整理番号1 = ViewStateHolder.get(ViewStateKeys.整理番号, RString.class);
         RString 様式番号 = ViewStateHolder.get(ViewStateKeys.様式番号, RString.class);
         RString 明細番号 = ViewStateHolder.get(ViewStateKeys.明細番号, RString.class);
-        boolean flag = getHandler(div).is内容変更状態();
         ShokanbaraiketteiJohoDiv adiv = (ShokanbaraiketteiJohoDiv) div.getCcdKetteiList();
+        if (adiv.getTxtKetebi().getValue() == null) {
+            throw new ApplicationException(UrErrorMessages.該当データなし.getMessage());
+        }
+        boolean flag = getHandler(div).is内容変更状態();
         if (!flag) {
             if (!ResponseHolder.isReRequest()) {
                 return ResponseData.of(div).addMessage(DbzInformationMessages.内容変更なしで保存不可.getMessage()).respond();
             }
         } else {
-            if (adiv.getTxtKetebi().getValue() == null) {
-                throw new ApplicationException(UrErrorMessages.該当データなし.getMessage());
-            }
             if (!ResponseHolder.isReRequest()) {
                 return ResponseData.of(div).addMessage(UrQuestionMessages.保存の確認.getMessage()).respond();
             }
@@ -208,7 +214,7 @@ public class PnlKeteiJohoMsg {
                 FukushiyoguKonyuhiShikyuShinsei f = new FukushiyoguKonyuhiShikyuShinsei();
 
                 ShokanShukei shokanshukei = new ShokanShukei(被保険者番号, new FlexibleYearMonth(サービス年月1.toString()),
-                        整理番号1, new JigyoshaNo(事業者番号1.toString()), 様式番号, 明細番号, new RString("1"));
+                        整理番号1, new JigyoshaNo(事業者番号1.toString()), 様式番号, 明細番号, 連番);
                 ShokanHanteiKekka shokanhanteikekka = new ShokanHanteiKekka(被保険者番号, サービス年月1,
                         整理番号1);
                 FukushiYoguKonyuhiShikyuShiseiKetteDivEntity entity = FukushiYoguKonyuhiShikyuShiseiKetteDivEntity.createEntity(
@@ -216,6 +222,8 @@ public class PnlKeteiJohoMsg {
                 f.updKetteJoho(entity);
                 div.getCcdMessage().setMessage(new RString(UrInformationMessages.保存終了.getMessage().evaluate()),
                         RString.EMPTY, RString.EMPTY, true);
+                div.getPnlButton().setDisplayNone(true);
+                div.getCcdKetteiList().setDisplayNone(true);
                 return ResponseData.of(div).setState(DBC0600031StateName.successSaved);
             }
         }
