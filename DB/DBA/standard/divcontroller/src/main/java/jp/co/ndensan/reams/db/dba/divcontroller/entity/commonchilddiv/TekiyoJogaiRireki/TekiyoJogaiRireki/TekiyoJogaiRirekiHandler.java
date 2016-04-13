@@ -13,8 +13,10 @@ import java.util.List;
 import jp.co.ndensan.reams.db.dba.business.core.tekiyojogaisha.tekiyojogaisha.TekiyoJogaishaBusiness;
 import jp.co.ndensan.reams.db.dba.business.core.tekiyojogaisha.tekiyojogaisha.TekiyoJogaishaRelate;
 import jp.co.ndensan.reams.db.dba.definition.message.DbaErrorMessages;
+import jp.co.ndensan.reams.db.dba.service.core.hihokenshashikakusoshitsu.HihokenshashikakusoshitsuManager;
 import jp.co.ndensan.reams.db.dba.service.core.tajushochito.TaJushochiTokureisyaKanriManager;
 import jp.co.ndensan.reams.db.dba.service.core.tekiyojogaisha.TekiyoJogaishaManager;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
 import jp.co.ndensan.reams.db.dbz.business.core.ShisetsuNyutaisho;
 import jp.co.ndensan.reams.db.dbz.business.core.ShisetsuNyutaishoIdentifier;
@@ -52,6 +54,7 @@ public class TekiyoJogaiRirekiHandler {
     private static final RString 状態_訂正履歴 = new RString("訂正履歴モード");
     private static final RString 状態_照会 = new RString("照会モード");
     private static final RString 除外者解除 = new RString("除外者解除");
+    private static final RString 除外者 = new RString("除外者");
     private static final int PADZERO = 4;
     private static final CodeShubetsu 介護除外適用理由 = new CodeShubetsu("0119");
     private static final CodeShubetsu 介護除外解除理由 = new CodeShubetsu("0123");
@@ -368,10 +371,7 @@ public class TekiyoJogaiRirekiHandler {
             } else if (状態_削除.equals(row.getStatus())) {
                 TekiyoJogaishaManager.createInstance().delTekiyoJogaisha(識別コード, 異動日, row.getEdaNo());
             } else if (状態_適用登録.equals(new RString(div.getMode_DisplayMode().toString()))) {
-                // TODO 丁一 「画面喪失チェック処理」を呼び出す　2016/04/10
-                // TODO　丁一　被保険者台帳管理（資格喪失）実装しない。　2016/04/10
-                // RString 画面喪失 = 被保険者台帳管理.ShikakuSoshitsuCheck(識別コード, null);
-                RString 画面喪失 = new RString("");
+                RString 画面喪失 = HihokenshashikakusoshitsuManager.createInstance().shikakuSoshitsuCheck(識別コード, null);
                 if (DbaErrorMessages.住所地特例として未適用.getMessage().getCode().equals(画面喪失.toString())) {
                     throw new ApplicationException(DbaErrorMessages.住所地特例として未適用.getMessage());
                 }
@@ -389,8 +389,12 @@ public class TekiyoJogaiRirekiHandler {
 
                 if (!(DbaErrorMessages.被保険者履歴に期間重複.getMessage().getCode().equals(画面喪失.toString())
                         && DbaErrorMessages.被保険者履歴に期間重複.getMessage().getCode().equals(画面喪失.toString()))) {
-                    // TODO 丁一 「被保険者台帳管理（資格喪失）登録処理」を呼び出す　2016/04/10
-                    // TODO　丁一　被保険者台帳管理（資格喪失）実装しない。　2016/04/10
+                    HihokenshashikakusoshitsuManager.createInstance().saveHihokenshaShikakuSoshitsu(
+                            識別コード,
+                            HihokenshaNo.EMPTY,
+                            new FlexibleDate(row.getTekiyoDate().toString()),
+                            除外者,
+                            new FlexibleDate(row.getTekiyoTodokeDate().toString()));
                 }
             } else if (状態_解除.equals(new RString(div.getMode_DisplayMode().toString()))) {
                 TekiyoJogaishaManager.createInstance().delTekiyoJogaisha(識別コード, 異動日, row.getEdaNo());
