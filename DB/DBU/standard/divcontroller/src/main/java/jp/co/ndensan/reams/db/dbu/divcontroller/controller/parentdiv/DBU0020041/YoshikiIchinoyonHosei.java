@@ -33,6 +33,7 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 /**
  * Mainパーネルクラスです。
  *
+ * @reamsid_L DBU-1100-040 yebangqiang
  */
 public class YoshikiIchinoyonHosei {
 
