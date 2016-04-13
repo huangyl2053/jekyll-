@@ -13,7 +13,7 @@ import static jp.co.ndensan.reams.db.dbz.definition.message.MessageCreateHelper.
 /**
  * DBAの質問メッセージ定義列挙型です。
  *
- * @author N9606 漢那 憲作
+ * @reamsid_L DBA-9999-023 liangbc
  */
 public enum DbaQuestionMessages implements IMessageGettable {
 

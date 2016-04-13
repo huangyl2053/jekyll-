@@ -7,11 +7,11 @@ package jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.Iryohoken
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import java.util.List;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.ui.binding.*;
-import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Button;
 import jp.co.ndensan.reams.uz.uza.ui.binding.DataGrid;
+import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 
 /**
  * IryohokenRirekiCommonChildDiv のクラスファイル
@@ -181,5 +181,14 @@ public class IryohokenRirekiCommonChildDivDiv extends Panel implements IIryohoke
     @Override
     public void save() {
         createHandlerOf(this).save(this);
+    }
+    
+    /**
+     * 医療保険情報を取得します。
+     * @return List<dgIryohokenIchiran_Row>
+     */
+    @Override
+    public List<dgIryohokenIchiran_Row> getDataGridList() {
+        return this.getDgIryohokenIchiran().getDataSource();
     }
 }

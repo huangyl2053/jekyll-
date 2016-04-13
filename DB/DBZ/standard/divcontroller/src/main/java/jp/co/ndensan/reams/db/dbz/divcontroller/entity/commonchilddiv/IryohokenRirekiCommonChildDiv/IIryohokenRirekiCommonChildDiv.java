@@ -1,5 +1,6 @@
 package jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.IryohokenRirekiCommonChildDiv;
 
+import java.util.List;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.binding.ICommonChildDivBaseProperties;
 
@@ -21,5 +22,11 @@ public interface IIryohokenRirekiCommonChildDiv extends ICommonChildDivBasePrope
      * 医療保険履歴の共有子DIVの画面内容から、施設入退所履歴情報をDBに反映します。
      */
     public abstract void save();
+    
+    /**
+     * 医療保険情報を取得します。
+     * @return List<dgIryohokenIchiran_Row>
+     */
+    public abstract List<dgIryohokenIchiran_Row> getDataGridList();
 
 }

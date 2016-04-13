@@ -1,5 +1,6 @@
 package jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.RoreiFukushiNenkinShokai;
 
+import java.util.List;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.ui.binding.ICommonChildDivBaseProperties;
@@ -22,5 +23,11 @@ public interface IRoreiFukushiNenkinShokaiDiv extends ICommonChildDivBasePropert
      * 画面データをデータベースに格納します。
      */
     public void click_Save();
+    
+    /**
+     * 老福年金情報を取得します。
+     * @return List<datagridRireki_Row>
+     */
+    public List<datagridRireki_Row> getgetDataGridList();
 
 }
