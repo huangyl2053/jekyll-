@@ -441,6 +441,7 @@ public class ShikakuTokusoRirekiDiv extends Panel implements IShikakuTokusoRirek
             row.setShoriDateTime(処理日時表示.toRString());
             row.setDeleteButtonState(DataGridButtonState.Disabled);
             row.setModifyButtonState(DataGridButtonState.Disabled);
+            dgShikakuShutokuRirekiList.add(row);
         }
         this.getDgShikakuShutokuRireki().setDataSource(dgShikakuShutokuRirekiList);
         this.getBtnAddShikakuShutoku().setDisabled(true);
