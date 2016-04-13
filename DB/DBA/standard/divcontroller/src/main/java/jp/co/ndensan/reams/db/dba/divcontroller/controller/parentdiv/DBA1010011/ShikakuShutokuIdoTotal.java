@@ -7,6 +7,7 @@ package jp.co.ndensan.reams.db.dba.divcontroller.controller.parentdiv.DBA1010011
 
 import jp.co.ndensan.reams.db.dba.divcontroller.entity.parentdiv.DBA1010011.ShikakuShutokuIdoTotalDiv;
 import jp.co.ndensan.reams.db.dba.divcontroller.handler.parentdiv.DBA1010011.ShiKaKuSyuToKuIdouTotalHandler;
+import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.ShikakuTokusoRireki.dgShikakuShutokuRireki_Row;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrQuestionMessages;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -24,6 +25,7 @@ public class ShikakuShutokuIdoTotal {
     private static final RString IRYOU = new RString("医療保険");
     private static final RString RONEN = new RString("老福年金");
     private static final RString SHISETSU = new RString("施設入退所");
+    private static final RString 追加 = new RString("追加");
 
     /**
      * 資格取得異動の初期化します。
@@ -77,6 +79,124 @@ public class ShikakuShutokuIdoTotal {
                 && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
             createHandler(div).save();
         }
+        response.data = div;
+        return response;
+    }
+
+    /**
+     * 「資格得喪履歴を追加する」ボタン処理します。
+     *
+     * @param div ShikakuShutokuIdoTotalDiv
+     * @return レスポンス
+     */
+    public ResponseData<ShikakuShutokuIdoTotalDiv> onClick_btnAdd(ShikakuShutokuIdoTotalDiv div) {
+        ResponseData<ShikakuShutokuIdoTotalDiv> response = new ResponseData<>();
+        div.getShikakuShutokuJoho().getShikakuTokusoRirekiMain().getCcdShikakuTokusoRireki().set追加するボタン(true);
+        div.getShikakuShutokuJoho().getShikakuTokusoRirekiMain().getShikakuShutokuInput().setDisabled(false);
+        createHandler(div).get被保番号表示有無制御();
+        response.data = div;
+        return response;
+    }
+
+    /**
+     * 「資格得喪履歴を修正する」ボタン処理します。
+     *
+     * @param div ShikakuShutokuIdoTotalDiv
+     * @return レスポンス
+     */
+    public ResponseData<ShikakuShutokuIdoTotalDiv> onClick_ModifyButton(ShikakuShutokuIdoTotalDiv div) {
+        ResponseData<ShikakuShutokuIdoTotalDiv> response = new ResponseData<>();
+
+        div.getShikakuShutokuJoho().getShikakuTokusoRirekiMain().getShikakuShutokuInput().setDisabled(false);
+        div.getShikakuShutokuJoho().getShikakuTokusoRirekiMain().getCcdShikakuTokusoRireki().set追加するボタン(true);
+        createHandler(div).get被保番号表示有無制御();
+
+        dgShikakuShutokuRireki_Row row = div.getShikakuShutokuJoho().getShikakuTokusoRirekiMain()
+                .getCcdShikakuTokusoRireki().getDataGridSelectItem();
+        div.getShikakuShutokuJoho().getShikakuTokusoRirekiMain().getShikakuShutokuInput()
+                .setHihokenshaNo(row.getHihokenshaNo());
+        div.getShikakuShutokuJoho().getShikakuTokusoRirekiMain().getShikakuShutokuInput()
+                .getTxtShutokuDate().setValue(row.getShutokuDate().getValue());
+        div.getShikakuShutokuJoho().getShikakuTokusoRirekiMain().getShikakuShutokuInput()
+                .getTxtShutokuTodokedeDate().setValue(row.getShutokuTodokedeDate().getValue());
+        div.getShikakuShutokuJoho().getShikakuTokusoRirekiMain().getShikakuShutokuInput()
+                .getDdlShikakuShutokuJiyu().setSelectedKey(row.getShikakuShutokuJiyuCode());
+        response.data = div;
+        return response;
+    }
+
+    /**
+     * 「資格得喪履歴を確定する」ボタン処理します。
+     *
+     * @param div ShikakuShutokuIdoTotalDiv
+     * @return レスポンス
+     */
+    public ResponseData<ShikakuShutokuIdoTotalDiv> onClick_btnKakutei(ShikakuShutokuIdoTotalDiv div) {
+        ResponseData<ShikakuShutokuIdoTotalDiv> response = new ResponseData<>();
+
+        dgShikakuShutokuRireki_Row row = div.getShikakuShutokuJoho().getShikakuTokusoRirekiMain().getCcdShikakuTokusoRireki().getDataGridSelectItem();
+        if (row != null) {
+            row.setDaNo(RONEN);
+            row.getShutokuDate().setValue(div.getShikakuShutokuJoho().getShikakuTokusoRirekiMain()
+                    .getShikakuShutokuInput().getTxtShutokuDate().getValue());
+            row.getShutokuTodokedeDate().setValue(div.getShikakuShutokuJoho().getShikakuTokusoRirekiMain().getShikakuShutokuInput()
+                    .getTxtShutokuTodokedeDate().getValue());
+            row.setShutokuJiyu(div.getShikakuShutokuJoho().getShikakuTokusoRirekiMain()
+                    .getShikakuShutokuInput().getDdlShikakuShutokuJiyu().getSelectedValue());
+            row.setShutokuJiyuKey(div.getShikakuShutokuJoho().getShikakuTokusoRirekiMain()
+                    .getShikakuShutokuInput().getDdlShikakuShutokuJiyu().getSelectedKey());
+            row.setHihokenshaNo(div.getShikakuShutokuJoho().getShikakuTokusoRirekiMain()
+                    .getShikakuShutokuInput().getHihokenshaNo());
+        } else {
+            row = new dgShikakuShutokuRireki_Row();
+            row.setState(追加);
+            //
+//            row.setDaNo(RONEN);
+            row.getShutokuDate().setValue(div.getShikakuShutokuJoho().getShikakuTokusoRirekiMain()
+                    .getShikakuShutokuInput().getTxtShutokuDate().getValue());
+            row.getShutokuTodokedeDate().setValue(div.getShikakuShutokuJoho().getShikakuTokusoRirekiMain().getShikakuShutokuInput()
+                    .getTxtShutokuTodokedeDate().getValue());
+            row.setShutokuJiyu(div.getShikakuShutokuJoho().getShikakuTokusoRirekiMain()
+                    .getShikakuShutokuInput().getDdlShikakuShutokuJiyu().getSelectedValue());
+            row.setShutokuJiyuKey(div.getShikakuShutokuJoho().getShikakuTokusoRirekiMain()
+                    .getShikakuShutokuInput().getDdlShikakuShutokuJiyu().getSelectedKey());
+            row.setHihokenshaNo(div.getShikakuShutokuJoho().getShikakuTokusoRirekiMain()
+                    .getShikakuShutokuInput().getHihokenshaNo());
+
+        }
+        div.getShikakuShutokuJoho().getShikakuTokusoRirekiMain().getCcdShikakuTokusoRireki().setDataGridSelectItem(row);
+        div.getShikakuShutokuJoho().getShikakuTokusoRirekiMain().getShikakuShutokuInput().setDisabled(true);
+        response.data = div;
+        return response;
+    }
+
+    /**
+     * 「資格得喪履歴を取消する」ボタン処理します。
+     *
+     * @param div ShikakuShutokuIdoTotalDiv
+     * @return レスポンス
+     */
+    public ResponseData<ShikakuShutokuIdoTotalDiv> onClick_btnTorikeshi(ShikakuShutokuIdoTotalDiv div) {
+        ResponseData<ShikakuShutokuIdoTotalDiv> response = new ResponseData<>();
+        div.getShikakuShutokuJoho().getShikakuTokusoRirekiMain().getShikakuShutokuInput().getTxtHihoNo().clearValue();
+        div.getShikakuShutokuJoho().getShikakuTokusoRirekiMain().getShikakuShutokuInput().getTxtShutokuDate().clearValue();
+        div.getShikakuShutokuJoho().getShikakuTokusoRirekiMain().getShikakuShutokuInput().getTxtShutokuTodokedeDate().clearValue();
+        createHandler(div).setDdlShikakuShutokuJiyu();
+        div.getShikakuShutokuJoho().getShikakuTokusoRirekiMain().getShikakuShutokuInput().setDisabled(true);
+        div.getShikakuShutokuJoho().getShikakuTokusoRirekiMain().getCcdShikakuTokusoRireki().set追加するボタン(false);
+        response.data = div;
+        return response;
+    }
+
+    /**
+     * 「資格得喪履歴を削除する」ボタン処理します。
+     *
+     * @param div ShikakuShutokuIdoTotalDiv
+     * @return レスポンス
+     */
+    public ResponseData<ShikakuShutokuIdoTotalDiv> onClick_btnDelete(ShikakuShutokuIdoTotalDiv div) {
+        ResponseData<ShikakuShutokuIdoTotalDiv> response = new ResponseData<>();
+        div.getShikakuShutokuJoho().getShikakuTokusoRirekiMain().getCcdShikakuTokusoRireki().set追加するボタン(false);
         response.data = div;
         return response;
     }
