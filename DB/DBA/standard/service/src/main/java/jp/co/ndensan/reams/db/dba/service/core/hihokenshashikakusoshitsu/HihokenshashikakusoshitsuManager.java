@@ -8,7 +8,6 @@ package jp.co.ndensan.reams.db.dba.service.core.hihokenshashikakusoshitsu;
 import java.util.List;
 import jp.co.ndensan.reams.db.dba.business.core.hihokenshadaicho.HihokenshaShutokuJyoho;
 import jp.co.ndensan.reams.db.dba.definition.message.DbaErrorMessages;
-import jp.co.ndensan.reams.db.dba.entity.HihokenshaDaichoAddJyoho;
 import jp.co.ndensan.reams.db.dba.service.core.hihokenshadaicho.HihokenshaShikakuShutokuManager;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbz.definition.core.sikakuidocheck.SikakuKikan;
@@ -55,26 +54,32 @@ public class HihokenshashikakusoshitsuManager {
     /**
      * 被保険者台帳管理（資格喪失）登録処理
      *
-     * @param addJyoho 被保険者台帳管理追加情報
+     * @param 識別コード 識別コード
+     * @param 被保険者番号 被保険者番号
+     * @param 資格喪失年月日 資格喪失年月日
+     * @param 資格喪失事由コード 資格喪失事由コード
+     * @param 資格喪失届出年月日 資格喪失届出年月日
+     *
      * @return 登録件数
      */
-    public int saveHihokenshaShikakuSoshitsu(HihokenshaDaichoAddJyoho addJyoho) {
-        RealInitialLocker.lock(new LockingKey(addJyoho.get被保険者番号()));
+    public int saveHihokenshaShikakuSoshitsu(ShikibetsuCode 識別コード, HihokenshaNo 被保険者番号, FlexibleDate 資格喪失年月日,
+            RString 資格喪失事由コード, FlexibleDate 資格喪失届出年月日) {
+        RealInitialLocker.lock(new LockingKey(被保険者番号));
 
         HihokenshaShikakuShutokuManager manager = HihokenshaShikakuShutokuManager.createInstance();
-        HihokenshaShutokuJyoho hihokenshaShutokuJyoho = manager.getSaishinDeta(addJyoho.get識別コード(), addJyoho.get被保険者番号());
+        HihokenshaShutokuJyoho hihokenshaShutokuJyoho = manager.getSaishinDeta(識別コード, 被保険者番号);
 
         DbT1001HihokenshaDaichoEntity dbT1001HihokenshaDaichoEntity = hihokenshaShutokuJyoho.get被保険者台帳管理();
-        dbT1001HihokenshaDaichoEntity.setIdoYMD(addJyoho.get資格喪失年月日());
-        dbT1001HihokenshaDaichoEntity.setIdoJiyuCode(addJyoho.get資格喪失事由コード());
-        dbT1001HihokenshaDaichoEntity.setShikakuSoshitsuJiyuCode(addJyoho.get資格喪失事由コード());
-        dbT1001HihokenshaDaichoEntity.setShikakuSoshitsuYMD(addJyoho.get資格喪失年月日());
-        dbT1001HihokenshaDaichoEntity.setShikakuSoshitsuTodokedeYMD(addJyoho.get資格喪失届出年月日());
+        dbT1001HihokenshaDaichoEntity.setIdoYMD(資格喪失年月日);
+        dbT1001HihokenshaDaichoEntity.setIdoJiyuCode(資格喪失事由コード);
+        dbT1001HihokenshaDaichoEntity.setShikakuSoshitsuJiyuCode(資格喪失事由コード);
+        dbT1001HihokenshaDaichoEntity.setShikakuSoshitsuYMD(資格喪失年月日);
+        dbT1001HihokenshaDaichoEntity.setShikakuSoshitsuTodokedeYMD(資格喪失届出年月日);
 
         RString edaNo = manager.getSaidaiEdaban(dbT1001HihokenshaDaichoEntity.getHihokenshaNo(), dbT1001HihokenshaDaichoEntity.getIdoYMD());
         dbT1001HihokenshaDaichoEntity.setEdaNo(edaNo);
 
-        RealInitialLocker.release(new LockingKey(addJyoho.get被保険者番号()));
+        RealInitialLocker.release(new LockingKey(被保険者番号));
 
         DbT1001HihokenshaDaichoDac dac = InstanceProvider.create(DbT1001HihokenshaDaichoDac.class);
         dbT1001HihokenshaDaichoEntity.setState(EntityDataState.Added);
