@@ -7,13 +7,17 @@ package jp.co.ndensan.reams.db.dba.divcontroller.entity.commonchilddiv.ShoKaishu
 
 import java.util.ArrayList;
 import java.util.List;
-import jp.co.ndensan.reams.db.dba.business.ShoKofuKaishuJohoModel;
 import jp.co.ndensan.reams.db.dba.service.core.shokofukaishujoho.ShoKofuKaishuJohoManager;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
+import jp.co.ndensan.reams.db.dbz.business.core.basic.ShoKofuKaishu;
+import jp.co.ndensan.reams.db.dbz.business.core.basic.ShoKofuKaishuIdentifier;
+import jp.co.ndensan.reams.db.dbz.divcontroller.viewbox.ViewStateKeys;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.CodeShubetsu;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.binding.KeyValueDataSource;
+import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
+import jp.co.ndensan.reams.uz.uza.util.Models;
 import jp.co.ndensan.reams.uz.uza.util.code.CodeMaster;
 import jp.co.ndensan.reams.uz.uza.util.code.entity.UzT0007CodeEntity;
 
@@ -48,23 +52,21 @@ public class ShoKaishuKirokuKanriHandler {
      * @param 被保険者番号 被保険者番号
      */
     public void initialize(RString 状態, HihokenshaNo 被保険者番号) {
-
         div.getPanelInput().getDdlKoufuJiyu().setDataSource(getCode(new CodeShubetsu(CODESHUBETSU_0116)));
         div.getPanelInput().getDdlKaisyuJiyu().setDataSource(getCode(new CodeShubetsu(CODESHUBETSU_0015)));
         if (状態_照会.equals(状態)) {
-            List<ShoKofuKaishuJohoModel> businessList = ShoKofuKaishuJohoManager.createInstance()
+            List<ShoKofuKaishu> businessList = ShoKofuKaishuJohoManager.createInstance()
                     .getShoKofuKaishuJohoList(被保険者番号, False).records();
             List<dgKoufuKaishu_Row> dgKoufuKaishuList = new ArrayList();
             if (businessList != null && !businessList.isEmpty()) {
-
-                for (ShoKofuKaishuJohoModel jigyoshaInput : businessList) {
+                for (ShoKofuKaishu jigyoshaInput : businessList) {
                     dgKoufuKaishu_Row dgJigyoshaItiran = new dgKoufuKaishu_Row();
-                    dgJigyoshaItiran.setKoufuType(CodeMaster.getCodeMeisho(new CodeShubetsu(CODESHUBETSU_0014), new Code(jigyoshaInput.get交付証種類コード())));
+                    dgJigyoshaItiran.setKoufuType(CodeMaster.getCodeMeisho(new CodeShubetsu(CODESHUBETSU_0014), new Code(jigyoshaInput.get交付証種類())));
                     dgJigyoshaItiran.setKoufuDate(jigyoshaInput.get交付年月日().wareki().toDateString());
-                    dgJigyoshaItiran.setKoufuJiyu(CodeMaster.getCodeMeisho(new CodeShubetsu(CODESHUBETSU_0116), new Code(jigyoshaInput.get交付事由コード())));
+                    dgJigyoshaItiran.setKoufuJiyu(CodeMaster.getCodeMeisho(new CodeShubetsu(CODESHUBETSU_0116), new Code(jigyoshaInput.get交付事由())));
                     dgJigyoshaItiran.setKofuRiyu(jigyoshaInput.get交付理由());
                     dgJigyoshaItiran.setKaishuDate((jigyoshaInput.get回収年月日().wareki().toDateString()));
-                    dgJigyoshaItiran.setKaishuJiyu(CodeMaster.getCodeMeisho(new CodeShubetsu(CODESHUBETSU_0015), new Code(jigyoshaInput.get回収事由コード())));
+                    dgJigyoshaItiran.setKaishuJiyu(CodeMaster.getCodeMeisho(new CodeShubetsu(CODESHUBETSU_0015), new Code(jigyoshaInput.get回収事由())));
                     dgJigyoshaItiran.setYukoKigen((jigyoshaInput.get有効期限().wareki().toDateString()));
                     dgJigyoshaItiran.setKaishuRiyu(jigyoshaInput.get回収理由());
                     dgKoufuKaishuList.add(dgJigyoshaItiran);
@@ -78,19 +80,20 @@ public class ShoKaishuKirokuKanriHandler {
             div.getDgKoufuKaishu().getGridSetting().setIsShowRowState(False);
         }
         if (状態_更新.equals(状態)) {
-            List<ShoKofuKaishuJohoModel> businessList = ShoKofuKaishuJohoManager.createInstance().
+            List<ShoKofuKaishu> businessList = ShoKofuKaishuJohoManager.createInstance().
                     getShoKofuKaishuJohoList(被保険者番号, False).records();
+            Models<ShoKofuKaishuIdentifier, ShoKofuKaishu> ShoKofuKaishu = Models.create(businessList);
+            ViewStateHolder.put(ViewStateKeys.証交付回収情報, ShoKofuKaishu);
             List<dgKoufuKaishu_Row> dgKoufuKaishuList = new ArrayList();
             if (businessList != null && !businessList.isEmpty()) {
-
-                for (ShoKofuKaishuJohoModel jigyoshaInput : businessList) {
+                for (ShoKofuKaishu jigyoshaInput : businessList) {
                     dgKoufuKaishu_Row dgJigyoshaItiran = new dgKoufuKaishu_Row();
-                    dgJigyoshaItiran.setKoufuType(CodeMaster.getCodeMeisho(new CodeShubetsu(CODESHUBETSU_0014), new Code(jigyoshaInput.get交付証種類コード())));
+                    dgJigyoshaItiran.setKoufuType(CodeMaster.getCodeMeisho(new CodeShubetsu(CODESHUBETSU_0014), new Code(jigyoshaInput.get交付証種類())));
                     dgJigyoshaItiran.setKoufuDate(jigyoshaInput.get交付年月日().wareki().toDateString());
-                    dgJigyoshaItiran.setKoufuJiyu(CodeMaster.getCodeMeisho(new CodeShubetsu(CODESHUBETSU_0116), new Code(jigyoshaInput.get交付事由コード())));
+                    dgJigyoshaItiran.setKoufuJiyu(CodeMaster.getCodeMeisho(new CodeShubetsu(CODESHUBETSU_0116), new Code(jigyoshaInput.get交付事由())));
                     dgJigyoshaItiran.setKofuRiyu(jigyoshaInput.get交付理由());
                     dgJigyoshaItiran.setKaishuDate((jigyoshaInput.get回収年月日().wareki().toDateString()));
-                    dgJigyoshaItiran.setKaishuJiyu(CodeMaster.getCodeMeisho(new CodeShubetsu(CODESHUBETSU_0015), new Code(jigyoshaInput.get回収事由コード())));
+                    dgJigyoshaItiran.setKaishuJiyu(CodeMaster.getCodeMeisho(new CodeShubetsu(CODESHUBETSU_0015), new Code(jigyoshaInput.get回収事由())));
                     dgJigyoshaItiran.setYukoKigen((jigyoshaInput.get有効期限().wareki().toDateString()));
                     dgJigyoshaItiran.setKaishuRiyu(jigyoshaInput.get回収理由());
                     dgKoufuKaishuList.add(dgJigyoshaItiran);
@@ -103,6 +106,15 @@ public class ShoKaishuKirokuKanriHandler {
         }
     }
 
+    /**
+     * 適用情報一覧を取得します。
+     *
+     * @return 適用情報一覧 適用情報一覧
+     */
+    public List<dgKoufuKaishu_Row> get証交付回収情報一覧() {
+        return div.getDgKoufuKaishu().getDataSource();
+    }
+
     private List<KeyValueDataSource> getCode(CodeShubetsu codeShubetsu) {
 
         List<UzT0007CodeEntity> codeValueList = CodeMaster.getCode(codeShubetsu);
@@ -112,4 +124,5 @@ public class ShoKaishuKirokuKanriHandler {
         }
         return dataSourceList;
     }
+
 }

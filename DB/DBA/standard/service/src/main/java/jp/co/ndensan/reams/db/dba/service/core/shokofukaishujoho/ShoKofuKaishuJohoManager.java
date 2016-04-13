@@ -7,9 +7,9 @@ package jp.co.ndensan.reams.db.dba.service.core.shokofukaishujoho;
 
 import java.util.ArrayList;
 import java.util.List;
-import jp.co.ndensan.reams.db.dba.business.ShoKofuKaishuJohoModel;
 import jp.co.ndensan.reams.db.dba.entity.ShoKofuKaishuJohoEntity;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
+import jp.co.ndensan.reams.db.dbz.business.core.basic.ShoKofuKaishu;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7037ShoKofuKaishuEntity;
 import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT7037ShoKofuKaishuDac;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -49,8 +49,7 @@ public class ShoKofuKaishuJohoManager {
     /**
      * {@link InstanceProvider#create}にて生成した{@link ShoKofuKaishuJohoManager}のインスタンスを返します。
      *
-     * @return
-     * {@link InstanceProvider#create}にて生成した{@link ShoKofuKaishuJohoManager}のインスタンス
+     * @return {@link InstanceProvider#create}にて生成した{@link ShoKofuKaishuJohoManager}のインスタンス
      */
     public static ShoKofuKaishuJohoManager createInstance() {
         return InstanceProvider.create(ShoKofuKaishuJohoManager.class);
@@ -61,14 +60,14 @@ public class ShoKofuKaishuJohoManager {
      *
      * @param 被保険者番号 HihokenshaNo
      * @param 論理削除フラグ boolean
-     * @return SearchResult<ShoKofuKaishuJohoModel>
+     * @return SearchResult<ShoKofuKaishu>
      */
     @Transaction
-    public SearchResult<ShoKofuKaishuJohoModel> getShoKofuKaishuJohoList(HihokenshaNo 被保険者番号, boolean 論理削除フラグ) {
-        List<ShoKofuKaishuJohoModel> businessList = new ArrayList<>();
+    public SearchResult<ShoKofuKaishu> getShoKofuKaishuJohoList(HihokenshaNo 被保険者番号, boolean 論理削除フラグ) {
+        List<ShoKofuKaishu> businessList = new ArrayList<>();
         List<DbT7037ShoKofuKaishuEntity> dbT7037ShoKofuKaishuEntity = 証交付回収情報dac.select一覧取得(被保険者番号, 論理削除フラグ);
         for (DbT7037ShoKofuKaishuEntity shoKofuKaishuEntity : dbT7037ShoKofuKaishuEntity) {
-            businessList.add(new ShoKofuKaishuJohoModel(shoKofuKaishuEntity));
+            businessList.add(new ShoKofuKaishu(shoKofuKaishuEntity));
         }
         return SearchResult.of(businessList, 0, false);
     }

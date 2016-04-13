@@ -4,12 +4,13 @@ package jp.co.ndensan.reams.db.dba.divcontroller.entity.commonchilddiv.ShoKaishu
  * このファイルへの変更は、再生成時には損失するため
  * 不正な動作の原因になります。
  */
+
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import jp.co.ndensan.reams.uz.uza.ui.binding.*;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 
 import java.util.HashSet;
+import java.util.List;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ICommonChildDivMode;
 import jp.co.ndensan.reams.uz.uza.ui.servlets._CommonChildDivModeUtil;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
@@ -28,6 +29,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxMultiLine;
  * @reamsid_L DBA-1070-020 lizhuoxuan
  */
 public class ShoKaishuKirokuKanriDiv extends Panel implements IShoKaishuKirokuKanriDiv {
+
     // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
     /*
      * [ private の作成 ]
@@ -105,7 +107,7 @@ public class ShoKaishuKirokuKanriDiv extends Panel implements IShoKaishuKirokuKa
             DisplayMode[] enumArray = DisplayMode.values();
 
             for (DisplayMode enumStr : enumArray) {
-                if (str.equals(enumStr.name.toString())) { 
+                if (str.equals(enumStr.name.toString())) {
                     return enumStr;
                 }
             }
@@ -120,11 +122,11 @@ public class ShoKaishuKirokuKanriDiv extends Panel implements IShoKaishuKirokuKa
     }
 
     public DisplayMode getMode_DisplayMode() {
-        return (DisplayMode) _CommonChildDivModeUtil.getMode( this.modes, DisplayMode.class );
+        return (DisplayMode) _CommonChildDivModeUtil.getMode(this.modes, DisplayMode.class);
     }
 
-    public void setMode_DisplayMode( DisplayMode value ) {
-        _CommonChildDivModeUtil.setMode( this.modes, DisplayMode.class , value );
+    public void setMode_DisplayMode(DisplayMode value) {
+        _CommonChildDivModeUtil.setMode(this.modes, DisplayMode.class, value);
     }
 
     /*
@@ -136,7 +138,7 @@ public class ShoKaishuKirokuKanriDiv extends Panel implements IShoKaishuKirokuKa
     }
 
     @JsonIgnore
-    public void  setDgKoufuKaishu(DataGrid<dgKoufuKaishu_Row> dgKoufuKaishu) {
+    public void setDgKoufuKaishu(DataGrid<dgKoufuKaishu_Row> dgKoufuKaishu) {
         this.getPanelKoufuList().setDgKoufuKaishu(dgKoufuKaishu);
     }
 
@@ -146,7 +148,7 @@ public class ShoKaishuKirokuKanriDiv extends Panel implements IShoKaishuKirokuKa
     }
 
     @JsonIgnore
-    public void  setTxtKoufuType(TextBox txtKoufuType) {
+    public void setTxtKoufuType(TextBox txtKoufuType) {
         this.getPanelInput().setTxtKoufuType(txtKoufuType);
     }
 
@@ -156,7 +158,7 @@ public class ShoKaishuKirokuKanriDiv extends Panel implements IShoKaishuKirokuKa
     }
 
     @JsonIgnore
-    public void  setTxtKoufuDate(TextBoxDate txtKoufuDate) {
+    public void setTxtKoufuDate(TextBoxDate txtKoufuDate) {
         this.getPanelInput().setTxtKoufuDate(txtKoufuDate);
     }
 
@@ -166,7 +168,7 @@ public class ShoKaishuKirokuKanriDiv extends Panel implements IShoKaishuKirokuKa
     }
 
     @JsonIgnore
-    public void  setTxtYukouKigen(TextBoxDate txtYukouKigen) {
+    public void setTxtYukouKigen(TextBoxDate txtYukouKigen) {
         this.getPanelInput().setTxtYukouKigen(txtYukouKigen);
     }
 
@@ -176,7 +178,7 @@ public class ShoKaishuKirokuKanriDiv extends Panel implements IShoKaishuKirokuKa
     }
 
     @JsonIgnore
-    public void  setDdlKoufuJiyu(DropDownList ddlKoufuJiyu) {
+    public void setDdlKoufuJiyu(DropDownList ddlKoufuJiyu) {
         this.getPanelInput().setDdlKoufuJiyu(ddlKoufuJiyu);
     }
 
@@ -186,7 +188,7 @@ public class ShoKaishuKirokuKanriDiv extends Panel implements IShoKaishuKirokuKa
     }
 
     @JsonIgnore
-    public void  setTxaKoufuRiyu(TextBoxMultiLine txaKoufuRiyu) {
+    public void setTxaKoufuRiyu(TextBoxMultiLine txaKoufuRiyu) {
         this.getPanelInput().setTxaKoufuRiyu(txaKoufuRiyu);
     }
 
@@ -196,7 +198,7 @@ public class ShoKaishuKirokuKanriDiv extends Panel implements IShoKaishuKirokuKa
     }
 
     @JsonIgnore
-    public void  setTxtKaisyuDate(TextBoxDate txtKaisyuDate) {
+    public void setTxtKaisyuDate(TextBoxDate txtKaisyuDate) {
         this.getPanelInput().setTxtKaisyuDate(txtKaisyuDate);
     }
 
@@ -206,7 +208,7 @@ public class ShoKaishuKirokuKanriDiv extends Panel implements IShoKaishuKirokuKa
     }
 
     @JsonIgnore
-    public void  setDdlKaisyuJiyu(DropDownList ddlKaisyuJiyu) {
+    public void setDdlKaisyuJiyu(DropDownList ddlKaisyuJiyu) {
         this.getPanelInput().setDdlKaisyuJiyu(ddlKaisyuJiyu);
     }
 
@@ -216,7 +218,7 @@ public class ShoKaishuKirokuKanriDiv extends Panel implements IShoKaishuKirokuKa
     }
 
     @JsonIgnore
-    public void  setTxaKaishuRiyu(TextBoxMultiLine txaKaishuRiyu) {
+    public void setTxaKaishuRiyu(TextBoxMultiLine txaKaishuRiyu) {
         this.getPanelInput().setTxaKaishuRiyu(txaKaishuRiyu);
     }
 
@@ -226,7 +228,7 @@ public class ShoKaishuKirokuKanriDiv extends Panel implements IShoKaishuKirokuKa
     }
 
     @JsonIgnore
-    public void  setBtnConfirm(Button btnConfirm) {
+    public void setBtnConfirm(Button btnConfirm) {
         this.getPanelInput().setBtnConfirm(btnConfirm);
     }
 
@@ -236,7 +238,7 @@ public class ShoKaishuKirokuKanriDiv extends Panel implements IShoKaishuKirokuKa
     }
 
     @JsonIgnore
-    public void  setBtnCancel(Button btnCancel) {
+    public void setBtnCancel(Button btnCancel) {
         this.getPanelInput().setBtnCancel(btnCancel);
     }
 
@@ -247,4 +249,13 @@ public class ShoKaishuKirokuKanriDiv extends Panel implements IShoKaishuKirokuKa
         new ShoKaishuKirokuKanriHandler(this).initialize(状態, 被保険者番号);
     }
 
+    /**
+     * 適用情報一覧を取得します。
+     *
+     * @return 適用情報一覧 適用情報一覧
+     */
+    @Override
+    public List<dgKoufuKaishu_Row> get証交付回収情報一覧() {
+        return new ShoKaishuKirokuKanriHandler(this).get証交付回収情報一覧();
+    }
 }
