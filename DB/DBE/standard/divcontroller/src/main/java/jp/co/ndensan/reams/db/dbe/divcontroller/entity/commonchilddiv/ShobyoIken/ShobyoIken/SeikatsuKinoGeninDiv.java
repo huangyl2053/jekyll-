@@ -13,7 +13,6 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxMultiLine;
 /**
  * SeikatsuKinoGenin のクラスファイル
  *
- * @reamsid_L DBE-3000-130 zhengshukai
  */
 public class SeikatsuKinoGeninDiv extends Panel {
 

@@ -11,7 +11,6 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 /**
  * SeikatsuKinoMitoshi のクラスファイル 
  * 
- * @reamsid_L DBE-3000-110 wangkun
  */
 public class SeikatsuKinoMitoshiDiv extends Panel {
     // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-01-15_09-59-03">

@@ -18,7 +18,6 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxDate;
 /**
  * ShindanName のクラスファイル
  *
- * @reamsid_L DBE-3000-130 zhengshukai
  */
 public class ShindanNameDiv extends Panel {
 

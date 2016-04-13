@@ -16,7 +16,6 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.RadioButton;
 /**
  * geninShikkanShosai のクラスファイル
  *
- * @reamsid_L DBE-3000-130 zhengshukai
  */
 public class geninShikkanShosaiDiv extends Panel {
 

@@ -17,7 +17,6 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.TextBox;
 /**
  * ShinshinIken のクラスファイル 
  * 
- * @reamsid_L DBE-3000-120 dongyabin
  */
 public class ShinshinIkenDiv extends Panel implements IShinshinIkenDiv {
     // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-01-15_09-59-03">

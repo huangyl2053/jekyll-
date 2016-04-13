@@ -14,7 +14,6 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.TextBox;
 /**
  * ShojoAnteisei のクラスファイル
  *
- * @reamsid_L DBE-3000-130 zhengshukai
  */
 public class ShojoAnteiseiDiv extends Panel {
 

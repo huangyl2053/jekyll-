@@ -12,7 +12,6 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.TextBox;
 /**
  * NinchishoShuhenShojo のクラスファイル 
  * 
- * @reamsid_L DBE-3000-120 dongyabin
  */
 public class NinchishoShuhenShojoDiv extends Panel {
     // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-01-15_09-59-03">
