@@ -21,16 +21,16 @@ import jp.co.ndensan.reams.uz.uza.util.serialization.DataPassingConverter;
  */
 public class JigyoshaShisetsuKanri {
 
-    private final RString サービス事業者モード = new RString("11");
-    private final RString その他特例施設モード = new RString("12");
-    private final RString 適用除外施設モード = new RString("21");
+    private static final RString サービス事業者モード = new RString("11");
+    private static final RString その他特例施設モード = new RString("12");
+    private static final RString 適用除外施設モード = new RString("21");
     private static final RString 修正 = new RString("修正");
     private static final RString 介護_修正 = new RString("修正");
     private static final RString 介護_削除 = new RString("削除");
     private static final RString 介護_照会 = new RString("照会");
-    private final RString サービス事業者 = new RString("サービス事業者");
-    private final RString その他特例施設 = new RString("その他特例施設");
-    private final RString 適用除外施設 = new RString("適用除外施設");
+    private static final RString サービス事業者 = new RString("サービス事業者");
+    private static final RString その他特例施設 = new RString("その他特例施設");
+    private static final RString 適用除外施設 = new RString("適用除外施設");
 
     /**
      * 介護事業者・施設管理Divを初期化します。
@@ -61,8 +61,9 @@ public class JigyoshaShisetsuKanri {
         JigyoshaMode mode = new JigyoshaMode();
         mode.setJigyoshaShubetsu(div.getJigyoshaShurui().getRadJigyoshaShurui().getSelectedKey());
         div.setJigyoshaMode(DataPassingConverter.serialize(mode));
-        div.getJigyoshaNyuryokuGuide().getCommonChildDiv1()
-                .initialize(mode);
+        div.getJigyoshaNyuryokuGuide().getCommonChildDiv1().initialize(mode);
+        div.getJigyoshaNyuryokuGuide().getCommonChildDiv1().getJigyoshaNyuryokuGudieCommonChildDiv()
+                .setJigyoshaMode(DataPassingConverter.serialize(mode));
         return ResponseData.of(div).respond();
     }
 
@@ -73,27 +74,21 @@ public class JigyoshaShisetsuKanri {
      * @return ResponseData<JigyoshaNyuryokuGuideDiv> 施設管理Div
      */
     public ResponseData<JigyoshaShisetsuKanriDiv> onClick_Senyi(JigyoshaShisetsuKanriDiv div) {
-        if (サービス事業者モード.equals(div.getJigyoshaShurui().getRadJigyoshaShurui().getSelectedKey())) {
-            ViewStateHolder.put(ViewStateKeys.介護事業者_状態, 介護_照会);
-            JigyoshaMode mode = DataPassingConverter.deserialize(div.getJigyoshaNyuryokuGuide()
-                    .getCommonChildDiv1().getJigyoshaNyuryokuGudieCommonChildDiv().getJigyoshaMode(), JigyoshaMode.class);
-            ViewStateHolder.put(ViewStateKeys.介護事業者_介護事業者情報, mode);
+        RString サービスモード = div.getJigyoshaShurui().getRadJigyoshaShurui().getSelectedKey();
+        ViewStateHolder.put(ViewStateKeys.サービス登録_サービス種類コード, サービスモード);
+        ViewStateHolder.put(ViewStateKeys.介護事業者_状態, 介護_照会);
+        JigyoshaMode mode = DataPassingConverter.deserialize(div.getJigyoshaNyuryokuGuide()
+                .getCommonChildDiv1().getJigyoshaNyuryokuGudieCommonChildDiv().getJigyoshaMode(), JigyoshaMode.class);
+        ViewStateHolder.put(ViewStateKeys.介護事業者_介護事業者情報, mode);
+        if (サービス事業者モード.equals(サービスモード)) {
             return ResponseData.of(div).forwardWithEventName(DBA2010011TransitionEventName.選択)
                     .parameter(サービス事業者);
         }
-        if (その他特例施設モード.equals(div.getJigyoshaShurui().getRadJigyoshaShurui().getSelectedKey())) {
-            ViewStateHolder.put(ViewStateKeys.介護事業者_状態, 介護_照会);
-            JigyoshaMode mode = DataPassingConverter.deserialize(div.getJigyoshaNyuryokuGuide()
-                    .getCommonChildDiv1().getJigyoshaNyuryokuGudieCommonChildDiv().getJigyoshaMode(), JigyoshaMode.class);
-            ViewStateHolder.put(ViewStateKeys.介護事業者_介護事業者情報, mode);
+        if (その他特例施設モード.equals(サービスモード)) {
             return ResponseData.of(div).forwardWithEventName(DBA2010011TransitionEventName.選択)
                     .parameter(その他特例施設);
         }
-        if (適用除外施設モード.equals(div.getJigyoshaShurui().getRadJigyoshaShurui().getSelectedKey())) {
-            ViewStateHolder.put(ViewStateKeys.介護事業者_状態, 介護_照会);
-            JigyoshaMode mode = DataPassingConverter.deserialize(div.getJigyoshaNyuryokuGuide()
-                    .getCommonChildDiv1().getJigyoshaNyuryokuGudieCommonChildDiv().getJigyoshaMode(), JigyoshaMode.class);
-            ViewStateHolder.put(ViewStateKeys.介護事業者_介護事業者情報, mode);
+        if (適用除外施設モード.equals(サービスモード)) {
             return ResponseData.of(div).forwardWithEventName(DBA2010011TransitionEventName.選択)
                     .parameter(適用除外施設);
         }
@@ -107,30 +102,21 @@ public class JigyoshaShisetsuKanri {
      * @return ResponseData<JigyoshaNyuryokuGuideDiv> 施設管理Div
      */
     public ResponseData<JigyoshaShisetsuKanriDiv> onClick_Skujou(JigyoshaShisetsuKanriDiv div) {
-        if (サービス事業者モード.equals(div.getJigyoshaShurui().getRadJigyoshaShurui().getSelectedKey())) {
-            ViewStateHolder.put(ViewStateKeys.サービス登録_サービス種類コード, div.getJigyoshaShurui().getRadJigyoshaShurui().getSelectedKey());
-            ViewStateHolder.put(ViewStateKeys.介護事業者_状態, 介護_削除);
-            JigyoshaMode mode = DataPassingConverter.deserialize(div.getJigyoshaNyuryokuGuide()
-                    .getCommonChildDiv1().getJigyoshaNyuryokuGudieCommonChildDiv().getJigyoshaMode(), JigyoshaMode.class);
-            ViewStateHolder.put(ViewStateKeys.介護事業者_介護事業者情報, mode);
+        RString 削除モード = div.getJigyoshaShurui().getRadJigyoshaShurui().getSelectedKey();
+        ViewStateHolder.put(ViewStateKeys.サービス登録_サービス種類コード, 削除モード);
+        ViewStateHolder.put(ViewStateKeys.介護事業者_状態, 介護_削除);
+        JigyoshaMode mode = DataPassingConverter.deserialize(div.getJigyoshaNyuryokuGuide()
+                .getCommonChildDiv1().getJigyoshaNyuryokuGudieCommonChildDiv().getJigyoshaMode(), JigyoshaMode.class);
+        ViewStateHolder.put(ViewStateKeys.介護事業者_介護事業者情報, mode);
+        if (サービス事業者モード.equals(削除モード)) {
             return ResponseData.of(div).forwardWithEventName(DBA2010011TransitionEventName.削除)
                     .parameter(サービス事業者);
         }
-        if (その他特例施設モード.equals(div.getJigyoshaShurui().getRadJigyoshaShurui().getSelectedKey())) {
-            ViewStateHolder.put(ViewStateKeys.サービス登録_サービス種類コード, div.getJigyoshaShurui().getRadJigyoshaShurui().getSelectedKey());
-            ViewStateHolder.put(ViewStateKeys.介護事業者_状態, 介護_削除);
-            JigyoshaMode mode = DataPassingConverter.deserialize(div.getJigyoshaNyuryokuGuide()
-                    .getCommonChildDiv1().getJigyoshaNyuryokuGudieCommonChildDiv().getJigyoshaMode(), JigyoshaMode.class);
-            ViewStateHolder.put(ViewStateKeys.介護事業者_介護事業者情報, mode);
+        if (その他特例施設モード.equals(削除モード)) {
             return ResponseData.of(div).forwardWithEventName(DBA2010011TransitionEventName.削除)
                     .parameter(その他特例施設);
         }
-        if (適用除外施設モード.equals(div.getJigyoshaShurui().getRadJigyoshaShurui().getSelectedKey())) {
-            ViewStateHolder.put(ViewStateKeys.サービス登録_サービス種類コード, div.getJigyoshaShurui().getRadJigyoshaShurui().getSelectedKey());
-            ViewStateHolder.put(ViewStateKeys.介護事業者_状態, 介護_削除);
-            JigyoshaMode mode = DataPassingConverter.deserialize(div.getJigyoshaNyuryokuGuide()
-                    .getCommonChildDiv1().getJigyoshaNyuryokuGudieCommonChildDiv().getJigyoshaMode(), JigyoshaMode.class);
-            ViewStateHolder.put(ViewStateKeys.介護事業者_介護事業者情報, mode);
+        if (適用除外施設モード.equals(削除モード)) {
             return ResponseData.of(div).forwardWithEventName(DBA2010011TransitionEventName.削除)
                     .parameter(適用除外施設);
         }
@@ -144,55 +130,22 @@ public class JigyoshaShisetsuKanri {
      * @return ResponseData<JigyoshaNyuryokuGuideDiv> 施設管理Div
      */
     public ResponseData<JigyoshaShisetsuKanriDiv> onClick_Siyuseyi(JigyoshaShisetsuKanriDiv div) {
-        if (サービス事業者モード.equals(div.getJigyoshaShurui().getRadJigyoshaShurui().getSelectedKey())) {
-            ViewStateHolder.put(ViewStateKeys.サービス登録_サービス種類コード, div.getJigyoshaShurui().getRadJigyoshaShurui().getSelectedKey());
-            ViewStateHolder.put(ViewStateKeys.介護事業者_状態, 介護_修正);
-            JigyoshaMode mode = DataPassingConverter.deserialize(div.getJigyoshaNyuryokuGuide()
-                    .getCommonChildDiv1().getJigyoshaNyuryokuGudieCommonChildDiv().getJigyoshaMode(), JigyoshaMode.class);
-            ViewStateHolder.put(ViewStateKeys.介護事業者_介護事業者情報, mode);
+        RString 修正モード = div.getJigyoshaShurui().getRadJigyoshaShurui().getSelectedKey();
+        ViewStateHolder.put(ViewStateKeys.サービス登録_サービス種類コード, 修正モード);
+        ViewStateHolder.put(ViewStateKeys.介護事業者_状態, 介護_修正);
+        JigyoshaMode mode = DataPassingConverter.deserialize(div.getJigyoshaNyuryokuGuide()
+                .getCommonChildDiv1().getJigyoshaNyuryokuGudieCommonChildDiv().getJigyoshaMode(), JigyoshaMode.class);
+        ViewStateHolder.put(ViewStateKeys.介護事業者_介護事業者情報, mode);
+        if (サービス事業者モード.equals(修正モード)) {
             return ResponseData.of(div).forwardWithEventName(DBA2010011TransitionEventName.修正)
                     .parameter(サービス事業者);
         }
-        if (その他特例施設モード.equals(div.getJigyoshaShurui().getRadJigyoshaShurui().getSelectedKey())) {
-            ViewStateHolder.put(ViewStateKeys.サービス登録_サービス種類コード, div.getJigyoshaShurui().getRadJigyoshaShurui().getSelectedKey());
-            ViewStateHolder.put(ViewStateKeys.介護事業者_状態, 介護_修正);
-            JigyoshaMode mode = DataPassingConverter.deserialize(div.getJigyoshaNyuryokuGuide()
-                    .getCommonChildDiv1().getJigyoshaNyuryokuGudieCommonChildDiv().getJigyoshaMode(), JigyoshaMode.class);
-            ViewStateHolder.put(ViewStateKeys.介護事業者_介護事業者情報, mode);
+        if (その他特例施設モード.equals(修正モード)) {
             return ResponseData.of(div).forwardWithEventName(DBA2010011TransitionEventName.修正)
                     .parameter(その他特例施設);
         }
-        if (適用除外施設モード.equals(div.getJigyoshaShurui().getRadJigyoshaShurui().getSelectedKey())) {
-            ViewStateHolder.put(ViewStateKeys.サービス登録_サービス種類コード, div.getJigyoshaShurui().getRadJigyoshaShurui().getSelectedKey());
-            ViewStateHolder.put(ViewStateKeys.介護事業者_状態, 介護_修正);
-            JigyoshaMode mode = DataPassingConverter.deserialize(div.getJigyoshaNyuryokuGuide()
-                    .getCommonChildDiv1().getJigyoshaNyuryokuGudieCommonChildDiv().getJigyoshaMode(), JigyoshaMode.class);
-            ViewStateHolder.put(ViewStateKeys.介護事業者_介護事業者情報, mode);
+        if (適用除外施設モード.equals(修正モード)) {
             return ResponseData.of(div).forwardWithEventName(DBA2010011TransitionEventName.修正)
-                    .parameter(適用除外施設);
-        }
-        return ResponseData.of(div).respond();
-    }
-
-    /**
-     * 施設管理の追加ボタンを押下処理します。
-     *
-     * @param div 施設管理Div
-     * @return ResponseData<JigyoshaNyuryokuGuideDiv> 施設管理Div
-     */
-    public ResponseData<JigyoshaShisetsuKanriDiv> onClick_TuyiKa(JigyoshaShisetsuKanriDiv div) {
-        if (サービス事業者モード.equals(div.getJigyoshaShurui().getRadJigyoshaShurui().getSelectedKey())) {
-
-            return ResponseData.of(div).forwardWithEventName(DBA2010011TransitionEventName.終了)
-                    .parameter(サービス事業者);
-        }
-        if (その他特例施設モード.equals(div.getJigyoshaShurui().getRadJigyoshaShurui().getSelectedKey())) {
-
-            return ResponseData.of(div).forwardWithEventName(DBA2010011TransitionEventName.終了)
-                    .parameter(その他特例施設);
-        }
-        if (適用除外施設モード.equals(div.getJigyoshaShurui().getRadJigyoshaShurui().getSelectedKey())) {
-            return ResponseData.of(div).forwardWithEventName(DBA2010011TransitionEventName.終了)
                     .parameter(適用除外施設);
         }
         return ResponseData.of(div).respond();

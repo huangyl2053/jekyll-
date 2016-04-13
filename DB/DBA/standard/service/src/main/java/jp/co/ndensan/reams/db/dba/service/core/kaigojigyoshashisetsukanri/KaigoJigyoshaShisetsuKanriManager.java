@@ -163,7 +163,7 @@ public class KaigoJigyoshaShisetsuKanriManager {
         List<KaigoJogaiTokureiBusiness> serviceShuruiList = new ArrayList<>();
         IKaigoJigyoshaShisetsuKanriMapper iKaigoJigyoshaShisetsuKanri = mapperProvider.create(IKaigoJigyoshaShisetsuKanriMapper.class);
         List<KaigoJogaiTokureiRelateEntity> サービス一覧情報 = iKaigoJigyoshaShisetsuKanri.getServiceItiranJoho(parameter);
-        if (サービス一覧情報 == null || サービス一覧情報.isEmpty()) {
+        if (サービス一覧情報 == null) {
             KaigoJogaiTokureiRelateEntity entity = new KaigoJogaiTokureiRelateEntity();
             entity.setJigyoshaName(RString.EMPTY);
             entity.setKanrishaName(RString.EMPTY);
