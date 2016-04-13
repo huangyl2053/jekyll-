@@ -17,7 +17,6 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.TextBox;
 /**
  * NinteiChosaSchedule7Main のクラスファイル
  *
- * @reamsid_L DBE-0023-010 xuyannan
  */
 public class NinteiChosaSchedule7MainDiv extends Panel {
 

@@ -12,7 +12,6 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 /**
  * WaritsukeZumiTaishosha のクラスファイル
  *
- * @reamsid_L DBE-0010-010 sunhaidi
  */
 public class WaritsukeZumiTaishoshaDiv extends Panel {
 

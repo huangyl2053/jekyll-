@@ -13,7 +13,6 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxDateRange;
 /**
  * NinteiChosaTokusokuTaishoshaIchiranhyo のクラスファイル
  *
- * @reamsid_L DBE-0060-010 zhangzhiming
  */
 public class NinteiChosaTokusokuTaishoshaIchiranhyoDiv extends Panel {
 

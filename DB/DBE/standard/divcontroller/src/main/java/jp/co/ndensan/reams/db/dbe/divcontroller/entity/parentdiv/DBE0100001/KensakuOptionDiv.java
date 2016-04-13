@@ -13,7 +13,6 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.TextBox;
 /**
  * KensakuOption のクラスファイル
  *
- * @reamsid_L DBE-1370-010 sunhaidi
  */
 public class KensakuOptionDiv extends Panel {
 

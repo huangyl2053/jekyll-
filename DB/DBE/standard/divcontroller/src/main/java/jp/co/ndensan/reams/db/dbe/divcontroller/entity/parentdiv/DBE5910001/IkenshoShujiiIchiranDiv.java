@@ -17,7 +17,6 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxCode;
 /**
  * IkenshoShujiiIchiran のクラスファイル
  *
- * @reamsid_L DBE-0260-010 zuotao
  */
 public class IkenshoShujiiIchiranDiv extends PanelBatchParameter {
 

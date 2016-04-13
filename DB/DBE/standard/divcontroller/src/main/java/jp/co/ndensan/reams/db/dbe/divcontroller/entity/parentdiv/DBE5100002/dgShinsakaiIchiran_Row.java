@@ -14,7 +14,6 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxTime;
 /**
  * dgShinsakaiIchiran_Row のクラスファイル
  *
- * @reamsid_L DBE-1350-030 lizhuoxuan
  */
 public class dgShinsakaiIchiran_Row extends DataRow {
     // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-01-15_09-59-03">

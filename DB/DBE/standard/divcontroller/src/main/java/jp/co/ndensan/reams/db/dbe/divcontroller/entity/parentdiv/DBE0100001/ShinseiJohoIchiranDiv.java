@@ -13,7 +13,6 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.PanelBatchParameter;
 /**
  * ShinseiJohoIchiran のクラスファイル
  *
- * @reamsid_L DBE-1370-010 sunhaidi
  */
 public class ShinseiJohoIchiranDiv extends PanelBatchParameter {
 

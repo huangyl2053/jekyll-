@@ -16,7 +16,6 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.DataRow;
 /**
  * dgListOfCommonMemo_Row のクラスファイル 
  * 
- * @reamsid_L DBE-0020-040 houtp
  */
 
 public class dgListOfCommonMemo_Row extends DataRow {

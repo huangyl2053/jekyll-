@@ -12,7 +12,6 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 /**
  * ChosaChikuPanel のクラスファイル
  *
- * @reamsid_L DBE-0021-010 zhangzhiming
  */
 public class ChosaChikuPanelDiv extends Panel {
 

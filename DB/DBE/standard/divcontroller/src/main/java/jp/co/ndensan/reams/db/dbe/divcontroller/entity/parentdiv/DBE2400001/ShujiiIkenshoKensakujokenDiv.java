@@ -16,7 +16,6 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxDate;
 /**
  * ShujiiIkenshoKensakujoken のクラスファイル
  *
- * @reamsid_L DBE-0080-010 duanzhanli
  */
 public class ShujiiIkenshoKensakujokenDiv extends Panel {
 

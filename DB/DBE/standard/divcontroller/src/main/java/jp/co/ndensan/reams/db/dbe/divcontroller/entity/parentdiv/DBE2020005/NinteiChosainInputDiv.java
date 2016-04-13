@@ -18,7 +18,6 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxNum;
 /**
  * NinteiChosainInput のクラスファイル
  *
- * @reamsid_L DBE-0021-010 zhangzhiming
  */
 public class NinteiChosainInputDiv extends Panel {
 

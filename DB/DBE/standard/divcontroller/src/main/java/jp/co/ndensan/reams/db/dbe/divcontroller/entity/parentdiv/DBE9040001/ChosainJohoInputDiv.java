@@ -25,7 +25,6 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.domain.TextBoxTelNo;
 /**
  * ChosainJohoInput のクラスファイル
  *
- * @reamsid_L DBE-0280-010 sunhaidi
  */
 public class ChosainJohoInputDiv extends Panel {
 

@@ -13,7 +13,6 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 /**
  * KaigoKanryoMessage のクラスファイル
  *
- * @reamsid_L DBE-0020-060 lishengli
  */
 public class KaigoKanryoMessageDiv extends Panel {
 

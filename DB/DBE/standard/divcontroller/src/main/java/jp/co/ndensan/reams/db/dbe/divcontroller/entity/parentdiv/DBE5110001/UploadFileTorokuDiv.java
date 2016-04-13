@@ -16,7 +16,6 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.UploadPanel;
 /**
  * UploadFileToroku のクラスファイル
  *
- * @reamsid_L DBE-0090-010 chengsanyuan
  */
 public class UploadFileTorokuDiv extends Panel {
 

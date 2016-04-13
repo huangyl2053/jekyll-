@@ -12,7 +12,6 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 /**
  * ShinsakaiKaisaiGogitaiJoho のクラスファイル。
  *
- * @reamsid_L DBE-0130-010 yaodongsheng
  */
 public class ShinsakaiKaisaiGogitaiJohoDiv extends Panel {
 

@@ -24,7 +24,6 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.domain.TextBoxTelNo;
 /**
  * ShujiiIkenshoToroku のクラスファイル
  *
- * @reamsid_L DBE-0070-010 chengsanyuan
  */
 public class ShujiiIkenshoTorokuDiv extends Panel {
 

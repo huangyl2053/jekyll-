@@ -16,7 +16,6 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxFlexibleDate;
 /**
  * SearchNinteiChosaSchedule のクラスファイル
  *
- * @reamsid_L DBE-0020-020 lishengli
  */
 public class SearchNinteiChosaScheduleDiv extends Panel {
 

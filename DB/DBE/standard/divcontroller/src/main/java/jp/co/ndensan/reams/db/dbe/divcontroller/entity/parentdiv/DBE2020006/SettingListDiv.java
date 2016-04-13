@@ -12,7 +12,6 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 /**
  * SettingList のクラスファイル
  *
- * @reamsid_L DBE-0022-010 linghuhang
  */
 public class SettingListDiv extends Panel {
 

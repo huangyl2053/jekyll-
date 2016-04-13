@@ -12,7 +12,6 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 /**
  * ShinsakaiScheduleSrch のクラスファイル。
  *
- * @reamsid_L DBE-0130-030 yaodongsheng
  */
 public class ShinsakaiScheduleSrchDiv extends Panel {
 

@@ -18,7 +18,6 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxNum;
 /**
  * ChosaChikuShichosoInput のクラスファイル
  *
- * @reamsid_L DBE-0023-010 xuyannan
  */
 public class ChosaChikuShichosoInputDiv extends Panel {
 

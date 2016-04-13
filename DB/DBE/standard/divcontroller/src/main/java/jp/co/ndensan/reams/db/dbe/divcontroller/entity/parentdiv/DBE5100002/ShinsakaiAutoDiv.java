@@ -12,7 +12,6 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.PanelBatchParameter;
 /**
  * ShinsakaiAuto のクラスファイル
  *
- * @reamsid_L DBE-1350-030 lizhuoxuan
  */
 public class ShinsakaiAutoDiv extends PanelBatchParameter {
 

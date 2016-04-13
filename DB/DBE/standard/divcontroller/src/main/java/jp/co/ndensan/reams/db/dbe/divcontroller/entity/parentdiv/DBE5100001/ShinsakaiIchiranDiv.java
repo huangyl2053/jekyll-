@@ -13,7 +13,6 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 /**
  * ShinsakaiIchiran のクラスファイル
  *
- * @reamsid_L DBE-1350-010 zuotao
  */
 public class ShinsakaiIchiranDiv extends Panel {
 

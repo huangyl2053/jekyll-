@@ -14,7 +14,6 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.TextBox;
 /**
  * GaibuSoft のクラスファイル
  *
- * @reamsid_L DBE-0070-010 chengsanyuan
  */
 public class GaibuSoftDiv extends Panel {
 

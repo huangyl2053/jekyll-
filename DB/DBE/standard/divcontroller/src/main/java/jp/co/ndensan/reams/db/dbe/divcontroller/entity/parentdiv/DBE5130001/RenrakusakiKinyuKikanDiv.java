@@ -13,7 +13,6 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.domain.*;
 /**
  * RenrakusakiKinyuKikan のクラスファイル
  *
- * @reamsid_L DBE-0110-010 wangxiaodong
  */
 public class RenrakusakiKinyuKikanDiv extends Panel {
 

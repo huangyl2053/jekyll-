@@ -12,7 +12,6 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.DataRow;
 /**
  * dgShinsakaiIinKoseiIchiran_Row のクラスファイル
  *
- * @reamsid_L DBE-0130-020 xuyannan
  */
 public class dgShinsakaiIinKoseiIchiran_Row extends DataRow {
     // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：バージョン情報無し">

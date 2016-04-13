@@ -12,7 +12,6 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 /**
  * KensakuJoken のクラスファイル
  *
- * @reamsid_L DBE-0110-010 wangxiaodong
  */
 public class KensakuJokenDiv extends Panel {
 

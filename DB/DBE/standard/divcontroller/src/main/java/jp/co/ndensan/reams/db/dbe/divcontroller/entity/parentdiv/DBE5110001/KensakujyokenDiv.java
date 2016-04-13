@@ -14,7 +14,6 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxNum;
 /**
  * Kensakujyoken のクラスファイル
  *
- * @reamsid_L DBE-0090-010 chengsanyuan
  */
 public class KensakujyokenDiv extends Panel {
 

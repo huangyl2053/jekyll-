@@ -14,7 +14,6 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.TextBox;
 /**
  * ChosaChikuShichosonPanel のクラスファイル
  *
- * @reamsid_L DBE-0023-010 xuyannan
  */
 public class ChosaChikuShichosonPanelDiv extends Panel {
 

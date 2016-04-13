@@ -12,7 +12,6 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.DataRow;
 /**
  * dgChosaChikuList_Row のクラスファイル
  *
- * @reamsid_L DBE-0021-010 zhangzhiming
  */
 public class dgChosaChikuList_Row extends DataRow {
     // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-01-15_09-59-03">

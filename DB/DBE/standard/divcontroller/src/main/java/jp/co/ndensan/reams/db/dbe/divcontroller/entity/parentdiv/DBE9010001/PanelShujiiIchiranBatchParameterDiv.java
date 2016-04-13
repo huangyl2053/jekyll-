@@ -10,7 +10,6 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.PanelBatchParameter;
 
 /**
  * PanelShujiiIchiranBatchParameter のクラスファイル 
- * @reamsid_L DBE-0240-010 dongyabin
  * @author 自動生成
  */
 public class PanelShujiiIchiranBatchParameterDiv extends PanelBatchParameter {

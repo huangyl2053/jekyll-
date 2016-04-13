@@ -18,7 +18,6 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxTime;
 /**
  * ShinsakaiIinWaritsuke のクラスファイル
  *
- * @reamsid_L DBE-0130-020 xuyannan
  */
 public class ShinsakaiIinWaritsukeDiv extends Panel {
 

@@ -14,7 +14,6 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 /**
  * NinteiChosainPanel のクラスファイル
  *
- * @reamsid_L DBE-0021-010 zhangzhiming
  */
 public class NinteiChosainPanelDiv extends Panel {
 

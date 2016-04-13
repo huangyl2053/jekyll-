@@ -12,7 +12,6 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 /**
  * ButtonArea のクラスファイル
  *
- * @reamsid_L DBE-0020-060 lishengli
  */
 public class ButtonAreaDiv extends Panel {
 
