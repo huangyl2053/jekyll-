@@ -71,6 +71,7 @@ public class TokuteiShinryouhi {
             div.getPanelThree().getDgdTokuteiShinryohi().setVisible(false);
             div.getPanelThree().getDgdTokuteiShinryohi().setDisplayNone(true);
             div.getPanelThree().getDdgToteishinryoTokubetushinryo().setVisible(true);
+            div.getPanelThree().getPanelFour().setVisible(false);
             div.getPanelThree().getPanelFive().setVisible(false);
             div.getPanelThree().getPanelFive().setDisplayNone(true);
             List<ShokanTokuteiShinryohi> shokanTokuteiShinryohiList = ShokanbaraiJyokyoShokai.createInstance()
@@ -86,6 +87,7 @@ public class TokuteiShinryouhi {
             div.getPanelThree().getDdgToteishinryoTokubetushinryo().setDisplayNone(true);
             div.getPanelThree().getPanelFour().setVisible(false);
             div.getPanelThree().getPanelFour().setDisplayNone(true);
+            div.getPanelThree().getPanelFive().setVisible(false);
             List<ShokanTokuteiShinryoTokubetsuRyoyo> shokanTokuteiShinryoTokubetsuRyoyoList = ShokanbaraiJyokyoShokai
                     .createInstance().getTokuteyiShinnryouhiTokubeturyoyohi(被保険者番号, サービス年月, 整理番号,
                             事業者番号, 様式番号, 明細番号, null);
