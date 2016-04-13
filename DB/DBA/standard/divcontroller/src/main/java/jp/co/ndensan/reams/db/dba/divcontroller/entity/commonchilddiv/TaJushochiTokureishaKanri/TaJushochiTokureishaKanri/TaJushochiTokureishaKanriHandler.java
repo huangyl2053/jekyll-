@@ -55,7 +55,6 @@ public class TaJushochiTokureishaKanriHandler {
     private static final RString 状態_追加 = new RString("追加");
     private static final RString 状態_修正 = new RString("修正");
     private static final RString 状態_削除 = new RString("削除");
-    private static final RString 状態_解除 = new RString("解除");
     private static final RString 他特例解除 = new RString("01");
     private static final RString 転入 = new RString("01");
     private static final RString 除外者適用 = new RString("01");
@@ -245,8 +244,8 @@ public class TaJushochiTokureishaKanriHandler {
         FlexibleDate 異動日 = new FlexibleDate(div.getTajushochiTokureiInput().getHiddenInputIdoYMD());
         RString 最大枝番;
         RString 最新履歴番号;
-        RString 枝番;
-        RString 履歴番号;
+        RString 枝番 = new RString("1");
+        RString 履歴番号 = new RString("1");
         if (rowList != null && !rowList.isEmpty()) {
             最大枝番 = rowList.get(0).getEdaNo();
             最新履歴番号 = rowList.get(0).getRirekiNo();
@@ -256,8 +255,6 @@ public class TaJushochiTokureishaKanriHandler {
             履歴番号 = new RString(String.valueOf(rirekiNoMax + 1));
         } else {
             rowList = new ArrayList();
-            枝番 = new RString("1");
-            履歴番号 = new RString("1");
         }
 
         if ((訂正モード.equals(親画面状態))) {
@@ -321,6 +318,7 @@ public class TaJushochiTokureishaKanriHandler {
                 if (div.getCcdHokensha().getHokenjaName() != null) {
                     rireki_Row.setSochiHokenshaNo(div.getCcdHokensha().getHokenjaName());
                 }
+                rireki_Row.setRirekiNo(履歴番号);
                 rowList.add(rireki_Row);
                 TashichosonJushochiTokurei 住所地特例の識別子
                         = new TashichosonJushochiTokurei(識別コード, new FlexibleDate(div.getTxtKaijyobi().getValue().toString()), 枝番);
@@ -419,12 +417,16 @@ public class TaJushochiTokureishaKanriHandler {
                 = ViewStateHolder.get(jp.co.ndensan.reams.db.dbz.divcontroller.viewbox.ViewStateKeys.他住所地特例者管理_他住所地特例, Models.class);
         Models<ShisetsuNyutaishoIdentifier, ShisetsuNyutaisho> 保険施設入退所Model
                 = ViewStateHolder.get(jp.co.ndensan.reams.db.dbz.divcontroller.viewbox.ViewStateKeys.他住所地特例者管理_保険施設入退所, Models.class);
+        RString 枝番;
         for (dgJushochiTokureiRireki_Row row : rowList) {
             RString 最大枝番 = rowList.get(0).getEdaNo();
             RString 履歴番号 = rowList.get(0).getRirekiNo();
             FlexibleDate 異動日 = new FlexibleDate(row.getIdoYMD());
             int intEdaNoMax = Integer.parseInt(最大枝番.toString());
-            RString 枝番 = new RString(String.valueOf(intEdaNoMax + 1));
+            枝番 = new RString(String.valueOf(intEdaNoMax + 1));
+            if (intEdaNoMax == 1) {
+                枝番 = new RString("1");
+            }
             if (row.getRowState() == null) {
                 continue;
             }
