@@ -29,6 +29,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Button;
 import jp.co.ndensan.reams.uz.uza.ui.binding.DataGrid;
+import jp.co.ndensan.reams.uz.uza.ui.binding.DataGridButtonState;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Mode;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxFlexibleDate;
@@ -44,7 +45,7 @@ import jp.co.ndensan.reams.uz.uza.util.db.SearchResult;
  */
 public class ShikakuTokusoRirekiDiv extends Panel implements IShikakuTokusoRirekiDiv {
 
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-01-15_09-59-03">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -426,7 +427,8 @@ public class ShikakuTokusoRirekiDiv extends Panel implements IShikakuTokusoRirek
             row.setSochimotoHokensha(shikakuTokuso.get措置元保険者());
             row.setKyuHokensha(shikakuTokuso.get旧市町村名称());
             row.setShikibetsuCode(shikakuTokuso.get識別コード().value());
-
+            row.setHihokenshaNo(shikakuTokuso.get被保険者番号().getColumnValue());
+            row.setDaNo(shikakuTokuso.get枝番());
             RDateTime 処理日時 = shikakuTokuso.get処理日時();
             RStringBuilder 処理日時表示 = new RStringBuilder();
             処理日時表示.append(処理日時.getDate().wareki().toDateString());
@@ -436,12 +438,39 @@ public class ShikakuTokusoRirekiDiv extends Panel implements IShikakuTokusoRirek
             処理日時表示.append(String.format("%02d", 処理日時.getMinute()));
             処理日時表示.append(":");
             処理日時表示.append(String.format("%02d", 処理日時.getSecond()));
-
             row.setShoriDateTime(処理日時表示.toRString());
-
-            dgShikakuShutokuRirekiList.add(row);
+            row.setDeleteButtonState(DataGridButtonState.Disabled);
+            row.setModifyButtonState(DataGridButtonState.Disabled);
         }
-
         this.getDgShikakuShutokuRireki().setDataSource(dgShikakuShutokuRirekiList);
+        this.getBtnAddShikakuShutoku().setDisabled(true);
     }
+
+    @Override
+    public void setDataGridSelectItem(dgShikakuShutokuRireki_Row dataSource) {
+        List<dgShikakuShutokuRireki_Row> rowList = this.getDgShikakuShutokuRireki().getDataSource();
+        rowList.add(dataSource);
+        this.getDgShikakuShutokuRireki().setDataSource(rowList);
+    }
+
+    @Override
+    public dgShikakuShutokuRireki_Row getDataGridSelectItem() {
+        return this.getDgShikakuShutokuRireki().getClickedItem();
+    }
+
+    @Override
+    public void setDataGridDataSource(List<dgShikakuShutokuRireki_Row> dataSource) {
+        this.getDgShikakuShutokuRireki().setDataSource(dataSource);
+    }
+
+    @Override
+    public List<dgShikakuShutokuRireki_Row> getDataGridDataSource() {
+        return this.getDgShikakuShutokuRireki().getDataSource();
+    }
+
+    @Override
+    public void set追加するボタン(boolean jyotai) {
+        this.getBtnAddShikakuShutoku().setDisabled(false);
+    }
+
 }
