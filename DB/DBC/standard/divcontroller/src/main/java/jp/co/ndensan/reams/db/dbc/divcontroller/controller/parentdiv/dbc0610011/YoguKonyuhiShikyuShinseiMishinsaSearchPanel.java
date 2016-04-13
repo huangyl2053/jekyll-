@@ -79,7 +79,7 @@ public class YoguKonyuhiShikyuShinseiMishinsaSearchPanel {
     public ResponseData<YoguKonyuhiShikyuShinseiMishinsaSearchPanelDiv> onClick_btnModifyShinsei(
             YoguKonyuhiShikyuShinseiMishinsaSearchPanelDiv div) {
         getHandler(div).setViewState();
-        // TODO 検索されたデータを一覧に表示する
+        // TODO 検索されたデータを一覧に表示する  福祉用具購入費支給申請_決定情報登録画面実装は完成していません
         return ResponseData.of(div).forwardWithEventName(DBC0610011TransitionEventName.修正).respond();
     }
 
@@ -108,7 +108,7 @@ public class YoguKonyuhiShikyuShinseiMishinsaSearchPanel {
         div.getYoguKonyuhiShikyuShinseiMishinsaSearchCondition().setVisible(false);
         div.getYoguKonyuhiShikyuShinseiMishinsaResultList().setVisible(false);
         CommonButtonHolder.setVisibleByCommonButtonFieldName(保存, false);
-        // TODO QA番号 628完了確認メッセージエリアを表示にする。
+        // TODO QA番号:628 完了確認メッセージエリアを表示にする。
         return ResponseData.of(div).respond();
     }
 
