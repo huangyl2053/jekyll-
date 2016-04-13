@@ -22,7 +22,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
  * @author 自動生成
  */
 public class GaikyoTokkiYichiranNyurokuDiv extends Panel {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-01-15_09-59-03">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -33,8 +33,6 @@ public class GaikyoTokkiYichiranNyurokuDiv extends Panel {
     private ChosaTaishoDiv ChosaTaisho;
     @JsonProperty("TokkiNyuryoku")
     private TokkiNyuryokuDiv TokkiNyuryoku;
-    @JsonProperty("CommonChildDiv1")
-    private NinteiShinseishaKihonInfoDiv CommonChildDiv1;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -79,22 +77,8 @@ public class GaikyoTokkiYichiranNyurokuDiv extends Panel {
     }
 
     /*
-     * getCommonChildDiv1
-     * @return CommonChildDiv1
-     */
-    @JsonProperty("CommonChildDiv1")
-    public INinteiShinseishaKihonInfoDiv getCommonChildDiv1() {
-        return CommonChildDiv1;
-    }
-
-    /*
      * [ ショートカットの作成 ]
      */
-    @JsonIgnore
-    public INinteiShinseishaKihonInfoDiv getCcdNinteiShinseishaKihonInfo() {
-        return this.getChosaTaisho().getCcdNinteiShinseishaKihonInfo();
-    }
-
     @JsonIgnore
     public RenrakusakiKihonDiv getRenrakusakiKihon() {
         return this.getChosaTaisho().getRenrakusakiKihon();
@@ -113,6 +97,11 @@ public class GaikyoTokkiYichiranNyurokuDiv extends Panel {
     @JsonIgnore
     public IChosaJisshishaJohoDiv getCcdChosaJisshishaJoho() {
         return this.getChosaTaisho().getCcdChosaJisshishaJoho();
+    }
+
+    @JsonIgnore
+    public INinteiShinseishaKihonInfoDiv getCcdNinteiShinseishaKihonInfo() {
+        return this.getChosaTaisho().getCcdNinteiShinseishaKihonInfo();
     }
 
     @JsonIgnore

@@ -29,6 +29,7 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
 public class ValidationHandler {
 
     private static final int INT8 = 8;
+    private static RString 特記事項番号 = RString.EMPTY;
 
     /**
      * 特記事項番号入力チェックします。
@@ -41,7 +42,7 @@ public class ValidationHandler {
     public ValidationMessageControlPairs 特記事項番号入力チェック(
             ValidationMessageControlPairs validPairs,
             TextBox texBox) {
-
+        特記事項番号 = texBox.getValue();
         try {
             NinteichosaKomoku09B.toValue(texBox.getValue());
         } catch (IllegalArgumentException e) {
@@ -127,7 +128,7 @@ public class ValidationHandler {
 
     private static enum RRVMessages implements IValidationMessage {
 
-        Validate特記事項番号不正(UrErrorMessages.不正, "特記事項番号"),
+        Validate特記事項番号不正(UrErrorMessages.不正, "特記事項番号(" + 特記事項番号.toString() + ")"),
         Validate特記事項番号が追加不可(DbeErrorMessages.特記事項番号が追加不可),
         Validate連番最大値を超過(DbeErrorMessages.連番最大値を超過);
         private final Message message;
