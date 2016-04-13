@@ -139,10 +139,9 @@ public final class FutsuChoshuTotalHandler {
 
     private List<KeyValueDataSource> set選択可能年度(FlexibleYear 調定年度) {
         List<KeyValueDataSource> keyValueData = new ArrayList<>();
-        while (平成12年.isBeforeOrEquals(調定年度)) {
+        for (; 平成12年.isBeforeOrEquals(調定年度); 調定年度 = 調定年度.minusYear(1)) {
             keyValueData.add(new KeyValueDataSource(調定年度.toDateString(),
                     調定年度.wareki().firstYear(FirstYear.ICHI_NEN).toDateString()));
-            調定年度 = 調定年度.minusYear(1);
         }
         return keyValueData;
     }
