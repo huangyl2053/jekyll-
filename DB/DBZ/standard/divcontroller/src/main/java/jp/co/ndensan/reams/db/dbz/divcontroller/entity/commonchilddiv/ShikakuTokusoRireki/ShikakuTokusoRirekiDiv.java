@@ -450,7 +450,11 @@ public class ShikakuTokusoRirekiDiv extends Panel implements IShikakuTokusoRirek
     @Override
     public void setDataGridSelectItem(dgShikakuShutokuRireki_Row dataSource) {
         List<dgShikakuShutokuRireki_Row> rowList = this.getDgShikakuShutokuRireki().getDataSource();
-        rowList.add(dataSource);
+        if (this.getDgShikakuShutokuRireki().getClickedRowId() != -1) {
+            rowList.set(this.getDgShikakuShutokuRireki().getClickedRowId(), dataSource);
+        } else {
+            rowList.add(dataSource);
+        }
         this.getDgShikakuShutokuRireki().setDataSource(rowList);
     }
 
