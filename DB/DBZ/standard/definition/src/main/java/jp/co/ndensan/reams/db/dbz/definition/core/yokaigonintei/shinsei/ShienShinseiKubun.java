@@ -26,7 +26,7 @@ public enum ShienShinseiKubun {
     /**
      * コード:3 名称:不明 略称:定義なし
      */
-    不明("3", "不明");
+    不明("9", "不明");
 
     private final RString code;
     private final RString fullName;
