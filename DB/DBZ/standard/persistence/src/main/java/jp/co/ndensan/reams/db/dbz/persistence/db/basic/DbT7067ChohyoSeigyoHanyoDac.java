@@ -178,4 +178,18 @@ public class DbT7067ChohyoSeigyoHanyoDac implements ISaveable<DbT7067ChohyoSeigy
                                 eq(kanriNendo, 管理年度))).
                 toList(DbT7067ChohyoSeigyoHanyoEntity.class);
     }
+
+    /**
+     * 帳票制御汎用のデータkomokuvalueを取得します。
+     *
+     * @param 出力条件 komokuname
+     * @return DbT7067ChohyoSeigyoHanyoEntity
+     */
+    public DbT7067ChohyoSeigyoHanyoEntity getKomokuValue(RString 出力条件) {
+        DbAccessorNormalType accessor = new DbAccessorNormalType(session);
+        return accessor.select().
+                table(DbT7067ChohyoSeigyoHanyo.class).
+                where(eq(komokuName, 出力条件)).
+                toObject(DbT7067ChohyoSeigyoHanyoEntity.class);
+    }
 }

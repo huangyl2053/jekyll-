@@ -8,9 +8,11 @@ package jp.co.ndensan.reams.db.dbu.service.core.hihokenshashoikkatsuhakko;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import jp.co.ndensan.reams.db.dbu.business.core.chohyoseigyohanyo.ChohyoSeigyoHanyoBusiness;
 import jp.co.ndensan.reams.db.dbu.business.core.hihokenshashoikkatsuhakko.HihokenshashoIkkatsuHakkoModel;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7022ShoriDateKanriEntity;
 import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT7022ShoriDateKanriDac;
+import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT7067ChohyoSeigyoHanyoDac;
 import jp.co.ndensan.reams.ur.urz.business.core.association.Association;
 import jp.co.ndensan.reams.ur.urz.service.core.association.AssociationFinderFactory;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
@@ -27,6 +29,7 @@ import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 public class HihokenshaShoBatchPrmFinder {
 
     private final DbT7022ShoriDateKanriDac datekanridac;
+    private final DbT7067ChohyoSeigyoHanyoDac dbt7067dac;
 
     /**
      * コンストラクタ
@@ -34,6 +37,7 @@ public class HihokenshaShoBatchPrmFinder {
      */
     public HihokenshaShoBatchPrmFinder() {
         this.datekanridac = InstanceProvider.create(DbT7022ShoriDateKanriDac.class);
+        this.dbt7067dac = InstanceProvider.create(DbT7067ChohyoSeigyoHanyoDac.class);
     }
 
     /**
@@ -93,5 +97,15 @@ public class HihokenshaShoBatchPrmFinder {
         model.setTaishoShuryoYMD(entityList.getTaishoShuryoYMD());
         hihokenList.add(model);
         return SearchResult.of(hihokenList, 0, false);
+    }
+
+    /**
+     * 項目名を取得します。
+     *
+     * @param 出力条件 出力条件
+     * @return 帳票制御汎用
+     */
+    public ChohyoSeigyoHanyoBusiness getKomokuValue(RString 出力条件) {
+        return new ChohyoSeigyoHanyoBusiness(dbt7067dac.getKomokuValue(出力条件));
     }
 }

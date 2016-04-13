@@ -13,11 +13,16 @@ import jp.co.ndensan.reams.db.dbu.divcontroller.handler.dbu0400011.HihokenshaSho
 import jp.co.ndensan.reams.db.dbu.divcontroller.handler.dbu0400011.ValidationHandler;
 import jp.co.ndensan.reams.db.dbu.service.core.hihokenshashoikkatsuhakko.HihokenshaShoBatchPrmFinder;
 import jp.co.ndensan.reams.db.dbz.definition.core.ViewStateKeys;
+import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.uz.uza.biz.ReportId;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.message.IMessageGettable;
+import jp.co.ndensan.reams.uz.uza.message.IValidationMessage;
+import jp.co.ndensan.reams.uz.uza.message.Message;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.CommonButtonHolder;
+import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPair;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 import jp.co.ndensan.reams.uz.uza.util.config.BusinessConfig;
@@ -39,6 +44,7 @@ public class HihokenshaShoBatchPrm {
     private static final RString タイプ_A4横 = new RString("01");
     private static final RString タイプ_B4横1 = new RString("21");
     private static final RString タイプ_B4横2 = new RString("22");
+    private static final RString KOMOKUNAME = new RString("出力条件");
     private static final ReportId REPORTID_A4 = new ReportId("DBA100001_HihokenshashoA4");
     private static final ReportId REPORTID_B4 = new ReportId("DBA100002_HihokenshashoB4");
 
@@ -58,10 +64,13 @@ public class HihokenshaShoBatchPrm {
      */
     public ResponseData<HihokenshaShoBatchPrmDiv> onLoad(HihokenshaShoBatchPrmDiv div) {
         ResponseData<HihokenshaShoBatchPrmDiv> response = new ResponseData<>();
-        //TODO QA295  未対応
-        div.getRadShutsuryokuJoken().setSelectedKey(JYUKYUMONO_RADIO_SENTAKU);
-        ViewStateHolder.put(ViewStateKeys.介護保険被保険者証一括作成_出力条件, JYUKYUMONO_RADIO_SENTAKU);
-        SearchResult<HihokenshashoIkkatsuHakkoModel> resultList = service.getChushutsuKikan(JYUKYUMONO_RADIO_SENTAKU);
+        if (!setSyutsuryoku(div)) {
+            ValidationMessageControlPairs validationMessages = new ValidationMessageControlPairs();
+            validationMessages.add(new ValidationMessageControlPair(RRVMessage.ValidateA, div.getRadShutsuryokuJoken()));
+            return ResponseData.of(div).addValidationMessages(validationMessages).respond();
+        }
+        ViewStateHolder.put(ViewStateKeys.介護保険被保険者証一括作成_出力条件, div.getRadShutsuryokuJoken().getSelectedKey());
+        SearchResult<HihokenshashoIkkatsuHakkoModel> resultList = service.getChushutsuKikan(div.getRadShutsuryokuJoken().getSelectedKey());
         CommonButtonHolder.setVisibleByCommonButtonFieldName(new RString("btnHakko"), false);
         getHandler(div).onLoad(resultList.records());
         NenreiToutatuYoteishaCheckListManager nenreiToutatuYoteishaManager
@@ -149,5 +158,35 @@ public class HihokenshaShoBatchPrm {
 
     private ValidationHandler getHandlerValidation(HihokenshaShoBatchPrmDiv div) {
         return new ValidationHandler(div);
+    }
+
+    private boolean setSyutsuryoku(HihokenshaShoBatchPrmDiv div) {
+        RString 出力条件 = service.getKomokuValue(KOMOKUNAME).getkomokuValue();
+        if (RString.isNullOrEmpty(出力条件)) {
+            return false;
+        }
+        if (JYUKYUMONO_RADIO_SENTAKU.equals(出力条件)) {
+            div.getRadShutsuryokuJoken().setSelectedKey(JYUKYUMONO_RADIO_SENTAKU);
+        } else if (GAITOMONO_RADIO_SENTAKU.equals(出力条件)) {
+            div.getRadShutsuryokuJoken().setSelectedKey(GAITOMONO_RADIO_SENTAKU);
+        } else if (JNENNREI_RADIO_SENTAKU.equals(出力条件)) {
+            div.getRadShutsuryokuJoken().setSelectedKey(JNENNREI_RADIO_SENTAKU);
+        }
+        return true;
+    }
+
+    private static enum RRVMessage implements IValidationMessage {
+
+        ValidateA(UrErrorMessages.選択されていない, KOMOKUNAME.toString());
+        private final Message message;
+
+        private RRVMessage(IMessageGettable message, String... replacements) {
+            this.message = message.getMessage().replace(replacements);
+        }
+
+        @Override
+        public Message getMessage() {
+            return message;
+        }
     }
 }
