@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbu.divcontroller.controller.dbu0900041;
+package jp.co.ndensan.reams.db.dbu.divcontroller.controller.parentdiv.DBU0900041;
 
 import jp.co.ndensan.reams.db.dbu.divcontroller.entity.parentdiv.DBU0900041.DBU0900041StateName;
 import jp.co.ndensan.reams.db.dbu.divcontroller.entity.parentdiv.DBU0900041.DBU0900041TransitionEventName;
@@ -28,6 +28,8 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 
 /**
  * 裁決結果登録_登録のクラス。
+ *
+ * @reamsid_L DBU-1080-110 xuyue
  */
 public class SaiketukekaTorokuPanel {
 

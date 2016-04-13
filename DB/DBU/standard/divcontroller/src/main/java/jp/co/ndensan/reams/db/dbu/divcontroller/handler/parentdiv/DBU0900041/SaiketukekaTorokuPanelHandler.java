@@ -13,6 +13,8 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 
 /**
  * 裁決結果登録_登録DivのHandlerクラスです。
+ *
+ * @reamsid_L DBU-1080-110 xuyue
  */
 public class SaiketukekaTorokuPanelHandler {
 
