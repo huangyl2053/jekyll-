@@ -510,7 +510,7 @@
     </select>
     <select id="select保険者ドロップダウンリスト"
              resultMap="resultMap_ChikuShichosonRelateEntity"
-             parameterType="jp.co.ndensan.reams.db.dbe.definition.core.ninteichosaschedule.INinteiKanryoJohoMybatisParamete" fetchSize="500">
+             parameterType="jp.co.ndensan.reams.db.dbe.definition.core.ninteichosaschedule.INinteiKanryoJohoMybatisParameter" fetchSize="500">
         SELECT
         DbT5224."shichosonCode" as "DbT5224_shichosonCode",
         DbT7051."shichosonMeisho" as "DbT7051_shichosonMeisho"

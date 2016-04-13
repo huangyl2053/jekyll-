@@ -18,10 +18,6 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
  */
 public class ShisetsutourukuPanelHandler {
 
-    private static final RString 追加 = new RString("追加状態");
-    private static final RString 修正 = new RString("修正状態");
-    private static final RString 削除 = new RString("削除状態");
-    private static final RString 照会 = new RString("照会状態");
     private static final RString その他特例施設 = new RString("2");
     private static final RString 管内 = new RString("1");
     private final ShisetsutourukuPanelDiv div;

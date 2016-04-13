@@ -69,6 +69,7 @@ public class ShisetsutourukuPanel {
         } else if (修正.equals(介護事業者_状態)) {
             List<KaigoJogaiTokureiTaishoShisetsu> list = manager.selectByKoseiShichosonMasterList(事業者情報取得paramter(div)).records();
             getHandler(div).修正_状態(list);
+            get事業者情報の検索処理(div);
             return ResponseData.of(div).setState(DBA2010012StateName.修正状態);
         } else if (削除.equals(介護事業者_状態)) {
             List<KaigoJogaiTokureiTaishoShisetsu> list = manager.selectByKoseiShichosonMasterList(事業者情報取得paramter(div)).records();
@@ -78,10 +79,9 @@ public class ShisetsutourukuPanel {
         } else if (照会.equals(介護事業者_状態)) {
             List<KaigoJogaiTokureiTaishoShisetsu> list = manager.selectByKoseiShichosonMasterList(事業者情報取得paramter(div)).records();
             getHandler(div).削除_状態(list);
+            get事業者情報の検索処理(div);
             return ResponseData.of(div).setState(DBA2010012StateName.照会状態);
         }
-        ViewStateHolder.put(ViewStateKeys.サービス登録_有効開始日, div.getTxtShisetsuYukoKaishiYMD().getValue());
-        ViewStateHolder.put(ViewStateKeys.サービス登録_サービス情報, KaigoJogaiTokureiTaishoShisetsu.class);
         return ResponseData.of(div).respond();
     }
 
@@ -111,6 +111,7 @@ public class ShisetsutourukuPanel {
                     && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
                 set有効期間合理性チェック(div);
                 get事業者情報の追加処理(div);
+                return ResponseData.of(div).setState(DBA2010012StateName.完了状態);
             }
         }
         if (修正.equals(ViewStateHolder.get(ViewStateKeys.介護事業者_状態, RString.class))) {
@@ -121,6 +122,7 @@ public class ShisetsutourukuPanel {
                     && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
                 set有効期間合理性チェック(div);
                 get事業者情報の修正処理(div);
+                return ResponseData.of(div).setState(DBA2010012StateName.完了状態);
             }
         }
         if (削除.equals(ViewStateHolder.get(ViewStateKeys.介護事業者_状態, RString.class))) {
@@ -131,9 +133,10 @@ public class ShisetsutourukuPanel {
                     && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
                 set有効期間合理性チェック(div);
                 get事業者情報の削除処理(div);
+                return ResponseData.of(div).setState(DBA2010012StateName.完了状態);
             }
         }
-        return ResponseData.of(div).setState(DBA2010012StateName.完了状態);
+        return ResponseData.of(div).respond();
     }
 
     /**
@@ -207,7 +210,7 @@ public class ShisetsutourukuPanel {
             business = 事業者登録情報List.get(0);
         }
         ViewStateHolder.put(ViewStateKeys.サービス登録_サービス情報, business);
-        getHandler(div).set施設情報エリア(事業者登録情報List);
+        ViewStateHolder.put(ViewStateKeys.サービス登録_有効開始日, div.getTxtShisetsuYukoKaishiYMD().getValue());
         return ResponseData.of(div).respond();
     }
 
