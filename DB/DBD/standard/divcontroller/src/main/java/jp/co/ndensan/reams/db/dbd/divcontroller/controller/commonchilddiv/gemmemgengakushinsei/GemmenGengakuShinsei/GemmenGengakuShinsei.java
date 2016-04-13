@@ -1,8 +1,8 @@
-package jp.co.ndensan.reams.db.dbd.divcontroller.controller.commonchilddiv.gemmemgengakushinsei;
+package jp.co.ndensan.reams.db.dbd.divcontroller.controller.commonchilddiv.gemmemgengakushinsei.GemmenGengakuShinsei;
 
 import java.util.List;
 import jp.co.ndensan.reams.db.dbd.divcontroller.entity.commonchilddiv.gemmemgengakushinsei.GemmenGengakuShinsei.GemmenGengakuShinseiDiv;
-import jp.co.ndensan.reams.db.dbd.divcontroller.handler.commonchilddiv.gemmemgengakushinsei.GemmenGengakuShinseiHandler;
+import jp.co.ndensan.reams.db.dbd.divcontroller.entity.commonchilddiv.gemmemgengakushinsei.GemmenGengakuShinsei.GemmenGengakuShinseiHandler;
 import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.kojin.IKojin;
 import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.search.IShikibetsuTaishoSearchKey;
 import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.search.ShikibetsuTaishoGyomuHanteiKeyFactory;
@@ -19,6 +19,8 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
  * 共有子Div「減免減額申請」のDivControllerです。
+ *
+ * @reamsid_L DBD-4341-010 xuyue
  */
 public class GemmenGengakuShinsei {
 

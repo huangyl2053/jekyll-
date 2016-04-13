@@ -3,12 +3,11 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbd.divcontroller.handler.commonchilddiv.gemmemgengakushinsei;
+package jp.co.ndensan.reams.db.dbd.divcontroller.entity.commonchilddiv.gemmemgengakushinsei.GemmenGengakuShinsei;
 
 import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbd.business.gemmengengaku.ShinseiJoho;
-import jp.co.ndensan.reams.db.dbd.divcontroller.entity.commonchilddiv.gemmemgengakushinsei.GemmenGengakuShinsei.GemmenGengakuShinseiDiv;
 import jp.co.ndensan.reams.db.dbx.business.core.kaigojigyosha.kaigojigyosha.KaigoJigyosha;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
 import jp.co.ndensan.reams.db.dbx.service.core.kaigojigyosha.kaigojigyosha.KaigoJigyoshaManager;
@@ -27,6 +26,8 @@ import jp.co.ndensan.reams.uz.uza.ui.session.PanelSessionAccessor;
 
 /**
  * 共有子Div「減免減額申請」のHandlerクラスです。
+ *
+ * @reamsid_L DBD-4341-010 xuyue
  */
 public class GemmenGengakuShinseiHandler {
 
