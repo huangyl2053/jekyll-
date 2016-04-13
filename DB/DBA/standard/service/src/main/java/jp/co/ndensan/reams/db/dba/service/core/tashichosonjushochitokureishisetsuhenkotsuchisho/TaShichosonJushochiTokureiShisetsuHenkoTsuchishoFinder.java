@@ -107,7 +107,8 @@ public class TaShichosonJushochiTokureiShisetsuHenkoTsuchishoFinder {
                 1,
                 1,
                 new FlexibleDate(RDate.getNowDate().toDateString()));
-        if (tsuchishoTeikeibunInfo.getUrT0126TsuchishoTeikeibunEntity() != null) {
+        if (tsuchishoTeikeibunInfo != null
+                && tsuchishoTeikeibunInfo.getUrT0126TsuchishoTeikeibunEntity() != null) {
             outEntity.set見出し(tsuchishoTeikeibunInfo.getUrT0126TsuchishoTeikeibunEntity().getSentence());
         }
 
@@ -153,7 +154,7 @@ public class TaShichosonJushochiTokureiShisetsuHenkoTsuchishoFinder {
                 = this.mapperProvider.create(ITaShichosonJushochiTokureiShisetsuHenkoTsuchishoMapper.class);
         List<DbT1005KaigoJogaiTokureiTaishoShisetsuEntity> entityList
                 = henkoTsuchishoMapper.getTaShichosonJushochiTokureiShisetsuHenkoTsuchisho(inEntity);
-        if (entityList.size() >= 0 && entityList.get(0) != null) {
+        if (entityList.size() >= 1 && entityList.get(0) != null) {
             outEntity.set変更前施設名称(entityList.get(0).getJigyoshaMeisho());
             outEntity.set変更前施設電話番号(entityList.get(0).getTelNo());
             outEntity.set変更前施設FAX番号(entityList.get(0).getFaxNo());
@@ -162,7 +163,7 @@ public class TaShichosonJushochiTokureiShisetsuHenkoTsuchishoFinder {
             }
             outEntity.set変更前施設住所(entityList.get(0).getJigyoshaJusho());
         }
-        if (entityList.size() >= 1 && entityList.get(1) != null) {
+        if (entityList.size() >= 2 && entityList.get(1) != null) {
             outEntity.set変更後施設名称(entityList.get(1).getJigyoshaMeisho());
             outEntity.set変更後施設電話番号(entityList.get(1).getTelNo());
             outEntity.set変更後施設FAX番号(entityList.get(1).getFaxNo());
@@ -224,7 +225,8 @@ public class TaShichosonJushochiTokureiShisetsuHenkoTsuchishoFinder {
                 1,
                 1,
                 new FlexibleDate(RDate.getNowDate().toDateString()));
-        if (tsuchishoTeikeibunInfo.getUrT0126TsuchishoTeikeibunEntity() != null) {
+        if (tsuchishoTeikeibunInfo != null
+                && tsuchishoTeikeibunInfo.getUrT0126TsuchishoTeikeibunEntity() != null) {
             outEntity.set見出し(tsuchishoTeikeibunInfo.getUrT0126TsuchishoTeikeibunEntity().getSentence());
         }
 
