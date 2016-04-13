@@ -7,7 +7,6 @@ package jp.co.ndensan.reams.db.dba.divcontroller.controller.parentdiv.DBA2010012
 
 import java.util.List;
 import jp.co.ndensan.reams.db.dba.definition.mybatisprm.kaigojigyoshashisetsukanrio.KaigoJigyoshaParameter;
-import jp.co.ndensan.reams.db.dba.definition.mybatisprm.kaigojigyoshashisetsukanrio.KaigoJigyoshaShisetsuKanriMapperParameter;
 import jp.co.ndensan.reams.db.dba.definition.mybatisprm.kaigojigyoshashisetsukanrio.KaigoJogaiTokureiParameter;
 import jp.co.ndensan.reams.db.dba.divcontroller.entity.parentdiv.DBA2010012.DBA2010012StateName;
 import jp.co.ndensan.reams.db.dba.divcontroller.entity.parentdiv.DBA2010012.ShisetsutourukuPanelDiv;
@@ -104,7 +103,7 @@ public class ShisetsutourukuPanel {
      * @return ResponseData
      */
     public ResponseData<ShisetsutourukuPanelDiv> onClick_HoZonn(ShisetsutourukuPanelDiv div) {
-        if (追加.equals(ViewStateHolder.get(ViewStateKeys.状態, RString.class))) {
+        if (追加.equals(ViewStateHolder.get(ViewStateKeys.介護事業者_状態, RString.class))) {
             if (!ResponseHolder.isReRequest()) {
                 return ResponseData.of(div).addMessage(UrQuestionMessages.保存の確認.getMessage()).respond();
             }
@@ -114,7 +113,7 @@ public class ShisetsutourukuPanel {
                 get事業者情報の追加処理(div);
             }
         }
-        if (修正.equals(ViewStateHolder.get(ViewStateKeys.状態, RString.class))) {
+        if (修正.equals(ViewStateHolder.get(ViewStateKeys.介護事業者_状態, RString.class))) {
             if (!ResponseHolder.isReRequest()) {
                 return ResponseData.of(div).addMessage(UrQuestionMessages.保存の確認.getMessage()).respond();
             }
@@ -124,7 +123,7 @@ public class ShisetsutourukuPanel {
                 get事業者情報の修正処理(div);
             }
         }
-        if (削除.equals(ViewStateHolder.get(ViewStateKeys.状態, RString.class))) {
+        if (削除.equals(ViewStateHolder.get(ViewStateKeys.介護事業者_状態, RString.class))) {
             if (!ResponseHolder.isReRequest()) {
                 return ResponseData.of(div).addMessage(UrQuestionMessages.保存の確認.getMessage()).respond();
             }
@@ -177,8 +176,8 @@ public class ShisetsutourukuPanel {
         JigyoshaMode mode = ViewStateHolder.get(ViewStateKeys.介護事業者_介護事業者情報, JigyoshaMode.class);
         KaigoJigyoshaParameter paramter = KaigoJigyoshaParameter
                 .createParam(mode.getJigyoshaNo() == null ? RString.EMPTY : mode.getJigyoshaNo().value(),
+                        ViewStateHolder.get(ViewStateKeys.介護事業者_事業者種別, RString.class),
                         div.getTxtShisetsuYukoKaishiYMD().getValue(),
-                        ViewStateHolder.get(ViewStateKeys.サービス登録_サービス種類コード, RString.class),
                         div.getTxtShisetsuYukoShuryoYMD().getValue());
 
         KaigoJogaiTokureiParameter 重複paramter = KaigoJogaiTokureiParameter
@@ -193,14 +192,12 @@ public class ShisetsutourukuPanel {
         }
     }
 
-    private KaigoJigyoshaShisetsuKanriMapperParameter 事業者情報取得paramter(ShisetsutourukuPanelDiv div) {
+    private KaigoJigyoshaParameter 事業者情報取得paramter(ShisetsutourukuPanelDiv div) {
         JigyoshaMode mode = ViewStateHolder.get(ViewStateKeys.介護事業者_介護事業者情報, JigyoshaMode.class);
-        return KaigoJigyoshaShisetsuKanriMapperParameter
-                .createParam(div.getJigyoshaShurui().getRadServiceShurui().getSelectedKey(),
-                        new FlexibleDate(mode.getYukoKaishiYMD()),
-                        mode.getJigyoshaNo() == null ? RString.EMPTY : mode.getJigyoshaNo().value(),
-                        ViewStateHolder.get(ViewStateKeys.サービス登録_サービス種類コード, RString.class),
-                        FlexibleDate.EMPTY);
+        return KaigoJigyoshaParameter.createParam(mode.getJigyoshaNo() == null ? RString.EMPTY : mode.getJigyoshaNo().value(),
+                ViewStateHolder.get(ViewStateKeys.介護事業者_事業者種別, RString.class),
+                new FlexibleDate(mode.getYukoKaishiYMD()),
+                FlexibleDate.EMPTY);
     }
 
     private ResponseData<ShisetsutourukuPanelDiv> get事業者情報の検索処理(ShisetsutourukuPanelDiv div) {

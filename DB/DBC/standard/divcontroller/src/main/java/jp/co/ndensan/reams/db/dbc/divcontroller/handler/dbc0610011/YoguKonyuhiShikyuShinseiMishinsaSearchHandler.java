@@ -68,8 +68,8 @@ public class YoguKonyuhiShikyuShinseiMishinsaSearchHandler {
         if (支給申請日To != null) {
             申請日To = new FlexibleDate(支給申請日To.toString());
         }
-        ArrayList<ShokanShinseiEntityResult> resultList = (ArrayList<ShokanShinseiEntityResult>) FukushiyoguKonyuhiShikyuIkkatuShinsa.createInstance()
-                .getMiShinsaShinseiList(申請日From, 申請日To);
+        ArrayList<ShokanShinseiEntityResult> resultList = (ArrayList<ShokanShinseiEntityResult>) FukushiyoguKonyuhiShikyuIkkatuShinsa
+                .createInstance().getMiShinsaShinseiList(申請日From, 申請日To);
         if (resultList == null || resultList.isEmpty()) {
             throw new ApplicationException(UrErrorMessages.該当データなし.getMessage());
         }
@@ -150,7 +150,8 @@ public class YoguKonyuhiShikyuShinseiMishinsaSearchHandler {
         for (dgYoguKonyuhiShisaMishinsaShikyuShinseiList_Row row : selectedMishinsaShikyuShinsei) {
             ShokanShinseiEntityResult entity = entityList.get(row.getRowNum().getValue().intValue());
             entity.getEntity().get償還払請求基本Entity().setHiHokenshaNo(new HihokenshaNo(row.getTxtHihoNo().getValue()));
-            entity.getEntity().get償還払請求基本Entity().setServiceTeikyoYM(new FlexibleYearMonth(row.getTxtTenkyoYM().getValue().getYearMonth().toString()));
+            entity.getEntity().get償還払請求基本Entity().setServiceTeikyoYM(
+                    new FlexibleYearMonth(row.getTxtTenkyoYM().getValue().getYearMonth().toString()));
             entity.getEntity().get償還払請求基本Entity().setSeiriNo(row.getTxtSeiriNo().getValue());
             entity.getEntity().get償還払請求基本Entity().setJigyoshaNo(new JigyoshaNo(row.getTxtJigyoshaNo().getValue()));
             entity.getEntity().get償還払請求基本Entity().setYoshikiNo(row.getTxtYoshikiNo().getValue());
@@ -159,7 +160,8 @@ public class YoguKonyuhiShikyuShinseiMishinsaSearchHandler {
             entity.getEntity().set氏名(new AtenaMeisho(row.getTxtHihoName().getValue()));
             entity.getEntity().get償還払支給申請Entity().setShinseiYMD(new FlexibleDate(row.getTxtShikyuShinseiDate().getValue().toString()));
             entity.getEntity().get償還払支給申請Entity().setHokenTaishoHiyogaku(row.getTxtHiyoTotal().getValue());
-            entity.getEntity().get償還払支給申請Entity().setRiyoshaFutangaku(Integer.parseInt(row.getTxtRiyoshaFutanAmount().getValue().toString()));
+            entity.getEntity().get償還払支給申請Entity().setRiyoshaFutangaku(
+                    Integer.parseInt(row.getTxtRiyoshaFutanAmount().getValue().toString()));
             entity.getEntity().get償還払支給申請Entity().setShiharaiKingakuTotal(row.getTxtHokenKyufuAmount().getValue());
             entity.getEntity().get償還払支給申請Entity().setShinsaKekka(row.getTxtShinsaNo().getValue());
             updList.add(entity);
