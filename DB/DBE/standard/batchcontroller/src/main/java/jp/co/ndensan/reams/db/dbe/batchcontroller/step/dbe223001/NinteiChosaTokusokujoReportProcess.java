@@ -102,7 +102,7 @@ public class NinteiChosaTokusokujoReportProcess extends BatchProcessBase<NinteiC
 
     @Override
     protected void process(NinteiChosaTokusokujoRelateEntity entity) {
-//        shinseishoKanriNoList.add(entity.getTemp_申請書管理番号().getColumnValue()); #72754
+        shinseishoKanriNoList.add(entity.getTemp_申請書管理番号().getColumnValue());
         bodyItem = setBodyItem(entity);
     }
 

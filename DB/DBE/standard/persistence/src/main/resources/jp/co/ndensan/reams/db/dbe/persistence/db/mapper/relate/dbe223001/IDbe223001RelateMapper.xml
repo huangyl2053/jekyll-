@@ -38,6 +38,7 @@
         DbT5101NinteiShinseiJoho."seinengappiYMD"  AS  temp_生年月日,
         DbT5101NinteiShinseiJoho."jusho"  AS  temp_被保険者住所,
         DbT5101NinteiShinseiJoho."yubinNo"  AS  temp_被保険者郵便番号,
+        DbT5101NinteiShinseiJoho."shinseishoKanriNo"  AS  temp_申請書管理番号,
         DbT5101NinteiShinseiJoho."ninteiShinseiShinseijiKubunCode"  AS  temp_申請区分コード
         FROM
         rgdb."DbT5101NinteiShinseiJoho"  AS  DbT5101NinteiShinseiJoho  <!-- 要介護認定申請情報 -->
