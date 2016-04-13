@@ -22,7 +22,8 @@ public enum JutakuKaishuhiShikyuShinseiErrorMessages implements IValidationMessa
     支給申請日FROMと支給申請日TOの必須チェック(UrErrorMessages.必須項目_追加メッセージあり, "支給申請日（FROM)と支給申請日（TO)"),
     支給申請日FROMと支給申請日TOの有効性チェック(DbzErrorMessages.期間が不正_未来日付不可, "支給申請日（FROM)", "支給申請日（TO)"),
     データ選択のチェック(UrErrorMessages.対象行を選択),
-    未審査のチェック(DbcErrorMessages.未審査有りで保存不可);
+    未審査のチェック(DbcErrorMessages.未審査有りで保存不可),
+    決定日のチェック(UrErrorMessages.必須項目_追加メッセージあり, "決定日");
 
     private final Message message;
 

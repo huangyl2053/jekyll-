@@ -47,7 +47,7 @@ public class JutakuKaishuhiShikyuShinseiPanelVlaidationHandler {
      *
      * @return ValidationMessageControlPairs
      */
-    public ValidationMessageControlPairs volidateデータ選択() {
+    public ValidationMessageControlPairs volidateデータ選択と決定日() {
         IValidationMessages messages = new MishinsaShikyuShinseiListPanelValidator(div).validate();
         return createMishinsaShikyuShinseiListPanelValidatorDictionary().check(messages);
     }
@@ -57,7 +57,7 @@ public class JutakuKaishuhiShikyuShinseiPanelVlaidationHandler {
      *
      * @return ValidationMessageControlPairs
      */
-    public ValidationMessageControlPairs volidateデータ選択と未審査() {
+    public ValidationMessageControlPairs volidateデータ選択と未審査と決定日() {
         IValidationMessages messages = new ShinsaButtonDivValidator(div).validate();
         return createMishinsaShinsaButtonDivValidatorDictionary().check(messages);
     }
@@ -83,7 +83,9 @@ public class JutakuKaishuhiShikyuShinseiPanelVlaidationHandler {
     private ValidationDictionary createMishinsaShikyuShinseiListPanelValidatorDictionary() {
         return new ValidationDictionaryBuilder()
                 .add(JutakuKaishuhiShikyuShinseiErrorMessages.データ選択のチェック,
-                        div.getMishinsaShikyuShinseiListPanel().getDgMishinsaShikyuShinsei()).build();
+                        div.getMishinsaShikyuShinseiListPanel().getDgMishinsaShikyuShinsei())
+                .add(JutakuKaishuhiShikyuShinseiErrorMessages.決定日のチェック,
+                        div.getMishinsaShikyuShinseiListPanel().getTxtKetteiYMD()).build();
     }
 
     /**
@@ -96,6 +98,8 @@ public class JutakuKaishuhiShikyuShinseiPanelVlaidationHandler {
                 .add(JutakuKaishuhiShikyuShinseiErrorMessages.データ選択のチェック,
                         div.getMishinsaShikyuShinseiListPanel().getDgMishinsaShikyuShinsei())
                 .add(JutakuKaishuhiShikyuShinseiErrorMessages.未審査のチェック,
-                        div.getMishinsaShikyuShinseiListPanel().getDgMishinsaShikyuShinsei()).build();
+                        div.getMishinsaShikyuShinseiListPanel().getDgMishinsaShikyuShinsei())
+                .add(JutakuKaishuhiShikyuShinseiErrorMessages.決定日のチェック,
+                        div.getMishinsaShikyuShinseiListPanel().getTxtKetteiYMD()).build();
     }
 }
