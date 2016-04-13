@@ -1,5 +1,6 @@
 package jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.kaigoatenainfo.KaigoAtenaInfo;
 
+import jp.co.ndensan.reams.ua.uax.divcontroller.entity.commonchilddiv.AtenaShokaiSimple.AtenaShokaiSimpleDiv;
 import jp.co.ndensan.reams.ua.uax.divcontroller.entity.commonchilddiv.AtenaShokaiSimple.ShokaiDataDiv;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaJusho;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
@@ -25,4 +26,6 @@ public interface IKaigoAtenaInfoDiv extends ICommonChildDivBaseProperties {
     AtenaJusho get住所();
 
     ShokaiDataDiv getShokaiData();
+
+    AtenaShokaiSimpleDiv getAtenaInfoDiv();
 }
