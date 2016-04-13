@@ -65,10 +65,6 @@ public class JigyoshaTouroku {
      * @return ResponseData<JigyoshaToutokuDiv> 事業者登録Div
      */
     public ResponseData<JigyoshaToutokuDiv> onLoad(JigyoshaToutokuDiv div) {
-        ViewStateHolder.put(ViewStateKeys.事業者登録_画面状態, new RString("修正"));
-        ViewStateHolder.put(ViewStateKeys.事業者登録_事業者番号, new RString("555523"));
-        ViewStateHolder.put(ViewStateKeys.事業者登録_事業者種類コード, new RString("11"));
-        ViewStateHolder.put(ViewStateKeys.事業者登録_有効開始日, new FlexibleDate("20160330"));
         RString 初期_状態 = ViewStateHolder.get(ViewStateKeys.事業者登録_画面状態, RString.class);
         RString 事業者番号 = ViewStateHolder.get(ViewStateKeys.事業者登録_事業者番号, RString.class);
         FlexibleDate 有効開始日 = ViewStateHolder.get(ViewStateKeys.事業者登録_有効開始日, FlexibleDate.class);
