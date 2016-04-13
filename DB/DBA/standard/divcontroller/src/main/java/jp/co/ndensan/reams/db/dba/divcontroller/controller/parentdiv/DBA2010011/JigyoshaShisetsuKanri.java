@@ -87,11 +87,12 @@ public class JigyoshaShisetsuKanri {
         }
         if (その他特例施設モード.equals(サービスモード)) {
             mode.setJigyoshaShubetsu(JigyosyaType.住所地特例対象施設.getコード());
+            ViewStateHolder.put(ViewStateKeys.介護事業者_事業者種別, JigyosyaType.住所地特例対象施設.getコード());
             return ResponseData.of(div).forwardWithEventName(DBA2010011TransitionEventName.選択)
                     .parameter(その他特例施設);
         }
         if (適用除外施設モード.equals(サービスモード)) {
-            mode.setJigyoshaShubetsu(JigyosyaType.適用除外施設.getコード());
+            ViewStateHolder.put(ViewStateKeys.介護事業者_事業者種別, JigyosyaType.適用除外施設.getコード());
             return ResponseData.of(div).forwardWithEventName(DBA2010011TransitionEventName.選択)
                     .parameter(適用除外施設);
         }
@@ -117,11 +118,12 @@ public class JigyoshaShisetsuKanri {
         }
         if (その他特例施設モード.equals(削除モード)) {
             mode.setJigyoshaShubetsu(JigyosyaType.住所地特例対象施設.getコード());
+            ViewStateHolder.put(ViewStateKeys.介護事業者_事業者種別, JigyosyaType.住所地特例対象施設.getコード());
             return ResponseData.of(div).forwardWithEventName(DBA2010011TransitionEventName.削除)
                     .parameter(その他特例施設);
         }
         if (適用除外施設モード.equals(削除モード)) {
-            mode.setJigyoshaShubetsu(JigyosyaType.適用除外施設.getコード());
+            ViewStateHolder.put(ViewStateKeys.介護事業者_事業者種別, JigyosyaType.適用除外施設.getコード());
             return ResponseData.of(div).forwardWithEventName(DBA2010011TransitionEventName.削除)
                     .parameter(適用除外施設);
         }
