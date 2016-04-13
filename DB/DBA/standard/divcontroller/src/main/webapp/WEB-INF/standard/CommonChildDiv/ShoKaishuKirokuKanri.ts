@@ -54,6 +54,7 @@ module DBA
                     this.controls.dgKoufuKaishu().gridSetting.isShowModifyButtonColumn = false;
                     this.controls.dgKoufuKaishu().gridSetting.isShowDeleteButtonColumn = false;
                     this.controls.dgKoufuKaishu()._control.afterPropertiesSet();
+                    this.controls.panelInput().displayNone = false;
                     this.controls.txtKoufuType().disabled = true;
                     this.controls.txtKoufuDate().disabled = true;
                     this.controls.txtYukouKigen().disabled = true;
@@ -72,6 +73,7 @@ module DBA
                     this.controls.dgKoufuKaishu().gridSetting.isShowModifyButtonColumn = true;
                     this.controls.dgKoufuKaishu().gridSetting.isShowDeleteButtonColumn = true;
                     this.controls.dgKoufuKaishu()._control.afterPropertiesSet();
+                    this.controls.panelInput().displayNone = false;
                     this.controls.txtKoufuType().disabled = true;
                     this.controls.txtKoufuDate().disabled = false;
                     this.controls.txtYukouKigen().disabled = false;
@@ -90,6 +92,7 @@ module DBA
                     this.controls.dgKoufuKaishu().gridSetting.isShowModifyButtonColumn = true;
                     this.controls.dgKoufuKaishu().gridSetting.isShowDeleteButtonColumn = true;
                     this.controls.dgKoufuKaishu()._control.afterPropertiesSet();
+                    this.controls.panelInput().displayNone = false;
                     this.controls.txtKoufuType().disabled = true;
                     this.controls.txtKoufuDate().disabled = true;
                     this.controls.txtYukouKigen().disabled = true;
