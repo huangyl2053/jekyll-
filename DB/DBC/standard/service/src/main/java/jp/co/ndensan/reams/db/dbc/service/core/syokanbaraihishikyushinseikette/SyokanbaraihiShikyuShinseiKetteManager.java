@@ -946,14 +946,16 @@ public class SyokanbaraihiShikyuShinseiKetteManager extends SyokanbaraihiShikyuS
                 }
             }
         }
-        DbT3043ShokanShokujiHiyoEntity entity = dbt3043entity.toEntity();
-        if (entityList == null || entityList.isEmpty()) {
-            entity.setState(EntityDataState.Added);
-            償還払請求食事費用Dac.save(entity);
+        if (dbt3043entity != null && !EntityDataState.Unchanged.equals(dbt3043entity.toEntity().getState())) {
+            DbT3043ShokanShokujiHiyoEntity entity = dbt3043entity.toEntity();
+            if (entityList == null || entityList.isEmpty()) {
+                entity.setState(EntityDataState.Added);
+                償還払請求食事費用Dac.save(entity);
 
-        } else {
-            entity.setState(EntityDataState.Modified);
-            償還払請求食事費用Dac.save(entity);
+            } else {
+                entity.setState(EntityDataState.Modified);
+                償還払請求食事費用Dac.save(entity);
+            }
         }
     }
 
