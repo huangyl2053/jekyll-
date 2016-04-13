@@ -9,7 +9,7 @@ import jp.co.ndensan.reams.db.dba.business.nenreitotatsushikakuido.Nenreitotatsu
 import jp.co.ndensan.reams.db.dba.definition.batchprm.dbamn71001.Dbamn71001BatchFlowParameter;
 import jp.co.ndensan.reams.db.dba.divcontroller.entity.parentdiv.DBA1020011.NenReiTotatsuSearchConditionDiv;
 import jp.co.ndensan.reams.db.dba.divcontroller.handler.parentdiv.DBA1020011.NenReiTotatsuSearchConditionHandler;
-import jp.co.ndensan.reams.db.dba.service.dbamn71001.NenreitotatsuShikakuIdo;
+import jp.co.ndensan.reams.db.dba.service.core.nenreitotatsushikakuido.NenreitotatsuShikakuIdo;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrQuestionMessages;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -20,7 +20,7 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
 
 /**
  * 年齢到達取得のクラスです。
- * 
+ *
  * @reamsid_L DBA-0330-050 wangkun
  */
 public class NenReiTotatsuSearchCondition {
