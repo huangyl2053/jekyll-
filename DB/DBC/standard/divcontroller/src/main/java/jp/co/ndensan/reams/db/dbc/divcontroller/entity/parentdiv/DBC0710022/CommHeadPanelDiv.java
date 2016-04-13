@@ -18,7 +18,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxNum;
  * CommHeadPanel のクラスファイル
  *
  * @author 自動生成
- * @reamsid_L DBC-992-110 yangchenbing
+ * @reamsid_L DBC-0992-110 yangchenbing
  */
 public class CommHeadPanelDiv extends Panel {
 
