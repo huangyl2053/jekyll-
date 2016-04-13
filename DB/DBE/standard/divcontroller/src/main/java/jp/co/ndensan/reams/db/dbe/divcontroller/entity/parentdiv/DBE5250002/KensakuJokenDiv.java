@@ -17,7 +17,6 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxDateRange;
 /**
  * KensakuJoken のクラスファイル
  *
- * @reamsid_L DBE-0190-010 lizhuoxuan
  */
 public class KensakuJokenDiv extends Panel {
 

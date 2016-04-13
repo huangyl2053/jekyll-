@@ -15,7 +15,6 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxFlexibleDate;
 /**
  * HakkoJoken のクラスファイル
  *
- * @reamsid_L DBE-0060-010 zhangzhiming
  */
 public class HakkoJokenDiv extends Panel {
 

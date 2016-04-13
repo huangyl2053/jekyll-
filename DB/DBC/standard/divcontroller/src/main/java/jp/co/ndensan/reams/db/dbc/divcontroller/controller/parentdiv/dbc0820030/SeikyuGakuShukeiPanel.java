@@ -50,6 +50,7 @@ public class SeikyuGakuShukeiPanel {
     private static final RString 削除 = new RString("削除");
     private static final RString 登録 = new RString("登録");
     private static final RString 申請を保存する = new RString("Element1");
+    private static final RString NUM1 = new RString("1");
 
     /**
      * onLoad事件
@@ -135,7 +136,7 @@ public class SeikyuGakuShukeiPanel {
         getHandler(div).clear請求額集計登録();
         div.getPanelSeikyugakuShukei().getPanelSeikyuShokai().getTxtKyufuritsu().setValue(
                 ViewStateHolder.get(ViewStateKeys.給付率, Decimal.class));
-
+        div.getPanelSeikyugakuShukei().getPanelSeikyuShokai().getRdoShinsahouhou().setSelectedKey(NUM1);
         return createResponse(div);
     }
 
@@ -186,6 +187,7 @@ public class SeikyuGakuShukeiPanel {
      */
     public ResponseData<SeikyuGakuShukeiPanelDiv> onClick_btnClear(SeikyuGakuShukeiPanelDiv div) {
         getHandler(div).clear請求額集計登録();
+        div.getPanelSeikyugakuShukei().getPanelSeikyuShokai().getRdoShinsahouhou().setSelectedKey(NUM1);
         return createResponse(div);
     }
 

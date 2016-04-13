@@ -10,7 +10,6 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.PanelBatchParameter;
 
 /**
  * ShinseiJohoIchiran のクラスファイル 
- * @reamsid_L DBE-0210-010 dongyabin
  */
 public class ShinseiJohoIchiranDiv extends PanelBatchParameter {
     // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-01-15_09-59-03">

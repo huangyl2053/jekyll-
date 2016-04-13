@@ -12,7 +12,6 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 /**
  * NinteiChosaIraiTaishoIchiran のクラスファイル
  *
- * @reamsid_L DBE-0080-010 duanzhanli
  */
 public class NinteiChosaIraiTaishoIchiranDiv extends Panel {
 

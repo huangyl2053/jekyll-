@@ -15,7 +15,6 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 /**
  * dgDoctorSelection_Row のクラスファイル 
  * 
- * @reamsid_L DBE-0220-010 wangkun
  */
 
 public class dgDoctorSelection_Row extends DataRow {

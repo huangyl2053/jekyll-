@@ -16,7 +16,6 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxDate;
 
 /**
  * dgShinseiJoho_Row のクラスファイル 
- * @reamsid_L DBE-0210-010 dongyabin
  * @author 自動生成
  */
 

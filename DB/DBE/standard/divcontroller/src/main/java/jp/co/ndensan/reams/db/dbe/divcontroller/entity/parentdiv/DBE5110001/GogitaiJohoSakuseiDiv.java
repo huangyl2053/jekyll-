@@ -25,7 +25,6 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.UploadPanel;
 /**
  * GogitaiJohoSakusei のクラスファイル
  *
- * @reamsid_L DBE-0090-010 chengsanyuan
  */
 public class GogitaiJohoSakuseiDiv extends Panel {
 

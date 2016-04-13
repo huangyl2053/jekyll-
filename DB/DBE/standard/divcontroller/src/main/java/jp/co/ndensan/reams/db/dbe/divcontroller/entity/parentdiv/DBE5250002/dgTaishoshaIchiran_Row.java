@@ -14,7 +14,6 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxFlexibleDate;
 /**
  * dgTaishoshaIchiran_Row のクラスファイル
  *
- * @reamsid_L DBE-0190-010 lizhuoxuan
  */
 public class dgTaishoshaIchiran_Row extends DataRow {
     // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-01-15_09-59-03">

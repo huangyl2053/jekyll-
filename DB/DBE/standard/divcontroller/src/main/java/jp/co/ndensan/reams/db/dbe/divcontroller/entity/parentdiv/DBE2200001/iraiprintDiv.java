@@ -15,7 +15,6 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxDate;
 /**
  * iraiprint のクラスファイル
  *
- * @reamsid_L DBE-0010-010 sunhaidi
  */
 public class iraiprintDiv extends Panel {
 

@@ -15,7 +15,6 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 /**
  * IraishoIkkatsuHakko のクラスファイル
  *
- * @reamsid_L DBE-0080-010 duanzhanli
  */
 public class IraishoIkkatsuHakkoDiv extends Panel {
 

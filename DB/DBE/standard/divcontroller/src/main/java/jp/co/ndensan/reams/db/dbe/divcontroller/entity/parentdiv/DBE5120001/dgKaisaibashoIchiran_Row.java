@@ -15,7 +15,6 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 /**
  * dgKaisaibashoIchiran_Row のクラスファイル 
  * 
- * @reamsid_L DBE-0100-010  wangkun
  */
 
 public class dgKaisaibashoIchiran_Row extends DataRow {

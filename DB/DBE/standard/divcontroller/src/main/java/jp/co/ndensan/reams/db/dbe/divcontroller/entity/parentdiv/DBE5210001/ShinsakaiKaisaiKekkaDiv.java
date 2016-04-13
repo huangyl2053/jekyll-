@@ -21,7 +21,6 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.UploadPanel;
 /**
  * ShinsakaiKaisaiKekka のクラスファイル
  *
- * @reamsid_L DBE-0160-010 wangxiaodong
  */
 public class ShinsakaiKaisaiKekkaDiv extends Panel {
 

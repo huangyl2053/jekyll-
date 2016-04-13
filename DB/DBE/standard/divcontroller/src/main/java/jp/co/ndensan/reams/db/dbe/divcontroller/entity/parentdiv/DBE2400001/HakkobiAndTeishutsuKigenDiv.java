@@ -13,7 +13,6 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxDate;
 /**
  * HakkobiAndTeishutsuKigen のクラスファイル
  *
- * @reamsid_L DBE-0080-010 duanzhanli
  */
 public class HakkobiAndTeishutsuKigenDiv extends Panel {
 

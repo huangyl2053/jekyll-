@@ -7,6 +7,13 @@ package jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.ServiceTy
 
 import java.util.List;
 import jp.co.ndensan.reams.db.dbx.business.core.kaigoserviceshurui.kaigoserviceshurui.KaigoServiceShurui;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ServiceShuruiCode;
+import jp.co.ndensan.reams.db.dbx.definition.mybatisprm.kaigoserviceshurui.KaigoServiceShuruiMapperParameter;
+import jp.co.ndensan.reams.db.dbx.service.core.kaigoserviceshurui.kaigoserviceshurui.KaigoServiceShuruiManager;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
+import jp.co.ndensan.reams.uz.uza.lang.RDate;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.util.db.SearchResult;
 
 /**
  *
@@ -17,6 +24,7 @@ import jp.co.ndensan.reams.db.dbx.business.core.kaigoserviceshurui.kaigoservices
 public class ServiceTypeInputCommonChildHandler {
 
     private final ServiceTypeInputCommonChildDivDiv div;
+    private final KaigoServiceShuruiManager service;
 
     /**
      * コンストラクタです。
@@ -25,7 +33,7 @@ public class ServiceTypeInputCommonChildHandler {
      */
     public ServiceTypeInputCommonChildHandler(ServiceTypeInputCommonChildDivDiv div) {
         this.div = div;
-
+        service = KaigoServiceShuruiManager.createInstance();
     }
 
     /**
@@ -36,6 +44,25 @@ public class ServiceTypeInputCommonChildHandler {
     public void initialize() {
         div.getTxtServiceType().clearValue();
         div.getTxtServiceTypeName().clearValue();
+        div.getTxtServiceTypeName().setDisabled(true);
+    }
+
+    /**
+     *
+     * サービス種類検索初期化の設定します。
+     *
+     * @param serviceTypeCode
+     */
+    public void initialize(RString serviceTypeCode) {
+        KaigoServiceShuruiMapperParameter param = KaigoServiceShuruiMapperParameter.createSelectByKeyParam(
+                new ServiceShuruiCode(serviceTypeCode),
+                new FlexibleYearMonth(RDate.getNowDate().getYearMonth().toDateString()));
+        SearchResult<KaigoServiceShurui> focusServiceTypeList = service.getFocusServiceTypeList(param);
+        if (focusServiceTypeList.records().isEmpty()) {
+            div.getTxtServiceTypeName().setValue(RString.EMPTY);
+        } else {
+            div.getTxtServiceTypeName().setValue(focusServiceTypeList.records().get(0).getサービス種類名称());
+        }
         div.getTxtServiceTypeName().setDisabled(true);
     }
 

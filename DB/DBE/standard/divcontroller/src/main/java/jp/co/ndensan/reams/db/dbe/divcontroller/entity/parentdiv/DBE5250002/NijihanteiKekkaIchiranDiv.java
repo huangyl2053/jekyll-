@@ -13,7 +13,6 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 /**
  * NijihanteiKekkaIchiran のクラスファイル
  *
- * @reamsid_L DBE-0190-010 lizhuoxuan
  */
 public class NijihanteiKekkaIchiranDiv extends Panel {
 

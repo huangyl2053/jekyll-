@@ -17,7 +17,6 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxTime;
 /**
  * tabSetting のクラスファイル
  *
- * @reamsid_L DBE-0022-010 linghuhang
  */
 public class tabSettingDiv extends TablePanel {
 

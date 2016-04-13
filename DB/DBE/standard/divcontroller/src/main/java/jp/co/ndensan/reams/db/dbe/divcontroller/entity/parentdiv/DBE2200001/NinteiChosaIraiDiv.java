@@ -16,7 +16,6 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 /**
  * NinteiChosaIrai のクラスファイル
  *
- * @reamsid_L DBE-0010-010 sunhaidi
  */
 public class NinteiChosaIraiDiv extends Panel {
 

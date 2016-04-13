@@ -15,7 +15,6 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 /**
  * dgChosaChikuGroupChosaChikuList_Row のクラスファイル 
  * 
- * @reamsid_L DBE-0024-010  suguangjun
  */
 
 public class dgChosaChikuGroupChosaChikuList_Row extends DataRow {

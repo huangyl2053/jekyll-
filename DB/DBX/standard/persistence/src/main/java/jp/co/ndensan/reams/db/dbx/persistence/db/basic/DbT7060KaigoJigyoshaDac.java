@@ -86,8 +86,8 @@ public class DbT7060KaigoJigyoshaDac implements ISaveable<DbT7060KaigoJigyoshaEn
         //return DbAccessorMethodSelector.saveByForDeletePhysical(new DbAccessorNormalType(session), entity);
         return DbAccessors.saveBy(new DbAccessorNormalType(session), entity);
     }
-    
-     /**
+
+    /**
      * DbT7060KaigoJigyoshaEntityを登録します。状態によってinsert/update/delete処理に振り分けられます。
      *
      * @param entity entity
@@ -143,5 +143,29 @@ public class DbT7060KaigoJigyoshaDac implements ISaveable<DbT7060KaigoJigyoshaEn
                 where(eq(DbT7060KaigoJigyosha.jigyoshaNo, 事業者番号)).
                 order(by(DbT7060KaigoJigyosha.yukoKaishiYMD, Order.DESC)).
                 toList(DbT7060KaigoJigyoshaEntity.class);
+    }
+
+    /**
+     * 事業者名称の取得。
+     *
+     * @param 事業者番号 JigyoshaNo
+     * @param システム日付 FlexibleDate
+     * @return DbT7060KaigoJigyoshaEntity
+     * @throws NullPointerException 引数のいずれかがnullの場合
+     */
+    public DbT7060KaigoJigyoshaEntity select事業者名称(JigyoshaNo 事業者番号,
+            FlexibleDate システム日付) throws NullPointerException {
+        requireNonNull(事業者番号, UrSystemErrorMessages.値がnull.getReplacedMessage("事業者番号"));
+        requireNonNull(システム日付, UrSystemErrorMessages.値がnull.getReplacedMessage("システム日付"));
+
+        DbAccessorNormalType accessor = new DbAccessorNormalType(session);
+        return accessor.select().
+                table(DbT7060KaigoJigyosha.class).
+                where(and(
+                                eq(DbT7060KaigoJigyosha.jigyoshaNo, 事業者番号),
+                                leq(DbT7060KaigoJigyosha.yukoKaishiYMD, システム日付),
+                                eq(DbT7060KaigoJigyosha.isDeleted, false)))
+                .order(by(DbT7060KaigoJigyosha.yukoKaishiYMD, Order.DESC)).limit(1)
+                .toObject(DbT7060KaigoJigyoshaEntity.class);
     }
 }

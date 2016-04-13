@@ -60,9 +60,9 @@ public class HihokenshaShikakuHakkoHandler {
         }
         // ヘッダエリア
         if (MENUID_DBUMN12001.equals(メニューID)) {
-            div.getYukoKigenInfo().getTxtYukoKigen().setVisible(true);
-        } else if (MENUID_DBUMN12002.equals(メニューID)) {
             div.getYukoKigenInfo().getTxtYukoKigen().setVisible(false);
+        } else if (MENUID_DBUMN12002.equals(メニューID)) {
+            div.getYukoKigenInfo().getTxtYukoKigen().setVisible(true);
         }
 
         div.getYukoKigenInfo().getTxtYukoKigen().clearValue();

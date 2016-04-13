@@ -20,7 +20,6 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxNum;
 /**
  * ChosainSearch のクラスファイル
  *
- * @reamsid_L DBE-0280-010 sunhaidi
  */
 public class ChosainSearchDiv extends Panel {
 

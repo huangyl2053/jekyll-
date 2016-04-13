@@ -15,7 +15,6 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxDate;
 /**
  * ChosaTaishoWaritsuke のクラスファイル
  *
- * @reamsid_L DBE-0010-010 sunhaidi
  */
 public class ChosaTaishoWaritsukeDiv extends Panel {
 

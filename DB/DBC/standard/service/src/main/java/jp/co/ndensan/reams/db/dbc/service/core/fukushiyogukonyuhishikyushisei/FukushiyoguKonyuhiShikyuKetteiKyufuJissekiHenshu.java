@@ -359,6 +359,7 @@ public class FukushiyoguKonyuhiShikyuKetteiKyufuJissekiHenshu {
                 dbT3026entity.setTorikomiYM(ketteiYMD.getYearMonth());
             }
             dbT3026entity.setSeiriNo(dbT3048Entity.getSeiriNo());
+            dbT3026entity.setMeisaiNo(dbT3048Entity.getMeisaiNo());
             dbT3026entity.setState(EntityDataState.Added);
             給付実績福祉用具販売費Dac.save(dbT3026entity);
         }

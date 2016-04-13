@@ -14,7 +14,6 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 /**
  * NinteiChosaSchedule5Main のクラスファイル
  *
- * @reamsid_L DBE-0021-010 zhangzhiming
  */
 public class NinteiChosaSchedule5MainDiv extends Panel {
 

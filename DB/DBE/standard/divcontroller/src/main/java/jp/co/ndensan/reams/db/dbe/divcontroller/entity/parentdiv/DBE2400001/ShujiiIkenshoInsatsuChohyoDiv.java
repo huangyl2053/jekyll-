@@ -12,7 +12,6 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 /**
  * ShujiiIkenshoInsatsuChohyo のクラスファイル
  *
- * @reamsid_L DBE-0080-010 duanzhanli
  */
 public class ShujiiIkenshoInsatsuChohyoDiv extends Panel {
 

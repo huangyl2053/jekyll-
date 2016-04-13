@@ -22,7 +22,6 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxTime;
 /**
  * GogitaiShosai のクラスファイル
  *
- * @reamsid_L DBE-0090-010 chengsanyuan
  */
 public class GogitaiShosaiDiv extends Panel {
 

@@ -16,7 +16,6 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 /**
  * ShujiiMaster のクラスファイル 
  * 
- * @reamsid_L DBE-0250-010  suguangjun
  */
 public class ShujiiMasterDiv extends Panel {
     // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-01-15_09-59-03">

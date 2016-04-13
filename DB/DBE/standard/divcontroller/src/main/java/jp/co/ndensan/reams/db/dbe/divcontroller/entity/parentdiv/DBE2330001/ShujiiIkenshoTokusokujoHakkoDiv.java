@@ -20,7 +20,6 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxNum;
 /**
  * ShujiiIkenshoTokusokujoHakko のクラスファイル
  *
- * @reamsid_L DBE-0060-010 zhangzhiming
  */
 public class ShujiiIkenshoTokusokujoHakkoDiv extends Panel {
 

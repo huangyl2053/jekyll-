@@ -16,7 +16,6 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.TextBox;
 /**
  * KensakuJoken のクラスファイル
  *
- * @reamsid_L DBE-1370-010 sunhaidi
  */
 public class KensakuJokenDiv extends Panel {
 

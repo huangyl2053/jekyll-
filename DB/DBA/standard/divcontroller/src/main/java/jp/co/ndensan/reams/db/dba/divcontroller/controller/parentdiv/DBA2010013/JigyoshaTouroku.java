@@ -176,7 +176,7 @@ public class JigyoshaTouroku {
 
     private void set画面引数の設定(JigyoshaToutokuDiv div) {
         ViewStateHolder.put(ViewStateKeys.サービス登録_事業者番号, ViewStateHolder.get(ViewStateKeys.事業者登録_事業者番号, RString.class));
-        ViewStateHolder.put(ViewStateKeys.サービス登録_サービス種類コード, 
+        ViewStateHolder.put(ViewStateKeys.サービス登録_サービス種類コード,
                 div.getServiceJoho().getDgServiceList().getClickedItem().getServiceType());
         ViewStateHolder.put(ViewStateKeys.サービス登録_有効開始日, ViewStateHolder.get(ViewStateKeys.事業者登録_有効開始日, FlexibleDate.class));
     }
@@ -232,9 +232,9 @@ public class JigyoshaTouroku {
         }
         KaigoJigyoshaParameter kaigoJigyoshaParameter = KaigoJigyoshaParameter.createParam(
                 jigyoshaNo.getColumnValue(),
-                yukoKaishiYMD,
                 ViewStateHolder.get(ViewStateKeys.事業者登録_事業者種類コード, RString.class
                 ),
+                yukoKaishiYMD,
                 yukoShuryoYMD);
         if (manager.checkKikanJufuku(kaigoJigyoshaParameter)) {
             throw new ApplicationException(UrErrorMessages.期間が重複.getMessage());
@@ -327,8 +327,8 @@ public class JigyoshaTouroku {
             }
             KaigoJigyoshaParameter kaigoJigyoshaParameter = KaigoJigyoshaParameter.createParam(
                     事業者番号,
-                    yukoKaishiYMD,
                     ViewStateHolder.get(ViewStateKeys.事業者登録_事業者種類コード, RString.class),
+                    yukoKaishiYMD,
                     yukoShuryoYMD);
             if (!manager.checkKikanJufuku(kaigoJigyoshaParameter)) {
                 throw new ApplicationException(UrErrorMessages.期間が重複.getMessage());
@@ -341,7 +341,7 @@ public class JigyoshaTouroku {
         }
         KaigoJigyoshaDaihyoshaIdentifier identifier
                 = new KaigoJigyoshaDaihyoshaIdentifier(事業者情報.get事業者番号(), 事業者情報.get有効開始日());
-        KaigoJigyoshaDaihyosha kaigoJigyoshaDaihyosha = 事業者情報.getKaigoJigyoshaDaihyoshaList(identifier);        
+        KaigoJigyoshaDaihyosha kaigoJigyoshaDaihyosha = 事業者情報.getKaigoJigyoshaDaihyoshaList(identifier);
         KaigoJigyoshaDaihyoshaBuilder kaigoJigyoshaDaihyoshaBuilder = kaigoJigyoshaDaihyosha.createBuilderForEdit();
         kaigoJigyoshaDaihyoshaBuilder.set代表者名(
                 new AtenaMeisho(div.getDaihyoshaJoho().getTxtDaihyoshaName().getValue()));

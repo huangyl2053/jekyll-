@@ -13,7 +13,6 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 /**
  * ShujiiIryokikaknAndShujiiInput のクラスファイル
  *
- * @reamsid_L DBE-0200-010 suguangjun
  */
 public class ShujiiIryokikaknAndShujiiInputDiv extends Panel {
 

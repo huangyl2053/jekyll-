@@ -23,10 +23,8 @@ import jp.co.ndensan.reams.db.dbc.service.core.syokanbaraihishikyushinseikette.S
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ServiceShuruiCode;
-import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.kyotsu.SaibanHanyokeyName;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.ServiceTypeInputCommonChildDiv.ServiceTypeInputCommonChildDivDiv;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
-import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.ApplicationException;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
@@ -40,7 +38,6 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.propertyenum.IconName;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPair;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
-import jp.co.ndensan.reams.uz.uza.util.Saiban;
 
 /**
  * 償還払い費支給申請決定_サービス提供証明書(請求額集計）
@@ -173,6 +170,7 @@ public class SeikyuGakuShukeiPanelHandler {
             sercode.getTxtServiceTypeName().setValue(row.getDefaultDataName16());
 
         }
+        //TODO共有divAPIがない
         div.getPanelSeikyugakuShukei().getPanelSeikyuShokai().getTxtJitsuNissu().setValue(
                 row.getDefaultDataName17().getValue());
         if (row.getDefaultDataName19() != null && !row.getDefaultDataName19().isEmpty()) {
@@ -192,7 +190,6 @@ public class SeikyuGakuShukeiPanelHandler {
                 getPanelSeikyuShokai().getCcdServiceTypeInput();
         sercode.getTxtServiceType().clearValue();
         sercode.getTxtServiceTypeName().clearValue();
-        div.getPanelSeikyugakuShukei().getPanelSeikyuShokai().getTxtKyufuritsu().clearValue();
         div.getPanelSeikyugakuShukei().getPanelSeikyuShokai().getTxtTanyigokeiHokenbun().clearValue();
         div.getPanelSeikyugakuShukei().getPanelSeikyuShokai().getTxtTanyiTanka().clearValue();
         div.getPanelSeikyugakuShukei().getPanelSeikyuShokai().getTxtSeikyugakuHoken().clearValue();
@@ -539,12 +536,10 @@ public class SeikyuGakuShukeiPanelHandler {
                     entityList.add(mapList.get(row.getDefaultDataName15()).deleted());
                 } else if (RowState.Added.equals(row.getRowState())) {
                     max連番 = max連番 + 1;
-                    RString 新整理番号 = Saiban.get(SubGyomuCode.DBC介護給付, SaibanHanyokeyName.償還整理番号.
-                            getコード()).nextString();
                     ShokanShukei entityAdded = new ShokanShukei(
                             被保険者番号,
                             サービス年月,
-                            新整理番号,
+                            整理番号,
                             事業者番号,
                             様式番号,
                             明細番号,

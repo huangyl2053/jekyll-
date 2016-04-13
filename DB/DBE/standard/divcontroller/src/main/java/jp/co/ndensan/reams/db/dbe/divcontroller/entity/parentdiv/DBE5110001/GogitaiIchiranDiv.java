@@ -13,7 +13,6 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 /**
  * GogitaiIchiran のクラスファイル
  *
- * @reamsid_L DBE-0090-010 chengsanyuan
  */
 public class GogitaiIchiranDiv extends Panel {
 

@@ -8,7 +8,6 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
  * このファイルへの変更は、再生成時には損失するため</br>
  * 不正な動作の原因になります。</br>
  * DBE5920001の状態名定義クラスです
- * @reamsid_L DBE-0290-010 dongyabin
  * @author 自動生成
  */
 public enum DBE5920001StateName implements IStateEnumerations {

@@ -102,6 +102,11 @@ public class ServiceTypeInputCommonChildDivDiv extends Panel implements IService
     }
 
     @Override
+    public void initialize(RString serviceTypeCode) {
+        getHandler().initialize(serviceTypeCode);
+    }
+
+    @Override
     public void clear() {
         getHandler().clear();
     }

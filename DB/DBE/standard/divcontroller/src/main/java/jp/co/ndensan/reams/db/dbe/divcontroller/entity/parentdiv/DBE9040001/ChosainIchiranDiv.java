@@ -13,7 +13,6 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 /**
  * ChosainIchiran のクラスファイル
  *
- * @reamsid_L DBE-0280-010 sunhaidi
  */
 public class ChosainIchiranDiv extends Panel {
 

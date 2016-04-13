@@ -13,7 +13,6 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxNum;
 /**
  * dgNinteiChosaIraiTaishoIchiran_Row のクラスファイル
  *
- * @reamsid_L DBE-0080-010 duanzhanli
  */
 public class dgNinteiChosaIraiTaishoIchiran_Row extends DataRow {
     // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-01-15_09-59-03">

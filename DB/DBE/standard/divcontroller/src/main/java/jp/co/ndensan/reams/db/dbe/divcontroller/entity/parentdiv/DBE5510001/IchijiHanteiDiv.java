@@ -11,7 +11,6 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.Space;
 
 /**
  * IchijiHantei のクラスファイル 
- * @reamsid_L DBE-0210-010 dongyabin
  * @author 自動生成
  */
 public class IchijiHanteiDiv extends Panel {

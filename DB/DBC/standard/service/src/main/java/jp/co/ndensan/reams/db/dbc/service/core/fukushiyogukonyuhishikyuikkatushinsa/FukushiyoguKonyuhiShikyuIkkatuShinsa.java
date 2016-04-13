@@ -97,7 +97,8 @@ public class FukushiyoguKonyuhiShikyuIkkatuShinsa {
     /**
      * {@link InstanceProvider#create}により生成されたインタフェースを返します。
      *
-     * @return {@link InstanceProvider#create}により生成された{@link FukushiyoguKonyuhiShikyuIkkatuShinsa}
+     * @return
+     * {@link InstanceProvider#create}により生成された{@link FukushiyoguKonyuhiShikyuIkkatuShinsa}
      */
     public static FukushiyoguKonyuhiShikyuIkkatuShinsa createInstance() {
         return InstanceProvider.create(FukushiyoguKonyuhiShikyuIkkatuShinsa.class);
@@ -146,7 +147,7 @@ public class FukushiyoguKonyuhiShikyuIkkatuShinsa {
                 IFukushiyoguKonyuhiShikyuIkkatuShinsaMapper mapper
                         = mapperProvider.create(IFukushiyoguKonyuhiShikyuIkkatuShinsaMapper.class);
                 Map<String, Object> parameter = new HashMap<>();
-                parameter.put("hiHokenshaNo", result.getEntity().
+                parameter.put("hihokenshaNo", result.getEntity().
                         get償還払支給申請Entity().getHiHokenshaNo());
                 DbT1001HihokenshaDaichoEntity dbt1001entity = mapper.get識別コード(parameter);
 

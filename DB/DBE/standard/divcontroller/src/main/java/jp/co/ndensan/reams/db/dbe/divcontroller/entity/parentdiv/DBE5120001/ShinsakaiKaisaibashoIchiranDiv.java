@@ -11,7 +11,6 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 /**
  * ShinsakaiKaisaibashoIchiran のクラスファイル 
  * 
- * @reamsid_L DBE-0100-010  wangkun
  */
 public class ShinsakaiKaisaibashoIchiranDiv extends Panel {
     // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-01-15_09-59-03">

@@ -12,7 +12,6 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 /**
  * NchosainScheduleIchiran のクラスファイル
  *
- * @reamsid_L DBE-0020-020 lishengli
  */
 public class NchosainScheduleIchiranDiv extends Panel {
 

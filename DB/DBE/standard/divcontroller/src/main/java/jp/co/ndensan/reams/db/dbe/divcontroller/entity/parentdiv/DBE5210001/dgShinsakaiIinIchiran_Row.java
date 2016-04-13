@@ -15,7 +15,6 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.DropDownList;
 /**
  * dgShinsakaiIinIchiran_Row のクラスファイル
  *
- * @reamsid_L DBE-0160-010 wangxiaodong
  */
 public class dgShinsakaiIinIchiran_Row extends DataRow {
     // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-01-15_09-59-03">

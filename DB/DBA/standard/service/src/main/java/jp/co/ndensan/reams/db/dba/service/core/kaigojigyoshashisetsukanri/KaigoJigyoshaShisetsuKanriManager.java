@@ -94,11 +94,11 @@ public class KaigoJigyoshaShisetsuKanriManager {
      * @return 事業者情報取得
      */
     @Transaction
-    public SearchResult<KaigoJogaiTokureiTaishoShisetsu> selectByKoseiShichosonMasterList(KaigoJigyoshaShisetsuKanriMapperParameter parameter) {
+    public SearchResult<KaigoJogaiTokureiTaishoShisetsu> selectByKoseiShichosonMasterList(KaigoJigyoshaParameter parameter) {
 
         List<KaigoJogaiTokureiTaishoShisetsu> serviceShuruiList = new ArrayList<>();
-        List<DbT1005KaigoJogaiTokureiTaishoShisetsuEntity> 事業者情報取得 = dbT1005dac.selectJigyoshaJoho(parameter.getJigyoshaNo(),
-                parameter.get事業者種別(), parameter.getYukoKaishiYMD());
+        List<DbT1005KaigoJogaiTokureiTaishoShisetsuEntity> 事業者情報取得 = dbT1005dac.selectJigyoshaJoho(parameter.get事業者種別(), parameter.getJigyoshaNo(),
+                parameter.getYukoKaishiYMD());
         if (事業者情報取得 == null || 事業者情報取得.isEmpty()) {
             return SearchResult.of(Collections.<KaigoJogaiTokureiTaishoShisetsu>emptyList(), 0, false);
         }

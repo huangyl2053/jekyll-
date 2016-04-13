@@ -14,7 +14,6 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.domain.*;
 /**
  * NinteiShinsakaiKaisaibashoToroku のクラスファイル 
  * 
- * @reamsid_L DBE-0100-010  wangkun
  */
 public class NinteiShinsakaiKaisaibashoTorokuDiv extends Panel {
     // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：バージョン情報無し">

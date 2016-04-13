@@ -14,7 +14,6 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxMultiLine;
 /**
  * MaintenanceForMemo のクラスファイル 
  * 
- * @reamsid_L DBE-0020-040 houtp
  */
 public class MaintenanceForMemoDiv extends Panel {
     // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-01-15_09-59-03">

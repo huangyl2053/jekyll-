@@ -12,7 +12,6 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 /**
  * dgShinsakaiScheduleKagami_Row のクラスファイル。
  *
- * @reamsid_L DBE-0130-030 yaodongsheng
  */
 public class dgShinsakaiScheduleKagami_Row extends DataRow {
     // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">

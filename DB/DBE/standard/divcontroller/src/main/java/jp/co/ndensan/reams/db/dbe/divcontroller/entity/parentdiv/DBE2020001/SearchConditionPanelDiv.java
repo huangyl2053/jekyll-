@@ -14,7 +14,6 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxFlexibleDate;
 /**
  * SearchConditionPanel のクラスファイル
  *
- * @reamsid_L DBE-0020-010 lizhuoxuan
  */
 public class SearchConditionPanelDiv extends Panel {
 

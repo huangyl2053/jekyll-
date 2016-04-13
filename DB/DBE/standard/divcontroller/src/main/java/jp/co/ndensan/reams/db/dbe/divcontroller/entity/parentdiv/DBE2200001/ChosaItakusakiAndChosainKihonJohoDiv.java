@@ -15,7 +15,6 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxCode;
 /**
  * ChosaItakusakiAndChosainKihonJoho のクラスファイル
  *
- * @reamsid_L DBE-0010-010 sunhaidi
  */
 public class ChosaItakusakiAndChosainKihonJohoDiv extends Panel {
 

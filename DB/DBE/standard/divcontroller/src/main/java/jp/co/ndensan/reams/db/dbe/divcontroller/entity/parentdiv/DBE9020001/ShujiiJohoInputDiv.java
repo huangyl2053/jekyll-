@@ -13,7 +13,6 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.domain.*;
 /**
  * ShujiiJohoInput のクラスファイル 
  * 
- * @reamsid_L DBE-0250-010  suguangjun
  */
 public class ShujiiJohoInputDiv extends Panel {
     // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-01-15_09-59-03">

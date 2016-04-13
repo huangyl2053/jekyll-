@@ -73,7 +73,7 @@ public class ShokujiHiyo {
             div.getPanelShokuji().getPanelShokujiGokei().setVisible(true);
             div.getPanelShokuji().getPanelDetail1().setVisible(false);
             div.getPanelShokuji().getPanelDetail1().setDisplayNone(true);
-            div.getPanelShokuji().getPanelDetail2().setVisible(true);
+            div.getPanelShokuji().getPanelDetail2().setVisible(false);
 
             List<ShokanMeisai> shokanMeisaiList = ShokanbaraiJyokyoShokai.createInstance()
                     .getShokujiHiyoDataList(被保険者番号, サービス年月, 整理番号, 事業者番号, 様式番号, 明細番号, null);

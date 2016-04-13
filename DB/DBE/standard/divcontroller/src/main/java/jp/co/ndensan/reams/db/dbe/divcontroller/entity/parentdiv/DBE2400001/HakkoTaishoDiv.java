@@ -12,7 +12,6 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.RadioButton;
 /**
  * HakkoTaisho のクラスファイル
  *
- * @reamsid_L DBE-0080-010 duanzhanli
  */
 public class HakkoTaishoDiv extends Panel {
 

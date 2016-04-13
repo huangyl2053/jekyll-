@@ -15,7 +15,6 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxDate;
 /**
  * ChosaTishoJoho のクラスファイル
  *
- * @reamsid_L DBE-0070-010 chengsanyuan
  */
 public class ChosaTishoJohoDiv extends Panel {
 

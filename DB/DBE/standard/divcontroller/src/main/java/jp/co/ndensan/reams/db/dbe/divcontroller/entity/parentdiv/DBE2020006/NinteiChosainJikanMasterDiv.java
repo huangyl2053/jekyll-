@@ -22,7 +22,6 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxTime;
 /**
  * NinteiChosainJikanMaster のクラスファイル
  *
- * @reamsid_L DBE-0022-010 linghuhang
  */
 public class NinteiChosainJikanMasterDiv extends Panel {
 

@@ -117,4 +117,14 @@ public class KaigoAtenaInfoDiv extends Panel implements IKaigoAtenaInfoDiv {
     public ShokaiDataDiv getShokaiData() {
         return atenaInfo.getShokaiData();
     }
+
+    /**
+     * 宛名情報を取得
+     *
+     * @return 宛名情報
+     */
+    @Override
+    public AtenaShokaiSimpleDiv getAtenaInfoDiv() {
+        return atenaInfo;
+    }
 }

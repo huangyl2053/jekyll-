@@ -12,7 +12,6 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.DataRow;
 /**
  * dgChosaChikuChichosonList_Row のクラスファイル
  *
- * @reamsid_L DBE-0023-010 xuyannan
  */
 public class dgChosaChikuChichosonList_Row extends DataRow {
     // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：バージョン情報無し">
