@@ -22,10 +22,7 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
 public class IryohokenRirekiValidationHandler {
 
     private final IryohokenRirekiCommonChildDivDiv requestDiv;
-    // private static final RString 種別 = new RString("種別");
-    private static final RString 保険者番号 = new RString("保険者番号");
-    //private static final RString 保険者名称 = new RString("保険者名称");
-    //private static final RString 記号番号 = new RString("記号番号");
+    private static final RString メッセージ = new RString("種別、保険者番号、保険者名称、記号番号項目はいずれの項目も未入力です");
 
     public IryohokenRirekiValidationHandler(IryohokenRirekiCommonChildDivDiv requestDiv) {
         this.requestDiv = requestDiv;
@@ -38,11 +35,9 @@ public class IryohokenRirekiValidationHandler {
                 && RString.isNullOrEmpty(requestDiv.getPnlIryohokenJoho().getTxtHokensyaKodo().getValue())
                 && RString.isNullOrEmpty(requestDiv.getPnlIryohokenJoho().getTxtHokensyaMeisho().getValue())
                 && RString.isNullOrEmpty(requestDiv.getPnlIryohokenJoho().getTxtKigoBango().getValue())) {
-            validPairs.add(new ValidationMessageControlPair(new IryohokenRirekiValidationHandler.RRVMessages(UrErrorMessages.必須項目, 保険者番号.toString()), requestDiv.getPnlIryohokenJoho().getTxtHokensyaKodo()));
+            validPairs.add(new ValidationMessageControlPair(new IryohokenRirekiValidationHandler.RRVMessages(UrErrorMessages.必須項目_追加メッセージあり, メッセージ.toString())));
         }
-
         return validPairs;
-
     }
 
     private static class RRVMessages implements IValidationMessage {
@@ -58,5 +53,4 @@ public class IryohokenRirekiValidationHandler {
             return message;
         }
     }
-
 }
