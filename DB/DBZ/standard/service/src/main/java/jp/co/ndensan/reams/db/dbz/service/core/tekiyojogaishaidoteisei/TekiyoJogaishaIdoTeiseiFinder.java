@@ -18,7 +18,7 @@ import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
  *
  * @reamsid_L DBA-0411-030 wangjie2
  */
-public class TekiyoJogaishaIdoTeisei {
+public class TekiyoJogaishaIdoTeiseiFinder {
 
     private static final RString DELETE = new RString("delete");
 
