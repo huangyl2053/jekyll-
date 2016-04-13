@@ -13,6 +13,8 @@ import lombok.Setter;
 
 /**
  * 65歳年齢到達資格異動バッチパラメータクラスです。
+ *
+ * @reamsid_L DBA-0330-010 xuyue
  */
 @Getter
 @Setter
@@ -23,12 +25,12 @@ public class Dbamn71001BatchFlowParameter extends BatchParameterBase {
      */
     private FlexibleDate kaishiYMD;
     private FlexibleDate shuryoYMD;
-    
-   /**
+
+    /**
      * コンストラクタです。
      */
     public Dbamn71001BatchFlowParameter() {
-        
+
     }
 
     /**
@@ -59,14 +61,14 @@ public class Dbamn71001BatchFlowParameter extends BatchParameterBase {
                 kaishiYMD,
                 shuryoYMD);
     }
-    
+
     /**
      * 認定調査督促対象者一覧表作成のパラメータを作成します。
-     * 
+     *
      * @return 認定調査督促対象者一覧表作成のパラメータ
      */
     public ShikakuIdoTaishoshaShutokuProcessParameter toShikakuIdoTaishoshaShutokuProcessParameter() {
-        
+
         ShikakuIdoTaishoshaShutokuProcessParameter parameter = new ShikakuIdoTaishoshaShutokuProcessParameter();
         parameter.set開始日(kaishiYMD);
         parameter.set終了日(shuryoYMD);

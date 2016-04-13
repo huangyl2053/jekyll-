@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dba.entity.dbamn71001;
+package jp.co.ndensan.reams.db.dba.entity.hihokenshadaichokoshin;
 
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
@@ -14,6 +14,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 /**
  * 最新異動日のデータEntityクラスです。
  *
+ * @reamsid_L DBA-0330-030 xuyue
  */
 @lombok.Getter
 @lombok.Setter
@@ -47,5 +48,5 @@ public class SaishinIdohiDataEntity {
     private RString 広域内住所地特例フラグ;
     private LasdecCode 広住特措置元市町村コード;
     private LasdecCode 旧市町村コード;
-    
+
 }

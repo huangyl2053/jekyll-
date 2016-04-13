@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dba.service.dbamn71001;
+package jp.co.ndensan.reams.db.dba.service.core.nenreitotatsushikakuido;
 
 import jp.co.ndensan.reams.db.dba.definition.batchprm.dbamn71001.Dbamn71001BatchFlowParameter;
 import jp.co.ndensan.reams.db.dba.entity.nenreitotatsushikakuido.NenreitotatsuJokenEntity;
@@ -21,6 +21,8 @@ import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 
 /**
  * ６５歳年齢到達資格異動のビジネスクラスです。
+ *
+ * @reamsid_L DBA-0330-030 xuyue
  */
 public class NenreitotatsuShikakuIdo {
 

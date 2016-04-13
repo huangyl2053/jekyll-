@@ -8,7 +8,7 @@ package jp.co.ndensan.reams.db.dba.persistence.db.mapper.relate.dbamn71001;
 import java.util.List;
 import jp.co.ndensan.reams.db.dba.definition.mybatisprm.dbamn71001.AtenaMybatisParameter;
 import jp.co.ndensan.reams.db.dba.definition.mybatisprm.dbamn71001.ShikakuIdoTaishoshaShutokuMybatisParameter;
-import jp.co.ndensan.reams.db.dba.entity.dbamn71001.ShikakuIdoTaishoshaEntity;
+import jp.co.ndensan.reams.db.dba.entity.hihokenshadaichokoshin.ShikakuIdoTaishoshaEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT1002TekiyoJogaishaEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT1003TashichosonJushochiTokureiEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT1009ShikakuShutokuJogaishaEntity;
@@ -17,6 +17,8 @@ import jp.co.ndensan.reams.ua.uax.entity.db.basic.UaFt200FindShikibetsuTaishoEnt
 
 /**
  * ６５歳年齢到達資格異動のマッパーインタフェースです。
+ *
+ * @reamsid_L DBA-0330-010 xuyue
  */
 public interface IDbamn71001RelateMapper {
 

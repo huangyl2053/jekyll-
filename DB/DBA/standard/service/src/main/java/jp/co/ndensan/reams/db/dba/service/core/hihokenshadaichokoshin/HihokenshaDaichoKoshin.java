@@ -3,12 +3,12 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dba.service.dbamn71001;
+package jp.co.ndensan.reams.db.dba.service.core.hihokenshadaichokoshin;
 
 import java.util.List;
 import jp.co.ndensan.reams.db.dba.definition.batchprm.dbamn71001.Dbamn71001BatchFlowParameter;
-import jp.co.ndensan.reams.db.dba.entity.dbamn71001.SaishinIdohiDataEntity;
-import jp.co.ndensan.reams.db.dba.entity.dbamn71001.ShikakuIdoTaishoshaEntity;
+import jp.co.ndensan.reams.db.dba.entity.hihokenshadaichokoshin.SaishinIdohiDataEntity;
+import jp.co.ndensan.reams.db.dba.entity.hihokenshadaichokoshin.ShikakuIdoTaishoshaEntity;
 import jp.co.ndensan.reams.db.dba.service.core.hihokenshadaicho.HihokenshaShikakuShutokuManager;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbz.definition.core.enumeratedtype.shinsei.HihokenshaKubunCode;
@@ -35,6 +35,8 @@ import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
 
 /**
  * ６５歳年齢到達資格異動被保険者台帳更新のビジネスクラスです。
+ *
+ * @reamsid_L DBA-0330-030 xuyue
  */
 public class HihokenshaDaichoKoshin {
 

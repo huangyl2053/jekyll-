@@ -9,7 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dba.definition.mybatisprm.dbamn71001.ShikakuIdoTaishoshaShutokuMybatisParameter;
 import jp.co.ndensan.reams.db.dba.definition.processprm.dbamn71001.ShikakuIdoTaishoshaShutokuProcessParameter;
-import jp.co.ndensan.reams.db.dba.entity.dbamn71001.ShikakuIdoTaishoshaEntity;
+import jp.co.ndensan.reams.db.dba.entity.hihokenshadaichokoshin.ShikakuIdoTaishoshaEntity;
 import jp.co.ndensan.reams.db.dba.persistence.db.mapper.relate.dbamn71001.IDbamn71001RelateMapper;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT1002TekiyoJogaishaEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT1003TashichosonJushochiTokureiEntity;
@@ -33,7 +33,9 @@ import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
- * 資格異動対象者情報の取得_バッチフ処理クラスです
+ * 資格異動対象者情報の取得_バッチフ処理クラスです。
+ *
+ * @reamsid_L DBA-0330-010 xuyue
  */
 public class ShikakuIdoTaishoshaShutokuProcess extends SimpleBatchProcessBase {
 

@@ -15,6 +15,8 @@ import lombok.Setter;
 
 /**
  * 抽出条件の生成_バッチ用のパラメータです。
+ *
+ * @reamsid_L DBA-0330-010 xuyue
  */
 @Getter
 @Setter

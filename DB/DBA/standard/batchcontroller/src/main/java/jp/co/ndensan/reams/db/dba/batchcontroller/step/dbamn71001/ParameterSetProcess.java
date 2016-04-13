@@ -17,7 +17,9 @@ import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
- * バッチ内で抽出条件の生成_バッチフ処理クラスです
+ * バッチ内で抽出条件の生成_バッチフ処理クラスです。
+ *
+ * @reamsid_L DBA-0330-010 xuyue
  */
 public class ParameterSetProcess extends SimpleBatchProcessBase {
 
