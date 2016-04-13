@@ -32,15 +32,7 @@ public class JukyuShikakuShomeishoDataEntity {
     private RString 被保険者住所_転出先予定;
     private RString 被保険者異動予定日;
     private RString 保険者番号;
-    private RString 電子公印;
     private RString 発行日;
-    private RString 認証者役職名;
-    private RString 認証者役職名1;
-    private RString 公印文字列;
-    private RString 認証者氏名掛けない;
-    private RString 認証者氏名掛ける;
-    private RString 認証者役職名2;
-    private RString 公印省略;
     private RString 申請状況;
     private RString 申請年月日;
     private RString 要介護状態区分;

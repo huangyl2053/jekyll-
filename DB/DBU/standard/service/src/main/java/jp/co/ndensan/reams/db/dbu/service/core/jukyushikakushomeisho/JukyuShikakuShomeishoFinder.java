@@ -7,6 +7,7 @@ package jp.co.ndensan.reams.db.dbu.service.core.jukyushikakushomeisho;
 
 import java.util.ArrayList;
 import java.util.List;
+import jp.co.ndensan.reams.db.dbu.business.jukyushikakushomeisho.JukyuShikakuShomeishoData;
 import jp.co.ndensan.reams.db.dbu.definition.mybatisprm.jukyushikakushomeisho.JukyuShikakuShomeishoMyBatisParameter;
 import jp.co.ndensan.reams.db.dbu.entity.jukyushikakushomeisho.JukyuShikakuShomeishoDataEntity;
 import jp.co.ndensan.reams.db.dbu.entity.jukyushikakushomeisho.JukyuShikakuShomeishoKaiKoEntity;
@@ -36,12 +37,8 @@ import jp.co.ndensan.reams.ua.uax.definition.mybatisprm.shikibetsutaisho.IShikib
 import jp.co.ndensan.reams.ua.uax.entity.db.basic.UaFt200FindShikibetsuTaishoEntity;
 import jp.co.ndensan.reams.ur.urz.business.core.association.Association;
 import jp.co.ndensan.reams.ur.urz.business.core.ninshosha.Ninshosha;
-import jp.co.ndensan.reams.ur.urz.business.report.parts.ninshosha.INinshoshaSourceBuilder;
-import jp.co.ndensan.reams.ur.urz.business.report.parts.ninshosha.NinshoshaSourceBuilderFactory;
-import jp.co.ndensan.reams.ur.urz.definition.core.ninshosha.KenmeiFuyoKubunType;
 import jp.co.ndensan.reams.ur.urz.definition.core.shikibetsutaisho.JuminJotai;
 import jp.co.ndensan.reams.ur.urz.definition.core.shikibetsutaisho.JuminShubetsu;
-import jp.co.ndensan.reams.ur.urz.entity.report.parts.ninshosha.NinshoshaSource;
 import jp.co.ndensan.reams.ur.urz.service.core.association.AssociationFinderFactory;
 import jp.co.ndensan.reams.ur.urz.service.core.association.IAssociationFinder;
 import jp.co.ndensan.reams.ur.urz.service.core.ninshosha.INinshoshaManager;
@@ -62,8 +59,6 @@ import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.Separator;
-import jp.co.ndensan.reams.uz.uza.report.ReportAssembler;
-import jp.co.ndensan.reams.uz.uza.report.ReportManager;
 import jp.co.ndensan.reams.uz.uza.util.config.BusinessConfig;
 import jp.co.ndensan.reams.uz.uza.util.db.SearchResult;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
@@ -98,7 +93,7 @@ public class JukyuShikakuShomeishoFinder {
      * @param inEntity 受給資格証明書発行Entity
      * @return outEntity 受給資格証明書の帳票出力用データEntity
      */
-    public JukyuShikakuShomeishoDataEntity setJukyuShikakuShomeisho(JukyuShikakuShomeishoKaiKoEntity inEntity) {
+    public JukyuShikakuShomeishoData setJukyuShikakuShomeisho(JukyuShikakuShomeishoKaiKoEntity inEntity) {
 
         JukyuShikakuShomeishoDataEntity outEntity = new JukyuShikakuShomeishoDataEntity();
 
@@ -111,14 +106,12 @@ public class JukyuShikakuShomeishoFinder {
 
         edit保険者番号(outEntity, inEntity.get被保険者番号());
 
-        edit認証者電子公印(outEntity, inEntity.get交付日());
-
         get申請状況情報(outEntity, inEntity);
         outEntity.set認定審査会の意見等(inEntity.get認定審査会の意見等());
         outEntity.set備考(inEntity.get備考());
         outEntity.set連番(null);
 
-        return outEntity;
+        return edit認証者電子公印(outEntity, inEntity.get交付日());
     }
 
     /**
@@ -345,31 +338,16 @@ public class JukyuShikakuShomeishoFinder {
      * @param outEntity 受給資格証明書の帳票出力用データEntity
      * @param 交付日 交付日
      */
-    private void edit認証者電子公印(JukyuShikakuShomeishoDataEntity outEntity, RDate 交付日) {
+    private JukyuShikakuShomeishoData edit認証者電子公印(JukyuShikakuShomeishoDataEntity outEntity, RDate 交付日) {
         ChohyoSeigyoKyotsu 帳票制御共通 = new ChohyoSeigyoKyotsu(SubGyomuCode.DBA介護資格, new ReportId("DBE223001_NinteiChosaTokusokujo"));
         IAssociationFinder finder = AssociationFinderFactory.createInstance();
         Association association = finder.getAssociation();
         INinshoshaManager iNinshoshaManager = NinshoshaFinderFactory.createInstance();
         Ninshosha ninshosha = iNinshoshaManager.get帳票認証者(GyomuCode.DB介護保険,
                 NinshoshaDenshikoinshubetsuCode.保険者印.getコード(), new FlexibleDate(交付日.toDateString()));
-        ReportAssembler assembler = new ReportManager().reportAssembler(new RString("DBA100004_JukyuShikakuShomeisho")).create();
-        RString imageFilePath = assembler.getImageFolderPath();
-        boolean is公印に掛ける = new RString("1").equals(帳票制御共通.get首長名印字位置());
-        boolean is公印を省略 = !帳票制御共通.is電子公印印字有無();
-        //TODO QA #79366 ReportSourceWriter.getImageFolderPath()
-        INinshoshaSourceBuilder builder = NinshoshaSourceBuilderFactory.createInstance(
-                ninshosha, association, imageFilePath, 交付日, is公印に掛ける, is公印を省略, KenmeiFuyoKubunType.付与なし);
-        NinshoshaSource ninshoshaSource = builder.buildSource();
-        outEntity.set電子公印(ninshoshaSource.denshiKoin);
         outEntity.set発行日(交付日.wareki().eraType(EraType.KANJI)
                 .firstYear(FirstYear.GAN_NEN).separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString());
-        outEntity.set認証者役職名(ninshoshaSource.ninshoshaYakushokuMei);
-        outEntity.set認証者役職名1(ninshoshaSource.ninshoshaYakushokuMei1);
-        outEntity.set認証者役職名2(ninshoshaSource.ninshoshaYakushokuMei2);
-        outEntity.set公印文字列(ninshoshaSource.koinMojiretsu);
-        outEntity.set認証者氏名掛けない(ninshoshaSource.ninshoshaShimeiKakenai);
-        outEntity.set認証者氏名掛ける(ninshoshaSource.ninshoshaShimeiKakeru);
-        outEntity.set公印省略(ninshoshaSource.koinShoryaku);
+        return new JukyuShikakuShomeishoData(outEntity, ninshosha, association, 帳票制御共通.get首長名印字位置(), 帳票制御共通.is電子公印印字有無());
     }
 
     /**
