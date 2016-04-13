@@ -266,8 +266,8 @@ public class JiGyoSyaHandler {
             div.getTaishoJigyoshaKensaku().getKennsakuJyokenn().getDdlKennsakuKubun().setDataSource(get検索条件区分());
             div.getTaishoJigyoshaKensaku().getKennsakuJyokenn().getDdlKennsakuKubun().setSelectedKey(前方一致_コード);
             div.getKennsakuJyokenn().setVisible(true);
-            div.getKennsakuJyokenn().getServiceJigyosha().setVisible(true);
-            div.getOtherTokureiShisetsu().setVisible(false);
+            div.getKennsakuJyokenn().getServiceJigyosha().setDisplayNone(false);
+            div.getOtherTokureiShisetsu().setDisplayNone(true);
             Association association = finder.getAssociation();
             div.getTaishoJigyoshaKensaku().getDdlKennCode().setSelectedKey(association.get地方公共団体コード() == null
                     ? RString.EMPTY : association.get地方公共団体コード().value().substring(0, 2));
@@ -288,8 +288,8 @@ public class JiGyoSyaHandler {
             div.getTaishoJigyoshaKensaku().getTxtMaxHyojiKensu().setValue(new Decimal(BusinessConfig.
                     get(ConfigNameDBU.検索制御_最大取得件数, SubGyomuCode.DBU介護統計報告).toString()));
             div.getKennsakuJyokenn().setVisible(true);
-            div.getKennsakuJyokenn().getServiceJigyosha().setVisible(false);
-            div.getOtherTokureiShisetsu().setVisible(true);
+            div.getKennsakuJyokenn().getServiceJigyosha().setDisplayNone(true);
+            div.getOtherTokureiShisetsu().setDisplayNone(false);
         }
 
         if (ShisetsuType.toValue(mode.getJigyoshaShubetsu()).toRString().equals(ShisetsuType.適用除外施設.toRString())) {
@@ -305,8 +305,8 @@ public class JiGyoSyaHandler {
             div.getTaishoJigyoshaKensaku().getTxtMaxHyojiKensu().setValue(new Decimal(BusinessConfig.
                     get(ConfigNameDBU.検索制御_最大取得件数, SubGyomuCode.DBU介護統計報告).toString()));
             div.getKennsakuJyokenn().setVisible(true);
-            div.getKennsakuJyokenn().getServiceJigyosha().setVisible(false);
-            div.getOtherTokureiShisetsu().setVisible(false);
+            div.getKennsakuJyokenn().getServiceJigyosha().setDisplayNone(true);
+            div.getOtherTokureiShisetsu().setDisplayNone(true);
         }
     }
 
