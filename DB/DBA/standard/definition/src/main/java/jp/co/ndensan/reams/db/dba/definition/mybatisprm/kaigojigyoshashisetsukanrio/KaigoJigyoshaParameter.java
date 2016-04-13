@@ -45,8 +45,8 @@ public final class KaigoJigyoshaParameter {
      */
     public static KaigoJigyoshaParameter createParam(
             RString jigyoshaNo,
-            FlexibleDate yukoKaishiYMD,
             RString 事業者種別,
+            FlexibleDate yukoKaishiYMD,
             FlexibleDate yukoShuryoYMD) {
 
         return new KaigoJigyoshaParameter(
