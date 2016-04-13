@@ -55,6 +55,15 @@ public class KogakuServiceKetteiJohoTorikomiDataHenshu {
     }
 
     /**
+     * {@link InstanceProvider#create}にて生成した{@link KogakuServiceKetteiJohoTorikomiDataHenshu}のインスタンスを返します。
+     *
+     * @return // * {@link InstanceProvider#create}にて生成した{@link KogakuServiceKetteiJohoTorikomiDataHenshu}のインスタンス
+     */
+    public static KogakuServiceKetteiJohoTorikomiDataHenshu createInstance() {
+        return InstanceProvider.create(KogakuServiceKetteiJohoTorikomiDataHenshu.class);
+    }
+
+    /**
      * 単体テスト用のコンストラクタです。
      *
      * @param mapperProvider mapperProvider
