@@ -15,6 +15,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
  *
  * サービス種類検索の抽象Handlerクラスです。
  *
+ * @reamsid_L DBA-0070-010 chengsanyuan
  */
 public class ServiceTypeCommonChildHandler {
 

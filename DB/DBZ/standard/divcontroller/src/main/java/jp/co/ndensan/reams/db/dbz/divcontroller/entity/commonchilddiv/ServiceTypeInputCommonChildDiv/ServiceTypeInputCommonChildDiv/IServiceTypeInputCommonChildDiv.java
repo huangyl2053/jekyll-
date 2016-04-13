@@ -16,6 +16,13 @@ public interface IServiceTypeInputCommonChildDiv extends ICommonChildDivBaseProp
     void initialize();
 
     /**
+     * この共有子Divを初期化します。
+     *
+     * @param serviceTypeCode サービス種類コード
+     */
+    void initialize(RString serviceTypeCode);
+
+    /**
      * この共有子Divに設定されているデータを全てクリアします。
      */
     void clear();

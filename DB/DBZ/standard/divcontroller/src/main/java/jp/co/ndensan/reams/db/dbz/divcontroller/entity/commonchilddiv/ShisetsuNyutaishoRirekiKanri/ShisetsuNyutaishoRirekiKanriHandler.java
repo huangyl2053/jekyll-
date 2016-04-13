@@ -5,10 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.ShisetsuNyutaishoRirekiKanri;
 
-import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
 import jp.co.ndensan.reams.db.dbz.business.core.ShisetsuNyutaisho;
@@ -184,7 +181,7 @@ public class ShisetsuNyutaishoRirekiKanriHandler {
         dgShisetsuNyutaishoRireki_Row newRow = new dgShisetsuNyutaishoRireki_Row();
         int 最大履歴番号 = 1;
         if (listRow != null && !listRow.isEmpty()) {
-            最大履歴番号 = Integer.parseInt(listRow.get(0).getRirekiNo().toString()) + 1;
+            最大履歴番号 = Integer.parseInt(listRow.get(listRow.size() - 1).getRirekiNo().toString()) + 1;
         } else {
             listRow = new ArrayList();
         }
@@ -243,7 +240,6 @@ public class ShisetsuNyutaishoRirekiKanriHandler {
         }
         ViewStateHolder.put(ViewStateKeys.施設入退所履歴_施設入退所情報, Models.create(施設入退所情報Model));
         div.setInputMode(RString.EMPTY);
-        Collections.sort(listRow, new ShisetsuNyutaishoRirekiKanriHandler.RirekiNoDateComparator());
         div.getDgShisetsuNyutaishoRireki().setDataSource(listRow);
         onClick_btnShisetsuNyutaishoTorikeshi();
     }
@@ -303,7 +299,6 @@ public class ShisetsuNyutaishoRirekiKanriHandler {
             rowList.add(row);
 
         }
-        Collections.sort(rowList, new ShisetsuNyutaishoRirekiKanriHandler.RirekiNoDateComparator());
         div.getDgShisetsuNyutaishoRireki().setDataSource(rowList);
     }
 
@@ -418,8 +413,7 @@ public class ShisetsuNyutaishoRirekiKanriHandler {
                 .set入所処理年月日(入所処理年月日)
                 .set入所年月日(入所年月日)
                 .set退所処理年月日(退所処理年月日)
-                .set退所年月日(退所年月日)
-                .set部屋記号番号(RString.EMPTY).build();
+                .set退所年月日(退所年月日).build();
     }
 
     private ShisetsuNyutaisho 修正の処理(
@@ -484,14 +478,6 @@ public class ShisetsuNyutaishoRirekiKanriHandler {
     private void 施設種類(RString 台帳種別, dgShisetsuNyutaishoRireki_Row row) {
         if (DaichoType.適用除外者.getコード().equals(台帳種別)) {
             row.setShisetsuShurui(RString.EMPTY);
-        }
-    }
-
-    private static class RirekiNoDateComparator implements Comparator<dgShisetsuNyutaishoRireki_Row>, Serializable {
-
-        @Override
-        public int compare(dgShisetsuNyutaishoRireki_Row o1, dgShisetsuNyutaishoRireki_Row o2) {
-            return o2.getRirekiNo().compareTo(o1.getRirekiNo());
         }
     }
 }
