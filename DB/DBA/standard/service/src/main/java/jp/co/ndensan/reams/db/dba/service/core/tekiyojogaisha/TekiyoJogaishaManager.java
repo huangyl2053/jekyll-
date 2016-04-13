@@ -278,7 +278,7 @@ public class TekiyoJogaishaManager {
         UaFt200FindShikibetsuTaishoEntity 宛名情報 = get宛名情報(識別コード);
         IKojin shikibetsuTaisho = ShikibetsuTaishoFactory.createKojin(宛名情報);
         RString 年齢 = get年齢(shikibetsuTaisho.get生年月日(), 解除届出年月日);
-        if (Integer.parseInt(年齢.toString()) >= AGE_65) {
+        if (AGE_65 <= Integer.parseInt(年齢.toString())) {
             DbT1001HihokenshaDaichoEntity entity = new DbT1001HihokenshaDaichoEntity();
             entity.setIdoYMD(解除年月日);
             entity.setIdoJiyuCode(ShikakuShutokuJiyu.除外者居住.getコード());
