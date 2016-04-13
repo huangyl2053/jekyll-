@@ -982,9 +982,9 @@ public final class YoshikiIchinoyonHoseiHandler {
     public boolean delete(JigyoHokokuGeppoParameter 引き継ぎデータ, RString 様式種類) {
         int row = 0;
         if (様式種類_008.equals(様式種類) || 様式種類_108.equals(様式種類)) {
-            row = deleteByParameter(引き継ぎデータ, new Code(集計番号_1030));
-        } else if (様式種類_009.equals(様式種類) || 様式種類_109.equals(様式種類)) {
             row = deleteByParameter(引き継ぎデータ, new Code(集計番号_1040));
+        } else if (様式種類_009.equals(様式種類) || 様式種類_109.equals(様式種類)) {
+            row = deleteByParameter(引き継ぎデータ, new Code(集計番号_1030));
         }
         return 0 <= row;
     }
