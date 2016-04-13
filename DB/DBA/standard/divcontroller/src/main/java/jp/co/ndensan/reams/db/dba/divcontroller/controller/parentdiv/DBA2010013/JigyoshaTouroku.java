@@ -36,6 +36,7 @@ import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.ApplicationException;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.message.MessageDialogSelectedResult;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ResponseHolder;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
@@ -64,6 +65,10 @@ public class JigyoshaTouroku {
      * @return ResponseData<JigyoshaToutokuDiv> 事業者登録Div
      */
     public ResponseData<JigyoshaToutokuDiv> onLoad(JigyoshaToutokuDiv div) {
+        ViewStateHolder.put(ViewStateKeys.事業者登録_画面状態, new RString("修正"));
+        ViewStateHolder.put(ViewStateKeys.事業者登録_事業者番号, new RString("555523"));
+        ViewStateHolder.put(ViewStateKeys.事業者登録_事業者種類コード, new RString("11"));
+        ViewStateHolder.put(ViewStateKeys.事業者登録_有効開始日, new FlexibleDate("20160330"));
         RString 初期_状態 = ViewStateHolder.get(ViewStateKeys.事業者登録_画面状態, RString.class);
         RString 事業者番号 = ViewStateHolder.get(ViewStateKeys.事業者登録_事業者番号, RString.class);
         FlexibleDate 有効開始日 = ViewStateHolder.get(ViewStateKeys.事業者登録_有効開始日, FlexibleDate.class);
@@ -145,7 +150,7 @@ public class JigyoshaTouroku {
      */
     public ResponseData<JigyoshaToutokuDiv> onClick_btnAddService(JigyoshaToutokuDiv div) {
         ViewStateHolder.put(ViewStateKeys.サービス登録_画面状態, 状態_追加);
-        set画面引数の設定();
+        set画面引数の設定(div);
         return ResponseData.of(div).forwardWithEventName(DBA2010013TransitionEventName.サービス追加).respond();
     }
 
@@ -157,7 +162,7 @@ public class JigyoshaTouroku {
      */
     public ResponseData<JigyoshaToutokuDiv> onClick_btnModify(JigyoshaToutokuDiv div) {
         ViewStateHolder.put(ViewStateKeys.サービス登録_画面状態, 状態_修正);
-        set画面引数の設定();
+        set画面引数の設定(div);
         return ResponseData.of(div).forwardWithEventName(DBA2010013TransitionEventName.サービス修正).respond();
     }
 
@@ -169,13 +174,14 @@ public class JigyoshaTouroku {
      */
     public ResponseData<JigyoshaToutokuDiv> onClick_btnDelete(JigyoshaToutokuDiv div) {
         ViewStateHolder.put(ViewStateKeys.サービス登録_画面状態, 状態_削除);
-        set画面引数の設定();
+        set画面引数の設定(div);
         return ResponseData.of(div).forwardWithEventName(DBA2010013TransitionEventName.サービス削除).respond();
     }
 
-    private void set画面引数の設定() {
+    private void set画面引数の設定(JigyoshaToutokuDiv div) {
         ViewStateHolder.put(ViewStateKeys.サービス登録_事業者番号, ViewStateHolder.get(ViewStateKeys.事業者登録_事業者番号, RString.class));
-        ViewStateHolder.put(ViewStateKeys.サービス登録_サービス種類コード, ViewStateHolder.get(ViewStateKeys.事業者登録_事業者種類コード, RString.class));
+        ViewStateHolder.put(ViewStateKeys.サービス登録_サービス種類コード, 
+                div.getServiceJoho().getDgServiceList().getClickedItem().getServiceType());
         ViewStateHolder.put(ViewStateKeys.サービス登録_有効開始日, ViewStateHolder.get(ViewStateKeys.事業者登録_有効開始日, FlexibleDate.class));
     }
 
@@ -196,6 +202,7 @@ public class JigyoshaTouroku {
             if (new RString(UrQuestionMessages.保存の確認.getMessage().getCode()).equals(ResponseHolder.getMessageCode())
                     && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
                 get事業者情報の登録処理(事業者番号, div);
+                return ResponseData.of(div).setState(DBA2010013StateName.完了状態);
             }
         } else if (初期_状態.equals(状態_修正)) {
             if (!ResponseHolder.isReRequest()) {
@@ -204,6 +211,7 @@ public class JigyoshaTouroku {
             if (new RString(UrQuestionMessages.保存の確認.getMessage().getCode()).equals(ResponseHolder.getMessageCode())
                     && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
                 get事業者情報の更新処理(div, 事業者番号, 有効開始日);
+                return ResponseData.of(div).setState(DBA2010013StateName.完了状態);
             }
         } else if (初期_状態.equals(状態_削除)) {
             if (!ResponseHolder.isReRequest()) {
@@ -212,9 +220,10 @@ public class JigyoshaTouroku {
             if (new RString(UrQuestionMessages.削除の確認.getMessage().getCode()).equals(ResponseHolder.getMessageCode())
                     && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
                 get事業者情報の削除処理(div);
+                return ResponseData.of(div).setState(DBA2010013StateName.完了状態);
             }
         }
-        return ResponseData.of(div).setState(DBA2010013StateName.完了状態);
+        return ResponseData.of(div).respond();
     }
 
     private ResponseData<JigyoshaToutokuDiv> get事業者情報の登録処理(RString 事業者番号, JigyoshaToutokuDiv div) {
@@ -255,9 +264,12 @@ public class JigyoshaTouroku {
         kaigoJigyoshaBuilder.set事業者住所カナ(div.getServiceJigyoshaJoho().getTxtJushoKana().getValue());
         kaigoJigyoshaBuilder.set所在市町村(div.getServiceJigyoshaJoho().getTxtShozaiShichoson().getValue());
         kaigoJigyoshaBuilder.setサービス実施地域(div.getServiceJigyoshaJoho().getTxtServiceTiiki().getValue());
-        kaigoJigyoshaBuilder.set所属人数(div.getServiceJigyoshaJoho().getTxtShozokuNum().getValue().intValue());
-        kaigoJigyoshaBuilder.set利用者数(div.getServiceJigyoshaJoho().getTxtRiyoshaNum().getValue().intValue());
-        kaigoJigyoshaBuilder.setベッド数(div.getServiceJigyoshaJoho().getTxtBedNum().getValue().intValue());
+        Decimal 所属人数 = div.getServiceJigyoshaJoho().getTxtShozokuNum().getValue();
+        kaigoJigyoshaBuilder.set所属人数(所属人数 == null ? 0 : 所属人数.intValue());
+        Decimal 利用者数 = div.getServiceJigyoshaJoho().getTxtRiyoshaNum().getValue();
+        kaigoJigyoshaBuilder.set利用者数(利用者数 == null ? 0 : 利用者数.intValue());
+        Decimal ベッド数 = div.getServiceJigyoshaJoho().getTxtBedNum().getValue();
+        kaigoJigyoshaBuilder.setベッド数(ベッド数 == null ? 0 : ベッド数.intValue());
         kaigoJigyoshaBuilder.set宛先人名(
                 new AtenaMeisho(div.getServiceJigyoshaJoho().getTxtAtesakininName().getValue()));
         kaigoJigyoshaBuilder.set宛先人名カナ(
@@ -314,7 +326,7 @@ public class JigyoshaTouroku {
         if (!有効開始日.equals(yukoKaishiYMD)
                 || get有効終了日の変更判定(有効終了日, yukoShuryoYMD)) {
             KaigoJogaiTokureiParameter parameter = KaigoJogaiTokureiParameter.createParam(事業者番号, yukoKaishiYMD, yukoShuryoYMD);
-            if (manager.checkKikanGorisei(parameter)) {
+            if (!manager.checkKikanGorisei(parameter)) {
                 throw new ApplicationException(UrErrorMessages.期間が不正.getMessage());
             }
             KaigoJigyoshaParameter kaigoJigyoshaParameter = KaigoJigyoshaParameter.createParam(
@@ -377,9 +389,12 @@ public class JigyoshaTouroku {
         kaigoJigyoshaBuilder.set事業者住所カナ(div.getServiceJigyoshaJoho().getTxtJushoKana().getValue());
         kaigoJigyoshaBuilder.set所在市町村(div.getServiceJigyoshaJoho().getTxtShozaiShichoson().getValue());
         kaigoJigyoshaBuilder.setサービス実施地域(div.getServiceJigyoshaJoho().getTxtServiceTiiki().getValue());
-        kaigoJigyoshaBuilder.set所属人数(div.getServiceJigyoshaJoho().getTxtShozokuNum().getValue().intValue());
-        kaigoJigyoshaBuilder.set利用者数(div.getServiceJigyoshaJoho().getTxtRiyoshaNum().getValue().intValue());
-        kaigoJigyoshaBuilder.setベッド数(div.getServiceJigyoshaJoho().getTxtBedNum().getValue().intValue());
+        Decimal 所属人数 = div.getServiceJigyoshaJoho().getTxtShozokuNum().getValue();
+        kaigoJigyoshaBuilder.set所属人数(所属人数 == null ? 0 : 所属人数.intValue());
+        Decimal 利用者数 = div.getServiceJigyoshaJoho().getTxtRiyoshaNum().getValue();
+        kaigoJigyoshaBuilder.set利用者数(利用者数 == null ? 0 : 利用者数.intValue());
+        Decimal ベッド数 = div.getServiceJigyoshaJoho().getTxtBedNum().getValue();
+        kaigoJigyoshaBuilder.setベッド数(ベッド数 == null ? 0 : ベッド数.intValue());
         kaigoJigyoshaBuilder.set宛先人名(
                 new AtenaMeisho(div.getServiceJigyoshaJoho().getTxtAtesakininName().getValue()));
         kaigoJigyoshaBuilder.set宛先人名カナ(

@@ -145,11 +145,11 @@ public class JigyoshaTourokuHandler {
         panelDiv.getServiceJigyoshaJoho().getTxtServiceTiiki().setValue(
                 business.getサービス実施地域() == null ? RString.EMPTY : business.getサービス実施地域());
         panelDiv.getServiceJigyoshaJoho().getTxtShozokuNum().setValue(
-                business.get所属人数() == 0 ? new Decimal("") : new Decimal(business.get所属人数()));
+                business.get所属人数() == 0 ? null : new Decimal(business.get所属人数()));
         panelDiv.getServiceJigyoshaJoho().getTxtRiyoshaNum().setValue(
-                business.get利用者数() == 0 ? new Decimal("") : new Decimal(business.get利用者数()));
+                business.get利用者数() == 0 ? null : new Decimal(business.get利用者数()));
         panelDiv.getServiceJigyoshaJoho().getTxtBedNum().setValue(
-                business.getベッド数() == 0 ? new Decimal("") : new Decimal(business.getベッド数()));
+                business.getベッド数() == 0 ? null : new Decimal(business.getベッド数()));
     }
 
     private void get事業者情報_代表者_開設者あり場合2(KaigoJigyosha business) {
