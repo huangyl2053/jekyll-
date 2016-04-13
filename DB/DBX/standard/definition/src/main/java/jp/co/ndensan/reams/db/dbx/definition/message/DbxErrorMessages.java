@@ -13,6 +13,8 @@ import jp.co.ndensan.reams.uz.uza.message.Message;
 
 /**
  * DBXのエラーメッセージ定義列挙型です。
+ *
+ * @reamsid_L DBX-9999-023 liangbc
  */
 public enum DbxErrorMessages implements IMessageGettable, IValidationMessage {
 

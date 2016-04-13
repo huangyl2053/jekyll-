@@ -13,7 +13,7 @@ import jp.co.ndensan.reams.uz.uza.message.Message;
 /**
  * DBZのインフォメーションメッセージ定義列挙型です。
  *
- * @author N9606 漢那 憲作
+ * @reamsid_L DBZ-9999-023 liangbc
  */
 public enum DbzInformationMessages implements IMessageGettable {
 

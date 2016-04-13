@@ -13,7 +13,7 @@ import jp.co.ndensan.reams.uz.uza.message.Message;
 /**
  * DBBのエラーメッセージ定義列挙型です。
  *
- * @author N9606 漢那 憲作
+ * @reamsid_L DBB-9999-023 liangbc
  */
 public enum DbbErrorMessages implements IMessageGettable {
 
@@ -46,7 +46,9 @@ public enum DbbErrorMessages implements IMessageGettable {
     特徴期別額不正_300円以上の差(27, "特徴4期納付額と特徴5期納付額で300円以上の差があります。"),
     特徴期別額不正_大小関係(28, "特徴4期納付額 ＜ 特徴5期納付額の入力はできません。"),
     特徴期別額不正_特徴0円(29, "特徴%期納付額は0円に設定できません。徴収方法修正で徴収方法を普徴に変更後、即時賦課更正を行ってください。"),
-    普徴納付額0円(30, "普徴の納付額が0円のため、登録できません。");
+    普徴納付額0円(30, "普徴の納付額が0円のため、登録できません。"),
+    減免額_合計不一致(31, "減免後の期別減免額（減免前額 - 減免後額）の合計が減免額と一致しません。"),
+    被保険者未選択(32, "被保険者が選択されていません。");
 
     private final Message message;
 

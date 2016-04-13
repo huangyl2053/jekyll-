@@ -13,7 +13,7 @@ import static jp.co.ndensan.reams.db.dbz.definition.message.MessageCreateHelper.
 /**
  * DBCのエラーメッセージ定義列挙型です。
  *
- * @author N9606 漢那 憲作
+ * @reamsid_L DBC-9999-023 liangbc
  */
 public enum DbcErrorMessages implements IMessageGettable {
 
@@ -22,7 +22,12 @@ public enum DbcErrorMessages implements IMessageGettable {
     高額判定_処理状態処理前数不正(3, "処理状態が処理前または再処理前である処理年月が２件以上存在します。"),
     処理状態処理前未設定(4, "処理状態が処理前または再処理前である処理年月が存在しません。"),
     給付実績複数件取得(5, "対象の給付実績情報が複数件取得されました。"),
-    未審査有りで保存不可(6, "未審査のデータがあるのため保存できません。");
+    未審査有りで保存不可(6, "未審査のデータがあるのため保存できません。"),
+    サービス年月と不一致(7, "%にはサービス年月と同月を指定してください。"),
+    住宅改修データなし(8, "住宅改修データがありません。"),
+    着工日不一致(9, "着工日には同一の年月を設定してください。"),
+    対象住宅住所不一致(10, "対象住宅住所には同じ住所を設定してください。");
+
     private final Message message;
 
     /**
