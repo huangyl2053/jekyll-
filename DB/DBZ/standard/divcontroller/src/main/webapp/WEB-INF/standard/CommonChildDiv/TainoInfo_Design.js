@@ -29,7 +29,7 @@ var DBZ;
             };
 
             Controls.prototype.txtHanteiKijunYMD = function () {
-                return new UZA.TextBoxDate(this.convFiledName("txtHanteiKijunYMD"));
+                return new UZA.TextBoxFlexibleDate(this.convFiledName("txtHanteiKijunYMD"));
             };
 
             Controls.prototype.btnKensaku = function () {
@@ -41,7 +41,7 @@ var DBZ;
             };
 
             Controls.prototype.txtSaikoNokigen = function () {
-                return new UZA.TextBoxDate(this.convFiledName("txtSaikoNokigen"));
+                return new UZA.TextBoxFlexibleDate(this.convFiledName("txtSaikoNokigen"));
             };
 
             Controls.prototype.txtKeikaNen = function () {

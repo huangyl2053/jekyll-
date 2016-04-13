@@ -36,7 +36,7 @@ var DBZ;
             };
 
             Controls.prototype.txtHanteiKijunYMD = function () {
-                return new UZA.TextBoxDate(this.convFiledName("txtHanteiKijunYMD"));
+                return new UZA.TextBoxFlexibleDate(this.convFiledName("txtHanteiKijunYMD"));
             };
 
             Controls.prototype.btnKensaku = function () {
@@ -48,11 +48,11 @@ var DBZ;
             };
 
             Controls.prototype.GenGakuKeisan = function () {
-                return new UZA.Panel(this.convFiledName("TainoNendo_GenGakuKeisan"));
+                return new UZA.Panel(this.convFiledName("GenGakuKeisan"));
             };
 
             Controls.prototype.ChoshuKenKeimetsuKikan1 = function () {
-                return new UZA.Panel(this.convFiledName("TainoNendo_GenGakuKeisan_ChoshuKenKeimetsuKikan1"));
+                return new UZA.Panel(this.convFiledName("ChoshuKenKeimetsuKikan1"));
             };
 
             Controls.prototype.lblChoShushometsu1 = function () {
@@ -64,7 +64,7 @@ var DBZ;
             };
 
             Controls.prototype.Kakesan = function () {
-                return new UZA.Panel(this.convFiledName("TainoNendo_GenGakuKeisan_ChoshuKenKeimetsuKikan1_Kakesan"));
+                return new UZA.Panel(this.convFiledName("Kakesan"));
             };
 
             Controls.prototype.lblKakesan = function () {
@@ -72,11 +72,11 @@ var DBZ;
             };
 
             Controls.prototype.ChoshuKenKeimetsuKikan2 = function () {
-                return new UZA.Panel(this.convFiledName("TainoNendo_GenGakuKeisan_ChoshuKenKeimetsuKikan2"));
+                return new UZA.Panel(this.convFiledName("ChoshuKenKeimetsuKikan2"));
             };
 
             Controls.prototype.ChoshuKenKeimetsuKikan3 = function () {
-                return new UZA.Panel(this.convFiledName("TainoNendo_GenGakuKeisan_ChoshuKenKeimetsuKikan2_ChoshuKenKeimetsuKikan3"));
+                return new UZA.Panel(this.convFiledName("ChoshuKenKeimetsuKikan3"));
             };
 
             Controls.prototype.lblChoShushometsu2 = function () {
@@ -92,7 +92,7 @@ var DBZ;
             };
 
             Controls.prototype.ChoshuKenKeimetsuKikan4 = function () {
-                return new UZA.Panel(this.convFiledName("TainoNendo_GenGakuKeisan_ChoshuKenKeimetsuKikan2_ChoshuKenKeimetsuKikan4"));
+                return new UZA.Panel(this.convFiledName("ChoshuKenKeimetsuKikan4"));
             };
 
             Controls.prototype.lblChoShushometsu3 = function () {
@@ -104,7 +104,7 @@ var DBZ;
             };
 
             Controls.prototype.Kasan = function () {
-                return new UZA.Panel(this.convFiledName("TainoNendo_GenGakuKeisan_ChoshuKenKeimetsuKikan2_Kasan"));
+                return new UZA.Panel(this.convFiledName("Kasan"));
             };
 
             Controls.prototype.lblKasan = function () {
@@ -112,7 +112,7 @@ var DBZ;
             };
 
             Controls.prototype.NofuZumiKikan = function () {
-                return new UZA.Panel(this.convFiledName("TainoNendo_GenGakuKeisan_ChoshuKenKeimetsuKikan2_NofuZumiKikan"));
+                return new UZA.Panel(this.convFiledName("NofuZumiKikan"));
             };
 
             Controls.prototype.lblNofuZumiKikan = function () {
@@ -124,7 +124,7 @@ var DBZ;
             };
 
             Controls.prototype.GnegakuKikan = function () {
-                return new UZA.Panel(this.convFiledName("TainoNendo_GenGakuKeisan_GnegakuKikan"));
+                return new UZA.Panel(this.convFiledName("GnegakuKikan"));
             };
 
             Controls.prototype.lblKeisanShiki = function () {
@@ -132,7 +132,7 @@ var DBZ;
             };
 
             Controls.prototype.GenGakuKikan2 = function () {
-                return new UZA.Panel(this.convFiledName("TainoNendo_GenGakuKeisan_GnegakuKikan_GenGakuKikan2"));
+                return new UZA.Panel(this.convFiledName("GenGakuKikan2"));
             };
 
             Controls.prototype.lblGenGakuKikan = function () {
@@ -152,7 +152,7 @@ var DBZ;
             };
 
             Controls.prototype.txtNendo = function () {
-                return new UZA.TextBoxDate(this.convFiledName("txtNendo"));
+                return new UZA.TextBoxFlexibleDate(this.convFiledName("txtNendo"));
             };
 
             Controls.prototype.dgTainoShosaiInfo = function () {
@@ -284,7 +284,7 @@ var DBZ;
             };
 
             Controls.prototype.Modoru = function () {
-                return new UZA.Panel(this.convFiledName("TainoGengakuShosaiInfo_Modoru"));
+                return new UZA.Panel(this.convFiledName("Modoru"));
             };
 
             Controls.prototype.btnModoru = function () {
