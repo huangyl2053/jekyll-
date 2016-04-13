@@ -14,7 +14,10 @@ import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0610011.Yogu
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0610011.dgYoguKonyuhiShisaMishinsaShikyuShinseiList_Row;
 import jp.co.ndensan.reams.db.dbc.divcontroller.viewbox.ViewStateKeys;
 import jp.co.ndensan.reams.db.dbc.divcontroller.viewbox.dbc0610011.ShikyuShinseiki;
+import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3048ShokanFukushiYoguHanbaihiEntity;
 import jp.co.ndensan.reams.db.dbc.service.core.fukushiyogukonyuhishikyuikkatushinsa.FukushiyoguKonyuhiShikyuIkkatuShinsa;
+import jp.co.ndensan.reams.db.dbc.service.core.fukushiyogukonyuhishikyushisei.FukushiYoguKounyuhiDouituHinmokuChofukuHantei;
+import jp.co.ndensan.reams.db.dbc.service.core.fukushiyogukonyuhishikyushisei.FukushiyoguKonyuhiShikyuGendogaku;
 import jp.co.ndensan.reams.db.dbc.service.core.fukushiyogukonyuhishikyushisei.FukushiyoguKonyuhiShikyuShinsei;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
@@ -25,6 +28,7 @@ import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.lang.RYearMonth;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 
@@ -39,7 +43,7 @@ public class YoguKonyuhiShikyuShinseiMishinsaSearchHandler {
     private final RString 審査 = new RString("審査");
     private final RString 承認する = new RString("承認する");
     private final RString 却下する = new RString("却下する");
-    private final RString 決定日 = new RString("決定日");
+    private final RString 決定日R = new RString("決定日");
 
     /**
      * YoguKonyuhiShikyuShinseiMishinsaSearchHandler
@@ -66,7 +70,7 @@ public class YoguKonyuhiShikyuShinseiMishinsaSearchHandler {
         }
         ArrayList<ShokanShinseiEntityResult> resultList = (ArrayList<ShokanShinseiEntityResult>) FukushiyoguKonyuhiShikyuIkkatuShinsa.createInstance()
                 .getMiShinsaShinseiList(申請日From, 申請日To);
-        if (null == resultList || resultList.isEmpty()) {
+        if (resultList == null || resultList.isEmpty()) {
             throw new ApplicationException(UrErrorMessages.該当データなし.getMessage());
         }
         ViewStateHolder.put(ViewStateKeys.福祉審査_決定, resultList);
@@ -80,7 +84,7 @@ public class YoguKonyuhiShikyuShinseiMishinsaSearchHandler {
         List<dgYoguKonyuhiShisaMishinsaShikyuShinseiList_Row> selectedMishinsaShikyuShinsei = div.getYoguKonyuhiShikyuShinseiMishinsaResultList()
                 .getDgYoguKonyuhiShisaMishinsaShikyuShinseiList().getSelectedItems();
         for (dgYoguKonyuhiShisaMishinsaShikyuShinseiList_Row row : selectedMishinsaShikyuShinsei) {
-            if (限度額チェッ(row) == !品目チェック(row)) {
+            if (限度額チェック(row) && !品目チェック(row)) {
                 row.getTxtShinsaNo().setValue(ShinsaNaiyoKubun.承認する.getコード());
                 row.getTxtShinsaResult().setValue(承認する);
             } else {
@@ -91,7 +95,7 @@ public class YoguKonyuhiShikyuShinseiMishinsaSearchHandler {
     }
 
     /**
-     * ViewStateの設定
+     * 申請グリッドの修正ボタン ViewStateの設定
      */
     public void setViewState() {
         dgYoguKonyuhiShisaMishinsaShikyuShinseiList_Row row = div.getYoguKonyuhiShikyuShinseiMishinsaResultList()
@@ -102,6 +106,8 @@ public class YoguKonyuhiShikyuShinseiMishinsaSearchHandler {
         JigyoshaNo 事業者番号 = new JigyoshaNo(row.getTxtJigyoshaNo().getValue());
         RString 様式番号 = row.getTxtYoshikiNo().getValue();
         RString 明細番号 = row.getTxtMeisaiNo().getValue();
+        RDate 決定日 = div.getYoguKonyuhiShikyuShinseiMishinsaResultList().getTxtKetteiYMD().getValue();
+        ViewStateHolder.put(ViewStateKeys.決定日, 決定日);
         ViewStateHolder.put(ViewStateKeys.被保険者番号, 被保険者番号);
         ViewStateHolder.put(ViewStateKeys.画面モード, 審査);
         ShikyuShinseiki param = new ShikyuShinseiki(被保険者番号,
@@ -116,7 +122,7 @@ public class YoguKonyuhiShikyuShinseiMishinsaSearchHandler {
      */
     public void 決定日入力チェック(RDate 決定日) {
         if (決定日 == null) {
-            throw new ApplicationException(UrErrorMessages.必須.getMessage().replace(決定日.toString()));
+            throw new ApplicationException(UrErrorMessages.必須.getMessage().replace(決定日R.toString()));
         }
     }
 
@@ -149,7 +155,7 @@ public class YoguKonyuhiShikyuShinseiMishinsaSearchHandler {
             entity.getEntity().get償還払請求基本Entity().setJigyoshaNo(new JigyoshaNo(row.getTxtJigyoshaNo().getValue()));
             entity.getEntity().get償還払請求基本Entity().setYoshikiNo(row.getTxtYoshikiNo().getValue());
             entity.getEntity().get償還払請求基本Entity().setMeisaiNo(row.getTxtMeisaiNo().getValue());
-            // TODO 償還払請求基本．被保険者番号??
+            // TODO セルフ業務決定_GS_DB介護保険 番号:8  償還払請求基本．被保険者番号?
             entity.getEntity().set氏名(new AtenaMeisho(row.getTxtHihoName().getValue()));
             entity.getEntity().get償還払支給申請Entity().setShinseiYMD(new FlexibleDate(row.getTxtShikyuShinseiDate().getValue().toString()));
             entity.getEntity().get償還払支給申請Entity().setHokenTaishoHiyogaku(row.getTxtHiyoTotal().getValue());
@@ -163,66 +169,81 @@ public class YoguKonyuhiShikyuShinseiMishinsaSearchHandler {
 
     private void setグリッド(List<ShokanShinseiEntityResult> resultList) {
         List<dgYoguKonyuhiShisaMishinsaShikyuShinseiList_Row> rowList = new ArrayList<>();
-        int i = 1;
-        dgYoguKonyuhiShisaMishinsaShikyuShinseiList_Row row = new dgYoguKonyuhiShisaMishinsaShikyuShinseiList_Row();
+        int i = 0;
         for (ShokanShinseiEntityResult entity : resultList) {
+            dgYoguKonyuhiShisaMishinsaShikyuShinseiList_Row row = new dgYoguKonyuhiShisaMishinsaShikyuShinseiList_Row();
             FlexibleDate 支給申請日 = entity.getEntity().get償還払支給申請Entity().getShinseiYMD();
             FlexibleYearMonth 提供購入年月 = entity.getEntity().get償還払請求基本Entity().getServiceTeikyoYM();
+            HihokenshaNo 被保番号 = entity.getEntity().get償還払請求基本Entity().getHiHokenshaNo();
+            AtenaMeisho 氏名 = entity.getEntity().get氏名();
+            RString 審査結果 = entity.getEntity().get償還払支給申請Entity().getShinsaKekka();
+            JigyoshaNo 事業者番号 = entity.getEntity().get償還払請求基本Entity().getJigyoshaNo();
             if (支給申請日 != null) {
                 row.getTxtShikyuShinseiDate().setValue(new RDate(支給申請日.toString()));
             }
             if (提供購入年月 != null) {
                 row.getTxtTenkyoYM().setValue(new RDate(提供購入年月.toString()));
             }
-            row.getTxtHihoNo().setValue(entity.getEntity().get償還払請求基本Entity().getHiHokenshaNo().getColumnValue());
-            // TODO 償還払請求基本．被保険者番号??
-//            row.getTxtHihoName().setValue(entity.get氏名().getColumnValue());
+            if (被保番号 != null) {
+                row.getTxtHihoNo().setValue(被保番号.getColumnValue());
+            }
+            if (氏名 != null) {
+                row.getTxtHihoName().setValue(氏名.getColumnValue());
+            }
+            if (審査結果 != null) {
+                row.getTxtShinsaResult().setValue(ShinsaNaiyoKubun.toValue(審査結果).get名称());
+            }
+            if (事業者番号 != null) {
+                row.getTxtJigyoshaNo().setValue(new RString(事業者番号.getColumnValue().toString()));
+            }
             row.getTxtHokenKyufuAmount().setValue(new Decimal(entity.getEntity().get償還払支給申請Entity().getHokenKyufugaku()));
             row.getTxtRiyoshaFutanAmount().setValue(new Decimal(entity.getEntity().get償還払支給申請Entity().getRiyoshaFutangaku()));
             row.getTxtHiyoTotal().setValue(entity.getEntity().get償還払支給申請Entity().getShiharaiKingakuTotal());
-            row.getTxtShinsaResult().setValue(ShinsaNaiyoKubun.toValue(entity.getEntity().get償還払支給申請Entity().getShinsaKekka()).get名称());
             row.getTxtSeiriNo().setValue(entity.getEntity().get償還払請求基本Entity().getSeiriNo());
-            row.getTxtJigyoshaNo().setValue(new RString(entity.getEntity().get償還払請求基本Entity().getJigyoshaNo().getColumnValue().toString()));
             row.getTxtYoshikiNo().setValue(entity.getEntity().get償還払請求基本Entity().getYoshikiNo());
             row.getTxtMeisaiNo().setValue(entity.getEntity().get償還払請求基本Entity().getMeisaiNo());
+            row.getTxtShinsaNo().setValue(entity.getEntity().get償還払支給申請Entity().getShinsaKekka());
             row.getRowNum().setValue(new Decimal(i));
             i = i + 1;
             rowList.add(row);
-            row.getTxtShikyuShinseiDate().setValue(null);
-            row.getTxtTenkyoYM().setValue(null);
         }
         div.getYoguKonyuhiShikyuShinseiMishinsaResultList().getDgYoguKonyuhiShisaMishinsaShikyuShinseiList().setDataSource(rowList);
     }
 
-    private Boolean 限度額チェッ(dgYoguKonyuhiShisaMishinsaShikyuShinseiList_Row row) {
+    private Boolean 限度額チェック(dgYoguKonyuhiShisaMishinsaShikyuShinseiList_Row row) {
         HihokenshaNo 被保険者番号 = new HihokenshaNo(row.getTxtHihoNo().getValue());
-//        FlexibleYearMonth サービス提供年月 = new FlexibleYearMonth(row.getTxtTenkyoYM().getValue().getYearMonth().toString());
-//        RString 整理番号 = row.getTxtSeiriNo().getValue();
-//        JigyoshaNo 事業者番号 = new JigyoshaNo(row.getTxtJigyoshaNo().getValue());
-//        RString 様式番号 = row.getTxtYoshikiNo().getValue();
-//        RString 明細番号 = row.getTxtMeisaiNo().getValue();
-//        Decimal 今回の保険対象費用額 = row.getTxtHiyoTotal().getValue();
-        // TODO
-//        return new FukushiyoguKonyuhiShikyuGendogakuValidate().chkKonyuhiShikyuGendogaku(被保険者番号,
-//                サービス提供年月, 整理番号, 事業者番号, 様式番号, 明細番号, 今回の保険対象費用額);
-        return 被保険者番号 == null;
-    }
-
-    private Boolean 品目チェック(dgYoguKonyuhiShisaMishinsaShikyuShinseiList_Row row) {
-        HihokenshaNo 被保険者番号 = new HihokenshaNo(row.getTxtHihoNo().getValue());
-        FlexibleYearMonth サービス提供年月 = new FlexibleYearMonth(row.getTxtTenkyoYM().getValue().getYearMonth().toString());
+        RYearMonth サービス提供年月Row = row.getTxtTenkyoYM().getValue().getYearMonth();
+        FlexibleYearMonth サービス提供年月 = null;
+        if (サービス提供年月Row != null) {
+            サービス提供年月 = new FlexibleYearMonth(サービス提供年月Row.toString());
+        }
         RString 整理番号 = row.getTxtSeiriNo().getValue();
         JigyoshaNo 事業者番号 = new JigyoshaNo(row.getTxtJigyoshaNo().getValue());
         RString 様式番号 = row.getTxtYoshikiNo().getValue();
         RString 明細番号 = row.getTxtMeisaiNo().getValue();
-        List<ShokanFukushiYoguHanbaihi> yoguHanbaihiList = FukushiyoguKonyuhiShikyuShinsei.createInstance()
+        Decimal 今回の保険対象費用額 = row.getTxtHiyoTotal().getValue();
+        return FukushiyoguKonyuhiShikyuGendogaku.createInstance().chkKonyuhiShikyuGendogaku(被保険者番号,
+                サービス提供年月, 整理番号, 事業者番号, 様式番号, 明細番号, 今回の保険対象費用額);
+    }
+
+    private Boolean 品目チェック(dgYoguKonyuhiShisaMishinsaShikyuShinseiList_Row row) {
+        HihokenshaNo 被保険者番号 = new HihokenshaNo(row.getTxtHihoNo().getValue());
+        RYearMonth サービス提供年月Row = row.getTxtTenkyoYM().getValue().getYearMonth();
+        FlexibleYearMonth サービス提供年月 = null;
+        if (サービス提供年月Row != null) {
+            サービス提供年月 = new FlexibleYearMonth(サービス提供年月Row.toString());
+        }
+        RString 整理番号 = row.getTxtSeiriNo().getValue();
+        JigyoshaNo 事業者番号 = new JigyoshaNo(row.getTxtJigyoshaNo().getValue());
+        RString 様式番号 = row.getTxtYoshikiNo().getValue();
+        RString 明細番号 = row.getTxtMeisaiNo().getValue();
+        List<ShokanFukushiYoguHanbaihi> 福祉用具購入販売費リスト = FukushiyoguKonyuhiShikyuShinsei.createInstance()
                 .getShokanFukushiYoguHanbaihi(被保険者番号, サービス提供年月, 整理番号, 事業者番号, 様式番号, 明細番号);
-//        List<DbT3048ShokanFukushiYoguHanbaihiEntity> entityList = new ArrayList<>();
-//        for(ShokanFukushiYoguHanbaihi yoguhanbaihi : yoguHanbaihiList) {
-//            entityList.add(yoguhanbaihi.toEntity());
-//        }
-//        return new FukushiYoguKounyuhiDouituHinmokuChofukuHantei().chkHinmokuCodePerYear(被保険者番号,
-//                サービス提供年月, entityList, 整理番号);
-        return yoguHanbaihiList == null;
+        List<DbT3048ShokanFukushiYoguHanbaihiEntity> entityList = new ArrayList<>();
+        for (ShokanFukushiYoguHanbaihi yoguhanbaihi : 福祉用具購入販売費リスト) {
+            entityList.add(yoguhanbaihi.toEntity());
+        }
+        return new FukushiYoguKounyuhiDouituHinmokuChofukuHantei().chkHinmokuCodePerYear(被保険者番号,
+                サービス提供年月, entityList, 整理番号);
     }
 }

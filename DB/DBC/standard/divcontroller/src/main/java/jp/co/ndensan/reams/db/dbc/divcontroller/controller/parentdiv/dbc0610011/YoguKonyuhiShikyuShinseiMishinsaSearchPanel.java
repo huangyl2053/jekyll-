@@ -8,6 +8,7 @@ package jp.co.ndensan.reams.db.dbc.divcontroller.controller.parentdiv.dbc0610011
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0610011.DBC0610011TransitionEventName;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0610011.YoguKonyuhiShikyuShinseiMishinsaSearchPanelDiv;
 import jp.co.ndensan.reams.db.dbc.divcontroller.handler.dbc0610011.YoguKonyuhiShikyuShinseiMishinsaSearchHandler;
+import jp.co.ndensan.reams.db.dbc.divcontroller.viewbox.ViewStateKeys;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrQuestionMessages;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
@@ -17,6 +18,7 @@ import jp.co.ndensan.reams.uz.uza.message.MessageDialogSelectedResult;
 import jp.co.ndensan.reams.uz.uza.message.QuestionMessage;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.CommonButtonHolder;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ResponseHolder;
+import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 
 /**
  * 福祉用具購入費支給申請審査 未審査支給申請一覧のパネルです。
@@ -28,7 +30,7 @@ public class YoguKonyuhiShikyuShinseiMishinsaSearchPanel {
     private final RString 保存 = new RString("btnSave");
 
     /**
-     * 画面初期化onLoad
+     * 画面初期化メソッドです。
      *
      * @param div YoguKonyuhiShikyuShinseiMishinsaSearchPanelDiv
      * @return 福祉用具購入費支給申請審査画面
@@ -46,6 +48,10 @@ public class YoguKonyuhiShikyuShinseiMishinsaSearchPanel {
     public ResponseData<YoguKonyuhiShikyuShinseiMishinsaSearchPanelDiv> onClick_btnSearchMishinsa(
             YoguKonyuhiShikyuShinseiMishinsaSearchPanelDiv div) {
         getHandler(div).未審査分検索処理();
+        RDate 支給申請日_FROM = div.getYoguKonyuhiShikyuShinseiMishinsaSearchCondition().getTxtShikyuShinseiDateRange().getFromValue();
+        RDate 支給申請日_TO = div.getYoguKonyuhiShikyuShinseiMishinsaSearchCondition().getTxtShikyuShinseiDateRange().getFromValue();
+        ViewStateHolder.put(ViewStateKeys.支給申請日_FROM, 支給申請日_FROM);
+        ViewStateHolder.put(ViewStateKeys.支給申請日_TO, 支給申請日_TO);
         div.getYoguKonyuhiShikyuShinseiMishinsaSearchCondition().setIsOpen(false);
         div.getYoguKonyuhiShikyuShinseiMishinsaResultList().setIsOpen(true);
         return ResponseData.of(div).respond();
@@ -85,9 +91,8 @@ public class YoguKonyuhiShikyuShinseiMishinsaSearchPanel {
      */
     public ResponseData<YoguKonyuhiShikyuShinseiMishinsaSearchPanelDiv> onClick_btnSave(
             YoguKonyuhiShikyuShinseiMishinsaSearchPanelDiv div) {
-        RDate 決定日R = div.getYoguKonyuhiShikyuShinseiMishinsaResultList().getTextBoxDate2().getValue();
+        RDate 決定日R = div.getYoguKonyuhiShikyuShinseiMishinsaResultList().getTxtKetteiYMD().getValue();
         getHandler(div).決定日入力チェック(決定日R);
-        FlexibleDate 決定日 = new FlexibleDate(決定日R.toString());
         getHandler(div).選択チェック();
         if (!ResponseHolder.isReRequest()) {
             QuestionMessage message = new QuestionMessage(UrQuestionMessages.保存の確認.getMessage().getCode(),
@@ -97,11 +102,13 @@ public class YoguKonyuhiShikyuShinseiMishinsaSearchPanel {
         if (new RString(UrQuestionMessages.保存の確認.getMessage().getCode())
                 .equals(ResponseHolder.getMessageCode())
                 && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
+            FlexibleDate 決定日 = new FlexibleDate(決定日R.toString());
             getHandler(div).保存処理(決定日);
         }
         div.getYoguKonyuhiShikyuShinseiMishinsaSearchCondition().setVisible(false);
         div.getYoguKonyuhiShikyuShinseiMishinsaResultList().setVisible(false);
         CommonButtonHolder.setVisibleByCommonButtonFieldName(保存, false);
+        // TODO QA番号 628完了確認メッセージエリアを表示にする。
         return ResponseData.of(div).respond();
     }
 
