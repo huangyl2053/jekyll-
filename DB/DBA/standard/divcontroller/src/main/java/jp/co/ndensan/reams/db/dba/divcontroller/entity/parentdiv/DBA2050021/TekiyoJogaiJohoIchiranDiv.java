@@ -5,29 +5,31 @@ package jp.co.ndensan.reams.db.dba.divcontroller.entity.parentdiv.DBA2050021;
  * 不正な動作の原因になります。
  */
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.TekiyoJogaiRireki.ITekiyoJogaiRirekiDiv;
-import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.TekiyoJogaiRireki.TekiyoJogaiRirekiDiv;
+import jp.co.ndensan.reams.db.dba.divcontroller.entity.commonchilddiv.TekiyoJogaiRireki.TekiyoJogaiRireki.ITekiyoJogaiRirekiDiv;
+import jp.co.ndensan.reams.db.dba.divcontroller.entity.commonchilddiv.TekiyoJogaiRireki.TekiyoJogaiRireki.TekiyoJogaiRirekiDiv;
+import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.ShisetsuNyutaishoRirekiKanri.IShisetsuNyutaishoRirekiKanriDiv;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 
 /**
  * TekiyoJogaiJohoIchiran のクラスファイル
  *
- * @reamsid_L DBA-0411-050 lizhuoxuan
+ * @author 自動生成
  */
 public class TekiyoJogaiJohoIchiranDiv extends Panel {
 
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-01-15_09-59-03">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
      * コントロール名とフィールド名を取得する
      * private + コントロール名 + フィールド名 の文字列を作成
      */
-    @JsonProperty("ShisetsuHenkoJohoInput")
-    private ShisetsuHenkoJohoInputDiv ShisetsuHenkoJohoInput;
     @JsonProperty("ccdTekiyoJogaiRireki")
     private TekiyoJogaiRirekiDiv ccdTekiyoJogaiRireki;
+    @JsonProperty("ShisetsuHenkoJohoInput")
+    private ShisetsuHenkoJohoInputDiv ShisetsuHenkoJohoInput;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -35,6 +37,15 @@ public class TekiyoJogaiJohoIchiranDiv extends Panel {
      * コントロール名とフィールド名を取得する
      * フィールド名のGetterとSetter を作成
      */
+    /*
+     * getccdTekiyoJogaiRireki
+     * @return ccdTekiyoJogaiRireki
+     */
+    @JsonProperty("ccdTekiyoJogaiRireki")
+    public ITekiyoJogaiRirekiDiv getCcdTekiyoJogaiRireki() {
+        return ccdTekiyoJogaiRireki;
+    }
+
     /*
      * getShisetsuHenkoJohoInput
      * @return ShisetsuHenkoJohoInput
@@ -54,12 +65,11 @@ public class TekiyoJogaiJohoIchiranDiv extends Panel {
     }
 
     /*
-     * getccdTekiyoJogaiRireki
-     * @return ccdTekiyoJogaiRireki
+     * [ ショートカットの作成 ]
      */
-    @JsonProperty("ccdTekiyoJogaiRireki")
-    public ITekiyoJogaiRirekiDiv getCcdTekiyoJogaiRireki() {
-        return ccdTekiyoJogaiRireki;
+    @JsonIgnore
+    public IShisetsuNyutaishoRirekiKanriDiv getCcdShisetsuNyutaishoRirekiKanri() {
+        return this.getShisetsuHenkoJohoInput().getCcdShisetsuNyutaishoRirekiKanri();
     }
 
     // </editor-fold>

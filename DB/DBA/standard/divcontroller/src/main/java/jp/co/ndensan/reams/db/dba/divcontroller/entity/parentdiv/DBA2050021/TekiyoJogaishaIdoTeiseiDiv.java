@@ -5,17 +5,22 @@ package jp.co.ndensan.reams.db.dba.divcontroller.entity.parentdiv.DBA2050021;
  * 不正な動作の原因になります。
  */
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import jp.co.ndensan.reams.db.dba.divcontroller.entity.commonchilddiv.TekiyoJogaiRireki.TekiyoJogaiRireki.ITekiyoJogaiRirekiDiv;
+import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.KaigoKanryoMessage.KaigoKanryoMessage.IKaigoKanryoMessageDiv;
+import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.ShisetsuNyutaishoRirekiKanri.IShisetsuNyutaishoRirekiKanriDiv;
+import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.kaigoatenainfo.KaigoAtenaInfo.IKaigoAtenaInfoDiv;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 
 /**
  * TekiyoJogaishaIdoTeisei のクラスファイル
  *
- * @reamsid_L DBA-0411-050 lizhuoxuan
+ * @author 自動生成
  */
 public class TekiyoJogaishaIdoTeiseiDiv extends Panel {
 
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-01-15_09-59-03">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -87,6 +92,39 @@ public class TekiyoJogaishaIdoTeiseiDiv extends Panel {
     @JsonProperty("TekiyoJogaiJohoIchiran")
     public void setTekiyoJogaiJohoIchiran(TekiyoJogaiJohoIchiranDiv TekiyoJogaiJohoIchiran) {
         this.TekiyoJogaiJohoIchiran = TekiyoJogaiJohoIchiran;
+    }
+
+    /*
+     * [ ショートカットの作成 ]
+     */
+    @JsonIgnore
+    public IKaigoKanryoMessageDiv getCcdKaigoKanryoMessage() {
+        return this.getKaigoKanryoMessageJo().getCcdKaigoKanryoMessage();
+    }
+
+    @JsonIgnore
+    public IKaigoAtenaInfoDiv getCcdKaigoAtenaInfo() {
+        return this.getShikakuKihonJoho().getCcdKaigoAtenaInfo();
+    }
+
+    @JsonIgnore
+    public ITekiyoJogaiRirekiDiv getCcdTekiyoJogaiRireki() {
+        return this.getTekiyoJogaiJohoIchiran().getCcdTekiyoJogaiRireki();
+    }
+
+    @JsonIgnore
+    public ShisetsuHenkoJohoInputDiv getShisetsuHenkoJohoInput() {
+        return this.getTekiyoJogaiJohoIchiran().getShisetsuHenkoJohoInput();
+    }
+
+    @JsonIgnore
+    public void setShisetsuHenkoJohoInput(ShisetsuHenkoJohoInputDiv ShisetsuHenkoJohoInput) {
+        this.getTekiyoJogaiJohoIchiran().setShisetsuHenkoJohoInput(ShisetsuHenkoJohoInput);
+    }
+
+    @JsonIgnore
+    public IShisetsuNyutaishoRirekiKanriDiv getCcdShisetsuNyutaishoRirekiKanri() {
+        return this.getTekiyoJogaiJohoIchiran().getShisetsuHenkoJohoInput().getCcdShisetsuNyutaishoRirekiKanri();
     }
 
     // </editor-fold>
