@@ -190,7 +190,7 @@ public class TekiyoJogaiRirekiHandler {
      */
     public void onClick_Update() {
         div.setStauts(状態_修正);
-        set適用除外者明細エリア(div.getDatagridTekiyoJogai().getActiveRow(), 状態_訂正履歴);
+        set適用除外者明細エリア(div.getDatagridTekiyoJogai().getActiveRow(), 状態_修正);
         div.getBtnInputClear().setVisible(true);
         div.getBtnInputClear().setDisabled(false);
         div.getBtnKakutei().setVisible(true);
@@ -202,7 +202,7 @@ public class TekiyoJogaiRirekiHandler {
      */
     public void onClick_Delete() {
         div.setStauts(状態_削除);
-        set適用除外者明細エリア(div.getDatagridTekiyoJogai().getActiveRow(), 状態_訂正履歴);
+        set適用除外者明細エリア(div.getDatagridTekiyoJogai().getActiveRow(), 状態_修正);
         div.getPanelTekiyoInput().getTxtTekiyoDate().setDisabled(true);
         div.getPanelTekiyoInput().getTxtTekiyoTodokeDate().setDisabled(true);
         div.getPanelTekiyoInput().getDdlTekiyoJiyu().setDisabled(true);
