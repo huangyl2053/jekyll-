@@ -277,25 +277,29 @@ public class KinkyujiShisetuRyoyohiPanel {
      * @return response
      */
     public ResponseData<KinkyujiShisetuRyoyohiPanelDiv> onClick_btnSave(KinkyujiShisetuRyoyohiPanelDiv div) {
-        if (削除.equals(ViewStateHolder.get(ViewStateKeys.処理モード, RString.class))) {
-            if (!ResponseHolder.isReRequest()) {
-                getHandler(div).保存処理();
-                return ResponseData.of(div).addMessage(UrInformationMessages.正常終了.getMessage().
-                        replace(削除.toString())).respond();
-            }
-            if (ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
-                CommonButtonHolder.setDisabledByCommonButtonFieldName(申請を保存する, true);
-                return createResponse(div);
-            }
-        } else {
-            boolean flag = getHandler(div).get内容変更状態();
-            if (flag) {
-                return save(div);
+        try {
+            if (削除.equals(ViewStateHolder.get(ViewStateKeys.処理モード, RString.class))) {
+                if (!ResponseHolder.isReRequest()) {
+                    getHandler(div).保存処理();
+                    return ResponseData.of(div).addMessage(UrInformationMessages.正常終了.getMessage().
+                            replace(削除.toString())).respond();
+                }
+                if (ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
+                    CommonButtonHolder.setDisabledByCommonButtonFieldName(申請を保存する, true);
+                    return createResponse(div);
+                }
             } else {
-                return noChange(div);
+                boolean flag = getHandler(div).get内容変更状態();
+                if (flag) {
+                    return save(div);
+                } else {
+                    return noChange(div);
+                }
             }
+        } catch (Exception e) {
+            throw new ApplicationException(UrErrorMessages.異常終了.getMessage());
         }
-        return ResponseData.of(div).addMessage(UrErrorMessages.異常終了.getMessage()).respond();
+        return ResponseData.of(div).respond();
     }
 
     private ResponseData<KinkyujiShisetuRyoyohiPanelDiv> save(KinkyujiShisetuRyoyohiPanelDiv div) {
