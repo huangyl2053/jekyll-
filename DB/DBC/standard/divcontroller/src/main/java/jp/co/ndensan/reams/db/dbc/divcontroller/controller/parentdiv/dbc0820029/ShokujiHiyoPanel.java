@@ -75,12 +75,12 @@ public class ShokujiHiyoPanel {
 
         ShoukanharaihishinseimeisaikensakuParameter parameter = new ShoukanharaihishinseimeisaikensakuParameter(
                 new HihokenshaNo("000000004"),
-                new FlexibleYearMonth(new RString("200401")),
+                new FlexibleYearMonth(new RString("200501")),
                 RDate.getNowDate(),
-                new RString("0000000003"),
+                new RString("0000000004"),
                 new JigyoshaNo("0000000003"),
-                new RString("0003"),
-                new RString("0003"));
+                new RString("0004"),
+                new RString("0001"));
         ViewStateHolder.put(ViewStateKeys.償還払費申請明細検索キー, parameter);
         ShoukanharaihishinseimeisaikensakuParameter meisaiPar = ViewStateHolder.get(ViewStateKeys.償還払費申請明細検索キー,
                 ShoukanharaihishinseimeisaikensakuParameter.class);
@@ -118,6 +118,8 @@ public class ShokujiHiyoPanel {
             div.getPanelShokuji().getPanelDetailGokei().setDisplayNone(true);
             div.getPanelShokuji().getPanelDetail1().setVisible(true);
             div.getPanelShokuji().getPanelDetail2().setVisible(false);
+            div.getPanelShokuji().getPanelDetail1().getBtnCancel1().setVisible(false);
+            div.getPanelShokuji().getPanelDetail1().getBtnConfirm1().setVisible(false);
 
             List<ShokanShokujiHiyo> shokanShokujiHiyoList = ShokanbaraiJyokyoShokai.createInstance()
                     .getSeikyuShokujiHiyoTanjyunSearch(被保険者番号,
@@ -176,6 +178,8 @@ public class ShokujiHiyoPanel {
                 div.getPanelShokuji().getPanelDetail1().setVisible(true);
                 div.getPanelShokuji().getPanelDetail1().setReadOnly(true);
                 div.getPanelShokuji().getPanelDetail2().setVisible(false);
+                div.getPanelShokuji().getPanelDetail1().getBtnCancel1().setVisible(false);
+                div.getPanelShokuji().getPanelDetail1().getBtnConfirm1().setVisible(false);
             }
             if (平成１５年３月.isBefore(サービス提供年月)
                     && サービス提供年月.isBeforeOrEquals(平成17年９月)) {
@@ -426,43 +430,12 @@ public class ShokujiHiyoPanel {
     }
 
     /**
-     * 食事費用登録エリア１「取消する」ボタン
-     *
-     * @param div ShokujiHiyoPanelDiv
-     * @return ResponseData<ShokujiHiyoPanelDiv>
-     */
-    public ResponseData<ShokujiHiyoPanelDiv> onClick_btnCancel(ShokujiHiyoPanelDiv div) {
-        getHandler(div).clear食事費用登録エリア１();
-        div.getPanelShokuji().getPanelDetail1().setVisible(false);
-        return createResponse(div);
-    }
-
-    /**
-     * 食事費用登録エリア１「確定する」ボタン
-     *
-     * @param div ShokujiHiyoPanelDiv
-     * @return ResponseData<ShokujiHiyoPanelDiv>
-     */
-    public ResponseData<ShokujiHiyoPanelDiv> onClick_btnConfirm(ShokujiHiyoPanelDiv div) {
-        if (登録.equals(ViewStateHolder.get(ViewStateKeys.状態, RString.class))) {
-            dgdShokuji_Row row = new dgdShokuji_Row();
-            getHandler(div).confirm(row);
-        } else {
-            dgdShokuji_Row row = getHandler(div).selectRow();
-            getHandler(div).confirm(row);
-        }
-        getHandler(div).clear食事費用登録エリア１();
-        div.getPanelShokuji().getPanelDetail1().setVisible(false);
-        return createResponse(div);
-    }
-
-    /**
      * 食事費用登録エリア２「クリアする」ボタン
      *
      * @param div ShokujiHiyoPanelDiv
      * @return ResponseData<ShokujiHiyoPanelDiv>
      */
-    public ResponseData<ShokujiHiyoPanelDiv> onClick_btnClear1(ShokujiHiyoPanelDiv div) {
+    public ResponseData<ShokujiHiyoPanelDiv> onClick_btnClear2(ShokujiHiyoPanelDiv div) {
         getHandler(div).clear食事費用登録エリア2();
         return createResponse(div);
     }

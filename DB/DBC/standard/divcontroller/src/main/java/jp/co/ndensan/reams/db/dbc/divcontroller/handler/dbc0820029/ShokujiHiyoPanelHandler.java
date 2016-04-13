@@ -12,19 +12,19 @@ import java.util.Map;
 import jp.co.ndensan.reams.db.dbc.business.core.basic.ShikibetsuNoKanri;
 import jp.co.ndensan.reams.db.dbc.business.core.basic.ShokanMeisai;
 import jp.co.ndensan.reams.db.dbc.business.core.basic.ShokanShokujiHiyo;
+import jp.co.ndensan.reams.db.dbc.business.core.basic.ShokanShokujiHiyoBuilder;
 import jp.co.ndensan.reams.db.dbc.business.core.syokanbaraihishikyushinseikette.ShokanKihonParameter;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0820029.ShokujiHiyoPanelDiv;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0820029.dgdShokuji_Row;
 import jp.co.ndensan.reams.db.dbc.divcontroller.viewbox.ViewStateKeys;
 import jp.co.ndensan.reams.db.dbc.divcontroller.viewbox.shoukanharaihishinseikensaku.ShoukanharaihishinseikensakuParameter;
+import jp.co.ndensan.reams.db.dbc.divcontroller.viewbox.shoukanharaihishinseikensaku.ShoukanharaihishinseimeisaikensakuParameter;
 import jp.co.ndensan.reams.db.dbc.service.core.syokanbaraihishikyushinseikette.SyokanbaraihiShikyuShinseiKetteManager;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ServiceKomokuCode;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ServiceShuruiCode;
-import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.kyotsu.SaibanHanyokeyName;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.ServiceCodeInputCommonChildDiv.ServiceCodeInputCommonChildDivDiv;
-import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -33,7 +33,6 @@ import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.ui.binding.RowState;
 import jp.co.ndensan.reams.uz.uza.ui.binding.propertyenum.IconName;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
-import jp.co.ndensan.reams.uz.uza.util.Saiban;
 
 /**
  * 償還払い費支給申請決定_サービス提供証明書(食事費用）の画面クラスです。
@@ -281,7 +280,7 @@ public class ShokujiHiyoPanelHandler {
                 div.getPanelHead().getTxtShomeisho().getValue(),
                 div.getPanelHead().getTxtMeisaiBango().getValue(),
                 null);
-        ViewStateHolder.put(ViewStateKeys.償還払費申請明細検索キー, paramter);
+        ViewStateHolder.put(ViewStateKeys.償還払費申請検索キー, paramter);
     }
 
     /**
@@ -543,14 +542,14 @@ public class ShokujiHiyoPanelHandler {
      * @param shikibetsuNoKanri ShikibetsuNoKanri
      */
     public void getボタンを制御(ShikibetsuNoKanri shikibetsuNoKanri) {
-        ShoukanharaihishinseikensakuParameter paramter = ViewStateHolder.get(ViewStateKeys.償還払費申請明細検索キー,
-                ShoukanharaihishinseikensakuParameter.class);
-        HihokenshaNo 被保険者番号 = paramter.getHiHokenshaNo();
-        FlexibleYearMonth サービス年月 = paramter.getServiceTeikyoYM();
-        RString 整理番号 = paramter.getSeiriNp();
-        JigyoshaNo 事業者番号 = paramter.getJigyoshaNo();
-        RString 様式番号 = paramter.getYoshikiNo();
-        RString 明細番号 = paramter.getMeisaiNo();
+        ShoukanharaihishinseimeisaikensakuParameter paramter = ViewStateHolder.get(ViewStateKeys.償還払費申請明細検索キー,
+                ShoukanharaihishinseimeisaikensakuParameter.class);
+        HihokenshaNo 被保険者番号 = paramter.get被保険者番号();
+        FlexibleYearMonth サービス年月 = paramter.getサービス年月();
+        RString 整理番号 = paramter.get整理番号();
+        JigyoshaNo 事業者番号 = paramter.get事業者番号();
+        RString 様式番号 = paramter.get様式番号();
+        RString 明細番号 = paramter.get明細番号();
         set基本情報ボタン制御(shikibetsuNoKanri, 被保険者番号, サービス年月, 整理番号, 事業者番号, 様式番号, 明細番号);
         set給付費明細ボタン制御(shikibetsuNoKanri, 被保険者番号, サービス年月, 整理番号, 事業者番号, 様式番号, 明細番号);
         set特定診療費ボタン制御(shikibetsuNoKanri, 被保険者番号, サービス年月, 整理番号, 事業者番号, 様式番号, 明細番号);
@@ -570,14 +569,14 @@ public class ShokujiHiyoPanelHandler {
      */
     public void 保存処理() {
 
-        ShoukanharaihishinseikensakuParameter paramter = ViewStateHolder.get(ViewStateKeys.償還払費申請明細検索キー,
-                ShoukanharaihishinseikensakuParameter.class);
-        HihokenshaNo 被保険者番号 = paramter.getHiHokenshaNo();
-        FlexibleYearMonth サービス提供年月 = paramter.getServiceTeikyoYM();
-        RString 整理番号 = paramter.getSeiriNp();
-        JigyoshaNo 事業者番号 = paramter.getJigyoshaNo();
-        RString 様式番号 = paramter.getYoshikiNo();
-        RString 明細番号 = paramter.getMeisaiNo();
+        ShoukanharaihishinseimeisaikensakuParameter paramter = ViewStateHolder.get(ViewStateKeys.償還払費申請明細検索キー,
+                ShoukanharaihishinseimeisaikensakuParameter.class);
+        HihokenshaNo 被保険者番号 = paramter.get被保険者番号();
+        FlexibleYearMonth サービス提供年月 = paramter.getサービス年月();
+        RString 整理番号 = paramter.get整理番号();
+        JigyoshaNo 事業者番号 = paramter.get事業者番号();
+        RString 様式番号 = paramter.get様式番号();
+        RString 明細番号 = paramter.get明細番号();
         ShokanKihonParameter par = ShokanKihonParameter.createSelectByKeyParam(
                 被保険者番号, サービス提供年月, 整理番号, 事業者番号, 様式番号, 明細番号, 0);
 
@@ -624,13 +623,13 @@ public class ShokujiHiyoPanelHandler {
                         entityDeleted = entityDeleted.deleted();
                         shokanMeisaiList.add(entityDeleted);
                     } else if (RowState.Added.equals(dgd.getRowState())) {
-                        RString 新整理番号 = Saiban.get(SubGyomuCode.DBC介護給付, SaibanHanyokeyName.償還整理番号.
-                                getコード()).nextString();
+//                        RString 新整理番号 = Saiban.get(SubGyomuCode.DBC介護給付, SaibanHanyokeyName.償還整理番号.
+//                                getコード()).nextString();
                         max連番 = max連番 + 1;
                         ShokanMeisai entityAdded = new ShokanMeisai(
                                 被保険者番号,
                                 サービス提供年月,
-                                新整理番号,
+                                整理番号,
                                 事業者番号,
                                 様式番号,
                                 明細番号,
@@ -645,6 +644,7 @@ public class ShokujiHiyoPanelHandler {
 
                 List<ShokanShokujiHiyo> shokanShokujiHiyoList = ViewStateHolder
                         .get(ViewStateKeys.償還払請求食事費用データ, List.class);
+
                 if (!shokanShokujiHiyoList.isEmpty()) {
                     ShokanShokujiHiyo shokanShokujiHiyo = shokanShokujiHiyoList.get(0);
                     shokanShokujiHiyo = build食事費用合計設定(shokanShokujiHiyo);
@@ -728,21 +728,20 @@ public class ShokujiHiyoPanelHandler {
      * @return ShokanShokujiHiyo
      */
     public ShokanShokujiHiyo build_new_食事費用登録1() {
-        ShoukanharaihishinseikensakuParameter paramter = ViewStateHolder.get(ViewStateKeys.償還払費申請明細検索キー,
-                ShoukanharaihishinseikensakuParameter.class);
-        HihokenshaNo 被保険者番号 = paramter.getHiHokenshaNo();
-        FlexibleYearMonth サービス提供年月 = paramter.getServiceTeikyoYM();
-        RString 新整理番号 = Saiban.get(SubGyomuCode.DBC介護給付, SaibanHanyokeyName.償還整理番号.
-                getコード()).nextString();
-        JigyoshaNo 事業者番号 = paramter.getJigyoshaNo();
-        RString 様式番号 = paramter.getYoshikiNo();
+        ShoukanharaihishinseimeisaikensakuParameter paramter = ViewStateHolder.get(ViewStateKeys.償還払費申請明細検索キー,
+                ShoukanharaihishinseimeisaikensakuParameter.class);
+        HihokenshaNo 被保険者番号 = paramter.get被保険者番号();
+        FlexibleYearMonth サービス提供年月 = paramter.getサービス年月();
+        RString 整理番号 = paramter.get整理番号();
+        JigyoshaNo 事業者番号 = paramter.get事業者番号();
+        RString 様式番号 = paramter.get様式番号();
         RString 明細番号 = DATA_0001;
         int ii = 1;
         RString 連番 = new RString(String.format("%02d", ii));
         ShokanShokujiHiyo shokanShokujiHiyo = new ShokanShokujiHiyo(
                 被保険者番号,
                 サービス提供年月,
-                新整理番号,
+                整理番号,
                 事業者番号,
                 様式番号,
                 明細番号,
@@ -857,21 +856,20 @@ public class ShokujiHiyoPanelHandler {
      * @return ShokanShokujiHiyo
      */
     public ShokanShokujiHiyo build_new_食事費用合計設定() {
-        ShoukanharaihishinseikensakuParameter paramter = ViewStateHolder.get(ViewStateKeys.償還払費申請明細検索キー,
-                ShoukanharaihishinseikensakuParameter.class);
-        HihokenshaNo 被保険者番号 = paramter.getHiHokenshaNo();
-        FlexibleYearMonth サービス提供年月 = paramter.getServiceTeikyoYM();
-        RString 新整理番号 = Saiban.get(SubGyomuCode.DBC介護給付, SaibanHanyokeyName.償還整理番号.
-                getコード()).nextString();
-        JigyoshaNo 事業者番号 = paramter.getJigyoshaNo();
-        RString 様式番号 = paramter.getYoshikiNo();
+        ShoukanharaihishinseimeisaikensakuParameter paramter = ViewStateHolder.get(ViewStateKeys.償還払費申請明細検索キー,
+                ShoukanharaihishinseimeisaikensakuParameter.class);
+        HihokenshaNo 被保険者番号 = paramter.get被保険者番号();
+        FlexibleYearMonth サービス提供年月 = paramter.getサービス年月();
+        RString 整理番号 = paramter.get整理番号();
+        JigyoshaNo 事業者番号 = paramter.get事業者番号();
+        RString 様式番号 = paramter.get様式番号();
         RString 明細番号 = DATA_0001;
         int ii = 1;
         RString 連番 = new RString(String.format("%02d", ii));
         ShokanShokujiHiyo shokanShokujiHiyo = new ShokanShokujiHiyo(
                 被保険者番号,
                 サービス提供年月,
-                新整理番号,
+                整理番号,
                 事業者番号,
                 様式番号,
                 明細番号,
@@ -902,29 +900,30 @@ public class ShokujiHiyoPanelHandler {
      */
     public ShokanShokujiHiyo build食事費用合計設定(ShokanShokujiHiyo shokanShokujiHiyo) {
 
+        ShokanShokujiHiyoBuilder builder = shokanShokujiHiyo.createBuilderForEdit();
         if (div.getPanelShokuji().getPanelDetailGokei().getTxtTeikyouHisu().getValue() != null) {
-            shokanShokujiHiyo = shokanShokujiHiyo.createBuilderForEdit().set食事提供延べ日数(
+            shokanShokujiHiyo = builder.set食事提供延べ日数(
                     div.getPanelShokuji().getPanelDetailGokei().getTxtTeikyouHisu()
                     .getValue().intValue()).build();
         }
         if (div.getPanelShokuji().getPanelDetailGokei().getTxtHigaku().getValue() != null) {
-            shokanShokujiHiyo = shokanShokujiHiyo.createBuilderForEdit().set標準負担額_日額(
+            shokanShokujiHiyo = builder.set標準負担額_日額(
                     div.getPanelShokuji().getPanelDetailGokei().getTxtHigaku()
                     .getValue().intValue()).build();
         }
         if (div.getPanelShokuji().getPanelDetailGokei().getTxtGetsugaku().getValue() != null) {
-            shokanShokujiHiyo = shokanShokujiHiyo.createBuilderForEdit().set標準負担額_月額(
+            shokanShokujiHiyo = builder.set標準負担額_月額(
                     div.getPanelShokuji().getPanelDetailGokei().getTxtGetsugaku()
                     .getValue().intValue()).build();
         }
         if (div.getPanelShokuji().getPanelDetailGokei().getTxtTeikyohiGokei().getValue() != null) {
-            shokanShokujiHiyo = shokanShokujiHiyo.createBuilderForEdit().set食事提供費合計(
+            shokanShokujiHiyo = builder.set食事提供費合計(
                     div.getPanelShokuji().getPanelDetailGokei().getTxtTeikyohiGokei()
                     .getValue().intValue()).build();
         }
 
         if (div.getPanelShokuji().getPanelDetailGokei().getTxtShokujiShiseigaku().getValue() != null) {
-            shokanShokujiHiyo = shokanShokujiHiyo.createBuilderForEdit().set食事提供費請求額(
+            shokanShokujiHiyo = builder.set食事提供費請求額(
                     div.getPanelShokuji().getPanelDetailGokei().getTxtShokujiShiseigaku()
                     .getValue().intValue()).build();
         }
