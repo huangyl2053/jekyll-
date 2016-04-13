@@ -127,15 +127,6 @@ public class GaikyoTokkiYichiranNyurokuHandler {
      */
     public void onLoad() {
 
-        ViewStateHolder.put(ViewStateKeys.申請書管理番号, new ShinseishoKanriNo(new RString("1001")));
-        ViewStateHolder.put(ViewStateKeys.認定調査履歴番号, 1);
-        ViewStateHolder.put(ViewStateKeys.調査実施日, new RString("21060304"));
-        ViewStateHolder.put(ViewStateKeys.調査実施場所, new RString("1"));
-        ViewStateHolder.put(ViewStateKeys.実施場所名称, new RString("実施場所名称"));
-        ViewStateHolder.put(ViewStateKeys.記入者, new RString("記入者"));
-        ViewStateHolder.put(ViewStateKeys.所属機関, new RString("001"));
-        ViewStateHolder.put(ViewStateKeys.調査区分, new RString("001"));
-
         ChosaJisshishaJohoModel model = new ChosaJisshishaJohoModel();
         ShinseishoKanriNo temp_申請書管理番号 = ViewStateHolder.get(ViewStateKeys.申請書管理番号, ShinseishoKanriNo.class);
         RString 調査実施日 = ViewStateHolder.get(ViewStateKeys.調査実施日, RString.class);
@@ -217,6 +208,7 @@ public class GaikyoTokkiYichiranNyurokuHandler {
     public void onClick_btnAfterTokkiJiko() {
 
         当前ページ数 = Integer.valueOf(div.getTokkiNyuryoku().getHiddenPageNo().toString());
+        総ページ数 = Integer.valueOf(div.getTokkiNyuryoku().getHiddenTotalPageCount().toString());
         RString key1 = new RString(String.valueOf(当前ページ数).concat("1"));
         RString key2 = new RString(String.valueOf(当前ページ数).concat("2"));
         RString key3 = new RString(String.valueOf(当前ページ数).concat("3"));
@@ -224,8 +216,6 @@ public class GaikyoTokkiYichiranNyurokuHandler {
         RString key5 = new RString(String.valueOf(当前ページ数).concat("5"));
 
         gaikyoTokkiNyurokuMap = DataPassingConverter.deserialize(div.getTokkiNyuryoku().getHiddenGaikyoTokkiNyurokuMap(), HashMap.class);
-        this.cleanData();
-        当前ページ数 = Integer.valueOf(div.getTokkiNyuryoku().getHiddenPageNo().toString()) + 1;
 
         if (gaikyoTokkiNyurokuMap.get(key1) == null
                 || ShinkiKubun.新規データ.getCode().equals(gaikyoTokkiNyurokuMap.get(key1).getTemp_新規区分())) {
@@ -243,11 +233,17 @@ public class GaikyoTokkiYichiranNyurokuHandler {
                 || ShinkiKubun.新規データ.getCode().equals(gaikyoTokkiNyurokuMap.get(key5).getTemp_新規区分())) {
             this.fifth特記事項をチェック();
         } else {
+            if (当前ページ数 == 総ページ数) {
+                総ページ数 = 総ページ数 + 1;
+                div.getTokkiNyuryoku().setHiddenTotalPageCount(new RString(String.valueOf(総ページ数)));
+            }
+            当前ページ数 = 当前ページ数 + 1;
             div.getTokkiNyuryoku().setHiddenPageNo(new RString(String.valueOf(当前ページ数)));
-            div.getTokkiNyuryoku().setHiddenTotalPageCount(new RString(String.valueOf(総ページ数 + 1)));
             div.getTokkiNyuryoku()
-                    .getLblTokkiJikoPage().setText(new RString(String.valueOf(当前ページ数).concat("/").concat(String.valueOf(総ページ数 + 1))));
+                    .getLblTokkiJikoPage().setText(new RString(String.valueOf(当前ページ数).concat("/").concat(String.valueOf(総ページ数))));
         }
+
+        this.cleanData();
 
         this.初期化項目設定();
 
@@ -593,13 +589,23 @@ public class GaikyoTokkiYichiranNyurokuHandler {
             認定調査特記事項番号 = NinteichosaKomoku09B.toValue(
                     entry.getValue().getTemp_認定調査特記事項番号()).get調査特記事項番序();
 
-            NinteichosahyoTokkijiko ninteichosahyoTokkijiko = new NinteichosahyoTokkijiko(
+            NinteichosahyoTokkijiko ninteichosahyoTokkijiko = manager.get認定調査票_特記情報ByKey(
                     temp_申請書管理番号,
                     temp_認定調査履歴番号,
                     認定調査特記事項番号,
                     Integer.valueOf(value.getTemp_認定調査特記事項連番().toString()),
                     value.getTemp_特記事項テキストイメージ区分(),
                     new Code(value.getTemp_原本マスク区分()));
+
+            if (ninteichosahyoTokkijiko == null) {
+                ninteichosahyoTokkijiko = new NinteichosahyoTokkijiko(
+                        temp_申請書管理番号,
+                        temp_認定調査履歴番号,
+                        認定調査特記事項番号,
+                        Integer.valueOf(value.getTemp_認定調査特記事項連番().toString()),
+                        value.getTemp_特記事項テキストイメージ区分(),
+                        new Code(value.getTemp_原本マスク区分()));
+            }
 
             NinteichosahyoTokkijikoBuilder builder = ninteichosahyoTokkijiko.createBuilderForEdit();
 
@@ -630,8 +636,20 @@ public class GaikyoTokkiYichiranNyurokuHandler {
 
         gaikyoTokkiNyurokuMap = ViewStateHolder.get(DBE2210003Keys.入力内容を取り消す用データ, HashMap.class);
 
+        当前ページ数 = 1;
+
         this.初期化項目設定();
         this.set初期化活性制御();
+
+        総項目数 = gaikyoTokkiNyurokuMap.size();
+        総ページ数 = get総ページ数();
+
+        div.getTokkiNyuryoku()
+                .getLblTokkiJikoPage().setText(new RString(String.valueOf(当前ページ数).concat("/").concat(String.valueOf(総ページ数))));
+        div.getTokkiNyuryoku()
+                .setHiddenPageNo(new RString(String.valueOf(当前ページ数)));
+        div.getTokkiNyuryoku()
+                .setHiddenTotalPageCount(new RString(String.valueOf(総ページ数)));
 
     }
 
@@ -1163,10 +1181,14 @@ public class GaikyoTokkiYichiranNyurokuHandler {
 
             throw new ApplicationException(DbeErrorMessages.新規未入力特記事項が有で新ページが追加不可.getMessage());
         } else {
+            if (当前ページ数 == 総ページ数) {
+                総ページ数 = 総ページ数 + 1;
+                div.getTokkiNyuryoku().setHiddenTotalPageCount(new RString(String.valueOf(総ページ数)));
+            }
+            当前ページ数 = 当前ページ数 + 1;
             div.getTokkiNyuryoku().setHiddenPageNo(new RString(String.valueOf(当前ページ数)));
-            div.getTokkiNyuryoku().setHiddenTotalPageCount(new RString(String.valueOf(総ページ数 + 1)));
             div.getTokkiNyuryoku()
-                    .getLblTokkiJikoPage().setText(new RString(String.valueOf(当前ページ数).concat("/").concat(String.valueOf(総ページ数 + 1))));
+                    .getLblTokkiJikoPage().setText(new RString(String.valueOf(当前ページ数).concat("/").concat(String.valueOf(総ページ数))));
         }
     }
 
@@ -1185,10 +1207,14 @@ public class GaikyoTokkiYichiranNyurokuHandler {
 
             throw new ApplicationException(DbeErrorMessages.新規未入力特記事項が有で新ページが追加不可.getMessage());
         } else {
+            if (当前ページ数 == 総ページ数) {
+                総ページ数 = 総ページ数 + 1;
+                div.getTokkiNyuryoku().setHiddenTotalPageCount(new RString(String.valueOf(総ページ数)));
+            }
+            当前ページ数 = 当前ページ数 + 1;
             div.getTokkiNyuryoku().setHiddenPageNo(new RString(String.valueOf(当前ページ数)));
-            div.getTokkiNyuryoku().setHiddenTotalPageCount(new RString(String.valueOf(総ページ数 + 1)));
             div.getTokkiNyuryoku()
-                    .getLblTokkiJikoPage().setText(new RString(String.valueOf(当前ページ数).concat("/").concat(String.valueOf(総ページ数 + 1))));
+                    .getLblTokkiJikoPage().setText(new RString(String.valueOf(当前ページ数).concat("/").concat(String.valueOf(総ページ数))));
         }
     }
 
@@ -1210,10 +1236,14 @@ public class GaikyoTokkiYichiranNyurokuHandler {
 
             throw new ApplicationException(DbeErrorMessages.新規未入力特記事項が有で新ページが追加不可.getMessage());
         } else {
+            if (当前ページ数 == 総ページ数) {
+                総ページ数 = 総ページ数 + 1;
+                div.getTokkiNyuryoku().setHiddenTotalPageCount(new RString(String.valueOf(総ページ数)));
+            }
+            当前ページ数 = 当前ページ数 + 1;
             div.getTokkiNyuryoku().setHiddenPageNo(new RString(String.valueOf(当前ページ数)));
-            div.getTokkiNyuryoku().setHiddenTotalPageCount(new RString(String.valueOf(総ページ数 + 1)));
             div.getTokkiNyuryoku()
-                    .getLblTokkiJikoPage().setText(new RString(String.valueOf(当前ページ数).concat("/").concat(String.valueOf(総ページ数 + 1))));
+                    .getLblTokkiJikoPage().setText(new RString(String.valueOf(当前ページ数).concat("/").concat(String.valueOf(総ページ数))));
         }
     }
 
@@ -1238,10 +1268,14 @@ public class GaikyoTokkiYichiranNyurokuHandler {
 
             throw new ApplicationException(DbeErrorMessages.新規未入力特記事項が有で新ページが追加不可.getMessage());
         } else {
+            if (当前ページ数 == 総ページ数) {
+                総ページ数 = 総ページ数 + 1;
+                div.getTokkiNyuryoku().setHiddenTotalPageCount(new RString(String.valueOf(総ページ数)));
+            }
+            当前ページ数 = 当前ページ数 + 1;
             div.getTokkiNyuryoku().setHiddenPageNo(new RString(String.valueOf(当前ページ数)));
-            div.getTokkiNyuryoku().setHiddenTotalPageCount(new RString(String.valueOf(総ページ数 + 1)));
             div.getTokkiNyuryoku()
-                    .getLblTokkiJikoPage().setText(new RString(String.valueOf(当前ページ数).concat("/").concat(String.valueOf(総ページ数 + 1))));
+                    .getLblTokkiJikoPage().setText(new RString(String.valueOf(当前ページ数).concat("/").concat(String.valueOf(総ページ数))));
         }
     }
 
@@ -1265,10 +1299,14 @@ public class GaikyoTokkiYichiranNyurokuHandler {
 
             throw new ApplicationException(DbeErrorMessages.新規未入力特記事項が有で新ページが追加不可.getMessage());
         } else {
+            if (当前ページ数 == 総ページ数) {
+                総ページ数 = 総ページ数 + 1;
+                div.getTokkiNyuryoku().setHiddenTotalPageCount(new RString(String.valueOf(総ページ数)));
+            }
+            当前ページ数 = 当前ページ数 + 1;
             div.getTokkiNyuryoku().setHiddenPageNo(new RString(String.valueOf(当前ページ数)));
-            div.getTokkiNyuryoku().setHiddenTotalPageCount(new RString(String.valueOf(総ページ数 + 1)));
             div.getTokkiNyuryoku()
-                    .getLblTokkiJikoPage().setText(new RString(String.valueOf(当前ページ数).concat("/").concat(String.valueOf(総ページ数 + 1))));
+                    .getLblTokkiJikoPage().setText(new RString(String.valueOf(当前ページ数).concat("/").concat(String.valueOf(総ページ数))));
         }
     }
 }
