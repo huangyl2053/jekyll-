@@ -4,6 +4,7 @@ package jp.co.ndensan.reams.db.dbc.divcontroller.entity.commonchilddiv.ServiceCo
  * このファイルへの変更は、再生成時には損失するため
  * 不正な動作の原因になります。
  */
+
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.binding.ButtonDialog;
@@ -13,11 +14,13 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.TextBox;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxCode;
 
 /**
- * ServiceCodeInputCommonChildDiv のクラスファイル 
+ * ServiceCodeInputCommonChildDiv のクラスファイル
+ *
  * @reamsid_L DBA-0060-010 dongyabin
  * @author 自動生成
  */
 public class ServiceCodeInputCommonChildDivDiv extends Panel implements IServiceCodeInputCommonChildDiv {
+
     // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-01-15_09-59-03">
     /*
      * [ private の作成 ]
@@ -160,5 +163,35 @@ public class ServiceCodeInputCommonChildDivDiv extends Panel implements IService
     @Override
     public void initialize() {
         this.getTxtServiceCodeName().setDisabled(true);
+    }
+
+    /**
+     * サービスコード1を返します。
+     *
+     * @return サービスコード1
+     */
+    @Override
+    public RString getサービスコード1() {
+        return this.txtServiceCode1.getValue();
+    }
+
+    /**
+     * サービスコード2を返します。
+     *
+     * @return サービスコード2
+     */
+    @Override
+    public RString getサービスコード2() {
+        return this.txtServiceCode2.getValue();
+    }
+
+    /**
+     * サービス名称を返します。
+     *
+     * @return サービス名称
+     */
+    @Override
+    public RString getサービス名称() {
+        return this.txtServiceCodeName.getValue();
     }
 }
