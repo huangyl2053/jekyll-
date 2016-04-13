@@ -8,9 +8,10 @@ package jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.ShikakuTo
 
 
 
-import jp.co.ndensan.reams.uz.uza.ui.binding.DataRow;
+import java.io.Serializable;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Button;
+import jp.co.ndensan.reams.uz.uza.ui.binding.DataRow;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxFlexibleDate;
 
 
@@ -20,7 +21,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxFlexibleDate;
  * @author 自動生成
  */
 
-public class dgShikakuShutokuRireki_Row extends DataRow {
+public class dgShikakuShutokuRireki_Row extends DataRow implements Serializable {
     // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
 
     private RString state;
