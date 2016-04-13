@@ -55,8 +55,8 @@ public class NinteichosaItakusakiMasterHandler {
     private final NinteichosaItakusakiJohoManager johoManager;
     private static final RString 状況フラグ有効 = new RString("有効");
     private static final RString 状況フラグ無効 = new RString("無効");
-    private static final RString 自動割付フラグ有効 = new RString("有効");
-    private static final RString 自動割付フラグ無効 = new RString("無効");
+    private static final RString 自動割付フラグ可能 = new RString("可能");
+    private static final RString 自動割付フラグ不可能 = new RString("不可能");
     private static final RString 特定調査員表示フラグ表示 = new RString("表示");
     private static final RString 特定調査員表示フラグ非表示 = new RString("非表示");
     private static final RString CSV_WRITER_DELIMITER = new RString(",");
@@ -435,7 +435,7 @@ public class NinteichosaItakusakiMasterHandler {
                         割付定員,
                         割付地区.getColumnValue(),
                         割付地区名称,
-                        joho.is自動割付フラグTrue() ? 自動割付フラグ有効 : 自動割付フラグ無効,
+                        joho.is自動割付フラグTrue() ? 自動割付フラグ可能 : 自動割付フラグ不可能,
                         chosaKikanKubun,
                         joho.is状況フラグ() ? 状況フラグ有効 : 状況フラグ無効);
                 dataSources.add(row);
@@ -487,7 +487,7 @@ public class NinteichosaItakusakiMasterHandler {
             ninteichosaItakusaki.getEntity().setTokuteiChosainDisplayFlag(row.getTokuteiChosainDispFlag().equals(特定調査員表示フラグ表示));
             ninteichosaItakusaki.getEntity().setWaritsukeTeiin(row.getWaritsukeTeiin().getValue().intValue());
             ninteichosaItakusaki.getEntity().setWaritsukeChiku(new ChikuCode(row.getChikuCode()));
-            ninteichosaItakusaki.getEntity().setAutoWaritsukeFlag(自動割付フラグ有効.equals(row.getAutoWaritsukeFlag()));
+            ninteichosaItakusaki.getEntity().setAutoWaritsukeFlag(自動割付フラグ可能.equals(row.getAutoWaritsukeFlag()));
             ninteichosaItakusaki.getEntity().setKikanKubun(chosaKikanKubun);
             ninteichosaItakusaki.getEntity().setJokyoFlag(状況フラグ有効.equals(row.getJokyoFlag()));
         }
