@@ -106,6 +106,116 @@ public class NinteiChosaScheduleInputHandler {
         認定調査委託先コード = ViewStateHolder.get(ViewStateKeys.認定調査スケジュール登録_認定調査委託先コード, RString.class);
         時間枠 = ViewStateHolder.get(ViewStateKeys.認定調査スケジュール登録_時間枠, RString.class);
         設定日 = ViewStateHolder.get(ViewStateKeys.認定調査スケジュール登録_設定日, FlexibleDate.class);
+        if (モード_1.equals(ViewStateHolder.get(ViewStateKeys.認定調査スケジュール登録10_対象者を検索するモード, RString.class))) {
+            ViewStateHolder.put(ViewStateKeys.認定調査スケジュール登録10_対象者を検索するモード, RString.EMPTY);
+            boolean 状態 = ViewStateHolder.get(ViewStateKeys.認定調査スケジュール登録10_認定調査員コード状態, boolean.class);
+            boolean 予約可否状態 = ViewStateHolder.get(ViewStateKeys.認定調査スケジュール登録10_予約可否状態, boolean.class);
+            boolean 備考状態 = ViewStateHolder.get(ViewStateKeys.認定調査スケジュール登録10_備考状態, boolean.class);
+            boolean 予約状況状態 = ViewStateHolder.get(ViewStateKeys.認定調査スケジュール登録10_予約状況状態, boolean.class);
+            boolean 被保番号状態 = ViewStateHolder.get(ViewStateKeys.認定調査スケジュール登録10_被保番号状態, boolean.class);
+            boolean 場所状態 = ViewStateHolder.get(ViewStateKeys.認定調査スケジュール登録10_場所状態, boolean.class);
+            div.getWariateJokyo().getTxtNinteiChosainCode().setValue(
+                    chickNull(ViewStateHolder.get(ViewStateKeys.認定調査スケジュール登録10_認定調査員コード値, RString.class)));
+            div.getWariateJokyo().getTxtNinteiChosainName().setValue(
+                    chickNull(ViewStateHolder.get(ViewStateKeys.認定調査スケジュール登録10_認定調査員氏名値, RString.class)));
+            div.getWariateJokyo().getTxtNinteiChosaItakusakiCode().setValue(
+                    chickNull(ViewStateHolder.get(ViewStateKeys.認定調査スケジュール登録10_認定調査委託先コード値, RString.class)));
+            div.getWariateJokyo().getTxtNinteiChosaItakusakiName().setValue(
+                    chickNull(ViewStateHolder.get(ViewStateKeys.認定調査スケジュール登録10_認定調査委託先名称値, RString.class)));
+            div.getWariateJokyo().getTxtNinteiChosaDate().setValue(
+                    chickNull(ViewStateHolder.get(ViewStateKeys.認定調査スケジュール登録10_調査日値, FlexibleDate.class)));
+            div.getWariateJokyo().getTxtNinteiChosaTime().setValue(
+                    chickNull(ViewStateHolder.get(ViewStateKeys.認定調査スケジュール登録10_調査日時値, RString.class)));
+            div.getWariateJokyo().getTxtNinteiChosaTimeFrame().setValue(
+                    chickNull(ViewStateHolder.get(ViewStateKeys.認定調査スケジュール登録10_時間枠値, RString.class)));
+            div.getWariateJokyo().getRadYoyakuKahi().setSelectedKey(
+                    chickNull(ViewStateHolder.get(ViewStateKeys.認定調査スケジュール登録10_予約可否値, RString.class)));
+            div.getWariateJokyo().getTxtNinteiChosaBiko().setValue(
+                    chickNull(ViewStateHolder.get(ViewStateKeys.認定調査スケジュール登録10_認定調査員コード値, RString.class)));
+            div.getWariateJokyo().getRadYoyakuJokyo().setSelectedKey(
+                    chickNull(ViewStateHolder.get(ViewStateKeys.認定調査スケジュール登録10_予約状況値, RString.class)));
+            div.getButtonArea().getBtnSearchTaishosha().setDisabled(
+                    ViewStateHolder.get(ViewStateKeys.認定調査スケジュール登録10_対象者を検索する状態, boolean.class));
+            div.getButtonArea().getBtnDisplayLatestInformation().setDisabled(
+                    ViewStateHolder.get(ViewStateKeys.認定調査スケジュール登録10_前回情報を表示する状態, boolean.class));
+            div.getButtonArea().getBtnSearchTaishosha().setVisible(
+                    ViewStateHolder.get(ViewStateKeys.認定調査スケジュール登録10_対象者を検索する表示, boolean.class));
+            div.getButtonArea().getBtnDisplayLatestInformation().setVisible(
+                    ViewStateHolder.get(ViewStateKeys.認定調査スケジュール登録10_前回情報を表示する表示, boolean.class));
+            div.getWariateJokyo().getTxtNinteiChosainCode().setDisabled(状態);
+            div.getWariateJokyo().getTxtNinteiChosainName().setDisabled(状態);
+            div.getWariateJokyo().getTxtNinteiChosaItakusakiCode().setDisabled(状態);
+            div.getWariateJokyo().getTxtNinteiChosaItakusakiName().setDisabled(状態);
+            div.getWariateJokyo().getTxtNinteiChosaDate().setDisabled(状態);
+            div.getWariateJokyo().getTxtNinteiChosaTime().setDisabled(状態);
+            div.getWariateJokyo().getTxtNinteiChosaTimeFrame().setDisabled(状態);
+            div.getWariateJokyo().getRadYoyakuKahi().setDisabled(予約可否状態);
+            div.getWariateJokyo().getTxtNinteiChosaBiko().setDisabled(備考状態);
+            div.getWariateJokyo().getRadYoyakuJokyo().setDisabled(予約状況状態);
+            set対象者詳細Grid値(temp_被保番号, temp_被保険者区分コード, temp_保険者, temp_認定申請日, temp_申請区分_申請時, temp_氏名,
+                    temp_カナ氏名, ViewStateHolder.get(ViewStateKeys.認定調査スケジュール登録10_場所値, RString.class),
+                    ViewStateHolder.get(ViewStateKeys.認定調査スケジュール登録10_駐車場値, RString.class),
+                    ViewStateHolder.get(ViewStateKeys.認定調査スケジュール登録10_立会人１値, RString.class),
+                    ViewStateHolder.get(ViewStateKeys.認定調査スケジュール登録10_連絡先１値, RString.class),
+                    ViewStateHolder.get(ViewStateKeys.認定調査スケジュール登録10_立会人２値, RString.class),
+                    ViewStateHolder.get(ViewStateKeys.認定調査スケジュール登録10_連絡先２値, RString.class),
+                    ViewStateHolder.get(ViewStateKeys.認定調査スケジュール登録10_対象者メモ値, RString.class));
+            div.getTaishoshaShosai().getTxtHihoBangoNumber().setDisabled(被保番号状態);
+            div.getTaishoshaShosai().getTxtHihoBangoGosu().setDisabled(被保番号状態);
+            div.getTaishoshaShosai().getTxtHokenshaName().setDisabled(被保番号状態);
+            div.getTaishoshaShosai().getTxtNinteiShinseiDate().setDisabled(被保番号状態);
+            div.getTaishoshaShosai().getTxtNinteiShinseiKubun().setDisabled(被保番号状態);
+            div.getTaishoshaShosai().getTxtTaishoshaName().setDisabled(被保番号状態);
+            div.getTaishoshaShosai().getTxtTaishoshaNameKana().setDisabled(被保番号状態);
+            div.getTaishoshaShosai().getTxtBasho().setDisabled(場所状態);
+            div.getTaishoshaShosai().getTxtChushajo().setDisabled(場所状態);
+            div.getTaishoshaShosai().getTxtTachiainin1().setDisabled(場所状態);
+            div.getTaishoshaShosai().getTxtRenrakusaki1().setDisabled(場所状態);
+            div.getTaishoshaShosai().getTxtTachiainin2().setDisabled(場所状態);
+            div.getTaishoshaShosai().getTxtRenrakusaki2().setDisabled(場所状態);
+            div.getTaishoshaShosai().getTxtTaishoshaShosaiMemo().setDisabled(場所状態);
+            div.getTaishoshaShosai().getBtnClear().setDisabled(
+                    ViewStateHolder.get(ViewStateKeys.認定調査スケジュール登録10_対象者をクリアする状態, boolean.class));
+            div.getTaishoshaShosai().getBtnClear().setDisabled(
+                    ViewStateHolder.get(ViewStateKeys.認定調査スケジュール登録10_対象者をクリアする表示, boolean.class));
+        } else {
+            onLoad_モード1_2_3(temp_認定調査員名称, temp_認定調査委託先名称, temp_予約可否, temp_備考, temp_予約状況,
+                    temp_被保番号, temp_被保険者区分コード, temp_保険者, temp_認定申請日, temp_申請区分_申請時, temp_氏名, temp_カナ氏名,
+                    temp_場所, temp_駐車場, temp_立会人1, temp_連絡先1, temp_立会人2, temp_連絡先2, temp_対象者メモ);
+            getボタン状態(temp_申請者管理番号3);
+        }
+    }
+
+    private RString chickNull(RString temp) {
+        return temp == null ? RString.EMPTY : temp;
+    }
+
+    private FlexibleDate chickNull(FlexibleDate temp) {
+        return temp == null ? FlexibleDate.EMPTY : temp;
+    }
+
+    private void getボタン状態(RString temp_申請者管理番号3) {
+        if (div.getButtonArea().getBtnDisplayLatestInformation().isVisible()) {
+            if (!RString.isNullOrEmpty(temp_申請者管理番号3)) {
+                div.getButtonArea().getBtnDisplayLatestInformation().setDisabled(false);
+            } else {
+                div.getButtonArea().getBtnDisplayLatestInformation().setDisabled(true);
+            }
+        }
+        if (予約不可.equals(予約可否)) {
+            if (div.getButtonArea().getBtnSearchTaishosha().isVisible()) {
+                div.getButtonArea().getBtnSearchTaishosha().setDisabled(true);
+            }
+            if (div.getButtonArea().getBtnDisplayLatestInformation().isVisible()) {
+                div.getButtonArea().getBtnDisplayLatestInformation().setDisabled(true);
+            }
+        }
+    }
+
+    private void onLoad_モード1_2_3(RString temp_認定調査員名称, RString temp_認定調査委託先名称, RString temp_予約可否,
+            RString temp_備考, RString temp_予約状況, RString temp_被保番号, RString temp_被保険者区分コード, RString temp_保険者,
+            FlexibleDate temp_認定申請日, RString temp_申請区分_申請時, RString temp_氏名, RString temp_カナ氏名, RString temp_場所,
+            RString temp_駐車場, RString temp_立会人1, RString temp_連絡先1, RString temp_立会人2, RString temp_連絡先2, RString temp_対象者メモ) {
         if (モード_1.equals(モード)) {
             if (予約不可.equals(予約可否)) {
                 set割当状況Grid値(temp_認定調査員名称, temp_認定調査委託先名称, temp_予約可否, temp_備考, temp_予約状況);
@@ -123,8 +233,7 @@ public class NinteiChosaScheduleInputHandler {
                 div.getButtonArea().getBtnDisplayLatestInformation().setDisabled(true);
                 div.getTaishoshaShosai().setDisabled(true);
                 div.getTaishoshaShosai().getBtnClear().setDisabled(true);
-            }
-            if (予約可.equals(予約可否) && 予約状況_未定.equals(予約状況)) {
+            } else if (予約可.equals(予約可否) && 予約状況_未定.equals(予約状況)) {
                 set割当状況Grid値(temp_認定調査員名称, temp_認定調査委託先名称, temp_予約可否, temp_備考, temp_予約状況);
                 div.getWariateJokyo().getTxtNinteiChosainCode().setDisabled(true);
                 div.getWariateJokyo().getTxtNinteiChosainName().setDisabled(true);
@@ -139,8 +248,7 @@ public class NinteiChosaScheduleInputHandler {
                 div.getButtonArea().getBtnSearchTaishosha().setDisabled(false);
                 div.getButtonArea().getBtnDisplayLatestInformation().setDisabled(true);
                 set対象者詳細Grid状態();
-            }
-            if (予約可.equals(予約可否) && (予約状況_仮予約.equals(予約状況) || 予約状況_確定.equals(予約状況))) {
+            } else if (予約可.equals(予約可否) && (予約状況_仮予約.equals(予約状況) || 予約状況_確定.equals(予約状況))) {
                 set割当状況Grid値(temp_認定調査員名称, temp_認定調査委託先名称, temp_予約可否, temp_備考, temp_予約状況);
                 div.getWariateJokyo().getTxtNinteiChosainCode().setDisabled(true);
                 div.getWariateJokyo().getTxtNinteiChosainName().setDisabled(true);
@@ -158,56 +266,11 @@ public class NinteiChosaScheduleInputHandler {
                         temp_カナ氏名, temp_場所, temp_駐車場, temp_立会人1, temp_連絡先1, temp_立会人2, temp_連絡先2, temp_対象者メモ);
                 set対象者詳細Grid状態();
             }
-        }
-        onLoad_モード_2_3(temp_認定調査員名称, temp_認定調査委託先名称, temp_予約可否, temp_備考, temp_予約状況,
-                temp_被保番号, temp_被保険者区分コード, temp_保険者, temp_認定申請日, temp_申請区分_申請時, temp_氏名, temp_カナ氏名,
-                temp_場所, temp_駐車場, temp_立会人1, temp_連絡先1, temp_立会人2, temp_連絡先2, temp_対象者メモ);
-        if (div.getButtonArea().getBtnSearchTaishosha().isVisible()) {
-            if (!RString.isNullOrEmpty(temp_申請者管理番号3)) {
-                div.getButtonArea().getBtnDisplayLatestInformation().setDisabled(false);
-            } else {
-                div.getButtonArea().getBtnDisplayLatestInformation().setDisabled(true);
-            }
-        }
-    }
-
-    private void onLoad_モード_2_3(RString temp_認定調査員名称, RString temp_認定調査委託先名称, RString temp_予約可否,
-            RString temp_備考, RString temp_予約状況, RString temp_被保番号, RString temp_被保険者区分コード, RString temp_保険者,
-            FlexibleDate temp_認定申請日, RString temp_申請区分_申請時, RString temp_氏名, RString temp_カナ氏名, RString temp_場所,
-            RString temp_駐車場, RString temp_立会人1, RString temp_連絡先1, RString temp_立会人2, RString temp_連絡先2, RString temp_対象者メモ) {
-        if (モード_2.equals(モード)) {
-            set割当状況Grid値(temp_認定調査員名称, temp_認定調査委託先名称, temp_予約可否, temp_備考, temp_予約状況);
-            div.getWariateJokyo().getTxtNinteiChosainCode().setDisabled(true);
-            div.getWariateJokyo().getTxtNinteiChosainName().setDisabled(true);
-            div.getWariateJokyo().getTxtNinteiChosaItakusakiCode().setDisabled(true);
-            div.getWariateJokyo().getTxtNinteiChosaItakusakiName().setDisabled(true);
-            div.getWariateJokyo().getTxtNinteiChosaDate().setDisabled(true);
-            div.getWariateJokyo().getTxtNinteiChosaTime().setDisabled(true);
-            div.getWariateJokyo().getTxtNinteiChosaTimeFrame().setDisabled(true);
-            div.getWariateJokyo().getRadYoyakuKahi().setDisabled(false);
-            div.getWariateJokyo().getTxtNinteiChosaBiko().setDisabled(true);
-            div.getWariateJokyo().getRadYoyakuJokyo().setDisabled(false);
-            div.getButtonArea().getBtnSearchTaishosha().setVisible(false);
-            div.getButtonArea().getBtnDisplayLatestInformation().setVisible(false);
-            set対象者詳細Grid値(temp_被保番号, temp_被保険者区分コード, temp_保険者, temp_認定申請日, temp_申請区分_申請時, temp_氏名,
-                    temp_カナ氏名, temp_場所, temp_駐車場, temp_立会人1, temp_連絡先1, temp_立会人2, temp_連絡先2, temp_対象者メモ);
-            div.getTaishoshaShosai().getTxtHihoBangoNumber().setDisabled(true);
-            div.getTaishoshaShosai().getTxtHihoBangoGosu().setDisabled(true);
-            div.getTaishoshaShosai().getTxtHokenshaName().setDisabled(true);
-            div.getTaishoshaShosai().getTxtNinteiShinseiDate().setDisabled(true);
-            div.getTaishoshaShosai().getTxtNinteiShinseiKubun().setDisabled(true);
-            div.getTaishoshaShosai().getTxtTaishoshaName().setDisabled(true);
-            div.getTaishoshaShosai().getTxtTaishoshaNameKana().setDisabled(true);
-            div.getTaishoshaShosai().getTxtBasho().setDisabled(true);
-            div.getTaishoshaShosai().getTxtChushajo().setDisabled(true);
-            div.getTaishoshaShosai().getTxtTachiainin1().setDisabled(true);
-            div.getTaishoshaShosai().getTxtRenrakusaki1().setDisabled(true);
-            div.getTaishoshaShosai().getTxtTachiainin2().setDisabled(true);
-            div.getTaishoshaShosai().getTxtRenrakusaki2().setDisabled(true);
-            div.getTaishoshaShosai().getTxtTaishoshaShosaiMemo().setDisabled(true);
-            div.getTaishoshaShosai().getBtnClear().setVisible(false);
-        }
-        if (モード_3.equals(モード)) {
+        } else if (モード_2.equals(モード)) {
+            onLoad_モード2(temp_認定調査員名称, temp_認定調査委託先名称, temp_予約可否, temp_備考, temp_予約状況,
+                    temp_被保番号, temp_被保険者区分コード, temp_保険者, temp_認定申請日, temp_申請区分_申請時, temp_氏名, temp_カナ氏名,
+                    temp_場所, temp_駐車場, temp_立会人1, temp_連絡先1, temp_立会人2, temp_連絡先2, temp_対象者メモ);
+        } else if (モード_3.equals(モード)) {
             if (予約可.equals(予約可否) && 予約状況_未定.equals(予約状況)) {
                 set割当状況Grid値(temp_認定調査員名称, temp_認定調査委託先名称, temp_予約可否, temp_備考, temp_予約状況);
                 div.getWariateJokyo().getTxtNinteiChosainCode().setDisabled(true);
@@ -226,8 +289,25 @@ public class NinteiChosaScheduleInputHandler {
                         temp_カナ氏名, temp_場所, temp_駐車場, temp_立会人1, temp_連絡先1, temp_立会人2, temp_連絡先2, temp_対象者メモ);
                 set対象者詳細Grid状態();
                 div.getTaishoshaShosai().getBtnClear().setVisible(false);
-            }
-            if (予約不可.equals(予約可否) && (予約状況_仮予約.equals(予約状況) || 予約状況_確定.equals(予約状況))) {
+            } else if (予約可.equals(予約可否) && (予約状況_仮予約.equals(予約状況) || 予約状況_確定.equals(予約状況))) {
+                set割当状況Grid値(temp_認定調査員名称, temp_認定調査委託先名称, temp_予約可否, temp_備考, temp_予約状況);
+                div.getWariateJokyo().getTxtNinteiChosainCode().setDisabled(true);
+                div.getWariateJokyo().getTxtNinteiChosainName().setDisabled(true);
+                div.getWariateJokyo().getTxtNinteiChosaItakusakiCode().setDisabled(true);
+                div.getWariateJokyo().getTxtNinteiChosaItakusakiName().setDisabled(true);
+                div.getWariateJokyo().getTxtNinteiChosaDate().setDisabled(true);
+                div.getWariateJokyo().getTxtNinteiChosaTime().setDisabled(true);
+                div.getWariateJokyo().getTxtNinteiChosaTimeFrame().setDisabled(true);
+                div.getWariateJokyo().getRadYoyakuKahi().setDisabled(false);
+                div.getWariateJokyo().getTxtNinteiChosaBiko().setDisabled(false);
+                div.getWariateJokyo().getRadYoyakuJokyo().setDisabled(false);
+                div.getButtonArea().getBtnSearchTaishosha().setVisible(false);
+                div.getButtonArea().getBtnDisplayLatestInformation().setVisible(false);
+                set対象者詳細Grid値(temp_被保番号, temp_被保険者区分コード, temp_保険者, temp_認定申請日, temp_申請区分_申請時, temp_氏名,
+                        temp_カナ氏名, temp_場所, temp_駐車場, temp_立会人1, temp_連絡先1, temp_立会人2, temp_連絡先2, temp_対象者メモ);
+                set対象者詳細Grid状態();
+                div.getTaishoshaShosai().getBtnClear().setVisible(false);
+            } else if (予約不可.equals(予約可否)) {
                 set割当状況Grid値(temp_認定調査員名称, temp_認定調査委託先名称, temp_予約可否, temp_備考, temp_予約状況);
                 div.getWariateJokyo().getTxtNinteiChosainCode().setDisabled(true);
                 div.getWariateJokyo().getTxtNinteiChosainName().setDisabled(true);
@@ -260,6 +340,42 @@ public class NinteiChosaScheduleInputHandler {
                 div.getTaishoshaShosai().getBtnClear().setVisible(false);
             }
         }
+    }
+
+    private void onLoad_モード2(RString temp_認定調査員名称, RString temp_認定調査委託先名称, RString temp_予約可否,
+            RString temp_備考, RString temp_予約状況, RString temp_被保番号, RString temp_被保険者区分コード, RString temp_保険者,
+            FlexibleDate temp_認定申請日, RString temp_申請区分_申請時, RString temp_氏名, RString temp_カナ氏名, RString temp_場所,
+            RString temp_駐車場, RString temp_立会人1, RString temp_連絡先1, RString temp_立会人2, RString temp_連絡先2, RString temp_対象者メモ) {
+        set割当状況Grid値(temp_認定調査員名称, temp_認定調査委託先名称, temp_予約可否, temp_備考, temp_予約状況);
+        div.getWariateJokyo().getTxtNinteiChosainCode().setDisabled(true);
+        div.getWariateJokyo().getTxtNinteiChosainName().setDisabled(true);
+        div.getWariateJokyo().getTxtNinteiChosaItakusakiCode().setDisabled(true);
+        div.getWariateJokyo().getTxtNinteiChosaItakusakiName().setDisabled(true);
+        div.getWariateJokyo().getTxtNinteiChosaDate().setDisabled(true);
+        div.getWariateJokyo().getTxtNinteiChosaTime().setDisabled(true);
+        div.getWariateJokyo().getTxtNinteiChosaTimeFrame().setDisabled(true);
+        div.getWariateJokyo().getRadYoyakuKahi().setDisabled(false);
+        div.getWariateJokyo().getTxtNinteiChosaBiko().setDisabled(true);
+        div.getWariateJokyo().getRadYoyakuJokyo().setDisabled(false);
+        div.getButtonArea().getBtnSearchTaishosha().setVisible(false);
+        div.getButtonArea().getBtnDisplayLatestInformation().setVisible(false);
+        set対象者詳細Grid値(temp_被保番号, temp_被保険者区分コード, temp_保険者, temp_認定申請日, temp_申請区分_申請時, temp_氏名,
+                temp_カナ氏名, temp_場所, temp_駐車場, temp_立会人1, temp_連絡先1, temp_立会人2, temp_連絡先2, temp_対象者メモ);
+        div.getTaishoshaShosai().getTxtHihoBangoNumber().setDisabled(true);
+        div.getTaishoshaShosai().getTxtHihoBangoGosu().setDisabled(true);
+        div.getTaishoshaShosai().getTxtHokenshaName().setDisabled(true);
+        div.getTaishoshaShosai().getTxtNinteiShinseiDate().setDisabled(true);
+        div.getTaishoshaShosai().getTxtNinteiShinseiKubun().setDisabled(true);
+        div.getTaishoshaShosai().getTxtTaishoshaName().setDisabled(true);
+        div.getTaishoshaShosai().getTxtTaishoshaNameKana().setDisabled(true);
+        div.getTaishoshaShosai().getTxtBasho().setDisabled(true);
+        div.getTaishoshaShosai().getTxtChushajo().setDisabled(true);
+        div.getTaishoshaShosai().getTxtTachiainin1().setDisabled(true);
+        div.getTaishoshaShosai().getTxtRenrakusaki1().setDisabled(true);
+        div.getTaishoshaShosai().getTxtTachiainin2().setDisabled(true);
+        div.getTaishoshaShosai().getTxtRenrakusaki2().setDisabled(true);
+        div.getTaishoshaShosai().getTxtTaishoshaShosaiMemo().setDisabled(true);
+        div.getTaishoshaShosai().getBtnClear().setVisible(false);
     }
 
     private void set対象者詳細Grid状態() {
