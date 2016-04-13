@@ -6,10 +6,9 @@
 package jp.co.ndensan.reams.db.dbb.business.report.tsuchisho.notsu;
 
 import java.util.List;
-import jp.co.ndensan.reams.ca.cax.entity.db.psm.CaFt703FindNokumiEntity;
+import jp.co.ndensan.reams.db.dbb.business.core.basic.ChoshuHoho;
 import jp.co.ndensan.reams.db.dbb.business.core.basic.Fuka;
 import jp.co.ndensan.reams.db.dbb.definition.core.ShoriKubun;
-import jp.co.ndensan.reams.db.dbb.definition.core.choshuhoho.ChoshuHoho;
 import jp.co.ndensan.reams.db.dbb.entity.db.basic.DbT2002FukaEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7065ChohyoSeigyoKyotsuEntity;
 import jp.co.ndensan.reams.ua.uax.business.core.atesaki.IAtesaki;
@@ -19,7 +18,6 @@ import jp.co.ndensan.reams.uz.uza.biz.ReportId;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 
 /**
- *
  * 仮算定通知書情報です。
  */
 @lombok.Getter
@@ -32,10 +30,9 @@ public class KariSanteiTsuchiShoKyotsu {
     private ReportId 帳票ID;
     private ShoriKubun 処理区分;
     private Association 地方公共団体;
-    //TODO 業務概念.賦課情報-宛名
-    private DbT2002FukaEntity 賦課の情報_更正後;
-    private DbT2002FukaEntity 賦課の情報_更正前;
-    private CaFt703FindNokumiEntity 納組情報;
+    private DbT2002FukaEntity 賦課の情報_更正後;//TODO 業務概念.賦課情報-宛名
+    private DbT2002FukaEntity 賦課の情報_更正前;//TODO 業務概念.賦課情報-宛名
+    //納組情報;TODO CaFt703FindNokumiEntity
     private List<NokiJoho> 普徴納期情報リスト;
     private List<NokiJoho> 特徴納期情報リスト;
     private IAtesaki 宛先情報;
