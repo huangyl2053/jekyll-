@@ -31,7 +31,7 @@ import jp.co.ndensan.reams.db.dbb.business.report.hokenryononyutsuchishobook.Kar
 import jp.co.ndensan.reams.db.dbb.business.report.hokenryononyutsuchishobook.KarisanteiHokenryoNonyuTsuchishoBookFuriKaeNashiCoverReport;
 import jp.co.ndensan.reams.db.dbb.business.report.karisanteihokenryononyutsuchishoginfuri.KarisanteiHokenryoNonyuTsuchishoGinfuriReport;
 import jp.co.ndensan.reams.db.dbb.business.report.karisanteihokenryononyutsuchishokigoto.KarisanteiHokenryoNonyuTsuchishoKigotoReport;
-import jp.co.ndensan.reams.db.dbb.business.report.karisanteinonyutsuchishocvskakukocover.KarisanteiNonyuTsuchishoCVSKakukoCoverReport;
+import jp.co.ndensan.reams.db.dbb.business.report.karisanteinonyutsuchishocvskakuko.KarisanteiNonyuTsuchishoCVSKakukoReport;
 import jp.co.ndensan.reams.db.dbb.business.report.karisanteinonyutsuchishocvsmulti.KarisanteiNonyuTsuchishoCVSMultiReport;
 import jp.co.ndensan.reams.db.dbb.business.report.tokubetsuchoshukaishitsuchishokari.TokubetsuChoshuKaishiTsuchishoKariB5Property;
 import jp.co.ndensan.reams.db.dbb.business.report.tokubetsuchoshukaishitsuchishokari.TokubetsuChoshuKaishiTsuchishoKariB5Report;
@@ -767,8 +767,8 @@ public class KakushuTsuchishoSakusei {
             sourceDataCollection = null;
 //            sourceDataCollection = new Printer<KarisanteiNonyuTsuchishoCVSMultiSource>().spool(null, report);
         } else if (ReportIdDBB.DBB100024.getReportId().equals(帳票ID)) {
-            KarisanteiNonyuTsuchishoCVSKakukoCoverReport report
-                    = KarisanteiNonyuTsuchishoCVSKakukoCoverReport.createFrom(null);
+            KarisanteiNonyuTsuchishoCVSKakukoReport report
+                    = KarisanteiNonyuTsuchishoCVSKakukoReport.createFrom(null);
             sourceDataCollection = null;
 //            sourceDataCollection = new Printer<KarisanteiNonyuTsuchishoCVSKakukoCoverSource>().spool(null, report);
         } else {
