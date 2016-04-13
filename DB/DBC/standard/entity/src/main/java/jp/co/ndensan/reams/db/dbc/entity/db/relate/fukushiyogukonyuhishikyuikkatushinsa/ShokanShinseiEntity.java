@@ -34,6 +34,13 @@ public class ShokanShinseiEntity implements Cloneable, Serializable {
 
     /**
      * コンストラクタです。
+     */
+    public ShokanShinseiEntity() {
+
+    }
+
+    /**
+     * コンストラクタです。
      *
      * @param 償還払請求基本Entity 償還払請求基本Entity
      * @param 償還払支給申請Entity 償還払支給申請Entity
