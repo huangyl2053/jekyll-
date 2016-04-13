@@ -175,8 +175,8 @@ public class JigyoshaService {
     private boolean データ更新チェック(JigyoshaServiceDiv div) {
         KaigoJigyoshaParameter 重複パラメータ = KaigoJigyoshaParameter.createParam(div.getJigyoshaServiceKihon().getJigyosha()
                 .getTxtJigyoshaNo().getValue(),
-                div.getJigyoshaServiceKihon().getJigyosha().getTxtYukoKaishiYMD().getValue(),
                 div.getJigyoshaServiceKihon().getDdlServiceShuruiChiikiMitchaku().getSelectedKey(),
+                div.getJigyoshaServiceKihon().getJigyosha().getTxtYukoKaishiYMD().getValue(),
                 div.getJigyoshaServiceKihon().getJigyosha().getTxtYukoShuryoYMD().getValue());
         if (getService().checkKikanJufuku(重複パラメータ)) {
             throw new ApplicationException(UrErrorMessages.期間が不正.getMessage());
