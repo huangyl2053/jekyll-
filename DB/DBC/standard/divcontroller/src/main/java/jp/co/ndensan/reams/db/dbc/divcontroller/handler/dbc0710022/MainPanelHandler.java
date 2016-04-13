@@ -14,7 +14,9 @@ import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 
 /**
- * @reamsid_L DBC-992-110 yangchenbing
+ * 画面設計_DBCMN52002_住宅改修費支給申請_償還払決定情報登録
+ *
+ * @reamsid_L DBC-0992-110 yangchenbing
  */
 public final class MainPanelHandler {
 
