@@ -14,6 +14,8 @@ import jp.co.ndensan.reams.uz.uza.math.Decimal;
 
 /**
  * 住宅改修費支給限度額判定クラス
+ *
+ * @reamsid_L DBC-0992-140 yebangqiang
  */
 public class JutakuKaishuShikyuGendogakuHantei {
 
