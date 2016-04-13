@@ -9,24 +9,24 @@
         <result property="証記載保険者番号" column="証記載保険者番号" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.HokenshaNoTypeHandler"/>
         <result property="被保険者番号" column="被保険者番号" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.HihokenshaNoTypeHandler"/>
         <result property="サービス提供年月" column="サービス提供年月" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleYearMonthTypeHandler"/>
-        <result property="通知書番号" column="通知書番号," typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="通知書番号," column="通知書番号" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="利用者負担額" column="利用者負担額" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
         <result property="支給区分コード" column="支給区分コード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="決定年月" column="決定年月" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleYearMonthTypeHandler"/>
         <result property="高額支給額" column="高額支給額" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
     </resultMap>
-
-    <select id="select一時TBLデータ" resultMap="resultMap_KogakuKyufuKetteiInPartEntity" fetchSize="500">
-        SELECT {処理年月} AS 決定者受取年月,
-        KETTEI."証記載保険者番号" AS 証記載保険者番号,
-        KETTEI."被保険者番号" AS 被保険者番号,
-        KETTEI."サービス提供年月" AS サービス提供年月
+    
+    <select id="select一時TBLデータ" resultMap="resultMap_KogakuKyufuKetteiInPartEntity" 
+            parameterType="jp.co.ndensan.reams.db.dbc.definition.core.kogakuserviceketteijohotorikomidatahenshu.DbShoriDataParameter" fetchSize="500">
+        SELECT #{処理年月} AS 決定者受取年月,
+        KETTEI."shoKisaiHokenshaNo" AS 証記載保険者番号,
+        KETTEI."hihokenshaNo" AS 被保険者番号,
+        KETTEI."serviceTeikyoYM" AS サービス提供年月
         KETTEI."no" AS 通知書番号,
-        KETTEI."利用者負担額" AS 利用者負担額,
-        KETTEI."支給区分コード" AS 支給区分コード,
-        KETTEI."決定年月" AS 決定年月,
-        KETTEI."高額支給額" AS 高額支給額
-        KETTEI.
+        KETTEI."riyoshaFutangaku" AS 利用者負担額,
+        KETTEI."shikyuKubunCode" AS 支給区分コード,
+        KETTEI."ketteiYM" AS 決定年月,
+        KETTEI."kogakuShikyuGaku" AS 高額支給額
         FROM "TABLE_KOGAKUKYUFUKETTEI" AS KETTEI
     </select>
 
@@ -46,6 +46,7 @@
         <result property="shichosonCode" column="shichosonCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.LasdecCodeTypeHandler"/>
     </resultMap>
 
+    <!-- 高額サービス費決定情報取込み市町村コードの取得-->
     <select id="select市町村コード" resultMap="resultMap_ShichosonCode"
             parameterType="jp.co.ndensan.reams.db.dbc.definition.mybatisprm.kagoketteikohifutanshain.ShichosonHihokenshaParameter">
         SELECT
@@ -66,6 +67,7 @@
         <result property="kyuNo" column="kyuNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
     </resultMap>
 
+    <!-- 高額サービス費決定情報取込み新番号の取得-->
     <select id="select新番号" resultMap="resultMap_DbT7026ShinKyuHihokenshaNoHenkanEntity"
             parameterType="jp.co.ndensan.reams.db.dbc.definition.mybatisprm.kagoketteikohifutanshain.ShichosonHihokenshaParameter">
         SELECT
@@ -138,27 +140,28 @@
         FROM <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.tableName_PsmParamClassShikibetsuTaisho" />
         AS ShikibetsuTaisho
     </select>
-
+    
+    <!-- 高額サービス費決定情報取込み新旧被保険者番号を変換する-->
     <update id="update高額サービス費決定情報一時TBL1"
-            parameterType="jp.co.ndensan.reams.db.dbc.definition.core.kogakuserviceketteijohotorikomidatahenshu.SinBangoTempParameter">
+            parameterType="jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7026ShinKyuHihokenshaNoHenkanEntity">
         UPDATE "TABLE_KOGAKUKYUFUKETTEI"
-        SET "hihokenshaNo" = KETTEI."新番号"
-        FROM　"TABLE_KOGAKUKYUFUKETTEI" AS KETTEI
-        WHERE "hihokenshaNo" = KETTEI."旧番号"
+        SET "hihokenshaNo" = #{shinNo}
+        WHERE "hihokenshaNo" = #{kyuNo}
     </update>
 
+    <!-- 高額サービス費決定情報取込み高額サービス費決定情報一時TBLの更新-->
     <update id="update高額サービス費決定情報一時TBL2"
-            parameterType="jp.co.ndensan.reams.db.dbc.definition.core.kogakuserviceketteijohotorikomidatahenshu.HihokenshaNoDataParameter">
+            parameterType="jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT1001HihokenshaDaichoEntity">
         UPDATE "TABLE_KOGAKUKYUFUKETTEI"
-        WHERE "hihokenshaNo"=#{被保険者番号};
-        SET "shikibetsuCode"=#{識別コード};
-        "shikakuSoshitsuJiyu"=#{喪失事由コード};
-        "shikakuSoshitsuYMD"=#{資格喪失年月日};
+        WHERE "hihokenshaNo"=#{hihokenshaNo};
+        SET "shikibetsuCode"=#{shikibetsuCode};
+        "shikakuSoshitsuJiyu"=#{shikakuSoshitsuJiyu};
+        "shikakuSoshitsuYMD"=#{shikakuSoshitsuYMD};
     </update>
 
-
+    <!-- 高額サービス費決定情報取込み高額サービス費決定情報一時TBLの更新-->
     <update id="update高額サービス費決定情報一時TBL3"
-            parameterType="jp.co.ndensan.reams.db.dbc.definition.mybatisprm.kagoketteikohifutanshain.ShikibetsuCodeTempParameter">
+            parameterType="jp.co.ndensan.reams.db.dbc.entity.db.relate.kogakukyufuketteiin.PSMEntity">
         UPDATE "TABLE_KOGAKUKYUFUKETTEI"
         WHERE "shikibetsuCode"=#{識別コード}
         SET "zenkokuJushoCode"=#{全国住所コード}
