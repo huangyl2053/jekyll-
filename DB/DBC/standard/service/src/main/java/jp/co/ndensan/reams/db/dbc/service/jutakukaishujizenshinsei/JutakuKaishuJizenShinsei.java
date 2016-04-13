@@ -39,9 +39,12 @@ import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.DonyuKeitaiC
 import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.GyomuBunrui;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HokenKyufuRitsu;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ServiceShuruiCode;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShoKisaiHokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.message.DbxErrorMessages;
+import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT7060KaigoJigyoshaEntity;
+import jp.co.ndensan.reams.db.dbx.persistence.db.basic.DbT7060KaigoJigyoshaDac;
 import jp.co.ndensan.reams.db.dbx.service.ShichosonSecurityJoho;
 import jp.co.ndensan.reams.db.dbx.service.core.dbbusinessconfig.DbBusinessConifg;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT1001HihokenshaDaichoEntity;
@@ -50,10 +53,12 @@ import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT1001HihokenshaDaichoDa
 import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT4001JukyushaDaichoDac;
 import jp.co.ndensan.reams.db.dbz.service.core.basic.koikishichosonjoho.KoikiShichosonJohoFinder;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
+import jp.co.ndensan.reams.uz.uza.biz.AtenaMeisho;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.ApplicationException;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -79,6 +84,7 @@ public class JutakuKaishuJizenShinsei {
     private final DbT7112ShokanShuruiShikyuGendoGakuDac shuruiShikyuGendoGakuDac;
     private final DbT4021ShiharaiHohoHenkoDac hohoHenkoDac;
     private final DbT4014RiyoshaFutangakuGengakuDac 負担額減額Dac;
+    private final DbT7060KaigoJigyoshaDac 介護事業者Dac;
     private static final int 区分 = 6;
     private static final RString キー = new RString("hiHokenshaNo");
     private static final RString モード_修正 = new RString("修正");
@@ -112,6 +118,7 @@ public class JutakuKaishuJizenShinsei {
         this.shuruiShikyuGendoGakuDac = InstanceProvider.create(DbT7112ShokanShuruiShikyuGendoGakuDac.class);
         this.hohoHenkoDac = InstanceProvider.create(DbT4021ShiharaiHohoHenkoDac.class);
         this.負担額減額Dac = InstanceProvider.create(DbT4014RiyoshaFutangakuGengakuDac.class);
+        this.介護事業者Dac = InstanceProvider.create(DbT7060KaigoJigyoshaDac.class);
 
     }
 
@@ -136,6 +143,7 @@ public class JutakuKaishuJizenShinsei {
      * @param shuruiShikyuGendoGakuDac shuruiShikyuGendoGakuDac
      * @param hohoHenkoDac hohoHenkoDac
      * @param 負担額減額Dac 負担額減額Dac
+     * @param 介護事業者Dac 介護事業者Dac
      */
     public JutakuKaishuJizenShinsei(MapperProvider mapperProvider,
             DbT4001JukyushaDaichoDac 受給者台帳Dac,
@@ -145,7 +153,8 @@ public class JutakuKaishuJizenShinsei {
             DbT7115UwanoseShokanShuruiShikyuGendoGakuDac shikyuGendoGakuDac,
             DbT7112ShokanShuruiShikyuGendoGakuDac shuruiShikyuGendoGakuDac,
             DbT4021ShiharaiHohoHenkoDac hohoHenkoDac,
-            DbT4014RiyoshaFutangakuGengakuDac 負担額減額Dac) {
+            DbT4014RiyoshaFutangakuGengakuDac 負担額減額Dac,
+            DbT7060KaigoJigyoshaDac 介護事業者Dac) {
         this.mapperProvider = mapperProvider;
         this.受給者台帳Dac = 受給者台帳Dac;
         this.jutakuKaishuDac = jutakuKaishuDac;
@@ -155,6 +164,7 @@ public class JutakuKaishuJizenShinsei {
         this.shuruiShikyuGendoGakuDac = shuruiShikyuGendoGakuDac;
         this.hohoHenkoDac = hohoHenkoDac;
         this.負担額減額Dac = 負担額減額Dac;
+        this.介護事業者Dac = 介護事業者Dac;
 
     }
 
@@ -544,5 +554,20 @@ public class JutakuKaishuJizenShinsei {
         }
         return 支払方法変更給付率list.get(0).getKyufuRitsu();
 
+    }
+
+    /**
+     * 作成事業者名称の取得
+     *
+     * @param 理由書作成事業者番号 JigyoshaNo
+     * @return AtenaMeisho
+     */
+    public AtenaMeisho getJigyoshaName(JigyoshaNo 理由書作成事業者番号) {
+        FlexibleDate システム日付 = new FlexibleDate(RDate.getNowDate().toDateString());
+        DbT7060KaigoJigyoshaEntity entity = 介護事業者Dac.select事業者名称(理由書作成事業者番号, システム日付);
+        if (entity == null) {
+            return new AtenaMeisho(RString.EMPTY);
+        }
+        return entity.getJigyoshaName();
     }
 }
