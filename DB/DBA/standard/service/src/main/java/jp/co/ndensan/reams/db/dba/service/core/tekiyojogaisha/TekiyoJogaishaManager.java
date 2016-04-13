@@ -65,7 +65,7 @@ public class TekiyoJogaishaManager {
     private final MapperProvider mapperProvider;
     private final DbT1002TekiyoJogaishaDac 適用除外者Dac;
     private final ShisetsuNyutaishoManager 介護保険施設入退所Manager;
-    private static boolean 退所日ありフラグ;
+    private boolean 退所日ありフラグ;
 
     /**
      * コンストラクタです。

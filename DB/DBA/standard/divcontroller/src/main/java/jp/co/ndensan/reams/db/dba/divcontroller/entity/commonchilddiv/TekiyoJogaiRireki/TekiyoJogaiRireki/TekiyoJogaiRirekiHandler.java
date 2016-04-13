@@ -304,22 +304,20 @@ public class TekiyoJogaiRirekiHandler {
                 TekiyoJogaisha 適用除外者の識別子 = new TekiyoJogaisha(識別コード, 異動日, 枝番);
                 適用除外者Model.add(適用除外者の識別子);
             }
-        } else if (状態_解除.equals(画面状態)) {
-            if (!rowList.isEmpty()) {
-                datagridTekiyoJogai_Row row = rowList.get(0);
-                row.setStatus(状態_修正);
-                row.setTaiShoDate(div.getPanelTekiyoJokaiKaiJyoInput().getTxtTaisyoDateInput());
-                row.setKayijoDate(div.getPanelTekiyoJokaiKaiJyoInput().getTxtKaijoDateInput());
-                row.setKaijoTodokeDate(div.getPanelTekiyoJokaiKaiJyoInput().getTxtKaijoTododkDateIn());
-                row.setKaijoJiyuCode(div.getPanelTekiyoJokaiKaiJyoInput().getDdlKaijoJiyuInput().getSelectedKey());
-                row.setKaijoJiyu(div.getPanelTekiyoJokaiKaiJyoInput().getDdlKaijoJiyuInput().getSelectedValue());
-                ShisetsuNyutaisho taisho = new ShisetsuNyutaisho(識別コード, Integer.parseInt(履歴番号.toString()));
-                保険施設入退所Model.add(taisho);
-                TekiyoJogaisha 適用除外者の識別子
-                        = new TekiyoJogaisha(識別コード, new FlexibleDate(
-                                        div.getPanelTekiyoJokaiKaiJyoInput().getTxtKaijoDateInput().getValue().toString()), 枝番);
-                適用除外者Model.add(適用除外者の識別子);
-            }
+        } else if (状態_解除.equals(画面状態) && !rowList.isEmpty()) {
+            datagridTekiyoJogai_Row row = rowList.get(0);
+            row.setStatus(状態_修正);
+            row.setTaiShoDate(div.getPanelTekiyoJokaiKaiJyoInput().getTxtTaisyoDateInput());
+            row.setKayijoDate(div.getPanelTekiyoJokaiKaiJyoInput().getTxtKaijoDateInput());
+            row.setKaijoTodokeDate(div.getPanelTekiyoJokaiKaiJyoInput().getTxtKaijoTododkDateIn());
+            row.setKaijoJiyuCode(div.getPanelTekiyoJokaiKaiJyoInput().getDdlKaijoJiyuInput().getSelectedKey());
+            row.setKaijoJiyu(div.getPanelTekiyoJokaiKaiJyoInput().getDdlKaijoJiyuInput().getSelectedValue());
+            ShisetsuNyutaisho taisho = new ShisetsuNyutaisho(識別コード, Integer.parseInt(履歴番号.toString()));
+            保険施設入退所Model.add(taisho);
+            TekiyoJogaisha 適用除外者の識別子
+                    = new TekiyoJogaisha(識別コード, new FlexibleDate(
+                                    div.getPanelTekiyoJokaiKaiJyoInput().getTxtKaijoDateInput().getValue().toString()), 枝番);
+            適用除外者Model.add(適用除外者の識別子);
         }
         Collections.sort(rowList, new DateComparator());
         div.getDatagridTekiyoJogai().setDataSource(rowList);

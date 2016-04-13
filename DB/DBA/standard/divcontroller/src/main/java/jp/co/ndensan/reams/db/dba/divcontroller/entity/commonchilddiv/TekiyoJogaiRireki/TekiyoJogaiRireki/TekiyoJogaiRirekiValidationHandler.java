@@ -116,57 +116,48 @@ public class TekiyoJogaiRirekiValidationHandler {
                             RRVMessages.解除事由, div.getPanelTekiyoJokaiKaiJyoInput().getDdlKaijoJiyuInput()));
                 }
             }
-            if (状態_追加.equals(画面状態) || 状態_修正.equals(画面状態) || 状態_訂正履歴.equals(画面状態)) {
-                if (div.getPanelTekiyoInput().getTxtKayijoDate().getValue().isBefore(
-                        div.getPanelTekiyoInput().getTxtTekiyoDate().getValue())) {
-                    validPairs.add(new ValidationMessageControlPair(
-                            RRVMessages.適用日と解除日の整合性チェック, div.getPanelTekiyoInput().getTxtTekiyoDate(),
-                            div.getPanelTekiyoInput().getTxtKayijoDate()));
-                }
+            if ((状態_追加.equals(画面状態) || 状態_修正.equals(画面状態) || 状態_訂正履歴.equals(画面状態))
+                    && div.getPanelTekiyoInput().getTxtKayijoDate().getValue().isBefore(
+                            div.getPanelTekiyoInput().getTxtTekiyoDate().getValue())) {
+                validPairs.add(new ValidationMessageControlPair(
+                        RRVMessages.適用日と解除日の整合性チェック, div.getPanelTekiyoInput().getTxtTekiyoDate(),
+                        div.getPanelTekiyoInput().getTxtKayijoDate()));
             }
-            if (状態_追加.equals(画面状態) || 状態_修正.equals(画面状態) || 状態_訂正履歴.equals(画面状態)) {
-                if (div.getPanelTekiyoInput().getTxtTekiyoDate().getValue() != null
-                        && div.getPanelTekiyoInput().getTxtTekiyoTodokeDate().getValue() != null) {
-                    if (div.getPanelTekiyoInput().getTxtTekiyoDate().getValue().isBefore(
+            if ((状態_追加.equals(画面状態) || 状態_修正.equals(画面状態) || 状態_訂正履歴.equals(画面状態))
+                    && div.getPanelTekiyoInput().getTxtTekiyoDate().getValue() != null
+                    && div.getPanelTekiyoInput().getTxtTekiyoTodokeDate().getValue() != null
+                    && div.getPanelTekiyoInput().getTxtTekiyoDate().getValue().isBefore(
                             div.getPanelTekiyoInput().getTxtTekiyoTodokeDate().getValue())) {
-                        validPairs.add(new ValidationMessageControlPair(
-                                RRVMessages.適用日と適用届出日の整合性チェック, div.getPanelTekiyoInput().getTxtTekiyoTodokeDate(),
-                                div.getPanelTekiyoInput().getTxtTekiyoDate()));
-                    }
-                }
-            } else if (状態_適用登録.equals(画面状態)) {
-                if (div.getPanelTekiyoJokaiTekiInput().getTxtTekiyoDateInput().getValue() != null
-                        && div.getPanelTekiyoJokaiTekiInput().getTxtTkyoTododkDateIn().getValue() != null) {
-                    if (div.getPanelTekiyoJokaiTekiInput().getTxtTekiyoDateInput().getValue().isBefore(
+                validPairs.add(new ValidationMessageControlPair(
+                        RRVMessages.適用日と適用届出日の整合性チェック, div.getPanelTekiyoInput().getTxtTekiyoTodokeDate(),
+                        div.getPanelTekiyoInput().getTxtTekiyoDate()));
+            } else if (状態_適用登録.equals(画面状態)
+                    && div.getPanelTekiyoJokaiTekiInput().getTxtTekiyoDateInput().getValue() != null
+                    && div.getPanelTekiyoJokaiTekiInput().getTxtTkyoTododkDateIn().getValue() != null
+                    && div.getPanelTekiyoJokaiTekiInput().getTxtTekiyoDateInput().getValue().isBefore(
                             div.getPanelTekiyoJokaiTekiInput().getTxtTkyoTododkDateIn().getValue())) {
-                        validPairs.add(new ValidationMessageControlPair(
-                                RRVMessages.適用日と適用届出日の整合性チェック,
-                                div.getPanelTekiyoJokaiTekiInput().getTxtTkyoTododkDateIn(),
-                                div.getPanelTekiyoJokaiTekiInput().getTxtTekiyoDateInput()));
-                    }
-                }
+                validPairs.add(new ValidationMessageControlPair(
+                        RRVMessages.適用日と適用届出日の整合性チェック,
+                        div.getPanelTekiyoJokaiTekiInput().getTxtTkyoTododkDateIn(),
+                        div.getPanelTekiyoJokaiTekiInput().getTxtTekiyoDateInput()));
             }
-            if (状態_追加.equals(画面状態) || 状態_修正.equals(画面状態) || 状態_訂正履歴.equals(画面状態)) {
-                if (div.getPanelTekiyoInput().getTxtKayijoDate().getValue() != null
-                        && div.getPanelTekiyoInput().getTxtKaijoTodokedeDate().getValue() != null) {
-                    if (div.getPanelTekiyoInput().getTxtKayijoDate().getValue().isBefore(
+            if ((状態_追加.equals(画面状態) || 状態_修正.equals(画面状態) || 状態_訂正履歴.equals(画面状態))
+                    && div.getPanelTekiyoInput().getTxtKayijoDate().getValue() != null
+                    && div.getPanelTekiyoInput().getTxtKaijoTodokedeDate().getValue() != null
+                    && div.getPanelTekiyoInput().getTxtKayijoDate().getValue().isBefore(
                             div.getPanelTekiyoInput().getTxtKaijoTodokedeDate().getValue())) {
-                        validPairs.add(new ValidationMessageControlPair(
-                                RRVMessages.解除日と解除届出日の整合性チェック, div.getPanelTekiyoInput().getTxtKaijoTodokedeDate(),
-                                div.getPanelTekiyoInput().getTxtKayijoDate()));
-                    }
-                }
-            } else if (状態_解除.equals(画面状態)) {
-                if (div.getPanelTekiyoJokaiKaiJyoInput().getTxtKaijoDateInput().getValue() != null
-                        && div.getPanelTekiyoJokaiKaiJyoInput().getTxtKaijoTododkDateIn().getValue() != null) {
-                    if (div.getPanelTekiyoJokaiKaiJyoInput().getTxtKaijoDateInput().getValue().isBefore(
+                validPairs.add(new ValidationMessageControlPair(
+                        RRVMessages.解除日と解除届出日の整合性チェック, div.getPanelTekiyoInput().getTxtKaijoTodokedeDate(),
+                        div.getPanelTekiyoInput().getTxtKayijoDate()));
+            } else if (状態_解除.equals(画面状態)
+                    && div.getPanelTekiyoJokaiKaiJyoInput().getTxtKaijoDateInput().getValue() != null
+                    && div.getPanelTekiyoJokaiKaiJyoInput().getTxtKaijoTododkDateIn().getValue() != null
+                    && div.getPanelTekiyoJokaiKaiJyoInput().getTxtKaijoDateInput().getValue().isBefore(
                             div.getPanelTekiyoJokaiKaiJyoInput().getTxtKaijoTododkDateIn().getValue())) {
-                        validPairs.add(new ValidationMessageControlPair(
-                                RRVMessages.解除日と解除届出日の整合性チェック,
-                                div.getPanelTekiyoJokaiKaiJyoInput().getTxtKaijoTododkDateIn(),
-                                div.getPanelTekiyoJokaiKaiJyoInput().getTxtKaijoDateInput()));
-                    }
-                }
+                validPairs.add(new ValidationMessageControlPair(
+                        RRVMessages.解除日と解除届出日の整合性チェック,
+                        div.getPanelTekiyoJokaiKaiJyoInput().getTxtKaijoTododkDateIn(),
+                        div.getPanelTekiyoJokaiKaiJyoInput().getTxtKaijoDateInput()));
             }
             if (状態_適用登録.equals(画面状態)) {
                 if (div.getPanelTekiyoJokaiTekiInput().getTxtNyusyoDateInput().getValue() == null
