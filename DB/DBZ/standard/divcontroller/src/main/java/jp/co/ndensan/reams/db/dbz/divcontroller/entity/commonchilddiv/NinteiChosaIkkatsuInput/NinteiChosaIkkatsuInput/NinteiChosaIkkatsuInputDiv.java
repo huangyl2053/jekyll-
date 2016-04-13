@@ -18,7 +18,6 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxTime;
 /**
  * NinteiChosaIkkatsuInput のクラスファイル
  *
- * @reamsid_L DBE-3000-210 zhengshukai
  */
 public class NinteiChosaIkkatsuInputDiv extends Panel implements INinteiChosaIkkatsuInputDiv {
 

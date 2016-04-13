@@ -15,7 +15,6 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxTime;
 /**
  * tblJikanwaku2 のクラスファイル
  *
- * @reamsid_L DBE-3000-210 zhengshukai
  */
 public class tblJikanwaku2Div extends TablePanel {
 

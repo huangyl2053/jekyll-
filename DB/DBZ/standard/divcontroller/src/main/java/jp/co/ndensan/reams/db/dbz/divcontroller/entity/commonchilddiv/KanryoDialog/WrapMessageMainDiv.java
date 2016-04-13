@@ -12,7 +12,6 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 /**
  * WrapMessageMain のクラスファイル
  *
- * @reamsid_L DBZ-4490-010 chengsanyuan
  */
 public class WrapMessageMainDiv extends Panel {
 

@@ -12,7 +12,6 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.DataRow;
 /**
  * dgSearchResultHokensha_Row のクラスファイル
  *
- * @reamsid_L DBA-0180-010 lishengli
  */
 public class dgSearchResultHokensha_Row extends DataRow {
     // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2015-11-30_08-54-50">

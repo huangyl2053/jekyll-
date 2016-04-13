@@ -13,7 +13,6 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.TextBox;
 /**
  * KaradaJotai のクラスファイル 
  * 
- * @reamsid_L DBE-3000-120 dongyabin
  */
 public class KaradaJotaiDiv extends Panel {
     // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2015-11-30_08-54-50">

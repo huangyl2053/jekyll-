@@ -15,7 +15,6 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.DataRow;
 /**
  * dgKoseiShichosonList_Row のクラスファイル 
  * 
- * @reamsid_L DBE-3000-060 dongyabin
  */
 
 public class dgKoseiShichosonList_Row extends DataRow {

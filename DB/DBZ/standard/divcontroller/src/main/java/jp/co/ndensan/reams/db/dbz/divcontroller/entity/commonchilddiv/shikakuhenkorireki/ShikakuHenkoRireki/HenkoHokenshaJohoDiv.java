@@ -12,7 +12,6 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 /**
  * HenkoHokenshaJoho のクラスファイル
  *
- * @reamsid_L DBA-1300-050 chengsanyuan
  */
 public class HenkoHokenshaJohoDiv extends Panel {
 

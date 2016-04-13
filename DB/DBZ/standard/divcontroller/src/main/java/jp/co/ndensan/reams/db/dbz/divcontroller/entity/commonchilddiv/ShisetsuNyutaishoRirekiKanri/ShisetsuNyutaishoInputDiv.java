@@ -13,7 +13,6 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 /**
  * ShisetsuNyutaishoInput のクラスファイル
  *
- * @reamsid_L DBA-0360-030 linghuhang
  */
 public class ShisetsuNyutaishoInputDiv extends Panel {
     // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-01-15_09-59-03">

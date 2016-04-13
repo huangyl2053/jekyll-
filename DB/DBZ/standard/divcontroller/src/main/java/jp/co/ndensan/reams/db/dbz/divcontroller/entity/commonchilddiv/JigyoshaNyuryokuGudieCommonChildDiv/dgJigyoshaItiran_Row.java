@@ -13,7 +13,6 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxDate;
 /**
  * dgJigyoshaItiran_Row のクラスファイル
  *
- * @reamsid_L DBA-0140-010 houtp
  */
 public class dgJigyoshaItiran_Row extends DataRow {
     // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">

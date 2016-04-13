@@ -12,7 +12,6 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.DataRow;
 /**
  * dgNinteiChosaIrai_Row のクラスファイル
  *
- * @reamsid_L DBE-0200-020 zhangguopeng
  */
 public class dgNinteiChosaIrai_Row extends DataRow {
     // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-01-15_09-59-03">

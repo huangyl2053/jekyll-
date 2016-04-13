@@ -15,7 +15,6 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 /**
  * dgShinsakaiIinIchiran_Row のクラスファイル 
  * 
- * @reamsid_L DBE-3000-030  lijia
  * 
  */
 

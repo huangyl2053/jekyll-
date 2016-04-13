@@ -15,7 +15,6 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxDate;
 
 /**
  * datagridRireki_Row のクラスファイル 
- * @reamsid_L DBA-0220-010 dongyabin
  * @author 自動生成
  */
 

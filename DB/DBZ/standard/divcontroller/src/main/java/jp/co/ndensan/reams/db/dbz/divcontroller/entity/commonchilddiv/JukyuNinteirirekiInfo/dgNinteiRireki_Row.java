@@ -13,7 +13,6 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxFlexibleDate;
 /**
  * dgNinteiRireki_Row のクラスファイル
  *
- * @reamsid_L DBZ-4550-010 zhangzhiming
  */
 public class dgNinteiRireki_Row extends DataRow {
     // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-01-15_09-59-03">

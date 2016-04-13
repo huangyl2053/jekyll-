@@ -13,7 +13,6 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxCode;
 /**
  * dgKensakuKekkaIchiran_Row のクラスファイル
  *
- * @reamsid_L DBE-1300-130 xuyannan
  */
 public class dgKensakuKekkaIchiran_Row extends DataRow {
     // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：バージョン情報無し">

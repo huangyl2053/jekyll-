@@ -12,7 +12,6 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.DataRow;
 /**
  * dgYokaigodoGuide_Row のクラスファイル
  *
- * @reamsid_L DBZ-4540-010 lizhuoxuan
  */
 public class dgYokaigodoGuide_Row extends DataRow {
     // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-01-15_09-59-03">

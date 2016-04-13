@@ -13,7 +13,6 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 /**
  * KensakuJoken のクラスファイル 
  * 
- * @reamsid_L DBE-3000-050 wangkun
  */
 public class KensakuJokenDiv extends Panel {
     // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-01-15_09-59-03">
