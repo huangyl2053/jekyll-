@@ -21,8 +21,6 @@ import jp.co.ndensan.reams.db.dbc.divcontroller.viewbox.shoukanharaihishinseiken
 import jp.co.ndensan.reams.db.dbc.service.core.syokanbaraihishikyushinseikette.SyokanbaraihiShikyuShinseiKetteManager;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
-import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.kyotsu.SaibanHanyokeyName;
-import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.FillType;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
@@ -34,7 +32,6 @@ import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.ui.binding.RowState;
 import jp.co.ndensan.reams.uz.uza.ui.binding.propertyenum.IconName;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
-import jp.co.ndensan.reams.uz.uza.util.Saiban;
 
 /**
  * 償還払い費支給申請決定_サービス提供証明書(緊急時・所定疾患）画面のハンドラクラスです
@@ -51,7 +48,7 @@ public final class KinkyujiShoteiShikanPanelHandler {
     private static final RString 削除 = new RString("削除");
     private static final RString 登録 = new RString("登録");
     private static final RString 登録_削除 = new RString("登録_削除");
-    private static final RString 改行 = new RString("\n");
+    private static final RString 書式 = new RString("%02d");
     private static final int 位置１ = 32;
     private static final int 位置２ = 64;
     private static final int 位置３ = 96;
@@ -73,7 +70,6 @@ public final class KinkyujiShoteiShikanPanelHandler {
     private static final int 位置１９ = 608;
     private static final int 位置２０ = 640;
     private static final int SIX = 6;
-    private static final int ZERO = 0;
 
     private KinkyujiShoteiShikanPanelHandler(KinkyujiShoteiShikanPanelDiv div) {
         this.div = div;
@@ -610,11 +606,9 @@ public final class KinkyujiShoteiShikanPanelHandler {
             for (dgdKinkyujiShoteiList_Row row : div.getDgdKinkyujiShoteiList().getDataSource()) {
                 if (RowState.Added == row.getRowState()) {
                     max連番 = max連番 + 1;
-                    RString 新整理番号 = Saiban.get(SubGyomuCode.DBC介護給付, SaibanHanyokeyName.償還整理番号.
-                            getコード()).nextString();
                     ShokanShoteiShikkanShisetsuRyoyo entity = new ShokanShoteiShikkanShisetsuRyoyo(
-                            被保険者番号, 提供購入年月, 新整理番号, 事業者番号, 様式番号, 明細番号,
-                            new RString(String.format("%02d", max連番)));
+                            被保険者番号, 提供購入年月, 整理番号, 事業者番号, 様式番号, 明細番号,
+                            new RString(String.format(書式.toString(), max連番)));
                     entity = entity.added();
                     entity = buildEntity(entity, row);
                     list.add(entity);
