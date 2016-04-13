@@ -19,6 +19,7 @@ import jp.co.ndensan.reams.ur.urz.definition.message.UrInformationMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrQuestionMessages;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
+import jp.co.ndensan.reams.uz.uza.lang.ApplicationException;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.message.MessageDialogSelectedResult;
@@ -83,25 +84,28 @@ public class ShikyuShinseiDetail {
         if (valid.iterator().hasNext()) {
             return ResponseData.of(div).addValidationMessages(valid).respond();
         }
-
-        if (MODEL_DEL.equals(処理モード)) {
-            return setDel(div, 処理モード);
-        } else if (MODEL_ADD.equals(処理モード)) {
-            boolean flag = getHandler(div).is変更あり2();
-            if (!flag) {
-                return isChange(div);
-            } else {
-                return setAdd(div, 処理モード);
+        try {
+            if (MODEL_DEL.equals(処理モード)) {
+                return setDel(div, 処理モード);
+            } else if (MODEL_ADD.equals(処理モード)) {
+                boolean flag = getHandler(div).is変更あり2();
+                if (!flag) {
+                    return isChange(div);
+                } else {
+                    return setAdd(div, 処理モード);
+                }
+            } else if (MODEL_UPD.equals(処理モード)) {
+                boolean flag = getHandler(div).is変更あり();
+                if (!flag) {
+                    return isChange(div);
+                } else {
+                    return setUpd(div, 処理モード);
+                }
             }
-        } else if (MODEL_UPD.equals(処理モード)) {
-            boolean flag = getHandler(div).is変更あり();
-            if (!flag) {
-                return isChange(div);
-            } else {
-                return setUpd(div, 処理モード);
-            }
+        } catch (Exception e) {
+            throw new ApplicationException(UrErrorMessages.異常終了.getMessage());
         }
-        return ResponseData.of(div).addMessage(UrErrorMessages.異常終了.getMessage()).respond();
+        return ResponseData.of(div).respond();
     }
 
     private ResponseData<ShikyuShinseiDetailDiv> setAdd(ShikyuShinseiDetailDiv div, RString 処理モード) {
