@@ -602,4 +602,16 @@ public class ShikakuHenkoRirekiDiv extends Panel implements IShikakuHenkoRirekiD
         return SearchResult.of(hihokenshaList, 0, false);
     }
 
+    /**
+     * 変更事由DDLを設定します。
+     *
+     * @param key 変更事由key
+     * @param falg 活性フラグ
+     */
+    @Override
+    public void setDdlHenkoJiyu(RString key, boolean falg) {
+        this.getDdlHenkoJiyu().setSelectedKey(key);
+        this.getDdlHenkoJiyu().setDisabled(falg);
+    }
+
 }

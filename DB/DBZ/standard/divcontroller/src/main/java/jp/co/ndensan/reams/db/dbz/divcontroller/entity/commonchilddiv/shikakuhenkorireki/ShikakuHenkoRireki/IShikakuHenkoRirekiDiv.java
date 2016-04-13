@@ -4,6 +4,7 @@ import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaN
 import jp.co.ndensan.reams.db.dbz.business.core.HihokenshaDaicho;
 import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.kojin.IKojin;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.binding.ICommonChildDivBaseProperties;
 import jp.co.ndensan.reams.uz.uza.util.db.SearchResult;
 
@@ -29,4 +30,12 @@ public interface IShikakuHenkoRirekiDiv extends ICommonChildDivBaseProperties {
      * @return List<HihokenshaDaicho>
      */
     SearchResult<HihokenshaDaicho> getGridData();
+
+    /**
+     * 変更事由DDLを設定します。
+     *
+     * @param key 変更事由key
+     * @param falg 活性フラグ
+     */
+    void setDdlHenkoJiyu(RString key, boolean falg);
 }
