@@ -11,7 +11,7 @@ and open the template in the editor.
     
     <resultMap id="ResultMap_DbT1004ShisetsuNyutaishoEntity" type="jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT1004ShisetsuNyutaishoEntity" autoMapping="true">
         <id property="shikibetsuCode" column="dbT1004ShisetsuNyutaisho_shikibetsuCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.ShikibetsuCodeTypeHandler"/>
-        <id property="rirekiNo" column="dbT1004ShisetsuNyutaisho_rirekiNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <id property="rirekiNo" column="dbT1004ShisetsuNyutaisho_rirekiNo"/>
         <result property="insertDantaiCd" column="dbT1004ShisetsuNyutaisho_insertDantaiCd" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="insertTimestamp" column="dbT1004ShisetsuNyutaisho_insertTimestamp" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RDateTimeTypeHandler"/>
         <result property="insertReamsLoginId" column="dbT1004ShisetsuNyutaisho_insertReamsLoginId" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
@@ -33,21 +33,31 @@ and open the template in the editor.
     
     <select id="getShiSeTsuJyoHon" parameterType="jp.co.ndensan.reams.db.dbz.definition.mybatisprm.kaigohohenshisetsu.KaigoHohenShisetsuMybatisParameter" resultMap="ResultMap_DbT1004ShisetsuNyutaishoEntity">
         SELECT
-        rgdb."DbT1004ShisetsuNyutaisho"."shikibetsuCode"
-        , rgdb."DbT1004ShisetsuNyutaisho"."rirekiNo"
-        , rgdb."DbT1004ShisetsuNyutaisho"."shichosonCode"
-        , rgdb."DbT1004ShisetsuNyutaisho"."daichoShubetsu"
-        , rgdb."DbT1004ShisetsuNyutaisho"."nyushoShisetsuShurui"
-        , rgdb."DbT1004ShisetsuNyutaisho"."nyushoShisetsuCode"
-        , rgdb."DbT1004ShisetsuNyutaisho"."nyushoShoriYMD"
-        , rgdb."DbT1004ShisetsuNyutaisho"."nyushoYMD"
-        , rgdb."DbT1004ShisetsuNyutaisho"."taishoShoriYMD"
-        , rgdb."DbT1004ShisetsuNyutaisho"."taishoYMD"
-        , rgdb."DbT1004ShisetsuNyutaisho"."roomKigoNo" 
+         "DbT1004ShisetsuNyutaisho"."shikibetsuCode" as "dbT1004ShisetsuNyutaisho_shikibetsuCode",
+         "DbT1004ShisetsuNyutaisho"."rirekiNo" as "dbT1004ShisetsuNyutaisho_rirekiNo",
+         "DbT1004ShisetsuNyutaisho"."insertDantaiCd" as "dbT1004ShisetsuNyutaisho_insertDantaiCd",
+         "DbT1004ShisetsuNyutaisho"."insertTimestamp" as "dbT1004ShisetsuNyutaisho_insertTimestamp",
+         "DbT1004ShisetsuNyutaisho"."insertReamsLoginId" as "dbT1004ShisetsuNyutaisho_insertReamsLoginId",
+         "DbT1004ShisetsuNyutaisho"."insertContextId" as "dbT1004ShisetsuNyutaisho_insertContextId",
+         "DbT1004ShisetsuNyutaisho"."isDeleted" as "dbT1004ShisetsuNyutaisho_isDeleted",
+         "DbT1004ShisetsuNyutaisho"."updateCount" as "dbT1004ShisetsuNyutaisho_updateCount",
+         "DbT1004ShisetsuNyutaisho"."lastUpdateTimestamp" as "dbT1004ShisetsuNyutaisho_lastUpdateTimestamp",
+         "DbT1004ShisetsuNyutaisho"."lastUpdateReamsLoginId" as "dbT1004ShisetsuNyutaisho_lastUpdateReamsLoginId",
+         "DbT1004ShisetsuNyutaisho"."shichosonCode" as "dbT1004ShisetsuNyutaisho_shichosonCode",
+         "DbT1004ShisetsuNyutaisho"."daichoShubetsu" as "dbT1004ShisetsuNyutaisho_daichoShubetsu",
+         "DbT1004ShisetsuNyutaisho"."nyushoShisetsuShurui" as "dbT1004ShisetsuNyutaisho_nyushoShisetsuShurui",
+         "DbT1004ShisetsuNyutaisho"."nyushoShisetsuCode" as "dbT1004ShisetsuNyutaisho_nyushoShisetsuCode",
+         "DbT1004ShisetsuNyutaisho"."nyushoShoriYMD" as "dbT1004ShisetsuNyutaisho_nyushoShoriYMD",
+         "DbT1004ShisetsuNyutaisho"."nyushoYMD" as "dbT1004ShisetsuNyutaisho_nyushoYMD",
+         "DbT1004ShisetsuNyutaisho"."taishoShoriYMD" as "dbT1004ShisetsuNyutaisho_taishoShoriYMD",
+         "DbT1004ShisetsuNyutaisho"."taishoYMD" as "dbT1004ShisetsuNyutaisho_taishoYMD",
+         "DbT1004ShisetsuNyutaisho"."roomKigoNo" as "dbT1004ShisetsuNyutaisho_roomKigoNo"
         FROM
-        rgdb."DbT1004ShisetsuNyutaisho" 
+        rgdb."DbT1004ShisetsuNyutaisho"
         WHERE
         rgdb."DbT1004ShisetsuNyutaisho"."shikibetsuCode" = #{shikibetsuCode}
+        AND 
+        rgdb."DbT1004ShisetsuNyutaisho"."isDeleted" = FALSE
         ORDER BY
         rgdb."DbT1004ShisetsuNyutaisho"."rirekiNo",
         rgdb."DbT1004ShisetsuNyutaisho"."nyushoYMD"
