@@ -143,4 +143,14 @@ public final class MishinsaShikyuShinseiListHandler {
         }
     }
 
+    /**
+     * 決定日のチェック
+     *
+     * @param div JutakuKaishuhiShikyuShinseiPanelDiv
+     * @return boolean
+     */
+    public static boolean is決定日入力(JutakuKaishuhiShikyuShinseiPanelDiv div) {
+        return div.getMishinsaShikyuShinseiListPanel().getTxtKetteiYMD().getValue() != null;
+    }
+
 }

@@ -175,7 +175,7 @@ public class JutakuKaishuhiShikyuShinseiPanel {
      * @return ResponseData<JutakuKaishuhiShikyuShinseiPanelDiv>
      */
     public ResponseData<JutakuKaishuhiShikyuShinseiPanelDiv> onClick_btnShinsa(JutakuKaishuhiShikyuShinseiPanelDiv div) {
-        ValidationMessageControlPairs validationMessages = new JutakuKaishuhiShikyuShinseiPanelVlaidationHandler(div).volidateデータ選択();
+        ValidationMessageControlPairs validationMessages = new JutakuKaishuhiShikyuShinseiPanelVlaidationHandler(div).volidateデータ選択と決定日();
         if (validationMessages.iterator().hasNext()) {
             return ResponseData.of(div).addValidationMessages(validationMessages).respond();
         }
@@ -246,7 +246,7 @@ public class JutakuKaishuhiShikyuShinseiPanel {
      */
     public ResponseData<JutakuKaishuhiShikyuShinseiPanelDiv> onClick_btnSave(JutakuKaishuhiShikyuShinseiPanelDiv div) {
         ValidationMessageControlPairs validationMessages = new JutakuKaishuhiShikyuShinseiPanelVlaidationHandler(div)
-                .volidateデータ選択と未審査();
+                .volidateデータ選択と未審査と決定日();
         if (validationMessages.iterator().hasNext()) {
             return ResponseData.of(div).addValidationMessages(validationMessages).respond();
         }

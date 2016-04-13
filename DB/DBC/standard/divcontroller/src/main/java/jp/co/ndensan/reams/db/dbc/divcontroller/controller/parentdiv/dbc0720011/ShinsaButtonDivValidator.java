@@ -39,6 +39,8 @@ public class ShinsaButtonDivValidator implements IValidatable {
                 .thenAdd(JutakuKaishuhiShikyuShinseiErrorMessages.データ選択のチェック)
                 .ifNot(JutakuKaishuhiShikyuShinseiPanelSpec.未審査のチェック)
                 .thenAdd(JutakuKaishuhiShikyuShinseiErrorMessages.未審査のチェック)
+                .ifNot(JutakuKaishuhiShikyuShinseiPanelSpec.決定日のチェック)
+                .thenAdd(JutakuKaishuhiShikyuShinseiErrorMessages.決定日のチェック)
                 .messages());
         return messages;
     }

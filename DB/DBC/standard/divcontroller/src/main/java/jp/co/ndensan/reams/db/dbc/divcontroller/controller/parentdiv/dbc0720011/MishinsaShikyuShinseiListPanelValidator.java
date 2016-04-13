@@ -37,6 +37,8 @@ public class MishinsaShikyuShinseiListPanelValidator implements IValidatable {
         messages.add(ValidateChain.validateStart(div)
                 .ifNot(JutakuKaishuhiShikyuShinseiPanelSpec.データ選択のチェック)
                 .thenAdd(JutakuKaishuhiShikyuShinseiErrorMessages.データ選択のチェック)
+                .ifNot(JutakuKaishuhiShikyuShinseiPanelSpec.決定日のチェック)
+                .thenAdd(JutakuKaishuhiShikyuShinseiErrorMessages.決定日のチェック)
                 .messages());
         return messages;
     }

@@ -42,5 +42,12 @@ public enum JutakuKaishuhiShikyuShinseiPanelSpec implements IPredicate<JutakuKai
                     return MishinsaShikyuShinseiListHandler.is未審査(div);
                 }
 
+            },
+    決定日のチェック {
+                @Override
+                public boolean apply(JutakuKaishuhiShikyuShinseiPanelDiv div) {
+                    return MishinsaShikyuShinseiListHandler.is決定日入力(div);
+                }
+
             }
 }
