@@ -305,6 +305,14 @@ public class RoreiFukushiNenkinShokaiDiv extends Panel implements IRoreiFukushiN
             getService().save老齢福祉年金受給者(roreiFukushiNenkinJukyusha.get(id));
         }
     }
+    
+    /**
+     * 老福年金情報を取得します。
+     * @return List<datagridRireki_Row>
+     */
+    public List<datagridRireki_Row> getgetDataGridList() {
+        return this.getDatagridRireki().getDataSource();
+    }
 
     private RoreiFukushiNenkinShokaiHandler getHandler(RoreiFukushiNenkinShokaiDiv div) {
         return new RoreiFukushiNenkinShokaiHandler(div);
