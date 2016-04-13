@@ -13,11 +13,11 @@ import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.kaigoatena
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 
 /**
- * MainPanel のクラスファイル
+ * ShotokuJohoShokai のクラスファイル
  *
  * @reamsid_L DBB-1740-010 xuhao
  */
-public class MainPanelDiv extends Panel {
+public class ShotokuJohoShokaiDiv extends Panel {
 
     // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
     /*

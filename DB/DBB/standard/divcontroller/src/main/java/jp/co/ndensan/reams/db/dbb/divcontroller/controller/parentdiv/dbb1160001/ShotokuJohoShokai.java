@@ -5,7 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbb.divcontroller.controller.parentdiv.dbb1160001;
 
-import jp.co.ndensan.reams.db.dbb.divcontroller.entity.parentdiv.DBB1160001.MainPanelDiv;
+import jp.co.ndensan.reams.db.dbb.divcontroller.entity.parentdiv.DBB1160001.ShotokuJohoShokaiDiv;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.TsuchishoNo;
 import jp.co.ndensan.reams.db.dbz.business.searchkey.KaigoFukaKihonSearchKey;
@@ -30,7 +30,7 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
  *
  * @reamsid_L DBB-1740-010 xuhao
  */
-public class MainPanel {
+public class ShotokuJohoShokai {
 
     /**
      * 所得情報照会onLoad
@@ -38,7 +38,7 @@ public class MainPanel {
      * @param div MainPanelDiv
      * @return div
      */
-    public ResponseData<MainPanelDiv> onLoad(MainPanelDiv div) {
+    public ResponseData<ShotokuJohoShokaiDiv> onLoad(ShotokuJohoShokaiDiv div) {
         FukaTaishoshaKey viewStateData = ViewStateHolder.get(ViewStateKey.賦課対象者, FukaTaishoshaKey.class);
         TsuchishoNo 通知書番号 = viewStateData.get通知書番号();
         FlexibleYear 賦課年度 = viewStateData.get賦課年度();
