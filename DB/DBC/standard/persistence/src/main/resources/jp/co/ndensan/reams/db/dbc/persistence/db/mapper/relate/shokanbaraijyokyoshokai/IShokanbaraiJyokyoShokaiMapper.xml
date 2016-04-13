@@ -98,7 +98,7 @@
                autoMapping="true">
         <id column="dbT3039ShokanMeisai_hiHokenshaNo"/>
         <id column="dbT3039ShokanMeisai_serviceTeikyoYM"/>
-        <id column="dbT3039ShokanMeisai_seiriNp"/>
+        <id column="dbT3039ShokanMeisai_seiriNo"/>
         <id column="dbT3039ShokanMeisai_jigyoshaNo"/>
         <id column="dbT3039ShokanMeisai_yoshikiNo"/>
         <id column="dbT3039ShokanMeisai_meisaiNo"/>
@@ -152,7 +152,7 @@
         WHERE
         SHOKANMEISAI."dbT3039ShokanMeisai_serviceTeikyoYM" = #{serviceTeikyoYM}
         AND SHOKANMEISAI."dbT3039ShokanMeisai_hiHokenshaNo" = #{hiHokenshaNo}
-        AND SHOKANMEISAI."dbT3039ShokanMeisai_seiriNp" = #{seiriNo}
+        AND SHOKANMEISAI."dbT3039ShokanMeisai_seiriNo" = #{seiriNo}
         AND SHOKANMEISAI."dbT3039ShokanMeisai_jigyoshaNo" = #{jigyoshaNo}
         AND SHOKANMEISAI."dbT3039ShokanMeisai_yoshikiNo" = #{yoshikiNo}
         AND SHOKANMEISAI."dbT3039ShokanMeisai_meisaiNo" = #{meisaiNo}
@@ -171,7 +171,7 @@
                autoMapping="true">
         <id column="dbT3107ShokanMeisaiJushochiTokurei_hiHokenshaNo"/>
         <id column="dbT3107ShokanMeisaiJushochiTokurei_serviceTeikyoYM"/>
-        <id column="dbT3107ShokanMeisaiJushochiTokurei_seiriNp"/>
+        <id column="dbT3107ShokanMeisaiJushochiTokurei_seiriNo"/>
         <id column="dbT3107ShokanMeisaiJushochiTokurei_jigyoshaNo"/>
         <id column="dbT3107ShokanMeisaiJushochiTokurei_yoshikiNo"/>
         <id column="dbT3107ShokanMeisaiJushochiTokurei_meisaiNo"/>
@@ -232,7 +232,7 @@
         WHERE
         SHOKANMEISAIJUSHOCHITOKUREI."dbT3107ShokanMeisaiJushochiTokurei_serviceTeikyoYM" = #{serviceTeikyoYM}
         AND SHOKANMEISAIJUSHOCHITOKUREI."dbT3107ShokanMeisaiJushochiTokurei_hiHokenshaNo" = #{hiHokenshaNo}
-        AND SHOKANMEISAIJUSHOCHITOKUREI."dbT3107ShokanMeisaiJushochiTokurei_seiriNp" = #{seiriNo}
+        AND SHOKANMEISAIJUSHOCHITOKUREI."dbT3107ShokanMeisaiJushochiTokurei_seiriNo" = #{seiriNo}
         AND SHOKANMEISAIJUSHOCHITOKUREI."dbT3107ShokanMeisaiJushochiTokurei_jigyoshaNo" = #{jigyoshaNo}
         AND SHOKANMEISAIJUSHOCHITOKUREI."dbT3107ShokanMeisaiJushochiTokurei_yoshikiNo" = #{yoshikiNo}
         AND SHOKANMEISAIJUSHOCHITOKUREI."dbT3107ShokanMeisaiJushochiTokurei_meisaiNo" = #{meisaiNo}
@@ -248,7 +248,7 @@
                autoMapping="true">
         <id column="dbT3047ShokanServicePlan200904_hiHokenshaNo"/>
         <id column="dbT3047ShokanServicePlan200904_serviceTeikyoYM"/>
-        <id column="dbT3047ShokanServicePlan200904_seiriNp"/>
+        <id column="dbT3047ShokanServicePlan200904_seiriNo"/>
         <id column="dbT3047ShokanServicePlan200904_jigyoshaNo"/>
         <id column="dbT3047ShokanServicePlan200904_yoshikiNo"/>
         <id column="dbT3047ShokanServicePlan200904_meisaiNo"/>
@@ -318,7 +318,7 @@
                 autoMapping="true">
         <id column="dbT3046ShokanServicePlan200604_hiHokenshaNo"/>
         <id column="dbT3046ShokanServicePlan200604_serviceTeikyoYM"/>
-        <id column="dbT3046ShokanServicePlan200604_seiriNp"/>
+        <id column="dbT3046ShokanServicePlan200604_seiriNo"/>
         <id column="dbT3046ShokanServicePlan200604_jigyoshaNo"/>
         <id column="dbT3046ShokanServicePlan200604_yoshikiNo"/>
         <id column="dbT3046ShokanServicePlan200604_meisaiNo"/>
