@@ -23,6 +23,7 @@ import jp.co.ndensan.reams.db.dbx.business.core.kaigojigyosha.kaigojigyoshadaihy
 import jp.co.ndensan.reams.db.dbx.business.core.kaigojigyosha.kaigojigyoshadaihyosha.KaigoJigyoshaDaihyoshaBuilder;
 import jp.co.ndensan.reams.db.dbx.business.core.kaigojigyosha.kaigojigyoshadaihyosha.KaigoJigyoshaDaihyoshaIdentifier;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
+import jp.co.ndensan.reams.db.dbz.business.core.jigyosha.JigyoshaMode;
 import jp.co.ndensan.reams.db.dbz.divcontroller.viewbox.ViewStateKeys;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrInformationMessages;
@@ -66,7 +67,12 @@ public class JigyoshaTouroku {
      * @return ResponseData<JigyoshaToutokuDiv> 事業者登録Div
      */
     public ResponseData<JigyoshaToutokuDiv> onLoad(JigyoshaToutokuDiv div) {
-        RString 初期_状態 = ViewStateHolder.get(ViewStateKeys.事業者登録_画面状態, RString.class);
+        JigyoshaMode jigyoshaMode = ViewStateHolder.get(ViewStateKeys.介護事業者_介護事業者情報, JigyoshaMode.class);
+        ViewStateHolder.put(ViewStateKeys.介護事業者_状態, new RString("修正"));
+        ViewStateHolder.put(ViewStateKeys.事業者登録_事業者番号, jigyoshaMode.getJigyoshaNo().getColumnValue());
+        ViewStateHolder.put(ViewStateKeys.事業者登録_事業者種類コード, jigyoshaMode.getJigyoshaShubetsu());
+        ViewStateHolder.put(ViewStateKeys.事業者登録_有効開始日, new FlexibleDate(jigyoshaMode.getYukoKaishiYMD()));
+        RString 初期_状態 = ViewStateHolder.get(ViewStateKeys.介護事業者_状態, RString.class);
         RString 事業者番号 = ViewStateHolder.get(ViewStateKeys.事業者登録_事業者番号, RString.class);
         FlexibleDate 有効開始日 = ViewStateHolder.get(ViewStateKeys.事業者登録_有効開始日, FlexibleDate.class);
         事業者登録パラメータ = KaigoJigyoshaShisetsuKanriMapperParameter.createParam(
@@ -192,7 +198,7 @@ public class JigyoshaTouroku {
      * @return ResponseData<JigyoshaToutokuDiv> 事業者登録Div
      */
     public ResponseData<JigyoshaToutokuDiv> onClick_btnSave(JigyoshaToutokuDiv div) {
-        RString 初期_状態 = ViewStateHolder.get(ViewStateKeys.事業者登録_画面状態, RString.class);
+        RString 初期_状態 = ViewStateHolder.get(ViewStateKeys.介護事業者_状態, RString.class);
         RString 事業者番号 = ViewStateHolder.get(ViewStateKeys.事業者登録_事業者番号, RString.class);
         FlexibleDate 有効開始日 = ViewStateHolder.get(ViewStateKeys.事業者登録_有効開始日, FlexibleDate.class);
         if (初期_状態.equals(状態_追加)) {
