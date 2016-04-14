@@ -45,9 +45,9 @@ public class YoshikiYonnosan {
     public ResponseData<YoshikiYonnosanDiv> onload(YoshikiYonnosanDiv div) {
         KaigoHokenTokubetuKaikeiKeiriJyokyoRegist3Handler handler = getHandler(div);
         handler.onload();
-        if (画面表示_追加.equals(handler.get画面表示())) {
+        if (画面表示_追加.equals(div.getGamenMode())) {
             return ResponseData.of(div).setState(DBU0050041StateName.追加状態);
-        } else if (画面表示_修正.equals(handler.get画面表示())) {
+        } else if (画面表示_修正.equals(div.getGamenMode())) {
             return ResponseData.of(div).setState(DBU0050041StateName.修正状態);
         } else {
             return ResponseData.of(div).setState(DBU0050041StateName.削除状態);
@@ -84,7 +84,7 @@ public class YoshikiYonnosan {
     private ResponseData<YoshikiYonnosanDiv> getResponseData_btnYoshikiyonno(
             YoshikiYonnosanDiv div) {
         KaigoHokenTokubetuKaikeiKeiriJyokyoRegist3Handler handler = getHandler(div);
-        RString 内部処理モード = handler.get内部処理モード();
+        RString 内部処理モード = div.getShoriMode();
         QuestionMessage message = new QuestionMessage(
                 UrQuestionMessages.入力内容の破棄.getMessage().getCode(), UrQuestionMessages.入力内容の破棄.getMessage().evaluate());
         if (内部処理モード_修正新規.equals(内部処理モード)
@@ -131,7 +131,7 @@ public class YoshikiYonnosan {
     private ResponseData<YoshikiYonnosanDiv> getResponseData_btnYoshikiyonnoni(
             YoshikiYonnosanDiv div) {
         KaigoHokenTokubetuKaikeiKeiriJyokyoRegist3Handler handler = getHandler(div);
-        RString 内部処理モード = handler.get内部処理モード();
+        RString 内部処理モード = div.getShoriMode();
         QuestionMessage message = new QuestionMessage(
                 UrQuestionMessages.入力内容の破棄.getMessage().getCode(), UrQuestionMessages.入力内容の破棄.getMessage().evaluate());
         if (内部処理モード_修正新規.equals(内部処理モード)
@@ -214,7 +214,7 @@ public class YoshikiYonnosan {
     private ResponseData<YoshikiYonnosanDiv> getResponseData_btnModUpdate(
             YoshikiYonnosanDiv div) {
         KaigoHokenTokubetuKaikeiKeiriJyokyoRegist3Handler handler = getHandler(div);
-        RString 内部処理モード = handler.get内部処理モード();
+        RString 内部処理モード = div.getShoriMode();
         QuestionMessage message = new QuestionMessage(
                 UrQuestionMessages.入力内容の破棄.getMessage().getCode(), UrQuestionMessages.入力内容の破棄.getMessage().evaluate());
         if (内部処理モード_修正新規.equals(内部処理モード)) {
@@ -259,7 +259,7 @@ public class YoshikiYonnosan {
 
     private ResponseData<YoshikiYonnosanDiv> throwException_btnSave(YoshikiYonnosanDiv div) {
         KaigoHokenTokubetuKaikeiKeiriJyokyoRegist3Handler handler = getHandler(div);
-        RString 内部処理モード = handler.get内部処理モード();
+        RString 内部処理モード = div.getShoriMode();
         ApplicationException exception = null;
         if (内部処理モード_修正新規.equals(内部処理モード)
                 || 内部処理モード_追加.equals(内部処理モード)) {

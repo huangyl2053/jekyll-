@@ -49,12 +49,10 @@ public class KaigoHokenTokubetuKaikeiKeiriJyokyoRegist1Handler {
     private static final RString DELETE = new RString("delete");
     private static final RString ADD = new RString("add");
     private static final RString 入力未 = new RString("入力未");
-    private RString 内部処理モード;
     private final RString 内部処理モード_修正追加 = new RString("修正追加");
     private final RString 内部処理モード_修正 = new RString("修正");
     private final RString 内部処理モード_削除 = new RString("削除");
     private final RString 内部処理モード_追加 = new RString("追加");
-    private RString 画面表示;
     private final RString 画面表示_修正 = new RString("修正");
     private final RString 画面表示_削除 = new RString("削除");
     private final RString 画面表示_追加 = new RString("追加");
@@ -92,7 +90,7 @@ public class KaigoHokenTokubetuKaikeiKeiriJyokyoRegist1Handler {
     private final RString その他_国庫支出金横縦番号 = new RString("10_1");
     private final RString 介護予防事業費横縦番号 = new RString("10_2");
     private final RString 介護給付費交付金横縦番号 = new RString("11_1");
-    private final RString 包括的支援事業_任意事業_地域支援事業横縦番号 = new RString("112");
+    private final RString 包括的支援事業_任意事業_地域支援事業横縦番号 = new RString("11_2");
     private final RString 地域支援事業支援交付金横縦番号 = new RString("12_1");
     private final RString 財政安定化基金拠出金横縦番号 = new RString("12_2");
     private final RString 都道府県負担金横縦番号 = new RString("13_1");
@@ -139,24 +137,6 @@ public class KaigoHokenTokubetuKaikeiKeiriJyokyoRegist1Handler {
     }
 
     /**
-     * 内部処理モードの取得処理です。
-     *
-     * @return 内部処理モード
-     */
-    public RString get内部処理モード() {
-        return 内部処理モード;
-    }
-
-    /**
-     * 画面表示の取得処理です。
-     *
-     * @return 画面表示
-     */
-    public RString get画面表示() {
-        return 画面表示;
-    }
-
-    /**
      * 画面初期化処理です。
      */
     public void onload() {
@@ -183,8 +163,8 @@ public class KaigoHokenTokubetuKaikeiKeiriJyokyoRegist1Handler {
             div.getHihokenshabango().getYoshikiyonMeisai().getDdlShicyoson().setDisabled(true);
             div.getHihokenshabango().getYoshikiyonMeisai().getDdlShicyoson().setSelectedIndex(0);
             div.getHihokenshabango().getYoshikiyonMeisai().getBtnHoukokuNenKT().setDisabled(false);
-            内部処理モード = 内部処理モード_追加;
-            画面表示 = 画面表示_追加;
+            div.setShoriMode(内部処理モード_追加);
+            div.setGamenMode(画面表示_追加);
             詳細データエリ表示(null, 状態1);
         }
     }
@@ -223,8 +203,8 @@ public class KaigoHokenTokubetuKaikeiKeiriJyokyoRegist1Handler {
             div.getHihokenshabango().getBtnYoshikiyon().setDisabled(true);
             div.getHihokenshabango().getBntYoskiyonosan().setDisabled(false);
             div.getHihokenshabango().getBtnYoshikiyonnoni().setDisabled(false);
-            内部処理モード = 内部処理モード_修正;
-            画面表示 = 画面表示_修正;
+            div.setShoriMode(内部処理モード_修正);
+            div.setGamenMode(画面表示_修正);
         } else {
             詳細データエリ表示(詳細データ, 状態3);
             div.getCcdKanryoMessage().setDisplayNone(true);
@@ -233,15 +213,15 @@ public class KaigoHokenTokubetuKaikeiKeiriJyokyoRegist1Handler {
                     .setDisabled(入力未.equals(insuranceInf.get様式４の２入力状況()));
             div.getHihokenshabango().getBntYoskiyonosan()
                     .setDisabled(入力未.equals(insuranceInf.get様式４の３入力状況()));
-            内部処理モード = 内部処理モード_削除;
-            画面表示 = 画面表示_削除;
+            div.setShoriMode(内部処理モード_削除);
+            div.setGamenMode(画面表示_削除);
         }
     }
 
     private void onload内部処理モードが修正追加(InsuranceInformation insuranceInf) {
         TextBoxFlexibleDate 報告年度Box = div.getHihokenshabango().getYoshikiyonMeisai().getTxthokokuYM();
         if (!(DELETE.equals(insuranceInf.get処理フラグ()))) {
-            内部処理モード = 内部処理モード_修正追加;
+            div.setShoriMode(内部処理モード_修正追加);
         }
         報告年度Box.setValue(new FlexibleDate(insuranceInf.get報告年().getYearValue(), 1, 1));
         報告年度Box.setReadOnly(true);
@@ -305,19 +285,19 @@ public class KaigoHokenTokubetuKaikeiKeiriJyokyoRegist1Handler {
         KaigoHokenTokubetuKaikeiKeiriJyokyoRegistManager 介護保険特別会計経理状況登録Manager
                 = new KaigoHokenTokubetuKaikeiKeiriJyokyoRegistManager();
         List<KaigoHokenJigyoHokokuNenpo> 画面入力データLst = new ArrayList<>();
-        if (内部処理モード_追加.equals(内部処理モード)) {
+        if (内部処理モード_追加.equals(div.getShoriMode())) {
             KaigoHokenJigyoHokokuNenpo 画面入力データ = get画面入力データ();
             画面入力データLst.add(画面入力データ);
             介護保険特別会計経理状況登録Manager.regKaigoHokenTokubetuKaikeiKeiriJyokyo(画面入力データLst);
-        } else if (内部処理モード_修正.equals(内部処理モード)) {
+        } else if (内部処理モード_修正.equals(div.getShoriMode())) {
             KaigoHokenJigyoHokokuNenpo 修正データ = get修正データ();
             画面入力データLst.add(修正データ);
             介護保険特別会計経理状況登録Manager.updKaigoHokenTokubetuKaikeiKeiriJyokyo(画面入力データLst);
-        } else if (内部処理モード_修正追加.equals(内部処理モード)) {
+        } else if (内部処理モード_修正追加.equals(div.getShoriMode())) {
             KaigoHokenJigyoHokokuNenpo 画面入力データ = get画面入力データ();
             画面入力データLst.add(画面入力データ);
             介護保険特別会計経理状況登録Manager.regUpdKaigoHokenTokubetuKaikeiKeiriJyokyo(画面入力データLst);
-        } else if (内部処理モード_削除.equals(内部処理モード)) {
+        } else if (内部処理モード_削除.equals(div.getShoriMode())) {
             InsuranceInformation insuranceInf = get引き継ぎデータ();
             介護保険特別会計経理状況登録Manager.delKaigoHokenTokubetuKaikeiKeiriJyokyo(
                     insuranceInf.get報告年(),

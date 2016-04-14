@@ -16,7 +16,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.TablePanel;
  * @author 自動生成
  */
 public class tplJisshitsushiharaiDiv extends TablePanel {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-01-15_09-59-03">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -242,7 +242,7 @@ public class tplJisshitsushiharaiDiv extends TablePanel {
  * @author 自動生成
  */
 class cell600AttplJisshitsushiharai extends TableCell {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-01-15_09-59-03">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
     @JsonProperty("lblshitsusainyugokei")
     private Label lblshitsusainyugokei;
 
@@ -272,7 +272,7 @@ class cell600AttplJisshitsushiharai extends TableCell {
  * @author 自動生成
  */
 class cell601AttplJisshitsushiharai extends TableCell {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-01-15_09-59-03">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
     @JsonProperty("txtshitsusainyugokei")
     private TextBoxNum txtshitsusainyugokei;
 
@@ -302,7 +302,7 @@ class cell601AttplJisshitsushiharai extends TableCell {
  * @author 自動生成
  */
 class cell603AttplJisshitsushiharai extends TableCell {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-01-15_09-59-03">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
     @JsonProperty("lblshitsusaishutsugokei")
     private Label lblshitsusaishutsugokei;
 
@@ -332,7 +332,7 @@ class cell603AttplJisshitsushiharai extends TableCell {
  * @author 自動生成
  */
 class cell604AttplJisshitsushiharai extends TableCell {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-01-15_09-59-03">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
     @JsonProperty("txtshitsusaishutsugokei")
     private TextBoxNum txtshitsusaishutsugokei;
 
@@ -362,7 +362,7 @@ class cell604AttplJisshitsushiharai extends TableCell {
  * @author 自動生成
  */
 class cell605AttplJisshitsushiharai extends TableCell {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-01-15_09-59-03">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
     @JsonProperty("lblshitsusainyusaishutsusa")
     private Label lblshitsusainyusaishutsusa;
 
@@ -392,7 +392,7 @@ class cell605AttplJisshitsushiharai extends TableCell {
  * @author 自動生成
  */
 class cell606AttplJisshitsushiharai extends TableCell {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-01-15_09-59-03">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
     @JsonProperty("txtshitsusainyusaishutsusa")
     private TextBoxNum txtshitsusainyusaishutsusa;
 
@@ -422,7 +422,7 @@ class cell606AttplJisshitsushiharai extends TableCell {
  * @author 自動生成
  */
 class cell607AttplJisshitsushiharai extends TableCell {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-01-15_09-59-03">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
     @JsonProperty("lblshitsuseisangozangaku")
     private Label lblshitsuseisangozangaku;
 
@@ -452,7 +452,7 @@ class cell607AttplJisshitsushiharai extends TableCell {
  * @author 自動生成
  */
 class cell608AttplJisshitsushiharai extends TableCell {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-01-15_09-59-03">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
     @JsonProperty("txtshitsuseisangozangaku")
     private TextBoxNum txtshitsuseisangozangaku;
 
