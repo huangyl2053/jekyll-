@@ -21,6 +21,14 @@ module DBA {
                 return "onClick_Delete";
             }
 
+            public static onBlur_Tekiyo(): string {
+                return "onBlur_Tekiyo";
+            }
+
+            public static onBlur_Kayijo(): string {
+                return "onBlur_Kayijo";
+            }
+
             public static onClick_BtnKakunin(): string {
                 return "onClick_BtnKakunin";
             }

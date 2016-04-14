@@ -16,6 +16,14 @@ var DBA;
                 return "onClick_Delete";
             };
 
+            Events.onBlur_Tekiyo = function () {
+                return "onBlur_Tekiyo";
+            };
+
+            Events.onBlur_Kayijo = function () {
+                return "onBlur_Kayijo";
+            };
+
             Events.onClick_BtnKakunin = function () {
                 return "onClick_BtnKakunin";
             };
