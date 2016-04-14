@@ -19,15 +19,16 @@ import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
 
 /**
+ * 裁決結果登録のビジネスです。
  *
- *
+ * @reamsid_L DBU-1080-120 xuyue
  */
 public class SaiketukekaToroku {
 
     private final DbT7001FufukuMoshitateDac 不服審査申立情報dac;
 
     /**
-     * SaiketukekaToroku
+     * コンストラクタです。
      */
     public SaiketukekaToroku() {
         不服審査申立情報dac = InstanceProvider.create(DbT7001FufukuMoshitateDac.class);
