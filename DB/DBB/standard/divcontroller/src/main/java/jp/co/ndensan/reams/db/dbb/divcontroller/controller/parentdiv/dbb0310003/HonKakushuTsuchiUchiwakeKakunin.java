@@ -23,7 +23,7 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 /**
  * 打ち分け方法確認のPanelクラスです。
  *
- * @reamsid_L DBC-0780-020 gongliang
+ * @reamsid_L DBB-0780-020 gongliang
  */
 public class HonKakushuTsuchiUchiwakeKakunin {
 

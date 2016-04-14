@@ -12,7 +12,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 /**
  * バッチ出力帳票一覧Entityクラスです。
  *
- * @reamsid_L DBC-0710-020 gongliang
+ * @reamsid_L DBB-0710-020 gongliang
  */
 @lombok.Getter
 @lombok.Setter

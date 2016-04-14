@@ -12,7 +12,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 /**
  * HonKakushuTsuchiUchiwakeSentaku のクラスファイル
  *
- * @reamsid_L DBC-0780-020 gongliang
+ * @reamsid_L DBB-0780-020 gongliang
  */
 public class HonKakushuTsuchiUchiwakeSentakuDiv extends Panel {
 
