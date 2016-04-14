@@ -65,7 +65,7 @@ public class KyokaisoGaitoshaPanel {
         RString 状態 = ViewStateHolder.get(ViewStateKeys.境界層該当者台帳管理_状態, RString.class);
         HihokenshaNo 被保険者番号 = ViewStateHolder.get(ViewStateKeys.境界層該当者台帳管理_被保険者番号, HihokenshaNo.class);
         div.getCcdKaigoAtena().onLoad(ViewStateHolder.get(ViewStateKeys.境界層該当者台帳管理_識別コード, ShikibetsuCode.class));
-        div.getCcdKaigoShikakuKihon().initialize(被保険者番号);
+        div.getCcdKaigoShikakuKihon().onLoad(被保険者番号);
         List<KyokaisoGaitoshaJoho> 境界層該当一覧情報
                 = KyokaisoGaitoshaManager.createInstance().getKyokaisoGaitoshaJohoList(被保険者番号).records();
         if (境界層該当一覧情報 == null || 境界層該当一覧情報.isEmpty()) {

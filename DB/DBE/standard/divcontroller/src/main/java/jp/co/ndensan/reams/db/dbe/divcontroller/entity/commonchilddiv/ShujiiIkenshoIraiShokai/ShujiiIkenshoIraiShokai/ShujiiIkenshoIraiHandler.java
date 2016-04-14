@@ -41,7 +41,7 @@ public class ShujiiIkenshoIraiHandler {
      */
     public void initialize() {
         HihokenshaNo hihokenshano = new HihokenshaNo(div.getHihokenshano());
-        div.getCcdKaigoShikakuKihon().initialize(hihokenshano);
+        div.getCcdKaigoShikakuKihon().onLoad(hihokenshano);
         ShujiiIkenshoIraiShokaiFinder finder = ShujiiIkenshoIraiShokaiFinder.createInstance();
         List<ShujiiIkenshoIraiBusiness> 認定調査情報 = finder.getNinnteiChousa(hihokenshano).records();
         init(認定調査情報);

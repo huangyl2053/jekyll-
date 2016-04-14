@@ -38,7 +38,7 @@ public class DBU0130011Main {
                 ViewStateHolder.get(ViewStateKeys.老人保健受給者台帳管理_識別コード, ShikibetsuCode.class)));
         // TODO 宛名基本情報実装しない
         //div.getAtenaAreaPanel().getCcdKaigoAtenaInfo().load(ViewStateHolder.get(ViewStateKeys.老人保健受給者台帳管理_識別コード, ShikibetsuCode.class));
-        div.getAtenaAreaPanel().getCcdKaigoShikakuKihon().initialize(ViewStateHolder.get(ViewStateKeys.老人保健受給者台帳管理_被保険者番号, HihokenshaNo.class));
+        div.getAtenaAreaPanel().getCcdKaigoShikakuKihon().onLoad(ViewStateHolder.get(ViewStateKeys.老人保健受給者台帳管理_被保険者番号, HihokenshaNo.class));
         return ResponseData.of(div).respond();
     }
 

@@ -48,7 +48,7 @@ public class NinteiChosaIraiShokaiHandler {
      * @param 被保険者番号 被保険者番号
      */
     public void load(List<NinteiChosaIraiShokaiMaster> ninteiChosaList, HihokenshaNo 被保険者番号) {
-        div.getCcdKaigoShikakuKihon().initialize(被保険者番号);
+        div.getCcdKaigoShikakuKihon().onLoad(被保険者番号);
         List<dgNinteiChosaIrai_Row> rowList = new ArrayList<>();
         int no = 1;
         for (NinteiChosaIraiShokaiMaster entity : ninteiChosaList) {
