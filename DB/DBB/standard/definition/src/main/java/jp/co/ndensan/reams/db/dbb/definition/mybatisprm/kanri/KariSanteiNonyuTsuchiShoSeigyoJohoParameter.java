@@ -13,6 +13,8 @@ import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 /**
  *
  * 納入通知書制御情報取得するためのMyBatis用パラメータクラスです。
+ *
+ * @reamsid_L DBB-9110-011 wangjie2
  */
 @lombok.Getter
 @SuppressWarnings("PMD.UnusedPrivateField")

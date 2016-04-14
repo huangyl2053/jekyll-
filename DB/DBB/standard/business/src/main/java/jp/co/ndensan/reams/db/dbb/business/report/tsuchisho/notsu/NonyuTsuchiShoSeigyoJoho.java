@@ -27,6 +27,8 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 /**
  *
  * 納入通知書制御情報です。
+ *
+ * @reamsid_L DBB-9110-011 wangjie2
  */
 @lombok.Getter
 @lombok.Setter

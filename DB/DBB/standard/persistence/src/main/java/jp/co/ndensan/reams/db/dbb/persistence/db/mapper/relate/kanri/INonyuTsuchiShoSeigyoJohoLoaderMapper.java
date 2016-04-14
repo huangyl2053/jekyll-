@@ -12,6 +12,8 @@ import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7067ChohyoSeigyoHanyoEntity
 /**
  *
  * 納入通知書制御情報取得のマッパーインタフェースです。
+ *
+ * @reamsid_L DBB-9110-011 wangjie2
  */
 public interface INonyuTsuchiShoSeigyoJohoLoaderMapper {
 

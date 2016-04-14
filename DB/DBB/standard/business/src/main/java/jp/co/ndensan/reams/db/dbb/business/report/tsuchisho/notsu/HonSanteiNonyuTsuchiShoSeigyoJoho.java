@@ -10,6 +10,8 @@ import jp.co.ndensan.reams.db.dbb.definition.core.tsuchisho.notsu.KanendoMongon;
 /**
  *
  * 本算定納入通知書制御情報です。
+ *
+ * @reamsid_L DBB-9110-011 wangjie2
  */
 @lombok.Getter
 @lombok.Setter
