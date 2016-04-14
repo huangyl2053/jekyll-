@@ -10,6 +10,8 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
  * 住宅改修申請区分を表す列挙型です。
+ *
+ * @reamsid_L DBC-0992-100 yebangqiang
  */
 public enum JutakukaishuShinseiKubun {
 

@@ -40,7 +40,7 @@ public class JigyoshaShisetsuKanri {
      * @return ResponseData<JigyoshaNyuryokuGuideDiv> 施設管理Div
      */
     public ResponseData<JigyoshaShisetsuKanriDiv> onLoad(JigyoshaShisetsuKanriDiv div) {
-        ViewStateHolder.put(ViewStateKeys.事業者施設選択入力ガイド_モード, 修正);
+        //ViewStateHolder.put(ViewStateKeys.事業者施設選択入力ガイド_モード, 修正);
         JigyoshaMode mode = new JigyoshaMode();
         div.getJigyoshaShurui().getRadJigyoshaShurui().setSelectedKey(サービス事業者モード);
         mode.setJigyoshaShubetsu(div.getJigyoshaShurui().getRadJigyoshaShurui().getSelectedKey());

@@ -10,7 +10,7 @@
         <association property="介護期別" resultMap="jp.co.ndensan.reams.db.dbb.persistence.db.mapper.basic.IDbT2003KibetsuMapper.ResultMap_DbT2003KibetsuEntity"/>
         <association property="調定共通介護継承" resultMap="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IUrT0705ChoteiKyotsuMapper.ResultMap_UrT0705ChoteiKyotsuEntity"/>
         <association property="介護徴収方法" resultMap="jp.co.ndensan.reams.db.dbb.persistence.db.mapper.basic.IDbT2001ChoshuHohoMapper.ResultMap_DbT2001ChoshuHohoEntity"/>
-        <association property="収入情報取得PSM" resultMap="jp.co.ndensan.reams.ca.cax.persistence.db.mapper.ICaFt702FindTotalShunyuFunctionMapper.totalShunyuResult"/>
+        <association property="収入情報取得PSM" resultMap="jp.co.ndensan.reams.ca.cax.persistence.db.mapper.psm.ICaFt702FindTotalShunyuFunctionMapper.totalShunyuResult"/>
         <association property="宛名" resultMap="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.shikibetsuTaishoResult"/>
     </resultMap>
     
@@ -21,7 +21,7 @@
             <include refid="jp.co.ndensan.reams.db.dbb.persistence.db.mapper.basic.IDbT2003KibetsuMapper.allColumns_DbT2003Kibetsu"/>,
             <include refid="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IUrT0705ChoteiKyotsuMapper.allColumns_UrT0705ChoteiKyotsu"/>,
             <include refid="jp.co.ndensan.reams.db.dbb.persistence.db.mapper.basic.IDbT2001ChoshuHohoMapper.allColumns_DbT2001ChoshuHoho"/>,
-            <include refid="jp.co.ndensan.reams.ca.cax.persistence.db.mapper.ICaFt702FindTotalShunyuFunctionMapper.columns_TotalShunyu"/>,
+            <include refid="jp.co.ndensan.reams.ca.cax.persistence.db.mapper.psm.ICaFt702FindTotalShunyuFunctionMapper.columns_TotalShunyu"/>,
             <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.columns_ShikibetsuTaisho"/>
         FROM
             rgdb."DbT2002Fuka" AS "DbT2002Fuka"

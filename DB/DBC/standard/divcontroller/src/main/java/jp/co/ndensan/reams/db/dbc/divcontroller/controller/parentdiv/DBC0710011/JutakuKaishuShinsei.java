@@ -20,6 +20,8 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 
 /**
  * 住宅改修費支給申請クラスです
+ *
+ * @reamsid_L DBC-0992-100 yebangqiang
  */
 public class JutakuKaishuShinsei {
 

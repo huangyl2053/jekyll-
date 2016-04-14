@@ -9,6 +9,7 @@ import java.util.List;
 import jp.co.ndensan.reams.db.dba.definition.mybatisprm.kaigojigyoshashisetsukanrio.KaigoJigyoshaParameter;
 import jp.co.ndensan.reams.db.dba.definition.mybatisprm.kaigojigyoshashisetsukanrio.KaigoJogaiTokureiParameter;
 import jp.co.ndensan.reams.db.dba.divcontroller.entity.parentdiv.DBA2010012.DBA2010012StateName;
+import jp.co.ndensan.reams.db.dba.divcontroller.entity.parentdiv.DBA2010012.DBA2010012TransitionEventName;
 import jp.co.ndensan.reams.db.dba.divcontroller.entity.parentdiv.DBA2010012.ShisetsutourukuPanelDiv;
 import jp.co.ndensan.reams.db.dba.divcontroller.handler.parentdiv.DBA2010012.ShisetsutourukuPanelHandler;
 import jp.co.ndensan.reams.db.dba.service.core.kaigojigyoshashisetsukanri.KaigoJigyoshaShisetsuKanriManager;
@@ -166,7 +167,7 @@ public class ShisetsutourukuPanel {
         }
         if (new RString(UrQuestionMessages.検索画面遷移の確認.getMessage().getCode()).equals(ResponseHolder.getMessageCode())
                 && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
-            return ResponseData.of(div).respond();
+            return ResponseData.of(div).forwardWithEventName(DBA2010012TransitionEventName.再検索).respond();
         }
         return ResponseData.of(div).respond();
     }

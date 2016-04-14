@@ -249,7 +249,7 @@ public class TaJushochiTokureishaKanriHandler {
         if (rowList != null && !rowList.isEmpty()) {
             最大枝番 = rowList.get(0).getEdaNo();
             最新履歴番号 = rowList.get(0).getRirekiNo();
-            int intEdaNoMax = Integer.parseInt(最大枝番.toString());
+            int intEdaNoMax = Integer.parseInt(最大枝番.toString().trim());
             int rirekiNoMax = Integer.parseInt(最新履歴番号.toString());
             枝番 = new RString(String.valueOf(intEdaNoMax + 1));
             履歴番号 = new RString(String.valueOf(rirekiNoMax + 1));
@@ -417,16 +417,24 @@ public class TaJushochiTokureishaKanriHandler {
                 = ViewStateHolder.get(jp.co.ndensan.reams.db.dbz.divcontroller.viewbox.ViewStateKeys.他住所地特例者管理_他住所地特例, Models.class);
         Models<ShisetsuNyutaishoIdentifier, ShisetsuNyutaisho> 保険施設入退所Model
                 = ViewStateHolder.get(jp.co.ndensan.reams.db.dbz.divcontroller.viewbox.ViewStateKeys.他住所地特例者管理_保険施設入退所, Models.class);
-        RString 枝番;
+        RString 枝番 = new RString("1");
+        RString 最大枝番 = new RString("0");
+        RString 履歴番号 = new RString("1");
+        int 番号 = 1;
         for (dgJushochiTokureiRireki_Row row : rowList) {
-            RString 最大枝番 = rowList.get(0).getEdaNo();
-            RString 履歴番号 = rowList.get(0).getRirekiNo();
+            if (番号 == 1) {
+                最大枝番 = rowList.get(0).getEdaNo();
+                履歴番号 = rowList.get(0).getRirekiNo();
+            } else {
+                int intEdaNoMax = Integer.parseInt(最大枝番.toString().trim());
+                枝番 = new RString(String.valueOf(intEdaNoMax + 1));
+                最大枝番 = 枝番;
+            }
             FlexibleDate 異動日 = new FlexibleDate(row.getIdoYMD());
-            int intEdaNoMax = Integer.parseInt(最大枝番.toString());
-            枝番 = new RString(String.valueOf(intEdaNoMax + 1));
-            if (intEdaNoMax == 1) {
+            if (new RString("1").equals(枝番) && 番号 == 1) {
                 枝番 = new RString("1");
             }
+            番号++;
             if (row.getRowState() == null) {
                 continue;
             }
@@ -435,6 +443,8 @@ public class TaJushochiTokureishaKanriHandler {
                         = new TashichosonJushochiTokureiIdentifier(識別コード, new FlexibleDate(row.getKaijoYMD().getValue().toString()), 枝番);
                 TaJushochiTokureisyaKanriManager.createInstance().regTaJushochiTokurei(set他住所地特例(他住所地特例Model.get(住所地特例の識別子), row).toEntity());
             } else if (RowState.Modified.equals(row.getRowState())) {
+                int intEdaNoMax = Integer.parseInt(最大枝番.toString().trim());
+                枝番 = new RString(String.valueOf(intEdaNoMax + 1));
                 TashichosonJushochiTokureiIdentifier 更新前住所地特例の識別子
                         = new TashichosonJushochiTokureiIdentifier(識別コード, 異動日, row.getEdaNo());
                 TaJushochiTokureisyaKanriManager.createInstance().delTaJushochiTokurei(他住所地特例Model.get(更新前住所地特例の識別子).

@@ -160,20 +160,24 @@ public class KaigoJigyoshaShisetsuKanriManager {
     @Transaction
     public SearchResult<KaigoJogaiTokureiBusiness> getServiceItiranJoho(KaigoJogaiTokureiParameter parameter) {
 
-        List<KaigoJogaiTokureiBusiness> serviceShuruiList = new ArrayList<>();
+        List<KaigoJogaiTokureiBusiness> serviceShuruiList = new ArrayList();
         IKaigoJigyoshaShisetsuKanriMapper iKaigoJigyoshaShisetsuKanri = mapperProvider.create(IKaigoJigyoshaShisetsuKanriMapper.class);
         List<KaigoJogaiTokureiRelateEntity> サービス一覧情報 = iKaigoJigyoshaShisetsuKanri.getServiceItiranJoho(parameter);
-        if (サービス一覧情報 == null) {
-            KaigoJogaiTokureiRelateEntity entity = new KaigoJogaiTokureiRelateEntity();
-            entity.setJigyoshaName(RString.EMPTY);
-            entity.setKanrishaName(RString.EMPTY);
-            entity.setServiceShuruiCode(RString.EMPTY);
-            entity.setYukoKaishiYMD(RString.EMPTY);
-            entity.setYukoShuryoYMD(RString.EMPTY);
-            serviceShuruiList.add(new KaigoJogaiTokureiBusiness(entity));
-        }
+
         for (KaigoJogaiTokureiRelateEntity entity : サービス一覧情報) {
-            serviceShuruiList.add(new KaigoJogaiTokureiBusiness(entity));
+            KaigoJogaiTokureiRelateEntity relateEntity = new KaigoJogaiTokureiRelateEntity();
+            KaigoJogaiTokureiBusiness business;
+            if (entity == null) {
+                relateEntity.setJigyoshaName(RString.EMPTY);
+                relateEntity.setKanrishaName(RString.EMPTY);
+                relateEntity.setServiceShuruiCode(RString.EMPTY);
+                relateEntity.setYukoKaishiYMD(RString.EMPTY);
+                relateEntity.setYukoShuryoYMD(RString.EMPTY);
+                business = new KaigoJogaiTokureiBusiness(relateEntity);
+            } else {
+                business = new KaigoJogaiTokureiBusiness(entity);
+            }
+            serviceShuruiList.add(business);
         }
         return SearchResult.of(serviceShuruiList, 0, false);
     }
