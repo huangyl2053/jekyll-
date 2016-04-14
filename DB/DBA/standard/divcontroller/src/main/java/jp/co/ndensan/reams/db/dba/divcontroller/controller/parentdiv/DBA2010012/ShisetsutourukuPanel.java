@@ -26,6 +26,7 @@ import jp.co.ndensan.reams.uz.uza.biz.TelNo;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.ApplicationException;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
+import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.message.MessageDialogSelectedResult;
 import jp.co.ndensan.reams.uz.uza.message.QuestionMessage;
@@ -198,7 +199,7 @@ public class ShisetsutourukuPanel {
     private void set有効期間追加合理性チェック(ShisetsutourukuPanelDiv div) {
         KaigoJigyoshaParameter paramter = KaigoJigyoshaParameter
                 .createParam(div.getTxtShisetsuJigyoshaNo().getValue(),
-                        div.getJigyoshaShurui().getRadServiceShurui().getSelectedValue(),
+                        div.getJigyoshaShurui().getRadServiceShurui().getSelectedKey(),
                         div.getTxtShisetsuYukoKaishiYMD().getValue(),
                         div.getTxtShisetsuYukoShuryoYMD().getValue());
 
@@ -301,8 +302,9 @@ public class ShisetsutourukuPanel {
     }
 
     private KaigoJogaiTokureiTaishoShisetsu 事業者情報の追加編集(ShisetsutourukuPanelDiv div) {
-        KaigoJogaiTokureiTaishoShisetsu business = new KaigoJogaiTokureiTaishoShisetsu(div.getTxtShisetsuJigyoshaNo().getValue(),
-                div.getJigyoshaShurui().getRadServiceShurui().getSelectedKey(), div.getTxtShisetsuYukoKaishiYMD().getValue());
+        KaigoJogaiTokureiTaishoShisetsu business = new KaigoJogaiTokureiTaishoShisetsu(div.getJigyoshaShurui().getRadServiceShurui().getSelectedKey(),
+                div.getTxtShisetsuJigyoshaNo().getValue(),
+                div.getTxtShisetsuYukoKaishiYMD().getValue());
         KaigoJogaiTokureiTaishoShisetsuBuilder builde = business.createBuilderForEdit();
         builde.set有効開始年月日(div.getTxtShisetsuYukoKaishiYMD().getValue());
         builde.set有効終了年月日(div.getTxtShisetsuYukoShuryoYMD().getValue());
@@ -324,7 +326,7 @@ public class ShisetsutourukuPanel {
         builde.set役職(div.getTxtShisetsuYakushoku().getValue());
         builde.set備考(div.getTxtShisetsuBiko().getValue());
         builde.set異動事由(new RString("01"));
-        builde.set異動年月日(FlexibleDate.getNowDate());
+        builde.set異動年月日(new FlexibleDate(RDate.getNowDate().toDateString()));
         business = builde.build();
         return business;
     }
