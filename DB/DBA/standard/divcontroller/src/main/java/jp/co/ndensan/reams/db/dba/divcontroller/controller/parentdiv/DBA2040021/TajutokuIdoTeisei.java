@@ -14,8 +14,11 @@ import jp.co.ndensan.reams.db.dba.divcontroller.entity.parentdiv.DBA2040021.DBA2
 import jp.co.ndensan.reams.db.dba.divcontroller.entity.parentdiv.DBA2040021.TajutokuIdoTeiseiDiv;
 import jp.co.ndensan.reams.db.dba.divcontroller.handler.parentdiv.DBA2040021.TajutokuIdoTeiseiHandler;
 import jp.co.ndensan.reams.db.dba.service.core.tashichosonjushochitokureisyaidoteisei.TaShichosonJushochiTokureisyaIdoTeisei;
-import jp.co.ndensan.reams.db.dbz.divcontroller.viewbox.ViewStateKeys;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
+import jp.co.ndensan.reams.db.dbz.divcontroller.util.viewstate.ViewStateKey;
+import jp.co.ndensan.reams.db.dbz.service.TaishoshaKey;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
+import jp.co.ndensan.reams.uz.uza.biz.SetaiCode;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.exclusion.LockingKey;
@@ -29,7 +32,6 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 
 /**
- *
  * 他市町村住所地特例者異動の訂正のコントローラです。
  *
  * @reamsid_L DBA-0401-030 duanzhanli
@@ -45,9 +47,10 @@ public class TajutokuIdoTeisei {
      * @return ResponseData<TajutokuIdoTeiseiDiv>
      */
     public ResponseData<TajutokuIdoTeiseiDiv> onLoad(TajutokuIdoTeiseiDiv div) {
-        ShikibetsuCode 識別コード = new ShikibetsuCode(new RString("000000000000010"));
-        ViewStateHolder.put(ViewStateKeys.該当者検索_識別コード, 識別コード);
-        getHandler(div).load(ViewStateHolder.get(ViewStateKeys.該当者検索_識別コード, ShikibetsuCode.class));
+        TaishoshaKey taishoshaKey = new TaishoshaKey(HihokenshaNo.EMPTY,
+                new ShikibetsuCode(new RString("000000000000010")), SetaiCode.EMPTY);
+        ViewStateHolder.put(ViewStateKey.資格対象者, taishoshaKey);
+        getHandler(div).load(ViewStateHolder.get(ViewStateKey.資格対象者, TaishoshaKey.class).get識別コード());
         if (!RealInitialLocker.tryGetLock(LOCKINGKEY)) {
             ValidationMessageControlPairs validationMessages = new ValidationMessageControlPairs();
             validationMessages.add(new ValidationMessageControlPair(TajutokuIdoTeiseiErrorMessage.排他_他のユーザが使用中));
@@ -75,11 +78,12 @@ public class TajutokuIdoTeisei {
             適用情報グリッド.add(tekiyouJouhou);
         }
         TaShichosonJushochiTokureisyaIdoTeiseiParamter paramter = new TaShichosonJushochiTokureisyaIdoTeiseiParamter(
-                ViewStateHolder.get(ViewStateKeys.該当者検索_識別コード, ShikibetsuCode.class),
+                ViewStateHolder.get(ViewStateKey.資格対象者, TaishoshaKey.class).get識別コード(),
                 適用情報グリッド);
         TaShichosonJushochiTokureisyaIdoTeisei.createInstance().is適用状態のチェック(paramter);
         requestDiv.getTajutokuIdoTeiseiIdoJoho().getCcdTaJushochiTokureishaKanri().saveTaJushochiTokurei(
-                ViewStateHolder.get(ViewStateKeys.該当者検索_識別コード, ShikibetsuCode.class));
+                ViewStateHolder.get(ViewStateKey.資格対象者, TaishoshaKey.class).get識別コード());
+        requestDiv.getTajutokuIdoTeiseiIdoJoho().getShisetsuIdoJoho().getCcdShisetsuNyutaishoRirekiKanri().saveShisetsuNyutaisho();
         RealInitialLocker.release(LOCKINGKEY);
         return ResponseData.of(requestDiv).setState(DBA2040021StateName.完了状態);
     }

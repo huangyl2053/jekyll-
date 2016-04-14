@@ -74,6 +74,8 @@ public class ShisetsuNyutaishoRirekiKanriHandler {
             case 資格異動:
                 資格異動モード();
                 break;
+            default:
+                break;
         }
     }
 
