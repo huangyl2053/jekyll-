@@ -9,7 +9,7 @@ import java.util.List;
 import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dbz.entity.db.view.DbV2502KaigoShotoku;
 import static jp.co.ndensan.reams.db.dbz.entity.db.view.DbV2502KaigoShotoku.shikibetsuCode;
-import static jp.co.ndensan.reams.db.dbz.entity.db.view.DbV2502KaigoShotoku.shoriYMD;
+import static jp.co.ndensan.reams.db.dbz.entity.db.view.DbV2502KaigoShotoku.shoriTimeStamp;
 import static jp.co.ndensan.reams.db.dbz.entity.db.view.DbV2502KaigoShotoku.shotokuNendo;
 import jp.co.ndensan.reams.db.dbz.entity.db.view.DbV2502KaigoShotokuEntity;
 import jp.co.ndensan.reams.db.dbz.persistence.db.basic.ISaveable;
@@ -56,7 +56,7 @@ public class DbV2502KaigoShotokuAliveDac implements ISaveable<DbV2502KaigoShotok
                 where(and(
                                 eq(shikibetsuCode, 識別コード),
                                 eq(shotokuNendo, 所得年度),
-                                leq(shoriYMD, 所得基準年月日))).
+                                leq(shoriTimeStamp, 所得基準年月日))).
                 limit(1).
                 toObject(DbV2502KaigoShotokuEntity.class);
     }
