@@ -37,7 +37,7 @@ public class ShisetsuNyutaishoIdo {
      * @param div 施設入退所異動Div
      * @return レスポンス
      */
-    public ResponseData onLoad(ShisetsuNyutaishoIdoDiv div) {
+    public ResponseData<ShisetsuNyutaishoIdoDiv> onLoad(ShisetsuNyutaishoIdoDiv div) {
         ResponseData<ShisetsuNyutaishoIdoDiv> response = new ResponseData<>();
 
         ShikibetsuCode 識別コード = ViewStateHolder.get(ViewStateKeys.施設入退所履歴_識別コード, ShikibetsuCode.class);
@@ -58,7 +58,7 @@ public class ShisetsuNyutaishoIdo {
      * @param div 施設入退所異動Div
      * @return レスポンス
      */
-    public ResponseData onClick_commonButtonBack(ShisetsuNyutaishoIdoDiv div) {
+    public ResponseData<ShisetsuNyutaishoIdoDiv> onClick_commonButtonBack(ShisetsuNyutaishoIdoDiv div) {
         RealInitialLocker.release(前排他ロックキー);
         return ResponseData.of(div).respond();
     }
@@ -69,7 +69,7 @@ public class ShisetsuNyutaishoIdo {
      * @param div 施設入退所異動Div
      * @return レスポンス
      */
-    public ResponseData onClick_commonButtonUpdate(ShisetsuNyutaishoIdoDiv div) {
+    public ResponseData<ShisetsuNyutaishoIdoDiv> onClick_commonButtonUpdate(ShisetsuNyutaishoIdoDiv div) {
         if (is履歴期間重複(div)) {
             throw new ApplicationException(UrErrorMessages.期間が不正_追加メッセージあり２.getMessage().replace("入所日", "退所日"));
         }
@@ -93,7 +93,7 @@ public class ShisetsuNyutaishoIdo {
      * @param div 施設入退所異動Div
      * @return レスポンス
      */
-    public ResponseData onClick_commonButtonUpdateDone(ShisetsuNyutaishoIdoDiv div) {
+    public ResponseData<ShisetsuNyutaishoIdoDiv> onClick_commonButtonUpdateDone(ShisetsuNyutaishoIdoDiv div) {
 
         RealInitialLocker.release(前排他ロックキー);
         onLoad(div);
