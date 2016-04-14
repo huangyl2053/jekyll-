@@ -11,8 +11,10 @@ import jp.co.ndensan.reams.db.dbc.definition.core.shiharaihoho.ShiharaiHohoKubun
 import jp.co.ndensan.reams.db.dbc.definition.mybatisprm.shiharaihohojyoho.SikyuSinseiJyohoParameter;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0810013.KouzaInfoDiv;
 import jp.co.ndensan.reams.db.dbc.divcontroller.handler.dbc0810013.KouzaInfoHandler;
+import jp.co.ndensan.reams.db.dbc.divcontroller.viewbox.ViewStateKeys;
 import jp.co.ndensan.reams.db.dbc.service.core.shokanbaraijyokyoshokai.ShokanbaraiJyokyoShokai;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
+import jp.co.ndensan.reams.db.dbz.service.TaishoshaKey;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.uz.uza.biz.KamokuCode;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
@@ -22,6 +24,7 @@ import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RTime;
+import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 
 /**
  * 償還払い状況照会_口座情報のクラス
@@ -41,17 +44,14 @@ public class KouzaInfo {
      */
     public ResponseData<KouzaInfoDiv> onLoad(KouzaInfoDiv div) {
 
-//        TaishoshaKey 引継ぎデータ = ViewStateHolder.get(ViewStateKeys.資格対象者, TaishoshaKey.class);
-//        ShikibetsuCode 識別コード = 引継ぎデータ.get識別コード();
-//        FlexibleYearMonth サービス年月 = new FlexibleYearMonth((new RDate(ViewStateHolder.get(
-//                ViewStateKeys.償還払申請一覧_サービス年月, RString.class).toString())).getYearMonth().toDateString());
-//        HihokenshaNo 被保険者番号 = ViewStateHolder.get(ViewStateKeys.償還払申請一覧_被保険者番号, HihokenshaNo.class);
-//        RString 整理番号 = ViewStateHolder.get(ViewStateKeys.償還払申請一覧_整理番号, RString.class);
-//        div.getPanelOne().getCcdKaigoAtenaInfo().onLoad(識別コード);
-        FlexibleYearMonth サービス年月 = new FlexibleYearMonth("200301");
-        HihokenshaNo 被保険者番号 = new HihokenshaNo("000000031");
-        ShikibetsuCode 識別コード = new ShikibetsuCode("000000000000010");
-        RString 整理番号 = new RString("0000000999");
+        TaishoshaKey 引継ぎデータ = ViewStateHolder.get(ViewStateKeys.資格対象者, TaishoshaKey.class);
+        ShikibetsuCode 識別コード = 引継ぎデータ.get識別コード();
+        FlexibleYearMonth サービス年月 = new FlexibleYearMonth((new RDate(ViewStateHolder.get(
+                ViewStateKeys.償還払申請一覧_サービス年月, RString.class).toString())).getYearMonth().toDateString());
+        HihokenshaNo 被保険者番号 = ViewStateHolder.get(ViewStateKeys.償還払申請一覧_被保険者番号, HihokenshaNo.class);
+        RString 整理番号 = ViewStateHolder.get(ViewStateKeys.償還払申請一覧_整理番号, RString.class);
+
+        div.getPanelOne().getCcdKaigoAtenaInfo().onLoad(識別コード);
         if (被保険者番号 != null && !被保険者番号.isEmpty()) {
             div.getPanelOne().getCcdKaigoShikakuKihon().onLoad(被保険者番号);
         } else {
@@ -72,10 +72,10 @@ public class KouzaInfo {
         parameter.setShiharaiHohoKubun(ShiharaiHohoKubun.toValue(支給申請情報.get支払方法区分コード()));
         parameter.setKeiyakuNo(支給申請情報.get受領委任契約番号());
         if (支給申請情報.get支払期間開始年月日() != null) {
-            parameter.setStartYMD(new RDate(shokanShinseiList.get(0).get支払期間開始年月日().toString()));
+            parameter.setStartYMD(new RDate(支給申請情報.get支払期間開始年月日().toString()));
         }
         if (支給申請情報.get支払期間終了年月日() != null) {
-            parameter.setEndYMD(new RDate(shokanShinseiList.get(0).get支払期間終了年月日().toString()));
+            parameter.setEndYMD(new RDate(支給申請情報.get支払期間終了年月日().toString()));
         }
         parameter.setStartHHMM(new RTime(支給申請情報.get支払窓口開始時間()));
         parameter.setEndHHMM(new RTime(支給申請情報.get支払窓口終了時間()));
