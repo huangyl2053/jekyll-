@@ -86,12 +86,12 @@ public class JutakuKaishuShinsei {
         //TODO 引き継ぎデータEntity.画面モード
         RString 画面モード = 画面モード_支給申請;
         handler.setModifyMode(画面モード);
-        if (画面モード_支給申請.equalsIgnoreCase(画面モード)) {
+        if (画面モード_支給申請.equals(画面モード)) {
             // TODO QA 466 住宅改修費支給申請登録画面へ遷移する。
-            return ResponseData.of(div).forwardWithEventName(DBC0710011TransitionEventName.検索条件).respond();
-        } else if (画面モード_事前申請.equalsIgnoreCase(画面モード)) {
+            return ResponseData.of(div).forwardWithEventName(DBC0710011TransitionEventName.修正).respond();
+        } else if (画面モード_事前申請.equals(画面モード)) {
             // TODO QA 466 住宅改修費事前申請登録画面へ遷移する
-            return ResponseData.of(div).forwardWithEventName(DBC0710011TransitionEventName.検索条件).respond();
+            return ResponseData.of(div).forwardWithEventName(DBC0710011TransitionEventName.修正).respond();
         }
         return ResponseData.of(div).respond();
     }
