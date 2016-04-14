@@ -114,15 +114,19 @@ public class NinteiShinseiRenrakusakiJohoHandler {
         for (RenrakusakiJoho renrakusakiJoho : renrakusakiJohoList) {
             dgRenrakusakiIchiran_Row row = new dgRenrakusakiIchiran_Row(new RString(String.valueOf(renrakusakiJoho.get連番())),
                     renrakusakiJoho.get連絡先氏名() == null ? RString.EMPTY : renrakusakiJoho.
-                            get連絡先氏名().getColumnValue(),
+                    get連絡先氏名().getColumnValue(),
                     renrakusakiJoho.get連絡先続柄(),
                     renrakusakiJoho.get連絡先住所() == null ? RString.EMPTY : renrakusakiJoho
-                            .get連絡先住所().getColumnValue(),
+                    .get連絡先住所().getColumnValue(),
                     renrakusakiJoho.get連絡先電話番号() == null ? RString.EMPTY : renrakusakiJoho.
-                            get連絡先電話番号().getColumnValue(),
+                    get連絡先電話番号().getColumnValue(),
                     renrakusakiJoho.get連絡先携帯番号() == null ? RString.EMPTY : renrakusakiJoho.
-                            get連絡先携帯番号().getColumnValue(),
-                    new RString(String.valueOf(renrakusakiJoho.get優先順位())));
+                    get連絡先携帯番号().getColumnValue(),
+                    new RString(String.valueOf(renrakusakiJoho.get優先順位())),
+                    RString.EMPTY,
+                    RString.EMPTY,
+                    RString.EMPTY,
+                    RString.EMPTY);
             dateSource.add(row);
         }
         div.getDgRenrakusakiIchiran().setDataSource(dateSource);
