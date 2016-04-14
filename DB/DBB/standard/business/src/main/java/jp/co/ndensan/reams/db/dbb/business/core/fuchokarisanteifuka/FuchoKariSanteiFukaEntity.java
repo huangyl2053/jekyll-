@@ -13,7 +13,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 /**
  * 普徴仮算定賦課画面div用パラメータのクラスです。
  *
- * @reamsid_L DBC-0710-020 gongliang
+ * @reamsid_L DBB-0710-020 gongliang
  */
 @lombok.Getter
 @lombok.Setter

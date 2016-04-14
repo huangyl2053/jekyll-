@@ -13,7 +13,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.DataRow;
 /**
  * dgKakushuTsuchiUchiwakeSentaku_Row のクラスファイル
  *
- * @reamsid_L DBC-0780-020 gongliang
+ * @reamsid_L DBB-0780-020 gongliang
  */
 public class dgKakushuTsuchiUchiwakeSentaku_Row extends DataRow {
     // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-01-15_09-59-03">

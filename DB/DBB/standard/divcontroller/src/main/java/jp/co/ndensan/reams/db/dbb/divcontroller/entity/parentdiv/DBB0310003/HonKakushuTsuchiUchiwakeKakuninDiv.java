@@ -14,7 +14,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.TextBox;
 /**
  * HonKakushuTsuchiUchiwakeKakunin のクラスファイル
  *
- * @reamsid_L DBC-0780-020 gongliang
+ * @reamsid_L DBB-0780-020 gongliang
  */
 public class HonKakushuTsuchiUchiwakeKakuninDiv extends Panel {
 
