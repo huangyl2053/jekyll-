@@ -6,6 +6,8 @@
 package jp.co.ndensan.reams.db.dbc.divcontroller.controller.parentdiv.dbc0820013;
 
 import jp.co.ndensan.reams.db.dbc.business.core.basic.ShokanShinsei;
+import jp.co.ndensan.reams.db.dbc.definition.core.shiharaihoho.ShiharaiHohoKubun;
+import jp.co.ndensan.reams.db.dbc.definition.mybatisprm.shiharaihohojyoho.SikyuSinseiJyohoParameter;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0820013.DBC0820013TransitionEventName;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0820013.KouzaInfoPanelDiv;
 import jp.co.ndensan.reams.db.dbc.divcontroller.handler.dbc0820013.KouzaInfoHandler;
@@ -18,10 +20,13 @@ import jp.co.ndensan.reams.db.dbz.definition.message.DbzInformationMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrInformationMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrQuestionMessages;
+import jp.co.ndensan.reams.uz.uza.biz.KamokuCode;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
+import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.lang.RTime;
 import jp.co.ndensan.reams.uz.uza.message.MessageDialogSelectedResult;
 import jp.co.ndensan.reams.uz.uza.message.QuestionMessage;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.CommonButtonHolder;
@@ -40,6 +45,7 @@ public class KouzaInfoPanel {
     private static final RString 登録 = new RString("登録");
     private static final RString 新規 = new RString("新規");
     private static final RString 参照 = new RString("参照");
+    private static final RString 償還払給付費 = new RString("001");
     private static final RString 申請を保存ボタン = new RString("Element3");
 
     /**
@@ -67,20 +73,36 @@ public class KouzaInfoPanel {
         RString 状態 = ViewStateHolder.get(ViewStateKeys.状態, RString.class);
 
         KouzaInfoHandler handler = getHandler(div);
-        ShokanShinsei 償還払支給申請 = handler.get償還払支給申請(被保険者番号, サービス年月, 整理番号);
-        ViewStateHolder.put(ViewStateKeys.償還払い費支給申請決定_口座情報, 償還払支給申請);
+        ShokanShinsei 支給申請情報 = handler.get償還払支給申請(被保険者番号, サービス年月, 整理番号);
+        ViewStateHolder.put(ViewStateKeys.償還払い費支給申請決定_口座情報, 支給申請情報);
         handler.loadヘッダエリア(識別コード, 被保険者番号);
         if (登録.equals(状態)) {
-            handler.load登録(被保険者番号, サービス年月, 整理番号, 償還払支給申請.is国保連再送付フラグ());
+            handler.load登録(被保険者番号, サービス年月, 整理番号, 支給申請情報.is国保連再送付フラグ());
             handler.load申請共通エリア(null, null, 新規);
         } else if (修正.equals(状態)) {
-            handler.load申請共通エリア(償還払支給申請.getサービス提供年月(), 償還払支給申請.get整理番号(), 修正);
+            handler.load申請共通エリア(支給申請情報.getサービス提供年月(), 支給申請情報.get整理番号(), 修正);
         } else if (削除.equals(状態)) {
             handler.load申請共通エリア(null, null, 参照);
             CommonButtonHolder.setVisibleByCommonButtonFieldName(申請を保存ボタン, false);
         }
-        // TODO QA252、284 支払方法情報共有DIV 初期化  空白
-//            div.getCcdShinseiNaiyo().load(修正, new RString("001"));
+        SikyuSinseiJyohoParameter param = new SikyuSinseiJyohoParameter();
+        param.setShikibetsuCode(識別コード);
+        param.setHihokenshaNo(支給申請情報.get被保険者番号());
+        param.setShikyushinseiServiceYM(支給申請情報.getサービス提供年月());
+        param.setShikyushinseiSeiriNo(支給申請情報.get整理番号());
+        param.setShiharaiHohoKubun(ShiharaiHohoKubun.toValue(支給申請情報.get支払方法区分コード()));
+        param.setKeiyakuNo(支給申請情報.get受領委任契約番号());
+        if (支給申請情報.get支払期間開始年月日() != null) {
+            param.setStartYMD(new RDate(支給申請情報.get支払期間開始年月日().toString()));
+        }
+        if (支給申請情報.get支払期間終了年月日() != null) {
+            param.setEndYMD(new RDate(支給申請情報.get支払期間終了年月日().toString()));
+        }
+        param.setStartHHMM(new RTime(支給申請情報.get支払窓口開始時間()));
+        param.setEndHHMM(new RTime(支給申請情報.get支払窓口終了時間()));
+        param.setKozaId(支給申請情報.get口座ID());
+        param.setShiharaiBasho(支給申請情報.get支払場所());
+        div.getPnlCommon().getCcdShinseiNaiyo().initialize(param, new KamokuCode(償還払給付費), 参照);
         return createResponse(div);
     }
 
