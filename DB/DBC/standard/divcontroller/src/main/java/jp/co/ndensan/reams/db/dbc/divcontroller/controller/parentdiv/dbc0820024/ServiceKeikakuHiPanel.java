@@ -11,6 +11,7 @@ import jp.co.ndensan.reams.db.dbc.business.core.basic.ShikibetsuNoKanri;
 import jp.co.ndensan.reams.db.dbc.business.core.shokanbaraijyokyoshokai.ShokanServicePlan200004Result;
 import jp.co.ndensan.reams.db.dbc.business.core.shokanbaraijyokyoshokai.ShokanServicePlan200604Result;
 import jp.co.ndensan.reams.db.dbc.business.core.shokanbaraijyokyoshokai.ShokanServicePlan200904Result;
+import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0820024.DBC0820024TransitionEventName;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0820024.ServiceKeikakuHiPanelDiv;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0820024.dgdYichiran_Row;
 import jp.co.ndensan.reams.db.dbc.divcontroller.handler.dbc0820024.ServiceKeikakuHiPanelHandler;
@@ -106,8 +107,7 @@ public class ServiceKeikakuHiPanel {
         div.getPanelCcd().getCcdKaigoAtenaInfo().onLoad(識別コード);
         div.getPanelCcd().getCcdKaigoShikakuKihon().onLoad(被保険者番号);
         if (明細番号 == null || 明細番号.isEmpty()) {
-            // TODO QA438 償還払支給申請_サービス提供証明書画面へ遷移する  TransitationEventName not have
-            return createResponse(div);
+            return ResponseData.of(div).forwardWithEventName(DBC0820024TransitionEventName.一覧に戻る).respond();
         }
         handler.set申請共通エリア(サービス年月, 申請年月日, 事業者番号, 明細番号, 証明書, 様式番号);
         div.getPanelServiceKeikakuhiUp().getPanelServiceKeikakuhiToroku().setIsOpen(false);
@@ -276,8 +276,7 @@ public class ServiceKeikakuHiPanel {
         ServiceKeikakuHiPanelHandler handler = getHandler(div);
         RString 画面モード = ViewStateHolder.get(ViewStateKeys.画面モード, RString.class);
         if (削除モード.equals(画面モード)) {
-            // TODO QA438 償還払支給申請_サービス提供証明書画面へ遷移する。
-            return createResponse(div);
+            return ResponseData.of(div).forwardWithEventName(DBC0820024TransitionEventName.一覧に戻る).respond();
         } else {
             boolean 変更 = false;
             ShoukanharaihishinseikensakuParameter parameter = ViewStateHolder.get(ViewStateKeys.償還払費申請検索キー,
@@ -335,15 +334,19 @@ public class ServiceKeikakuHiPanel {
     }
 
     private ResponseData<ServiceKeikakuHiPanelDiv> 保存処理(ServiceKeikakuHiPanelDiv div, RString 状態) {
-        if (!ResponseHolder.isReRequest()) {
-            getHandler(div).保存処理(登録モード);
-            return ResponseData.of(div).addMessage(UrInformationMessages.正常終了.getMessage().replace(状態.toString())).respond();
+        try {
+            if (!ResponseHolder.isReRequest()) {
+                getHandler(div).保存処理(登録モード);
+                return ResponseData.of(div).addMessage(UrInformationMessages.正常終了.getMessage().replace(状態.toString())).respond();
+            }
+            if (ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
+                CommonButtonHolder.setDisabledByCommonButtonFieldName(申請を保存するボタン, true);
+                return createResponse(div);
+            }
+        } catch (Exception e) {
+            throw new ApplicationException(UrErrorMessages.異常終了.getMessage());
         }
-        if (ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
-            CommonButtonHolder.setDisabledByCommonButtonFieldName(申請を保存するボタン, true);
-            return createResponse(div);
-        }
-        return ResponseData.of(div).addMessage(UrErrorMessages.異常終了.getMessage()).respond();
+        return createResponse(div);
     }
 
     private ResponseData<ServiceKeikakuHiPanelDiv> saveOut(ServiceKeikakuHiPanelDiv div) {
@@ -358,8 +361,7 @@ public class ServiceKeikakuHiPanel {
 
     private ResponseData<ServiceKeikakuHiPanelDiv> 登録モード変更処理(boolean 変更, ServiceKeikakuHiPanelDiv div) {
         if (!変更) {
-            // TODO QA438 償還払支給申請_サービス提供証明書画面へ遷移する。
-            return createResponse(div);
+            return ResponseData.of(div).forwardWithEventName(DBC0820024TransitionEventName.一覧に戻る).respond();
         } else {
             if (!ResponseHolder.isReRequest()) {
                 QuestionMessage message = new QuestionMessage(UrQuestionMessages.入力内容の破棄.getMessage().getCode(),
@@ -373,10 +375,7 @@ public class ServiceKeikakuHiPanel {
                         ShoukanharaihishinseikensakuParameter.class);
                 FlexibleYearMonth サービス年月 = parameter.getServiceTeikyoYM();
                 getHandler(div).登録モード変更処理(サービス年月);
-                return createResponse(div);
-                // QA438 償還払支給申請_サービス提供証明書画面へ遷移する。
-                //                return ResponseData.of(div).forwardWithEventName(DBC0820024TransitionEventName.サービス提供証明書)
-                //                        .parameter(new RString("サービス提供証明書"));
+                return ResponseData.of(div).forwardWithEventName(DBC0820024TransitionEventName.一覧に戻る).respond();
             }
         }
         return createResponse(div);
