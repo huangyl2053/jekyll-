@@ -76,6 +76,7 @@ public class JushochiTokureiRirekiListDiv extends Panel implements IJushochiToku
      * @return dgJutoku
      */
     @JsonProperty("dgJutoku")
+    @Override
     public DataGrid<dgJutoku_Row> getDgJutoku() {
         return dgJutoku;
     }
@@ -94,6 +95,7 @@ public class JushochiTokureiRirekiListDiv extends Panel implements IJushochiToku
      * @return JutokuInput
      */
     @JsonProperty("JutokuInput")
+    @Override
     public JutokuInputDiv getJutokuInput() {
         return JutokuInput;
     }
