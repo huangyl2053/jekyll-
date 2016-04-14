@@ -50,6 +50,8 @@ import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 /**
  *
  * 介護保険特別会計経理状況登録Managerクラスです。
+ *
+ * @reamsid_L DBU-1130-050 wangjie2
  */
 public class KaigoHokenTokubetuKaikeiKeiriJyokyoRegistManager {
 

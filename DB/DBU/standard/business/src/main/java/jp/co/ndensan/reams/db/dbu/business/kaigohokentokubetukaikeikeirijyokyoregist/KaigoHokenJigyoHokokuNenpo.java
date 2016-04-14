@@ -18,6 +18,8 @@ import jp.co.ndensan.reams.uz.uza.math.Decimal;
 /**
  *
  * 事業報告集計一覧データを管理するビジネスです。
+ *
+ * @reamsid_L DBU-1130-050 wangjie2
  */
 public class KaigoHokenJigyoHokokuNenpo {
 

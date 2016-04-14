@@ -15,6 +15,8 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 /**
  *
  * 介護保険特別会計経理状況登録遷移先渡す項目のエンティティクラスです。
+ *
+ * @reamsid_L DBU-1130-010 wangjie2
  */
 @lombok.Getter
 @lombok.Setter

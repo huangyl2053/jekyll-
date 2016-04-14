@@ -18,6 +18,8 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 /**
  *
  * 介護保険特別会計経理状況登録遷移先渡す項目を管理するビジネスです。
+ *
+ * @reamsid_L DBU-1130-010 wangjie2
  */
 public class InsuranceInformation implements Serializable {
 

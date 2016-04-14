@@ -14,6 +14,8 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 /**
  *
  * 市町村を管理するビジネスです。
+ *
+ * @reamsid_L DBU-1130-050 wangjie2
  */
 public class Shichoson {
 

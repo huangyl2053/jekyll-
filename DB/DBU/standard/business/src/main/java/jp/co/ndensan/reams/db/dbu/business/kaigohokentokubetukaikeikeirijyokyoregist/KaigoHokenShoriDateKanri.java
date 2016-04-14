@@ -19,6 +19,8 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 /**
  *
  * 処理日付管理マスタを管理するビジネスです。
+ *
+ * @reamsid_L DBU-1130-050 wangjie2
  */
 public class KaigoHokenShoriDateKanri implements Serializable {
 
