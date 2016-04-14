@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dba.entity.db.hihokenshashikakuteisei;
+package jp.co.ndensan.reams.db.dba.business.core.hihokenshashikakuteisei;
 
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
@@ -18,7 +18,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 @lombok.Getter
 @lombok.Setter
 @SuppressWarnings("PMD.UnusedPrivateField")
-public class RoreiFukushiEntity {
+public class RoreiFukushiJoho {
 
     private ShikibetsuCode 識別コード;
     private FlexibleDate 受給開始年月日;
