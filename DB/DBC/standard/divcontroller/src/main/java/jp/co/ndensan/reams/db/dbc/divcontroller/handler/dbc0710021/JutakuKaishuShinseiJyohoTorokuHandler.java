@@ -182,8 +182,8 @@ public final class JutakuKaishuShinseiJyohoTorokuHandler {
             事前申請内容エリアを初期(申請情報);
             // １．５．3　「住宅改修内容一覧」共有子Div の初期化
             RString 様式番号 = 住宅改修費事前申請.getYoshikiNo(被保険者番号, サービス提供年月, 整理番号);
-            div.getJutakuKaishuShinseiContents().getCcdJutakugaisyunaiyoList().load(
-                    被保険者番号, サービス提供年月, 整理番号, 様式番号);
+//            div.getJutakuKaishuShinseiContents().getCcdJutakugaisyunaiyoList().load(
+//                    被保険者番号, サービス提供年月, 整理番号, 様式番号);
             // １．５．４　前回まで支払結果の初期化
             ShiharaiKekkaResult 過去住宅改修費支払結果 = 住宅改修費事前申請.getOldJutakuKaishuHi(被保険者番号, サービス提供年月, 整理番号);
             前回まで支払結果の初期化(過去住宅改修費支払結果);

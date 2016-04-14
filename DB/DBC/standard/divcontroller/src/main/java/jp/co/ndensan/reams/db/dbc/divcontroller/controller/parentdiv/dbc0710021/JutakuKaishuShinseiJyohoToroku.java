@@ -7,7 +7,6 @@ package jp.co.ndensan.reams.db.dbc.divcontroller.controller.parentdiv.dbc0710021
 
 import jp.co.ndensan.reams.db.dbc.business.core.jutakukaishujizenshinsei.YokaigoNinteiJyoho;
 import jp.co.ndensan.reams.db.dbc.definition.enumeratedtype.config.ConfigNameDBC;
-import jp.co.ndensan.reams.db.dbc.definition.message.DbcQuestionMessages;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0710021.DBC0710021StateName;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0710021.DBC0710021TransitionEventName;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0710021.JutakuKaishuShinseiJyohoTorokuDiv;
@@ -236,43 +235,43 @@ public class JutakuKaishuShinseiJyohoToroku {
                 // １１．２　画面モードが登録モード、事前申請登録モード
             } else if (画面モード_登録.equals(画面モード) || 画面モード_事前申請.equals(画面モード)) {
                 if (給付実績連動_受託なし.equals(償還)) {
-                    if (!ResponseHolder.isReRequest()) {
-                        QuestionMessage message = new QuestionMessage(
-                                DbcQuestionMessages.償還払決定情報登録.getMessage().getCode(),
-                                DbcQuestionMessages.償還払決定情報登録.getMessage().evaluate());
-                        return ResponseData.of(div).addMessage(message).respond();
-                    }
-                    if (new RString(DbcQuestionMessages.償還払決定情報登録.getMessage().getCode()).equals(
-                            ResponseHolder.getMessageCode())
-                            && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
-                        handler.set画面遷移パラメータ(引き継ぎデータEntity, 画面モード_修正);
-                        return ResponseData.of(div).forwardWithEventName(DBC0710021TransitionEventName.to償還払決定情報)
-                                .respond();
-                    }
-                    if (new RString(DbcQuestionMessages.償還払決定情報登録.getMessage().getCode()).equals(
-                            ResponseHolder.getMessageCode())
-                            && ResponseHolder.getButtonType() == MessageDialogSelectedResult.No) {
-                        return ResponseData.of(div).setState(DBC0710021StateName.KanryoMessage);
-                    }
+//                    if (!ResponseHolder.isReRequest()) {
+//                        QuestionMessage message = new QuestionMessage(
+//                                DbcQuestionMessages.償還払決定情報登録.getMessage().getCode(),
+//                                DbcQuestionMessages.償還払決定情報登録.getMessage().evaluate());
+//                        return ResponseData.of(div).addMessage(message).respond();
+//                    }
+//                    if (new RString(DbcQuestionMessages.償還払決定情報登録.getMessage().getCode()).equals(
+//                            ResponseHolder.getMessageCode())
+//                            && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
+//                        handler.set画面遷移パラメータ(引き継ぎデータEntity, 画面モード_修正);
+//                        return ResponseData.of(div).forwardWithEventName(DBC0710021TransitionEventName.to償還払決定情報)
+//                                .respond();
+//                    }
+//                    if (new RString(DbcQuestionMessages.償還払決定情報登録.getMessage().getCode()).equals(
+//                            ResponseHolder.getMessageCode())
+//                            && ResponseHolder.getButtonType() == MessageDialogSelectedResult.No) {
+//                        return ResponseData.of(div).setState(DBC0710021StateName.KanryoMessage);
+//                    }
                 } else if (給付実績連動_受託あり.equals(償還)) {
                     return ResponseData.of(div).setState(DBC0710021StateName.KanryoMessage);
                 }
                 // １１．３　画面モードが修正モード
             } else if (画面モード_修正.equals(画面モード)) {
                 if (!div.getBtnShokanKetteiJyoho().isDisabled()) {
-                    if (!ResponseHolder.isReRequest()) {
-                        QuestionMessage message = new QuestionMessage(
-                                DbcQuestionMessages.償還払決定情報登録.getMessage().getCode(),
-                                DbcQuestionMessages.償還払決定情報登録.getMessage().evaluate());
-                        return ResponseData.of(div).addMessage(message).respond();
-                    }
-                    if (new RString(DbcQuestionMessages.償還払決定情報登録.getMessage().getCode()).equals(
-                            ResponseHolder.getMessageCode())
-                            && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
-                        handler.set画面遷移パラメータ(引き継ぎデータEntity, 画面モード);
-                        return ResponseData.of(div).forwardWithEventName(DBC0710021TransitionEventName.to償還払決定情報)
-                                .respond();
-                    }
+//                    if (!ResponseHolder.isReRequest()) {
+//                        QuestionMessage message = new QuestionMessage(
+//                                DbcQuestionMessages.償還払決定情報登録.getMessage().getCode(),
+//                                DbcQuestionMessages.償還払決定情報登録.getMessage().evaluate());
+//                        return ResponseData.of(div).addMessage(message).respond();
+//                    }
+//                    if (new RString(DbcQuestionMessages.償還払決定情報登録.getMessage().getCode()).equals(
+//                            ResponseHolder.getMessageCode())
+//                            && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
+//                        handler.set画面遷移パラメータ(引き継ぎデータEntity, 画面モード);
+//                        return ResponseData.of(div).forwardWithEventName(DBC0710021TransitionEventName.to償還払決定情報)
+//                                .respond();
+//                    }
                 } else {
                     return ResponseData.of(div).setState(DBC0710021StateName.KanryoMessage);
                 }
