@@ -45,7 +45,6 @@ public class ShisetsutourukuPanel {
     private static final RString 修正 = new RString("修正");
     private static final RString 削除 = new RString("削除");
     private static final RString 照会 = new RString("照会");
-    private static final RString 事業者種別 = new RString("21");
     private static final RString 変更なし = new RString("2");
     private final KaigoJigyoshaShisetsuKanriManager manager;
 
@@ -110,7 +109,7 @@ public class ShisetsutourukuPanel {
             }
             if (new RString(UrQuestionMessages.保存の確認.getMessage().getCode()).equals(ResponseHolder.getMessageCode())
                     && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
-                set有効期間合理性チェック(div);
+                set有効期間追加合理性チェック(div);
                 get事業者情報の追加処理(div);
                 return ResponseData.of(div).setState(DBA2010012StateName.完了状態);
             }
@@ -196,6 +195,25 @@ public class ShisetsutourukuPanel {
         }
     }
 
+    private void set有効期間追加合理性チェック(ShisetsutourukuPanelDiv div) {
+        KaigoJigyoshaParameter paramter = KaigoJigyoshaParameter
+                .createParam(div.getTxtShisetsuJigyoshaNo().getValue(),
+                        div.getJigyoshaShurui().getRadServiceShurui().getSelectedValue(),
+                        div.getTxtShisetsuYukoKaishiYMD().getValue(),
+                        div.getTxtShisetsuYukoShuryoYMD().getValue());
+
+        KaigoJogaiTokureiParameter 重複paramter = KaigoJogaiTokureiParameter
+                .createParam(RString.EMPTY,
+                        div.getTxtShisetsuYukoKaishiYMD().getValue(),
+                        div.getTxtShisetsuYukoShuryoYMD().getValue());
+        if (!manager.checkKikanGorisei(重複paramter)) {
+            throw new ApplicationException(UrErrorMessages.期間が不正.getMessage());
+        }
+        if (!manager.checkKikanJufuku(paramter)) {
+            throw new ApplicationException(UrErrorMessages.期間が重複.getMessage());
+        }
+    }
+
     private KaigoJigyoshaParameter 事業者情報取得paramter(ShisetsutourukuPanelDiv div) {
         JigyoshaMode mode = ViewStateHolder.get(ViewStateKeys.介護事業者_介護事業者情報, JigyoshaMode.class);
         return KaigoJigyoshaParameter.createParam(mode.getJigyoshaNo() == null ? RString.EMPTY : mode.getJigyoshaNo().value(),
@@ -217,7 +235,7 @@ public class ShisetsutourukuPanel {
 
     private ResponseData<ShisetsutourukuPanelDiv> get事業者情報の追加処理(ShisetsutourukuPanelDiv div) {
         KaigoJogaiTokureiTaishoShisetsu business = 事業者情報の追加編集(div);
-        manager.insertJigyoshaJoho(null, 事業者種別, business);
+        manager.insertJigyoshaJoho(null, div.getJigyoshaShurui().getRadServiceShurui().getSelectedKey(), business);
         div.getKaigoKanryo().getCcdKaigoKanryoMessage().setMessage(new RString(UrInformationMessages.正常終了.getMessage()
                 .replace("追加").evaluate()),
                 RString.EMPTY, RString.EMPTY, true);
@@ -230,10 +248,10 @@ public class ShisetsutourukuPanel {
                 = ViewStateHolder.get(ViewStateKeys.サービス登録_サービス情報, KaigoJogaiTokureiTaishoShisetsu.class);
         if (事業者.get有効開始年月日().equals(div.getTxtShisetsuYukoKaishiYMD().getValue())) {
             KaigoJogaiTokureiTaishoShisetsu 事業者情報 = 事業者情報の修正編集(div);
-            manager.updateJigyoshaJoho(null, ViewStateHolder.get(ViewStateKeys.介護事業者_事業者種別, RString.class), 事業者情報, 変更なし);
+            manager.updateJigyoshaJoho(null, div.getJigyoshaShurui().getRadServiceShurui().getSelectedValue(), 事業者情報, 変更なし);
         } else {
             KaigoJogaiTokureiTaishoShisetsu business = 事業者情報の追加編集(div);
-            manager.insertJigyoshaJoho(null, ViewStateHolder.get(ViewStateKeys.介護事業者_事業者種別, RString.class), business);
+            manager.insertJigyoshaJoho(null, div.getJigyoshaShurui().getRadServiceShurui().getSelectedKey(), business);
         }
         div.getKaigoKanryo().getCcdKaigoKanryoMessage().setMessage(new RString(UrInformationMessages.正常終了.getMessage()
                 .replace("修正").evaluate()),
