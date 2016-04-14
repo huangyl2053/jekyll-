@@ -12,6 +12,8 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
  * 裁決結果明細データです。
+ *
+ * @reamsid_L DBU-1080-110 xuyue
  */
 public class SaiketukekaMeisaiJohoData implements Serializable {
 
