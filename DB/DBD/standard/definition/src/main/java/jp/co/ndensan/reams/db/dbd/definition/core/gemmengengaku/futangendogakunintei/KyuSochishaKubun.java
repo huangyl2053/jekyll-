@@ -1,4 +1,4 @@
-package jp.co.ndensan.reams.db.dbd.definition.core.kyusochisha;
+package jp.co.ndensan.reams.db.dbd.definition.core.gemmengengaku.futangendogakunintei;
 
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -6,7 +6,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 /**
  * 旧措置者区分を表す列挙型です。
  *
- * @author LDNS
+ * @reamsid_L DBD-9999-023 wangchao
  */
 public enum KyuSochishaKubun {
 

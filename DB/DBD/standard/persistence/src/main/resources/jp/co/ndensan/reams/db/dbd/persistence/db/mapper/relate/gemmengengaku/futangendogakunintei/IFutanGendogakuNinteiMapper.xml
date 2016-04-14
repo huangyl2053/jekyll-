@@ -14,7 +14,7 @@
             parameterType="jp.co.ndensan.reams.db.dbd.definition.mybatisprm.gemmengengaku.futangendogakunintei.FutanGendogakuNinteiMapperParameter" fetchSize="500">
         <include refid="selectFutanGendogakuNinteiEntity" />
     </select>
-
+    
     <!-- TODO RelateEntityを取得できるSQLに修正してください。where句はMapperParameterクラスに合わせて修正します。 -->
     <sql id="selectFutanGendogakuNinteiEntity">
         SELECT
@@ -41,6 +41,56 @@
         </where>
     </sql>
 
+    <select id="select負担限度額認定画面用リスト" resultMap="resultMap_FutanGendogakuNinteiEntity" 
+            parameterType="jp.co.ndensan.reams.db.dbd.definition.mybatisprm.relate.futangendogakunintei.FutanGendogakuNinteiParameter" fetchSize="500">
+        <include refid="selectFutanGendogakuNinteiGmenyListEntity" />
+    </select>
+    
+     <sql id="selectFutanGendogakuNinteiGmenyListEntity">
+        SELECT
+        DbT4018KaigoHokenFutanGendogakuNintei.*,
+        DbT4010GemmenGengakuShinsei.*
+        FROM
+        (<include refid="jp.co.ndensan.reams.db.dbd.persistence.db.mapper.basic.IDbT4018KaigoHokenFutanGendogakuNinteiMapper.noDeleted_DbT4018KaigoHokenFutanGendogakuNintei" />) AS DbT4018KaigoHokenFutanGendogakuNintei
+        LEFT JOIN
+        (<include refid="jp.co.ndensan.reams.db.dbd.persistence.db.mapper.basic.IDbT4010GemmenGengakuShinseiMapper.noDeleted_DbT4010GemmenGengakuShinsei" />) AS DbT4010GemmenGengakuShinsei
+        ON
+        DbT4018KaigoHokenFutanGendogakuNintei."dbT4018KaigoHokenFutanGendogakuNintei_shoKisaiHokenshaNo" = DbT4010GemmenGengakuShinsei."dbT4010GemmenGengakuShinsei_shoKisaiHokenshaNo" and
+        DbT4018KaigoHokenFutanGendogakuNintei."dbT4018KaigoHokenFutanGendogakuNintei_hihokenshaNo" = DbT4010GemmenGengakuShinsei."dbT4010GemmenGengakuShinsei_hihokenshaNo" and
+        DbT4018KaigoHokenFutanGendogakuNintei."dbT4018KaigoHokenFutanGendogakuNintei_rirekiNo" = DbT4010GemmenGengakuShinsei."dbT4010GemmenGengakuShinsei_shinseiRirekiNo" and
+        DbT4010GemmenGengakuShinsei."dbT4010GemmenGengakuShinsei_gemmenGengakuShurui" =#{減免減額種類}
+        <where>
+            DbT4018KaigoHokenFutanGendogakuNintei."dbT4018KaigoHokenFutanGendogakuNintei_hihokenshaNo" = #{被保険者番号}
+            AND DbT4018KaigoHokenFutanGendogakuNintei."dbT4018KaigoHokenFutanGendogakuNintei_ketteiKubun" IS NOT NULL
+            AND DbT4018KaigoHokenFutanGendogakuNintei."dbT4018KaigoHokenFutanGendogakuNintei_ketteiKubun" != ''
+        </where>
+        ORDER BY  DbT4018KaigoHokenFutanGendogakuNintei."dbT4018KaigoHokenFutanGendogakuNintei_rirekiNo"
+    </sql>
+    
+     <select id="get負担限度額認定帳票用リスト" resultMap="resultMap_FutanGendogakuNinteiEntity" 
+            parameterType="jp.co.ndensan.reams.db.dbd.definition.mybatisprm.relate.futangendogakunintei.FutanGendogakuNinteiParameter" fetchSize="500">
+        <include refid="selectFutanGendogakuNinteiThyouyListEntity" />
+    </select>
+    
+     <sql id="selectFutanGendogakuNinteiThyouyListEntity">
+        SELECT
+        DbT4018KaigoHokenFutanGendogakuNintei.*,
+        DbT4010GemmenGengakuShinsei.*
+        FROM
+        (<include refid="jp.co.ndensan.reams.db.dbd.persistence.db.mapper.basic.IDbT4018KaigoHokenFutanGendogakuNinteiMapper.noDeleted_DbT4018KaigoHokenFutanGendogakuNintei" />) AS DbT4018KaigoHokenFutanGendogakuNintei
+        LEFT JOIN
+        (<include refid="jp.co.ndensan.reams.db.dbd.persistence.db.mapper.basic.IDbT4010GemmenGengakuShinseiMapper.noDeleted_DbT4010GemmenGengakuShinsei" />) AS DbT4010GemmenGengakuShinsei
+        ON
+        DbT4018KaigoHokenFutanGendogakuNintei."dbT4018KaigoHokenFutanGendogakuNintei_shoKisaiHokenshaNo" = DbT4010GemmenGengakuShinsei."dbT4010GemmenGengakuShinsei_shoKisaiHokenshaNo" and
+        DbT4018KaigoHokenFutanGendogakuNintei."dbT4018KaigoHokenFutanGendogakuNintei_hihokenshaNo" = DbT4010GemmenGengakuShinsei."dbT4010GemmenGengakuShinsei_hihokenshaNo" and
+        DbT4018KaigoHokenFutanGendogakuNintei."dbT4018KaigoHokenFutanGendogakuNintei_rirekiNo" = DbT4010GemmenGengakuShinsei."dbT4010GemmenGengakuShinsei_shinseiRirekiNo" and
+        DbT4010GemmenGengakuShinsei."dbT4010GemmenGengakuShinsei_gemmenGengakuShurui" =#{減免減額種類}
+        <where>
+            DbT4018KaigoHokenFutanGendogakuNintei."dbT4018KaigoHokenFutanGendogakuNintei_hihokenshaNo" = #{被保険者番号}
+            AND DbT4018KaigoHokenFutanGendogakuNintei."dbT4018KaigoHokenFutanGendogakuNintei_rirekiNo" = #{履歴番号}
+        </where>
+    </sql>
+    
     <!-- TODO RelateEntityの形に合わせてマッピング定義を修正してください。 -->
     <resultMap id="resultMap_FutanGendogakuNinteiEntity" type="jp.co.ndensan.reams.db.dbd.entity.db.relate.gemmengengaku.futangendogakunintei.FutanGendogakuNinteiEntity" autoMapping="true">
        <id property="介護保険負担限度額認定Entity.shoKisaiHokenshaNo" column="dbT4018KaigoHokenFutanGendogakuNintei_shoKisaiHokenshaNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.ShoKisaiHokenshaNoTypeHandler"/>
