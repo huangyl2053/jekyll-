@@ -14,6 +14,7 @@ import jp.co.ndensan.reams.db.dba.business.core.tajushochitokureisyakanri.TaJush
 import jp.co.ndensan.reams.db.dba.business.core.tajushochitokureisyakanri.TashichosonBusiness;
 import jp.co.ndensan.reams.db.dba.definition.message.DbaErrorMessages;
 import jp.co.ndensan.reams.db.dba.definition.message.DbaQuestionMessages;
+import jp.co.ndensan.reams.db.dba.service.core.hihokenshashikakusoshitsu.HihokenshashikakusoshitsuManager;
 import jp.co.ndensan.reams.db.dba.service.core.tajushochito.TaJushochiTokureisyaKanriManager;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.code.KaigoTatokuKaijoJiyu;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.code.KaigoTatokuTekiyoJiyu;
@@ -453,10 +454,7 @@ public class TaJushochiTokureishaKanriHandler {
                         = new TashichosonJushochiTokureiIdentifier(識別コード, 異動日, 枝番);
                 TaJushochiTokureisyaKanriManager.createInstance().regTaJushochiTokurei(set解除状態他住所地特例(他住所地特例Model.get(住所地特例の識別子), row).toEntity());
             } else if (適用モード.equals(new RString(div.getMode_DisplayMode().toString()))) {
-                // TODO 凌護行 被保険者台帳管理（資格喪失）実装しないのため、１．４．１　資格喪失チェック実装しない。
-                //TODO　凌護行　被保険者台帳管理（資格喪失）実装しない。　2016/01/26。
-//                RString 画面喪失 = 被保険者台帳管理.ShikakuSoshitsuCheck(識別コード, null);
-                RString 画面喪失 = new RString("");
+                RString 画面喪失 = HihokenshashikakusoshitsuManager.createInstance().shikakuSoshitsuCheck(識別コード, HihokenshaNo.EMPTY);
                 if (RString.isNullOrEmpty(画面喪失)) {
                     TaJushochiTokureisyaKanriManager.createInstance().saveHihokenshaSositu(
                             new KaigoTatokuTekiyoJiyu(row.getTekiyoJiyu()),
