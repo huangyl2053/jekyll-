@@ -9,8 +9,9 @@ import jp.co.ndensan.reams.db.dba.entity.report.idochecklist.IdoCheckListReportS
 import jp.co.ndensan.reams.uz.uza.report.ReportEditorJoiner;
 
 /**
+ * 異動チェックリストBuilderクラスです。
  *
- * 異動チェックリストBuilderクラスです
+ * @reamsid_L DBA-0530-060 xuyue
  */
 class IdoCheckListBuilderImpl implements IIdoCheckListBuilder {
 
@@ -23,11 +24,11 @@ class IdoCheckListBuilderImpl implements IIdoCheckListBuilder {
      * @param headerEditor {@link IIdoCheckListEditor}
      * @param hyojiBodyEditor {@link IIdoCheckListEditor}
      */
-
     public IdoCheckListBuilderImpl(IIdoCheckListEditor headerEditor, IIdoCheckListEditor hyojiBodyEditor) {
         this.headerEditor = headerEditor;
         this.hyojiBodyEditor = hyojiBodyEditor;
     }
+
     /**
      * 帳票ソースをビルドします。
      *

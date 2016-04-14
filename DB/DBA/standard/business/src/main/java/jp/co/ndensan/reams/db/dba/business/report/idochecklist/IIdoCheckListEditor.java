@@ -9,8 +9,9 @@ import jp.co.ndensan.reams.db.dba.entity.report.idochecklist.IdoCheckListReportS
 import jp.co.ndensan.reams.uz.uza.report.IReportEditor;
 
 /**
- *
  * 異動チェックリストヘッダエディターのインターフェースクラスです。
+ *
+ * @reamsid_L DBA-0530-060 xuyue
  */
 interface IIdoCheckListEditor extends IReportEditor<IdoCheckListReportSource> {
 
