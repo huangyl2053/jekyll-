@@ -32,7 +32,7 @@ import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
  *
  * 帳票「認定調査票差異チェック票_DBE292003」の出力処理クラスです。
  *
- * @reamsid_L DBA-0401-140 duanzhanli
+ * @reamsid_L DBE-0080-140 duanzhanli
  */
 public class SaiChekkuhyo_292003Process extends BatchProcessBase<HomonChosaIraishoRelateEntity> {
 

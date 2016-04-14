@@ -51,7 +51,7 @@ import jp.co.ndensan.reams.uz.uza.util.config.BusinessConfig;
  *
  * 帳票「認定調査票差異チェック票_DBE292001」の出力処理クラスです。
  *
- * @reamsid_L DBA-0401-140 duanzhanli
+ * @reamsid_L DBE-0080-140 duanzhanli
  */
 public class SaiChekkuhyo_292001Process extends BatchProcessBase<HomonChosaIraishoRelateEntity> {
 

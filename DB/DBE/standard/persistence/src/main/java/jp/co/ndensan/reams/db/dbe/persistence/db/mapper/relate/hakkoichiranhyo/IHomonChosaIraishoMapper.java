@@ -13,7 +13,7 @@ import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5201NinteichosaIraiJohoEnti
 /**
  * 訪問調査依頼書発行のマッパーインタフェースです。
  *
- * @reamsid_L DBA-0401-140 duanzhanli
+ * @reamsid_L DBE-0080-140 duanzhanli
  */
 public interface IHomonChosaIraishoMapper {
 
