@@ -12,7 +12,7 @@ import lombok.Setter;
 /**
  * 住宅住所変更 住宅改修住宅住所
  *
- * @reamsid_L DBC-992-130 yangchenbing
+ * @reamsid_L DBC-0992-130 yangchenbing
  */
 @SuppressWarnings("PMD.UnusedPrivateField")
 @Getter
