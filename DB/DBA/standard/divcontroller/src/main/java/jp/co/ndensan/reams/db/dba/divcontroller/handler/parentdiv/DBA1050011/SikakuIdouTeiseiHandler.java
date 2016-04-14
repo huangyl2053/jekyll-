@@ -39,13 +39,13 @@ public class SikakuIdouTeiseiHandler {
     private static final RString 被保履歴ボタン = new RString("NinteirirekiNashiMode");
     private static final RString チェックNG = new RString("チェックNG");
     private static final RString 状態_登録 = new RString("登録");
+    private static final RString 表示モード = new RString("HihokenrirekiNashiMode");
     private final SikakuIdouTeiseiDiv div;
     /**
      * テストデータ
      */
-    private static final HihokenshaNo 被保険者番号 = new HihokenshaNo(new RString("0000000001"));
-    private static final RString 表示モード = new RString("HihokenrirekiNashiMode");
-    private static final ShikibetsuCode 識別コード = new ShikibetsuCode(new RString("000001"));
+    private final HihokenshaNo 被保険者番号;
+    private final ShikibetsuCode 識別コード;
 
     /**
      * コンストラクタです。
@@ -54,6 +54,8 @@ public class SikakuIdouTeiseiHandler {
      */
     public SikakuIdouTeiseiHandler(SikakuIdouTeiseiDiv div) {
         this.div = div;
+        this.被保険者番号 = ViewStateHolder.get(ViewStateKeys.資格異動の訂正_被保番号, HihokenshaNo.class);
+        this.識別コード = ViewStateHolder.get(ViewStateKeys.資格異動の訂正_識別コード, ShikibetsuCode.class);
     }
 
     /**
