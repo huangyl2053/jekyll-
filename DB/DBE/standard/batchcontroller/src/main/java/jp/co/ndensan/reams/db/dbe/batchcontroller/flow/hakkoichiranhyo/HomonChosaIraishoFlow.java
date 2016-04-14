@@ -37,7 +37,7 @@ import jp.co.ndensan.reams.uz.uza.util.config.BusinessConfig;
  *
  * 訪問調査依頼書発行_バッチフロークラスです。
  *
- * @reamsid_L DBA-0401-140 duanzhanli
+ * @reamsid_L DBE-0080-140 duanzhanli
  */
 public class HomonChosaIraishoFlow extends BatchFlowBase<IraishoIkkatsuHakkoBatchParamter> {
 

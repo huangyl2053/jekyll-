@@ -51,7 +51,7 @@ import jp.co.ndensan.reams.uz.uza.util.config.BusinessConfig;
  *
  * 帳票「前回認定調査結果との比較表」の出力処理クラスです。
  *
- * @reamsid_L DBA-0401-140 duanzhanli
+ * @reamsid_L DBE-0080-140 duanzhanli
  */
 public class ChosahyoSaiCheckhyoReportProcess extends BatchProcessBase<HomonChosaIraishoRelateEntity> {
 

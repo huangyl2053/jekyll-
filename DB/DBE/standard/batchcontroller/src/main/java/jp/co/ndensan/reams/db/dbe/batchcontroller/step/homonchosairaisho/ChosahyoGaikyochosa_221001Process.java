@@ -39,7 +39,7 @@ import jp.co.ndensan.reams.uz.uza.util.config.BusinessConfig;
  *
  * 要介護認定調査票（概況調査）の帳票DBE221001出力処理クラスです。
  *
- * @reamsid_L DBA-0401-140 duanzhanli
+ * @reamsid_L DBE-0080-140 duanzhanli
  */
 public class ChosahyoGaikyochosa_221001Process extends BatchProcessBase<HomonChosaIraishoRelateEntity> {
 

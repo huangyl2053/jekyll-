@@ -39,7 +39,7 @@ import jp.co.ndensan.reams.uz.uza.util.config.BusinessConfig;
  *
  * 要介護認定調査票（特記事項）の帳票DBE221043出力処理クラスです。
  *
- * @reamsid_L DBA-0401-140 duanzhanli
+ * @reamsid_L DBE-0080-140 duanzhanli
  */
 public class TokkijikoOCR_221043Process extends BatchProcessBase<HomonChosaIraishoRelateEntity> {
 

@@ -51,7 +51,7 @@ import jp.co.ndensan.reams.uz.uza.util.config.BusinessConfig;
  *
  * 帳票「DBE220001_認定調査依頼書」の処理クラスです。
  *
- * @reamsid_L DBA-0401-140 duanzhanli
+ * @reamsid_L DBE-0080-140 duanzhanli
  */
 public class IraishoReportProcess extends BatchProcessBase<HomonChosaIraishoRelateEntity> {
 
