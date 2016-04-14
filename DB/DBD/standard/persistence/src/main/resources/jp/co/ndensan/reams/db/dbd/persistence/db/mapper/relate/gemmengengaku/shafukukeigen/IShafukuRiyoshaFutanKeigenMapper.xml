@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 概要： 社会福祉法人等利用者負担軽減のマッピング用XMLです。 -->
+<!-- @reamsid_L DBD-9999-011 sunhaidi -->
+<!-- どのマッパーインターフェースと対応するかを指定する -->
+<mapper namespace="jp.co.ndensan.reams.db.dbd.persistence.db.mapper.relate.gemmengengaku.shafukukeigen.IShafukuRiyoshaFutanKeigenMapper">
+
+    <select id="select社会福祉法人等利用者負担軽減ByKey" 
+            parameterType="jp.co.ndensan.reams.db.dbd.definition.mybatisprm.gemmengengaku.shafukukeigen.ShafukuRiyoshaFutanKeigenMapperParameter"
+            resultMap="resultMap_ShafukuRiyoshaFutanKeigenEntity" fetchSize="500">
+        <include refid="selectShafukuRiyoshaFutanKeigenEntity" />
+    </select>
+
+    <select id="select社会福祉法人等利用者負担軽減リストBy主キー1" 
+            resultMap="resultMap_ShafukuRiyoshaFutanKeigenEntity" 
+            parameterType="jp.co.ndensan.reams.db.dbd.definition.mybatisprm.gemmengengaku.shafukukeigen.ShafukuRiyoshaFutanKeigenMapperParameter"
+            fetchSize="500">
+        <include refid="selectShafukuRiyoshaFutanKeigenEntity" />
+    </select>
+
+    <!-- TODO RelateEntityを取得できるSQLに修正してください。where句はMapperParameterクラスに合わせて修正します。 -->
+    <sql id="selectShafukuRiyoshaFutanKeigenEntity">
+        SELECT
+        DbT4017ShakaiFukushiHojinRiyoshaFutanKeigen.*,
+        DbT4010GemmenGengakuShinsei.*
+        FROM
+        (<include refid="jp.co.ndensan.reams.db.dbd.persistence.db.mapper.basic.IDbT4017ShakaiFukushiHojinRiyoshaFutanKeigenMapper.noDeleted_DbT4017ShakaiFukushiHojinRiyoshaFutanKeigen" />) AS DbT4017ShakaiFukushiHojinRiyoshaFutanKeigen
+        LEFT JOIN
+        (<include refid="jp.co.ndensan.reams.db.dbd.persistence.db.mapper.basic.IDbT4010GemmenGengakuShinseiMapper.noDeleted_DbT4010GemmenGengakuShinsei" />) AS DbT4010GemmenGengakuShinsei
+        ON
+        DbT4017ShakaiFukushiHojinRiyoshaFutanKeigen."dbT4017ShakaiFukushiHojinRiyoshaFutanKeigen_shoKisaiHokenshaNo" = DbT4010GemmenGengakuShinsei."dbT4010GemmenGengakuShinsei_shoKisaiHokenshaNo" and
+        DbT4017ShakaiFukushiHojinRiyoshaFutanKeigen."dbT4017ShakaiFukushiHojinRiyoshaFutanKeigen_hihokenshaNo" = DbT4010GemmenGengakuShinsei."dbT4010GemmenGengakuShinsei_hihokenshaNo" and
+        DbT4017ShakaiFukushiHojinRiyoshaFutanKeigen."dbT4017ShakaiFukushiHojinRiyoshaFutanKeigen_rirekiNo" = DbT4010GemmenGengakuShinsei."dbT4010GemmenGengakuShinsei_shinseiRirekiNo" 
+        <where>
+            <if test="uses証記載保険者番号">
+                AND DbT4017ShakaiFukushiHojinRiyoshaFutanKeigen."dbT4017ShakaiFukushiHojinRiyoshaFutanKeigen_shoKisaiHokenshaNo" = #{証記載保険者番号}
+            </if>
+            <if test="uses被保険者番号">
+                AND DbT4017ShakaiFukushiHojinRiyoshaFutanKeigen."dbT4017ShakaiFukushiHojinRiyoshaFutanKeigen_hihokenshaNo" = #{被保険者番号}
+            </if>
+            <if test="uses履歴番号">
+                AND DbT4017ShakaiFukushiHojinRiyoshaFutanKeigen."dbT4017ShakaiFukushiHojinRiyoshaFutanKeigen_rirekiNo" = #{履歴番号}
+            </if>
+        </where>
+    </sql>
+
+    <!-- TODO RelateEntityの形に合わせてマッピング定義を修正してください。 -->
+    <resultMap id="resultMap_ShafukuRiyoshaFutanKeigenEntity" type="jp.co.ndensan.reams.db.dbd.entity.db.relate.gemmengengaku.shafukukeigen.ShafukuRiyoshaFutanKeigenEntity" autoMapping="true">
+        <id property="社会福祉法人等利用者負担軽減Entity.shoKisaiHokenshaNo" column="dbT4017ShakaiFukushiHojinRiyoshaFutanKeigen_shoKisaiHokenshaNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.ShoKisaiHokenshaNoTypeHandler"/>
+        <id property="社会福祉法人等利用者負担軽減Entity.hihokenshaNo" column="dbT4017ShakaiFukushiHojinRiyoshaFutanKeigen_hihokenshaNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.HihokenshaNoTypeHandler"/>
+        <id property="社会福祉法人等利用者負担軽減Entity.rirekiNo" column="dbT4017ShakaiFukushiHojinRiyoshaFutanKeigen_rirekiNo" />
+        <association property="社会福祉法人等利用者負担軽減Entity" resultMap="jp.co.ndensan.reams.db.dbd.persistence.db.mapper.basic.IDbT4017ShakaiFukushiHojinRiyoshaFutanKeigenMapper.ResultMap_DbT4017ShakaiFukushiHojinRiyoshaFutanKeigenEntity"/>
+        <collection property="減免減額申請Entity" resultMap="jp.co.ndensan.reams.db.dbd.persistence.db.mapper.basic.IDbT4010GemmenGengakuShinseiMapper.ResultMap_DbT4010GemmenGengakuShinseiEntity"/>
+    </resultMap>
+</mapper>
