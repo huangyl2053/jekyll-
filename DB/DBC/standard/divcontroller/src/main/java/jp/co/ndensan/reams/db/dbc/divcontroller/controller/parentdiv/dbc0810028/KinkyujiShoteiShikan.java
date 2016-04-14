@@ -72,6 +72,7 @@ public class KinkyujiShoteiShikan {
         handler.initDgdKinkyujiShoteiList(businessList);
         ShikibetsuNoKanriResult 識別番号 = finder.getShikibetsubangoKanri(サービス年月, 様式番号);
         handler.setボタン表示制御処理(識別番号);
+        div.getPanelDetail().setDisplayNone(true);
         return ResponseData.of(div).respond();
     }
 
