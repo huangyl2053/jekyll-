@@ -11,6 +11,7 @@ import jp.co.ndensan.reams.db.dbc.business.core.jutakukaishusikyushinsei.Jutakuk
 import jp.co.ndensan.reams.db.dbc.business.core.jutakukaishusikyushinsei.JutakukaishuSikyuShinseiResult;
 import jp.co.ndensan.reams.db.dbc.definition.core.jutakukaishu.JutakukaishuShinseiKubun;
 import jp.co.ndensan.reams.db.dbc.definition.core.shikyufushikyukubun.ShikyuFushikyuKubun;
+import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0710011.DBC0710011StateName;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0710011.JutakuKaishuShinseiDiv;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0710011.dgJutakuKaishuShinseiList_Row;
 import jp.co.ndensan.reams.db.dbc.divcontroller.viewbox.ViewStateKeys;
@@ -28,8 +29,6 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 public final class JutakuKaishuShinseiHandler {
 
     private final JutakuKaishuShinseiDiv div;
-    private final RString 画面モード_支給申請 = new RString("支給申請モード");
-    private final RString 画面モード_事前申請 = new RString("事前申請モード");
     private final RString 審査済み = new RString("審査済み");
     private final RString 未審査 = new RString("未審査");
     private final RString 事前申請有る = new RString("○");
@@ -65,9 +64,9 @@ public final class JutakuKaishuShinseiHandler {
     public void onLoad(HihokenshaNo 被保険者番号, RString 画面モード) {
         JutakukaishuSikyuShinseiManager manager = JutakukaishuSikyuShinseiManager.createInstance();
         List<dgJutakuKaishuShinseiList_Row> rows = new ArrayList<>();
-        if (画面モード_支給申請.equalsIgnoreCase(画面モード)) {
+        if (画面モード.equals(DBC0710011StateName.支給申請モード.getName())) {
             set支給申請一覧(manager, 被保険者番号, rows);
-        } else if (画面モード_事前申請.equalsIgnoreCase(画面モード)) {
+        } else if (画面モード.equals(DBC0710011StateName.事前申請モード.getName())) {
             set事前申請一覧(manager, 被保険者番号, rows);
         }
         div.getJutakuKaishuShinseiList().getDgJutakuKaishuShinseiList().setDataSource(rows);
@@ -88,7 +87,7 @@ public final class JutakuKaishuShinseiHandler {
     public void setModifyMode(RString 画面モード) {
         RString 申請区分 = div.getJutakuKaishuShinseiList().getDgJutakuKaishuShinseiList().getClickedItem()
                 .getTxtShinseiKubun();
-        if (画面モード_支給申請.equalsIgnoreCase(画面モード)) {
+        if (画面モード.equals(DBC0710011StateName.支給申請モード.getName())) {
             if (申請区分事前申請.equals(申請区分)) {
                 ViewStateHolder.put(ViewStateKeys.表示モード, 事前申請登録モード);
             } else if (申請区分支給申請.equals(申請区分)) {
@@ -96,7 +95,7 @@ public final class JutakuKaishuShinseiHandler {
             } else if (申請区分取消.equals(申請区分)) {
                 ViewStateHolder.put(ViewStateKeys.表示モード, 取消モード);
             }
-        } else if (画面モード_事前申請.equalsIgnoreCase(画面モード)) {
+        } else if (画面モード.equals(DBC0710011StateName.事前申請モード.getName())) {
             if (申請区分事前申請.equals(申請区分)) {
                 ViewStateHolder.put(ViewStateKeys.表示モード, 修正モード);
             } else if (申請区分取消.equals(申請区分)) {
