@@ -58,6 +58,12 @@ public class KyokaisoKanriMasterListBatchParameter extends BatchParameterBase {
     private RString order_ID;
 
     /**
+     * コンストラクタです。
+     */
+    public KyokaisoKanriMasterListBatchParameter() {
+    }
+
+    /**
      * processのパラメータを生成します。
      *
      * @return processパラメータ
