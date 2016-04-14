@@ -21,8 +21,9 @@ import jp.co.ndensan.reams.uz.uza.message.QuestionMessage;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ResponseHolder;
 
 /**
- *
  * 介護保険特別会計経理状況登録_様式４の３情報Divを制御します。
+ *
+ * @reamsid_L DBU-1130-040 liangbc
  */
 public class YoshikiYonnosan {
 

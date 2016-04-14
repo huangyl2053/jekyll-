@@ -9,8 +9,9 @@ import jp.co.ndensan.reams.db.dbb.business.report.tsuchisho.notsu.HonSanteiNonyu
 import lombok.Getter;
 
 /**
- *
  * 保険料納入通知書（本算定過年度）【ブックタイプ】NonyuTsuchishoBookItem
+ *
+ * @reamsid_L DBB-9110-160 liangbc
  */
 @Getter
 @SuppressWarnings("PMD.UnusedPrivateField")
