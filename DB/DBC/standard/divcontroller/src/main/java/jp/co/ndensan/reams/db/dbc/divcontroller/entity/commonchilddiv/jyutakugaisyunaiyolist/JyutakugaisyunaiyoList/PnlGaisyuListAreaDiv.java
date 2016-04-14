@@ -12,7 +12,6 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 /**
  * PnlGaisyuListArea のクラスファイル
  *
- * @reamsid_L DBC-0940-010 yaodongsheng
  */
 public class PnlGaisyuListAreaDiv extends Panel {
 

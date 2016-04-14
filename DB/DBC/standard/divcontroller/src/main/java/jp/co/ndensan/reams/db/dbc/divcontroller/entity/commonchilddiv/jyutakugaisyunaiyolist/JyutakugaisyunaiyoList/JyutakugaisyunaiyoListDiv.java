@@ -14,7 +14,6 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.domain.*;
 /**
  * JyutakugaisyunaiyoList のクラスファイル
  *
- * @reamsid_L DBC-0940-010 yaodongsheng
  */
 public class JyutakugaisyunaiyoListDiv extends Panel implements IJyutakugaisyunaiyoListDiv {
 

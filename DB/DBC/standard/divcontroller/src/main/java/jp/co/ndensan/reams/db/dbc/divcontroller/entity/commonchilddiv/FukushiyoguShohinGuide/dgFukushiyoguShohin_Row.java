@@ -13,7 +13,6 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxDate;
 /**
  * dgFukushiyoguShohin_Row のクラスファイル
  *
- * @reamsid_L DBC-0970-020 lizhuoxuan
  */
 public class dgFukushiyoguShohin_Row extends DataRow {
     // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2015-11-30_08-54-50">

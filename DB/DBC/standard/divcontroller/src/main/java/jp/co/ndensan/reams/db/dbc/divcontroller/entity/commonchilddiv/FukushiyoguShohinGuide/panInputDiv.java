@@ -14,7 +14,6 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxDate;
 /**
  * panInput のクラスファイル
  *
- * @reamsid_L DBC-0970-020 lizhuoxuan
  */
 public class panInputDiv extends Panel {
 

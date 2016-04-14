@@ -14,7 +14,6 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.DataRow;
 
 /**
  * dgCodeIchiran_Row のクラスファイル 
- * @reamsid_L DBA-0060-010 dongyabin
  * @author 自動生成
  */
 

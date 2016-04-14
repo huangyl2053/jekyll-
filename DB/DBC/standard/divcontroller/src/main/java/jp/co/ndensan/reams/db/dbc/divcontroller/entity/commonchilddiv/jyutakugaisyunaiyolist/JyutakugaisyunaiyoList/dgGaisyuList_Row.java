@@ -12,7 +12,6 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 /**
  * dgGaisyuList_Row のクラスファイル。
  *
- * @reamsid_L DBC-0940-010 yaodongsheng
  */
 public class dgGaisyuList_Row extends DataRow {
     // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：バージョン情報無し">

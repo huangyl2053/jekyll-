@@ -15,7 +15,6 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxDate;
 
 /**
  * ServiceCodeCommonChildDiv のクラスファイル 
- * @reamsid_L DBA-0060-010 dongyabin
  * @author 自動生成
  */
 public class ServiceCodeCommonChildDivDiv extends Panel implements IServiceCodeCommonChildDiv, IDialogDiv{
