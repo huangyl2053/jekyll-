@@ -8,9 +8,16 @@ package jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.Hihosyosa
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import java.util.HashSet;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
+import jp.co.ndensan.reams.db.dbz.business.core.HihokenshaDaicho;
+import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.ShisetsuNyutaishoRirekiKanri.IShisetsuNyutaishoRirekiKanriDiv;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.jushochitokureirirekilist.JushochiTokureiRirekiList.IJushochiTokureiRirekiListDiv;
+import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.jushochitokureirirekilist.JushochiTokureiRirekiList.JushochiTokureiRirekiListDiv;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.shikakuhenkorireki.ShikakuHenkoRireki.IShikakuHenkoRirekiDiv;
-import jp.co.ndensan.reams.db.dbz.divcontroller.entity.parentdiv.shisetsunyutaishorirekikanri.IShisetsuNyutaishoRirekiKanriDiv;
+import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
+import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.binding.DropDownList;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Label;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Mode;
@@ -19,14 +26,16 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.TextBox;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxDate;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ICommonChildDivMode;
 import jp.co.ndensan.reams.uz.uza.ui.servlets._CommonChildDivModeUtil;
+import jp.co.ndensan.reams.uz.uza.util.db.SearchResult;
 
 /**
- * Hihosyosai のクラスファイル 
- * 
- * @author 自動生成
+ * Hihosyosai のクラスファイル
+ *
+ * @reamsid_L DBA-0170-010 linghuhang
  */
 public class HihosyosaiDiv extends Panel implements IHihosyosaiDiv {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：バージョン情報無し">
+
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -563,7 +572,7 @@ public class HihosyosaiDiv extends Panel implements IHihosyosaiDiv {
             DisplayType[] enumArray = DisplayType.values();
 
             for (DisplayType enumStr : enumArray) {
-                if (str.equals(enumStr.name.toString())) { 
+                if (str.equals(enumStr.name.toString())) {
                     return enumStr;
                 }
             }
@@ -578,11 +587,11 @@ public class HihosyosaiDiv extends Panel implements IHihosyosaiDiv {
     }
 
     public DisplayType getMode_DisplayType() {
-        return (DisplayType) _CommonChildDivModeUtil.getMode( this.modes, DisplayType.class );
+        return (DisplayType) _CommonChildDivModeUtil.getMode(this.modes, DisplayType.class);
     }
 
-    public void setMode_DisplayType( DisplayType value ) {
-        _CommonChildDivModeUtil.setMode( this.modes, DisplayType.class , value );
+    public void setMode_DisplayType(DisplayType value) {
+        _CommonChildDivModeUtil.setMode(this.modes, DisplayType.class, value);
     }
 
     /*
@@ -594,7 +603,7 @@ public class HihosyosaiDiv extends Panel implements IHihosyosaiDiv {
     }
 
     @JsonIgnore
-    public void  setTabPnlJyusyoti(tabPnlJyusyotiDiv tabPnlJyusyoti) {
+    public void setTabPnlJyusyoti(tabPnlJyusyotiDiv tabPnlJyusyoti) {
         this.getTabContainerDetail().setTabPnlJyusyoti(tabPnlJyusyoti);
     }
 
@@ -609,7 +618,7 @@ public class HihosyosaiDiv extends Panel implements IHihosyosaiDiv {
     }
 
     @JsonIgnore
-    public void  setTabPnlShikaku(tabPnlShikakuDiv tabPnlShikaku) {
+    public void setTabPnlShikaku(tabPnlShikakuDiv tabPnlShikaku) {
         this.getTabContainerDetail().setTabPnlShikaku(tabPnlShikaku);
     }
 
@@ -624,7 +633,7 @@ public class HihosyosaiDiv extends Panel implements IHihosyosaiDiv {
     }
 
     @JsonIgnore
-    public void  setTabPnlShisetu(tabPnlShisetuDiv tabPnlShisetu) {
+    public void setTabPnlShisetu(tabPnlShisetuDiv tabPnlShisetu) {
         this.getTabContainerDetail().setTabPnlShisetu(tabPnlShisetu);
     }
 
@@ -635,5 +644,78 @@ public class HihosyosaiDiv extends Panel implements IHihosyosaiDiv {
 
     // </editor-fold>
     //--------------- この行より下にコードを追加してください -------------------
+    @Override
+    public void 被保詳細モード(RString モード) {
+        setMode_DisplayType(DisplayType.getEnum(モード.toString()));
+    }
 
+    @Override
+    public void 住所地特例表示モード(RString 住所地特例表示モード) {
+        this.getCcdJyusyotiTokure().setMeisaiDisplayMode(JushochiTokureiRirekiListDiv.MeisaiDisplayMode.valueOf(住所地特例表示モード.toString()));
+    }
+
+    @Override
+    public void 住所地特例追加ボタン(RString 住所地特例追加ボタンモード) {
+        this.getCcdJyusyotiTokure().setAddButtonDisplay(JushochiTokureiRirekiListDiv.BtnDisplayMode.valueOf(住所地特例追加ボタンモード.toString()));
+    }
+
+    @Override
+    public void 住所地特例表示タイプ(RString 住所地特例表示タイプモード) {
+        this.getCcdJyusyotiTokure().setDisplayType(JushochiTokureiRirekiListDiv.DisplayType.valueOf(住所地特例表示タイプモード.toString()));
+    }
+
+    @Override
+    public void 資格関連異動表示モード(RString 資格関連異動表示モード) {
+        this.getCcdShikakuKanrenIdo().setDisplayTypeBykey(資格関連異動表示モード);
+    }
+
+    @Override
+    public void 施設入退所表示モード(RString 施設入退所表示モード) {
+        this.getCcdShisetuNyutaisyo().set表示モード(施設入退所表示モード);
+    }
+
+    @Override
+    public void 施設入退所明細表示モード(RString 施設入退所明細表示モード) {
+        this.getCcdShisetuNyutaisyo().set明細表示モード(施設入退所明細表示モード);
+    }
+
+    @Override
+    public void 施設入退所利用モード(RString 施設入退所利用モード) {
+        this.getCcdShisetuNyutaisyo().set利用モード(施設入退所利用モード);
+    }
+
+    @Override
+    public void 施設入退所表示widthサイズ(RString 施設入退所表示widthサイズ) {
+        this.getCcdShisetuNyutaisyo().set表示widthサイズ(施設入退所表示widthサイズ);
+    }
+
+    @Override
+    public void 施設入退所表示heightサイズ(RString 施設入退所表示heightサイズ) {
+        this.getCcdShisetuNyutaisyo().set表示heightサイズ(施設入退所表示heightサイズ);
+    }
+
+    private HihosyosaiHandler getHandler() {
+        return new HihosyosaiHandler(this);
+    }
+
+    @Override
+    public void initialize(LasdecCode 市町村コード, RString 導入形態コード, LasdecCode 広住特措置元市町村コード,
+            HihokenshaNo 被保険者番号, FlexibleDate 異動日, RString 枝番, ShikibetsuCode 識別コード, FlexibleDate 資格取得日) {
+        getHandler().initialize(市町村コード, 導入形態コード, 広住特措置元市町村コード, 被保険者番号, 異動日, 枝番, 識別コード, 資格取得日);
+    }
+
+    @Override
+    public void setDdlHenkoJiyu(RString key, boolean falg) {
+        getHandler().setDdlHenkoJiyu(key, falg);
+    }
+
+    @Override
+    public void 施設入退所保存処理() {
+        getHandler().施設入退所保存処理();
+    }
+
+    @Override
+    public SearchResult<HihokenshaDaicho> getGridData() {
+        return getHandler().資格関連異動一覧取得();
+    }
 }
