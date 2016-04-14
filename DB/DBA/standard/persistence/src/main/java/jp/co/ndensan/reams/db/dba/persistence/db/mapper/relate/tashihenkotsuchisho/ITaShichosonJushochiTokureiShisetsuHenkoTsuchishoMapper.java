@@ -15,6 +15,7 @@ import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT1005KaigoJogaiTokureiTaisho
 /**
  * 介護除外住所地特例対象施設情報取得Mapperクラスです。
  *
+ * @reamsid_L DBA-0380-040 huangh
  */
 public interface ITaShichosonJushochiTokureiShisetsuHenkoTsuchishoMapper {
 

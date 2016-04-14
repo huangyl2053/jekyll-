@@ -5,8 +5,10 @@ import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaN
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.ui.binding.ICommonChildDivBaseProperties;
 
-/*
+/**
  * このコードはツールによって生成されました。
+ *
+ * @reamsid_L DBA-0130-011 huangh
  */
 public interface IShikakuTokusoRirekiDiv extends ICommonChildDivBaseProperties {
 

@@ -50,6 +50,7 @@ import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 /**
  * 介護保険住所地特例施設変更通知書のビジネスクラスです。
  *
+ * @reamsid_L DBA-0380-040 huangh
  */
 public class TaShichosonJushochiTokureiShisetsuHenkoTsuchishoFinder {
 

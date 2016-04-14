@@ -18,7 +18,7 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.ResponseHolder;
 /**
  * 共有子Div「住所地特例履歴List」のイベントを定義したDivControllerクラスです。
  *
- * @author 自動生成
+ * @reamsid_L DBA-0150-011 huangh
  */
 public class JushochiTokureiRirekiList {
 

@@ -31,7 +31,7 @@ import jp.co.ndensan.reams.uz.uza.util.db.SearchResult;
 /**
  * 共有子Div「住所地特例履歴」の状態を変更するクラスです。
  *
- * @author n8178 城間篤人
+ * @reamsid_L DBA-0150-011 huangh
  */
 public class JushochiTokureiRirekiListHandler {
 

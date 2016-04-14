@@ -25,7 +25,7 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets._CommonChildDivModeUtil;
 /**
  * JushochiTokureiRirekiList のクラスファイル
  *
- * @author 自動生成
+ * @reamsid_L DBA-0150-011 huangh
  */
 public class JushochiTokureiRirekiListDiv extends Panel implements IJushochiTokureiRirekiListDiv {
 

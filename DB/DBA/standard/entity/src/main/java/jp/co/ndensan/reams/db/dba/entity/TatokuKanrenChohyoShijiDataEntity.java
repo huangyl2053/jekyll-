@@ -13,6 +13,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 /**
  * 他市町村住所地特例者関連帳票発行指示データEntity
  *
+ * @reamsid_L DBA-0380-050 huangh
  */
 @lombok.Getter
 @lombok.Setter

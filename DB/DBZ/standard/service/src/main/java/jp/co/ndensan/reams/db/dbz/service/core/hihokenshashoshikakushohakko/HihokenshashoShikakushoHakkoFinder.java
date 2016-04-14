@@ -48,6 +48,7 @@ import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
 /**
  * 共有子Div「被保険者証・資格証」の状態を変更するクラスです
  *
+ * @reamsid_L DBA-1090-021 huangh
  */
 public class HihokenshashoShikakushoHakkoFinder {
 

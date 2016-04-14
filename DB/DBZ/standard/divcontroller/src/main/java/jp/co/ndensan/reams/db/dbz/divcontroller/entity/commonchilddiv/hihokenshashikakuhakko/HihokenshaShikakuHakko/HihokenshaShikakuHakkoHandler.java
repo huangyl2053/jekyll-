@@ -25,7 +25,7 @@ import jp.co.ndensan.reams.uz.uza.util.code.entity.UzT0007CodeEntity;
 /**
  * 共有子Div「被保険者証・資格証」の状態を変更するクラスです。
  *
- *
+ * @reamsid_L DBA-1090-011 huangh
  */
 public class HihokenshaShikakuHakkoHandler {
 

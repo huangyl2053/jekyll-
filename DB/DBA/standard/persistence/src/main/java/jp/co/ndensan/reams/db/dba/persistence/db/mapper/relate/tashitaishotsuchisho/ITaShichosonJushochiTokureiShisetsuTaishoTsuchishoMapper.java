@@ -12,6 +12,8 @@ import jp.co.ndensan.reams.db.dba.entity.db.relate.TaShichosonJushochiTokureiShi
 /**
  *
  * 住特施設退所通知書のMapperクラスです。
+ *
+ * @reamsid_L DBA-0380-010 huangh
  */
 public interface ITaShichosonJushochiTokureiShisetsuTaishoTsuchishoMapper {
 

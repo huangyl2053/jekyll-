@@ -41,7 +41,7 @@ import jp.co.ndensan.reams.uz.uza.util.db.SearchResult;
 /**
  * ShikakuTokusoRireki のクラスファイル
  *
- * @author 自動生成
+ * @reamsid_L DBA-0130-011 huangh
  */
 public class ShikakuTokusoRirekiDiv extends Panel implements IShikakuTokusoRirekiDiv {
 

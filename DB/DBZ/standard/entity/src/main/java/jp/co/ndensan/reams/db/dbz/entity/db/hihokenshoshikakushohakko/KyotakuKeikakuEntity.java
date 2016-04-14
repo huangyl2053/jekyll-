@@ -11,6 +11,8 @@ import jp.co.ndensan.reams.uz.uza.util.db.IDbAccessable;
 
 /**
  * 支援事業者の情報Entity
+ *
+ * @reamsid_L DBA-1090-021 huangh
  */
 @lombok.Getter
 @lombok.Setter

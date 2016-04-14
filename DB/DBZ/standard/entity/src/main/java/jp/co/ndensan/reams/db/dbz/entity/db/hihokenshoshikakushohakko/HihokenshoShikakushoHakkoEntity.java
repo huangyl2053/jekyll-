@@ -15,6 +15,8 @@ import jp.co.ndensan.reams.uz.uza.util.db.IDbAccessable;
 /**
  *
  * 被保険者証資格証発行情報取得Entityです。
+ *
+ * @reamsid_L DBA-1090-021 huangh
  */
 @lombok.Getter
 @lombok.Setter
