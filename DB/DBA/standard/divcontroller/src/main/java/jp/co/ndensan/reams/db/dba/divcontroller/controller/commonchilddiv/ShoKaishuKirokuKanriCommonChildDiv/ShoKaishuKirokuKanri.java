@@ -7,7 +7,6 @@ package jp.co.ndensan.reams.db.dba.divcontroller.controller.commonchilddiv.ShoKa
 
 import java.util.List;
 import jp.co.ndensan.reams.db.dba.divcontroller.entity.commonchilddiv.ShoKaishuKirokuKanri.ShoKaishuKirokuKanriDiv;
-import jp.co.ndensan.reams.db.dba.divcontroller.entity.commonchilddiv.ShoKaishuKirokuKanri.ShoKaishuKirokuKanriHandler;
 import jp.co.ndensan.reams.db.dba.divcontroller.entity.commonchilddiv.ShoKaishuKirokuKanri.ValidationHandler;
 import jp.co.ndensan.reams.db.dba.divcontroller.entity.commonchilddiv.ShoKaishuKirokuKanri.dgKoufuKaishu_Row;
 import jp.co.ndensan.reams.db.dbz.definition.core.ViewStateKeys;
@@ -167,10 +166,6 @@ public class ShoKaishuKirokuKanri {
         shoKaishuDiv.getPanelInput().getBtnCancel().setDisabled(true);
         response.data = shoKaishuDiv;
         return response;
-    }
-
-    private ShoKaishuKirokuKanriHandler createHandlerOf(ShoKaishuKirokuKanriDiv requestDiv) {
-        return new ShoKaishuKirokuKanriHandler(requestDiv);
     }
 
     private ValidationMessageControlPairs check_btnKakuninn(ShoKaishuKirokuKanriDiv requestDiv) {

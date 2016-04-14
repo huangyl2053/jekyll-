@@ -20,4 +20,10 @@ public interface IShoKaishuKirokuKanriDiv extends ICommonChildDivBaseProperties 
      * @return 証交付回収情報一覧 証交付回収情報一覧
      */
     public List<dgKoufuKaishu_Row> get証交付回収情報一覧();
+
+    /**
+     * 証交付回収の保存処理結果を返します。
+     *
+     */
+    void saveShoKaishuKirokuKanri();
 }

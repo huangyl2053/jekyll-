@@ -7,21 +7,20 @@ package jp.co.ndensan.reams.db.dba.divcontroller.entity.commonchilddiv.ShoKaishu
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
-
 import java.util.HashSet;
 import java.util.List;
-import jp.co.ndensan.reams.uz.uza.ui.servlets.ICommonChildDivMode;
-import jp.co.ndensan.reams.uz.uza.ui.servlets._CommonChildDivModeUtil;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Button;
 import jp.co.ndensan.reams.uz.uza.ui.binding.DataGrid;
 import jp.co.ndensan.reams.uz.uza.ui.binding.DropDownList;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Mode;
+import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TextBox;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxDate;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxMultiLine;
+import jp.co.ndensan.reams.uz.uza.ui.servlets.ICommonChildDivMode;
+import jp.co.ndensan.reams.uz.uza.ui.servlets._CommonChildDivModeUtil;
 
 /**
  * ShoKaishuKirokuKanri のクラスファイル
@@ -257,5 +256,14 @@ public class ShoKaishuKirokuKanriDiv extends Panel implements IShoKaishuKirokuKa
     @Override
     public List<dgKoufuKaishu_Row> get証交付回収情報一覧() {
         return new ShoKaishuKirokuKanriHandler(this).get証交付回収情報一覧();
+    }
+
+    /**
+     * 適用情報一覧を取得します。
+     *
+     */
+    @Override
+    public void saveShoKaishuKirokuKanri() {
+        new ShoKaishuKirokuKanriHandler(this).saveShoKaishuKirokuKanri();
     }
 }
