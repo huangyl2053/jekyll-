@@ -18,7 +18,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
  */
 public class ShisetsutourukuPanelHandler {
 
-    private static final RString その他特例施設 = new RString("2");
+    private static final RString その他特例施設 = new RString("01");
     private static final RString 管内 = new RString("1");
     private final ShisetsutourukuPanelDiv div;
 
