@@ -26,10 +26,9 @@ import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
 
 /**
- *
  * 資格得喪履歴クラスです。
  *
- * @reamsid_L DBA-0310-010 wanghui
+ * @reamsid_L DBA-0130-010 wanghui
  */
 public class ShikakuTokusoFinder {
 
