@@ -9,8 +9,9 @@ import jp.co.ndensan.reams.db.dba.entity.report.jukirendotorokulist.JukiRendoTor
 import jp.co.ndensan.reams.uz.uza.report.IReportEditor;
 
 /**
- *
  * 住基連動登録リスヘッダエディターのインターフェースクラスです。
+ *
+ * @reamsid_L DBA-0560-060 xuyue
  */
 interface IJukiRendoTorokuListEditor extends IReportEditor<JukiRendoTorokuListReportSource> {
 

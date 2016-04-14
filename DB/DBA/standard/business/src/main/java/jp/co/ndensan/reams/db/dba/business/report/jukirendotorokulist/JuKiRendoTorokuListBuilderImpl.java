@@ -9,8 +9,9 @@ import jp.co.ndensan.reams.db.dba.entity.report.jukirendotorokulist.JukiRendoTor
 import jp.co.ndensan.reams.uz.uza.report.ReportEditorJoiner;
 
 /**
+ * 住基連動登録リストBuilderクラスです。
  *
- * 住基連動登録リストBuilderクラスです
+ * @reamsid_L DBA-0560-060 xuyue
  */
 class JuKiRendoTorokuListBuilderImpl implements IJuKiRendoTorokuListBuilder {
 
@@ -33,7 +34,6 @@ class JuKiRendoTorokuListBuilderImpl implements IJuKiRendoTorokuListBuilder {
      *
      * @return {@link JukiRendoTorokuListReportSource}
      */
-
     @Override
     public JukiRendoTorokuListReportSource build() {
         return ReportEditorJoiner.from(new JukiRendoTorokuListReportSource()).join(headerEditor).join(hyojiBodyEditor).buildSource();

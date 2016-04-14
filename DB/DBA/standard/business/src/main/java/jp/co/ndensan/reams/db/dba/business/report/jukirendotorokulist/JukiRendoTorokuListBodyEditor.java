@@ -8,8 +8,9 @@ package jp.co.ndensan.reams.db.dba.business.report.jukirendotorokulist;
 import jp.co.ndensan.reams.db.dba.entity.report.jukirendotorokulist.JukiRendoTorokuListReportSource;
 
 /**
+ * 住基連動登録リスト帳票のボディエディタクラスです。
  *
- * @author yuyong3
+ * @reamsid_L DBA-0560-060 xuyue
  */
 class JukiRendoTorokuListBodyEditor implements IJukiRendoTorokuListEditor {
 
