@@ -18,6 +18,8 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 /**
  *
  * 介護保険特別会計経理状況登録_検索情報Divを制御します。
+ *
+ * @reamsid_L DBU-1130-010 wangjie2
  */
 public class TaishokensakuJyouken {
 
