@@ -353,7 +353,7 @@ public class tplFirstHihokensyasuDiv extends TablePanel {
 /**
  * celZenGetsumatsugenzailrokugoijonanagomiman のクラスファイル
  *
- * @reamsid_L DBU-1100-060 zhangrui
+ * @author 自動生成
  */
 class celZenGetsumatsugenzailrokugoijonanagomimanAttplFirstHihokensyasu extends TableCell {
 
