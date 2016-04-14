@@ -282,7 +282,10 @@ public class IryohokenRirekiCommonChildDiv {
         if (ichiran_Row.getDefaultDataName4().compareTo(ichiran_Row.getDefaultDataName3()) < 0) {
             throw new ApplicationException(
                     DbzErrorMessages.期間が不正_未来日付不可.getMessage().replace(
-                            ichiran_Row.getDefaultDataName4().toString(), ichiran_Row.getDefaultDataName3().toString()));
+                            ichiran_Row.getDefaultDataName3().toString(), ichiran_Row.getDefaultDataName4().toString()));
+        }
+        if (childDivDate.size() <= 1) {
+            return;
         }
         if (sortIndex == 0) {
             IryohokenRirekiCommonChildDivDate nextData = childDivDate.get(sortIndex + 1);
