@@ -71,7 +71,7 @@ public class ShisetsuNyutaishoIdo {
      */
     public ResponseData onClick_commonButtonUpdate(ShisetsuNyutaishoIdoDiv div) {
         if (is履歴期間重複(div)) {
-            throw new ApplicationException(UrErrorMessages.期間が不正_追加メッセージあり２.getMessage().replace("入所日").replace("退所日"));
+            throw new ApplicationException(UrErrorMessages.期間が不正_追加メッセージあり２.getMessage().replace("入所日", "退所日"));
         }
         if (!ResponseHolder.isReRequest()) {
             return ResponseData.of(div).addMessage(UrQuestionMessages.処理実行の確認.getMessage()).respond();

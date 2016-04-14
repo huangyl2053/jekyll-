@@ -148,12 +148,14 @@ public class SetaiinShotokuJohoFinder {
     public List<SetaiinShotoku> get世帯員所得情報(ShikibetsuCode 識別コード, FlexibleYear 所得年度, YMDHMS 所得基準年月日) {
         requireNonNull(識別コード, UrErrorMessages.検索キーの誤り.getMessage().toString());
         requireNonNull(所得年度, UrErrorMessages.検索キーの誤り.getMessage().toString());
-//        requireNonNull(所得基準年月日, UrErrorMessages.検索キーの誤り.getMessage().toString());
-//        if (所得基準年月日 == null) {
-//            所得基準年月日 = YMDHMS.now();
-//        }
+        requireNonNull(所得基準年月日, UrErrorMessages.検索キーの誤り.getMessage().toString());
+        if (所得基準年月日 == null) {
+            所得基準年月日 = YMDHMS.now();
+        }
         //TODO :get所得情報登録用世帯員情報は見直しが入るため、実装後コメントアウト外す
-        //世帯員Finder.get所得情報登録用世帯員情報();
+        // by GC 所得情報照会画面をテストするために、ダミーソースを呼び出す。
+        return  get世帯員所得情報(識別コード, null, 所得年度, 所得基準年月日,  true);
+//        世帯員Finder.get所得情報登録用世帯員情報();
         //世帯員情報リストが空であれば空のリストを返す。
 
         //世帯員情報リストに対するループ処理
@@ -167,6 +169,6 @@ public class SetaiinShotokuJohoFinder {
         //        RString.EMPTY, null, false, null, null, RString.HALF_SPACE, RString.EMPTY, 0, RString.EMPTY);
         //リストに追加する
         //ループ終了後、リストを返す。
-        return new ArrayList();
+//        return new ArrayList();
     }
 }

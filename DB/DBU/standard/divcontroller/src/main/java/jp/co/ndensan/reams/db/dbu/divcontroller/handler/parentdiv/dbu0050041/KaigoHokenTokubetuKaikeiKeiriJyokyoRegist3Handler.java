@@ -51,12 +51,10 @@ public class KaigoHokenTokubetuKaikeiKeiriJyokyoRegist3Handler {
     private static final RString ADD = new RString("add");
 
     private final YoshikiYonnosanDiv div;
-    private RString 内部処理モード;
     private static final RString 内部処理モード_修正新規 = new RString("修正新規");
     private static final RString 内部処理モード_修正 = new RString("修正");
     private static final RString 内部処理モード_削除 = new RString("削除");
     private static final RString 内部処理モード_追加 = new RString("追加");
-    private RString 画面表示;
     private static final RString 画面表示_修正 = new RString("修正");
     private static final RString 画面表示_削除 = new RString("削除");
     private static final RString 画面表示_追加 = new RString("追加");
@@ -66,7 +64,7 @@ public class KaigoHokenTokubetuKaikeiKeiriJyokyoRegist3Handler {
     private static final Decimal DECIMAL_0 = new Decimal("0");
     private static final RString DOUBLE_ZEOR = new RString("00");
     private final RString 状態1 = new RString("状態1");
-    private final RString 状態1_確定 = new RString("状態1");
+    private final RString 状態1_確定 = new RString("状態1_確定");
     private final RString 状態2 = new RString("状態2");
     private final RString 状態3 = new RString("状態3");
     private final Code 集計番号_0301 = new Code("0301");
@@ -187,24 +185,6 @@ public class KaigoHokenTokubetuKaikeiKeiriJyokyoRegist3Handler {
     }
 
     /**
-     * 内部処理モードの取得処理です。
-     *
-     * @return 内部処理モード
-     */
-    public RString get内部処理モード() {
-        return 内部処理モード;
-    }
-
-    /**
-     * 画面表示の取得処理です。
-     *
-     * @return 画面表示
-     */
-    public RString get画面表示() {
-        return 画面表示;
-    }
-
-    /**
      * 画面初期化処理です。
      */
     public void onload() {
@@ -239,8 +219,8 @@ public class KaigoHokenTokubetuKaikeiKeiriJyokyoRegist3Handler {
         div.getYoshikiYonnosanMeisai().getTxtShukeiYM().setValue(new RDate(集計年度.getYearValue()));
         div.getYoshikiYonnosanMeisai().getDdlShicyoson().setDataSource(dataSource);
         div.getYoshikiYonnosanMeisai().getDdlShicyoson().setSelectedIndex(0);
-        内部処理モード = 内部処理モード_追加;
-        画面表示 = 画面表示_追加;
+        div.setShoriMode(内部処理モード_追加);
+        div.setGamenMode(画面表示_追加);
         div.getKanryoMessage().setDisplayNone(true);
         div.getYoshikiYonnosanMeisai().getTxtHokokuYM().setReadOnly(false);
         div.getYoshikiYonnosanMeisai().getTxtShukeiYM().setReadOnly(true);
@@ -283,7 +263,7 @@ public class KaigoHokenTokubetuKaikeiKeiriJyokyoRegist3Handler {
                 && (null == data今年度データ || data今年度データ.get詳細データエリア().isEmpty())
                 && (null == data実質的な収支についてデータ || data実質的な収支についてデータ.get詳細データエリア().isEmpty())
                 && !DELETE.equals(insuranceInfEntity.get処理フラグ())) {
-            内部処理モード = 内部処理モード_修正新規;
+            div.setShoriMode(内部処理モード_修正新規);
         } else {
             div.getYoshikiYonnosanMeisai().getTxtHokokuYM().setValue(new RDate(insuranceInfEntity.get報告年().getYearValue()));
             div.getYoshikiYonnosanMeisai().getTxtShukeiYM().setValue(new RDate(insuranceInfEntity.get集計対象年().getYearValue()));
@@ -297,9 +277,9 @@ public class KaigoHokenTokubetuKaikeiKeiriJyokyoRegist3Handler {
             div.getYoshikiYonnosanMeisai().getDdlShicyoson().setDisplayNone(true);
             div.getYoshikiYonnosanMeisai().getBtnKakutei().setDisplayNone(true);
             boolean 処理 = UPDATE.equals(insuranceInfEntity.get処理フラグ());
-            内部処理モード = 処理 ? 内部処理モード_修正 : 内部処理モード_削除;
+            div.setShoriMode(処理 ? 内部処理モード_修正 : 内部処理モード_削除);
             set詳細データエリア入力可否(処理 ? 状態2 : 状態3);
-            画面表示 = 処理 ? 画面表示_修正 : 画面表示_削除;
+            div.setGamenMode(処理 ? 画面表示_修正 : 画面表示_削除);
         }
     }
 
@@ -707,12 +687,12 @@ public class KaigoHokenTokubetuKaikeiKeiriJyokyoRegist3Handler {
                 = new KaigoHokenTokubetuKaikeiKeiriJyokyoRegistManager();
         InsuranceInformation insuranceInfEntity = get引き継ぎデータ();
         KaigoHokenShoriDateKanri 処理日付管理マスタ = get処理日付管理マスタ();
-        if (内部処理モード_追加.equals(内部処理モード)) {
+        if (内部処理モード_追加.equals(div.getShoriMode())) {
             介護保険特別会計経理状況登録Manager.insertShoriDateKanri(処理日付管理マスタ);
-        } else if (内部処理モード_修正.equals(内部処理モード) || 内部処理モード_削除.equals(内部処理モード)) {
+        } else if (内部処理モード_修正.equals(div.getShoriMode()) || 内部処理モード_削除.equals(div.getShoriMode())) {
             介護保険特別会計経理状況登録Manager.updateShoriDateKanri(処理日付管理マスタ);
         }
-        if (内部処理モード_削除.equals(内部処理モード)) {
+        if (内部処理モード_削除.equals(div.getShoriMode())) {
             List<Code> 集計番号list = new ArrayList<>();
             集計番号list.add(集計番号_0301);
             集計番号list.add(集計番号_0302);
@@ -724,7 +704,7 @@ public class KaigoHokenTokubetuKaikeiKeiriJyokyoRegist3Handler {
                     insuranceInfEntity.get市町村コード(),
                     insuranceInfEntity.get表番号(), 集計番号list);
         }
-        if (内部処理モード_修正新規.equals(内部処理モード) || 内部処理モード_追加.equals(内部処理モード)) {
+        if (内部処理モード_修正新規.equals(div.getShoriMode()) || 内部処理モード_追加.equals(div.getShoriMode())) {
             List<KaigoHokenJigyoHokokuNenpo> 前年度以前データLst = new ArrayList<>();
             List<KaigoHokenJigyoHokokuNenpo> 今年度データLst = new ArrayList<>();
             List<KaigoHokenJigyoHokokuNenpo> 実質的な収支についてデータLst = new ArrayList<>();
@@ -737,7 +717,7 @@ public class KaigoHokenTokubetuKaikeiKeiriJyokyoRegist3Handler {
             介護保険特別会計経理状況登録Manager.regKaigoHokenTokubetuKaikeiKeiriJyokyo(前年度以前データLst);
             介護保険特別会計経理状況登録Manager.regKaigoHokenTokubetuKaikeiKeiriJyokyo(今年度データLst);
             介護保険特別会計経理状況登録Manager.regKaigoHokenTokubetuKaikeiKeiriJyokyo(実質的な収支についてデータLst);
-        } else if (内部処理モード_修正.equals(内部処理モード)) {
+        } else if (内部処理モード_修正.equals(div.getShoriMode())) {
             List<KaigoHokenJigyoHokokuNenpo> 修正データLst = get修正データ();
             介護保険特別会計経理状況登録Manager.updKaigoHokenTokubetuKaikeiKeiriJyokyo(修正データLst);
         }

@@ -12,6 +12,7 @@ import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
+import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
@@ -551,4 +552,12 @@ public class HihokenshaDaicho {
         entity.setKyuShichosonCode(kyuShichosonCode);
     }
 
+    /**
+     * 更新日時を取得します。
+     *
+     * @return 更新日時
+     */
+    public RDateTime getLastUpdateTimestamp() {
+        return entity.getLastUpdateTimestamp();
+    }
 }

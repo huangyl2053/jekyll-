@@ -89,10 +89,15 @@ public final class MishinsaShikyuShinseiListHandler {
      */
     public static boolean is支給申請日有効(JutakuKaishuhiShikyuShinseiPanelDiv div) {
         if (is支給申請日入力(div)) {
-            return div.getSearchConditionToMishinsaShikyuShinseiPanel().getTxtShikyuShinseiDate().getFromValue()
-                    .isBeforeOrEquals(div.getSearchConditionToMishinsaShikyuShinseiPanel()
-                            .getTxtShikyuShinseiDate().getToValue());
-
+            if (div.getSearchConditionToMishinsaShikyuShinseiPanel().getTxtShikyuShinseiDate().getFromValue() == null) {
+                return true;
+            } else if (div.getSearchConditionToMishinsaShikyuShinseiPanel().getTxtShikyuShinseiDate().getToValue() == null) {
+                return false;
+            } else {
+                return div.getSearchConditionToMishinsaShikyuShinseiPanel().getTxtShikyuShinseiDate().getFromValue()
+                        .isBeforeOrEquals(div.getSearchConditionToMishinsaShikyuShinseiPanel()
+                                .getTxtShikyuShinseiDate().getToValue());
+            }
         } else {
             return true;
         }
@@ -107,7 +112,7 @@ public final class MishinsaShikyuShinseiListHandler {
      */
     public static boolean is支給申請日入力(JutakuKaishuhiShikyuShinseiPanelDiv div) {
         return div.getSearchConditionToMishinsaShikyuShinseiPanel().getTxtShikyuShinseiDate().getFromValue() != null
-                && div.getSearchConditionToMishinsaShikyuShinseiPanel().getTxtShikyuShinseiDate().getToValue() != null;
+                || div.getSearchConditionToMishinsaShikyuShinseiPanel().getTxtShikyuShinseiDate().getToValue() != null;
     }
 
     /**

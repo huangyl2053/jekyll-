@@ -54,9 +54,9 @@ public class KaigoHokenTokubetuKaikeiKeiriJyokyoRegist1 {
     public ResponseData<KaigoHokenTokubetuKaikeiKeiriJyokyoRegist1Div> onload(KaigoHokenTokubetuKaikeiKeiriJyokyoRegist1Div div) {
         KaigoHokenTokubetuKaikeiKeiriJyokyoRegist1Handler handler = getHandler(div);
         handler.onload();
-        if (画面表示_追加.equals(handler.get画面表示())) {
+        if (画面表示_追加.equals(div.getGamenMode())) {
             return ResponseData.of(div).setState(DBU0050021StateName.add);
-        } else if (画面表示_修正.equals(handler.get画面表示())) {
+        } else if (画面表示_修正.equals(div.getGamenMode())) {
             return ResponseData.of(div).setState(DBU0050021StateName.mod);
         } else {
             return ResponseData.of(div).setState(DBU0050021StateName.del);
@@ -88,10 +88,10 @@ public class KaigoHokenTokubetuKaikeiKeiriJyokyoRegist1 {
         }
         if (responseDate != null) {
             return responseDate;
-        } else if (内部処理モード_修正追加.equals(getHandler(div).get画面表示()) || RString.isNullOrEmpty(getHandler(div).get画面表示())) {
+        } else if (内部処理モード_修正追加.equals(div.getGamenMode()) || RString.isNullOrEmpty(div.getGamenMode())) {
             return ResponseData.of(div).forwardWithEventName(様式４の２).parameter(内部処理モード_修正);
         } else {
-            return ResponseData.of(div).forwardWithEventName(様式４の２).parameter(getHandler(div).get画面表示());
+            return ResponseData.of(div).forwardWithEventName(様式４の２).parameter(div.getGamenMode());
         }
     }
 
@@ -100,14 +100,14 @@ public class KaigoHokenTokubetuKaikeiKeiriJyokyoRegist1 {
         KaigoHokenTokubetuKaikeiKeiriJyokyoRegist1Handler handler = getHandler(div);
         QuestionMessage message = new QuestionMessage(
                 UrQuestionMessages.入力内容の破棄.getMessage().getCode(), UrQuestionMessages.入力内容の破棄.getMessage().evaluate());
-        if (内部処理モード_修正.equals(handler.get内部処理モード())) {
+        if (内部処理モード_修正.equals(div.getShoriMode())) {
             KaigoHokenJigyoHokokuNenpo 修正データ = handler.get修正データ();
             return 修正データ != null && !修正データ.get詳細データエリア().isEmpty() ? ResponseData.of(div).addMessage(message).respond() : null;
-        } else if (内部処理モード_修正追加.equals(handler.get内部処理モード())
-                || 内部処理モード_追加.equals(handler.get内部処理モード())) {
+        } else if (内部処理モード_修正追加.equals(div.getShoriMode())
+                || 内部処理モード_追加.equals(div.getShoriMode())) {
             return handler.is画面詳細エリア入力有(handler.get画面入力データ()) ? ResponseData.of(div).addMessage(message).respond() : null;
         }
-        return null;
+        return ResponseData.of(div).respond();
     }
 
     /**
@@ -127,10 +127,10 @@ public class KaigoHokenTokubetuKaikeiKeiriJyokyoRegist1 {
         }
         KaigoHokenShoriDateKanri 処理日付管理マスタ = getHandler(div).get処理日付管理マスタ();
         ViewStateHolder.put(TaishokensakuJyouken.ViewStateKey.様式４の３, 処理日付管理マスタ);
-        if (内部処理モード_修正追加.equals(getHandler(div).get画面表示()) || RString.isNullOrEmpty(getHandler(div).get画面表示())) {
+        if (内部処理モード_修正追加.equals(div.getGamenMode()) || RString.isNullOrEmpty(div.getGamenMode())) {
             return ResponseData.of(div).forwardWithEventName(DBU0050021TransitionEventName.様式４の３).parameter(内部処理モード_修正);
         } else {
-            return ResponseData.of(div).forwardWithEventName(DBU0050021TransitionEventName.様式４の３).parameter(getHandler(div).get画面表示());
+            return ResponseData.of(div).forwardWithEventName(DBU0050021TransitionEventName.様式４の３).parameter(div.getGamenMode());
         }
     }
 
@@ -139,11 +139,11 @@ public class KaigoHokenTokubetuKaikeiKeiriJyokyoRegist1 {
         KaigoHokenTokubetuKaikeiKeiriJyokyoRegist1Handler handler = getHandler(div);
         QuestionMessage message = new QuestionMessage(
                 UrQuestionMessages.入力内容の破棄.getMessage().getCode(), UrQuestionMessages.入力内容の破棄.getMessage().evaluate());
-        if (内部処理モード_修正.equals(handler.get内部処理モード())) {
+        if (内部処理モード_修正.equals(div.getShoriMode())) {
             KaigoHokenJigyoHokokuNenpo 修正データ = handler.get修正データ();
             return 修正データ != null && !修正データ.get詳細データエリア().isEmpty() ? ResponseData.of(div).addMessage(message).respond() : null;
-        } else if (内部処理モード_修正追加.equals(handler.get内部処理モード())
-                || 内部処理モード_追加.equals(handler.get内部処理モード())) {
+        } else if (内部処理モード_修正追加.equals(div.getShoriMode())
+                || 内部処理モード_追加.equals(div.getShoriMode())) {
             return handler.is画面詳細エリア入力有(handler.get画面入力データ()) ? ResponseData.of(div).addMessage(message).respond() : null;
         }
         return null;
@@ -191,10 +191,10 @@ public class KaigoHokenTokubetuKaikeiKeiriJyokyoRegist1 {
         KaigoHokenTokubetuKaikeiKeiriJyokyoRegist1Handler handler = getHandler(div);
         QuestionMessage message = new QuestionMessage(
                 UrQuestionMessages.入力内容の破棄.getMessage().getCode(), UrQuestionMessages.入力内容の破棄.getMessage().evaluate());
-        if (内部処理モード_修正.equals(handler.get内部処理モード())) {
+        if (内部処理モード_修正.equals(div.getShoriMode())) {
             KaigoHokenJigyoHokokuNenpo 修正データ = handler.get修正データ();
             return 修正データ != null && !修正データ.get詳細データエリア().isEmpty() ? ResponseData.of(div).addMessage(message).respond() : null;
-        } else if (内部処理モード_修正追加.equals(handler.get内部処理モード())) {
+        } else if (内部処理モード_修正追加.equals(div.getShoriMode())) {
             return handler.is画面詳細エリア入力有(handler.get画面入力データ()) ? ResponseData.of(div).addMessage(message).respond() : null;
         }
         return null;
@@ -217,12 +217,8 @@ public class KaigoHokenTokubetuKaikeiKeiriJyokyoRegist1 {
      * @return 介護保険特別会計経理状況登録_様式４情報Divを持つResponseData
      */
     public ResponseData<KaigoHokenTokubetuKaikeiKeiriJyokyoRegist1Div> onClick_btnSave(KaigoHokenTokubetuKaikeiKeiriJyokyoRegist1Div div) {
-        ResponseData<KaigoHokenTokubetuKaikeiKeiriJyokyoRegist1Div> responseData = null;
         if (!ResponseHolder.isReRequest()) {
-            responseData = getResponseData_btnSave(div);
-        }
-        if (responseData != null) {
-            return responseData;
+            return getResponseData_btnSave(div);
         }
         getHandler(div).onClick_btnSave();
         return ResponseData.of(div).respond();
@@ -234,13 +230,13 @@ public class KaigoHokenTokubetuKaikeiKeiriJyokyoRegist1 {
         KaigoHokenJigyoHokokuNenpo 画面入力データ = handler.get画面入力データ();
         QuestionMessage message = new QuestionMessage(
                 UrQuestionMessages.処理実行の確認.getMessage().getCode(), UrQuestionMessages.処理実行の確認.getMessage().evaluate());
-        if (内部処理モード_追加.equals(handler.get内部処理モード())) {
+        if (内部処理モード_追加.equals(div.getShoriMode())) {
             return getResponseData_btnSave_追加(div, 画面入力データ, message);
-        } else if (内部処理モード_修正.equals(handler.get内部処理モード())) {
+        } else if (内部処理モード_修正.equals(div.getShoriMode())) {
             return getResponseData_btnSave_修正(div, message);
-        } else if (内部処理モード_修正追加.equals(handler.get内部処理モード())) {
+        } else if (内部処理モード_修正追加.equals(div.getShoriMode())) {
             return getResponseData_btnSave_修正追加(div, 画面入力データ, message);
-        } else if (内部処理モード_削除.equals(handler.get内部処理モード())) {
+        } else if (内部処理モード_削除.equals(div.getShoriMode())) {
             return ResponseData.of(div).addMessage(message).respond();
         }
         return null;

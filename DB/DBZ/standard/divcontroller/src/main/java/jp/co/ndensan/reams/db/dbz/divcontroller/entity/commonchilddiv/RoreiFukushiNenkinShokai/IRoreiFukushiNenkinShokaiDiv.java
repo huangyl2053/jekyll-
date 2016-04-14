@@ -23,11 +23,12 @@ public interface IRoreiFukushiNenkinShokaiDiv extends ICommonChildDivBasePropert
      * 画面データをデータベースに格納します。
      */
     public void click_Save();
-    
+
     /**
      * 老福年金情報を取得します。
+     *
      * @return List<datagridRireki_Row>
      */
-    public List<datagridRireki_Row> getgetDataGridList();
+    public List<datagridRireki_Row> getDataGridList();
 
 }

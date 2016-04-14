@@ -82,8 +82,8 @@ public class ShoKaishuKirokuKanriHandler {
         if (状態_更新.equals(状態)) {
             List<ShoKofuKaishu> businessList = ShoKofuKaishuJohoManager.createInstance().
                     getShoKofuKaishuJohoList(被保険者番号, False).records();
-            Models<ShoKofuKaishuIdentifier, ShoKofuKaishu> ShoKofuKaishu = Models.create(businessList);
-            ViewStateHolder.put(ViewStateKeys.証交付回収情報, ShoKofuKaishu);
+            Models<ShoKofuKaishuIdentifier, ShoKofuKaishu> shoKofuKaishu = Models.create(businessList);
+            ViewStateHolder.put(ViewStateKeys.証交付回収情報, shoKofuKaishu);
             List<dgKoufuKaishu_Row> dgKoufuKaishuList = new ArrayList();
             if (businessList != null && !businessList.isEmpty()) {
                 for (ShoKofuKaishu jigyoshaInput : businessList) {
@@ -96,6 +96,7 @@ public class ShoKaishuKirokuKanriHandler {
                     dgJigyoshaItiran.setKaishuJiyu(CodeMaster.getCodeMeisho(new CodeShubetsu(CODESHUBETSU_0015), new Code(jigyoshaInput.get回収事由())));
                     dgJigyoshaItiran.setYukoKigen((jigyoshaInput.get有効期限().wareki().toDateString()));
                     dgJigyoshaItiran.setKaishuRiyu(jigyoshaInput.get回収理由());
+                    dgJigyoshaItiran.setRirekiNo(new RString(jigyoshaInput.get履歴番号()));
                     dgKoufuKaishuList.add(dgJigyoshaItiran);
                 }
                 div.getDgKoufuKaishu().setDataSource(dgKoufuKaishuList);

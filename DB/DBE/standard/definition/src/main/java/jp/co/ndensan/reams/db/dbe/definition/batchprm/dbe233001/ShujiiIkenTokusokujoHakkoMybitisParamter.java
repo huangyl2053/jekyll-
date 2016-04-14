@@ -5,6 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbe.definition.batchprm.dbe233001;
 
+import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.ShoriJotaiKubun;
 import jp.co.ndensan.reams.uz.uza.batch.parameter.IMyBatisParameter;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import lombok.Getter;
@@ -29,6 +30,8 @@ public final class ShujiiIkenTokusokujoHakkoMybitisParamter implements IMyBatisP
     private final boolean uses保険者コード;
     private final boolean uses主治医医療機関コード;
     private final boolean uses主治医コード;
+    private final RString 取下 = ShoriJotaiKubun.取下.getコード();
+    private final RString 却下 = ShoriJotaiKubun.却下.getコード();
 
     private ShujiiIkenTokusokujoHakkoMybitisParamter(RString temp_印刷期間開始日, RString temp_印刷期間終了日,
             RString temp_保険者コード, RString temp_主治医医療機関コード, RString temp_主治医コード,

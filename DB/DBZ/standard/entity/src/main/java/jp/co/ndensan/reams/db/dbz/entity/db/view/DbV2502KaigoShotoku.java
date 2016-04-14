@@ -48,13 +48,13 @@ public enum DbV2502KaigoShotoku implements IColumnDefinition {
      */
     gekihenKanwaKubun(1, 0),
     /**
-     * yusebKubun
+     * yusenKubun
      */
-    yusebKubun(1, 0),
+    yusenKubun(1, 0),
     /**
-     * shoriYMD
+     * shoriTimeStamp
      */
-    shoriYMD(2147483647, 0),
+    shoriTimeStamp(2147483647, 0),
     /**
      * motoRirekiNo
      */

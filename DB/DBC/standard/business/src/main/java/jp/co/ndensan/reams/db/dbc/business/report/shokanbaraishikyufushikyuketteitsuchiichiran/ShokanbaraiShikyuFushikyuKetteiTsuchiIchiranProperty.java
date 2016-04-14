@@ -47,13 +47,6 @@ public class ShokanbaraiShikyuFushikyuKetteiTsuchiIchiranProperty
             Breakers<ShokanbaraiShikyuFushikyuReportSource> breakers,
             BreakerCatalog<ShokanbaraiShikyuFushikyuReportSource> catalog) {
         return breakers.add(catalog.new SimplePageBreaker(
-
-
-
-
-
-
-
             PAGE_BREAK_KEYS) {
             @Override
             public ReportLineRecord<ShokanbaraiShikyuFushikyuReportSource> occuredBreak(

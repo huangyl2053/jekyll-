@@ -1,15 +1,13 @@
 package jp.co.ndensan.reams.db.dbz.entity.db.view;
 
-import jp.co.ndensan.reams.uz.uza.util.db.IDbAccessable;
-import jp.co.ndensan.reams.uz.uza.util.db.DbTableEntityBase;
-import jp.co.ndensan.reams.uz.uza.util.db.PrimaryKey;
-import jp.co.ndensan.reams.uz.uza.util.db.TableName;
-import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
-import jp.co.ndensan.reams.uz.uza.math.Decimal;
-import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
-import java.util.Objects;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.math.Decimal;
+import jp.co.ndensan.reams.uz.uza.util.db.DbTableEntityBase;
+import jp.co.ndensan.reams.uz.uza.util.db.IDbAccessable;
+import jp.co.ndensan.reams.uz.uza.util.db.TableName;
 
 /**
  * 介護所得テーブルのエンティティクラスです。
@@ -30,8 +28,8 @@ public class DbV2502KaigoShotokuEntity extends DbTableEntityBase<DbV2502KaigoSho
     private Decimal nenkiniShotokuGaku;
     private Decimal kazeiShotokuGaku;
     private RString gekihenKanwaKubun;
-    private RString yusebKubun;
-    private YMDHMS shoriYMD;
+    private RString yusenKubun;
+    private YMDHMS shoriTimeStamp;
     private int motoRirekiNo;
     private RString torokuGyomu;
 
@@ -216,39 +214,39 @@ public class DbV2502KaigoShotokuEntity extends DbTableEntityBase<DbV2502KaigoSho
     }
 
     /**
-     * yusebKubunのgetメソッドです。
+     * yusenKubunのgetメソッドです。
      *
-     * @return yusebKubun
+     * @return yusenKubun
      */
     public RString getYusebKubun() {
-        return yusebKubun;
+        return yusenKubun;
     }
 
     /**
-     * yusebKubunのsetメソッドです。
+     * yusenKubunのsetメソッドです。
      *
-     * @param yusebKubun yusebKubun
+     * @param yusenKubun yusenKubun
      */
-    public void setYusebKubun(RString yusebKubun) {
-        this.yusebKubun = yusebKubun;
+    public void setYusebKubun(RString yusenKubun) {
+        this.yusenKubun = yusenKubun;
     }
 
     /**
-     * shoriYMDのgetメソッドです。
+     * shoriTimeStampのgetメソッドです。
      *
-     * @return shoriYMD
+     * @return shoriTimeStamp
      */
     public YMDHMS getShoriYMD() {
-        return shoriYMD;
+        return shoriTimeStamp;
     }
 
     /**
-     * shoriYMDのsetメソッドです。
+     * shoriTimeStampのsetメソッドです。
      *
-     * @param shoriYMD shoriYMD
+     * @param shoriTimeStamp shoriTimeStamp
      */
-    public void setShoriYMD(YMDHMS shoriYMD) {
-        this.shoriYMD = shoriYMD;
+    public void setShoriYMD(YMDHMS shoriTimeStamp) {
+        this.shoriTimeStamp = shoriTimeStamp;
     }
 
     /**
@@ -317,8 +315,8 @@ public class DbV2502KaigoShotokuEntity extends DbTableEntityBase<DbV2502KaigoSho
         this.nenkiniShotokuGaku = entity.nenkiniShotokuGaku;
         this.kazeiShotokuGaku = entity.kazeiShotokuGaku;
         this.gekihenKanwaKubun = entity.gekihenKanwaKubun;
-        this.yusebKubun = entity.yusebKubun;
-        this.shoriYMD = entity.shoriYMD;
+        this.yusenKubun = entity.yusenKubun;
+        this.shoriTimeStamp = entity.shoriTimeStamp;
         this.motoRirekiNo = entity.motoRirekiNo;
         this.torokuGyomu = entity.torokuGyomu;
     }
@@ -330,7 +328,7 @@ public class DbV2502KaigoShotokuEntity extends DbTableEntityBase<DbV2502KaigoSho
      */
     @Override
     public RString getMd5() {
-        return super.toMd5(shotokuNendo, shikibetsuCode, rirekino, kazeiKubun, kazeiKubunGemmenGo, gokeiShotokuGaku, nenkiniShunyuGaku, nenkiniShotokuGaku, kazeiShotokuGaku, gekihenKanwaKubun, yusebKubun, shoriYMD, motoRirekiNo, torokuGyomu);
+        return super.toMd5(shotokuNendo, shikibetsuCode, rirekino, kazeiKubun, kazeiKubunGemmenGo, gokeiShotokuGaku, nenkiniShunyuGaku, nenkiniShotokuGaku, kazeiShotokuGaku, gekihenKanwaKubun, yusenKubun, shoriTimeStamp, motoRirekiNo, torokuGyomu);
     }
 
 // </editor-fold>

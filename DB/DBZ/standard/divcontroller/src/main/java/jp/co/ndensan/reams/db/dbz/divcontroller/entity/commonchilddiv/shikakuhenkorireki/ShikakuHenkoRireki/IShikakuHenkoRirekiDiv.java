@@ -38,4 +38,11 @@ public interface IShikakuHenkoRirekiDiv extends ICommonChildDivBaseProperties {
      * @param falg 活性フラグ
      */
     void setDdlHenkoJiyu(RString key, boolean falg);
+
+    /**
+     * モードを設定します。
+     *
+     * @param mode モードキー
+     */
+    void setDisplayTypeBykey(RString mode);
 }

@@ -16,7 +16,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.TablePanel;
  * @author 自動生成
  */
 public class tabkaigokyufuhijunhoyuDiv extends TablePanel {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2015-11-30_08-54-50">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -92,7 +92,7 @@ public class tabkaigokyufuhijunhoyuDiv extends TablePanel {
  * @author 自動生成
  */
 class cellkaigokyufuhijunhoyuAttabkaigokyufuhijunhoyu extends TableCell {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2015-11-30_08-54-50">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
     @JsonProperty("lblkaigokyufuhijunhoyu")
     private Label lblkaigokyufuhijunhoyu;
 
@@ -122,7 +122,7 @@ class cellkaigokyufuhijunhoyuAttabkaigokyufuhijunhoyu extends TableCell {
  * @author 自動生成
  */
 class tabAttabkaigokyufuhijunhoyu extends TableCell {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2015-11-30_08-54-50">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
     @JsonProperty("txtkaigokyufuhijunhoyu")
     private TextBoxNum txtkaigokyufuhijunhoyu;
 

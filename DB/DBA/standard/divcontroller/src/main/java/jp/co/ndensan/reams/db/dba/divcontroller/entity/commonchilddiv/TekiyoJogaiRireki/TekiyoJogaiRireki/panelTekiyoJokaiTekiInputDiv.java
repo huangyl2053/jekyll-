@@ -4,13 +4,12 @@ package jp.co.ndensan.reams.db.dba.divcontroller.entity.commonchilddiv.TekiyoJog
  * このファイルへの変更は、再生成時には損失するため
  * 不正な動作の原因になります。
  */
-
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.ShisetsuJohoCommonChildDiv.IShisetsuJohoCommonChildDiv;
-import jp.co.ndensan.reams.uz.uza.ui.binding.DropDownList;
+import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.ShisetsuJohoCommonChildDiv.ShisetsuJohoCommonChildDivDiv;
+import jp.co.ndensan.reams.uz.uza.ui.binding.*;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
-import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxDate;
 
 /**
  * panelTekiyoJokaiTekiInput のクラスファイル
@@ -18,7 +17,6 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxDate;
  * @reamsid_L DBA-0210-010 dingyi
  */
 public class panelTekiyoJokaiTekiInputDiv extends Panel {
-
     // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
     /*
      * [ private の作成 ]
@@ -62,7 +60,7 @@ public class panelTekiyoJokaiTekiInputDiv extends Panel {
     }
 
     @JsonIgnore
-    public void setTxtNyusyoDateInput(TextBoxDate txtNyusyoDateInput) {
+    public void  setTxtNyusyoDateInput(TextBoxDate txtNyusyoDateInput) {
         this.getPanelJogaisyaTekiyo().setTxtNyusyoDateInput(txtNyusyoDateInput);
     }
 
@@ -72,7 +70,7 @@ public class panelTekiyoJokaiTekiInputDiv extends Panel {
     }
 
     @JsonIgnore
-    public void setTxtTekiyoDateInput(TextBoxDate txtTekiyoDateInput) {
+    public void  setTxtTekiyoDateInput(TextBoxDate txtTekiyoDateInput) {
         this.getPanelJogaisyaTekiyo().setTxtTekiyoDateInput(txtTekiyoDateInput);
     }
 
@@ -82,7 +80,7 @@ public class panelTekiyoJokaiTekiInputDiv extends Panel {
     }
 
     @JsonIgnore
-    public void setTxtTkyoTododkDateIn(TextBoxDate txtTkyoTododkDateIn) {
+    public void  setTxtTkyoTododkDateIn(TextBoxDate txtTkyoTododkDateIn) {
         this.getPanelJogaisyaTekiyo().setTxtTkyoTododkDateIn(txtTkyoTododkDateIn);
     }
 
@@ -92,7 +90,7 @@ public class panelTekiyoJokaiTekiInputDiv extends Panel {
     }
 
     @JsonIgnore
-    public void setDdlTekiyoJiyuInput(DropDownList ddlTekiyoJiyuInput) {
+    public void  setDdlTekiyoJiyuInput(DropDownList ddlTekiyoJiyuInput) {
         this.getPanelJogaisyaTekiyo().setDdlTekiyoJiyuInput(ddlTekiyoJiyuInput);
     }
 

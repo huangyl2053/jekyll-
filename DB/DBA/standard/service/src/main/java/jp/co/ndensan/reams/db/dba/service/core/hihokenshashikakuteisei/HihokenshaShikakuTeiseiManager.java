@@ -14,9 +14,9 @@ import jp.co.ndensan.reams.db.dba.business.core.hihokenshadaicho.HihokenshaShuto
 import jp.co.ndensan.reams.db.dba.definition.core.shikakuidojiyu.ShikakuHenkoJiyu;
 import jp.co.ndensan.reams.db.dba.definition.core.shikakuidojiyu.ShikakuJutokuTekiyoJiyu;
 import jp.co.ndensan.reams.db.dba.definition.core.shikakuidojiyu.ShikakuShutokuJiyu;
-import jp.co.ndensan.reams.db.dba.entity.db.hihokenshashikakuteisei.IryoHokenJoho;
+import jp.co.ndensan.reams.db.dba.business.core.hihokenshashikakuteisei.IryoHokenJoho;
 import jp.co.ndensan.reams.db.dba.entity.db.hihokenshashikakuteisei.JushochiTokureiEntity;
-import jp.co.ndensan.reams.db.dba.entity.db.hihokenshashikakuteisei.RoreiFukushiEntity;
+import jp.co.ndensan.reams.db.dba.business.core.hihokenshashikakuteisei.RoreiFukushiJoho;
 import jp.co.ndensan.reams.db.dba.entity.db.hihokenshashikakuteisei.ShikakuKanrenYidouEntity;
 import jp.co.ndensan.reams.db.dba.entity.db.hihokenshashikakuteisei.ShikakuSyousayiEntity;
 import jp.co.ndensan.reams.db.dba.entity.db.hihokenshashikakuteisei.ShikakuTeyiseyiEntity;
@@ -446,7 +446,7 @@ public class HihokenshaShikakuTeiseiManager {
      * @param newList 保存ボタン押下時のList＜老福年金情報Entity＞
      * @return 老福年金比較結果フラグ
      */
-    public RString checkRofukuNenkin(List<RoreiFukushiEntity> oldList, List<RoreiFukushiEntity> newList) {
+    public RString checkRofukuNenkin(List<RoreiFukushiJoho> oldList, List<RoreiFukushiJoho> newList) {
         if (oldList.size() != newList.size()) {
             return チェックOK;
         }

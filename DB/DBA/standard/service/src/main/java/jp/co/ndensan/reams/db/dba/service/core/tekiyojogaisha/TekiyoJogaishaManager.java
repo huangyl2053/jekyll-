@@ -25,7 +25,6 @@ import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT1001HihokenshaDaichoEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT1002TekiyoJogaishaEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT1004ShisetsuNyutaishoEntity;
 import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT1002TekiyoJogaishaDac;
-import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT1004ShisetsuNyutaishoDac;
 import jp.co.ndensan.reams.db.dbz.service.core.MapperProvider;
 import jp.co.ndensan.reams.ua.uax.business.core.dateofbirth.AgeCalculator;
 import jp.co.ndensan.reams.ua.uax.business.core.dateofbirth.IDateOfBirth;
@@ -86,8 +85,7 @@ public class TekiyoJogaishaManager {
     TekiyoJogaishaManager(
             MapperProvider mapperProvider,
             DbT1002TekiyoJogaishaDac 適用除外者Dac,
-            ShisetsuNyutaishoManager 介護保険施設入退所Manager,
-            DbT1004ShisetsuNyutaishoDac 介護保険施設入退所dac) {
+            ShisetsuNyutaishoManager 介護保険施設入退所Manager) {
         this.mapperProvider = mapperProvider;
         this.適用除外者Dac = 適用除外者Dac;
         this.介護保険施設入退所Manager = 介護保険施設入退所Manager;
@@ -292,7 +290,14 @@ public class TekiyoJogaishaManager {
         }
     }
 
-    private UaFt200FindShikibetsuTaishoEntity get宛名情報(ShikibetsuCode 識別コード) {
+    /**
+     * 宛名情報を取得します。
+     *
+     * @param 識別コード 識別コード
+     * @return UaFt200FindShikibetsuTaishoEntity
+     */
+    @Transaction
+    public UaFt200FindShikibetsuTaishoEntity get宛名情報(ShikibetsuCode 識別コード) {
         ShikibetsuTaishoSearchKeyBuilder key = new ShikibetsuTaishoSearchKeyBuilder(ShikibetsuTaishoGyomuHanteiKeyFactory.createInstance(
                 GyomuCode.DB介護保険, KensakuYusenKubun.住登外優先));
         key.setデータ取得区分(DataShutokuKubun.直近レコード);

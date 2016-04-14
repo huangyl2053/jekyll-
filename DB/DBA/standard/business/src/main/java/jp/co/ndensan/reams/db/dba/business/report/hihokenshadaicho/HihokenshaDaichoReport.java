@@ -46,7 +46,8 @@ public final class HihokenshaDaichoReport extends Report<HihokenshaDaichoReportS
     private void writeChohyo(HihokenshaDaichoSakusei item, ReportSourceWriter<HihokenshaDaichoReportSource> writer) {
         IHihokenshaDaichoEditor joho = new HihokenshaDaichoEditor(item);
 
-        for (int i = ZERO; i < getMaxBreakCount(item); i++) {
+        int maxCount = getMaxBreakCount(item);
+        for (int i = ZERO; i < maxCount; i++) {
             IHihokenshaDaichoEditor 老齢福祉 = new HihokenshaDaichoRoreiFukushiEditor(item.get老齢福祉情報(), i);
             IHihokenshaDaichoEditor 生活保護 = new HihokenshaDaichoSeikatsuhogoEditor(item.get生活保護情報(), i);
             IHihokenshaDaichoEditor 世帯左 = new HihokenshaDaichoSetaiLeftEditor(item, i);

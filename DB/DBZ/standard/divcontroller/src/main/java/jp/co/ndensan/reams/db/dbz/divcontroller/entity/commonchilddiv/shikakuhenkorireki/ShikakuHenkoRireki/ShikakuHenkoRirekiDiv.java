@@ -614,4 +614,14 @@ public class ShikakuHenkoRirekiDiv extends Panel implements IShikakuHenkoRirekiD
         this.getDdlHenkoJiyu().setDisabled(falg);
     }
 
+    /**
+     * モードを設定します。
+     *
+     * @param mode モードキー
+     */
+    @Override
+    public void setDisplayTypeBykey(RString mode) {
+        this.setMode_DisplayType(ShikakuHenkoRirekiDiv.DisplayType.getEnum(mode.toString()));
+    }
+
 }
