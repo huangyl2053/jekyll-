@@ -5,25 +5,20 @@
  */
 package jp.co.ndensan.reams.db.dbc.divcontroller.controller.parentdiv.jyutakugaisyunaiyolist;
 
-import java.util.ArrayList;
 import java.util.List;
-import jp.co.ndensan.reams.db.dbc.business.core.shokanjutakukaishu.ShokanJutakuKaishuBusiness;
+import jp.co.ndensan.reams.db.dbc.business.core.jyutakugaisyunaiyolist.JyutakugaisyunaiyoListDataPassModel;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.commonchilddiv.jyutakugaisyunaiyolist.JyutakugaisyunaiyoList.JyutakugaisyunaiyoListDiv;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.commonchilddiv.jyutakugaisyunaiyolist.JyutakugaisyunaiyoList.dgGaisyuList_Row;
 import jp.co.ndensan.reams.db.dbc.divcontroller.handler.parentdiv.jyutakugaisyunaiyolist.JyutakugaisyunaiyoListHandler;
 import jp.co.ndensan.reams.db.dbc.divcontroller.handler.parentdiv.jyutakugaisyunaiyolist.JyutakugaisyunaiyoListValidationHandler;
-import jp.co.ndensan.reams.db.dbc.service.core.jyutakukaisyuyichiran.JyutakukaisyuyichiranFinder;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
-import jp.co.ndensan.reams.db.dbz.definition.core.ViewStateKeys;
+import jp.co.ndensan.reams.ur.urz.business.core.jusho.IJusho;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaJusho;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
-import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
-import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
-import jp.co.ndensan.reams.uz.uza.util.db.SearchResult;
+import jp.co.ndensan.reams.uz.uza.util.serialization.DataPassingConverter;
 
 /**
  *
@@ -45,19 +40,9 @@ public class JyutakugaisyunaiyoList {
      * @return JyutakugaisyunaiyoListDivのResponseData
      */
     public ResponseData<JyutakugaisyunaiyoListDiv> onLoad(JyutakugaisyunaiyoListDiv requestDiv) {
-        HihokenshaNo 被保険者番号 = ViewStateHolder.get(ViewStateKeys.住宅改修内容一覧_被保険者番号, HihokenshaNo.class);
-        FlexibleYearMonth サービス提供年月 = ViewStateHolder.get(ViewStateKeys.住宅改修内容一覧_サービス提供年月, FlexibleYearMonth.class);
-        RString 整理番号 = ViewStateHolder.get(ViewStateKeys.住宅改修内容一覧_整理番号, RString.class);
-        RString 様式番号 = ViewStateHolder.get(ViewStateKeys.住宅改修内容一覧_様式番号, RString.class);
-        RString mode = ViewStateHolder.get(ViewStateKeys.住宅改修内容一覧_モード, RString.class);
-        SearchResult<ShokanJutakuKaishuBusiness> jyutakukaisyuList;
-        if (被保険者番号 == null || サービス提供年月 == null || 整理番号 == null || 様式番号 == null) {
-            jyutakukaisyuList = SearchResult.of(new ArrayList<>(), 0, false);
-        } else {
-            jyutakukaisyuList = JyutakukaisyuyichiranFinder
-                    .createInstance().selectJyutakukaisyuList(被保険者番号, サービス提供年月, 整理番号, 様式番号);
-        }
-        getHandler(requestDiv).initialize(mode, jyutakukaisyuList);
+        JyutakugaisyunaiyoListDataPassModel model = DataPassingConverter.deserialize(
+                requestDiv.getHiddenPass(), JyutakugaisyunaiyoListDataPassModel.class);
+        getHandler(requestDiv).initialize(model);
         return ResponseData.of(requestDiv).respond();
     }
 
@@ -114,7 +99,8 @@ public class JyutakugaisyunaiyoList {
      * @return JyutakugaisyunaiyoListDivのResponseData
      */
     public ResponseData<JyutakugaisyunaiyoListDiv> onClick_CopyButton(JyutakugaisyunaiyoListDiv requestDiv) {
-        // TODOQA516 親画面はどの画面ですが。
+        requestDiv.getTxtJyusyo().setValue(DataPassingConverter.deserialize(
+                requestDiv.getJushoData(), IJusho.class).get住所());
         return ResponseData.of(requestDiv).respond();
     }
 
