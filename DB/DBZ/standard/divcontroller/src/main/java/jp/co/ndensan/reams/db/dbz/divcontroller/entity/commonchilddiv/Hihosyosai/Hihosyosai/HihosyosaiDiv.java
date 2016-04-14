@@ -25,6 +25,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TextBox;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxDate;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ICommonChildDivMode;
+import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
 import jp.co.ndensan.reams.uz.uza.ui.servlets._CommonChildDivModeUtil;
 import jp.co.ndensan.reams.uz.uza.util.db.SearchResult;
 
@@ -717,5 +718,10 @@ public class HihosyosaiDiv extends Panel implements IHihosyosaiDiv {
     @Override
     public SearchResult<HihokenshaDaicho> getGridData() {
         return getHandler().資格関連異動一覧取得();
+    }
+
+    @Override
+    public ValidationMessageControlPairs 取得日と喪失日の前後順() {
+        return getHandler().validateForUpdate();
     }
 }

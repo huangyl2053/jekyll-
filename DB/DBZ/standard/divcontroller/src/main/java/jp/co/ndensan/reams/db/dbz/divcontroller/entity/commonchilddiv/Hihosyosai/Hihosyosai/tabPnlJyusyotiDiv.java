@@ -13,7 +13,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.TabPanel;
 /**
  * tabPnlJyusyoti のクラスファイル
  *
- * @author 自動生成
+ * @reamsid_L DBA-0170-010 linghuhang
  */
 public class tabPnlJyusyotiDiv extends TabPanel {
 

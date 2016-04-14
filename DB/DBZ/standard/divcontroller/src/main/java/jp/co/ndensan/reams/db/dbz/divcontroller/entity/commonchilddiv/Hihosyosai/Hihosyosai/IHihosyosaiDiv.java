@@ -7,6 +7,7 @@ import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.binding.ICommonChildDivBaseProperties;
+import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
 import jp.co.ndensan.reams.uz.uza.util.db.SearchResult;
 
 /**
@@ -117,4 +118,11 @@ public interface IHihosyosaiDiv extends ICommonChildDivBaseProperties {
      * @param 施設入退所表示widthサイズ 施設入退所表示widthサイズ
      */
     public void 施設入退所表示heightサイズ(RString 施設入退所表示widthサイズ);
+
+    /**
+     * 取得日と喪失日の前後順チックを実施します。
+     *
+     * @return ValidationMessageControlPairs ValidationMessageControlPairs
+     */
+    public ValidationMessageControlPairs 取得日と喪失日の前後順();
 }

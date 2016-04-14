@@ -4,6 +4,9 @@ var DBZ;
         var Events = (function () {
             function Events() {
             }
+            Events.onClick_Change = function () {
+                return "onClick_Change";
+            };
             return Events;
         })();
         Hihosyosai.Events = Events;

@@ -11,6 +11,10 @@ module DBZ {
 
         export class Events {
 
+            public static onClick_Change(): string {
+                return "onClick_Change";
+            }
+
         }
 
         export class Controls {

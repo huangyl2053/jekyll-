@@ -103,6 +103,9 @@ public class ShisetsuJohoHandler {
             case 3:
                 div.setMode_利用機能(利用機能.適用除外者対象機能);
                 break;
+            case 4:
+                div.setMode_利用機能(利用機能.全施設対象機能);
+                break;
             default:
                 div.setMode_利用機能(利用機能.台帳種別表示機能);
                 break;

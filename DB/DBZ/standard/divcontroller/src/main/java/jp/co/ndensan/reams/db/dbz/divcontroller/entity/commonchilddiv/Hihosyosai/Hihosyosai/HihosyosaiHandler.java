@@ -18,8 +18,20 @@ import jp.co.ndensan.reams.db.dbz.business.core.koseishichosonmaster.koseishicho
 import jp.co.ndensan.reams.db.dbz.business.shichoson.Shichoson;
 import jp.co.ndensan.reams.db.dbz.definition.core.shikakukubun.ShikakuKubun;
 import jp.co.ndensan.reams.db.dbz.service.core.hihousyosai.HihousyosaiFinder;
+import jp.co.ndensan.reams.ua.uax.business.core.psm.ShikibetsuTaishoSearchEntityHolder;
+import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.search.IShikibetsuTaishoSearchKey;
+import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.search.ShikibetsuTaishoGyomuHanteiKeyFactory;
+import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.search.ShikibetsuTaishoSearchKeyBuilder;
+import jp.co.ndensan.reams.ua.uax.definition.core.enumeratedtype.shikibetsutaisho.KensakuYusenKubun;
+import jp.co.ndensan.reams.ua.uax.definition.mybatisprm.shikibetsutaisho.IShikibetsuTaishoGyomuHanteiKey;
+import jp.co.ndensan.reams.ua.uax.entity.db.basic.UaFt200FindShikibetsuTaishoEntity;
+import jp.co.ndensan.reams.ua.uax.persistence.db.basic.UaFt200FindShikibetsuTaishoFunctionDac;
+import jp.co.ndensan.reams.ur.urz.business.core.association.Association;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
+import jp.co.ndensan.reams.ur.urz.service.core.association.AssociationFinderFactory;
+import jp.co.ndensan.reams.ur.urz.service.core.association.IAssociationFinder;
 import jp.co.ndensan.reams.uz.uza.biz.CodeShubetsu;
+import jp.co.ndensan.reams.uz.uza.biz.GyomuCode;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
@@ -28,12 +40,19 @@ import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.message.IMessageGettable;
+import jp.co.ndensan.reams.uz.uza.message.IValidationMessage;
+import jp.co.ndensan.reams.uz.uza.message.Message;
 import jp.co.ndensan.reams.uz.uza.ui.binding.KeyValueDataSource;
 import jp.co.ndensan.reams.uz.uza.ui.binding.propertyenum.DisplayTimeFormat;
+import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPair;
+import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
 import jp.co.ndensan.reams.uz.uza.util.code.CodeMaster;
 import jp.co.ndensan.reams.uz.uza.util.code.entity.UzT0007CodeEntity;
 import jp.co.ndensan.reams.uz.uza.util.config.BusinessConfig;
+import jp.co.ndensan.reams.uz.uza.util.db.IPsmCriteria;
 import jp.co.ndensan.reams.uz.uza.util.db.SearchResult;
+import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 
 /**
  * 被保詳細のHandlerクラスです。
@@ -85,24 +104,25 @@ public class HihosyosaiHandler {
         表示と非表示();
         switch (div.getMode_DisplayType()) {
             case shokai:
-                get旧保険者(市町村コード, 導入形態コード, 広住特措置元市町村コード);
+                div.getDdlKyuHokensya().setDataSource(get旧保険者(市町村コード, 導入形態コード, 広住特措置元市町村コード));
                 訂正モード(get得喪情報(被保険者番号, 異動日, 枝番));
                 break;
             case toroku:
+                登録モード();
                 break;
             case teiseitoroku_jyusyoti:
-                get旧保険者(市町村コード, 導入形態コード, 広住特措置元市町村コード);
+                div.getDdlKyuHokensya().setDataSource(get旧保険者(市町村コード, 導入形態コード, 広住特措置元市町村コード));
                 訂正モード(get得喪情報(被保険者番号, 異動日, 枝番));
                 break;
             case teiseitoroku_shikaku:
-                get旧保険者(市町村コード, 導入形態コード, 広住特措置元市町村コード);
+                div.getDdlKyuHokensya().setDataSource(get旧保険者(市町村コード, 導入形態コード, 広住特措置元市町村コード));
                 訂正モード(get得喪情報(被保険者番号, 異動日, 枝番));
                 break;
             default:
                 break;
         }
         div.getCcdJyusyotiTokure().initialize(被保険者番号, 識別コード, 資格取得日);
-        // 資格変更履歴
+        // 資格変更履歴　
 //        div.getCcdShikakuKanrenIdo().initialize(被保険者番号, null, 資格取得日);
         div.getCcdShisetuNyutaisyo().initialize(識別コード);
     }
@@ -111,7 +131,7 @@ public class HihosyosaiHandler {
      * 所在保険者部品連動処理します。
      */
     public void onClick_Change() {
-// TODO
+// TODO 陽さん確認です。
     }
 
     /**
@@ -140,6 +160,21 @@ public class HihosyosaiHandler {
         return div.getCcdShikakuKanrenIdo().getGridData();
     }
 
+    /**
+     * 取得日と喪失日のチックを実施する。
+     *
+     * @return ValidationMessageControlPairs ValidationMessageControlPairs
+     */
+    public ValidationMessageControlPairs validateForUpdate() {
+        ValidationMessageControlPairs validPairs = new ValidationMessageControlPairs();
+        if (div.getTxtSyutokuYMD() != null && div.getTxtSosichiYMD() != null) {
+            if (div.getTxtSosichiYMD().getValue().isBefore(div.getTxtSyutokuYMD().getValue())) {
+                validPairs.add(new ValidationMessageControlPair(RRVMessages.期間が不正));
+            }
+        }
+        return validPairs;
+    }
+
     private void 訂正モード(HihokenshaDaicho 得喪情報) {
         div.getTxtSyutokuYMD().setValue(new RDate(得喪情報.getShikakuShutokuYMD().toString()));
         div.getTxtSyutokutodokedeYMD().setValue(new RDate(得喪情報.getShikakuShutokuTodokedeYMD().toString()));
@@ -147,8 +182,7 @@ public class HihosyosaiHandler {
         set被保区分(得喪情報.getHihokennshaKubunCode());
         set所在保険者(得喪情報.getShichosonCode().getColumnValue());
         set所在保険者(得喪情報.getKoikinaiTokureiSochimotoShichosonCode().getColumnValue());
-//        // 旧保険者
-//        div.getDdlKyuHokensya().setSelectedKey(得喪情報.getKyuShichosonCode().getColumnValue());
+        set旧保険者(得喪情報.getKyuShichosonCode().getColumnValue());
         div.getTxtSyoninichiji1().setValue(日期(得喪情報.getLastUpdateTimestamp()));
         if (得喪情報.getShikakuSoshitsuYMD() != null && !得喪情報.getShikakuSoshitsuYMD().isEmpty()) {
             div.getTxtSosichiYMD().setValue(new RDate(得喪情報.getShikakuSoshitsuYMD().toString()));
@@ -168,22 +202,57 @@ public class HihosyosaiHandler {
         div.getTxtSyoninichiji2().setValue(日期(得喪情報.getLastUpdateTimestamp()));
     }
 
+    private void 登録モード() {
+        if (単一市町村.equals(広域と市町村判断())) {
+            IAssociationFinder finder = AssociationFinderFactory.createInstance();
+            Association association = finder.getAssociation();
+            LasdecCode 市町村コード = association.get地方公共団体コード();
+            KeyValueDataSource keyValue = new KeyValueDataSource();
+            keyValue.setKey(市町村コード.getColumnValue());
+            keyValue.setValue(市町村コード.getColumnValue());
+            List<KeyValueDataSource> keyValueList = new ArrayList<>();
+            keyValueList.add(keyValue);
+            div.getDdlSyozaiHokensya().setDataSource(keyValueList);
+            div.getDdlSyozaiHokensya().setSelectedKey(市町村コード.getColumnValue());
+        } else if (広域市町村.equals(広域と市町村判断())) {
+            IShikibetsuTaishoGyomuHanteiKey 業務判定キー = ShikibetsuTaishoGyomuHanteiKeyFactory.createInstance(GyomuCode.DB介護保険, KensakuYusenKubun.住登内優先);
+            IShikibetsuTaishoSearchKey 検索キー
+                    = new ShikibetsuTaishoSearchKeyBuilder(業務判定キー, true)
+                    .set識別コード(ShikibetsuCode.EMPTY)
+                    .build();
+            IPsmCriteria psm = ShikibetsuTaishoSearchEntityHolder.getCriteria(検索キー);
+            List<UaFt200FindShikibetsuTaishoEntity> 宛名PSM = InstanceProvider.create(UaFt200FindShikibetsuTaishoFunctionDac.class).select(psm);
+            if (宛名PSM != null && !宛名PSM.isEmpty()) {
+                LasdecCode 現地方公共団体コード = 宛名PSM.get(0).getGenLasdecCode();
+                if (現地方公共団体コード != null && !現地方公共団体コード.isEmpty()) {
+                    set所在保険者(現地方公共団体コード.getColumnValue());
+                }
+            }
+        }
+    }
+
     private void 表示と非表示() {
         if (単一市町村.equals(広域と市町村判断())) {
+            div.getLblSyozaiHokensya().setVisible(false);
             div.getDdlSyozaiHokensya().setVisible(false);
+            div.getLblSotimotoHokensya().setVisible(false);
             div.getDdlSotimotoHokensya().setVisible(false);
         } else if (広域市町村.equals(広域と市町村判断())) {
+            div.getLblSyozaiHokensya().setVisible(true);
             div.getDdlSyozaiHokensya().setVisible(true);
+            div.getLblSotimotoHokensya().setVisible(true);
             div.getDdlSotimotoHokensya().setVisible(true);
         }
         if (is合併市町村()) {
+            div.getLblKyuHokensya().setVisible(true);
             div.getDdlKyuHokensya().setVisible(true);
         } else {
+            div.getLblKyuHokensya().setVisible(false);
             div.getDdlKyuHokensya().setVisible(false);
         }
     }
 
-    private List<Shichoson> get旧保険者(LasdecCode 市町村コード, RString 導入形態コード, LasdecCode 広住特措置元市町村コード) {
+    private List<Shichoson> 旧保険者取得(LasdecCode 市町村コード, RString 導入形態コード, LasdecCode 広住特措置元市町村コード) {
         if (市町村コード == null || 市町村コード.isEmpty() || RString.isNullOrEmpty(導入形態コード)) {
             throw new ApplicationException(UrErrorMessages.対象データなし.getMessage().evaluate());
         }
@@ -215,6 +284,27 @@ public class HihosyosaiHandler {
             keyValueList.add(keyValue);
         }
         return keyValueList;
+    }
+
+    private List<KeyValueDataSource> get旧保険者(LasdecCode 市町村コード, RString 導入形態コード, LasdecCode 広住特措置元市町村コード) {
+        List<Shichoson> 旧保険者情報 = 旧保険者取得(市町村コード, 導入形態コード, 広住特措置元市町村コード);
+        List<KeyValueDataSource> keyValueList = new ArrayList<>();
+        for (Shichoson 旧保険者 : 旧保険者情報) {
+            KeyValueDataSource keyValue = new KeyValueDataSource();
+            keyValue.setKey(旧保険者.get旧市町村コード().getColumnValue());
+            keyValue.setValue(旧保険者.get旧市町村名称());
+            keyValueList.add(keyValue);
+        }
+        return keyValueList;
+    }
+
+    private void set旧保険者(RString 旧保険者情報コード) {
+        List<KeyValueDataSource> 旧保険者情報 = div.getDdlKyuHokensya().getDataSource();
+        for (KeyValueDataSource keyValue : 旧保険者情報) {
+            if (旧保険者情報コード.equals(keyValue.getKey())) {
+                div.getDdlKyuHokensya().setSelectedKey(旧保険者情報コード);
+            }
+        }
     }
 
     private void set所在保険者(RString 所在保険者コード) {
@@ -315,5 +405,20 @@ public class HihosyosaiHandler {
                 .append(" ")
                 .append(更新日時.getTime().toFormattedTimeString(DisplayTimeFormat.HH_mm_ss));
         return new RString(builder.toString());
+    }
+
+    private static enum RRVMessages implements IValidationMessage {
+
+        期間が不正(UrErrorMessages.期間が不正_追加メッセージあり２, "取得日（入力した値）", "喪失日（入力した値）");
+        private final Message message;
+
+        private RRVMessages(IMessageGettable message, String... replacements) {
+            this.message = message.getMessage().replace(replacements);
+        }
+
+        @Override
+        public Message getMessage() {
+            return message;
+        }
     }
 }
