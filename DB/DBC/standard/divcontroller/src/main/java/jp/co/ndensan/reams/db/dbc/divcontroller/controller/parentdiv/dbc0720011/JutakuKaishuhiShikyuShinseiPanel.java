@@ -75,9 +75,14 @@ public class JutakuKaishuhiShikyuShinseiPanel {
             RDate 支給申請日開始 = ViewStateHolder.get(JutakuKaishuhiShikyuShinseiKeys.支給申請日From, RDate.class);
             RDate 支給申請日終了 = ViewStateHolder.get(JutakuKaishuhiShikyuShinseiKeys.支給申請日To, RDate.class);
             JutakukaishuSikyuShinseiIkkatuShinsaManager manager = JutakukaishuSikyuShinseiIkkatuShinsaManager.createInstance();
-            List<MiShinsaSikyuShinsei> resultList = manager.getMiShinasaShikyuShinseiList(
-                    new FlexibleDate(支給申請日開始.toDateString()),
-                    new FlexibleDate(支給申請日終了.toDateString()));
+            List<MiShinsaSikyuShinsei> resultList;
+            if (支給申請日開始 != null) {
+                resultList = manager.getMiShinasaShikyuShinseiList(
+                        new FlexibleDate(支給申請日開始.toDateString()),
+                        new FlexibleDate(支給申請日終了.toDateString()));
+            } else {
+                resultList = manager.getMiShinasaShikyuShinseiList(null, new FlexibleDate(支給申請日終了.toDateString()));
+            }
             List<MiShinsaSikyuShinsei> viewStateList = ViewStateHolder.get(JutakuKaishuhiShikyuShinseiKeys.申請一覧GridEntity, List.class);
             if (!resultList.isEmpty() && !viewStateList.isEmpty()) {
                 審査結果の再設定(viewStateList, resultList);
