@@ -14,6 +14,8 @@ import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7022ShoriDateKanriEntity;
 /**
  *
  * 特別徴収対象者登録のMapperクラスです。
+ *
+ * @reamsid_L DBB-0670-020 wangjie2
  */
 public interface ITokubetuChosyutaisyosyaTorokuMapper {
 

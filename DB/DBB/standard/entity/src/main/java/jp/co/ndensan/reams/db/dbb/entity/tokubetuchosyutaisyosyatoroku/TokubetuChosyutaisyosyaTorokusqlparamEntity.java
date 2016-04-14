@@ -15,6 +15,8 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 /**
  *
  * sql parameters
+ *
+ * @reamsid_L DBB-0670-020 wangjie2
  */
 @lombok.Getter
 @lombok.Setter

@@ -37,6 +37,7 @@ import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
  *
  * 特別徴収対象者登録。
  *
+ * @reamsid_L DBB-0670-020 wangjie2
  */
 public class TokubetuChosyutaisyosyaTorokuManager {
 
