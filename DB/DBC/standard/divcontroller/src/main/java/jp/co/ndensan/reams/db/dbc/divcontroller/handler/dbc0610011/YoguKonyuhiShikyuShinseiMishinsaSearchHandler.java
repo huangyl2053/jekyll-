@@ -82,7 +82,7 @@ public class YoguKonyuhiShikyuShinseiMishinsaSearchHandler {
      */
     public void 審査決定処理() {
         List<dgYoguKonyuhiShisaMishinsaShikyuShinseiList_Row> selectedMishinsaShikyuShinsei = div.getYoguKonyuhiShikyuShinseiMishinsaResultList()
-                .getDgYoguKonyuhiShisaMishinsaShikyuShinseiList().getSelectedItems();
+                .getDgYoguKonyuhiShisaMishinsaShikyuShinseiList().getDataSource();
         for (dgYoguKonyuhiShisaMishinsaShikyuShinseiList_Row row : selectedMishinsaShikyuShinsei) {
             if (限度額チェック(row) && !品目チェック(row)) {
                 row.getTxtShinsaNo().setValue(ShinsaNaiyoKubun.承認する.getコード());

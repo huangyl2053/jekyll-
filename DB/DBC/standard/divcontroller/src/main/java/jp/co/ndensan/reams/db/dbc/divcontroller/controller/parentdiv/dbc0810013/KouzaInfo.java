@@ -81,6 +81,7 @@ public class KouzaInfo {
         parameter.setEndHHMM(new RTime(支給申請情報.get支払窓口終了時間()));
         parameter.setKozaId(支給申請情報.get口座ID());
         parameter.setShiharaiBasho(支給申請情報.get支払場所());
+        // TODO QA638画面レイアウトと画面が一致しません。
         div.getPanelShinseiNaiyo().getCcdShiharaiHohoJyoho().initialize(parameter, new KamokuCode(償還払給付費), 照会);
         return createResponse(div);
     }
