@@ -11,7 +11,6 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 /**
  * FukaKakutei のクラスファイル
  *
- * @reamsid_L DBB-0800-010 wanghui
  */
 public class FukaKakuteiDiv extends Panel {
 

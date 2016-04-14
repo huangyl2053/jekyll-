@@ -14,7 +14,6 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.PanelBatchParameter;
 /**
  * TsukibetsuSuiihyoSakuseiParameter のクラスファイル
  *
- * @reamsid_L DBB-0760-010 zhangguopeng
  */
 public class TsukibetsuSuiihyoSakuseiParameterDiv extends PanelBatchParameter {
 

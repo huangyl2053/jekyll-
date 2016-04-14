@@ -16,7 +16,6 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 /**
  * FukaErrorReportView のクラスファイル
  *
- * @reamsid_L DBB-0720-010 zuotao
  */
 public class FukaErrorReportViewDiv extends Panel {
 

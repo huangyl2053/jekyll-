@@ -20,7 +20,6 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxNum;
 /**
  * ChushutsuJoken のクラスファイル
  *
- * @reamsid_L DBB-0760-010 zhangguopeng
  */
 public class ChushutsuJokenDiv extends Panel {
 

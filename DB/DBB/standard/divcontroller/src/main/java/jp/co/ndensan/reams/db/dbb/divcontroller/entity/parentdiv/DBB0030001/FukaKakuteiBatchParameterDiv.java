@@ -13,7 +13,6 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.PanelBatchParameter;
 /**
  * FukaKakuteiBatchParameter のクラスファイル
  *
- * @reamsid_L DBB-0800-010 wanghui
  */
 public class FukaKakuteiBatchParameterDiv extends PanelBatchParameter {
 

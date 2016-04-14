@@ -13,7 +13,6 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxDate;
 /**
  * dgFukaErrorList_Row のクラスファイル
  *
- * @reamsid_L DBB-0720-010 zuotao
  */
 public class dgFukaErrorList_Row extends DataRow {
     // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2015-11-30_08-54-50">
