@@ -7,10 +7,10 @@ package jp.co.ndensan.reams.db.dbu.service.core.jukyushikakushomeisho;
 
 import java.util.ArrayList;
 import java.util.List;
+import jp.co.ndensan.reams.db.dbu.business.core.jukyushikakushomeisho.JukyuShikakuShomeishoKaiKo;
 import jp.co.ndensan.reams.db.dbu.business.jukyushikakushomeisho.JukyuShikakuShomeishoData;
 import jp.co.ndensan.reams.db.dbu.definition.mybatisprm.jukyushikakushomeisho.JukyuShikakuShomeishoMyBatisParameter;
 import jp.co.ndensan.reams.db.dbu.entity.jukyushikakushomeisho.JukyuShikakuShomeishoDataEntity;
-import jp.co.ndensan.reams.db.dbu.entity.jukyushikakushomeisho.JukyuShikakuShomeishoKaiKoEntity;
 import jp.co.ndensan.reams.db.dbu.persistence.db.mapper.relate.jukyushikakushomeisho.IJukyuShikakuShomeishoMapper;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBU;
 import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.GyomuBunrui;
@@ -93,7 +93,7 @@ public class JukyuShikakuShomeishoFinder {
      * @param inEntity 受給資格証明書発行Entity
      * @return outEntity 受給資格証明書の帳票出力用データEntity
      */
-    public JukyuShikakuShomeishoData setJukyuShikakuShomeisho(JukyuShikakuShomeishoKaiKoEntity inEntity) {
+    public JukyuShikakuShomeishoData setJukyuShikakuShomeisho(JukyuShikakuShomeishoKaiKo inEntity) {
 
         JukyuShikakuShomeishoDataEntity outEntity = new JukyuShikakuShomeishoDataEntity();
 
@@ -120,7 +120,7 @@ public class JukyuShikakuShomeishoFinder {
      * @param outEntity 受給資格証明書の帳票出力用データEntity
      * @param inEntity 受給資格証明書発行Entity
      */
-    private void edit被保険者(JukyuShikakuShomeishoDataEntity outEntity, JukyuShikakuShomeishoKaiKoEntity inEntity) {
+    private void edit被保険者(JukyuShikakuShomeishoDataEntity outEntity, JukyuShikakuShomeishoKaiKo inEntity) {
 
         RString 住民種別コード1 = new RString("1");
         RString 住民種別コード2 = new RString("2");
@@ -356,7 +356,7 @@ public class JukyuShikakuShomeishoFinder {
      * @param outEntity 受給資格証明書の帳票出力用データEntity
      * @param inEntity 受給資格証明書発行Entity
      */
-    private void get申請状況情報(JukyuShikakuShomeishoDataEntity outEntity, JukyuShikakuShomeishoKaiKoEntity inEntity) {
+    private void get申請状況情報(JukyuShikakuShomeishoDataEntity outEntity, JukyuShikakuShomeishoKaiKo inEntity) {
 
         DbT4001JukyushaDaichoDac dbT4001Dac = InstanceProvider.create(DbT4001JukyushaDaichoDac.class);
         List<DbT4001JukyushaDaichoEntity> dbT4001EntityList = dbT4001Dac.select受給者台帳(inEntity.get被保険者番号());
@@ -391,7 +391,7 @@ public class JukyuShikakuShomeishoFinder {
                 .separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString());
     }
 
-    private void set申請状況And年月日(JukyuShikakuShomeishoDataEntity outEntity, JukyuShikakuShomeishoKaiKoEntity inEntity, FlexibleDate 認定年月日) {
+    private void set申請状況And年月日(JukyuShikakuShomeishoDataEntity outEntity, JukyuShikakuShomeishoKaiKo inEntity, FlexibleDate 認定年月日) {
         if (inEntity.get申請日() != null && !inEntity.get申請日().isEmpty()) {
             outEntity.set申請状況(new RString("申請中"));
             outEntity.set申請年月日(new FlexibleDate(inEntity.get申請日()).wareki().eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN)
@@ -404,7 +404,7 @@ public class JukyuShikakuShomeishoFinder {
     }
 
     private void set申請状況And年月日(JukyuShikakuShomeishoDataEntity outEntity,
-            JukyuShikakuShomeishoKaiKoEntity inEntity, DbT4001JukyushaDaichoEntity dbT4001JukyushaDaichoEntity) {
+            JukyuShikakuShomeishoKaiKo inEntity, DbT4001JukyushaDaichoEntity dbT4001JukyushaDaichoEntity) {
         if (null == inEntity.get申請日() || inEntity.get申請日().isEmpty()) {
             outEntity.set申請状況(new RString("認定済"));
             outEntity.set申請年月日(RString.EMPTY);
