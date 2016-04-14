@@ -9,8 +9,9 @@ import jp.co.ndensan.reams.db.dbb.entity.report.hokenryononyutsuchishoginfuri.Ho
 import jp.co.ndensan.reams.uz.uza.report.ReportEditorJoiner;
 
 /**
- *
  * 保険料納入通知書（本算定）【銀振タイプ】帳票項目定義_5期 HokenryoNonyuTsuchishoGinfuriFiveKiBuilder
+ *
+ * @reamsid_L DBB-9110-090 liangbc
  */
 public class HokenryoNonyuTsuchishoGinfuriFiveKiBuilder implements IHokenryoNonyuTsuchishoGinfuriFiveKiBuilder {
 

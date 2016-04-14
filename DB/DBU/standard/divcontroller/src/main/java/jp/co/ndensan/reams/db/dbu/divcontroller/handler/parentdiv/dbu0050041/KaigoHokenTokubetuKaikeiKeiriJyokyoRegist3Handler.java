@@ -37,8 +37,9 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
 
 /**
- *
  * 介護保険特別会計経理状況登録_様式４の３ハンドラクラスです。
+ *
+ * @reamsid_L DBU-1130-040 liangbc
  */
 public class KaigoHokenTokubetuKaikeiKeiriJyokyoRegist3Handler {
 

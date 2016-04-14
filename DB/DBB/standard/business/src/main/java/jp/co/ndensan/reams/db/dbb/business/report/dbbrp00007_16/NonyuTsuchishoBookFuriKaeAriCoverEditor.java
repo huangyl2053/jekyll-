@@ -8,8 +8,9 @@ package jp.co.ndensan.reams.db.dbb.business.report.dbbrp00007_16;
 import jp.co.ndensan.reams.db.dbb.entity.report.dbbrp00007_16.NonyuTsuchishoBookFuriKaeAriCoverSource;
 
 /**
- *
  * 保険料納入通知書（本算定過年度）【ブックタイプ】（口振依頼あり）通知書 NonyuTsuchishoBookFuriKaeAriCoverEditor
+ *
+ * @reamsid_L DBB-9110-160 liangbc
  */
 public class NonyuTsuchishoBookFuriKaeAriCoverEditor implements INonyuTsuchishoBookFuriKaeAriCoverEditor {
 

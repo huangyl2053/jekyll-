@@ -9,8 +9,9 @@ import jp.co.ndensan.reams.db.dbb.entity.report.dbbrp00007_14.HokenryoNonyuTsuch
 import jp.co.ndensan.reams.uz.uza.report.ReportEditorJoiner;
 
 /**
- *
  * 保険料納入通知書（本算定過年度）【期毎タイプ】HokenryoNonyuTsuchishoKigotoBuilder
+ *
+ * @reamsid_L DBB-9110-140 liangbc
  */
 public class HokenryoNonyuTsuchishoKigotoBuilder implements IHokenryoNonyuTsuchishoKigotoBuilder {
 

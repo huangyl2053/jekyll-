@@ -8,8 +8,9 @@ package jp.co.ndensan.reams.db.dbb.business.report.dbbrp00007_14;
 import jp.co.ndensan.reams.db.dbb.entity.report.dbbrp00007_14.HokenryoNonyuTsuchishoKigotoSource;
 
 /**
- *
  * 保険料納入通知書（本算定過年度）【期毎タイプ】HokenryoNonyuTsuchishoKigotoEditor
+ *
+ * @reamsid_L DBB-9110-140 liangbc
  */
 public class HokenryoNonyuTsuchishoKigotoEditor implements IHokenryoNonyuTsuchishoKigotoEditor {
 

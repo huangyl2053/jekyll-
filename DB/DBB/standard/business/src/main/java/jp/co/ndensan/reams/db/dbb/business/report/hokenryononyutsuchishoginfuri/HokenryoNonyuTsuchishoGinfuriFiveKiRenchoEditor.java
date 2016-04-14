@@ -8,8 +8,9 @@ package jp.co.ndensan.reams.db.dbb.business.report.hokenryononyutsuchishoginfuri
 import jp.co.ndensan.reams.db.dbb.entity.report.hokenryononyutsuchishoginfuri.HokenryoNonyuTsuchishoGinfuriFiveKiRenchoSource;
 
 /**
- *
  * 保険料納入通知書（本算定）【銀振タイプ】帳票項目定義_5期_連帳 HokenryoNonyuTsuchishoGinfuriFiveKiRenchoEditor
+ *
+ * @reamsid_L DBB-9110-090 liangbc
  */
 public class HokenryoNonyuTsuchishoGinfuriFiveKiRenchoEditor implements IHokenryoNonyuTsuchishoGinfuriFiveKiRenchoEditor {
 

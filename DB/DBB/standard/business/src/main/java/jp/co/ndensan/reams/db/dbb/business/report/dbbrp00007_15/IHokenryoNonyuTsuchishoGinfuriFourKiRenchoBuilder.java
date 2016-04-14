@@ -9,8 +9,9 @@ import jp.co.ndensan.reams.db.dbb.entity.report.dbbrp00007_15.HokenryoNonyuTsuch
 import jp.co.ndensan.reams.uz.uza.report.IReportBuilder;
 
 /**
- *
  * 保険料納入通知書（本算定過年度）【銀振タイプ】帳票項目定義_4期_連帳 IHokenryoNonyuTsuchishoGinfuriFourKiRenchoBuilder
+ *
+ * @reamsid_L DBB-9110-150 liangbc
  */
 public interface IHokenryoNonyuTsuchishoGinfuriFourKiRenchoBuilder extends IReportBuilder<HokenryoNonyuTsuchishoGinfuriFourKiRenchoSource> {
 

@@ -20,8 +20,9 @@ import jp.co.ndensan.reams.uz.uza.lang.RStringUtil;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 
 /**
- *
  * 保険料納入通知書（本算定）【銀振タイプ】帳票項目定義_4期 HokenryoNonyuTsuchishoGinfuriFourKiEditor
+ *
+ * @reamsid_L DBB-9110-090 liangbc
  */
 public class HokenryoNonyuTsuchishoGinfuriFourKiEditor implements IHokenryoNonyuTsuchishoGinfuriFourKiEditor {
 

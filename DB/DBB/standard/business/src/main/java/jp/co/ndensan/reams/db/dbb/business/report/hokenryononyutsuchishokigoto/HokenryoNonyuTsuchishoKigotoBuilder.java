@@ -9,8 +9,9 @@ import jp.co.ndensan.reams.db.dbb.entity.report.hokenryononyutsuchishokigoto.Hok
 import jp.co.ndensan.reams.uz.uza.report.ReportEditorJoiner;
 
 /**
- *
  * 保険料納入通知書（本算定）【期毎タイプ】HokenryoNonyuTsuchishoKigotoBuilder
+ *
+ * @reamsid_L DBB-9110-080 liangbc
  */
 public class HokenryoNonyuTsuchishoKigotoBuilder implements IHokenryoNonyuTsuchishoKigotoBuilder {
 
