@@ -72,5 +72,6 @@ public class HihokenshaEntity {
     private List<ShisetsuNyutaishoEntity> shisetsuNyutaishoEntityList;
     private List<DbT7006RoreiFukushiNenkinJukyushaEntity> dbT7006RoreiFukushiNenkinJukyushaEntityList;
     private List<DbT7037ShoKofuKaishuEntity> dbT7037ShoKofuKaishuEntityList;
-    // TODO 蘇広俊 世帯情報取得方針不明、QA170提出中
+    private List<SetaiinJohoEntity> setaiinJohoEntityList;
+
 }

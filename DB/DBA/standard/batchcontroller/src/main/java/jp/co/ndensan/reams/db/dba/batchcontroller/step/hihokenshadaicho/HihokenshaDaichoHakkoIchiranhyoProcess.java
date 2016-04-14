@@ -16,6 +16,7 @@ import jp.co.ndensan.reams.db.dba.definition.processprm.hihokenshadaicho.Ikkatsu
 import jp.co.ndensan.reams.db.dba.definition.reportid.ReportIdDBA;
 import jp.co.ndensan.reams.db.dba.entity.db.relate.hihokenshadaicho.HihokenshaDaichoIchiranHyoRelateEntity;
 import jp.co.ndensan.reams.db.dba.entity.db.relate.hihokenshadaichosakusei.HihokenshaEntity;
+import jp.co.ndensan.reams.db.dba.entity.db.relate.hihokenshadaichosakusei.SetaiinJohoEntity;
 import jp.co.ndensan.reams.db.dba.entity.db.relate.hihokenshadaichosakusei.ShisetsuNyutaishoEntity;
 import jp.co.ndensan.reams.db.dba.entity.report.hihokenshadaichohakkoichiranhyo.HihokenshaDaichoHakkoIchiranhyoReportSource;
 import jp.co.ndensan.reams.db.dba.persistence.db.mapper.relate.hihokenshadaicho.IIkkatsuSakuseiMapper;
@@ -24,8 +25,10 @@ import jp.co.ndensan.reams.db.dba.service.core.hihokenshadaichosakusei.Hihokensh
 import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.DonyuKeitaiCode;
 import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.GyomuBunrui;
 import jp.co.ndensan.reams.db.dbx.service.ShichosonSecurityJoho;
+import jp.co.ndensan.reams.db.dbz.business.core.basic.SetaiinJoho;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT1001HihokenshaDaichoEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT1008IryohokenKanyuJokyoEntity;
+import jp.co.ndensan.reams.db.dbz.service.core.setai.SetaiinFinder;
 import jp.co.ndensan.reams.ua.uax.business.core.psm.UaFt200FindShikibetsuTaishoFunction;
 import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.IShikibetsuTaisho;
 import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.ShikibetsuTaishoFactory;
@@ -47,6 +50,8 @@ import jp.co.ndensan.reams.uz.uza.batch.process.IBatchReader;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaMeisho;
 import jp.co.ndensan.reams.uz.uza.biz.GyomuCode;
 import jp.co.ndensan.reams.uz.uza.biz.ReportId;
+import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
@@ -55,7 +60,6 @@ import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
  * 帳票_保険者台帳発行一覧表の処理クラスです
  *
  * @reamsid_L DBA-0510-010 duanzhanli
- *
  */
 public class HihokenshaDaichoHakkoIchiranhyoProcess extends BatchProcessBase<DbT1001HihokenshaDaichoEntity> {
 
@@ -175,10 +179,10 @@ public class HihokenshaDaichoHakkoIchiranhyoProcess extends BatchProcessBase<DbT
         被保険者Entity.setPage(RString.EMPTY);
         被保険者Entity.setTitle(TITLE);
         被保険者Entity.setShichosonCode(entity.getShichosonCode());
-        //被保険者Entity.setShichosonMeisho(get市町村名称(entity));
+        被保険者Entity.setShichosonMeisho(get市町村名称(entity));
         被保険者Entity.setHihokenshaNoTitle(HIHOKENSHANOTITLE);
         被保険者Entity.setHihokenshaNo(entity.getHihokenshaNo());
-        UaFt200FindShikibetsuTaishoEntity 識別対象Entity = get宛名識別対象取得(entity);
+        UaFt200FindShikibetsuTaishoEntity 識別対象Entity = get宛名識別対象取得(entity.getShikibetsuCode());
         被保険者Entity.setShikibetsuCode(entity.getShikibetsuCode());
         if (識別対象Entity != null) {
             IShikibetsuTaisho shikibetsuTaisho = ShikibetsuTaishoFactory.createKojin(識別対象Entity);
@@ -228,9 +232,23 @@ public class HihokenshaDaichoHakkoIchiranhyoProcess extends BatchProcessBase<DbT
         被保険者Entity.setShisetsuNyutaishoEntityList(iIkkatsuSakuseiMapper.get生活保護受給者(mybatisParameter));
         被保険者Entity.setDbT7006RoreiFukushiNenkinJukyushaEntityList(iIkkatsuSakuseiMapper.get老齢福祉年金受給者(mybatisParameter));
         被保険者Entity.setDbT7037ShoKofuKaishuEntityList(iIkkatsuSakuseiMapper.get証交付回収(mybatisParameter));
-        // 段站立　世帯情報取得方針不明、QA170回答待ち
-        //SetaiinFinder.createInstance().get世帯員情報By識別コード(entity.getShikibetsuCode(), FlexibleDate.getNowDate());
+        被保険者Entity.setSetaiinJohoEntityList(get世帯一覧情報(entity.getShikibetsuCode()));
         return 被保険者Entity;
+    }
+
+    private List<SetaiinJohoEntity> get世帯一覧情報(ShikibetsuCode shikibetsuCode) {
+        List<SetaiinJohoEntity> setaiinJohoEntityList = new ArrayList<>();
+        List<SetaiinJoho> setaiinJohoList = SetaiinFinder.createInstance().
+                get世帯員情報By識別コード(shikibetsuCode, FlexibleDate.getNowDate());
+        for (SetaiinJoho setaiinJoho : setaiinJohoList) {
+            SetaiinJohoEntity setaiinJohoEntity = new SetaiinJohoEntity();
+            if (setaiinJoho.get識別対象() != null) {
+                setaiinJohoEntity.setUaFt200Entity(setaiinJoho.get識別対象().toEntity());
+            }
+            setaiinJohoEntity.set本人区分(setaiinJoho.get本人区分());
+            setaiinJohoEntityList.add(setaiinJohoEntity);
+        }
+        return setaiinJohoEntityList;
     }
 //    TODO 出力順の取得方式確認中
 //    private void get出力順(){
@@ -283,7 +301,7 @@ public class HihokenshaDaichoHakkoIchiranhyoProcess extends BatchProcessBase<DbT
         return state;
     }
 
-    private UaFt200FindShikibetsuTaishoEntity get宛名識別対象取得(DbT1001HihokenshaDaichoEntity entity) {
+    private UaFt200FindShikibetsuTaishoEntity get宛名識別対象取得(ShikibetsuCode shikibetsuCode) {
         ShikibetsuTaishoSearchKeyBuilder key = new ShikibetsuTaishoSearchKeyBuilder(
                 ShikibetsuTaishoGyomuHanteiKeyFactory.createInstance(GyomuCode.DB介護保険, KensakuYusenKubun.住登外優先), true);
         List<JuminShubetsu> juminShubetsu = new ArrayList<>();
@@ -292,7 +310,7 @@ public class HihokenshaDaichoHakkoIchiranhyoProcess extends BatchProcessBase<DbT
         juminShubetsu.add(JuminShubetsu.住登外個人_日本人);
         juminShubetsu.add(JuminShubetsu.住登外個人_外国人);
         key.set住民種別(juminShubetsu);
-        key.set識別コード(entity.getShikibetsuCode());
+        key.set識別コード(shikibetsuCode);
         UaFt200FindShikibetsuTaishoFunction uaFt200Psm = new UaFt200FindShikibetsuTaishoFunction(key.getPSM検索キー());
         IkkatsuSakuseiMybatisParameter mybatisParameter = IkkatsuSakuseiMybatisParameter.
                 createSelectByKeyParam(mybatisPrm.isChushutsuFlag(), mybatisPrm.getShichosonCode(), mybatisPrm.getShikibetsuCode(),
