@@ -11,12 +11,12 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 import jp.co.ndensan.reams.db.dba.business.core.hihokenshadaicho.HihokenshaShutokuJyoho;
+import jp.co.ndensan.reams.db.dba.business.core.hihokenshashikakuteisei.IryoHokenJoho;
+import jp.co.ndensan.reams.db.dba.business.core.hihokenshashikakuteisei.RoreiFukushiJoho;
 import jp.co.ndensan.reams.db.dba.definition.core.shikakuidojiyu.ShikakuHenkoJiyu;
 import jp.co.ndensan.reams.db.dba.definition.core.shikakuidojiyu.ShikakuJutokuTekiyoJiyu;
 import jp.co.ndensan.reams.db.dba.definition.core.shikakuidojiyu.ShikakuShutokuJiyu;
-import jp.co.ndensan.reams.db.dba.business.core.hihokenshashikakuteisei.IryoHokenJoho;
 import jp.co.ndensan.reams.db.dba.entity.db.hihokenshashikakuteisei.JushochiTokureiEntity;
-import jp.co.ndensan.reams.db.dba.business.core.hihokenshashikakuteisei.RoreiFukushiJoho;
 import jp.co.ndensan.reams.db.dba.entity.db.hihokenshashikakuteisei.ShikakuKanrenYidouEntity;
 import jp.co.ndensan.reams.db.dba.entity.db.hihokenshashikakuteisei.ShikakuSyousayiEntity;
 import jp.co.ndensan.reams.db.dba.entity.db.hihokenshashikakuteisei.ShikakuTeyiseyiEntity;
@@ -125,6 +125,15 @@ public class HihokenshaShikakuTeiseiManager {
         this.市町村情報取得Finder = 市町村情報取得Finder;
         this.kyuShichosonCodeJoho = kyuShichosonCodeJoho;
         this.getIdoCheckManager = getIdoCheckManager;
+    }
+
+    /**
+     * {@link InstanceProvider#create}にて生成した{@link HihokenshaShikakuTeiseiManager}のインスタンスを返します。
+     *
+     * @return HihokenshaShikakuTeiseiManager
+     */
+    public static HihokenshaShikakuTeiseiManager createInstance() {
+        return InstanceProvider.create(HihokenshaShikakuTeiseiManager.class);
     }
 
     /**
