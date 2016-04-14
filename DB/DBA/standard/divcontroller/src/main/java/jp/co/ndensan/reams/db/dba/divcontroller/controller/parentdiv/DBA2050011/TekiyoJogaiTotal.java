@@ -47,7 +47,6 @@ public class TekiyoJogaiTotal {
      * @return レスポンス
      */
     public ResponseData onLoad(TekiyoJogaiTotalDiv requestDiv) {
-        ViewStateHolder.put(ViewStateKeys.該当者検索_識別コード, new ShikibetsuCode("000000000022505"));
         ShikibetsuCode 識別コード = ViewStateHolder.get(ViewStateKeys.該当者検索_識別コード, ShikibetsuCode.class);
         RString menuId = ResponseHolder.getMenuID();
         getHandler(requestDiv).initialize(識別コード, menuId);
