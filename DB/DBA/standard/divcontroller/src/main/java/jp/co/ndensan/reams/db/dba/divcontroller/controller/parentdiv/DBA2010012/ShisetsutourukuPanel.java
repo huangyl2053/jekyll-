@@ -230,10 +230,10 @@ public class ShisetsutourukuPanel {
                 = ViewStateHolder.get(ViewStateKeys.サービス登録_サービス情報, KaigoJogaiTokureiTaishoShisetsu.class);
         if (事業者.get有効開始年月日().equals(div.getTxtShisetsuYukoKaishiYMD().getValue())) {
             KaigoJogaiTokureiTaishoShisetsu 事業者情報 = 事業者情報の修正編集(div);
-            manager.updateJigyoshaJoho(null, 事業者種別, 事業者情報, 変更なし);
+            manager.updateJigyoshaJoho(null, ViewStateHolder.get(ViewStateKeys.介護事業者_事業者種別, RString.class), 事業者情報, 変更なし);
         } else {
             KaigoJogaiTokureiTaishoShisetsu business = 事業者情報の追加編集(div);
-            manager.insertJigyoshaJoho(null, 事業者種別, business);
+            manager.insertJigyoshaJoho(null, ViewStateHolder.get(ViewStateKeys.介護事業者_事業者種別, RString.class), business);
         }
         div.getKaigoKanryo().getCcdKaigoKanryoMessage().setMessage(new RString(UrInformationMessages.正常終了.getMessage()
                 .replace("修正").evaluate()),
