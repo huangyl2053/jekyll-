@@ -5,6 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dba.business.core.hihokenshashikakuteisei;
 
+import java.io.Serializable;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -18,7 +19,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 @lombok.Getter
 @lombok.Setter
 @SuppressWarnings("PMD.UnusedPrivateField")
-public class RoreiFukushiJoho {
+public class RoreiFukushiJoho implements Serializable {
 
     private ShikibetsuCode 識別コード;
     private FlexibleDate 受給開始年月日;

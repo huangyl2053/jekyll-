@@ -5,6 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dba.business.core.hihokenshashikakuteisei;
 
+import java.io.Serializable;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
@@ -19,7 +20,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 @lombok.Getter
 @lombok.Setter
 @SuppressWarnings("PMD.UnusedPrivateField")
-public class IryoHokenJoho {
+public class IryoHokenJoho implements Serializable {
 
     private ShikibetsuCode 識別コード;
     private int 履歴番号;
