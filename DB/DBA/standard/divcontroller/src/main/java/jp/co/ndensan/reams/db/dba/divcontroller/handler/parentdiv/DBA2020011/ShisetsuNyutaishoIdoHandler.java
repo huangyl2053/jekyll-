@@ -2,7 +2,6 @@ package jp.co.ndensan.reams.db.dba.divcontroller.handler.parentdiv.DBA2020011;
 
 import jp.co.ndensan.reams.db.dba.divcontroller.entity.parentdiv.DBA2020011.ShisetsuNyutaishoIdoDiv;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
-import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
  * 施設入退所異動Divのハンドラークラスです。
@@ -11,10 +10,6 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
  */
 public class ShisetsuNyutaishoIdoHandler {
 
-    private static final RString 表示モード = new RString("資格異動");
-    private static final RString WIDTHサイズモード = new RString("モード1");
-    private static final RString 明細表示モード = new RString("追加_修正");
-    private static final RString 利用モード = new RString("台帳種別表示機能");
     private final ShisetsuNyutaishoIdoDiv div;
 
     /**
@@ -45,10 +40,6 @@ public class ShisetsuNyutaishoIdoHandler {
     }
 
     private void init施設入退所異動エリア(ShikibetsuCode 識別コード) {
-        div.getShisetsuNyutaishoRireki().getCcdShisetsuNyutaishoRirekiKanri().set表示モード(表示モード);
-        div.getShisetsuNyutaishoRireki().getCcdShisetsuNyutaishoRirekiKanri().set表示widthサイズ(WIDTHサイズモード);
-        div.getShisetsuNyutaishoRireki().getCcdShisetsuNyutaishoRirekiKanri().set明細表示モード(明細表示モード);
-        div.getShisetsuNyutaishoRireki().getCcdShisetsuNyutaishoRirekiKanri().set利用モード(利用モード);
         div.getShisetsuNyutaishoRireki().getCcdShisetsuNyutaishoRirekiKanri().initialize(識別コード);
     }
 
