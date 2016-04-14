@@ -70,11 +70,10 @@ public class ShokanShinseiList {
      * @return ShokanShinseiListDivのResponseData
      */
     public ResponseData<ShokanShinseiListDiv> onClick_InsertButton(ShokanShinseiListDiv requestDiv) {
-
+        get申請を追加するcheck(requestDiv);
         if (!ResponseHolder.isReRequest()) {
             return ResponseData.of(requestDiv).addMessage(UrQuestionMessages.処理実行の確認.getMessage()).respond();
         }
-        get申請を追加するcheck(requestDiv);
         ViewStateHolder.put(ViewStateKeys.償還払申請一覧_サービス年月, requestDiv.getTxtServiceYM().getValue().getYearMonth());
         ViewStateHolder.put(ViewStateKeys.償還払申請一覧_サービス年月From, RString.EMPTY);
         ViewStateHolder.put(ViewStateKeys.償還払申請一覧_サービス年月To, RString.EMPTY);
@@ -92,13 +91,13 @@ public class ShokanShinseiList {
      * @return ShokanShinseiListDivのResponseData
      */
     public ResponseData<ShokanShinseiListDiv> onSelectByDbClick(ShokanShinseiListDiv requestDiv) {
+        get検索ボタンcheck(requestDiv);
         if (!ResponseHolder.isReRequest()) {
             return ResponseData.of(requestDiv).addMessage(UrQuestionMessages.処理実行の確認.getMessage()).respond();
         }
         if (new RString(UrQuestionMessages.処理実行の確認.getMessage().getCode()).equals(
                 ResponseHolder.getMessageCode()) && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
 
-            get検索ボタンcheck(requestDiv);
             RString mode = ViewStateHolder.get(ViewStateKeys.償還払申請一覧_モード, RString.class);
             SearchResult<ShokanShinseiIchiran> shokandhinseiichiran;
             FlexibleYearMonth serviceYMFrom = null;
@@ -124,8 +123,7 @@ public class ShokanShinseiList {
             getHandler(requestDiv).initialize(mode, shokandhinseiichiran);
         }
 
-        return ResponseData.of(requestDiv)
-                .respond();
+        return ResponseData.of(requestDiv).respond();
     }
 
     /**
