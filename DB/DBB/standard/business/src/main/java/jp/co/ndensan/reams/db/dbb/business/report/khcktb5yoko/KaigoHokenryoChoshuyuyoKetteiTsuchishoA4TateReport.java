@@ -14,7 +14,7 @@ import lombok.NonNull;
 /**
  * 介護保険料徴収猶予決定通知書帳票A4縦タイプReport
  *
- * @reamsid_L DBC-0740-040 sunhui
+ * @reamsid_L DBB-0740-040 sunhui
  */
 public class KaigoHokenryoChoshuyuyoKetteiTsuchishoA4TateReport
         extends Report<KaigoHokenryoChoshuyuyoKetteiTsuchishoA4TateSource> {

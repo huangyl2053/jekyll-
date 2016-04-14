@@ -16,7 +16,7 @@ import lombok.Setter;
 /**
  * 介護保険料徴収猶予決定通知書_徴収猶予決定通知書情報を格納
  *
- * @reamsid_L DBC-0740-040 sunhui
+ * @reamsid_L DBB-0740-040 sunhui
  */
 @Getter
 @Setter
