@@ -197,7 +197,7 @@ public class KaigoJigyoshaShisetsuKanriManager {
         } else {
             重複チェック = mapper.getCheckKikanJufukui(parameter);
         }
-        return 重複チェック != null && !重複チェック.isEmpty();
+        return !重複チェック.isEmpty();
     }
 
     /**
