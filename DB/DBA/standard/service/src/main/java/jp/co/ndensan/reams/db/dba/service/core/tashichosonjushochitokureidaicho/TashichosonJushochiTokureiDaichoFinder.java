@@ -7,6 +7,7 @@ package jp.co.ndensan.reams.db.dba.service.core.tashichosonjushochitokureidaicho
 
 import java.util.ArrayList;
 import java.util.List;
+import jp.co.ndensan.reams.db.dba.business.core.tashichosonjushochitokureidaicho.OtherAddressLedgerBusiness;
 import jp.co.ndensan.reams.db.dba.definition.mybatisprm.atena.OtherAddressInformationRecipientNameMybatisParam;
 import jp.co.ndensan.reams.db.dba.definition.otheraddressledger.OtherAddressInformationParameter;
 import jp.co.ndensan.reams.db.dba.entity.db.otheraddressledger.OtherAddressInfEntity;
@@ -47,7 +48,7 @@ import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
  *
  * @reamsid_L DBA-0402-020 wangjie2
  */
-public class TashichosonJushochiTokureiDaicho {
+public class TashichosonJushochiTokureiDaichoFinder {
 
     private static final int ONEPAGE = 1;
     private static final RString 住所 = new RString("住所");
@@ -75,7 +76,7 @@ public class TashichosonJushochiTokureiDaicho {
      * @param 識別コード 識別コード
      * @return 他市町村住所地特例者台帳Entityリスト
      */
-    public List<OtherAddressLedgerEntity> getTashichosonJushochiTokureiDaicho(ShikibetsuCode 識別コード) {
+    public List<OtherAddressLedgerBusiness> getTashichosonJushochiTokureiDaicho(ShikibetsuCode 識別コード) {
         List<OtherAddressLedgerEntity> otherAddressLedgerLst = new ArrayList<>();
         ShikibetsuTaishoPSMSearchKeyBuilder key = new ShikibetsuTaishoPSMSearchKeyBuilder(GyomuCode.DB介護保険, KensakuYusenKubun.住登外優先);
         key.setデータ取得区分(DataShutokuKubun.直近レコード);
@@ -92,7 +93,7 @@ public class TashichosonJushochiTokureiDaicho {
             otherAddressLedger.setページ目(ONEPAGE);
             otherAddressLedger.set状態(他住所地特例者);
             otherAddressLedgerLst.add(otherAddressLedger);
-            return otherAddressLedgerLst;
+            return getOtherAddressLedgerBusinessList(otherAddressLedgerLst);
         }
         List<OtherAddressInfEntity> 他市町村住所地特例者情報 = get他市町村住所地特例者情報(識別コード);
         LasdecCode 市町村コード = 他市町村住所地特例者情報.get(0).get市町村コード();
@@ -104,8 +105,17 @@ public class TashichosonJushochiTokureiDaicho {
             otherAddressLedgerLst.add(otherAddressLedger);
             pageNo++;
         }
-        return otherAddressLedgerLst;
+        return getOtherAddressLedgerBusinessList(otherAddressLedgerLst);
 
+    }
+
+    private List<OtherAddressLedgerBusiness> getOtherAddressLedgerBusinessList(List<OtherAddressLedgerEntity> otherAddressLedgerLst) {
+        List<OtherAddressLedgerBusiness> otherAddressLedgerList = new ArrayList<>();
+        for (OtherAddressLedgerEntity otherAddressLedger : otherAddressLedgerLst) {
+            OtherAddressLedgerBusiness otherAddressLedgerBusiness = new OtherAddressLedgerBusiness(otherAddressLedger);
+            otherAddressLedgerList.add(otherAddressLedgerBusiness);
+        }
+        return otherAddressLedgerList;
     }
 
     /**
