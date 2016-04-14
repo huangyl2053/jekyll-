@@ -5,8 +5,9 @@ import jp.co.ndensan.reams.uz.uza.report.IReportSource;
 import jp.co.ndensan.reams.uz.uza.report.source.ReportItem;
 
 /**
+ * 年齢到達者登録リストヘッダエディターの帳票項目クラスです。
  *
- * 年齢到達者登録リストヘッダエディターの帳票項目クラスです
+ * @reamsid_L DBA-0570-060 xuyue
  */
 public class NenreitotatsuKakuninListReportSource implements IReportSource {
 // <editor-fold defaultstate="collapsed" desc="Generated Code">

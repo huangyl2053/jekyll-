@@ -12,8 +12,9 @@ import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
 import lombok.NonNull;
 
 /**
+ * 年齢到達者登録リスト帳票です。
  *
- * NenreitotatsuKakuninListReportです。
+ * @reamsid_L DBA-0570-060 xuyue
  */
 public class NenreitotatsuKakuninListReport extends Report<NenreitotatsuKakuninListReportSource> {
 

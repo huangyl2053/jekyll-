@@ -8,8 +8,9 @@ package jp.co.ndensan.reams.db.dba.business.report.nenreitotatsukakuninlist;
 import jp.co.ndensan.reams.db.dba.entity.report.nenreitotatsukakuninlist.NenreitotatsuKakuninListReportSource;
 
 /**
+ * 年齢到達者登録リスト帳票のヘッダエディタです。
  *
- * @author yuyong3
+ * @reamsid_L DBA-0570-060 xuyue
  */
 class NenreitotatsuKakuninListHeaderEditor implements INenreitotatsuKakuninListEdiotr {
 
