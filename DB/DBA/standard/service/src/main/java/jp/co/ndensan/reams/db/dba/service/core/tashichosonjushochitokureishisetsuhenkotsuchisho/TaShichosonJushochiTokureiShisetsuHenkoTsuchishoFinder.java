@@ -13,6 +13,7 @@ import jp.co.ndensan.reams.db.dba.entity.TatokuKanrenChohyoRenrakuhyoEntity;
 import jp.co.ndensan.reams.db.dba.entity.TatokuKanrenChohyoShijiDataEntity;
 import jp.co.ndensan.reams.db.dba.entity.db.relate.TaShichosonJushochiTokureiShisetsuHenkoTsuchishoRelateEntity;
 import jp.co.ndensan.reams.db.dba.persistence.db.mapper.relate.tashihenkotsuchisho.ITaShichosonJushochiTokureiShisetsuHenkoTsuchishoMapper;
+import jp.co.ndensan.reams.db.dbz.definition.core.seibetsu.Seibetsu;
 import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.kyotsu.NinshoshaDenshikoinshubetsuCode;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT1005KaigoJogaiTokureiTaishoShisetsuEntity;
 import jp.co.ndensan.reams.db.dbz.service.core.MapperProvider;
@@ -153,7 +154,12 @@ public class TaShichosonJushochiTokureiShisetsuHenkoTsuchishoFinder {
             outEntity.set誕生日(pSMEntity.get生年月日().
                     wareki().eraType(EraType.KANJI).
                     firstYear(FirstYear.GAN_NEN).separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString());
-            outEntity.set性別(pSMEntity.get性別コード());
+
+            if (Seibetsu.男.getコード().equals(pSMEntity.get性別コード())) {
+                outEntity.set性別(Seibetsu.男.get名称());
+            } else if (Seibetsu.女.getコード().equals(pSMEntity.get性別コード())) {
+                outEntity.set性別(Seibetsu.女.get名称());
+            }
         }
 
         outEntity.set変更年月日(inEntity.get入所年月日().
@@ -291,7 +297,13 @@ public class TaShichosonJushochiTokureiShisetsuHenkoTsuchishoFinder {
             outEntity.set誕生日(entity.get生年月日().
                     wareki().eraType(EraType.KANJI).
                     firstYear(FirstYear.GAN_NEN).separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString());
-            outEntity.set性別(entity.get性別コード());
+
+            if (Seibetsu.男.getコード().equals(entity.get性別コード())) {
+                outEntity.set性別(Seibetsu.男.get名称());
+            } else if (Seibetsu.女.getコード().equals(entity.get性別コード())) {
+                outEntity.set性別(Seibetsu.女.get名称());
+            }
+
             if (entity.get転入前郵便番号() != null) {
                 outEntity.set郵便番号(entity.get転入前郵便番号().getEditedYubinNo());
             }

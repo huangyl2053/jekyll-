@@ -10,6 +10,7 @@ import jp.co.ndensan.reams.db.dba.entity.TatokuKanrenChohyoShijiDataEntity;
 import jp.co.ndensan.reams.db.dba.entity.TatokuKanrenChohyoTaishoTsuchishoEntity;
 import jp.co.ndensan.reams.db.dba.entity.db.relate.TaShichosonJushochiTokureiShisetsuTaishoTsuchishoRelateEntity;
 import jp.co.ndensan.reams.db.dba.persistence.db.mapper.relate.tashitaishotsuchisho.ITaShichosonJushochiTokureiShisetsuTaishoTsuchishoMapper;
+import jp.co.ndensan.reams.db.dbz.definition.core.seibetsu.Seibetsu;
 import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.kyotsu.NinshoshaDenshikoinshubetsuCode;
 import jp.co.ndensan.reams.db.dbz.service.core.MapperProvider;
 import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.search.ShikibetsuTaishoPSMSearchKeyBuilder;
@@ -179,8 +180,12 @@ public class TaShichosonJushochiTokureiShisetsuTaishoTsuchishoFinder {
             outEntity.set誕生日(getEntity.get生年月日().
                     wareki().eraType(EraType.KANJI).
                     firstYear(FirstYear.GAN_NEN).separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString());
-            outEntity.set性別(getEntity.get性別コード());
 
+            if (Seibetsu.男.getコード().equals(getEntity.get性別コード())) {
+                outEntity.set性別(Seibetsu.男.get名称());
+            } else if (Seibetsu.女.getコード().equals(getEntity.get性別コード())) {
+                outEntity.set性別(Seibetsu.女.get名称());
+            }
         }
 
         IAssociationFinder finder = AssociationFinderFactory.createInstance();
