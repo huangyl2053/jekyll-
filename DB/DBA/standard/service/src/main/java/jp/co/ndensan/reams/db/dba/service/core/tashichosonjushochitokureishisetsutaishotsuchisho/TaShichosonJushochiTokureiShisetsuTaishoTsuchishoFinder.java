@@ -75,6 +75,15 @@ public class TaShichosonJushochiTokureiShisetsuTaishoTsuchishoFinder {
     }
 
     /**
+     * {@link InstanceProvider#create}にて生成した{@link TaShichosonJushochiTokureiShisetsuTaishoTsuchishoFinder}のインスタンスを返します。
+     *
+     * @return {@link InstanceProvider#create}にて生成した{@link TaShichosonJushochiTokureiShisetsuTaishoTsuchishoFinder}のインスタンス
+     */
+    public static TaShichosonJushochiTokureiShisetsuTaishoTsuchishoFinder createInstance() {
+        return InstanceProvider.create(TaShichosonJushochiTokureiShisetsuTaishoTsuchishoFinder.class);
+    }
+
+    /**
      * 他住特施設退所通知書データ作成
      *
      * @param inEntity 他市町村住所地特例者関連帳票発行指示データEntity
