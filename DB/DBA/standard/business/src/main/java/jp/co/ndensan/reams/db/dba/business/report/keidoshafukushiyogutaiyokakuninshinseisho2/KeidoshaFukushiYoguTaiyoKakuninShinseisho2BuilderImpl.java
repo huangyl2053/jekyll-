@@ -11,8 +11,8 @@ import jp.co.ndensan.reams.uz.uza.report.ReportEditorJoiner;
 /**
  * 軽度者に対する福祉用具貸与の取り扱いの特例に関する確認申請書2Builderクラスです。
  *
- * @reamsid_L DBA-0540-704  lijia
- * 
+ * @reamsid_L DBA-0540-705 lijia
+ *
  */
 public class KeidoshaFukushiYoguTaiyoKakuninShinseisho2BuilderImpl implements IKeidoshaFukushiYoguTaiyoKakuninShinseisho2Builder {
 

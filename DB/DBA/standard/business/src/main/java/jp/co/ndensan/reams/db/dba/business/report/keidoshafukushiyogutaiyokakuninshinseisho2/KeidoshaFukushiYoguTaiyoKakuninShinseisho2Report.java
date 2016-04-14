@@ -13,8 +13,8 @@ import lombok.NonNull;
 /**
  * 軽度者に対する福祉用具貸与の取り扱いの特例に関する確認申請書2の帳票作成します。
  *
- * @reamsid_L DBA-0540-704  lijia
- * 
+ * @reamsid_L DBA-0540-705 lijia
+ *
  */
 public final class KeidoshaFukushiYoguTaiyoKakuninShinseisho2Report extends Report<KeidoshaFukushiYoguTaiyoKakuninShinseisho2ReportSource> {
 
