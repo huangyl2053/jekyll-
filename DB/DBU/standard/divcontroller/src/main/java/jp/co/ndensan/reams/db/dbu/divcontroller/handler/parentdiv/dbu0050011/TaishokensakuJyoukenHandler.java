@@ -35,6 +35,8 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 /**
  *
  * 介護保険特別会計経理状況登録_検索ハンドラクラスです。
+ *
+ * @reamsid_L DBU-1130-010 wangjie2
  */
 public class TaishokensakuJyoukenHandler {
 
@@ -150,13 +152,11 @@ public class TaishokensakuJyoukenHandler {
      * 「報告年度」フォーカスロスト処理です。
      */
     public void lostFocus() {
-        RString 報告年度String = div.getTxtHoukokuY().getText();
+        div.getTxtShukeiY().clearValue();
         FlexibleDate 報告年度 = div.getTxtHoukokuY().getValue();
-        if (!報告年度.isEmpty() && !報告年度String.isNullOrEmpty()) {
-            int 報告年度Year = Integer.parseInt(報告年度String.substring(0, INT4).toString());
+        if (報告年度.isValid() && !報告年度.isEmpty()) {
+            int 報告年度Year = 報告年度.getYearValue();
             set集計年度(報告年度Year);
-        } else {
-            div.getTxtShukeiY().setValue(FlexibleDate.EMPTY);
         }
     }
 
