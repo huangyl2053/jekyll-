@@ -6,8 +6,8 @@
 package jp.co.ndensan.reams.db.dba.business.core.sikakuidouteisei;
 
 import java.io.Serializable;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxFlexibleDate;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -23,14 +23,14 @@ import lombok.Setter;
 public class ShikakuRirekiJoho implements Serializable {
 
     private RString state;
-    private RString shutokuDate;
-    private RString shutokuTodokedeDate;
+    private FlexibleDate shutokuDate;
+    private FlexibleDate shutokuTodokedeDate;
     private RString shutokuJiyuKey;
     private RString shutokuJiyu;
     private RString hihokenshaKubun;
     private RString hihokenshaKubunKey;
-    private TextBoxFlexibleDate soshitsuDate;
-    private TextBoxFlexibleDate soshitsuTodokedeDate;
+    private FlexibleDate soshitsuDate;
+    private FlexibleDate soshitsuTodokedeDate;
     private RString soshitsuJiyuKey;
     private RString soshitsuJiyu;
     private RString jutokuKubun;
