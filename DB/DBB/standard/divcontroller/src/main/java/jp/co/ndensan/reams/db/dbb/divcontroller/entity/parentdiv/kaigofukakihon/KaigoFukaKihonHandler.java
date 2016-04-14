@@ -9,6 +9,8 @@ import jp.co.ndensan.reams.db.dbb.service.core.basic.FukaManager;
 import jp.co.ndensan.reams.db.dbb.service.core.basic.HokenryoDankaiManager;
 import jp.co.ndensan.reams.db.dbz.business.searchkey.KaigoFukaKihonSearchKey;
 import jp.co.ndensan.reams.db.dbz.service.core.basic.HihokenshaDaichoManager;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
 //import jp.co.ndensan.reams.db.dbz.realservice.HihokenshaDaichoManager;
 
 /**
@@ -62,7 +64,14 @@ public class KaigoFukaKihonHandler {
      */
     public void load(KaigoFukaKihonSearchKey searchKey) {
 
+        // 画面表示にデータを表示させるために、固定値を使った。
         div.getTxtTsuchishoNo().setValue(searchKey.get通知書番号().value());
+        div.getTxtHihokenshaNo().setValue(new RString("000000001"));
+        div.getTxtHokenryoDankai().setValue(new RString("0001"));
+        div.getTxtShutokuJiyu().setValue(new RString("0002"));
+        div.getTxtShutokuYmd().setValue(new FlexibleDate("20160401"));
+        div.getTxtSoshitsuJiyu().setValue(new RString("0003"));
+        div.getTxtSoshitsuYmd().setValue(new FlexibleDate("20160402"));
 
         //TODO n8187久保田 ビルドエラー回避のために暫定対応
 //        Optional<Fuka> fuka = fukaManager.get最新介護賦課(searchKey.get賦課年度(), searchKey.get通知書番号());
