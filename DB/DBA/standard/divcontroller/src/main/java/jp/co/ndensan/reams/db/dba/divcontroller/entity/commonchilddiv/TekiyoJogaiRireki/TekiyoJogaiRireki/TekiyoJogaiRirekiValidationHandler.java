@@ -55,6 +55,13 @@ public class TekiyoJogaiRirekiValidationHandler {
         }
         if (!状態_削除.equals(div.getStauts())) {
             if (状態_適用登録.equals(画面状態)) {
+                if (div.getPanelTekiyoJokaiTekiInput().getTxtNyusyoDateInput().getValue() == null) {
+                    validPairs.add(new ValidationMessageControlPair(RRVMessages.入所日,
+                            div.getPanelTekiyoJokaiTekiInput().getTxtNyusyoDateInput()));
+                }
+                if (RString.isNullOrEmpty(div.getPanelTekiyoJokaiTekiInput().getCcdShisetsuJoho().getNyuryokuShisetsuKodo())) {
+                    validPairs.add(new ValidationMessageControlPair(RRVMessages.入所施設コード));
+                }
                 if (div.getPanelTekiyoJokaiTekiInput().getTxtTekiyoDateInput().getValue() == null) {
                     validPairs.add(new ValidationMessageControlPair(RRVMessages.適用日,
                             div.getPanelTekiyoJokaiTekiInput().getTxtTekiyoDateInput()));
@@ -70,7 +77,7 @@ public class TekiyoJogaiRirekiValidationHandler {
                     validPairs.add(new ValidationMessageControlPair(RRVMessages.適用事由,
                             div.getPanelTekiyoJokaiTekiInput().getDdlTekiyoJiyuInput()));
                 }
-            } else if (状態_追加.equals(画面状態) || 状態_修正.equals(画面状態) || 状態_訂正履歴.equals(画面状態)) {
+            } else if (状態_追加.equals(div.getStauts()) || 状態_修正.equals(div.getStauts()) || 状態_訂正履歴.equals(画面状態)) {
                 if (div.getPanelTekiyoInput().getTxtTekiyoDate().getValue() == null) {
                     validPairs.add(new ValidationMessageControlPair(RRVMessages.適用日,
                             div.getPanelTekiyoInput().getTxtTekiyoDate()));
@@ -89,7 +96,7 @@ public class TekiyoJogaiRirekiValidationHandler {
                             div.getPanelTekiyoInput().getDdlTekiyoJiyu()));
                 }
             }
-            if (状態_追加.equals(画面状態) || 状態_修正.equals(画面状態) || 状態_訂正履歴.equals(画面状態)) {
+            if (状態_追加.equals(div.getStauts()) || 状態_修正.equals(div.getStauts()) || 状態_訂正履歴.equals(画面状態)) {
                 if (div.getPanelTekiyoInput().getTxtKayijoDate().getValue() == null) {
                     validPairs.add(new ValidationMessageControlPair(
                             RRVMessages.解除日, div.getPanelTekiyoInput().getTxtKayijoDate()));
@@ -116,14 +123,14 @@ public class TekiyoJogaiRirekiValidationHandler {
                             RRVMessages.解除事由, div.getPanelTekiyoJokaiKaiJyoInput().getDdlKaijoJiyuInput()));
                 }
             }
-            if ((状態_追加.equals(画面状態) || 状態_修正.equals(画面状態) || 状態_訂正履歴.equals(画面状態))
+            if ((状態_追加.equals(div.getStauts()) || 状態_修正.equals(div.getStauts()) || 状態_訂正履歴.equals(画面状態))
                     && div.getPanelTekiyoInput().getTxtKayijoDate().getValue().isBefore(
                             div.getPanelTekiyoInput().getTxtTekiyoDate().getValue())) {
                 validPairs.add(new ValidationMessageControlPair(
                         RRVMessages.適用日と解除日の整合性チェック, div.getPanelTekiyoInput().getTxtTekiyoDate(),
                         div.getPanelTekiyoInput().getTxtKayijoDate()));
             }
-            if ((状態_追加.equals(画面状態) || 状態_修正.equals(画面状態) || 状態_訂正履歴.equals(画面状態))
+            if ((状態_追加.equals(div.getStauts()) || 状態_修正.equals(div.getStauts()) || 状態_訂正履歴.equals(画面状態))
                     && div.getPanelTekiyoInput().getTxtTekiyoDate().getValue() != null
                     && div.getPanelTekiyoInput().getTxtTekiyoTodokeDate().getValue() != null
                     && div.getPanelTekiyoInput().getTxtTekiyoDate().getValue().isBefore(
@@ -141,7 +148,7 @@ public class TekiyoJogaiRirekiValidationHandler {
                         div.getPanelTekiyoJokaiTekiInput().getTxtTkyoTododkDateIn(),
                         div.getPanelTekiyoJokaiTekiInput().getTxtTekiyoDateInput()));
             }
-            if ((状態_追加.equals(画面状態) || 状態_修正.equals(画面状態) || 状態_訂正履歴.equals(画面状態))
+            if ((状態_追加.equals(div.getStauts()) || 状態_修正.equals(div.getStauts()) || 状態_訂正履歴.equals(画面状態))
                     && div.getPanelTekiyoInput().getTxtKayijoDate().getValue() != null
                     && div.getPanelTekiyoInput().getTxtKaijoTodokedeDate().getValue() != null
                     && div.getPanelTekiyoInput().getTxtKayijoDate().getValue().isBefore(
@@ -229,6 +236,8 @@ public class TekiyoJogaiRirekiValidationHandler {
         解除日(UrErrorMessages.必須, "解除日"),
         適用事由(UrErrorMessages.必須, "適用事由"),
         解除事由(UrErrorMessages.必須, "解除事由"),
+        入所日(UrErrorMessages.必須, "入所日"),
+        入所施設コード(UrErrorMessages.必須, "入所施設コード"),
         適用日と解除日の整合性チェック(DbzErrorMessages.期間が不正_未来日付不可, メッセージ適用日.toString(), "解除日"),
         適用日と適用届出日の整合性チェック(DbzErrorMessages.期間が不正_未来日付不可, "適用届出日", メッセージ適用日.toString()),
         解除日と解除届出日の整合性チェック(DbzErrorMessages.期間が不正_未来日付不可, "解除届出日", "解除日"),
