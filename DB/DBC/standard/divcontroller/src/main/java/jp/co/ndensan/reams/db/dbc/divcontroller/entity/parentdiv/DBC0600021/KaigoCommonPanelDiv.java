@@ -15,7 +15,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 /**
  * KaigoCommonPanel のクラスファイル
  *
- * @reamsid_L DBC-1020-030 quxiaodong
+ * @author 自動生成
  */
 public class KaigoCommonPanelDiv extends Panel {
 

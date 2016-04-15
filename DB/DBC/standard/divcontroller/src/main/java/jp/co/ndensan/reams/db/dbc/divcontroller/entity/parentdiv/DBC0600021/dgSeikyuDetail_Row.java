@@ -3,20 +3,24 @@ package jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0600021;
  * このコードはツールによって生成されました。
  * このファイルへの変更は、以下の状況下で不正な動作の原因になったり、
  * コードが再生成されるときに損失したりします。
- * Thu Apr 14 12:37:33 CST 2016
+ * Thu Apr 14 15:43:53 CST 2016 
  */
 
-import jp.co.ndensan.reams.uz.uza.lang.RString;
+
+
 import jp.co.ndensan.reams.uz.uza.ui.binding.DataRow;
-import jp.co.ndensan.reams.uz.uza.ui.binding.TextBox;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxDate;
+import jp.co.ndensan.reams.uz.uza.ui.binding.TextBox;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxNum;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
+
 
 /**
- * dgSeikyuDetail_Row のクラスファイル
- *
- * @reamsid_L DBC-1020-030 quxiaodong
+ * dgSeikyuDetail_Row のクラスファイル 
+ * 
+ * @author 自動生成
  */
+
 public class dgSeikyuDetail_Row extends DataRow {
     // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
 
@@ -28,7 +32,8 @@ public class dgSeikyuDetail_Row extends DataRow {
     private TextBox fukushiYoguSeizoJigyoshaName;
     private TextBox fukushiYoguHanbaiJigyoshaName;
     private RString renban;
-    private RString hinmokuCode;
+    private TextBox hinmokuCode;
+    private TextBox txtShinsaMethodcode;
 
     public dgSeikyuDetail_Row() {
         super();
@@ -40,7 +45,8 @@ public class dgSeikyuDetail_Row extends DataRow {
         this.fukushiYoguSeizoJigyoshaName = new TextBox();
         this.fukushiYoguHanbaiJigyoshaName = new TextBox();
         this.renban = RString.EMPTY;
-        this.hinmokuCode = RString.EMPTY;
+        this.hinmokuCode = new TextBox();
+        this.txtShinsaMethodcode = new TextBox();
         this.setOriginalData("txtBuyYMD", txtBuyYMD);
         this.setOriginalData("txtShumoku", txtShumoku);
         this.setOriginalData("txtShohinName", txtShohinName);
@@ -50,9 +56,10 @@ public class dgSeikyuDetail_Row extends DataRow {
         this.setOriginalData("fukushiYoguHanbaiJigyoshaName", fukushiYoguHanbaiJigyoshaName);
         this.setOriginalData("renban", renban);
         this.setOriginalData("hinmokuCode", hinmokuCode);
+        this.setOriginalData("txtShinsaMethodcode", txtShinsaMethodcode);
     }
 
-    public dgSeikyuDetail_Row(TextBoxDate txtBuyYMD, TextBox txtShumoku, TextBox txtShohinName, TextBoxNum txtBuyAmount, TextBox txtShinsaMethod, TextBox fukushiYoguSeizoJigyoshaName, TextBox fukushiYoguHanbaiJigyoshaName, RString renban, RString hinmokuCode) {
+    public dgSeikyuDetail_Row(TextBoxDate txtBuyYMD, TextBox txtShumoku, TextBox txtShohinName, TextBoxNum txtBuyAmount, TextBox txtShinsaMethod, TextBox fukushiYoguSeizoJigyoshaName, TextBox fukushiYoguHanbaiJigyoshaName, RString renban, TextBox hinmokuCode, TextBox txtShinsaMethodcode) {
         super();
         this.setOriginalData("txtBuyYMD", txtBuyYMD);
         this.setOriginalData("txtShumoku", txtShumoku);
@@ -63,6 +70,7 @@ public class dgSeikyuDetail_Row extends DataRow {
         this.setOriginalData("fukushiYoguHanbaiJigyoshaName", fukushiYoguHanbaiJigyoshaName);
         this.setOriginalData("renban", renban);
         this.setOriginalData("hinmokuCode", hinmokuCode);
+        this.setOriginalData("txtShinsaMethodcode", txtShinsaMethodcode);
         this.txtBuyYMD = txtBuyYMD;
         this.txtShumoku = txtShumoku;
         this.txtShohinName = txtShohinName;
@@ -72,6 +80,7 @@ public class dgSeikyuDetail_Row extends DataRow {
         this.fukushiYoguHanbaiJigyoshaName = fukushiYoguHanbaiJigyoshaName;
         this.renban = renban;
         this.hinmokuCode = hinmokuCode;
+        this.txtShinsaMethodcode = txtShinsaMethodcode;
     }
 
     public TextBoxDate getTxtBuyYMD() {
@@ -106,8 +115,12 @@ public class dgSeikyuDetail_Row extends DataRow {
         return renban;
     }
 
-    public RString getHinmokuCode() {
+    public TextBox getHinmokuCode() {
         return hinmokuCode;
+    }
+
+    public TextBox getTxtShinsaMethodcode() {
+        return txtShinsaMethodcode;
     }
 
     public void setTxtBuyYMD(TextBoxDate txtBuyYMD) {
@@ -150,9 +163,14 @@ public class dgSeikyuDetail_Row extends DataRow {
         this.renban = renban;
     }
 
-    public void setHinmokuCode(RString hinmokuCode) {
+    public void setHinmokuCode(TextBox hinmokuCode) {
         this.setOriginalData("hinmokuCode", hinmokuCode);
         this.hinmokuCode = hinmokuCode;
+    }
+
+    public void setTxtShinsaMethodcode(TextBox txtShinsaMethodcode) {
+        this.setOriginalData("txtShinsaMethodcode", txtShinsaMethodcode);
+        this.txtShinsaMethodcode = txtShinsaMethodcode;
     }
 
     // </editor-fold>
