@@ -25,6 +25,7 @@ import jp.co.ndensan.reams.uz.uza.lang.ApplicationException;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.ui.binding.DataGridButtonState;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 
 /**
@@ -65,6 +66,7 @@ public class SikakuIdouTeiseiHandler {
         kaigoShikakuKihon_onload(被保険者番号, 表示モード);
         kaigoNinteiAtenaInfo_onload(new ShikibetsuCode(RString.EMPTY));
         div.getShikakuShutokuJoho().getShikakuTokusoRirekii().getCcdShikakuTokusoRireki().initialize(被保険者番号, 識別コード);
+        setButtonDisable();
         div.getShikakuShutokuJoho().getTplIryoHoken().getIryoHokenRirekii().getCcdIryoHokenRireki().
                 initialize(状態_登録, 識別コード.getColumnValue());
         div.getShikakuShutokuJoho().getTplRofukuNenkin().getRohukuNenkin().getCcdRohukuNenkin()
@@ -73,6 +75,19 @@ public class SikakuIdouTeiseiHandler {
         joho.setIryoHokenJohoList(set初期化時の医療保険情報());
         joho.setRoreiFukushiJohoList(set初期化時の老福年金情報());
         ViewStateHolder.put(ViewStateKeys.資格異動の訂正_初期化時医療保険情報, joho);
+    }
+
+    private void setButtonDisable() {
+        div.getShikakuShutokuJoho().getShikakuTokusoRirekii().getCcdShikakuTokusoRireki().set追加するボタン(false);
+        List<dgShikakuShutokuRireki_Row> dataSource = new ArrayList<>();
+        for (dgShikakuShutokuRireki_Row row : div.getShikakuShutokuJoho()
+                .getShikakuTokusoRirekii().getCcdShikakuTokusoRireki().getDataGridDataSource()) {
+            row.setDeleteButtonState(DataGridButtonState.Enabled);
+            row.setModifyButtonState(DataGridButtonState.Enabled);
+            dataSource.add(row);
+        }
+        div.getShikakuShutokuJoho()
+                .getShikakuTokusoRirekii().getCcdShikakuTokusoRireki().setDataGridDataSource(dataSource);
     }
 
     private List<IryoHokenJoho> set初期化時の医療保険情報() {
@@ -125,30 +140,33 @@ public class SikakuIdouTeiseiHandler {
         ViewStateHolder.put(ViewStateKeys.資格異動の訂正_識別コード, 識別コード);
         ViewStateHolder.put(ViewStateKeys.資格異動の訂正_被保番号, 被保険者番号);
         ViewStateHolder.put(ViewStateKeys.資格異動の訂正_状態, 状態);
-        dgShikakuShutokuRireki_Row row = div.getShikakuShutokuJoho().getShikakuTokusoRirekii()
-                .getCcdShikakuTokusoRireki().getDataGridSelectItem();
-        ShikakuRirekiJoho joho = new ShikakuRirekiJoho();
-        joho.setDaNo(row.getDaNo());
-        joho.setHihokenshaKubun(row.getHihokenshaKubun());
-        joho.setHihokenshaKubunKey(row.getHihokenshaKubunKey());
-        joho.setHihokenshaNo(row.getHihokenshaNo());
-        joho.setJutokuKubun(row.getJutokuKubun());
-        joho.setKyuHokensha(row.getKyuHokensha());
-        joho.setShikakuShutokuJiyuCode(row.getShikakuShutokuJiyuCode());
-        joho.setShikibetsuCode(row.getShikibetsuCode());
-        joho.setShoriDateTime(row.getShoriDateTime());
-        joho.setShozaiHokensha(row.getShozaiHokensha());
-        joho.setShutokuDate(row.getShutokuDate().getValue());
-        joho.setShutokuJiyu(row.getShutokuJiyu());
-        joho.setShutokuJiyuKey(row.getShutokuJiyuKey());
-        joho.setShutokuTodokedeDate(row.getShutokuTodokedeDate().getValue());
-        joho.setSochimotoHokensha(row.getSochimotoHokensha());
-        joho.setSoshitsuDate(row.getSoshitsuDate().getValue());
-        joho.setSoshitsuJiyu(row.getSoshitsuJiyu());
-        joho.setSoshitsuJiyuKey(row.getSoshitsuJiyuKey());
-        joho.setSoshitsuTodokedeDate(row.getSoshitsuTodokedeDate().getValue());
-        joho.setState(row.getState());
-        ViewStateHolder.put(ViewStateKeys.資格異動の訂正_資格得喪情報, joho);
+        if (!new RString("追加").equals(状態)) {
+            dgShikakuShutokuRireki_Row row = div.getShikakuShutokuJoho().getShikakuTokusoRirekii()
+                    .getCcdShikakuTokusoRireki().getDataGridSelectItem();
+            ShikakuRirekiJoho joho = new ShikakuRirekiJoho();
+            joho.setDaNo(row.getDaNo());
+            joho.setHihokenshaKubun(row.getHihokenshaKubun());
+            joho.setHihokenshaKubunKey(row.getHihokenshaKubunKey());
+            joho.setHihokenshaNo(row.getHihokenshaNo());
+            joho.setJutokuKubun(row.getJutokuKubun());
+            joho.setKyuHokensha(row.getKyuHokensha());
+            joho.setShikakuShutokuJiyuCode(row.getShikakuShutokuJiyuCode());
+            joho.setShikibetsuCode(row.getShikibetsuCode());
+            joho.setShoriDateTime(row.getShoriDateTime());
+            joho.setShozaiHokensha(row.getShozaiHokensha());
+            joho.setShutokuDate(row.getShutokuDate().getValue());
+            joho.setShutokuJiyu(row.getShutokuJiyu());
+            joho.setShutokuJiyuKey(row.getShutokuJiyuKey());
+            joho.setShutokuTodokedeDate(row.getShutokuTodokedeDate().getValue());
+            joho.setSochimotoHokensha(row.getSochimotoHokensha());
+            joho.setSoshitsuDate(row.getSoshitsuDate().getValue());
+            joho.setSoshitsuJiyu(row.getSoshitsuJiyu());
+            joho.setSoshitsuJiyuKey(row.getSoshitsuJiyuKey());
+            joho.setSoshitsuTodokedeDate(row.getSoshitsuTodokedeDate().getValue());
+            joho.setState(row.getState());
+            ViewStateHolder.put(ViewStateKeys.資格異動の訂正_資格得喪情報, joho);
+        }
+
     }
 
     /**
