@@ -7,7 +7,7 @@ package jp.co.ndensan.reams.db.dbc.service.core.jyutakukaisyuyichiran;
 
 import java.util.ArrayList;
 import java.util.List;
-import jp.co.ndensan.reams.db.dbc.business.core.shokanjutakukaishu.ShokanJutakuKaishuBusiness;
+import jp.co.ndensan.reams.db.dbc.business.core.basic.ShokanJutakuKaishu;
 import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3049ShokanJutakuKaishuEntity;
 import jp.co.ndensan.reams.db.dbc.persistence.db.basic.DbT3049ShokanJutakuKaishuDac;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
@@ -60,13 +60,13 @@ public class JyutakukaisyuyichiranFinder {
      * @param 様式番号 様式番号
      * @return SearchResult<ShokanJutakuKaishuBusiness> 住宅改修一覧
      */
-    public SearchResult<ShokanJutakuKaishuBusiness> selectJyutakukaisyuList(HihokenshaNo 被保険者番号,
+    public SearchResult<ShokanJutakuKaishu> selectJyutakukaisyuList(HihokenshaNo 被保険者番号,
             FlexibleYearMonth サービス提供年月, RString 整理番号, RString 様式番号) {
-        List<ShokanJutakuKaishuBusiness> 住宅改修一覧 = new ArrayList<>();
+        List<ShokanJutakuKaishu> 住宅改修一覧 = new ArrayList<>();
         List<DbT3049ShokanJutakuKaishuEntity> entityList = dac.getJyutakukaisyuList(
                 被保険者番号, サービス提供年月, 整理番号, 様式番号);
         for (DbT3049ShokanJutakuKaishuEntity entity : entityList) {
-            住宅改修一覧.add(new ShokanJutakuKaishuBusiness(entity));
+            住宅改修一覧.add(new ShokanJutakuKaishu(entity));
         }
         return SearchResult.of(住宅改修一覧, 0, false);
     }
