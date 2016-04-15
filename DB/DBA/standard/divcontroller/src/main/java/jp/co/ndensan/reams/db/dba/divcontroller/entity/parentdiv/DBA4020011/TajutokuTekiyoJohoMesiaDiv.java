@@ -12,7 +12,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxFlexibleDate;
 /**
  * TajutokuTekiyoJohoMesia のクラスファイル
  *
- * @author 自動生成
+ * @reamsid_L DBA-0402-010 xuyannan
  */
 public class TajutokuTekiyoJohoMesiaDiv extends Panel {
     /*
