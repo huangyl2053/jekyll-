@@ -176,6 +176,8 @@ public class ShiKaKuSyuToKuIdouTotalHandler {
      */
     public void setDdlShikakuShutokuJiyu() {
         RString menuID = ResponseHolder.getMenuID();
+        //------------------------
+        menuID = DBAMN21005_転居により取得_施設退所等;
         div.getShikakuShutokuJoho().getShikakuTokusoRirekiMain().getShikakuShutokuInput().getDdlShikakuShutokuJiyu().setDisabled(true);
         List<KeyValueDataSource> keyValueList = new ArrayList();
         if (DBAMN21001_転入により取得.equals(menuID)) {
@@ -195,9 +197,31 @@ public class ShiKaKuSyuToKuIdouTotalHandler {
         } else if (DBAMN21007_職権により取得.equals(menuID)) {
             keyValueList.add(new KeyValueDataSource(ShikakuShutokuJiyu.職権取得.getコード(), ShikakuShutokuJiyu.職権取得.get名称()));
         } else if (DBAMN21008_その他事由により取得.equals(menuID)) {
+            keyValueList.add(new KeyValueDataSource(ShikakuShutokuJiyu.転入.getコード(), ShikakuShutokuJiyu.転入.get名称()));
+            keyValueList.add(new KeyValueDataSource(ShikakuShutokuJiyu._２号申請.getコード(), ShikakuShutokuJiyu._２号申請.get名称()));
+            keyValueList.add(new KeyValueDataSource(ShikakuShutokuJiyu.外国人.getコード(), ShikakuShutokuJiyu.外国人.get名称()));
+            keyValueList.add(new KeyValueDataSource(ShikakuShutokuJiyu.年齢到達.getコード(), ShikakuShutokuJiyu.年齢到達.get名称()));
+            keyValueList.add(new KeyValueDataSource(ShikakuShutokuJiyu.他特例居住.getコード(), ShikakuShutokuJiyu.他特例居住.get名称()));
+            keyValueList.add(new KeyValueDataSource(ShikakuShutokuJiyu.除外者居住.getコード(), ShikakuShutokuJiyu.除外者居住.get名称()));
+            keyValueList.add(new KeyValueDataSource(ShikakuShutokuJiyu.帰化.getコード(), ShikakuShutokuJiyu.帰化.get名称()));
+            keyValueList.add(new KeyValueDataSource(ShikakuShutokuJiyu.職権取得.getコード(), ShikakuShutokuJiyu.職権取得.get名称()));
             keyValueList.add(new KeyValueDataSource(ShikakuShutokuJiyu.その他.getコード(), ShikakuShutokuJiyu.その他.get名称()));
+            div.getShikakuShutokuJoho().getShikakuTokusoRirekiMain().getShikakuShutokuInput().getDdlShikakuShutokuJiyu().setDataSource(keyValueList);
+            div.getShikakuShutokuJoho().getShikakuTokusoRirekiMain().getShikakuShutokuInput().getDdlShikakuShutokuJiyu().setDisabled(false);
+            div.getShikakuShutokuJoho().getShikakuTokusoRirekiMain().getShikakuShutokuInput()
+                    .getDdlShikakuShutokuJiyu().setSelectedKey(ShikakuShutokuJiyu.その他.getコード());
         }
         div.getShikakuShutokuJoho().getShikakuTokusoRirekiMain().getShikakuShutokuInput().getDdlShikakuShutokuJiyu().setDataSource(keyValueList);
+        div.getShikakuShutokuJoho().getShikakuTokusoRirekiMain().getShikakuShutokuInput().getDdlShikakuShutokuJiyu().setSelectedIndex(0);
+    }
+
+    public void 資格取得情報パネルの初期化() {
+        div.getShikakuShutokuJoho().getShikakuTokusoRirekiMain().getShikakuShutokuInput().getTxtHihoNo().clearValue();
+        div.getShikakuShutokuJoho().getShikakuTokusoRirekiMain().getShikakuShutokuInput().getTxtShutokuDate().clearValue();
+        div.getShikakuShutokuJoho().getShikakuTokusoRirekiMain().getShikakuShutokuInput().getTxtShutokuTodokedeDate().clearValue();
+        setDdlShikakuShutokuJiyu();
+        div.getShikakuShutokuJoho().getShikakuTokusoRirekiMain().getShikakuShutokuInput().setDisabled(true);
+        div.getShikakuShutokuJoho().getShikakuTokusoRirekiMain().getCcdShikakuTokusoRireki().set追加するボタン(false);
     }
 
     public void get被保番号表示有無制御() {
@@ -214,14 +238,25 @@ public class ShiKaKuSyuToKuIdouTotalHandler {
 
     private void save資格得喪履歴() {
         HihokenshaShikakuShutokuManager manager = HihokenshaShikakuShutokuManager.createInstance();
-        // TODO 資格取得登録チェック処理
         List<dgShikakuShutokuRireki_Row> rowList = div.getShikakuShutokuJoho().getShikakuTokusoRirekiMain().getCcdShikakuTokusoRireki().getDataGridDataSource();
         for (dgShikakuShutokuRireki_Row row : rowList) {
             if (追加.equals(row.getState())) {
                 HihokenshaDaicho business = new HihokenshaDaicho(new HihokenshaNo(row.getHihokenshaNo()), row.getShutokuDate().getValue(), row.getDaNo());
                 HihokenshaDaichoBuilder build = business.createBuilderForEdit();
-                build.set資格変更届出年月日(row.getShutokuTodokedeDate().getValue());
+                build.set資格取得届出年月日(row.getShutokuTodokedeDate().getValue());
                 build.set資格取得事由コード(row.getSoshitsuJiyuKey());
+                build.set資格取得年月日(row.getShutokuDate().getValue());
+
+                build.set市町村コード(LasdecCode.EMPTY);
+                build.set被保険者区分コード(RString.EMPTY);
+                build.set識別コード(識別コード);
+                build.set異動事由コード(row.getSoshitsuJiyuKey());
+                boolean checkFlag = manager.shikakuShutokuTorokuCheck(DateOfBirthFactory.createInstance(div.getKihonJoho().getCcdKaigoAtenaInfo().getShokaiData().getTxtSeinengappiYMD().getValue()),
+                        row.getShutokuDate().getValue(), row.getSoshitsuJiyuKey());
+                if (!checkFlag) {
+                    // TODO 提QA
+                    throw new ApplicationException(UrErrorMessages.チェックディジットが不正.getMessage());
+                }
                 manager.saveHihokenshaShutoku(build.build(),
                         DateOfBirthFactory.createInstance(div.getKihonJoho().getCcdKaigoAtenaInfo().getShokaiData().getTxtSeinengappiYMD().getValue()));
             }
