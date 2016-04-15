@@ -131,8 +131,8 @@
                  OR (("DbT1002TekiyoJogaisha"."kaijoYMD" IS NOT NULL AND (("DbT1004ShisetsuNyutaisho"."taishoYMD" IS NULL AND "DbT1004ShisetsuNyutaisho"."nyushoYMD" <![CDATA[<]]> "DbT1002TekiyoJogaisha"."kaijoYMD")
                  OR ("DbT1004ShisetsuNyutaisho"."nyushoYMD" <![CDATA[<]]> "DbT1002TekiyoJogaisha"."kaijoYMD" AND "DbT1004ShisetsuNyutaisho"."taishoYMD" <![CDATA[>]]> "DbT1002TekiyoJogaisha"."tekiyoYMD")))))
         ORDER BY
-            "DbT1002TekiyoJogaisha"."tekiyoYMD" DESC, "DbT1002TekiyoJogaisha"."idoYMD" DESC, "DbT1002TekiyoJogaisha"."tekiyoYMD" edaNo,
-            "DbT1002TekiyoJogaisha"."nyushoYMD" DESC, DbT1002TekiyoJogaisha"taishoYMD" DESC
+            "DbT1002TekiyoJogaisha"."tekiyoYMD" DESC, "DbT1002TekiyoJogaisha"."idoYMD" DESC, "DbT1002TekiyoJogaisha"."edaNo" DESC,
+            "DbT1004ShisetsuNyutaisho"."nyushoYMD" DESC, "DbT1004ShisetsuNyutaisho"."taishoYMD" DESC
     </select>
      
     <select id="select宛名情報" resultMap="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.UaFt200FindShikibetsuTaishoEntity"
