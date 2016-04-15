@@ -50,7 +50,7 @@ public class ShotokuJohoShokai {
         YMDHMS 所得基準日時 = YMDHMS.now();
         div.getKaigoAtenaInfo().onLoad(識別コード);
         KaigoFukaKihonSearchKey searchKey = new KaigoFukaKihonSearchKey.Builder(通知書番号, 賦課年度, 市町村コード, 識別コード).build();
-        div.getKaigoFukaKihon().initialize(searchKey);
+        div.getKaigoFukaKihon().load(searchKey);
         div.getSetaiShotokuIchiran().initialize(識別コード, 世帯基準年月日, 所得年度, 所得基準日時);
         AccessLogger.log(AccessLogType.照会, toPersonalData(識別コード, 被保険者番号));
         return ResponseData.of(div).respond();
