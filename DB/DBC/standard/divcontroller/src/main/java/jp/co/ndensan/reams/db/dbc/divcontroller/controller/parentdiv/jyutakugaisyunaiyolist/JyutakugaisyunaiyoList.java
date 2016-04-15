@@ -6,7 +6,6 @@
 package jp.co.ndensan.reams.db.dbc.divcontroller.controller.parentdiv.jyutakugaisyunaiyolist;
 
 import java.util.List;
-import jp.co.ndensan.reams.db.dbc.business.core.jyutakugaisyunaiyolist.JyutakugaisyunaiyoListDataPassModel;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.commonchilddiv.jyutakugaisyunaiyolist.JyutakugaisyunaiyoList.JyutakugaisyunaiyoListDiv;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.commonchilddiv.jyutakugaisyunaiyolist.JyutakugaisyunaiyoList.dgGaisyuList_Row;
 import jp.co.ndensan.reams.db.dbc.divcontroller.handler.parentdiv.jyutakugaisyunaiyolist.JyutakugaisyunaiyoListHandler;
@@ -32,19 +31,6 @@ public class JyutakugaisyunaiyoList {
     private static final RString モード_修正 = new RString("更新");
     private static final RString モード_削除 = new RString("削除");
     private static final RString モード_選択 = new RString("選択");
-
-    /**
-     * 住宅改修内容一覧のonLoadです。
-     *
-     * @param requestDiv JyutakugaisyunaiyoListDiv
-     * @return JyutakugaisyunaiyoListDivのResponseData
-     */
-    public ResponseData<JyutakugaisyunaiyoListDiv> onLoad(JyutakugaisyunaiyoListDiv requestDiv) {
-        JyutakugaisyunaiyoListDataPassModel model = DataPassingConverter.deserialize(
-                requestDiv.getHiddenPass(), JyutakugaisyunaiyoListDataPassModel.class);
-        getHandler(requestDiv).initialize(model);
-        return ResponseData.of(requestDiv).respond();
-    }
 
     /**
      * 追加ボタンを押下した際に実行します。
@@ -136,6 +122,9 @@ public class JyutakugaisyunaiyoList {
         if (モード_追加.equals(requestDiv.getPnlNyuryokuArea().getState())) {
             ValidationMessageControlPairs validPairs = getCheck(requestDiv);
             if (validPairs.iterator().hasNext()) {
+                requestDiv.getBtnClear().setDisabled(false);
+                requestDiv.getBtnDetailConfirm().setDisabled(false);
+                requestDiv.getBtnHonnijyusyoCopy().setDisabled(false);
                 return ResponseData.of(requestDiv).addValidationMessages(validPairs).respond();
             }
             dgGaisyuListRow = new dgGaisyuList_Row();

@@ -7,14 +7,18 @@ package jp.co.ndensan.reams.db.dbc.divcontroller.handler.parentdiv.jyutakugaisyu
 
 import java.util.ArrayList;
 import java.util.List;
+import jp.co.ndensan.reams.db.dbc.business.core.basic.ShokanJutakuKaishu;
+import jp.co.ndensan.reams.db.dbc.business.core.basic.ShokanJutakuKaishuIdentifier;
 import jp.co.ndensan.reams.db.dbc.business.core.jyutakugaisyunaiyolist.JyutakugaisyunaiyoListDataPassModel;
-import jp.co.ndensan.reams.db.dbc.business.core.shokanjutakukaishu.ShokanJutakuKaishuBusiness;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.commonchilddiv.jyutakugaisyunaiyolist.JyutakugaisyunaiyoList.JyutakugaisyunaiyoListDiv;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.commonchilddiv.jyutakugaisyunaiyolist.JyutakugaisyunaiyoList.dgGaisyuList_Row;
 import jp.co.ndensan.reams.db.dbc.service.core.jyutakukaisyuyichiran.JyutakukaisyuyichiranFinder;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
+import jp.co.ndensan.reams.db.dbz.divcontroller.viewbox.ViewStateKeys;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
+import jp.co.ndensan.reams.uz.uza.util.Models;
 import jp.co.ndensan.reams.uz.uza.util.db.SearchResult;
 import jp.co.ndensan.reams.uz.uza.util.serialization.DataPassingConverter;
 
@@ -47,7 +51,7 @@ public class JyutakugaisyunaiyoListHandler {
     public void initialize(JyutakugaisyunaiyoListDataPassModel model) {
         div.setJushoData(DataPassingConverter.serialize(model.get住所クラス()));
         RString 状態 = model.get状態();
-        SearchResult<ShokanJutakuKaishuBusiness> jyutakugaisyunaiyoList;
+        SearchResult<ShokanJutakuKaishu> jyutakugaisyunaiyoList;
         HihokenshaNo 被保険者番号 = model.get被保険者番号();
         FlexibleYearMonth サービス提供年月 = model.getサービス提供年月();
         RString 整理番号 = model.get整理番号();
@@ -58,9 +62,11 @@ public class JyutakugaisyunaiyoListHandler {
             jyutakugaisyunaiyoList = JyutakukaisyuyichiranFinder
                     .createInstance().selectJyutakukaisyuList(被保険者番号, サービス提供年月, 整理番号, 様式番号);
         }
+        Models<ShokanJutakuKaishuIdentifier, ShokanJutakuKaishu> jyutakugaisyu = Models.create(jyutakugaisyunaiyoList.records());
+        ViewStateHolder.put(ViewStateKeys.住宅改修内容一覧_検索結果, jyutakugaisyu);
         List<dgGaisyuList_Row> dgGaisyuListRow = new ArrayList<>();
         if (!jyutakugaisyunaiyoList.records().isEmpty()) {
-            for (ShokanJutakuKaishuBusiness jyutaku : jyutakugaisyunaiyoList.records()) {
+            for (ShokanJutakuKaishu jyutaku : jyutakugaisyunaiyoList.records()) {
                 dgGaisyuList_Row listRow = new dgGaisyuList_Row();
                 if (jyutaku.get住宅改修着工年月日() != null) {
                     listRow.setTxtChakkoYoteibi(jyutaku.get住宅改修着工年月日().wareki().toDateString());
@@ -72,7 +78,7 @@ public class JyutakugaisyunaiyoListHandler {
                 listRow.setTxtJigyosha(jyutaku.get住宅改修事業者名());
                 listRow.setTxtJyotai(RString.EMPTY);
                 listRow.setTxtJutakuAddress(jyutaku.get住宅改修住宅住所());
-                listRow.setTxtKaishuNaiyo(jyutaku.get住宅改修内容());
+                listRow.setTxtKaishuNaiyo(jyutaku.get住宅改修住宅内容());
                 listRow.setTxtSeiriNo(jyutaku.get整理番号());
                 dgGaisyuListRow.add(listRow);
             }
