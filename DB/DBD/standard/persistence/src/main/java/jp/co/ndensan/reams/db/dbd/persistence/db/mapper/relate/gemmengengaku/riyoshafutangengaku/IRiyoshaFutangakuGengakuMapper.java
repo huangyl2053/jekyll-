@@ -6,6 +6,7 @@ package jp.co.ndensan.reams.db.dbd.persistence.db.mapper.relate.gemmengengaku.ri
 
 import java.util.List;
 import jp.co.ndensan.reams.db.dbd.definition.mybatisprm.gemmengengaku.riyoshafutangengaku.RiyoshaFutangakuGengakuMapperParameter;
+import jp.co.ndensan.reams.db.dbd.definition.mybatisprm.gemmengengaku.riyoshafutangengaku.RiyoshaFutangakuGengakuServiceMapperParameter;
 import jp.co.ndensan.reams.db.dbd.entity.db.relate.gemmengengaku.riyoshafutangengaku.RiyoshaFutangakuGengakuEntity;
 
 /**
@@ -30,4 +31,12 @@ public interface IRiyoshaFutangakuGengakuMapper {
      * @return RiyoshaFutangakuGengakuEntityの{@code list}
      */
     List<RiyoshaFutangakuGengakuEntity> select利用者負担額減額リストBy主キー1(RiyoshaFutangakuGengakuMapperParameter 利用者負担額減額検索条件);
+
+    /**
+     * 利用者負担額減額の情報を取得します。
+     *
+     * @param parameter 利用者負担額減額検索条件
+     * @return List<RiyoshaFutangakuGengakuEntity>
+     */
+    List<RiyoshaFutangakuGengakuEntity> select利用者負担額減額情報By被保険者番号(RiyoshaFutangakuGengakuServiceMapperParameter parameter);
 }
