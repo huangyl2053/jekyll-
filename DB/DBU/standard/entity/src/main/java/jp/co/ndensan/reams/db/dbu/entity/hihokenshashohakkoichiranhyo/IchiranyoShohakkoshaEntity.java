@@ -8,8 +8,9 @@ package jp.co.ndensan.reams.db.dbu.entity.hihokenshashohakkoichiranhyo;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
- *
  * 一覧表証発行者Entity
+ *
+ * @reamsid_L DBU-0420-050 wangchao
  */
 @lombok.Getter
 @lombok.Setter
@@ -40,6 +41,5 @@ public class IchiranyoShohakkoshaEntity {
     private RString 施設名;
     private RString 計画事業所名;
     private RString 交付事由_非交付理由タイトル;
-    private RString 交付事由;
-    private RString 非交付事由;
+    private RString 交付_非交付事由;
 }

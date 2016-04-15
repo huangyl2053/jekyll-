@@ -55,8 +55,9 @@ import jp.co.ndensan.reams.uz.uza.util.config.BusinessConfig;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 
 /**
- *
  * 被保険者証発行一覧表のビジネスクラスです。
+ *
+ * @reamsid_L DBU-0420-050 wangchao
  */
 public class HihokenshashoHakkoIchiranHyoFinder {
 
@@ -193,7 +194,7 @@ public class HihokenshashoHakkoIchiranHyoFinder {
             is申請中状態フラグ(ichiranyoShohakkoshaEntity, hihokenshashoHakkoIchiranHyoEntity);
         } else {
             ichiranyoShohakkoshaEntity.set交付事由_非交付理由タイトル(交付事由_非交付理由タイトル_非交付事由);
-            ichiranyoShohakkoshaEntity.set非交付事由(new RString("申請中"));
+            ichiranyoShohakkoshaEntity.set交付_非交付事由(new RString("申請中"));
         }
     }
 
@@ -206,7 +207,7 @@ public class HihokenshashoHakkoIchiranHyoFinder {
             if (交付事由.isEmpty()) {
                 交付事由 = new RString("02");
             }
-            ichiranyoShohakkoshaEntity.set交付事由(交付事由);
+            ichiranyoShohakkoshaEntity.set交付_非交付事由(交付事由);
         } else if ((new RString("2").equals(hihokenshashoHakkoIchiranHyoEntity.get被保険者区分コード())
                 && (!RString.isNullOrEmpty(hihokenshashoHakkoIchiranHyoEntity.get資格取得年月日()))
                 && (!RString.isNullOrEmpty(hihokenshashoHakkoIchiranHyoEntity.get資格喪失年月日())))
@@ -216,7 +217,7 @@ public class HihokenshashoHakkoIchiranHyoFinder {
             if (交付事由.isEmpty()) {
                 交付事由 = new RString("01");
             }
-            ichiranyoShohakkoshaEntity.set交付事由(交付事由);
+            ichiranyoShohakkoshaEntity.set交付_非交付事由(交付事由);
         } else {
             RString 交付事由 = CodeMasterNoOption.getCodeRyakusho(SubGyomuCode.DBA介護資格, new CodeShubetsu("0002"),
                     new Code(isNull(hihokenshashoHakkoIchiranHyoEntity.get異動事由コード())),
@@ -224,7 +225,7 @@ public class HihokenshashoHakkoIchiranHyoFinder {
             if (交付事由.isEmpty()) {
                 交付事由 = hihokenshashoHakkoIchiranHyoEntity.get異動事由コード();
             }
-            ichiranyoShohakkoshaEntity.set交付事由(交付事由);
+            ichiranyoShohakkoshaEntity.set交付_非交付事由(交付事由);
         }
     }
 
@@ -528,8 +529,7 @@ public class HihokenshashoHakkoIchiranHyoFinder {
         ichiranyoShohakkoshaEntity.set施設名(RString.EMPTY);
         ichiranyoShohakkoshaEntity.set計画事業所名(RString.EMPTY);
         ichiranyoShohakkoshaEntity.set交付事由_非交付理由タイトル(RString.EMPTY);
-        ichiranyoShohakkoshaEntity.set交付事由(RString.EMPTY);
-        ichiranyoShohakkoshaEntity.set非交付事由(RString.EMPTY);
+        ichiranyoShohakkoshaEntity.set交付_非交付事由(RString.EMPTY);
         return ichiranyoShohakkoshaEntity;
     }
 

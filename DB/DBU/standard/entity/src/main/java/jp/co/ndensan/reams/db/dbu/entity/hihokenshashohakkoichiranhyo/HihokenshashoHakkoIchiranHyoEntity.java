@@ -13,6 +13,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 /**
  * 被保険者証一覧表Entity
  *
+ * @reamsid_L DBU-0420-050 wangchao
  */
 @lombok.Getter
 @lombok.Setter
