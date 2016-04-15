@@ -66,7 +66,7 @@ public class JigyoshaTouroku {
      * @param div 事業者登録Div
      * @return ResponseData<JigyoshaToutokuDiv> 事業者登録Div
      */
-    public ResponseData<JigyoshaToutokuDiv> onLoad(JigyoshaToutokuDiv div) {        
+    public ResponseData<JigyoshaToutokuDiv> onLoad(JigyoshaToutokuDiv div) {
         JigyoshaMode jigyoshaMode = ViewStateHolder.get(ViewStateKeys.介護事業者_介護事業者情報, JigyoshaMode.class);
         ViewStateHolder.put(ViewStateKeys.事業者登録_事業者番号, jigyoshaMode.getJigyoshaNo().getColumnValue());
         ViewStateHolder.put(ViewStateKeys.事業者登録_事業者種類コード, jigyoshaMode.getJigyoshaShubetsu());
@@ -369,7 +369,7 @@ public class JigyoshaTouroku {
                     ViewStateHolder.get(ViewStateKeys.事業者登録_事業者種類コード, RString.class),
                     yukoKaishiYMD,
                     yukoShuryoYMD);
-            if (!manager.checkKikanJufuku(kaigoJigyoshaParameter)) {
+            if (manager.checkKikanJufuku(kaigoJigyoshaParameter)) {
                 throw new ApplicationException(UrErrorMessages.期間が重複.getMessage());
             }
         }
