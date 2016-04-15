@@ -246,6 +246,18 @@ public class ShokanJutakuKaishuBuilder {
     }
 
     /**
+     * 住宅改修内容を設定します。
+     *
+     * @param 住宅改修内容 住宅改修内容
+     * @return {@link ShokanJutakuKaishuBuilder}
+     */
+    public ShokanJutakuKaishuBuilder set住宅改修内容(RString 住宅改修内容) {
+        requireNonNull(住宅改修内容, UrSystemErrorMessages.値がnull.getReplacedMessage("住宅改修内容"));
+        entity.setJutakuKaishuNaiyo(住宅改修内容);
+        return this;
+    }
+
+    /**
      * {@link ShokanJutakuKaishu}のインスタンスを生成します。
      *
      * @return {@link ShokanJutakuKaishu}のインスタンス
