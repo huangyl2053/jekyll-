@@ -1,6 +1,8 @@
 package jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.jushochitokureirirekilist.JushochiTokureiRirekiList;
 
+import java.util.List;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
+import jp.co.ndensan.reams.db.dbz.business.core.HihokenshaDaicho;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.ui.binding.DataGrid;
@@ -84,4 +86,6 @@ public interface IJushochiTokureiRirekiListDiv extends ICommonChildDivBaseProper
     JutokuInputDiv getJutokuInput();
 
     DataGrid<dgJutoku_Row> getDgJutoku();
+
+    List<HihokenshaDaicho> getDataList();
 }
