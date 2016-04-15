@@ -247,7 +247,8 @@ public class ShisetsutourukuPanel {
     private ResponseData<ShisetsutourukuPanelDiv> get事業者情報の修正処理(ShisetsutourukuPanelDiv div) {
         KaigoJogaiTokureiTaishoShisetsu 事業者
                 = ViewStateHolder.get(ViewStateKeys.サービス登録_サービス情報, KaigoJogaiTokureiTaishoShisetsu.class);
-        if (事業者.get有効開始年月日().equals(div.getTxtShisetsuYukoKaishiYMD().getValue())) {
+        if (事業者.get有効開始年月日().equals(div.getTxtShisetsuYukoKaishiYMD().getValue())
+                && 事業者.get事業者番号().equals(div.getTxtShisetsuJigyoshaNo().getValue())) {
             KaigoJogaiTokureiTaishoShisetsu 事業者情報 = 事業者情報の修正編集(div);
             manager.updateJigyoshaJoho(null, div.getJigyoshaShurui().getRadServiceShurui().getSelectedValue(), 事業者情報, 変更なし);
         } else {
