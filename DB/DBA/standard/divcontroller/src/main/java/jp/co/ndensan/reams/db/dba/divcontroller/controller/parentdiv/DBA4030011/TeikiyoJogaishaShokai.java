@@ -10,7 +10,6 @@ import java.util.List;
 import jp.co.ndensan.reams.db.dba.business.core.tekiyojogaishadaichojoho.TekiyoJogaishaDaichoJoho;
 import jp.co.ndensan.reams.db.dba.business.report.tekiyojogaishadaicho.TekiyojogaishaDaichoItem;
 import jp.co.ndensan.reams.db.dba.business.report.tekiyojogaishadaicho.TekiyojogaishaDaichoReportJoho;
-import jp.co.ndensan.reams.db.dba.divcontroller.entity.parentdiv.DBA4030011.DBA4030011StateName;
 import jp.co.ndensan.reams.db.dba.divcontroller.entity.parentdiv.DBA4030011.TeikiyoJogaishaShokaiDiv;
 import jp.co.ndensan.reams.db.dba.service.core.tekiyojogaishadaichojoho.TekiyoJogaishaDaichoJohoFinder;
 import jp.co.ndensan.reams.db.dba.service.report.tekiyojogaishadaicho.TekiyojogaishaDaichoPrintService;
@@ -64,7 +63,7 @@ public class TeikiyoJogaishaShokai {
     public ResponseData<SourceDataCollection> onClick_btnReportPublish(TeikiyoJogaishaShokaiDiv div) {
         ShikibetsuCode 識別コード = ViewStateHolder.get(ViewStateKeys.識別コード, ShikibetsuCode.class);
         List<TekiyoJogaishaDaichoJoho> list = TekiyoJogaishaDaichoJohoFinder.createInstance().getTekiyoJogaishaDaichoJoho(識別コード).records();
-        return ResponseData.of(new TekiyojogaishaDaichoPrintService().print(get適用除外者台帳情報(list))).setState(DBA4030011StateName.完了状態);
+        return ResponseData.of(new TekiyojogaishaDaichoPrintService().print(get適用除外者台帳情報(list))).respond();
     }
 
     /**
