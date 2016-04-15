@@ -10,11 +10,13 @@ import jp.co.ndensan.reams.db.dba.definition.mybatis.param.hihokenshadaichosakus
 import jp.co.ndensan.reams.db.dba.entity.db.relate.hihokenshadaichosakusei.ShisetsuNyutaishoEntity;
 import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT7060KaigoJigyoshaEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT1001HihokenshaDaichoEntity;
+import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT1004ShisetsuNyutaishoEntity;
+import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT1005KaigoJogaiTokureiTaishoShisetsuEntity;
 
 /**
  * 被保険者台帳のマッパーインタフェースです。
  *
- * @reamsid_L DBA-0500-010  suguangjun
+ * @reamsid_L DBA-0500-010 suguangjun
  */
 public interface IHihokenshaDaichoSakuseiMapper {
 
@@ -24,7 +26,15 @@ public interface IHihokenshaDaichoSakuseiMapper {
      * @param parameter 被保険者台帳パラメータ
      * @return ShisetsuNyutaishoEntity 検索結果の{@link ShisetsuNyutaishoEntity}
      */
-    List<ShisetsuNyutaishoEntity> getShisetsuNyutaisho(HihokenshaDaichoSakuseiParameter parameter);
+    DbT1004ShisetsuNyutaishoEntity getShisetsuNyutaisho(HihokenshaDaichoSakuseiParameter parameter);
+
+    /**
+     * DbT7060KaigoJigyoshaEntity 介護事業者テーブルのエンティティ
+     *
+     * @param parameter 被保険者台帳パラメータ
+     * @return DbT7060KaigoJigyoshaEntity 検索結果の{@link DbT7060KaigoJigyoshaEntity}
+     */
+    DbT1005KaigoJogaiTokureiTaishoShisetsuEntity getKaigoJogaiTokureiTaisho(HihokenshaDaichoSakuseiParameter parameter);
 
     /**
      * DbT7060KaigoJigyoshaEntity 介護事業者テーブルのエンティティ
