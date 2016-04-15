@@ -91,8 +91,6 @@ public class KaigoHokenryoChoshuyuyoKetteiTsuchishoItem {
     private RString telNo;
     private RString naisenLabel;
     private RString naisenNo;
-    private RString ninshoshaYakushokuMei1;
-    private RString ninshoshaYakushokuMei2;
     private RString setainusimei;
     private RString samaKata;
 }

@@ -59,7 +59,7 @@ public class KaigoHokenryoChoshuyuyoKetteiTsuchishoPrintService {
     private static final int ZERO = 0;
     private static final int TEN = 10;
     private static final int END_NUMBER = 15;
-    private static final RString RSTR_0 = new RString("0");
+    private static final RString RSTR_0 = new RString("　");
     private static final RString 期_1 = new RString("01");
     private static final RString 期_2 = new RString("02");
     private static final RString 期_3 = new RString("03");
@@ -342,7 +342,7 @@ public class KaigoHokenryoChoshuyuyoKetteiTsuchishoPrintService {
         ChoshuYuyoJoho choshuYuyoJoho = 徴収猶予決定通知書情報.get徴収猶予の情報();
         RString 徴収方法 = choshuYuyoJoho.get介護期別徴収猶予().getChoshuHoho();
         RString 期 = new RString(String.valueOf(choshuYuyoJoho.get介護期別徴収猶予().getKi()));
-        if (new RString(ChoshuHohoKibetsu.普通徴収.toString()).equals(徴収方法) && 普徴期月.get期().equals(期)) {
+        if (ChoshuHohoKibetsu.普通徴収.code().equals(徴収方法) && 普徴期月.get期().equals(期)) {
             徴収猶予期間 = new RString(DateEditor.to西暦(choshuYuyoJoho.get介護期別徴収猶予().getYuyoStartYMD()).toString()
                     + 波線.toString() + DateEditor.to西暦(choshuYuyoJoho.get介護期別徴収猶予().getYuyoEndYMD()).toString());
         } else {
@@ -394,9 +394,7 @@ public class KaigoHokenryoChoshuyuyoKetteiTsuchishoPrintService {
         item.setHakkoYMD(sourceBuilder.hakkoYMD);
         item.setDenshiKoin(sourceBuilder.denshiKoin);
         item.setNinshoshaYakushokuMei(sourceBuilder.ninshoshaYakushokuMei);
-        item.setNinshoshaYakushokuMei1(sourceBuilder.ninshoshaYakushokuMei1);
         item.setKoinMojiretsu(sourceBuilder.koinMojiretsu);
-        item.setNinshoshaYakushokuMei2(sourceBuilder.ninshoshaYakushokuMei2);
         item.setNinshoshaShimeiKakenai(sourceBuilder.ninshoshaShimeiKakenai);
         item.setNinshoshaShimeiKakeru(sourceBuilder.ninshoshaShimeiKakeru);
         item.setKoinShoryaku(sourceBuilder.koinShoryaku);
