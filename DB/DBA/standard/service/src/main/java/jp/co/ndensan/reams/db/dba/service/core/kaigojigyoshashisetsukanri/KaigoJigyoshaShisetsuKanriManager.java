@@ -35,7 +35,6 @@ import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
 
 /**
- *
  * 介護事業者・施設管理Managerクラスです。
  *
  * @reamsid_L DBA-0340-010 wanghui
@@ -210,7 +209,7 @@ public class KaigoJigyoshaShisetsuKanriManager {
     public boolean checkKikanGorisei(KaigoJogaiTokureiParameter parameter) {
         boolean 有効期間合理性フラグ = false;
         if (parameter != null && !parameter.getYukoShuryoYMD().isEmpty()) {
-            if (parameter.getYukoKaishiYMD().isBeforeOrEquals(parameter.getYukoShuryoYMD())) {
+            if (!parameter.getYukoKaishiYMD().isBeforeOrEquals(parameter.getYukoShuryoYMD())) {
                 有効期間合理性フラグ = true;
             }
         }

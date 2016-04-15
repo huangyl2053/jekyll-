@@ -86,22 +86,39 @@
     <select id="getCheckKikanJufuku" resultMap="resultMap_getKaigoJigyoshaRelateEntity"
              parameterType="jp.co.ndensan.reams.db.dba.definition.mybatisprm.kaigojigyoshashisetsukanrio.KaigoJigyoshaParameter" fetchSize="500">
         SELECT
-        DbT7060."yukoKaishiYMD" as "DbT7060_yukoKaishiYMD" ,
-        DbT7060."yukoShuryoYMD" as "DbT7060_yukoShuryoYMD" ,
-        DbT7060."jigyoshaNo" as "DbT7060_jigyoshaNo"
+            DbT7060."yukoKaishiYMD" as "DbT7060_yukoKaishiYMD" ,
+            DbT7060."yukoShuryoYMD" as "DbT7060_yukoShuryoYMD" ,
+            DbT7060."jigyoshaNo" as "DbT7060_jigyoshaNo"
         FROM
-        rgdb."DbT7060KaigoJigyosha" as DbT7060
+            rgdb."DbT7060KaigoJigyosha" as DbT7060
         WHERE
-        DbT7060."jigyoshaNo" = #{jigyoshaNo}
+            DbT7060."jigyoshaNo" = #{jigyoshaNo}
         AND
-        ((DbT7060."yukoKaishiYMD"<![CDATA[<=]]> #{yukoKaishiYMD}
-        AND (DbT7060."yukoShuryoYMD"<![CDATA[>]]> #{yukoKaishiYMD}))
-        OR(DbT7060."yukoKaishiYMD"<![CDATA[<]]> #{yukoShuryoYMD}
-        AND DbT7060."yukoShuryoYMD"<![CDATA[>=]]> #{yukoShuryoYMD}
-        )
-        OR((DbT7060."yukoKaishiYMD"<![CDATA[<=]]> #{yukoKaishiYMD}
-        AND DbT7060."yukoShuryoYMD"<![CDATA[>=]]> #{yukoShuryoYMD})
-        )
+           (
+                ( 
+                        DbT7060."yukoKaishiYMD"<![CDATA[<=]]> #{yukoKaishiYMD}
+                    AND 
+                        DbT7060."yukoShuryoYMD"<![CDATA[>]]> #{yukoKaishiYMD}
+                )
+            OR
+                (
+                        DbT7060."yukoKaishiYMD"<![CDATA[<]]> #{yukoShuryoYMD}
+                    AND 
+                        DbT7060."yukoShuryoYMD"<![CDATA[>=]]> #{yukoShuryoYMD}
+                )
+            OR
+              
+                ( 
+                        #{yukoKaishiYMD}<![CDATA[<=]]> DbT7060."yukoKaishiYMD"
+                    AND 
+                        #{yukoShuryoYMD}<![CDATA[>]]> DbT7060."yukoKaishiYMD"
+                )
+            OR
+                (
+                        #{yukoKaishiYMD}<![CDATA[<]]> DbT7060."yukoShuryoYMD"
+                    AND 
+                        #{yukoShuryoYMD}<![CDATA[>=]]> DbT7060."yukoShuryoYMD"
+                )
         )
         AND
         DbT7060."isDeleted"<![CDATA[<>]]>TRUE
@@ -109,26 +126,44 @@
     <select id="getCheckKikanJufukui" resultMap="resultMap_getKaigoJigyoshaRelateEntity"
              parameterType="jp.co.ndensan.reams.db.dba.definition.mybatisprm.kaigojigyoshashisetsukanrio.KaigoJigyoshaParameter" fetchSize="500">
         SELECT
-        DbT1005."jigyoshaNo" as "DbT1005_jigyoshaNo" ,
-        DbT1005."yukoKaishiYMD" as "DbT1005_yukoKaishiYMD",
-        DbT1005."yukoShuryoYMD" as "DbT1005_yukoShuryoYMD"
+            DbT1005."jigyoshaNo" as "DbT1005_jigyoshaNo" ,
+            DbT1005."yukoKaishiYMD" as "DbT1005_yukoKaishiYMD",
+            DbT1005."yukoShuryoYMD" as "DbT1005_yukoShuryoYMD"
         FROM
-        rgdb."DbT1005KaigoJogaiTokureiTaishoShisetsu" as DbT1005
+            rgdb."DbT1005KaigoJogaiTokureiTaishoShisetsu" as DbT1005
         WHERE
-        DbT1005."jigyoshaNo"= #{jigyoshaNo}
+            DbT1005."jigyoshaNo"= #{jigyoshaNo}
         AND
-        DbT1005."jigyoshaShubetsu"= #{事業者種別}
+            DbT1005."jigyoshaShubetsu"= #{事業者種別}
         AND
-        DbT1005."isDeleted"<![CDATA[<>]]>TRUE
+            DbT1005."isDeleted"<![CDATA[<>]]>TRUE
         AND
-        (( DbT1005."yukoKaishiYMD"<![CDATA[<=]]> #{yukoKaishiYMD}
-        AND (DbT1005."yukoShuryoYMD"<![CDATA[>]]> #{yukoKaishiYMD} ))
-        OR(DbT1005."yukoKaishiYMD"<![CDATA[<]]> #{yukoShuryoYMD}
-        AND DbT1005."yukoShuryoYMD"<![CDATA[>=]]> #{yukoShuryoYMD}
+        (
+                ( 
+                        DbT1005."yukoKaishiYMD"<![CDATA[<=]]> #{yukoKaishiYMD}
+                    AND 
+                        DbT1005."yukoShuryoYMD"<![CDATA[>]]> #{yukoKaishiYMD}
+                )
+            OR
+                (
+                        DbT1005."yukoKaishiYMD"<![CDATA[<]]> #{yukoShuryoYMD}
+                    AND 
+                        DbT1005."yukoShuryoYMD"<![CDATA[>=]]> #{yukoShuryoYMD}
+                )
+            OR
+              
+                ( 
+                        #{yukoKaishiYMD}<![CDATA[<=]]> DbT1005."yukoKaishiYMD"
+                    AND 
+                        #{yukoShuryoYMD}<![CDATA[>]]> DbT1005."yukoKaishiYMD"
+                )
+            OR
+                (
+                        #{yukoKaishiYMD}<![CDATA[<]]> DbT1005."yukoShuryoYMD"
+                    AND 
+                        #{yukoShuryoYMD}<![CDATA[>=]]> DbT1005."yukoShuryoYMD"
+                )
         )
-        OR((DbT1005."yukoKaishiYMD"<![CDATA[<=]]> #{yukoKaishiYMD}
-        AND DbT1005."yukoShuryoYMD"<![CDATA[>=]]> #{yukoShuryoYMD})
-        )
-        )
+
     </select>
 </mapper>
