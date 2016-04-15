@@ -27,6 +27,7 @@
             rgdb."DbT1002TekiyoJogaisha" AS TekiyoJogaisha,
             (SELECT
                     T1."shikibetsuCode" AS "shikibetsuCode",
+                    T1."tekiyoYMD",
                     T1."idoYMD" AS "idoYMD",
                     MAX(T1."edaNo") AS "edaNo"
              FROM
@@ -43,7 +44,7 @@
             AND TekiyoJogaisha."idoYMD" = T2."idoYMD"
             AND TekiyoJogaisha."edaNo" = T2."edaNo"
         ORDER BY
-            TekiyoJogaisha."tekiyoYMD" DESC
+            TekiyoJogaisha."tekiyoYMD" DESC, TekiyoJogaisha."idoYMD" DESC, TekiyoJogaisha."edaNo" DESC
     </select>
     
     <select id="get施設情報" parameterType="jp.co.ndensan.reams.db.dba.definition.mybatisprm.tekiyojogaisha.TekiyoJogaishaMapperParameter" 
@@ -80,7 +81,7 @@
             OR (ShisetsuNyutaisho."nyushoYMD" <![CDATA[<]]> #{kaijoYMD} AND ShisetsuNyutaisho."taishoYMD" <![CDATA[>]]> #{tekiyoYMD}))
         </if>
         ORDER BY
-            ShisetsuNyutaisho."nyushoYMD" DESC
+            ShisetsuNyutaisho."nyushoYMD" DESC, ShisetsuNyutaisho."taishoYMD" DESC
     </select>
     
     <select id="getMax履歴番号" parameterType="jp.co.ndensan.reams.db.dba.definition.mybatisprm.tekiyojogaisha.TekiyoJogaishaMapperParameter" 
@@ -130,7 +131,8 @@
                  OR (("DbT1002TekiyoJogaisha"."kaijoYMD" IS NOT NULL AND (("DbT1004ShisetsuNyutaisho"."taishoYMD" IS NULL AND "DbT1004ShisetsuNyutaisho"."nyushoYMD" <![CDATA[<]]> "DbT1002TekiyoJogaisha"."kaijoYMD")
                  OR ("DbT1004ShisetsuNyutaisho"."nyushoYMD" <![CDATA[<]]> "DbT1002TekiyoJogaisha"."kaijoYMD" AND "DbT1004ShisetsuNyutaisho"."taishoYMD" <![CDATA[>]]> "DbT1002TekiyoJogaisha"."tekiyoYMD")))))
         ORDER BY
-            "DbT1002TekiyoJogaisha"."tekiyoYMD" DESC
+            "DbT1002TekiyoJogaisha"."tekiyoYMD" DESC, "DbT1002TekiyoJogaisha"."idoYMD" DESC, "DbT1002TekiyoJogaisha"."tekiyoYMD" edaNo,
+            "DbT1002TekiyoJogaisha"."nyushoYMD" DESC, DbT1002TekiyoJogaisha"taishoYMD" DESC
     </select>
      
     <select id="select宛名情報" resultMap="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.UaFt200FindShikibetsuTaishoEntity"

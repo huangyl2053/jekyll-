@@ -1,5 +1,6 @@
 package jp.co.ndensan.reams.db.dba.divcontroller.entity.commonchilddiv.TekiyoJogaiRireki.TekiyoJogaiRireki;
 
+import java.util.List;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.binding.ICommonChildDivBaseProperties;
@@ -31,5 +32,12 @@ public interface ITekiyoJogaiRirekiDiv extends ICommonChildDivBaseProperties {
      * @param 識別コード 識別コード
      */
     public void saveTekiyoJogaisha(ShikibetsuCode 識別コード);
+
+    /**
+     * 適用情報一覧を取得します。
+     *
+     * @return 適用情報一覧 適用情報一覧
+     */
+    public List<datagridTekiyoJogai_Row> get適用情報一覧();
 
 }
