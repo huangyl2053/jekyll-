@@ -97,7 +97,7 @@ public class IryohokenRirekiHandler {
             div.getPnlIryohokenJoho().getTxtKigoBango().setReadOnly(true);
             div.getDgIryohokenIchiran().getGridSetting().setIsShowDeleteButtonColumn(false);
             div.getDgIryohokenIchiran().getGridSetting().setIsShowModifyButtonColumn(false);
-            div.getDgIryohokenIchiran().getGridSetting().setIsShowRowState(true);
+            div.getDgIryohokenIchiran().getGridSetting().getColumn(new RString("defaultDataName2")).setVisible(false);
             div.getPlIryohokenRireki().getBtnCancel().setVisible(false);
             div.getPlIryohokenRireki().getBtnIryohokenKakute().setVisible(false);
             div.getPlIryohokenRireki().getBtnIryohokenTsuika().setVisible(false);
