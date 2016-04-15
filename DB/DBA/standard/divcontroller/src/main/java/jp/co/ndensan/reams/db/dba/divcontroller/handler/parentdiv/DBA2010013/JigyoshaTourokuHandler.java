@@ -24,8 +24,8 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxFlexibleDate;
 
 /**
  * 事業者登録Handlerクラスです。
- * 
- * @reamsid_L DBA-0340-050  lijia
+ *
+ * @reamsid_L DBA-0340-050 lijia
  *
  */
 public class JigyoshaTourokuHandler {
@@ -64,7 +64,6 @@ public class JigyoshaTourokuHandler {
 
         } else if (viewState.equals(状態_照会)) {
             get画面初期の照会モードの表示制御();
-
         }
     }
 
@@ -242,20 +241,21 @@ public class JigyoshaTourokuHandler {
         List<dgServiceList_Row> サービス一覧データ = new ArrayList<>();
         for (KaigoJogaiTokureiBusiness result : サービス一覧情報List) {
             dgServiceList_Row row = new dgServiceList_Row();
-            row.setServiceType(
-                    result.getサービス種類コード().isNullOrEmpty() ? RString.EMPTY : result.getサービス種類コード());
-            TextBoxFlexibleDate 開始日 = new TextBoxFlexibleDate();
-            開始日.setValue(new FlexibleDate(result.get有効開始日()));
-            TextBoxFlexibleDate 終了日 = new TextBoxFlexibleDate();
-            終了日.setValue(
-                    result.get有効終了日() == null ? FlexibleDate.EMPTY : new FlexibleDate(result.get有効終了日()));
-            row.setKaishiDate(開始日);
-            row.setShuryoDate(終了日);
-            row.setJigyoshaMei(
-                    result.get事業者名称().isNullOrEmpty() ? RString.EMPTY : result.get事業者名称());
-            row.setKanrishaMei(
-                    result.get管理者氏名().isNullOrEmpty() ? RString.EMPTY : result.get管理者氏名());
-            サービス一覧データ.add(row);
+            if (!RString.isNullOrEmpty(result.getサービス種類コード())) {
+                row.setServiceType(result.getサービス種類コード());
+                TextBoxFlexibleDate 開始日 = new TextBoxFlexibleDate();
+                開始日.setValue(new FlexibleDate(result.get有効開始日()));
+                TextBoxFlexibleDate 終了日 = new TextBoxFlexibleDate();
+                終了日.setValue(
+                        result.get有効終了日() == null ? FlexibleDate.EMPTY : new FlexibleDate(result.get有効終了日()));
+                row.setKaishiDate(開始日);
+                row.setShuryoDate(終了日);
+                row.setJigyoshaMei(
+                        result.get事業者名称().isNullOrEmpty() ? RString.EMPTY : result.get事業者名称());
+                row.setKanrishaMei(
+                        result.get管理者氏名().isNullOrEmpty() ? RString.EMPTY : result.get管理者氏名());
+                サービス一覧データ.add(row);
+            }
         }
         panelDiv.getServiceJoho().getDgServiceList().setDataSource(サービス一覧データ);
     }

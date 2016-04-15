@@ -32,6 +32,7 @@ import jp.co.ndensan.reams.uz.uza.biz.AtenaJusho;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaKanaMeisho;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaMeisho;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
+import jp.co.ndensan.reams.uz.uza.biz.KaigoJigyoshaNo;
 import jp.co.ndensan.reams.uz.uza.biz.TelNo;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.ApplicationException;
@@ -231,7 +232,6 @@ public class JigyoshaTouroku {
     }
 
     private ResponseData<JigyoshaToutokuDiv> get事業者情報の登録処理(RString 事業者番号, JigyoshaToutokuDiv div) {
-        get事業者情報の登録チェック(div);
         JigyoshaNo jigyoshaNo = new JigyoshaNo(div.getServiceJigyoshaJoho().getTxtJigyoshaNo().getValue());
         FlexibleDate yukoKaishiYMD = div.getServiceJigyoshaJoho().getTxtYukoKaishiYMD().getValue();
         FlexibleDate yukoShuryoYMD = div.getServiceJigyoshaJoho().getTxtYukoShuryoYMD().getValue();
@@ -320,34 +320,6 @@ public class JigyoshaTouroku {
         if (insertFlag) {
             div.getKaigoKanryo().getCcdKaigoKanryoMessage().setMessage(new RString(UrInformationMessages.正常終了.getMessage()
                     .replace("登録").evaluate()), RString.EMPTY, RString.EMPTY, true);
-        }
-        return ResponseData.of(div).respond();
-    }
-
-    private ResponseData<JigyoshaToutokuDiv> get事業者情報の登録チェック(JigyoshaToutokuDiv div) {
-        RString 事業者番号 = div.getServiceJigyoshaJoho().getTxtJigyoshaNo().getValue();
-        if (事業者番号.isNullOrEmpty()) {
-            throw new ApplicationException(UrErrorMessages.必須項目.getMessage());
-        }
-        FlexibleDate 有効開始日 = div.getServiceJigyoshaJoho().getTxtYukoKaishiYMD().getValue();
-        if (有効開始日.isEmpty()) {
-            throw new ApplicationException(UrErrorMessages.必須項目.getMessage());
-        }
-        RString 事業者名称 = div.getServiceJigyoshaJoho().getTxtJigyoshaName().getValue();
-        if (事業者名称.isNullOrEmpty()) {
-            throw new ApplicationException(UrErrorMessages.必須項目.getMessage());
-        }
-        RString 事業者名称カナ = div.getServiceJigyoshaJoho().getTxtJigyoshaNameKana().getValue();
-        if (事業者名称カナ.isNullOrEmpty()) {
-            throw new ApplicationException(UrErrorMessages.必須項目.getMessage());
-        }
-        RString 代表者名 = div.getDaihyoshaJoho().getTxtDaihyoshaName().getValue();
-        if (代表者名.isNullOrEmpty()) {
-            throw new ApplicationException(UrErrorMessages.必須項目.getMessage());
-        }
-        RString 代表者名カナ = div.getDaihyoshaJoho().getTxtDaihyoshaNameKana().getValue();
-        if (代表者名カナ.isNullOrEmpty()) {
-            throw new ApplicationException(UrErrorMessages.必須項目.getMessage());
         }
         return ResponseData.of(div).respond();
     }
