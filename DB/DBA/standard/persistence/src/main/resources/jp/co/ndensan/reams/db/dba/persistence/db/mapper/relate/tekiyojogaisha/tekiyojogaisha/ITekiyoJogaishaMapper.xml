@@ -105,17 +105,19 @@
             FROM
                 rgdb."DbT1002TekiyoJogaisha" AS TekiyoJogaisha,
                 (SELECT
-                        T1."shikibetsuCode" AS "shikibetsuCode",
-                        T1."idoYMD" AS "idoYMD",
-                        MAX(T1."edaNo") AS "edaNo"
-                 FROM
-                        rgdb."DbT1002TekiyoJogaisha" AS T1
-                 WHERE
-                        T1."shikibetsuCode" = #{識別コード}
-                        AND T1."logicalDeletedFlag" = #{論理削除フラグ}
-                 GROUP BY
-                        T1."shikibetsuCode",
-                        T1."idoYMD") AS T2
+                    T1."shikibetsuCode" AS "shikibetsuCode",
+                    T1."tekiyoYMD",
+                    T1."idoYMD" AS "idoYMD",
+                    MAX(T1."edaNo") AS "edaNo"
+                FROM
+                    rgdb."DbT1002TekiyoJogaisha" AS T1
+                WHERE
+                    T1."shikibetsuCode" = #{識別コード}
+                    AND T1."logicalDeletedFlag" = #{論理削除フラグ}
+                GROUP BY
+                    T1."shikibetsuCode",
+                    T1."tekiyoYMD",
+                    T1."idoYMD") AS T2
             WHERE
                 TekiyoJogaisha."shikibetsuCode" = T2."shikibetsuCode"
                 AND TekiyoJogaisha."idoYMD" = T2."idoYMD"
