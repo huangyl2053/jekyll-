@@ -168,7 +168,7 @@ public class HihosyosaiHandler {
     public ValidationMessageControlPairs validateForUpdate() {
         ValidationMessageControlPairs validPairs = new ValidationMessageControlPairs();
         if (div.getTxtSyutokuYMD() != null && div.getTxtSosichiYMD() != null
-                && div.getTxtSosichiYMD().getValue().isBefore(div.getTxtSyutokuYMD().getValue())  {
+                && div.getTxtSosichiYMD().getValue().isBefore(div.getTxtSyutokuYMD().getValue())) {
             validPairs.add(new ValidationMessageControlPair(RRVMessages.期間が不正));
         }
         return validPairs;
