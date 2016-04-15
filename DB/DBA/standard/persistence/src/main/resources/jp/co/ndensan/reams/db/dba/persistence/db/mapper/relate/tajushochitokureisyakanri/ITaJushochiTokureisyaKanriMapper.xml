@@ -88,6 +88,7 @@
         SELECT
         dbT1003Tashi."shikibetsuCode" AS "shikibetsuCode",
         dbT1003Tashi."idoYMD" AS "idoYMD",
+        dbT1003Tashi."tekiyoYMD" AS "tekiyoYMD",
         MAX(dbT1003Tashi."edaNo") AS "edaNo"
         FROM
         rgdb."DbT1003TashichosonJushochiTokurei" AS dbT1003Tashi
@@ -96,6 +97,7 @@
         AND dbT1003Tashi."logicalDeletedFlag" = FALSE
         GROUP BY
         dbT1003Tashi."shikibetsuCode",
+        dbT1003Tashi."tekiyoYMD",
         dbT1003Tashi."idoYMD"
         ) AS dbT1003TashichosonJushochiTokurei
         WHERE
@@ -204,9 +206,9 @@
         FROM
         rgdb."DbT1003TashichosonJushochiTokurei" AS dbT1003Tashichoson,
         (
-        SELECT
         dbT1003Tashi."shikibetsuCode" AS "shikibetsuCode",
         dbT1003Tashi."idoYMD" AS "idoYMD",
+        dbT1003Tashi."tekiyoYMD" AS "tekiyoYMD",
         MAX(dbT1003Tashi."edaNo") AS "edaNo"
         FROM
         rgdb."DbT1003TashichosonJushochiTokurei" AS dbT1003Tashi
@@ -215,6 +217,7 @@
         AND dbT1003Tashi."logicalDeletedFlag" = FALSE
         GROUP BY
         dbT1003Tashi."shikibetsuCode",
+        dbT1003Tashi."tekiyoYMD",
         dbT1003Tashi."idoYMD"
         ) AS dbT1003TashichosonJushochiTokurei
         WHERE

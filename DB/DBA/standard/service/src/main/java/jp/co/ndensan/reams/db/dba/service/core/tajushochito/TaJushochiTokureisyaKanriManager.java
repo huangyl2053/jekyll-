@@ -95,8 +95,7 @@ public class TaJushochiTokureisyaKanriManager {
     /**
      * {@link InstanceProvider#create}にて生成した{@link TaJushochiTokureisyaKanriManager}のインスタンスを返します。
      *
-     * @return
-     * {@link InstanceProvider#create}にて生成した{@link TaJushochiTokureisyaKanriManager}のインスタンス
+     * @return {@link InstanceProvider#create}にて生成した{@link TaJushochiTokureisyaKanriManager}のインスタンス
      */
     public static TaJushochiTokureisyaKanriManager createInstance() {
         return InstanceProvider.create(TaJushochiTokureisyaKanriManager.class);
@@ -129,12 +128,12 @@ public class TaJushochiTokureisyaKanriManager {
         }
         List<TaJushochiTokureisyaKanriRelateEntity> 最新他市町村住所地特例情報 = new ArrayList<>();
         if (!適用情報リスト.isEmpty()) {
+            Collections.sort(適用情報リスト, new TaJushochiTokureisyaKanriManager.DateComparator());
+            FlexibleDate 最新適用年月日 = FlexibleDate.EMPTY;
             for (TaJushochiTokureisyaKanriRelateEntity entity : 適用情報リスト) {
-                if (entity.getTaishoYMD() == null || entity.getTaishoYMD().isEmpty()) {
+                if (!最新適用年月日.equals(entity.getTekiyoYMD())) {
                     最新他市町村住所地特例情報.add(entity);
-                } else {
-                    Collections.sort(適用情報リスト, new TaJushochiTokureisyaKanriManager.DateComparator());
-                    最新他市町村住所地特例情報.add(適用情報リスト.get(0));
+                    最新適用年月日 = entity.getTekiyoYMD();
                 }
             }
         }
@@ -378,7 +377,11 @@ public class TaJushochiTokureisyaKanriManager {
 
         @Override
         public int compare(TaJushochiTokureisyaKanriRelateEntity entity1, TaJushochiTokureisyaKanriRelateEntity entity2) {
-            return entity1.getNyushoYMD().compareTo(entity2.getNyushoYMD());
+            int flg = entity2.getTekiyoYMD().compareTo(entity1.getTekiyoYMD());
+            if (flg == 0) {
+                return entity1.getNyushoYMD().compareTo(entity2.getNyushoYMD());
+            }
+            return flg;
         }
     }
 }
