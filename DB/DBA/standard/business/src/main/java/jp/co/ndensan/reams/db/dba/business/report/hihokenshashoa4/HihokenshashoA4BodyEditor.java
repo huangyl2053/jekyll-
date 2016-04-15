@@ -8,6 +8,7 @@ package jp.co.ndensan.reams.db.dba.business.report.hihokenshashoa4;
 import jp.co.ndensan.reams.db.dba.entity.report.hihokenshashoa4.HihokenshashoA4ReportSource;
 import jp.co.ndensan.reams.uz.uza.lang.EraType;
 import jp.co.ndensan.reams.uz.uza.lang.FillType;
+import jp.co.ndensan.reams.uz.uza.lang.FillTypeFormatted;
 import jp.co.ndensan.reams.uz.uza.lang.FirstYear;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -15,8 +16,8 @@ import jp.co.ndensan.reams.uz.uza.lang.Separator;
 
 /**
  * 介護保険被保険者証ボディEditorです。
- * 
- * @reamsid_L DBU-0490-070  suguangjun
+ *
+ * @reamsid_L DBU-0490-070 suguangjun
  */
 public class HihokenshashoA4BodyEditor implements IHihokenshashoA4Editor {
 
@@ -53,19 +54,20 @@ public class HihokenshashoA4BodyEditor implements IHihokenshashoA4Editor {
         source.hihokana = item.getHihokana();
         source.hihoname = item.getHihoname();
         source.umareG = item.getUmareG();
-        RString umareYyyy = item.getUmareYyyy();
-        if (!umareYyyy.isEmpty()) {
-            source.umareYyyy = new RDate(umareYyyy.toString()).wareki().eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN)
-                    .separator(Separator.JAPANESE).fillType(FillType.BLANK).getEra();
-            source.umareYy = new RDate(umareYyyy.toString()).seireki().getYear();
-        }
+        source.umareYyyy = item.getUmareYyyy();
+        source.umareYy = item.getUmareYy();
         source.umareMm = item.getUmareMm();
         source.umareDd = item.getUmareDd();
         source.seibetsu = item.getSeibetsu();
-        source.kofuymdGengo = item.getKofuymdGengo();
-        source.kofuymdYy = item.getKofuymdYy();
-        source.kofuymdMm = item.getKofuymdMm();
-        source.kofuymdDd = item.getKofuymdDd();
+        RString kofuymd = item.getKofuymd();
+        if (kofuymd != null) {
+            FillTypeFormatted kofuymdFormat = new RDate(kofuymd.toString()).wareki().eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN)
+                    .separator(Separator.JAPANESE).fillType(FillType.BLANK);
+            source.kofuymdGengo = kofuymdFormat.getEra();
+            source.kofuymdYy = kofuymdFormat.getYear();
+            source.kofuymdMm = kofuymdFormat.getMonth();
+            source.kofuymdDd = kofuymdFormat.getDay();
+        }
         source.saikofu1 = item.getSaikofu1();
         source.hokenshano1 = item.getHokenshano1();
         source.hokenshano2 = item.getHokenshano2();
