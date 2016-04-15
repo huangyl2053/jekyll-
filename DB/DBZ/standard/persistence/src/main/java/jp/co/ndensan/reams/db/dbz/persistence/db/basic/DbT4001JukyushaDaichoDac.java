@@ -7,6 +7,7 @@ package jp.co.ndensan.reams.db.dbz.persistence.db.basic;
 import java.util.List;
 import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
+import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.core.YukoMukoKubun;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT4001JukyushaDaicho;
 import static jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT4001JukyushaDaicho.edaban;
 import static jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT4001JukyushaDaicho.hihokenshaNo;
@@ -23,6 +24,7 @@ import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.core.mybatis.SqlSession;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.util.db.DbAccessorNormalType;
@@ -218,6 +220,30 @@ public class DbT4001JukyushaDaichoDac implements ISaveable<DbT4001JukyushaDaicho
                                 not(eq(logicalDeletedFlag, true)))).
                 order(by(rirekiNo, Order.DESC), by(edaban, Order.DESC)).limit(1).
                 toObject(DbT4001JukyushaDaichoEntity.class);
+    }
+
+    /**
+     * 受給者台帳情報を取得します。
+     *
+     * @param 被保険者番号 被保険者番号
+     * @param 適用日 適用日
+     * @return DbT4001JukyushaDaichoEntity
+     * @throws NullPointerException 引数のいずれかがnullの場合
+     */
+    public List<DbT4001JukyushaDaichoEntity> select受給者台帳情報By適用日(HihokenshaNo 被保険者番号,
+            FlexibleDate 適用日) throws NullPointerException {
+        requireNonNull(被保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage(被保険者番号.toString()));
+        requireNonNull(適用日, UrSystemErrorMessages.値がnull.getReplacedMessage("適用日"));
+        DbAccessorNormalType accessor = new DbAccessorNormalType(session);
+        return accessor.select().
+                table(DbT4001JukyushaDaicho.class).
+                where(and(
+                                eq(hihokenshaNo, 被保険者番号),
+                                leq(ninteiYukoKikanKaishiYMD, 適用日),
+                                leq(適用日, ninteiYukoKikanShuryoYMD),
+                                not(eq(yukoMukoKubun, YukoMukoKubun.無効.getコード())),
+                                eq(logicalDeletedFlag, false))).
+                toList(DbT4001JukyushaDaichoEntity.class);
     }
 
     /**
