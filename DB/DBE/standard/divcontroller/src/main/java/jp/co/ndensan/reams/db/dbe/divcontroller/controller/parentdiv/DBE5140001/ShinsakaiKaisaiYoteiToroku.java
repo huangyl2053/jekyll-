@@ -22,8 +22,8 @@ import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE5140001.dgSh
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE5140001.dgShinsakaiKaisaiYoteiIchiran_Row;
 import jp.co.ndensan.reams.db.dbe.divcontroller.handler.parentdiv.DBE5140001.ShinsakaiKaisaiYoteiTorokuValidationHandler;
 import jp.co.ndensan.reams.db.dbe.service.core.shinsakaikaisaiyoteitoroku.ShinsakaiKaisaiYoteiTorokuManager;
-import jp.co.ndensan.reams.db.dbe.service.shinsakai.GogitaiManager;
-import jp.co.ndensan.reams.db.dbe.service.shinsakai.ShinsakaiKaisaiYoteiJohoManager;
+import jp.co.ndensan.reams.db.dbe.service.core.shinsakai1.GogitaiManager;
+import jp.co.ndensan.reams.db.dbe.service.core.shinsakai1.ShinsakaiKaisaiYoteiJohoManager;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBE;
 import jp.co.ndensan.reams.db.dbz.divcontroller.viewbox.ViewStateKeys;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrQuestionMessages;

@@ -12,7 +12,7 @@ import jp.co.ndensan.reams.db.dbe.definition.batchprm.kaigoninteishinsakaischedu
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE5140003.ShinsakaiScheduleHakkoDiv;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE5140003.dgShinsakaiScheduleKagami_Row;
 import jp.co.ndensan.reams.db.dbe.divcontroller.handler.parentdiv.DBE5140003.ShinsakaiScheduleHakkoValidationHandler;
-import jp.co.ndensan.reams.db.dbe.service.shinsakai.ShinsakaiiinJohoManager;
+import jp.co.ndensan.reams.db.dbe.service.core.shinsakai1.ShinsakaiiinJohoManager;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.CommonButtonHolder;
