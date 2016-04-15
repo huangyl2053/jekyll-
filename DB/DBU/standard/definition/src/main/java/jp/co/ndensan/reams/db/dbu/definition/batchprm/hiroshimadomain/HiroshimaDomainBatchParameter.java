@@ -6,7 +6,6 @@
 package jp.co.ndensan.reams.db.dbu.definition.batchprm.hiroshimadomain;
 
 import jp.co.ndensan.reams.db.dbu.definition.processprm.hiroshimadomain.HiroshimaDomainProcessParameter;
-import jp.co.ndensan.reams.ua.uax.definition.mybatisprm.shikibetsutaisho.IShikibetsuTaishoPSMSearchKey;
 import jp.co.ndensan.reams.uz.uza.batch.BatchParameter;
 import jp.co.ndensan.reams.uz.uza.batch.flow.BatchParameterBase;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
@@ -35,18 +34,12 @@ public class HiroshimaDomainBatchParameter extends BatchParameterBase {
     @BatchParameter(key = "日付To", name = "日付To")
     private FlexibleDate 日付To;
 
-    private IShikibetsuTaishoPSMSearchKey 宛名検索条件;
-
     /**
      * コンストラクタです。
      *
      */
     public HiroshimaDomainBatchParameter() {
-//        this.市町村コード = 市町村コード;
-//        this.市町村名称 = 市町村名称;
-//        this.日付From = 日付From;
-//        this.日付To = 日付To;
-//        this.宛名検索条件 = 宛名検索条件;
+
     }
 
     /**
@@ -56,18 +49,15 @@ public class HiroshimaDomainBatchParameter extends BatchParameterBase {
      * @param 市町村名称 市町村名称
      * @param 日付From 日付From
      * @param 日付To 日付To
-     * @param 宛名検索条件 宛名検索条件
      */
     public HiroshimaDomainBatchParameter(LasdecCode 市町村コード,
             RString 市町村名称,
             FlexibleDate 日付From,
-            FlexibleDate 日付To,
-            IShikibetsuTaishoPSMSearchKey 宛名検索条件) {
+            FlexibleDate 日付To) {
         this.市町村コード = 市町村コード;
         this.市町村名称 = 市町村名称;
         this.日付From = 日付From;
         this.日付To = 日付To;
-        this.宛名検索条件 = 宛名検索条件;
     }
 
     /**
@@ -76,6 +66,6 @@ public class HiroshimaDomainBatchParameter extends BatchParameterBase {
      * @return processパラメータ
      */
     public HiroshimaDomainProcessParameter toHiroshimaDomainProcessParameter() {
-        return new HiroshimaDomainProcessParameter(市町村コード, 市町村名称, 日付From, 日付To, 宛名検索条件);
+        return new HiroshimaDomainProcessParameter(市町村コード, 市町村名称, 日付From, 日付To);
     }
 }

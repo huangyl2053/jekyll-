@@ -39,9 +39,9 @@ public class ShokanbaraiJutakuShikyuGendogakuHanteiCheck {
         if (様式番号 == null) {
             return flag;
         }
-        if (様式番号.startsWith(DEFAULT_213) || 様式番号.startsWith(DEFAULT_214)
-                || 様式番号.startsWith(DEFAULT_215) || 様式番号.startsWith(DEFAULT_216)) {
-            if (!様式番号.endsWith("1") && 限度額対象単位 == null) {
+        if (様式番号.startsWith(DEFAULT_213) || ((様式番号.startsWith(DEFAULT_214)
+                || 様式番号.startsWith(DEFAULT_215) || 様式番号.startsWith(DEFAULT_216)) && !様式番号.endsWith("1"))) {
+            if (限度額対象単位 == null) {
                 flag = true;
             }
         } else if (DEFAULT_2173.equals(様式番号) && DEFAULT_33.equals(サービス種類コード) && 限度額対象単位 == null) {
