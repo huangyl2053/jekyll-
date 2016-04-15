@@ -3,7 +3,6 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.ChosaJisshishaJoho.ChosaJisshishaJoho;
 
 import java.util.ArrayList;
@@ -22,25 +21,28 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.KeyValueDataSource;
 /**
  *
  * 調査実施者情報の処理クラスです。
+ *
  * @reamsid_L DBE-3000-100 dongyabin
  */
 public class ChosaJisshishaJohoHandler {
-    
+
     private static final RString SHOKAI_KEY = new RString("key0");
     private final ChosaJisshishaJohoDiv div;
     private final ChosaJisshishaJohoFinder service;
-    
+
     /**
      * コンストラクタです。
+     *
      * @param div 画面情報
      */
     public ChosaJisshishaJohoHandler(ChosaJisshishaJohoDiv div) {
-        this.div = div;   
+        this.div = div;
         service = ChosaJisshishaJohoFinder.createInstance();
     }
-    
+
     /**
      * 調査実施者(記入者)Divの初期化します。
+     *
      * @param key 親画面から受け取ったパラメータ
      */
     public void intialize(ChosaJisshishaJohoModel key) {
@@ -50,10 +52,10 @@ public class ChosaJisshishaJohoHandler {
             setShokai(key);
         }
     }
-    
+
     private void setInput(ChosaJisshishaJohoModel key) {
-        
-        div.getTxtChosaJisshiDate().setValue(key.get調査実施日().isEmpty() ? RDate.getNowDate() : new RDate(key.get調査実施日().toString()));
+
+        div.getTxtChosaJisshiDate().setValue(RString.isNullOrEmpty(key.get調査実施日()) ? RDate.getNowDate() : new RDate(key.get調査実施日().toString()));
         List<KeyValueDataSource> chosaJisshiBasho = new ArrayList<>();
         for (ChosaJisshiBashoCode code : ChosaJisshiBashoCode.values()) {
             KeyValueDataSource data = new KeyValueDataSource(code.getコード(), code.get名称());
@@ -73,7 +75,7 @@ public class ChosaJisshishaJohoHandler {
             shozokuKikan.add(date);
         }
         div.getDdlShozokuKikan().setDataSource(shozokuKikan);
-        if (key.get所属機関()!= null && !key.get所属機関().isEmpty()) {
+        if (key.get所属機関() != null && !key.get所属機関().isEmpty()) {
             div.getDdlShozokuKikan().setSelectedValue(key.get所属機関());
         }
         List<ChosainJoho> chosainJohoList = service.getKinyusha(key
@@ -85,7 +87,7 @@ public class ChosaJisshishaJohoHandler {
             kinyusha.add(data);
         }
         div.getDdlKinyusha().setDataSource(kinyusha);
-        if (key.get記入者()!= null && !key.get記入者().isEmpty()) {
+        if (key.get記入者() != null && !key.get記入者().isEmpty()) {
             div.getDdlShozokuKikan().setSelectedValue(key.get記入者());
         }
         List<NinteiShinseiJoho> ninteiShinseiJoho = service.get調査区分(key.
@@ -102,7 +104,7 @@ public class ChosaJisshishaJohoHandler {
             }
         }
     }
-    
+
     private void setShokai(ChosaJisshishaJohoModel key) {
         div.getTxtChosaJisshiDate().setValue(new RDate(key.get調査実施日().toString()));
         List<KeyValueDataSource> chosaJisshiBasho = new ArrayList<>();
