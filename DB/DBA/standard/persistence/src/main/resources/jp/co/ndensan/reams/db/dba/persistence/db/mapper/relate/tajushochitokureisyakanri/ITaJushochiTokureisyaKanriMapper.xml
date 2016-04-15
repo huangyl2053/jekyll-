@@ -241,7 +241,7 @@
         OR ("DbT1004ShisetsuNyutaisho"."nyushoYMD" <![CDATA[<]]> "DbT1003TashichosonJushochiTokurei"."kaijoYMD" AND "DbT1004ShisetsuNyutaisho"."taishoYMD" <![CDATA[>]]> "DbT1003TashichosonJushochiTokurei"."tekiyoYMD")))))
         ORDER BY
         "DbT1003TashichosonJushochiTokurei"."tekiyoYMD"
-        , "DbT1003TashichosonJushochiTokurei"."idoYMD"
+        , "DbT1003TashichosonJushochiTokurei"."idoYMD",
            "DbT1003TashichosonJushochiTokurei"."edaNo"
            , "DbT1004ShisetsuNyutaisho"."nyushoYMD", 
            "DbT1004ShisetsuNyutaisho"."taishoYMD" DESC
