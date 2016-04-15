@@ -7,6 +7,8 @@ package jp.co.ndensan.reams.db.dbc.business.core.jutakukaishujizenshinsei;
 
 import java.io.Serializable;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.jutakukaishujizenshinsei.ShiharaiKekaEntity;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.math.Decimal;
 
 /**
  * 支払結果情報のオブジェクトクラスです。
@@ -27,5 +29,50 @@ public class ShiharaiKekkaResult implements Serializable {
      */
     public ShiharaiKekkaResult(ShiharaiKekaEntity entity) {
         this.entity = entity;
+    }
+
+    /**
+     * 費用額合計の取得メソッド
+     *
+     * @return 費用額合計
+     */
+    public Decimal get費用額合計() {
+        return entity.get費用額合計();
+    }
+
+    /**
+     * 保険対象費用額の取得メソッド
+     *
+     * @return 保険対象費用額
+     */
+    public Decimal get保険対象費用額() {
+        return entity.get保険対象費用額();
+    }
+
+    /**
+     * 保険給付額の取得メソッド
+     *
+     * @return 保険給付額
+     */
+    public Decimal get保険給付額() {
+        return entity.get保険給付額();
+    }
+
+    /**
+     * 利用者負担額の取得メソッド
+     *
+     * @return 利用者負担額
+     */
+    public Decimal get利用者負担額() {
+        return entity.get利用者負担額();
+    }
+
+    /**
+     * 住宅改修住宅住所の取得メソッド
+     *
+     * @return 住宅改修住宅住所
+     */
+    public RString get住宅改修住宅住所() {
+        return entity.get住宅改修住宅住所();
     }
 }
