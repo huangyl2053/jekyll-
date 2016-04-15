@@ -11,7 +11,6 @@ import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaN
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
-import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 
 /**
  * 住宅改修費支給限度額判定クラス
@@ -25,19 +24,9 @@ public class JutakuKaishuShikyuGendogakuHantei {
     /**
      * コンストラクタ
      *
-     * @param jizenShisei JutakuKaishuJizenShinsei
      */
-    public JutakuKaishuShikyuGendogakuHantei(JutakuKaishuJizenShinsei jizenShisei) {
-        this.jizenShisei = jizenShisei;
-    }
-
-    /**
-     * {@link InstanceProvider#create}にて生成した{@link JutakuKaishuShikyuGendogakuHantei}のインスタンスを返します。
-     *
-     * @return {@link InstanceProvider#create}にて生成した{@link JutakuKaishuShikyuGendogakuHantei}のインスタンス
-     */
-    public static JutakuKaishuShikyuGendogakuHantei createInstance() {
-        return InstanceProvider.create(JutakuKaishuShikyuGendogakuHantei.class);
+    public JutakuKaishuShikyuGendogakuHantei() {
+        this.jizenShisei = JutakuKaishuJizenShinsei.createInstance();
     }
 
     /**

@@ -30,7 +30,6 @@ import jp.co.ndensan.reams.db.dbc.service.core.jutakukaishujyusyo.JutakuKaishuJy
 import jp.co.ndensan.reams.db.dbc.service.core.jutakukaishusikyushinsei.JutakuKaishuShikyuGendogakuHantei;
 import jp.co.ndensan.reams.db.dbc.service.core.jutakukaishusikyushinseiikkatushinsa.JutakukaishuSikyuShinseiIkkatuShinsaManager;
 import jp.co.ndensan.reams.db.dbc.service.core.jutakukaishuyaokaigojyotaisandannkaihantei.JutakuKaishuYaokaigoJyotaiSandannkaiHanteiManager;
-import jp.co.ndensan.reams.db.dbc.service.jutakukaishujizenshinsei.JutakuKaishuJizenShinsei;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HokenshaNo;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
@@ -348,8 +347,7 @@ public class JutakuKaishuhiShikyuShinseiPanel {
      */
     private boolean 限度額チェック(HihokenshaNo 被保険者番号, FlexibleYearMonth サービス提供年月, RString 整理番号,
             boolean 限度リセットフラグ, Decimal 保険対象費用額) {
-        JutakuKaishuShikyuGendogakuHantei gendogakuHantei = new JutakuKaishuShikyuGendogakuHantei(
-                JutakuKaishuJizenShinsei.createInstance());
+        JutakuKaishuShikyuGendogakuHantei gendogakuHantei = new JutakuKaishuShikyuGendogakuHantei();
         return gendogakuHantei.checkJutakukaishuShikyuGendogaku(被保険者番号, サービス提供年月,
                 整理番号, 限度リセットフラグ, 保険対象費用額);
     }
