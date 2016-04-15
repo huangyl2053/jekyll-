@@ -99,8 +99,10 @@ public class JyutakugaisyunaiyoList {
      * @return JyutakugaisyunaiyoListDivのResponseData
      */
     public ResponseData<JyutakugaisyunaiyoListDiv> onClick_CopyButton(JyutakugaisyunaiyoListDiv requestDiv) {
-        requestDiv.getTxtJyusyo().setValue(DataPassingConverter.deserialize(
+        AtenaJusho jusho = new AtenaJusho(DataPassingConverter.deserialize(
                 requestDiv.getJushoData(), IJusho.class).get住所());
+        requestDiv.getTxtJyusyo().setDomain(jusho);
+        requestDiv.setBtnClear(null);
         return ResponseData.of(requestDiv).respond();
     }
 
@@ -186,13 +188,13 @@ public class JyutakugaisyunaiyoList {
             AtenaJusho domain = new AtenaJusho(dgGaisyuListRow.getTxtJutakuAddress());
             requestDiv.getTxtJyusyo().setDomain(domain);
         }
-        if (dgGaisyuListRow.getTxtChakkoYoteibi() != null) {
+        if (!RString.isNullOrEmpty(dgGaisyuListRow.getTxtChakkoYoteibi())) {
             requestDiv.getTxtTyakkoyotebi().setValue(new RDate(dgGaisyuListRow.getTxtChakkoYoteibi().toString()));
         }
-        if (dgGaisyuListRow.getTxtKanseiYoteibi() != null) {
+        if (!RString.isNullOrEmpty(dgGaisyuListRow.getTxtKanseiYoteibi())) {
             requestDiv.getTxtKanseyotebi().setValue(new RDate(dgGaisyuListRow.getTxtKanseiYoteibi().toString()));
         }
-        if (dgGaisyuListRow.getTxtKaishuKingaku() != null && !dgGaisyuListRow.getTxtKaishuKingaku().isEmpty()) {
+        if (!RString.isNullOrEmpty(dgGaisyuListRow.getTxtKaishuKingaku())) {
             requestDiv.getTxtKaisyukingaku().setValue(new Decimal(dgGaisyuListRow.getTxtKaishuKingaku().toString().trim()));
         }
         if (モード_修正.equals(状態)) {
@@ -200,13 +202,12 @@ public class JyutakugaisyunaiyoList {
             requestDiv.getPnlNyuryokuArea().setState(モード_修正);
         }
         if (モード_削除.equals(状態)) {
-            requestDiv = clear制御活性(requestDiv);
-            requestDiv.getBtnClear().setDisabled(true);
-            requestDiv.getBtnHonnijyusyoCopy().setDisabled(true);
+            requestDiv = clear制御非活性(requestDiv);
+            requestDiv.getBtnDetailConfirm().setDisabled(false);
             requestDiv.getPnlNyuryokuArea().setState(モード_削除);
         }
         if (モード_選択.equals(状態)) {
-            requestDiv = clear制御活性(requestDiv);
+            requestDiv = clear制御非活性(requestDiv);
             requestDiv.getBtnClear().setDisabled(true);
             requestDiv.getBtnHonnijyusyoCopy().setDisabled(true);
             requestDiv.getBtnDetailConfirm().setDisabled(true);
