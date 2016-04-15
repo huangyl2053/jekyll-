@@ -134,14 +134,10 @@ public class NinteiChosaScheduleInputHandler {
                     chickNull(ViewStateHolder.get(ViewStateKeys.認定調査スケジュール登録10_認定調査員コード値, RString.class)));
             div.getWariateJokyo().getRadYoyakuJokyo().setSelectedKey(
                     chickNull(ViewStateHolder.get(ViewStateKeys.認定調査スケジュール登録10_予約状況値, RString.class)));
-            div.getButtonArea().getBtnSearchTaishosha().setDisabled(
-                    ViewStateHolder.get(ViewStateKeys.認定調査スケジュール登録10_対象者を検索する状態, boolean.class));
-            div.getButtonArea().getBtnDisplayLatestInformation().setDisabled(
-                    ViewStateHolder.get(ViewStateKeys.認定調査スケジュール登録10_前回情報を表示する状態, boolean.class));
-            div.getButtonArea().getBtnSearchTaishosha().setVisible(
-                    ViewStateHolder.get(ViewStateKeys.認定調査スケジュール登録10_対象者を検索する表示, boolean.class));
-            div.getButtonArea().getBtnDisplayLatestInformation().setVisible(
-                    ViewStateHolder.get(ViewStateKeys.認定調査スケジュール登録10_前回情報を表示する表示, boolean.class));
+            div.getButtonArea().getBtnSearchTaishosha().setVisible(true);
+            div.getButtonArea().getBtnDisplayLatestInformation().setVisible(true);
+            div.getButtonArea().getBtnSearchTaishosha().setDisabled(false);
+            div.getButtonArea().getBtnDisplayLatestInformation().setDisabled(false);
             div.getWariateJokyo().getTxtNinteiChosainCode().setDisabled(状態);
             div.getWariateJokyo().getTxtNinteiChosainName().setDisabled(状態);
             div.getWariateJokyo().getTxtNinteiChosaItakusakiCode().setDisabled(状態);
@@ -174,10 +170,8 @@ public class NinteiChosaScheduleInputHandler {
             div.getTaishoshaShosai().getTxtTachiainin2().setDisabled(場所状態);
             div.getTaishoshaShosai().getTxtRenrakusaki2().setDisabled(場所状態);
             div.getTaishoshaShosai().getTxtTaishoshaShosaiMemo().setDisabled(場所状態);
-            div.getTaishoshaShosai().getBtnClear().setDisabled(
-                    ViewStateHolder.get(ViewStateKeys.認定調査スケジュール登録10_対象者をクリアする状態, boolean.class));
-            div.getTaishoshaShosai().getBtnClear().setDisabled(
-                    ViewStateHolder.get(ViewStateKeys.認定調査スケジュール登録10_対象者をクリアする表示, boolean.class));
+            div.getTaishoshaShosai().getBtnClear().setVisible(true);
+            div.getTaishoshaShosai().getBtnClear().setDisabled(false);
         } else {
             onLoad_モード1_2_3(temp_認定調査員名称, temp_認定調査委託先名称, temp_予約可否, temp_備考, temp_予約状況,
                     temp_被保番号, temp_被保険者区分コード, temp_保険者, temp_認定申請日, temp_申請区分_申請時, temp_氏名, temp_カナ氏名,

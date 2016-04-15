@@ -113,8 +113,13 @@ public class NinteiChosaScheduleInput {
      */
     public ResponseData<NinteiChosaScheduleInputDiv> onLoad(NinteiChosaScheduleInputDiv div) {
 
-        initializeTemp変数();
-        setTemp変数();
+        if (!画面ステート_1.equals(ViewStateHolder.get(ViewStateKeys.認定調査スケジュール登録10_対象者を検索するモード, RString.class))) {
+            initializeTemp変数();
+            setTemp変数();
+        } else {
+            temp_申請者管理番号3 = ViewStateHolder.get(ViewStateKeys.認定調査スケジュール登録_申請書管理番号3, RString.class);
+            set対象者個人基本情報Temp変数();
+        }
         getHandler(div).onLoad(temp_申請者管理番号3, temp_認定調査員名称, temp_認定調査委託先名称, temp_予約可否, temp_備考, temp_予約状況,
                 temp_被保番号, temp_被保険者区分コード, temp_保険者, temp_認定申請日, temp_申請区分_申請時, temp_氏名, temp_カナ氏名,
                 temp_場所, temp_駐車場, temp_立会人1, temp_連絡先1, temp_立会人2, temp_連絡先2, temp_対象者メモ);
@@ -275,7 +280,7 @@ public class NinteiChosaScheduleInput {
                 div.getWariateJokyo().getTxtNinteiChosaItakusakiCode().getValue());
         ViewStateHolder.put(ViewStateKeys.認定調査スケジュール登録10_認定調査委託先名称値,
                 div.getWariateJokyo().getTxtNinteiChosaItakusakiName().getValue());
-        ViewStateHolder.put(ViewStateKeys.認定調査スケジュール登録10_調査日時値,
+        ViewStateHolder.put(ViewStateKeys.認定調査スケジュール登録10_調査日値,
                 div.getWariateJokyo().getTxtNinteiChosaDate().getValue());
         ViewStateHolder.put(ViewStateKeys.認定調査スケジュール登録10_調査日時値,
                 div.getWariateJokyo().getTxtNinteiChosaTime().getValue());
@@ -293,14 +298,6 @@ public class NinteiChosaScheduleInput {
                 div.getWariateJokyo().getRadYoyakuJokyo().getSelectedKey());
         ViewStateHolder.put(ViewStateKeys.認定調査スケジュール登録10_予約状況状態,
                 div.getWariateJokyo().getRadYoyakuJokyo().isDisabled());
-        ViewStateHolder.put(ViewStateKeys.認定調査スケジュール登録10_対象者を検索する表示,
-                div.getButtonArea().getBtnSearchTaishosha().isVisible());
-        ViewStateHolder.put(ViewStateKeys.認定調査スケジュール登録10_対象者を検索する状態,
-                div.getButtonArea().getBtnSearchTaishosha().isDisabled());
-        ViewStateHolder.put(ViewStateKeys.認定調査スケジュール登録10_前回情報を表示する表示,
-                div.getButtonArea().getBtnDisplayLatestInformation().isVisible());
-        ViewStateHolder.put(ViewStateKeys.認定調査スケジュール登録10_前回情報を表示する状態,
-                div.getButtonArea().getBtnDisplayLatestInformation().isDisabled());
         ViewStateHolder.put(ViewStateKeys.認定調査スケジュール登録10_被保番号状態,
                 div.getTaishoshaShosai().getTxtHihoBangoNumber().isDisabled());
         ViewStateHolder.put(ViewStateKeys.認定調査スケジュール登録10_場所値,
@@ -319,10 +316,6 @@ public class NinteiChosaScheduleInput {
                 div.getTaishoshaShosai().getTxtRenrakusaki2().getValue());
         ViewStateHolder.put(ViewStateKeys.認定調査スケジュール登録10_対象者メモ値,
                 div.getTaishoshaShosai().getTxtTaishoshaShosaiMemo().getValue());
-        ViewStateHolder.put(ViewStateKeys.認定調査スケジュール登録10_対象者をクリアする表示,
-                div.getTaishoshaShosai().getBtnClear().isVisible());
-        ViewStateHolder.put(ViewStateKeys.認定調査スケジュール登録10_対象者をクリアする状態,
-                div.getTaishoshaShosai().getBtnClear().isDisabled());
         return ResponseData.of(div).forwardWithEventName(DBE2020010TransitionEventName.更新_対象者を検索する).respond();
     }
 
@@ -379,12 +372,8 @@ public class NinteiChosaScheduleInput {
         if (new RString(DbeQuestionMessages.クリア確認.getMessage().getCode()).equals(ResponseHolder.getMessageCode())
                 && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
             set対象者詳細Grid値Clear(div);
-            initializeTemp変数();
-            setTemp変数();
-            getHandler(div).onLoad(temp_申請者管理番号3, temp_認定調査員名称, temp_認定調査委託先名称, temp_予約可否, temp_備考, temp_予約状況,
-                    temp_被保番号, temp_被保険者区分コード, temp_保険者, temp_認定申請日, temp_申請区分_申請時, temp_氏名, temp_カナ氏名,
-                    temp_場所, temp_駐車場, temp_立会人1, temp_連絡先1, temp_立会人2, temp_連絡先2, temp_対象者メモ);
-            div.getButtonArea().getBtnSearchTaishosha().setDisabled(true);
+            div.getButtonArea().getBtnDisplayLatestInformation().setDisabled(true);
+            div.getTaishoshaShosai().getBtnClear().setDisabled(true);
         }
         return ResponseData.of(div).respond();
     }
