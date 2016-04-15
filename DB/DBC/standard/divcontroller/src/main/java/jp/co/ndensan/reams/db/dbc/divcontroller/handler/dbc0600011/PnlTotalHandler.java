@@ -13,6 +13,9 @@ import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0600011.PnlT
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0600011.dgShikyuShinseiList_Row;
 import jp.co.ndensan.reams.db.dbc.divcontroller.viewbox.ViewStateKeys;
 import jp.co.ndensan.reams.db.dbc.divcontroller.viewbox.dbc0600011.PnlTotalParameter;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 
@@ -89,10 +92,10 @@ public final class PnlTotalHandler {
      * @param 状態 状態
      */
     public void putViewStateHolder(RString 状態) {
-        RString 被保険者番号 = ViewStateHolder.get(ViewStateKeys.被保険者番号, RString.class);
+        HihokenshaNo 被保険者番号 = ViewStateHolder.get(ViewStateKeys.被保険者番号, HihokenshaNo.class);
         dgShikyuShinseiList_Row row = div.getYoguKonyuhiShikyuShinseiList().getDgShikyuShinseiList().getClickedItem();
-        PnlTotalParameter parameter = new PnlTotalParameter(被保険者番号, row.getTxtTeikyoYM(), row.getTxtSerialNo(),
-                row.getTxtJigyosyaNo(), row.getTxtYoshikiNo(), row.getTxtMeisaiNo());
+        PnlTotalParameter parameter = new PnlTotalParameter(被保険者番号, new FlexibleYearMonth(row.getTxtTeikyoYM()), row.getTxtSerialNo(),
+                new JigyoshaNo(row.getTxtJigyosyaNo()), row.getTxtYoshikiNo(), row.getTxtMeisaiNo());
         ViewStateHolder.put(ViewStateKeys.支給申請情報検索キー, parameter);
         ViewStateHolder.put(ViewStateKeys.状態, 状態);
     }

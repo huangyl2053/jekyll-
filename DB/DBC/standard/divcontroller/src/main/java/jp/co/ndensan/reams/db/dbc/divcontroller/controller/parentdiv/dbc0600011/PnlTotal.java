@@ -44,7 +44,7 @@ public class PnlTotal {
         ShikibetsuCode 識別コード = key.get識別コード();
         HihokenshaNo 被保険者番号 = key.get被保険者番号();
         ViewStateHolder.put(ViewStateKeys.識別コード, 識別コード.value());
-        ViewStateHolder.put(ViewStateKeys.被保険者番号, 被保険者番号.value());
+        ViewStateHolder.put(ViewStateKeys.被保険者番号, 被保険者番号);
         div.getKaigoCommonPanel().getCcdAtenaInfo().onLoad(識別コード);
         div.getKaigoCommonPanel().getCcdShikakuKihon().onLoad(被保険者番号);
         PnlTotalHandler handler = getHandler(div);
@@ -89,7 +89,7 @@ public class PnlTotal {
      */
     public ResponseData<PnlTotalDiv> onClick_dgShikyuShinseiList_modify(PnlTotalDiv div) {
         RString 登録状態 = ResponseHolder.getState();
-     
+
         if (登録状態.equals(差額登録)) {
             getHandler(div).putViewStateHolder(差額登録);
         } else {

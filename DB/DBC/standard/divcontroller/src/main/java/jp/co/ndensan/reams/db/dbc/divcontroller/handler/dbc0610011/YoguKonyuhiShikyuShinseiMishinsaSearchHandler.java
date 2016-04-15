@@ -13,7 +13,7 @@ import jp.co.ndensan.reams.db.dbc.definition.core.shinnsanaiyo.ShinsaNaiyoKubun;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0610011.YoguKonyuhiShikyuShinseiMishinsaSearchPanelDiv;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0610011.dgYoguKonyuhiShisaMishinsaShikyuShinseiList_Row;
 import jp.co.ndensan.reams.db.dbc.divcontroller.viewbox.ViewStateKeys;
-import jp.co.ndensan.reams.db.dbc.divcontroller.viewbox.dbc0610011.ShikyuShinseiki;
+import jp.co.ndensan.reams.db.dbc.divcontroller.viewbox.dbc0600011.PnlTotalParameter;
 import jp.co.ndensan.reams.db.dbc.service.core.fukushiyogukonyuhishikyuikkatushinsa.FukushiyoguKonyuhiShikyuIkkatuShinsa;
 import jp.co.ndensan.reams.db.dbc.service.core.fukushiyogukonyuhishikyushisei.FukushiYoguKounyuhiDouituHinmokuChofukuHantei;
 import jp.co.ndensan.reams.db.dbc.service.core.fukushiyogukonyuhishikyushisei.FukushiyoguKonyuhiShikyuGendogaku;
@@ -109,7 +109,7 @@ public class YoguKonyuhiShikyuShinseiMishinsaSearchHandler {
         ViewStateHolder.put(ViewStateKeys.決定日, 決定日);
         ViewStateHolder.put(ViewStateKeys.被保険者番号, 被保険者番号);
         ViewStateHolder.put(ViewStateKeys.画面モード, 審査);
-        ShikyuShinseiki param = new ShikyuShinseiki(被保険者番号,
+        PnlTotalParameter param = new PnlTotalParameter(被保険者番号,
                 サービス提供年月, 整理番号, 事業者番号, 様式番号, 明細番号);
         ViewStateHolder.put(ViewStateKeys.支給申請情報検索キー, param);
     }
