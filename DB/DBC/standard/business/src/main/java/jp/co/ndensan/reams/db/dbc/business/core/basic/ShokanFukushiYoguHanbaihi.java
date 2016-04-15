@@ -298,6 +298,30 @@ public class ShokanFukushiYoguHanbaihi
     }
 
     /**
+     * 保持する償還払請求福祉用具販売費を削除対象とします。<br/>
+     * {@link DbT3048ShokanFukushiYoguHanbaihiEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば削除状態にします。
+     *
+     * @return modified対象処理実施後の{@link ShokanFukushiYoguHanbaihi}
+     */
+    public ShokanFukushiYoguHanbaihi modified() {
+        DbT3048ShokanFukushiYoguHanbaihiEntity modifiedEntity = this.toEntity();
+        modifiedEntity.setState(EntityDataState.Modified);
+        return new ShokanFukushiYoguHanbaihi(modifiedEntity, id);
+    }
+
+    /**
+     * 保持する償還払請求福祉用具販売費を削除対象とします。<br/>
+     * {@link DbT3048ShokanFukushiYoguHanbaihiEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば削除状態にします。
+     *
+     * @return added対象処理実施後の{@link ShokanFukushiYoguHanbaihi}
+     */
+    public ShokanFukushiYoguHanbaihi added() {
+        DbT3048ShokanFukushiYoguHanbaihiEntity addedEntity = this.toEntity();
+        addedEntity.setState(EntityDataState.Added);
+        return new ShokanFukushiYoguHanbaihi(addedEntity, id);
+    }
+
+    /**
      * {@link ShokanFukushiYoguHanbaihi}のシリアライズ形式を提供します。
      *
      * @return {@link ShokanFukushiYoguHanbaihi}のシリアライズ形式
