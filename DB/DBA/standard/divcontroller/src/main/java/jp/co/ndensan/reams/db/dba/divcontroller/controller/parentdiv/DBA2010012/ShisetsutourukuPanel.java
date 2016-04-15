@@ -188,10 +188,10 @@ public class ShisetsutourukuPanel {
                 .createParam(RString.EMPTY,
                         div.getTxtShisetsuYukoKaishiYMD().getValue(),
                         div.getTxtShisetsuYukoShuryoYMD().getValue());
-        if (!manager.checkKikanGorisei(重複paramter)) {
+        if (manager.checkKikanGorisei(重複paramter)) {
             throw new ApplicationException(UrErrorMessages.期間が不正.getMessage());
         }
-        if (!manager.checkKikanJufuku(paramter)) {
+        if (manager.checkKikanJufuku(paramter)) {
             throw new ApplicationException(UrErrorMessages.期間が重複.getMessage());
         }
     }
