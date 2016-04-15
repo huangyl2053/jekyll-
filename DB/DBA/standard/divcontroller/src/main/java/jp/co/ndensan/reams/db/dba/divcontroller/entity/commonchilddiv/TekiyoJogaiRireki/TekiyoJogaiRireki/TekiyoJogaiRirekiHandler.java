@@ -473,6 +473,15 @@ public class TekiyoJogaiRirekiHandler {
         }
     }
 
+    /**
+     * 適用情報一覧を取得します。
+     *
+     * @return 適用情報一覧
+     */
+    public List<datagridTekiyoJogai_Row> get適用情報一覧() {
+        return div.getDatagridTekiyoJogai().getDataSource();
+    }
+
     private void set適用除外者一覧(List<TekiyoJogaishaRelate> 適用除外者情報リスト) {
         List<datagridTekiyoJogai_Row> rowList = new ArrayList<>();
         for (TekiyoJogaishaRelate 適用除外者情報 : 適用除外者情報リスト) {
