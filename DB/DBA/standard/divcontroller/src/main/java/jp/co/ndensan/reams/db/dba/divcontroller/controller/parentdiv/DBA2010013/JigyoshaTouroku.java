@@ -66,9 +66,8 @@ public class JigyoshaTouroku {
      * @param div 事業者登録Div
      * @return ResponseData<JigyoshaToutokuDiv> 事業者登録Div
      */
-    public ResponseData<JigyoshaToutokuDiv> onLoad(JigyoshaToutokuDiv div) {
+    public ResponseData<JigyoshaToutokuDiv> onLoad(JigyoshaToutokuDiv div) {        
         JigyoshaMode jigyoshaMode = ViewStateHolder.get(ViewStateKeys.介護事業者_介護事業者情報, JigyoshaMode.class);
-        ViewStateHolder.put(ViewStateKeys.介護事業者_状態, new RString("修正"));
         ViewStateHolder.put(ViewStateKeys.事業者登録_事業者番号, jigyoshaMode.getJigyoshaNo().getColumnValue());
         ViewStateHolder.put(ViewStateKeys.事業者登録_事業者種類コード, jigyoshaMode.getJigyoshaShubetsu());
         ViewStateHolder.put(ViewStateKeys.事業者登録_有効開始日, new FlexibleDate(jigyoshaMode.getYukoKaishiYMD()));
@@ -155,8 +154,6 @@ public class JigyoshaTouroku {
         ViewStateHolder.put(ViewStateKeys.サービス登録_画面状態, 状態_追加);
         ViewStateHolder.put(ViewStateKeys.サービス登録_事業者番号,
                 ViewStateHolder.get(ViewStateKeys.事業者登録_事業者番号, RString.class));
-        ViewStateHolder.put(ViewStateKeys.サービス登録_有効開始日,
-                ViewStateHolder.get(ViewStateKeys.事業者登録_有効開始日, FlexibleDate.class));
         return ResponseData.of(div).forwardWithEventName(DBA2010013TransitionEventName.サービス追加).respond();
     }
 
@@ -188,7 +185,8 @@ public class JigyoshaTouroku {
         ViewStateHolder.put(ViewStateKeys.サービス登録_事業者番号, ViewStateHolder.get(ViewStateKeys.事業者登録_事業者番号, RString.class));
         ViewStateHolder.put(ViewStateKeys.サービス登録_サービス種類コード,
                 div.getServiceJoho().getDgServiceList().getClickedItem().getServiceType());
-        ViewStateHolder.put(ViewStateKeys.サービス登録_有効開始日, ViewStateHolder.get(ViewStateKeys.事業者登録_有効開始日, FlexibleDate.class));
+        ViewStateHolder.put(ViewStateKeys.サービス登録_有効開始日, 
+                div.getServiceJoho().getDgServiceList().getClickedItem().getKaishiDate().getValue());
     }
 
     /**
