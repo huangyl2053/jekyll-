@@ -119,45 +119,52 @@ public class TaJushochiTokureisyaKanriManager {
         List<TaJushochiTokureisyaKanriRelateEntity> 他市町村住所地特例情報リスト = mapper.selct他市町村住所地特例(parameter);
         List<TaJushochiTokureisyaKanriRelateEntity> 適用情報リスト = new ArrayList<>();
         List<TaJushochiTokureisyaKanriMaster> syaKanriMaster = new ArrayList<>();
-        for (TaJushochiTokureisyaKanriRelateEntity 他市町村住所地特例情報 : 他市町村住所地特例情報リスト) {
 
+        FlexibleDate 適用年月日 = FlexibleDate.EMPTY;
+        for (TaJushochiTokureisyaKanriRelateEntity 他市町村住所地特例情報 : 他市町村住所地特例情報リスト) {
+            if (!適用年月日.equals(他市町村住所地特例情報.getTekiyoYMD())) {
+                適用情報リスト.add(他市町村住所地特例情報);
+                適用年月日 = 他市町村住所地特例情報.getTekiyoYMD();
+            }
+        }
+        List<TaJushochiTokureisyaKanriRelateEntity> 最新他市町村住所地特例情報 = new ArrayList<>();
+        if (!適用情報リスト.isEmpty()) {
+            for (TaJushochiTokureisyaKanriRelateEntity entity : 適用情報リスト) {
+                if (entity.getTaishoYMD() == null || entity.getTaishoYMD().isEmpty()) {
+                    最新他市町村住所地特例情報.add(entity);
+                } else {
+                    Collections.sort(適用情報リスト, new TaJushochiTokureisyaKanriManager.DateComparator());
+                    最新他市町村住所地特例情報.add(適用情報リスト.get(0));
+                }
+            }
+        }
+        List<TaJushochiTokureisyaKanriRelateEntity> 適用情報 = new ArrayList<>();
+        for (TaJushochiTokureisyaKanriRelateEntity 地特例情報 : 最新他市町村住所地特例情報) {
             RString 介護保険施設 = ShisetsuType.介護保険施設.getコード();
             RString 住所地特例対象施設 = ShisetsuType.住所地特例対象施設.getコード();
-            if (介護保険施設.equals(他市町村住所地特例情報.getNyushoShisetsuShurui())) {
+            if (介護保険施設.equals(地特例情報.getNyushoShisetsuShurui())) {
                 TaJushochiTokureisyaKanriParameter iParameter
                         = TaJushochiTokureisyaKanriParameter.createParam_TaJushochi(
-                                ShikibetsuCode.EMPTY, RString.EMPTY, RString.EMPTY, 他市町村住所地特例情報.getNyushoShisetsuCode(), RString.EMPTY);
+                                ShikibetsuCode.EMPTY, RString.EMPTY, RString.EMPTY, 地特例情報.getNyushoShisetsuCode(), RString.EMPTY);
                 TaJushochiTokureisyaKanriRelateEntity 事業者名称 = mapper.get事業者名称_介護保険施設(iParameter);
                 if (事業者名称 != null) {
-                    他市町村住所地特例情報.setJigyoshaName(事業者名称.getJigyoshaName());
+                    地特例情報.setJigyoshaName(事業者名称.getJigyoshaName());
                 }
-                適用情報リスト.add(他市町村住所地特例情報);
+                適用情報.add(地特例情報);
             }
-            if (住所地特例対象施設.equals(他市町村住所地特例情報.getNyushoShisetsuShurui())) {
+            if (住所地特例対象施設.equals(地特例情報.getNyushoShisetsuShurui())) {
                 TaJushochiTokureisyaKanriParameter iParameter = TaJushochiTokureisyaKanriParameter.createParam_TaJushochi(
-                        ShikibetsuCode.EMPTY, RString.EMPTY, RString.EMPTY, 他市町村住所地特例情報.getNyushoShisetsuCode(),
+                        ShikibetsuCode.EMPTY, RString.EMPTY, RString.EMPTY, 地特例情報.getNyushoShisetsuCode(),
                         JigyosyaType.住所地特例対象施設.getコード());
                 TaJushochiTokureisyaKanriRelateEntity 事業者名称 = mapper.get事業者名称_住所地特例対象施設(iParameter);
                 if (事業者名称 != null) {
-                    他市町村住所地特例情報.setJigyoshaName(事業者名称.getJigyoshaMeisho());
+                    地特例情報.setJigyoshaName(事業者名称.getJigyoshaMeisho());
                 }
-                適用情報リスト.add(他市町村住所地特例情報);
+                適用情報.add(地特例情報);
             }
         }
-        if (!適用情報リスト.isEmpty()) {
-            List<TaJushochiTokureisyaKanriRelateEntity> list = new ArrayList<>();
-            for (TaJushochiTokureisyaKanriRelateEntity entity : 適用情報リスト) {
-                FlexibleDate 退所日 = entity.getTaishoYMD();
-                if (退所日 == null || 退所日.isEmpty()) {
-                    list.add(適用情報リスト.get(0));
-                    break;
-                } else {
-                    Collections.sort(適用情報リスト, new TaJushochiTokureisyaKanriManager.DateComparator());
-                    list.add(適用情報リスト.get(0));
-                    break;
-                }
-            }
-            for (TaJushochiTokureisyaKanriRelateEntity listEntity : list) {
+        if (!適用情報.isEmpty()) {
+            for (TaJushochiTokureisyaKanriRelateEntity listEntity : 適用情報) {
                 syaKanriMaster.add(new TaJushochiTokureisyaKanriMaster(listEntity));
             }
             return SearchResult.of(syaKanriMaster, 0, false);
