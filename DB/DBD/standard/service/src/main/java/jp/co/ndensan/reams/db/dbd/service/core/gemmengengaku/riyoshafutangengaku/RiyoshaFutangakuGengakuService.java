@@ -7,6 +7,7 @@ package jp.co.ndensan.reams.db.dbd.service.core.gemmengengaku.riyoshafutangengak
 
 import java.util.ArrayList;
 import java.util.List;
+import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dbd.business.core.gemmengengaku.riyoshafutangengaku.RiyoshaFutangakuGengaku;
 import jp.co.ndensan.reams.db.dbd.definition.core.gemmengengaku.GemmenGengakuShurui;
 import jp.co.ndensan.reams.db.dbd.definition.mybatisprm.gemmengengaku.riyoshafutangengaku.RiyoshaFutangakuGengakuServiceMapperParameter;
@@ -16,14 +17,16 @@ import jp.co.ndensan.reams.db.dbd.persistence.db.mapper.basic.IDbT3114RiyoshaFut
 import jp.co.ndensan.reams.db.dbd.persistence.db.mapper.relate.gemmengengaku.riyoshafutangengaku.IRiyoshaFutangakuGengakuMapper;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBD;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
-import jp.co.ndensan.reams.db.dbx.service.core.dbbusinessconfig.DbBusinessConifg;
 import jp.co.ndensan.reams.db.dbz.definition.core.futanwariai.FutanwariaiKubun;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT4001JukyushaDaichoEntity;
 import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT4001JukyushaDaichoDac;
 import jp.co.ndensan.reams.db.dbz.service.core.MapperProvider;
+import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
+import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.util.config.BusinessConfig;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
 
@@ -36,6 +39,8 @@ public class RiyoshaFutangakuGengakuService {
 
     private final MapperProvider mapperProvider;
     private final DbT4001JukyushaDaichoDac dac;
+    private static final int INDEX_2 = 2;
+    private static final int INDEX_4 = 4;
 
     /**
      * コンストラクタです。
@@ -68,9 +73,6 @@ public class RiyoshaFutangakuGengakuService {
                         RiyoshaFutangakuGengakuServiceMapperParameter.createParameter(GemmenGengakuShurui.利用者負担額減額.getコード(), 被保険者番号));
 
         List<RiyoshaFutangakuGengaku> list = new ArrayList<>();
-        if (利用者負担額減額の情報 == null) {
-            return list;
-        }
         for (RiyoshaFutangakuGengakuEntity entity : 利用者負担額減額の情報) {
             list.add(new RiyoshaFutangakuGengaku(entity));
         }
@@ -89,15 +91,13 @@ public class RiyoshaFutangakuGengakuService {
             return FlexibleDate.EMPTY;
         }
         FlexibleDate 有効期限候補;
-        RString 減免期限_利用減免;
-        try {
-            減免期限_利用減免 = DbBusinessConifg.get(ConfigNameDBD.減免期限_利用減免, RDate.getNowDate());
-        } catch (Exception e) {
+        RString 減免期限_利用減免 = BusinessConfig.get(ConfigNameDBD.減免期限_利用減免, RDate.getNowDate(), SubGyomuCode.DBD介護受給);
+        if (減免期限_利用減免 == null) {
             return FlexibleDate.EMPTY;
         }
         RString 年 = 適用日.getYear().toDateString();
-        RString 月 = new RString(new FlexibleDate(減免期限_利用減免).getMonthValue());
-        RString 日 = new RString(new FlexibleDate(減免期限_利用減免).getDayValue());
+        RString 月 = 減免期限_利用減免.substring(0, INDEX_2);
+        RString 日 = 減免期限_利用減免.substring(2, INDEX_4);
         有効期限候補 = new FlexibleDate(年.concat(月).concat(日));
 
         if (適用日.isBeforeOrEquals(有効期限候補)) {
@@ -115,9 +115,8 @@ public class RiyoshaFutangakuGengakuService {
      */
     @Transaction
     public FutanwariaiKubun get利用者負担割合(HihokenshaNo 被保険者番号, FlexibleDate 基準日) {
-        if (被保険者番号 == null || 基準日 == null) {
-            throw new NullPointerException();
-        }
+        requireNonNull(被保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage("被保険者番号"));
+        requireNonNull(基準日, UrSystemErrorMessages.値がnull.getReplacedMessage("基準日"));
         if (!基準日.getYear().isValid()) {
             throw new IllegalArgumentException();
         }
@@ -126,8 +125,10 @@ public class RiyoshaFutangakuGengakuService {
                 .notExists_maxRirekiNo(被保険者番号.getColumnValue(), new RString(基準日.toString()));
         if (entity != null) {
             RString 負担割合区分 = entity.getFutanWariaiKubun();
-            if (負担割合区分 != null && !負担割合区分.isEmpty()) {
+            try {
                 return FutanwariaiKubun.toValue(負担割合区分);
+            } catch (Exception e) {
+                return FutanwariaiKubun._１割;
             }
         }
         return FutanwariaiKubun._１割;
