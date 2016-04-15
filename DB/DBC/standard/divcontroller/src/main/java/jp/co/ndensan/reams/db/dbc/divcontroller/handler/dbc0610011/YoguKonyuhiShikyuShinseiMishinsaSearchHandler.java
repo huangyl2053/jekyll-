@@ -14,7 +14,6 @@ import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0610011.Yogu
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0610011.dgYoguKonyuhiShisaMishinsaShikyuShinseiList_Row;
 import jp.co.ndensan.reams.db.dbc.divcontroller.viewbox.ViewStateKeys;
 import jp.co.ndensan.reams.db.dbc.divcontroller.viewbox.dbc0610011.ShikyuShinseiki;
-import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3048ShokanFukushiYoguHanbaihiEntity;
 import jp.co.ndensan.reams.db.dbc.service.core.fukushiyogukonyuhishikyuikkatushinsa.FukushiyoguKonyuhiShikyuIkkatuShinsa;
 import jp.co.ndensan.reams.db.dbc.service.core.fukushiyogukonyuhishikyushisei.FukushiYoguKounyuhiDouituHinmokuChofukuHantei;
 import jp.co.ndensan.reams.db.dbc.service.core.fukushiyogukonyuhishikyushisei.FukushiyoguKonyuhiShikyuGendogaku;
@@ -241,11 +240,7 @@ public class YoguKonyuhiShikyuShinseiMishinsaSearchHandler {
         RString 明細番号 = row.getTxtMeisaiNo().getValue();
         List<ShokanFukushiYoguHanbaihi> 福祉用具購入販売費リスト = FukushiyoguKonyuhiShikyuShinsei.createInstance()
                 .getShokanFukushiYoguHanbaihi(被保険者番号, サービス提供年月, 整理番号, 事業者番号, 様式番号, 明細番号);
-        List<DbT3048ShokanFukushiYoguHanbaihiEntity> entityList = new ArrayList<>();
-        for (ShokanFukushiYoguHanbaihi yoguhanbaihi : 福祉用具購入販売費リスト) {
-            entityList.add(yoguhanbaihi.toEntity());
-        }
         return new FukushiYoguKounyuhiDouituHinmokuChofukuHantei().chkHinmokuCodePerYear(被保険者番号,
-                サービス提供年月, entityList, 整理番号);
+                サービス提供年月, 福祉用具購入販売費リスト, 整理番号);
     }
 }
