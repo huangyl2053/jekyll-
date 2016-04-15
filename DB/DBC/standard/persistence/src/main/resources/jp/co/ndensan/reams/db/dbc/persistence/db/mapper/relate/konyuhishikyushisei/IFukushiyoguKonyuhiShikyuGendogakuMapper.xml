@@ -60,7 +60,7 @@
         AND ShokanKihon."yoshikiNo" = DbT3048TEMP."yoshikiNo"
         AND ShokanKihon."meisaiNo" = DbT3048TEMP."meisaiNo"
         ORDER BY
-        "serviceTeikyoYM" ASC,"seiriNo" ASC,"yoshikiNo"ASC
+        "serviceTeikyoYM" ASC,"seiriNo" ASC,"jigyoshaNo"ASC
     </select>
         
     <resultMap id="Result_ShikyuShinseiList" type="jp.co.ndensan.reams.db.dbc.entity.db.relate.fukushiyogukonyuhishikyushisei.FukushiyouguKonyuhiShikyuShinsei" autoMapping="true">

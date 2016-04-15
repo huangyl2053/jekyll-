@@ -13,9 +13,12 @@ import jp.co.ndensan.reams.db.dbc.divcontroller.handler.dbc0600011.PnlTotalHandl
 import jp.co.ndensan.reams.db.dbc.divcontroller.viewbox.ViewStateKeys;
 import jp.co.ndensan.reams.db.dbc.service.core.fukushiyogukonyuhishikyushisei.FukushiyoguKonyuhiShikyuShinsei;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
+import jp.co.ndensan.reams.db.dbz.divcontroller.util.viewstate.ViewStateKey;
+import jp.co.ndensan.reams.db.dbz.service.TaishoshaKey;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.ui.servlets.ResponseHolder;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 
 /**
@@ -29,8 +32,6 @@ public class PnlTotal {
     private static final RString 差額登録 = new RString("差額登録");
     private static final RString 修正 = new RString("修正");
     private static final RString 削除 = new RString("削除");
-    private static final RString 参照 = new RString("参照");
-    private static final RString 被保険者番号 = new RString("000000003");
 
     /**
      * 画面初期化
@@ -39,15 +40,18 @@ public class PnlTotal {
      * @return 福祉用具購入費支給申請
      */
     public ResponseData<PnlTotalDiv> onLoad(PnlTotalDiv div) {
-        ViewStateHolder.put(ViewStateKeys.識別コード, new ShikibetsuCode(new RString("000000000000010")));
-        ViewStateHolder.put(ViewStateKeys.被保険者番号, new HihokenshaNo("000000003"));
-        div.getKaigoCommonPanel().getCcdAtenaInfo().onLoad(ViewStateHolder.get(ViewStateKeys.識別コード, ShikibetsuCode.class));
-        div.getKaigoCommonPanel().getCcdShikakuKihon().onLoad(ViewStateHolder.get(ViewStateKeys.被保険者番号, HihokenshaNo.class));
+        TaishoshaKey key = ViewStateHolder.get(ViewStateKey.資格対象者, TaishoshaKey.class);
+        ShikibetsuCode 識別コード = key.get識別コード();
+        HihokenshaNo 被保険者番号 = key.get被保険者番号();
+        ViewStateHolder.put(ViewStateKeys.識別コード, 識別コード.value());
+        ViewStateHolder.put(ViewStateKeys.被保険者番号, 被保険者番号.value());
+        div.getKaigoCommonPanel().getCcdAtenaInfo().onLoad(識別コード);
+        div.getKaigoCommonPanel().getCcdShikakuKihon().onLoad(被保険者番号);
         PnlTotalHandler handler = getHandler(div);
         List<FukushiyouguKonyuhiShikyuShinseiResult> list = FukushiyoguKonyuhiShikyuShinsei.createInstance().
-                getShokanShikyuShinseiList(ViewStateHolder.get(ViewStateKeys.被保険者番号, HihokenshaNo.class));
+                getShokanShikyuShinseiList(被保険者番号);
         handler.initializedgShikyuShinseiList(list);
-        if (差額登録.equals(ViewStateHolder.get(ViewStateKeys.状態, RString.class))) {
+        if (差額登録.equals(ResponseHolder.getState())) {
             div.getYoguKonyuhiShikyuShinseiList().getBtnAddShikyuShinsei().setDisabled(true);
             div.getYoguKonyuhiShikyuShinseiList().getDgShikyuShinseiList().getGridSetting().setIsShowSelectButtonColumn(false);
             div.getYoguKonyuhiShikyuShinseiList().getDgShikyuShinseiList().getGridSetting().setIsShowDeleteButtonColumn(false);
@@ -64,7 +68,6 @@ public class PnlTotal {
      */
     public ResponseData<PnlTotalDiv> onClick_btnAddShikyuShinsei(PnlTotalDiv div) {
         ViewStateHolder.put(ViewStateKeys.状態, 登録);
-        ViewStateHolder.put(ViewStateKeys.被保険者番号, 被保険者番号);
         return ResponseData.of(div).forwardWithEventName(DBC0600011TransitionEventName.明細情報).respond();
     }
 
@@ -75,7 +78,6 @@ public class PnlTotal {
      * @return 福祉用具購入費支給申請_登録画面へ遷移
      */
     public ResponseData<PnlTotalDiv> onClick_byselectbutton(PnlTotalDiv div) {
-        getHandler(div).putViewStateHolder(参照, 被保険者番号);
         return ResponseData.of(div).forwardWithEventName(DBC0600011TransitionEventName.明細情報).respond();
     }
 
@@ -86,12 +88,12 @@ public class PnlTotal {
      * @return 福祉用具購入費支給申請_登録画面へ遷移
      */
     public ResponseData<PnlTotalDiv> onClick_dgShikyuShinseiList_modify(PnlTotalDiv div) {
-        RString 登録状態 = 修正;
-        if (登録状態.equals(修正)) {
-            getHandler(div).putViewStateHolder(修正, 被保険者番号);
-        }
+        RString 登録状態 = ResponseHolder.getState();
+     
         if (登録状態.equals(差額登録)) {
-            getHandler(div).putViewStateHolder(差額登録, 被保険者番号);
+            getHandler(div).putViewStateHolder(差額登録);
+        } else {
+            getHandler(div).putViewStateHolder(修正);
         }
         return ResponseData.of(div).forwardWithEventName(DBC0600011TransitionEventName.明細情報).respond();
     }
@@ -103,7 +105,7 @@ public class PnlTotal {
      * @return 福祉用具購入費支給申請_登録画面へ遷移
      */
     public ResponseData<PnlTotalDiv> onClick_dgShikyuShinseiList_delete(PnlTotalDiv div) {
-        getHandler(div).putViewStateHolder(削除, 被保険者番号);
+        getHandler(div).putViewStateHolder(削除);
         return ResponseData.of(div).forwardWithEventName(DBC0600011TransitionEventName.明細情報).respond();
     }
 

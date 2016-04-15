@@ -87,15 +87,14 @@ public final class PnlTotalHandler {
      * putViewStateHolder
      *
      * @param 状態 状態
-     * @param 被保険者番号 被保険者番号
      */
-    public void putViewStateHolder(RString 状態, RString 被保険者番号) {
+    public void putViewStateHolder(RString 状態) {
+        RString 被保険者番号 = ViewStateHolder.get(ViewStateKeys.被保険者番号, RString.class);
         dgShikyuShinseiList_Row row = div.getYoguKonyuhiShikyuShinseiList().getDgShikyuShinseiList().getClickedItem();
         PnlTotalParameter parameter = new PnlTotalParameter(被保険者番号, row.getTxtTeikyoYM(), row.getTxtSerialNo(),
                 row.getTxtJigyosyaNo(), row.getTxtYoshikiNo(), row.getTxtMeisaiNo());
         ViewStateHolder.put(ViewStateKeys.支給申請情報検索キー, parameter);
         ViewStateHolder.put(ViewStateKeys.状態, 状態);
-        ViewStateHolder.put(ViewStateKeys.被保険者番号, 被保険者番号);
     }
 
 }
