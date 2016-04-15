@@ -81,7 +81,6 @@ public class ShokanShinseiList {
         ViewStateHolder.put(ViewStateKeys.償還払申請一覧_サービス年月From, RString.EMPTY);
         ViewStateHolder.put(ViewStateKeys.償還払申請一覧_サービス年月To, RString.EMPTY);
         ViewStateHolder.put(ViewStateKeys.償還払申請一覧_モード, 追加モード);
-        ViewStateHolder.put(ViewStateKeys.償還払申請一覧_被保険者番号, RString.EMPTY);
         ViewStateHolder.put(ViewStateKeys.償還払申請一覧_整理番号, RString.EMPTY);
         ViewStateHolder.put(ViewStateKeys.償還払申請一覧_様式番号, RString.EMPTY);
 
