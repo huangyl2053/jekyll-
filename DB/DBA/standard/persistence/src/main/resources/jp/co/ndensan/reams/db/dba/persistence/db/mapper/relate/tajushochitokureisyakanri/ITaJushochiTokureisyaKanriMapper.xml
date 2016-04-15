@@ -206,6 +206,7 @@
         FROM
         rgdb."DbT1003TashichosonJushochiTokurei" AS dbT1003Tashichoson,
         (
+        SELECT
         dbT1003Tashi."shikibetsuCode" AS "shikibetsuCode",
         dbT1003Tashi."idoYMD" AS "idoYMD",
         dbT1003Tashi."tekiyoYMD" AS "tekiyoYMD",
