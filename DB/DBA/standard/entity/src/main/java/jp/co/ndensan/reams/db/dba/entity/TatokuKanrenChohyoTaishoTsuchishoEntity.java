@@ -11,6 +11,8 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 /**
  *
  * 他住特施設退所通知書データEntity
+ *
+ * @reamsid_L DBA-0380-010 huangh
  */
 @lombok.Getter
 @lombok.Setter

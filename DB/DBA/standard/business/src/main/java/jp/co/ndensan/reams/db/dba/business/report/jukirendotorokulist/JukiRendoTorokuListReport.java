@@ -12,8 +12,9 @@ import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
 import lombok.NonNull;
 
 /**
- *
  * 住基連動登録リスト帳票です。
+ *
+ * @reamsid_L DBA-0560-060 xuyue
  */
 public class JukiRendoTorokuListReport extends Report<JukiRendoTorokuListReportSource> {
 

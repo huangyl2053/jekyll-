@@ -8,11 +8,14 @@ package jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.jushochit
 import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
+import jp.co.ndensan.reams.db.dbz.business.core.HihokenshaDaicho;
+import jp.co.ndensan.reams.db.dbz.business.core.HihokenshaDaichoBuilder;
 import jp.co.ndensan.reams.db.dbz.business.jushotitokure.JushotiTokureiBusiness;
 import jp.co.ndensan.reams.db.dbz.definition.core.enumeratedtype.ViewExecutionStatus;
 import jp.co.ndensan.reams.db.dbz.definition.core.shikakuidojiyu.ShikakuJutokuKaijoJiyu;
 import jp.co.ndensan.reams.db.dbz.definition.core.shikakuidojiyu.ShikakuJutokuTekiyoJiyu;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.jushochitokureirirekilist.JushochiTokureiRirekiList.JushochiTokureiRirekiListDiv.DisplayType;
+import jp.co.ndensan.reams.db.dbz.service.core.basic.HihokenshaDaichoManager;
 import jp.co.ndensan.reams.db.dbz.service.core.jushotitokurei.JushotiTokureiFinder;
 import jp.co.ndensan.reams.uz.uza.biz.CodeShubetsu;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
@@ -31,7 +34,7 @@ import jp.co.ndensan.reams.uz.uza.util.db.SearchResult;
 /**
  * 共有子Div「住所地特例履歴」の状態を変更するクラスです。
  *
- * @author n8178 城間篤人
+ * @reamsid_L DBA-0150-011 huangh
  */
 public class JushochiTokureiRirekiListHandler {
 
@@ -198,6 +201,8 @@ public class JushochiTokureiRirekiListHandler {
     private dgJutoku_Row add住所地特例履歴() {
         TextBoxDate shoriDate = new TextBoxDate();
         shoriDate.setValue(RDate.getNowDate());
+        TextBoxDate idoYmd = new TextBoxDate();
+        idoYmd.setValue(RDate.getNowDate());
         TextBoxFlexibleDate tekiyoDate = new TextBoxFlexibleDate();
         tekiyoDate.setValue(jutokuRirekiDiv.getTxtTekiyoDate().getValue());
         TextBoxFlexibleDate tekiyoTodokedeDate = new TextBoxFlexibleDate();
@@ -221,7 +226,9 @@ public class JushochiTokureiRirekiListHandler {
                 jutokuRirekiDiv.getDdlKaijoJiyu().getSelectedKey(),
                 RString.EMPTY,
                 RString.EMPTY,
-                shoriDate);
+                shoriDate,
+                idoYmd,
+                RString.EMPTY);
     }
 
     /**
@@ -270,6 +277,17 @@ public class JushochiTokureiRirekiListHandler {
                 }
                 row.setKaijoJiyuKey(jushotiTokureiBusiness.get解除事由コード());
                 //措置元保険者 旧保険者 処理日時
+                row.setEdaNo(jushotiTokureiBusiness.get枝番());
+                TextBoxDate idoYMD = new TextBoxDate();
+                idoYMD.setValue(new RDate(jushotiTokureiBusiness.get異動日().toString()));
+                row.setIdoYMD(idoYMD);
+                row.setSochimotoHokensha(jushotiTokureiBusiness.get措置元保険者().value());
+                row.setKyuHokensha(jushotiTokureiBusiness.get旧保険者().value());
+
+                TextBoxDate shoriDate = new TextBoxDate();
+                shoriDate.setValue(jushotiTokureiBusiness.get処理日時().getDate());
+                row.setShoriDate(shoriDate);
+                row.setHihokenshaNo(jushotiTokureiBusiness.get被保番号().value());
 
                 dgJutokuList.add(row);
             }
@@ -349,6 +367,40 @@ public class JushochiTokureiRirekiListHandler {
             dataSourceList.add(new KeyValueDataSource(codeValueObject.getコード().getKey(), codeValueObject.getコード略称()));
         }
         return dataSourceList;
+    }
+
+    /**
+     * 共有子Divの状態を初期化します。
+     *
+     * @return List<HihokenshaDaicho>
+     */
+    public List<HihokenshaDaicho> getDataList() {
+        List<dgJutoku_Row> dgJutokuList = jutokuRirekiDiv.getDgJutoku().getDataSource();
+        List<HihokenshaDaicho> returnList = new ArrayList<>();
+
+        for (dgJutoku_Row row : dgJutokuList) {
+            HihokenshaDaichoManager manager = new HihokenshaDaichoManager();
+
+            HihokenshaDaicho hihokenshaDaicho = manager.get被保険者台帳管理(
+                    new HihokenshaNo(row.getHihokenshaNo()), new FlexibleDate(row.getIdoYMD().getText()), row.getEdaNo());
+
+            if (hihokenshaDaicho == null) {
+                returnList.add(hihokenshaDaicho);
+                continue;
+            }
+            HihokenshaDaichoBuilder builder = hihokenshaDaicho.createBuilderForEdit();
+
+            builder.set適用年月日(row.getTekiyoDate().getValue());
+            builder.set適用届出年月日(row.getTekiyoTodokedeDate().getValue());
+            builder.set住所地特例適用事由コード(row.getTekiyoJiyuKey());
+            builder.set解除年月日(row.getKaijoDate().getValue());
+            builder.set解除届出年月日(row.getKaijoTodokedeDate().getValue());
+            builder.set住所地特例解除事由コード(row.getKaijoJiyuKey());
+
+            returnList.add(builder.build());
+
+        }
+        return returnList;
     }
 
     /**

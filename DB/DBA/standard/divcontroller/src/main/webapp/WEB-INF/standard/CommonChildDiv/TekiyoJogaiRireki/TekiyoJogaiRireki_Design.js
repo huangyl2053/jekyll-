@@ -4,6 +4,10 @@ var DBA;
         var Events = (function () {
             function Events() {
             }
+            Events.onClick_BtnAdd = function () {
+                return "onClick_BtnAdd";
+            };
+
             Events.onClick_Selected = function () {
                 return "onClick_Selected";
             };

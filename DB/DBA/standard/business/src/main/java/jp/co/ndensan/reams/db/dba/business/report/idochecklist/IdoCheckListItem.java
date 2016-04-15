@@ -9,8 +9,9 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 import lombok.Getter;
 
 /**
+ * 住基異動チェックリスト帳票Itemです。
  *
- * 住基連動登録リスト帳票IdoCheckListItemです。
+ * @reamsid_L DBA-0530-060 xuyue
  */
 @Getter
 @SuppressWarnings("PMD.UnusedPrivateField")

@@ -41,6 +41,8 @@ import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 /**
  *
  * 納入通知書制御情報取得クラス。
+ *
+ * @reamsid_L DBB-9110-011 wangjie2
  */
 public class NonyuTsuchiShoSeigyoJohoLoaderFinder {
 

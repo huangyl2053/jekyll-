@@ -13,6 +13,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 /**
  * 画面divデータクラスです。
  *
+ * @reamsid_L DBB-0820-020 xuyue
  */
 public class KaigoFukaTokuchoHeijunkaEntity {
 

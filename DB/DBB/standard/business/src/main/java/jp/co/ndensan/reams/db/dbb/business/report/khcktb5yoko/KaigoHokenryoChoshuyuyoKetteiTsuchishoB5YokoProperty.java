@@ -13,7 +13,7 @@ import jp.co.ndensan.reams.uz.uza.report.ReportPropertyBase;
 /**
  * 介護保険料徴収猶予決定通知書帳票B5横タイプKaigoHokenryoChoshuyuyoKetteiTsuchishoB5YokoProperty
  *
- * @reamsid_L DBC-0740-040 sunhui
+ * @reamsid_L DBB-0740-040 sunhui
  */
 public class KaigoHokenryoChoshuyuyoKetteiTsuchishoB5YokoProperty
         extends ReportPropertyBase<KaigoHokenryoChoshuyuyoKetteiTsuchishoB5YokoSource> {

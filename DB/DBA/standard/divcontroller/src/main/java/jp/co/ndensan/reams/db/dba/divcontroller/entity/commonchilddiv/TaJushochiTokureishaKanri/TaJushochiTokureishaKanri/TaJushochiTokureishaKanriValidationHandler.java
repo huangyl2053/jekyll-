@@ -60,13 +60,9 @@ public class TaJushochiTokureishaKanriValidationHandler {
                         validPairs.add(new ValidationMessageControlPair(RRVMessages.適用日と最新の適用情報の整合性チェック, div.getTxtTekiyobi()));
                     }
                 }
-                if (div.getTxtKaijyobi().getValue() == null) {
-                    validPairs.add(new ValidationMessageControlPair(RRVMessages.解除日, div.getTxtKaijyobi()));
-                } else {
-                    if (div.getDdlKaijyoJiyo().getSelectedKey() == null
-                            || div.getDdlKaijyoJiyo().getSelectedKey().isEmpty()) {
-                        validPairs.add(new ValidationMessageControlPair(RRVMessages.解除事由, div.getDdlKaijyoJiyo()));
-                    }
+                if (div.getTxtKaijyobi().getValue() != null && div.getDdlKaijyoJiyo().getSelectedKey() == null
+                        || div.getDdlKaijyoJiyo().getSelectedKey().isEmpty()) {
+                    validPairs.add(new ValidationMessageControlPair(RRVMessages.解除事由, div.getDdlKaijyoJiyo()));
                 }
                 if (div.getDdlTekiyoJiyo().getSelectedKey() == null
                         || div.getDdlTekiyoJiyo().getSelectedKey().isEmpty()) {

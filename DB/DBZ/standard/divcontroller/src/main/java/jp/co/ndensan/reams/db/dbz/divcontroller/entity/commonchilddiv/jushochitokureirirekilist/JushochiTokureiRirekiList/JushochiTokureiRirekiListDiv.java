@@ -8,7 +8,9 @@ package jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.jushochit
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import java.util.HashSet;
+import java.util.List;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
+import jp.co.ndensan.reams.db.dbz.business.core.HihokenshaDaicho;
 import jp.co.ndensan.reams.db.dbz.definition.core.enumeratedtype.ViewExecutionStatus;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
@@ -25,11 +27,11 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets._CommonChildDivModeUtil;
 /**
  * JushochiTokureiRirekiList のクラスファイル
  *
- * @author 自動生成
+ * @reamsid_L DBA-0150-011 huangh
  */
 public class JushochiTokureiRirekiListDiv extends Panel implements IJushochiTokureiRirekiListDiv {
 
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：バージョン情報無し">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -95,7 +97,6 @@ public class JushochiTokureiRirekiListDiv extends Panel implements IJushochiToku
      * @return JutokuInput
      */
     @JsonProperty("JutokuInput")
-    @Override
     public JutokuInputDiv getJutokuInput() {
         return JutokuInput;
     }
@@ -544,5 +545,11 @@ public class JushochiTokureiRirekiListDiv extends Panel implements IJushochiToku
 
     public void setExecutionStatus(ViewExecutionStatus status) {
         this.setExecutionStatus(status.getValue());
+    }
+
+    @Override
+    public List<HihokenshaDaicho> getDataList() {
+        JushochiTokureiRirekiListHandler handler = new JushochiTokureiRirekiListHandler(this);
+        return handler.getDataList();
     }
 }

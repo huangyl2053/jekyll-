@@ -8,8 +8,9 @@ package jp.co.ndensan.reams.db.dba.business.report.idochecklist;
 import jp.co.ndensan.reams.db.dba.entity.report.idochecklist.IdoCheckListReportSource;
 
 /**
+ * 住基異動チェックリスト帳票IdoCheckListBodyEditorです。
  *
- * 住基連動登録リスト帳票IdoCheckListBodyEditorです。
+ * @reamsid_L DBA-0530-060 xuyue
  */
 class IdoCheckListBodyEditor implements IIdoCheckListEditor {
 

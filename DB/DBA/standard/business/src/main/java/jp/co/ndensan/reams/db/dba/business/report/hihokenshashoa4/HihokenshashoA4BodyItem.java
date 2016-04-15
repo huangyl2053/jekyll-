@@ -10,8 +10,8 @@ import lombok.Getter;
 
 /**
  * 介護保険被保険者証リスト一覧表情報です。
- * 
- * @reamsid_L DBU-0490-070  suguangjun 
+ *
+ * @reamsid_L DBU-0490-070 suguangjun
  */
 @Getter
 @SuppressWarnings("PMD.UnusedPrivateField")
@@ -28,13 +28,11 @@ public class HihokenshashoA4BodyItem {
     private final RString hihoname;
     private final RString umareG;
     private final RString umareYyyy;
+    private final RString umareYy;
     private final RString umareMm;
     private final RString umareDd;
     private final RString seibetsu;
-    private final RString kofuymdGengo;
-    private final RString kofuymdYy;
-    private final RString kofuymdMm;
-    private final RString kofuymdDd;
+    private final RString kofuymd;
     private final RString saikofu1;
     private final RString hokenshano1;
     private final RString hokenshano2;
@@ -148,12 +146,10 @@ public class HihokenshashoA4BodyItem {
      * @param hihoname 氏名
      * @param umareG 生年月日の年号
      * @param umareYyyy 生年月日の年
+     * @param umareYy 生年月日の年
      * @param umareMm 生年月日の月
      * @param umareDd 生年月日の日
-     * @param kofuymdGengo 交付年月日の年号
-     * @param kofuymdYy 交付年月日の年
-     * @param kofuymdMm 交付年月日の月
-     * @param kofuymdDd 交付年月日の日
+     * @param kofuymd 交付年月日の年号
      * @param seibetsu 性別
      * @param saikofu1 再交付1
      * @param hokenshano1 保険者NO1
@@ -265,13 +261,11 @@ public class HihokenshashoA4BodyItem {
             RString hihoname,
             RString umareG,
             RString umareYyyy,
+            RString umareYy,
             RString umareMm,
             RString umareDd,
             RString seibetsu,
-            RString kofuymdGengo,
-            RString kofuymdYy,
-            RString kofuymdMm,
-            RString kofuymdDd,
+            RString kofuymd,
             RString saikofu1,
             RString hokenshano1,
             RString hokenshano2,
@@ -381,13 +375,11 @@ public class HihokenshashoA4BodyItem {
         this.hihoname = hihoname;
         this.umareG = umareG;
         this.umareYyyy = umareYyyy;
+        this.umareYy = umareYy;
         this.umareMm = umareMm;
         this.umareDd = umareDd;
         this.seibetsu = seibetsu;
-        this.kofuymdGengo = kofuymdGengo;
-        this.kofuymdYy = kofuymdYy;
-        this.kofuymdMm = kofuymdMm;
-        this.kofuymdDd = kofuymdDd;
+        this.kofuymd = kofuymd;
         this.saikofu1 = saikofu1;
         this.hokenshano1 = hokenshano1;
         this.hokenshano2 = hokenshano2;

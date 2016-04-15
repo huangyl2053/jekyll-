@@ -11,7 +11,7 @@ import jp.co.ndensan.reams.uz.uza.report.IReportBuilder;
 /**
  * 介護保険料徴収猶予決定通知書A4縦タイプBuilderのインターフェースクラスです。
  *
- * @reamsid_L DBC-0740-040 sunhui
+ * @reamsid_L DBB-0740-040 sunhui
  */
 public interface IKaigoHokenryoChoshuyuyoKetteiTsuchishoA4TateBuider
         extends IReportBuilder<KaigoHokenryoChoshuyuyoKetteiTsuchishoA4TateSource> {

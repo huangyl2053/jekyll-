@@ -22,6 +22,7 @@ import jp.co.ndensan.reams.db.dbz.business.core.ShisetsuNyutaisho;
 import jp.co.ndensan.reams.db.dbz.business.core.ShisetsuNyutaishoIdentifier;
 import jp.co.ndensan.reams.db.dbz.business.core.TekiyoJogaisha;
 import jp.co.ndensan.reams.db.dbz.business.core.TekiyoJogaishaIdentifier;
+import jp.co.ndensan.reams.db.dbz.definition.core.ViewStateKeys;
 import jp.co.ndensan.reams.ua.uax.entity.db.basic.UaFt200FindShikibetsuTaishoEntity;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.CodeShubetsu;
@@ -54,6 +55,8 @@ public class TekiyoJogaiRirekiHandler {
     private static final RString 状態_照会 = new RString("照会モード");
     private static final RString 除外者解除 = new RString("除外者解除");
     private static final RString 除外者 = new RString("除外者");
+    private static final RString 台帳種別表示無し = new RString("台帳種別表示無し");
+    private static final RString 適用除外者 = new RString("適用除外者");
     private static final int PADZERO = 4;
     private static final CodeShubetsu 介護除外適用理由 = new CodeShubetsu("0119");
     private static final CodeShubetsu 介護除外解除理由 = new CodeShubetsu("0123");
@@ -228,7 +231,10 @@ public class TekiyoJogaiRirekiHandler {
                         Models.class);
         List<datagridTekiyoJogai_Row> rowList = div.getDatagridTekiyoJogai().getDataSource();
         ShikibetsuCode 識別コード = new ShikibetsuCode(div.getHiddenInputShikibetsuCode());
-        FlexibleDate 異動日 = new FlexibleDate(選択データ.getIdoYMD());
+        FlexibleDate 異動日 = FlexibleDate.EMPTY;
+        if (!状態_追加.equals(div.getStauts())) {
+            異動日 = new FlexibleDate(選択データ.getIdoYMD());
+        }
         RString 最大枝番;
         RString 最新履歴番号;
         RString 枝番;
@@ -237,14 +243,14 @@ public class TekiyoJogaiRirekiHandler {
             最大枝番 = rowList.get(0).getEdaNo();
             最新履歴番号 = rowList.get(0).getRirekiNo();
             int rirekiNoMax = Integer.parseInt(最新履歴番号.toString());
-            枝番 = new RString(String.valueOf(Integer.valueOf(最大枝番.toString()) + 1)).padZeroToLeft(PADZERO);
+            枝番 = new RString(String.valueOf(Integer.valueOf(最大枝番.toString().trim()) + 1)).padZeroToLeft(PADZERO);
             履歴番号 = new RString(String.valueOf(rirekiNoMax + 1));
         } else {
             rowList = new ArrayList();
             枝番 = new RString("0001");
             履歴番号 = new RString("1");
         }
-        if (状態_修正.equals(画面状態) || 状態_訂正履歴.equals(画面状態)) {
+        if (状態_訂正履歴.equals(画面状態) || 状態_修正.equals(div.getStauts())) {
             if (!状態_削除.equals(選択データ.getStatus())) {
                 if (状態_追加.equals(選択データ.getStatus())) {
                     選択データ.setStatus(選択データ.getStatus());
@@ -270,7 +276,8 @@ public class TekiyoJogaiRirekiHandler {
             row.setTekiyoJiyuCode(div.getPanelTekiyoJokaiTekiInput().getDdlTekiyoJiyuInput().getSelectedKey());
             row.setTekiyoJiyu(div.getPanelTekiyoJokaiTekiInput().getDdlTekiyoJiyuInput().getSelectedValue());
             row.setNyuShoDate(div.getPanelTekiyoJokaiTekiInput().getTxtNyusyoDateInput());
-            row.setNyuShoShisetu(div.getPanelTekiyoJokaiTekiInput().getCcdShisetsuJoho().getNyuryokuShisetsuKodo());
+            row.setNyushoShisetsuCode(div.getPanelTekiyoJokaiTekiInput().getCcdShisetsuJoho().getNyuryokuShisetsuKodo());
+            row.setNyuShoShisetu(div.getPanelTekiyoJokaiTekiInput().getCcdShisetsuJoho().getNyuryokuShisetsuMeisho());
             row.setDaichoShubetsu(div.getPanelTekiyoJokaiTekiInput().getCcdShisetsuJoho().getDaichoShubetsu());
             row.setShisetsuShurui(div.getPanelTekiyoJokaiTekiInput().getCcdShisetsuJoho().get施設種類());
             rowList.add(row);
@@ -281,7 +288,7 @@ public class TekiyoJogaiRirekiHandler {
                                     div.getPanelTekiyoJokaiTekiInput().getTxtTekiyoDateInput().getValue().toString()), 枝番);
             適用除外者Model.add(適用除外者の識別子);
             Collections.sort(rowList, new DateComparator());
-        } else if (状態_追加.equals(画面状態)) {
+        } else if (状態_追加.equals(div.getStauts())) {
             datagridTekiyoJogai_Row row = new datagridTekiyoJogai_Row();
             row.setStatus(状態_追加);
             row.setTekiyoDate(div.getPanelTekiyoInput().getTxtTekiyoDate());
@@ -298,7 +305,7 @@ public class TekiyoJogaiRirekiHandler {
                                     div.getPanelTekiyoInput().getTxtKaijoTodokedeDate().getValue().toString()), 枝番);
             適用除外者Model.add(適用除外者の識別子);
             Collections.sort(rowList, new DateComparator());
-        } else if (状態_削除.equals(画面状態)) {
+        } else if (状態_削除.equals(div.getStauts())) {
             if (状態_追加.equals(選択データ.getStatus())) {
                 rowList.remove(選択データ);
             } else {
@@ -508,8 +515,10 @@ public class TekiyoJogaiRirekiHandler {
             }
             if (適用除外者情報.get事業者名称() != null && !適用除外者情報.get事業者名称().isEmpty()) {
                 row.setNyuShoShisetu(適用除外者情報.get事業者名称().getColumnValue());
+                row.setNyushoShisetsuCode(適用除外者情報.get入所施設コード().getColumnValue());
             } else {
                 row.setNyuShoShisetu(RString.EMPTY);
+                row.setNyushoShisetsuCode(RString.EMPTY);
             }
             row.setDaichoShubetsu(適用除外者情報.get台帳種別());
             row.setShisetsuShurui(適用除外者情報.get入所施設種類());
@@ -594,6 +603,8 @@ public class TekiyoJogaiRirekiHandler {
         div.getPanelTekiyoJokaiTekiInput().getTxtTkyoTododkDateIn().clearValue();
         div.getPanelTekiyoJokaiTekiInput().getDdlTekiyoJiyuInput().setDataSource(set適用事由());
         div.getPanelTekiyoJokaiTekiInput().getDdlTekiyoJiyuInput().setSelectedValue(RString.EMPTY);
+        ViewStateHolder.put(ViewStateKeys.台帳種別表示, 台帳種別表示無し);
+        ViewStateHolder.put(ViewStateKeys.適用除外者, 適用除外者);
         div.getPanelTekiyoJokaiTekiInput().getCcdShisetsuJoho().initialize();
     }
 
@@ -652,19 +663,20 @@ public class TekiyoJogaiRirekiHandler {
     }
 
     private void clear適用除外情報入力エリア(RString 画面状態) {
-        if (状態_適用登録.equals(画面状態)) {
+        RString 画面モード = new RString(div.getMode_DisplayMode().toString());
+        if (状態_適用登録.equals(画面モード)) {
             div.getPanelTekiyoJokaiTekiInput().getTxtNyusyoDateInput().clearValue();
             div.getPanelTekiyoJokaiTekiInput().getTxtTekiyoDateInput().clearValue();
             div.getPanelTekiyoJokaiTekiInput().getTxtTkyoTododkDateIn().clearValue();
             div.getPanelTekiyoJokaiTekiInput().getDdlTekiyoJiyuInput().setSelectedValue(RString.EMPTY);
             div.getPanelTekiyoJokaiTekiInput().getCcdShisetsuJoho().clear();
             div.getBtnAdd().setDisabled(false);
-        } else if (状態_解除.equals(画面状態)) {
+        } else if (状態_解除.equals(画面モード)) {
             div.getPanelTekiyoJokaiKaiJyoInput().getTxtTaisyoDateInput().clearValue();
             div.getPanelTekiyoJokaiKaiJyoInput().getTxtKaijoDateInput().clearValue();
             div.getPanelTekiyoJokaiKaiJyoInput().getTxtKaijoTododkDateIn().clearValue();
             div.getPanelTekiyoJokaiKaiJyoInput().getDdlKaijoJiyuInput().setSelectedValue(RString.EMPTY);
-        } else if (状態_追加.equals(画面状態) || 状態_訂正履歴.equals(画面状態) || 状態_修正.equals(画面状態)) {
+        } else if (状態_訂正履歴.equals(画面モード) || 状態_追加.equals(画面状態) || 状態_修正.equals(画面状態)) {
             div.getPanelTekiyoInput().getDdlTekiyoJiyu().setDataSource(set適用事由());
             div.getPanelTekiyoInput().getDdlKaijyoJiyu().setDataSource(set解除事由());
             div.getPanelTekiyoInput().getTxtTekiyoDate().clearValue();

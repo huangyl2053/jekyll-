@@ -13,6 +13,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 /**
  * batchParameterクラスです。
  *
+ * @reamsid_L DBB-0820-020 xuyue
  */
 public class TokuchoHeijunka6BatchParameterEntity {
 

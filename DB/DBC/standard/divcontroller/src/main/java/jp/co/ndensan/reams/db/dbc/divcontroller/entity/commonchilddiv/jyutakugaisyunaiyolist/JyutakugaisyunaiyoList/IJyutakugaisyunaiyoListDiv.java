@@ -1,5 +1,7 @@
 package jp.co.ndensan.reams.db.dbc.divcontroller.entity.commonchilddiv.jyutakugaisyunaiyolist.JyutakugaisyunaiyoList;
 
+import java.util.List;
+import jp.co.ndensan.reams.db.dbc.business.core.jyutakugaisyunaiyolist.JyutakugaisyunaiyoListDataPassModel;
 import jp.co.ndensan.reams.uz.uza.ui.binding.ICommonChildDivBaseProperties;
 
 /*
@@ -9,4 +11,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.ICommonChildDivBaseProperties;
  */
 public interface IJyutakugaisyunaiyoListDiv extends ICommonChildDivBaseProperties {
 
+    public void initialize(JyutakugaisyunaiyoListDataPassModel model);
+
+    public List<dgGaisyuList_Row> get住宅改修内容一覧();
 }

@@ -55,13 +55,20 @@ public class TekiyoJogaiRirekiValidationHandler {
         }
         if (!状態_削除.equals(div.getStauts())) {
             if (状態_適用登録.equals(画面状態)) {
+                if (div.getPanelTekiyoJokaiTekiInput().getTxtNyusyoDateInput().getValue() == null) {
+                    validPairs.add(new ValidationMessageControlPair(RRVMessages.入所日,
+                            div.getPanelTekiyoJokaiTekiInput().getTxtNyusyoDateInput()));
+                }
+                if (RString.isNullOrEmpty(div.getPanelTekiyoJokaiTekiInput().getCcdShisetsuJoho().getNyuryokuShisetsuKodo())) {
+                    validPairs.add(new ValidationMessageControlPair(RRVMessages.入所施設コード));
+                }
                 if (div.getPanelTekiyoJokaiTekiInput().getTxtTekiyoDateInput().getValue() == null) {
                     validPairs.add(new ValidationMessageControlPair(RRVMessages.適用日,
                             div.getPanelTekiyoJokaiTekiInput().getTxtTekiyoDateInput()));
                 } else {
                     if (最新の適用情報.getTekiyoDate() != null
-                            && (!最新の適用情報.getTekiyoDate().getValue().isBefore(
-                                    div.getPanelTekiyoJokaiTekiInput().getTxtTekiyoDateInput().getValue()))) {
+                            && (div.getPanelTekiyoJokaiTekiInput().getTxtTekiyoDateInput().getValue().isBeforeOrEquals(
+                                    最新の適用情報.getTekiyoDate().getValue()))) {
                         validPairs.add(new ValidationMessageControlPair(RRVMessages.期間が重複));
                     }
                 }
@@ -70,13 +77,13 @@ public class TekiyoJogaiRirekiValidationHandler {
                     validPairs.add(new ValidationMessageControlPair(RRVMessages.適用事由,
                             div.getPanelTekiyoJokaiTekiInput().getDdlTekiyoJiyuInput()));
                 }
-            } else if (状態_追加.equals(画面状態) || 状態_修正.equals(画面状態) || 状態_訂正履歴.equals(画面状態)) {
+            } else if (状態_追加.equals(div.getStauts()) || 状態_修正.equals(div.getStauts()) || 状態_訂正履歴.equals(画面状態)) {
                 if (div.getPanelTekiyoInput().getTxtTekiyoDate().getValue() == null) {
                     validPairs.add(new ValidationMessageControlPair(RRVMessages.適用日,
                             div.getPanelTekiyoInput().getTxtTekiyoDate()));
                 } else {
                     if (最新の適用情報.getTekiyoDate() != null
-                            && (!div.getPanelTekiyoInput().getTxtTekiyoDate().getValue().isBefore(
+                            && (div.getPanelTekiyoInput().getTxtTekiyoDate().getValue().isBefore(
                                     最新の適用情報.getTekiyoDate().getValue()))) {
                         validPairs.add(new ValidationMessageControlPair(
                                 RRVMessages.適用日と直近データの適用日の整合性チェック,
@@ -89,7 +96,7 @@ public class TekiyoJogaiRirekiValidationHandler {
                             div.getPanelTekiyoInput().getDdlTekiyoJiyu()));
                 }
             }
-            if (状態_追加.equals(画面状態) || 状態_修正.equals(画面状態) || 状態_訂正履歴.equals(画面状態)) {
+            if (状態_追加.equals(div.getStauts()) || 状態_修正.equals(div.getStauts()) || 状態_訂正履歴.equals(画面状態)) {
                 if (div.getPanelTekiyoInput().getTxtKayijoDate().getValue() == null) {
                     validPairs.add(new ValidationMessageControlPair(
                             RRVMessages.解除日, div.getPanelTekiyoInput().getTxtKayijoDate()));
@@ -105,8 +112,8 @@ public class TekiyoJogaiRirekiValidationHandler {
                             RRVMessages.解除日, div.getPanelTekiyoJokaiKaiJyoInput().getTxtKaijoDateInput()));
                 } else {
                     if (最新の適用情報.getTekiyoDate() != null
-                            && (!最新の適用情報.getTekiyoDate().getValue().isBefore(
-                                    div.getPanelTekiyoJokaiKaiJyoInput().getTxtKaijoDateInput().getValue()))) {
+                            && (div.getPanelTekiyoJokaiKaiJyoInput().getTxtKaijoDateInput().getValue().isBeforeOrEquals(
+                                    最新の適用情報.getTekiyoDate().getValue()))) {
                         validPairs.add(new ValidationMessageControlPair(RRVMessages.期間が重複));
                     }
                 }
@@ -116,21 +123,31 @@ public class TekiyoJogaiRirekiValidationHandler {
                             RRVMessages.解除事由, div.getPanelTekiyoJokaiKaiJyoInput().getDdlKaijoJiyuInput()));
                 }
             }
-            if ((状態_追加.equals(画面状態) || 状態_修正.equals(画面状態) || 状態_訂正履歴.equals(画面状態))
-                    && div.getPanelTekiyoInput().getTxtKayijoDate().getValue().isBefore(
-                            div.getPanelTekiyoInput().getTxtTekiyoDate().getValue())) {
-                validPairs.add(new ValidationMessageControlPair(
-                        RRVMessages.適用日と解除日の整合性チェック, div.getPanelTekiyoInput().getTxtTekiyoDate(),
-                        div.getPanelTekiyoInput().getTxtKayijoDate()));
-            }
-            if ((状態_追加.equals(画面状態) || 状態_修正.equals(画面状態) || 状態_訂正履歴.equals(画面状態))
-                    && div.getPanelTekiyoInput().getTxtTekiyoDate().getValue() != null
-                    && div.getPanelTekiyoInput().getTxtTekiyoTodokeDate().getValue() != null
-                    && div.getPanelTekiyoInput().getTxtTekiyoDate().getValue().isBefore(
-                            div.getPanelTekiyoInput().getTxtTekiyoTodokeDate().getValue())) {
-                validPairs.add(new ValidationMessageControlPair(
-                        RRVMessages.適用日と適用届出日の整合性チェック, div.getPanelTekiyoInput().getTxtTekiyoTodokeDate(),
-                        div.getPanelTekiyoInput().getTxtTekiyoDate()));
+            if ((状態_追加.equals(div.getStauts()) || 状態_修正.equals(div.getStauts()) || 状態_訂正履歴.equals(画面状態))) {
+                if (div.getPanelTekiyoInput().getTxtTekiyoDate().getValue() != null
+                        && div.getPanelTekiyoInput().getTxtKayijoDate().getValue() != null
+                        && div.getPanelTekiyoInput().getTxtKayijoDate().getValue().isBefore(
+                                div.getPanelTekiyoInput().getTxtTekiyoDate().getValue())) {
+                    validPairs.add(new ValidationMessageControlPair(
+                            RRVMessages.適用日と解除日の整合性チェック, div.getPanelTekiyoInput().getTxtTekiyoDate(),
+                            div.getPanelTekiyoInput().getTxtKayijoDate()));
+                }
+                if (div.getPanelTekiyoInput().getTxtTekiyoDate().getValue() != null
+                        && div.getPanelTekiyoInput().getTxtTekiyoTodokeDate().getValue() != null
+                        && div.getPanelTekiyoInput().getTxtTekiyoDate().getValue().isBefore(
+                                div.getPanelTekiyoInput().getTxtTekiyoTodokeDate().getValue())) {
+                    validPairs.add(new ValidationMessageControlPair(
+                            RRVMessages.適用日と適用届出日の整合性チェック, div.getPanelTekiyoInput().getTxtTekiyoTodokeDate(),
+                            div.getPanelTekiyoInput().getTxtTekiyoDate()));
+                }
+                if (div.getPanelTekiyoInput().getTxtKayijoDate().getValue() != null
+                        && div.getPanelTekiyoInput().getTxtKaijoTodokedeDate().getValue() != null
+                        && div.getPanelTekiyoInput().getTxtKayijoDate().getValue().isBefore(
+                                div.getPanelTekiyoInput().getTxtKaijoTodokedeDate().getValue())) {
+                    validPairs.add(new ValidationMessageControlPair(
+                            RRVMessages.解除日と解除届出日の整合性チェック, div.getPanelTekiyoInput().getTxtKaijoTodokedeDate(),
+                            div.getPanelTekiyoInput().getTxtKayijoDate()));
+                }
             } else if (状態_適用登録.equals(画面状態)
                     && div.getPanelTekiyoJokaiTekiInput().getTxtTekiyoDateInput().getValue() != null
                     && div.getPanelTekiyoJokaiTekiInput().getTxtTkyoTododkDateIn().getValue() != null
@@ -140,15 +157,6 @@ public class TekiyoJogaiRirekiValidationHandler {
                         RRVMessages.適用日と適用届出日の整合性チェック,
                         div.getPanelTekiyoJokaiTekiInput().getTxtTkyoTododkDateIn(),
                         div.getPanelTekiyoJokaiTekiInput().getTxtTekiyoDateInput()));
-            }
-            if ((状態_追加.equals(画面状態) || 状態_修正.equals(画面状態) || 状態_訂正履歴.equals(画面状態))
-                    && div.getPanelTekiyoInput().getTxtKayijoDate().getValue() != null
-                    && div.getPanelTekiyoInput().getTxtKaijoTodokedeDate().getValue() != null
-                    && div.getPanelTekiyoInput().getTxtKayijoDate().getValue().isBefore(
-                            div.getPanelTekiyoInput().getTxtKaijoTodokedeDate().getValue())) {
-                validPairs.add(new ValidationMessageControlPair(
-                        RRVMessages.解除日と解除届出日の整合性チェック, div.getPanelTekiyoInput().getTxtKaijoTodokedeDate(),
-                        div.getPanelTekiyoInput().getTxtKayijoDate()));
             } else if (状態_解除.equals(画面状態)
                     && div.getPanelTekiyoJokaiKaiJyoInput().getTxtKaijoDateInput().getValue() != null
                     && div.getPanelTekiyoJokaiKaiJyoInput().getTxtKaijoTododkDateIn().getValue() != null
@@ -193,8 +201,8 @@ public class TekiyoJogaiRirekiValidationHandler {
                     validPairs.add(new ValidationMessageControlPair(RRVMessages.解除日,
                             div.getPanelTekiyoInput().getTxtKayijoDate()));
                 } else {
-                    if (!div.getPanelTekiyoInput().getTxtKayijoDate().getValue().isBefore(
-                            row.getTekiyoDate().getValue())) {
+                    if (row.getTekiyoDate().getValue().isBeforeOrEquals(
+                            div.getPanelTekiyoInput().getTxtKayijoDate().getValue())) {
                         validPairs.add(new ValidationMessageControlPair(RRVMessages.期間が重複));
                     }
                 }
@@ -229,6 +237,8 @@ public class TekiyoJogaiRirekiValidationHandler {
         解除日(UrErrorMessages.必須, "解除日"),
         適用事由(UrErrorMessages.必須, "適用事由"),
         解除事由(UrErrorMessages.必須, "解除事由"),
+        入所日(UrErrorMessages.必須, "入所日"),
+        入所施設コード(UrErrorMessages.必須, "入所施設コード"),
         適用日と解除日の整合性チェック(DbzErrorMessages.期間が不正_未来日付不可, メッセージ適用日.toString(), "解除日"),
         適用日と適用届出日の整合性チェック(DbzErrorMessages.期間が不正_未来日付不可, "適用届出日", メッセージ適用日.toString()),
         解除日と解除届出日の整合性チェック(DbzErrorMessages.期間が不正_未来日付不可, "解除届出日", "解除日"),

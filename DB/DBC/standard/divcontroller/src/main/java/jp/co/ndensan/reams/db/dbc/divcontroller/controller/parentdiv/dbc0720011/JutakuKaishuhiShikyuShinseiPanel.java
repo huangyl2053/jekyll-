@@ -236,7 +236,20 @@ public class JutakuKaishuhiShikyuShinseiPanel {
     public ResponseData<JutakuKaishuhiShikyuShinseiPanelDiv> onSelectByModifyButton(JutakuKaishuhiShikyuShinseiPanelDiv div) {
         RDate 支給申請日開始 = div.getSearchConditionToMishinsaShikyuShinseiPanel().getTxtShikyuShinseiDate().getFromValue();
         RDate 支給申請日終了 = div.getSearchConditionToMishinsaShikyuShinseiPanel().getTxtShikyuShinseiDate().getToValue();
-        List<dgMishinsaShikyuShinsei_Row> list = div.getMishinsaShikyuShinseiListPanel().getDgMishinsaShikyuShinsei().getDataSource();
+        List<MiShinsaSikyuShinsei> viewStateList = ViewStateHolder.get(JutakuKaishuhiShikyuShinseiKeys.未審査支給申請一覧,
+                List.class);
+        int i = 0;
+        for (dgMishinsaShikyuShinsei_Row e : div.getMishinsaShikyuShinseiListPanel().getDgMishinsaShikyuShinsei().getDataSource()) {
+            ShokanShinsei entity = viewStateList.get(i).getEntity().createBuilderForEdit().set住宅住所変更(e.getTxtTenkyoReset()).
+                    set要介護状態３段階変更(e.getTxt3DankaiReset()).build();
+            if (承認する.equals(e.getTxtShinsaResult())) {
+                entity = entity.createBuilderForEdit().set審査結果(ShinsaNaiyoKubun.承認する.getコード()).build();
+            } else if (却下する.equals(e.getTxtShinsaResult())) {
+                entity = entity.createBuilderForEdit().set審査結果(ShinsaNaiyoKubun.却下する.getコード()).build();
+            }
+            viewStateList.get(i).setEntity(entity);
+            i = i + 1;
+        }
         dgMishinsaShikyuShinsei_Row row = div.getMishinsaShikyuShinseiListPanel().getDgMishinsaShikyuShinsei().getClickedItem();
         HihokenshaNo 被保険者番号 = new HihokenshaNo(row.getTxtHihoNo());
         FlexibleYearMonth サービス提供年月 = new FlexibleYearMonth(row.getTxtTeikyoYM().getValue().toDateString()
@@ -244,7 +257,7 @@ public class JutakuKaishuhiShikyuShinseiPanel {
         RString 整理番号 = row.getTxtSeiriNo().getValue();
         ViewStateHolder.put(JutakuKaishuhiShikyuShinseiKeys.支給申請日From, 支給申請日開始);
         ViewStateHolder.put(JutakuKaishuhiShikyuShinseiKeys.支給申請日To, 支給申請日終了);
-        ViewStateHolder.put(JutakuKaishuhiShikyuShinseiKeys.申請一覧GridEntity, (Serializable) list);
+        ViewStateHolder.put(JutakuKaishuhiShikyuShinseiKeys.申請一覧GridEntity, (Serializable) viewStateList);
         ViewStateHolder.put(JutakuKaishuhiShikyuShinseiKeys.被保険者番号, 被保険者番号);
         ViewStateHolder.put(JutakuKaishuhiShikyuShinseiKeys.サービス提供年月, サービス提供年月);
         ViewStateHolder.put(JutakuKaishuhiShikyuShinseiKeys.整理番号, 整理番号);

@@ -36,6 +36,7 @@
                     AND T1."logicalDeletedFlag" = #{論理削除フラグ}
              GROUP BY
                     T1."shikibetsuCode",
+                    T1."tekiyoYMD",
                     T1."idoYMD") AS T2
         WHERE
             TekiyoJogaisha."shikibetsuCode" = T2."shikibetsuCode"

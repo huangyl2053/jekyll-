@@ -12,8 +12,9 @@ import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
 import lombok.NonNull;
 
 /**
+ * 異動チェックリスト帳票作成。
  *
- * 異動チェックリスト帳票作成
+ * @reamsid_L DBA-0530-060 xuyue
  */
 public class IdoCheckListReport extends Report<IdoCheckListReportSource> {
 

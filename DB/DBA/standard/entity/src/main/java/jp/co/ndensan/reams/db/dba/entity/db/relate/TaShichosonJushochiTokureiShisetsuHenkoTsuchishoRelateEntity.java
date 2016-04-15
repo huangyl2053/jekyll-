@@ -12,6 +12,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 /**
  * 介護除外住所地特例対象施設情報&宛名データ情報クラスです。
  *
+ * @reamsid_L DBA-0380-040 huangh
  */
 @lombok.Getter
 @lombok.Setter

@@ -9,8 +9,9 @@ import jp.co.ndensan.reams.db.dba.entity.report.nenreitotatsukakuninlist.Nenreit
 import jp.co.ndensan.reams.uz.uza.report.IReportBuilder;
 
 /**
- *
  * 年齢到達者登録リストBuilderのインターフェースクラスです。
+ *
+ * @reamsid_L DBA-0570-060 xuyue
  */
 interface INenreitotatsuKakuninListBuilder extends IReportBuilder<NenreitotatsuKakuninListReportSource> {
 

@@ -9,6 +9,10 @@ module DBA {
 
         export class Events {
 
+            public static onClick_BtnAdd(): string {
+                return "onClick_BtnAdd";
+            }
+
             public static onClick_Selected(): string {
                 return "onClick_Selected";
             }

@@ -10,7 +10,7 @@ import jp.co.ndensan.reams.db.dbb.entity.db.report.khcktb5yoko.KaigoHokenryoChos
 /**
  * 介護保険料徴収猶予決定通知書B5横タイプCompSofubutsuAtesakiEditor
  *
- * @reamsid_L DBC-0740-040 sunhui
+ * @reamsid_L DBB-0740-040 sunhui
  */
 public class CompSofubutsuAtesakiB5Editor implements IKaigoHokenryoChoshuyuyoKetteiTsuchishoB5YokoEditor {
 

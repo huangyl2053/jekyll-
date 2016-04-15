@@ -10,6 +10,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 /**
  * 他住特施設連絡票データEntity
  *
+ * @reamsid_L DBA-0380-050 huangh
  */
 @lombok.Getter
 @lombok.Setter

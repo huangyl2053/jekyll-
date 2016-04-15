@@ -15,6 +15,7 @@ import lombok.Setter;
 /**
  * 他住特施設退所通知書データ作成の宛名識別取得のMyBatis用パラメータクラスです。
  *
+ * @reamsid_L DBA-0380-050 huangh
  */
 @SuppressWarnings("PMD.UnusedPrivateField")
 @Getter

@@ -10,6 +10,8 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
  * 裁決結果明細情報です。
+ *
+ * @reamsid_L DBU-1080-120 xuyue
  */
 @lombok.Getter
 @lombok.Setter

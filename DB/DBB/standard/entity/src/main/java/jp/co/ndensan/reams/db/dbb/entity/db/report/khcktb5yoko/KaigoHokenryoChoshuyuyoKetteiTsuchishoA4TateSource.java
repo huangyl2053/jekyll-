@@ -7,7 +7,7 @@ import jp.co.ndensan.reams.uz.uza.report.source.ReportItem;
 /**
  * 介護保険料徴収猶予決定通知書A4縦タイプ帳票Sourceです。
  *
- * @reamsid_L DBC-0740-040 sunhui
+ * @reamsid_L DBB-0740-040 sunhui
  */
 public class KaigoHokenryoChoshuyuyoKetteiTsuchishoA4TateSource implements IReportSource {
 // <editor-fold defaultstate="collapsed" desc="Generated Code">
@@ -40,8 +40,8 @@ public class KaigoHokenryoChoshuyuyoKetteiTsuchishoA4TateSource implements IRepo
     public RString hihokenshaNo;
     @ReportItem(name = "shikibetsuCode", length = 15, order = 14)
     public RString shikibetsuCode;
-    @ReportItem(name = "KetteiYMD", length = 11, order = 15)
-    public RString KetteiYMD;
+    @ReportItem(name = "ketteiYMD", length = 11, order = 15)
+    public RString ketteiYMD;
     @ReportItem(name = "ketteiRiyu1", length = 30, order = 16)
     public RString ketteiRiyu1;
     @ReportItem(name = "ketteiRiyu2", length = 30, order = 17)

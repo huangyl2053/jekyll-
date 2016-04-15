@@ -28,6 +28,7 @@ import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 /**
  * 特徴平準化（特徴6月分）のビジネスクラスです。
  *
+ * @reamsid_L DBB-0820-020 xuyue
  */
 public class KaigoFukaTokuchoHeijunka6 {
 

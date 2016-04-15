@@ -13,13 +13,19 @@ import jp.co.ndensan.reams.db.dba.business.report.tekiyojogaishadaicho.Tekiyojog
 import jp.co.ndensan.reams.db.dba.divcontroller.entity.parentdiv.DBA4030011.TeikiyoJogaishaShokaiDiv;
 import jp.co.ndensan.reams.db.dba.service.core.tekiyojogaishadaichojoho.TekiyoJogaishaDaichoJohoFinder;
 import jp.co.ndensan.reams.db.dba.service.report.tekiyojogaishadaicho.TekiyojogaishaDaichoPrintService;
-import jp.co.ndensan.reams.db.dbz.definition.core.ViewStateKeys;
+import jp.co.ndensan.reams.db.dbz.divcontroller.viewbox.ViewStateKeys;
+import jp.co.ndensan.reams.db.dbz.service.TaishoshaKey;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrQuestionMessages;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaMeisho;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.biz.TelNo;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
+import jp.co.ndensan.reams.uz.uza.lang.EraType;
+import jp.co.ndensan.reams.uz.uza.lang.FillType;
+import jp.co.ndensan.reams.uz.uza.lang.FirstYear;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.lang.Separator;
 import jp.co.ndensan.reams.uz.uza.message.QuestionMessage;
 import jp.co.ndensan.reams.uz.uza.report.SourceDataCollection;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.CommonButtonHolder;
@@ -40,7 +46,11 @@ public class TeikiyoJogaishaShokai {
      * @return ResponseData<TeikiyoJogaishaShokaiDiv>
      */
     public ResponseData<TeikiyoJogaishaShokaiDiv> onLoad(TeikiyoJogaishaShokaiDiv div) {
-        ShikibetsuCode 識別コード = ViewStateHolder.get(ViewStateKeys.識別コード, ShikibetsuCode.class);
+        TaishoshaKey key = ViewStateHolder.get(ViewStateKeys.資格対象者, TaishoshaKey.class);
+        ShikibetsuCode 識別コード = ShikibetsuCode.EMPTY;
+        if (key != null) {
+            識別コード = key.get識別コード();
+        }
         div.getShikakuKihonJoho().getCcdShikakuJoho().onLoad(識別コード);
         div.getShikakuKihonJoho().getCcdKaigoAtenaInfo().onLoad(識別コード);
         div.getTeikiyoJogaishaJoho().getCcdTekiyoJogaiRireki().initialize(識別コード);
@@ -56,9 +66,12 @@ public class TeikiyoJogaishaShokai {
      * @return ResponseData<SourceDataCollection>
      */
     public ResponseData<SourceDataCollection> onClick_btnReportPublish(TeikiyoJogaishaShokaiDiv div) {
-        ShikibetsuCode 識別コード = ViewStateHolder.get(ViewStateKeys.識別コード, ShikibetsuCode.class);
+        TaishoshaKey key = ViewStateHolder.get(ViewStateKeys.資格対象者, TaishoshaKey.class);
+        ShikibetsuCode 識別コード = ShikibetsuCode.EMPTY;
+        if (key != null) {
+            識別コード = key.get識別コード();
+        }
         List<TekiyoJogaishaDaichoJoho> list = TekiyoJogaishaDaichoJohoFinder.createInstance().getTekiyoJogaishaDaichoJoho(識別コード).records();
-        CommonButtonHolder.setVisibleByCommonButtonFieldName(new RString("btnComplete2"), true);
         return ResponseData.of(new TekiyojogaishaDaichoPrintService().print(get適用除外者台帳情報(list))).respond();
     }
 
@@ -89,12 +102,14 @@ public class TeikiyoJogaishaShokai {
         List<TekiyojogaishaDaichoItem> bodyItemList = new ArrayList<>();
         if (list != null && !list.isEmpty()) {
             for (int i = 0; i < list.size(); i++) {
+                FlexibleDate 生年月日 = new FlexibleDate(list.get(0).get生年月日());
                 TekiyojogaishaDaichoItem item = new TekiyojogaishaDaichoItem(
                         chickNull(list.get(0).get印刷日時()),
                         new RString("適用除外者台帳"),
                         chickNull(list.get(0).get市町村コード()),
                         chickNull(list.get(0).get市町村名称()),
-                        chickNull(list.get(0).get生年月日()),
+                        生年月日.wareki().eraType(EraType.KANJI_RYAKU).firstYear(FirstYear.GAN_NEN)
+                        .separator(Separator.PERIOD).fillType(FillType.BLANK).toDateString(),
                         chickNull(list.get(0).get性別()),
                         chickNull(list.get(0).get世帯コード()),
                         chickNull(list.get(0).get識別コード()),

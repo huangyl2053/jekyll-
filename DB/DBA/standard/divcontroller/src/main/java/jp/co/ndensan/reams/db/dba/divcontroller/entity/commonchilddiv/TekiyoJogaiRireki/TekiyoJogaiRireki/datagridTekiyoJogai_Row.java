@@ -3,7 +3,7 @@ package jp.co.ndensan.reams.db.dba.divcontroller.entity.commonchilddiv.TekiyoJog
  * このコードはツールによって生成されました。
  * このファイルへの変更は、以下の状況下で不正な動作の原因になったり、
  * コードが再生成されるときに損失したりします。
- * Thu Apr 14 11:56:45 CST 2016 
+ * Fri Apr 15 10:49:57 CST 2016 
  */
 
 
@@ -34,6 +34,7 @@ public class datagridTekiyoJogai_Row extends DataRow {
     private TextBoxDate nyuShoDate;
     private TextBoxDate taiShoDate;
     private RString nyuShoShisetu;
+    private RString nyushoShisetsuCode;
     private RString daichoShubetsu;
     private RString shisetsuShurui;
     private RString rirekiNo;
@@ -59,6 +60,7 @@ public class datagridTekiyoJogai_Row extends DataRow {
         this.nyuShoDate = new TextBoxDate();
         this.taiShoDate = new TextBoxDate();
         this.nyuShoShisetu = RString.EMPTY;
+        this.nyushoShisetsuCode = RString.EMPTY;
         this.daichoShubetsu = RString.EMPTY;
         this.shisetsuShurui = RString.EMPTY;
         this.rirekiNo = RString.EMPTY;
@@ -81,6 +83,7 @@ public class datagridTekiyoJogai_Row extends DataRow {
         this.setOriginalData("nyuShoDate", nyuShoDate);
         this.setOriginalData("taiShoDate", taiShoDate);
         this.setOriginalData("nyuShoShisetu", nyuShoShisetu);
+        this.setOriginalData("nyushoShisetsuCode", nyushoShisetsuCode);
         this.setOriginalData("daichoShubetsu", daichoShubetsu);
         this.setOriginalData("shisetsuShurui", shisetsuShurui);
         this.setOriginalData("rirekiNo", rirekiNo);
@@ -93,7 +96,7 @@ public class datagridTekiyoJogai_Row extends DataRow {
         this.setOriginalData("henkoTsuchiHakkoYMD", henkoTsuchiHakkoYMD);
     }
 
-    public datagridTekiyoJogai_Row(RString status, TextBoxDate tekiyoDate, TextBoxDate tekiyoTodokeDate, RString tekiyoJiyuCode, RString tekiyoJiyu, TextBoxDate kayijoDate, TextBoxDate kaijoTodokeDate, RString kaijoJiyuCode, RString kaijoJiyu, TextBoxDate nyuShoDate, TextBoxDate taiShoDate, RString nyuShoShisetu, RString daichoShubetsu, RString shisetsuShurui, RString rirekiNo, RString idoYMD, RString idoJiyuCode, RString edaNo, RString shichosonCode, RString nyushoTsuchiHakkoYMD, RString taishoTsuchiHakkoYMD, RString henkoTsuchiHakkoYMD) {
+    public datagridTekiyoJogai_Row(RString status, TextBoxDate tekiyoDate, TextBoxDate tekiyoTodokeDate, RString tekiyoJiyuCode, RString tekiyoJiyu, TextBoxDate kayijoDate, TextBoxDate kaijoTodokeDate, RString kaijoJiyuCode, RString kaijoJiyu, TextBoxDate nyuShoDate, TextBoxDate taiShoDate, RString nyuShoShisetu, RString nyushoShisetsuCode, RString daichoShubetsu, RString shisetsuShurui, RString rirekiNo, RString idoYMD, RString idoJiyuCode, RString edaNo, RString shichosonCode, RString nyushoTsuchiHakkoYMD, RString taishoTsuchiHakkoYMD, RString henkoTsuchiHakkoYMD) {
         super();
         this.setOriginalData("status", status);
         this.setOriginalData("tekiyoDate", tekiyoDate);
@@ -107,6 +110,7 @@ public class datagridTekiyoJogai_Row extends DataRow {
         this.setOriginalData("nyuShoDate", nyuShoDate);
         this.setOriginalData("taiShoDate", taiShoDate);
         this.setOriginalData("nyuShoShisetu", nyuShoShisetu);
+        this.setOriginalData("nyushoShisetsuCode", nyushoShisetsuCode);
         this.setOriginalData("daichoShubetsu", daichoShubetsu);
         this.setOriginalData("shisetsuShurui", shisetsuShurui);
         this.setOriginalData("rirekiNo", rirekiNo);
@@ -129,6 +133,7 @@ public class datagridTekiyoJogai_Row extends DataRow {
         this.nyuShoDate = nyuShoDate;
         this.taiShoDate = taiShoDate;
         this.nyuShoShisetu = nyuShoShisetu;
+        this.nyushoShisetsuCode = nyushoShisetsuCode;
         this.daichoShubetsu = daichoShubetsu;
         this.shisetsuShurui = shisetsuShurui;
         this.rirekiNo = rirekiNo;
@@ -187,6 +192,10 @@ public class datagridTekiyoJogai_Row extends DataRow {
 
     public RString getNyuShoShisetu() {
         return nyuShoShisetu;
+    }
+
+    public RString getNyushoShisetsuCode() {
+        return nyushoShisetsuCode;
     }
 
     public RString getDaichoShubetsu() {
@@ -287,6 +296,11 @@ public class datagridTekiyoJogai_Row extends DataRow {
     public void setNyuShoShisetu(RString nyuShoShisetu) {
         this.setOriginalData("nyuShoShisetu", nyuShoShisetu);
         this.nyuShoShisetu = nyuShoShisetu;
+    }
+
+    public void setNyushoShisetsuCode(RString nyushoShisetsuCode) {
+        this.setOriginalData("nyushoShisetsuCode", nyushoShisetsuCode);
+        this.nyushoShisetsuCode = nyushoShisetsuCode;
     }
 
     public void setDaichoShubetsu(RString daichoShubetsu) {

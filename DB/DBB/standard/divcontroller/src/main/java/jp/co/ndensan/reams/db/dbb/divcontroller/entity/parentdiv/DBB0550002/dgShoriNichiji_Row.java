@@ -3,7 +3,7 @@ package jp.co.ndensan.reams.db.dbb.divcontroller.entity.parentdiv.DBB0550002;
  * このコードはツールによって生成されました。
  * このファイルへの変更は、以下の状況下で不正な動作の原因になったり、
  * コードが再生成されるときに損失したりします。
- * Mon Mar 28 14:37:44 CST 2016
+ * Thu Apr 14 10:26:49 CST 2016
  */
 
 import jp.co.ndensan.reams.uz.uza.ui.binding.DataRow;
@@ -17,7 +17,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxTime;
  * @reamsid_L DBB-0680-010 wangkanglei
  */
 public class dgShoriNichiji_Row extends DataRow {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-01-15_09-59-03">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
 
     private TextBox txtShoriNichiji;
     private TextBoxDate txtShoriYMD;

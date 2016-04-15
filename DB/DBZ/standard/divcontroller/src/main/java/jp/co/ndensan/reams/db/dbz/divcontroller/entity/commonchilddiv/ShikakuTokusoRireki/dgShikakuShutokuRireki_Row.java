@@ -3,25 +3,20 @@ package jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.ShikakuTo
  * このコードはツールによって生成されました。
  * このファイルへの変更は、以下の状況下で不正な動作の原因になったり、
  * コードが再生成されるときに損失したりします。
- * Tue Apr 12 16:50:30 CST 2016 
+ * Tue Apr 12 16:50:30 CST 2016
  */
 
-
-
-import java.io.Serializable;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Button;
 import jp.co.ndensan.reams.uz.uza.ui.binding.DataRow;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxFlexibleDate;
 
-
 /**
- * dgShikakuShutokuRireki_Row のクラスファイル 
- * 
+ * dgShikakuShutokuRireki_Row のクラスファイル
+ *
  * @author 自動生成
  */
-
-public class dgShikakuShutokuRireki_Row extends DataRow implements Serializable {
+public class dgShikakuShutokuRireki_Row extends DataRow {
     // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
 
     private RString state;

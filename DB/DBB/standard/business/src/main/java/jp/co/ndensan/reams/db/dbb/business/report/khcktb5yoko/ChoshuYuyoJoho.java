@@ -18,7 +18,7 @@ import lombok.Setter;
 /**
  * 徴収猶予の情報
  *
- * @reamsid_L DBC-0740-040 sunhui
+ * @reamsid_L DBB-0740-040 sunhui
  */
 @Getter
 @Setter

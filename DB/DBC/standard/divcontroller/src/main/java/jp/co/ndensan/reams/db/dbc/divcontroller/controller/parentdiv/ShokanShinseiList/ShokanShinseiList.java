@@ -55,9 +55,11 @@ public class ShokanShinseiList {
         ResponseData<ShokanShinseiListDiv> responseData = new ResponseData<>();
         if (!RString.isNullOrEmpty(モード) && 被保険者番号 != null
                 && サービス年月From != null && サービス年月To != null) {
+            requestDiv.getTxtServiceYMFrom().setValue(new RDate(サービス年月From.toDateString().toString()));
+            requestDiv.getTxtServiceYMTo().setValue(new RDate(サービス年月To.toDateString().toString()));
             requestDiv.initialize(モード, 被保険者番号, サービス年月From, サービス年月To);
-
         }
+
         responseData.data = requestDiv;
 
         return responseData;
@@ -74,6 +76,7 @@ public class ShokanShinseiList {
         if (!ResponseHolder.isReRequest()) {
             return ResponseData.of(requestDiv).addMessage(UrQuestionMessages.処理実行の確認.getMessage()).respond();
         }
+
         ViewStateHolder.put(ViewStateKeys.償還払申請一覧_サービス年月, requestDiv.getTxtServiceYM().getValue().getYearMonth());
         ViewStateHolder.put(ViewStateKeys.償還払申請一覧_サービス年月From, RString.EMPTY);
         ViewStateHolder.put(ViewStateKeys.償還払申請一覧_サービス年月To, RString.EMPTY);
@@ -123,7 +126,8 @@ public class ShokanShinseiList {
             getHandler(requestDiv).initialize(mode, shokandhinseiichiran);
         }
 
-        return ResponseData.of(requestDiv).respond();
+        return ResponseData.of(requestDiv)
+                .respond();
     }
 
     /**
@@ -174,26 +178,23 @@ public class ShokanShinseiList {
     }
 
     private void get申請を追加するcheck(ShokanShinseiListDiv requestDiv) {
-        if (new RString(UrQuestionMessages.処理実行の確認.getMessage().getCode()).equals(
-                ResponseHolder.getMessageCode()) && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
 
-            if (RDate.getNowDate().getYearMonth().isBefore(requestDiv.getTxtServiceYM().getValue().getYearMonth())) {
-                throw new ApplicationException(
-                        UrWarningMessages.日付の前後関係逆転以降.getMessage().replace(
-                                requestDiv.getTxtServiceYM().getValue().getYearMonth().toString(), RDate.getNowDate().getYearMonth().toString()));
+        if (RDate.getNowDate().getYearMonth().isBefore(requestDiv.getTxtServiceYM().getValue().getYearMonth())) {
+            throw new ApplicationException(
+                    UrWarningMessages.日付の前後関係逆転以降.getMessage().replace(
+                            requestDiv.getTxtServiceYM().getValue().getYearMonth().toString(), RDate.getNowDate().getYearMonth().toString()));
 
-            }
-            int count = ShokanShinseiIchiranManager.createInstance().getShokanShinseiCount(
-                    ViewStateHolder.get(ViewStateKeys.償還払申請一覧_被保険者番号,
-                            HihokenshaNo.class
-                    ), new FlexibleYearMonth(
-                            requestDiv.getTxtServiceYM().getValue().getYearMonth().toDateString()));
-            if (count
-                    > 1) {
-                throw new ApplicationException(
-                        UrErrorMessages.既に登録済.getMessage().replace(
-                                requestDiv.getTxtServiceYM().getValue().getYearMonth().toString()));
-            }
+        }
+        int count = ShokanShinseiIchiranManager.createInstance().getShokanShinseiCount(
+                ViewStateHolder.get(ViewStateKeys.償還払申請一覧_被保険者番号,
+                        HihokenshaNo.class
+                ), new FlexibleYearMonth(
+                        requestDiv.getTxtServiceYM().getValue().getYearMonth().toDateString()));
+        if (count
+                > 1) {
+            throw new ApplicationException(
+                    UrErrorMessages.既に登録済.getMessage().replace(
+                            requestDiv.getTxtServiceYM().getValue().getYearMonth().toString()));
         }
     }
 

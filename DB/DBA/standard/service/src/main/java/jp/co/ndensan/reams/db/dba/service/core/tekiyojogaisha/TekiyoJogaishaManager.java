@@ -20,7 +20,6 @@ import jp.co.ndensan.reams.db.dba.service.core.hihokenshadaicho.HihokenshaShikak
 import jp.co.ndensan.reams.db.dba.service.core.jushochitokurei.shisetsunyutaisho.ShisetsuNyutaishoManager;
 import jp.co.ndensan.reams.db.dbz.business.core.HihokenshaDaicho;
 import jp.co.ndensan.reams.db.dbz.business.core.TekiyoJogaisha;
-import jp.co.ndensan.reams.db.dbz.definition.core.enumeratedtype.DaichoType;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT1001HihokenshaDaichoEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT1002TekiyoJogaishaEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT1004ShisetsuNyutaishoEntity;
@@ -37,14 +36,11 @@ import jp.co.ndensan.reams.ua.uax.definition.core.enumeratedtype.AgeArrivalDay;
 import jp.co.ndensan.reams.ua.uax.definition.core.enumeratedtype.shikibetsutaisho.KensakuYusenKubun;
 import jp.co.ndensan.reams.ua.uax.definition.core.enumeratedtype.shikibetsutaisho.psm.DataShutokuKubun;
 import jp.co.ndensan.reams.ua.uax.entity.db.basic.UaFt200FindShikibetsuTaishoEntity;
-import jp.co.ndensan.reams.ur.urz.business.core.association.Association;
 import jp.co.ndensan.reams.ur.urz.definition.core.shikibetsutaisho.JuminJotai;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
-import jp.co.ndensan.reams.ur.urz.service.core.association.AssociationFinderFactory;
 import jp.co.ndensan.reams.uz.uza.biz.GyomuCode;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
-import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
@@ -234,12 +230,11 @@ public class TekiyoJogaishaManager {
         } else {
             entity.setRirekiNo(履歴番号.add(1).intValue());
         }
-        Association association = AssociationFinderFactory.createInstance().getAssociation();
-        entity.setShichosonCode(association.get地方公共団体コード());
-        entity.setDaichoShubetsu(DaichoType.適用除外者.getCode());
+        entity.setShichosonCode(shisetsuNyutaisho.get市町村コード());
+        entity.setDaichoShubetsu(shisetsuNyutaisho.get台帳種別());
         entity.setNyushoShisetsuShurui(shisetsuNyutaisho.get入所施設種類());
         entity.setNyushoShisetsuCode(shisetsuNyutaisho.get入所施設コード());
-        entity.setNyushoShoriYMD(new FlexibleDate(RDate.getNowDate().toString()));
+        entity.setNyushoShoriYMD(shisetsuNyutaisho.get入所処理年月日());
         entity.setNyushoYMD(shisetsuNyutaisho.get入所年月日());
         if (介護保険施設入退所Manager.save介護保険施設入退所(new ShisetsuNyutaisho(entity))) {
             count = 1;

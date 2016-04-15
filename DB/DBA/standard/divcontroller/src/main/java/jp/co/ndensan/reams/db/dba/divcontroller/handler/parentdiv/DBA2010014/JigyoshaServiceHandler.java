@@ -3,7 +3,6 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package jp.co.ndensan.reams.db.dba.divcontroller.handler.parentdiv.DBA2010014;
 
 import java.util.ArrayList;
@@ -15,38 +14,42 @@ import jp.co.ndensan.reams.uz.uza.biz.AtenaKanaMeisho;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaMeisho;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.TelNo;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 
 /**
  *
  * 画面サービス登録のHandlerクラスです。
+ *
  * @reamsid_L DBA-0340-060 dongyabin
  */
 public class JigyoshaServiceHandler {
-    
+
     private static final RString 準拠しない = new RString("0");
+    private static final RString 準拠する = new RString("1");
     private static final RString 無 = new RString("1");
     private static final RString 有 = new RString("2");
     private static final RString 別表第二注２ロ該当 = new RString("3");
     private static final RString 栄養ケア_マネジメント体制 = new RString("4");
     private final JigyoshaServiceDiv div;
-    
+
     /**
      * コンストラクタです。
+     *
      * @param div 画面情報
      */
     public JigyoshaServiceHandler(JigyoshaServiceDiv div) {
         this.div = div;
     }
-    
+
     /**
      * 追加状態の画面設定します。
      */
     public void set状態_追加() {
         div.getJigyoshaServiceKihon().getTxtTorokuHokenshaName().setDisabled(true);
     }
-    
+
     /**
      * 修正状態の画面設定します。
      */
@@ -55,7 +58,7 @@ public class JigyoshaServiceHandler {
         div.getJigyoshaServiceKihon().getJigyosha().getTxtJigyoshaNo().setDisabled(true);
         div.getJigyoshaServiceKihon().getTxtTorokuHokenshaNo().setDisabled(true);
     }
-    
+
     /**
      * 修正状態の画面設定します。
      */
@@ -63,18 +66,19 @@ public class JigyoshaServiceHandler {
         div.getJigyoshaServiceKihon().setDisabled(true);
         div.getJigyoshaServiceShosai().setDisabled(true);
     }
-    
+
     /**
      * 画面情報の設定します。
+     *
      * @param list 事業者サービス情報
      */
     public void set画面情報(List<KaigoJigyoshaShiteiService> list) {
         if (!list.isEmpty()) {
             set画面情報(list.get(0));
-            
+
         }
     }
-    
+
     /**
      * 詳細情報を表示します。
      */
@@ -82,7 +86,7 @@ public class JigyoshaServiceHandler {
         div.getJigyoshaServiceKihon().setDisplayNone(true);
         div.getJigyoshaServiceShosai().setDisplayNone(false);
     }
-    
+
     /**
      * 基本情報を表示します。
      */
@@ -90,7 +94,7 @@ public class JigyoshaServiceHandler {
         div.getJigyoshaServiceKihon().setDisplayNone(false);
         div.getJigyoshaServiceShosai().setDisplayNone(true);
     }
-    
+
     private void set画面情報(KaigoJigyoshaShiteiService joho) {
         List<RString> chkKihonJunkyoFlag = new ArrayList<>();
         if (無.equals(joho.get基本情報準拠区分())) {
@@ -111,20 +115,20 @@ public class JigyoshaServiceHandler {
                 .get事業者郵便番号().getColumnValue());
         div.getJigyoshaServiceKihon().getJigyosha().getTxtJigyoshaFaxNo().setValue(joho.get事業者FAX番号() == null ? RString.EMPTY : joho
                 .get事業者FAX番号().getColumnValue());
-        div.getJigyoshaServiceKihon().getJigyosha().getTxtJigyoshaAddress().setValue(joho.get事業者住所() == null ? RString.EMPTY 
+        div.getJigyoshaServiceKihon().getJigyosha().getTxtJigyoshaAddress().setValue(joho.get事業者住所() == null ? RString.EMPTY
                 : joho.get事業者住所().getColumnValue());
-        div.getJigyoshaServiceKihon().getJigyosha().getTxtJigyoshaAddress().setValue(joho.get事業者住所カナ());
+        div.getJigyoshaServiceKihon().getJigyosha().getTxtJigyoshaAddressKana().setValue(joho.get事業者住所カナ());
         div.getJigyoshaServiceKihon().getTxtTorokuHokenshaNo().setValue(joho.get登録保険者番号());
         // TODO 内部QA:1008 登録保険者名称の取得を不明です。
         div.getJigyoshaServiceKihon().getRadJuryoininUmu().setSelectedKey(setRadio(joho.get受領委任の有無()));
         div.getJigyoshaServiceKihon().getTxtTorokuKaishiYMD().setValue(joho.get登録開始日());
         div.getJigyoshaServiceKihon().getTxtTorokuShuryoYMD().setValue(joho.get登録終了日());
-        div.getJigyoshaServiceKihon().getTxtKanrishaName().setValue(joho.get管理者氏名() == null ? RString.EMPTY 
+        div.getJigyoshaServiceKihon().getTxtKanrishaName().setValue(joho.get管理者氏名() == null ? RString.EMPTY
                 : joho.get管理者氏名().getColumnValue());
-        div.getJigyoshaServiceKihon().getTxtKanrishaNameKana().setValue(joho.get管理者氏名カナ() == null ? RString.EMPTY 
+        div.getJigyoshaServiceKihon().getTxtKanrishaNameKana().setValue(joho.get管理者氏名カナ() == null ? RString.EMPTY
                 : joho.get管理者氏名カナ().getColumnValue());
         div.getJigyoshaServiceKihon().getTxtKanrishaYubinNo().setValue(joho.get管理者住所郵便番号());
-        div.getJigyoshaServiceKihon().getTxtKanrishaAddress().setValue(joho.get管理者住所() == null ? RString.EMPTY 
+        div.getJigyoshaServiceKihon().getTxtKanrishaAddress().setValue(joho.get管理者住所() == null ? RString.EMPTY
                 : joho.get管理者住所().getColumnValue());
         div.getJigyoshaServiceKihon().getTxtKanrishaAddressKana().setValue(joho.get管理者住所カナ());
         div.getJigyoshaServiceKihon().getRadShakaiFukushihoujinKeigenjigyouJisshiUumu()
@@ -137,7 +141,7 @@ public class JigyoshaServiceHandler {
         set訪問介護員数(joho);
         set個別リハビリテーション提供体制(joho);
     }
-    
+
     private void set事業者サービス詳細情報エリア(KaigoJigyoshaShiteiService joho) {
         // TODO 内部QA：1008　「施設等の区分」と「人員配置区分」の設定を不明です。
         div.getJigyoshaServiceShosai().getRadTokubetsuChiikiKasanUmu().setSelectedKey(setRadio(joho.get特別地域加算の有無()));
@@ -185,14 +189,13 @@ public class JigyoshaServiceHandler {
                 .get個別リハビリテーション提供体制()));
         div.getJigyoshaServiceShosai().getRadKyojuhiTaisaku().setSelectedKey(setRadio(joho
                 .get居住費対策()));
-        div.getJigyoshaServiceShosai().getRadKobetsuRehabilitationTeikyoTaisei().setSelectedKey(setRadio(joho
+        div.getJigyoshaServiceShosai().getRadYakanCareUmu().setSelectedKey(setRadio(joho
                 .get夜間ケアの有無()));
-        div.getJigyoshaServiceShosai().getRadKobetsuRehabilitationTeikyoTaisei().setSelectedKey(setRadio(joho
+        div.getJigyoshaServiceShosai().getRadRehabilitationKinoKyokaUmu().setSelectedKey(setRadio(joho
                 .getリハビリテーション機能強化の有無()));
-        
-        
+
     }
-    
+
     private void setリハビリテーション提供体制(KaigoJigyoshaShiteiService joho) {
         div.getJigyoshaServiceShosai().getRadSogoRehaShisetsuUmu().setSelectedKey(setRadio(joho
                 .getリハビリテーション提供体制_総合リハビリテーション施設_の有無()));
@@ -207,7 +210,7 @@ public class JigyoshaServiceHandler {
         div.getJigyoshaServiceShosai().getRadSonotaUmu().setSelectedKey(setRadio(joho
                 .getリハビリテーション提供体制_その他_の有無()));
     }
-    
+
     private void set個別リハビリテーション提供体制(KaigoJigyoshaShiteiService joho) {
         div.getJigyoshaServiceShosai().getRadKobetsuSogoRehaShisetsuUmu().setSelectedKey(setRadio(joho
                 .get個別リハビリテーション提供体制_総合リハビリテーション施設_の有無()));
@@ -247,7 +250,7 @@ public class JigyoshaServiceHandler {
         // div.getJigyoshaServiceShosai().getRadGengoChokakushiKetsuinGenzanJokyoUmu().setSelectedKey(setRadio(joho
         //        .get言語聴覚士の欠員による減算の状況の有無()));
     }
-    
+
     private void set介護支援専門員数(KaigoJigyoshaShiteiService joho) {
         div.getJigyoshaServiceShosai().getTxtKaigoShienSemmoninSenjuJokinshaNinsu().setValue(intToDecimal(joho.
                 get介護支援専門員数_専従の常勤者_()));
@@ -260,7 +263,7 @@ public class JigyoshaServiceHandler {
         div.getJigyoshaServiceShosai().getTxtHomonkaigoServiceTeikyoSekininshaNinsu().setValue(intToDecimal(joho.
                 get訪問介護サービス提供責任者数()));
     }
-    
+
     private void set訪問介護員数(KaigoJigyoshaShiteiService joho) {
         div.getJigyoshaServiceShosai().getTxtHomonkaigoSenjuJokinshaNinsu().setValue(intToDecimal(joho.
                 get訪問介護員数_専従の常勤者_()));
@@ -334,9 +337,10 @@ public class JigyoshaServiceHandler {
         div.getJigyoshaServiceShosai().getRadSeikatuKinoKojoGroupKatsudoKasan().setSelectedKey(setRadio(joho.get生活機能向上グループ活動加算()));
         div.getJigyoshaServiceShosai().getRadKaigoShokuinShoguKaizenKasan().setSelectedKey(set栄養管理の評価DDL(joho.get介護職員処遇改善加算()));
     }
-    
+
     /**
      * 事業者サービスDivの設定します。
+     *
      * @param business 事業者サービスDiv
      * @return KaigoJigyoshaShiteiService
      */
@@ -345,8 +349,10 @@ public class JigyoshaServiceHandler {
         business = set事業者サービス情報_2(business);
         return business;
     }
-    
+
     private KaigoJigyoshaShiteiService set事業者サービス情報(KaigoJigyoshaShiteiService joho) {
+        joho = joho.createBuilderForEdit().set異動日(FlexibleDate.getNowDate()).build();
+        joho = joho.createBuilderForEdit().set異動事由(new RString("01")).build();
         joho = joho.createBuilderForEdit().set基本情報準拠区分(set介護事業者は基本情報に準拠(div.getJigyoshaServiceKihon().
                 getChkKihonJunkyoFlag().getSelectedKeys())).build();
         joho = joho.createBuilderForEdit().set有効終了日(div.getJigyoshaServiceKihon().getJigyosha().getTxtYukoShuryoYMD().getValue()).build();
@@ -487,7 +493,7 @@ public class JigyoshaServiceHandler {
                 getJigyoshaServiceShosai().getRadYakanKangoTaiseiUmu().getSelectedKey())).build();
         return joho;
     }
-    
+
     private KaigoJigyoshaShiteiService set事業者サービス情報_2(KaigoJigyoshaShiteiService joho) {
         // TODO 内部QA：1008 「特定事業所加算（居宅介護支援）」の設定を不明です。
         joho = joho.createBuilderForEdit().set介護支援専門員数_専従の常勤者_(decimalToInt(div.getJigyoshaServiceShosai().
@@ -495,9 +501,9 @@ public class JigyoshaServiceHandler {
         joho = joho.createBuilderForEdit().set介護支援専門員数_専従の非常勤者_(decimalToInt(div.getJigyoshaServiceShosai().
                 getTxtKaigoSienSemmoninSenjuHijokinshaNinsu().getValue())).build();
         joho = joho.createBuilderForEdit().set介護支援専門員数_兼務の非常勤者_(decimalToInt(div.getJigyoshaServiceShosai().
-                getTxtKaigoSienSemmoninKemmuJokinshaNinsu().getValue())).build();
-        joho = joho.createBuilderForEdit().set介護支援専門員数_専従の非常勤者_(decimalToInt(div.getJigyoshaServiceShosai().
                 getTxtKaigoSienSemmoninKemmuHijokinshaNinsu().getValue())).build();
+        joho = joho.createBuilderForEdit().set介護支援専門員数_兼務の常勤者_(decimalToInt(div.getJigyoshaServiceShosai().
+                getTxtKaigoSienSemmoninKemmuJokinshaNinsu().getValue())).build();
         joho = joho.createBuilderForEdit().set訪問介護サービス提供責任者数(decimalToInt(div.getJigyoshaServiceShosai().
                 getTxtHomonkaigoServiceTeikyoSekininshaNinsu().getValue())).build();
         joho = joho.createBuilderForEdit().set訪問介護員数_専従の常勤者_(decimalToInt(div.getJigyoshaServiceShosai().
@@ -602,16 +608,15 @@ public class JigyoshaServiceHandler {
                 .getRadKaigoShokuinShoguKaizenKasan().getSelectedKey())).build();
         return joho;
     }
-    
+
     private RString set介護事業者は基本情報に準拠(List<RString> selectKeys) {
         if (selectKeys.contains(準拠しない)) {
-            return 準拠しない;
+            return 準拠する;
         } else {
-            return RString.EMPTY;
+            return 準拠しない;
         }
     }
-    
-    
+
     private RString setRadio(Code code) {
         if (code == null) {
             return 無;
@@ -621,7 +626,7 @@ public class JigyoshaServiceHandler {
         }
         return code.getColumnValue();
     }
-    
+
     private RString set食事提供の状況DDL(Code code) {
         if (code == null) {
             return 無;
@@ -632,7 +637,7 @@ public class JigyoshaServiceHandler {
         }
         return code.getColumnValue();
     }
-    
+
     private RString set栄養管理の評価DDL(Code code) {
         if (code == null) {
             return 無;
@@ -644,15 +649,15 @@ public class JigyoshaServiceHandler {
         }
         return code.getColumnValue();
     }
-        
+
     private Decimal intToDecimal(int data) {
         return new Decimal(data);
     }
-    
+
     private int decimalToInt(Decimal data) {
         return data == null ? 0 : data.intValue();
     }
-    
+
     private Code stringToCode(RString code) {
         return new Code(code);
     }

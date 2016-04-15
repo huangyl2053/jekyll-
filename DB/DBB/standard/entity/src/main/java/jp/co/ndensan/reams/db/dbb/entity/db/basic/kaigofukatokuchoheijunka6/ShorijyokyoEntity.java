@@ -12,6 +12,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 /**
  * 処理日付管理entityクラスです。
  *
+ * @reamsid_L DBB-0820-020 xuyue
  */
 public class ShorijyokyoEntity {
 

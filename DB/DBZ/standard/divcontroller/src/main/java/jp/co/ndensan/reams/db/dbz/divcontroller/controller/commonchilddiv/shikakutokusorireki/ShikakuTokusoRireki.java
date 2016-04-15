@@ -9,8 +9,9 @@ import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.ShikakuTok
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 
 /**
+ * 共有子Div「資格得喪履歴」のイベントを定義したDivControllerです。
  *
- * @author 自動生成
+ * @reamsid_L DBA-0130-011 huangh
  */
 public class ShikakuTokusoRireki {
 

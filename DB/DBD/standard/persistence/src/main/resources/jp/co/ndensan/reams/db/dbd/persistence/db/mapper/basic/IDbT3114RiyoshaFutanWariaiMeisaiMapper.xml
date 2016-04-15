@@ -1,45 +1,45 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <!-- 概要： DbT3114RiyoshaFutanWariaiMeisaiマスタとエンティティのマッピング用XMLです。 -->
-<!-- 作者： n1070 久保裕是 -->
+<!-- @reamsid_L DBD-3600-030 xuyue -->
 
 <!-- どのマッパーインターフェースと対応するかを指定する -->
 <mapper namespace="jp.co.ndensan.reams.db.dbd.persistence.db.mapper.basic.IDbT3114RiyoshaFutanWariaiMeisaiMapper">
-    
+
     <!-- 概要： 削除されたデータ以外を全件取得するSQLです。 -->
     <sql id="noDeleted_DbT3114RiyoshaFutanWariaiMeisai">
-     SELECT
-         <include refid="jp.co.ndensan.reams.db.dbd.persistence.db.mapper.basic.IDbT3114RiyoshaFutanWariaiMeisaiMapper.allColumns_DbT3114RiyoshaFutanWariaiMeisai" />
-     FROM
-         rgdb."DbT3114RiyoshaFutanWariaiMeisai"
-     WHERE
-         rgdb."DbT3114RiyoshaFutanWariaiMeisai"."isDeleted" = FALSE
+        SELECT
+        <include refid="jp.co.ndensan.reams.db.dbd.persistence.db.mapper.basic.IDbT3114RiyoshaFutanWariaiMeisaiMapper.allColumns_DbT3114RiyoshaFutanWariaiMeisai" />
+        FROM
+        rgdb."DbT3114RiyoshaFutanWariaiMeisai"
+        WHERE
+        rgdb."DbT3114RiyoshaFutanWariaiMeisai"."isDeleted" = FALSE
     </sql>
 
     <sql id="allColumns_DbT3114RiyoshaFutanWariaiMeisai">
-         "DbT3114RiyoshaFutanWariaiMeisai"."nendo" as "dbT3114RiyoshaFutanWariaiMeisai_nendo",
-         "DbT3114RiyoshaFutanWariaiMeisai"."hihokenshaNo" as "dbT3114RiyoshaFutanWariaiMeisai_hihokenshaNo",
-         "DbT3114RiyoshaFutanWariaiMeisai"."rirekiNo" as "dbT3114RiyoshaFutanWariaiMeisai_rirekiNo",
-         "DbT3114RiyoshaFutanWariaiMeisai"."edaNo" as "dbT3114RiyoshaFutanWariaiMeisai_edaNo",
-         "DbT3114RiyoshaFutanWariaiMeisai"."insertDantaiCd" as "dbT3114RiyoshaFutanWariaiMeisai_insertDantaiCd",
-         "DbT3114RiyoshaFutanWariaiMeisai"."insertTimestamp" as "dbT3114RiyoshaFutanWariaiMeisai_insertTimestamp",
-         "DbT3114RiyoshaFutanWariaiMeisai"."insertReamsLoginId" as "dbT3114RiyoshaFutanWariaiMeisai_insertReamsLoginId",
-         "DbT3114RiyoshaFutanWariaiMeisai"."insertContextId" as "dbT3114RiyoshaFutanWariaiMeisai_insertContextId",
-         "DbT3114RiyoshaFutanWariaiMeisai"."isDeleted" as "dbT3114RiyoshaFutanWariaiMeisai_isDeleted",
-         "DbT3114RiyoshaFutanWariaiMeisai"."updateCount" as "dbT3114RiyoshaFutanWariaiMeisai_updateCount",
-         "DbT3114RiyoshaFutanWariaiMeisai"."lastUpdateTimestamp" as "dbT3114RiyoshaFutanWariaiMeisai_lastUpdateTimestamp",
-         "DbT3114RiyoshaFutanWariaiMeisai"."lastUpdateReamsLoginId" as "dbT3114RiyoshaFutanWariaiMeisai_lastUpdateReamsLoginId",
-         "DbT3114RiyoshaFutanWariaiMeisai"."shikakuKubun" as "dbT3114RiyoshaFutanWariaiMeisai_shikakuKubun",
-         "DbT3114RiyoshaFutanWariaiMeisai"."futanWariaiKubun" as "dbT3114RiyoshaFutanWariaiMeisai_futanWariaiKubun",
-         "DbT3114RiyoshaFutanWariaiMeisai"."yukoKaishiYMD" as "dbT3114RiyoshaFutanWariaiMeisai_yukoKaishiYMD",
-         "DbT3114RiyoshaFutanWariaiMeisai"."yukoShuryoYMD" as "dbT3114RiyoshaFutanWariaiMeisai_yukoShuryoYMD",
-         "DbT3114RiyoshaFutanWariaiMeisai"."honninGoukeiShotokuGaku" as "dbT3114RiyoshaFutanWariaiMeisai_honninGoukeiShotokuGaku",
-         "DbT3114RiyoshaFutanWariaiMeisai"."setaiIchigouHihokenshaSu" as "dbT3114RiyoshaFutanWariaiMeisai_setaiIchigouHihokenshaSu",
-         "DbT3114RiyoshaFutanWariaiMeisai"."nenkinShunyuGoukei" as "dbT3114RiyoshaFutanWariaiMeisai_nenkinShunyuGoukei",
-         "DbT3114RiyoshaFutanWariaiMeisai"."sonotanoGoukeiShotokuKingakuGoukei" as "dbT3114RiyoshaFutanWariaiMeisai_sonotanoGoukeiShotokuKingakuGoukei",
-         "DbT3114RiyoshaFutanWariaiMeisai"."koseiRiyu" as "dbT3114RiyoshaFutanWariaiMeisai_koseiRiyu",
-         "DbT3114RiyoshaFutanWariaiMeisai"."setaiCd" as "dbT3114RiyoshaFutanWariaiMeisai_setaiCd",
-         "DbT3114RiyoshaFutanWariaiMeisai"."logicalDeletedFlag" as "dbT3114RiyoshaFutanWariaiMeisai_logicalDeletedFlag"
+        "DbT3114RiyoshaFutanWariaiMeisai"."nendo" as "dbT3114RiyoshaFutanWariaiMeisai_nendo",
+        "DbT3114RiyoshaFutanWariaiMeisai"."hihokenshaNo" as "dbT3114RiyoshaFutanWariaiMeisai_hihokenshaNo",
+        "DbT3114RiyoshaFutanWariaiMeisai"."rirekiNo" as "dbT3114RiyoshaFutanWariaiMeisai_rirekiNo",
+        "DbT3114RiyoshaFutanWariaiMeisai"."edaNo" as "dbT3114RiyoshaFutanWariaiMeisai_edaNo",
+        "DbT3114RiyoshaFutanWariaiMeisai"."insertDantaiCd" as "dbT3114RiyoshaFutanWariaiMeisai_insertDantaiCd",
+        "DbT3114RiyoshaFutanWariaiMeisai"."insertTimestamp" as "dbT3114RiyoshaFutanWariaiMeisai_insertTimestamp",
+        "DbT3114RiyoshaFutanWariaiMeisai"."insertReamsLoginId" as "dbT3114RiyoshaFutanWariaiMeisai_insertReamsLoginId",
+        "DbT3114RiyoshaFutanWariaiMeisai"."insertContextId" as "dbT3114RiyoshaFutanWariaiMeisai_insertContextId",
+        "DbT3114RiyoshaFutanWariaiMeisai"."isDeleted" as "dbT3114RiyoshaFutanWariaiMeisai_isDeleted",
+        "DbT3114RiyoshaFutanWariaiMeisai"."updateCount" as "dbT3114RiyoshaFutanWariaiMeisai_updateCount",
+        "DbT3114RiyoshaFutanWariaiMeisai"."lastUpdateTimestamp" as "dbT3114RiyoshaFutanWariaiMeisai_lastUpdateTimestamp",
+        "DbT3114RiyoshaFutanWariaiMeisai"."lastUpdateReamsLoginId" as "dbT3114RiyoshaFutanWariaiMeisai_lastUpdateReamsLoginId",
+        "DbT3114RiyoshaFutanWariaiMeisai"."shikakuKubun" as "dbT3114RiyoshaFutanWariaiMeisai_shikakuKubun",
+        "DbT3114RiyoshaFutanWariaiMeisai"."futanWariaiKubun" as "dbT3114RiyoshaFutanWariaiMeisai_futanWariaiKubun",
+        "DbT3114RiyoshaFutanWariaiMeisai"."yukoKaishiYMD" as "dbT3114RiyoshaFutanWariaiMeisai_yukoKaishiYMD",
+        "DbT3114RiyoshaFutanWariaiMeisai"."yukoShuryoYMD" as "dbT3114RiyoshaFutanWariaiMeisai_yukoShuryoYMD",
+        "DbT3114RiyoshaFutanWariaiMeisai"."honninGoukeiShotokuGaku" as "dbT3114RiyoshaFutanWariaiMeisai_honninGoukeiShotokuGaku",
+        "DbT3114RiyoshaFutanWariaiMeisai"."setaiIchigouHihokenshaSu" as "dbT3114RiyoshaFutanWariaiMeisai_setaiIchigouHihokenshaSu",
+        "DbT3114RiyoshaFutanWariaiMeisai"."nenkinShunyuGoukei" as "dbT3114RiyoshaFutanWariaiMeisai_nenkinShunyuGoukei",
+        "DbT3114RiyoshaFutanWariaiMeisai"."sonotanoGoukeiShotokuKingakuGoukei" as "dbT3114RiyoshaFutanWariaiMeisai_sonotanoGoukeiShotokuKingakuGoukei",
+        "DbT3114RiyoshaFutanWariaiMeisai"."koseiRiyu" as "dbT3114RiyoshaFutanWariaiMeisai_koseiRiyu",
+        "DbT3114RiyoshaFutanWariaiMeisai"."setaiCd" as "dbT3114RiyoshaFutanWariaiMeisai_setaiCd",
+        "DbT3114RiyoshaFutanWariaiMeisai"."logicalDeletedFlag" as "dbT3114RiyoshaFutanWariaiMeisai_logicalDeletedFlag"
     </sql>
 
 
@@ -69,5 +69,23 @@
         <result property="setaiCd" column="dbT3114RiyoshaFutanWariaiMeisai_setaiCd" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.SetaiCodeTypeHandler"/>
         <result property="logicalDeletedFlag" column="dbT3114RiyoshaFutanWariaiMeisai_logicalDeletedFlag" />
     </resultMap>
+
+    <select id="notExists_maxRirekiNo" resultMap="ResultMap_DbT3114RiyoshaFutanWariaiMeisaiEntity"
+            parameterType="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" fetchSize="500">
+        SELECT *
+        FROM rgdb."DbT3114RiyoshaFutanWariaiMeisai" AS A
+        WHERE A."hihokenshaNo" = #{被保険者番号}
+        AND NOT EXISTS(
+        SELECT 1
+        FROM rgdb."DbT3114RiyoshaFutanWariaiMeisai" AS B
+        WHERE
+        A."hihokenshaNo" = B."hihokenshaNo"
+        AND A."nendo" = B."nendo"
+        AND A."isDeleted" = B."isDeleted"
+        AND A."rirekiNo" <![CDATA[<]]> B."rirekiNo"
+        )
+        AND (A."yukoKaishiYMD" <![CDATA[<=]]> #{基準日} AND A."yukoShuryoYMD" <![CDATA[>=]]> #{基準日})
+        AND A."isDeleted" = false
+    </select>
 
 </mapper>

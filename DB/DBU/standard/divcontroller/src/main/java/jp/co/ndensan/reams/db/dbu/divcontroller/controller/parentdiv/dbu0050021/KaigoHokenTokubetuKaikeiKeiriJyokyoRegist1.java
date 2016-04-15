@@ -33,8 +33,9 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 
 /**
- *
  * 介護保険特別会計経理状況登録_様式４情報Divを制御します。
+ *
+ * @reamsid_L DBU-1130-020 liangbc
  */
 public class KaigoHokenTokubetuKaikeiKeiriJyokyoRegist1 {
 

@@ -11,6 +11,7 @@ import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.kaigoatena
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.kaigoatenainfo.KaigoAtenaInfo.KaigoAtenaInfoDiv;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.kaigoshikakukihon.KaigoShikakuKihon.IKaigoShikakuKihonDiv;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.kaigoshikakukihon.KaigoShikakuKihon.KaigoShikakuKihonDiv;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.binding.*;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 
@@ -31,13 +32,19 @@ public class FutanGendogakuNinteiKousinTsuchisyoKobetHakkoDiv extends Panel {
     @JsonProperty("LineHorizontal1")
     private HorizontalLine LineHorizontal1;
     @JsonProperty("btnShotaiJohou")
-    private Button btnShotaiJohou;
+    private ButtonDialog btnShotaiJohou;
     @JsonProperty("HihokenshashoHakkoTaishoshaJoho")
     private HihokenshashoHakkoTaishoshaJohoDiv HihokenshashoHakkoTaishoshaJoho;
     @JsonProperty("ccdKaigoShikakuKihonDiv")
     private KaigoShikakuKihonDiv ccdKaigoShikakuKihonDiv;
     @JsonProperty("ccdKaigoAtenaInfoDiv")
     private KaigoAtenaInfoDiv ccdKaigoAtenaInfoDiv;
+    @JsonProperty("listIndex")
+    private RString listIndex;
+    @JsonProperty("shikibetsuCode")
+    private RString shikibetsuCode;
+    @JsonProperty("nowDate")
+    private RString nowDate;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -68,7 +75,7 @@ public class FutanGendogakuNinteiKousinTsuchisyoKobetHakkoDiv extends Panel {
      * @return btnShotaiJohou
      */
     @JsonProperty("btnShotaiJohou")
-    public Button getBtnShotaiJohou() {
+    public ButtonDialog getBtnShotaiJohou() {
         return btnShotaiJohou;
     }
 
@@ -77,7 +84,7 @@ public class FutanGendogakuNinteiKousinTsuchisyoKobetHakkoDiv extends Panel {
      * @param btnShotaiJohou btnShotaiJohou
      */
     @JsonProperty("btnShotaiJohou")
-    public void setBtnShotaiJohou(Button btnShotaiJohou) {
+    public void setBtnShotaiJohou(ButtonDialog btnShotaiJohou) {
         this.btnShotaiJohou = btnShotaiJohou;
     }
 
@@ -115,6 +122,60 @@ public class FutanGendogakuNinteiKousinTsuchisyoKobetHakkoDiv extends Panel {
     @JsonProperty("ccdKaigoAtenaInfoDiv")
     public IKaigoAtenaInfoDiv getCcdKaigoAtenaInfoDiv() {
         return ccdKaigoAtenaInfoDiv;
+    }
+
+    /*
+     * getlistIndex
+     * @return listIndex
+     */
+    @JsonProperty("listIndex")
+    public RString getListIndex() {
+        return listIndex;
+    }
+
+    /*
+     * setlistIndex
+     * @param listIndex listIndex
+     */
+    @JsonProperty("listIndex")
+    public void setListIndex(RString listIndex) {
+        this.listIndex = listIndex;
+    }
+
+    /*
+     * getshikibetsuCode
+     * @return shikibetsuCode
+     */
+    @JsonProperty("shikibetsuCode")
+    public RString getShikibetsuCode() {
+        return shikibetsuCode;
+    }
+
+    /*
+     * setshikibetsuCode
+     * @param shikibetsuCode shikibetsuCode
+     */
+    @JsonProperty("shikibetsuCode")
+    public void setShikibetsuCode(RString shikibetsuCode) {
+        this.shikibetsuCode = shikibetsuCode;
+    }
+
+    /*
+     * getnowDate
+     * @return nowDate
+     */
+    @JsonProperty("nowDate")
+    public RString getNowDate() {
+        return nowDate;
+    }
+
+    /*
+     * setnowDate
+     * @param nowDate nowDate
+     */
+    @JsonProperty("nowDate")
+    public void setNowDate(RString nowDate) {
+        this.nowDate = nowDate;
     }
 
     /*

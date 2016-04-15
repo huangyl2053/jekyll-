@@ -9,8 +9,9 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 import lombok.Getter;
 
 /**
+ * 年齢到達者登録リスト帳票のItemクラスです。
  *
- * 住基連動登録リスト帳票NenreitotatsuKakuninListItemです。
+ * @reamsid_L DBA-0570-060 xuyue
  */
 @Getter
 @SuppressWarnings("PMD.UnusedPrivateField")
