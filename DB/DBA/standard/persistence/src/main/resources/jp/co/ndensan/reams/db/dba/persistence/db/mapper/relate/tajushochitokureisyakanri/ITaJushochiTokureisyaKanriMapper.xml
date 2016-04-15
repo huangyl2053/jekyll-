@@ -120,7 +120,7 @@
         AND ((dbT1004."taishoYMD" IS NULL AND dbT1004."nyushoYMD" <![CDATA[<]]> dbT1003."kaijoYMD")
         OR (dbT1004."nyushoYMD" <![CDATA[<]]> dbT1003."kaijoYMD" AND dbT1004."taishoYMD" <![CDATA[>]]> dbT1003."tekiyoYMD")))))
         ORDER BY
-        dbT1003."tekiyoYMD", dbT1003."idoYMD",dbT1003."edaNo", dbT1004."nyushoYMD", dbT1004."taishoYMD" DESC
+        dbT1003."tekiyoYMD" DESC, dbT1003."idoYMD" DESC,dbT1003."edaNo" DESC, dbT1004."nyushoYMD" DESC, dbT1004."taishoYMD" DESC
     </select>
 
     <resultMap id="result_get事業者名称_介護保険施設" type="jp.co.ndensan.reams.db.dba.entity.db.relate.tajushochitokureisyakan.TaJushochiTokureisyaKanriRelateEntity">
@@ -240,10 +240,10 @@
         AND (("DbT1004ShisetsuNyutaisho"."taishoYMD" IS NULL AND "DbT1004ShisetsuNyutaisho"."nyushoYMD" <![CDATA[<]]> "DbT1003TashichosonJushochiTokurei"."kaijoYMD")
         OR ("DbT1004ShisetsuNyutaisho"."nyushoYMD" <![CDATA[<]]> "DbT1003TashichosonJushochiTokurei"."kaijoYMD" AND "DbT1004ShisetsuNyutaisho"."taishoYMD" <![CDATA[>]]> "DbT1003TashichosonJushochiTokurei"."tekiyoYMD")))))
         ORDER BY
-        "DbT1003TashichosonJushochiTokurei"."tekiyoYMD"
-        , "DbT1003TashichosonJushochiTokurei"."idoYMD",
-           "DbT1003TashichosonJushochiTokurei"."edaNo"
-           , "DbT1004ShisetsuNyutaisho"."nyushoYMD", 
+        "DbT1003TashichosonJushochiTokurei"."tekiyoYMD" DESC
+        , "DbT1003TashichosonJushochiTokurei"."idoYMD" DESC,
+           "DbT1003TashichosonJushochiTokurei"."edaNo" DESC
+           , "DbT1004ShisetsuNyutaisho"."nyushoYMD" DESC, 
            "DbT1004ShisetsuNyutaisho"."taishoYMD" DESC
     </select>
     <resultMap id="ResultMap_TashichosonRelateEntity" type="jp.co.ndensan.reams.db.dba.entity.db.relate.tajushochitokureisyakan.TashichosonRelateEntity" autoMapping="true">
