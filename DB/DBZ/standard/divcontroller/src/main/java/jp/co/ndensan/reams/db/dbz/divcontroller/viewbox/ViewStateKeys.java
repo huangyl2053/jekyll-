@@ -13,6 +13,10 @@ package jp.co.ndensan.reams.db.dbz.divcontroller.viewbox;
 public enum ViewStateKeys {
 
     /**
+     * 資格対象者。
+     */
+    資格対象者,
+    /**
      * キーが「認定調査スケジュール登録_地区コード」であることを表します。
      */
     認定調査スケジュール登録_地区コード,

@@ -13,7 +13,8 @@ import jp.co.ndensan.reams.db.dba.business.report.tekiyojogaishadaicho.Tekiyojog
 import jp.co.ndensan.reams.db.dba.divcontroller.entity.parentdiv.DBA4030011.TeikiyoJogaishaShokaiDiv;
 import jp.co.ndensan.reams.db.dba.service.core.tekiyojogaishadaichojoho.TekiyoJogaishaDaichoJohoFinder;
 import jp.co.ndensan.reams.db.dba.service.report.tekiyojogaishadaicho.TekiyojogaishaDaichoPrintService;
-import jp.co.ndensan.reams.db.dbz.definition.core.ViewStateKeys;
+import jp.co.ndensan.reams.db.dbz.divcontroller.viewbox.ViewStateKeys;
+import jp.co.ndensan.reams.db.dbz.service.TaishoshaKey;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrQuestionMessages;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaMeisho;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
@@ -45,7 +46,11 @@ public class TeikiyoJogaishaShokai {
      * @return ResponseData<TeikiyoJogaishaShokaiDiv>
      */
     public ResponseData<TeikiyoJogaishaShokaiDiv> onLoad(TeikiyoJogaishaShokaiDiv div) {
-        ShikibetsuCode 識別コード = ViewStateHolder.get(ViewStateKeys.識別コード, ShikibetsuCode.class);
+        TaishoshaKey key = ViewStateHolder.get(ViewStateKeys.資格対象者, TaishoshaKey.class);
+        ShikibetsuCode 識別コード = ShikibetsuCode.EMPTY;
+        if (key != null) {
+            識別コード = key.get識別コード();
+        }
         div.getShikakuKihonJoho().getCcdShikakuJoho().onLoad(識別コード);
         div.getShikakuKihonJoho().getCcdKaigoAtenaInfo().onLoad(識別コード);
         div.getTeikiyoJogaishaJoho().getCcdTekiyoJogaiRireki().initialize(識別コード);
@@ -61,7 +66,11 @@ public class TeikiyoJogaishaShokai {
      * @return ResponseData<SourceDataCollection>
      */
     public ResponseData<SourceDataCollection> onClick_btnReportPublish(TeikiyoJogaishaShokaiDiv div) {
-        ShikibetsuCode 識別コード = ViewStateHolder.get(ViewStateKeys.識別コード, ShikibetsuCode.class);
+        TaishoshaKey key = ViewStateHolder.get(ViewStateKeys.資格対象者, TaishoshaKey.class);
+        ShikibetsuCode 識別コード = ShikibetsuCode.EMPTY;
+        if (key != null) {
+            識別コード = key.get識別コード();
+        }
         List<TekiyoJogaishaDaichoJoho> list = TekiyoJogaishaDaichoJohoFinder.createInstance().getTekiyoJogaishaDaichoJoho(識別コード).records();
         return ResponseData.of(new TekiyojogaishaDaichoPrintService().print(get適用除外者台帳情報(list))).respond();
     }
