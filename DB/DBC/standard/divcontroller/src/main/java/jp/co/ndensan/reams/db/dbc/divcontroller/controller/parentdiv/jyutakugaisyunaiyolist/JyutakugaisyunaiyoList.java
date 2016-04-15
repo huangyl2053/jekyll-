@@ -102,7 +102,9 @@ public class JyutakugaisyunaiyoList {
         AtenaJusho jusho = new AtenaJusho(DataPassingConverter.deserialize(
                 requestDiv.getJushoData(), IJusho.class).get住所());
         requestDiv.getTxtJyusyo().setDomain(jusho);
-        requestDiv.setBtnClear(null);
+        requestDiv.getBtnClear().setDisabled(false);
+        requestDiv.getBtnDetailConfirm().setDisabled(false);
+        requestDiv.getBtnHonnijyusyoCopy().setDisabled(false);
         return ResponseData.of(requestDiv).respond();
     }
 
@@ -227,12 +229,12 @@ public class JyutakugaisyunaiyoList {
         div.getTxtKaisyunaiyo().setValue(RString.EMPTY);
         div.getTxtKaisyunaiyo().setReadOnly(true);
         div.getTxtJigyosya().setValue(RString.EMPTY);
-        div.getTxtJigyosya().setReadOnly(true);
+        div.getTxtJigyosya().setDisabled(true);
         div.getBtnHonnijyusyoCopy().setDisabled(true);
         div.getTxtJyusyo().clearDomain();
         div.getTxtJyusyo().setReadOnly(true);
         div.getTxtTyakkoyotebi().clearValue();
-        div.getTxtTyakkoyotebi().setReadOnly(true);
+        div.getTxtTyakkoyotebi().setDisabled(true);
         div.getTxtKanseyotebi().clearValue();
         div.getTxtKanseyotebi().setReadOnly(true);
         div.getTxtKaisyukingaku().clearValue();
@@ -245,10 +247,10 @@ public class JyutakugaisyunaiyoList {
 
     private JyutakugaisyunaiyoListDiv clear制御非活性(JyutakugaisyunaiyoListDiv div) {
         div.getTxtKaisyunaiyo().setReadOnly(true);
-        div.getTxtJigyosya().setReadOnly(true);
+        div.getTxtJigyosya().setDisabled(true);
         div.getBtnHonnijyusyoCopy().setDisabled(true);
         div.getTxtJyusyo().setReadOnly(true);
-        div.getTxtTyakkoyotebi().setReadOnly(true);
+        div.getTxtTyakkoyotebi().setDisabled(true);
         div.getTxtKanseyotebi().setReadOnly(true);
         div.getTxtKaisyukingaku().setReadOnly(true);
         div.getBtnClear().setDisabled(true);
@@ -258,10 +260,10 @@ public class JyutakugaisyunaiyoList {
 
     private JyutakugaisyunaiyoListDiv clear制御活性(JyutakugaisyunaiyoListDiv div) {
         div.getTxtKaisyunaiyo().setReadOnly(false);
-        div.getTxtJigyosya().setReadOnly(false);
+        div.getTxtJigyosya().setDisabled(false);
         div.getBtnHonnijyusyoCopy().setDisabled(false);
         div.getTxtJyusyo().setReadOnly(false);
-        div.getTxtTyakkoyotebi().setReadOnly(false);
+        div.getTxtTyakkoyotebi().setDisabled(false);
         div.getTxtKanseyotebi().setReadOnly(false);
         div.getTxtKaisyukingaku().setReadOnly(false);
         div.getBtnClear().setDisabled(false);
