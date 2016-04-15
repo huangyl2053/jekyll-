@@ -21,13 +21,7 @@ import jp.co.ndensan.reams.db.dbu.entity.kouikitenkyoresultlist.KoikinaiTenkyoCS
 import jp.co.ndensan.reams.db.dbu.entity.kouikitenkyoresultlist.KoikinaiTenkyoEntity;
 import jp.co.ndensan.reams.db.dbu.entity.kouikitenkyoresultlist.KoikinaiTenkyoListEntity;
 import jp.co.ndensan.reams.db.dbu.entity.kouikitenkyoresultlist.KoikinaiTenkyoResultEntity;
-import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.search.ShikibetsuTaishoPSMSearchKeyBuilder;
-import jp.co.ndensan.reams.ua.uax.definition.core.enumeratedtype.shikibetsutaisho.KensakuYusenKubun;
-import jp.co.ndensan.reams.ua.uax.definition.core.enumeratedtype.shikibetsutaisho.psm.DataShutokuKubun;
-import jp.co.ndensan.reams.ua.uax.definition.mybatisprm.shikibetsutaisho.IShikibetsuTaishoPSMSearchKey;
 import jp.co.ndensan.reams.ur.urz.business.core.association.Association;
-import jp.co.ndensan.reams.ur.urz.definition.core.shikibetsutaisho.JuminJotai;
-import jp.co.ndensan.reams.ur.urz.definition.core.shikibetsutaisho.JuminShubetsu;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.ur.urz.service.core.association.AssociationFinderFactory;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchDbReader;
@@ -37,7 +31,6 @@ import jp.co.ndensan.reams.uz.uza.batch.process.BatchReportWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.IBatchReader;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaMeisho;
-import jp.co.ndensan.reams.uz.uza.biz.GyomuCode;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.ReportId;
 import jp.co.ndensan.reams.uz.uza.euc.io.EucCsvWriter;
@@ -66,6 +59,7 @@ public class HiroshimaDomainReportProcess extends BatchProcessBase<HiroshimaDoma
             "jp.co.ndensan.reams.db.dbu.persistence.db.mapper.relate.hiroshimadomain.IHiroshimaDomainMapper.get転入転出異動情報");
     private static final EucEntityId EUC_ENTITY_ID = new EucEntityId(new RString("DBA200011_KoikinaiTenkyoKekkaIchiranhyo"));
     private static final ReportId DBA200011 = new ReportId("DBA200011_KoikinaiTenkyoKekkaIchiranhyo");
+    private static final RString INDEX = new RString("000000");
     private static final RString EUC_WRITER_DELIMITER = new RString(",");
     private static final RString EUC_WRITER_ENCLOSURE = new RString("\"");
     private static final RString STRING_SAKUSEI = new RString("作成");
@@ -83,22 +77,6 @@ public class HiroshimaDomainReportProcess extends BatchProcessBase<HiroshimaDoma
     @Override
     protected void initialize() {
         list = new ArrayList<>();
-        ShikibetsuTaishoPSMSearchKeyBuilder builder = new ShikibetsuTaishoPSMSearchKeyBuilder(GyomuCode.DB介護保険,
-                KensakuYusenKubun.住登外優先);
-        List<JuminShubetsu> 住民種別List = new ArrayList();
-        List<JuminJotai> 住民状態List = new ArrayList();
-        住民種別List.add(JuminShubetsu.日本人);
-        住民種別List.add(JuminShubetsu.外国人);
-        住民状態List.add(JuminJotai.住民);
-        住民状態List.add(JuminJotai.住登外);
-        住民状態List.add(JuminJotai.消除者);
-        住民状態List.add(JuminJotai.転出者);
-        住民状態List.add(JuminJotai.死亡者);
-        builder.set住民種別(住民種別List);
-        builder.set住民状態(住民状態List);
-        builder.setデータ取得区分(DataShutokuKubun.基準日時点の最新のレコード);
-        IShikibetsuTaishoPSMSearchKey searchKey = builder.build();
-        processParameter.set宛名検索条件(searchKey);
     }
 
     @Override
@@ -156,7 +134,7 @@ public class HiroshimaDomainReportProcess extends BatchProcessBase<HiroshimaDoma
     @Override
     protected void afterExecute() {
         if (processParameter.get市町村コード() != null
-                && !new RString("0000").equals(processParameter.get市町村コード().getColumnValue())) {
+                && !INDEX.equals(processParameter.get市町村コード().value())) {
             市町村コード = processParameter.get市町村コード();
             市町村名称 = processParameter.get市町村名称();
         } else {
@@ -164,7 +142,7 @@ public class HiroshimaDomainReportProcess extends BatchProcessBase<HiroshimaDoma
             市町村コード = 導入団体クラス.getLasdecCode_();
             市町村名称 = 導入団体クラス.get市町村名();
         }
-        List<KoikinaiTenkyoResultEntity> 広域内転居結果帳票List = get帳票リスト(list);
+        List<KoikinaiTenkyoResultEntity> 広域内転居結果帳票List = get帳票リスト(list, 市町村コード, 市町村名称);
         List<KoikinaiTenkyoKekkaIchiranhyoBodyItem> itemList = get広域内転居結果一覧表ボディのITEM(広域内転居結果帳票List);
         KoikinaiTenkyoKekkaIchiranhyoHeadItem headItem = new KoikinaiTenkyoKekkaIchiranhyoHeadItem(印刷日時表示作成(),
                 市町村コード.value(),
@@ -178,19 +156,13 @@ public class HiroshimaDomainReportProcess extends BatchProcessBase<HiroshimaDoma
     /**
      * get帳票リスト
      *
-     * @param list
+     * @param list list
+     * @param 市町村コード 市町村コード
+     * @param 市町村名称 市町村名称
      * @return 帳票リスト
      */
-    private List<KoikinaiTenkyoResultEntity> get帳票リスト(List<KoikinaiTenkyoEntity> list) {
-        if (processParameter.get市町村コード() != null
-                && !new RString("0000").equals(processParameter.get市町村コード().getColumnValue())) {
-            市町村コード = processParameter.get市町村コード();
-            市町村名称 = processParameter.get市町村名称();
-        } else {
-            Association 導入団体クラス = AssociationFinderFactory.createInstance().getAssociation();
-            市町村コード = 導入団体クラス.getLasdecCode_();
-            市町村名称 = 導入団体クラス.get市町村名();
-        }
+    private List<KoikinaiTenkyoResultEntity> get帳票リスト(List<KoikinaiTenkyoEntity> list, LasdecCode 市町村コード, RString 市町村名称) {
+
         KoikinaiTenkyoListEntity 広域内転居結果一覧Entity = new KoikinaiTenkyoListEntity();
         if (list.isEmpty()) {
             KoikinaiTenkyoEntity 広域内転居結果Entity = new KoikinaiTenkyoEntity();
