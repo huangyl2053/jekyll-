@@ -14,12 +14,15 @@ import jp.co.ndensan.reams.db.dba.service.report.hihokenshadaicho.HihokenshaDaic
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbz.divcontroller.util.viewstate.ViewStateKey;
 import jp.co.ndensan.reams.db.dbz.service.TaishoshaKey;
+import jp.co.ndensan.reams.ur.urz.definition.message.UrQuestionMessages;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.report.SourceDataCollection;
+import jp.co.ndensan.reams.uz.uza.ui.servlets.CommonButtonHolder;
+import jp.co.ndensan.reams.uz.uza.ui.servlets.ResponseHolder;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 import jp.co.ndensan.reams.uz.uza.util.db.SearchResult;
 
@@ -45,12 +48,26 @@ public class HihokenshaShokaiTotal {
      * @return ResponseData<HihokenshaShokaiTotalDiv>
      */
     public ResponseData<HihokenshaShokaiTotalDiv> onLoad(HihokenshaShokaiTotalDiv div) {
+        CommonButtonHolder.setVisibleByCommonButtonFieldName(new RString("btnPublish"), false);
         TaishoshaKey key = ViewStateHolder.get(ViewStateKey.資格対象者, TaishoshaKey.class);
         ShikibetsuCode shikibetsuCode = key.get識別コード();
         HihokenshaNo hihokenshaNo = key.get被保険者番号();
         div.getKihonJoho().getCcdKaigoAtenaInfo().onLoad(shikibetsuCode);
         div.getKihonJoho().getCcdKaigoShikakuKihon().onLoad(shikibetsuCode);
         div.getHihokenshaShokaiPanel().getCcdShikakuTokusoRireki().initialize(hihokenshaNo, shikibetsuCode);
+        return ResponseData.of(div).respond();
+    }
+
+    /**
+     * 被保険者台帳を発行します。
+     *
+     * @param div 被保険者照会DIV
+     * @return ResponseData<HihokenshaShokaiTotalDiv>
+     */
+    public ResponseData<HihokenshaShokaiTotalDiv> onClick_btnChkPublish(HihokenshaShokaiTotalDiv div) {
+        if (!ResponseHolder.isReRequest()) {
+            return ResponseData.of(div).addMessage(UrQuestionMessages.処理実行の確認.getMessage()).respond();
+        }
         return ResponseData.of(div).respond();
     }
 
@@ -95,9 +112,11 @@ public class HihokenshaShokaiTotal {
      * @return ResponseData<HihokenshaShokaiTotalDiv>
      */
     public ResponseData<HihokenshaShokaiTotalDiv> onChange_tabHihokenshaShokai(HihokenshaShokaiTotalDiv div) {
-        TaishoshaKey key = ViewStateHolder.get(ViewStateKey.資格対象者, TaishoshaKey.class);
+        TaishoshaKey key = ViewStateHolder.get(ViewStateKey.資格対象者, TaishoshaKey.class
+        );
         ShikibetsuCode shikibetsuCode = key.get識別コード();
         HihokenshaNo hihokenshaNo = key.get被保険者番号();
+
         if (被保履歴.equals(div.getHihokenshaShokaiPanel().getTabHihokenshaShokai().getSelectControlID())) {
             div.getHihokenshaShokaiPanel().getCcdShikakuTokusoRireki().initialize(hihokenshaNo, shikibetsuCode);
         } else if (世帯照会.equals(div.getHihokenshaShokaiPanel().getTabHihokenshaShokai().getSelectedItem().getSelectControlID())) {
@@ -112,6 +131,8 @@ public class HihokenshaShokaiTotal {
         } else if (証交付回収.equals(div.getHihokenshaShokaiPanel().getTabHihokenshaShokai().getSelectedItem().getSelectControlID())) {
             div.getHihokenshaShokaiPanel().getCcdShoKaishuJokyoList().initialize(照会, hihokenshaNo);
         }
-        return ResponseData.of(div).respond();
+
+        return ResponseData.of(div)
+                .respond();
     }
 }
