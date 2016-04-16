@@ -10,7 +10,7 @@ import jp.co.ndensan.reams.db.dbu.definition.core.benmeitoroku.BenmeiTorokuViewS
 import jp.co.ndensan.reams.db.dbu.divcontroller.entity.parentdiv.DBU0900031.BenmeiTorokuPanelDiv;
 import jp.co.ndensan.reams.db.dbu.divcontroller.entity.parentdiv.DBU0900031.DBU0900031StateName;
 import jp.co.ndensan.reams.db.dbu.divcontroller.entity.parentdiv.DBU0900031.DBU0900031TransitionEventName;
-import jp.co.ndensan.reams.db.dbu.divcontroller.handler.dbu0900031.BenmeiTorokuPanelHandler;
+import jp.co.ndensan.reams.db.dbu.divcontroller.handler.parentdiv.DBU0900031.BenmeiTorokuPanelHandler;
 import jp.co.ndensan.reams.db.dbu.service.core.benmeitoroku.BenmeiTorokuManager;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.BemmeiNaiyo;

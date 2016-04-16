@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbu.divcontroller.handler.dbu0400011;
+package jp.co.ndensan.reams.db.dbu.divcontroller.handler.parentdiv.DBU0400011;
 
 import jp.co.ndensan.reams.db.dbu.divcontroller.entity.parentdiv.DBU0400011.HihokenshaShoBatchPrmDiv;
 import jp.co.ndensan.reams.db.dbz.definition.message.DbzErrorMessages;

@@ -14,7 +14,7 @@ import static jp.co.ndensan.reams.db.dbu.divcontroller.entity.parentdiv.DBU00200
 import static jp.co.ndensan.reams.db.dbu.divcontroller.entity.parentdiv.DBU0020041.DBU0020041StateName.削除状態4;
 import jp.co.ndensan.reams.db.dbu.divcontroller.entity.parentdiv.DBU0020041.DBU0020041TransitionEventName;
 import jp.co.ndensan.reams.db.dbu.divcontroller.entity.parentdiv.DBU0020041.YoshikiIchinoyonHoseiDiv;
-import jp.co.ndensan.reams.db.dbu.divcontroller.handler.dbu0020041.YoshikiIchinoyonHoseiHandler;
+import jp.co.ndensan.reams.db.dbu.divcontroller.handler.parentdiv.DBU0020041.YoshikiIchinoyonHoseiHandler;
 import jp.co.ndensan.reams.db.dbu.divcontroller.viewbox.JigyoHokokuGeppoParameter;
 import jp.co.ndensan.reams.db.dbu.divcontroller.viewbox.ViewStateKeys;
 import jp.co.ndensan.reams.db.dbu.service.jigyohokokugeppohoseihako.JigyoHokokuGeppoHoseiHako;

@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbu.divcontroller.handler.dbu0020041;
+package jp.co.ndensan.reams.db.dbu.divcontroller.handler.parentdiv.DBU0020041;
 
 import java.util.ArrayList;
 import java.util.List;
