@@ -425,9 +425,9 @@ public class ShokanJutakuKaishuJizenShinseiBuilder {
      * @param 判定決定年月日 判定決定年月日
      * @return {@link ShokanJutakuKaishuJizenShinseiBuilder}
      */
-    public ShokanJutakuKaishuJizenShinseiBuilder set判定決定年月日(boolean 判定決定年月日) {
+    public ShokanJutakuKaishuJizenShinseiBuilder set判定決定年月日(FlexibleDate 判定決定年月日) {
         requireNonNull(判定決定年月日, UrSystemErrorMessages.値がnull.getReplacedMessage("判定決定年月日"));
-        entity.setJutakuJushoHenko(判定決定年月日);
+        entity.setHanteiKetteiYMD(判定決定年月日);
         return this;
     }
 
@@ -437,9 +437,9 @@ public class ShokanJutakuKaishuJizenShinseiBuilder {
      * @param 判定区分 判定区分
      * @return {@link ShokanJutakuKaishuJizenShinseiBuilder}
      */
-    public ShokanJutakuKaishuJizenShinseiBuilder set判定区分(FlexibleDate 判定区分) {
+    public ShokanJutakuKaishuJizenShinseiBuilder set判定区分(RString 判定区分) {
         requireNonNull(判定区分, UrSystemErrorMessages.値がnull.getReplacedMessage("判定区分"));
-        entity.setHanteiKetteiYMD(判定区分);
+        entity.setHanteiKubun(判定区分);
         return this;
     }
 
