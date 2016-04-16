@@ -80,7 +80,7 @@ public class HihokenshaDaichoProcess extends BatchProcessBase<DbT1001HihokenshaD
     private IkkatsuSusakuseiProcessParameter processPrm;
     private IkkatsuSakuseiMybatisParameter mybatisPrm;
     private IIkkatsuSakuseiMapper iIkkatsuSakuseiMapper;
-    private List<HihokenshaEntity> 被保険者EntityList;
+    private List<HihokenshaDaichoSakusei> 被保険者台帳EntityList;
     @BatchWriter
     private BatchReportWriter<HihokenshaDaichoReportSource> batchReportWriter;
     private ReportSourceWriter<HihokenshaDaichoReportSource> reportSourceWriter;
@@ -89,7 +89,7 @@ public class HihokenshaDaichoProcess extends BatchProcessBase<DbT1001HihokenshaD
     protected void initialize() {
         mybatisPrm = processPrm.toIkkatsuHakkoMybatisParameter();
         iIkkatsuSakuseiMapper = getMapper(IIkkatsuSakuseiMapper.class);
-        被保険者EntityList = new ArrayList<>();
+        被保険者台帳EntityList = new ArrayList<>();
     }
 
     @Override
@@ -106,15 +106,16 @@ public class HihokenshaDaichoProcess extends BatchProcessBase<DbT1001HihokenshaD
 
     @Override
     protected void process(DbT1001HihokenshaDaichoEntity entity) {
-        被保険者EntityList.add(set被保険者Entity(entity));
+        被保険者台帳EntityList.addAll(HihokenshaDaichoSakuseiManager.createInstance().
+                getHihokenshaDaichoHenshu(set被保険者Entity(entity)).records());
     }
 
     @Override
     protected void afterExecute() {
-        List<HihokenshaDaichoSakusei> 被保険者台帳EntityList = HihokenshaDaichoSakuseiManager.
-                createInstance().getHihokenshaDaichoHenshu(被保険者EntityList).records();
-        HihokenshaDaichoReport report = HihokenshaDaichoReport.createReport(被保険者台帳EntityList);
-        report.writeBy(reportSourceWriter);
+        if (被保険者台帳EntityList != null && !被保険者台帳EntityList.isEmpty()) {
+            HihokenshaDaichoReport report = HihokenshaDaichoReport.createReport(被保険者台帳EntityList);
+            report.writeBy(reportSourceWriter);
+        }
     }
 
     private HihokenshaEntity set被保険者Entity(DbT1001HihokenshaDaichoEntity entity) {

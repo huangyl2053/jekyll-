@@ -11,6 +11,7 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import jp.co.ndensan.reams.db.dbd.business.core.gemmengengaku.futangendogakunintei.FutanGendogakuNintei;
+import jp.co.ndensan.reams.db.dbd.business.report.ninteikoshintsuchisho.NinteiKoshinTsuchishoItem;
 import jp.co.ndensan.reams.db.dbd.definition.core.gemmengengaku.GemmenGengakuShurui;
 import jp.co.ndensan.reams.db.dbd.definition.core.gemmengengaku.futangendogakunintei.KyuSochishaKubun;
 import jp.co.ndensan.reams.db.dbd.definition.core.reportid.ReportIdDBD;
@@ -20,7 +21,9 @@ import jp.co.ndensan.reams.db.dbd.definition.mybatisprm.relate.futangendogakunin
 import jp.co.ndensan.reams.db.dbd.persistence.db.mapper.relate.futangendogakunintei.IAtesakiPSMMybatisMapper;
 import jp.co.ndensan.reams.db.dbd.persistence.db.mapper.relate.futangendogakunintei.IShikibetsuTaishoPSMMybatisMapper;
 import jp.co.ndensan.reams.db.dbd.service.core.gemmengengaku.futangendogakunintei.FutanGendogakuNinteiManager;
+import jp.co.ndensan.reams.db.dbd.service.core.ninteikoshintsuchisho.NinteiKoshinTsuchishoService;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
+import jp.co.ndensan.reams.db.dbz.business.core.basic.ChohyoSeigyoKyotsu;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7065ChohyoSeigyoKyotsuEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7067ChohyoSeigyoHanyoEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7068ChohyoBunruiKanriEntity;
@@ -29,6 +32,8 @@ import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT7067ChohyoSeigyoHanyoD
 import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT7068ChohyoBunruiKanriDac;
 import jp.co.ndensan.reams.db.dbz.service.core.MapperProvider;
 import jp.co.ndensan.reams.db.dbz.service.util.report.ReportUtil;
+import jp.co.ndensan.reams.ua.uax.business.core.atesaki.AtesakiFactory;
+import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.ShikibetsuTaishoFactory;
 import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.search.AtesakiGyomuHanteiKeyFactory;
 import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.search.AtesakiPSMSearchKeyBuilder;
 import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.search.ShikibetsuTaishoPSMSearchKeyBuilder;
@@ -38,6 +43,7 @@ import jp.co.ndensan.reams.ua.uax.definition.mybatisprm.shikibetsutaisho.IShikib
 import jp.co.ndensan.reams.ua.uax.entity.db.basic.UaFt200FindShikibetsuTaishoEntity;
 import jp.co.ndensan.reams.ua.uax.entity.db.basic.UaFt250FindAtesakiEntity;
 import jp.co.ndensan.reams.ur.urz.business.core.association.Association;
+import jp.co.ndensan.reams.ur.urz.business.core.ninshosha.Ninshosha;
 import jp.co.ndensan.reams.ur.urz.definition.core.reportprinthistory.ChohyoHakkoRirekiJotai;
 import jp.co.ndensan.reams.ur.urz.definition.core.reportprinthistory.ChohyoHakkoRirekiSearchDefault;
 import jp.co.ndensan.reams.ur.urz.entity.report.parts.ninshosha.NinshoshaSource;
@@ -54,9 +60,6 @@ import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.report.IReportProperty;
-import jp.co.ndensan.reams.uz.uza.report.Printer;
-import jp.co.ndensan.reams.uz.uza.report.Report;
 import jp.co.ndensan.reams.uz.uza.report.SourceData;
 import jp.co.ndensan.reams.uz.uza.report.SourceDataCollection;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
@@ -102,7 +105,7 @@ public class FutanGendogakuNinteiKanshoTsuchisho {
         FutanGendogakuNinteiManager futanGendogakuNinteiManager = FutanGendogakuNinteiManager.createInstance();
         FutanGendogakuNinteiParameter parameter
                 = FutanGendogakuNinteiParameter.createSelectParam(GemmenGengakuShurui.負担限度額認定.getコード(), 被保険者番号, 履歴番号);
-        ArrayList<FutanGendogakuNintei> 介護保険負担限度額認定List = futanGendogakuNinteiManager.get負担限度額認定帳票用リスト(parameter);
+        FutanGendogakuNintei 介護保険負担限度額認定 = futanGendogakuNinteiManager.get負担限度額認定帳票用(parameter);
         //1.2.	地方公共団体を取得する
         IAssociationFinder finder = AssociationFinderFactory.createInstance();
         Association association = finder.getAssociation();
@@ -131,16 +134,17 @@ public class FutanGendogakuNinteiKanshoTsuchisho {
         DbT7068ChohyoBunruiKanriEntity dbT7068Entity = dbT7068Dac.selectByKey(SubGyomuCode.DBD介護受給, ReportIdDBD.DBDPR12002_1.getReportId());
         ReportId 帳票分類ID = dbT7068Entity.getChohyoBunruiID();
         // 2.2.	帳票制御共通を取得する
-        load帳票制御共通(帳票分類ID);
+        DbT7065ChohyoSeigyoKyotsuEntity dbT7065Entity = load帳票制御共通(帳票分類ID);
 
         // 2.3.	帳票制御汎用を取得する
-        load帳票制御汎用(帳票分類ID);
+        List<DbT7067ChohyoSeigyoHanyoEntity> dbT7067EntityList = load帳票制御汎用(帳票分類ID);
 
         //2.4.	認証者を取得する
         //JoseikinKyufuShinseishoProperty proerty = new JoseikinKyufuShinseishoProperty();
-        //ReportSourceWriter<JoseikinKyufuShinseishoReportSource> reportSourceWriter = new ReportSourceWriter(createAssembler(proerty, new ReportManager()));
+        //ReportSourceWriter<JoseikinKyufuShinseishoReportSource> reportSourceWriter
+        //= new ReportSourceWriter(createAssembler(proerty, new ReportManager()));
         NinshoshaSource ninshoshaSource = ReportUtil.get認証者情報(SubGyomuCode.DBD介護受給, 帳票分類ID, new FlexibleDate(発行日.toDateString()), null);
-
+        Ninshosha ninshosha = new Ninshosha(null);
         // 3.	帳票を発行する
         if (new RString("DBD100008_FutanGendogakuNinteiKoshinTsuchisho").equals(new RString(帳票分類ID.toString()))) {
             // 3.1.1.帳票IDを判断する
@@ -157,18 +161,34 @@ public class FutanGendogakuNinteiKanshoTsuchisho {
 
             //3.1.2.定型文情報を取得する
             Map<Integer, RString> 通知文Map = ReportUtil.get通知文(SubGyomuCode.DBD介護受給, 帳票分類ID, KamokuCode.EMPTY, パターン番号);
+            List<RString> 通知書定型文List = new ArrayList<>();
+            while (通知文Map.keySet().iterator().hasNext()) {
+                RString 通知文 = 通知文Map.get(通知文Map.keySet().iterator().next());
+                通知書定型文List.add(通知文);
+            };
 
             //3.1.3.帳票を編集する
             //3.1.4.プールの登録
-            Printer printer = new Printer();
-            IReportProperty property = null;
-            Report report = null;
-            sourceDataCollection = printer.spool(property, report);
+            List<NinteiKoshinTsuchishoItem> itemList = new ArrayList<>();
+            NinteiKoshinTsuchishoItem item = new NinteiKoshinTsuchishoItem(
+                    介護保険負担限度額認定,
+                    ShikibetsuTaishoFactory.createKojin(uaFt200Entity),
+                    AtesakiFactory.createInstance(uaFt250Entity),
+                    new ChohyoSeigyoKyotsu(dbT7065Entity),
+                    dbT7067EntityList,
+                    association,
+                    発行日,
+                    文書番号,
+                    通知書定型文List,
+                    帳票分類ID,
+                    ninshosha,
+                    TODO旧措置者区分);
+
+            itemList.add(item);
+            NinteiKoshinTsuchishoService service = new NinteiKoshinTsuchishoService();
+            sourceDataCollection = service.print(itemList);
             //3.1.5.		発行履歴の登録
             insert発行履歴(sourceDataCollection, 発行日, 帳票ID, 識別コード);
-
-            // 4.  負担限度額認定申請書の発行
-            // TODO
         }
         return sourceDataCollection;
     }
@@ -205,7 +225,8 @@ public class FutanGendogakuNinteiKanshoTsuchisho {
             throw new NullPointerException();
 
         }
-        DbT7065ChohyoSeigyoKyotsuDac dbT7065Dac = InstanceProvider.create(DbT7065ChohyoSeigyoKyotsuDac.class);
+        DbT7065ChohyoSeigyoKyotsuDac dbT7065Dac = InstanceProvider.create(DbT7065ChohyoSeigyoKyotsuDac.class
+        );
         DbT7065ChohyoSeigyoKyotsuEntity dbT7065Entity = dbT7065Dac.selectByKey(SubGyomuCode.DBD介護受給, 帳票分類ID);
         return dbT7065Entity;
     }
@@ -218,7 +239,8 @@ public class FutanGendogakuNinteiKanshoTsuchisho {
      */
     public List
             load帳票制御汎用(ReportId 帳票分類ID) {
-        DbT7067ChohyoSeigyoHanyoDac dbT7067Dac = InstanceProvider.create(DbT7067ChohyoSeigyoHanyoDac.class);
+        DbT7067ChohyoSeigyoHanyoDac dbT7067Dac = InstanceProvider.create(DbT7067ChohyoSeigyoHanyoDac.class
+        );
         List<DbT7067ChohyoSeigyoHanyoEntity> dbT7067EntityList
                 = dbT7067Dac.get帳票制御汎用(SubGyomuCode.DBD介護受給, 帳票分類ID, new FlexibleYear("0000"));
         return dbT7067EntityList;

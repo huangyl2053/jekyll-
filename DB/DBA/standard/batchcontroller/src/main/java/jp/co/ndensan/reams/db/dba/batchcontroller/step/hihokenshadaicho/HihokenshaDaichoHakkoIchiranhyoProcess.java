@@ -86,7 +86,7 @@ public class HihokenshaDaichoHakkoIchiranhyoProcess extends BatchProcessBase<DbT
     private IkkatsuSusakuseiProcessParameter processPrm;
     private IkkatsuSakuseiMybatisParameter mybatisPrm;
     private IIkkatsuSakuseiMapper iIkkatsuSakuseiMapper;
-    private List<HihokenshaEntity> 被保険者EntityList;
+    private List<HihokenshaDaichoSakusei> 被保険者台帳EntityList;
     @BatchWriter
     private BatchReportWriter<HihokenshaDaichoHakkoIchiranhyoReportSource> batchReportWriter;
     private ReportSourceWriter<HihokenshaDaichoHakkoIchiranhyoReportSource> reportSourceWriter;
@@ -95,7 +95,7 @@ public class HihokenshaDaichoHakkoIchiranhyoProcess extends BatchProcessBase<DbT
     protected void initialize() {
         mybatisPrm = processPrm.toIkkatsuHakkoMybatisParameter();
         iIkkatsuSakuseiMapper = getMapper(IIkkatsuSakuseiMapper.class);
-        被保険者EntityList = new ArrayList<>();
+        被保険者台帳EntityList = new ArrayList<>();
     }
 
     @Override
@@ -112,7 +112,8 @@ public class HihokenshaDaichoHakkoIchiranhyoProcess extends BatchProcessBase<DbT
 
     @Override
     protected void process(DbT1001HihokenshaDaichoEntity entity) {
-        被保険者EntityList.add(set被保険者Entity(entity));
+        被保険者台帳EntityList.addAll(HihokenshaDaichoSakuseiManager.
+                createInstance().getHihokenshaDaichoHenshu(set被保険者Entity(entity)).records());
     }
 
     @Override
@@ -143,8 +144,6 @@ public class HihokenshaDaichoHakkoIchiranhyoProcess extends BatchProcessBase<DbT
 
     private List<HihokenshaDaichoHakkoIchiranhyoBodyItem> setBodyItemList() {
         List<HihokenshaDaichoHakkoIchiranhyoBodyItem> bodyItemList = new ArrayList<>();
-        List<HihokenshaDaichoSakusei> 被保険者台帳EntityList = HihokenshaDaichoSakuseiManager.
-                createInstance().getHihokenshaDaichoHenshu(被保険者EntityList).records();
         List<HihokenshaDaichoIchiranHyoRelateEntity> ichiranHyoRelateEntityList
                 = HihokenshaDaichoIchiranHyoFinder.createInstance().getChohyoIchiran(processPrm.getShutsuryokujunId(), 被保険者台帳EntityList);
         for (HihokenshaDaichoIchiranHyoRelateEntity entity : ichiranHyoRelateEntityList) {

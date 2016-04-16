@@ -5,6 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbc.divcontroller.controller.parentdiv.dbc0610011;
 
+import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0610011.DBC0610011StateName;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0610011.DBC0610011TransitionEventName;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0610011.YoguKonyuhiShikyuShinseiMishinsaSearchPanelDiv;
 import jp.co.ndensan.reams.db.dbc.divcontroller.handler.dbc0610011.YoguKonyuhiShikyuShinseiMishinsaSearchHandler;
@@ -28,6 +29,7 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 public class YoguKonyuhiShikyuShinseiMishinsaSearchPanel {
 
     private final RString 保存 = new RString("btnSave");
+    private final RString 審査 = new RString("審査");
 
     /**
      * 画面初期化メソッドです。
@@ -36,6 +38,15 @@ public class YoguKonyuhiShikyuShinseiMishinsaSearchPanel {
      * @return 福祉用具購入費支給申請審査画面
      */
     public ResponseData<YoguKonyuhiShikyuShinseiMishinsaSearchPanelDiv> onLoad(YoguKonyuhiShikyuShinseiMishinsaSearchPanelDiv div) {
+        if (審査.equals(ViewStateHolder.get(ViewStateKeys.画面モード, RString.class))) {
+            RDate 支給申請日To = ViewStateHolder.get(ViewStateKeys.支給申請日_TO, RDate.class);
+            RDate 支給申請日From = ViewStateHolder.get(ViewStateKeys.支給申請日_FROM, RDate.class);
+            div.getYoguKonyuhiShikyuShinseiMishinsaSearchCondition().getTxtShikyuShinseiDateRange().setToValue(支給申請日To);
+            div.getYoguKonyuhiShikyuShinseiMishinsaSearchCondition().getTxtShikyuShinseiDateRange().setFromValue(支給申請日From);
+            getHandler(div).未審査分検索処理(支給申請日From, 支給申請日To);
+            div.getYoguKonyuhiShikyuShinseiMishinsaResultList().getTxtKetteiYMD().setValue(ViewStateHolder.get(ViewStateKeys.決定日, RDate.class));
+            return ResponseData.of(div).setState(DBC0610011StateName.審査);
+        }
         return ResponseData.of(div).respond();
     }
 
@@ -47,13 +58,11 @@ public class YoguKonyuhiShikyuShinseiMishinsaSearchPanel {
      */
     public ResponseData<YoguKonyuhiShikyuShinseiMishinsaSearchPanelDiv> onClick_btnSearchMishinsa(
             YoguKonyuhiShikyuShinseiMishinsaSearchPanelDiv div) {
-        getHandler(div).未審査分検索処理();
-        RDate 支給申請日_FROM = div.getYoguKonyuhiShikyuShinseiMishinsaSearchCondition().getTxtShikyuShinseiDateRange().getFromValue();
-        RDate 支給申請日_TO = div.getYoguKonyuhiShikyuShinseiMishinsaSearchCondition().getTxtShikyuShinseiDateRange().getFromValue();
-        ViewStateHolder.put(ViewStateKeys.支給申請日_FROM, 支給申請日_FROM);
-        ViewStateHolder.put(ViewStateKeys.支給申請日_TO, 支給申請日_TO);
-        div.getYoguKonyuhiShikyuShinseiMishinsaSearchCondition().setIsOpen(false);
-        div.getYoguKonyuhiShikyuShinseiMishinsaResultList().setIsOpen(true);
+        RDate 支給申請日From = div.getYoguKonyuhiShikyuShinseiMishinsaSearchCondition().getTxtShikyuShinseiDateRange().getFromValue();
+        RDate 支給申請日To = div.getYoguKonyuhiShikyuShinseiMishinsaSearchCondition().getTxtShikyuShinseiDateRange().getToValue();
+        getHandler(div).未審査分検索処理(支給申請日From, 支給申請日To);
+        ViewStateHolder.put(ViewStateKeys.支給申請日_FROM, 支給申請日From);
+        ViewStateHolder.put(ViewStateKeys.支給申請日_TO, 支給申請日To);
         return ResponseData.of(div).respond();
     }
 

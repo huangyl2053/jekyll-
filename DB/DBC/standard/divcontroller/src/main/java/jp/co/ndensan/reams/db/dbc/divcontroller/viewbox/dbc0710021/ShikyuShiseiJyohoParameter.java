@@ -10,6 +10,8 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
  * 遷移画面と支給申請一覧Entityクラスです。
+ *
+ * @reamsid_L DBC-0992-120 yebangqiang
  */
 @lombok.Getter
 @lombok.Setter

@@ -5,10 +5,10 @@
  */
 package jp.co.ndensan.reams.db.dbc.definition.message;
 
+import static jp.co.ndensan.reams.db.dbz.definition.message.MessageCreateHelper.toCode;
 import jp.co.ndensan.reams.uz.uza.message.IMessageGettable;
 import jp.co.ndensan.reams.uz.uza.message.Message;
 import jp.co.ndensan.reams.uz.uza.message.QuestionMessage;
-import static jp.co.ndensan.reams.db.dbz.definition.message.MessageCreateHelper.toCode;
 
 /**
  * DBCの質問メッセージ定義列挙型です。
@@ -19,7 +19,7 @@ public enum DbcQuestionMessages implements IMessageGettable {
 
     要介護状態区分変更_限度額リセット対象(1, "要介護状態区分3段階変更による限度額リセット対象です。"
             + "「要介護状態区分3段階変更による」をチェックしてよろしいですか？"),
-    要介護状態区分変更_限度額リセット対象外(2, "要介護状態区分3段階変更による限度額リセット対象外です。｢住宅住所変更による｣をチェックしないでよろしいですか？"),
+    要介護状態区分変更_限度額リセット対象外(2, "要介護状態区分3段階変更による限度額リセット対象外です。｢要介護状態区分3段階変更による｣をチェックしないでよろしいですか？"),
     改修住所変更_限度額リセット対象(3, "改修住所変更による限度額リセット対象です。｢住宅住所変更による｣をチェックしてよろしいですか？"),
     改修住所変更_限度額リセット対象外(4, "改修住所変更による限度額リセット対象外です。｢住宅住所変更による｣をチェックしないでよろしいですか？"),
     限度額変更確認(5, "住宅改修情報が変更されています。限度額の確認はよろしいですか？");

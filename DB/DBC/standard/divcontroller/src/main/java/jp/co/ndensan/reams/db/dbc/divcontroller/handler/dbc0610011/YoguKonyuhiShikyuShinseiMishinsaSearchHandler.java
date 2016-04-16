@@ -55,10 +55,11 @@ public class YoguKonyuhiShikyuShinseiMishinsaSearchHandler {
 
     /**
      * 「未審査分を検索する」ボタンHandler処理
+     *
+     * @param 支給申請日From RDate 支給申請日To
+     * @param 支給申請日To 支給申請日To
      */
-    public void 未審査分検索処理() {
-        RDate 支給申請日From = div.getYoguKonyuhiShikyuShinseiMishinsaSearchCondition().getTxtShikyuShinseiDateRange().getFromValue();
-        RDate 支給申請日To = div.getYoguKonyuhiShikyuShinseiMishinsaSearchCondition().getTxtShikyuShinseiDateRange().getToValue();
+    public void 未審査分検索処理(RDate 支給申請日From, RDate 支給申請日To) {
         FlexibleDate 申請日From = null;
         FlexibleDate 申請日To = null;
         if (支給申請日From != null) {
@@ -74,6 +75,8 @@ public class YoguKonyuhiShikyuShinseiMishinsaSearchHandler {
         }
         ViewStateHolder.put(ViewStateKeys.福祉審査_決定, resultList);
         setグリッド(resultList);
+        div.getYoguKonyuhiShikyuShinseiMishinsaSearchCondition().setIsOpen(false);
+        div.getYoguKonyuhiShikyuShinseiMishinsaResultList().setIsOpen(true);
     }
 
     /**
