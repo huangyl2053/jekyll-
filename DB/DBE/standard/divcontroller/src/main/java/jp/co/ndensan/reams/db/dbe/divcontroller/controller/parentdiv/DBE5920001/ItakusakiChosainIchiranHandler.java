@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbe.divcontroller.controller.dbe5920001;
+package jp.co.ndensan.reams.db.dbe.divcontroller.controller.parentdiv.DBE5920001;
 
 import jp.co.ndensan.reams.db.dbe.definition.batchprm.itakusakichosainichiran.ItakusakiChosainIchiranBatchParamter;
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.itakusakichosainzichiran.JyoukyouType;

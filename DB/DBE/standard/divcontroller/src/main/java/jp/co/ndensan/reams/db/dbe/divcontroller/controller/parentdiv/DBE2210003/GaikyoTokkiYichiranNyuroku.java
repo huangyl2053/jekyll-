@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbe.divcontroller.controller.dbe2210003;
+package jp.co.ndensan.reams.db.dbe.divcontroller.controller.parentdiv.DBE2210003;
 
 import java.util.HashMap;
 import jp.co.ndensan.reams.db.dbe.business.core.gaikyotokkiyichirannyuroku.GaikyoTokkiYichiranNyurokuBusiness;
