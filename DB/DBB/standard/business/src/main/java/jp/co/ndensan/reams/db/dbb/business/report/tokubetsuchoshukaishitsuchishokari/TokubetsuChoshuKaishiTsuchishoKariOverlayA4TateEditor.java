@@ -5,114 +5,180 @@
  */
 package jp.co.ndensan.reams.db.dbb.business.report.tokubetsuchoshukaishitsuchishokari;
 
+import jp.co.ndensan.reams.db.dbb.business.report.tsuchisho.KariTokuchoKaishiTsuchisyoJoho;
 import jp.co.ndensan.reams.db.dbb.entity.report.tokubetsuchoshukaishitsuchishokari.TokubetsuChoshuKaishiTsuchishoKariOverlayA4TateSource;
+import jp.co.ndensan.reams.db.dbz.business.report.parts.kaigotoiawasesaki.CompKaigoToiawasesakiSource;
+import jp.co.ndensan.reams.ur.urz.entity.report.parts.ninshosha.NinshoshaSource;
+import jp.co.ndensan.reams.ur.urz.entity.report.sofubutsuatesaki.SofubutsuAtesakiSource;
+import jp.co.ndensan.reams.uz.uza.lang.EraType;
+import jp.co.ndensan.reams.uz.uza.lang.FillType;
+import jp.co.ndensan.reams.uz.uza.lang.FirstYear;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.util.editor.DecimalFormatter;
 
 /**
  * 特別徴収開始通知書（仮算定）帳票 A4縦・オーバーレイタイプEditor
+ *
+ * @reamsid_L DBB-0790-050 lijunjun
  */
 public class TokubetsuChoshuKaishiTsuchishoKariOverlayA4TateEditor implements
         ITokubetsuChoshuKaishiTsuchishoKariOverlayA4TateEditor {
 
-    private final TokubetsuChoshuKaishiTsuchishoKariOverlayA4TateItem item;
+    private static final RString NENDO = new RString("年度");
+    private static final int INDEX_0 = 0;
+    private static final int INDEX_1 = 1;
+    private static final int INDEX_2 = 2;
+    private static final RString SPLITTOKEN = new RString(".");
+
+    private final KariTokuchoKaishiTsuchisyoJoho 仮算定特徴開始通知書情報;
+    private final RString 通知書定型文１;
+    private final SofubutsuAtesakiSource sofubutsuAtesakiSource;
+    private final NinshoshaSource ninshoshaSource;
+    private final CompKaigoToiawasesakiSource toiawasesakiSource;
 
     /**
      * コンストラクタです
      *
-     * @param item TokubetsuChoshuKaishiTsuchishoKariOverlayA4TateItem
+     * @param sofubutsuAtesakiSource SofubutsuAtesakiSource
+     * @param ninshoshaSource NinshoshaSource
+     * @param toiawasesakiSource CompKaigoToiawasesakiSource
+     * @param 仮算定特徴開始通知書情報 KariTokuchoKaishiTsuchisyoJoho
+     * @param 通知書定型文１ RString
      */
-    public TokubetsuChoshuKaishiTsuchishoKariOverlayA4TateEditor(TokubetsuChoshuKaishiTsuchishoKariOverlayA4TateItem item) {
-        this.item = item;
+    public TokubetsuChoshuKaishiTsuchishoKariOverlayA4TateEditor(SofubutsuAtesakiSource sofubutsuAtesakiSource,
+            NinshoshaSource ninshoshaSource,
+            CompKaigoToiawasesakiSource toiawasesakiSource,
+            KariTokuchoKaishiTsuchisyoJoho 仮算定特徴開始通知書情報,
+            RString 通知書定型文１) {
+        this.sofubutsuAtesakiSource = sofubutsuAtesakiSource;
+        this.ninshoshaSource = ninshoshaSource;
+        this.toiawasesakiSource = toiawasesakiSource;
+        this.仮算定特徴開始通知書情報 = 仮算定特徴開始通知書情報;
+        this.通知書定型文１ = 通知書定型文１;
     }
 
     @Override
     public TokubetsuChoshuKaishiTsuchishoKariOverlayA4TateSource edit(TokubetsuChoshuKaishiTsuchishoKariOverlayA4TateSource source) {
-        source.titleNendo = item.getタイトル年度();
-        source.hyojicodeName1 = item.get表示コード名称１();
-        source.hyojicodeName2 = item.get表示コード名称２();
-        source.hyojicodeName3 = item.get表示コード名称３();
-        source.hyojicodeCode1 = item.get表示コード１();
-        source.hyojicodeCode2 = item.get表示コード２();
-        source.hyojicodeCode3 = item.get表示コード３();
-        source.hihokenshaNo = item.get被保険者番号();
-        source.tuchishoNo = item.get通知書番号();
-        source.setaiCode = item.get世帯コード();
-        source.shikibetsuCode = item.get識別コード();
-        source.hihokenshaName = item.get被保険者氏名();
-        source.setainushiName = item.get世帯主名();
-        source.hihokenshaJusho = item.get被保険者住所();
-        source.hihokenshaKatagaki = item.get被保険者方書();
-        source.birthYYYY = item.get生年度();
-        source.birthMM = item.get生月();
-        source.birthDD = item.get生日();
-        source.seibetsu = item.get性別();
-        source.tokuchoGimushaName = item.get特徴義務者名称();
-        source.tokuchoTaishoNenkinName = item.get特徴対象年金名称();
-        source.hokenryoGakuNendo1 = item.get保険料額年度１();
-        source.hokenryoGakuNendo2 = item.get保険料額年度２();
-        source.karisanteiGakuGokei = item.get仮算定額合計();
-        source.hokenryoGaku4Gatsu1 = item.get保険料額4月1();
-        source.hokenryoGaku6Gatsu1 = item.get保険料額6月1();
-        source.hokenryoGaku8Gatsu1 = item.get保険料額8月1();
-        source.SanteiKisoNendo1 = item.get算定基礎年度１();
-        source.SanteiKisoNendo2 = item.get算定基礎年度２();
-        source.SanteiKisoNendo3 = item.get算定基礎年度３();
-        source.shotokuDankai = item.get取得段階();
-        source.karisanteiGakuGokei1 = item.get仮算定額合計１();
-        source.hokenryoGaku10Gatsu = item.get保険料額10月前();
-        source.hokenryoGaku4Gatsu2 = item.get保険料額4月2前();
-        source.hokenryoGaku12Gatsu = item.get保険料額12月前();
-        source.hokenryoGaku6Gatsu2 = item.get保険料額6月2前();
-        source.hokenryoGaku2Gatsu = item.get保険料額2月前();
-        source.hokenryoGaku8Gatsu2 = item.get保険料額8月2前();
-        source.tsuchibun = item.get通知文();
-        source.yubinNo1 = item.get郵便番号１();
-        source.gyoseiku1 = item.get行政区１();
-        source.jusho3 = item.get住所３();
-        source.jushoText = item.get住所();
-        source.jusho1 = item.get住所１();
-        source.jusho2 = item.get住所２();
-        source.katagakiText = item.get方書();
-        source.katagaki2 = item.get方書２();
-        source.katagakiSmall2 = item.get方書小２();
-        source.katagaki1 = item.get方書１();
-        source.katagakiSmall1 = item.get方書小１();
-        source.shimei2 = item.get氏名２();
-        source.shimeiSmall2 = item.get氏名小２();
-        source.shimeiText = item.get氏名text();
-        source.meishoFuyo2 = item.get名称不要２();
-        source.shimeiSmall1 = item.get氏名小1();
-        source.dainoKubunMei = item.get代納区分名();
-        source.shimei1 = item.get氏名1();
-        source.meishoFuyo1 = item.get名称不要1();
-        source.samabunShimeiText = item.getSamabunShimeiText();
-        source.samabunShimeiSmall2 = item.getSamabunShimeiSmall2();
-        source.samaBun2 = item.getSamaBun2();
-        source.kakkoLeft2 = item.getKakkoLeft2();
-        source.samabunShimei2 = item.getSamabunShimei2();
-        source.kakkoRight2 = item.getKakkoRight2();
-        source.kakkoLeft1 = item.getKakkoLeft1();
-        source.samabunShimei1 = item.getSamabunShimei1();
-        source.samaBun1 = item.getSamaBun1();
-        source.kakkoRight1 = item.getKakkoRight1();
-        source.samabunShimeiSmall1 = item.getSamabunShimeiSmall1();
-        source.customerBarCode = item.getCustomerBarCode();
+        source.titleNendo = 仮算定特徴開始通知書情報.get編集後仮算定通知書共通情報().get調定年度().wareki().eraType(EraType.KANJI)
+                .firstYear(FirstYear.GAN_NEN).fillType(FillType.BLANK).toDateString().concat(NENDO);
+        source.hyojicodeName1 = 仮算定特徴開始通知書情報.get編集後仮算定通知書共通情報().get表示コード１名();
+        source.hyojicodeName2 = 仮算定特徴開始通知書情報.get編集後仮算定通知書共通情報().get表示コード２名();
+        source.hyojicodeName3 = 仮算定特徴開始通知書情報.get編集後仮算定通知書共通情報().get表示コード３名();
+        source.hyojicodeCode1 = 仮算定特徴開始通知書情報.get編集後仮算定通知書共通情報().get表示コード1();
+        source.hyojicodeCode2 = 仮算定特徴開始通知書情報.get編集後仮算定通知書共通情報().get表示コード２();
+        source.hyojicodeCode3 = 仮算定特徴開始通知書情報.get編集後仮算定通知書共通情報().get表示コード３();
+        source.hihokenshaNo = 仮算定特徴開始通知書情報.get編集後仮算定通知書共通情報().get被保険者番号().value();
+        source.tuchishoNo = 仮算定特徴開始通知書情報.get編集後仮算定通知書共通情報().get通知書番号().value();
+        source.setaiCode = 仮算定特徴開始通知書情報.get編集後仮算定通知書共通情報().get編集後個人().get世帯コード().value();
+        source.shikibetsuCode = 仮算定特徴開始通知書情報.get編集後仮算定通知書共通情報().get識別コード().value();
+        source.hihokenshaName = 仮算定特徴開始通知書情報.get編集後仮算定通知書共通情報().get編集後個人().get名称().getName().value();
+        source.setainushiName = 仮算定特徴開始通知書情報.get編集後仮算定通知書共通情報().get編集後個人().get世帯主名().value();
+        source.hihokenshaJusho = 仮算定特徴開始通知書情報.get編集後仮算定通知書共通情報().get編集後宛先().get編集後住所();
+        source.hihokenshaKatagaki = 仮算定特徴開始通知書情報.get編集後仮算定通知書共通情報().get編集後個人().get方書().value();
+        source.birthYYYY = 仮算定特徴開始通知書情報.get編集後仮算定通知書共通情報().get編集後個人().get生年月日()
+                .split(SPLITTOKEN.toString()).get(INDEX_0);
+        source.birthMM = 仮算定特徴開始通知書情報.get編集後仮算定通知書共通情報().get編集後個人().get生年月日()
+                .split(SPLITTOKEN.toString()).get(INDEX_1);
+        source.birthDD = 仮算定特徴開始通知書情報.get編集後仮算定通知書共通情報().get編集後個人().get生年月日()
+                .split(SPLITTOKEN.toString()).get(INDEX_2);
+        source.seibetsu = 仮算定特徴開始通知書情報.get編集後仮算定通知書共通情報().get編集後個人().get性別();
+        source.tokuchoGimushaName = 仮算定特徴開始通知書情報.get編集後仮算定通知書共通情報().get更正後().get更正後特別徴収義務者();
+        source.tokuchoTaishoNenkinName = 仮算定特徴開始通知書情報.get編集後仮算定通知書共通情報().get更正後().get更正後特別徴収対象年金();
+        source.hokenryoGakuNendo1 = 仮算定特徴開始通知書情報.get編集後仮算定通知書共通情報().get調定年度().wareki().eraType(EraType.KANJI)
+                .firstYear(FirstYear.GAN_NEN).fillType(FillType.BLANK).toDateString().concat(NENDO);
+        source.hokenryoGakuNendo2 = 仮算定特徴開始通知書情報.get編集後仮算定通知書共通情報().get調定年度().wareki().eraType(EraType.KANJI)
+                .firstYear(FirstYear.GAN_NEN).fillType(FillType.BLANK).toDateString().concat(NENDO);
+        source.karisanteiGakuGokei = DecimalFormatter.toコンマ区切りRString(
+                仮算定特徴開始通知書情報.get編集後仮算定通知書共通情報().get更正後().get更正後特徴期別金額01()
+                .add(仮算定特徴開始通知書情報.get編集後仮算定通知書共通情報().get更正後().get更正後特徴期別金額02())
+                .add(仮算定特徴開始通知書情報.get編集後仮算定通知書共通情報().get更正後().get更正後特徴期別金額03()),
+                0);
+        source.hokenryoGaku4Gatsu1 = DecimalFormatter.toコンマ区切りRString(仮算定特徴開始通知書情報.get編集後仮算定通知書共通情報()
+                .get更正後().get更正後特徴期別金額01(), 0);
+        source.hokenryoGaku6Gatsu1 = DecimalFormatter.toコンマ区切りRString(仮算定特徴開始通知書情報.get編集後仮算定通知書共通情報()
+                .get更正後().get更正後特徴期別金額02(), 0);
+        source.hokenryoGaku8Gatsu1 = DecimalFormatter.toコンマ区切りRString(仮算定特徴開始通知書情報.get編集後仮算定通知書共通情報()
+                .get更正後().get更正後特徴期別金額03(), 0);
+        source.SanteiKisoNendo1 = new FlexibleYear(仮算定特徴開始通知書情報.get編集後仮算定通知書共通情報().get前年度情報().get前年度賦課年度())
+                .wareki().eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN).fillType(FillType.BLANK).toDateString();
+        source.SanteiKisoNendo2 = new FlexibleYear(仮算定特徴開始通知書情報.get編集後仮算定通知書共通情報().get前年度情報().get前年度賦課年度())
+                .wareki().eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN).fillType(FillType.BLANK).toDateString();
+        source.SanteiKisoNendo3 = new FlexibleYear(仮算定特徴開始通知書情報.get編集後仮算定通知書共通情報().get前年度情報().get前年度賦課年度())
+                .wareki().eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN).fillType(FillType.BLANK).toDateString();
+        source.shotokuDankai = 仮算定特徴開始通知書情報.get編集後仮算定通知書共通情報().get前年度情報().get前年度保険料段階();
+        source.karisanteiGakuGokei1 = DecimalFormatter.toコンマ区切りRString(仮算定特徴開始通知書情報.get編集後仮算定通知書共通情報().get前年度情報()
+                .get前年度保険料率(), 0);
+        source.hokenryoGaku10Gatsu = DecimalFormatter.toコンマ区切りRString(仮算定特徴開始通知書情報.get編集後仮算定通知書共通情報()
+                .get前年度情報().get前年度特徴期別金額04(), 0);
+        source.hokenryoGaku4Gatsu2 = DecimalFormatter.toコンマ区切りRString(仮算定特徴開始通知書情報.get編集後仮算定通知書共通情報()
+                .get前年度情報().get前年度特徴期別金額01(), 0);
+        source.hokenryoGaku12Gatsu = DecimalFormatter.toコンマ区切りRString(仮算定特徴開始通知書情報.get編集後仮算定通知書共通情報()
+                .get前年度情報().get前年度特徴期別金額05(), 0);
+        source.hokenryoGaku6Gatsu2 = DecimalFormatter.toコンマ区切りRString(仮算定特徴開始通知書情報.get編集後仮算定通知書共通情報()
+                .get前年度情報().get前年度特徴期別金額02(), 0);
+        // TODO 保険料額2月（前）
+        source.hokenryoGaku2Gatsu = DecimalFormatter.toコンマ区切りRString(仮算定特徴開始通知書情報.get編集後仮算定通知書共通情報()
+                .get前年度情報().get前年度特徴期別金額06(), 0);
+        source.hokenryoGaku8Gatsu2 = DecimalFormatter.toコンマ区切りRString(仮算定特徴開始通知書情報.get編集後仮算定通知書共通情報()
+                .get前年度情報().get前年度最終期特徴期別介護保険料(), 0);
+        source.tsuchibun = 通知書定型文１;
+
+        source.yubinNo1 = sofubutsuAtesakiSource.yubinNo;
+        source.gyoseiku1 = sofubutsuAtesakiSource.gyoseiku;
+        source.jusho3 = sofubutsuAtesakiSource.jusho3;
+        source.jushoText = sofubutsuAtesakiSource.jushoText;
+        source.jusho1 = sofubutsuAtesakiSource.jusho1;
+        source.jusho2 = sofubutsuAtesakiSource.jusho2;
+        source.katagakiText = sofubutsuAtesakiSource.katagakiText;
+        source.katagaki2 = sofubutsuAtesakiSource.katagaki2;
+        source.katagakiSmall2 = sofubutsuAtesakiSource.katagakiSmall2;
+        source.katagaki1 = sofubutsuAtesakiSource.katagaki1;
+        source.katagakiSmall1 = sofubutsuAtesakiSource.katagakiSmall1;
+        source.shimei2 = sofubutsuAtesakiSource.shimei2;
+        source.shimeiSmall2 = sofubutsuAtesakiSource.shimeiSmall2;
+        source.shimeiText = sofubutsuAtesakiSource.shimeiText;
+        source.meishoFuyo2 = sofubutsuAtesakiSource.meishoFuyo2;
+        source.shimeiSmall1 = sofubutsuAtesakiSource.shimeiSmall1;
+        source.dainoKubunMei = sofubutsuAtesakiSource.dainoKubunMei;
+        source.shimei1 = sofubutsuAtesakiSource.shimei1;
+        source.meishoFuyo1 = sofubutsuAtesakiSource.meishoFuyo1;
+        source.samabunShimeiText = sofubutsuAtesakiSource.samabunShimeiText;
+        source.samabunShimeiSmall2 = sofubutsuAtesakiSource.samabunShimeiSmall2;
+        source.samaBun2 = sofubutsuAtesakiSource.samaBun2;
+        source.kakkoLeft2 = sofubutsuAtesakiSource.kakkoLeft2;
+        source.samabunShimei2 = sofubutsuAtesakiSource.samabunShimei2;
+        source.kakkoRight2 = sofubutsuAtesakiSource.kakkoRight2;
+        source.kakkoLeft1 = sofubutsuAtesakiSource.kakkoLeft1;
+        source.samabunShimei1 = sofubutsuAtesakiSource.samabunShimei1;
+        source.samaBun1 = sofubutsuAtesakiSource.samaBun1;
+        source.kakkoRight1 = sofubutsuAtesakiSource.kakkoRight1;
+        source.samabunShimeiSmall1 = sofubutsuAtesakiSource.samabunShimeiSmall1;
+        source.customerBarCode = sofubutsuAtesakiSource.customerBarCode;
         // TODO 世帯主名
         //source.setainusimei = item.get世帯主名();
         // TODO 様方
         //source.samaKata = item.get様方();
-        source.yubinBango = item.get郵便番号();
-        source.shozaichi = item.get所在地();
-        source.choshaBushoName = item.get庁舎部署名();
-        source.tantoName = item.get担当名();
-        source.telNo = item.get電話番号();
-        source.naisenNo = item.get内線番号();
-        source.denshiKoin = item.get電子公印();
-        source.hakkoYMD = item.get署名発行年月日();
-        // TODO 市町村名
-//        source.shichosonMei = item.get市町村名();
-        // TODO 市長名
-        //source.shuchoMei = item.get市長名();
-        source.koinShoryaku = item.get公印省略();
+//        IKaigoToiawasesakiSourceBuilder 介護問合せ先ソースビルダー
+//                = KaigoToiawasesakiSourceBuilderCreator.create(SubGyomuCode.DBB介護賦課, ReportId.EMPTY);
+//        CompKaigoToiawasesakiSource toiawasesakiSource = 介護問合せ先ソースビルダー.buildSource();
+//        CompKaigoToiawasesakiSource toiawasesakiSource = null;
+        // TODO 帳票項目定義_CompKaigoToiawasesaki
+//        KaigoToiawasesakiSourceBuilderCreator
+        source.yubinBango = toiawasesakiSource.yubinBango;
+        source.shozaichi = toiawasesakiSource.shozaichi;
+        source.choshaBushoName = toiawasesakiSource.choshaBushoName;
+        source.tantoName = toiawasesakiSource.tantoName;
+        source.telNo = toiawasesakiSource.telNo;
+        source.naisenNo = toiawasesakiSource.naisenNo;
+
+        source.hakkoYMD = ninshoshaSource.hakkoYMD;
+        source.denshiKoin = ninshoshaSource.denshiKoin;
+        source.koinMojiretsu = ninshoshaSource.koinMojiretsu;
+        source.koinShoryaku = ninshoshaSource.koinShoryaku;
+        source.ninshoshaShimeiKakenai = ninshoshaSource.ninshoshaShimeiKakenai;
+        source.ninshoshaShimeiKakeru = ninshoshaSource.ninshoshaShimeiKakeru;
+        source.ninshoshaYakushokuMei = ninshoshaSource.ninshoshaYakushokuMei;
         return source;
     }
 

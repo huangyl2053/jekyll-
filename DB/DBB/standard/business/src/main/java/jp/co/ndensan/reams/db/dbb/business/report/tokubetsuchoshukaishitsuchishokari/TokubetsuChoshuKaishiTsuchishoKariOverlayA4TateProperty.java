@@ -13,7 +13,7 @@ import jp.co.ndensan.reams.uz.uza.report.ReportPropertyBase;
 /**
  * 特別徴収開始通知書（仮算定）【A4縦・オーバレイタイプ】のプロパティです。
  *
- * @reamsid_L DBB-0790-050 chenaoqi
+ * @reamsid_L DBB-0790-050 lijunjun
  */
 public class TokubetsuChoshuKaishiTsuchishoKariOverlayA4TateProperty
         extends ReportPropertyBase<TokubetsuChoshuKaishiTsuchishoKariOverlayA4TateSource> {

@@ -10,6 +10,8 @@ import jp.co.ndensan.reams.uz.uza.report.IReportBuilder;
 
 /**
  * 特別徴収開始通知書（仮算定）帳票 B5横・オーバレイタイプIBuilder
+ *
+ * @reamsid_L DBB-0790-050 lijunjun
  */
 public interface ITokubetsuChoshuKaishiTsuchishoKariOverlayB5YokoBuilder extends
         IReportBuilder<TokubetsuChoshuKaishiTsuchishoKariOverlayB5YokoSource> {

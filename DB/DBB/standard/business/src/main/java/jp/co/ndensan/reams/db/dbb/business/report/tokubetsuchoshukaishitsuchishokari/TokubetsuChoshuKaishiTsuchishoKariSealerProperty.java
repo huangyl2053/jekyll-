@@ -13,7 +13,7 @@ import jp.co.ndensan.reams.uz.uza.report.ReportPropertyBase;
 /**
  * 特別徴収開始通知書（仮算定）発行一覧表property
  *
- * @reamsid_L DBB-0790-050 chenaoqi
+ * @reamsid_L DBB-0790-050 lijunjun
  */
 public class TokubetsuChoshuKaishiTsuchishoKariSealerProperty
         extends ReportPropertyBase<TokubetsuChoshuKaishiTsuchishoKariSealerSource> {

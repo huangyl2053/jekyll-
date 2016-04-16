@@ -10,6 +10,8 @@ import jp.co.ndensan.reams.uz.uza.report.IReportEditor;
 
 /**
  * 特別徴収開始通知書（仮算定）帳票 シーラタイプIEditor
+ *
+ * @reamsid_L DBB-0790-050 lijunjun
  */
 public interface ITokubetsuChoshuKaishiTsuchishoKariSealerEditor extends
         IReportEditor<TokubetsuChoshuKaishiTsuchishoKariSealerSource> {

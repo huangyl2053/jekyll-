@@ -14,7 +14,7 @@ import jp.co.ndensan.reams.uz.uza.report.ReportPropertyBase;
  *
  * 特別徴収開始通知書（仮算定）【シーラタイプ（連帳）】property
  *
- * @reamsid_L DBB-0790-050 chenaoqi
+ * @reamsid_L DBB-0790-050 lijunjun
  */
 public class TokubetsuChoshuKaishiTsuchishoKariSealerRenchoProperty
         extends ReportPropertyBase<TokubetsuChoshuKaishiTsuchishoKariSealerRenchoSource> {

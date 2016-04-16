@@ -14,7 +14,7 @@ import jp.co.ndensan.reams.uz.uza.report.ReportPropertyBase;
  *
  * 特別徴収開始通知書（仮算定）【B5横タイプ（連帳）】のプロパティです。
  *
- * @reamsid_L DBB-0790-050 chenaoqi
+ * @reamsid_L DBB-0790-050 lijunjun
  */
 public class TokubetsuChoshuKaishiTsuchishoKariB5RenchoProperty
         extends ReportPropertyBase<TokubetsuChoshuKaishiTsuchishoKariB5RenchoSource> {
