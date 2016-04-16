@@ -106,7 +106,6 @@ dbe/db/dbe/KaniShinsakaiKaisaiKekka/onClick_btnShinsaKekkaNyuryokuEnd
 dbe/db/dbe/KaniShinsakaiKaisaiKekka/onLoadData
 dbe/db/dbe/KanryoDialog/onClick_btnClose
 dbe/db/dbe/KanryoDialog/onLoad
-dbe/db/dbe/KojinJokyoShokai/dispKojinJokyoShokai
 dbe/db/dbe/KojinJokyoShokai/onClick_btnBackIryokikanToComplet
 dbe/db/dbe/KojinJokyoShokai/onClick_btnBackIryokikanToComplete
 dbe/db/dbe/KojinJokyoShokai/onClick_btnNinteiChosaIraiShokai

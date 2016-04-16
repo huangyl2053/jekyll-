@@ -55,6 +55,59 @@
      "condition": ""
     }
    ]
+  },
+  {
+   "id": 2,
+   "name": "住宅改修費支給申請一括審査決定修正",
+   "transitionList": [
+    {
+     "id": "1",
+     "type": "start",
+     "condition": "",
+     "toLayoutSubGyomuCode": "DBC",
+     "toLayoutName": "DBC0720011",
+     "toLayoutTitle": "住宅改修費支給申請一括審査・決定",
+     "toState": "申請検索"
+    },
+    {
+     "id": "2",
+     "type": "ordinal",
+     "layoutSubGyomuCode": "DBC",
+     "layoutName": "DBC0720011",
+     "layoutTitle": "住宅改修費支給申請一括審査・決定",
+     "eventName": "申請修正",
+     "destroy": false,
+     "condition": "",
+     "toLayoutSubGyomuCode": "DBC",
+     "toLayoutName": "DBC0710022",
+     "toLayoutTitle": "住宅改修費支給申請登録",
+     "toState": ""
+    },
+    {
+     "id": "3",
+     "type": "ordinal",
+     "layoutSubGyomuCode": "DBC",
+     "layoutName": "DBC0710022",
+     "layoutTitle": "住宅改修費支給申請登録",
+     "eventName": "to申請情報",
+     "destroy": false,
+     "condition": "",
+     "toLayoutSubGyomuCode": "DBC",
+     "toLayoutName": "DBC0720011",
+     "toLayoutTitle": "住宅改修費支給申請一括審査・決定",
+     "toState": "申請審査"
+    },
+    {
+     "id": "4",
+     "type": "end",
+     "layoutSubGyomuCode": "DBC",
+     "layoutName": "DBC0720011",
+     "layoutTitle": "住宅改修費支給申請一括審査・決定",
+     "eventName": "処理完了",
+     "destroy": false,
+     "condition": ""
+    }
+   ]
   }
  ]
 }

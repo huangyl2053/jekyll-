@@ -3,7 +3,7 @@ package jp.co.ndensan.reams.db.dbe.divcontroller.entity.commonchilddiv.IchijiHan
  * このコードはツールによって生成されました。
  * このファイルへの変更は、以下の状況下で不正な動作の原因になったり、
  * コードが再生成されるときに損失したりします。
- * Mon Mar 21 15:07:40 CST 2016 
+ * Thu Apr 07 14:28:11 JST 2016 
  */
 
 
@@ -19,7 +19,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
  */
 
 public class dgIchijiHanteiKeikokuCode_Row extends DataRow {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-01-15_09-59-03">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-02-19_14-33-39">
 
     private RString no;
     private RString code;

@@ -9,7 +9,9 @@ import java.util.HashSet;
 import jp.co.ndensan.reams.db.dbc.definition.mybatisprm.shiharaihohojyoho.SikyuSinseiJyohoParameter;
 import jp.co.ndensan.reams.db.dbc.divcontroller.controller.handler.commonchilddiv.shiharaihohojyoho.ShiharaiHohoJyohoHandler;
 import jp.co.ndensan.reams.uz.uza.biz.KamokuCode;
+import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.lang.RTime;
 import jp.co.ndensan.reams.uz.uza.ui.binding.ButtonDialog;
 import jp.co.ndensan.reams.uz.uza.ui.binding.DropDownList;
 import jp.co.ndensan.reams.uz.uza.ui.binding.HorizontalLine;
@@ -732,6 +734,86 @@ public class ShiharaiHohoJyohoDiv extends Panel implements IShiharaiHohoJyohoDiv
      */
     @JsonProperty("modes")
     private HashSet<Mode> modes;
+
+    /**
+     * 支払方法を取得します。
+     *
+     * @return RString
+     */
+    @Override
+    public RString getShiharaiHoho() {
+        return this.getRadJyryoinin().getSelectedKey();
+    }
+
+    /**
+     * 支払場所を取得します。
+     *
+     * @return RString
+     */
+    @Override
+    public RString getShiharaiBasho() {
+        return this.getTxtShiharaiBasho().getValue();
+    }
+
+    /**
+     * 開始日を取得します。
+     *
+     * @return RDate
+     */
+    @Override
+    public RDate getStartYMD() {
+        return this.getTxtStartYMD().getValue();
+    }
+
+    /**
+     * 終了日を取得します。
+     *
+     * @return RDate
+     */
+    @Override
+    public RDate getEndYMD() {
+        return this.getTxtEndYMD().getValue();
+    }
+
+    /**
+     * 開始時間を取得します。
+     *
+     * @return RTime
+     */
+    @Override
+    public RTime getStartHHMM() {
+        return this.getTxtStartHHMM().getValue();
+    }
+
+    /**
+     * 終了時間を取得します。
+     *
+     * @return RTime
+     */
+    @Override
+    public RTime getEndHHMM() {
+        return this.getTxtEndHHMM().getValue();
+    }
+
+    /**
+     * 口座IDを取得します。
+     *
+     * @return RString
+     */
+    @Override
+    public RString getKozaNo() {
+        return this.getTxtKozaNo().getValue();
+    }
+
+    /**
+     * 契約番号を取得します。
+     *
+     * @return RString
+     */
+    @Override
+    public RString getKeiyakuNo() {
+        return this.getTxtKeiyakuNo().getValue();
+    }
 
     public static enum DisplayMode implements ICommonChildDivMode {
 

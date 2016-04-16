@@ -1,0 +1,57 @@
+﻿{
+ "uiContainerName": "DBBUC61100",
+ "displayWizard": false,
+ "subGyomuCode": "DBB",
+ "steps": [
+  {
+   "id": 1,
+   "name": "連帯納付義務者登録_一覧",
+   "transitionList": [
+    {
+     "id": "1",
+     "type": "start",
+     "condition": "",
+     "toLayoutSubGyomuCode": "DBB",
+     "toLayoutName": "DBB6110001",
+     "toLayoutTitle": "介護保険料連帯納付義務者登録",
+     "toState": "連帯納付義務者情報一覧"
+    },
+    {
+     "id": "2",
+     "type": "end",
+     "layoutSubGyomuCode": "DBB",
+     "layoutName": "DBB6110001",
+     "layoutTitle": "介護保険料連帯納付義務者登録",
+     "eventName": "完了状態",
+     "destroy": false,
+     "condition": ""
+    }
+   ]
+  },
+  {
+   "id": 2,
+   "name": "連帯納付義務者登録_新規",
+   "transitionList": [
+    {
+     "id": "1",
+     "type": "start",
+     "condition": "",
+     "toLayoutSubGyomuCode": "DBB",
+     "toLayoutName": "DBB6110001",
+     "toLayoutTitle": "介護保険料連帯納付義務者登録",
+     "toState": "連帯納付義務者新規"
+    },
+    {
+     "id": "2",
+     "type": "end",
+     "layoutSubGyomuCode": "DBB",
+     "layoutName": "DBB6110001",
+     "layoutTitle": "介護保険料連帯納付義務者登録",
+     "eventName": "完了状態",
+     "destroy": false,
+     "condition": ""
+    }
+   ]
+  }
+ ]
+}
