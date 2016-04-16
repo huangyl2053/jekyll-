@@ -6,6 +6,7 @@
 package jp.co.ndensan.reams.db.dbd.divcontroller.controller.parentdiv.DBD1090001;
 
 import java.util.ArrayList;
+import java.util.List;
 import jp.co.ndensan.reams.db.dbd.business.core.gemmengengaku.futangendogakunintei.FutanGendogakuNintei;
 import jp.co.ndensan.reams.db.dbd.definition.core.gemmengengaku.KetteiKubun;
 import jp.co.ndensan.reams.db.dbd.definition.core.gemmengengaku.RiyoshaFutanDankai;
@@ -21,12 +22,9 @@ import jp.co.ndensan.reams.db.dbd.service.report.futangendogakunintei.FutanGendo
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
-import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.math.Decimal;
-import jp.co.ndensan.reams.uz.uza.ui.binding.DataGrid;
-import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxDate;
+import jp.co.ndensan.reams.uz.uza.report.SourceDataCollection;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 
@@ -44,11 +42,12 @@ public class FutanGendogakuNinteiKousinTsuchisyoKobetHakko {
      * @return レスポンスデータ
      */
     public ResponseData<FutanGendogakuNinteiKousinTsuchisyoKobetHakkoDiv> onLoad(FutanGendogakuNinteiKousinTsuchisyoKobetHakkoDiv div) {
+        // TODO テストデータ準備
+        ViewStateHolder.put(ViewStateKeys.負担限度額認定更新のお知らせ通知書個別発行_被保険者番号, new HihokenshaNo("L000000016"));
+        ViewStateHolder.put(ViewStateKeys.負担限度額認定更新のお知らせ通知書個別発行_識別コード, new ShikibetsuCode("210000000000011"));
+
         HihokenshaNo 被保険者番号 = ViewStateHolder.get(ViewStateKeys.負担限度額認定更新のお知らせ通知書個別発行_被保険者番号, HihokenshaNo.class);
         ShikibetsuCode 識別コード = ViewStateHolder.get(ViewStateKeys.負担限度額認定更新のお知らせ通知書個別発行_識別コード, ShikibetsuCode.class);
-        // テストデータ
-        識別コード = new ShikibetsuCode("210000000000011");
-        被保険者番号 = new HihokenshaNo("L000000016");
         div.getCcdKaigoAtenaInfoDiv().onLoad(識別コード);
 
         if (被保険者番号.isEmpty()) {
@@ -69,12 +68,20 @@ public class FutanGendogakuNinteiKousinTsuchisyoKobetHakko {
                 = ViewStateHolder.get(FutanGendogakuNinteiKousinTsuchisyoKobetHakkoHandler.介護保険負担限度額認定.リストキー, ArrayList.class);
         set負担限度額認定エリア(div, futanGendogakuNinteiList.get(0));
 
+        List<dgChohyoSentaku_Row> rowList = new ArrayList<>();
+        for (FutanGendogakuNintei futanGendogakuNintei : futanGendogakuNinteiList) {
+            dgChohyoSentaku_Row row = new dgChohyoSentaku_Row();
+            row.setTxtChohyoSentaku(new RString(futanGendogakuNintei.get履歴番号()));
+            rowList.add(row);
+        }
+        div.getHihokenshashoHakkoTaishoshaJoho().getTsuchishoSakuseiKobetsu().getDgChohyoSentaku().setDataSource(rowList);
+        div.getHihokenshashoHakkoTaishoshaJoho().getTsuchishoSakuseiKobetsu().getHenkoTsuchiKobetsu().getTxtHenkoTsuchiHakkoYMD()
+                .setValue(RDate.getNowDate());
         div.setListIndex(new RString("0"));
         div.getBttZenRireki().setDisabled(true);
         if (1 == futanGendogakuNinteiList.size()) {
             div.getBttGoRireki().setDisabled(true);
         }
-
         return ResponseData.of(div).respond();
     }
 
@@ -114,7 +121,7 @@ public class FutanGendogakuNinteiKousinTsuchisyoKobetHakko {
         div.getHihokenshashoHakkoTaishoshaJoho().getTxtJuuraiKoshitsuTNum().setValue(futanGendogakuNintei.get従来型個室_特養等());
         div.getHihokenshashoHakkoTaishoshaJoho().getTxtTkutokosituNum().setValue(futanGendogakuNintei.get多床室());
         div.getHihokenshashoHakkoTaishoshaJoho().getTxtFushouninRiyuLine().setValue(futanGendogakuNintei.get非承認理由());
-        //   div.getHihokenshashoHakkoTaishoshaJoho().getTxtFushouninRiyuLine().setValue(futanGendogakuNintei.get履歴番号());
+        div.setRirekiNo(new RString(futanGendogakuNintei.get履歴番号()));
     }
 
     /**
@@ -165,8 +172,7 @@ public class FutanGendogakuNinteiKousinTsuchisyoKobetHakko {
      * @param div FutanGendogakuNinteiKousinTsuchisyoKobetHakkoDiv
      * @return ResponseData
      */
-    public ResponseData<FutanGendogakuNinteiKousinTsuchisyoKobetHakkoDiv> onClick_btnHakou(
-            FutanGendogakuNinteiKousinTsuchisyoKobetHakkoDiv div) {
+    public ResponseData<SourceDataCollection> onClick_btnPublish(FutanGendogakuNinteiKousinTsuchisyoKobetHakkoDiv div) {
 
         ValidationMessageControlPairs pairs = new ValidationMessageControlPairs();
         getValidationHandler().validateFor出力チェックボックス(pairs, div);
@@ -175,15 +181,18 @@ public class FutanGendogakuNinteiKousinTsuchisyoKobetHakko {
             getValidationHandler().validateFor発行日の必須入力(pairs, div);
         }
 
-        // テストデータ
-        ShikibetsuCode 識別コード = new ShikibetsuCode("210000000000011");
-        HihokenshaNo 被保険者番号 = new HihokenshaNo("L000000016");
-        RDate 発行日 = div.getHihokenshashoHakkoTaishoshaJoho().getTsuchishoSakuseiKobetsu().getHenkoTsuchiKobetsu().getTxtHenkoTsuchiHakkoYMD().getValue();
-        RString 文書番号 = div.getHihokenshashoHakkoTaishoshaJoho().getTsuchishoSakuseiKobetsu().getHenkoTsuchiKobetsu().getTxtHenkoTsuchiBunshoNo().getValue();
+        HihokenshaNo 被保険者番号 = ViewStateHolder.get(ViewStateKeys.負担限度額認定更新のお知らせ通知書個別発行_被保険者番号, HihokenshaNo.class);
+        ShikibetsuCode 識別コード = ViewStateHolder.get(ViewStateKeys.負担限度額認定更新のお知らせ通知書個別発行_識別コード, ShikibetsuCode.class);
+        RDate 発行日 = div.getHihokenshashoHakkoTaishoshaJoho().getTsuchishoSakuseiKobetsu()
+                .getHenkoTsuchiKobetsu().getTxtHenkoTsuchiHakkoYMD().getValue();
+        RString 文書番号 = div.getHihokenshashoHakkoTaishoshaJoho().getTsuchishoSakuseiKobetsu()
+                .getHenkoTsuchiKobetsu().getTxtHenkoTsuchiBunshoNo().getValue();
 
         FutanGendogakuNinteiKanshoTsuchisho futanGendogakuNinteiKanshoTsuchisho = FutanGendogakuNinteiKanshoTsuchisho.createInstance();
-        futanGendogakuNinteiKanshoTsuchisho.publish(被保険者番号, 識別コード, 0, 発行日, 文書番号);
-        return ResponseData.of(div).respond();
+        SourceDataCollection sourceDataCollection = futanGendogakuNinteiKanshoTsuchisho.publish(
+                被保険者番号, 識別コード, Integer.valueOf(div.getRirekiNo().toString()), 発行日, 文書番号);
+
+        return ResponseData.of(sourceDataCollection).respond();
     }
 
     /**
@@ -194,8 +203,7 @@ public class FutanGendogakuNinteiKousinTsuchisyoKobetHakko {
      */
     public ResponseData<FutanGendogakuNinteiKousinTsuchisyoKobetHakkoDiv> onClick_btnShotaiJohou(
             FutanGendogakuNinteiKousinTsuchisyoKobetHakkoDiv div) {
-        // テストデータ
-        ShikibetsuCode 識別コード = new ShikibetsuCode("210000000000011");
+        ShikibetsuCode 識別コード = ViewStateHolder.get(ViewStateKeys.負担限度額認定更新のお知らせ通知書個別発行_識別コード, ShikibetsuCode.class);
         div.setNowDate(RDate.getNowDate().toDateString());
         div.setShikibetsuCode(new RString(識別コード.toString()));
         return ResponseData.of(div).respond();

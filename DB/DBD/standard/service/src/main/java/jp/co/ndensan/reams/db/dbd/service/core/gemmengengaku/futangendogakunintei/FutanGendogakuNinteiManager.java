@@ -157,20 +157,15 @@ public class FutanGendogakuNinteiManager {
      * 介護負担限度額認定の情報を取得する。
      *
      * @param 負担限度額認定検索条件 負担限度額認定検索条件
-     * @return FutanGendogakuNinteiの{@code list}
+     * @return FutanGendogakuNinteiの{@code}
      */
     @Transaction
-    public ArrayList<FutanGendogakuNintei> get負担限度額認定帳票用リスト(FutanGendogakuNinteiParameter 負担限度額認定検索条件) {
+    public FutanGendogakuNintei get負担限度額認定帳票用(FutanGendogakuNinteiParameter 負担限度額認定検索条件) {
         requireNonNull(負担限度額認定検索条件, UrSystemErrorMessages.値がnull.getReplacedMessage("負担限度額認定検索条件"));
         IFutanGendogakuNinteiMapper mapper = mapperProvider.create(IFutanGendogakuNinteiMapper.class);
 
-        List<FutanGendogakuNinteiEntity> relateEntityList = mapper.select負担限度額認定帳票用リスト(負担限度額認定検索条件);
+        FutanGendogakuNinteiEntity relateEntity = mapper.select負担限度額認定帳票用(負担限度額認定検索条件);
 
-        ArrayList<FutanGendogakuNintei> 介護保険負担限度額認定List = new ArrayList<>();
-        for (FutanGendogakuNinteiEntity relateEntity : relateEntityList) {
-            relateEntity.initializeMd5ToEntities();
-            介護保険負担限度額認定List.add(new FutanGendogakuNintei(relateEntity));
-        }
-        return 介護保険負担限度額認定List;
+        return new FutanGendogakuNintei(relateEntity);
     }
 }

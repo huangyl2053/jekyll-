@@ -4,7 +4,6 @@ package jp.co.ndensan.reams.db.dbd.divcontroller.entity.parentdiv.DBD1090001;
  * このファイルへの変更は、再生成時には損失するため
  * 不正な動作の原因になります。
  */
-
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.kaigoatenainfo.KaigoAtenaInfo.IKaigoAtenaInfoDiv;
@@ -16,12 +15,11 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.*;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 
 /**
- * FutanGendogakuNinteiKousinTsuchisyoKobetHakko のクラスファイル
- *
+ * FutanGendogakuNinteiKousinTsuchisyoKobetHakko のクラスファイル 
+ * 
  * @author 自動生成
  */
 public class FutanGendogakuNinteiKousinTsuchisyoKobetHakkoDiv extends Panel {
-
     // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
     /*
      * [ private の作成 ]
@@ -45,6 +43,8 @@ public class FutanGendogakuNinteiKousinTsuchisyoKobetHakkoDiv extends Panel {
     private RString shikibetsuCode;
     @JsonProperty("nowDate")
     private RString nowDate;
+    @JsonProperty("rirekiNo")
+    private RString rirekiNo;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -179,6 +179,24 @@ public class FutanGendogakuNinteiKousinTsuchisyoKobetHakkoDiv extends Panel {
     }
 
     /*
+     * getrirekiNo
+     * @return rirekiNo
+     */
+    @JsonProperty("rirekiNo")
+    public RString getRirekiNo() {
+        return rirekiNo;
+    }
+
+    /*
+     * setrirekiNo
+     * @param rirekiNo rirekiNo
+     */
+    @JsonProperty("rirekiNo")
+    public void setRirekiNo(RString rirekiNo) {
+        this.rirekiNo = rirekiNo;
+    }
+
+    /*
      * [ ショートカットの作成 ]
      */
     @JsonIgnore
@@ -187,7 +205,7 @@ public class FutanGendogakuNinteiKousinTsuchisyoKobetHakkoDiv extends Panel {
     }
 
     @JsonIgnore
-    public void setBttZenRireki(Button bttZenRireki) {
+    public void  setBttZenRireki(Button bttZenRireki) {
         this.getHihokenshashoHakkoTaishoshaJoho().getZengoRireki().setBttZenRireki(bttZenRireki);
     }
 
@@ -197,7 +215,7 @@ public class FutanGendogakuNinteiKousinTsuchisyoKobetHakkoDiv extends Panel {
     }
 
     @JsonIgnore
-    public void setBttGoRireki(Button bttGoRireki) {
+    public void  setBttGoRireki(Button bttGoRireki) {
         this.getHihokenshashoHakkoTaishoshaJoho().getZengoRireki().setBttGoRireki(bttGoRireki);
     }
 
