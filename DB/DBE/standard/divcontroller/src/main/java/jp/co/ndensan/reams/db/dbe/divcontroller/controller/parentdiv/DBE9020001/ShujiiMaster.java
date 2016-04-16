@@ -16,8 +16,8 @@ import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE9020001.DBE9
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE9020001.DBE9020001TransitionEventName;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE9020001.ShujiiMasterDiv;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE9020001.dgShujiiIchiran_Row;
-import jp.co.ndensan.reams.db.dbe.divcontroller.handler.parentdiv.dbe9020001.ShujiiMasterHandler;
-import jp.co.ndensan.reams.db.dbe.divcontroller.handler.parentdiv.dbe9020001.ShujiiMasterValidationHandler;
+import jp.co.ndensan.reams.db.dbe.divcontroller.handler.parentdiv.DBE9020001.ShujiiMasterHandler;
+import jp.co.ndensan.reams.db.dbe.divcontroller.handler.parentdiv.DBE9020001.ShujiiMasterValidationHandler;
 import jp.co.ndensan.reams.db.dbe.service.core.basic.shujiijoho.ShujiiMasterFinder;
 import jp.co.ndensan.reams.db.dbe.service.core.basic.shujiijoho.ShujiiMasterManager;
 import jp.co.ndensan.reams.db.dbe.service.core.syujii.shujiijoho.ShujiiJohoManager;
@@ -46,7 +46,7 @@ import jp.co.ndensan.reams.uz.uza.util.config.BusinessConfig;
 /**
  * 主治医マスタ処理のクラスです。。
  *
- * @reamsid_L DBE-0250-010  suguangjun 
+ * @reamsid_L DBE-0250-010 suguangjun
  */
 public class ShujiiMaster {
 
