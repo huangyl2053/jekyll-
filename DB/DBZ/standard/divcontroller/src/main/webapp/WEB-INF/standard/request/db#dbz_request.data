@@ -15,6 +15,8 @@ dbz/db/dbz/ChosaTokkiShokai/onClick_btnBeforeTokkiJiko
 dbz/db/dbz/ChosaTokkiShokai/onClick_btnBeforeTokkiJikoNo
 dbz/db/dbz/ChosaTokkiShokai/onClick_btnReturn
 dbz/db/dbz/ChosaTokkiShokai/onLoad
+dbz/db/dbz/DataOutputInfomation/onClick_btnKakunin
+dbz/db/dbz/DataOutputInfomation/onLoad
 dbz/db/dbz/FukaTaishoshaSearch/onBlur_txtMaxNumber
 dbz/db/dbz/FukaTaishoshaSearch/onClick_btnClear
 dbz/db/dbz/FukaTaishoshaSearch/onClick_btnReSearch
@@ -53,6 +55,8 @@ dbz/db/dbz/JigyoshaNyuryokuGudieCommonChildDiv/onLoad
 dbz/db/dbz/JigyoshaNyuryokuGudieCommonChildDiv/onclick_BtnClear
 dbz/db/dbz/JigyoshaNyuryokuGudieCommonChildDiv/onclick_BtnTaishoJigyoshaKensaku
 dbz/db/dbz/JigyoshaNyuryokuGudieCommonChildDiv/select_BtnSenTaKu
+dbz/db/dbz/JukyuNinteirirekiInfo/onClick_btnClose
+dbz/db/dbz/JukyuNinteirirekiInfo/onLoad
 dbz/db/dbz/JushochiTokureiRirekiList/onClick_btnAdd
 dbz/db/dbz/JushochiTokureiRirekiList/onClick_btnJutokuKakutei
 dbz/db/dbz/JushochiTokureiRirekiList/onClick_btnJutokuTorikeshi
@@ -74,9 +78,14 @@ dbz/db/dbz/KaigoShikakuKihon/onClick_BeforeOpenDialog
 dbz/db/dbz/KaigoTeikeibunSelector/onChange_ddlTeikenbunShubetsu
 dbz/db/dbz/KaigoTeikeibunSelector/onLoad
 dbz/db/dbz/KaigoTeikeibunSelector/onSelectBySelectButton_dgTeikeibun
+dbz/db/dbz/KanryoDialog/onClick_btnClose
+dbz/db/dbz/KanryoDialog/onLoad
+dbz/db/dbz/KihonChosaInput/onClick_btnBack
+dbz/db/dbz/KihonChosaInput/onClick_btnConfirm
 dbz/db/dbz/KihonChosaInput/onClick_btnOpenDialog
 dbz/db/dbz/KihonChosaInput/onClick_chkKoshukuChange
 dbz/db/dbz/KihonChosaInput/onClick_chkMahiChange
+dbz/db/dbz/KihonChosaInput/onLoad
 dbz/db/dbz/KoseiShiChosonSelector/onClick_Kensaku
 dbz/db/dbz/KoseiShiChosonSelector/onClick_Moderu
 dbz/db/dbz/KoseiShiChosonSelector/onLoad
@@ -157,6 +166,8 @@ dbz/db/dbz/ShikakuHenkoRireki/onClick_btnHenkoKakutei
 dbz/db/dbz/ShikakuHenkoRireki/onClick_btnHenkoTorikeshi
 dbz/db/dbz/ShikakuHenkoRireki/onSelectByDeleteButton_dgHenko
 dbz/db/dbz/ShikakuHenkoRireki/onSelectByModifyButton_dgHenko
+dbz/db/dbz/ShikakuRirekiInfo/onClick_BtnClose
+dbz/db/dbz/ShikakuRirekiInfo/onLoad
 dbz/db/dbz/ShikakuTokusoRireki/onClick_btnAdd
 dbz/db/dbz/ShikakuTokusoRireki/onClick_btnDelete
 dbz/db/dbz/ShikakuTokusoRireki/onClick_btnSelect
@@ -196,6 +207,7 @@ dbz/db/dbz/ShujiiIryokikanAndShujiiGuide/onClick_btnClear
 dbz/db/dbz/ShujiiIryokikanAndShujiiGuide/onClick_btnKensaku
 dbz/db/dbz/ShujiiIryokikanAndShujiiGuide/onLoad
 dbz/db/dbz/ShujiiIryokikanAndShujiiGuide/onSelect
+dbz/db/dbz/ShujiiIryokikanAndShujiiInput/onBefore_btnShujiiRenrakuJiko
 dbz/db/dbz/ShujiiIryokikanAndShujiiInput/onBlurTxtShujiiCode
 dbz/db/dbz/ShujiiIryokikanAndShujiiInput/onBlurTxtShujiiIryokikanCode
 dbz/db/dbz/ShujiiIryokikanAndShujiiInput/onBlur_txtIryoKikanCode
@@ -208,6 +220,7 @@ dbz/db/dbz/ShujiiIryokikanAndShujiiInput/onClick_btnShujiiGuide
 dbz/db/dbz/ShujiiIryokikanAndShujiiInput/onClick_btnZenkaiIrokikanJoho
 dbz/db/dbz/ShujiiIryokikanAndShujiiInput/onOKClose_btnIryokikanGuide
 dbz/db/dbz/ShujiiIryokikanAndShujiiInput/onOKClose_btnShujiiGuide
+dbz/db/dbz/ShujiiIryokikanAndShujiiInput/onOKClose_btnShujiiRenrakuJiko
 dbz/db/dbz/SonotaKikanGuide/onClick_Clear
 dbz/db/dbz/SonotaKikanGuide/onClick_Kensaku
 dbz/db/dbz/SonotaKikanGuide/onClick_Moderu
@@ -266,4 +279,7 @@ dbz/db/dbz/TestZenkaiNinteiKekkaJoho/onClick_btnSetinput
 dbz/db/dbz/YokaigoNinteiShinsakaiIchiranList/onClick_BtnKensaku
 dbz/db/dbz/YokaigoNinteiShinsakaiIchiranList/onClick_CheckBox
 dbz/db/dbz/YokaigoNinteiShinsakaiIchiranList/onClick_btnSelect
+dbz/db/dbz/YokaigodoGuide/onClick_btnModoru
+dbz/db/dbz/YokaigodoGuide/onLoad
+dbz/db/dbz/YokaigodoGuide/onSelect_Yokaigodo
 dbz/db/dbz/ZenkaiNinteiKekkaJoho/onClick_btn_ZenkaiShosai

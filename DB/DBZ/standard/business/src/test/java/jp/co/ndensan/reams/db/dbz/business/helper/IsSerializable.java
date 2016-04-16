@@ -67,7 +67,7 @@ public class IsSerializable extends BaseMatcher<Object> {
         description.appendText("シリアライズした後、すぐにデシリアライズすると、シリアライズ前の状態が復元する ");
     }
 
-    @Override
+//    @Override
     public void describeMismatch(Object item, Description description) {
         description.appendText(result.errorMessage);
     }
