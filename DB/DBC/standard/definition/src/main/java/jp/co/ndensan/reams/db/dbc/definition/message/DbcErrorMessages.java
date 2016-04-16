@@ -5,10 +5,10 @@
  */
 package jp.co.ndensan.reams.db.dbc.definition.message;
 
+import static jp.co.ndensan.reams.db.dbz.definition.message.MessageCreateHelper.toCode;
 import jp.co.ndensan.reams.uz.uza.message.ErrorMessage;
 import jp.co.ndensan.reams.uz.uza.message.IMessageGettable;
 import jp.co.ndensan.reams.uz.uza.message.Message;
-import static jp.co.ndensan.reams.db.dbz.definition.message.MessageCreateHelper.toCode;
 
 /**
  * DBCのエラーメッセージ定義列挙型です。
@@ -26,7 +26,8 @@ public enum DbcErrorMessages implements IMessageGettable {
     サービス年月と不一致(7, "%にはサービス年月と同月を指定してください。"),
     住宅改修データなし(8, "住宅改修データがありません。"),
     着工日不一致(9, "着工日には同一の年月を設定してください。"),
-    対象住宅住所不一致(10, "対象住宅住所には同じ住所を設定してください。");
+    対象住宅住所不一致(10, "対象住宅住所には同じ住所を設定してください。"),
+    実行不可(19, "%1ため%2できません。");
 
     private final Message message;
 

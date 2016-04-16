@@ -34,10 +34,12 @@ import jp.co.ndensan.reams.db.dbc.definition.mybatisprm.shiharaihohojyoho.SikyuS
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0710011.dgJutakuKaishuShinseiList_Row;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0710021.JutakuKaishuShinseiJyohoTorokuDiv;
 import jp.co.ndensan.reams.db.dbc.divcontroller.viewbox.ViewStateKeys;
+import jp.co.ndensan.reams.db.dbc.divcontroller.viewbox.dbc0710021.JutakuGaisuDataParameter;
 import jp.co.ndensan.reams.db.dbc.divcontroller.viewbox.dbc0710021.ShikyuShiseiJyohoParameter;
 import jp.co.ndensan.reams.db.dbc.divcontroller.viewbox.dbc0710021.ShokanharaKeteiJyohoParameter;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.jutakukaishujizenshinsei.ShiharaiKekaEntity;
 import jp.co.ndensan.reams.db.dbc.service.core.fukushiyogukonyuhishikyushisei.FukushiyoguKonyuhiShikyuShinsei;
+import jp.co.ndensan.reams.db.dbc.service.core.jutakukaishusikyushinsei.JutakuKaishuShikyuGendogakuHantei;
 import jp.co.ndensan.reams.db.dbc.service.core.jutakukaishusikyushinsei.JutakukaishuSikyuShinseiManager;
 import jp.co.ndensan.reams.db.dbc.service.jutakukaishujizenshinsei.JutakuKaishuJizenShinsei;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBU;
@@ -74,7 +76,9 @@ import jp.co.ndensan.reams.uz.uza.util.code.CodeMasterNoOption;
 import jp.co.ndensan.reams.uz.uza.util.config.BusinessConfig;
 
 /**
- * 住宅改修費支給申請_申請情報登録ハンドラークラスです
+ * 住宅改修費支給申請_申請情報登録ハンドラークラスです。
+ *
+ * @reamsid_L DBC-0992-120 yebangqiang
  */
 public final class JutakuKaishuShinseiJyohoTorokuHandler {
 
@@ -112,6 +116,7 @@ public final class JutakuKaishuShinseiJyohoTorokuHandler {
     private final int 画面年月開始位 = 0;
     private final int 画面年月終了位 = 6;
     private final RString 償還払給付費 = new RString("001");
+    private final RString 提供着工年月MSG = new RString("提供（着工）年月");
 
     private JutakuKaishuShinseiJyohoTorokuHandler(JutakuKaishuShinseiJyohoTorokuDiv div) {
         this.div = div;
@@ -619,6 +624,8 @@ public final class JutakuKaishuShinseiJyohoTorokuHandler {
                 国保連再送付フラグ = true;
             }
         }
+        Decimal 支払金額合計 = div.getJutakuKaishuShinseiContents().getJutakuKaishuShinseiResetInfo()
+                .getTxtHiyoTotalNow().getValue();
         RString 住宅所有者 = div.getJutakuKaishuShinseiContents().getTxtJutakuOwner().getValue();
         RString 被保険者の関係 = div.getJutakuKaishuShinseiContents().getTxtRelationWithHihokensha().getValue();
 //        if (画面モード_事前申請.equals(画面モード)) {
@@ -778,6 +785,7 @@ public final class JutakuKaishuShinseiJyohoTorokuHandler {
         償還払決定情報.set証明書(div.getDdlSyomeisyo().getSelectedKey());
         償還払決定情報.set給付率(div.getTxtKyufuritsu().getValue());
         償還払決定情報.set画面モード(画面モード);
+        ViewStateHolder.put(ViewStateKeys.検索情報キー, 償還払決定情報);
     }
 
     private Map<RString, RString> get更新前データ() {
@@ -861,5 +869,186 @@ public final class JutakuKaishuShinseiJyohoTorokuHandler {
             }
         }
         return false;
+    }
+
+    /**
+     * 住宅改修内容のチェックするメソッドです。
+     */
+//    public void 住宅改修内容のチェック() {
+//        RDate 画面提供着工年月 = div.getTxtTeikyoYM().getValue();
+//        RYearMonth 申請日年月 = div.getJutakuKaishuShinseiContents().getShinseishaInfo()
+//                .getTxtShinseiYMD().getValue().getYearMonth();
+//        if (画面提供着工年月 == null) {
+//            throw new ApplicationException(UrErrorMessages.必須.getMessage().replace(提供着工年月MSG.toString()));
+//        }
+//        // ６．２　TODO　Interfaceが未提供
+//        // ６．３　提供（着工）年月と申請日のチェック
+//        RString 償還 = BusinessConfig.get(ConfigNameDBC.国保連共同処理受託区分_償還, SubGyomuCode.DBC介護給付);
+//        if (給付実績連動_受託なし.equals(償還)) {
+//            if (!画面提供着工年月.getYearMonth().equals(申請日年月)) {
+//                // TODO
+//                throw new ApplicationException(DbcErrorMessages.サービス年月と不一致.getMessage());
+//            }
+//        }
+//    }
+    /**
+     * 費用額合計の取得するメソッドです。
+     */
+    public Decimal 費用額合計の取得() {
+// TODO 「住宅改修内容一覧」共有子DIVのグリッドのレコード
+        return Decimal.ONE;
+    }
+
+    /**
+     * 限度額リセット有効性チェックするメソッドです。
+     */
+    public void 支払結果の設定() {
+        ShikyuShiseiJyohoParameter 引き継ぎデータEntity = new ShikyuShiseiJyohoParameter();
+        引き継ぎデータEntity.set被保険者番号(new RString("000000003"));
+        HihokenshaNo 被保険者番号 = new HihokenshaNo(引き継ぎデータEntity.get被保険者番号());
+        FlexibleYearMonth 画面提供着工年月 = new FlexibleYearMonth(
+                div.getTxtTeikyoYM().getValue().getYearMonth().toString());
+        JutakuKaishuJizenShinsei 住宅改修費事前申請 = JutakuKaishuJizenShinsei.createInstance();
+        Decimal 支給限度額 = 住宅改修費事前申請.getShikyuGendoGaku(被保険者番号, 画面提供着工年月);
+        // 5．２　今回の支払結果を設定する
+        // 5．２．１　両方をチェックしない場合
+        Decimal 費用額合計 = this.費用額合計の取得();
+        Decimal 前回までの費用額合計 = div.getJutakuKaishuShinseiContents().getJutakuKaishuShinseiResetInfo()
+                .getTxtHiyoTotalMae().getValue();
+        Decimal 前回までの被保険対象額 = div.getJutakuKaishuShinseiContents().getJutakuKaishuShinseiResetInfo()
+                .getTxtHokenTaishoHiyoMae().getValue();
+        Decimal 前回までの保険給付額 = div.getJutakuKaishuShinseiContents().getJutakuKaishuShinseiResetInfo()
+                .getTxtHokenKyufuAmountMae().getValue();
+        Decimal 今回の被保険対象額 = div.getJutakuKaishuShinseiContents().getJutakuKaishuShinseiResetInfo()
+                .getTxtHokenTaishoHiyoNow().getValue();
+//            Decimal 今回の保険給付額 = div.getJutakuKaishuShinseiContents().getJutakuKaishuShinseiResetInfo()
+//                    .getTxtHokenKyufuAmountNow().getValue();
+        Decimal 今回の利用者負担額 = div.getJutakuKaishuShinseiContents().getJutakuKaishuShinseiResetInfo()
+                .getTxtRiyoshaFutanAmountNow().getValue();
+        Decimal 給付率 = div.getTxtKyufuritsu().getValue();
+        if (!div.getJutakuKaishuShinseiContents().getJutakuKaishuShinseiResetInfo()
+                .getChkResetInfo().isAllSelected()) {
+            // ①
+            if (費用額合計.add(前回までの費用額合計).compareTo(支給限度額) > 0) {
+                Decimal 今回被保険対象額 = 支給限度額.subtract(前回までの被保険対象額);
+                // 1
+                div.getJutakuKaishuShinseiContents().getJutakuKaishuShinseiResetInfo()
+                        .getTxtHokenTaishoHiyoNow().setValue(今回被保険対象額);
+                if (今回被保険対象額.compareTo(Decimal.ONE) > 0) {
+                    Decimal 今回の保険給付額 = 支給限度額.multiply(給付率).divide(100).subtract(前回までの保険給付額);
+                    // 2
+                    div.getJutakuKaishuShinseiContents().getJutakuKaishuShinseiResetInfo()
+                            .getTxtHokenKyufuAmountNow().setValue(今回の保険給付額);
+                } else if (Decimal.ZERO.equals(今回被保険対象額)) {
+                    // 3
+                    div.getJutakuKaishuShinseiContents().getJutakuKaishuShinseiResetInfo()
+                            .getTxtHokenKyufuAmountNow().setValue(Decimal.ZERO);
+                }
+                // 4
+                Decimal 今回の保険給付額 = div.getJutakuKaishuShinseiContents().getJutakuKaishuShinseiResetInfo()
+                        .getTxtHokenKyufuAmountNow().getValue();
+                div.getJutakuKaishuShinseiContents().getJutakuKaishuShinseiResetInfo().getTxtRiyoshaFutanAmountMae()
+                        .setValue(費用額合計.subtract(今回の保険給付額));
+                // ②
+            } else if (費用額合計.add(前回までの費用額合計).compareTo(支給限度額) <= 0) {
+                // 1
+                div.getJutakuKaishuShinseiContents().getJutakuKaishuShinseiResetInfo()
+                        .getTxtHokenTaishoHiyoNow().setValue(費用額合計);
+                // 2
+                Decimal 今回の保険給付額 = 費用額合計.multiply(給付率).divide(100);
+                div.getJutakuKaishuShinseiContents().getJutakuKaishuShinseiResetInfo()
+                        .getTxtHokenKyufuAmountNow().setValue(今回の保険給付額);
+                // 3
+                Decimal 今回保険給付額 = div.getJutakuKaishuShinseiContents().getJutakuKaishuShinseiResetInfo()
+                        .getTxtHokenKyufuAmountNow().getValue();
+                div.getJutakuKaishuShinseiContents().getJutakuKaishuShinseiResetInfo().getTxtRiyoshaFutanAmountMae()
+                        .setValue(費用額合計.subtract(今回保険給付額));
+            }
+            // 5．１．２　その以外の場合
+        } else {
+            // ①
+            if (費用額合計.compareTo(支給限度額) > 0) {
+                // 1
+                div.getJutakuKaishuShinseiContents().getJutakuKaishuShinseiResetInfo()
+                        .getTxtHokenTaishoHiyoNow().setValue(支給限度額);
+                // 2
+                Decimal 今回の保険給付額 = 支給限度額.multiply(給付率).divide(100);
+                div.getJutakuKaishuShinseiContents().getJutakuKaishuShinseiResetInfo()
+                        .getTxtHokenKyufuAmountNow().setValue(今回の保険給付額);
+                // 3
+                Decimal 今回保険給付額 = div.getJutakuKaishuShinseiContents().getJutakuKaishuShinseiResetInfo()
+                        .getTxtHokenKyufuAmountNow().getValue();
+                div.getJutakuKaishuShinseiContents().getJutakuKaishuShinseiResetInfo().getTxtRiyoshaFutanAmountMae()
+                        .setValue(費用額合計.subtract(今回保険給付額));
+            } else if (費用額合計.compareTo(支給限度額) <= 0) {
+                // ②
+                // 1
+                div.getJutakuKaishuShinseiContents().getJutakuKaishuShinseiResetInfo()
+                        .getTxtHokenTaishoHiyoNow().setValue(費用額合計);
+                // 2
+                Decimal 今回の保険給付額 = 今回の被保険対象額.multiply(給付率).divide(100);
+                div.getJutakuKaishuShinseiContents().getJutakuKaishuShinseiResetInfo()
+                        .getTxtHokenKyufuAmountNow().setValue(今回の保険給付額);
+                // 3
+                Decimal 今回保険給付額 = div.getJutakuKaishuShinseiContents().getJutakuKaishuShinseiResetInfo()
+                        .getTxtHokenKyufuAmountNow().getValue();
+                div.getJutakuKaishuShinseiContents().getJutakuKaishuShinseiResetInfo().getTxtRiyoshaFutanAmountMae()
+                        .setValue(費用額合計.subtract(今回保険給付額));
+            }
+        }
+    }
+
+    /**
+     * 限度額チェックするメソッドです。
+     *
+     * @return (OK：限度額を超えない、NG:限度額を超える)
+     */
+    public boolean is限度額を超えない() {
+        ShikyuShiseiJyohoParameter 引き継ぎデータEntity = new ShikyuShiseiJyohoParameter();
+        引き継ぎデータEntity.set被保険者番号(new RString("000000003"));
+        RString 整理番号 = new RString("0000000003");
+        HihokenshaNo 被保険者番号 = new HihokenshaNo(引き継ぎデータEntity.get被保険者番号());
+        FlexibleYearMonth 画面提供着工年月 = new FlexibleYearMonth(
+                div.getTxtTeikyoYM().getValue().getYearMonth().toString());
+        Decimal 今回の保険対象費用額 = div.getJutakuKaishuShinseiContents().getJutakuKaishuShinseiResetInfo()
+                .getTxtHiyoTotalNow().getValue();
+        boolean 限度リセットフラグ = true;
+        if (div.getJutakuKaishuShinseiContents().getJutakuKaishuShinseiResetInfo()
+                .getChkResetInfo().getSelectedKeys().isEmpty()) {
+            限度リセットフラグ = false;
+        }
+        JutakuKaishuShikyuGendogakuHantei 支給限度額判定 = new JutakuKaishuShikyuGendogakuHantei();
+        return 支給限度額判定.checkJutakukaishuShikyuGendogaku(
+                被保険者番号, 画面提供着工年月, 整理番号, 限度リセットフラグ, 今回の保険対象費用額);
+    }
+
+    /**
+     * 確認対象変更有無チェックするメソッドです。
+     *
+     * @return (true;変更有、false:変更無)
+     */
+    public boolean is確認対象変更有無チェック(JutakuGaisuDataParameter 住宅改修データ) {
+        RString 住宅改修データdgList = 住宅改修データ.get住宅改修データ();
+        List<RString> 限度額リセット = 住宅改修データ.get限度額リセット();
+        List<RString> 画面限度額リセット = div.getJutakuKaishuShinseiContents().getJutakuKaishuShinseiResetInfo()
+                .getChkResetInfo().getSelectedKeys();
+        if (限度額リセット.size() != 画面限度額リセット.size()) {
+            return true;
+        }
+        return false;
+    }
+
+    /**
+     * 本人情報をコピーするメソッドです。
+     */
+    public void set本人情報() {
+        div.getJutakuKaishuShinseiContents().getShinseishaInfo().getTxtAddress().setDomain(
+                div.getJutakuKaishuShinseiHihokenshaPanel().getKaigoAtenaInfo().get住所());
+        div.getJutakuKaishuShinseiContents().getShinseishaInfo().getTxtShinseishaNameKana().setValue(
+                div.getJutakuKaishuShinseiHihokenshaPanel().getKaigoAtenaInfo().get氏名カナ());
+        div.getJutakuKaishuShinseiContents().getShinseishaInfo().getTxtShinseishaName().setValue(
+                div.getJutakuKaishuShinseiHihokenshaPanel().getKaigoAtenaInfo().get氏名漢字());
+        div.getJutakuKaishuShinseiContents().getShinseishaInfo().getTxtYubinNo().setValue(
+                div.getJutakuKaishuShinseiHihokenshaPanel().getKaigoAtenaInfo().get郵便番号());
     }
 }
