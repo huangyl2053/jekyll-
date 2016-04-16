@@ -9,7 +9,7 @@ import jp.co.ndensan.reams.db.dbu.definition.enumeratedtype.DbuViewStateKey;
 import jp.co.ndensan.reams.db.dbu.divcontroller.entity.parentdiv.DBU0060011.DBU0060011TransitionEventName;
 import jp.co.ndensan.reams.db.dbu.divcontroller.entity.parentdiv.DBU0060011.PanelBaseDiv;
 import jp.co.ndensan.reams.db.dbu.divcontroller.entity.parentdiv.DBU0060011.dgHoseitaishoYoshiki_Row;
-import jp.co.ndensan.reams.db.dbu.divcontroller.handler.parentdiv.dbu0060011.PanelBaseHandler;
+import jp.co.ndensan.reams.db.dbu.divcontroller.handler.parentdiv.DBU0060011.PanelBaseHandler;
 import jp.co.ndensan.reams.db.dbu.service.core.jigyohokokunenpo.JigyoHokokuNenpoHoseiHakoManager;
 import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.kyotsu.JigyohokokuNenpoHoseiHyoji;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;

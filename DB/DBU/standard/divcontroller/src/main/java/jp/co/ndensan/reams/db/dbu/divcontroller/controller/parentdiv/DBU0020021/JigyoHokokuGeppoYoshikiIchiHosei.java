@@ -3,14 +3,14 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbu.divcontroller.controller.parentdiv.dbu0020021;
+package jp.co.ndensan.reams.db.dbu.divcontroller.controller.parentdiv.DBU0020021;
 
 import java.util.List;
 import jp.co.ndensan.reams.db.dbu.business.core.basic.JigyoHokokuTokeiData;
 import jp.co.ndensan.reams.db.dbu.divcontroller.entity.parentdiv.DBU0020021.DBU0020021StateName;
 import jp.co.ndensan.reams.db.dbu.divcontroller.entity.parentdiv.DBU0020021.DBU0020021TransitionEventName;
 import jp.co.ndensan.reams.db.dbu.divcontroller.entity.parentdiv.DBU0020021.JigyoHokokuGeppoYoshikiIchiHoseiDiv;
-import jp.co.ndensan.reams.db.dbu.divcontroller.handler.parentdiv.dbu0020021.JigyoHokokuGeppoYoshikiIchiHoseiHandler;
+import jp.co.ndensan.reams.db.dbu.divcontroller.handler.parentdiv.DBU0020021.JigyoHokokuGeppoYoshikiIchiHoseiHandler;
 import jp.co.ndensan.reams.db.dbu.divcontroller.viewbox.JigyoHokokuGeppoParameter;
 import jp.co.ndensan.reams.db.dbu.divcontroller.viewbox.ViewStateKeys;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
