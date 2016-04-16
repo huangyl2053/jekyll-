@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbe.service.shinsakai;
+package jp.co.ndensan.reams.db.dbe.service.core.shinsakai2;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -29,7 +29,7 @@ import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
  *
  * @reamsid_L DBE-0130-050 xuyannan
  */
-public class ShinsakaiiinJohoManager2 {
+public class ShinsakaiiinJohoManager {
 
     private final MapperProvider mapperProvider;
     private final DbT5503ShinsakaiWariateIinJohoDac dac;
@@ -37,7 +37,7 @@ public class ShinsakaiiinJohoManager2 {
     /**
      * コンストラクタです。
      */
-    ShinsakaiiinJohoManager2() {
+    ShinsakaiiinJohoManager() {
         this.mapperProvider = InstanceProvider.create(MapperProvider.class);
         this.dac = InstanceProvider.create(DbT5503ShinsakaiWariateIinJohoDac.class);
     }
@@ -48,7 +48,7 @@ public class ShinsakaiiinJohoManager2 {
      * @param dac 介護認定審査会割当委員情報のDac
      * @param mapperProvider {@link MapperProvider}
      */
-    ShinsakaiiinJohoManager2(
+    ShinsakaiiinJohoManager(
             MapperProvider mapperProvider,
             DbT5503ShinsakaiWariateIinJohoDac dac) {
         this.mapperProvider = mapperProvider;
@@ -56,12 +56,12 @@ public class ShinsakaiiinJohoManager2 {
     }
 
     /**
-     * {@link InstanceProvider#create}にて生成した{@link ShinsakaiiinJohoManager2}のインスタンスを返します。
+     * {@link InstanceProvider#create}にて生成した{@link ShinsakaiiinJohoManager}のインスタンスを返します。
      *
-     * @return {@link InstanceProvider#create}にて生成した{@link ShinsakaiiinJohoManager2}のインスタンス
+     * @return {@link InstanceProvider#create}にて生成した{@link ShinsakaiiinJohoManager}のインスタンス
      */
-    public static ShinsakaiiinJohoManager2 createInstance() {
-        return InstanceProvider.create(ShinsakaiiinJohoManager2.class);
+    public static ShinsakaiiinJohoManager createInstance() {
+        return InstanceProvider.create(ShinsakaiiinJohoManager.class);
     }
 
     /**

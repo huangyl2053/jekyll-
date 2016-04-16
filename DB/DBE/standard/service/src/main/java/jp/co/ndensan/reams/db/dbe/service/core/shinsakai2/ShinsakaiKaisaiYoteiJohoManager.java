@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbe.service.shinsakai;
+package jp.co.ndensan.reams.db.dbe.service.core.shinsakai2;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -23,14 +23,14 @@ import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
  *
  * @reamsid_L DBE-0130-050 xuyannan
  */
-public class ShinsakaiKaisaiYoteiJohoManager2 {
+public class ShinsakaiKaisaiYoteiJohoManager {
 
     private final MapperProvider mapperProvider;
 
     /**
      * コンストラクタです。
      */
-    ShinsakaiKaisaiYoteiJohoManager2() {
+    ShinsakaiKaisaiYoteiJohoManager() {
         this.mapperProvider = InstanceProvider.create(MapperProvider.class);
     }
 
@@ -39,17 +39,17 @@ public class ShinsakaiKaisaiYoteiJohoManager2 {
      *
      * @param mapperProvider {@link MapperProvider}
      */
-    ShinsakaiKaisaiYoteiJohoManager2(MapperProvider mapperProvider) {
+    ShinsakaiKaisaiYoteiJohoManager(MapperProvider mapperProvider) {
         this.mapperProvider = mapperProvider;
     }
 
     /**
-     * {@link InstanceProvider#create}にて生成した{@link ShinsakaiKaisaiYoteiJohoManager2}のインスタンスを返します。
+     * {@link InstanceProvider#create}にて生成した{@link ShinsakaiKaisaiYoteiJohoManager}のインスタンスを返します。
      *
-     * @return {@link InstanceProvider#create}にて生成した{@link ShinsakaiKaisaiYoteiJohoManager2}のインスタンス
+     * @return {@link InstanceProvider#create}にて生成した{@link ShinsakaiKaisaiYoteiJohoManager}のインスタンス
      */
-    public static ShinsakaiKaisaiYoteiJohoManager2 createInstance() {
-        return InstanceProvider.create(ShinsakaiKaisaiYoteiJohoManager2.class);
+    public static ShinsakaiKaisaiYoteiJohoManager createInstance() {
+        return InstanceProvider.create(ShinsakaiKaisaiYoteiJohoManager.class);
     }
 
     /**
