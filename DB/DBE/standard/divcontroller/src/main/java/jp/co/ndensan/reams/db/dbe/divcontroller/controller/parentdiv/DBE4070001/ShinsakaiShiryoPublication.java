@@ -5,9 +5,9 @@
  */
 package jp.co.ndensan.reams.db.dbe.divcontroller.controller.parentdiv.DBE4070001;
 
-import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.dbe4070001.ShinsakaiSearchDiv;
-import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.dbe4070001.ShinsakaiShiryoPublicationDiv;
-import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.dbe4070001.dgShinsakaiList_Row;
+import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE4070001.ShinsakaiSearchDiv;
+import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE4070001.ShinsakaiShiryoPublicationDiv;
+import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE4070001.dgShinsakaiList_Row;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;

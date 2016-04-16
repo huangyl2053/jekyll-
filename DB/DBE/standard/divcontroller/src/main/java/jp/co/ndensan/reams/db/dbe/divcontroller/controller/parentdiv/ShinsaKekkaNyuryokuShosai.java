@@ -7,12 +7,12 @@ package jp.co.ndensan.reams.db.dbe.divcontroller.controller.parentdiv;
 
 import java.util.ArrayList;
 import java.util.List;
-import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.dbe5020001.ShinsaKekkaNyuryokuShosaiDiv;
-import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.dbe5020001.ShinsaShienTaishoshaIchiranDiv;
-import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.dbe5020001.dgChosakekka1_Row;
-import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.dbe5020001.dgChosakekka2_Row;
-import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.dbe5020001.dgChosakekka3_Row;
-import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.dbe5020001.dgShinsaTaishoshaIchiran1_Row;
+import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE5020001.ShinsaKekkaNyuryokuShosaiDiv;
+import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE5020001.ShinsaShienTaishoshaIchiranDiv;
+import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE5020001.dgChosakekka1_Row;
+import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE5020001.dgChosakekka2_Row;
+import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE5020001.dgChosakekka3_Row;
+import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE5020001.dgShinsaTaishoshaIchiran1_Row;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.kaigoNinteiKekka.KaigoNinteiKekkaDiv;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;

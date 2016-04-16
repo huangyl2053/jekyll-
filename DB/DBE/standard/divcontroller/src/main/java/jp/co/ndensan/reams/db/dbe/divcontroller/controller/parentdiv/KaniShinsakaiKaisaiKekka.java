@@ -7,8 +7,8 @@ package jp.co.ndensan.reams.db.dbe.divcontroller.controller.parentdiv;
 
 import java.util.ArrayList;
 import java.util.List;
-import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.dbe5020001.KaniShinsakaiKaisaiKekkaDiv;
-import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.dbe5020001.dgKaniKaisaiKekka_Row;
+import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE5020001.KaniShinsakaiKaisaiKekkaDiv;
+import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE5020001.dgKaniKaisaiKekka_Row;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
