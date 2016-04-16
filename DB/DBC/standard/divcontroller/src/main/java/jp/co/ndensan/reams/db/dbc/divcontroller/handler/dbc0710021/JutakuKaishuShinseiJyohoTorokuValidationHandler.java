@@ -5,6 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbc.divcontroller.handler.dbc0710021;
 
+import jp.co.ndensan.reams.db.dbc.definition.message.DbcErrorMessages;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0710021.JutakuKaishuShinseiJyohoTorokuDiv;
 import jp.co.ndensan.reams.ua.uax.divcontroller.controller.testdriver.TestJukiAtenaValidation.ValidationDictionary;
 import jp.co.ndensan.reams.ua.uax.divcontroller.controller.testdriver.TestJukiAtenaValidation.ValidationDictionaryBuilder;
@@ -20,6 +21,8 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
 
 /**
  * 住宅改修費支給申請_申請情報登録のバリデーションハンドラークラスです。
+ *
+ * @reamsid_L DBC-0992-120 yebangqiang
  */
 public class JutakuKaishuShinseiJyohoTorokuValidationHandler {
 
@@ -40,6 +43,15 @@ public class JutakuKaishuShinseiJyohoTorokuValidationHandler {
     }
 
     /**
+     * コンストラクタです。
+     *
+     * @param div 住宅改修費支給申請_申請情報登録div
+     */
+    public JutakuKaishuShinseiJyohoTorokuValidationHandler(JutakuKaishuShinseiJyohoTorokuDiv div) {
+        this.div = div;
+    }
+
+    /**
      * 保存ボタンクリック時のバリデーションチェックです。
      *
      * @return バリデーション突合結果
@@ -47,6 +59,23 @@ public class JutakuKaishuShinseiJyohoTorokuValidationHandler {
     public ValidationMessageControlPairs validate() {
         IValidationMessages messages = new ControlValidator(div).validate();
         return createDictionary().check(messages);
+    }
+
+    /**
+     * 保存ボタンクリック時のバリデーションチェックです。
+     *
+     * @return バリデーション突合結果
+     */
+    public ValidationMessageControlPairs validate住宅改修内容() {
+        IValidationMessages messages = new ControlValidator(div).validate住宅改修内容();
+        return create住宅改修内容Dictionary().check(messages);
+    }
+
+    private ValidationDictionary create住宅改修内容Dictionary() {
+        return new ValidationDictionaryBuilder()
+                .add(JutakuKaishuShinseiJyohoTorokuValidationMessages.提供着工年月が未入力, div.getTxtTeikyoYM())
+                .add(JutakuKaishuShinseiJyohoTorokuValidationMessages.提供着工年月が申請日の年月と一致しない)
+                .build();
     }
 
     private ValidationDictionary createDictionary() {
@@ -96,15 +125,32 @@ public class JutakuKaishuShinseiJyohoTorokuValidationHandler {
             }
             return messages;
         }
+
+        /**
+         * 保存ボタンクリック時のバリデーションチェック。
+         *
+         * @return バリデーション突合結果
+         */
+        public IValidationMessages validate住宅改修内容() {
+            IValidationMessages messages = ValidationMessagesFactory.createInstance();
+            messages.add(ValidateChain.validateStart(div)
+                    .ifNot(JutakuKaishuShinseiJyohoTorokuSpec.提供着工年月が入力)
+                    .thenAdd(JutakuKaishuShinseiJyohoTorokuValidationMessages.提供着工年月が未入力)
+                    .ifNot(JutakuKaishuShinseiJyohoTorokuSpec.提供着工年月が申請日の年月と一致しない)
+                    .thenAdd(JutakuKaishuShinseiJyohoTorokuValidationMessages.提供着工年月が申請日の年月と一致しない)
+                    .messages());
+            return messages;
+        }
     }
 
     private static enum JutakuKaishuShinseiJyohoTorokuValidationMessages implements IValidationMessage {
 
-        提供着工年月が未入力(UrErrorMessages.必須, "提供（着工）年月が未入力"),
+        提供着工年月が未入力(UrErrorMessages.必須, "提供（着工）年月"),
         住宅所有者が未入力(UrErrorMessages.必須, "住宅所有者"),
         申請日が未入力(UrErrorMessages.必須, "申請日"),
         申請取消事由が未入力(UrErrorMessages.必須, "申請取消事由"),
-        領収日が未入力(UrErrorMessages.必須, "領収日");
+        領収日が未入力(UrErrorMessages.必須, "領収日"),
+        提供着工年月が申請日の年月と一致しない(DbcErrorMessages.サービス年月と不一致);
         private final Message message;
 
         JutakuKaishuShinseiJyohoTorokuValidationMessages(IMessageGettable message, String... replacements) {
