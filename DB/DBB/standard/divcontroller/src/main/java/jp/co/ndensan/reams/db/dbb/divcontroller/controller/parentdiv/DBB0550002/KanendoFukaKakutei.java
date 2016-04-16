@@ -10,7 +10,7 @@ import jp.co.ndensan.reams.db.dbb.business.honsanteiidokanendofukakakutei.Kanend
 import jp.co.ndensan.reams.db.dbb.definition.message.DbbInformationMessages;
 import jp.co.ndensan.reams.db.dbb.definition.message.DbbQuestionMessages;
 import jp.co.ndensan.reams.db.dbb.divcontroller.entity.parentdiv.DBB0550002.KanendoFukaKakuteiDiv;
-import jp.co.ndensan.reams.db.dbb.divcontroller.handler.parentdiv.dbb0550002.KanendoFukaKakuteiHandler;
+import jp.co.ndensan.reams.db.dbb.divcontroller.handler.parentdiv.DBB0550002.KanendoFukaKakuteiHandler;
 import jp.co.ndensan.reams.db.dbb.service.honsanteiidokanendofukakakutei.HonsanteiIdoKanendoFukaKakutei;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBB;
 import jp.co.ndensan.reams.db.dbx.service.core.dbbusinessconfig.DbBusinessConifg;
