@@ -1,61 +1,79 @@
-var DBC;
-(function (DBC) {
-    (function (ShiharaiHohoJyoho) {
-        var ModeController = (function () {
-            function ModeController(fieldName) {
+/// <reference path='ShiharaiHohoJyoho_Design.ts' />
+module DBC
+{
+    export module ShiharaiHohoJyoho
+    {
+        export class ModeController {
+            private controls: Controls;
+            private fieldName: string;
+
+            constructor(fieldName: string) {
                 this.fieldName = fieldName;
-                this.controls = new ShiharaiHohoJyoho.Controls(fieldName);
+                this.controls = new Controls(fieldName);
             }
-            ModeController.prototype.Properties = function () {
+
+            public Properties() {
                 return new UZA.CommonChildDiv(this.fieldName);
-            };
+            }
 
-            ModeController.prototype.PublicProperties = function () {
-                return new ShiharaiHohoJyoho.PublicProperties(this.fieldName);
-            };
-
-            ModeController.prototype.priorities = function () {
+            public PublicProperties() {
+                return new PublicProperties(this.fieldName);
+            }
+            
+            public priorities(): Array < string > {
                 return [
                     "DisplayMode",
                     "PageMode"
                 ];
-            };
-
-            ModeController.prototype.DisplayMode = function () {
+            }
+            
+            public DisplayMode() {
                 return new Modes.DisplayMode(this.controls);
-            };
-
-            ModeController.prototype.PageMode = function () {
+            }
+            
+            public PageMode() {
                 return new Modes.PageMode(this.controls);
-            };
-            return ModeController;
-        })();
-        ShiharaiHohoJyoho.ModeController = ModeController;
+            }
+        }
 
-        (function (Modes) {
-            var DisplayMode = (function () {
-                function DisplayMode(controls) {
+        export module Modes {
+            export class DisplayMode {
+                private controls: Controls;
+
+                constructor(controls: Controls) {
                     this.controls = controls;
                 }
-                DisplayMode.prototype.shokai = function () {
-                    this.controls.btnKozaToroku().visible = false;
-                    this.controls.btnSelect().visible = false;
-                    this.controls.ShiharaiHohoJyoho().disabled = true;
-                };
 
-                DisplayMode.prototype.toroku = function () {
-                    this.controls.btnKozaToroku().visible = true;
-                    this.controls.btnSelect().visible = true;
-                    this.controls.ShiharaiHohoJyoho().disabled = false;
-                };
-                return DisplayMode;
-            })();
-            Modes.DisplayMode = DisplayMode;
-            var PageMode = (function () {
-                function PageMode(controls) {
+                public shokai(): void {
+                    this.controls.radMadoguti().disabled = true;
+                    this.controls.txtShiharaiBasho().disabled = true;
+                    this.controls.txtStartYMD().disabled = true;
+                    this.controls.txtStartHHMM().disabled = true;
+                    this.controls.txtEndYMD().disabled = true;
+                    this.controls.txtEndHHMM().disabled = true;
+                    this.controls.radKoza().disabled = true;
+                    this.controls.radJyryoinin().disabled = true;
+                }
+
+                public toroku(): void {
+                    this.controls.radMadoguti().disabled = false;
+                    this.controls.txtShiharaiBasho().disabled = false;
+                    this.controls.txtStartYMD().disabled = false;
+                    this.controls.txtStartHHMM().disabled = false;
+                    this.controls.txtEndYMD().disabled = false;
+                    this.controls.txtEndHHMM().disabled = false;
+                    this.controls.radKoza().disabled = false;
+                    this.controls.radJyryoinin().disabled = false;
+                }
+            }
+            export class PageMode {
+                private controls: Controls;
+
+                constructor(controls: Controls) {
                     this.controls = controls;
                 }
-                PageMode.prototype.Shokan = function () {
+
+                public Shokan(): void {
                     this.controls.linKoza().displayNone = false;
                     this.controls.radJyryoinin().displayNone = false;
                     this.controls.txtKeiyakuNo().displayNone = false;
@@ -64,14 +82,15 @@ var DBC;
                     this.controls.txtKeiyakuName().displayNone = false;
                     this.controls.txtKinyuKikanCode1().displayNone = false;
                     this.controls.txtKinyuKikanShitenCode1().displayNone = false;
+                    this.controls.txtTenban1().displayNone = false;
                     this.controls.txtYokinShubetsu1().displayNone = false;
                     this.controls.txtKozaNo1().displayNone = false;
                     this.controls.txtKinyuKikanName1().displayNone = false;
                     this.controls.txtMeigininKana1().displayNone = false;
                     this.controls.txtMeigininKanji1().displayNone = false;
-                };
-
-                PageMode.prototype.JutakuKaishu = function () {
+                }
+                
+                public JutakuKaishu(): void {
                     this.controls.linKoza().displayNone = false;
                     this.controls.radJyryoinin().displayNone = false;
                     this.controls.txtKeiyakuNo().displayNone = false;
@@ -80,14 +99,15 @@ var DBC;
                     this.controls.txtKeiyakuName().displayNone = false;
                     this.controls.txtKinyuKikanCode1().displayNone = false;
                     this.controls.txtKinyuKikanShitenCode1().displayNone = false;
+                    this.controls.txtTenban1().displayNone = false;
                     this.controls.txtYokinShubetsu1().displayNone = false;
                     this.controls.txtKozaNo1().displayNone = false;
                     this.controls.txtKinyuKikanName1().displayNone = false;
                     this.controls.txtMeigininKana1().displayNone = false;
                     this.controls.txtMeigininKanji1().displayNone = false;
-                };
-
-                PageMode.prototype.Fukushiyogu = function () {
+                }
+                
+                public Fukushiyogu(): void {
                     this.controls.linKoza().displayNone = false;
                     this.controls.radJyryoinin().displayNone = false;
                     this.controls.txtKeiyakuNo().displayNone = false;
@@ -96,14 +116,15 @@ var DBC;
                     this.controls.txtKeiyakuName().displayNone = false;
                     this.controls.txtKinyuKikanCode1().displayNone = false;
                     this.controls.txtKinyuKikanShitenCode1().displayNone = false;
+                    this.controls.txtTenban1().displayNone = false;
                     this.controls.txtYokinShubetsu1().displayNone = false;
                     this.controls.txtKozaNo1().displayNone = false;
                     this.controls.txtKinyuKikanName1().displayNone = false;
                     this.controls.txtMeigininKana1().displayNone = false;
                     this.controls.txtMeigininKanji1().displayNone = false;
-                };
-
-                PageMode.prototype.KogakuService = function () {
+                }
+                
+                public KogakuService(): void {
                     this.controls.linKoza().displayNone = false;
                     this.controls.radJyryoinin().displayNone = false;
                     this.controls.txtKeiyakuNo().displayNone = false;
@@ -112,14 +133,15 @@ var DBC;
                     this.controls.txtKeiyakuName().displayNone = false;
                     this.controls.txtKinyuKikanCode1().displayNone = false;
                     this.controls.txtKinyuKikanShitenCode1().displayNone = false;
+                    this.controls.txtTenban1().displayNone = false;
                     this.controls.txtYokinShubetsu1().displayNone = false;
                     this.controls.txtKozaNo1().displayNone = false;
                     this.controls.txtKinyuKikanName1().displayNone = false;
                     this.controls.txtMeigininKana1().displayNone = false;
                     this.controls.txtMeigininKanji1().displayNone = false;
-                };
+                }
 
-                PageMode.prototype.KogakuGassan = function () {
+                public KogakuGassan(): void {
                     this.controls.linKoza().displayNone = true;
                     this.controls.radJyryoinin().displayNone = true;
                     this.controls.txtKeiyakuNo().displayNone = true;
@@ -128,37 +150,37 @@ var DBC;
                     this.controls.txtKeiyakuName().displayNone = true;
                     this.controls.txtKinyuKikanCode1().displayNone = true;
                     this.controls.txtKinyuKikanShitenCode1().displayNone = true;
+                    this.controls.txtTenban1().displayNone = true;
                     this.controls.txtYokinShubetsu1().displayNone = true;
                     this.controls.txtKozaNo1().displayNone = true;
                     this.controls.txtKinyuKikanName1().displayNone = true;
                     this.controls.txtMeigininKana1().displayNone = true;
                     this.controls.txtMeigininKanji1().displayNone = true;
-                };
-                return PageMode;
-            })();
-            Modes.PageMode = PageMode;
-        })(ShiharaiHohoJyoho.Modes || (ShiharaiHohoJyoho.Modes = {}));
-        var Modes = ShiharaiHohoJyoho.Modes;
-    })(DBC.ShiharaiHohoJyoho || (DBC.ShiharaiHohoJyoho = {}));
-    var ShiharaiHohoJyoho = DBC.ShiharaiHohoJyoho;
-})(DBC || (DBC = {}));
-
-var DBC;
-(function (DBC) {
-    (function (ShiharaiHohoJyoho) {
-        var PublicProperties = (function () {
-            function PublicProperties(fieldName) {
-                this.fieldName = fieldName;
-                this.controls = new ShiharaiHohoJyoho.Controls(fieldName);
+                }
             }
-            PublicProperties.prototype.getEditTypes = function () {
+        }
+    }
+}
+
+module DBC
+{
+    export module ShiharaiHohoJyoho
+    {
+        export class PublicProperties {
+            private controls: Controls;
+            private fieldName: string;
+
+            constructor(fieldName: string) {
+                this.fieldName = fieldName;
+                this.controls = new Controls(fieldName);
+            }
+
+            public getEditTypes(): UZA.EditTypeForPublicProperty {
                 var editTypes = new UZA.EditTypeForPublicProperty();
 
                 return editTypes;
-            };
-            return PublicProperties;
-        })();
-        ShiharaiHohoJyoho.PublicProperties = PublicProperties;
-    })(DBC.ShiharaiHohoJyoho || (DBC.ShiharaiHohoJyoho = {}));
-    var ShiharaiHohoJyoho = DBC.ShiharaiHohoJyoho;
-})(DBC || (DBC = {}));
+            }
+        }
+    }
+}
+
