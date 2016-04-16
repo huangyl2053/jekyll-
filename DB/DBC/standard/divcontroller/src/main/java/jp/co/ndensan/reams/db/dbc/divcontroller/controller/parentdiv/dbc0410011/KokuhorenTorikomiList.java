@@ -8,8 +8,8 @@ package jp.co.ndensan.reams.db.dbc.divcontroller.controller.parentdiv.dbc0410011
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0410011.DBC0410011TransitionEventName;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0410011.KokuhorenTorikomiListDiv;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0410011.dgKokuhorenTorikomiList_Row;
-import jp.co.ndensan.reams.db.dbc.divcontroller.handler.dbc0410011.KokuhorenTorikomiListHandler;
-import jp.co.ndensan.reams.db.dbc.divcontroller.handler.dbc0410011.KokuhorenTorikomiListValidationHandler;
+import jp.co.ndensan.reams.db.dbc.divcontroller.handler.parentdiv.DBC0410011.KokuhorenTorikomiListHandler;
+import jp.co.ndensan.reams.db.dbc.divcontroller.handler.parentdiv.DBC0410011.KokuhorenTorikomiListValidationHandler;
 import jp.co.ndensan.reams.db.dbc.divcontroller.viewbox.ViewStateKeys;
 import jp.co.ndensan.reams.db.dbc.divcontroller.viewbox.kaigokyufukokuhorenjohotorikomi.KokuhorenDataTorikomiViewStateClass;
 import jp.co.ndensan.reams.db.dbc.service.core.basic.IryoHokenRirekiManager;
