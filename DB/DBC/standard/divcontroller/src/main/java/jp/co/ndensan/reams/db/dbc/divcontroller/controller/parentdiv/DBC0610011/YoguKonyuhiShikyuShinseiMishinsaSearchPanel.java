@@ -112,12 +112,13 @@ public class YoguKonyuhiShikyuShinseiMishinsaSearchPanel {
                 .equals(ResponseHolder.getMessageCode())
                 && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
             FlexibleDate 決定日 = new FlexibleDate(決定日R.toString());
+            div.getYoguKonyuhiShikyuShinseiMishinsaSearchCondition().setVisible(false);
+            div.getYoguKonyuhiShikyuShinseiMishinsaResultList().setVisible(false);
+            CommonButtonHolder.setVisibleByCommonButtonFieldName(保存, false);
             getHandler(div).保存処理(決定日);
+            // TODO QA番号:628 完了確認メッセージエリアを表示にする。
+            return ResponseData.of(div).forwardWithEventName(DBC0610011TransitionEventName.更新).respond();
         }
-        div.getYoguKonyuhiShikyuShinseiMishinsaSearchCondition().setVisible(false);
-        div.getYoguKonyuhiShikyuShinseiMishinsaResultList().setVisible(false);
-        CommonButtonHolder.setVisibleByCommonButtonFieldName(保存, false);
-        // TODO QA番号:628 完了確認メッセージエリアを表示にする。
         return ResponseData.of(div).respond();
     }
 
