@@ -5,7 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0720011;
 
-import jp.co.ndensan.reams.db.dbc.divcontroller.handler.parentdiv.dbc0720011.MishinsaShikyuShinseiListHandler;
+import jp.co.ndensan.reams.db.dbc.divcontroller.handler.parentdiv.DBC0720011.MishinsaShikyuShinseiListHandler;
 import jp.co.ndensan.reams.uz.uza.core.validation.IPredicate;
 
 /**
