@@ -14,6 +14,7 @@ import jp.co.ndensan.reams.db.dbc.business.core.basic.ShokanShukei;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
+import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -35,6 +36,7 @@ public class FukushiYoguKonyuhiShikyuShiseiKetteDivEntity {
     private RString 証明書コード;
     private RString 明細番号;
     private FlexibleDate 決定日;
+    private ShikibetsuCode 識別コード;
     private List<ShokanFukushiYoguHanbaihi> 登録福祉用具販売費リスト;
     private List<ShokanFukushiYoguHanbaihi> 修正福祉用具販売費リスト;
     private List<ShokanFukushiYoguHanbaihi> 削除福祉用具販売費リスト;
@@ -42,7 +44,7 @@ public class FukushiYoguKonyuhiShikyuShiseiKetteDivEntity {
     private boolean 差額金額登録フラグ;
     private final ShokanHanteiKekka 償還払支給判定結果;
     private final ShokanShukei 償還払集計;
-    private final RString 画面モード;
+    private RString 画面モード;
 
     private static final RString MODEL_TOROKU = new RString("登録");
     private static final RString MODEL_SHUSEI = new RString("修正");
