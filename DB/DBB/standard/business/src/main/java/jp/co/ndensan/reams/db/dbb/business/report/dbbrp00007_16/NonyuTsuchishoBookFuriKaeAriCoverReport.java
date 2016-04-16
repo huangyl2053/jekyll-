@@ -10,6 +10,7 @@ import java.util.List;
 import jp.co.ndensan.reams.db.dbb.business.report.tsuchisho.notsu.HonSanteiNonyuTsuchiShoJoho;
 import jp.co.ndensan.reams.db.dbb.business.report.tsuchisho.notsu.NonyuTsuchiShoKiJoho;
 import jp.co.ndensan.reams.db.dbb.entity.report.dbbrp00007_16.NonyuTsuchishoBookFuriKaeAriCoverSource;
+import jp.co.ndensan.reams.db.dbz.business.core.kaigosofubutsuatesakisource.KaigoSofubutsuAtesakiSource;
 import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.kyotsu.NinshoshaDenshikoinshubetsuCode;
 import jp.co.ndensan.reams.ur.urz.business.core.association.Association;
 import jp.co.ndensan.reams.ur.urz.business.core.ninshosha.Ninshosha;
@@ -17,7 +18,6 @@ import jp.co.ndensan.reams.ur.urz.business.report.parts.ninshosha.INinshoshaSour
 import jp.co.ndensan.reams.ur.urz.business.report.parts.ninshosha.NinshoshaSourceBuilderFactory;
 import jp.co.ndensan.reams.ur.urz.definition.core.ninshosha.KenmeiFuyoKubunType;
 import jp.co.ndensan.reams.ur.urz.entity.report.parts.ninshosha.NinshoshaSource;
-import jp.co.ndensan.reams.ur.urz.entity.report.sofubutsuatesaki.SofubutsuAtesakiSource;
 import jp.co.ndensan.reams.ur.urz.service.core.association.AssociationFinderFactory;
 import jp.co.ndensan.reams.ur.urz.service.core.ninshosha.NinshoshaFinderFactory;
 import jp.co.ndensan.reams.uz.uza.biz.GyomuCode;
@@ -66,7 +66,7 @@ public class NonyuTsuchishoBookFuriKaeAriCoverReport extends Report<NonyuTsuchis
         }
 
         // TODO 雛形部品CompNinshoshaを作成する
-        // TODO 帳票制御情報を取得する 
+        // TODO 帳票制御情報を取得する
         // 帳票制御共通（DbT7065ChohyoSeigyoKyotsu）
         // パラメータ：　サブ業務コード　＝　DBB
         //	　　　   帳票分類ID　＝　"DBB100045_HokenryoNonyuTsuchishoDaihyo"
@@ -80,7 +80,7 @@ public class NonyuTsuchishoBookFuriKaeAriCoverReport extends Report<NonyuTsuchis
         NinshoshaSource ninshoshaSource = iNinshoshaSourceBuilder.buildSource();
 
         // TODO 共通部品CompSofubutsuAtesakiを作成する
-        SofubutsuAtesakiSource sofubutsuAtesakiSource = 本算定納入通知書情報.get編集後本算定通知書共通情報().get編集後宛先().getSofubutsuAtesakiSource();
+        KaigoSofubutsuAtesakiSource sofubutsuAtesakiSource = 本算定納入通知書情報.get編集後本算定通知書共通情報().get編集後宛先().getSofubutsuAtesakiSource();
         int 連番 = 1;
 
         for (NonyuTsuchiShoKiJoho 納入通知書期情報 : 納入通知書期情報リスト) {
@@ -88,7 +88,7 @@ public class NonyuTsuchishoBookFuriKaeAriCoverReport extends Report<NonyuTsuchis
                 continue;
             }
             INonyuTsuchishoBookFuriKaeAriCoverEditor editor = new NonyuTsuchishoBookFuriKaeAriCoverEditor(item,
-                    連番, ninshoshaSource, sofubutsuAtesakiSource);
+                    連番, ninshoshaSource, sofubutsuAtesakiSource.get送付物宛先ソース());
             INonyuTsuchishoBookFuriKaeAriCoverBuilder builder = new NonyuTsuchishoBookFuriKaeAriCoverBuilder(editor);
             writer.writeLine(builder);
             連番++;
