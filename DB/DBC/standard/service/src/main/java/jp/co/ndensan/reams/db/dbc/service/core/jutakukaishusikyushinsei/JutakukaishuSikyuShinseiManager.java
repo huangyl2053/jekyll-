@@ -21,7 +21,6 @@ import jp.co.ndensan.reams.db.dbc.business.core.basic.ShokanShukei;
 import jp.co.ndensan.reams.db.dbc.business.core.jutakukaishusikyushinsei.JutakukaishuJizenShinseiResult;
 import jp.co.ndensan.reams.db.dbc.business.core.jutakukaishusikyushinsei.JutakukaishuSikyuShinseiResult;
 import jp.co.ndensan.reams.db.dbc.business.core.jutakukaishusikyushinsei.UpdSyokanbaraiketeJoho;
-import jp.co.ndensan.reams.db.dbc.business.core.shokanjutakukaishu.ShokanJutakuKaishuBusiness;
 import jp.co.ndensan.reams.db.dbc.definition.core.shikyufushikyukubun.ShikyuFushikyuKubun;
 import jp.co.ndensan.reams.db.dbc.definition.mybatisprm.jutakukaishusikyushinsei.JutakukaishuSikyuShinseiKey;
 import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3017KyufujissekiKihonEntity;
@@ -516,12 +515,12 @@ public class JutakukaishuSikyuShinseiManager {
 
         List<DbT3049ShokanJutakuKaishuEntity> dbt3049List = new ArrayList<>();
         JyutakukaisyuyichiranFinder finder = JyutakukaisyuyichiranFinder.createInstance();
-        SearchResult<ShokanJutakuKaishuBusiness> tmpList
+        SearchResult<ShokanJutakuKaishu> tmpList
                 = finder.selectJyutakukaisyuList(parameter.get被保険者番号(), parameter.getサービス提供年月(),
                         parameter.get整理番号(), parameter.get証明書());
         if (!tmpList.records().isEmpty()) {
-            for (ShokanJutakuKaishuBusiness tmp : tmpList.records()) {
-                dbt3049List.add(tmp.get住宅改修());
+            for (ShokanJutakuKaishu tmp : tmpList.records()) {
+                dbt3049List.add(tmp.toEntity());
             }
         }
         ShokanKihon kihon
