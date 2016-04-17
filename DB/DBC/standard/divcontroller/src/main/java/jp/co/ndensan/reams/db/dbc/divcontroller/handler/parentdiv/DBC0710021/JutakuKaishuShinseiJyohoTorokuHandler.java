@@ -17,8 +17,11 @@ import jp.co.ndensan.reams.db.dbc.business.core.basic.ShokanHanteiKekka;
 import jp.co.ndensan.reams.db.dbc.business.core.basic.ShokanJutakuKaishu;
 import jp.co.ndensan.reams.db.dbc.business.core.basic.ShokanJutakuKaishuJizenShinsei;
 import jp.co.ndensan.reams.db.dbc.business.core.basic.ShokanKihon;
+import jp.co.ndensan.reams.db.dbc.business.core.basic.ShokanKihonBuilder;
 import jp.co.ndensan.reams.db.dbc.business.core.basic.ShokanShinsei;
+import jp.co.ndensan.reams.db.dbc.business.core.basic.ShokanShinseiBuilder;
 import jp.co.ndensan.reams.db.dbc.business.core.basic.ShokanShukei;
+import jp.co.ndensan.reams.db.dbc.business.core.basic.ShokanShukeiBuilder;
 import jp.co.ndensan.reams.db.dbc.business.core.fukushiyogukonyuhishikyushisei.ShichosonResult;
 import jp.co.ndensan.reams.db.dbc.business.core.jutakukaishujizenshinsei.ShiharaiKekkaResult;
 import jp.co.ndensan.reams.db.dbc.business.core.jutakukaishujizenshinsei.YokaigoNinteiJyoho;
@@ -703,47 +706,11 @@ public final class JutakuKaishuShinseiJyohoTorokuHandler {
 
         if (画面モード_登録.equals(画面モード)
                 || 画面モード_事前申請.equals(画面モード)) {
-            RString 理由書作成日DB = 理由書作成日 == null ? null : 理由書作成日.toDateString();
-            int 保険給付額DB = 保険給付額 == null ? null : 保険給付額.intValue();
-            int 利用者負担額DB = 利用者負担額 == null ? null : 利用者負担額.intValue();
-            ShokanShinsei dbt3034 = new ShokanShinsei(引き継ぎ被保険者番号, サービス提供年月, 整理番号);
-            dbt3034 = dbt3034.createBuilderForEdit().set証記載保険者番号(new ShoKisaiHokenshaNo(保険者))
-                    .set受付年月日(受付年月日).set申請年月日(new FlexibleDate(申請年月日.toString()))
-                    .set申請理由(申請理由).set申請者区分(申請者区分).set申請者氏名(申請者氏名)
-                    .set申請者氏名カナ(申請者氏名カナ).set申請者郵便番号(申請者郵便番号)
-                    .set申請者住所(申請者住所.value()).set申請者電話番号(申請者電話番号).set申請事業者番号(
-                            new JigyoshaNo(申請事業者番号)).set理由書作成日(new FlexibleDate(理由書作成日DB))
-                    .set理由書作成者(理由書作成者カナ).set理由書作成者カナ(理由書作成者カナ).set理由書作成事業者番号(
-                            new JigyoshaNo(理由書作成事業者番号)).set支払金額合計(支払金額合計)
-                    .set保険対象費用額(保険対象費用額).set保険給付額(保険給付額DB).
-                    set利用者負担額(利用者負担額DB).set支給申請審査区分(null).set送付区分(送付区分)
-                    .set送付年月(送付年月).set国保連再送付フラグ(国保連再送付フラグ).set住宅所有者(住宅所有者)
-                    .set被保険者の関係(被保険者の関係).set要介護状態３段階変更(要介護状態区分3段階変更)
-                    .set住宅住所変更(住宅住所変更).set審査年月日(null).set審査結果(null).set住宅改修申請区分(
-                            住宅改修申請区分).set住宅改修申請取消事由コード(null).set領収年月日(領収年月日).build();
-            if (画面モード_事前申請.equals(画面モード)) {
-                dbt3034 = dbt3034.createBuilderForEdit().set事前申請サービス提供年月(サービス提供年月)
-                        .set事前申請整理番号(整理番号).build();
-            }
-            ShokanKihon dbt3038 = new ShokanKihon(引き継ぎ被保険者番号, サービス提供年月, 整理番号, 償還払請求基本_事業者番号,
-                    証明書, 償還払請求基本_明細番号);
-            dbt3038 = dbt3038.createBuilderForEdit().set保険給付率(給付率).setサービス単位数(支払金額合計.intValue())
-                    .set保険請求額(保険給付額).set利用者負担額(利用者負担額.intValue()).build();
-            ShokanShukei dbt3053 = new ShokanShukei(引き継ぎ被保険者番号, サービス提供年月, 整理番号, 償還払請求基本_事業者番号,
-                    証明書, 償還払請求基本_明細番号, new RString("01"));
-            JutakuKaishuJizenShinsei 住宅改修費事前申請 = JutakuKaishuJizenShinsei.createInstance();
-            ServiceShuruiCode サービス種類コード = 住宅改修費事前申請.getServiceShuruiCode(引き継ぎ被保険者番号, サービス提供年月);
-            dbt3053 = dbt3053.createBuilderForEdit().setサービス種類コード(サービス種類コード)
-                    .set請求額(保険給付額).set利用者負担額(利用者負担額.intValue()).build();
-            ShokanJutakuKaishu dbt3049 = new ShokanJutakuKaishu(引き継ぎ被保険者番号, サービス提供年月, 整理番号,
-                    償還払請求基本_事業者番号, 証明書, 償還払請求基本_明細番号, new RString("01"));
-            dbt3049 = dbt3049.createBuilderForEdit().setサービスコード(
-                    new ServiceCode(サービス種類コード.value().concat("0000"))).
-                    set事前申請サービス提供年月(サービス提供年月).set事前申請整理番号(整理番号).build();
-            // TODO 住宅改修内容リストを子DIVから取得が不明
-            List<ShokanJutakuKaishu> dbt3049List = new ArrayList<>();
-            dbt3049List.add(dbt3049);
-            住宅改修費支給申請.saveDBDate(dbt3034, dbt3038, dbt3053, dbt3049List);
+            set登録モードDB保存(理由書作成日, 引き継ぎ被保険者番号, サービス提供年月, 整理番号, 保険者, 受付年月日,
+                    申請年月日, 申請理由, 申請者区分, 申請者氏名, 申請者氏名カナ, 申請者郵便番号, 申請者住所, 申請者電話番号,
+                    理由書作成者カナ, 支払金額合計, 保険対象費用額, 送付区分, 送付年月, 国保連再送付フラグ, 住宅所有者,
+                    被保険者の関係, 要介護状態区分3段階変更, 住宅住所変更, 住宅改修申請区分, 領収年月日, 証明書, 給付率,
+                    保険給付額, 利用者負担額, 申請事業者番号, 理由書作成事業者番号, 画面モード, 住宅改修費支給申請);
         } else if (画面モード_削除.equals(画面モード)) {
             List<ShokanJutakuKaishu> dbt3049List = new ArrayList<>();
             ShokanShinsei dbt3034 = new ShokanShinsei(引き継ぎ被保険者番号, 引き継ぎサービス提供年月, 引き継ぎ整理番号);
@@ -816,6 +783,67 @@ public final class JutakuKaishuShinseiJyohoTorokuHandler {
                     new HokenshaNo(div.getJutakuKaishuShinseiContents().getDdlHokensha().getSelectedKey()),
                     dbt3034, dbt3038, null, dbt3053, (償還払支給判定結果 == null ? null : 償還払支給判定結果));
         }
+    }
+
+    private void set登録モードDB保存(RDate 理由書作成日, HihokenshaNo 引き継ぎ被保険者番号, FlexibleYearMonth サービス提供年月, RString 整理番号, RString 保険者, FlexibleDate 受付年月日, RDate 申請年月日, RString 申請理由, RString 申請者区分, RString 申請者氏名, RString 申請者氏名カナ, YubinNo 申請者郵便番号, AtenaJusho 申請者住所, TelNo 申請者電話番号, RString 理由書作成者カナ, Decimal 支払金額合計, Decimal 保険対象費用額, RString 送付区分, FlexibleYearMonth 送付年月, boolean 国保連再送付フラグ, RString 住宅所有者, RString 被保険者の関係, boolean 要介護状態区分3段階変更, boolean 住宅住所変更, RString 住宅改修申請区分, FlexibleDate 領収年月日, RString 証明書, HokenKyufuRitsu 給付率, Decimal 保険給付額, Decimal 利用者負担額, RString 申請事業者番号, RString 理由書作成事業者番号, RString 画面モード, JutakukaishuSikyuShinseiManager 住宅改修費支給申請) throws IllegalArgumentException {
+        FlexibleDate 理由書作成日DB = 理由書作成日 == null ? null : new FlexibleDate(理由書作成日.toDateString());
+        ShokanShinsei dbt3034 = new ShokanShinsei(引き継ぎ被保険者番号, サービス提供年月, 整理番号);
+        ShokanShinseiBuilder dbt3034Builder = dbt3034.createBuilderForEdit().set証記載保険者番号(new ShoKisaiHokenshaNo(保険者))
+                .set受付年月日(受付年月日).set申請年月日(new FlexibleDate(申請年月日.toString()))
+                .set申請理由(申請理由).set申請者区分(申請者区分).set申請者氏名(申請者氏名)
+                .set申請者氏名カナ(申請者氏名カナ).set申請者郵便番号(申請者郵便番号)
+                .set申請者住所(申請者住所.value()).set申請者電話番号(申請者電話番号).set理由書作成日(理由書作成日DB)
+                .set理由書作成者(理由書作成者カナ).set理由書作成者カナ(理由書作成者カナ).set支払金額合計(支払金額合計)
+                .set保険対象費用額(保険対象費用額).set審査方法区分(new RString("1"))
+                .set支給申請審査区分(null).set送付区分(送付区分)
+                .set送付年月(送付年月).set国保連再送付フラグ(国保連再送付フラグ).set住宅所有者(住宅所有者)
+                .set被保険者の関係(被保険者の関係).set要介護状態３段階変更(要介護状態区分3段階変更)
+                .set住宅住所変更(住宅住所変更).set審査年月日(null).set審査結果(null).set住宅改修申請区分(
+                        住宅改修申請区分).set住宅改修申請取消事由コード(null).set領収年月日(領収年月日);
+        ShokanKihon dbt3038 = new ShokanKihon(引き継ぎ被保険者番号, サービス提供年月, 整理番号, 償還払請求基本_事業者番号,
+                証明書, 償還払請求基本_明細番号);
+        ShokanKihonBuilder dbt3038Builder = dbt3038.createBuilderForEdit().set保険給付率(給付率);
+        ShokanShukei dbt3053 = new ShokanShukei(引き継ぎ被保険者番号, サービス提供年月, 整理番号, 償還払請求基本_事業者番号,
+                証明書, 償還払請求基本_明細番号, new RString("01"));
+        JutakuKaishuJizenShinsei 住宅改修費事前申請 = JutakuKaishuJizenShinsei.createInstance();
+        ServiceShuruiCode サービス種類コード = 住宅改修費事前申請.getServiceShuruiCode(引き継ぎ被保険者番号, サービス提供年月);
+        ShokanShukeiBuilder dbt3053Builder = dbt3053.createBuilderForEdit().setサービス種類コード(サービス種類コード);
+        ShokanJutakuKaishu dbt3049 = new ShokanJutakuKaishu(引き継ぎ被保険者番号, サービス提供年月, 整理番号,
+                償還払請求基本_事業者番号, 証明書, 償還払請求基本_明細番号, new RString("01"));
+        if (サービス種類コード != null) {
+            dbt3049 = dbt3049.createBuilderForEdit().setサービスコード(
+                    new ServiceCode(サービス種類コード.value().concat("0000"))).
+                    set事前申請サービス提供年月(サービス提供年月).set事前申請整理番号(整理番号).build();
+        }
+        // TODO 住宅改修内容リストを子DIVから取得が不明
+        List<ShokanJutakuKaishu> dbt3049List = new ArrayList<>();
+        dbt3049List.add(dbt3049);
+        if (保険給付額 != null) {
+            dbt3034Builder.set保険給付額(保険給付額.intValue());
+            dbt3038Builder.set保険請求額(保険給付額);
+            dbt3053Builder.set請求額(保険給付額);
+        }
+        if (利用者負担額 != null) {
+            dbt3034Builder.set利用者負担額(利用者負担額.intValue());
+            dbt3038Builder.set利用者負担額(利用者負担額.intValue());
+            dbt3053Builder.set利用者負担額(利用者負担額.intValue());
+        }
+        if (支払金額合計 != null) {
+            dbt3038Builder.setサービス単位数(支払金額合計.intValue());
+        }
+        if (!申請事業者番号.isNullOrEmpty()) {
+            dbt3034Builder.set申請事業者番号(new JigyoshaNo(申請事業者番号));
+        }
+        if (!理由書作成事業者番号.isNullOrEmpty()) {
+            dbt3034Builder.set理由書作成事業者番号(new JigyoshaNo(理由書作成事業者番号));
+        }
+        if (画面モード_事前申請.equals(画面モード)) {
+            dbt3034Builder.set事前申請サービス提供年月(サービス提供年月).set事前申請整理番号(整理番号);
+        }
+        dbt3034 = dbt3034Builder.build();
+        dbt3038 = dbt3038Builder.build();
+        dbt3053 = dbt3053Builder.build();
+        住宅改修費支給申請.saveDBDate(dbt3034, dbt3038, dbt3053, dbt3049List);
     }
 
     /**

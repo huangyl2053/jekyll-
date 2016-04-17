@@ -132,7 +132,7 @@ public class ShokanShukeiBuilder {
      * @return {@link ShokanShukeiBuilder}
      */
     public ShokanShukeiBuilder setサービス種類コード(ServiceShuruiCode サービス種類コード) {
-        requireNonNull(サービス種類コード, UrSystemErrorMessages.値がnull.getReplacedMessage("サービス種類コード"));
+//        requireNonNull(サービス種類コード, UrSystemErrorMessages.値がnull.getReplacedMessage("サービス種類コード"));
         entity.setServiceShuruiCode(サービス種類コード);
         return this;
     }
