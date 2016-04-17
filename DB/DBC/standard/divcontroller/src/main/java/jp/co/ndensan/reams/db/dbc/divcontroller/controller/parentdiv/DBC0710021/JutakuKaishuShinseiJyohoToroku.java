@@ -151,7 +151,8 @@ public class JutakuKaishuShinseiJyohoToroku {
         引き継ぎデータEntity.set画面モード(画面モード);
         引き継ぎデータEntity.set識別コード(識別コード);
         引き継ぎデータEntity.set被保険者番号(被保険者番号);
-        引き継ぎデータEntity.setサービス提供年月(new FlexibleYearMonth(サービス提供年月.getYearMonth().toDateString()));
+        引き継ぎデータEntity.setサービス提供年月(
+                サービス提供年月 != null ? new FlexibleYearMonth(サービス提供年月.getYearMonth().toDateString()) : null);
         引き継ぎデータEntity.set整理番号(整理番号);
         // 入力チェック
         ValidationMessageControlPairs valid = getJutakuKaishuShinseiJyohoTorokuValidationHandler(
@@ -200,17 +201,19 @@ public class JutakuKaishuShinseiJyohoToroku {
         // is確認対象変更有無チェック TODO
         JutakuGaisuDataParameter 住宅改修データ = ViewStateHolder.get(
                 ViewStateKeys.住宅改修データ_画面メモリ, JutakuGaisuDataParameter.class);
-        boolean 確認対象変更有無 = handler.is確認対象変更有無チェック(住宅改修データ);
-        if (確認対象変更有無) {
-            if (!ResponseHolder.isReRequest()) {
-                return ResponseData.of(div).addMessage(
-                        DbzInformationMessages.内容変更なしで保存不可.getMessage()).respond();
+        if (住宅改修データ != null) {
+            boolean is確認対象変更有 = handler.is確認対象変更有無チェック(住宅改修データ);
+            if (is確認対象変更有) {
+                if (!ResponseHolder.isReRequest()) {
+                    return ResponseData.of(div).addMessage(
+                            DbzInformationMessages.内容変更なしで保存不可.getMessage()).respond();
+                }
+                if (new RString(DbzInformationMessages.内容変更なしで保存不可.getMessage().getCode()).equals(
+                        ResponseHolder.getMessageCode())
+                        && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
+                    return ResponseData.of(div).respond();
+                }
             }
-        }
-        if (new RString(DbzInformationMessages.内容変更なしで保存不可.getMessage().getCode()).equals(
-                ResponseHolder.getMessageCode())
-                && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
-            return ResponseData.of(div).respond();
         }
         // 操作可否確認
         if (画面モード_削除.equals(画面モード)) {
