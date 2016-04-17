@@ -18,7 +18,6 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxNum;
 /**
  * MainPanel のクラスファイル
  *
- * @author 自動生成
  * @reamsid_L DBC-0992-110 yangchenbing
  */
 public class MainPanelDiv extends Panel {

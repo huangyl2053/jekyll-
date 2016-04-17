@@ -102,7 +102,7 @@
      "layoutSubGyomuCode": "DBC",
      "layoutName": "DBC0710022",
      "layoutTitle": "住宅改修費支給申請登録",
-     "eventName": "to申請情報",
+     "eventName": "申請情報",
      "destroy": false,
      "condition": "",
      "toLayoutSubGyomuCode": "DBC",

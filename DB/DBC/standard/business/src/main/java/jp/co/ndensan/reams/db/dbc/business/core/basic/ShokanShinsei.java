@@ -139,6 +139,15 @@ public class ShokanShinsei extends ModelBase<ShokanShinseiIdentifier, DbT3034Sho
     }
 
     /**
+     * 審査年月日を返します。
+     *
+     * @return 審査年月日
+     */
+    public FlexibleDate get審査年月日() {
+        return entity.getShinsaYMD();
+    }
+
+    /**
      * 履歴番号を返します。
      *
      * @return 履歴番号

@@ -9,7 +9,6 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
  * 不正な動作の原因になります。</br>
  * DBC0710022のイベント名定義クラスです</br>
  *
- * @author 自動生成
  * @reamsid_L DBC-0992-110 yangchenbing
  */
 public enum DBC0710022TransitionEventName implements IContainerEvents {
