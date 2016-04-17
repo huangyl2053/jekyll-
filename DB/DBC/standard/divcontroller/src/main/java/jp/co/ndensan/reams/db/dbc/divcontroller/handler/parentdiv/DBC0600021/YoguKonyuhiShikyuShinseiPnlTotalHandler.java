@@ -198,7 +198,7 @@ public class YoguKonyuhiShikyuShinseiPnlTotalHandler {
             row.getFukushiYoguHanbaiJigyoshaName().setValue(shfu.get福祉用具販売事業者名());
             row.getHinmokuCode().setValue(shfu.get品目コード());
             row.setRenban(shfu.get連番());
-            row.getTxtShinsaMethodcode().setValue(shfu.get審査方法区分コード());
+            row.setTxtShinsa(shfu.get審査方法区分コード());
             rowList.add(row);
         }
         div.getYoguKonyuhiShikyuShinseiContentsPanel().getDgSeikyuDetail().setDataSource(rowList);
@@ -290,7 +290,7 @@ public class YoguKonyuhiShikyuShinseiPnlTotalHandler {
                     getYoguKonyuhiDetailInput().getRadShinsaMethod().getSelectedValue());
         }
         if (div.getYoguKonyuhiShikyuShinseiContentsPanel().getYoguKonyuhiDetailInput().getRadShinsaMethod() != null) {
-            row.getTxtShinsaMethodcode().setValue(div.getYoguKonyuhiShikyuShinseiContentsPanel().
+            row.setTxtShinsa(div.getYoguKonyuhiShikyuShinseiContentsPanel().
                     getYoguKonyuhiDetailInput().getRadShinsaMethod().getSelectedKey());
         }
         if (登録.equals(ViewStateHolder.get(ViewStateKeys.状態, RString.class))) {
@@ -598,8 +598,8 @@ public class YoguKonyuhiShikyuShinseiPnlTotalHandler {
         if (row.getHinmokuCode().getValue() != null) {
             entity = entity.createBuilderForEdit().set品目コード(row.getHinmokuCode().getValue()).build();
         }
-        if (row.getTxtShinsaMethodcode().getValue() != null) {
-            entity = entity.createBuilderForEdit().set審査方法区分コード(row.getTxtShinsaMethodcode().getValue()).build();
+        if (row.getTxtShinsa() != null) {
+            entity = entity.createBuilderForEdit().set審査方法区分コード(row.getTxtShinsa()).build();
         }
         return entity;
 
