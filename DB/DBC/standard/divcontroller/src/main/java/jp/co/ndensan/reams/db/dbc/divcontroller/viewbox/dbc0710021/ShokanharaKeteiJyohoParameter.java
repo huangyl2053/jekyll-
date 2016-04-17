@@ -6,6 +6,9 @@
 package jp.co.ndensan.reams.db.dbc.divcontroller.viewbox.dbc0710021;
 
 import java.io.Serializable;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
+import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 
@@ -19,9 +22,9 @@ import jp.co.ndensan.reams.uz.uza.math.Decimal;
 @SuppressWarnings("PMD.UnusedPrivateField")
 public class ShokanharaKeteiJyohoParameter implements Serializable {
 
-    private RString 識別コード;
-    private RString 被保険者番号;
-    private RString サービス提供年月;
+    private ShikibetsuCode 識別コード;
+    private HihokenshaNo 被保険者番号;
+    private FlexibleYearMonth サービス提供年月;
     private RString 整理番号;
     private RString 証明書;
     private Decimal 給付率;

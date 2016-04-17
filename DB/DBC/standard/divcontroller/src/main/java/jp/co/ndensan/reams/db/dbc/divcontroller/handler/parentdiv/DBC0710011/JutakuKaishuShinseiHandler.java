@@ -88,26 +88,26 @@ public final class JutakuKaishuShinseiHandler {
         RString 申請区分 = div.getJutakuKaishuShinseiList().getDgJutakuKaishuShinseiList().getClickedItem()
                 .getTxtShinseiKubun();
         if (画面モード.equals(DBC0710011StateName.支給申請モード.getName())) {
-            if (申請区分事前申請.equals(申請区分)) {
+            if (JutakukaishuShinseiKubun.事前申請.get名称().equals(申請区分)) {
                 ViewStateHolder.put(ViewStateKeys.表示モード, 事前申請登録モード);
-            } else if (申請区分支給申請.equals(申請区分)) {
+            } else if (JutakukaishuShinseiKubun.支給申請.get名称().equals(申請区分)) {
                 ViewStateHolder.put(ViewStateKeys.表示モード, 修正モード);
-            } else if (申請区分取消.equals(申請区分)) {
+            } else if (JutakukaishuShinseiKubun.取消.get名称().equals(申請区分)) {
                 ViewStateHolder.put(ViewStateKeys.表示モード, 取消モード);
             }
         } else if (画面モード.equals(DBC0710011StateName.事前申請モード.getName())) {
-            if (申請区分事前申請.equals(申請区分)) {
+            if (JutakukaishuShinseiKubun.事前申請.get名称().equals(申請区分)) {
                 ViewStateHolder.put(ViewStateKeys.表示モード, 修正モード);
-            } else if (申請区分取消.equals(申請区分)) {
+            } else if (JutakukaishuShinseiKubun.取消.get名称().equals(申請区分)) {
                 ViewStateHolder.put(ViewStateKeys.表示モード, 取消モード);
             }
         }
         ViewStateHolder.put(
                 ViewStateKeys.サービス提供年月, div.getJutakuKaishuShinseiList().getDgJutakuKaishuShinseiList()
-                .getClickedItem().getTxtTeikyoYM().toString());
+                .getClickedItem().getTxtTeikyoYM().getValue());
         ViewStateHolder.put(
                 ViewStateKeys.整理番号, div.getJutakuKaishuShinseiList().getDgJutakuKaishuShinseiList()
-                .getClickedItem().getTxtSeiriNo().toString());
+                .getClickedItem().getTxtSeiriNo().getValue());
     }
 
     /**
@@ -146,8 +146,6 @@ public final class JutakuKaishuShinseiHandler {
                         result.getEntity().getKaishuShinseiKubun()).get名称());
                 row.getTxtTeikyoYM().setValue(new RDate(result.getEntity().getServiceTeikyoYM().toString()));
                 row.getTxtShinseiDate().setValue(new RDate(result.getEntity().getShinseiYMD().toString()));
-                row.setTxtShikyuKubun(ShikyuFushikyuKubun.toValue(
-                        result.getEntity().getKaishuShinseiKubun()).get名称());
                 row.getTxtSeiriNo().setValue(result.getEntity().getSeiriNo());
                 row.getTxtKaishuKingaku().setValue(result.getEntity().getShiharaiKingakuTotal());
                 rows.add(row);
@@ -172,7 +170,7 @@ public final class JutakuKaishuShinseiHandler {
                     row.setTxtShinsaResult(未審査);
                 }
                 row.setTxtShikyuKubun(ShikyuFushikyuKubun.toValue(
-                        result.getEntity().getKaishuShinseiKubun()).get名称());
+                        result.getEntity().getShikyuHushikyuKetteiKubun()).get名称());
                 if (result.getEntity().getKetteiYMD() != null) {
                     row.getTxtKetteiDate().setValue(new RDate(result.getEntity().getKetteiYMD().toString()));
                 }

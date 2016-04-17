@@ -199,12 +199,12 @@
      "layoutName": "DBC0710021",
      "layoutTitle": "住宅改修費支給申請登録",
      "eventName": "to申請一覧",
-     "destroy": false,
+     "destroy": true,
      "condition": "以外",
      "toLayoutSubGyomuCode": "DBC",
      "toLayoutName": "DBC0710011",
      "toLayoutTitle": "住宅改修費支給申請登録",
-     "toState": "default"
+     "toState": "支給申請モード"
     },
     {
      "id": "17",
