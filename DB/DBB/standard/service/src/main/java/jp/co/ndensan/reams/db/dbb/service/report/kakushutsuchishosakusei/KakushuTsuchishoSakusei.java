@@ -34,13 +34,9 @@ import jp.co.ndensan.reams.db.dbb.business.report.karisanteihokenryononyutsuchis
 import jp.co.ndensan.reams.db.dbb.business.report.karisanteinonyutsuchishocvskakuko.KarisanteiNonyuTsuchishoCVSKakukoReport;
 import jp.co.ndensan.reams.db.dbb.business.report.karisanteinonyutsuchishocvsmulti.KarisanteiNonyuTsuchishoCVSMultiReport;
 import jp.co.ndensan.reams.db.dbb.business.report.tokubetsuchoshukaishitsuchishokari.TokubetsuChoshuKaishiTsuchishoKariB5Property;
-import jp.co.ndensan.reams.db.dbb.business.report.tokubetsuchoshukaishitsuchishokari.TokubetsuChoshuKaishiTsuchishoKariB5Report;
 import jp.co.ndensan.reams.db.dbb.business.report.tokubetsuchoshukaishitsuchishokari.TokubetsuChoshuKaishiTsuchishoKariOverlayA4TateProperty;
-import jp.co.ndensan.reams.db.dbb.business.report.tokubetsuchoshukaishitsuchishokari.TokubetsuChoshuKaishiTsuchishoKariOverlayA4TateReport;
 import jp.co.ndensan.reams.db.dbb.business.report.tokubetsuchoshukaishitsuchishokari.TokubetsuChoshuKaishiTsuchishoKariOverlayB5YokoProperty;
-import jp.co.ndensan.reams.db.dbb.business.report.tokubetsuchoshukaishitsuchishokari.TokubetsuChoshuKaishiTsuchishoKariOverlayB5YokoReport;
 import jp.co.ndensan.reams.db.dbb.business.report.tokubetsuchoshukaishitsuchishokari.TokubetsuChoshuKaishiTsuchishoKariSealerProperty;
-import jp.co.ndensan.reams.db.dbb.business.report.tokubetsuchoshukaishitsuchishokari.TokubetsuChoshuKaishiTsuchishoKariSealerReport;
 import jp.co.ndensan.reams.db.dbb.business.report.tsuchisho.KariTokuchoKaishiTsuchisyoJoho;
 import jp.co.ndensan.reams.db.dbb.business.report.tsuchisho.notsu.EditedKariSanteiTsuchiShoKyotsu;
 import jp.co.ndensan.reams.db.dbb.business.report.tsuchisho.notsu.HonSanteiNonyuTsuchiShoJoho;
@@ -75,10 +71,6 @@ import jp.co.ndensan.reams.db.dbb.entity.report.hokenryononyutsuchishobook.Karis
 import jp.co.ndensan.reams.db.dbb.entity.report.hokenryononyutsuchishobook.KarisanteiHokenryoNonyuTsuchishoBookFuriKaeNashiCoverSource;
 import jp.co.ndensan.reams.db.dbb.entity.report.karisanteihokenryononyutsuchishoginfuri.KarisanteiHokenryoNonyuTsuchishoGinfuriSource;
 import jp.co.ndensan.reams.db.dbb.entity.report.karisanteihokenryononyutsuchishokigoto.KarisanteiHokenryoNonyuTsuchishoKigotoSource;
-import jp.co.ndensan.reams.db.dbb.entity.report.tokubetsuchoshukaishitsuchishokari.TokubetsuChoshuKaishiTsuchishoKariB5Source;
-import jp.co.ndensan.reams.db.dbb.entity.report.tokubetsuchoshukaishitsuchishokari.TokubetsuChoshuKaishiTsuchishoKariOverlayA4TateSource;
-import jp.co.ndensan.reams.db.dbb.entity.report.tokubetsuchoshukaishitsuchishokari.TokubetsuChoshuKaishiTsuchishoKariOverlayB5YokoSource;
-import jp.co.ndensan.reams.db.dbb.entity.report.tokubetsuchoshukaishitsuchishokari.TokubetsuChoshuKaishiTsuchishoKariSealerSource;
 import jp.co.ndensan.reams.db.dbb.persistence.db.basic.DbT2004GemmenDac;
 import jp.co.ndensan.reams.db.dbb.persistence.db.basic.DbT2006ChoshuYuyoDac;
 import jp.co.ndensan.reams.db.dbb.persistence.db.basic.DbT2018RealHakkoRirekiDac;
@@ -556,27 +548,31 @@ public class KakushuTsuchishoSakusei {
                 通知文2 = tsuchishoTeikeibunInfo.getUrT0126TsuchishoTeikeibunEntity().getSentence();
             }
         }
-        SourceDataCollection sourceDataCollection;
+        SourceDataCollection sourceDataCollection = new SourceDataCollection();
         if (ReportIdDBB.DBB100003.getReportId().equals(帳票ID)) {
-            TokubetsuChoshuKaishiTsuchishoKariB5Report report
-                    = TokubetsuChoshuKaishiTsuchishoKariB5Report.createForm(仮算定特徴開始通知書情報, null);
+         // TODO　ビルドエラー修正
+//            TokubetsuChoshuKaishiTsuchishoKariB5Report report
+//                    = TokubetsuChoshuKaishiTsuchishoKariB5Report.createForm(仮算定特徴開始通知書情報, null);
             TokubetsuChoshuKaishiTsuchishoKariB5Property property = new TokubetsuChoshuKaishiTsuchishoKariB5Property();
-            sourceDataCollection = new Printer<TokubetsuChoshuKaishiTsuchishoKariB5Source>().spool(property, report);
+//            sourceDataCollection = new Printer<TokubetsuChoshuKaishiTsuchishoKariB5Source>().spool(property, report);
         } else if (ReportIdDBB.DBB100005.getReportId().equals(帳票ID)) {
-            TokubetsuChoshuKaishiTsuchishoKariSealerReport report
-                    = TokubetsuChoshuKaishiTsuchishoKariSealerReport.createForm(仮算定特徴開始通知書情報);
+            // TODO　ビルドエラー修正
+//            TokubetsuChoshuKaishiTsuchishoKariSealerReport report
+//                    = TokubetsuChoshuKaishiTsuchishoKariSealerReport.createForm(仮算定特徴開始通知書情報);
             TokubetsuChoshuKaishiTsuchishoKariSealerProperty property = new TokubetsuChoshuKaishiTsuchishoKariSealerProperty();
-            sourceDataCollection = new Printer<TokubetsuChoshuKaishiTsuchishoKariSealerSource>().spool(property, report);
+//            sourceDataCollection = new Printer<TokubetsuChoshuKaishiTsuchishoKariSealerSource>().spool(property, report);
         } else if (ReportIdDBB.DBB100008.getReportId().equals(帳票ID)) {
-            TokubetsuChoshuKaishiTsuchishoKariOverlayA4TateReport report
-                    = TokubetsuChoshuKaishiTsuchishoKariOverlayA4TateReport.createForm(仮算定特徴開始通知書情報, 通知文1);
+        // TODO　ビルドエラー修正
+//            TokubetsuChoshuKaishiTsuchishoKariOverlayA4TateReport report
+//                    = TokubetsuChoshuKaishiTsuchishoKariOverlayA4TateReport.createForm(仮算定特徴開始通知書情報, 通知文1);
             TokubetsuChoshuKaishiTsuchishoKariOverlayA4TateProperty property = new TokubetsuChoshuKaishiTsuchishoKariOverlayA4TateProperty();
-            sourceDataCollection = new Printer<TokubetsuChoshuKaishiTsuchishoKariOverlayA4TateSource>().spool(property, report);
+//            sourceDataCollection = new Printer<TokubetsuChoshuKaishiTsuchishoKariOverlayA4TateSource>().spool(property, report);
         } else {
-            TokubetsuChoshuKaishiTsuchishoKariOverlayB5YokoReport report
-                    = TokubetsuChoshuKaishiTsuchishoKariOverlayB5YokoReport.createForm(仮算定特徴開始通知書情報, 通知文1, 通知文2);
+        // TODO　ビルドエラー修正
+//            TokubetsuChoshuKaishiTsuchishoKariOverlayB5YokoReport report
+//                    = TokubetsuChoshuKaishiTsuchishoKariOverlayB5YokoReport.createForm(仮算定特徴開始通知書情報, 通知文1, 通知文2);
             TokubetsuChoshuKaishiTsuchishoKariOverlayB5YokoProperty property = new TokubetsuChoshuKaishiTsuchishoKariOverlayB5YokoProperty();
-            sourceDataCollection = new Printer<TokubetsuChoshuKaishiTsuchishoKariOverlayB5YokoSource>().spool(property, report);
+//            sourceDataCollection = new Printer<TokubetsuChoshuKaishiTsuchishoKariOverlayB5YokoSource>().spool(property, report);
         }
 
         List<ShikibetsuCode> 識別コードList = new ArrayList<>();

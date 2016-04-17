@@ -27,6 +27,7 @@ public class PrecedingFiscalYearInformation {
     private Decimal 前年度特徴期別金額03;
     private Decimal 前年度特徴期別金額04;
     private Decimal 前年度特徴期別金額05;
+    private Decimal 前年度特徴期別金額06;
     private Decimal 前年度最終期特徴期別介護保険料;
     private Decimal 前年度最終期普徴期別介護保険料;
 
