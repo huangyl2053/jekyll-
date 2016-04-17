@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbc.divcontroller.handler.parentdiv.DBC0600021;
+package jp.co.ndensan.reams.db.dbc.divcontroller.handler.DBC0600021;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -230,6 +230,27 @@ public class YoguKonyuhiShikyuShinseiPnlTotalHandler {
     }
 
     /**
+     * readOnly福祉用具購入費明細
+     *
+     * @param flag boolean
+     */
+    public void readOnly福祉用具購入費明細(boolean flag) {
+        div.getYoguKonyuhiShikyuShinseiContentsPanel().getYoguKonyuhiDetailInput().getTxtBuyYMD().setReadOnly(flag);
+        div.getYoguKonyuhiShikyuShinseiContentsPanel().getYoguKonyuhiDetailInput().getDdlShumoku().setReadOnly(flag);
+        div.getYoguKonyuhiShikyuShinseiContentsPanel().getYoguKonyuhiDetailInput().
+                getTxtShohinName().setReadOnly(flag);
+        div.getYoguKonyuhiShikyuShinseiContentsPanel().getYoguKonyuhiDetailInput().
+                getTxtSeizoJigyosha().setReadOnly(flag);
+        div.getYoguKonyuhiShikyuShinseiContentsPanel().getYoguKonyuhiDetailInput().
+                getTxtHanbaiJigyosha().setReadOnly(flag);
+        div.getYoguKonyuhiShikyuShinseiContentsPanel().getYoguKonyuhiDetailInput().getTxtBuyAmount().setReadOnly(flag);
+        div.getYoguKonyuhiShikyuShinseiContentsPanel().getYoguKonyuhiDetailInput().getTxtHinmokuCode().setReadOnly(flag);
+        div.getYoguKonyuhiShikyuShinseiContentsPanel().getYoguKonyuhiDetailInput().
+                getRadShinsaMethod().setReadOnly(flag);
+        div.getYoguKonyuhiShikyuShinseiContentsPanel().getYoguKonyuhiDetailInput().getBtnClear().setDisabled(flag);
+    }
+
+    /**
      * setDgSeikyuDetail
      *
      * @param row dgSeikyuDetail_Row
@@ -383,7 +404,7 @@ public class YoguKonyuhiShikyuShinseiPnlTotalHandler {
     public void 保存処理() {
         PnlTotalParameter parameter = ViewStateHolder.get(ViewStateKeys.支給申請情報検索キー,
                 PnlTotalParameter.class);
-        HihokenshaNo 被保険者番号 = parameter.getHiHokenshaNo();
+        HihokenshaNo 被保険者番号 = ViewStateHolder.get(ViewStateKeys.被保険者番号, HihokenshaNo.class);
         FlexibleYearMonth サービス提供年月 = parameter.getTeikyoYM();
         RString 整理番号 = parameter.getSerialNo();
         RString 様式番号 = parameter.getYoshikiNo();
@@ -606,14 +627,13 @@ public class YoguKonyuhiShikyuShinseiPnlTotalHandler {
         ValidationMessageControlPairs validPairs = new ValidationMessageControlPairs();
         PnlTotalParameter parameter = ViewStateHolder.get(ViewStateKeys.支給申請情報検索キー,
                 PnlTotalParameter.class);
-        HihokenshaNo 被保険者番号 = parameter.getHiHokenshaNo();
+        HihokenshaNo 被保険者番号 = ViewStateHolder.get(ViewStateKeys.被保険者番号, HihokenshaNo.class);
         FlexibleYearMonth サービス提供年月 = parameter.getTeikyoYM();
         RString 整理番号 = parameter.getSerialNo();
         RString 様式番号 = parameter.getYoshikiNo();
-        RString 明細番号 = parameter.getMeisaiNo();
         JigyoshaNo 事業者番号 = parameter.getJigyosyaNo();
         List<ShokanFukushiYoguHanbaihi> shfuhalist = FukushiyoguKonyuhiShikyuShinsei.createInstance().
-                getShokanFukushiYoguHanbaihi(被保険者番号, サービス提供年月, 整理番号, 事業者番号, 様式番号, 明細番号);
+                getShokanFukushiYoguHanbaihi(被保険者番号, サービス提供年月, 整理番号, 事業者番号, 様式番号, NUM1);
         RString ddlShumoku = div.getYoguKonyuhiShikyuShinseiContentsPanel().
                 getYoguKonyuhiDetailInput().getDdlShumoku().getSelectedKey();
         RString hinmokuCode = div.getYoguKonyuhiShikyuShinseiContentsPanel().
@@ -654,14 +674,13 @@ public class YoguKonyuhiShikyuShinseiPnlTotalHandler {
         ValidationMessageControlPairs validPairs = new ValidationMessageControlPairs();
         PnlTotalParameter parameter = ViewStateHolder.get(ViewStateKeys.支給申請情報検索キー,
                 PnlTotalParameter.class);
-        HihokenshaNo 被保険者番号 = parameter.getHiHokenshaNo();
+        HihokenshaNo 被保険者番号 = ViewStateHolder.get(ViewStateKeys.被保険者番号, HihokenshaNo.class);
         FlexibleYearMonth サービス提供年月 = parameter.getTeikyoYM();
         RString 整理番号 = parameter.getSerialNo();
         RString 様式番号 = parameter.getYoshikiNo();
-        RString 明細番号 = parameter.getMeisaiNo();
         JigyoshaNo 事業者番号 = parameter.getJigyosyaNo();
         List<ShokanFukushiYoguHanbaihi> shfuhalist = FukushiyoguKonyuhiShikyuShinsei.createInstance().
-                getShokanFukushiYoguHanbaihi(被保険者番号, サービス提供年月, 整理番号, 事業者番号, 様式番号, 明細番号);
+                getShokanFukushiYoguHanbaihi(被保険者番号, サービス提供年月, 整理番号, 事業者番号, 様式番号, NUM1);
         RString hinmokuCode = div.getYoguKonyuhiShikyuShinseiContentsPanel().
                 getYoguKonyuhiDetailInput().getTxtHinmokuCode().getValue();
         RYear buyY = div.getYoguKonyuhiShikyuShinseiContentsPanel().
@@ -830,9 +849,9 @@ public class YoguKonyuhiShikyuShinseiPnlTotalHandler {
     }
 
     /**
-     * set状態１
+     * 登録モード
      */
-    public void set状態１() {
+    public void set登録モード() {
         int 設定値 = 0;
         RString 設定値の年月 = BusinessConfig.get(ConfigNameDBC.初期表示_償還支給申請登録初期, SubGyomuCode.DBC介護給付);
         if (!設定値の年月.isNullOrEmpty()) {
@@ -875,10 +894,9 @@ public class YoguKonyuhiShikyuShinseiPnlTotalHandler {
     }
 
     /**
-     * set状態2
+     * 修正モード
      */
-    public void set状態2() {
-        div.getPnlButton().getBtnKetteiJoho().setDisabled(true);
+    public void set修正モード() {
         div.getYoguKonyuhiShikyuShinseiContentsPanel().getTxtTeikyoYM().setDisabled(true);
         div.getYoguKonyuhiShikyuShinseiContentsPanel().getDdlShityoson().setDisabled(true);
         div.getYoguKonyuhiShikyuShinseiContentsPanel().getTxtSyomeisyo().setDisabled(true);
@@ -908,10 +926,9 @@ public class YoguKonyuhiShikyuShinseiPnlTotalHandler {
     }
 
     /**
-     * set状態3
+     * 削除モード
      */
-    public void set状態3() {
-        div.getPnlButton().getBtnKetteiJoho().setDisabled(true);
+    public void set削除モード() {
         div.getYoguKonyuhiShikyuShinseiContentsPanel().getTxtTeikyoYM().setDisabled(true);
         div.getYoguKonyuhiShikyuShinseiContentsPanel().getDdlShityoson().setDisabled(true);
         div.getYoguKonyuhiShikyuShinseiContentsPanel().getTxtSyomeisyo().setDisabled(true);
@@ -955,10 +972,9 @@ public class YoguKonyuhiShikyuShinseiPnlTotalHandler {
     }
 
     /**
-     * set状態4
+     * 参照モード
      */
-    public void set状態4() {
-        div.getPnlButton().getBtnKetteiJoho().setDisabled(true);
+    public void set参照モード() {
         div.getYoguKonyuhiShikyuShinseiContentsPanel().getTxtTeikyoYM().setDisabled(true);
         div.getYoguKonyuhiShikyuShinseiContentsPanel().getDdlShityoson().setDisabled(true);
         div.getYoguKonyuhiShikyuShinseiContentsPanel().getTxtSyomeisyo().setDisabled(true);
@@ -1004,9 +1020,9 @@ public class YoguKonyuhiShikyuShinseiPnlTotalHandler {
     }
 
     /**
-     * set状態5
+     * 審査モード
      */
-    public void set状態5() {
+    public void set審査モード() {
         div.getPnlButton().getBtnKetteiJoho().setDisabled(true);
         div.getYoguKonyuhiShikyuShinseiContentsPanel().getTxtTeikyoYM().setDisabled(true);
         div.getYoguKonyuhiShikyuShinseiContentsPanel().getDdlShityoson().setDisabled(true);
