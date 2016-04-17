@@ -169,8 +169,10 @@ public final class JutakuKaishuShinseiHandler {
                 } else {
                     row.setTxtShinsaResult(未審査);
                 }
-                row.setTxtShikyuKubun(ShikyuFushikyuKubun.toValue(
-                        result.getEntity().getShikyuHushikyuKetteiKubun()).get名称());
+                if (result.getEntity().getShikyuHushikyuKetteiKubun() != null) {
+                    row.setTxtShikyuKubun(ShikyuFushikyuKubun.toValue(
+                            result.getEntity().getShikyuHushikyuKetteiKubun()).get名称());
+                }
                 if (result.getEntity().getKetteiYMD() != null) {
                     row.getTxtKetteiDate().setValue(new RDate(result.getEntity().getKetteiYMD().toString()));
                 }
