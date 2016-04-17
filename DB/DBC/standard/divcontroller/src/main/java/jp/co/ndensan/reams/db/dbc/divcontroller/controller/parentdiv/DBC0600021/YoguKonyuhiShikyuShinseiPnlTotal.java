@@ -21,7 +21,7 @@ import jp.co.ndensan.reams.db.dbc.definition.mybatisprm.shiharaihohojyoho.SikyuS
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0600021.DBC0600021TransitionEventName;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0600021.YoguKonyuhiShikyuShinseiPnlTotalDiv;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0600021.dgSeikyuDetail_Row;
-import jp.co.ndensan.reams.db.dbc.divcontroller.handler.DBC0600021.YoguKonyuhiShikyuShinseiPnlTotalHandler;
+import jp.co.ndensan.reams.db.dbc.divcontroller.handler.parentdiv.DBC0600021.YoguKonyuhiShikyuShinseiPnlTotalHandler;
 import jp.co.ndensan.reams.db.dbc.divcontroller.viewbox.ViewStateKeys;
 import jp.co.ndensan.reams.db.dbc.divcontroller.viewbox.dbc0600011.PnlTotalParameter;
 import jp.co.ndensan.reams.db.dbc.service.core.fukushiyogukonyuhishikyushisei.FukushiyoguKonyuhiShikyuShinsei;
@@ -168,9 +168,9 @@ public class YoguKonyuhiShikyuShinseiPnlTotal {
         div.getYoguKonyuhiShikyuShinseiContentsPanel().getYoguKonyuhiDetailInput().getDdlShumoku().
                 setDataSource(getHandler(div).get種目());
         div.getYoguKonyuhiShikyuShinseiContentsPanel().getYoguKonyuhiDetailInput().setVisible(false);
-        if (修正.equals(ViewStateHolder.get(ViewStateKeys.状態, RString.class))) {
-            償還払支給判定結果を取得する();
-        }
+//        if (修正.equals(ViewStateHolder.get(ViewStateKeys.状態, RString.class))) {
+//            償還払支給判定結果を取得する();
+//        }
 
         return createResponse(div);
     }
