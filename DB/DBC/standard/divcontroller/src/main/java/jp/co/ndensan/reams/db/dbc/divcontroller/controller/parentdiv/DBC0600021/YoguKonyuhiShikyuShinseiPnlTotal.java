@@ -65,6 +65,7 @@ public class YoguKonyuhiShikyuShinseiPnlTotal {
     private static final RString 修正 = new RString("修正");
     private static final RString 削除 = new RString("削除");
     private static final RString 登録 = new RString("登録");
+    private static final RString 処理モード登録 = new RString("処理モード登録");
     private static final RString 選択 = new RString("選択");
     private static final RString 参照 = new RString("参照");
     private static final RString 審査 = new RString("審査");
@@ -90,6 +91,7 @@ public class YoguKonyuhiShikyuShinseiPnlTotal {
             getHandler(div).set削除モード();
         } else if (参照.equals(ViewStateHolder.get(ViewStateKeys.状態, RString.class))) {
             getHandler(div).set参照モード();
+
         } else if (審査.equals(ViewStateHolder.get(ViewStateKeys.状態, RString.class))) {
             getHandler(div).set審査モード();
         }
@@ -219,8 +221,9 @@ public class YoguKonyuhiShikyuShinseiPnlTotal {
 //                getKyufuritsu(被保険者番号, サービス提供年月);
 //        SokanbaraiShiharaiKekkaResult nowResult = FukushiyoguKonyuhiShikyuShinsei.createInstance().
 //                getShokanShiharaiKekka(被保険者番号, サービス提供年月, 整理番号, 事業者番号, 様式番号, NUM3);
+        getHandler(div).readOnly福祉用具購入費明細(false);
         dgSeikyuDetail_Row row;
-        if (登録.equals(ViewStateHolder.get(ViewStateKeys.状態, RString.class))) {
+        if (処理モード登録.equals(ViewStateHolder.get(ViewStateKeys.処理モード, RString.class))) {
             row = new dgSeikyuDetail_Row();
         } else {
             row = getHandler(div).selectRow();
@@ -244,7 +247,8 @@ public class YoguKonyuhiShikyuShinseiPnlTotal {
     public ResponseData<YoguKonyuhiShikyuShinseiPnlTotalDiv> onClick_btnAddDetail(
             YoguKonyuhiShikyuShinseiPnlTotalDiv div) {
         div.getYoguKonyuhiShikyuShinseiContentsPanel().getYoguKonyuhiDetailInput().setVisible(true);
-        ViewStateHolder.put(ViewStateKeys.状態, 登録);
+        getHandler(div).readOnly福祉用具購入費明細(false);
+        ViewStateHolder.put(ViewStateKeys.処理モード, 処理モード登録);
         getHandler(div).clear福祉用具購入費明細();
         return createResponse(div);
     }
@@ -273,6 +277,8 @@ public class YoguKonyuhiShikyuShinseiPnlTotal {
         div.getYoguKonyuhiShikyuShinseiContentsPanel().getYoguKonyuhiDetailInput().setVisible(true);
         getHandler(div).set福祉用具購入費明細();
         getHandler(div).readOnly福祉用具購入費明細(true);
+        div.getYoguKonyuhiShikyuShinseiContentsPanel().getYoguKonyuhiDetailInput().getBtnModifyDetail().setDisabled(true);
+        div.getYoguKonyuhiShikyuShinseiContentsPanel().getYoguKonyuhiDetailInput().getBtnClear().setDisabled(true);
         ViewStateHolder.put(ViewStateKeys.状態, 選択);
         return createResponse(div);
     }
@@ -287,6 +293,7 @@ public class YoguKonyuhiShikyuShinseiPnlTotal {
             YoguKonyuhiShikyuShinseiPnlTotalDiv div) {
         div.getYoguKonyuhiShikyuShinseiContentsPanel().getYoguKonyuhiDetailInput().setVisible(true);
         getHandler(div).set福祉用具購入費明細();
+        getHandler(div).readOnly福祉用具購入費明細(false);
         ViewStateHolder.put(ViewStateKeys.状態, 修正);
         return createResponse(div);
     }
