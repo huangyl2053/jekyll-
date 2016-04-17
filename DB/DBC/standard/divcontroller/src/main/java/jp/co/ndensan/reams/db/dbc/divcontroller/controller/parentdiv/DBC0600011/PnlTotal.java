@@ -32,6 +32,7 @@ public class PnlTotal {
     private static final RString 差額登録 = new RString("差額登録");
     private static final RString 修正 = new RString("修正");
     private static final RString 削除 = new RString("削除");
+    private static final RString 参照 = new RString("参照");
 
     /**
      * 画面初期化
@@ -43,7 +44,7 @@ public class PnlTotal {
         TaishoshaKey key = ViewStateHolder.get(ViewStateKey.資格対象者, TaishoshaKey.class);
         ShikibetsuCode 識別コード = key.get識別コード();
         HihokenshaNo 被保険者番号 = key.get被保険者番号();
-        ViewStateHolder.put(ViewStateKeys.識別コード, 識別コード.value());
+        ViewStateHolder.put(ViewStateKeys.識別コード, 識別コード);
         ViewStateHolder.put(ViewStateKeys.被保険者番号, 被保険者番号);
         div.getKaigoCommonPanel().getCcdAtenaInfo().onLoad(識別コード);
         div.getKaigoCommonPanel().getCcdShikakuKihon().onLoad(被保険者番号);
@@ -78,6 +79,7 @@ public class PnlTotal {
      * @return 福祉用具購入費支給申請_登録画面へ遷移
      */
     public ResponseData<PnlTotalDiv> onClick_byselectbutton(PnlTotalDiv div) {
+         getHandler(div).putViewStateHolder(参照);
         return ResponseData.of(div).forwardWithEventName(DBC0600011TransitionEventName.明細情報).respond();
     }
 

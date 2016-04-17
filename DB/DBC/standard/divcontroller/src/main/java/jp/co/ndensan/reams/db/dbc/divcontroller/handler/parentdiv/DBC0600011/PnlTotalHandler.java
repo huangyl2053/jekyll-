@@ -73,7 +73,7 @@ public final class PnlTotalHandler {
                 row.setTxtKonyuKingaku(new RString(shinsei.get購入金額合計().toString()));
             }
             if (shinsei.get事業者番号() != null) {
-                row.setTxtJigyosyaNo(new RString(shinsei.get事業者番号().toString()));
+                row.setTxtJigyosyaNo(shinsei.get事業者番号().value());
             }
             if (shinsei.get様式番号() != null) {
                 row.setTxtYoshikiNo(new RString(shinsei.get様式番号().toString()));
