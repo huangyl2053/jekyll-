@@ -3,7 +3,7 @@ package jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0600021;
  * このコードはツールによって生成されました。
  * このファイルへの変更は、以下の状況下で不正な動作の原因になったり、
  * コードが再生成されるときに損失したりします。
- * Sun Apr 17 12:22:34 CST 2016
+ * Sun Apr 17 15:47:43 CST 2016
  */
 
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -29,7 +29,7 @@ public class dgSeikyuDetail_Row extends DataRow {
     private TextBox fukushiYoguHanbaiJigyoshaName;
     private RString renban;
     private TextBox hinmokuCode;
-    private TextBox txtShinsaMethodcode;
+    private RString txtShinsa;
 
     public dgSeikyuDetail_Row() {
         super();
@@ -42,7 +42,7 @@ public class dgSeikyuDetail_Row extends DataRow {
         this.fukushiYoguHanbaiJigyoshaName = new TextBox();
         this.renban = RString.EMPTY;
         this.hinmokuCode = new TextBox();
-        this.txtShinsaMethodcode = new TextBox();
+        this.txtShinsa = RString.EMPTY;
         this.setOriginalData("txtBuyYMD", txtBuyYMD);
         this.setOriginalData("txtShumoku", txtShumoku);
         this.setOriginalData("txtShohinName", txtShohinName);
@@ -52,10 +52,10 @@ public class dgSeikyuDetail_Row extends DataRow {
         this.setOriginalData("fukushiYoguHanbaiJigyoshaName", fukushiYoguHanbaiJigyoshaName);
         this.setOriginalData("renban", renban);
         this.setOriginalData("hinmokuCode", hinmokuCode);
-        this.setOriginalData("txtShinsaMethodcode", txtShinsaMethodcode);
+        this.setOriginalData("txtShinsa", txtShinsa);
     }
 
-    public dgSeikyuDetail_Row(TextBoxDate txtBuyYMD, TextBox txtShumoku, TextBox txtShohinName, TextBoxNum txtBuyAmount, TextBox txtShinsaMethod, TextBox fukushiYoguSeizoJigyoshaName, TextBox fukushiYoguHanbaiJigyoshaName, RString renban, TextBox hinmokuCode, TextBox txtShinsaMethodcode) {
+    public dgSeikyuDetail_Row(TextBoxDate txtBuyYMD, TextBox txtShumoku, TextBox txtShohinName, TextBoxNum txtBuyAmount, TextBox txtShinsaMethod, TextBox fukushiYoguSeizoJigyoshaName, TextBox fukushiYoguHanbaiJigyoshaName, RString renban, TextBox hinmokuCode, RString txtShinsa) {
         super();
         this.setOriginalData("txtBuyYMD", txtBuyYMD);
         this.setOriginalData("txtShumoku", txtShumoku);
@@ -66,7 +66,7 @@ public class dgSeikyuDetail_Row extends DataRow {
         this.setOriginalData("fukushiYoguHanbaiJigyoshaName", fukushiYoguHanbaiJigyoshaName);
         this.setOriginalData("renban", renban);
         this.setOriginalData("hinmokuCode", hinmokuCode);
-        this.setOriginalData("txtShinsaMethodcode", txtShinsaMethodcode);
+        this.setOriginalData("txtShinsa", txtShinsa);
         this.txtBuyYMD = txtBuyYMD;
         this.txtShumoku = txtShumoku;
         this.txtShohinName = txtShohinName;
@@ -76,7 +76,7 @@ public class dgSeikyuDetail_Row extends DataRow {
         this.fukushiYoguHanbaiJigyoshaName = fukushiYoguHanbaiJigyoshaName;
         this.renban = renban;
         this.hinmokuCode = hinmokuCode;
-        this.txtShinsaMethodcode = txtShinsaMethodcode;
+        this.txtShinsa = txtShinsa;
     }
 
     public TextBoxDate getTxtBuyYMD() {
@@ -115,8 +115,8 @@ public class dgSeikyuDetail_Row extends DataRow {
         return hinmokuCode;
     }
 
-    public TextBox getTxtShinsaMethodcode() {
-        return txtShinsaMethodcode;
+    public RString getTxtShinsa() {
+        return txtShinsa;
     }
 
     public void setTxtBuyYMD(TextBoxDate txtBuyYMD) {
@@ -164,9 +164,9 @@ public class dgSeikyuDetail_Row extends DataRow {
         this.hinmokuCode = hinmokuCode;
     }
 
-    public void setTxtShinsaMethodcode(TextBox txtShinsaMethodcode) {
-        this.setOriginalData("txtShinsaMethodcode", txtShinsaMethodcode);
-        this.txtShinsaMethodcode = txtShinsaMethodcode;
+    public void setTxtShinsa(RString txtShinsa) {
+        this.setOriginalData("txtShinsa", txtShinsa);
+        this.txtShinsa = txtShinsa;
     }
 
     // </editor-fold>
