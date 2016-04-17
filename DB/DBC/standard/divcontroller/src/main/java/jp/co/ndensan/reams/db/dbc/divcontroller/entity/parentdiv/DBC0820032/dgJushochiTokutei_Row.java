@@ -3,20 +3,24 @@ package jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0820032;
  * このコードはツールによって生成されました。
  * このファイルへの変更は、以下の状況下で不正な動作の原因になったり、
  * コードが再生成されるときに損失したりします。
- * Wed Mar 23 14:15:52 CST 2016
+ * Fri Apr 15 15:47:56 CST 2016 
  */
 
-import jp.co.ndensan.reams.uz.uza.lang.RString;
+
+
 import jp.co.ndensan.reams.uz.uza.ui.binding.DataRow;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxNum;
 
+
 /**
- * dgJushochiTokutei_Row のクラスファイル
- *
- * @reamsid_L DBC-1030-030 quxiaodong
+ * dgJushochiTokutei_Row のクラスファイル 
+ * 
+ * @author 自動生成
  */
+
 public class dgJushochiTokutei_Row extends DataRow {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-01-15_09-59-03">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
 
     private RString defaultDataName1;
     private TextBoxNum defaultDataName2;

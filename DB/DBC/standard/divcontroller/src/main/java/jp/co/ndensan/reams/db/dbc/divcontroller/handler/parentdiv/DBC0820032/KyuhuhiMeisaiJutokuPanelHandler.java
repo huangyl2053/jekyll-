@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbc.divcontroller.handler.parentdiv.DBC0820032;
+package jp.co.ndensan.reams.db.dbc.divcontroller.handler.parentdiv.dbc0820032;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -24,6 +24,7 @@ import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ServiceShur
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShoKisaiHokenshaNo;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.HokenshaJoho.HokenshaJohoDiv;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.ServiceCodeInputCommonChildDiv.ServiceCodeInputCommonChildDivDiv;
+import jp.co.ndensan.reams.ur.urz.definition.core.hokenja.HokenjaNo;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -86,7 +87,7 @@ public class KyuhuhiMeisaiJutokuPanelHandler {
             }
             row.setDefaultDataName7(shokan.getEntity().get連番());
             row.setDefaultDataName8(shokan.getServiceName());
-            row.setDefaultDataName9(shokan.getHokenshaName());
+            row.setDefaultDataName9(shokan.getEntity().get被保険者番号().value());
             rowList.add(row);
         }
         div.getPnlBtnDetail().getPnlKyufuhiMeisai().getDgJushochiTokutei().setDataSource(rowList);
@@ -122,8 +123,6 @@ public class KyuhuhiMeisaiJutokuPanelHandler {
         ServiceCodeInputCommonChildDivDiv sercode
                 = (ServiceCodeInputCommonChildDivDiv) div.getPnlBtnDetail().getPnlKyufuhiMeisai().
                 getPnlKyufuhiMeisaiTouroku().getCcdServiceCodeInput();
-        HokenshaJohoDiv hojo = (HokenshaJohoDiv) div.getPnlBtnDetail().getPnlKyufuhiMeisai().
-                getPnlKyufuhiMeisaiTouroku().getCcdHokenshaJoho();
         if (row.getDefaultDataName1() != null && !row.getDefaultDataName1().isEmpty()) {
             RString serviceCodeShuruyi = new RString(row.getDefaultDataName1().substring(0, 2).toString());
             RString serviceCodeKoumoku = new RString(row.getDefaultDataName1().substring(2, NUM).toString());
@@ -139,14 +138,12 @@ public class KyuhuhiMeisaiJutokuPanelHandler {
         div.getPnlBtnDetail().getPnlKyufuhiMeisai().getPnlKyufuhiMeisaiTouroku().getTxtTekiyo().
                 setValue(row.getDefaultDataName5());
         div.getPnlBtnDetail().getPnlKyufuhiMeisai().getRowId().setValue(new Decimal(row.getId()));
-        if (!row.getDefaultDataName6().isNullOrEmpty()) {
-            hojo.getTxtHokenshaNo().setValue(row.getDefaultDataName6());
-        }
         if (row.getDefaultDataName8() != null && !row.getDefaultDataName8().isEmpty()) {
             sercode.getTxtServiceCodeName().setValue(row.getDefaultDataName8());
         }
-        if (row.getDefaultDataName9() != null) {
-            hojo.getTxtHokenshaNo().setValue(row.getDefaultDataName9());
+        if (row.getDefaultDataName6() != null) {
+            div.getPnlBtnDetail().getPnlKyufuhiMeisai().getPnlKyufuhiMeisaiTouroku().getCcdHokenshaJoho().
+                    intialize(new HokenjaNo(row.getDefaultDataName6()));
         }
 
     }
