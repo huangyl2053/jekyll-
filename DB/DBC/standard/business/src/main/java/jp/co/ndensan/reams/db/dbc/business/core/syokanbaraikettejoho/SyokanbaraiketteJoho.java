@@ -5,6 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbc.business.core.syokanbaraikettejoho;
 
+import java.io.Serializable;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.syokanbaraiketejoho.SyokanbaraiketeJohoEntity;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ServiceCode;
@@ -15,8 +16,9 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
  *
  * @reamsid_L DBC-0950-010 zuotao
  */
-public class SyokanbaraiketteJoho {
+public class SyokanbaraiketteJoho implements Serializable {
 
+    private static final long serialVersionUID = 8783303115467556258L;
     private final SyokanbaraiketeJohoEntity entity;
 
     /**

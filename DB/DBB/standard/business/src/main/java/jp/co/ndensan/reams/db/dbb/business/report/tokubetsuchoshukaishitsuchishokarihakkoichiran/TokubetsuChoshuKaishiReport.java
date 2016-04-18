@@ -18,6 +18,8 @@ import lombok.NonNull;
 
 /**
  * 帳票設計_DBBRP43002_4_特別徴収開始通知書（本算定）TokubetsuChoshuKaishiReport
+ *
+ * @reamsid_L DBB-0780-120 yangchenbing
  */
 public class TokubetsuChoshuKaishiReport extends Report<TokubetsuChoshuKaishiSource> {
 
@@ -156,8 +158,12 @@ public class TokubetsuChoshuKaishiReport extends Report<TokubetsuChoshuKaishiSou
         if (編集後本算定通知書共通情報.get(i).get編集後個人() != null && 編集後本算定通知書共通情報.get(i).get編集後個人().get名称() != null) {
             item1.setListLower_3(new RString(編集後本算定通知書共通情報.get(i).get編集後個人().get名称().toString()));
         }
-        item1.setListLower_4(編集後本算定通知書共通情報.get(i).get更正後().get特別徴収義務者());
-        item1.setListLower_5(new RString(編集後本算定通知書共通情報.get(i).get更正後().get特別徴収対象年金コード().toString()));
+        if (編集後本算定通知書共通情報.get(i).get更正後() != null && 編集後本算定通知書共通情報.get(i).get更正後().get特別徴収義務者() != null) {
+            item1.setListLower_4(編集後本算定通知書共通情報.get(i).get更正後().get特別徴収義務者());
+        }
+        if (編集後本算定通知書共通情報.get(i).get更正後() != null && 編集後本算定通知書共通情報.get(i).get更正後().get特別徴収対象年金コード() != null) {
+            item1.setListLower_5(new RString(編集後本算定通知書共通情報.get(i).get更正後().get特別徴収対象年金コード().toString()));
+        }
         item1.setListLower_6(new RString("10月"));
         for (CharacteristicsPhase entity : 編集後本算定通知書共通情報.get(i).get更正後().get特徴期別金額リスト()) {
             if (Integer.valueOf(entity.get期().toString()) == NUM4) {
@@ -172,5 +178,6 @@ public class TokubetsuChoshuKaishiReport extends Report<TokubetsuChoshuKaishiSou
         }
         item1.setListLower_8(new RString("12月"));
         item1.setListLower_10(new RString("2月"));
+        targets.add(item1);
     }
 }

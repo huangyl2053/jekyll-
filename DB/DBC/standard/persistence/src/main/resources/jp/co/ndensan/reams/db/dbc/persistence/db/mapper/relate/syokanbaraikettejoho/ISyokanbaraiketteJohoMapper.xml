@@ -322,7 +322,7 @@
         WHERE
         償還払決定一覧."hiHokenshaNo" = #{hiHokenshaNo}
         AND 償還払決定一覧."serviceTeikyoYM" = #{serviceTeikyoYM}
-        AND 償還払決定一覧."seiriNo" = #{seiriNo}
+        <!--AND 償還払決定一覧."seiriNo" = #{seiriNo}-->
         ORDER BY
         償還払決定一覧."jigyoshaNo",
         償還払決定一覧."yoshikiNo"

@@ -4,10 +4,6 @@
  */
 package jp.co.ndensan.reams.db.dbd.persistence.db.mapper.relate.riyoshafutanwariai;
 
-import java.util.List;
-import jp.co.ndensan.reams.db.dbd.definition.mybatisprm.relate.RiyoshaFutanWariaiMapperParameter;
-import jp.co.ndensan.reams.db.dbd.entity.db.relate.RiyoshaFutanWariaiEntity;
-
 /**
  * 利用者負担割合のマッパーインタフェースです。
  */
@@ -19,8 +15,7 @@ public interface IRiyoshaFutanWariaiMapper {
      * @param 利用者負担割合検索条件 利用者負担割合検索条件
      * @return RiyoshaFutanWariaiEntity
      */
-    RiyoshaFutanWariaiEntity select利用者負担割合ByKey(RiyoshaFutanWariaiMapperParameter 利用者負担割合検索条件);
-
+//    RiyoshaFutanWariaiEntity select利用者負担割合ByKey(RiyoshaFutanWariaiMapperParameter 利用者負担割合検索条件);
     // TODO リスト一覧取得に使用する検索項目はテーブル構造に合わせて修正が必要になります。
     // TODO 個別に引き渡す必要があるパラメータがある場合、追加してください。
     /**
@@ -29,5 +24,5 @@ public interface IRiyoshaFutanWariaiMapper {
      * @param 利用者負担割合検索条件 利用者負担割合検索条件
      * @return RiyoshaFutanWariaiEntityの{@code list}
      */
-    List<RiyoshaFutanWariaiEntity> select利用者負担割合リストBy主キー1(RiyoshaFutanWariaiMapperParameter 利用者負担割合検索条件);
+//    List<RiyoshaFutanWariaiEntity> select利用者負担割合リストBy主キー1(RiyoshaFutanWariaiMapperParameter 利用者負担割合検索条件);
 }

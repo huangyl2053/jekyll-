@@ -10,6 +10,8 @@ import jp.co.ndensan.reams.uz.uza.report.ReportEditorJoiner;
 
 /**
  * 帳票設計_DBBRP43002_2_保険料納入通知書（本算定）NonyuTsuchIchiranBuilder
+ *
+ * @reamsid_L DBB-0780-120 yangchenbing
  */
 public class NonyuTsuchIchiranBuilder implements INonyuTsuchIchiranBuilder {
 

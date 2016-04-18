@@ -10,16 +10,12 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0030011.SetaiInfoDiv;
-import jp.co.ndensan.reams.db.dbz.divcontroller.entity.parentdiv.SetaiShotokuIchiran.SetaiShotokuIchiranDiv;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.parentdiv.SetaiShotokuIchiran.dgSetaiShotoku_Row;
 import jp.co.ndensan.reams.db.dbz.divcontroller.helper.ControlGenerator;
 import jp.co.ndensan.reams.db.dbz.divcontroller.helper.YamlLoader;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Button;
-import jp.co.ndensan.reams.uz.uza.ui.binding.DataGrid;
-import jp.co.ndensan.reams.uz.uza.ui.binding.DataGridSetting;
-import jp.co.ndensan.reams.uz.uza.ui.binding.KeyValueDataSource;
 
 /**
  * 世帯情報。
@@ -109,9 +105,9 @@ public class SetaiInfo {
             dgSetaiShotoku_Row row = createRowSetaiShotoku(dataGrid);
             dataGridAll.add(row);
         }
-
-        DataGrid<dgSetaiShotoku_Row> ssid = panel.getSetaiinShotoku().getDgSetaiShotoku();
-        ssid.setDataSource(dataGridAll);
+//
+//        DataGrid<dgSetaiShotoku_Row> ssid = panel.getSetaiinShotoku().getDgSetaiShotoku();
+//        ssid.setDataSource(dataGridAll);
     }
 
     /**
@@ -310,24 +306,22 @@ public class SetaiInfo {
      */
     private RString setProperty_SetaiinShotku(SetaiInfoDiv panel) {
 
-        SetaiShotokuIchiranDiv shotokuIchiranDiv = panel.getSetaiinShotoku();
-        DataGridSetting gridSetting = shotokuIchiranDiv.getDgSetaiShotoku().getGridSetting();
-        List<KeyValueDataSource> selectItem = shotokuIchiranDiv.getChkSetaiIchiranAll().getSelectedItems();
-
+//        SetaiShotokuIchiranDiv shotokuIchiranDiv = panel.getSetaiinShotoku();
+//        DataGridSetting gridSetting = shotokuIchiranDiv.getDgSetaiShotoku().getGridSetting();
+//        List<KeyValueDataSource> selectItem = shotokuIchiranDiv.getChkSetaiIchiranAll().getSelectedItems();
         RString mode;
 
         //チェックによりOnOff
-        if (selectItem.size() >= 1) {
-            gridSetting.getColumn("txtSonzaiUmuChokkin").setVisible(true);
-            gridSetting.getColumn("txtSonzaiUmuKijunbi").setVisible(true);
-            mode = new RString("onChange");
-        } else {
-            gridSetting.getColumn("txtSonzaiUmuChokkin").setVisible(false);
-            gridSetting.getColumn("txtSonzaiUmuKijunbi").setVisible(false);
-            mode = ONCLICK;
-        }
-
-        return mode;
+//        if (selectItem.size() >= 1) {
+//            gridSetting.getColumn("txtSonzaiUmuChokkin").setVisible(true);
+//            gridSetting.getColumn("txtSonzaiUmuKijunbi").setVisible(true);
+//            mode = new RString("onChange");
+//        } else {
+//            gridSetting.getColumn("txtSonzaiUmuChokkin").setVisible(false);
+//            gridSetting.getColumn("txtSonzaiUmuKijunbi").setVisible(false);
+//            mode = ONCLICK;
+//        }
+        return null;
     }
 
     /**

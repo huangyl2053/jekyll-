@@ -99,11 +99,9 @@ public class YoguKonyuhiShikyuShinseiPnlTotal {
             PnlTotalParameter parameter = ViewStateHolder.get(ViewStateKeys.支給申請情報検索キー,
                     PnlTotalParameter.class);
             FlexibleYearMonth サービス提供年月 = parameter.getTeikyoYM();
-            RString 整理番号 = parameter.getSerialNo();
-            RString 様式番号 = parameter.getYoshikiNo();
-            JigyoshaNo 事業者番号 = parameter.getJigyosyaNo();
-            ViewStateHolder.put(ViewStateKeys.事業者番号, 事業者番号);
-            ViewStateHolder.put(ViewStateKeys.整理番号, 整理番号);
+            RString 整理番号 = ViewStateHolder.get(ViewStateKeys.整理番号, RString.class);
+            RString 様式番号 = ViewStateHolder.get(ViewStateKeys.様式番号, RString.class);
+            JigyoshaNo 事業者番号 = ViewStateHolder.get(ViewStateKeys.事業者番号, JigyoshaNo.class);
             ShokanKihon shokankihon = FukushiyoguKonyuhiShikyuShinsei.createInstance().getShokanSeikyuKihon(
                     被保険者番号, サービス提供年月, 整理番号, 事業者番号, 様式番号, NUM3);
             ViewStateHolder.put(ViewStateKeys.福祉償還払請求基本, shokankihon);

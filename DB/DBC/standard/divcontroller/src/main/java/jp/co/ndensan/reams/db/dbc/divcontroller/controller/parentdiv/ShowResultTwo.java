@@ -76,12 +76,12 @@ public class ShowResultTwo {
                 //dgJudgementResultLR 判定結果
                 if (i == 0) {
                     //  panel.getTxtHihoNoL().setValue(setaiInfopanel.getSetaiinShotoku().getDgSetaiShotoku().getSelectedItems().get(i).getTxtKetsugo01().replace("<br>", ""));
-                    panel.getTxtHihoNoL().setValue(setaiInfopanel.getSetaiinShotoku().getDgSetaiShotoku().getSelectedItems().get(i).getTxtHihokenshaNo());
+                    //   panel.getTxtHihoNoL().setValue(setaiInfopanel.getSetaiinShotoku().getDgSetaiShotoku().getSelectedItems().get(i).getTxtHihokenshaNo());
                     panel.getTxtHihoNameR().setValue(setaiInfopanel.getSetaiinShotoku().getDgSetaiShotoku().getSelectedItems().get(i).getTxtShimei());
                 } else if (i == 1) {
                     System.out.println("++++++++++++++++++++! I " + i);
                     //   panel.getTxtHihoNoR().setValue(setaiInfopanel.getSetaiinShotoku().getDgSetaiShotoku().getSelectedItems().get(i).getTxtKetsugo01().replace("<br>", ""));
-                    panel.getTxtHihoNoR().setValue(setaiInfopanel.getSetaiinShotoku().getDgSetaiShotoku().getSelectedItems().get(i).getTxtHihokenshaNo());
+                    ///  panel.getTxtHihoNoR().setValue(setaiInfopanel.getSetaiinShotoku().getDgSetaiShotoku().getSelectedItems().get(i).getTxtHihokenshaNo());
                     panel.getTxtHihoNameL().setValue(setaiInfopanel.getSetaiinShotoku().getDgSetaiShotoku().getSelectedItems().get(i).getTxtShimei());
 
                 }

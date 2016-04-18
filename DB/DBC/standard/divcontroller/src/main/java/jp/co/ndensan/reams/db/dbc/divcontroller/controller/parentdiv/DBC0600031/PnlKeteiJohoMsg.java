@@ -18,6 +18,7 @@ import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0600031.DBC0
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0600031.PnlKeteiJohoMsgDiv;
 import jp.co.ndensan.reams.db.dbc.divcontroller.handler.parentdiv.DBC0600031.PnlKeteiJohoMsgHandler;
 import jp.co.ndensan.reams.db.dbc.divcontroller.viewbox.ViewStateKeys;
+import jp.co.ndensan.reams.db.dbc.divcontroller.viewbox.dbc0600011.PnlTotalParameter;
 import jp.co.ndensan.reams.db.dbc.divcontroller.viewbox.shoukanharaihishinseikensaku.ShoukanharaihishinseikensakuParameter;
 import jp.co.ndensan.reams.db.dbc.service.core.fukushiyogukonyuhishikyushisei.FukushiyoguKonyuhiShikyuShinsei;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
@@ -57,7 +58,7 @@ public class PnlKeteiJohoMsg {
     private static final RString モード_参照 = new RString("参照");
     private static final RString 保存 = new RString("Element10");
     private static final RString 業務区分 = new RString("02");
-    private static final RString 連番 = new RString("11");
+    private static final RString 連番 = new RString("1");
 
     /**
      * onLoad事件
@@ -66,15 +67,15 @@ public class PnlKeteiJohoMsg {
      * @return 福祉用具購入費支給申請の決定情報登録
      */
     public ResponseData<PnlKeteiJohoMsgDiv> onLoad(PnlKeteiJohoMsgDiv div) {
-        ShoukanharaihishinseikensakuParameter shuoParameter
-                = ViewStateHolder.get(ViewStateKeys.支給申請情報検索キー, ShoukanharaihishinseikensakuParameter.class);
+        PnlTotalParameter shuoParameter
+                = ViewStateHolder.get(ViewStateKeys.支給申請情報検索キー, PnlTotalParameter.class);
         ShikibetsuCode 識別コード = ViewStateHolder.get(ViewStateKeys.識別コード, ShikibetsuCode.class);
         div.getKaigoCommonPanel().getCcdAtenaInfo().onLoad(識別コード);
-        HihokenshaNo 被保険者番号 = shuoParameter.getHiHokenshaNo();
-        FlexibleYearMonth サービス年月 = shuoParameter.getServiceTeikyoYM();
-        RString 整理番号 = shuoParameter.getSeiriNp();
-        Decimal 給付率 = shuoParameter.getKyufuritsu();
-        JigyoshaNo 事業者番号 = shuoParameter.getJigyoshaNo();
+        HihokenshaNo 被保険者番号 = ViewStateHolder.get(ViewStateKeys.被保険者番号, HihokenshaNo.class);
+        FlexibleYearMonth サービス年月 = ViewStateHolder.get(ViewStateKeys.サービス年月, FlexibleYearMonth.class);
+        RString 整理番号 = ViewStateHolder.get(ViewStateKeys.整理番号, RString.class);
+        Decimal 給付率 = ViewStateHolder.get(ViewStateKeys.給付率, Decimal.class);
+        JigyoshaNo 事業者番号 = ViewStateHolder.get(ViewStateKeys.事業者番号, JigyoshaNo.class);
         RString 証明書 = ViewStateHolder.get(ViewStateKeys.証明書, RString.class);
         if (モード_参照.equals(ViewStateHolder.get(ViewStateKeys.処理モード, RString.class))) {
             CommonButtonHolder.setVisibleByCommonButtonFieldName(保存, false);
@@ -148,12 +149,12 @@ public class PnlKeteiJohoMsg {
     public ResponseData<PnlKeteiJohoMsgDiv> onClick_btnUpdate(PnlKeteiJohoMsgDiv div) {
         ShoukanharaihishinseikensakuParameter shuoParameter
                 = ViewStateHolder.get(ViewStateKeys.支給申請情報検索キー, ShoukanharaihishinseikensakuParameter.class);
-        HihokenshaNo 被保険者番号 = shuoParameter.getHiHokenshaNo();
-        FlexibleYearMonth サービス年月 = shuoParameter.getServiceTeikyoYM();
-        RString 整理番号 = shuoParameter.getSeiriNp();
-        JigyoshaNo 事業者番号 = shuoParameter.getJigyoshaNo();
-        RString 様式番号 = shuoParameter.getYoshikiNo();
-        RString 明細番号 = shuoParameter.getMeisaiNo();
+        HihokenshaNo 被保険者番号 = ViewStateHolder.get(ViewStateKeys.被保険者番号, HihokenshaNo.class);
+        FlexibleYearMonth サービス年月 = ViewStateHolder.get(ViewStateKeys.サービス年月, FlexibleYearMonth.class);
+        RString 整理番号 = ViewStateHolder.get(ViewStateKeys.整理番号, RString.class);
+        JigyoshaNo 事業者番号 = ViewStateHolder.get(ViewStateKeys.事業者番号, JigyoshaNo.class);
+        RString 様式番号 = ViewStateHolder.get(ViewStateKeys.様式番号, RString.class);
+        RString 明細番号 = ViewStateHolder.get(ViewStateKeys.明細番号, RString.class);
         if (削除.equals(ViewStateHolder.get(ViewStateKeys.処理モード, RString.class))) {
             if (!ResponseHolder.isReRequest()) {
                 return ResponseData.of(div).addMessage(UrQuestionMessages.削除の確認.getMessage()).respond();
@@ -192,14 +193,12 @@ public class PnlKeteiJohoMsg {
      * @return 福祉用具購入費支給申請_明細登録へ遷移す
      */
     private ResponseData<PnlKeteiJohoMsgDiv> 登録修正Update(PnlKeteiJohoMsgDiv div) {
-        ShoukanharaihishinseikensakuParameter shuoParameter
-                = ViewStateHolder.get(ViewStateKeys.支給申請情報検索キー, ShoukanharaihishinseikensakuParameter.class);
-        HihokenshaNo 被保険者番号 = shuoParameter.getHiHokenshaNo();
-        FlexibleYearMonth サービス年月 = shuoParameter.getServiceTeikyoYM();
-        RString 整理番号 = shuoParameter.getSeiriNp();
-        JigyoshaNo 事業者番号 = shuoParameter.getJigyoshaNo();
-        RString 様式番号 = shuoParameter.getYoshikiNo();
-        RString 明細番号 = shuoParameter.getMeisaiNo();
+        HihokenshaNo 被保険者番号 = ViewStateHolder.get(ViewStateKeys.被保険者番号, HihokenshaNo.class);
+        FlexibleYearMonth サービス年月 = ViewStateHolder.get(ViewStateKeys.サービス年月, FlexibleYearMonth.class);
+        RString 整理番号 = ViewStateHolder.get(ViewStateKeys.整理番号, RString.class);
+        JigyoshaNo 事業者番号 = ViewStateHolder.get(ViewStateKeys.事業者番号, JigyoshaNo.class);
+        RString 様式番号 = ViewStateHolder.get(ViewStateKeys.様式番号, RString.class);
+        RString 明細番号 = ViewStateHolder.get(ViewStateKeys.明細番号, RString.class);
         RString 証明書 = ViewStateHolder.get(ViewStateKeys.証明書, RString.class);
         ShokanbaraiketteiJohoDiv adiv = (ShokanbaraiketteiJohoDiv) div.getCcdKetteiList();
         if (adiv.getTxtKetebi().getValue() == null) {

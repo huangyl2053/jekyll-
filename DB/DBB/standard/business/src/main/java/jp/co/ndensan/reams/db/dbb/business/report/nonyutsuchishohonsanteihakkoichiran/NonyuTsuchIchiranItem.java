@@ -9,6 +9,8 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
  * 帳票設計_DBBRP43002_2_保険料納入通知書（本算定）NonyuTsuchIchiranItem
+ *
+ * @reamsid_L DBB-0780-120 yangchenbing
  */
 @SuppressWarnings("PMD.UnusedPrivateField")
 @lombok.Getter

@@ -22,11 +22,14 @@ import lombok.NonNull;
 
 /**
  * 帳票設計_DBBRP43002_2_保険料納入通知書（本算定）NonyuTsuchIchiranReport
+ *
+ * @reamsid_L DBB-0780-080 yangchenbing
  */
 public class NonyuTsuchIchiranReport extends Report<NonyuTsuchIchiranSource> {
 
     private final List<EditedHonSanteiTsuchiShoKyotsu> 編集後本算定通知書共通情報;
     private final NonyuTsuchIchiranBatchParameter バッチパラメータ;
+    private final List<RString> 改頁項目リスト;
     private final RString 帳票作成日時;
     private final RString 市町村コード;
     private final RString 市町村名;
@@ -43,15 +46,18 @@ public class NonyuTsuchIchiranReport extends Report<NonyuTsuchIchiranSource> {
      *
      * @param 編集後本算定通知書共通情報 EditedHonSanteiTsuchiShoKyotsu
      * @param バッチパラメータ NonyuTsuchIchiranBatchParameter
+     * @param 改頁項目リスト List<RString>
      * @param 帳票作成日時 RString
      * @param 市町村コード RString
      * @param 市町村名 RString
      */
     protected NonyuTsuchIchiranReport(List<EditedHonSanteiTsuchiShoKyotsu> 編集後本算定通知書共通情報,
             NonyuTsuchIchiranBatchParameter バッチパラメータ,
+            List<RString> 改頁項目リスト,
             RString 帳票作成日時, RString 市町村コード, RString 市町村名) {
         this.編集後本算定通知書共通情報 = 編集後本算定通知書共通情報;
         this.バッチパラメータ = バッチパラメータ;
+        this.改頁項目リスト = 改頁項目リスト;
         this.帳票作成日時 = 帳票作成日時;
         this.市町村コード = 市町村コード;
         this.市町村名 = 市町村名;
@@ -63,6 +69,7 @@ public class NonyuTsuchIchiranReport extends Report<NonyuTsuchIchiranSource> {
      *
      * @param 編集後本算定通知書共通情報 EditedHonSanteiTsuchiShoKyotsu
      * @param バッチパラメータ NonyuTsuchIchiranBatchParameter
+     * @param 改頁項目リスト List<RString>
      * @param 帳票作成日時 RString
      * @param 市町村コード RString
      * @param 市町村名 RString
@@ -70,9 +77,10 @@ public class NonyuTsuchIchiranReport extends Report<NonyuTsuchIchiranSource> {
      */
     public static NonyuTsuchIchiranReport createFrom(@NonNull List<EditedHonSanteiTsuchiShoKyotsu> 編集後本算定通知書共通情報,
             @NonNull NonyuTsuchIchiranBatchParameter バッチパラメータ,
+            @NonNull List<RString> 改頁項目リスト,
             @NonNull RString 帳票作成日時,
             @NonNull RString 市町村コード, @NonNull RString 市町村名) {
-        return new NonyuTsuchIchiranReport(編集後本算定通知書共通情報, バッチパラメータ, 帳票作成日時, 市町村コード, 市町村名);
+        return new NonyuTsuchIchiranReport(編集後本算定通知書共通情報, バッチパラメータ, 改頁項目リスト, 帳票作成日時, 市町村コード, 市町村名);
     }
 
     /**
@@ -107,6 +115,9 @@ public class NonyuTsuchIchiranReport extends Report<NonyuTsuchIchiranSource> {
         }
     }
 
+    /**
+     * makeNonyuTsuchIchiranItemList
+     */
     private void makeNonyuTsuchIchiranItemList() {
         for (int i = 0; i < 編集後本算定通知書共通情報.size(); i++) {
             NonyuTsuchIchiranItem item1 = new NonyuTsuchIchiranItem();
@@ -171,26 +182,40 @@ public class NonyuTsuchIchiranReport extends Report<NonyuTsuchIchiranSource> {
         }
     }
 
+    /**
+     * 出力帳票entityss
+     *
+     * @param item1
+     */
     private void 出力帳票entityss(NonyuTsuchIchiranItem item1) {
-        if (バッチパラメータ.get出力帳票entity() != null) {
-            if (バッチパラメータ.get出力帳票entity().size() > NUM0) {
-                item1.setShutsuryokujun1(バッチパラメータ.get出力帳票entity().get(NUM0).get出力順ID());
-            }
-            if (バッチパラメータ.get出力帳票entity().size() > NUM1) {
-                item1.setShutsuryokujun2(バッチパラメータ.get出力帳票entity().get(NUM1).get出力順ID());
-            }
-            if (バッチパラメータ.get出力帳票entity().size() > NUM2) {
-                item1.setShutsuryokujun3(バッチパラメータ.get出力帳票entity().get(NUM2).get出力順ID());
-            }
-            if (バッチパラメータ.get出力帳票entity().size() > NUM3) {
-                item1.setShutsuryokujun4(バッチパラメータ.get出力帳票entity().get(NUM3).get出力順ID());
-            }
-            if (バッチパラメータ.get出力帳票entity().size() > NUM4) {
-                item1.setShutsuryokujun5(バッチパラメータ.get出力帳票entity().get(NUM4).get出力順ID());
-            }
+        RString 並び順の1件目 = 改頁項目リスト.size() <= NUM0 ? RString.EMPTY : 改頁項目リスト.get(NUM0);
+        if (並び順の1件目 != null && !並び順の1件目.isEmpty()) {
+            item1.setShutsuryokujun1(並び順の1件目);
+        }
+        RString 並び順の2件目 = 改頁項目リスト.size() <= NUM1 ? RString.EMPTY : 改頁項目リスト.get(NUM1);
+        if (並び順の2件目 != null) {
+            item1.setShutsuryokujun2(並び順の2件目);
+        }
+        RString 並び順の3件目 = 改頁項目リスト.size() <= NUM2 ? RString.EMPTY : 改頁項目リスト.get(NUM2);
+        if (並び順の3件目 != null) {
+            item1.setShutsuryokujun3(並び順の3件目);
+        }
+        RString 並び順の4件目 = 改頁項目リスト.size() <= NUM3 ? RString.EMPTY : 改頁項目リスト.get(NUM3);
+        if (並び順の4件目 != null) {
+            item1.setShutsuryokujun4(並び順の4件目);
+        }
+        RString 並び順の5件目 = 改頁項目リスト.size() <= NUM4 ? RString.EMPTY : 改頁項目リスト.get(NUM4);
+        if (並び順の5件目 != null) {
+            item1.setShutsuryokujun5(並び順の5件目);
         }
     }
 
+    /**
+     * listlowers
+     *
+     * @param item1
+     * @param i
+     */
     private void listlowers(NonyuTsuchIchiranItem item1, int i) {
         if (編集後本算定通知書共通情報.get(i).get編集後宛先() != null) {
             item1.setListLower_1(new RString(編集後本算定通知書共通情報.get(i).get編集後宛先().get本人名称().toString()));
