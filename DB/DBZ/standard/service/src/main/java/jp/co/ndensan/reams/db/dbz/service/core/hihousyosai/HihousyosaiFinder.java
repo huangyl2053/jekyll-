@@ -100,13 +100,13 @@ public class HihousyosaiFinder {
         requireNonNull(市町村コード, UrSystemErrorMessages.値がnull.getReplacedMessage("市町村コード"));
         requireNonNull(導入形態コード, UrSystemErrorMessages.値がnull.getReplacedMessage("導入形態コード"));
         List<Shichoson> shichosonList = new ArrayList<>();
-        Shichoson shichoson = new Shichoson();
         List<KyuShichosonCode> kyuShichosonCodeList
                 = KyuShichosonCode.getKyuShichosonCodeJoho(市町村コード, 導入形態コード).get旧市町村コード情報List();
         if (kyuShichosonCodeList == null || kyuShichosonCodeList.isEmpty()) {
             return SearchResult.of(Collections.<Shichoson>emptyList(), 0, false);
         }
         for (KyuShichosonCode kyuShichosonCode : kyuShichosonCodeList) {
+            Shichoson shichoson = new Shichoson();
             shichoson.set旧市町村コード(kyuShichosonCode.get旧市町村コード());
             shichoson.set旧市町村名称(kyuShichosonCode.get旧市町村名称());
             shichosonList.add(shichoson);

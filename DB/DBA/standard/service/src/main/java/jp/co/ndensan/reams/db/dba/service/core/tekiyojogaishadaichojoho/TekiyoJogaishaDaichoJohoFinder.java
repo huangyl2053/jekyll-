@@ -288,7 +288,7 @@ public class TekiyoJogaishaDaichoJohoFinder {
     }
 
     private RString get住所の編集(IJusho 住所クラス) {
-        RString 編集後住所 = new KaigoJushoEditor().create編集後住所(住所クラス, SubGyomuCode.DBB介護賦課, 帳票分類ID);
+        RString 編集後住所 = new KaigoJushoEditor().create編集後住所(住所クラス, SubGyomuCode.DBA介護資格, 帳票分類ID);
         if (RString.isNullOrEmpty(編集後住所)) {
             return RString.EMPTY;
         }

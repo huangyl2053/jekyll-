@@ -4,7 +4,6 @@
  */
 package jp.co.ndensan.reams.db.dbz.persistence.db.basic;
 
-import java.util.ArrayList;
 import java.util.List;
 import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
@@ -30,7 +29,6 @@ import jp.co.ndensan.reams.uz.uza.core.mybatis.SqlSession;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.report.dac._ReportDACUtility;
 import jp.co.ndensan.reams.uz.uza.util.db.DbAccessorNormalType;
 import jp.co.ndensan.reams.uz.uza.util.db.ITrueFalseCriteria;
 import jp.co.ndensan.reams.uz.uza.util.db.NullsOrder;
@@ -342,15 +340,13 @@ public class DbT1001HihokenshaDaichoDac implements ISaveable<DbT1001HihokenshaDa
             throws NullPointerException {
         requireNonNull(被保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage(メッセージ_被保険者番号.toString()));
         DbAccessorNormalType accessor = new DbAccessorNormalType(session);
-        List<OrderBy> orderBy = new ArrayList<>();
-        orderBy.add(new OrderBy(DbT1001HihokenshaDaicho.idoYMD, Order.DESC, NullsOrder.LAST));
-        orderBy.add(new OrderBy(DbT1001HihokenshaDaicho.edaNo, Order.DESC, NullsOrder.LAST));
         return accessor.select().
                 table(DbT1001HihokenshaDaicho.class).
                 where(and(
                                 eq(hihokenshaNo, 被保険者番号),
                                 eq(logicalDeletedFlag, false))).
-                order(_ReportDACUtility.toOrderBysArray(orderBy)).
+                order(new OrderBy(DbT1001HihokenshaDaicho.idoYMD, Order.DESC, NullsOrder.LAST),
+                        new OrderBy(DbT1001HihokenshaDaicho.edaNo, Order.DESC, NullsOrder.LAST)).
                 limit(1).
                 toObject(DbT1001HihokenshaDaichoEntity.class);
     }

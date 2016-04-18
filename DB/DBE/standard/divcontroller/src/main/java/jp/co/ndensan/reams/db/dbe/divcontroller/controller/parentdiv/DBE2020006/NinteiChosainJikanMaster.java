@@ -21,8 +21,6 @@ import jp.co.ndensan.reams.db.dbz.business.core.basic.NinteichosaScheduleIdentif
 import jp.co.ndensan.reams.db.dbz.business.core.inkijuntsukishichosonjoho.KijuntsukiShichosonjohoiDataPassModel;
 import jp.co.ndensan.reams.db.dbz.business.core.ninteichosaikkatsuinput.NinteiChosaIkkatsuInputModel;
 import jp.co.ndensan.reams.db.dbz.divcontroller.viewbox.ViewStateKeys;
-import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5221NinteichosaScheduleEntity;
-import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT5221NinteichosaScheduleDac;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrInformationMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrQuestionMessages;
@@ -53,7 +51,6 @@ import jp.co.ndensan.reams.uz.uza.util.Models;
 import jp.co.ndensan.reams.uz.uza.util.code.CodeMaster;
 import jp.co.ndensan.reams.uz.uza.util.code.entity.UzT0007CodeEntity;
 import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
-import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 import jp.co.ndensan.reams.uz.uza.util.serialization.DataPassingConverter;
 
 /**
@@ -83,13 +80,11 @@ public class NinteiChosainJikanMaster {
     private final RString 編集状態_既存 = new RString("2");
     private final RString 保存 = new RString("保存");
     private static final CodeShubetsu コード種別 = new CodeShubetsu("5002");
-    private final DbT5221NinteichosaScheduleDac dac;
 
     /**
      * コンストラクタです。
      */
     public NinteiChosainJikanMaster() {
-        dac = InstanceProvider.create(DbT5221NinteichosaScheduleDac.class);
     }
 
     /**
@@ -212,7 +207,10 @@ public class NinteiChosainJikanMaster {
             RString 変更前調査地区 = div.getMainPanel().getSearchConditionPanel().getTaishoChikuKey();
             List<KeyValueDataSource> keyValueList = get調査地区ドロップダウンリスト();
             for (KeyValueDataSource keyValue : keyValueList) {
-                if (変更前調査地区 != null && !変更前調査地区.isEmpty() && 変更前調査地区.equals(keyValue.getKey())) {
+                if (変更前調査地区 == null || 変更前調査地区.isEmpty()) {
+                    div.getDdlTaishoChiku().setSelectedKey(RString.EMPTY);
+                    break;
+                } else if (変更前調査地区.equals(keyValue.getKey())) {
                     div.getDdlTaishoChiku().setSelectedKey(変更前調査地区);
                 }
             }
@@ -822,7 +820,8 @@ public class NinteiChosainJikanMaster {
                     認定調査員コード,
                     市町村コード);
             if (ninteichosaModels.get(情報PK) != null) {
-                dac.save(ninteichosaModels.get(情報PK).createBuilderForEdit().set予約状況(new Code(予約状況)).build().toEntity());
+                NinteiChosainJikanMasterManager.createInstance().save(
+                        ninteichosaModels.get(情報PK).createBuilderForEdit().set予約状況(new Code(予約状況)).build().toEntity());
             }
         } else if (処理区分_更新.equals(処理区分)) {
             NinteichosaScheduleIdentifier 情報PK = new NinteichosaScheduleIdentifier(
@@ -846,12 +845,9 @@ public class NinteiChosainJikanMaster {
             if (!EntityDataState.Added.equals(ninteichosaModels.get(情報PK).toEntity().getState())) {
                 ninteichosaModels.deleteOrRemove(情報PK);
             }
-            DbT5221NinteichosaScheduleEntity 変更前データ = ninteichosaModels.get(情報PK).createBuilderForEdit().set予約状況(new Code(予約状況)).build().toEntity();
-            DbT5221NinteichosaScheduleEntity 変更後データ
-                    = ninteichosaModels.get(登録情報PK).createBuilderForEdit().set予約状況(new Code(予約状況)).build().toEntity();
-            変更後データ.setState(EntityDataState.Added);
-            NinteiChosainJikanMasterManager.createInstance().更新(変更前データ,
-                    変更後データ);
+            NinteiChosainJikanMasterManager.createInstance().更新(
+                    ninteichosaModels.get(情報PK).createBuilderForEdit().set予約状況(new Code(予約状況)).build().toEntity(),
+                    ninteichosaModels.get(登録情報PK).createBuilderForEdit().set予約状況(new Code(予約状況)).build().toEntity());
         } else if (処理区分_削除.equals(処理区分)) {
             NinteichosaScheduleIdentifier 情報PK = new NinteichosaScheduleIdentifier(
                     予定年月日,
@@ -863,7 +859,7 @@ public class NinteiChosainJikanMaster {
                     認定調査員コード,
                     市町村コード);
             if (ninteichosaModels.get(情報PK) != null) {
-                dac.saveOrDelete(ninteichosaModels.get(情報PK).toEntity());
+                NinteiChosainJikanMasterManager.createInstance().saveOrDelete(ninteichosaModels.get(情報PK).toEntity());
             }
         }
     }
