@@ -5,6 +5,10 @@
  */
 package jp.co.ndensan.reams.db.dba.business.report.shikakushasho;
 
+import java.util.List;
+import jp.co.ndensan.reams.db.dba.entity.db.relate.kaigohokenshikakushasho.KyufuseigenDataEntity;
+import jp.co.ndensan.reams.db.dba.entity.db.relate.kaigohokenshikakushasho.NyushoShisetsuDataEntity;
+import jp.co.ndensan.reams.db.dba.entity.db.relate.kaigohokenshikakushasho.ShuruiShikyuGendoKizyunngakuEntity;
 import jp.co.ndensan.reams.db.dba.entity.report.shikakushasho.ShikakushashoReportSource;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
@@ -71,47 +75,59 @@ public class ShikakushashoBodyEditor implements IShikakushashoEditor {
         source.kubunShikyuYukoShuryoYMD = item.getKubunShikyuYukoShuryoYMD();
         source.kubunShikyuTaniShurui = item.getKubunShikyuTaniShurui();
         source.kubunShikyuTani = item.getKubunShikyuTani();
-        if (!item.getShuruiShikyuServiceName().isEmpty()) {
-            for (int i = 1; i <= item.getShuruiShikyuServiceName().size(); i++) {
+        if (!item.getShuruiShikyuGendoEntity().isEmpty()) {
+            List<ShuruiShikyuGendoKizyunngakuEntity> gakuEntityList = item.getShuruiShikyuGendoEntity();
+            for (int i = 1; i <= gakuEntityList.size(); i++) {
                 if (i == 1) {
-                    source.shuruiShikyuServiceName1 = item.getShuruiShikyuServiceName().get(0);
+                    source.shuruiShikyuServiceName1 = gakuEntityList.get(0).getServiceShurui();
+                    source.shuruiShikyuTnisu1 = gakuEntityList.get(0).getShuruiShikyuKizyunngaku();
+                    source.shuruiShikyuTani1 = gakuEntityList.get(0).getShuruiShikyuKizyunngakuTani();
                 }
                 if (i == NOCOUNT_2) {
-                    source.shuruiShikyuServiceName2 = item.getShuruiShikyuServiceName().get(1);
+                    source.shuruiShikyuServiceName2 = gakuEntityList.get(1).getServiceShurui();
+                    source.shuruiShikyuTnisu2 = gakuEntityList.get(1).getShuruiShikyuKizyunngaku();
+                    source.shuruiShikyuTani2 = gakuEntityList.get(1).getShuruiShikyuKizyunngakuTani();
                 }
                 if (i == NOCOUNT_3) {
-                    source.shuruiShikyuServiceName3 = item.getShuruiShikyuServiceName().get(2);
+                    source.shuruiShikyuServiceName3 = gakuEntityList.get(2).getServiceShurui();
+                    source.shuruiShikyuTnisu3 = gakuEntityList.get(2).getShuruiShikyuKizyunngaku();
+                    source.shuruiShikyuTani3 = gakuEntityList.get(2).getShuruiShikyuKizyunngakuTani();
                 }
                 if (i == NOCOUNT_4) {
-                    source.shuruiShikyuServiceName4 = item.getShuruiShikyuServiceName().get(NOCOUNT_3);
+                    source.shuruiShikyuServiceName4 = gakuEntityList.get(NOCOUNT_3).getServiceShurui();
+                    source.shuruiShikyuTnisu4 = gakuEntityList.get(NOCOUNT_3).getShuruiShikyuKizyunngaku();
+                    source.shuruiShikyuTani4 = gakuEntityList.get(NOCOUNT_3).getShuruiShikyuKizyunngakuTani();
                 }
                 if (i == NOCOUNT_5) {
-                    source.shuruiShikyuServiceName5 = item.getShuruiShikyuServiceName().get(NOCOUNT_4);
+                    source.shuruiShikyuServiceName5 = gakuEntityList.get(NOCOUNT_4).getServiceShurui();
+                    source.shuruiShikyuTnisu5 = gakuEntityList.get(NOCOUNT_4).getShuruiShikyuKizyunngaku();
+                    source.shuruiShikyuTani5 = gakuEntityList.get(NOCOUNT_4).getShuruiShikyuKizyunngakuTani();
                 }
                 if (i == NOCOUNT_6) {
-                    source.shuruiShikyuServiceName6 = item.getShuruiShikyuServiceName().get(NOCOUNT_6);
+                    source.shuruiShikyuServiceName6 = gakuEntityList.get(NOCOUNT_5).getServiceShurui();
+                    source.shuruiShikyuTnisu6 = gakuEntityList.get(NOCOUNT_5).getShuruiShikyuKizyunngaku();
+                    source.shuruiShikyuTani6 = gakuEntityList.get(NOCOUNT_5).getShuruiShikyuKizyunngakuTani();
                 }
             }
         }
-        if (!item.getShuruiShikyuTnisu().isEmpty()) {
-            for (int i = 1; i <= item.getShuruiShikyuTnisu().size(); i++) {
+        source.serviceRyui = item.getServiceRyui();
+        if (!item.getKyufuseigenEntity().isEmpty()) {
+            List<KyufuseigenDataEntity> seigenEntityList = item.getKyufuseigenEntity();
+            for (int i = 1; i <= seigenEntityList.size(); i++) {
                 if (i == 1) {
-                    source.shuruiShikyuTnisu1 = item.getShuruiShikyuTnisu().get(0);
+                    source.kyufuseigenNaiyo1 = seigenEntityList.get(0).getKyufuseigenNaiyo();
+                    source.kyufuseigenKaishiYMD1 = seigenEntityList.get(0).getKyufuseigenKaishiYMD();
+                    source.kyufuseigenShuryoYMD1 = seigenEntityList.get(0).getKyufuseigenShuryoYMD();
                 }
                 if (i == NOCOUNT_2) {
-                    source.shuruiShikyuTnisu2 = item.getShuruiShikyuTnisu().get(1);
+                    source.kyufuseigenNaiyo2 = seigenEntityList.get(1).getKyufuseigenNaiyo();
+                    source.kyufuseigenKaishiYMD2 = seigenEntityList.get(1).getKyufuseigenKaishiYMD();
+                    source.kyufuseigenShuryoYMD2 = seigenEntityList.get(1).getKyufuseigenShuryoYMD();
                 }
                 if (i == NOCOUNT_3) {
-                    source.shuruiShikyuTnisu3 = item.getShuruiShikyuTnisu().get(2);
-                }
-                if (i == NOCOUNT_4) {
-                    source.shuruiShikyuTnisu4 = item.getShuruiShikyuTnisu().get(NOCOUNT_3);
-                }
-                if (i == NOCOUNT_5) {
-                    source.shuruiShikyuTnisu5 = item.getShuruiShikyuTnisu().get(NOCOUNT_4);
-                }
-                if (i == NOCOUNT_6) {
-                    source.shuruiShikyuTnisu6 = item.getShuruiShikyuTnisu().get(NOCOUNT_6);
+                    source.kyufuseigenNaiyo3 = seigenEntityList.get(2).getKyufuseigenNaiyo();
+                    source.kyufuseigenKaishiYMD3 = seigenEntityList.get(2).getKyufuseigenKaishiYMD();
+                    source.kyufuseigenShuryoYMD3 = seigenEntityList.get(2).getKyufuseigenShuryoYMD();
                 }
             }
         }
@@ -120,73 +136,6 @@ public class ShikakushashoBodyEditor implements IShikakushashoEditor {
     }
 
     private ShikakushashoReportSource bodyEdit2(ShikakushashoReportSource source) {
-        if (!item.getShuruiShikyuTani().isEmpty()) {
-            for (int i = 1; i <= item.getShuruiShikyuTani().size(); i++) {
-                if (i == 1) {
-                    source.shuruiShikyuTani1 = item.getShuruiShikyuTani().get(0);
-                }
-                if (i == NOCOUNT_2) {
-                    source.shuruiShikyuTani2 = item.getShuruiShikyuTani().get(1);
-                }
-                if (i == NOCOUNT_3) {
-                    source.shuruiShikyuTani3 = item.getShuruiShikyuTani().get(2);
-                }
-                if (i == NOCOUNT_4) {
-                    source.shuruiShikyuTani4 = item.getShuruiShikyuTani().get(NOCOUNT_3);
-                }
-                if (i == NOCOUNT_5) {
-                    source.shuruiShikyuTani5 = item.getShuruiShikyuTani().get(NOCOUNT_4);
-                }
-                if (i == NOCOUNT_6) {
-                    source.shuruiShikyuTani6 = item.getShuruiShikyuTani().get(NOCOUNT_6);
-                }
-            }
-        }
-        source.serviceRyui = item.getServiceRyui();
-        if (!item.getKyufuseigenNaiyo().isEmpty()) {
-            for (int i = 1; i <= item.getKyufuseigenNaiyo().size(); i++) {
-                if (i == 1) {
-                    source.kyufuseigenNaiyo1 = item.getKyufuseigenNaiyo().get(0);
-                }
-                if (i == NOCOUNT_2) {
-                    source.kyufuseigenNaiyo2 = item.getKyufuseigenNaiyo().get(1);
-                }
-                if (i == NOCOUNT_3) {
-                    source.kyufuseigenNaiyo3 = item.getKyufuseigenNaiyo().get(2);
-                }
-            }
-        }
-        bodyEdit3(source);
-        return source;
-    }
-
-    private ShikakushashoReportSource bodyEdit3(ShikakushashoReportSource source) {
-        if (!item.getKyufuseigenKaishiYMD().isEmpty()) {
-            for (int i = 1; i <= item.getKyufuseigenKaishiYMD().size(); i++) {
-                if (i == 1) {
-                    source.kyufuseigenKaishiYMD1 = item.getKyufuseigenKaishiYMD().get(0);
-                }
-                if (i == NOCOUNT_2) {
-                    source.kyufuseigenKaishiYMD2 = item.getKyufuseigenKaishiYMD().get(1);
-                }
-                if (i == NOCOUNT_3) {
-                    source.kyufuseigenKaishiYMD3 = item.getKyufuseigenKaishiYMD().get(2);
-                }
-            }
-        }
-        if (!item.getKyufuseigenShuryoYMD().isEmpty()) {
-            for (int i = 1; i <= item.getKyufuseigenShuryoYMD().size(); i++) {
-                if (i == 1) {
-                    source.kyufuseigenShuryoYMD1 = item.getKyufuseigenShuryoYMD().get(0);
-                }
-                if (i == NOCOUNT_2) {
-                    source.kyufuseigenShuryoYMD2 = item.getKyufuseigenShuryoYMD().get(1);
-                }
-                if (i == NOCOUNT_3) {
-                    source.kyufuseigenShuryoYMD3 = item.getKyufuseigenShuryoYMD().get(2);
-                }
-            }
-        }
         source.keikakuJigyoshaName1 = item.getKeikakuJigyoshaName1();
         source.keikakuTodokedeYMD1 = item.getKeikakuTodokedeYMD1();
         source.keikakuJigyoshaName2 = item.getKeikakuJigyoshaName2();
@@ -201,46 +150,27 @@ public class ShikakushashoBodyEditor implements IShikakushashoEditor {
         source.keikakuTodokedeYMD3 = item.getKeikakuTodokedeYMD3();
         source.keikakuTodokedeYMD3Asutarisuku = item.getKeikakuTodokedeYMD3Asutarisuku();
         source.keikakuTodokedeYMD3Masshosen = item.getKeikakuTodokedeYMD3Masshosen();
-        source.nyushoShisetsuShurui1 = item.getNyushoShisetsuShurui();
-        if (!item.getNyushoShisetsuName().isEmpty()) {
-            for (int i = 1; i <= item.getNyushoShisetsuName().size(); i++) {
+        if (!item.getNyushoShisetsuEntity().isEmpty()) {
+            List<NyushoShisetsuDataEntity> entityList = item.getNyushoShisetsuEntity();
+            for (int i = 1; i <= entityList.size(); i++) {
                 if (i == 1) {
-                    source.nyushoShisetsuName1 = item.getNyushoShisetsuName().get(0);
+                    source.nyushoShisetsuShurui1 = entityList.get(0).getNyushoShisetsuShurui();
+                    source.nyushoShisetsuName1 = entityList.get(0).getNyushoShisetsuName();
+                    source.shisetsuNyushoYMD1 = entityList.get(0).getShisetsuNyushoYMD();
+                    source.shisetsuTaishoYMD1 = entityList.get(0).getShisetsuTaishoYMD();
                 }
                 if (i == NOCOUNT_2) {
-                    source.nyushoShisetsuName2 = item.getNyushoShisetsuName().get(1);
+                    source.nyushoShisetsuShurui2 = entityList.get(1).getNyushoShisetsuShurui();
+                    source.nyushoShisetsuName2 = entityList.get(1).getNyushoShisetsuName();
+                    source.shisetsuNyushoYMD2 = entityList.get(1).getShisetsuNyushoYMD();
+                    source.shisetsuTaishoYMD2 = entityList.get(1).getShisetsuTaishoYMD();
                 }
             }
         }
         source.shisetsuNyusho1 = item.getShisetsuNyusho();
         source.shisetsuNyuin1 = item.getShisetsuNyuin();
-        if (!item.getShisetsuNyushoYMD().isEmpty()) {
-            for (int i = 1; i <= item.getShisetsuNyushoYMD().size(); i++) {
-                if (i == 1) {
-                    source.shisetsuNyushoYMD1 = item.getShisetsuNyushoYMD().get(0);
-                }
-                if (i == NOCOUNT_2) {
-                    source.shisetsuNyushoYMD2 = item.getShisetsuNyushoYMD().get(1);
-                }
-            }
-        }
-        bodyEdit4(source);
-        return source;
-    }
-
-    private ShikakushashoReportSource bodyEdit4(ShikakushashoReportSource source) {
         source.shisetsuTaisho1 = item.getShisetsuTaisho();
         source.shisetsuTaiin1 = item.getShisetsuTaiin();
-        if (!item.getShisetsuTaishoYMD().isEmpty()) {
-            for (int i = 1; i <= item.getShisetsuTaishoYMD().size(); i++) {
-                if (i == 1) {
-                    source.shisetsuTaishoYMD1 = item.getShisetsuTaishoYMD().get(0);
-                }
-                if (i == NOCOUNT_2) {
-                    source.shisetsuTaishoYMD2 = item.getShisetsuTaishoYMD().get(1);
-                }
-            }
-        }
         source.nyushoShisetsuShurui2 = item.getNyushoShisetsuShurui();
         source.shisetsuNyusho2 = item.getShisetsuNyusho();
         source.shisetsuNyuin2 = item.getShisetsuNyuin();
