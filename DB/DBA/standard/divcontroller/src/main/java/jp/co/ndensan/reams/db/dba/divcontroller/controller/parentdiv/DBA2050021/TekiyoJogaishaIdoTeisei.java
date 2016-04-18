@@ -50,7 +50,6 @@ public class TekiyoJogaishaIdoTeisei {
      * @return レスポンス
      */
     public ResponseData onLoad(TekiyoJogaishaIdoTeiseiDiv div) {
-        ViewStateHolder.put(ViewStateKeys.該当者検索_識別コード, new ShikibetsuCode("000000000022505"));
         ShikibetsuCode 識別コード = ViewStateHolder.get(ViewStateKeys.該当者検索_識別コード, ShikibetsuCode.class);
         new TekiyoJogaishaIdoTeiseiHandler(div).initLoad(識別コード);
         if (!RealInitialLocker.tryGetLock(前排他ロックキー)) {
@@ -91,7 +90,6 @@ public class TekiyoJogaishaIdoTeisei {
         if (new RString(UrQuestionMessages.処理実行の確認.getMessage().getCode())
                 .equals(ResponseHolder.getMessageCode())
                 && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
-//            ViewStateHolder.put(ViewStateKeys.該当者検索_識別コード, new ShikibetsuCode("000000000022505"));
             ShikibetsuCode 識別コード = ViewStateHolder.get(ViewStateKeys.該当者検索_識別コード, ShikibetsuCode.class);
             div.getTekiyoJogaiJohoIchiran().getCcdTekiyoJogaiRireki().saveTekiyoJogaisha(識別コード);
             div.getTekiyoJogaiJohoIchiran().getShisetsuHenkoJohoInput().getCcdShisetsuNyutaishoRirekiKanri().saveShisetsuNyutaisho();
