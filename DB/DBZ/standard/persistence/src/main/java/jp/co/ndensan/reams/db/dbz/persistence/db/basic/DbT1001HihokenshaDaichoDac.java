@@ -53,6 +53,7 @@ public class DbT1001HihokenshaDaichoDac implements ISaveable<DbT1001HihokenshaDa
 
     private static final RString メッセージ_識別コード = new RString("識別コード");
     private static final RString メッセージ_被保険者番号 = new RString("被保険者番号");
+    private static final RString メッセージ_異動日 = new RString("異動日");
     @InjectSession
     private SqlSession session;
 
@@ -564,6 +565,27 @@ public class DbT1001HihokenshaDaichoDac implements ISaveable<DbT1001HihokenshaDa
         return accessor.select().
                 table(DbT1001HihokenshaDaicho.class).
                 where((eq(hihokenshaNo, 被保険者番号))).order(by(idoYMD, Order.DESC), by(edaNo, Order.DESC)).
+                limit(1).
+                toObject(DbT1001HihokenshaDaichoEntity.class);
+    }
+
+    /**
+     * 異動日を指定し、該当する被保険者台帳情報のなかから最新の1件を取得します。
+     *
+     * @param 異動日 異動日
+     * @return 該当する被保険者台帳情報から最新1件
+     */
+    @Transaction
+    public DbT1001HihokenshaDaichoEntity selectBy異動日(FlexibleDate 異動日) {
+        requireNonNull(異動日, UrSystemErrorMessages.値がnull.getReplacedMessage(メッセージ_異動日.toString()));
+
+        DbAccessorNormalType accessor = new DbAccessorNormalType(session);
+
+        return accessor.select().
+                table(DbT1001HihokenshaDaicho.class).
+                where(
+                        leq(idoYMD, 異動日)).
+                order(new OrderBy(idoYMD, Order.DESC, NullsOrder.LAST)).
                 limit(1).
                 toObject(DbT1001HihokenshaDaichoEntity.class);
     }
