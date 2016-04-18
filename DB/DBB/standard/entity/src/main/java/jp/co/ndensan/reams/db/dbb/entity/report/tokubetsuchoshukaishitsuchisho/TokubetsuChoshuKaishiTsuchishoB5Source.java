@@ -3,7 +3,6 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package jp.co.ndensan.reams.db.dbb.entity.report.tokubetsuchoshukaishitsuchisho;
 
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -12,6 +11,8 @@ import jp.co.ndensan.reams.uz.uza.report.source.ReportItem;
 
 /**
  * 特別徴収開始通知書（本算定） B5横タイプ帳票Source
+ *
+ * @reamsid_L DBB-0780-070 xuhao
  */
 public class TokubetsuChoshuKaishiTsuchishoB5Source implements IReportSource {
 // <editor-fold defaultstate="collapsed" desc="Generated Code">

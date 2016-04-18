@@ -12,6 +12,8 @@ import jp.co.ndensan.reams.uz.uza.report.source.ReportItem;
 /**
  * 特別徴収開始通知書（本算定） シーラタイプ（連帳）帳票Source
  *
+ * @reamsid_L DBB-0780-070 xuhao
+ *
  */
 public class TokubetsuChoshuKaishiTsuchishoSealerRenchoSource implements IReportSource {
 // <editor-fold defaultstate="collapsed" desc="Generated Code">

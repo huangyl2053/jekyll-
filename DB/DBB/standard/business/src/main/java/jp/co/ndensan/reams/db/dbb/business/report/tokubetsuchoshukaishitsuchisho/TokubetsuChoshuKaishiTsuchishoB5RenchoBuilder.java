@@ -10,6 +10,8 @@ import jp.co.ndensan.reams.uz.uza.report.ReportEditorJoiner;
 
 /**
  * 特別徴収開始通知書（本算定） B5横タイプ（連帳）帳票Builder
+ *
+ * @reamsid_L DBB-0780-070 xuhao
  */
 public class TokubetsuChoshuKaishiTsuchishoB5RenchoBuilder implements
         ITokubetsuChoshuKaishiTsuchishoB5RenchoBuilder {

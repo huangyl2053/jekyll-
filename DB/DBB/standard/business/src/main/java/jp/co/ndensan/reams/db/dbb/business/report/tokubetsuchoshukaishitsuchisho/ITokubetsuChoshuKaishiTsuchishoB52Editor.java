@@ -10,6 +10,8 @@ import jp.co.ndensan.reams.uz.uza.report.IReportEditor;
 
 /**
  * 特別徴収開始通知書（本算定） B5横タイプ2帳票IEditor
+ *
+ * @reamsid_L DBB-0780-070 xuhao
  */
 public interface ITokubetsuChoshuKaishiTsuchishoB52Editor extends
         IReportEditor<TokubetsuChoshuKaishiTsuchishoB52Source> {

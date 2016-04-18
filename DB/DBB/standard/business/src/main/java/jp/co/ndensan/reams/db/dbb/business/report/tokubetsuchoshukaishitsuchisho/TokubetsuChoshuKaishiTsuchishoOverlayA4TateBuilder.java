@@ -10,6 +10,8 @@ import jp.co.ndensan.reams.uz.uza.report.ReportEditorJoiner;
 
 /**
  * 特別徴収開始通知書（本算定） A4縦・オーバレイタイプ帳票Builder
+ *
+ * @reamsid_L DBB-0780-070 xuhao
  */
 public class TokubetsuChoshuKaishiTsuchishoOverlayA4TateBuilder implements ITokubetsuChoshuKaishiTsuchishoOverlayA4TateBuilder {
 
