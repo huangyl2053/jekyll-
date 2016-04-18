@@ -20,8 +20,15 @@ import jp.co.ndensan.reams.uz.uza.util.db.annotation.TempTableColumnOrder;
 public class DbT0705ChoteiKyotsuTempTableEntity extends DbTableEntityBase<DbT0705ChoteiKyotsuTempTableEntity> implements IDbAccessable {
 // <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.4.2">
 
+    /**
+     * 調定共通（一時テーブル）
+     */
     @TableName
-    public static final RString TABLE_NAME = new RString("DbT0705ChoteiKyotsuTemp");
+    public static final RString TABLE_NAME;
+
+    static {
+        TABLE_NAME = new RString("DbT0705ChoteiKyotsuTemp");
+    }
 
     @TempTableColumnOrder(1)
     private long choteiId;

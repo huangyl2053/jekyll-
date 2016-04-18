@@ -362,40 +362,21 @@ public class TekiyoJogaiRirekiDiv extends Panel implements ITekiyoJogaiRirekiDiv
         return new TekiyoJogaiRirekiHandler(this);
     }
 
-    /* 状態の設定します。
-     *
-     * @param mode mode
-     */
     @Override
     public void set状態(RString mode) {
         setMode_DisplayMode(TekiyoJogaiRirekiDiv.DisplayMode.getEnum(mode.toString()));
     }
 
-    /**
-     * 適用除外者管理に初期化を設定します。
-     *
-     * @param 識別コード 識別コード
-     */
     @Override
     public void initialize(ShikibetsuCode 識別コード) {
         getHandler().initialize(識別コード);
     }
 
-    /**
-     * 適用除外者管理の共有子DIVの画面内容から、適用除外者情報をDBに反映します。
-     *
-     * @param 識別コード 識別コード
-     */
     @Override
     public void saveTekiyoJogaisha(ShikibetsuCode 識別コード) {
         getHandler().saveTekiyoJogaisha(識別コード);
     }
 
-    /**
-     * 適用情報一覧を取得します。
-     *
-     * @return 適用情報一覧 適用情報一覧
-     */
     @Override
     public List<datagridTekiyoJogai_Row> get適用情報一覧() {
         return getHandler().get適用情報一覧();

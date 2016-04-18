@@ -48,7 +48,6 @@ public class ShikakuSoshitsuIdoTotal {
      * @return レスポンス
      */
     public ResponseData<ShikakuSoshitsuIdoTotalDiv> onLoad(ShikakuSoshitsuIdoTotalDiv div) {
-        ResponseData<ShikakuSoshitsuIdoTotalDiv> response = new ResponseData<>();
         createHandler(div).load();
         if (!RealInitialLocker.tryGetLock(前排他ロックキー)) {
             div.setReadOnly(true);
@@ -58,8 +57,7 @@ public class ShikakuSoshitsuIdoTotal {
         } else {
             RealInitialLocker.lock(前排他ロックキー);
         }
-        response.data = div;
-        return response;
+        return ResponseData.of(div).respond();
     }
 
     /**
@@ -132,19 +130,6 @@ public class ShikakuSoshitsuIdoTotal {
         return ResponseData.of(div).forwardWithEventName(DBA1030011TransitionEventName.再検索).respond();
     }
 
-//    /**
-//     * 「資格得喪履歴を追加する」ボタン処理します。
-//     *
-//     * @param div ShikakuSoshitsuIdoTotalDiv
-//     * @return レスポンス
-//     */
-//    public ResponseData<ShikakuSoshitsuIdoTotalDiv> onClick_btnAdd(ShikakuSoshitsuIdoTotalDiv div) {
-//        ResponseData<ShikakuSoshitsuIdoTotalDiv> response = new ResponseData<>();
-//        div.getShikakuSoshitsuJoho().getShikakuTokusoRirekiMain().getCcdShikakuTokusoRireki().set追加するボタン(true);
-//        div.getShikakuSoshitsuJoho().getShikakuTokusoRirekiMain().getShikakuSoshitsuInput().setDisabled(false);
-//        response.data = div;
-//        return response;
-//    }
     /**
      * 「資格得喪履歴を修正する」ボタン処理します。
      *
@@ -208,31 +193,6 @@ public class ShikakuSoshitsuIdoTotal {
         return response;
     }
 
-//    /**
-//     * 「資格得喪履歴を削除する」ボタン処理します。
-//     *
-//     * @param div ShikakuSoshitsuIdoTotalDiv
-//     * @return レスポンス
-//     */
-//    public ResponseData<ShikakuSoshitsuIdoTotalDiv> onClick_btnDelete(ShikakuSoshitsuIdoTotalDiv div) {
-//        ResponseData<ShikakuSoshitsuIdoTotalDiv> response = new ResponseData<>();
-//        div.getShikakuSoshitsuJoho().getShikakuTokusoRirekiMain().getCcdShikakuTokusoRireki().set追加するボタン(false);
-//        response.data = div;
-//        return response;
-//    }
-//    /**
-//     * 資格得喪履歴グリッドの枝番の昇順処理です。
-//     *
-//     */
-//    public class ComparatorByDaNoSort implements Comparator {
-//
-//        @Override
-//        public int compare(Object arg0, Object arg1) {
-//            dgShikakuShutokuRireki_Row row0 = (dgShikakuShutokuRireki_Row) arg0;
-//            dgShikakuShutokuRireki_Row row1 = (dgShikakuShutokuRireki_Row) arg1;
-//            return row0.getDaNo().compareTo(row1.getDaNo());
-//        }
-//    }
     private enum ShikakuSoshitsuIdoErrorMessage implements IValidationMessage {
 
         排他_他のユーザが使用中(UrErrorMessages.排他_他のユーザが使用中);

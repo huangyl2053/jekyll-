@@ -5,6 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dba.divcontroller.controller.parentdiv.DBA1010011;
 
+import java.io.Serializable;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
@@ -197,7 +198,8 @@ public class ShikakuShutokuIdoTotal {
         ResponseData<ShikakuShutokuIdoTotalDiv> response = new ResponseData<>();
 
         dgShikakuShutokuRireki_Row row = div.getShikakuShutokuJoho().getShikakuTokusoRirekiMain().getCcdShikakuTokusoRireki().getDataGridSelectItem();
-        List<dgShikakuShutokuRireki_Row> rowList = div.getShikakuShutokuJoho().getShikakuTokusoRirekiMain().getCcdShikakuTokusoRireki().getDataGridDataSource();
+        List<dgShikakuShutokuRireki_Row> rowList = div.getShikakuShutokuJoho().getShikakuTokusoRirekiMain()
+                .getCcdShikakuTokusoRireki().getDataGridDataSource();
         Collections.sort(rowList, new ShikakuShutokuIdoTotal.ComparatorByDaNoSort());
         RString daNo = new RString("1");
         if (!rowList.isEmpty()) {
@@ -263,9 +265,8 @@ public class ShikakuShutokuIdoTotal {
 
     /**
      * 資格得喪履歴グリッドの枝番の昇順処理です。
-     *
      */
-    public static class ComparatorByDaNoSort implements Comparator {
+    public static class ComparatorByDaNoSort implements Comparator, Serializable {
 
         @Override
         public int compare(Object arg0, Object arg1) {
