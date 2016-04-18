@@ -193,6 +193,22 @@ public class HihokenshaDaichoManager {
     }
 
     /**
+     * 異動日に該当する最新の被保険者台帳を取得します。
+     *
+     * @param 異動日 異動日
+     * @return 該当する被保険者台帳情報の内、最新の1件
+     */
+    public HihokenshaDaicho find最新被保険者台帳(FlexibleDate 異動日) {
+        requireNonNull(異動日, UrSystemErrorMessages.値がnull.getReplacedMessage("異動日"));
+        DbT1001HihokenshaDaichoEntity entity = dac.selectBy異動日(異動日);
+        if (entity == null) {
+            return null;
+        }
+        entity.initializeMd5();
+        return new HihokenshaDaicho(entity);
+    }
+
+    /**
      * 被保険者台帳管理{@link HihokenshaDaicho}を保存します。
      *
      * @param 被保険者台帳管理 {@link HihokenshaDaicho}
