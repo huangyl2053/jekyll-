@@ -567,4 +567,17 @@ public class ShokanShinsei extends ModelBase<ShokanShinseiIdentifier, DbT3034Sho
     public JigyoshaNo get理由書作成事業者番号() {
         return entity.getRiyushoSakuseiJigyoshaNo();
     }
+
+    /**
+     * 償還払支給申請のみを変更対象とします。<br/> {@link DbT3034ShokanShinseiEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば変更状態にします。
+     *
+     * @return 変更対象処理実施後の{@link ShokanShinsei}
+     */
+    public ShokanShinsei modifiedModel() {
+        DbT3034ShokanShinseiEntity modifiedEntity = this.toEntity();
+        if (!modifiedEntity.getState().equals(EntityDataState.Added)) {
+            modifiedEntity.setState(EntityDataState.Modified);
+        }
+        return new ShokanShinsei(modifiedEntity, id);
+    }
 }
