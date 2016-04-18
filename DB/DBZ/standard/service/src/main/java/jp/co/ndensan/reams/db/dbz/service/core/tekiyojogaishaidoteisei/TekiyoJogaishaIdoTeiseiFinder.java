@@ -6,8 +6,8 @@
 package jp.co.ndensan.reams.db.dbz.service.core.tekiyojogaishaidoteisei;
 
 import java.util.List;
+import jp.co.ndensan.reams.db.dbz.business.core.tekiyojogaishaidoteisei.TekiyoJogaishaIdoTeiseiBusiness;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT1004ShisetsuNyutaishoEntity;
-import jp.co.ndensan.reams.db.dbz.entity.information.InformationEntity;
 import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT1004ShisetsuNyutaishoDac;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -28,9 +28,9 @@ public class TekiyoJogaishaIdoTeiseiFinder {
      * @param informationEntityLst 適用除外情報リスト
      * @return 結果フラグ
      */
-    public boolean checkTekiyoJogaiKikanByTeiseiMode(List<InformationEntity> informationEntityLst) {
+    public boolean checkTekiyoJogaiKikanByTeiseiMode(List<TekiyoJogaishaIdoTeiseiBusiness> informationEntityLst) {
         DbT1004ShisetsuNyutaishoDac dbT1004ShisetsuNyutaishoDac = InstanceProvider.create(DbT1004ShisetsuNyutaishoDac.class);
-        for (InformationEntity informationEntity : informationEntityLst) {
+        for (TekiyoJogaishaIdoTeiseiBusiness informationEntity : informationEntityLst) {
             if (DELETE.equals(informationEntity.get状態())) {
                 continue;
             }
@@ -46,10 +46,10 @@ public class TekiyoJogaishaIdoTeiseiFinder {
         return true;
     }
 
-    private int getCount(List<InformationEntity> informationEntityLst, List<DbT1004ShisetsuNyutaishoEntity> dbT1004EntityLst) {
+    private int getCount(List<TekiyoJogaishaIdoTeiseiBusiness> informationEntityLst, List<DbT1004ShisetsuNyutaishoEntity> dbT1004EntityLst) {
         int count = 0;
         for (DbT1004ShisetsuNyutaishoEntity dbT1004Entity : dbT1004EntityLst) {
-            for (InformationEntity infEntity : informationEntityLst) {
+            for (TekiyoJogaishaIdoTeiseiBusiness infEntity : informationEntityLst) {
                 if (DELETE.equals(infEntity.get状態())) {
                     continue;
                 }
