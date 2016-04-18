@@ -18,16 +18,30 @@ import jp.co.ndensan.reams.db.dbb.service.core.fukaerror.FukaErrorListService;
 import jp.co.ndensan.reams.db.dbz.definition.core.ViewStateKeys;
 import jp.co.ndensan.reams.ur.urz.business.core.internalreportoutput.IInternalReport;
 import jp.co.ndensan.reams.ur.urz.business.core.internalreportoutput.IInternalReportCommon;
-import jp.co.ndensan.reams.ur.urz.business.core.internalreportoutput.IInternalReportCsvConverter;
 import jp.co.ndensan.reams.ur.urz.business.core.internalreportoutput.InternalReportCommon;
-import jp.co.ndensan.reams.ur.urz.business.core.internalreportoutput.InternalReportConverterFactory;
 import jp.co.ndensan.reams.ur.urz.business.core.internalreportoutput.InternalReportShoriKubun;
 import jp.co.ndensan.reams.ur.urz.divcontroller.entity.commonchilddiv.InternalReportKihon.IInternalReportKihonDiv;
 import jp.co.ndensan.reams.ur.urz.service.core.internalreportoutput.InternalReportServiceFactory;
+import jp.co.ndensan.reams.uz.uza.biz.GyomuCode;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
+import jp.co.ndensan.reams.uz.uza.cooperation.FilesystemName;
+import jp.co.ndensan.reams.uz.uza.cooperation.FilesystemPath;
+import jp.co.ndensan.reams.uz.uza.cooperation.SharedFile;
+import jp.co.ndensan.reams.uz.uza.cooperation.SharedFileDirectAccessDescriptor;
+import jp.co.ndensan.reams.uz.uza.cooperation.SharedFileDirectAccessDownload;
+import jp.co.ndensan.reams.uz.uza.cooperation.descriptor.CopyToSharedFileOpts;
+import jp.co.ndensan.reams.uz.uza.cooperation.descriptor.SharedFileDescriptor;
+import jp.co.ndensan.reams.uz.uza.cooperation.descriptor.SharedFileEntryDescriptor;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
+import jp.co.ndensan.reams.uz.uza.io.Encode;
+import jp.co.ndensan.reams.uz.uza.io.NewLine;
+import jp.co.ndensan.reams.uz.uza.io.Path;
+import jp.co.ndensan.reams.uz.uza.io.csv.CsvWriter;
 import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
+import jp.co.ndensan.reams.uz.uza.lang.RTime;
+import jp.co.ndensan.reams.uz.uza.lang.Separator;
 import jp.co.ndensan.reams.uz.uza.message.IValidationMessage;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.IDownLoadServletResponse;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPair;
@@ -40,12 +54,15 @@ import jp.co.ndensan.reams.uz.uza.workflow.parameter.FlowParameterAccessor;
  *
  * @reamsid_L DBB-0720-010 zuotao
  */
-@SuppressWarnings("checkstyle:illegaltoken")
 public class FukaErrorReportView {
 
     private static final RString BATCHID_FUKAERROR = new RString("FukaErrorBatchId");
     private static final RString REPORTID_FUKAERROR = new RString("DBB400001_FukaErrorIchiran");
     private static final RString BATCHSTARTINGDATETIME = new RString("FukaErrorBatchStartingDateTime");
+    private static final RString CSV_WRITER_DELIMITER = new RString(",");
+    private static final RString CSV_WRITER_LINE = new RString("_");
+    private static final RString CSV = new RString(".csv");
+    private static final int TWO = 2;
 
     /**
      * 画面初期化処理です。
@@ -100,19 +117,31 @@ public class FukaErrorReportView {
      * @return ダウンロードするCsvファイルの、ファイル名とByteデータを持つReponseData
      */
     public IDownLoadServletResponse onClick_btnCsvDownload(FukaErrorReportViewDiv div, IDownLoadServletResponse response) {
-        IInternalReportKihonDiv kihonDiv = div.getCcdFukaErrorCommon();
-        IInternalReportCommon reportCommon = kihonDiv.getInternalReportCommon();
+        IInternalReportCommon reportCommon = div.getCcdFukaErrorCommon().getInternalReportCommon();
         FukaErrorListCsvItemList reportItem = createHandler(div).toFukaErrorReportItemList();
         IInternalReport internalReport = new FukaErrorListCsvReport(reportCommon, reportItem);
-        IInternalReportCsvConverter converter = InternalReportConverterFactory.createCsvConvertor();
-        List<Byte> csvByteData = converter.convertCsvByteData(internalReport);
-        byte[] bytes = new byte[csvByteData.size()];
-        for (int i = 0; i < csvByteData.size(); i++) {
-            bytes[i] = csvByteData.get(i);
+        RDateTime dateTime = internalReport.get内部帳票作成日時();
+        RString dateString = dateTime.getDate().seireki().separator(Separator.HYPHEN).toDateString();
+        RString timeString = createTimeString(dateTime.getTime());
+        RStringBuilder fileName = new RStringBuilder();
+        fileName.append(internalReport.get内部帳票名());
+        fileName.append(CSV_WRITER_LINE).append(dateString);
+        fileName.append(CSV_WRITER_LINE).append(timeString);
+        fileName.append(CSV);
+        RString filePath = Path.combinePath(Path.getTmpDirectoryPath(), fileName.toRString());
+        try (CsvWriter<FukaErrorListCsvItem> csvWriter
+                = new CsvWriter.InstanceBuilder(filePath).canAppend(false).setDelimiter(CSV_WRITER_DELIMITER).setEncode(Encode.SJIS).
+                setEnclosure(RString.EMPTY).setNewLine(NewLine.CRLF).hasHeader(false).build()) {
+            for (FukaErrorListCsvItem item : reportItem) {
+                csvWriter.writeLine(item);
+            }
+            csvWriter.close();
         }
-        response.writeData(bytes);
-        response.setFileName(converter.getFileName(internalReport));
-        return response;
+        SharedFileDescriptor sfd = new SharedFileDescriptor(GyomuCode.DB介護保険, FilesystemName.fromString(fileName.toRString()));
+        sfd = SharedFile.defineSharedFile(sfd);
+        CopyToSharedFileOpts opts = new CopyToSharedFileOpts().isCompressedArchive(false);
+        SharedFileEntryDescriptor entry = SharedFile.copyToSharedFile(sfd, new FilesystemPath(filePath), opts);
+        return SharedFileDirectAccessDownload.directAccessDownload(new SharedFileDirectAccessDescriptor(entry, fileName.toRString()), response);
     }
 
     /**
@@ -197,5 +226,16 @@ public class FukaErrorReportView {
 
     private FukaErrorReportViewHandler createHandler(FukaErrorReportViewDiv div) {
         return new FukaErrorReportViewHandler(div);
+    }
+
+    private static RString createTimeString(RTime time) {
+        RString hour = new RString(Integer.toString(time.getHour()));
+        RString minute = new RString(Integer.toString(time.getMinute()));
+        RString second = new RString(Integer.toString(time.getSecond()));
+
+        RStringBuilder builder = new RStringBuilder(hour.padZeroToLeft(TWO));
+        builder.append("-").append(minute.padZeroToLeft(TWO))
+                .append("-").append(second.padZeroToLeft(TWO));
+        return builder.toRString();
     }
 }
