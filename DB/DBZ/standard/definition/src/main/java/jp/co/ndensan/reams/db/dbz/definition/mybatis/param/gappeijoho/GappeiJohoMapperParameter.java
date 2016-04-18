@@ -10,6 +10,8 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
  * 合併情報を特定するためのMyBatis用パラメータクラスです。
+ *
+ * @reamsid_L DBZ-9999-011 sunhaidi
  */
 @lombok.Getter
 @SuppressWarnings("PMD.UnusedPrivateField")
