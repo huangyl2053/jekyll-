@@ -37,11 +37,9 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
  */
 public class JutakuKaishuJizenShinseiToroku {
 
-    private static final RString 照会モード = new RString("照会");
     private static final RString 登録モード = new RString("登録");
     private static final RString 修正モード = new RString("修正");
     private static final RString 削除モード = new RString("削除");
-    private static final RString 取消モード = new RString("取消");
     private static final RString 非表示用フラグ_TRUE = new RString("true");
     private static final RString 要介護状態区分_KEY = new RString("threeUp");
     private static final RString 要介護状態区分_VALUE = new RString("要介護状態区分３段階変更による");
@@ -56,7 +54,6 @@ public class JutakuKaishuJizenShinseiToroku {
      */
     public ResponseData<JutakuKaishuJizenShinseiTorokuDiv> onLoad(JutakuKaishuJizenShinseiTorokuDiv div) {
 
-        // TODO 引継ぎデータは単体テスト不可
         HihokenshaNo 被保険者番号;
         ShikibetsuCode 識別コード;
         TaishoshaKey 引き継ぎデータEntity = ViewStateHolder.get(ViewStateKeys.資格対象者, TaishoshaKey.class);
@@ -67,28 +64,29 @@ public class JutakuKaishuJizenShinseiToroku {
             ViewStateHolder.put(ViewStateKeys.識別コード, 識別コード);
         }
 
-        // TODO
-        ViewStateHolder.put(ViewStateKeys.被保険者番号, new HihokenshaNo("800000008"));
-        ViewStateHolder.put(ViewStateKeys.識別コード, new ShikibetsuCode("000000000000010"));
-        ViewStateHolder.put(ViewStateKeys.整理番号, new RString("0000000001"));
-
+        // TODO ダミー値を設定する。
+//        ViewStateHolder.put(ViewStateKeys.被保険者番号, new HihokenshaNo("800000008"));
+//        ViewStateHolder.put(ViewStateKeys.識別コード, new ShikibetsuCode("000000000000010"));
+//        ViewStateHolder.put(ViewStateKeys.整理番号, new RString("0000000001"));
+//        ViewStateHolder.put(ViewStateKeys.サービス提供年月, new FlexibleYearMonth("199008"));
         被保険者番号 = ViewStateHolder.get(ViewStateKeys.被保険者番号, HihokenshaNo.class);
         識別コード = ViewStateHolder.get(ViewStateKeys.識別コード, ShikibetsuCode.class);
         div.getKaigoShikakuKihonShaPanel().getCcdKaigoAtenaInfo().onLoad(識別コード);
         div.getKaigoShikakuKihonShaPanel().getCcdKaigoShikakuKihon().onLoad(識別コード);
 
         // TODO 単体テスト
-        ViewStateHolder.put(ViewStateKeys.処理モード, 修正モード);
-
+//        ViewStateHolder.put(ViewStateKeys.処理モード, 修正モード);
         JutakuKaishuJizenShinseiTorokuDivHandler handler = getHandler(div);
         RString state = ViewStateHolder.get(ViewStateKeys.処理モード, RString.class);
-        if (!state.isNullOrEmpty()) {
+        if (state != null) {
             FlexibleYearMonth サービス提供年月 = ViewStateHolder.get(ViewStateKeys.サービス提供年月, FlexibleYearMonth.class);
             RString 整理番号 = ViewStateHolder.get(ViewStateKeys.整理番号, RString.class);
-            // TODO ダミー値を設定
-            handler.登録以外初期化(被保険者番号, new FlexibleYearMonth("199008"), new RString("0000000001"));
+            handler.登録以外初期化(被保険者番号, サービス提供年月, 整理番号);
+        } else {
+            state = 登録モード;
+            ViewStateHolder.put(ViewStateKeys.処理モード, 登録モード);
         }
-//        handler.項目表示制御処理(state);
+        handler.項目表示制御処理(state);
         return ResponseData.of(div).respond();
     }
 
@@ -231,6 +229,9 @@ public class JutakuKaishuJizenShinseiToroku {
                 div.getKaigoShikakuKihonShaPanel().getTabShinseiContents()
                         .getTabJutakuKaisyuJyoho().getTotalPanel().getChkResetInfo().getSelectedItems().add(要介護状態区分);
                 div.setHidSandannkaiMsgFlg(非表示用フラグ_TRUE);
+            } else {
+                div.setHidSandannkaiMsgFlg(RString.EMPTY);
+                return ResponseData.of(div).respond();
             }
         } else if (!非表示用フラグ_TRUE.equals(div.getHidDataChangeFlg()) && !handler.要介護状態３段階変更の有効性チェック(hihokenshaNo)
                 && selectedItems.contains(要介護状態区分)) {
@@ -247,11 +248,12 @@ public class JutakuKaishuJizenShinseiToroku {
                 div.getKaigoShikakuKihonShaPanel().getTabShinseiContents()
                         .getTabJutakuKaisyuJyoho().getTotalPanel().getChkResetInfo().setDataSource(selectedItems);
                 div.setHidSandannkaiMsgFlg(非表示用フラグ_TRUE);
+            } else {
+                div.setHidSandannkaiMsgFlg(RString.EMPTY);
+                return ResponseData.of(div).respond();
             }
         }
-
         限度額リセットチェック(div, hihokenshaNo);
-
         boolean 限度額のチェック結果 = handler.限度額チェック(hihokenshaNo, seiriNo);
         if (!限度額のチェック結果) {
             if (!非表示用フラグ_TRUE.equals(div.getHidLimitNGMsgDisplayedFlg())) {
@@ -267,6 +269,9 @@ public class JutakuKaishuJizenShinseiToroku {
                 selectedItems.remove(住宅住所変更);
                 div.getKaigoShikakuKihonShaPanel().getTabShinseiContents()
                         .getTabJutakuKaisyuJyoho().getTotalPanel().getChkResetInfo().setDataSource(selectedItems);
+            } else {
+                div.setHidLimitNGMsgDisplayedFlg(RString.EMPTY);
+                return ResponseData.of(div).respond();
             }
         }
 
@@ -281,7 +286,6 @@ public class JutakuKaishuJizenShinseiToroku {
         KeyValueDataSource 住宅住所変更 = new KeyValueDataSource(住宅住所変更_KEY, 住宅住所変更_VALUE);
         List<KeyValueDataSource> selectedItems = div.getKaigoShikakuKihonShaPanel().getTabShinseiContents()
                 .getTabJutakuKaisyuJyoho().getTotalPanel().getChkResetInfo().getSelectedItems();
-
         if (!非表示用フラグ_TRUE.equals(div.getHidLimitMsgNotNeedFlg())
                 && handler.改修住所変更による限度額リセットチェック(hihokenshaNo)
                 && !selectedItems.contains(住宅住所変更)) {
@@ -298,6 +302,8 @@ public class JutakuKaishuJizenShinseiToroku {
                 div.getKaigoShikakuKihonShaPanel().getTabShinseiContents()
                         .getTabJutakuKaisyuJyoho().getTotalPanel().getChkResetInfo().getSelectedItems().add(住宅住所変更);
                 div.setHidLimitMsgDisplayedFlg(非表示用フラグ_TRUE);
+            } else {
+                div.setHidLimitMsgDisplayedFlg(RString.EMPTY);
             }
         } else if (!非表示用フラグ_TRUE.equals(div.getHidLimitMsgNotNeedFlg())
                 && !handler.改修住所変更による限度額リセットチェック(hihokenshaNo)
@@ -316,6 +322,8 @@ public class JutakuKaishuJizenShinseiToroku {
                 div.getKaigoShikakuKihonShaPanel().getTabShinseiContents()
                         .getTabJutakuKaisyuJyoho().getTotalPanel().getChkResetInfo().setDataSource(selectedItems);
                 div.setHidLimitMsgNotNeedFlg(非表示用フラグ_TRUE);
+            } else {
+                div.setHidLimitMsgNotNeedFlg(RString.EMPTY);
             }
         }
         return null;
@@ -351,7 +359,7 @@ public class JutakuKaishuJizenShinseiToroku {
         }
 
         if (!非表示用フラグ_TRUE.equals(div.getHidDataChangeFlg())) {
-            throw new ApplicationException(DbzQuestionMessages.内容変更なし処理中止確認.getMessage().toString());
+            throw new ApplicationException(DbzQuestionMessages.内容変更なし処理中止確認.getMessage().evaluate().toString());
         }
 
         boolean 確認対象変更有無チェック結果 = handler.確認対象変更有無チェック();
