@@ -83,8 +83,8 @@ public class TekiyoJogaiRirekiValidationHandler {
                             div.getPanelTekiyoInput().getTxtTekiyoDate()));
                 } else {
                     if (最新の適用情報.getTekiyoDate() != null
-                            && (div.getPanelTekiyoInput().getTxtTekiyoDate().getValue().isBefore(
-                                    最新の適用情報.getTekiyoDate().getValue()))) {
+                            && (最新の適用情報.getTekiyoDate().getValue().isBeforeOrEquals(
+                                    div.getPanelTekiyoInput().getTxtTekiyoDate().getValue()))) {
                         validPairs.add(new ValidationMessageControlPair(
                                 RRVMessages.適用日と直近データの適用日の整合性チェック,
                                 div.getPanelTekiyoInput().getTxtTekiyoDate()));
