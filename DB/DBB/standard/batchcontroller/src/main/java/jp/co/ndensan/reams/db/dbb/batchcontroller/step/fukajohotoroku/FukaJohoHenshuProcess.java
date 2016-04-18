@@ -50,11 +50,6 @@ public class FukaJohoHenshuProcess extends BatchProcessBase<DbT2002FukaJohoTempT
     BatchEntityCreatedTempTableWriter dbT0705ChoteiKyotsuTemp;
 
     @Override
-    protected void beforeExecute() {
-        super.beforeExecute();
-    }
-
-    @Override
     protected IBatchReader createReader() {
         return new BatchDbReader(SELECTALL);
     }
@@ -65,10 +60,6 @@ public class FukaJohoHenshuProcess extends BatchProcessBase<DbT2002FukaJohoTempT
                 DbT0700ShunoKanriTempTableEntity.class);
         dbT0705ChoteiKyotsuTemp = new BatchEntityCreatedTempTableWriter(DbT0705ChoteiKyotsuTempTableEntity.TABLE_NAME,
                 DbT0705ChoteiKyotsuTempTableEntity.class);
-    }
-
-    @Override
-    protected void afterExecute() {
     }
 
     @Override

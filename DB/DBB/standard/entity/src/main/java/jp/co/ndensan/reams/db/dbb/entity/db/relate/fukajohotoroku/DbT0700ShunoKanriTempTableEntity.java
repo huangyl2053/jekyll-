@@ -22,9 +22,15 @@ import jp.co.ndensan.reams.uz.uza.util.db.annotation.TempTableColumnOrder;
 public class DbT0700ShunoKanriTempTableEntity extends DbTableEntityBase<DbT0700ShunoKanriTempTableEntity> implements IDbAccessable {
 // <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.4.2">
 
+    /**
+     * 収納管理（一時テーブル）
+     */
     @TableName
-    public static final RString TABLE_NAME = new RString("DbT0700ShunoKanriTemp");
+    public static final RString TABLE_NAME;
 
+    static {
+        TABLE_NAME = new RString("DbT0700ShunoKanriTemp");
+    }
     @TempTableColumnOrder(1)
     private long shunoId;
     @TempTableColumnOrder(2)
