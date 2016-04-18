@@ -85,6 +85,12 @@ public class NenpoYoushi3Handler {
     public void set保険給付支払状況詳細データ(List<JigyoHokokuTokeiData> 事業報告集計一覧データリスト) {
         for (JigyoHokokuTokeiData data : 事業報告集計一覧データリスト) {
             set支払状況詳細データ(data);
+            set支払状況詳細データ2(data);
+            set支払状況詳細データ3(data);
+            set支払状況詳細データ4(data);
+            set支払状況詳細データ5(data);
+            set支払状況詳細データ6(data);
+            set支払状況詳細データ7(data);
         }
     }
 
@@ -96,6 +102,12 @@ public class NenpoYoushi3Handler {
     public void set保険料収納状況詳細データ(List<JigyoHokokuTokeiData> 事業報告集計一覧データリスト) {
         for (JigyoHokokuTokeiData data : 事業報告集計一覧データリスト) {
             set収納状況詳細データ(data);
+            set収納状況詳細データ2(data);
+            set収納状況詳細データ3(data);
+            set収納状況詳細データ4(data);
+            set収納状況詳細データ5(data);
+            set収納状況詳細データ6(data);
+            set収納状況詳細データ7(data);
         }
     }
 
@@ -304,6 +316,9 @@ public class NenpoYoushi3Handler {
         if (縦番号_1.equals(data.get縦番号()) && 横番号_6.equals(data.get横番号())) {
             div.getShokuhikyojunofutannintei().getTxtgemmengaku1().setValue(data.get集計結果値());
         }
+    }
+
+    private void set収納状況詳細データ2(JigyoHokokuTokeiData data) {
         if (縦番号_2.equals(data.get縦番号()) && 横番号_1.equals(data.get横番号())) {
             div.getShokuhikyojunofutannintei().getTxtchotei2().setValue(data.get集計結果値());
         }
@@ -322,6 +337,9 @@ public class NenpoYoushi3Handler {
         if (縦番号_2.equals(data.get縦番号()) && 横番号_6.equals(data.get横番号())) {
             div.getShokuhikyojunofutannintei().getTxtgemmengaku2().setValue(data.get集計結果値());
         }
+    }
+
+    private void set収納状況詳細データ3(JigyoHokokuTokeiData data) {
         if (縦番号_3.equals(data.get縦番号()) && 横番号_1.equals(data.get横番号())) {
             div.getShokuhikyojunofutannintei().getTxtchotei3().setValue(data.get集計結果値());
         }
@@ -340,6 +358,9 @@ public class NenpoYoushi3Handler {
         if (縦番号_3.equals(data.get縦番号()) && 横番号_6.equals(data.get横番号())) {
             div.getShokuhikyojunofutannintei().getTxtgemmengaku3().setValue(data.get集計結果値());
         }
+    }
+
+    private void set収納状況詳細データ4(JigyoHokokuTokeiData data) {
         if (縦番号_4.equals(data.get縦番号()) && 横番号_1.equals(data.get横番号())) {
             div.getShokuhikyojunofutannintei().getTxtchotei4().setValue(data.get集計結果値());
         }
@@ -358,6 +379,9 @@ public class NenpoYoushi3Handler {
         if (縦番号_4.equals(data.get縦番号()) && 横番号_6.equals(data.get横番号())) {
             div.getShokuhikyojunofutannintei().getTxtgemmengaku4().setValue(data.get集計結果値());
         }
+    }
+
+    private void set収納状況詳細データ5(JigyoHokokuTokeiData data) {
         if (縦番号_5.equals(data.get縦番号()) && 横番号_1.equals(data.get横番号())) {
             div.getShokuhikyojunofutannintei().getTxtchotei5().setValue(data.get集計結果値());
         }
@@ -370,6 +394,9 @@ public class NenpoYoushi3Handler {
         if (縦番号_5.equals(data.get縦番号()) && 横番号_6.equals(data.get横番号())) {
             div.getShokuhikyojunofutannintei().getTxtgemmengaku5().setValue(data.get集計結果値());
         }
+    }
+
+    private void set収納状況詳細データ6(JigyoHokokuTokeiData data) {
         if (縦番号_6.equals(data.get縦番号()) && 横番号_1.equals(data.get横番号())) {
             div.getShokuhikyojunofutannintei().getTxtchotei6().setValue(data.get集計結果値());
         }
@@ -388,6 +415,9 @@ public class NenpoYoushi3Handler {
         if (縦番号_6.equals(data.get縦番号()) && 横番号_6.equals(data.get横番号())) {
             div.getShokuhikyojunofutannintei().getTxtgemmengaku6().setValue(data.get集計結果値());
         }
+    }
+
+    private void set収納状況詳細データ7(JigyoHokokuTokeiData data) {
         if (縦番号_7.equals(data.get縦番号()) && 横番号_1.equals(data.get横番号())) {
             div.getShokuhikyojunofutannintei().getTxtchotei7().setValue(data.get集計結果値());
         }
@@ -424,6 +454,8 @@ public class NenpoYoushi3Handler {
         if (縦番号_1.equals(data.get縦番号()) && 横番号_5.equals(data.get横番号())) {
             div.getShokuhikyojunofutannintei().getTxtlmishiharaigaku1().setValue(data.get集計結果値());
         }
+    }
+    private void set支払状況詳細データ2(JigyoHokokuTokeiData data) {
         if (縦番号_2.equals(data.get縦番号()) && 横番号_1.equals(data.get横番号())) {
             div.getShokuhikyojunofutannintei().getTxtShiharaigi2().setValue(data.get集計結果値());
         }
@@ -439,6 +471,8 @@ public class NenpoYoushi3Handler {
         if (縦番号_2.equals(data.get縦番号()) && 横番号_5.equals(data.get横番号())) {
             div.getShokuhikyojunofutannintei().getTxtlmishiharaigaku2().setValue(data.get集計結果値());
         }
+    }
+    private void set支払状況詳細データ3(JigyoHokokuTokeiData data) {
         if (縦番号_3.equals(data.get縦番号()) && 横番号_1.equals(data.get横番号())) {
             div.getShokuhikyojunofutannintei().getTxtShiharaigi3().setValue(data.get集計結果値());
         }
@@ -454,6 +488,9 @@ public class NenpoYoushi3Handler {
         if (縦番号_3.equals(data.get縦番号()) && 横番号_5.equals(data.get横番号())) {
             div.getShokuhikyojunofutannintei().getTxtlmishiharaigaku3().setValue(data.get集計結果値());
         }
+    }
+    
+    private void set支払状況詳細データ4(JigyoHokokuTokeiData data) {
         if (縦番号_4.equals(data.get縦番号()) && 横番号_1.equals(data.get横番号())) {
             div.getShokuhikyojunofutannintei().getTxtShiharaigi4().setValue(data.get集計結果値());
         }
@@ -463,12 +500,15 @@ public class NenpoYoushi3Handler {
         if (縦番号_4.equals(data.get縦番号()) && 横番号_3.equals(data.get横番号())) {
             div.getShokuhikyojunofutannintei().getTxtChoshu4().setValue(data.get集計結果値());
         }
-        if (縦番号_4.equals(data.get縦番号()) && 横番号_4.equals(data.get横番号())) {
+         if (縦番号_4.equals(data.get縦番号()) && 横番号_4.equals(data.get横番号())) {
             div.getShokuhikyojunofutannintei().getTxtReinyu4().setValue(data.get集計結果値());
         }
         if (縦番号_4.equals(data.get縦番号()) && 横番号_5.equals(data.get横番号())) {
             div.getShokuhikyojunofutannintei().getTxtlmishiharaigaku4().setValue(data.get集計結果値());
         }
+    }
+
+    private void set支払状況詳細データ5(JigyoHokokuTokeiData data) {       
         if (縦番号_5.equals(data.get縦番号()) && 横番号_1.equals(data.get横番号())) {
             div.getShokuhikyojunofutannintei().getTxtShiharaigi5().setValue(data.get集計結果値());
         }
@@ -484,6 +524,9 @@ public class NenpoYoushi3Handler {
         if (縦番号_5.equals(data.get縦番号()) && 横番号_5.equals(data.get横番号())) {
             div.getShokuhikyojunofutannintei().getTxtlmishiharaigaku5().setValue(data.get集計結果値());
         }
+    }
+    
+    private void set支払状況詳細データ6(JigyoHokokuTokeiData data) {  
         if (縦番号_6.equals(data.get縦番号()) && 横番号_1.equals(data.get横番号())) {
             div.getShokuhikyojunofutannintei().getTxtShiharaigi6().setValue(data.get集計結果値());
         }
@@ -499,6 +542,9 @@ public class NenpoYoushi3Handler {
         if (縦番号_6.equals(data.get縦番号()) && 横番号_5.equals(data.get横番号())) {
             div.getShokuhikyojunofutannintei().getTxtlmishiharaigaku6().setValue(data.get集計結果値());
         }
+    }
+    
+    private void set支払状況詳細データ7(JigyoHokokuTokeiData data) {       
         if (縦番号_7.equals(data.get縦番号()) && 横番号_1.equals(data.get横番号())) {
             div.getShokuhikyojunofutannintei().getTxtShiharaigi7().setValue(data.get集計結果値());
         }

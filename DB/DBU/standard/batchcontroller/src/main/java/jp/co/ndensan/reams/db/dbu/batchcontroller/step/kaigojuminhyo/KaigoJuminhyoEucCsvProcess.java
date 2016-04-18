@@ -78,18 +78,18 @@ public class KaigoJuminhyoEucCsvProcess extends BatchProcessBase<KaigoJuminhyoRe
         if (processParameter.getTaishoKaishiTimestamp() == null && processParameter.getTaishoShuryoTimestamp() == null) {
             shoriDateKanriMapper = getMapper(IDbT7022ShoriDateKanriMapper.class);
             shoriDateKanriEntity = shoriDateKanriMapper.getTaishoShuryoYMD();
-            if (RDate.getNowDateTime().isBefore(shoriDateKanriEntity.getTaishoShuryoTimestamp().getRDateTime())) {
+            //if (RDate.getNowDateTime().isBefore(shoriDateKanriEntity.getTaishoShuryoTimestamp().getRDateTime())) {
                 //TODO 技術点NO:31　バッチメッセージの出力　DBZErrorMessage．DBZE00006を返して、バッチ処理終了。
-            }
+            //}
             processParameter.setTaishoKaishiTimestamp(shoriDateKanriEntity.getTaishoShuryoTimestamp().getRDateTime());
             processParameter.setTaishoShuryoTimestamp(RDate.getNowDateTime());
         }
 
         rendoPatternMapper = getMapper(IDbT7035RendoPatternMapper.class);
         dbT7035RendoPatternEntity = rendoPatternMapper.getRendoPatternEntity(new FlexibleDate(RDate.getNowDate().toDateString()));
-        if (dbT7035RendoPatternEntity == null) {
+        //if (dbT7035RendoPatternEntity == null) {
             //TODO 技術点NO:31　バッチメッセージの出力 DbzErrorMessages.連携パターン取得エラー.getMessage();
-        }
+        //}
         rendoPatternEntity = new RendoPatternEntity();
         rendoPatternEntity.setSakiFormatVersion(dbT7035RendoPatternEntity.getSakiFormatVersion());
         rendoPatternEntity.setSakiEncodeKeitai(dbT7035RendoPatternEntity.getSakiEncodeKeitai());

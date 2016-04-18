@@ -80,10 +80,10 @@ public class JigyoHokokuNenpoHoseiHakoManager {
      * @param kyuShichosonCodeFinder
      */
     JigyoHokokuNenpoHoseiHakoManager(GappeiCityJohoBFinder gappeiCityJohoBFinder,
-                                     ShichosonSecurityJohoFinder shichosonSecurityJoho,
-                                     KoikiShichosonJohoFinder koikiShichosonJoho,
-                                     KyuShichosonCodeFinder kyuShichosonCodeFinder,
-                                     DbT7021JigyoHokokuTokeiDataDac dac) {
+            ShichosonSecurityJohoFinder shichosonSecurityJoho,
+            KoikiShichosonJohoFinder koikiShichosonJoho,
+            KyuShichosonCodeFinder kyuShichosonCodeFinder,
+            DbT7021JigyoHokokuTokeiDataDac dac) {
         this.gappeiCityJohoBFinder = gappeiCityJohoBFinder;
         this.shichosonSecurityJoho = shichosonSecurityJoho;
         this.koikiShichosonJoho = koikiShichosonJoho;
@@ -95,7 +95,8 @@ public class JigyoHokokuNenpoHoseiHakoManager {
     /**
      * {@link InstanceProvider#create}にて生成した{@link JigyoHokokuNenpoHoseiHakoManager}のインスタンスを返します。
      *
-     * @return {@link InstanceProvider#create}にて生成した{@link JigyoHokokuNenpoHoseiHakoManager}のインスタンス
+     * @return
+     * {@link InstanceProvider#create}にて生成した{@link JigyoHokokuNenpoHoseiHakoManager}のインスタンス
      */
     public static JigyoHokokuNenpoHoseiHakoManager createInstance() {
         return InstanceProvider.create(JigyoHokokuNenpoHoseiHakoManager.class);
@@ -128,7 +129,7 @@ public class JigyoHokokuNenpoHoseiHakoManager {
     }
 
     private SearchResult<ShichosonCodeNameResult> get市町村情報リストBy導入形態コードは事務広域と認定広域の場合(RString 合併情報区分,
-                                                                                    IShichosonJoho 市町村情報) {
+            IShichosonJoho 市町村情報) {
         if (合併情報区分_合併なし.equals(合併情報区分)) {
             return get市町村情報リストBy合併情報区分は合併なしの場合(市町村情報);
         }
@@ -139,11 +140,11 @@ public class JigyoHokokuNenpoHoseiHakoManager {
     }
 
     private SearchResult<ShichosonCodeNameResult> get市町村情報リストBy導入形態コードは単一の場合(RString 合併情報区分,
-                                                                             IShichosonJoho 市町村情報, RString 導入形態コード) {
+            IShichosonJoho 市町村情報, RString 導入形態コード) {
         List<ShichosonCodeNameResult> 出力市町村情報リスト = new ArrayList<>();
         if (合併情報区分_合併なし.equals(合併情報区分)) {
             出力市町村情報リスト.add(new ShichosonCodeNameResult(市町村情報.get市町村コード(), 市町村情報.get市町村名(),
-                                                       市町村情報.get証記載保険者番号(), TokeiTaishoKubun.保険者分.getコード()));
+                    市町村情報.get証記載保険者番号(), TokeiTaishoKubun.保険者分.getコード()));
         }
         if (合併情報区分_合併あり.equals(合併情報区分)) {
             return get市町村情報リストBy導入形態コードは単一と合併あり(市町村情報, 導入形態コード);
@@ -170,14 +171,14 @@ public class JigyoHokokuNenpoHoseiHakoManager {
     @SuppressWarnings("null")
     @edu.umd.cs.findbugs.annotations.SuppressWarnings("NP_NULL_ON_SOME_PATH_FROM_RETURN_VALUE")
     private SearchResult<ShichosonCodeNameResult> get市町村情報リストBy導入形態コードは単一と合併あり(IShichosonJoho 市町村情報,
-                                                                               RString 導入形態コード) {
+            RString 導入形態コード) {
         List<ShichosonCodeNameResult> 出力市町村情報リスト = new ArrayList<>();
         LasdecCode 市町村コード;
         RString 市町村名称;
         ShoKisaiHokenshaNo 保険者コード;
         RString 保険者区分;
         出力市町村情報リスト.add(new ShichosonCodeNameResult(市町村情報.get市町村コード(), 市町村情報.get市町村名(),
-                                                   市町村情報.get証記載保険者番号(), TokeiTaishoKubun.保険者分.getコード()));
+                市町村情報.get証記載保険者番号(), TokeiTaishoKubun.保険者分.getコード()));
         KyuShichosonJohoEntities relateEntity = null;
         if (DonyuKeitaiCode.事務単一.getCode().equals(導入形態コード)) {
             relateEntity = kyuShichosonCodeFinder.getKyuShichosonCodeJoho(市町村情報.get市町村コード(), DonyuKeitaiCode.事務単一);
@@ -211,7 +212,7 @@ public class JigyoHokokuNenpoHoseiHakoManager {
         RString 保険者区分;
         保険者区分 = TokeiTaishoKubun.保険者分.getコード();
         出力市町村情報リスト.add(new ShichosonCodeNameResult(市町村情報.get市町村コード(), 市町村情報.get市町村名(),
-                                                   市町村情報.get証記載保険者番号(), 保険者区分));
+                市町村情報.get証記載保険者番号(), 保険者区分));
         List<KoikiZenShichosonJoho> zenShichosonJohoList = koikiShichosonJoho.getZenShichosonJoho().records();
         if (zenShichosonJohoList == null || zenShichosonJohoList.isEmpty()) {
             throw new ApplicationException(UrErrorMessages.存在しない.getMessage().replace("全市町村情報"));
@@ -234,14 +235,14 @@ public class JigyoHokokuNenpoHoseiHakoManager {
     private SearchResult<ShichosonCodeNameResult> get市町村情報リストBy合併なしと市町村識別IDは00の場合(IShichosonJoho 市町村情報) {
         List<ShichosonCodeNameResult> 出力市町村情報リスト = new ArrayList<>();
         出力市町村情報リスト.add(new ShichosonCodeNameResult(市町村情報.get市町村コード(), 市町村情報.get市町村名(),
-                                                   市町村情報.get証記載保険者番号(), TokeiTaishoKubun.保険者分.getコード()));
+                市町村情報.get証記載保険者番号(), TokeiTaishoKubun.保険者分.getコード()));
         List<KoikiZenShichosonJoho> genShichosonJohoList = koikiShichosonJoho.getGenShichosonJoho().records();
         if (genShichosonJohoList == null || genShichosonJohoList.isEmpty()) {
             throw new ApplicationException(UrErrorMessages.存在しない.getMessage().replace("現市町村情報"));
         }
         for (KoikiZenShichosonJoho genShichosonJoho : genShichosonJohoList) {
             出力市町村情報リスト.add(new ShichosonCodeNameResult(genShichosonJoho.get市町村コード(), genShichosonJoho.get市町村名称(),
-                                                       genShichosonJoho.get証記載保険者番号(), TokeiTaishoKubun.構成市町村分.getコード()));
+                    genShichosonJoho.get証記載保険者番号(), TokeiTaishoKubun.構成市町村分.getコード()));
         }
         return SearchResult.of(出力市町村情報リスト, 0, false);
     }
@@ -260,7 +261,7 @@ public class JigyoHokokuNenpoHoseiHakoManager {
         IJigyoHokokuNenpoMapper jigyoHokokuNenpoMapper = mapperProvider.create(IJigyoHokokuNenpoMapper.class);
         List<DbT7021JigyoHokokuTokeiDataEntity> 事業報告集計一覧データEntityリスト
                 = jigyoHokokuNenpoMapper.getJigyoHokokuNenpoList(JigyoHokokuNenpoParameter.createParameterForJigyoHokokuNenpo(年度,
-                                                                                                                              市町村コード, 保険者区分));
+                                市町村コード, 保険者区分));
         for (DbT7021JigyoHokokuTokeiDataEntity entity : 事業報告集計一覧データEntityリスト) {
             事業報告集計一覧データリスト.add(new JigyoHokokuNenpoResult(entity));
         }
@@ -282,13 +283,21 @@ public class JigyoHokokuNenpoHoseiHakoManager {
         List<DbT7021JigyoHokokuTokeiDataEntity> 事業報告集計一覧データEntityリスト;
         JigyoHokokuNenpoDetalParameter parameter = getJigyoHokokuNenpoParameter(jigyoHokokuNenpoSearch);
         if (!jigyoHokokuNenpoSearch.get集計番号().isEmpty()) {
-            事業報告集計一覧データEntityリスト = dac.selectJigyoHokokuNenpoDetal1(jigyoHokokuNenpoSearch.get報告年(),
-                                                                    jigyoHokokuNenpoSearch.get集計対象年(), parameter.getToukeiTaishoKubun(),
-                                                                    jigyoHokokuNenpoSearch.get市町村コード(), parameter.getHyoNo(), jigyoHokokuNenpoSearch.get集計番号());
+            事業報告集計一覧データEntityリスト = dac.selectJigyoHokokuNenpoDetal1(
+                    jigyoHokokuNenpoSearch.get報告年(),
+                    jigyoHokokuNenpoSearch.get集計対象年(),
+                    parameter.getToukeiTaishoKubun(),
+                    jigyoHokokuNenpoSearch.get市町村コード(),
+                    parameter.getHyoNo(),
+                    jigyoHokokuNenpoSearch.get集計番号());
         } else {
-            事業報告集計一覧データEntityリスト = dac.selectJigyoHokokuNenpoDetal2(jigyoHokokuNenpoSearch.get報告年(),
-                                                                    jigyoHokokuNenpoSearch.get集計対象年(), parameter.getToukeiTaishoKubun(),
-                                                                    jigyoHokokuNenpoSearch.get市町村コード(), parameter.getHyoNo(), parameter.getShukeiNoList());
+            事業報告集計一覧データEntityリスト = dac.selectJigyoHokokuNenpoDetal2(
+                    jigyoHokokuNenpoSearch.get報告年(),
+                    jigyoHokokuNenpoSearch.get集計対象年(),
+                    parameter.getToukeiTaishoKubun(),
+                    jigyoHokokuNenpoSearch.get市町村コード(),
+                    parameter.getHyoNo(),
+                    parameter.getShukeiNoList());
         }
         for (DbT7021JigyoHokokuTokeiDataEntity entity : 事業報告集計一覧データEntityリスト) {
             entity.initializeMd5();
