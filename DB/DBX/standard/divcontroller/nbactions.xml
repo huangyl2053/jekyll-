@@ -19,7 +19,6 @@
             </packagings>
             <goals>
                 <goal>install</goal>
-                <goal>-Dmaven.test.skip=true</goal>
             </goals>
             <properties>
                 <skipTests>true</skipTests>
