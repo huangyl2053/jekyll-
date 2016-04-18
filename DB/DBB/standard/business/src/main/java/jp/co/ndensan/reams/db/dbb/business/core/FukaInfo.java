@@ -3,36 +3,31 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbb.business.report.gemmen;
+package jp.co.ndensan.reams.db.dbb.business.core;
 
-import jp.co.ndensan.reams.db.dbb.entity.db.basic.DbT2001ChoshuHohoEntity;
+import java.io.Serializable;
 import jp.co.ndensan.reams.db.dbb.entity.db.basic.DbT2002FukaEntity;
-import jp.co.ndensan.reams.db.dbb.entity.db.basic.DbT2003KibetsuEntity;
-import jp.co.ndensan.reams.db.dbz.entity.db.basic.UrT0705ChoteiKyotsuEntity;
+import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
-import lombok.Getter;
-import lombok.Setter;
 
 /**
- * 賦課の情報
+ * 賦課の情報。
+ *
+ * @reamsid_L DBB-0740-010 wangkanglei
  */
-@Getter
-@Setter
+@lombok.Getter
+@lombok.Setter
 @SuppressWarnings("PMD.UnusedPrivateField")
-public class FukaShojoho {
+public class FukaInfo implements Serializable {
 
     private DbT2002FukaEntity 介護賦課;
-    private DbT2003KibetsuEntity 介護期別;
-    private UrT0705ChoteiKyotsuEntity 調定共通;
-    private DbT2001ChoshuHohoEntity 介護徴収方法;
-    //特徴期別金額（更正前）
     private Decimal 特徴期別金額01;
     private Decimal 特徴期別金額02;
     private Decimal 特徴期別金額03;
     private Decimal 特徴期別金額04;
     private Decimal 特徴期別金額05;
     private Decimal 特徴期別金額06;
-    //普徴期別金額（更正前）
     private Decimal 普徴期別金額01;
     private Decimal 普徴期別金額02;
     private Decimal 普徴期別金額03;
@@ -48,4 +43,23 @@ public class FukaShojoho {
     private Decimal 普徴期別金額13;
     private Decimal 普徴期別金額14;
 
+    /**
+     * FukaInfo。
+     *
+     * @return FukaInfo
+     */
+    public FukaInfo getFukaInfo() {
+        this.介護賦課 = getDBT();
+        this.特徴期別金額01 = new Decimal(1);
+        this.普徴期別金額01 = new Decimal(1);
+        return this;
+    }
+
+    private DbT2002FukaEntity getDBT() {
+        DbT2002FukaEntity entity = new DbT2002FukaEntity();
+        entity.setChoteiNendo(new FlexibleYear("2016"));
+        entity.setFukaNendo(new FlexibleYear("2015"));
+        entity.setChoteiNichiji(new YMDHMS("20160416161233"));
+        return entity;
+    }
 }

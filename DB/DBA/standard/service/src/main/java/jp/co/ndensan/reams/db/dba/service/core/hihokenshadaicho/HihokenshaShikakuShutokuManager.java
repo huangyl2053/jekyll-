@@ -49,7 +49,7 @@ public class HihokenshaShikakuShutokuManager {
     private static final RString 被保険者番号 = new RString("被保険者番号");
     private final DbT1001HihokenshaDaichoDac dbT1001Dac;
     private final MapperProvider mapperProvider;
-    private static boolean checkFlg = false;
+    private boolean checkFlg = false;
 
     /**
      * コンストラクタです。

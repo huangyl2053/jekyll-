@@ -117,8 +117,8 @@ public class NinteiChosaScheduleInput {
             initializeTemp変数();
             setTemp変数();
         } else {
-            temp_申請者管理番号3 = ViewStateHolder.get(ViewStateKeys.認定調査スケジュール登録_申請書管理番号3, RString.class);
-            set対象者個人基本情報Temp変数();
+            RString 申請者管理番号 = ViewStateHolder.get(ViewStateKeys.認定調査スケジュール登録_申請書管理番号3, RString.class);
+            set対象者個人基本情報Temp変数(申請者管理番号);
         }
         getHandler(div).onLoad(temp_申請者管理番号3, temp_認定調査員名称, temp_認定調査委託先名称, temp_予約可否, temp_備考, temp_予約状況,
                 temp_被保番号, temp_被保険者区分コード, temp_保険者, temp_認定申請日, temp_申請区分_申請時, temp_氏名, temp_カナ氏名,
@@ -153,14 +153,14 @@ public class NinteiChosaScheduleInput {
             temp_申請者管理番号3 = temp_申請者管理番号1;
             set調査員情報Temp変数();
             set対象者調査基本情報Temp変数();
-            set対象者個人基本情報Temp変数();
+            set対象者個人基本情報Temp変数(temp_申請者管理番号3);
         }
         if (画面ステート_1.equals(temp_画面ステート) && 遷移元画面番号_3.equals(temp_遷移元画面番号)) {
             temp_申請者管理番号1 = ViewStateHolder.get(ViewStateKeys.認定調査スケジュール登録_申請書管理番号3, RString.class);
             temp_申請者管理番号3 = temp_申請者管理番号1;
             temp_対象者区分 = ViewStateHolder.get(ViewStateKeys.認定調査スケジュール登録_対象者区分, RString.class);
             set対象者調査基本情報Temp変数();
-            set対象者個人基本情報Temp変数();
+            set対象者個人基本情報Temp変数(temp_申請者管理番号3);
         }
         if (画面ステート_2.equals(temp_画面ステート)) {
             temp_申請者管理番号1 = ViewStateHolder.get(ViewStateKeys.認定調査スケジュール登録_申請書管理番号3, RString.class);
@@ -169,7 +169,7 @@ public class NinteiChosaScheduleInput {
             temp_対象者区分 = new RString("0");
             set調査員情報Temp変数();
             set対象者調査基本情報Temp変数();
-            set対象者個人基本情報Temp変数();
+            set対象者個人基本情報Temp変数(temp_申請者管理番号3);
         }
         if (画面ステート_3.equals(temp_画面ステート)) {
             temp_申請者管理番号1 = ViewStateHolder.get(ViewStateKeys.認定調査スケジュール登録_申請書管理番号2, RString.class);
@@ -178,7 +178,7 @@ public class NinteiChosaScheduleInput {
             temp_対象者区分 = ViewStateHolder.get(ViewStateKeys.認定調査スケジュール登録_対象者区分, RString.class);
             set調査員情報Temp変数();
             set対象者調査基本情報Temp変数();
-            set対象者個人基本情報Temp変数();
+            set対象者個人基本情報Temp変数(temp_申請者管理番号3);
         }
     }
 
@@ -207,10 +207,10 @@ public class NinteiChosaScheduleInput {
         }
     }
 
-    private void set対象者個人基本情報Temp変数() {
-        if (!RString.isNullOrEmpty(temp_申請者管理番号3)) {
+    private void set対象者個人基本情報Temp変数(RString 申請者管理番号3) {
+        if (!RString.isNullOrEmpty(申請者管理番号3)) {
             NinteiShinseiJoho ninteiShinseiJoho = NinteiChosaScheduleInputManager.createInstance()
-                    .get対象個人基本情報取得(new ShinseishoKanriNo(temp_申請者管理番号3));
+                    .get対象個人基本情報取得(new ShinseishoKanriNo(申請者管理番号3));
             if (ninteiShinseiJoho != null) {
                 temp_被保番号 = ninteiShinseiJoho.get被保険者番号();
                 temp_被保険者区分コード = ninteiShinseiJoho.get被保険者区分コード();
