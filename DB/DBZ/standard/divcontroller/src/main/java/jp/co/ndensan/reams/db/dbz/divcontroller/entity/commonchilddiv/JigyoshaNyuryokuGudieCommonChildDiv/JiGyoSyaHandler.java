@@ -133,6 +133,8 @@ public class JiGyoSyaHandler {
                     dgJigyoshaItiran.setTxtJusho(Jigyosha.records().get(i).get事業者住所カナ());
                     dgJigyoshaItiran.setTxtTelNo(Jigyosha.records().get(i).get電話番号() == null ? RString.EMPTY
                             : Jigyosha.records().get(i).get電話番号().value());
+                    dgJigyoshaItiran.getTxtYukoKaishibiYMD().setDisabled(true);
+                    dgJigyoshaItiran.getTxtYukoShuryobiYMD().setDisabled(true);
                     dgJigyoshaItiranList.add(dgJigyoshaItiran);
                 }
                 DataGridSetting dataGrid = div.getJigyoshaItirann().getDgJigyoshaItiran().getGridSetting();
@@ -178,7 +180,7 @@ public class JiGyoSyaHandler {
                     if (Jigyosha.records().get(i).get有効開始日() != null && !Jigyosha.records().get(i).get有効開始日().isEmpty()) {
                         dgJigyoshaItiran.getTxtYukoKaishibiYMD().setValue(new RDate(Jigyosha.records().get(i).get有効開始日().toString()));
                     }
-                    if (Jigyosha.records().get(i).get有効開始日() != null && !Jigyosha.records().get(i).get有効終了日().isEmpty()) {
+                    if (Jigyosha.records().get(i).get有効終了日() != null && !Jigyosha.records().get(i).get有効終了日().isEmpty()) {
                         dgJigyoshaItiran.getTxtYukoShuryobiYMD().setValue(new RDate(Jigyosha.records().get(i).get有効終了日().toString()));
                     }
                     dgJigyoshaItiran.setTxtMeisho(Jigyosha.records().get(i).get介護除外住所地特例対象施設_事業者名称カナ() == null
@@ -186,6 +188,8 @@ public class JiGyoSyaHandler {
                     dgJigyoshaItiran.setTxtJusho(Jigyosha.records().get(i).get介護除外住所地特例対象施設_事業者住所カナ());
                     dgJigyoshaItiran.setTxtTelNo(Jigyosha.records().get(i).get電話番号() == null ? RString.EMPTY
                             : Jigyosha.records().get(i).get電話番号().value());
+                    dgJigyoshaItiran.getTxtYukoKaishibiYMD().setDisabled(true);
+                    dgJigyoshaItiran.getTxtYukoShuryobiYMD().setDisabled(true);
                     dgJigyoshaItiranList.add(dgJigyoshaItiran);
                 }
                 DataGridSetting dataGrid = div.getJigyoshaItirann().getDgJigyoshaItiran().getGridSetting();
@@ -236,6 +240,8 @@ public class JiGyoSyaHandler {
                     dgJigyoshaItiran.setTxtJusho(Jigyosha.records().get(i).get介護除外住所地特例対象施設_事業者住所カナ());
                     dgJigyoshaItiran.setTxtTelNo(Jigyosha.records().get(i).get電話番号() == null ? RString.EMPTY
                             : Jigyosha.records().get(i).get電話番号().value());
+                    dgJigyoshaItiran.getTxtYukoKaishibiYMD().setDisabled(true);
+                    dgJigyoshaItiran.getTxtYukoShuryobiYMD().setDisabled(true);
                     dgJigyoshaItiranList.add(dgJigyoshaItiran);
                 }
                 DataGridSetting dataGrid = div.getJigyoshaItirann().getDgJigyoshaItiran().getGridSetting();

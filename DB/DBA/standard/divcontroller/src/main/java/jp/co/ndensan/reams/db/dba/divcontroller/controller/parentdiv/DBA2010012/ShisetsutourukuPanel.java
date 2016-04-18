@@ -132,7 +132,6 @@ public class ShisetsutourukuPanel {
             }
             if (new RString(UrQuestionMessages.保存の確認.getMessage().getCode()).equals(ResponseHolder.getMessageCode())
                     && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
-                set有効期間合理性チェック(div);
                 get事業者情報の削除処理(div);
                 return ResponseData.of(div).setState(DBA2010012StateName.完了状態);
             }
