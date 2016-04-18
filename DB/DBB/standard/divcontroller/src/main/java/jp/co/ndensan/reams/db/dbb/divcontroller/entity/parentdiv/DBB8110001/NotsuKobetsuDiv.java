@@ -1,20 +1,25 @@
 package jp.co.ndensan.reams.db.dbb.divcontroller.entity.parentdiv.DBB8110001;
-/**
+/*
  * このコードはツールによって生成されました。
  * このファイルへの変更は、再生成時には損失するため
  * 不正な動作の原因になります。
  */
+
 import com.fasterxml.jackson.annotation.JsonProperty;
-import jp.co.ndensan.reams.uz.uza.ui.binding.*;
+import jp.co.ndensan.reams.uz.uza.ui.binding.CheckBoxList;
+import jp.co.ndensan.reams.uz.uza.ui.binding.DropDownList;
 import jp.co.ndensan.reams.uz.uza.ui.binding.PanelPublish;
-import jp.co.ndensan.reams.uz.uza.ui.binding.domain.*;
+import jp.co.ndensan.reams.uz.uza.ui.binding.RadioButton;
+import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxFlexibleDate;
 
 /**
- * NotsuKobetsu のクラスファイル 
- * 
- * @author 自動生成
+ * NotsuKobetsu のクラスファイル
+ *
+ * @reamsid_L DBB-0740-010 wangkanglei
  */
 public class NotsuKobetsuDiv extends PanelPublish {
+
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -22,19 +27,13 @@ public class NotsuKobetsuDiv extends PanelPublish {
      * private + コントロール名 + フィールド名 の文字列を作成
      */
     @JsonProperty("txtNotsuHakkoYMD")
-    private TextBoxDate txtNotsuHakkoYMD;
+    private TextBoxFlexibleDate txtNotsuHakkoYMD;
     @JsonProperty("ddlNotsuShuturyokuKi")
     private DropDownList ddlNotsuShuturyokuKi;
     @JsonProperty("chkNotsuShuturyokuKi")
     private CheckBoxList chkNotsuShuturyokuKi;
-    @JsonProperty("lblNotsuShuturyokuKeishiki")
-    private Label lblNotsuShuturyokuKeishiki;
     @JsonProperty("radNotsuShuturyokuKeishiki")
     private RadioButton radNotsuShuturyokuKeishiki;
-    @JsonProperty("lblNotsuTaishoChohyo")
-    private Label lblNotsuTaishoChohyo;
-    @JsonProperty("radNotsuTaishoChohyo")
-    private RadioButton radNotsuTaishoChohyo;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -42,74 +41,77 @@ public class NotsuKobetsuDiv extends PanelPublish {
      * コントロール名とフィールド名を取得する
      * フィールド名のGetterとSetter を作成
      */
+    /*
+     * gettxtNotsuHakkoYMD
+     * @return txtNotsuHakkoYMD
+     */
     @JsonProperty("txtNotsuHakkoYMD")
-    public TextBoxDate getTxtNotsuHakkoYMD() {
+    public TextBoxFlexibleDate getTxtNotsuHakkoYMD() {
         return txtNotsuHakkoYMD;
     }
 
+    /*
+     * settxtNotsuHakkoYMD
+     * @param txtNotsuHakkoYMD txtNotsuHakkoYMD
+     */
     @JsonProperty("txtNotsuHakkoYMD")
-    public void setTxtNotsuHakkoYMD(TextBoxDate txtNotsuHakkoYMD) {
-        this.txtNotsuHakkoYMD=txtNotsuHakkoYMD;
+    public void setTxtNotsuHakkoYMD(TextBoxFlexibleDate txtNotsuHakkoYMD) {
+        this.txtNotsuHakkoYMD = txtNotsuHakkoYMD;
     }
 
+    /*
+     * getddlNotsuShuturyokuKi
+     * @return ddlNotsuShuturyokuKi
+     */
     @JsonProperty("ddlNotsuShuturyokuKi")
     public DropDownList getDdlNotsuShuturyokuKi() {
         return ddlNotsuShuturyokuKi;
     }
 
+    /*
+     * setddlNotsuShuturyokuKi
+     * @param ddlNotsuShuturyokuKi ddlNotsuShuturyokuKi
+     */
     @JsonProperty("ddlNotsuShuturyokuKi")
     public void setDdlNotsuShuturyokuKi(DropDownList ddlNotsuShuturyokuKi) {
-        this.ddlNotsuShuturyokuKi=ddlNotsuShuturyokuKi;
+        this.ddlNotsuShuturyokuKi = ddlNotsuShuturyokuKi;
     }
 
+    /*
+     * getchkNotsuShuturyokuKi
+     * @return chkNotsuShuturyokuKi
+     */
     @JsonProperty("chkNotsuShuturyokuKi")
     public CheckBoxList getChkNotsuShuturyokuKi() {
         return chkNotsuShuturyokuKi;
     }
 
+    /*
+     * setchkNotsuShuturyokuKi
+     * @param chkNotsuShuturyokuKi chkNotsuShuturyokuKi
+     */
     @JsonProperty("chkNotsuShuturyokuKi")
     public void setChkNotsuShuturyokuKi(CheckBoxList chkNotsuShuturyokuKi) {
-        this.chkNotsuShuturyokuKi=chkNotsuShuturyokuKi;
+        this.chkNotsuShuturyokuKi = chkNotsuShuturyokuKi;
     }
 
-    @JsonProperty("lblNotsuShuturyokuKeishiki")
-    public Label getLblNotsuShuturyokuKeishiki() {
-        return lblNotsuShuturyokuKeishiki;
-    }
-
-    @JsonProperty("lblNotsuShuturyokuKeishiki")
-    public void setLblNotsuShuturyokuKeishiki(Label lblNotsuShuturyokuKeishiki) {
-        this.lblNotsuShuturyokuKeishiki=lblNotsuShuturyokuKeishiki;
-    }
-
+    /*
+     * getradNotsuShuturyokuKeishiki
+     * @return radNotsuShuturyokuKeishiki
+     */
     @JsonProperty("radNotsuShuturyokuKeishiki")
     public RadioButton getRadNotsuShuturyokuKeishiki() {
         return radNotsuShuturyokuKeishiki;
     }
 
+    /*
+     * setradNotsuShuturyokuKeishiki
+     * @param radNotsuShuturyokuKeishiki radNotsuShuturyokuKeishiki
+     */
     @JsonProperty("radNotsuShuturyokuKeishiki")
     public void setRadNotsuShuturyokuKeishiki(RadioButton radNotsuShuturyokuKeishiki) {
-        this.radNotsuShuturyokuKeishiki=radNotsuShuturyokuKeishiki;
+        this.radNotsuShuturyokuKeishiki = radNotsuShuturyokuKeishiki;
     }
 
-    @JsonProperty("lblNotsuTaishoChohyo")
-    public Label getLblNotsuTaishoChohyo() {
-        return lblNotsuTaishoChohyo;
-    }
-
-    @JsonProperty("lblNotsuTaishoChohyo")
-    public void setLblNotsuTaishoChohyo(Label lblNotsuTaishoChohyo) {
-        this.lblNotsuTaishoChohyo=lblNotsuTaishoChohyo;
-    }
-
-    @JsonProperty("radNotsuTaishoChohyo")
-    public RadioButton getRadNotsuTaishoChohyo() {
-        return radNotsuTaishoChohyo;
-    }
-
-    @JsonProperty("radNotsuTaishoChohyo")
-    public void setRadNotsuTaishoChohyo(RadioButton radNotsuTaishoChohyo) {
-        this.radNotsuTaishoChohyo=radNotsuTaishoChohyo;
-    }
-
+    // </editor-fold>
 }
