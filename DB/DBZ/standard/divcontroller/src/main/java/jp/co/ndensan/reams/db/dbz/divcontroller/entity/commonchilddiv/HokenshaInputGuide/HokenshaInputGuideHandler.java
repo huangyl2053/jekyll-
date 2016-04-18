@@ -43,15 +43,19 @@ public class HokenshaInputGuideHandler {
         set保険者(hokenshaList);
         div.getDdlHokenshaKenCode().getDataSource().clear();
         List<KeyValueDataSource> dataSourceList = new ArrayList<>();
+        List<RString> list = new ArrayList<>();
         for (KenCodeJigyoshaInputGuide guide : kenCodeList) {
-            KeyValueDataSource DataSource = new KeyValueDataSource();
+            KeyValueDataSource dataSource = new KeyValueDataSource();
             RStringBuilder 県コード = new RStringBuilder();
-            DataSource.setKey(guide.get都道府県住所コード());
+            dataSource.setKey(guide.get都道府県住所コード());
             県コード.append(guide.get都道府県住所コード());
             県コード.append(RString.HALF_SPACE);
             県コード.append(guide.get都道府県名());
-            DataSource.setValue(県コード.toRString());
-            dataSourceList.add(DataSource);
+            dataSource.setValue(県コード.toRString());
+            if (!list.contains(guide.get都道府県住所コード())) {
+                dataSourceList.add(dataSource);
+            }
+            list.add(guide.get都道府県住所コード());
         }
         div.getDdlHokenshaKenCode().setDataSource(dataSourceList);
         for (KenCodeJigyoshaInputGuide guide : kenCodeList) {
