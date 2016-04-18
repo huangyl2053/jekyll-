@@ -122,7 +122,7 @@ public class HihosyosaiHandler {
                 break;
         }
         div.getCcdJyusyotiTokure().initialize(被保険者番号, 識別コード, 資格取得日);
-        // 資格変更履歴　
+        // TODO 凌護行　Redmine#:82087回答まち、
 //        div.getCcdShikakuKanrenIdo().initialize(被保険者番号, null, 資格取得日);
         div.getCcdShisetuNyutaisyo().initialize(識別コード);
     }
@@ -169,7 +169,9 @@ public class HihosyosaiHandler {
         ValidationMessageControlPairs validPairs = new ValidationMessageControlPairs();
         if (div.getTxtSyutokuYMD() != null && div.getTxtSosichiYMD() != null
                 && div.getTxtSosichiYMD().getValue().isBefore(div.getTxtSyutokuYMD().getValue())) {
-            validPairs.add(new ValidationMessageControlPair(RRVMessages.期間が不正));
+            validPairs.add(new ValidationMessageControlPair(new RRVMessages(UrErrorMessages.期間が不正_追加メッセージあり２,
+                    "取得日（入力した値）", "喪失日（入力した値）"),
+                    div.getTxtSyutokuYMD(), div.getTxtSosichiYMD()));
         }
         return validPairs;
     }
@@ -188,7 +190,7 @@ public class HihosyosaiHandler {
         } else {
             div.getTxtSosichiYMD().setDisabled(true);
         }
-        if (div.getTxtSosichiTodokedeYMD() != null) {
+        if (得喪情報.getShikakuSoshitsuTodokedeYMD() != null) {
             div.getTxtSosichiTodokedeYMD().setValue(new RDate(得喪情報.getShikakuSoshitsuTodokedeYMD().toString()));
         } else {
             div.getTxtSosichiTodokedeYMD().setDisabled(true);
@@ -406,9 +408,8 @@ public class HihosyosaiHandler {
         return new RString(builder.toString());
     }
 
-    private static enum RRVMessages implements IValidationMessage {
+    private static class RRVMessages implements IValidationMessage {
 
-        期間が不正(UrErrorMessages.期間が不正_追加メッセージあり２, "取得日（入力した値）", "喪失日（入力した値）");
         private final Message message;
 
         private RRVMessages(IMessageGettable message, String... replacements) {
