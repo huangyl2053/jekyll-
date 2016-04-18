@@ -745,8 +745,6 @@ public class FukushiyoguKonyuhiShikyuShinsei {
                 償還払請求集計Dac.save(dbT3053_Entity);
                 修正前支給区分 = 支給区分_不支給;
             } else {
-                System.out.println("増減点===" + 福祉用具購入費支給申請決定情報画面.get償還払集計().get増減点() + "増減理由等==="
-                        + 福祉用具購入費支給申請決定情報画面.get償還払集計().get増減理由等());
                 dbT3053Entity.setShinsaYM(福祉用具購入費支給申請決定情報画面.get決定日().getYearMonth());
                 dbT3053Entity.setShikyuKubunCode(福祉用具購入費支給申請決定情報画面.get償還払集計().get支給区分コード());
                 dbT3053Entity.setShikyuKingaku(福祉用具購入費支給申請決定情報画面.get償還払集計().get支払金額());

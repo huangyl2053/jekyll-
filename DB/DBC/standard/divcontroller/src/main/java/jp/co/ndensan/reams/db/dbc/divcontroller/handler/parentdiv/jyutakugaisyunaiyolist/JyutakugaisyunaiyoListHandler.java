@@ -14,8 +14,10 @@ import jp.co.ndensan.reams.db.dbc.divcontroller.entity.commonchilddiv.jyutakugai
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.commonchilddiv.jyutakugaisyunaiyolist.JyutakugaisyunaiyoList.dgGaisyuList_Row;
 import jp.co.ndensan.reams.db.dbc.service.core.jyutakukaisyuyichiran.JyutakukaisyuyichiranFinder;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
+import jp.co.ndensan.reams.db.dbz.divcontroller.viewbox.ViewStateKeys;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 import jp.co.ndensan.reams.uz.uza.util.Models;
 import jp.co.ndensan.reams.uz.uza.util.db.SearchResult;
 import jp.co.ndensan.reams.uz.uza.util.serialization.DataPassingConverter;
@@ -61,7 +63,7 @@ public class JyutakugaisyunaiyoListHandler {
                     .createInstance().selectJyutakukaisyuList(被保険者番号, サービス提供年月, 整理番号, 様式番号);
         }
         Models<ShokanJutakuKaishuIdentifier, ShokanJutakuKaishu> jyutakugaisyu = Models.create(jyutakugaisyunaiyoList.records());
-        // ViewStateHolder.put(ViewStateKeys.住宅改修内容一覧_検索結果, jyutakugaisyu);
+        ViewStateHolder.put(ViewStateKeys.住宅改修内容一覧_検索結果, jyutakugaisyu);
         List<dgGaisyuList_Row> dgGaisyuListRow = new ArrayList<>();
         if (!jyutakugaisyunaiyoList.records().isEmpty()) {
             for (ShokanJutakuKaishu jyutaku : jyutakugaisyunaiyoList.records()) {
