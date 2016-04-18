@@ -55,6 +55,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RTime;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.ui.binding.KeyValueDataSource;
+import jp.co.ndensan.reams.uz.uza.ui.binding.RowState;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 import jp.co.ndensan.reams.uz.uza.util.Models;
 import jp.co.ndensan.reams.uz.uza.util.Saiban;
@@ -326,26 +327,65 @@ public final class JutakuKaishuJizenShinseiTorokuDivHandler {
      * 住宅改修内容のチェック
      */
     public void 住宅改修内容のチェック() {
-        // TODO 「住宅改修内容一覧」共有子DIV
+        List<dgGaisyuList_Row> gridList = div.getKaigoShikakuKihonShaPanel().getTabShinseiContents()
+                .getTabJutakuKaisyuJyoho().getCcdJutakuJizenShinseiDetail().get住宅改修内容一覧();
+        int 削除レコード数 = 0;
+        int 著工日に対する年月不一致レコード = 0;
+        int 対象住宅住所が不一致レコード = 0;
+        List<RString> 著工日リスト = new ArrayList<>();
+        List<RString> 完成日リスト = new ArrayList<>();
+
+        if (gridList.size() > 0) {
+            住宅改修内容のレコードチェック(gridList, 削除レコード数, 著工日に対する年月不一致レコード,
+                    対象住宅住所が不一致レコード, 著工日リスト, 完成日リスト);
+            if (削除レコード数 == gridList.size()) {
+                throw new ApplicationException(DbcErrorMessages.住宅改修データなし.getMessage());
+            }
+            if (著工日に対する年月不一致レコード > 0) {
+                throw new ApplicationException(DbcErrorMessages.着工日不一致.getMessage());
+            }
+            if (対象住宅住所が不一致レコード > 0) {
+                throw new ApplicationException(DbcErrorMessages.対象住宅住所不一致.getMessage());
+            }
+        }
 
         if (div.getKaigoShikakuKihonShaPanel().getTxtServiceYM().getValue() == null) {
             throw new ApplicationException(UrErrorMessages.必須.getMessage().replace(サービス年月.toString()));
         }
-
         RString kubun = DbBusinessConifg.get(ConfigNameDBC.国保連共同処理受託区分_償還, RDate.getNowDate(),
                 SubGyomuCode.DBC介護給付);
-        // TODO
-        kubun = new RString("3");
         if (文字_1.equals(kubun)) {
-            // TODO 住宅改修内容一覧に有効の着工日、完成日のいすれの年月と一致しないと、エラーとする
-
-            throw new ApplicationException(DbcErrorMessages.サービス年月と不一致.getMessage()
-                    .replace(メッセージ引数_着工日完成日.toString()));
+            if (!著工日リスト.contains(div.getKaigoShikakuKihonShaPanel().getTxtServiceYM().getValue().toDateString())
+                    && 完成日リスト.contains(div.getKaigoShikakuKihonShaPanel().getTxtServiceYM().getValue().toDateString())) {
+                throw new ApplicationException(DbcErrorMessages.サービス年月と不一致.getMessage()
+                        .replace(メッセージ引数_着工日完成日.toString()));
+            }
         } else if (文字_2.equals(kubun)) {
-            // TODO 住宅改修内容一覧に有効の着工日は画面．サービス年月と同月しないと、エラーとする
+            if (!著工日リスト.contains(div.getKaigoShikakuKihonShaPanel().getTxtServiceYM().getValue().toDateString())) {
+                throw new ApplicationException(DbcErrorMessages.サービス年月と不一致.getMessage()
+                        .replace(メッセージ引数_着工日.toString()));
+            }
+        }
+    }
 
-            throw new ApplicationException(DbcErrorMessages.サービス年月と不一致.getMessage()
-                    .replace(メッセージ引数_着工日.toString()));
+    private void 住宅改修内容のレコードチェック(List<dgGaisyuList_Row> gridList, int 削除レコード数,
+            int 著工日に対する年月不一致レコード, int 対象住宅住所が不一致レコード,
+            List<RString> 著工日リスト, List<RString> 完成日リスト) {
+        RString 著工日に対する年月 = new FlexibleDate(gridList.get(0).getTxtChakkoYoteibi()).getYearMonth().toDateString();
+        RString 対象住宅住所 = gridList.get(0).getTxtJutakuAddress();
+        for (dgGaisyuList_Row tmpRow : gridList) {
+            if (RowState.Deleted.equals(tmpRow.getRowState())) {
+                削除レコード数 = 削除レコード数 + 1;
+            } else {
+                著工日リスト.add(new FlexibleDate(tmpRow.getTxtChakkoYoteibi()).getYearMonth().toDateString());
+                完成日リスト.add(new FlexibleDate(tmpRow.getTxtKanseiYoteibi()).getYearMonth().toDateString());
+                if (!著工日に対する年月.equals(new FlexibleDate(tmpRow.getTxtChakkoYoteibi()).getYearMonth().toDateString())) {
+                    著工日に対する年月不一致レコード = 著工日に対する年月不一致レコード + 1;
+                }
+                if (!対象住宅住所.equals(tmpRow.getTxtJutakuAddress())) {
+                    対象住宅住所が不一致レコード = 対象住宅住所が不一致レコード + 1;
+                }
+            }
         }
     }
 
@@ -373,7 +413,6 @@ public final class JutakuKaishuJizenShinseiTorokuDivHandler {
             throw new ApplicationException(UrErrorMessages.必須.getMessage().replace(発行日.toString()));
         }
         住宅改修内容のチェック();
-
         if (登録モード.equals(画面モード)) {
             return 要介護認定有効のチェック(hihokenshaNo);
         } else if (取消モード.equals(画面モード)) {
@@ -504,7 +543,7 @@ public final class JutakuKaishuJizenShinseiTorokuDivHandler {
      * @param hihokenshaNo HihokenshaNo
      */
     public void 過去の住宅改修費取得(HihokenshaNo hihokenshaNo) {
-        // TODO ダミー値を設定
+        // TODO QAのNo.660 住宅住所の取得元は確認中
         RString 住宅住所 = new RString("住宅住所");
         ShiharaiKekkaResult result = JutakuKaishuJizenShinsei.createInstance().getJutakuKaishuHi(hihokenshaNo,
                 new FlexibleYearMonth(div.getKaigoShikakuKihonShaPanel().getTxtServiceYM().getValue().getYearMonth().toDateString()),
@@ -542,9 +581,16 @@ public final class JutakuKaishuJizenShinseiTorokuDivHandler {
      * 費用額合計の設定
      */
     public void 費用額合計の設定() {
-        // TODO 「住宅改修内容一覧」共有子DIVのグリッドのレコード分処理を繰り返して、改修金額の計算を行う
+        List<dgGaisyuList_Row> rowList = div.getKaigoShikakuKihonShaPanel().getTabShinseiContents()
+                .getTabJutakuKaisyuJyoho().getCcdJutakuJizenShinseiDetail().get住宅改修内容一覧();
+        Decimal 費用額合計 = Decimal.ZERO;
+        for (dgGaisyuList_Row tmpRow : rowList) {
+            if (RowState.Deleted.equals(tmpRow.getRowState()) && !tmpRow.getTxtKaishuKingaku().isNullOrEmpty()) {
+                費用額合計 = 費用額合計.add(new Decimal(tmpRow.getTxtKaishuKingaku().toString()));
+            }
+        }
         div.getKaigoShikakuKihonShaPanel().getTabShinseiContents().getTabJutakuKaisyuJyoho().getTotalPanel()
-                .getTxtHiyoTotalNow().setValue(Decimal.TEN);
+                .getTxtHiyoTotalNow().setValue(費用額合計);
     }
 
     /**
