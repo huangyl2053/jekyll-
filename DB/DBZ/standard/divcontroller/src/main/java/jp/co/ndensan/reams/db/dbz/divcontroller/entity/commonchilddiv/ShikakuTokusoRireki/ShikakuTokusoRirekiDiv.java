@@ -475,7 +475,12 @@ public class ShikakuTokusoRirekiDiv extends Panel implements IShikakuTokusoRirek
 
     @Override
     public void set追加するボタン(boolean jyotai) {
-        this.getBtnAddShikakuShutoku().setDisabled(false);
+        this.getBtnAddShikakuShutoku().setDisabled(jyotai);
+    }
+
+    @Override
+    public void set追加するボタンの表示状態(boolean 表示モード) {
+        this.getBtnAddShikakuShutoku().setDisplayNone(表示モード);
     }
 
 }

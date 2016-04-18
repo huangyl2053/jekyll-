@@ -55,4 +55,11 @@ public interface IShikakuTokusoRirekiDiv extends ICommonChildDivBaseProperties {
      */
     public abstract void set追加するボタン(boolean jyotai);
 
+    /**
+     * 「追加するボタン」の表示状態を設定します、 パラメーターは true : 非表示 、false : 表示
+     *
+     * @param 表示モード 表示モード
+     */
+    public abstract void set追加するボタンの表示状態(boolean 表示モード);
+
 }
