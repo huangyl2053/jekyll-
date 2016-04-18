@@ -6,6 +6,9 @@
 package jp.co.ndensan.reams.db.dbu.entity.db.relate.kaigohokenshikakushasho;
 
 import java.util.List;
+import jp.co.ndensan.reams.db.dba.entity.db.relate.kaigohokenshikakushasho.KyufuseigenDataEntity;
+import jp.co.ndensan.reams.db.dba.entity.db.relate.kaigohokenshikakushasho.NyushoShisetsuDataEntity;
+import jp.co.ndensan.reams.db.dba.entity.db.relate.kaigohokenshikakushasho.ShuruiShikyuGendoKizyunngakuEntity;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
@@ -40,9 +43,7 @@ public class KaigoHokenShikakushashoDataEntity {
     private RString tani;
     private List<ShuruiShikyuGendoKizyunngakuEntity> shikyuGendoKizyungakuList;
     private RString serviceShitei;
-    private RString kyufuseigenNaiyo;
-    private RString kyufuseigenKaishiYMD;
-    private RString kyufuseigenShuryoYMD;
+    private List<KyufuseigenDataEntity> kyufuseigenDataList;
     private RString jigyoshaName1;
     private RString todokedeYMD1;
     private RString jigyoshaName2;
@@ -58,9 +59,7 @@ public class KaigoHokenShikakushashoDataEntity {
     private RString todokedeYMD3Asutarisuku;
     private RString todokedeYMD3Masshosen;
     private RString nyushoShisetsuShurui;
-    private RString nyushoShisetsuName;
-    private RString shisetsuNyushoYMD;
-    private RString shisetsuTaishoYMD;
+    private List<NyushoShisetsuDataEntity> nyushoShisetsuDataList;
     private RString shisetsuNyusho;
     private RString shisetsuNyuin;
     private RString shisetsuTaisho;

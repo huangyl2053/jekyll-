@@ -6,6 +6,9 @@
 package jp.co.ndensan.reams.db.dbu.entity.db.relate.kaigohokenshikakushasho;
 
 import java.util.List;
+import jp.co.ndensan.reams.db.dba.entity.db.relate.kaigohokenshikakushasho.KyufuseigenDataEntity;
+import jp.co.ndensan.reams.db.dba.entity.db.relate.kaigohokenshikakushasho.NyushoShisetsuDataEntity;
+import jp.co.ndensan.reams.db.dba.entity.db.relate.kaigohokenshikakushasho.ShuruiShikyuGendoKizyunngakuEntity;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
@@ -32,12 +35,8 @@ public class ShikakushashoHakkoEntity {
     private RString kubunShikyuKizyunngaku;
     private List<ShuruiShikyuGendoKizyunngakuEntity> shikyuGendoKizyungakuList;
     private RString serviceShitei;
-    private RString seigenNaiyo;
-    private RString seigenKaishiYMD;
-    private RString seigenShuryoYMD;
-    private RString nyushoShisetsu;
-    private RString nyushoYMD;
-    private RString taishoYMD;
+    private List<KyufuseigenDataEntity> kyufuseigenDataList;
+    private List<NyushoShisetsuDataEntity> nyushoShisetsuDataList;
     private List<ShienJigyoshaEntity> shienJigyoshaList;
     private RString shikibetsuCode;
 }

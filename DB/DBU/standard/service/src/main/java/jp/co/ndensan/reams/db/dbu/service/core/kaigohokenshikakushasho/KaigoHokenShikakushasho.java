@@ -9,14 +9,15 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
+import jp.co.ndensan.reams.db.dba.entity.db.relate.kaigohokenshikakushasho.ShuruiShikyuGendoKizyunngakuEntity;
+import jp.co.ndensan.reams.db.dbu.business.core.kaigohokenshikakushasho.KaigoHokenShikakushashoDataBusiness;
+import jp.co.ndensan.reams.db.dbu.business.core.kaigohokenshikakushasho.ShikakushashoHakkoBusiness;
 import jp.co.ndensan.reams.db.dbu.definition.mybatis.param.kaigohokenshikakushasho.KaigoHokenShikakushashoParameter;
 import jp.co.ndensan.reams.db.dbu.entity.db.relate.kaigohokenshikakushasho.HihokenshaDateEntity;
 import jp.co.ndensan.reams.db.dbu.entity.db.relate.kaigohokenshikakushasho.HokenshaBangoMeishoInDataEntity;
 import jp.co.ndensan.reams.db.dbu.entity.db.relate.kaigohokenshikakushasho.KaigoHokenShikakushashoDataEntity;
 import jp.co.ndensan.reams.db.dbu.entity.db.relate.kaigohokenshikakushasho.ShienJigyoshaDataEntity;
 import jp.co.ndensan.reams.db.dbu.entity.db.relate.kaigohokenshikakushasho.ShienJigyoshaEntity;
-import jp.co.ndensan.reams.db.dbu.entity.db.relate.kaigohokenshikakushasho.ShikakushashoHakkoEntity;
-import jp.co.ndensan.reams.db.dbu.entity.db.relate.kaigohokenshikakushasho.ShuruiShikyuGendoKizyunngakuEntity;
 import jp.co.ndensan.reams.db.dbu.persistence.db.mapper.relate.kaigohokenshikakushasho.IKaigoHokenShikakushashoMapper;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBD;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBU;
@@ -120,14 +121,14 @@ public class KaigoHokenShikakushasho {
     /**
      * 介護保険資格者証データを作成します。
      *
-     * @param entity 資格者証発行Entity
-     * @return KaigoHokenShikakushashoDataEntity
+     * @param business 資格者証発行ビジネス
+     * @return KaigoHokenShikakushashoDataBusiness
      */
-    public KaigoHokenShikakushashoDataEntity setKaigoHokenShikakushasho(ShikakushashoHakkoEntity entity) {
+    public KaigoHokenShikakushashoDataBusiness setKaigoHokenShikakushasho(ShikakushashoHakkoBusiness business) {
         KaigoHokenShikakushashoDataEntity dataEntity = new KaigoHokenShikakushashoDataEntity();
-        dataEntity.setYukoKigen(entity.getYukoKigen());
-        dataEntity.setHihokenshaNo(entity.getHihokenshaNo());
-        HihokenshaDateEntity hihokenshaDateEntity = getHihokenshajouhou(entity.getShikibetsuCode());
+        dataEntity.setYukoKigen(business.get有効期限());
+        dataEntity.setHihokenshaNo(business.get被保番号());
+        HihokenshaDateEntity hihokenshaDateEntity = getHihokenshajouhou(business.get識別コード());
         dataEntity.setJusho(hihokenshaDateEntity.getJusho());
         dataEntity.setHihokenshaNameKana(hihokenshaDateEntity.getHihokenshaNameKana());
         dataEntity.setHihokenshaName(hihokenshaDateEntity.getHihokenshaName());
@@ -136,18 +137,18 @@ public class KaigoHokenShikakushasho {
         dataEntity.setBirthGengoShowa(hihokenshaDateEntity.getBirthGengoShowa());
         dataEntity.setBirthYMD(hihokenshaDateEntity.getBirthYMD());
         dataEntity.setSeibetsu(hihokenshaDateEntity.getSeibetsu());
-        dataEntity.setKofuYMD(entity.getKofuYMD());
-        dataEntity.setYokaigoJotaiKubun(YokaigoJotaiKubun09.toValue(entity.getYokaigoJotai()).get名称());
-        dataEntity.setNinteiYMD(entity.getNinteiYMD());
-        dataEntity.setYukoKaishiYMD(entity.getYukoKaishiYMD());
-        dataEntity.setYukoShuryoYMD(entity.getYukoShuryoYMD());
-        dataEntity.setKubunShikyuYukoKaishiYMD(entity.getKubunShikyuYukoKaishiYMD());
-        dataEntity.setKubunShikyuYukoShuryoYMD(entity.getKubunShikyuYukoShuryoYMD());
-        dataEntity.setKizyunngaku(entity.getKubunShikyuKizyunngaku());
+        dataEntity.setKofuYMD(business.get交付日());
+        dataEntity.setYokaigoJotaiKubun(YokaigoJotaiKubun09.toValue(business.get介護状態()).get名称());
+        dataEntity.setNinteiYMD(business.get認定日());
+        dataEntity.setYukoKaishiYMD(business.get有効期間の開始日付());
+        dataEntity.setYukoShuryoYMD(business.get有効期間の終了日付());
+        dataEntity.setKubunShikyuYukoKaishiYMD(business.get区分支給限度額の有効期間の開始日付());
+        dataEntity.setKubunShikyuYukoShuryoYMD(business.get区分支給限度額の有効期間の終了日付());
+        dataEntity.setKizyunngaku(business.get区分支給限度額の基準額());
         dataEntity.setTaniShurui(単位種類);
         dataEntity.setTani(固定文字_単位);
-        if (entity.getShikyuGendoKizyungakuList() != null) {
-            Collections.sort(entity.getShikyuGendoKizyungakuList(), new Comparator<ShuruiShikyuGendoKizyunngakuEntity>() {
+        if (business.getうち種類支給限度基準額の情報() != null) {
+            Collections.sort(business.getうち種類支給限度基準額の情報(), new Comparator<ShuruiShikyuGendoKizyunngakuEntity>() {
                 @Override
                 public int compare(ShuruiShikyuGendoKizyunngakuEntity entity1, ShuruiShikyuGendoKizyunngakuEntity entity2) {
                     return entity1.getServiceShurui().compareTo(entity2.getServiceShurui());
@@ -155,7 +156,7 @@ public class KaigoHokenShikakushasho {
             });
             int i = 0;
             List<ShuruiShikyuGendoKizyunngakuEntity> shikyuGendoKizyungakuList = new ArrayList<>();
-            for (ShuruiShikyuGendoKizyunngakuEntity kizyunngakuEntity : entity.getShikyuGendoKizyungakuList()) {
+            for (ShuruiShikyuGendoKizyunngakuEntity kizyunngakuEntity : business.getうち種類支給限度基準額の情報()) {
                 if (i < 画面のデータ件数) {
                     shikyuGendoKizyungakuList.add(kizyunngakuEntity);
                     dataEntity.setShikyuGendoKizyungakuList(shikyuGendoKizyungakuList);
@@ -166,33 +167,29 @@ public class KaigoHokenShikakushasho {
                 i = i + 1;
             }
         }
-        dataEntity.setServiceShitei(entity.getServiceShitei());
-        dataEntity.setKyufuseigenNaiyo(entity.getSeigenNaiyo());
-        dataEntity.setKyufuseigenKaishiYMD(entity.getSeigenKaishiYMD());
-        dataEntity.setKyufuseigenShuryoYMD(entity.getSeigenShuryoYMD());
-        dataEntity.setJigyoshaName1(getShienJigyoshajouhou(entity).getJigyoshaName1());
-        dataEntity.setTodokedeYMD1(getShienJigyoshajouhou(entity).getTodokedeYMD1());
-        dataEntity.setJigyoshaName2(getShienJigyoshajouhou(entity).getJigyoshaName2());
-        dataEntity.setJigyoshaName2Asutarisuku(getShienJigyoshajouhou(entity).getJigyoshaName2Asutarisuku());
-        dataEntity.setJigyoshaName2Masshosen(getShienJigyoshajouhou(entity).getJigyoshaName2Masshosen());
-        dataEntity.setTodokedeYMD2(getShienJigyoshajouhou(entity).getTodokedeYMD2());
-        dataEntity.setTodokedeYMD2Asutarisuku(getShienJigyoshajouhou(entity).getTodokedeYMD2Asutarisuku());
-        dataEntity.setTodokedeYMD2Masshosen(getShienJigyoshajouhou(entity).getTodokedeYMD2Masshosen());
-        dataEntity.setJigyoshaName3(getShienJigyoshajouhou(entity).getJigyoshaName3());
-        dataEntity.setJigyoshaName3Asutarisuku(getShienJigyoshajouhou(entity).getJigyoshaName3Asutarisuku());
-        dataEntity.setJigyoshaName3Masshosen(getShienJigyoshajouhou(entity).getJigyoshaName3Masshosen());
-        dataEntity.setTodokedeYMD3(getShienJigyoshajouhou(entity).getTodokedeYMD3());
-        dataEntity.setTodokedeYMD3Asutarisuku(getShienJigyoshajouhou(entity).getTodokedeYMD3Asutarisuku());
-        dataEntity.setTodokedeYMD3Masshosen(getShienJigyoshajouhou(entity).getTodokedeYMD3Masshosen());
+        dataEntity.setServiceShitei(business.get認定審査会の意見及びサービスの種類の指定());
+        dataEntity.setKyufuseigenDataList(business.get給付制限の情報());
+        dataEntity.setJigyoshaName1(getShienJigyoshajouhou(business).getJigyoshaName1());
+        dataEntity.setTodokedeYMD1(getShienJigyoshajouhou(business).getTodokedeYMD1());
+        dataEntity.setJigyoshaName2(getShienJigyoshajouhou(business).getJigyoshaName2());
+        dataEntity.setJigyoshaName2Asutarisuku(getShienJigyoshajouhou(business).getJigyoshaName2Asutarisuku());
+        dataEntity.setJigyoshaName2Masshosen(getShienJigyoshajouhou(business).getJigyoshaName2Masshosen());
+        dataEntity.setTodokedeYMD2(getShienJigyoshajouhou(business).getTodokedeYMD2());
+        dataEntity.setTodokedeYMD2Asutarisuku(getShienJigyoshajouhou(business).getTodokedeYMD2Asutarisuku());
+        dataEntity.setTodokedeYMD2Masshosen(getShienJigyoshajouhou(business).getTodokedeYMD2Masshosen());
+        dataEntity.setJigyoshaName3(getShienJigyoshajouhou(business).getJigyoshaName3());
+        dataEntity.setJigyoshaName3Asutarisuku(getShienJigyoshajouhou(business).getJigyoshaName3Asutarisuku());
+        dataEntity.setJigyoshaName3Masshosen(getShienJigyoshajouhou(business).getJigyoshaName3Masshosen());
+        dataEntity.setTodokedeYMD3(getShienJigyoshajouhou(business).getTodokedeYMD3());
+        dataEntity.setTodokedeYMD3Asutarisuku(getShienJigyoshajouhou(business).getTodokedeYMD3Asutarisuku());
+        dataEntity.setTodokedeYMD3Masshosen(getShienJigyoshajouhou(business).getTodokedeYMD3Masshosen());
         dataEntity.setNyushoShisetsuShurui(RString.EMPTY);
-        dataEntity.setNyushoShisetsuName(entity.getNyushoShisetsu());
-        dataEntity.setShisetsuNyushoYMD(entity.getNyushoYMD());
-        dataEntity.setShisetsuTaishoYMD(entity.getTaishoYMD());
+        dataEntity.setNyushoShisetsuDataList(business.get介護保険施設等の情報());
         dataEntity.setShisetsuNyusho(RString.EMPTY);
         dataEntity.setShisetsuNyuin(RString.EMPTY);
         dataEntity.setShisetsuTaisho(RString.EMPTY);
         dataEntity.setShisetsuTaiin(RString.EMPTY);
-        HokenshaBangoMeishoInDataEntity hokenshaBangoMeishoInEntity = getHokenshaBangoMeishoInjouhou(entity.getHokenshaNo());
+        HokenshaBangoMeishoInDataEntity hokenshaBangoMeishoInEntity = getHokenshaBangoMeishoInjouhou(business.get保険者番号());
         dataEntity.setHokenshaNo(hokenshaBangoMeishoInEntity.getHokenshaNo());
         dataEntity.setHokenshaJusho(hokenshaBangoMeishoInEntity.getHokenshaJusho());
         dataEntity.setHokenshaName(hokenshaBangoMeishoInEntity.getHokenshaName());
@@ -200,7 +197,7 @@ public class KaigoHokenShikakushasho {
         dataEntity.setDenshiKoin(hokenshaBangoMeishoInEntity.getDenshiKoin());
         dataEntity.setRemban(null);
         dataEntity.setSubTitle(RString.EMPTY);
-        return dataEntity;
+        return new KaigoHokenShikakushashoDataBusiness(dataEntity);
     }
 
     private HihokenshaDateEntity getHihokenshajouhou(RString shikibetsuCode) {
@@ -356,36 +353,36 @@ public class KaigoHokenShikakushasho {
         return entity;
     }
 
-    private ShienJigyoshaDataEntity getShienJigyoshajouhou(ShikakushashoHakkoEntity entity) {
+    private ShienJigyoshaDataEntity getShienJigyoshajouhou(ShikakushashoHakkoBusiness business) {
         ShienJigyoshaDataEntity shienJigyoshaDataEntity = new ShienJigyoshaDataEntity();
-        if (entity.getShienJigyoshaList() != null) {
-            Collections.sort(entity.getShienJigyoshaList(), new Comparator<ShienJigyoshaEntity>() {
+        if (business.get支援事業者の情報() != null) {
+            Collections.sort(business.get支援事業者の情報(), new Comparator<ShienJigyoshaEntity>() {
                 @Override
                 public int compare(ShienJigyoshaEntity entity1, ShienJigyoshaEntity entity2) {
                     return entity2.getTekiyoKaishiYMD().compareTo(entity1.getTekiyoKaishiYMD());
                 }
             });
-            set支援事業者情報(entity, shienJigyoshaDataEntity);
+            set支援事業者情報(business, shienJigyoshaDataEntity);
         }
         return shienJigyoshaDataEntity;
     }
 
-    private ShienJigyoshaDataEntity set支援事業者情報(ShikakushashoHakkoEntity entity,
+    private ShienJigyoshaDataEntity set支援事業者情報(ShikakushashoHakkoBusiness business,
             ShienJigyoshaDataEntity shienJigyoshaDataEntity) {
         if (適用切れ非表示.equals(BusinessConfig.get(ConfigNameDBD.資格者証表示方法_居宅支援事業者, SubGyomuCode.DBD介護受給))) {
-            if (RString.isNullOrEmpty(entity.getShienJigyoshaList().get(0).getTekiyoKaishiYMD())) {
-                shienJigyoshaDataEntity.setJigyoshaName1(entity.getShienJigyoshaList().get(0).getJigyosha());
-                shienJigyoshaDataEntity.setTodokedeYMD1(entity.getShienJigyoshaList().get(0).getTodokedeYMD());
+            if (RString.isNullOrEmpty(business.get支援事業者の情報().get(0).getTekiyoKaishiYMD())) {
+                shienJigyoshaDataEntity.setJigyoshaName1(business.get支援事業者の情報().get(0).getJigyosha());
+                shienJigyoshaDataEntity.setTodokedeYMD1(business.get支援事業者の情報().get(0).getTodokedeYMD());
             }
-            if (entity.getShienJigyoshaList().get(1).getTekiyoKaishiYMD().compareTo(entity.getKofuYMD()) >= -1) {
-                setNameAndYMD(entity.getShienJigyoshaList(), shienJigyoshaDataEntity);
+            if (business.get支援事業者の情報().get(1).getTekiyoKaishiYMD().compareTo(business.get交付日()) >= -1) {
+                setNameAndYMD(business.get支援事業者の情報(), shienJigyoshaDataEntity);
             }
         } else if (適用切れ表示.equals(BusinessConfig.get(ConfigNameDBD.資格者証表示方法_居宅支援事業者, SubGyomuCode.DBD介護受給))
-                && (RString.isNullOrEmpty(entity.getShienJigyoshaList().get(0).getTekiyoKaishiYMD())
-                || entity.getShienJigyoshaList().get(0).getTekiyoKaishiYMD().compareTo(entity.getKofuYMD()) == -1)) {
-            shienJigyoshaDataEntity.setJigyoshaName1(entity.getShienJigyoshaList().get(0).getJigyosha());
-            shienJigyoshaDataEntity.setTodokedeYMD1(entity.getShienJigyoshaList().get(0).getTodokedeYMD());
-            setNameAndYMDBy居宅支援事業者履歴(entity.getShienJigyoshaList(), shienJigyoshaDataEntity);
+                && (RString.isNullOrEmpty(business.get支援事業者の情報().get(0).getTekiyoKaishiYMD())
+                || business.get支援事業者の情報().get(0).getTekiyoKaishiYMD().compareTo(business.get交付日()) == -1)) {
+            shienJigyoshaDataEntity.setJigyoshaName1(business.get支援事業者の情報().get(0).getJigyosha());
+            shienJigyoshaDataEntity.setTodokedeYMD1(business.get支援事業者の情報().get(0).getTodokedeYMD());
+            setNameAndYMDBy居宅支援事業者履歴(business.get支援事業者の情報(), shienJigyoshaDataEntity);
         }
         return shienJigyoshaDataEntity;
     }
