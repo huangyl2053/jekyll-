@@ -114,6 +114,8 @@ public class NinteiChosaScheduleInputHandler {
             boolean 予約状況状態 = ViewStateHolder.get(ViewStateKeys.認定調査スケジュール登録10_予約状況状態, boolean.class);
             boolean 被保番号状態 = ViewStateHolder.get(ViewStateKeys.認定調査スケジュール登録10_被保番号状態, boolean.class);
             boolean 場所状態 = ViewStateHolder.get(ViewStateKeys.認定調査スケジュール登録10_場所状態, boolean.class);
+            設定日 = ViewStateHolder.get(ViewStateKeys.認定調査スケジュール登録10_調査日値, FlexibleDate.class);
+            ViewStateHolder.put(ViewStateKeys.認定調査スケジュール登録_設定日, 設定日);
             div.getWariateJokyo().getTxtNinteiChosainCode().setValue(
                     chickNull(ViewStateHolder.get(ViewStateKeys.認定調査スケジュール登録10_認定調査員コード値, RString.class)));
             div.getWariateJokyo().getTxtNinteiChosainName().setValue(
@@ -131,7 +133,7 @@ public class NinteiChosaScheduleInputHandler {
             div.getWariateJokyo().getRadYoyakuKahi().setSelectedKey(
                     chickNull(ViewStateHolder.get(ViewStateKeys.認定調査スケジュール登録10_予約可否値, RString.class)));
             div.getWariateJokyo().getTxtNinteiChosaBiko().setValue(
-                    chickNull(ViewStateHolder.get(ViewStateKeys.認定調査スケジュール登録10_認定調査員コード値, RString.class)));
+                    chickNull(ViewStateHolder.get(ViewStateKeys.認定調査スケジュール登録10_備考値, RString.class)));
             div.getWariateJokyo().getRadYoyakuJokyo().setSelectedKey(
                     chickNull(ViewStateHolder.get(ViewStateKeys.認定調査スケジュール登録10_予約状況値, RString.class)));
             div.getButtonArea().getBtnSearchTaishosha().setVisible(true);
