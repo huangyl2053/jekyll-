@@ -52,16 +52,21 @@ public final class HihokenshaDaichoSakuseiParameter {
     public static HihokenshaDaichoSakuseiParameter createSelectByKeyParam(
             ShikibetsuCode shikibetsuCode,
             HihokenshaNo hihokenshaNo,
-            JigyoshaNo nyushoShisetsuCode
+            JigyoshaNo... nyushoShisetsuCode
     ) {
         boolean useshihokenshaNo = false;
         if (hihokenshaNo != null && !hihokenshaNo.isEmpty()) {
             useshihokenshaNo = true;
         }
+        JigyoshaNo jigyoshaNo = JigyoshaNo.EMPTY;
+        if (nyushoShisetsuCode != null) {
+            jigyoshaNo = nyushoShisetsuCode[0];
+        }
+
         return new HihokenshaDaichoSakuseiParameter(shikibetsuCode,
                 hihokenshaNo,
                 useshihokenshaNo,
-                nyushoShisetsuCode
+                jigyoshaNo
         );
     }
 }

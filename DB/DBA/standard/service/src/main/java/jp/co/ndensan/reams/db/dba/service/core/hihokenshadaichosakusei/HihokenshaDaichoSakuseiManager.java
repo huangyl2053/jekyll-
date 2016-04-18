@@ -682,18 +682,23 @@ public class HihokenshaDaichoSakuseiManager {
     }
 
     private ShisetsuNyutaishoEntity get入所施設(HihokenshaDaichoSakuseiParameter parameter) {
+        requireNonNull(parameter, UrSystemErrorMessages.値がnull.getReplacedMessage(REPLACED_MESSAGE.toString()));
         ShisetsuNyutaishoEntity entity = new ShisetsuNyutaishoEntity();
         IHihokenshaDaichoSakuseiMapper mapper = mapperProvider.create(IHihokenshaDaichoSakuseiMapper.class);
         DbT1004ShisetsuNyutaishoEntity nyutaishoEntity = mapper.getShisetsuNyutaisho(parameter);
-        if (nyutaishoEntity != null && nyutaishoEntity.getNyushoShisetsuShurui() != NYUSHOSHISETSUSHURUI_11) {
-            DbT1005KaigoJogaiTokureiTaishoShisetsuEntity tokureiTaishoShisetsuEntity = mapper.getKaigoJogaiTokureiTaisho(parameter);
+        if (nyutaishoEntity != null && !NYUSHOSHISETSUSHURUI_11.equals(nyutaishoEntity.getNyushoShisetsuShurui())) {
+            HihokenshaDaichoSakuseiParameter sakuseiParameter = HihokenshaDaichoSakuseiParameter.createSelectByKeyParam(
+                    parameter.getShikibetsuCode(), parameter.getHihokenshaNo(), nyutaishoEntity.getNyushoShisetsuCode());
+            DbT1005KaigoJogaiTokureiTaishoShisetsuEntity tokureiTaishoShisetsuEntity = mapper.getKaigoJogaiTokureiTaisho(sakuseiParameter);
             if (tokureiTaishoShisetsuEntity != null) {
                 entity.setJigyoshaNo(tokureiTaishoShisetsuEntity.getJigyoshaNo());
                 entity.setJigyoshaMeisho(tokureiTaishoShisetsuEntity.getJigyoshaMeisho() == null
                         ? RString.EMPTY : tokureiTaishoShisetsuEntity.getJigyoshaMeisho().getColumnValue());
             }
-        } else {
-            DbT7060KaigoJigyoshaEntity dbT7060KaigoJigyoshaEntity = mapper.getKaigoJigyosha(parameter);
+        } else if (nyutaishoEntity != null && NYUSHOSHISETSUSHURUI_11.equals(nyutaishoEntity.getNyushoShisetsuShurui())) {
+            HihokenshaDaichoSakuseiParameter sakuseiParameter = HihokenshaDaichoSakuseiParameter.createSelectByKeyParam(
+                    parameter.getShikibetsuCode(), parameter.getHihokenshaNo(), nyutaishoEntity.getNyushoShisetsuCode());
+            DbT7060KaigoJigyoshaEntity dbT7060KaigoJigyoshaEntity = mapper.getKaigoJigyosha(sakuseiParameter);
             if (dbT7060KaigoJigyoshaEntity != null) {
                 entity.setJigyoshaNo(dbT7060KaigoJigyoshaEntity.getJigyoshaNo() == null
                         ? RString.EMPTY : dbT7060KaigoJigyoshaEntity.getJigyoshaNo().getColumnValue());
