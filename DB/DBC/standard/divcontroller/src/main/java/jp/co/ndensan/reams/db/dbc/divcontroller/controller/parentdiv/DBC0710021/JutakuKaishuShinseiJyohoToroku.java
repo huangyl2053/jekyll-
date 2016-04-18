@@ -61,8 +61,6 @@ public class JutakuKaishuShinseiJyohoToroku {
     private final RString 画面モード_修正 = new RString("修正モード");
     private final RString 画面モード_事前申請 = new RString("事前申請モード");
     private final RString 画面モード_以外 = new RString("以外");
-    private final int 画面年月開始位 = 0;
-    private final int 画面年月終了位 = 6;
     private final Code 非該当 = new Code("01");
     private final Code 要支援1 = new Code("12");
     private final Code 要支援2 = new Code("13");
@@ -194,7 +192,7 @@ public class JutakuKaishuShinseiJyohoToroku {
             }
             if (new RString(UrQuestionMessages.入力内容の破棄.getMessage().getCode()).equals(
                     ResponseHolder.getMessageCode())
-                    && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
+                    && ResponseHolder.getButtonType() == MessageDialogSelectedResult.No) {
                 return ResponseData.of(div).respond();
             }
         }
@@ -460,8 +458,7 @@ public class JutakuKaishuShinseiJyohoToroku {
         RDate 領収日 = div.getJutakuKaishuShinseiContents().getTxtRyoshuYMD().getValue();
         RDate 画面提供着工年月 = div.getTxtTeikyoYM().getValue();
         if (領収日 != null) {
-            FlexibleYearMonth サービス提供年月 = new FlexibleYearMonth(領収日.toString().substring(
-                    画面年月開始位, 画面年月終了位));
+            FlexibleYearMonth サービス提供年月 = new FlexibleYearMonth(領収日.getYearMonth().toString());
             JutakuKaishuJizenShinsei 住宅改修費事前申請 = JutakuKaishuJizenShinsei.createInstance();
             YokaigoNinteiJyoho 要介護認定情報 = 住宅改修費事前申請.getYokaigoNinteiJyoho(
                     被保険者番号, サービス提供年月);

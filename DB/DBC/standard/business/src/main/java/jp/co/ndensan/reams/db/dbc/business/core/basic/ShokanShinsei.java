@@ -575,9 +575,7 @@ public class ShokanShinsei extends ModelBase<ShokanShinseiIdentifier, DbT3034Sho
      */
     public ShokanShinsei modifiedModel() {
         DbT3034ShokanShinseiEntity modifiedEntity = this.toEntity();
-        if (!modifiedEntity.getState().equals(EntityDataState.Added)) {
-            modifiedEntity.setState(EntityDataState.Modified);
-        }
+        modifiedEntity.setState(EntityDataState.Modified);
         return new ShokanShinsei(modifiedEntity, id);
     }
 }

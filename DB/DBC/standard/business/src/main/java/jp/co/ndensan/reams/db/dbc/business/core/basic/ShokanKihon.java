@@ -356,6 +356,17 @@ public class ShokanKihon extends ModelBase<ShokanKihonIdentifier, DbT3038ShokanK
     }
 
     /**
+     * 保持する償還払請求基本を更新対象とします。<br/> {@link DbT3038ShokanKihonEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば更新状態にします。
+     *
+     * @return 更新対象処理実施後の{@link ShokanKihon}
+     */
+    public ShokanKihon modified() {
+        DbT3038ShokanKihonEntity modifiedEntity = this.toEntity();
+        modifiedEntity.setState(EntityDataState.Modified);
+        return new ShokanKihon(modifiedEntity, id);
+    }
+
+    /**
      * {@link ShokanKihon}のシリアライズ形式を提供します。
      *
      * @return {@link ShokanKihon}のシリアライズ形式
