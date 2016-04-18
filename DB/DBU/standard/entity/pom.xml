@@ -16,6 +16,10 @@
     <dependencies>
 		<!-- DBU -->
 		<!-- DBA -->
+                <dependency>
+                    <groupId>jp.co.ndensan.reams.db.dba</groupId>
+                    <artifactId>DbaEntity</artifactId>
+                </dependency>
 		<!-- DBB -->
 		<!-- DBC -->
 		<!-- DBD -->
