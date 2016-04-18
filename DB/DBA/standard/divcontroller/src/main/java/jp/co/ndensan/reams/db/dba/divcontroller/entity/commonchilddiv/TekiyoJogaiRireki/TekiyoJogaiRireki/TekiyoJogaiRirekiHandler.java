@@ -302,6 +302,7 @@ public class TekiyoJogaiRirekiHandler {
             row.setKaijoTodokeDate(div.getPanelTekiyoInput().getTxtKaijoTodokedeDate());
             row.setKaijoJiyuCode(div.getPanelTekiyoInput().getDdlKaijyoJiyu().getSelectedKey());
             row.setKaijoJiyu(div.getPanelTekiyoInput().getDdlKaijyoJiyu().getSelectedValue());
+            row.setRirekiNo(履歴番号);
             rowList.add(row);
             TekiyoJogaisha 適用除外者の識別子
                     = new TekiyoJogaisha(識別コード, new FlexibleDate(
@@ -331,7 +332,6 @@ public class TekiyoJogaiRirekiHandler {
                                     div.getPanelTekiyoJokaiKaiJyoInput().getTxtKaijoDateInput().getValue().toString()), 枝番);
             適用除外者Model.add(適用除外者の識別子);
         }
-        Collections.sort(rowList, new DateComparator());
         div.getDatagridTekiyoJogai().setDataSource(rowList);
         div.setStauts(RString.EMPTY);
         ViewStateHolder.put(jp.co.ndensan.reams.db.dbz.divcontroller.viewbox.ViewStateKeys.適用除外者管理_適用除外者情報, 適用除外者Model);
@@ -363,20 +363,21 @@ public class TekiyoJogaiRirekiHandler {
         RString 最大枝番 = new RString("0");
         RString 履歴番号 = new RString("1");
         int index = 1;
+        if (状態_適用登録.equals(new RString(div.getMode_DisplayMode().toString()))) {
+            Collections.sort(rowList, new DateComparatorTekiyoYMD());
+        }
         for (datagridTekiyoJogai_Row row : rowList) {
             if (index == 1) {
                 最大枝番 = rowList.get(0).getEdaNo();
                 履歴番号 = rowList.get(0).getRirekiNo();
-            } else {
-                int intEdaNoMax = Integer.parseInt(最大枝番.toString().trim());
-                枝番 = new RString(String.valueOf(intEdaNoMax + 1)).padZeroToLeft(PADZERO);
-                最大枝番 = 枝番;
             }
+            int intEdaNoMax = Integer.parseInt(最大枝番.toString().trim());
+            枝番 = new RString(String.valueOf(intEdaNoMax + 1)).padZeroToLeft(PADZERO);
+            最大枝番 = 枝番;
             FlexibleDate 異動日 = new FlexibleDate(row.getIdoYMD());
             if (new RString("0001").equals(枝番) && index == 1) {
                 枝番 = new RString("0001");
             }
-            index++;
             if (row.getRowState() == null || RowState.Unchanged.equals(row.getRowState())) {
                 continue;
             }
@@ -394,8 +395,6 @@ public class TekiyoJogaiRirekiHandler {
                 TekiyoJogaishaManager.createInstance().regTekiyoJogaisha(set適用除外者情報(
                         適用除外者Model.get(適用除外者の識別子), row).toEntity());
             } else if (状態_修正.equals(row.getStatus())) {
-                int intEdaNoMax = Integer.parseInt(最大枝番.toString().trim());
-                枝番 = new RString(String.valueOf(intEdaNoMax + 1)).padZeroToLeft(PADZERO);
                 TekiyoJogaishaManager.createInstance().delTekiyoJogaisha(識別コード, 異動日, row.getEdaNo());
                 TekiyoJogaishaIdentifier 適用除外者の識別子
                         = new TekiyoJogaishaIdentifier(識別コード, 異動日, 枝番);
@@ -450,6 +449,10 @@ public class TekiyoJogaiRirekiHandler {
                             解除届出日);
                 }
             }
+            index++;
+        }
+        if (状態_適用登録.equals(new RString(div.getMode_DisplayMode().toString()))) {
+            Collections.sort(rowList, new DateComparator());
         }
     }
 
@@ -949,9 +952,20 @@ public class TekiyoJogaiRirekiHandler {
 
     private static class DateComparator implements Comparator<datagridTekiyoJogai_Row>, Serializable {
 
+        private static final long serialVersionUID = 1L;
+
         @Override
         public int compare(datagridTekiyoJogai_Row o1, datagridTekiyoJogai_Row o2) {
             return o2.getTekiyoDate().getValue().compareTo(o1.getTekiyoDate().getValue());
+        }
+    }
+
+    private static class DateComparatorTekiyoYMD implements Comparator<datagridTekiyoJogai_Row>, Serializable {
+
+        @Override
+        public int compare(datagridTekiyoJogai_Row o1, datagridTekiyoJogai_Row o2) {
+            return o1.getTekiyoDate().getValue().
+                    compareTo(o2.getTekiyoDate().getValue());
         }
     }
 }
