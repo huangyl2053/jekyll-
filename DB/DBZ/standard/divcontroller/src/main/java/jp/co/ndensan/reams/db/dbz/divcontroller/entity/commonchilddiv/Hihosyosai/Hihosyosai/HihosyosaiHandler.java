@@ -182,7 +182,7 @@ public class HihosyosaiHandler {
         set取得事由(得喪情報.getShikakuShutokuJiyuCode());
         set被保区分(得喪情報.getHihokennshaKubunCode());
         set所在保険者(得喪情報.getShichosonCode().getColumnValue());
-        set所在保険者(得喪情報.getKoikinaiTokureiSochimotoShichosonCode().getColumnValue());
+        set措置元保険者(得喪情報.getKoikinaiTokureiSochimotoShichosonCode().getColumnValue());
         set旧保険者(得喪情報.getKyuShichosonCode().getColumnValue());
         div.getTxtSyoninichiji1().setValue(日期(得喪情報.getLastUpdateTimestamp()));
         if (得喪情報.getShikakuSoshitsuYMD() != null && !得喪情報.getShikakuSoshitsuYMD().isEmpty()) {
@@ -313,6 +313,15 @@ public class HihosyosaiHandler {
         for (KeyValueDataSource keyValue : 所在保険者情報) {
             if (所在保険者コード.equals(keyValue.getKey())) {
                 div.getDdlSyozaiHokensya().setSelectedKey(所在保険者コード);
+            }
+        }
+    }
+
+    private void set措置元保険者(RString 措置元保険者コード) {
+        List<KeyValueDataSource> 所在保険者情報 = get所在保険者();
+        for (KeyValueDataSource keyValue : 所在保険者情報) {
+            if (措置元保険者コード.equals(keyValue.getKey())) {
+                div.getDdlSotimotoHokensya().setSelectedKey(措置元保険者コード);
             }
         }
     }
