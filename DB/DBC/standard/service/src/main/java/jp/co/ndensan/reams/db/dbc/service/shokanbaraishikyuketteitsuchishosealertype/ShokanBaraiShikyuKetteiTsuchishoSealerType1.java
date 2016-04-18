@@ -165,7 +165,7 @@ public class ShokanBaraiShikyuKetteiTsuchishoSealerType1 {
                         fillType(FillType.BLANK).toDateString());
             }
             抽出条件Builder.append(KARA);
-            if (batchPram.getDataFrom() != null) {
+            if (batchPram.getDataTo() != null) {
                 抽出条件Builder.append(batchPram.getDataTo().wareki().
                         eraType(EraType.KANJI).
                         firstYear(FirstYear.GAN_NEN).
@@ -182,7 +182,7 @@ public class ShokanBaraiShikyuKetteiTsuchishoSealerType1 {
                         fillType(FillType.BLANK).toDateString());
             }
             抽出条件Builder.append(KARA);
-            if (batchPram.getDataFrom() != null) {
+            if (batchPram.getDataTo() != null) {
                 抽出条件Builder.append(batchPram.getDataTo().wareki().
                         eraType(EraType.KANJI).
                         firstYear(FirstYear.GAN_NEN).
