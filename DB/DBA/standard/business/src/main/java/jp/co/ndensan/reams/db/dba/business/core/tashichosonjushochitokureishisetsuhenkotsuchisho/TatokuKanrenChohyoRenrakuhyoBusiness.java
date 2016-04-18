@@ -349,4 +349,22 @@ public class TatokuKanrenChohyoRenrakuhyoBusiness {
     public RString get施設住所() {
         return entity.get施設住所();
     }
+
+    /**
+     * 郵便番号を返します。
+     *
+     * @return 郵便番号
+     */
+    public RString get郵便番号() {
+        return entity.get郵便番号();
+    }
+
+    /**
+     * 住所を返します。
+     *
+     * @return 住所
+     */
+    public RString get住所() {
+        return entity.get住所();
+    }
 }
