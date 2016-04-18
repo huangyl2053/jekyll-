@@ -28,9 +28,15 @@ import jp.co.ndensan.reams.uz.uza.util.db.annotation.TempTableColumnOrder;
 public class DbT2002FukaJohoTempTableEntity extends DbTableEntityBase<DbT2002FukaJohoTempTableEntity> implements IDbAccessable {
 // <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.4.2">
 
+    /**
+     * 賦課情報一時テーブル
+     */
     @TableName
-    public static final RString TABLE_NAME = new RString("DbT2002FukaJohoTemp");
+    public static final RString TABLE_NAME;
 
+    static {
+        TABLE_NAME = new RString("DbT2002FukaJohoTemp");
+    }
     @TempTableColumnOrder(1)
     private FlexibleYear choteiNendo;
     @TempTableColumnOrder(2)
