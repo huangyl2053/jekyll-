@@ -172,4 +172,31 @@ public class DbT7130KaigoServiceShuruiDac {
                                 leq(teikyoKaishiYM, RDate.getNowDate()),
                                 or(leq(RDate.getNowDate(), teikyoshuryoYM), isNULL(teikyoshuryoYM)))).toObject(DbT7130KaigoServiceShuruiEntity.class);
     }
+
+    /**
+     * 介護サービス種類名称を取得します。
+     *
+     * @param サービス種類コード サービス種類コード
+     * @param 認定有効期間開始 認定有効期間開始
+     * @param 認定有効期間終了 認定有効期間終了
+     * @return DbT7130KaigoServiceShuruiEntity
+     * @throws NullPointerException 引数のいずれかがnullの場合
+     */
+    @Transaction
+    public DbT7130KaigoServiceShuruiEntity select種類名称(
+            ServiceShuruiCode サービス種類コード,
+            FlexibleYearMonth 認定有効期間開始,
+            FlexibleYearMonth 認定有効期間終了) throws NullPointerException {
+
+        DbAccessorNormalType accessor = new DbAccessorNormalType(session);
+
+        return accessor.select().
+                table(DbT7130KaigoServiceShurui.class).
+                where(and(eq(DbT7130KaigoServiceShurui.serviceShuruiCd, サービス種類コード),
+                                leq(DbT7130KaigoServiceShurui.teikyoKaishiYM, 認定有効期間終了),
+                                leq(認定有効期間開始, DbT7130KaigoServiceShurui.teikyoKaishiYM)))
+                .order(by(DbT7130KaigoServiceShurui.teikyoKaishiYM, Order.DESC))
+                .limit(1)
+                .toObject(DbT7130KaigoServiceShuruiEntity.class);
+    }
 }

@@ -19,8 +19,11 @@ import jp.co.ndensan.reams.uz.uza.core.mybatis.SqlSession;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.util.db.DbAccessorNormalType;
+import jp.co.ndensan.reams.uz.uza.util.db.Order;
 import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.and;
+import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.by;
 import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.eq;
+import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.leq;
 import jp.co.ndensan.reams.uz.uza.util.db.util.DbAccessors;
 import jp.co.ndensan.reams.uz.uza.util.di.InjectSession;
 import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
@@ -93,5 +96,33 @@ public class DbT7111ServiceShuruiShikyuGendoGakuDac implements ISaveable<DbT7111
         // TODO 物理削除であるかは業務ごとに検討してください。
         //return DbAccessorMethodSelector.saveByForDeletePhysical(new DbAccessorNormalType(session), entity);
         return DbAccessors.saveBy(new DbAccessorNormalType(session), entity);
+    }
+
+    /**
+     * 支給限度単位数を取得します。
+     *
+     * @param サービス種類コード サービス種類コード
+     * @param 認定有効期間開始 認定有効期間開始
+     * @param 認定有効期間終了 認定有効期間終了
+     * @return DbT7111ServiceShuruiShikyuGendoGakuEntity
+     * @throws NullPointerException 引数のいずれかがnullの場合
+     */
+    @Transaction
+    public DbT7111ServiceShuruiShikyuGendoGakuEntity select支給限度単位数(
+            ServiceShuruiCode サービス種類コード,
+            FlexibleYearMonth 認定有効期間開始,
+            FlexibleYearMonth 認定有効期間終了) throws NullPointerException {
+
+        DbAccessorNormalType accessor = new DbAccessorNormalType(session);
+
+        return accessor.select().
+                table(DbT7111ServiceShuruiShikyuGendoGaku.class).
+                where(and(
+                                leq(serviceShuruiCode, サービス種類コード),
+                                leq(tekiyoKaishiYM, 認定有効期間開始),
+                                leq(認定有効期間終了, tekiyoKaishiYM)))
+                .order(by(DbT7111ServiceShuruiShikyuGendoGaku.tekiyoKaishiYM, Order.DESC))
+                .limit(1).
+                toObject(DbT7111ServiceShuruiShikyuGendoGakuEntity.class);
     }
 }
