@@ -46,6 +46,9 @@ public interface IHihosyosaiDiv extends ICommonChildDivBaseProperties {
      */
     SearchResult<HihokenshaDaicho> getGridData();
 
+    /**
+     * 施設入退所の保存処理する。
+     */
     public void 施設入退所保存処理();
 
     /**
