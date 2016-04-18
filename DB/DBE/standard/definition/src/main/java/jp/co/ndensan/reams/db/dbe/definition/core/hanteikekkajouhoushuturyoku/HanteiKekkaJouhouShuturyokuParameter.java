@@ -149,8 +149,7 @@ public final class HanteiKekkaJouhouShuturyokuParameter {
      * @param 生年月日From RString
      * @param 生年月日To RString
      * @param 申請区分_申請時 RString
-     * @param 性別区分フラグ
-     * @param 性別区分 RString
+     * @param 性別区分フラグ boolean
      * @param kaisaiNoList List
      * @param 最大表示件数 Decimal
      * @param 一致 一致
@@ -191,10 +190,6 @@ public final class HanteiKekkaJouhouShuturyokuParameter {
         boolean 生年月日Toフラグ = false;
         boolean 申請区分_申請時フラグ = false;
         boolean usesSaidaiHyojiKensu = false;
-        boolean 前方一致フラグ = false;
-        boolean 完全一致フラグ = false;
-        boolean 部分一致フラグ = false;
-        boolean 後方一致フラグ = false;
         if (!RString.isNullOrEmpty(二次判定日From)) {
             二次判定日Fromフラグ = true;
         }
@@ -253,19 +248,6 @@ public final class HanteiKekkaJouhouShuturyokuParameter {
         if (!最大表示件数.equals(new Decimal(0))) {
             usesSaidaiHyojiKensu = true;
         }
-        if (一致.equals(new RString("key0"))) {
-            前方一致フラグ = true;
-        }
-        if (一致.equals(new RString("key1"))) {
-            完全一致フラグ = true;
-        }
-        if (一致.equals(new RString("key2"))) {
-            部分一致フラグ = true;
-        }
-        if (一致.equals(new RString("key3"))) {
-            後方一致フラグ = true;
-        }
-
         return new HanteiKekkaJouhouShuturyokuParameter(二次判定日Fromフラグ,
                 二次判定日From,
                 二次判定日Toフラグ,
@@ -298,10 +280,13 @@ public final class HanteiKekkaJouhouShuturyokuParameter {
                 usesSaidaiHyojiKensu,
                 最大表示件数,
                 一致,
-                前方一致フラグ,
-                完全一致フラグ,
-                部分一致フラグ,
-                後方一致フラグ);
+                itti(一致, new RString("key0")),
+                itti(一致, new RString("key1")),
+                itti(一致, new RString("key2")),
+                itti(一致, new RString("key3")));
     }
 
+    private static boolean itti(RString 一致, RString key) {
+        return 一致.equals(key);
+    }
 }

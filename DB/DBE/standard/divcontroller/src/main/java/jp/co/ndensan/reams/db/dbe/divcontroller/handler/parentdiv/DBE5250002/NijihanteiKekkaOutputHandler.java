@@ -156,22 +156,26 @@ public class NijihanteiKekkaOutputHandler {
                 審査会名称.append(jigyoshaInput.get開催番号() == null ? RString.EMPTY : jigyoshaInput.get開催番号());
                 審査会名称.append(new RString("回審査会"));
                 dgFukushiyoguShohin.setKaigoNinteiShinsakaiName(審査会名称.toRString());
-                if (jigyoshaInput.get開催予定日() != null) {
-                    dgFukushiyoguShohin.getKaisaiYoteiDay().setValue(new FlexibleDate(jigyoshaInput.get開催予定日().toString()));
-                }
-                if (jigyoshaInput.get開催日() != null) {
-                    dgFukushiyoguShohin.getKaisaiDay().setValue(new FlexibleDate(jigyoshaInput.get開催日().toString()));
-                }
-                if (jigyoshaInput.get審査会結果情報抽出年月日() == null) {
-                    dgFukushiyoguShohin.setDataShutsuryoku(nullToEmpty(jigyoshaInput.get審査会結果情報抽出年月日()));
-                } else {
-                    dgFukushiyoguShohin.setDataShutsuryoku(new RString("済"));
-                }
+                hiduke(dgFukushiyoguShohin, jigyoshaInput);
                 dgFukushiyoguShohin.setShinseishoKanriNo(jigyoshaInput.get申請書管理番号());
                 dgTaishoshaIchiranList.add(dgFukushiyoguShohin);
             }
         }
         nijidiv.getNijihanteiKekkaIchiran().getDgTaishoshaIchiran().setDataSource(dgTaishoshaIchiranList);
+    }
+
+    private void hiduke(dgTaishoshaIchiran_Row dgFukushiyoguShohin, HanteiKekkaJouhouShuturyokuBusiness jigyoshaInput) {
+        if (jigyoshaInput.get開催予定日() != null) {
+            dgFukushiyoguShohin.getKaisaiYoteiDay().setValue(new FlexibleDate(jigyoshaInput.get開催予定日().toString()));
+        }
+        if (jigyoshaInput.get開催日() != null) {
+            dgFukushiyoguShohin.getKaisaiDay().setValue(new FlexibleDate(jigyoshaInput.get開催日().toString()));
+        }
+        if (jigyoshaInput.get審査会結果情報抽出年月日() == null) {
+            dgFukushiyoguShohin.setDataShutsuryoku(nullToEmpty(jigyoshaInput.get審査会結果情報抽出年月日()));
+        } else {
+            dgFukushiyoguShohin.setDataShutsuryoku(new RString("済"));
+        }
     }
 
     /**
@@ -193,11 +197,6 @@ public class NijihanteiKekkaOutputHandler {
                 : new RString(nijidiv.getKensakuJoken().getTxtNijihanteDateRange().getFromValue().toString()));
         hanteibatchParameter.setNijiHanteiYMDTo(nijidiv.getKensakuJoken().getTxtNijihanteDateRange().getToValue() == null ? RString.EMPTY
                 : new RString(nijidiv.getKensakuJoken().getTxtNijihanteDateRange().getToValue().toString()));
-//        (shinseishoKanriNo,
-//                        nijidiv.getKensakuJoken().getTxtNijihanteDateRange().getFromValue() == null ? RString.EMPTY
-//                        : new RString(nijidiv.getKensakuJoken().getTxtNijihanteDateRange().getFromValue().toString()),
-//                        nijidiv.getKensakuJoken().getTxtNijihanteDateRange().getToValue() == null ? RString.EMPTY
-//                        : new RString(nijidiv.getKensakuJoken().getTxtNijihanteDateRange().getToValue().toString()));
         return hanteibatchParameter;
     }
 
@@ -220,13 +219,6 @@ public class NijihanteiKekkaOutputHandler {
                 : new RString(nijidiv.getKensakuJoken().getTxtNijihanteDateRange().getFromValue().toString()));
         hanteibatchParameter.setNijiHanteiYMDTo(nijidiv.getKensakuJoken().getTxtNijihanteDateRange().getToValue() == null ? RString.EMPTY
                 : new RString(nijidiv.getKensakuJoken().getTxtNijihanteDateRange().getToValue().toString()));
-
-//        HanteiKekkaJohoShutsuryokuBatchParamter hanteibatchParameter
-//                = new HanteiKekkaJohoShutsuryokuBatchParamter(shinseishoKanriNo,
-//                        nijidiv.getKensakuJoken().getTxtNijihanteDateRange().getFromValue() == null ? RString.EMPTY
-//                        : new RString(nijidiv.getKensakuJoken().getTxtNijihanteDateRange().getFromValue().toString()),
-//                        nijidiv.getKensakuJoken().getTxtNijihanteDateRange().getToValue() == null ? RString.EMPTY
-//                        : new RString(nijidiv.getKensakuJoken().getTxtNijihanteDateRange().getToValue().toString()));
         return hanteibatchParameter;
     }
 }

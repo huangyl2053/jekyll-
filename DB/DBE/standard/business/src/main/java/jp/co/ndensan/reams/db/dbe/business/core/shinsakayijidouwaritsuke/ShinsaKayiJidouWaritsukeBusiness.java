@@ -58,7 +58,7 @@ public class ShinsaKayiJidouWaritsukeBusiness {
      *
      * @return 種類
      */
-    public boolean get種類() {
+    public boolean is種類() {
         return entity.isGogitaiSeishinkaSonzaiFlag();
     }
 
@@ -130,7 +130,7 @@ public class ShinsaKayiJidouWaritsukeBusiness {
      *
      * @return ダミーフラグ
      */
-    public boolean getダミーフラグ() {
+    public boolean isダミーフラグ() {
         return entity.isGogitaiDummyFlag();
     }
 }

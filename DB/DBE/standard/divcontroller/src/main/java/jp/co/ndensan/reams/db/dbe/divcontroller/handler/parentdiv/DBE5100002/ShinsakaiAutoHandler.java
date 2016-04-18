@@ -47,7 +47,7 @@ public class ShinsakaiAutoHandler {
                 dgShinsakaiIchiran.setKaisaino(jigyoshaInput.get審査会開催番号());
                 dgShinsakaiIchiran.setShinsakainame(jigyoshaInput.get審査会名称());
                 dgShinsakaiIchiran.setGogitainame(jigyoshaInput.get合議体名称());
-                if (jigyoshaInput.get種類()) {
+                if (jigyoshaInput.is種類()) {
                     dgShinsakaiIchiran.setShurui(new RString("精"));
                 }
                 dgShinsakaiIchiran.setShinsakaikaijyo(jigyoshaInput.get審査会会場());
@@ -57,7 +57,7 @@ public class ShinsakaiAutoHandler {
                 dgShinsakaiIchiran.getShinsakaiJidoWariateTeiin();
                 dgShinsakaiIchiran.setWaritsukeninzu(jigyoshaInput.get割付人数());
                 dgShinsakaiIchiran.setShinchokuJokyo(ShinsakaiShinchokuJokyo.toValue(jigyoshaInput.get進捗状況()).get名称());
-                dgShinsakaiIchiran.setDammyflag(IsGogitaiDummy.toValue(jigyoshaInput.getダミーフラグ()).is合議体ダミーフラグTrue());
+                dgShinsakaiIchiran.setDammyflag(IsGogitaiDummy.toValue(jigyoshaInput.isダミーフラグ()).is合議体ダミーフラグTrue());
                 dgShinsakaiIchiranList.add(dgShinsakaiIchiran);
             }
         }

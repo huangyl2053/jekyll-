@@ -28,6 +28,15 @@ public class ChosaChiku {
     }
 
     /**
+     * コンストラクタです。<br/>
+     * DBより取得した{@link ChosaChikuEntity}より{@link ChosaChiku}を生成します。
+     *
+     */
+    public ChosaChiku() {
+        this.chosaChikuEntity = new ChosaChikuEntity();
+    }
+
+    /**
      * 調査地区コードを返します。
      *
      * @return 調査地区コード

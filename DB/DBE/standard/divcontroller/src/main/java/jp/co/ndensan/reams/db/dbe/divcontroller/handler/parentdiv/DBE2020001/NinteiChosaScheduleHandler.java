@@ -14,7 +14,6 @@ import jp.co.ndensan.reams.db.dbe.business.core.chikushichoson.ChikuShichosonBus
 import jp.co.ndensan.reams.db.dbe.business.core.ninteichosaschedule.NinteichosaScheduleBusiness;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2020001.NinteiChosaSchedulePanelDiv;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2020001.dgNinteiChosaSchedule_Row;
-import jp.co.ndensan.reams.db.dbe.entity.db.relate.chikuninteichosain.ChosaChikuEntity;
 import jp.co.ndensan.reams.db.dbe.service.core.basic.sukejurutouroku.SukejuruTourokuFinder;
 import jp.co.ndensan.reams.db.dbz.definition.core.ViewStateKeys;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
@@ -77,11 +76,11 @@ public class NinteiChosaScheduleHandler {
         for (ChikuShichosonBusiness chikuShichosonBusiness : chikuList) {
             UzT0007CodeEntity entity = CodeMaster.getCode(SubGyomuCode.DBE認定支援,
                     new CodeShubetsu("5002"), chikuShichosonBusiness.getChosaChikuCode());
-            ChosaChikuEntity chosaChikuEntity = new ChosaChikuEntity();
+            ChosaChiku chiku = new ChosaChiku();
             if (entity != null) {
-                chosaChikuEntity.setChosaChikuName(entity.getコード名称());
-                chosaChikuEntity.setChosaChikuCode(chikuShichosonBusiness.getChosaChikuCode().getColumnValue());
-                list.add(new ChosaChiku(chosaChikuEntity));
+                chiku.set調査地区名称(entity.getコード名称());
+                chiku.set調査地区コード(chikuShichosonBusiness.getChosaChikuCode().getColumnValue());
+                list.add(chiku);
             } else {
                 throw new ApplicationException(UrErrorMessages.コードマスタなし.getMessage());
             }
@@ -153,15 +152,7 @@ public class NinteiChosaScheduleHandler {
                 }
                 dgJigyoshaItiran.setMemoImportantCount(new RString(String.valueOf(jigyoshaInput.get重要メモ件数())));
             } else {
-                if (dateIndex.getDayOfWeek() == DayOfWeek.SATURDAY) {
-                    dgJigyoshaItiran.setRowBgColor(DataGridCellBgColor.bgColorGreen);
-                }
-                if (dateIndex.getDayOfWeek() == DayOfWeek.SUNDAY) {
-                    dgJigyoshaItiran.setRowBgColor(DataGridCellBgColor.bgColorRed);
-                }
-                if (new RDate(dateIndex.toString()).isNationalHoliday()) {
-                    dgJigyoshaItiran.setRowBgColor(DataGridCellBgColor.bgColorRed);
-                }
+                hiduke(dgJigyoshaItiran, dateIndex);
                 dgJigyoshaItiran.getDate().setValue(new RDate(dateIndex.toString()));
                 dgJigyoshaItiran.setDay(new RString(dateIndex.getDayOfWeek().getMiddleTerm()));
             }
@@ -169,6 +160,18 @@ public class NinteiChosaScheduleHandler {
             dgKoufuKaishuList.add(dgJigyoshaItiran);
         }
         ninteidiv.getDgNinteiChosaSchedule().setDataSource(dgKoufuKaishuList);
+    }
+
+    private void hiduke(dgNinteiChosaSchedule_Row dgJigyoshaItiran, FlexibleDate dateIndex) {
+        if (dateIndex.getDayOfWeek() == DayOfWeek.SATURDAY) {
+            dgJigyoshaItiran.setRowBgColor(DataGridCellBgColor.bgColorGreen);
+        }
+        if (dateIndex.getDayOfWeek() == DayOfWeek.SUNDAY) {
+            dgJigyoshaItiran.setRowBgColor(DataGridCellBgColor.bgColorRed);
+        }
+        if (new RDate(dateIndex.toString()).isNationalHoliday()) {
+            dgJigyoshaItiran.setRowBgColor(DataGridCellBgColor.bgColorRed);
+        }
     }
 
     /**

@@ -6,7 +6,6 @@ package jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.Kaigonint
  */
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import jp.co.ndensan.reams.db.dbz.divcontroller.handler.commonchilddiv.KaigoNinteiShikakuInfo.KaigoNinteiShikakuInfoHandler;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TextBox;
