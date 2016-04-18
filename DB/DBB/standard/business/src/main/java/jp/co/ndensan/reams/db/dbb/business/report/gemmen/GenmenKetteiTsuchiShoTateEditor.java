@@ -9,6 +9,8 @@ import jp.co.ndensan.reams.db.dbb.entity.report.gemmen.KaigoHokenryoGenmenKettei
 
 /**
  * 介護保険料減免決定通知書 A4縦タイプEditor
+ *
+ * @reamsid_L DBB-0740-030 surun
  */
 public class GenmenKetteiTsuchiShoTateEditor implements IGenmenKetteiTsuchiShoTateEditor {
 

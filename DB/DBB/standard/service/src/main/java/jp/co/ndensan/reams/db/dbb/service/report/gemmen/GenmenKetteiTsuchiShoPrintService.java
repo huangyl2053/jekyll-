@@ -57,6 +57,8 @@ import jp.co.ndensan.reams.uz.uza.util.editor.DecimalFormatter;
 
 /**
  * 介護保険料減免決定通知書PrintService
+ *
+ * @reamsid_L DBB-0740-030 surun
  */
 public class GenmenKetteiTsuchiShoPrintService {
 
@@ -142,7 +144,12 @@ public class GenmenKetteiTsuchiShoPrintService {
     /**
      * setItemsメソッド
      *
+     * @param 発行日 FlexibleDate
+     * @param 文書番号 RString
      * @param 減免決定通知書情報 GenmenKetteiTsuchiShoJoho
+     * @param 通知書定型文 RString
+     * @param 介護問合せ先ソースビルダー IKaigoToiawasesakiSourceBuilder
+     * @param sourceBuilder NinshoshaSource
      * @return List<GenmenKetteiTsuchiShoItem>
      */
     private List<GenmenKetteiTsuchiShoItem> setItems(FlexibleDate 発行日, RString 文書番号,
@@ -177,10 +184,10 @@ public class GenmenKetteiTsuchiShoPrintService {
     private void setBaseItem(GenmenKetteiTsuchiShoItem item, GenmenKetteiTsuchiShoJoho 減免決定通知書情報,
             RString 文書番号, RString 通知書定型文, FlexibleDate 発行日, IKaigoToiawasesakiSourceBuilder 介護問合せ先ソースビルダー, NinshoshaSource sourceBuilder) {
         item.set文書番号(文書番号);
-        item.set調定年度(減免決定通知書情報.get減免の情報更正後().get介護賦課().getChoteiNendo().wareki().eraType(EraType.KANJI).toDateString());
-        item.set賦課年度(減免決定通知書情報.get減免の情報更正後().get介護賦課().getFukaNendo().wareki().eraType(EraType.KANJI)
+        item.set調定年度(減免決定通知書情報.get減免の情報更正後().get調定年度().wareki().eraType(EraType.KANJI).toDateString());
+        item.set賦課年度(減免決定通知書情報.get減免の情報更正後().get賦課年度().wareki().eraType(EraType.KANJI)
                 .firstYear(FirstYear.GAN_NEN).toDateString().concat(年度));
-        item.set決定結果(減免決定通知書情報.get減免の情報更正後().get介護賦課減免().getJotaiKubun());
+        item.set決定結果(減免決定通知書情報.get減免の情報更正後().get減免状態区分());
         HyojiCodeResearcher researcher = new HyojiCodeResearcher();
         if (isNotNull(減免決定通知書情報.get帳票制御共通()) && isNotNull(減免決定通知書情報.get宛名()) && isNotNull(減免決定通知書情報.get納組情報())) {
 
@@ -199,32 +206,32 @@ public class GenmenKetteiTsuchiShoPrintService {
 
             }
         }
-        item.set通知書番号(減免決定通知書情報.get減免の情報更正後().get介護賦課().getTsuchishoNo().value());
-        SetaiCode 世帯コード = 減免決定通知書情報.get減免の情報更正後().get介護賦課().getSetaiCode();
+        item.set通知書番号(減免決定通知書情報.get減免の情報更正後().get通知書番号().value());
+        SetaiCode 世帯コード = 減免決定通知書情報.get減免の情報更正後().get世帯コード();
         if (世帯コード != null) {
             item.set世帯コード(世帯コード.value());
         }
-        item.set被保険者番号(減免決定通知書情報.get減免の情報更正後().get介護賦課().getHihokenshaNo().value());
-        ShikibetsuCode 識別コード = 減免決定通知書情報.get減免の情報更正後().get介護賦課().getShikibetsuCode();
+        item.set被保険者番号(減免決定通知書情報.get減免の情報更正後().get被保険者番号().value());
+        ShikibetsuCode 識別コード = 減免決定通知書情報.get減免の情報更正後().get識別コード();
         if (識別コード != null) {
             item.set識別コード(識別コード.value());
         }
-        item.set減免決定年月日(減免決定通知書情報.get減免の情報更正後().get介護賦課減免().getKetteiYMD().wareki().eraType(EraType.KANJI).
+        item.set減免決定年月日(減免決定通知書情報.get減免の情報更正後().get減免決定日().wareki().eraType(EraType.KANJI).
                 firstYear(FirstYear.GAN_NEN).separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString());
         item.set減免額前(DecimalFormatter.toコンマ区切りRString(減免決定通知書情報
-                .get賦課の情報更正前().get介護賦課().getGemmenGaku(), 0));
+                .get賦課の情報更正前().get減免額(), 0));
         item.set保険料算出額前(DecimalFormatter.toコンマ区切りRString(減免決定通知書情報
-                .get賦課の情報更正前().get介護賦課().getGemmenMaeHokenryo(), 0));
+                .get賦課の情報更正前().get減免前介護保険料(), 0));
         item.set保険料額前(DecimalFormatter.toコンマ区切りRString(減免決定通知書情報
-                .get賦課の情報更正前().get介護賦課().getKakuteiHokenryo(), 0));
+                .get賦課の情報更正前().get確定介護保険料(), 0));
         item.set減免額後(DecimalFormatter.toコンマ区切りRString(減免決定通知書情報
-                .get減免の情報更正後().get介護賦課().getGemmenGaku(), 0));
+                .get減免の情報更正後().get減免額(), 0));
         item.set保険料算出額後(DecimalFormatter.toコンマ区切りRString(減免決定通知書情報
-                .get減免の情報更正後().get介護賦課().getGemmenMaeHokenryo(), 0));
+                .get減免の情報更正後().get減免前介護保険料(), 0));
         item.set保険料額後(DecimalFormatter.toコンマ区切りRString(減免決定通知書情報
-                .get減免の情報更正後().get介護賦課().getKakuteiHokenryo(), 0));
-        item.set減免理由1(減免決定通知書情報.get減免の情報更正後().get介護賦課減免().getGemmenJiyuCode().value());
-        item.set減免理由2(減免決定通知書情報.get減免の情報更正後().get介護賦課減免().getGemmenJiyu());
+                .get減免の情報更正後().get確定介護保険料(), 0));
+        item.set減免理由1(減免決定通知書情報.get減免の情報更正後().get減免種類().value());
+        item.set減免理由2(減免決定通知書情報.get減免の情報更正後().get減免事由());
         item.set備考Title(通知書定型文);
         item.set備考(通知書定型文);
 
@@ -259,41 +266,38 @@ public class GenmenKetteiTsuchiShoPrintService {
                     減免決定通知書情報.get帳票制御共通());
             if (isNotNull(編集後宛先)) {
                 KaigoSofubutsuAtesakiSource source = 編集後宛先.getSofubutsuAtesakiSource();
-                if (source != null) {
-                    item.set郵便番号No(source.get送付物宛先ソース().yubinNo);
-                    item.set行政区(source.get送付物宛先ソース().gyoseiku);
-                    item.set住所3(source.get送付物宛先ソース().jusho3);
-                    item.set住所(source.get送付物宛先ソース().jushoText);
-                    item.set住所1(source.get送付物宛先ソース().jusho1);
+                item.set郵便番号No(source.get送付物宛先ソース().yubinNo);
+                item.set行政区(source.get送付物宛先ソース().gyoseiku);
+                item.set住所3(source.get送付物宛先ソース().jusho3);
+                item.set住所(source.get送付物宛先ソース().jushoText);
+                item.set住所1(source.get送付物宛先ソース().jusho1);
 
-                    item.set住所2(source.get送付物宛先ソース().jusho2);
-                    item.set方書(source.get送付物宛先ソース().katagakiText);
-                    item.set方書2(source.get送付物宛先ソース().katagaki2);
-                    item.set方書Small2(source.get送付物宛先ソース().katagakiSmall2);
-                    item.set方書1(source.get送付物宛先ソース().katagaki1);
-                    item.set方書Small1(source.get送付物宛先ソース().katagakiSmall1);
-                    item.set右括弧2(source.get送付物宛先ソース().kakkoRight2);
-                    item.set右括弧1(source.get送付物宛先ソース().kakkoRight1);
-                    item.set氏名2(source.get送付物宛先ソース().shimei2);
-                    item.set氏名Small2(source.get送付物宛先ソース().shimeiSmall2);
-                    item.set氏名(source.get送付物宛先ソース().shimeiText);
-                    item.set名称付与2(source.get送付物宛先ソース().meishoFuyo2);
-                    item.set氏名Small1(source.get送付物宛先ソース().shimeiSmall1);
-                    item.set代納区分名(source.get送付物宛先ソース().dainoKubunMei);
-                    item.set氏名1(source.get送付物宛先ソース().shimei1);
-                    item.set名称付与1(source.get送付物宛先ソース().meishoFuyo1);
-                    item.set様分氏名(source.get送付物宛先ソース().samabunShimeiText);
-                    item.set様分氏名Small2(source.get送付物宛先ソース().samabunShimeiSmall2);
-                    item.set様分2(source.get送付物宛先ソース().samaBun2);
-                    item.set左括弧2(source.get送付物宛先ソース().kakkoLeft2);
-                    item.set様分氏名2(source.get送付物宛先ソース().samabunShimei2);
-                    item.set左括弧1(source.get送付物宛先ソース().kakkoLeft1);
-                    item.set様分氏名1(source.get送付物宛先ソース().samabunShimei1);
-                    item.set様分1(source.get送付物宛先ソース().samaBun1);
-                    item.set様分氏名Small1(source.get送付物宛先ソース().samabunShimeiSmall1);
-                    item.setカスタマバーコード(source.get送付物宛先ソース().customerBarCode);
-
-                }
+                item.set住所2(source.get送付物宛先ソース().jusho2);
+                item.set方書(source.get送付物宛先ソース().katagakiText);
+                item.set方書2(source.get送付物宛先ソース().katagaki2);
+                item.set方書Small2(source.get送付物宛先ソース().katagakiSmall2);
+                item.set方書1(source.get送付物宛先ソース().katagaki1);
+                item.set方書Small1(source.get送付物宛先ソース().katagakiSmall1);
+                item.set右括弧2(source.get送付物宛先ソース().kakkoRight2);
+                item.set右括弧1(source.get送付物宛先ソース().kakkoRight1);
+                item.set氏名2(source.get送付物宛先ソース().shimei2);
+                item.set氏名Small2(source.get送付物宛先ソース().shimeiSmall2);
+                item.set氏名(source.get送付物宛先ソース().shimeiText);
+                item.set名称付与2(source.get送付物宛先ソース().meishoFuyo2);
+                item.set氏名Small1(source.get送付物宛先ソース().shimeiSmall1);
+                item.set代納区分名(source.get送付物宛先ソース().dainoKubunMei);
+                item.set氏名1(source.get送付物宛先ソース().shimei1);
+                item.set名称付与1(source.get送付物宛先ソース().meishoFuyo1);
+                item.set様分氏名(source.get送付物宛先ソース().samabunShimeiText);
+                item.set様分氏名Small2(source.get送付物宛先ソース().samabunShimeiSmall2);
+                item.set様分2(source.get送付物宛先ソース().samaBun2);
+                item.set左括弧2(source.get送付物宛先ソース().kakkoLeft2);
+                item.set様分氏名2(source.get送付物宛先ソース().samabunShimei2);
+                item.set左括弧1(source.get送付物宛先ソース().kakkoLeft1);
+                item.set様分氏名1(source.get送付物宛先ソース().samabunShimei1);
+                item.set様分1(source.get送付物宛先ソース().samaBun1);
+                item.set様分氏名Small1(source.get送付物宛先ソース().samabunShimeiSmall1);
+                item.setカスタマバーコード(source.get送付物宛先ソース().customerBarCode);
 
             }
 
