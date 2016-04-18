@@ -5,8 +5,6 @@
  */
 package jp.co.ndensan.reams.db.dba.business.report.hihokenshadaicho;
 
-import java.util.ArrayList;
-import java.util.List;
 import jp.co.ndensan.reams.db.dba.entity.report.hihokenshadaicho.HihokenshaDaichoReportSource;
 import jp.co.ndensan.reams.uz.uza.report.ReportEditorJoiner;
 
@@ -58,33 +56,6 @@ public final class HihokenshaDaichoBuilder implements IHihokenshaDaichoBuilder {
      */
     @Override
     public HihokenshaDaichoReportSource build() {
-        List<IHihokenshaDaichoEditor> editor = new ArrayList<>();
-        if (joho != null) {
-            editor.add(joho);
-        }
-        if (老齢福祉 != null) {
-            editor.add(老齢福祉);
-        }
-        if (生活保護 != null) {
-            editor.add(生活保護);
-        }
-        if (世帯左 != null) {
-            editor.add(世帯左);
-        }
-        if (世帯右 != null) {
-            editor.add(世帯右);
-        }
-        if (資格移動情報 != null) {
-            editor.add(資格移動情報);
-        }
-        if (被保険者証発行履歴情報1 != null) {
-            editor.add(被保険者証発行履歴情報1);
-        }
-        if (被保険者証発行履歴情報2 != null) {
-            editor.add(被保険者証発行履歴情報2);
-        }
-
-//        for
         return ReportEditorJoiner.from(new HihokenshaDaichoReportSource()).join(joho).join(老齢福祉).join(生活保護).join(世帯左).
                 join(世帯右).join(資格移動情報).join(被保険者証発行履歴情報1).join(被保険者証発行履歴情報2).buildSource();
     }
