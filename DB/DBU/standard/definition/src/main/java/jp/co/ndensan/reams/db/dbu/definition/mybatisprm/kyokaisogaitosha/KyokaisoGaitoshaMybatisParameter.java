@@ -9,16 +9,13 @@ import jp.co.ndensan.reams.uz.uza.batch.parameter.IMyBatisParameter;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import lombok.Getter;
-import lombok.Setter;
 
 /**
- *
  * 境界層管理マスタリストのMyBatisパラメータ
  *
  * @reamsid_L DBU-1050-020 wanghui
  */
 @Getter
-@Setter
 @SuppressWarnings("PMD.UnusedPrivateField")
 public final class KyokaisoGaitoshaMybatisParameter implements IMyBatisParameter {
 
@@ -79,7 +76,7 @@ public final class KyokaisoGaitoshaMybatisParameter implements IMyBatisParameter
      * @param isDate_TOFlag 日付ToNULL
      * @param psmShikibetsuTaisho 宛名情報取得
      */
-    public KyokaisoGaitoshaMybatisParameter(
+    private KyokaisoGaitoshaMybatisParameter(
             RString mode,
             RString range,
             FlexibleDate date_FROM,
@@ -148,22 +145,8 @@ public final class KyokaisoGaitoshaMybatisParameter implements IMyBatisParameter
      * @param isshokuhiKeiFlag 特定介護食費負担額減額該当区分フラグ
      * @param iskogakuFlag 高額サービス費該当区分フラグ
      * @param ishokenFlag 納付減額該当区分フラグ
-     * @param order_ID 出力順ID
-     * @param ismodekjunhe 基準日
-     * @param ismoderange 範囲
-     * @param ismodenayi 指定無し
-     * @param isRangeApplication 境界層該当申請日
-     * @param isRangeStart 境界層該当開始日
-     * @param isRangeEnd 境界層該当終了日
-     * @param isDateFlag 日付FROMNULL
-     * @param isDate_TOFlag 日付ToNULL
-     * @param psmShikibetsuTaisho 宛名情報取得
-     * @param kyuufugakuFlag boolean
-     * @param shokuhiKeiFlag boolean
-     * @param hyojunFutanFlag boolean
-     * @param kyojuhinadoFutangFlag boolean
-     * @param kogakuFlag boolean
-     * @param hokenFlag boolean
+     * @param order_ID 出力順I
+     * @param psmShikibetsuTaisho RString
      * @return mybatisパラメータ
      */
     public static KyokaisoGaitoshaMybatisParameter createParam(
@@ -178,22 +161,21 @@ public final class KyokaisoGaitoshaMybatisParameter implements IMyBatisParameter
             RString iskogakuFlag,
             RString ishokenFlag,
             RString order_ID,
-            boolean ismodekjunhe,
-            boolean ismoderange,
-            boolean ismodenayi,
-            boolean isRangeApplication,
-            boolean isRangeStart,
-            boolean isRangeEnd,
-            boolean isDateFlag,
-            boolean isDate_TOFlag,
-            RString psmShikibetsuTaisho,
-            boolean kyuufugakuFlag,
-            boolean hyojunFutanFlag,
-            boolean kyojuhinadoFutangFlag,
-            boolean shokuhiKeiFlag,
-            boolean kogakuFlag,
-            boolean hokenFlag
-    ) {
+            RString psmShikibetsuTaisho) {
+        boolean ismodekjunhe = false;
+        boolean hyojunFutanFlag = false;
+        boolean kyojuhinadoFutangFlag = false;
+        boolean shokuhiKeiFlag = false;
+        boolean kogakuFlag = false;
+        boolean hokenFlag = false;
+        boolean isRangeApplication = false;
+        boolean ismoderange = false;
+        boolean ismodenayi = false;
+        boolean isRangeStart = false;
+        boolean isRangeEnd = false;
+        boolean isDateFlag = false;
+        boolean isDate_TOFlag = false;
+        boolean kyuufugakuFlag = false;
         if (new RString("1").equals(mode)) {
             ismodekjunhe = true;
         }

@@ -39,7 +39,7 @@ public class FukaKakuteiPanelHandler {
     private static final RString 本算定賦課処理の結果を確定します = new RString("本算定賦課処理の結果を確定します。");
     private static final RString 本算定 = new RString("本算定異動（現年度）賦課処理の結果を確定します。");
     private static final RString 確定処理 = new RString("確定処理");
-    private static final RString BtnFukaKakutei = new RString("btnFukaKakutei");
+    private static final RString 共通ボタン = new RString("btnFukaKakutei");
 
     /**
      * コンストラクタ。
@@ -67,7 +67,7 @@ public class FukaKakuteiPanelHandler {
      */
     public boolean 処理名_特徴仮算定賦課(YMDHMS 特徴仮算定賦課の基準日時, YMDHMS 特徴仮算定賦課確定の基準日時) {
         if (特徴仮算定賦課の基準日時 == null) {
-            CommonButtonHolder.setDisabledByCommonButtonFieldName(BtnFukaKakutei, true);
+            CommonButtonHolder.setDisabledByCommonButtonFieldName(共通ボタン, true);
             throw new ApplicationException(UrErrorMessages.実行不可.getMessage().replace((確定処理).toString()).evaluate());
         } else {
             if (特徴仮算定賦課確定の基準日時 == null) {
@@ -94,7 +94,7 @@ public class FukaKakuteiPanelHandler {
      */
     public boolean 処理名_普徴仮算定賦課(YMDHMS 普徴仮算定賦課の最大基準日時, YMDHMS 普徴仮算定賦課確定の基準日時) {
         if (普徴仮算定賦課の最大基準日時 == null) {
-            CommonButtonHolder.setDisabledByCommonButtonFieldName(BtnFukaKakutei, true);
+            CommonButtonHolder.setDisabledByCommonButtonFieldName(共通ボタン, true);
             throw new ApplicationException(UrErrorMessages.実行不可.getMessage().replace((確定処理).toString()).evaluate());
         } else {
             if (普徴仮算定賦課確定の基準日時 == null) {
@@ -121,7 +121,7 @@ public class FukaKakuteiPanelHandler {
      */
     public boolean 処理名_仮算定異動賦課(YMDHMS 仮算定異動賦課の基準日, YMDHMS 仮算定異動賦課確定の最大基準日時) {
         if (仮算定異動賦課の基準日 == null) {
-            CommonButtonHolder.setDisabledByCommonButtonFieldName(BtnFukaKakutei, true);
+            CommonButtonHolder.setDisabledByCommonButtonFieldName(共通ボタン, true);
             throw new ApplicationException(UrErrorMessages.実行不可.getMessage().replace((確定処理).toString()).evaluate());
         } else {
             if (仮算定異動賦課確定の最大基準日時 == null) {
@@ -158,7 +158,7 @@ public class FukaKakuteiPanelHandler {
      */
     public boolean 処理名_本算定賦課(YMDHMS 本算定賦課の基準日時, YMDHMS 本算定賦課確定の基準日時) {
         if (本算定賦課の基準日時 == null) {
-            CommonButtonHolder.setDisabledByCommonButtonFieldName(BtnFukaKakutei, true);
+            CommonButtonHolder.setDisabledByCommonButtonFieldName(共通ボタン, true);
             throw new ApplicationException(UrErrorMessages.実行不可.getMessage().replace((確定処理).toString()).evaluate());
         } else {
             if (本算定賦課確定の基準日時 == null) {
@@ -185,7 +185,7 @@ public class FukaKakuteiPanelHandler {
      */
     public boolean 処理名_異動賦課(YMDHMS 異動賦課の基準日時, YMDHMS 異動賦課確定の最大基準日時) {
         if (異動賦課の基準日時 == null) {
-            CommonButtonHolder.setDisabledByCommonButtonFieldName(BtnFukaKakutei, true);
+            CommonButtonHolder.setDisabledByCommonButtonFieldName(共通ボタン, true);
             throw new ApplicationException(UrErrorMessages.実行不可.getMessage().replace((確定処理).toString()).evaluate());
         } else {
             if (異動賦課確定の最大基準日時 == null) {

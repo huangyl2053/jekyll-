@@ -6,7 +6,7 @@
 package jp.co.ndensan.reams.db.dbu.batchcontroller.flow.kyokaisoggaitosha;
 
 import jp.co.ndensan.reams.db.dbu.batchcontroller.step.kyokaisoggaitoshareportprocess.KyokaisogGaitoshaReportPageBreakProcess;
-import jp.co.ndensan.reams.db.dbu.definition.core.kyokaisogaitoshabatchparameter.KyokaisoKanriMasterListBatchParameter;
+import jp.co.ndensan.reams.db.dbu.definition.batchprm.kyokaisogaitoshabatchparameter.KyokaisoKanriMasterListBatchParameter;
 import jp.co.ndensan.reams.uz.uza.batch.Step;
 import jp.co.ndensan.reams.uz.uza.batch.flow.BatchFlowBase;
 import jp.co.ndensan.reams.uz.uza.batch.flow.IBatchFlowCommand;

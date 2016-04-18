@@ -207,13 +207,13 @@ public class KaigoJigyoshaShisetsuKanriManager {
      */
     @Transaction
     public boolean checkKikanGorisei(KaigoJogaiTokureiParameter parameter) {
-        boolean 有効期間合理性フラグ = false;
-        if (parameter != null && !parameter.getYukoShuryoYMD().isEmpty()) {
-            if (!parameter.getYukoKaishiYMD().isBeforeOrEquals(parameter.getYukoShuryoYMD())) {
-                有効期間合理性フラグ = true;
-            }
+
+        if (parameter == null || parameter.getYukoShuryoYMD().isEmpty()) {
+            return true;
+        } else if (parameter.getYukoKaishiYMD().isBeforeOrEquals(parameter.getYukoShuryoYMD())) {
+            return true;
         }
-        return 有効期間合理性フラグ;
+        return false;
     }
 
     /**

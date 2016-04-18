@@ -3,13 +3,15 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbu.definition.core.kyokaisogaitoshabatchparameter;
+package jp.co.ndensan.reams.db.dbu.definition.batchprm.kyokaisogaitoshabatchparameter;
 
 import jp.co.ndensan.reams.db.dbu.definition.processprm.kyokaisogaitosha.KyokaisoGaitoshaProcessParameter;
 import jp.co.ndensan.reams.uz.uza.batch.BatchParameter;
 import jp.co.ndensan.reams.uz.uza.batch.flow.BatchParameterBase;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import lombok.Getter;
+import lombok.Setter;
 
 /**
  *
@@ -17,9 +19,8 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
  *
  * @reamsid_L DBU-1050-020 wanghui
  */
-@lombok.Getter
-@lombok.Setter
-@SuppressWarnings("PMD.UnusedPrivateField")
+@Getter
+@Setter
 public class KyokaisoKanriMasterListBatchParameter extends BatchParameterBase {
 
     private static final String KEY_MODE = "mode";
@@ -33,7 +34,6 @@ public class KyokaisoKanriMasterListBatchParameter extends BatchParameterBase {
     private static final String KEY_ISKOGAKUFLAG = "iskogakuFlag";
     private static final String KEY_ISHOKENFLAG = "ishokenFlag";
     private static final String KEY_ORDER_ID = "order_ID";
-
     @BatchParameter(key = KEY_MODE, name = "取得モード")
     private RString mode;
     @BatchParameter(key = KEY_RANGE, name = "境界層対象抽出範囲")
@@ -56,12 +56,6 @@ public class KyokaisoKanriMasterListBatchParameter extends BatchParameterBase {
     private RString ishokenFlag;
     @BatchParameter(key = KEY_ORDER_ID, name = "出力順ID")
     private RString order_ID;
-
-    /**
-     * コンストラクタです。
-     */
-    public KyokaisoKanriMasterListBatchParameter() {
-    }
 
     /**
      * processのパラメータを生成します。
