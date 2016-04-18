@@ -5,13 +5,13 @@
  */
 package jp.co.ndensan.reams.db.dba.divcontroller.controller.parentdiv.DBA1030011;
 
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.List;
+import jp.co.ndensan.reams.db.dba.divcontroller.entity.parentdiv.DBA1030011.DBA1030011StateName;
+import jp.co.ndensan.reams.db.dba.divcontroller.entity.parentdiv.DBA1030011.DBA1030011TransitionEventName;
 import jp.co.ndensan.reams.db.dba.divcontroller.entity.parentdiv.DBA1030011.ShikakuSoshitsuIdoTotalDiv;
 import jp.co.ndensan.reams.db.dba.divcontroller.handler.parentdiv.DBA1030011.ShikakuSoshitsuIdoTotalHandler;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.ShikakuTokusoRireki.dgShikakuShutokuRireki_Row;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
+import jp.co.ndensan.reams.ur.urz.definition.message.UrInformationMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrQuestionMessages;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.exclusion.LockingKey;
@@ -29,6 +29,7 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
 /**
  * 資格喪失異動の対象者情報を表示するためのDivControllerです。
  *
+ * @reamsid_L DBA-0552-030 wangkun
  */
 public class ShikakuSoshitsuIdoTotal {
 
@@ -38,7 +39,7 @@ public class ShikakuSoshitsuIdoTotal {
     private static final RString RONEN = new RString("老福年金");
     private static final RString SHISETSU = new RString("施設入退所");
     private static final RString SHORUIJOKYO = new RString("証類状況");
-    private static final RString 追加 = new RString("追加");
+    private static final RString 修正 = new RString("修正");
 
     /**
      * 資格喪失異動の初期化します。
@@ -57,7 +58,6 @@ public class ShikakuSoshitsuIdoTotal {
         } else {
             RealInitialLocker.lock(前排他ロックキー);
         }
-
         response.data = div;
         return response;
     }
@@ -102,25 +102,49 @@ public class ShikakuSoshitsuIdoTotal {
         if (new RString(UrQuestionMessages.処理実行の確認.getMessage().getCode()).equals(ResponseHolder.getMessageCode())
                 && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
             createHandler(div).save();
+            RealInitialLocker.release(前排他ロックキー);
+            div.getComplete().getCcdKaigoKanryoMessage().setSuccessMessage(new RString(UrInformationMessages.保存終了.getMessage().evaluate()));
+            return ResponseData.of(div).setState(DBA1030011StateName.完了状態);
         }
         response.data = div;
         return response;
     }
 
     /**
-     * 「資格得喪履歴を追加する」ボタン処理します。
+     * 「資格情報を詳細」ボタン処理します。
      *
      * @param div ShikakuSoshitsuIdoTotalDiv
      * @return レスポンス
      */
-    public ResponseData<ShikakuSoshitsuIdoTotalDiv> onClick_btnAdd(ShikakuSoshitsuIdoTotalDiv div) {
-        ResponseData<ShikakuSoshitsuIdoTotalDiv> response = new ResponseData<>();
-        div.getShikakuSoshitsuJoho().getShikakuTokusoRirekiMain().getCcdShikakuTokusoRireki().set追加するボタン(true);
-        div.getShikakuSoshitsuJoho().getShikakuTokusoRirekiMain().getShikakuSoshitsuInput().setDisabled(false);
-        response.data = div;
-        return response;
+    public ResponseData<ShikakuSoshitsuIdoTotalDiv> onClick_btnSyouHoSo(ShikakuSoshitsuIdoTotalDiv div) {
+        RealInitialLocker.release(前排他ロックキー);
+        return ResponseData.of(div).forwardWithEventName(DBA1030011TransitionEventName.詳細へ).respond();
     }
 
+    /**
+     * 「戻る」ボタン処理します。
+     *
+     * @param div ShikakuSoshitsuIdoTotalDiv
+     * @return レスポンス
+     */
+    public ResponseData<ShikakuSoshitsuIdoTotalDiv> onClick_btnBack(ShikakuSoshitsuIdoTotalDiv div) {
+        RealInitialLocker.release(前排他ロックキー);
+        return ResponseData.of(div).forwardWithEventName(DBA1030011TransitionEventName.再検索).respond();
+    }
+
+//    /**
+//     * 「資格得喪履歴を追加する」ボタン処理します。
+//     *
+//     * @param div ShikakuSoshitsuIdoTotalDiv
+//     * @return レスポンス
+//     */
+//    public ResponseData<ShikakuSoshitsuIdoTotalDiv> onClick_btnAdd(ShikakuSoshitsuIdoTotalDiv div) {
+//        ResponseData<ShikakuSoshitsuIdoTotalDiv> response = new ResponseData<>();
+//        div.getShikakuSoshitsuJoho().getShikakuTokusoRirekiMain().getCcdShikakuTokusoRireki().set追加するボタン(true);
+//        div.getShikakuSoshitsuJoho().getShikakuTokusoRirekiMain().getShikakuSoshitsuInput().setDisabled(false);
+//        response.data = div;
+//        return response;
+//    }
     /**
      * 「資格得喪履歴を修正する」ボタン処理します。
      *
@@ -129,18 +153,17 @@ public class ShikakuSoshitsuIdoTotal {
      */
     public ResponseData<ShikakuSoshitsuIdoTotalDiv> onClick_ModifyButton(ShikakuSoshitsuIdoTotalDiv div) {
         ResponseData<ShikakuSoshitsuIdoTotalDiv> response = new ResponseData<>();
-
         div.getShikakuSoshitsuJoho().getShikakuTokusoRirekiMain().getShikakuSoshitsuInput().setDisabled(false);
-        div.getShikakuSoshitsuJoho().getShikakuTokusoRirekiMain().getCcdShikakuTokusoRireki().set追加するボタン(true);
-
-        dgShikakuShutokuRireki_Row row = div.getShikakuSoshitsuJoho().getShikakuTokusoRirekiMain()
-                .getCcdShikakuTokusoRireki().getDataGridSelectItem();
-        div.getShikakuSoshitsuJoho().getShikakuTokusoRirekiMain().getShikakuSoshitsuInput()
-                .getTxtShutokuDate().setValue(row.getShutokuDate().getValue());
-        div.getShikakuSoshitsuJoho().getShikakuTokusoRirekiMain().getShikakuSoshitsuInput()
-                .getTxtShutokuTodokedeDate().setValue(row.getShutokuTodokedeDate().getValue());
-        div.getShikakuSoshitsuJoho().getShikakuTokusoRirekiMain().getShikakuSoshitsuInput()
-                .getDdlShikakuShutokuJiyu().setSelectedKey(row.getShutokuJiyuKey());
+        dgShikakuShutokuRireki_Row row = div.getShikakuSoshitsuJoho().getShikakuTokusoRirekiMain().getCcdShikakuTokusoRireki()
+                .getDataGridSelectItem();
+        div.getShikakuSoshitsuJoho().getShikakuTokusoRirekiMain().getShikakuSoshitsuInput().getTxtShutokuDate()
+                .setValue(row.getSoshitsuDate().getValue());
+        div.getShikakuSoshitsuJoho().getShikakuTokusoRirekiMain().getShikakuSoshitsuInput().getTxtShutokuTodokedeDate()
+                .setValue(row.getSoshitsuTodokedeDate().getValue());
+        if (RString.isNullOrEmpty(row.getSoshitsuJiyuKey())) {
+            div.getShikakuSoshitsuJoho().getShikakuTokusoRirekiMain().getShikakuSoshitsuInput().getDdlShikakuShutokuJiyu()
+                    .setSelectedKey(row.getSoshitsuJiyuKey());
+        }
         response.data = div;
         return response;
     }
@@ -153,40 +176,21 @@ public class ShikakuSoshitsuIdoTotal {
      */
     public ResponseData<ShikakuSoshitsuIdoTotalDiv> onClick_btnKakutei(ShikakuSoshitsuIdoTotalDiv div) {
         ResponseData<ShikakuSoshitsuIdoTotalDiv> response = new ResponseData<>();
-
         dgShikakuShutokuRireki_Row row = div.getShikakuSoshitsuJoho().getShikakuTokusoRirekiMain().getCcdShikakuTokusoRireki().getDataGridSelectItem();
-        List<dgShikakuShutokuRireki_Row> rowList = div.getShikakuSoshitsuJoho().getShikakuTokusoRirekiMain().getCcdShikakuTokusoRireki().getDataGridDataSource();
-        Collections.sort(rowList, new ShikakuSoshitsuIdoTotal.ComparatorByDaNoSort());
-        RString daNo = new RString("1");
-        if (!rowList.isEmpty()) {
-            daNo = new RString(Integer.parseInt(rowList.get(rowList.size() - 1).getDaNo().trim().toString()) + 1);
-        }
         if (row != null) {
-            row.getShutokuDate().setValue(div.getShikakuSoshitsuJoho().getShikakuTokusoRirekiMain()
-                    .getShikakuSoshitsuInput().getTxtShutokuDate().getValue());
+            row.getShutokuDate().setValue(div.getShikakuSoshitsuJoho().getShikakuTokusoRirekiMain().getShikakuSoshitsuInput()
+                    .getTxtShutokuDate().getValue());
             row.getShutokuTodokedeDate().setValue(div.getShikakuSoshitsuJoho().getShikakuTokusoRirekiMain().getShikakuSoshitsuInput()
                     .getTxtShutokuTodokedeDate().getValue());
-            row.setShutokuJiyu(div.getShikakuSoshitsuJoho().getShikakuTokusoRirekiMain()
-                    .getShikakuSoshitsuInput().getDdlShikakuShutokuJiyu().getSelectedValue());
-            row.setShutokuJiyuKey(div.getShikakuSoshitsuJoho().getShikakuTokusoRirekiMain()
-                    .getShikakuSoshitsuInput().getDdlShikakuShutokuJiyu().getSelectedKey());
-        } else {
-            row = new dgShikakuShutokuRireki_Row();
-            row.setState(追加);
-            row.setDaNo(daNo);
-            row.getShutokuDate().setValue(div.getShikakuSoshitsuJoho().getShikakuTokusoRirekiMain()
-                    .getShikakuSoshitsuInput().getTxtShutokuDate().getValue());
-            row.getShutokuTodokedeDate().setValue(div.getShikakuSoshitsuJoho().getShikakuTokusoRirekiMain().getShikakuSoshitsuInput()
-                    .getTxtShutokuTodokedeDate().getValue());
-            row.setShutokuJiyu(div.getShikakuSoshitsuJoho().getShikakuTokusoRirekiMain()
-                    .getShikakuSoshitsuInput().getDdlShikakuShutokuJiyu().getSelectedValue());
-            row.setShutokuJiyuKey(div.getShikakuSoshitsuJoho().getShikakuTokusoRirekiMain()
-                    .getShikakuSoshitsuInput().getDdlShikakuShutokuJiyu().getSelectedKey());
-
+            row.setShutokuJiyu(div.getShikakuSoshitsuJoho().getShikakuTokusoRirekiMain().getShikakuSoshitsuInput()
+                    .getDdlShikakuShutokuJiyu().getSelectedValue());
+            row.setShutokuJiyuKey(div.getShikakuSoshitsuJoho().getShikakuTokusoRirekiMain().getShikakuSoshitsuInput()
+                    .getDdlShikakuShutokuJiyu().getSelectedKey());
+            row.setState(修正);
+            div.getShikakuSoshitsuJoho().getShikakuTokusoRirekiMain().getCcdShikakuTokusoRireki().setDataGridSelectItem(row);
+            createHandler(div).資格喪失情報パネルの初期化();
+            div.getShikakuSoshitsuJoho().getShikakuTokusoRirekiMain().getShikakuSoshitsuInput().setDisabled(true);
         }
-        div.getShikakuSoshitsuJoho().getShikakuTokusoRirekiMain().getCcdShikakuTokusoRireki().setDataGridSelectItem(row);
-        createHandler(div).資格喪失情報パネルの初期化();
-        div.getShikakuSoshitsuJoho().getShikakuTokusoRirekiMain().getShikakuSoshitsuInput().setDisabled(true);
         response.data = div;
         return response;
     }
@@ -204,33 +208,31 @@ public class ShikakuSoshitsuIdoTotal {
         return response;
     }
 
-    /**
-     * 「資格得喪履歴を削除する」ボタン処理します。
-     *
-     * @param div ShikakuSoshitsuIdoTotalDiv
-     * @return レスポンス
-     */
-    public ResponseData<ShikakuSoshitsuIdoTotalDiv> onClick_btnDelete(ShikakuSoshitsuIdoTotalDiv div) {
-        ResponseData<ShikakuSoshitsuIdoTotalDiv> response = new ResponseData<>();
-        div.getShikakuSoshitsuJoho().getShikakuTokusoRirekiMain().getCcdShikakuTokusoRireki().set追加するボタン(false);
-        response.data = div;
-        return response;
-    }
-
-    /**
-     * 資格得喪履歴グリッドの枝番の昇順処理です。
-     *
-     */
-    public class ComparatorByDaNoSort implements Comparator {
-
-        @Override
-        public int compare(Object arg0, Object arg1) {
-            dgShikakuShutokuRireki_Row row0 = (dgShikakuShutokuRireki_Row) arg0;
-            dgShikakuShutokuRireki_Row row1 = (dgShikakuShutokuRireki_Row) arg1;
-            return row0.getDaNo().compareTo(row1.getDaNo());
-        }
-    }
-
+//    /**
+//     * 「資格得喪履歴を削除する」ボタン処理します。
+//     *
+//     * @param div ShikakuSoshitsuIdoTotalDiv
+//     * @return レスポンス
+//     */
+//    public ResponseData<ShikakuSoshitsuIdoTotalDiv> onClick_btnDelete(ShikakuSoshitsuIdoTotalDiv div) {
+//        ResponseData<ShikakuSoshitsuIdoTotalDiv> response = new ResponseData<>();
+//        div.getShikakuSoshitsuJoho().getShikakuTokusoRirekiMain().getCcdShikakuTokusoRireki().set追加するボタン(false);
+//        response.data = div;
+//        return response;
+//    }
+//    /**
+//     * 資格得喪履歴グリッドの枝番の昇順処理です。
+//     *
+//     */
+//    public class ComparatorByDaNoSort implements Comparator {
+//
+//        @Override
+//        public int compare(Object arg0, Object arg1) {
+//            dgShikakuShutokuRireki_Row row0 = (dgShikakuShutokuRireki_Row) arg0;
+//            dgShikakuShutokuRireki_Row row1 = (dgShikakuShutokuRireki_Row) arg1;
+//            return row0.getDaNo().compareTo(row1.getDaNo());
+//        }
+//    }
     private enum ShikakuSoshitsuIdoErrorMessage implements IValidationMessage {
 
         排他_他のユーザが使用中(UrErrorMessages.排他_他のユーザが使用中);

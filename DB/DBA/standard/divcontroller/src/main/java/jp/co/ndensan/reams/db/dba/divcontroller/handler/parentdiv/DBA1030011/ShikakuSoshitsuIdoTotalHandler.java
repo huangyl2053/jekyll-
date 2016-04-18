@@ -8,23 +8,28 @@ package jp.co.ndensan.reams.db.dba.divcontroller.handler.parentdiv.DBA1030011;
 import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dba.divcontroller.entity.parentdiv.DBA1030011.ShikakuSoshitsuIdoTotalDiv;
-import jp.co.ndensan.reams.db.dba.service.core.hihokenshadaicho.HihokenshaShikakuShutokuManager;
+import jp.co.ndensan.reams.db.dba.service.core.hihokenshashikakusoshitsu.HihokenshashikakusoshitsuManager;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
-import jp.co.ndensan.reams.db.dbz.business.core.HihokenshaDaicho;
-import jp.co.ndensan.reams.db.dbz.business.core.HihokenshaDaichoBuilder;
 import jp.co.ndensan.reams.db.dbz.definition.core.ViewStateKeys;
 import jp.co.ndensan.reams.db.dbz.definition.core.shikakuidojiyu.ShikakuSoshitsuJiyu;
+import jp.co.ndensan.reams.db.dbz.definition.core.sikakuidocheck.SikakuKikan;
+import jp.co.ndensan.reams.db.dbz.definition.core.sikakuidocheck.TokusoRireki;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.ShikakuTokusoRireki.dgShikakuShutokuRireki_Row;
 import jp.co.ndensan.reams.ua.uax.business.core.dateofbirth.DateOfBirthFactory;
+import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
+import jp.co.ndensan.reams.uz.uza.lang.ApplicationException;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.ui.binding.DataGridButtonState;
 import jp.co.ndensan.reams.uz.uza.ui.binding.KeyValueDataSource;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ResponseHolder;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 
 /**
  * 資格喪失異動のHandlerクラスです。
+ *
+ * @reamsid_L DBA-0552-030 wangkun
  */
 public class ShikakuSoshitsuIdoTotalHandler {
 
@@ -41,8 +46,7 @@ public class ShikakuSoshitsuIdoTotalHandler {
     private static final RString DBAMN22006_職権により喪失 = new RString("DBAMN22006_職権により喪失");
     private static final RString DBAMN22007_その他事由により喪失 = new RString("DBAMN22007_その他事由により喪失");
 
-    private static final RString 任意手入力付番 = new RString("3");
-    private static final RString 追加 = new RString("追加");
+    private static final RString 修正 = new RString("修正");
 
     private static final RString FIRSTREQUEST以外 = new RString("2");
     private RString 状態_被保履歴タブ = RString.EMPTY;
@@ -76,7 +80,6 @@ public class ShikakuSoshitsuIdoTotalHandler {
     public void load() {
         kaigoShikakuKihon_onload(被保険者番号, 表示モード);
         kaigoNinteiAtenaInfo_onload(new ShikibetsuCode(RString.EMPTY));
-        // TODO:　
         ViewStateHolder.put(ViewStateKeys.医療保険情報_識別コード, 識別コード);
         ViewStateHolder.put(ViewStateKeys.医療保険情報_市町村コード, LasdecCode.EMPTY);
         ViewStateHolder.put(ViewStateKeys.医療保険情報_モード, 状態_登録);
@@ -113,6 +116,7 @@ public class ShikakuSoshitsuIdoTotalHandler {
     public void onOpenTplDefault() {
         if (!状態_被保履歴タブ.equals(FIRSTREQUEST以外)) {
             div.getShikakuSoshitsuJoho().getShikakuTokusoRirekiMain().getCcdShikakuTokusoRireki().initialize(被保険者番号, 識別コード);
+            setRowState();
             状態_被保履歴タブ = FIRSTREQUEST以外;
         }
         setDdlShikakuSoshitsuJiyu();
@@ -186,7 +190,7 @@ public class ShikakuSoshitsuIdoTotalHandler {
     public void setDdlShikakuSoshitsuJiyu() {
         RString menuID = ResponseHolder.getMenuID();
         //------------------------
-        menuID = DBAMN22001_転出により喪失;
+        menuID = DBAMN22007_その他事由により喪失;
         div.getShikakuSoshitsuJoho().getShikakuTokusoRirekiMain().getShikakuSoshitsuInput().getDdlShikakuShutokuJiyu().setDisabled(true);
         List<KeyValueDataSource> keyValueList = new ArrayList();
         if (DBAMN22001_転出により喪失.equals(menuID)) {
@@ -221,28 +225,62 @@ public class ShikakuSoshitsuIdoTotalHandler {
         div.getShikakuSoshitsuJoho().getShikakuTokusoRirekiMain().getShikakuSoshitsuInput().getDdlShikakuShutokuJiyu().setSelectedIndex(0);
     }
 
+    /**
+     * 資格喪失情報パネルの初期化
+     */
     public void 資格喪失情報パネルの初期化() {
         div.getShikakuSoshitsuJoho().getShikakuTokusoRirekiMain().getShikakuSoshitsuInput().getTxtShutokuDate().clearValue();
         div.getShikakuSoshitsuJoho().getShikakuTokusoRirekiMain().getShikakuSoshitsuInput().getTxtShutokuTodokedeDate().clearValue();
         setDdlShikakuSoshitsuJiyu();
         div.getShikakuSoshitsuJoho().getShikakuTokusoRirekiMain().getShikakuSoshitsuInput().setDisabled(true);
-        div.getShikakuSoshitsuJoho().getShikakuTokusoRirekiMain().getCcdShikakuTokusoRireki().set追加するボタン(false);
     }
 
     private void save資格得喪履歴() {
-        HihokenshaShikakuShutokuManager manager = HihokenshaShikakuShutokuManager.createInstance();
-        // TODO 資格取得登録チェック処理
+        HihokenshashikakusoshitsuManager manager = HihokenshashikakusoshitsuManager.createInstance();
         List<dgShikakuShutokuRireki_Row> rowList = div.getShikakuSoshitsuJoho().getShikakuTokusoRirekiMain().getCcdShikakuTokusoRireki().getDataGridDataSource();
+        List<TokusoRireki> tokusoRirekiList = get開始日と終了日(rowList);
+        List<SikakuKikan> sikakuKikanList = get取得日と喪失日(rowList);
         for (dgShikakuShutokuRireki_Row row : rowList) {
-            if (追加.equals(row.getState())) {
-                HihokenshaDaicho business = new HihokenshaDaicho(new HihokenshaNo(row.getHihokenshaNo()), row.getShutokuDate().getValue(), row.getDaNo());
-                HihokenshaDaichoBuilder build = business.createBuilderForEdit();
-                build.set資格変更届出年月日(row.getShutokuTodokedeDate().getValue());
-                build.set資格取得事由コード(row.getSoshitsuJiyuKey());
-                manager.saveHihokenshaShutoku(build.build(),
-                        DateOfBirthFactory.createInstance(div.getKihonJoho().getCcdKaigoAtenaInfo().getShokaiData().getTxtSeinengappiYMD().getValue()));
+            if (修正.equals(row.getState())) {
+                RString errorCode = manager.shikakuSoshitsuTorokuCheck(識別コード, 被保険者番号, row.getShutokuDate().getValue(),
+                        DateOfBirthFactory.createInstance(div.getKihonJoho().getCcdKaigoAtenaInfo().getShokaiData().getTxtSeinengappiYMD().getValue()), tokusoRirekiList, sikakuKikanList);
+                // TODO
+                if (!RString.isNullOrEmpty(errorCode)) {
+                    throw new ApplicationException(UrErrorMessages.チェックディジットが不正.getMessage());
+                }
+                manager.saveHihokenshaShikakuSoshitsu(識別コード, 被保険者番号,
+                        row.getSoshitsuDate().getValue(),
+                        row.getSoshitsuJiyuKey(),
+                        row.getSoshitsuTodokedeDate().getValue());
             }
         }
+    }
+
+    private void setRowState() {
+        List<dgShikakuShutokuRireki_Row> rowListOld = div.getShikakuSoshitsuJoho()
+                .getShikakuTokusoRirekiMain().getCcdShikakuTokusoRireki().getDataGridDataSource();
+        List<dgShikakuShutokuRireki_Row> rowListNew = new ArrayList<>();
+        for (dgShikakuShutokuRireki_Row row : rowListOld) {
+            row.setModifyButtonState(DataGridButtonState.Enabled);
+            rowListNew.add(row);
+        }
+        div.getShikakuSoshitsuJoho().getShikakuTokusoRirekiMain().getCcdShikakuTokusoRireki().setDataGridDataSource(rowListNew);
+    }
+
+    private List<TokusoRireki> get開始日と終了日(List<dgShikakuShutokuRireki_Row> rowList) {
+        List<TokusoRireki> resultList = new ArrayList<>();
+        for (dgShikakuShutokuRireki_Row row : rowList) {
+            resultList.add(new TokusoRireki(row.getShutokuDate().getValue(), row.getSoshitsuDate().getValue()));
+        }
+        return resultList;
+    }
+
+    private List<SikakuKikan> get取得日と喪失日(List<dgShikakuShutokuRireki_Row> rowList) {
+        List<SikakuKikan> resultList = new ArrayList<>();
+        for (dgShikakuShutokuRireki_Row row : rowList) {
+            resultList.add(new SikakuKikan(row.getShutokuDate().getValue(), row.getSoshitsuDate().getValue()));
+        }
+        return resultList;
     }
 
 }
