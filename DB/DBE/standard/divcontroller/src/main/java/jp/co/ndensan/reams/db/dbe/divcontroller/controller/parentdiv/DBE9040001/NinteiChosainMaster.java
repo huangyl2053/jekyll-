@@ -69,7 +69,7 @@ public class NinteiChosainMaster {
     private static final RString 状態_追加 = new RString("追加");
     private static final RString 状態_修正 = new RString("修正");
     private static final RString 状態_削除 = new RString("削除");
-    private static final RString CSVファイル名 = new RString("認定調査員情報.csv");
+    private static final RString CSVファイル名 = new RString("調査員情報.csv");
     private static final RString CSV_WRITER_DELIMITER = new RString(",");
 
     /**
@@ -222,13 +222,15 @@ public class NinteiChosainMaster {
     public IDownLoadServletResponse onClick_btnOutputCsv(NinteiChosainMasterDiv div, IDownLoadServletResponse response) {
         RString filePath = Path.combinePath(Path.getTmpDirectoryPath(), CSVファイル名);
         try (CsvWriter<NinteiChosainMasterCsvEntity> csvWriter
-                = new CsvWriter.InstanceBuilder(filePath).canAppend(true).setDelimiter(CSV_WRITER_DELIMITER).setEncode(Encode.UTF_8).
+                = new CsvWriter.InstanceBuilder(filePath).canAppend(false).setDelimiter(CSV_WRITER_DELIMITER).setEncode(Encode.UTF_8).
                 setEnclosure(RString.EMPTY).setNewLine(NewLine.CRLF).hasHeader(true).build()) {
             List<dgChosainIchiran_Row> dataList = div.getChosainIchiran().getDgChosainIchiran().getDataSource();
             for (dgChosainIchiran_Row row : dataList) {
                 csvWriter.writeLine(getCsvData(row));
             }
+            csvWriter.close();
         }
+
         SharedFileDescriptor sfd = new SharedFileDescriptor(GyomuCode.DB介護保険, FilesystemName.fromString(CSVファイル名));
         sfd = SharedFile.defineSharedFile(sfd);
         CopyToSharedFileOpts opts = new CopyToSharedFileOpts().isCompressedArchive(false);
