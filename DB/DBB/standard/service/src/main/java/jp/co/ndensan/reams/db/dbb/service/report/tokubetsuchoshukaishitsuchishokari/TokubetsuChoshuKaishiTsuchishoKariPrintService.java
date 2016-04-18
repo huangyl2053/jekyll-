@@ -26,6 +26,7 @@ import jp.co.ndensan.reams.db.dbb.entity.report.tokubetsuchoshukaishitsuchishoka
 import jp.co.ndensan.reams.db.dbb.entity.report.tokubetsuchoshukaishitsuchishokari.TokubetsuChoshuKaishiTsuchishoKariSealerSource;
 import jp.co.ndensan.reams.db.dbz.business.report.parts.kaigotoiawasesaki.CompKaigoToiawasesakiSource;
 import jp.co.ndensan.reams.db.dbz.business.report.parts.kaigotoiawasesaki.IKaigoToiawasesakiSourceBuilder;
+import jp.co.ndensan.reams.db.dbz.business.report.util.EditedAtesaki;
 import jp.co.ndensan.reams.db.dbz.service.report.parts.kaigotoiawasesaki.KaigoToiawasesakiSourceBuilderCreator;
 import jp.co.ndensan.reams.ur.urz.business.core.ninshosha.Ninshosha;
 import jp.co.ndensan.reams.ur.urz.business.report.parts.ninshosha.NinshoshaSourceBuilderFactory;
@@ -35,7 +36,6 @@ import jp.co.ndensan.reams.ur.urz.service.core.association.AssociationFinderFact
 import jp.co.ndensan.reams.ur.urz.service.core.ninshosha.INinshoshaManager;
 import jp.co.ndensan.reams.ur.urz.service.core.ninshosha._NinshoshaManager;
 import jp.co.ndensan.reams.uz.uza.biz.GyomuCode;
-import jp.co.ndensan.reams.uz.uza.biz.ReportId;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -67,24 +67,24 @@ public class TokubetsuChoshuKaishiTsuchishoKariPrintService {
             RString 宛名連番) {
 
         TokubetsuChoshuKaishiTsuchishoKariB5Property property = new TokubetsuChoshuKaishiTsuchishoKariB5Property();
+        // TODO
+        EditedAtesaki 編集後宛先 = new EditedAtesaki(仮算定特徴開始通知書情報.get宛先情報(), 仮算定特徴開始通知書情報.get地方公共団体(),
+                仮算定特徴開始通知書情報.get帳票制御共通(), null, null, true,
+                null, null, null, null);
+        SofubutsuAtesakiSource sofubutsuAtesakiSource = 編集後宛先.getSofubutsuAtesakiSource().get送付物宛先ソース();
 
-//        EditedAtesaki 編集後宛先 = new EditedAtesaki(仮算定特徴開始通知書情報.get宛先情報(),
-//                仮算定特徴開始通知書情報.get編集後仮算定通知書共通情報().get編集後宛先().get地方公共団体(),
-//                仮算定特徴開始通知書情報.get編集後仮算定通知書共通情報().get編集後宛先().get帳票制御共通(), null, null, true,
-//                null, null, null, null);
-//        SofubutsuAtesakiSource sofubutsuAtesakiSource = 編集後宛先.getSofubutsuAtesakiSource();
         try (ReportManager reportManager = new ReportManager()) {
             try (ReportAssembler<TokubetsuChoshuKaishiTsuchishoKariB5Source> assembler = createAssembler(property, reportManager);) {
                 INinshoshaManager manager = new _NinshoshaManager();
-                Ninshosha 認証者 = manager.get帳票認証者(GyomuCode.DB介護保険, new RString("0001"));
+                Ninshosha 認証者 = manager.get帳票認証者(GyomuCode.DB介護保険, 仮算定特徴開始通知書情報.get帳票分類ID().value());
 
                 NinshoshaSource sourceBuilder = NinshoshaSourceBuilderFactory.createInstance(認証者,
                         AssociationFinderFactory.createInstance().getAssociation(),
-                        assembler.getImageFolderPath(), new RDate("20150101")).buildSource();
+                        assembler.getImageFolderPath(), new RDate(仮算定特徴開始通知書情報.get発行日().toString())).buildSource();
 
                 ReportSourceWriter<TokubetsuChoshuKaishiTsuchishoKariB5Source> reportSourceWriter
                         = new ReportSourceWriter(assembler);
-                new TokubetsuChoshuKaishiTsuchishoKariB5Report(new SofubutsuAtesakiSource(), sourceBuilder,
+                new TokubetsuChoshuKaishiTsuchishoKariB5Report(sofubutsuAtesakiSource, sourceBuilder,
                         仮算定特徴開始通知書情報, 宛名連番).writeBy(reportSourceWriter);
             }
             return reportManager.publish();
@@ -112,27 +112,24 @@ public class TokubetsuChoshuKaishiTsuchishoKariPrintService {
     public SourceDataCollection printB5横タイプ連帳(KariTokuchoKaishiTsuchisyoJoho 仮算定特徴開始通知書情報,
             RString 宛名連番) {
         TokubetsuChoshuKaishiTsuchishoKariB5RenchoProperty property = new TokubetsuChoshuKaishiTsuchishoKariB5RenchoProperty();
-        //        EditedAtesaki 編集後宛先 = new EditedAtesaki(仮算定特徴開始通知書情報.get宛先情報(),
-//                null, null, null, NENDO, true,
-//                JushoKangaiEditPattern.space方書,
-//                JushoPrefix.市町村名付加,
-//                JushoKannaiEditPattern.町域番地,
-//                GyoseikuInjiKubun.印字しない);
-//        SofubutsuAtesakiSource sofubutsuAtesakiSource = 編集後宛先.getSofubutsuAtesakiSource();
-//        SofubutsuAtesakiSource sofubutsuAtesakiSource = null;
+        // TODO
+        EditedAtesaki 編集後宛先 = new EditedAtesaki(仮算定特徴開始通知書情報.get宛先情報(), 仮算定特徴開始通知書情報.get地方公共団体(),
+                仮算定特徴開始通知書情報.get帳票制御共通(), null, null, true,
+                null, null, null, null);
+        SofubutsuAtesakiSource sofubutsuAtesakiSource = 編集後宛先.getSofubutsuAtesakiSource().get送付物宛先ソース();
 
         try (ReportManager reportManager = new ReportManager()) {
             try (ReportAssembler<TokubetsuChoshuKaishiTsuchishoKariB5RenchoSource> assembler = createAssembler(property, reportManager);) {
                 INinshoshaManager manager = new _NinshoshaManager();
-                Ninshosha 認証者 = manager.get帳票認証者(GyomuCode.DB介護保険, new RString("0001"));
+                Ninshosha 認証者 = manager.get帳票認証者(GyomuCode.DB介護保険, 仮算定特徴開始通知書情報.get帳票分類ID().value());
 
                 NinshoshaSource sourceBuilder = NinshoshaSourceBuilderFactory.createInstance(認証者,
                         AssociationFinderFactory.createInstance().getAssociation(),
-                        assembler.getImageFolderPath(), new RDate("20150101")).buildSource();
+                        assembler.getImageFolderPath(), new RDate(仮算定特徴開始通知書情報.get発行日().toString())).buildSource();
 
                 ReportSourceWriter<TokubetsuChoshuKaishiTsuchishoKariB5RenchoSource> reportSourceWriter
                         = new ReportSourceWriter(assembler);
-                new TokubetsuChoshuKaishiTsuchishoKariB5RenchoReport(new SofubutsuAtesakiSource(), sourceBuilder,
+                new TokubetsuChoshuKaishiTsuchishoKariB5RenchoReport(sofubutsuAtesakiSource, sourceBuilder,
                         仮算定特徴開始通知書情報, 宛名連番).writeBy(reportSourceWriter);
             }
             return reportManager.publish();
@@ -149,27 +146,24 @@ public class TokubetsuChoshuKaishiTsuchishoKariPrintService {
     public SourceDataCollection printシーラタイプ(KariTokuchoKaishiTsuchisyoJoho 仮算定特徴開始通知書情報) {
 
         TokubetsuChoshuKaishiTsuchishoKariSealerProperty property = new TokubetsuChoshuKaishiTsuchishoKariSealerProperty();
-        //        EditedAtesaki 編集後宛先 = new EditedAtesaki(仮算定特徴開始通知書情報.get宛先情報(),
-//                null, null, null, NENDO, true,
-//                JushoKangaiEditPattern.space方書,
-//                JushoPrefix.市町村名付加,
-//                JushoKannaiEditPattern.町域番地,
-//                GyoseikuInjiKubun.印字しない);
-//        SofubutsuAtesakiSource sofubutsuAtesakiSource = 編集後宛先.getSofubutsuAtesakiSource();
-//        SofubutsuAtesakiSource sofubutsuAtesakiSource = null;
+        // TODO
+        EditedAtesaki 編集後宛先 = new EditedAtesaki(仮算定特徴開始通知書情報.get宛先情報(), 仮算定特徴開始通知書情報.get地方公共団体(),
+                仮算定特徴開始通知書情報.get帳票制御共通(), null, null, true,
+                null, null, null, null);
+        SofubutsuAtesakiSource sofubutsuAtesakiSource = 編集後宛先.getSofubutsuAtesakiSource().get送付物宛先ソース();
 
         try (ReportManager reportManager = new ReportManager()) {
             try (ReportAssembler<TokubetsuChoshuKaishiTsuchishoKariSealerSource> assembler = createAssembler(property, reportManager);) {
                 INinshoshaManager manager = new _NinshoshaManager();
-                Ninshosha 認証者 = manager.get帳票認証者(GyomuCode.DB介護保険, new RString("0001"));
+                Ninshosha 認証者 = manager.get帳票認証者(GyomuCode.DB介護保険, 仮算定特徴開始通知書情報.get帳票分類ID().value());
 
                 NinshoshaSource sourceBuilder = NinshoshaSourceBuilderFactory.createInstance(認証者,
                         AssociationFinderFactory.createInstance().getAssociation(),
-                        assembler.getImageFolderPath(), new RDate("20150101")).buildSource();
+                        assembler.getImageFolderPath(), new RDate(仮算定特徴開始通知書情報.get発行日().toString())).buildSource();
 
                 ReportSourceWriter<TokubetsuChoshuKaishiTsuchishoKariSealerSource> reportSourceWriter
                         = new ReportSourceWriter(assembler);
-                new TokubetsuChoshuKaishiTsuchishoKariSealerReport(new SofubutsuAtesakiSource(), sourceBuilder,
+                new TokubetsuChoshuKaishiTsuchishoKariSealerReport(sofubutsuAtesakiSource, sourceBuilder,
                         仮算定特徴開始通知書情報).writeBy(reportSourceWriter);
             }
             return reportManager.publish();
@@ -185,27 +179,24 @@ public class TokubetsuChoshuKaishiTsuchishoKariPrintService {
     public SourceDataCollection printシーラタイプ連帳(KariTokuchoKaishiTsuchisyoJoho 仮算定特徴開始通知書情報) {
 
         TokubetsuChoshuKaishiTsuchishoKariSealerRenchoProperty property = new TokubetsuChoshuKaishiTsuchishoKariSealerRenchoProperty();
-        //        EditedAtesaki 編集後宛先 = new EditedAtesaki(仮算定特徴開始通知書情報.get宛先情報(),
-        //                null, null, null, NENDO, true,
-        //                JushoKangaiEditPattern.space方書,
-        //                JushoPrefix.市町村名付加,
-        //                JushoKannaiEditPattern.町域番地,
-        //                GyoseikuInjiKubun.印字しない);
-        //        SofubutsuAtesakiSource sofubutsuAtesakiSource = 編集後宛先.getSofubutsuAtesakiSource();
-        //        SofubutsuAtesakiSource sofubutsuAtesakiSource = null;
+        // TODO
+        EditedAtesaki 編集後宛先 = new EditedAtesaki(仮算定特徴開始通知書情報.get宛先情報(), 仮算定特徴開始通知書情報.get地方公共団体(),
+                仮算定特徴開始通知書情報.get帳票制御共通(), null, null, true,
+                null, null, null, null);
+        SofubutsuAtesakiSource sofubutsuAtesakiSource = 編集後宛先.getSofubutsuAtesakiSource().get送付物宛先ソース();
 
         try (ReportManager reportManager = new ReportManager()) {
             try (ReportAssembler<TokubetsuChoshuKaishiTsuchishoKariSealerRenchoSource> assembler = createAssembler(property, reportManager);) {
                 INinshoshaManager manager = new _NinshoshaManager();
-                Ninshosha 認証者 = manager.get帳票認証者(GyomuCode.DB介護保険, new RString("0001"));
+                Ninshosha 認証者 = manager.get帳票認証者(GyomuCode.DB介護保険, 仮算定特徴開始通知書情報.get帳票分類ID().value());
 
                 NinshoshaSource sourceBuilder = NinshoshaSourceBuilderFactory.createInstance(認証者,
                         AssociationFinderFactory.createInstance().getAssociation(),
-                        assembler.getImageFolderPath(), new RDate("20150101")).buildSource();
+                        assembler.getImageFolderPath(), new RDate(仮算定特徴開始通知書情報.get発行日().toString())).buildSource();
 
                 ReportSourceWriter<TokubetsuChoshuKaishiTsuchishoKariSealerRenchoSource> reportSourceWriter
                         = new ReportSourceWriter(assembler);
-                new TokubetsuChoshuKaishiTsuchishoKariSealerRenchoReport(new SofubutsuAtesakiSource(), sourceBuilder,
+                new TokubetsuChoshuKaishiTsuchishoKariSealerRenchoReport(sofubutsuAtesakiSource, sourceBuilder,
                         仮算定特徴開始通知書情報).writeBy(reportSourceWriter);
             }
             return reportManager.publish();
@@ -223,31 +214,28 @@ public class TokubetsuChoshuKaishiTsuchishoKariPrintService {
             RString 通知書定型文１) {
 
         TokubetsuChoshuKaishiTsuchishoKariOverlayA4TateProperty property = new TokubetsuChoshuKaishiTsuchishoKariOverlayA4TateProperty();
-        //        EditedAtesaki 編集後宛先 = new EditedAtesaki(仮算定特徴開始通知書情報.get宛先情報(),
-        //                null, null, null, NENDO, true,
-        //                JushoKangaiEditPattern.space方書,
-        //                JushoPrefix.市町村名付加,
-        //                JushoKannaiEditPattern.町域番地,
-        //                GyoseikuInjiKubun.印字しない);
-        //        SofubutsuAtesakiSource sofubutsuAtesakiSource = 編集後宛先.getSofubutsuAtesakiSource();
-        //        SofubutsuAtesakiSource sofubutsuAtesakiSource = null;
+        // TODO
+        EditedAtesaki 編集後宛先 = new EditedAtesaki(仮算定特徴開始通知書情報.get宛先情報(), 仮算定特徴開始通知書情報.get地方公共団体(),
+                仮算定特徴開始通知書情報.get帳票制御共通(), null, null, true,
+                null, null, null, null);
+        SofubutsuAtesakiSource sofubutsuAtesakiSource = 編集後宛先.getSofubutsuAtesakiSource().get送付物宛先ソース();
 
         IKaigoToiawasesakiSourceBuilder 介護問合せ先ソースビルダー = KaigoToiawasesakiSourceBuilderCreator.create(
-                SubGyomuCode.DBB介護賦課, new ReportId("000001"));
+                SubGyomuCode.DBB介護賦課, 仮算定特徴開始通知書情報.get帳票分類ID());
         CompKaigoToiawasesakiSource toiawasesakiSource = 介護問合せ先ソースビルダー.buildSource();
 
         try (ReportManager reportManager = new ReportManager()) {
             try (ReportAssembler<TokubetsuChoshuKaishiTsuchishoKariOverlayA4TateSource> assembler = createAssembler(property, reportManager);) {
                 INinshoshaManager manager = new _NinshoshaManager();
-                Ninshosha 認証者 = manager.get帳票認証者(GyomuCode.DB介護保険, new RString("0001"));
+                Ninshosha 認証者 = manager.get帳票認証者(GyomuCode.DB介護保険, 仮算定特徴開始通知書情報.get帳票分類ID().value());
 
                 NinshoshaSource sourceBuilder = NinshoshaSourceBuilderFactory.createInstance(認証者,
                         AssociationFinderFactory.createInstance().getAssociation(),
-                        assembler.getImageFolderPath(), new RDate("20150101")).buildSource();
+                        assembler.getImageFolderPath(), new RDate(仮算定特徴開始通知書情報.get発行日().toString())).buildSource();
 
                 ReportSourceWriter<TokubetsuChoshuKaishiTsuchishoKariOverlayA4TateSource> reportSourceWriter
                         = new ReportSourceWriter(assembler);
-                new TokubetsuChoshuKaishiTsuchishoKariOverlayA4TateReport(new SofubutsuAtesakiSource(), sourceBuilder, toiawasesakiSource,
+                new TokubetsuChoshuKaishiTsuchishoKariOverlayA4TateReport(sofubutsuAtesakiSource, sourceBuilder, toiawasesakiSource,
                         仮算定特徴開始通知書情報, 通知書定型文１).writeBy(reportSourceWriter);
             }
             return reportManager.publish();
@@ -267,34 +255,32 @@ public class TokubetsuChoshuKaishiTsuchishoKariPrintService {
             RString 通知書定型文２) {
 
         TokubetsuChoshuKaishiTsuchishoKariOverlayB5YokoProperty property = new TokubetsuChoshuKaishiTsuchishoKariOverlayB5YokoProperty();
-        //        EditedAtesaki 編集後宛先 = new EditedAtesaki(仮算定特徴開始通知書情報.get宛先情報(),
-//                null, null, null, NENDO, true,
-//                JushoKangaiEditPattern.space方書,
-//                JushoPrefix.市町村名付加,
-//                JushoKannaiEditPattern.町域番地,
-//                GyoseikuInjiKubun.印字しない);
-//        SofubutsuAtesakiSource sofubutsuAtesakiSource = 編集後宛先.getSofubutsuAtesakiSource();
-//        SofubutsuAtesakiSource sofubutsuAtesakiSource = null;
+        // TODO
+        EditedAtesaki 編集後宛先 = new EditedAtesaki(仮算定特徴開始通知書情報.get宛先情報(), 仮算定特徴開始通知書情報.get地方公共団体(),
+                仮算定特徴開始通知書情報.get帳票制御共通(), null, null, true,
+                null, null, null, null);
+        SofubutsuAtesakiSource sofubutsuAtesakiSource = 編集後宛先.getSofubutsuAtesakiSource().get送付物宛先ソース();
 
         IKaigoToiawasesakiSourceBuilder 介護問合せ先ソースビルダー = KaigoToiawasesakiSourceBuilderCreator.create(
-                SubGyomuCode.DBB介護賦課, new ReportId("000001"));
+                SubGyomuCode.DBB介護賦課, 仮算定特徴開始通知書情報.get帳票分類ID());
         CompKaigoToiawasesakiSource toiawasesakiSource = 介護問合せ先ソースビルダー.buildSource();
 
         try (ReportManager reportManager = new ReportManager()) {
             try (ReportAssembler<TokubetsuChoshuKaishiTsuchishoKariOverlayB5YokoSource> assembler = createAssembler(property, reportManager);) {
                 INinshoshaManager manager = new _NinshoshaManager();
-                Ninshosha 認証者 = manager.get帳票認証者(GyomuCode.DB介護保険, new RString("0001"));
+                Ninshosha 認証者 = manager.get帳票認証者(GyomuCode.DB介護保険, 仮算定特徴開始通知書情報.get帳票分類ID().value());
 
                 NinshoshaSource sourceBuilder = NinshoshaSourceBuilderFactory.createInstance(認証者,
                         AssociationFinderFactory.createInstance().getAssociation(),
-                        assembler.getImageFolderPath(), new RDate("20150101")).buildSource();
+                        assembler.getImageFolderPath(), new RDate(仮算定特徴開始通知書情報.get発行日().toString())).buildSource();
 
                 ReportSourceWriter<TokubetsuChoshuKaishiTsuchishoKariOverlayB5YokoSource> reportSourceWriter
                         = new ReportSourceWriter(assembler);
-                new TokubetsuChoshuKaishiTsuchishoKariOverlayB5YokoReport(new SofubutsuAtesakiSource(), sourceBuilder, toiawasesakiSource,
+                new TokubetsuChoshuKaishiTsuchishoKariOverlayB5YokoReport(sofubutsuAtesakiSource, sourceBuilder, toiawasesakiSource,
                         仮算定特徴開始通知書情報, 通知書定型文１, 通知書定型文２).writeBy(reportSourceWriter);
             }
             return reportManager.publish();
         }
     }
+
 }
