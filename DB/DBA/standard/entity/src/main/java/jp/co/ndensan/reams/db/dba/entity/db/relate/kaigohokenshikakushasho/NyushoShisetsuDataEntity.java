@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbu.entity.db.relate.kaigohokenshikakushasho;
+package jp.co.ndensan.reams.db.dba.entity.db.relate.kaigohokenshikakushasho;
 
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
@@ -17,6 +17,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 @SuppressWarnings("PMD.UnusedPrivateField")
 public class NyushoShisetsuDataEntity {
 
+    private RString nyushoShisetsuShurui;
     private RString nyushoShisetsuName;
     private RString shisetsuNyushoYMD;
     private RString shisetsuTaishoYMD;
