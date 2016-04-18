@@ -455,7 +455,7 @@ public class HomonChosaIraishoFlow extends BatchFlowBase<IraishoIkkatsuHakkoBatc
      * @return SaiChekkuhyo_292001Process
      */
     @Step(SAICHEKKUHYO1)
-    protected IBatchFlowCommand saiChekkuhyo1() {
+    protected IBatchFlowCommand saiChekkuhyoProcess1() {
         return loopBatch(SaiChekkuhyo_292001Process.class)
                 .arguments(getParameter().toHomonChosaIraishoProcessParamter()).define();
     }
@@ -466,7 +466,7 @@ public class HomonChosaIraishoFlow extends BatchFlowBase<IraishoIkkatsuHakkoBatc
      * @return SaiChekkuhyo_292002Process
      */
     @Step(SAICHEKKUHYO2)
-    protected IBatchFlowCommand saiChekkuhyo2() {
+    protected IBatchFlowCommand saiChekkuhyoProcess2() {
         return loopBatch(SaiChekkuhyo_292002Process.class)
                 .arguments(getParameter().toHomonChosaIraishoProcessParamter()).define();
     }
@@ -477,7 +477,7 @@ public class HomonChosaIraishoFlow extends BatchFlowBase<IraishoIkkatsuHakkoBatc
      * @return SaiChekkuhyo_292003Process
      */
     @Step(SAICHEKKUHYO3)
-    protected IBatchFlowCommand saiChekkuhyo3() {
+    protected IBatchFlowCommand saiChekkuhyoProcess3() {
         return loopBatch(SaiChekkuhyo_292003Process.class)
                 .arguments(getParameter().toHomonChosaIraishoProcessParamter()).define();
     }
@@ -488,7 +488,7 @@ public class HomonChosaIraishoFlow extends BatchFlowBase<IraishoIkkatsuHakkoBatc
      * @return SaiChekkuhyo_292004Process
      */
     @Step(SAICHEKKUHYO4)
-    protected IBatchFlowCommand saiChekkuhyo4() {
+    protected IBatchFlowCommand saiChekkuhyoProcess4() {
         return loopBatch(SaiChekkuhyo_292004Process.class)
                 .arguments(getParameter().toHomonChosaIraishoProcessParamter()).define();
     }

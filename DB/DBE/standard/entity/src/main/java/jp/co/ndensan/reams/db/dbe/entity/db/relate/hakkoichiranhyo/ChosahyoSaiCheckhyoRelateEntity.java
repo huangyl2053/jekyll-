@@ -10,6 +10,8 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
  * 前回認定調査結果との比較表のRelateEntityクラスです。
+ *
+ * @reamsid_L DBE-0080-140 duanzhanli
  */
 @SuppressWarnings("PMD.UnusedPrivateField")
 @lombok.Getter
