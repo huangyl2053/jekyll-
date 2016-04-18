@@ -186,7 +186,7 @@ public class JutakuKaishuShinseiJyohoToroku {
         }
         // 領収日チェック
         RDate 領収日 = div.getJutakuKaishuShinseiContents().getTxtRyoshuYMD().getValue();
-        if (領収日.isBeforeOrEquals(画面提供着工年月)) {
+        if (領収日.getYearMonth().isBeforeOrEquals(画面提供着工年月.getYearMonth())) {
             if (!ResponseHolder.isReRequest()) {
                 QuestionMessage message = new QuestionMessage(UrQuestionMessages.入力内容の破棄.getMessage().getCode(),
                         UrQuestionMessages.入力内容の破棄.getMessage().evaluate());
@@ -195,7 +195,7 @@ public class JutakuKaishuShinseiJyohoToroku {
             if (new RString(UrQuestionMessages.入力内容の破棄.getMessage().getCode()).equals(
                     ResponseHolder.getMessageCode())
                     && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
-
+                return ResponseData.of(div).respond();
             }
         }
         // is確認対象変更有無チェック TODO
@@ -573,11 +573,6 @@ public class JutakuKaishuShinseiJyohoToroku {
         // 2 費用額合計の設定
 //        handler.費用額合計の取得();
         // 3 限度額リセット有効性チェック
-        ShikyuShiseiJyohoParameter 引き継ぎデータEntity = new ShikyuShiseiJyohoParameter();
-        FlexibleYearMonth 画面提供着工年月 = new FlexibleYearMonth(
-                div.getTxtTeikyoYM().getValue().getYearMonth().toString());
-        引き継ぎデータEntity.set被保険者番号(new RString("000000003"));
-        HihokenshaNo 被保険者番号 = new HihokenshaNo(引き継ぎデータEntity.get被保険者番号());
         // ７．１　要介護状態３段階変更の有効性チェック
 //        JutakuKaishuYaokaigoJyotaiSandannkaiHanteiManager manager = new JutakuKaishuYaokaigoJyotaiSandannkaiHanteiManager();
 //        boolean 要介護状態３段階変更の判定 = manager.checkYaokaigoJyotaiSandannkai(
