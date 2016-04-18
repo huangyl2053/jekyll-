@@ -20,7 +20,7 @@
 
 
     <!-- ShikakuIdoTaishoshaEntityの項目にマッピングします。-->
-    <resultMap id="resultMap_ShikakuIdoTaishoshaEntity" type="jp.co.ndensan.reams.db.dba.entity.dbamn71001.ShikakuIdoTaishoshaEntity" autoMapping="true">
+    <resultMap id="resultMap_ShikakuIdoTaishoshaEntity" type="jp.co.ndensan.reams.db.dba.entity.hihokenshadaichokoshin.ShikakuIdoTaishoshaEntity" autoMapping="true">
         <result property="識別コード" column="識別コード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.ShikibetsuCodeTypeHandler" />
         <result property="現全国地方公共団体コード" column="現全国地方公共団体コード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.LasdecCodeTypeHandler" />
         <result property="旧全国地方公共団体コード" column="旧全国地方公共団体コード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.LasdecCodeTypeHandler" />
