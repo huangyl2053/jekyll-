@@ -10,11 +10,9 @@ import lombok.Getter;
 import lombok.Setter;
 
 /**
- *
  * 介護保険住所地特例施設退所通知書_帳票パラメータクラスです。
  *
  * @reamsid_L DBA-0380-060 duanzhanli
- *
  */
 @Getter
 @Setter
@@ -53,8 +51,12 @@ public class ShisetsuTaishoTsuchishoItem {
     private RString shisetsuYubinNo;
     private RString shisetsuJusho;
     private RString denshiKoin;
-    private RString shomeiHakkoYMD;
-    private RString shuchoMei;
-    private RString shichosonMei2;
+    private RString hakkoYMD1;
+    private RString ninshoshaYakushokuMei;
+    private RString ninshoshaYakushokuMei1;
+    private RString koinMojiretsu;
+    private RString ninshoshaShimeiKakenai;
+    private RString ninshoshaShimeiKakeru;
+    private RString ninshoshaYakushokuMei2;
     private RString koinShoryaku;
 }

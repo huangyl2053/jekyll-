@@ -11,7 +11,6 @@ import jp.co.ndensan.reams.db.dba.entity.report.source.shisetsutaishotsuchisho.S
  * 介護保険住所地特例施設退所通知書Editorです。
  *
  * @reamsid_L DBA-0380-060 duanzhanli
- *
  */
 class ShisetsuTaishoTsuchishoEditor implements IShisetsuTaishoTsuchishoEditor {
 
@@ -66,9 +65,13 @@ class ShisetsuTaishoTsuchishoEditor implements IShisetsuTaishoTsuchishoEditor {
         source.shisetsuYubinNo = item.getShisetsuYubinNo();
         source.shisetsuJusho = item.getShisetsuJusho();
         source.denshiKoin = item.getDenshiKoin();
-        source.shomeiHakkoYMD = item.getShomeiHakkoYMD();
-        source.shuchoMei = item.getShuchoMei();
-        source.shichosonMei2 = item.getShichosonMei2();
+        source.hakkoYMD1 = item.getHakkoYMD1();
+        source.ninshoshaYakushokuMei = item.getNinshoshaYakushokuMei();
+        source.ninshoshaYakushokuMei1 = item.getNinshoshaYakushokuMei1();
+        source.koinMojiretsu = item.getKoinMojiretsu();
+        source.ninshoshaShimeiKakenai = item.getNinshoshaShimeiKakenai();
+        source.ninshoshaShimeiKakeru = item.getNinshoshaShimeiKakeru();
+        source.ninshoshaYakushokuMei2 = item.getNinshoshaYakushokuMei2();
         source.koinShoryaku = item.getKoinShoryaku();
         return source;
     }
