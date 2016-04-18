@@ -9,7 +9,6 @@ import jp.co.ndensan.reams.db.dbb.business.report.tsuchisho.KariTokuchoKaishiTsu
 import jp.co.ndensan.reams.db.dbb.entity.report.tokubetsuchoshukaishitsuchishokari.TokubetsuChoshuKaishiTsuchishoKariOverlayA4TateSource;
 import jp.co.ndensan.reams.db.dbz.business.report.parts.kaigotoiawasesaki.CompKaigoToiawasesakiSource;
 import jp.co.ndensan.reams.ur.urz.entity.report.parts.ninshosha.NinshoshaSource;
-import jp.co.ndensan.reams.ur.urz.entity.report.sofubutsuatesaki.SofubutsuAtesakiSource;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.report.Report;
 import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
@@ -24,25 +23,21 @@ public class TokubetsuChoshuKaishiTsuchishoKariOverlayA4TateReport extends
 
     private final KariTokuchoKaishiTsuchisyoJoho 仮算定特徴開始通知書情報;
     private final RString 通知書定型文１;
-    private final SofubutsuAtesakiSource sofubutsuAtesakiSource;
     private final NinshoshaSource ninshoshaSource;
     private final CompKaigoToiawasesakiSource toiawasesakiSource;
 
     /**
      * コンストラクタです
      *
-     * @param sofubutsuAtesakiSource SofubutsuAtesakiSource
      * @param ninshoshaSource NinshoshaSource
      * @param toiawasesakiSource CompKaigoToiawasesakiSource
      * @param 仮算定特徴開始通知書情報 KariTokuchoKaishiTsuchisyoJoho
      * @param 通知書定型文１ RString
      */
-    public TokubetsuChoshuKaishiTsuchishoKariOverlayA4TateReport(SofubutsuAtesakiSource sofubutsuAtesakiSource,
-            NinshoshaSource ninshoshaSource,
+    public TokubetsuChoshuKaishiTsuchishoKariOverlayA4TateReport(NinshoshaSource ninshoshaSource,
             CompKaigoToiawasesakiSource toiawasesakiSource,
             KariTokuchoKaishiTsuchisyoJoho 仮算定特徴開始通知書情報,
             RString 通知書定型文１) {
-        this.sofubutsuAtesakiSource = sofubutsuAtesakiSource;
         this.ninshoshaSource = ninshoshaSource;
         this.toiawasesakiSource = toiawasesakiSource;
         this.仮算定特徴開始通知書情報 = 仮算定特徴開始通知書情報;
@@ -52,7 +47,7 @@ public class TokubetsuChoshuKaishiTsuchishoKariOverlayA4TateReport extends
     @Override
     public void writeBy(ReportSourceWriter<TokubetsuChoshuKaishiTsuchishoKariOverlayA4TateSource> writer) {
         ITokubetsuChoshuKaishiTsuchishoKariOverlayA4TateEditor editor = new TokubetsuChoshuKaishiTsuchishoKariOverlayA4TateEditor(
-                sofubutsuAtesakiSource, ninshoshaSource, toiawasesakiSource, 仮算定特徴開始通知書情報, 通知書定型文１);
+                ninshoshaSource, toiawasesakiSource, 仮算定特徴開始通知書情報, 通知書定型文１);
         ITokubetsuChoshuKaishiTsuchishoKariOverlayA4TateBuilder builder = new TokubetsuChoshuKaishiTsuchishoKariOverlayA4TateBuilder(editor);
         writer.writeLine(builder);
     }

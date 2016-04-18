@@ -7,6 +7,7 @@ package jp.co.ndensan.reams.db.dbb.business.report.tokubetsuchoshukaishitsuchish
 
 import jp.co.ndensan.reams.db.dbb.business.report.tsuchisho.KariTokuchoKaishiTsuchisyoJoho;
 import jp.co.ndensan.reams.db.dbb.entity.report.tokubetsuchoshukaishitsuchishokari.TokubetsuChoshuKaishiTsuchishoKariSealerSource;
+import jp.co.ndensan.reams.db.dbz.business.report.util.EditedAtesaki;
 import jp.co.ndensan.reams.ur.urz.entity.report.parts.ninshosha.NinshoshaSource;
 import jp.co.ndensan.reams.ur.urz.entity.report.sofubutsuatesaki.SofubutsuAtesakiSource;
 import jp.co.ndensan.reams.uz.uza.lang.EraType;
@@ -26,30 +27,26 @@ public class TokubetsuChoshuKaishiTsuchishoKariSealerEditor implements
 
     private static final RString NENDO = new RString("年度");
     private final KariTokuchoKaishiTsuchisyoJoho 仮算定特徴開始通知書情報;
-    private final SofubutsuAtesakiSource sofubutsuAtesakiSource;
     private final NinshoshaSource ninshoshaSource;
 
     /**
      * コンストラクタです
      *
-     * @param sofubutsuAtesakiSource SofubutsuAtesakiSource
      * @param ninshoshaSource NinshoshaSource
      * @param 仮算定特徴開始通知書情報 KariTokuchoKaishiTsuchisyoJoho
      */
-    public TokubetsuChoshuKaishiTsuchishoKariSealerEditor(SofubutsuAtesakiSource sofubutsuAtesakiSource,
-            NinshoshaSource ninshoshaSource,
+    public TokubetsuChoshuKaishiTsuchishoKariSealerEditor(NinshoshaSource ninshoshaSource,
             KariTokuchoKaishiTsuchisyoJoho 仮算定特徴開始通知書情報) {
-        this.sofubutsuAtesakiSource = sofubutsuAtesakiSource;
         this.ninshoshaSource = ninshoshaSource;
         this.仮算定特徴開始通知書情報 = 仮算定特徴開始通知書情報;
     }
 
     @Override
     public TokubetsuChoshuKaishiTsuchishoKariSealerSource edit(TokubetsuChoshuKaishiTsuchishoKariSealerSource source) {
-//        source.birthYMD = 仮算定特徴開始通知書情報.get編集後仮算定通知書共通情報().get編集後個人().get生年月日();
-//        source.hihokenshaJusho = 仮算定特徴開始通知書情報.get編集後仮算定通知書共通情報().get編集後宛先().get編集後住所();
-//        source.hihokenshaKatagaki = 仮算定特徴開始通知書情報.get編集後仮算定通知書共通情報().get編集後個人().get方書().value();
-//        source.hihokenshaName = 仮算定特徴開始通知書情報.get編集後仮算定通知書共通情報().get編集後個人().get名称().getName().value();
+        source.birthYMD = 仮算定特徴開始通知書情報.get編集後仮算定通知書共通情報().get編集後個人().get生年月日();
+        source.hihokenshaJusho = 仮算定特徴開始通知書情報.get編集後仮算定通知書共通情報().get編集後宛先().get編集後住所();
+        source.hihokenshaKatagaki = 仮算定特徴開始通知書情報.get編集後仮算定通知書共通情報().get編集後個人().get方書().value();
+        source.hihokenshaName = 仮算定特徴開始通知書情報.get編集後仮算定通知書共通情報().get編集後個人().get名称().getName().value();
         source.hokenryoGaku4Gatsu1 = DecimalFormatter.toコンマ区切りRString(仮算定特徴開始通知書情報.get編集後仮算定通知書共通情報()
                 .get更正後().get更正後特徴期別金額01(), 0);
         source.hokenryoGaku4Gatsu2 = DecimalFormatter.toコンマ区切りRString(仮算定特徴開始通知書情報.get編集後仮算定通知書共通情報()
@@ -97,13 +94,18 @@ public class TokubetsuChoshuKaishiTsuchishoKariSealerEditor implements
                 .firstYear(FirstYear.GAN_NEN).fillType(FillType.BLANK).toDateString();
         source.nendo9 = 仮算定特徴開始通知書情報.get編集後仮算定通知書共通情報().get調定年度().wareki().eraType(EraType.KANJI)
                 .firstYear(FirstYear.GAN_NEN).fillType(FillType.BLANK).toDateString();
-//        source.seibetsu = 仮算定特徴開始通知書情報.get編集後仮算定通知書共通情報().get編集後個人().get性別();
-//        source.setaiCode = 仮算定特徴開始通知書情報.get編集後仮算定通知書共通情報().get編集後個人().get世帯コード().value();
-//        source.setainushiName = 仮算定特徴開始通知書情報.get編集後仮算定通知書共通情報().get編集後個人().get世帯主名().value();
+        source.seibetsu = 仮算定特徴開始通知書情報.get編集後仮算定通知書共通情報().get編集後個人().get性別();
+        source.setaiCode = 仮算定特徴開始通知書情報.get編集後仮算定通知書共通情報().get編集後個人().get世帯コード().value();
+        source.setainushiName = 仮算定特徴開始通知書情報.get編集後仮算定通知書共通情報().get編集後個人().get世帯主名().value();
         source.tokuchoGimushaName = 仮算定特徴開始通知書情報.get編集後仮算定通知書共通情報().get更正後().get更正後特別徴収義務者();
         source.tokuchoTaishoNenkinName = 仮算定特徴開始通知書情報.get編集後仮算定通知書共通情報().get更正後().get更正後特別徴収対象年金();
         source.tsuchishoNo = 仮算定特徴開始通知書情報.get編集後仮算定通知書共通情報().get通知書番号().value();
 
+        // TODO
+        EditedAtesaki 編集後宛先 = new EditedAtesaki(仮算定特徴開始通知書情報.get宛先情報(), 仮算定特徴開始通知書情報.get地方公共団体(),
+                仮算定特徴開始通知書情報.get帳票制御共通(), null, null, true,
+                null, null, null, null);
+        SofubutsuAtesakiSource sofubutsuAtesakiSource = 編集後宛先.getSofubutsuAtesakiSource().get送付物宛先ソース();
         source.yubinNo1 = sofubutsuAtesakiSource.yubinNo;
         source.gyoseiku1 = sofubutsuAtesakiSource.gyoseiku;
         source.jusho3 = sofubutsuAtesakiSource.jusho3;
