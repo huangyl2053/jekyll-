@@ -10,7 +10,7 @@ import jp.co.ndensan.reams.db.dbb.entity.report.nonyutsuchishohonsanteihakkoichi
 /**
  * 帳票設計_DBBRP43002_2_保険料納入通知書（本算定）発行一覧表
  *
- * @reamsid_L DBB-0780-120 yangchenbing
+ * @reamsid_L DBB-0780-080 yangchenbing
  */
 public class BodyEditor implements INonyuTsuchIchiranEditor {
 
