@@ -8,6 +8,7 @@ package jp.co.ndensan.reams.db.dbb.business.report.tokubetsuchoshukaishitsuchish
 import jp.co.ndensan.reams.db.dbb.business.report.tsuchisho.KariTokuchoKaishiTsuchisyoJoho;
 import jp.co.ndensan.reams.db.dbb.entity.report.tokubetsuchoshukaishitsuchishokari.TokubetsuChoshuKaishiTsuchishoKariOverlayA4TateSource;
 import jp.co.ndensan.reams.db.dbz.business.report.parts.kaigotoiawasesaki.CompKaigoToiawasesakiSource;
+import jp.co.ndensan.reams.db.dbz.business.report.util.EditedAtesaki;
 import jp.co.ndensan.reams.ur.urz.entity.report.parts.ninshosha.NinshoshaSource;
 import jp.co.ndensan.reams.ur.urz.entity.report.sofubutsuatesaki.SofubutsuAtesakiSource;
 import jp.co.ndensan.reams.uz.uza.lang.EraType;
@@ -33,25 +34,21 @@ public class TokubetsuChoshuKaishiTsuchishoKariOverlayA4TateEditor implements
 
     private final KariTokuchoKaishiTsuchisyoJoho 仮算定特徴開始通知書情報;
     private final RString 通知書定型文１;
-    private final SofubutsuAtesakiSource sofubutsuAtesakiSource;
     private final NinshoshaSource ninshoshaSource;
     private final CompKaigoToiawasesakiSource toiawasesakiSource;
 
     /**
      * コンストラクタです
      *
-     * @param sofubutsuAtesakiSource SofubutsuAtesakiSource
      * @param ninshoshaSource NinshoshaSource
      * @param toiawasesakiSource CompKaigoToiawasesakiSource
      * @param 仮算定特徴開始通知書情報 KariTokuchoKaishiTsuchisyoJoho
      * @param 通知書定型文１ RString
      */
-    public TokubetsuChoshuKaishiTsuchishoKariOverlayA4TateEditor(SofubutsuAtesakiSource sofubutsuAtesakiSource,
-            NinshoshaSource ninshoshaSource,
+    public TokubetsuChoshuKaishiTsuchishoKariOverlayA4TateEditor(NinshoshaSource ninshoshaSource,
             CompKaigoToiawasesakiSource toiawasesakiSource,
             KariTokuchoKaishiTsuchisyoJoho 仮算定特徴開始通知書情報,
             RString 通知書定型文１) {
-        this.sofubutsuAtesakiSource = sofubutsuAtesakiSource;
         this.ninshoshaSource = ninshoshaSource;
         this.toiawasesakiSource = toiawasesakiSource;
         this.仮算定特徴開始通知書情報 = 仮算定特徴開始通知書情報;
@@ -124,6 +121,11 @@ public class TokubetsuChoshuKaishiTsuchishoKariOverlayA4TateEditor implements
                 .get前年度情報().get前年度最終期特徴期別介護保険料(), 0);
         source.tsuchibun = 通知書定型文１;
 
+        // TODO
+        EditedAtesaki 編集後宛先 = new EditedAtesaki(仮算定特徴開始通知書情報.get宛先情報(), 仮算定特徴開始通知書情報.get地方公共団体(),
+                仮算定特徴開始通知書情報.get帳票制御共通(), null, null, true,
+                null, null, null, null);
+        SofubutsuAtesakiSource sofubutsuAtesakiSource = 編集後宛先.getSofubutsuAtesakiSource().get送付物宛先ソース();
         source.yubinNo1 = sofubutsuAtesakiSource.yubinNo;
         source.gyoseiku1 = sofubutsuAtesakiSource.gyoseiku;
         source.jusho3 = sofubutsuAtesakiSource.jusho3;
@@ -159,12 +161,7 @@ public class TokubetsuChoshuKaishiTsuchishoKariOverlayA4TateEditor implements
         //source.setainusimei = item.get世帯主名();
         // TODO 様方
         //source.samaKata = item.get様方();
-//        IKaigoToiawasesakiSourceBuilder 介護問合せ先ソースビルダー
-//                = KaigoToiawasesakiSourceBuilderCreator.create(SubGyomuCode.DBB介護賦課, ReportId.EMPTY);
-//        CompKaigoToiawasesakiSource toiawasesakiSource = 介護問合せ先ソースビルダー.buildSource();
-//        CompKaigoToiawasesakiSource toiawasesakiSource = null;
-        // TODO 帳票項目定義_CompKaigoToiawasesaki
-//        KaigoToiawasesakiSourceBuilderCreator
+
         source.yubinBango = toiawasesakiSource.yubinBango;
         source.shozaichi = toiawasesakiSource.shozaichi;
         source.choshaBushoName = toiawasesakiSource.choshaBushoName;

@@ -7,6 +7,7 @@ package jp.co.ndensan.reams.db.dbb.business.report.tokubetsuchoshukaishitsuchish
 
 import jp.co.ndensan.reams.db.dbb.business.report.tsuchisho.KariTokuchoKaishiTsuchisyoJoho;
 import jp.co.ndensan.reams.db.dbb.entity.report.tokubetsuchoshukaishitsuchishokari.TokubetsuChoshuKaishiTsuchishoKariB5Source;
+import jp.co.ndensan.reams.db.dbz.business.report.util.EditedAtesaki;
 import jp.co.ndensan.reams.ur.urz.entity.report.parts.ninshosha.NinshoshaSource;
 import jp.co.ndensan.reams.ur.urz.entity.report.sofubutsuatesaki.SofubutsuAtesakiSource;
 import jp.co.ndensan.reams.uz.uza.lang.EraType;
@@ -27,22 +28,18 @@ public class TokubetsuChoshuKaishiTsuchishoKariB5Editor implements
     private static final RString NENDO = new RString("年度");
     private final KariTokuchoKaishiTsuchisyoJoho 仮算定特徴開始通知書情報;
     private final RString 宛名連番;
-    private final SofubutsuAtesakiSource sofubutsuAtesakiSource;
     private final NinshoshaSource ninshoshaSource;
 
     /**
      * コンストラクタです
      *
-     * @param sofubutsuAtesakiSource SofubutsuAtesakiSource
      * @param ninshoshaSource NinshoshaSource
      * @param 仮算定特徴開始通知書情報 KariTokuchoKaishiTsuchisyoJoho
      * @param 宛名連番 RString
      */
-    public TokubetsuChoshuKaishiTsuchishoKariB5Editor(SofubutsuAtesakiSource sofubutsuAtesakiSource,
-            NinshoshaSource ninshoshaSource,
+    public TokubetsuChoshuKaishiTsuchishoKariB5Editor(NinshoshaSource ninshoshaSource,
             KariTokuchoKaishiTsuchisyoJoho 仮算定特徴開始通知書情報,
             RString 宛名連番) {
-        this.sofubutsuAtesakiSource = sofubutsuAtesakiSource;
         this.ninshoshaSource = ninshoshaSource;
         this.仮算定特徴開始通知書情報 = 仮算定特徴開始通知書情報;
         this.宛名連番 = 宛名連番;
@@ -116,7 +113,10 @@ public class TokubetsuChoshuKaishiTsuchishoKariB5Editor implements
                 .get更正後().get更正後特徴期別金額03(), 0);
         source.hokenshaName = 仮算定特徴開始通知書情報.get編集後仮算定通知書共通情報().get保険者名();
         // TODO
-
+        EditedAtesaki 編集後宛先 = new EditedAtesaki(仮算定特徴開始通知書情報.get宛先情報(), 仮算定特徴開始通知書情報.get地方公共団体(),
+                仮算定特徴開始通知書情報.get帳票制御共通(), null, null, true,
+                null, null, null, null);
+        SofubutsuAtesakiSource sofubutsuAtesakiSource = 編集後宛先.getSofubutsuAtesakiSource().get送付物宛先ソース();
         source.yubinNo1 = sofubutsuAtesakiSource.yubinNo;
         source.gyoseiku1 = sofubutsuAtesakiSource.gyoseiku;
         source.jusho3 = sofubutsuAtesakiSource.jusho3;
