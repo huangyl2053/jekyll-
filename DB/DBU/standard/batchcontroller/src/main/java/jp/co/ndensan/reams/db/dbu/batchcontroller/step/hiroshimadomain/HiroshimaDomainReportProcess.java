@@ -73,10 +73,12 @@ public class HiroshimaDomainReportProcess extends BatchProcessBase<HiroshimaDoma
     private EucCsvWriter<HiroshimaDomainEucCsvEntity> eucCsvWriter;
     private HiroshimaDomainProcessParameter processParameter;
     private List<KoikinaiTenkyoEntity> list;
+    private boolean flag;
 
     @Override
     protected void initialize() {
         list = new ArrayList<>();
+        flag = false;
     }
 
     @Override
@@ -104,6 +106,7 @@ public class HiroshimaDomainReportProcess extends BatchProcessBase<HiroshimaDoma
         KoikinaiTenkyoEntity entity = new KoikinaiTenkyoEntity();
         if (転入転出異動情報Entity == null) {
             entity.set氏名(new AtenaMeisho(UrErrorMessages.該当データなし.toString()));
+            flag = true;
         } else {
             if (転入転出異動情報Entity.get転入PSM_住登内住所() != null
                     && 転入転出異動情報Entity.get転入PSM_住登内番地() != null
@@ -164,7 +167,7 @@ public class HiroshimaDomainReportProcess extends BatchProcessBase<HiroshimaDoma
     private List<KoikinaiTenkyoResultEntity> get帳票リスト(List<KoikinaiTenkyoEntity> list, LasdecCode 市町村コード, RString 市町村名称) {
 
         KoikinaiTenkyoListEntity 広域内転居結果一覧Entity = new KoikinaiTenkyoListEntity();
-        if (list.isEmpty()) {
+        if (flag) {
             KoikinaiTenkyoEntity 広域内転居結果Entity = new KoikinaiTenkyoEntity();
             広域内転居結果Entity.set氏名(new AtenaMeisho(UrErrorMessages.該当データなし.toString()));
             list.add(広域内転居結果Entity);
@@ -188,7 +191,7 @@ public class HiroshimaDomainReportProcess extends BatchProcessBase<HiroshimaDoma
      * @return 広域内転居結果CSV
      */
     private List<KoikinaiTenkyoCSVDataEntity> get広域内転居結果CSV(List<KoikinaiTenkyoEntity> list) {
-        if (list.isEmpty()) {
+        if (flag) {
             KoikinaiTenkyoEntity 広域内転居結果Entity = new KoikinaiTenkyoEntity();
             広域内転居結果Entity.set氏名(new AtenaMeisho(UrErrorMessages.該当データなし.toString()));
             list.add(広域内転居結果Entity);
