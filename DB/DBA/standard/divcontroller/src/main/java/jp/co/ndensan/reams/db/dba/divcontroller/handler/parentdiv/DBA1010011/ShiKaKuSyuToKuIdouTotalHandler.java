@@ -14,7 +14,6 @@ import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBA;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbz.business.core.HihokenshaDaicho;
 import jp.co.ndensan.reams.db.dbz.business.core.HihokenshaDaichoBuilder;
-import jp.co.ndensan.reams.db.dbz.definition.core.ViewStateKeys;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.ShikakuTokusoRireki.dgShikakuShutokuRireki_Row;
 import jp.co.ndensan.reams.db.dbz.service.core.hihokenshanotsukiban.HihokenshanotsukibanFinder;
 import jp.co.ndensan.reams.ua.uax.business.core.dateofbirth.DateOfBirthFactory;
@@ -26,11 +25,12 @@ import jp.co.ndensan.reams.uz.uza.lang.ApplicationException;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.binding.KeyValueDataSource;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ResponseHolder;
-import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 import jp.co.ndensan.reams.uz.uza.util.config.BusinessConfig;
 
 /**
  * 資格取得異動のHandlerクラスです。
+ *
+ * @reamsid_L DBA-0520-030 wangkun
  */
 public class ShiKaKuSyuToKuIdouTotalHandler {
 
@@ -55,12 +55,9 @@ public class ShiKaKuSyuToKuIdouTotalHandler {
     private RString 状態_老福年金タブ = RString.EMPTY;
     private RString 状態_施設入退所タブ = RString.EMPTY;
 
-    /**
-     * テストデータ
-     */
-    private static HihokenshaNo 被保険者番号 = new HihokenshaNo(new RString("0000000001"));
-    private static RString 表示モード = new RString("HihokenrirekiNashiMode");
-    private static ShikibetsuCode 識別コード = new ShikibetsuCode(new RString("000001"));
+    private final HihokenshaNo 被保険者番号 = new HihokenshaNo(new RString("0000000001"));
+    private final RString 表示モード = new RString("HihokenrirekiNashiMode");
+    private final ShikibetsuCode 識別コード = new ShikibetsuCode(new RString("000001"));
 
     private final ShikakuShutokuIdoTotalDiv div;
 
@@ -79,12 +76,7 @@ public class ShiKaKuSyuToKuIdouTotalHandler {
      */
     public void load() {
         kaigoShikakuKihon_onload(被保険者番号, 表示モード);
-        kaigoNinteiAtenaInfo_onload(new ShikibetsuCode(RString.EMPTY));
-        // TODO:　
-        ViewStateHolder.put(ViewStateKeys.医療保険情報_識別コード, 識別コード);
-        ViewStateHolder.put(ViewStateKeys.医療保険情報_市町村コード, LasdecCode.EMPTY);
-        ViewStateHolder.put(ViewStateKeys.医療保険情報_モード, 状態_登録);
-        ViewStateHolder.put(ViewStateKeys.モード, DBAMN21001_転入により取得);
+        kaigoNinteiAtenaInfo_onload(識別コード);
         onOpenTplDefault();
     }
 
@@ -98,8 +90,6 @@ public class ShiKaKuSyuToKuIdouTotalHandler {
                 div.getKihonJoho().getCcdKaigoShikakuKihon().set被保履歴ボタンDisable(false);
             }
         }
-
-        // 楊さん指示より、以下実行です。
         if (!RString.isNullOrEmpty(被保険者番号.getColumnValue())) {
             div.getKihonJoho().getCcdKaigoShikakuKihon().onLoad(被保険者番号);
         }
@@ -215,6 +205,9 @@ public class ShiKaKuSyuToKuIdouTotalHandler {
         div.getShikakuShutokuJoho().getShikakuTokusoRirekiMain().getShikakuShutokuInput().getDdlShikakuShutokuJiyu().setSelectedIndex(0);
     }
 
+    /**
+     * 資格取得情報パネルの初期化
+     */
     public void 資格取得情報パネルの初期化() {
         div.getShikakuShutokuJoho().getShikakuTokusoRirekiMain().getShikakuShutokuInput().getTxtHihoNo().clearValue();
         div.getShikakuShutokuJoho().getShikakuTokusoRirekiMain().getShikakuShutokuInput().getTxtShutokuDate().clearValue();
@@ -224,15 +217,18 @@ public class ShiKaKuSyuToKuIdouTotalHandler {
         div.getShikakuShutokuJoho().getShikakuTokusoRirekiMain().getCcdShikakuTokusoRireki().set追加するボタン(false);
     }
 
+    /**
+     * 被保番号表示有無制御
+     */
     public void get被保番号表示有無制御() {
         HihokenshaNo hihokenshaNo = HihokenshanotsukibanFinder.createInstance().getHihokenshanotsukiban(識別コード);
-        if (任意手入力付番.equals(BusinessConfig.get(ConfigNameDBA.被保険者番号付番方法_付番方法, SubGyomuCode.DBA介護資格))
+        if (hihokenshaNo == null) {
+            throw new ApplicationException(UrErrorMessages.対象データなし.getMessage());
+        } else if (任意手入力付番.equals(BusinessConfig.get(ConfigNameDBA.被保険者番号付番方法_付番方法, SubGyomuCode.DBA介護資格))
                 && hihokenshaNo.isEmpty()) {
             div.getShikakuShutokuJoho().getShikakuTokusoRirekiMain().getShikakuShutokuInput().getTxtHihoNo().setDisplayNone(false);
         } else if (!hihokenshaNo.isEmpty()) {
             div.getShikakuShutokuJoho().getShikakuTokusoRirekiMain().getShikakuShutokuInput().getTxtHihoNo().setDisplayNone(true);
-        } else if (hihokenshaNo == null) {
-            throw new ApplicationException(UrErrorMessages.対象データなし.getMessage());
         }
     }
 

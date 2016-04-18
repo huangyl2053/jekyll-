@@ -13,7 +13,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 /**
  * ShikakuTokusoRirekiPanel のクラスファイル
  *
- * @author 自動生成
+ * @reamsid_L DBA-0520-030 wangkun
  */
 public class ShikakuTokusoRirekiPanelDiv extends Panel {
 

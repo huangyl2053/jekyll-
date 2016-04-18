@@ -9,6 +9,7 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 import jp.co.ndensan.reams.db.dba.divcontroller.entity.parentdiv.DBA1010011.DBA1010011StateName;
+import jp.co.ndensan.reams.db.dba.divcontroller.entity.parentdiv.DBA1010011.DBA1010011TransitionEventName;
 import jp.co.ndensan.reams.db.dba.divcontroller.entity.parentdiv.DBA1010011.ShikakuShutokuIdoTotalDiv;
 import jp.co.ndensan.reams.db.dba.divcontroller.handler.parentdiv.DBA1010011.ShiKaKuSyuToKuIdouTotalHandler;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.ShikakuTokusoRireki.dgShikakuShutokuRireki_Row;
@@ -31,6 +32,7 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
 /**
  * 資格取得異動の対象者情報を表示するためのDivControllerです。
  *
+ * @reamsid_L DBA-0552-030 wangkun
  */
 public class ShikakuShutokuIdoTotal {
 
@@ -118,6 +120,29 @@ public class ShikakuShutokuIdoTotal {
         RealInitialLocker.release(前排他ロックキー);
         onLoad(div);
         return ResponseData.of(div).setState(DBA1010011StateName.初期状態);
+    }
+
+    /**
+     * 「戻る」ボタンを押下します。
+     *
+     * @param div 適用除外者異動の訂正Div
+     * @return レスポンス
+     */
+    public ResponseData onClick_btnBack(ShikakuShutokuIdoTotalDiv div) {
+        RealInitialLocker.release(前排他ロックキー);
+        onLoad(div);
+        return ResponseData.of(div).forwardWithEventName(DBA1010011TransitionEventName.再検索).respond();
+    }
+
+    /**
+     * 「資格情報を詳細」ボタン処理します。
+     *
+     * @param div ShikakuShutokuIdoTotalDiv
+     * @return レスポンス
+     */
+    public ResponseData<ShikakuShutokuIdoTotalDiv> onClick_btnSyouHoSo(ShikakuShutokuIdoTotalDiv div) {
+        RealInitialLocker.release(前排他ロックキー);
+        return ResponseData.of(div).forwardWithEventName(DBA1010011TransitionEventName.詳細へ).respond();
     }
 
     /**
@@ -240,7 +265,7 @@ public class ShikakuShutokuIdoTotal {
      * 資格得喪履歴グリッドの枝番の昇順処理です。
      *
      */
-    public class ComparatorByDaNoSort implements Comparator {
+    public static class ComparatorByDaNoSort implements Comparator {
 
         @Override
         public int compare(Object arg0, Object arg1) {

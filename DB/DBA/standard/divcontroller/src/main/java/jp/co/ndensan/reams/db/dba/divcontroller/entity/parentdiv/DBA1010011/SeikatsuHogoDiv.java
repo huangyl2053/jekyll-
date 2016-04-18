@@ -4,16 +4,19 @@ package jp.co.ndensan.reams.db.dba.divcontroller.entity.parentdiv.DBA1010011;
  * このファイルへの変更は、再生成時には損失するため
  * 不正な動作の原因になります。
  */
+
 import com.fasterxml.jackson.annotation.JsonProperty;
-import jp.co.ndensan.reams.uz.uza.ui.binding.*;
+import jp.co.ndensan.reams.uz.uza.ui.binding.Button;
+import jp.co.ndensan.reams.uz.uza.ui.binding.DataGrid;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 
 /**
- * SeikatsuHogo のクラスファイル 
- * 
- * @author 自動生成
+ * SeikatsuHogo のクラスファイル
+ *
+ * @reamsid_L DBA-0520-030 wangkun
  */
 public class SeikatsuHogoDiv extends Panel {
+
     // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：Uz-master-49">
     /*
      * [ private の作成 ]
@@ -43,7 +46,7 @@ public class SeikatsuHogoDiv extends Panel {
 
     @JsonProperty("btnAddSeikatsuHogo")
     public void setBtnAddSeikatsuHogo(Button btnAddSeikatsuHogo) {
-        this.btnAddSeikatsuHogo=btnAddSeikatsuHogo;
+        this.btnAddSeikatsuHogo = btnAddSeikatsuHogo;
     }
 
     @JsonProperty("dgSeikatsuHogoRireki")
@@ -53,7 +56,7 @@ public class SeikatsuHogoDiv extends Panel {
 
     @JsonProperty("dgSeikatsuHogoRireki")
     public void setDgSeikatsuHogoRireki(DataGrid<dgSeikatsuHogoRireki_Row> dgSeikatsuHogoRireki) {
-        this.dgSeikatsuHogoRireki=dgSeikatsuHogoRireki;
+        this.dgSeikatsuHogoRireki = dgSeikatsuHogoRireki;
     }
 
     @JsonProperty("SeikatsuHogoInput")
@@ -63,7 +66,7 @@ public class SeikatsuHogoDiv extends Panel {
 
     @JsonProperty("SeikatsuHogoInput")
     public void setSeikatsuHogoInput(SeikatsuHogoInputDiv SeikatsuHogoInput) {
-        this.SeikatsuHogoInput=SeikatsuHogoInput;
+        this.SeikatsuHogoInput = SeikatsuHogoInput;
     }
 
     @JsonProperty("btnUpdataSeikatsuHogo")
@@ -73,7 +76,7 @@ public class SeikatsuHogoDiv extends Panel {
 
     @JsonProperty("btnUpdataSeikatsuHogo")
     public void setBtnUpdataSeikatsuHogo(Button btnUpdataSeikatsuHogo) {
-        this.btnUpdataSeikatsuHogo=btnUpdataSeikatsuHogo;
+        this.btnUpdataSeikatsuHogo = btnUpdataSeikatsuHogo;
     }
 
     // </editor-fold>
