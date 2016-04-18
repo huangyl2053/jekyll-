@@ -57,10 +57,8 @@ public class KyokaisoGaitoshaPanelValidationHandler {
 
         RDate 開始日 = div.getTxtKaishibi().getValue();
         RDate 終了日 = div.getTxtShuryobi().getValue();
-        if (開始日 != null && 終了日 != null) {
-            if (!開始日.isBefore(終了日)) {
-                validPairs.add(new ValidationMessageControlPair(RRVMessages.開始日と終了日の順番の整合性チェック));
-            }
+        if (開始日 != null && 終了日 != null && !開始日.isBefore(終了日)) {
+            validPairs.add(new ValidationMessageControlPair(RRVMessages.開始日と終了日の順番の整合性チェック));
         }
         境界層該当一覧情報チェック(validPairs);
         境界層保険料段階情報チェック(validPairs);

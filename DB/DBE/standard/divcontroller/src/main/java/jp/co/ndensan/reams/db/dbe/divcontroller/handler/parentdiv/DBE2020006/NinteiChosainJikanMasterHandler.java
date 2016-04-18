@@ -224,13 +224,15 @@ public class NinteiChosainJikanMasterHandler {
         NinteiChosaIkkatsuInputModel models = DataPassingConverter.deserialize(div.getNinteiChosaIkkatsuInputModel(), NinteiChosaIkkatsuInputModel.class);
         if (models != null) {
             List<NinteiChosaIkkatsuInputModel> データ = models.getModelList();
-            for (NinteiChosaIkkatsuInputModel model : データ) {
-                FlexibleDate 設定予定日 = model.get認定調査予定年月日();
-                boolean is上書きするフラグ = model.is既に設定済みの場合上書きするフラグ();
-                RString 時間枠 = model.get認定調査時間枠().getColumnValue();
-                RString 認定調査予定開始時間 = model.get認定調査予定開始時間();
-                RString 認定調査予定終了時間 = model.get認定調査予定終了時間();
-                データ編集(設定予定日, is上書きするフラグ, 時間枠, 認定調査予定開始時間, 認定調査予定終了時間);
+            if (データ != null) {
+                for (NinteiChosaIkkatsuInputModel model : データ) {
+                    FlexibleDate 設定予定日 = model.get認定調査予定年月日();
+                    boolean is上書きするフラグ = model.is既に設定済みの場合上書きするフラグ();
+                    RString 時間枠 = model.get認定調査時間枠().getColumnValue();
+                    RString 認定調査予定開始時間 = model.get認定調査予定開始時間();
+                    RString 認定調査予定終了時間 = model.get認定調査予定終了時間();
+                    データ編集(設定予定日, is上書きするフラグ, 時間枠, 認定調査予定開始時間, 認定調査予定終了時間);
+                }
             }
         }
     }
@@ -1090,7 +1092,9 @@ public class NinteiChosainJikanMasterHandler {
                         row.setYoyakuJokyo02(認定調査データ.get予約状況().getColumnValue());
                         row.setYoyakuKaoFlag02(get予約可能フラグ(認定調査データ.is予約可能フラグ()));
                         row.setBiko02(nullToEmpty(認定調査データ.get備考()));
-                        row.setHiddenChosaJikanwaku02(RString.EMPTY);
+                        row.setHiddenChosaJikanwaku02(予定開始時間と予定終了時間(
+                                認定調査データ.get認定調査予定開始時間(),
+                                認定調査データ.get認定調査予定終了時間()));
                         break;
                     case 時間枠_3:
                         row.setChosaJikanwaku03(予定開始時間と予定終了時間(

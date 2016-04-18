@@ -216,9 +216,30 @@ public class NinteiChosainJikanMasterManager {
      */
     @Transaction
     public void 更新(DbT5221NinteichosaScheduleEntity 変更前データ, DbT5221NinteichosaScheduleEntity 変更後データ) {
+        変更後データ.setState(EntityDataState.Added);
         dac.saveOrDelete(変更前データ);
         if (!EntityDataState.Added.equals(変更前データ.getState())) {
             dac.save(変更後データ);
         }
+    }
+
+    /**
+     * DbT5221NinteichosaScheduleEntityを登録します。状態によってinsert/update/delete処理に振り分けられます。
+     *
+     * @param entity entity
+     */
+    @Transaction
+    public void saveOrDelete(DbT5221NinteichosaScheduleEntity entity) {
+        dac.saveOrDelete(entity);
+    }
+
+    /**
+     * DbT5221NinteichosaScheduleEntityを登録します。状態によってinsert/update/delete処理に振り分けられます。
+     *
+     * @param entity entity
+     */
+    @Transaction
+    public void save(DbT5221NinteichosaScheduleEntity entity) {
+        dac.save(entity);
     }
 }

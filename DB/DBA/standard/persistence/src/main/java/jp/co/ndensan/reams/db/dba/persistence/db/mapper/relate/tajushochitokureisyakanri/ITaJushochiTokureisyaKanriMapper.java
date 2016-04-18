@@ -55,7 +55,8 @@ public interface ITaJushochiTokureisyaKanriMapper {
      * @param 施設入退所情報リスト件数取得 TaJushochiTokureisyaKanriParameter
      * @return 施設入退所情報リスト件数
      */
-    int select施設入退所情報リスト件数取得(jp.co.ndensan.reams.db.dba.definition.mybatis.param.tajushochitokureisya.TaJushochiTokureisyaKanriParameter 施設入退所情報リスト件数取得);
+    int select施設入退所情報リスト件数取得(
+            jp.co.ndensan.reams.db.dba.definition.mybatis.param.tajushochitokureisya.TaJushochiTokureisyaKanriParameter 施設入退所情報リスト件数取得);
 
     /**
      * 他市町村住所地特例情報取得します。
