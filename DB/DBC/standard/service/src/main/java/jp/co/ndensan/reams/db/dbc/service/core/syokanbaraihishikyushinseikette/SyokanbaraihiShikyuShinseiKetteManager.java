@@ -1242,7 +1242,7 @@ public class SyokanbaraihiShikyuShinseiKetteManager extends SyokanbaraihiShikyuS
             RString 様式番号, RString 明細番号) {
         DbT3034ShokanShinseiEntity dbT3034entity = 償還払支給申請Dac.selectByKey(被保険者番号, サービス年月, 整理番号);
         if (dbT3034entity == null) {
-            return Decimal.ZERO;
+            return null;
         }
         ShoKisaiHokenshaNo 証記載保険者番号 = dbT3034entity.getShoKisaiHokenshaNo();
 
@@ -1253,7 +1253,7 @@ public class SyokanbaraihiShikyuShinseiKetteManager extends SyokanbaraihiShikyuS
         }
         DbT7131KaigoServiceNaiyouEntity dbt7131entity = 介護サービスDac.select介護サービス(サービス年月);
         if (dbt7131entity == null) {
-            return Decimal.ZERO;
+            return null;
         }
         return new Decimal(dbt7131entity.getTaniSu());
 
