@@ -31,6 +31,15 @@ public class TatokuKanrenChohyoShijiData implements Serializable {
     }
 
     /**
+     * Entityを取得します。
+     *
+     * @return Entity
+     */
+    public TatokuKanrenChohyoShijiDataEntity getEntity() {
+        return entity;
+    }
+
+    /**
      * 保険者郵便番号を取得します。
      *
      * @return 保険者郵便番号
