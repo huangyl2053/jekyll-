@@ -8,14 +8,14 @@ package jp.co.ndensan.reams.db.dba.divcontroller.entity.parentdiv.DBA7010011;
 
 
 
-import jp.co.ndensan.reams.uz.uza.ui.binding.DataRow;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.ui.binding.DataRow;
 
 
 /**
  * dgAddressSel_Row のクラスファイル 
  * 
- * @author 自動生成
+ * @reamsid_L DBA-0380-020 houtp
  */
 
 public class dgAddressSel_Row extends DataRow {
