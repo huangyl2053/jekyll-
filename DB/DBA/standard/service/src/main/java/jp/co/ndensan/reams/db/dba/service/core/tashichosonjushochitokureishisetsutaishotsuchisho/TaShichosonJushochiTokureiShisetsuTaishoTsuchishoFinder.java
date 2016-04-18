@@ -5,6 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dba.service.core.tashichosonjushochitokureishisetsutaishotsuchisho;
 
+import jp.co.ndensan.reams.db.dba.business.core.tashichosonjushochitokureishisetsutaishotsuchisho.TatokuKanrenChohyoTaishoTsuchishoBusiness;
 import jp.co.ndensan.reams.db.dba.definition.mybatis.param.tashitaishotsuchisho.TaShichosonJushochiTokureiShisetsuTaishoTsuchishoMybatisParameter;
 import jp.co.ndensan.reams.db.dba.entity.TatokuKanrenChohyoShijiDataEntity;
 import jp.co.ndensan.reams.db.dba.entity.TatokuKanrenChohyoTaishoTsuchishoEntity;
@@ -93,7 +94,7 @@ public class TaShichosonJushochiTokureiShisetsuTaishoTsuchishoFinder {
      * @return 他住特施設退所通知書データEntity
      */
     @Transaction
-    public TatokuKanrenChohyoTaishoTsuchishoEntity setTatokuKanrenChohyoTaishoTsuchisho(TatokuKanrenChohyoShijiDataEntity inEntity) {
+    public TatokuKanrenChohyoTaishoTsuchishoBusiness setTatokuKanrenChohyoTaishoTsuchisho(TatokuKanrenChohyoShijiDataEntity inEntity) {
         TatokuKanrenChohyoTaishoTsuchishoEntity outEntity = new TatokuKanrenChohyoTaishoTsuchishoEntity();
         outEntity.set保険者郵便番号(inEntity.get保険者郵便番号().getEditedYubinNo());
         outEntity.set文書番号(inEntity.get文書番号());
@@ -208,7 +209,9 @@ public class TaShichosonJushochiTokureiShisetsuTaishoTsuchishoFinder {
         }
         outEntity.set市町村名(association.get市町村名());
         outEntity.set公印省略(builder.buildSource().koinShoryaku);
-        return outEntity;
+
+        TatokuKanrenChohyoTaishoTsuchishoBusiness business = new TatokuKanrenChohyoTaishoTsuchishoBusiness(outEntity);
+        return business;
     }
 
     /**
