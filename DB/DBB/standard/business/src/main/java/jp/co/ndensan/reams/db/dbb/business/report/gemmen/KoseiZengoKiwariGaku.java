@@ -11,8 +11,6 @@ import lombok.Setter;
 
 /**
  * 更正前後期割額 更正前後の期割額を格納
- *
- * @reamsid_L DBB-0740-030 surun
  */
 @Getter
 @Setter

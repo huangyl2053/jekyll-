@@ -3,6 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
+
 package jp.co.ndensan.reams.db.dbb.business.report.gemmen;
 
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -11,14 +12,11 @@ import lombok.Setter;
 
 /**
  * 介護保険料減免決定通知書Item
- *
- * @reamsid_L DBB-0740-030 surun
  */
 @Getter
 @Setter
 @SuppressWarnings("PMD.UnusedPrivateField")
 public class GenmenKetteiTsuchiShoItem {
-
     private RString 文書番号;
     private RString 調定年度;
     private RString 賦課年度;

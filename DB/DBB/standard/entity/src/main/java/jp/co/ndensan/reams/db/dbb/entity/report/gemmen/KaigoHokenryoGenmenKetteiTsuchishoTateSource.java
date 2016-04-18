@@ -11,8 +11,6 @@ import jp.co.ndensan.reams.uz.uza.report.source.ReportItem;
 
 /**
  * 介護保険料減免決定通知書 A4縦タイプSource
- *
- * @reamsid_L DBB-0740-030 surun
  */
 public class KaigoHokenryoGenmenKetteiTsuchishoTateSource implements IReportSource {
 // <editor-fold defaultstate="collapsed" desc="Generated Code">

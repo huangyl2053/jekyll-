@@ -10,8 +10,6 @@ import jp.co.ndensan.reams.uz.uza.report.IReportEditor;
 
 /**
  * 介護保険料減免決定通知書 A4縦タイプIEditor
- *
- * @reamsid_L DBB-0740-030 surun
  */
 public interface IGenmenKetteiTsuchiShoTateEditor extends
         IReportEditor<KaigoHokenryoGenmenKetteiTsuchishoTateSource> {

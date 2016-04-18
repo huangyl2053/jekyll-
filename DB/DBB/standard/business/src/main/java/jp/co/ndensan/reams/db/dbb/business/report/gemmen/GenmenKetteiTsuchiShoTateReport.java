@@ -13,8 +13,6 @@ import lombok.NonNull;
 
 /**
  * 介護保険料減免決定通知書 A4縦タイプReport
- *
- * @reamsid_L DBB-0740-030 surun
  */
 public class GenmenKetteiTsuchiShoTateReport extends Report<KaigoHokenryoGenmenKetteiTsuchishoTateSource> {
 

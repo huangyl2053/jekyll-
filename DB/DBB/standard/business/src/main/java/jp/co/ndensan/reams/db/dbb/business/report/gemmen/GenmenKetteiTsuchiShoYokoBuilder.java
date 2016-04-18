@@ -10,8 +10,6 @@ import jp.co.ndensan.reams.uz.uza.report.ReportEditorJoiner;
 
 /**
  * 介護保険料減免決定通知書 B5横タイプBuilder
- *
- * @reamsid_L DBB-0740-030 surun
  */
 public class GenmenKetteiTsuchiShoYokoBuilder implements IGenmenKetteiTsuchiShoYokoBuilder {
 
