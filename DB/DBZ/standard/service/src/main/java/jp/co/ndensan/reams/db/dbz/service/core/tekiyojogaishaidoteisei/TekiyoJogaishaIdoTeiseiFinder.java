@@ -39,28 +39,44 @@ public class TekiyoJogaishaIdoTeiseiFinder {
             if (dbT1004EntityLst.isEmpty()) {
                 return false;
             }
-            int count = 0;
-            for (DbT1004ShisetsuNyutaishoEntity dbT1004Entity : dbT1004EntityLst) {
-                for (InformationEntity infEntity : informationEntityLst) {
-                    if (DELETE.equals(infEntity.get状態())) {
-                        continue;
-                    }
-                    FlexibleDate taishoYMD = dbT1004Entity.getTaishoYMD();
-                    FlexibleDate nyushoYMD = dbT1004Entity.getNyushoYMD();
-                    if (!((nyushoYMD != null && infEntity.get適用日().isBefore(nyushoYMD)
-                            && infEntity.get解除日().isBeforeOrEquals(nyushoYMD))
-                            || (taishoYMD != null && taishoYMD.isBeforeOrEquals(infEntity.get適用日())
-                            && taishoYMD.isBefore(infEntity.get解除日())))) {
-                        count++;
-                    }
-                    if (count > 1) {
-                        return false;
-                    }
-                }
-
+            if (getCount(informationEntityLst, dbT1004EntityLst) > 1) {
+                return false;
             }
         }
         return true;
+    }
+
+    private int getCount(List<InformationEntity> informationEntityLst, List<DbT1004ShisetsuNyutaishoEntity> dbT1004EntityLst) {
+        int count = 0;
+        for (DbT1004ShisetsuNyutaishoEntity dbT1004Entity : dbT1004EntityLst) {
+            for (InformationEntity infEntity : informationEntityLst) {
+                if (DELETE.equals(infEntity.get状態())) {
+                    continue;
+                }
+                FlexibleDate taishoYMD = dbT1004Entity.getTaishoYMD();
+                FlexibleDate nyushoYMD = dbT1004Entity.getNyushoYMD();
+                if (is日付空(infEntity.get適用日()) && is日付空(infEntity.get解除日())) {
+                    count++;
+                } else if (is日付空(infEntity.get適用日())
+                        && !(taishoYMD != null && taishoYMD.isBeforeOrEquals(infEntity.get適用日())
+                        && taishoYMD.isBefore(infEntity.get解除日()))) {
+                    count++;
+                } else if (is日付空(infEntity.get解除日())) {
+                    count++;
+                } else if (!((nyushoYMD != null && infEntity.get適用日().isBefore(nyushoYMD)
+                        && infEntity.get解除日().isBeforeOrEquals(nyushoYMD))
+                        || (taishoYMD != null && taishoYMD.isBeforeOrEquals(infEntity.get適用日())
+                        && taishoYMD.isBefore(infEntity.get解除日())))) {
+                    count++;
+                }
+            }
+        }
+        return count;
+    }
+
+    private boolean is日付空(FlexibleDate 日付) {
+        return null == 日付 || 日付.isEmpty();
+
     }
 
 }
