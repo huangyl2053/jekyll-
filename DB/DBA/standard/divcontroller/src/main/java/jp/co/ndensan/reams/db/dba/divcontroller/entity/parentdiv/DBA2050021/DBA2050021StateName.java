@@ -1,7 +1,7 @@
 package jp.co.ndensan.reams.db.dba.divcontroller.entity.parentdiv.DBA2050021;
 
-import jp.co.ndensan.reams.uz.uza.core.ui.response.IStateEnumerations;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.core.ui.response.IStateEnumerations;
 
 /**
  * このコードはツールによって生成されました。</br>
@@ -9,7 +9,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
  * 不正な動作の原因になります。</br>
  * DBA2050021の状態名定義クラスです
  *
- * @reamsid_L DBA-0411-050 lizhuoxuan
+ * @author 自動生成
  */
 public enum DBA2050021StateName implements IStateEnumerations {
 // <editor-fold defaultstate="collapsed" desc="Created By UI Designer ver 1.0.0">

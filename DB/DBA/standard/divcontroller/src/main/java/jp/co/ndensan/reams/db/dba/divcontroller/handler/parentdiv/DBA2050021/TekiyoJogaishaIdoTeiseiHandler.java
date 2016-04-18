@@ -21,7 +21,7 @@ public class TekiyoJogaishaIdoTeiseiHandler {
     private static final RString WIDTHサイズモード = new RString("モード1");
     private static final RString 明細表示モード = new RString("追加_修正");
     private static final RString 利用モード = new RString("適用除外者対象機能");
-    private static final RString 訂正履歴モード = new RString("訂正");
+    private static final RString 訂正履歴モード = new RString("訂正履歴モード");
 
     /**
      * コンストラクタです。
@@ -38,7 +38,6 @@ public class TekiyoJogaishaIdoTeiseiHandler {
      * @param 識別コード 識別コード
      */
     public void initLoad(ShikibetsuCode 識別コード) {
-        div.getKaigoKanryoMessageJo().setDisplayNone(true);
         div.getShikakuKihonJoho().getCcdKaigoAtenaInfo().onLoad(識別コード);
         init適用除外情報一覧エリア(識別コード);
         init施設入退所異動エリア(識別コード);
