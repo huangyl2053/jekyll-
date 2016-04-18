@@ -112,11 +112,9 @@ public class HihokenshaShokaiTotal {
      * @return ResponseData<HihokenshaShokaiTotalDiv>
      */
     public ResponseData<HihokenshaShokaiTotalDiv> onChange_tabHihokenshaShokai(HihokenshaShokaiTotalDiv div) {
-        TaishoshaKey key = ViewStateHolder.get(ViewStateKey.資格対象者, TaishoshaKey.class
-        );
+        TaishoshaKey key = ViewStateHolder.get(ViewStateKey.資格対象者, TaishoshaKey.class);
         ShikibetsuCode shikibetsuCode = key.get識別コード();
         HihokenshaNo hihokenshaNo = key.get被保険者番号();
-
         if (被保履歴.equals(div.getHihokenshaShokaiPanel().getTabHihokenshaShokai().getSelectControlID())) {
             div.getHihokenshaShokaiPanel().getCcdShikakuTokusoRireki().initialize(hihokenshaNo, shikibetsuCode);
         } else if (世帯照会.equals(div.getHihokenshaShokaiPanel().getTabHihokenshaShokai().getSelectedItem().getSelectControlID())) {
@@ -131,8 +129,6 @@ public class HihokenshaShokaiTotal {
         } else if (証交付回収.equals(div.getHihokenshaShokaiPanel().getTabHihokenshaShokai().getSelectedItem().getSelectControlID())) {
             div.getHihokenshaShokaiPanel().getCcdShoKaishuJokyoList().initialize(照会, hihokenshaNo);
         }
-
-        return ResponseData.of(div)
-                .respond();
+        return ResponseData.of(div).respond();
     }
 }
