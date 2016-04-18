@@ -6,6 +6,7 @@
 package jp.co.ndensan.reams.db.dbz.divcontroller.controller.commonchilddiv.ShujiiIryokikanAndShujiiGuide;
 
 import java.util.List;
+import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.GyomuBunrui;
 import jp.co.ndensan.reams.db.dbz.business.core.shujiiiryokikanandshujiiguide.ShujiiIryokikanAndShujii;
 import jp.co.ndensan.reams.db.dbz.business.core.shujiiiryokikanandshujiiinput.ShujiiIryokikanandshujiiDataPassModel;
 import jp.co.ndensan.reams.db.dbz.definition.mybatis.param.shujiiiryokikanandshujiiguide.ShujiiIryokikanAndShujiiGuideParameter;
@@ -43,7 +44,7 @@ public class ShujiiIryokikanAndShujiiGuide {
      * @return ResponseData<ShujiiIryokikanAndShujiiGuideDiv>
      */
     public ResponseData<ShujiiIryokikanAndShujiiGuideDiv> onLoad(ShujiiIryokikanAndShujiiGuideDiv div) {
-        div.getHokenshaList().loadHokenshaList();
+        div.getHokenshaList().loadHokenshaList(GyomuBunrui.介護認定);
         getHandler(div).intialize();
         return ResponseData.of(div).respond();
     }

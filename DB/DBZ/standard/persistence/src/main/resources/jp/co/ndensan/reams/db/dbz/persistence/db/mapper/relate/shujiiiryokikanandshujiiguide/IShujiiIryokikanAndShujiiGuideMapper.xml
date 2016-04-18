@@ -59,8 +59,12 @@
                     DbT5911."shujiiIryokikanCode" = DbT5912."shujiiIryokikanCode"
                     AND
                     DbT5911."shichosonCode" = DbT5912."shichosonCode"
-        WHERE                                                
-            DbT5912."shichosonCode" = #{hokensha}
+        WHERE
+            1 = 1
+            <if test = "hokenshaFlag">
+                AND
+                DbT5912."shichosonCode" = #{hokensha}
+            </if>
             <if test = "shujiiIryokikanCodeFromFlag">
                 AND
                 DbT5911."shujiiIryokikanCode" <![CDATA[>=]]> #{shujiiIryokikanCodeFrom}
@@ -144,8 +148,12 @@
                     DbT4911."shujiiIryokikanCode" = DbT4912."shujiiIryokikanCode"
                     AND
                     DbT4911."shichosonCode" = DbT4912."shichosonCode"
-        WHERE                                                
-            DbT4912."shichosonCode" = #{hokensha}
+        WHERE
+            1 = 1
+            <if test = "hokenshaFlag">
+                AND
+                DbT4912."shichosonCode" = #{hokensha}
+            </if>
             <if test = "shujiiIryokikanCodeFromFlag">
                 AND
                 DbT4911."shujiiIryokikanCode" <![CDATA[>=]]> #{shujiiIryokikanCodeFrom}
