@@ -24,12 +24,14 @@ import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0600021.dgSe
 import jp.co.ndensan.reams.db.dbc.divcontroller.handler.parentdiv.DBC0600021.YoguKonyuhiShikyuShinseiPnlTotalHandler;
 import jp.co.ndensan.reams.db.dbc.divcontroller.viewbox.ViewStateKeys;
 import jp.co.ndensan.reams.db.dbc.divcontroller.viewbox.dbc0600011.PnlTotalParameter;
+import jp.co.ndensan.reams.db.dbc.divcontroller.viewbox.dbc0600021.YoguKonyuhiShikyuShinseiPnlTotalParameter;
 import jp.co.ndensan.reams.db.dbc.service.core.fukushiyogukonyuhishikyushisei.FukushiyoguKonyuhiShikyuShinsei;
 import jp.co.ndensan.reams.db.dbc.service.jutakukaishujizenshinsei.JutakuKaishuJizenShinsei;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HokenKyufuRitsu;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ServiceShuruiCode;
 import jp.co.ndensan.reams.db.dbz.definition.message.DbzInformationMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrInformationMessages;
@@ -66,6 +68,9 @@ public class YoguKonyuhiShikyuShinseiPnlTotal {
     private static final RString 削除 = new RString("削除");
     private static final RString 登録 = new RString("登録");
     private static final RString 処理モード登録 = new RString("処理モード登録");
+    private static final RString 処理モード修正 = new RString("処理モード修正");
+    private static final RString 処理モード削除 = new RString("処理モード削除");
+    private static final RString 処理モード選択 = new RString("処理モード選択");
     private static final RString 選択 = new RString("選択");
     private static final RString 参照 = new RString("参照");
     private static final RString 審査 = new RString("審査");
@@ -81,8 +86,14 @@ public class YoguKonyuhiShikyuShinseiPnlTotal {
     public ResponseData<YoguKonyuhiShikyuShinseiPnlTotalDiv> onLoad(YoguKonyuhiShikyuShinseiPnlTotalDiv div) {
         HihokenshaNo 被保険者番号 = ViewStateHolder.get(ViewStateKeys.被保険者番号, HihokenshaNo.class);
         ShikibetsuCode 識別コード = ViewStateHolder.get(ViewStateKeys.識別コード, ShikibetsuCode.class);
+        div.getKaigoCommonPanel().getCcdAtenaInfo().onLoad(識別コード);
+        if (!被保険者番号.isEmpty()) {
+            div.getKaigoCommonPanel().getCcdShikakuKihon().onLoad(被保険者番号);
+        } else {
+            div.getKaigoCommonPanel().getCcdShikakuKihon().setDisplayNone(true);
+        }
+
         ShokanShinsei shshResult = null;
-        SikyuSinseiJyohoParameter para = new SikyuSinseiJyohoParameter();
         if (登録.equals(ViewStateHolder.get(ViewStateKeys.状態, RString.class))) {
             getHandler(div).set登録モード();
         } else if (修正.equals(ViewStateHolder.get(ViewStateKeys.状態, RString.class))) {
@@ -95,20 +106,27 @@ public class YoguKonyuhiShikyuShinseiPnlTotal {
         } else if (審査.equals(ViewStateHolder.get(ViewStateKeys.状態, RString.class))) {
             getHandler(div).set審査モード();
         }
+        PnlTotalParameter parameter = ViewStateHolder.get(ViewStateKeys.支給申請情報検索キー,
+                PnlTotalParameter.class);
+        FlexibleYearMonth サービス提供年月 = parameter.getTeikyoYM();
+        RString 整理番号 = parameter.getSerialNo();
+        RString 様式番号 = parameter.getYoshikiNo();
+        JigyoshaNo 事業者番号 = parameter.getJigyosyaNo();
+        RString 明細番号 = parameter.getMeisaiNo();
+        ViewStateHolder.put(ViewStateKeys.事業者番号, 事業者番号);
+        ViewStateHolder.put(ViewStateKeys.整理番号, 整理番号);
+        ViewStateHolder.put(ViewStateKeys.サービス提供年月, サービス提供年月);
+        ShokanKihon shokankihon = FukushiyoguKonyuhiShikyuShinsei.createInstance().getShokanSeikyuKihon(
+                被保険者番号, サービス提供年月, 整理番号, 事業者番号, 様式番号, 明細番号);
+        ViewStateHolder.put(ViewStateKeys.福祉償還払請求基本, shokankihon);
+        if (shokankihon == null) {
+            throw new ApplicationException(UrErrorMessages.該当データなし.getMessage());
+        }
+        div.getYoguKonyuhiShikyuShinseiContentsPanel().getDdlShityoson().setDataSource(getHandler(div).get保険者(サービス提供年月));
+
         if (!登録.equals(ViewStateHolder.get(ViewStateKeys.状態, RString.class))) {
-            PnlTotalParameter parameter = ViewStateHolder.get(ViewStateKeys.支給申請情報検索キー,
-                    PnlTotalParameter.class);
-            FlexibleYearMonth サービス提供年月 = parameter.getTeikyoYM();
-            RString 整理番号 = parameter.getSerialNo();
-            RString 様式番号 = parameter.getYoshikiNo();
-            JigyoshaNo 事業者番号 = parameter.getJigyosyaNo();
-            ViewStateHolder.put(ViewStateKeys.事業者番号, 事業者番号);
-            ViewStateHolder.put(ViewStateKeys.整理番号, 整理番号);
-            ShokanKihon shokankihon = FukushiyoguKonyuhiShikyuShinsei.createInstance().getShokanSeikyuKihon(
-                    被保険者番号, サービス提供年月, 整理番号, 事業者番号, 様式番号, NUM3);
-            ViewStateHolder.put(ViewStateKeys.福祉償還払請求基本, shokankihon);
             List<ShokanFukushiYoguHanbaihi> shfuhalist = FukushiyoguKonyuhiShikyuShinsei.createInstance().
-                    getShokanFukushiYoguHanbaihi(被保険者番号, サービス提供年月, 整理番号, 事業者番号, 様式番号, NUM3);
+                    getShokanFukushiYoguHanbaihi(被保険者番号, サービス提供年月, 整理番号, 事業者番号, 様式番号, 明細番号);
             ViewStateHolder.put(ViewStateKeys.福祉用具販売費, (Serializable) shfuhalist);
             SokanbaraiShiharaiKekkaResult maeResult = FukushiyoguKonyuhiShikyuShinsei.createInstance().
                     getShokanShiharaiKekkaAll(被保険者番号, サービス提供年月);
@@ -120,14 +138,14 @@ public class YoguKonyuhiShikyuShinseiPnlTotal {
             ShokanShukei shokanShukei = FukushiyoguKonyuhiShikyuShinsei.createInstance().
                     getShokanShukei(被保険者番号, サービス提供年月, 整理番号);
             ViewStateHolder.put(ViewStateKeys.福祉償還払請求集計, shokanShukei);
-
-            if (shokankihon == null) {
-                throw new ApplicationException(UrErrorMessages.該当データなし.getMessage());
-            } else {
-                div.getYoguKonyuhiShikyuShinseiContentsPanel().getDdlShityoson().
-                        setDataSource(getHandler(div).get保険者(shokankihon));
-                getHandler(div).支給申請内容エリア(shokankihon, shshResult);
-            }
+            RString 略称 = FukushiyoguKonyuhiShikyuShinsei.createInstance().getYoshikiName(
+                    様式番号, サービス提供年月);
+            getHandler(div).get証明書(shokankihon, 略称);
+            RString 証明書 = div.getYoguKonyuhiShikyuShinseiContentsPanel().getTxtSyomeisyo().getValue();
+            ViewStateHolder.put(ViewStateKeys.証明書, 証明書);
+            getHandler(div).支給申請内容エリア(shokankihon, shshResult);
+            div.getYoguKonyuhiShikyuShinseiContentsPanel().getYoguKonyuhiDetailInput().getDdlShumoku().
+                    setDataSource(getHandler(div).get種目());
             if (maeResult != null) {
                 //TODO QA623
 //            getHandler(div).今までの支払結果情報(maeResult);
@@ -140,6 +158,7 @@ public class YoguKonyuhiShikyuShinseiPnlTotal {
             getHandler(div).get給付率(hokenkyufuritsu);
             ViewStateHolder.put(ViewStateKeys.給付率, hokenkyufuritsu);
         }
+        SikyuSinseiJyohoParameter para = new SikyuSinseiJyohoParameter();
         if (shshResult != null) {
             para.setShikibetsuCode(識別コード);
             para.setHihokenshaNo(shshResult.get被保険者番号());
@@ -161,19 +180,14 @@ public class YoguKonyuhiShikyuShinseiPnlTotal {
             div.getYoguKonyuhiShikyuShinseiContentsPanel().getCcdShiharaiHohoInfo().initialize(
                     para, new KamokuCode(償還払給付費), 修正);
         }
-        div.getKaigoCommonPanel().getCcdAtenaInfo().onLoad(識別コード);
-        if (!被保険者番号.isEmpty()) {
-            div.getKaigoCommonPanel().getCcdShikakuKihon().onLoad(被保険者番号);
-        } else {
-            div.getKaigoCommonPanel().getCcdShikakuKihon().setDisplayNone(true);
-        }
-        div.getYoguKonyuhiShikyuShinseiContentsPanel().getYoguKonyuhiDetailInput().getDdlShumoku().
-                setDataSource(getHandler(div).get種目());
-        div.getYoguKonyuhiShikyuShinseiContentsPanel().getYoguKonyuhiDetailInput().setVisible(false);
 //        if (修正.equals(ViewStateHolder.get(ViewStateKeys.状態, RString.class))) {
 //            償還払支給判定結果を取得する();
 //        }
-
+        ServiceShuruiCode serviceShuru = FukushiyoguKonyuhiShikyuShinsei.createInstance().
+                getServiceShuruiCode(被保険者番号, サービス提供年月);
+        div.getYoguKonyuhiShikyuShinseiContentsPanel().getTxtServiceCode().setValue(serviceShuru.value());
+        YoguKonyuhiShikyuShinseiPnlTotalParameter 画面データ = getHandler(div).set画面データ();
+        ViewStateHolder.put(ViewStateKeys.福祉用具購入費支給申請_明細登録画面データ, 画面データ);
         return createResponse(div);
     }
 
@@ -191,10 +205,12 @@ public class YoguKonyuhiShikyuShinseiPnlTotal {
         RString 整理番号 = parameter.getSerialNo();
         RString 様式番号 = parameter.getYoshikiNo();
         JigyoshaNo 事業者番号 = parameter.getJigyosyaNo();
+        RString 明細番号 = parameter.getMeisaiNo();
+
+        ShokanKihon shokankihon = FukushiyoguKonyuhiShikyuShinsei.createInstance().getShokanSeikyuKihon(
+                被保険者番号, サービス提供年月, 整理番号, 事業者番号, 様式番号, 明細番号);
         RString 略称 = FukushiyoguKonyuhiShikyuShinsei.createInstance().getYoshikiName(
                 様式番号, サービス提供年月);
-        ShokanKihon shokankihon = FukushiyoguKonyuhiShikyuShinsei.createInstance().getShokanSeikyuKihon(
-                被保険者番号, サービス提供年月, 整理番号, 事業者番号, 様式番号, NUM3);
         getHandler(div).get証明書(shokankihon, 略称);
         RString 証明書 = div.getYoguKonyuhiShikyuShinseiContentsPanel().getTxtSyomeisyo().getValue();
         ViewStateHolder.put(ViewStateKeys.証明書, 証明書);
@@ -279,7 +295,7 @@ public class YoguKonyuhiShikyuShinseiPnlTotal {
         getHandler(div).readOnly福祉用具購入費明細(true);
         div.getYoguKonyuhiShikyuShinseiContentsPanel().getYoguKonyuhiDetailInput().getBtnModifyDetail().setDisabled(true);
         div.getYoguKonyuhiShikyuShinseiContentsPanel().getYoguKonyuhiDetailInput().getBtnClear().setDisabled(true);
-        ViewStateHolder.put(ViewStateKeys.状態, 選択);
+        ViewStateHolder.put(ViewStateKeys.処理モード, 処理モード選択);
         return createResponse(div);
     }
 
@@ -294,7 +310,7 @@ public class YoguKonyuhiShikyuShinseiPnlTotal {
         div.getYoguKonyuhiShikyuShinseiContentsPanel().getYoguKonyuhiDetailInput().setVisible(true);
         getHandler(div).set福祉用具購入費明細();
         getHandler(div).readOnly福祉用具購入費明細(false);
-        ViewStateHolder.put(ViewStateKeys.状態, 修正);
+        ViewStateHolder.put(ViewStateKeys.処理モード, 処理モード修正);
         return createResponse(div);
     }
 
@@ -308,7 +324,7 @@ public class YoguKonyuhiShikyuShinseiPnlTotal {
             YoguKonyuhiShikyuShinseiPnlTotalDiv div) {
         div.getYoguKonyuhiShikyuShinseiContentsPanel().getYoguKonyuhiDetailInput().setVisible(true);
         getHandler(div).set福祉用具購入費明細();
-        ViewStateHolder.put(ViewStateKeys.状態, 削除);
+        ViewStateHolder.put(ViewStateKeys.処理モード, 処理モード削除);
         div.getYoguKonyuhiShikyuShinseiContentsPanel().getDgSeikyuDetail().setDisabled(false);
         div.getYoguKonyuhiShikyuShinseiContentsPanel().getYoguKonyuhiDetailInput().getBtnModifyDetail().setDisabled(false);
         div.getYoguKonyuhiShikyuShinseiContentsPanel().getYoguKonyuhiDetailInput().getBtnClear().setDisabled(false);
@@ -415,11 +431,11 @@ public class YoguKonyuhiShikyuShinseiPnlTotal {
             return 保存処理(div, 削除);
         } else {
             boolean flag = getHandler(div).is内容変更状態();
-            ValidationMessageControlPairs validPairs = getHandler(div).保存チェック();
-            if (validPairs.iterator().hasNext()) {
-                return ResponseData.of(div).addValidationMessages(validPairs).respond();
-            }
             if (flag) {
+                ValidationMessageControlPairs validPairs = getHandler(div).保存チェック();
+                if (validPairs.iterator().hasNext()) {
+                    return ResponseData.of(div).addValidationMessages(validPairs).respond();
+                }
                 RString 状態 = ViewStateHolder.get(ViewStateKeys.状態, RString.class);
                 return 保存処理(div, 状態);
             } else {
@@ -459,13 +475,15 @@ public class YoguKonyuhiShikyuShinseiPnlTotal {
         FlexibleYearMonth サービス提供年月 = parameter.getTeikyoYM();
         RString 整理番号 = parameter.getSerialNo();
         RString 様式番号 = parameter.getYoshikiNo();
+        RString 明細番号 = parameter.getMeisaiNo();
         ShokanShinsei shshResult = FukushiyoguKonyuhiShikyuShinsei.createInstance().
                 getShokanShinsei(被保険者番号, サービス提供年月, 整理番号);
         List<KyufujissekiKihon> kyufulist = FukushiyoguKonyuhiShikyuShinsei.createInstance().
                 getKyufuJissekiKihonList(様式番号, new HokenshaNo(shshResult.get証記載保険者番号().value()),
-                        被保険者番号, サービス提供年月, 整理番号, NUM3);
+                        被保険者番号, サービス提供年月, 整理番号, 明細番号);
         ShokanHanteiKekka shokanhanteike = FukushiyoguKonyuhiShikyuShinsei.createInstance().
                 getShokanHanteiKekka(被保険者番号, サービス提供年月, 整理番号);
+        ViewStateHolder.put(ViewStateKeys.償還払支給判定結果, shokanhanteike);
         if (shokanhanteike == null && NUM2.equals(受託区分)) {
             throw new ApplicationException(
                     UrErrorMessages.更新不可.getMessage().

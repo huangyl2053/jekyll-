@@ -144,7 +144,7 @@ public class ShokanFukushiYoguHanbaihiBuilder {
      * @return {@link ShokanFukushiYoguHanbaihiBuilder}
      */
     public ShokanFukushiYoguHanbaihiBuilder set福祉用具販売年月日(FlexibleDate 福祉用具販売年月日) {
-        requireNonNull(福祉用具販売年月日, UrSystemErrorMessages.値がnull.getReplacedMessage("福祉用具販売年月日"));
+//        requireNonNull(福祉用具販売年月日, UrSystemErrorMessages.値がnull.getReplacedMessage("福祉用具販売年月日"));
         entity.setFukushiYoguHanbaiYMD(福祉用具販売年月日);
         return this;
     }
@@ -156,7 +156,7 @@ public class ShokanFukushiYoguHanbaihiBuilder {
      * @return {@link ShokanFukushiYoguHanbaihiBuilder}
      */
     public ShokanFukushiYoguHanbaihiBuilder set福祉用具商品名(RString 福祉用具商品名) {
-        requireNonNull(福祉用具商品名, UrSystemErrorMessages.値がnull.getReplacedMessage("福祉用具商品名"));
+//        requireNonNull(福祉用具商品名, UrSystemErrorMessages.値がnull.getReplacedMessage("福祉用具商品名"));
         entity.setFukushiYoguShohinName(福祉用具商品名);
         return this;
     }
@@ -180,7 +180,7 @@ public class ShokanFukushiYoguHanbaihiBuilder {
      * @return {@link ShokanFukushiYoguHanbaihiBuilder}
      */
     public ShokanFukushiYoguHanbaihiBuilder set福祉用具製造事業者名(RString 福祉用具製造事業者名) {
-        requireNonNull(福祉用具製造事業者名, UrSystemErrorMessages.値がnull.getReplacedMessage("福祉用具製造事業者名"));
+//        requireNonNull(福祉用具製造事業者名, UrSystemErrorMessages.値がnull.getReplacedMessage("福祉用具製造事業者名"));
         entity.setFukushiYoguSeizoJigyoshaName(福祉用具製造事業者名);
         return this;
     }
@@ -192,7 +192,7 @@ public class ShokanFukushiYoguHanbaihiBuilder {
      * @return {@link ShokanFukushiYoguHanbaihiBuilder}
      */
     public ShokanFukushiYoguHanbaihiBuilder set福祉用具販売事業者名(RString 福祉用具販売事業者名) {
-        requireNonNull(福祉用具販売事業者名, UrSystemErrorMessages.値がnull.getReplacedMessage("福祉用具販売事業者名"));
+//        requireNonNull(福祉用具販売事業者名, UrSystemErrorMessages.値がnull.getReplacedMessage("福祉用具販売事業者名"));
         entity.setFukushiYoguHanbaiJigyoshaName(福祉用具販売事業者名);
         return this;
     }
@@ -216,7 +216,7 @@ public class ShokanFukushiYoguHanbaihiBuilder {
      * @return {@link ShokanFukushiYoguHanbaihiBuilder}
      */
     public ShokanFukushiYoguHanbaihiBuilder set品目コード(RString 品目コード) {
-        requireNonNull(品目コード, UrSystemErrorMessages.値がnull.getReplacedMessage("品目コード"));
+//        requireNonNull(品目コード, UrSystemErrorMessages.値がnull.getReplacedMessage("品目コード"));
         entity.setHinmokuCode(品目コード);
         return this;
     }
@@ -228,7 +228,7 @@ public class ShokanFukushiYoguHanbaihiBuilder {
      * @return {@link ShokanFukushiYoguHanbaihiBuilder}
      */
     public ShokanFukushiYoguHanbaihiBuilder set審査方法区分コード(RString 審査方法区分コード) {
-        requireNonNull(審査方法区分コード, UrSystemErrorMessages.値がnull.getReplacedMessage("審査方法区分コード"));
+//        requireNonNull(審査方法区分コード, UrSystemErrorMessages.値がnull.getReplacedMessage("審査方法区分コード"));
         entity.setShinsaHohoKubunCode(審査方法区分コード);
         return this;
     }
