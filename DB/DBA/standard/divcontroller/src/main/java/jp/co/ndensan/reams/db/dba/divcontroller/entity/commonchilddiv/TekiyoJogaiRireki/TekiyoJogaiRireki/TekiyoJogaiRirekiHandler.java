@@ -103,7 +103,6 @@ public class TekiyoJogaiRirekiHandler {
             div.getDatagridTekiyoJogai().getGridSetting().setIsShowSelectButtonColumn(false);
             div.getDatagridTekiyoJogai().getGridSetting().setIsShowModifyButtonColumn(false);
             div.getDatagridTekiyoJogai().getGridSetting().setIsShowDeleteButtonColumn(false);
-            div.getDatagridTekiyoJogai().getGridSetting().getColumns().get(0).setVisible(false);
             div.getPanelTekiyoJokaiTekiInput().setVisible(true);
             div.getPanelTekiyoJokaiKaiJyoInput().setVisible(false);
             div.getPanelTekiyoInput().setVisible(false);
@@ -118,7 +117,6 @@ public class TekiyoJogaiRirekiHandler {
             div.getDatagridTekiyoJogai().getGridSetting().setIsShowSelectButtonColumn(false);
             div.getDatagridTekiyoJogai().getGridSetting().setIsShowModifyButtonColumn(false);
             div.getDatagridTekiyoJogai().getGridSetting().setIsShowDeleteButtonColumn(false);
-            div.getDatagridTekiyoJogai().getGridSetting().getColumns().get(0).setVisible(false);
             div.getPanelTekiyoJokaiTekiInput().setVisible(false);
             div.getPanelTekiyoJokaiKaiJyoInput().setVisible(true);
             div.getPanelTekiyoInput().setVisible(false);
@@ -152,7 +150,6 @@ public class TekiyoJogaiRirekiHandler {
             div.getDatagridTekiyoJogai().getGridSetting().setIsShowSelectButtonColumn(false);
             div.getDatagridTekiyoJogai().getGridSetting().setIsShowModifyButtonColumn(true);
             div.getDatagridTekiyoJogai().getGridSetting().setIsShowDeleteButtonColumn(true);
-            div.getDatagridTekiyoJogai().getGridSetting().getColumns().get(0).setVisible(true);
             div.getPanelTekiyoJokaiTekiInput().setVisible(false);
             div.getPanelTekiyoJokaiKaiJyoInput().setVisible(false);
             div.getPanelTekiyoInput().setVisible(true);
@@ -166,7 +163,6 @@ public class TekiyoJogaiRirekiHandler {
             div.getDatagridTekiyoJogai().getGridSetting().setIsShowSelectButtonColumn(true);
             div.getDatagridTekiyoJogai().getGridSetting().setIsShowModifyButtonColumn(false);
             div.getDatagridTekiyoJogai().getGridSetting().setIsShowDeleteButtonColumn(false);
-            div.getDatagridTekiyoJogai().getGridSetting().getColumns().get(0).setVisible(false);
             div.getPanelTekiyoJokaiTekiInput().setVisible(false);
             div.getPanelTekiyoJokaiKaiJyoInput().setVisible(false);
             div.getPanelTekiyoInput().setVisible(true);
