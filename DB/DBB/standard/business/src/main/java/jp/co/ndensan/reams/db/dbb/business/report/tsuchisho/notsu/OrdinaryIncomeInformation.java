@@ -11,6 +11,8 @@ import jp.co.ndensan.reams.uz.uza.math.Decimal;
 /**
  *
  * 編集後仮算定通知書共通情報の普徴収入情報です。
+ *
+ * @reamsid_L DBB-9110-040 wangjie2
  */
 @lombok.Getter
 @lombok.Setter

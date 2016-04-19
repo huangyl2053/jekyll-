@@ -12,6 +12,8 @@ import jp.co.ndensan.reams.uz.uza.math.Decimal;
 /**
  *
  * 収入情報です。
+ *
+ * @reamsid_L DBB-9020-160 sunhaidi
  */
 @lombok.Getter
 @lombok.Setter

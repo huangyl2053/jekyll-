@@ -1,10 +1,14 @@
-// TODO: 業務に合わせてパスを変更してください
 package jp.co.ndensan.reams.db.dbb.entity.report.dbbrp00007_16;
 
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.report.IReportSource;
 import jp.co.ndensan.reams.uz.uza.report.source.ReportItem;
 
+/**
+ * 保険料納入通知書（本算定過年度）【ブックタイプ】（口振依頼なし）通知書 NonyuTsuchishoBookFuriKaeAriCoverSource
+ *
+ * @reamsid_L DBB-9110-160 liangbc
+ */
 public class NonyuTsuchishoBookFuriKaeAriCoverSource implements IReportSource {
 // <editor-fold defaultstate="collapsed" desc="Generated Code">
 
