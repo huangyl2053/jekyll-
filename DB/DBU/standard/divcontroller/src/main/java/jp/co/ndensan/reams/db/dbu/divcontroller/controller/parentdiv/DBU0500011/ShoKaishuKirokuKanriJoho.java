@@ -10,7 +10,6 @@ import jp.co.ndensan.reams.db.dba.divcontroller.entity.commonchilddiv.ShoKaishuK
 import jp.co.ndensan.reams.db.dbu.divcontroller.entity.parentdiv.DBU0500011.ShoKaishuKirokuKanriJohoDiv;
 import jp.co.ndensan.reams.db.dbu.divcontroller.handler.parentdiv.DBU0500011.ShoKaishuKirokuKanriJohoHandler;
 import jp.co.ndensan.reams.db.dbu.service.core.shokaishukirokukanrijoho.ShoKaishuKirokuKanriJohoManager;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.ShoKofuKaishu;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.ShoKofuKaishuBuilder;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.ShoKofuKaishuIdentifier;
@@ -20,7 +19,6 @@ import jp.co.ndensan.reams.db.dbz.service.TaishoshaKey;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrQuestionMessages;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
-import jp.co.ndensan.reams.uz.uza.biz.SetaiCode;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
@@ -71,8 +69,6 @@ public class ShoKaishuKirokuKanriJoho {
      * @return ResponseData<ShoKaishuKirokuKanriJohoDiv>
      */
     public ResponseData<ShoKaishuKirokuKanriJohoDiv> onLoad(ShoKaishuKirokuKanriJohoDiv div) {
-        TaishoshaKey key2 = new TaishoshaKey(new HihokenshaNo("2000000030"), new ShikibetsuCode("000000000000010"), SetaiCode.EMPTY);
-        ViewStateHolder.put(ViewStateKey.資格対象者, key2);
         TaishoshaKey key = ViewStateHolder.get(ViewStateKey.資格対象者, TaishoshaKey.class);
         getHandler(div).onLoad(key.get識別コード(), key.get被保険者番号());
         return ResponseData.of(div).respond();
