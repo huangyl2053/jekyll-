@@ -298,20 +298,11 @@ public class ShikakuKihonJoho {
         item.setShisetsuFaxNo(business.get施設FAX番号());
         item.setShisetsuYubinNo(business.get施設郵便番号());
         item.setShisetsuJusho(business.get施設住所());
-        item.setDenshiKoin(business.get電子公印());
-        item.setHakkoYMD1(RString.EMPTY);
-        item.setNinshoshaYakushokuMei(RString.EMPTY);
-        item.setNinshoshaYakushokuMei1(RString.EMPTY);
-        item.setKoinMojiretsu(RString.EMPTY);
-        item.setNinshoshaShimeiKakenai(RString.EMPTY);
-        item.setNinshoshaShimeiKakeru(RString.EMPTY);
-        item.setNinshoshaYakushokuMei2(RString.EMPTY);
-        item.setKoinShoryaku(business.get公印省略());
-
         return item;
     }
 
     private ShisetsuTaishoTsuchishoItem dba100005_Item(TatokuKanrenChohyoTaishoTsuchishoBusiness business) {
+
         ShisetsuTaishoTsuchishoItem item = new ShisetsuTaishoTsuchishoItem();
         item.setHokenshaYubinNo(business.get保険者郵便番号());
         item.setBunshoNo(business.get文書番号());
@@ -342,19 +333,11 @@ public class ShikakuKihonJoho {
         item.setShisetsuFaxNo(business.get施設FAX番号());
         item.setShisetsuYubinNo(business.get施設郵便番号());
         item.setShisetsuJusho(business.get施設住所());
-        item.setDenshiKoin(business.get電子公印());
-        item.setHakkoYMD1(RString.EMPTY);
-        item.setNinshoshaYakushokuMei(RString.EMPTY);
-        item.setNinshoshaYakushokuMei1(RString.EMPTY);
-        item.setKoinMojiretsu(RString.EMPTY);
-        item.setNinshoshaShimeiKakenai(RString.EMPTY);
-        item.setNinshoshaShimeiKakeru(RString.EMPTY);
-        item.setNinshoshaYakushokuMei2(RString.EMPTY);
-        item.setKoinShoryaku(business.get公印省略());
         return item;
     }
 
     private ShisetsuHenkoTsuchishoItem dba100006_Item(TatokuKanrenChohyoHenkoTsuchishoBusiness business) {
+
         ShisetsuHenkoTsuchishoItem item = new ShisetsuHenkoTsuchishoItem();
         item.setHokenshaYubinNo(business.get保険者郵便番号());
         item.setBunshoNo(business.get文書番号());
@@ -389,15 +372,6 @@ public class ShikakuKihonJoho {
         item.setHenkogoShisetsuFaxNo(business.get変更後施設FAX番号() == null ? RString.EMPTY : business.get変更後施設FAX番号().value());
         item.setHenkogoShisetsuYubinNo(business.get変更後施設住所());
         item.setHenkogoShisetsuJusho(business.get変更後施設住所());
-        item.setDenshiKoin(business.get電子公印());
-        item.setHakkoYMD1(RString.EMPTY);
-        item.setNinshoshaYakushokuMei(RString.EMPTY);
-        item.setNinshoshaYakushokuMei1(RString.EMPTY);
-        item.setKoinMojiretsu(RString.EMPTY);
-        item.setNinshoshaShimeiKakenai(RString.EMPTY);
-        item.setNinshoshaShimeiKakeru(RString.EMPTY);
-        item.setNinshoshaYakushokuMei2(RString.EMPTY);
-        item.setKoinShoryaku(business.get公印省略());
         return item;
     }
 
