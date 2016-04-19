@@ -48,9 +48,10 @@ import jp.co.ndensan.reams.ur.urc.business.core.noki.nokikanri.Noki;
 import jp.co.ndensan.reams.ur.urc.definition.core.noki.nokikanri.GennenKanen;
 import jp.co.ndensan.reams.ur.urc.definition.core.shunokamoku.shunokamoku.ShunoKamokuShubetsu;
 import jp.co.ndensan.reams.ur.urc.service.core.noki.nokikanri.NokiManager;
+import jp.co.ndensan.reams.ur.urz.business.IUrControlData;
+import jp.co.ndensan.reams.ur.urz.business.UrControlDataFactory;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
-import jp.co.ndensan.reams.uz.uza.core._ControlDataHolder;
 import jp.co.ndensan.reams.uz.uza.exclusion.LockingKey;
 import jp.co.ndensan.reams.uz.uza.exclusion.RealInitialLocker;
 import jp.co.ndensan.reams.uz.uza.lang.ApplicationException;
@@ -61,7 +62,6 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
 import jp.co.ndensan.reams.uz.uza.lang.RYear;
 import jp.co.ndensan.reams.uz.uza.ui.binding.KeyValueDataSource;
-import jp.co.ndensan.reams.uz.uza.ui.servlets._IServletControlData;
 import jp.co.ndensan.reams.uz.uza.util.config.BusinessConfig;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 
@@ -118,6 +118,13 @@ public final class TokubetsuChoshuTotalHandler {
     public void set初期化() {
         HizukeConfig config = new HizukeConfig();
         FlexibleYear 調定年度 = config.get調定年度();
+        if (調定年度.isEmpty()) {
+            List<KeyValueDataSource> list = new ArrayList<>();
+            list.add(new KeyValueDataSource(RString.EMPTY, RString.EMPTY));
+            div.getKonkaiShoriNaiyo().getDdlChoteiNendo().setDataSource(list);
+            div.getKonkaiShoriNaiyo().getDdlShichosonSelect().setDataSource(list);
+            return;
+        }
         set調定年度DDL(調定年度);
         div.getKonkaiShoriNaiyo().getDdlChoteiNendo().setSelectedKey(調定年度.toDateString());
         set市町村指定DDL(調定年度);
@@ -853,8 +860,8 @@ public final class TokubetsuChoshuTotalHandler {
                     || TokuchokiJohoTsukiShoriKubun.特徴仮算定異動.getコード()
                     .equals(row.getDdlTsukiShoriKbn().getSelectedKey())
                     || TokuchokiJohoTsukiShoriKubun.本算定.getコード().equals(row.getDdlTsukiShoriKbn().getSelectedKey())
-                    || TokuchokiJohoTsukiShoriKubun.本算定異動.getコード()
-                    .equals(row.getDdlTsukiShoriKbn().getSelectedKey())) {
+                    || TokuchokiJohoTsukiShoriKubun.本算定異動.getコード().equals(row.getDdlTsukiShoriKbn().getSelectedKey())
+                    || TokuchokiJohoTsukiShoriKubun.随時.getコード().equals(row.getDdlTsukiShoriKbn().getSelectedKey())) {
                 設定納期数 = 設定納期数 + 1;
             }
         }
@@ -1242,7 +1249,8 @@ public final class TokubetsuChoshuTotalHandler {
      * @return Boolean
      */
     public Boolean 前排他キーのセット() {
-        LockingKey 排他キー = new LockingKey(((_IServletControlData) _ControlDataHolder.getControlData()).getGamenID());
+        IUrControlData controlData = UrControlDataFactory.createInstance();
+        LockingKey 排他キー = new LockingKey(controlData.getMenuID());
         return RealInitialLocker.tryGetLock(排他キー);
     }
 
@@ -1250,7 +1258,8 @@ public final class TokubetsuChoshuTotalHandler {
      * 前排他キーの解除
      */
     public void 前排他キーの解除() {
-        LockingKey 排他キー = new LockingKey(((_IServletControlData) _ControlDataHolder.getControlData()).getGamenID());
+        IUrControlData controlData = UrControlDataFactory.createInstance();
+        LockingKey 排他キー = new LockingKey(controlData.getMenuID());
         RealInitialLocker.release(排他キー);
     }
 }

@@ -6,6 +6,7 @@
 package jp.co.ndensan.reams.db.dbb.divcontroller.controller.parentdiv.DBB9020002;
 
 import jp.co.ndensan.reams.db.dbb.definition.core.tokucho.FutsuChoshuKirikaeKeisanHoho;
+import static jp.co.ndensan.reams.db.dbb.divcontroller.entity.parentdiv.DBB9020002.DBB9020002StateName.初期状態;
 import static jp.co.ndensan.reams.db.dbb.divcontroller.entity.parentdiv.DBB9020002.DBB9020002StateName.完了;
 import static jp.co.ndensan.reams.db.dbb.divcontroller.entity.parentdiv.DBB9020002.DBB9020002StateName.平17年以前;
 import static jp.co.ndensan.reams.db.dbb.divcontroller.entity.parentdiv.DBB9020002.DBB9020002StateName.平18年から平20年まで;
@@ -15,11 +16,15 @@ import jp.co.ndensan.reams.db.dbb.divcontroller.handler.parentdiv.DBB9020002.Tok
 import jp.co.ndensan.reams.db.dbb.divcontroller.handler.parentdiv.DBB9020002.TokubetsuChoshuTotalValidationHandler;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrInformationMessages;
+import jp.co.ndensan.reams.ur.urz.definition.message.UrQuestionMessages;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.ApplicationException;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
+import jp.co.ndensan.reams.uz.uza.message.MessageDialogSelectedResult;
+import jp.co.ndensan.reams.uz.uza.message.QuestionMessage;
+import jp.co.ndensan.reams.uz.uza.ui.servlets.ResponseHolder;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
 
 /**
@@ -57,6 +62,9 @@ public class TokubetsuChoshuTotal {
                     .replace(前排他メッセージ.toString()).evaluate());
         }
         getHandler(div).set初期化();
+        if (div.getKonkaiShoriNaiyo().getDdlChoteiNendo().getSelectedKey().isEmpty()) {
+            return ResponseData.of(div).setState(初期状態);
+        }
         FlexibleYear 調定年度 = new FlexibleYear(div.getKonkaiShoriNaiyo().getDdlChoteiNendo().getSelectedKey());
         return 画面の状態遷移(div, 調定年度);
     }
@@ -186,10 +194,21 @@ public class TokubetsuChoshuTotal {
         if (valid.iterator().hasNext()) {
             return ResponseData.of(div).addValidationMessages(valid).respond();
         }
-        getHandler(div).save業務コンフィグ();
         FlexibleYear 調定年度 = new FlexibleYear(div.getKonkaiShoriNaiyo().getDdlChoteiNendo().getSelectedKey());
-        if (!div.getKonkaiShoriNaiyo().getDdlShichosonSelect().isVisible()) {
-            getHandler(div).save納期限(調定年度);
+        if (!ResponseHolder.isReRequest()) {
+            QuestionMessage message = new QuestionMessage(UrQuestionMessages.保存の確認.getMessage().getCode(),
+                    UrQuestionMessages.保存の確認.getMessage().evaluate());
+            return ResponseData.of(div).addMessage(message).respond();
+        }
+        if (new RString(UrQuestionMessages.保存の確認.getMessage().getCode())
+                .equals(ResponseHolder.getMessageCode())
+                && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
+            getHandler(div).save業務コンフィグ();
+            if (!div.getKonkaiShoriNaiyo().getDdlShichosonSelect().isVisible()) {
+                getHandler(div).save納期限(調定年度);
+            }
+        } else {
+            return ResponseData.of(div).respond();
         }
         RStringBuilder rsb = new RStringBuilder();
         rsb.append(終了メッセージ1).append(調定年度.wareki().toDateString()).append(終了メッセージ2);
