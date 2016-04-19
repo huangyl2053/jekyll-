@@ -8,8 +8,9 @@ package jp.co.ndensan.reams.db.dba.entity.db.relate.tennyutenshuhosyutaisyosya;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
- *
  * 転出保留対象者RelateEntityクラスです。
+ *
+ * @reamsid_L DBU-4110-030 yaodongsheng
  */
 @lombok.Getter
 @lombok.Setter
