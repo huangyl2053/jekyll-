@@ -4,24 +4,19 @@ package jp.co.ndensan.reams.db.dba.divcontroller.entity.parentdiv.DBA1120011;
  * このファイルへの変更は、再生成時には損失するため
  * 不正な動作の原因になります。
  */
-
 import com.fasterxml.jackson.annotation.JsonProperty;
-import jp.co.ndensan.reams.db.dba.divcontroller.entity.commonchilddiv.KaigoChohyoShutsuryokujun.IKaigoChohyoShutsuryokujunDiv;
-import jp.co.ndensan.reams.db.dba.divcontroller.entity.commonchilddiv.KaigoChohyoShutsuryokujun.KaigoChohyoShutsuryokujunDiv;
-import jp.co.ndensan.reams.uz.uza.ui.binding.CheckBoxList;
-import jp.co.ndensan.reams.uz.uza.ui.binding.HorizontalLine;
-import jp.co.ndensan.reams.uz.uza.ui.binding.Label;
+import jp.co.ndensan.reams.ur.urz.divcontroller.entity.commonchilddiv.chohyoshutsuryokujun.ChohyoShutsuryokujun.ChohyoShutsuryokujunDiv;
+import jp.co.ndensan.reams.ur.urz.divcontroller.entity.commonchilddiv.chohyoshutsuryokujun.ChohyoShutsuryokujun.IChohyoShutsuryokujunDiv;
+import jp.co.ndensan.reams.uz.uza.ui.binding.*;
 import jp.co.ndensan.reams.uz.uza.ui.binding.PanelBatchParameter;
-import jp.co.ndensan.reams.uz.uza.ui.binding.RadioButton;
-import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxDateRange;
 
 /**
- * NenreiToutatuYoteishaCheckList のクラスファイル。
- *
+ * NenreiToutatuYoteishaCheckList のクラスファイル 
+ * 
+ * @author 自動生成
  */
 public class NenreiToutatuYoteishaCheckListDiv extends PanelBatchParameter {
-
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：バージョン情報無し">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -65,7 +60,7 @@ public class NenreiToutatuYoteishaCheckListDiv extends PanelBatchParameter {
     @JsonProperty("hr4")
     private HorizontalLine hr4;
     @JsonProperty("ccdChohyoShutsuryokujun")
-    private KaigoChohyoShutsuryokujunDiv ccdChohyoShutsuryokujun;
+    private ChohyoShutsuryokujunDiv ccdChohyoShutsuryokujun;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -402,7 +397,7 @@ public class NenreiToutatuYoteishaCheckListDiv extends PanelBatchParameter {
      * @return ccdChohyoShutsuryokujun
      */
     @JsonProperty("ccdChohyoShutsuryokujun")
-    public IKaigoChohyoShutsuryokujunDiv getCcdChohyoShutsuryokujun() {
+    public IChohyoShutsuryokujunDiv getCcdChohyoShutsuryokujun() {
         return ccdChohyoShutsuryokujun;
     }
 

@@ -17,7 +17,9 @@ import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaN
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.IryohokenRirekiCommonChildDiv.dgIryohokenIchiran_Row;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.RoreiFukushiNenkinShokai.datagridRireki_Row;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.ShikakuTokusoRireki.dgShikakuShutokuRireki_Row;
+import jp.co.ndensan.reams.db.dbz.divcontroller.util.viewstate.ViewStateKey;
 import jp.co.ndensan.reams.db.dbz.divcontroller.viewbox.ViewStateKeys;
+import jp.co.ndensan.reams.db.dbz.service.TaishoshaKey;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
@@ -29,7 +31,6 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.DataGridButtonState;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 
 /**
- *
  * 資格異動訂正の画面処理Handlerクラスです。
  *
  * @reamsid_L DBA-0521-010 dongyabin
@@ -55,8 +56,9 @@ public class SikakuIdouTeiseiHandler {
      */
     public SikakuIdouTeiseiHandler(SikakuIdouTeiseiDiv div) {
         this.div = div;
-        this.被保険者番号 = ViewStateHolder.get(ViewStateKeys.資格異動の訂正_被保番号, HihokenshaNo.class);
-        this.識別コード = ViewStateHolder.get(ViewStateKeys.資格異動の訂正_識別コード, ShikibetsuCode.class);
+        TaishoshaKey key = ViewStateHolder.get(ViewStateKey.資格対象者, TaishoshaKey.class);
+        this.識別コード = key.get識別コード();
+        this.被保険者番号 = key.get被保険者番号();
     }
 
     /**
@@ -64,7 +66,7 @@ public class SikakuIdouTeiseiHandler {
      */
     public void onLoad() {
         kaigoShikakuKihon_onload(被保険者番号, 表示モード);
-        kaigoNinteiAtenaInfo_onload(new ShikibetsuCode(RString.EMPTY));
+        kaigoNinteiAtenaInfo_onload(識別コード);
         div.getShikakuShutokuJoho().getShikakuTokusoRirekii().getCcdShikakuTokusoRireki().initialize(被保険者番号, 識別コード);
         setButtonDisable();
         div.getShikakuShutokuJoho().getTplIryoHoken().getIryoHokenRirekii().getCcdIryoHokenRireki().
@@ -166,7 +168,6 @@ public class SikakuIdouTeiseiHandler {
             joho.setState(row.getState());
             ViewStateHolder.put(ViewStateKeys.資格異動の訂正_資格得喪情報, joho);
         }
-
     }
 
     /**

@@ -3,9 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dba.divcontroller.entity.commonchilddiv.KaigoChohyoShutsuryokujun;
+package jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.KaigoChohyoShutsuryokujun.KaigoChohyoShutsuryokujun;
 
-import jp.co.ndensan.reams.db.dba.service.core.kaigochohyoshutsuryokujun.KaigoChohyoShutsuryokujun;
+import jp.co.ndensan.reams.db.dbz.service.core.kaigochohyoshutsuryokujun.KaigoChohyoShutsuryokujun;
 import jp.co.ndensan.reams.ur.urz.divcontroller.entity.commonchilddiv.chohyoshutsuryokujun.ChohyoShutsuryokujun.ChohyoShutsuryokujunDiv;
 import jp.co.ndensan.reams.ur.urz.divcontroller.entity.commonchilddiv.chohyoshutsuryokujun.ChohyoShutsuryokujun.ChohyoShutsuryokujunDiv.DisplayNone;
 import jp.co.ndensan.reams.uz.uza.biz.ReportId;
