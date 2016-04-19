@@ -107,6 +107,7 @@ public class ShoKaishuKirokuKanriHandler {
                     dgJigyoshaItiran.setYukoKigen((jigyoshaInput.get有効期限().wareki().toDateString()));
                     dgJigyoshaItiran.setKaishuRiyu(jigyoshaInput.get回収理由());
                     dgJigyoshaItiran.setRirekiNo(new RString(jigyoshaInput.get履歴番号()));
+                    dgJigyoshaItiran.getKoufuTypeNo();
                     dgKoufuKaishuList.add(dgJigyoshaItiran);
                 }
                 div.getDgKoufuKaishu().setDataSource(dgKoufuKaishuList);
