@@ -16,28 +16,16 @@ import jp.co.ndensan.reams.uz.uza.report.ReportEditorJoiner;
 public class KaigoHokenryoChoshuyuyoKetteiTsuchishoA4TateBuider
         implements IKaigoHokenryoChoshuyuyoKetteiTsuchishoA4TateBuider {
 
-    private final ReiyaA4Editor reiyaEditor;
-    private final CompNinshoshaA4Editor compNinshoshaEditor;
-    private final CompKaigoToiawasesakiA4Editor compKaigoToiawasesakiEditor;
-    private final CompSofubutsuAtesakiA4Editor compSofubutsuAtesakiEditor;
+    private final KaigoHokenryoChoshuyuyoKetteiTsuchishoA4TateEditor editor;
 
     /**
      * インスタンスを生成します。
      *
-     * @param reiyaEditor ReiyaEditor
-     * @param compNinshoshaEditor CompNinshoshaEditor
-     * @param compKaigoToiawasesakiEditor CompKaigoToiawasesakiEditor
-     * @param compSofubutsuAtesakiEditor CompSofubutsuAtesakiEditor
+     * @param editor KaigoHokenryoChoshuyuyoKetteiTsuchishoA4TateEditor
      */
     public KaigoHokenryoChoshuyuyoKetteiTsuchishoA4TateBuider(
-            ReiyaA4Editor reiyaEditor,
-            CompNinshoshaA4Editor compNinshoshaEditor,
-            CompKaigoToiawasesakiA4Editor compKaigoToiawasesakiEditor,
-            CompSofubutsuAtesakiA4Editor compSofubutsuAtesakiEditor) {
-        this.reiyaEditor = reiyaEditor;
-        this.compNinshoshaEditor = compNinshoshaEditor;
-        this.compKaigoToiawasesakiEditor = compKaigoToiawasesakiEditor;
-        this.compSofubutsuAtesakiEditor = compSofubutsuAtesakiEditor;
+            KaigoHokenryoChoshuyuyoKetteiTsuchishoA4TateEditor editor) {
+        this.editor = editor;
     }
 
     /**
@@ -47,9 +35,8 @@ public class KaigoHokenryoChoshuyuyoKetteiTsuchishoA4TateBuider
      */
     @Override
     public KaigoHokenryoChoshuyuyoKetteiTsuchishoA4TateSource build() {
-        return ReportEditorJoiner.from(new KaigoHokenryoChoshuyuyoKetteiTsuchishoA4TateSource())
-                .join(reiyaEditor).join(compNinshoshaEditor).join(compKaigoToiawasesakiEditor)
-                .join(compSofubutsuAtesakiEditor).buildSource();
+        return ReportEditorJoiner.from(
+                new KaigoHokenryoChoshuyuyoKetteiTsuchishoA4TateSource()).join(editor).buildSource();
     }
 
 }
