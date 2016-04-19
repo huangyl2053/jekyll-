@@ -150,18 +150,17 @@ public class ShikakuKihonJoho {
         IUrControlData controlData = UrControlDataFactory.createInstance();
         RString menuID = controlData.getMenuID();
         ReportId 帳票ID = new ReportId("");
-        RString 文書番号取得 = RString.EMPTY;
         if (遷移元メニューID_DBAMN12008.equals(menuID)) {
 
-            文書番号取得 = get文書番号取得(ReportIdDBA.DBA100007.getReportId());
+            帳票ID = ReportIdDBA.DBA100007.getReportId();
         }
         if (遷移元メニューID_DBAMN12009.equals(menuID)) {
 
-            文書番号取得 = get文書番号取得(ReportIdDBA.DBA100005.getReportId());
+            帳票ID = ReportIdDBA.DBA100005.getReportId();
         }
         if (遷移元メニューID_DBAMN12010.equals(menuID)) {
 
-            文書番号取得 = get文書番号取得(ReportIdDBA.DBA100006.getReportId());
+            帳票ID = ReportIdDBA.DBA100006.getReportId();
         }
         BunshoNo bushoNo = bushoFineder.get文書番号管理(帳票ID, FlexibleDate.getNowDate());
         div.getTajutokuTekiyoJohoIchiran().getReportPublish().
@@ -364,7 +363,7 @@ public class ShikakuKihonJoho {
         item.setHenkomaeShisetsuName(business.get変更前施設名称() == null ? RString.EMPTY : business.get変更前施設名称().value());
         item.setHenkomaeShisetsuTelNo(business.get変更前施設電話番号() == null ? RString.EMPTY : business.get変更前施設電話番号().value());
         item.setHenkomaeShisetsuFaxNo(business.get変更前施設FAX番号() == null ? RString.EMPTY : business.get変更前施設FAX番号().value());
-        item.setHenkomaeShisetsuYubinNo(business.get変更前施設住所() == null ? RString.EMPTY : business.get変更前施設住所());
+        item.setHenkomaeShisetsuYubinNo(business.get変更前施設住所());
         item.setHenkomaeShisetsuJusho(business.get変更後施設名称() == null ? RString.EMPTY : business.get変更後施設名称().value());
         item.setHenkogoShisetsuName(business.get変更後施設名称() == null ? RString.EMPTY : business.get変更後施設名称().value());
         item.setHenkogoShisetsuTelNo(business.get変更後施設電話番号() == null ? RString.EMPTY : business.get変更後施設電話番号().value());

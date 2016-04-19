@@ -52,7 +52,7 @@ public class ShikakuKihonJohoHandler {
     private void 適用情報Gridの編集(TaJushochiTokureisyaKanriMaster master, dgJushochiTokureiRireki_Row row) {
 
         RString 保険者名 = master.getHokenjaName();
-        row.setTekiyoJiyu(master.getTekiyoJiyuCode());
+        row.setTekiyoJiyu(master.getTekiyoJiyuCode() == null ? RString.EMPTY : master.getTekiyoJiyuCode());
         row.getTekiyoDate().setValue(master.getTekiyoYMD() == null ? FlexibleDate.EMPTY : master.getTekiyoYMD());
         row.getTekiyoTodokedeDate().setValue(master.getTekiyoTodokedeYMD() == null ? FlexibleDate.EMPTY : master.getTekiyoTodokedeYMD());
         row.setKaijoJiyu(master.getKaijoJiyuCode() == null ? RString.EMPTY : master.getKaijoJiyuCode());
