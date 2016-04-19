@@ -5,6 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbc.divcontroller.controller.parentdiv.DBC0410011;
 
+import jp.co.ndensan.reams.db.dbc.definition.core.saishori.SaiShoriKubun;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0410011.DBC0410011TransitionEventName;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0410011.KokuhorenTorikomiListDiv;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0410011.dgKokuhorenTorikomiList_Row;
@@ -28,6 +29,9 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
  * @reamsid_L DBC-0980-460 wangkanglei
  */
 public class KokuhorenTorikomiList {
+
+    private static final RString 再処理可能 = new RString("再処理可能");
+    private static final RString 再処理不可 = new RString("再処理不可");
 
     /**
      * 初期化のメソッドます。
@@ -72,10 +76,14 @@ public class KokuhorenTorikomiList {
     public ResponseData<KokuhorenTorikomiListDiv> onSelect_dgKokuhorenTorikomiList_Row(
             KokuhorenTorikomiListDiv div) {
         dgKokuhorenTorikomiList_Row row = div.getDgKokuhorenTorikomiList().getClickedItem();
-        // TODO QA
+        RString 再処理区分 = RString.EMPTY;
+        if (再処理可能.equals(row.getSaishoriFlag())) {
+            再処理区分 = SaiShoriKubun.再処理.getコード();
+        } else if (再処理不可.equals(row.getSaishoriFlag())) {
+            再処理区分 = SaiShoriKubun.空白.getコード();
+        }
         KokuhorenDataTorikomiViewStateClass parmater = new KokuhorenDataTorikomiViewStateClass(
-                div.getTxtShoriYM().getValue().getYearMonth(),
-                new RString("1"));
+                div.getTxtShoriYM().getValue().getYearMonth(), 再処理区分);
         ViewStateHolder.put(ViewStateHolderName.国保連取込情報, parmater);
 
         RString paramete = getHandler(div).getParamter(row.getKokanShikibetsuNo());
