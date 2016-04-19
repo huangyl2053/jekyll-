@@ -30,7 +30,6 @@ import jp.co.ndensan.reams.uz.uza.lang.ApplicationException;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.message.MessageDialogSelectedResult;
 import jp.co.ndensan.reams.uz.uza.message.QuestionMessage;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.CommonButtonHolder;
@@ -56,26 +55,7 @@ public class TokuteiNyushoshaHiyoPanel {
      * @return ResponseData
      */
     public ResponseData<TokuteiNyushoshaHiyoPanelDiv> onLoad(TokuteiNyushoshaHiyoPanelDiv div) {
-        // TODO 償還払費申請検索キー
-        ShoukanharaihishinseikensakuParameter par = new ShoukanharaihishinseikensakuParameter(
-                new HihokenshaNo("000000004"),
-                new FlexibleYearMonth(new RString("200501")),
-                new RString("0000000004"),
-                new JigyoshaNo("0000000003"),
-                new RString("0004"),
-                new RString("0004"),
-                Decimal.TEN);
-        ViewStateHolder.put(ViewStateKeys.償還払費申請検索キー, par);
-        // TODO 償還払費申請明細検索キー
-        ShoukanharaihishinseimeisaikensakuParameter parameter = new ShoukanharaihishinseimeisaikensakuParameter(
-                new HihokenshaNo("000000003"),
-                new FlexibleYearMonth(new RString("200501")),
-                RDate.getNowDate(),
-                new RString("0000000003"),
-                new JigyoshaNo("0000000003"),
-                new RString("0003"),
-                new RString("0003"));
-        ViewStateHolder.put(ViewStateKeys.償還払費申請明細検索キー, parameter);
+
         ShoukanharaihishinseimeisaikensakuParameter meisaiPar = ViewStateHolder.get(ViewStateKeys.償還払費申請明細検索キー,
                 ShoukanharaihishinseimeisaikensakuParameter.class);
         HihokenshaNo 被保険者番号 = meisaiPar.get被保険者番号();
@@ -97,7 +77,6 @@ public class TokuteiNyushoshaHiyoPanel {
                 償還払費申請検索.getServiceTeikyoYM());
         ViewStateHolder.put(ViewStateKeys.識別番号検索キー, sikibetuKey);
 
-        ViewStateHolder.put(ViewStateKeys.識別コード, new ShikibetsuCode("000000000000010"));
         ShikibetsuCode 識別コード = ViewStateHolder.get(ViewStateKeys.識別コード, ShikibetsuCode.class);
         div.getPanelCcd().getCcdKaigoAtenaInfo().onLoad(識別コード);
         if (!被保険者番号.isEmpty()) {
@@ -267,15 +246,20 @@ public class TokuteiNyushoshaHiyoPanel {
      * @return ResponseData
      */
     public ResponseData<TokuteiNyushoshaHiyoPanelDiv> onClick_btnSave(TokuteiNyushoshaHiyoPanelDiv div) {
-        if (削除.equals(ViewStateHolder.get(ViewStateKeys.処理モード, RString.class))) {
-            return 保存処理(div, 削除);
-        } else {
-            boolean flag = getHandler(div).isChange();
-            if (flag) {
-                return 保存処理(div, 登録);
+        try {
+            if (削除.equals(ViewStateHolder.get(ViewStateKeys.処理モード, RString.class))) {
+                return 保存処理(div, 削除);
             } else {
-                return saveOut(div);
+                boolean flag = getHandler(div).isChange();
+                if (flag) {
+                    return 保存処理(div, 登録);
+                } else {
+                    return saveOut(div);
+                }
             }
+        } catch (Exception e) {
+            e.toString();
+            throw new ApplicationException(UrErrorMessages.異常終了.getMessage());
         }
     }
 
@@ -299,7 +283,7 @@ public class TokuteiNyushoshaHiyoPanel {
             CommonButtonHolder.setDisabledByCommonButtonFieldName(申請を保存する, true);
             return createResponse(div);
         }
-        return ResponseData.of(div).addMessage(UrErrorMessages.異常終了.getMessage()).respond();
+        return createResponse(div);
     }
 
     private TokuteiNyushoshaHiyoPanelHandler getHandler(TokuteiNyushoshaHiyoPanelDiv div) {

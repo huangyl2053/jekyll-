@@ -32,7 +32,6 @@ import jp.co.ndensan.reams.uz.uza.lang.ApplicationException;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.message.MessageDialogSelectedResult;
 import jp.co.ndensan.reams.uz.uza.message.QuestionMessage;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.CommonButtonHolder;
@@ -61,26 +60,7 @@ public class TokuteiShinryohiPanel {
      * @return ResponseData
      */
     public ResponseData<TokuteiShinryohiPanelDiv> onLoad(TokuteiShinryohiPanelDiv div) {
-        // TODO 償還払費申請検索キー
-        ShoukanharaihishinseikensakuParameter par = new ShoukanharaihishinseikensakuParameter(
-                new HihokenshaNo("000000004"),
-                new FlexibleYearMonth(new RString("200501")),
-                new RString("0000000004"),
-                new JigyoshaNo("0000000003"),
-                new RString("0004"),
-                new RString("0004"),
-                Decimal.TEN);
-        ViewStateHolder.put(ViewStateKeys.償還払費申請検索キー, par);
-        // TODO 償還払費申請明細検索キー
-        ShoukanharaihishinseimeisaikensakuParameter parameter = new ShoukanharaihishinseimeisaikensakuParameter(
-                new HihokenshaNo("000000003"),
-                new FlexibleYearMonth(new RString("200501")),
-                RDate.getNowDate(),
-                new RString("0000000003"),
-                new JigyoshaNo("0000000003"),
-                new RString("0003"),
-                new RString("0003"));
-        ViewStateHolder.put(ViewStateKeys.償還払費申請明細検索キー, parameter);
+
         ShoukanharaihishinseimeisaikensakuParameter meisaiPar = ViewStateHolder.get(ViewStateKeys.償還払費申請明細検索キー,
                 ShoukanharaihishinseimeisaikensakuParameter.class);
         HihokenshaNo 被保険者番号 = meisaiPar.get被保険者番号();
@@ -102,7 +82,6 @@ public class TokuteiShinryohiPanel {
                 償還払費申請検索.getServiceTeikyoYM());
         ViewStateHolder.put(ViewStateKeys.識別番号検索キー, sikibetuKey);
 
-        ViewStateHolder.put(ViewStateKeys.識別コード, new ShikibetsuCode("000000000000010"));
         ShikibetsuCode 識別コード = ViewStateHolder.get(ViewStateKeys.識別コード, ShikibetsuCode.class);
         div.getPanelOne().getCcdKaigoAtenaInfo().onLoad(識別コード);
         if (!被保険者番号.isEmpty()) {
@@ -396,26 +375,31 @@ public class TokuteiShinryohiPanel {
      * @return ResponseData
      */
     public ResponseData<TokuteiShinryohiPanelDiv> onClick_btnSave(TokuteiShinryohiPanelDiv div) {
-        FlexibleYearMonth サービス年月 = ViewStateHolder.get(ViewStateKeys.サービス年月, FlexibleYearMonth.class);
-        if (削除.equals(ViewStateHolder.get(ViewStateKeys.処理モード, RString.class))) {
-            if (!ResponseHolder.isReRequest()) {
-                getHandler(div).保存処理();
-                return ResponseData.of(div).addMessage(UrInformationMessages.正常終了.getMessage()
-                        .replace(削除.toString())).respond();
-            }
-            if (ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
-                CommonButtonHolder.setDisabledByCommonButtonFieldName(申請を保存する, true);
-                return createResponse(div);
-            }
-        } else {
-            boolean flag = getHandler(div).get内容変更状態(サービス年月);
-            if (flag) {
-                return 保存処理(div);
+        try {
+            FlexibleYearMonth サービス年月 = ViewStateHolder.get(ViewStateKeys.サービス年月, FlexibleYearMonth.class);
+            if (削除.equals(ViewStateHolder.get(ViewStateKeys.処理モード, RString.class))) {
+                if (!ResponseHolder.isReRequest()) {
+                    getHandler(div).保存処理();
+                    return ResponseData.of(div).addMessage(UrInformationMessages.正常終了.getMessage()
+                            .replace(削除.toString())).respond();
+                }
+                if (ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
+                    CommonButtonHolder.setDisabledByCommonButtonFieldName(申請を保存する, true);
+                    return createResponse(div);
+                }
+                return ResponseData.of(div).respond();
             } else {
-                return saveOut(div);
+                boolean flag = getHandler(div).get内容変更状態(サービス年月);
+                if (flag) {
+                    return 保存処理(div);
+                } else {
+                    return saveOut(div);
+                }
             }
+        } catch (Exception e) {
+            e.toString();
+            throw new ApplicationException(UrErrorMessages.異常終了.getMessage());
         }
-        return ResponseData.of(div).addMessage(UrErrorMessages.異常終了.getMessage()).respond();
     }
 
     private ResponseData<TokuteiShinryohiPanelDiv> saveOut(TokuteiShinryohiPanelDiv div) {
