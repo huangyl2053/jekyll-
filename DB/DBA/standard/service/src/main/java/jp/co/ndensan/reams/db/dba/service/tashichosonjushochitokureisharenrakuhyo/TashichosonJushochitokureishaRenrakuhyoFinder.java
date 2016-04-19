@@ -73,11 +73,11 @@ public class TashichosonJushochitokureishaRenrakuhyoFinder {
 
         TatokuKanrenChohyoSofusakiEntity entity = new TatokuKanrenChohyoSofusakiEntity();
         ICityAtesakiFinder finder = CityAtesakiService.createCityAtesakiFinder();
-        entity.set郵便番号(finder.get市町村宛先(new LasdecCode(市町村コード),
+        entity.set郵便番号(finder.get市町村宛先(new LasdecCode(市町村コード == null ? RString.EMPTY : 市町村コード),
                 SofusakiGroup.住基関連.getCode()).get郵便番号());
-        entity.set住所(finder.get市町村宛先(new LasdecCode(市町村コード),
+        entity.set住所(finder.get市町村宛先(new LasdecCode(市町村コード == null ? RString.EMPTY : 市町村コード),
                 SofusakiGroup.住基関連.getCode()).get住所());
-        entity.set役所名(finder.get市町村宛先(new LasdecCode(市町村コード),
+        entity.set役所名(finder.get市町村宛先(new LasdecCode(市町村コード == null ? RString.EMPTY : 市町村コード),
                 SofusakiGroup.住基関連.getCode()).get名称());
 //        TODO QA1036 entity.set役所名敬称(BusinessConfig);
 //        介護資格業務コンフィグ.他住所地特例施設退所通知_送付先情報_役場・役所名敬称

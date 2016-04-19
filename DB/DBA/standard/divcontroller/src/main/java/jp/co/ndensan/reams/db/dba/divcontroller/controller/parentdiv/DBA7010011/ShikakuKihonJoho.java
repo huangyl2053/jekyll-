@@ -9,6 +9,7 @@ import jp.co.ndensan.reams.db.dba.business.core.tatokukanrenchohyoshiji.TatokuKa
 import jp.co.ndensan.reams.db.dba.business.report.shisetsuhenkotsuchisho.ShisetsuHenkoTsuchishoItem;
 import jp.co.ndensan.reams.db.dba.business.report.shisetsutaishotsuchisho.ShisetsuTaishoTsuchishoItem;
 import jp.co.ndensan.reams.db.dba.business.report.tashichosonjushochitokureisharenrakuhyo.TashichosonJushochitokureishaRenrakuhyoItem;
+import jp.co.ndensan.reams.db.dba.definition.reportid.ReportIdDBA;
 import jp.co.ndensan.reams.db.dba.definition.tatokukanrenchohyoshijidata.TatokuKanrenParameter;
 import jp.co.ndensan.reams.db.dba.divcontroller.entity.parentdiv.DBA7010011.ShikakuKihonJohoDiv;
 import jp.co.ndensan.reams.db.dba.divcontroller.handler.parentdiv.DBA7010011.ShikakuKihonJohoHandler;
@@ -20,7 +21,7 @@ import jp.co.ndensan.reams.db.dba.service.report.shisetsutaishotsuchisho.Shisets
 import jp.co.ndensan.reams.db.dba.service.report.tashichosonjushochitokureisharenrakuhyo.TashichosonJushochitokureishaRenrakuhyoPrintService;
 import jp.co.ndensan.reams.db.dba.service.tashichosonjushochitokureisharenrakuhyo.TashichosonJushochitokureishaRenrakuhyoFinder;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
-import jp.co.ndensan.reams.db.dbz.definition.core.ViewStateKeys;
+import jp.co.ndensan.reams.db.dbz.divcontroller.viewbox.ViewStateKeys;
 import jp.co.ndensan.reams.db.dbz.service.util.report.ReportUtil;
 import jp.co.ndensan.reams.ur.urz.business.IUrControlData;
 import jp.co.ndensan.reams.ur.urz.business.UrControlDataFactory;
@@ -48,13 +49,10 @@ import jp.co.ndensan.reams.uz.uza.util.Saiban;
 /**
  * 他市町村住所地特例者関連帳票発行のクラスです。
  *
- * @reamsid_L DBA-0380-020 houtp
+ * @reamsid_L DBA-0380-020 houtianpeng
  */
 public class ShikakuKihonJoho {
 
-    private static final ReportId 帳票ID_DBA100007 = new ReportId("DBA100007");
-    private static final ReportId 帳票ID_DBA100005 = new ReportId("DBA100005");
-    private static final ReportId 帳票ID_DBA100006 = new ReportId("DBA100006");
     private static final RString 遷移元メニューID_DBAMN12008 = new RString("DBAMN12008");
     private static final RString 遷移元メニューID_DBAMN12009 = new RString("DBAMN12009");
     private static final RString 遷移元メニューID_DBAMN12010 = new RString("DBAMN12010");
@@ -95,15 +93,15 @@ public class ShikakuKihonJoho {
         RString 文書番号取得 = RString.EMPTY;
         if (遷移元メニューID_DBAMN12008.equals(menuID)) {
 
-            文書番号取得 = get文書番号取得(帳票ID_DBA100007);
+            文書番号取得 = get文書番号取得(ReportIdDBA.DBA100007.getReportId());
         }
         if (遷移元メニューID_DBAMN12009.equals(menuID)) {
 
-            文書番号取得 = get文書番号取得(帳票ID_DBA100005);
+            文書番号取得 = get文書番号取得(ReportIdDBA.DBA100005.getReportId());
         }
         if (遷移元メニューID_DBAMN12010.equals(menuID)) {
 
-            文書番号取得 = get文書番号取得(帳票ID_DBA100006);
+            文書番号取得 = get文書番号取得(ReportIdDBA.DBA100006.getReportId());
         }
         createHandler(div).適用情報の編集(文書番号取得);
         CommonButtonHolder.setVisibleByCommonButtonFieldName(発行ボタン, false);
@@ -124,15 +122,15 @@ public class ShikakuKihonJoho {
         RString 文書番号取得 = RString.EMPTY;
         if (遷移元メニューID_DBAMN12008.equals(menuID)) {
 
-            文書番号取得 = get文書番号取得(帳票ID_DBA100007);
+            文書番号取得 = get文書番号取得(ReportIdDBA.DBA100007.getReportId());
         }
         if (遷移元メニューID_DBAMN12009.equals(menuID)) {
 
-            文書番号取得 = get文書番号取得(帳票ID_DBA100005);
+            文書番号取得 = get文書番号取得(ReportIdDBA.DBA100005.getReportId());
         }
         if (遷移元メニューID_DBAMN12010.equals(menuID)) {
 
-            文書番号取得 = get文書番号取得(帳票ID_DBA100006);
+            文書番号取得 = get文書番号取得(ReportIdDBA.DBA100006.getReportId());
         }
         div.getTajutokuTekiyoJohoIchiran().getReportPublish().getHenshuNaiyo().getTxtBunshoBango().setValue(文書番号取得);
         CommonButtonHolder.setDisplayNoneByCommonButtonFieldName(完了ボタン, true);
@@ -152,17 +150,18 @@ public class ShikakuKihonJoho {
         IUrControlData controlData = UrControlDataFactory.createInstance();
         RString menuID = controlData.getMenuID();
         ReportId 帳票ID = new ReportId("");
+        RString 文書番号取得 = RString.EMPTY;
         if (遷移元メニューID_DBAMN12008.equals(menuID)) {
 
-            帳票ID = 帳票ID_DBA100007;
+            文書番号取得 = get文書番号取得(ReportIdDBA.DBA100007.getReportId());
         }
         if (遷移元メニューID_DBAMN12009.equals(menuID)) {
 
-            帳票ID = 帳票ID_DBA100005;
+            文書番号取得 = get文書番号取得(ReportIdDBA.DBA100005.getReportId());
         }
         if (遷移元メニューID_DBAMN12010.equals(menuID)) {
 
-            帳票ID = 帳票ID_DBA100006;
+            文書番号取得 = get文書番号取得(ReportIdDBA.DBA100006.getReportId());
         }
         BunshoNo bushoNo = bushoFineder.get文書番号管理(帳票ID, FlexibleDate.getNowDate());
         div.getTajutokuTekiyoJohoIchiran().getReportPublish().
