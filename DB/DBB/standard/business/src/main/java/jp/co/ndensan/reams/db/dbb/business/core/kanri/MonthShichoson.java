@@ -13,6 +13,8 @@ import lombok.Setter;
 
 /**
  * 月別市町村情報のクラスです。
+ *
+ * @reamsid_L DBB-9020-150 sunhaidi
  */
 @Getter
 @Setter

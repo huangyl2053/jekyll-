@@ -27,6 +27,8 @@ import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 
 /**
  * 保険料ランクのクラスです。
+ *
+ * @reamsid_L DBB-9020-150 sunhaidi
  */
 public class HokenryoRank {
 
