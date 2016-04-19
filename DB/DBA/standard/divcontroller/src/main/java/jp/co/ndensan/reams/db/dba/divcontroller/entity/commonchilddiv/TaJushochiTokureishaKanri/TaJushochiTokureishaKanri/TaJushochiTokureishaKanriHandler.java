@@ -443,7 +443,7 @@ public class TaJushochiTokureishaKanriHandler {
             if (new RString("1").equals(枝番) && 番号 == 1) {
                 枝番 = new RString("1");
             }
-            if (row.getRowState() == null) {
+            if (row.getRowState() == null || RowState.Unchanged.equals(row.getRowState())) {
                 continue;
             }
             if (RowState.Added.equals(row.getRowState())) {
