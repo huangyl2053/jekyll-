@@ -7,12 +7,10 @@ package jp.co.ndensan.reams.db.dba.service.core.nenreitotatsushikakuido;
 
 import jp.co.ndensan.reams.db.dba.definition.batchprm.dbamn71001.Dbamn71001BatchFlowParameter;
 import jp.co.ndensan.reams.db.dba.entity.nenreitotatsushikakuido.NenreitotatsuJokenEntity;
-import jp.co.ndensan.reams.db.dbz.definition.message.DbzErrorMessages;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7022ShoriDateKanriEntity;
 import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT7022ShoriDateKanriDac;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
-import jp.co.ndensan.reams.uz.uza.lang.ApplicationException;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
@@ -78,7 +76,7 @@ public class NenreitotatsuShikakuIdo {
         if (年齢到達期間開始日.isBeforeOrEquals(年齢到達期間終了日)) {
             return true;
         }
-        throw new ApplicationException(DbzErrorMessages.期間が不正_未来日付不可.getMessage().replace("開始日", "終了日"));
+        return false;
     }
 
     /**
@@ -97,7 +95,7 @@ public class NenreitotatsuShikakuIdo {
             check = true;
         }
         if (年齢到達期間開始日.isBeforeOrEquals(前回処理期間終了日)) {
-            throw new ApplicationException(DbzErrorMessages.期間が不正_過去日付不可.getMessage().replace("開始日", "前回終了日"));
+            check = false;
         }
         return check;
     }
