@@ -25,6 +25,14 @@ module DBA {
                 return "onClick_Delete";
             }
 
+            public static onBlur_TekiyoRireki(): string {
+                return "onBlur_TekiyoRireki";
+            }
+
+            public static onBlur_KayijoRireki(): string {
+                return "onBlur_KayijoRireki";
+            }
+
             public static onBlur_Tekiyo(): string {
                 return "onBlur_Tekiyo";
             }

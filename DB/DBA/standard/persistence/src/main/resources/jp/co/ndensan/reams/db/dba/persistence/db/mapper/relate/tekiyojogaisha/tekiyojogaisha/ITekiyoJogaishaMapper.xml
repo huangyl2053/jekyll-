@@ -24,25 +24,20 @@
             TekiyoJogaisha."taishoTsuchiHakkoYMD" AS "tekiyoJogaisha_taishoTsuchiHakkoYMD",
             TekiyoJogaisha."henkoTsuchiHakkoYMD" AS "tekiyoJogaisha_henkoTsuchiHakkoYMD"
         FROM
-            rgdb."DbT1002TekiyoJogaisha" AS TekiyoJogaisha,
             (SELECT
-                    T1."shikibetsuCode" AS "shikibetsuCode",
-                    T1."tekiyoYMD",
-                    T1."idoYMD" AS "idoYMD",
-                    MAX(T1."edaNo") AS "edaNo"
+                    *,
+                    ROW_NUMBER() OVER (PARTITION BY T1."shikibetsuCode", T1."tekiyoYMD" ORDER BY 
+                    T1."shikibetsuCode" ASC,
+                    T1."tekiyoYMD" ASC,
+                    T1."idoYMD" DESC,
+                    T1."edaNo" DESC) AS rrkno
              FROM
                     rgdb."DbT1002TekiyoJogaisha" AS T1
              WHERE
                     T1."shikibetsuCode" = #{識別コード}
-                    AND T1."logicalDeletedFlag" = #{論理削除フラグ}
-             GROUP BY
-                    T1."shikibetsuCode",
-                    T1."tekiyoYMD",
-                    T1."idoYMD") AS T2
+                    AND T1."logicalDeletedFlag" = #{論理削除フラグ}) AS TekiyoJogaisha
         WHERE
-            TekiyoJogaisha."shikibetsuCode" = T2."shikibetsuCode"
-            AND TekiyoJogaisha."idoYMD" = T2."idoYMD"
-            AND TekiyoJogaisha."edaNo" = T2."edaNo"
+            TekiyoJogaisha."rrkno" = 1
         ORDER BY
             TekiyoJogaisha."tekiyoYMD" DESC, TekiyoJogaisha."idoYMD" DESC, TekiyoJogaisha."edaNo" DESC
     </select>
@@ -101,27 +96,22 @@
            <include refid="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT1004ShisetsuNyutaishoMapper.allColumns_DbT1004ShisetsuNyutaisho"/> 
         FROM
             (SELECT
-               TekiyoJogaisha.*
+                TekiyoJogaisha.*
             FROM
-                rgdb."DbT1002TekiyoJogaisha" AS TekiyoJogaisha,
                 (SELECT
-                    T1."shikibetsuCode" AS "shikibetsuCode",
-                    T1."tekiyoYMD",
-                    T1."idoYMD" AS "idoYMD",
-                    MAX(T1."edaNo") AS "edaNo"
-                FROM
-                    rgdb."DbT1002TekiyoJogaisha" AS T1
-                WHERE
-                    T1."shikibetsuCode" = #{識別コード}
-                    AND T1."logicalDeletedFlag" = #{論理削除フラグ}
-                GROUP BY
-                    T1."shikibetsuCode",
-                    T1."tekiyoYMD",
-                    T1."idoYMD") AS T2
+                        *,
+                        ROW_NUMBER() OVER (PARTITION BY T1."shikibetsuCode", T1."tekiyoYMD" ORDER BY 
+                        T1."shikibetsuCode" ASC,
+                        T1."tekiyoYMD" ASC,
+                        T1."idoYMD" DESC,
+                        T1."edaNo" DESC) AS rrkno
+                 FROM
+                        rgdb."DbT1002TekiyoJogaisha" AS T1
+                 WHERE
+                        T1."shikibetsuCode" = #{識別コード}
+                        AND T1."logicalDeletedFlag" = #{論理削除フラグ}) AS TekiyoJogaisha
             WHERE
-                TekiyoJogaisha."shikibetsuCode" = T2."shikibetsuCode"
-                AND TekiyoJogaisha."idoYMD" = T2."idoYMD"
-                AND TekiyoJogaisha."edaNo" = T2."edaNo") AS "DbT1002TekiyoJogaisha"
+                TekiyoJogaisha."rrkno" = 1) AS "DbT1002TekiyoJogaisha"
         LEFT JOIN
             rgdb."DbT1004ShisetsuNyutaisho" AS "DbT1004ShisetsuNyutaisho"
         ON

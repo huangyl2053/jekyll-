@@ -3,14 +3,14 @@ package jp.co.ndensan.reams.db.dba.divcontroller.entity.commonchilddiv.TekiyoJog
  * このコードはツールによって生成されました。
  * このファイルへの変更は、以下の状況下で不正な動作の原因になったり、
  * コードが再生成されるときに損失したりします。
- * Fri Apr 15 10:49:57 CST 2016 
+ * Tue Apr 19 17:11:50 CST 2016 
  */
 
 
 
 import jp.co.ndensan.reams.uz.uza.ui.binding.DataRow;
-import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxDate;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 
 /**
@@ -22,7 +22,6 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxDate;
 public class datagridTekiyoJogai_Row extends DataRow {
     // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
 
-    private RString status;
     private TextBoxDate tekiyoDate;
     private TextBoxDate tekiyoTodokeDate;
     private RString tekiyoJiyuCode;
@@ -48,7 +47,6 @@ public class datagridTekiyoJogai_Row extends DataRow {
 
     public datagridTekiyoJogai_Row() {
         super();
-        this.status = RString.EMPTY;
         this.tekiyoDate = new TextBoxDate();
         this.tekiyoTodokeDate = new TextBoxDate();
         this.tekiyoJiyuCode = RString.EMPTY;
@@ -71,7 +69,6 @@ public class datagridTekiyoJogai_Row extends DataRow {
         this.nyushoTsuchiHakkoYMD = RString.EMPTY;
         this.taishoTsuchiHakkoYMD = RString.EMPTY;
         this.henkoTsuchiHakkoYMD = RString.EMPTY;
-        this.setOriginalData("status", status);
         this.setOriginalData("tekiyoDate", tekiyoDate);
         this.setOriginalData("tekiyoTodokeDate", tekiyoTodokeDate);
         this.setOriginalData("tekiyoJiyuCode", tekiyoJiyuCode);
@@ -96,9 +93,8 @@ public class datagridTekiyoJogai_Row extends DataRow {
         this.setOriginalData("henkoTsuchiHakkoYMD", henkoTsuchiHakkoYMD);
     }
 
-    public datagridTekiyoJogai_Row(RString status, TextBoxDate tekiyoDate, TextBoxDate tekiyoTodokeDate, RString tekiyoJiyuCode, RString tekiyoJiyu, TextBoxDate kayijoDate, TextBoxDate kaijoTodokeDate, RString kaijoJiyuCode, RString kaijoJiyu, TextBoxDate nyuShoDate, TextBoxDate taiShoDate, RString nyuShoShisetu, RString nyushoShisetsuCode, RString daichoShubetsu, RString shisetsuShurui, RString rirekiNo, RString idoYMD, RString idoJiyuCode, RString edaNo, RString shichosonCode, RString nyushoTsuchiHakkoYMD, RString taishoTsuchiHakkoYMD, RString henkoTsuchiHakkoYMD) {
+    public datagridTekiyoJogai_Row(TextBoxDate tekiyoDate, TextBoxDate tekiyoTodokeDate, RString tekiyoJiyuCode, RString tekiyoJiyu, TextBoxDate kayijoDate, TextBoxDate kaijoTodokeDate, RString kaijoJiyuCode, RString kaijoJiyu, TextBoxDate nyuShoDate, TextBoxDate taiShoDate, RString nyuShoShisetu, RString nyushoShisetsuCode, RString daichoShubetsu, RString shisetsuShurui, RString rirekiNo, RString idoYMD, RString idoJiyuCode, RString edaNo, RString shichosonCode, RString nyushoTsuchiHakkoYMD, RString taishoTsuchiHakkoYMD, RString henkoTsuchiHakkoYMD) {
         super();
-        this.setOriginalData("status", status);
         this.setOriginalData("tekiyoDate", tekiyoDate);
         this.setOriginalData("tekiyoTodokeDate", tekiyoTodokeDate);
         this.setOriginalData("tekiyoJiyuCode", tekiyoJiyuCode);
@@ -121,7 +117,6 @@ public class datagridTekiyoJogai_Row extends DataRow {
         this.setOriginalData("nyushoTsuchiHakkoYMD", nyushoTsuchiHakkoYMD);
         this.setOriginalData("taishoTsuchiHakkoYMD", taishoTsuchiHakkoYMD);
         this.setOriginalData("henkoTsuchiHakkoYMD", henkoTsuchiHakkoYMD);
-        this.status = status;
         this.tekiyoDate = tekiyoDate;
         this.tekiyoTodokeDate = tekiyoTodokeDate;
         this.tekiyoJiyuCode = tekiyoJiyuCode;
@@ -144,10 +139,6 @@ public class datagridTekiyoJogai_Row extends DataRow {
         this.nyushoTsuchiHakkoYMD = nyushoTsuchiHakkoYMD;
         this.taishoTsuchiHakkoYMD = taishoTsuchiHakkoYMD;
         this.henkoTsuchiHakkoYMD = henkoTsuchiHakkoYMD;
-    }
-
-    public RString getStatus() {
-        return status;
     }
 
     public TextBoxDate getTekiyoDate() {
@@ -236,11 +227,6 @@ public class datagridTekiyoJogai_Row extends DataRow {
 
     public RString getHenkoTsuchiHakkoYMD() {
         return henkoTsuchiHakkoYMD;
-    }
-
-    public void setStatus(RString status) {
-        this.setOriginalData("status", status);
-        this.status = status;
     }
 
     public void setTekiyoDate(TextBoxDate tekiyoDate) {
