@@ -9,7 +9,7 @@ import jp.co.ndensan.reams.db.dbb.entity.report.gemmen.KaigoHokenryoGenmenKettei
 import jp.co.ndensan.reams.uz.uza.report.ReportEditorJoiner;
 
 /**
- * 介護保険料減免決定通知書 B5横タイプBuilder
+ * 介護保険料減免決定通知書 B5横タイプBuilderクラスです。
  *
  * @reamsid_L DBB-0740-030 surun
  */
@@ -18,7 +18,7 @@ public class GenmenKetteiTsuchiShoYokoBuilder implements IGenmenKetteiTsuchiShoY
     private final IGenmenKetteiTsuchiShoYokoEditor editor;
 
     /**
-     * コンストラクタです
+     * コンストラクタです。
      *
      * @param editor GenmenKetteiTsuchiShoTateEditor
      */
