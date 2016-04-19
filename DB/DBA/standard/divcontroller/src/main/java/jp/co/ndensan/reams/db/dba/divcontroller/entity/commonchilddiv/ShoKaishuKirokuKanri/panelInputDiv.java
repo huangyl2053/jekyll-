@@ -11,7 +11,6 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 /**
  * panelInput のクラスファイル
  *
- * @reamsid_L DBA-1070-020 lizhuoxuan
  */
 public class panelInputDiv extends Panel {
     // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">

@@ -14,7 +14,6 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxCode;
 /**
  * panSotimotoJyoho のクラスファイル
  *
- * @reamsid_L DBA-0200-010 linghuhang
  */
 public class panSotimotoJyohoDiv extends Panel {
 

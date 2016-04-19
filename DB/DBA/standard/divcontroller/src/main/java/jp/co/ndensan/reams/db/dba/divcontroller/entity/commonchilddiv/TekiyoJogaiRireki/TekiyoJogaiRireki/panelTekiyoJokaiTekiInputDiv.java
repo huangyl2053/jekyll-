@@ -14,7 +14,6 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 /**
  * panelTekiyoJokaiTekiInput のクラスファイル
  *
- * @reamsid_L DBA-0210-010 dingyi
  */
 public class panelTekiyoJokaiTekiInputDiv extends Panel {
     // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
