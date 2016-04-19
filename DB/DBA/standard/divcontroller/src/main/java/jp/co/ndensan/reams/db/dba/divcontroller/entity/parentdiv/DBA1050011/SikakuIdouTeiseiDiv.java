@@ -18,7 +18,6 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 /**
  * SikakuIdouTeisei のクラスファイル
  *
- * @reamsid_L DBA-0521-010 dongyabin
  */
 public class SikakuIdouTeiseiDiv extends Panel {
 

@@ -16,7 +16,6 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxFlexibleDate;
 /**
  * ShikakuShutokuInput のクラスファイル
  *
- * @reamsid_L DBA-0520-030 wangkun
  */
 public class ShikakuShutokuInputDiv extends Panel {
 

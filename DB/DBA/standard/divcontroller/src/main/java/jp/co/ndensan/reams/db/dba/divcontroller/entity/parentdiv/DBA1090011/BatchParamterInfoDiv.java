@@ -14,7 +14,6 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.PanelBatchParameter;
 /**
  * BatchParamterInfo のクラスファイル
  *
- * @reamsid_L DBU-4110-010 yaodongsheng
  */
 public class BatchParamterInfoDiv extends PanelBatchParameter {
 

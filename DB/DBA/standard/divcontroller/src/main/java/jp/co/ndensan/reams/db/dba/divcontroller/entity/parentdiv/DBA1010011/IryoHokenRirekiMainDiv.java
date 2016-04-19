@@ -13,7 +13,6 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 /**
  * IryoHokenRirekiMain のクラスファイル
  *
- * @reamsid_L DBA-0520-030 wangkun
  */
 public class IryoHokenRirekiMainDiv extends Panel {
 

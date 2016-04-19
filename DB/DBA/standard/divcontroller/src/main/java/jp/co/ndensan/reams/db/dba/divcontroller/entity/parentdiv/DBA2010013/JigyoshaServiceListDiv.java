@@ -11,7 +11,6 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 /**
  * JigyoshaServiceList のクラスファイル 
  * 
- * @reamsid_L DBA-0340-050  lijia
  * 
  */
 public class JigyoshaServiceListDiv extends Panel {

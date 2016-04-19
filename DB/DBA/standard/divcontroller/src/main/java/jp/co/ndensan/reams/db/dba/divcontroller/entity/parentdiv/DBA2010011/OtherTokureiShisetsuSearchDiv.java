@@ -10,7 +10,6 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 /**
  * OtherTokureiShisetsuSearch のクラスファイル
  *
- * @reamsid_L DBA-0340-030 wanghui
  */
 public class OtherTokureiShisetsuSearchDiv extends Panel {
     /*

@@ -9,7 +9,6 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
  * 不正な動作の原因になります。</br>
  * DBA1140011の状態名定義クラスです
  *
- * @reamsid_L DBA-0560-010 xuyannan
  */
 public enum DBA1140011StateName implements IStateEnumerations {
 // <editor-fold defaultstate="collapsed" desc="Created By UI Designer ver 1.0.0">

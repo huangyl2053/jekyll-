@@ -13,7 +13,6 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxFlexibleDate;
 /**
  * dgServiceList_Row のクラスファイル
  *
- * @reamsid_L DBA-0340-050  lijia
  * 
  */
 public class dgServiceList_Row extends DataRow {

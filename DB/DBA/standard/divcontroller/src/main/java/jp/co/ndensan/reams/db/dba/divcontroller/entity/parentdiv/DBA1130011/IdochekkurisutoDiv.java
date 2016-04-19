@@ -17,7 +17,6 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxFlexibleDate;
 /**
  * Idochekkurisuto のクラスファイル
  *
- * @reamsid_L DBA-0530-010 chengsanyuan
  */
 public class IdochekkurisutoDiv extends Panel {
 

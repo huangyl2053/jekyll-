@@ -19,7 +19,6 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxYubinNo;
 /**
  * ShisetsuSearch のクラスファイル
  *
- * @reamsid_L DBA-0340-030 wanghui
  */
 public class ShisetsuSearchDiv extends Panel {
     /*

@@ -18,7 +18,6 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxDateRange;
 /**
  * NenreiToutatuYoteishaCheckList のクラスファイル。
  *
- * @reamsid_L DBA-0580-010 yaodongsheng
  */
 public class NenreiToutatuYoteishaCheckListDiv extends PanelBatchParameter {
 

@@ -10,7 +10,6 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 /**
  * JigyoshaToutoku のクラスファイル 
  * 
- * @reamsid_L DBA-0340-050  lijia
  * 
  */
 public class JigyoshaToutokuDiv extends Panel {

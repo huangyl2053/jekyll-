@@ -12,7 +12,6 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 /**
  * NenReiTotatsuSearchCondition のクラスファイル 
  * 
- * @reamsid_L DBA-0330-050 wangkun
  */
 public class NenReiTotatsuSearchConditionDiv extends Panel {
     // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-01-15_09-59-03">

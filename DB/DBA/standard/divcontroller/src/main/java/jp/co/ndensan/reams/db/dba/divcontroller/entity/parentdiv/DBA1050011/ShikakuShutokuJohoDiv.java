@@ -16,7 +16,6 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 /**
  * ShikakuShutokuJoho のクラスファイル
  *
- * @reamsid_L DBA-0521-010 dongyabin
  */
 public class ShikakuShutokuJohoDiv extends Panel {
 

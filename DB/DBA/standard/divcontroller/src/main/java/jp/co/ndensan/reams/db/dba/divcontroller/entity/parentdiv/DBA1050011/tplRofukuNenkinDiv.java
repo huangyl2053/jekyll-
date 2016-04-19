@@ -13,7 +13,6 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.TabPanel;
 /**
  * tplRofukuNenkin のクラスファイル
  *
- * @reamsid_L DBA-0521-010 dongyabin
  */
 public class tplRofukuNenkinDiv extends TabPanel {
 

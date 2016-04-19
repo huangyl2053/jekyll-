@@ -12,7 +12,6 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 /**
  * JigyoshaShisetsuKanri のクラスファイル
  *
- * @reamsid_L DBA-0340-030 wanghui
  */
 public class JigyoshaShisetsuKanriDiv extends Panel {
 

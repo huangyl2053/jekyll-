@@ -16,7 +16,6 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.domain.TextBoxShikibetsuCode;
 /**
  * JogaiTaishoIchiran のクラスファイル
  *
- * @reamsid_L DBA-0440-030 zhangzhiming
  */
 public class JogaiTaishoIchiranDiv extends Panel {
 

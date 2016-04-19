@@ -19,7 +19,6 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxDateRange;
 /**
  * BatchPanel のクラスファイル
  *
- * @reamsid_L DBA-0600-010 zhangguopeng
  */
 public class BatchPanelDiv extends PanelBatchParameter {
 

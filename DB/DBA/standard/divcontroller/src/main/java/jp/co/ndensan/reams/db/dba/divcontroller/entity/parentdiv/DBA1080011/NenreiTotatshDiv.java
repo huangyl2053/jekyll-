@@ -13,7 +13,6 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 /**
  * NenreiTotatsh のクラスファイル
  *
- * @reamsid_L DBA-0440-030 zhangzhiming
  */
 public class NenreiTotatshDiv extends Panel {
 

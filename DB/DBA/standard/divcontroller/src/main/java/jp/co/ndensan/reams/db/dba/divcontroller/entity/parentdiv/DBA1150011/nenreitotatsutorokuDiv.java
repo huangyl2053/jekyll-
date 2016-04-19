@@ -11,7 +11,6 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 /**
  * nenreitotatsutoroku のクラスファイル
  *
- * @reamsid_L DBA-0570-010 xuyannan
  */
 public class nenreitotatsutorokuDiv extends Panel {
 

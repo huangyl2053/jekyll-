@@ -13,7 +13,6 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 /**
  * KaigoKanryo のクラスファイル
  *
- * @reamsid_L DBA-0440-030 zhangzhiming
  */
 public class KaigoKanryoDiv extends Panel {
 

@@ -9,7 +9,6 @@ import jp.co.ndensan.reams.uz.uza.core.ui.response.IContainerEvents;
  * 不正な動作の原因になります。</br>
  * DBA2010013のイベント名定義クラスです</br>
  *
- * @reamsid_L DBA-0340-050 lijia
  *
  */
 public enum DBA2010013TransitionEventName implements IContainerEvents {

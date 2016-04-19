@@ -17,7 +17,6 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxFlexibleDate;
 /**
  * BatchParamterInfo のクラスファイル
  *
- * @reamsid_L DBA-0530-010 chengsanyuan
  */
 public class BatchParamterInfoDiv extends PanelBatchParameter {
 

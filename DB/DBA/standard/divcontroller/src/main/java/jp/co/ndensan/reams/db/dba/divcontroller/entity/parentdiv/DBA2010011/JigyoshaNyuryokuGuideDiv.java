@@ -13,7 +13,6 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 /**
  * JigyoshaNyuryokuGuide のクラスファイル
  *
- * @reamsid_L DBA-0340-030 wanghui
  */
 public class JigyoshaNyuryokuGuideDiv extends Panel {
 

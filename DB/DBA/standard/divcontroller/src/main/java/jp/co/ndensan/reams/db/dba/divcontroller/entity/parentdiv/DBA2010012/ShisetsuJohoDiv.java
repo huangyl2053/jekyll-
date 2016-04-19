@@ -17,7 +17,6 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxYubinNo;
 /**
  * ShisetsuJoho のクラスファイル
  *
- * @reamsid_L DBA-0340-040 wanghui
  */
 public class ShisetsuJohoDiv extends Panel {
 

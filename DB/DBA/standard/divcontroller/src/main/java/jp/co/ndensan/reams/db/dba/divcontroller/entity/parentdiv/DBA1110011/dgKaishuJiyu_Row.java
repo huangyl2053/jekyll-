@@ -12,7 +12,6 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.DataRow;
 /**
  * dgKaishuJiyu_Row のクラスファイル
  *
- * @reamsid_L DBA-0600-010 zhangguopeng
  */
 public class dgKaishuJiyu_Row extends DataRow {
     // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：バージョン情報無し">

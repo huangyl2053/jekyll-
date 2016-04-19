@@ -11,7 +11,6 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 /**
  * MishorishaIchiranSakusei のクラスファイル
  *
- * @reamsid_L DBU-4110-010 yaodongsheng
  */
 public class MishorishaIchiranSakuseiDiv extends Panel {
 

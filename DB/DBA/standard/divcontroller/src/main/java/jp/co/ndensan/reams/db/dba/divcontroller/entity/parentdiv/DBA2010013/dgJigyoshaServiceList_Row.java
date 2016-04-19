@@ -12,7 +12,6 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 /**
  * dgJigyoshaServiceList_Row のクラスファイル 
  * 
- * @reamsid_L DBA-0340-050  lijia
  * 
  */
 

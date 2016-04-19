@@ -11,7 +11,6 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 /**
  * KaisetsushaJoho のクラスファイル 
  * 
- * @reamsid_L DBA-0340-050  lijia
  * 
  */
 public class KaisetsushaJohoDiv extends Panel {

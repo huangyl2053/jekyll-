@@ -14,7 +14,6 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxFlexibleDate;
 /**
  * SeikatsuHogoInput のクラスファイル
  *
- * @reamsid_L DBA-0520-030 wangkun
  */
 public class SeikatsuHogoInputDiv extends Panel {
 

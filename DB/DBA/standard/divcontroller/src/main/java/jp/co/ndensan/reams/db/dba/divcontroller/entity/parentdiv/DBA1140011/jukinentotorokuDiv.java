@@ -11,7 +11,6 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 /**
  * jukinentotoroku のクラスファイル
  *
- * @reamsid_L DBA-0560-010 xuyannan
  */
 public class jukinentotorokuDiv extends Panel {
 

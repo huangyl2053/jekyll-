@@ -11,8 +11,6 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 /**
  * JigyoshaShurui のクラスファイル 
  * 
- * @reamsid_L DBA-0340-050  lijia
- * 
  */
 public class JigyoshaShuruiDiv extends Panel {
     // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-01-15_09-59-03">

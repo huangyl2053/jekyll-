@@ -11,7 +11,6 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 /**
  * ShikakuShutokuIdoTotal のクラスファイル
  *
- * @reamsid_L DBA-0520-030 wangkun
  */
 public class ShikakuShutokuIdoTotalDiv extends Panel {
 
