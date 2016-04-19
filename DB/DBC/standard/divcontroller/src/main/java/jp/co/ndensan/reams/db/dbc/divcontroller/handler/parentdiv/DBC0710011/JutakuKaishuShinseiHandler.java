@@ -116,10 +116,10 @@ public final class JutakuKaishuShinseiHandler {
     public void setDeleteMode() {
         ViewStateHolder.put(
                 ViewStateKeys.サービス提供年月, div.getJutakuKaishuShinseiList().getDgJutakuKaishuShinseiList()
-                .getClickedItem().getTxtTeikyoYM().toString());
+                .getClickedItem().getTxtTeikyoYM().getValue());
         ViewStateHolder.put(
                 ViewStateKeys.整理番号, div.getJutakuKaishuShinseiList().getDgJutakuKaishuShinseiList()
-                .getClickedItem().getTxtSeiriNo().toString());
+                .getClickedItem().getTxtSeiriNo().getValue());
         ViewStateHolder.put(ViewStateKeys.表示モード, 削除モード);
     }
 
@@ -129,10 +129,10 @@ public final class JutakuKaishuShinseiHandler {
     public void setCancelMode() {
         ViewStateHolder.put(
                 ViewStateKeys.サービス提供年月, div.getJutakuKaishuShinseiList().getDgJutakuKaishuShinseiList()
-                .getClickedItem().getTxtTeikyoYM().toString());
+                .getClickedItem().getTxtTeikyoYM().getValue());
         ViewStateHolder.put(
                 ViewStateKeys.整理番号, div.getJutakuKaishuShinseiList().getDgJutakuKaishuShinseiList()
-                .getClickedItem().getTxtSeiriNo().toString());
+                .getClickedItem().getTxtSeiriNo().getValue());
         ViewStateHolder.put(ViewStateKeys.表示モード, 取消モード);
     }
 

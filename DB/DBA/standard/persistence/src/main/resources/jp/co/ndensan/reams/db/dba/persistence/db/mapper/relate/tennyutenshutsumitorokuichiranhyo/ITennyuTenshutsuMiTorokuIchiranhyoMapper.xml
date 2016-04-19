@@ -1,9 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<!-- 概要： 合議体情報のマッピング用XMLです。 -->
-
-<!-- どのマッパーインターフェースと対応するかを指定する -->
 <!-- @reamsid_L DBU-4110-030 yaodongsheng -->
+<!-- 概要： 合議体情報のマッピング用XMLです。 -->
+<!-- どのマッパーインターフェースと対応するかを指定する -->
 <mapper namespace="jp.co.ndensan.reams.db.dba.persistence.db.mapper.relate.tennyutenshutsumitorokuichiranhyo.ITennyuTenshutsuMiTorokuIchiranhyoMapper">
 
     <resultMap id="resultMap_TennyuHosyutaiSyosyaEntity" type="jp.co.ndensan.reams.db.dba.entity.db.relate.tennyutenshuhosyutaisyosya.TennyuHosyutaiSyosyaEntity" autoMapping="true">
