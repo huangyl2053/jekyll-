@@ -5,18 +5,20 @@
  */
 package jp.co.ndensan.reams.db.dbc.divcontroller.handler.parentdiv.DBC0600031;
 
+import java.util.List;
+import jp.co.ndensan.reams.db.dbc.business.core.syokanbaraikettejoho.KetteJoho;
+import jp.co.ndensan.reams.db.dbc.divcontroller.entity.commonchilddiv.ShokanbaraiketteiJoho.ShokanbaraiketteiJoho.dgSyokanbaraikete_Row;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0600031.PnlKeteiJohoMsgDiv;
-import jp.co.ndensan.reams.db.dbc.divcontroller.viewbox.ViewStateKeys;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
-import jp.co.ndensan.reams.uz.uza.lang.RDate;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.math.Decimal;
+import static jp.co.ndensan.reams.uz.uza.math.Decimal.ONE;
 import jp.co.ndensan.reams.uz.uza.message.IMessageGettable;
 import jp.co.ndensan.reams.uz.uza.message.IValidationMessage;
 import jp.co.ndensan.reams.uz.uza.message.Message;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPair;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
-import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
+import static org.joda.time.Seconds.TWO;
 
 /**
  * 福祉用具購入費支給申請_決定情報登録 Handler
@@ -43,131 +45,52 @@ public final class PnlKeteiJohoMsgHandler {
     }
 
     /**
-     * get内容変更状態
      *
+     * @param 償還払決定一覧 List<dgSyokanbaraikete_Row>
+     * @param 決定情報 KetteJoho
      * @return boolean
      */
-    public boolean is内容変更状態() {
-        Decimal 支払金額合計New = div.getCcdKetteiList().getShokanbaraiketteiJohoDiv()
-                .getTxtShiharaikingakugoke().getValue();
-        Decimal 支払金額合計Old = ViewStateHolder.get(ViewStateKeys.支払金額合計, Decimal.class);
-        if ((支払金額合計New != null && 支払金額合計Old != null && !支払金額合計New.equals(支払金額合計Old))
-                || (支払金額合計New != null && 支払金額合計Old == null)
-                || 支払金額合計New == null && 支払金額合計Old != null) {
-            return true;
+    public boolean is内容変更状態(List<dgSyokanbaraikete_Row> 償還払決定一覧, KetteJoho 決定情報) {
+        boolean flag = false;
+        FlexibleDate ketebi = new FlexibleDate(div.getCcdKetteiList().getShokanbaraiketteiJohoDiv().getTxtKetebi()
+                .getValue().toDateString());
+        if (!ketebi.equals(決定情報.getKetteiYMD())) {
+            flag = true;
         }
-        RString 増減理由New = div.getCcdKetteiList().getShokanbaraiketteiJohoDiv()
-                .getTxtZogenriyu().getValue();
-        RString 増減理由Old = ViewStateHolder.get(ViewStateKeys.増減理由, RString.class);
-        if ((増減理由New != null && 増減理由Old != null && !増減理由New.equals(増減理由Old))
-                || (増減理由New != null && 増減理由Old == null)
-                || 増減理由New == null && 増減理由Old != null) {
-            return true;
-        }
-        int 増減単位New = div.getCcdKetteiList().getShokanbaraiketteiJohoDiv()
-                .getTxtZogentani().getValue().intValue();
-        int 増減単位Old = ViewStateHolder.get(ViewStateKeys.増減単位, int.class);
-        if (増減単位New != 増減単位Old) {
-            return true;
-        }
-        RDate 決定日New = div.getCcdKetteiList().getShokanbaraiketteiJohoDiv()
-                .getTxtKetebi().getValue();
-        RDate 決定日Old = ViewStateHolder.get(ViewStateKeys.決定日, RDate.class);
-        if (equal決定日(決定日New, 決定日Old)) {
-            return true;
-        }
-        RString 支給区分New = div.getCcdKetteiList().getShokanbaraiketteiJohoDiv().
-                getRdoShikyukubun().getSelectedKey();
-        RString 支給区分Old = ViewStateHolder.get(ViewStateKeys.支給区分, RString.class);
-        if (equal支給区分(支給区分New, 支給区分Old)) {
-            return true;
-        }
-        RString fuSyikyuriyu1New = div.getCcdKetteiList().getShokanbaraiketteiJohoDiv()
-                .getTxtFuSyikyuriyu1().getValue();
-        RString fuSyikyuriyu1Old = ViewStateHolder.get(ViewStateKeys.fuSyikyuriyu1, RString.class);
-        if (equalFuSyikyuriyu1(fuSyikyuriyu1New, fuSyikyuriyu1Old)) {
-            return true;
-        }
-        RString fuSyikyuriyu2New = div.getCcdKetteiList().getShokanbaraiketteiJohoDiv()
-                .getTxtFushikyuriyu2().getValue();
-        RString fuSyikyuriyu2Old = ViewStateHolder.get(ViewStateKeys.fuSyikyuriyu2, RString.class);
-        return equalFuSyikyuriyu2(fuSyikyuriyu2New, fuSyikyuriyu2Old);
-    }
-
-    /**
-     * 決定日 内容の変更を判断する
-     *
-     * @param 決定日New RDate
-     * @param 決定日Old RDate
-     * @return boolean
-     */
-    public boolean equal決定日(RDate 決定日New, RDate 決定日Old) {
-        if (決定日New != null && 決定日Old != null) {
-            if (!決定日New.equals(決定日Old)) {
-                return true;
+        RString rdoShikyukubunNew = div.getCcdKetteiList().getShokanbaraiketteiJohoDiv().getRdoShikyukubun().getSelectedKey();
+        if (!rdoShikyukubunNew.equals(決定情報.getShikyuHushikyuKetteiKubun())) {
+            flag = true;
+        } else if (決定情報.getShikyuHushikyuKetteiKubun().equals(ONE)) {
+            RString zogenriyu = div.getCcdKetteiList().getShokanbaraiketteiJohoDiv().getTxtZogenriyu().getValue();
+            if (!zogenriyu.equals(決定情報.getZougenRiyu())) {
+                flag = true;
             }
-        } else if ((決定日New != null && 決定日Old == null)
-                || (決定日New == null && 決定日Old != null)) {
-            return true;
-        }
-        return false;
-    }
-
-    /**
-     * 支給区分 内容の変更を判断する
-     *
-     * @param 支給区分New RString
-     * @param 支給区分Old RString
-     * @return boolean
-     */
-    public boolean equal支給区分(RString 支給区分New, RString 支給区分Old) {
-        if (支給区分New != null && 支給区分Old != null) {
-            if (!支給区分New.equals(支給区分Old)) {
-                return true;
+            int zogentani = div.getCcdKetteiList().getShokanbaraiketteiJohoDiv().getTxtZogentani().getValue().intValue();
+            if (zogentani != 決定情報.getZougenten()) {
+                flag = true;
             }
-        } else if ((支給区分New != null && 支給区分Old == null)
-                || (支給区分New == null && 支給区分Old != null)) {
-            return true;
-        }
-        return false;
-    }
-
-    /**
-     * fuSyikyuriyu1 内容の変更を判断する
-     *
-     * @param fuSyikyuriyu1New RString
-     * @param fuSyikyuriyu1Old RString
-     * @return boolean
-     */
-    public boolean equalFuSyikyuriyu1(RString fuSyikyuriyu1New, RString fuSyikyuriyu1Old) {
-        if (fuSyikyuriyu1New != null && fuSyikyuriyu1Old != null) {
-            if (!fuSyikyuriyu1New.equals(fuSyikyuriyu1Old)) {
-                return true;
+            int shiharaikingakugoke = div.getCcdKetteiList().getShokanbaraiketteiJohoDiv().getTxtShiharaikingakugoke()
+                    .getValue().intValue();
+            if (shiharaikingakugoke != 決定情報.getShiharaiKingaku()) {
+                flag = true;
             }
-        } else if ((fuSyikyuriyu1New != null && fuSyikyuriyu1Old == null)
-                || (fuSyikyuriyu1New == null && fuSyikyuriyu1Old != null)) {
-            return true;
-        }
-        return false;
-    }
-
-    /**
-     * fuSyikyuriyu2 内容の変更を判断する
-     *
-     * @param fuSyikyuriyu2New RString
-     * @param fuSyikyuriyu2Old RString
-     * @return boolean
-     */
-    public boolean equalFuSyikyuriyu2(RString fuSyikyuriyu2New, RString fuSyikyuriyu2Old) {
-        if (fuSyikyuriyu2New != null && fuSyikyuriyu2Old != null) {
-            if (!fuSyikyuriyu2New.equals(fuSyikyuriyu2Old)) {
-                return true;
+        } else if (決定情報.getShikyuHushikyuKetteiKubun().equals(TWO)) {
+            RString fuSyikyuriyu1 = div.getCcdKetteiList().getShokanbaraiketteiJohoDiv().getTxtFuSyikyuriyu1().getValue();
+            if (!fuSyikyuriyu1.equals(決定情報.getHushikyuRiyu())) {
+                flag = true;
             }
-        } else if ((fuSyikyuriyu2New != null && fuSyikyuriyu2Old == null)
-                || (fuSyikyuriyu2New == null && fuSyikyuriyu2Old != null)) {
-            return true;
+            RString fushikyuriyu2 = div.getCcdKetteiList().getShokanbaraiketteiJohoDiv().getTxtFushikyuriyu2().getValue();
+            if (!fushikyuriyu2.equals(決定情報.getKounyuKaishuRireki())) {
+                flag = true;
+            }
         }
-        return false;
+        List<dgSyokanbaraikete_Row> rowList = div.getCcdKetteiList().getShokanbaraiketteiJohoDiv().getDgSyokanbaraikete().getDataSource();
+        for (int i = 0; i < rowList.size(); i++) {
+            if (償還払決定一覧.get(i).getSagakuKingaku().getValue().intValue() != rowList.get(i).getSagakuKingaku().getValue().intValue()) {
+                flag = true;
+            }
+        }
+        return flag;
     }
 
     /**

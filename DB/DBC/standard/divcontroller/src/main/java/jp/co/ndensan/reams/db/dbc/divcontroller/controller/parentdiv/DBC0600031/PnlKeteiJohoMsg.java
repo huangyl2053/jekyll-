@@ -1,6 +1,6 @@
 /**
- * To change this license header, choose License Headers in Project Properties. To change this template file, choose
- * Tools | Templates and open the template in the editor.
+ * To change this license header, choose License Headers in Project Properties. To change this template file, choose Tools | Templates and open the
+ * template in the editor.
  */
 package jp.co.ndensan.reams.db.dbc.divcontroller.controller.parentdiv.DBC0600031;
 
@@ -10,6 +10,7 @@ import jp.co.ndensan.reams.db.dbc.business.core.basic.ShokanFukushiYoguHanbaihi;
 import jp.co.ndensan.reams.db.dbc.business.core.basic.ShokanHanteiKekka;
 import jp.co.ndensan.reams.db.dbc.business.core.basic.ShokanShukei;
 import jp.co.ndensan.reams.db.dbc.business.core.fukushiyogukonyuhishikyushisei.FukushiYoguKonyuhiShikyuShiseiKetteDivEntity;
+import jp.co.ndensan.reams.db.dbc.business.core.syokanbaraikettejoho.KetteJoho;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.commonchilddiv.ShokanbaraiketteiJoho.ShokanbaraiketteiJoho.ShokanbaraiketteiJohoDiv;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.commonchilddiv.ShokanbaraiketteiJoho.ShokanbaraiketteiJoho.dgSyokanbaraikete_Row;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0600031.DBC0600031StateName;
@@ -55,6 +56,9 @@ public class PnlKeteiJohoMsg {
     private static final RString 業務区分 = new RString("02");
     private static final RString 連番 = new RString("1");
     private static final RString 明細番号 = new RString("0001");
+    private static final ShoKisaiHokenshaNo 証記載保険者番号 = new ShoKisaiHokenshaNo("888888");
+    private static List<dgSyokanbaraikete_Row> 償還払決定一覧;
+    private static KetteJoho 決定情報;
 
     /**
      * onLoad事件
@@ -86,20 +90,8 @@ public class PnlKeteiJohoMsg {
         } else {
             div.getCcdKetteiList().loadInitialize(被保険者番号, サービス年月, 整理番号, 業務区分, モード_照会);
         }
-        ViewStateHolder.put(ViewStateKeys.支払金額合計, div.getCcdKetteiList().getShokanbaraiketteiJohoDiv()
-                .getTxtShiharaikingakugoke().getValue());
-        ViewStateHolder.put(ViewStateKeys.増減理由, div.getCcdKetteiList().getShokanbaraiketteiJohoDiv()
-                .getTxtZogenriyu().getValue());
-        ViewStateHolder.put(ViewStateKeys.増減単位, div.getCcdKetteiList().getShokanbaraiketteiJohoDiv()
-                .getTxtZogentani().getValue().intValue());
-        ViewStateHolder.put(ViewStateKeys.決定日, div.getCcdKetteiList().getShokanbaraiketteiJohoDiv()
-                .getTxtKetebi().getValue());
-        ViewStateHolder.put(ViewStateKeys.支給区分, div.getCcdKetteiList().getShokanbaraiketteiJohoDiv().
-                getRdoShikyukubun().getSelectedKey());
-        ViewStateHolder.put(ViewStateKeys.fuSyikyuriyu1, div.getCcdKetteiList().getShokanbaraiketteiJohoDiv()
-                .getTxtFuSyikyuriyu1().getValue());
-        ViewStateHolder.put(ViewStateKeys.fuSyikyuriyu2, div.getCcdKetteiList().getShokanbaraiketteiJohoDiv()
-                .getTxtFushikyuriyu2().getValue());
+        償還払決定一覧 = div.getCcdKetteiList().getShokanbaraiketteiJohoDiv().getDgSyokanbaraikete().getDataSource();
+        決定情報 = ViewStateHolder.get(jp.co.ndensan.reams.db.dbz.definition.core.ViewStateKeys.決定情報, KetteJoho.class);
         return ResponseData.of(div).respond();
     }
 
@@ -113,7 +105,7 @@ public class PnlKeteiJohoMsg {
         if (モード_削除.equals(ViewStateHolder.get(ViewStateKeys.状態, RString.class))) {
             return ResponseData.of(div).forwardWithEventName(DBC0600031TransitionEventName.一覧に戻る).respond();
         }
-        boolean flag = getHandler(div).is内容変更状態();
+        boolean flag = getHandler(div).is内容変更状態(償還払決定一覧, 決定情報);
         if (flag && (モード_登録.equals(ViewStateHolder.get(ViewStateKeys.状態, RString.class))
                 || モード_修正.equals(ViewStateHolder.get(ViewStateKeys.状態, RString.class)))) {
             if (!ResponseHolder.isReRequest()) {
@@ -146,6 +138,7 @@ public class PnlKeteiJohoMsg {
         RString 整理番号 = ViewStateHolder.get(ViewStateKeys.整理番号, RString.class);
         JigyoshaNo 事業者番号 = ViewStateHolder.get(ViewStateKeys.事業者番号, JigyoshaNo.class);
         RString 様式番号 = ViewStateHolder.get(ViewStateKeys.様式番号, RString.class);
+        ShikibetsuCode 識別コード = ViewStateHolder.get(ViewStateKeys.識別コード, ShikibetsuCode.class);
         if (削除.equals(ViewStateHolder.get(ViewStateKeys.状態, RString.class))) {
             if (!ResponseHolder.isReRequest()) {
                 return ResponseData.of(div).addMessage(UrQuestionMessages.削除の確認.getMessage()).respond();
@@ -154,7 +147,7 @@ public class PnlKeteiJohoMsg {
                     getMessageCode())
                     && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
                 FukushiyoguKonyuhiShikyuShinsei fukuShinsei = new FukushiyoguKonyuhiShikyuShinsei();
-                fukuShinsei.delete(被保険者番号, サービス年月, 整理番号, 事業者番号, 様式番号, null);
+                fukuShinsei.delete(被保険者番号, サービス年月, 整理番号, 事業者番号, 様式番号, 識別コード);
                 div.getCcdMessage().setMessage(new RString(UrInformationMessages.保存終了.getMessage().evaluate()),
                         RString.EMPTY, RString.EMPTY, true);
                 return ResponseData.of(div).setState(DBC0600031StateName.successSaved);
@@ -193,7 +186,7 @@ public class PnlKeteiJohoMsg {
         if (adiv.getTxtKetebi().getValue() == null) {
             return ResponseData.of(div).addValidationMessages(getHandler(div).getCheckMessage()).respond();
         }
-        boolean flag = getHandler(div).is内容変更状態();
+        boolean flag = getHandler(div).is内容変更状態(償還払決定一覧, 決定情報);
         if (!flag) {
             if (!ResponseHolder.isReRequest()) {
                 return ResponseData.of(div).addMessage(DbzInformationMessages.内容変更なしで保存不可.getMessage()).respond();
@@ -222,15 +215,16 @@ public class PnlKeteiJohoMsg {
                         .set増減理由等(div.getCcdKetteiList().getShokanbaraiketteiJohoDiv()
                                 .getTxtZogenriyu().getValue())
                         .set不支給理由等(new RString(div.getCcdKetteiList().getShokanbaraiketteiJohoDiv().getTxtFuSyikyuriyu1().
-                                        getValue().toString() + div.getCcdKetteiList().getShokanbaraiketteiJohoDiv()
+                                        getValue().toString()))
+                        .set購入_改修履歴等(new RString(div.getCcdKetteiList().getShokanbaraiketteiJohoDiv()
                                         .getTxtFushikyuriyu2().getValue().toString()))
                         .build();
 
                 // 3036
                 ShokanHanteiKekka shokanhanteikekka = new ShokanHanteiKekka(被保険者番号, サービス年月, 整理番号)
                         .createBuilderForEdit()
-                        //TODO画面の保険者の選択値
-                        .set証記載保険者番号(new ShoKisaiHokenshaNo("888888"))
+                        //TODO画面に「保険者の選択値」を取得できない 、「888888」で固定
+                        .set証記載保険者番号(証記載保険者番号)
                         .set決定年月日(new FlexibleDate(div.getCcdKetteiList().getShokanbaraiketteiJohoDiv()
                                         .getTxtKetebi().getValue().toString()))
                         .set支給_不支給決定区分(div.getCcdKetteiList().getShokanbaraiketteiJohoDiv().

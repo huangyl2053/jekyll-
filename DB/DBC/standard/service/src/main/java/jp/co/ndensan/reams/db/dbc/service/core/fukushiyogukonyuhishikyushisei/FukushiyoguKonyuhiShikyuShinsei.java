@@ -538,6 +538,7 @@ public class FukushiyoguKonyuhiShikyuShinsei {
      * @param 整理番号 整理番号
      * @param 事業者番号 事業者番号
      * @param 様式番号 様式番号
+     * @param 識別コード ShikibetsuCode
      * @param 明細番号 明細番号
      */
     @Transaction
@@ -547,7 +548,7 @@ public class FukushiyoguKonyuhiShikyuShinsei {
             RString 整理番号,
             JigyoshaNo 事業者番号,
             RString 様式番号,
-            RString 明細番号) {
+            ShikibetsuCode 識別コード) {
         ShokanKihon 償還払請求基本Entity = getShokanSeikyuKihon(被保険者番号, サービス提供年月, 整理番号,
                 事業者番号, 様式番号, MEISAINO_0001);
         List<ShokanFukushiYoguHanbaihi> 償還払請求福祉用具販売費リスト = getShokanFukushiYoguHanbaihi(
@@ -724,14 +725,12 @@ public class FukushiyoguKonyuhiShikyuShinsei {
                 償還払支給判定結果Dac.save(データ);
                 修正前支給区分 = データ.getShikyuHushikyuKetteiKubun();
             }
-            DbT3053ShokanShukeiEntity dbT3053Entity = 償還払請求集計Dac.selectByKey(
+            SyokanbaraiketteJohoParameter parameter = SyokanbaraiketteJohoParameter.createMybatisParam(
                     福祉用具購入費支給申請決定情報画面.get償還払集計().get被保険者番号(),
                     福祉用具購入費支給申請決定情報画面.get償還払集計().getサービス提供年月(),
-                    福祉用具購入費支給申請決定情報画面.get償還払集計().get整理番号(),
-                    福祉用具購入費支給申請決定情報画面.get償還払集計().get事業者番号(),
-                    福祉用具購入費支給申請決定情報画面.get償還払集計().get様式番号(),
-                    福祉用具購入費支給申請決定情報画面.get償還払集計().get明細番号(),
-                    福祉用具購入費支給申請決定情報画面.get償還払集計().get連番());
+                    福祉用具購入費支給申請決定情報画面.get償還払集計().get整理番号()
+            );
+            DbT3053ShokanShukeiEntity dbT3053Entity = 償還払請求集計Dac.select償還払請求集計(parameter);
             if (null == dbT3053Entity) {
                 DbT3053ShokanShukeiEntity dbT3053_Entity = new DbT3053ShokanShukeiEntity();
                 dbT3053_Entity.setHiHokenshaNo(福祉用具購入費支給申請決定情報画面.get償還払集計().get被保険者番号());
@@ -752,6 +751,7 @@ public class FukushiyoguKonyuhiShikyuShinsei {
                 dbT3053Entity.setSeikyugakuSagakuKingaku(福祉用具購入費支給申請決定情報画面.get償還払集計().get請求額差額金額());
                 dbT3053Entity.setZougenRiyu(福祉用具購入費支給申請決定情報画面.get償還払集計().get増減理由等());
                 dbT3053Entity.setHushikyuRiyu(福祉用具購入費支給申請決定情報画面.get償還払集計().get不支給理由等());
+                dbT3053Entity.setKounyuKaishuRireki(福祉用具購入費支給申請決定情報画面.get償還払集計().get購入_改修履歴等());
                 dbT3053Entity.setState(EntityDataState.Modified);
                 償還払請求集計Dac.save(dbT3053Entity);
             }
