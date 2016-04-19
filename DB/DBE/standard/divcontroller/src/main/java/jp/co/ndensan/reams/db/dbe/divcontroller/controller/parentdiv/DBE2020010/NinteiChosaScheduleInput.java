@@ -99,9 +99,9 @@ public class NinteiChosaScheduleInput {
     private RString temp_連絡先2;
     private RString temp_対象者メモ;
     private RString temp_申請者管理番号1;
-    private static RString temp_申請者管理番号2;
-    private static RString temp_申請者管理番号3;
-    private static RString temp_対象者区分;
+    private RString temp_申請者管理番号2;
+    private RString temp_申請者管理番号3;
+    private RString temp_対象者区分;
     //この仕様書のtemp_変量使用しない
 //    private RString temp_認定調査予定開始時間;
 //    private RString temp_認定調査予定終了時間;
@@ -119,9 +119,10 @@ public class NinteiChosaScheduleInput {
 
         if (!画面ステート_1.equals(ViewStateHolder.get(ViewStateKeys.認定調査スケジュール登録10_対象者を検索するモード, RString.class))) {
             initializeTemp変数();
-            setTemp変数();
+            setTemp変数(div);
         } else {
             RString 申請者管理番号 = ViewStateHolder.get(ViewStateKeys.認定調査スケジュール登録_申請書管理番号3, RString.class);
+            div.setShinseishoKanriNo3(申請者管理番号);
             set対象者個人基本情報Temp変数(申請者管理番号);
         }
         getHandler(div).onLoad(temp_申請者管理番号3, temp_認定調査員名称, temp_認定調査委託先名称, temp_予約可否, temp_備考, temp_予約状況,
@@ -148,13 +149,15 @@ public class NinteiChosaScheduleInput {
 //        temp_編集状態 = new RString("0");
     }
 
-    private void setTemp変数() {
+    private void setTemp変数(NinteiChosaScheduleInputDiv div) {
         temp_画面ステート = ViewStateHolder.get(ViewStateKeys.認定調査スケジュール登録_モード, RString.class);
         temp_遷移元画面番号 = ViewStateHolder.get(ViewStateKeys.認定調査スケジュール登録_画面番号, RString.class);
         if (画面ステート_1.equals(temp_画面ステート) && 遷移元画面番号_2.equals(temp_遷移元画面番号)) {
             temp_申請者管理番号1 = ViewStateHolder.get(ViewStateKeys.認定調査スケジュール登録_申請書管理番号2, RString.class);
             temp_申請者管理番号2 = temp_申請者管理番号1;
             temp_申請者管理番号3 = temp_申請者管理番号1;
+            div.setShinseishoKanriNo2(temp_申請者管理番号2);
+            div.setShinseishoKanriNo3(temp_申請者管理番号3);
             set調査員情報Temp変数();
             set対象者調査基本情報Temp変数();
             set対象者個人基本情報Temp変数(temp_申請者管理番号3);
@@ -163,6 +166,8 @@ public class NinteiChosaScheduleInput {
             temp_申請者管理番号1 = ViewStateHolder.get(ViewStateKeys.認定調査スケジュール登録_申請書管理番号3, RString.class);
             temp_申請者管理番号3 = temp_申請者管理番号1;
             temp_対象者区分 = ViewStateHolder.get(ViewStateKeys.認定調査スケジュール登録_対象者区分, RString.class);
+            div.setShinseishoKanriNo3(temp_申請者管理番号3);
+            div.setTayisyousyaKubun(temp_対象者区分);
             set対象者調査基本情報Temp変数();
             set対象者個人基本情報Temp変数(temp_申請者管理番号3);
         }
@@ -171,6 +176,9 @@ public class NinteiChosaScheduleInput {
             temp_申請者管理番号2 = temp_申請者管理番号1;
             temp_申請者管理番号3 = temp_申請者管理番号1;
             temp_対象者区分 = new RString("0");
+            div.setShinseishoKanriNo2(temp_申請者管理番号2);
+            div.setShinseishoKanriNo3(temp_申請者管理番号3);
+            div.setTayisyousyaKubun(temp_対象者区分);
             set調査員情報Temp変数();
             set対象者調査基本情報Temp変数();
             set対象者個人基本情報Temp変数(temp_申請者管理番号3);
@@ -180,6 +188,9 @@ public class NinteiChosaScheduleInput {
             temp_申請者管理番号2 = temp_申請者管理番号1;
             temp_申請者管理番号3 = ViewStateHolder.get(ViewStateKeys.認定調査スケジュール登録_申請書管理番号3, RString.class);
             temp_対象者区分 = ViewStateHolder.get(ViewStateKeys.認定調査スケジュール登録_対象者区分, RString.class);
+            div.setShinseishoKanriNo2(temp_申請者管理番号2);
+            div.setShinseishoKanriNo3(temp_申請者管理番号3);
+            div.setTayisyousyaKubun(temp_対象者区分);
             set調査員情報Temp変数();
             set対象者調査基本情報Temp変数();
             set対象者個人基本情報Temp変数(temp_申請者管理番号3);
@@ -330,6 +341,7 @@ public class NinteiChosaScheduleInput {
      * @return ResponseData<NinteiChosaScheduleShosaiDiv>
      */
     public ResponseData<NinteiChosaScheduleInputDiv> onClick_BtnZenkayiJyoho(NinteiChosaScheduleInputDiv div) {
+        temp_申請者管理番号3 = div.getShinseishoKanriNo3();
         if (!RString.isNullOrEmpty(temp_申請者管理番号3)) {
             ShinseiRirekiJoho shinseiRirekiJoho = NinteiChosaScheduleInputManager.createInstance()
                     .get前回情報(new ShinseishoKanriNo(temp_申請者管理番号3));
@@ -408,6 +420,9 @@ public class NinteiChosaScheduleInput {
     public ResponseData<NinteiChosaScheduleInputDiv> onClick_BtnHozon(NinteiChosaScheduleInputDiv div) {
         ValidationMessageControlPairs validationMessages = new ValidationMessageControlPairs();
         画面ステート = ViewStateHolder.get(ViewStateKeys.認定調査スケジュール登録_モード, RString.class);
+        temp_申請者管理番号2 = div.getShinseishoKanriNo2();
+        temp_申請者管理番号3 = div.getShinseishoKanriNo3();
+        temp_対象者区分 = div.getTayisyousyaKubun();
         if (画面ステート_2.equals(画面ステート)) {
             validationMessages = getValidationHandler(div).スケジュール照会のため保存できませんチェック();
             return ResponseData.of(div).addValidationMessages(validationMessages).respond();

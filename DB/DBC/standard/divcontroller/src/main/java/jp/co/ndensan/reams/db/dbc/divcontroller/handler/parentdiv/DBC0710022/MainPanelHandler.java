@@ -43,7 +43,6 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 public final class MainPanelHandler {
 
     private final MainPanelDiv div;
-    private static final RDate システム日時 = RDate.getNowDate();
     private static final RString 受託なし = new RString("1");
     private static final RString 受託あり = new RString("2");
 
@@ -196,7 +195,7 @@ public final class MainPanelHandler {
         ShokanShinsei dbt3034 = new ShokanShinsei(被保険者番号, サービス年月, 整理番号);
 
         RString 国保連共同処理受託区分_償還 = DbBusinessConifg.get(
-                ConfigNameDBC.国保連共同処理受託区分_償還, システム日時, SubGyomuCode.DBC介護給付);
+                ConfigNameDBC.国保連共同処理受託区分_償還, RDate.getNowDate(), SubGyomuCode.DBC介護給付);
         if (受託なし.equals(国保連共同処理受託区分_償還)) {
             dbt3034 = dbt3034.createBuilderForEdit().set支給申請審査区分(ShikyushinseiShinsaKubun.審査済.getコード()).
                     set審査方法区分(ShinsaHohoKubun.審査済み.getコード()).

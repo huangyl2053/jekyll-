@@ -5,6 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbc.divcontroller.handler.parentdiv.DBC0700011;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -305,44 +306,8 @@ public final class JutakuKaishuJizenShinseiTorokuDivHandler {
             JyutakugaisyunaiyoListDataPassModel model = new JyutakugaisyunaiyoListDataPassModel();
             model.set被保険者番号(被保険者番号);
             model.set状態(状態_登録);
-            // TODO
-//            model.set住所クラス(new IJusho() {
-//
-//                @Override
-//                public KannaiKangaiKubunType get管内管外() {
-//                    throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-//                }
-//
-//                @Override
-//                public ChoikiCode get町域コード() {
-//                    throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-//                }
-//
-//                @Override
-//                public ZenkokuJushoCode get全国住所コード() {
-//                    throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-//                }
-//
-//                @Override
-//                public YubinNo get郵便番号() {
-//                    throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-//                }
-//
-//                @Override
-//                public RString get住所() {
-//                    throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-//                }
-//
-//                @Override
-//                public Banchi get番地() {
-//                    throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-//                }
-//
-//                @Override
-//                public Katagaki get方書() {
-//                    throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-//                }
-//            });
+            // TODO QAのNo.664 項目「住所クラス」の設定値は確認中
+            model.set住所クラス(new _Jusho());
             div.getKaigoShikakuKihonShaPanel().getTabShinseiContents().getTabJutakuKaisyuJyoho()
                     .getCcdJutakuJizenShinseiDetail().initialize(model);
             ShiharaiKekkaResult result = JutakuKaishuJizenShinsei.createInstance()
@@ -362,43 +327,7 @@ public final class JutakuKaishuJizenShinseiTorokuDivHandler {
             model.set整理番号(seiriNo);
             model.set様式番号(yoshikiNo);
             model.set状態((照会モード.equals(画面モード) || 削除モード.equals(画面モード)) ? 状態_参照 : 状態_登録);
-//            model.set住所クラス(new IJusho() {
-//
-//                @Override
-//                public KannaiKangaiKubunType get管内管外() {
-//                    throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-//                }
-//
-//                @Override
-//                public ChoikiCode get町域コード() {
-//                    throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-//                }
-//
-//                @Override
-//                public ZenkokuJushoCode get全国住所コード() {
-//                    throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-//                }
-//
-//                @Override
-//                public YubinNo get郵便番号() {
-//                    throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-//                }
-//
-//                @Override
-//                public RString get住所() {
-//                    throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-//                }
-//
-//                @Override
-//                public Banchi get番地() {
-//                    throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-//                }
-//
-//                @Override
-//                public Katagaki get方書() {
-//                    throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-//                }
-//            });
+            model.set住所クラス(new _Jusho());
             div.getKaigoShikakuKihonShaPanel().getTabShinseiContents().getTabJutakuKaisyuJyoho()
                     .getCcdJutakuJizenShinseiDetail().initialize(model);
             ShiharaiKekkaResult result = JutakuKaishuJizenShinsei.createInstance()
@@ -586,7 +515,8 @@ public final class JutakuKaishuJizenShinseiTorokuDivHandler {
                 .getTotalPanel().getTxtRiyoshaFutanAmountNow().getValue());
         parameter.set住宅改修住宅住所(div.getKaigoShikakuKihonShaPanel().getShinseishaInfo().getTxtAddress().getDomain().value());
 
-        JutakuKaishuJizenShinseiTsuchishoManager.createInstance().createJutakuKaishuJizenShinseiTsuchisho(parameter);
+        // TODO 疎通のため、コメント化になる。
+//        JutakuKaishuJizenShinseiTsuchishoManager.createInstance().createJutakuKaishuJizenShinseiTsuchisho(parameter);
     }
 
     /**
@@ -960,15 +890,15 @@ public final class JutakuKaishuJizenShinseiTorokuDivHandler {
             更新データの設定(builder);
             updateData = builder.build();
 
-            // TODO
+            // TODO 共有子DIVのデータと元Entityのmapperは確認中
             Models<ShokanJutakuKaishuIdentifier, ShokanJutakuKaishu> data = ViewStateHolder
                     .get(ViewStateKeys.住宅改修内容一覧_検索結果, Models.class);
             List<ShokanJutakuKaishu> kaishuList = new ArrayList<>();
-            for (ShokanJutakuKaishu tmp : data.aliveValues()) {
-                ShokanJutakuKaishuBuilder shokanJutakuKaishuBuilder = tmp.createBuilderForEdit();
-
-                kaishuList.add(shokanJutakuKaishuBuilder.build());
-            }
+//            for (ShokanJutakuKaishu tmp : data.aliveValues()) {
+//                ShokanJutakuKaishuBuilder shokanJutakuKaishuBuilder = tmp.createBuilderForEdit();
+//
+//                kaishuList.add(shokanJutakuKaishuBuilder.build());
+//            }
             return JutakuKaishuJizenShinsei.createInstance().updDBDate(updateData, kaishuList, 画面モード);
         }
     }
@@ -994,16 +924,20 @@ public final class JutakuKaishuJizenShinseiTorokuDivHandler {
         builder.set申請者郵便番号(div.getKaigoShikakuKihonShaPanel().getShinseishaInfo().getTxtYubinNo().getValue());
         builder.set申請者住所(div.getKaigoShikakuKihonShaPanel().getShinseishaInfo().getTxtAddress().getDomain().value());
         builder.set申請者電話番号(div.getKaigoShikakuKihonShaPanel().getShinseishaInfo().getTxtTelNo().getDomain());
-        builder.set申請事業者番号(new JigyoshaNo(div.getKaigoShikakuKihonShaPanel().getShinseishaInfo()
-                .getTxtJigyoshaNo().getValue()));
+        //  事業者番号は正常設定できない
+        builder.set申請事業者番号(new JigyoshaNo("9"));
+//        builder.set申請事業者番号(new JigyoshaNo(div.getKaigoShikakuKihonShaPanel().getShinseishaInfo()
+//                .getTxtJigyoshaNo().getValue()));
         builder.set理由書作成日(new FlexibleDate(div.getKaigoShikakuKihonShaPanel().getJutakuKaishuJizenShinseiReason()
                 .getTxtCreateYMD().getValue().toDateString()));
         builder.set理由書作成者(div.getKaigoShikakuKihonShaPanel().getJutakuKaishuJizenShinseiReason()
                 .getTxtCreatorName().getDomain().value());
         builder.set理由書作成者カナ(div.getKaigoShikakuKihonShaPanel().getJutakuKaishuJizenShinseiReason()
                 .getTxtCreatorKanaName().getDomain().value());
-        builder.set理由書作成事業者番号(new JigyoshaNo(div.getKaigoShikakuKihonShaPanel().getJutakuKaishuJizenShinseiReason()
-                .getTxtCreationJigyoshaNo().getValue()));
+        //  事業者番号は正常設定できない
+        builder.set理由書作成事業者番号(new JigyoshaNo("9"));
+//        builder.set理由書作成事業者番号(new JigyoshaNo(div.getKaigoShikakuKihonShaPanel().getJutakuKaishuJizenShinseiReason()
+//                .getTxtCreationJigyoshaNo().getValue()));
         // TODO
         builder.set住宅所有者(div.getKaigoShikakuKihonShaPanel().getTabShinseiJyoho().getTxtJutakuOwner().getValue());
         builder.set被保険者との関係(div.getKaigoShikakuKihonShaPanel().getTabShinseiJyoho()
@@ -1034,14 +968,15 @@ public final class JutakuKaishuJizenShinseiTorokuDivHandler {
             builder.set不承認理由(div.getKaigoShikakuKihonShaPanel().getTabShinseiContents().getTabShinsaKakka()
                     .getTxtFushoninReason().getValue());
         }
-        builder.set給付額等_費用額合計(div.getKaigoShikakuKihonShaPanel().getTabShinseiContents().getTabJutakuKaisyuJyoho()
-                .getTotalPanel().getTxtHiyoTotalNow().getValue().intValue());
-        builder.set給付額等_保険対象費用額(div.getKaigoShikakuKihonShaPanel().getTabShinseiContents().getTabJutakuKaisyuJyoho()
-                .getTotalPanel().getTxtHokenTaishoHiyoNow().getValue().intValue());
-        builder.set給付額等_利用者自己負担額(div.getKaigoShikakuKihonShaPanel().getTabShinseiContents().getTabJutakuKaisyuJyoho()
-                .getTotalPanel().getTxtRiyoshaFutanAmountNow().getValue().intValue());
-        builder.set給付額等_保険給付費額(div.getKaigoShikakuKihonShaPanel().getTabShinseiContents().getTabJutakuKaisyuJyoho()
-                .getTotalPanel().getTxtHokenKyufuAmountNow().getValue().intValue());
+        // TODO 疎通のため。コメント化になる。
+//        builder.set給付額等_費用額合計(div.getKaigoShikakuKihonShaPanel().getTabShinseiContents().getTabJutakuKaisyuJyoho()
+//                .getTotalPanel().getTxtHiyoTotalNow().getValue().intValue());
+//        builder.set給付額等_保険対象費用額(div.getKaigoShikakuKihonShaPanel().getTabShinseiContents().getTabJutakuKaisyuJyoho()
+//                .getTotalPanel().getTxtHokenTaishoHiyoNow().getValue().intValue());
+//        builder.set給付額等_利用者自己負担額(div.getKaigoShikakuKihonShaPanel().getTabShinseiContents().getTabJutakuKaisyuJyoho()
+//                .getTotalPanel().getTxtRiyoshaFutanAmountNow().getValue().intValue());
+//        builder.set給付額等_保険給付費額(div.getKaigoShikakuKihonShaPanel().getTabShinseiContents().getTabJutakuKaisyuJyoho()
+//                .getTotalPanel().getTxtHokenKyufuAmountNow().getValue().intValue());
 
         if (div.getKaigoShikakuKihonShaPanel().getTabShinseiContents().getTabShinsaKakka()
                 .getJutakuKaishuJizenShoninKetteiTsuchisho().isIsPublish()) {
@@ -1271,5 +1206,48 @@ public final class JutakuKaishuJizenShinseiTorokuDivHandler {
                     .getJutakuKaishuJizenShoninKetteiTsuchisho().getTxtHakkoYMD()
                     .setValue(new RDate(data.get事前申請決定通知発行日().toString()));
         }
+    }
+}
+
+/**
+ * 疎通のため、内部クラス
+ *
+ * @author SE1007
+ */
+class _Jusho implements IJusho, Serializable {
+
+    @Override
+    public KannaiKangaiKubunType get管内管外() {
+        return KannaiKangaiKubunType.管内;
+    }
+
+    @Override
+    public ChoikiCode get町域コード() {
+        return new ChoikiCode("123546");
+    }
+
+    @Override
+    public ZenkokuJushoCode get全国住所コード() {
+        return new ZenkokuJushoCode("789456");
+    }
+
+    @Override
+    public YubinNo get郵便番号() {
+        return new YubinNo("654897");
+    }
+
+    @Override
+    public RString get住所() {
+        return new RString("广島");
+    }
+
+    @Override
+    public Banchi get番地() {
+        return new Banchi();
+    }
+
+    @Override
+    public Katagaki get方書() {
+        return new Katagaki("3698522");
     }
 }

@@ -18,6 +18,8 @@ import jp.co.ndensan.reams.uz.uza.math.Decimal;
 /**
  *
  * 編集後本算定通知書共通情報です。
+ *
+ * @reamsid_L DBB-9020-160 sunhaidi
  */
 @lombok.Getter
 @lombok.Setter

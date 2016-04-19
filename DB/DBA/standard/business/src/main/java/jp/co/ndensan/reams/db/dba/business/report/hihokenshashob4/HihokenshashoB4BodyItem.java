@@ -3,7 +3,6 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package jp.co.ndensan.reams.db.dba.business.report.hihokenshashob4;
 
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -11,14 +10,15 @@ import lombok.Getter;
 import lombok.Setter;
 
 /**
- *
  * 介護保険被保険者証（B4版）BodyEntityリストです。
+ *
  * @reamsid_L DBU-0490-060 dongyabin
  */
 @Getter
 @Setter
 @SuppressWarnings("PMD.UnusedPrivateField")
 public class HihokenshashoB4BodyItem {
+
     private RString yukokigen;
     private RString hihokenshanno;
     private RString yubinno;
@@ -91,9 +91,17 @@ public class HihokenshashoB4BodyItem {
     private RString gyosha;
     private RString todokeYmd1;
     private RString gyosha2;
+    private RString gyosha2Asa;
+    private RString gyosha2Massho;
     private RString todokeYmd2;
+    private RString todokeYmd2Asa1;
+    private RString todokeYmd2Massho1;
     private RString gyosha3;
+    private RString gyosha3Asa;
+    private RString gyosha3Massho;
     private RString todokeYmd3;
+    private RString todokeYmd3Asa1;
+    private RString todokeYmd3Massho1;
     private RString shisetsuSyu1;
     private RString shisetsuname1;
     private RString nyushochk1;
@@ -117,8 +125,12 @@ public class HihokenshashoB4BodyItem {
     private RString kosekiSeibetsu2;
     private RString itakuGyosha1;
     private RString itakuGyosha2;
+    private RString itakuGyosha2Asa;
+    private RString itakuGyosha2Massho;
     private RString itakuGyosha3;
-    
+    private RString itakuGyosha3Asa;
+    private RString itakuGyosha3Massho;
+
     private RString yukokigen2;
     private RString hihokenshanno2;
     private RString yubinno2;
@@ -191,9 +203,17 @@ public class HihokenshashoB4BodyItem {
     private RString gyosha02;
     private RString todokeYmd12;
     private RString gyosha22;
+    private RString gyosha5Asa;
+    private RString gyosha5Massho;
     private RString todokeYmd22;
+    private RString todokeYmd2Asa2;
+    private RString todokeYmd2Massho2;
     private RString gyosha32;
+    private RString gyosha6Asa;
+    private RString gyosha6Massho;
     private RString todokeYmd32;
+    private RString todokeYmd3Asa2;
+    private RString todokeYmd3Massho2;
     private RString shisetsuSyu12;
     private RString shisetsuname12;
     private RString nyushochk12;
@@ -217,6 +237,10 @@ public class HihokenshashoB4BodyItem {
     private RString kosekiSeibetsu22;
     private RString itakuGyosha12;
     private RString itakuGyosha22;
+    private RString itakuGyosha5Asa;
+    private RString itakuGyosha5Massho;
     private RString itakuGyosha32;
+    private RString itakuGyosha6Asa;
+    private RString itakuGyosha6Massho;
 
 }

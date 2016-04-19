@@ -10,6 +10,8 @@ import jp.co.ndensan.reams.db.dbb.entity.db.basic.DbT2015KeisangoJohoEntity;
 
 /**
  * 賦課の情報Entityクラスです。
+ *
+ * @reamsid_L DBB-9050-010 xicongwang
  */
 @lombok.Getter
 @lombok.Setter
