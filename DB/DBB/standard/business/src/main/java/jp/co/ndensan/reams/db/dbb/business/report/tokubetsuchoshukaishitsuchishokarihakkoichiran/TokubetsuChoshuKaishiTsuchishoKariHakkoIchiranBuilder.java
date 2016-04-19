@@ -10,6 +10,8 @@ import jp.co.ndensan.reams.uz.uza.report.ReportEditorJoiner;
 
 /**
  * 特別徴収開始通知書（仮算定）発行一覧表Builder
+ *
+ * @reamsid_L DBB-0790-060 surun
  */
 public class TokubetsuChoshuKaishiTsuchishoKariHakkoIchiranBuilder implements
         ITokubetsuChoshuKaishiTsuchishoKariHakkoIchiranBuilder {

@@ -27,7 +27,6 @@ import jp.co.ndensan.reams.db.dbz.business.core.kaigosofubutsuatesakisource.Kaig
 import jp.co.ndensan.reams.db.dbz.business.report.parts.kaigotoiawasesaki.CompKaigoToiawasesakiSource;
 import jp.co.ndensan.reams.db.dbz.business.report.parts.kaigotoiawasesaki.IKaigoToiawasesakiSourceBuilder;
 import jp.co.ndensan.reams.db.dbz.business.report.util.EditedAtesaki;
-import jp.co.ndensan.reams.db.dbz.service.core.kanri.JushoHenshu;
 import jp.co.ndensan.reams.ur.urz.business.core.ninshosha.Ninshosha;
 import jp.co.ndensan.reams.ur.urz.business.report.parts.ninshosha.NinshoshaSourceBuilderFactory;
 import jp.co.ndensan.reams.ur.urz.entity.report.parts.ninshosha.NinshoshaSource;
@@ -57,6 +56,8 @@ import jp.co.ndensan.reams.uz.uza.util.editor.DecimalFormatter;
 
 /**
  * 介護保険料減免決定通知書PrintService
+ *
+ * @reamsid_L DBB-0740-030 surun
  */
 public class GenmenKetteiTsuchiShoPrintService {
 
@@ -142,7 +143,12 @@ public class GenmenKetteiTsuchiShoPrintService {
     /**
      * setItemsメソッド
      *
+     * @param 発行日 FlexibleDate
+     * @param 文書番号 RString
      * @param 減免決定通知書情報 GenmenKetteiTsuchiShoJoho
+     * @param 通知書定型文 RString
+     * @param 介護問合せ先ソースビルダー IKaigoToiawasesakiSourceBuilder
+     * @param sourceBuilder NinshoshaSource
      * @return List<GenmenKetteiTsuchiShoItem>
      */
     private List<GenmenKetteiTsuchiShoItem> setItems(FlexibleDate 発行日, RString 文書番号,
@@ -161,7 +167,7 @@ public class GenmenKetteiTsuchiShoPrintService {
             item.set期別7(更正前後期割額リスト.get(index).get普徴期別金額更正前());
             item.set期別8(更正前後期割額リスト.get(index).get普徴期別金額更正後());
             item.set随時List(随時リスト.get(index));
-            setBaseItem(item, 減免決定通知書情報, 文書番号, 通知書定型文, 発行日, 介護問合せ先ソースビルダー, sourceBuilder);
+            setBaseItem(item, 減免決定通知書情報, 文書番号, 通知書定型文, 介護問合せ先ソースビルダー, sourceBuilder);
             items.add(item);
         }
 
@@ -173,9 +179,14 @@ public class GenmenKetteiTsuchiShoPrintService {
      *
      * @param item GenmenKetteiTsuchiShoItem
      * @param 減免決定通知書情報 GenmenKetteiTsuchiShoJoho
+     * @param 文書番号 RString
+     * @param 通知書定型文
+     * @param 発行日 FlexibleDate
+     * @param 介護問合せ先ソースビルダー IKaigoToiawasesakiSourceBuilder
+     * @param sourceBuilder NinshoshaSource
      */
     private void setBaseItem(GenmenKetteiTsuchiShoItem item, GenmenKetteiTsuchiShoJoho 減免決定通知書情報,
-            RString 文書番号, RString 通知書定型文, FlexibleDate 発行日, IKaigoToiawasesakiSourceBuilder 介護問合せ先ソースビルダー, NinshoshaSource sourceBuilder) {
+            RString 文書番号, RString 通知書定型文, IKaigoToiawasesakiSourceBuilder 介護問合せ先ソースビルダー, NinshoshaSource sourceBuilder) {
         item.set文書番号(文書番号);
         item.set調定年度(減免決定通知書情報.get減免の情報更正後().get介護賦課().getChoteiNendo().wareki().eraType(EraType.KANJI).toDateString());
         item.set賦課年度(減免決定通知書情報.get減免の情報更正後().get介護賦課().getFukaNendo().wareki().eraType(EraType.KANJI)
@@ -196,7 +207,6 @@ public class GenmenKetteiTsuchiShoPrintService {
                 item.set表示コード１(表示コード.get表示コード１());
                 item.set表示コード２(表示コード.get表示コード２());
                 item.set表示コード３(表示コード.get表示コード３());
-
             }
         }
         item.set通知書番号(減免決定通知書情報.get減免の情報更正後().get介護賦課().getTsuchishoNo().value());
@@ -238,7 +248,6 @@ public class GenmenKetteiTsuchiShoPrintService {
             item.set認証者氏名公印に掛けない(sourceBuilder.ninshoshaShimeiKakenai);
             item.set認証者氏名公印に掛ける(sourceBuilder.ninshoshaShimeiKakeru);
             item.set公印省略(sourceBuilder.koinShoryaku);
-
         }
 
         if (isNotNull(介護問合せ先ソースビルダー)) {
@@ -253,48 +262,44 @@ public class GenmenKetteiTsuchiShoPrintService {
             item.set内線番号(buildSource.naisenNo);
         }
         if (isNotNull(減免決定通知書情報.get宛先()) && isNotNull(減免決定通知書情報.get地方公共団体()) && isNotNull(減免決定通知書情報.get帳票制御共通())) {
-            JushoHenshu jushoHenshu = new JushoHenshu();
-            EditedAtesaki 編集後宛先 = jushoHenshu.create編集後宛先(減免決定通知書情報.get宛先(),
+            EditedAtesaki 編集後宛先 = new EditedAtesaki(減免決定通知書情報.get宛先(),
                     減免決定通知書情報.get地方公共団体(),
-                    減免決定通知書情報.get帳票制御共通());
-            if (isNotNull(編集後宛先)) {
+                    減免決定通知書情報.get帳票制御共通(),
+                    null, null, true, null, null, null, null);
+            if (isNotNull(編集後宛先.getSofubutsuAtesakiSource())) {
                 KaigoSofubutsuAtesakiSource source = 編集後宛先.getSofubutsuAtesakiSource();
-                if (source != null) {
-                    item.set郵便番号No(source.get送付物宛先ソース().yubinNo);
-                    item.set行政区(source.get送付物宛先ソース().gyoseiku);
-                    item.set住所3(source.get送付物宛先ソース().jusho3);
-                    item.set住所(source.get送付物宛先ソース().jushoText);
-                    item.set住所1(source.get送付物宛先ソース().jusho1);
+                item.set郵便番号No(source.get送付物宛先ソース().yubinNo);
+                item.set行政区(source.get送付物宛先ソース().gyoseiku);
+                item.set住所3(source.get送付物宛先ソース().jusho3);
+                item.set住所(source.get送付物宛先ソース().jushoText);
+                item.set住所1(source.get送付物宛先ソース().jusho1);
 
-                    item.set住所2(source.get送付物宛先ソース().jusho2);
-                    item.set方書(source.get送付物宛先ソース().katagakiText);
-                    item.set方書2(source.get送付物宛先ソース().katagaki2);
-                    item.set方書Small2(source.get送付物宛先ソース().katagakiSmall2);
-                    item.set方書1(source.get送付物宛先ソース().katagaki1);
-                    item.set方書Small1(source.get送付物宛先ソース().katagakiSmall1);
-                    item.set右括弧2(source.get送付物宛先ソース().kakkoRight2);
-                    item.set右括弧1(source.get送付物宛先ソース().kakkoRight1);
-                    item.set氏名2(source.get送付物宛先ソース().shimei2);
-                    item.set氏名Small2(source.get送付物宛先ソース().shimeiSmall2);
-                    item.set氏名(source.get送付物宛先ソース().shimeiText);
-                    item.set名称付与2(source.get送付物宛先ソース().meishoFuyo2);
-                    item.set氏名Small1(source.get送付物宛先ソース().shimeiSmall1);
-                    item.set代納区分名(source.get送付物宛先ソース().dainoKubunMei);
-                    item.set氏名1(source.get送付物宛先ソース().shimei1);
-                    item.set名称付与1(source.get送付物宛先ソース().meishoFuyo1);
-                    item.set様分氏名(source.get送付物宛先ソース().samabunShimeiText);
-                    item.set様分氏名Small2(source.get送付物宛先ソース().samabunShimeiSmall2);
-                    item.set様分2(source.get送付物宛先ソース().samaBun2);
-                    item.set左括弧2(source.get送付物宛先ソース().kakkoLeft2);
-                    item.set様分氏名2(source.get送付物宛先ソース().samabunShimei2);
-                    item.set左括弧1(source.get送付物宛先ソース().kakkoLeft1);
-                    item.set様分氏名1(source.get送付物宛先ソース().samabunShimei1);
-                    item.set様分1(source.get送付物宛先ソース().samaBun1);
-                    item.set様分氏名Small1(source.get送付物宛先ソース().samabunShimeiSmall1);
-                    item.setカスタマバーコード(source.get送付物宛先ソース().customerBarCode);
-
-                }
-
+                item.set住所2(source.get送付物宛先ソース().jusho2);
+                item.set方書(source.get送付物宛先ソース().katagakiText);
+                item.set方書2(source.get送付物宛先ソース().katagaki2);
+                item.set方書Small2(source.get送付物宛先ソース().katagakiSmall2);
+                item.set方書1(source.get送付物宛先ソース().katagaki1);
+                item.set方書Small1(source.get送付物宛先ソース().katagakiSmall1);
+                item.set右括弧2(source.get送付物宛先ソース().kakkoRight2);
+                item.set右括弧1(source.get送付物宛先ソース().kakkoRight1);
+                item.set氏名2(source.get送付物宛先ソース().shimei2);
+                item.set氏名Small2(source.get送付物宛先ソース().shimeiSmall2);
+                item.set氏名(source.get送付物宛先ソース().shimeiText);
+                item.set名称付与2(source.get送付物宛先ソース().meishoFuyo2);
+                item.set氏名Small1(source.get送付物宛先ソース().shimeiSmall1);
+                item.set代納区分名(source.get送付物宛先ソース().dainoKubunMei);
+                item.set氏名1(source.get送付物宛先ソース().shimei1);
+                item.set名称付与1(source.get送付物宛先ソース().meishoFuyo1);
+                item.set様分氏名(source.get送付物宛先ソース().samabunShimeiText);
+                item.set様分氏名Small2(source.get送付物宛先ソース().samabunShimeiSmall2);
+                item.set様分2(source.get送付物宛先ソース().samaBun2);
+                item.set左括弧2(source.get送付物宛先ソース().kakkoLeft2);
+                item.set様分氏名2(source.get送付物宛先ソース().samabunShimei2);
+                item.set左括弧1(source.get送付物宛先ソース().kakkoLeft1);
+                item.set様分氏名1(source.get送付物宛先ソース().samabunShimei1);
+                item.set様分1(source.get送付物宛先ソース().samaBun1);
+                item.set様分氏名Small1(source.get送付物宛先ソース().samabunShimeiSmall1);
+                item.setカスタマバーコード(source.get送付物宛先ソース().customerBarCode);
             }
 
         }
@@ -425,7 +430,7 @@ public class GenmenKetteiTsuchiShoPrintService {
     /**
      * set特徴期別金額更正前
      *
-     * @param index int
+     * @param 期 RString
      * @param 減免決定通知書情報 GenmenKetteiTsuchiShoJoho
      * @return Decimal
      */
@@ -452,7 +457,7 @@ public class GenmenKetteiTsuchiShoPrintService {
     /**
      * set特徴期別金額更正後
      *
-     * @param index int
+     * @param 期 RString
      * @param 減免決定通知書情報 GenmenKetteiTsuchiShoJoho
      * @return Decimal
      */

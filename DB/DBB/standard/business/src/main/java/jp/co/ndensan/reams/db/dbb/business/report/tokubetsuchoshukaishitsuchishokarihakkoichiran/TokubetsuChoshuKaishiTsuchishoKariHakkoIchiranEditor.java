@@ -9,6 +9,8 @@ import jp.co.ndensan.reams.db.dbb.entity.report.tokubetsuchoshukaishitsuchishoka
 
 /**
  * 特別徴収開始通知書（仮算定）発行一覧表Editor
+ *
+ * @reamsid_L DBB-0790-060 surun
  */
 public class TokubetsuChoshuKaishiTsuchishoKariHakkoIchiranEditor implements ITokubetsuChoshuKaishiTsuchishoKariHakkoIchiranEditor {
 

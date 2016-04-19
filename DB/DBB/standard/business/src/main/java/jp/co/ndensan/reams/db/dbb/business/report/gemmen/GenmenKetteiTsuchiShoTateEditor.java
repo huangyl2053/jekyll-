@@ -9,6 +9,8 @@ import jp.co.ndensan.reams.db.dbb.entity.report.gemmen.KaigoHokenryoGenmenKettei
 
 /**
  * 介護保険料減免決定通知書 A4縦タイプEditor
+ *
+ * @reamsid_L DBB-0740-030 surun
  */
 public class GenmenKetteiTsuchiShoTateEditor implements IGenmenKetteiTsuchiShoTateEditor {
 
@@ -63,10 +65,10 @@ public class GenmenKetteiTsuchiShoTateEditor implements IGenmenKetteiTsuchiShoTa
         source.denshiKoin = item.get電子公印();
         source.ninshoshaYakushokuMei = item.get認証者役職名();
         // TODO ninshoshaYakushokuMei1 認証者役職名1
-        //source.ninshoshaYakushokuMei = item.get認証者役職名1();
+//        source.ninshoshaYakushokuMei1 = item.get認証者役職名1();
         source.koinMojiretsu = item.get公印文字列();
         // TODO ninshoshaYakushokuMei2 認証者役職名2
-        //source.ninshoshaYakushokuMei2 = item.get認証者役職名2();
+//        source.ninshoshaYakushokuMei2 = item.get認証者役職名2();
         source.ninshoshaShimeiKakenai = item.get認証者氏名公印に掛けない();
         source.ninshoshaShimeiKakeru = item.get認証者氏名公印に掛ける();
         source.yubinBango = item.get郵便番号Bango();
@@ -110,4 +112,5 @@ public class GenmenKetteiTsuchiShoTateEditor implements IGenmenKetteiTsuchiShoTa
         // TODO 様方
         return source;
     }
+
 }
