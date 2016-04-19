@@ -6,9 +6,7 @@
 package jp.co.ndensan.reams.db.dbb.service.honsanteiidokanendofukakakutei;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import jp.co.ndensan.reams.db.dbb.business.core.kanri.KoseiTsukiHantei;
 import jp.co.ndensan.reams.db.dbb.business.honsanteiidokanendofukakakutei.KanendoIdoFukaKakutei;
 import jp.co.ndensan.reams.db.dbb.definition.core.choshuhoho.ChoshuHohoKibetsu;
@@ -32,9 +30,6 @@ import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7022ShoriDateKanriEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.UrT0705ChoteiKyotsuEntity;
 import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT7022ShoriDateKanriDac;
 import jp.co.ndensan.reams.db.dbz.persistence.db.basic.UrT0705ChoteiKyotsuDac;
-import jp.co.ndensan.reams.ur.urc.entity.db.basic.shuno.chotei.UrT0706ChoteigakuUchiwakeEntity;
-import jp.co.ndensan.reams.ur.urc.entity.db.basic.shuno.chotei.UrT0707ChoteiJokyoEntity;
-import jp.co.ndensan.reams.ur.urc.entity.db.basic.shuno.shunokanri.UrT0700ShunoKanriEntity;
 import jp.co.ndensan.reams.ur.urz.business.core.association.Association;
 import jp.co.ndensan.reams.ur.urz.service.core.association.AssociationFinderFactory;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
@@ -62,9 +57,6 @@ public class HonsanteiIdoKanendoFukaKakutei {
     private static final RString 連番 = new RString("0001");
     private static final RString 処理枝番 = new RString("0001");
     private static final RString FORMAT = new RString("%04d");
-    private static final RString SHUNOID = new RString("shunoId");
-    private static final RString CHOTEIJOKYOID = new RString("choteiJokyoId");
-    private static final RString CHOTEIID = new RString("choteiId");
     private static final SubGyomuCode サブ業務コード = new SubGyomuCode("DBB");
     private static final int NUM_1 = 1;
     private static final int NUM_2 = 2;
@@ -262,49 +254,7 @@ public class HonsanteiIdoKanendoFukaKakutei {
      */
     @Transaction
     public void deleteFuka(List<KanendoIdoFukaKakutei> fukaKakuteiList, boolean deleteFlag) {
-        IFukaKakuteiMapper mapper = mapperProvider.create(IFukaKakuteiMapper.class);
         for (KanendoIdoFukaKakutei fukaKakutei : fukaKakuteiList) {
-            FukaKakuteiParameter parameter = new FukaKakuteiParameter(
-                    fukaKakutei.get調定年度(),
-                    fukaKakutei.get賦課年度(),
-                    fukaKakutei.get通知書番号(),
-                    fukaKakutei.get履歴番号(),
-                    0,
-                    null,
-                    null);
-            Map<String, Object> deleteParameter = new HashMap<>();
-            List<UrT0700ShunoKanriEntity> shunoKanriList = mapper.select収納管理マスタ(parameter);
-            if (shunoKanriList != null) {
-                for (UrT0700ShunoKanriEntity shunoKanriEntity : shunoKanriList) {
-                    deleteParameter.put(SHUNOID.toString(), shunoKanriEntity.getShunoId());
-                    mapper.delete収納管理マスタ(deleteParameter);
-                }
-            }
-
-            List<UrT0707ChoteiJokyoEntity> choteiJokyoList = mapper.select調定状況(parameter);
-            if (choteiJokyoList != null) {
-                for (UrT0707ChoteiJokyoEntity choteiJokyoEntity : choteiJokyoList) {
-                    deleteParameter.put(CHOTEIJOKYOID.toString(), choteiJokyoEntity.getChoteiJokyoId());
-                    mapper.delete調定状況(deleteParameter);
-                }
-            }
-
-            List<UrT0706ChoteigakuUchiwakeEntity> choteigakuUchiwakeList = mapper.select調定額内訳(parameter);
-            if (choteigakuUchiwakeList != null) {
-                for (UrT0706ChoteigakuUchiwakeEntity choteigakuUchiwakeEntity : choteigakuUchiwakeList) {
-                    deleteParameter.put(CHOTEIID.toString(), choteigakuUchiwakeEntity.getChoteiId());
-                    mapper.delete調定額内訳(deleteParameter);
-                }
-            }
-
-            List<UrT0705ChoteiKyotsuEntity> choteiKyotsuList = mapper.select調定共通(parameter);
-            if (choteiKyotsuList != null) {
-                for (UrT0705ChoteiKyotsuEntity choteiKyotsuEntity : choteiKyotsuList) {
-                    choteiKyotsuEntity.setState(EntityDataState.Deleted);
-                    choteiKyotsuDac.deletePhysicalBy(choteiKyotsuEntity);
-                }
-            }
-
             DbT2002FukaEntity fukaEntity = fukaDac.selectByKey(
                     fukaKakutei.get調定年度(),
                     fukaKakutei.get賦課年度(),
