@@ -27,7 +27,7 @@ public class ShikakushashoBodyEditor implements IShikakushashoEditor {
     private static final int NOCOUNT_6 = 6;
     private static final RString SHINSEICHU_1 = new RString("1");
     private static final RString SHINSEICHU_2 = new RString("2");
-    private static final RString HOUSI = new RString("*");
+    private static final RString HOUSI = new RString("＊");
 
     private final ShikakushashoBodyItem item;
 
@@ -171,7 +171,6 @@ public class ShikakushashoBodyEditor implements IShikakushashoEditor {
         source.shisetsuNyuin1 = item.getShisetsuNyuin();
         source.shisetsuTaisho1 = item.getShisetsuTaisho();
         source.shisetsuTaiin1 = item.getShisetsuTaiin();
-        source.nyushoShisetsuShurui2 = item.getNyushoShisetsuShurui();
         source.shisetsuNyusho2 = item.getShisetsuNyusho();
         source.shisetsuNyuin2 = item.getShisetsuNyuin();
         source.shisetsuTaisho2 = item.getShisetsuTaisho();
