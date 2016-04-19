@@ -5,7 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbu.divcontroller.controller.parentdiv.DBU0520011;
 
-import jp.co.ndensan.reams.db.dbu.definition.core.kyokaisogaitoshabatchparameter.KyokaisoKanriMasterListBatchParameter;
+import jp.co.ndensan.reams.db.dbu.definition.batchprm.kyokaisogaitoshabatchparameter.KyokaisoKanriMasterListBatchParameter;
 import jp.co.ndensan.reams.db.dbu.divcontroller.entity.parentdiv.DBU0520011.KyokaisouKanriMasterListPanelDiv;
 import jp.co.ndensan.reams.db.dbu.divcontroller.handler.parentdiv.DBU0520011.KyokaisouKanriMasterListPanelHandler;
 import jp.co.ndensan.reams.db.dbu.divcontroller.handler.parentdiv.DBU0520011.KyokaisouKanriMasterListValidatisonHandler;
