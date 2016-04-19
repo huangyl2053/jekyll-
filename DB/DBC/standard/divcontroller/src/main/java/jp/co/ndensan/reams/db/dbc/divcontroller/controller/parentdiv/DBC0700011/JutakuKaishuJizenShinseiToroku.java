@@ -392,13 +392,12 @@ public class JutakuKaishuJizenShinseiToroku {
         boolean 入力チェック結果 = handler.入力チェック(state, hihokenshaNo);
         if (入力チェック結果) {
             if (!ResponseHolder.isReRequest()) {
-                // TODO メッセージ未定
                 QuestionMessage message = new QuestionMessage(
-                        DbcQuestionMessages.要介護状態区分変更_限度額リセット対象.getMessage().getCode(),
-                        DbcQuestionMessages.要介護状態区分変更_限度額リセット対象.getMessage().evaluate());
+                        DbcQuestionMessages.旧措置者_保存確認.getMessage().getCode(),
+                        DbcQuestionMessages.旧措置者_保存確認.getMessage().evaluate());
                 return ResponseData.of(div).addMessage(message).respond();
             }
-            if (new RString(DbcErrorMessages.対象年月被保険者データなし.getMessage().getCode())
+            if (new RString(DbcQuestionMessages.旧措置者_保存確認.getMessage().getCode())
                     .equals(ResponseHolder.getMessageCode())
                     && ResponseHolder.getButtonType() == MessageDialogSelectedResult.No) {
                 return ResponseData.of(div).respond();

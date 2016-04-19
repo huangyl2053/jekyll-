@@ -10,7 +10,6 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbc.business.core.basic.ShokanJutakuKaishu;
-import jp.co.ndensan.reams.db.dbc.business.core.basic.ShokanJutakuKaishuBuilder;
 import jp.co.ndensan.reams.db.dbc.business.core.basic.ShokanJutakuKaishuIdentifier;
 import jp.co.ndensan.reams.db.dbc.business.core.basic.ShokanJutakuKaishuJizenShinsei;
 import jp.co.ndensan.reams.db.dbc.business.core.basic.ShokanJutakuKaishuJizenShinseiBuilder;
@@ -31,7 +30,6 @@ import jp.co.ndensan.reams.db.dbc.service.core.jutakukaishujyusyo.JutakuKaishuJy
 import jp.co.ndensan.reams.db.dbc.service.core.jutakukaishusikyushinsei.JutakuKaishuShikyuGendogakuHantei;
 import jp.co.ndensan.reams.db.dbc.service.core.jutakukaishuyaokaigojyotaisandannkaihantei.JutakuKaishuYaokaigoJyotaiSandannkaiHanteiManager;
 import jp.co.ndensan.reams.db.dbc.service.jutakukaishujizenshinsei.JutakuKaishuJizenShinsei;
-import jp.co.ndensan.reams.db.dbc.service.report.jutakukaishujizenshinseitsuchisho.JutakuKaishuJizenShinseiTsuchishoManager;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBC;
 import jp.co.ndensan.reams.db.dbx.definition.core.enumeratedtype.YoKaigoJotaiKubun;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
@@ -543,16 +541,14 @@ public final class JutakuKaishuJizenShinseiTorokuDivHandler {
         要介護認定状態区分コードリスト.add(YoKaigoJotaiKubun.要介護4.getCode());
         要介護認定状態区分コードリスト.add(YoKaigoJotaiKubun.要介護5.getCode());
         if (!要介護認定状態区分コードリスト.contains(要介護認定状態区分コード.getKey())) {
-            // TODO DBCErrorMessages．要介護状態になっていないため、事前申請できません。
-            throw new ApplicationException(UrErrorMessages.必須.getMessage().replace(申請取消事由.toString()));
+            throw new ApplicationException(DbcErrorMessages.要介護状態_事前申請不可.getMessage());
         }
 
         if (YoKaigoJotaiKubun.非該当.getCode().equals(要介護認定状態区分コード.getKey())) {
             if (result.is旧措置者フラグ()) {
                 return true;
             } else {
-                // TODO DBCErrorMessages．要介護状態になっていないため、事前申請できません。
-                throw new ApplicationException(UrErrorMessages.必須.getMessage().replace(申請取消事由.toString()));
+                throw new ApplicationException(DbcErrorMessages.要介護状態_事前申請不可.getMessage());
             }
         }
         return false;
