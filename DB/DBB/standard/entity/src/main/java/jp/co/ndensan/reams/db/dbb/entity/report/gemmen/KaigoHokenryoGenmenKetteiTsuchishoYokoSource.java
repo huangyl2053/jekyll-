@@ -10,7 +10,7 @@ import jp.co.ndensan.reams.uz.uza.report.IReportSource;
 import jp.co.ndensan.reams.uz.uza.report.source.ReportItem;
 
 /**
- * 介護保険料減免決定通知書 B5横タイプ
+ * 介護保険料減免決定通知書 B5横タイプするクラスです。
  *
  * @reamsid_L DBB-0740-030 surun
  */

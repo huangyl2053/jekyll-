@@ -101,13 +101,15 @@ public class ShoKaishuKirokuKanriHandler {
                     dgJigyoshaItiran.setKoufuType(CodeMaster.getCodeMeisho(new CodeShubetsu(CODESHUBETSU_0014), new Code(jigyoshaInput.get交付証種類())));
                     dgJigyoshaItiran.setKoufuDate(jigyoshaInput.get交付年月日().wareki().toDateString());
                     dgJigyoshaItiran.setKoufuJiyu(CodeMaster.getCodeMeisho(new CodeShubetsu(CODESHUBETSU_0116), new Code(jigyoshaInput.get交付事由())));
+                    dgJigyoshaItiran.setKoufuJiyuNo(jigyoshaInput.get交付事由());
                     dgJigyoshaItiran.setKofuRiyu(jigyoshaInput.get交付理由());
                     dgJigyoshaItiran.setKaishuDate((jigyoshaInput.get回収年月日().wareki().toDateString()));
                     dgJigyoshaItiran.setKaishuJiyu(CodeMaster.getCodeMeisho(new CodeShubetsu(CODESHUBETSU_0015), new Code(jigyoshaInput.get回収事由())));
+                    dgJigyoshaItiran.setKaishuJiyuNo(jigyoshaInput.get回収事由());
                     dgJigyoshaItiran.setYukoKigen((jigyoshaInput.get有効期限().wareki().toDateString()));
                     dgJigyoshaItiran.setKaishuRiyu(jigyoshaInput.get回収理由());
                     dgJigyoshaItiran.setRirekiNo(new RString(jigyoshaInput.get履歴番号()));
-                    dgJigyoshaItiran.getKoufuTypeNo();
+                    dgJigyoshaItiran.setKoufuTypeNo(jigyoshaInput.get交付証種類());
                     dgKoufuKaishuList.add(dgJigyoshaItiran);
                 }
                 div.getDgKoufuKaishu().setDataSource(dgKoufuKaishuList);
@@ -147,7 +149,7 @@ public class ShoKaishuKirokuKanriHandler {
         for (dgKoufuKaishu_Row dgKoufuKaishu : listRow) {
             ShoKofuKaishuIdentifier key = new ShoKofuKaishuIdentifier(
                     ViewStateHolder.get(ViewStateKey.資格対象者, TaishoshaKey.class).get被保険者番号(),
-                    dgKoufuKaishu.getKoufuType(), Integer.valueOf(dgKoufuKaishu.getRirekiNo().toString()));
+                    dgKoufuKaishu.getKoufuTypeNo(), Integer.valueOf(dgKoufuKaishu.getRirekiNo().toString()));
             ShoKofuKaishu shoKofuKaishu = 証交付回収情報Model.get(key);
             ShoKofuKaishuBuilder builder = shoKofuKaishu.createBuilderForEdit();
 

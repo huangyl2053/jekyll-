@@ -55,7 +55,7 @@ import jp.co.ndensan.reams.uz.uza.report.source.breaks.BreakAggregator;
 import jp.co.ndensan.reams.uz.uza.util.editor.DecimalFormatter;
 
 /**
- * 介護保険料減免決定通知書PrintService
+ * 介護保険料減免決定通知書PrintServiceクラスです。
  *
  * @reamsid_L DBB-0740-030 surun
  */
@@ -83,7 +83,7 @@ public class GenmenKetteiTsuchiShoPrintService {
     private static final int INDEX_FIFTEEN = 15;
 
     /**
-     * printA4縦タイプメソッド
+     * printA4縦タイプメソッドします。
      *
      * @param 発行日 FlexibleDate
      * @param 文書番号 RString
@@ -102,7 +102,7 @@ public class GenmenKetteiTsuchiShoPrintService {
                 NinshoshaSource sourceBuilder = NinshoshaSourceBuilderFactory.createInstance(認証者,
                         減免決定通知書情報.get地方公共団体(), assembler.getImageFolderPath(),
                         new RDate(発行日.toString())).buildSource();
-                List<GenmenKetteiTsuchiShoItem> targets = setItems(発行日, 文書番号, 減免決定通知書情報, 通知書定型文, 介護問合せ先ソースビルダー, sourceBuilder);
+                List<GenmenKetteiTsuchiShoItem> targets = setItems(文書番号, 減免決定通知書情報, 通知書定型文, 介護問合せ先ソースビルダー, sourceBuilder);
                 ReportSourceWriter<KaigoHokenryoGenmenKetteiTsuchishoTateSource> reportSourceWriter
                         = new ReportSourceWriter(assembler);
                 GenmenKetteiTsuchiShoTateReport.createForm(targets).writeBy(reportSourceWriter);
@@ -112,7 +112,7 @@ public class GenmenKetteiTsuchiShoPrintService {
     }
 
     /**
-     * printB5横タイプメソッド
+     * printB5横タイプメソッドします。
      *
      * @param 発行日 FlexibleDate
      * @param 文書番号 RString
@@ -131,7 +131,7 @@ public class GenmenKetteiTsuchiShoPrintService {
                 NinshoshaSource sourceBuilder = NinshoshaSourceBuilderFactory.createInstance(認証者,
                         減免決定通知書情報.get地方公共団体(), assembler.getImageFolderPath(),
                         new RDate(発行日.toString())).buildSource();
-                List<GenmenKetteiTsuchiShoItem> targets = setItems(発行日, 文書番号, 減免決定通知書情報, 通知書定型文, 介護問合せ先ソースビルダー, sourceBuilder);
+                List<GenmenKetteiTsuchiShoItem> targets = setItems(文書番号, 減免決定通知書情報, 通知書定型文, 介護問合せ先ソースビルダー, sourceBuilder);
                 ReportSourceWriter<KaigoHokenryoGenmenKetteiTsuchishoYokoSource> reportSourceWriter
                         = new ReportSourceWriter(assembler);
                 GenmenKetteiTsuchiShoYokoReport.createForm(targets).writeBy(reportSourceWriter);
@@ -141,17 +141,17 @@ public class GenmenKetteiTsuchiShoPrintService {
     }
 
     /**
-     * setItemsメソッド
+     * setItemsメソッドします。
      *
-     * @param 発行日 FlexibleDate
      * @param 文書番号 RString
      * @param 減免決定通知書情報 GenmenKetteiTsuchiShoJoho
      * @param 通知書定型文 RString
      * @param 介護問合せ先ソースビルダー IKaigoToiawasesakiSourceBuilder
      * @param sourceBuilder NinshoshaSource
+     *
      * @return List<GenmenKetteiTsuchiShoItem>
      */
-    private List<GenmenKetteiTsuchiShoItem> setItems(FlexibleDate 発行日, RString 文書番号,
+    private List<GenmenKetteiTsuchiShoItem> setItems(RString 文書番号,
             GenmenKetteiTsuchiShoJoho 減免決定通知書情報, RString 通知書定型文, IKaigoToiawasesakiSourceBuilder 介護問合せ先ソースビルダー, NinshoshaSource sourceBuilder) {
         List<GenmenKetteiTsuchiShoItem> items = new ArrayList<>();
         List<KoseiZengoKiwariGaku> 更正前後期割額リスト = 更正前後期割額リストを生成(減免決定通知書情報);
@@ -175,13 +175,12 @@ public class GenmenKetteiTsuchiShoPrintService {
     }
 
     /**
-     * setBaseItem
+     * setBaseItemします。
      *
      * @param item GenmenKetteiTsuchiShoItem
      * @param 減免決定通知書情報 GenmenKetteiTsuchiShoJoho
      * @param 文書番号 RString
      * @param 通知書定型文
-     * @param 発行日 FlexibleDate
      * @param 介護問合せ先ソースビルダー IKaigoToiawasesakiSourceBuilder
      * @param sourceBuilder NinshoshaSource
      */
@@ -308,7 +307,7 @@ public class GenmenKetteiTsuchiShoPrintService {
     }
 
     /**
-     * 随時リストを生成する
+     * 随時リストを生成する。
      *
      * @return List<RString>
      */
@@ -329,7 +328,7 @@ public class GenmenKetteiTsuchiShoPrintService {
     }
 
     /**
-     * 更正前後期割額リストを生成
+     * 更正前後期割額リストを生成する。
      *
      * @param 減免決定通知書情報 GenmenKetteiTsuchiShoJoho
      * @return List<KoseiZengoKiwariGaku>
@@ -350,7 +349,7 @@ public class GenmenKetteiTsuchiShoPrintService {
     }
 
     /**
-     * 更正前後期割額を生成
+     * 更正前後期割額を生成する。
      *
      * @param index int
      * @param 減免決定通知書情報 GenmenKetteiTsuchiShoJoho
@@ -428,7 +427,7 @@ public class GenmenKetteiTsuchiShoPrintService {
     }
 
     /**
-     * set特徴期別金額更正前
+     * set特徴期別金額更正前します。
      *
      * @param 期 RString
      * @param 減免決定通知書情報 GenmenKetteiTsuchiShoJoho
@@ -455,7 +454,7 @@ public class GenmenKetteiTsuchiShoPrintService {
     }
 
     /**
-     * set特徴期別金額更正後
+     * set特徴期別金額更正後します。
      *
      * @param 期 RString
      * @param 減免決定通知書情報 GenmenKetteiTsuchiShoJoho
@@ -482,7 +481,7 @@ public class GenmenKetteiTsuchiShoPrintService {
     }
 
     /**
-     * set普徴期別金額更正前
+     * set普徴期別金額更正前します。
      *
      * @param index int
      * @param 減免決定通知書情報 GenmenKetteiTsuchiShoJoho
@@ -524,7 +523,7 @@ public class GenmenKetteiTsuchiShoPrintService {
     }
 
     /**
-     * set普徴期別金額更正後
+     * set普徴期別金額更正後します。
      *
      * @param index int
      * @param 減免決定通知書情報 GenmenKetteiTsuchiShoJoho
@@ -565,6 +564,12 @@ public class GenmenKetteiTsuchiShoPrintService {
         }
     }
 
+    /**
+     * 判断をnull対象 します。
+     *
+     * @param object Object
+     * @return boolean
+     */
     private boolean isNotNull(Object object) {
         return object != null;
     }

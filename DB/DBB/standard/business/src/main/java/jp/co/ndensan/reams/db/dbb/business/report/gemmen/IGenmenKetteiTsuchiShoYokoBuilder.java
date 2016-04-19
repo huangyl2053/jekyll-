@@ -9,7 +9,7 @@ import jp.co.ndensan.reams.db.dbb.entity.report.gemmen.KaigoHokenryoGenmenKettei
 import jp.co.ndensan.reams.uz.uza.report.IReportBuilder;
 
 /**
- * 介護保険料減免決定通知書 B5横タイプIBuilder
+ * 介護保険料減免決定通知書 B5横タイプIBuilderクラスです。
  *
  * @reamsid_L DBB-0740-030 surun
  */

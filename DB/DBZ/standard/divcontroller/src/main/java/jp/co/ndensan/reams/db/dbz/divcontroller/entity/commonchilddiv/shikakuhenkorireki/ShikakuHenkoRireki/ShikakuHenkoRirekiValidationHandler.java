@@ -7,13 +7,12 @@ package jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.shikakuhe
 
 import jp.co.ndensan.reams.db.dbz.business.core.HihokenshaDaicho;
 import jp.co.ndensan.reams.db.dbz.service.core.shikakuhenkorireki.ShikakuhenkorirekiFinder;
-import jp.co.ndensan.reams.ur.urz.business.IUrControlData;
-import jp.co.ndensan.reams.ur.urz.business.UrControlDataFactory;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.message.IMessageGettable;
 import jp.co.ndensan.reams.uz.uza.message.IValidationMessage;
 import jp.co.ndensan.reams.uz.uza.message.Message;
+import jp.co.ndensan.reams.uz.uza.ui.servlets.ResponseHolder;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPair;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
 
@@ -46,17 +45,16 @@ public class ShikakuHenkoRirekiValidationHandler {
      */
     public ValidationMessageControlPairs tsuikaShoriCheck(HihokenshaDaicho 資格関連異動) {
         ValidationMessageControlPairs validationMessages = new ValidationMessageControlPairs();
-        IUrControlData controlData = UrControlDataFactory.createInstance();
-        RString menuID = controlData.getMenuID();
+        RString menuID = ResponseHolder.getMenuID();
         ShikakuhenkorirekiFinder shikakuhenkorireki = ShikakuhenkorirekiFinder.createInstance();
         HihokenshaDaicho hihokenshaDaicho = shikakuhenkorireki.getHihokenshaDaichoByHihokenshaNo(資格関連異動.get被保険者番号());
         if (MENUID_DBAMN24001.equals(menuID)) {
-            if (hihokenshaDaicho != null && div.getTxtHenkoDate().getValue().isBeforeOrEquals(hihokenshaDaicho.get異動日())) {
+            if (hihokenshaDaicho != null && !div.getTxtHenkoDate().getValue().isBeforeOrEquals(hihokenshaDaicho.get異動日())) {
                 validationMessages.add(new ValidationMessageControlPair(
                         new ShikakuHenkoRirekiMessages(UrErrorMessages.入力値が不正_追加メッセージあり, "最新履歴を追加することはできません。")));
             }
         } else {
-            if (hihokenshaDaicho != null && !div.getTxtHenkoDate().getValue().isBeforeOrEquals(hihokenshaDaicho.get異動日())) {
+            if (hihokenshaDaicho != null && div.getTxtHenkoDate().getValue().isBefore(hihokenshaDaicho.get異動日())) {
                 validationMessages.add(new ValidationMessageControlPair(
                         new ShikakuHenkoRirekiMessages(UrErrorMessages.入力値が不正_追加メッセージあり, "過去の履歴を追加することはできません。")));
             }

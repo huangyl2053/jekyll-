@@ -5,7 +5,6 @@
  */
 package jp.co.ndensan.reams.db.dbb.business.report.tsuchisho;
 
-import java.util.List;
 import jp.co.ndensan.reams.db.dbb.definition.core.ShoriKubun;
 import jp.co.ndensan.reams.db.dbb.entity.db.basic.DbT2001ChoshuHohoEntity;
 import jp.co.ndensan.reams.db.dbb.entity.db.basic.DbT2002FukaEntity;
@@ -34,8 +33,6 @@ public class KariSanteiTsuchiShoKyotsu {
     private DbT2002FukaEntity 賦課の情報_更正前;
     private RString 納組情報;
     //CaFt703FindNokumiEntity
-    private List<普徴納期情報Entity> 普徴納期情報リスト;
-    private List<特徴納期情報Entity> 特徴納期情報リスト;
     private IAtesaki 宛先情報;
     private DbT2002FukaEntity 前年度賦課情報;
     private IKoza 口座情報;

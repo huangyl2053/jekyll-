@@ -1,10 +1,14 @@
-// TODO: 業務に合わせてパスを変更してください
 package jp.co.ndensan.reams.db.dbb.entity.report.dbbrp00007_15;
 
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.report.IReportSource;
 import jp.co.ndensan.reams.uz.uza.report.source.ReportItem;
 
+/**
+ * 保険料納入通知書（本算定過年度）【銀振タイプ】帳票項目定義_5期_連帳 HokenryoNonyuTsuchishoGinfuriFourKiRenchoSource
+ *
+ * @reamsid_L DBB-9110-150 liangbc
+ */
 public class HokenryoNonyuTsuchishoGinfuriFourKiRenchoSource implements IReportSource {
 // <editor-fold defaultstate="collapsed" desc="Generated Code">
 

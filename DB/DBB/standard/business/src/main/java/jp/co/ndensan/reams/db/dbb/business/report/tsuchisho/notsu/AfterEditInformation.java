@@ -11,6 +11,8 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 /**
  *
  * 編集後納期情報です。
+ *
+ * @reamsid_L DBB-9110-080 liangbc
  */
 @lombok.Getter
 @lombok.Setter

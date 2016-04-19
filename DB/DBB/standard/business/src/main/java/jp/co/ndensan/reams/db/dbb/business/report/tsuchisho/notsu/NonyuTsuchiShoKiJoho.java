@@ -14,6 +14,8 @@ import jp.co.ndensan.reams.uz.uza.math.Decimal;
 /**
  *
  * 納入通知書期情報です。
+ *
+ * @reamsid_L DBB-9110-070 wangjie2
  */
 @lombok.Getter
 @lombok.Setter
