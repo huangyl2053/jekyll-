@@ -16,7 +16,6 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxNum;
 /**
  * JigyoshaServiceShosai のクラスファイル 
  * 
- * @reamsid_L DBA-0340-060 dongyabin
  */
 public class JigyoshaServiceShosaiDiv extends Panel {
     // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-01-15_09-59-03">

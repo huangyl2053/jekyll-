@@ -11,7 +11,6 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.RadioButton;
 /**
  * KobetsuRihabiri2 のクラスファイル 
  * 
- * @reamsid_L DBA-0340-060 dongyabin
  */
 public class KobetsuRihabiri2Div extends Panel {
     // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-01-15_09-59-03">

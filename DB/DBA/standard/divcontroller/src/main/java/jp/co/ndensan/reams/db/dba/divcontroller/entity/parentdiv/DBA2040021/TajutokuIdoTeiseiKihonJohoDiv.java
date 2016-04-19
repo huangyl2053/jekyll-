@@ -13,7 +13,6 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 /**
  * TajutokuIdoTeiseiKihonJoho のクラスファイル
  *
- * @reamsid_L DBA-0401-030 duanzhanli
  */
 public class TajutokuIdoTeiseiKihonJohoDiv extends Panel {
 

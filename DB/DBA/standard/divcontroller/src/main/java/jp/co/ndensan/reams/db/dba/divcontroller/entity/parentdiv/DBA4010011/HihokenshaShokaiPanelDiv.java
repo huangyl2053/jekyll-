@@ -18,7 +18,6 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 /**
  * HihokenshaShokaiPanel のクラスファイル
  *
- * @reamsid_L DBA-0500-030 zuotao
  */
 public class HihokenshaShokaiPanelDiv extends Panel {
 

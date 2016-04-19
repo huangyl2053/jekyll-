@@ -13,7 +13,6 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 /**
  * ChohyoShutsuryokujunOya のクラスファイル
  *
- * @reamsid_L DBA-0510-050 wangxiaodong
  */
 public class ChohyoShutsuryokujunOyaDiv extends Panel {
 

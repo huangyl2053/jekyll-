@@ -11,7 +11,6 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 /**
  * HihokenshaDaichoIchiran のクラスファイル
  *
- * @reamsid_L DBA-0510-050 wangxiaodong
  */
 public class HihokenshaDaichoIchiranDiv extends Panel {
 

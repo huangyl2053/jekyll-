@@ -15,7 +15,6 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 /**
  * KihonJoho のクラスファイル
  *
- * @reamsid_L DBA-0360-040 wangxiaodong
  */
 public class KihonJohoDiv extends Panel {
 

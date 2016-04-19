@@ -11,7 +11,6 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxFlexibleDate;
 /**
  * KaijoJiyuInput のクラスファイル
  *
- * @reamsid_L DBA-0402-010 xuyannan
  */
 public class KaijoJiyuInputDiv extends Panel {
     /*

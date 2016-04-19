@@ -18,7 +18,6 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.TabContainer;
 /**
  * tabHihokenshaShokai のクラスファイル
  *
- * @reamsid_L DBA-0500-030 zuotao
  */
 public class tabHihokenshaShokaiDiv extends TabContainer {
 

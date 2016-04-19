@@ -13,7 +13,6 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 /**
  * JutokuJohoTeiseiIchiran のクラスファイル
  *
- * @reamsid_L DBA-0402-010 xuyannan
  */
 public class JutokuJohoTeiseiIchiranDiv extends Panel {
 

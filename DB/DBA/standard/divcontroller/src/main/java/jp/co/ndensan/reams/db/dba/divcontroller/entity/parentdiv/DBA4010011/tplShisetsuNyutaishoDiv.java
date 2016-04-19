@@ -13,7 +13,6 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.TabPanel;
 /**
  * tplShisetsuNyutaisho のクラスファイル
  *
- * @reamsid_L DBA-0500-030 zuotao
  */
 public class tplShisetsuNyutaishoDiv extends TabPanel {
 

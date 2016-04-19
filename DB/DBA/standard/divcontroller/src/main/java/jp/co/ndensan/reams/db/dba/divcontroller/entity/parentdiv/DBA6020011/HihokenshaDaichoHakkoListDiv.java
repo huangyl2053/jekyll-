@@ -10,7 +10,6 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.PanelPublish;
 /**
  * HihokenshaDaichoHakkoList のクラスファイル
  *
- * @reamsid_L DBA-0510-050 wangxiaodong
  */
 public class HihokenshaDaichoHakkoListDiv extends PanelPublish {
     // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-01-15_09-59-03">

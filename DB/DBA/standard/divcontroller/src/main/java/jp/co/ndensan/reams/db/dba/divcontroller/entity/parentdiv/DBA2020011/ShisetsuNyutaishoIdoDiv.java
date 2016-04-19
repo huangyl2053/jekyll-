@@ -11,7 +11,6 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 /**
  * ShisetsuNyutaishoIdo のクラスファイル
  *
- * @reamsid_L DBA-0360-040 wangxiaodong
  */
 public class ShisetsuNyutaishoIdoDiv extends Panel {
 

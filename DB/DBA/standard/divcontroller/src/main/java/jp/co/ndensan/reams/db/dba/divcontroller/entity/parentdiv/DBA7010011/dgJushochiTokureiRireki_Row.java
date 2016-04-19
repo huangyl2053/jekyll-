@@ -16,7 +16,6 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxFlexibleDate;
 /**
  * dgJushochiTokureiRireki_Row のクラスファイル 
  * 
- * @reamsid_L DBA-0380-020 houtp
  */
 
 public class dgJushochiTokureiRireki_Row extends DataRow {

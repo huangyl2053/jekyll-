@@ -13,7 +13,6 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 /**
  * TeikiyoJogaishaJoho のクラスファイル
  *
- * @reamsid_L DBA-0412-030 lishengli
  */
 public class TeikiyoJogaishaJohoDiv extends Panel {
 

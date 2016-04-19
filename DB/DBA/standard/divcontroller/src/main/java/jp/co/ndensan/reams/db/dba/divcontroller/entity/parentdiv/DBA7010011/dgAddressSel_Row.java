@@ -15,7 +15,6 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.DataRow;
 /**
  * dgAddressSel_Row のクラスファイル 
  * 
- * @reamsid_L DBA-0380-020 houtp
  */
 
 public class dgAddressSel_Row extends DataRow {

@@ -16,7 +16,6 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 /**
  * TekiyoJogaiJohoIchiran のクラスファイル
  *
- * @reamsid_L DBA-0410-080 dingyi
  */
 public class TekiyoJogaiJohoIchiranDiv extends Panel {
 
