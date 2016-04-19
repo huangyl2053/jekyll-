@@ -1,4 +1,4 @@
-﻿var DBZ;
+var DBZ;
 (function (DBZ) {
     (function (KaigoChohyoShutsuryokujun) {
         var ModeController = (function () {
@@ -13,39 +13,9 @@
             ModeController.prototype.PublicProperties = function () {
                 return new KaigoChohyoShutsuryokujun.PublicProperties(this.fieldName);
             };
-
-            ModeController.prototype.priorities = function () {
-                return [
-                    "DisplayType"
-                ];
-            };
-
-            ModeController.prototype.DisplayType = function () {
-                return new Modes.DisplayType(this.controls);
-            };
             return ModeController;
         })();
         KaigoChohyoShutsuryokujun.ModeController = ModeController;
-
-        (function (Modes) {
-            var DisplayType = (function () {
-                function DisplayType(controls) {
-                    this.controls = controls;
-                }
-                DisplayType.prototype.SORT_ONLY = function () {
-                    this.controls.ccdChohyoShutsuryokujun().Grid().G12();
-                    this.controls.ccdChohyoShutsuryokujun().DisplayNone().SORT_ONLY();
-                };
-
-                DisplayType.prototype.SHUKEI_NONE = function () {
-                    this.controls.ccdChohyoShutsuryokujun().Grid().G12();
-                    this.controls.ccdChohyoShutsuryokujun().DisplayNone().SHUKEI_NONE();
-                };
-                return DisplayType;
-            })();
-            Modes.DisplayType = DisplayType;
-        })(KaigoChohyoShutsuryokujun.Modes || (KaigoChohyoShutsuryokujun.Modes = {}));
-        var Modes = KaigoChohyoShutsuryokujun.Modes;
     })(DBZ.KaigoChohyoShutsuryokujun || (DBZ.KaigoChohyoShutsuryokujun = {}));
     var KaigoChohyoShutsuryokujun = DBZ.KaigoChohyoShutsuryokujun;
 })(DBZ || (DBZ = {}));
