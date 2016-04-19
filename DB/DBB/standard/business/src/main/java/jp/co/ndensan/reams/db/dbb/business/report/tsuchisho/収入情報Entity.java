@@ -9,8 +9,9 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 
 /**
+ * 収入情報Entity。
  *
- * 収入情報Entity
+ * @reamsid_L DBB-0820-050 xuyue
  */
 @lombok.Getter
 @lombok.Setter
