@@ -12,6 +12,8 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 /**
  *
  * 本算定賦課処理のバッチ起動時に設定されるパラメータ
+ *
+ * @reamsid_L DBB-0780-080 yangchenbing
  */
 @lombok.Getter
 @lombok.Setter
