@@ -22,10 +22,15 @@ public class TekiyoJogaishaIdoTeiseiBusiness {
     /**
      * コンストラクタです。
      *
-     * @param entity 適用除外情報
+     * @param 状態 状態
+     * @param 適用日 適用日
+     * @param 解除日 解除日
      */
-    public TekiyoJogaishaIdoTeiseiBusiness(InformationEntity entity) {
-        this.entity = entity;
+    public TekiyoJogaishaIdoTeiseiBusiness(RString 状態, FlexibleDate 適用日, FlexibleDate 解除日) {
+        this.entity = new InformationEntity();
+        entity.set状態(状態);
+        entity.set解除日(解除日);
+        entity.set適用日(適用日);
     }
 
     /**

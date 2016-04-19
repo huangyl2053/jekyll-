@@ -12,8 +12,8 @@ import jp.co.ndensan.reams.db.dba.divcontroller.entity.parentdiv.DBA2050021.DBA2
 import jp.co.ndensan.reams.db.dba.divcontroller.entity.parentdiv.DBA2050021.DBA2050021TransitionEventName;
 import jp.co.ndensan.reams.db.dba.divcontroller.entity.parentdiv.DBA2050021.TekiyoJogaishaIdoTeiseiDiv;
 import jp.co.ndensan.reams.db.dba.divcontroller.handler.parentdiv.DBA2050021.TekiyoJogaishaIdoTeiseiHandler;
+import jp.co.ndensan.reams.db.dbz.business.core.tekiyojogaishaidoteisei.TekiyoJogaishaIdoTeiseiBusiness;
 import jp.co.ndensan.reams.db.dbz.divcontroller.viewbox.ViewStateKeys;
-import jp.co.ndensan.reams.db.dbz.entity.information.InformationEntity;
 import jp.co.ndensan.reams.db.dbz.service.core.tekiyojogaishaidoteisei.TekiyoJogaishaIdoTeiseiFinder;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrInformationMessages;
@@ -115,14 +115,11 @@ public class TekiyoJogaishaIdoTeisei {
 
     private boolean is履歴期間重複(TekiyoJogaishaIdoTeiseiDiv div) {
         TekiyoJogaishaIdoTeiseiFinder finder = new TekiyoJogaishaIdoTeiseiFinder();
-        List<InformationEntity> entitylist = new ArrayList<>();
+        List<TekiyoJogaishaIdoTeiseiBusiness> entitylist = new ArrayList<>();
         for (datagridTekiyoJogai_Row row : div.getTekiyoJogaiJohoIchiran().getCcdTekiyoJogaiRireki().get適用情報一覧()) {
-            InformationEntity entity = new InformationEntity();
-            entity.set状態(row.getStatus());
-            entity.set解除日(row.getKayijoDate().getValue() == null ? FlexibleDate.EMPTY
-                    : new FlexibleDate(row.getKayijoDate().getValue().toDateString()));
-            entity.set適用日(row.getTekiyoDate().getValue() == null ? FlexibleDate.EMPTY
-                    : new FlexibleDate(row.getTekiyoDate().getValue().toDateString()));
+            TekiyoJogaishaIdoTeiseiBusiness entity = new TekiyoJogaishaIdoTeiseiBusiness(row.getStatus(),
+                    row.getKayijoDate().getValue() == null ? FlexibleDate.EMPTY : new FlexibleDate(row.getKayijoDate().getValue().toDateString()),
+                    row.getTekiyoDate().getValue() == null ? FlexibleDate.EMPTY : new FlexibleDate(row.getTekiyoDate().getValue().toDateString()));
             entitylist.add(entity);
         }
         return finder.checkTekiyoJogaiKikanByTeiseiMode(entitylist);
