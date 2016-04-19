@@ -21,7 +21,13 @@ import jp.co.ndensan.reams.db.dbu.entity.kouikitenkyoresultlist.KoikinaiTenkyoCS
 import jp.co.ndensan.reams.db.dbu.entity.kouikitenkyoresultlist.KoikinaiTenkyoEntity;
 import jp.co.ndensan.reams.db.dbu.entity.kouikitenkyoresultlist.KoikinaiTenkyoListEntity;
 import jp.co.ndensan.reams.db.dbu.entity.kouikitenkyoresultlist.KoikinaiTenkyoResultEntity;
+import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.search.ShikibetsuTaishoPSMSearchKeyBuilder;
+import jp.co.ndensan.reams.ua.uax.definition.core.enumeratedtype.shikibetsutaisho.KensakuYusenKubun;
+import jp.co.ndensan.reams.ua.uax.definition.core.enumeratedtype.shikibetsutaisho.psm.DataShutokuKubun;
+import jp.co.ndensan.reams.ua.uax.definition.mybatisprm.shikibetsutaisho.IShikibetsuTaishoPSMSearchKey;
 import jp.co.ndensan.reams.ur.urz.business.core.association.Association;
+import jp.co.ndensan.reams.ur.urz.definition.core.shikibetsutaisho.JuminJotai;
+import jp.co.ndensan.reams.ur.urz.definition.core.shikibetsutaisho.JuminShubetsu;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.ur.urz.service.core.association.AssociationFinderFactory;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchDbReader;
@@ -31,6 +37,7 @@ import jp.co.ndensan.reams.uz.uza.batch.process.BatchReportWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.IBatchReader;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaMeisho;
+import jp.co.ndensan.reams.uz.uza.biz.GyomuCode;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.ReportId;
 import jp.co.ndensan.reams.uz.uza.euc.io.EucCsvWriter;
@@ -61,6 +68,7 @@ public class HiroshimaDomainReportProcess extends BatchProcessBase<HiroshimaDoma
     private static final ReportId DBA200011 = new ReportId("DBA200011_KoikinaiTenkyoKekkaIchiranhyo");
     private static final RString INDEX = new RString("000000");
     private static final RString EUC_WRITER_DELIMITER = new RString(",");
+    private static final RString DELIMITER = new RString(" ");
     private static final RString EUC_WRITER_ENCLOSURE = new RString("\"");
     private static final RString STRING_SAKUSEI = new RString("作成");
     private LasdecCode 市町村コード;
@@ -78,6 +86,22 @@ public class HiroshimaDomainReportProcess extends BatchProcessBase<HiroshimaDoma
     @Override
     protected void initialize() {
         list = new ArrayList<>();
+        ShikibetsuTaishoPSMSearchKeyBuilder builder = new ShikibetsuTaishoPSMSearchKeyBuilder(GyomuCode.DB介護保険,
+                KensakuYusenKubun.住登外優先);
+        List<JuminShubetsu> 住民種別List = new ArrayList();
+        List<JuminJotai> 住民状態List = new ArrayList();
+        住民種別List.add(JuminShubetsu.日本人);
+        住民種別List.add(JuminShubetsu.外国人);
+        住民状態List.add(JuminJotai.住民);
+        住民状態List.add(JuminJotai.住登外);
+        住民状態List.add(JuminJotai.消除者);
+        住民状態List.add(JuminJotai.転出者);
+        住民状態List.add(JuminJotai.死亡者);
+        builder.set住民種別(住民種別List);
+        builder.set住民状態(住民状態List);
+        builder.setデータ取得区分(DataShutokuKubun.基準日時点の最新のレコード);
+        IShikibetsuTaishoPSMSearchKey searchKey = builder.build();
+        processParameter.set宛名検索条件(searchKey);
         flag = false;
     }
 
@@ -111,7 +135,7 @@ public class HiroshimaDomainReportProcess extends BatchProcessBase<HiroshimaDoma
             if (転入転出異動情報Entity.get転入PSM_住登内住所() != null
                     && 転入転出異動情報Entity.get転入PSM_住登内番地() != null
                     && 転入転出異動情報Entity.get転入PSM_住登内方書() != null) {
-                RString 住所 = 転入転出異動情報Entity.get転入PSM_住登内住所().
+                RString 住所 = 転入転出異動情報Entity.get転入PSM_住登内住所().concat(DELIMITER).
                         concat(転入転出異動情報Entity.get転入PSM_住登内番地()).
                         concat(転入転出異動情報Entity.get転入PSM_住登内方書());
                 entity.set前住所(住所);
@@ -236,17 +260,18 @@ public class HiroshimaDomainReportProcess extends BatchProcessBase<HiroshimaDoma
      */
     private List<KoikinaiTenkyoKekkaIchiranhyoBodyItem> get広域内転居結果一覧表ボディのITEM(List<KoikinaiTenkyoResultEntity> 広域内転居結果帳票List) {
         List<KoikinaiTenkyoKekkaIchiranhyoBodyItem> itemList = new ArrayList<>();
+
         for (KoikinaiTenkyoResultEntity 広域内転居結果帳票Entity : 広域内転居結果帳票List) {
             KoikinaiTenkyoKekkaIchiranhyoBodyItem item = new KoikinaiTenkyoKekkaIchiranhyoBodyItem(
                     広域内転居結果帳票Entity.get被保険者番号(),
                     広域内転居結果帳票Entity.get氏名カナ(),
-                    広域内転居結果帳票Entity.get氏名(),
                     広域内転居結果帳票Entity.get旧住民コード(),
                     広域内転居結果帳票Entity.get前住所(),
                     広域内転居結果帳票Entity.get転出予定日(),
                     広域内転居結果帳票Entity.get転出確定日(),
                     広域内転居結果帳票Entity.get転出確定通知日(),
                     広域内転居結果帳票Entity.get処理日(),
+                    広域内転居結果帳票Entity.get氏名(),
                     広域内転居結果帳票Entity.get新住民コード(),
                     広域内転居結果帳票Entity.get現住所(),
                     広域内転居結果帳票Entity.get登録異動日(),
