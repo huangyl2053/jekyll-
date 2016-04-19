@@ -890,15 +890,15 @@ public final class JutakuKaishuJizenShinseiTorokuDivHandler {
             更新データの設定(builder);
             updateData = builder.build();
 
-            // TODO
+            // TODO 共有子DIVのデータと元Entityのmapperは確認中
             Models<ShokanJutakuKaishuIdentifier, ShokanJutakuKaishu> data = ViewStateHolder
                     .get(ViewStateKeys.住宅改修内容一覧_検索結果, Models.class);
             List<ShokanJutakuKaishu> kaishuList = new ArrayList<>();
-            for (ShokanJutakuKaishu tmp : data.aliveValues()) {
-                ShokanJutakuKaishuBuilder shokanJutakuKaishuBuilder = tmp.createBuilderForEdit();
-
-                kaishuList.add(shokanJutakuKaishuBuilder.build());
-            }
+//            for (ShokanJutakuKaishu tmp : data.aliveValues()) {
+//                ShokanJutakuKaishuBuilder shokanJutakuKaishuBuilder = tmp.createBuilderForEdit();
+//
+//                kaishuList.add(shokanJutakuKaishuBuilder.build());
+//            }
             return JutakuKaishuJizenShinsei.createInstance().updDBDate(updateData, kaishuList, 画面モード);
         }
     }
@@ -924,16 +924,20 @@ public final class JutakuKaishuJizenShinseiTorokuDivHandler {
         builder.set申請者郵便番号(div.getKaigoShikakuKihonShaPanel().getShinseishaInfo().getTxtYubinNo().getValue());
         builder.set申請者住所(div.getKaigoShikakuKihonShaPanel().getShinseishaInfo().getTxtAddress().getDomain().value());
         builder.set申請者電話番号(div.getKaigoShikakuKihonShaPanel().getShinseishaInfo().getTxtTelNo().getDomain());
-        builder.set申請事業者番号(new JigyoshaNo(div.getKaigoShikakuKihonShaPanel().getShinseishaInfo()
-                .getTxtJigyoshaNo().getValue()));
+        //  事業者番号は正常設定できない
+        builder.set申請事業者番号(new JigyoshaNo("9"));
+//        builder.set申請事業者番号(new JigyoshaNo(div.getKaigoShikakuKihonShaPanel().getShinseishaInfo()
+//                .getTxtJigyoshaNo().getValue()));
         builder.set理由書作成日(new FlexibleDate(div.getKaigoShikakuKihonShaPanel().getJutakuKaishuJizenShinseiReason()
                 .getTxtCreateYMD().getValue().toDateString()));
         builder.set理由書作成者(div.getKaigoShikakuKihonShaPanel().getJutakuKaishuJizenShinseiReason()
                 .getTxtCreatorName().getDomain().value());
         builder.set理由書作成者カナ(div.getKaigoShikakuKihonShaPanel().getJutakuKaishuJizenShinseiReason()
                 .getTxtCreatorKanaName().getDomain().value());
-        builder.set理由書作成事業者番号(new JigyoshaNo(div.getKaigoShikakuKihonShaPanel().getJutakuKaishuJizenShinseiReason()
-                .getTxtCreationJigyoshaNo().getValue()));
+        //  事業者番号は正常設定できない
+        builder.set理由書作成事業者番号(new JigyoshaNo("9"));
+//        builder.set理由書作成事業者番号(new JigyoshaNo(div.getKaigoShikakuKihonShaPanel().getJutakuKaishuJizenShinseiReason()
+//                .getTxtCreationJigyoshaNo().getValue()));
         // TODO
         builder.set住宅所有者(div.getKaigoShikakuKihonShaPanel().getTabShinseiJyoho().getTxtJutakuOwner().getValue());
         builder.set被保険者との関係(div.getKaigoShikakuKihonShaPanel().getTabShinseiJyoho()
@@ -964,14 +968,15 @@ public final class JutakuKaishuJizenShinseiTorokuDivHandler {
             builder.set不承認理由(div.getKaigoShikakuKihonShaPanel().getTabShinseiContents().getTabShinsaKakka()
                     .getTxtFushoninReason().getValue());
         }
-        builder.set給付額等_費用額合計(div.getKaigoShikakuKihonShaPanel().getTabShinseiContents().getTabJutakuKaisyuJyoho()
-                .getTotalPanel().getTxtHiyoTotalNow().getValue().intValue());
-        builder.set給付額等_保険対象費用額(div.getKaigoShikakuKihonShaPanel().getTabShinseiContents().getTabJutakuKaisyuJyoho()
-                .getTotalPanel().getTxtHokenTaishoHiyoNow().getValue().intValue());
-        builder.set給付額等_利用者自己負担額(div.getKaigoShikakuKihonShaPanel().getTabShinseiContents().getTabJutakuKaisyuJyoho()
-                .getTotalPanel().getTxtRiyoshaFutanAmountNow().getValue().intValue());
-        builder.set給付額等_保険給付費額(div.getKaigoShikakuKihonShaPanel().getTabShinseiContents().getTabJutakuKaisyuJyoho()
-                .getTotalPanel().getTxtHokenKyufuAmountNow().getValue().intValue());
+        // TODO 疎通のため。コメント化になる。
+//        builder.set給付額等_費用額合計(div.getKaigoShikakuKihonShaPanel().getTabShinseiContents().getTabJutakuKaisyuJyoho()
+//                .getTotalPanel().getTxtHiyoTotalNow().getValue().intValue());
+//        builder.set給付額等_保険対象費用額(div.getKaigoShikakuKihonShaPanel().getTabShinseiContents().getTabJutakuKaisyuJyoho()
+//                .getTotalPanel().getTxtHokenTaishoHiyoNow().getValue().intValue());
+//        builder.set給付額等_利用者自己負担額(div.getKaigoShikakuKihonShaPanel().getTabShinseiContents().getTabJutakuKaisyuJyoho()
+//                .getTotalPanel().getTxtRiyoshaFutanAmountNow().getValue().intValue());
+//        builder.set給付額等_保険給付費額(div.getKaigoShikakuKihonShaPanel().getTabShinseiContents().getTabJutakuKaisyuJyoho()
+//                .getTotalPanel().getTxtHokenKyufuAmountNow().getValue().intValue());
 
         if (div.getKaigoShikakuKihonShaPanel().getTabShinseiContents().getTabShinsaKakka()
                 .getJutakuKaishuJizenShoninKetteiTsuchisho().isIsPublish()) {
