@@ -76,20 +76,6 @@ public class NenReiTotatsuSearchCondition {
      */
     public ResponseData<Dbamn71001BatchFlowParameter> batchRegister(NenReiTotatsuSearchConditionDiv div) {
         ResponseData<Dbamn71001BatchFlowParameter> response = new ResponseData<>();
-        new NenreitotatsuShikakuIdo()
-                .checkKaishibiShuryobiJunban(div.getCcdNenReiTotatsuSearchCondition().getTxtNenreiTotatsuKikanFrom().getValue(),
-                        div.getCcdNenReiTotatsuSearchCondition().getTxtNenreiTotatsuKikanTo().getValue());
-        if (!div.getCcdNenReiTotatsuSearchCondition().getTxtZenkaiFrom().getValue().isEmpty()
-                && !div.getCcdNenReiTotatsuSearchCondition().getTxtZenkaiTo().getValue().isEmpty()) {
-            new NenreitotatsuShikakuIdo()
-                    .checkKaishibiShuryobiJunban(div.getCcdNenReiTotatsuSearchCondition().getTxtZenkaiFrom().getValue(),
-                            div.getCcdNenReiTotatsuSearchCondition().getTxtZenkaiTo().getValue());
-            new NenreitotatsuShikakuIdo()
-                    .checkKaishibiShuryobiKikanJufuku(div.getCcdNenReiTotatsuSearchCondition().getTxtZenkaiFrom().getValue(),
-                            div.getCcdNenReiTotatsuSearchCondition().getTxtZenkaiTo().getValue(),
-                            div.getCcdNenReiTotatsuSearchCondition().getTxtNenreiTotatsuKikanFrom().getValue(),
-                            div.getCcdNenReiTotatsuSearchCondition().getTxtNenreiTotatsuKikanTo().getValue());
-        }
         Dbamn71001BatchFlowParameter param = new NenreitotatsuShikakuIdo()
                 .getNenreitotatsuJokenBatchParameter(div.getCcdNenReiTotatsuSearchCondition().getTxtNenreiTotatsuKikanFrom().getValue(),
                         div.getCcdNenReiTotatsuSearchCondition().getTxtNenreiTotatsuKikanTo().getValue());
