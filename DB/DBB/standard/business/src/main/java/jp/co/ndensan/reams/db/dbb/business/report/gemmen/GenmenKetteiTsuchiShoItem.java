@@ -10,7 +10,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 /**
- * 介護保険料減免決定通知書Item
+ * 介護保険料減免決定通知書Itemクラスです。
  *
  * @reamsid_L DBB-0740-030 surun
  */

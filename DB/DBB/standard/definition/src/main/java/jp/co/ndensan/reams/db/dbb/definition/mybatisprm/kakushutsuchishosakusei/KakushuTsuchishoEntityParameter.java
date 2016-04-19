@@ -8,7 +8,7 @@ package jp.co.ndensan.reams.db.dbb.definition.mybatisprm.kakushutsuchishosakusei
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.TsuchishoNo;
 import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
-import jp.co.ndensan.reams.uz.uza.lang.RDate;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
  * 更正後賦課の情報を取得のMyBatis用パラメータクラスです。
@@ -23,7 +23,7 @@ public final class KakushuTsuchishoEntityParameter {
     private final FlexibleYear 賦課年度;
     private final TsuchishoNo 通知書番号;
     private final YMDHMS 調定日時;
-    private final RDate 調定日;
+    private final RString 調定日;
 
     /**
      * コンストラクタです。
@@ -39,7 +39,7 @@ public final class KakushuTsuchishoEntityParameter {
             FlexibleYear 賦課年度,
             TsuchishoNo 通知書番号,
             YMDHMS 調定日時,
-            RDate 調定日) {
+            RString 調定日) {
         this.調定年度 = 調定年度;
         this.賦課年度 = 賦課年度;
         this.通知書番号 = 通知書番号;
@@ -50,6 +50,7 @@ public final class KakushuTsuchishoEntityParameter {
     /**
      * パラメータメソッドです。
      *
+     * @param 調定年度 調定年度
      * @param 賦課年度 賦課年度
      * @param 通知書番号 通知書番号
      * @param 調定日時 調定日時
@@ -61,7 +62,7 @@ public final class KakushuTsuchishoEntityParameter {
             FlexibleYear 賦課年度,
             TsuchishoNo 通知書番号,
             YMDHMS 調定日時,
-            RDate 調定日) {
+            RString 調定日) {
         return new KakushuTsuchishoEntityParameter(調定年度, 賦課年度, 通知書番号, 調定日時, 調定日);
     }
 }

@@ -11,6 +11,8 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
  * 契約事業者情報を特定するためのMyBatis用パラメータクラスです。
+ *
+ * @reamsid_L DBC-0300-010 houtianpeng
  */
 @lombok.Getter
 @SuppressWarnings("PMD.UnusedPrivateField")

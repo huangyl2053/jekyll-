@@ -13,6 +13,8 @@ import jp.co.ndensan.reams.uz.uza.math.Decimal;
 /**
  *
  * 編集後仮算定通知書共通情報の更正後情報です。
+ *
+ * @reamsid_L DBB-9110-070 wangjie2
  */
 @lombok.Getter
 @lombok.Setter

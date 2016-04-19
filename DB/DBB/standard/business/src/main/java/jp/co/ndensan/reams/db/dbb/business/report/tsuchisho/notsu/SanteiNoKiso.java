@@ -10,6 +10,8 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 /**
  *
  * 算定の基礎1~3の情報です。
+ *
+ * @reamsid_L DBB-9110-010 wangjie2
  */
 @lombok.Getter
 @lombok.Setter

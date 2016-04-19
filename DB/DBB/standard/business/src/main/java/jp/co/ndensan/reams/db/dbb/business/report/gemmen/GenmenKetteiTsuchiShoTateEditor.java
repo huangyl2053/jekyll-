@@ -8,7 +8,7 @@ package jp.co.ndensan.reams.db.dbb.business.report.gemmen;
 import jp.co.ndensan.reams.db.dbb.entity.report.gemmen.KaigoHokenryoGenmenKetteiTsuchishoTateSource;
 
 /**
- * 介護保険料減免決定通知書 A4縦タイプEditor
+ * 介護保険料減免決定通知書 A4縦タイプEditorクラスです。
  *
  * @reamsid_L DBB-0740-030 surun
  */
@@ -17,7 +17,7 @@ public class GenmenKetteiTsuchiShoTateEditor implements IGenmenKetteiTsuchiShoTa
     private final GenmenKetteiTsuchiShoItem item;
 
     /**
-     * コンストラクタです
+     * コンストラクタです。
      *
      * @param item TokubetsuChoshuKaishiTsuchishoKariHakkoIchiranItem
      */

@@ -12,7 +12,7 @@ import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.report.ReportPropertyBase;
 
 /**
- * 介護保険料減免決定通知書 B5横タイプProperty
+ * 介護保険料減免決定通知書 B5横タイプPropertyクラスです。
  *
  * @reamsid_L DBB-0740-030 surun
  */

@@ -6,6 +6,7 @@
 package jp.co.ndensan.reams.db.dbu.definition.core.hihokenshashochohyo;
 
 import java.util.List;
+import jp.co.ndensan.reams.uz.uza.biz.YubinNo;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
@@ -25,7 +26,7 @@ public class HihokenshashoChohyoParameter {
     private boolean umareflg;
     private RString hihokana;
     private RString seibetsu;
-    private RString hihokenshaNo;
+    private YubinNo hihokenshaNo;
     private RString shikibetsuCode;
     private RString shichosonCode;
     private RString updateTimestamp;

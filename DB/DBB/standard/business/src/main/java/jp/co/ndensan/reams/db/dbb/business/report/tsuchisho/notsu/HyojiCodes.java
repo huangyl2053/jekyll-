@@ -10,6 +10,8 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 /**
  *
  * 表示コード情報です。
+ *
+ * @reamsid_L DBB-9110-010 wangjie2
  */
 @lombok.Getter
 @lombok.Setter

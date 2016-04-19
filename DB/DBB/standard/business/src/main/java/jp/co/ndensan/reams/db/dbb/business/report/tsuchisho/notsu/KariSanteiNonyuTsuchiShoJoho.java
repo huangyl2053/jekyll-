@@ -16,6 +16,8 @@ import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 /**
  *
  * 仮算定納入通知書情報です。
+ *
+ * @reamsid_L DBB-9110-010 wangjie2
  */
 @lombok.Getter
 @lombok.Setter

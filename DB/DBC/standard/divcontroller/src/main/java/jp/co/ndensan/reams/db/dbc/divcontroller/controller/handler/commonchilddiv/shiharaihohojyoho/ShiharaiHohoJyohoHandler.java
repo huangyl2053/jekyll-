@@ -31,6 +31,8 @@ import jp.co.ndensan.reams.uz.uza.util.code.entity.UzT0007CodeEntity;
 
 /**
  * 支払方法情報のコントローラです。
+ *
+ * @reamsid_L DBC-0300-010 houtianpeng
  */
 public class ShiharaiHohoJyohoHandler {
 
