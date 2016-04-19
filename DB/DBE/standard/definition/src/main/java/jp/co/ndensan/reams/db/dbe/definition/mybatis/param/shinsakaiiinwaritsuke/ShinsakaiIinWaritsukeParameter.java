@@ -10,6 +10,8 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
  * 審査会内容検索パラメータクラス
+ *
+ * @reamsid_L DBE-0130-050 xuyannan
  */
 @lombok.Getter
 @SuppressWarnings("PMD.UnusedPrivateField")
