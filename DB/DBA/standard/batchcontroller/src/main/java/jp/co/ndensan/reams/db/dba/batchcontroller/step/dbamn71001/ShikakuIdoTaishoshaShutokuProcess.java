@@ -109,7 +109,7 @@ public class ShikakuIdoTaishoshaShutokuProcess extends SimpleBatchProcessBase {
         List<ShikakuIdoTaishoshaEntity> 資格異動対象者List = new ArrayList<>();
         資格異動対象者List.addAll(資格異動対象者ListTmp);
         for (ShikakuIdoTaishoshaEntity entity : 資格異動対象者ListTmp) {
-            if (entity.get生年月日().isBefore(開始日.plusYear(AGE_65).plusDay(1))
+            if (entity.get生年月日().isBefore(開始日.minusYear(AGE_65).plusDay(1))
                     || 終了日.minusYear(AGE_65).plusDay(1).isBefore(entity.get生年月日())) {
                 資格異動対象者List.remove(entity);
             }
