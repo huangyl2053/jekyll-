@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 概要： 負担限度額認定申請のマッピング用XMLです。 -->
+<!-- @reamsid_L DBD-9999-013 huangh -->
+<!-- どのマッパーインターフェースと対応するかを指定する -->
+<mapper namespace="jp.co.ndensan.reams.db.dbd.persistence.db.mapper.relate.gemmengengaku.futangendogakunintei.IFutanGendogakuNinteiShinseiMapper">
+    <resultMap id="resultMap_FutanGendogakuNinteiEntity" type="jp.co.ndensan.reams.db.dbd.entity.db.relate.gemmengengaku.futangendogakunintei.FutanGendogakuNinteiEntity" autoMapping="true">
+        <id property="負担限度額認定申請Entity.shoKisaiHokenshaNo" column="dbT4018KaigoHokenFutanGendogakuNintei_shoKisaiHokenshaNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.ShoKisaiHokenshaNoTypeHandler"/>
+        <id property="負担限度額認定申請Entity.hihokenshaNo" column="dbT4018KaigoHokenFutanGendogakuNintei_hihokenshaNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.HihokenshaNoTypeHandler"/>
+        <id property="負担限度額認定申請Entity.rirekiNo" column="dbT4018KaigoHokenFutanGendogakuNintei_rirekiNo" />
+        <association property="負担限度額認定申請Entity" resultMap="jp.co.ndensan.reams.db.dbd.persistence.db.mapper.basic.IDbT4018KaigoHokenFutanGendogakuNinteiMapper.ResultMap_DbT4018KaigoHokenFutanGendogakuNinteiEntity"/>
+        <collection property="減免減額申請Entity" resultMap="jp.co.ndensan.reams.db.dbd.persistence.db.mapper.basic.IDbT4010GemmenGengakuShinseiMapper.ResultMap_DbT4010GemmenGengakuShinseiEntity"/>
+    </resultMap>
+
+
+    <select id="select境界層該当者" parameterType="jp.co.ndensan.reams.db.dbd.definition.mybatisprm.gemmengengaku.futangendogakunintei.FutanGendogakuNinteiShinseiMapperParameter"
+            resultType="jp.co.ndensan.reams.db.dbd.entity.db.basic.DbT1006KyokaisoGaitoshaEntity" fetchSize="500">
+        SELECT
+        *
+        FROM
+        rgdb."DbT1006KyokaisoGaitosha" AS A
+        WHERE
+        A."hihokenshaNo" = #{被保険者番号}
+        AND A."tekiyoKaishiYMD" <![CDATA[<=]]> #{適用日}
+        AND
+        CASE WHEN A."tekiyoShuryoYMD" = NULL THEN #{適用日} <= '99999999'
+        ELSE #{適用日} <![CDATA[<=]]> A."tekiyoShuryoYMD"
+        AND A."logicalDeletedFlag" = false
+    </select>
+
+    <select id="get負担限度額認定申請の情報List"
+            resultMap="resultMap_FutanGendogakuNinteiEntity"
+            parameterType="jp.co.ndensan.reams.db.dbd.definition.mybatisprm.gemmengengaku.futangendogakunintei.FutanGendogakuNinteiShinseiMapperParameter"
+            fetchSize="500">
+        SELECT
+        A.*,
+        B.*
+        FROM (<include refid="jp.co.ndensan.reams.db.dbd.persistence.db.mapper.basic.IDbT4018KaigoHokenFutanGendogakuNinteiMapper.noDeleted_DbT4018KaigoHokenFutanGendogakuNintei" />) AS A
+        LEFT JOIN (<include refid="jp.co.ndensan.reams.db.dbd.persistence.db.mapper.basic.IDbT4010GemmenGengakuShinseiMapper.noDeleted_DbT4010GemmenGengakuShinsei" />) AS B
+        ON A."dbT4018KaigoHokenFutanGendogakuNintei_hihokenshaNo" = B."dbT4010GemmenGengakuShinsei_hihokenshaNo"
+        AND A."dbT4018KaigoHokenFutanGendogakuNintei_shoKisaiHokenshaNo" = B."dbT4010GemmenGengakuShinsei_shoKisaiHokenshaNo"
+        AND A."dbT4018KaigoHokenFutanGendogakuNintei_rirekiNo" = B."dbT4010GemmenGengakuShinsei_shinseiRirekiNo"
+        WHERE A."dbT4018KaigoHokenFutanGendogakuNintei_hihokenshaNo" = #{被保険者番号}
+        ORDER BY A."dbT4018KaigoHokenFutanGendogakuNintei_shinseiYMD" DESC
+    </select>
+</mapper>
