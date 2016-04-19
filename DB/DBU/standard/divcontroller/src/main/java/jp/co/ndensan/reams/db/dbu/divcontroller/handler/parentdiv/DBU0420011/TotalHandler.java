@@ -12,11 +12,13 @@ import jp.co.ndensan.reams.db.dba.business.report.hihokenshashob4.HihokenshashoB
 import jp.co.ndensan.reams.db.dba.business.report.jukyushikakushomeisho.JukyuShikakuShomeishoBodyItem;
 import jp.co.ndensan.reams.db.dba.business.report.shikakushasho.ShikakushashoBodyItem;
 import jp.co.ndensan.reams.db.dbu.business.core.hihokenshashochohyo.HihokenshashoChohyoBusiness;
+import jp.co.ndensan.reams.db.dbu.business.core.kaigohokenshikakushasho.KaigoHokenShikakushashoDataBusiness;
 import jp.co.ndensan.reams.db.dbu.business.jukyushikakushomeisho.JukyuShikakuShomeishoData;
 import jp.co.ndensan.reams.db.dbu.definition.core.hihokenshashochohyo.HihokenshashoChohyoParameter;
 import jp.co.ndensan.reams.db.dbu.divcontroller.entity.parentdiv.DBU0420011.TotalDiv;
 import jp.co.ndensan.reams.db.dbu.service.core.hihokenshashochohyo.HihokenshashoChohyoFinder;
 import jp.co.ndensan.reams.db.dbu.service.core.jukyushikakushomeisho.JukyuShikakuShomeishoFinder;
+import jp.co.ndensan.reams.db.dbu.service.core.kaigohokenshikakushasho.KaigoHokenShikakushasho;
 import jp.co.ndensan.reams.db.dbz.divcontroller.util.viewstate.ViewStateKey;
 import jp.co.ndensan.reams.db.dbz.service.TaishoshaKey;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -139,11 +141,14 @@ public class TotalHandler {
                     item.getSeigenLong2(), item.getSeigen3(), item.getSeigenLong3(), item.getSeigen4(), item.getSeigenLong4(), item.getSeigen5(),
                     item.getSeigenLong5(), item.getSeigen6(), item.getSeigenLong6(), item.getSeigenSt1(), item.getSeigenEd1(), item.getSeigenSt2(),
                     item.getSeigenEd2(), item.getSeigenSt3(), item.getSeigenEd3(), item.getGyosha1(), item.getTodokeYmd1(), item.getGyosha2(),
-                    item.getTodokeYmd2(), item.getGyosha3(), item.getTodokeYmd3(), item.getShisetsuSyu1(), item.getShisetsuname1(),
-                    item.getNyushochk1(), item.getNyuinchk1(), item.getTaishochk1(), item.getTaiinchk1(), item.getNyushoymd1(), item.getTaiinymd1(),
+                    item.getGyosha2Asa(), item.getGyosha2Massho(), item.getTodokeYmd2(), item.getTodokeYmd2Asa(), item.getTodokeYmd2Massho(),
+                    item.getGyosha3(), item.getGyosha3Asa(), item.getGyosha3Massho(), item.getTodokeYmd3(), item.getTodokeYmd3Asa(),
+                    item.getTodokeYmd3Massho(), item.getShisetsuSyu1(), item.getShisetsuname1(), item.getNyushochk1(), item.getNyuinchk1(),
+                    item.getTaishochk1(), item.getTaiinchk1(), item.getNyushoymd1(), item.getTaiinymd1(),
                     item.getShisetsuSyu2(), item.getShisetsuname2(), item.getNyushochk2(), item.getNyuinchk2(), item.getTaishochk2(),
                     item.getTaiinchk2(), item.getNyushoymd2(), item.getTaiinymd2(), item.getRenban(), item.getSeiShogai1(), item.getSeiShogai2(),
-                    item.getKosekiSeibetsu1(), item.getKosekiSeibetsu2(), item.getItakuGyosha1(), item.getItakuGyosha2(), item.getItakuGyosha3());
+                    item.getKosekiSeibetsu1(), item.getKosekiSeibetsu2(), item.getItakuGyosha1(), item.getItakuGyosha2(), item.getItakuGyosha2Asa(),
+                    item.getItakuGyosha2Massho(), item.getItakuGyosha3(), item.getItakuGyosha3Asa(), item.getItakuGyosha3Massho());
             items.add(bodyItem);
         }
         return items;
@@ -156,9 +161,18 @@ public class TotalHandler {
      */
     public List<ShikakushashoBodyItem> shikakushasho() {
         List<ShikakushashoBodyItem> items = new ArrayList<>();
-        // TODO 帳票設計とビジネス問題 QA1050 パラメタ不明
-//        KaigoHokenShikakushashoDataEntity entity = KaigoHokenShikakushasho.createInstance().setKaigoHokenShikakushasho(null);
-//        ShikakushashoBodyItem item = new ShikakushashoBodyItem();
+        // TODO QA1050 パラメタ不明
+        KaigoHokenShikakushashoDataBusiness business = KaigoHokenShikakushasho.createInstance().setKaigoHokenShikakushasho(null);
+//        ShikakushashoBodyItem item = new ShikakushashoBodyItem(business.getサーブタイトル(), business.get有効期限(), business.get被保険者番号(),
+//                business.get被保険者住所(), business.get被保険者フリガナ(), business.get被保険者氏名(), business.get明治(), business.get大正(),
+//                business.get昭和(), business.get被保険者性別(), business.get被保険者生年月日(), business.get交付年月日(), business.get要介護状態区分等(),
+//                business.get認定年月日(), business.get認定の有効期間開始年月日(), business.get認定の有効期間終了年月日(),
+//                business.get居宅サービス等の単位(), business.get居宅サービス等の区分支給限度開始年月日(),
+//                business.get居宅サービス等の区分支給限度終了年月日(), business.get居宅サービス等の単位種類(), business.get居宅サービス等の単位(),
+//                business.getうち種類支給限度基準額の情報(), business.get認定審査会の意見及びサービスの種類の指定(), business.get, business.get, business.get, business.get, business.get,
+//                business.get, business.get,business.get,business.get,business.get,business.get,business.get,business.get,business.get,business.get,business.get,business.get,business.get,
+//                business.get,business.get保険者番号及びに保険者の名称及び印の保険者番号(),business.get保険者番号及びに保険者の名称及び印の住所(),business.get保険者番号及びに保険者の名称及び印の保険者名称(),business.get保険者番号及びに保険者の名称及び印の電話番号(),business.get連番(),business.get保険者番号及びに保険者の名称及び印の印字編集());
+//        items.add(item);
         return items;
     }
 
