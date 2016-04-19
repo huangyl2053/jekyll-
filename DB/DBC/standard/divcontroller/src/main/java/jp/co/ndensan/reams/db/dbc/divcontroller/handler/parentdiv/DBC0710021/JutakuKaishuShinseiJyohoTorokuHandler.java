@@ -159,6 +159,7 @@ public final class JutakuKaishuShinseiJyohoTorokuHandler {
         // １．９　証明書ドロップダウンリストを初期化する
         JutakukaishuSikyuShinseiManager 住宅改修費支給申請 = JutakukaishuSikyuShinseiManager.createInstance();
         set費用額合計など入力不可();
+        set申請者区分DataSource();
         if (画面モード_登録.equals(画面モード)) {
             // １．４．１　整理番号の初期化
             div.getCommHeadPanel().getTxtSeiriNo().setValue(Saiban.get(
@@ -208,7 +209,7 @@ public final class JutakuKaishuShinseiJyohoTorokuHandler {
             前回まで支払結果の初期化(過去住宅改修費支払結果);
             // １．５．５　「支払方法情報」共有子Div の初期化
             SikyuSinseiJyohoParameter 支給申請情報 = new SikyuSinseiJyohoParameter();
-            set事前支給申請情報(支給申請情報, 申請情報);
+            set事前支給申請情報(支給申請情報, 申請情報, 識別コード);
             div.getJutakuKaishuShinseiContents().getCcdShiharaiHohoJyoho().initialize(
                     支給申請情報, new KamokuCode(償還払給付費), 状態_修正);
             ViewStateHolder.put(ViewStateKeys.申請情報登録_更新前データ, (Serializable) get更新前データ());
@@ -258,8 +259,11 @@ public final class JutakuKaishuShinseiJyohoTorokuHandler {
             ShokanHanteiKekka 償還払支給判定結果 = 住宅改修費支給申請.getShokanHanteiKekka(償還払請求基本.get被保険者番号(),
                     償還払請求基本.getサービス提供年月(), 償還払請求基本.get整理番号());
             ViewStateHolder.put(ViewStateKeys.償還払支給判定結果, 償還払支給判定結果);
+            div.getJutakuKaishuShinseiContents().getShinsaKekkaPanel().setDisabled(true);
             if (画面モード_審査.equals(画面モード)) {
                 div.getBtnShokanKetteiJyoho().setDisabled(true);
+                div.getTxtTeikyoYM().setDisabled(true);
+                set国保連再送付表示非表示();
             } else if (画面モード_照会.equals(画面モード)) {
                 div.getBtnShokanKetteiJyoho().setDisabled(true);
                 if (償還払支給判定結果 != null) {
@@ -267,20 +271,48 @@ public final class JutakuKaishuShinseiJyohoTorokuHandler {
                 }
                 // ④　画面モードが修正モード
             } else if (画面モード_修正.equals(画面モード)) {
-                設定償還払決定情報ボタンの表示(償還, 償還払支給判定結果, 償還払支給申請情報, 画面モード, 支給申請情報, 住宅改修費支給申請, 償還払請求基本, 被保険者番号, サービス提供年月, 整理番号);
+                div.getJutakuKaishuShinseiContents().getShinsaKekkaPanel().setVisible(false);
+                div.getJutakuKaishuShinseiContents().getShinseishaInfo().getDdlShinseiTorikesuJiyu().setVisible(false);
+                設定償還払決定情報ボタンの表示(償還, 償還払支給判定結果, 償還払支給申請情報, 画面モード, 支給申請情報,
+                        住宅改修費支給申請, 償還払請求基本, 被保険者番号, サービス提供年月, 整理番号);
             } else {
-                設定償還払決定情報ボタンの表示(償還, 償還払支給判定結果, 償還払支給申請情報, 画面モード, 支給申請情報, 住宅改修費支給申請, 償還払請求基本, 被保険者番号, サービス提供年月, 整理番号);
+                設定償還払決定情報ボタンの表示(償還, 償還払支給判定結果, 償還払支給申請情報, 画面モード, 支給申請情報,
+                        住宅改修費支給申請, 償還払請求基本, 被保険者番号, サービス提供年月, 整理番号);
             }
 
             証明書表示設定(住宅改修費支給申請, 被保険者番号, 画面モード);
             ViewStateHolder.put(ViewStateKeys.申請情報登録_更新前データ, (Serializable) get更新前データ());
-            if (画面モード_削除.equals(画面モード) && 給付実績緋連動_受託あり.equals(償還)) {
-                div.getJutakuKaishuShinseiContents().getChkKokubo().setDisabled(true);
-            } else {
-                set国保連再送付表示非表示();
-            }
+            set国保連再送付制御(画面モード, 償還);
             div.getJutakuKaishuShinseiContents().getBtnShowJizenShinsei().setDisabled(true);
         }
+    }
+
+    private void set国保連再送付制御(RString 画面モード, RString 償還) {
+        if (画面モード_削除.equals(画面モード)) {
+            set画面照会モードに変更();
+        }
+        if ((画面モード_削除.equals(画面モード) || 画面モード_照会.equals(画面モード)
+                || 画面モード_取消.equals(画面モード) || 画面モード_審査.equals(画面モード))
+                && 給付実績緋連動_受託あり.equals(償還)) {
+            div.getJutakuKaishuShinseiContents().getChkKokubo().setDisabled(true);
+            div.getBtnShokanKetteiJyoho().setDisabled(true);
+        } else if ((画面モード_削除.equals(画面モード) || 画面モード_照会.equals(画面モード)
+                || 画面モード_取消.equals(画面モード) || 画面モード_審査.equals(画面モード))
+                && 給付実績連動_受託なし.equals(償還)) {
+            div.getJutakuKaishuShinseiContents().getChkKokubo().setVisible(false);
+        } else {
+            set国保連再送付表示非表示();
+        }
+    }
+
+    private void set申請者区分DataSource() {
+        List<KeyValueDataSource> 申請者区分リスト = new ArrayList<>();
+        申請者区分リスト.add(new KeyValueDataSource(申請者区分_空, RString.EMPTY));
+        申請者区分リスト.add(new KeyValueDataSource(ShinseishaKubun.本人.getコード(), ShinseishaKubun.本人.get名称()));
+        申請者区分リスト.add(new KeyValueDataSource(ShinseishaKubun.代理人.getコード(), ShinseishaKubun.代理人.get名称()));
+        申請者区分リスト.add(new KeyValueDataSource(ShinseishaKubun.受領委任事業者.getコード(),
+                ShinseishaKubun.受領委任事業者.get名称()));
+        div.getJutakuKaishuShinseiContents().getShinseishaInfo().getDdlShinseishaKubun().setDataSource(申請者区分リスト);
     }
 
     private void set国保連再送付表示非表示() {
@@ -382,8 +414,9 @@ public final class JutakuKaishuShinseiJyohoTorokuHandler {
 //                        new KamokuCode(償還払給付費), 状態_登録);
     }
 
-    private void set事前支給申請情報(SikyuSinseiJyohoParameter 支給申請情報, ShokanJutakuKaishuJizenShinsei 事前申請情報) {
-        支給申請情報.setShikibetsuCode(new ShikibetsuCode("000000000000010"));
+    private void set事前支給申請情報(SikyuSinseiJyohoParameter 支給申請情報, ShokanJutakuKaishuJizenShinsei 事前申請情報,
+            ShikibetsuCode 識別コード) {
+        支給申請情報.setShikibetsuCode(識別コード);
         支給申請情報.setHihokenshaNo(事前申請情報.get被保険者番号());
         支給申請情報.setShikyushinseiServiceYM(事前申請情報.getサービス提供年月());
         支給申請情報.setShikyushinseiSeiriNo(事前申請情報.get整理番号());
@@ -543,7 +576,8 @@ public final class JutakuKaishuShinseiJyohoTorokuHandler {
         div.getJutakuKaishuShinseiContents().getShinseishaInfo().getDdlShinseiTorikesuJiyu().setDataSource(torikesuJiyu);
         div.getJutakuKaishuShinseiContents().getShinseishaInfo().getDdlShinseiTorikesuJiyu().setSelectedKey(
                 申請取消事由コード);
-        div.getJutakuKaishuShinseiContents().getShinseishaInfo().getTxtYubinNo().setValue(償還払支給申請情報.get申請者郵便番号());
+        div.getJutakuKaishuShinseiContents().getShinseishaInfo().getTxtYubinNo().setValue(
+                償還払支給申請情報.get申請者郵便番号());
         div.getJutakuKaishuShinseiContents().getShinseishaInfo().getTxtAddress().setDomain(
                 new AtenaJusho(償還払支給申請情報.get申請者住所()));
         div.getJutakuKaishuShinseiContents().getJutakuKaishuShinseiReason().getTxtCreateYMD().setValue(
