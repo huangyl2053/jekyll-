@@ -14,15 +14,15 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
  * @author 自動生成
  */
 public class ShinsakaiScheduleHakkoDiv extends Panel {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：バージョン情報無し">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-02-19_14-33-39">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
      * コントロール名とフィールド名を取得する
      * private + コントロール名 + フィールド名 の文字列を作成
      */
-    @JsonProperty("shinsakaiScheduleSrch")
-    private shinsakaiScheduleSrchDiv shinsakaiScheduleSrch;
+    @JsonProperty("ShinsakaiScheduleSrch")
+    private ShinsakaiScheduleSrchDiv ShinsakaiScheduleSrch;
     @JsonProperty("dgShinsakaiScheduleKagami")
     private DataGrid<dgShinsakaiScheduleKagami_Row> dgShinsakaiScheduleKagami;
 
@@ -33,21 +33,21 @@ public class ShinsakaiScheduleHakkoDiv extends Panel {
      * フィールド名のGetterとSetter を作成
      */
     /*
-     * getshinsakaiScheduleSrch
-     * @return shinsakaiScheduleSrch
+     * getShinsakaiScheduleSrch
+     * @return ShinsakaiScheduleSrch
      */
-    @JsonProperty("shinsakaiScheduleSrch")
-    public shinsakaiScheduleSrchDiv getShinsakaiScheduleSrch() {
-        return shinsakaiScheduleSrch;
+    @JsonProperty("ShinsakaiScheduleSrch")
+    public ShinsakaiScheduleSrchDiv getShinsakaiScheduleSrch() {
+        return ShinsakaiScheduleSrch;
     }
 
     /*
-     * setshinsakaiScheduleSrch
-     * @param shinsakaiScheduleSrch shinsakaiScheduleSrch
+     * setShinsakaiScheduleSrch
+     * @param ShinsakaiScheduleSrch ShinsakaiScheduleSrch
      */
-    @JsonProperty("shinsakaiScheduleSrch")
-    public void setShinsakaiScheduleSrch(shinsakaiScheduleSrchDiv shinsakaiScheduleSrch) {
-        this.shinsakaiScheduleSrch = shinsakaiScheduleSrch;
+    @JsonProperty("ShinsakaiScheduleSrch")
+    public void setShinsakaiScheduleSrch(ShinsakaiScheduleSrchDiv ShinsakaiScheduleSrch) {
+        this.ShinsakaiScheduleSrch = ShinsakaiScheduleSrch;
     }
 
     /*

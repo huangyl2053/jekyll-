@@ -9,12 +9,12 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.*;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 
 /**
- * shinsakaiScheduleSrch のクラスファイル 
+ * ShinsakaiScheduleSrch のクラスファイル 
  * 
  * @author 自動生成
  */
-public class shinsakaiScheduleSrchDiv extends Panel {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：バージョン情報無し">
+public class ShinsakaiScheduleSrchDiv extends Panel {
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-02-19_14-33-39">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -27,6 +27,10 @@ public class shinsakaiScheduleSrchDiv extends Panel {
     private CheckBoxList chkShinsakaiSchedule;
     @JsonProperty("chkShinsakaiScheduleKagami")
     private CheckBoxList chkShinsakaiScheduleKagami;
+    @JsonProperty("chkShinsakaiScheduleNenkan")
+    private CheckBoxList chkShinsakaiScheduleNenkan;
+    @JsonProperty("txtNendo")
+    private TextBoxDate txtNendo;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -86,6 +90,42 @@ public class shinsakaiScheduleSrchDiv extends Panel {
     @JsonProperty("chkShinsakaiScheduleKagami")
     public void setChkShinsakaiScheduleKagami(CheckBoxList chkShinsakaiScheduleKagami) {
         this.chkShinsakaiScheduleKagami = chkShinsakaiScheduleKagami;
+    }
+
+    /*
+     * getchkShinsakaiScheduleNenkan
+     * @return chkShinsakaiScheduleNenkan
+     */
+    @JsonProperty("chkShinsakaiScheduleNenkan")
+    public CheckBoxList getChkShinsakaiScheduleNenkan() {
+        return chkShinsakaiScheduleNenkan;
+    }
+
+    /*
+     * setchkShinsakaiScheduleNenkan
+     * @param chkShinsakaiScheduleNenkan chkShinsakaiScheduleNenkan
+     */
+    @JsonProperty("chkShinsakaiScheduleNenkan")
+    public void setChkShinsakaiScheduleNenkan(CheckBoxList chkShinsakaiScheduleNenkan) {
+        this.chkShinsakaiScheduleNenkan = chkShinsakaiScheduleNenkan;
+    }
+
+    /*
+     * gettxtNendo
+     * @return txtNendo
+     */
+    @JsonProperty("txtNendo")
+    public TextBoxDate getTxtNendo() {
+        return txtNendo;
+    }
+
+    /*
+     * settxtNendo
+     * @param txtNendo txtNendo
+     */
+    @JsonProperty("txtNendo")
+    public void setTxtNendo(TextBoxDate txtNendo) {
+        this.txtNendo = txtNendo;
     }
 
     // </editor-fold>
