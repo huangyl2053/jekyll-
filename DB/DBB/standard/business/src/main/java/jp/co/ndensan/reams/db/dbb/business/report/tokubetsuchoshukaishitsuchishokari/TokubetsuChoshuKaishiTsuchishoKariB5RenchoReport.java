@@ -41,7 +41,8 @@ public class TokubetsuChoshuKaishiTsuchishoKariB5RenchoReport extends
 
     @Override
     public void writeBy(ReportSourceWriter<TokubetsuChoshuKaishiTsuchishoKariB5RenchoSource> writer) {
-        ITokubetsuChoshuKaishiTsuchishoKariB5RenchoEditor editor = new TokubetsuChoshuKaishiTsuchishoKariB5RenchoEditor(ninshoshaSource, 仮算定特徴開始通知書情報, 宛名連番);
+        ITokubetsuChoshuKaishiTsuchishoKariB5RenchoEditor editor = new TokubetsuChoshuKaishiTsuchishoKariB5RenchoEditor(
+                ninshoshaSource, 仮算定特徴開始通知書情報, 宛名連番);
         ITokubetsuChoshuKaishiTsuchishoKariB5RenchoBuilder builder = new TokubetsuChoshuKaishiTsuchishoKariB5RenchoBuilder(editor);
         writer.writeLine(builder);
     }
