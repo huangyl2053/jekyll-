@@ -7,9 +7,15 @@ package jp.co.ndensan.reams.db.dbc.divcontroller.handler.parentdiv.DBC0600031;
 
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0600031.PnlKeteiJohoMsgDiv;
 import jp.co.ndensan.reams.db.dbc.divcontroller.viewbox.ViewStateKeys;
+import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
+import jp.co.ndensan.reams.uz.uza.message.IMessageGettable;
+import jp.co.ndensan.reams.uz.uza.message.IValidationMessage;
+import jp.co.ndensan.reams.uz.uza.message.Message;
+import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPair;
+import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 
 /**
@@ -20,6 +26,7 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 public final class PnlKeteiJohoMsgHandler {
 
     private final PnlKeteiJohoMsgDiv div;
+    private static final RString 決定日 = new RString("決定日");
 
     private PnlKeteiJohoMsgHandler(PnlKeteiJohoMsgDiv div) {
         this.div = div;
@@ -161,5 +168,31 @@ public final class PnlKeteiJohoMsgHandler {
             return true;
         }
         return false;
+    }
+
+    /**
+     * 入力チェックのメソッドます。
+     *
+     * @return ResponseData
+     */
+    public ValidationMessageControlPairs getCheckMessage() {
+        ValidationMessageControlPairs pairs = new ValidationMessageControlPairs();
+        pairs.add(new ValidationMessageControlPair(new PnlKeteiJohoMsgHandler.IdocheckMessages(
+                UrErrorMessages.必須, 決定日.toString())));
+        return pairs;
+    }
+
+    private static class IdocheckMessages implements IValidationMessage {
+
+        private final Message message;
+
+        public IdocheckMessages(IMessageGettable message, String... replacements) {
+            this.message = message.getMessage().replace(replacements);
+        }
+
+        @Override
+        public Message getMessage() {
+            return message;
+        }
     }
 }
