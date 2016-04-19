@@ -65,6 +65,9 @@ public class FukushiyoguKonyuhiShikyuKetteiKyufuJissekiHenshu {
     private static final RString モード_差額登録 = new RString("差額登録");
     private static final RString モード_削除 = new RString("削除");
     private static final RString モード_審査 = new RString("審査");
+    private static final RString INDEX_1 = new RString("1");
+    private static final RString INDEX_2 = new RString("2");
+    private static final RString INDEX_3 = new RString("3");
 
     /**
      * コンストラクタです。
@@ -141,7 +144,7 @@ public class FukushiyoguKonyuhiShikyuKetteiKyufuJissekiHenshu {
 
         if (モード_登録.equals(画面モード)
                 && ShikyuFushikyuKubun.支給.getコード().equals(shokanHanteiKekkaEntity.getShikyuHushikyuKetteiKubun())) {
-            給付実績情報作成区分コード = new RString("1");
+            給付実績情報作成区分コード = INDEX_1;
             給付実績追加(画面モード, 識別コード, shokanKihonEntity, businessList,
                     shokanShinseiEntity, shokanHanteiKekkaEntity,
                     shokanShukeiEntity, 給付実績情報作成区分コード);
@@ -155,7 +158,7 @@ public class FukushiyoguKonyuhiShikyuKetteiKyufuJissekiHenshu {
             }
             if (ShikyuFushikyuKubun.不支給.getコード().equals(修正前支給区分)
                     && ShikyuFushikyuKubun.支給.getコード().equals(shokanHanteiKekkaEntity.getShikyuHushikyuKetteiKubun())) {
-                給付実績情報作成区分コード = new RString("1");
+                給付実績情報作成区分コード = INDEX_1;
                 給付実績追加(画面モード, 識別コード, shokanKihonEntity, businessList,
                         shokanShinseiEntity, shokanHanteiKekkaEntity,
                         shokanShukeiEntity, 給付実績情報作成区分コード);
@@ -163,7 +166,7 @@ public class FukushiyoguKonyuhiShikyuKetteiKyufuJissekiHenshu {
             }
             if (ShikyuFushikyuKubun.支給.getコード().equals(修正前支給区分)
                     && ShikyuFushikyuKubun.支給.getコード().equals(shokanHanteiKekkaEntity.getShikyuHushikyuKetteiKubun())) {
-                給付実績情報作成区分コード = new RString("2");
+                給付実績情報作成区分コード = INDEX_2;
                 給付実績追加(画面モード, 識別コード, shokanKihonEntity, businessList,
                         shokanShinseiEntity, shokanHanteiKekkaEntity,
                         shokanShukeiEntity, 給付実績情報作成区分コード);
@@ -171,7 +174,7 @@ public class FukushiyoguKonyuhiShikyuKetteiKyufuJissekiHenshu {
             }
             if (ShikyuFushikyuKubun.支給.getコード().equals(修正前支給区分)
                     && ShikyuFushikyuKubun.不支給.getコード().equals(shokanHanteiKekkaEntity.getShikyuHushikyuKetteiKubun())) {
-                給付実績情報作成区分コード = new RString("3");
+                給付実績情報作成区分コード = INDEX_3;
                 給付実績追加(画面モード, 識別コード, shokanKihonEntity, businessList,
                         shokanShinseiEntity, shokanHanteiKekkaEntity,
                         shokanShukeiEntity, 給付実績情報作成区分コード);
@@ -183,7 +186,7 @@ public class FukushiyoguKonyuhiShikyuKetteiKyufuJissekiHenshu {
                 return;
             }
             if (ShikyuFushikyuKubun.支給.getコード().equals(shokanHanteiKekkaEntity.getShikyuHushikyuKetteiKubun())) {
-                給付実績情報作成区分コード = new RString("3");
+                給付実績情報作成区分コード = INDEX_3;
                 給付実績追加(画面モード, 識別コード, shokanKihonEntity, businessList,
                         shokanShinseiEntity, shokanHanteiKekkaEntity,
                         shokanShukeiEntity, 給付実績情報作成区分コード);
@@ -191,7 +194,7 @@ public class FukushiyoguKonyuhiShikyuKetteiKyufuJissekiHenshu {
             }
         }
         if (モード_審査.equals(画面モード)) {
-            給付実績情報作成区分コード = new RString("1");
+            給付実績情報作成区分コード = INDEX_1;
             給付実績追加(画面モード, 識別コード, shokanKihonEntity, businessList,
                     shokanShinseiEntity, shokanHanteiKekkaEntity,
                     shokanShukeiEntity, 給付実績情報作成区分コード);
@@ -226,7 +229,7 @@ public class FukushiyoguKonyuhiShikyuKetteiKyufuJissekiHenshu {
         }
 
         ShikibetsuTaishoPSMSearchKeyBuilder builder
-                = new ShikibetsuTaishoPSMSearchKeyBuilder(GyomuCode.DB介護保険, KensakuYusenKubun.未定義);
+                = new ShikibetsuTaishoPSMSearchKeyBuilder(GyomuCode.DB介護保険, KensakuYusenKubun.住登外優先);
         builder.set識別コード(識別コード);
         IShikibetsuTaishoPSMSearchKey key = builder.build();
         SyokanbaraiShikyuKetteKyufuJssekiHensyuParameter parameter
@@ -235,7 +238,7 @@ public class FukushiyoguKonyuhiShikyuKetteiKyufuJissekiHenshu {
                 = mapperProvider.create(ISyokanbaraiShikyuKetteKyufuJssekiHensyuMapper.class);
         DealKyufujissekiEntity 宛名 = mapper.get宛名(parameter);
         FlexibleDate 生年月日YMD = null;
-        RString 性別コード = null;
+        RString 性別コード = RString.EMPTY;
         if (宛名 != null) {
             生年月日YMD = 宛名.get生年月日();
             性別コード = 宛名.get性別コード();
@@ -285,7 +288,7 @@ public class FukushiyoguKonyuhiShikyuKetteiKyufuJissekiHenshu {
         }
         dbT3017entity.setHiHokenshaNo(shokanKihonEntity.getHiHokenshaNo());
         dbT3017entity.setServiceTeikyoYM(shokanKihonEntity.getServiceTeikyoYM());
-        dbT3017entity.setKyufuJissekiKubunCode(new RString("2"));
+        dbT3017entity.setKyufuJissekiKubunCode(INDEX_2);
         dbT3017entity.setJigyoshoNo(shokanKihonEntity.getJigyoshaNo());
         dbT3017entity.setToshiNo(通し番号);
         dbT3017entity.setUmareYMD(生年月日YMD);
