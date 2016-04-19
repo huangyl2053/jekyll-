@@ -89,6 +89,30 @@ public class EditedAtesaki {
     }
 
     /**
+     * コンストラクタです。
+     *
+     * @param 宛先 宛先
+     * @param 地方公共団体 地方公共団体
+     * @param 帳票制御共通 帳票制御共通
+     *
+     * このコンストラクタを利用する場合、メソッドgetSofubutsuAtesakiSourceとget編集後住所は使用不可
+     */
+    public EditedAtesaki(IAtesaki 宛先,
+            Association 地方公共団体,
+            ChohyoSeigyoKyotsu 帳票制御共通) {
+        this.宛先 = requireNonNull(宛先, UrSystemErrorMessages.値がnull.getReplacedMessage("宛先"));
+        this.地方公共団体 = requireNonNull(地方公共団体, UrSystemErrorMessages.値がnull.getReplacedMessage("地方公共団体"));
+        this.帳票制御共通 = requireNonNull(帳票制御共通, UrSystemErrorMessages.値がnull.getReplacedMessage("帳票制御共通"));
+        this.送付物宛先ソース = null;
+        this.編集後住所 = null;
+        this.カスタマバーコード使用有無 = true;
+        this.管外住所編集パターン = null;
+        this.管内住所接頭辞 = null;
+        this.管内住所編集パターン = null;
+        this.行政区印字区分 = null;
+    }
+
+    /**
      * 送付物宛先ソースデータを返します。
      *
      * @return 送付物宛先ソースデータ
