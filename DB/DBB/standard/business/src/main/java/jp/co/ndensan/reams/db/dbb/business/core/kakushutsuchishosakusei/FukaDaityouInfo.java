@@ -9,10 +9,10 @@ import java.util.List;
 import jp.co.ndensan.reams.db.dbd.entity.db.basic.DbT4021ShiharaiHohoHenkoEntity;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.SetaiinShotoku;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT1001HihokenshaDaichoEntity;
-import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT4001JukyushaDaichoEntity;
+import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbV4001JukyushaDaichoEntity;
 import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.IShikibetsuTaisho;
+import jp.co.ndensan.reams.uz.uza.biz.TelNo;
 import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
-import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
  * 賦課台帳情報クラスです。
@@ -26,12 +26,12 @@ public class FukaDaityouInfo {
 
     private IShikibetsuTaisho 代納人情報;
     private List<SetaiinShotoku> 世帯員所得情報;
-    private RString 本人連絡先1;
-    private RString 本人連絡先2;
-    private RString 代納人連絡先1;
-    private RString 代納人連絡先2;
+    private TelNo 本人連絡先1;
+    private TelNo 本人連絡先2;
+    private TelNo 代納人連絡先1;
+    private TelNo 代納人連絡先2;
     private DbT1001HihokenshaDaichoEntity 被保険者台帳情報;
     private List<DbT4021ShiharaiHohoHenkoEntity> 支払方法変更リスト;
-    private List<DbT4001JukyushaDaichoEntity> 受給者台帳情報;
+    private DbV4001JukyushaDaichoEntity 受給者台帳情報;
     private YMDHMS 基準日時;
 }

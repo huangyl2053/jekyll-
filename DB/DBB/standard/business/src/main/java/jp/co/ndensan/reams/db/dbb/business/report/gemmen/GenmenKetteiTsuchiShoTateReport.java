@@ -12,7 +12,7 @@ import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
 import lombok.NonNull;
 
 /**
- * 介護保険料減免決定通知書 A4縦タイプReport
+ * 介護保険料減免決定通知書 A4縦タイプReportクラスです。
  *
  * @reamsid_L DBB-0740-030 surun
  */
@@ -30,7 +30,7 @@ public class GenmenKetteiTsuchiShoTateReport extends Report<KaigoHokenryoGenmenK
     }
 
     /**
-     * createFormメソッド
+     * createFormメソッドです。
      *
      * @param items List<GenmenKetteiTsuchiShoItem>
      * @return GenmenKetteiTsuchiShoTateReport

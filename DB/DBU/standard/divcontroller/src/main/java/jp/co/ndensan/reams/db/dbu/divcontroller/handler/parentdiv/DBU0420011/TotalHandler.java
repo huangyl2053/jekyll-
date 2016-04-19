@@ -163,16 +163,24 @@ public class TotalHandler {
         List<ShikakushashoBodyItem> items = new ArrayList<>();
         // TODO QA1050 パラメタ不明
         KaigoHokenShikakushashoDataBusiness business = KaigoHokenShikakushasho.createInstance().setKaigoHokenShikakushasho(null);
-//        ShikakushashoBodyItem item = new ShikakushashoBodyItem(business.getサーブタイトル(), business.get有効期限(), business.get被保険者番号(),
-//                business.get被保険者住所(), business.get被保険者フリガナ(), business.get被保険者氏名(), business.get明治(), business.get大正(),
-//                business.get昭和(), business.get被保険者性別(), business.get被保険者生年月日(), business.get交付年月日(), business.get要介護状態区分等(),
-//                business.get認定年月日(), business.get認定の有効期間開始年月日(), business.get認定の有効期間終了年月日(),
-//                business.get居宅サービス等の単位(), business.get居宅サービス等の区分支給限度開始年月日(),
-//                business.get居宅サービス等の区分支給限度終了年月日(), business.get居宅サービス等の単位種類(), business.get居宅サービス等の単位(),
-//                business.getうち種類支給限度基準額の情報(), business.get認定審査会の意見及びサービスの種類の指定(), business.get, business.get, business.get, business.get, business.get,
-//                business.get, business.get,business.get,business.get,business.get,business.get,business.get,business.get,business.get,business.get,business.get,business.get,business.get,
-//                business.get,business.get保険者番号及びに保険者の名称及び印の保険者番号(),business.get保険者番号及びに保険者の名称及び印の住所(),business.get保険者番号及びに保険者の名称及び印の保険者名称(),business.get保険者番号及びに保険者の名称及び印の電話番号(),business.get連番(),business.get保険者番号及びに保険者の名称及び印の印字編集());
-//        items.add(item);
+        ShikakushashoBodyItem item = new ShikakushashoBodyItem(business.getサーブタイトル(), business.get有効期限(), business.get被保険者番号(),
+                business.get被保険者住所(), business.get被保険者フリガナ(), business.get被保険者氏名(), business.get明治(), business.get大正(),
+                business.get昭和(), business.get被保険者性別(), business.get被保険者生年月日(), business.get交付年月日(), business.get要介護状態区分等(),
+                business.get認定年月日(), business.get認定の有効期間開始年月日(), business.get認定の有効期間終了年月日(),
+                business.get居宅サービス等の単位(), business.get居宅サービス等の区分支給限度開始年月日(),
+                business.get居宅サービス等の区分支給限度終了年月日(), business.get居宅サービス等の単位種類(), business.get居宅サービス等の単位(),
+                business.getうち種類支給限度基準額の情報(), business.get認定審査会の意見及びサービスの種類の指定(), business.get給付制限の情報(),
+                business.get支援事業者情報の名称の内容1(), business.get支援事業者情報の名称の届出年月日1(), business.get支援事業者情報の名称の内容2(),
+                business.get支援事業者情報の名称の内容アスタリスク2(), business.get支援事業者情報の名称の内容取消2(),
+                business.get支援事業者情報の名称の届出年月日2(), business.get支援事業者情報の名称の届出年月日アスタリスク2(),
+                business.get支援事業者情報の名称の届出年月日取消2(), business.get支援事業者情報の名称の内容アスタリスク3(),
+                business.get支援事業者情報の名称の内容3(), business.get支援事業者情報の名称の内容取消3(), business.get支援事業者情報の名称の届出年月日3(),
+                business.get支援事業者情報の名称の届出年月日アスタリスク3(), business.get支援事業者情報の名称の届出年月日取消3(),
+                business.get介護保険施設等の情報(), business.get施設入所(), business.get施設入院(), business.get施設退所(), business.get施設退院(),
+                business.get保険者番号及びに保険者の名称及び印の保険者番号(), business.get保険者番号及びに保険者の名称及び印の住所(),
+                business.get保険者番号及びに保険者の名称及び印の保険者名称(), business.get保険者番号及びに保険者の名称及び印の電話番号(),
+                business.get連番(), business.get保険者番号及びに保険者の名称及び印の印字編集());
+        items.add(item);
         return items;
     }
 
@@ -186,8 +194,8 @@ public class TotalHandler {
         // TODO QA1050 パラメタ不明
         JukyuShikakuShomeishoFinder finder = new JukyuShikakuShomeishoFinder();
         JukyuShikakuShomeishoData business = finder.setJukyuShikakuShomeisho(null);
-        JukyuShikakuShomeishoBodyItem item = new JukyuShikakuShomeishoBodyItem(business.get保険者番号(), new RString(business.get被保険者フリガナ()
-                .toString()), new RString(business.get被保険者氏名().toString()), business.get年号_明治(), business.get年号_大正(),
+        JukyuShikakuShomeishoBodyItem item = new JukyuShikakuShomeishoBodyItem(business.get保険者番号(), business.get被保険者フリガナ().value(),
+                business.get被保険者氏名().value(), business.get年号_明治(), business.get年号_大正(),
                 business.get年号_昭和(), business.get被保険者生年月日(), business.get被保険者性別(), business.get被保険者住所_転出前(),
                 business.get被保険者住所_転出先予定(), business.get被保険者異動予定日(), business.get保険者番号(), business.get発行日(),
                 RString.EMPTY, RString.EMPTY, RString.EMPTY, RString.EMPTY, RString.EMPTY, business.get申請状況(), business.get申請年月日(),

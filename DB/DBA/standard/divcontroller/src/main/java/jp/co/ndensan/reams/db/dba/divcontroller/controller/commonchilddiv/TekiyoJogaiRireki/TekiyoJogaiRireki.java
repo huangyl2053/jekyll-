@@ -135,6 +135,28 @@ public class TekiyoJogaiRireki {
         return ResponseData.of(requestDiv).respond();
     }
 
+    /**
+     * 除外者履歴変更パネルの適用日がある場合、適用届出日を設定します。
+     *
+     * @param requestDiv 適用除外者管理Div
+     * @return ResponseData<TekiyoJogaiRirekiDiv>
+     */
+    public ResponseData<TekiyoJogaiRirekiDiv> onBlur_TekiyoRireki(TekiyoJogaiRirekiDiv requestDiv) {
+        getHandler(requestDiv).onBlur_TekiyoRireki();
+        return ResponseData.of(requestDiv).respond();
+    }
+
+    /**
+     * 除外者履歴変更パネルの解除日がある場合、解除届出日を設定します。
+     *
+     * @param requestDiv 適用除外者管理Div
+     * @return ResponseData<TekiyoJogaiRirekiDiv>
+     */
+    public ResponseData<TekiyoJogaiRirekiDiv> onBlur_KayijoRireki(TekiyoJogaiRirekiDiv requestDiv) {
+        getHandler(requestDiv).onBlur_KayijoRireki();
+        return ResponseData.of(requestDiv).respond();
+    }
+
     private TekiyoJogaiRirekiHandler getHandler(TekiyoJogaiRirekiDiv requestDiv) {
         return new TekiyoJogaiRirekiHandler(requestDiv);
     }

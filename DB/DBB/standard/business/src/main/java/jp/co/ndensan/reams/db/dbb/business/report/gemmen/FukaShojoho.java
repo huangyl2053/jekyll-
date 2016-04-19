@@ -14,7 +14,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 /**
- * 賦課の情報
+ * 賦課の情報クラスです。
  *
  * @reamsid_L DBB-0740-030 surun
  */

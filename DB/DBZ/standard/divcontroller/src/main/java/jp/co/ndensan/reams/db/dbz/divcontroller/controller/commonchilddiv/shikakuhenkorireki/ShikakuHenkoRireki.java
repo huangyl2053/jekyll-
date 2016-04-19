@@ -165,10 +165,10 @@ public class ShikakuHenkoRireki {
         Models<HihokenshaDaichoIdentifier, HihokenshaDaicho> result = ViewStateHolder.get(ViewStateKeys.資格変更履歴_被保険者台帳情報, Models.class);
 
         ValidationMessageControlPairs validationMessages = new ValidationMessageControlPairs();
-        validationMessages.add(getValidationHandler(henkoRirekiDiv).tsuikaShoriCheck(result.iterator().next()));
         HihokenshaDaicho hihokenshaDaicho;
         if (henkoRirekiDiv.getInputMode().equals(ViewExecutionStatus.Add.getValue())) {
             hihokenshaDaicho = getHandler(henkoRirekiDiv).getTsuikaEntity(result);
+            validationMessages.add(getValidationHandler(henkoRirekiDiv).tsuikaShoriCheck(result.iterator().next()));
         } else {
             HihokenshaDaichoIdentifier hihokenshaDaichoIdentifier = new HihokenshaDaichoIdentifier(
                     new HihokenshaNo(henkoRirekiDiv.getDgHenko().getClickedItem().getHihokenshaNo()),
@@ -177,7 +177,8 @@ public class ShikakuHenkoRireki {
             hihokenshaDaicho = result.get(hihokenshaDaichoIdentifier);
         }
         validationMessages.add(getValidationHandler(henkoRirekiDiv).henkoJiyuCheck(hihokenshaDaicho));
-        if (validationMessages.iterator().hasNext()) {
+        if (validationMessages.iterator().hasNext()
+                && !henkoRirekiDiv.getInputMode().equals(ViewExecutionStatus.Delete.getValue())) {
             return ResponseData.of(henkoRirekiDiv).addValidationMessages(validationMessages).respond();
         }
         if (!ResponseHolder.isReRequest() && henkoRirekiDiv.getInputMode().equals(ViewExecutionStatus.Delete.getValue())) {

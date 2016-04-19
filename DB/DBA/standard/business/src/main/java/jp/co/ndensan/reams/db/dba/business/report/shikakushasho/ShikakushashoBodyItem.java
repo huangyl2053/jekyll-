@@ -59,7 +59,6 @@ public class ShikakushashoBodyItem {
     private final RString keikakuTodokedeYMD3;
     private final RString keikakuTodokedeYMD3Asutarisuku;
     private final RString keikakuTodokedeYMD3Masshosen;
-    private final RString nyushoShisetsuShurui;
     private final List<NyushoShisetsuDataEntity> nyushoShisetsuEntity;
     private final RString shisetsuNyusho;
     private final RString shisetsuNyuin;
@@ -114,7 +113,6 @@ public class ShikakushashoBodyItem {
      * @param keikakuTodokedeYMD3Asutarisuku 事業所届出年月日アスタリスク3
      * @param nyushoShisetsuEntity 介護保険施設等
      * @param keikakuTodokedeYMD3Masshosen 事業所届出年月日取消3
-     * @param nyushoShisetsuShurui 介護保険施設等の種類1
      * @param shisetsuNyusho 施設入所1
      * @param shisetsuNyuin 施設入院1
      * @param shisetsuTaisho 施設退所1
@@ -164,7 +162,6 @@ public class ShikakushashoBodyItem {
             RString keikakuTodokedeYMD3,
             RString keikakuTodokedeYMD3Asutarisuku,
             RString keikakuTodokedeYMD3Masshosen,
-            RString nyushoShisetsuShurui,
             List<NyushoShisetsuDataEntity> nyushoShisetsuEntity,
             RString shisetsuNyusho,
             RString shisetsuNyuin,
@@ -214,7 +211,6 @@ public class ShikakushashoBodyItem {
         this.keikakuTodokedeYMD3 = keikakuTodokedeYMD3;
         this.keikakuTodokedeYMD3Asutarisuku = keikakuTodokedeYMD3Asutarisuku;
         this.keikakuTodokedeYMD3Masshosen = keikakuTodokedeYMD3Masshosen;
-        this.nyushoShisetsuShurui = nyushoShisetsuShurui;
         this.nyushoShisetsuEntity = nyushoShisetsuEntity;
         this.shisetsuNyusho = shisetsuNyusho;
         this.shisetsuNyuin = shisetsuNyuin;

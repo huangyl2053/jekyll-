@@ -6,6 +6,8 @@ import jp.co.ndensan.reams.uz.uza.report.source.ReportItem;
 
 /**
  * 帳票設計_DBBRP43002_4_特別徴収開始通知書（本算定）発行一覧表
+ *
+ * @reamsid_L DBB-0780-100 yangchenbing
  */
 public class TokubetsuChoshuKaishiSource implements IReportSource {
 // <editor-fold defaultstate="collapsed" desc="Generated Code">

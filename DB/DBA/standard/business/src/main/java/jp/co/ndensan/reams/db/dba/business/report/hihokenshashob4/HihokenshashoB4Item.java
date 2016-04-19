@@ -238,11 +238,11 @@ public class HihokenshashoB4Item {
      * @param kosekiSeibetsu2 構成性別2
      * @param itakuGyosha1 居宅介護事業者長１
      * @param itakuGyosha2 居宅介護事業者長2
-     * @param itakuGyosha2Asa
-     * @param itakuGyosha2Massho
+     * @param itakuGyosha2Asa 居宅介護事業者長★2
+     * @param itakuGyosha2Massho 居宅介護事業者長取消2
      * @param itakuGyosha3 居宅介護事業者長3
-     * @param itakuGyosha3Asa 居宅介護事業者長★2
-     * @param itakuGyosha3Massho 居宅介護事業者長取消2
+     * @param itakuGyosha3Asa 居宅介護事業者長★3
+     * @param itakuGyosha3Massho 居宅介護事業者長取消3
      */
     public HihokenshashoB4Item(RString yukokigen,
             RString hihokenshanno,

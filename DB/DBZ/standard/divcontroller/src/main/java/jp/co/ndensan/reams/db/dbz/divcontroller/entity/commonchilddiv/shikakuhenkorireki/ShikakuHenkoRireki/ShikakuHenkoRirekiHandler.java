@@ -28,8 +28,6 @@ import jp.co.ndensan.reams.db.dbz.service.core.basic.HihokenshaDaichoManager;
 import jp.co.ndensan.reams.db.dbz.service.core.shikakuhenkorireki.ShikakuhenkorirekiFinder;
 import jp.co.ndensan.reams.db.dbz.service.sikakukanrenidoa.SikakuKanrenIdoFinder;
 import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.kojin.IKojin;
-import jp.co.ndensan.reams.ur.urz.business.IUrControlData;
-import jp.co.ndensan.reams.ur.urz.business.UrControlDataFactory;
 import jp.co.ndensan.reams.ur.urz.definition.core.shikibetsutaisho.JuminJotai;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaKanaMeisho;
@@ -47,6 +45,7 @@ import jp.co.ndensan.reams.uz.uza.lang.Separator;
 import jp.co.ndensan.reams.uz.uza.ui.binding.DataGridButtonState;
 import jp.co.ndensan.reams.uz.uza.ui.binding.KeyValueDataSource;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxFlexibleDate;
+import jp.co.ndensan.reams.uz.uza.ui.servlets.ResponseHolder;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 import jp.co.ndensan.reams.uz.uza.util.Models;
 import jp.co.ndensan.reams.uz.uza.util.config.BusinessConfig;
@@ -270,7 +269,7 @@ public class ShikakuHenkoRirekiHandler {
         hihokenshaDaichoBuilder.set資格変更年月日(row.getHenkoDate().getValue());
         hihokenshaDaichoBuilder.set資格変更届出年月日(row.getHenkoTodokedeDate().getValue());
         hihokenshaDaichoBuilder.set資格変更事由コード(row.getHenkoJiyuKey());
-        hihokenshaDaichoBuilder.set広住特措置元市町村コード(new LasdecCode(div.getDdlHenkoSochimotoHokensha().getSelectedKey()));
+        hihokenshaDaichoBuilder.set広住特措置元市町村コード(new LasdecCode(div.getDdlHenkoSochimotoHokensha().getSelectedValue()));
         if (div.getDdlJuminJoho().getIsBlankLine()) {
             hihokenshaDaichoBuilder.set旧市町村コード(new LasdecCode(div.getDdlHenkoKyuHokensha().getSelectedKey()));
         } else {
@@ -402,10 +401,13 @@ public class ShikakuHenkoRirekiHandler {
 
     private static class DateComparator implements Comparator<HihokenshaDaicho>, Serializable {
 
+        private static final long serialVersionUID = -3192008985017883135L;
+
         @Override
         public int compare(HihokenshaDaicho o1, HihokenshaDaicho o2) {
             return o2.get異動日().compareTo(o1.get異動日());
         }
+
     }
 
     private List<KeyValueDataSource> get措置元保険者DDL() {
@@ -440,8 +442,7 @@ public class ShikakuHenkoRirekiHandler {
     }
 
     private List<KeyValueDataSource> get変更事由リスト情報() {
-        IUrControlData controlData = UrControlDataFactory.createInstance();
-        RString menuID = controlData.getMenuID();
+        RString menuID = ResponseHolder.getMenuID();
         List<KeyValueDataSource> dataSource = new ArrayList<>();
         dataSource.add(new KeyValueDataSource(EMPTY_KEY, RString.EMPTY));
         if (MENUID_DBAMN52003.equals(menuID)) {
@@ -508,7 +509,7 @@ public class ShikakuHenkoRirekiHandler {
     private RString get市町村コード() {
         List<RString> selectedKey = div.getDdlJuminJoho().getSelectedKey().split(半角コロン.toString());
         RString 市町村コード = RString.EMPTY;
-        if (selectedKey.size() > 1) {
+        if (1 < selectedKey.size()) {
             市町村コード = selectedKey.get(1);
         }
         return 市町村コード;
@@ -517,7 +518,7 @@ public class ShikakuHenkoRirekiHandler {
     private RString get識別コード() {
         List<RString> selectedKey = div.getDdlJuminJoho().getSelectedKey().split(半角コロン.toString());
         RString 識別コード = RString.EMPTY;
-        if (selectedKey.size() > 1) {
+        if (1 < selectedKey.size()) {
             識別コード = selectedKey.get(0);
         }
         return 識別コード;

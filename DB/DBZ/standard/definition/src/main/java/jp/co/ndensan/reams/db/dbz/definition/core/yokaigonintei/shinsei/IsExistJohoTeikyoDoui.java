@@ -11,7 +11,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 /**
  * 情報提供への同意有無を表す列挙型です。
  *
- * @author LDNS
+ * @reamsid_L DBZ-9999-023 wangchao
  */
 public enum IsExistJohoTeikyoDoui {
 

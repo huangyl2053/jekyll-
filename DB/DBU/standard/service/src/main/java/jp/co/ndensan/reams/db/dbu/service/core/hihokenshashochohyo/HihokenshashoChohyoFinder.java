@@ -154,7 +154,7 @@ public class HihokenshashoChohyoFinder {
             entity.get(i).setYukokigen1(RString.EMPTY);
             entity.get(i).setYukokigen2(RString.EMPTY);
             if (郵便番号表示有.equals(BusinessConfig.get(ConfigKeysHihokenshashoIndicationMethod.被保険者証表示方法_郵便番号表示有無))) {
-                entity.get(i).setHihokenshanno(hihoken.get(i).getHihokenshaNo());
+                entity.get(i).setHihokenshanno(hihoken.get(i).getHihokenshaNo().getEditedYubinNo());
             }
             RString gyoseiku = hihoken.get(i).getGyoseiku();
             if (!gyoseiku.isNullOrEmpty()) {

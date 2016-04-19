@@ -11,6 +11,8 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
  * 認定調査項目内容04
+ *
+ * @reamsid_L DBZ-9999-023 wangchao
  */
 public enum ChosaAnser04 {
 

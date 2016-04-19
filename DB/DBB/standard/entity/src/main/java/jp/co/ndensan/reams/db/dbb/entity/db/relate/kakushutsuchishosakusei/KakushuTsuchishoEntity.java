@@ -14,7 +14,7 @@ import jp.co.ndensan.reams.db.dbz.entity.db.basic.UrT0705ChoteiKyotsuEntity;
 import jp.co.ndensan.reams.ua.uax.entity.db.basic.UaFt200FindShikibetsuTaishoEntity;
 
 /**
- * 更正後賦課の情報を取得Entityクラスです。
+ * 更正前後賦課の情報を取得Entityクラスです。
  *
  * @reamsid_L DBB-0740-020 xicongwang
  */
