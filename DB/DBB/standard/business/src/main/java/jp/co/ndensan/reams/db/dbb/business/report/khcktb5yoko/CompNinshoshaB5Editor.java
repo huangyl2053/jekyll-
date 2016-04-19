@@ -6,6 +6,7 @@
 package jp.co.ndensan.reams.db.dbb.business.report.khcktb5yoko;
 
 import jp.co.ndensan.reams.db.dbb.entity.db.report.khcktb5yoko.KaigoHokenryoChoshuyuyoKetteiTsuchishoB5YokoSource;
+import jp.co.ndensan.reams.ur.urz.entity.report.parts.ninshosha.NinshoshaSource;
 
 /**
  * 介護保険料徴収猶予決定通知書B5横タイプCompNinshoshaEditor
@@ -14,30 +15,27 @@ import jp.co.ndensan.reams.db.dbb.entity.db.report.khcktb5yoko.KaigoHokenryoChos
  */
 public class CompNinshoshaB5Editor implements IKaigoHokenryoChoshuyuyoKetteiTsuchishoB5YokoEditor {
 
-    private final KaigoHokenryoChoshuyuyoKetteiTsuchishoItem item;
+    private final NinshoshaSource sourceBuilder;
 
     /**
      * コンストラクタです
      *
-     * @param item KaigoHokenryoChoshuyuyoKetteiTsuchishoB5YokoItem
+     * @param sourceBuilder sourceBuilder
      */
-    public CompNinshoshaB5Editor(KaigoHokenryoChoshuyuyoKetteiTsuchishoItem item) {
-        this.item = item;
+    public CompNinshoshaB5Editor(NinshoshaSource sourceBuilder) {
+        this.sourceBuilder = sourceBuilder;
     }
 
     @Override
     public KaigoHokenryoChoshuyuyoKetteiTsuchishoB5YokoSource edit(KaigoHokenryoChoshuyuyoKetteiTsuchishoB5YokoSource source) {
 
-        source.hakkoYMD = item.getHakkoYMD();
-        source.denshiKoin = item.getDenshiKoin();
-        source.ninshoshaYakushokuMei = item.getNinshoshaYakushokuMei();
-        // QA:581
-//        source.ninshoshaYakushokuMei1 = item.getNinshoshaYakushokuMei1();
-//        source.ninshoshaYakushokuMei2 = item.getNinshoshaYakushokuMei1();
-        source.koinMojiretsu = item.getKoinMojiretsu();
-        source.ninshoshaShimeiKakenai = item.getNinshoshaShimeiKakenai();
-        source.ninshoshaShimeiKakeru = item.getNinshoshaShimeiKakeru();
-        source.koinShoryaku = item.getKoinShoryaku();
+        source.hakkoYMD = sourceBuilder.hakkoYMD;
+        source.denshiKoin = sourceBuilder.denshiKoin;
+        source.ninshoshaYakushokuMei = sourceBuilder.ninshoshaYakushokuMei;
+        source.koinMojiretsu = sourceBuilder.koinMojiretsu;
+        source.ninshoshaShimeiKakenai = sourceBuilder.ninshoshaShimeiKakenai;
+        source.ninshoshaShimeiKakeru = sourceBuilder.ninshoshaShimeiKakeru;
+        source.koinShoryaku = sourceBuilder.koinShoryaku;
         return source;
     }
 

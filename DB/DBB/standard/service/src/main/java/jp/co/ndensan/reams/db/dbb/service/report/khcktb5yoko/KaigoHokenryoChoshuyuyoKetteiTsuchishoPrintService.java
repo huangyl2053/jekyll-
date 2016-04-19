@@ -14,7 +14,6 @@ import jp.co.ndensan.reams.db.dbb.business.report.khcktb5yoko.KaigoHokenryoChosh
 import jp.co.ndensan.reams.db.dbb.business.report.khcktb5yoko.KaigoHokenryoChoshuyuyoKetteiTsuchishoB5YokoJoho;
 import jp.co.ndensan.reams.db.dbb.business.report.khcktb5yoko.KaigoHokenryoChoshuyuyoKetteiTsuchishoB5YokoProperty;
 import jp.co.ndensan.reams.db.dbb.business.report.khcktb5yoko.KaigoHokenryoChoshuyuyoKetteiTsuchishoB5YokoReport;
-import jp.co.ndensan.reams.db.dbb.business.report.khcktb5yoko.KaigoHokenryoChoshuyuyoKetteiTsuchishoItem;
 import jp.co.ndensan.reams.db.dbb.business.report.tsuchisho.notsu.HyojiCodes;
 import jp.co.ndensan.reams.db.dbb.entity.db.report.khcktb5yoko.KaigoHokenryoChoshuyuyoKetteiTsuchishoA4TateSource;
 import jp.co.ndensan.reams.db.dbb.entity.db.report.khcktb5yoko.KaigoHokenryoChoshuyuyoKetteiTsuchishoB5YokoSource;
@@ -25,7 +24,6 @@ import jp.co.ndensan.reams.db.dbx.business.core.kanri.KitsukiList;
 import jp.co.ndensan.reams.db.dbx.business.core.kanri.TokuchoKiUtil;
 import jp.co.ndensan.reams.db.dbx.definition.core.fucho.FuchokiJohoTsukiShoriKubun;
 import jp.co.ndensan.reams.db.dbx.definition.core.fuka.Tsuki;
-import jp.co.ndensan.reams.db.dbz.business.report.parts.kaigotoiawasesaki.CompKaigoToiawasesakiSource;
 import jp.co.ndensan.reams.db.dbz.business.report.parts.kaigotoiawasesaki.IKaigoToiawasesakiSourceBuilder;
 import jp.co.ndensan.reams.db.dbz.business.report.util.EditedAtesaki;
 import jp.co.ndensan.reams.db.dbz.definition.core.enumeratedtype.ChoshuHohoKibetsu;
@@ -35,17 +33,20 @@ import jp.co.ndensan.reams.ur.urz.business.report.parts.ninshosha.NinshoshaSourc
 import jp.co.ndensan.reams.ur.urz.entity.report.parts.ninshosha.NinshoshaSource;
 import jp.co.ndensan.reams.ur.urz.entity.report.sofubutsuatesaki.SofubutsuAtesakiSource;
 import jp.co.ndensan.reams.ur.urz.service.core.ninshosha.INinshoshaManager;
-import jp.co.ndensan.reams.ur.urz.service.core.ninshosha.NinshoshaFinderFactory;
-import jp.co.ndensan.reams.uz.uza.batch.process.BatchReportFactory;
-import jp.co.ndensan.reams.uz.uza.batch.process.BatchReportWriter;
-import jp.co.ndensan.reams.uz.uza.batch.process.BatchWriter;
+import jp.co.ndensan.reams.ur.urz.service.core.ninshosha._NinshoshaManager;
 import jp.co.ndensan.reams.uz.uza.biz.GyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
-import jp.co.ndensan.reams.uz.uza.report.Printer;
+import jp.co.ndensan.reams.uz.uza.report.IReportProperty;
+import jp.co.ndensan.reams.uz.uza.report.IReportSource;
+import jp.co.ndensan.reams.uz.uza.report.Report;
+import jp.co.ndensan.reams.uz.uza.report.ReportAssembler;
+import jp.co.ndensan.reams.uz.uza.report.ReportAssemblerBuilder;
+import jp.co.ndensan.reams.uz.uza.report.ReportManager;
 import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
 import jp.co.ndensan.reams.uz.uza.report.SourceDataCollection;
+import jp.co.ndensan.reams.uz.uza.report.source.breaks.BreakAggregator;
 import jp.co.ndensan.reams.uz.uza.util.editor.DecimalFormatter;
 
 /**
@@ -65,26 +66,24 @@ public class KaigoHokenryoChoshuyuyoKetteiTsuchishoPrintService {
     private static final RString 期_3 = new RString("03");
     private static final RString 期_4 = new RString("04");
     private static final RString 期_5 = new RString("05");
-    private static final RString 普徴期_4 = new RString("4");
-    private static final RString 普徴期_5 = new RString("5");
-    private static final RString 普徴期_6 = new RString("6");
-    private static final RString 普徴期_7 = new RString("7");
-    private static final RString 普徴期_8 = new RString("8");
-    private static final RString 普徴期_9 = new RString("9");
-    private static final RString 普徴期_10 = new RString("10");
-    private static final RString 普徴期_11 = new RString("11");
-    private static final RString 普徴期_12 = new RString("12");
-    private static final RString 普徴期_1 = new RString("1");
-    private static final RString 普徴期_2 = new RString("2");
-    private static final RString 普徴期_3 = new RString("3");
-    private static final RString 普徴期翌年度_4 = new RString("13");
+    private static final RString 期_6 = new RString("06");
+    private static final RString 普徴期_4 = new RString("_4月");
+    private static final RString 普徴期_5 = new RString("_5月");
+    private static final RString 普徴期_6 = new RString("_6月");
+    private static final RString 普徴期_7 = new RString("_7月");
+    private static final RString 普徴期_8 = new RString("_8月");
+    private static final RString 普徴期_9 = new RString("_9月");
+    private static final RString 普徴期_10 = new RString("_10月");
+    private static final RString 普徴期_11 = new RString("_11月");
+    private static final RString 普徴期_12 = new RString("_12月");
+    private static final RString 普徴期_1 = new RString("_1月");
+    private static final RString 普徴期_2 = new RString("_2月");
+    private static final RString 普徴期_3 = new RString("_3月");
+    private static final RString 普徴期翌年度_4 = new RString("翌年度4月");
+    private static final RString 普徴期翌年度_5 = new RString("翌年度5月");
     private static final RString 随時 = new RString("随時");
     private static final RString 波線 = new RString("～");
-    private static final RString 種別コード = new RString("DBB100081_KaigoHokenHokenryoChoshuyoyoKetteiTsuchishoDaihyo");
-
-    @BatchWriter
-    private BatchReportWriter<KaigoHokenryoChoshuyuyoKetteiTsuchishoB5YokoSource> batchWrite;
-    private ReportSourceWriter<KaigoHokenryoChoshuyuyoKetteiTsuchishoB5YokoSource> reportSourceWriter;
+    private static final RString 種別コード = new RString("DBB100081");
 
     /**
      * printメソッド
@@ -102,23 +101,41 @@ public class KaigoHokenryoChoshuyuyoKetteiTsuchishoPrintService {
 
         KaigoHokenryoChoshuyuyoKetteiTsuchishoB5YokoProperty property
                 = new KaigoHokenryoChoshuyuyoKetteiTsuchishoB5YokoProperty();
-        List<KaigoHokenryoChoshuyuyoKetteiTsuchishoItem> targets = setItems(
-                発行日, 文書番号, 徴収猶予決定通知書情報, 通知書定型文, 介護問合せ先ソースビルダー);
-        return new Printer<KaigoHokenryoChoshuyuyoKetteiTsuchishoB5YokoSource>().spool(property, toReportsB5横タイプ(targets));
+        try (ReportManager reportManager = new ReportManager()) {
+            try (ReportAssembler<KaigoHokenryoChoshuyuyoKetteiTsuchishoB5YokoSource> assembler = createAssembler(property, reportManager)) {
+                INinshoshaManager manager = new _NinshoshaManager();
+                Ninshosha 認証者 = manager.get帳票認証者(GyomuCode.DB介護保険, 種別コード);
+                NinshoshaSource sourceBuilder = NinshoshaSourceBuilderFactory.createInstance(認証者,
+                        徴収猶予決定通知書情報.get地方公共団体(), assembler.getImageFolderPath(), 発行日).buildSource();
+                ReportSourceWriter<KaigoHokenryoChoshuyuyoKetteiTsuchishoB5YokoSource> reportSourceWriter
+                        = new ReportSourceWriter(assembler);
 
-    }
-
-    /**
-     * toReportsメソッド
-     *
-     * @param targets List<KaigoHokenryoChoshuyuyoKetteiTsuchishoItem>
-     * @return List<KaigoHokenryoChoshuyuyoKetteiTsuchishoB5YokoReport>
-     */
-    private static List<KaigoHokenryoChoshuyuyoKetteiTsuchishoB5YokoReport>
-            toReportsB5横タイプ(List<KaigoHokenryoChoshuyuyoKetteiTsuchishoItem> targets) {
-        List<KaigoHokenryoChoshuyuyoKetteiTsuchishoB5YokoReport> list = new ArrayList<>();
-        list.add(KaigoHokenryoChoshuyuyoKetteiTsuchishoB5YokoReport.createForm(targets));
-        return list;
+                KitsukiList 期月リスト_特徴;
+                KitsukiList 期月リスト_普徴;
+                List<RString> 随時リスト = new ArrayList<>();
+                List<KibetsuChoshyuYuyoKikan> 期別徴収猶予期間List = new ArrayList<>();
+                TokuchoKiUtil 月期対応取得_特徴 = new TokuchoKiUtil();
+                期月リスト_特徴 = 月期対応取得_特徴.get期月リスト();
+                FuchoKiUtil 月期対応取得_普徴 = new FuchoKiUtil();
+                期月リスト_普徴 = 月期対応取得_普徴.get期月リスト();
+                for (int index = ONE; index < END_NUMBER; index++) {
+                    HyojiCodes 表示コード = get表示コード(徴収猶予決定通知書情報);
+                    期別徴収猶予期間List = get期別徴収猶予期間リストを生成する(期別徴収猶予期間List,
+                            徴収猶予決定通知書情報, 期月リスト_特徴, 期月リスト_普徴, index);
+                    随時リスト = get随時リストを生成する(随時リスト, 期月リスト_普徴, index);
+                    //TODO
+                    EditedAtesaki 編集後宛先 = new EditedAtesaki(徴収猶予決定通知書情報.get宛先(),
+                            徴収猶予決定通知書情報.get地方公共団体(), 徴収猶予決定通知書情報.get帳票制御共通(),
+                            get送付物宛先ソース(), null, true, null, null, null, null);
+                    KaigoHokenryoChoshuyuyoKetteiTsuchishoB5YokoReport report
+                            = new KaigoHokenryoChoshuyuyoKetteiTsuchishoB5YokoReport(発行日, 文書番号,
+                                    徴収猶予決定通知書情報, 通知書定型文, 介護問合せ先ソースビルダー, sourceBuilder,
+                                    表示コード, 期別徴収猶予期間List, 随時リスト, 編集後宛先, index);
+                    report.writeBy(reportSourceWriter);
+                }
+            }
+            return reportManager.publish();
+        }
     }
 
     /**
@@ -137,48 +154,48 @@ public class KaigoHokenryoChoshuyuyoKetteiTsuchishoPrintService {
 
         KaigoHokenryoChoshuyuyoKetteiTsuchishoA4TateProperty property
                 = new KaigoHokenryoChoshuyuyoKetteiTsuchishoA4TateProperty();
-        List<KaigoHokenryoChoshuyuyoKetteiTsuchishoItem> targets = setItems(
-                発行日, 文書番号, 徴収猶予決定通知書情報, 通知書定型文, 介護問合せ先ソースビルダー);
-        return new Printer<KaigoHokenryoChoshuyuyoKetteiTsuchishoA4TateSource>().spool(property, toReportsA4縦タイプ(targets));
+        try (ReportManager reportManager = new ReportManager()) {
+            try (ReportAssembler<KaigoHokenryoChoshuyuyoKetteiTsuchishoA4TateSource> assembler = createAssembler(property, reportManager)) {
+                INinshoshaManager manager = new _NinshoshaManager();
+                Ninshosha 認証者 = manager.get帳票認証者(GyomuCode.DB介護保険, 種別コード);
+                NinshoshaSource sourceBuilder = NinshoshaSourceBuilderFactory.createInstance(認証者,
+                        徴収猶予決定通知書情報.get地方公共団体(), assembler.getImageFolderPath(), 発行日).buildSource();
+                ReportSourceWriter<KaigoHokenryoChoshuyuyoKetteiTsuchishoA4TateSource> reportSourceWriter
+                        = new ReportSourceWriter(assembler);
+
+                KitsukiList 期月リスト_特徴;
+                KitsukiList 期月リスト_普徴;
+                List<RString> 随時リスト = new ArrayList<>();
+                List<KibetsuChoshyuYuyoKikan> 期別徴収猶予期間List = new ArrayList<>();
+                TokuchoKiUtil 月期対応取得_特徴 = new TokuchoKiUtil();
+                期月リスト_特徴 = 月期対応取得_特徴.get期月リスト();
+                FuchoKiUtil 月期対応取得_普徴 = new FuchoKiUtil();
+                期月リスト_普徴 = 月期対応取得_普徴.get期月リスト();
+                for (int index = ONE; index < END_NUMBER; index++) {
+                    HyojiCodes 表示コード = get表示コード(徴収猶予決定通知書情報);
+                    期別徴収猶予期間List = get期別徴収猶予期間リストを生成する(期別徴収猶予期間List,
+                            徴収猶予決定通知書情報, 期月リスト_特徴, 期月リスト_普徴, index);
+                    随時リスト = get随時リストを生成する(随時リスト, 期月リスト_普徴, index);
+                    // TODO
+                    EditedAtesaki 編集後宛先 = new EditedAtesaki(徴収猶予決定通知書情報.get宛先(),
+                            徴収猶予決定通知書情報.get地方公共団体(), 徴収猶予決定通知書情報.get帳票制御共通(),
+                            get送付物宛先ソース(), null, true, null, null, null, null);
+                    KaigoHokenryoChoshuyuyoKetteiTsuchishoA4TateReport report
+                            = new KaigoHokenryoChoshuyuyoKetteiTsuchishoA4TateReport(発行日, 文書番号,
+                                    徴収猶予決定通知書情報, 通知書定型文, 介護問合せ先ソースビルダー, sourceBuilder,
+                                    表示コード, 期別徴収猶予期間List, 随時リスト, 編集後宛先, index);
+                    report.writeBy(reportSourceWriter);
+                }
+            }
+            return reportManager.publish();
+        }
 
     }
 
-    /**
-     * toReportsメソッド
-     *
-     * @param targets List<KaigoHokenryoChoshuyuyoKetteiTsuchishoItem>
-     * @return List<KaigoHokenryoChoshuyuyoKetteiTsuchishoA4TateReport>
-     */
-    private static List<KaigoHokenryoChoshuyuyoKetteiTsuchishoA4TateReport>
-            toReportsA4縦タイプ(List<KaigoHokenryoChoshuyuyoKetteiTsuchishoItem> targets) {
-        List<KaigoHokenryoChoshuyuyoKetteiTsuchishoA4TateReport> list = new ArrayList<>();
-        list.add(KaigoHokenryoChoshuyuyoKetteiTsuchishoA4TateReport.createForm(targets));
-        return list;
-    }
-
-    /**
-     * setItemsメソッド
-     *
-     * @param 発行日 発行日
-     * @param 文書番号 文書番号
-     * @param 徴収猶予決定通知書情報 徴収猶予決定通知書情報
-     * @param 通知書定型文 通知書定型文
-     * @param 介護問合せ先 介護問合せ先
-     * @return List<KaigoHokenryoChoshuyuyoKetteiTsuchishoB5YokoItem>
-     */
-    private List<KaigoHokenryoChoshuyuyoKetteiTsuchishoItem> setItems(RDate 発行日,
-            RString 文書番号, KaigoHokenryoChoshuyuyoKetteiTsuchishoB5YokoJoho 徴収猶予決定通知書情報,
-            RString 通知書定型文, IKaigoToiawasesakiSourceBuilder 介護問合せ先ソースビルダー) {
-
-        KitsukiList 期月リスト_特徴;
-        KitsukiList 期月リスト_普徴;
-        List<RString> 随時リスト = new ArrayList<>();
-        List<KaigoHokenryoChoshuyuyoKetteiTsuchishoItem> itemList = new ArrayList<>();
-        KaigoHokenryoChoshuyuyoKetteiTsuchishoItem item = new KaigoHokenryoChoshuyuyoKetteiTsuchishoItem();
-        List<KibetsuChoshyuYuyoKikan> 期別徴収猶予期間List = new ArrayList<>();
+    private HyojiCodes get表示コード(KaigoHokenryoChoshuyuyoKetteiTsuchishoB5YokoJoho 徴収猶予決定通知書情報) {
 
         HyojiCodeResearcher hyojiCodeResearcher = new HyojiCodeResearcher();
-        HyojiCodes 表示コード = hyojiCodeResearcher.create表示コード情報(
+        return hyojiCodeResearcher.create表示コード情報(
                 徴収猶予決定通知書情報.get帳票制御共通().toEntity(),
                 new RString(徴収猶予決定通知書情報.get宛名().get住所().get町域コード().toString()),
                 new RString(徴収猶予決定通知書情報.get宛名().get行政区画().getGyoseiku().getコード().toString()),
@@ -186,39 +203,6 @@ public class KaigoHokenryoChoshuyuyoKetteiTsuchishoPrintService {
                 new RString(徴収猶予決定通知書情報.get宛名().get行政区画().getChiku2().getコード().toString()),
                 new RString(徴収猶予決定通知書情報.get宛名().get行政区画().getChiku3().getコード().toString()),
                 new RString(徴収猶予決定通知書情報.get納組情報().getNokumi().getNokumiCode().toString()));
-
-        editItem表示コード(表示コード, item, 文書番号, 徴収猶予決定通知書情報, 通知書定型文);
-
-        TokuchoKiUtil 月期対応取得_特徴 = new TokuchoKiUtil();
-        期月リスト_特徴 = 月期対応取得_特徴.get期月リスト();
-        FuchoKiUtil 月期対応取得_普徴 = new FuchoKiUtil();
-        期月リスト_普徴 = 月期対応取得_普徴.get期月リスト();
-
-        for (int index = ONE; index < END_NUMBER; index++) {
-            期別徴収猶予期間List = get期別徴収猶予期間リストを生成する(期別徴収猶予期間List,
-                    徴収猶予決定通知書情報, 期月リスト_特徴, 期月リスト_普徴, index);
-            随時リスト = get随時リストを生成する(随時リスト, 期月リスト_普徴, index);
-            edit期別と随時リスト(item, 期別徴収猶予期間List, 随時リスト, index);
-        }
-
-        EditedAtesaki 編集後宛先 = new EditedAtesaki(徴収猶予決定通知書情報.get宛先(),
-                徴収猶予決定通知書情報.get地方公共団体(), 徴収猶予決定通知書情報.get帳票制御共通(), null,
-                null, true, null, null, null, null);
-        editCompSofubutsuAtesakiItem(item, 編集後宛先);
-        INinshoshaManager iNinshoshaManager = NinshoshaFinderFactory.createInstance();
-        Ninshosha ninshosha = iNinshoshaManager.get帳票認証者(GyomuCode.DB介護保険, 種別コード);
-
-        batchWrite = BatchReportFactory.createBatchReportWriter(種別コード).create();
-        reportSourceWriter = new ReportSourceWriter<>(batchWrite);
-        RString イメージファイルパス = reportSourceWriter.getImageFolderPath();
-        NinshoshaSource sourceBuilder = NinshoshaSourceBuilderFactory.createInstance(
-                ninshosha, 徴収猶予決定通知書情報.get地方公共団体(), イメージファイルパス, 発行日).buildSource();
-        editCompNinshoshaItem(item, sourceBuilder);
-
-        editCompKaigoToiawasesakiItem(item, 介護問合せ先ソースビルダー);
-
-        itemList.add(item);
-        return itemList;
     }
 
     private List<KibetsuChoshyuYuyoKikan> get期別徴収猶予期間リストを生成する(
@@ -296,8 +280,10 @@ public class KaigoHokenryoChoshuyuyoKetteiTsuchishoPrintService {
             return 徴収猶予決定通知書情報.get徴収猶予の情報().get特徴期別金額04();
         } else if (期_5.equals(期)) {
             return 徴収猶予決定通知書情報.get徴収猶予の情報().get特徴期別金額05();
-        } else {
+        } else if (期_6.equals(期)) {
             return 徴収猶予決定通知書情報.get徴収猶予の情報().get特徴期別金額06();
+        } else {
+            return Decimal.ZERO;
         }
     }
 
@@ -331,124 +317,73 @@ public class KaigoHokenryoChoshuyuyoKetteiTsuchishoPrintService {
             return 徴収猶予決定通知書情報.get徴収猶予の情報().get普徴期別金額12();
         } else if (普徴期翌年度_4.equals(普徴月)) {
             return 徴収猶予決定通知書情報.get徴収猶予の情報().get普徴期別金額13();
-        } else {
+        } else if (普徴期翌年度_5.equals(普徴月)) {
             return 徴収猶予決定通知書情報.get徴収猶予の情報().get普徴期別金額14();
+        } else {
+            return Decimal.ZERO;
         }
     }
 
     private RString get徴収猶予期間(KaigoHokenryoChoshuyuyoKetteiTsuchishoB5YokoJoho 徴収猶予決定通知書情報, Kitsuki 普徴期月) {
 
-        RString 徴収猶予期間;
+        RString 徴収猶予期間 = RString.EMPTY;
         ChoshuYuyoJoho choshuYuyoJoho = 徴収猶予決定通知書情報.get徴収猶予の情報();
+        if (choshuYuyoJoho == null) {
+            return 徴収猶予期間;
+        }
         RString 徴収方法 = choshuYuyoJoho.get介護期別徴収猶予().getChoshuHoho();
         RString 期 = new RString(String.valueOf(choshuYuyoJoho.get介護期別徴収猶予().getKi()));
         if (ChoshuHohoKibetsu.普通徴収.code().equals(徴収方法) && 普徴期月.get期().equals(期)) {
             徴収猶予期間 = new RString(DateEditor.to西暦(choshuYuyoJoho.get介護期別徴収猶予().getYuyoStartYMD()).toString()
                     + 波線.toString() + DateEditor.to西暦(choshuYuyoJoho.get介護期別徴収猶予().getYuyoEndYMD()).toString());
-        } else {
-            徴収猶予期間 = RString.EMPTY;
         }
         return 徴収猶予期間;
     }
 
-    private void editItem表示コード(HyojiCodes 表示コード, KaigoHokenryoChoshuyuyoKetteiTsuchishoItem item,
-            RString 文書番号, KaigoHokenryoChoshuyuyoKetteiTsuchishoB5YokoJoho 徴収猶予決定通知書情報, RString 通知書定型文) {
-
-        item.setBunshoNo(文書番号);
-        item.setChoteiNendo(徴収猶予決定通知書情報.get徴収猶予の情報().get調定年度());
-        item.setFukaNendo(徴収猶予決定通知書情報.get徴収猶予の情報().get調定年度());
-        item.setKetteiKekka(徴収猶予決定通知書情報.get徴収猶予の情報().get徴収猶予状態区分());
-        item.setHyojicodeName1(表示コード.get表示コード名１());
-        item.setHyojicodeName2(表示コード.get表示コード名２());
-        item.setHyojicodeName3(表示コード.get表示コード名３());
-        item.setHyojicode1(表示コード.get表示コード１());
-        item.setHyojicode2(表示コード.get表示コード２());
-        item.setHyojicode3(表示コード.get表示コード３());
-        item.setTsuchishoNo(徴収猶予決定通知書情報.get徴収猶予の情報().get通知書番号());
-        item.setSetaiCode(徴収猶予決定通知書情報.get徴収猶予の情報().get世帯コード());
-        item.setHihokenshaNo(徴収猶予決定通知書情報.get徴収猶予の情報().get被保険者番号());
-        item.setShikibetsucode(徴収猶予決定通知書情報.get徴収猶予の情報().get識別コード());
-        item.setKetteiYMD(徴収猶予決定通知書情報.get徴収猶予の情報().get徴収猶予決定日());
-        item.setKetteiRiyu1(徴収猶予決定通知書情報.get徴収猶予の情報().get徴収猶予種類());
-        item.setKetteiRiyu2(徴収猶予決定通知書情報.get徴収猶予の情報().get徴収猶予取消事由());
-        item.setBikoTitle(通知書定型文);
-        item.setBiko(通知書定型文);
+    private static <T extends IReportSource, R extends Report<T>> ReportAssembler<T> createAssembler(
+            IReportProperty<T> property, ReportManager manager) {
+        ReportAssemblerBuilder builder = manager.reportAssembler(property.reportId().value(), property.subGyomuCode());
+        for (BreakAggregator<? super T, ?> breaker : property.breakers()) {
+            builder.addBreak(breaker);
+        }
+        builder.isHojinNo(property.containsHojinNo());
+        builder.isKojinNo(property.containsKojinNo());
+        return builder.<T>create();
     }
 
-    private void edit期別と随時リスト(KaigoHokenryoChoshuyuyoKetteiTsuchishoItem item,
-            List<KibetsuChoshyuYuyoKikan> 期別徴収猶予期間List, List<RString> 随時リスト, int index) {
-
-        item.setListKibetsu_1(期別徴収猶予期間List.get(index - 1).get特徴期());
-        item.setListKibetsu_2(期別徴収猶予期間List.get(index - 1).get特徴月());
-        item.setListKibetsu_3(期別徴収猶予期間List.get(index - 1).get特徴期別金額());
-        item.setListKibetsu_4(期別徴収猶予期間List.get(index - 1).get普徴期());
-        item.setListKibetsu_5(期別徴収猶予期間List.get(index - 1).get普徴月());
-        item.setListKibetsu_6(期別徴収猶予期間List.get(index - 1).get普徴期別金額());
-        item.setListKibetsu_7(期別徴収猶予期間List.get(index - 1).get徴収猶予期間());
-        item.setListZuiji_1(随時リスト.get(index - 1));
+    private SofubutsuAtesakiSource get送付物宛先ソース() {
+        SofubutsuAtesakiSource 送付物宛先ソース = new SofubutsuAtesakiSource();
+        送付物宛先ソース.yubinNo = new RString("1");
+        送付物宛先ソース.gyoseiku = new RString("1");
+        送付物宛先ソース.jusho3 = new RString("2");
+        送付物宛先ソース.jushoText = new RString("3");
+        送付物宛先ソース.jusho1 = new RString("4");
+        送付物宛先ソース.jusho2 = new RString("5");
+        送付物宛先ソース.katagakiText = new RString("6");
+        送付物宛先ソース.katagaki2 = new RString("7");
+        送付物宛先ソース.katagakiSmall2 = new RString("8");
+        送付物宛先ソース.katagaki1 = new RString("9");
+        送付物宛先ソース.katagakiSmall1 = new RString("10");
+        送付物宛先ソース.shimei2 = new RString("11");
+        送付物宛先ソース.shimeiSmall2 = new RString("12");
+        送付物宛先ソース.shimeiText = new RString("13");
+        送付物宛先ソース.meishoFuyo2 = new RString("14");
+        送付物宛先ソース.shimeiSmall1 = new RString("15");
+        送付物宛先ソース.dainoKubunMei = new RString("16");
+        送付物宛先ソース.shimei1 = new RString("17");
+        送付物宛先ソース.meishoFuyo1 = new RString("18");
+        送付物宛先ソース.samabunShimeiText = new RString("19");
+        送付物宛先ソース.kakkoLeft2 = new RString("20");
+        送付物宛先ソース.samabunShimei2 = new RString("21");
+        送付物宛先ソース.samaBun2 = new RString("22");
+        送付物宛先ソース.kakkoRight2 = new RString("23");
+        送付物宛先ソース.kakkoLeft1 = new RString("24");
+        送付物宛先ソース.samabunShimei1 = new RString("25");
+        送付物宛先ソース.samaBun1 = new RString("26");
+        送付物宛先ソース.kakkoRight1 = new RString("27");
+        送付物宛先ソース.samabunShimeiSmall1 = new RString("28");
+        送付物宛先ソース.customerBarCode = new RString("29");
+        return 送付物宛先ソース;
     }
 
-    private void editCompNinshoshaItem(
-            KaigoHokenryoChoshuyuyoKetteiTsuchishoItem item, NinshoshaSource sourceBuilder) {
-
-        item.setHakkoYMD(sourceBuilder.hakkoYMD);
-        item.setDenshiKoin(sourceBuilder.denshiKoin);
-        item.setNinshoshaYakushokuMei(sourceBuilder.ninshoshaYakushokuMei);
-        item.setKoinMojiretsu(sourceBuilder.koinMojiretsu);
-        item.setNinshoshaShimeiKakenai(sourceBuilder.ninshoshaShimeiKakenai);
-        item.setNinshoshaShimeiKakeru(sourceBuilder.ninshoshaShimeiKakeru);
-        item.setKoinShoryaku(sourceBuilder.koinShoryaku);
-    }
-
-    private void editCompKaigoToiawasesakiItem(
-            KaigoHokenryoChoshuyuyoKetteiTsuchishoItem item,
-            IKaigoToiawasesakiSourceBuilder 介護問合せ先ソースビルダー) {
-
-        CompKaigoToiawasesakiSource buildSource = 介護問合せ先ソースビルダー.buildSource();
-        item.setYubinBango(buildSource.yubinBango);
-        item.setShozaichi(buildSource.shozaichi);
-        item.setChoshaBushoName(buildSource.choshaBushoName);
-        item.setTantoName(buildSource.tantoName);
-        item.setTelNo(buildSource.telNo);
-        item.setNaisenLabel(buildSource.naisenLabel);
-        item.setNaisenNo(buildSource.naisenNo);
-    }
-
-    private void editCompSofubutsuAtesakiItem(KaigoHokenryoChoshuyuyoKetteiTsuchishoItem item, EditedAtesaki 編集後宛先) {
-        SofubutsuAtesakiSource source = 編集後宛先.getSofubutsuAtesakiSource().get送付物宛先ソース();
-        item.setYubinNo(source.yubinNo);
-        item.setGyoseiku(source.gyoseiku);
-        item.setJusho3(source.jusho3);
-        item.setJushoText(source.jushoText);
-        item.setJusho1(source.jusho1);
-        item.setJusho2(source.jusho2);
-        item.setKatagakiText(source.katagakiText);
-        item.setKatagaki2(source.katagaki2);
-        item.setKatagakiSmall2(source.katagakiSmall2);
-        item.setKatagaki1(source.katagaki1);
-        item.setKatagakiSmall1(source.katagakiSmall1);
-        item.setKakkoRight2(source.kakkoRight2);
-        item.setKakkoRight1(source.kakkoRight1);
-        item.setShimei2(source.shimei2);
-        item.setShimeiSmall2(source.shimeiSmall2);
-        item.setShimeiText(source.shimeiText);
-        item.setMeishoFuyo2(source.meishoFuyo2);
-        item.setShimeiSmall1(source.shimeiSmall1);
-        item.setDainoKubunMei(source.dainoKubunMei);
-        item.setShimei1(source.shimei1);
-        item.setMeishoFuyo1(source.meishoFuyo1);
-        item.setSamabunShimeiText(source.samabunShimeiText);
-        item.setSamabunShimeiSmall2(source.samabunShimeiSmall2);
-        item.setSamaBun2(source.samaBun2);
-        item.setKakkoLeft2(source.kakkoLeft2);
-        item.setSamabunShimei2(source.samabunShimei2);
-        item.setKakkoLeft1(source.kakkoLeft1);
-        item.setSamabunShimei1(source.samabunShimei1);
-        item.setSamaBun1(source.samaBun1);
-        item.setSamabunShimeiSmall1(source.samabunShimeiSmall1);
-        item.setCustomerBarCode(source.customerBarCode);
-        // TODO QA:581
-//        item.setSetainusimei(source.setainusimei);
-//        item.setSamaKata(source.samaKata);
-    }
 }
