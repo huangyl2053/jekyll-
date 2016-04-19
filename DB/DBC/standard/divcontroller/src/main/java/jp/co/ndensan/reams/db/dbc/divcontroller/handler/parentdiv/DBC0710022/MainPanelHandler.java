@@ -20,9 +20,10 @@ import jp.co.ndensan.reams.db.dbc.divcontroller.entity.commonchilddiv.Shokanbara
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0710022.MainPanelDiv;
 import jp.co.ndensan.reams.db.dbc.divcontroller.viewbox.ViewStateKeys;
 import jp.co.ndensan.reams.db.dbc.divcontroller.viewbox.dbc0710021.ShokanharaKeteiJyohoParameter;
-import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3053ShokanShukeiEntity;
+import jp.co.ndensan.reams.db.dbc.divcontroller.viewbox.dbc0710022.ShoukanFutsuKetteiJouhouTourokuParameter;
 import jp.co.ndensan.reams.db.dbc.service.core.jutakukaishusikyushinsei.JutakukaishuSikyuShinseiManager;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
 import jp.co.ndensan.reams.db.dbx.service.core.dbbusinessconfig.DbBusinessConifg;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
@@ -77,7 +78,6 @@ public final class MainPanelHandler {
             }
         }
         div.getDdlSyomeisyo().setDataSource(sources);
-
         div.getDdlSyomeisyo().setSelectedKey(証明書);
         div.getJutakuKaishuShinseiInfoPanel().getCommHeadPanel().getTxtKyufuritsu().setValue(給付率);
         div.getJutakuKaishuShinseiInfoPanel().getCommHeadPanel().getTxtSeiriNo().setValue(整理番号);
@@ -90,41 +90,79 @@ public final class MainPanelHandler {
      * @return boolean
      */
     public boolean is内容変更状態() {
+        ShoukanFutsuKetteiJouhouTourokuParameter parameter = ViewStateHolder.get(
+                ViewStateKeys.住宅改修費支給申請_償還払決定情報登録画面データ, ShoukanFutsuKetteiJouhouTourokuParameter.class);
         ShokanbaraiketteiJohoDiv shokanbaraiketteiJohoDiv = (ShokanbaraiketteiJohoDiv) div.getJutakuKaishuShinseiInfoPanel()
                 .getShokanbaraiKetteiJyohoPanel().getCcdShokanbaraiketteiJoho();
-        Decimal 支払金額合計New = shokanbaraiketteiJohoDiv.getTxtShiharaikingakugoke().getValue();
-        Decimal 支払金額合計Old = ViewStateHolder.get(ViewStateKeys.支払金額合計, Decimal.class);
-        if (!支払金額合計New.equals(支払金額合計Old)) {
-            return true;
-        }
-        RString 増減理由New = shokanbaraiketteiJohoDiv.getTxtZogenriyu().getValue();
-        RString 増減理由Old = ViewStateHolder.get(ViewStateKeys.増減理由, RString.class);
-        if (!増減理由New.equals(増減理由Old)) {
-            return true;
-        }
-        int 増減単位New = shokanbaraiketteiJohoDiv.getTxtZogentani().getValue().intValue();
-        int 増減単位Old = ViewStateHolder.get(ViewStateKeys.増減単位, int.class);
-        if (増減単位New != 増減単位Old) {
-            return true;
-        }
         RDate 決定日New = shokanbaraiketteiJohoDiv.getTxtKetebi().getValue();
-        RDate 決定日Old = ViewStateHolder.get(ViewStateKeys.決定日, RDate.class);
+        RDate 決定日Old = parameter.get決定日();
         if (!決定日New.equals(決定日Old)) {
             return true;
         }
         RString 支給区分New = shokanbaraiketteiJohoDiv.getRdoShikyukubun().getSelectedKey();
-        RString 支給区分Old = ViewStateHolder.get(ViewStateKeys.支給区分, RString.class);
+        RString 支給区分Old = parameter.get支給区分();
         if (!支給区分New.equals(支給区分Old)) {
             return true;
         }
-        RString fuSyikyuriyu1New = shokanbaraiketteiJohoDiv.getTxtFuSyikyuriyu1().getValue();
-        RString fuSyikyuriyu1Old = ViewStateHolder.get(ViewStateKeys.fuSyikyuriyu1, RString.class);
-        if (!fuSyikyuriyu1New.equals(fuSyikyuriyu1Old)) {
-            return true;
+        if (ShikyuFushikyuKubun.支給.getコード().equals(支給区分New)) {
+
+            Decimal 支払金額合計New = shokanbaraiketteiJohoDiv.getTxtShiharaikingakugoke().getValue();
+            Decimal 支払金額合計Old = parameter.get支払金額合計();
+            if (!支払金額合計New.equals(支払金額合計Old)) {
+                return true;
+            }
+            Decimal 増減単位New = shokanbaraiketteiJohoDiv.getTxtZogentani().getValue();
+            Decimal 増減単位Old = parameter.get増減単位();
+            if (増減単位New.equals(増減単位Old)) {
+                return true;
+            }
+            RString 増減理由New = shokanbaraiketteiJohoDiv.getTxtZogenriyu().getValue();
+            RString 増減理由Old = parameter.get増減理由();
+            return 増減理由チェック(増減理由New, 増減理由Old);
+        } else {
+            RString fuSyikyuriyu1New = shokanbaraiketteiJohoDiv.getTxtFuSyikyuriyu1().getValue();
+            RString fuSyikyuriyu1Old = parameter.get不支給理由１();
+            if (!fuSyikyuriyu1New.equals(fuSyikyuriyu1Old)) {
+                return true;
+            }
+            RString fuSyikyuriyu2New = shokanbaraiketteiJohoDiv.getTxtFushikyuriyu2().getValue();
+            RString fuSyikyuriyu2Old = parameter.get不支給理由２();
+            return !fuSyikyuriyu2New.equals(fuSyikyuriyu2Old);
         }
-        RString fuSyikyuriyu2New = shokanbaraiketteiJohoDiv.getTxtFushikyuriyu2().getValue();
-        RString fuSyikyuriyu2Old = ViewStateHolder.get(ViewStateKeys.fuSyikyuriyu2, RString.class);
-        return !fuSyikyuriyu2New.equals(fuSyikyuriyu2Old);
+    }
+
+    private boolean 増減理由チェック(RString 増減理由New, RString 増減理由Old) {
+        if (増減理由New.isNullOrEmpty() && 増減理由Old.isNullOrEmpty()) {
+            return false;
+        } else if (増減理由New.isNullOrEmpty() || 増減理由Old.isNullOrEmpty()) {
+            return true;
+        } else {
+            return !増減理由New.equals(増減理由Old);
+        }
+    }
+
+    /**
+     * set画面データ
+     *
+     * @return parameter
+     */
+    public ShoukanFutsuKetteiJouhouTourokuParameter set画面データ() {
+        ShoukanFutsuKetteiJouhouTourokuParameter parameter = new ShoukanFutsuKetteiJouhouTourokuParameter();
+        parameter.set決定日(div.getJutakuKaishuShinseiInfoPanel().getShokanbaraiKetteiJyohoPanel().
+                getCcdShokanbaraiketteiJoho().getShokanbaraiketteiJohoDiv().getTxtKetebi().getValue());
+        parameter.set支給区分(div.getJutakuKaishuShinseiInfoPanel().getShokanbaraiKetteiJyohoPanel().
+                getCcdShokanbaraiketteiJoho().getShokanbaraiketteiJohoDiv().getRdoShikyukubun().getSelectedKey());
+        parameter.set支払金額合計(div.getJutakuKaishuShinseiInfoPanel().getShokanbaraiKetteiJyohoPanel().
+                getCcdShokanbaraiketteiJoho().getShokanbaraiketteiJohoDiv().getTxtShiharaikingakugoke().getValue());
+        parameter.set増減単位(div.getJutakuKaishuShinseiInfoPanel().getShokanbaraiKetteiJyohoPanel().
+                getCcdShokanbaraiketteiJoho().getShokanbaraiketteiJohoDiv().getTxtZogentani().getValue());
+        parameter.set増減理由(div.getJutakuKaishuShinseiInfoPanel().getShokanbaraiKetteiJyohoPanel().
+                getCcdShokanbaraiketteiJoho().getShokanbaraiketteiJohoDiv().getTxtZogenriyu().getValue());
+        parameter.set不支給理由１(div.getJutakuKaishuShinseiInfoPanel().getShokanbaraiKetteiJyohoPanel().
+                getCcdShokanbaraiketteiJoho().getShokanbaraiketteiJohoDiv().getTxtFuSyikyuriyu1().getValue());
+        parameter.set不支給理由２(div.getJutakuKaishuShinseiInfoPanel().getShokanbaraiKetteiJyohoPanel().
+                getCcdShokanbaraiketteiJoho().getShokanbaraiketteiJohoDiv().getTxtFushikyuriyu2().getValue());
+        return parameter;
     }
 
     /**
@@ -174,11 +212,8 @@ public final class MainPanelHandler {
                     set審査年月日(null).set審査結果(null).build();
         }
 
-        DbT3053ShokanShukeiEntity entity = new DbT3053ShokanShukeiEntity();
-        entity.setHiHokenshaNo(被保険者番号);
-        entity.setServiceTeikyoYM(サービス年月);
-        entity.setSeiriNo(整理番号);
-        ShokanShukei dbt3053 = new ShokanShukei(entity);
+        ShokanShukei dbt3053 = new ShokanShukei(被保険者番号, サービス年月, 整理番号,
+                new JigyoshaNo(整理番号), 整理番号, 整理番号, 証明書);
         dbt3053 = dbt3053.createBuilderForEdit().set審査方法区分コード(dbt3034.get審査方法区分()).
                 set審査年月(決定日.getYearMonth()).set支給区分コード(支給区分).
                 set支払金額(支払金額.intValue()).

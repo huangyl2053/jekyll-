@@ -14,6 +14,7 @@ import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0710022.Main
 import jp.co.ndensan.reams.db.dbc.divcontroller.handler.parentdiv.DBC0710022.MainPanelHandler;
 import jp.co.ndensan.reams.db.dbc.divcontroller.viewbox.ViewStateKeys;
 import jp.co.ndensan.reams.db.dbc.divcontroller.viewbox.dbc0710021.ShokanharaKeteiJyohoParameter;
+import jp.co.ndensan.reams.db.dbc.divcontroller.viewbox.dbc0710022.ShoukanFutsuKetteiJouhouTourokuParameter;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbz.definition.message.DbzInformationMessages;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.KaigoKanryoMessage.KaigoKanryoMessage.KaigoKanryoMessageDiv;
@@ -77,6 +78,9 @@ public class MainPanel {
             div.getJutakuKaishuShinseiInfoPanel().getShokanbaraiKetteiJyohoPanel().getCcdShokanbaraiketteiJoho().
                     loadInitialize(被保険者番号, サービス年月, 整理番号, 業務区分, モード_照会);
         }
+
+        ShoukanFutsuKetteiJouhouTourokuParameter 画面データ = getHandler(div).set画面データ();
+        ViewStateHolder.put(ViewStateKeys.住宅改修費支給申請_償還払決定情報登録画面データ, 画面データ);
         return ResponseData.of(div).respond();
     }
 
