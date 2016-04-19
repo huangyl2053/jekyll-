@@ -17,7 +17,6 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 
 /**
- *
  * 他市町村住所地特例者異動の訂正のクラスです。
  *
  * @reamsid_L DBA-0401-010 dongyabin
@@ -55,7 +54,7 @@ public class TaShichosonJushochiTokureisyaIdoTeisei {
         List<DbT1004ShisetsuNyutaishoEntity> dbT1004List = dac.get入退所日(paramter.get識別コード(), new RString("2"), new RString("12"));
         for (DbT1004ShisetsuNyutaishoEntity dbT1004 : dbT1004List) {
             int count = 0;
-            if (dbT1004.getTaishoYMD() == null) {
+            if (isNullOrEmpty(dbT1004.getTaishoYMD())) {
                 continue;
             }
             for (TekiyouJouhou tekiyou : paramter.get適用情報グリッド()) {
@@ -70,6 +69,10 @@ public class TaShichosonJushochiTokureisyaIdoTeisei {
                 throw new ApplicationException(UrErrorMessages.期間が重複.getMessage());
             }
         }
+    }
+
+    private boolean isNullOrEmpty(FlexibleDate date) {
+        return date == null || date.isEmpty();
     }
 
     private boolean 適用日_判断(FlexibleDate taishoYMD, FlexibleDate 適用日) {

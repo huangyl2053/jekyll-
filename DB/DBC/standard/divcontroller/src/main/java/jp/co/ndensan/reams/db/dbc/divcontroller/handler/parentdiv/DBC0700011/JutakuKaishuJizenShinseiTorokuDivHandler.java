@@ -36,17 +36,25 @@ import jp.co.ndensan.reams.db.dbx.definition.core.enumeratedtype.YoKaigoJotaiKub
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HokenKyufuRitsu;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShoKisaiHokenshaNo;
 import jp.co.ndensan.reams.db.dbx.service.core.dbbusinessconfig.DbBusinessConifg;
 import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.kyotsu.SaibanHanyokeyName;
+import jp.co.ndensan.reams.ur.urz.business.core.jusho.IJusho;
+import jp.co.ndensan.reams.ur.urz.business.core.jusho.banchi.Banchi;
+import jp.co.ndensan.reams.ur.urz.definition.core.jusho.KannaiKangaiKubunType;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaJusho;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaKanaMeisho;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaMeisho;
+import jp.co.ndensan.reams.uz.uza.biz.ChoikiCode;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.CodeShubetsu;
 import jp.co.ndensan.reams.uz.uza.biz.KamokuCode;
+import jp.co.ndensan.reams.uz.uza.biz.Katagaki;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
+import jp.co.ndensan.reams.uz.uza.biz.YubinNo;
+import jp.co.ndensan.reams.uz.uza.biz.ZenkokuJushoCode;
 import jp.co.ndensan.reams.uz.uza.lang.ApplicationException;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
@@ -266,9 +274,13 @@ public final class JutakuKaishuJizenShinseiTorokuDivHandler {
         SikyuSinseiJyohoParameter param = new SikyuSinseiJyohoParameter();
         if (登録モード.equals(画面モード)) {
             param.setShikibetsuCode(ViewStateHolder.get(ViewStateKeys.識別コード, ShikibetsuCode.class));
-            param.setHihokenshaNo(data.get被保険者番号());
-            param.setShikyushinseiServiceYM(data.getサービス提供年月());
-            param.setShikyushinseiSeiriNo(data.get整理番号());
+            // TODO QAのNo.XXX 登録モード初期情報の取得方針は確認中
+//            param.setHihokenshaNo(data.get被保険者番号());
+//            param.setShikyushinseiServiceYM(data.getサービス提供年月());
+//            param.setShikyushinseiSeiriNo(data.get整理番号());
+            param.setHihokenshaNo(new HihokenshaNo("800000008"));
+            param.setShikyushinseiServiceYM(new FlexibleYearMonth("199008"));
+            param.setShikyushinseiSeiriNo(new RString("0000000001"));
         } else {
             param.setShikibetsuCode(ViewStateHolder.get(ViewStateKeys.識別コード, ShikibetsuCode.class));
             param.setHihokenshaNo(data.get被保険者番号());
@@ -293,6 +305,44 @@ public final class JutakuKaishuJizenShinseiTorokuDivHandler {
             JyutakugaisyunaiyoListDataPassModel model = new JyutakugaisyunaiyoListDataPassModel();
             model.set被保険者番号(被保険者番号);
             model.set状態(状態_登録);
+            // TODO
+//            model.set住所クラス(new IJusho() {
+//
+//                @Override
+//                public KannaiKangaiKubunType get管内管外() {
+//                    throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+//                }
+//
+//                @Override
+//                public ChoikiCode get町域コード() {
+//                    throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+//                }
+//
+//                @Override
+//                public ZenkokuJushoCode get全国住所コード() {
+//                    throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+//                }
+//
+//                @Override
+//                public YubinNo get郵便番号() {
+//                    throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+//                }
+//
+//                @Override
+//                public RString get住所() {
+//                    throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+//                }
+//
+//                @Override
+//                public Banchi get番地() {
+//                    throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+//                }
+//
+//                @Override
+//                public Katagaki get方書() {
+//                    throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+//                }
+//            });
             div.getKaigoShikakuKihonShaPanel().getTabShinseiContents().getTabJutakuKaisyuJyoho()
                     .getCcdJutakuJizenShinseiDetail().initialize(model);
             ShiharaiKekkaResult result = JutakuKaishuJizenShinsei.createInstance()
@@ -312,6 +362,43 @@ public final class JutakuKaishuJizenShinseiTorokuDivHandler {
             model.set整理番号(seiriNo);
             model.set様式番号(yoshikiNo);
             model.set状態((照会モード.equals(画面モード) || 削除モード.equals(画面モード)) ? 状態_参照 : 状態_登録);
+//            model.set住所クラス(new IJusho() {
+//
+//                @Override
+//                public KannaiKangaiKubunType get管内管外() {
+//                    throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+//                }
+//
+//                @Override
+//                public ChoikiCode get町域コード() {
+//                    throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+//                }
+//
+//                @Override
+//                public ZenkokuJushoCode get全国住所コード() {
+//                    throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+//                }
+//
+//                @Override
+//                public YubinNo get郵便番号() {
+//                    throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+//                }
+//
+//                @Override
+//                public RString get住所() {
+//                    throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+//                }
+//
+//                @Override
+//                public Banchi get番地() {
+//                    throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+//                }
+//
+//                @Override
+//                public Katagaki get方書() {
+//                    throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+//                }
+//            });
             div.getKaigoShikakuKihonShaPanel().getTabShinseiContents().getTabJutakuKaisyuJyoho()
                     .getCcdJutakuJizenShinseiDetail().initialize(model);
             ShiharaiKekkaResult result = JutakuKaishuJizenShinsei.createInstance()
@@ -354,6 +441,8 @@ public final class JutakuKaishuJizenShinseiTorokuDivHandler {
         }
         RString kubun = DbBusinessConifg.get(ConfigNameDBC.国保連共同処理受託区分_償還, RDate.getNowDate(),
                 SubGyomuCode.DBC介護給付);
+        // TODO
+        kubun = new RString("3");
         if (文字_1.equals(kubun)) {
             if (!著工日リスト.contains(div.getKaigoShikakuKihonShaPanel().getTxtServiceYM().getValue().toDateString())
                     && 完成日リスト.contains(div.getKaigoShikakuKihonShaPanel().getTxtServiceYM().getValue().toDateString())) {
@@ -404,7 +493,9 @@ public final class JutakuKaishuJizenShinseiTorokuDivHandler {
                 .getValue() == null) {
             throw new ApplicationException(UrErrorMessages.必須.getMessage().replace(判定決定日.toString()));
         }
-        if (div.getKaigoShikakuKihonShaPanel().getTabShinseiContents().getTabShinsaKakka().getTxtFushoninReason()
+        if (ShoninKubun.承認しない.getコード().equals(div.getKaigoShikakuKihonShaPanel().getTabShinseiContents()
+                .getTabShinsaKakka().getRadJudgeKubun().getSelectedKey())
+                && div.getKaigoShikakuKihonShaPanel().getTabShinseiContents().getTabShinsaKakka().getTxtFushoninReason()
                 .getValue().isNullOrEmpty()) {
             throw new ApplicationException(UrErrorMessages.必須.getMessage().replace(不承認理由.toString()));
         }
@@ -825,7 +916,7 @@ public final class JutakuKaishuJizenShinseiTorokuDivHandler {
         if (登録モード.equals(画面モード)) {
             HihokenshaNo hihokenshaNo = ViewStateHolder.get(ViewStateKeys.被保険者番号, HihokenshaNo.class);
             FlexibleYearMonth サービス提供年月 = new FlexibleYearMonth(div.getKaigoShikakuKihonShaPanel().getTxtServiceYM()
-                    .getValue().toDateString());
+                    .getValue().getYearMonth().toDateString());
             RString 整理番号 = Saiban.get(SubGyomuCode.DBC介護給付, SaibanHanyokeyName.償還整理番号.getコード()).nextString();
 
             ShokanJutakuKaishuJizenShinsei insertData = new ShokanJutakuKaishuJizenShinsei(hihokenshaNo, サービス提供年月, 整理番号);
@@ -836,17 +927,20 @@ public final class JutakuKaishuJizenShinseiTorokuDivHandler {
             List<ShokanJutakuKaishu> kaishuList = new ArrayList<>();
             List<dgGaisyuList_Row> gridList = div.getKaigoShikakuKihonShaPanel().getTabShinseiContents()
                     .getTabJutakuKaisyuJyoho().getCcdJutakuJizenShinseiDetail().get住宅改修内容一覧();
-            int index = 0;
-            for (dgGaisyuList_Row row : gridList) {
-                ShokanJutakuKaishu tmpData = new ShokanJutakuKaishu(hihokenshaNo, サービス提供年月, 整理番号,
-                        new JigyoshaNo(固定値_事業者番号), new RString("0000"), 固定値_明細番号, new RString(index++));
-                tmpData.createBuilderForEdit().set住宅改修着工年月日(new FlexibleDate(row.getTxtChakkoYoteibi()))
-                        .set住宅改修内容(row.getTxtKaishuNaiyo())
-                        .set住宅改修事業者名(row.getTxtJigyosha())
-                        .set住宅改修住宅住所(row.getTxtJutakuAddress())
-                        .set改修金額(Integer.parseInt(row.getTxtKaishuKingaku().toString()))
-                        .set住宅改修完成年月日(new FlexibleDate(row.getTxtKanseiYoteibi())).build();
-                kaishuList.add(tmpData);
+            if (gridList.size() > 0) {
+                int index = 0;
+                for (dgGaisyuList_Row row : gridList) {
+                    ShokanJutakuKaishu tmpData = new ShokanJutakuKaishu(hihokenshaNo, サービス提供年月, 整理番号,
+                            new JigyoshaNo(固定値_事業者番号), new RString("0000"), 固定値_明細番号, new RString(index++));
+                    tmpData.createBuilderForEdit().set住宅改修着工年月日(new FlexibleDate(row.getTxtChakkoYoteibi()))
+                            .set住宅改修内容(row.getTxtKaishuNaiyo())
+                            .set住宅改修事業者名(row.getTxtJigyosha())
+                            .set住宅改修住宅住所(row.getTxtJutakuAddress())
+                            .set改修金額(Integer.parseInt(row.getTxtKaishuKingaku().toString()))
+                            .set住宅改修完成年月日(new FlexibleDate(row.getTxtKanseiYoteibi())).build();
+                    kaishuList.add(tmpData);
+                }
+
             }
             return JutakuKaishuJizenShinsei.createInstance().saveDBDate(insertData, kaishuList);
         } else if (削除モード.equals(画面モード)) {
@@ -960,6 +1054,8 @@ public final class JutakuKaishuJizenShinseiTorokuDivHandler {
     }
 
     private void 登録データの設定(ShokanJutakuKaishuJizenShinseiBuilder builder) {
+        // TODO 証記載保険者番号の設定方法はQA確認中
+        builder.set証記載保険者番号(new ShoKisaiHokenshaNo("000033"));
         builder.set受付年月日(FlexibleDate.getNowDate());
         builder.set申請年月日(new FlexibleDate(div.getKaigoShikakuKihonShaPanel().getShinseishaInfo()
                 .getTxtShinseiYMD().getValue().toDateString()));
@@ -970,16 +1066,20 @@ public final class JutakuKaishuJizenShinseiTorokuDivHandler {
         builder.set申請者郵便番号(div.getKaigoShikakuKihonShaPanel().getShinseishaInfo().getTxtYubinNo().getValue());
         builder.set申請者住所(div.getKaigoShikakuKihonShaPanel().getShinseishaInfo().getTxtAddress().getDomain().value());
         builder.set申請者電話番号(div.getKaigoShikakuKihonShaPanel().getShinseishaInfo().getTxtTelNo().getDomain());
-        builder.set申請事業者番号(new JigyoshaNo(div.getKaigoShikakuKihonShaPanel().getShinseishaInfo()
-                .getTxtJigyoshaNo().getValue()));
+        //  事業者番号は正常設定できない
+        builder.set申請事業者番号(new JigyoshaNo("9"));
+//        builder.set申請事業者番号(new JigyoshaNo(div.getKaigoShikakuKihonShaPanel().getShinseishaInfo()
+//                .getTxtJigyoshaNo().getValue()));
         builder.set理由書作成日(new FlexibleDate(div.getKaigoShikakuKihonShaPanel().getJutakuKaishuJizenShinseiReason()
                 .getTxtCreateYMD().getValue().toDateString()));
         builder.set理由書作成者(div.getKaigoShikakuKihonShaPanel().getJutakuKaishuJizenShinseiReason()
                 .getTxtCreatorName().getDomain().value());
         builder.set理由書作成者カナ(div.getKaigoShikakuKihonShaPanel().getJutakuKaishuJizenShinseiReason()
                 .getTxtCreatorKanaName().getDomain().value());
-        builder.set理由書作成事業者番号(new JigyoshaNo(div.getKaigoShikakuKihonShaPanel().getJutakuKaishuJizenShinseiReason()
-                .getTxtCreationJigyoshaNo().getValue()));
+        //  事業者番号は正常設定できない
+        builder.set理由書作成事業者番号(new JigyoshaNo("9"));
+//        builder.set理由書作成事業者番号(new JigyoshaNo(div.getKaigoShikakuKihonShaPanel().getJutakuKaishuJizenShinseiReason()
+//                .getTxtCreationJigyoshaNo().getValue()));
         // TODO
         builder.set住宅所有者(div.getKaigoShikakuKihonShaPanel().getTabShinseiJyoho().getTxtJutakuOwner().getValue());
         builder.set被保険者との関係(div.getKaigoShikakuKihonShaPanel().getTabShinseiJyoho()
@@ -1010,14 +1110,15 @@ public final class JutakuKaishuJizenShinseiTorokuDivHandler {
             builder.set不承認理由(div.getKaigoShikakuKihonShaPanel().getTabShinseiContents().getTabShinsaKakka()
                     .getTxtFushoninReason().getValue());
         }
-        builder.set給付額等_費用額合計(div.getKaigoShikakuKihonShaPanel().getTabShinseiContents().getTabJutakuKaisyuJyoho()
-                .getTotalPanel().getTxtHiyoTotalNow().getValue().intValue());
-        builder.set給付額等_保険対象費用額(div.getKaigoShikakuKihonShaPanel().getTabShinseiContents().getTabJutakuKaisyuJyoho()
-                .getTotalPanel().getTxtHokenTaishoHiyoNow().getValue().intValue());
-        builder.set給付額等_利用者自己負担額(div.getKaigoShikakuKihonShaPanel().getTabShinseiContents().getTabJutakuKaisyuJyoho()
-                .getTotalPanel().getTxtRiyoshaFutanAmountNow().getValue().intValue());
-        builder.set給付額等_保険給付費額(div.getKaigoShikakuKihonShaPanel().getTabShinseiContents().getTabJutakuKaisyuJyoho()
-                .getTotalPanel().getTxtHokenKyufuAmountNow().getValue().intValue());
+        // TODO 疎通のため。コメント化になる。
+//        builder.set給付額等_費用額合計(div.getKaigoShikakuKihonShaPanel().getTabShinseiContents().getTabJutakuKaisyuJyoho()
+//                .getTotalPanel().getTxtHiyoTotalNow().getValue().intValue());
+//        builder.set給付額等_保険対象費用額(div.getKaigoShikakuKihonShaPanel().getTabShinseiContents().getTabJutakuKaisyuJyoho()
+//                .getTotalPanel().getTxtHokenTaishoHiyoNow().getValue().intValue());
+//        builder.set給付額等_利用者自己負担額(div.getKaigoShikakuKihonShaPanel().getTabShinseiContents().getTabJutakuKaisyuJyoho()
+//                .getTotalPanel().getTxtRiyoshaFutanAmountNow().getValue().intValue());
+//        builder.set給付額等_保険給付費額(div.getKaigoShikakuKihonShaPanel().getTabShinseiContents().getTabJutakuKaisyuJyoho()
+//                .getTotalPanel().getTxtHokenKyufuAmountNow().getValue().intValue());
 
         if (div.getKaigoShikakuKihonShaPanel().getTabShinseiContents().getTabShinsaKakka()
                 .getJutakuKaishuJizenShoninKetteiTsuchisho().isIsPublish()) {

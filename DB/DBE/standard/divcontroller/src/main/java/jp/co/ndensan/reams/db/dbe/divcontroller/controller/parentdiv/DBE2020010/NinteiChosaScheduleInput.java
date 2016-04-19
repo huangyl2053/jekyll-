@@ -27,9 +27,13 @@ import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.TelNo;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
+import jp.co.ndensan.reams.uz.uza.exclusion.LockingKey;
+import jp.co.ndensan.reams.uz.uza.exclusion.RealInitialLocker;
 import jp.co.ndensan.reams.uz.uza.lang.ApplicationException;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
+import jp.co.ndensan.reams.uz.uza.message.ErrorMessage;
 import jp.co.ndensan.reams.uz.uza.message.MessageDialogSelectedResult;
 import jp.co.ndensan.reams.uz.uza.message.QuestionMessage;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ResponseHolder;
@@ -432,7 +436,12 @@ public class NinteiChosaScheduleInput {
             }
         }
         if (ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes && saveスケジュール情報(div) == 1) {
-
+            NinteichosaSchedule ninteichosa = ViewStateHolder.get(ViewStateKeys.認定調査スケジュール登録_調査員情報, NinteichosaSchedule.class);
+            前排他キーの解除(new RString("DBEChosaSchedule"),
+                    ninteichosa.get認定調査予定年月日(),
+                    ninteichosa.get認定調査予定開始時間(),
+                    ninteichosa.get認定調査予定終了時間(),
+                    ninteichosa.get調査地区コード());
             div.getKaigoKanryoMessage().getCcdKaigoKanryoMessage().setMessage(new RString(
                     UrInformationMessages.正常終了.getMessage().replace(保存.toString()).evaluate()), RString.EMPTY, RString.EMPTY, true);
             return ResponseData.of(div).setState(DBE2020010StateName.完了);
@@ -471,10 +480,6 @@ public class NinteiChosaScheduleInput {
     }
 
     private int saveスケジュール情報(NinteiChosaScheduleInputDiv div) {
-        //TODO 前排他制限の排他Keyがありません。QA898
-//            if (true) {
-//                throw new ApplicationException(UrErrorMessages.排他_バッチ実行中で更新不可.getMessage());
-//            }
         Code 予約状況;
         NinteichosaSchedule ninteichosa = ViewStateHolder.get(ViewStateKeys.認定調査スケジュール登録_調査員情報, NinteichosaSchedule.class);
         if (予約状況_仮予約.equals(div.getWariateJokyo().getRadYoyakuJokyo().getSelectedKey())) {
@@ -495,6 +500,16 @@ public class NinteiChosaScheduleInput {
             }
         }
         if (ninteichosa != null) {
+            boolean gotLock = 前排他キーのセット(new RString("DBEChosaSchedule"),
+                    ninteichosa.get認定調査予定年月日(),
+                    ninteichosa.get認定調査予定開始時間(),
+                    ninteichosa.get認定調査予定終了時間(),
+                    ninteichosa.get調査地区コード());
+            if (!gotLock) {
+                ErrorMessage message = new ErrorMessage(UrErrorMessages.排他_バッチ実行中で更新不可.getMessage().getCode(),
+                        UrErrorMessages.排他_バッチ実行中で更新不可.getMessage().evaluate());
+                throw new ApplicationException(message);
+            }
             ninteichosa = ninteichosa.createBuilderForEdit().set予約可能フラグ(予約可_KEY.equals(temp_予約可否))
                     .set予約状況(予約状況)
                     .set備考(div.getWariateJokyo().getTxtNinteiChosaBiko().getValue())
@@ -510,6 +525,31 @@ public class NinteiChosaScheduleInput {
             return NinteiChosaScheduleInputManager.createInstance().saveスケジュール情報(ninteichosa);
         }
         return 0;
+    }
+
+    private boolean 前排他キーのセット(RString dBEChosaSchedule, FlexibleDate 認定調査予定年月日,
+            RString 認定調査予定開始時間, RString 認定調査予定終了時間, Code 調査地区コード) {
+        LockingKey 排他キー = new LockingKey(getキー(dBEChosaSchedule, 認定調査予定年月日, 認定調査予定開始時間,
+                認定調査予定終了時間, 調査地区コード));
+        return RealInitialLocker.tryGetLock(排他キー);
+    }
+
+    private void 前排他キーの解除(RString dBEChosaSchedule, FlexibleDate 認定調査予定年月日,
+            RString 認定調査予定開始時間, RString 認定調査予定終了時間, Code 調査地区コード) {
+        LockingKey 排他キー = new LockingKey(getキー(dBEChosaSchedule, 認定調査予定年月日, 認定調査予定開始時間,
+                認定調査予定終了時間, 調査地区コード));
+        RealInitialLocker.release(排他キー);
+    }
+
+    private RString getキー(RString dBEChosaSchedule, FlexibleDate 認定調査予定年月日,
+            RString 認定調査予定開始時間, RString 認定調査予定終了時間, Code 調査地区コード) {
+        RStringBuilder キー = new RStringBuilder();
+        キー.append(dBEChosaSchedule);
+        キー.append(認定調査予定年月日);
+        キー.append(認定調査予定開始時間);
+        キー.append(認定調査予定終了時間);
+        キー.append(調査地区コード);
+        return キー.toRString();
     }
 
     private ValidationMessageControlPairs getMessage(NinteiChosaScheduleInputDiv div, ValidationMessageControlPairs validationMessages) {

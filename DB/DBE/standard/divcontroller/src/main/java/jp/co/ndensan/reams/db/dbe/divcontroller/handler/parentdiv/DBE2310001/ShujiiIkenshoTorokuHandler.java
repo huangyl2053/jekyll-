@@ -8,7 +8,7 @@ package jp.co.ndensan.reams.db.dbe.divcontroller.handler.parentdiv.DBE2310001;
 import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbe.business.core.shujiiikenshotoroku.ShujiiIkenshoTorokuResult;
-import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2310001.ShujiiIkenshoTorokuDiv;
+import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2310001.ShujiiIkenshoTorokuTotalDiv;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.ikensho.IkenshoSakuseiKaisuKubun;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaJusho;
 import jp.co.ndensan.reams.uz.uza.biz.TelNo;
@@ -19,6 +19,8 @@ import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
 
 /**
  * 主治医意見書登録の抽象Handlerクラスです。
+ *
+ * @reamsid_L DBE-0070-010 chengsanyuan
  */
 public class ShujiiIkenshoTorokuHandler {
 
@@ -36,14 +38,14 @@ public class ShujiiIkenshoTorokuHandler {
     private static final RString SELECT_JIBIINKOKA = new RString("key9");
     private static final RString SELECT_REHABIRITATIONKA = new RString("key10");
     private static final RString SELECT_SHIKA = new RString("key11");
-    private final ShujiiIkenshoTorokuDiv div;
+    private final ShujiiIkenshoTorokuTotalDiv div;
 
     /**
      * コンストラクタです。
      *
      * @param div 主治医意見書登録Div
      */
-    public ShujiiIkenshoTorokuHandler(ShujiiIkenshoTorokuDiv div) {
+    public ShujiiIkenshoTorokuHandler(ShujiiIkenshoTorokuTotalDiv div) {
         this.div = div;
     }
 
@@ -78,7 +80,6 @@ public class ShujiiIkenshoTorokuHandler {
         setShujiiJohoDisable(true);
         setChosaTishoJohoDisable(!result.is他科受診の有無());
         setSonotaDisable(!result.isその他受診科の有無());
-        setGaibuSoftDisable(true);
     }
 
     /**
@@ -100,10 +101,7 @@ public class ShujiiIkenshoTorokuHandler {
             rsb.append(selKey);
         }
         rsb.append(div.getTxtSonotaNyuryoku().getValue());
-        for (RString selKey : div.getChkGaibuSoft().getSelectedKeys()) {
-            rsb.append(selKey);
-        }
-        rsb.append(div.getTxtGaibuSoftName().getValue());
+        rsb.append(div.getTxtKinyuYMD().getValue());
         rsb.append(div.getTxtShujiiMemo().getValue());
         return rsb.toRString();
     }
@@ -125,15 +123,6 @@ public class ShujiiIkenshoTorokuHandler {
      */
     public void setSonotaDisable(boolean sonotaFlag) {
         div.getTxtSonotaNyuryoku().setDisabled(sonotaFlag);
-    }
-
-    /**
-     * 外部入力の入力可・不可を設定します。
-     *
-     * @param flag 入力可・不可フラグ
-     */
-    public void setGaibuSoftDisable(boolean flag) {
-        div.getTxtGaibuSoftName().setDisabled(flag);
     }
 
     private void setShujiiJohoDisable(boolean flag) {

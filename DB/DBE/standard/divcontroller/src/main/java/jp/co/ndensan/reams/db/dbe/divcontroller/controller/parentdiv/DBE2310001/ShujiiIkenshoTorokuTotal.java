@@ -14,8 +14,9 @@ import jp.co.ndensan.reams.db.dbe.business.core.ikensho.shujiiikenshojoho.Shujii
 import jp.co.ndensan.reams.db.dbe.business.core.shujiiikenshotoroku.ShujiiIkenshoTorokuResult;
 import jp.co.ndensan.reams.db.dbe.definition.mybatis.param.ikensho.ninteishinseijoho.NinteiShinseiJohoMapperParameter;
 import jp.co.ndensan.reams.db.dbe.definition.mybatis.param.shujiiikenshotoroku.ShujiiIkenshoTorokuMapperParameter;
+import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2310001.DBE2310001StateName;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2310001.DBE2310001TransitionEventName;
-import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2310001.ShujiiIkenshoTorokuDiv;
+import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2310001.ShujiiIkenshoTorokuTotalDiv;
 import jp.co.ndensan.reams.db.dbe.divcontroller.handler.parentdiv.DBE2310001.ShujiiIkenshoTorokuHandler;
 import jp.co.ndensan.reams.db.dbe.service.core.ikensho.ninteishinseijoho.NinteiShinseiJohoManager;
 import jp.co.ndensan.reams.db.dbe.service.core.shujiiikenshotoroku.ShujiiIkenshoTorokuManager;
@@ -36,7 +37,6 @@ import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.message.MessageDialogSelectedResult;
-import jp.co.ndensan.reams.uz.uza.ui.servlets.CommonButtonHolder;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ResponseHolder;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 import jp.co.ndensan.reams.uz.uza.util.db.SearchResult;
@@ -46,7 +46,7 @@ import jp.co.ndensan.reams.uz.uza.util.db.SearchResult;
  *
  * @reamsid_L DBE-0070-010 chengsanyuan
  */
-public class ShujiiIkenshoToroku {
+public class ShujiiIkenshoTorokuTotal {
 
     private static final RString JYOTAI_CODE_ADD = new RString("1");
     private static final RString JYOTAI_CODE_UPD = new RString("2");
@@ -62,6 +62,8 @@ public class ShujiiIkenshoToroku {
     private static final RString SELECT_KEY9 = new RString("key9");
     private static final RString SELECT_KEY10 = new RString("key10");
     private static final RString SELECT_KEY11 = new RString("key11");
+    private static final RString MENUID_DBEMN32002 = new RString("DBEMN32002");
+    private static final RString MENUID_DBEMNA1005 = new RString("DBEMNA1005");
     private final ShujiiIkenshoTorokuManager service;
     private final ImageManager imageManager;
     private final NinteiShinseiJohoManager ninteiManager;
@@ -70,7 +72,7 @@ public class ShujiiIkenshoToroku {
      * コンストラクタです。
      *
      */
-    public ShujiiIkenshoToroku() {
+    public ShujiiIkenshoTorokuTotal() {
         this.service = ShujiiIkenshoTorokuManager.createInstance();
         this.imageManager = new ImageManager();
         this.ninteiManager = NinteiShinseiJohoManager.createInstance();
@@ -80,11 +82,21 @@ public class ShujiiIkenshoToroku {
      * 主治医意見書登録初期化の設定します。
      *
      * @param div 主治医意見書登録Div
-     * @return ResponseData<ShujiiIkenshoTorokuDiv>
+     * @return ResponseData<ShujiiIkenshoTorokuTotalDiv>
      */
-    public ResponseData<ShujiiIkenshoTorokuDiv> onLoad(ShujiiIkenshoTorokuDiv div) {
-        ShinseishoKanriNo 管理番号 = new ShinseishoKanriNo(ViewStateHolder.get(ViewStateKeys.要介護認定申請検索_申請書管理番号, RString.class));
-        int 履歴番号 = Integer.parseInt(ViewStateHolder.get(ViewStateKeys.要介護認定申請検索_主治医意見書作成依頼履歴番号, RString.class).toString());
+    public ResponseData<ShujiiIkenshoTorokuTotalDiv> onLoad(ShujiiIkenshoTorokuTotalDiv div) {
+        RString menuID = ResponseHolder.getMenuID();
+        ShinseishoKanriNo 管理番号 = ShinseishoKanriNo.EMPTY;
+        int 履歴番号 = 0;
+        if (MENUID_DBEMN32002.equals(menuID)) {
+            管理番号 = new ShinseishoKanriNo(ViewStateHolder.get(ViewStateKeys.要介護認定申請検索_申請書管理番号, RString.class));
+            履歴番号 = Integer.parseInt(ViewStateHolder.get(ViewStateKeys.要介護認定申請検索_主治医意見書作成依頼履歴番号, RString.class).toString());
+        }
+        if (MENUID_DBEMNA1005.equals(menuID)) {
+            // TODO 完了処理　主治医意見書入手画面は未開発です、キーを分かりません
+            管理番号 = new ShinseishoKanriNo(ViewStateHolder.get(ViewStateKeys.その他機関選択ガイド_モード, RString.class));
+            履歴番号 = Integer.parseInt(ViewStateHolder.get(ViewStateKeys.その他機関選択ガイド_モード, RString.class).toString());
+        }
         LasdecCode 市町村コード = AssociationFinderFactory.createInstance().getAssociation().get地方公共団体コード();
         ShujiiIkenshoTorokuMapperParameter param
                 = ShujiiIkenshoTorokuMapperParameter.createShujiiIkenshoTorokuMapperParameter(管理番号, 履歴番号, 市町村コード);
@@ -96,16 +108,15 @@ public class ShujiiIkenshoToroku {
             div.getRadTakaShinryo().setSelectedKey(SELECT_KEY1);
             ViewStateHolder.put(ViewStateKeys.状態, JYOTAI_CODE_ADD);
             getHandler(div).setChosaTishoJohoDisable(true);
-            getHandler(div).setGaibuSoftDisable(true);
             getHandler(div).setSonotaDisable(true);
+            div.getTxtKinyuYMD().setDisabled(false);
         } else {
             getHandler(div).load(resultList.records().get(0));
             div.setHdnHasChanged(getHandler(div).getDataRString());
+            div.getTxtKinyuYMD().setDisabled(true);
             ViewStateHolder.put(ViewStateKeys.状態, JYOTAI_CODE_UPD);
         }
         div.getCcdNinteiShinseishaKihonInfo().initialize(管理番号);
-        // TODO Redmine#78229(再提出です、回答待ち)
-        CommonButtonHolder.setDisabledByCommonButtonFieldName(new RString("btnComplete"), true);
         ViewStateHolder.put(ViewStateKeys.主治医意見書登録_意見書情報, ninteiShinseiJoho);
         ViewStateHolder.put(ViewStateKeys.主治医意見書登録_イメージ情報, image);
         return ResponseData.of(div).respond();
@@ -115,9 +126,9 @@ public class ShujiiIkenshoToroku {
      * チェック変更した際の選択項目により、他科診療チェックボックスを変更可能にします。
      *
      * @param div 主治医意見書登録Div
-     * @return ResponseData<ShujiiIkenshoTorokuDiv>
+     * @return ResponseData<ShujiiIkenshoTorokuTotalDiv>
      */
-    public ResponseData<ShujiiIkenshoTorokuDiv> onChange_radTakaShinryo(ShujiiIkenshoTorokuDiv div) {
+    public ResponseData<ShujiiIkenshoTorokuTotalDiv> onChange_radTakaShinryo(ShujiiIkenshoTorokuTotalDiv div) {
         if (SELECT_KEY0.equals(div.getRadTakaShinryo().getSelectedKey())) {
             getHandler(div).setChosaTishoJohoDisable(false);
         } else {
@@ -130,9 +141,9 @@ public class ShujiiIkenshoToroku {
      * チェック変更した際の選択項目により、テキストボックスその他を変更可能にします。
      *
      * @param div 主治医意見書登録Div
-     * @return ResponseData<ShujiiIkenshoTorokuDiv>
+     * @return ResponseData<ShujiiIkenshoTorokuTotalDiv>
      */
-    public ResponseData<ShujiiIkenshoTorokuDiv> onChange_chkSonota(ShujiiIkenshoTorokuDiv div) {
+    public ResponseData<ShujiiIkenshoTorokuTotalDiv> onChange_chkSonota(ShujiiIkenshoTorokuTotalDiv div) {
         if (div.getChkSonota().getSelectedKeys().contains(SELECT_KEY0)) {
             getHandler(div).setSonotaDisable(false);
         } else {
@@ -142,27 +153,12 @@ public class ShujiiIkenshoToroku {
     }
 
     /**
-     * 外部入力の入力可・不可を設定します。
-     *
-     * @param div 主治医意見書登録Div
-     * @return ResponseData<ShujiiIkenshoTorokuDiv>
-     */
-    public ResponseData<ShujiiIkenshoTorokuDiv> onChange_chkGaibuSoft(ShujiiIkenshoTorokuDiv div) {
-        if (div.getChkGaibuSoft().getSelectedKeys().contains(SELECT_KEY0)) {
-            getHandler(div).setGaibuSoftDisable(false);
-        } else {
-            getHandler(div).setGaibuSoftDisable(true);
-        }
-        return ResponseData.of(div).respond();
-    }
-
-    /**
      * 傷病に関する意見ダイアログ表示前、データを設定します。
      *
      * @param div 主治医意見書登録Div
-     * @return ResponseData<ShujiiIkenshoTorokuDiv>
+     * @return ResponseData<ShujiiIkenshoTorokuTotalDiv>
      */
-    public ResponseData<ShujiiIkenshoTorokuDiv> onBefore_btnShobyoGuide(ShujiiIkenshoTorokuDiv div) {
+    public ResponseData<ShujiiIkenshoTorokuTotalDiv> onBefore_btnShobyoGuide(ShujiiIkenshoTorokuTotalDiv div) {
         return ResponseData.of(div).respond();
     }
 
@@ -170,9 +166,9 @@ public class ShujiiIkenshoToroku {
      * 傷病に関する意見ダイアログ閉じの時、データを取得します。
      *
      * @param div 主治医意見書登録Div
-     * @return ResponseData<ShujiiIkenshoTorokuDiv>
+     * @return ResponseData<ShujiiIkenshoTorokuTotalDiv>
      */
-    public ResponseData<ShujiiIkenshoTorokuDiv> onOkClose_btnShobyoGuide(ShujiiIkenshoTorokuDiv div) {
+    public ResponseData<ShujiiIkenshoTorokuTotalDiv> onOkClose_btnShobyoGuide(ShujiiIkenshoTorokuTotalDiv div) {
         return ResponseData.of(div).respond();
     }
 
@@ -180,9 +176,9 @@ public class ShujiiIkenshoToroku {
      * 特別な医療に関する意見ダイアログ表示前、データを設定します。
      *
      * @param div 主治医意見書登録Div
-     * @return ResponseData<ShujiiIkenshoTorokuDiv>
+     * @return ResponseData<ShujiiIkenshoTorokuTotalDiv>
      */
-    public ResponseData<ShujiiIkenshoTorokuDiv> onBefore_btnTokubetsuIryoGuide(ShujiiIkenshoTorokuDiv div) {
+    public ResponseData<ShujiiIkenshoTorokuTotalDiv> onBefore_btnTokubetsuIryoGuide(ShujiiIkenshoTorokuTotalDiv div) {
         return ResponseData.of(div).respond();
     }
 
@@ -190,9 +186,9 @@ public class ShujiiIkenshoToroku {
      * 特別な医療に関する意見ダイアログ閉じの時、データを取得します。
      *
      * @param div 主治医意見書登録Div
-     * @return ResponseData<ShujiiIkenshoTorokuDiv>
+     * @return ResponseData<ShujiiIkenshoTorokuTotalDiv>
      */
-    public ResponseData<ShujiiIkenshoTorokuDiv> onOkClose_btnTokubetsuIryoGuide(ShujiiIkenshoTorokuDiv div) {
+    public ResponseData<ShujiiIkenshoTorokuTotalDiv> onOkClose_btnTokubetsuIryoGuide(ShujiiIkenshoTorokuTotalDiv div) {
         return ResponseData.of(div).respond();
     }
 
@@ -200,9 +196,9 @@ public class ShujiiIkenshoToroku {
      * 心身の状態に関する意見ダイアログ表示前、データを設定します。
      *
      * @param div 主治医意見書登録Div
-     * @return ResponseData<ShujiiIkenshoTorokuDiv>
+     * @return ResponseData<ShujiiIkenshoTorokuTotalDiv>
      */
-    public ResponseData<ShujiiIkenshoTorokuDiv> onBefore_btnShinshinJotaiGuide(ShujiiIkenshoTorokuDiv div) {
+    public ResponseData<ShujiiIkenshoTorokuTotalDiv> onBefore_btnShinshinJotaiGuide(ShujiiIkenshoTorokuTotalDiv div) {
         return ResponseData.of(div).respond();
     }
 
@@ -210,9 +206,9 @@ public class ShujiiIkenshoToroku {
      * 心身の状態に関する意見ダイアログ閉じの時、データを取得します。
      *
      * @param div 主治医意見書登録Div
-     * @return ResponseData<ShujiiIkenshoTorokuDiv>
+     * @return ResponseData<ShujiiIkenshoTorokuTotalDiv>
      */
-    public ResponseData<ShujiiIkenshoTorokuDiv> onOkClose_btnShinshinJotaiGuide(ShujiiIkenshoTorokuDiv div) {
+    public ResponseData<ShujiiIkenshoTorokuTotalDiv> onOkClose_btnShinshinJotaiGuide(ShujiiIkenshoTorokuTotalDiv div) {
         return ResponseData.of(div).respond();
     }
 
@@ -220,9 +216,9 @@ public class ShujiiIkenshoToroku {
      * 生活機能とサービスダイアログ表示前、データを設定します。
      *
      * @param div 主治医意見書登録Div
-     * @return ResponseData<ShujiiIkenshoTorokuDiv>
+     * @return ResponseData<ShujiiIkenshoTorokuTotalDiv>
      */
-    public ResponseData<ShujiiIkenshoTorokuDiv> onBefore_btnSeikatsuKinoServiceGuide(ShujiiIkenshoTorokuDiv div) {
+    public ResponseData<ShujiiIkenshoTorokuTotalDiv> onBefore_btnSeikatsuKinoServiceGuide(ShujiiIkenshoTorokuTotalDiv div) {
         return ResponseData.of(div).respond();
     }
 
@@ -230,9 +226,9 @@ public class ShujiiIkenshoToroku {
      * 生活機能とサービスダイアログ閉じの時、データを取得します。
      *
      * @param div 主治医意見書登録Div
-     * @return ResponseData<ShujiiIkenshoTorokuDiv>
+     * @return ResponseData<ShujiiIkenshoTorokuTotalDiv>
      */
-    public ResponseData<ShujiiIkenshoTorokuDiv> onOkClose_btnSeikatsuKinoServiceGuide(ShujiiIkenshoTorokuDiv div) {
+    public ResponseData<ShujiiIkenshoTorokuTotalDiv> onOkClose_btnSeikatsuKinoServiceGuide(ShujiiIkenshoTorokuTotalDiv div) {
         return ResponseData.of(div).respond();
     }
 
@@ -240,9 +236,9 @@ public class ShujiiIkenshoToroku {
      * 特記すべき事項ダイアログ表示前、データを設定します。
      *
      * @param div 主治医意見書登録Div
-     * @return ResponseData<ShujiiIkenshoTorokuDiv>
+     * @return ResponseData<ShujiiIkenshoTorokuTotalDiv>
      */
-    public ResponseData<ShujiiIkenshoTorokuDiv> onBefore_btnTokkiJikoGuide(ShujiiIkenshoTorokuDiv div) {
+    public ResponseData<ShujiiIkenshoTorokuTotalDiv> onBefore_btnTokkiJikoGuide(ShujiiIkenshoTorokuTotalDiv div) {
         return ResponseData.of(div).respond();
     }
 
@@ -250,9 +246,9 @@ public class ShujiiIkenshoToroku {
      * 特記すべき事項ダイアログ閉じの時、データを取得します。
      *
      * @param div 主治医意見書登録Div
-     * @return ResponseData<ShujiiIkenshoTorokuDiv>
+     * @return ResponseData<ShujiiIkenshoTorokuTotalDiv>
      */
-    public ResponseData<ShujiiIkenshoTorokuDiv> onOkClose_btnTokkiJikoGuide(ShujiiIkenshoTorokuDiv div) {
+    public ResponseData<ShujiiIkenshoTorokuTotalDiv> onOkClose_btnTokkiJikoGuide(ShujiiIkenshoTorokuTotalDiv div) {
         return ResponseData.of(div).respond();
     }
 
@@ -260,9 +256,9 @@ public class ShujiiIkenshoToroku {
      * 定型文ダイアログ表示前、データを設定します。
      *
      * @param div 主治医意見書登録Div
-     * @return ResponseData<ShujiiIkenshoTorokuDiv>
+     * @return ResponseData<ShujiiIkenshoTorokuTotalDiv>
      */
-    public ResponseData<ShujiiIkenshoTorokuDiv> onBefore_btnMemoTeikeibunGuide(ShujiiIkenshoTorokuDiv div) {
+    public ResponseData<ShujiiIkenshoTorokuTotalDiv> onBefore_btnMemoTeikeibunGuide(ShujiiIkenshoTorokuTotalDiv div) {
         div.setHdnSubGyomuCd(GyomuCode.DB介護保険.value());
         div.setHdnGroupCd(new RString("5101"));
         return ResponseData.of(div).respond();
@@ -272,9 +268,9 @@ public class ShujiiIkenshoToroku {
      * 定型文ダイアログ閉じの時、データを取得します。
      *
      * @param div 主治医意見書登録Div
-     * @return ResponseData<ShujiiIkenshoTorokuDiv>
+     * @return ResponseData<ShujiiIkenshoTorokuTotalDiv>
      */
-    public ResponseData<ShujiiIkenshoTorokuDiv> onOkClose_btnMemoTeikeibunGuide(ShujiiIkenshoTorokuDiv div) {
+    public ResponseData<ShujiiIkenshoTorokuTotalDiv> onOkClose_btnMemoTeikeibunGuide(ShujiiIkenshoTorokuTotalDiv div) {
         div.getTxtShujiiMemo().setValue(div.getHdnSampleText());
         return ResponseData.of(div).respond();
     }
@@ -283,9 +279,9 @@ public class ShujiiIkenshoToroku {
      * 一覧に戻るボタンを押下の場合、主治医意見書入手へ遷移します。
      *
      * @param div 主治医意見書登録Div
-     * @return ResponseData<ShujiiIkenshoTorokuDiv>
+     * @return ResponseData<ShujiiIkenshoTorokuTotalDiv>
      */
-    public ResponseData<ShujiiIkenshoTorokuDiv> onClick_btnBackToIchiran(ShujiiIkenshoTorokuDiv div) {
+    public ResponseData<ShujiiIkenshoTorokuTotalDiv> onClick_btnBackToIchiran(ShujiiIkenshoTorokuTotalDiv div) {
         if (!ResponseHolder.isReRequest()) {
             RString state = ViewStateHolder.get(ViewStateKeys.状態, RString.class);
             RString beforeChange = getHandler(div).getDataRString();
@@ -301,12 +297,33 @@ public class ShujiiIkenshoToroku {
     }
 
     /**
+     * 検索に戻るボタンを押下の場合、要介護認定申請検索へ遷移します。
+     *
+     * @param div 主治医意見書登録Div
+     * @return ResponseData<ShujiiIkenshoTorokuTotalDiv>
+     */
+    public ResponseData<ShujiiIkenshoTorokuTotalDiv> onClick_btnResearch(ShujiiIkenshoTorokuTotalDiv div) {
+        if (!ResponseHolder.isReRequest()) {
+            RString state = ViewStateHolder.get(ViewStateKeys.状態, RString.class);
+            RString beforeChange = getHandler(div).getDataRString();
+            if ((JYOTAI_CODE_ADD.equals(state) && !beforeChange.isEmpty())
+                    || (JYOTAI_CODE_UPD.equals(state) && !beforeChange.equals(div.getHdnHasChanged()))) {
+                return ResponseData.of(div).addMessage(UrQuestionMessages.画面遷移の確認.getMessage()).respond();
+            }
+        }
+        if (ResponseHolder.getButtonType() == MessageDialogSelectedResult.No) {
+            return ResponseData.of(div).respond();
+        }
+        return ResponseData.of(div).forwardWithEventName(DBE2310001TransitionEventName.申請者検索に戻る).respond();
+    }
+
+    /**
      * 保存するボタンを押下の場合、主治医意見書入手へ遷移します。
      *
      * @param div 主治医意見書登録Div
-     * @return ResponseData<ShujiiIkenshoTorokuDiv>
+     * @return ResponseData<ShujiiIkenshoTorokuTotalDiv>
      */
-    public ResponseData<ShujiiIkenshoTorokuDiv> onClick_btnIkenshoSave(ShujiiIkenshoTorokuDiv div) {
+    public ResponseData<ShujiiIkenshoTorokuTotalDiv> onClick_btnIkenshoSave(ShujiiIkenshoTorokuTotalDiv div) {
         RString state = ViewStateHolder.get(ViewStateKeys.状態, RString.class);
         ShinseishoKanriNo 管理番号 = new ShinseishoKanriNo(ViewStateHolder.get(ViewStateKeys.要介護認定申請検索_申請書管理番号, RString.class));
         int 履歴番号 = Integer.parseInt(ViewStateHolder.get(ViewStateKeys.要介護認定申請検索_主治医意見書作成依頼履歴番号, RString.class).toString());
@@ -324,10 +341,10 @@ public class ShujiiIkenshoToroku {
         if (ResponseHolder.getButtonType() == MessageDialogSelectedResult.No) {
             return ResponseData.of(div).respond();
         }
-        return onLoad(div);
+        return ResponseData.of(div).setState(DBE2310001StateName.完了状態);
     }
 
-    private ShujiiIkenshoTorokuHandler getHandler(ShujiiIkenshoTorokuDiv div) {
+    private ShujiiIkenshoTorokuHandler getHandler(ShujiiIkenshoTorokuTotalDiv div) {
         return new ShujiiIkenshoTorokuHandler(div);
     }
 
@@ -335,7 +352,7 @@ public class ShujiiIkenshoToroku {
             RString flag,
             ShinseishoKanriNo 管理番号,
             int 履歴番号,
-            ShujiiIkenshoTorokuDiv div) {
+            ShujiiIkenshoTorokuTotalDiv div) {
 
         NinteiShinseiJoho ninteiShinseiJoho = ViewStateHolder.get(ViewStateKeys.主治医意見書登録_意見書情報, NinteiShinseiJoho.class);
         ShujiiIkenshoIraiJoho shujiiIkenshoIraiJoho = ninteiShinseiJoho.getShujiiIkenshoIraiJoho(
@@ -374,7 +391,7 @@ public class ShujiiIkenshoToroku {
         }
     }
 
-    private void setShujiiIkenshoJohoCommon(ShujiiIkenshoJohoBuilder shujiiIkenshoBuilder, ShujiiIkenshoTorokuDiv div) {
+    private void setShujiiIkenshoJohoCommon(ShujiiIkenshoJohoBuilder shujiiIkenshoBuilder, ShujiiIkenshoTorokuTotalDiv div) {
         shujiiIkenshoBuilder.set意見書作成回数区分(SELECT_KEY0.equals(div.getRadIkenshoSakuseiKaisu().getSelectedKey())
                 ? new Code(IkenshoSakuseiKaisuKubun.初回.getコード())
                 : new Code(IkenshoSakuseiKaisuKubun._2回目以降.getコード()));

@@ -37,6 +37,7 @@ public class DbT1005KaigoJogaiTokureiTaishoShisetsuDac implements ISaveable<DbT1
 
     @InjectSession
     private SqlSession session;
+    private static final RString 事業者番号_事業者 = new RString("事業者番号");
 
     /**
      * 主キーで介護除外住所地特例対象施設を取得します。
@@ -53,7 +54,7 @@ public class DbT1005KaigoJogaiTokureiTaishoShisetsuDac implements ISaveable<DbT1
             RString 事業者番号,
             FlexibleDate 有効開始年月日) throws NullPointerException {
         requireNonNull(事業者種別, UrSystemErrorMessages.値がnull.getReplacedMessage("事業者種別"));
-        requireNonNull(事業者番号, UrSystemErrorMessages.値がnull.getReplacedMessage("事業者番号"));
+        requireNonNull(事業者番号, UrSystemErrorMessages.値がnull.getReplacedMessage((事業者番号_事業者).toString()));
         requireNonNull(有効開始年月日, UrSystemErrorMessages.値がnull.getReplacedMessage("有効開始年月日"));
         DbAccessorNormalType accessor = new DbAccessorNormalType(session);
         return accessor.select().
@@ -123,7 +124,7 @@ public class DbT1005KaigoJogaiTokureiTaishoShisetsuDac implements ISaveable<DbT1
             JigyoshaNo 事業者番号,
             FlexibleDate 有効開始年月日) throws NullPointerException {
         requireNonNull(事業者種別, UrSystemErrorMessages.値がnull.getReplacedMessage("事業者種別"));
-        requireNonNull(事業者番号, UrSystemErrorMessages.値がnull.getReplacedMessage("事業者番号"));
+        requireNonNull(事業者番号, UrSystemErrorMessages.値がnull.getReplacedMessage((事業者番号_事業者).toString()));
         requireNonNull(有効開始年月日, UrSystemErrorMessages.値がnull.getReplacedMessage("有効開始年月日"));
 
         DbAccessorNormalType accessor = new DbAccessorNormalType(session);
@@ -148,7 +149,7 @@ public class DbT1005KaigoJogaiTokureiTaishoShisetsuDac implements ISaveable<DbT1
      */
     @Transaction
     public List<DbT1005KaigoJogaiTokureiTaishoShisetsuEntity> select事業者名称(JigyoshaNo 事業者番号) throws NullPointerException {
-        requireNonNull(事業者番号, UrSystemErrorMessages.値がnull.getReplacedMessage("事業者番号"));
+        requireNonNull(事業者番号, UrSystemErrorMessages.値がnull.getReplacedMessage(事業者番号.toString()));
         DbAccessorNormalType accessor = new DbAccessorNormalType(session);
         return accessor.select().
                 table(DbT1005KaigoJogaiTokureiTaishoShisetsu.class).
@@ -172,7 +173,7 @@ public class DbT1005KaigoJogaiTokureiTaishoShisetsuDac implements ISaveable<DbT1
             RString 事業者番号,
             FlexibleDate 有効開始年月日) throws NullPointerException {
         requireNonNull(事業者種別, UrSystemErrorMessages.値がnull.getReplacedMessage("事業者種別"));
-        requireNonNull(事業者番号, UrSystemErrorMessages.値がnull.getReplacedMessage("事業者番号"));
+        requireNonNull(事業者番号, UrSystemErrorMessages.値がnull.getReplacedMessage((事業者番号_事業者).toString()));
         requireNonNull(有効開始年月日, UrSystemErrorMessages.値がnull.getReplacedMessage("有効開始年月日"));
         DbAccessorNormalType accessor = new DbAccessorNormalType(session);
         return accessor.select().
