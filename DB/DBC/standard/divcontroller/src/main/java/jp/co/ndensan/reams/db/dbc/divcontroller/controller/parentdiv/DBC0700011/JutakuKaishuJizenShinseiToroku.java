@@ -75,7 +75,7 @@ public class JutakuKaishuJizenShinseiToroku {
         div.getKaigoShikakuKihonShaPanel().getCcdKaigoShikakuKihon().onLoad(識別コード);
 
         // TODO 単体テスト
-//        ViewStateHolder.put(ViewStateKeys.処理モード, 修正モード);
+//        ViewStateHolder.put(ViewStateKeys.処理モード, 削除モード);
         JutakuKaishuJizenShinseiTorokuDivHandler handler = getHandler(div);
         RString state = ViewStateHolder.get(ViewStateKeys.処理モード, RString.class);
         if (state != null) {
@@ -342,42 +342,9 @@ public class JutakuKaishuJizenShinseiToroku {
         ShikibetsuCode 識別コード = ViewStateHolder.get(ViewStateKeys.識別コード, ShikibetsuCode.class);
 
         RString state = ViewStateHolder.get(ViewStateKeys.処理モード, RString.class);
-        boolean 入力チェック結果 = handler.入力チェック(state, hihokenshaNo);
-        if (入力チェック結果) {
-            if (!ResponseHolder.isReRequest()) {
-                // TODO メッセージ未定
-                QuestionMessage message = new QuestionMessage(
-                        DbcQuestionMessages.要介護状態区分変更_限度額リセット対象.getMessage().getCode(),
-                        DbcQuestionMessages.要介護状態区分変更_限度額リセット対象.getMessage().evaluate());
-                return ResponseData.of(div).addMessage(message).respond();
-            }
-            if (new RString(DbcErrorMessages.対象年月被保険者データなし.getMessage().getCode())
-                    .equals(ResponseHolder.getMessageCode())
-                    && ResponseHolder.getButtonType() == MessageDialogSelectedResult.No) {
-                return ResponseData.of(div).respond();
-            }
+        if (!削除モード.equals(state)) {
+            削除以外のチェック(div, handler, state, hihokenshaNo);
         }
-
-        if (!非表示用フラグ_TRUE.equals(div.getHidDataChangeFlg())) {
-            throw new ApplicationException(DbzQuestionMessages.内容変更なし処理中止確認.getMessage().evaluate().toString());
-        }
-
-        boolean 確認対象変更有無チェック結果 = handler.確認対象変更有無チェック();
-        if (確認対象変更有無チェック結果) {
-            if (!非表示用フラグ_TRUE.equals(div.getHidInputCheckMsgDisplayedFlg())) {
-                QuestionMessage message = new QuestionMessage(
-                        DbcQuestionMessages.限度額変更確認.getMessage().getCode(),
-                        DbcQuestionMessages.限度額変更確認.getMessage().evaluate());
-                div.setHidInputCheckMsgDisplayedFlg(非表示用フラグ_TRUE);
-                return ResponseData.of(div).addMessage(message).respond();
-            }
-            if (new RString(DbcQuestionMessages.限度額変更確認.getMessage().getCode())
-                    .equals(ResponseHolder.getMessageCode())
-                    && ResponseHolder.getButtonType() == MessageDialogSelectedResult.No) {
-                return ResponseData.of(div).respond();
-            }
-        }
-
         if (削除モード.equals(state)) {
             if (!非表示用フラグ_TRUE.equals(div.getHidInputConfirmMsgDisplayedFlg())) {
                 QuestionMessage message = new QuestionMessage(
@@ -418,6 +385,48 @@ public class JutakuKaishuJizenShinseiToroku {
         handler.承認結果通知書作成(hihokenshaNo, 識別コード, seiriNo, state);
 
         return ResponseData.of(div).setState(更新完了);
+    }
+
+    private ResponseData<JutakuKaishuJizenShinseiTorokuDiv> 削除以外のチェック(
+            JutakuKaishuJizenShinseiTorokuDiv div,
+            JutakuKaishuJizenShinseiTorokuDivHandler handler,
+            RString state, HihokenshaNo hihokenshaNo) {
+        boolean 入力チェック結果 = handler.入力チェック(state, hihokenshaNo);
+        if (入力チェック結果) {
+            if (!ResponseHolder.isReRequest()) {
+                // TODO メッセージ未定
+                QuestionMessage message = new QuestionMessage(
+                        DbcQuestionMessages.要介護状態区分変更_限度額リセット対象.getMessage().getCode(),
+                        DbcQuestionMessages.要介護状態区分変更_限度額リセット対象.getMessage().evaluate());
+                return ResponseData.of(div).addMessage(message).respond();
+            }
+            if (new RString(DbcErrorMessages.対象年月被保険者データなし.getMessage().getCode())
+                    .equals(ResponseHolder.getMessageCode())
+                    && ResponseHolder.getButtonType() == MessageDialogSelectedResult.No) {
+                return ResponseData.of(div).respond();
+            }
+        }
+
+        if (!非表示用フラグ_TRUE.equals(div.getHidDataChangeFlg())) {
+            throw new ApplicationException(DbzQuestionMessages.内容変更なし処理中止確認.getMessage().evaluate().toString());
+        }
+
+        boolean 確認対象変更有無チェック結果 = handler.確認対象変更有無チェック();
+        if (確認対象変更有無チェック結果) {
+            if (!非表示用フラグ_TRUE.equals(div.getHidInputCheckMsgDisplayedFlg())) {
+                QuestionMessage message = new QuestionMessage(
+                        DbcQuestionMessages.限度額変更確認.getMessage().getCode(),
+                        DbcQuestionMessages.限度額変更確認.getMessage().evaluate());
+                div.setHidInputCheckMsgDisplayedFlg(非表示用フラグ_TRUE);
+                return ResponseData.of(div).addMessage(message).respond();
+            }
+            if (new RString(DbcQuestionMessages.限度額変更確認.getMessage().getCode())
+                    .equals(ResponseHolder.getMessageCode())
+                    && ResponseHolder.getButtonType() == MessageDialogSelectedResult.No) {
+                return ResponseData.of(div).respond();
+            }
+        }
+        return null;
     }
 
     /**
