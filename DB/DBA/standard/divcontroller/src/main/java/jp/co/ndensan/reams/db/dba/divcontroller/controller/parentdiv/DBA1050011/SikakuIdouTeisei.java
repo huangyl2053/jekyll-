@@ -9,15 +9,22 @@ import jp.co.ndensan.reams.db.dba.divcontroller.entity.parentdiv.DBA1050011.DBA1
 import jp.co.ndensan.reams.db.dba.divcontroller.entity.parentdiv.DBA1050011.DBA1050011TransitionEventName;
 import jp.co.ndensan.reams.db.dba.divcontroller.entity.parentdiv.DBA1050011.SikakuIdouTeiseiDiv;
 import jp.co.ndensan.reams.db.dba.divcontroller.handler.parentdiv.DBA1050011.SikakuIdouTeiseiHandler;
+import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrQuestionMessages;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
+import jp.co.ndensan.reams.uz.uza.exclusion.LockingKey;
+import jp.co.ndensan.reams.uz.uza.exclusion.RealInitialLocker;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.message.IMessageGettable;
+import jp.co.ndensan.reams.uz.uza.message.IValidationMessage;
+import jp.co.ndensan.reams.uz.uza.message.Message;
 import jp.co.ndensan.reams.uz.uza.message.MessageDialogSelectedResult;
 import jp.co.ndensan.reams.uz.uza.message.QuestionMessage;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ResponseHolder;
+import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPair;
+import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
 
 /**
- *
  * 資格異動訂正の画面処理クラスです。
  *
  * @reamsid_L DBA-0521-010 dongyabin
@@ -28,6 +35,7 @@ public class SikakuIdouTeisei {
     private static final RString 状態_修正 = new RString("修正");
     private static final RString 状態_削除 = new RString("削除");
     private static final RString 状態_照会 = new RString("照会");
+    private static final LockingKey 前排他ロックキー = new LockingKey("ShikakuIdoTeisei");
 
     /**
      * 画面を初期化します。
@@ -37,7 +45,14 @@ public class SikakuIdouTeisei {
      */
     public ResponseData<SikakuIdouTeiseiDiv> onLoad(SikakuIdouTeiseiDiv div) {
         getHandler(div).onLoad();
-        // TODO 処理詳細シート「３．　前排他制御」を参照
+        if (!RealInitialLocker.tryGetLock(前排他ロックキー)) {
+            div.setReadOnly(true);
+            ValidationMessageControlPairs validationMessages = new ValidationMessageControlPairs();
+            validationMessages.add(new ValidationMessageControlPair(SikakuIdouTeiseiErrorMessage.排他_他のユーザが使用中));
+            return ResponseData.of(div).addValidationMessages(validationMessages).respond();
+        } else {
+            RealInitialLocker.lock(前排他ロックキー);
+        }
         return ResponseData.of(div).respond();
     }
 
@@ -101,11 +116,37 @@ public class SikakuIdouTeisei {
                 && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
             getHandler(div).save();
         }
-        // TODO 前排他ロック解除
+        RealInitialLocker.release(前排他ロックキー);
         return ResponseData.of(div).setState(DBA1050011StateName.完了状態);
+    }
+
+    /**
+     * 「対象者検索に戻る」ボタンを押します。
+     *
+     * @param div 画面情報
+     * @return ResponseData<SikakuIdouTeiseiDiv>
+     */
+    public ResponseData<SikakuIdouTeiseiDiv> onClick_Modoru(SikakuIdouTeiseiDiv div) {
+        RealInitialLocker.release(前排他ロックキー);
+        return ResponseData.of(div).forwardWithEventName(DBA1050011TransitionEventName.再検索).respond();
     }
 
     private SikakuIdouTeiseiHandler getHandler(SikakuIdouTeiseiDiv div) {
         return new SikakuIdouTeiseiHandler(div);
+    }
+
+    private enum SikakuIdouTeiseiErrorMessage implements IValidationMessage {
+
+        排他_他のユーザが使用中(UrErrorMessages.排他_他のユーザが使用中);
+        private final Message message;
+
+        private SikakuIdouTeiseiErrorMessage(IMessageGettable message) {
+            this.message = message.getMessage();
+        }
+
+        @Override
+        public Message getMessage() {
+            return message;
+        }
     }
 }
