@@ -99,4 +99,20 @@ public class DbV4001JukyushaDaichoAliveDac implements ISaveable<DbV4001JukyushaD
         //return DbAccessorMethodSelector.saveByForDeletePhysical(new DbAccessorNormalType(session), entity);
         return DbAccessors.saveBy(new DbAccessorNormalType(session), entity);
     }
+
+    /**
+     * 受給者台帳AliveをselectBy被保険者番号。
+     *
+     * @param 被保険者番号 HihokenshaNo
+     * @return DbV4001JukyushaDaichoEntityの{@code list}
+     */
+    @Transaction
+    public List<DbV4001JukyushaDaichoEntity> selectBy被保険者番号(HihokenshaNo 被保険者番号) {
+        DbAccessorNormalType accessor = new DbAccessorNormalType(session);
+
+        return accessor.select().
+                table(DbV4001JukyushaDaicho.class).
+                where(eq(hihokenshaNo, 被保険者番号)).
+                toList(DbV4001JukyushaDaichoEntity.class);
+    }
 }
