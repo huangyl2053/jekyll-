@@ -3,20 +3,20 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package jp.co.ndensan.reams.db.dba.business.report.hihokenshashob4;
 
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import lombok.Getter;
 
 /**
- *
  * 介護保険被保険者証（B4版）Entityリストです。
+ *
  * @reamsid_L DBU-0490-060 dongyabin
  */
 @Getter
 @SuppressWarnings("PMD.UnusedPrivateField")
 public class HihokenshashoB4Item {
+
     private final RString yukokigen;
     private final RString hihokenshanno;
     private final RString yubinno;
@@ -89,9 +89,17 @@ public class HihokenshashoB4Item {
     private final RString gyosha;
     private final RString todokeYmd1;
     private final RString gyosha2;
+    private final RString gyosha2Asa;
+    private final RString gyosha2Massho;
     private final RString todokeYmd2;
+    private final RString todokeYmd2Asa1;
+    private final RString todokeYmd2Massho1;
     private final RString gyosha3;
+    private final RString gyosha3Asa;
+    private final RString gyosha3Massho;
     private final RString todokeYmd3;
+    private final RString todokeYmd3Asa1;
+    private final RString todokeYmd3Massho1;
     private final RString shisetsuSyu1;
     private final RString shisetsuname1;
     private final RString nyushochk1;
@@ -115,10 +123,15 @@ public class HihokenshashoB4Item {
     private final RString kosekiSeibetsu2;
     private final RString itakuGyosha1;
     private final RString itakuGyosha2;
+    private final RString itakuGyosha2Asa;
+    private final RString itakuGyosha2Massho;
     private final RString itakuGyosha3;
+    private final RString itakuGyosha3Asa;
+    private final RString itakuGyosha3Massho;
 
     /**
      * コンストラクタです。
+     *
      * @param yukokigen 有効期限1
      * @param hihokenshanno 被保険者番号
      * @param yubinno 郵便番号
@@ -191,9 +204,17 @@ public class HihokenshashoB4Item {
      * @param gyosha 居宅介護事業者１
      * @param todokeYmd1 届出年月日１
      * @param gyosha2 居宅介護事業者2
+     * @param gyosha2Asa 居宅介護事業者★2
+     * @param gyosha2Massho 居宅介護事業者取消2
      * @param todokeYmd2 届出年月日２
+     * @param todokeYmd2Asa1 届出年月日★21
+     * @param todokeYmd2Massho1 届出年月日取消21
      * @param gyosha3 居宅介護事業者3
+     * @param gyosha3Asa 居宅介護事業者★3
+     * @param gyosha3Massho 居宅介護事業者取消3
      * @param todokeYmd3 届出年月日3
+     * @param todokeYmd3Asa1 届出年月日★31
+     * @param todokeYmd3Massho1 届出年月日取消31
      * @param shisetsuSyu1 施設種類11
      * @param shisetsuname1 施設名1
      * @param nyushochk1 入所チェック1
@@ -217,7 +238,11 @@ public class HihokenshashoB4Item {
      * @param kosekiSeibetsu2 構成性別2
      * @param itakuGyosha1 居宅介護事業者長１
      * @param itakuGyosha2 居宅介護事業者長2
+     * @param itakuGyosha2Asa 居宅介護事業者長★2
+     * @param itakuGyosha2Massho 居宅介護事業者長取消2
      * @param itakuGyosha3 居宅介護事業者長3
+     * @param itakuGyosha3Asa 居宅介護事業者長★3
+     * @param itakuGyosha3Massho 居宅介護事業者長取消3
      */
     public HihokenshashoB4Item(RString yukokigen,
             RString hihokenshanno,
@@ -291,9 +316,17 @@ public class HihokenshashoB4Item {
             RString gyosha,
             RString todokeYmd1,
             RString gyosha2,
+            RString gyosha2Asa,
+            RString gyosha2Massho,
             RString todokeYmd2,
+            RString todokeYmd2Asa1,
+            RString todokeYmd2Massho1,
             RString gyosha3,
+            RString gyosha3Asa,
+            RString gyosha3Massho,
             RString todokeYmd3,
+            RString todokeYmd3Asa1,
+            RString todokeYmd3Massho1,
             RString shisetsuSyu1,
             RString shisetsuname1,
             RString nyushochk1,
@@ -317,7 +350,11 @@ public class HihokenshashoB4Item {
             RString kosekiSeibetsu2,
             RString itakuGyosha1,
             RString itakuGyosha2,
-            RString itakuGyosha3) {
+            RString itakuGyosha2Asa,
+            RString itakuGyosha2Massho,
+            RString itakuGyosha3,
+            RString itakuGyosha3Asa,
+            RString itakuGyosha3Massho) {
         this.yukokigen = yukokigen;
         this.hihokenshanno = hihokenshanno;
         this.yubinno = yubinno;
@@ -390,9 +427,17 @@ public class HihokenshashoB4Item {
         this.gyosha = gyosha;
         this.todokeYmd1 = todokeYmd1;
         this.gyosha2 = gyosha2;
+        this.gyosha2Asa = gyosha2Asa;
+        this.gyosha2Massho = gyosha2Massho;
         this.todokeYmd2 = todokeYmd2;
+        this.todokeYmd2Asa1 = todokeYmd2Asa1;
+        this.todokeYmd2Massho1 = todokeYmd2Massho1;
         this.gyosha3 = gyosha3;
+        this.gyosha3Asa = gyosha3Asa;
+        this.gyosha3Massho = gyosha3Massho;
         this.todokeYmd3 = todokeYmd3;
+        this.todokeYmd3Asa1 = todokeYmd3Asa1;
+        this.todokeYmd3Massho1 = todokeYmd3Massho1;
         this.shisetsuSyu1 = shisetsuSyu1;
         this.shisetsuname1 = shisetsuname1;
         this.nyushochk1 = nyushochk1;
@@ -416,6 +461,10 @@ public class HihokenshashoB4Item {
         this.kosekiSeibetsu2 = kosekiSeibetsu2;
         this.itakuGyosha1 = itakuGyosha1;
         this.itakuGyosha2 = itakuGyosha2;
+        this.itakuGyosha2Asa = itakuGyosha2Asa;
+        this.itakuGyosha2Massho = itakuGyosha2Massho;
         this.itakuGyosha3 = itakuGyosha3;
+        this.itakuGyosha3Asa = itakuGyosha3Asa;
+        this.itakuGyosha3Massho = itakuGyosha3Massho;
     }
 }

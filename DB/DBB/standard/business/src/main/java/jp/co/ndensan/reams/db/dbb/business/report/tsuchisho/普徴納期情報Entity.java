@@ -8,8 +8,9 @@ package jp.co.ndensan.reams.db.dbb.business.report.tsuchisho;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
- * 普徴納期情報Entity
+ * 普徴納期情報Entity。
  *
+ * @reamsid_L DBB-0820-050 xuyue
  */
 @lombok.Getter
 @lombok.Setter

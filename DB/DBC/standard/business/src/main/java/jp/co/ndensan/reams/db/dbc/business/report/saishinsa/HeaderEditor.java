@@ -5,6 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbc.business.report.saishinsa;
 
+import jp.co.ndensan.reams.db.dbc.business.core.SaishinsaKohifutanshaBunSourceData;
 import jp.co.ndensan.reams.db.dbc.entity.report.saishinsa.SaishinsaKetteitsuchishoTorikomiIchiranKohifutanshaBunSource;
 
 /**
@@ -14,14 +15,14 @@ import jp.co.ndensan.reams.db.dbc.entity.report.saishinsa.SaishinsaKetteitsuchis
  */
 public class HeaderEditor implements ISaishinsaKetteitsuchishoTorikomiIchiranKohifutanshaBunEditor {
 
-    private final SaishinsaKetteitsuchishoTorikomiIchiranKohifutanshaBunItem item;
+    private final SaishinsaKohifutanshaBunSourceData item;
 
     /**
      * コンストラクタです
      *
-     * @param item SaishinsaKetteitsuchishoTorikomiIchiranKohifutanshaBunItem
+     * @param item SaishinsaKohifutanshaBunSourceData
      */
-    public HeaderEditor(SaishinsaKetteitsuchishoTorikomiIchiranKohifutanshaBunItem item) {
+    public HeaderEditor(SaishinsaKohifutanshaBunSourceData item) {
         this.item = item;
     }
 
@@ -29,10 +30,10 @@ public class HeaderEditor implements ISaishinsaKetteitsuchishoTorikomiIchiranKoh
     public SaishinsaKetteitsuchishoTorikomiIchiranKohifutanshaBunSource edit(
             SaishinsaKetteitsuchishoTorikomiIchiranKohifutanshaBunSource source) {
 
-        source.printTimeStamp = item.getPrintTimeStamp();
-        source.torikomiYM = item.getTorikomiYM();
-        source.kokuhorenName = item.getKokuhorenName();
-        source.shinsakaiName = item.getShinsakaiName();
+        source.printTimeStamp = item.get印刷日時();
+        source.torikomiYM = item.get処理年月();
+        source.kokuhorenName = item.get国保連合会名();
+        source.shinsakaiName = item.get審査委員会名();
         return source;
     }
 

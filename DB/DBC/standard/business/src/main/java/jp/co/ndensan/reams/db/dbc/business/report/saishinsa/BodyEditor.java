@@ -5,6 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbc.business.report.saishinsa;
 
+import jp.co.ndensan.reams.db.dbc.business.core.SaishinsaKohifutanshaBunSourceData;
 import jp.co.ndensan.reams.db.dbc.entity.report.saishinsa.SaishinsaKetteitsuchishoTorikomiIchiranKohifutanshaBunSource;
 
 /**
@@ -14,14 +15,14 @@ import jp.co.ndensan.reams.db.dbc.entity.report.saishinsa.SaishinsaKetteitsuchis
  */
 public class BodyEditor implements ISaishinsaKetteitsuchishoTorikomiIchiranKohifutanshaBunEditor {
 
-    private final SaishinsaKetteitsuchishoTorikomiIchiranKohifutanshaBunItem item;
+    private final SaishinsaKohifutanshaBunSourceData item;
 
     /**
      * コンストラクタです
      *
-     * @param item SaishinsaKetteitsuchishoTorikomiIchiranKohifutanshaBunItem
+     * @param item SaishinsaKohifutanshaBunSourceData
      */
-    public BodyEditor(SaishinsaKetteitsuchishoTorikomiIchiranKohifutanshaBunItem item) {
+    public BodyEditor(SaishinsaKohifutanshaBunSourceData item) {
         this.item = item;
     }
 
@@ -29,69 +30,69 @@ public class BodyEditor implements ISaishinsaKetteitsuchishoTorikomiIchiranKohif
     public SaishinsaKetteitsuchishoTorikomiIchiranKohifutanshaBunSource edit(
             SaishinsaKetteitsuchishoTorikomiIchiranKohifutanshaBunSource source) {
 
-        source.kohiFutanshaNo = item.getKohiFutanshaNo();
-        source.kohiFutanshaName = item.getKohiFutanshaName();
-        source.shutsuryokujun1 = item.getShutsuryokujun1();
-        source.shutsuryokujun2 = item.getShutsuryokujun2();
-        source.shutsuryokujun3 = item.getShutsuryokujun3();
-        source.shutsuryokujun4 = item.getShutsuryokujun4();
-        source.shutsuryokujun5 = item.getShutsuryokujun5();
-        source.kaipage1 = item.getKaipage1();
-        source.kaipage2 = item.getKaipage2();
-        source.kaipage3 = item.getKaipage3();
-        source.kaipage4 = item.getKaipage4();
-        source.kaipage5 = item.getKaipage5();
-        source.listCenter_1 = item.getListCenter_1();
-        source.listCenter_2 = item.getListCenter_2();
-        source.listCenter_3 = item.getListCenter_3();
-        source.listUpper_1 = item.getListUpper_1();
-        source.listUpper_2 = item.getListUpper_2();
-        source.listUpper_3 = item.getListUpper_3();
-        source.listUpper_4 = item.getListUpper_4();
-        source.listUpper_5 = item.getListUpper_5();
-        source.listUpper_6 = item.getListUpper_6();
-        source.listUpper_7 = item.getListUpper_7();
-        source.listUpper_8 = item.getListUpper_8();
-        source.listLower_1 = item.getListLower_1();
-        source.listLower_2 = item.getListLower_2();
-        source.listLower_3 = item.getListLower_3();
-        source.listLower_4 = item.getListLower_4();
-        source.listLower_5 = item.getListLower_5();
-        source.listLower_6 = item.getListLower_6();
-        source.listLower_7 = item.getListLower_7();
-        source.listLower_8 = item.getListLower_8();
-        source.midashi1 = item.getMidashi1();
-        source.midashi2 = item.getMidashi2();
-        source.midashi3 = item.getMidashi3();
-        source.midashi4 = item.getMidashi4();
-        source.midashi5 = item.getMidashi5();
-        source.midashi6 = item.getMidashi6();
-        source.midashi7 = item.getMidashi7();
-        source.midashi8 = item.getMidashi8();
-        source.midashi9 = item.getMidashi9();
-        source.midashi10 = item.getMidashi10();
-        source.midashi11 = item.getMidashi11();
-        source.midashi12 = item.getMidashi12();
-        source.midashi13 = item.getMidashi13();
-        source.midashi14 = item.getMidashi14();
-        source.kensu1 = item.getKensu1();
-        source.tanisu1 = item.getTanisu1();
-        source.futangaku1 = item.getFutangaku1();
-        source.kensu2 = item.getKensu2();
-        source.tanisu2 = item.getTanisu2();
-        source.futangaku2 = item.getFutangaku2();
-        source.kensu3 = item.getKensu3();
-        source.tanisu3 = item.getTanisu3();
-        source.futangaku3 = item.getFutangaku3();
-        source.kensu4 = item.getKensu4();
-        source.tanisu4 = item.getTanisu4();
-        source.futangaku4 = item.getFutangaku4();
-        source.kensu5 = item.getKensu5();
-        source.tanisu5 = item.getTanisu5();
-        source.futangaku5 = item.getFutangaku5();
-        source.kensu6 = item.getKensu6();
-        source.tanisu6 = item.getTanisu6();
-        source.futangaku6 = item.getFutangaku6();
+        source.kohiFutanshaNo = item.get公費負担者番号();
+        source.kohiFutanshaName = item.get公費負担者名();
+        source.shutsuryokujun1 = item.get並び順１();
+        source.shutsuryokujun2 = item.get並び順２();
+        source.shutsuryokujun3 = item.get並び順３();
+        source.shutsuryokujun4 = item.get並び順４();
+        source.shutsuryokujun5 = item.get並び順５();
+        source.kaipage1 = item.get改頁１();
+        source.kaipage2 = item.get改頁２();
+        source.kaipage3 = item.get改頁３();
+        source.kaipage4 = item.get改頁４();
+        source.kaipage5 = item.get改頁５();
+        source.listCenter_1 = item.getNo();
+        source.listCenter_2 = item.get取扱年月();
+        source.listCenter_3 = item.getサービス提供年月();
+        source.listUpper_1 = item.get事業者番号();
+        source.listUpper_2 = item.get事業者名();
+        source.listUpper_3 = item.getサービス種類コード();
+        source.listUpper_4 = item.getサービス種類名();
+        source.listUpper_5 = item.get再審査結果コード();
+        source.listUpper_6 = item.get当初請求単位数();
+        source.listUpper_7 = item.get申立単位数();
+        source.listUpper_8 = item.get調整単位数();
+        source.listLower_1 = item.get被保険者番号();
+        source.listLower_2 = item.get被保険者名();
+        source.listLower_3 = item.get申立事由コード();
+        source.listLower_4 = item.get申立事由();
+        source.listLower_5 = item.get再審査結果();
+        source.listLower_6 = item.get原番単位数();
+        source.listLower_7 = item.get決定単位数();
+        source.listLower_8 = item.get公費負担額();
+        source.midashi1 = item.get再審査申立タイトル();
+        source.midashi2 = item.get再審査決定タイトル();
+        source.midashi3 = item.get調整タイトル();
+        source.midashi4 = item.get件数タイトル1();
+        source.midashi5 = item.get単位数タイトル1();
+        source.midashi6 = item.get公費負担額タイトル1();
+        source.midashi7 = item.get件数タイトル2();
+        source.midashi8 = item.get単位数タイトル2();
+        source.midashi9 = item.get公費負担額タイトル2();
+        source.midashi10 = item.get件数タイトル3();
+        source.midashi11 = item.get単位数タイトル3();
+        source.midashi12 = item.get公費負担額タイトル3();
+        source.midashi13 = item.get介護給付費タイトル();
+        source.midashi14 = item.get高額介護サービス費タイトル();
+        source.kensu1 = item.get介護給付費請求件数();
+        source.tanisu1 = item.get介護給付費請求単位数();
+        source.futangaku1 = item.get介護給付費請求公費負担額();
+        source.kensu2 = item.get介護給付費決定件数();
+        source.tanisu2 = item.get介護給付費決定単位数();
+        source.futangaku2 = item.get介護給付費決定公費負担額();
+        source.kensu3 = item.get介護給付費調整件数();
+        source.tanisu3 = item.get介護給付費調整単位数();
+        source.futangaku3 = item.get介護給付費調整公費負担額();
+        source.kensu4 = item.get高額介護サービス費請求件数();
+        source.tanisu4 = item.get高額介護サービス費請求単位数();
+        source.futangaku4 = item.get高額介護サービス費請求公費負担額();
+        source.kensu5 = item.get高額介護サービス費決定件数();
+        source.tanisu5 = item.get高額介護サービス費決定単位数();
+        source.futangaku5 = item.get高額介護サービス費決定公費負担額();
+        source.kensu6 = item.get高額介護サービス費調整件数();
+        source.tanisu6 = item.get高額介護サービス費調整単位数();
+        source.futangaku6 = item.get高額介護サービス費調整公費負担額();
         return source;
     }
 

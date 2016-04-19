@@ -12,6 +12,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.message.IMessageGettable;
 import jp.co.ndensan.reams.uz.uza.message.IValidationMessage;
 import jp.co.ndensan.reams.uz.uza.message.Message;
+import jp.co.ndensan.reams.uz.uza.ui.binding.RowState;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPair;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
 
@@ -193,7 +194,7 @@ public class TekiyoJogaiRirekiValidationHandler {
     private void 期間重複チェック(List<datagridTekiyoJogai_Row> 適用情報リスト,
             datagridTekiyoJogai_Row 最新の適用情報, ValidationMessageControlPairs validPairs) {
         for (datagridTekiyoJogai_Row row : 適用情報リスト) {
-            if (状態_削除.equals(row.getStatus()) || row.getId() == 最新の適用情報.getId()) {
+            if (RowState.Deleted.equals(row.getRowState()) || row.getId() == 最新の適用情報.getId()) {
                 continue;
             }
             if (row.getKayijoDate().getValue() == null) {
@@ -208,8 +209,9 @@ public class TekiyoJogaiRirekiValidationHandler {
                 }
             } else {
                 if (div.getPanelTekiyoInput().getTxtKayijoDate().getValue() == null) {
-                    if (div.getPanelTekiyoInput().getTxtTekiyoDate().getValue().isBefore(
-                            row.getKayijoDate().getValue())) {
+                    if (div.getPanelTekiyoInput().getTxtTekiyoDate().getValue() != null
+                            && div.getPanelTekiyoInput().getTxtTekiyoDate().getValue().isBefore(
+                                    row.getKayijoDate().getValue())) {
                         validPairs.add(new ValidationMessageControlPair(RRVMessages.解除日,
                                 div.getPanelTekiyoInput().getTxtKayijoDate()));
                     }

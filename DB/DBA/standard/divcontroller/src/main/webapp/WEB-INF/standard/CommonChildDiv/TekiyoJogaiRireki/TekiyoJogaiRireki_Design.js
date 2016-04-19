@@ -20,6 +20,14 @@ var DBA;
                 return "onClick_Delete";
             };
 
+            Events.onBlur_TekiyoRireki = function () {
+                return "onBlur_TekiyoRireki";
+            };
+
+            Events.onBlur_KayijoRireki = function () {
+                return "onBlur_KayijoRireki";
+            };
+
             Events.onBlur_Tekiyo = function () {
                 return "onBlur_Tekiyo";
             };

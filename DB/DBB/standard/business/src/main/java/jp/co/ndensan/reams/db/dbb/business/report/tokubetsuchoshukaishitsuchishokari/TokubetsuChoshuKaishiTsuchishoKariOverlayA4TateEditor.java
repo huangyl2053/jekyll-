@@ -31,6 +31,7 @@ public class TokubetsuChoshuKaishiTsuchishoKariOverlayA4TateEditor implements
     private static final int INDEX_1 = 1;
     private static final int INDEX_2 = 2;
     private static final RString SPLITTOKEN = new RString(".");
+    private static final RString PING = new RString("平");
 
     private final KariTokuchoKaishiTsuchisyoJoho 仮算定特徴開始通知書情報;
     private final RString 通知書定型文１;
@@ -67,61 +68,85 @@ public class TokubetsuChoshuKaishiTsuchishoKariOverlayA4TateEditor implements
         source.hyojicodeCode3 = 仮算定特徴開始通知書情報.get編集後仮算定通知書共通情報().get表示コード３();
         source.hihokenshaNo = 仮算定特徴開始通知書情報.get編集後仮算定通知書共通情報().get被保険者番号().value();
         source.tuchishoNo = 仮算定特徴開始通知書情報.get編集後仮算定通知書共通情報().get通知書番号().value();
-        source.setaiCode = 仮算定特徴開始通知書情報.get編集後仮算定通知書共通情報().get編集後個人().get世帯コード().value();
+        if (仮算定特徴開始通知書情報.get編集後仮算定通知書共通情報().get編集後個人() != null) {
+            source.setaiCode = 仮算定特徴開始通知書情報.get編集後仮算定通知書共通情報().get編集後個人().get世帯コード().value();
+        }
+
         source.shikibetsuCode = 仮算定特徴開始通知書情報.get編集後仮算定通知書共通情報().get識別コード().value();
-        source.hihokenshaName = 仮算定特徴開始通知書情報.get編集後仮算定通知書共通情報().get編集後個人().get名称().getName().value();
-        source.setainushiName = 仮算定特徴開始通知書情報.get編集後仮算定通知書共通情報().get編集後個人().get世帯主名().value();
-        source.hihokenshaJusho = 仮算定特徴開始通知書情報.get編集後仮算定通知書共通情報().get編集後宛先().get編集後住所();
-        source.hihokenshaKatagaki = 仮算定特徴開始通知書情報.get編集後仮算定通知書共通情報().get編集後個人().get方書().value();
-        source.birthYYYY = 仮算定特徴開始通知書情報.get編集後仮算定通知書共通情報().get編集後個人().get生年月日()
-                .split(SPLITTOKEN.toString()).get(INDEX_0);
-        source.birthMM = 仮算定特徴開始通知書情報.get編集後仮算定通知書共通情報().get編集後個人().get生年月日()
-                .split(SPLITTOKEN.toString()).get(INDEX_1);
-        source.birthDD = 仮算定特徴開始通知書情報.get編集後仮算定通知書共通情報().get編集後個人().get生年月日()
-                .split(SPLITTOKEN.toString()).get(INDEX_2);
-        source.seibetsu = 仮算定特徴開始通知書情報.get編集後仮算定通知書共通情報().get編集後個人().get性別();
-        source.tokuchoGimushaName = 仮算定特徴開始通知書情報.get編集後仮算定通知書共通情報().get更正後().get更正後特別徴収義務者();
-        source.tokuchoTaishoNenkinName = 仮算定特徴開始通知書情報.get編集後仮算定通知書共通情報().get更正後().get更正後特別徴収対象年金();
+        if (仮算定特徴開始通知書情報.get編集後仮算定通知書共通情報().get編集後個人() != null) {
+            source.hihokenshaName = 仮算定特徴開始通知書情報.get編集後仮算定通知書共通情報().get編集後個人().get名称().getName().value();
+            source.setainushiName = 仮算定特徴開始通知書情報.get編集後仮算定通知書共通情報().get編集後個人().get世帯主名().value();
+        }
+        if (仮算定特徴開始通知書情報.get編集後仮算定通知書共通情報().get編集後宛先() != null) {
+            source.hihokenshaJusho = 仮算定特徴開始通知書情報.get編集後仮算定通知書共通情報().get編集後宛先().get編集後住所();
+        }
+        // TODO 内部番号639 被保険者方書
+        if (仮算定特徴開始通知書情報.get編集後仮算定通知書共通情報().get編集後個人() != null) {
+            source.hihokenshaKatagaki = 仮算定特徴開始通知書情報.get編集後仮算定通知書共通情報().get編集後個人().get方書().value();
+            RString 生年月日_first = 仮算定特徴開始通知書情報.get編集後仮算定通知書共通情報().get編集後個人().get生年月日().substring(INDEX_0, INDEX_1);
+            if (PING.equals(生年月日_first)) {
+                source.birthYYYY = 仮算定特徴開始通知書情報.get編集後仮算定通知書共通情報().get編集後個人().get生年月日()
+                        .split(SPLITTOKEN.toString()).get(INDEX_0);
+            } else {
+                source.birthYYYY = new FlexibleYear(仮算定特徴開始通知書情報.get編集後仮算定通知書共通情報().get編集後個人().get生年月日())
+                        .wareki().eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN).fillType(FillType.BLANK).toDateString().concat(NENDO);
+            }
+            source.birthMM = 仮算定特徴開始通知書情報.get編集後仮算定通知書共通情報().get編集後個人().get生年月日()
+                    .split(SPLITTOKEN.toString()).get(INDEX_1);
+            source.birthDD = 仮算定特徴開始通知書情報.get編集後仮算定通知書共通情報().get編集後個人().get生年月日()
+                    .split(SPLITTOKEN.toString()).get(INDEX_2);
+            source.seibetsu = 仮算定特徴開始通知書情報.get編集後仮算定通知書共通情報().get編集後個人().get性別();
+        }
+        if (仮算定特徴開始通知書情報.get編集後仮算定通知書共通情報().get更正後() != null) {
+            source.tokuchoGimushaName = 仮算定特徴開始通知書情報.get編集後仮算定通知書共通情報().get更正後().get更正後特別徴収義務者();
+            source.tokuchoTaishoNenkinName = 仮算定特徴開始通知書情報.get編集後仮算定通知書共通情報().get更正後().get更正後特別徴収対象年金();
+        }
         source.hokenryoGakuNendo1 = 仮算定特徴開始通知書情報.get編集後仮算定通知書共通情報().get調定年度().wareki().eraType(EraType.KANJI)
                 .firstYear(FirstYear.GAN_NEN).fillType(FillType.BLANK).toDateString().concat(NENDO);
         source.hokenryoGakuNendo2 = 仮算定特徴開始通知書情報.get編集後仮算定通知書共通情報().get調定年度().wareki().eraType(EraType.KANJI)
                 .firstYear(FirstYear.GAN_NEN).fillType(FillType.BLANK).toDateString().concat(NENDO);
-        source.karisanteiGakuGokei = DecimalFormatter.toコンマ区切りRString(
-                仮算定特徴開始通知書情報.get編集後仮算定通知書共通情報().get更正後().get更正後特徴期別金額01()
-                .add(仮算定特徴開始通知書情報.get編集後仮算定通知書共通情報().get更正後().get更正後特徴期別金額02())
-                .add(仮算定特徴開始通知書情報.get編集後仮算定通知書共通情報().get更正後().get更正後特徴期別金額03()),
-                0);
-        source.hokenryoGaku4Gatsu1 = DecimalFormatter.toコンマ区切りRString(仮算定特徴開始通知書情報.get編集後仮算定通知書共通情報()
-                .get更正後().get更正後特徴期別金額01(), 0);
-        source.hokenryoGaku6Gatsu1 = DecimalFormatter.toコンマ区切りRString(仮算定特徴開始通知書情報.get編集後仮算定通知書共通情報()
-                .get更正後().get更正後特徴期別金額02(), 0);
-        source.hokenryoGaku8Gatsu1 = DecimalFormatter.toコンマ区切りRString(仮算定特徴開始通知書情報.get編集後仮算定通知書共通情報()
-                .get更正後().get更正後特徴期別金額03(), 0);
-        source.SanteiKisoNendo1 = new FlexibleYear(仮算定特徴開始通知書情報.get編集後仮算定通知書共通情報().get前年度情報().get前年度賦課年度())
-                .wareki().eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN).fillType(FillType.BLANK).toDateString();
-        source.SanteiKisoNendo2 = new FlexibleYear(仮算定特徴開始通知書情報.get編集後仮算定通知書共通情報().get前年度情報().get前年度賦課年度())
-                .wareki().eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN).fillType(FillType.BLANK).toDateString();
-        source.SanteiKisoNendo3 = new FlexibleYear(仮算定特徴開始通知書情報.get編集後仮算定通知書共通情報().get前年度情報().get前年度賦課年度())
-                .wareki().eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN).fillType(FillType.BLANK).toDateString();
-        source.shotokuDankai = 仮算定特徴開始通知書情報.get編集後仮算定通知書共通情報().get前年度情報().get前年度保険料段階();
-        source.karisanteiGakuGokei1 = DecimalFormatter.toコンマ区切りRString(仮算定特徴開始通知書情報.get編集後仮算定通知書共通情報().get前年度情報()
-                .get前年度保険料率(), 0);
-        source.hokenryoGaku10Gatsu = DecimalFormatter.toコンマ区切りRString(仮算定特徴開始通知書情報.get編集後仮算定通知書共通情報()
-                .get前年度情報().get前年度特徴期別金額04(), 0);
-        source.hokenryoGaku4Gatsu2 = DecimalFormatter.toコンマ区切りRString(仮算定特徴開始通知書情報.get編集後仮算定通知書共通情報()
-                .get前年度情報().get前年度特徴期別金額01(), 0);
-        source.hokenryoGaku12Gatsu = DecimalFormatter.toコンマ区切りRString(仮算定特徴開始通知書情報.get編集後仮算定通知書共通情報()
-                .get前年度情報().get前年度特徴期別金額05(), 0);
-        source.hokenryoGaku6Gatsu2 = DecimalFormatter.toコンマ区切りRString(仮算定特徴開始通知書情報.get編集後仮算定通知書共通情報()
-                .get前年度情報().get前年度特徴期別金額02(), 0);
-        // TODO 保険料額2月（前）
-        source.hokenryoGaku2Gatsu = DecimalFormatter.toコンマ区切りRString(仮算定特徴開始通知書情報.get編集後仮算定通知書共通情報()
-                .get前年度情報().get前年度特徴期別金額06(), 0);
-        source.hokenryoGaku8Gatsu2 = DecimalFormatter.toコンマ区切りRString(仮算定特徴開始通知書情報.get編集後仮算定通知書共通情報()
-                .get前年度情報().get前年度最終期特徴期別介護保険料(), 0);
+        if (仮算定特徴開始通知書情報.get編集後仮算定通知書共通情報().get更正後() != null) {
+            source.karisanteiGakuGokei = DecimalFormatter.toコンマ区切りRString(
+                    仮算定特徴開始通知書情報.get編集後仮算定通知書共通情報().get更正後().get更正後特徴期別金額01()
+                    .add(仮算定特徴開始通知書情報.get編集後仮算定通知書共通情報().get更正後().get更正後特徴期別金額02())
+                    .add(仮算定特徴開始通知書情報.get編集後仮算定通知書共通情報().get更正後().get更正後特徴期別金額03()),
+                    0);
+        }
+        if (仮算定特徴開始通知書情報.get編集後仮算定通知書共通情報().get更正後() != null) {
+            source.hokenryoGaku4Gatsu1 = DecimalFormatter.toコンマ区切りRString(仮算定特徴開始通知書情報.get編集後仮算定通知書共通情報()
+                    .get更正後().get更正後特徴期別金額01(), 0);
+            source.hokenryoGaku6Gatsu1 = DecimalFormatter.toコンマ区切りRString(仮算定特徴開始通知書情報.get編集後仮算定通知書共通情報()
+                    .get更正後().get更正後特徴期別金額02(), 0);
+            source.hokenryoGaku8Gatsu1 = DecimalFormatter.toコンマ区切りRString(仮算定特徴開始通知書情報.get編集後仮算定通知書共通情報()
+                    .get更正後().get更正後特徴期別金額03(), 0);
+        }
+        if (仮算定特徴開始通知書情報.get編集後仮算定通知書共通情報().get前年度情報() != null) {
+            source.SanteiKisoNendo1 = new FlexibleYear(仮算定特徴開始通知書情報.get編集後仮算定通知書共通情報().get前年度情報().get前年度賦課年度())
+                    .wareki().eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN).fillType(FillType.BLANK).toDateString();
+            source.SanteiKisoNendo2 = new FlexibleYear(仮算定特徴開始通知書情報.get編集後仮算定通知書共通情報().get前年度情報().get前年度賦課年度())
+                    .wareki().eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN).fillType(FillType.BLANK).toDateString();
+            source.SanteiKisoNendo3 = new FlexibleYear(仮算定特徴開始通知書情報.get編集後仮算定通知書共通情報().get前年度情報().get前年度賦課年度())
+                    .wareki().eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN).fillType(FillType.BLANK).toDateString();
+            source.shotokuDankai = 仮算定特徴開始通知書情報.get編集後仮算定通知書共通情報().get前年度情報().get前年度保険料段階();
+            source.karisanteiGakuGokei1 = DecimalFormatter.toコンマ区切りRString(仮算定特徴開始通知書情報.get編集後仮算定通知書共通情報().get前年度情報()
+                    .get前年度保険料率(), 0);
+            source.hokenryoGaku10Gatsu = DecimalFormatter.toコンマ区切りRString(仮算定特徴開始通知書情報.get編集後仮算定通知書共通情報()
+                    .get前年度情報().get前年度特徴期別金額04(), 0);
+            source.hokenryoGaku4Gatsu2 = DecimalFormatter.toコンマ区切りRString(仮算定特徴開始通知書情報.get編集後仮算定通知書共通情報()
+                    .get前年度情報().get前年度特徴期別金額01(), 0);
+            source.hokenryoGaku12Gatsu = DecimalFormatter.toコンマ区切りRString(仮算定特徴開始通知書情報.get編集後仮算定通知書共通情報()
+                    .get前年度情報().get前年度特徴期別金額05(), 0);
+            source.hokenryoGaku6Gatsu2 = DecimalFormatter.toコンマ区切りRString(仮算定特徴開始通知書情報.get編集後仮算定通知書共通情報()
+                    .get前年度情報().get前年度特徴期別金額02(), 0);
+            // TODO  内部番号639 保険料額2月（前）
+            source.hokenryoGaku2Gatsu = DecimalFormatter.toコンマ区切りRString(仮算定特徴開始通知書情報.get編集後仮算定通知書共通情報()
+                    .get前年度情報().get前年度特徴期別金額06(), 0);
+            source.hokenryoGaku8Gatsu2 = DecimalFormatter.toコンマ区切りRString(仮算定特徴開始通知書情報.get編集後仮算定通知書共通情報()
+                    .get前年度情報().get前年度最終期特徴期別介護保険料(), 0);
+        }
         source.tsuchibun = 通知書定型文１;
 
-        // TODO
+        // TODO 内部番号647
         EditedAtesaki 編集後宛先 = new EditedAtesaki(仮算定特徴開始通知書情報.get宛先情報(), 仮算定特徴開始通知書情報.get地方公共団体(),
                 仮算定特徴開始通知書情報.get帳票制御共通(), null, null, true,
                 null, null, null, null);

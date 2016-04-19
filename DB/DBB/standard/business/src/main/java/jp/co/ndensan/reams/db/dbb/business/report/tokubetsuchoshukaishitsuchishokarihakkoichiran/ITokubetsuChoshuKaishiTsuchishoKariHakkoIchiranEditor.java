@@ -5,12 +5,13 @@
  */
 package jp.co.ndensan.reams.db.dbb.business.report.tokubetsuchoshukaishitsuchishokarihakkoichiran;
 
-import jp.co.ndensan.reams.db.dbb.entity.report.tokubetsuchoshukaishitsuchishokarihakkoichiran
-        .TokubetsuChoshuKaishiTsuchishoKariHakkoIchiranSource;
+import jp.co.ndensan.reams.db.dbb.entity.report.tokubetsuchoshukaishitsuchishokarihakkoichiran.TokubetsuChoshuKaishiTsuchishoKariHakkoIchiranSource;
 import jp.co.ndensan.reams.uz.uza.report.IReportEditor;
 
 /**
  * 特別徴収開始通知書（仮算定）発行一覧表IEditor
+ *
+ * @reamsid_L DBB-0790-060 surun
  */
 public interface ITokubetsuChoshuKaishiTsuchishoKariHakkoIchiranEditor extends
         IReportEditor<TokubetsuChoshuKaishiTsuchishoKariHakkoIchiranSource> {

@@ -11,6 +11,8 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
  * 年齢到達条件情報の取得するクラスです。
+ *
+ * @reamsid_L DBA-0330-030 xuyue
  */
 public class NenreitotatsuJoken {
 

@@ -105,22 +105,22 @@ and open the template in the editor.
         転入."idoYMD" DESC,
         転入."edaNo" DESC
         ) AS A
-        INNER JOIN rgdb."DbT1001HihokenshaDaicho" AS B
+        LEFT JOIN rgdb."DbT1001HihokenshaDaicho" AS B
         ON A.転入_被保険者番号=B."hihokenshaNo"
         AND  A.転入_異動日<![CDATA[>]]> B."idoYMD"
         AND B."shikibetsuCode"<![CDATA[!=]]> A.転入_識別コード
         ) AS C
-        LEFT JOIN rgua."UaFt200FindShikibetsuTaisho"('2',C.転出_異動日, '1','DB','0',C.転出_識別コード,'','','','','','',
-        '','','','0','0','','','','','','','0','0','','','','','','','','','','0','','1','1','0','0','0','0','1','1',
-        '1','1','1','','','','','','','','0','0','','','0','0','0','','','','','','','','','','','','','','','',
-	'','','','{  }') AS 転出PSM ON 1=1
-        LEFT JOIN rgua."UaFt200FindShikibetsuTaisho"('2',C.転入_異動日, '1','DB','0',C.転入_識別コード,'','','','','','',
-        '','','','0','0','','','','','','','0','0','','','','','','','','','','0','','1','1','0','0','0','0','1','1',
-        '1','1','1','','','','','','','','0','0','','','0','0','0','','','','','','','','','','','','','','','',
-	'','','','{  }') AS 転入PSM ON 1=1
+        LEFT JOIN
+        <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.tableName_PsmParamClassShikibetsuTaisho" /> AS 転出PSM
+        ON 転出PSM."shikibetsuCode"=C.転出_識別コード
+        AND 転出PSM."idoYMD" = C.転出_異動日
+        LEFT JOIN
+        <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.tableName_PsmParamClassShikibetsuTaisho" /> AS 転入PSM
+        ON 転入PSM."shikibetsuCode"=C.転入_識別コード
+        AND 転入PSM."idoYMD" = C.転入_異動日
         WHERE C.順序番号 = '1'
         ORDER BY
-        転入_被保険者番号 ASC,
+        転入_被保険者番号 ASC,  
         転入_異動日 DESC,
         転入_枝番 DESC
     </select>

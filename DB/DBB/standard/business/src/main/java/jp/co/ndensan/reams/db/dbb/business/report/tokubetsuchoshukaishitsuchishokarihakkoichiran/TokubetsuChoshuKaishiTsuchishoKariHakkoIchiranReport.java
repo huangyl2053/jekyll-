@@ -26,6 +26,8 @@ import lombok.NonNull;
 
 /**
  * 特別徴収開始通知書（仮算定）発行一覧表Report
+ *
+ * @reamsid_L DBB-0790-060 surun
  */
 @SuppressWarnings("PMD.UnusedPrivateField")
 public class TokubetsuChoshuKaishiTsuchishoKariHakkoIchiranReport extends

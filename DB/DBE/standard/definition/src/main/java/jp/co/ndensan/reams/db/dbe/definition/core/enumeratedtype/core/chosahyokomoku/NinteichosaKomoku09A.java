@@ -11,6 +11,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 /**
  * 処調査項目09Aを表す列挙型です。
  *
+ * @reamsid_L DBE-9999-023 wangchao
  */
 public enum NinteichosaKomoku09A {
 

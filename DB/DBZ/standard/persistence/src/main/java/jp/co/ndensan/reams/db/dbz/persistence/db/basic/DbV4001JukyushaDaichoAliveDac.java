@@ -28,6 +28,8 @@ import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
 
 /**
  * 受給者台帳Aliveのデータアクセスクラスです。
+ *
+ * @reamsid_L DBB-9999-012 xicongwang
  */
 public class DbV4001JukyushaDaichoAliveDac implements ISaveable<DbV4001JukyushaDaichoEntity> {
 
@@ -114,5 +116,26 @@ public class DbV4001JukyushaDaichoAliveDac implements ISaveable<DbV4001JukyushaD
                 table(DbV4001JukyushaDaicho.class).
                 where(eq(hihokenshaNo, 被保険者番号)).
                 toList(DbV4001JukyushaDaichoEntity.class);
+    }
+
+    /**
+     * 主キーで受給者台帳Aliveを取得します。
+     *
+     * @param 被保険者番号 被保険者番号
+     * @return DbV4001JukyushaDaichoEntity
+     * @throws NullPointerException 引数のいずれかがnullの場合
+     */
+    @Transaction
+    public DbV4001JukyushaDaichoEntity select受給者台帳情報(
+            HihokenshaNo 被保険者番号) throws NullPointerException {
+        requireNonNull(被保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage("被保険者番号"));
+
+        DbAccessorNormalType accessor = new DbAccessorNormalType(session);
+
+        return accessor.select().
+                table(DbV4001JukyushaDaicho.class).
+                where(
+                        eq(hihokenshaNo, 被保険者番号)).
+                toObject(DbV4001JukyushaDaichoEntity.class);
     }
 }

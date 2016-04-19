@@ -10,6 +10,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 /**
  * 完了情報の現在のフェーズを表す列挙型です。
  *
+ * @reamsid_L DBZ-9999-023 wangchao
  */
 public enum KanryoInfoPhase {
 

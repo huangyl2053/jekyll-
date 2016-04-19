@@ -27,7 +27,7 @@ public class FuchoKarisanteiBatchParameter extends BatchParameterBase {
     private RString 出力方法;
     private RString 出力期表示方法;
     private RString 出力期;
-    private RString 対象者;
+    private RString 対象者フラグ;
     private RString 生活保護者をまとめて先頭に出力フラグ;
     private RString ページごとに山分けフラグ;
 }

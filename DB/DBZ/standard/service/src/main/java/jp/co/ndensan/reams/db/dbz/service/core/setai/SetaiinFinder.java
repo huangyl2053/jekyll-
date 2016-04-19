@@ -262,23 +262,33 @@ public class SetaiinFinder {
                     宛名識別対象Entity.getShikibetsuCode(), KensakuYusenKubun.住登外優先);
             識別対象list.add(識別対象);
         }
+        List<SetaiinJoho> リスト = null;
         for (IShikibetsuTaisho 宛名識別対象 : 識別対象list) {
+            リスト = new ArrayList<>();
             if (識別コード.equals(宛名識別対象.get識別コード())) {
-                IShikibetsuTaisho 識別対象 = 宛名識別対象;
-                RString 本人区分 = RSTR_ONE;
-                SetaiinJoho setaiinJoho = new SetaiinJoho(識別対象, 本人区分);
-                世帯員情報リスト.add(setaiinJoho);
+                if (世帯員情報リスト.isEmpty()) {
+                    IShikibetsuTaisho 識別対象 = 宛名識別対象;
+                    RString 本人区分 = RSTR_ONE;
+                    SetaiinJoho setaiinJoho = new SetaiinJoho(識別対象, 本人区分);
+                    世帯員情報リスト.add(setaiinJoho);
+                } else {
+                    IShikibetsuTaisho 識別対象 = 宛名識別対象;
+                    RString 本人区分 = RSTR_ONE;
+                    SetaiinJoho setaiinJoho = new SetaiinJoho(識別対象, 本人区分);
+                    リスト.add(setaiinJoho);
+                }
             } else {
                 IShikibetsuTaisho 識別対象 = 宛名識別対象;
                 RString 本人区分 = RSTR_ZERO;
                 SetaiinJoho setaiinJoho = new SetaiinJoho(識別対象, 本人区分);
                 世帯員情報リスト.add(setaiinJoho);
             }
-            if (世帯員情報リスト.size() == 最大のリスト) {
-                return 世帯員情報リスト;
+            リスト.addAll(世帯員情報リスト);
+            if (リスト.size() == 最大のリスト) {
+                return リスト;
             }
         }
-        return 世帯員情報リスト;
+        return リスト;
     }
 
     /**

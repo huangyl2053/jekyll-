@@ -11,6 +11,7 @@ import jp.co.ndensan.reams.db.dbb.business.core.fuchokarisanteifuka.BatchFuchoKa
 import jp.co.ndensan.reams.db.dbb.business.core.fuchokarisanteifuka.FuchoKariSanteiEntity;
 import jp.co.ndensan.reams.db.dbb.business.core.fuchokarisanteifuka.FuchoKariSanteiFukaEntity;
 import jp.co.ndensan.reams.db.dbb.definition.batchprm.fuchokarisantei.FuchoKarisanteiBatchParameter;
+import jp.co.ndensan.reams.db.dbb.definition.reportid.ReportIdDBB;
 import jp.co.ndensan.reams.db.dbb.entity.db.relate.fuchokarisanteifuka.BatchFuchoKariSanteiEntity;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.ChohyoSeigyoHanyo;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.ShoriDateKanri;
@@ -90,21 +91,7 @@ public class FuchoKariSanteiFuka {
     private static final int CASE_3021 = 3021;
     private static final int CASE_610 = 610;
     private static final int CASE_611 = 611;
-    private static final ReportId 保険料納入通知書_仮算定 = new ReportId("DBB100014_KarisanteiHokenryoNonyuTsuchishoDaihyo");
-    private static final ReportId DBB100014 = new ReportId("DBB100014_KarisanteiHokenryoNonyuTsuchishoKigoto");
-    private static final ReportId DBB100015 = new ReportId("DBB100015_KarisanteiHokenryoNonyuTsuchishoKigotoRencho");
-    private static final ReportId DBB100018 = new ReportId("DBB100018_KarisanteiHokenryoNonyuTsuchishoGinfuri");
-    private static final ReportId DBB100019 = new ReportId("DBB100019_KarisanteiHokenryoNonyuTsuchishoGinfuriRencho");
-    private static final ReportId DBB100021 = new ReportId("DBB100021_KarisanteiHokenryoNonyuTsuchishoBookFuriKaeNashi");
-    private static final ReportId DBB100023 = new ReportId("DBB100023_KarisanteiNonyuTsuchishoBookFuriKaeNashiRencho");
-    private static final ReportId DBB100020 = new ReportId("DBB100020_KarisanteiHokenryoNonyuTsuchishoBookFuriKaeAri");
-    private static final ReportId DBB100022 = new ReportId("DBB100022_KarisanteiNonyuTsuchishoBookFuriKaeAriRencho");
-    private static final ReportId DBB100026 = new ReportId("DBB100026_KarisanteiNonyuTsuchishoCVSMulti");
-    private static final ReportId DBB100027 = new ReportId("DBB100027_KarisanteiNonyuTsuchishoCVSMultiRencho");
-    private static final ReportId DBB100024 = new ReportId("DBB100024_KarisanteiNonyuTsuchishoCVSKakuko");
-    private static final ReportId DBB100025 = new ReportId("DBB100025_KarisanteiNonyuTsuchishoCVSKakukoRencho");
-    private static final ReportId DBB100028 = new ReportId("DBB100028_KarisanteiNonyuTsuchishoCVSKigoto");
-    private static final ReportId DBB100029 = new ReportId("DBB100029_KarisanteiNonyuTsuchishoCVSKigotoRencho");
+    private static final ReportId DBB100014 = new ReportId("DBB100014_KarisanteiHokenryoNonyuTsuchishoDaihyo");
     private static final RString 納入通知書の帳票ID = new RString("納入通知書の帳票ID");
 
     /**
@@ -189,11 +176,11 @@ public class FuchoKariSanteiFuka {
         }
         resultParameter.set出力期(entity.get出力期());
         if (すべて選択.equals(entity.get対象者())) {
-            resultParameter.set対象者(すべて選択_2);
+            resultParameter.set対象者フラグ(すべて選択_2);
         } else if (現金納付者.equals(entity.get対象者())) {
-            resultParameter.set対象者(現金納付者_0);
+            resultParameter.set対象者フラグ(現金納付者_0);
         } else if (口座振替者.equals(entity.get対象者())) {
-            resultParameter.set対象者(口座振替者_1);
+            resultParameter.set対象者フラグ(口座振替者_1);
         }
         resultParameter.set生活保護者をまとめて先頭に出力フラグ(entity.get生活保護者をまとめて先頭に出力フラグ());
         resultParameter.setページごとに山分けフラグ(entity.getページごとに山分けフラグ());
@@ -216,9 +203,10 @@ public class FuchoKariSanteiFuka {
         for (FuchoKariSanteiEntity 出力帳票entity : 出力帳票List) {
             ReportId 帳票分類ID = 出力帳票entity.get帳票分類ID();
             ReportId 帳票ID = 帳票分類ID;
-            if (保険料納入通知書_仮算定.equals(帳票分類ID)) {
+            if (DBB100014.equals(帳票分類ID)) {
                 // TODO DBBコンフィグから、納付書の型と連帳区分を取得する。
 //                BusinessConfig.get(ConfigNameDBB.普徴期情報_納付書の型４, RDate.MAX, SubGyomuCode.DBB介護賦課, LasdecCode.EMPTY)
+                RString 設定値 = get設定値(算定期);
                 RString 納入通知書の型 = get納入通知書の型(算定期);
                 RString 普徴期情報_納通連帳区分 = new RString("0");
                 RString 項目名 = get項目名(納入通知書の型);
@@ -239,6 +227,10 @@ public class FuchoKariSanteiFuka {
             resultList.add(new BatchFuchoKariSanteiResult(バッチ出力帳票一覧Entity));
         }
         return resultList;
+    }
+
+    private RString get設定値(RString 算定期) {
+        return 算定期;
     }
 
     private RString get納入通知書の型(RString 算定期) {
@@ -301,16 +293,16 @@ public class FuchoKariSanteiFuka {
                     算定期.toString() + 帳票制御汎用.toString() + 普徴期情報_納通連帳区分.toString());
             switch (Integer.valueOf(コンフィグと帳票制御汎用.toString())) {
                 case CASE_10010:
-                    通知書帳票ID = DBB100014;
+                    通知書帳票ID = ReportIdDBB.DBB100014.getReportId();
                     break;
                 case CASE_10011:
-                    通知書帳票ID = DBB100015;
+                    通知書帳票ID = ReportIdDBB.DBB100015.getReportId();
                     break;
                 case CASE_40010:
-                    通知書帳票ID = DBB100018;
+                    通知書帳票ID = ReportIdDBB.DBB100018.getReportId();
                     break;
                 case CASE_40011:
-                    通知書帳票ID = DBB100019;
+                    通知書帳票ID = ReportIdDBB.DBB100019.getReportId();
                     break;
                 case CASE_50010:
                 case CASE_50011:
@@ -318,16 +310,16 @@ public class FuchoKariSanteiFuka {
                             = getChohyoHanyoKey(SubGyomuCode.DBB介護賦課, 帳票分類ID, 調定年度, ブック口座振替依頼表示);
                     switch (Integer.valueOf(帳票制御汎用キー_ブックタイプ.get設定値().toString() + 普徴期情報_納通連帳区分.toString())) {
                         case CASE_00:
-                            通知書帳票ID = DBB100021;
+                            通知書帳票ID = ReportIdDBB.DBB100021.getReportId();
                             break;
                         case CASE_01:
-                            通知書帳票ID = DBB100023;
+                            通知書帳票ID = ReportIdDBB.DBB100023.getReportId();
                             break;
                         case CASE_10:
-                            通知書帳票ID = DBB100020;
+                            通知書帳票ID = ReportIdDBB.DBB100020.getReportId();
                             break;
                         case CASE_11:
-                            通知書帳票ID = DBB100022;
+                            通知書帳票ID = ReportIdDBB.DBB100022.getReportId();
                             break;
                         default:
                             通知書帳票ID = ReportId.EMPTY;
@@ -342,10 +334,10 @@ public class FuchoKariSanteiFuka {
                     通知書帳票ID = get通知書の帳票ID_通常出力(通知書帳票IDFlag);
                     break;
                 case CASE_610:
-                    通知書帳票ID = DBB100028;
+                    通知書帳票ID = ReportIdDBB.DBB100028.getReportId();
                     break;
                 case CASE_611:
-                    通知書帳票ID = DBB100029;
+                    通知書帳票ID = ReportIdDBB.DBB100029.getReportId();
                     break;
                 default:
                     通知書帳票ID = ReportId.EMPTY;
@@ -358,16 +350,16 @@ public class FuchoKariSanteiFuka {
         ReportId 通知書帳票ID = null;
         switch (通知書帳票IDFlag) {
             case CASE_3010:
-                通知書帳票ID = DBB100026;
+                通知書帳票ID = ReportIdDBB.DBB100026.getReportId();
                 break;
             case CASE_3011:
-                通知書帳票ID = DBB100027;
+                通知書帳票ID = ReportIdDBB.DBB100027.getReportId();
                 break;
             case CASE_3020:
-                通知書帳票ID = DBB100024;
+                通知書帳票ID = ReportIdDBB.DBB100024.getReportId();
                 break;
             case CASE_3021:
-                通知書帳票ID = DBB100025;
+                通知書帳票ID = ReportIdDBB.DBB100025.getReportId();
                 break;
             default:
                 通知書帳票ID = ReportId.EMPTY;

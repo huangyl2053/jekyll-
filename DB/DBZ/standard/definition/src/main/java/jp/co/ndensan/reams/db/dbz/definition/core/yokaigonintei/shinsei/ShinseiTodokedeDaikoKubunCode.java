@@ -12,7 +12,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 /**
  * 申請届出代行区分の列挙型クラスです。
  *
- * @author LDNS
+ * @reamsid_L DBZ-9999-023 wangchao
  */
 public enum ShinseiTodokedeDaikoKubunCode {
 

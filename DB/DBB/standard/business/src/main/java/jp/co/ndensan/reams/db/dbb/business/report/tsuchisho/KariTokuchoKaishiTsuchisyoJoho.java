@@ -5,15 +5,17 @@
  */
 package jp.co.ndensan.reams.db.dbb.business.report.tsuchisho;
 
-import jp.co.ndensan.reams.uz.uza.biz.ReportId;
 import jp.co.ndensan.reams.db.dbb.business.report.tsuchisho.notsu.EditedKariSanteiTsuchiShoKyotsu;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.ChohyoSeigyoKyotsu;
 import jp.co.ndensan.reams.ua.uax.business.core.atesaki.IAtesaki;
 import jp.co.ndensan.reams.ur.urz.business.core.association.Association;
+import jp.co.ndensan.reams.uz.uza.biz.ReportId;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 
 /**
  * 仮算定特徴開始通知書情報
+ *
+ * @reamsid_L DBB-0790-060 surun
  */
 @lombok.Getter
 @lombok.Setter

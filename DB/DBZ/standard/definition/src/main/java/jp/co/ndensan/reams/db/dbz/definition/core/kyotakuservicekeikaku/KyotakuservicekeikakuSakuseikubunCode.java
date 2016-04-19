@@ -6,6 +6,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 /**
  * 居宅サービス計画作成区分コードを表す列挙型です。
  *
+ * @reamsid_L DBZ-9999-023 wangchao
  */
 public enum KyotakuservicekeikakuSakuseikubunCode {
 

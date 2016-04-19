@@ -6,8 +6,6 @@
 package jp.co.ndensan.reams.db.dbb.service.report.kakushutsuchishosakusei;
 
 import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
@@ -33,10 +31,6 @@ import jp.co.ndensan.reams.db.dbb.business.report.karisanteihokenryononyutsuchis
 import jp.co.ndensan.reams.db.dbb.business.report.karisanteihokenryononyutsuchishokigoto.KarisanteiHokenryoNonyuTsuchishoKigotoReport;
 import jp.co.ndensan.reams.db.dbb.business.report.karisanteinonyutsuchishocvskakuko.KarisanteiNonyuTsuchishoCVSKakukoReport;
 import jp.co.ndensan.reams.db.dbb.business.report.karisanteinonyutsuchishocvsmulti.KarisanteiNonyuTsuchishoCVSMultiReport;
-import jp.co.ndensan.reams.db.dbb.business.report.tokubetsuchoshukaishitsuchishokari.TokubetsuChoshuKaishiTsuchishoKariB5Property;
-import jp.co.ndensan.reams.db.dbb.business.report.tokubetsuchoshukaishitsuchishokari.TokubetsuChoshuKaishiTsuchishoKariOverlayA4TateProperty;
-import jp.co.ndensan.reams.db.dbb.business.report.tokubetsuchoshukaishitsuchishokari.TokubetsuChoshuKaishiTsuchishoKariOverlayB5YokoProperty;
-import jp.co.ndensan.reams.db.dbb.business.report.tokubetsuchoshukaishitsuchishokari.TokubetsuChoshuKaishiTsuchishoKariSealerProperty;
 import jp.co.ndensan.reams.db.dbb.business.report.tsuchisho.KariTokuchoKaishiTsuchisyoJoho;
 import jp.co.ndensan.reams.db.dbb.business.report.tsuchisho.notsu.EditedKariSanteiTsuchiShoKyotsu;
 import jp.co.ndensan.reams.db.dbb.business.report.tsuchisho.notsu.HonSanteiNonyuTsuchiShoJoho;
@@ -64,6 +58,7 @@ import jp.co.ndensan.reams.db.dbb.entity.db.relate.kakushutsuchishosakusei.Chosh
 import jp.co.ndensan.reams.db.dbb.entity.db.relate.kakushutsuchishosakusei.GenmenInfoEntity;
 import jp.co.ndensan.reams.db.dbb.entity.db.relate.kakushutsuchishosakusei.KakushuTsuchishoEntity;
 import jp.co.ndensan.reams.db.dbb.entity.db.relate.kakushutsuchishosakusei.KakushuTsuchishoFindEntity;
+import jp.co.ndensan.reams.db.dbb.entity.db.relate.kakushutsuchishosakusei.LastYearFukaEntity;
 import jp.co.ndensan.reams.db.dbb.entity.report.KarisanteiNonyuTsuchishoCVSKigoto.KarisanteiNonyuTsuchishoCVSKigotoSource;
 import jp.co.ndensan.reams.db.dbb.entity.report.dbbmn35003.dbb100010.KarisanteiHenkoTsuchishoB5YokoReportSource;
 import jp.co.ndensan.reams.db.dbb.entity.report.dbbmn35003.dbb100011.KarisanteiHenkoTsuchishoA4TateReportSource;
@@ -82,6 +77,7 @@ import jp.co.ndensan.reams.db.dbb.service.core.kanri.NonyuTsuchiShoSeigyoJohoLoa
 import jp.co.ndensan.reams.db.dbb.service.report.fukadaicho.FukaDaichoPrintService;
 import jp.co.ndensan.reams.db.dbb.service.report.gemmen.GenmenKetteiTsuchiShoPrintService;
 import jp.co.ndensan.reams.db.dbb.service.report.karisanteifukadaicho.KarisanteiFukaDaichoPrintService;
+import jp.co.ndensan.reams.db.dbb.service.report.tokubetsuchoshukaishitsuchishokari.TokubetsuChoshuKaishiTsuchishoKariPrintService;
 import jp.co.ndensan.reams.db.dbb.service.report.tsuchisho.notsu.NonyuTsuchiShoJohoFactory;
 import jp.co.ndensan.reams.db.dbd.entity.db.basic.DbT4021ShiharaiHohoHenkoEntity;
 import jp.co.ndensan.reams.db.dbd.persistence.db.basic.DbT4021ShiharaiHohoHenkoDac;
@@ -98,28 +94,31 @@ import jp.co.ndensan.reams.db.dbz.business.core.basic.SetaiinShotoku;
 import jp.co.ndensan.reams.db.dbz.business.report.parts.kaigotoiawasesaki.CompKaigoToiawasesakiSource;
 import jp.co.ndensan.reams.db.dbz.business.report.parts.kaigotoiawasesaki.IKaigoToiawasesakiSourceBuilder;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT1001HihokenshaDaichoEntity;
-import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT4001JukyushaDaichoEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7022ShoriDateKanriEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7065ChohyoSeigyoKyotsuEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7067ChohyoSeigyoHanyoEntity;
+import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbV4001JukyushaDaichoEntity;
 import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT1001HihokenshaDaichoDac;
-import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT4001JukyushaDaichoDac;
 import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT7022ShoriDateKanriDac;
 import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT7065ChohyoSeigyoKyotsuDac;
 import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT7067ChohyoSeigyoHanyoDac;
+import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbV4001JukyushaDaichoAliveDac;
 import jp.co.ndensan.reams.db.dbz.service.core.setaiinshotokujoho.SetaiinShotokuJohoFinder;
 import jp.co.ndensan.reams.db.dbz.service.report.parts.kaigotoiawasesaki.KaigoToiawasesakiSourceBuilderCreator;
+import jp.co.ndensan.reams.ua.uax.business.core.atesaki.AtesakiFactory;
+import jp.co.ndensan.reams.ua.uax.business.core.atesaki.IAtesaki;
 import jp.co.ndensan.reams.ua.uax.business.core.dainonin.Dainonin;
 import jp.co.ndensan.reams.ua.uax.business.core.dainonin.DainoninRelate;
 import jp.co.ndensan.reams.ua.uax.business.core.koza.IKoza;
-import jp.co.ndensan.reams.ua.uax.business.core.renrakusaki.RenrakusakiRelate;
-import jp.co.ndensan.reams.ua.uax.business.core.renrakusaki.RenrakusakiRelateCollection;
 import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.IShikibetsuTaisho;
+import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.ShikibetsuTaishoFactory;
+import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.kojin.IKojin;
 import jp.co.ndensan.reams.ua.uax.definition.core.enumeratedtype.AtesakiShubetsu;
+import jp.co.ndensan.reams.ua.uax.definition.mybatisprm.koza.IKozaSearchKey;
+import jp.co.ndensan.reams.ua.uax.entity.db.basic.UaFt200FindShikibetsuTaishoEntity;
 import jp.co.ndensan.reams.ua.uax.service.core.dainonin.DainoninRelateFinderFactory;
 import jp.co.ndensan.reams.ua.uax.service.core.koza.IKozaManager;
 import jp.co.ndensan.reams.ua.uax.service.core.koza.KozaService;
-import jp.co.ndensan.reams.ua.uax.service.core.renrakusaki.RenrakusakiFinderFactory;
 import jp.co.ndensan.reams.ue.uex.entity.db.basic.UeT0511NenkinTokuchoKaifuJohoEntity;
 import jp.co.ndensan.reams.ur.urc.definition.core.noki.nokikanri.GennenKanen;
 import jp.co.ndensan.reams.ur.urz.business.core.association.Association;
@@ -138,6 +137,7 @@ import jp.co.ndensan.reams.uz.uza.biz.KamokuCode;
 import jp.co.ndensan.reams.uz.uza.biz.ReportId;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
+import jp.co.ndensan.reams.uz.uza.biz.TelNo;
 import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
 import jp.co.ndensan.reams.uz.uza.lang.ApplicationException;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
@@ -166,7 +166,7 @@ public class KakushuTsuchishoSakusei {
     private static final int 設定値_番号5 = 5;
     private static final int 設定値_番号6 = 6;
     private static final int 設定値_番号9 = 9;
-    private static final Decimal 期別金額 = new Decimal(1);
+    private static final RString 定値_0 = new RString("0");
     private static final RString 算定区分_本算定 = new RString("本算定");
     private static final RString 算定区分_仮算定 = new RString("仮算定");
     private static final RString 年度区分_現年度 = new RString("現年度");
@@ -209,12 +209,14 @@ public class KakushuTsuchishoSakusei {
     private static final ReportId 特別徴収開始通知書仮算定_帳票分類ID = new ReportId("DBB100003_TokubetsuChoshuKaishiTsuchishoKariDaihyo");
     private static final ReportId 仮算定額変更通知書_帳票分類ID = new ReportId("DBB100010_KarisanteiHenkoTsuchishoDaihyo");
     private static final ReportId 保険料納入通知書仮算定_帳票分類ID = new ReportId("DBB100014_KarisanteiHokenryoNonyuTsuchishoDaihyo");
-    //TODO 賦課台帳仮算定_帳票分類ID=DBB100031_FukaDaichoDaihyo?
     private static final ReportId 賦課台帳仮算定_帳票分類ID = new ReportId("DBB100031_KarisanteiFukaDaicho");
     private static final ReportId 特別徴収開始通知書本算定_帳票分類ID = new ReportId("DBB100032_TokubetsuChoshuKaishiTsuchishoDaihyo");
+    private static final ReportId 保険料納入通知書_帳票分類ID = new ReportId("DBB100045_HokenryoNonyuTsuchishoDaihyo");
     private static final ReportId 決定通知書_帳票分類ID = new ReportId("DBB100039_KaigoHokenHokenryogakuKetteiTsuchishoDaihyo");
-    private static final ReportId 介護保険料減免決定通知書_帳票分類ID = new ReportId("DBB100077_KaigoHokenHokenryoGenmenKetteiTsuchishoDaihyo");
-    private static final ReportId 介護保険料減免取消通知書_帳票分類ID = new ReportId("DBB100079_KaigoHokenHokenryoGenmenTorikeshiTsuchishoDaihyo");
+    private static final ReportId 介護保険料減免決定通知書_帳票分類ID
+            = new ReportId("DBB100077_KaigoHokenHokenryoGenmenKetteiTsuchishoDaihyo");
+    private static final ReportId 介護保険料減免取消通知書_帳票分類ID
+            = new ReportId("DBB100079_KaigoHokenHokenryoGenmenTorikeshiTsuchishoDaihyo");
     private static final ReportId 介護保険料徴収猶予決定通知書_帳票分類ID
             = new ReportId("DBB100081_KaigoHokenHokenryoChoshuyoyoKetteiTsuchishoDaihyo");
     private static final ReportId 介護保険料徴収猶予取消通知書_帳票分類ID
@@ -228,6 +230,10 @@ public class KakushuTsuchishoSakusei {
     private static final RString 通知書タイプ_シーラ = new RString("101");
     private static final RString 処理名 = new RString("本算定賦課");
     private static final RString 番号 = new RString("0001");
+    private static final RString キー_被保険者番号 = new RString("hihokenshaNo");
+    private static final RString キー_賦課年度 = new RString("fukaNendo");
+    private static final RString キー_調定日 = new RString("調定日");
+    private static final RString キー_識別コード = new RString("識別コード");
     private final MapperProvider mapperProvider;
     private final DbT2004GemmenDac 介護賦課減免Dac;
     private final DbT2006ChoshuYuyoDac 介護賦課徴収猶予Dac;
@@ -236,7 +242,7 @@ public class KakushuTsuchishoSakusei {
     private final DbT2018RealHakkoRirekiDac リアル発行履歴Dac;
     private final DbT1001HihokenshaDaichoDac 被保険者台帳管理Dac;
     private final DbT4021ShiharaiHohoHenkoDac 支払方法変更Dac;
-    private final DbT4001JukyushaDaichoDac 受給者台帳Dac;
+    private final DbV4001JukyushaDaichoAliveDac 受給者台帳Dac;
     private final DbT7022ShoriDateKanriDac 処理日付Dac;
 
     /**
@@ -251,7 +257,7 @@ public class KakushuTsuchishoSakusei {
         this.リアル発行履歴Dac = InstanceProvider.create(DbT2018RealHakkoRirekiDac.class);
         this.被保険者台帳管理Dac = InstanceProvider.create(DbT1001HihokenshaDaichoDac.class);
         this.支払方法変更Dac = InstanceProvider.create(DbT4021ShiharaiHohoHenkoDac.class);
-        this.受給者台帳Dac = InstanceProvider.create(DbT4001JukyushaDaichoDac.class);
+        this.受給者台帳Dac = InstanceProvider.create(DbV4001JukyushaDaichoAliveDac.class);
         this.処理日付Dac = InstanceProvider.create(DbT7022ShoriDateKanriDac.class);
     }
 
@@ -313,11 +319,11 @@ public class KakushuTsuchishoSakusei {
         //入力.賦課の情報.普徴期別金額01~入力.賦課の情報.普徴期別金額14　に1以上の金額がある場合、「普徴あり」。
         Decimal 特徴期別金額 = new Decimal(2);
         Decimal 普徴期別金額 = new Decimal(2);
-        if (特徴期別金額.compareTo(期別金額) != 定値 && 普徴期別金額.compareTo(期別金額) != 定値) {
+        if (特徴期別金額.compareTo(Decimal.ONE) != 定値 && 普徴期別金額.compareTo(Decimal.ONE) != 定値) {
             return 徴収方法_併徴;
-        } else if (特徴期別金額.compareTo(期別金額) != 定値) {
+        } else if (特徴期別金額.compareTo(Decimal.ONE) != 定値) {
             return 徴収方法_特徴のみ;
-        } else if (普徴期別金額.compareTo(期別金額) != 定値) {
+        } else if (普徴期別金額.compareTo(Decimal.ONE) != 定値) {
             return 徴収方法_普徴のみ;
         }
         return null;
@@ -548,31 +554,17 @@ public class KakushuTsuchishoSakusei {
                 通知文2 = tsuchishoTeikeibunInfo.getUrT0126TsuchishoTeikeibunEntity().getSentence();
             }
         }
-        SourceDataCollection sourceDataCollection = new SourceDataCollection();
+        SourceDataCollection sourceDataCollection;
         if (ReportIdDBB.DBB100003.getReportId().equals(帳票ID)) {
-         // TODO　ビルドエラー修正
-//            TokubetsuChoshuKaishiTsuchishoKariB5Report report
-//                    = TokubetsuChoshuKaishiTsuchishoKariB5Report.createForm(仮算定特徴開始通知書情報, null);
-            TokubetsuChoshuKaishiTsuchishoKariB5Property property = new TokubetsuChoshuKaishiTsuchishoKariB5Property();
-//            sourceDataCollection = new Printer<TokubetsuChoshuKaishiTsuchishoKariB5Source>().spool(property, report);
+            sourceDataCollection = new TokubetsuChoshuKaishiTsuchishoKariPrintService().printB5横タイプ(仮算定特徴開始通知書情報, null);
         } else if (ReportIdDBB.DBB100005.getReportId().equals(帳票ID)) {
-            // TODO　ビルドエラー修正
-//            TokubetsuChoshuKaishiTsuchishoKariSealerReport report
-//                    = TokubetsuChoshuKaishiTsuchishoKariSealerReport.createForm(仮算定特徴開始通知書情報);
-            TokubetsuChoshuKaishiTsuchishoKariSealerProperty property = new TokubetsuChoshuKaishiTsuchishoKariSealerProperty();
-//            sourceDataCollection = new Printer<TokubetsuChoshuKaishiTsuchishoKariSealerSource>().spool(property, report);
+            sourceDataCollection = new TokubetsuChoshuKaishiTsuchishoKariPrintService().printシーラタイプ(仮算定特徴開始通知書情報);
         } else if (ReportIdDBB.DBB100008.getReportId().equals(帳票ID)) {
-        // TODO　ビルドエラー修正
-//            TokubetsuChoshuKaishiTsuchishoKariOverlayA4TateReport report
-//                    = TokubetsuChoshuKaishiTsuchishoKariOverlayA4TateReport.createForm(仮算定特徴開始通知書情報, 通知文1);
-            TokubetsuChoshuKaishiTsuchishoKariOverlayA4TateProperty property = new TokubetsuChoshuKaishiTsuchishoKariOverlayA4TateProperty();
-//            sourceDataCollection = new Printer<TokubetsuChoshuKaishiTsuchishoKariOverlayA4TateSource>().spool(property, report);
+            sourceDataCollection
+                    = new TokubetsuChoshuKaishiTsuchishoKariPrintService().printA4縦オーバーレイタイプ(仮算定特徴開始通知書情報, 通知文1);
         } else {
-        // TODO　ビルドエラー修正
-//            TokubetsuChoshuKaishiTsuchishoKariOverlayB5YokoReport report
-//                    = TokubetsuChoshuKaishiTsuchishoKariOverlayB5YokoReport.createForm(仮算定特徴開始通知書情報, 通知文1, 通知文2);
-            TokubetsuChoshuKaishiTsuchishoKariOverlayB5YokoProperty property = new TokubetsuChoshuKaishiTsuchishoKariOverlayB5YokoProperty();
-//            sourceDataCollection = new Printer<TokubetsuChoshuKaishiTsuchishoKariOverlayB5YokoSource>().spool(property, report);
+            sourceDataCollection
+                    = new TokubetsuChoshuKaishiTsuchishoKariPrintService().printB5横オーバレイタイプ(仮算定特徴開始通知書情報, 通知文1, 通知文2);
         }
 
         List<ShikibetsuCode> 識別コードList = new ArrayList<>();
@@ -995,17 +987,15 @@ public class KakushuTsuchishoSakusei {
         if (帳票ID == null) {
             return null;
         }
-
         HonSanteiTsuchiShoKyotsu 本算定通知書情報 = new HonSanteiTsuchiShoKyotsu();
         本算定通知書情報.set現年度_過年度区分(通知書共通情報.get年度区分());
         本算定通知書情報.set発行日(new RDate(parameter.get納入通知書_発行日().toString()));
-        //TODO DBB100032_TokubetsuChoshuKaishiTsuchishoDaihyo?
-        本算定通知書情報.set帳票分類ID(特別徴収開始通知書本算定_帳票分類ID);
+        本算定通知書情報.set帳票分類ID(保険料納入通知書_帳票分類ID);
         本算定通知書情報.set帳票ID(帳票ID);
         本算定通知書情報.set処理区分(ShoriKubun.リアル);
         本算定通知書情報.set地方公共団体(通知書共通情報.get地方公共団体());
-        本算定通知書情報.set賦課の情報_更正前(通知書共通情報.get賦課の情報_更正前().toEntity());
-        本算定通知書情報.set賦課の情報_更正後(通知書共通情報.get賦課の情報_更正後().toEntity());
+        本算定通知書情報.set賦課の情報_更正前(通知書共通情報.get賦課の情報_更正前());
+        本算定通知書情報.set賦課の情報_更正後(通知書共通情報.get賦課の情報_更正後());
         本算定通知書情報.set納組情報(通知書共通情報.get納組情報());
         本算定通知書情報.set普徴納期情報リスト(通知書共通情報.get普徴納期情報List());
         本算定通知書情報.set特徴納期情報リスト(通知書共通情報.get特徴収入情報List());
@@ -1022,7 +1012,10 @@ public class KakushuTsuchishoSakusei {
         //TODO 収入情報
         List<ShunyuJoho> 収入情報 = new ArrayList<>();
         本算定通知書情報.set収入情報(収入情報);
-        本算定通知書情報.set帳票制御共通(load帳票制御共通(特別徴収開始通知書本算定_帳票分類ID));
+        DbT7065ChohyoSeigyoKyotsuEntity entity = load帳票制御共通(保険料納入通知書_帳票分類ID);
+        if (entity != null) {
+            本算定通知書情報.set帳票制御共通(new ChohyoSeigyoKyotsu(entity));
+        }
 
         //TODO 入力.各種通知書作成パラメータ.納入通知書.出力期リスト
         List<Kitsuki> 出力期リスト = new ArrayList<>();
@@ -1060,7 +1053,7 @@ public class KakushuTsuchishoSakusei {
                     parameter.get納入通知書_発行日(), ChohyoHakkoRirekiJotai.新規作成, 業務固有情報, 識別コードList);
         }
 
-        insertリアル発行履歴(通知書共通情報.get賦課の情報_更正後(), 特別徴収開始通知書本算定_帳票分類ID);
+        insertリアル発行履歴(通知書共通情報.get賦課の情報_更正後(), 保険料納入通知書_帳票分類ID);
 
         return null;
     }
@@ -1316,7 +1309,6 @@ public class KakushuTsuchishoSakusei {
         CompKaigoToiawasesakiSource 介護問合せ先ソースビルダー
                 = KaigoToiawasesakiSourceBuilderCreator.create(SubGyomuCode.DBB介護賦課, 介護保険料徴収猶予決定通知書_帳票分類ID).buildSource();
         IKakushuTsuchishoSakuseiMapper mapper = mapperProvider.create(IKakushuTsuchishoSakuseiMapper.class);
-        //TODO 入力．各種通知書発行パラメータ.調定年度?
         KakushuTsuchishoEntityParameter paramt
                 = KakushuTsuchishoEntityParameter.createSelectByKeyParam(通知書共通情報.get賦課の情報_更正後().get調定年度(),
                         通知書共通情報.get賦課の情報_更正後().get賦課年度(), 通知書共通情報.get賦課の情報_更正後().get通知書番号(),
@@ -1464,13 +1456,13 @@ public class KakushuTsuchishoSakusei {
         KakushuTsuchishoEntityParameter 更正後
                 = KakushuTsuchishoEntityParameter.createSelectByKeyParam(賦課の情報_更正後.get調定年度(),
                         賦課の情報_更正後.get賦課年度(), 賦課の情報_更正後.get通知書番号(),
-                        賦課の情報_更正後.get調定日時(), 賦課の情報_更正後.get調定日時().getDate());
-        KakushuTsuchishoEntity 更正後entity = mapper.get更正後賦課の情報(更正後);
+                        賦課の情報_更正後.get調定日時(), 賦課の情報_更正後.get調定日時().getDate().toDateString());
+        KakushuTsuchishoEntity 更正後entity = mapper.get更正前後賦課の情報(更正後);
         KakushuTsuchishoEntityParameter 更正前
                 = KakushuTsuchishoEntityParameter.createSelectByKeyParam(賦課の情報_更正前.get調定年度(),
                         賦課の情報_更正前.get賦課年度(), 賦課の情報_更正前.get通知書番号(),
-                        賦課の情報_更正前.get調定日時(), 賦課の情報_更正前.get調定日時().getDate());
-        KakushuTsuchishoEntity 更正前entity = mapper.get更正後賦課の情報(更正前);
+                        賦課の情報_更正前.get調定日時(), 賦課の情報_更正前.get調定日時().getDate().toDateString());
+        KakushuTsuchishoEntity 更正前entity = mapper.get更正前後賦課の情報(更正前);
 
         KakushuTsuchishoFindEntity 宛名納組宛先口座entity = mapper.get宛名納組宛先口座(更正後);
 
@@ -1513,12 +1505,13 @@ public class KakushuTsuchishoSakusei {
 
         HonsanteiIkoHantei honsanteiIkoHantei = HonsanteiIkoHantei.createInstance();
         //TODO 賦課の情報-宛名（更正後)?
-        boolean 本算定区分 = honsanteiIkoHantei.is本算定後(賦課の情報_更正後);
+        boolean 本算定区分 = honsanteiIkoHantei.is本算定後(new Fuka(更正後entity.get介護賦課()));
         //TODO 対象者（追加含む）の情報の取得
         UeT0511NenkinTokuchoKaifuJohoEntity 対象者_追加含む_の情報_更正前 = null;
         UeT0511NenkinTokuchoKaifuJohoEntity 対象者_追加含む_の情報_更正後 = null;
 
         IKozaManager iKozaManager = KozaService.createKozaManager();
+        IKozaSearchKey iksk;
         List<IKoza> マスク済み口座List
                 = iKozaManager.getマスク済口座(SubGyomuCode.DBB介護賦課, 処理基準日, 賦課の情報_更正後.get識別コード());
         IKoza マスク済み口座 = null;
@@ -1536,12 +1529,14 @@ public class KakushuTsuchishoSakusei {
         通知書共通情報.set納組情報(null);
         通知書共通情報.set普徴納期情報List(普徴納期情報List);
         通知書共通情報.set特徴収入情報List(特徴収入情報List);
-        //TODO ３の結果.宛名情報
-        通知書共通情報.set宛名情報(null);
-        //TODO ３で取得した宛先情報
-        通知書共通情報.set宛先情報(null);
-        //TODO ３で取得した口座情報
-        通知書共通情報.set口座情報(null);
+        if (宛名納組宛先口座entity != null) {
+            IKojin 宛名 = ShikibetsuTaishoFactory.createKojin(宛名納組宛先口座entity.get宛名());
+            通知書共通情報.set宛名情報(宛名);
+            IAtesaki 宛先 = AtesakiFactory.createInstance(宛名納組宛先口座entity.get宛先());
+            通知書共通情報.set宛先情報(宛先);
+            //TODO ３で取得した口座情報
+            通知書共通情報.set口座情報(null);
+        }
         通知書共通情報.setマスク口座情報(マスク済み口座);
         通知書共通情報.set徴収方法情報_更正前(new ChoshuHoho(更正前entity.get介護徴収方法()));
         通知書共通情報.set徴収方法情報_更正後(new ChoshuHoho(更正後entity.get介護徴収方法()));
@@ -1591,6 +1586,13 @@ public class KakushuTsuchishoSakusei {
      * @return Fuka
      */
     public Fuka find前年度賦課(Fuka 賦課の情報) {
+
+        IKakushuTsuchishoSakuseiMapper mapper = mapperProvider.create(IKakushuTsuchishoSakuseiMapper.class);
+        Map<String, Object> parameter = new HashMap<>();
+        parameter.put(キー_被保険者番号.toString(), 賦課の情報.get被保険者番号());
+        parameter.put(キー_賦課年度.toString(), 賦課の情報.get賦課年度().minusYear(定値_番号1));
+        LastYearFukaEntity 前年度賦課の情報 = mapper.get前年度賦課の情報(parameter);
+        //TODO 賦課の情報?
         return null;
     }
 
@@ -1717,7 +1719,7 @@ public class KakushuTsuchishoSakusei {
 
     private RString get納入通知書タイプ(RString 出力期) {
 
-        RString 設定値 = new RString("0");
+        RString 設定値 = 定値_0;
         RDate 運用日 = RDate.getNowDate();
         出力期 = 出力期.split(括弧_左.toString()).get(0).replace(定値_期, RString.EMPTY);
         switch (Integer.parseInt(出力期.toString())) {
@@ -1812,7 +1814,7 @@ public class KakushuTsuchishoSakusei {
         List<GyomuCode> list = new ArrayList<>();
         list.add(GyomuCode.DB介護保険);
         List<DainoninRelate> 代納人情報リスト = DainoninRelateFinderFactory.createInstance().get代納人byサブ業務コード(
-                parameter.get賦課の情報_更正後().get識別コード(), list, SubGyomuCode.DBB介護賦課);
+                賦課の情報_更正後.get識別コード(), list, SubGyomuCode.DBB介護賦課);
         if (代納人情報リスト != null && !代納人情報リスト.isEmpty()) {
             for (DainoninRelate 代納人情報 : 代納人情報リスト) {
                 Dainonin 代納人 = 代納人情報.get代納人();
@@ -1827,30 +1829,22 @@ public class KakushuTsuchishoSakusei {
 
         SetaiinShotokuJohoFinder 世帯員所得情報Finder = SetaiinShotokuJohoFinder.createInstance();
         List<SetaiinShotoku> 世帯員所得情報 = 世帯員所得情報Finder.get世帯員所得情報(賦課の情報_更正後.get識別コード(),
-                賦課の情報_更正後.get賦課期日(), 賦課の情報_更正後.get賦課年度(), null, true);
+                賦課の情報_更正後.get賦課期日(), 賦課の情報_更正後.get賦課年度(), null, false);
         賦課台帳情報.set世帯員所得情報(世帯員所得情報);
-        RString 本人連絡先1 = RString.EMPTY;
-        RString 本人連絡先2 = RString.EMPTY;
-        RString 代納人連絡先1 = RString.EMPTY;
-        RString 代納人連絡先2 = RString.EMPTY;
-        List<SubGyomuCode> サブ業務コード = new ArrayList<>();
-        サブ業務コード.add(SubGyomuCode.DBB介護賦課);
-        RenrakusakiRelateCollection renrakusakiRelateCollection
-                = RenrakusakiFinderFactory.createInstance().get連絡先byサブ業務コード(賦課の情報_更正後.get識別コード(), サブ業務コード);
-        List<RenrakusakiRelate> 本人連絡先関連List = renrakusakiRelateCollection.get連絡先関連();
-        if (本人連絡先関連List != null && !本人連絡先関連List.isEmpty()) {
-            本人連絡先関連List = sort(本人連絡先関連List);
-            本人連絡先1 = 本人連絡先関連List.get(0).get連絡先リスト().get(0).get登録値();
-            本人連絡先2 = get連絡先(本人連絡先関連List);
-        }
+        TelNo 本人連絡先1 = 通知書共通情報.get宛名情報().get連絡先１();
+        TelNo 本人連絡先2 = 通知書共通情報.get宛名情報().get連絡先２();
+        TelNo 代納人連絡先1 = TelNo.EMPTY;
+        TelNo 代納人連絡先2 = TelNo.EMPTY;
+
+        IKakushuTsuchishoSakuseiMapper mapper = mapperProvider.create(IKakushuTsuchishoSakuseiMapper.class);
         if (識別対象 != null) {
-            renrakusakiRelateCollection
-                    = RenrakusakiFinderFactory.createInstance().get連絡先byサブ業務コード(識別対象.get識別コード(), サブ業務コード);
-            List<RenrakusakiRelate> 代納人連絡先関連List = renrakusakiRelateCollection.get連絡先関連();
-            if (代納人連絡先関連List != null && !代納人連絡先関連List.isEmpty()) {
-                代納人連絡先関連List = sort(代納人連絡先関連List);
-                代納人連絡先1 = 代納人連絡先関連List.get(0).get連絡先リスト().get(0).get登録値();
-                代納人連絡先2 = get連絡先(代納人連絡先関連List);
+            Map<String, Object> para = new HashMap<>();
+            para.put(キー_調定日.toString(), 賦課の情報_更正後.get調定日時().getDate().toDateString());
+            para.put(キー_識別コード.toString(), 識別対象.get識別コード());
+            UaFt200FindShikibetsuTaishoEntity 代納人の宛名情報 = mapper.get代納人の宛名情報(para);
+            if (代納人の宛名情報 != null) {
+                代納人連絡先1 = 代納人の宛名情報.getRenrakusaki1();
+                代納人連絡先2 = 代納人の宛名情報.getRenrakusaki2();
             }
         }
         賦課台帳情報.set本人連絡先1(本人連絡先1);
@@ -1859,13 +1853,11 @@ public class KakushuTsuchishoSakusei {
         賦課台帳情報.set代納人連絡先2(代納人連絡先2);
 
         //TODO 4.1　境界層当該者情報を取得する。(介護保険者境界層当該者台帳)
-        //TODO ORDER BY異動日(?)
         DbT1001HihokenshaDaichoEntity 被保険者台帳情報 = 被保険者台帳管理Dac.selectByHihokensha(賦課の情報更正後.get被保険者番号());
         賦課台帳情報.set被保険者台帳情報(被保険者台帳情報);
         List<DbT4021ShiharaiHohoHenkoEntity> 支払方法変更リスト = 支払方法変更Dac.get支支払方法変更(賦課の情報更正後.get被保険者番号());
         賦課台帳情報.set支払方法変更リスト(支払方法変更リスト);
-        //TODO リスト?
-        List<DbT4001JukyushaDaichoEntity> 受給者台帳情報 = 受給者台帳Dac.select受給者台帳情報(賦課の情報更正後.get被保険者番号());
+        DbV4001JukyushaDaichoEntity 受給者台帳情報 = 受給者台帳Dac.select受給者台帳情報(賦課の情報更正後.get被保険者番号());
         賦課台帳情報.set受給者台帳情報(受給者台帳情報);
         DbT7022ShoriDateKanriEntity 処理日付マスタ
                 = 処理日付Dac.selectByKey(SubGyomuCode.DBB介護賦課, 通知書共通情報.get地方公共団体().getLasdecCode_(),
@@ -1874,38 +1866,6 @@ public class KakushuTsuchishoSakusei {
             賦課台帳情報.set基準日時(処理日付マスタ.getKijunTimestamp());
         }
         return 賦課台帳情報;
-    }
-
-    /**
-     * 連絡先関連Listのsortメソッドです。
-     *
-     * @param 連絡先関連List 連絡先関連List
-     * @return List<RenrakusakiRelate>
-     */
-    private List<RenrakusakiRelate> sort(List<RenrakusakiRelate> 連絡先関連List) {
-        Collections.sort(連絡先関連List, new Comparator<RenrakusakiRelate>() {
-            @Override
-            public int compare(RenrakusakiRelate o1, RenrakusakiRelate o2) {
-                //TODO int flag = o2.get優先順位() > o1.get優先順位() ? 1 : 0;
-                int flag = 0;
-                return flag;
-            }
-        });
-        return 連絡先関連List;
-    }
-
-    /**
-     * 連絡先情報を取得メソッドです。
-     *
-     * @param 連絡先関連List 連絡先関連List
-     * @return RString
-     */
-    private RString get連絡先(List<RenrakusakiRelate> 連絡先関連List) {
-        if (連絡先関連List.size() > 1) {
-            //TODO return 連絡先関連List.get(1).get検索登録値();
-            return null;
-        }
-        return RString.EMPTY;
     }
 
     /**

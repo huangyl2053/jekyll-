@@ -11,6 +11,8 @@ import jp.co.ndensan.reams.db.dbb.entity.db.relate.kanendokoseikeisan.KoseigoFuk
 
 /**
  * 更正後賦課情報取得のクラスです。
+ *
+ * @reamsid_L DBB-9050-010 xicongwang
  */
 @lombok.Getter
 @lombok.Setter

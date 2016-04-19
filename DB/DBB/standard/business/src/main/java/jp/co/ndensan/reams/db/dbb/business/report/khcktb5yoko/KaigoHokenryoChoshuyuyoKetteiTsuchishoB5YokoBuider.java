@@ -16,28 +16,16 @@ import jp.co.ndensan.reams.uz.uza.report.ReportEditorJoiner;
 public class KaigoHokenryoChoshuyuyoKetteiTsuchishoB5YokoBuider
         implements IKaigoHokenryoChoshuyuyoKetteiTsuchishoB5YokoBuider {
 
-    private final ReiyaB5Editor reiyaEditor;
-    private final CompNinshoshaB5Editor compNinshoshaEditor;
-    private final CompKaigoToiawasesakiB5Editor compKaigoToiawasesakiEditor;
-    private final CompSofubutsuAtesakiB5Editor compSofubutsuAtesakiEditor;
+    private final KaigoHokenryoChoshuyuyoKetteiTsuchishoB5YokoEditor editor;
 
     /**
      * インスタンスを生成します。
      *
-     * @param reiyaEditor ReiyaEditor
-     * @param compNinshoshaEditor CompNinshoshaEditor
-     * @param compKaigoToiawasesakiEditor CompKaigoToiawasesakiEditor
-     * @param compSofubutsuAtesakiEditor CompSofubutsuAtesakiEditor
+     * @param editor KaigoHokenryoChoshuyuyoKetteiTsuchishoB5YokoEditor
      */
     public KaigoHokenryoChoshuyuyoKetteiTsuchishoB5YokoBuider(
-            ReiyaB5Editor reiyaEditor,
-            CompNinshoshaB5Editor compNinshoshaEditor,
-            CompKaigoToiawasesakiB5Editor compKaigoToiawasesakiEditor,
-            CompSofubutsuAtesakiB5Editor compSofubutsuAtesakiEditor) {
-        this.reiyaEditor = reiyaEditor;
-        this.compNinshoshaEditor = compNinshoshaEditor;
-        this.compKaigoToiawasesakiEditor = compKaigoToiawasesakiEditor;
-        this.compSofubutsuAtesakiEditor = compSofubutsuAtesakiEditor;
+            KaigoHokenryoChoshuyuyoKetteiTsuchishoB5YokoEditor editor) {
+        this.editor = editor;
     }
 
     /**
@@ -48,8 +36,7 @@ public class KaigoHokenryoChoshuyuyoKetteiTsuchishoB5YokoBuider
     @Override
     public KaigoHokenryoChoshuyuyoKetteiTsuchishoB5YokoSource build() {
         return ReportEditorJoiner.from(new KaigoHokenryoChoshuyuyoKetteiTsuchishoB5YokoSource())
-                .join(reiyaEditor).join(compNinshoshaEditor).join(compKaigoToiawasesakiEditor)
-                .join(compSofubutsuAtesakiEditor).buildSource();
+                .join(editor).buildSource();
     }
 
 }

@@ -12,7 +12,7 @@ import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import jp.co.ndensan.reams.db.dbx.business.core.kanri.MonthShichoson;
+import jp.co.ndensan.reams.db.dbb.business.core.kanri.MonthShichoson;
 import jp.co.ndensan.reams.db.dbx.business.util.NendoUtil;
 import jp.co.ndensan.reams.db.dbx.definition.core.fuka.Tsuki;
 import jp.co.ndensan.reams.db.dbz.business.core.HihokenshaDaicho;
@@ -27,6 +27,8 @@ import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 
 /**
  * 保険料ランクのクラスです。
+ *
+ * @reamsid_L DBB-9020-150 sunhaidi
  */
 public class HokenryoRank {
 

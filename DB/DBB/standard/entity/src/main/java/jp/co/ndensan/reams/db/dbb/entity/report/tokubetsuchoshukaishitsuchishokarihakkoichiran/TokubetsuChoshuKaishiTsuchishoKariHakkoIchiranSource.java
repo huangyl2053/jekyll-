@@ -12,6 +12,8 @@ import jp.co.ndensan.reams.uz.uza.report.source.ReportPerson;
 
 /**
  * 特別徴収開始通知書（仮算定）発行一覧表Source
+ *
+ * @reamsid_L DBB-0790-060 surun
  */
 public class TokubetsuChoshuKaishiTsuchishoKariHakkoIchiranSource implements IReportSource {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">

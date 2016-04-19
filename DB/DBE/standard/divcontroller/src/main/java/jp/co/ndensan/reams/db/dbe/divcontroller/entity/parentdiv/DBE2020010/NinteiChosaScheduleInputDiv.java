@@ -6,15 +6,17 @@ package jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2020010;
  */
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 
 /**
  * NinteiChosaScheduleInput のクラスファイル
  *
+ * @reamsid_L DBE-0020-060 lishengli
  */
 public class NinteiChosaScheduleInputDiv extends Panel {
 
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-01-15_09-59-03">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -29,6 +31,12 @@ public class NinteiChosaScheduleInputDiv extends Panel {
     private TaishoshaShosaiDiv TaishoshaShosai;
     @JsonProperty("KaigoKanryoMessage")
     private KaigoKanryoMessageDiv KaigoKanryoMessage;
+    @JsonProperty("shinseishoKanriNo2")
+    private RString shinseishoKanriNo2;
+    @JsonProperty("shinseishoKanriNo3")
+    private RString shinseishoKanriNo3;
+    @JsonProperty("tayisyousyaKubun")
+    private RString tayisyousyaKubun;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -106,6 +114,60 @@ public class NinteiChosaScheduleInputDiv extends Panel {
     @JsonProperty("KaigoKanryoMessage")
     public void setKaigoKanryoMessage(KaigoKanryoMessageDiv KaigoKanryoMessage) {
         this.KaigoKanryoMessage = KaigoKanryoMessage;
+    }
+
+    /*
+     * getshinseishoKanriNo2
+     * @return shinseishoKanriNo2
+     */
+    @JsonProperty("shinseishoKanriNo2")
+    public RString getShinseishoKanriNo2() {
+        return shinseishoKanriNo2;
+    }
+
+    /*
+     * setshinseishoKanriNo2
+     * @param shinseishoKanriNo2 shinseishoKanriNo2
+     */
+    @JsonProperty("shinseishoKanriNo2")
+    public void setShinseishoKanriNo2(RString shinseishoKanriNo2) {
+        this.shinseishoKanriNo2 = shinseishoKanriNo2;
+    }
+
+    /*
+     * getshinseishoKanriNo3
+     * @return shinseishoKanriNo3
+     */
+    @JsonProperty("shinseishoKanriNo3")
+    public RString getShinseishoKanriNo3() {
+        return shinseishoKanriNo3;
+    }
+
+    /*
+     * setshinseishoKanriNo3
+     * @param shinseishoKanriNo3 shinseishoKanriNo3
+     */
+    @JsonProperty("shinseishoKanriNo3")
+    public void setShinseishoKanriNo3(RString shinseishoKanriNo3) {
+        this.shinseishoKanriNo3 = shinseishoKanriNo3;
+    }
+
+    /*
+     * gettayisyousyaKubun
+     * @return tayisyousyaKubun
+     */
+    @JsonProperty("tayisyousyaKubun")
+    public RString getTayisyousyaKubun() {
+        return tayisyousyaKubun;
+    }
+
+    /*
+     * settayisyousyaKubun
+     * @param tayisyousyaKubun tayisyousyaKubun
+     */
+    @JsonProperty("tayisyousyaKubun")
+    public void setTayisyousyaKubun(RString tayisyousyaKubun) {
+        this.tayisyousyaKubun = tayisyousyaKubun;
     }
 
     // </editor-fold>

@@ -15,6 +15,8 @@ import lombok.Setter;
 
 /**
  * 減免の情報
+ *
+ * @reamsid_L DBB-0740-030 surun
  */
 @Getter
 @Setter
