@@ -80,6 +80,9 @@ public class JyutakugaisyunaiyoListHandler {
                 listRow.setTxtJutakuAddress(jyutaku.get住宅改修住宅住所());
                 listRow.setTxtKaishuNaiyo(jyutaku.get住宅改修住宅内容());
                 listRow.setTxtSeiriNo(jyutaku.get整理番号());
+                listRow.setTxtJigyoshaNo(jyutaku.get事業者番号().value());
+                listRow.setTxtRenban(jyutaku.get連番());
+                listRow.setTxtMeseiNo(jyutaku.get明細番号());
                 dgGaisyuListRow.add(listRow);
             }
         }
