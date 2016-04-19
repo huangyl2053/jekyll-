@@ -6,7 +6,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 /**
  * 帳票宛先敬称を表す列挙型です。
  *
- * @author LDNS
+ * @reamsid_L DBE-9999-023 wangchao
  */
 public enum ChohyoAtesakiKeisho {
 

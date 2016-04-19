@@ -11,7 +11,8 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 /**
  * 家庭訪問の有無を表す列挙型です。
  *
- * @author LDNS
+ * @reamsid_L DBZ-9999-023 wangchao
+ *
  */
 public enum KateiHomonUmu {
 

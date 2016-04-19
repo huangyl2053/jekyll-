@@ -9,8 +9,9 @@ import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
- *
  * 意見書項目マッピング09Aを表す列挙型です。
+ *
+ * @reamsid_L DBZ-9999-023 wangchao
  */
 public enum IkenshoKomokuMapping09A {
 
