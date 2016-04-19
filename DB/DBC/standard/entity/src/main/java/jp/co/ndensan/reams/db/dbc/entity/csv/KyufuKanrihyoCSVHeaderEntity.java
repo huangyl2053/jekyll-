@@ -13,6 +13,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
  *
  * @author N2810 久保 里史
  */
+@SuppressWarnings("PMD.UnusedPrivateField")
 public class KyufuKanrihyoCSVHeaderEntity {
 
     @CsvField(order = 10, name = "レコード種別")
@@ -40,6 +41,9 @@ public class KyufuKanrihyoCSVHeaderEntity {
     @CsvField(order = 120, name = "ファイル管理番号")
     private RString fileKanriNo;
 
+    /**
+     * コンストラクタです。
+     */
     public KyufuKanrihyoCSVHeaderEntity() {
     }
 
@@ -154,7 +158,7 @@ public class KyufuKanrihyoCSVHeaderEntity {
     /**
      * setrecordShubetsu
      *
-     * @param recordShubetsu
+     * @param recordShubetsu レコード種別
      */
     public void setRecordShubetsu(RString recordShubetsu) {
         this.recordShubetsu = recordShubetsu;
@@ -163,7 +167,7 @@ public class KyufuKanrihyoCSVHeaderEntity {
     /**
      * setrecordNo
      *
-     * @param recordNo
+     * @param recordNo レコード番号
      */
     public void setRecordNo(RString recordNo) {
         this.recordNo = recordNo;
@@ -172,7 +176,7 @@ public class KyufuKanrihyoCSVHeaderEntity {
     /**
      * setvolumeRenban
      *
-     * @param volumeRenban
+     * @param volumeRenban ボリューム連番
      */
     public void setVolumeRenban(RString volumeRenban) {
         this.volumeRenban = volumeRenban;
@@ -181,7 +185,7 @@ public class KyufuKanrihyoCSVHeaderEntity {
     /**
      * setrecordKensu
      *
-     * @param recordKensu
+     * @param recordKensu レコード件数
      */
     public void setRecordKensu(RString recordKensu) {
         this.recordKensu = recordKensu;
@@ -190,7 +194,7 @@ public class KyufuKanrihyoCSVHeaderEntity {
     /**
      * setdataShubetsu
      *
-     * @param dataShubetsu
+     * @param dataShubetsu データ種別
      */
     public void setDataShubetsu(RString dataShubetsu) {
         this.dataShubetsu = dataShubetsu;
@@ -199,7 +203,7 @@ public class KyufuKanrihyoCSVHeaderEntity {
     /**
      * setfukushijimushoTokuteiNo
      *
-     * @param fukushijimushoTokuteiNo
+     * @param fukushijimushoTokuteiNo 福祉事務所特定番号
      */
     public void setFukushijimushoTokuteiNo(RString fukushijimushoTokuteiNo) {
         this.fukushijimushoTokuteiNo = fukushijimushoTokuteiNo;
@@ -208,7 +212,7 @@ public class KyufuKanrihyoCSVHeaderEntity {
     /**
      * sethokenshaNo
      *
-     * @param hokenshaNo
+     * @param hokenshaNo 保険者番号
      */
     public void setHokenshaNo(RString hokenshaNo) {
         this.hokenshaNo = hokenshaNo;
@@ -217,7 +221,7 @@ public class KyufuKanrihyoCSVHeaderEntity {
     /**
      * setjigyoshoNo
      *
-     * @param jigyoshoNo
+     * @param jigyoshoNo 事業者番号
      */
     public void setJigyoshoNo(RString jigyoshoNo) {
         this.jigyoshoNo = jigyoshoNo;
@@ -226,7 +230,7 @@ public class KyufuKanrihyoCSVHeaderEntity {
     /**
      * settodofukenNo
      *
-     * @param todofukenNo
+     * @param todofukenNo 都道府県番号
      */
     public void setTodofukenNo(RString todofukenNo) {
         this.todofukenNo = todofukenNo;
@@ -235,7 +239,7 @@ public class KyufuKanrihyoCSVHeaderEntity {
     /**
      * setbaitaiKubun
      *
-     * @param baitaiKubun
+     * @param baitaiKubun 媒体区分
      */
     public void setBaitaiKubun(RString baitaiKubun) {
         this.baitaiKubun = baitaiKubun;
@@ -244,7 +248,7 @@ public class KyufuKanrihyoCSVHeaderEntity {
     /**
      * setshoriTaishoYM
      *
-     * @param shoriTaishoYM
+     * @param shoriTaishoYM 処理対象年月
      */
     public void setShoritaishoYM(RString shoriTaishoYM) {
         this.shoriTaishoYM = shoriTaishoYM;
@@ -253,7 +257,7 @@ public class KyufuKanrihyoCSVHeaderEntity {
     /**
      * setfileKanriNo
      *
-     * @param fileKanriNo
+     * @param fileKanriNo ファイル管理番号
      */
     public void setFilekanriNo(RString fileKanriNo) {
         this.fileKanriNo = fileKanriNo;
