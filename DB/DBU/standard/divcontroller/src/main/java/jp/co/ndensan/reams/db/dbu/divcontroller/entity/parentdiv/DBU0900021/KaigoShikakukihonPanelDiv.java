@@ -21,7 +21,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.domain.TextBoxTelNo;
 /**
  * KaigoShikakukihonPanel のクラスファイル 
  * 
- * @reamsid_L DBU-1080-060 houtp
+ * @reamsid_L DBU-1080-060 houtianpeng
  */
 public class KaigoShikakukihonPanelDiv extends Panel {
     // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：バージョン情報無し">

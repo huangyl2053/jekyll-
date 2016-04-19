@@ -11,7 +11,7 @@ import jp.co.ndensan.reams.uz.uza.report.IReportEditor;
 /**
  * 介護保険被保険者証交付申請書（第2号被保険者）のインターフェースクラスです。
  *
- * @reamsid_L DBA-0540-140 houtp
+ * @reamsid_L DBA-0540-140 houtianpeng
  */
 public interface IHihokenshashokoufuShinseishoEditor extends IReportEditor<HihokenshashokoufuShinseishoReportSource> {
 }

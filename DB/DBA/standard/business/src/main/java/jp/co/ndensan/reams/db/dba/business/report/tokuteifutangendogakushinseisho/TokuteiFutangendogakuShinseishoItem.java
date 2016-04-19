@@ -12,7 +12,7 @@ import lombok.Getter;
  *
  * 介護保険被保険者証交付申請書（第2号被保険者）です。
  *
- * @reamsid_L DBA-0540-688 houtp
+ * @reamsid_L DBA-0540-688 houtianpeng
  */
 @Getter
 @SuppressWarnings("PMD.UnusedPrivateField")

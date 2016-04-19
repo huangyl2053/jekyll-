@@ -11,7 +11,7 @@ import jp.co.ndensan.reams.uz.uza.report.ReportEditorJoiner;
 /**
  * 介護保険特定負担限度額申請書Builderクラスです。
  *
- * @reamsid_L DBA-0540-688 houtp
+ * @reamsid_L DBA-0540-688 houtianpeng
  */
 public class TokuteiFutangendogakuShinseishoBuilder implements ITokuteiFutangendogakuShinseishoBuilder {
 

@@ -35,7 +35,7 @@ import jp.co.ndensan.reams.uz.uza.util.serialization.DataPassingConverter;
 /**
  * 事業者・施設選択入力ガイドDivのHandlerクラスです。
  *
- * @reamsid_L DBA-0140-010 houtp
+ * @reamsid_L DBA-0140-010 houtianpeng
  */
 public class JiGyoSyaHandler {
 

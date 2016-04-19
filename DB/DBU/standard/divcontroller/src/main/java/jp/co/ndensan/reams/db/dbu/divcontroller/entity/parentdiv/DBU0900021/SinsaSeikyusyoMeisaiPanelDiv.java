@@ -25,7 +25,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.domain.TextBoxTelNo;
 /**
  * SinsaSeikyusyoMeisaiPanel のクラスファイル
  *
- * @reamsid_L DBU-1080-060 houtp
+ * @reamsid_L DBU-1080-060 houtianpeng
  */
 public class SinsaSeikyusyoMeisaiPanelDiv extends Panel {
 

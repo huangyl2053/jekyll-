@@ -25,7 +25,7 @@ import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
  *
  * 入所施設名称取得のクラス。
  *
- * @reamsid_L DBA-0190-010 houtp
+ * @reamsid_L DBA-0190-010 houtianpeng
  */
 public class ShisetsuJohoInputGuideFinder {
 

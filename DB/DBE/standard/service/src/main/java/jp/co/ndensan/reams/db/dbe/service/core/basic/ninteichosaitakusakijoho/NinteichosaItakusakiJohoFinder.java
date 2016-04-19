@@ -38,7 +38,7 @@ import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
  *
  * 認定調査スケジュール登録9クラスです。
  *
- * @reamsid_L DBE-0020-050 houtp
+ * @reamsid_L DBE-0020-050 houtianpeng
  */
 public class NinteichosaItakusakiJohoFinder {
 

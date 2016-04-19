@@ -17,7 +17,7 @@ import lombok.Setter;
  * 要介護認定申請情報＆申請履歴情報＆要介護認定完了情報＆構成市町村マスタ＆認定調査依頼情報＆認定調査票（概況調査）＆
  * 認定調査委託先情報＆調査員情報RelateEntityクラスです。
  *
- * @reamsid_L DBE-3000-160 houtp
+ * @reamsid_L DBE-3000-160 houtianpeng
  */
 @Getter
 @Setter
@@ -38,6 +38,7 @@ public class IkenSyoNyuSyuRelateEntity {
     private int ikenshoTokusokuKaisu;
     private FlexibleDate ikenshoSakuseiKigenYMD;
     private FlexibleDate ikenshoSakuseiIraiYMD;
+    private int ikenshoIraiRirekiNo;
     private Code ikenshoSakuseiKaisuKubun;
     private FlexibleDate ikenshoReadYMD;
     private RString iryoKikanMeisho;

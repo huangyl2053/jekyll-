@@ -57,7 +57,7 @@ import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 /**
  * 介護保険特定負担限度額申請書Printerです。
  *
- * @reamsid_L DBA-0540-688 houtp
+ * @reamsid_L DBA-0540-688 houtianpeng
  */
 public class TokuteifutanGendogakuShinseisho {
 

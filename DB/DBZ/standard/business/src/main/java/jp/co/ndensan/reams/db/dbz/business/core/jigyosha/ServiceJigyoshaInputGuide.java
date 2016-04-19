@@ -17,7 +17,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 /**
  * 介護事業者施設オブジェクトの項目定義クラスです。
  *
- * @reamsid_L DBA-0140-010 houtp
+ * @reamsid_L DBA-0140-010 houtianpeng
  */
 public class ServiceJigyoshaInputGuide implements Serializable {
     private static final long serialVersionUID = -6323018880264468128L;

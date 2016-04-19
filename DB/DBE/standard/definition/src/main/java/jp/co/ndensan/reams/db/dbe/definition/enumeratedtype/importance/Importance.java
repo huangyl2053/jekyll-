@@ -5,7 +5,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
  * メモ重要度を表す列挙型です。
- * @reamsid_L DBE-0020-040 houtp
+ * @reamsid_L DBE-0020-040 houtianpeng
  *
  */
 public enum Importance {

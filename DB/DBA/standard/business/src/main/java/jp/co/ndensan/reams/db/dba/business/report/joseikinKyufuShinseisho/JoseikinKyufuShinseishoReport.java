@@ -12,7 +12,7 @@ import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
 /**
  * 介護保険助成金給付申請書のReportです。
  *
- * @reamsid_L DBA-0540-686 houtp
+ * @reamsid_L DBA-0540-686 houtianpeng
  */
 public class JoseikinKyufuShinseishoReport extends Report<JoseikinKyufuShinseishoReportSource> {
 

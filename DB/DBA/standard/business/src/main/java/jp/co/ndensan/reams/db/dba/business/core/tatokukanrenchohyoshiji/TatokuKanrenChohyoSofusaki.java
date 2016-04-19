@@ -14,7 +14,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 /**
  * 他市町村住所地特例者関連帳票の項目定義クラスです。
  *
- * @reamsid_L DBA-0380-020 houtp
+ * @reamsid_L DBA-0380-020 houtianpeng
  */
 public class TatokuKanrenChohyoSofusaki implements Serializable {
 

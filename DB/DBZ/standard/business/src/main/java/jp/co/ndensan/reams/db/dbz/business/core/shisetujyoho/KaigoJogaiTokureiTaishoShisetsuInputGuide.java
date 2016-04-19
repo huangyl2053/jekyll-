@@ -14,7 +14,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
  *
  * 入所施設名称オブジェクトの項目定義クラスです。
  *
- * @reamsid_L DBA-0190-010 houtp
+ * @reamsid_L DBA-0190-010 houtianpeng
  */
 public class KaigoJogaiTokureiTaishoShisetsuInputGuide implements Serializable {
 

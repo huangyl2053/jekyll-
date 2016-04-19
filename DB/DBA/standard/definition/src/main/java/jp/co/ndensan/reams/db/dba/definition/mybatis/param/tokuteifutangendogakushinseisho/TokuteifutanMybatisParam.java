@@ -14,7 +14,7 @@ import lombok.Getter;
  *
  * 介護保険特定負担限度額申請書の検索のパラメータクラスです。
  *
- * @reamsid_L DBA-0540-160 houtp
+ * @reamsid_L DBA-0540-160 houtianpeng
  */
 @Getter
 @SuppressWarnings("PMD.UnusedPrivateField")

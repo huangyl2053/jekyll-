@@ -11,7 +11,7 @@ import jp.co.ndensan.reams.uz.uza.report.IReportBuilder;
 /**
  * 介護保険助成金給付申請書Builderのインターフェースクラスです。
  *
- * @reamsid_L DBA-0540-686 houtp
+ * @reamsid_L DBA-0540-686 houtianpeng
  */
 public interface IJoseikinKyufuShinseishoBuilder
         extends IReportBuilder<JoseikinKyufuShinseishoReportSource> {

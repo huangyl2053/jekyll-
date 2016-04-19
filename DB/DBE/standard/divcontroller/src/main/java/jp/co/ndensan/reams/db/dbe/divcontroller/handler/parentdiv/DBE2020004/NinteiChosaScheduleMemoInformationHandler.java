@@ -30,7 +30,7 @@ import jp.co.ndensan.reams.uz.uza.util.code.entity.UzT0007CodeEntity;
  *
  * 認定調査スケジュール登録4のクラス。
  *
- * @reamsid_L DBE-0020-040 houtp
+ * @reamsid_L DBE-0020-040 houtianpeng
  */
 public class NinteiChosaScheduleMemoInformationHandler {
 

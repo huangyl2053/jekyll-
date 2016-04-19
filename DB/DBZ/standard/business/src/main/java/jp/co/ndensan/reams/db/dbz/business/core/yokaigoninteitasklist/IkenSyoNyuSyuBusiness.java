@@ -15,7 +15,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 /**
  * タスク一覧共有画面を管理するクラスです。
  *
- * @reamsid_L DBE-3000-160 houtp
+ * @reamsid_L DBE-3000-160 houtianpeng
  */
 public class IkenSyoNyuSyuBusiness {
 
@@ -154,6 +154,15 @@ public class IkenSyoNyuSyuBusiness {
      */
     public FlexibleDate get主治医意見書作成依頼年月日() {
         return entity.getIkenshoSakuseiIraiYMD();
+    }
+
+    /**
+     * 主治医意見書作成依頼履歴番号を返します。
+     *
+     * @return 主治医意見書作成依頼履歴番号
+     */
+    public int get主治医意見書作成依頼履歴番号() {
+        return entity.getIkenshoIraiRirekiNo();
     }
 
     /**

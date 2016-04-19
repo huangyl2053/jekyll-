@@ -12,7 +12,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
  *
  * 事務所の場合で認定調査スケジュール情報戻るのEntity。
  *
- * @reamsid_L DBE-0020-050 houtp
+ * @reamsid_L DBE-0020-050 houtianpeng
  */
 @lombok.Getter
 @lombok.Setter

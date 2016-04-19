@@ -11,7 +11,7 @@ import jp.co.ndensan.reams.uz.uza.report.ReportEditorJoiner;
 /**
  * 介護保険助成金給付申請書Builderクラスです。
  *
- * @reamsid_L DBA-0540-686 houtp
+ * @reamsid_L DBA-0540-686 houtianpeng
  */
 public class JoseikinKyufuShinseishoBuilder implements IJoseikinKyufuShinseishoBuilder {
 

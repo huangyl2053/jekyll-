@@ -12,7 +12,7 @@ import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT1005KaigoJogaiTokureiTaisho
 
 /**
  * 受給資格証明書発行情報を取得のマッパーインタフェースです。
- * @reamsid_L DBA-0540-160 houtp
+ * @reamsid_L DBA-0540-160 houtianpeng
  */
 public interface ITokuteifutanGendogakuShinseishoRelateMapper {
 

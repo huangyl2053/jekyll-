@@ -22,8 +22,9 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 
 /**
- *
  * 他市町村住所地特例者関連帳票クラスです。
+ *
+ * @reamsid_L DBA-0380-030 houtianpeng
  */
 public class TashichosonJushochitokureishaRenrakuhyoFinder {
 

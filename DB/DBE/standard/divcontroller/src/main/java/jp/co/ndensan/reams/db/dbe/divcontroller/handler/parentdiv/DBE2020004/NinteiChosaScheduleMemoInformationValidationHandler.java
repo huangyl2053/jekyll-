@@ -19,7 +19,7 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
  *
  * 認定調査スケジュール登録4のバリデーションハンドラークラスです。
  *
- * @reamsid_L DBE-0020-040 houtp
+ * @reamsid_L DBE-0020-040 houtianpeng
  */
 public class NinteiChosaScheduleMemoInformationValidationHandler {
 

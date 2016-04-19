@@ -16,7 +16,7 @@ import jp.co.ndensan.reams.uz.uza.util.serialization.DataPassingConverter;
  *
  * 介護保険施設（介護事業者）、その他特例施設、適用除外施設の事業者・施設入力ガイドを呼び出す元共有子Divです。
  *
- * @reamsid_L DBA-0190-010 houtp
+ * @reamsid_L DBA-0190-010 houtianpeng
  */
 public class ShisetsuJohoCommonChildDiv {
 

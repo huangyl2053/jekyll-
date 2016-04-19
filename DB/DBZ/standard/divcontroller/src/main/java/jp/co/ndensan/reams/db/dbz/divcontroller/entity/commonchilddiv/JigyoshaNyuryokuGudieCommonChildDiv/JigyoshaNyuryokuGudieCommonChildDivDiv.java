@@ -21,7 +21,7 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets._CommonChildDivModeUtil;
 /**
  * JigyoshaNyuryokuGudieCommonChildDiv のクラスファイル
  *
- * @reamsid_L DBA-0140-010 houtp
+ * @reamsid_L DBA-0140-010 houtianpeng
  */
 public class JigyoshaNyuryokuGudieCommonChildDivDiv extends Panel implements IJigyoshaNyuryokuGudieCommonChildDiv {
 

@@ -10,7 +10,7 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
 /**
  * 事業者・施設選択入力ガイドのチェッククラスです。
  *
- * @reamsid_L DBA-0140-010 houtp
+ * @reamsid_L DBA-0140-010 houtianpeng
  */
 public class ValidationHandler {
 
