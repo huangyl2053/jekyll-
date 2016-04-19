@@ -99,7 +99,7 @@ public interface INenreiToutatsuYoteishaCheckListMapper {
     /**
      * 処理日付管理マスタのデータ挿入
      *
-     * @param dbT7022ShoriDateKanriEntity
+     * @param dbT7022ShoriDateKanriEntity dbT7022ShoriDateKanriEntity
      * @return 挿入件数
      */
     int getInsert(DbT7022ShoriDateKanriEntity dbT7022ShoriDateKanriEntity);

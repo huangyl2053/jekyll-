@@ -154,9 +154,9 @@ public class TokuteifutanGendogakuShinseisho {
         if (renrakusaki1 != null) {
             hihokenshaKihonEntity.set電話番号(renrakusaki1.value());
         }
-        AtenaJusho Jusho = uaft200Entity.getJusho();
-        if (Jusho != null) {
-            hihokenshaKihonEntity.set住所(Jusho.value());
+        AtenaJusho jusho = uaft200Entity.getJusho();
+        if (jusho != null) {
+            hihokenshaKihonEntity.set住所(jusho.value());
         }
         AtenaMeisho setainushiMei = uaft200Entity.getSetainushiMei();
         if (setainushiMei != null) {

@@ -8,7 +8,6 @@ package jp.co.ndensan.reams.db.dbc.divcontroller.controller.parentdiv.jyutakugai
 import java.util.List;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.commonchilddiv.jyutakugaisyunaiyolist.JyutakugaisyunaiyoList.JyutakugaisyunaiyoListDiv;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.commonchilddiv.jyutakugaisyunaiyolist.JyutakugaisyunaiyoList.dgGaisyuList_Row;
-import jp.co.ndensan.reams.db.dbc.divcontroller.handler.parentdiv.jyutakugaisyunaiyolist.JyutakugaisyunaiyoListHandler;
 import jp.co.ndensan.reams.db.dbc.divcontroller.handler.parentdiv.jyutakugaisyunaiyolist.JyutakugaisyunaiyoListValidationHandler;
 import jp.co.ndensan.reams.ur.urz.business.core.jusho.IJusho;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaJusho;
@@ -204,10 +203,6 @@ public class JyutakugaisyunaiyoList {
             requestDiv.getBtnDetailConfirm().setDisabled(true);
         }
         return requestDiv;
-    }
-
-    private JyutakugaisyunaiyoListHandler getHandler(JyutakugaisyunaiyoListDiv requestDiv) {
-        return new JyutakugaisyunaiyoListHandler(requestDiv);
     }
 
     private JyutakugaisyunaiyoListValidationHandler getValidationHandler(JyutakugaisyunaiyoListDiv div) {
