@@ -24,6 +24,8 @@ public class HeijunkaAugustKeisanDiv extends Panel {
     private Heijunka8ShoriNaiyoDiv Heijunka8ShoriNaiyo;
     @JsonProperty("Heijunka8ShoriKakunin")
     private Heijunka8ShoriKakuninDiv Heijunka8ShoriKakunin;
+    @JsonProperty("Heijunka8KeisanHoho")
+    private Heijunka8KeisanHohoPanelDiv Heijunka8KeisanHohoPanel;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -67,5 +69,14 @@ public class HeijunkaAugustKeisanDiv extends Panel {
         this.Heijunka8ShoriKakunin = Heijunka8ShoriKakunin;
     }
 
+    @JsonProperty("Heijunka8KeisanHoho")
+    public Heijunka8KeisanHohoPanelDiv getHeijunka8KeisanHohoPanel() {
+        return Heijunka8KeisanHohoPanel;
+    }
+
+    @JsonProperty("Heijunka8KeisanHoho")
+    public void setHeijunka8KeisanHohoPanel(Heijunka8KeisanHohoPanelDiv Heijunka8KeisanHohoPanel) {
+        this.Heijunka8KeisanHohoPanel = Heijunka8KeisanHohoPanel;
+    }
     // </editor-fold>
 }
