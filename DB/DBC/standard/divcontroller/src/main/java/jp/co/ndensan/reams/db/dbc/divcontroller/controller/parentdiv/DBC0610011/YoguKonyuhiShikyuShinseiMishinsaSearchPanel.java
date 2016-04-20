@@ -10,6 +10,7 @@ import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0610011.DBC0
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0610011.YoguKonyuhiShikyuShinseiMishinsaSearchPanelDiv;
 import jp.co.ndensan.reams.db.dbc.divcontroller.handler.parentdiv.DBC0610011.YoguKonyuhiShikyuShinseiMishinsaSearchHandler;
 import jp.co.ndensan.reams.db.dbc.divcontroller.viewbox.ViewStateKeys;
+import jp.co.ndensan.reams.ur.urz.definition.message.UrInformationMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrQuestionMessages;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
@@ -30,6 +31,7 @@ public class YoguKonyuhiShikyuShinseiMishinsaSearchPanel {
 
     private final RString 保存 = new RString("btnSave");
     private final RString 審査 = new RString("審査");
+    private final RString 保存MSG = new RString(" 福祉用具購入費支給申請審査結果を更新しました。");
 
     /**
      * 画面初期化メソッドです。
@@ -88,7 +90,6 @@ public class YoguKonyuhiShikyuShinseiMishinsaSearchPanel {
     public ResponseData<YoguKonyuhiShikyuShinseiMishinsaSearchPanelDiv> onClick_btnModifyShinsei(
             YoguKonyuhiShikyuShinseiMishinsaSearchPanelDiv div) {
         getHandler(div).setViewState();
-        // TODO 検索されたデータを一覧に表示する  福祉用具購入費支給申請_決定情報登録画面実装は完成していません
         return ResponseData.of(div).forwardWithEventName(DBC0610011TransitionEventName.修正).respond();
     }
 
@@ -116,8 +117,9 @@ public class YoguKonyuhiShikyuShinseiMishinsaSearchPanel {
             div.getYoguKonyuhiShikyuShinseiMishinsaResultList().setVisible(false);
             CommonButtonHolder.setVisibleByCommonButtonFieldName(保存, false);
             getHandler(div).保存処理(決定日);
-            // TODO QA番号:628 完了確認メッセージエリアを表示にする。
-            return ResponseData.of(div).forwardWithEventName(DBC0610011TransitionEventName.更新).respond();
+            div.getYoguKonyuhiShikyuShinseiMishinsaResultList().getCcdKaigoKanryoMessage().setSuccessMessage(new RString(
+                    UrInformationMessages.正常終了.getMessage().replace(保存MSG.toString()).evaluate()));
+            return ResponseData.of(div).setState(DBC0610011StateName.完了);
         }
         return ResponseData.of(div).respond();
     }

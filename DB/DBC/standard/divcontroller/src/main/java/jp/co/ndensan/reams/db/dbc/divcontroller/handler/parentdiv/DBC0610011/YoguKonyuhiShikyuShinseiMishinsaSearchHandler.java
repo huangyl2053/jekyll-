@@ -111,7 +111,7 @@ public class YoguKonyuhiShikyuShinseiMishinsaSearchHandler {
         RDate 決定日 = div.getYoguKonyuhiShikyuShinseiMishinsaResultList().getTxtKetteiYMD().getValue();
         ViewStateHolder.put(ViewStateKeys.決定日, 決定日);
         ViewStateHolder.put(ViewStateKeys.被保険者番号, 被保険者番号);
-        ViewStateHolder.put(ViewStateKeys.画面モード, 審査);
+        ViewStateHolder.put(ViewStateKeys.状態, 審査);
         PnlTotalParameter param = new PnlTotalParameter(被保険者番号,
                 サービス提供年月, 整理番号, 事業者番号, 様式番号, 明細番号);
         ViewStateHolder.put(ViewStateKeys.支給申請情報検索キー, param);
@@ -158,7 +158,6 @@ public class YoguKonyuhiShikyuShinseiMishinsaSearchHandler {
             entity.getEntity().get償還払請求基本Entity().setJigyoshaNo(new JigyoshaNo(row.getTxtJigyoshaNo().getValue()));
             entity.getEntity().get償還払請求基本Entity().setYoshikiNo(row.getTxtYoshikiNo().getValue());
             entity.getEntity().get償還払請求基本Entity().setMeisaiNo(row.getTxtMeisaiNo().getValue());
-            // TODO セルフ業務決定_GS_DB介護保険 番号:8  償還払請求基本．被保険者番号?
             entity.getEntity().set氏名(new AtenaMeisho(row.getTxtHihoName().getValue()));
             entity.getEntity().get償還払支給申請Entity().setShinseiYMD(new FlexibleDate(row.getTxtShikyuShinseiDate().getValue().toString()));
             entity.getEntity().get償還払支給申請Entity().setHokenTaishoHiyogaku(row.getTxtHiyoTotal().getValue());
