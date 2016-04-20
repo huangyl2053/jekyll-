@@ -23,6 +23,9 @@ import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBD;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBU;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigojotaikubun.YokaigoJotaiKubun09;
 import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.kyotsu.GaikokujinSeinengappiHyojihoho;
+import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.kyotsu.NinshoshaDenshikoinshubetsuCode;
+import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7065ChohyoSeigyoKyotsuEntity;
+import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT7065ChohyoSeigyoKyotsuDac;
 import jp.co.ndensan.reams.db.dbz.service.core.MapperProvider;
 import jp.co.ndensan.reams.ua.uax.business.core.psm.UaFt200FindShikibetsuTaishoFunction;
 import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.ShikibetsuTaishoFactory;
@@ -30,9 +33,13 @@ import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.search.Shikibet
 import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.search.ShikibetsuTaishoSearchKeyBuilder;
 import jp.co.ndensan.reams.ua.uax.definition.core.enumeratedtype.shikibetsutaisho.KensakuYusenKubun;
 import jp.co.ndensan.reams.ua.uax.entity.db.basic.UaFt200FindShikibetsuTaishoEntity;
+import jp.co.ndensan.reams.ur.urz.business.report.parts.ninshosha.INinshoshaSourceBuilder;
 import jp.co.ndensan.reams.ur.urz.definition.core.shikibetsutaisho.JuminJotai;
 import jp.co.ndensan.reams.ur.urz.definition.core.shikibetsutaisho.JuminShubetsu;
+import jp.co.ndensan.reams.ur.urz.service.report.parts.ninshosha.INinshoshaSourceBuilderCreator;
+import jp.co.ndensan.reams.ur.urz.service.report.sourcebuilder.ReportSourceBuilders;
 import jp.co.ndensan.reams.uz.uza.biz.GyomuCode;
+import jp.co.ndensan.reams.uz.uza.biz.ReportId;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.EraType;
@@ -56,30 +63,19 @@ public class KaigoHokenShikakushasho {
     private static final int 画面のデータ件数 = 6;
     private static final RString 単位種類 = new RString("1月当たり");
     private static final RString 固定文字_単位 = new RString("単位");
-    // TODO QA:1035 Redmine# (実装できない)
-//    private static final RString 印字する = new RString("1");
-//    private static final RString 印字しない = new RString("0");
     private static final RString 適用切れ非表示 = new RString("0");
     private static final RString 適用切れ表示 = new RString("1");
     private static final RString 居宅支援事業者履歴_0 = new RString("0");
     private static final RString 居宅支援事業者履歴_2 = new RString("2");
     private static final RString 居宅支援事業者履歴_3 = new RString("3");
-    // TODO QA:1035 Redmine# (実装できない)
-//    private static final RString 帳票独自区分_1 = new RString("1");
-//    private static final RString 帳票独自区分_0 = new RString("0");
-//    private static final RString 都道府県名付与有無_1 = new RString("1");
-//    private static final RString 都道府県名付与有無_0 = new RString("0");
-//    private static final RString 郡名付与有無_1 = new RString("1");
-//    private static final RString 郡名付与有無_0 = new RString("0");
-//    private static final RString 市町村名付与有無_1 = new RString("1");
-//    private static final RString 市町村名付与有無_0 = new RString("0");
-//    private static final RString 編集方法_1 = new RString("1");
-//    private static final RString 編集方法_2 = new RString("2");
-//    private static final RString 編集方法_3 = new RString("3");
-//    private static final RString 編集方法_4 = new RString("4");
-//    private static final RString 編集方法_5 = new RString("5");
-//    private static final RString 方書表示有無_1 = new RString("1");
-//    private static final RString 方書表示有無_0 = new RString("0");
+    private static final ReportId 帳票分類ID = new ReportId("DBA100003_Shikakushasho");
+    private static final RString 帳票独自 = new RString("1");
+    private static final RString 市町村共通 = new RString("0");
+    private static final RString 編集方法_1 = new RString("1");
+    private static final RString 編集方法_2 = new RString("2");
+    private static final RString 編集方法_3 = new RString("3");
+    private static final RString 編集方法_4 = new RString("4");
+    private static final RString 編集方法_5 = new RString("5");
     private static final RString 管内区分 = new RString("1");
     private static final RString 管外区分 = new RString("2");
     private static final RString 年号_明治 = new RString("明治");
@@ -92,12 +88,15 @@ public class KaigoHokenShikakushasho {
     private static final int SIZE_3 = 3;
     private static final int INDEX_2 = 2;
     private final MapperProvider mapperProvider;
+    private final DbT7065ChohyoSeigyoKyotsuDac dac;
+    private DbT7065ChohyoSeigyoKyotsuEntity 帳票制御共通Entity;
 
     /**
      * コンストラクタです。
      */
     public KaigoHokenShikakushasho() {
         this.mapperProvider = InstanceProvider.create(MapperProvider.class);
+        this.dac = InstanceProvider.create(DbT7065ChohyoSeigyoKyotsuDac.class);
     }
 
     /**
@@ -114,8 +113,9 @@ public class KaigoHokenShikakushasho {
      *
      * @param provider
      */
-    KaigoHokenShikakushasho(MapperProvider provider) {
+    KaigoHokenShikakushasho(MapperProvider provider, DbT7065ChohyoSeigyoKyotsuDac dac) {
         this.mapperProvider = provider;
+        this.dac = dac;
     }
 
     /**
@@ -128,6 +128,7 @@ public class KaigoHokenShikakushasho {
         KaigoHokenShikakushashoDataEntity dataEntity = new KaigoHokenShikakushashoDataEntity();
         dataEntity.setYukoKigen(business.get有効期限());
         dataEntity.setHihokenshaNo(business.get被保番号());
+        帳票制御共通Entity = dac.selectByKey(SubGyomuCode.DBA介護資格, 帳票分類ID);
         HihokenshaDateEntity hihokenshaDateEntity = getHihokenshajouhou(business.get識別コード());
         dataEntity.setJusho(hihokenshaDateEntity.getJusho());
         dataEntity.setHihokenshaNameKana(hihokenshaDateEntity.getHihokenshaNameKana());
@@ -249,42 +250,42 @@ public class KaigoHokenShikakushasho {
 
     }
 
+    // TODO QA:1088 Redmine：  (住所の編集方法)
     private RString set住所() {
-        // TODO QA:1035 Redmine# (実装できない)
-//        if (帳票独自区分_1.equals(BusinessConfig.get(ConfigNameDBD.資格者証_管内住所編集_帳票独自区分, SubGyomuCode.DBD介護受給))) {
+//        if (市町村共通.equals(帳票制御共通Entity.getJushoHenshuKubun())) {
 //
-//            if (都道府県名付与有無_1.equals(BusinessConfig.get(ConfigNameDBD.資格者証_管内住所編集_都道府県名付与有無, SubGyomuCode.DBD介護受給))) {
+//            if (帳票制御共通Entity.getJushoHenshuTodoufukenMeiHyojiUmu()) {
 //
-//            } else if (都道府県名付与有無_0.equals(BusinessConfig.get(ConfigNameDBD.資格者証_管内住所編集_都道府県名付与有無, SubGyomuCode.DBD介護受給))) {
-//
-//            }
-//            if (郡名付与有無_1.equals(BusinessConfig.get(ConfigNameDBD.資格者証_管内住所編集_郡名付与有無, SubGyomuCode.DBD介護受給))) {
-//
-//            } else if (郡名付与有無_0.equals(BusinessConfig.get(ConfigNameDBD.資格者証_管内住所編集_郡名付与有無, SubGyomuCode.DBD介護受給))) {
+//            } else {
 //
 //            }
-//            if (市町村名付与有無_1.equals(BusinessConfig.get(ConfigNameDBD.資格者証_管内住所編集_市町村名付与有無, SubGyomuCode.DBD介護受給))) {
+//            if (帳票制御共通Entity.getJushoHenshuGunMeiHyojiUmu()) {
 //
-//            } else if (市町村名付与有無_0.equals(BusinessConfig.get(ConfigNameDBD.資格者証_管内住所編集_市町村名付与有無, SubGyomuCode.DBD介護受給))) {
-//
-//            }
-//            if (編集方法_1.equals(BusinessConfig.get(ConfigNameDBD.資格者証_管内住所編集_編集方法, SubGyomuCode.DBD介護受給))) {
-//
-//            } else if (編集方法_2.equals(BusinessConfig.get(ConfigNameDBD.資格者証_管内住所編集_編集方法, SubGyomuCode.DBD介護受給))) {
-//
-//            } else if (編集方法_3.equals(BusinessConfig.get(ConfigNameDBD.資格者証_管内住所編集_編集方法, SubGyomuCode.DBD介護受給))) {
-//
-//            } else if (編集方法_4.equals(BusinessConfig.get(ConfigNameDBD.資格者証_管内住所編集_編集方法, SubGyomuCode.DBD介護受給))) {
-//
-//            } else if (編集方法_5.equals(BusinessConfig.get(ConfigNameDBD.資格者証_管内住所編集_編集方法, SubGyomuCode.DBD介護受給))) {
+//            } else {
 //
 //            }
-//            if (方書表示有無_1.equals(BusinessConfig.get(ConfigNameDBD.資格者証_住所編集_方書表示有無, SubGyomuCode.DBD介護受給))) {
+//            if (帳票制御共通Entity.getJushoHenshuShichosonMeiHyojiUmu()) {
 //
-//            } else if (方書表示有無_0.equals(BusinessConfig.get(ConfigNameDBD.資格者証_住所編集_方書表示有無, SubGyomuCode.DBD介護受給))) {
+//            } else {
 //
 //            }
-//        } else if (帳票独自区分_0.equals(BusinessConfig.get(ConfigNameDBD.資格者証_管内住所編集_帳票独自区分, SubGyomuCode.DBD介護受給))) {
+//            if (編集方法_1.equals(帳票制御共通Entity.getJushoHenshuChoikiHenshuHoho())) {
+//
+//            } else if (編集方法_2.equals(帳票制御共通Entity.getJushoHenshuChoikiHenshuHoho())) {
+//
+//            } else if (編集方法_3.equals(帳票制御共通Entity.getJushoHenshuChoikiHenshuHoho())) {
+//
+//            } else if (編集方法_4.equals(帳票制御共通Entity.getJushoHenshuChoikiHenshuHoho())) {
+//
+//            } else if (編集方法_5.equals(帳票制御共通Entity.getJushoHenshuChoikiHenshuHoho())) {
+//
+//            }
+//            if (帳票制御共通Entity.getJushoHenshuKatagakiHyojiUmu()) {
+//
+//            } else {
+//
+//            }
+//        } else if (帳票独自.equals(帳票制御共通Entity.getJushoHenshuKubun())) {
 //            BusinessConfig.get(ConfigNameDBU.帳票共通住所編集方法_管内住所編集, SubGyomuCode.DBU介護統計報告);
 //        }
         return null;
@@ -369,12 +370,13 @@ public class KaigoHokenShikakushasho {
 
     private ShienJigyoshaDataEntity set支援事業者情報(ShikakushashoHakkoBusiness business,
             ShienJigyoshaDataEntity shienJigyoshaDataEntity) {
+        // TODO QA:1088 Redmine：  (支援事業者の編集方法)
         if (適用切れ非表示.equals(BusinessConfig.get(ConfigNameDBD.資格者証表示方法_居宅支援事業者, SubGyomuCode.DBD介護受給))) {
             if (RString.isNullOrEmpty(business.get支援事業者の情報().get(0).getTekiyoKaishiYMD())) {
                 shienJigyoshaDataEntity.setJigyoshaName1(business.get支援事業者の情報().get(0).getJigyosha());
                 shienJigyoshaDataEntity.setTodokedeYMD1(business.get支援事業者の情報().get(0).getTodokedeYMD());
             }
-            if (business.get支援事業者の情報().get(1).getTekiyoKaishiYMD().compareTo(business.get交付日()) >= -1) {
+            if (business.get支援事業者の情報().get(1).getTekiyoKaishiYMD().compareTo(business.get交付日()) >= 0) {
                 setNameAndYMD(business.get支援事業者の情報(), shienJigyoshaDataEntity);
             }
         } else if (適用切れ表示.equals(BusinessConfig.get(ConfigNameDBD.資格者証表示方法_居宅支援事業者, SubGyomuCode.DBD介護受給))
@@ -425,24 +427,19 @@ public class KaigoHokenShikakushasho {
         entity.setHokenshaJusho(BusinessConfig.get(ConfigNameDBU.保険者情報_住所, SubGyomuCode.DBU介護統計報告));
         entity.setHokenshaName(BusinessConfig.get(ConfigNameDBU.保険者情報_保険者名称, SubGyomuCode.DBU介護統計報告));
         entity.setHokenshaTelno(BusinessConfig.get(ConfigNameDBU.保険者情報_電話番号, SubGyomuCode.DBU介護統計報告));
-        // TODO QA:1035 Redmine# (実装できない)
-//        if (印字する.equals(BusinessConfig.get(ConfigNameDBD.資格者証_電子公印出力制御_印字有無, SubGyomuCode.DBD介護受給))) {
-//            INinshoshaSourceBuilderCreator builderCreator = ReportSourceBuilders.ninshoshaSourceBuilder();
-//            INinshoshaSourceBuilder builder = builderCreator.create(
-//                    GyomuCode.DB介護保険,
-//                    NinshoshaDenshikoinshubetsuCode.保険者印.getコード(),
-//                    null,
-//                    null);
-//            entity.setDenshiKoin(builder.buildSource().denshiKoin);
-//        } else if (印字しない.equals(BusinessConfig.get(ConfigNameDBD.資格者証_電子公印出力制御_印字有無, SubGyomuCode.DBD介護受給))) {
-//            INinshoshaSourceBuilderCreator builderCreator = ReportSourceBuilders.ninshoshaSourceBuilder();
-//            INinshoshaSourceBuilder builder = builderCreator.create(
-//                    GyomuCode.DB介護保険,
-//                    NinshoshaDenshikoinshubetsuCode.印の字.getコード(),
-//                    null,
-//                    null);
-//            entity.setDenshiKoin(builder.buildSource().denshiKoin);
-//        }
+        RString 認証者電子公印種別コード;
+        if (帳票制御共通Entity.getDenshiKoinInjiUmu()) {
+            認証者電子公印種別コード = NinshoshaDenshikoinshubetsuCode.保険者印.getコード();
+        } else {
+            認証者電子公印種別コード = NinshoshaDenshikoinshubetsuCode.印の字.getコード();
+        }
+        INinshoshaSourceBuilderCreator builderCreator = ReportSourceBuilders.ninshoshaSourceBuilder();
+        INinshoshaSourceBuilder builder = builderCreator.create(
+                GyomuCode.DB介護保険,
+                認証者電子公印種別コード,
+                null,
+                null);
+        entity.setDenshiKoin(builder.buildSource().denshiKoin);
         return entity;
     }
 
