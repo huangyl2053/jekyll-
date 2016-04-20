@@ -9,6 +9,8 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
  * 帳票設計_DBBRP43002_4_特別徴収開始通知書（本算定）TokubetsuChoshuKaishiItem
+ *
+ * @reamsid_L DBB-0780-100 yangchenbing
  */
 @SuppressWarnings("PMD.UnusedPrivateField")
 @lombok.Getter

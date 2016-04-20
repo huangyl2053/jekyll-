@@ -19,7 +19,7 @@ import lombok.NonNull;
 /**
  * 帳票設計_DBBRP43002_4_特別徴収開始通知書（本算定）TokubetsuChoshuKaishiReport
  *
- * @reamsid_L DBB-0780-120 yangchenbing
+ * @reamsid_L DBB-0780-100 yangchenbing
  */
 public class TokubetsuChoshuKaishiReport extends Report<TokubetsuChoshuKaishiSource> {
 

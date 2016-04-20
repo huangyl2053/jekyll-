@@ -10,6 +10,8 @@ import jp.co.ndensan.reams.uz.uza.report.IReportEditor;
 
 /**
  * 帳票設計_DBBRP43002_4_特別徴収開始通知書（本算定）ITokubetsuChoshuKaishiEditor
+ *
+ * @reamsid_L DBB-0780-100 yangchenbing
  */
 public interface ITokubetsuChoshuKaishiEditor extends IReportEditor<TokubetsuChoshuKaishiSource> {
 
