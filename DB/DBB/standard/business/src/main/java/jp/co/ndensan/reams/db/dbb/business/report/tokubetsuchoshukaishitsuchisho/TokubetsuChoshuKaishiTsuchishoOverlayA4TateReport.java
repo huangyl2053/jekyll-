@@ -12,6 +12,7 @@ import jp.co.ndensan.reams.ur.urz.entity.report.parts.ninshosha.NinshoshaSource;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.report.Report;
 import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
+import lombok.NonNull;
 
 /**
  * 特別徴収開始通知書（本算定） A4縦・オーバレイタイプ帳票Report
@@ -34,7 +35,7 @@ public class TokubetsuChoshuKaishiTsuchishoOverlayA4TateReport extends Report<To
      * @param sourceBuilder sourceBuilder
      */
     public TokubetsuChoshuKaishiTsuchishoOverlayA4TateReport(
-            EditedHonSanteiTsuchiShoKyotsu 編集後本算定通知書共通情報,
+            @NonNull EditedHonSanteiTsuchiShoKyotsu 編集後本算定通知書共通情報,
             RString 通知書定型文,
             CompKaigoToiawasesakiSource toiawasesakiSource,
             NinshoshaSource sourceBuilder) {

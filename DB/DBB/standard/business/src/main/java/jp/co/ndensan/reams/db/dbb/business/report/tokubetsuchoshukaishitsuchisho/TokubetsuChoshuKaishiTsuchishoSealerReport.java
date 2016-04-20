@@ -8,9 +8,9 @@ package jp.co.ndensan.reams.db.dbb.business.report.tokubetsuchoshukaishitsuchish
 import jp.co.ndensan.reams.db.dbb.business.report.tsuchisho.notsu.EditedHonSanteiTsuchiShoKyotsu;
 import jp.co.ndensan.reams.db.dbb.entity.report.tokubetsuchoshukaishitsuchisho.TokubetsuChoshuKaishiTsuchishoSealerSource;
 import jp.co.ndensan.reams.ur.urz.entity.report.parts.ninshosha.NinshoshaSource;
-import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.report.Report;
 import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
+import lombok.NonNull;
 
 /**
  * 特別徴収開始通知書（本算定） シーラタイプ帳票Report
@@ -20,22 +20,18 @@ import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
 public class TokubetsuChoshuKaishiTsuchishoSealerReport extends Report<TokubetsuChoshuKaishiTsuchishoSealerSource> {
 
     private final EditedHonSanteiTsuchiShoKyotsu 編集後本算定通知書共通情報;
-    private final RString バッチパラメータ;
     private final NinshoshaSource sourceBuilder;
 
     /**
      * コンストラクタです。
      *
      * @param 編集後本算定通知書共通情報 編集後本算定通知書共通情報
-     * @param バッチパラメータ バッチパラメータ
      * @param sourceBuilder sourceBuilder
      */
     public TokubetsuChoshuKaishiTsuchishoSealerReport(
-            EditedHonSanteiTsuchiShoKyotsu 編集後本算定通知書共通情報,
-            RString バッチパラメータ,
+            @NonNull EditedHonSanteiTsuchiShoKyotsu 編集後本算定通知書共通情報,
             NinshoshaSource sourceBuilder) {
         this.編集後本算定通知書共通情報 = 編集後本算定通知書共通情報;
-        this.バッチパラメータ = バッチパラメータ;
         this.sourceBuilder = sourceBuilder;
     }
 

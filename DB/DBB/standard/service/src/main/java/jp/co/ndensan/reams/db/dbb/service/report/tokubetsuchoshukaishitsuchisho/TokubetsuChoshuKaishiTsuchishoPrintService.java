@@ -58,7 +58,6 @@ import jp.co.ndensan.reams.uz.uza.report.source.breaks.BreakAggregator;
  */
 public class TokubetsuChoshuKaishiTsuchishoPrintService {
 
-    private static final RString ONE = new RString("0001");
     private static final RDate 発行日 = new RDate("20160115");
 
     /**
@@ -76,7 +75,7 @@ public class TokubetsuChoshuKaishiTsuchishoPrintService {
         try (ReportManager reportManager = new ReportManager()) {
             try (ReportAssembler<TokubetsuChoshuKaishiTsuchishoB5Source> assembler = createAssembler(property, reportManager)) {
                 INinshoshaManager manager = new _NinshoshaManager();
-                Ninshosha 認証者 = manager.get帳票認証者(GyomuCode.DB介護保険, ONE);
+                Ninshosha 認証者 = manager.get帳票認証者(GyomuCode.DB介護保険, new RString("DBB100032"));
                 NinshoshaSource sourceBuilder = NinshoshaSourceBuilderFactory.createInstance(認証者,
                         AssociationFinderFactory.createInstance().getAssociation(), assembler.getImageFolderPath(),
                         発行日).buildSource();
@@ -104,7 +103,7 @@ public class TokubetsuChoshuKaishiTsuchishoPrintService {
         try (ReportManager reportManager = new ReportManager()) {
             try (ReportAssembler<TokubetsuChoshuKaishiTsuchishoB5RenchoSource> assembler = createAssembler(property, reportManager)) {
                 INinshoshaManager manager = new _NinshoshaManager();
-                Ninshosha 認証者 = manager.get帳票認証者(GyomuCode.DB介護保険, ONE);
+                Ninshosha 認証者 = manager.get帳票認証者(GyomuCode.DB介護保険, new RString("DBB100033"));
                 NinshoshaSource sourceBuilder = NinshoshaSourceBuilderFactory.createInstance(認証者,
                         AssociationFinderFactory.createInstance().getAssociation(), assembler.getImageFolderPath(),
                         発行日).buildSource();
@@ -122,24 +121,22 @@ public class TokubetsuChoshuKaishiTsuchishoPrintService {
      * シーラタイプ printメソッド
      *
      * @param 編集後本算定通知書共通情報 編集後本算定通知書共通情報
-     * @param バッチパラメータ バッチパラメータ
      * @return SourceDataCollection
      */
     public SourceDataCollection printシーラタイプ(
-            EditedHonSanteiTsuchiShoKyotsu 編集後本算定通知書共通情報,
-            RString バッチパラメータ) {
+            EditedHonSanteiTsuchiShoKyotsu 編集後本算定通知書共通情報) {
         TokubetsuChoshuKaishiTsuchishoSealerProperty property
                 = new TokubetsuChoshuKaishiTsuchishoSealerProperty();
         try (ReportManager reportManager = new ReportManager()) {
             try (ReportAssembler<TokubetsuChoshuKaishiTsuchishoSealerSource> assembler = createAssembler(property, reportManager)) {
                 INinshoshaManager manager = new _NinshoshaManager();
-                Ninshosha 認証者 = manager.get帳票認証者(GyomuCode.DB介護保険, ONE);
+                Ninshosha 認証者 = manager.get帳票認証者(GyomuCode.DB介護保険, new RString("DBB100034"));
                 NinshoshaSource sourceBuilder = NinshoshaSourceBuilderFactory.createInstance(認証者,
                         AssociationFinderFactory.createInstance().getAssociation(), assembler.getImageFolderPath(),
                         new RDate("20160115")).buildSource();
                 ReportSourceWriter<TokubetsuChoshuKaishiTsuchishoSealerSource> reportSourceWriter
                         = new ReportSourceWriter(assembler);
-                new TokubetsuChoshuKaishiTsuchishoSealerReport(編集後本算定通知書共通情報, バッチパラメータ, sourceBuilder).
+                new TokubetsuChoshuKaishiTsuchishoSealerReport(編集後本算定通知書共通情報, sourceBuilder).
                         writeBy(reportSourceWriter);
             }
             return reportManager.publish();
@@ -150,24 +147,22 @@ public class TokubetsuChoshuKaishiTsuchishoPrintService {
      * printシーラタイプ連帳 printメソッド
      *
      * @param 編集後本算定通知書共通情報 編集後本算定通知書共通情報
-     * @param バッチパラメータ バッチパラメータ
      * @return SourceDataCollection
      */
     public SourceDataCollection printシーラタイプ連帳(
-            EditedHonSanteiTsuchiShoKyotsu 編集後本算定通知書共通情報,
-            RString バッチパラメータ) {
+            EditedHonSanteiTsuchiShoKyotsu 編集後本算定通知書共通情報) {
         TokubetsuChoshuKaishiTsuchishoSealerRenchoProperty property
                 = new TokubetsuChoshuKaishiTsuchishoSealerRenchoProperty();
         try (ReportManager reportManager = new ReportManager()) {
             try (ReportAssembler<TokubetsuChoshuKaishiTsuchishoSealerRenchoSource> assembler = createAssembler(property, reportManager)) {
                 INinshoshaManager manager = new _NinshoshaManager();
-                Ninshosha 認証者 = manager.get帳票認証者(GyomuCode.DB介護保険, ONE);
+                Ninshosha 認証者 = manager.get帳票認証者(GyomuCode.DB介護保険, new RString("DBB100035"));
                 NinshoshaSource sourceBuilder = NinshoshaSourceBuilderFactory.createInstance(認証者,
                         AssociationFinderFactory.createInstance().getAssociation(), assembler.getImageFolderPath(),
                         発行日).buildSource();
                 ReportSourceWriter<TokubetsuChoshuKaishiTsuchishoSealerRenchoSource> reportSourceWriter
                         = new ReportSourceWriter(assembler);
-                new TokubetsuChoshuKaishiTsuchishoSealerRenchoReport(編集後本算定通知書共通情報, バッチパラメータ, sourceBuilder).
+                new TokubetsuChoshuKaishiTsuchishoSealerRenchoReport(編集後本算定通知書共通情報, sourceBuilder).
                         writeBy(reportSourceWriter);
             }
             return reportManager.publish();
@@ -190,7 +185,7 @@ public class TokubetsuChoshuKaishiTsuchishoPrintService {
         try (ReportManager reportManager = new ReportManager()) {
             try (ReportAssembler<TokubetsuChoshuKaishiTsuchishoB52Source> assembler = createAssembler(property, reportManager)) {
                 INinshoshaManager manager = new _NinshoshaManager();
-                Ninshosha 認証者 = manager.get帳票認証者(GyomuCode.DB介護保険, ONE);
+                Ninshosha 認証者 = manager.get帳票認証者(GyomuCode.DB介護保険, new RString("DBB100036"));
                 NinshoshaSource sourceBuilder = NinshoshaSourceBuilderFactory.createInstance(認証者,
                         AssociationFinderFactory.createInstance().getAssociation(), assembler.getImageFolderPath(),
                         発行日).buildSource();
@@ -219,7 +214,7 @@ public class TokubetsuChoshuKaishiTsuchishoPrintService {
         try (ReportManager reportManager = new ReportManager()) {
             try (ReportAssembler<TokubetsuChoshuKaishiTsuchishoB52RenchoSource> assembler = createAssembler(property, reportManager)) {
                 INinshoshaManager manager = new _NinshoshaManager();
-                Ninshosha 認証者 = manager.get帳票認証者(GyomuCode.DB介護保険, ONE);
+                Ninshosha 認証者 = manager.get帳票認証者(GyomuCode.DB介護保険, new RString("DBB100037"));
                 NinshoshaSource sourceBuilder = NinshoshaSourceBuilderFactory.createInstance(認証者,
                         AssociationFinderFactory.createInstance().getAssociation(), assembler.getImageFolderPath(),
                         発行日).buildSource();
@@ -248,12 +243,12 @@ public class TokubetsuChoshuKaishiTsuchishoPrintService {
         try (ReportManager reportManager = new ReportManager()) {
             try (ReportAssembler<TokubetsuChoshuKaishiTsuchishoOverlayA4TateSource> assembler = createAssembler(property, reportManager)) {
                 INinshoshaManager manager = new _NinshoshaManager();
-                Ninshosha 認証者 = manager.get帳票認証者(GyomuCode.DB介護保険, ONE);
+                Ninshosha 認証者 = manager.get帳票認証者(GyomuCode.DB介護保険, new RString("DBB100038"));
                 NinshoshaSource sourceBuilder = NinshoshaSourceBuilderFactory.createInstance(認証者,
                         AssociationFinderFactory.createInstance().getAssociation(), assembler.getImageFolderPath(),
                         発行日).buildSource();
                 IKaigoToiawasesakiSourceBuilder 介護問合せ先ソースビルダー
-                        = KaigoToiawasesakiSourceBuilderCreator.create(SubGyomuCode.DBB介護賦課, new ReportId("123456"));
+                        = KaigoToiawasesakiSourceBuilderCreator.create(SubGyomuCode.DBB介護賦課, new ReportId("DBB100038"));
                 CompKaigoToiawasesakiSource toiawasesakiSource = 介護問合せ先ソースビルダー.buildSource();
                 ReportSourceWriter<TokubetsuChoshuKaishiTsuchishoOverlayA4TateSource> reportSourceWriter
                         = new ReportSourceWriter(assembler);

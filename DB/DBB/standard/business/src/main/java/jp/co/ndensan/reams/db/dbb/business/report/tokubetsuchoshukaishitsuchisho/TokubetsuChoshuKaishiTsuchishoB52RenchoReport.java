@@ -11,6 +11,7 @@ import jp.co.ndensan.reams.ur.urz.entity.report.parts.ninshosha.NinshoshaSource;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.report.Report;
 import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
+import lombok.NonNull;
 
 /**
  * 別徴収開始通知書（本算定） B5横タイプ2（連帳）帳票Report
@@ -31,7 +32,7 @@ public class TokubetsuChoshuKaishiTsuchishoB52RenchoReport extends Report<Tokube
      * @param sourceBuilder sourceBuilder
      */
     public TokubetsuChoshuKaishiTsuchishoB52RenchoReport(
-            EditedHonSanteiTsuchiShoKyotsu 編集後本算定通知書共通情報,
+            @NonNull EditedHonSanteiTsuchiShoKyotsu 編集後本算定通知書共通情報,
             RString 宛名連番,
             NinshoshaSource sourceBuilder) {
         this.編集後本算定通知書共通情報 = 編集後本算定通知書共通情報;
