@@ -95,10 +95,8 @@ public class ShoKaishuKirokuKanriJoho {
             RealInitialLocker.release(LOCKINGKEY);
             アクセスログ(ViewStateHolder.get(ViewStateKey.資格対象者, TaishoshaKey.class).get識別コード());
             return ResponseData.of(div).setState(DBU0500011StateName.完了状態);
-        } else {
-            return ResponseData.of(div).respond();
         }
-
+        return ResponseData.of(div).respond();
     }
 
     /**
@@ -138,7 +136,7 @@ public class ShoKaishuKirokuKanriJoho {
                 builder.set有効期限(getDate(dgKoufuKaishu.getYukoKigen()));
                 builder.set交付事由(dgKoufuKaishu.getKoufuJiyuNo());
                 builder.set交付理由(dgKoufuKaishu.getKofuRiyu());
-                builder.set回収年月日(getDate((dgKoufuKaishu.getKaishuDate())));
+                builder.set回収年月日(getDate(dgKoufuKaishu.getKaishuDate()));
                 builder.set回収事由(dgKoufuKaishu.getKaishuJiyuNo());
                 builder.set回収理由(dgKoufuKaishu.getKaishuRiyu());
                 builder.set発行処理日時(YMDHMS.now());

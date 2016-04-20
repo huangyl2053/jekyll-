@@ -30,7 +30,6 @@ public class ShoKaishuKirokuKanriJohoManager {
     /**
      * 単体テスト用のコンストラクタです。
      *
-     * @param mapperProvider mapperProvider
      * @param 証交付回収情報dac 証交付回収情報dac
      */
     ShoKaishuKirokuKanriJohoManager(
