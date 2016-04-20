@@ -60,7 +60,6 @@ public class ShikakuHenkoRirekiHandler {
 
     private static final Code 広域 = new Code("111");
     private static final RString 合併有り = new RString("1");
-    private static final RString EMPTY_KEY = new RString("EMPTY");
     private static final RString 半角コロン = new RString(":");
     private static final RString 追加状態 = new RString("追加");
     private static final RString 修正状態 = new RString("修正");
@@ -414,7 +413,6 @@ public class ShikakuHenkoRirekiHandler {
         SikakuKanrenIdoFinder finder = SikakuKanrenIdoFinder.createInstance();
         List<KoseiShichosonMaster> shichosonMasters = finder.selectByKoseiShichosonMasterList().records();
         List<KeyValueDataSource> dataSource = new ArrayList<>();
-        dataSource.add(new KeyValueDataSource(EMPTY_KEY, RString.EMPTY));
         int count = 1;
         for (KoseiShichosonMaster koseiShichosonMaster : shichosonMasters) {
             if (!RString.isNullOrEmpty(koseiShichosonMaster.getShoKisaiHokenshaNo().getColumnValue())) {
@@ -430,7 +428,6 @@ public class ShikakuHenkoRirekiHandler {
         SikakuKanrenIdoFinder finder = SikakuKanrenIdoFinder.createInstance();
         List<GappeiShichoson> gappeiShichosons = finder.getGappeiShichosonList().records();
         List<KeyValueDataSource> dataSource = new ArrayList<>();
-        dataSource.add(new KeyValueDataSource(EMPTY_KEY, RString.EMPTY));
         int count = 1;
         for (GappeiShichoson gappeiShichoson : gappeiShichosons) {
             if (!RString.isNullOrEmpty(gappeiShichoson.get旧保険者番号().getColumnValue())) {
@@ -444,7 +441,6 @@ public class ShikakuHenkoRirekiHandler {
     private List<KeyValueDataSource> get変更事由リスト情報() {
         RString menuID = ResponseHolder.getMenuID();
         List<KeyValueDataSource> dataSource = new ArrayList<>();
-        dataSource.add(new KeyValueDataSource(EMPTY_KEY, RString.EMPTY));
         if (MENUID_DBAMN52003.equals(menuID)) {
             dataSource.add(new KeyValueDataSource(ShikakuHenkoRirekiEnum.広域内転居.getコード(),
                     ShikakuHenkoRirekiEnum.広域内転居.get名称()));
@@ -473,7 +469,6 @@ public class ShikakuHenkoRirekiHandler {
         List<KeyValueDataSource> dataSource = new ArrayList<>();
         ShikakuhenkorirekiFinder shikakuhenkorirekiManage = ShikakuhenkorirekiFinder.createInstance();
         List<IKojin> kojins = shikakuhenkorirekiManage.getKojinInfoByShikibetuCd(処理対象者);
-        dataSource.add(new KeyValueDataSource(EMPTY_KEY, RString.EMPTY));
         for (IKojin iKojin : kojins) {
             dataSource.add(
                     new KeyValueDataSource(iKojin.get識別コード().getColumnValue().
