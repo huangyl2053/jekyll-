@@ -14,6 +14,7 @@ import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 
 /**
  * {@link ShokanJutakuKaishu}の編集を行うビルダークラスです。
@@ -254,6 +255,17 @@ public class ShokanJutakuKaishuBuilder {
     public ShokanJutakuKaishuBuilder set住宅改修内容(RString 住宅改修内容) {
         requireNonNull(住宅改修内容, UrSystemErrorMessages.値がnull.getReplacedMessage("住宅改修内容"));
         entity.setJutakuKaishuNaiyo(住宅改修内容);
+        return this;
+    }
+
+    /**
+     * ステータスを設定します
+     *
+     * @param ステータス ステータス
+     * @return {@link ShokanJutakuKaishuBuilder}
+     */
+    public ShokanJutakuKaishuBuilder setステータス(EntityDataState ステータス) {
+        entity.setState(ステータス);
         return this;
     }
 
