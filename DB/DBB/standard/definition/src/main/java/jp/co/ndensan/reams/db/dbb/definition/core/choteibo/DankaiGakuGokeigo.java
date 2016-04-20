@@ -5,10 +5,13 @@
  */
 package jp.co.ndensan.reams.db.dbb.definition.core.choteibo;
 
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 
 /**
  * 段階合計後調定額合計クラスです。
+ *
+ * @reamsid_L DBB-0770-040 yebangqiang
  */
 @lombok.Getter
 @lombok.Setter
@@ -26,4 +29,6 @@ public class DankaiGakuGokeigo {
     private Decimal 全て段階の特徴者数の合計 = Decimal.ZERO;
     private Decimal 全て段階の普徴者数の合計 = Decimal.ZERO;
     private Decimal 全て段階の内併徴者数の合計 = Decimal.ZERO;
+    private FlexibleYear 調定年度 = FlexibleYear.EMPTY;
+    private FlexibleYear 賦課年度 = FlexibleYear.EMPTY;
 }

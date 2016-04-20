@@ -10,6 +10,8 @@ import jp.co.ndensan.reams.uz.uza.math.Decimal;
 
 /**
  * 期別合計後調定額合計クラスです。
+ *
+ * @reamsid_L DBB-0770-040 yebangqiang
  */
 @lombok.Getter
 @lombok.Setter

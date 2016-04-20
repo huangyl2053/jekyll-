@@ -18,6 +18,7 @@ import jp.co.ndensan.reams.db.dbb.definition.core.choteibo.Gokeigo;
 import jp.co.ndensan.reams.db.dbb.definition.core.choteibo.Kibetsu;
 import jp.co.ndensan.reams.db.dbb.definition.core.choteibo.KibetsuGokeigo;
 import jp.co.ndensan.reams.db.dbb.definition.core.choteibo.KibetsuShokei;
+import jp.co.ndensan.reams.db.dbb.definition.mybatisprm.choteibo.ChoteiboShoriHizukeMyBatisParameter;
 import jp.co.ndensan.reams.db.dbb.definition.processprm.choteibo.ChoteiboProcessParameter;
 import jp.co.ndensan.reams.db.dbb.entity.db.relate.choteibo.DanKaiEntity;
 import jp.co.ndensan.reams.db.dbb.entity.db.relate.choteibo.DangatsuDankaiDataEntity;
@@ -47,7 +48,10 @@ import jp.co.ndensan.reams.db.dbx.business.core.kanri.KanendoKiUtil;
 import jp.co.ndensan.reams.db.dbx.business.core.kanri.KitsukiList;
 import jp.co.ndensan.reams.db.dbx.definition.core.fuka.Tsuki;
 import jp.co.ndensan.reams.db.dbz.definition.core.enumeratedtype.fuka.ChoshuHohoKibetsu;
+import jp.co.ndensan.reams.db.dbz.definition.core.kyotsu.ShoriName;
+import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7022ShoriDateKanriEntity;
 import jp.co.ndensan.reams.uz.uza.batch.process.SimpleBatchProcessBase;
+import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -84,6 +88,9 @@ public class ChoteiboSakuseiDataShoriProcess extends SimpleBatchProcessBase {
     private static final RString KEY_ZENNENDO = new RString("zenNendo");
     private static final RString KEY_ZENZENNENDO = new RString("zenzenNendo");
     private static final RString KEY_DOGETSUFLG = new RString("dogetsuFlag");
+    private static final RString KEY_KARISANFLG = new RString("karisanFlag");
+    private static final RString 本算定 = new RString("0");
+    private static final RString 仮算定 = new RString("1");
     private IChoteiboSakuseiMapper choteiboSakuseiMapper;
     private ChoteiboProcessParameter parameter;
 
@@ -160,12 +167,17 @@ public class ChoteiboSakuseiDataShoriProcess extends SimpleBatchProcessBase {
             YMDHMS 終了調定日時) {
         insert期別情報一時テーブル(調定年度, 賦課年度, 開始調定日時, 終了調定日時);
         insert段階情報一時テーブル(調定年度, 賦課年度, 開始調定日時, 終了調定日時);
-        insert段階小計一時テーブル(調定年度, 賦課年度, ChoshuHohoKibetsu.特別徴収.code(), 当月フラグ);
-        insert段階小計一時テーブル(調定年度, 賦課年度, ChoshuHohoKibetsu.特別徴収.code(), 前月フラグ);
-        insert段階小計一時テーブル(調定年度, 賦課年度, ChoshuHohoKibetsu.普通徴収.code(), 当月フラグ);
-        insert段階小計一時テーブル(調定年度, 賦課年度, ChoshuHohoKibetsu.普通徴収.code(), 前月フラグ);
+        insert段階小計一時テーブル(調定年度, 賦課年度, ChoshuHohoKibetsu.特別徴収.code(), 当月フラグ, 仮算定);
+        insert段階小計一時テーブル(調定年度, 賦課年度, ChoshuHohoKibetsu.特別徴収.code(), 当月フラグ, 本算定);
+        insert段階小計一時テーブル(調定年度, 賦課年度, ChoshuHohoKibetsu.特別徴収.code(), 前月フラグ, 仮算定);
+        insert段階小計一時テーブル(調定年度, 賦課年度, ChoshuHohoKibetsu.特別徴収.code(), 前月フラグ, 本算定);
+        insert段階小計一時テーブル(調定年度, 賦課年度, ChoshuHohoKibetsu.普通徴収.code(), 当月フラグ, 仮算定);
+        insert段階小計一時テーブル(調定年度, 賦課年度, ChoshuHohoKibetsu.普通徴収.code(), 当月フラグ, 本算定);
+        insert段階小計一時テーブル(調定年度, 賦課年度, ChoshuHohoKibetsu.普通徴収.code(), 前月フラグ, 仮算定);
+        insert段階小計一時テーブル(調定年度, 賦課年度, ChoshuHohoKibetsu.普通徴収.code(), 前月フラグ, 本算定);
 
-        update内併徴者数(調定年度, 賦課年度);
+        update内併徴者数(調定年度, 賦課年度, 仮算定);
+        update内併徴者数(調定年度, 賦課年度, 本算定);
 
         update増減調定額の小計(調定年度, 賦課年度);
 
@@ -196,9 +208,13 @@ public class ChoteiboSakuseiDataShoriProcess extends SimpleBatchProcessBase {
         FlexibleYear 前々年度 = 調定年度.minusYear(2);
         insert合計部分一時テーブル_特別徴収(調定年度, 当年度, 前年度, 前々年度);
         insert合計部分一時テーブル_普通徴収(調定年度, 当年度, 前年度, 前々年度);
-        update当月末の段階のデータ(調定年度, 当年度, 前年度, 前々年度);
-        update前月末の段階のデータ(調定年度, 当年度, 前年度, 前々年度);
-        update段階の特徴と普徴者数(調定年度, 当年度, 前年度, 前々年度);
+        update当月末の段階のデータ(調定年度, 当年度, 前年度, 前々年度, 仮算定);
+        update当月末の段階のデータ(調定年度, 当年度, 前年度, 前々年度, 本算定);
+        update前月末の段階のデータ(調定年度, 当年度, 前年度, 前々年度, 仮算定);
+        update前月末の段階のデータ(調定年度, 当年度, 前年度, 前々年度, 本算定);
+
+        update段階の特徴と普徴者数(調定年度, 当年度, 前年度, 前々年度, 仮算定);
+        update段階の特徴と普徴者数(調定年度, 当年度, 前年度, 前々年度, 本算定);
 
         insert合計部分総計一時テーブル(調定年度, 当年度, 前年度, 前々年度);
         updateその他部分のデータ(調定年度, 当年度, 前年度, 前々年度);
@@ -300,6 +316,9 @@ public class ChoteiboSakuseiDataShoriProcess extends SimpleBatchProcessBase {
         param.put(KEY_FUKANENDO.toString(), 賦課年度);
         param.put(KEY_CHUSHUTSUSTYMD.toString(), 開始調定日時);
         param.put(KEY_CHUSHUTSUENDYMD.toString(), 終了調定日時);
+        ChoteiboShoriHizukeMyBatisParameter myBatisParameter = new ChoteiboShoriHizukeMyBatisParameter(
+                SubGyomuCode.DBB介護賦課, ShoriName.本算定賦課.get名称(), 調定年度);
+        DbT7022ShoriDateKanriEntity shoriDateKanriData = choteiboSakuseiMapper.select処理日付(myBatisParameter);
         List<DankaiDataEntity> dogetsudankaiData = choteiboSakuseiMapper.select当月末の段階データ(param);
         for (DankaiDataEntity entity : dogetsudankaiData) {
             DanKaiEntity dankaiEntity = new DanKaiEntity();
@@ -312,6 +331,15 @@ public class ChoteiboSakuseiDataShoriProcess extends SimpleBatchProcessBase {
             dankaiEntity.setChoshuHouhou(entity.getChoshuHouhou());
             dankaiEntity.setChoteiId(entity.getChoteiId());
             dankaiEntity.setDogetsuFlag(1);
+            if (shoriDateKanriData == null || shoriDateKanriData.getKijunTimestamp() == null
+                    || shoriDateKanriData.getKijunTimestamp().isEmpty()
+                    || (entity.getChoteiNichiji().isBefore(shoriDateKanriData.getKijunTimestamp())
+                    && entity.getChoteiNendo().equals(shoriDateKanriData.getNendo()))) {
+                dankaiEntity.setKarisanFlag(仮算定);
+            } else if (shoriDateKanriData.getKijunTimestamp().isBeforeOrEquals(entity.getChoteiNichiji())
+                    && entity.getChoteiNendo().equals(shoriDateKanriData.getNendo())) {
+                dankaiEntity.setKarisanFlag(本算定);
+            }
             dankaiEntity.setZengetsusueChoteigaku(null);
             dankaiEntity.setFueChoteigaku(null);
             dankaiEntity.setGenChoteigaku(null);
@@ -331,6 +359,15 @@ public class ChoteiboSakuseiDataShoriProcess extends SimpleBatchProcessBase {
             dankaiEntity.setChoshuHouhou(entity.getChoshuHouhou());
             dankaiEntity.setChoteiId(entity.getChoteiId());
             dankaiEntity.setDogetsuFlag(0);
+            if (shoriDateKanriData == null || shoriDateKanriData.getKijunTimestamp() == null
+                    || shoriDateKanriData.getKijunTimestamp().isEmpty()
+                    || (entity.getChoteiNichiji().isBefore(shoriDateKanriData.getKijunTimestamp())
+                    && entity.getChoteiNendo().equals(shoriDateKanriData.getNendo()))) {
+                dankaiEntity.setKarisanFlag(仮算定);
+            } else if (shoriDateKanriData.getKijunTimestamp().isBeforeOrEquals(entity.getChoteiNichiji())
+                    && entity.getChoteiNendo().equals(shoriDateKanriData.getNendo())) {
+                dankaiEntity.setKarisanFlag(本算定);
+            }
             dankaiEntity.setZengetsusueChoteigaku(entity.getChoteigaku());
             dankaiEntity.setFueChoteigaku(null);
             dankaiEntity.setGenChoteigaku(null);
@@ -350,12 +387,14 @@ public class ChoteiboSakuseiDataShoriProcess extends SimpleBatchProcessBase {
     private void insert段階小計一時テーブル(FlexibleYear 調定年度,
             FlexibleYear 賦課年度,
             RString 徴収方法,
-            int 当月フラグ) {
+            int 当月フラグ,
+            RString 仮算フラグ) {
         Map<String, Object> param = new HashMap<>();
         param.put(KEY_CHOTEINENDO.toString(), 調定年度);
         param.put(KEY_FUKANENDO.toString(), 賦課年度);
         param.put(KEY_CHUSHUHOUHOU.toString(), 徴収方法);
         param.put(KEY_DOGETSUFLG.toString(), 当月フラグ);
+        param.put(KEY_KARISANFLG.toString(), 仮算フラグ);
         List<DankaiKensuEntity> dankaiKensu = choteiboSakuseiMapper.select所得段階の件数(param);
         for (DankaiKensuEntity entity : dankaiKensu) {
             DankaiShokeiEntity dankaiShokeiEntity = new DankaiShokeiEntity();
@@ -364,6 +403,7 @@ public class ChoteiboSakuseiDataShoriProcess extends SimpleBatchProcessBase {
             dankaiShokeiEntity.setChoshuHouhou(徴収方法);
             dankaiShokeiEntity.setDankai(entity.getDankai());
             dankaiShokeiEntity.setDogetsuFlag(当月フラグ);
+            dankaiShokeiEntity.setKarisanFlag(仮算フラグ);
             if (当月フラグ == 1) {
                 dankaiShokeiEntity.setDogetsusueKensu(entity.getDankaiKensu());
             } else if (当月フラグ == 0) {
@@ -384,10 +424,11 @@ public class ChoteiboSakuseiDataShoriProcess extends SimpleBatchProcessBase {
      * @param 調定年度 調定年度
      * @param 賦課年度 賦課年度
      */
-    private void update内併徴者数(FlexibleYear 調定年度, FlexibleYear 賦課年度) {
+    private void update内併徴者数(FlexibleYear 調定年度, FlexibleYear 賦課年度, RString 仮算フラグ) {
         Map<String, Object> param = new HashMap<>();
         param.put(KEY_CHOTEINENDO.toString(), 調定年度);
         param.put(KEY_FUKANENDO.toString(), 賦課年度);
+        param.put(KEY_KARISANFLG.toString(), 仮算フラグ);
         List<NaiheisyaKensuEntity> naiheisyaKensu = choteiboSakuseiMapper.select内併徴者数(param);
         for (NaiheisyaKensuEntity entity : naiheisyaKensu) {
             choteiboSakuseiMapper.update内併徴者数(entity);
@@ -520,6 +561,7 @@ public class ChoteiboSakuseiDataShoriProcess extends SimpleBatchProcessBase {
                     entity.getChoshuHouhou(),
                     entity.getChoteiId(),
                     entity.getDogetsuFlag(),
+                    entity.getKarisanFlag(),
                     entity.getZengetsusueChoteigaku(),
                     entity.getFueChoteigaku(),
                     entity.getGenChoteigaku(),
@@ -586,6 +628,7 @@ public class ChoteiboSakuseiDataShoriProcess extends SimpleBatchProcessBase {
                     entity.getChoshuHouhou(),
                     entity.getDankai(),
                     entity.getDogetsuFlag(),
+                    entity.getKarisanFlag(),
                     entity.getZengetsusueKensu(),
                     entity.getZengetsusueChoteigakuCount(),
                     entity.getFueKensu(),
@@ -853,20 +896,22 @@ public class ChoteiboSakuseiDataShoriProcess extends SimpleBatchProcessBase {
     private void update当月末の段階のデータ(FlexibleYear 調定年度,
             FlexibleYear 当年度,
             FlexibleYear 前年度,
-            FlexibleYear 前々年度) {
+            FlexibleYear 前々年度,
+            RString 仮算フラグ) {
         Map<String, Object> param = new HashMap<>();
         param.put(KEY_CHOTEINENDO.toString(), 調定年度);
         param.put(KEY_DANNENDO.toString(), 当年度);
         param.put(KEY_ZENNENDO.toString(), 前年度);
         param.put(KEY_ZENZENNENDO.toString(), 前々年度);
         param.put(KEY_DOGETSUFLG.toString(), 当月フラグ);
-
+        param.put(KEY_KARISANFLG.toString(), 仮算フラグ);
         List<DangatsuDankaiDataEntity> dangatsuDankaiDataList = choteiboSakuseiMapper.select当月末の段階のデータ(param);
         for (DangatsuDankaiDataEntity entity : dangatsuDankaiDataList) {
             GokeiBubunEntity gokeiBubunEntity = new GokeiBubunEntity();
             gokeiBubunEntity.setChoshuHouhou(entity.getChoshuHouhou());
             gokeiBubunEntity.setDankai(entity.getDankai());
             gokeiBubunEntity.setDogetsuFlag(entity.getDogetsuFlag());
+            gokeiBubunEntity.setKarisanFlag(entity.getKarisanFlag());
             gokeiBubunEntity.setDogetsusueChoteigakuCount(entity.getDogetsusueChoteigakuCount());
             gokeiBubunEntity.setDogetsusueKensuCount(entity.getDogetsusueKensuCount());
             gokeiBubunEntity.setFueChoteigakuCount(entity.getFueChoteigakuCount());
@@ -889,20 +934,22 @@ public class ChoteiboSakuseiDataShoriProcess extends SimpleBatchProcessBase {
     private void update前月末の段階のデータ(FlexibleYear 調定年度,
             FlexibleYear 当年度,
             FlexibleYear 前年度,
-            FlexibleYear 前々年度) {
+            FlexibleYear 前々年度,
+            RString 仮算フラグ) {
         Map<String, Object> param = new HashMap<>();
         param.put(KEY_CHOTEINENDO.toString(), 調定年度);
         param.put(KEY_DANNENDO.toString(), 当年度);
         param.put(KEY_ZENNENDO.toString(), 前年度);
         param.put(KEY_ZENZENNENDO.toString(), 前々年度);
         param.put(KEY_DOGETSUFLG.toString(), 前月フラグ);
-
+        param.put(KEY_KARISANFLG.toString(), 仮算フラグ);
         List<ZengatsuDankaiDataEntity> zengatsuDankaiDataList = choteiboSakuseiMapper.select前月末の段階のデータ(param);
         for (ZengatsuDankaiDataEntity entity : zengatsuDankaiDataList) {
             GokeiBubunEntity gokeiBubunEntity = new GokeiBubunEntity();
             gokeiBubunEntity.setChoshuHouhou(entity.getChoshuHouhou());
             gokeiBubunEntity.setDankai(entity.getDankai());
             gokeiBubunEntity.setDogetsuFlag(entity.getDogetsuFlag());
+            gokeiBubunEntity.setKarisanFlag(entity.getKarisanFlag());
             gokeiBubunEntity.setZengetsusueChoteigakuCount(entity.getZengetsusueChoteigakuCount());
             gokeiBubunEntity.setZengetsusueKensuCount(entity.getZengetsusueKensuCount());
             choteiboSakuseiMapper.insertTmpGokeiBubun(gokeiBubunEntity);
@@ -920,13 +967,14 @@ public class ChoteiboSakuseiDataShoriProcess extends SimpleBatchProcessBase {
     private void update段階の特徴と普徴者数(FlexibleYear 調定年度,
             FlexibleYear 当年度,
             FlexibleYear 前年度,
-            FlexibleYear 前々年度) {
+            FlexibleYear 前々年度,
+            RString 仮算フラグ) {
         Map<String, Object> param = new HashMap<>();
         param.put(KEY_CHOTEINENDO.toString(), 調定年度);
         param.put(KEY_DANNENDO.toString(), 当年度);
         param.put(KEY_ZENNENDO.toString(), 前年度);
         param.put(KEY_ZENZENNENDO.toString(), 前々年度);
-
+        param.put(KEY_KARISANFLG.toString(), 仮算フラグ);
         List<DankaiTksaiToFusaiKensuEntity> dankaiTksaiToFusaiKensuList
                 = choteiboSakuseiMapper.select段階の特徴と普徴者数(param);
         for (DankaiTksaiToFusaiKensuEntity entity : dankaiTksaiToFusaiKensuList) {

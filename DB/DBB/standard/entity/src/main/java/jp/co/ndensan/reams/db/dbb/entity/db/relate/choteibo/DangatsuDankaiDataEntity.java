@@ -23,6 +23,7 @@ public class DangatsuDankaiDataEntity {
     private RString choshuHouhou;
     private RString dankai;
     private int dogetsuFlag;
+    private RString karisanFlag;
     private Decimal dogetsusueKensuCount;
     private Decimal dogetsusueChoteigakuCount;
     private Decimal fueKensuCount;

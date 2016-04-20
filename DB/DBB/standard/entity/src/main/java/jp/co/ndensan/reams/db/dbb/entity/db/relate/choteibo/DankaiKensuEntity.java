@@ -25,4 +25,5 @@ public class DankaiKensuEntity {
     private RString choshuHouhou;
     private RString dankai;
     private int dogetsuFlag;
+    private RString karisanFlag;
 }

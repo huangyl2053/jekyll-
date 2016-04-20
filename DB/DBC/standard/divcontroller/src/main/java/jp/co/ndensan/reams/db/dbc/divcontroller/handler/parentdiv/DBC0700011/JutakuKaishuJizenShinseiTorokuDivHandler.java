@@ -418,7 +418,9 @@ public final class JutakuKaishuJizenShinseiTorokuDivHandler {
         if (div.getKaigoShikakuKihonShaPanel().getTabShinseiJyoho().getTxtJutakuOwner().getValue().isNullOrEmpty()) {
             throw new ApplicationException(UrErrorMessages.必須.getMessage().replace(住宅所有者.toString()));
         }
-        if (div.getKaigoShikakuKihonShaPanel().getTabShinseiContents().getTabShinsaKakka().getTxtJudgeYMD()
+        if (div.getKaigoShikakuKihonShaPanel().getTabShinseiContents().getTabShinsaKakka()
+                .getJutakuKaishuJizenShoninKetteiTsuchisho().isIsPublish()
+                && div.getKaigoShikakuKihonShaPanel().getTabShinseiContents().getTabShinsaKakka().getTxtJudgeYMD()
                 .getValue() == null) {
             throw new ApplicationException(UrErrorMessages.必須.getMessage().replace(判定決定日.toString()));
         }
@@ -429,6 +431,8 @@ public final class JutakuKaishuJizenShinseiTorokuDivHandler {
             throw new ApplicationException(UrErrorMessages.必須.getMessage().replace(不承認理由.toString()));
         }
         if (div.getKaigoShikakuKihonShaPanel().getTabShinseiContents().getTabShinsaKakka()
+                .getJutakuKaishuJizenShoninKetteiTsuchisho().isIsPublish()
+                && div.getKaigoShikakuKihonShaPanel().getTabShinseiContents().getTabShinsaKakka()
                 .getJutakuKaishuJizenShoninKetteiTsuchisho().getTxtHakkoYMD().getValue() == null) {
             throw new ApplicationException(UrErrorMessages.必須.getMessage().replace(発行日.toString()));
         }
@@ -937,8 +941,10 @@ public final class JutakuKaishuJizenShinseiTorokuDivHandler {
     }
 
     private void 更新データの設定(ShokanJutakuKaishuJizenShinseiBuilder builder) {
-        builder.set申請年月日(new FlexibleDate(div.getKaigoShikakuKihonShaPanel().getShinseishaInfo()
-                .getTxtShinseiYMD().getValue().toDateString()));
+        if (div.getKaigoShikakuKihonShaPanel().getShinseishaInfo().getTxtShinseiYMD().getValue() != null) {
+            builder.set申請年月日(new FlexibleDate(div.getKaigoShikakuKihonShaPanel().getShinseishaInfo()
+                    .getTxtShinseiYMD().getValue().toDateString()));
+        }
         builder.set申請理由(div.getKaigoShikakuKihonShaPanel().getShinseishaInfo().getTxtShinseiRiyu().getValue());
         builder.set申請者区分(div.getKaigoShikakuKihonShaPanel().getShinseishaInfo().getDdlShinseishaKubun().getSelectedKey());
         builder.set申請者氏名(div.getKaigoShikakuKihonShaPanel().getShinseishaInfo().getTxtShinseishaName().getValue());
@@ -950,8 +956,11 @@ public final class JutakuKaishuJizenShinseiTorokuDivHandler {
         builder.set申請事業者番号(new JigyoshaNo("9"));
 //        builder.set申請事業者番号(new JigyoshaNo(div.getKaigoShikakuKihonShaPanel().getShinseishaInfo()
 //                .getTxtJigyoshaNo().getValue()));
-        builder.set理由書作成日(new FlexibleDate(div.getKaigoShikakuKihonShaPanel().getJutakuKaishuJizenShinseiReason()
-                .getTxtCreateYMD().getValue().toDateString()));
+        if (div.getKaigoShikakuKihonShaPanel().getJutakuKaishuJizenShinseiReason()
+                .getTxtCreateYMD().getValue() != null) {
+            builder.set理由書作成日(new FlexibleDate(div.getKaigoShikakuKihonShaPanel().getJutakuKaishuJizenShinseiReason()
+                    .getTxtCreateYMD().getValue().toDateString()));
+        }
         builder.set理由書作成者(div.getKaigoShikakuKihonShaPanel().getJutakuKaishuJizenShinseiReason()
                 .getTxtCreatorName().getDomain().value());
         builder.set理由書作成者カナ(div.getKaigoShikakuKihonShaPanel().getJutakuKaishuJizenShinseiReason()
@@ -960,6 +969,27 @@ public final class JutakuKaishuJizenShinseiTorokuDivHandler {
         builder.set理由書作成事業者番号(new JigyoshaNo("9"));
 //        builder.set理由書作成事業者番号(new JigyoshaNo(div.getKaigoShikakuKihonShaPanel().getJutakuKaishuJizenShinseiReason()
 //                .getTxtCreationJigyoshaNo().getValue()));
+        RString 支払方法区分コード = div.getKaigoShikakuKihonShaPanel().getTabKozaJyoho()
+                .getCcdJutakuKaishuJizenShinseiKoza().getShiharaiHoho();
+//        builder.set支払方法区分コード(支払方法区分コード);
+        if (ShiharaiHohoKubun.窓口払.getコード().equals(支払方法区分コード)) {
+            builder.set支払場所(div.getKaigoShikakuKihonShaPanel().getTabKozaJyoho()
+                    .getCcdJutakuKaishuJizenShinseiKoza().getShiharaiBasho());
+            builder.set支払期間開始年月日(new FlexibleDate(div.getKaigoShikakuKihonShaPanel().getTabKozaJyoho()
+                    .getCcdJutakuKaishuJizenShinseiKoza().getStartYMD().toDateString()));
+            builder.set支払期間終了年月日(new FlexibleDate(div.getKaigoShikakuKihonShaPanel().getTabKozaJyoho()
+                    .getCcdJutakuKaishuJizenShinseiKoza().getEndYMD().toDateString()));
+            builder.set支払窓口開始時間(new RString(div.getKaigoShikakuKihonShaPanel().getTabKozaJyoho()
+                    .getCcdJutakuKaishuJizenShinseiKoza().getStartHHMM().toString()));
+            builder.set支払窓口終了時間(new RString(div.getKaigoShikakuKihonShaPanel().getTabKozaJyoho()
+                    .getCcdJutakuKaishuJizenShinseiKoza().getEndHHMM().toString()));
+        } else if (ShiharaiHohoKubun.口座払.getコード().equals(支払方法区分コード)) {
+            builder.set口座ID(Long.valueOf(div.getKaigoShikakuKihonShaPanel().getTabKozaJyoho()
+                    .getCcdJutakuKaishuJizenShinseiKoza().getKozaNo().toString()));
+        } else if (ShiharaiHohoKubun.受領委任払.getコード().equals(支払方法区分コード)) {
+            builder.set受領委任契約番号(div.getKaigoShikakuKihonShaPanel().getTabKozaJyoho()
+                    .getCcdJutakuKaishuJizenShinseiKoza().getKeiyakuNo());
+        }
         // TODO
         builder.set住宅所有者(div.getKaigoShikakuKihonShaPanel().getTabShinseiJyoho().getTxtJutakuOwner().getValue());
         builder.set被保険者との関係(div.getKaigoShikakuKihonShaPanel().getTabShinseiJyoho()
@@ -1011,11 +1041,13 @@ public final class JutakuKaishuJizenShinseiTorokuDivHandler {
     }
 
     private void 登録データの設定(ShokanJutakuKaishuJizenShinseiBuilder builder) {
-        // TODO 証記載保険者番号の設定方法はQA確認中
+        // TODO QAのNo.654確認中
         builder.set証記載保険者番号(new ShoKisaiHokenshaNo("000033"));
         builder.set受付年月日(FlexibleDate.getNowDate());
-        builder.set申請年月日(new FlexibleDate(div.getKaigoShikakuKihonShaPanel().getShinseishaInfo()
-                .getTxtShinseiYMD().getValue().toDateString()));
+        if (div.getKaigoShikakuKihonShaPanel().getShinseishaInfo().getTxtShinseiYMD().getValue() != null) {
+            builder.set申請年月日(new FlexibleDate(div.getKaigoShikakuKihonShaPanel().getShinseishaInfo()
+                    .getTxtShinseiYMD().getValue().toDateString()));
+        }
         builder.set申請理由(div.getKaigoShikakuKihonShaPanel().getShinseishaInfo().getTxtShinseiRiyu().getValue());
         builder.set申請者区分(div.getKaigoShikakuKihonShaPanel().getShinseishaInfo().getDdlShinseishaKubun().getSelectedKey());
         builder.set申請者氏名(div.getKaigoShikakuKihonShaPanel().getShinseishaInfo().getTxtShinseishaName().getValue());
@@ -1023,21 +1055,45 @@ public final class JutakuKaishuJizenShinseiTorokuDivHandler {
         builder.set申請者郵便番号(div.getKaigoShikakuKihonShaPanel().getShinseishaInfo().getTxtYubinNo().getValue());
         builder.set申請者住所(div.getKaigoShikakuKihonShaPanel().getShinseishaInfo().getTxtAddress().getDomain().value());
         builder.set申請者電話番号(div.getKaigoShikakuKihonShaPanel().getShinseishaInfo().getTxtTelNo().getDomain());
-        //  事業者番号は正常設定できない
+        // TODO QAのNo.669確認中 事業者番号は正常設定できない
         builder.set申請事業者番号(new JigyoshaNo("9"));
 //        builder.set申請事業者番号(new JigyoshaNo(div.getKaigoShikakuKihonShaPanel().getShinseishaInfo()
 //                .getTxtJigyoshaNo().getValue()));
-        builder.set理由書作成日(new FlexibleDate(div.getKaigoShikakuKihonShaPanel().getJutakuKaishuJizenShinseiReason()
-                .getTxtCreateYMD().getValue().toDateString()));
+        if (div.getKaigoShikakuKihonShaPanel().getJutakuKaishuJizenShinseiReason().getTxtCreateYMD().getValue() != null) {
+            builder.set理由書作成日(new FlexibleDate(div.getKaigoShikakuKihonShaPanel().getJutakuKaishuJizenShinseiReason()
+                    .getTxtCreateYMD().getValue().toDateString()));
+        }
         builder.set理由書作成者(div.getKaigoShikakuKihonShaPanel().getJutakuKaishuJizenShinseiReason()
                 .getTxtCreatorName().getDomain().value());
         builder.set理由書作成者カナ(div.getKaigoShikakuKihonShaPanel().getJutakuKaishuJizenShinseiReason()
                 .getTxtCreatorKanaName().getDomain().value());
-        //  事業者番号は正常設定できない
+        // TODO QAのNo.669確認中 事業者番号は正常設定できない
         builder.set理由書作成事業者番号(new JigyoshaNo("9"));
 //        builder.set理由書作成事業者番号(new JigyoshaNo(div.getKaigoShikakuKihonShaPanel().getJutakuKaishuJizenShinseiReason()
 //                .getTxtCreationJigyoshaNo().getValue()));
-        // TODO
+        RString 支払方法区分コード = div.getKaigoShikakuKihonShaPanel().getTabKozaJyoho()
+                .getCcdJutakuKaishuJizenShinseiKoza().getShiharaiHoho();
+//        builder.set支払方法区分コード(支払方法区分コード);
+        if (ShiharaiHohoKubun.窓口払.getコード().equals(支払方法区分コード)) {
+            builder.set支払場所(div.getKaigoShikakuKihonShaPanel().getTabKozaJyoho()
+                    .getCcdJutakuKaishuJizenShinseiKoza().getShiharaiBasho());
+            builder.set支払期間開始年月日(new FlexibleDate(div.getKaigoShikakuKihonShaPanel().getTabKozaJyoho()
+                    .getCcdJutakuKaishuJizenShinseiKoza().getStartYMD().toDateString()));
+            builder.set支払期間終了年月日(new FlexibleDate(div.getKaigoShikakuKihonShaPanel().getTabKozaJyoho()
+                    .getCcdJutakuKaishuJizenShinseiKoza().getEndYMD().toDateString()));
+            builder.set支払窓口開始時間(new RString(div.getKaigoShikakuKihonShaPanel().getTabKozaJyoho()
+                    .getCcdJutakuKaishuJizenShinseiKoza().getStartHHMM().toString()));
+            builder.set支払窓口終了時間(new RString(div.getKaigoShikakuKihonShaPanel().getTabKozaJyoho()
+                    .getCcdJutakuKaishuJizenShinseiKoza().getEndHHMM().toString()));
+        } else if (ShiharaiHohoKubun.口座払.getコード().equals(支払方法区分コード)) {
+            builder.set口座ID(Long.valueOf(div.getKaigoShikakuKihonShaPanel().getTabKozaJyoho()
+                    .getCcdJutakuKaishuJizenShinseiKoza().getKozaNo().toString()));
+        } else if (ShiharaiHohoKubun.受領委任払.getコード().equals(支払方法区分コード)) {
+            builder.set受領委任契約番号(div.getKaigoShikakuKihonShaPanel().getTabKozaJyoho()
+                    .getCcdJutakuKaishuJizenShinseiKoza().getKeiyakuNo());
+        }
+        // TODO QAのNo.654確認中
+//        builder.setサービス種類コード(ServiceShuruiCode.EMPTY);
         builder.set住宅所有者(div.getKaigoShikakuKihonShaPanel().getTabShinseiJyoho().getTxtJutakuOwner().getValue());
         builder.set被保険者との関係(div.getKaigoShikakuKihonShaPanel().getTabShinseiJyoho()
                 .getTxtRelationWithHihokensha().getValue());
