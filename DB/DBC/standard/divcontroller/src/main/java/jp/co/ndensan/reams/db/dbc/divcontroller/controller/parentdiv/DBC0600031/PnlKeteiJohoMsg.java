@@ -116,6 +116,8 @@ public class PnlKeteiJohoMsg {
                     .equals(ResponseHolder.getMessageCode())
                     && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
                 return ResponseData.of(div).forwardWithEventName(DBC0600031TransitionEventName.一覧に戻る).respond();
+            } else {
+                return ResponseData.of(div).respond();
             }
         }
         if ((!flag && (モード_登録.equals(ViewStateHolder.get(ViewStateKeys.状態, RString.class))))
