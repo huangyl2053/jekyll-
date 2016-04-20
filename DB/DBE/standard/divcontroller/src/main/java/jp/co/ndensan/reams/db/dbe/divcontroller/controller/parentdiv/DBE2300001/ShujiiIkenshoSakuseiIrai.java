@@ -35,7 +35,6 @@ import jp.co.ndensan.reams.db.dbz.divcontroller.viewbox.ViewStateKeys;
 import jp.co.ndensan.reams.db.dbz.service.util.report.ReportUtil;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrInformationMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrQuestionMessages;
-import jp.co.ndensan.reams.ur.urz.service.core.association.AssociationFinderFactory;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
@@ -63,6 +62,8 @@ import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 
 /**
  * 主治医意見書作成依頼のクラスです。
+ *
+ * @reamsid_L DBE-0050-010 zuotao
  */
 public class ShujiiIkenshoSakuseiIrai {
 
@@ -107,7 +108,9 @@ public class ShujiiIkenshoSakuseiIrai {
      */
     public ResponseData<ShujiiIkenshoSakuseiIraiDiv> onLoad(ShujiiIkenshoSakuseiIraiDiv div) {
         CommonButtonHolder.setVisibleByCommonButtonFieldName(帳票発行, false);
-        div.getCcdShujiiIryoKikanAndShujiiInput().initialize(AssociationFinderFactory.createInstance().getAssociation().get地方公共団体コード(),
+        div.getCcdNinteishinseishaFinder().initialize();
+        div.getCcdShujiiIryoKikanAndShujiiInput().initialize(
+                div.getCcdNinteishinseishaFinder().getNinteiShinseishaFinderDiv().getDdlHokenshaNumber().getSelectedItem().get市町村コード(),
                 ShinseishoKanriNo.EMPTY, SubGyomuCode.DBE認定支援);
         div.getDgShinseishaIchiran().setDataSource(Collections.<dgShinseishaIchiran_Row>emptyList());
         div.getMeireisho().getRadjyushin().setSelectedKey(SELECTED_KEY1);
@@ -138,10 +141,8 @@ public class ShujiiIkenshoSakuseiIrai {
      */
     public ResponseData<ShujiiIkenshoSakuseiIraiDiv> onClick_btnSearch(ShujiiIkenshoSakuseiIraiDiv div) {
 
-        RString 被保険者番号 = div.getCcdHihokenshaFinder().get被保険者番号();
-        // QA894　最大表示件数の確認
         ShujiiIkenshoSakuseiIraiManager manager = ShujiiIkenshoSakuseiIraiManager.createInstance();
-        ShujiiIkenshoSakuseiIraiParameter param = ShujiiIkenshoSakuseiIraiParameter.createShujiiIkenshoSakuseiIraiParameter(被保険者番号);
+        ShujiiIkenshoSakuseiIraiParameter param = createHandler(div).createParameter();
         createHandler(div).init(manager.get申請者情報(param).records());
         Models<ShujiiIkenshoIraiJohoIdentifier, ShujiiIkenshoIraiJoho> 主治医意見書作成依頼情報
                 = Models.create(manager.get主治医意見書作成依頼情報(param).records());
