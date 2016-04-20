@@ -295,8 +295,16 @@ public final class JutakuKaishuShinseiJyohoTorokuHandler {
                 div.getJutakuKaishuShinseiContents().getDdlHokensha().setDisabled(true);
                 div.getJutakuKaishuShinseiContents().getJutakuKaishuShinseiResetInfo().setDisabled(true);
                 div.getJutakuKaishuShinseiContents().getShinsaKekkaPanel().setDisabled(true);
-                div.getJutakuKaishuShinseiContents().getShinseishaInfo().setDisabled(true);
-                div.getJutakuKaishuShinseiContents().getShinseishaInfo().getDdlShinseiTorikesuJiyu().setDisabled(false);
+                div.getJutakuKaishuShinseiContents().getShinseishaInfo().getTxtShinseiYMD().setDisabled(true);
+                div.getJutakuKaishuShinseiContents().getShinseishaInfo().getDdlShinseishaKubun().setDisabled(true);
+                div.getJutakuKaishuShinseiContents().getShinseishaInfo().getTxtShinseiRiyu().setDisabled(true);
+                div.getJutakuKaishuShinseiContents().getShinseishaInfo().getBtnJigyosha().setDisabled(true);
+                div.getJutakuKaishuShinseiContents().getShinseishaInfo().getBtnHonninJohoCopy().setDisabled(true);
+                div.getJutakuKaishuShinseiContents().getShinseishaInfo().getTxtShinseishaNameKana().setDisabled(true);
+                div.getJutakuKaishuShinseiContents().getShinseishaInfo().getTxtShinseishaName().setDisabled(true);
+                div.getJutakuKaishuShinseiContents().getShinseishaInfo().getTxtTelNo().setDisabled(true);
+                div.getJutakuKaishuShinseiContents().getShinseishaInfo().getTxtYubinNo().setDisabled(true);
+                div.getJutakuKaishuShinseiContents().getShinseishaInfo().getTxtAddress().setDisabled(true);
                 div.getJutakuKaishuShinseiContents().getJutakuKaishuShinseiReason().setDisabled(true);
                 div.getJutakuKaishuShinseiContents().getShinseishaInfo().getDdlShinseiTorikesuJiyu().setSelectedKey(
                         申請取消事由_空);
