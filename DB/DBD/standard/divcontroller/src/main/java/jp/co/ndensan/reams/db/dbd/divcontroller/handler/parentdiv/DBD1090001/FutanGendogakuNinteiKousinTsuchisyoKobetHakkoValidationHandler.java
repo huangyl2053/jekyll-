@@ -63,26 +63,6 @@ public class FutanGendogakuNinteiKousinTsuchisyoKobetHakkoValidationHandler {
         return pairs;
     }
 
-    /**
-     * 出力チェックボックスをチェックオンの場合、文書番号は空の場合、エラーとする
-     *
-     * @param pairs バリデーションコントロール
-     * @param div FutanGendogakuNinteiKousinTsuchisyoKobetHakkoDiv
-     * @return バリデーション結果
-     */
-    public ValidationMessageControlPairs validateFor文書番号の必須入力(ValidationMessageControlPairs pairs,
-            FutanGendogakuNinteiKousinTsuchisyoKobetHakkoDiv div) {
-
-        IValidationMessages messages = ValidationMessagesFactory.createInstance();
-        messages.add(ValidateChain.validateStart(div).ifNot(FutanGendogakuNinteiKousinTsuchisyoKobetHakkoDivSpec.文書番号の非空チェック)
-                .thenAdd(NoInputMessages.文書番号の必須入力).messages());
-        pairs.add(new ValidationMessageControlDictionaryBuilder().add(
-                NoInputMessages.文書番号の必須入力,
-                div.getHihokenshashoHakkoTaishoshaJoho().getTsuchishoSakuseiKobetsu().
-                getHenkoTsuchiKobetsu().getTxtHenkoTsuchiBunshoNo()).build().check(messages));
-        return pairs;
-    }
-
     private static enum NoInputMessages implements IValidationMessage {
 
         出力対象の選択されていない(UrErrorMessages.選択されていない, "出力対象"),

@@ -39,17 +39,4 @@ public enum FutanGendogakuNinteiKousinTsuchisyoKobetHakkoDivSpec implements IPre
                     getHenkoTsuchiKobetsu().getTxtHenkoTsuchiHakkoYMD() != null;
                 }
             },
-    文書番号の非空チェック {
-                /**
-                 * 文書番号の必須入力です。
-                 *
-                 * @param div SaiketukekaTorokuPanelDiv
-                 * @return 出力チェックボックスをチェックオンの場合、文書番号は空の場合、エラーとする
-                 */
-                @Override
-                public boolean apply(FutanGendogakuNinteiKousinTsuchisyoKobetHakkoDiv div) {
-                    return div.getHihokenshashoHakkoTaishoshaJoho().getTsuchishoSakuseiKobetsu().
-                    getHenkoTsuchiKobetsu().getTxtHenkoTsuchiBunshoNo() != null;
-                }
-            },
 }

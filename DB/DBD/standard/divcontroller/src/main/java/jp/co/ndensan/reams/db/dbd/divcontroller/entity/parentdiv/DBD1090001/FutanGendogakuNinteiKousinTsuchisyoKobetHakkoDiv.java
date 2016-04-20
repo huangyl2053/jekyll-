@@ -37,14 +37,14 @@ public class FutanGendogakuNinteiKousinTsuchisyoKobetHakkoDiv extends Panel {
     private KaigoShikakuKihonDiv ccdKaigoShikakuKihonDiv;
     @JsonProperty("ccdKaigoAtenaInfoDiv")
     private KaigoAtenaInfoDiv ccdKaigoAtenaInfoDiv;
-    @JsonProperty("listIndex")
-    private RString listIndex;
+    @JsonProperty("rirekiNo")
+    private RString rirekiNo;
     @JsonProperty("shikibetsuCode")
     private RString shikibetsuCode;
     @JsonProperty("nowDate")
     private RString nowDate;
-    @JsonProperty("rirekiNo")
-    private RString rirekiNo;
+    @JsonProperty("listIndex")
+    private RString listIndex;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -125,21 +125,21 @@ public class FutanGendogakuNinteiKousinTsuchisyoKobetHakkoDiv extends Panel {
     }
 
     /*
-     * getlistIndex
-     * @return listIndex
+     * getrirekiNo
+     * @return rirekiNo
      */
-    @JsonProperty("listIndex")
-    public RString getListIndex() {
-        return listIndex;
+    @JsonProperty("rirekiNo")
+    public RString getRirekiNo() {
+        return rirekiNo;
     }
 
     /*
-     * setlistIndex
-     * @param listIndex listIndex
+     * setrirekiNo
+     * @param rirekiNo rirekiNo
      */
-    @JsonProperty("listIndex")
-    public void setListIndex(RString listIndex) {
-        this.listIndex = listIndex;
+    @JsonProperty("rirekiNo")
+    public void setRirekiNo(RString rirekiNo) {
+        this.rirekiNo = rirekiNo;
     }
 
     /*
@@ -179,44 +179,44 @@ public class FutanGendogakuNinteiKousinTsuchisyoKobetHakkoDiv extends Panel {
     }
 
     /*
-     * getrirekiNo
-     * @return rirekiNo
+     * getlistIndex
+     * @return listIndex
      */
-    @JsonProperty("rirekiNo")
-    public RString getRirekiNo() {
-        return rirekiNo;
+    @JsonProperty("listIndex")
+    public RString getListIndex() {
+        return listIndex;
     }
 
     /*
-     * setrirekiNo
-     * @param rirekiNo rirekiNo
+     * setlistIndex
+     * @param listIndex listIndex
      */
-    @JsonProperty("rirekiNo")
-    public void setRirekiNo(RString rirekiNo) {
-        this.rirekiNo = rirekiNo;
+    @JsonProperty("listIndex")
+    public void setListIndex(RString listIndex) {
+        this.listIndex = listIndex;
     }
 
     /*
      * [ ショートカットの作成 ]
      */
     @JsonIgnore
-    public Button getBttZenRireki() {
-        return this.getHihokenshashoHakkoTaishoshaJoho().getZengoRireki().getBttZenRireki();
+    public Button getBtnZenRireki() {
+        return this.getHihokenshashoHakkoTaishoshaJoho().getZengoRireki().getBtnZenRireki();
     }
 
     @JsonIgnore
-    public void  setBttZenRireki(Button bttZenRireki) {
-        this.getHihokenshashoHakkoTaishoshaJoho().getZengoRireki().setBttZenRireki(bttZenRireki);
+    public void  setBtnZenRireki(Button btnZenRireki) {
+        this.getHihokenshashoHakkoTaishoshaJoho().getZengoRireki().setBtnZenRireki(btnZenRireki);
     }
 
     @JsonIgnore
-    public Button getBttGoRireki() {
-        return this.getHihokenshashoHakkoTaishoshaJoho().getZengoRireki().getBttGoRireki();
+    public Button getBtnGoRireki() {
+        return this.getHihokenshashoHakkoTaishoshaJoho().getZengoRireki().getBtnGoRireki();
     }
 
     @JsonIgnore
-    public void  setBttGoRireki(Button bttGoRireki) {
-        this.getHihokenshashoHakkoTaishoshaJoho().getZengoRireki().setBttGoRireki(bttGoRireki);
+    public void  setBtnGoRireki(Button btnGoRireki) {
+        this.getHihokenshashoHakkoTaishoshaJoho().getZengoRireki().setBtnGoRireki(btnGoRireki);
     }
 
     // </editor-fold>

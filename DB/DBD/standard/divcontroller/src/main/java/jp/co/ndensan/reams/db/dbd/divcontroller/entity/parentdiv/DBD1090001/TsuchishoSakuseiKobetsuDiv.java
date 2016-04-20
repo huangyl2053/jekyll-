@@ -5,7 +5,6 @@ package jp.co.ndensan.reams.db.dbd.divcontroller.entity.parentdiv.DBD1090001;
  * 不正な動作の原因になります。
  */
 import com.fasterxml.jackson.annotation.JsonProperty;
-import jp.co.ndensan.reams.uz.uza.ui.binding.*;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 
 /**
@@ -21,10 +20,10 @@ public class TsuchishoSakuseiKobetsuDiv extends Panel {
      * コントロール名とフィールド名を取得する
      * private + コントロール名 + フィールド名 の文字列を作成
      */
-    @JsonProperty("dgChohyoSentaku")
-    private DataGrid<dgChohyoSentaku_Row> dgChohyoSentaku;
     @JsonProperty("HenkoTsuchiKobetsu")
     private HenkoTsuchiKobetsuDiv HenkoTsuchiKobetsu;
+    @JsonProperty("FutanGendogakuNinteiHeddaXinseiSyo")
+    private FutanGendogakuNinteiHeddaXinseiSyoDiv FutanGendogakuNinteiHeddaXinseiSyo;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -32,24 +31,6 @@ public class TsuchishoSakuseiKobetsuDiv extends Panel {
      * コントロール名とフィールド名を取得する
      * フィールド名のGetterとSetter を作成
      */
-    /*
-     * getdgChohyoSentaku
-     * @return dgChohyoSentaku
-     */
-    @JsonProperty("dgChohyoSentaku")
-    public DataGrid<dgChohyoSentaku_Row> getDgChohyoSentaku() {
-        return dgChohyoSentaku;
-    }
-
-    /*
-     * setdgChohyoSentaku
-     * @param dgChohyoSentaku dgChohyoSentaku
-     */
-    @JsonProperty("dgChohyoSentaku")
-    public void setDgChohyoSentaku(DataGrid<dgChohyoSentaku_Row> dgChohyoSentaku) {
-        this.dgChohyoSentaku = dgChohyoSentaku;
-    }
-
     /*
      * getHenkoTsuchiKobetsu
      * @return HenkoTsuchiKobetsu
@@ -66,6 +47,24 @@ public class TsuchishoSakuseiKobetsuDiv extends Panel {
     @JsonProperty("HenkoTsuchiKobetsu")
     public void setHenkoTsuchiKobetsu(HenkoTsuchiKobetsuDiv HenkoTsuchiKobetsu) {
         this.HenkoTsuchiKobetsu = HenkoTsuchiKobetsu;
+    }
+
+    /*
+     * getFutanGendogakuNinteiHeddaXinseiSyo
+     * @return FutanGendogakuNinteiHeddaXinseiSyo
+     */
+    @JsonProperty("FutanGendogakuNinteiHeddaXinseiSyo")
+    public FutanGendogakuNinteiHeddaXinseiSyoDiv getFutanGendogakuNinteiHeddaXinseiSyo() {
+        return FutanGendogakuNinteiHeddaXinseiSyo;
+    }
+
+    /*
+     * setFutanGendogakuNinteiHeddaXinseiSyo
+     * @param FutanGendogakuNinteiHeddaXinseiSyo FutanGendogakuNinteiHeddaXinseiSyo
+     */
+    @JsonProperty("FutanGendogakuNinteiHeddaXinseiSyo")
+    public void setFutanGendogakuNinteiHeddaXinseiSyo(FutanGendogakuNinteiHeddaXinseiSyoDiv FutanGendogakuNinteiHeddaXinseiSyo) {
+        this.FutanGendogakuNinteiHeddaXinseiSyo = FutanGendogakuNinteiHeddaXinseiSyo;
     }
 
     // </editor-fold>

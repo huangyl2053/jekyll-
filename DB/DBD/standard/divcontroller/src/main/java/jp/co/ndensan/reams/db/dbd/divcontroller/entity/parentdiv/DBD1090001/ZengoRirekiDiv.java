@@ -21,10 +21,10 @@ public class ZengoRirekiDiv extends Panel {
      * コントロール名とフィールド名を取得する
      * private + コントロール名 + フィールド名 の文字列を作成
      */
-    @JsonProperty("bttZenRireki")
-    private Button bttZenRireki;
-    @JsonProperty("bttGoRireki")
-    private Button bttGoRireki;
+    @JsonProperty("btnZenRireki")
+    private Button btnZenRireki;
+    @JsonProperty("btnGoRireki")
+    private Button btnGoRireki;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -33,39 +33,39 @@ public class ZengoRirekiDiv extends Panel {
      * フィールド名のGetterとSetter を作成
      */
     /*
-     * getbttZenRireki
-     * @return bttZenRireki
+     * getbtnZenRireki
+     * @return btnZenRireki
      */
-    @JsonProperty("bttZenRireki")
-    public Button getBttZenRireki() {
-        return bttZenRireki;
+    @JsonProperty("btnZenRireki")
+    public Button getBtnZenRireki() {
+        return btnZenRireki;
     }
 
     /*
-     * setbttZenRireki
-     * @param bttZenRireki bttZenRireki
+     * setbtnZenRireki
+     * @param btnZenRireki btnZenRireki
      */
-    @JsonProperty("bttZenRireki")
-    public void setBttZenRireki(Button bttZenRireki) {
-        this.bttZenRireki = bttZenRireki;
+    @JsonProperty("btnZenRireki")
+    public void setBtnZenRireki(Button btnZenRireki) {
+        this.btnZenRireki = btnZenRireki;
     }
 
     /*
-     * getbttGoRireki
-     * @return bttGoRireki
+     * getbtnGoRireki
+     * @return btnGoRireki
      */
-    @JsonProperty("bttGoRireki")
-    public Button getBttGoRireki() {
-        return bttGoRireki;
+    @JsonProperty("btnGoRireki")
+    public Button getBtnGoRireki() {
+        return btnGoRireki;
     }
 
     /*
-     * setbttGoRireki
-     * @param bttGoRireki bttGoRireki
+     * setbtnGoRireki
+     * @param btnGoRireki btnGoRireki
      */
-    @JsonProperty("bttGoRireki")
-    public void setBttGoRireki(Button bttGoRireki) {
-        this.bttGoRireki = bttGoRireki;
+    @JsonProperty("btnGoRireki")
+    public void setBtnGoRireki(Button btnGoRireki) {
+        this.btnGoRireki = btnGoRireki;
     }
 
     // </editor-fold>
