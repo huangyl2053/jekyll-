@@ -225,9 +225,9 @@ public class MainPanel {
     private RString getr1(boolean flags) {
         RString r1;
         if (flags) {
-            r1 = new RString(UrInformationMessages.保存終了.toString());
+            r1 = new RString(UrInformationMessages.保存終了.getMessage().toString());
         } else {
-            r1 = new RString(UrErrorMessages.異常終了.toString());
+            r1 = new RString(UrErrorMessages.異常終了.getMessage().toString());
         }
         return r1;
     }
