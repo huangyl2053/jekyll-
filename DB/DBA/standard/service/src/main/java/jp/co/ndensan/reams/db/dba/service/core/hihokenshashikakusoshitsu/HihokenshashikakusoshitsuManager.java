@@ -31,6 +31,7 @@ import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 /**
  * 被保険者台帳管理（資格喪失）クラスです。
  *
+ * @reamsid_L DBA-0552-010 huangh
  */
 public class HihokenshashikakusoshitsuManager {
 
