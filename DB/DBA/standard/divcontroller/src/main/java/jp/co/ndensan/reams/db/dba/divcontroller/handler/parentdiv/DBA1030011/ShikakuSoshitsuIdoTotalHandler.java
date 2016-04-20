@@ -37,13 +37,13 @@ public class ShikakuSoshitsuIdoTotalHandler {
     private static final RString 状態_登録 = new RString("登録");
     private static final RString 状態_更新 = new RString("更新");
 
-    private static final RString DBAMN22001_転出により喪失 = new RString("DBAMN22001_転出により喪失");
-    private static final RString DBAMN22002_死亡により喪失 = new RString("DBAMN22002_死亡により喪失");
-    private static final RString DBAMN22003_転居により喪失_施設入所等 = new RString("DBAMN22003_転居により喪失（施設入所等）");
-    private static final RString DBAMN22004_国籍喪失により喪失 = new RString("DBAMN22004_国籍喪失により喪失");
-    private static final RString DBAMN22005_医療保険未加入により喪失 = new RString("DBAMN22005_医療保険未加入により喪失");
-    private static final RString DBAMN22006_職権により喪失 = new RString("DBAMN22006_職権により喪失");
-    private static final RString DBAMN22007_その他事由により喪失 = new RString("DBAMN22007_その他事由により喪失");
+    private static final RString DBAMN22001_転出により喪失 = new RString("DBAMN22001");
+    private static final RString DBAMN22002_死亡により喪失 = new RString("DBAMN22002");
+    private static final RString DBAMN22003_転居により喪失_施設入所等 = new RString("DBAMN22003");
+    private static final RString DBAMN22004_国籍喪失により喪失 = new RString("DBAMN22004");
+    private static final RString DBAMN22005_医療保険未加入により喪失 = new RString("DBAMN22005");
+    private static final RString DBAMN22006_職権により喪失 = new RString("DBAMN22006");
+    private static final RString DBAMN22007_その他事由により喪失 = new RString("DBAMN22007");
     private static final RString FIRSTREQUEST以外 = new RString("2");
     private static final RString 修正 = new RString("修正");
     private final RString 表示モード = new RString("HihokenrirekiNashiMode");
@@ -149,6 +149,7 @@ public class ShikakuSoshitsuIdoTotalHandler {
         RString menuID = ResponseHolder.getMenuID();
         div.getShikakuSoshitsuJoho().getShikakuTokusoRirekiMain().getShikakuSoshitsuInput().getDdlShikakuShutokuJiyu().setDisabled(true);
         List<KeyValueDataSource> keyValueList = new ArrayList();
+        keyValueList.add(new KeyValueDataSource(new RString("key0"), RString.EMPTY));
         if (DBAMN22001_転出により喪失.equals(menuID)) {
             keyValueList.add(new KeyValueDataSource(ShikakuSoshitsuJiyu.転出.getコード(), ShikakuSoshitsuJiyu.転出.get名称()));
         } else if (DBAMN22002_死亡により喪失.equals(menuID)) {
@@ -179,7 +180,7 @@ public class ShikakuSoshitsuIdoTotalHandler {
             return;
         }
         div.getShikakuSoshitsuJoho().getShikakuTokusoRirekiMain().getShikakuSoshitsuInput().getDdlShikakuShutokuJiyu().setDataSource(keyValueList);
-        div.getShikakuSoshitsuJoho().getShikakuTokusoRirekiMain().getShikakuSoshitsuInput().getDdlShikakuShutokuJiyu().setSelectedIndex(0);
+        div.getShikakuSoshitsuJoho().getShikakuTokusoRirekiMain().getShikakuSoshitsuInput().getDdlShikakuShutokuJiyu().setSelectedIndex(1);
     }
 
     /**
@@ -225,7 +226,7 @@ public class ShikakuSoshitsuIdoTotalHandler {
                         tokusoRirekiList, sikakuKikanList);
                 // TODO
                 if (!RString.isNullOrEmpty(errorCode)) {
-                    throw new ApplicationException(UrErrorMessages.チェックディジットが不正.getMessage());
+                    throw new ApplicationException(UrErrorMessages.コードマスタなし.getMessage());
                 }
                 manager.saveHihokenshaShikakuSoshitsu(識別コード, 被保険者番号,
                         row.getSoshitsuDate().getValue(),
