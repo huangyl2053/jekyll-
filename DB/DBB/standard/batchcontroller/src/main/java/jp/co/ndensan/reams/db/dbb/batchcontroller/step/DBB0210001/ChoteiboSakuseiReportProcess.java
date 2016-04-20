@@ -116,6 +116,7 @@ public class ChoteiboSakuseiReportProcess extends BatchProcessBase<DbT7022ShoriD
     private static final RString MIDDLELINE = new RString("-");
     private static final RString なし = new RString("なし");
     private static final RString 本算定 = new RString("0");
+    private final RString 固定文字 = new RString("該当データがありません");
     private static final RString SELECT_ID = new RString(
             "jp.co.ndensan.reams.db.dbb.persistence.db.mapper.relate.choteibo.IChoteiboSakuseiMapper.select処理日付");
     private IChoteiboSakuseiMapper choteiboSakuseiMapper;
@@ -892,6 +893,16 @@ public class ChoteiboSakuseiReportProcess extends BatchProcessBase<DbT7022ShoriD
     private List<ChoteiboDankaiItem> makeChoteiboDankaiItemList(List<NendoDataEntity> 年度データリスト) {
         List<ChoteiboDankaiItem> dankaiItemList = new ArrayList<>();
         HokenryoDankaiList 保険料段階List = get保険料段階List(年度データリスト.get(0).get賦課年度());
+        if (保険料段階List.to表記List().isEmpty()) {
+            ChoteiboDankaiFuchoItem fuchoItem = new ChoteiboDankaiFuchoItem(RString.EMPTY, RString.EMPTY, RString.EMPTY,
+                    RString.EMPTY, RString.EMPTY, RString.EMPTY, RString.EMPTY, RString.EMPTY, RString.EMPTY);
+            ChoteiboDankaiTokuchoItem tokuchoItem = new ChoteiboDankaiTokuchoItem(RString.EMPTY, RString.EMPTY,
+                    RString.EMPTY, RString.EMPTY, 固定文字, RString.EMPTY, RString.EMPTY, RString.EMPTY, RString.EMPTY);
+            ChoteiboDankaiItem item = new ChoteiboDankaiItem(RString.EMPTY, RString.EMPTY, RString.EMPTY, RString.EMPTY,
+                    fuchoItem, tokuchoItem);
+            dankaiItemList.add(item);
+            return dankaiItemList;
+        }
         for (RString 段階表記 : 保険料段階List.to表記List()) {
             dankaiItemList.add(makeChoteiboDankaiItem(段階表記, 年度データリスト));
         }
