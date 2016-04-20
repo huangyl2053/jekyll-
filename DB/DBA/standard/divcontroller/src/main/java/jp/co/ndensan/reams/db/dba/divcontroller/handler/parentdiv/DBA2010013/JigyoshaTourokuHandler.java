@@ -8,9 +8,10 @@ package jp.co.ndensan.reams.db.dba.divcontroller.handler.parentdiv.DBA2010013;
 import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dba.business.core.kaigojigyoshashisetsukanrio.KaigoJogaiTokureiBusiness;
-import jp.co.ndensan.reams.db.dba.divcontroller.entity.parentdiv.DBA2010013.JigyoshaToutokuDiv;
+import jp.co.ndensan.reams.db.dba.divcontroller.entity.parentdiv.DBA2010013.JigyoshaTourokuDiv;
 import jp.co.ndensan.reams.db.dba.divcontroller.entity.parentdiv.DBA2010013.dgServiceList_Row;
 import jp.co.ndensan.reams.db.dbx.business.core.kaigojigyosha.kaigojigyosha.KaigoJigyosha;
+import jp.co.ndensan.reams.db.dbx.business.core.kaigojigyosha.kaigojigyoshashiteiservice.KaigoJigyoshaShiteiService;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaJusho;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaKanaMeisho;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaMeisho;
@@ -30,9 +31,9 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxFlexibleDate;
  */
 public class JigyoshaTourokuHandler {
 
-    private final JigyoshaToutokuDiv panelDiv;
+    private final JigyoshaTourokuDiv panelDiv;
     private static final RString 状態_追加 = new RString("追加");
-    private static final RString 状態_更新 = new RString("更新");
+    private static final RString 状態_更新 = new RString("修正");
     private static final RString 状態_削除 = new RString("削除");
     private static final RString 状態_照会 = new RString("照会");
     private static final RString 法人等種別 = new RString("12");
@@ -43,7 +44,7 @@ public class JigyoshaTourokuHandler {
      *
      * @param panelDiv 事業者登録Div
      */
-    public JigyoshaTourokuHandler(JigyoshaToutokuDiv panelDiv) {
+    public JigyoshaTourokuHandler(JigyoshaTourokuDiv panelDiv) {
         this.panelDiv = panelDiv;
     }
 
@@ -58,7 +59,8 @@ public class JigyoshaTourokuHandler {
 
         } else if (viewState.equals(状態_更新)) {
             get画面初期の更新モードの表示制御();
-
+            panelDiv.getServiceJigyoshaJoho().getTxtJigyoshaNo().setDisabled(true);
+            panelDiv.getServiceJigyoshaJoho().getBtnJigyoshaNoInputGuide().setDisabled(true);
         } else if (viewState.equals(状態_削除)) {
             get画面初期の削除モードの表示制御();
 
@@ -237,7 +239,35 @@ public class JigyoshaTourokuHandler {
      *
      * @param サービス一覧情報List サービス一覧情報List
      */
-    public void getサービス一覧情報(List<KaigoJogaiTokureiBusiness> サービス一覧情報List) {
+    public void getサービス一覧情報(List<KaigoJigyoshaShiteiService> サービス一覧情報List) {
+        List<dgServiceList_Row> サービス一覧データ = new ArrayList<>();
+        for (KaigoJigyoshaShiteiService result : サービス一覧情報List) {
+            dgServiceList_Row row = new dgServiceList_Row();
+            if (!RString.isNullOrEmpty(result.getサービス種類コード().getColumnValue())) {
+                row.setServiceType(result.getサービス種類コード().getColumnValue());
+                TextBoxFlexibleDate 開始日 = new TextBoxFlexibleDate();
+                開始日.setValue(new FlexibleDate(result.get有効開始日().toString()));
+                TextBoxFlexibleDate 終了日 = new TextBoxFlexibleDate();
+                FlexibleDate 有効終了日 = result.get有効終了日();
+                終了日.setValue(有効終了日 == null ? FlexibleDate.EMPTY : 有効終了日);
+                row.setKaishiDate(開始日);
+                row.setShuryoDate(終了日);
+                AtenaMeisho 事業者名称 = result.get事業者名称();
+                row.setJigyoshaMei(事業者名称 == null ? RString.EMPTY : 事業者名称.getColumnValue());
+                AtenaMeisho 管理者氏名 = result.get管理者氏名();
+                row.setKanrishaMei(管理者氏名 == null ? RString.EMPTY : 管理者氏名.getColumnValue());
+                サービス一覧データ.add(row);
+            }
+        }
+        panelDiv.getServiceJoho().getDgServiceList().setDataSource(サービス一覧データ);
+    }
+    
+    /**
+     * 「再表示」ボタンを押下時、サービス一覧情報を設定します。
+     *
+     * @param サービス一覧情報List サービス一覧情報List
+     */
+    public void getサービス一覧情報再表示(List<KaigoJogaiTokureiBusiness> サービス一覧情報List) {
         List<dgServiceList_Row> サービス一覧データ = new ArrayList<>();
         for (KaigoJogaiTokureiBusiness result : サービス一覧情報List) {
             dgServiceList_Row row = new dgServiceList_Row();

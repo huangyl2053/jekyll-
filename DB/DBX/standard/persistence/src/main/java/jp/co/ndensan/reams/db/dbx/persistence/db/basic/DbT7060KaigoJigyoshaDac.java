@@ -168,4 +168,22 @@ public class DbT7060KaigoJigyoshaDac implements ISaveable<DbT7060KaigoJigyoshaEn
                 .order(by(DbT7060KaigoJigyosha.yukoKaishiYMD, Order.DESC)).limit(1)
                 .toObject(DbT7060KaigoJigyoshaEntity.class);
     }
+    
+    /**
+     * 事業者情報の取得。
+     *
+     * @param 事業者番号 JigyoshaNo
+     * @return DbT7060KaigoJigyoshaEntity
+     * @throws NullPointerException 引数のいずれかがnullの場合
+     */
+    public List<DbT7060KaigoJigyoshaEntity> select事業者情報(JigyoshaNo 事業者番号) throws NullPointerException {
+        requireNonNull(事業者番号, UrSystemErrorMessages.値がnull.getReplacedMessage("事業者番号"));
+        DbAccessorNormalType accessor = new DbAccessorNormalType(session);
+        return accessor.select().
+                table(DbT7060KaigoJigyosha.class).
+                where(and(
+                                eq(DbT7060KaigoJigyosha.jigyoshaNo, 事業者番号),
+                                eq(DbT7060KaigoJigyosha.isDeleted, false)))
+                .toList(DbT7060KaigoJigyoshaEntity.class);
+    }
 }
