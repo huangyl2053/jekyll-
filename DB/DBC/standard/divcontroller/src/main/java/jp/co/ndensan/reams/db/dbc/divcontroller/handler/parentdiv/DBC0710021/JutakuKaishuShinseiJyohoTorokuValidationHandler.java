@@ -150,7 +150,7 @@ public class JutakuKaishuShinseiJyohoTorokuValidationHandler {
         申請日が未入力(UrErrorMessages.必須, "申請日"),
         申請取消事由が未入力(UrErrorMessages.必須, "申請取消事由"),
         領収日が未入力(UrErrorMessages.必須, "領収日"),
-        提供着工年月が申請日の年月と一致しない(DbcErrorMessages.サービス年月と不一致);
+        提供着工年月が申請日の年月と一致しない(DbcErrorMessages.着工日不一致);
         private final Message message;
 
         JutakuKaishuShinseiJyohoTorokuValidationMessages(IMessageGettable message, String... replacements) {

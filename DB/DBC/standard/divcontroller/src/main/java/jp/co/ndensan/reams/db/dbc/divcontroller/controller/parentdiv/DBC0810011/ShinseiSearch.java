@@ -11,7 +11,6 @@ import static jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC08100
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0810011.ShinseiSearchDiv;
 import jp.co.ndensan.reams.db.dbc.divcontroller.viewbox.ViewStateKeys;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
-
 import jp.co.ndensan.reams.db.dbz.service.TaishoshaKey;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
@@ -40,6 +39,7 @@ public class ShinseiSearch {
         TaishoshaKey 引継ぎデータ = ViewStateHolder.get(ViewStateKeys.資格対象者, TaishoshaKey.class);
         ShikibetsuCode 識別コード = 引継ぎデータ.get識別コード();
         div.getPanelAtenaShikaku().getCcdKaigoAtenalInfo().onLoad(識別コード);
+        ViewStateHolder.put(ViewStateKeys.識別コード, 識別コード);
         HihokenshaNo 被保険者番号 = 引継ぎデータ.get被保険者番号();
         div.getPanelAtenaShikaku().getCcdKaigoShikakuKihon().onLoad(被保険者番号);
         div.getPanelShokan().getCcdShokanShinseiList().initialize(照会, 被保険者番号, FlexibleYearMonth.MIN, FlexibleYearMonth.MAX);
