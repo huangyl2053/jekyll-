@@ -7,7 +7,6 @@ package jp.co.ndensan.reams.db.dba.business.report.hihokenshadaicho;
 
 import jp.co.ndensan.reams.db.dba.entity.db.relate.hihokenshadaichosakusei.SeikatsuHogoJukyushaDivisionEntity;
 import jp.co.ndensan.reams.db.dba.entity.report.hihokenshadaicho.HihokenshaDaichoReportSource;
-import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
  * 被保険者台帳_生活保護Editorです。
@@ -46,14 +45,10 @@ public class HihokenshaDaichoSeikatsuhogoEditor implements IHihokenshaDaichoEdit
 
     private HihokenshaDaichoReportSource editBody(HihokenshaDaichoReportSource source) {
         source.listSeikatsuhogo_1 = entity.get生活保護No().get(index);
-        source.listSeikatsuhogo_2 = entity.get受給開始日().get(index) == null
-                ? RString.EMPTY : new RString(entity.get受給開始日().get(index).toString());
-        source.listSeikatsuhogo_3 = entity.get受給廃止日().get(index) == null
-                ? RString.EMPTY : new RString(entity.get受給廃止日().get(index).toString());
-        source.listSeikatsuhogo_4 = entity.get全額停止開始日().get(index) == null
-                ? RString.EMPTY : new RString(entity.get全額停止開始日().get(index).toString());
-        source.listSeikatsuhogo_5 = entity.get全額停止終了日().get(index) == null
-                ? RString.EMPTY : new RString(entity.get全額停止終了日().get(index).toString());
+        source.listSeikatsuhogo_2 = HihokenshaDaichoEditor.dataFomart(entity.get受給開始日().get(index));
+        source.listSeikatsuhogo_3 = HihokenshaDaichoEditor.dataFomart(entity.get受給廃止日().get(index));
+        source.listSeikatsuhogo_4 = HihokenshaDaichoEditor.dataFomart(entity.get全額停止開始日().get(index));
+        source.listSeikatsuhogo_5 = HihokenshaDaichoEditor.dataFomart(entity.get全額停止終了日().get(index));
         source.listSeikatsuhogo_6 = entity.get扶助種類().get(index);
         return source;
     }

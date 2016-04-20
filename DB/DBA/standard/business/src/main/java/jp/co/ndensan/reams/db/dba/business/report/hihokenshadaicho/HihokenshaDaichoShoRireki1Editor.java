@@ -7,7 +7,6 @@ package jp.co.ndensan.reams.db.dba.business.report.hihokenshadaicho;
 
 import jp.co.ndensan.reams.db.dba.entity.db.relate.hihokenshadaichosakusei.ShoKofuKaishuDivisionSumEntity;
 import jp.co.ndensan.reams.db.dba.entity.report.hihokenshadaicho.HihokenshaDaichoReportSource;
-import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
  * 被保険者台帳_被保険者証発行履歴情報Editorです。
@@ -46,11 +45,9 @@ public class HihokenshaDaichoShoRireki1Editor implements IHihokenshaDaichoEditor
 
     private HihokenshaDaichoReportSource editBody(HihokenshaDaichoReportSource source) {
         source.listShoRireki1_1 = entity.get証履歴No1().get(index);
-        source.listShoRireki1_2 = entity.get証履歴発行日1().get(index) == null
-                ? RString.EMPTY : new RString(entity.get証履歴発行日1().get(index).toString());
+        source.listShoRireki1_2 = HihokenshaDaichoEditor.dataFomart(entity.get証履歴発行日1().get(index));
         source.listShoRireki1_3 = entity.get証履歴事由名称1().get(index);
-        source.listShoRireki1_4 = entity.get証履歴回収日1().get(index) == null
-                ? RString.EMPTY : new RString(entity.get証履歴回収日1().get(index).toString());
+        source.listShoRireki1_4 = HihokenshaDaichoEditor.dataFomart(entity.get証履歴回収日1().get(index));
         return source;
     }
 }

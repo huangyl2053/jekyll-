@@ -7,7 +7,6 @@ package jp.co.ndensan.reams.db.dba.business.report.hihokenshadaicho;
 
 import jp.co.ndensan.reams.db.dba.entity.db.relate.hihokenshadaichosakusei.RoreiFukushiNenkinJukyushaDivisionEntity;
 import jp.co.ndensan.reams.db.dba.entity.report.hihokenshadaicho.HihokenshaDaichoReportSource;
-import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
  * 被保険者台帳_老齢福祉Editorです。
@@ -46,10 +45,8 @@ public class HihokenshaDaichoRoreiFukushiEditor implements IHihokenshaDaichoEdit
 
     private HihokenshaDaichoReportSource editBody(HihokenshaDaichoReportSource source) {
         source.listRoreiFukushi_1 = entity.get老齢福祉No().get(index);
-        source.listRoreiFukushi_2 = entity.get老齢福祉受給開始日().get(index) == null
-                ? RString.EMPTY : new RString(entity.get老齢福祉受給開始日().get(index).toString());
-        source.listRoreiFukushi_3 = entity.get老齢福祉受給終了日().get(index) == null
-                ? RString.EMPTY : new RString(entity.get老齢福祉受給終了日().get(index).toString());
+        source.listRoreiFukushi_2 = HihokenshaDaichoEditor.dataFomart(entity.get老齢福祉受給開始日().get(index));
+        source.listRoreiFukushi_3 = HihokenshaDaichoEditor.dataFomart(entity.get老齢福祉受給終了日().get(index));
         return source;
     }
 }

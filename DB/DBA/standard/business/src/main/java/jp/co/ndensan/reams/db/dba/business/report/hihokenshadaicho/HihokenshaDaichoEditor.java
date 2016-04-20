@@ -7,6 +7,7 @@ package jp.co.ndensan.reams.db.dba.business.report.hihokenshadaicho;
 
 import jp.co.ndensan.reams.db.dba.business.core.hihokenshadaichosakusei.HihokenshaDaichoSakusei;
 import jp.co.ndensan.reams.db.dba.entity.report.hihokenshadaicho.HihokenshaDaichoReportSource;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
@@ -17,6 +18,8 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 public class HihokenshaDaichoEditor implements IHihokenshaDaichoEditor {
 
     private final HihokenshaDaichoSakusei joho;
+    private static final RString FOMART_TEN = new RString(".");
+    private static final RString FOMART_LINE = new RString(".");
 
     /**
      * コンストラクタです。
@@ -73,6 +76,21 @@ public class HihokenshaDaichoEditor implements IHihokenshaDaichoEditor {
         source.iryohokenshaName = joho.get医療保険者名称();
         source.sochiHokensha = joho.get措置保険者タイトル();
         source.kyuHokensha = joho.get旧保険者タイトル();
+        source.junno = joho.get順番号();
         return source;
+    }
+
+    /**
+     * 日付型はFlexibleDateをRStringに変換します。
+     *
+     * @param date 変換前 yyyyMMdd
+     * @return 変換後 yyyy/MM/dd
+     */
+    public static RString dataFomart(FlexibleDate date) {
+        RString fomartDate = RString.EMPTY;
+        if (date != null) {
+            fomartDate = date.seireki().toDateString().replace(FOMART_TEN, FOMART_LINE);
+        }
+        return fomartDate;
     }
 }
