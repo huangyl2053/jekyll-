@@ -108,7 +108,7 @@ public class TekiyoJogaiRireki {
         if (new RString(UrQuestionMessages.入力内容の破棄.getMessage().getCode())
                 .equals(ResponseHolder.getMessageCode())
                 && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
-            getHandler(requestDiv).onClick_Torikeshi(requestDiv.getStauts());
+            getHandler(requestDiv).onClick_Torikeshi();
         }
         return ResponseData.of(requestDiv).respond();
     }
