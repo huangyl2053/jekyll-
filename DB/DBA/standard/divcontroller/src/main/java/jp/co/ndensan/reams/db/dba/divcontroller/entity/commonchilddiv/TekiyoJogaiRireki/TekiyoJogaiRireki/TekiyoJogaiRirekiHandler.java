@@ -668,15 +668,32 @@ public class TekiyoJogaiRirekiHandler {
         div.getPanelTekiyoInput().getDdlTekiyoJiyu().setDataSource(set適用事由());
         div.getPanelTekiyoInput().getDdlKaijyoJiyu().setDataSource(set解除事由());
         if (適用除外者情報 != null && !適用除外者情報.isEmpty()) {
-            div.getPanelTekiyoInput().getTxtTekiyoDate().setValue(
-                    new RDate(適用除外者情報.get(0).get適用年月日().toString()));
-            div.getPanelTekiyoInput().getTxtTekiyoTodokeDate().setValue(
-                    new RDate(適用除外者情報.get(0).get適用届出年月日().toString()));
+            if (適用除外者情報.get(0).get適用年月日() != null) {
+                div.getPanelTekiyoInput().getTxtTekiyoDate().setValue(
+                        new RDate(適用除外者情報.get(0).get適用年月日().toString()));
+            } else {
+                div.getPanelTekiyoInput().getTxtTekiyoDate().clearValue();
+            }
+            if (適用除外者情報.get(0).get適用届出年月日() != null) {
+                div.getPanelTekiyoInput().getTxtTekiyoTodokeDate().setValue(
+                        new RDate(適用除外者情報.get(0).get適用届出年月日().toString()));
+            } else {
+                div.getPanelTekiyoInput().getTxtTekiyoTodokeDate().clearValue();
+            }
             div.getPanelTekiyoInput().getDdlTekiyoJiyu().setSelectedKey(適用除外者情報.get(0).get適用除外適用事由コード());
-            div.getPanelTekiyoInput().getTxtKayijoDate().setValue(
-                    new RDate(適用除外者情報.get(0).get解除年月日().toString()));
-            div.getPanelTekiyoInput().getTxtKaijoTodokedeDate().setValue(
-                    new RDate(適用除外者情報.get(0).get解除届出年月日().toString()));
+
+            if (適用除外者情報.get(0).get解除年月日() != null) {
+                div.getPanelTekiyoInput().getTxtKayijoDate().setValue(
+                        new RDate(適用除外者情報.get(0).get解除年月日().toString()));
+            } else {
+                div.getPanelTekiyoInput().getTxtKayijoDate().clearValue();
+            }
+            if (適用除外者情報.get(0).get解除届出年月日() != null) {
+                div.getPanelTekiyoInput().getTxtKaijoTodokedeDate().setValue(
+                        new RDate(適用除外者情報.get(0).get解除届出年月日().toString()));
+            } else {
+                div.getPanelTekiyoInput().getTxtKaijoTodokedeDate().clearValue();
+            }
             div.getPanelTekiyoInput().getDdlKaijyoJiyu().setSelectedKey(適用除外者情報.get(0).get適用除外解除事由コード());
         }
         div.getPanelTekiyoInput().getTxtTekiyoDate().setDisabled(true);
