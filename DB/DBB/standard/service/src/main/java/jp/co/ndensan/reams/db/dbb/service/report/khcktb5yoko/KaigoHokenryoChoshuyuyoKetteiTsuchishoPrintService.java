@@ -40,9 +40,10 @@ import jp.co.ndensan.reams.uz.uza.report.source.breaks.BreakAggregator;
  */
 public class KaigoHokenryoChoshuyuyoKetteiTsuchishoPrintService {
 
-    private static final int ONE = 1;
+    private static final int START_NUMBER = 1;
     private static final int END_NUMBER = 15;
-    private static final RString 種別コード = new RString("DBB100081");
+    private static final RString B5種別コード = new RString("DBB100081");
+    private static final RString A4種別コード = new RString("DBB100082");
 
     /**
      * printメソッド
@@ -63,13 +64,13 @@ public class KaigoHokenryoChoshuyuyoKetteiTsuchishoPrintService {
         try (ReportManager reportManager = new ReportManager()) {
             try (ReportAssembler<KaigoHokenryoChoshuyuyoKetteiTsuchishoB5YokoSource> assembler = createAssembler(property, reportManager)) {
                 INinshoshaManager manager = new _NinshoshaManager();
-                Ninshosha 認証者 = manager.get帳票認証者(GyomuCode.DB介護保険, 種別コード);
+                Ninshosha 認証者 = manager.get帳票認証者(GyomuCode.DB介護保険, B5種別コード);
                 NinshoshaSource sourceBuilder = NinshoshaSourceBuilderFactory.createInstance(認証者,
                         徴収猶予決定通知書情報.get地方公共団体(), assembler.getImageFolderPath(), 発行日).buildSource();
                 ReportSourceWriter<KaigoHokenryoChoshuyuyoKetteiTsuchishoB5YokoSource> reportSourceWriter
                         = new ReportSourceWriter(assembler);
 
-                for (int index = ONE; index < END_NUMBER; index++) {
+                for (int index = START_NUMBER; index < END_NUMBER; index++) {
                     HyojiCodes 表示コード = get表示コード(徴収猶予決定通知書情報);
 
                     KaigoHokenryoChoshuyuyoKetteiTsuchishoB5YokoReport report
@@ -101,13 +102,13 @@ public class KaigoHokenryoChoshuyuyoKetteiTsuchishoPrintService {
         try (ReportManager reportManager = new ReportManager()) {
             try (ReportAssembler<KaigoHokenryoChoshuyuyoKetteiTsuchishoA4TateSource> assembler = createAssembler(property, reportManager)) {
                 INinshoshaManager manager = new _NinshoshaManager();
-                Ninshosha 認証者 = manager.get帳票認証者(GyomuCode.DB介護保険, 種別コード);
+                Ninshosha 認証者 = manager.get帳票認証者(GyomuCode.DB介護保険, A4種別コード);
                 NinshoshaSource sourceBuilder = NinshoshaSourceBuilderFactory.createInstance(認証者,
                         徴収猶予決定通知書情報.get地方公共団体(), assembler.getImageFolderPath(), 発行日).buildSource();
                 ReportSourceWriter<KaigoHokenryoChoshuyuyoKetteiTsuchishoA4TateSource> reportSourceWriter
                         = new ReportSourceWriter(assembler);
 
-                for (int index = ONE; index < END_NUMBER; index++) {
+                for (int index = START_NUMBER; index < END_NUMBER; index++) {
                     HyojiCodes 表示コード = get表示コード(徴収猶予決定通知書情報);
 
                     KaigoHokenryoChoshuyuyoKetteiTsuchishoA4TateReport report
@@ -124,14 +125,19 @@ public class KaigoHokenryoChoshuyuyoKetteiTsuchishoPrintService {
     private HyojiCodes get表示コード(KaigoHokenryoChoshuyuyoKetteiTsuchishoB5YokoJoho 徴収猶予決定通知書情報) {
 
         HyojiCodeResearcher hyojiCodeResearcher = new HyojiCodeResearcher();
-        return hyojiCodeResearcher.create表示コード情報(
-                徴収猶予決定通知書情報.get帳票制御共通().toEntity(),
-                new RString(徴収猶予決定通知書情報.get宛名().get住所().get町域コード().toString()),
-                new RString(徴収猶予決定通知書情報.get宛名().get行政区画().getGyoseiku().getコード().toString()),
-                new RString(徴収猶予決定通知書情報.get宛名().get行政区画().getChiku1().getコード().toString()),
-                new RString(徴収猶予決定通知書情報.get宛名().get行政区画().getChiku2().getコード().toString()),
-                new RString(徴収猶予決定通知書情報.get宛名().get行政区画().getChiku3().getコード().toString()),
-                new RString(徴収猶予決定通知書情報.get納組情報().getNokumi().getNokumiCode().toString()));
+        if (isNotNull(徴収猶予決定通知書情報.get帳票制御共通()) && isNotNull(徴収猶予決定通知書情報.get宛名())
+                && isNotNull(徴収猶予決定通知書情報.get納組情報())) {
+            return hyojiCodeResearcher.create表示コード情報(
+                    徴収猶予決定通知書情報.get帳票制御共通().toEntity(),
+                    徴収猶予決定通知書情報.get宛名().get住所().get町域コード().value(),
+                    徴収猶予決定通知書情報.get宛名().get行政区画().getGyoseiku().getコード().value(),
+                    徴収猶予決定通知書情報.get宛名().get行政区画().getChiku1().getコード().value(),
+                    徴収猶予決定通知書情報.get宛名().get行政区画().getChiku2().getコード().value(),
+                    徴収猶予決定通知書情報.get宛名().get行政区画().getChiku3().getコード().value(),
+                    徴収猶予決定通知書情報.get納組情報().getNokumi().getNokumiCode());
+        } else {
+            return null;
+        }
     }
 
     private static <T extends IReportSource, R extends Report<T>> ReportAssembler<T> createAssembler(
@@ -143,5 +149,9 @@ public class KaigoHokenryoChoshuyuyoKetteiTsuchishoPrintService {
         builder.isHojinNo(property.containsHojinNo());
         builder.isKojinNo(property.containsKojinNo());
         return builder.<T>create();
+    }
+
+    private boolean isNotNull(Object object) {
+        return object != null;
     }
 }

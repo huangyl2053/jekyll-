@@ -23,7 +23,11 @@ import jp.co.ndensan.reams.db.dbz.definition.core.enumeratedtype.ChoshuHohoKibet
 import jp.co.ndensan.reams.ur.urz.business.core.date.DateEditor;
 import jp.co.ndensan.reams.ur.urz.entity.report.parts.ninshosha.NinshoshaSource;
 import jp.co.ndensan.reams.ur.urz.entity.report.sofubutsuatesaki.SofubutsuAtesakiSource;
+import jp.co.ndensan.reams.uz.uza.lang.EraType;
+import jp.co.ndensan.reams.uz.uza.lang.FillType;
+import jp.co.ndensan.reams.uz.uza.lang.FirstYear;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.lang.Separator;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.util.editor.DecimalFormatter;
 
@@ -43,11 +47,10 @@ public class KaigoHokenryoChoshuyuyoKetteiTsuchishoB5YokoEditor
     private final HyojiCodes 表示コード;
     private final int index;
 
-    private static final int ONE = 1;
-    private static final int ZERO = 0;
-    private static final int TEN = 10;
+    private static final int 定数_ONE = 1;
+    private static final int 定数_ZERO = 0;
+    private static final int 定数_TEN = 10;
     private static final RString RSTR_0 = new RString("　");
-    private static final RString 随時 = new RString("随時");
     private static final RString 波線 = new RString("～");
     private static final RString 期_1 = new RString("01");
     private static final RString 期_2 = new RString("02");
@@ -104,104 +107,136 @@ public class KaigoHokenryoChoshuyuyoKetteiTsuchishoB5YokoEditor
         期月リスト_特徴 = 月期対応取得_特徴.get期月リスト();
         FuchoKiUtil 月期対応取得_普徴 = new FuchoKiUtil();
         期月リスト_普徴 = 月期対応取得_普徴.get期月リスト();
-        List<KibetsuChoshyuYuyoKikan> 期別徴収猶予期間List = get期別徴収猶予期間リストを生成する(
+        KibetsuChoshyuYuyoKikan 期別徴収猶予期間 = get期別徴収猶予期間リストを生成する(
                 徴収猶予決定通知書情報, 期月リスト_特徴, 期月リスト_普徴, index);
         List<RString> 随時リスト = get随時リストを生成する(期月リスト_普徴, index);
 
         source.bunshoNo = 文書番号;
-        source.choteiNendo = 徴収猶予決定通知書情報.get徴収猶予の情報().get調定年度();
-        source.fukaNendo = 徴収猶予決定通知書情報.get徴収猶予の情報().get調定年度();
-        source.ketteiKekka = 徴収猶予決定通知書情報.get徴収猶予の情報().get徴収猶予状態区分();
-        source.hyojicodeName1 = 表示コード.get表示コード名１();
-        source.hyojicodeName2 = 表示コード.get表示コード名２();
-        source.hyojicodeName3 = 表示コード.get表示コード名３();
-        source.hyojicode1 = 表示コード.get表示コード１();
-        source.hyojicode2 = 表示コード.get表示コード２();
-        source.hyojicode3 = 表示コード.get表示コード３();
-        source.tsuchishoNo = 徴収猶予決定通知書情報.get徴収猶予の情報().get通知書番号();
-        source.setaiCode = 徴収猶予決定通知書情報.get徴収猶予の情報().get世帯コード();
-        source.hihokenshaNo = 徴収猶予決定通知書情報.get徴収猶予の情報().get被保険者番号();
-        source.shikibetsucode = 徴収猶予決定通知書情報.get徴収猶予の情報().get識別コード();
-        source.ketteiYMD = 徴収猶予決定通知書情報.get徴収猶予の情報().get徴収猶予決定日();
-        source.ketteiRiyu1 = 徴収猶予決定通知書情報.get徴収猶予の情報().get徴収猶予種類();
-        source.ketteiRiyu2 = 徴収猶予決定通知書情報.get徴収猶予の情報().get徴収猶予取消事由();
-        source.listKibetsu_1 = 期別徴収猶予期間List.get(0).get特徴期();
-        source.listKibetsu_2 = 期別徴収猶予期間List.get(0).get特徴月();
-        source.listKibetsu_3 = 期別徴収猶予期間List.get(0).get特徴期別金額();
-        source.listKibetsu_4 = 期別徴収猶予期間List.get(0).get普徴期();
-        source.listKibetsu_5 = 期別徴収猶予期間List.get(0).get普徴月();
-        source.listKibetsu_6 = 期別徴収猶予期間List.get(0).get普徴期別金額();
-        source.listKibetsu_7 = 期別徴収猶予期間List.get(0).get徴収猶予期間();
-        source.listZuiji_1 = 随時リスト.get(0);
+        if (isNotNull(表示コード)) {
+            source.hyojicodeName1 = 表示コード.get表示コード名１();
+            source.hyojicodeName2 = 表示コード.get表示コード名２();
+            source.hyojicodeName3 = 表示コード.get表示コード名３();
+            source.hyojicode1 = 表示コード.get表示コード１();
+            source.hyojicode2 = 表示コード.get表示コード２();
+            source.hyojicode3 = 表示コード.get表示コード３();
+        }
+
+        if (isNotNull(徴収猶予決定通知書情報.get徴収猶予の情報())) {
+            if (isNotNull(徴収猶予決定通知書情報.get徴収猶予の情報().get調定年度())) {
+                source.choteiNendo = 徴収猶予決定通知書情報.get徴収猶予の情報().get調定年度().wareki()
+                        .eraType(EraType.KANJI).firstYear(FirstYear.ICHI_NEN).toDateString();
+            }
+            if (isNotNull(徴収猶予決定通知書情報.get徴収猶予の情報().get賦課年度())) {
+                source.fukaNendo = 徴収猶予決定通知書情報.get徴収猶予の情報().get賦課年度().wareki()
+                        .eraType(EraType.KANJI).firstYear(FirstYear.ICHI_NEN).toDateString();
+            }
+            source.ketteiKekka = 徴収猶予決定通知書情報.get徴収猶予の情報().get徴収猶予状態区分();
+            source.tsuchishoNo = 徴収猶予決定通知書情報.get徴収猶予の情報().get通知書番号();
+            source.setaiCode = 徴収猶予決定通知書情報.get徴収猶予の情報().get世帯コード();
+            source.hihokenshaNo = 徴収猶予決定通知書情報.get徴収猶予の情報().get被保険者番号();
+            source.shikibetsucode = 徴収猶予決定通知書情報.get徴収猶予の情報().get識別コード();
+            if (isNotNull(徴収猶予決定通知書情報.get徴収猶予の情報().get徴収猶予決定日())) {
+                source.ketteiYMD = 徴収猶予決定通知書情報.get徴収猶予の情報().get徴収猶予決定日()
+                        .wareki().eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN)
+                        .separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString();
+            }
+            if (isNotNull(徴収猶予決定通知書情報.get徴収猶予の情報().get徴収猶予種類())) {
+                source.ketteiRiyu1 = 徴収猶予決定通知書情報.get徴収猶予の情報().get徴収猶予種類().getMeisho();
+            }
+            source.ketteiRiyu2 = 徴収猶予決定通知書情報.get徴収猶予の情報().get徴収猶予取消事由();
+        }
+
+        if (isNotNull(期別徴収猶予期間)) {
+            source.listKibetsu_1 = 期別徴収猶予期間.get特徴期();
+            source.listKibetsu_2 = 期別徴収猶予期間.get特徴月();
+            source.listKibetsu_3 = 期別徴収猶予期間.get特徴期別金額();
+            source.listKibetsu_4 = 期別徴収猶予期間.get普徴期();
+            source.listKibetsu_5 = 期別徴収猶予期間.get普徴月();
+            source.listKibetsu_6 = 期別徴収猶予期間.get普徴期別金額();
+            source.listKibetsu_7 = 期別徴収猶予期間.get徴収猶予期間();
+        }
+
+        if (!随時リスト.isEmpty()) {
+            source.listZuiji_1 = 随時リスト.get(0);
+        }
+
         source.bikoTitle = 通知書定型文;
         source.biko = 通知書定型文;
 
-        source.hakkoYMD = sourceBuilder.hakkoYMD;
-        source.denshiKoin = sourceBuilder.denshiKoin;
-        source.ninshoshaYakushokuMei = sourceBuilder.ninshoshaYakushokuMei;
-        source.koinMojiretsu = sourceBuilder.koinMojiretsu;
-        source.ninshoshaShimeiKakenai = sourceBuilder.ninshoshaShimeiKakenai;
-        source.ninshoshaShimeiKakeru = sourceBuilder.ninshoshaShimeiKakeru;
-        source.koinShoryaku = sourceBuilder.koinShoryaku;
+        if (sourceBuilder != null) {
+            source.hakkoYMD = sourceBuilder.hakkoYMD;
+            source.denshiKoin = sourceBuilder.denshiKoin;
+            source.ninshoshaYakushokuMei = sourceBuilder.ninshoshaYakushokuMei;
+            source.koinMojiretsu = sourceBuilder.koinMojiretsu;
+            source.ninshoshaShimeiKakenai = sourceBuilder.ninshoshaShimeiKakenai;
+            source.ninshoshaShimeiKakeru = sourceBuilder.ninshoshaShimeiKakeru;
+            source.koinShoryaku = sourceBuilder.koinShoryaku;
 
-        CompKaigoToiawasesakiSource buildSource = 介護問合せ先ソースビルダー.buildSource();
-        source.yubinBango = buildSource.yubinBango;
-        source.shozaichi = buildSource.shozaichi;
-        source.choshaBushoName = buildSource.choshaBushoName;
-        source.tantoName = buildSource.tantoName;
-        source.telNo = buildSource.telNo;
-        source.naisenLabel = buildSource.naisenLabel;
-        source.naisenNo = buildSource.naisenNo;
+        }
 
-        // TODO
-        EditedAtesaki 編集後宛先 = new EditedAtesaki(徴収猶予決定通知書情報.get宛先(),
-                徴収猶予決定通知書情報.get地方公共団体(), 徴収猶予決定通知書情報.get帳票制御共通(),
-                get送付物宛先ソース(), null, true, null, null, null, null);
+        if (isNotNull(介護問合せ先ソースビルダー)) {
+            CompKaigoToiawasesakiSource buildSource = 介護問合せ先ソースビルダー.buildSource();
+            source.yubinBango = buildSource.yubinBango;
+            source.shozaichi = buildSource.shozaichi;
+            source.choshaBushoName = buildSource.choshaBushoName;
+            source.tantoName = buildSource.tantoName;
+            source.telNo = buildSource.telNo;
+            source.naisenLabel = buildSource.naisenLabel;
+            source.naisenNo = buildSource.naisenNo;
+        }
 
-        SofubutsuAtesakiSource sofuSource = 編集後宛先.getSofubutsuAtesakiSource().get送付物宛先ソース();
+        if (isNotNull(徴収猶予決定通知書情報.get宛先()) && isNotNull(徴収猶予決定通知書情報.get地方公共団体())
+                && isNotNull(徴収猶予決定通知書情報.get帳票制御共通())) {
+            // TODO
+            EditedAtesaki 編集後宛先 = new EditedAtesaki(徴収猶予決定通知書情報.get宛先(),
+                    徴収猶予決定通知書情報.get地方公共団体(), 徴収猶予決定通知書情報.get帳票制御共通(),
+                    get送付物宛先ソース(), null, true, null, null, null, null);
 
-        source.yubinNo = sofuSource.yubinNo;
-        source.gyoseiku = sofuSource.gyoseiku;
-        source.jusho3 = sofuSource.jusho3;
-        source.jushoText = sofuSource.jushoText;
-        source.jusho1 = sofuSource.jusho1;
-        source.jusho2 = sofuSource.jusho2;
-        source.katagakiText = sofuSource.katagakiText;
-        source.katagaki2 = sofuSource.katagaki2;
-        source.katagakiSmall2 = sofuSource.katagakiSmall2;
-        source.katagaki1 = sofuSource.katagaki1;
-        source.katagakiSmall1 = sofuSource.katagakiSmall1;
-        source.kakkoRight2 = sofuSource.kakkoRight2;
-        source.kakkoRight1 = sofuSource.kakkoRight1;
-        source.shimei2 = sofuSource.shimei2;
-        source.shimeiSmall2 = sofuSource.shimeiSmall2;
-        source.shimeiText = sofuSource.shimeiText;
-        source.meishoFuyo2 = sofuSource.meishoFuyo2;
-        source.shimeiSmall1 = sofuSource.shimeiSmall1;
-        source.dainoKubunMei = sofuSource.dainoKubunMei;
-        source.shimei1 = sofuSource.shimei1;
-        source.meishoFuyo1 = sofuSource.meishoFuyo1;
-        source.samabunShimeiText = sofuSource.samabunShimeiText;
-        source.samabunShimeiSmall2 = sofuSource.samabunShimeiSmall2;
-        source.samaBun2 = sofuSource.samaBun2;
-        source.kakkoLeft2 = sofuSource.kakkoLeft2;
-        source.samabunShimei2 = sofuSource.samabunShimei2;
-        source.kakkoLeft1 = sofuSource.kakkoLeft1;
-        source.samabunShimei1 = sofuSource.samabunShimei1;
-        source.samaBun1 = sofuSource.samaBun1;
-        source.samabunShimeiSmall1 = sofuSource.samabunShimeiSmall1;
-        source.customerBarCode = sofuSource.customerBarCode;
-        // TODO QA:581
+            if (isNotNull(編集後宛先.getSofubutsuAtesakiSource())) {
+                SofubutsuAtesakiSource sofuSource = 編集後宛先.getSofubutsuAtesakiSource().get送付物宛先ソース();
+                source.yubinNo = sofuSource.yubinNo;
+                source.gyoseiku = sofuSource.gyoseiku;
+                source.jusho3 = sofuSource.jusho3;
+                source.jushoText = sofuSource.jushoText;
+                source.jusho1 = sofuSource.jusho1;
+                source.jusho2 = sofuSource.jusho2;
+                source.katagakiText = sofuSource.katagakiText;
+                source.katagaki2 = sofuSource.katagaki2;
+                source.katagakiSmall2 = sofuSource.katagakiSmall2;
+                source.katagaki1 = sofuSource.katagaki1;
+                source.katagakiSmall1 = sofuSource.katagakiSmall1;
+                source.kakkoRight2 = sofuSource.kakkoRight2;
+                source.kakkoRight1 = sofuSource.kakkoRight1;
+                source.shimei2 = sofuSource.shimei2;
+                source.shimeiSmall2 = sofuSource.shimeiSmall2;
+                source.shimeiText = sofuSource.shimeiText;
+                source.meishoFuyo2 = sofuSource.meishoFuyo2;
+                source.shimeiSmall1 = sofuSource.shimeiSmall1;
+                source.dainoKubunMei = sofuSource.dainoKubunMei;
+                source.shimei1 = sofuSource.shimei1;
+                source.meishoFuyo1 = sofuSource.meishoFuyo1;
+                source.samabunShimeiText = sofuSource.samabunShimeiText;
+                source.samabunShimeiSmall2 = sofuSource.samabunShimeiSmall2;
+                source.samaBun2 = sofuSource.samaBun2;
+                source.kakkoLeft2 = sofuSource.kakkoLeft2;
+                source.samabunShimei2 = sofuSource.samabunShimei2;
+                source.kakkoLeft1 = sofuSource.kakkoLeft1;
+                source.samabunShimei1 = sofuSource.samabunShimei1;
+                source.samaBun1 = sofuSource.samaBun1;
+                source.samabunShimeiSmall1 = sofuSource.samabunShimeiSmall1;
+                source.customerBarCode = sofuSource.customerBarCode;
+                // TODO QA:581
 //        source.setainusimei = sofuSource.setainusimei;
 //        source.samaKata = sofuSource.samaKata;
+            }
+        }
         return source;
     }
 
-    private List<KibetsuChoshyuYuyoKikan> get期別徴収猶予期間リストを生成する(
+    private KibetsuChoshyuYuyoKikan get期別徴収猶予期間リストを生成する(
             KaigoHokenryoChoshuyuyoKetteiTsuchishoB5YokoJoho 徴収猶予決定通知書情報,
             KitsukiList 期月リスト_特徴, KitsukiList 期月リスト_普徴, int index) {
 
-        List<KibetsuChoshyuYuyoKikan> 期別徴収猶予期間List = new ArrayList<>();
         KibetsuChoshyuYuyoKikan 期別徴収猶予期間 = new KibetsuChoshyuYuyoKikan();
         Kitsuki 特徴期月 = 期月リスト_特徴.get期の最初月(index);
         Kitsuki 普徴期月 = 期月リスト_普徴.get期の最初月(index);
@@ -228,8 +263,7 @@ public class KaigoHokenryoChoshuyuyoKetteiTsuchishoB5YokoEditor
             期別徴収猶予期間.set普徴期別金額(RString.EMPTY);
             期別徴収猶予期間.set徴収猶予期間(RString.EMPTY);
         }
-        期別徴収猶予期間List.add(期別徴収猶予期間);
-        return 期別徴収猶予期間List;
+        return 期別徴収猶予期間;
     }
 
     private List<RString> get随時リストを生成する(KitsukiList 期月リスト_普徴, int index) {
@@ -238,7 +272,7 @@ public class KaigoHokenryoChoshuyuyoKetteiTsuchishoB5YokoEditor
         Kitsuki 普徴期月 = 期月リスト_普徴.get期の最初月(index);
         if (FuchokiJohoTsukiShoriKubun.随時.equals(普徴期月.get月処理区分())
                 || FuchokiJohoTsukiShoriKubun.現年随時.equals(普徴期月.get月処理区分())) {
-            随時リスト.add(随時);
+            随時リスト.add(FuchokiJohoTsukiShoriKubun.随時.get名称());
         } else {
             随時リスト.add(RString.EMPTY);
         }
@@ -246,7 +280,7 @@ public class KaigoHokenryoChoshuyuyoKetteiTsuchishoB5YokoEditor
     }
 
     private RString edit2桁文字列(RString 期) {
-        if (ONE == 期.length()) {
+        if (定数_ONE == 期.length()) {
             期 = new RString(RSTR_0 + 期.toString());
         }
         return 期;
@@ -254,7 +288,7 @@ public class KaigoHokenryoChoshuyuyoKetteiTsuchishoB5YokoEditor
 
     private RString editInt2桁文字列(int 月) {
         RString 月AsInt = new RString(String.valueOf(月));
-        if (月 < TEN && 月 >= ZERO) {
+        if (月 < 定数_TEN && 月 >= 定数_ZERO) {
             月AsInt = new RString(RSTR_0 + String.valueOf(月));
         }
         return 月AsInt;
@@ -333,6 +367,11 @@ public class KaigoHokenryoChoshuyuyoKetteiTsuchishoB5YokoEditor
         return 徴収猶予期間;
     }
 
+    /**
+     * テスト用
+     *
+     * @return　SofubutsuAtesakiSource
+     */
     private SofubutsuAtesakiSource get送付物宛先ソース() {
         SofubutsuAtesakiSource 送付物宛先ソース = new SofubutsuAtesakiSource();
         送付物宛先ソース.yubinNo = new RString("1");
@@ -366,6 +405,10 @@ public class KaigoHokenryoChoshuyuyoKetteiTsuchishoB5YokoEditor
         送付物宛先ソース.samabunShimeiSmall1 = new RString("28");
         送付物宛先ソース.customerBarCode = new RString("29");
         return 送付物宛先ソース;
+    }
+
+    private boolean isNotNull(Object object) {
+        return object != null;
     }
 
 }
