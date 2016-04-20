@@ -27,14 +27,12 @@ public class FukaShojoho {
     private DbT2003KibetsuEntity 介護期別;
     private UrT0705ChoteiKyotsuEntity 調定共通;
     private DbT2001ChoshuHohoEntity 介護徴収方法;
-    //特徴期別金額（更正前）
     private Decimal 特徴期別金額01;
     private Decimal 特徴期別金額02;
     private Decimal 特徴期別金額03;
     private Decimal 特徴期別金額04;
     private Decimal 特徴期別金額05;
     private Decimal 特徴期別金額06;
-    //普徴期別金額（更正前）
     private Decimal 普徴期別金額01;
     private Decimal 普徴期別金額02;
     private Decimal 普徴期別金額03;

@@ -64,10 +64,10 @@ public class GenmenKetteiTsuchiShoTateEditor implements IGenmenKetteiTsuchiShoTa
         source.hakkoYMD = item.get発行日();
         source.denshiKoin = item.get電子公印();
         source.ninshoshaYakushokuMei = item.get認証者役職名();
-        // TODO ninshoshaYakushokuMei1 認証者役職名1
+        // TODO (QA655) ninshoshaYakushokuMei1 認証者役職名1
 //        source.ninshoshaYakushokuMei1 = item.get認証者役職名1();
         source.koinMojiretsu = item.get公印文字列();
-        // TODO ninshoshaYakushokuMei2 認証者役職名2
+        // TODO (QA655) ninshoshaYakushokuMei2 認証者役職名2
 //        source.ninshoshaYakushokuMei2 = item.get認証者役職名2();
         source.ninshoshaShimeiKakenai = item.get認証者氏名公印に掛けない();
         source.ninshoshaShimeiKakeru = item.get認証者氏名公印に掛ける();
@@ -108,8 +108,8 @@ public class GenmenKetteiTsuchiShoTateEditor implements IGenmenKetteiTsuchiShoTa
         source.samaBun1 = item.get様分1();
         source.samabunShimeiSmall1 = item.get様分氏名Small1();
         source.customerBarCode = item.getカスタマバーコード();
-        // TODO 世帯主名
-        // TODO 様方
+        // TODO (QA655) 世帯主名
+        // TODO (QA655) 様方
         return source;
     }
 
