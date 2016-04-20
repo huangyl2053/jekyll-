@@ -12,7 +12,7 @@ import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 /**
  * 介護給付費過誤決定通知書情報取込（公費負担者分）のバッチパラメータです。
  *
- * @reamsid_L DBB-0890-040 zhangrui
+ * @reamsid_L DBC-0980-420 zhangrui
  */
 @lombok.Getter
 @lombok.Setter
