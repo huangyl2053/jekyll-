@@ -323,9 +323,6 @@ public class YoguKonyuhiShikyuShinseiPnlTotalHandler {
                     getDgSeikyuDetail().getDataSource();
             list.add(row);
         }
-//        clear福祉用具購入費明細();
-//        div.getYoguKonyuhiShikyuShinseiContentsPanel().getYoguKonyuhiDetailInput().setVisible(false);
-
     }
 
     /**
@@ -419,9 +416,10 @@ public class YoguKonyuhiShikyuShinseiPnlTotalHandler {
                 shokanshinsei.get申請者電話番号());
         div.getYoguKonyuhiShikyuShinseiContentsPanel().getPnlShinsakekka().
                 getRadShinsakekka().setSelectedKey(shokanshinsei.get審査結果());
-        //TODO
-//        div.getYoguKonyuhiShikyuShinseiContentsPanel().getPnlShinsesyaJoho().getTxtShinseisyaYubin().setValue(
-//                new YubinNo(shokanshinsei.get申請者住所()));
+        div.getYoguKonyuhiShikyuShinseiContentsPanel().getPnlShinsesyaJoho().getTxtShinseisyaYubin().setValue(
+                shokanshinsei.get申請者郵便番号());
+        div.getYoguKonyuhiShikyuShinseiContentsPanel().getPnlShinsesyaJoho().getTxtShinseisyaJyusyo().setValue(
+                shokanshinsei.get申請者住所());
     }
 
     /**
@@ -454,8 +452,7 @@ public class YoguKonyuhiShikyuShinseiPnlTotalHandler {
             if (new RString("44").equals(サービス種類)) {
                 証明書コード = new RString("21C2");
             }
-            整理番号 = Saiban.get(SubGyomuCode.DBC介護給付, SaibanHanyokeyName.償還整理番号.
-                    getコード()).nextString();
+            整理番号 = ViewStateHolder.get(ViewStateKeys.整理番号, RString.class);
             様式番号 = 証明書コード;
             事業者番号 = new JigyoshaNo(div.getYoguKonyuhiShikyuShinseiContentsPanel().getTxtJigyoshaNo().getValue());
             明細番号 = NUM1;
@@ -706,7 +703,14 @@ public class YoguKonyuhiShikyuShinseiPnlTotalHandler {
             entity = entity.createBuilderForEdit().set申請者電話番号(div.getYoguKonyuhiShikyuShinseiContentsPanel().
                     getPnlShinsesyaJoho().getTxtShinseisyaTel().getDomain()).build();
         }
-        //TODO申請者住所,郵便番号
+        if (div.getYoguKonyuhiShikyuShinseiContentsPanel().getPnlShinsesyaJoho().getTxtShinseisyaYubin() != null) {
+            entity = entity.createBuilderForEdit().set申請者郵便番号(div.getYoguKonyuhiShikyuShinseiContentsPanel().
+                    getPnlShinsesyaJoho().getTxtShinseisyaYubin().getValue()).build();
+        }
+        if (div.getYoguKonyuhiShikyuShinseiContentsPanel().getPnlShinsesyaJoho().getTxtShinseisyaJyusyo() != null) {
+            entity = entity.createBuilderForEdit().set申請者住所(div.getYoguKonyuhiShikyuShinseiContentsPanel().
+                    getPnlShinsesyaJoho().getTxtShinseisyaJyusyo().getDomain().value()).build();
+        }
         if (div.getCcdShiharaiHohoInfo().getShiharaiHoho() != null
                 && !div.getCcdShiharaiHohoInfo().getShiharaiHoho().isEmpty()) {
             entity = entity.createBuilderForEdit().set支払方法区分コード(

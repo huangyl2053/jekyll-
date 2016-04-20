@@ -30,11 +30,13 @@ import jp.co.ndensan.reams.db.dbc.divcontroller.viewbox.dbc0600011.PnlTotalParam
 import jp.co.ndensan.reams.db.dbc.divcontroller.viewbox.dbc0600021.YoguKonyuhiShikyuShinseiPnlTotalParameter;
 import jp.co.ndensan.reams.db.dbc.service.core.fukushiyogukonyuhishikyushisei.FukushiyoguKonyuhiShikyuShinsei;
 import jp.co.ndensan.reams.db.dbc.service.jutakukaishujizenshinsei.JutakuKaishuJizenShinsei;
+import jp.co.ndensan.reams.db.dbx.definition.core.enumeratedtype.ShisetsuType;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HokenKyufuRitsu;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ServiceShuruiCode;
+import jp.co.ndensan.reams.db.dbz.business.core.jigyosha.JigyoshaMode;
 import jp.co.ndensan.reams.db.dbz.definition.message.DbzInformationMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrInformationMessages;
@@ -56,6 +58,7 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.ResponseHolder;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 import jp.co.ndensan.reams.uz.uza.util.config.BusinessConfig;
+import jp.co.ndensan.reams.uz.uza.util.serialization.DataPassingConverter;
 
 /**
  *
@@ -218,7 +221,7 @@ public class YoguKonyuhiShikyuShinseiPnlTotal {
         if (参照.equals(ViewStateHolder.get(ViewStateKeys.状態, RString.class))
                 || 削除.equals(ViewStateHolder.get(ViewStateKeys.状態, RString.class))) {
             div.getYoguKonyuhiShikyuShinseiContentsPanel().getCcdShiharaiHohoInfo().initialize(
-                    para, new KamokuCode(償還払給付費), 削除);
+                    para, new KamokuCode(償還払給付費), 参照);
         } else if (修正.equals(ViewStateHolder.get(ViewStateKeys.状態, RString.class))) {
             div.getYoguKonyuhiShikyuShinseiContentsPanel().getCcdShiharaiHohoInfo().initialize(
                     para, new KamokuCode(償還払給付費), 修正);
@@ -505,6 +508,35 @@ public class YoguKonyuhiShikyuShinseiPnlTotal {
             }
         }
 
+    }
+
+    /**
+     * 「申請事業者参考」ボタンを押した後のメソッドです。
+     *
+     * @param div 住宅改修費支給申請_申請情報登録DIV
+     * @return ResponseData
+     */
+    public ResponseData<YoguKonyuhiShikyuShinseiPnlTotalDiv> onBeforeOpenDialog_btnJigyosha(
+            YoguKonyuhiShikyuShinseiPnlTotalDiv div) {
+        JigyoshaMode jigyoshaMode = new JigyoshaMode();
+        jigyoshaMode.setJigyoshaShubetsu(ShisetsuType.介護保険施設.code());
+        div.getYoguKonyuhiShikyuShinseiContentsPanel().setJigyoshaMode(DataPassingConverter.serialize(jigyoshaMode));
+        return ResponseData.of(div).respond();
+    }
+
+    /**
+     * 「事業者・施設選択入力ガイド」ダイアログのOKボタンを押した後のメソッドです。
+     *
+     * @param div YoguKonyuhiShikyuShinseiPnlTotalDiv
+     * @return ResponseData
+     */
+    public ResponseData<YoguKonyuhiShikyuShinseiPnlTotalDiv> onOkClose_btnJigyosha(
+            YoguKonyuhiShikyuShinseiPnlTotalDiv div) {
+        JigyoshaMode jigyoshaMode = DataPassingConverter.deserialize(div.getYoguKonyuhiShikyuShinseiContentsPanel().
+                getJigyoshaMode(), JigyoshaMode.class);
+        div.getYoguKonyuhiShikyuShinseiContentsPanel().getPnlShinsesyaJoho().getTxtJigyosya().setValue(
+                jigyoshaMode.getJigyoshaNo().value());
+        return ResponseData.of(div).respond();
     }
 
     private ResponseData<YoguKonyuhiShikyuShinseiPnlTotalDiv> 保存処理(YoguKonyuhiShikyuShinseiPnlTotalDiv div, RString 状態) {

@@ -3,20 +3,24 @@ package jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0600021;
  * このコードはツールによって生成されました。
  * このファイルへの変更は、以下の状況下で不正な動作の原因になったり、
  * コードが再生成されるときに損失したりします。
- * Sun Apr 17 15:47:43 CST 2016
+ * Wed Apr 20 20:18:33 CST 2016 
  */
 
-import jp.co.ndensan.reams.uz.uza.lang.RString;
+
+
 import jp.co.ndensan.reams.uz.uza.ui.binding.DataRow;
-import jp.co.ndensan.reams.uz.uza.ui.binding.TextBox;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxDate;
+import jp.co.ndensan.reams.uz.uza.ui.binding.TextBox;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxNum;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
+
 
 /**
- * dgSeikyuDetail_Row のクラスファイル
- *
- * @reamsid_L DBC-1020-030 quxiaodong
+ * dgSeikyuDetail_Row のクラスファイル 
+ * 
+ * @author 自動生成
  */
+
 public class dgSeikyuDetail_Row extends DataRow {
     // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
 
