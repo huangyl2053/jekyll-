@@ -20,7 +20,9 @@ import jp.co.ndensan.reams.db.dbc.divcontroller.viewbox.ViewStateKeys;
 import jp.co.ndensan.reams.db.dbc.divcontroller.viewbox.dbc0710021.JutakuGaisuDataParameter;
 import jp.co.ndensan.reams.db.dbc.divcontroller.viewbox.dbc0710021.ShikyuShiseiJyohoParameter;
 import jp.co.ndensan.reams.db.dbc.divcontroller.viewbox.dbc0710021.ShokanharaKeteiJyohoParameter;
+import jp.co.ndensan.reams.db.dbc.service.core.jutakukaishujyusyo.JutakuKaishuJyusyoChofukuHanntei;
 import jp.co.ndensan.reams.db.dbc.service.core.jutakukaishusikyushinsei.JutakukaishuSikyuShinseiManager;
+import jp.co.ndensan.reams.db.dbc.service.core.jutakukaishuyaokaigojyotaisandannkaihantei.JutakuKaishuYaokaigoJyotaiSandannkaiHanteiManager;
 import jp.co.ndensan.reams.db.dbc.service.jutakukaishujizenshinsei.JutakuKaishuJizenShinsei;
 import jp.co.ndensan.reams.db.dbd.definition.enumeratedtype.core.IsKyuSoti;
 import jp.co.ndensan.reams.db.dbx.definition.core.enumeratedtype.ShisetsuType;
@@ -244,7 +246,7 @@ public class JutakuKaishuShinseiJyohoToroku {
                 return ResponseData.of(div).setState(DBC0710021StateName.KanryoMessage);
                 // １１．２　画面モードが登録モード、事前申請登録モード
             } else if (画面モード_登録.equals(画面モード) || 画面モード_事前申請.equals(画面モード)) {
-                if (給付実績連動_受託なし.equals(償還)) {
+//                if (給付実績連動_受託なし.equals(償還)) {
 //                    if (!ResponseHolder.isReRequest()) {
 //                        QuestionMessage message = new QuestionMessage(
 //                                DbcQuestionMessages.償還払決定情報登録.getMessage().getCode(),
@@ -263,9 +265,9 @@ public class JutakuKaishuShinseiJyohoToroku {
 //                            && ResponseHolder.getButtonType() == MessageDialogSelectedResult.No) {
 //                        return ResponseData.of(div).setState(DBC0710021StateName.KanryoMessage);
 //                    }
-                } else if (給付実績連動_受託あり.equals(償還)) {
-                    return ResponseData.of(div).setState(DBC0710021StateName.KanryoMessage);
-                }
+//                } else if (給付実績連動_受託あり.equals(償還)) {
+//                    return ResponseData.of(div).setState(DBC0710021StateName.KanryoMessage);
+//                }
                 // １１．３　画面モードが修正モード
             } else if (画面モード_修正.equals(画面モード)) {
                 if (!div.getBtnShokanKetteiJyoho().isDisabled()) {
@@ -299,8 +301,8 @@ public class JutakuKaishuShinseiJyohoToroku {
     public ResponseData<JutakuKaishuShinseiJyohoTorokuDiv> onBeforeOpenDialog_btnJigyosha(
             JutakuKaishuShinseiJyohoTorokuDiv div) {
         JigyoshaMode jigyoshaMode = new JigyoshaMode();
-        jigyoshaMode.setJigyoshaShubetsu(ShisetsuType.介護保険施設.code());
-        div.setJigyoshaMode(DataPassingConverter.serialize(jigyoshaMode));
+//        jigyoshaMode.setJigyoshaShubetsu(ShisetsuType.介護保険施設.code());
+//        div.setJigyoshaMode(DataPassingConverter.serialize(jigyoshaMode));
         return ResponseData.of(div).respond();
     }
 
@@ -439,9 +441,12 @@ public class JutakuKaishuShinseiJyohoToroku {
             JutakuKaishuShinseiJyohoTorokuDiv div) {
         HihokenshaNo 被保険者番号 = ViewStateHolder.get(ViewStateKeys.被保険者番号, HihokenshaNo.class);
         RString 画面モード = ViewStateHolder.get(ViewStateKeys.表示モード, RString.class);
-        JutakuKaishuShinseiJyohoTorokuHandler handler = getHandler(div);
-        JutakukaishuSikyuShinseiManager 住宅改修費支給申請 = JutakukaishuSikyuShinseiManager.createInstance();
-        handler.証明書表示設定(住宅改修費支給申請, 被保険者番号, 画面モード);
+        RDate 画面提供着工年月 = div.getTxtTeikyoYM().getValue();
+        if (画面提供着工年月 != null) {
+            JutakuKaishuShinseiJyohoTorokuHandler handler = getHandler(div);
+            JutakukaishuSikyuShinseiManager 住宅改修費支給申請 = JutakukaishuSikyuShinseiManager.createInstance();
+            handler.証明書表示設定(住宅改修費支給申請, 被保険者番号, 画面モード);
+        }
         return ResponseData.of(div).respond();
     }
 
@@ -551,6 +556,23 @@ public class JutakuKaishuShinseiJyohoToroku {
     }
 
     /**
+     * 「過去の住宅改修費を確認する」ボタン押したするメソッドです。
+     *
+     * @param div 住宅改修費支給申請_申請情報登録DIV
+     * @return ResponseData
+     */
+    public ResponseData<JutakuKaishuShinseiJyohoTorokuDiv> onClick_btnRireki(
+            JutakuKaishuShinseiJyohoTorokuDiv div) {
+
+        ValidationMessageControlPairs valid = getJutakuKaishuShinseiJyohoTorokuValidationHandler(
+                div, null).validate住宅改修内容();
+        if (valid.iterator().hasNext()) {
+            return ResponseData.of(div).addValidationMessages(valid).respond();
+        }
+        return ResponseData.of(div).respond();
+    }
+
+    /**
      * 「限度額をチェックする」ボタン押したするメソッドです。
      *
      * @param div 住宅改修費支給申請_申請情報登録DIV
@@ -558,6 +580,9 @@ public class JutakuKaishuShinseiJyohoToroku {
      */
     public ResponseData<JutakuKaishuShinseiJyohoTorokuDiv> onClick_btnCheckGendogaku(
             JutakuKaishuShinseiJyohoTorokuDiv div) {
+        HihokenshaNo 被保険者番号 = ViewStateHolder.get(ViewStateKeys.被保険者番号, HihokenshaNo.class);
+        FlexibleYearMonth 画面提供着工年月 = new FlexibleYearMonth(
+                div.getTxtTeikyoYM().getValue().getYearMonth().toDateString());
         JutakuKaishuShinseiJyohoTorokuHandler handler = getHandler(div);
         // 1 入力チェック
 //        handler.住宅改修内容のチェック();
@@ -571,12 +596,13 @@ public class JutakuKaishuShinseiJyohoToroku {
 //        handler.費用額合計の取得();
         // 3 限度額リセット有効性チェック
         // ７．１　要介護状態３段階変更の有効性チェック
-//        JutakuKaishuYaokaigoJyotaiSandannkaiHanteiManager manager = new JutakuKaishuYaokaigoJyotaiSandannkaiHanteiManager();
-//        boolean 要介護状態３段階変更の判定 = manager.checkYaokaigoJyotaiSandannkai(
-//                被保険者番号,
-//                画面提供着工年月);
-        List<RString> 要介護状態区分３段階変更チェック = div.getJutakuKaishuShinseiContents().getJutakuKaishuShinseiResetInfo()
-                .getChkResetInfo().getSelectedKeys();
+        JutakuKaishuYaokaigoJyotaiSandannkaiHanteiManager manager
+                = JutakuKaishuYaokaigoJyotaiSandannkaiHanteiManager.createInstance();
+        boolean 要介護状態３段階変更の判定 = manager.checkYaokaigoJyotaiSandannkai(
+                被保険者番号,
+                画面提供着工年月);
+        List<RString> 要介護状態区分３段階変更チェック = div.getJutakuKaishuShinseiContents()
+                .getJutakuKaishuShinseiResetInfo().getChkResetInfo().getSelectedKeys();
 //        if (要介護状態３段階変更の判定
 //                && (要介護状態区分３段階変更チェック == null || 要介護状態区分３段階変更チェック.contains(
 //        要介護状態区分3段階変更による))) {
@@ -584,8 +610,8 @@ public class JutakuKaishuShinseiJyohoToroku {
 //        } else if (!要介護状態３段階変更の判定 && 要介護状態区分３段階変更チェック != null) {
 //
 //        }
-        if (要介護状態区分３段階変更チェック.isEmpty()
-                || !要介護状態区分３段階変更チェック.contains(要介護状態区分3段階変更による)) {
+        if (要介護状態３段階変更の判定 && (要介護状態区分３段階変更チェック.isEmpty()
+                || !要介護状態区分３段階変更チェック.contains(要介護状態区分3段階変更による))) {
             if (!ResponseHolder.isReRequest()) {
                 QuestionMessage message = new QuestionMessage(
                         DbcQuestionMessages.要介護状態区分変更_限度額リセット対象.getMessage().getCode(),
@@ -600,8 +626,8 @@ public class JutakuKaishuShinseiJyohoToroku {
                         .getChkResetInfo().setSelectedItemsByKey(要介護状態区分３段階変更チェック);
                 return ResponseData.of(div).respond();
             }
-        } else if (!要介護状態区分３段階変更チェック.isEmpty()
-                && 要介護状態区分３段階変更チェック.contains(要介護状態区分3段階変更による)) {
+        } else if (!要介護状態３段階変更の判定 && (!要介護状態区分３段階変更チェック.isEmpty()
+                && 要介護状態区分３段階変更チェック.contains(要介護状態区分3段階変更による))) {
             if (!ResponseHolder.isReRequest()) {
                 QuestionMessage message = new QuestionMessage(
                         DbcQuestionMessages.要介護状態区分変更_限度額リセット対象外.getMessage().getCode(),
@@ -618,7 +644,7 @@ public class JutakuKaishuShinseiJyohoToroku {
             }
         }
         // ７．２　改修住所変更による限度額リセットチェック
-//        JutakuKaishuJyusyoChofukuHanntei chofukuHanntei = new JutakuKaishuJyusyoChofukuHanntei();
+        JutakuKaishuJyusyoChofukuHanntei chofukuHanntei = JutakuKaishuJyusyoChofukuHanntei.createInstance();
 //        chofukuHanntei.checkKaishuJyusyoChofukuToroku(被保険者番号,
 //                画面提供着工年月, 表示モード);
 //        RString 住宅住所変更チェック = div.getJutakuKaishuShinseiContents().getJutakuKaishuShinseiResetInfo()
