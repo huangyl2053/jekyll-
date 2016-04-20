@@ -268,12 +268,15 @@ public class ShikakuShutokuIdoTotal {
      */
     public static class ComparatorByDaNoSort implements Comparator, Serializable {
 
+        private static final long serialVersionUID = -4360646115909064130L;
+
         @Override
         public int compare(Object arg0, Object arg1) {
             dgShikakuShutokuRireki_Row row0 = (dgShikakuShutokuRireki_Row) arg0;
             dgShikakuShutokuRireki_Row row1 = (dgShikakuShutokuRireki_Row) arg1;
             return row0.getDaNo().compareTo(row1.getDaNo());
         }
+
     }
 
     private enum ShikakuShutokuIdoTotalErrorMessage implements IValidationMessage {
