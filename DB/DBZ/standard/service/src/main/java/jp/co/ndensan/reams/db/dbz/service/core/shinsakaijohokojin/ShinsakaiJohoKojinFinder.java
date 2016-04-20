@@ -74,7 +74,11 @@ public class ShinsakaiJohoKojinFinder {
      */
     public KaisaiKekkaAndBashoJohoEntity onLoad1(ShinseishoKanriNo 申請書管理番号) {
         IShinsakaiJohoKojinMapper mapper = mapperProvider.create(IShinsakaiJohoKojinMapper.class);
-        return mapper.getKaisaikekkaandbashojoho(申請書管理番号);
+        KaisaiKekkaAndBashoJohoEntity entity = mapper.getKaisaikekkaandbashojoho(申請書管理番号);
+        if (entity == null) {
+            entity = new KaisaiKekkaAndBashoJohoEntity();
+        }
+        return entity;
     }
 
     /**
