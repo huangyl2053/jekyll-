@@ -54,13 +54,13 @@ public class ShoKaishuKirokuKanriJoho {
     private static final RString 状態_削除 = new RString("削除");
     private static final RString POINT = new RString(".");
     private static final LockingKey LOCKINGKEY = new LockingKey(new RString("ShoKaishuKirokuKanri"));
-    private final ShoKaishuKirokuKanriJohoManager shoKaishuKirokuKanriJohoManager;
+    private final ShoKaishuKirokuKanriJohoManager shoKaishuManager;
 
     /**
      * コンストラクタです。
      */
     public ShoKaishuKirokuKanriJoho() {
-        this.shoKaishuKirokuKanriJohoManager = InstanceProvider.create(ShoKaishuKirokuKanriJohoManager.class);
+        this.shoKaishuManager = InstanceProvider.create(ShoKaishuKirokuKanriJohoManager.class);
     }
 
     /**
@@ -148,7 +148,7 @@ public class ShoKaishuKirokuKanriJoho {
                 shoKofuKaishu.toEntity().setState(EntityDataState.Deleted);
             }
             if (状態_修正.equals(dgKoufuKaishu.getStatus()) || 状態_削除.equals(dgKoufuKaishu.getStatus())) {
-                shoKaishuKirokuKanriJohoManager.updateOrdelete(builder.build());
+                shoKaishuManager.updateOrdelete(builder.build());
             }
         }
     }
