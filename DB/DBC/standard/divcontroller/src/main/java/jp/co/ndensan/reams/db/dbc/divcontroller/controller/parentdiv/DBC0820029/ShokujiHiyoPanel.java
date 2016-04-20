@@ -75,7 +75,7 @@ public class ShokujiHiyoPanel {
 
         ShoukanharaihishinseimeisaikensakuParameter parameter = new ShoukanharaihishinseimeisaikensakuParameter(
                 new HihokenshaNo("000000004"),
-                new FlexibleYearMonth(new RString("200501")),
+                new FlexibleYearMonth(new RString("200201")),
                 RDate.getNowDate(),
                 new RString("0000000004"),
                 new JigyoshaNo("0000000003"),
