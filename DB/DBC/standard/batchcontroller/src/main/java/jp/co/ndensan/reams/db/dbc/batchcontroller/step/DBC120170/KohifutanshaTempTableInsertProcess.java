@@ -21,7 +21,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 /**
  * ファイルのデータを一時テーブルに設定する。
  *
- * @reamsid_L DBB-0890-040 zhangrui
+ * @reamsid_L DBC-0980-420 zhangrui
  */
 public class KohifutanshaTempTableInsertProcess extends BatchProcessBase<RString> {
 
