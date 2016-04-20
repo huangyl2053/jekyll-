@@ -9,7 +9,7 @@
        <id property="介護事業者Entity.jigyoshaNo" column="dbT7060KaigoJigyoshaEntity.jigyoshaNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
        <id property="介護事業者Entity.yukoKaishiYMD" column="dbT7060KaigoJigyoshaEntity.yukoKaishiYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
         <association property="介護事業者Entity" resultMap="jp.co.ndensan.reams.db.dbx.persistence.db.mapper.basic.IDbT7060KaigoJigyoshaMapper.ResultMap_DbT7060KaigoJigyoshaEntity"/>
-        <association property="介護事業者代表者Entity" resultMap="jp.co.ndensan.reams.db.dbx.persistence.db.mapper.basic.IDbT7062KaigoJigyoshaDaihyoshaMapper.ResultMap_DbT7062KaigoJigyoshaDaihyoshaEntity"/>
+        <association property="介護事業者代表者Entity" resultMap="jp.co.ndensan.reams.db.dbx.persistence.db.mapper.basic.IDbT7062KaigoJigyoshaDaihyoshaMapper.ResultMap_DbT7062KaigoJigyoshaDaihyoshaEntity"/> 
     </resultMap>
     <resultMap id="resultMap_getKaigoJigyoshaRelateEntity" type="jp.co.ndensan.reams.db.dba.entity.db.relate.kaigojigyoshashisetsukanrio.KaigoJigyoshaRelateEntity" autoMapping="true">
         <result property="yukoKaishiYMD" column="DbT7060_yukoKaishiYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
@@ -18,14 +18,7 @@
         <result property="yukoKaishiYMD2" column="DbT1005_yukoKaishiYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="yukoShuryoYMD2" column="DbT7060_yukoShuryoYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
         <result property="jigyoshaNo2" column="DbT1005_jigyoshaNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
-    </resultMap>
-    <resultMap id="resultMap_getKaigoJogaiTokureiRelateEntity" type="jp.co.ndensan.reams.db.dba.entity.db.relate.kaigojigyoshashisetsukanrio.KaigoJogaiTokureiRelateEntity" autoMapping="true">
-        <result property="yukoKaishiYMD" column="DbT7063_yukoKaishiYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
-        <result property="yukoShuryoYMD" column="DbT7063_yukoShuryoYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
-        <result property="jigyoshaName" column="DbT7063_jigyoshaName" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
-        <result property="kanrishaName" column="DbT7063_kanrishaName" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
-        <result property="serviceShuruiCode" column="DbT7063_serviceShuruiCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
-    </resultMap>
+    </resultMap> 
     <select id="getJigyoshaJoho" resultMap="resultMap_getShikakuJohoEntity"
             parameterType="jp.co.ndensan.reams.db.dba.definition.mybatisprm.kaigojigyoshashisetsukanrio.KaigoJigyoshaShisetsuKanriMapperParameter" fetchSize="500">
         SELECT
@@ -48,28 +41,23 @@
         AND
         rgdb."DbT7060KaigoJigyosha"."isDeleted"<![CDATA[<>]]> TRUE
     </select>
-    <select id="getServiceItiranJoho" resultMap="resultMap_getKaigoJogaiTokureiRelateEntity"
+    <select id="getServiceItiranJoho" resultMap="jp.co.ndensan.reams.db.dbx.persistence.db.mapper.basic.IDbT7063KaigoJigyoshaShiteiServiceMapper.ResultMap_DbT7063KaigoJigyoshaShiteiServiceEntity"
              parameterType="jp.co.ndensan.reams.db.dba.definition.mybatisprm.kaigojigyoshashisetsukanrio.KaigoJogaiTokureiParameter" fetchSize="500">
         SELECT
-        DbT7063."yukoKaishiYMD" as "DbT7063_yukoKaishiYMD",
-        DbT7063."yukoShuryoYMD" as "DbT7063_yukoShuryoYMD",
-        DbT7063."jigyoshaName" as "DbT7063_jigyoshaName",
-        DbT7063."kanrishaName" as "DbT7063_kanrishaName",
-        DbT7063."serviceShuruiCode" as "DbT7063_serviceShuruiCode"
+        DbT7063.*
         FROM
         rgdb."DbT7060KaigoJigyosha" as DbT7060
         LEFT JOIN
         rgdb."DbT7063KaigoJigyoshaShiteiService" as DbT7063
         ON
         DbT7060."jigyoshaNo" = DbT7063."jigyoshaNo"
-        AND NOT((DbT7060."yukoKaishiYMD"<![CDATA[>]]>DbT7063."yukoKaishiYMD"
+        AND NOT((DbT7060."yukoKaishiYMD"<![CDATA[>]]> DbT7063."yukoKaishiYMD"
         AND
-        (DbT7060."yukoKaishiYMD"<![CDATA[>=]]>DbT7063."yukoShuryoYMD"))
+        (DbT7060."yukoKaishiYMD"<![CDATA[>=]]> DbT7063."yukoShuryoYMD"))
         OR
-        (DbT7060."yukoShuryoYMD"<![CDATA[<=]]>DbT7063."yukoKaishiYMD"
+        (DbT7060."yukoShuryoYMD"<![CDATA[<=]]> DbT7063."yukoKaishiYMD"
         AND
-        DbT7060."yukoShuryoYMD"<![CDATA[<]]>DbT7063."yukoShuryoYMD")
-
+        DbT7060."yukoShuryoYMD"<![CDATA[<]]> DbT7063."yukoShuryoYMD")
         )
         AND
         DbT7063."isDeleted"<![CDATA[<>]]> TRUE
@@ -81,7 +69,6 @@
         DbT7060."isDeleted" <![CDATA[<>]]> TRUE
         ORDER BY
         DbT7063."serviceShuruiCode" asc, DbT7063."yukoKaishiYMD" desc
-
     </select>
     <select id="getCheckKikanJufuku" resultMap="resultMap_getKaigoJigyoshaRelateEntity"
              parameterType="jp.co.ndensan.reams.db.dba.definition.mybatisprm.kaigojigyoshashisetsukanrio.KaigoJigyoshaParameter" fetchSize="500">

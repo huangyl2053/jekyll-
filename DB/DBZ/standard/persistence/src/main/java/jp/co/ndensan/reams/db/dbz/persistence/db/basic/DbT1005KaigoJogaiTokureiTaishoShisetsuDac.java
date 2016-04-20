@@ -184,4 +184,22 @@ public class DbT1005KaigoJogaiTokureiTaishoShisetsuDac implements ISaveable<DbT1
                                 eq(yukoKaishiYMD, 有効開始年月日)))
                 .toList(DbT1005KaigoJogaiTokureiTaishoShisetsuEntity.class);
     }
+
+    /**
+     * 主キーで介護除外住所地特例対象施設を取得します。
+     *
+     * @param 事業者番号 RString
+     * @return DbT1005KaigoJogaiTokureiTaishoShisetsuEntity
+     * @throws NullPointerException 引数のいずれかがnullの場合
+     */
+    @Transaction
+    public List<DbT1005KaigoJogaiTokureiTaishoShisetsuEntity> select事業者番号(
+            RString 事業者番号) throws NullPointerException {
+        requireNonNull(事業者番号, UrSystemErrorMessages.値がnull.getReplacedMessage((事業者番号_事業者).toString()));
+        DbAccessorNormalType accessor = new DbAccessorNormalType(session);
+        return accessor.select().
+                table(DbT1005KaigoJogaiTokureiTaishoShisetsu.class).
+                where((eq(jigyoshaNo, 事業者番号)))
+                .toList(DbT1005KaigoJogaiTokureiTaishoShisetsuEntity.class);
+    }
 }

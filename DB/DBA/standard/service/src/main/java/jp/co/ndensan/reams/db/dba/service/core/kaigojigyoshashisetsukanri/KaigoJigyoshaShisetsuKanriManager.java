@@ -9,15 +9,14 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import static java.util.Objects.requireNonNull;
-import jp.co.ndensan.reams.db.dba.business.core.kaigojigyoshashisetsukanrio.KaigoJogaiTokureiBusiness;
 import jp.co.ndensan.reams.db.dba.definition.mybatisprm.kaigojigyoshashisetsukanrio.KaigoJigyoshaParameter;
 import jp.co.ndensan.reams.db.dba.definition.mybatisprm.kaigojigyoshashisetsukanrio.KaigoJigyoshaShisetsuKanriMapperParameter;
 import jp.co.ndensan.reams.db.dba.definition.mybatisprm.kaigojigyoshashisetsukanrio.KaigoJogaiTokureiParameter;
 import jp.co.ndensan.reams.db.dba.entity.db.relate.kaigojigyoshashisetsukanrio.KaigoJigyoshaRelateEntity;
-import jp.co.ndensan.reams.db.dba.entity.db.relate.kaigojigyoshashisetsukanrio.KaigoJogaiTokureiRelateEntity;
 import jp.co.ndensan.reams.db.dba.persistence.db.mapper.relate.kaigojigyoshashisetsukanri.IKaigoJigyoshaShisetsuKanriMapper;
 import jp.co.ndensan.reams.db.dbx.business.core.kaigojigyosha.kaigojigyosha.KaigoJigyosha;
 import jp.co.ndensan.reams.db.dbx.business.core.kaigojigyosha.kaigojigyoshashiteiservice.KaigoJigyoshaShiteiService;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ServiceShuruiCode;
 import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT7063KaigoJigyoshaShiteiServiceEntity;
 import jp.co.ndensan.reams.db.dbx.entity.db.relate.kaigojigyosha.kaigojigyosha.KaigoJigyoshaEntity;
 import jp.co.ndensan.reams.db.dbx.persistence.db.basic.DbT7063KaigoJigyoshaShiteiServiceDac;
@@ -28,6 +27,8 @@ import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT1005KaigoJogaiTokureiT
 import jp.co.ndensan.reams.db.dbz.service.core.MapperProvider;
 import jp.co.ndensan.reams.db.dbz.service.core.basic.KaigoJogaiTokureiTaishoShisetsuManager;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
+import jp.co.ndensan.reams.uz.uza.biz.AtenaMeisho;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 import jp.co.ndensan.reams.uz.uza.util.db.SearchResult;
@@ -157,24 +158,23 @@ public class KaigoJigyoshaShisetsuKanriManager {
      * @return サービス一覧情報取得
      */
     @Transaction
-    public SearchResult<KaigoJogaiTokureiBusiness> getServiceItiranJoho(KaigoJogaiTokureiParameter parameter) {
+    public SearchResult<KaigoJigyoshaShiteiService> getServiceItiranJoho(KaigoJogaiTokureiParameter parameter) {
 
-        List<KaigoJogaiTokureiBusiness> serviceShuruiList = new ArrayList();
+        List<KaigoJigyoshaShiteiService> serviceShuruiList = new ArrayList();
         IKaigoJigyoshaShisetsuKanriMapper iKaigoJigyoshaShisetsuKanri = mapperProvider.create(IKaigoJigyoshaShisetsuKanriMapper.class);
-        List<KaigoJogaiTokureiRelateEntity> サービス一覧情報 = iKaigoJigyoshaShisetsuKanri.getServiceItiranJoho(parameter);
-
-        for (KaigoJogaiTokureiRelateEntity entity : サービス一覧情報) {
-            KaigoJogaiTokureiRelateEntity relateEntity = new KaigoJogaiTokureiRelateEntity();
-            KaigoJogaiTokureiBusiness business;
+        List<DbT7063KaigoJigyoshaShiteiServiceEntity> サービス一覧情報 = iKaigoJigyoshaShisetsuKanri.getServiceItiranJoho(parameter);
+        for (DbT7063KaigoJigyoshaShiteiServiceEntity entity : サービス一覧情報) {
+            DbT7063KaigoJigyoshaShiteiServiceEntity relateEntity = new DbT7063KaigoJigyoshaShiteiServiceEntity();
+            KaigoJigyoshaShiteiService business;
             if (entity == null) {
-                relateEntity.setJigyoshaName(RString.EMPTY);
-                relateEntity.setKanrishaName(RString.EMPTY);
-                relateEntity.setServiceShuruiCode(RString.EMPTY);
-                relateEntity.setYukoKaishiYMD(RString.EMPTY);
-                relateEntity.setYukoShuryoYMD(RString.EMPTY);
-                business = new KaigoJogaiTokureiBusiness(relateEntity);
+                relateEntity.setJigyoshaName(AtenaMeisho.EMPTY);
+                relateEntity.setKanrishaName(AtenaMeisho.EMPTY);
+                relateEntity.setServiceShuruiCode(ServiceShuruiCode.EMPTY);
+                relateEntity.setYukoKaishiYMD(FlexibleDate.EMPTY);
+                relateEntity.setYukoShuryoYMD(FlexibleDate.EMPTY);
+                business = new KaigoJigyoshaShiteiService(relateEntity);
             } else {
-                business = new KaigoJogaiTokureiBusiness(entity);
+                business = new KaigoJigyoshaShiteiService(entity);
             }
             serviceShuruiList.add(business);
         }
@@ -208,12 +208,9 @@ public class KaigoJigyoshaShisetsuKanriManager {
     @Transaction
     public boolean checkKikanGorisei(KaigoJogaiTokureiParameter parameter) {
 
-        if (parameter == null || parameter.getYukoShuryoYMD().isEmpty()) {
-            return true;
-        } else if (parameter.getYukoKaishiYMD().isBeforeOrEquals(parameter.getYukoShuryoYMD())) {
-            return true;
-        }
-        return false;
+        return parameter.getYukoShuryoYMD() == null || (parameter.getYukoShuryoYMD() != null
+                && parameter.getYukoKaishiYMD().isBeforeOrEquals(parameter.
+                        getYukoShuryoYMD()));
     }
 
     /**
@@ -318,5 +315,19 @@ public class KaigoJigyoshaShisetsuKanriManager {
         }
         介護事業者 = 介護事業者.deleted();
         return 1 == dbT1005dac.saveOrDeletePhysicalBy(介護事業者.toEntity());
+    }
+
+    /**
+     * 介護事業者{@link KaigoJigyosha}を保存します。
+     *
+     * @param parameter KaigoJogaiTokureiParameter
+     * @return 存在します:true、存在しなし:false <br>
+     * いずれかのテーブルに更新があればtrueを返す、いずれのテーブルもunchangedで更新無しの場合falseを返す
+     */
+    @Transaction
+    public boolean 追加状態チェック(KaigoJogaiTokureiParameter parameter) {
+        List<DbT1005KaigoJogaiTokureiTaishoShisetsuEntity> 追加状態チェック = dbT1005dac.select事業者番号(
+                parameter.getJigyoshaNo());
+        return !追加状態チェック.isEmpty();
     }
 }

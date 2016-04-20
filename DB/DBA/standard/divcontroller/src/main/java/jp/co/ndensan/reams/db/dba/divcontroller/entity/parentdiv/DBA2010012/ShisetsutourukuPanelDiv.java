@@ -4,24 +4,18 @@ package jp.co.ndensan.reams.db.dba.divcontroller.entity.parentdiv.DBA2010012;
  * このファイルへの変更は、再生成時には損失するため
  * 不正な動作の原因になります。
  */
-
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import jp.co.ndensan.reams.uz.uza.ui.binding.*;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
-import jp.co.ndensan.reams.uz.uza.ui.binding.RadioButton;
-import jp.co.ndensan.reams.uz.uza.ui.binding.TextBox;
-import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxCode;
-import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxFlexibleDate;
-import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxMultiLine;
-import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxYubinNo;
 
 /**
- * ShisetsutourukuPanel のクラスファイル
- *
+ * ShisetsutourukuPanel のクラスファイル 
+ * 
+ * @author 自動生成
  */
 public class ShisetsutourukuPanelDiv extends Panel {
-
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-01-15_09-59-03">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -104,7 +98,7 @@ public class ShisetsutourukuPanelDiv extends Panel {
     }
 
     @JsonIgnore
-    public void setTxtShisetsuYukoKaishiYMD(TextBoxFlexibleDate txtShisetsuYukoKaishiYMD) {
+    public void  setTxtShisetsuYukoKaishiYMD(TextBoxFlexibleDate txtShisetsuYukoKaishiYMD) {
         this.getShisetsuJoho().setTxtShisetsuYukoKaishiYMD(txtShisetsuYukoKaishiYMD);
     }
 
@@ -114,7 +108,7 @@ public class ShisetsutourukuPanelDiv extends Panel {
     }
 
     @JsonIgnore
-    public void setTxtShisetsuYukoShuryoYMD(TextBoxFlexibleDate txtShisetsuYukoShuryoYMD) {
+    public void  setTxtShisetsuYukoShuryoYMD(TextBoxFlexibleDate txtShisetsuYukoShuryoYMD) {
         this.getShisetsuJoho().setTxtShisetsuYukoShuryoYMD(txtShisetsuYukoShuryoYMD);
     }
 
@@ -124,7 +118,7 @@ public class ShisetsutourukuPanelDiv extends Panel {
     }
 
     @JsonIgnore
-    public void setRadShisetsuKannaiKangaiKubun(RadioButton radShisetsuKannaiKangaiKubun) {
+    public void  setRadShisetsuKannaiKangaiKubun(RadioButton radShisetsuKannaiKangaiKubun) {
         this.getShisetsuJoho().setRadShisetsuKannaiKangaiKubun(radShisetsuKannaiKangaiKubun);
     }
 
@@ -134,7 +128,7 @@ public class ShisetsutourukuPanelDiv extends Panel {
     }
 
     @JsonIgnore
-    public void setTxtShisetsuJigyoshaNo(TextBoxCode txtShisetsuJigyoshaNo) {
+    public void  setTxtShisetsuJigyoshaNo(TextBoxCode txtShisetsuJigyoshaNo) {
         this.getShisetsuJoho().setTxtShisetsuJigyoshaNo(txtShisetsuJigyoshaNo);
     }
 
@@ -144,7 +138,7 @@ public class ShisetsutourukuPanelDiv extends Panel {
     }
 
     @JsonIgnore
-    public void setTxtShisetsuJigyoshaName(TextBox txtShisetsuJigyoshaName) {
+    public void  setTxtShisetsuJigyoshaName(TextBox txtShisetsuJigyoshaName) {
         this.getShisetsuJoho().setTxtShisetsuJigyoshaName(txtShisetsuJigyoshaName);
     }
 
@@ -154,28 +148,8 @@ public class ShisetsutourukuPanelDiv extends Panel {
     }
 
     @JsonIgnore
-    public void setTxtShisetsuJigyoshaNameKana(TextBox txtShisetsuJigyoshaNameKana) {
+    public void  setTxtShisetsuJigyoshaNameKana(TextBox txtShisetsuJigyoshaNameKana) {
         this.getShisetsuJoho().setTxtShisetsuJigyoshaNameKana(txtShisetsuJigyoshaNameKana);
-    }
-
-    @JsonIgnore
-    public TextBox getTxtShisetsuRyakusho() {
-        return this.getShisetsuJoho().getTxtShisetsuRyakusho();
-    }
-
-    @JsonIgnore
-    public void setTxtShisetsuRyakusho(TextBox txtShisetsuRyakusho) {
-        this.getShisetsuJoho().setTxtShisetsuRyakusho(txtShisetsuRyakusho);
-    }
-
-    @JsonIgnore
-    public TextBox getTxtShisetsuRyakushoKana() {
-        return this.getShisetsuJoho().getTxtShisetsuRyakushoKana();
-    }
-
-    @JsonIgnore
-    public void setTxtShisetsuRyakushoKana(TextBox txtShisetsuRyakushoKana) {
-        this.getShisetsuJoho().setTxtShisetsuRyakushoKana(txtShisetsuRyakushoKana);
     }
 
     @JsonIgnore
@@ -184,7 +158,7 @@ public class ShisetsutourukuPanelDiv extends Panel {
     }
 
     @JsonIgnore
-    public void setTxtShisetsuJigyoKaishiYMD(TextBoxFlexibleDate txtShisetsuJigyoKaishiYMD) {
+    public void  setTxtShisetsuJigyoKaishiYMD(TextBoxFlexibleDate txtShisetsuJigyoKaishiYMD) {
         this.getShisetsuJoho().setTxtShisetsuJigyoKaishiYMD(txtShisetsuJigyoKaishiYMD);
     }
 
@@ -194,7 +168,7 @@ public class ShisetsutourukuPanelDiv extends Panel {
     }
 
     @JsonIgnore
-    public void setTxtShisetsuJigyoKyushuYMD(TextBoxFlexibleDate txtShisetsuJigyoKyushuYMD) {
+    public void  setTxtShisetsuJigyoKyushuYMD(TextBoxFlexibleDate txtShisetsuJigyoKyushuYMD) {
         this.getShisetsuJoho().setTxtShisetsuJigyoKyushuYMD(txtShisetsuJigyoKyushuYMD);
     }
 
@@ -204,7 +178,7 @@ public class ShisetsutourukuPanelDiv extends Panel {
     }
 
     @JsonIgnore
-    public void setTxtShisetsuJigyoSaikaiYMD(TextBoxFlexibleDate txtShisetsuJigyoSaikaiYMD) {
+    public void  setTxtShisetsuJigyoSaikaiYMD(TextBoxFlexibleDate txtShisetsuJigyoSaikaiYMD) {
         this.getShisetsuJoho().setTxtShisetsuJigyoSaikaiYMD(txtShisetsuJigyoSaikaiYMD);
     }
 
@@ -214,7 +188,7 @@ public class ShisetsutourukuPanelDiv extends Panel {
     }
 
     @JsonIgnore
-    public void setTxtShisetsuJigyoHaishiYMD(TextBoxFlexibleDate txtShisetsuJigyoHaishiYMD) {
+    public void  setTxtShisetsuJigyoHaishiYMD(TextBoxFlexibleDate txtShisetsuJigyoHaishiYMD) {
         this.getShisetsuJoho().setTxtShisetsuJigyoHaishiYMD(txtShisetsuJigyoHaishiYMD);
     }
 
@@ -224,7 +198,7 @@ public class ShisetsutourukuPanelDiv extends Panel {
     }
 
     @JsonIgnore
-    public void setTxtShisetsuYubinNo(TextBoxYubinNo txtShisetsuYubinNo) {
+    public void  setTxtShisetsuYubinNo(TextBoxYubinNo txtShisetsuYubinNo) {
         this.getShisetsuJoho().setTxtShisetsuYubinNo(txtShisetsuYubinNo);
     }
 
@@ -234,7 +208,7 @@ public class ShisetsutourukuPanelDiv extends Panel {
     }
 
     @JsonIgnore
-    public void setTxtShisetsuTelNo(TextBox txtShisetsuTelNo) {
+    public void  setTxtShisetsuTelNo(TextBox txtShisetsuTelNo) {
         this.getShisetsuJoho().setTxtShisetsuTelNo(txtShisetsuTelNo);
     }
 
@@ -244,7 +218,7 @@ public class ShisetsutourukuPanelDiv extends Panel {
     }
 
     @JsonIgnore
-    public void setTxtShisetsuFaxNo(TextBox txtShisetsuFaxNo) {
+    public void  setTxtShisetsuFaxNo(TextBox txtShisetsuFaxNo) {
         this.getShisetsuJoho().setTxtShisetsuFaxNo(txtShisetsuFaxNo);
     }
 
@@ -254,7 +228,7 @@ public class ShisetsutourukuPanelDiv extends Panel {
     }
 
     @JsonIgnore
-    public void setTxtShisetsuJusho(TextBox txtShisetsuJusho) {
+    public void  setTxtShisetsuJusho(TextBox txtShisetsuJusho) {
         this.getShisetsuJoho().setTxtShisetsuJusho(txtShisetsuJusho);
     }
 
@@ -264,7 +238,7 @@ public class ShisetsutourukuPanelDiv extends Panel {
     }
 
     @JsonIgnore
-    public void setTxtShisetsuJushoKana(TextBox txtShisetsuJushoKana) {
+    public void  setTxtShisetsuJushoKana(TextBox txtShisetsuJushoKana) {
         this.getShisetsuJoho().setTxtShisetsuJushoKana(txtShisetsuJushoKana);
     }
 
@@ -274,7 +248,7 @@ public class ShisetsutourukuPanelDiv extends Panel {
     }
 
     @JsonIgnore
-    public void setTxtShisetsuDaihyoshaName(TextBox txtShisetsuDaihyoshaName) {
+    public void  setTxtShisetsuDaihyoshaName(TextBox txtShisetsuDaihyoshaName) {
         this.getShisetsuJoho().setTxtShisetsuDaihyoshaName(txtShisetsuDaihyoshaName);
     }
 
@@ -284,7 +258,7 @@ public class ShisetsutourukuPanelDiv extends Panel {
     }
 
     @JsonIgnore
-    public void setTxtShisetsuDaihyoshaNameKana(TextBox txtShisetsuDaihyoshaNameKana) {
+    public void  setTxtShisetsuDaihyoshaNameKana(TextBox txtShisetsuDaihyoshaNameKana) {
         this.getShisetsuJoho().setTxtShisetsuDaihyoshaNameKana(txtShisetsuDaihyoshaNameKana);
     }
 
@@ -294,7 +268,7 @@ public class ShisetsutourukuPanelDiv extends Panel {
     }
 
     @JsonIgnore
-    public void setTxtShisetsuYakushoku(TextBox txtShisetsuYakushoku) {
+    public void  setTxtShisetsuYakushoku(TextBox txtShisetsuYakushoku) {
         this.getShisetsuJoho().setTxtShisetsuYakushoku(txtShisetsuYakushoku);
     }
 
@@ -304,7 +278,7 @@ public class ShisetsutourukuPanelDiv extends Panel {
     }
 
     @JsonIgnore
-    public void setTxtShisetsuBiko(TextBoxMultiLine txtShisetsuBiko) {
+    public void  setTxtShisetsuBiko(TextBoxMultiLine txtShisetsuBiko) {
         this.getShisetsuJoho().setTxtShisetsuBiko(txtShisetsuBiko);
     }
 

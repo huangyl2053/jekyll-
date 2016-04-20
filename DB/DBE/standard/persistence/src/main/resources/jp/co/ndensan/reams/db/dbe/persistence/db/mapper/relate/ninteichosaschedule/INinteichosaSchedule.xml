@@ -166,7 +166,8 @@
         DbT5221."ninteiChosaItakusakiCode" as "DbT5221_ninteiChosaItakusakiCode",
         DbT5221."ninteiChosainCode" as "DbT5221_ninteiChosainCode",
         DbT5221."ninteiChosaJikanWaku" as "DbT5221_ninteiChosaJikanWaku",
-        DbT5221."yoyakuKaoFlag" as "DbT5221_yoyakuKaoFlag"
+        DbT5221."yoyakuKaoFlag" as "DbT5221_yoyakuKaoFlag",
+        DbT5101."shoKisaiHokenshaNo" as "DbT5101_shoKisaiHokenshaNo"
         FROM
         rgdb."DbT5101NinteiShinseiJoho" as  DbT5101
         INNER JOIN
@@ -293,7 +294,8 @@
         DbT5221."ninteiChosaItakusakiCode" as "DbT5221_ninteiChosaItakusakiCode",
         DbT5221."ninteiChosainCode" as "DbT5221_ninteiChosainCode",
         DbT5221."ninteiChosaJikanWaku" as "DbT5221_ninteiChosaJikanWaku",
-        DbT5221."yoyakuKaoFlag" as "DbT5221_yoyakuKaoFlag"
+        DbT5221."yoyakuKaoFlag" as "DbT5221_yoyakuKaoFlag",
+        DbT5101."shoKisaiHokenshaNo" as "DbT5101_shoKisaiHokenshaNo"
         FROM
         rgdb."DbT5101NinteiShinseiJoho" as  DbT5101
         INNER JOIN
@@ -421,7 +423,8 @@
         DbT5221."ninteiChosaItakusakiCode" as "DbT5221_ninteiChosaItakusakiCode",
         DbT5221."ninteiChosainCode" as "DbT5221_ninteiChosainCode",
         DbT5221."ninteiChosaJikanWaku" as "DbT5221_ninteiChosaJikanWaku",
-        DbT5221."yoyakuKaoFlag" as "DbT5221_yoyakuKaoFlag"
+        DbT5221."yoyakuKaoFlag" as "DbT5221_yoyakuKaoFlag",
+        DbT5101."shoKisaiHokenshaNo" as "DbT5101_shoKisaiHokenshaNo"
         FROM
         rgdb."DbT5101NinteiShinseiJoho" as  DbT5101
         INNER JOIN

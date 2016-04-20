@@ -63,22 +63,23 @@ public class ShisetsutourukuPanel {
      * @return ResponseData<ShisetsutourukuPanel>
      */
     public ResponseData<ShisetsutourukuPanelDiv> onLoad(ShisetsutourukuPanelDiv div) {
+        ViewStateHolder.put(ViewStateKeys.介護事業者_状態, 追加);
         RString 介護事業者_状態 = ViewStateHolder.get(ViewStateKeys.介護事業者_状態, RString.class);
         if (追加.equals(介護事業者_状態)) {
             getHandler(div).追加_状態();
             return ResponseData.of(div).setState(DBA2010012StateName.追加状態);
         } else if (修正.equals(介護事業者_状態)) {
-            List<KaigoJogaiTokureiTaishoShisetsu> list = manager.selectByKoseiShichosonMasterList(事業者情報取得paramter(div)).records();
+            List<KaigoJogaiTokureiTaishoShisetsu> list = manager.selectByKoseiShichosonMasterList(事業者情報取得paramter()).records();
             getHandler(div).修正_状態(list);
             get事業者情報の検索処理(div);
             return ResponseData.of(div).setState(DBA2010012StateName.修正状態);
         } else if (削除.equals(介護事業者_状態)) {
-            List<KaigoJogaiTokureiTaishoShisetsu> list = manager.selectByKoseiShichosonMasterList(事業者情報取得paramter(div)).records();
+            List<KaigoJogaiTokureiTaishoShisetsu> list = manager.selectByKoseiShichosonMasterList(事業者情報取得paramter()).records();
             getHandler(div).削除_状態(list);
             get事業者情報の検索処理(div);
             return ResponseData.of(div).setState(DBA2010012StateName.削除状態);
         } else if (照会.equals(介護事業者_状態)) {
-            List<KaigoJogaiTokureiTaishoShisetsu> list = manager.selectByKoseiShichosonMasterList(事業者情報取得paramter(div)).records();
+            List<KaigoJogaiTokureiTaishoShisetsu> list = manager.selectByKoseiShichosonMasterList(事業者情報取得paramter()).records();
             getHandler(div).削除_状態(list);
             get事業者情報の検索処理(div);
             return ResponseData.of(div).setState(DBA2010012StateName.照会状態);
@@ -111,6 +112,7 @@ public class ShisetsutourukuPanel {
             if (new RString(UrQuestionMessages.保存の確認.getMessage().getCode()).equals(ResponseHolder.getMessageCode())
                     && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
                 set有効期間追加合理性チェック(div);
+                set追加状態チェック(div);
                 get事業者情報の追加処理(div);
                 return ResponseData.of(div).setState(DBA2010012StateName.完了状態);
             }
@@ -187,7 +189,7 @@ public class ShisetsutourukuPanel {
                 .createParam(RString.EMPTY,
                         div.getTxtShisetsuYukoKaishiYMD().getValue(),
                         div.getTxtShisetsuYukoShuryoYMD().getValue());
-        if (manager.checkKikanGorisei(重複paramter)) {
+        if (!manager.checkKikanGorisei(重複paramter)) {
             throw new ApplicationException(UrErrorMessages.期間が不正.getMessage());
         }
         if (manager.checkKikanJufuku(paramter)) {
@@ -206,7 +208,7 @@ public class ShisetsutourukuPanel {
                 .createParam(RString.EMPTY,
                         div.getTxtShisetsuYukoKaishiYMD().getValue(),
                         div.getTxtShisetsuYukoShuryoYMD().getValue());
-        if (manager.checkKikanGorisei(重複paramter)) {
+        if (!manager.checkKikanGorisei(重複paramter)) {
             throw new ApplicationException(UrErrorMessages.期間が不正.getMessage());
         }
         if (manager.checkKikanJufuku(paramter)) {
@@ -214,7 +216,13 @@ public class ShisetsutourukuPanel {
         }
     }
 
-    private KaigoJigyoshaParameter 事業者情報取得paramter(ShisetsutourukuPanelDiv div) {
+    private void set追加状態チェック(ShisetsutourukuPanelDiv div) {
+        if (manager.追加状態チェック(追加状態チェックparamter(div))) {
+            throw new ApplicationException("事業者番号のため登録できません。");
+        }
+    }
+
+    private KaigoJigyoshaParameter 事業者情報取得paramter() {
         JigyoshaMode mode = ViewStateHolder.get(ViewStateKeys.介護事業者_介護事業者情報, JigyoshaMode.class);
         return KaigoJigyoshaParameter.createParam(mode.getJigyoshaNo() == null ? RString.EMPTY : mode.getJigyoshaNo().value(),
                 ViewStateHolder.get(ViewStateKeys.介護事業者_事業者種別, RString.class),
@@ -222,8 +230,14 @@ public class ShisetsutourukuPanel {
                 FlexibleDate.EMPTY);
     }
 
+    private KaigoJogaiTokureiParameter 追加状態チェックparamter(ShisetsutourukuPanelDiv div) {
+        return KaigoJogaiTokureiParameter.createParam(div.getShisetsuJoho().getTxtShisetsuJigyoshaNo().getValue(),
+                FlexibleDate.EMPTY,
+                FlexibleDate.EMPTY);
+    }
+
     private ResponseData<ShisetsutourukuPanelDiv> get事業者情報の検索処理(ShisetsutourukuPanelDiv div) {
-        List<KaigoJogaiTokureiTaishoShisetsu> 事業者登録情報List = manager.selectByKoseiShichosonMasterList(事業者情報取得paramter(div)).records();
+        List<KaigoJogaiTokureiTaishoShisetsu> 事業者登録情報List = manager.selectByKoseiShichosonMasterList(事業者情報取得paramter()).records();
         KaigoJogaiTokureiTaishoShisetsu business = null;
         if (!事業者登録情報List.isEmpty()) {
             business = 事業者登録情報List.get(0);

@@ -17,6 +17,8 @@ import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2020003.Nint
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2020003.dgResultList_Row;
 import jp.co.ndensan.reams.db.dbe.service.core.basic.ninteichosaschedule.NinteichosaScheduleFinder;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBU;
+import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.GyomuBunrui;
+import jp.co.ndensan.reams.db.dbx.service.ShichosonSecurityJoho;
 import jp.co.ndensan.reams.db.dbz.definition.core.enumeratedtype.shinsei.NinteiShinseiShinseijiKubunCode;
 import jp.co.ndensan.reams.db.dbz.divcontroller.viewbox.ViewStateKeys;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
@@ -50,7 +52,6 @@ public class MainPanelHandler {
     private static final RString 性別_女 = new RString("女");
     private static final RString 男 = new RString("1");
     private static final CodeShubetsu コード種別 = new CodeShubetsu("5002");
-    private static final RString 市町村コード = new RString("123460");
 
     /**
      * コンストラクタ。
@@ -234,10 +235,8 @@ public class MainPanelHandler {
      * 認定調査委託先ドロップダウンリストと認定調査員値取得を検索する。
      */
     public void set認定調査委託先コード() {
-        //TODO データは完全に1つの固定値を設定して
-//        ShichosonSecurityJoho 市町村セキュリティ情報 = ShichosonSecurityJoho.getShichosonSecurityJoho(GyomuBunrui.介護認定);
-//        RString 市町村識別ID = 市町村セキュリティ情報.get市町村情報().get市町村識別ID();
-//        RString 市町村コード = 市町村セキュリティ情報.get市町村情報().get市町村コード().value();
+        ShichosonSecurityJoho 市町村セキュリティ情報 = ShichosonSecurityJoho.getShichosonSecurityJoho(GyomuBunrui.介護認定);
+        RString 市町村コード = 市町村セキュリティ情報.get市町村情報().get市町村コード().value();
         INinteichosaScheduleMybatisParameter mybatisParameter = INinteichosaScheduleMybatisParameter.createParam(RString.EMPTY,
                 RString.EMPTY,
                 RString.EMPTY,
@@ -331,6 +330,7 @@ public class MainPanelHandler {
                 row.setNinteiChosainCode(entity.get認定調査員コード());
                 row.setYoyakuKaoFlag(entity.get予約可能フラグ());
                 row.setNinteiChosaJikanWaku(entity.get認定調査時間枠());
+                row.setShoKisaiHokenshaNo(entity.get証記載保険者番号());
                 rowList.add(row);
             }
             div.getResultListPanel().getDgResultList().setDataSource(rowList);
@@ -390,6 +390,7 @@ public class MainPanelHandler {
                 row.setNinteiChosainCode(entity.get認定調査員コード());
                 row.setYoyakuKaoFlag(entity.get予約可能フラグ());
                 row.setNinteiChosaJikanWaku(entity.get認定調査時間枠());
+                row.setShoKisaiHokenshaNo(entity.get証記載保険者番号());
                 rowList.add(row);
             }
             div.getResultListPanel().getDgResultList().setDataSource(rowList);
@@ -450,6 +451,7 @@ public class MainPanelHandler {
                 row.setNinteiChosainCode(entity.get認定調査員コード());
                 row.setYoyakuKaoFlag(entity.get予約可能フラグ());
                 row.setNinteiChosaJikanWaku(entity.get認定調査時間枠());
+                row.setShoKisaiHokenshaNo(entity.get証記載保険者番号());
                 rowList.add(row);
             }
             div.getResultListPanel().getDgResultList().setDataSource(rowList);
@@ -510,6 +512,7 @@ public class MainPanelHandler {
                 row.setNinteiChosainCode(entity.get認定調査員コード());
                 row.setYoyakuKaoFlag(entity.get予約可能フラグ());
                 row.setNinteiChosaJikanWaku(entity.get認定調査時間枠());
+                row.setShoKisaiHokenshaNo(entity.get証記載保険者番号());
                 rowList.add(row);
             }
             div.getResultListPanel().getDgResultList().setDataSource(rowList);
@@ -572,6 +575,7 @@ public class MainPanelHandler {
                 row.setNinteiChosainCode(entity.get認定調査員コード());
                 row.setYoyakuKaoFlag(entity.get予約可能フラグ());
                 row.setNinteiChosaJikanWaku(entity.get認定調査時間枠());
+                row.setShoKisaiHokenshaNo(entity.get証記載保険者番号());
                 rowList.add(row);
             }
             div.getResultListPanel().getDgResultList().setDataSource(rowList);

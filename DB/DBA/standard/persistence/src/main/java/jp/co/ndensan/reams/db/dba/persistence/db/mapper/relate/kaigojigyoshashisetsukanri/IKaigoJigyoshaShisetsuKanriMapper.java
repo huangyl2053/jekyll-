@@ -5,7 +5,7 @@ import jp.co.ndensan.reams.db.dba.definition.mybatisprm.kaigojigyoshashisetsukan
 import jp.co.ndensan.reams.db.dba.definition.mybatisprm.kaigojigyoshashisetsukanrio.KaigoJigyoshaShisetsuKanriMapperParameter;
 import jp.co.ndensan.reams.db.dba.definition.mybatisprm.kaigojigyoshashisetsukanrio.KaigoJogaiTokureiParameter;
 import jp.co.ndensan.reams.db.dba.entity.db.relate.kaigojigyoshashisetsukanrio.KaigoJigyoshaRelateEntity;
-import jp.co.ndensan.reams.db.dba.entity.db.relate.kaigojigyoshashisetsukanrio.KaigoJogaiTokureiRelateEntity;
+import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT7063KaigoJigyoshaShiteiServiceEntity;
 import jp.co.ndensan.reams.db.dbx.entity.db.relate.kaigojigyosha.kaigojigyosha.KaigoJigyoshaEntity;
 
 /**
@@ -30,7 +30,7 @@ public interface IKaigoJigyoshaShisetsuKanriMapper {
      * @param parameter KaigoJigyoshaShisetsuKanriMapperParameter
      * @return サービス一覧情報取得
      */
-    List<KaigoJogaiTokureiRelateEntity> getServiceItiranJoho(KaigoJogaiTokureiParameter parameter);
+    List<DbT7063KaigoJigyoshaShiteiServiceEntity> getServiceItiranJoho(KaigoJogaiTokureiParameter parameter);
 
     /**
      * 有効期間重複があるかどうかを判定する。

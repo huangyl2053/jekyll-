@@ -4,23 +4,17 @@ package jp.co.ndensan.reams.db.dba.divcontroller.entity.parentdiv.DBA2010012;
  * このファイルへの変更は、再生成時には損失するため
  * 不正な動作の原因になります。
  */
-
 import com.fasterxml.jackson.annotation.JsonProperty;
+import jp.co.ndensan.reams.uz.uza.ui.binding.*;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
-import jp.co.ndensan.reams.uz.uza.ui.binding.RadioButton;
-import jp.co.ndensan.reams.uz.uza.ui.binding.TextBox;
-import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxCode;
-import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxFlexibleDate;
-import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxMultiLine;
-import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxYubinNo;
 
 /**
- * ShisetsuJoho のクラスファイル
- *
+ * ShisetsuJoho のクラスファイル 
+ * 
+ * @author 自動生成
  */
 public class ShisetsuJohoDiv extends Panel {
-
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-01-15_09-59-03">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -39,10 +33,6 @@ public class ShisetsuJohoDiv extends Panel {
     private TextBox txtShisetsuJigyoshaName;
     @JsonProperty("txtShisetsuJigyoshaNameKana")
     private TextBox txtShisetsuJigyoshaNameKana;
-    @JsonProperty("txtShisetsuRyakusho")
-    private TextBox txtShisetsuRyakusho;
-    @JsonProperty("txtShisetsuRyakushoKana")
-    private TextBox txtShisetsuRyakushoKana;
     @JsonProperty("txtShisetsuJigyoKaishiYMD")
     private TextBoxFlexibleDate txtShisetsuJigyoKaishiYMD;
     @JsonProperty("txtShisetsuJigyoKyushuYMD")
@@ -182,42 +172,6 @@ public class ShisetsuJohoDiv extends Panel {
     @JsonProperty("txtShisetsuJigyoshaNameKana")
     public void setTxtShisetsuJigyoshaNameKana(TextBox txtShisetsuJigyoshaNameKana) {
         this.txtShisetsuJigyoshaNameKana = txtShisetsuJigyoshaNameKana;
-    }
-
-    /*
-     * gettxtShisetsuRyakusho
-     * @return txtShisetsuRyakusho
-     */
-    @JsonProperty("txtShisetsuRyakusho")
-    public TextBox getTxtShisetsuRyakusho() {
-        return txtShisetsuRyakusho;
-    }
-
-    /*
-     * settxtShisetsuRyakusho
-     * @param txtShisetsuRyakusho txtShisetsuRyakusho
-     */
-    @JsonProperty("txtShisetsuRyakusho")
-    public void setTxtShisetsuRyakusho(TextBox txtShisetsuRyakusho) {
-        this.txtShisetsuRyakusho = txtShisetsuRyakusho;
-    }
-
-    /*
-     * gettxtShisetsuRyakushoKana
-     * @return txtShisetsuRyakushoKana
-     */
-    @JsonProperty("txtShisetsuRyakushoKana")
-    public TextBox getTxtShisetsuRyakushoKana() {
-        return txtShisetsuRyakushoKana;
-    }
-
-    /*
-     * settxtShisetsuRyakushoKana
-     * @param txtShisetsuRyakushoKana txtShisetsuRyakushoKana
-     */
-    @JsonProperty("txtShisetsuRyakushoKana")
-    public void setTxtShisetsuRyakushoKana(TextBox txtShisetsuRyakushoKana) {
-        this.txtShisetsuRyakushoKana = txtShisetsuRyakushoKana;
     }
 
     /*
