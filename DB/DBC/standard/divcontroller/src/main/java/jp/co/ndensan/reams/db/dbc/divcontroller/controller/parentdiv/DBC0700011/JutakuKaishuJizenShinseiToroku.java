@@ -354,6 +354,7 @@ public class JutakuKaishuJizenShinseiToroku {
             if (new RString(UrQuestionMessages.削除の確認.getMessage().getCode())
                     .equals(ResponseHolder.getMessageCode())
                     && ResponseHolder.getButtonType() == MessageDialogSelectedResult.No) {
+                div.setHidInputConfirmMsgDisplayedFlg(RString.EMPTY);
                 return ResponseData.of(div).respond();
             }
         } else {
@@ -367,6 +368,7 @@ public class JutakuKaishuJizenShinseiToroku {
             if (new RString(UrQuestionMessages.保存の確認.getMessage().getCode())
                     .equals(ResponseHolder.getMessageCode())
                     && ResponseHolder.getButtonType() == MessageDialogSelectedResult.No) {
+                div.setHidInputConfirmMsgDisplayedFlg(RString.EMPTY);
                 return ResponseData.of(div).respond();
             }
         }
