@@ -539,7 +539,6 @@ public class FukushiyoguKonyuhiShikyuShinsei {
      * @param 事業者番号 事業者番号
      * @param 様式番号 様式番号
      * @param 識別コード ShikibetsuCode
-     * @param 明細番号 明細番号
      */
     @Transaction
     public void delete(
@@ -585,7 +584,7 @@ public class FukushiyoguKonyuhiShikyuShinsei {
 
         if (null != 償還払支給判定結果entity) {
             福祉用具購入費支給決定給付実績編集Mgr.dealKyufujisseki(
-                    状態_削除, ShikibetsuCode.EMPTY, 償還払請求基本Entity.toEntity(),
+                    状態_削除, 識別コード, 償還払請求基本Entity.toEntity(),
                     dbT3048EntityList, 償還払支給申請entity.toEntity(), 償還払支給判定結果entity.toEntity(),
                     償還払請求集計entity.toEntity(), null);
         }
@@ -675,7 +674,7 @@ public class FukushiyoguKonyuhiShikyuShinsei {
         if (null != 償還払支給判定結果) {
             福祉用具購入費支給決定給付実績編集Mgr.dealKyufujisseki(
                     状態_登録,
-                    ShikibetsuCode.EMPTY,
+                    福祉用具購入費支給申請明細登録画面.get識別コード(),
                     dbT3038Entity,
                     dbT3048EntityList,
                     dbT3034Entity,

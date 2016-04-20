@@ -12,13 +12,11 @@ import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0600031.PnlK
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import static jp.co.ndensan.reams.uz.uza.math.Decimal.ONE;
 import jp.co.ndensan.reams.uz.uza.message.IMessageGettable;
 import jp.co.ndensan.reams.uz.uza.message.IValidationMessage;
 import jp.co.ndensan.reams.uz.uza.message.Message;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPair;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
-import static org.joda.time.Seconds.TWO;
 
 /**
  * 福祉用具購入費支給申請_決定情報登録 Handler
@@ -29,6 +27,8 @@ public final class PnlKeteiJohoMsgHandler {
 
     private final PnlKeteiJohoMsgDiv div;
     private static final RString 決定日 = new RString("決定日");
+    private static final RString ONE = new RString("1");
+    private static final RString TWO = new RString("2");
 
     private PnlKeteiJohoMsgHandler(PnlKeteiJohoMsgDiv div) {
         this.div = div;
