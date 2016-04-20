@@ -84,20 +84,6 @@
             <scope>test</scope>
             <type>jar</type>
         </dependency>
-        <dependency>
-            <groupId>log4j.org.powermock</groupId>
-            <artifactId>powermock-core</artifactId>
-            <version>1.6.1</version>
-            <scope>test</scope>
-            <type>jar</type>
-        </dependency>
-        <dependency>
-            <groupId>log4j.org.powermock</groupId>
-            <artifactId>powermock-module-junit4</artifactId>
-            <version>1.6.1</version>
-            <scope>test</scope>
-            <type>jar</type>
-        </dependency>
     </dependencies>
     <build>
         <plugins>
