@@ -193,13 +193,8 @@ public class MainPanel {
             if (new RString(UrQuestionMessages.保存の確認.getMessage().getCode())
                     .equals(ResponseHolder.getMessageCode())
                     && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
-                KaigoKanryoMessageDiv kaigokanryomessagediv = (KaigoKanryoMessageDiv) div.
-                        getJutakuShikyuShinseiKanryoPanel().getKanryoMessage();
                 boolean flags = getHandler(div).保存処理();
-                RString r1 = getr1(flags);
-                RString r2 = ViewStateHolder.get(ViewStateKeys.被保険者番号, HihokenshaNo.class).value();
-                RString r3 = div.getJutakuKaishuShinseiHihokenshaPanel().getKaigoAtenaInfo().get氏名漢字();
-                kaigokanryomessagediv.setMessage(r1, r2, r3, flags);
+                setMessages(div, flags);
                 return ResponseData.of(div).setState(DBC0710022StateName.KanryoMessage);
             }
         } else {
@@ -215,19 +210,15 @@ public class MainPanel {
         return ResponseData.of(div).respond();
     }
 
-    /**
-     * getr1
-     *
-     * @param flags flags
-     * @return RString
-     */
-    private RString getr1(boolean flags) {
-        RString r1;
+    private void setMessages(MainPanelDiv div, boolean flags) {
+        RString 被保険者番号 = ViewStateHolder.get(ViewStateKeys.被保険者番号, HihokenshaNo.class).value();
+        RString 氏名漢字 = div.getJutakuKaishuShinseiHihokenshaPanel().getKaigoAtenaInfo().get氏名漢字();
         if (flags) {
-            r1 = new RString(UrInformationMessages.保存終了.getMessage().toString());
+            div.getJutakuShikyuShinseiKanryoPanel().getKanryoMessage().setMessage(UrInformationMessages.保存終了,
+                    被保険者番号, 氏名漢字, flags);
         } else {
-            r1 = new RString(UrErrorMessages.異常終了.getMessage().toString());
+            div.getJutakuShikyuShinseiKanryoPanel().getKanryoMessage().setMessage(UrInformationMessages.保存終了,
+                    被保険者番号, 氏名漢字, flags);
         }
-        return r1;
     }
 }

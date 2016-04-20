@@ -5,7 +5,6 @@
  */
 package jp.co.ndensan.reams.db.dba.divcontroller.controller.parentdiv.DBA2010013;
 
-import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dba.business.core.kaigojigyoshashisetsukanrio.KaigoJogaiTokureiBusiness;
 import jp.co.ndensan.reams.db.dba.definition.mybatisprm.kaigojigyoshashisetsukanrio.KaigoJigyoshaParameter;
@@ -13,7 +12,7 @@ import jp.co.ndensan.reams.db.dba.definition.mybatisprm.kaigojigyoshashisetsukan
 import jp.co.ndensan.reams.db.dba.definition.mybatisprm.kaigojigyoshashisetsukanrio.KaigoJogaiTokureiParameter;
 import jp.co.ndensan.reams.db.dba.divcontroller.entity.parentdiv.DBA2010013.DBA2010013StateName;
 import jp.co.ndensan.reams.db.dba.divcontroller.entity.parentdiv.DBA2010013.DBA2010013TransitionEventName;
-import jp.co.ndensan.reams.db.dba.divcontroller.entity.parentdiv.DBA2010013.JigyoshaToutokuDiv;
+import jp.co.ndensan.reams.db.dba.divcontroller.entity.parentdiv.DBA2010013.JigyoshaTourokuDiv;
 import jp.co.ndensan.reams.db.dba.divcontroller.handler.parentdiv.DBA2010013.JigyoshaTourokuHandler;
 import jp.co.ndensan.reams.db.dba.service.core.kaigojigyoshashisetsukanri.KaigoJigyoshaShisetsuKanriManager;
 import jp.co.ndensan.reams.db.dba.service.jigyoshatouroku.JigyoshaTourokuFinder;
@@ -22,6 +21,8 @@ import jp.co.ndensan.reams.db.dbx.business.core.kaigojigyosha.kaigojigyosha.Kaig
 import jp.co.ndensan.reams.db.dbx.business.core.kaigojigyosha.kaigojigyoshadaihyosha.KaigoJigyoshaDaihyosha;
 import jp.co.ndensan.reams.db.dbx.business.core.kaigojigyosha.kaigojigyoshadaihyosha.KaigoJigyoshaDaihyoshaBuilder;
 import jp.co.ndensan.reams.db.dbx.business.core.kaigojigyosha.kaigojigyoshadaihyosha.KaigoJigyoshaDaihyoshaIdentifier;
+import jp.co.ndensan.reams.db.dbx.business.core.kaigojigyosha.kaigojigyoshashiteiservice.KaigoJigyoshaShiteiService;
+import jp.co.ndensan.reams.db.dbx.business.core.kaigojigyosha.kaigojigyoshashiteiservice.KaigoJigyoshaShiteiServiceIdentifier;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
 import jp.co.ndensan.reams.db.dbz.business.core.jigyosha.JigyoshaMode;
 import jp.co.ndensan.reams.db.dbz.divcontroller.viewbox.ViewStateKeys;
@@ -42,6 +43,7 @@ import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.message.MessageDialogSelectedResult;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ResponseHolder;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
+import jp.co.ndensan.reams.uz.uza.util.Models;
 
 /**
  * 事業者登録クラスです。
@@ -64,9 +66,9 @@ public class JigyoshaTouroku {
      * 事業者登録Divを初期化します。
      *
      * @param div 事業者登録Div
-     * @return ResponseData<JigyoshaToutokuDiv> 事業者登録Div
+     * @return ResponseData<JigyoshaTourokuDiv> 事業者登録Div
      */
-    public ResponseData<JigyoshaToutokuDiv> onLoad(JigyoshaToutokuDiv div) {
+    public ResponseData<JigyoshaTourokuDiv> onLoad(JigyoshaTourokuDiv div) {
         JigyoshaMode jigyoshaMode = ViewStateHolder.get(ViewStateKeys.介護事業者_介護事業者情報, JigyoshaMode.class);
         ViewStateHolder.put(ViewStateKeys.事業者登録_事業者番号, jigyoshaMode.getJigyoshaNo().getColumnValue());
         ViewStateHolder.put(ViewStateKeys.事業者登録_事業者種類コード, jigyoshaMode.getJigyoshaShubetsu());
@@ -97,9 +99,9 @@ public class JigyoshaTouroku {
         return ResponseData.of(div).respond();
     }
 
-    private ResponseData<JigyoshaToutokuDiv> get事業者情報の検索処理(JigyoshaToutokuDiv div) {
+    private ResponseData<JigyoshaTourokuDiv> get事業者情報の検索処理(JigyoshaTourokuDiv div) {
         List<KaigoJigyosha> 事業者登録情報List = manager.getJigyoshaJoho(事業者登録パラメータ).records();
-        List<KaigoJogaiTokureiBusiness> サービス一覧情報List = manager.getServiceItiranJoho(サービス一覧パラメータ).records();
+        List<KaigoJigyoshaShiteiService> サービス一覧情報List = manager.getServiceItiranJoho(サービス一覧パラメータ).records();
         boolean selectFlag = false;
         KaigoJigyosha kaigoJigyosha = null;
         if (!事業者登録情報List.isEmpty()) {
@@ -107,6 +109,7 @@ public class JigyoshaTouroku {
             kaigoJigyosha = 事業者登録情報List.get(0);
         }
         ViewStateHolder.put(ViewStateKeys.事業者登録情報, kaigoJigyosha);
+        ViewStateHolder.put(ViewStateKeys.サービス一覧情報, Models.create(サービス一覧情報List));
         getHandler(div).get事業者情報_代表者_開設者情報(selectFlag, kaigoJigyosha);
         getHandler(div).getサービス一覧情報(サービス一覧情報List);
         return ResponseData.of(div).respond();
@@ -116,31 +119,16 @@ public class JigyoshaTouroku {
      * サービス一覧の「再表示」ボタンの押下を処理です。
      *
      * @param div 事業者登録Div
-     * @return ResponseData<JigyoshaToutokuDiv> 事業者登録Div
+     * @return ResponseData<JigyoshaTourokuDiv> 事業者登録Div
      */
-    public ResponseData<JigyoshaToutokuDiv> onClick_btnServiceReload(JigyoshaToutokuDiv div) {
-        List<RString> chkKakoRirekiHyojiFlagList = div.getServiceJoho().getChkKakoRirekiHyojiFlag().getSelectedKeys();
-        boolean chkKakoRirekiHyojiFlag = false;
-        if (chkKakoRirekiHyojiFlagList.isEmpty()) {
-            chkKakoRirekiHyojiFlag = true;
+    public ResponseData<JigyoshaTourokuDiv> onClick_btnServiceReload(JigyoshaTourokuDiv div) {
+        List<RString> chkFlagList = div.getServiceJoho().getChkKakoRirekiHyojiFlag().getSelectedKeys();
+        boolean chkFlag = false;
+        if (chkFlagList.isEmpty()) {
+            chkFlag = true;
         }
-        //TODO QA:1033
-        RString 事業者番号 = ViewStateHolder.get(ViewStateKeys.事業者登録_事業者番号, RString.class);
-        FlexibleDate 有効開始日 = ViewStateHolder.get(ViewStateKeys.事業者登録_有効開始日, FlexibleDate.class);
-        サービス一覧パラメータ = KaigoJogaiTokureiParameter.createParam(
-                事業者番号, 有効開始日, FlexibleDate.EMPTY);
-        List<KaigoJogaiTokureiBusiness> サービス一覧情報List = manager.getServiceItiranJoho(サービス一覧パラメータ).records();
-        List<KaigoJogaiTokureiBusiness> サービス一覧の現在有効の情報List = new ArrayList();
-        if (chkKakoRirekiHyojiFlag) {
-            for (KaigoJogaiTokureiBusiness business : サービス一覧情報List) {
-                if (business.get有効終了日() == null) {
-                    サービス一覧の現在有効の情報List.add(business);
-                }
-            }
-            getHandler(div).getサービス一覧情報(サービス一覧の現在有効の情報List);
-        } else {
-            getHandler(div).getサービス一覧情報(サービス一覧情報List);
-        }
+        List<KaigoJogaiTokureiBusiness> サービス一覧情報List = jigyoshaTourokuFinder.getServiceItiranJoho(chkFlag).records();
+        getHandler(div).getサービス一覧情報再表示(サービス一覧情報List);
         return ResponseData.of(div).respond();
     }
 
@@ -148,9 +136,9 @@ public class JigyoshaTouroku {
      * 「サービスを追加する」ボタンの押下を処理です。
      *
      * @param div 事業者登録Div
-     * @return ResponseData<JigyoshaToutokuDiv> 事業者登録Div
+     * @return ResponseData<JigyoshaTourokuDiv> 事業者登録Div
      */
-    public ResponseData<JigyoshaToutokuDiv> onClick_btnAddService(JigyoshaToutokuDiv div) {
+    public ResponseData<JigyoshaTourokuDiv> onClick_btnAddService(JigyoshaTourokuDiv div) {
         ViewStateHolder.put(ViewStateKeys.サービス登録_画面状態, 状態_追加);
         ViewStateHolder.put(ViewStateKeys.サービス登録_事業者番号,
                 ViewStateHolder.get(ViewStateKeys.事業者登録_事業者番号, RString.class));
@@ -161,9 +149,9 @@ public class JigyoshaTouroku {
      * 「サービスを修正する」ボタンの押下を処理です。
      *
      * @param div 事業者登録Div
-     * @return ResponseData<JigyoshaToutokuDiv> 事業者登録Div
+     * @return ResponseData<JigyoshaTourokuDiv> 事業者登録Div
      */
-    public ResponseData<JigyoshaToutokuDiv> onClick_btnModify(JigyoshaToutokuDiv div) {
+    public ResponseData<JigyoshaTourokuDiv> onClick_btnModify(JigyoshaTourokuDiv div) {
         ViewStateHolder.put(ViewStateKeys.サービス登録_画面状態, 状態_修正);
         set画面引数の設定(div);
         return ResponseData.of(div).forwardWithEventName(DBA2010013TransitionEventName.サービス修正).respond();
@@ -173,19 +161,19 @@ public class JigyoshaTouroku {
      * 「サービスを削除する」ボタンの押下を処理です。
      *
      * @param div 事業者登録Div
-     * @return ResponseData<JigyoshaToutokuDiv> 事業者登録Div
+     * @return ResponseData<JigyoshaTourokuDiv> 事業者登録Div
      */
-    public ResponseData<JigyoshaToutokuDiv> onClick_btnDelete(JigyoshaToutokuDiv div) {
+    public ResponseData<JigyoshaTourokuDiv> onClick_btnDelete(JigyoshaTourokuDiv div) {
         ViewStateHolder.put(ViewStateKeys.サービス登録_画面状態, 状態_削除);
         set画面引数の設定(div);
         return ResponseData.of(div).forwardWithEventName(DBA2010013TransitionEventName.サービス削除).respond();
     }
 
-    private void set画面引数の設定(JigyoshaToutokuDiv div) {
+    private void set画面引数の設定(JigyoshaTourokuDiv div) {
         ViewStateHolder.put(ViewStateKeys.サービス登録_事業者番号, ViewStateHolder.get(ViewStateKeys.事業者登録_事業者番号, RString.class));
         ViewStateHolder.put(ViewStateKeys.サービス登録_サービス種類コード,
                 div.getServiceJoho().getDgServiceList().getClickedItem().getServiceType());
-        ViewStateHolder.put(ViewStateKeys.サービス登録_有効開始日, 
+        ViewStateHolder.put(ViewStateKeys.サービス登録_有効開始日,
                 div.getServiceJoho().getDgServiceList().getClickedItem().getKaishiDate().getValue());
     }
 
@@ -193,9 +181,9 @@ public class JigyoshaTouroku {
      * 「事業者情報を保存する」ボタンの押下を処理です。
      *
      * @param div 事業者登録Div
-     * @return ResponseData<JigyoshaToutokuDiv> 事業者登録Div
+     * @return ResponseData<JigyoshaTourokuDiv> 事業者登録Div
      */
-    public ResponseData<JigyoshaToutokuDiv> onClick_btnSave(JigyoshaToutokuDiv div) {
+    public ResponseData<JigyoshaTourokuDiv> onClick_btnSave(JigyoshaTourokuDiv div) {
         RString 初期_状態 = ViewStateHolder.get(ViewStateKeys.介護事業者_状態, RString.class);
         RString 事業者番号 = ViewStateHolder.get(ViewStateKeys.事業者登録_事業者番号, RString.class);
         FlexibleDate 有効開始日 = ViewStateHolder.get(ViewStateKeys.事業者登録_有効開始日, FlexibleDate.class);
@@ -230,8 +218,11 @@ public class JigyoshaTouroku {
         return ResponseData.of(div).respond();
     }
 
-    private ResponseData<JigyoshaToutokuDiv> get事業者情報の登録処理(RString 事業者番号, JigyoshaToutokuDiv div) {
+    private ResponseData<JigyoshaTourokuDiv> get事業者情報の登録処理(RString 事業者番号, JigyoshaTourokuDiv div) {
         JigyoshaNo jigyoshaNo = new JigyoshaNo(div.getServiceJigyoshaJoho().getTxtJigyoshaNo().getValue());
+        if (!jigyoshaTourokuFinder.事業者番号重複チェック(jigyoshaNo)) {
+            throw new ApplicationException("事業者番号が介護事業者テーブルに存在するのため登録できません。");
+        }
         FlexibleDate yukoKaishiYMD = div.getServiceJigyoshaJoho().getTxtYukoKaishiYMD().getValue();
         FlexibleDate yukoShuryoYMD = div.getServiceJigyoshaJoho().getTxtYukoShuryoYMD().getValue();
         KaigoJogaiTokureiParameter parameter = KaigoJogaiTokureiParameter.createParam(事業者番号, yukoKaishiYMD, yukoShuryoYMD);
@@ -323,7 +314,7 @@ public class JigyoshaTouroku {
         return ResponseData.of(div).respond();
     }
 
-    private ResponseData<JigyoshaToutokuDiv> get事業者情報の更新処理(JigyoshaToutokuDiv div, RString 事業者番号, FlexibleDate 有効開始日) {
+    private ResponseData<JigyoshaTourokuDiv> get事業者情報の更新処理(JigyoshaTourokuDiv div, RString 事業者番号, FlexibleDate 有効開始日) {
         KaigoJigyosha 事業者情報 = ViewStateHolder.get(ViewStateKeys.事業者登録情報, KaigoJigyosha.class);
         FlexibleDate 有効終了日 = 事業者情報.get有効終了日();
         RString jigyoshaNo = div.getServiceJigyoshaJoho().getTxtJigyoshaNo().getValue();
@@ -425,7 +416,12 @@ public class JigyoshaTouroku {
         return ResponseData.of(div).respond();
     }
 
-    private ResponseData<JigyoshaToutokuDiv> get事業者情報の削除処理(JigyoshaToutokuDiv div) {
+    private ResponseData<JigyoshaTourokuDiv> get事業者情報の削除処理(JigyoshaTourokuDiv div) {
+        boolean deleteServiceFlag = false;
+        Models<KaigoJigyoshaShiteiServiceIdentifier, KaigoJigyoshaShiteiService> サービス一覧情報Model = ViewStateHolder.get(ViewStateKeys.サービス一覧情報, Models.class);
+        for (KaigoJigyoshaShiteiService business : サービス一覧情報Model.values()) {
+            deleteServiceFlag = jigyoshaTourokuFinder.isShiteiServiceDelete(business);
+        }
         KaigoJigyosha 事業者情報 = ViewStateHolder.get(ViewStateKeys.事業者登録情報, KaigoJigyosha.class);
         KaigoJigyoshaDaihyoshaIdentifier identifier
                 = new KaigoJigyoshaDaihyoshaIdentifier(事業者情報.get事業者番号(), 事業者情報.get有効開始日());
@@ -436,7 +432,7 @@ public class JigyoshaTouroku {
         kaigoJigyoshaBuilder.setKaigoJigyoshaDaihyosha(kaigoJigyoshaDaihyosha.deleted());
         事業者情報 = kaigoJigyoshaBuilder.build();
         boolean deleteFlag = jigyoshaTourokuFinder.saveOrDelete(事業者情報.deleted());
-        if (deleteFlag) {
+        if (deleteFlag && deleteServiceFlag) {
             div.getKaigoKanryo().getCcdKaigoKanryoMessage().setMessage(new RString(UrInformationMessages.正常終了.getMessage()
                     .replace("削除").evaluate()), RString.EMPTY, RString.EMPTY, true);
         }
@@ -451,9 +447,9 @@ public class JigyoshaTouroku {
      * 「再検索する」ボタンの押下を処理です。
      *
      * @param div 事業者登録Div
-     * @return ResponseData<JigyoshaToutokuDiv> 事業者登録Div
+     * @return ResponseData<JigyoshaTourokuDiv> 事業者登録Div
      */
-    public ResponseData<JigyoshaToutokuDiv> onClick_btnBack(JigyoshaToutokuDiv div) {
+    public ResponseData<JigyoshaTourokuDiv> onClick_btnBack(JigyoshaTourokuDiv div) {
         if (!ResponseHolder.isReRequest()) {
             return ResponseData.of(div).addMessage(UrQuestionMessages.検索画面遷移の確認.getMessage()).respond();
         }
@@ -468,13 +464,24 @@ public class JigyoshaTouroku {
      * 「完了する」ボタンの押下を処理です。
      *
      * @param div 事業者登録Div
-     * @return ResponseData<JigyoshaToutokuDiv> 事業者登録Div
+     * @return ResponseData<JigyoshaTourokuDiv> 事業者登録Div
      */
-    public ResponseData<JigyoshaToutokuDiv> onClick_btnComplete(JigyoshaToutokuDiv div) {
+    public ResponseData<JigyoshaTourokuDiv> onClick_btnComplete(JigyoshaTourokuDiv div) {
         return ResponseData.of(div).forwardWithEventName(DBA2010013TransitionEventName.完了).respond();
     }
 
-    private JigyoshaTourokuHandler getHandler(JigyoshaToutokuDiv div) {
+    /**
+     * 「事業者番号入力ガイド」ボタンの押下を処理です。
+     *
+     * @param div 事業者登録Div
+     * @return ResponseData<JigyoshaTourokuDiv> 事業者登録Div
+     */
+    public ResponseData<JigyoshaTourokuDiv> onClick_btnDialog(JigyoshaTourokuDiv div) {
+        div.getServiceJigyoshaJoho().getTxtJigyoshaNo().setValue(div.getJigyoshaCode());
+        return ResponseData.of(div).respond();
+    }
+
+    private JigyoshaTourokuHandler getHandler(JigyoshaTourokuDiv div) {
         return new JigyoshaTourokuHandler(div);
     }
 }

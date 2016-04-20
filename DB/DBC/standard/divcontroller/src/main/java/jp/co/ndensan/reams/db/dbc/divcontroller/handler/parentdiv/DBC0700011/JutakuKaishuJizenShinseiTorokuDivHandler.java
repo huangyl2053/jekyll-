@@ -363,6 +363,8 @@ public final class JutakuKaishuJizenShinseiTorokuDivHandler {
             if (対象住宅住所が不一致レコード > 0) {
                 throw new ApplicationException(DbcErrorMessages.対象住宅住所不一致.getMessage());
             }
+        } else {
+            throw new ApplicationException(DbcErrorMessages.住宅改修データなし.getMessage());
         }
 
         if (div.getKaigoShikakuKihonShaPanel().getTxtServiceYM().getValue() == null) {

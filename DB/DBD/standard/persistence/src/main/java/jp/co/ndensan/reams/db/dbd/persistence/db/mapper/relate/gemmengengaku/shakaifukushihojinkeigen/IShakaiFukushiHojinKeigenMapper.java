@@ -7,7 +7,6 @@ package jp.co.ndensan.reams.db.dbd.persistence.db.mapper.relate.gemmengengaku.sh
 
 import java.util.List;
 import jp.co.ndensan.reams.db.dbd.definition.mybatisprm.gemmengengaku.shakaifukushihojinkeigen.ShakaiFukushiHojinKeigenParameter;
-import jp.co.ndensan.reams.db.dbd.entity.db.basic.DbT4017ShakaiFukushiHojinRiyoshaFutanKeigenEntity;
 import jp.co.ndensan.reams.db.dbd.entity.db.relate.gemmengengaku.shafukukeigen.ShafukuRiyoshaFutanKeigenEntity;
 
 /**
@@ -25,13 +24,5 @@ public interface IShakaiFukushiHojinKeigenMapper {
      * @return List<ShafukuRiyoshaFutanKeigenEntity>
      */
     List<ShafukuRiyoshaFutanKeigenEntity> get社会福祉法人等利用者負担軽減の情報List(ShakaiFukushiHojinKeigenParameter parameter);
-
-    /**
-     * 年度内の確認番号の重複判定します。
-     *
-     * @param parameter パラメータ
-     * @return List<DbT4017ShakaiFukushiHojinRiyoshaFutanKeigenEntity>
-     */
-    List<DbT4017ShakaiFukushiHojinRiyoshaFutanKeigenEntity> 年度内の確認番号の重複判定(ShakaiFukushiHojinKeigenParameter parameter);
 
 }

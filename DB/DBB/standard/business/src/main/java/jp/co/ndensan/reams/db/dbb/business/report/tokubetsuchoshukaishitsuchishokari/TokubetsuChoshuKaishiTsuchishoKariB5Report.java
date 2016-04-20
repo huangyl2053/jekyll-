@@ -11,6 +11,7 @@ import jp.co.ndensan.reams.ur.urz.entity.report.parts.ninshosha.NinshoshaSource;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.report.Report;
 import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
+import lombok.NonNull;
 
 /**
  * 特別徴収開始通知書（仮算定）帳票 B5横タイプ
@@ -32,7 +33,7 @@ public class TokubetsuChoshuKaishiTsuchishoKariB5Report extends
      * @param 宛名連番 RString
      */
     public TokubetsuChoshuKaishiTsuchishoKariB5Report(NinshoshaSource ninshoshaSource,
-            KariTokuchoKaishiTsuchisyoJoho 仮算定特徴開始通知書情報,
+            @NonNull KariTokuchoKaishiTsuchisyoJoho 仮算定特徴開始通知書情報,
             RString 宛名連番) {
         this.ninshoshaSource = ninshoshaSource;
         this.仮算定特徴開始通知書情報 = 仮算定特徴開始通知書情報;
@@ -41,7 +42,8 @@ public class TokubetsuChoshuKaishiTsuchishoKariB5Report extends
 
     @Override
     public void writeBy(ReportSourceWriter<TokubetsuChoshuKaishiTsuchishoKariB5Source> writer) {
-        ITokubetsuChoshuKaishiTsuchishoKariB5Editor editor = new TokubetsuChoshuKaishiTsuchishoKariB5Editor(ninshoshaSource, 仮算定特徴開始通知書情報, 宛名連番);
+        ITokubetsuChoshuKaishiTsuchishoKariB5Editor editor = new TokubetsuChoshuKaishiTsuchishoKariB5Editor(
+                ninshoshaSource, 仮算定特徴開始通知書情報, 宛名連番);
         ITokubetsuChoshuKaishiTsuchishoKariB5Builder builder = new TokubetsuChoshuKaishiTsuchishoKariB5Builder(editor);
         writer.writeLine(builder);
     }

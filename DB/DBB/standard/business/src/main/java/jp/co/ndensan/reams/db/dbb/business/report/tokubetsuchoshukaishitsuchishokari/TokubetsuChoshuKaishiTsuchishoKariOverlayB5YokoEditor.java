@@ -26,8 +26,7 @@ import jp.co.ndensan.reams.uz.uza.util.editor.DecimalFormatter;
 public class TokubetsuChoshuKaishiTsuchishoKariOverlayB5YokoEditor implements
         ITokubetsuChoshuKaishiTsuchishoKariOverlayB5YokoEditor {
 
-    private static final RString NENDO = new RString("年度");
-
+//    private static final RString NENDO = new RString("年度");
     private final KariTokuchoKaishiTsuchisyoJoho 仮算定特徴開始通知書情報;
     private final RString 通知書定型文１;
     private final RString 通知書定型文２;
@@ -58,9 +57,9 @@ public class TokubetsuChoshuKaishiTsuchishoKariOverlayB5YokoEditor implements
     @Override
     public TokubetsuChoshuKaishiTsuchishoKariOverlayB5YokoSource edit(TokubetsuChoshuKaishiTsuchishoKariOverlayB5YokoSource source) {
         source.nendo1 = 仮算定特徴開始通知書情報.get編集後仮算定通知書共通情報().get調定年度().wareki().eraType(EraType.KANJI)
-                .firstYear(FirstYear.GAN_NEN).fillType(FillType.BLANK).toDateString().concat(NENDO);
+                .firstYear(FirstYear.GAN_NEN).fillType(FillType.BLANK).toDateString();
         source.nendo2 = 仮算定特徴開始通知書情報.get編集後仮算定通知書共通情報().get調定年度().wareki().eraType(EraType.KANJI)
-                .firstYear(FirstYear.GAN_NEN).fillType(FillType.BLANK).toDateString().concat(NENDO);
+                .firstYear(FirstYear.GAN_NEN).fillType(FillType.BLANK).toDateString();
         source.tsuchishoNo2 = 仮算定特徴開始通知書情報.get編集後仮算定通知書共通情報().get通知書番号().value();
         if (仮算定特徴開始通知書情報.get編集後仮算定通知書共通情報().get編集後個人() != null) {
             source.setaiCode2 = 仮算定特徴開始通知書情報.get編集後仮算定通知書共通情報().get編集後個人().get世帯コード().value();
@@ -83,14 +82,14 @@ public class TokubetsuChoshuKaishiTsuchishoKariOverlayB5YokoEditor implements
                     0);
         }
         source.nendo3 = 仮算定特徴開始通知書情報.get編集後仮算定通知書共通情報().get調定年度().wareki().eraType(EraType.KANJI)
-                .firstYear(FirstYear.GAN_NEN).fillType(FillType.BLANK).toDateString().concat(NENDO);
+                .firstYear(FirstYear.GAN_NEN).fillType(FillType.BLANK).toDateString();
         if (仮算定特徴開始通知書情報.get編集後仮算定通知書共通情報().get前年度情報() != null) {
             source.nendo4 = new FlexibleYear(仮算定特徴開始通知書情報.get編集後仮算定通知書共通情報().get前年度情報().get前年度賦課年度())
-                    .wareki().eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN).fillType(FillType.BLANK).toDateString().concat(NENDO);
+                    .wareki().eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN).fillType(FillType.BLANK).toDateString();
         }
 
         source.nendo5 = 仮算定特徴開始通知書情報.get編集後仮算定通知書共通情報().get調定年度().wareki().eraType(EraType.KANJI)
-                .firstYear(FirstYear.GAN_NEN).fillType(FillType.BLANK).toDateString().concat(NENDO);
+                .firstYear(FirstYear.GAN_NEN).fillType(FillType.BLANK).toDateString();
         if (仮算定特徴開始通知書情報.get編集後仮算定通知書共通情報().get前年度情報() != null) {
             source.shotokuDankai = 仮算定特徴開始通知書情報.get編集後仮算定通知書共通情報().get前年度情報().get前年度保険料段階();
         }

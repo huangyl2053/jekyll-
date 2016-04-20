@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- @reamsid_L DBA-0340-050 lijia -->
+
+<mapper namespace="jp.co.ndensan.reams.db.dba.persistence.db.mapper.relate.kaigojigyoshashiteiservice.IKaigoJigyoshaShiteiServiceMapper">
+
+    <resultMap id="resultMap_getKaigoJogaiTokureiRelateEntity" type="jp.co.ndensan.reams.db.dba.entity.db.relate.kaigojigyoshashisetsukanrio.KaigoJogaiTokureiRelateEntity" autoMapping="true">
+        <result property="yukoKaishiYMD" column="DbT7063_yukoKaishiYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="yukoShuryoYMD" column="DbT7063_yukoShuryoYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="jigyoshaName" column="DbT7063_jigyoshaName" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="kanrishaName" column="DbT7063_kanrishaName" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="serviceShuruiCode" column="DbT7063_serviceShuruiCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+    </resultMap>
+    
+    <select id="getKaigoJigyoshaShiteiServiceRireki" resultMap="resultMap_getKaigoJogaiTokureiRelateEntity"
+            parameterType="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler" fetchSize="500">
+        SELECT
+        DbT7063."yukoKaishiYMD" as "DbT7063_yukoKaishiYMD",
+        DbT7063."yukoShuryoYMD" as "DbT7063_yukoShuryoYMD",
+        DbT7063."jigyoshaName" as "DbT7063_jigyoshaName",
+        DbT7063."kanrishaName" as "DbT7063_kanrishaName",
+        DbT7063."serviceShuruiCode" as "DbT7063_serviceShuruiCode"
+        FROM
+        rgdb."DbT7063KaigoJigyoshaShiteiService" AS DbT7063
+        WHERE
+        DbT7063."yukoKaishiYMD" <![CDATA[<=]]> #{systemDate}
+        ORDER BY
+        DbT7063."serviceShuruiCode" DESC,
+        DbT7063."yukoKaishiYMD" DESC
+    </select>
+    
+    <select id="getKaigoJigyoshaShiteiService" resultMap="resultMap_getKaigoJogaiTokureiRelateEntity"
+            parameterType="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler" fetchSize="500">
+        SELECT
+        DbT7063."yukoKaishiYMD" as "DbT7063_yukoKaishiYMD",
+        DbT7063."yukoShuryoYMD" as "DbT7063_yukoShuryoYMD",
+        DbT7063."jigyoshaName" as "DbT7063_jigyoshaName",
+        DbT7063."kanrishaName" as "DbT7063_kanrishaName",
+        DbT7063."serviceShuruiCode" as "DbT7063_serviceShuruiCode"
+        FROM
+        (SELECT
+        dbT7063Service."yukoKaishiYMD",
+        dbT7063Service."yukoShuryoYMD",
+        dbT7063Service."jigyoshaName",
+        dbT7063Service."kanrishaName",
+        dbT7063Service."serviceShuruiCode",
+        row_number() OVER (PARTITION BY dbT7063Service."jigyoshaNo", dbT7063Service."serviceShuruiCode" ORDER BY dbT7063Service."yukoKaishiYMD" DESC) AS rrkno
+        FROM
+        rgdb."DbT7063KaigoJigyoshaShiteiService" AS dbT7063Service
+        WHERE
+        dbT7063Service."yukoKaishiYMD" <![CDATA[<=]]> #{systemDate}) AS DbT7063
+        WHERE
+        DbT7063.rrkno = 1
+    </select>
+</mapper>

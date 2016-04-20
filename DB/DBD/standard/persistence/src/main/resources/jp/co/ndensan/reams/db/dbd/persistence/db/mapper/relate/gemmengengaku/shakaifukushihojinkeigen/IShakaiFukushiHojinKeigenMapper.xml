@@ -28,14 +28,4 @@
         <association property="社会福祉法人等利用者負担軽減Entity" resultMap="jp.co.ndensan.reams.db.dbd.persistence.db.mapper.basic.IDbT4017ShakaiFukushiHojinRiyoshaFutanKeigenMapper.ResultMap_DbT4017ShakaiFukushiHojinRiyoshaFutanKeigenEntity"/>
         <collection property="減免減額申請Entity" resultMap="jp.co.ndensan.reams.db.dbd.persistence.db.mapper.basic.IDbT4010GemmenGengakuShinseiMapper.ResultMap_DbT4010GemmenGengakuShinseiEntity"/>
     </resultMap>
-    <select id="年度内の確認番号の重複判定"
-            resultType="jp.co.ndensan.reams.db.dbd.entity.db.basic.DbT4017ShakaiFukushiHojinRiyoshaFutanKeigenEntity" 
-            parameterType="jp.co.ndensan.reams.db.dbd.definition.mybatisprm.gemmengengaku.shakaifukushihojinkeigen.ShakaiFukushiHojinKeigenParameter"
-            fetchSize="500">
-        SELECT *
-        FROM rgdb."DbT4017ShakaiFukushiHojinRiyoshaFutanKeigen" A
-        WHERE A."tekiyoKaishiYMD" <![CDATA[>=]]> #{年度開始日}
-        AND A."tekiyoShuryoYMD" <![CDATA[<=]]> #{年度終了日}
-        AND A."kakuninNo" = #{確認番号}
-    </select>
 </mapper>

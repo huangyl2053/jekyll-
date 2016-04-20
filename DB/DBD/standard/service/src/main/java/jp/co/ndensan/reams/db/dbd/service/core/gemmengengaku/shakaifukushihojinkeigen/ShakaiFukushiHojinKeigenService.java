@@ -14,6 +14,7 @@ import jp.co.ndensan.reams.db.dbd.definition.core.gemmengengaku.shakaifukushihoj
 import jp.co.ndensan.reams.db.dbd.definition.mybatisprm.gemmengengaku.shakaifukushihojinkeigen.ShakaiFukushiHojinKeigenParameter;
 import jp.co.ndensan.reams.db.dbd.entity.db.basic.DbT4017ShakaiFukushiHojinRiyoshaFutanKeigenEntity;
 import jp.co.ndensan.reams.db.dbd.entity.db.relate.gemmengengaku.shafukukeigen.ShafukuRiyoshaFutanKeigenEntity;
+import jp.co.ndensan.reams.db.dbd.persistence.db.basic.DbT4017ShakaiFukushiHojinRiyoshaFutanKeigenDac;
 import jp.co.ndensan.reams.db.dbd.persistence.db.mapper.relate.gemmengengaku.shakaifukushihojinkeigen.IShakaiFukushiHojinKeigenMapper;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBD;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
@@ -26,8 +27,8 @@ import jp.co.ndensan.reams.db.dbz.service.core.MapperProvider;
 import jp.co.ndensan.reams.ur.urd.service.core.seikatsuhogo.SeikatsuhogoManagerFactory;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.biz.GyomuCode;
-import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
+import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -96,17 +97,15 @@ public class ShakaiFukushiHojinKeigenService {
         RString 有効期限RString;
         if (適用日.isBeforeOrEquals(new FlexibleDate(new RString("20050930")))) {
             有効期限RString = BusinessConfig.get(ConfigNameDBD.減免期限_法人減免,
-                    new RDate(適用日.getYearValue(), 適用日.getMonthValue(), 適用日.getDayValue()), LasdecCode.EMPTY);
+                    new RDate(適用日.getYearValue(), 適用日.getMonthValue(), 適用日.getDayValue()), SubGyomuCode.DBD介護受給);
         } else {
             有効期限RString = BusinessConfig.get(ConfigNameDBD.減免期限_法人軽減,
-                    new RDate(適用日.getYearValue(), 適用日.getMonthValue(), 適用日.getDayValue()), LasdecCode.EMPTY);
+                    new RDate(適用日.getYearValue(), 適用日.getMonthValue(), 適用日.getDayValue()), SubGyomuCode.DBD介護受給);
         }
-        if (有効期限RString != null && !有効期限RString.isEmpty()) {
-            有効期限 = new FlexibleDate(有効期限RString);
-        } else {
+        if (null == 有効期限RString || 有効期限RString.isEmpty()) {
             return FlexibleDate.EMPTY;
         }
-        FlexibleDate 有効期限候補 = new FlexibleDate(適用日.getYearValue(), 有効期限.getMonthValue(), 有効期限.getDayValue());
+        FlexibleDate 有効期限候補 = new FlexibleDate(new RString(String.valueOf(適用日.getYearValue())).concat(有効期限RString));
         if (適用日.isBeforeOrEquals(有効期限候補)) {
             return 有効期限候補;
         } else {
@@ -130,17 +129,18 @@ public class ShakaiFukushiHojinKeigenService {
         if (年度終了日.isEmpty()) {
             年度終了日の前年 = FlexibleDate.EMPTY;
         } else {
-            年度終了日の前年 = new FlexibleDate(年度終了日.getYearValue(), 1, 1);
+            年度終了日の前年 = new FlexibleDate(年度終了日.getYearValue() - 1, 1, 1);
         }
         FlexibleDate 年度開始日;
         if (年度終了日の前年.isEmpty()) {
             年度開始日 = FlexibleDate.EMPTY;
         } else {
-            年度開始日 = estimate有効期限(年度終了日の前年).plusYear(1);
+            年度開始日 = estimate有効期限(年度終了日の前年).plusDay(1);
         }
-        ShakaiFukushiHojinKeigenParameter 検索条件 = new ShakaiFukushiHojinKeigenParameter(年度開始日, 年度終了日, 確認番号);
-        IShakaiFukushiHojinKeigenMapper mapper = mapperProvider.create(IShakaiFukushiHojinKeigenMapper.class);
-        List<DbT4017ShakaiFukushiHojinRiyoshaFutanKeigenEntity> entityList = mapper.年度内の確認番号の重複判定(検索条件);
+        DbT4017ShakaiFukushiHojinRiyoshaFutanKeigenDac dac
+                = InstanceProvider.create(DbT4017ShakaiFukushiHojinRiyoshaFutanKeigenDac.class);
+        List<DbT4017ShakaiFukushiHojinRiyoshaFutanKeigenEntity> entityList
+                = dac.selectFor年度内の確認番号の重複判定(年度開始日, 年度終了日, 確認番号);
         return entityList != null && !entityList.isEmpty();
     }
 

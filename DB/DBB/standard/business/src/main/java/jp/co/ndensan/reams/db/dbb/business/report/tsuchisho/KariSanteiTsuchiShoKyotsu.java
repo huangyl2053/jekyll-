@@ -5,15 +5,21 @@
  */
 package jp.co.ndensan.reams.db.dbb.business.report.tsuchisho;
 
+import java.util.List;
+import jp.co.ndensan.reams.ca.cax.entity.db.psm.CaFt703FindNokumiEntity;
+import jp.co.ndensan.reams.db.dbb.business.core.basic.ChoshuHoho;
+import jp.co.ndensan.reams.db.dbb.business.core.fukaatena.FukaAtena;
+import jp.co.ndensan.reams.db.dbb.business.core.zenkaifuka.ZenkaiFuka;
+import jp.co.ndensan.reams.db.dbb.business.report.tsuchisho.notsu.NokiJoho;
+import jp.co.ndensan.reams.db.dbb.business.report.tsuchisho.notsu.ShunyuJoho;
 import jp.co.ndensan.reams.db.dbb.definition.core.ShoriKubun;
-import jp.co.ndensan.reams.db.dbb.entity.db.basic.DbT2001ChoshuHohoEntity;
-import jp.co.ndensan.reams.db.dbb.entity.db.basic.DbT2002FukaEntity;
-import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7065ChohyoSeigyoKyotsuEntity;
+import jp.co.ndensan.reams.db.dbz.business.core.basic.ChohyoSeigyoKyotsu;
 import jp.co.ndensan.reams.ua.uax.business.core.atesaki.IAtesaki;
 import jp.co.ndensan.reams.ua.uax.business.core.koza.IKoza;
+import jp.co.ndensan.reams.ue.uex.business.core.NenkinTokuchoKaifuJoho;
 import jp.co.ndensan.reams.ur.urz.business.core.association.Association;
+import jp.co.ndensan.reams.uz.uza.biz.ReportId;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
-import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
  * KariSanteiTsuchiShoKyotsuのクラスです。
@@ -24,25 +30,22 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 public class KariSanteiTsuchiShoKyotsu {
 
     private FlexibleDate 発行日;
-    private RString 帳票分類ID;
-    //chohyoBunruiID
-    private RString 帳票ID;
+    private ReportId 帳票分類ID;
+    private ReportId 帳票ID;
     private ShoriKubun 処理区分;
     private Association 地方公共団体;
-    private DbT2002FukaEntity 賦課の情報_更正後;
-    private DbT2002FukaEntity 賦課の情報_更正前;
-    private RString 納組情報;
-    //CaFt703FindNokumiEntity
+    private FukaAtena 賦課の情報_更正後;
+    private FukaAtena 賦課の情報_更正前;
+    private CaFt703FindNokumiEntity 納組情報;
+    private List<NokiJoho> 普徴納期情報リスト;
+    private List<NokiJoho> 特徴納期情報リスト;
     private IAtesaki 宛先情報;
-    private DbT2002FukaEntity 前年度賦課情報;
+    private ZenkaiFuka 前年度賦課情報;
     private IKoza 口座情報;
-    private DbT2001ChoshuHohoEntity 徴収方法情報_更正前;
-    private DbT2001ChoshuHohoEntity 徴収方法情報_更正後;
-    private RString 対象者_追加含む_情報_更正前;
-    //UrT0511NenkinTokuchoKaifuJoho
-    private RString 対象者_追加含む_情報_更正後;
-    //UrT0511NenkinTokuchoKaifuJoho
-    private RString 収入情報;
-    //ShunyuJoho
-    private DbT7065ChohyoSeigyoKyotsuEntity 帳票制御共通;
+    private ChoshuHoho 徴収方法情報_更正前;
+    private ChoshuHoho 徴収方法情報_更正後;
+    private NenkinTokuchoKaifuJoho 対象者_追加含む_情報_更正前;
+    private NenkinTokuchoKaifuJoho 対象者_追加含む_情報_更正後;
+    private ShunyuJoho 収入情報;
+    private ChohyoSeigyoKyotsu 帳票制御共通;
 }
