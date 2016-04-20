@@ -5,7 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dba.divcontroller.handler.parentdiv.DBA1140011;
 
-import jp.co.ndensan.reams.db.dba.divcontroller.entity.parentdiv.DBA1140011.jukinentotorokuDiv;
+import jp.co.ndensan.reams.db.dba.divcontroller.entity.parentdiv.DBA1140011.JukiNendoTorokushaListDiv;
 import jp.co.ndensan.reams.db.dbz.definition.message.DbzErrorMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.uz.uza.message.IMessageGettable;
@@ -21,14 +21,14 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
  */
 public class JukinenTotorokuValidationHandler {
 
-    private final jukinentotorokuDiv div;
+    private final JukiNendoTorokushaListDiv div;
 
     /**
      * コンストラクタです。
      *
      * @param div 住基連動登録者Div
      */
-    public JukinenTotorokuValidationHandler(jukinentotorokuDiv div) {
+    public JukinenTotorokuValidationHandler(JukiNendoTorokushaListDiv div) {
         this.div = div;
     }
 

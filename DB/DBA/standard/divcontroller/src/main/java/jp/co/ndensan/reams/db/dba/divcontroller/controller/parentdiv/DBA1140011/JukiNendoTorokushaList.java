@@ -9,7 +9,7 @@ import jp.co.ndensan.reams.db.dba.business.core.jukinentotoroku.DbT7022ShoriDate
 import jp.co.ndensan.reams.db.dba.definition.batchprm.jyukirendotorokushalistbatch.JyukiRendoTorokushaListBatchParameter;
 import jp.co.ndensan.reams.db.dba.divcontroller.entity.parentdiv.DBA1140011.BatchParamterInfoDiv;
 import jp.co.ndensan.reams.db.dba.divcontroller.entity.parentdiv.DBA1140011.DBA1140011TransitionEventName;
-import jp.co.ndensan.reams.db.dba.divcontroller.entity.parentdiv.DBA1140011.jukinentotorokuDiv;
+import jp.co.ndensan.reams.db.dba.divcontroller.entity.parentdiv.DBA1140011.JukiNendoTorokushaListDiv;
 import jp.co.ndensan.reams.db.dba.divcontroller.handler.parentdiv.DBA1140011.JukinenTotorokuValidationHandler;
 import jp.co.ndensan.reams.db.dba.service.core.jukirendotorokushalist.JukiRendoTorokushaListFinder;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
@@ -24,7 +24,7 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
  *
  * @reamsid_L DBA-0560-010 xuyannan
  */
-public class jukinentotoroku {
+public class JukiNendoTorokushaList {
 
     private final JukiRendoTorokushaListFinder finder;
     // TODO 帳票出力順の初期化(技術点に提出しました※QA#73393)
@@ -34,7 +34,7 @@ public class jukinentotoroku {
     /**
      * コンストラクタです。
      */
-    public jukinentotoroku() {
+    public JukiNendoTorokushaList() {
         finder = JukiRendoTorokushaListFinder.createInstance();
     }
 
@@ -42,9 +42,9 @@ public class jukinentotoroku {
      * 住基登録者Divを初期化します。
      *
      * @param div 住基登録者Div
-     * @return ResponseData<jukinentotorokuDiv> 住基登録者Div
+     * @return ResponseData<JukiNendoTorokushaListDiv> 住基登録者Div
      */
-    public ResponseData<jukinentotorokuDiv> onLoad(jukinentotorokuDiv div) {
+    public ResponseData<JukiNendoTorokushaListDiv> onLoad(JukiNendoTorokushaListDiv div) {
         FlexibleDate nowDate = new FlexibleDate(RDate.getNowDate().toDateString());
         CommonButtonHolder.setVisibleByCommonButtonFieldName(new RString("BatchRegister"), false);
         DbT7022ShoriDateKanriBusiness business = finder.getKaishiShuryobi();
@@ -86,7 +86,7 @@ public class jukinentotoroku {
      * @param div 住基登録者Div
      * @return チェック結果(true/false)
      */
-    public ResponseData<jukinentotorokuDiv> onClick_inputCheck(jukinentotorokuDiv div) {
+    public ResponseData<JukiNendoTorokushaListDiv> onClick_inputCheck(JukiNendoTorokushaListDiv div) {
         ValidationMessageControlPairs validPairs = getValidationHandler(div).validateForAction();
         if (validPairs.iterator().hasNext()) {
             return ResponseData.of(div).addValidationMessages(validPairs).respond();
@@ -111,7 +111,7 @@ public class jukinentotoroku {
         return ResponseData.of(parameter).forwardWithEventName(DBA1140011TransitionEventName.処理終了).respond();
     }
 
-    private JukinenTotorokuValidationHandler getValidationHandler(jukinentotorokuDiv div) {
+    private JukinenTotorokuValidationHandler getValidationHandler(JukiNendoTorokushaListDiv div) {
         return new JukinenTotorokuValidationHandler(div);
     }
 }
