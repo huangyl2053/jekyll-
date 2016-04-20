@@ -26,12 +26,14 @@ import jp.co.ndensan.reams.db.dbc.divcontroller.viewbox.ViewStateKeys;
 import jp.co.ndensan.reams.db.dbc.divcontroller.viewbox.dbc0600011.PnlTotalParameter;
 import jp.co.ndensan.reams.db.dbc.divcontroller.viewbox.dbc0600021.YoguKonyuhiShikyuShinseiPnlTotalParameter;
 import jp.co.ndensan.reams.db.dbc.service.core.fukushiyogukonyuhishikyushisei.FukushiyoguKonyuhiShikyuShinsei;
+import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBU;
 import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.GyomuBunrui;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HokenKyufuRitsu;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShoKisaiHokenshaNo;
 import jp.co.ndensan.reams.db.dbx.service.ShichosonSecurityJoho;
+import jp.co.ndensan.reams.db.dbx.service.core.dbbusinessconfig.DbBusinessConifg;
 import jp.co.ndensan.reams.db.dbz.business.core.kijunt.IKoseiShichosonMaster;
 import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.kyotsu.SaibanHanyokeyName;
 import jp.co.ndensan.reams.db.dbz.service.core.kijuntsukishichosonjoho.KijuntsukiShichosonjohoFinder;
@@ -147,6 +149,7 @@ public class YoguKonyuhiShikyuShinseiPnlTotalHandler {
         if (shokankihon.get様式番号() != null) {
             builder.append(shokankihon.get様式番号());
         }
+        builder.append(new RString(" "));
         if (略称 != null) {
             builder.append(略称);
         }
@@ -1067,6 +1070,9 @@ public class YoguKonyuhiShikyuShinseiPnlTotalHandler {
         return parameter;
     }
 
+    /**
+     * get申請者区分リスト
+     */
     public void get申請者区分リスト() {
         List<KeyValueDataSource> dataSourceList = new ArrayList<>();
         KeyValueDataSource dataSourceBlank = new KeyValueDataSource(申請者区分BLANK, RString.EMPTY);
@@ -1097,12 +1103,25 @@ public class YoguKonyuhiShikyuShinseiPnlTotalHandler {
                 getGridSetting().setIsShowSelectButtonColumn(false);
         div.getYoguKonyuhiShikyuShinseiContentsPanel().getTxtTeikyoYM().setValue(
                 new RDate(RDate.getNowDate().getYearMonth().minusMonth(設定値).toString()));
+        FlexibleYearMonth サービス提供年月 = new FlexibleYearMonth(div.getYoguKonyuhiShikyuShinseiContentsPanel().
+                getTxtTeikyoYM().getValue().getYearMonth().toString());
+        ViewStateHolder.put(ViewStateKeys.サービス提供年月, サービス提供年月);
         div.getYoguKonyuhiShikyuShinseiContentsPanel().getDdlShityoson().setDataSource(
                 get保険者(new FlexibleYearMonth(div.getYoguKonyuhiShikyuShinseiContentsPanel().
                                 getTxtTeikyoYM().getValue().getYearMonth().toString())));
         div.getYoguKonyuhiShikyuShinseiContentsPanel().getTxtSeiriNo().clearValue();
-        div.getYoguKonyuhiShikyuShinseiContentsPanel().getTxtKyufuritsu().clearValue();
+        RString 給付率 = DbBusinessConifg.get(ConfigNameDBU.介護保険法情報_保険給付率_標準給付率, RDate.getNowDate(),
+                SubGyomuCode.DBU介護統計報告);
+        div.getYoguKonyuhiShikyuShinseiContentsPanel().getTxtKyufuritsu().setValue(new Decimal(給付率.toString()));
+        HokenKyufuRitsu hokenkyufuritsu = new HokenKyufuRitsu(
+                div.getYoguKonyuhiShikyuShinseiContentsPanel().getTxtKyufuritsu().getValue());
+        ViewStateHolder.put(ViewStateKeys.給付率, hokenkyufuritsu);
         div.getYoguKonyuhiShikyuShinseiContentsPanel().getTxtJigyoshaNo().setValue(NUM3);
+        RString 整理番号 = Saiban.get(SubGyomuCode.DBC介護給付, SaibanHanyokeyName.償還整理番号.
+                getコード()).nextString();
+        JigyoshaNo 事業者番号 = new JigyoshaNo(NUM3);
+        ViewStateHolder.put(ViewStateKeys.事業者番号, 事業者番号);
+        ViewStateHolder.put(ViewStateKeys.整理番号, 整理番号);
         div.getYoguKonyuhiShikyuShinseiContentsPanel().getYoguKonyuhiDetailInput().
                 getTxtBuyYMD().setDisabled(true);
         div.getYoguKonyuhiShikyuShinseiContentsPanel().getYoguKonyuhiDetailInput().
@@ -1169,7 +1188,7 @@ public class YoguKonyuhiShikyuShinseiPnlTotalHandler {
      */
     public void set削除モード() {
         div.getYoguKonyuhiShikyuShinseiContentsPanel().getTxtTeikyoYM().setDisabled(true);
-        div.getYoguKonyuhiShikyuShinseiContentsPanel().getDdlShityoson().setVisible(false);
+        div.getYoguKonyuhiShikyuShinseiContentsPanel().getDdlShityoson().setDisplayNone(true);
         div.getYoguKonyuhiShikyuShinseiContentsPanel().getTxtSyomeisyo().setDisabled(true);
         div.getYoguKonyuhiShikyuShinseiContentsPanel().getTxtJigyoshaNo().setDisabled(true);
         div.getYoguKonyuhiShikyuShinseiContentsPanel().getDgSeikyuDetail().
