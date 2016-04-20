@@ -100,7 +100,8 @@ public class PnlKeteiJohoMsg {
      * @return 福祉用具購入費支給申請一覧画面へ遷移
      */
     public ResponseData<PnlKeteiJohoMsgDiv> onClick_btnFree(PnlKeteiJohoMsgDiv div) {
-        if (モード_削除.equals(ViewStateHolder.get(ViewStateKeys.状態, RString.class))) {
+        if (モード_削除.equals(ViewStateHolder.get(ViewStateKeys.状態, RString.class))
+                || モード_参照.equals(ViewStateHolder.get(ViewStateKeys.状態, RString.class))) {
             return ResponseData.of(div).forwardWithEventName(DBC0600031TransitionEventName.一覧に戻る).respond();
         }
         boolean flag = getHandler(div).is内容変更状態(償還払決定一覧, 決定情報);
