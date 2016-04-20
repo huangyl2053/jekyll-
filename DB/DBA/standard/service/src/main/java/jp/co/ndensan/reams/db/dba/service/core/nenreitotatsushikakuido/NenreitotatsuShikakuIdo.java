@@ -20,7 +20,7 @@ import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 /**
  * ６５歳年齢到達資格異動のビジネスクラスです。
  *
- * @reamsid_L DBA-0330-030 xuyue
+ * @reamsid_L DBA-0330-020 xuyue
  */
 public class NenreitotatsuShikakuIdo {
 

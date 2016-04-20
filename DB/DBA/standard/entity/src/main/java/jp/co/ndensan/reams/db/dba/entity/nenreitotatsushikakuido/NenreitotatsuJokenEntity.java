@@ -11,6 +11,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 /**
  * 年齢到達条件Entityクラスです。
  *
+ * @reamsid_L DBA-0330-020 xuyue
  */
 @lombok.Getter
 @lombok.Setter
