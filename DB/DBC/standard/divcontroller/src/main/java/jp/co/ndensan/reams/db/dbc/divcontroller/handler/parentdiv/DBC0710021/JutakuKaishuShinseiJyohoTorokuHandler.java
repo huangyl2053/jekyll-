@@ -118,6 +118,7 @@ public final class JutakuKaishuShinseiJyohoTorokuHandler {
     private final RString 償還払給付費 = new RString("001");
     private final RString 提供着工年月MSG = new RString("提供（着工）年月");
     private final RString 申請者区分_空 = new RString("0");
+    private final RString 申請取消事由_空 = new RString("0");
     private final RString 連番 = new RString("01");
     private final int 被除数 = 100;
 
@@ -295,7 +296,10 @@ public final class JutakuKaishuShinseiJyohoTorokuHandler {
                 div.getJutakuKaishuShinseiContents().getJutakuKaishuShinseiResetInfo().setDisabled(true);
                 div.getJutakuKaishuShinseiContents().getShinsaKekkaPanel().setDisabled(true);
                 div.getJutakuKaishuShinseiContents().getShinseishaInfo().setDisabled(true);
-                div.getJutakuKaishuShinseiContents().getShinseishaInfo().getDdlShinseiTorikesuJiyu().setSelectedKey(償還);
+                div.getJutakuKaishuShinseiContents().getShinseishaInfo().getDdlShinseiTorikesuJiyu().setDisabled(false);
+                div.getJutakuKaishuShinseiContents().getJutakuKaishuShinseiReason().setDisabled(true);
+                div.getJutakuKaishuShinseiContents().getShinseishaInfo().getDdlShinseiTorikesuJiyu().setSelectedKey(
+                        申請取消事由_空);
             }
             証明書表示設定(住宅改修費支給申請, 被保険者番号, 画面モード);
             ViewStateHolder.put(ViewStateKeys.申請情報登録_更新前データ, (Serializable) get更新前データ());
@@ -592,6 +596,7 @@ public final class JutakuKaishuShinseiJyohoTorokuHandler {
         RString 申請取消事由 = CodeMasterNoOption.getCodeRyakusho(
                 new CodeShubetsu("0028"), new Code(申請取消事由コード));
         List<KeyValueDataSource> torikesuJiyu = new ArrayList<>();
+        torikesuJiyu.add(new KeyValueDataSource(申請取消事由_空, RString.EMPTY));
         torikesuJiyu.add(new KeyValueDataSource(申請取消事由コード, 申請取消事由));
         div.getJutakuKaishuShinseiContents().getShinseishaInfo().getDdlShinseiTorikesuJiyu().setDataSource(torikesuJiyu);
         div.getJutakuKaishuShinseiContents().getShinseishaInfo().getDdlShinseiTorikesuJiyu().setSelectedKey(
