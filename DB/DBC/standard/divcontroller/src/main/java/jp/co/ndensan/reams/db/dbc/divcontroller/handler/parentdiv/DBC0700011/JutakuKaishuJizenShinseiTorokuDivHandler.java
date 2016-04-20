@@ -1160,7 +1160,13 @@ public final class JutakuKaishuJizenShinseiTorokuDivHandler {
             削除モード初期化();
         } else if (取消モード.equals(画面モード)) {
             取消モード初期化();
+        } else if (登録モード.equals(画面モード)) {
+            登録モード初期化();
         }
+    }
+
+    private void 登録モード初期化() {
+        div.getKaigoShikakuKihonShaPanel().getShinseishaInfo().getDdlShinseiTorikesuJiyu().setDisplayNone(true);
     }
 
     private void 照会モード初期化() {
