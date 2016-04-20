@@ -187,10 +187,10 @@ public class GenmenKetteiTsuchiShoPrintService {
     private void setBaseItem(GenmenKetteiTsuchiShoItem item, GenmenKetteiTsuchiShoJoho 減免決定通知書情報,
             RString 文書番号, RString 通知書定型文, IKaigoToiawasesakiSourceBuilder 介護問合せ先ソースビルダー, NinshoshaSource sourceBuilder) {
         item.set文書番号(文書番号);
-        item.set調定年度(減免決定通知書情報.get減免の情報更正後().get介護賦課().getChoteiNendo().wareki().eraType(EraType.KANJI).toDateString());
-        item.set賦課年度(減免決定通知書情報.get減免の情報更正後().get介護賦課().getFukaNendo().wareki().eraType(EraType.KANJI)
+        item.set調定年度(減免決定通知書情報.get減免の情報更正後().get調定年度().wareki().eraType(EraType.KANJI).toDateString());
+        item.set賦課年度(減免決定通知書情報.get減免の情報更正後().get賦課年度().wareki().eraType(EraType.KANJI)
                 .firstYear(FirstYear.GAN_NEN).toDateString().concat(年度));
-        item.set決定結果(減免決定通知書情報.get減免の情報更正後().get介護賦課減免().getJotaiKubun());
+        item.set決定結果(減免決定通知書情報.get減免の情報更正後().get減免状態区分());
         HyojiCodeResearcher researcher = new HyojiCodeResearcher();
         if (isNotNull(減免決定通知書情報.get帳票制御共通()) && isNotNull(減免決定通知書情報.get宛名()) && isNotNull(減免決定通知書情報.get納組情報())) {
 
@@ -208,32 +208,32 @@ public class GenmenKetteiTsuchiShoPrintService {
                 item.set表示コード３(表示コード.get表示コード３());
             }
         }
-        item.set通知書番号(減免決定通知書情報.get減免の情報更正後().get介護賦課().getTsuchishoNo().value());
-        SetaiCode 世帯コード = 減免決定通知書情報.get減免の情報更正後().get介護賦課().getSetaiCode();
+        item.set通知書番号(減免決定通知書情報.get減免の情報更正後().get通知書番号().value());
+        SetaiCode 世帯コード = 減免決定通知書情報.get減免の情報更正後().get世帯コード();
         if (世帯コード != null) {
             item.set世帯コード(世帯コード.value());
         }
-        item.set被保険者番号(減免決定通知書情報.get減免の情報更正後().get介護賦課().getHihokenshaNo().value());
-        ShikibetsuCode 識別コード = 減免決定通知書情報.get減免の情報更正後().get介護賦課().getShikibetsuCode();
+        item.set被保険者番号(減免決定通知書情報.get減免の情報更正後().get被保険者番号().value());
+        ShikibetsuCode 識別コード = 減免決定通知書情報.get減免の情報更正後().get識別コード();
         if (識別コード != null) {
             item.set識別コード(識別コード.value());
         }
-        item.set減免決定年月日(減免決定通知書情報.get減免の情報更正後().get介護賦課減免().getKetteiYMD().wareki().eraType(EraType.KANJI).
+        item.set減免決定年月日(減免決定通知書情報.get減免の情報更正後().get減免決定日().wareki().eraType(EraType.KANJI).
                 firstYear(FirstYear.GAN_NEN).separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString());
         item.set減免額前(DecimalFormatter.toコンマ区切りRString(減免決定通知書情報
-                .get賦課の情報更正前().get介護賦課().getGemmenGaku(), 0));
+                .get賦課の情報更正前().get減免額(), 0));
         item.set保険料算出額前(DecimalFormatter.toコンマ区切りRString(減免決定通知書情報
-                .get賦課の情報更正前().get介護賦課().getGemmenMaeHokenryo(), 0));
+                .get賦課の情報更正前().get減免前介護保険料(), 0));
         item.set保険料額前(DecimalFormatter.toコンマ区切りRString(減免決定通知書情報
-                .get賦課の情報更正前().get介護賦課().getKakuteiHokenryo(), 0));
+                .get賦課の情報更正前().get確定介護保険料(), 0));
         item.set減免額後(DecimalFormatter.toコンマ区切りRString(減免決定通知書情報
-                .get減免の情報更正後().get介護賦課().getGemmenGaku(), 0));
+                .get減免の情報更正後().get減免額(), 0));
         item.set保険料算出額後(DecimalFormatter.toコンマ区切りRString(減免決定通知書情報
-                .get減免の情報更正後().get介護賦課().getGemmenMaeHokenryo(), 0));
+                .get減免の情報更正後().get減免前介護保険料(), 0));
         item.set保険料額後(DecimalFormatter.toコンマ区切りRString(減免決定通知書情報
-                .get減免の情報更正後().get介護賦課().getKakuteiHokenryo(), 0));
-        item.set減免理由1(減免決定通知書情報.get減免の情報更正後().get介護賦課減免().getGemmenJiyuCode().value());
-        item.set減免理由2(減免決定通知書情報.get減免の情報更正後().get介護賦課減免().getGemmenJiyu());
+                .get減免の情報更正後().get確定介護保険料(), 0));
+        item.set減免理由1(減免決定通知書情報.get減免の情報更正後().get減免種類().value());
+        item.set減免理由2(減免決定通知書情報.get減免の情報更正後().get減免事由());
         item.set備考Title(通知書定型文);
         item.set備考(通知書定型文);
 

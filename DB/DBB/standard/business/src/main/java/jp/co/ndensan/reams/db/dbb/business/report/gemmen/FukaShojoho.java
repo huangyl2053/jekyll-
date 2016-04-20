@@ -49,5 +49,8 @@ public class FukaShojoho {
     private Decimal 普徴期別金額12;
     private Decimal 普徴期別金額13;
     private Decimal 普徴期別金額14;
+    private Decimal 減免額;
+    private Decimal 減免前介護保険料;
+    private Decimal 確定介護保険料;
 
 }
