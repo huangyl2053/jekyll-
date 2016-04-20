@@ -59,6 +59,13 @@ dbc/db/dbc/JutakuKaishuJizenShinseiShinsaResultPanel/onLoad
 dbc/db/dbc/JutakuKaishuJizenShinseiTab/onLoad
 dbc/db/dbc/JutakuKaishuJizenShoninKetteiTsuchishoPanel/onLoad
 dbc/db/dbc/JutakuKaishuShinsaHihokenshaPanel/onLoad
+dbc/db/dbc/JutakuKaishuShinsei/onLoad
+dbc/db/dbc/JutakuKaishuShinsei/onClick_btnAddShinsei
+dbc/db/dbc/JutakuKaishuShinsei/onClick_btnModify
+dbc/db/dbc/JutakuKaishuShinsei/onClick_btnDelete
+dbc/db/dbc/JutakuKaishuShinsei/onClick_btnCancel
+dbc/db/dbc/JutakuKaishuShinsei/onClick_btnBackSearch
+dbc/db/dbc/JutakuKaishuShinsei/onClick_btnBackResult
 dbc/db/dbc/JutakuKaishuShinseiHihokenshaPanel/onLoad
 dbc/db/dbc/JutakuKaishuShinseiInfoPanel/onClick_btnAddShinsei
 dbc/db/dbc/JutakuKaishuShinseiInfoPanel/onClick_btnCheckGendogaku
