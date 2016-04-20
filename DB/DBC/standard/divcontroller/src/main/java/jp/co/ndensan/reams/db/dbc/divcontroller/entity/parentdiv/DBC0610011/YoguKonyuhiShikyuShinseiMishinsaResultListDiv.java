@@ -6,8 +6,6 @@ package jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0610011;
  */
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.KaigoKanryoMessage.KaigoKanryoMessage.IKaigoKanryoMessageDiv;
-import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.KaigoKanryoMessage.KaigoKanryoMessage.KaigoKanryoMessageDiv;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Button;
 import jp.co.ndensan.reams.uz.uza.ui.binding.DataGrid;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
@@ -33,8 +31,6 @@ public class YoguKonyuhiShikyuShinseiMishinsaResultListDiv extends Panel {
     private DataGrid<dgYoguKonyuhiShisaMishinsaShikyuShinseiList_Row> dgYoguKonyuhiShisaMishinsaShikyuShinseiList;
     @JsonProperty("btnIkkatsuShinsa")
     private Button btnIkkatsuShinsa;
-    @JsonProperty("ccdKaigoKanryoMessage")
-    private KaigoKanryoMessageDiv ccdKaigoKanryoMessage;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -94,15 +90,6 @@ public class YoguKonyuhiShikyuShinseiMishinsaResultListDiv extends Panel {
     @JsonProperty("btnIkkatsuShinsa")
     public void setBtnIkkatsuShinsa(Button btnIkkatsuShinsa) {
         this.btnIkkatsuShinsa = btnIkkatsuShinsa;
-    }
-
-    /*
-     * getccdKaigoKanryoMessage
-     * @return ccdKaigoKanryoMessage
-     */
-    @JsonProperty("ccdKaigoKanryoMessage")
-    public IKaigoKanryoMessageDiv getCcdKaigoKanryoMessage() {
-        return ccdKaigoKanryoMessage;
     }
 
     // </editor-fold>

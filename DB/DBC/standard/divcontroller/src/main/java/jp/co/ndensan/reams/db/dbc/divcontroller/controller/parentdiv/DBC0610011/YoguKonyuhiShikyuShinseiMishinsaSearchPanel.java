@@ -31,7 +31,7 @@ public class YoguKonyuhiShikyuShinseiMishinsaSearchPanel {
 
     private final RString 保存 = new RString("btnSave");
     private final RString 審査 = new RString("審査");
-    private final RString 保存MSG = new RString(" 福祉用具購入費支給申請審査結果を更新しました。");
+    private final RString 保存MSG = new RString(" 福祉用具購入費支給申請審査結果を更新");
 
     /**
      * 画面初期化メソッドです。
@@ -40,7 +40,7 @@ public class YoguKonyuhiShikyuShinseiMishinsaSearchPanel {
      * @return 福祉用具購入費支給申請審査画面
      */
     public ResponseData<YoguKonyuhiShikyuShinseiMishinsaSearchPanelDiv> onLoad(YoguKonyuhiShikyuShinseiMishinsaSearchPanelDiv div) {
-        if (審査.equals(ViewStateHolder.get(ViewStateKeys.画面モード, RString.class))) {
+        if (審査.equals(ViewStateHolder.get(ViewStateKeys.状態, RString.class))) {
             RDate 支給申請日To = ViewStateHolder.get(ViewStateKeys.支給申請日_TO, RDate.class);
             RDate 支給申請日From = ViewStateHolder.get(ViewStateKeys.支給申請日_FROM, RDate.class);
             div.getYoguKonyuhiShikyuShinseiMishinsaSearchCondition().getTxtShikyuShinseiDateRange().setToValue(支給申請日To);
@@ -117,7 +117,7 @@ public class YoguKonyuhiShikyuShinseiMishinsaSearchPanel {
             div.getYoguKonyuhiShikyuShinseiMishinsaResultList().setVisible(false);
             CommonButtonHolder.setVisibleByCommonButtonFieldName(保存, false);
             getHandler(div).保存処理(決定日);
-            div.getYoguKonyuhiShikyuShinseiMishinsaResultList().getCcdKaigoKanryoMessage().setSuccessMessage(new RString(
+            div.getCcdKaigoKanryoMessage().setSuccessMessage(new RString(
                     UrInformationMessages.正常終了.getMessage().replace(保存MSG.toString()).evaluate()));
             return ResponseData.of(div).setState(DBC0610011StateName.完了);
         }
