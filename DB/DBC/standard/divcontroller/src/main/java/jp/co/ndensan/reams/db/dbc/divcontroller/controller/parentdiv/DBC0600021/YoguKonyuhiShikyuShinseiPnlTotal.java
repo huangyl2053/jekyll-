@@ -122,6 +122,7 @@ public class YoguKonyuhiShikyuShinseiPnlTotal {
             div.getYoguKonyuhiShikyuShinseiContentsPanel().getTxtSyomeisyo().setValue(builder.toRString());
             ViewStateHolder.put(ViewStateKeys.証明書, div.
                     getYoguKonyuhiShikyuShinseiContentsPanel().getTxtSyomeisyo().getValue());
+            ViewStateHolder.put(ViewStateKeys.様式番号, 証明書コード);
         } else if (修正.equals(ViewStateHolder.get(ViewStateKeys.状態, RString.class))) {
             getHandler(div).set修正モード();
         } else if (削除.equals(ViewStateHolder.get(ViewStateKeys.状態, RString.class))) {
@@ -526,11 +527,12 @@ public class YoguKonyuhiShikyuShinseiPnlTotal {
             if (new RString(UrQuestionMessages.確認_汎用.getMessage().getCode()).equals(ResponseHolder.getMessageCode())
                     && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
                 ViewStateHolder.put(ViewStateKeys.被保険者番号,
-                        div.getKaigoCommonPanel().getCcdShikakuKihon().get被保険者番号());
+                        new HihokenshaNo(div.getKaigoCommonPanel().getCcdShikakuKihon().get被保険者番号()));
                 ViewStateHolder.put(ViewStateKeys.サービス提供年月,
-                        div.getYoguKonyuhiShikyuShinseiContentsPanel().getTxtTeikyoYM().getValue().getYearMonth());
+                        new FlexibleYearMonth(div.getYoguKonyuhiShikyuShinseiContentsPanel().
+                                getTxtTeikyoYM().getValue().getYearMonth().toString()));
                 ViewStateHolder.put(ViewStateKeys.事業者番号,
-                        div.getYoguKonyuhiShikyuShinseiContentsPanel().getTxtJigyoshaNo().getValue());
+                        new JigyoshaNo(div.getYoguKonyuhiShikyuShinseiContentsPanel().getTxtJigyoshaNo().getValue()));
                 ViewStateHolder.put(ViewStateKeys.給付率,
                         new HokenKyufuRitsu(div.getYoguKonyuhiShikyuShinseiContentsPanel().getTxtKyufuritsu().getValue()));
                 return ResponseData.of(div).forwardWithEventName(DBC0600021TransitionEventName.決定情報).respond();
