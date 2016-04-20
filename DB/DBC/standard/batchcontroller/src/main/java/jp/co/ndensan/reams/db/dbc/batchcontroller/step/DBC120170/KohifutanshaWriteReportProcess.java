@@ -31,7 +31,7 @@ import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
 /**
  * 帳票用Entityリスト作成と作成したdataを帳票に出力する。
  *
- * @reamsid_L DBB-0890-040 zhangrui
+ * @reamsid_L DBC-0980-420 zhangrui
  */
 public class KohifutanshaWriteReportProcess extends BatchKeyBreakBase<KagoKetteiKohifutanshaInEntity> {
 
