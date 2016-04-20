@@ -526,16 +526,16 @@ public class JutakukaishuSikyuShinseiManager {
                 return true;
             }
         } else {
-            if (不支給.equals(dbt3036entity.getShikyuHushikyuKetteiKubun()) && 不支給.equals(parameter.get支給区分())) {
+            if (不支給.equals(kekka.toEntity().getShikyuHushikyuKetteiKubun()) && 不支給.equals(parameter.get支給区分())) {
                 return true;
-            } else if (不支給.equals(dbt3036entity.getShikyuHushikyuKetteiKubun()) && 支給.equals(parameter.get支給区分())) {
+            } else if (不支給.equals(kekka.toEntity().getShikyuHushikyuKetteiKubun()) && 支給.equals(parameter.get支給区分())) {
                 kyufuentity.setShinsaYM(parameter.get決定日().getYearMonth());
                 kyufuentity.setKyufuSakuseiKubunCode(区分_コード1);
-            } else if (支給.equals(dbt3036entity.getShikyuHushikyuKetteiKubun())
+            } else if (支給.equals(kekka.toEntity().getShikyuHushikyuKetteiKubun())
                     && 不支給.equals(parameter.get支給区分())) {
                 kyufuentity.setShinsaYM(parameter.get決定日().getYearMonth());
                 kyufuentity.setKyufuSakuseiKubunCode(区分_コード3);
-            } else if (支給.equals(dbt3036entity.getShikyuHushikyuKetteiKubun())
+            } else if (支給.equals(kekka.toEntity().getShikyuHushikyuKetteiKubun())
                     && 支給.equals(parameter.get支給区分())) {
                 kyufuentity.setShinsaYM(parameter.get決定日().getYearMonth());
                 kyufuentity.setKyufuSakuseiKubunCode(区分_コード2);
