@@ -180,8 +180,7 @@ public class MainPanel {
             throw new ApplicationException(UrErrorMessages.必須.getMessage().replace(MSG_決定日.toString()));
         }
         if (ShikyuFushikyuKubun.不支給.getコード().equals(shokanbaraiketteiJohoDiv.getRdoShikyukubun().getSelectedKey())
-                && shokanbaraiketteiJohoDiv.getTxtFuSyikyuriyu1().getValue().isNullOrEmpty()
-                && shokanbaraiketteiJohoDiv.getTxtFushikyuriyu2().getValue().isNullOrEmpty()) {
+                && shokanbaraiketteiJohoDiv.getTxtFuSyikyuriyu1().getValue().isNullOrEmpty()) {
             throw new ApplicationException(UrErrorMessages.必須.getMessage().replace(MSG_理由.toString()));
         }
         boolean flag = getHandler(div).is内容変更状態();
