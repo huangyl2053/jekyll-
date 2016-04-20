@@ -196,10 +196,8 @@ public class ShikakuHenkoRireki {
             henkoRirekiDiv.setMode_MeisaiMode(ShikakuHenkoRirekiDiv.MeisaiMode.shokai);
         }
 
-        henkoRirekiDiv.getHenkoHokenshaJoho()
-                .setReadOnly(false);
-        return ResponseData.of(henkoRirekiDiv)
-                .respond();
+        henkoRirekiDiv.getHenkoHokenshaJoho().setReadOnly(false);
+        return ResponseData.of(henkoRirekiDiv).respond();
     }
 
     private ShikakuHenkoRirekiHandler getHandler(ShikakuHenkoRirekiDiv requestDiv) {

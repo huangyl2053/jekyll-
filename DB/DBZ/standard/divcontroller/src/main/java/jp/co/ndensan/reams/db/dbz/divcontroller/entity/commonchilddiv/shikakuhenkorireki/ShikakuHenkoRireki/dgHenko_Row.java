@@ -3,7 +3,7 @@ package jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.shikakuhe
  * このコードはツールによって生成されました。
  * このファイルへの変更は、以下の状況下で不正な動作の原因になったり、
  * コードが再生成されるときに損失したりします。
- * Tue Apr 19 17:17:04 CST 2016 
+ * Wed Apr 20 11:27:41 CST 2016 
  */
 
 

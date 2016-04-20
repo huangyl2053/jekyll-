@@ -271,7 +271,7 @@ public class ShikakuHenkoRirekiHandler {
         hihokenshaDaichoBuilder.set資格変更事由コード(row.getHenkoJiyuKey());
         hihokenshaDaichoBuilder.set広住特措置元市町村コード(new LasdecCode(div.getDdlHenkoSochimotoHokensha().getSelectedValue()));
         if (div.getDdlJuminJoho().getIsBlankLine()) {
-            hihokenshaDaichoBuilder.set旧市町村コード(new LasdecCode(div.getDdlHenkoKyuHokensha().getSelectedKey()));
+            hihokenshaDaichoBuilder.set旧市町村コード(new LasdecCode(div.getDdlHenkoKyuHokensha().getSelectedValue()));
         } else {
             hihokenshaDaichoBuilder.set旧市町村コード(new LasdecCode(get市町村コード()));
             hihokenshaDaichoBuilder.set識別コード(new ShikibetsuCode(get識別コード()));
@@ -329,7 +329,7 @@ public class ShikakuHenkoRirekiHandler {
 
     private boolean isValueContains(List<KeyValueDataSource> list, RString value) {
         for (KeyValueDataSource item : list) {
-            if (value.equals(item.getValue())) {
+            if (item.getValue().equals(value)) {
                 return true;
             }
         }
@@ -338,7 +338,7 @@ public class ShikakuHenkoRirekiHandler {
 
     private boolean isKeyContains(List<KeyValueDataSource> list, RString key) {
         for (KeyValueDataSource item : list) {
-            if (key.equals(item.getKey())) {
+            if (item.getKey().equals(key)) {
                 return true;
             }
         }
