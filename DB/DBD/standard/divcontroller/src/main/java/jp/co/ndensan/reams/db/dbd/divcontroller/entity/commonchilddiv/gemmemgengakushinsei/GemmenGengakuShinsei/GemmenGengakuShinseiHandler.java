@@ -33,6 +33,7 @@ public class GemmenGengakuShinseiHandler {
 
     private final GemmenGengakuShinseiDiv div;
     private static final RString 本人識別コードのキー = new RString("本人識別コード");
+    private static final RString 空白KEY = new RString("-1");
 
     /**
      * コンストラクタです。
@@ -52,7 +53,9 @@ public class GemmenGengakuShinseiHandler {
         PanelSessionAccessor.put(div, 本人識別コードのキー, 本人識別コード);
 
         div.getDdlShinseiDaikoKubun().setDataSource(getDdlShinseiDaikoKubun());
+        div.getDdlShinseiDaikoKubun().setSelectedKey(空白KEY);
         div.getDdlJigyoshaKubun().setDataSource(getDdlJigyoshaKubun());
+        div.getDdlJigyoshaKubun().setSelectedKey(空白KEY);
         データクリア();
     }
 
@@ -89,8 +92,11 @@ public class GemmenGengakuShinseiHandler {
             div.getTxtJigyoshaName().clearValue();
         }
         div.getDdlJigyoshaKubun().setDataSource(getDdlJigyoshaKubun());
+        div.getDdlJigyoshaKubun().setSelectedKey(空白KEY);
         if (減免減額申請情報.get申請届出代行区分() != null) {
             div.getDdlShinseiDaikoKubun().setSelectedKey(減免減額申請情報.get申請届出代行区分().getCode());
+        } else {
+            div.getDdlShinseiDaikoKubun().setSelectedKey(空白KEY);
         }
         if (減免減額申請情報.get申請届出者氏名カナ() != null) {
             div.getTxtShinseishaShimeiKana().setValue(減免減額申請情報.get申請届出者氏名カナ().getColumnValue());
@@ -109,7 +115,7 @@ public class GemmenGengakuShinseiHandler {
      */
     public ShinseiJoho get減免減額申請情報() {
         ShinseiTodokedeDaikoKubunCode 申請届出代行区分 = null;
-        if (!div.getDdlShinseiDaikoKubun().getSelectedKey().isEmpty()) {
+        if (!div.getDdlShinseiDaikoKubun().getSelectedKey().isEmpty() && !空白KEY.equals(div.getDdlShinseiDaikoKubun().getSelectedKey())) {
             申請届出代行区分 = ShinseiTodokedeDaikoKubunCode.toValue(div.getDdlShinseiDaikoKubun().getSelectedKey());
         }
         AtenaMeisho 申請届出者氏名 = div.getTxtShinseishaShimei().getDomain();
@@ -117,7 +123,7 @@ public class GemmenGengakuShinseiHandler {
         RString 申請届出者続柄 = div.getTxtShinseishaTsuzukigara().getValue();
         JigyoshaNo 申請届出代行事業者番号 = new JigyoshaNo(div.getTxtJigyoshaCode().getValue());
         JigyoshaKubun 事業者区分 = null;
-        if (!div.getDdlJigyoshaKubun().getSelectedKey().isEmpty()) {
+        if (!div.getDdlJigyoshaKubun().getSelectedKey().isEmpty() && !空白KEY.equals(div.getDdlJigyoshaKubun().getSelectedKey())) {
             事業者区分 = JigyoshaKubun.toValue(div.getDdlJigyoshaKubun().getSelectedKey());
         }
         YubinNo 申請届出者郵便番号 = div.getTxtShinseishaYubinNo().getValue();
@@ -143,6 +149,7 @@ public class GemmenGengakuShinseiHandler {
 
     private List<KeyValueDataSource> getDdlShinseiDaikoKubun() {
         List<KeyValueDataSource> shinseiDaikoKubun = new ArrayList<>();
+        shinseiDaikoKubun.add(new KeyValueDataSource(空白KEY, RString.EMPTY));
         for (ShinseiTodokedeDaikoKubunCode code : ShinseiTodokedeDaikoKubunCode.values()) {
             KeyValueDataSource data = new KeyValueDataSource(code.getCode(), code.get名称());
             shinseiDaikoKubun.add(data);
@@ -152,6 +159,7 @@ public class GemmenGengakuShinseiHandler {
 
     private List<KeyValueDataSource> getDdlJigyoshaKubun() {
         List<KeyValueDataSource> jigyoshaKubun = new ArrayList<>();
+        jigyoshaKubun.add(new KeyValueDataSource(空白KEY, RString.EMPTY));
         for (JigyoshaKubun code : JigyoshaKubun.values()) {
             KeyValueDataSource data = new KeyValueDataSource(code.getCode(), code.get名称());
             jigyoshaKubun.add(data);
