@@ -21,6 +21,8 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 @SuppressWarnings("PMD.UnusedPrivateField")
 public class JiKanKanRiEntity {
 
+    private RString ninteiChosaYoteiKaishiTime;
+    private RString ninteiChosaYoteiShuryoTime;
     private RString ninteiChosaItakusakiCode;
     private RString chosainShimei;
     private RString jigyoshaMeisho;

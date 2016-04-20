@@ -103,8 +103,8 @@ public class NinteiChosaSchedule9MainHandler {
         div.getPrintConditionPanel().getDdlTaishoChiku().setSelectedKey(RString.EMPTY);
         List<KeyValueDataSource> dataSource = new ArrayList();
         div.getPrintConditionPanel().getDdlTaishoShichoson().setDataSource(dataSource);
-        div.getPrintConditionPanel().getTxtNinteiChosaYoteiYMDFrom().clearValue();
-        div.getPrintConditionPanel().getTxtNinteiChosaYoteiYMDTo().clearValue();
+        div.getPrintConditionPanel().getTxtNinteiChosaYoteiYMD().clearFromValue();
+        div.getPrintConditionPanel().getTxtNinteiChosaYoteiYMD().clearToValue();
         div.getPrintConditionPanel().getDdlTaishoNinteiChosainShozokuKikan().setDataSource(dataSource);
         div.getPrintConditionPanel().getDdlTaishoNinteiChosain().setDataSource(dataSource);
         div.getPrintConditionPanel().getRadJokyo().setSelectedKey(全て);
@@ -176,13 +176,13 @@ public class NinteiChosaSchedule9MainHandler {
      */
     public List<ChosaSchedulehyoTyousayinBodyItem> createBodyItem_調査員(List<NinteichosaScheduleBusiness> businessList) {
         List<ChosaSchedulehyoTyousayinBodyItem> itemList = new ArrayList<>();
+        int num = 0;
         for (NinteichosaScheduleBusiness bnusiness : businessList) {
 
             itemList.add(new ChosaSchedulehyoTyousayinBodyItem(
                     bnusiness.get認定調査予定開始時間() == null ? RString.EMPTY : bnusiness.get認定調査予定開始時間(),
                     bnusiness.get認定調査予定終了時間() == null ? RString.EMPTY : bnusiness.get認定調査予定終了時間(),
-                    // TODO No QA内部番号810
-                    RString.EMPTY,
+                    new RString(String.valueOf(num + 1)),
                     bnusiness.get認定調査員コード() == null ? RString.EMPTY : bnusiness.get認定調査員コード(),
                     bnusiness.get調査員氏名() == null ? RString.EMPTY : bnusiness.get調査員氏名(),
                     bnusiness.get認定調査予約日() == null ? RString.EMPTY : new RString(bnusiness.get認定調査予約日().toString()),
@@ -212,7 +212,7 @@ public class NinteiChosaSchedule9MainHandler {
             NinteichosaScheduleBusiness business = businessList.get(0);
             return new ChosaSchedulehyoTyousayinHeadItem(business.get認定調査委託先コード() == null
                     ? RString.EMPTY : business.get認定調査委託先コード(),
-                    business.get事務所名() == null ? RString.EMPTY : business.get認定調査委託先コード());
+                    business.get事務所名() == null ? RString.EMPTY : business.get事務所名());
         }
         return new ChosaSchedulehyoTyousayinHeadItem(RString.EMPTY, RString.EMPTY);
     }
@@ -226,9 +226,11 @@ public class NinteiChosaSchedule9MainHandler {
     public ChosaSchedulehyoHeadItem createHeadItemItem_事務所(List<JiMuSyoBusiness> businessList) {
 
 //        if (businessList != null && !businessList.isEmpty()) {
-        //JiMuSyoBusiness business = businessList.get(0);
+//            JiMuSyoBusiness business = businessList.get(0);
+//            return new ChosaSchedulehyoHeadItem(RString.EMPTY, RString.EMPTY,
+//                    RString.EMPTY);
 //        }
-        // TODO 引数が不正です。QA内部番号810
+        // TODO 引数が不正です。QA内部番号1086
         return new ChosaSchedulehyoHeadItem(RString.EMPTY, RString.EMPTY,
                 RString.EMPTY);
     }
@@ -302,10 +304,8 @@ public class NinteiChosaSchedule9MainHandler {
                     business.get被保険者氏名() == null ? RString.EMPTY : business.get被保険者氏名().value(),
                     business.get連絡先1() == null ? RString.EMPTY : business.get連絡先1().value(),
                     business.get連絡先2() == null ? RString.EMPTY : business.get連絡先2().value(),
-                    //TODO 認定調査予定開始時間 QA内部番号810
-                    RString.EMPTY,
-                    //TODO 認定調査予定終了時間 QA内部番号810
-                    RString.EMPTY,
+                    business.get認定調査予定開始時間(),
+                    business.get認定調査予定終了時間(),
                     business.get予約状況() == null ? RString.EMPTY : business.get予約状況().value()
             ));
         }

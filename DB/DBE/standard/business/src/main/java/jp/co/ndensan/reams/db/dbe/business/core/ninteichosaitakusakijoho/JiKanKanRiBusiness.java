@@ -32,6 +32,24 @@ public class JiKanKanRiBusiness {
     }
 
     /**
+     * 認定調査予定開始時間を返します。
+     *
+     * @return 認定調査予定開始時間
+     */
+    public RString get認定調査予定開始時間() {
+        return entity.getNinteiChosaYoteiKaishiTime();
+    }
+
+    /**
+     * 認定調査予定終了時間を返します。
+     *
+     * @return 認定調査予定終了時間
+     */
+    public RString get認定調査予定終了時間() {
+        return entity.getNinteiChosaYoteiShuryoTime();
+    }
+
+    /**
      * 認定調査委託先コードを返します。
      *
      * @return 認定調査委託先コード
