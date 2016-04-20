@@ -12,6 +12,7 @@ import jp.co.ndensan.reams.db.dbz.business.report.util.EditedAtesaki;
 import jp.co.ndensan.reams.db.dbz.business.report.util.EditedKojin;
 import jp.co.ndensan.reams.db.dbz.business.report.util.EditedKoza;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 
@@ -30,10 +31,10 @@ public class EditedHonSanteiTsuchiShoKyotsu {
     private EditedKojin 編集後個人;
     private HyojiCodes 表示コード;
     private HihokenshaNo 被保険者番号;
-    private RString 調定年度;
+    private FlexibleYear 調定年度;
     private RString 調定年度_年度あり;
     private RString 調定年度_年度なし;
-    private RString 賦課年度;
+    private FlexibleYear 賦課年度;
     private RString 賦課年度_年度あり;
     private RString 賦課年度_年度なし;
     private ShikibetsuCode 識別コード;
