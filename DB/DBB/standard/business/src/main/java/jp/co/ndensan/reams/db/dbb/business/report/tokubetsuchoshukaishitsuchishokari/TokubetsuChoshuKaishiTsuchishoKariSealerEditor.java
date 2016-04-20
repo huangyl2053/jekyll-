@@ -14,7 +14,6 @@ import jp.co.ndensan.reams.uz.uza.lang.EraType;
 import jp.co.ndensan.reams.uz.uza.lang.FillType;
 import jp.co.ndensan.reams.uz.uza.lang.FirstYear;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
-import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.util.editor.DecimalFormatter;
 
 /**
@@ -25,7 +24,7 @@ import jp.co.ndensan.reams.uz.uza.util.editor.DecimalFormatter;
 public class TokubetsuChoshuKaishiTsuchishoKariSealerEditor implements
         ITokubetsuChoshuKaishiTsuchishoKariSealerEditor {
 
-    private static final RString NENDO = new RString("年度");
+//    private static final RString NENDO = new RString("年度");
     private final KariTokuchoKaishiTsuchisyoJoho 仮算定特徴開始通知書情報;
     private final NinshoshaSource ninshoshaSource;
 
@@ -85,19 +84,19 @@ public class TokubetsuChoshuKaishiTsuchishoKariSealerEditor implements
         source.hyojicodeName2 = 仮算定特徴開始通知書情報.get編集後仮算定通知書共通情報().get表示コード２名();
         source.hyojicodeName3 = 仮算定特徴開始通知書情報.get編集後仮算定通知書共通情報().get表示コード３名();
         source.nendo = 仮算定特徴開始通知書情報.get編集後仮算定通知書共通情報().get調定年度().wareki().eraType(EraType.KANJI)
-                .firstYear(FirstYear.GAN_NEN).fillType(FillType.BLANK).toDateString().concat(NENDO);
+                .firstYear(FirstYear.GAN_NEN).fillType(FillType.BLANK).toDateString();
         source.nendo2 = 仮算定特徴開始通知書情報.get編集後仮算定通知書共通情報().get調定年度().wareki().eraType(EraType.KANJI)
-                .firstYear(FirstYear.GAN_NEN).fillType(FillType.BLANK).toDateString().concat(NENDO);
+                .firstYear(FirstYear.GAN_NEN).fillType(FillType.BLANK).toDateString();
         source.nendo3 = 仮算定特徴開始通知書情報.get編集後仮算定通知書共通情報().get調定年度().wareki().eraType(EraType.KANJI)
-                .firstYear(FirstYear.GAN_NEN).fillType(FillType.BLANK).toDateString().concat(NENDO);
+                .firstYear(FirstYear.GAN_NEN).fillType(FillType.BLANK).toDateString();
         source.nendo4 = 仮算定特徴開始通知書情報.get編集後仮算定通知書共通情報().get調定年度().wareki().eraType(EraType.KANJI)
-                .firstYear(FirstYear.GAN_NEN).fillType(FillType.BLANK).toDateString().concat(NENDO);
+                .firstYear(FirstYear.GAN_NEN).fillType(FillType.BLANK).toDateString();
         if (仮算定特徴開始通知書情報.get編集後仮算定通知書共通情報().get前年度情報() != null) {
             source.nendo5 = new FlexibleYear(仮算定特徴開始通知書情報.get編集後仮算定通知書共通情報().get前年度情報().get前年度賦課年度())
-                    .wareki().eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN).fillType(FillType.BLANK).toDateString().concat(NENDO);
+                    .wareki().eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN).fillType(FillType.BLANK).toDateString();
         }
         source.nendo6 = 仮算定特徴開始通知書情報.get編集後仮算定通知書共通情報().get調定年度().wareki().eraType(EraType.KANJI)
-                .firstYear(FirstYear.GAN_NEN).fillType(FillType.BLANK).toDateString().concat(NENDO);
+                .firstYear(FirstYear.GAN_NEN).fillType(FillType.BLANK).toDateString();
         source.nendo7 = 仮算定特徴開始通知書情報.get編集後仮算定通知書共通情報().get調定年度().wareki().eraType(EraType.KANJI)
                 .firstYear(FirstYear.GAN_NEN).fillType(FillType.BLANK).toDateString();
         source.nendo8 = 仮算定特徴開始通知書情報.get編集後仮算定通知書共通情報().get調定年度().wareki().eraType(EraType.KANJI)

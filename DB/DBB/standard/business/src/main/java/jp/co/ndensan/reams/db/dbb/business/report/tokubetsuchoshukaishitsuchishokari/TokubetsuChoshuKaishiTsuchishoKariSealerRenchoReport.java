@@ -10,6 +10,7 @@ import jp.co.ndensan.reams.db.dbb.entity.report.tokubetsuchoshukaishitsuchishoka
 import jp.co.ndensan.reams.ur.urz.entity.report.parts.ninshosha.NinshoshaSource;
 import jp.co.ndensan.reams.uz.uza.report.Report;
 import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
+import lombok.NonNull;
 
 /**
  * 特別徴収開始通知書（仮算定）帳票 シーラタイプ連帳Report
@@ -29,7 +30,7 @@ public class TokubetsuChoshuKaishiTsuchishoKariSealerRenchoReport extends
      * @param 仮算定特徴開始通知書情報 KariTokuchoKaishiTsuchisyoJoho
      */
     public TokubetsuChoshuKaishiTsuchishoKariSealerRenchoReport(NinshoshaSource ninshoshaSource,
-            KariTokuchoKaishiTsuchisyoJoho 仮算定特徴開始通知書情報) {
+            @NonNull KariTokuchoKaishiTsuchisyoJoho 仮算定特徴開始通知書情報) {
         this.ninshoshaSource = ninshoshaSource;
         this.仮算定特徴開始通知書情報 = 仮算定特徴開始通知書情報;
     }
