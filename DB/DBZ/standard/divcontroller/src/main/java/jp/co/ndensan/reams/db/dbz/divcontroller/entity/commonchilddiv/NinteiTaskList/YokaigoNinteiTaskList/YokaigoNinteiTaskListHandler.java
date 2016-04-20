@@ -46,7 +46,6 @@ import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.util.code.CodeMaster;
 
 /**
- *
  * タスク一覧共有画面のDivControllerです。
  *
  * @reamsid_L DBE-3000-160 houtianpeng
