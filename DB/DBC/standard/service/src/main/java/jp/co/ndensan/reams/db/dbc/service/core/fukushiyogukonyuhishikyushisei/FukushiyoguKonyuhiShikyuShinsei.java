@@ -691,8 +691,6 @@ public class FukushiyoguKonyuhiShikyuShinsei {
      */
     @Transaction
     public void updKetteJoho(FukushiYoguKonyuhiShikyuShiseiKetteDivEntity 福祉用具購入費支給申請決定情報画面) {
-        RString 整理番号 = Saiban.get(SubGyomuCode.DBC介護給付,
-                SaibanHanyokeyName.償還整理番号.getコード()).nextString();
         RString 修正前支給区分 = RString.EMPTY;
         if (null != 福祉用具購入費支給申請決定情報画面.get決定日()
                 && !福祉用具購入費支給申請決定情報画面.get決定日().isEmpty()) {

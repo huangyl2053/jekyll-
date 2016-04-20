@@ -74,7 +74,7 @@ public class PnlKeteiJohoMsg {
         JigyoshaNo 事業者番号 = ViewStateHolder.get(ViewStateKeys.事業者番号, JigyoshaNo.class);
         RString 証明書 = ViewStateHolder.get(ViewStateKeys.証明書, RString.class);
         if (モード_参照.equals(ViewStateHolder.get(ViewStateKeys.状態, RString.class))) {
-            CommonButtonHolder.setVisibleByCommonButtonFieldName(保存, false);
+            CommonButtonHolder.setDisplayNoneByCommonButtonFieldName(保存, true);
         }
         div.getKaigoCommonPanel().getCcdShikakuKihon().onLoad(被保険者番号);
         div.getYoguKonyuhiShikyuShinseiContentsPanel().getTxtTeikyoYM().setValue(new RDate(サービス年月.toString()));
@@ -148,6 +148,7 @@ public class PnlKeteiJohoMsg {
                 fukuShinsei.delete(被保険者番号, サービス年月, 整理番号, 事業者番号, 様式番号, 識別コード);
                 div.getCcdMessage().setMessage(new RString(UrInformationMessages.保存終了.getMessage().evaluate()),
                         RString.EMPTY, RString.EMPTY, true);
+                div.getPnlButton().setDisplayNone(true);
                 div.getCcdKetteiList().setDisplayNone(true);
                 return ResponseData.of(div).setState(DBC0600031StateName.successSaved);
             }
