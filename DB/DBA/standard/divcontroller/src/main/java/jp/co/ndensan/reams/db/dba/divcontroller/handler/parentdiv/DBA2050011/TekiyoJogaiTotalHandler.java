@@ -47,6 +47,7 @@ public class TekiyoJogaiTotalHandler {
             div.getTekiyoJogaiJohoIchiran().getCcdTekiyoJogaiRireki().set状態(new RString(DisplayMode.照会モード.toString()));
         }
         div.getTekiyoJogaiJohoIchiran().getCcdTekiyoJogaiRireki().initialize(識別コード);
+        div.getTekiyoJogaiJohoIchiran().getCddShisetsuNyutaishoRirekiKanri().initialize(識別コード);
     }
 
 }
