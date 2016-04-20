@@ -7,6 +7,7 @@ package jp.co.ndensan.reams.db.dbu.divcontroller.controller.parentdiv.DBU0500011
 
 import java.util.List;
 import jp.co.ndensan.reams.db.dba.divcontroller.entity.commonchilddiv.ShoKaishuKirokuKanri.dgKoufuKaishu_Row;
+import jp.co.ndensan.reams.db.dbu.divcontroller.entity.parentdiv.DBU0500011.DBU0500011StateName;
 import jp.co.ndensan.reams.db.dbu.divcontroller.entity.parentdiv.DBU0500011.ShoKaishuKirokuKanriJohoDiv;
 import jp.co.ndensan.reams.db.dbu.divcontroller.handler.parentdiv.DBU0500011.ShoKaishuKirokuKanriJohoHandler;
 import jp.co.ndensan.reams.db.dbu.service.core.shokaishukirokukanrijoho.ShoKaishuKirokuKanriJohoManager;
