@@ -19,7 +19,7 @@ public class HihokenshaDaichoEditor implements IHihokenshaDaichoEditor {
 
     private final HihokenshaDaichoSakusei joho;
     private static final RString FOMART_TEN = new RString(".");
-    private static final RString FOMART_LINE = new RString(".");
+    private static final RString FOMART_LINE = new RString("/");
 
     /**
      * コンストラクタです。
@@ -77,6 +77,11 @@ public class HihokenshaDaichoEditor implements IHihokenshaDaichoEditor {
         source.sochiHokensha = joho.get措置保険者タイトル();
         source.kyuHokensha = joho.get旧保険者タイトル();
         source.junno = joho.get順番号();
+        source.setaiinShimei1 = joho.get世帯氏名1();
+        source.setaiinShimei2 = joho.get世帯氏名2();
+        source.setaiinShimei3 = joho.get世帯氏名3();
+        source.setaiinShimei4 = joho.get世帯氏名4();
+        source.setaiinShimei5 = joho.get世帯氏名5();
         return source;
     }
 
