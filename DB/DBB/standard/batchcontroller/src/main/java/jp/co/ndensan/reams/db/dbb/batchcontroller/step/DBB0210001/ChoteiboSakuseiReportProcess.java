@@ -6,6 +6,7 @@
 package jp.co.ndensan.reams.db.dbb.batchcontroller.step.DBB0210001;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -116,6 +117,7 @@ public class ChoteiboSakuseiReportProcess extends BatchProcessBase<DbT7022ShoriD
     private static final RString MIDDLELINE = new RString("-");
     private static final RString なし = new RString("なし");
     private static final RString 本算定 = new RString("0");
+    private static final RString FORMAT = new RString("%03d");
     private final RString 固定文字 = new RString("該当データがありません");
     private static final RString SELECT_ID = new RString(
             "jp.co.ndensan.reams.db.dbb.persistence.db.mapper.relate.choteibo.IChoteiboSakuseiMapper.select処理日付");
@@ -772,10 +774,27 @@ public class ChoteiboSakuseiReportProcess extends BatchProcessBase<DbT7022ShoriD
     private List<ChoteiboDankaiItem> makeChoteiboDankaiItemListBy合計(List<GokeiDataEntity> 合計データリスト) {
         List<ChoteiboDankaiItem> dankaiItemList = new ArrayList<>();
         HokenryoDankaiList 保険料段階List = get保険料段階List(parameter.getShoriNendo());
-        for (RString 段階表記 : 保険料段階List.to表記List()) {
+        for (RString 段階表記 : sort表記List(保険料段階List.to表記List())) {
             dankaiItemList.add(makeChoteiboDankaiItemBy合計(段階表記, 合計データリスト));
         }
         return dankaiItemList;
+    }
+
+    private List<RString> sort表記List(List<RString> 表記List) {
+        List<String> stringList = new ArrayList<>();
+        for (int i = 0; i < 表記List.size(); i++) {
+            stringList.add(String.format(FORMAT.toString(), get段階(表記List.get(i))));
+        }
+        Collections.sort(stringList);
+        List<RString> resultList = new ArrayList<>();
+        for (int i = 0; i < stringList.size(); i++) {
+            for (int j = 0; j < 表記List.size(); j++) {
+                if (get段階(表記List.get(j)) == Integer.parseInt(stringList.get(i))) {
+                    resultList.add(表記List.get(j));
+                }
+            }
+        }
+        return resultList;
     }
 
     private ChoteiboDankaiItem makeChoteiboDankaiItemBy合計(RString 段階表記, List<GokeiDataEntity> 合計データリスト) {
@@ -903,7 +922,7 @@ public class ChoteiboSakuseiReportProcess extends BatchProcessBase<DbT7022ShoriD
             dankaiItemList.add(item);
             return dankaiItemList;
         }
-        for (RString 段階表記 : 保険料段階List.to表記List()) {
+        for (RString 段階表記 : sort表記List(保険料段階List.to表記List())) {
             dankaiItemList.add(makeChoteiboDankaiItem(段階表記, 年度データリスト));
         }
         return dankaiItemList;
