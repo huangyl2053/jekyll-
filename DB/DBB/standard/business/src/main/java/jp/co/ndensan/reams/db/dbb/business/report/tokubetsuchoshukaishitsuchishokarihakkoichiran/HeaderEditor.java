@@ -9,6 +9,8 @@ import jp.co.ndensan.reams.db.dbb.entity.report.tokubetsuchoshukaishitsuchishoka
 
 /**
  * 帳票設計_DBBRP43002_4_特別徴収開始通知書（本算定）HeaderEditor
+ *
+ * @reamsid_L DBB-0780-100 yangchenbing
  */
 public class HeaderEditor implements ITokubetsuChoshuKaishiEditor {
 
