@@ -34,7 +34,7 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 /**
  * 福祉用具購入費支給申請審査 未審査支給申請一覧のHandlerです。
  *
- * @reamsid_L DBC-1021-090 gongliang
+ * @reamsid_L DBC-1020-040 gongliang
  */
 public class YoguKonyuhiShikyuShinseiMishinsaSearchHandler {
 
