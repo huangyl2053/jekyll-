@@ -293,23 +293,23 @@ public class HihokenshashoHakkoTaishoshaJohoDiv extends Panel {
     }
 
     @JsonIgnore
-    public Button getBttZenRireki() {
-        return this.getZengoRireki().getBttZenRireki();
+    public Button getBtnZenRireki() {
+        return this.getZengoRireki().getBtnZenRireki();
     }
 
     @JsonIgnore
-    public void  setBttZenRireki(Button bttZenRireki) {
-        this.getZengoRireki().setBttZenRireki(bttZenRireki);
+    public void  setBtnZenRireki(Button btnZenRireki) {
+        this.getZengoRireki().setBtnZenRireki(btnZenRireki);
     }
 
     @JsonIgnore
-    public Button getBttGoRireki() {
-        return this.getZengoRireki().getBttGoRireki();
+    public Button getBtnGoRireki() {
+        return this.getZengoRireki().getBtnGoRireki();
     }
 
     @JsonIgnore
-    public void  setBttGoRireki(Button bttGoRireki) {
-        this.getZengoRireki().setBttGoRireki(bttGoRireki);
+    public void  setBtnGoRireki(Button btnGoRireki) {
+        this.getZengoRireki().setBtnGoRireki(btnGoRireki);
     }
 
     // </editor-fold>

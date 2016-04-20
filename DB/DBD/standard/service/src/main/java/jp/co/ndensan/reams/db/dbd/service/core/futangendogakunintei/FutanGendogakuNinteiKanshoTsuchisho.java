@@ -48,13 +48,12 @@ public class FutanGendogakuNinteiKanshoTsuchisho {
     }
 
     /**
-     * 負担限度額認定更新のお知らせ通知書が発行可能かどうかを判断する。
+     * アクセスログの記録。
      *
      * @param 被保険者番号 被保険者番号
      * @param 識別コード 識別コード
-     * @return 介護保険負担限度額認定の検索結果
      */
-    public List selectCount(HihokenshaNo 被保険者番号, ShikibetsuCode 識別コード) {
+    public void setAccessLogger(HihokenshaNo 被保険者番号, ShikibetsuCode 識別コード) {
 
         //アクセスログの記録
         JukyushaDaichoEntity jukyushaDaicho = new JukyushaDaichoEntity();
@@ -64,10 +63,6 @@ public class FutanGendogakuNinteiKanshoTsuchisho {
         jukyushaDaicho.set識別コード(識別コード);
         PersonalData personalData = toPersonalData(jukyushaDaicho);
         AccessLogger.log(AccessLogType.照会, personalData);
-
-        List<DbT4018KaigoHokenFutanGendogakuNinteiEntity> dbT4018EntityList
-                = 介護保険負担限度額認定Dac.selectCount(被保険者番号);
-        return dbT4018EntityList;
     }
 
     private PersonalData toPersonalData(JukyushaDaichoEntity jukyushaDaicho) {

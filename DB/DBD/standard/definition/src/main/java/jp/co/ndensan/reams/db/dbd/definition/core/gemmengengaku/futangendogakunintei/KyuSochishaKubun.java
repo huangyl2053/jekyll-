@@ -11,9 +11,9 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 public enum KyuSochishaKubun {
 
     /**
-     * コード:0 名称:空白 略称:定義なし
+     * コード: 名称:非該当 略称:定義なし
      */
-    空白("0", "空白"),
+    非該当("", "非該当"),
     /**
      * コード:1 名称:旧措置 略称:定義なし
      */
