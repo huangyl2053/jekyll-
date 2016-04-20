@@ -256,12 +256,14 @@ public class JutakuKaishuhiShikyuShinseiPanel {
         FlexibleYearMonth サービス提供年月 = new FlexibleYearMonth(row.getTxtTeikyoYM().getValue().toDateString()
                 .substring(0, LENGTH));
         RString 整理番号 = row.getTxtSeiriNo().getValue();
+        ShikibetsuCode 識別コード = new ShikibetsuCode(row.getTxtSikibetsuCode());
         ViewStateHolder.put(ViewStateKeys.支給申請日_FROM, 支給申請日開始);
         ViewStateHolder.put(ViewStateKeys.支給申請日_TO, 支給申請日終了);
         ViewStateHolder.put(ViewStateKeys.住宅改修費支給申請一括審査_決定_申請一覧, (Serializable) viewStateList);
         ViewStateHolder.put(ViewStateKeys.被保険者番号, 被保険者番号);
         ViewStateHolder.put(ViewStateKeys.サービス提供年月, サービス提供年月);
         ViewStateHolder.put(ViewStateKeys.整理番号, 整理番号);
+        ViewStateHolder.put(ViewStateKeys.識別コード, 識別コード);
         ViewStateHolder.put(ViewStateKeys.表示モード, 審査);
         return ResponseData.of(div).forwardWithEventName(DBC0720011TransitionEventName.申請修正).respond();
     }
@@ -407,8 +409,8 @@ public class JutakuKaishuhiShikyuShinseiPanel {
                             .set審査結果(row.getTxtShinsaResult()).set支給申請審査区分(ShikyushinseiShinsaKubun.審査済.getコード())
                             .set要介護状態３段階変更(要介護状態３段階変更).set住宅住所変更(住宅住所変更)
                             .set審査年月日(FlexibleDate.getNowDate()).set審査結果(審査結果).build();
-                    SaveIkkatuShinsaDate date = new SaveIkkatuShinsaDate(entity, 被保険者番号, サービス提供年月,
-                            整理番号, 証記載保険者番号, 決定年月日, ShikibetsuCode.EMPTY, 支給決定区分, 支払金額);
+                    SaveIkkatuShinsaDate date = new SaveIkkatuShinsaDate(entity, 被保険者番号, サービス提供年月, 整理番号,
+                            証記載保険者番号, 決定年月日, new ShikibetsuCode(row.getTxtSikibetsuCode()), 支給決定区分, 支払金額);
                     parameterList.add(date);
                     break;
                 }

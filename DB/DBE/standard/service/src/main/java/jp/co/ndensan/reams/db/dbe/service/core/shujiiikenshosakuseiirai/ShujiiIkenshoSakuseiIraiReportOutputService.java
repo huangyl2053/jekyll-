@@ -40,6 +40,8 @@ import jp.co.ndensan.reams.uz.uza.report.source.breaks.BreakAggregator;
 
 /**
  * 主治医意見書作成依頼情報の帳票出力管理クラスです。
+ *
+ * @reamsid_L DBE-0050-010 zuotao
  */
 public class ShujiiIkenshoSakuseiIraiReportOutputService {
 

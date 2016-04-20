@@ -76,6 +76,7 @@ public final class MishinsaShikyuShinseiListHandler {
             row.setTxtTenkyoReset(result.getEntity().is住宅住所変更());
             row.setTxt3DankaiReset(result.getEntity().is要介護状態３段階変更());
             row.getTxtSeiriNo().setValue(result.getEntity().get整理番号());
+            row.setTxtSikibetsuCode(result.get識別コード().value());
             lists.add(row);
         }
         div.getDgMishinsaShikyuShinsei().setDataSource(lists);

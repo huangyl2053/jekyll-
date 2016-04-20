@@ -13,6 +13,8 @@ import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5301ShujiiIkenshoIraiJohoEn
 
 /**
  * 主治医意見書のマッパーインタフェースです。
+ *
+ * @reamsid_L DBE-0050-010 zuotao
  */
 public interface IShujiiIkenshoSakuseiIraiMapper {
 

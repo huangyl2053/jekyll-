@@ -10,9 +10,9 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import jp.co.ndensan.reams.db.dbb.business.core.karisanteiidotsuchisho.TsuchishoKyotsuEntity;
+import jp.co.ndensan.reams.db.dbb.business.report.tsuchisho.KariSanteiTsuchiShoKyotsu;
 import jp.co.ndensan.reams.db.dbb.business.report.tsuchisho.notsu.KariSanteiNonyuTsuchiShoJoho;
 import jp.co.ndensan.reams.db.dbb.business.report.tsuchisho.notsu.KariSanteiNonyuTsuchiShoSeigyoJoho;
-import jp.co.ndensan.reams.db.dbb.business.report.tsuchisho.notsu.KariSanteiTsuchiShoKyotsu;
 import jp.co.ndensan.reams.db.dbb.business.report.tsuchisho.notsu.NokiJoho;
 import jp.co.ndensan.reams.db.dbb.definition.batchprm.keisangojoho.KeisangoJohoSakuseiBatchParamter;
 import jp.co.ndensan.reams.db.dbb.definition.core.ShoriKubun;
@@ -36,6 +36,7 @@ import jp.co.ndensan.reams.db.dbx.business.core.kanri.TokuchoKiUtil;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBB;
 import jp.co.ndensan.reams.db.dbx.definition.core.fucho.FuchokiJohoTsukiShoriKubun;
 import jp.co.ndensan.reams.db.dbx.definition.core.fuka.Tsuki;
+import jp.co.ndensan.reams.db.dbz.business.core.basic.ChohyoSeigyoKyotsu;
 import jp.co.ndensan.reams.db.dbz.business.report.util.EditedKoza;
 import jp.co.ndensan.reams.db.dbz.definition.core.kyotsu.ShoriName;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7022ShoriDateKanriEntity;
@@ -272,7 +273,7 @@ public class KarisanteiIdoTsuchishoIkkatsuHakko {
         仮算定通知書情報.set徴収方法情報_更正前(null);
         仮算定通知書情報.set徴収方法情報_更正後(null);
         仮算定通知書情報.set収入情報(null);
-        仮算定通知書情報.set帳票制御共通(entity);
+        仮算定通知書情報.set帳票制御共通(new ChohyoSeigyoKyotsu(entity));
         // TODO 共通編集処理を呼び出す。「ビジネス設計_DBBBZ00007_1_賦課帳票共通項目編集（仮算定）.xlsx」は実装していないため
 //        KariSanteiTsuchiShoKyotsu 編集後仮算定通知書共通情報 = new KariSanteiTsuchiShoKyotsu();
 //        KariSanteiTsuchiShoKyotsuKomokuHenshu 共通編集処理 = new KariSanteiTsuchiShoKyotsuKomokuHenshu();

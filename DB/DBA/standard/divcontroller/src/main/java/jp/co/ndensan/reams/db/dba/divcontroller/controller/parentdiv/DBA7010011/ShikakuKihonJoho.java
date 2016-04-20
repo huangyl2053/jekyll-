@@ -20,8 +20,8 @@ import jp.co.ndensan.reams.db.dba.service.report.shisetsuhenkotsuchisho.Shisetsu
 import jp.co.ndensan.reams.db.dba.service.report.shisetsutaishotsuchisho.ShisetsuTaishoTsuchishoPrintService;
 import jp.co.ndensan.reams.db.dba.service.report.tashichosonjushochitokureisharenrakuhyo.TashichosonJushochitokureishaRenrakuhyoPrintService;
 import jp.co.ndensan.reams.db.dba.service.tashichosonjushochitokureisharenrakuhyo.TashichosonJushochitokureishaRenrakuhyoFinder;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
-import jp.co.ndensan.reams.db.dbz.divcontroller.viewbox.ViewStateKeys;
+import jp.co.ndensan.reams.db.dbz.divcontroller.util.viewstate.ViewStateKey;
+import jp.co.ndensan.reams.db.dbz.service.TaishoshaKey;
 import jp.co.ndensan.reams.db.dbz.service.util.report.ReportUtil;
 import jp.co.ndensan.reams.ur.urz.business.IUrControlData;
 import jp.co.ndensan.reams.ur.urz.business.UrControlDataFactory;
@@ -68,9 +68,9 @@ public class ShikakuKihonJoho {
      */
     public ResponseData<ShikakuKihonJohoDiv> onLoad(ShikakuKihonJohoDiv div) {
 
-        div.getCcdKaigoAtenaInfo().onLoad(ViewStateHolder.get(ViewStateKeys.識別コード, ShikibetsuCode.class));
-        div.getCcdKaigoShikakuJoho().onLoad(ViewStateHolder.get(ViewStateKeys.被保険者番号, HihokenshaNo.class));
-        List<TaJushochiTokureisyaKanriMaster> tekiyoJohoList = get適用情報(ViewStateHolder.get(ViewStateKeys.識別コード, ShikibetsuCode.class));
+        div.getCcdKaigoAtenaInfo().onLoad(ViewStateHolder.get(ViewStateKey.資格対象者, TaishoshaKey.class).get識別コード());
+        div.getCcdKaigoShikakuJoho().onLoad(ViewStateHolder.get(ViewStateKey.資格対象者, TaishoshaKey.class).get被保険者番号());
+        List<TaJushochiTokureisyaKanriMaster> tekiyoJohoList = get適用情報(ViewStateHolder.get(ViewStateKey.資格対象者, TaishoshaKey.class).get識別コード());
         createHandler(div).適用情報Gridの設定(tekiyoJohoList);
 
         div.getTajutokuTekiyoJohoIchiran().getReportPublish().getHenshuNaiyo().getCcdPrintContentsSetting().initialize(true, RDate.getNowDate(), true, false, RDate.MAX, false);
@@ -254,8 +254,10 @@ public class ShikakuKihonJoho {
                                 : div.getTajutokuTekiyoJohoIchiran().getReportPublish().getHenshuNaiyo().getTxtTantokamei().getValue(),
                                 div.getTajutokuTekiyoJohoIchiran().getReportPublish().getHenshuNaiyo().getTxtSam() == null ? RString.EMPTY
                                 : div.getTajutokuTekiyoJohoIchiran().getReportPublish().getHenshuNaiyo().getTxtSam().getValue(),
-                                ViewStateHolder.get(ViewStateKeys.識別コード, ShikibetsuCode.class) == null ? ShikibetsuCode.EMPTY : ViewStateHolder.get(ViewStateKeys.識別コード, ShikibetsuCode.class),
-                                ViewStateHolder.get(ViewStateKeys.被保険者番号, HihokenshaNo.class) == null ? RString.EMPTY : ViewStateHolder.get(ViewStateKeys.被保険者番号, HihokenshaNo.class).value(),
+                                ViewStateHolder.get(ViewStateKey.資格対象者, TaishoshaKey.class).get識別コード() == null
+                                ? ShikibetsuCode.EMPTY : ViewStateHolder.get(ViewStateKey.資格対象者, TaishoshaKey.class).get識別コード(),
+                                ViewStateHolder.get(ViewStateKey.資格対象者, TaishoshaKey.class).get被保険者番号() == null
+                                ? RString.EMPTY : ViewStateHolder.get(ViewStateKey.資格対象者, TaishoshaKey.class).get被保険者番号().value(),
                                 div.getTajutokuTekiyoJohoIchiran().getReportPublish().getHenshuNaiyo() == null ? FlexibleDate.EMPTY
                                 : new FlexibleDate(div.getTajutokuTekiyoJohoIchiran().getReportPublish().getHenshuNaiyo().get他市町村住所地特例異動日()),
                                 div.getTajutokuTekiyoJohoIchiran().getReportPublish().getHenshuNaiyo().get他市町村住所地特例枝番(),

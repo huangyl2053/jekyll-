@@ -11,6 +11,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import jp.co.ndensan.reams.ca.cax.business.report.seikyu.SeikyuForPrinting;
+import jp.co.ndensan.reams.db.dbb.business.report.tsuchisho.KariSanteiTsuchiShoKyotsu;
 import jp.co.ndensan.reams.db.dbb.definition.core.HyojiUmu;
 import jp.co.ndensan.reams.db.dbb.definition.core.fuka.KozaKubun;
 import jp.co.ndensan.reams.db.dbb.definition.core.tsuchisho.notsu.HenshuHaniKubun;
@@ -195,8 +196,8 @@ public class NonyuTsuchiShoDataHenshu {
         List<NonyuTsuchiShoKiJoho> 納入通知書期情報リスト = create納入通知書期情報(null, null, null, 請求情報リスト,
                 本算定納入通知書制御情報.get納入通知書制御情報(), null, 出力期リスト, null, null);
         NofuShoKyotsu 納付書共通 = create納付書共通(
-                new FlexibleYear(編集後本算定通知書共通情報.get調定年度()),
-                new FlexibleYear(編集後本算定通知書共通情報.get賦課年度()),
+                編集後本算定通知書共通情報.get調定年度(),
+                編集後本算定通知書共通情報.get賦課年度(),
                 編集後本算定通知書共通情報.get編集後宛先(),
                 編集後本算定通知書共通情報.get編集後個人().get世帯コード(),
                 編集後本算定通知書共通情報.get通知書番号(),

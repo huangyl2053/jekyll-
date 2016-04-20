@@ -65,26 +65,4 @@ public class DbT4018KaigoHokenFutanGendogakuNinteiDac {
                 toObject(DbT4018KaigoHokenFutanGendogakuNinteiEntity.class);
     }
 
-    /**
-     * 主キーで支払方法変更を取得します。
-     *
-     * @param 被保険者番号 被保険者番号
-     * @return List<DbT4018KaigoHokenFutanGendogakuNinteiEntity>
-     * @throws NullPointerException 引数のいずれかがnullの場合
-     */
-    @Transaction
-    public List<DbT4018KaigoHokenFutanGendogakuNinteiEntity> selectCount(
-            HihokenshaNo 被保険者番号) throws NullPointerException {
-        requireNonNull(被保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage("被保険者番号"));
-
-        DbAccessorNormalType accessor = new DbAccessorNormalType(session);
-
-        return accessor.select().
-                table(DbT4018KaigoHokenFutanGendogakuNintei.class).
-                where(and(
-                                eq(hihokenshaNo, 被保険者番号),
-                                not(isNULL(ketteiKubun)))).
-                toList(DbT4018KaigoHokenFutanGendogakuNinteiEntity.class);
-    }
-
 }

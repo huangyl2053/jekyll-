@@ -363,6 +363,8 @@ public final class JutakuKaishuJizenShinseiTorokuDivHandler {
             if (対象住宅住所が不一致レコード > 0) {
                 throw new ApplicationException(DbcErrorMessages.対象住宅住所不一致.getMessage());
             }
+        } else {
+            throw new ApplicationException(DbcErrorMessages.住宅改修データなし.getMessage());
         }
 
         if (div.getKaigoShikakuKihonShaPanel().getTxtServiceYM().getValue() == null) {
@@ -1158,7 +1160,13 @@ public final class JutakuKaishuJizenShinseiTorokuDivHandler {
             削除モード初期化();
         } else if (取消モード.equals(画面モード)) {
             取消モード初期化();
+        } else if (登録モード.equals(画面モード)) {
+            登録モード初期化();
         }
+    }
+
+    private void 登録モード初期化() {
+        div.getKaigoShikakuKihonShaPanel().getShinseishaInfo().getDdlShinseiTorikesuJiyu().setDisplayNone(true);
     }
 
     private void 照会モード初期化() {

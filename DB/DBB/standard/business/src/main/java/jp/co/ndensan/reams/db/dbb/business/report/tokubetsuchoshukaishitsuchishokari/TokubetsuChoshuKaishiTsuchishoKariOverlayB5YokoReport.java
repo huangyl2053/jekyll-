@@ -12,6 +12,7 @@ import jp.co.ndensan.reams.ur.urz.entity.report.parts.ninshosha.NinshoshaSource;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.report.Report;
 import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
+import lombok.NonNull;
 
 /**
  * 特別徴収開始通知書（仮算定）帳票 B5横・オーバレイタイプReport
@@ -38,7 +39,7 @@ public class TokubetsuChoshuKaishiTsuchishoKariOverlayB5YokoReport extends
      */
     public TokubetsuChoshuKaishiTsuchishoKariOverlayB5YokoReport(NinshoshaSource ninshoshaSource,
             CompKaigoToiawasesakiSource toiawasesakiSource,
-            KariTokuchoKaishiTsuchisyoJoho 仮算定特徴開始通知書情報,
+            @NonNull KariTokuchoKaishiTsuchisyoJoho 仮算定特徴開始通知書情報,
             RString 通知書定型文１,
             RString 通知書定型文２) {
         this.ninshoshaSource = ninshoshaSource;

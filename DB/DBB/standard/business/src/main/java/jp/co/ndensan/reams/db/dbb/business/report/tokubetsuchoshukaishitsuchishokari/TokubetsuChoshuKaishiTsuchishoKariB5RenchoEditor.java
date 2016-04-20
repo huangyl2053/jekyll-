@@ -25,7 +25,7 @@ import jp.co.ndensan.reams.uz.uza.util.editor.DecimalFormatter;
 public class TokubetsuChoshuKaishiTsuchishoKariB5RenchoEditor implements
         ITokubetsuChoshuKaishiTsuchishoKariB5RenchoEditor {
 
-    private static final RString NENDO = new RString("年度");
+//    private static final RString NENDO = new RString("年度");
     private final KariTokuchoKaishiTsuchisyoJoho 仮算定特徴開始通知書情報;
     private final RString 宛名連番;
     private final NinshoshaSource ninshoshaSource;
@@ -48,9 +48,9 @@ public class TokubetsuChoshuKaishiTsuchishoKariB5RenchoEditor implements
     @Override
     public TokubetsuChoshuKaishiTsuchishoKariB5RenchoSource edit(TokubetsuChoshuKaishiTsuchishoKariB5RenchoSource source) {
         source.nendo = 仮算定特徴開始通知書情報.get編集後仮算定通知書共通情報().get調定年度().wareki().eraType(EraType.KANJI)
-                .firstYear(FirstYear.GAN_NEN).fillType(FillType.BLANK).toDateString().concat(NENDO);
+                .firstYear(FirstYear.GAN_NEN).fillType(FillType.BLANK).toDateString();
         source.nendo2 = 仮算定特徴開始通知書情報.get編集後仮算定通知書共通情報().get調定年度().wareki().eraType(EraType.KANJI)
-                .firstYear(FirstYear.GAN_NEN).fillType(FillType.BLANK).toDateString().concat(NENDO);
+                .firstYear(FirstYear.GAN_NEN).fillType(FillType.BLANK).toDateString();
         source.tsuchishoNo2 = 仮算定特徴開始通知書情報.get編集後仮算定通知書共通情報().get通知書番号().value();
         if (仮算定特徴開始通知書情報.get編集後仮算定通知書共通情報().get編集後個人() != null) {
             source.setaiCode2 = 仮算定特徴開始通知書情報.get編集後仮算定通知書共通情報().get編集後個人().get世帯コード().value();
@@ -65,7 +65,7 @@ public class TokubetsuChoshuKaishiTsuchishoKariB5RenchoEditor implements
         source.atenaRenban2 = 宛名連番;
         source.atenaRenban1 = 宛名連番;
         source.nendo3 = 仮算定特徴開始通知書情報.get編集後仮算定通知書共通情報().get調定年度().wareki().eraType(EraType.KANJI)
-                .firstYear(FirstYear.GAN_NEN).fillType(FillType.BLANK).toDateString().concat(NENDO);
+                .firstYear(FirstYear.GAN_NEN).fillType(FillType.BLANK).toDateString();
         if (仮算定特徴開始通知書情報.get編集後仮算定通知書共通情報().get更正後() != null) {
             source.hokenryoGokei = DecimalFormatter.toコンマ区切りRString(
                     仮算定特徴開始通知書情報.get編集後仮算定通知書共通情報().get更正後().get更正後特徴期別金額01()
@@ -75,10 +75,10 @@ public class TokubetsuChoshuKaishiTsuchishoKariB5RenchoEditor implements
         }
         if (仮算定特徴開始通知書情報.get編集後仮算定通知書共通情報().get前年度情報() != null) {
             source.nendo4 = new FlexibleYear(仮算定特徴開始通知書情報.get編集後仮算定通知書共通情報().get前年度情報().get前年度賦課年度())
-                    .wareki().eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN).fillType(FillType.BLANK).toDateString().concat(NENDO);
+                    .wareki().eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN).fillType(FillType.BLANK).toDateString();
         }
         source.nendo5 = 仮算定特徴開始通知書情報.get編集後仮算定通知書共通情報().get調定年度().wareki().eraType(EraType.KANJI)
-                .firstYear(FirstYear.GAN_NEN).fillType(FillType.BLANK).toDateString().concat(NENDO);
+                .firstYear(FirstYear.GAN_NEN).fillType(FillType.BLANK).toDateString();
         if (仮算定特徴開始通知書情報.get編集後仮算定通知書共通情報().get前年度情報() != null) {
             source.hokenryoGakuZen10Gatsu = DecimalFormatter.toコンマ区切りRString(仮算定特徴開始通知書情報.get編集後仮算定通知書共通情報()
                     .get前年度情報().get前年度特徴期別金額04(), 0);

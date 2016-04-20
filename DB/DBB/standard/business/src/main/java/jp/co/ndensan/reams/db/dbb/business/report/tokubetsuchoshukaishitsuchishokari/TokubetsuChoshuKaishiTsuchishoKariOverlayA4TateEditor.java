@@ -26,12 +26,17 @@ import jp.co.ndensan.reams.uz.uza.util.editor.DecimalFormatter;
 public class TokubetsuChoshuKaishiTsuchishoKariOverlayA4TateEditor implements
         ITokubetsuChoshuKaishiTsuchishoKariOverlayA4TateEditor {
 
-    private static final RString NENDO = new RString("年度");
     private static final int INDEX_0 = 0;
     private static final int INDEX_1 = 1;
     private static final int INDEX_2 = 2;
-    private static final RString SPLITTOKEN = new RString(".");
-    private static final RString PING = new RString("平");
+    private static final int INDEX_4 = 4;
+    private static final int INDEX_5 = 5;
+    private static final int INDEX_7 = 7;
+    private static final int INDEX_8 = 8;
+    private static final int INDEX_10 = 10;
+
+//    private static final RString SPLITTOKEN = new RString(".");
+    private static final RString HEI = new RString("平");
 
     private final KariTokuchoKaishiTsuchisyoJoho 仮算定特徴開始通知書情報;
     private final RString 通知書定型文１;
@@ -59,7 +64,7 @@ public class TokubetsuChoshuKaishiTsuchishoKariOverlayA4TateEditor implements
     @Override
     public TokubetsuChoshuKaishiTsuchishoKariOverlayA4TateSource edit(TokubetsuChoshuKaishiTsuchishoKariOverlayA4TateSource source) {
         source.titleNendo = 仮算定特徴開始通知書情報.get編集後仮算定通知書共通情報().get調定年度().wareki().eraType(EraType.KANJI)
-                .firstYear(FirstYear.GAN_NEN).fillType(FillType.BLANK).toDateString().concat(NENDO);
+                .firstYear(FirstYear.GAN_NEN).fillType(FillType.BLANK).toDateString();
         source.hyojicodeName1 = 仮算定特徴開始通知書情報.get編集後仮算定通知書共通情報().get表示コード１名();
         source.hyojicodeName2 = 仮算定特徴開始通知書情報.get編集後仮算定通知書共通情報().get表示コード２名();
         source.hyojicodeName3 = 仮算定特徴開始通知書情報.get編集後仮算定通知書共通情報().get表示コード３名();
@@ -84,17 +89,19 @@ public class TokubetsuChoshuKaishiTsuchishoKariOverlayA4TateEditor implements
         if (仮算定特徴開始通知書情報.get編集後仮算定通知書共通情報().get編集後個人() != null) {
             source.hihokenshaKatagaki = 仮算定特徴開始通知書情報.get編集後仮算定通知書共通情報().get編集後個人().get方書().value();
             RString 生年月日_first = 仮算定特徴開始通知書情報.get編集後仮算定通知書共通情報().get編集後個人().get生年月日().substring(INDEX_0, INDEX_1);
-            if (PING.equals(生年月日_first)) {
-                source.birthYYYY = 仮算定特徴開始通知書情報.get編集後仮算定通知書共通情報().get編集後個人().get生年月日()
-                        .split(SPLITTOKEN.toString()).get(INDEX_0);
+            if (HEI.equals(生年月日_first)) {
+                RString 生年月日の年度 = 仮算定特徴開始通知書情報.get編集後仮算定通知書共通情報().get編集後個人().get生年月日().substring(INDEX_2, INDEX_4);
+                source.birthYYYY = HEI.concat(生年月日の年度);
+                source.birthMM = 仮算定特徴開始通知書情報.get編集後仮算定通知書共通情報().get編集後個人().get生年月日().substring(INDEX_5, INDEX_7);
+                source.birthDD = 仮算定特徴開始通知書情報.get編集後仮算定通知書共通情報().get編集後個人().get生年月日().substring(INDEX_8, INDEX_10);
             } else {
-                source.birthYYYY = new FlexibleYear(仮算定特徴開始通知書情報.get編集後仮算定通知書共通情報().get編集後個人().get生年月日())
-                        .wareki().eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN).fillType(FillType.BLANK).toDateString().concat(NENDO);
+                RString 生年月日 = 仮算定特徴開始通知書情報.get編集後仮算定通知書共通情報().get編集後個人().get生年月日();
+                FlexibleYear 年度 = new FlexibleYear(生年月日.substring(INDEX_0, INDEX_4).toString());
+                source.birthYYYY = 年度.wareki().toDateString();
+                source.birthMM = 生年月日.substring(INDEX_5, INDEX_7);
+                source.birthDD = 生年月日.substring(INDEX_8, INDEX_10);
+
             }
-            source.birthMM = 仮算定特徴開始通知書情報.get編集後仮算定通知書共通情報().get編集後個人().get生年月日()
-                    .split(SPLITTOKEN.toString()).get(INDEX_1);
-            source.birthDD = 仮算定特徴開始通知書情報.get編集後仮算定通知書共通情報().get編集後個人().get生年月日()
-                    .split(SPLITTOKEN.toString()).get(INDEX_2);
             source.seibetsu = 仮算定特徴開始通知書情報.get編集後仮算定通知書共通情報().get編集後個人().get性別();
         }
         if (仮算定特徴開始通知書情報.get編集後仮算定通知書共通情報().get更正後() != null) {
@@ -102,9 +109,9 @@ public class TokubetsuChoshuKaishiTsuchishoKariOverlayA4TateEditor implements
             source.tokuchoTaishoNenkinName = 仮算定特徴開始通知書情報.get編集後仮算定通知書共通情報().get更正後().get更正後特別徴収対象年金();
         }
         source.hokenryoGakuNendo1 = 仮算定特徴開始通知書情報.get編集後仮算定通知書共通情報().get調定年度().wareki().eraType(EraType.KANJI)
-                .firstYear(FirstYear.GAN_NEN).fillType(FillType.BLANK).toDateString().concat(NENDO);
+                .firstYear(FirstYear.GAN_NEN).fillType(FillType.BLANK).toDateString();
         source.hokenryoGakuNendo2 = 仮算定特徴開始通知書情報.get編集後仮算定通知書共通情報().get調定年度().wareki().eraType(EraType.KANJI)
-                .firstYear(FirstYear.GAN_NEN).fillType(FillType.BLANK).toDateString().concat(NENDO);
+                .firstYear(FirstYear.GAN_NEN).fillType(FillType.BLANK).toDateString();
         if (仮算定特徴開始通知書情報.get編集後仮算定通知書共通情報().get更正後() != null) {
             source.karisanteiGakuGokei = DecimalFormatter.toコンマ区切りRString(
                     仮算定特徴開始通知書情報.get編集後仮算定通知書共通情報().get更正後().get更正後特徴期別金額01()
@@ -148,7 +155,7 @@ public class TokubetsuChoshuKaishiTsuchishoKariOverlayA4TateEditor implements
 
         // TODO 内部番号647
         EditedAtesaki 編集後宛先 = new EditedAtesaki(仮算定特徴開始通知書情報.get宛先情報(), 仮算定特徴開始通知書情報.get地方公共団体(),
-                仮算定特徴開始通知書情報.get帳票制御共通(), null, null, true,
+                仮算定特徴開始通知書情報.get帳票制御共通(), null, new RString("2212"), true,
                 null, null, null, null);
         SofubutsuAtesakiSource sofubutsuAtesakiSource = 編集後宛先.getSofubutsuAtesakiSource().get送付物宛先ソース();
         source.yubinNo1 = sofubutsuAtesakiSource.yubinNo;
