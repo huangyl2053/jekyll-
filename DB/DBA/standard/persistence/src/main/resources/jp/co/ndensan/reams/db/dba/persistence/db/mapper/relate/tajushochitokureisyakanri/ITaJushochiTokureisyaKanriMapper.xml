@@ -83,27 +83,20 @@
         dbT1003Tashichoson."shisetsuTaishoTsuchiHakkoYMD" AS "shisetsuTaishoTsuchiHakkoYMD",
         dbT1003Tashichoson."shisetsuHenkoTsuchiHakkoYMD"  AS "shisetsuHenkoTsuchiHakkoYMD"
         FROM
-        rgdb."DbT1003TashichosonJushochiTokurei" AS dbT1003Tashichoson,
-        (
-        SELECT
-        dbT1003Tashi."shikibetsuCode" AS "shikibetsuCode",
-        dbT1003Tashi."idoYMD" AS "idoYMD",
-        dbT1003Tashi."tekiyoYMD" AS "tekiyoYMD",
-        MAX(dbT1003Tashi."edaNo") AS "edaNo"
-        FROM
-        rgdb."DbT1003TashichosonJushochiTokurei" AS dbT1003Tashi
+                    (SELECT
+                    *,
+                    ROW_NUMBER() OVER (PARTITION BY T1."shikibetsuCode", T1."tekiyoYMD" ORDER BY 
+                    T1."shikibetsuCode" ASC,
+                    T1."tekiyoYMD" ASC,
+                    T1."idoYMD" DESC,
+                    T1."edaNo" DESC) AS rrkno
+             FROM
+                    rgdb."DbT1003TashichosonJushochiTokurei" AS T1
+             WHERE
+                    T1."shikibetsuCode" = #{shikibetsuCode}
+                    AND T1."logicalDeletedFlag" = FALSE) AS dbT1003Tashichoson
         WHERE
-        dbT1003Tashi."shikibetsuCode" = #{shikibetsuCode}
-        AND dbT1003Tashi."logicalDeletedFlag" = FALSE
-        GROUP BY
-        dbT1003Tashi."shikibetsuCode",
-        dbT1003Tashi."tekiyoYMD",
-        dbT1003Tashi."idoYMD"
-        ) AS dbT1003TashichosonJushochiTokurei
-        WHERE
-        dbT1003Tashichoson."shikibetsuCode" = dbT1003TashichosonJushochiTokurei."shikibetsuCode"
-        AND dbT1003Tashichoson."idoYMD" = dbT1003TashichosonJushochiTokurei."idoYMD"
-        AND dbT1003Tashichoson."edaNo" = dbT1003TashichosonJushochiTokurei."edaNo"
+            dbT1003Tashichoson."rrkno" = 1
         ) AS dbT1003
         LEFT JOIN rgdb."DbT1004ShisetsuNyutaisho" AS dbT1004
         ON
@@ -204,27 +197,20 @@
         SELECT
         dbT1003Tashichoson.* 
         FROM
-        rgdb."DbT1003TashichosonJushochiTokurei" AS dbT1003Tashichoson,
-        (
-        SELECT
-        dbT1003Tashi."shikibetsuCode" AS "shikibetsuCode",
-        dbT1003Tashi."idoYMD" AS "idoYMD",
-        dbT1003Tashi."tekiyoYMD" AS "tekiyoYMD",
-        MAX(dbT1003Tashi."edaNo") AS "edaNo"
-        FROM
-        rgdb."DbT1003TashichosonJushochiTokurei" AS dbT1003Tashi
+                 (SELECT
+                    *,
+                    ROW_NUMBER() OVER (PARTITION BY T1."shikibetsuCode", T1."tekiyoYMD" ORDER BY 
+                    T1."shikibetsuCode" ASC,
+                    T1."tekiyoYMD" ASC,
+                    T1."idoYMD" DESC,
+                    T1."edaNo" DESC) AS rrkno
+             FROM
+                    rgdb."DbT1003TashichosonJushochiTokurei" AS T1
+             WHERE
+                    T1."shikibetsuCode" = #{shikibetsuCode}
+                    AND T1."logicalDeletedFlag" = FALSE) AS dbT1003Tashichoson
         WHERE
-        dbT1003Tashi."shikibetsuCode" = #{shikibetsuCode}
-        AND dbT1003Tashi."logicalDeletedFlag" = FALSE
-        GROUP BY
-        dbT1003Tashi."shikibetsuCode",
-        dbT1003Tashi."tekiyoYMD",
-        dbT1003Tashi."idoYMD"
-        ) AS dbT1003TashichosonJushochiTokurei
-        WHERE
-        dbT1003Tashichoson."shikibetsuCode" = dbT1003TashichosonJushochiTokurei."shikibetsuCode"
-        AND dbT1003Tashichoson."idoYMD" = dbT1003TashichosonJushochiTokurei."idoYMD"
-        AND dbT1003Tashichoson."edaNo" = dbT1003TashichosonJushochiTokurei."edaNo"
+            dbT1003Tashichoson."rrkno" = 1
         ) AS "DbT1003TashichosonJushochiTokurei"
         LEFT JOIN rgdb."DbT1004ShisetsuNyutaisho" AS "DbT1004ShisetsuNyutaisho"
         ON
