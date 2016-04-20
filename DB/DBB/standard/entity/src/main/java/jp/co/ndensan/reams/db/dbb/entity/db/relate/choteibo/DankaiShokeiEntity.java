@@ -25,6 +25,7 @@ public class DankaiShokeiEntity implements IDbAccessable {
     private RString choshuHouhou;
     private RString dankai;
     private int dogetsuFlag;
+    private RString karisanFlag;
     private Decimal zengetsusueKensu;
     private Decimal zengetsusueChoteigakuCount;
     private Decimal fueKensu;

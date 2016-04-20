@@ -22,6 +22,7 @@ public class DankaiTksaiToFusaiKensuEntity {
     private FlexibleYear choteiNendo;
     private RString choshuHouhou;
     private RString dankai;
+    private RString karisanFlag;
     private Decimal tokuchosyaKensuCount;
     private Decimal fuchosyaKensuCount;
     private Decimal naiheisyaKensuCount;

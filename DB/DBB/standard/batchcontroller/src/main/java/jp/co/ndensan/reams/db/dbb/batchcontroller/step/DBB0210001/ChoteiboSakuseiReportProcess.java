@@ -113,6 +113,9 @@ public class ChoteiboSakuseiReportProcess extends BatchProcessBase<DbT7022ShoriD
     private static final int NENDO_SUBSTR_START = 2;
     private static final RString STRING_SAKUSEI = new RString("作成");
     private static final RString UNDERLINE = new RString("_");
+    private static final RString MIDDLELINE = new RString("-");
+    private static final RString なし = new RString("なし");
+    private static final RString 本算定 = new RString("0");
     private static final RString SELECT_ID = new RString(
             "jp.co.ndensan.reams.db.dbb.persistence.db.mapper.relate.choteibo.IChoteiboSakuseiMapper.select処理日付");
     private IChoteiboSakuseiMapper choteiboSakuseiMapper;
@@ -163,7 +166,7 @@ public class ChoteiboSakuseiReportProcess extends BatchProcessBase<DbT7022ShoriD
 
     @Override
     protected void process(DbT7022ShoriDateKanriEntity entity) {
-        if (null != entity && null != entity.getKijunTimestamp()
+        if (null != entity && null != entity.getKijunTimestamp() && !entity.getKijunTimestamp().isEmpty()
                 && !parameter.getChushutsuEdYMD().isBefore(entity.getKijunTimestamp())) {
             処理日付リスト.add(entity);
         }
@@ -386,7 +389,7 @@ public class ChoteiboSakuseiReportProcess extends BatchProcessBase<DbT7022ShoriD
         RString listDankaiBetsuGokei_3 = RString.EMPTY;
         RString listDankaiBetsuGokei_4 = RString.EMPTY;
         RString mongon = RString.EMPTY;
-        RString ｈeichoShaSuKome = RString.EMPTY;
+        RString heichoShaSuKome = RString.EMPTY;
         RString fuchoShaSuKome = RString.EMPTY;
         RString tokuchoshaShaSuKome = RString.EMPTY;
         ChoteiboDankaiGokeiFuchoItem dankaiGokeiFuchoItem = null;
@@ -414,7 +417,7 @@ public class ChoteiboSakuseiReportProcess extends BatchProcessBase<DbT7022ShoriD
             }
         }
         if (!changeDecimalToRString(内併徴者数の件数合計).equals(listDankaiBetsuGokei_4)) {
-            ｈeichoShaSuKome = 星を追加する(RString.EMPTY);
+            heichoShaSuKome = 星を追加する(RString.EMPTY);
         }
         if (!changeDecimalToRString(普徴者数の合計).equals(listDankaiBetsuGokei_3)) {
             fuchoShaSuKome = 星を追加する(RString.EMPTY);
@@ -424,7 +427,7 @@ public class ChoteiboSakuseiReportProcess extends BatchProcessBase<DbT7022ShoriD
         }
         return new ChoteiboDankaiGokeiItem(
                 GOKEI, listDankaiBetsuGokei_2, listDankaiBetsuGokei_3, listDankaiBetsuGokei_4,
-                mongon, ｈeichoShaSuKome, fuchoShaSuKome, tokuchoshaShaSuKome,
+                mongon, heichoShaSuKome, fuchoShaSuKome, tokuchoshaShaSuKome,
                 dankaiGokeiFuchoItem, dankaiGokeiTokuchoItem);
     }
 
@@ -656,7 +659,7 @@ public class ChoteiboSakuseiReportProcess extends BatchProcessBase<DbT7022ShoriD
         RString listDankaiBetsuGokei_3 = RString.EMPTY;
         RString listDankaiBetsuGokei_4 = RString.EMPTY;
         RString mongon = RString.EMPTY;
-        RString ｈeichoShaSuKome = RString.EMPTY;
+        RString heichoShaSuKome = RString.EMPTY;
         RString fuchoShaSuKome = RString.EMPTY;
         RString tokuchoshaShaSuKome = RString.EMPTY;
         ChoteiboDankaiGokeiFuchoItem dankaiGokeiFuchoItem = null;
@@ -684,7 +687,7 @@ public class ChoteiboSakuseiReportProcess extends BatchProcessBase<DbT7022ShoriD
             }
         }
         if (!changeDecimalToRString(内併徴者数の件数合計).equals(listDankaiBetsuGokei_4)) {
-            ｈeichoShaSuKome = 星を追加する(RString.EMPTY);
+            heichoShaSuKome = 星を追加する(RString.EMPTY);
         }
         if (!changeDecimalToRString(普徴者数の合計).equals(listDankaiBetsuGokei_3)) {
             fuchoShaSuKome = 星を追加する(RString.EMPTY);
@@ -694,7 +697,7 @@ public class ChoteiboSakuseiReportProcess extends BatchProcessBase<DbT7022ShoriD
         }
         ChoteiboDankaiGokeiItem dankaiGokeiItem = new ChoteiboDankaiGokeiItem(
                 GOKEI, listDankaiBetsuGokei_2, listDankaiBetsuGokei_3, listDankaiBetsuGokei_4,
-                mongon, ｈeichoShaSuKome, fuchoShaSuKome, tokuchoshaShaSuKome,
+                mongon, heichoShaSuKome, fuchoShaSuKome, tokuchoshaShaSuKome,
                 dankaiGokeiFuchoItem, dankaiGokeiTokuchoItem);
         return dankaiGokeiItem;
     }
@@ -907,11 +910,7 @@ public class ChoteiboSakuseiReportProcess extends BatchProcessBase<DbT7022ShoriD
             } else if (ChoshuHohoKibetsu.特別徴収.code().equals(年度データ.get徴収方法())) {
                 sankaiTokuchoItem = makeChoteiboDankaiTokuchoItem(段階表記, 年度データ);
             }
-            if (null == 年度データ.get段階小計リスト() || 年度データ.get段階小計リスト().isEmpty()) {
-                listDankaiBetsu_2 = RString.EMPTY;
-                listDankaiBetsu_3 = RString.EMPTY;
-                listDankaiBetsu_4 = RString.EMPTY;
-            } else {
+            if (null != 年度データ.get段階小計リスト() && !年度データ.get段階小計リスト().isEmpty()) {
                 for (DankaiShokeiEntity 段階小計 : 年度データ.get段階小計リスト()) {
                     if (null == 段階小計.getDankai() || 段階小計.getDankai().isEmpty()
                             || get段階(段階表記) != Integer.parseInt(段階小計.getDankai().trim().toString())) {
@@ -1026,13 +1025,13 @@ public class ChoteiboSakuseiReportProcess extends BatchProcessBase<DbT7022ShoriD
     private void バッチ出力条件リストの出力() {
         RStringBuilder builder = new RStringBuilder();
         builder.append(JOBNO_NAME);
-        builder.append(" ");
+        builder.append(RString.HALF_SPACE);
         builder.append(JobContextHolder.getJobId());
         RString ジョブ番号 = builder.toRString();
         RString 帳票名 = ReportIdDBB.DBB3001.getReportName();
         RString 出力ページ数 = new RString(String.valueOf(reportSourceWriter.pageCount().value()));
-        RString csv出力有無 = new RString("なし");
-        RString csvファイル名 = new RString("-");
+        RString csv出力有無 = なし;
+        RString csvファイル名 = MIDDLELINE;
         List<RString> 出力条件 = new ArrayList<>();
         builder.append(SHORINENDO_NAME);
         builder.append(parameter.getShoriNendo().wareki().toDateString());
@@ -1196,7 +1195,7 @@ public class ChoteiboSakuseiReportProcess extends BatchProcessBase<DbT7022ShoriD
     }
 
     private void set段階合計データ(GokeiDataEntity 合計データ, GokeiBubunEntity 合計部分情報) {
-        if (null == 合計部分情報.getDankai()) {
+        if (null == 合計部分情報.getDankai() || !本算定.equals(合計部分情報.getKarisanFlag())) {
             return;
         }
         if (null == 合計データ.get徴収方法()) {
@@ -1272,7 +1271,7 @@ public class ChoteiboSakuseiReportProcess extends BatchProcessBase<DbT7022ShoriD
     }
 
     private List<GokeiDataEntity> get合計データリスト() {
-        List<GokeiDataEntity> 合計データリスト = new ArrayList<>();
+        List<GokeiDataEntity> 合計リスト = new ArrayList<>();
         List<GokeiBubunEntity> 合計部分情報リスト = choteiboSakuseiMapper.selectAll合計部分情報();
         List<GokeiBubunSoukeiEntity> 合計部分総計情報リスト = choteiboSakuseiMapper.selectAll合計部分総計情報();
         GokeiDataEntity 特別徴収合計データ = new GokeiDataEntity();
@@ -1286,14 +1285,14 @@ public class ChoteiboSakuseiReportProcess extends BatchProcessBase<DbT7022ShoriD
         GokeiDataEntity その他合計データ = new GokeiDataEntity();
         List<DankaiShokeiEntity> その他合計の段階リスト = new ArrayList<>();
         その他合計データ.set合計の段階リスト(その他合計の段階リスト);
-        合計データリスト.add(特別徴収合計データ);
-        合計データリスト.add(普通徴収合計データ);
-        合計データリスト.add(その他合計データ);
+        合計リスト.add(特別徴収合計データ);
+        合計リスト.add(普通徴収合計データ);
+        合計リスト.add(その他合計データ);
         for (GokeiBubunSoukeiEntity 合計部分総計情報 : 合計部分総計情報リスト) {
-            set合計データリストBy合計部分総計情報(合計データリスト, 合計部分総計情報);
+            set合計データリストBy合計部分総計情報(合計リスト, 合計部分総計情報);
         }
         for (GokeiBubunEntity 合計部分情報 : 合計部分情報リスト) {
-            set合計データリストBy合計部分情報(合計データリスト, 合計部分情報);
+            set合計データリストBy合計部分情報(合計リスト, 合計部分情報);
         }
         特別徴収合計データ.set特別徴収の調定額の総計(その他合計データ.get特別徴収の調定額の総計());
         特別徴収合計データ.set特徴歳出還付の件数の総計(その他合計データ.get特徴歳出還付の件数の総計());
@@ -1301,7 +1300,7 @@ public class ChoteiboSakuseiReportProcess extends BatchProcessBase<DbT7022ShoriD
         普通徴収合計データ.set普通徴収の調定額の総計(その他合計データ.get普通徴収の調定額の総計());
         普通徴収合計データ.set普徴歳出還付の件数の総計(その他合計データ.get普徴歳出還付の件数の総計());
         普通徴収合計データ.set普徴歳出還付の調定額の総計(その他合計データ.get普徴歳出還付の調定額の総計());
-        return 合計データリスト;
+        return 合計リスト;
     }
 
     private List<NendoDataEntity> get年度データリスト(FlexibleYear choteiNendo, FlexibleYear fukaNendo) {
@@ -1422,7 +1421,8 @@ public class ChoteiboSakuseiReportProcess extends BatchProcessBase<DbT7022ShoriD
         }
         List<DankaiShokeiEntity> result段階小計リスト = new ArrayList<>();
         for (DankaiShokeiEntity 段階小計 : 段階小計リスト) {
-            if (null != 段階小計.getChoshuHouhou() && 徴収方法.equals(段階小計.getChoshuHouhou())) {
+            if (null != 段階小計.getChoshuHouhou() && 徴収方法.equals(段階小計.getChoshuHouhou())
+                    && 本算定.equals(段階小計.getKarisanFlag())) {
                 result段階小計リスト.add(段階小計);
             }
         }

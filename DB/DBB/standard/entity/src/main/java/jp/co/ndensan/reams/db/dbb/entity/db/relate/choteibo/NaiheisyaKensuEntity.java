@@ -24,5 +24,6 @@ public class NaiheisyaKensuEntity {
     private FlexibleYear fukaNendo;
     private RString choshuHouhou;
     private RString dankai;
+    private RString karisanFlag;
     private Decimal naiheisyaKensu;
 }

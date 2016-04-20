@@ -31,6 +31,7 @@ public class DanKaiEntity implements IDbAccessable {
     private RString choshuHouhou;
     private Decimal choteiId;
     private int dogetsuFlag;
+    private RString karisanFlag;
     private Decimal zengetsusueChoteigaku;
     private Decimal fueChoteigaku;
     private Decimal genChoteigaku;

@@ -23,6 +23,7 @@ public class GokeiBubunEntity implements IDbAccessable {
     private RString choshuHouhou;
     private int dogetsuFlag;
     private RString dankai;
+    private RString karisanFlag;
     private Decimal choteigaku4GatsuCount;
     private Decimal choteigaku5GatsuCount;
     private Decimal choteigaku6GatsuCount;

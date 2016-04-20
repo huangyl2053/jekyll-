@@ -9,6 +9,8 @@ import jp.co.ndensan.reams.uz.uza.math.Decimal;
 
 /**
  * 調定額設定クラスです。
+ *
+ * @reamsid_L DBB-0770-040 yebangqiang
  */
 @lombok.Getter
 @lombok.Setter

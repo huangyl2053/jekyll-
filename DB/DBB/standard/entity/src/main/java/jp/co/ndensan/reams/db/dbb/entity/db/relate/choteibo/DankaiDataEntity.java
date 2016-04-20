@@ -7,6 +7,7 @@ package jp.co.ndensan.reams.db.dbb.entity.db.relate.choteibo;
 
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.TsuchishoNo;
+import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
@@ -27,6 +28,7 @@ public class DankaiDataEntity {
     private Decimal rirekiNo;
     private HihokenshaNo hihokenshaNo;
     private RString dankai;
+    private YMDHMS choteiNichiji;
     private RString choshuHouhou;
     private Decimal choteiId;
     private Decimal choteigaku;

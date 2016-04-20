@@ -438,9 +438,9 @@ public interface IChoteiboSakuseiMapper {
      * 処理日付管理マスタから処理日付を取得する。
      *
      * @param parameter 検索条件
-     * @return List<DbT7022ShoriDateKanriEntity>
+     * @return DbT7022ShoriDateKanriEntity
      */
-    List<DbT7022ShoriDateKanriEntity> select処理日付(ChoteiboShoriHizukeMyBatisParameter parameter);
+    DbT7022ShoriDateKanriEntity select処理日付(ChoteiboShoriHizukeMyBatisParameter parameter);
 
     /**
      * 期別情報一時テーブルを削除します。

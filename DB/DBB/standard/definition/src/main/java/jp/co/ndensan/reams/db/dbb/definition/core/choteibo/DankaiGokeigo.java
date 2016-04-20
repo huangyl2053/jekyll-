@@ -11,6 +11,8 @@ import jp.co.ndensan.reams.uz.uza.math.Decimal;
 
 /**
  * 段階合計後用パラメータクラスです。
+ *
+ * @reamsid_L DBB-0770-040 yebangqiang
  */
 @SuppressWarnings("PMD.UnusedPrivateField")
 @lombok.Getter

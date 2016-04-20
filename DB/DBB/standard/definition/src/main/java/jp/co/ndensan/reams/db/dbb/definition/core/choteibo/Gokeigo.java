@@ -9,6 +9,8 @@ import java.util.List;
 
 /**
  * 合計後用パラメータクラスです。
+ *
+ * @reamsid_L DBB-0770-040 yebangqiang
  */
 @SuppressWarnings("PMD.UnusedPrivateField")
 @lombok.Getter
