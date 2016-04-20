@@ -5,7 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dba.divcontroller.handler.parentdiv.DBA1150011;
 
-import jp.co.ndensan.reams.db.dba.divcontroller.entity.parentdiv.DBA1150011.nenreitotatsutorokuDiv;
+import jp.co.ndensan.reams.db.dba.divcontroller.entity.parentdiv.DBA1150011.NenreiTotatsuTorokushaListDiv;
 import jp.co.ndensan.reams.db.dbz.definition.message.DbzErrorMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.uz.uza.message.IMessageGettable;
@@ -21,14 +21,14 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
  */
 public class NenreiTotatsuTorokuValidationHandler {
 
-    private final nenreitotatsutorokuDiv div;
+    private final NenreiTotatsuTorokushaListDiv div;
 
     /**
      * コンストラクタです。
      *
      * @param div 年齢到達登録者Div
      */
-    public NenreiTotatsuTorokuValidationHandler(nenreitotatsutorokuDiv div) {
+    public NenreiTotatsuTorokuValidationHandler(NenreiTotatsuTorokushaListDiv div) {
         this.div = div;
     }
 

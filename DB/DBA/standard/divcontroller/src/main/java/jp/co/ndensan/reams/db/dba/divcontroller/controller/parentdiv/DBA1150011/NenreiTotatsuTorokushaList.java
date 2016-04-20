@@ -8,7 +8,7 @@ package jp.co.ndensan.reams.db.dba.divcontroller.controller.parentdiv.DBA1150011
 import jp.co.ndensan.reams.db.dba.business.core.nenreitotatsutoroku.DbT7022ShoriDateKanriBusiness;
 import jp.co.ndensan.reams.db.dba.definition.batchprm.nenreitotatsutorokushalistbatch.NenreiTotatsuTorokushaListBatchParameter;
 import jp.co.ndensan.reams.db.dba.divcontroller.entity.parentdiv.DBA1150011.BatchParamterInfoDiv;
-import jp.co.ndensan.reams.db.dba.divcontroller.entity.parentdiv.DBA1150011.nenreitotatsutorokuDiv;
+import jp.co.ndensan.reams.db.dba.divcontroller.entity.parentdiv.DBA1150011.NenreiTotatsuTorokushaListDiv;
 import jp.co.ndensan.reams.db.dba.divcontroller.handler.parentdiv.DBA1150011.NenreiTotatsuTorokuValidationHandler;
 import jp.co.ndensan.reams.db.dba.service.core.nenreitotatsutorokushalist.NenreiTotatsushaTorokuListFinder;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
@@ -23,14 +23,14 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
  *
  * @reamsid_L DBA-0570-010 xuyannan
  */
-public class nenreitotatsutoroku {
+public class NenreiTotatsuTorokushaList {
 
     private final NenreiTotatsushaTorokuListFinder finder;
 
     /**
      * コンストラクタです。
      */
-    public nenreitotatsutoroku() {
+    public NenreiTotatsuTorokushaList() {
         finder = NenreiTotatsushaTorokuListFinder.createInstance();
     }
 
@@ -38,9 +38,9 @@ public class nenreitotatsutoroku {
      * 年齢到達登録者Divを初期化します。
      *
      * @param div 年齢到達登録者Div
-     * @return ResponseData<nenreitotatsutorokuDiv> 年齢到達登録者Div
+     * @return ResponseData<NenreiTotatsuTorokushaListDiv> 年齢到達登録者Div
      */
-    public ResponseData<nenreitotatsutorokuDiv> onLoad(nenreitotatsutorokuDiv div) {
+    public ResponseData<NenreiTotatsuTorokushaListDiv> onLoad(NenreiTotatsuTorokushaListDiv div) {
         FlexibleDate nowDate = new FlexibleDate(RDate.getNowDate().toDateString());
         CommonButtonHolder.setVisibleByCommonButtonFieldName(new RString("BatchRegister"), false);
         DbT7022ShoriDateKanriBusiness business = finder.getKaishiShuryobi();
@@ -80,9 +80,9 @@ public class nenreitotatsutoroku {
      * 開始日、終了日によって、チェックを実施する。
      *
      * @param div 年齢到達登録者Div
-     * @return ResponseData<nenreitotatsutorokuDiv>
+     * @return ResponseData<NenreiTotatsuTorokushaListDiv>
      */
-    public ResponseData<nenreitotatsutorokuDiv> onClick_inputCheck(nenreitotatsutorokuDiv div) {
+    public ResponseData<NenreiTotatsuTorokushaListDiv> onClick_inputCheck(NenreiTotatsuTorokushaListDiv div) {
         ValidationMessageControlPairs validPairs = getValidationHandler(div).validateForAction();
         if (validPairs.iterator().hasNext()) {
             return ResponseData.of(div).addValidationMessages(validPairs).respond();
@@ -106,7 +106,7 @@ public class nenreitotatsutoroku {
         return ResponseData.of(parameter).respond();
     }
 
-    private NenreiTotatsuTorokuValidationHandler getValidationHandler(nenreitotatsutorokuDiv div) {
+    private NenreiTotatsuTorokuValidationHandler getValidationHandler(NenreiTotatsuTorokushaListDiv div) {
         return new NenreiTotatsuTorokuValidationHandler(div);
     }
 }
