@@ -67,7 +67,6 @@ public class YoguKonyuhiShikyuShinseiPnlTotal {
 
     private static final RString NUM2 = new RString("2");
     private static final RString NUM1 = new RString("1");
-    private static final RString NUM3 = new RString("0001");
     private static final RString 修正 = new RString("修正");
     private static final RString 削除 = new RString("削除");
     private static final RString 登録 = new RString("登録");
@@ -75,11 +74,9 @@ public class YoguKonyuhiShikyuShinseiPnlTotal {
     private static final RString 処理モード修正 = new RString("処理モード修正");
     private static final RString 処理モード削除 = new RString("処理モード削除");
     private static final RString 処理モード選択 = new RString("処理モード選択");
-    private static final RString 選択 = new RString("選択");
     private static final RString 参照 = new RString("参照");
     private static final RString 審査 = new RString("審査");
     private static final RString 償還払給付費 = new RString("001");
-    private static final RString 申請を保存する = new RString("btnUpdate");
 
     /**
      * onLoad事件
@@ -99,6 +96,7 @@ public class YoguKonyuhiShikyuShinseiPnlTotal {
 
         PnlTotalParameter parameter = ViewStateHolder.get(ViewStateKeys.支給申請情報検索キー,
                 PnlTotalParameter.class);
+        getHandler(div).get申請者区分リスト();
         ShokanShinsei shshResult = null;
         if (登録.equals(ViewStateHolder.get(ViewStateKeys.状態, RString.class))) {
             getHandler(div).set登録モード();
@@ -204,14 +202,7 @@ public class YoguKonyuhiShikyuShinseiPnlTotal {
             para.setKozaId(shshResult.get口座ID());
             para.setShiharaiBasho(shshResult.get支払場所());
             getHandler(div).償還払支給申請情報(shshResult);
-            if (参照.equals(ViewStateHolder.get(ViewStateKeys.状態, RString.class))
-                    || 削除.equals(ViewStateHolder.get(ViewStateKeys.状態, RString.class))) {
-                div.getYoguKonyuhiShikyuShinseiContentsPanel().getCcdShiharaiHohoInfo().initialize(
-                        para, new KamokuCode(償還払給付費), 削除);
-            } else {
-                div.getYoguKonyuhiShikyuShinseiContentsPanel().getCcdShiharaiHohoInfo().initialize(
-                        para, new KamokuCode(償還払給付費), 修正);
-            }
+            支払方法情報状態(div, para);
         }
 //        if (修正.equals(ViewStateHolder.get(ViewStateKeys.状態, RString.class))) {
 //            償還払支給判定結果を取得する();
@@ -220,6 +211,20 @@ public class YoguKonyuhiShikyuShinseiPnlTotal {
         YoguKonyuhiShikyuShinseiPnlTotalParameter 画面データ = getHandler(div).set画面データ();
         ViewStateHolder.put(ViewStateKeys.福祉用具購入費支給申請_明細登録画面データ, 画面データ);
         return createResponse(div);
+    }
+
+    private void 支払方法情報状態(YoguKonyuhiShikyuShinseiPnlTotalDiv div, SikyuSinseiJyohoParameter para) {
+        if (参照.equals(ViewStateHolder.get(ViewStateKeys.状態, RString.class))
+                || 削除.equals(ViewStateHolder.get(ViewStateKeys.状態, RString.class))) {
+            div.getYoguKonyuhiShikyuShinseiContentsPanel().getCcdShiharaiHohoInfo().initialize(
+                    para, new KamokuCode(償還払給付費), 削除);
+        } else if (修正.equals(ViewStateHolder.get(ViewStateKeys.状態, RString.class))) {
+            div.getYoguKonyuhiShikyuShinseiContentsPanel().getCcdShiharaiHohoInfo().initialize(
+                    para, new KamokuCode(償還払給付費), 修正);
+        } else if (登録.equals(ViewStateHolder.get(ViewStateKeys.状態, RString.class))) {
+            div.getYoguKonyuhiShikyuShinseiContentsPanel().getCcdShiharaiHohoInfo().initialize(
+                    para, new KamokuCode(償還払給付費), 登録);
+        }
     }
 
     /**
@@ -389,8 +394,7 @@ public class YoguKonyuhiShikyuShinseiPnlTotal {
     public ResponseData<YoguKonyuhiShikyuShinseiPnlTotalDiv> onClick_btnFree(YoguKonyuhiShikyuShinseiPnlTotalDiv div) {
         boolean flag = true;
         if (削除.equals(ViewStateHolder.get(ViewStateKeys.状態, RString.class))) {
-            return ResponseData.of(div).forwardWithEventName(DBC0600021TransitionEventName.一覧に戻る)
-                    .parameter(new RString("一覧に戻る"));
+            return ResponseData.of(div).forwardWithEventName(DBC0600021TransitionEventName.一覧に戻る).respond();
         }
         if (登録.equals(ViewStateHolder.get(ViewStateKeys.状態, RString.class))
                 || 修正.equals(ViewStateHolder.get(ViewStateKeys.状態, RString.class))) {
@@ -410,15 +414,13 @@ public class YoguKonyuhiShikyuShinseiPnlTotal {
             if (new RString(UrQuestionMessages.入力内容の破棄.getMessage().getCode())
                     .equals(ResponseHolder.getMessageCode())
                     && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
-                return ResponseData.of(div).forwardWithEventName(DBC0600021TransitionEventName.一覧に戻る)
-                        .parameter(new RString("一覧に戻る"));
+                return ResponseData.of(div).forwardWithEventName(DBC0600021TransitionEventName.一覧に戻る).respond();
             } else {
                 ResponseData.of(div).respond();
             }
         } else {
             // TODO 償還払支給申請_サービス提供証明書画面へ遷移する。
-            return ResponseData.of(div).forwardWithEventName(DBC0600021TransitionEventName.一覧に戻る)
-                    .parameter(new RString("一覧に戻る"));
+            return ResponseData.of(div).forwardWithEventName(DBC0600021TransitionEventName.一覧に戻る).respond();
         }
 
         return createResponse(div);
@@ -432,10 +434,11 @@ public class YoguKonyuhiShikyuShinseiPnlTotal {
      */
     public ResponseData<YoguKonyuhiShikyuShinseiPnlTotalDiv> onFocusout_txtRyosyuYMD(
             YoguKonyuhiShikyuShinseiPnlTotalDiv div) {
+        //TODO自己決定
         HokenKyufuRitsu 給付率 = JutakuKaishuJizenShinsei.createInstance().getKyufuritsu(
                 new HihokenshaNo(div.getKaigoCommonPanel().getCcdShikakuKihon().get被保険者番号()),
-                new FlexibleYearMonth(div.getYoguKonyuhiShikyuShinseiContentsPanel().getPnlShinsesyaJoho()
-                        .getTxtRyosyuYMD().getValue().getYearMonth().toDateString()));
+                new FlexibleYearMonth(div.getYoguKonyuhiShikyuShinseiContentsPanel().
+                        getPnlShinsesyaJoho().getTxtRyosyuYMD().getValue().getYearMonth().toString()));
         getHandler(div).get給付率(給付率);
         return createResponse(div);
     }
