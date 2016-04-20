@@ -71,7 +71,7 @@ public final class MainPanelHandler {
         List<ShikibetsuNoKanri> 様式名称情報 = JutakukaishuSikyuShinseiManager.createInstance().
                 getYoshikiName(サービス年月);
         List<KeyValueDataSource> sources = new ArrayList<>();
-        if (!様式名称情報.isEmpty()) {
+        if (様式名称情報 != null && !様式名称情報.isEmpty()) {
             for (ShikibetsuNoKanri db : 様式名称情報) {
                 sources.add(new KeyValueDataSource(db.get識別番号(), db.get名称()));
             }
