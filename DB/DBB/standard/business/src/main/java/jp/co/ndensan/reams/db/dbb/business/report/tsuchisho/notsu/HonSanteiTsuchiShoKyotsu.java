@@ -47,6 +47,6 @@ public class HonSanteiTsuchiShoKyotsu {
     private ChoshuHoho 徴収方法情報_更正後;
     private NenkinTokuchoKaifuJoho 対象者_追加含む_情報_更正前;
     private NenkinTokuchoKaifuJoho 対象者_追加含む_情報_更正後;
-    private List<ShunyuJoho> 収入情報;
+    private ShunyuJoho 収入情報;
     private ChohyoSeigyoKyotsu 帳票制御共通;
 }
