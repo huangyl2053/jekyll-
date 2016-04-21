@@ -522,6 +522,7 @@ public class KakushuTsuchishoSakuseiKobetsuHandler {
     private void set普通徴収(FukaInfo 更正前情報, FukaInfo 更正後情報) {
         clear更正前_普徴();
         clear更正後_普徴();
+        clear期_普徴();
         FuchoKiUtil util = new FuchoKiUtil();
         KitsukiList 期月リスト = util.get期月リスト();
         RString 期_4月 = 期月リスト.get月の期(Tsuki._4月).get期();
@@ -1075,11 +1076,11 @@ public class KakushuTsuchishoSakuseiKobetsuHandler {
      * @return SourceDataCollection
      */
     public SourceDataCollection to発行処理() {
-        Map<RString, FukaInfo> map = ViewStateHolder.get(ViewStateKeys.賦課の情報リスト, Map.class);
+//        Map<RString, FukaInfo> map = ViewStateHolder.get(ViewStateKeys.賦課の情報リスト, Map.class);
         RString 更正前Key = div.getFukaShokaiGrandsonTsuchisho().getKobetsuHakkoZengoSentaku()
                 .getDdlInjiKouseiMae().getSelectedKey();
-        RString 更正後Key = div.getFukaShokaiGrandsonTsuchisho().getKobetsuHakkoZengoSentaku()
-                .getDdlInjiKouseiAto().getSelectedKey();
+//        RString 更正後Key = div.getFukaShokaiGrandsonTsuchisho().getKobetsuHakkoZengoSentaku()
+//                .getDdlInjiKouseiAto().getSelectedKey();
 
         KakushuTsuchishoParameter parameter = new KakushuTsuchishoParameter();
         parameter.set発行する帳票List(null);
