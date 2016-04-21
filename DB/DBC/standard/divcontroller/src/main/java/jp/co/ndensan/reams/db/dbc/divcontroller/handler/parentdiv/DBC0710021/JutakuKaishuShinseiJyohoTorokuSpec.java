@@ -103,12 +103,16 @@ public enum JutakuKaishuShinseiJyohoTorokuSpec implements IPredicate<JutakuKaish
         public static boolean is提供着工年月が申請日の年月と一致しない(JutakuKaishuShinseiJyohoTorokuDiv div) {
             RString 給付実績連動_受託なし = new RString("1");
             RDate 画面提供着工年月 = div.getTxtTeikyoYM().getValue();
-            RYearMonth 申請日年月 = div.getJutakuKaishuShinseiContents().getShinseishaInfo()
-                    .getTxtShinseiYMD().getValue().getYearMonth();
-            // ６．３　提供（着工）年月と申請日のチェック
+            RDate 申請日 = div.getJutakuKaishuShinseiContents().getShinseishaInfo()
+                    .getTxtShinseiYMD().getValue();
+            RYearMonth 申請日年月 = null;
+            if (申請日 != null) {
+                申請日年月 = div.getJutakuKaishuShinseiContents().getShinseishaInfo()
+                        .getTxtShinseiYMD().getValue().getYearMonth();
+            }
             RString 償還 = BusinessConfig.get(ConfigNameDBC.国保連共同処理受託区分_償還, SubGyomuCode.DBC介護給付);
             if (給付実績連動_受託なし.equals(償還)) {
-                if (!画面提供着工年月.getYearMonth().equals(申請日年月)) {
+                if ((申請日 == null) || (!画面提供着工年月.getYearMonth().equals(申請日年月))) {
                     return false;
                 }
             }

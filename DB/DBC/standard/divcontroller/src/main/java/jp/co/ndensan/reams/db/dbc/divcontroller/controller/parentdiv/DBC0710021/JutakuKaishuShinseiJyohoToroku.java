@@ -24,17 +24,16 @@ import jp.co.ndensan.reams.db.dbc.service.core.jutakukaishusikyushinsei.Jutakuka
 import jp.co.ndensan.reams.db.dbc.service.core.jutakukaishuyaokaigojyotaisandannkaihantei.JutakuKaishuYaokaigoJyotaiSandannkaiHanteiManager;
 import jp.co.ndensan.reams.db.dbc.service.jutakukaishujizenshinsei.JutakuKaishuJizenShinsei;
 import jp.co.ndensan.reams.db.dbd.definition.enumeratedtype.core.IsKyuSoti;
-import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBC;
 import jp.co.ndensan.reams.db.dbx.definition.core.enumeratedtype.ShisetsuType;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HokenKyufuRitsu;
 import jp.co.ndensan.reams.db.dbz.business.core.jigyosha.JigyoshaMode;
 import jp.co.ndensan.reams.db.dbz.definition.message.DbzInformationMessages;
+import jp.co.ndensan.reams.db.dbz.definition.message.DbzQuestionMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrInformationMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrQuestionMessages;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
-import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.ApplicationException;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
@@ -45,7 +44,6 @@ import jp.co.ndensan.reams.uz.uza.message.QuestionMessage;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ResponseHolder;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
-import jp.co.ndensan.reams.uz.uza.util.config.BusinessConfig;
 import jp.co.ndensan.reams.uz.uza.util.serialization.DataPassingConverter;
 
 /**
@@ -165,34 +163,38 @@ public class JutakuKaishuShinseiJyohoToroku {
         if (!handler.is画面データが変更()) {
             if (!ResponseHolder.isReRequest()) {
                 QuestionMessage message = new QuestionMessage(
-                        DbzInformationMessages.内容変更なしで保存不可.getMessage().getCode(),
-                        DbzInformationMessages.内容変更なしで保存不可.getMessage().evaluate());
+                        DbzQuestionMessages.内容変更なし処理中止確認.getMessage().getCode(),
+                        DbzQuestionMessages.内容変更なし処理中止確認.getMessage().evaluate());
                 return ResponseData.of(div).addMessage(message).respond();
             }
-            if (new RString(DbzInformationMessages.内容変更なしで保存不可.getMessage().getCode()).equals(
+            if (new RString(DbzQuestionMessages.内容変更なし処理中止確認.getMessage().getCode()).equals(
                     ResponseHolder.getMessageCode())
                     && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
                 return ResponseData.of(div).respond();
+            } else if (new RString(DbzQuestionMessages.内容変更なし処理中止確認.getMessage().getCode()).equals(
+                    ResponseHolder.getMessageCode())
+                    && ResponseHolder.getButtonType() == MessageDialogSelectedResult.No) {
+
             }
         }
         RDate 画面提供着工年月 = div.getTxtTeikyoYM().getValue();
-        RDate 申請日 = div.getJutakuKaishuShinseiContents().getShinseishaInfo().getTxtShinseiYMD().getValue();
-        RDate 申請日年月 = new RDate(申請日.getYearMonth().toString());
-        RString 償還 = BusinessConfig.get(ConfigNameDBC.国保連共同処理受託区分_償還, SubGyomuCode.DBC介護給付);
-        if (給付実績連動_受託なし.equals(償還)) {
-            if (!申請日年月.equals(画面提供着工年月)) {
-//                throw new ApplicationException(DbcErrorMessages.申請日不一致.getMessage());
-            }
-        }
+//        RDate 申請日 = div.getJutakuKaishuShinseiContents().getShinseishaInfo().getTxtShinseiYMD().getValue();
+//        RDate 申請日年月 = new RDate(申請日.getYearMonth().toString());
+//        RString 償還 = BusinessConfig.get(ConfigNameDBC.国保連共同処理受託区分_償還, SubGyomuCode.DBC介護給付);
+//        if (給付実績連動_受託なし.equals(償還)) {
+//            if (!申請日年月.equals(画面提供着工年月)) {
+////                throw new ApplicationException(DbcErrorMessages.申請日不一致.getMessage());
+//            }
+//        }
         // 領収日チェック
         RDate 領収日 = div.getJutakuKaishuShinseiContents().getTxtRyoshuYMD().getValue();
         if (領収日.getYearMonth().isBeforeOrEquals(画面提供着工年月.getYearMonth())) {
             if (!ResponseHolder.isReRequest()) {
-                QuestionMessage message = new QuestionMessage(UrQuestionMessages.入力内容の破棄.getMessage().getCode(),
-                        UrQuestionMessages.入力内容の破棄.getMessage().evaluate());
+                QuestionMessage message = new QuestionMessage(DbzQuestionMessages.判断基準より前の日付.getMessage().getCode(),
+                        DbzQuestionMessages.判断基準より前の日付.getMessage().evaluate());
                 return ResponseData.of(div).addMessage(message).respond();
             }
-            if (new RString(UrQuestionMessages.入力内容の破棄.getMessage().getCode()).equals(
+            if (new RString(DbzQuestionMessages.判断基準より前の日付.getMessage().getCode()).equals(
                     ResponseHolder.getMessageCode())
                     && ResponseHolder.getButtonType() == MessageDialogSelectedResult.No) {
                 return ResponseData.of(div).respond();
@@ -493,17 +495,18 @@ public class JutakuKaishuShinseiJyohoToroku {
             } else {
                 // TODO
                 if (!ResponseHolder.isReRequest()) {
-                    QuestionMessage message = new QuestionMessage(UrQuestionMessages.入力内容の破棄.getMessage().getCode(),
-                            UrQuestionMessages.入力内容の破棄.getMessage().evaluate());
+                    QuestionMessage message = new QuestionMessage(
+                            DbcQuestionMessages.領収日不一致_提供年月変更確認.getMessage().getCode(),
+                            DbcQuestionMessages.領収日不一致_提供年月変更確認.getMessage().replace(
+                                    領収日.getYearMonth().toString()).evaluate());
                     return ResponseData.of(div).addMessage(message).respond();
                 }
-                if (new RString(UrQuestionMessages.入力内容の破棄.getMessage().getCode()).equals(
+                if (new RString(DbcQuestionMessages.領収日不一致_提供年月変更確認.getMessage().getCode()).equals(
                         ResponseHolder.getMessageCode())
                         && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
 // １０．３．１　｢はい｣をクリックされる場合、提供（着工）年月を領収日の年月に設定する
-//                    div.getCommHeadPanel().getTxtTeikyoYM().setValue(new RDate(領収日.getYearMonth().toString()));
                     div.getCommHeadPanel().getTxtTeikyoYM().setValue(領収日);
-                } else if (new RString(UrQuestionMessages.入力内容の破棄.getMessage().getCode()).equals(
+                } else if (new RString(DbcQuestionMessages.領収日不一致_提供年月変更確認.getMessage().getCode()).equals(
                         ResponseHolder.getMessageCode())
                         && ResponseHolder.getButtonType() == MessageDialogSelectedResult.No) {
                     return ResponseData.of(div).respond();
