@@ -32,7 +32,7 @@ public class NinteiKoshinTsuchishoLayer1Editor implements INinteiKoshinTsuchisho
     @Override
     public NinteiKoshinTsuchisho edit(NinteiKoshinTsuchisho source) {
         source.bunshoNo = item.get文書番号();
-        if (KyuSochishaKubun.空白.getコード().equals(item.get帳票情報().get旧措置者区分())) {
+        if (KyuSochishaKubun.非該当.getコード().equals(item.get帳票情報().get旧措置者区分())) {
             source.title = RString.EMPTY;//DBDEnum.帳票制御汎用キーDBD100008.帳票タイトル
         } else {
             source.title = RString.EMPTY;//DBDEnum.帳票制御汎用キーDBD100008.帳票タイトル_旧措置者
