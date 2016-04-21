@@ -129,11 +129,6 @@ public class YoguKonyuhiShikyuShinseiPnlTotalHandler {
         if (shokankihon.get保険給付率() != null) {
             div.getYoguKonyuhiShikyuShinseiContentsPanel().getTxtKyufuritsu().setValue(shokankihon.get保険給付率().value());
         }
-        if (shokanshinsei.is国保連再送付フラグ()) {
-            List<RString> list = new ArrayList<>();
-            list.add(KEY);
-            div.getYoguKonyuhiShikyuShinseiContentsPanel().getChkKokuhorenSend().setSelectedItemsByKey(list);
-        }
         if (shokankihon.get事業者番号() != null) {
             div.getYoguKonyuhiShikyuShinseiContentsPanel().getTxtJigyoshaNo().setValue(shokankihon.get事業者番号().value());
         }
@@ -450,7 +445,7 @@ public class YoguKonyuhiShikyuShinseiPnlTotalHandler {
             サービス提供年月 = new FlexibleYearMonth(
                     div.getYoguKonyuhiShikyuShinseiContentsPanel().getTxtTeikyoYM().getValue().getYearMonth().toString());
             if (new RString("41").equals(サービス種類)) {
-                証明書コード = new RString("212C");
+                証明書コード = new RString("21C1");
             }
             if (new RString("44").equals(サービス種類)) {
                 証明書コード = new RString("21C2");
@@ -626,9 +621,13 @@ public class YoguKonyuhiShikyuShinseiPnlTotalHandler {
             entity = entity.createBuilderForEdit().setサービス提供年月(new FlexibleYearMonth(div.
                     getYoguKonyuhiShikyuShinseiContentsPanel().getTxtTeikyoYM().getValue().getYearMonth().toString())).build();
         }
-        if (div.getYoguKonyuhiShikyuShinseiContentsPanel().getChkKokuhorenSend() != null) {
+        if (div.getYoguKonyuhiShikyuShinseiContentsPanel().getTxtJigyoshaNo() != null) {
             entity = entity.createBuilderForEdit().set事業者番号(new JigyoshaNo(
                     div.getYoguKonyuhiShikyuShinseiContentsPanel().getTxtJigyoshaNo().getValue())).build();
+        }
+        if (div.getYoguKonyuhiShikyuShinseiContentsPanel().getTxtKyufuritsu().getValue() != null) {
+            entity = entity.createBuilderForEdit().set保険給付率(new HokenKyufuRitsu(
+                    div.getYoguKonyuhiShikyuShinseiContentsPanel().getTxtKyufuritsu().getValue())).build();
         }
         return entity;
     }
@@ -1010,47 +1009,77 @@ public class YoguKonyuhiShikyuShinseiPnlTotalHandler {
                 ViewStateKeys.福祉用具購入費支給申請_明細登録画面データ, YoguKonyuhiShikyuShinseiPnlTotalParameter.class);
         if (!parameter.getサービス提供年月().equals(div.getYoguKonyuhiShikyuShinseiContentsPanel().
                 getTxtTeikyoYM().getValue())
-                || !parameter.get整理番号().equals(div.getYoguKonyuhiShikyuShinseiContentsPanel().
+                || is比較変更(parameter.get整理番号(), div.getYoguKonyuhiShikyuShinseiContentsPanel().
                         getTxtSeiriNo().getValue())
-                || !parameter.get保険者().equals(div.getYoguKonyuhiShikyuShinseiContentsPanel().
+                || is比較変更(parameter.get保険者(), div.getYoguKonyuhiShikyuShinseiContentsPanel().
                         getDdlShityoson().getSelectedValue())
-                || !parameter.get国保連再送付().equals(div.getYoguKonyuhiShikyuShinseiContentsPanel().
-                        getChkKokuhorenSend().isAllSelected())
-                || !parameter.get事業者().equals(div.getYoguKonyuhiShikyuShinseiContentsPanel().
+                || is比較変更(parameter.get事業者(), div.getYoguKonyuhiShikyuShinseiContentsPanel().
                         getTxtJigyoshaNo().getValue())
-                || !parameter.get証明書().equals(div.getYoguKonyuhiShikyuShinseiContentsPanel().
+                || is比較変更(parameter.get証明書(), div.getYoguKonyuhiShikyuShinseiContentsPanel().
                         getTxtSyomeisyo().getValue())
-                || !parameter.get審査結果().equals(div.getYoguKonyuhiShikyuShinseiContentsPanel().
+                || is比較変更(parameter.get審査結果(), div.getYoguKonyuhiShikyuShinseiContentsPanel().
                         getRadShinsakekka().getSelectedValue())) {
             return true;
         }
-
-        return is内容変更_申請者情報(parameter);
+        if (is内容変更_申請者情報(parameter)) {
+            return true;
+        } else {
+            return is支払方法情報(parameter);
+        }
     }
 
     private boolean is内容変更_申請者情報(YoguKonyuhiShikyuShinseiPnlTotalParameter parameter) {
-        return !parameter.get申請日().equals(div.getYoguKonyuhiShikyuShinseiContentsPanel().
-                getTxtShinseibi().getValue())
-                || !parameter.get受付年月日().equals(div.getYoguKonyuhiShikyuShinseiContentsPanel().
-                        getTxtUkechikebi().getValue())
-                || !parameter.get領収年月日().equals(div.getYoguKonyuhiShikyuShinseiContentsPanel().
-                        getTxtRyosyuYMD().getValue())
-                || !parameter.get申請者区分().equals(div.getYoguKonyuhiShikyuShinseiContentsPanel().
+        return is比較変更(new RString(parameter.get申請日().toString()), new RString(div.
+                getYoguKonyuhiShikyuShinseiContentsPanel().getTxtShinseibi().getValue().toString()))
+                || is比較変更(new RString(parameter.get受付年月日().toString()), new RString(div.
+                                getYoguKonyuhiShikyuShinseiContentsPanel().getTxtUkechikebi().getValue().toString()))
+                || is比較変更(new RString(parameter.get領収年月日().toString()), new RString(div.
+                                getYoguKonyuhiShikyuShinseiContentsPanel().getTxtRyosyuYMD().getValue().toString()))
+                || is比較変更(parameter.get申請者区分(), div.getYoguKonyuhiShikyuShinseiContentsPanel().
                         getDdlShinseisyakubun().getSelectedValue())
-                || !parameter.get申請理由().equals(div.getYoguKonyuhiShikyuShinseiContentsPanel().
+                || is比較変更(parameter.get申請理由(), div.getYoguKonyuhiShikyuShinseiContentsPanel().
                         getTxtShinseiriyu().getValue())
-                || !parameter.get事業者コード().equals(div.getYoguKonyuhiShikyuShinseiContentsPanel().
+                || is比較変更(parameter.get事業者コード(), div.getYoguKonyuhiShikyuShinseiContentsPanel().
                         getTxtJigyosya().getValue())
-                || !parameter.get氏名１().equals(div.getYoguKonyuhiShikyuShinseiContentsPanel().
+                || is比較変更(parameter.get氏名１(), div.getYoguKonyuhiShikyuShinseiContentsPanel().
                         getTxtShimei().getValue())
-                || !parameter.get氏名２().equals(div.getYoguKonyuhiShikyuShinseiContentsPanel().
+                || is比較変更(parameter.get氏名２(), div.getYoguKonyuhiShikyuShinseiContentsPanel().
                         getTxtShimeiKana().getValue())
-                || !parameter.get電話番号().equals(div.getYoguKonyuhiShikyuShinseiContentsPanel().
+                || is比較変更(parameter.get電話番号(), div.getYoguKonyuhiShikyuShinseiContentsPanel().
                         getTxtShinseisyaTel().getDomain().value())
-                || !parameter.get郵便番号().equals(div.getYoguKonyuhiShikyuShinseiContentsPanel().
+                || is比較変更(parameter.get郵便番号(), div.getYoguKonyuhiShikyuShinseiContentsPanel().
                         getTxtShinseisyaYubin().getValue().value())
-                || !parameter.get住所().equals(div.getYoguKonyuhiShikyuShinseiContentsPanel().
+                || is比較変更(parameter.get住所(), div.getYoguKonyuhiShikyuShinseiContentsPanel().
                         getTxtShinseisyaJyusyo().getDomain().value());
+    }
+
+    private boolean is支払方法情報(YoguKonyuhiShikyuShinseiPnlTotalParameter parameter) {
+        return is比較変更(parameter.get窓口払い_支払場所(), div.getYoguKonyuhiShikyuShinseiContentsPanel().
+                getCcdShiharaiHohoInfo().getShiharaiBasho())
+                || is比較変更(parameter.get窓口払い_開始日(), new RString(div.
+                                getYoguKonyuhiShikyuShinseiContentsPanel().
+                                getCcdShiharaiHohoInfo().getStartYMD().toString()))
+                || is比較変更(parameter.get窓口払い_終了日(), new RString(div.
+                                getYoguKonyuhiShikyuShinseiContentsPanel().
+                                getCcdShiharaiHohoInfo().getEndYMD().toString()))
+                || is比較変更(parameter.get窓口払い_開始時間(), new RString(div.getYoguKonyuhiShikyuShinseiContentsPanel().
+                                getCcdShiharaiHohoInfo().getStartHHMM().toString()))
+                || is比較変更(parameter.get窓口払い_終了時間(), new RString(div.getYoguKonyuhiShikyuShinseiContentsPanel().
+                                getCcdShiharaiHohoInfo().getEndHHMM().toString()))
+                || is比較変更(parameter.get口座払い_口座ＩＤ(), div.getYoguKonyuhiShikyuShinseiContentsPanel().
+                        getCcdShiharaiHohoInfo().getKozaNo())
+                || is比較変更(parameter.get受領委任払い_契約番号(), div.getYoguKonyuhiShikyuShinseiContentsPanel().
+                        getCcdShiharaiHohoInfo().getKeiyakuNo());
+    }
+
+    private boolean is比較変更(RString s1, RString s2) {
+        if (s1 == null && s2 == null) {
+            return false;
+        } else if (s1 == null || s2 == null) {
+            return true;
+        } else {
+            return !s1.equals(s2);
+        }
     }
 
     /**
@@ -1062,7 +1091,7 @@ public class YoguKonyuhiShikyuShinseiPnlTotalHandler {
         YoguKonyuhiShikyuShinseiPnlTotalParameter parameter = new YoguKonyuhiShikyuShinseiPnlTotalParameter();
         parameter.setサービス提供年月(div.getYoguKonyuhiShikyuShinseiContentsPanel().getTxtTeikyoYM().getValue());
         parameter.set整理番号(div.getYoguKonyuhiShikyuShinseiContentsPanel().getTxtSeiriNo().getValue());
-        parameter.set保険者(div.getYoguKonyuhiShikyuShinseiContentsPanel().getDdlShityoson().getSelectedValue());
+        parameter.set保険者(div.getYoguKonyuhiShikyuShinseiContentsPanel().getDdlShityoson().getSelectedKey());
         parameter.set国保連再送付(div.getYoguKonyuhiShikyuShinseiContentsPanel().getChkKokuhorenSend().isAllSelected());
         parameter.set事業者(div.getYoguKonyuhiShikyuShinseiContentsPanel().getTxtJigyoshaNo().getValue());
         parameter.set証明書(div.getYoguKonyuhiShikyuShinseiContentsPanel().getTxtSyomeisyo().getValue());
@@ -1154,7 +1183,6 @@ public class YoguKonyuhiShikyuShinseiPnlTotalHandler {
         div.getYoguKonyuhiShikyuShinseiContentsPanel().getPnlShinsesyaJoho().getTxtUkechikebi().clearValue();
         div.getYoguKonyuhiShikyuShinseiContentsPanel().getPnlShinsesyaJoho().getTxtRyosyuYMD().clearValue();
         div.getPnlKeteiJohoMsg().getCcdMessage().setVisible(false);
-        div.getYoguKonyuhiShikyuShinseiContentsPanel().getDdlShityoson().setSelectedIndex(0);
     }
 
     /**
@@ -1196,9 +1224,10 @@ public class YoguKonyuhiShikyuShinseiPnlTotalHandler {
      */
     public void set削除モード() {
         div.getYoguKonyuhiShikyuShinseiContentsPanel().getTxtTeikyoYM().setDisabled(true);
-        div.getYoguKonyuhiShikyuShinseiContentsPanel().getDdlShityoson().setDisplayNone(true);
+        div.getYoguKonyuhiShikyuShinseiContentsPanel().getDdlShityoson().setDisabled(true);
         div.getYoguKonyuhiShikyuShinseiContentsPanel().getTxtSyomeisyo().setDisabled(true);
         div.getYoguKonyuhiShikyuShinseiContentsPanel().getTxtJigyoshaNo().setDisabled(true);
+        div.getYoguKonyuhiShikyuShinseiContentsPanel().getBtnAddDetail().setDisabled(true);
         div.getYoguKonyuhiShikyuShinseiContentsPanel().getDgSeikyuDetail().
                 getGridSetting().setIsShowSelectButtonColumn(true);
         div.getYoguKonyuhiShikyuShinseiContentsPanel().getDgSeikyuDetail().
