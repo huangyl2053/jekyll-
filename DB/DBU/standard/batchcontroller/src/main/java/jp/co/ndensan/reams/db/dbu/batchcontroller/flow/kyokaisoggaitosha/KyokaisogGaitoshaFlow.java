@@ -19,7 +19,7 @@ import jp.co.ndensan.reams.uz.uza.batch.flow.IBatchFlowCommand;
  */
 public class KyokaisogGaitoshaFlow extends BatchFlowBase<KyokaisoKanriMasterListBatchParameter> {
 
-    private static final String KYOKAISOG_REPORT_PROCESS = "KyokaisoKanriMasterListBatchParameterSakusei";
+    private static final String KYOKAISOG_REPORT_PROCESS = "KyokaisogGaitoshaReportPageBreakProcess";
 
     @Override
     protected void defineFlow() {
