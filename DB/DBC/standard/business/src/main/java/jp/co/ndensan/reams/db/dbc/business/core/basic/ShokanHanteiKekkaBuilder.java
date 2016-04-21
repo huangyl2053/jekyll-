@@ -7,9 +7,9 @@ package jp.co.ndensan.reams.db.dbc.business.core.basic;
 
 import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3036ShokanHanteiKekkaEntity;
-import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShoKisaiHokenshaNo;
+import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -108,7 +108,7 @@ public class ShokanHanteiKekkaBuilder {
      * @return {@link ShokanHanteiKekkaBuilder}
      */
     public ShokanHanteiKekkaBuilder set支給_不支給決定区分(RString 支給_不支給決定区分) {
-        requireNonNull(支給_不支給決定区分, UrSystemErrorMessages.値がnull.getReplacedMessage("支給_不支給決定区分"));
+//        requireNonNull(支給_不支給決定区分, UrSystemErrorMessages.値がnull.getReplacedMessage("支給_不支給決定区分"));
         entity.setShikyuHushikyuKetteiKubun(支給_不支給決定区分);
         return this;
     }
