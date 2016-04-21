@@ -8,6 +8,7 @@ package jp.co.ndensan.reams.db.dbc.divcontroller.handler.parentdiv.DBC0600031;
 import java.util.List;
 import java.util.Map;
 import jp.co.ndensan.reams.db.dbc.business.core.syokanbaraikettejoho.KetteJoho;
+import jp.co.ndensan.reams.db.dbc.definition.core.shikyufushikyukubun.ShikyuFushikyuKubun;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.commonchilddiv.ShokanbaraiketteiJoho.ShokanbaraiketteiJoho.dgSyokanbaraikete_Row;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0600031.PnlKeteiJohoMsgDiv;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
@@ -28,8 +29,6 @@ public final class PnlKeteiJohoMsgHandler {
 
     private final PnlKeteiJohoMsgDiv div;
     private static final RString 決定日 = new RString("決定日");
-    private static final RString ONE = new RString("1");
-    private static final RString TWO = new RString("2");
 
     private PnlKeteiJohoMsgHandler(PnlKeteiJohoMsgDiv div) {
         this.div = div;
@@ -113,7 +112,7 @@ public final class PnlKeteiJohoMsgHandler {
         RString rdoShikyukubunNew = div.getCcdKetteiList().getShokanbaraiketteiJohoDiv().getRdoShikyukubun().getSelectedKey();
         if (equal支給区分(決定情報, rdoShikyukubunNew)) {
             flag = true;
-        } else if (決定情報 != null && 決定情報.getShikyuHushikyuKetteiKubun() != null && 決定情報.getShikyuHushikyuKetteiKubun().equals(ONE)) {
+        } else if (決定情報 != null && 決定情報.getShikyuHushikyuKetteiKubun() != null && 決定情報.getShikyuHushikyuKetteiKubun().equals(ShikyuFushikyuKubun.支給.getコード())) {
             RString zogenriyu = div.getCcdKetteiList().getShokanbaraiketteiJohoDiv().getTxtZogenriyu().getValue();
             if (zogenriyu != null && !zogenriyu.equals(決定情報.getZougenRiyu())) {
                 flag = true;
@@ -127,7 +126,7 @@ public final class PnlKeteiJohoMsgHandler {
             if (shiharaikingakugoke != 決定情報.getShiharaiKingaku()) {
                 flag = true;
             }
-        } else if (決定情報 != null && 決定情報.getShikyuHushikyuKetteiKubun() != null && 決定情報.getShikyuHushikyuKetteiKubun().equals(TWO)) {
+        } else if (決定情報 != null && 決定情報.getShikyuHushikyuKetteiKubun() != null && 決定情報.getShikyuHushikyuKetteiKubun().equals(ShikyuFushikyuKubun.不支給.getコード())) {
             RString fuSyikyuriyu1 = div.getCcdKetteiList().getShokanbaraiketteiJohoDiv().getTxtFuSyikyuriyu1().getValue();
             if (fuSyikyuriyu1 != null && !fuSyikyuriyu1.equals(決定情報.getHushikyuRiyu())) {
                 flag = true;

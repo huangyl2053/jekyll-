@@ -268,17 +268,18 @@ public class PnlKeteiJohoMsg {
                 entity.set画面モード(ViewStateHolder.get(ViewStateKeys.状態, RString.class));
                 entity.set決定日(new FlexibleDate(div.getCcdKetteiList().getShokanbaraiketteiJohoDiv().
                         getTxtKetebi().getValue().toString()));
-                entity.set差額金額登録フラグ(div.getCcdKetteiList().getShokanbaraiketteiJohoDiv().getDgSyokanbaraikete()
-                        .getGridSetting().getColumn("sagakuKingaku").getCellDetails().getDisabled());
                 List<ShokanFukushiYoguHanbaihi> 福祉用具販売費リスト = new ArrayList<>();
                 List<dgSyokanbaraikete_Row> list = div.getCcdKetteiList().getShokanbaraiketteiJohoDiv().
                         getDgSyokanbaraikete().getDataSource();
+                boolean 差額金額登録フラグ = true;
                 for (dgSyokanbaraikete_Row row : list) {
+                    差額金額登録フラグ = row.getSagakuKingaku().isDisabled();
                     ShokanFukushiYoguHanbaihi shokanFukushiYoguHanbaihi = new ShokanFukushiYoguHanbaihi(
                             被保険者番号, サービス年月, 整理番号, 事業者番号, 様式番号, row.getMeisaiNo(), row.getRenban())
                             .createBuilderForEdit().set差額金額(row.getSagakuKingaku().getValue().intValue()).build();
                     福祉用具販売費リスト.add(shokanFukushiYoguHanbaihi);
                 }
+                entity.set差額金額登録フラグ(差額金額登録フラグ);
                 entity.add福祉用具販売費リスト(ViewStateHolder.get(ViewStateKeys.状態, RString.class), 福祉用具販売費リスト);
                 FukushiyoguKonyuhiShikyuShinsei.createInstance().updKetteJoho(entity);
                 div.getCcdMessage().setMessage(new RString(UrInformationMessages.保存終了.getMessage().evaluate()),
