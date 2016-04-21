@@ -14,6 +14,8 @@ import lombok.Setter;
 
 /**
  * 被保険者証一括発行のバッチ処理クラスのパラメータ
+ *
+ * @reamsid_L DBA-0380-020 houtianpeng
  */
 @SuppressWarnings("PMD.UnusedPrivateField")
 @Getter
