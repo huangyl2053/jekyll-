@@ -100,7 +100,7 @@ public class FutanGendogakuNinteiKanshoTsuchisho {
      * @param 文書番号 文書番号
      * @param お知らせ通知書 willPublishお知らせ通知書
      * @param 申請書 willPublish申請書
-     * @return
+     * @return SourceDataCollection
      */
     public SourceDataCollection publish(HihokenshaNo 被保険者番号, ShikibetsuCode 識別コード,
             int 履歴番号, RDate 発行日, RString 文書番号, boolean お知らせ通知書, boolean 申請書) {
@@ -138,7 +138,7 @@ public class FutanGendogakuNinteiKanshoTsuchisho {
             while (通知文Map.keySet().iterator().hasNext()) {
                 RString 通知文 = 通知文Map.get(通知文Map.keySet().iterator().next());
                 通知書定型文List.add(通知文);
-            };
+            }
 
             RString イメージファイルパス = null;
             List<NinteiKoshinTsuchishoItem> itemList = new ArrayList<>();
@@ -168,22 +168,19 @@ public class FutanGendogakuNinteiKanshoTsuchisho {
 
     private Ninshosha get認証者情報(FlexibleDate kaisiYMD) {
         INinshoshaManager ninshoshaManager = NinshoshaFinderFactory.createInstance();
-        Ninshosha ninshosha = ninshoshaManager.get帳票認証者(GyomuCode.DB介護保険, NinshoshaDenshikoinshubetsuCode.認定用印.getコード(), kaisiYMD);
-        return ninshosha;
+        return ninshoshaManager.get帳票認証者(GyomuCode.DB介護保険, NinshoshaDenshikoinshubetsuCode.認定用印.getコード(), kaisiYMD);
     }
 
     private FutanGendogakuNintei get介護負担限度額認定の情報(HihokenshaNo 被保険者番号, int 履歴番号) {
         FutanGendogakuNinteiManager futanGendogakuNinteiManager = FutanGendogakuNinteiManager.createInstance();
         FutanGendogakuNinteiParameter parameter
                 = FutanGendogakuNinteiParameter.createSelectParam(GemmenGengakuShurui.負担限度額認定.getコード(), 被保険者番号, 履歴番号);
-        FutanGendogakuNintei 介護保険負担限度額認定 = futanGendogakuNinteiManager.get負担限度額認定帳票用(parameter);
-        return 介護保険負担限度額認定;
+        return futanGendogakuNinteiManager.get負担限度額認定帳票用(parameter);
     }
 
     private Association get地方公共団体() {
         IAssociationFinder finder = AssociationFinderFactory.createInstance();
-        Association association = finder.getAssociation();
-        return association;
+        return finder.getAssociation();
     }
 
     private UaFt200FindShikibetsuTaishoEntity get宛名情報(ShikibetsuCode 識別コード) {
@@ -194,8 +191,7 @@ public class FutanGendogakuNinteiKanshoTsuchisho {
         ShikibetsuTaishoPSMMybatisParameter shikibetsuTaishoPSMParameter = new ShikibetsuTaishoPSMMybatisParameter(shikibetsuTaishoPSMSearchKey);
         shikibetsuTaishoPSMParameter.setPsmShikibetsuTaisho(new RString(shikibetsuTaishoPSMParameter.toString()));
         IShikibetsuTaishoPSMMybatisMapper shikibetsuTaishoPSMMapper = this.mapperProvider.create(IShikibetsuTaishoPSMMybatisMapper.class);
-        UaFt200FindShikibetsuTaishoEntity uaFt200Entity = shikibetsuTaishoPSMMapper.selectShikibetsuTaishoPSMMybatis(shikibetsuTaishoPSMParameter);
-        return uaFt200Entity;
+        return shikibetsuTaishoPSMMapper.selectShikibetsuTaishoPSMMybatis(shikibetsuTaishoPSMParameter);
     }
 
     private UaFt250FindAtesakiEntity get宛先情報(ShikibetsuCode 識別コード) {
@@ -206,15 +202,13 @@ public class FutanGendogakuNinteiKanshoTsuchisho {
         AtesakiPSMMybatisParameter atesakiPSMMybatisParameter = new AtesakiPSMMybatisParameter(atesakiPSMSearchKey);
         atesakiPSMMybatisParameter.setPsmAtesaki(new RString(atesakiPSMMybatisParameter.toString()));
         IAtesakiPSMMybatisMapper atesakiPSMMapper = this.mapperProvider.create(IAtesakiPSMMybatisMapper.class);
-        UaFt250FindAtesakiEntity uaFt250Entity = atesakiPSMMapper.selectAtesakiPSMMybatis(atesakiPSMMybatisParameter);
-        return uaFt250Entity;
+        return atesakiPSMMapper.selectAtesakiPSMMybatis(atesakiPSMMybatisParameter);
     }
 
     private ReportId get帳票分類ID() {
         DbT7068ChohyoBunruiKanriDac dbT7068Dac = InstanceProvider.create(DbT7068ChohyoBunruiKanriDac.class);
         DbT7068ChohyoBunruiKanriEntity dbT7068Entity = dbT7068Dac.selectByKey(SubGyomuCode.DBD介護受給, ReportIdDBD.DBDPR12002_1_1.getReportId());
-        ReportId 帳票分類ID = dbT7068Entity.getChohyoBunruiID();
-        return 帳票分類ID;
+        return dbT7068Entity.getChohyoBunruiID();
     }
 
     private boolean insert発行履歴(SourceDataCollection sourceDataCollection, RDate 発行日, ReportId 帳票ID, ShikibetsuCode 識別コード) {
@@ -249,8 +243,7 @@ public class FutanGendogakuNinteiKanshoTsuchisho {
             throw new NullPointerException();
         }
         DbT7065ChohyoSeigyoKyotsuDac dbT7065Dac = InstanceProvider.create(DbT7065ChohyoSeigyoKyotsuDac.class);
-        DbT7065ChohyoSeigyoKyotsuEntity dbT7065Entity = dbT7065Dac.selectByKey(SubGyomuCode.DBD介護受給, 帳票分類ID);
-        return dbT7065Entity;
+        return dbT7065Dac.selectByKey(SubGyomuCode.DBD介護受給, 帳票分類ID);
     }
 
     /**
@@ -261,9 +254,6 @@ public class FutanGendogakuNinteiKanshoTsuchisho {
      */
     public List load帳票制御汎用(ReportId 帳票分類ID) {
         DbT7067ChohyoSeigyoHanyoDac dbT7067Dac = InstanceProvider.create(DbT7067ChohyoSeigyoHanyoDac.class);
-        List<DbT7067ChohyoSeigyoHanyoEntity> dbT7067EntityList
-                = dbT7067Dac.get帳票制御汎用(SubGyomuCode.DBD介護受給, 帳票分類ID, new FlexibleYear("0000"));
-        return dbT7067EntityList;
+        return dbT7067Dac.get帳票制御汎用(SubGyomuCode.DBD介護受給, 帳票分類ID, new FlexibleYear("0000"));
     }
-
 }

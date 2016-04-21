@@ -108,9 +108,9 @@ public class HihokenshashoHakkoIchiranHyoFinder {
             List<IkkatsuHakkoRelateEntity> inEntityList, IOutputOrder iOutputOrder) {
         List<IchiranyoShohakkoshaEntity> outEntitylist = new ArrayList<>();
 
-        if (!inEntityList.isEmpty() && 0 != inEntityList.size()) {
+        if (!inEntityList.isEmpty()) {
             outEntitylist = createHihokenshashoHakkoIchiranHyoDataあり(交付日, inEntityList, iOutputOrder);
-            if (0 == outEntitylist.size()) {
+            if (outEntitylist.isEmpty()) {
                 outEntitylist.add(createHihokenshashoHakkoIchiranHyoDataなし(iOutputOrder));
             }
         } else {
@@ -366,7 +366,7 @@ public class HihokenshashoHakkoIchiranHyoFinder {
         if (JushoHenshuKubun.帳票独自.getコード().equals(dbT7065Entity.getJushoHenshuKubun())) {
             set送付先住所の管内の帳票独自(dbT7065Entity, 住所, 番地, 方書, 都道府県名, 郡名, 市町村名, 行政区名);
         } else if (JushoHenshuKubun.市町村共通.getコード().equals(dbT7065Entity.getJushoHenshuKubun())) {
-            set送付先住所の管内の市町村共通(dbT7065Entity, 住所, 番地, 方書, 都道府県名, 郡名, 市町村名, 行政区名);
+            set送付先住所の管内の市町村共通(住所, 番地, 方書, 都道府県名, 郡名, 市町村名, 行政区名);
         }
         return 送付先住所;
     }
@@ -402,8 +402,8 @@ public class HihokenshashoHakkoIchiranHyoFinder {
         return 送付先住所;
     }
 
-    private RString set送付先住所の管内の市町村共通(DbT7065ChohyoSeigyoKyotsuEntity dbT7065Entity,
-            RString 住所, RString 番地, RString 方書, RString 都道府県名, RString 郡名, RString 市町村名, RString 行政区名) {
+    private RString set送付先住所の管内の市町村共通(RString 住所, RString 番地, RString 方書,
+            RString 都道府県名, RString 郡名, RString 市町村名, RString 行政区名) {
         RString 送付先住所 = RString.EMPTY;
         if (new RString("1").equals(
                 BusinessConfig.get(ConfigNameDBU.帳票共通住所編集方法_管内住所編集_都道府県名付与有無, SubGyomuCode.DBU介護統計報告))) {

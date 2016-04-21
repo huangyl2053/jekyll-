@@ -61,9 +61,9 @@ public enum KyotakuservicekeikakuSakuseikubunCode {
      */
     public static KyotakuservicekeikakuSakuseikubunCode toValue(RString code) {
 
-        for (KyotakuservicekeikakuSakuseikubunCode kyotakuservicekeikakuSakuseikubunCode : KyotakuservicekeikakuSakuseikubunCode.values()) {
-            if (kyotakuservicekeikakuSakuseikubunCode.code.equals(code)) {
-                return kyotakuservicekeikakuSakuseikubunCode;
+        for (KyotakuservicekeikakuSakuseikubunCode kubunCode : KyotakuservicekeikakuSakuseikubunCode.values()) {
+            if (kubunCode.code.equals(code)) {
+                return kubunCode;
             }
         }
         throw new IllegalArgumentException(UrSystemErrorMessages.変換不可.getReplacedMessage("居宅サービス計画作成区分コード"));

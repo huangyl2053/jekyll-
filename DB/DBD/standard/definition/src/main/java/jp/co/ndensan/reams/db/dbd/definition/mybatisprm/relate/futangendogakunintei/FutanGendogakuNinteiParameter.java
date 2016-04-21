@@ -20,13 +20,13 @@ import lombok.Setter;
 @Setter
 public class FutanGendogakuNinteiParameter {
 
-    private final RString 減免減額種類;
-    private final HihokenshaNo 被保険者番号;
-    private final int 履歴番号;
+    private RString 減免減額種類;
+    private HihokenshaNo 被保険者番号;
+    private int 履歴番号;
 
-    private final boolean uses減免減額種類;
-    private final boolean uses被保険者番号;
-    private final boolean uses履歴番号;
+    private boolean uses減免減額種類;
+    private boolean uses被保険者番号;
+    private boolean uses履歴番号;
 
     private FutanGendogakuNinteiParameter(
             @lombok.NonNull RString 減免減額種類,

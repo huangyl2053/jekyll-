@@ -3,23 +3,19 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbz.divcontroller.entity.parentdiv.NinteiInput;
+package jp.co.ndensan.reams.db.dbz.divcontroller.controller.parentdiv.helper;
 
 import java.util.ArrayList;
 import java.util.List;
-import static jp.co.ndensan.reams.db.dbz.divcontroller.entity.parentdiv.NinteiInput.NinteiInputDiv.ShoriType.IchibuSoshitsuMode;
-import static jp.co.ndensan.reams.db.dbz.divcontroller.entity.parentdiv.NinteiInput.NinteiInputDiv.ShoriType.NinteiMode;
-import static jp.co.ndensan.reams.db.dbz.divcontroller.entity.parentdiv.NinteiInput.NinteiInputDiv.ShoriType.ShokaiMode;
-import static jp.co.ndensan.reams.db.dbz.divcontroller.entity.parentdiv.NinteiInput.NinteiInputDiv.ShoriType.ShokkenShuseiMode;
-import static jp.co.ndensan.reams.db.dbz.divcontroller.entity.parentdiv.NinteiInput.NinteiInputDiv.ShoriType.TokushuShuseiMode;
 // TODO n8187久保田 dbxのJukyushaDaichoに置換すること。
 import jp.co.ndensan.reams.db.dbz.business.core.JukyushaDaicho;
 import jp.co.ndensan.reams.db.dbz.definition.core.util.optional.Optional;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ServiceShuruiCode;
 // TODO n8187久保田 dbxのJukyushaDaichoManagerに置換すること。
 import jp.co.ndensan.reams.db.dbz.definition.core.enumeratedtype.KoroshoInterfaceShikibetsuCode;
 import jp.co.ndensan.reams.db.dbz.definition.core.enumeratedtype.YokaigoJotaiKubunSupport;
+import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.NinteiInput.NinteiInput.NinteiInputDiv;
+import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.NinteiInput.NinteiInput.dgServiceIchiran_Row;
 import jp.co.ndensan.reams.uz.uza.biz.CodeShubetsu;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
