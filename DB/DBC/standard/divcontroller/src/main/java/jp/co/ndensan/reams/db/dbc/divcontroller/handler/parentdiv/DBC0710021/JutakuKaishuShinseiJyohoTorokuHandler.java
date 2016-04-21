@@ -37,7 +37,6 @@ import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0710011.dgJu
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0710021.JutakuKaishuShinseiJyohoTorokuDiv;
 import jp.co.ndensan.reams.db.dbc.divcontroller.viewbox.ViewStateKeys;
 import jp.co.ndensan.reams.db.dbc.divcontroller.viewbox.dbc0710021.JutakuGaisuDataParameter;
-import jp.co.ndensan.reams.db.dbc.divcontroller.viewbox.dbc0710021.ShikyuShiseiJyohoParameter;
 import jp.co.ndensan.reams.db.dbc.divcontroller.viewbox.dbc0710021.ShokanharaKeteiJyohoParameter;
 import jp.co.ndensan.reams.db.dbc.service.core.fukushiyogukonyuhishikyushisei.FukushiyoguKonyuhiShikyuShinsei;
 import jp.co.ndensan.reams.db.dbc.service.core.jutakukaishusikyushinsei.JutakuKaishuShikyuGendogakuHantei;
@@ -119,6 +118,7 @@ public final class JutakuKaishuShinseiJyohoTorokuHandler {
     private final RString 提供着工年月MSG = new RString("提供（着工）年月");
     private final RString 申請者区分_空 = new RString("0");
     private final RString 申請取消事由_空 = new RString("0");
+    private final RString 保険者_空 = new RString("key0");
     private final RString 連番 = new RString("01");
     private final RString コロン = new RString(":");
     private final int 被除数 = 100;
@@ -623,8 +623,6 @@ public final class JutakuKaishuShinseiJyohoTorokuHandler {
         }
         div.getJutakuKaishuShinseiContents().getShinseishaInfo().getTxtShinseiYMD().setValue(
                 new RDate(償還払支給申請情報.get申請年月日().toString()));
-//        div.getJutakuKaishuShinseiContents().getShinseishaInfo().getDdlShinseishaKubun().setSelectedKey(
-//                ShinseishaKubun.toValue(償還払支給申請情報.get申請者区分()).getコード());
         div.getJutakuKaishuShinseiContents().getShinseishaInfo().getDdlShinseishaKubun().setSelectedKey(
                 償還払支給申請情報.get申請者区分());
         div.getJutakuKaishuShinseiContents().getShinseishaInfo().getTxtShinseiRiyu().setValue(
@@ -640,17 +638,17 @@ public final class JutakuKaishuShinseiJyohoTorokuHandler {
         div.getJutakuKaishuShinseiContents().getShinseishaInfo().getTxtTelNo().setDomain(
                 償還払支給申請情報.get申請者電話番号());
         RString 申請取消事由コード = 償還払支給申請情報.get住宅改修申請取消事由コード();
+        List<KeyValueDataSource> torikesuJiyu = new ArrayList<>();
+        torikesuJiyu.add(new KeyValueDataSource(申請取消事由_空, RString.EMPTY));
         if (申請取消事由コード != null) {
             RString 申請取消事由 = CodeMasterNoOption.getCodeRyakusho(
                     new CodeShubetsu("0028"), new Code(申請取消事由コード));
-            List<KeyValueDataSource> torikesuJiyu = new ArrayList<>();
-            torikesuJiyu.add(new KeyValueDataSource(申請取消事由_空, RString.EMPTY));
             torikesuJiyu.add(new KeyValueDataSource(申請取消事由コード, 申請取消事由));
-            div.getJutakuKaishuShinseiContents().getShinseishaInfo().getDdlShinseiTorikesuJiyu().setDataSource(
-                    torikesuJiyu);
-            div.getJutakuKaishuShinseiContents().getShinseishaInfo().getDdlShinseiTorikesuJiyu().setSelectedKey(
-                    申請取消事由コード);
         }
+        div.getJutakuKaishuShinseiContents().getShinseishaInfo().getDdlShinseiTorikesuJiyu().setDataSource(
+                torikesuJiyu);
+        div.getJutakuKaishuShinseiContents().getShinseishaInfo().getDdlShinseiTorikesuJiyu().setSelectedKey(
+                申請取消事由コード);
         div.getJutakuKaishuShinseiContents().getShinseishaInfo().getTxtYubinNo().setValue(
                 償還払支給申請情報.get申請者郵便番号());
         if (償還払支給申請情報.get申請者住所() != null) {
@@ -678,6 +676,7 @@ public final class JutakuKaishuShinseiJyohoTorokuHandler {
     // 8．保険者表示設定
     private void set保険者初期化(List<ShichosonResult> 保険者リスト) {
         List<KeyValueDataSource> 保険者ddl = new ArrayList<>();
+        保険者ddl.add(new KeyValueDataSource(保険者_空, RString.EMPTY));
         for (ShichosonResult 保険者 : 保険者リスト) {
             保険者ddl.add(new KeyValueDataSource(保険者.get証記載保険者番号().value(), 保険者.get市町村名称()));
         }
@@ -729,7 +728,17 @@ public final class JutakuKaishuShinseiJyohoTorokuHandler {
     }
 
     private void set証明書値(RString 証明書) {
-        div.getDdlSyomeisyo().setSelectedKey(証明書);
+        List<KeyValueDataSource> 証明書ddl = div.getDdlSyomeisyo().getDataSource();
+        boolean 証明書keyが存在 = false;
+        for (KeyValueDataSource 証明書key : 証明書ddl) {
+            if (証明書.equals(証明書key.getKey())) {
+                証明書keyが存在 = true;
+                break;
+            }
+        }
+        if (証明書keyが存在) {
+            div.getDdlSyomeisyo().setSelectedKey(証明書);
+        }
         div.getDdlSyomeisyo().setDisabled(true);
     }
 
@@ -756,7 +765,8 @@ public final class JutakuKaishuShinseiJyohoTorokuHandler {
         FlexibleYearMonth サービス提供年月 = new FlexibleYearMonth(div.getTxtTeikyoYM().getValue().getYearMonth()
                 .toDateString());
         RString 整理番号 = div.getTxtSeiriNo().getValue();
-        RString 保険者 = div.getJutakuKaishuShinseiContents().getDdlHokensha().getSelectedKey();
+        RString 画面保険者 = div.getJutakuKaishuShinseiContents().getDdlHokensha().getSelectedKey();
+        RString 保険者 = 画面保険者.isNullOrEmpty() ? RString.EMPTY : 画面保険者;
         FlexibleDate 受付年月日 = FlexibleDate.getNowDate();
         RDate 申請年月日 = div.getJutakuKaishuShinseiContents().getShinseishaInfo().getTxtShinseiYMD().getValue();
         RString 申請理由 = div.getJutakuKaishuShinseiContents().getShinseishaInfo().getTxtShinseiRiyu().getValue();
@@ -1171,6 +1181,9 @@ public final class JutakuKaishuShinseiJyohoTorokuHandler {
             for (Entry<RString, RString> entry1 : 画面データmap.entrySet()) {
                 RString 画面データkey = entry1.getKey();
                 if (更新前データkey.equals(画面データkey)) {
+                    if (entry.getValue() == null && entry1.getValue() == null) {
+                        break;
+                    }
                     if ((entry.getValue() == null && entry1.getValue() != null)
                             || (entry.getValue() != null && entry1.getValue() == null)
                             || (!entry.getValue().equals(entry1.getValue()))) {
@@ -1203,17 +1216,21 @@ public final class JutakuKaishuShinseiJyohoTorokuHandler {
         // 5．２　今回の支払結果を設定する
         // 5．２．１　両方をチェックしない場合
         Decimal 費用額合計 = this.費用額合計の取得();
-        Decimal 前回までの費用額合計 = div.getJutakuKaishuShinseiContents().getJutakuKaishuShinseiResetInfo()
+        Decimal 画面前回までの費用額合計 = div.getJutakuKaishuShinseiContents().getJutakuKaishuShinseiResetInfo()
                 .getTxtHiyoTotalMae().getValue();
-        Decimal 前回までの被保険対象額 = div.getJutakuKaishuShinseiContents().getJutakuKaishuShinseiResetInfo()
+        Decimal 前回までの費用額合計 = 画面前回までの費用額合計 == null ? Decimal.ZERO : 画面前回までの費用額合計;
+        Decimal 画面前回までの被保険対象額 = div.getJutakuKaishuShinseiContents().getJutakuKaishuShinseiResetInfo()
                 .getTxtHokenTaishoHiyoMae().getValue();
-        Decimal 前回までの保険給付額 = div.getJutakuKaishuShinseiContents().getJutakuKaishuShinseiResetInfo()
+        Decimal 前回までの被保険対象額 = 画面前回までの被保険対象額 == null ? Decimal.ZERO : 画面前回までの被保険対象額;
+        Decimal 画面前回までの保険給付額 = div.getJutakuKaishuShinseiContents().getJutakuKaishuShinseiResetInfo()
                 .getTxtHokenKyufuAmountMae().getValue();
-        Decimal 今回の被保険対象額 = div.getJutakuKaishuShinseiContents().getJutakuKaishuShinseiResetInfo()
+        Decimal 前回までの保険給付額 = 画面前回までの保険給付額 == null ? Decimal.ZERO : 画面前回までの保険給付額;
+        Decimal 画面今回の被保険対象額 = div.getJutakuKaishuShinseiContents().getJutakuKaishuShinseiResetInfo()
                 .getTxtHokenTaishoHiyoNow().getValue();
+        Decimal 今回の被保険対象額 = 画面今回の被保険対象額 == null ? Decimal.ZERO : 画面今回の被保険対象額;
         Decimal 給付率 = div.getTxtKyufuritsu().getValue();
-        if (!div.getJutakuKaishuShinseiContents().getJutakuKaishuShinseiResetInfo()
-                .getChkResetInfo().isAllSelected()) {
+        if (div.getJutakuKaishuShinseiContents().getJutakuKaishuShinseiResetInfo()
+                .getChkResetInfo().getSelectedKeys().isEmpty()) {
             // ①
             if (費用額合計.add(前回までの費用額合計).compareTo(支給限度額) > 0) {
                 Decimal 今回被保険対象額 = 支給限度額.subtract(前回までの被保険対象額);
@@ -1290,10 +1307,8 @@ public final class JutakuKaishuShinseiJyohoTorokuHandler {
      * @return (OK：限度額を超えない、NG:限度額を超える)
      */
     public boolean is限度額を超えない() {
-        ShikyuShiseiJyohoParameter 引き継ぎデータEntity = new ShikyuShiseiJyohoParameter();
-        引き継ぎデータEntity.set被保険者番号(new RString("000000003"));
-        RString 整理番号 = new RString("0000000003");
-        HihokenshaNo 被保険者番号 = new HihokenshaNo(引き継ぎデータEntity.get被保険者番号());
+        HihokenshaNo 被保険者番号 = ViewStateHolder.get(ViewStateKeys.被保険者番号, HihokenshaNo.class);
+        RString 整理番号 = ViewStateHolder.get(ViewStateKeys.整理番号, RString.class);
         FlexibleYearMonth 画面提供着工年月 = new FlexibleYearMonth(
                 div.getTxtTeikyoYM().getValue().getYearMonth().toString());
         Decimal 今回の保険対象費用額 = div.getJutakuKaishuShinseiContents().getJutakuKaishuShinseiResetInfo()
@@ -1305,7 +1320,8 @@ public final class JutakuKaishuShinseiJyohoTorokuHandler {
         }
         JutakuKaishuShikyuGendogakuHantei 支給限度額判定 = new JutakuKaishuShikyuGendogakuHantei();
         return 支給限度額判定.checkJutakukaishuShikyuGendogaku(
-                被保険者番号, 画面提供着工年月, 整理番号, 限度リセットフラグ, 今回の保険対象費用額);
+                被保険者番号, 画面提供着工年月, 整理番号, 限度リセットフラグ,
+                今回の保険対象費用額 == null ? Decimal.ZERO : 今回の保険対象費用額);
     }
 
     /**
