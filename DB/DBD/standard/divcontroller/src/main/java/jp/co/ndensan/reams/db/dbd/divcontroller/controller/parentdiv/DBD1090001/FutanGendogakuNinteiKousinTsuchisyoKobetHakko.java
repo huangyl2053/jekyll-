@@ -67,7 +67,7 @@ public class FutanGendogakuNinteiKousinTsuchisyoKobetHakko {
         getHandler(div).get介護負担限度額認定(被保険者番号, 識別コード);
 
         ArrayList<FutanGendogakuNintei> futanGendogakuNinteiList
-                = ViewStateHolder.get(FutanGendogakuNinteiKousinTsuchisyoKobetHakkoHandler.介護保険負担限度額認定.リストキー, ArrayList.class);
+                = ViewStateHolder.get(FutanGendogakuNinteiKousinTsuchisyoKobetHakkoHandler.KgHoukenFutanGendogakuNintei.リストキー, ArrayList.class);
         if (!futanGendogakuNinteiList.isEmpty()) {
             set負担限度額認定エリア(div, futanGendogakuNinteiList.get(0));
             div.setListIndex(new RString("0"));
@@ -139,7 +139,7 @@ public class FutanGendogakuNinteiKousinTsuchisyoKobetHakko {
         }
         div.setListIndex(new RString(listIndex));
         ArrayList<FutanGendogakuNintei> futanGendogakuNinteiList
-                = ViewStateHolder.get(FutanGendogakuNinteiKousinTsuchisyoKobetHakkoHandler.介護保険負担限度額認定.リストキー, ArrayList.class);
+                = ViewStateHolder.get(FutanGendogakuNinteiKousinTsuchisyoKobetHakkoHandler.KgHoukenFutanGendogakuNintei.リストキー, ArrayList.class);
         set負担限度額認定エリア(div, futanGendogakuNinteiList.get(listIndex));
         return ResponseData.of(div).respond();
     }
@@ -155,7 +155,7 @@ public class FutanGendogakuNinteiKousinTsuchisyoKobetHakko {
 
         int listIndex = Integer.valueOf(div.getListIndex().toString()) + 1;
         ArrayList<FutanGendogakuNintei> futanGendogakuNinteiList
-                = ViewStateHolder.get(FutanGendogakuNinteiKousinTsuchisyoKobetHakkoHandler.介護保険負担限度額認定.リストキー, ArrayList.class);
+                = ViewStateHolder.get(FutanGendogakuNinteiKousinTsuchisyoKobetHakkoHandler.KgHoukenFutanGendogakuNintei.リストキー, ArrayList.class);
         set負担限度額認定エリア(div, futanGendogakuNinteiList.get(listIndex));
         div.getBtnZenRireki().setDisabled(false);
         if (listIndex == futanGendogakuNinteiList.size() - 1) {
@@ -188,8 +188,8 @@ public class FutanGendogakuNinteiKousinTsuchisyoKobetHakko {
         boolean お知らせ通知書 = div.getHihokenshashoHakkoTaishoshaJoho().getTsuchishoSakuseiKobetsu().getHenkoTsuchiKobetsu().isIsPublish();
         boolean 申請書 = div.getHihokenshashoHakkoTaishoshaJoho().getTsuchishoSakuseiKobetsu().getFutanGendogakuNinteiHeddaXinseiSyo().isIsPublish();
 
-        FutanGendogakuNinteiKanshoTsuchisho futanGendogakuNinteiKanshoTsuchisho = FutanGendogakuNinteiKanshoTsuchisho.createInstance();
-        SourceDataCollection sourceDataCollection = futanGendogakuNinteiKanshoTsuchisho.publish(
+        FutanGendogakuNinteiKanshoTsuchisho tsuchisho = FutanGendogakuNinteiKanshoTsuchisho.createInstance();
+        SourceDataCollection sourceDataCollection = tsuchisho.publish(
                 被保険者番号, 識別コード, Integer.valueOf(div.getRirekiNo().toString()), 発行日, 文書番号, お知らせ通知書, 申請書);
 
         return ResponseData.of(sourceDataCollection).respond();

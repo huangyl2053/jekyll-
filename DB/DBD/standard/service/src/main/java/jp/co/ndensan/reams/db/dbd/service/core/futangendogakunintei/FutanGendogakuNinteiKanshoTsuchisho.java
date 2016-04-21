@@ -5,12 +5,8 @@
  */
 package jp.co.ndensan.reams.db.dbd.service.core.futangendogakunintei;
 
-import java.util.List;
-import jp.co.ndensan.reams.db.dbd.entity.db.basic.DbT4018KaigoHokenFutanGendogakuNinteiEntity;
 import jp.co.ndensan.reams.db.dbd.entity.db.relate.futangendogakunintei.JukyushaDaichoEntity;
-import jp.co.ndensan.reams.db.dbd.persistence.db.basic.DbT4018KaigoHokenFutanGendogakuNinteiDac;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
-import jp.co.ndensan.reams.db.dbz.service.core.MapperProvider;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -27,15 +23,13 @@ import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
  */
 public class FutanGendogakuNinteiKanshoTsuchisho {
 
-    private final MapperProvider mapperProvider;
-    private final DbT4018KaigoHokenFutanGendogakuNinteiDac 介護保険負担限度額認定Dac;
+    private static final RString コード = new RString("003");
+    private static final RString TXT被保険者番号 = new RString("被保険者番号");
 
     /**
      * コンストラクタです。
      */
     FutanGendogakuNinteiKanshoTsuchisho() {
-        this.mapperProvider = InstanceProvider.create(MapperProvider.class);
-        this.介護保険負担限度額認定Dac = InstanceProvider.create(DbT4018KaigoHokenFutanGendogakuNinteiDac.class);
     }
 
     /**
@@ -57,8 +51,8 @@ public class FutanGendogakuNinteiKanshoTsuchisho {
 
         //アクセスログの記録
         JukyushaDaichoEntity jukyushaDaicho = new JukyushaDaichoEntity();
-        jukyushaDaicho.setコード(new Code("003"));
-        jukyushaDaicho.setName(new RString("被保険者番号"));
+        jukyushaDaicho.setコード(new Code(コード));
+        jukyushaDaicho.setName(TXT被保険者番号);
         jukyushaDaicho.setValue(被保険者番号);
         jukyushaDaicho.set識別コード(識別コード);
         PersonalData personalData = toPersonalData(jukyushaDaicho);
@@ -67,7 +61,7 @@ public class FutanGendogakuNinteiKanshoTsuchisho {
 
     private PersonalData toPersonalData(JukyushaDaichoEntity jukyushaDaicho) {
         ExpandedInformation expandedInfo = new ExpandedInformation(
-                new Code("0003"), new RString("被保険者番号"), new RString(jukyushaDaicho.getValue().toString()));
+                new Code(コード), TXT被保険者番号, new RString(jukyushaDaicho.getValue().toString()));
         return PersonalData.of(jukyushaDaicho.get識別コード(), expandedInfo);
     }
 }

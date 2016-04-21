@@ -12,5 +12,8 @@ package jp.co.ndensan.reams.db.dbe.definition.core.enumeratedtype.taishouwaritsu
  */
 public enum TaishouWaritsukeViewStateKey {
 
+    /**
+     * 介護認定審査会番号
+     */
     介護認定審査会番号;
 }
