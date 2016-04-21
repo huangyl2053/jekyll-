@@ -4,18 +4,20 @@ package jp.co.ndensan.reams.db.dbz.divcontroller.entity.testdriver.TestNinteiInp
  * このファイルへの変更は、再生成時には損失するため
  * 不正な動作の原因になります。
  */
+
 import com.fasterxml.jackson.annotation.JsonProperty;
-import jp.co.ndensan.reams.db.dbz.divcontroller.entity.parentdiv.NinteiInput.INinteiInputDiv;
-import jp.co.ndensan.reams.db.dbz.divcontroller.entity.parentdiv.NinteiInput.NinteiInputDiv;
+import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.NinteiInput.NinteiInput.INinteiInputDiv;
+import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.NinteiInput.NinteiInput.NinteiInputDiv;
 import jp.co.ndensan.reams.uz.uza.ui.binding.*;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 
 /**
- * TestNinteiInput のクラスファイル 
- * 
+ * TestNinteiInput のクラスファイル
+ *
  * @author 自動生成
  */
 public class TestNinteiInputDiv extends Panel {
+
     // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：Uz-master-44">
     /*
      * [ private の作成 ]
@@ -51,7 +53,7 @@ public class TestNinteiInputDiv extends Panel {
 
     @JsonProperty("radModeSet")
     public void setRadModeSet(RadioButton radModeSet) {
-        this.radModeSet=radModeSet;
+        this.radModeSet = radModeSet;
     }
 
     @JsonProperty("txtHihokenshaNo")
@@ -61,7 +63,7 @@ public class TestNinteiInputDiv extends Panel {
 
     @JsonProperty("txtHihokenshaNo")
     public void setTxtHihokenshaNo(TextBox txtHihokenshaNo) {
-        this.txtHihokenshaNo=txtHihokenshaNo;
+        this.txtHihokenshaNo = txtHihokenshaNo;
     }
 
     @JsonProperty("txtIfShikibetsuCode")
@@ -71,7 +73,7 @@ public class TestNinteiInputDiv extends Panel {
 
     @JsonProperty("txtIfShikibetsuCode")
     public void setTxtIfShikibetsuCode(TextBox txtIfShikibetsuCode) {
-        this.txtIfShikibetsuCode=txtIfShikibetsuCode;
+        this.txtIfShikibetsuCode = txtIfShikibetsuCode;
     }
 
     @JsonProperty("txtShinseishoKanriNo")
@@ -81,7 +83,7 @@ public class TestNinteiInputDiv extends Panel {
 
     @JsonProperty("txtShinseishoKanriNo")
     public void setTxtShinseishoKanriNo(TextBox txtShinseishoKanriNo) {
-        this.txtShinseishoKanriNo=txtShinseishoKanriNo;
+        this.txtShinseishoKanriNo = txtShinseishoKanriNo;
     }
 
     @JsonProperty("btnLoad")
@@ -91,7 +93,7 @@ public class TestNinteiInputDiv extends Panel {
 
     @JsonProperty("btnLoad")
     public void setBtnLoad(Button btnLoad) {
-        this.btnLoad=btnLoad;
+        this.btnLoad = btnLoad;
     }
 
     @JsonProperty("btnClear")
@@ -101,7 +103,7 @@ public class TestNinteiInputDiv extends Panel {
 
     @JsonProperty("btnClear")
     public void setBtnClear(Button btnClear) {
-        this.btnClear=btnClear;
+        this.btnClear = btnClear;
     }
 
     @JsonProperty("ccdNinteiInput")
