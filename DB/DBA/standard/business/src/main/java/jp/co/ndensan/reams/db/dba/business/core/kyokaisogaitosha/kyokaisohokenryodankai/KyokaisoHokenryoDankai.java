@@ -6,9 +6,10 @@
 package jp.co.ndensan.reams.db.dba.business.core.kyokaisogaitosha.kyokaisohokenryodankai;
 
 import java.io.Serializable;
+import java.util.Objects;
 import static java.util.Objects.requireNonNull;
-import jp.co.ndensan.reams.db.dba.entity.db.basic.DbT1007KyokaisoHokenryoDankaiEntity;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
+import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT1007KyokaisoHokenryoDankaiEntity;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
@@ -170,8 +171,6 @@ public class KyokaisoHokenryoDankai extends ModelBase<KyokaisoHokenryoDankaiIden
         return this.id;
     }
 
-//TODO 子階層のリレーション有無に応じて、選択して下さい
-    // <editor-fold defaultstate="collapsed" desc="ありの場合">
     /**
      * 境界層保険料段階配下の要素を削除対象とします。<br/> {@link DbT1007KyokaisoHokenryoDankaiEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば削除状態にします。
      * 境界層保険料段階配下の要素である精神手帳任意項目情報の{@link Models#deleteOrRemoveAll() }を実行します。 削除処理結果となる{@link KyokaisoHokenryoDankai}を返します。
@@ -246,5 +245,30 @@ public class KyokaisoHokenryoDankai extends ModelBase<KyokaisoHokenryoDankaiIden
     public KyokaisoHokenryoDankaiBuilder createBuilderForEdit() {
         return new KyokaisoHokenryoDankaiBuilder(entity, id);
     }
-    private static final long serialVersionUID = -6785941436966247472L;
+
+    @Override
+    public int hashCode() {
+        int hash = 7;
+        hash = 23 * hash + Objects.hashCode(this.entity);
+        hash = 23 * hash + Objects.hashCode(this.id);
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final KyokaisoHokenryoDankai other = (KyokaisoHokenryoDankai) obj;
+        if (!Objects.equals(this.entity, other.entity)) {
+            return false;
+        }
+        if (!Objects.equals(this.id, other.id)) {
+            return false;
+        }
+        return true;
+    }
 }

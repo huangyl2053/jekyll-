@@ -4,9 +4,6 @@
  */
 package jp.co.ndensan.reams.db.dba.service.core.kyokaisogaitosha.kyokaisogaitosha;
 
-import jp.co.ndensan.reams.db.dba.service.core.kyokaisogaitosha.kyokaisosochishinsei.KyokaisoSochiShinseiManager;
-import jp.co.ndensan.reams.db.dba.service.core.kyokaisogaitosha.kyokaisohokenryodankai.KyokaisoHokenryoDankaiManager;
-import java.util.ArrayList;
 import java.util.List;
 import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dba.business.core.kyokaisogaitosha.kyokaisogaitosha.KyokaisoGaitosha;
@@ -14,8 +11,10 @@ import jp.co.ndensan.reams.db.dba.business.core.kyokaisogaitosha.kyokaisohokenry
 import jp.co.ndensan.reams.db.dba.business.core.kyokaisogaitosha.kyokaisosochishinsei.KyokaisoSochiShinsei;
 import jp.co.ndensan.reams.db.dba.definition.mybatisprm.kyokaisogaitosha.KyokaisoGaitoshaMapperParameter;
 import jp.co.ndensan.reams.db.dba.entity.db.relate.kyokaisogaitosha.KyokaisoGaitoshaEntity;
-import jp.co.ndensan.reams.db.dba.persistence.db.basic.DbT1006KyokaisoGaitoshaDac;
 import jp.co.ndensan.reams.db.dba.persistence.db.mapper.relate.kyokaisogaitosha.IKyokaisoGaitoshaMapper;
+import jp.co.ndensan.reams.db.dba.service.core.kyokaisogaitosha.kyokaisohokenryodankai.KyokaisoHokenryoDankaiManager;
+import jp.co.ndensan.reams.db.dba.service.core.kyokaisogaitosha.kyokaisosochishinsei.KyokaisoSochiShinseiManager;
+import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT1006KyokaisoGaitoshaDac;
 import jp.co.ndensan.reams.db.dbz.service.core.MapperProvider;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
@@ -92,28 +91,6 @@ public class KyokaisoGaitoshaManager {
     }
 
     /**
-     * 主キー1に合致する境界層該当者のリストを返します。
-     *
-     * @param 境界層該当者検索条件 境界層該当者検索条件
-     * @return KyokaisoGaitoshaの{@code list}
-     */
-    @Transaction
-    public List<KyokaisoGaitosha> get境界層該当者リストBy主キー1(KyokaisoGaitoshaMapperParameter 境界層該当者検索条件) {
-        requireNonNull(境界層該当者検索条件, UrSystemErrorMessages.値がnull.getReplacedMessage("境界層該当者検索条件"));
-        IKyokaisoGaitoshaMapper mapper = mapperProvider.create(IKyokaisoGaitoshaMapper.class);
-
-        List<KyokaisoGaitoshaEntity> relateEntityList = mapper.select境界層該当者リストBy主キー1(境界層該当者検索条件);
-
-        ArrayList<KyokaisoGaitosha> 境界層該当者List = new ArrayList<>();
-        for (KyokaisoGaitoshaEntity relateEntity : relateEntityList) {
-            relateEntity.initializeMd5ToEntities();
-            境界層該当者List.add(new KyokaisoGaitosha(relateEntity));
-        }
-        return 境界層該当者List;
-
-    }
-
-    /**
      * 境界層該当者{@link KyokaisoGaitosha}を保存します。
      *
      * @param 境界層該当者 境界層該当者
@@ -128,8 +105,8 @@ public class KyokaisoGaitoshaManager {
             return false;
         }
         境界層該当者 = 境界層該当者.modifiedModel();
-        save境界層保険料段階リスト(境界層該当者.getKyokaisoHokenryoDankaiList());  // XXXは本メソッドの引数に変更してください。
-        save境界層措置申請リスト(境界層該当者.getKyokaisoSochiShinseiList());  // XXXは本メソッドの引数に変更してください。
+        save境界層保険料段階リスト(境界層該当者.getKyokaisoHokenryoDankaiList());
+        save境界層措置申請リスト(境界層該当者.getKyokaisoSochiShinseiList());
         return 1 == 境界層該当者Dac.save(境界層該当者.toEntity());
     }
 

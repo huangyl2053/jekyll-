@@ -6,7 +6,7 @@
 package jp.co.ndensan.reams.db.dba.business.core.kyokaisogaitosha.kyokaisosochishinsei;
 
 import static java.util.Objects.requireNonNull;
-import jp.co.ndensan.reams.db.dba.entity.db.basic.DbT1013KyokaisoSochiShinseiEntity;
+import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT1013KyokaisoSochiShinseiEntity;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;

@@ -4,7 +4,6 @@
  */
 package jp.co.ndensan.reams.db.dba.persistence.db.mapper.relate.kyokaisogaitosha;
 
-import java.util.List;
 import jp.co.ndensan.reams.db.dba.definition.mybatisprm.kyokaisogaitosha.KyokaisoGaitoshaMapperParameter;
 import jp.co.ndensan.reams.db.dba.entity.db.relate.kyokaisogaitosha.KyokaisoGaitoshaEntity;
 
@@ -23,11 +22,4 @@ public interface IKyokaisoGaitoshaMapper {
      */
     KyokaisoGaitoshaEntity select境界層該当者ByKey(KyokaisoGaitoshaMapperParameter 境界層該当者検索条件);
 
-    /**
-     * 主キー1に合致する境界層該当者のリストを取得します。
-     *
-     * @param 境界層該当者検索条件 境界層該当者検索条件
-     * @return KyokaisoGaitoshaEntityの{@code list}
-     */
-    List<KyokaisoGaitoshaEntity> select境界層該当者リストBy主キー1(KyokaisoGaitoshaMapperParameter 境界層該当者検索条件);
 }
