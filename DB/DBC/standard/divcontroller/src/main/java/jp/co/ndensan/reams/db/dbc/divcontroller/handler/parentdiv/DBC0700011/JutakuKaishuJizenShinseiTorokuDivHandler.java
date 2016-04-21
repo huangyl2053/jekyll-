@@ -1055,7 +1055,9 @@ public final class JutakuKaishuJizenShinseiTorokuDivHandler {
         }
         ServiceShuruiCode サービス種類コード = JutakuKaishuJizenShinsei.createInstance()
                 .getServiceShuruiCode(被保険者番号, サービス提供年月);
-        builder.setサービス種類コード(サービス種類コード);
+        if (サービス種類コード != null) {
+            builder.setサービス種類コード(サービス種類コード);
+        }
         builder.set住宅所有者(div.getKaigoShikakuKihonShaPanel().getTabShinseiJyoho().getTxtJutakuOwner().getValue());
         builder.set被保険者との関係(div.getKaigoShikakuKihonShaPanel().getTabShinseiJyoho()
                 .getTxtRelationWithHihokensha().getValue());
@@ -1164,7 +1166,9 @@ public final class JutakuKaishuJizenShinseiTorokuDivHandler {
         }
         ServiceShuruiCode サービス種類コード = JutakuKaishuJizenShinsei.createInstance()
                 .getServiceShuruiCode(被保険者番号, サービス提供年月);
-        builder.setサービス種類コード(サービス種類コード);
+        if (サービス種類コード != null) {
+            builder.setサービス種類コード(サービス種類コード);
+        }
         builder.set住宅所有者(div.getKaigoShikakuKihonShaPanel().getTabShinseiJyoho().getTxtJutakuOwner().getValue());
         builder.set被保険者との関係(div.getKaigoShikakuKihonShaPanel().getTabShinseiJyoho()
                 .getTxtRelationWithHihokensha().getValue());
