@@ -615,8 +615,13 @@ public final class JutakuKaishuJizenShinseiTorokuDivHandler {
         div.getKaigoShikakuKihonShaPanel().getTabShinseiContents().getTabJutakuKaisyuJyoho().getTotalPanel()
                 .getTxtRiyoshaFutanAmountMae().setValue(result.get利用者負担額());
 
+        ShiharaiKekkaResult 前回までの支払結果 = ViewStateHolder.get(ViewStateKeys.前回までの支払結果, ShiharaiKekkaResult.class);
+        RString 前回まで住宅住所 = RString.EMPTY;
+        if (前回までの支払結果 != null) {
+            前回まで住宅住所 = 前回までの支払結果.get住宅改修住宅住所();
+        }
         KeyValueDataSource item = new KeyValueDataSource(住宅住所変更_KEY, 住宅住所変更_VALUE);
-        if (住宅住所.equals(result.get住宅改修住宅住所())) {
+        if (!住宅住所.equals(前回まで住宅住所)) {
             div.getKaigoShikakuKihonShaPanel().getTabShinseiContents().getTabJutakuKaisyuJyoho().getTotalPanel()
                     .getChkResetInfo().getSelectedItems().add(item);
         } else {
@@ -1298,6 +1303,7 @@ public final class JutakuKaishuJizenShinseiTorokuDivHandler {
      */
     private void loadTabKozaJyoho(ShiharaiKekkaResult param, RString 画面モード) {
         if (param != null) {
+            ViewStateHolder.put(ViewStateKeys.前回までの支払結果, ShiharaiKekkaResult.class);
             div.getKaigoShikakuKihonShaPanel().getTabShinseiContents().getTabJutakuKaisyuJyoho().getTotalPanel()
                     .getTxtHiyoTotalMae().setValue(param.get費用額合計());
             div.getKaigoShikakuKihonShaPanel().getTabShinseiContents().getTabJutakuKaisyuJyoho().getTotalPanel()
