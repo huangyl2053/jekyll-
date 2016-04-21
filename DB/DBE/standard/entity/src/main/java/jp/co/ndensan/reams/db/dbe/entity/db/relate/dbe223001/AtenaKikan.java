@@ -17,6 +17,7 @@ import lombok.Setter;
  */
 @Getter
 @Setter
+@SuppressWarnings("PMD.UnusedPrivateField")
 public class AtenaKikan {
 
     private RString 宛名機関名;

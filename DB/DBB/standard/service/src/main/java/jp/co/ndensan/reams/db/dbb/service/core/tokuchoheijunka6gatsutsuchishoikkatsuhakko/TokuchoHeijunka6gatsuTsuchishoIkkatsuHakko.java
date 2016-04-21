@@ -16,7 +16,7 @@ import jp.co.ndensan.reams.db.dbb.definition.mybatisprm.tokuchoheijunka6gatsutsu
 import jp.co.ndensan.reams.db.dbb.entity.db.basic.DbT2015KeisangoJohoEntity;
 import jp.co.ndensan.reams.db.dbb.entity.db.relate.tokuchoheijunka6gatsutsuchishoikkatsuhakko.DbT2002FukaTempEntity;
 import jp.co.ndensan.reams.db.dbb.entity.dbbbt35003.ChohyoHakkoEntity;
-import jp.co.ndensan.reams.db.dbb.persistence.db.mapper.relate.tokuchoheijunka6gatsutsuchishoikkatsuhakko.ITokuchoHeijunka6gatsuTsuchishoIkkatsuHakkoMapper;
+import jp.co.ndensan.reams.db.dbb.persistence.db.mapper.relate.tokuchoheijunka6gatsu.ITokuchoHeijunka6gatsuMapper;
 import jp.co.ndensan.reams.db.dbb.service.core.MapperProvider;
 import jp.co.ndensan.reams.db.dbb.service.core.kanri.FukaNokiResearcher;
 import jp.co.ndensan.reams.db.dbx.business.core.kanri.FuchoKiUtil;
@@ -24,8 +24,6 @@ import jp.co.ndensan.reams.db.dbx.business.core.kanri.Kitsuki;
 import jp.co.ndensan.reams.db.dbx.business.core.kanri.TokuchoKiUtil;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.TsuchishoNo;
 import jp.co.ndensan.reams.db.dbz.definition.core.kyotsu.ShoriName;
-import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7065ChohyoSeigyoKyotsuEntity;
-import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT7065ChohyoSeigyoKyotsuDac;
 import jp.co.ndensan.reams.ua.uax.business.core.atesaki._Atesaki;
 import jp.co.ndensan.reams.ua.uax.business.core.koza.IKoza;
 import jp.co.ndensan.reams.ua.uax.business.core.koza.Koza;
@@ -36,7 +34,6 @@ import jp.co.ndensan.reams.ua.uax.entity.db.basic.UaT0310KozaEntity;
 import jp.co.ndensan.reams.ua.uax.entity.db.relate.KozaRelateEntity;
 import jp.co.ndensan.reams.ue.uex.definition.core.TsuchiNaiyoCodeType;
 import jp.co.ndensan.reams.ur.urc.business.core.noki.nokikanri.Noki;
-import jp.co.ndensan.reams.ur.urz.business.IUrControlData;
 import jp.co.ndensan.reams.ur.urz.business.UrControlDataFactory;
 import jp.co.ndensan.reams.ur.urz.business.core.association.Association;
 import jp.co.ndensan.reams.ur.urz.business.core.reportoutputorder.IOutputOrder;
@@ -44,17 +41,11 @@ import jp.co.ndensan.reams.ur.urz.business.core.reportoutputorder.MyBatisOrderBy
 import jp.co.ndensan.reams.ur.urz.service.core.association.AssociationFinderFactory;
 import jp.co.ndensan.reams.ur.urz.service.core.reportoutputorder.ChohyoShutsuryokujunFinderFactory;
 import jp.co.ndensan.reams.ur.urz.service.core.reportoutputorder.IChohyoShutsuryokujunFinder;
-import jp.co.ndensan.reams.uz.uza.batch.process.BatchReportManager;
 import jp.co.ndensan.reams.uz.uza.biz.ReportId;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
-import jp.co.ndensan.reams.uz.uza.euc.definition.UzUDE0831EucAccesslogFileType;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RYear;
-import jp.co.ndensan.reams.uz.uza.report.ReportAssembler;
-import jp.co.ndensan.reams.uz.uza.report.ReportAssemblerBuilder;
-import jp.co.ndensan.reams.uz.uza.spool.FileSpoolManager;
-import jp.co.ndensan.reams.uz.uza.spool.entities.UzUDE0835SpoolOutputType;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 
 /**
@@ -66,7 +57,7 @@ import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 public class TokuchoHeijunka6gatsuTsuchishoIkkatsuHakko {
 
     private final MapperProvider mapperProvider;
-    private final ITokuchoHeijunka6gatsuTsuchishoIkkatsuHakkoMapper mapper;
+    private final ITokuchoHeijunka6gatsuMapper mapper;
     private static final ReportId REPORT_ID_DBB100012 = new ReportId("DBB100012_KarisanteiHenjunkaHenkoTsuchishoDaihyo");
 //    private BatchEntityCreatedTempTableWriter<SampleTempTableEntity> batchEntityCreatedTempTableWriter;  //TODO 一時テーブルのEntity;
 
@@ -81,8 +72,9 @@ public class TokuchoHeijunka6gatsuTsuchishoIkkatsuHakko {
         this.普徴納期情報リスト = new ArrayList<>();
         this.特徴納期情報リスト = new ArrayList<>();
         this.mapperProvider = InstanceProvider.create(MapperProvider.class);
-        this.mapper = mapperProvider.create(ITokuchoHeijunka6gatsuTsuchishoIkkatsuHakkoMapper.class);
-//        batchEntityCreatedTempTableWriter = new BatchEntityCreatedTempTableWriter<>(SampleTempTableEntity.TABLE_NAME, SampleTempTableEntity.class); //TODO 一時テーブルのEntity;
+        this.mapper = mapperProvider.create(ITokuchoHeijunka6gatsuMapper.class);
+        //TODO 一時テーブルのEntity;
+//        batchEntityCreatedTempTableWriter = new BatchEntityCreatedTempTableWriter<>(SampleTempTableEntity.TABLE_NAME, SampleTempTableEntity.class);
     }
 
     /**
@@ -139,13 +131,12 @@ public class TokuchoHeijunka6gatsuTsuchishoIkkatsuHakko {
         List<DbT2002FukaTempEntity> fukaJohoList = 出力対象情報の取得(param);
 
         //TODO 帳票制御共通情報の取得
-        DbT7065ChohyoSeigyoKyotsuDac dac = InstanceProvider.create(DbT7065ChohyoSeigyoKyotsuDac.class);
-        DbT7065ChohyoSeigyoKyotsuEntity 帳票制御共通情報 = dac.selectByKey(SubGyomuCode.DBB介護賦課, REPORT_ID_DBB100012);
-
+//        DbT7065ChohyoSeigyoKyotsuDac dac = InstanceProvider.create(DbT7065ChohyoSeigyoKyotsuDac.class);
+//        DbT7065ChohyoSeigyoKyotsuEntity 帳票制御共通情報 = dac.selectByKey(SubGyomuCode.DBB介護賦課, REPORT_ID_DBB100012);
         // 共通的な項目の編集を行う
         Association association = AssociationFinderFactory.createInstance().getAssociation();
-        RString 市町村コード = association.get地方公共団体コード().value();
-        RString 市町村名 = association.get市町村名();
+//        RString 市町村コード = association.get地方公共団体コード().value();
+//        RString 市町村名 = association.get市町村名();
         for (DbT2002FukaTempEntity tmpEntity : fukaJohoList) {
 
             TsuchishoNo 知書番号 = tmpEntity.get更正後_計算後情報().getTsuchishoNo();
@@ -175,23 +166,21 @@ public class TokuchoHeijunka6gatsuTsuchishoIkkatsuHakko {
         }
 
 //        // 4.6 通知書帳票をスプール登録する   //TODO QA引数の確認
-        FileSpoolManager manager = new FileSpoolManager(UzUDE0835SpoolOutputType.EucOther, RString.EMPTY, UzUDE0831EucAccesslogFileType.Csv);
-
+//        FileSpoolManager manager = new FileSpoolManager(UzUDE0835SpoolOutputType.EucOther, RString.EMPTY, UzUDE0831EucAccesslogFileType.Csv);
 //        // 4.7 通知書一覧帳票をスプール登録する  　　
-        IChohyoShutsuryokujunFinder chohyouFinder = ChohyoShutsuryokujunFinderFactory.createInstance();
-        IUrControlData urData = UrControlDataFactory.createInstance();
-        IOutputOrder outputOrder = chohyouFinder.get出力順(SubGyomuCode.DBB介護賦課, REPORT_ID_DBB100012, Long.parseLong(param.get出力順ID().toString()));
-        RString 改頁項目ID = outputOrder.get改頁項目ID();
-
+//        IChohyoShutsuryokujunFinder chohyouFinder = ChohyoShutsuryokujunFinderFactory.createInstance();
+//        IUrControlData urData = UrControlDataFactory.createInstance();
+//        IOutputOrder outputOrder = chohyouFinder.get出力順(SubGyomuCode.DBB介護賦課, REPORT_ID_DBB100012, Long.parseLong(param.get出力順ID().toString()));
+//        RString 改頁項目ID = outputOrder.get改頁項目ID();
 //        // 4.8 CSVファイルの文字コードを指定された文字コードに変換する
 //        // 4.9 CSVファイルをスプール登録する（TechwikiのEUC用CSVファイル出力API利用ガイドライン参照）
 //
 //        // 5 発行履歴の登録
 //        IHakkoRirekiManager iHakkoRirekiManager = HakkoRirekiManagerFactory.createInstance();
 //        // 1:SourceData   3:初期発行状態  4:発行履歴固有情報Map  5:識別コードList
-        BatchReportManager batchManager = new BatchReportManager();
-        ReportAssemblerBuilder build = batchManager.reportAssembler(REPORT_ID_DBB100012.value(), SubGyomuCode.DBB介護賦課);  // 帳票ID  サブ業務コード
-        ReportAssembler assemble = build.create();
+//        BatchReportManager batchManager = new BatchReportManager();
+//        ReportAssemblerBuilder build = batchManager.reportAssembler(REPORT_ID_DBB100012.value(), SubGyomuCode.DBB介護賦課);  // 帳票ID  サブ業務コード
+//        ReportAssembler assemble = build.create();
 //        BatchReportWriter writer = new BatchReportWriter(new BatchReportManager(), assemble);
 //        iHakkoRirekiManager.insert帳票発行履歴(null, new FlexibleDate(param.get発行日().toDateString()), ChohyoHakkoRirekiJotai.未定, null, null);
 //
@@ -313,7 +302,12 @@ public class TokuchoHeijunka6gatsuTsuchishoIkkatsuHakko {
 
     }
 
-    private void 普徴納期情報リストと特徴納期情報リストの作成(RYear 調定年度) {
+    /**
+     * 普徴納期情報リストと特徴納期情報リストを作成します。
+     *
+     * @param 調定年度 調定年度
+     */
+    public void 普徴納期情報リストと特徴納期情報リストの作成(RYear 調定年度) {
 
         FukaNokiResearcher 賦課納期取得 = new FukaNokiResearcher(調定年度);
         Noki noki;

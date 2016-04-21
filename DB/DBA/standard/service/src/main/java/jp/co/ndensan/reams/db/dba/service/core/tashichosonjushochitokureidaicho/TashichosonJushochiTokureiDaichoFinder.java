@@ -9,7 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dba.business.core.tashichosonjushochitokureidaicho.OtherAddressLedgerBusiness;
 import jp.co.ndensan.reams.db.dba.definition.mybatisprm.atena.OtherAddressInformationRecipientNameMybatisParam;
-import jp.co.ndensan.reams.db.dba.definition.otheraddressledger.OtherAddressInformationParameter;
+import jp.co.ndensan.reams.db.dba.definition.mybatisprm.otheraddressledger.OtherAddressInformationParameter;
 import jp.co.ndensan.reams.db.dba.entity.db.otheraddressledger.OtherAddressInfEntity;
 import jp.co.ndensan.reams.db.dba.entity.db.otheraddressledger.OtherAddressInfFromDBEntity;
 import jp.co.ndensan.reams.db.dba.entity.db.otheraddressledger.OtherAddressInformationRecipientNameMybatisEntity;
@@ -236,8 +236,10 @@ public class TashichosonJushochiTokureiDaichoFinder {
      * @param 識別コード 識別コード
      * @return 他市町村住所地特例者情報Entityリスト
      */
-    private List<OtherAddressInfEntity> get他市町村住所地特例者情報(ShikibetsuCode 識別コード) {
-        OtherAddressInformationParameter 検索条件 = OtherAddressInformationParameter.createParam_ServiceOtherAddressInformation(識別コード);
+    public List<OtherAddressInfEntity> get他市町村住所地特例者情報(ShikibetsuCode 識別コード) {
+        RString 保険者種別 = GyomuCode.DB介護保険.getColumnValue();
+        OtherAddressInformationParameter 検索条件
+                = OtherAddressInformationParameter.createParam_ServiceOtherAddressInformation(識別コード, 保険者種別);
         MapperProvider mapperProvider = InstanceProvider.create(MapperProvider.class);
         IOtherAddressInformationMapper otherAddressInfMapper = mapperProvider.create(IOtherAddressInformationMapper.class);
         List<OtherAddressInfFromDBEntity> 他市町村住所地特例者情報Lst = otherAddressInfMapper.get他市町村住所地特例者情報の取得処理(検索条件);
