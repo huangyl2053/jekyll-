@@ -191,8 +191,8 @@ public class NonyuTsuchiShoDataHenshu {
             IName 代納人氏名,
             List<Kitsuki> 出力期リスト,
             HenshuHaniKubun 編集範囲区分) {
-        //TODO DBBBZ00005_1の本算定通知書共通情報作成メソッドを呼び出し  未作成
-        EditedHonSanteiTsuchiShoKyotsu 編集後本算定通知書共通情報 = new EditedHonSanteiTsuchiShoKyotsu();
+        HonSanteiTsuchiShoKyotsuKomokuHenshu 賦課帳票共通項目編集 = new HonSanteiTsuchiShoKyotsuKomokuHenshu();
+        EditedHonSanteiTsuchiShoKyotsu 編集後本算定通知書共通情報 = 賦課帳票共通項目編集.create本算定通知書共通情報(本算定通知書情報);
         List<NonyuTsuchiShoKiJoho> 納入通知書期情報リスト = create納入通知書期情報(null, null, null, 請求情報リスト,
                 本算定納入通知書制御情報.get納入通知書制御情報(), null, 出力期リスト, null, null);
         NofuShoKyotsu 納付書共通 = create納付書共通(
@@ -810,9 +810,8 @@ public class NonyuTsuchiShoDataHenshu {
                 .separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString() : 空白);
         納付書共通.set住所(編集後宛先.get編集後住所());
         納付書共通.set郵便番号(編集後宛先.get郵便番号());
-        //TODO QA #78465 入力.編集後宛先.get行政区名() 編集後宛先.get方書()
-        納付書共通.set行政区名(null);
-        納付書共通.set方書(null);
+        納付書共通.set行政区名(編集後宛先.get行政区名());
+        納付書共通.set方書(編集後宛先.get方書());
         納付書共通.set代納人氏名(代納人氏名.getName());
         納付書共通.set被保険者氏名(編集後宛先.get本人名称().getName());
         if (AtesakiShubetsu.代納人送付先.equals(編集後宛先.get宛先種別()) || AtesakiShubetsu.代納人.equals(編集後宛先.get宛先種別())) {
