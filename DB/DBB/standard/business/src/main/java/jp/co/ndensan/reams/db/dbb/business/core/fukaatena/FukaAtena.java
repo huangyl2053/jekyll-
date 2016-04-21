@@ -5,7 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbb.business.core.fukaatena;
 
-import jp.co.ndensan.reams.db.dbb.business.core.basic.Fuka;
+import jp.co.ndensan.reams.db.dbb.business.core.zenkaifuka.ZenkaiFuka;
 import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.IShikibetsuTaisho;
 
 /**
@@ -17,6 +17,7 @@ import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.IShikibetsuTais
 @lombok.Setter
 @SuppressWarnings("PMD.UnusedPrivateField")
 public class FukaAtena {
-    private Fuka 賦課情報;
+
+    private ZenkaiFuka 賦課情報;
     private IShikibetsuTaisho 宛名;
 }
