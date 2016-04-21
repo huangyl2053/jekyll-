@@ -7,6 +7,7 @@ package jp.co.ndensan.reams.db.dbd.business.report.ninteikoshintsuchisho;
 
 import jp.co.ndensan.reams.db.dbd.definition.core.gemmengengaku.futangendogakunintei.KyuSochishaKubun;
 import jp.co.ndensan.reams.db.dbd.entity.report.ninteikoshintsuchisho.NinteiKoshinTsuchisho;
+import jp.co.ndensan.reams.db.dbz.business.core.basic.ChohyoSeigyoKyotsu;
 import jp.co.ndensan.reams.db.dbz.business.report.util.EditedKojin;
 import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.kojin.IKojin;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -33,11 +34,13 @@ public class NinteiKoshinTsuchishoLayer1Editor implements INinteiKoshinTsuchisho
     public NinteiKoshinTsuchisho edit(NinteiKoshinTsuchisho source) {
         source.bunshoNo = item.get文書番号();
         if (KyuSochishaKubun.非該当.getコード().equals(item.get帳票情報().get旧措置者区分())) {
-            source.title = RString.EMPTY;//DBDEnum.帳票制御汎用キーDBD100008.帳票タイトル
+            //TODO DBDEnum.帳票制御汎用キーDBD100008.帳票タイトル
+            source.title = RString.EMPTY;
         } else {
-            source.title = RString.EMPTY;//DBDEnum.帳票制御汎用キーDBD100008.帳票タイトル_旧措置者
+            //TODO DBDEnum.帳票制御汎用キーDBD100008.帳票タイトル_旧措置者
+            source.title = RString.HALF_SPACE;
         }
-        EditedKojin 編集後個人 = getEditedKojin(item.getIKojin());
+        EditedKojin 編集後個人 = getEditedKojin(item.getIKojin(), item.get帳票制御共通());
         source.hihokenshaNameKana = 編集後個人.get名称().getKana().getColumnValue();
         source.hihokenshaName = 編集後個人.get名称().getName().getColumnValue();
         source.hihokenshaNo = item.get帳票情報().get被保険者番号().getColumnValue();
@@ -46,7 +49,7 @@ public class NinteiKoshinTsuchishoLayer1Editor implements INinteiKoshinTsuchisho
         return source;
     }
 
-    private static EditedKojin getEditedKojin(IKojin kojin) {
-        return new EditedKojin(kojin);
+    private static EditedKojin getEditedKojin(IKojin kojin, ChohyoSeigyoKyotsu 帳票制御共通) {
+        return new EditedKojin(kojin, 帳票制御共通);
     }
 }

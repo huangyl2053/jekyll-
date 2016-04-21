@@ -25,12 +25,12 @@ public class KateiHomonUmuTest extends DbeTestBase {
 
     @Test
     public void ありを指定した場合_getコードは_Trueを返す() {
-        assertThat(KateiHomonUmu.あり.getコード(), is(true));
+        assertThat(KateiHomonUmu.あり.is家庭訪問(), is(true));
     }
 
     @Test
     public void なしを指定した場合_getコードは_Falseを返す() {
-        assertThat(KateiHomonUmu.なし.getコード(), is(false));
+        assertThat(KateiHomonUmu.なし.is家庭訪問(), is(false));
     }
 
     @Test

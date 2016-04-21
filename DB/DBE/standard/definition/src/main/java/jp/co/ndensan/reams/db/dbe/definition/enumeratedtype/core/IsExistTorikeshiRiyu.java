@@ -32,7 +32,7 @@ public enum IsExistTorikeshiRiyu {
      *
      * @return 取消理由の有無のコード
      */
-    public boolean getコード() {
+    public boolean has取消理由() {
         return code;
     }
 

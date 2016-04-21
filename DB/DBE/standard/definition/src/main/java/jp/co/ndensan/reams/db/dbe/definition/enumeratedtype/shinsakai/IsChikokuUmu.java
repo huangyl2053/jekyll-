@@ -32,7 +32,7 @@ public enum IsChikokuUmu {
      *
      * @return 委員遅刻有無のコード
      */
-    public boolean getコード() {
+    public boolean is委員遅刻() {
         return code;
     }
 

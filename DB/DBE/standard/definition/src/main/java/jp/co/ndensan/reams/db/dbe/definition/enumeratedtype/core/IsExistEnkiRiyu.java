@@ -32,7 +32,7 @@ public enum IsExistEnkiRiyu {
      *
      * @return 延期理由の有無のコード
      */
-    public boolean getコード() {
+    public boolean is延期理由あり() {
         return code;
     }
 

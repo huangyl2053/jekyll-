@@ -32,7 +32,7 @@ public enum ShinsakaiOrderKakuteiFlg {
      *
      * @return 介護認定審査会審査順確定フラグのコード
      */
-    public boolean getコード() {
+    public boolean is介護認定審査会審査順確定() {
         return code;
     }
 

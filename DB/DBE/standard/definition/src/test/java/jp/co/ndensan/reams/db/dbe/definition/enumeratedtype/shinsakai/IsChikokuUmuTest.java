@@ -25,12 +25,12 @@ public class IsChikokuUmuTest extends DbeTestBase {
 
     @Test
     public void 遅刻を指定した場合_getコードは_Trueを返す() {
-        assertThat(IsChikokuUmu.遅刻.getコード(), is(true));
+        assertThat(IsChikokuUmu.遅刻.is委員遅刻(), is(true));
     }
 
     @Test
     public void 遅刻なしを指定した場合_getコードは_Falseを返す() {
-        assertThat(IsChikokuUmu.遅刻なし.getコード(), is(false));
+        assertThat(IsChikokuUmu.遅刻なし.is委員遅刻(), is(false));
     }
 
     @Test

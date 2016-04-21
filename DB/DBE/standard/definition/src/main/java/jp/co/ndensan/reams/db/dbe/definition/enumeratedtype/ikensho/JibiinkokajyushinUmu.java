@@ -32,7 +32,7 @@ public enum JibiinkokajyushinUmu {
      *
      * @return 耳鼻咽喉科受診の有無のコード
      */
-    public boolean getコード() {
+    public boolean is耳鼻咽喉科受診() {
         return code;
     }
 

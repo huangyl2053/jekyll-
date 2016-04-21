@@ -25,12 +25,12 @@ public class ShinsakaiOrderKakuteiFlgTest extends DbeTestBase {
 
     @Test
     public void 確定を指定した場合_getコードは_Trueを返す() {
-        assertThat(ShinsakaiOrderKakuteiFlg.確定.getコード(), is(true));
+        assertThat(ShinsakaiOrderKakuteiFlg.確定.is介護認定審査会審査順確定(), is(true));
     }
 
     @Test
     public void 未確定を指定した場合_getコードは_Falseを返す() {
-        assertThat(ShinsakaiOrderKakuteiFlg.未確定.getコード(), is(false));
+        assertThat(ShinsakaiOrderKakuteiFlg.未確定.is介護認定審査会審査順確定(), is(false));
     }
 
     @Test

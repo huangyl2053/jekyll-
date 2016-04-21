@@ -32,7 +32,7 @@ public enum RehabiritationkaJushinUmu {
      *
      * @return リハビリテーション科受診の有無のコード
      */
-    public boolean getコード() {
+    public boolean isリハビリテーション科受診() {
         return code;
     }
 

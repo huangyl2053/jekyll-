@@ -32,7 +32,7 @@ public enum IsSubstitute {
      *
      * @return 補欠のコード
      */
-    public boolean getコード() {
+    public boolean is補欠() {
         return code;
     }
 

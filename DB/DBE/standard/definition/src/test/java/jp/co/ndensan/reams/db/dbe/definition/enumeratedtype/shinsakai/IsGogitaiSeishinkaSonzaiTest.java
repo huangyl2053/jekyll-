@@ -25,12 +25,12 @@ public class IsGogitaiSeishinkaSonzaiTest extends DbeTestBase {
 
     @Test
     public void 存在を指定した場合_getコードは_Trueを返す() {
-        assertThat(IsGogitaiSeishinkaSonzai.存在.getコード(), is(true));
+        assertThat(IsGogitaiSeishinkaSonzai.存在.is合議体精神科医存在(), is(true));
     }
 
     @Test
     public void 不在を指定した場合_getコードは_Falseを返す() {
-        assertThat(IsGogitaiSeishinkaSonzai.不在.getコード(), is(false));
+        assertThat(IsGogitaiSeishinkaSonzai.不在.is合議体精神科医存在(), is(false));
     }
 
     @Test

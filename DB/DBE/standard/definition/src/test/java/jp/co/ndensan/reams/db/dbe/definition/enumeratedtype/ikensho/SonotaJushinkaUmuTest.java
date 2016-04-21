@@ -25,12 +25,12 @@ public class SonotaJushinkaUmuTest extends DbeTestBase {
 
     @Test
     public void ありを指定した場合_getコードは_Trueを返す() {
-        assertThat(SonotaJushinkaUmu.あり.getコード(), is(true));
+        assertThat(SonotaJushinkaUmu.あり.isその他受診科(), is(true));
     }
 
     @Test
     public void なしを指定した場合_getコードは_Falseを返す() {
-        assertThat(SonotaJushinkaUmu.なし.getコード(), is(false));
+        assertThat(SonotaJushinkaUmu.なし.isその他受診科(), is(false));
     }
 
     @Test

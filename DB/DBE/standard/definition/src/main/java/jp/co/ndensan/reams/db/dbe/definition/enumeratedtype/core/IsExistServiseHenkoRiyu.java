@@ -32,7 +32,7 @@ public enum IsExistServiseHenkoRiyu {
      *
      * @return サービス変更理由の有無のコード
      */
-    public boolean getコード() {
+    public boolean hasサービス変更理由() {
         return code;
     }
 

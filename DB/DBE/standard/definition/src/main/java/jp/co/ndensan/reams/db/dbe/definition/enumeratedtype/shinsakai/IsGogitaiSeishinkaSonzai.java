@@ -32,7 +32,7 @@ public enum IsGogitaiSeishinkaSonzai {
      *
      * @return 合議体精神科医存在フラグのコード
      */
-    public boolean getコード() {
+    public boolean is合議体精神科医存在() {
         return code;
     }
 

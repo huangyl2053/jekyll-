@@ -18,6 +18,11 @@ public class NinteiKoshinTsuchishoCompNinshoshaEditor implements INinteiKoshinTs
 
     private final NinteiKoshinTsuchishoItem item;
 
+    /**
+     * コンストラクタです。
+     *
+     * @param item NinteiKoshinTsuchishoItem
+     */
     protected NinteiKoshinTsuchishoCompNinshoshaEditor(NinteiKoshinTsuchishoItem item) {
         this.item = item;
     }

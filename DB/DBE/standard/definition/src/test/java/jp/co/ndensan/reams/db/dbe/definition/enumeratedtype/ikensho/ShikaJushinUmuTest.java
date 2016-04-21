@@ -25,12 +25,12 @@ public class ShikaJushinUmuTest extends DbeTestBase {
 
     @Test
     public void ありを指定した場合_getコードは_Trueを返す() {
-        assertThat(ShikaJushinUmu.あり.getコード(), is(true));
+        assertThat(ShikaJushinUmu.あり.is歯科受診(), is(true));
     }
 
     @Test
     public void なしを指定した場合_getコードは_Falseを返す() {
-        assertThat(ShikaJushinUmu.なし.getコード(), is(false));
+        assertThat(ShikaJushinUmu.なし.is歯科受診(), is(false));
     }
 
     @Test

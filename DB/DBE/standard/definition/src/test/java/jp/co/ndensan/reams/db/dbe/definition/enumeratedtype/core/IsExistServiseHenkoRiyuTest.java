@@ -25,12 +25,12 @@ public class IsExistServiseHenkoRiyuTest extends DbeTestBase {
 
     @Test
     public void であるを指定した場合_getコードは_Trueを返す() {
-        assertThat(IsExistServiseHenkoRiyu.である.getコード(), is(true));
+        assertThat(IsExistServiseHenkoRiyu.である.hasサービス変更理由(), is(true));
     }
 
     @Test
     public void でないを指定した場合_getコードは_Falseを返す() {
-        assertThat(IsExistServiseHenkoRiyu.でない.getコード(), is(false));
+        assertThat(IsExistServiseHenkoRiyu.でない.hasサービス変更理由(), is(false));
     }
 
     @Test

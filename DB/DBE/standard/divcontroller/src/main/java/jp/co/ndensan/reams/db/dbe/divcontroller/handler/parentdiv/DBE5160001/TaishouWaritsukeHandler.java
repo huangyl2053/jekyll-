@@ -603,7 +603,7 @@ public class TaishouWaritsukeHandler {
                 builder.set介護認定審査会割当年月日(new FlexibleDate(RDate.getNowDate().toString()));
                 builder.set介護認定審査会審査順(gridソート順);
                 builder.set介護認定審査会審査順確定フラグ(row.getShinsajunKakuteiFlag().equals(審査順確定フラグ_確定));
-                builder.set審査会自動割付フラグ(IsShinsakaiJidoWaritsuke.手動.getコード());
+                builder.set審査会自動割付フラグ(IsShinsakaiJidoWaritsuke.手動.is審査会自動割付());
                 johoManager.save介護認定審査会割当情報(builder.build().modifiedModel());
             }
             gridソート順++;

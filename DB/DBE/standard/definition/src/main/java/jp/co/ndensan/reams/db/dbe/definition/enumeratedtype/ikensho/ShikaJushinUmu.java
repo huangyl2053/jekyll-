@@ -32,7 +32,7 @@ public enum ShikaJushinUmu {
      *
      * @return 歯科受診の有無のコード
      */
-    public boolean getコード() {
+    public boolean is歯科受診() {
         return code;
     }
 

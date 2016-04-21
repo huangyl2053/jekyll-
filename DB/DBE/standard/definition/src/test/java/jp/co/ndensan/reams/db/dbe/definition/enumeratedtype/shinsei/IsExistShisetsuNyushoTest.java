@@ -25,12 +25,12 @@ public class IsExistShisetsuNyushoTest extends DbeTestBase {
 
     @Test
     public void 入所しているを指定した場合_getコードは_Trueを返す() {
-        assertThat(IsExistShisetsuNyusho.入所している.getコード(), is(true));
+        assertThat(IsExistShisetsuNyusho.入所している.is施設入所(), is(true));
     }
 
     @Test
     public void 入所していないを指定した場合_getコードは_Falseを返す() {
-        assertThat(IsExistShisetsuNyusho.入所していない.getコード(), is(false));
+        assertThat(IsExistShisetsuNyusho.入所していない.is施設入所(), is(false));
     }
 
     @Test

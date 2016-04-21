@@ -131,7 +131,7 @@ public class GogitaiJohoSakuseiHandler {
         div.getTxtYoteiTeiin().setValue(row.getYoteiTeiin().getValue());
         div.getTxtJidoWariateTeiin().setValue(row.getJidoWariateTeiin().getValue());
         div.getTxtIinTeiin().setValue(row.getIinTeiin().getValue());
-        if (IsGogitaiSeishinkaSonzai.toValue(row.getSeishinkaiSonzai()).getコード()) {
+        if (IsGogitaiSeishinkaSonzai.toValue(row.getSeishinkaiSonzai()).is合議体精神科医存在()) {
             div.getRadSeishinkaiSonzai().setSelectedKey(SEISHINKAI_SONZAI_SURU);
         } else {
             div.getRadSeishinkaiSonzai().setSelectedKey(SEISHINKAI_SONZAI_SHINAI);

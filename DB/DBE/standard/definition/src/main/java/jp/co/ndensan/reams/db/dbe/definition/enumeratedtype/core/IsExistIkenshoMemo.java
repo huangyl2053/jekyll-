@@ -32,7 +32,7 @@ public enum IsExistIkenshoMemo {
      *
      * @return 意見書メモの有無のコード
      */
-    public boolean getコード() {
+    public boolean is意見書メモ有り() {
         return code;
     }
 

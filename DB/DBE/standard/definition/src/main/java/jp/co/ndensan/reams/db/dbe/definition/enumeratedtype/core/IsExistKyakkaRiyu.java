@@ -32,7 +32,7 @@ public enum IsExistKyakkaRiyu {
      *
      * @return 却下理由の有無のコード
      */
-    public boolean getコード() {
+    public boolean has却下理由() {
         return code;
     }
 

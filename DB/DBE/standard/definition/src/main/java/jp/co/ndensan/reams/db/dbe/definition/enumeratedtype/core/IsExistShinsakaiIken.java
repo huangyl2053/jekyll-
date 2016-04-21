@@ -32,7 +32,7 @@ public enum IsExistShinsakaiIken {
      *
      * @return 審査会意見の有無のコード
      */
-    public boolean getコード() {
+    public boolean has審査会意見() {
         return code;
     }
 

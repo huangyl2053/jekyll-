@@ -32,7 +32,7 @@ public enum IsExistShisetsuNyusho {
      *
      * @return 施設入所の有無のコード
      */
-    public boolean getコード() {
+    public boolean is施設入所() {
         return code;
     }
 

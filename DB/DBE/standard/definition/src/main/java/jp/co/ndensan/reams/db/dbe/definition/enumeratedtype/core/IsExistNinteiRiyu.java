@@ -32,7 +32,7 @@ public enum IsExistNinteiRiyu {
      *
      * @return 認定理由の有無のコード
      */
-    public boolean getコード() {
+    public boolean has認定理由() {
         return code;
     }
 

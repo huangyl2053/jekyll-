@@ -32,7 +32,7 @@ public enum IsShinsakaiJidoWaritsuke {
      *
      * @return 審査会自動割付フラグのコード
      */
-    public boolean getコード() {
+    public boolean is審査会自動割付() {
         return code;
     }
 

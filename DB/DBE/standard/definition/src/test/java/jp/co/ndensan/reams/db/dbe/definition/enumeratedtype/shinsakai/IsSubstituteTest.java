@@ -25,12 +25,12 @@ public class IsSubstituteTest extends DbeTestBase {
 
     @Test
     public void 補欠を指定した場合_getコードは_Trueを返す() {
-        assertThat(IsSubstitute.補欠.getコード(), is(true));
+        assertThat(IsSubstitute.補欠.is補欠(), is(true));
     }
 
     @Test
     public void 通常を指定した場合_getコードは_Falseを返す() {
-        assertThat(IsSubstitute.通常.getコード(), is(false));
+        assertThat(IsSubstitute.通常.is補欠(), is(false));
     }
 
     @Test

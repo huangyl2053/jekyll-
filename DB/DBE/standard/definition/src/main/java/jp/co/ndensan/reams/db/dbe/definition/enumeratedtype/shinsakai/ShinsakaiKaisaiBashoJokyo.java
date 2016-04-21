@@ -32,7 +32,7 @@ public enum ShinsakaiKaisaiBashoJokyo {
      *
      * @return 審査会開催場所状況のコード
      */
-    public boolean getコード() {
+    public boolean is審査会開催場所状況() {
         return code;
     }
 
