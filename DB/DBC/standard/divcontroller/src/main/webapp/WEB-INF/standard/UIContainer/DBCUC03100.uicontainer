@@ -55,6 +55,31 @@
      "condition": ""
     }
    ]
+  },
+  {
+   "id": 2,
+   "name": "受領委任契約申請登録",
+   "transitionList": [
+    {
+     "id": "1",
+     "type": "start",
+     "condition": "",
+     "toLayoutSubGyomuCode": "DBC",
+     "toLayoutName": "DBC0310012",
+     "toLayoutTitle": "受領委任契約申請登録・追加",
+     "toState": ""
+    },
+    {
+     "id": "2",
+     "type": "end",
+     "layoutSubGyomuCode": "DBC",
+     "layoutName": "DBC0310012",
+     "layoutTitle": "受領委任契約申請登録・追加",
+     "eventName": "処理完了",
+     "destroy": false,
+     "condition": ""
+    }
+   ]
   }
  ]
 }
