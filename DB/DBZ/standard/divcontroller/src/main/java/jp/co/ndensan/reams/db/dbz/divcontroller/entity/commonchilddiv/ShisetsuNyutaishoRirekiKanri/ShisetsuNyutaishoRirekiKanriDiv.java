@@ -401,6 +401,17 @@ public class ShisetsuNyutaishoRirekiKanriDiv extends Panel implements IShisetsuN
     }
 
     /**
+     * 共通子DIVの初期化処理です。
+     *
+     * @param 識別コード 識別コード
+     * @param 台帳種別 台帳種別
+     */
+    @Override
+    public void initialize(ShikibetsuCode 識別コード, RString 台帳種別) {
+        getHandler().initialize(識別コード, 台帳種別);
+    }
+
+    /**
      * 施設入退所履歴の共有子DIVの画面内容から、施設入退所履歴情報をDBに反映します。
      */
     @Override
