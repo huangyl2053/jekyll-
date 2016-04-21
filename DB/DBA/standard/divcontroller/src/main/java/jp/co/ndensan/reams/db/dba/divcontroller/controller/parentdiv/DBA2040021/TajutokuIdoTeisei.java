@@ -14,16 +14,12 @@ import jp.co.ndensan.reams.db.dba.divcontroller.entity.parentdiv.DBA2040021.DBA2
 import jp.co.ndensan.reams.db.dba.divcontroller.entity.parentdiv.DBA2040021.TajutokuIdoTeiseiDiv;
 import jp.co.ndensan.reams.db.dba.divcontroller.handler.parentdiv.DBA2040021.TajutokuIdoTeiseiHandler;
 import jp.co.ndensan.reams.db.dba.service.core.tashichosonjushochitokureisyaidoteisei.TaShichosonJushochiTokureisyaIdoTeisei;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbz.divcontroller.util.viewstate.ViewStateKey;
 import jp.co.ndensan.reams.db.dbz.service.TaishoshaKey;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
-import jp.co.ndensan.reams.uz.uza.biz.SetaiCode;
-import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.exclusion.LockingKey;
 import jp.co.ndensan.reams.uz.uza.exclusion.RealInitialLocker;
-import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.message.IMessageGettable;
 import jp.co.ndensan.reams.uz.uza.message.IValidationMessage;
 import jp.co.ndensan.reams.uz.uza.message.Message;
@@ -47,9 +43,6 @@ public class TajutokuIdoTeisei {
      * @return ResponseData<TajutokuIdoTeiseiDiv>
      */
     public ResponseData<TajutokuIdoTeiseiDiv> onLoad(TajutokuIdoTeiseiDiv div) {
-        TaishoshaKey taishoshaKey = new TaishoshaKey(HihokenshaNo.EMPTY,
-                new ShikibetsuCode(new RString("000000000000010")), SetaiCode.EMPTY);
-        ViewStateHolder.put(ViewStateKey.資格対象者, taishoshaKey);
         getHandler(div).load(ViewStateHolder.get(ViewStateKey.資格対象者, TaishoshaKey.class).get識別コード());
         if (!RealInitialLocker.tryGetLock(LOCKINGKEY)) {
             ValidationMessageControlPairs validationMessages = new ValidationMessageControlPairs();
