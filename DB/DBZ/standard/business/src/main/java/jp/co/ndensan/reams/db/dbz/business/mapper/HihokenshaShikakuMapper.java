@@ -7,6 +7,7 @@ package jp.co.ndensan.reams.db.dbz.business.mapper;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dbx.business.core.IKaigoShikaku;
 import jp.co.ndensan.reams.db.dbx.definition.core.enumeratedtype.JushochiTokureishaKubun;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShoKisaiHokenshaNo;
@@ -25,6 +26,7 @@ import jp.co.ndensan.reams.db.dbz.definition.core.enumeratedtype.KoikinaiJushoch
 import jp.co.ndensan.reams.db.dbz.definition.core.enumeratedtype.ShikakuHenkoJiyu;
 import jp.co.ndensan.reams.db.dbz.definition.core.valueobject.chohyokofurirekiid.ChohyoKofuRirekiID;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT1001HihokenshaDaichoEntity;
+import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
@@ -118,6 +120,7 @@ public final class HihokenshaShikakuMapper {
     }
 
     private static IHihokenshaShikaku _toHihokenshaShikaku(DbT1001HihokenshaDaichoEntity entity) {
+        requireNonNull(entity, UrSystemErrorMessages.値がnull.getReplacedMessage("被保険者台帳"));
 //        IKaigoShikaku kaigoShikaku = toKaigoShikaku(entity);
         IKaigoShikaku kaigoShikaku = toKaigoShikaku();
         ShikakuHenko 資格変更 = toShikakuHenko(

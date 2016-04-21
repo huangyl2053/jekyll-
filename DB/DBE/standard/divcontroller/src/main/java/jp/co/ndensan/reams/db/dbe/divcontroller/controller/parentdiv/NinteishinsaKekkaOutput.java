@@ -30,7 +30,7 @@ public class NinteishinsaKekkaOutput {
 
     private static final RString CST_TSUJO = new RString("0");
     private static final RString CST_SAISHORI = new RString("1");
-    private static RString shoriFlag = RString.EMPTY;
+    private RString shoriFlag = RString.EMPTY;
 
     /**
      * 認定審査結果出力画面ロード時の処理を表します。
