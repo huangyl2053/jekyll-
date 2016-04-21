@@ -56,6 +56,15 @@ public class RiyoshaFutangakuGengakuManager {
     }
 
     /**
+     * 利用者負担額減額を管理するクラスを生成します。
+     *
+     * @return 利用者負担額減額を管理するクラス
+     */
+    public static RiyoshaFutangakuGengakuManager createInstance() {
+        return InstanceProvider.create(RiyoshaFutangakuGengakuManager.class);
+    }
+
+    /**
      * 主キーに合致する利用者負担額減額を返します。
      *
      * @param parameter {@link RiyoshaFutangakuGengakuMapperParameter}
@@ -110,9 +119,28 @@ public class RiyoshaFutangakuGengakuManager {
         return 1 == dac.save(利用者負担額減額.toEntity());
     }
 
+    /**
+     * 利用者負担額減額{@link RiyoshaFutangakuGengaku}を保存します。
+     *
+     * @param 利用者負担額減額 {@link RiyoshaFutangakuGengaku}
+     * @return 更新件数 更新結果の件数を返します。
+     */
+    @Transaction
+    public boolean delete利用者負担額減額(RiyoshaFutangakuGengaku 利用者負担額減額) {
+        requireNonNull(利用者負担額減額, UrSystemErrorMessages.値がnull.getReplacedMessage("利用者負担額減額"));
+        delete減免減額申請リスト(利用者負担額減額.getGemmenGengakuShinseiList());
+        return 1 == dac.delete(利用者負担額減額.toEntity());
+    }
+
     private void save減免減額申請リスト(List<GemmenGengakuShinsei> 減免減額申請List) {
         for (GemmenGengakuShinsei 減免減額申請 : 減免減額申請List) {
             gemmenGengakuShinseiManager.save減免減額申請(減免減額申請);
+        }
+    }
+
+    private void delete減免減額申請リスト(List<GemmenGengakuShinsei> 減免減額申請List) {
+        for (GemmenGengakuShinsei 減免減額申請 : 減免減額申請List) {
+            gemmenGengakuShinseiManager.delete減免減額申請(減免減額申請);
         }
     }
 }
