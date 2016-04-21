@@ -22,6 +22,7 @@ import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaN
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaMeisho;
+import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.lang.ApplicationException;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
@@ -108,10 +109,12 @@ public class YoguKonyuhiShikyuShinseiMishinsaSearchHandler {
         JigyoshaNo 事業者番号 = new JigyoshaNo(row.getTxtJigyoshaNo().getValue());
         RString 様式番号 = row.getTxtYoshikiNo().getValue();
         RString 明細番号 = row.getTxtMeisaiNo().getValue();
+        ShikibetsuCode 識別コード = new ShikibetsuCode(row.getShikibetsuCode().getValue());
         RDate 決定日 = div.getYoguKonyuhiShikyuShinseiMishinsaResultList().getTxtKetteiYMD().getValue();
-        ViewStateHolder.put(ViewStateKeys.決定日, 決定日);
-        ViewStateHolder.put(ViewStateKeys.被保険者番号, 被保険者番号);
         ViewStateHolder.put(ViewStateKeys.状態, 審査);
+        ViewStateHolder.put(ViewStateKeys.決定日, 決定日);
+        ViewStateHolder.put(ViewStateKeys.識別コード, 識別コード);
+        ViewStateHolder.put(ViewStateKeys.被保険者番号, 被保険者番号);
         PnlTotalParameter param = new PnlTotalParameter(被保険者番号,
                 サービス提供年月, 整理番号, 事業者番号, 様式番号, 明細番号);
         ViewStateHolder.put(ViewStateKeys.支給申請情報検索キー, param);
@@ -165,6 +168,7 @@ public class YoguKonyuhiShikyuShinseiMishinsaSearchHandler {
                     Integer.parseInt(row.getTxtRiyoshaFutanAmount().getValue().toString()));
             entity.getEntity().get償還払支給申請Entity().setShiharaiKingakuTotal(row.getTxtHokenKyufuAmount().getValue());
             entity.getEntity().get償還払支給申請Entity().setShinsaKekka(row.getTxtShinsaNo().getValue());
+            entity.getEntity().set識別コード(new ShikibetsuCode(row.getShikibetsuCode().getValue()));
             updList.add(entity);
         }
         FukushiyoguKonyuhiShikyuIkkatuShinsa.createInstance().updShikyuShinsei(決定日, updList);
@@ -181,6 +185,7 @@ public class YoguKonyuhiShikyuShinseiMishinsaSearchHandler {
             AtenaMeisho 氏名 = entity.getEntity().get氏名();
             RString 審査結果 = entity.getEntity().get償還払支給申請Entity().getShinsaKekka();
             JigyoshaNo 事業者番号 = entity.getEntity().get償還払請求基本Entity().getJigyoshaNo();
+            ShikibetsuCode 識別コード = entity.getEntity().get識別コード();
             if (支給申請日 != null) {
                 row.getTxtShikyuShinseiDate().setValue(new RDate(支給申請日.toString()));
             }
@@ -197,7 +202,10 @@ public class YoguKonyuhiShikyuShinseiMishinsaSearchHandler {
                 row.getTxtShinsaResult().setValue(ShinsaNaiyoKubun.toValue(審査結果).get名称());
             }
             if (事業者番号 != null) {
-                row.getTxtJigyoshaNo().setValue(new RString(事業者番号.getColumnValue().toString()));
+                row.getTxtJigyoshaNo().setValue(事業者番号.getColumnValue());
+            }
+            if (識別コード != null) {
+                row.getShikibetsuCode().setValue(識別コード.getColumnValue());
             }
             row.getTxtHokenKyufuAmount().setValue(new Decimal(entity.getEntity().get償還払支給申請Entity().getHokenKyufugaku()));
             row.getTxtRiyoshaFutanAmount().setValue(new Decimal(entity.getEntity().get償還払支給申請Entity().getRiyoshaFutangaku()));
