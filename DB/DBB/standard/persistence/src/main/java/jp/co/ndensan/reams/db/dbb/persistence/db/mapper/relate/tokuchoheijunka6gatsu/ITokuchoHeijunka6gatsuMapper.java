@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbb.persistence.db.mapper.relate.tokuchoheijunka6gatsutsuchishoikkatsuhakko;
+package jp.co.ndensan.reams.db.dbb.persistence.db.mapper.relate.tokuchoheijunka6gatsu;
 
 import java.util.List;
 import jp.co.ndensan.reams.db.dbb.definition.mybatisprm.tokuchoheijunka6gatsutsuchishoikkatsuhakko.TokuchoHeijunka6gatsuMyBatisParameter;
@@ -13,11 +13,11 @@ import jp.co.ndensan.reams.db.dbb.entity.dbbbt35003.ChohyoHakkoEntity;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
- * 特徴平準化（特徴6月分）通知書一括発行(バッチ) Mapper
+ * 特徴平準化（特徴6月分）通知書一括発行(バッチ)のMapperクラスです。
  *
  * @reamsid_L DBB-0820-040 xuyue
  */
-public interface ITokuchoHeijunka6gatsuTsuchishoIkkatsuHakkoMapper {
+public interface ITokuchoHeijunka6gatsuMapper {
 
     /**
      * 基準日時を取得する。
@@ -99,6 +99,8 @@ public interface ITokuchoHeijunka6gatsuTsuchishoIkkatsuHakkoMapper {
 
     /**
      * 入力の出力対象区分によって、出力対象データを抽出する。
+     *
+     * @param param パラメータ
      */
     void insert通知書発行後異動者(TokuchoHeijunka6gatsuMyBatisParameter param);
 }

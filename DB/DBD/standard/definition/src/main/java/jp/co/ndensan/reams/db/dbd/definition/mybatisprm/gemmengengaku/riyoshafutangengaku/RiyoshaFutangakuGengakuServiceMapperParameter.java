@@ -14,6 +14,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
  * @reamsid_L DBD-3600-030 xuyue
  */
 @lombok.Getter
+@SuppressWarnings("PMD.UnusedPrivateField")
 public final class RiyoshaFutangakuGengakuServiceMapperParameter {
 
     private final RString 減免減額種類;
