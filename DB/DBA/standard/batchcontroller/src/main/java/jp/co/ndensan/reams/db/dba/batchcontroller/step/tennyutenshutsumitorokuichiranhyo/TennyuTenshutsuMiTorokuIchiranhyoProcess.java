@@ -108,23 +108,27 @@ public class TennyuTenshutsuMiTorokuIchiranhyoProcess extends BatchProcessBase<T
 
     @Override
     protected void process(TennyuHosyutaiSyosyaEntity entity) {
-        TennyuTenshutsuMitorokuIchiranhyoEucCsvEntity csvEntity = new TennyuTenshutsuMitorokuIchiranhyoEucCsvEntity();
-        TennyuTenshutsuMiTorokuIchiranhyoBodyItem bodyItem = new TennyuTenshutsuMiTorokuIchiranhyoBodyItem();
-        setNyuBodyItem(entity, csvEntity, bodyItem);
-        bodyItemList.add(bodyItem);
-        eucCsvList.add(csvEntity);
+        if (!processParamter.getTennyusakuseijiyucode().isEmpty()) {
+            TennyuTenshutsuMitorokuIchiranhyoEucCsvEntity csvEntity = new TennyuTenshutsuMitorokuIchiranhyoEucCsvEntity();
+            TennyuTenshutsuMiTorokuIchiranhyoBodyItem bodyItem = new TennyuTenshutsuMiTorokuIchiranhyoBodyItem();
+            setNyuBodyItem(entity, csvEntity, bodyItem);
+            bodyItemList.add(bodyItem);
+            eucCsvList.add(csvEntity);
+        }
     }
 
     @Override
     protected void afterExecute() {
-        List<TensyuHosyutaiSyosyaEntity> syuHosyutaiSyosyaEntityList = mapper.get転出保留対象者(
-                processParamter.toTennyuTensyutsuMiTorokuIchiranhyoMybatisParameter());
-        for (TensyuHosyutaiSyosyaEntity entity : syuHosyutaiSyosyaEntityList) {
-            TennyuTenshutsuMitorokuIchiranhyoEucCsvEntity csvEntity = new TennyuTenshutsuMitorokuIchiranhyoEucCsvEntity();
-            TennyuTenshutsuMiTorokuIchiranhyoBodyItem bodyItem = new TennyuTenshutsuMiTorokuIchiranhyoBodyItem();
-            setShuBodyItem(entity, csvEntity, bodyItem);
-            bodyItemList.add(bodyItem);
-            eucCsvList.add(csvEntity);
+        if (!processParamter.getTensyutsusakuseiJiyucode().isEmpty()) {
+            List<TensyuHosyutaiSyosyaEntity> syuHosyutaiSyosyaEntityList = mapper.get転出保留対象者(
+                    processParamter.toTennyuTensyutsuMiTorokuIchiranhyoMybatisParameter());
+            for (TensyuHosyutaiSyosyaEntity entity : syuHosyutaiSyosyaEntityList) {
+                TennyuTenshutsuMitorokuIchiranhyoEucCsvEntity csvEntity = new TennyuTenshutsuMitorokuIchiranhyoEucCsvEntity();
+                TennyuTenshutsuMiTorokuIchiranhyoBodyItem bodyItem = new TennyuTenshutsuMiTorokuIchiranhyoBodyItem();
+                setShuBodyItem(entity, csvEntity, bodyItem);
+                bodyItemList.add(bodyItem);
+                eucCsvList.add(csvEntity);
+            }
         }
         manager = new FileSpoolManager(UzUDE0835SpoolOutputType.EucOther, EUC_ENTITY_ID, UzUDE0831EucAccesslogFileType.Csv);
         RString spoolWorkPath = manager.getEucOutputDirectry();
