@@ -3,10 +3,10 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package jp.co.ndensan.reams.db.dbe.divcontroller.controller.commonchilddiv.ShinshinIken;
 
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.commonchilddiv.ShinshinIken.ShinshinIken.ShinshinIkenDiv;
+import jp.co.ndensan.reams.db.dbe.divcontroller.handler.parentdiv.ShinshinIken.ShinshinIkenBakHandler;
 import jp.co.ndensan.reams.db.dbe.divcontroller.handler.parentdiv.ShinshinIken.ShinshinIkenHandler;
 import jp.co.ndensan.reams.db.dbe.divcontroller.handler.parentdiv.ShinshinIken.ShinshinIkenValidationHandler;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrQuestionMessages;
@@ -20,12 +20,14 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
 /**
  *
  * 心身の意見入力のクラスです。
+ *
  * @reamsid_L DBE-3000-120 dongyabin
  */
 public class ShinshinIken {
-    
+
     /**
      * 心身の意見入力の初期化処理です。
+     *
      * @param div 画面情報
      * @return ResponseData<ShinshinIkenDiv>
      */
@@ -34,9 +36,10 @@ public class ShinshinIken {
         getHandler(div).setSelectKey();
         return ResponseData.of(div).respond();
     }
-    
+
     /**
      * 認知症周辺症状チェックボックスのChange処理です。
+     *
      * @param div 画面情報
      * @return ResponseData<ShinshinIkenDiv>
      */
@@ -44,9 +47,10 @@ public class ShinshinIken {
         getHandler(div).changeChkNinchishoShuhenShojoUmu();
         return ResponseData.of(div).respond();
     }
-    
+
     /**
      * その他認知症周辺症状チェックボックスのChange処理です。
+     *
      * @param div 画面情報
      * @return ResponseData<ShinshinIkenDiv>
      */
@@ -54,9 +58,10 @@ public class ShinshinIken {
         getHandler(div).changeChkNinchishoShuhenShojoSonota();
         return ResponseData.of(div).respond();
     }
-    
+
     /**
      * その他の精神神経症状チェックボックスのChange処理です。
+     *
      * @param div 画面情報
      * @return ResponseData<ShinshinIkenDiv>
      */
@@ -64,9 +69,10 @@ public class ShinshinIken {
         getHandler(div).changeChkSonotaShojo();
         return ResponseData.of(div).respond();
     }
-    
+
     /**
      * 専門医受診の有無チェックボックスのChange処理です。
+     *
      * @param div 画面情報
      * @return ResponseData<ShinshinIkenDiv>
      */
@@ -74,9 +80,10 @@ public class ShinshinIken {
         getHandler(div).changeChkSenmonJushin();
         return ResponseData.of(div).respond();
     }
-    
+
     /**
      * 四肢欠損チェックボックスのChange処理です。
+     *
      * @param div 画面情報
      * @return ResponseData<ShinshinIkenDiv>
      */
@@ -84,9 +91,10 @@ public class ShinshinIken {
         getHandler(div).changeChkShishiKesson();
         return ResponseData.of(div).respond();
     }
-    
+
     /**
      * 麻痺チェックボックスのChange処理です。
+     *
      * @param div 画面情報
      * @return ResponseData<ShinshinIkenDiv>
      */
@@ -94,9 +102,10 @@ public class ShinshinIken {
         getHandler(div).changeChkMahi();
         return ResponseData.of(div).respond();
     }
-    
+
     /**
      * 右上肢チェックボックスのChange処理です。
+     *
      * @param div 画面情報
      * @return ResponseData<ShinshinIkenDiv>
      */
@@ -104,9 +113,10 @@ public class ShinshinIken {
         getHandler(div).changeChkMigiJoshiMahi();
         return ResponseData.of(div).respond();
     }
-    
+
     /**
      * 左上肢チェックボックスのChange処理です。
+     *
      * @param div 画面情報
      * @return ResponseData<ShinshinIkenDiv>
      */
@@ -114,9 +124,10 @@ public class ShinshinIken {
         getHandler(div).changeChkHidariJoshiMahi();
         return ResponseData.of(div).respond();
     }
-    
+
     /**
      * 右下肢チェックボックスのChange処理です。
+     *
      * @param div 画面情報
      * @return ResponseData<ShinshinIkenDiv>
      */
@@ -124,9 +135,10 @@ public class ShinshinIken {
         getHandler(div).changeChkMigiKashiMahi();
         return ResponseData.of(div).respond();
     }
-    
+
     /**
      * 左下肢チェックボックスのChange処理です。
+     *
      * @param div 画面情報
      * @return ResponseData<ShinshinIkenDiv>
      */
@@ -134,9 +146,10 @@ public class ShinshinIken {
         getHandler(div).changeChkHidariKashiMahi();
         return ResponseData.of(div).respond();
     }
-    
+
     /**
      * その他麻痺チェックボックスのChange処理です。
+     *
      * @param div 画面情報
      * @return ResponseData<ShinshinIkenDiv>
      */
@@ -144,9 +157,10 @@ public class ShinshinIken {
         getHandler(div).changeChkSonotaMahi();
         return ResponseData.of(div).respond();
     }
-    
+
     /**
      * 筋力の低下チェックボックスのChange処理です。
+     *
      * @param div 画面情報
      * @return ResponseData<ShinshinIkenDiv>
      */
@@ -154,9 +168,10 @@ public class ShinshinIken {
         getHandler(div).changeChkKinryokuTeika();
         return ResponseData.of(div).respond();
     }
-    
+
     /**
      * 関節の拘縮チェックボックスのChange処理です。
+     *
      * @param div 画面情報
      * @return ResponseData<ShinshinIkenDiv>
      */
@@ -164,9 +179,10 @@ public class ShinshinIken {
         getHandler(div).changeChkKansetsuKoshuku();
         return ResponseData.of(div).respond();
     }
-    
+
     /**
      * 関節の痛みチェックボックスのChange処理です。
+     *
      * @param div 画面情報
      * @return ResponseData<ShinshinIkenDiv>
      */
@@ -174,9 +190,10 @@ public class ShinshinIken {
         getHandler(div).changeChkKansetsuItami();
         return ResponseData.of(div).respond();
     }
-    
+
     /**
      * 失調不随意運動チェックボックスのChange処理です。
+     *
      * @param div 画面情報
      * @return ResponseData<ShinshinIkenDiv>
      */
@@ -184,9 +201,10 @@ public class ShinshinIken {
         getHandler(div).changeChkShicchoFuzuii();
         return ResponseData.of(div).respond();
     }
-    
+
     /**
      * 褥瘡チェックボックスのChange処理です。
+     *
      * @param div 画面情報
      * @return ResponseData<ShinshinIkenDiv>
      */
@@ -194,9 +212,10 @@ public class ShinshinIken {
         getHandler(div).changeChkJokuso();
         return ResponseData.of(div).respond();
     }
-    
+
     /**
      * その他皮膚疾患チェックボックスのChange処理です。
+     *
      * @param div 画面情報
      * @return ResponseData<ShinshinIkenDiv>
      */
@@ -204,9 +223,10 @@ public class ShinshinIken {
         getHandler(div).changeChkSonotaHifuShikkan();
         return ResponseData.of(div).respond();
     }
-    
+
     /**
      * 確定ボタンを押します。
+     *
      * @param div 画面情報
      * @return ResponseData<ShinshinIkenDiv>
      */
@@ -216,7 +236,7 @@ public class ShinshinIken {
             return ResponseData.of(div).addValidationMessages(validPairs).respond();
         }
         if (div.getSelectKeys().equals(getHandler(div).getSelectKey())) {
-            return ResponseData.of(div).dialogOKClose(); 
+            return ResponseData.of(div).dialogOKClose();
         }
         if (!ResponseHolder.isReRequest()) {
             QuestionMessage message = new QuestionMessage(UrQuestionMessages.確定の確認.getMessage().getCode(),
@@ -226,20 +246,21 @@ public class ShinshinIken {
         if (new RString(UrQuestionMessages.確定の確認.getMessage().getCode())
                 .equals(ResponseHolder.getMessageCode())
                 && ResponseHolder.getButtonType().equals(MessageDialogSelectedResult.Yes)) {
-            getHandler(div).onClickBtnKakutei();
+            getHandlerBak(div).onClickBtnKakutei();
             return ResponseData.of(div).dialogOKClose();
         }
         return ResponseData.of(div).respond();
     }
-    
+
     /**
      * 取消ボタンを押します。
+     *
      * @param div 画面情報
      * @return ResponseData<ShinshinIkenDiv>
      */
     public ResponseData<ShinshinIkenDiv> onClickBtnCancel(ShinshinIkenDiv div) {
         if (div.getSelectKeys().equals(getHandler(div).getSelectKey())) {
-            return ResponseData.of(div).dialogOKClose(); 
+            return ResponseData.of(div).dialogOKClose();
         }
         if (!ResponseHolder.isReRequest()) {
             QuestionMessage message = new QuestionMessage(UrQuestionMessages.画面遷移の確認.getMessage().getCode(),
@@ -253,13 +274,16 @@ public class ShinshinIken {
         }
         return ResponseData.of(div).respond();
     }
-    
+
     private ShinshinIkenHandler getHandler(ShinshinIkenDiv div) {
         return new ShinshinIkenHandler(div);
     }
-    
+
     private ShinshinIkenValidationHandler getValidationHandler(ShinshinIkenDiv div) {
         return new ShinshinIkenValidationHandler(div);
     }
-    
+
+    private ShinshinIkenBakHandler getHandlerBak(ShinshinIkenDiv div) {
+        return new ShinshinIkenBakHandler(div);
+    }
 }

@@ -5,6 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.RoreiFukushiNenkinShokai;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
@@ -26,6 +27,7 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
 
 /**
  * 老齢福祉年金画面のハンドラークラスです。
+ *
  * @reamsid_L DBA-0220-010 dongyabin
  */
 public class RoreiFukushiNenkinShokaiHandler {
@@ -170,9 +172,9 @@ public class RoreiFukushiNenkinShokaiHandler {
             RoreiFukushiNenkinJukyusha roreifukushinenkinjukyusha) {
         if (div.getPanelInput().getTxtEndDate().getValue() == null) {
             return roreifukushinenkinjukyusha.createBuilderForEdit()
-                .set被保険者番号(new HihokenshaNo(div.getHihokenshaNo()))
-                .set受給廃止年月日(null)
-                .build();
+                    .set被保険者番号(new HihokenshaNo(div.getHihokenshaNo()))
+                    .set受給廃止年月日(null)
+                    .build();
         }
         return roreifukushinenkinjukyusha.createBuilderForEdit()
                 .set被保険者番号(new HihokenshaNo(div.getHihokenshaNo()))
@@ -206,6 +208,7 @@ public class RoreiFukushiNenkinShokaiHandler {
 
     /**
      * 老齢福祉年金「追加モード」の場合、「受給開始日の重複チェック」、 DBには、既に存在していれば、エラーとする。
+     *
      * @return ValidationMessageControlPairs
      */
     public ValidationMessageControlPairs set受給開始日の重複チェック() {
@@ -216,8 +219,8 @@ public class RoreiFukushiNenkinShokaiHandler {
                 HihokenshaNo.EMPTY,
                 FlexibleDate.EMPTY);
         if (RoreiFukushiNenkinJukyushaManager.createInstance().checkSameJukyuKaishibi(addCheck) > 0) {
-            addMessage_既に登録済(validPairs, 
-                        div.getPanelInput().getTxtStartDate().getValue().toString());
+            addMessage_既に登録済(validPairs,
+                    div.getPanelInput().getTxtStartDate().getValue().toString());
         }
         return validPairs;
     }
@@ -249,7 +252,7 @@ public class RoreiFukushiNenkinShokaiHandler {
         for (int i = 0; i < list.size() - 1; i++) {
             if (!list.get(i).getEndDate().getValue()
                     .isBefore(list.get(i + 1).getStartDate().getValue())) {
-                addMessage(validPairs, 
+                addMessage(validPairs,
                         list.get(i).getEndDate().getValue().toString(),
                         list.get(i + 1).getStartDate().getValue().toString());
             }
@@ -261,7 +264,9 @@ public class RoreiFukushiNenkinShokaiHandler {
      * 老齢福祉年金情報グリッドの受給開始年月日、受給廃止年月日を受給開始年月日の昇順、受給廃止年月日の昇順処理です。
      *
      */
-    public class ComparatorByStartDateSort implements Comparator {
+    public static class ComparatorByStartDateSort implements Comparator, Serializable {
+
+        private static final long serialVersionUID = -5365704613493047853L;
 
         @Override
         public int compare(Object arg0, Object arg1) {
@@ -269,6 +274,7 @@ public class RoreiFukushiNenkinShokaiHandler {
             datagridRireki_Row row1 = (datagridRireki_Row) arg1;
             return row0.getStartDate().getValue().compareTo(row1.getStartDate().getValue());
         }
+
     }
 
     private List<datagridRireki_Row> getSeiReKi(List<datagridRireki_Row> list) {
@@ -280,9 +286,10 @@ public class RoreiFukushiNenkinShokaiHandler {
         }
         return tempList;
     }
-    
+
     /**
      * 期間が不正チェックです。
+     *
      * @param validPairs ValidationMessageControlPairs
      * @param replace 受給開始日
      * @param replace1 受給廃止日
@@ -290,17 +297,17 @@ public class RoreiFukushiNenkinShokaiHandler {
      */
     public ValidationMessageControlPairs addMessage(ValidationMessageControlPairs validPairs, String replace, String replace1) {
         validPairs.add(new ValidationMessageControlPair(new IdocheckMessages(
-                    UrErrorMessages.期間が不正_追加メッセージあり２, replace, replace1), div.getPanelInput()
-                            .getTxtStartDate(), div.getPanelInput().getTxtEndDate()));
+                UrErrorMessages.期間が不正_追加メッセージあり２, replace, replace1), div.getPanelInput()
+                .getTxtStartDate(), div.getPanelInput().getTxtEndDate()));
         return validPairs;
     }
-    
+
     private ValidationMessageControlPairs addMessage_既に登録済(ValidationMessageControlPairs validPairs, String replace) {
         validPairs.add(new ValidationMessageControlPair(new IdocheckMessages(
-                    UrErrorMessages.既に登録済, replace), div.getPanelInput().getTxtStartDate()));
+                UrErrorMessages.既に登録済, replace), div.getPanelInput().getTxtStartDate()));
         return validPairs;
     }
-    
+
     private static class IdocheckMessages implements IValidationMessage {
 
         private final Message message;
