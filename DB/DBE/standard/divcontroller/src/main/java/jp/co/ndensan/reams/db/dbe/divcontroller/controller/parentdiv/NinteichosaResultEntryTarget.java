@@ -91,14 +91,11 @@ public class NinteichosaResultEntryTarget {
             for (dgNinteichosaResultTaishosha_Row row : dgTargetPersons(div).getDataSource()) {
                 if (row.getHihokenshaNo().equals(target.getHihokenshaNo())) {
                     list.add(target);
-                    if (canBeSet_chosaKanryoDate(target)) {
-                        setDisabled_btnCommonToCompleteChosa(false);
-                    }
                 } else {
                     list.add(row);
-                    if (canBeSet_chosaKanryoDate(row)) {
-                        setDisabled_btnCommonToCompleteChosa(false);
-                    }
+                }
+                if (canBeSet_chosaKanryoDate(target) || canBeSet_chosaKanryoDate(row)) {
+                    setDisabled_btnCommonToCompleteChosa(false);
                 }
             }
             dgTargetPersons(div).setDataSource(list);

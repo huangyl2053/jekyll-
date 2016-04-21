@@ -4,15 +4,15 @@
  */
 package jp.co.ndensan.reams.db.dbe.business.core.ichijihanteiresult;
 
-import jp.co.ndensan.reams.db.dbe.business.core.ichijihanteikeikoku.IchijiHanteiKeikokuList;
 import java.util.EnumMap;
 import java.util.Map;
-import jp.co.ndensan.reams.db.dbe.business.core.ninchishokoreishajiritsudo.NinchishoKoreishaJiritsudoGaizenseiHyokaKomoku;
+import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dbe.business.core.NoryokuMiteikaNinchishoKoreishaShihyoKomoku;
 import jp.co.ndensan.reams.db.dbe.business.core.SuiteiKyuhuKubun;
+import jp.co.ndensan.reams.db.dbe.business.core.ichijihanteikeikoku.IchijiHanteiKeikokuList;
+import jp.co.ndensan.reams.db.dbe.business.core.ninchishokoreishajiritsudo.NinchishoKoreishaJiritsudoGaizenseiHyokaKomoku;
 import jp.co.ndensan.reams.db.dbe.business.core.yokaigonintei.YokaigoNinteiChukanHyokaKomokuTokuten;
 import jp.co.ndensan.reams.db.dbe.business.core.yokaigonintei.YokaigoNinteiKijunTime;
-import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dbe.definition.core.enumeratedtype.KariIchijiHanteiKubun;
 import jp.co.ndensan.reams.db.dbe.definition.core.enumeratedtype.KoroshoIFKubun;
 import jp.co.ndensan.reams.db.dbe.definition.core.enumeratedtype.NichijoSeikatsuJiritsudoKumiawaseItem;
@@ -238,9 +238,11 @@ public final class IchijiHanteiResultDetail {
     /**
      * 一次判定結果詳細のBuilderです。
      */
-    public static final class Builder implements IShinseishoKanriNoSetter, IKoroshoIFKubunSetter, IKariIchijiHanteiKubunSetter, IchijiHanteiDateSetter,
-            IchijiHanteiResultSetter, INinchishoKasanIchijiHanteiResultSetter, IYokaigoNinteiKijunTimeSetter, IChukanHyokaKomokuTokutenSetter,
-            IchijiHanteiKeikokuListSetter, IJotaiAnteiseiSetter, IGaizenseiSetter, ISuiteiKyuhuKubunSetter, IOthersSetter {
+    public static final class Builder implements IShinseishoKanriNoSetter, IKoroshoIFKubunSetter,
+            IKariIchijiHanteiKubunSetter, IchijiHanteiDateSetter,
+            IchijiHanteiResultSetter, INinchishoKasanIchijiHanteiResultSetter, IYokaigoNinteiKijunTimeSetter,
+            IChukanHyokaKomokuTokutenSetter, IchijiHanteiKeikokuListSetter, IJotaiAnteiseiSetter,
+            IGaizenseiSetter, ISuiteiKyuhuKubunSetter, IOthersSetter {
 
         private ShinseishoKanriNo 申請書管理番号;
         private KoroshoIFKubun 厚労省IF区分;
@@ -261,8 +263,7 @@ public final class IchijiHanteiResultDetail {
         private IchijiHanteiResultSofu 一次判定結果送付状況;
 
         /**
-         * 一次判定結果詳細のBuilderインスタンスを生成します。
-         * 認定ソフト2006年度版のときに使用されていた指標や送付区分などについては、ここで初期値を設定します。
+         * 一次判定結果詳細のBuilderインスタンスを生成します。 認定ソフト2006年度版のときに使用されていた指標や送付区分などについては、ここで初期値を設定します。
          */
         private Builder() {
             this.運動能力未低下認知症高齢者指標

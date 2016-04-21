@@ -164,10 +164,7 @@ public class NinteichosaIraiEntry {
     }
 
     private void setDisabled_btnToCallNext(boolean disabled) {
-        try {
-            CommonButtonHolder.setDisabledByCommonButtonFieldName(new RString("btnToCallNext"), disabled);
-        } catch (Exception e) {
-        }
+        CommonButtonHolder.setDisabledByCommonButtonFieldName(new RString("btnToCallNext"), disabled);
     }
 
     /**
