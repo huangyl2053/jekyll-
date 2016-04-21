@@ -69,13 +69,14 @@ public class KaigoHokenShikakushasho {
     private static final RString 居宅支援事業者履歴_2 = new RString("2");
     private static final RString 居宅支援事業者履歴_3 = new RString("3");
     private static final ReportId 帳票分類ID = new ReportId("DBA100003_Shikakushasho");
-    private static final RString 帳票独自 = new RString("1");
-    private static final RString 市町村共通 = new RString("0");
-    private static final RString 編集方法_1 = new RString("1");
-    private static final RString 編集方法_2 = new RString("2");
-    private static final RString 編集方法_3 = new RString("3");
-    private static final RString 編集方法_4 = new RString("4");
-    private static final RString 編集方法_5 = new RString("5");
+    // TODO QA:1088 Redmine：  (住所の編集方法がわかりません。)
+//    private static final RString 帳票独自 = new RString("1");
+//    private static final RString 市町村共通 = new RString("0");
+//    private static final RString 編集方法_1 = new RString("1");
+//    private static final RString 編集方法_2 = new RString("2");
+//    private static final RString 編集方法_3 = new RString("3");
+//    private static final RString 編集方法_4 = new RString("4");
+//    private static final RString 編集方法_5 = new RString("5");
     private static final RString 管内区分 = new RString("1");
     private static final RString 管外区分 = new RString("2");
     private static final RString 年号_明治 = new RString("明治");
@@ -250,7 +251,7 @@ public class KaigoHokenShikakushasho {
 
     }
 
-    // TODO QA:1088 Redmine：  (住所の編集方法)
+    // TODO QA:1088 Redmine：  (住所の編集方法がわかりません。)
     private RString set住所() {
 //        if (市町村共通.equals(帳票制御共通Entity.getJushoHenshuKubun())) {
 //

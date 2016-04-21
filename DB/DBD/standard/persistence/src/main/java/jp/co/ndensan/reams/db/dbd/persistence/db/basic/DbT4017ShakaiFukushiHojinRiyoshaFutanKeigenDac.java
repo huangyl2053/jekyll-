@@ -22,6 +22,7 @@ import jp.co.ndensan.reams.uz.uza.core.mybatis.SqlSession;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.util.db.DbAccessorNormalType;
+import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.and;
 import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.eq;
 import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.leq;
@@ -116,6 +117,20 @@ public class DbT4017ShakaiFukushiHojinRiyoshaFutanKeigenDac {
                                 eq(shoKisaiHokenshaNo, 証記載保険者番号),
                                 eq(hihokenshaNo, 被保険者番号))).
                 toList(DbT4017ShakaiFukushiHojinRiyoshaFutanKeigenEntity.class);
+    }
+
+    /**
+     * キーで支払方法変更を取得します。
+     *
+     * @param entity entity
+     * @return 削除件数
+     */
+    @Transaction
+    public int delete(DbT4017ShakaiFukushiHojinRiyoshaFutanKeigenEntity entity) {
+
+        requireNonNull(entity, UrSystemErrorMessages.値がnull.getReplacedMessage("支払方法変更エンティティ"));
+        entity.setState(EntityDataState.Deleted);
+        return DbAccessors.saveOrDeletePhysicalBy(new DbAccessorNormalType(session), entity);
     }
 
     /**
