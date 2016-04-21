@@ -18,7 +18,7 @@ import jp.co.ndensan.reams.uz.uza.report.ReportPropertyBase;
  */
 public class NinteiKoshinTsuchishoProperty extends ReportPropertyBase<NinteiKoshinTsuchisho> {
 
-    private static final ReportId ID = ReportIdDBD.DBDPR12002_1.getReportId();
+    private static final ReportId ID = ReportIdDBD.DBDPR12002_1_1.getReportId();
 
     /**
      * インスタンスを生成します。
