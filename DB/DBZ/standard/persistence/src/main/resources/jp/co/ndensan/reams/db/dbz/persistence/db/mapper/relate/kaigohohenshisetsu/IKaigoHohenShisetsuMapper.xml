@@ -31,39 +31,208 @@ and open the template in the editor.
         <result property="roomKigoNo" column="dbT1004ShisetsuNyutaisho_roomKigoNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
     </resultMap>
     
-    <select id="getShiSeTsuJyoHon" parameterType="jp.co.ndensan.reams.db.dbz.definition.mybatisprm.kaigohohenshisetsu.KaigoHohenShisetsuMybatisParameter" resultMap="ResultMap_DbT1004ShisetsuNyutaishoEntity">
-        SELECT
-         "DbT1004ShisetsuNyutaisho"."shikibetsuCode" as "dbT1004ShisetsuNyutaisho_shikibetsuCode",
-         "DbT1004ShisetsuNyutaisho"."rirekiNo" as "dbT1004ShisetsuNyutaisho_rirekiNo",
-         "DbT1004ShisetsuNyutaisho"."insertDantaiCd" as "dbT1004ShisetsuNyutaisho_insertDantaiCd",
-         "DbT1004ShisetsuNyutaisho"."insertTimestamp" as "dbT1004ShisetsuNyutaisho_insertTimestamp",
-         "DbT1004ShisetsuNyutaisho"."insertReamsLoginId" as "dbT1004ShisetsuNyutaisho_insertReamsLoginId",
-         "DbT1004ShisetsuNyutaisho"."insertContextId" as "dbT1004ShisetsuNyutaisho_insertContextId",
-         "DbT1004ShisetsuNyutaisho"."isDeleted" as "dbT1004ShisetsuNyutaisho_isDeleted",
-         "DbT1004ShisetsuNyutaisho"."updateCount" as "dbT1004ShisetsuNyutaisho_updateCount",
-         "DbT1004ShisetsuNyutaisho"."lastUpdateTimestamp" as "dbT1004ShisetsuNyutaisho_lastUpdateTimestamp",
-         "DbT1004ShisetsuNyutaisho"."lastUpdateReamsLoginId" as "dbT1004ShisetsuNyutaisho_lastUpdateReamsLoginId",
-         "DbT1004ShisetsuNyutaisho"."shichosonCode" as "dbT1004ShisetsuNyutaisho_shichosonCode",
-         "DbT1004ShisetsuNyutaisho"."daichoShubetsu" as "dbT1004ShisetsuNyutaisho_daichoShubetsu",
-         "DbT1004ShisetsuNyutaisho"."nyushoShisetsuShurui" as "dbT1004ShisetsuNyutaisho_nyushoShisetsuShurui",
-         "DbT1004ShisetsuNyutaisho"."nyushoShisetsuCode" as "dbT1004ShisetsuNyutaisho_nyushoShisetsuCode",
-         "DbT1004ShisetsuNyutaisho"."nyushoShoriYMD" as "dbT1004ShisetsuNyutaisho_nyushoShoriYMD",
-         "DbT1004ShisetsuNyutaisho"."nyushoYMD" as "dbT1004ShisetsuNyutaisho_nyushoYMD",
-         "DbT1004ShisetsuNyutaisho"."taishoShoriYMD" as "dbT1004ShisetsuNyutaisho_taishoShoriYMD",
-         "DbT1004ShisetsuNyutaisho"."taishoYMD" as "dbT1004ShisetsuNyutaisho_taishoYMD",
-         "DbT1004ShisetsuNyutaisho"."roomKigoNo" as "dbT1004ShisetsuNyutaisho_roomKigoNo"
-        FROM
-        rgdb."DbT1004ShisetsuNyutaisho"
-        WHERE
-        rgdb."DbT1004ShisetsuNyutaisho"."shikibetsuCode" = #{shikibetsuCode}
-        AND 
-        rgdb."DbT1004ShisetsuNyutaisho"."isDeleted" = FALSE
+    <select id="getShiSeTsuJyoHon_A" parameterType="jp.co.ndensan.reams.db.dbz.definition.mybatisprm.kaigohohenshisetsu.KaigoHohenShisetsuMybatisParameter" resultMap="ResultMap_DbT1004ShisetsuNyutaishoEntity">
+        (SELECT  
+            DbT1004."shikibetsuCode" as "dbT1004ShisetsuNyutaisho_shikibetsuCode",
+            DbT1004."rirekiNo" as "dbT1004ShisetsuNyutaisho_rirekiNo",
+            DbT1004."insertDantaiCd" as "dbT1004ShisetsuNyutaisho_insertDantaiCd",
+            DbT1004."insertTimestamp" as "dbT1004ShisetsuNyutaisho_insertTimestamp",
+            DbT1004."insertReamsLoginId" as "dbT1004ShisetsuNyutaisho_insertReamsLoginId",
+            DbT1004."insertContextId" as "dbT1004ShisetsuNyutaisho_insertContextId",
+            DbT1004."isDeleted" as "dbT1004ShisetsuNyutaisho_isDeleted",
+            DbT1004."updateCount" as "dbT1004ShisetsuNyutaisho_updateCount",
+            DbT1004."lastUpdateTimestamp" as "dbT1004ShisetsuNyutaisho_lastUpdateTimestamp",
+            DbT1004."lastUpdateReamsLoginId" as "dbT1004ShisetsuNyutaisho_lastUpdateReamsLoginId",
+            DbT1004."shichosonCode" as "dbT1004ShisetsuNyutaisho_shichosonCode",
+            DbT1004."daichoShubetsu" as "dbT1004ShisetsuNyutaisho_daichoShubetsu",
+            DbT1004."nyushoShisetsuShurui" as "dbT1004ShisetsuNyutaisho_nyushoShisetsuShurui",
+            DbT1004."nyushoShisetsuCode" as "dbT1004ShisetsuNyutaisho_nyushoShisetsuCode",
+            DbT1004."nyushoShoriYMD" as "dbT1004ShisetsuNyutaisho_nyushoShoriYMD",
+            DbT1004."nyushoYMD" as "dbT1004ShisetsuNyutaisho_nyushoYMD",
+            DbT1004."taishoShoriYMD" as "dbT1004ShisetsuNyutaisho_taishoShoriYMD",
+            DbT1004."taishoYMD" as "dbT1004ShisetsuNyutaisho_taishoYMD",
+            DbT1004."roomKigoNo" as "dbT1004ShisetsuNyutaisho_roomKigoNo"
+        FROM      
+            rgdb."DbT1004ShisetsuNyutaisho"   AS DbT1004
+        LEFT JOIN 
+            rgdb."DbT7060KaigoJigyosha" AS DbT7060
+        ON          DbT7060."jigyoshaNo" = DbT1004."nyushoShisetsuCode"
+        WHERE 
+            DbT1004."shikibetsuCode" = #{shikibetsuCode}
+            AND         DbT1004."nyushoShisetsuShurui" = #{入所施設種類_介護保険施設}
+            AND         DbT7060."yukoKaishiYMD" = (SELECT MAX(rgdb."DbT7060KaigoJigyosha"."yukoKaishiYMD")
+                                                        FROM  rgdb."DbT7060KaigoJigyosha"
+                                                        WHERE rgdb."DbT7060KaigoJigyosha"."jigyoshaNo" =  DbT1004."nyushoShisetsuCode")
         ORDER BY
-        rgdb."DbT1004ShisetsuNyutaisho"."rirekiNo",
-        rgdb."DbT1004ShisetsuNyutaisho"."nyushoYMD"
+            DbT1004."rirekiNo",
+            DbT1004."nyushoYMD")
+        UNION
+            (SELECT  
+                DbT1004."shikibetsuCode" as "dbT1004ShisetsuNyutaisho_shikibetsuCode",
+                DbT1004."rirekiNo" as "dbT1004ShisetsuNyutaisho_rirekiNo",
+                DbT1004."insertDantaiCd" as "dbT1004ShisetsuNyutaisho_insertDantaiCd",
+                DbT1004."insertTimestamp" as "dbT1004ShisetsuNyutaisho_insertTimestamp",
+                DbT1004."insertReamsLoginId" as "dbT1004ShisetsuNyutaisho_insertReamsLoginId",
+                DbT1004."insertContextId" as "dbT1004ShisetsuNyutaisho_insertContextId",
+                DbT1004."isDeleted" as "dbT1004ShisetsuNyutaisho_isDeleted",
+                DbT1004."updateCount" as "dbT1004ShisetsuNyutaisho_updateCount",
+                DbT1004."lastUpdateTimestamp" as "dbT1004ShisetsuNyutaisho_lastUpdateTimestamp",
+                DbT1004."lastUpdateReamsLoginId" as "dbT1004ShisetsuNyutaisho_lastUpdateReamsLoginId",
+                DbT1004."shichosonCode" as "dbT1004ShisetsuNyutaisho_shichosonCode",
+                DbT1004."daichoShubetsu" as "dbT1004ShisetsuNyutaisho_daichoShubetsu",
+                DbT1004."nyushoShisetsuShurui" as "dbT1004ShisetsuNyutaisho_nyushoShisetsuShurui",
+                DbT1004."nyushoShisetsuCode" as "dbT1004ShisetsuNyutaisho_nyushoShisetsuCode",
+                DbT1004."nyushoShoriYMD" as "dbT1004ShisetsuNyutaisho_nyushoShoriYMD",
+                DbT1004."nyushoYMD" as "dbT1004ShisetsuNyutaisho_nyushoYMD",
+                DbT1004."taishoShoriYMD" as "dbT1004ShisetsuNyutaisho_taishoShoriYMD",
+                DbT1004."taishoYMD" as "dbT1004ShisetsuNyutaisho_taishoYMD",
+                DbT1004."roomKigoNo" as "dbT1004ShisetsuNyutaisho_roomKigoNo"
+            FROM 
+                rgdb."DbT1004ShisetsuNyutaisho" AS DbT1004
+            LEFT JOIN 
+                rgdb."DbT1005KaigoJogaiTokureiTaishoShisetsu" AS DbT1005
+            ON        DbT1005."jigyoshaNo" = DbT1004."nyushoShisetsuCode"
+            WHERE
+                DbT1004."shikibetsuCode" = #{shikibetsuCode}
+                AND         DbT1004."nyushoShisetsuShurui" = #{入所施設種類_住所地特例対象施設} 
+                AND         DbT1005."jigyoshaShubetsu" = #{事業者種別_住所地特例対象施設}
+                AND         DbT1005."yukoKaishiYMD" = ( SELECT MAX(rgdb."DbT1005KaigoJogaiTokureiTaishoShisetsu"."yukoKaishiYMD")
+                                                                FROM  rgdb."DbT1005KaigoJogaiTokureiTaishoShisetsu"
+                                                                WHERE DbT1005."jigyoshaNo" = DbT1004."nyushoShisetsuCode"
+                                                                AND  DbT1005."jigyoshaShubetsu" = DbT1004."nyushoShisetsuShurui")
+            ORDER BY
+                DbT1004."rirekiNo", DbT1004."nyushoYMD")
+         UNION
+            (SELECT  
+                DbT1004."shikibetsuCode" as "dbT1004ShisetsuNyutaisho_shikibetsuCode",
+                DbT1004."rirekiNo" as "dbT1004ShisetsuNyutaisho_rirekiNo",
+                DbT1004."insertDantaiCd" as "dbT1004ShisetsuNyutaisho_insertDantaiCd",
+                DbT1004."insertTimestamp" as "dbT1004ShisetsuNyutaisho_insertTimestamp",
+                DbT1004."insertReamsLoginId" as "dbT1004ShisetsuNyutaisho_insertReamsLoginId",
+                DbT1004."insertContextId" as "dbT1004ShisetsuNyutaisho_insertContextId",
+                DbT1004."isDeleted" as "dbT1004ShisetsuNyutaisho_isDeleted",
+                DbT1004."updateCount" as "dbT1004ShisetsuNyutaisho_updateCount",
+                DbT1004."lastUpdateTimestamp" as "dbT1004ShisetsuNyutaisho_lastUpdateTimestamp",
+                DbT1004."lastUpdateReamsLoginId" as "dbT1004ShisetsuNyutaisho_lastUpdateReamsLoginId",
+                DbT1004."shichosonCode" as "dbT1004ShisetsuNyutaisho_shichosonCode",
+                DbT1004."daichoShubetsu" as "dbT1004ShisetsuNyutaisho_daichoShubetsu",
+                DbT1004."nyushoShisetsuShurui" as "dbT1004ShisetsuNyutaisho_nyushoShisetsuShurui",
+                DbT1004."nyushoShisetsuCode" as "dbT1004ShisetsuNyutaisho_nyushoShisetsuCode",
+                DbT1004."nyushoShoriYMD" as "dbT1004ShisetsuNyutaisho_nyushoShoriYMD",
+                DbT1004."nyushoYMD" as "dbT1004ShisetsuNyutaisho_nyushoYMD",
+                DbT1004."taishoShoriYMD" as "dbT1004ShisetsuNyutaisho_taishoShoriYMD",
+                DbT1004."taishoYMD" as "dbT1004ShisetsuNyutaisho_taishoYMD",
+                DbT1004."roomKigoNo" as "dbT1004ShisetsuNyutaisho_roomKigoNo"
+            FROM      
+                rgdb."DbT1004ShisetsuNyutaisho" AS DbT1004
+            LEFT JOIN 
+                rgdb."DbT1005KaigoJogaiTokureiTaishoShisetsu" AS DbT1005
+                ON  DbT1005."jigyoshaNo" = DbT1004."nyushoShisetsuCode"
+            WHERE
+                DbT1004."shikibetsuCode" = #{shikibetsuCode}
+                AND   DbT1004."nyushoShisetsuShurui" = #{入所施設種類_適用除外施設}
+                AND   DbT1005."jigyoshaShubetsu" = #{事業者種別_適用除外施設}
+                AND   DbT1005."yukoKaishiYMD" = ( SELECT MAX(rgdb."DbT1005KaigoJogaiTokureiTaishoShisetsu"."yukoKaishiYMD")
+                                                FROM  rgdb."DbT1005KaigoJogaiTokureiTaishoShisetsu"
+                                                WHERE DbT1005."jigyoshaNo" = DbT1004."nyushoShisetsuCode"
+                                                AND  DbT1005."jigyoshaShubetsu" = DbT1004."nyushoShisetsuShurui")
+            ORDER BY
+                DbT1004."rirekiNo", DbT1004."nyushoYMD")
     </select>
     
-     <resultMap id="result_selct施設情報の取得" type="jp.co.ndensan.reams.db.dbz.entity.db.relate.kaigohohenshisetsu.KaigoHohenShisetsuRelateEntity">
+    <select id="getShiSeTsuJyoHon_I" parameterType="jp.co.ndensan.reams.db.dbz.definition.mybatisprm.kaigohohenshisetsu.KaigoHohenShisetsuMybatisParameter" resultMap="ResultMap_DbT1004ShisetsuNyutaishoEntity">
+        <if test="被保険者台帳_他住所地特例者台帳の時_フラグ">
+          (SELECT  
+              DbT1004."shikibetsuCode"         AS  shikibetsuCode
+            , DbT1004."rirekiNo"               AS  rirekiNo
+            , DbT1004."shichosonCode"          AS  shikibetsuCode
+            , DbT1004."daichoShubetsu"         AS  daichoShubetsu
+            , DbT1004."nyushoShisetsuShurui"   AS  nyushoShisetsuShurui
+            , DbT1004."nyushoShisetsuCode"     AS  nyushoShisetsuCode
+            , DbT1004."nyushoShoriYMD"         AS  nyushoShoriYMD
+            , DbT1004."nyushoYMD"              AS  nyushoYMD
+            , DbT1004."taishoShoriYMD"         AS  taishoShoriYMD
+            , DbT1004."taishoYMD"              AS  taishoYMD
+            , DbT1004."roomKigoNo"             AS  roomKigoNo
+            , DbT7060."jigyoshaName"           AS  jigyoshaName
+            FROM      
+                rgdb."DbT1004ShisetsuNyutaisho"   AS DbT1004
+            LEFT JOIN 
+                rgdb."DbT7060KaigoJigyosha" AS DbT7060
+            ON  DbT7060."jigyoshaNo" = DbT1004."nyushoShisetsuCode"
+            WHERE 
+                DbT1004."shikibetsuCode" = #{shikibetsuCode}
+                AND         DbT1004."nyushoShisetsuShurui" = #{入所施設種類_介護保険施設}
+                AND         DbT1004."daichoShubetsu" = #{台帳種別}
+                AND         DbT7060."yukoKaishiYMD" = (SELECT MAX(rgdb."DbT7060KaigoJigyosha"."yukoKaishiYMD")
+                                                            FROM  rgdb."DbT7060KaigoJigyosha"
+                                                            WHERE rgdb."DbT7060KaigoJigyosha"."jigyoshaNo" =  DbT1004."nyushoShisetsuCode")
+                ORDER BY  DbT1004."rirekiNo", DbT1004."nyushoYMD")
+       UNION
+            (SELECT  
+              DbT1004."shikibetsuCode"          AS  shikibetsuCode
+            , DbT1004."rirekiNo"               AS  rirekiNo
+            , DbT1004."shichosonCode"          AS  shikibetsuCode
+            , DbT1004."daichoShubetsu"         AS  daichoShubetsu
+            , DbT1004."nyushoShisetsuShurui"   AS  nyushoShisetsuShurui
+            , DbT1004."nyushoShisetsuCode"     AS  nyushoShisetsuCode
+            , DbT1004."nyushoShoriYMD"         AS  nyushoShoriYMD
+            , DbT1004."nyushoYMD"              AS  nyushoYMD
+            , DbT1004."taishoShoriYMD"         AS  taishoShoriYMD
+            , DbT1004."taishoYMD"              AS  taishoYMD
+            , DbT1004."roomKigoNo"             AS  roomKigoNo
+            , DbT1005."jigyoshaMeisho"         AS  jigyoshaName
+            FROM 
+                rgdb."DbT1004ShisetsuNyutaisho" AS DbT1004
+            LEFT JOIN 
+                rgdb."DbT1005KaigoJogaiTokureiTaishoShisetsu" AS DbT1005
+                ON        DbT1005."jigyoshaNo" = DbT1004."nyushoShisetsuCode"
+            WHERE
+                DbT1004."shikibetsuCode" = #{shikibetsuCode}
+                AND         DbT1004."daichoShubetsu" = #{台帳種別}
+                AND         DbT1004."nyushoShisetsuShurui" = #{入所施設種類_住所地特例対象施設} 
+                AND         DbT1005."jigyoshaShubetsu" = #{事業者種別_住所地特例対象施設}
+                AND         DbT1005."yukoKaishiYMD" = ( SELECT MAX(rgdb."DbT1005KaigoJogaiTokureiTaishoShisetsu"."yukoKaishiYMD")
+                                                        FROM  rgdb."DbT1005KaigoJogaiTokureiTaishoShisetsu"
+                                                        WHERE DbT1005."jigyoshaNo" = DbT1004."nyushoShisetsuCode"
+                                                        AND  DbT1005."jigyoshaShubetsu" = DbT1004."nyushoShisetsuShurui")
+            ORDER BY
+                DbT1004."rirekiNo", DbT1004."nyushoYMD")
+        </if>
+        <if test="適用除外者台帳の時_フラグ">
+          (SELECT  
+              DbT1004."shikibetsuCode"         AS  shikibetsuCode
+            , DbT1004."rirekiNo"               AS  rirekiNo
+            , DbT1004."shichosonCode"          AS  shikibetsuCode
+            , DbT1004."daichoShubetsu"         AS  daichoShubetsu
+            , DbT1004."nyushoShisetsuShurui"   AS  nyushoShisetsuShurui
+            , DbT1004."nyushoShisetsuCode"     AS  nyushoShisetsuCode
+            , DbT1004."nyushoShoriYMD"         AS  nyushoShoriYMD
+            , DbT1004."nyushoYMD"              AS  nyushoYMD
+            , DbT1004."taishoShoriYMD"         AS  taishoShoriYMD
+            , DbT1004."taishoYMD"              AS  taishoYMD
+            , DbT1004."roomKigoNo"             AS  roomKigoNo
+            , DbT1005."jigyoshaMeisho"         AS  jigyoshaName
+            FROM      
+                rgdb."DbT1004ShisetsuNyutaisho" AS DbT1004
+            LEFT JOIN 
+                rgdb."DbT1005KaigoJogaiTokureiTaishoShisetsu" AS DbT1005
+                ON  DbT1005."jigyoshaNo" = DbT1004."nyushoShisetsuCode"
+            WHERE
+                DbT1004."shikibetsuCode" = #{shikibetsuCode}
+                AND         DbT1004."daichoShubetsu" = #{台帳種別}
+                AND   DbT1004."nyushoShisetsuShurui" = #{入所施設種類_適用除外施設}
+                AND   DbT1005."jigyoshaShubetsu" = #{事業者種別_適用除外施設}
+                AND   DbT1005."yukoKaishiYMD" = ( SELECT MAX(rgdb."DbT1005KaigoJogaiTokureiTaishoShisetsu"."yukoKaishiYMD")
+                                                FROM  rgdb."DbT1005KaigoJogaiTokureiTaishoShisetsu"
+                                                WHERE DbT1005."jigyoshaNo" = DbT1004."nyushoShisetsuCode"
+                                                        AND  DbT1005."jigyoshaShubetsu" = DbT1004."nyushoShisetsuShurui")
+            ORDER BY
+                DbT1004."rirekiNo", DbT1004."nyushoYMD")
+        </if>
+    </select>
+    
+    <resultMap id="result_selct施設情報の取得" type="jp.co.ndensan.reams.db.dbz.entity.db.relate.kaigohohenshisetsu.KaigoHohenShisetsuRelateEntity">
         <result property="shikibetsuCode" column="shikibetsuCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.ShikibetsuCodeTypeHandler"/>
         <result property="rirekiNo" column="rirekiNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
         <result property="shichosonCode" column="shichosonCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.LasdecCodeTypeHandler"/>
@@ -76,97 +245,185 @@ and open the template in the editor.
         <result property="jigyoshaName" column="jigyoshaName" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
     </resultMap>
     
-    
-    <!--適用除外施設情報件数を取得します-->
-    <select id="getShiSeTsuJyoHon_A" parameterType="jp.co.ndensan.reams.db.dbz.definition.mybatisprm.kaigohohenshisetsu.KaigoHohenShisetsuMybatisParameter" resultMap="result_selct施設情報の取得">
-        SELECT  
-            DbT1004."shikibetsuCode"          AS  shikibetsuCode
-            , DbT1004."rirekiNo"               AS  rirekiNo
-            , DbT1004."shichosonCode"          AS  shikibetsuCode
-            , DbT1004."daichoShubetsu"         AS  daichoShubetsu
-            , DbT1004."nyushoShisetsuShurui"   AS  nyushoShisetsuShurui
-            , DbT1004."nyushoShisetsuCode"     AS  nyushoShisetsuCode
-            , DbT1004."nyushoShoriYMD"         AS  nyushoShoriYMD
-            , DbT1004."nyushoYMD"              AS  nyushoYMD
-            , DbT1004."taishoShoriYMD"         AS  taishoShoriYMD
-            , DbT1004."taishoYMD"              AS  taishoYMD
-            , DbT1004."roomKigoNo"             AS  roomKigoNo
-            , DbT7060."jigyoshaName"           AS  jigyoshaName
+    <!--施設情報の取得を取得します-->
+    <select id="get施設情報の取得_A" parameterType="jp.co.ndensan.reams.db.dbz.definition.mybatisprm.kaigohohenshisetsu.KaigoHohenShisetsuMybatisParameter" resultMap="result_selct施設情報の取得">
+        (SELECT  
+            DbT1004."shikibetsuCode"         AS  shikibetsuCode
+          , DbT1004."rirekiNo"               AS  rirekiNo
+          , DbT1004."shichosonCode"          AS  shikibetsuCode
+          , DbT1004."daichoShubetsu"         AS  daichoShubetsu
+          , DbT1004."nyushoShisetsuShurui"   AS  nyushoShisetsuShurui
+          , DbT1004."nyushoShisetsuCode"     AS  nyushoShisetsuCode
+          , DbT1004."nyushoShoriYMD"         AS  nyushoShoriYMD
+          , DbT1004."nyushoYMD"              AS  nyushoYMD
+          , DbT1004."taishoShoriYMD"         AS  taishoShoriYMD
+          , DbT1004."taishoYMD"              AS  taishoYMD
+          , DbT1004."roomKigoNo"             AS  roomKigoNo
+          , DbT7060."jigyoshaName"           AS  jigyoshaName
         FROM      
-             (SELECT
-                    rgdb."DbT1004ShisetsuNyutaisho"."shikibetsuCode"
-                    , rgdb."DbT1004ShisetsuNyutaisho"."rirekiNo"
-                    , rgdb."DbT1004ShisetsuNyutaisho"."shichosonCode"
-                    , rgdb."DbT1004ShisetsuNyutaisho"."daichoShubetsu"
-                    , rgdb."DbT1004ShisetsuNyutaisho"."nyushoShisetsuShurui"
-                    , rgdb."DbT1004ShisetsuNyutaisho"."nyushoShisetsuCode"
-                    , rgdb."DbT1004ShisetsuNyutaisho"."nyushoShoriYMD"
-                    , rgdb."DbT1004ShisetsuNyutaisho"."nyushoYMD"
-                    , rgdb."DbT1004ShisetsuNyutaisho"."taishoShoriYMD"
-                    , rgdb."DbT1004ShisetsuNyutaisho"."taishoYMD"
-                    , rgdb."DbT1004ShisetsuNyutaisho"."roomKigoNo" 
-                FROM
-                rgdb."DbT1004ShisetsuNyutaisho" 
-                WHERE
-                rgdb."DbT1004ShisetsuNyutaisho"."shikibetsuCode" = #{shikibetsuCode}
-             AND
-                rgdb."DbT1004ShisetsuNyutaisho"."rirekiNo" = #{履歴番号}
-                ORDER BY
-                rgdb."DbT1004ShisetsuNyutaisho"."rirekiNo",
-                rgdb."DbT1004ShisetsuNyutaisho"."nyushoYMD") AS  DbT1004
+            rgdb."DbT1004ShisetsuNyutaisho"   AS DbT1004
         LEFT JOIN 
             rgdb."DbT7060KaigoJigyosha" AS DbT7060
-        ON          DbT7060."jigyoshaNo" = DbT1004."nyushoShisetsuCode"
-        AND         DbT1004."nyushoShisetsuShurui" = #{入所施設種類}
-        AND         DbT7060."yukoKaishiYMD" = (SELECT MAX(rgdb."DbT7060KaigoJigyosha"."yukoKaishiYMD")
-                                                FROM  rgdb."DbT7060KaigoJigyosha"
-                                                WHERE rgdb."DbT7060KaigoJigyosha"."jigyoshaNo" =  DbT1004."nyushoShisetsuCode")
+            ON          DbT7060."jigyoshaNo" = DbT1004."nyushoShisetsuCode"
+        WHERE 
+            DbT1004."shikibetsuCode" = #{shikibetsuCode}
+            AND         DbT1004."nyushoShisetsuShurui" = #{入所施設種類_介護保険施設}
+            AND         DbT7060."yukoKaishiYMD" = (SELECT MAX(rgdb."DbT7060KaigoJigyosha"."yukoKaishiYMD")
+                                                    FROM  rgdb."DbT7060KaigoJigyosha"
+                                                    WHERE rgdb."DbT7060KaigoJigyosha"."jigyoshaNo" =  DbT1004."nyushoShisetsuCode")
+        ORDER BY
+            DbT1004."rirekiNo", DbT1004."nyushoYMD")
+     UNION
+        (SELECT  
+          DbT1004."shikibetsuCode"          AS  shikibetsuCode
+        , DbT1004."rirekiNo"               AS  rirekiNo
+        , DbT1004."shichosonCode"          AS  shikibetsuCode
+        , DbT1004."daichoShubetsu"         AS  daichoShubetsu
+        , DbT1004."nyushoShisetsuShurui"   AS  nyushoShisetsuShurui
+        , DbT1004."nyushoShisetsuCode"     AS  nyushoShisetsuCode
+        , DbT1004."nyushoShoriYMD"         AS  nyushoShoriYMD
+        , DbT1004."nyushoYMD"              AS  nyushoYMD
+        , DbT1004."taishoShoriYMD"         AS  taishoShoriYMD
+        , DbT1004."taishoYMD"              AS  taishoYMD
+        , DbT1004."roomKigoNo"             AS  roomKigoNo
+        , DbT1005."jigyoshaMeisho"         AS  jigyoshaName
+        FROM 
+            rgdb."DbT1004ShisetsuNyutaisho" AS DbT1004
+        LEFT JOIN 
+            rgdb."DbT1005KaigoJogaiTokureiTaishoShisetsu" AS DbT1005
+            ON        DbT1005."jigyoshaNo" = DbT1004."nyushoShisetsuCode"
+        WHERE
+            DbT1004."shikibetsuCode" = #{shikibetsuCode}
+            AND         DbT1004."nyushoShisetsuShurui" = #{入所施設種類_住所地特例対象施設} 
+            AND         DbT1005."jigyoshaShubetsu" = #{事業者種別_住所地特例対象施設}
+            AND         DbT1005."yukoKaishiYMD" = ( SELECT MAX(rgdb."DbT1005KaigoJogaiTokureiTaishoShisetsu"."yukoKaishiYMD")
+                                                    FROM  rgdb."DbT1005KaigoJogaiTokureiTaishoShisetsu"
+                                                    WHERE DbT1005."jigyoshaNo" = DbT1004."nyushoShisetsuCode"
+                                                    AND  DbT1005."jigyoshaShubetsu" = DbT1004."nyushoShisetsuShurui")
+        ORDER BY
+            DbT1004."rirekiNo", DbT1004."nyushoYMD")
+    UNION
+        (SELECT  
+          DbT1004."shikibetsuCode"         AS  shikibetsuCode
+        , DbT1004."rirekiNo"               AS  rirekiNo
+        , DbT1004."shichosonCode"          AS  shikibetsuCode
+        , DbT1004."daichoShubetsu"         AS  daichoShubetsu
+        , DbT1004."nyushoShisetsuShurui"   AS  nyushoShisetsuShurui
+        , DbT1004."nyushoShisetsuCode"     AS  nyushoShisetsuCode
+        , DbT1004."nyushoShoriYMD"         AS  nyushoShoriYMD
+        , DbT1004."nyushoYMD"              AS  nyushoYMD
+        , DbT1004."taishoShoriYMD"         AS  taishoShoriYMD
+        , DbT1004."taishoYMD"              AS  taishoYMD
+        , DbT1004."roomKigoNo"             AS  roomKigoNo
+        , DbT1005."jigyoshaMeisho"         AS  jigyoshaName
+        FROM      
+            rgdb."DbT1004ShisetsuNyutaisho" AS DbT1004
+        LEFT JOIN 
+            rgdb."DbT1005KaigoJogaiTokureiTaishoShisetsu" AS DbT1005
+            ON  DbT1005."jigyoshaNo" = DbT1004."nyushoShisetsuCode"
+        WHERE
+            DbT1004."shikibetsuCode" = #{shikibetsuCode}
+            AND   DbT1004."nyushoShisetsuShurui" = #{入所施設種類_適用除外施設}
+            AND   DbT1005."jigyoshaShubetsu" = #{事業者種別_適用除外施設}
+            AND   DbT1005."yukoKaishiYMD" = ( SELECT MAX(rgdb."DbT1005KaigoJogaiTokureiTaishoShisetsu"."yukoKaishiYMD")
+                                            FROM  rgdb."DbT1005KaigoJogaiTokureiTaishoShisetsu"
+                                            WHERE DbT1005."jigyoshaNo" = DbT1004."nyushoShisetsuCode"
+                                            AND  DbT1005."jigyoshaShubetsu" = DbT1004."nyushoShisetsuShurui")
+        ORDER BY
+            DbT1004."rirekiNo", DbT1004."nyushoYMD")
     </select>
       
-    <select id="getShiSeTsuJyoHon_I" parameterType="jp.co.ndensan.reams.db.dbz.definition.mybatisprm.kaigohohenshisetsu.KaigoHohenShisetsuMybatisParameter" resultMap="result_selct施設情報の取得">
-        SELECT  
-            DbT1004."shikibetsuCode"          AS  shikibetsuCode
-           , DbT1004."rirekiNo"               AS  rirekiNo
-           , DbT1004."shichosonCode"          AS  shikibetsuCode
-           , DbT1004."daichoShubetsu"         AS  daichoShubetsu
-           , DbT1004."nyushoShisetsuShurui"   AS  nyushoShisetsuShurui
-           , DbT1004."nyushoShisetsuCode"     AS  nyushoShisetsuCode
-           , DbT1004."nyushoShoriYMD"         AS  nyushoShoriYMD
-           , DbT1004."nyushoYMD"              AS  nyushoYMD
-           , DbT1004."taishoShoriYMD"         AS  taishoShoriYMD
-           , DbT1004."taishoYMD"              AS  taishoYMD
-           , DbT1004."roomKigoNo"             AS  roomKigoNo
-           , DbT1005."jigyoshaMeisho"         AS  jigyoshaName
-        FROM      
-            (SELECT
-            rgdb."DbT1004ShisetsuNyutaisho"."shikibetsuCode"
-            , rgdb."DbT1004ShisetsuNyutaisho"."rirekiNo"
-            , rgdb."DbT1004ShisetsuNyutaisho"."shichosonCode"
-            , rgdb."DbT1004ShisetsuNyutaisho"."daichoShubetsu"
-            , rgdb."DbT1004ShisetsuNyutaisho"."nyushoShisetsuShurui"
-            , rgdb."DbT1004ShisetsuNyutaisho"."nyushoShisetsuCode"
-            , rgdb."DbT1004ShisetsuNyutaisho"."nyushoShoriYMD"
-            , rgdb."DbT1004ShisetsuNyutaisho"."nyushoYMD"
-            , rgdb."DbT1004ShisetsuNyutaisho"."taishoShoriYMD"
-            , rgdb."DbT1004ShisetsuNyutaisho"."taishoYMD"
-            , rgdb."DbT1004ShisetsuNyutaisho"."roomKigoNo" 
-        FROM
-            rgdb."DbT1004ShisetsuNyutaisho" 
-        WHERE
-                rgdb."DbT1004ShisetsuNyutaisho"."shikibetsuCode" = #{shikibetsuCode}
-            AND
-                rgdb."DbT1004ShisetsuNyutaisho"."rirekiNo" = #{履歴番号}
-                ORDER BY
-                rgdb."DbT1004ShisetsuNyutaisho"."rirekiNo",
-                rgdb."DbT1004ShisetsuNyutaisho"."nyushoYMD") AS  DbT1004
-        LEFT JOIN 
+    <!--施設情報の取得を取得します-->
+    <select id="get施設情報の取得_I" parameterType="jp.co.ndensan.reams.db.dbz.definition.mybatisprm.kaigohohenshisetsu.KaigoHohenShisetsuMybatisParameter" resultMap="result_selct施設情報の取得">
+        <if test="被保険者台帳_他住所地特例者台帳の時_フラグ">
+            (SELECT  
+                DbT1004."shikibetsuCode"         AS  shikibetsuCode
+              , DbT1004."rirekiNo"               AS  rirekiNo
+              , DbT1004."shichosonCode"          AS  shikibetsuCode
+              , DbT1004."daichoShubetsu"         AS  daichoShubetsu
+              , DbT1004."nyushoShisetsuShurui"   AS  nyushoShisetsuShurui
+              , DbT1004."nyushoShisetsuCode"     AS  nyushoShisetsuCode
+              , DbT1004."nyushoShoriYMD"         AS  nyushoShoriYMD
+              , DbT1004."nyushoYMD"              AS  nyushoYMD
+              , DbT1004."taishoShoriYMD"         AS  taishoShoriYMD
+              , DbT1004."taishoYMD"              AS  taishoYMD
+              , DbT1004."roomKigoNo"             AS  roomKigoNo
+              , DbT7060."jigyoshaName"           AS  jigyoshaName
+            FROM      
+                rgdb."DbT1004ShisetsuNyutaisho"   AS DbT1004
+            LEFT JOIN 
+                rgdb."DbT7060KaigoJigyosha" AS DbT7060
+            ON          DbT7060."jigyoshaNo" = DbT1004."nyushoShisetsuCode"
+            WHERE 
+                    DbT1004."shikibetsuCode" = #{shikibetsuCode}
+                    AND         DbT1004."nyushoShisetsuShurui" = #{入所施設種類_介護保険施設}
+                    AND         DbT1004."daichoShubetsu" = #{台帳種別}
+                    AND         DbT7060."yukoKaishiYMD" = (SELECT MAX(rgdb."DbT7060KaigoJigyosha"."yukoKaishiYMD")
+                    FROM  rgdb."DbT7060KaigoJigyosha"
+                    WHERE rgdb."DbT7060KaigoJigyosha"."jigyoshaNo" =  DbT1004."nyushoShisetsuCode")
+            ORDER BY
+                    DbT1004."rirekiNo", DbT1004."nyushoYMD")
+         UNION
+            (SELECT  
+                DbT1004."shikibetsuCode"          AS  shikibetsuCode
+              , DbT1004."rirekiNo"               AS  rirekiNo
+              , DbT1004."shichosonCode"          AS  shikibetsuCode
+              , DbT1004."daichoShubetsu"         AS  daichoShubetsu
+              , DbT1004."nyushoShisetsuShurui"   AS  nyushoShisetsuShurui
+              , DbT1004."nyushoShisetsuCode"     AS  nyushoShisetsuCode
+              , DbT1004."nyushoShoriYMD"         AS  nyushoShoriYMD
+              , DbT1004."nyushoYMD"              AS  nyushoYMD
+              , DbT1004."taishoShoriYMD"         AS  taishoShoriYMD
+              , DbT1004."taishoYMD"              AS  taishoYMD
+              , DbT1004."roomKigoNo"             AS  roomKigoNo
+              , DbT1005."jigyoshaMeisho"         AS  jigyoshaName
+            FROM 
+                rgdb."DbT1004ShisetsuNyutaisho" AS DbT1004
+            LEFT JOIN 
                 rgdb."DbT1005KaigoJogaiTokureiTaishoShisetsu" AS DbT1005
-        ON          DbT1005."jigyoshaNo" = DbT1004."nyushoShisetsuCode"
-        AND         DbT1005."jigyoshaShubetsu" = DbT1004."nyushoShisetsuShurui"
-        AND         DbT1004."nyushoShisetsuShurui" = #{入所施設種類}
-        AND         DbT1005."yukoKaishiYMD" = ( SELECT MAX(rgdb."DbT1005KaigoJogaiTokureiTaishoShisetsu"."yukoKaishiYMD")
-                                                FROM  rgdb."DbT1005KaigoJogaiTokureiTaishoShisetsu"
-                                                WHERE DbT1005."jigyoshaNo" = DbT1004."nyushoShisetsuCode"
+            ON  DbT1005."jigyoshaNo" = DbT1004."nyushoShisetsuCode"
+            WHERE
+                DbT1004."shikibetsuCode" = #{shikibetsuCode}
+                AND         DbT1004."daichoShubetsu" = #{台帳種別}
+                AND         DbT1004."nyushoShisetsuShurui" = #{入所施設種類_住所地特例対象施設} 
+                AND         DbT1005."jigyoshaShubetsu" = #{事業者種別_住所地特例対象施設}
+                AND         DbT1005."yukoKaishiYMD" = ( SELECT MAX(rgdb."DbT1005KaigoJogaiTokureiTaishoShisetsu"."yukoKaishiYMD")
+                                                        FROM  rgdb."DbT1005KaigoJogaiTokureiTaishoShisetsu"
+                                                        WHERE DbT1005."jigyoshaNo" = DbT1004."nyushoShisetsuCode"
+                                                        AND  DbT1005."jigyoshaShubetsu" = DbT1004."nyushoShisetsuShurui")
+            ORDER BY
+                DbT1004."rirekiNo", DbT1004."nyushoYMD")
+        </if>
+        <if test="適用除外者台帳の時_フラグ">
+            (SELECT  
+                DbT1004."shikibetsuCode"         AS  shikibetsuCode
+                , DbT1004."rirekiNo"               AS  rirekiNo
+                , DbT1004."shichosonCode"          AS  shikibetsuCode
+                , DbT1004."daichoShubetsu"         AS  daichoShubetsu
+                , DbT1004."nyushoShisetsuShurui"   AS  nyushoShisetsuShurui
+                , DbT1004."nyushoShisetsuCode"     AS  nyushoShisetsuCode
+                , DbT1004."nyushoShoriYMD"         AS  nyushoShoriYMD
+                , DbT1004."nyushoYMD"              AS  nyushoYMD
+                , DbT1004."taishoShoriYMD"         AS  taishoShoriYMD
+                , DbT1004."taishoYMD"              AS  taishoYMD
+                , DbT1004."roomKigoNo"             AS  roomKigoNo
+                , DbT1005."jigyoshaMeisho"         AS  jigyoshaName
+            FROM      
+                rgdb."DbT1004ShisetsuNyutaisho" AS DbT1004
+            LEFT JOIN 
+                rgdb."DbT1005KaigoJogaiTokureiTaishoShisetsu" AS DbT1005
+              DbT1005."jigyoshaNo" = DbT1004."nyushoShisetsuCode"
+            WHERE
+                DbT1004."shikibetsuCode" = #{shikibetsuCode}
+                AND         DbT1004."daichoShubetsu" = #{台帳種別}
+                AND   DbT1004."nyushoShisetsuShurui" = #{入所施設種類_適用除外施設}
+                AND   DbT1005."jigyoshaShubetsu" = #{事業者種別_適用除外施設}
+                AND   DbT1005."yukoKaishiYMD" = ( SELECT MAX(rgdb."DbT1005KaigoJogaiTokureiTaishoShisetsu"."yukoKaishiYMD")
+                                                    FROM  rgdb."DbT1005KaigoJogaiTokureiTaishoShisetsu"
+                                                    WHERE DbT1005."jigyoshaNo" = DbT1004."nyushoShisetsuCode"
                                                     AND  DbT1005."jigyoshaShubetsu" = DbT1004."nyushoShisetsuShurui")
+            ORDER BY
+                DbT1004."rirekiNo", DbT1004."nyushoYMD")
+        </if>
     </select>
 </mapper>

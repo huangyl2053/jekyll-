@@ -106,6 +106,18 @@ public class DbT1004ShisetsuNyutaishoDac implements ISaveable<DbT1004ShisetsuNyu
      * @return 登録件数
      */
     @Transaction
+    public int saveByForDelete(DbT1004ShisetsuNyutaishoEntity entity) {
+        requireNonNull(entity, UrSystemErrorMessages.値がnull.getReplacedMessage("介護保険施設入退所エンティティ"));
+        return DbAccessors.saveOrDeletePhysicalBy(new DbAccessorNormalType(session), entity);
+    }
+
+    /**
+     * DbT1004ShisetsuNyutaishoEntityを登録します。状態によってinsert/update/delete処理に振り分けられます。
+     *
+     * @param entity entity
+     * @return 登録件数
+     */
+    @Transaction
     @Override
     public int save(DbT1004ShisetsuNyutaishoEntity entity) {
         requireNonNull(entity, UrSystemErrorMessages.値がnull.getReplacedMessage("介護保険施設入退所エンティティ"));
