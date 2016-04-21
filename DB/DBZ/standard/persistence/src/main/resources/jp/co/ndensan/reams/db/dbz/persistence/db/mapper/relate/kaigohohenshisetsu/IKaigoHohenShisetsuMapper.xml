@@ -167,7 +167,8 @@ and open the template in the editor.
                 AND         DbT7060."yukoKaishiYMD" = (SELECT MAX(rgdb."DbT7060KaigoJigyosha"."yukoKaishiYMD")
                                                             FROM  rgdb."DbT7060KaigoJigyosha"
                                                             WHERE rgdb."DbT7060KaigoJigyosha"."jigyoshaNo" =  DbT1004."nyushoShisetsuCode")
-                ORDER BY  DbT1004."rirekiNo", DbT1004."nyushoYMD")
+                ORDER BY  
+                    DbT1004."rirekiNo", DbT1004."nyushoYMD")
        UNION
             (SELECT  
               DbT1004."shikibetsuCode"          AS  shikibetsuCode
@@ -336,7 +337,7 @@ and open the template in the editor.
     <!--施設情報の取得を取得します-->
     <select id="get施設情報の取得_I" parameterType="jp.co.ndensan.reams.db.dbz.definition.mybatisprm.kaigohohenshisetsu.KaigoHohenShisetsuMybatisParameter" resultMap="result_selct施設情報の取得">
         <if test="被保険者台帳_他住所地特例者台帳の時_フラグ">
-            (SELECT  
+            ( SELECT  
                 DbT1004."shikibetsuCode"         AS  shikibetsuCode
               , DbT1004."rirekiNo"               AS  rirekiNo
               , DbT1004."shichosonCode"          AS  shikibetsuCode
@@ -362,9 +363,9 @@ and open the template in the editor.
                     FROM  rgdb."DbT7060KaigoJigyosha"
                     WHERE rgdb."DbT7060KaigoJigyosha"."jigyoshaNo" =  DbT1004."nyushoShisetsuCode")
             ORDER BY
-                    DbT1004."rirekiNo", DbT1004."nyushoYMD")
+                    DbT1004."rirekiNo", DbT1004."nyushoYMD" )
          UNION
-            (SELECT  
+            ( SELECT  
                 DbT1004."shikibetsuCode"          AS  shikibetsuCode
               , DbT1004."rirekiNo"               AS  rirekiNo
               , DbT1004."shichosonCode"          AS  shikibetsuCode
@@ -392,7 +393,7 @@ and open the template in the editor.
                                                         WHERE DbT1005."jigyoshaNo" = DbT1004."nyushoShisetsuCode"
                                                         AND  DbT1005."jigyoshaShubetsu" = DbT1004."nyushoShisetsuShurui")
             ORDER BY
-                DbT1004."rirekiNo", DbT1004."nyushoYMD")
+                DbT1004."rirekiNo", DbT1004."nyushoYMD" )
         </if>
         <if test="適用除外者台帳の時_フラグ">
             (SELECT  
@@ -411,8 +412,8 @@ and open the template in the editor.
             FROM      
                 rgdb."DbT1004ShisetsuNyutaisho" AS DbT1004
             LEFT JOIN 
-                rgdb."DbT1005KaigoJogaiTokureiTaishoShisetsu" AS DbT1005
-              DbT1005."jigyoshaNo" = DbT1004."nyushoShisetsuCode"
+                 rgdb."DbT1005KaigoJogaiTokureiTaishoShisetsu" AS DbT1005
+             ON  DbT1005."jigyoshaNo" = DbT1004."nyushoShisetsuCode"
             WHERE
                 DbT1004."shikibetsuCode" = #{shikibetsuCode}
                 AND         DbT1004."daichoShubetsu" = #{台帳種別}
