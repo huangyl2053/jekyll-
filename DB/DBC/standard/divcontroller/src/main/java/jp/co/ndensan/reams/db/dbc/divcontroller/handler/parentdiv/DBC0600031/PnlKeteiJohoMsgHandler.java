@@ -6,6 +6,7 @@
 package jp.co.ndensan.reams.db.dbc.divcontroller.handler.parentdiv.DBC0600031;
 
 import java.util.List;
+import java.util.Map;
 import jp.co.ndensan.reams.db.dbc.business.core.syokanbaraikettejoho.KetteJoho;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.commonchilddiv.ShokanbaraiketteiJoho.ShokanbaraiketteiJoho.dgSyokanbaraikete_Row;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0600031.PnlKeteiJohoMsgDiv;
@@ -45,24 +46,76 @@ public final class PnlKeteiJohoMsgHandler {
     }
 
     /**
+     * 決定日 内容の変更を判断する
+     *
+     * @param 決定情報 KetteJoho
+     * @param ketebi FlexibleDate
+     * @return boolean
+     */
+    public boolean equal決定日(KetteJoho 決定情報, FlexibleDate ketebi) {
+        if (決定情報 != null && ketebi != null) {
+            if (!ketebi.equals(決定情報.getKetteiYMD())) {
+                return true;
+            }
+        } else if ((決定情報 != null && 決定情報.getKetteiYMD() != null && ketebi == null) || (決定情報 == null && ketebi != null)) {
+            return true;
+        }
+        return false;
+    }
+
+    /**
+     * 支給区分 内容の変更を判断する
+     *
+     * @param 決定情報 KetteJoho
+     * @param rdoShikyukubunNew RString
+     * @return boolean
+     */
+    public Boolean equal支給区分(KetteJoho 決定情報, RString rdoShikyukubunNew) {
+        if (決定情報 != null && rdoShikyukubunNew != null) {
+            if (!rdoShikyukubunNew.equals(決定情報.getShikyuHushikyuKetteiKubun())) {
+                return true;
+            }
+        } else if ((決定情報 != null && 決定情報.getShikyuHushikyuKetteiKubun() != null && rdoShikyukubunNew == null)
+                || (決定情報 == null && rdoShikyukubunNew != null)) {
+            return true;
+        }
+        return false;
+    }
+
+    /**
+     * 償還払決定一覧 内容の変更を判断する
+     *
+     * @param rowList List<dgSyokanbaraikete_Row>
+     * @param 償還払決定一覧 Map<RString, Integer>
+     * @return boolean
+     */
+    public Boolean equal償還払決定一覧(List<dgSyokanbaraikete_Row> rowList, Map<RString, Integer> 償還払決定一覧) {
+        for (int i = 0; i < rowList.size(); i++) {
+            if (償還払決定一覧 != null && 償還払決定一覧.get(rowList.get(i).getNo()) != rowList.get(i).getSagakuKingaku().getValue().intValue()) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    /**
      *
      * @param 償還払決定一覧 List<dgSyokanbaraikete_Row>
      * @param 決定情報 KetteJoho
-     * @return boolean
+     * @return flag Boolean
      */
-    public boolean is内容変更状態(List<dgSyokanbaraikete_Row> 償還払決定一覧, KetteJoho 決定情報) {
+    public Boolean is内容変更状態(Map<RString, Integer> 償還払決定一覧, KetteJoho 決定情報) {
         boolean flag = false;
-        FlexibleDate ketebi = new FlexibleDate(div.getCcdKetteiList().getShokanbaraiketteiJohoDiv().getTxtKetebi()
-                .getValue().toDateString());
-        if (!ketebi.equals(決定情報.getKetteiYMD())) {
+        FlexibleDate ketebi = new FlexibleDate(div.getCcdKetteiList().getShokanbaraiketteiJohoDiv().getTxtKetebi().getValue().toDateString());
+        if (equal決定日(決定情報, ketebi)) {
             flag = true;
         }
         RString rdoShikyukubunNew = div.getCcdKetteiList().getShokanbaraiketteiJohoDiv().getRdoShikyukubun().getSelectedKey();
-        if (!rdoShikyukubunNew.equals(決定情報.getShikyuHushikyuKetteiKubun())) {
+        if (equal支給区分(決定情報, rdoShikyukubunNew)) {
             flag = true;
-        } else if (決定情報.getShikyuHushikyuKetteiKubun().equals(ONE)) {
+        } else if (決定情報 != null && 決定情報.getShikyuHushikyuKetteiKubun() != null && 決定情報.getShikyuHushikyuKetteiKubun().equals(ONE)) {
             RString zogenriyu = div.getCcdKetteiList().getShokanbaraiketteiJohoDiv().getTxtZogenriyu().getValue();
-            if (!zogenriyu.equals(決定情報.getZougenRiyu())) {
+            if (zogenriyu != null && !zogenriyu.equals(決定情報.getZougenRiyu())) {
                 flag = true;
             }
             int zogentani = div.getCcdKetteiList().getShokanbaraiketteiJohoDiv().getTxtZogentani().getValue().intValue();
@@ -74,21 +127,19 @@ public final class PnlKeteiJohoMsgHandler {
             if (shiharaikingakugoke != 決定情報.getShiharaiKingaku()) {
                 flag = true;
             }
-        } else if (決定情報.getShikyuHushikyuKetteiKubun().equals(TWO)) {
+        } else if (決定情報 != null && 決定情報.getShikyuHushikyuKetteiKubun() != null && 決定情報.getShikyuHushikyuKetteiKubun().equals(TWO)) {
             RString fuSyikyuriyu1 = div.getCcdKetteiList().getShokanbaraiketteiJohoDiv().getTxtFuSyikyuriyu1().getValue();
-            if (!fuSyikyuriyu1.equals(決定情報.getHushikyuRiyu())) {
+            if (fuSyikyuriyu1 != null && !fuSyikyuriyu1.equals(決定情報.getHushikyuRiyu())) {
                 flag = true;
             }
             RString fushikyuriyu2 = div.getCcdKetteiList().getShokanbaraiketteiJohoDiv().getTxtFushikyuriyu2().getValue();
-            if (!fushikyuriyu2.equals(決定情報.getKounyuKaishuRireki())) {
+            if (fushikyuriyu2 != null && !fushikyuriyu2.equals(決定情報.getKounyuKaishuRireki())) {
                 flag = true;
             }
         }
         List<dgSyokanbaraikete_Row> rowList = div.getCcdKetteiList().getShokanbaraiketteiJohoDiv().getDgSyokanbaraikete().getDataSource();
-        for (int i = 0; i < rowList.size(); i++) {
-            if (償還払決定一覧.get(i).getSagakuKingaku().getValue().intValue() != rowList.get(i).getSagakuKingaku().getValue().intValue()) {
-                flag = true;
-            }
+        if (equal償還払決定一覧(rowList, 償還払決定一覧)) {
+            flag = true;
         }
         return flag;
     }
