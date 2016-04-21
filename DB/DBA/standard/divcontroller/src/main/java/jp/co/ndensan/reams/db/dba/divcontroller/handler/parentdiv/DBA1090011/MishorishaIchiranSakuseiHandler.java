@@ -21,7 +21,6 @@ import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
 import jp.co.ndensan.reams.uz.uza.ui.binding.KeyValueDataSource;
 
 /**
- *
  * 転入・転出未登録一覧表のHandlerクラスです。
  *
  * @reamsid_L DBU-4110-010 yaodongsheng
@@ -63,10 +62,12 @@ public class MishorishaIchiranSakuseiHandler {
                     UrControlDataFactory.createInstance().getLoginInfo().getUserId());
             for (AuthorityItem authorityItem : authorityItemList) {
                 KoseiShichosonJoho 構成市町村情報 = ShichosonSecurityJoho.getKouseiShichosonJoho(authorityItem.getItemId());
-                KeyValueDataSource keyValue = new KeyValueDataSource();
-                keyValue.setKey(構成市町村情報.get市町村コード().value());
-                keyValue.setValue(setValue(構成市町村情報.get市町村コード().value(), 構成市町村情報.get市町村名称()));
-                list.add(keyValue);
+                if (構成市町村情報 != null) {
+                    KeyValueDataSource keyValue = new KeyValueDataSource();
+                    keyValue.setKey(構成市町村情報.get市町村コード().value());
+                    keyValue.setValue(setValue(構成市町村情報.get市町村コード().value(), 構成市町村情報.get市町村名称()));
+                    list.add(keyValue);
+                }
             }
             div.getBatchParamterInfo().getDdlShichoson().setDataSource(list);
         }

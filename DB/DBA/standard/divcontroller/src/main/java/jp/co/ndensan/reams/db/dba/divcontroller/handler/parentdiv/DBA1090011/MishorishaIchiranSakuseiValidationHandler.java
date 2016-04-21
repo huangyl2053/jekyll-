@@ -14,7 +14,6 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPair;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
 
 /**
- *
  * 転入・転出未登録一覧表のHandlerクラスです。
  *
  * @reamsid_L DBU-4110-010 yaodongsheng
