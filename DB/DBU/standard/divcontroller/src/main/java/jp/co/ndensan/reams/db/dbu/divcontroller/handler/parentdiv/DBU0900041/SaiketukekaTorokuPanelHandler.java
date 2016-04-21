@@ -51,9 +51,6 @@ public class SaiketukekaTorokuPanelHandler {
     }
 
     private void 初期化の編集() {
-        ViewStateHolder.put(ViewStateKeys.識別コード, new ShikibetsuCode("800000000000001"));
-        ViewStateHolder.put(ViewStateKeys.被保険者番号, new HihokenshaNo("0000000016"));
-        ViewStateHolder.put(ViewStateKeys.審査請求届出日, new FlexibleDate(2015, 10, 10));
         ShikibetsuCode 識別コード = ViewStateHolder.get(ViewStateKeys.識別コード, ShikibetsuCode.class);
         HihokenshaNo 被保険者番号 = ViewStateHolder.get(ViewStateKeys.被保険者番号, HihokenshaNo.class);
         FlexibleDate 審査請求届出日 = ViewStateHolder.get(ViewStateKeys.審査請求届出日, FlexibleDate.class);
