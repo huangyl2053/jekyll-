@@ -218,12 +218,20 @@
         DbT5101."ninteiChosaItakusakiCode" = DbT5221."ninteiChosaItakusakiCode"
         AND
         DbT5101."ninteiChosainCode" = DbT5221."ninteiChosainCode"
+        AND
+        DbT5221."yoyakuKaoFlag" = TRUE
+         <if test="メモフラグ">
+            AND
+            DbT5221."taishoshaMemo" LIKE #{メモ} || '%'
+        </if>
+        <if test="対象地区フラグ">
+            AND
+            DbT5221."chosaChikuCode" = #{対象地区}
+        </if>
         WHERE
         DbT5101."logicalDeletedFlag" = FALSE
         AND
         DbT5101."shoriJotaiKubun"  IN ('0','3')
-        AND
-        DbT5221."yoyakuKaoFlag" = TRUE
         <if test="保険者フラグ">
             AND
             DbT5101."shoKisaiHokenshaNo" = #{証記載保険者番号}
@@ -254,14 +262,6 @@
         <if test="認定申請日Toフラグ">
             AND
             DbT5101."ninteiShinseiYMD" <![CDATA[<=]]> #{認定申請日To}
-        </if>
-        <if test="メモフラグ">
-            AND
-            DbT5221."taishoshaMemo" LIKE #{メモ} || '%'
-        </if>
-        <if test="対象地区フラグ">
-            AND
-            DbT5221."chosaChikuCode" = #{対象地区}
         </if>
         ORDER BY
         DbT7051."shichosonMeisho",

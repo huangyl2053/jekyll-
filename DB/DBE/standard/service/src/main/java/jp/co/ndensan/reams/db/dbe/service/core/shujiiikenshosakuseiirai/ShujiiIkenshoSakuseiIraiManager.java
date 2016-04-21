@@ -27,6 +27,7 @@ import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
 /**
  * 主治医意見書作成依頼情報を管理するクラスです。
  *
+ * @reamsid_L DBE-0050-010 zuotao
  */
 public class ShujiiIkenshoSakuseiIraiManager {
 

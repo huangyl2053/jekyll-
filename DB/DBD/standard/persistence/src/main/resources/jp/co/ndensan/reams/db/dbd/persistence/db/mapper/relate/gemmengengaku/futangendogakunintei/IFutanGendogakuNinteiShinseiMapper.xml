@@ -23,7 +23,7 @@
         A."hihokenshaNo" = #{被保険者番号}
         AND A."tekiyoKaishiYMD" <![CDATA[<=]]> #{適用日}
         AND
-        CASE WHEN A."tekiyoShuryoYMD" = NULL THEN #{適用日} <= '99999999'
+        CASE WHEN A."tekiyoShuryoYMD" = NULL THEN #{適用日} <![CDATA[<=]]> '99999999'
         ELSE #{適用日} <![CDATA[<=]]> A."tekiyoShuryoYMD"
         AND A."logicalDeletedFlag" = false
     </select>

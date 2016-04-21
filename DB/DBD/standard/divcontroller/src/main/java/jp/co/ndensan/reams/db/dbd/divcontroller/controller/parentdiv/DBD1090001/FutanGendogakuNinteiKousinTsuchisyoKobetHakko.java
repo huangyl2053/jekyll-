@@ -6,16 +6,15 @@
 package jp.co.ndensan.reams.db.dbd.divcontroller.controller.parentdiv.DBD1090001;
 
 import java.util.ArrayList;
-import java.util.List;
 import jp.co.ndensan.reams.db.dbd.business.core.gemmengengaku.futangendogakunintei.FutanGendogakuNintei;
 import jp.co.ndensan.reams.db.dbd.definition.core.gemmengengaku.KetteiKubun;
 import jp.co.ndensan.reams.db.dbd.definition.core.gemmengengaku.RiyoshaFutanDankai;
 import jp.co.ndensan.reams.db.dbd.definition.core.gemmengengaku.futangendogakunintei.KyuSochishaKubun;
 import jp.co.ndensan.reams.db.dbd.definition.core.gemmengengaku.futangendogakunintei.ShinseiRiyuKubun;
+import jp.co.ndensan.reams.db.dbd.definition.core.reportid.ReportIdDBD;
 import jp.co.ndensan.reams.db.dbd.definition.message.DbdInformationMessages;
 import jp.co.ndensan.reams.db.dbd.definition.viewbox.ViewStateKeys;
 import jp.co.ndensan.reams.db.dbd.divcontroller.entity.parentdiv.DBD1090001.FutanGendogakuNinteiKousinTsuchisyoKobetHakkoDiv;
-import jp.co.ndensan.reams.db.dbd.divcontroller.entity.parentdiv.DBD1090001.dgChohyoSentaku_Row;
 import jp.co.ndensan.reams.db.dbd.divcontroller.handler.parentdiv.DBD1090001.FutanGendogakuNinteiKousinTsuchisyoKobetHakkoHandler;
 import jp.co.ndensan.reams.db.dbd.divcontroller.handler.parentdiv.DBD1090001.FutanGendogakuNinteiKousinTsuchisyoKobetHakkoValidationHandler;
 import jp.co.ndensan.reams.db.dbd.service.report.futangendogakunintei.FutanGendogakuNinteiKanshoTsuchisho;
@@ -51,37 +50,37 @@ public class FutanGendogakuNinteiKousinTsuchisyoKobetHakko {
         div.getCcdKaigoAtenaInfoDiv().onLoad(識別コード);
 
         if (被保険者番号.isEmpty()) {
+            getHandler(div).setアクセスログ(被保険者番号, 識別コード);
+
+            div.getBtnZenRireki().setDisabled(true);
+            div.getBtnShotaiJohou().setDisabled(true);
+            div.getBtnGoRireki().setDisabled(true);
+
             return ResponseData.of(div).addMessage(DbdInformationMessages.受給共通_被保データなし.getMessage()).respond();
         } else {
             div.getCcdKaigoShikakuKihonDiv().onLoad(被保険者番号);
         }
 
-        div.getHihokenshashoHakkoTaishoshaJoho().getTsuchishoSakuseiKobetsu().getHenkoTsuchiKobetsu()
-                .getTxtHenkoTsuchiBunshoNo().setValue(new RString("DBD100008"));
+        div.getHihokenshashoHakkoTaishoshaJoho().getTsuchishoSakuseiKobetsu().getHenkoTsuchiKobetsu().getCcdBunshoBangoInputDiv()
+                .initialize(ReportIdDBD.DBDPR12002_1_1.getReportId());
 
-        boolean 減免減額 = getHandler(div).initialize(被保険者番号, 識別コード);
-        if (!減免減額) {
-            return ResponseData.of(div).addMessage(DbdInformationMessages.減免減額_承認処理済みのため削除不可.getMessage()).respond();
-        }
+        getHandler(div).get介護負担限度額認定(被保険者番号, 識別コード);
 
         ArrayList<FutanGendogakuNintei> futanGendogakuNinteiList
                 = ViewStateHolder.get(FutanGendogakuNinteiKousinTsuchisyoKobetHakkoHandler.介護保険負担限度額認定.リストキー, ArrayList.class);
-        set負担限度額認定エリア(div, futanGendogakuNinteiList.get(0));
-
-        List<dgChohyoSentaku_Row> rowList = new ArrayList<>();
-        for (FutanGendogakuNintei futanGendogakuNintei : futanGendogakuNinteiList) {
-            dgChohyoSentaku_Row row = new dgChohyoSentaku_Row();
-            row.setTxtChohyoSentaku(new RString(futanGendogakuNintei.get履歴番号()));
-            rowList.add(row);
+        if (!futanGendogakuNinteiList.isEmpty()) {
+            set負担限度額認定エリア(div, futanGendogakuNinteiList.get(0));
+            div.setListIndex(new RString("0"));
+            div.getBtnZenRireki().setDisabled(true);
+            if (1 == futanGendogakuNinteiList.size()) {
+                div.getBtnGoRireki().setDisabled(true);
+            }
         }
-        div.getHihokenshashoHakkoTaishoshaJoho().getTsuchishoSakuseiKobetsu().getDgChohyoSentaku().setDataSource(rowList);
+        getHandler(div).setアクセスログ(被保険者番号, 識別コード);
+
         div.getHihokenshashoHakkoTaishoshaJoho().getTsuchishoSakuseiKobetsu().getHenkoTsuchiKobetsu().getTxtHenkoTsuchiHakkoYMD()
                 .setValue(RDate.getNowDate());
-        div.setListIndex(new RString("0"));
-        div.getBttZenRireki().setDisabled(true);
-        if (1 == futanGendogakuNinteiList.size()) {
-            div.getBttGoRireki().setDisabled(true);
-        }
+
         return ResponseData.of(div).respond();
     }
 
@@ -133,10 +132,10 @@ public class FutanGendogakuNinteiKousinTsuchisyoKobetHakko {
     public ResponseData<FutanGendogakuNinteiKousinTsuchisyoKobetHakkoDiv> onClick_btnZenrireki(
             FutanGendogakuNinteiKousinTsuchisyoKobetHakkoDiv div) {
 
-        div.getBttGoRireki().setDisabled(false);
+        div.getBtnGoRireki().setDisabled(false);
         int listIndex = Integer.valueOf(div.getListIndex().toString()) - 1;
         if (listIndex == 0) {
-            div.getBttZenRireki().setDisabled(true);
+            div.getBtnZenRireki().setDisabled(true);
         }
         div.setListIndex(new RString(listIndex));
         ArrayList<FutanGendogakuNintei> futanGendogakuNinteiList
@@ -158,9 +157,9 @@ public class FutanGendogakuNinteiKousinTsuchisyoKobetHakko {
         ArrayList<FutanGendogakuNintei> futanGendogakuNinteiList
                 = ViewStateHolder.get(FutanGendogakuNinteiKousinTsuchisyoKobetHakkoHandler.介護保険負担限度額認定.リストキー, ArrayList.class);
         set負担限度額認定エリア(div, futanGendogakuNinteiList.get(listIndex));
-        div.getBttZenRireki().setDisabled(false);
+        div.getBtnZenRireki().setDisabled(false);
         if (listIndex == futanGendogakuNinteiList.size() - 1) {
-            div.getBttGoRireki().setDisabled(true);
+            div.getBtnGoRireki().setDisabled(true);
         }
         div.setListIndex(new RString(listIndex));
         return ResponseData.of(div).respond();
@@ -177,7 +176,6 @@ public class FutanGendogakuNinteiKousinTsuchisyoKobetHakko {
         ValidationMessageControlPairs pairs = new ValidationMessageControlPairs();
         getValidationHandler().validateFor出力チェックボックス(pairs, div);
         if (div.getHihokenshashoHakkoTaishoshaJoho().getTsuchishoSakuseiKobetsu().getHenkoTsuchiKobetsu().isIsPublish()) {
-            getValidationHandler().validateFor文書番号の必須入力(pairs, div);
             getValidationHandler().validateFor発行日の必須入力(pairs, div);
         }
 
@@ -186,11 +184,13 @@ public class FutanGendogakuNinteiKousinTsuchisyoKobetHakko {
         RDate 発行日 = div.getHihokenshashoHakkoTaishoshaJoho().getTsuchishoSakuseiKobetsu()
                 .getHenkoTsuchiKobetsu().getTxtHenkoTsuchiHakkoYMD().getValue();
         RString 文書番号 = div.getHihokenshashoHakkoTaishoshaJoho().getTsuchishoSakuseiKobetsu()
-                .getHenkoTsuchiKobetsu().getTxtHenkoTsuchiBunshoNo().getValue();
+                .getHenkoTsuchiKobetsu().getCcdBunshoBangoInputDiv().get文書番号();
+        boolean お知らせ通知書 = div.getHihokenshashoHakkoTaishoshaJoho().getTsuchishoSakuseiKobetsu().getHenkoTsuchiKobetsu().isIsPublish();
+        boolean 申請書 = div.getHihokenshashoHakkoTaishoshaJoho().getTsuchishoSakuseiKobetsu().getFutanGendogakuNinteiHeddaXinseiSyo().isIsPublish();
 
         FutanGendogakuNinteiKanshoTsuchisho futanGendogakuNinteiKanshoTsuchisho = FutanGendogakuNinteiKanshoTsuchisho.createInstance();
         SourceDataCollection sourceDataCollection = futanGendogakuNinteiKanshoTsuchisho.publish(
-                被保険者番号, 識別コード, Integer.valueOf(div.getRirekiNo().toString()), 発行日, 文書番号);
+                被保険者番号, 識別コード, Integer.valueOf(div.getRirekiNo().toString()), 発行日, 文書番号, お知らせ通知書, 申請書);
 
         return ResponseData.of(sourceDataCollection).respond();
     }

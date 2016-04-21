@@ -58,7 +58,7 @@ public class HihokenshaDaichoShikakuIdoEditor implements IHihokenshaDaichoEditor
         source.listShikakuIdo_11 = entity.get変更事由コード().get(index);
         source.listShikakuIdo_12 = entity.get変更事由名称().get(index);
         source.listShikakuIdo_13 = entity.get住特適用日().get(index);
-        source.listShikakuIdo_14 = entity.get住特適用日().get(index);
+        source.listShikakuIdo_14 = entity.get住特解除日().get(index);
         source.listShikakuIdo_15 = entity.get措置保険者().get(index) == null ? RString.EMPTY : entity.get措置保険者().get(index).value();
         source.listShikakuIdo_16 = entity.get旧保険者().get(index) == null ? RString.EMPTY : entity.get旧保険者().get(index).value();
         return source;

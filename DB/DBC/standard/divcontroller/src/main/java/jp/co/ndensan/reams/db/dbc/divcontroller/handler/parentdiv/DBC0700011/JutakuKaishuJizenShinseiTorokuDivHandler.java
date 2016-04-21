@@ -1160,7 +1160,15 @@ public final class JutakuKaishuJizenShinseiTorokuDivHandler {
             削除モード初期化();
         } else if (取消モード.equals(画面モード)) {
             取消モード初期化();
+        } else if (登録モード.equals(画面モード)) {
+            登録モード初期化();
         }
+    }
+
+    private void 登録モード初期化() {
+        div.getKaigoShikakuKihonShaPanel().getTabShinseiContents().getTabShinsaKakka()
+                .getJutakuKaishuJizenShoninKetteiTsuchisho().setIsPublish(false);
+        div.getKaigoShikakuKihonShaPanel().getShinseishaInfo().getDdlShinseiTorikesuJiyu().setDisplayNone(true);
     }
 
     private void 照会モード初期化() {
@@ -1223,7 +1231,13 @@ public final class JutakuKaishuJizenShinseiTorokuDivHandler {
 
     private void 削除モード初期化() {
         照会モード初期化();
-        // TODO QAのNo.643　申請取消事由の設定
+        ShokanJutakuKaishuJizenShinsei data = ViewStateHolder.get(ViewStateKeys.償還払支給住宅改修事前申請情報,
+                ShokanJutakuKaishuJizenShinsei.class);
+        if (JutakukaishuShinseiKubun.取消.getCode().equals(data.get住宅改修申請区分())) {
+            div.getKaigoShikakuKihonShaPanel().getShinseishaInfo().getDdlShinseiTorikesuJiyu().setDisplayNone(false);
+        } else {
+            div.getKaigoShikakuKihonShaPanel().getShinseishaInfo().getDdlShinseiTorikesuJiyu().setDisplayNone(true);
+        }
     }
 
     private void 取消モード初期化() {

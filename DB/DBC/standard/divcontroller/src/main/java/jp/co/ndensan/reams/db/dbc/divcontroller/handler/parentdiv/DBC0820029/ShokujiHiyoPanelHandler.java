@@ -216,23 +216,53 @@ public class ShokujiHiyoPanelHandler {
      * 計算するのメソッド
      */
     public void 計算する() {
-        Decimal 基本提供金額, 特別食提供金額, 食事提供延べ日数, 標準負担_月額, 食事提供費合計, 食事提供費請求額;
-        基本提供金額 = div.getPanelShokuji().getPanelDetail1().getTxtKihonNissu().getValue().multiply(
-                div.getPanelShokuji().getPanelDetail1().getTxtKihonTanka().getValue());
-        特別食提供金額 = div.getPanelShokuji().getPanelDetail1().getTxtTokubetuSyokuNissu().getValue().multiply(
-                div.getPanelShokuji().getPanelDetail1().getTxtTokubetuSyokuTanka().getValue());
-        食事提供延べ日数 = div.getPanelShokuji().getPanelDetail1().getTxtKihonNissu().getValue().add(
-                div.getPanelShokuji().getPanelDetail1().getTxtTokubetuSyokuNissu().getValue());
-        標準負担_月額 = 食事提供延べ日数.multiply(
-                div.getPanelShokuji().getPanelDetail1().getTxtnichigakuHyojunFutangaku().getValue());
-        食事提供費合計 = 基本提供金額.add(特別食提供金額);
-        食事提供費請求額 = 食事提供費合計.subtract(標準負担_月額);
-        div.getPanelShokuji().getPanelDetail1().getTxtKihonKingaku().setValue(基本提供金額);
-        div.getPanelShokuji().getPanelDetail1().getTxtTokubetuSyokuKinngaku().setValue(特別食提供金額);
+        Decimal 基本金額, 特別食金額, 食事提供延べ日数, 標準負担額月額, 食事提供費合計, 食事提供費請求額;
+        Decimal 基本日数 = div.getPanelShokuji().getPanelDetail1().getTxtKihonNissu().getValue();
+        Decimal 基本単価 = div.getPanelShokuji().getPanelDetail1().getTxtKihonTanka().getValue();
+        Decimal 特別食日数 = div.getPanelShokuji().getPanelDetail1().getTxtTokubetuSyokuNissu().getValue();
+        Decimal 特別食単価 = div.getPanelShokuji().getPanelDetail1().getTxtTokubetuSyokuTanka().getValue();
+        Decimal 標準負担額日額 = div.getPanelShokuji().getPanelDetail1().getTxtnichigakuHyojunFutangaku().getValue();
+
+        基本日数 = null == 基本日数 ? Decimal.ZERO : 基本日数;
+        基本単価 = null == 基本単価 ? Decimal.ZERO : 基本単価;
+        特別食日数 = null == 特別食日数 ? Decimal.ZERO : 特別食日数;
+        特別食単価 = null == 特別食単価 ? Decimal.ZERO : 特別食単価;
+        標準負担額日額 = null == 標準負担額日額 ? Decimal.ZERO : 標準負担額日額;
+
+        基本金額 = 基本日数.multiply(基本単価);
+        特別食金額 = 特別食日数.multiply(特別食単価);
+        食事提供延べ日数 = 基本日数.add(特別食日数);
+        標準負担額月額 = 食事提供延べ日数.multiply(標準負担額日額);
+        食事提供費合計 = 基本金額.add(特別食金額);
+        食事提供費請求額 = 食事提供費合計.subtract(標準負担額月額);
+
+        div.getPanelShokuji().getPanelDetail1().getTxtKihonNissu().setValue(基本日数);
+        div.getPanelShokuji().getPanelDetail1().getTxtKihonTanka().setValue(基本単価);
+        div.getPanelShokuji().getPanelDetail1().getTxtKihonKingaku().setValue(基本金額);
+        div.getPanelShokuji().getPanelDetail1().getTxtTokubetuSyokuNissu().setValue(特別食日数);
+        div.getPanelShokuji().getPanelDetail1().getTxtTokubetuSyokuTanka().setValue(特別食単価);
+        div.getPanelShokuji().getPanelDetail1().getTxtTokubetuSyokuKinngaku().setValue(特別食金額);
         div.getPanelShokuji().getPanelDetail1().getTxtShokujiTeikyoTotalNissu().setValue(食事提供延べ日数);
-        div.getPanelShokuji().getPanelDetail1().getTxtgetsugakuHyojunFutangaku().setValue(標準負担_月額);
+        div.getPanelShokuji().getPanelDetail1().getTxtnichigakuHyojunFutangaku().setValue(標準負担額日額);
+        div.getPanelShokuji().getPanelDetail1().getTxtgetsugakuHyojunFutangaku().setValue(標準負担額月額);
         div.getPanelShokuji().getPanelDetail1().getTxtShokujiTeikyohiTotal().setValue(食事提供費合計);
         div.getPanelShokuji().getPanelDetail1().getTxtshokujiTeikyohiSeikyugaku().setValue(食事提供費請求額);
+//        基本提供金額 = div.getPanelShokuji().getPanelDetail1().getTxtKihonNissu().getValue().multiply(
+//                div.getPanelShokuji().getPanelDetail1().getTxtKihonTanka().getValue());
+//        特別食提供金額 = div.getPanelShokuji().getPanelDetail1().getTxtTokubetuSyokuNissu().getValue().multiply(
+//                div.getPanelShokuji().getPanelDetail1().getTxtTokubetuSyokuTanka().getValue());
+//        食事提供延べ日数 = div.getPanelShokuji().getPanelDetail1().getTxtKihonNissu().getValue().add(
+//                div.getPanelShokuji().getPanelDetail1().getTxtTokubetuSyokuNissu().getValue());
+//        標準負担_月額 = 食事提供延べ日数.multiply(
+//                div.getPanelShokuji().getPanelDetail1().getTxtnichigakuHyojunFutangaku().getValue());
+//        食事提供費合計 = 基本提供金額.add(特別食提供金額);
+//        食事提供費請求額 = 食事提供費合計.subtract(標準負担_月額);
+//        div.getPanelShokuji().getPanelDetail1().getTxtKihonKingaku().setValue(基本提供金額);
+//        div.getPanelShokuji().getPanelDetail1().getTxtTokubetuSyokuKinngaku().setValue(特別食提供金額);
+//        div.getPanelShokuji().getPanelDetail1().getTxtShokujiTeikyoTotalNissu().setValue(食事提供延べ日数);
+//        div.getPanelShokuji().getPanelDetail1().getTxtgetsugakuHyojunFutangaku().setValue(標準負担_月額);
+//        div.getPanelShokuji().getPanelDetail1().getTxtShokujiTeikyohiTotal().setValue(食事提供費合計);
+//        div.getPanelShokuji().getPanelDetail1().getTxtshokujiTeikyohiSeikyugaku().setValue(食事提供費請求額);
     }
 
     /**

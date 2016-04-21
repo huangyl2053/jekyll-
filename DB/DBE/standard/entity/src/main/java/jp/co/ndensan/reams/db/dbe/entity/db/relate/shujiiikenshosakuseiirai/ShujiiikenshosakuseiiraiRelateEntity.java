@@ -19,13 +19,16 @@ import lombok.Getter;
 import lombok.Setter;
 
 /**
- * 主治医意見書作成依頼RelateEntityクラスです。
+ * 主治医意見書作成依頼RelateEntityクラスです
+ *
+ * @reamsid_L DBE-0050-010 zuotao
  */
 @Getter
 @Setter
 @SuppressWarnings("PMD.UnusedPrivateField")
 public class ShujiiikenshosakuseiiraiRelateEntity {
 
+    private RString hihokenshaNo;
     private ShinseishoKanriNo shinseishoKanriNo;
     private RString shoKisaiHokenshaNo;
     private Code koroshoIfShikibetsuCode;

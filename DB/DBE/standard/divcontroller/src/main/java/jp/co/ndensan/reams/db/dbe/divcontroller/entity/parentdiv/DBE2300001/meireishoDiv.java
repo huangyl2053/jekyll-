@@ -29,10 +29,10 @@ public class meireishoDiv extends Panel {
     private TextBoxTime txtjyushintime;
     @JsonProperty("spSpace1")
     private Space spSpace1;
-    @JsonProperty("txtJyushinKikan")
-    private TextBoxDateRange txtJyushinKikan;
     @JsonProperty("spSpace2")
     private Space spSpace2;
+    @JsonProperty("txtJyushinKikan")
+    private TextBoxDateRange txtJyushinKikan;
     @JsonProperty("txtjyushinbasho")
     private TextBox txtjyushinbasho;
 
@@ -115,24 +115,6 @@ public class meireishoDiv extends Panel {
     }
 
     /*
-     * gettxtJyushinKikan
-     * @return txtJyushinKikan
-     */
-    @JsonProperty("txtJyushinKikan")
-    public TextBoxDateRange getTxtJyushinKikan() {
-        return txtJyushinKikan;
-    }
-
-    /*
-     * settxtJyushinKikan
-     * @param txtJyushinKikan txtJyushinKikan
-     */
-    @JsonProperty("txtJyushinKikan")
-    public void setTxtJyushinKikan(TextBoxDateRange txtJyushinKikan) {
-        this.txtJyushinKikan = txtJyushinKikan;
-    }
-
-    /*
      * getspSpace2
      * @return spSpace2
      */
@@ -148,6 +130,24 @@ public class meireishoDiv extends Panel {
     @JsonProperty("spSpace2")
     public void setSpSpace2(Space spSpace2) {
         this.spSpace2 = spSpace2;
+    }
+
+    /*
+     * gettxtJyushinKikan
+     * @return txtJyushinKikan
+     */
+    @JsonProperty("txtJyushinKikan")
+    public TextBoxDateRange getTxtJyushinKikan() {
+        return txtJyushinKikan;
+    }
+
+    /*
+     * settxtJyushinKikan
+     * @param txtJyushinKikan txtJyushinKikan
+     */
+    @JsonProperty("txtJyushinKikan")
+    public void setTxtJyushinKikan(TextBoxDateRange txtJyushinKikan) {
+        this.txtJyushinKikan = txtJyushinKikan;
     }
 
     /*

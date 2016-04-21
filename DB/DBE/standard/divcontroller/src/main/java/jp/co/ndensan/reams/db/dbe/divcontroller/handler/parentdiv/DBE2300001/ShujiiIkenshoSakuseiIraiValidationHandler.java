@@ -17,6 +17,8 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
 
 /**
  * 主治医意見書作成依頼のValidationHandlerクラスです。
+ *
+ * @reamsid_L DBE-0050-010 zuotao
  */
 public class ShujiiIkenshoSakuseiIraiValidationHandler {
 

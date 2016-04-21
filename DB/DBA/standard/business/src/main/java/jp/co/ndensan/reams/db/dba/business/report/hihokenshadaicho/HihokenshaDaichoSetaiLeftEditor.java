@@ -19,11 +19,6 @@ public class HihokenshaDaichoSetaiLeftEditor implements IHihokenshaDaichoEditor 
 
     private final HihokenshaDaichoSakusei joho;
     private final int index;
-    private static final int ZERO = 0;
-    private static final int ONE = 1;
-    private static final int TWO = 2;
-    private static final int THREE = 3;
-    private static final int FOUR = 4;
 
     /**
      * コンストラクタです。
@@ -55,17 +50,6 @@ public class HihokenshaDaichoSetaiLeftEditor implements IHihokenshaDaichoEditor 
         source.listSetaiLeft_1 = 世帯左情報.get世帯左No().get(index);
         source.listSetaiLeft_2 = 世帯左情報.get世帯左識別コード().get(index) == null
                 ? RString.EMPTY : 世帯左情報.get世帯左識別コード().get(index).value();
-        if (index == ZERO) {
-            source.setaiinShimei1 = joho.get世帯氏名1();
-        } else if (index == ONE) {
-            source.setaiinShimei2 = joho.get世帯氏名2();
-        } else if (index == TWO) {
-            source.setaiinShimei3 = joho.get世帯氏名3();
-        } else if (index == THREE) {
-            source.setaiinShimei4 = joho.get世帯氏名4();
-        } else if (index == FOUR) {
-            source.setaiinShimei5 = joho.get世帯氏名5();
-        }
         return source;
     }
 }
