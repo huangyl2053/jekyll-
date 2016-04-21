@@ -26,6 +26,8 @@ import jp.co.ndensan.reams.uz.uza.lang.ApplicationException;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.log.accesslog.AccessLogType;
+import jp.co.ndensan.reams.uz.uza.log.accesslog.AccessLogger;
 import jp.co.ndensan.reams.uz.uza.log.accesslog.core.ExpandedInformation;
 import jp.co.ndensan.reams.uz.uza.log.accesslog.core.PersonalData;
 import jp.co.ndensan.reams.uz.uza.ui.binding.RowState;
@@ -284,7 +286,7 @@ public class JogaishaTorokuHandler {
     }
 
     private void アクセスログ() {
-//        AccessLogger.log(AccessLogType.照会, toPersonalData(new ShikibetsuCode(dgRowList.get(i).getShikibetsuCode())));
+        AccessLogger.log(AccessLogType.照会, toPersonalData(ShikibetsuCode.EMPTY));
     }
 
     private void set除外対象者エリア(dgNenreiTotatshusha_Row row) {
