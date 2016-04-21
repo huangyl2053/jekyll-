@@ -638,17 +638,17 @@ public final class JutakuKaishuShinseiJyohoTorokuHandler {
         div.getJutakuKaishuShinseiContents().getShinseishaInfo().getTxtTelNo().setDomain(
                 償還払支給申請情報.get申請者電話番号());
         RString 申請取消事由コード = 償還払支給申請情報.get住宅改修申請取消事由コード();
-        List<KeyValueDataSource> torikesuJiyu = new ArrayList<>();
-        torikesuJiyu.add(new KeyValueDataSource(申請取消事由_空, RString.EMPTY));
         if (申請取消事由コード != null) {
             RString 申請取消事由 = CodeMasterNoOption.getCodeRyakusho(
                     new CodeShubetsu("0028"), new Code(申請取消事由コード));
+            List<KeyValueDataSource> torikesuJiyu = new ArrayList<>();
+            torikesuJiyu.add(new KeyValueDataSource(申請取消事由_空, RString.EMPTY));
             torikesuJiyu.add(new KeyValueDataSource(申請取消事由コード, 申請取消事由));
+            div.getJutakuKaishuShinseiContents().getShinseishaInfo().getDdlShinseiTorikesuJiyu().setDataSource(
+                    torikesuJiyu);
+            div.getJutakuKaishuShinseiContents().getShinseishaInfo().getDdlShinseiTorikesuJiyu().setSelectedKey(
+                    申請取消事由コード);
         }
-        div.getJutakuKaishuShinseiContents().getShinseishaInfo().getDdlShinseiTorikesuJiyu().setDataSource(
-                torikesuJiyu);
-        div.getJutakuKaishuShinseiContents().getShinseishaInfo().getDdlShinseiTorikesuJiyu().setSelectedKey(
-                申請取消事由コード);
         div.getJutakuKaishuShinseiContents().getShinseishaInfo().getTxtYubinNo().setValue(
                 償還払支給申請情報.get申請者郵便番号());
         if (償還払支給申請情報.get申請者住所() != null) {
