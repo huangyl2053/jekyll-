@@ -72,7 +72,10 @@ public class FukushiyoguKonyuhiShikyuGendogaku {
         }
         Decimal 支給限度額 = sut.getShikyuGendogaku(被保険者番号, サービス提供年月);
         SokanbaraiShiharaiKekkaResult entity = sut.getShokanShiharaiKekkaAll(被保険者番号, サービス提供年月);
-        Decimal 今までの保険者対象費用額 = entity.get保険対象費用額();
+        Decimal 今までの保険者対象費用額 = Decimal.ZERO;
+        if (entity != null) {
+            今までの保険者対象費用額 = entity.get保険対象費用額();
+        }
         Decimal 前回までの保険対象費用額 = 今までの保険者対象費用額;
 
         if (今までの保険者対象費用額 != Decimal.ZERO && 整理番号 != null) {
