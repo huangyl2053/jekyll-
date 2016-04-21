@@ -27,6 +27,7 @@ import jp.co.ndensan.reams.db.dbz.business.core.kaigosofubutsuatesakisource.Kaig
 import jp.co.ndensan.reams.db.dbz.business.report.parts.kaigotoiawasesaki.CompKaigoToiawasesakiSource;
 import jp.co.ndensan.reams.db.dbz.business.report.parts.kaigotoiawasesaki.IKaigoToiawasesakiSourceBuilder;
 import jp.co.ndensan.reams.db.dbz.business.report.util.EditedAtesaki;
+import jp.co.ndensan.reams.db.dbz.service.core.kanri.JushoHenshu;
 import jp.co.ndensan.reams.ur.urz.business.core.ninshosha.Ninshosha;
 import jp.co.ndensan.reams.ur.urz.business.report.parts.ninshosha.NinshoshaSourceBuilderFactory;
 import jp.co.ndensan.reams.ur.urz.entity.report.parts.ninshosha.NinshoshaSource;
@@ -263,10 +264,10 @@ public class GenmenKetteiTsuchiShoPrintService {
         }
         if (isNotNull(減免決定通知書情報.get宛先()) && isNotNull(減免決定通知書情報.get地方公共団体())
                 && isNotNull(減免決定通知書情報.get帳票制御共通())) {
-            EditedAtesaki 編集後宛先 = new EditedAtesaki(減免決定通知書情報.get宛先(),
+            JushoHenshu jushoHenshu = new JushoHenshu();
+            EditedAtesaki 編集後宛先 = jushoHenshu.create編集後宛先(減免決定通知書情報.get宛先(),
                     減免決定通知書情報.get地方公共団体(),
-                    減免決定通知書情報.get帳票制御共通(),
-                    null, null, true, null, null, null, null);
+                    減免決定通知書情報.get帳票制御共通());
             if (isNotNull(編集後宛先.getSofubutsuAtesakiSource())) {
                 KaigoSofubutsuAtesakiSource source = 編集後宛先.getSofubutsuAtesakiSource();
                 item.set郵便番号No(source.get送付物宛先ソース().yubinNo);
