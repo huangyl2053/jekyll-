@@ -29,6 +29,11 @@ public class FukushiyoguKonyuhiShikyuGendogaku {
         sut = InstanceProvider.create(FukushiyoguKonyuhiShikyuShinsei.class);
     }
 
+    /**
+     * テスト用コンストラクタです。
+     *
+     * @return FukushiyoguKonyuhiShikyuGendogaku
+     */
     public static FukushiyoguKonyuhiShikyuGendogaku createInstance() {
         return InstanceProvider.create(FukushiyoguKonyuhiShikyuGendogaku.class);
     }

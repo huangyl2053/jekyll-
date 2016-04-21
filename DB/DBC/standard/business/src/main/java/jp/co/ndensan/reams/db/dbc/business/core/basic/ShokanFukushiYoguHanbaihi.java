@@ -25,7 +25,8 @@ import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
  * @reamsid_L DBC-1020-050 chenaoqi
  */
 public class ShokanFukushiYoguHanbaihi
-        extends ModelBase<ShokanFukushiYoguHanbaihiIdentifier, DbT3048ShokanFukushiYoguHanbaihiEntity, ShokanFukushiYoguHanbaihi> implements Serializable {
+        extends ModelBase<ShokanFukushiYoguHanbaihiIdentifier, DbT3048ShokanFukushiYoguHanbaihiEntity, ShokanFukushiYoguHanbaihi>
+        implements Serializable {
 
     private final DbT3048ShokanFukushiYoguHanbaihiEntity entity;
     private final ShokanFukushiYoguHanbaihiIdentifier id;

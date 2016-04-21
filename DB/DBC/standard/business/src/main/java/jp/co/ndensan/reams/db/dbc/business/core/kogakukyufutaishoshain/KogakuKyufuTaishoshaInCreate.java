@@ -5,12 +5,10 @@
  */
 package jp.co.ndensan.reams.db.dbc.business.core.kogakukyufutaishoshain;
 
-import java.util.List;
 import jp.co.ndensan.reams.db.dbc.entity.csv.kogakukyufutaishoshaichiran.DbT3054CSVDataMeisaiEntity;
 import jp.co.ndensan.reams.db.dbc.entity.csv.kogakukyufutaishoshaichiran.DbT3055CSVDataGokeiEntity;
 import jp.co.ndensan.reams.db.dbc.entity.csv.kogakukyufutaishoshaichiran.DbTKogakuKyufuCSVDataHeadEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.kogakukyufutaishoshain.DbTKogakuKyufuTaishoshaDataTempTableEntity;
-import jp.co.ndensan.reams.db.dbc.entity.db.relate.kogakukyufutaishoshain.KogakuKyufuTaishoshaInEntity;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ServiceShuruiCode;
@@ -81,20 +79,6 @@ public class KogakuKyufuTaishoshaInCreate {
         result.setSakuseiYMD(new FlexibleDate(trim囲み文字(headEntity.getSakuseiYMD())));
         result.setKokukoRengoukaiNa(trim囲み文字(headEntity.getKokukoRengoukaiNa()));
         return result;
-    }
-
-    private KogakuKyufuTaishoshaInEntity getHeaderFrom情報Entity(
-            DbTKogakuKyufuCSVDataHeadEntity headEntity, List<KogakuKyufuTaishoshaInEntity> 情報Entity) {
-        if (null == 情報Entity) {
-            return null;
-        }
-        for (KogakuKyufuTaishoshaInEntity entity : 情報Entity) {
-
-            if (headEntity.equalsToEntity(entity.getHeadEntity())) {
-                return entity;
-            }
-        }
-        return null;
     }
 
     private RString trim囲み文字(RString 対象文字列) {
