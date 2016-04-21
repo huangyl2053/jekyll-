@@ -55,6 +55,7 @@ public class JutakuKaishuShinseiJyohoToroku {
 
     private final RString 画面モード_審査 = new RString("審査モード");
     private final RString 画面モード_照会 = new RString("照会モード");
+    private final RString モード_照会 = new RString("照会");
     private final RString 画面モード_削除 = new RString("削除モード");
     private final RString 画面モード_取消 = new RString("取消モード");
     private final RString 画面モード_登録 = new RString("登録モード");
@@ -107,7 +108,7 @@ public class JutakuKaishuShinseiJyohoToroku {
      */
     public ResponseData<JutakuKaishuShinseiJyohoTorokuDiv> onClick_btnShowJizenShinsei(
             JutakuKaishuShinseiJyohoTorokuDiv div) {
-        ViewStateHolder.put(ViewStateKeys.表示モード, 画面モード_照会);
+        ViewStateHolder.put(ViewStateKeys.処理モード, モード_照会);
         RDate 画面提供着工年月 = div.getTxtTeikyoYM().getValue();
         RString 整理番号 = div.getTxtSeiriNo().getValue();
         ViewStateHolder.put(ViewStateKeys.サービス提供年月, new FlexibleYearMonth(
