@@ -18,6 +18,7 @@ import jp.co.ndensan.reams.db.dbc.business.core.fukushiyogukonyuhishikyushisei.F
 import jp.co.ndensan.reams.db.dbc.business.core.fukushiyogukonyuhishikyushisei.SokanbaraiShiharaiKekkaResult;
 import jp.co.ndensan.reams.db.dbc.definition.core.shinsahoho.ShinsaHohoKubun;
 import jp.co.ndensan.reams.db.dbc.definition.core.shinseisha.ShinseishaKubun;
+import jp.co.ndensan.reams.db.dbc.definition.enumeratedtype.config.ConfigNameDBC;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0600021.YoguKonyuhiShikyuShinseiPnlTotalDiv;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0600021.dgSeikyuDetail_Row;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.KyufugakuSummaryDiv;
@@ -25,12 +26,12 @@ import jp.co.ndensan.reams.db.dbc.divcontroller.viewbox.ViewStateKeys;
 import jp.co.ndensan.reams.db.dbc.divcontroller.viewbox.dbc0600011.PnlTotalParameter;
 import jp.co.ndensan.reams.db.dbc.divcontroller.viewbox.dbc0600021.YoguKonyuhiShikyuShinseiPnlTotalParameter;
 import jp.co.ndensan.reams.db.dbc.service.core.fukushiyogukonyuhishikyushisei.FukushiyoguKonyuhiShikyuShinsei;
-import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBC;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBU;
 import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.GyomuBunrui;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HokenKyufuRitsu;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ServiceCode;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShoKisaiHokenshaNo;
 import jp.co.ndensan.reams.db.dbx.service.ShichosonSecurityJoho;
 import jp.co.ndensan.reams.db.dbx.service.core.dbbusinessconfig.DbBusinessConifg;
@@ -39,6 +40,7 @@ import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.kyotsu.SaibanHanyoke
 import jp.co.ndensan.reams.db.dbz.service.core.kijuntsukishichosonjoho.KijuntsukiShichosonjohoFinder;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrWarningMessages;
+import jp.co.ndensan.reams.uz.uza.biz.AtenaJusho;
 import jp.co.ndensan.reams.uz.uza.biz.CodeShubetsu;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
@@ -81,6 +83,7 @@ public class YoguKonyuhiShikyuShinseiPnlTotalHandler {
     private static final RString NUM1 = new RString("0001");
     private static final RString NUM01 = new RString("01");
     private static final RString NUMB1 = new RString("1");
+    private static final RString NUM0000 = new RString("0000");
     private static final int NUM_0 = 0;
     private static final int NUM_2 = 2;
     private static final int NUM_3 = 3;
@@ -418,8 +421,8 @@ public class YoguKonyuhiShikyuShinseiPnlTotalHandler {
                 getRadShinsakekka().setSelectedKey(shokanshinsei.get審査結果());
         div.getYoguKonyuhiShikyuShinseiContentsPanel().getPnlShinsesyaJoho().getTxtShinseisyaYubin().setValue(
                 shokanshinsei.get申請者郵便番号());
-        div.getYoguKonyuhiShikyuShinseiContentsPanel().getPnlShinsesyaJoho().getTxtShinseisyaJyusyo().setValue(
-                shokanshinsei.get申請者住所());
+        div.getYoguKonyuhiShikyuShinseiContentsPanel().getPnlShinsesyaJoho().
+                getTxtShinseisyaJyusyo().setDomain(new AtenaJusho(shokanshinsei.get申請者住所()));
     }
 
     /**
@@ -760,7 +763,8 @@ public class YoguKonyuhiShikyuShinseiPnlTotalHandler {
                 .set申請事業者コード(null)
                 .set申請者氏名(null)
                 .set申請者氏名カナ(null)
-                //TODO申請者住所
+                .set申請者住所(null)
+                .set申請者郵便番号(null)
                 .set支払期間開始年月日(null)
                 .set支払期間終了年月日(null)
                 .set支払窓口開始時間(null)
@@ -797,6 +801,9 @@ public class YoguKonyuhiShikyuShinseiPnlTotalHandler {
         if (row.getTxtShinsa() != null) {
             entity = entity.createBuilderForEdit().set審査方法区分コード(row.getTxtShinsa()).build();
         }
+        entity = entity.createBuilderForEdit().setサービスコード(new ServiceCode(
+                div.getYoguKonyuhiShikyuShinseiContentsPanel().
+                getTxtServiceCode().getValue().concat(NUM0000))).build();
         return entity;
 
     }
@@ -1117,9 +1124,6 @@ public class YoguKonyuhiShikyuShinseiPnlTotalHandler {
         RString 給付率 = DbBusinessConifg.get(ConfigNameDBU.介護保険法情報_保険給付率_標準給付率, RDate.getNowDate(),
                 SubGyomuCode.DBU介護統計報告);
         div.getYoguKonyuhiShikyuShinseiContentsPanel().getTxtKyufuritsu().setValue(new Decimal(給付率.toString()));
-        HokenKyufuRitsu hokenkyufuritsu = new HokenKyufuRitsu(
-                div.getYoguKonyuhiShikyuShinseiContentsPanel().getTxtKyufuritsu().getValue());
-        ViewStateHolder.put(ViewStateKeys.給付率, hokenkyufuritsu);
         div.getYoguKonyuhiShikyuShinseiContentsPanel().getTxtJigyoshaNo().setValue(NUM3);
         RString 整理番号 = Saiban.get(SubGyomuCode.DBC介護給付, SaibanHanyokeyName.償還整理番号.
                 getコード()).nextString();
