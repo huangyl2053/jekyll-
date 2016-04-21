@@ -301,8 +301,8 @@ public class JutakuKaishuShinseiJyohoToroku {
     public ResponseData<JutakuKaishuShinseiJyohoTorokuDiv> onBeforeOpenDialog_btnJigyosha(
             JutakuKaishuShinseiJyohoTorokuDiv div) {
         JigyoshaMode jigyoshaMode = new JigyoshaMode();
-//        jigyoshaMode.setJigyoshaShubetsu(ShisetsuType.介護保険施設.code());
-//        div.setJigyoshaMode(DataPassingConverter.serialize(jigyoshaMode));
+        jigyoshaMode.setJigyoshaShubetsu(ShisetsuType.介護保険施設.code());
+        div.setJigyoshaMode(DataPassingConverter.serialize(jigyoshaMode));
         return ResponseData.of(div).respond();
     }
 
