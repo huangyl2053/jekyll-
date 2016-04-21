@@ -8,8 +8,8 @@ package jp.co.ndensan.reams.db.dbc.business.core.kyotakukeika.kyotakukeikakujiko
 import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dbc.business.core.kyotakukeika.kyotakukeikakujikosakuseigokei.KyotakuKeikakuJikoSakuseiGokei;
 import jp.co.ndensan.reams.db.dbc.business.core.kyotakukeika.kyotakukeikakujikosakuseigokei.KyotakuKeikakuJikoSakuseiGokeiIdentifier;
-import jp.co.ndensan.reams.db.dbc.business.core.kyotakukeika.kyotakukeikakujikosakuseitankinyushoriyonissu.KyotakuKeikakuJikoSakuseiTankiNyushoRiyoNissu;
-import jp.co.ndensan.reams.db.dbc.business.core.kyotakukeika.kyotakukeikakujikosakuseitankinyushoriyonissu.KyotakuKeikakuJikoSakuseiTankiNyushoRiyoNissuIdentifier;
+import jp.co.ndensan.reams.db.dbc.business.core.kyotakukeika.kyotakukeika.KyotakuKeikakuJikoSakuseiTankiNyushoRiyoNissu;
+import jp.co.ndensan.reams.db.dbc.business.core.kyotakukeika.kyotakukeika.KyotakuKeikakuJikoSakuseiTankiNyushoRiyoNissuIdentifier;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HokenKyufuRitsu;
 import jp.co.ndensan.reams.db.dbz.business.core.uzclasses.Models;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT3008KyotakuKeikakuJikosakuseiMeisaiEntity;

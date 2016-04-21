@@ -375,7 +375,9 @@ public class NinteichosahyoGaikyoChosa
 
     /**
      * 認定調査票（概況調査）配下の要素を削除対象とします。<br/> {@link DbT5202NinteichosahyoGaikyoChosaEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば削除状態にします。
-     * 認定調査票（概況調査）配下の要素である認定調査票（概況特記）情報の{@link Models#deleteOrRemoveAll() }と 認定調査票（基本調査）情報の{@link Models#deleteOrRemoveAll() }と 認定調査票（概況調査）記入項目情報の{@link Models#deleteOrRemoveAll()
+     * 認定調査票（概況調査）配下の要素である認定調査票（概況特記）情報の{@link Models#deleteOrRemoveAll() }と <br/>
+     * 認定調査票（基本調査）情報の{@link Models#deleteOrRemoveAll() }と <br/>
+     * 認定調査票（概況調査）記入項目情報の{@link Models#deleteOrRemoveAll()
      * }と 認定調査票（概況調査）サービスの状況情報の{@link Models#deleteOrRemoveAll() }と 認定調査票（概況調査）サービスの状況フラグ情報の{@link Models#deleteOrRemoveAll() }と
      * 認定調査票（概況調査）施設利用情報の{@link Models#deleteOrRemoveAll() }と 認定調査票（特記情報）情報の{@link Models#deleteOrRemoveAll() }とを実行します。
      * 削除処理結果となる{@link NinteichosahyoGaikyoChosa}を返します。

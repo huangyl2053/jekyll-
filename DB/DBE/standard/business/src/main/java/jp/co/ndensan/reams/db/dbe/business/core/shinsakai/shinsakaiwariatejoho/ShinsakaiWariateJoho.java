@@ -204,6 +204,12 @@ public class ShinsakaiWariateJoho
         return this.id;
     }
 
+    /**
+     * 要介護認定申請情報を取得します。
+     *
+     * @param id NinteiShinseiJohoIdentifier
+     * @return NinteiShinseiJoho
+     */
     public NinteiShinseiJoho getNinteiShinseiJoho(NinteiShinseiJohoIdentifier id) {
         if (ninteiShinseiJoho.contains(id)) {
             return ninteiShinseiJoho.clone().get(id);
@@ -212,6 +218,11 @@ public class ShinsakaiWariateJoho
         throw new IllegalArgumentException(UrErrorMessages.不正.toString());
     }
 
+    /**
+     * 要介護認定申請情報リストを取得します。
+     *
+     * @return List<NinteiShinseiJoho>
+     */
     public List<NinteiShinseiJoho> getNinteiShinseiJohoList() {
         return new ArrayList<>(ninteiShinseiJoho.values());
     }
@@ -263,6 +274,7 @@ public class ShinsakaiWariateJoho
     }
 
     private static final class _SerializationProxy implements Serializable {
+        private static final long serialVersionUID = 2243645461859993680L;
 
         private final DbT5502ShinsakaiWariateJohoEntity entity;
         private final ShinsakaiWariateJohoIdentifier id;

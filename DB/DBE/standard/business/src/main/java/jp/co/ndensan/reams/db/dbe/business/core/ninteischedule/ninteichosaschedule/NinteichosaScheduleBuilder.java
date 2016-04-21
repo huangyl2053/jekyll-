@@ -207,7 +207,7 @@ public class NinteichosaScheduleBuilder {
     }
 
     private boolean hasSameIdentifier(NinteiShinseiJohoIdentifier 要介護認定申請情報の識別子) {
-        return (entity.getShinseishoKanriNo().equals(要介護認定申請情報の識別子.get申請書管理番号()));
+        return (要介護認定申請情報の識別子.get申請書管理番号().equals(entity.getShinseishoKanriNo()));
     }
 
     /**
