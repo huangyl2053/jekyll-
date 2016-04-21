@@ -48,6 +48,7 @@ import jp.co.ndensan.reams.db.dbc.service.core.jyutakukaisyuyichiran.Jyutakukais
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShoKisaiHokenshaNo;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
@@ -474,6 +475,8 @@ public class JutakukaishuSikyuShinseiManager {
             dbt3036entity.setHiHokenshaNo(parameter.get被保険者番号());
             dbt3036entity.setServiceTeikyoYM(parameter.getサービス提供年月());
             dbt3036entity.setSeiriNo(parameter.get整理番号());
+            //TODO QA
+            dbt3036entity.setShoKisaiHokenshaNo(new ShoKisaiHokenshaNo("123456"));
             dbt3036entity.setKetteiYMD(parameter.get決定年月日());
             dbt3036entity.setShikyuHushikyuKetteiKubun(parameter.get支給決定区分());
             dbt3036entity.setShiharaiKingaku(parameter.get支払金額());
