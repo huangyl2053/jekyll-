@@ -347,10 +347,7 @@ public class FukushiyoguKonyuhiShikyuKetteiKyufuJissekiHenshu {
             ServiceShuruiCode サービス種類コード = shokanShukeiEntity.getServiceShuruiCode();
             if (サービス種類コード != null) {
                 dbT3026entity.setServiceCode(new ServiceCode(サービス種類コード.value().concat(new RString("0000"))));
-            } else {
-                dbT3026entity.setServiceCode(new ServiceCode(new RString("0000")));
             }
-
             dbT3026entity.setFukushiyoguHanbaiYMD(nullTOEmpty(dbT3048Entity.getFukushiYoguHanbaiYMD()));
             dbT3026entity.setFukushiyoguShohinName(dbT3048Entity.getFukushiYoguShohinName());
             dbT3026entity.setFukushiyoguSyumokuCode(dbT3048Entity.getFukushiYoguShumokuCode());
