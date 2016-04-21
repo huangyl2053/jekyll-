@@ -244,9 +244,7 @@ public class GenmenKetteiTsuchiShoPrintService {
             item.set発行日(sourceBuilder.hakkoYMD);
             item.set電子公印(sourceBuilder.denshiKoin);
             item.set認証者役職名(sourceBuilder.ninshoshaYakushokuMei);
-            item.set認証者役職名1(sourceBuilder.ninshoshaYakushokuMei1);
             item.set公印文字列(sourceBuilder.koinMojiretsu);
-            item.set認証者役職名2(sourceBuilder.ninshoshaYakushokuMei2);
             item.set認証者氏名公印に掛けない(sourceBuilder.ninshoshaShimeiKakenai);
             item.set認証者氏名公印に掛ける(sourceBuilder.ninshoshaShimeiKakeru);
             item.set公印省略(sourceBuilder.koinShoryaku);
@@ -306,8 +304,8 @@ public class GenmenKetteiTsuchiShoPrintService {
             }
 
         }
-        // TODO (QA655) 世帯主名
-        // TODO (QA655) 様方
+        // TODO (QA655) 世帯主名 将来に追加する
+        // TODO (QA655) 様方 将来に追加する
     }
 
     /**
