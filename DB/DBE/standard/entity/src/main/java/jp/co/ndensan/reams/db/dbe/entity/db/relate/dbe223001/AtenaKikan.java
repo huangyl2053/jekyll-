@@ -11,8 +11,9 @@ import lombok.Getter;
 import lombok.Setter;
 
 /**
- *
  * 宛名機関情報のクラスです。
+ *
+ * @reamsid_L DBE-0030-040 xuyue
  */
 @Getter
 @Setter
