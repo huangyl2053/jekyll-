@@ -7,7 +7,7 @@ import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaN
  */
 @lombok.Getter
 @SuppressWarnings("PMD.UnusedPrivateField")
-public final class KyokaisoGaitoshaMapperParameter {
+public final class KyokaisoMapperParameter {
 
     private final HihokenshaNo 被保険者番号;
     private final int 履歴番号;
@@ -17,10 +17,10 @@ public final class KyokaisoGaitoshaMapperParameter {
     private final boolean uses履歴番号;
     private final boolean usesリンク番号;
 
-    private KyokaisoGaitoshaMapperParameter(
+    private KyokaisoMapperParameter(
             @lombok.NonNull HihokenshaNo 被保険者番号,
-            @lombok.NonNull int 履歴番号,
-            @lombok.NonNull int リンク番号,
+            int 履歴番号,
+            int リンク番号,
             boolean uses被保険者番号,
             boolean uses履歴番号,
             boolean usesリンク番号) {
@@ -41,13 +41,13 @@ public final class KyokaisoGaitoshaMapperParameter {
      * @param 被保険者番号 HihokenshaNo
      * @param 履歴番号 int
      * @param リンク番号 int
-     * @return KyokaisoGaitoshaMapperParameter
+     * @return KyokaisoMapperParameter
      */
-    public static KyokaisoGaitoshaMapperParameter createSelectByKeyParam(
+    public static KyokaisoMapperParameter createSelectByKeyParam(
             HihokenshaNo 被保険者番号,
             int 履歴番号,
             int リンク番号) {
-        return new KyokaisoGaitoshaMapperParameter(被保険者番号, 履歴番号, リンク番号, true, true, true);
+        return new KyokaisoMapperParameter(被保険者番号, 履歴番号, リンク番号, true, true, true);
     }
 
     /**
@@ -55,11 +55,11 @@ public final class KyokaisoGaitoshaMapperParameter {
      *
      * @param 被保険者番号 HihokenshaNo
      * @param リンク番号 int
-     * @return KyokaisoGaitoshaMapperParameter
+     * @return KyokaisoMapperParameter
      */
-    public static KyokaisoGaitoshaMapperParameter createSelectListParam(
+    public static KyokaisoMapperParameter createSelectListParam(
             HihokenshaNo 被保険者番号,
             int リンク番号) {
-        return new KyokaisoGaitoshaMapperParameter(被保険者番号, 0, リンク番号, true, false, true);
+        return new KyokaisoMapperParameter(被保険者番号, 0, リンク番号, true, false, true);
     }
 }

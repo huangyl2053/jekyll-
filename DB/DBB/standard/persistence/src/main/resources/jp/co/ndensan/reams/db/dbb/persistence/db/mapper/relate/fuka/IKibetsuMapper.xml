@@ -13,7 +13,6 @@
         <include refid="selectKibetsuEntity" />
     </select>
 
-    <!-- TODO RelateEntityを取得できるSQLに修正してください。where句はMapperParameterクラスに合わせて修正します。 -->
     <sql id="selectKibetsuEntity">
         SELECT
         DbT2003Kibetsu.*,

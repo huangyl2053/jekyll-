@@ -12,7 +12,7 @@ import jp.co.ndensan.reams.db.dbb.business.core.fukajoho.kibetsu.Kibetsu;
 import jp.co.ndensan.reams.db.dbb.definition.mybatisprm.fukajoho.KibetsuMapperParameter;
 import jp.co.ndensan.reams.db.dbb.entity.db.relate.fukajoho.kibetsu.KibetsuEntity;
 import jp.co.ndensan.reams.db.dbb.persistence.db.basic.DbT2003KibetsuDac;
-import jp.co.ndensan.reams.db.dbb.persistence.db.mapper.relate.fukajoho.kibestu.IKibetsuMapper;
+import jp.co.ndensan.reams.db.dbb.persistence.db.mapper.relate.fuka.IKibetsuMapper;
 import jp.co.ndensan.reams.db.dbb.service.core.MapperProvider;
 import jp.co.ndensan.reams.db.dbb.service.core.fukajoho.choteikyotsu.ChoteiKyotsuManager;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;

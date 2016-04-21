@@ -4,7 +4,6 @@
  */
 package jp.co.ndensan.reams.db.dbb.service.core.fukajoho.fukajoho;
 
-import java.util.ArrayList;
 import java.util.List;
 import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dbb.business.core.fukajoho.fukajoho.FukaJoho;
@@ -12,7 +11,7 @@ import jp.co.ndensan.reams.db.dbb.business.core.fukajoho.kibetsu.Kibetsu;
 import jp.co.ndensan.reams.db.dbb.definition.mybatisprm.fukajoho.FukaJohoRelateMapperParameter;
 import jp.co.ndensan.reams.db.dbb.entity.db.relate.fukajoho.fukajoho.FukaJohoRelateEntity;
 import jp.co.ndensan.reams.db.dbb.persistence.db.basic.DbT2002FukaDac;
-import jp.co.ndensan.reams.db.dbb.persistence.db.mapper.relate.fukajoho.fukajoho.IFukaJohoRelateMapper;
+import jp.co.ndensan.reams.db.dbb.persistence.db.mapper.relate.fuka.IFukaJohoRelateMapper;
 import jp.co.ndensan.reams.db.dbb.service.core.MapperProvider;
 import jp.co.ndensan.reams.db.dbb.service.core.fukajoho.kibetsu.KibetsuManager;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
@@ -82,28 +81,6 @@ public class FukaJohoManager {
         }
         relateEntity.initializeMd5ToEntities();
         return new FukaJoho(relateEntity);
-    }
-
-    /**
-     * 主キー1に合致する賦課の情報のリストを返します。
-     *
-     * @param 賦課の情報検索条件 賦課の情報検索条件
-     * @return FukaJohoRelateの{@code list}
-     */
-    @Transaction
-    public List<FukaJoho> get賦課の情報リストBy主キー1(FukaJohoRelateMapperParameter 賦課の情報検索条件) {
-        requireNonNull(賦課の情報検索条件, UrSystemErrorMessages.値がnull.getReplacedMessage("賦課の情報検索条件"));
-        IFukaJohoRelateMapper mapper = mapperProvider.create(IFukaJohoRelateMapper.class);
-
-        List<FukaJohoRelateEntity> relateEntityList = mapper.select賦課の情報リストBy主キー1(賦課の情報検索条件);
-
-        ArrayList<FukaJoho> 介護賦課List = new ArrayList<>();
-        for (FukaJohoRelateEntity relateEntity : relateEntityList) {
-            relateEntity.initializeMd5ToEntities();
-            介護賦課List.add(new FukaJoho(relateEntity));
-        }
-        return 介護賦課List;
-
     }
 
     /**

@@ -9,7 +9,7 @@ import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dba.business.core.kyokaisogaitosha.kyokaisogaitosha.KyokaisoGaitosha;
 import jp.co.ndensan.reams.db.dba.business.core.kyokaisogaitosha.kyokaisohokenryodankai.KyokaisoHokenryoDankai;
 import jp.co.ndensan.reams.db.dba.business.core.kyokaisogaitosha.kyokaisosochishinsei.KyokaisoSochiShinsei;
-import jp.co.ndensan.reams.db.dba.definition.mybatisprm.kyokaisogaitosha.KyokaisoGaitoshaMapperParameter;
+import jp.co.ndensan.reams.db.dba.definition.mybatisprm.kyokaisogaitosha.KyokaisoMapperParameter;
 import jp.co.ndensan.reams.db.dba.entity.db.relate.kyokaisogaitosha.KyokaisoGaitoshaEntity;
 import jp.co.ndensan.reams.db.dba.persistence.db.mapper.relate.kyokaisogaitosha.IKyokaisoGaitoshaMapper;
 import jp.co.ndensan.reams.db.dba.service.core.kyokaisogaitosha.kyokaisohokenryodankai.KyokaisoHokenryoDankaiManager;
@@ -78,7 +78,7 @@ public class KyokaisoGaitoshaManager {
      * @return KyokaisoGaitosha 【　※ツールの都合上、このカッコ部は手動で削除して下さい 境界層該当者】 nullが返る可能性があります。
      */
     @Transaction
-    public KyokaisoGaitosha get境界層該当者(KyokaisoGaitoshaMapperParameter 境界層該当者検索条件) {
+    public KyokaisoGaitosha get境界層該当者(KyokaisoMapperParameter 境界層該当者検索条件) {
         requireNonNull(境界層該当者検索条件, UrSystemErrorMessages.値がnull.getReplacedMessage("境界層該当者検索条件"));
         IKyokaisoGaitoshaMapper mapper = mapperProvider.create(IKyokaisoGaitoshaMapper.class);
 
