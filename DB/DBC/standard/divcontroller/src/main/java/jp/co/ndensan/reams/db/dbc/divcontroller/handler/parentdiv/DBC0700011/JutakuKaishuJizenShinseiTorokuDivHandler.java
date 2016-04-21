@@ -112,6 +112,9 @@ public final class JutakuKaishuJizenShinseiTorokuDivHandler {
     private static final RString 初期化済み = new RString("true");
     private static final RString 固定値_事業者番号 = new RString("0000000000");
     private static final RString 固定値_明細番号 = new RString("0001");
+    private static final int 住宅改修データなしコード = 1;
+    private static final int 着工日不一致コード = 2;
+    private static final int 対象住宅住所不一致コード = 3;
 
     private JutakuKaishuJizenShinseiTorokuDivHandler(JutakuKaishuJizenShinseiTorokuDiv div) {
         this.div = div;
@@ -346,22 +349,18 @@ public final class JutakuKaishuJizenShinseiTorokuDivHandler {
     public void 住宅改修内容のチェック() {
         List<dgGaisyuList_Row> gridList = div.getKaigoShikakuKihonShaPanel().getTabShinseiContents()
                 .getTabJutakuKaisyuJyoho().getCcdJutakuJizenShinseiDetail().get住宅改修内容一覧();
-        int 削除レコード数 = 0;
-        int 著工日に対する年月不一致レコード = 0;
-        int 対象住宅住所が不一致レコード = 0;
         List<RString> 著工日リスト = new ArrayList<>();
         List<RString> 完成日リスト = new ArrayList<>();
 
         if (gridList.size() > 0) {
-            住宅改修内容のレコードチェック(gridList, 削除レコード数, 著工日に対する年月不一致レコード,
-                    対象住宅住所が不一致レコード, 著工日リスト, 完成日リスト);
-            if (削除レコード数 == gridList.size()) {
+            int 住宅改修内容チェック結果 = 住宅改修内容のレコードチェック(gridList, 著工日リスト, 完成日リスト);
+            if (対象住宅住所不一致コード == 住宅改修内容チェック結果) {
                 throw new ApplicationException(DbcErrorMessages.住宅改修データなし.getMessage());
             }
-            if (著工日に対する年月不一致レコード > 0) {
+            if (着工日不一致コード == 住宅改修内容チェック結果) {
                 throw new ApplicationException(DbcErrorMessages.着工日不一致.getMessage());
             }
-            if (対象住宅住所が不一致レコード > 0) {
+            if (対象住宅住所不一致コード == 住宅改修内容チェック結果) {
                 throw new ApplicationException(DbcErrorMessages.対象住宅住所不一致.getMessage());
             }
         } else {
@@ -373,8 +372,6 @@ public final class JutakuKaishuJizenShinseiTorokuDivHandler {
         }
         RString kubun = DbBusinessConifg.get(ConfigNameDBC.国保連共同処理受託区分_償還, RDate.getNowDate(),
                 SubGyomuCode.DBC介護給付);
-        // TODO
-        kubun = new RString("3");
         if (文字_1.equals(kubun)) {
             if (!著工日リスト.contains(div.getKaigoShikakuKihonShaPanel().getTxtServiceYM().getValue()
                     .getYearMonth().toDateString())
@@ -392,11 +389,13 @@ public final class JutakuKaishuJizenShinseiTorokuDivHandler {
         }
     }
 
-    private void 住宅改修内容のレコードチェック(List<dgGaisyuList_Row> gridList, int 削除レコード数,
-            int 著工日に対する年月不一致レコード, int 対象住宅住所が不一致レコード,
+    private int 住宅改修内容のレコードチェック(List<dgGaisyuList_Row> gridList,
             List<RString> 著工日リスト, List<RString> 完成日リスト) {
         RString 著工日に対する年月 = RString.EMPTY;
         RString 対象住宅住所 = RString.EMPTY;
+        int 削除レコード数 = 0;
+        int 著工日に対する年月不一致レコード = 0;
+        int 対象住宅住所が不一致レコード = 0;
         if (!gridList.get(0).getTxtChakkoYoteibi().isNullOrEmpty()) {
             著工日に対する年月 = new FlexibleDate(gridList.get(0).getTxtChakkoYoteibi()).getYearMonth().toDateString();
         }
@@ -422,6 +421,17 @@ public final class JutakuKaishuJizenShinseiTorokuDivHandler {
                 }
             }
         }
+
+        if (削除レコード数 == gridList.size()) {
+            return 対象住宅住所不一致コード;
+        }
+        if (著工日に対する年月不一致レコード > 0) {
+            return 着工日不一致コード;
+        }
+        if (対象住宅住所が不一致レコード > 0) {
+            return 対象住宅住所不一致コード;
+        }
+        return 0;
     }
 
     /**
