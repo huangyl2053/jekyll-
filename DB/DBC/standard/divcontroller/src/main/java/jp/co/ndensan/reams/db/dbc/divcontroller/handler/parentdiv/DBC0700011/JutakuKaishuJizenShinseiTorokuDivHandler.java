@@ -354,7 +354,7 @@ public final class JutakuKaishuJizenShinseiTorokuDivHandler {
 
         if (gridList.size() > 0) {
             int 住宅改修内容チェック結果 = 住宅改修内容のレコードチェック(gridList, 著工日リスト, 完成日リスト);
-            if (対象住宅住所不一致コード == 住宅改修内容チェック結果) {
+            if (住宅改修データなしコード == 住宅改修内容チェック結果) {
                 throw new ApplicationException(DbcErrorMessages.住宅改修データなし.getMessage());
             }
             if (着工日不一致コード == 住宅改修内容チェック結果) {
@@ -423,7 +423,7 @@ public final class JutakuKaishuJizenShinseiTorokuDivHandler {
         }
 
         if (削除レコード数 == gridList.size()) {
-            return 対象住宅住所不一致コード;
+            return 住宅改修データなしコード;
         }
         if (著工日に対する年月不一致レコード > 0) {
             return 着工日不一致コード;
