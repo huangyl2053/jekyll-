@@ -64,7 +64,6 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RTime;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.ui.binding.KeyValueDataSource;
-import jp.co.ndensan.reams.uz.uza.ui.binding.RowState;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.CommonButtonHolder;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 import jp.co.ndensan.reams.uz.uza.util.Models;
@@ -119,6 +118,9 @@ public final class JutakuKaishuJizenShinseiTorokuDivHandler {
     private static final RString 申請一覧へ戻る = new RString("btnBackToResult");
     private static final RString 申請を保存する = new RString("btnSave");
     private static final RString 非表示用フラグ_TRUE = new RString("true");
+    private static final RString 行状態_登録 = new RString("登録");
+    private static final RString 行状態_削除 = new RString("削除");
+    private static final RString 行状態_更新 = new RString("更新");
 
     private JutakuKaishuJizenShinseiTorokuDivHandler(JutakuKaishuJizenShinseiTorokuDiv div) {
         this.div = div;
@@ -424,7 +426,7 @@ public final class JutakuKaishuJizenShinseiTorokuDivHandler {
         }
 
         for (dgGaisyuList_Row tmpRow : gridList) {
-            if (RowState.Deleted.equals(tmpRow.getRowState())) {
+            if (行状態_削除.equals(tmpRow.getTxtJyotai())) {
                 削除レコード数 = 削除レコード数 + 1;
             } else {
                 RString tmp著工日 = tmpRow.getTxtChakkoYoteibi().isNullOrEmpty() ? RString.EMPTY
@@ -674,7 +676,7 @@ public final class JutakuKaishuJizenShinseiTorokuDivHandler {
                 .getTabJutakuKaisyuJyoho().getCcdJutakuJizenShinseiDetail().get住宅改修内容一覧();
         Decimal 費用額合計 = Decimal.ZERO;
         for (dgGaisyuList_Row tmpRow : rowList) {
-            if (!RowState.Deleted.equals(tmpRow.getRowState()) && !tmpRow.getTxtKaishuKingaku().isNullOrEmpty()) {
+            if (!行状態_削除.equals(tmpRow.getTxtJyotai()) && !tmpRow.getTxtKaishuKingaku().isNullOrEmpty()) {
                 費用額合計 = 費用額合計.add(new Decimal(tmpRow.getTxtKaishuKingaku().toString()));
             }
         }
@@ -975,7 +977,7 @@ public final class JutakuKaishuJizenShinseiTorokuDivHandler {
                     .getTabJutakuKaisyuJyoho().getCcdJutakuJizenShinseiDetail().get住宅改修内容一覧();
             int index = 0;
             for (dgGaisyuList_Row tmpRow : gridList) {
-                if (RowState.Modified.equals(tmpRow.getRowState()) || RowState.Deleted.equals(tmpRow.getRowState())) {
+                if (行状態_更新.equals(tmpRow.getTxtJyotai()) || 行状態_削除.equals(tmpRow.getTxtJyotai())) {
                     ShokanJutakuKaishu oldData = 住宅改修レコードの取得(tmpRow);
                     ShokanJutakuKaishuBuilder shokanJutakuKaishuBuilder = oldData.createBuilderForEdit();
                     shokanJutakuKaishuBuilder.set住宅改修事業者名(tmpRow.getTxtJigyosha());
@@ -983,7 +985,7 @@ public final class JutakuKaishuJizenShinseiTorokuDivHandler {
                     shokanJutakuKaishuBuilder.set住宅改修着工年月日(new FlexibleDate(tmpRow.getTxtChakkoYoteibi()));
                     shokanJutakuKaishuBuilder.set住宅改修完成年月日(new FlexibleDate(tmpRow.getTxtKanseiYoteibi()));
                     shokanJutakuKaishuBuilder.set改修金額(tmpRow.getTxtKaishuKingaku().isNullOrEmpty() ? 0 : Integer.parseInt(tmpRow.getTxtKaishuKingaku().toString()));
-                    EntityDataState state = RowState.Modified.equals(tmpRow.getRowState()) ? EntityDataState.Modified : EntityDataState.Deleted;
+                    EntityDataState state = 行状態_更新.equals(tmpRow.getTxtJyotai()) ? EntityDataState.Modified : EntityDataState.Deleted;
                     shokanJutakuKaishuBuilder.setステータス(state);
                     oldData = shokanJutakuKaishuBuilder.build();
                     kaishuList.add(oldData);
