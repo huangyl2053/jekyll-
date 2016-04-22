@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import jp.co.ndensan.reams.db.dbb.business.core.kanri.HyojiCodeResearcher;
 import jp.co.ndensan.reams.db.dbb.business.core.kanri.KoseiTsukiHantei;
 import jp.co.ndensan.reams.db.dbb.business.core.zenkaifuka.ZenkaiFuka;
 import jp.co.ndensan.reams.db.dbb.business.report.tsuchisho.KariSanteiTsuchiShoKyotsu;
@@ -99,6 +100,13 @@ public class KariSanteiTsuchiShoKyotsuKomokuHenshu {
         EditedKariSanteiTsuchiShoKyotsu 編集後仮算定通知書 = new EditedKariSanteiTsuchiShoKyotsu();
         編集後仮算定通知書.set編集後宛先(編集後宛先);
         編集後仮算定通知書.set編集後個人(編集後個人);
+        HyojiCodes 表示コード = get表示コード(仮算定通知書情報);
+        編集後仮算定通知書.set表示コード1(表示コード.get表示コード１());
+        編集後仮算定通知書.set表示コード１名(表示コード.get表示コード名１());
+        編集後仮算定通知書.set表示コード２(表示コード.get表示コード２());
+        編集後仮算定通知書.set表示コード２名(表示コード.get表示コード名２());
+        編集後仮算定通知書.set表示コード３(表示コード.get表示コード３());
+        編集後仮算定通知書.set表示コード３名(表示コード.get表示コード名３());
         編集後仮算定通知書.set被保険者番号(仮算定通知書情報.get賦課の情報_更正後().get賦課情報().get賦課情報().get被保険者番号());
         編集後仮算定通知書.set識別コード(仮算定通知書情報.get賦課の情報_更正後().get賦課情報().get賦課情報().get識別コード());
         編集後仮算定通知書.set調定年度(仮算定通知書情報.get賦課の情報_更正後().get賦課情報().get賦課情報().get調定年度());
@@ -157,6 +165,17 @@ public class KariSanteiTsuchiShoKyotsuKomokuHenshu {
 
         return 随時.equals(期月.get月処理区分().getName())
                 || 現年随時.equals(期月.get月処理区分().getName());
+    }
+
+    private HyojiCodes get表示コード(KariSanteiTsuchiShoKyotsu 仮算定通知書情報) {
+
+        return new HyojiCodeResearcher().create表示コード情報(仮算定通知書情報.get帳票制御共通().toEntity(),
+                仮算定通知書情報.get賦課の情報_更正後().get宛名().get住所().get町域コード().value(),
+                仮算定通知書情報.get賦課の情報_更正後().get宛名().get行政区画().getGyoseiku().getコード().value(),
+                仮算定通知書情報.get賦課の情報_更正後().get宛名().get行政区画().getChiku1().getコード().value(),
+                仮算定通知書情報.get賦課の情報_更正後().get宛名().get行政区画().getChiku2().getコード().value(),
+                仮算定通知書情報.get賦課の情報_更正後().get宛名().get行政区画().getChiku3().getコード().value(),
+                仮算定通知書情報.get納組情報().getNokumi().getNokumiCode());
     }
 
     private EditedKariSanteiTsuchiShoKyotsuBeforeCorrection get更正前(
