@@ -49,11 +49,11 @@ public class ShikakuHenkouIdouHandler {
         div.getCcdHihosyosai().施設入退所表示モード(new RString("資格異動"));
         div.getCcdHihosyosai().施設入退所表示widthサイズ(new RString("モード1"));
         div.getCcdHihosyosai().施設入退所明細表示モード(new RString("追加_修正"));
-        div.getCcdHihosyosai().initialize(
+        div.getCcdHihosyosai().initilize(
                 hihokensha.get市町村コード(), 導入形態コード,
                 hihokensha.get広住特措置元市町村コード(), hihokensha.get被保険者番号(),
                 hihokensha.get異動日(), hihokensha.get枝番(),
-                hihokensha.get識別コード(), hihokensha.get資格取得年月日());
+                hihokensha.get識別コード(), hihokensha.get資格取得年月日(), RString.EMPTY);
         RString menuId = ResponseHolder.getMenuID();
         if (MENUID_DBAMN23001.equals(menuId)) {
             div.getCcdHihosyosai().setDdlHenkoJiyu(ShikakuHenkoJiyu.転居.getコード(), true);
