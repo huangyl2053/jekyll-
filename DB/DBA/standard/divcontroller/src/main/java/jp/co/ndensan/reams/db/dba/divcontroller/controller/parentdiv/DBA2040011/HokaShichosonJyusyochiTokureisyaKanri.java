@@ -18,15 +18,21 @@ import jp.co.ndensan.reams.db.dba.divcontroller.handler.parentdiv.DBA2040011.Hok
 import jp.co.ndensan.reams.db.dba.service.core.tajushochitokureisyakanri.TaJushochiTokureisyaKanriManager;
 import jp.co.ndensan.reams.db.dbz.divcontroller.util.viewstate.ViewStateKey;
 import jp.co.ndensan.reams.db.dbz.service.TaishoshaKey;
+import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrQuestionMessages;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.exclusion.LockingKey;
 import jp.co.ndensan.reams.uz.uza.exclusion.RealInitialLocker;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.message.IMessageGettable;
+import jp.co.ndensan.reams.uz.uza.message.IValidationMessage;
+import jp.co.ndensan.reams.uz.uza.message.Message;
 import jp.co.ndensan.reams.uz.uza.message.MessageDialogSelectedResult;
 import jp.co.ndensan.reams.uz.uza.message.QuestionMessage;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ResponseHolder;
+import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPair;
+import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 
 /**
@@ -62,7 +68,14 @@ public class HokaShichosonJyusyochiTokureisyaKanri {
         menuId = ResponseHolder.getMenuID();
         div.getShikakuKihonJoho().getCddTaJushochiTokureishaKanri().set状態(getMode().get(menuId));
         getHandler(div).onLoad(ViewStateHolder.get(ViewStateKey.資格対象者, TaishoshaKey.class).get識別コード());
-        RealInitialLocker.tryGetLock(LOCKINGKEY);
+        if (!RealInitialLocker.tryGetLock(LOCKINGKEY)) {
+            div.setReadOnly(true);
+            ValidationMessageControlPairs validationMessages = new ValidationMessageControlPairs();
+            validationMessages.add(new ValidationMessageControlPair(TekiyoJogaiTotalErrorMessage.排他_他のユーザが使用中));
+            return ResponseData.of(div).addValidationMessages(validationMessages).respond();
+
+        }
+
         koshinzen = div.getCddTaJushochiTokureishaKanri().get適用情報一覧();
         if (メニューID_施設入所により適用.equals(menuId) || メニューID_転入転出保留対象者管理.equals(menuId)) {
             return ResponseData.of(div).setState(DBA2040011StateName.追加適用);
@@ -191,6 +204,21 @@ public class HokaShichosonJyusyochiTokureisyaKanri {
                     parameter1.getNyuusyoYMD(), parameter1.getTayishoYMD(), parameter1.getKaijoYMD(), parameter1.getTekiyoYMD(), SYUSEI
             );
             paramaterList.set(0, parameter);
+        }
+    }
+
+    private enum TekiyoJogaiTotalErrorMessage implements IValidationMessage {
+
+        排他_他のユーザが使用中(UrErrorMessages.排他_他のユーザが使用中);
+        private final Message message;
+
+        private TekiyoJogaiTotalErrorMessage(IMessageGettable message) {
+            this.message = message.getMessage();
+        }
+
+        @Override
+        public Message getMessage() {
+            return message;
         }
     }
 }
