@@ -64,8 +64,6 @@ public class ShikakuSoshitsuIdoTotalHandler {
      * @param div 資格喪失異動Div
      */
     public ShikakuSoshitsuIdoTotalHandler(ShikakuSoshitsuIdoTotalDiv div) {
-        ViewStateHolder.put(ViewStateKeys.被保険者番号, new HihokenshaNo("0000000014"));
-        ViewStateHolder.put(ViewStateKeys.資格喪失異動_識別コード, new ShikibetsuCode("000000000000014"));
         this.div = div;
         被保険者番号 = ViewStateHolder.get(ViewStateKeys.被保険者番号, HihokenshaNo.class);
         識別コード = ViewStateHolder.get(ViewStateKeys.資格喪失異動_識別コード, ShikibetsuCode.class);
