@@ -1,0 +1,32 @@
+﻿{
+ "uiContainerName": "DBEUC60701",
+ "displayWizard": false,
+ "subGyomuCode": "DBE",
+ "steps": [
+  {
+   "id": 1,
+   "name": "審査会委員報酬入力",
+   "transitionList": [
+    {
+     "id": "1",
+     "type": "start",
+     "condition": "",
+     "toLayoutSubGyomuCode": "DBE",
+     "toLayoutName": "DBE6070001",
+     "toLayoutTitle": "審査会委員報酬入力",
+     "toState": "検索"
+    },
+    {
+     "id": "2",
+     "type": "end",
+     "layoutSubGyomuCode": "DBE",
+     "layoutName": "DBE6070001",
+     "layoutTitle": "審査会委員報酬入力",
+     "eventName": "完了状態",
+     "destroy": false,
+     "condition": ""
+    }
+   ]
+  }
+ ]
+}
