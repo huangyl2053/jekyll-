@@ -102,7 +102,7 @@ public class GogitaiJohoIkkatuSakuseiProcess extends BatchProcessBase<GogitaiJoh
                     true,
                     Integer.parseInt(item.getGogitaiNo().toString()),
                     new FlexibleDate(item.getGogitaiYukoKikanKaishiYMD().replace(SLASH, RString.EMPTY)),
-                    RString.EMPTY));
+                    RString.EMPTY, 0));
             if (count == 0) {
                 dbT5591EntityWriter.insert(item.toDbt5591Entity());
             } else {
@@ -113,7 +113,7 @@ public class GogitaiJohoIkkatuSakuseiProcess extends BatchProcessBase<GogitaiJoh
                     true,
                     Integer.parseInt(item.getGogitaiNo().toString()),
                     new FlexibleDate(item.getGogitaiYukoKikanKaishiYMD().replace(SLASH, RString.EMPTY)),
-                    item.getShinsakaiIinCode()));
+                    item.getShinsakaiIinCode(), 0));
             if (count == 0) {
                 dbT5593EntityWriter.insert(item.toDbt5593Entity());
             } else {
