@@ -130,8 +130,13 @@ public class RiyoshaFutangakuGengakuPanel {
     public ResponseData<RiyoshaFutangakuGengakuPanelDiv> onClick_btnDelete(RiyoshaFutangakuGengakuPanelDiv div) {
         ddlShinseiIchiran_Row row = div.getDdlShinseiIchiran().getActiveRow();
         RString 決定区分 = row.getKetteiKubun();
-        if (決定区分 != null && !決定区分.isEmpty()) {
-            throw new ApplicationException(DbdInformationMessages.減免減額_承認処理済みのため削除不可.getMessage());
+        if (!ResponseHolder.isReRequest() && 決定区分 != null && !決定区分.isEmpty()) {
+            InformationMessage message = new InformationMessage(DbdInformationMessages.減免減額_承認処理済みのため削除不可.getMessage().getCode(),
+                    DbdInformationMessages.減免減額_承認処理済みのため削除不可.getMessage().evaluate());
+            return ResponseData.of(div).addMessage(message).respond();
+        } else if (new RString(DbdInformationMessages.減免減額_承認処理済みのため削除不可.getMessage().getCode())
+                .equals(ResponseHolder.getMessageCode())) {
+            return ResponseData.of(div).respond();
         }
         getHandler(div).申請一覧の削除ボタンをクリック();
         return ResponseData.of(div).setState(DBD1020001StateName.一覧);
