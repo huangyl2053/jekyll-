@@ -11,11 +11,9 @@ import jp.co.ndensan.reams.db.dba.business.report.jukyushikakushomeisho.JukyuShi
 import jp.co.ndensan.reams.db.dba.business.report.jukyushikakushomeisho.JukyuShikakuShomeishoJoho;
 import jp.co.ndensan.reams.db.dba.business.report.jukyushikakushomeisho.JukyuShikakuShomeishoProerty;
 import jp.co.ndensan.reams.db.dba.business.report.jukyushikakushomeisho.JukyuShikakuShomeishoReport;
-import jp.co.ndensan.reams.db.dba.definition.reportid.ReportIdDBA;
 import jp.co.ndensan.reams.db.dba.entity.report.jukyushikakushomeisho.JukyuShikakuShomeishoReportSource;
 import jp.co.ndensan.reams.db.dbz.service.util.report.ReportUtil;
 import jp.co.ndensan.reams.ur.urz.entity.report.parts.ninshosha.NinshoshaSource;
-import jp.co.ndensan.reams.uz.uza.biz.ReportId;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.report.IReportProperty;
@@ -35,9 +33,6 @@ import jp.co.ndensan.reams.uz.uza.report.source.breaks.BreakAggregator;
  */
 public class JukyuShikakuShomeishoPrintService {
 
-    private ReportSourceWriter<JukyuShikakuShomeishoReportSource> reportSourceWriter;
-    private static final ReportId 帳票ID = ReportIdDBA.DBA100004.getReportId();
-
     /**
      * 受給資格証明書を印刷します。
      *
@@ -48,8 +43,9 @@ public class JukyuShikakuShomeishoPrintService {
         JukyuShikakuShomeishoProerty property = new JukyuShikakuShomeishoProerty();
         try (ReportManager reportManager = new ReportManager()) {
             try (ReportAssembler<JukyuShikakuShomeishoReportSource> assembler = createAssembler(property, reportManager)) {
+                ReportSourceWriter<JukyuShikakuShomeishoReportSource> reportSourceWriter = new ReportSourceWriter(assembler);
                 NinshoshaSource ninshoshaSource = ReportUtil.get認証者情報(SubGyomuCode.DBE認定支援,
-                        帳票ID,
+                        property.reportId(),
                         FlexibleDate.getNowDate(),
                         reportSourceWriter);
                 for (JukyuShikakuShomeishoBodyItem bodyItem : bodyItemList) {
