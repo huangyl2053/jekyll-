@@ -90,7 +90,6 @@ public final class JutakuKaishuJizenShinseiTorokuDivHandler {
     private static final RString 状態_参照 = new RString("sansyo");
     private static final RString コード種別 = new RString("0028");
     private static final RString 取消事由なし = new RString("0");
-    private static final RString 申請情報 = new RString("申請情報");
     private static final RString 口座情報 = new RString("口座情報");
     private static final RString 住宅改修情報 = new RString("住宅改修情報");
     private static final RString 審査結果 = new RString("審査結果");
@@ -271,7 +270,7 @@ public final class JutakuKaishuJizenShinseiTorokuDivHandler {
         if (口座情報.equals(selectedTab) && !初期化済み.equals(div.getHidKozaJyohoFlg())) {
             口座情報選択時(画面モード, data);
         } else if (住宅改修情報.equals(selectedTab) && !初期化済み.equals(div.getHidJutakuKaisyuJyohoFlg())) {
-            住宅改修情報(画面モード, 被保険者番号);
+            住宅改修情報選択時(画面モード, 被保険者番号);
         } else if (審査結果.equals(selectedTab) && !初期化済み.equals(div.getHidSeikyuSummaryFlg())) {
             if (!登録モード.equals(画面モード)) {
                 loadTabShinsaKakka(data, 画面モード);
@@ -314,7 +313,7 @@ public final class JutakuKaishuJizenShinseiTorokuDivHandler {
         div.setHidKozaJyohoFlg(初期化済み);
     }
 
-    private void 住宅改修情報(RString 画面モード, HihokenshaNo 被保険者番号) {
+    private void 住宅改修情報選択時(RString 画面モード, HihokenshaNo 被保険者番号) {
         if (登録モード.equals(画面モード)) {
             JyutakugaisyunaiyoListDataPassModel model = new JyutakugaisyunaiyoListDataPassModel();
             model.set被保険者番号(被保険者番号);
@@ -357,7 +356,7 @@ public final class JutakuKaishuJizenShinseiTorokuDivHandler {
         List<RString> 著工日リスト = new ArrayList<>();
         List<RString> 完成日リスト = new ArrayList<>();
 
-        if (gridList.size() > 0) {
+        if (!gridList.isEmpty()) {
             int 住宅改修内容チェック結果 = 住宅改修内容のレコードチェック(gridList, 著工日リスト, 完成日リスト);
             if (住宅改修データなしコード == 住宅改修内容チェック結果) {
                 throw new ApplicationException(DbcErrorMessages.住宅改修データなし.getMessage());
@@ -385,12 +384,10 @@ public final class JutakuKaishuJizenShinseiTorokuDivHandler {
                 throw new ApplicationException(DbcErrorMessages.サービス年月と不一致.getMessage()
                         .replace(メッセージ引数_着工日完成日.toString()));
             }
-        } else if (文字_2.equals(kubun)) {
-            if (!著工日リスト.contains(div.getKaigoShikakuKihonShaPanel().getTxtServiceYM().getValue()
-                    .getYearMonth().toDateString())) {
-                throw new ApplicationException(DbcErrorMessages.サービス年月と不一致.getMessage()
-                        .replace(メッセージ引数_着工日.toString()));
-            }
+        } else if (文字_2.equals(kubun) && !著工日リスト.contains(div.getKaigoShikakuKihonShaPanel()
+                .getTxtServiceYM().getValue().getYearMonth().toDateString())) {
+            throw new ApplicationException(DbcErrorMessages.サービス年月と不一致.getMessage()
+                    .replace(メッセージ引数_着工日.toString()));
         }
     }
 
@@ -489,11 +486,9 @@ public final class JutakuKaishuJizenShinseiTorokuDivHandler {
         住宅改修内容のチェック();
         if (登録モード.equals(画面モード)) {
             return 要介護認定有効のチェック(hihokenshaNo);
-        } else if (取消モード.equals(画面モード)) {
-            if (取消事由なし.equals(div.getKaigoShikakuKihonShaPanel().getShinseishaInfo().getDdlShinseiTorikesuJiyu()
-                    .getSelectedKey())) {
-                throw new ApplicationException(UrErrorMessages.必須.getMessage().replace(申請取消事由.toString()));
-            }
+        } else if (取消モード.equals(画面モード) && 取消事由なし.equals(div.getKaigoShikakuKihonShaPanel()
+                .getShinseishaInfo().getDdlShinseiTorikesuJiyu().getSelectedKey())) {
+            throw new ApplicationException(UrErrorMessages.必須.getMessage().replace(申請取消事由.toString()));
         }
         return false;
     }
@@ -937,7 +932,7 @@ public final class JutakuKaishuJizenShinseiTorokuDivHandler {
             List<ShokanJutakuKaishu> kaishuList = new ArrayList<>();
             List<dgGaisyuList_Row> gridList = div.getKaigoShikakuKihonShaPanel().getTabShinseiContents()
                     .getTabJutakuKaisyuJyoho().getCcdJutakuJizenShinseiDetail().get住宅改修内容一覧();
-            if (gridList.size() > 0) {
+            if (!gridList.isEmpty()) {
                 int index = 0;
                 for (dgGaisyuList_Row row : gridList) {
                     ShokanJutakuKaishu tmpData = new ShokanJutakuKaishu(hihokenshaNo, サービス提供年月, 整理番号,

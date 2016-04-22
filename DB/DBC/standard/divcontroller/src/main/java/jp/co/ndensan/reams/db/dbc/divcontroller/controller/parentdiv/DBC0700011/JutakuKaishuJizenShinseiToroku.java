@@ -36,7 +36,6 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 public class JutakuKaishuJizenShinseiToroku {
 
     private static final RString 登録モード = new RString("登録");
-    private static final RString 修正モード = new RString("修正");
     private static final RString 削除モード = new RString("削除");
     private static final RString 非表示用フラグ_TRUE = new RString("true");
     private static final RString 要介護状態区分_KEY = new RString("threeUp");
