@@ -380,6 +380,9 @@ public class TaJushochiTokureishaKanriHandler {
             }
             row.setNyushoShisetsuShurui(div.getCcdShisetsuJoho().get施設種類());
             RString 履歴番号 = rowList.get(0).getRirekiNo();
+            if (RString.isNullOrEmpty(履歴番号)) {
+                履歴番号 = new RString("0");
+            }
             int 最新履歴番号 = Integer.parseInt(履歴番号.toString()) + 1;
             rowList.add(row);
             ShisetsuNyutaisho taisho = new ShisetsuNyutaisho(識別コード, 最新履歴番号);
