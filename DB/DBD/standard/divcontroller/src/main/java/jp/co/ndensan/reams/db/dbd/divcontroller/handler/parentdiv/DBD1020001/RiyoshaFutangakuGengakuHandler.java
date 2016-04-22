@@ -6,6 +6,8 @@
 package jp.co.ndensan.reams.db.dbd.divcontroller.handler.parentdiv.DBD1020001;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbd.business.core.gemmengengaku.riyoshafutangengaku.RiyoshaFutangakuGengaku;
 import jp.co.ndensan.reams.db.dbd.business.core.gemmengengaku.riyoshafutangengaku.RiyoshaFutangakuGengakuBuilder;
@@ -115,7 +117,7 @@ public class RiyoshaFutangakuGengakuHandler {
         }
 
         div.getCcdAtenaInfo().onLoad(識別コード);
-        div.getCcdKaigoKihon().initialize(被保険者番号);
+        div.getCcdKaigoKihon().onLoad(被保険者番号);
         div.getCcdShinseiJoho().initialize(識別コード);
         PersonalData personalData = toPersonalData(識別コード, 被保険者番号);
         AccessLogger.log(AccessLogType.照会, personalData);
@@ -285,6 +287,7 @@ public class RiyoshaFutangakuGengakuHandler {
             newRowList.add(row);
             newRowList.addAll(pageList);
         }
+        Collections.sort(newRowList, new RiyoshaFutangakuGengakuRowComparator());
         div.getDdlShinseiIchiran().setDataSource(newRowList);
         入力情報をクリア();
         承認情報エリア状態(承認する_KEY, true);
@@ -394,6 +397,7 @@ public class RiyoshaFutangakuGengakuHandler {
             newRowList.add(row);
             newRowList.addAll(pageList);
         }
+        Collections.sort(newRowList, new RiyoshaFutangakuGengakuRowComparator());
         div.getDdlShinseiIchiran().setDataSource(newRowList);
         入力情報をクリア();
         申請情報エリ状態(false);
@@ -935,6 +939,53 @@ public class RiyoshaFutangakuGengakuHandler {
         LockingKey 排他キー = new LockingKey(GyomuCode.DB介護保険.getColumnValue()
                 .concat(被保険者番号.getColumnValue()).concat(new RString("RiyoshaFutanGengaku")));
         RealInitialLocker.lock(排他キー);
+    }
+
+    /**
+     * ViewStateのComparatorです。
+     */
+    public static class RiyoshaFutangakuGengakuComparator implements Comparator<RiyoshaFutangakuGengakuViewState> {
+
+        @Override
+        public int compare(RiyoshaFutangakuGengakuViewState s1, RiyoshaFutangakuGengakuViewState s2) {
+
+            int result = !s1.getRiyoshaFutangakuGengaku().get申請年月日().isBeforeOrEquals(s2.getRiyoshaFutangakuGengaku().get申請年月日())
+                    ? 1 : (s1.getRiyoshaFutangakuGengaku().get申請年月日().equals(s2.getRiyoshaFutangakuGengaku().get申請年月日()) ? 0 : -1);
+
+            if (result == 0 && EntityDataState.Added != s1.getState() && EntityDataState.Added != s2.getState()) {
+                result = s1.getShorigoRirekiNo() > s2.getShorigoRirekiNo() ? 1 : -1;
+            }
+            if (result == 0 && EntityDataState.Added == s1.getState()) {
+                result = 1;
+            } else if (result == 0 && EntityDataState.Added == s2.getState()) {
+                result = -1;
+            }
+            return result;
+        }
+
+    }
+
+    /**
+     * 申請一覧エリアデータのComparatorです。
+     */
+    public static class RiyoshaFutangakuGengakuRowComparator implements Comparator<ddlShinseiIchiran_Row> {
+
+        @Override
+        public int compare(ddlShinseiIchiran_Row row1, ddlShinseiIchiran_Row row2) {
+
+            int result = !row1.getTxtShinseiYMD().getValue().isBeforeOrEquals(row2.getTxtShinseiYMD().getValue())
+                    ? 1 : (row1.getTxtShinseiYMD().getValue().equals(row2.getTxtShinseiYMD().getValue()) ? 0 : -1);
+
+            if (result == 0 && 追加.equals(row1.getJotai()) && 追加.equals(row2.getJotai())) {
+                result = row1.getHiddenShinseiRirekiNo().compareTo(row2.getHiddenShinseiRirekiNo());
+            }
+            if (result == 0 && 追加.equals(row1.getJotai())) {
+                result = 1;
+            } else if (result == 0 && 追加.equals(row2.getJotai())) {
+                result = -1;
+            }
+            return result;
+        }
     }
 
     /**

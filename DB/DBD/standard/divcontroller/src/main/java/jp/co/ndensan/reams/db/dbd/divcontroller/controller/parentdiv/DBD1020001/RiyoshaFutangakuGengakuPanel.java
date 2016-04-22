@@ -7,14 +7,12 @@ package jp.co.ndensan.reams.db.dbd.divcontroller.controller.parentdiv.DBD1020001
 
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.Comparator;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbd.business.core.gemmengengaku.riyoshafutangengaku.RiyoshaFutangakuGengaku;
 import jp.co.ndensan.reams.db.dbd.business.core.gemmengengaku.riyoshafutangengaku.RiyoshaFutangakuGengakuBuilder;
 import jp.co.ndensan.reams.db.dbd.business.core.gemmengengaku.riyoshafutangengaku.RiyoshaFutangakuGengakuViewState;
 import jp.co.ndensan.reams.db.dbd.business.core.gemmengengaku.shinsei.GemmenGengakuShinsei;
 import jp.co.ndensan.reams.db.dbd.business.core.gemmengengaku.shinsei.GemmenGengakuShinseiBuilder;
-import jp.co.ndensan.reams.db.dbd.definition.core.ViewStateKeys;
 import jp.co.ndensan.reams.db.dbd.definition.core.gemmengengaku.GemmenGengakuShurui;
 import jp.co.ndensan.reams.db.dbd.definition.core.gemmengengaku.KetteiKubun;
 import jp.co.ndensan.reams.db.dbd.definition.core.kanri.SampleBunshoGroupCodes;
@@ -26,6 +24,7 @@ import jp.co.ndensan.reams.db.dbd.divcontroller.entity.parentdiv.DBD1020001.DBD1
 import jp.co.ndensan.reams.db.dbd.divcontroller.entity.parentdiv.DBD1020001.RiyoshaFutangakuGengakuPanelDiv;
 import jp.co.ndensan.reams.db.dbd.divcontroller.entity.parentdiv.DBD1020001.ddlShinseiIchiran_Row;
 import jp.co.ndensan.reams.db.dbd.divcontroller.handler.parentdiv.DBD1020001.RiyoshaFutangakuGengakuHandler;
+import jp.co.ndensan.reams.db.dbd.divcontroller.handler.parentdiv.DBD1020001.RiyoshaFutangakuGengakuHandler.RiyoshaFutangakuGengakuComparator;
 import jp.co.ndensan.reams.db.dbd.divcontroller.handler.parentdiv.DBD1020001.RiyoshaFutangakuGengakuValidationHandler;
 import jp.co.ndensan.reams.db.dbd.service.core.gemmengengaku.riyoshafutangengaku.RiyoshaFutangakuGengakuManager;
 import jp.co.ndensan.reams.db.dbd.service.core.gemmengengaku.riyoshafutangengaku.RiyoshaFutangakuGengakuService;
@@ -35,6 +34,7 @@ import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HokenKyufuR
 import jp.co.ndensan.reams.db.dbx.service.core.dbbusinessconfig.DbBusinessConifg;
 import jp.co.ndensan.reams.db.dbz.definition.core.futanwariai.FutanwariaiKubun;
 import jp.co.ndensan.reams.db.dbz.definition.message.DbzInformationMessages;
+import jp.co.ndensan.reams.db.dbz.divcontroller.viewbox.ViewStateKeys;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrInformationMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrQuestionMessages;
 import jp.co.ndensan.reams.uz.uza.biz.GyomuCode;
@@ -413,7 +413,7 @@ public class RiyoshaFutangakuGengakuPanel {
 
         ArrayList<RiyoshaFutangakuGengakuViewState> viewStateList
                 = ViewStateHolder.get(RiyoshaFutangakuGengakuHandler.Dbd1020001Keys.利用者負担額減額情報ListのViewState, ArrayList.class);
-        Collections.sort(viewStateList, new ViewStateComparator());
+        Collections.sort(viewStateList, new RiyoshaFutangakuGengakuComparator());
 
         int size = viewStateList.size();
         int minRirekiNo = 0;
@@ -635,26 +635,5 @@ public class RiyoshaFutangakuGengakuPanel {
 
     private RiyoshaFutangakuGengakuValidationHandler getValidationHandler() {
         return new RiyoshaFutangakuGengakuValidationHandler();
-    }
-
-    private static class ViewStateComparator implements Comparator<RiyoshaFutangakuGengakuViewState> {
-
-        @Override
-        public int compare(RiyoshaFutangakuGengakuViewState s1, RiyoshaFutangakuGengakuViewState s2) {
-
-            int result = !s1.getRiyoshaFutangakuGengaku().get申請年月日().isBeforeOrEquals(s2.getRiyoshaFutangakuGengaku().get申請年月日())
-                    ? 1 : (s1.getRiyoshaFutangakuGengaku().get申請年月日().equals(s2.getRiyoshaFutangakuGengaku().get申請年月日()) ? 0 : -1);
-
-            if (result == 0 && EntityDataState.Added != s1.getState() && EntityDataState.Added != s2.getState()) {
-                result = s1.getShorigoRirekiNo() > s2.getShorigoRirekiNo() ? 1 : -1;
-            }
-            if (result == 0 && EntityDataState.Added == s1.getState()) {
-                result = 1;
-            } else if (result == 0 && EntityDataState.Added == s2.getState()) {
-                result = -1;
-            }
-            return result;
-        }
-
     }
 }
