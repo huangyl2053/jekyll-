@@ -861,13 +861,17 @@ public class KakushuTsuchishoSakusei {
 
         SourceDataCollection sourceDataCollection;
         if (ReportIdDBB.DBB100032.getReportId().equals(帳票ID)) {
-            sourceDataCollection = new TokubetsuChoshuKaishiTsuchishoPrintService().printB5横タイプ(編集後本算定通知書共通情報, null);
+            sourceDataCollection
+                    = new TokubetsuChoshuKaishiTsuchishoPrintService().printB5横タイプ(編集後本算定通知書共通情報, null, 本算定通知書情報);
         } else if (ReportIdDBB.DBB100036.getReportId().equals(帳票ID)) {
-            sourceDataCollection = new TokubetsuChoshuKaishiTsuchishoPrintService().printB5横タイプ2(編集後本算定通知書共通情報, null);
+            sourceDataCollection
+                    = new TokubetsuChoshuKaishiTsuchishoPrintService().printB5横タイプ2(編集後本算定通知書共通情報, null, 本算定通知書情報);
         } else if (ReportIdDBB.DBB100038.getReportId().equals(帳票ID)) {
-            sourceDataCollection = new TokubetsuChoshuKaishiTsuchishoPrintService().printA4縦(編集後本算定通知書共通情報, null);
+            sourceDataCollection
+                    = new TokubetsuChoshuKaishiTsuchishoPrintService().printA4縦(編集後本算定通知書共通情報, null, 本算定通知書情報);
         } else {
-            sourceDataCollection = new TokubetsuChoshuKaishiTsuchishoPrintService().printシーラタイプ(編集後本算定通知書共通情報);
+            sourceDataCollection
+                    = new TokubetsuChoshuKaishiTsuchishoPrintService().printシーラタイプ(編集後本算定通知書共通情報, 本算定通知書情報);
         }
 
         List<ShikibetsuCode> 識別コードList = new ArrayList<>();
