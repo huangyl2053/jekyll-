@@ -11,6 +11,8 @@ import jp.co.ndensan.reams.db.dbc.definition.core.shikibetsubangokubun.Shikibets
 import jp.co.ndensan.reams.db.dbc.definition.core.shikibetsunokubon.ShikibetsuNoKubon;
 import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3118ShikibetsuNoKanri;
 import static jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3118ShikibetsuNoKanri.hyoujiJun;
+import static jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3118ShikibetsuNoKanri.kyufuBunruiKubun;
+import static jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3118ShikibetsuNoKanri.kyufujissekiKubun;
 import static jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3118ShikibetsuNoKanri.shikibetsuNo;
 import static jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3118ShikibetsuNoKanri.shikibetsuNoKubon;
 import static jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3118ShikibetsuNoKanri.tekiyoKaishiYM;
@@ -227,6 +229,30 @@ public class DbT3118ShikibetsuNoKanriDac implements ISaveable<DbT3118ShikibetsuN
                                 leq(tekiyoKaishiYM, サービス提供年月),
                                 leq(サービス提供年月, tekiyoShuryoYM),
                                 eq(shikibetsuNoKubon, ShikibetsuNoKubon.入力識別番号.getコード()))).
+                toList(DbT3118ShikibetsuNoKanriEntity.class);
+    }
+
+    /**
+     * 様式名称とコードを取得する。
+     *
+     * @param サービス提供年月 FlexibleYearMonth
+     * @return List<DbT3118ShikibetsuNoKanriEntity>
+     */
+    public List<DbT3118ShikibetsuNoKanriEntity> select様式名称とコード(FlexibleYearMonth サービス提供年月) {
+
+        DbAccessorNormalType accessor = new DbAccessorNormalType(session);
+
+        return accessor.select().
+                table(DbT3118ShikibetsuNoKanri.class).
+                where(and(
+                                leq(tekiyoKaishiYM, サービス提供年月),
+                                leq(サービス提供年月, tekiyoShuryoYM),
+                                eq(shikibetsuNoKubon, new RString("2")),
+                                eq(kyufujissekiKubun, new RString("2")),
+                                or(
+                                        eq(kyufuBunruiKubun, new RString("1")),
+                                        eq(kyufuBunruiKubun, new RString("2")),
+                                        eq(kyufuBunruiKubun, new RString("3"))))).
                 toList(DbT3118ShikibetsuNoKanriEntity.class);
     }
 }
