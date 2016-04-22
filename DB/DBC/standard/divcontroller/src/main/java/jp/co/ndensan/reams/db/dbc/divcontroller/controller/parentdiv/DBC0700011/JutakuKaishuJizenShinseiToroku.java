@@ -213,7 +213,7 @@ public class JutakuKaishuJizenShinseiToroku {
         handler.住宅改修内容のチェック();
         handler.費用額合計の設定();
 
-        if (!非表示用フラグ_TRUE.equals(div.getHidDataChangeFlg()) && handler.要介護状態３段階変更の有効性チェック(hihokenshaNo)
+        if (!非表示用フラグ_TRUE.equals(div.getHidSandannkaiMsgFlg()) && handler.要介護状態３段階変更の有効性チェック(hihokenshaNo)
                 && !selectedItems.contains(要介護状態区分)) {
             if (!ResponseHolder.isReRequest()) {
                 QuestionMessage message = new QuestionMessage(
@@ -231,7 +231,7 @@ public class JutakuKaishuJizenShinseiToroku {
                 div.setHidSandannkaiMsgFlg(RString.EMPTY);
                 return ResponseData.of(div).respond();
             }
-        } else if (!非表示用フラグ_TRUE.equals(div.getHidDataChangeFlg()) && !handler.要介護状態３段階変更の有効性チェック(hihokenshaNo)
+        } else if (!非表示用フラグ_TRUE.equals(div.getHidSandannkaiMsgFlg()) && !handler.要介護状態３段階変更の有効性チェック(hihokenshaNo)
                 && selectedItems.contains(要介護状態区分)) {
             if (!ResponseHolder.isReRequest()) {
                 QuestionMessage message = new QuestionMessage(
@@ -251,7 +251,15 @@ public class JutakuKaishuJizenShinseiToroku {
                 return ResponseData.of(div).respond();
             }
         }
-        限度額リセットチェック(div, hihokenshaNo);
+        QuestionMessage msg = 限度額リセットチェック(div, hihokenshaNo);
+        if (msg != null) {
+            if (QuestionMessage.NO_MESSAGE.getCode().equals(msg.getCode())) {
+                return ResponseData.of(div).respond();
+            } else {
+                return ResponseData.of(div).addMessage(msg).respond();
+            }
+        }
+
         boolean 限度額のチェック結果 = handler.限度額チェック(hihokenshaNo, seiriNo);
         if (!限度額のチェック結果) {
             if (!非表示用フラグ_TRUE.equals(div.getHidLimitNGMsgDisplayedFlg())) {
@@ -274,25 +282,24 @@ public class JutakuKaishuJizenShinseiToroku {
         }
 
         handler.支払結果の設定(hihokenshaNo);
-
         return ResponseData.of(div).respond();
     }
 
-    private ResponseData<JutakuKaishuJizenShinseiTorokuDiv> 限度額リセットチェック(JutakuKaishuJizenShinseiTorokuDiv div,
+    private QuestionMessage 限度額リセットチェック(JutakuKaishuJizenShinseiTorokuDiv div,
             HihokenshaNo hihokenshaNo) {
         JutakuKaishuJizenShinseiTorokuDivHandler handler = getHandler(div);
         KeyValueDataSource 住宅住所変更 = new KeyValueDataSource(住宅住所変更_KEY, 住宅住所変更_VALUE);
         List<KeyValueDataSource> selectedItems = div.getKaigoShikakuKihonShaPanel().getTabShinseiContents()
                 .getTabJutakuKaisyuJyoho().getTotalPanel().getChkResetInfo().getSelectedItems();
         if (!非表示用フラグ_TRUE.equals(div.getHidLimitMsgNotNeedFlg())
-                && handler.改修住所変更による限度額リセットチェック(hihokenshaNo)
+                && !handler.改修住所変更による限度額リセットチェック(hihokenshaNo)
                 && !selectedItems.contains(住宅住所変更)) {
             if (!非表示用フラグ_TRUE.equals(div.getHidLimitMsgDisplayedFlg())) {
                 QuestionMessage message = new QuestionMessage(
                         DbcQuestionMessages.改修住所変更_限度額リセット対象.getMessage().getCode(),
                         DbcQuestionMessages.改修住所変更_限度額リセット対象.getMessage().evaluate());
                 div.setHidLimitMsgDisplayedFlg(非表示用フラグ_TRUE);
-                return ResponseData.of(div).addMessage(message).respond();
+                return message;
             }
             if (new RString(DbcQuestionMessages.改修住所変更_限度額リセット対象.getMessage().getCode())
                     .equals(ResponseHolder.getMessageCode())
@@ -302,16 +309,17 @@ public class JutakuKaishuJizenShinseiToroku {
                 div.setHidLimitMsgDisplayedFlg(非表示用フラグ_TRUE);
             } else {
                 div.setHidLimitMsgDisplayedFlg(RString.EMPTY);
+                return new QuestionMessage(QuestionMessage.NO_MESSAGE.getCode(), QuestionMessage.NO_MESSAGE.evaluate());
             }
         } else if (!非表示用フラグ_TRUE.equals(div.getHidLimitMsgNotNeedFlg())
-                && !handler.改修住所変更による限度額リセットチェック(hihokenshaNo)
+                && handler.改修住所変更による限度額リセットチェック(hihokenshaNo)
                 && selectedItems.contains(住宅住所変更)) {
             if (!非表示用フラグ_TRUE.equals(div.getHidLimitMsgDisplayedFlg())) {
                 QuestionMessage message = new QuestionMessage(
                         DbcQuestionMessages.改修住所変更_限度額リセット対象外.getMessage().getCode(),
                         DbcQuestionMessages.改修住所変更_限度額リセット対象外.getMessage().evaluate());
                 div.setHidLimitMsgDisplayedFlg(非表示用フラグ_TRUE);
-                return ResponseData.of(div).addMessage(message).respond();
+                return message;
             }
             if (new RString(DbcQuestionMessages.改修住所変更_限度額リセット対象外.getMessage().getCode())
                     .equals(ResponseHolder.getMessageCode())
@@ -322,6 +330,7 @@ public class JutakuKaishuJizenShinseiToroku {
                 div.setHidLimitMsgNotNeedFlg(非表示用フラグ_TRUE);
             } else {
                 div.setHidLimitMsgNotNeedFlg(RString.EMPTY);
+                return new QuestionMessage(QuestionMessage.NO_MESSAGE.getCode(), QuestionMessage.NO_MESSAGE.evaluate());
             }
         }
         return null;

@@ -725,8 +725,9 @@ public final class JutakuKaishuJizenShinseiTorokuDivHandler {
      * @param hihokenshaNo HihokenshaNo
      */
     public void 支払結果の設定(HihokenshaNo hihokenshaNo) {
-        // TODO ダミー値を設定 「住宅改修内容一覧」共有子Divの一覧Gridに「着工予定日」
-        FlexibleYearMonth 着工予定日 = FlexibleYearMonth.MAX;
+        FlexibleYearMonth 着工予定日 = new FlexibleDate(div.getKaigoShikakuKihonShaPanel()
+                .getTabShinseiContents().getTabJutakuKaisyuJyoho().getCcdJutakuJizenShinseiDetail().get住宅改修内容一覧()
+                .get(0).getTxtChakkoYoteibi()).getYearMonth();
         Decimal 支給限度額 = JutakuKaishuJizenShinsei.createInstance().getShikyuGendoGaku(hihokenshaNo, 着工予定日);
 
         List<KeyValueDataSource> selectedItems = div.getKaigoShikakuKihonShaPanel().getTabShinseiContents()
@@ -748,25 +749,27 @@ public final class JutakuKaishuJizenShinseiTorokuDivHandler {
     private void setチェックしない保険給付額(Decimal 支給限度額) {
         Decimal 費用額合計 = div.getKaigoShikakuKihonShaPanel().getTabShinseiContents().getTabJutakuKaisyuJyoho()
                 .getTotalPanel().getTxtHiyoTotalNow().getValue();
-        if (費用額合計.add(費用額合計).compareTo(支給限度額) > 0) {
+        Decimal 前回までの費用額合計 = div.getKaigoShikakuKihonShaPanel().getTabShinseiContents().getTabJutakuKaisyuJyoho()
+                .getTotalPanel().getTxtHiyoTotalMae().getValue();
+        if (費用額合計.add(前回までの費用額合計).compareTo(支給限度額) > 0) {
             Decimal 前回までの被保険対象額 = div.getKaigoShikakuKihonShaPanel().getTabShinseiContents()
                     .getTabJutakuKaisyuJyoho().getTotalPanel().getTxtHokenTaishoHiyoMae().getValue();
             Decimal 今回の被保険対象額 = 支給限度額.compareTo(前回までの被保険対象額) < 0 ? Decimal.ZERO : 支給限度額
                     .subtract(前回までの被保険対象額);
             div.getKaigoShikakuKihonShaPanel().getTabShinseiContents()
                     .getTabJutakuKaisyuJyoho().getTotalPanel().getTxtHokenTaishoHiyoNow().setValue(今回の被保険対象額);
-            if (今回の被保険対象額.compareTo(Decimal.ONE) > 0) {
+            if (今回の被保険対象額.compareTo(Decimal.ONE) >= 0) {
                 Decimal 前回までの保険給付額 = div.getKaigoShikakuKihonShaPanel().getTabShinseiContents()
                         .getTabJutakuKaisyuJyoho().getTotalPanel().getTxtHokenKyufuAmountMae().getValue();
                 Decimal 給付率 = new Decimal(div.getKaigoShikakuKihonShaPanel().getTxtKyufuritsu().getValue().toString());
-                Decimal 今回の保険給付額 = 支給限度額.multiply(給付率).divide(数字_100).subtract(前回までの保険給付額);
+                Decimal 今回の保険給付額 = 支給限度額.multiply(給付率).divide(数字_100)
+                        .subtract(前回までの保険給付額).roundDownTo(0);
                 div.getKaigoShikakuKihonShaPanel().getTabShinseiContents().getTabJutakuKaisyuJyoho().getTotalPanel()
                         .getTxtHokenKyufuAmountNow().setValue(今回の保険給付額.compareTo(Decimal.ZERO) < 0
-                                ? Decimal.ZERO : 今回の保険給付額.minusToZero());
+                                ? Decimal.ZERO : 今回の保険給付額);
             } else if (今回の被保険対象額.compareTo(Decimal.ZERO) == 0) {
-                Decimal 今回の保険給付額 = Decimal.ZERO;
                 div.getKaigoShikakuKihonShaPanel().getTabShinseiContents()
-                        .getTabJutakuKaisyuJyoho().getTotalPanel().getTxtHokenKyufuAmountNow().setValue(今回の保険給付額);
+                        .getTabJutakuKaisyuJyoho().getTotalPanel().getTxtHokenKyufuAmountNow().setValue(Decimal.ZERO);
             }
             Decimal 今回の利用者負担額 = 費用額合計.subtract(div.getKaigoShikakuKihonShaPanel().getTabShinseiContents()
                     .getTabJutakuKaisyuJyoho().getTotalPanel().getTxtHokenKyufuAmountNow().getValue());
@@ -776,10 +779,10 @@ public final class JutakuKaishuJizenShinseiTorokuDivHandler {
             div.getKaigoShikakuKihonShaPanel().getTabShinseiContents()
                     .getTabJutakuKaisyuJyoho().getTotalPanel().getTxtHokenTaishoHiyoNow().setValue(費用額合計);
             Decimal 給付率 = new Decimal(div.getKaigoShikakuKihonShaPanel().getTxtKyufuritsu().getValue().toString());
-            Decimal 今回の保険給付額 = 費用額合計.multiply(給付率).divide(数字_100);
+            Decimal 今回の保険給付額 = 費用額合計.multiply(給付率).divide(数字_100).roundDownTo(0);
             div.getKaigoShikakuKihonShaPanel().getTabShinseiContents().getTabJutakuKaisyuJyoho().getTotalPanel()
-                    .getTxtHokenKyufuAmountNow().setValue(今回の保険給付額.minusToZero());
-            Decimal 今回の利用者負担額 = 費用額合計.subtract(今回の保険給付額.minusToZero());
+                    .getTxtHokenKyufuAmountNow().setValue(今回の保険給付額);
+            Decimal 今回の利用者負担額 = 費用額合計.subtract(今回の保険給付額);
             div.getKaigoShikakuKihonShaPanel().getTabShinseiContents()
                     .getTabJutakuKaisyuJyoho().getTotalPanel().getTxtRiyoshaFutanAmountNow().setValue(今回の利用者負担額);
         }
@@ -797,19 +800,19 @@ public final class JutakuKaishuJizenShinseiTorokuDivHandler {
         if (費用額合計.compareTo(支給限度額) > 0) {
             div.getKaigoShikakuKihonShaPanel().getTabShinseiContents()
                     .getTabJutakuKaisyuJyoho().getTotalPanel().getTxtHokenTaishoHiyoNow().setValue(支給限度額);
-            Decimal 今回の保険給付額 = 支給限度額.multiply(給付率).divide(数字_100);
+            Decimal 今回の保険給付額 = 支給限度額.multiply(給付率).divide(数字_100).roundDownTo(0);
             div.getKaigoShikakuKihonShaPanel().getTabShinseiContents().getTabJutakuKaisyuJyoho().getTotalPanel()
-                    .getTxtHokenKyufuAmountNow().setValue(今回の保険給付額.minusToZero());
-            Decimal 今回の利用者負担額 = 費用額合計.subtract(今回の保険給付額.minusToZero());
+                    .getTxtHokenKyufuAmountNow().setValue(今回の保険給付額);
+            Decimal 今回の利用者負担額 = 費用額合計.subtract(今回の保険給付額);
             div.getKaigoShikakuKihonShaPanel().getTabShinseiContents()
                     .getTabJutakuKaisyuJyoho().getTotalPanel().getTxtRiyoshaFutanAmountNow().setValue(今回の利用者負担額);
         } else {
             div.getKaigoShikakuKihonShaPanel().getTabShinseiContents()
                     .getTabJutakuKaisyuJyoho().getTotalPanel().getTxtHokenTaishoHiyoNow().setValue(費用額合計);
-            Decimal 今回の保険給付額 = 費用額合計.multiply(給付率).divide(数字_100);
+            Decimal 今回の保険給付額 = 費用額合計.multiply(給付率).divide(数字_100).roundDownTo(0);
             div.getKaigoShikakuKihonShaPanel().getTabShinseiContents().getTabJutakuKaisyuJyoho().getTotalPanel()
-                    .getTxtHokenKyufuAmountNow().setValue(今回の保険給付額.minusToZero());
-            Decimal 今回の利用者負担額 = 費用額合計.subtract(今回の保険給付額.minusToZero());
+                    .getTxtHokenKyufuAmountNow().setValue(今回の保険給付額);
+            Decimal 今回の利用者負担額 = 費用額合計.subtract(今回の保険給付額);
             div.getKaigoShikakuKihonShaPanel().getTabShinseiContents()
                     .getTabJutakuKaisyuJyoho().getTotalPanel().getTxtRiyoshaFutanAmountNow().setValue(今回の利用者負担額);
         }
