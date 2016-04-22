@@ -16,12 +16,9 @@ import jp.co.ndensan.reams.db.dba.divcontroller.entity.parentdiv.DBA2040011.DBA2
 import jp.co.ndensan.reams.db.dba.divcontroller.entity.parentdiv.DBA2040011.HokaShichosonJyusyochiTokureisyaKanriDiv;
 import jp.co.ndensan.reams.db.dba.divcontroller.handler.parentdiv.DBA2040011.HokaShichosonJyusyochiTokureisyaKanriHandler;
 import jp.co.ndensan.reams.db.dba.service.core.tajushochitokureisyakanri.TaJushochiTokureisyaKanriManager;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbz.divcontroller.util.viewstate.ViewStateKey;
 import jp.co.ndensan.reams.db.dbz.service.TaishoshaKey;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrQuestionMessages;
-import jp.co.ndensan.reams.uz.uza.biz.SetaiCode;
-import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.exclusion.LockingKey;
 import jp.co.ndensan.reams.uz.uza.exclusion.RealInitialLocker;
@@ -63,9 +60,6 @@ public class HokaShichosonJyusyochiTokureisyaKanri {
      */
     public ResponseData<HokaShichosonJyusyochiTokureisyaKanriDiv> onLoad(HokaShichosonJyusyochiTokureisyaKanriDiv div) {
         menuId = ResponseHolder.getMenuID();
-        menuId = メニューID_施設変更により変更;
-        TaishoshaKey key = new TaishoshaKey(HihokenshaNo.EMPTY, new ShikibetsuCode("000000000000010"), SetaiCode.EMPTY);
-        ViewStateHolder.put(ViewStateKey.資格対象者, key);
         div.getShikakuKihonJoho().getCddTaJushochiTokureishaKanri().set状態(getMode().get(menuId));
         getHandler(div).onLoad(ViewStateHolder.get(ViewStateKey.資格対象者, TaishoshaKey.class).get識別コード());
         RealInitialLocker.tryGetLock(LOCKINGKEY);
