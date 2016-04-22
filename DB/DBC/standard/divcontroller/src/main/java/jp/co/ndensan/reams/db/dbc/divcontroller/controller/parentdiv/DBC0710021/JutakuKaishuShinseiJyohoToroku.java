@@ -10,6 +10,7 @@ import jp.co.ndensan.reams.db.dbc.business.core.jutakukaishujizenshinsei.Yokaigo
 import jp.co.ndensan.reams.db.dbc.definition.message.DbcErrorMessages;
 import jp.co.ndensan.reams.db.dbc.definition.message.DbcQuestionMessages;
 import jp.co.ndensan.reams.db.dbc.definition.message.DbcWarningMessages;
+import jp.co.ndensan.reams.db.dbc.divcontroller.entity.commonchilddiv.jyutakugaisyunaiyolist.JyutakugaisyunaiyoList.dgGaisyuList_Row;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0710021.DBC0710021StateName;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0710021.DBC0710021TransitionEventName;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0710021.JutakuKaishuShinseiJyohoTorokuDiv;
@@ -39,6 +40,7 @@ import jp.co.ndensan.reams.uz.uza.lang.ApplicationException;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.message.MessageDialogSelectedResult;
 import jp.co.ndensan.reams.uz.uza.message.QuestionMessage;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ResponseHolder;
@@ -71,8 +73,6 @@ public class JutakuKaishuShinseiJyohoToroku {
     private final Code 要介護3 = new Code("23");
     private final Code 要介護4 = new Code("24");
     private final Code 要介護5 = new Code("25");
-    private final RString 給付実績連動_受託なし = new RString("1");
-    private final RString 給付実績連動_受託あり = new RString("2");
     private final RString 要介護状態区分3段階変更による = new RString("threeUp");
     private final RString 住宅住所変更による = new RString("changeAddress");
     private final RString エラー_RPLC_MSG_1 = new RString("受給認定有効期間外の");
@@ -179,14 +179,6 @@ public class JutakuKaishuShinseiJyohoToroku {
             }
         }
         RDate 画面提供着工年月 = div.getTxtTeikyoYM().getValue();
-//        RDate 申請日 = div.getJutakuKaishuShinseiContents().getShinseishaInfo().getTxtShinseiYMD().getValue();
-//        RDate 申請日年月 = new RDate(申請日.getYearMonth().toString());
-//        RString 償還 = BusinessConfig.get(ConfigNameDBC.国保連共同処理受託区分_償還, SubGyomuCode.DBC介護給付);
-//        if (給付実績連動_受託なし.equals(償還)) {
-//            if (!申請日年月.equals(画面提供着工年月)) {
-////                throw new ApplicationException(DbcErrorMessages.申請日不一致.getMessage());
-//            }
-//        }
         // 領収日チェック
         RDate 領収日 = div.getJutakuKaishuShinseiContents().getTxtRyoshuYMD().getValue();
         if (領収日.getYearMonth().isBeforeOrEquals(画面提供着工年月.getYearMonth())) {
@@ -238,8 +230,6 @@ public class JutakuKaishuShinseiJyohoToroku {
                         ResponseHolder.getMessageCode()))
                 && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
             handler.save(引き継ぎデータEntity);
-            // １１．保存完了の確認
-            // １１．１　画面モードが審査モード、削除モード、取消モード
             if (画面モード_審査.equals(画面モード) || 画面モード_削除.equals(画面モード)
                     || 画面モード_取消.equals(画面モード)) {
                 div.getJutakuShikyuShinseiKanryoPanel().getKanryoMessage().setMessage(new RString(
@@ -430,7 +420,8 @@ public class JutakuKaishuShinseiJyohoToroku {
      */
     public ResponseData<JutakuKaishuShinseiJyohoTorokuDiv> onClick_creationJigyoshaNoonBlur(
             JutakuKaishuShinseiJyohoTorokuDiv div) {
-
+        JutakuKaishuShinseiJyohoTorokuHandler handler = getHandler(div);
+        handler.get作成事業者名();
         return ResponseData.of(div).respond();
     }
 
@@ -470,7 +461,6 @@ public class JutakuKaishuShinseiJyohoToroku {
             JutakuKaishuJizenShinsei 住宅改修費事前申請 = JutakuKaishuJizenShinsei.createInstance();
             YokaigoNinteiJyoho 要介護認定情報 = 住宅改修費事前申請.getYokaigoNinteiJyoho(
                     被保険者番号, サービス提供年月);
-            // １０．１　取得した要介護認定状態区分コードが以下の場合、受給認定が有効としてチェックする
             if (要介護認定情報 == null) {
 //                throw new ApplicationException(DbcErrorMessages.受給認定有効期間外で入力不可.getMessage());
             }
@@ -490,7 +480,6 @@ public class JutakuKaishuShinseiJyohoToroku {
                         エラー_RPLC_MSG_1.toString(), エラー_RPLC_MSG_2.toString()));
             }
 
-            // １０．２　画面．提供（着工）年月が画面．領収日の年月と一致する場合、処理終了
             if (領収日.getYearMonth().equals(画面提供着工年月.getYearMonth())) {
                 return ResponseData.of(div).respond();
             } else {
@@ -505,7 +494,6 @@ public class JutakuKaishuShinseiJyohoToroku {
                 if (new RString(DbcQuestionMessages.領収日不一致_提供年月変更確認.getMessage().getCode()).equals(
                         ResponseHolder.getMessageCode())
                         && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
-// １０．３．１　｢はい｣をクリックされる場合、提供（着工）年月を領収日の年月に設定する
                     div.getCommHeadPanel().getTxtTeikyoYM().setValue(領収日);
                 } else if (new RString(DbcQuestionMessages.領収日不一致_提供年月変更確認.getMessage().getCode()).equals(
                         ResponseHolder.getMessageCode())
@@ -513,11 +501,9 @@ public class JutakuKaishuShinseiJyohoToroku {
                     return ResponseData.of(div).respond();
                 }
             }
-// １０．４　給付率の再設定
             HokenKyufuRitsu 給付率 = 住宅改修費事前申請.getKyufuritsu(被保険者番号,
                     new FlexibleYearMonth(領収日.getYearMonth().toString()));
             div.getTxtKyufuritsu().setValue(給付率.value());
-            // １０．５　画面．提供（着工）年月が変更されたので、証明書を再設定する
             JutakuKaishuShinseiJyohoTorokuHandler handler = getHandler(div);
             JutakukaishuSikyuShinseiManager 住宅改修費支給申請 = JutakukaishuSikyuShinseiManager.createInstance();
             handler.証明書表示設定(住宅改修費支給申請, 被保険者番号, 引き継ぎデータEntity.get画面モード());
@@ -573,6 +559,8 @@ public class JutakuKaishuShinseiJyohoToroku {
         if (valid.iterator().hasNext()) {
             return ResponseData.of(div).addValidationMessages(valid).respond();
         }
+        JutakuKaishuShinseiJyohoTorokuHandler handler = getHandler(div);
+        handler.過去の住宅改修費取得と支払結果の設定();
         return ResponseData.of(div).respond();
     }
 
@@ -588,32 +576,19 @@ public class JutakuKaishuShinseiJyohoToroku {
         FlexibleYearMonth 画面提供着工年月 = new FlexibleYearMonth(
                 div.getTxtTeikyoYM().getValue().getYearMonth().toDateString());
         JutakuKaishuShinseiJyohoTorokuHandler handler = getHandler(div);
-        // 1 入力チェック
-//        handler.住宅改修内容のチェック();
-
         ValidationMessageControlPairs valid = getJutakuKaishuShinseiJyohoTorokuValidationHandler(
                 div, null).validate住宅改修内容();
         if (valid.iterator().hasNext()) {
             return ResponseData.of(div).addValidationMessages(valid).respond();
         }
-        // 2 費用額合計の設定
-//        handler.費用額合計の取得();
-        // 3 限度額リセット有効性チェック
-        // ７．１　要介護状態３段階変更の有効性チェック
+        Decimal 費用額合計 = handler.費用額合計の取得();
+        div.getJutakuKaishuShinseiContents().getJutakuKaishuShinseiResetInfo()
+                .getTxtHiyoTotalNow().setValue(費用額合計);
         JutakuKaishuYaokaigoJyotaiSandannkaiHanteiManager manager
                 = JutakuKaishuYaokaigoJyotaiSandannkaiHanteiManager.createInstance();
-        boolean 要介護状態３段階変更の判定 = manager.checkYaokaigoJyotaiSandannkai(
-                被保険者番号,
-                画面提供着工年月);
+        boolean 要介護状態３段階変更の判定 = manager.checkYaokaigoJyotaiSandannkai(被保険者番号, 画面提供着工年月);
         List<RString> 要介護状態区分３段階変更チェック = div.getJutakuKaishuShinseiContents()
                 .getJutakuKaishuShinseiResetInfo().getChkResetInfo().getSelectedKeys();
-//        if (要介護状態３段階変更の判定
-//                && (要介護状態区分３段階変更チェック == null || 要介護状態区分３段階変更チェック.contains(
-//        要介護状態区分3段階変更による))) {
-//
-//        } else if (!要介護状態３段階変更の判定 && 要介護状態区分３段階変更チェック != null) {
-//
-//        }
         if (要介護状態３段階変更の判定 && (要介護状態区分３段階変更チェック.isEmpty()
                 || !要介護状態区分３段階変更チェック.contains(要介護状態区分3段階変更による))) {
             if (!ResponseHolder.isReRequest()) {
@@ -644,17 +619,16 @@ public class JutakuKaishuShinseiJyohoToroku {
                 要介護状態区分３段階変更チェック.remove(要介護状態区分3段階変更による);
                 div.getJutakuKaishuShinseiContents().getJutakuKaishuShinseiResetInfo()
                         .getChkResetInfo().setSelectedItemsByKey(要介護状態区分３段階変更チェック);
-                return ResponseData.of(div).respond();
+//                return ResponseData.of(div).respond();
             }
         }
-        // ７．２　改修住所変更による限度額リセットチェック
+        List<dgGaisyuList_Row> gridList = div.getJutakuKaishuShinseiContents().getCcdJutakugaisyunaiyoList()
+                .get住宅改修内容一覧();
         JutakuKaishuJyusyoChofukuHanntei chofukuHanntei = JutakuKaishuJyusyoChofukuHanntei.createInstance();
-//        chofukuHanntei.checkKaishuJyusyoChofukuToroku(被保険者番号,
-//                画面提供着工年月, 表示モード);
-//        RString 住宅住所変更チェック = div.getJutakuKaishuShinseiContents().getJutakuKaishuShinseiResetInfo()
-//                .getChkResetInfo().getSelectedKeys().get(1);
-        if (要介護状態区分３段階変更チェック.isEmpty()
-                || !要介護状態区分３段階変更チェック.contains(住宅住所変更による)) {
+        boolean is改修住所重複 = chofukuHanntei.checkKaishuJyusyoChofukuToroku(被保険者番号,
+                画面提供着工年月, gridList.get(0).getTxtJutakuAddress());
+        if (!is改修住所重複 && (要介護状態区分３段階変更チェック.isEmpty()
+                || !要介護状態区分３段階変更チェック.contains(住宅住所変更による))) {
             if (!ResponseHolder.isReRequest()) {
                 QuestionMessage message = new QuestionMessage(
                         DbcQuestionMessages.改修住所変更_限度額リセット対象.getMessage().getCode(),
@@ -667,10 +641,12 @@ public class JutakuKaishuShinseiJyohoToroku {
                 要介護状態区分３段階変更チェック.add(住宅住所変更による);
                 div.getJutakuKaishuShinseiContents().getJutakuKaishuShinseiResetInfo()
                         .getChkResetInfo().setSelectedItemsByKey(要介護状態区分３段階変更チェック);
+//                return ResponseData.of(div).respond();
+            } else {
                 return ResponseData.of(div).respond();
             }
-        } else if (!要介護状態区分３段階変更チェック.isEmpty()
-                && 要介護状態区分３段階変更チェック.contains(住宅住所変更による)) {
+        } else if (is改修住所重複 && (!要介護状態区分３段階変更チェック.isEmpty()
+                && 要介護状態区分３段階変更チェック.contains(住宅住所変更による))) {
             if (!ResponseHolder.isReRequest()) {
                 QuestionMessage message = new QuestionMessage(
                         DbcQuestionMessages.改修住所変更_限度額リセット対象外.getMessage().getCode(),
@@ -683,25 +659,25 @@ public class JutakuKaishuShinseiJyohoToroku {
                 要介護状態区分３段階変更チェック.remove(住宅住所変更による);
                 div.getJutakuKaishuShinseiContents().getJutakuKaishuShinseiResetInfo()
                         .getChkResetInfo().setSelectedItemsByKey(要介護状態区分３段階変更チェック);
+//                return ResponseData.of(div).respond();
+            } else {
                 return ResponseData.of(div).respond();
             }
         }
-        // 4 限度額のチェック
         boolean 限度額チェック = handler.is限度額を超えない();
         if (!限度額チェック) {
             if (!ResponseHolder.isReRequest()) {
                 QuestionMessage message = new QuestionMessage(
-                        DbcWarningMessages.ダミーメッセージ.getMessage().getCode(),
-                        DbcWarningMessages.ダミーメッセージ.getMessage().evaluate());
+                        DbcWarningMessages.住宅改修限度額確認.getMessage().getCode(),
+                        DbcWarningMessages.住宅改修限度額確認.getMessage().evaluate());
                 return ResponseData.of(div).addMessage(message).respond();
             }
-            if (new RString(DbcWarningMessages.ダミーメッセージ.getMessage().getCode()).equals(
+            if (new RString(DbcWarningMessages.住宅改修限度額確認.getMessage().getCode()).equals(
                     ResponseHolder.getMessageCode())
                     && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
                 return ResponseData.of(div).respond();
             }
         }
-        // 5.　支払結果の設定
         handler.支払結果の設定();
         // 6 確認対象の保存 TODO
         JutakuGaisuDataParameter 住宅改修データ = new JutakuGaisuDataParameter();

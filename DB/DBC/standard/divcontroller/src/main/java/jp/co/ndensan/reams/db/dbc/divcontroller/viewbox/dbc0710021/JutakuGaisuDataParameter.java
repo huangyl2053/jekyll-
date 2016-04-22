@@ -7,6 +7,7 @@ package jp.co.ndensan.reams.db.dbc.divcontroller.viewbox.dbc0710021;
 
 import java.io.Serializable;
 import java.util.List;
+import jp.co.ndensan.reams.db.dbc.divcontroller.entity.commonchilddiv.jyutakugaisyunaiyolist.JyutakugaisyunaiyoList.dgGaisyuList_Row;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
@@ -19,6 +20,6 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 @SuppressWarnings("PMD.UnusedPrivateField")
 public class JutakuGaisuDataParameter implements Serializable {
 
-    private RString 住宅改修データ;
+    private List<dgGaisyuList_Row> 住宅改修データ;
     private List<RString> 限度額リセット;
 }
