@@ -16,10 +16,9 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 @lombok.Getter
 @lombok.Setter
 @SuppressWarnings("PMD.UnusedPrivateField")
-public class TaishoNoParameter {
+public class ShutokuTodokedeParameter {
 
-    private RString taishoYM;
-    private RString keikakuJigyoshaNo;
-    private FlexibleDate tekiyoKaishiYMD;
-    private FlexibleDate tekiyoShuryoYMD;
+    private RString 計画事業者番号;
+    private FlexibleDate 届出年月日;
+    private FlexibleDate 適用終了日;
 }

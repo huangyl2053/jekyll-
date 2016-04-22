@@ -5,7 +5,6 @@
  */
 package jp.co.ndensan.reams.db.dbu.definition.core.hihokenshashochohyo;
 
-import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
@@ -16,10 +15,8 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 @lombok.Getter
 @lombok.Setter
 @SuppressWarnings("PMD.UnusedPrivateField")
-public class NyushoShisetsuParameter {
+public class ShiteiServiceParameter {
 
-    private RString nyushoShisetsuShurui;
-    private RString nyushoShisetsuCode;
-    private FlexibleDate nyushoYMD;
-    private FlexibleDate taishoYMD;
+    private RString 指定サービス種類;
+    private RString サービス種類限度額;
 }
