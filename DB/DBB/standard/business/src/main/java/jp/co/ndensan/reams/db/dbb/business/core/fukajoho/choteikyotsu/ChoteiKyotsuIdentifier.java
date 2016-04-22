@@ -16,14 +16,14 @@ import java.io.Serializable;
 @lombok.Value
 public class ChoteiKyotsuIdentifier implements Serializable {
 
-    private final Long 調定ID;
+    private final long 調定ID;
 
     /**
      * コンストラクタです。
      *
      * @param 調定ID 調定ID
      */
-    public ChoteiKyotsuIdentifier(Long 調定ID) {
+    public ChoteiKyotsuIdentifier(long 調定ID) {
         this.調定ID = 調定ID;
     }
     private static final long serialVersionUID = 3116830075776426007L;

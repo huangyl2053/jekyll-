@@ -9,8 +9,10 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import static java.util.Objects.requireNonNull;
+import jp.co.ndensan.reams.db.dbb.business.core.fukajoho.choteikyotsu.ChoteiKyotsuIdentifier;
 import jp.co.ndensan.reams.db.dbb.business.core.fukajoho.kibetsu.Kibetsu;
 import jp.co.ndensan.reams.db.dbb.business.core.fukajoho.kibetsu.KibetsuIdentifier;
+import jp.co.ndensan.reams.db.dbb.definition.core.choshuhoho.ChoshuHohoKibetsu;
 import jp.co.ndensan.reams.db.dbb.entity.db.basic.DbT2002FukaEntity;
 import jp.co.ndensan.reams.db.dbb.entity.db.relate.fukajoho.fukajoho.FukaJohoRelateEntity;
 import jp.co.ndensan.reams.db.dbb.entity.db.relate.fukajoho.kibetsu.KibetsuEntity;
@@ -41,6 +43,21 @@ public class FukaJoho extends ParentModelBase<FukaJohoIdentifier, DbT2002FukaEnt
     private final DbT2002FukaEntity entity;
     private final FukaJohoIdentifier id;
     private final Models<KibetsuIdentifier, Kibetsu> kibetsu;
+
+    private static final int INT_1 = 1;
+    private static final int INT_2 = 2;
+    private static final int INT_3 = 3;
+    private static final int INT_4 = 4;
+    private static final int INT_5 = 5;
+    private static final int INT_6 = 6;
+    private static final int INT_7 = 7;
+    private static final int INT_8 = 8;
+    private static final int INT_9 = 9;
+    private static final int INT_10 = 10;
+    private static final int INT_11 = 11;
+    private static final int INT_12 = 12;
+    private static final int INT_13 = 13;
+    private static final int INT_14 = 14;
 
     /**
      * コンストラクタです。<br/>
@@ -548,6 +565,227 @@ public class FukaJoho extends ParentModelBase<FukaJohoIdentifier, DbT2002FukaEnt
      */
     public Decimal get普徴歳出還付額() {
         return entity.getFuSaishutsuKampuGaku();
+    }
+
+    /**
+     * 特徴期別金額01を返します。
+     *
+     * @return 特徴期別金額01
+     */
+    public Decimal get特徴期別金額01() {
+
+        return this.get期別金額(INT_1, ChoshuHohoKibetsu.普通徴収.getコード());
+    }
+
+    /**
+     * 特徴期別金額02を返します。
+     *
+     * @return 特徴期別金額02
+     */
+    public Decimal get特徴期別金額02() {
+
+        return this.get期別金額(INT_2, ChoshuHohoKibetsu.普通徴収.getコード());
+    }
+
+    /**
+     * 特徴期別金額03を返します。
+     *
+     * @return 特徴期別金額03
+     */
+    public Decimal get特徴期別金額03() {
+
+        return this.get期別金額(INT_3, ChoshuHohoKibetsu.普通徴収.getコード());
+    }
+
+    /**
+     * 特徴期別金額04を返します。
+     *
+     * @return 特徴期別金額04
+     */
+    public Decimal get特徴期別金額04() {
+
+        return this.get期別金額(INT_4, ChoshuHohoKibetsu.普通徴収.getコード());
+    }
+
+    /**
+     * 特徴期別金額05を返します。
+     *
+     * @return 特徴期別金額05
+     */
+    public Decimal get特徴期別金額05() {
+
+        return this.get期別金額(INT_5, ChoshuHohoKibetsu.普通徴収.getコード());
+    }
+
+    /**
+     * 特徴期別金額06を返します。
+     *
+     * @return 特徴期別金額06
+     */
+    public Decimal get特徴期別金額06() {
+
+        return this.get期別金額(INT_6, ChoshuHohoKibetsu.普通徴収.getコード());
+    }
+
+    /**
+     * 普徴期別金額01を返します。
+     *
+     * @return 普徴期別金額01
+     */
+    public Decimal get普徴期別金額01() {
+
+        return this.get期別金額(INT_1, ChoshuHohoKibetsu.特別徴収.getコード());
+    }
+
+    /**
+     * 普徴期別金額02を返します。
+     *
+     * @return 普徴期別金額02
+     */
+    public Decimal get普徴期別金額02() {
+
+        return this.get期別金額(INT_2, ChoshuHohoKibetsu.特別徴収.getコード());
+    }
+
+    /**
+     * 普徴期別金額03を返します。
+     *
+     * @return 普徴期別金額03
+     */
+    public Decimal get普徴期別金額03() {
+
+        return this.get期別金額(INT_3, ChoshuHohoKibetsu.特別徴収.getコード());
+    }
+
+    /**
+     * 普徴期別金額04を返します。
+     *
+     * @return 普徴期別金額04
+     */
+    public Decimal get普徴期別金額04() {
+
+        return this.get期別金額(INT_4, ChoshuHohoKibetsu.特別徴収.getコード());
+    }
+
+    /**
+     * 普徴期別金額05を返します。
+     *
+     * @return 普徴期別金額05
+     */
+    public Decimal get普徴期別金額05() {
+
+        return this.get期別金額(INT_5, ChoshuHohoKibetsu.特別徴収.getコード());
+    }
+
+    /**
+     * 普徴期別金額06を返します。
+     *
+     * @return 普徴期別金額06
+     */
+    public Decimal get普徴期別金額06() {
+
+        return this.get期別金額(INT_6, ChoshuHohoKibetsu.特別徴収.getコード());
+    }
+
+    /**
+     * 普徴期別金額07を返します。
+     *
+     * @return 普徴期別金額07
+     */
+    public Decimal get普徴期別金額07() {
+
+        return this.get期別金額(INT_7, ChoshuHohoKibetsu.特別徴収.getコード());
+    }
+
+    /**
+     * 普徴期別金額08を返します。
+     *
+     * @return 普徴期別金額08
+     */
+    public Decimal get普徴期別金額08() {
+
+        return this.get期別金額(INT_8, ChoshuHohoKibetsu.特別徴収.getコード());
+    }
+
+    /**
+     * 普徴期別金額09を返します。
+     *
+     * @return 普徴期別金額09
+     */
+    public Decimal get普徴期別金額09() {
+
+        return this.get期別金額(INT_9, ChoshuHohoKibetsu.特別徴収.getコード());
+    }
+
+    /**
+     * 普徴期別金額10を返します。
+     *
+     * @return 普徴期別金額10
+     */
+    public Decimal get普徴期別金額10() {
+
+        return this.get期別金額(INT_10, ChoshuHohoKibetsu.特別徴収.getコード());
+    }
+
+    /**
+     * 普徴期別金額11を返します。
+     *
+     * @return 普徴期別金額11
+     */
+    public Decimal get普徴期別金額11() {
+
+        return this.get期別金額(INT_11, ChoshuHohoKibetsu.特別徴収.getコード());
+    }
+
+    /**
+     * 普徴期別金額12を返します。
+     *
+     * @return 普徴期別金額12
+     */
+    public Decimal get普徴期別金額12() {
+
+        return this.get期別金額(INT_12, ChoshuHohoKibetsu.特別徴収.getコード());
+    }
+
+    /**
+     * 普徴期別金額13を返します。
+     *
+     * @return 普徴期別金額13
+     */
+    public Decimal get普徴期別金額13() {
+
+        return this.get期別金額(INT_13, ChoshuHohoKibetsu.特別徴収.getコード());
+    }
+
+    /**
+     * 普徴期別金額14を返します。
+     *
+     * @return 普徴期別金額14
+     */
+    public Decimal get普徴期別金額14() {
+
+        return this.get期別金額(INT_14, ChoshuHohoKibetsu.特別徴収.getコード());
+    }
+
+    /**
+     * 期別金額を返します。
+     *
+     * @param 期 int
+     * @param 徴収方法期別 RString
+     * @return 期別金額
+     */
+    private Decimal get期別金額(int 期, RString 徴収方法期別) {
+
+        if (kibetsu.iterator().hasNext()) {
+            Kibetsu thisKibetsu = kibetsu.iterator().next();
+            if (徴収方法期別.equals(thisKibetsu.get徴収方法())
+                    && 期 == thisKibetsu.get期()) {
+
+                ChoteiKyotsuIdentifier identifier = new ChoteiKyotsuIdentifier(thisKibetsu.get調定ID().longValue());
+                return thisKibetsu.getChoteiKyotsu(identifier).get調定額();
+            }
+        }
+        return Decimal.ZERO;
     }
 
     /**
