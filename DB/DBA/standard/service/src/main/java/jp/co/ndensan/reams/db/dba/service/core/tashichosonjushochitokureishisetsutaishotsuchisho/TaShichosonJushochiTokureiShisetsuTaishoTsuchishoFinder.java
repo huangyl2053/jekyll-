@@ -68,7 +68,6 @@ public class TaShichosonJushochiTokureiShisetsuTaishoTsuchishoFinder {
     private static final int INT8 = 8;
     private static final int INT9 = 9;
     private static final int INT10 = 10;
-    private static final int INT100 = 100;
 
     /**
      * コンストラクタです。
