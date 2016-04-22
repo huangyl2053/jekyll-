@@ -45,8 +45,6 @@ public class ShisetsuNyutaishoIdo {
         if (!RealInitialLocker.tryGetLock(前排他ロックキー)) {
             div.setReadOnly(true);
             throw new ApplicationException(UrErrorMessages.排他_他のユーザが使用中.getMessage());
-        } else {
-            RealInitialLocker.lock(前排他ロックキー);
         }
         response.data = div;
         return response;
