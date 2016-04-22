@@ -973,15 +973,15 @@ public class RiyoshaFutangakuGengakuHandler {
         @Override
         public int compare(ddlShinseiIchiran_Row row1, ddlShinseiIchiran_Row row2) {
 
-            int result = !row1.getTxtShinseiYMD().getValue().isBeforeOrEquals(row2.getTxtShinseiYMD().getValue())
-                    ? 1 : (row1.getTxtShinseiYMD().getValue().equals(row2.getTxtShinseiYMD().getValue()) ? 0 : -1);
+            int result = !row2.getTxtShinseiYMD().getValue().isBeforeOrEquals(row1.getTxtShinseiYMD().getValue())
+                    ? 1 : (row2.getTxtShinseiYMD().getValue().equals(row1.getTxtShinseiYMD().getValue()) ? 0 : -1);
 
             if (result == 0 && 追加.equals(row1.getJotai()) && 追加.equals(row2.getJotai())) {
-                result = row1.getHiddenShinseiRirekiNo().compareTo(row2.getHiddenShinseiRirekiNo());
+                result = row2.getHiddenShinseiRirekiNo().compareTo(row1.getHiddenShinseiRirekiNo());
             }
-            if (result == 0 && 追加.equals(row1.getJotai())) {
+            if (result == 0 && 追加.equals(row2.getJotai())) {
                 result = 1;
-            } else if (result == 0 && 追加.equals(row2.getJotai())) {
+            } else if (result == 0 && 追加.equals(row1.getJotai())) {
                 result = -1;
             }
             return result;
