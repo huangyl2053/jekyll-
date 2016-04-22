@@ -12,6 +12,7 @@ import java.util.Comparator;
 import java.util.List;
 import jp.co.ndensan.reams.db.dba.business.core.tekiyojogaisha.tekiyojogaisha.TekiyoJogaishaBusiness;
 import jp.co.ndensan.reams.db.dba.business.core.tekiyojogaisha.tekiyojogaisha.TekiyoJogaishaRelate;
+import jp.co.ndensan.reams.db.dba.definition.core.jogaiidojiyu.JogaiKaijoJiyu;
 import jp.co.ndensan.reams.db.dba.definition.message.DbaErrorMessages;
 import jp.co.ndensan.reams.db.dba.service.core.hihokenshashikakusoshitsu.HihokenshashikakusoshitsuManager;
 import jp.co.ndensan.reams.db.dba.service.core.tajushochito.TaJushochiTokureisyaKanriManager;
@@ -23,6 +24,7 @@ import jp.co.ndensan.reams.db.dbz.business.core.ShisetsuNyutaishoIdentifier;
 import jp.co.ndensan.reams.db.dbz.business.core.TekiyoJogaisha;
 import jp.co.ndensan.reams.db.dbz.business.core.TekiyoJogaishaIdentifier;
 import jp.co.ndensan.reams.db.dbz.definition.core.ViewStateKeys;
+import jp.co.ndensan.reams.db.dbz.definition.core.shikakuidojiyu.ShikakuSoshitsuJiyu;
 import jp.co.ndensan.reams.ua.uax.entity.db.basic.UaFt200FindShikibetsuTaishoEntity;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.CodeShubetsu;
@@ -54,8 +56,6 @@ public class TekiyoJogaiRirekiHandler {
     private static final RString 状態_施設変更 = new RString("施設変更モード");
     private static final RString 状態_訂正履歴 = new RString("訂正履歴モード");
     private static final RString 状態_照会 = new RString("照会モード");
-    private static final RString 除外者解除 = new RString("除外者解除");
-    private static final RString 除外者 = new RString("除外者");
     private static final RString 台帳種別表示無し = new RString("台帳種別表示無し");
     private static final RString 適用除外者 = new RString("適用除外者");
     private static final int PADZERO = 4;
@@ -431,9 +431,6 @@ public class TekiyoJogaiRirekiHandler {
             if (row.getKaijoTodokeDate().getValue() != null) {
                 解除届出日 = new FlexibleDate(row.getKaijoTodokeDate().getValue().toString());
             }
-            if (row.getKaijoTodokeDate().getValue() != null) {
-                解除届出日 = new FlexibleDate(row.getKaijoTodokeDate().getValue().toString());
-            }
             if (状態_適用登録.equals(画面状態)) {
                 RString 画面喪失 = HihokenshashikakusoshitsuManager.createInstance().shikakuSoshitsuCheck(識別コード, HihokenshaNo.EMPTY);
                 if (DbaErrorMessages.住所地特例として未適用.getMessage().getCode().equals(画面喪失.toString())) {
@@ -454,9 +451,9 @@ public class TekiyoJogaiRirekiHandler {
                     HihokenshashikakusoshitsuManager.createInstance().saveHihokenshaShikakuSoshitsu(
                             識別コード,
                             HihokenshaNo.EMPTY,
-                            new FlexibleDate(row.getTekiyoDate().toString()),
-                            除外者,
-                            new FlexibleDate(row.getTekiyoTodokeDate().toString()));
+                            new FlexibleDate(row.getTekiyoDate().getValue().toDateString()),
+                            ShikakuSoshitsuJiyu.除外者.getコード(),
+                            new FlexibleDate(row.getTekiyoTodokeDate().getValue().toDateString()));
                 }
                 Collections.sort(rowList, new DateComparator());
                 break;
@@ -471,9 +468,9 @@ public class TekiyoJogaiRirekiHandler {
                         識別コード, Integer.getInteger(row.getRirekiNo().toString()));
                 TekiyoJogaishaManager.createInstance().updateKaigoJogaiTokureiTaishoShisetsu(
                         set解除状態介護保険施設入退所(保険施設入退所Model.get(taisho), row).toEntity());
-                if (除外者解除.equals(row.getKaijoJiyu())) {
+                if (JogaiKaijoJiyu.除外者解除.getコード().equals(row.getKaijoJiyuCode())) {
                     TekiyoJogaishaManager.createInstance().saveHihokenshaShutoku(
-                            row.getKaijoJiyu(),
+                            row.getKaijoJiyuCode(),
                             解除日,
                             識別コード,
                             解除届出日);
@@ -880,9 +877,6 @@ public class TekiyoJogaiRirekiHandler {
                 .set解除年月日(解除日)
                 .set解除届出年月日(解除届出日)
                 .set解除受付年月日(解除届出日)
-                .set入所通知発行日(FlexibleDate.EMPTY)
-                .set退所通知発行日(FlexibleDate.EMPTY)
-                .set変更通知発行日(FlexibleDate.EMPTY)
                 .set論理削除フラグ(false)
                 .build();
     }
@@ -950,12 +944,6 @@ public class TekiyoJogaiRirekiHandler {
                 .set適用届出年月日(適用届出日)
                 .set適用受付年月日(適用届出日)
                 .set適用除外解除事由コード(row.getKaijoJiyuCode())
-                .set解除年月日(FlexibleDate.EMPTY)
-                .set解除届出年月日(FlexibleDate.EMPTY)
-                .set解除受付年月日(FlexibleDate.EMPTY)
-                .set入所通知発行日(FlexibleDate.EMPTY)
-                .set退所通知発行日(FlexibleDate.EMPTY)
-                .set変更通知発行日(FlexibleDate.EMPTY)
                 .set論理削除フラグ(false)
                 .build();
     }
@@ -1011,9 +999,6 @@ public class TekiyoJogaiRirekiHandler {
                 .set入所施設コード(new JigyoshaNo(row.getNyushoShisetsuCode()))
                 .set入所処理年月日(FlexibleDate.getNowDate())
                 .set入所年月日(new FlexibleDate(row.getNyuShoDate().getValue().toDateString()))
-                .set退所年月日(FlexibleDate.EMPTY)
-                .set退所処理年月日(FlexibleDate.EMPTY)
-                .set部屋記号番号(RString.EMPTY)
                 .build();
     }
 
