@@ -30,7 +30,7 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 
 /**
  * 生活サービス意見入力のHandlerクラスです。
- * 
+ *
  * @reamsid_L DBE-3000-110 wangkun
  */
 public class SeikatsuServiceIkenHandler {
@@ -70,7 +70,7 @@ public class SeikatsuServiceIkenHandler {
     List<RString> chkIgakutekiKanrikeys = new ArrayList();
     List<RString> chkJotaiSonotakeys = new ArrayList();
     List<RString> chkSonotaIryoServicekeys = new ArrayList();
-    List<RString> chkSonotaIryoServiceHitsuyoSeikeys = new ArrayList();
+    List<RString> chkSonotaHitsuyoSeikeys = new ArrayList();
     private final SeikatsuServiceIkenDiv div;
 
     /**
@@ -576,8 +576,8 @@ public class SeikatsuServiceIkenHandler {
         return item;
     }
 
-    private List<ShujiiIkenshoIkenItem> 意見項目初期化編集(List<ShujiiIkenshoIkenItem> 要介護認定主治医意見書意見項目リスト
-            , ShinseishoKanriNo 管理番号, int 履歴番号) {
+    private List<ShujiiIkenshoIkenItem> 意見項目初期化編集(List<ShujiiIkenshoIkenItem> 要介護認定主治医意見書意見項目リスト,
+            ShinseishoKanriNo 管理番号, int 履歴番号) {
         List<ShujiiIkenshoIkenItem> result = new ArrayList();
         boolean isExits = false;
         ShujiiIkenshoIkenItem itemTemp;
@@ -612,8 +612,8 @@ public class SeikatsuServiceIkenHandler {
         return result;
     }
 
-    private List<ShujiiIkenshoKinyuItem> 記入項目初期化編集(List<ShujiiIkenshoKinyuItem> 要介護認定主治医意見書記入項目リスト
-            , ShinseishoKanriNo 管理番号, int 履歴番号) {
+    private List<ShujiiIkenshoKinyuItem> 記入項目初期化編集(List<ShujiiIkenshoKinyuItem> 要介護認定主治医意見書記入項目リスト,
+            ShinseishoKanriNo 管理番号, int 履歴番号) {
         List<ShujiiIkenshoKinyuItem> result = new ArrayList();
         boolean isNotExits = false;
         ShujiiIkenshoKinyuItem itemTemp;
@@ -850,9 +850,9 @@ public class SeikatsuServiceIkenHandler {
         }
         div.getChkSonotaIryoService().setSelectedItemsByKey(chkSonotaIryoServicekeys);
         if (107 == item.get連番() && IkenKomoku13.チェック有.getコード().equals(item.get意見項目())) {
-            chkSonotaIryoServiceHitsuyoSeikeys.add(KEY0);
+            chkSonotaHitsuyoSeikeys.add(KEY0);
         }
-        div.getChkSonotaIryoServiceHitsuyoSei().setSelectedItemsByKey(chkSonotaIryoServiceHitsuyoSeikeys);
+        div.getChkSonotaIryoServiceHitsuyoSei().setSelectedItemsByKey(chkSonotaHitsuyoSeikeys);
     }
 
     private void 医学的管理の必要性エリアの記入項目初期化編集(ShujiiIkenshoKinyuItem item) {
