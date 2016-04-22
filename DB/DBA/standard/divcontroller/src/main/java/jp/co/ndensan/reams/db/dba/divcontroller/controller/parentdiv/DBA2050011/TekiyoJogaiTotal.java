@@ -24,6 +24,8 @@ import jp.co.ndensan.reams.uz.uza.message.Message;
 import jp.co.ndensan.reams.uz.uza.message.MessageDialogSelectedResult;
 import jp.co.ndensan.reams.uz.uza.message.QuestionMessage;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ResponseHolder;
+import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPair;
+import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 
 /**
@@ -48,7 +50,12 @@ public class TekiyoJogaiTotal {
         ShikibetsuCode 識別コード = ViewStateHolder.get(ViewStateKeys.該当者検索_識別コード, ShikibetsuCode.class);
         RString menuId = ResponseHolder.getMenuID();
         getHandler(requestDiv).initialize(識別コード, menuId);
-        RealInitialLocker.lock(前排他ロックキー);
+        if (!RealInitialLocker.tryGetLock(前排他ロックキー)) {
+            requestDiv.setReadOnly(true);
+            ValidationMessageControlPairs validationMessages = new ValidationMessageControlPairs();
+            validationMessages.add(new ValidationMessageControlPair(TekiyoJogaiTotal.TekiyoJogaiTotalErrorMessage.排他_他のユーザが使用中));
+            return ResponseData.of(requestDiv).addValidationMessages(validationMessages).respond();
+        }
         if (遷移元メニューID_適用.equals(menuId)) {
             return ResponseData.of(requestDiv).setState(DBA2050011StateName.適用状態);
         } else if (遷移元メニューID_解除.equals(menuId)) {
