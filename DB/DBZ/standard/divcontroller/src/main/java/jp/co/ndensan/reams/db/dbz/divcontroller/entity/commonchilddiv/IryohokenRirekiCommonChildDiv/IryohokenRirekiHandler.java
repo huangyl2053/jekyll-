@@ -166,10 +166,8 @@ public class IryohokenRirekiHandler {
                 IryohokenKanyuJokyo kanyuJokyo = 医療保険情報
                         .get(new IryohokenKanyuJokyoIdentifier(new ShikibetsuCode(row.getDefaultDataName0()),
                                         row.getDefaultDataName9().getValue().intValue()));
-                kanyuJokyo.toEntity().setState(EntityDataState.Deleted);
-                医療保険情報更新List.add(kanyuJokyo);
+                医療保険情報更新List.add(kanyuJokyo.deleted());
             }
-
         }
         return IryohokenKanyuJokyoManager.createInstance().saveAllIryoHokenJoho(医療保険情報更新List);
     }
