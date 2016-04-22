@@ -63,6 +63,7 @@ public class TashichosonJushochiTokureiDaichoFinder {
     private static final RString MINUTE = new RString("分");
     private static final RString SECOND = new RString("秒");
     private static final RString SPACE = new RString("　");
+    private static final int INT10 = 10;
     private static final int INT40 = 40;
     private static final int INT39 = 39;
     private static final int INT80 = 80;
@@ -164,14 +165,14 @@ public class TashichosonJushochiTokureiDaichoFinder {
         他市町村住所地特例者台帳情報.setNo(他市町村住所地特例者情報.getNo());
         他市町村住所地特例者台帳情報.set適用年月日(flexibleDateToFillTypeFormatted(他市町村住所地特例者情報.get適用年月日()));
         他市町村住所地特例者台帳情報.set適用届出年月日(flexibleDateToFillTypeFormatted(他市町村住所地特例者情報.get適用届出年月日()));
-        他市町村住所地特例者台帳情報.set他市町村住所地特例適用事由コード(他市町村住所地特例者情報.get適用事由名称());
+        他市町村住所地特例者台帳情報.set他市町村住所地特例適用事由コード(他市町村住所地特例者情報.get適用事由コード());
         他市町村住所地特例者台帳情報.set他市町村住所地特例適用事由名称(他市町村住所地特例者情報.get適用事由名称());
         他市町村住所地特例者台帳情報.set入所年月日(flexibleDateToFillTypeFormatted(他市町村住所地特例者情報.get入所年月日()));
         他市町村住所地特例者台帳情報.set事業者名称(他市町村住所地特例者情報.get事業者名称());
         他市町村住所地特例者台帳情報.set電話番号(他市町村住所地特例者情報.get電話番号());
         他市町村住所地特例者台帳情報.set解除年月日(flexibleDateToFillTypeFormatted(他市町村住所地特例者情報.get解除年月日()));
         他市町村住所地特例者台帳情報.set解除届出年月日(flexibleDateToFillTypeFormatted(他市町村住所地特例者情報.get解除届出年月日()));
-        他市町村住所地特例者台帳情報.set他市町村住所地特例解除事由コード(他市町村住所地特例者情報.get解除事由名称());
+        他市町村住所地特例者台帳情報.set他市町村住所地特例解除事由コード(他市町村住所地特例者情報.get解除事由コード());
         他市町村住所地特例者台帳情報.set他市町村住所地特例解除事由名称(他市町村住所地特例者情報.get解除事由名称());
         他市町村住所地特例者台帳情報.set退所年月日(flexibleDateToFillTypeFormatted(他市町村住所地特例者情報.get退所年月日()));
         他市町村住所地特例者台帳情報.set事業者住所(他市町村住所地特例者情報.get事業者住所());
@@ -187,7 +188,7 @@ public class TashichosonJushochiTokureiDaichoFinder {
     }
 
     /**
-     * 住所を編集します。
+     * 日時を編集します。
      *
      * @param dateTime
      * @return システム日時（ggyy年mm月dd日　hh時mm分ss秒　作成)
@@ -195,12 +196,14 @@ public class TashichosonJushochiTokureiDaichoFinder {
     private RString dateTimeEdit(RDateTime dateTime) {
         RString dateTimeEdit = new FlexibleDate(dateTime.getDate().toDateString()).seireki().separator(Separator.JAPANESE)
                 .fillType(FillType.ZERO).toDateString();
-        dateTimeEdit.concat(SPACE).concat(intToRString(dateTime.getHour())).concat(HOUR).concat(intToRString(dateTime.getMinute()))
-                .concat(MINUTE).concat(intToRString(dateTime.getSecond())).concat(SECOND);
-        return dateTimeEdit;
+        return dateTimeEdit.concat(SPACE).concat(intToRString(dateTime.getHour())).concat(HOUR).concat(intToRString(dateTime.getMinute()))
+                .concat(MINUTE).concat(intToRString(dateTime.getSecond())).concat(SECOND).concat("　作成");
     }
 
     private RString intToRString(int number) {
+        if (number < INT10) {
+            return new RString("0").concat(String.valueOf(number));
+        }
         return new RString(String.valueOf(number));
     }
 
@@ -236,7 +239,7 @@ public class TashichosonJushochiTokureiDaichoFinder {
      * @param 識別コード 識別コード
      * @return 他市町村住所地特例者情報Entityリスト
      */
-    public List<OtherAddressInfEntity> get他市町村住所地特例者情報(ShikibetsuCode 識別コード) {
+    private List<OtherAddressInfEntity> get他市町村住所地特例者情報(ShikibetsuCode 識別コード) {
         RString 保険者種別 = new RString("08");
         OtherAddressInformationParameter 検索条件
                 = OtherAddressInformationParameter.createParam_ServiceOtherAddressInformation(識別コード, 保険者種別);
