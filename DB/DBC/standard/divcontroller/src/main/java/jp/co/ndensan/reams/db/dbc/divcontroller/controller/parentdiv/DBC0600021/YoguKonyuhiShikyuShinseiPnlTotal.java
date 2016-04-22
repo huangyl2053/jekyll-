@@ -105,7 +105,6 @@ public class YoguKonyuhiShikyuShinseiPnlTotal {
         } else {
             div.getKaigoCommonPanel().getCcdShikakuKihon().setDisplayNone(true);
         }
-
         PnlTotalParameter parameter = ViewStateHolder.get(ViewStateKeys.支給申請情報検索キー,
                 PnlTotalParameter.class);
         getHandler(div).get申請者区分リスト();
@@ -182,8 +181,6 @@ public class YoguKonyuhiShikyuShinseiPnlTotal {
             div.getYoguKonyuhiShikyuShinseiContentsPanel().getYoguKonyuhiDetailInput().getDdlShumoku().
                     setDataSource(getHandler(div).get種目());
             if (maeResult != null) {
-                //TODO QA623
-                getHandler(div).今までの支払結果情報(maeResult);
                 getHandler(div).今回登録済みの支払結果情報(maeResult);
                 maeResult.hashCode();
             }
@@ -191,6 +188,7 @@ public class YoguKonyuhiShikyuShinseiPnlTotal {
                 getHandler(div).福祉用具販売費情報(shfuhalist);
             }
             onLoad国保連再送付(div);
+            償還払支給判定結果を取得する(div);
         }
         if (shshResult != null) {
             getHandler(div).償還払支給申請情報(shshResult);
@@ -416,8 +414,7 @@ public class YoguKonyuhiShikyuShinseiPnlTotal {
                 || 参照.equals(ViewStateHolder.get(ViewStateKeys.状態, RString.class))) {
             return ResponseData.of(div).forwardWithEventName(DBC0600021TransitionEventName.一覧に戻る).respond();
         }
-        if (登録.equals(ViewStateHolder.get(ViewStateKeys.状態, RString.class))
-                || 修正.equals(ViewStateHolder.get(ViewStateKeys.状態, RString.class))) {
+        if (修正.equals(ViewStateHolder.get(ViewStateKeys.状態, RString.class))) {
             flag = getHandler(div).is内容変更状態();
         }
         if (審査.equals(ViewStateHolder.get(ViewStateKeys.状態, RString.class))) {
@@ -463,7 +460,7 @@ public class YoguKonyuhiShikyuShinseiPnlTotal {
     }
 
     private ResponseData<YoguKonyuhiShikyuShinseiPnlTotalDiv> 審査場合(YoguKonyuhiShikyuShinseiPnlTotalDiv div) {
-        boolean flag = getHandler(div).is内容変更状態();
+        boolean flag = !getHandler(div).is内容変更状態();
         if (flag) {
             if (!ResponseHolder.isReRequest()) {
                 QuestionMessage message = new QuestionMessage(UrQuestionMessages.入力内容の破棄.getMessage().getCode(),
@@ -580,7 +577,7 @@ public class YoguKonyuhiShikyuShinseiPnlTotal {
             }
             if (!new RString(UrQuestionMessages.保存の確認.getMessage().getCode()).equals(ResponseHolder.getMessageCode())) {
                 div.getPnlKeteiJohoMsg().getCcdMessage().setMessage(
-                        new RString(UrInformationMessages.保存終了.getMessage().evaluate()),
+                        UrInformationMessages.保存終了,
                         div.getKaigoCommonPanel().getCcdShikakuKihon().get被保険者番号(),
                         div.getKaigoCommonPanel().getCcdAtenaInfo().get氏名漢字(),
                         true);
@@ -590,7 +587,7 @@ public class YoguKonyuhiShikyuShinseiPnlTotal {
         } catch (Exception e) {
             e.toString();
             div.getPnlKeteiJohoMsg().getCcdMessage().setMessage(
-                    new RString(UrErrorMessages.異常終了.getMessage().evaluate()),
+                    UrErrorMessages.異常終了,
                     div.getKaigoCommonPanel().getCcdShikakuKihon().get被保険者番号(),
                     div.getKaigoCommonPanel().getCcdAtenaInfo().get氏名漢字(),
                     false);
@@ -760,8 +757,22 @@ public class YoguKonyuhiShikyuShinseiPnlTotal {
                 事業者番号,
                 様式番号,
                 明細番号,
-                div.getYoguKonyuhiShikyuShinseiContentsPanel().getPnlSummary().getTxtKonkaiHokenTaishoHiyogakuGokei().getValue());
-        if (!flag) {
+                div.getYoguKonyuhiShikyuShinseiContentsPanel().getPnlSummary().getTxtKonkaiHokenTaishoHiyogakuGokei()
+                .getValue());
+        Decimal 前回までの保険給付額 = div.getYoguKonyuhiShikyuShinseiContentsPanel().getPnlSummary()
+                .getTxtZenkaiHokenTaishoHiyogakuGokei().getValue();
+        前回までの保険給付額 = 前回までの保険給付額 == null ? Decimal.ZERO : 前回までの保険給付額;
+        Decimal 今回の保険給付額 = div.getYoguKonyuhiShikyuShinseiContentsPanel().getPnlSummary()
+                .getTxtKonkaiHokenTaishoHiyogakuGokei().getValue();
+        今回の保険給付額 = 今回の保険給付額 == null ? Decimal.ZERO : 今回の保険給付額;
+        Decimal 限度額 = FukushiyoguKonyuhiShikyuShinsei.createInstance().getShikyuGendogaku(
+                被保険者番号, サービス提供年月);
+        限度額 = 限度額 == null ? Decimal.ZERO : 限度額;
+        boolean flag2 = true;
+        if (前回までの保険給付額.add(今回の保険給付額).compareTo(限度額) > 0) {
+            flag2 = false;
+        }
+        if (!flag || !flag2) {
             // TODO  DBC.WarningMessage.DBCW00001
             if (!ResponseHolder.isReRequest()) {
                 WarningMessage message = new WarningMessage("DBCW00001", "DBC.WarningMessage.DBCW00001");
@@ -773,7 +784,8 @@ public class YoguKonyuhiShikyuShinseiPnlTotal {
                 事業者番号, 様式番号);
         FukushiYoguKounyuhiDouituHinmokuChofukuHantei entity = new FukushiYoguKounyuhiDouituHinmokuChofukuHantei();
         flag = entity.chkHinmokuCodePerYear(被保険者番号, サービス提供年月, list, 整理番号);
-        if (!flag) {
+        boolean flag3 = getHandler(div).check品目コード();
+        if (!flag || !flag3) {
             throw new ApplicationException(UrErrorMessages.既に登録済.getMessage().replace("品目コード"));
         }
         return ResponseData.of(div).respond();
