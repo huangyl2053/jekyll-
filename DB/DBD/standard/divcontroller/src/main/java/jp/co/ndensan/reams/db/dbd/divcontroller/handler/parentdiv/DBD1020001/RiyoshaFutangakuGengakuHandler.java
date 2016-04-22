@@ -86,7 +86,7 @@ public class RiyoshaFutangakuGengakuHandler {
     /**
      * コンストラクタです。
      *
-     * @param div 認定調査結果登録1のコントロールdiv
+     * @param div 利用者負担額減額申請のコントロールdiv
      */
     public RiyoshaFutangakuGengakuHandler(RiyoshaFutangakuGengakuPanelDiv div) {
         this.div = div;
@@ -113,6 +113,7 @@ public class RiyoshaFutangakuGengakuHandler {
         RiyoshaFutangakuGengakuService service = RiyoshaFutangakuGengakuService.createInstance();
         List<RiyoshaFutangakuGengaku> 利用者負担額減額の情報List = service.load利用者負担額減額申請All(被保険者番号);
         if (利用者負担額減額の情報List != null) {
+            ViewStateHolder.put(Dbd1020001Keys.DB利用者負担額減額情報List, new ArrayList<>(利用者負担額減額の情報List));
             一覧エリアの設定(利用者負担額減額の情報List);
         }
 
@@ -149,6 +150,10 @@ public class RiyoshaFutangakuGengakuHandler {
         div.getDdlShinseiIchiran().setDisabled(false);
 
         ArrayList<RiyoshaFutangakuGengakuViewState> existsViewStateList = ViewStateHolder.get(Dbd1020001Keys.利用者負担額減額情報ListのViewState, ArrayList.class);
+        if (existsViewStateList == null) {
+            existsViewStateList = new ArrayList<>();
+        }
+        RiyoshaFutangakuGengaku 該当DB申請 = ViewStateHolder.get(Dbd1020001Keys.該当DB申請, RiyoshaFutangakuGengaku.class);
         RiyoshaFutangakuGengakuViewState 該当申請のViewState = ViewStateHolder.get(Dbd1020001Keys.該当申請のViewState, RiyoshaFutangakuGengakuViewState.class);
 
         ShoKisaiHokenshaNo 証記載保険者番号 = null;
@@ -156,31 +161,35 @@ public class RiyoshaFutangakuGengakuHandler {
         EntityDataState state = EntityDataState.Unchanged;
         GemmenGengakuShinsei gemmenGengakuShinsei;
         RiyoshaFutangakuGengakuBuilder builder;
-        if (該当申請のViewState != null) {
-            証記載保険者番号 = 該当申請のViewState.getRiyoshaFutangakuGengaku().get証記載保険者番号();
-            履歴番号 = 該当申請のViewState.getRiyoshaFutangakuGengaku().get履歴番号();
+        if (該当DB申請 != null) {
+            証記載保険者番号 = 該当DB申請.get証記載保険者番号();
+            履歴番号 = 該当DB申請.get履歴番号();
 
-            boolean 変更あり = 申請情報_変更あり(該当申請のViewState);
-            if (履歴番号 < 0) {
-                state = EntityDataState.Added;
-            } else if (変更あり) {
+            boolean 変更あり = 申請情報_変更あり(該当DB申請);
+            if (変更あり) {
                 state = EntityDataState.Modified;
             } else {
                 state = EntityDataState.Unchanged;
             }
 
-            gemmenGengakuShinsei = 該当申請のViewState.getRiyoshaFutangakuGengaku().getGemmenGengakuShinseiList().get(0);
-            builder = 該当申請のViewState.getRiyoshaFutangakuGengaku().createBuilderForEdit();
+            gemmenGengakuShinsei = 該当DB申請.getGemmenGengakuShinseiList().get(0);
+            builder = 該当DB申請.createBuilderForEdit();
         } else {
             state = EntityDataState.Added;
-            Integer 新規申請の履歴番号 = ViewStateHolder.get(Dbd1020001Keys.新規申請の履歴番号, Integer.class);
-            履歴番号 = 新規申請の履歴番号 - 1;
-            ViewStateHolder.put(Dbd1020001Keys.新規申請の履歴番号, 履歴番号);
-
-            証記載保険者番号 = get証記載保険者番号(div.getTxtShinseiYmd().getValue());
             HihokenshaNo 被保険者番号 = ViewStateHolder.get(ViewStateKeys.被保険者番号, HihokenshaNo.class);
-            gemmenGengakuShinsei = new GemmenGengakuShinsei(証記載保険者番号, 被保険者番号, GemmenGengakuShurui.利用者負担額減額.code(), 履歴番号);
-            builder = new RiyoshaFutangakuGengaku(証記載保険者番号, 被保険者番号, 履歴番号).createBuilderForEdit();
+            証記載保険者番号 = get証記載保険者番号(div.getTxtShinseiYmd().getValue());
+
+            if (該当申請のViewState != null) {
+                履歴番号 = 該当申請のViewState.getRiyoshaFutangakuGengaku().get履歴番号();
+                gemmenGengakuShinsei = 該当申請のViewState.getRiyoshaFutangakuGengaku().getGemmenGengakuShinseiList().get(0);
+                builder = 該当申請のViewState.getRiyoshaFutangakuGengaku().createBuilderForEdit();
+            } else {
+                Integer 新規申請の履歴番号 = ViewStateHolder.get(Dbd1020001Keys.新規申請の履歴番号, Integer.class);
+                履歴番号 = 新規申請の履歴番号 - 1;
+                ViewStateHolder.put(Dbd1020001Keys.新規申請の履歴番号, 履歴番号);
+                gemmenGengakuShinsei = new GemmenGengakuShinsei(証記載保険者番号, 被保険者番号, GemmenGengakuShurui.利用者負担額減額.code(), 履歴番号);
+                builder = new RiyoshaFutangakuGengaku(証記載保険者番号, 被保険者番号, 履歴番号).createBuilderForEdit();
+            }
         }
 
         GemmenGengakuShinseiBuilder gemmenGengakuShinseiBuilder = gemmenGengakuShinsei.createBuilderForEdit();
@@ -217,7 +226,7 @@ public class RiyoshaFutangakuGengakuHandler {
             決定区分コード = KetteiKubun.承認しない.getコード();
             決定区分TXT = KetteiKubun.承認しない.get名称();
             非承認理由 = div.getTxtHiShoninRiyu().getText();
-            旧措置 = KyuSochishaKubun.旧措置.getコード();
+            旧措置 = KyuSochishaKubun.非該当.getコード();
         }
         builder.set給付率(給付率);
         builder.set適用開始年月日(適用開始年月日);
@@ -301,6 +310,10 @@ public class RiyoshaFutangakuGengakuHandler {
         div.getDdlShinseiIchiran().setDisabled(false);
 
         ArrayList<RiyoshaFutangakuGengakuViewState> existsViewStateList = ViewStateHolder.get(Dbd1020001Keys.利用者負担額減額情報ListのViewState, ArrayList.class);
+        if (existsViewStateList == null) {
+            existsViewStateList = new ArrayList<>();
+        }
+        RiyoshaFutangakuGengaku 該当DB申請 = ViewStateHolder.get(Dbd1020001Keys.該当DB申請, RiyoshaFutangakuGengaku.class);
         RiyoshaFutangakuGengakuViewState 該当申請のViewState = ViewStateHolder.get(Dbd1020001Keys.該当申請のViewState, RiyoshaFutangakuGengakuViewState.class);
 
         ShoKisaiHokenshaNo 証記載保険者番号 = null;
@@ -309,31 +322,35 @@ public class RiyoshaFutangakuGengakuHandler {
         GemmenGengakuShinsei gemmenGengakuShinsei;
         RiyoshaFutangakuGengakuBuilder builder;
 
-        if (該当申請のViewState != null) {
-            証記載保険者番号 = 該当申請のViewState.getRiyoshaFutangakuGengaku().get証記載保険者番号();
-            履歴番号 = 該当申請のViewState.getRiyoshaFutangakuGengaku().get履歴番号();
+        if (該当DB申請 != null) {
+            証記載保険者番号 = 該当DB申請.get証記載保険者番号();
+            履歴番号 = 該当DB申請.get履歴番号();
 
-            boolean 変更あり = 申請情報_変更あり(該当申請のViewState);
-            if (履歴番号 < 0) {
-                state = EntityDataState.Added;
-            } else if (変更あり) {
+            boolean 変更あり = 申請情報_変更あり(該当DB申請);
+            if (変更あり) {
                 state = EntityDataState.Modified;
             } else {
                 state = EntityDataState.Unchanged;
             }
 
-            gemmenGengakuShinsei = 該当申請のViewState.getRiyoshaFutangakuGengaku().getGemmenGengakuShinseiList().get(0);
-            builder = 該当申請のViewState.getRiyoshaFutangakuGengaku().createBuilderForEdit();
+            gemmenGengakuShinsei = 該当DB申請.getGemmenGengakuShinseiList().get(0);
+            builder = 該当DB申請.createBuilderForEdit();
         } else {
             state = EntityDataState.Added;
-            Integer 新規申請の履歴番号 = ViewStateHolder.get(Dbd1020001Keys.新規申請の履歴番号, Integer.class);
-            履歴番号 = 新規申請の履歴番号 - 1;
-            ViewStateHolder.put(Dbd1020001Keys.新規申請の履歴番号, 履歴番号);
-
-            証記載保険者番号 = get証記載保険者番号(div.getTxtShinseiYmd().getValue());
             HihokenshaNo 被保険者番号 = ViewStateHolder.get(ViewStateKeys.被保険者番号, HihokenshaNo.class);
-            gemmenGengakuShinsei = new GemmenGengakuShinsei(証記載保険者番号, 被保険者番号, GemmenGengakuShurui.利用者負担額減額.code(), 履歴番号);
-            builder = new RiyoshaFutangakuGengaku(証記載保険者番号, 被保険者番号, 履歴番号).createBuilderForEdit();
+            証記載保険者番号 = get証記載保険者番号(div.getTxtShinseiYmd().getValue());
+
+            if (該当申請のViewState != null) {
+                履歴番号 = 該当申請のViewState.getRiyoshaFutangakuGengaku().get履歴番号();
+                gemmenGengakuShinsei = 該当申請のViewState.getRiyoshaFutangakuGengaku().getGemmenGengakuShinseiList().get(0);
+                builder = 該当申請のViewState.getRiyoshaFutangakuGengaku().createBuilderForEdit();
+            } else {
+                Integer 新規申請の履歴番号 = ViewStateHolder.get(Dbd1020001Keys.新規申請の履歴番号, Integer.class);
+                履歴番号 = 新規申請の履歴番号 - 1;
+                ViewStateHolder.put(Dbd1020001Keys.新規申請の履歴番号, 履歴番号);
+                gemmenGengakuShinsei = new GemmenGengakuShinsei(証記載保険者番号, 被保険者番号, GemmenGengakuShurui.利用者負担額減額.code(), 履歴番号);
+                builder = new RiyoshaFutangakuGengaku(証記載保険者番号, 被保険者番号, 履歴番号).createBuilderForEdit();
+            }
         }
 
         GemmenGengakuShinseiBuilder gemmenGengakuShinseiBuilder = gemmenGengakuShinsei.createBuilderForEdit();
@@ -407,7 +424,7 @@ public class RiyoshaFutangakuGengakuHandler {
      * 「申請情報を追加する/承認情報を追加する」ボタン押下の処理です。
      */
     public void 追加するボタン押下() {
-        ViewStateHolder.put(Dbd1020001Keys.該当申請のViewState, null);
+        該当データのリセット();
         if (ResponseHolder.getMenuID().equals(申請メニュー)) {
             申請情報エリ状態(true);
         } else if (ResponseHolder.getMenuID().equals(承認メニュー)) {
@@ -424,11 +441,25 @@ public class RiyoshaFutangakuGengakuHandler {
      */
     public void 申請一覧の修正ボタンをクリック() {
 
+        該当データのリセット();
         div.getDdlShinseiIchiran().setDisabled(true);
 
         ddlShinseiIchiran_Row row = div.getDdlShinseiIchiran().getActiveRow();
-        List<RiyoshaFutangakuGengakuViewState> list = ViewStateHolder.get(Dbd1020001Keys.利用者負担額減額情報ListのViewState, List.class);
-        for (RiyoshaFutangakuGengakuViewState joho : list) {
+        List<RiyoshaFutangakuGengaku> dbDatalist = ViewStateHolder.get(Dbd1020001Keys.DB利用者負担額減額情報List, ArrayList.class);
+        List<RiyoshaFutangakuGengakuViewState> existsViewStateList = ViewStateHolder.get(Dbd1020001Keys.利用者負担額減額情報ListのViewState, List.class);
+        if (existsViewStateList == null) {
+            existsViewStateList = new ArrayList<>();
+        }
+
+        if (dbDatalist != null) {
+            for (RiyoshaFutangakuGengaku joho : dbDatalist) {
+                if (joho.get証記載保険者番号().getColumnValue().equals(row.getHiddenShoKisaiHokenshaNo())
+                        && new RString(joho.get履歴番号()).equals(row.getHiddenShinseiRirekiNo())) {
+                    ViewStateHolder.put(Dbd1020001Keys.該当DB申請, joho);
+                }
+            }
+        }
+        for (RiyoshaFutangakuGengakuViewState joho : existsViewStateList) {
             if (joho.getRiyoshaFutangakuGengaku().get証記載保険者番号().getColumnValue().equals(row.getHiddenShoKisaiHokenshaNo())
                     && new RString(joho.getRiyoshaFutangakuGengaku().get履歴番号()).equals(row.getHiddenShinseiRirekiNo())) {
                 ViewStateHolder.put(Dbd1020001Keys.該当申請のViewState, joho);
@@ -485,6 +516,10 @@ public class RiyoshaFutangakuGengakuHandler {
     public void 申請一覧の削除ボタンをクリック() {
 
         ArrayList<RiyoshaFutangakuGengakuViewState> list = ViewStateHolder.get(Dbd1020001Keys.利用者負担額減額情報ListのViewState, ArrayList.class);
+        if (list == null) {
+            list = new ArrayList<>();
+        }
+
         ddlShinseiIchiran_Row row = div.getDdlShinseiIchiran().getActiveRow();
 
         if (追加.equals(row.getJotai())) {
@@ -748,28 +783,27 @@ public class RiyoshaFutangakuGengakuHandler {
                 申請届出者氏名, 申請届出者氏名カナ, 申請届出者続柄, 申請届出代行事業者番号, 事業者区分, 申請届出者郵便番号, 申請届出者住所, 申請届出者電話番号);
     }
 
-    private boolean 申請情報_変更あり(RiyoshaFutangakuGengakuViewState 該当申請のViewState) {
+    private boolean 申請情報_変更あり(RiyoshaFutangakuGengaku 該当DB申請) {
 
         RString 決定区分 = div.getRadKetteiKubun().getSelectedKey();
         if (承認する_KEY.equals(決定区分)) {
-            return !(is等しい(該当申請のViewState.getRiyoshaFutangakuGengaku().get申請事由(), div.getTxtShinseiRiyu().getValue())
-                    && 該当申請のViewState.getRiyoshaFutangakuGengaku().get申請年月日().equals(div.getTxtShinseiYmd().getValue())
-                    && is減免減額申請共有子Div等しい(該当申請のViewState)
-                    && is承認情報等しい(該当申請のViewState, 決定区分));
+            return !(is等しい(該当DB申請.get申請事由(), div.getTxtShinseiRiyu().getValue())
+                    && 該当DB申請.get申請年月日().equals(div.getTxtShinseiYmd().getValue())
+                    && is減免減額申請共有子Div等しい(該当DB申請)
+                    && is承認情報等しい(該当DB申請, 決定区分));
         }
-        return !(is等しい(該当申請のViewState.getRiyoshaFutangakuGengaku().get申請事由(), div.getTxtShinseiRiyu().getValue())
-                && 該当申請のViewState.getRiyoshaFutangakuGengaku().get申請年月日().equals(div.getTxtShinseiYmd().getValue())
-                && is減免減額申請共有子Div等しい(該当申請のViewState)
-                && is承認情報等しい(該当申請のViewState, 決定区分));
+        return !(is等しい(該当DB申請.get申請事由(), div.getTxtShinseiRiyu().getValue())
+                && 該当DB申請.get申請年月日().equals(div.getTxtShinseiYmd().getValue())
+                && is減免減額申請共有子Div等しい(該当DB申請)
+                && is承認情報等しい(該当DB申請, 決定区分));
     }
 
-    private boolean is承認情報等しい(RiyoshaFutangakuGengakuViewState 該当申請のViewState, RString 決定区分) {
+    private boolean is承認情報等しい(RiyoshaFutangakuGengaku 該当DB申請, RString 決定区分) {
 
-        RiyoshaFutangakuGengaku riyoshaFutangakuGengaku = 該当申請のViewState.getRiyoshaFutangakuGengaku();
         RString 決定区分コード = RString.EMPTY;
 
         if (ResponseHolder.getMenuID().equals(申請メニュー)) {
-            決定区分コード = riyoshaFutangakuGengaku.get決定区分();
+            決定区分コード = 該当DB申請.get決定区分();
         } else if (承認する_KEY.equals(決定区分)) {
             決定区分コード = KetteiKubun.承認する.getコード();
         } else if (承認しない_KEY.equals(決定区分)) {
@@ -780,23 +814,23 @@ public class RiyoshaFutangakuGengakuHandler {
             is旧措置者有無 = true;
         }
 
-        Decimal 給付率data = riyoshaFutangakuGengaku.get給付率() == null ? HokenKyufuRitsu.ZERO.getColumnValue() : riyoshaFutangakuGengaku.get給付率().getColumnValue();
+        Decimal 給付率data = 該当DB申請.get給付率() == null ? HokenKyufuRitsu.ZERO.getColumnValue() : 該当DB申請.get給付率().getColumnValue();
         if (承認する_KEY.equals(決定区分)) {
-            return is等しい(riyoshaFutangakuGengaku.get決定区分(), 決定区分コード)
-                    && riyoshaFutangakuGengaku.get決定年月日().equals(div.getTxtKettaiYmd().getValue())
-                    && riyoshaFutangakuGengaku.get適用開始年月日().equals(div.getTxtTekiyoYmd().getValue())
-                    && riyoshaFutangakuGengaku.get適用終了年月日().equals(div.getTxtYukoKigenYmd().getValue())
-                    && riyoshaFutangakuGengaku.is旧措置者有無() == is旧措置者有無
+            return is等しい(該当DB申請.get決定区分(), 決定区分コード)
+                    && 該当DB申請.get決定年月日().equals(div.getTxtKettaiYmd().getValue())
+                    && 該当DB申請.get適用開始年月日().equals(div.getTxtTekiyoYmd().getValue())
+                    && 該当DB申請.get適用終了年月日().equals(div.getTxtYukoKigenYmd().getValue())
+                    && 該当DB申請.is旧措置者有無() == is旧措置者有無
                     && 給付率data.compareTo(div.getTxtKyufuRitsu().getValue()) == 0;
         }
-        return is等しい(riyoshaFutangakuGengaku.get決定区分(), 決定区分コード)
-                && riyoshaFutangakuGengaku.get決定年月日().equals(div.getTxtKettaiYmd().getValue())
-                && riyoshaFutangakuGengaku.is旧措置者有無() == is旧措置者有無
-                && is等しい(riyoshaFutangakuGengaku.get非承認理由(), div.getTxtShinseiRiyu().getText());
+        return is等しい(該当DB申請.get決定区分(), 決定区分コード)
+                && 該当DB申請.get決定年月日().equals(div.getTxtKettaiYmd().getValue())
+                && 該当DB申請.is旧措置者有無() == is旧措置者有無
+                && is等しい(該当DB申請.get非承認理由(), div.getTxtShinseiRiyu().getText());
     }
 
-    private boolean is減免減額申請共有子Div等しい(RiyoshaFutangakuGengakuViewState 該当申請のViewState) {
-        GemmenGengakuShinsei gemmenGengakuShinsei = 該当申請のViewState.getRiyoshaFutangakuGengaku().getGemmenGengakuShinseiList().get(0);
+    private boolean is減免減額申請共有子Div等しい(RiyoshaFutangakuGengaku 該当DB申請) {
+        GemmenGengakuShinsei gemmenGengakuShinsei = 該当DB申請.getGemmenGengakuShinseiList().get(0);
 
         RString 申請届出代行区分page = get申請届出代行区分page();
 
@@ -941,6 +975,11 @@ public class RiyoshaFutangakuGengakuHandler {
         RealInitialLocker.lock(排他キー);
     }
 
+    private void 該当データのリセット() {
+        ViewStateHolder.put(Dbd1020001Keys.該当DB申請, null);
+        ViewStateHolder.put(Dbd1020001Keys.該当申請のViewState, null);
+    }
+
     /**
      * ViewStateのComparatorです。
      */
@@ -994,9 +1033,17 @@ public class RiyoshaFutangakuGengakuHandler {
     public enum Dbd1020001Keys {
 
         /**
+         * DB利用者負担額減額情報List
+         */
+        DB利用者負担額減額情報List,
+        /**
          * 利用者負担額減額情報ListのViewState
          */
         利用者負担額減額情報ListのViewState,
+        /**
+         * 該当DB申請
+         */
+        該当DB申請,
         /**
          * 該当申請のViewState
          */
