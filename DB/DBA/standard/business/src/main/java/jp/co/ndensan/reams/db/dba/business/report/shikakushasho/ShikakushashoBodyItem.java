@@ -6,9 +6,9 @@
 package jp.co.ndensan.reams.db.dba.business.report.shikakushasho;
 
 import java.util.List;
-import jp.co.ndensan.reams.db.dba.entity.db.relate.kaigohokenshikakushasho.KyufuseigenDataEntity;
-import jp.co.ndensan.reams.db.dba.entity.db.relate.kaigohokenshikakushasho.NyushoShisetsuDataEntity;
-import jp.co.ndensan.reams.db.dba.entity.db.relate.kaigohokenshikakushasho.ShuruiShikyuGendoKizyunngakuEntity;
+import jp.co.ndensan.reams.db.dba.business.core.kaigohokenshikakushasho.KyufuseigenBusiness;
+import jp.co.ndensan.reams.db.dba.business.core.kaigohokenshikakushasho.NyushoShisetsuBusiness;
+import jp.co.ndensan.reams.db.dba.business.core.kaigohokenshikakushasho.ShuruiShikyuGendoKizyunngakuBusiness;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import lombok.Getter;
 
@@ -42,9 +42,9 @@ public class ShikakushashoBodyItem {
     private final RString kubunShikyuYukoShuryoYMD;
     private final RString kubunShikyuTaniShurui;
     private final RString kubunShikyuTani;
-    private final List<ShuruiShikyuGendoKizyunngakuEntity> shuruiShikyuGendoEntity;
+    private final List<ShuruiShikyuGendoKizyunngakuBusiness> shuruiShikyuGendoBusiness;
     private final RString serviceRyui;
-    private final List<KyufuseigenDataEntity> kyufuseigenEntity;
+    private final List<KyufuseigenBusiness> kyufuseigenBusiness;
     private final RString keikakuJigyoshaName1;
     private final RString keikakuTodokedeYMD1;
     private final RString keikakuJigyoshaName2;
@@ -59,7 +59,7 @@ public class ShikakushashoBodyItem {
     private final RString keikakuTodokedeYMD3;
     private final RString keikakuTodokedeYMD3Asutarisuku;
     private final RString keikakuTodokedeYMD3Masshosen;
-    private final List<NyushoShisetsuDataEntity> nyushoShisetsuEntity;
+    private final List<NyushoShisetsuBusiness> nyushoShisetsuBusiness;
     private final RString shisetsuNyusho;
     private final RString shisetsuNyuin;
     private final RString shisetsuTaisho;
@@ -95,9 +95,9 @@ public class ShikakushashoBodyItem {
      * @param kubunShikyuYukoShuryoYMD 区分支給限度期間終了
      * @param kubunShikyuTaniShurui 居宅サービス等の単位種類
      * @param kubunShikyuTani 居宅サービス等の単位
-     * @param shuruiShikyuGendoEntity うち種類支給限度基準額
+     * @param shuruiShikyuGendoBusiness うち種類支給限度基準額
      * @param serviceRyui 認定審査会の意見及びサービスの種類
-     * @param kyufuseigenEntity 給付制限
+     * @param kyufuseigenBusiness 給付制限
      * @param keikakuJigyoshaName1 計画事業者名称1
      * @param keikakuTodokedeYMD1 事業所届出年月日1
      * @param keikakuJigyoshaName2 計画事業者名称2
@@ -111,7 +111,7 @@ public class ShikakushashoBodyItem {
      * @param keikakuJigyoshaName3Masshosen 計画事業者名称取消3
      * @param keikakuTodokedeYMD3 事業所届出年月日3
      * @param keikakuTodokedeYMD3Asutarisuku 事業所届出年月日アスタリスク3
-     * @param nyushoShisetsuEntity 介護保険施設等
+     * @param nyushoShisetsuBusiness 介護保険施設等
      * @param keikakuTodokedeYMD3Masshosen 事業所届出年月日取消3
      * @param shisetsuNyusho 施設入所1
      * @param shisetsuNyuin 施設入院1
@@ -145,9 +145,9 @@ public class ShikakushashoBodyItem {
             RString kubunShikyuYukoShuryoYMD,
             RString kubunShikyuTaniShurui,
             RString kubunShikyuTani,
-            List<ShuruiShikyuGendoKizyunngakuEntity> shuruiShikyuGendoEntity,
+            List<ShuruiShikyuGendoKizyunngakuBusiness> shuruiShikyuGendoBusiness,
             RString serviceRyui,
-            List<KyufuseigenDataEntity> kyufuseigenEntity,
+            List<KyufuseigenBusiness> kyufuseigenBusiness,
             RString keikakuJigyoshaName1,
             RString keikakuTodokedeYMD1,
             RString keikakuJigyoshaName2,
@@ -162,7 +162,7 @@ public class ShikakushashoBodyItem {
             RString keikakuTodokedeYMD3,
             RString keikakuTodokedeYMD3Asutarisuku,
             RString keikakuTodokedeYMD3Masshosen,
-            List<NyushoShisetsuDataEntity> nyushoShisetsuEntity,
+            List<NyushoShisetsuBusiness> nyushoShisetsuBusiness,
             RString shisetsuNyusho,
             RString shisetsuNyuin,
             RString shisetsuTaisho,
@@ -190,13 +190,13 @@ public class ShikakushashoBodyItem {
         this.yukoKaishiYMD = yukoKaishiYMD;
         this.yukoShuryoYMD = yukoShuryoYMD;
         this.kubunShikyuTanisu = kubunShikyuTanisu;
-        this.shuruiShikyuGendoEntity = shuruiShikyuGendoEntity;
+        this.shuruiShikyuGendoBusiness = shuruiShikyuGendoBusiness;
         this.kubunShikyuYukoKaishiYMD = kubunShikyuYukoKaishiYMD;
         this.kubunShikyuYukoShuryoYMD = kubunShikyuYukoShuryoYMD;
         this.kubunShikyuTaniShurui = kubunShikyuTaniShurui;
         this.kubunShikyuTani = kubunShikyuTani;
         this.serviceRyui = serviceRyui;
-        this.kyufuseigenEntity = kyufuseigenEntity;
+        this.kyufuseigenBusiness = kyufuseigenBusiness;
         this.keikakuJigyoshaName1 = keikakuJigyoshaName1;
         this.keikakuTodokedeYMD1 = keikakuTodokedeYMD1;
         this.keikakuJigyoshaName2 = keikakuJigyoshaName2;
@@ -211,7 +211,7 @@ public class ShikakushashoBodyItem {
         this.keikakuTodokedeYMD3 = keikakuTodokedeYMD3;
         this.keikakuTodokedeYMD3Asutarisuku = keikakuTodokedeYMD3Asutarisuku;
         this.keikakuTodokedeYMD3Masshosen = keikakuTodokedeYMD3Masshosen;
-        this.nyushoShisetsuEntity = nyushoShisetsuEntity;
+        this.nyushoShisetsuBusiness = nyushoShisetsuBusiness;
         this.shisetsuNyusho = shisetsuNyusho;
         this.shisetsuNyuin = shisetsuNyuin;
         this.shisetsuTaisho = shisetsuTaisho;

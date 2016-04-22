@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dba.entity.db.relate.kaigohokenshikakushasho;
+package jp.co.ndensan.reams.db.dba.business.core.kaigohokenshikakushasho;
 
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
@@ -15,7 +15,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 @lombok.Getter
 @lombok.Setter
 @SuppressWarnings("PMD.UnusedPrivateField")
-public class ShuruiShikyuGendoKizyunngakuEntity {
+public class ShuruiShikyuGendoKizyunngakuBusiness {
 
     private RString serviceShurui;
     private RString shuruiShikyuKizyunngaku;
