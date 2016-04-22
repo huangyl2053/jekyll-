@@ -75,6 +75,10 @@ public class YoguKonyuhiShikyuShinseiPnlTotal {
 
     private static final RString NUM2 = new RString("2");
     private static final RString NUM1 = new RString("1");
+    private static final RString NUM41 = new RString("41");
+    private static final RString NUM44 = new RString("42");
+    private static final RString 証明書コード1 = new RString("21C1");
+    private static final RString 証明書コード2 = new RString("21C2");
     private static final RString 修正 = new RString("修正");
     private static final RString 削除 = new RString("削除");
     private static final RString 登録 = new RString("登録");
@@ -112,11 +116,11 @@ public class YoguKonyuhiShikyuShinseiPnlTotal {
                     getServiceShuruiCode(被保険者番号, new FlexibleYearMonth(div.getYoguKonyuhiShikyuShinseiContentsPanel().
                                     getTxtTeikyoYM().getValue().getYearMonth().toString()));
             RString 証明書コード = RString.EMPTY;
-            if (new RString("41").equals(サービス種類.value())) {
-                証明書コード = new RString("21C1");
+            if (NUM41.equals(サービス種類.value())) {
+                証明書コード = 証明書コード1;
             }
-            if (new RString("44").equals(サービス種類.value())) {
-                証明書コード = new RString("21C2");
+            if (NUM44.equals(サービス種類.value())) {
+                証明書コード = 証明書コード2;
             }
             RString 証明書略称 = FukushiyoguKonyuhiShikyuShinsei.createInstance().getYoshikiName(
                     証明書コード, new FlexibleYearMonth(div.
@@ -272,11 +276,11 @@ public class YoguKonyuhiShikyuShinseiPnlTotal {
         ServiceShuruiCode サービス種類 = FukushiyoguKonyuhiShikyuShinsei.
                 createInstance().getServiceShuruiCode(被保険者番号, サービス提供年月);
         RString 証明書コード = RString.EMPTY;
-        if (new RString("41").equals(サービス種類.value())) {
-            証明書コード = new RString("21C1");
+        if (NUM41.equals(サービス種類.value())) {
+            証明書コード = 証明書コード1;
         }
-        if (new RString("44").equals(サービス種類.value())) {
-            証明書コード = new RString("21C2");
+        if (NUM44.equals(サービス種類.value())) {
+            証明書コード = 証明書コード2;
         }
         RString 証明書略称 = FukushiyoguKonyuhiShikyuShinsei.createInstance().getYoshikiName(証明書コード, サービス提供年月);
         RStringBuilder builder = new RStringBuilder();

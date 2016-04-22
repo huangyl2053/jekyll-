@@ -80,7 +80,6 @@ public class YoguKonyuhiShikyuShinseiPnlTotalHandler {
     private static final RString コード種別 = new RString("0006");
     private static final RString NUM3 = new RString("0000000000");
     private static final RString NUM1 = new RString("0001");
-    private static final RString NUM00 = new RString("01");
     private static final RString NUM01 = new RString("01");
     private static final RString NUMB1 = new RString("1");
     private static final RString NUM0000 = new RString("0000");
@@ -88,6 +87,10 @@ public class YoguKonyuhiShikyuShinseiPnlTotalHandler {
     private static final int NUM_2 = 2;
     private static final int NUM_3 = 3;
     private static final int NUM_5 = 5;
+    private static final RString NUM41 = new RString("41");
+    private static final RString NUM44 = new RString("42");
+    private static final RString 証明書コード1 = new RString("21C1");
+    private static final RString 証明書コード2 = new RString("21C2");
     private static final RString 修正 = new RString("修正");
     private static final RString 削除 = new RString("削除");
     private static final RString 登録 = new RString("登録");
@@ -449,11 +452,11 @@ public class YoguKonyuhiShikyuShinseiPnlTotalHandler {
             RString サービス種類 = div.getYoguKonyuhiShikyuShinseiContentsPanel().getTxtServiceCode().getValue();
             サービス提供年月 = new FlexibleYearMonth(
                     div.getYoguKonyuhiShikyuShinseiContentsPanel().getTxtTeikyoYM().getValue().getYearMonth().toString());
-            if (new RString("41").equals(サービス種類)) {
-                証明書コード = new RString("21C1");
+            if (NUM41.equals(サービス種類)) {
+                証明書コード = 証明書コード1;
             }
-            if (new RString("44").equals(サービス種類)) {
-                証明書コード = new RString("21C2");
+            if (NUM44.equals(サービス種類)) {
+                証明書コード = 証明書コード2;
             }
             整理番号 = ViewStateHolder.get(ViewStateKeys.整理番号, RString.class);
             様式番号 = 証明書コード;
@@ -637,6 +640,18 @@ public class YoguKonyuhiShikyuShinseiPnlTotalHandler {
             entity = entity.createBuilderForEdit().set保険給付率(new HokenKyufuRitsu(
                     div.getYoguKonyuhiShikyuShinseiContentsPanel().getTxtKyufuritsu().getValue())).build();
         }
+        if (div.getTpSummary().getTxtKonkaiHiyogakuGokei().getValue() != null) {
+            entity = entity.createBuilderForEdit().setサービス単位数(div.getTpSummary().
+                    getTxtKonkaiHiyogakuGokei().getValue().intValue()).build();
+        }
+        if (div.getTpSummary().getTxtKonkaiHokenkyufugakuGokei().getValue() != null) {
+            entity = entity.createBuilderForEdit().set保険請求額(div.getTpSummary().
+                    getTxtKonkaiHokenkyufugakuGokei().getValue()).build();
+        }
+        if (div.getTpSummary().getTxtKonkaiRiyoshaFutangakuGokei().getValue() != null) {
+            entity = entity.createBuilderForEdit().set利用者負担額(div.getTpSummary().
+                    getTxtKonkaiRiyoshaFutangakuGokei().getValue().intValue()).build();
+        }
         return entity;
     }
 
@@ -659,6 +674,18 @@ public class YoguKonyuhiShikyuShinseiPnlTotalHandler {
         }
         if (dgrow.get(0).getTxtShinsa() != null) {
             entity = entity.createBuilderForEdit().set審査方法区分コード(dgrow.get(0).getTxtShinsa()).build();
+        }
+        if (div.getTpSummary().getTxtKonkaiHokenkyufugakuGokei().getValue() != null) {
+            entity = entity.createBuilderForEdit().set請求額(div.getTpSummary().
+                    getTxtKonkaiHokenkyufugakuGokei().getValue()).build();
+        }
+        if (div.getTpSummary().getTxtKonkaiRiyoshaFutangakuGokei().getValue() != null) {
+            entity = entity.createBuilderForEdit().set利用者負担額(div.getTpSummary().
+                    getTxtKonkaiRiyoshaFutangakuGokei().getValue().intValue()).build();
+        }
+        if (div.getTpSummary().getTxtKonkaiHokenTaishoHiyogakuGokei().getValue() != null) {
+            entity = entity.createBuilderForEdit().set点数_金額(div.getTpSummary().
+                    getTxtKonkaiHokenTaishoHiyogakuGokei().getValue().intValue()).build();
         }
         return entity;
     }
@@ -713,11 +740,12 @@ public class YoguKonyuhiShikyuShinseiPnlTotalHandler {
                     getDdlShinseisyakubun().getSelectedKey()).build();
         }
         if (div.getYoguKonyuhiShikyuShinseiContentsPanel().getPnlShinsesyaJoho().getTxtShinseiriyu() != null) {
-            entity = entity.createBuilderForEdit().set申請理由(
-                    div.getYoguKonyuhiShikyuShinseiContentsPanel().getPnlShinsesyaJoho().getTxtShinseiriyu().getValue()).build();
+            entity = entity.createBuilderForEdit().set申請理由(div.getYoguKonyuhiShikyuShinseiContentsPanel().
+                    getPnlShinsesyaJoho().getTxtShinseiriyu().getValue()).build();
         }
         if (div.getYoguKonyuhiShikyuShinseiContentsPanel().getPnlShinsesyaJoho().getTxtJigyosya().getValue() != null
-                && !div.getYoguKonyuhiShikyuShinseiContentsPanel().getPnlShinsesyaJoho().getTxtJigyosya().getValue().isEmpty()) {
+                && !div.getYoguKonyuhiShikyuShinseiContentsPanel().getPnlShinsesyaJoho().
+                getTxtJigyosya().getValue().isEmpty()) {
             entity = entity.createBuilderForEdit().set申請事業者コード(new JigyoshaNo(
                     div.getYoguKonyuhiShikyuShinseiContentsPanel().
                     getPnlShinsesyaJoho().getTxtJigyosya().getValue())).build();
@@ -743,6 +771,22 @@ public class YoguKonyuhiShikyuShinseiPnlTotalHandler {
         if (div.getYoguKonyuhiShikyuShinseiContentsPanel().getPnlShinsesyaJoho().getTxtShinseisyaJyusyo() != null) {
             entity = entity.createBuilderForEdit().set申請者住所(div.getYoguKonyuhiShikyuShinseiContentsPanel().
                     getPnlShinsesyaJoho().getTxtShinseisyaJyusyo().getDomain().value()).build();
+        }
+        if (div.getTpSummary().getTxtKonkaiHiyogakuGokei().getValue() != null) {
+            entity = entity.createBuilderForEdit().set支払金額合計(div.getTpSummary().
+                    getTxtKonkaiHiyogakuGokei().getValue()).build();
+        }
+        if (div.getTpSummary().getTxtKonkaiHokenTaishoHiyogakuGokei().getValue() != null) {
+            entity = entity.createBuilderForEdit().set保険対象費用額(div.getTpSummary().
+                    getTxtKonkaiHokenTaishoHiyogakuGokei().getValue()).build();
+        }
+        if (div.getTpSummary().getTxtKonkaiHokenkyufugakuGokei().getValue() != null) {
+            entity = entity.createBuilderForEdit().set保険給付額(div.getTpSummary().getTxtKonkaiHokenkyufugakuGokei().
+                    getValue().intValue()).build();
+        }
+        if (div.getTpSummary().getTxtKonkaiRiyoshaFutangakuGokei().getValue() != null) {
+            entity = entity.createBuilderForEdit().set利用者負担額(div.getTpSummary().
+                    getTxtKonkaiRiyoshaFutangakuGokei().getValue().intValue()).build();
         }
         if (div.getCcdShiharaiHohoInfo().getShiharaiHoho() != null
                 && !div.getCcdShiharaiHohoInfo().getShiharaiHoho().isEmpty()) {
@@ -779,6 +823,11 @@ public class YoguKonyuhiShikyuShinseiPnlTotalHandler {
         if (div.getCcdShiharaiHohoInfo().getKeiyakuNo() != null) {
             entity = entity.createBuilderForEdit().set受領委任契約番号(
                     div.getCcdShiharaiHohoInfo().getKeiyakuNo()).build();
+        }
+        if (div.getYoguKonyuhiShikyuShinseiContentsPanel().getPnlShinsesyaJoho().getTxtRyosyuYMD().getValue() != null) {
+            entity = entity.createBuilderForEdit().set領収年月日(new FlexibleDate(div.
+                    getYoguKonyuhiShikyuShinseiContentsPanel().getPnlShinsesyaJoho().
+                    getTxtRyosyuYMD().getValue().toString())).build();
         }
         return entity;
     }
@@ -838,6 +887,7 @@ public class YoguKonyuhiShikyuShinseiPnlTotalHandler {
         entity = entity.createBuilderForEdit().setサービスコード(new ServiceCode(
                 div.getYoguKonyuhiShikyuShinseiContentsPanel().
                 getTxtServiceCode().getValue().concat(NUM0000))).build();
+        entity = entity.createBuilderForEdit().set差額金額(0).build();
         return entity;
 
     }
