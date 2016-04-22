@@ -15,6 +15,7 @@ import jp.co.ndensan.reams.db.dba.divcontroller.entity.parentdiv.DBA4020011.Taju
 import jp.co.ndensan.reams.db.dba.divcontroller.handler.parentdiv.DBA4020011.TajutokuShokaiHandler;
 import jp.co.ndensan.reams.db.dba.service.core.tashichosonjushochitokureidaicho.TashichosonJushochiTokureiDaichoFinder;
 import jp.co.ndensan.reams.db.dba.service.report.tashichosonjushochi.TashichosonJushochitokureishaDaichoPrintService;
+import jp.co.ndensan.reams.db.dbz.definition.core.enumeratedtype.DaichoType;
 import jp.co.ndensan.reams.db.dbz.divcontroller.util.viewstate.ViewStateKey;
 import jp.co.ndensan.reams.db.dbz.service.TaishoshaKey;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrQuestionMessages;
@@ -56,8 +57,7 @@ public class TajutokuShokai {
         div.getShikakuKihonJoho().getCcdKaigoAtenaInfo().onLoad(key.get識別コード());
         div.getShikakuKihonJoho().getCcdShikakuJoho().onLoad(key.get識別コード());
         div.getTajutokuTekiyoJohoIchiran().getCcdTaJushochiTokureishaKanri().initialize(key.get識別コード());
-        // TODO QA:1073 Redmine# (選択ボタンを実装できない)
-        div.getJutokuJohoTeiseiIchiran().getCcdShisetsuNyushRirekiKanri().initialize(key.get識別コード());
+        div.getJutokuJohoTeiseiIchiran().getCcdShisetsuNyushRirekiKanri().initialize(key.get識別コード(), DaichoType.他市町村住所地特例者.getCode());
         return ResponseData.of(div).setState(DBA4020011StateName.他市町村住所特例者照会);
     }
 
