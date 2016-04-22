@@ -5,7 +5,10 @@
  */
 package jp.co.ndensan.reams.db.dbc.divcontroller.controller.parentdiv.DBC0820015;
 
+import java.io.Serializable;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import jp.co.ndensan.reams.db.dbc.business.core.syokanbaraikettejoho.KetteJoho;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.commonchilddiv.ShokanbaraiketteiJoho.ShokanbaraiketteiJoho.dgSyokanbaraikete_Row;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0820015.ShokanbarayiKeteiInfoPanelDiv;
@@ -48,8 +51,6 @@ public class ShokanbarayiKeteiInfoPanel {
     private static final RString 照会 = new RString("照会");
     private static final RString 申請を保存する = new RString("Element3");
     private static final RString 業務区分 = new RString("03");
-    private static List<dgSyokanbaraikete_Row> 償還払決定一覧;
-    private static KetteJoho 決定情報;
 
     /**
      * onLoad
@@ -114,8 +115,14 @@ public class ShokanbarayiKeteiInfoPanel {
             div.getPanelTwo().getBtnShinsei().setDisabled(true);
             div.getPanelTwo().getTxtShoriMode().setValue(削除);
         }
-        償還払決定一覧 = div.getCcdShokanbaraiketteiJoho().getShokanbaraiketteiJohoDiv().getDgSyokanbaraikete().getDataSource();
-        決定情報 = ViewStateHolder.get(jp.co.ndensan.reams.db.dbz.definition.core.ViewStateKeys.決定情報, KetteJoho.class);
+        List<dgSyokanbaraikete_Row> 決定情報登録_償還払決定一覧 = div.getCcdShokanbaraiketteiJoho().getShokanbaraiketteiJohoDiv().getDgSyokanbaraikete().getDataSource();
+        KetteJoho 決定情報 = ViewStateHolder.get(jp.co.ndensan.reams.db.dbz.definition.core.ViewStateKeys.決定情報, KetteJoho.class);
+        Map<RString, Integer> map_Row = new HashMap<>();
+        for (dgSyokanbaraikete_Row list : 決定情報登録_償還払決定一覧) {
+            map_Row.put(list.getNo(), list.getSagakuKingaku().getValue().intValue());
+        }
+        ViewStateHolder.put(ViewStateKeys.決定情報登録_償還払決定一覧, (Serializable) map_Row);
+        ViewStateHolder.put(ViewStateKeys.決定情報登録_決定情報, 決定情報);
         return ResponseData.of(div).respond();
     }
 
@@ -183,7 +190,7 @@ public class ShokanbarayiKeteiInfoPanel {
         if (削除.equals(ViewStateHolder.get(ViewStateKeys.処理モード, RString.class))) {
             モード = 照会;
         }
-        boolean flag = getHandler(div).get内容変更状態(償還払決定一覧, 決定情報);
+        boolean flag = getHandler(div).get内容変更状態();
         if (flag) {
             if (!ResponseHolder.isReRequest()) {
                 QuestionMessage message = new QuestionMessage(UrQuestionMessages.入力内容の破棄.getMessage().getCode(),
@@ -211,7 +218,7 @@ public class ShokanbarayiKeteiInfoPanel {
      * @return 画面DIV
      */
     public ResponseData<ShokanbarayiKeteiInfoPanelDiv> onClick_CommonSave(ShokanbarayiKeteiInfoPanelDiv div) {
-        boolean flag = getHandler(div).get内容変更状態(償還払決定一覧, 決定情報);
+        boolean flag = getHandler(div).get内容変更状態();
         if (削除.equals(ViewStateHolder.get(ViewStateKeys.処理モード, RString.class))) {
             if (!ResponseHolder.isReRequest()) {
                 getHandler(div).削除Save();

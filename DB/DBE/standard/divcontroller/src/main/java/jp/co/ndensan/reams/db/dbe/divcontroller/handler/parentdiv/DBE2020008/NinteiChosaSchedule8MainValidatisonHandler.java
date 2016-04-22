@@ -21,7 +21,7 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
 /**
  * MainPaneValidationMessageバリデーションメッセージを定義している列挙型です。
  *
- * @reamsid_L DBE-0024-010  suguangjun 
+ * @reamsid_L DBE-0024-010 suguangjun
  */
 public class NinteiChosaSchedule8MainValidatisonHandler {
 
@@ -143,16 +143,16 @@ public class NinteiChosaSchedule8MainValidatisonHandler {
      * 保存するボタンを押下するとき、バリデーションチェックを行う。
      *
      * @param chosaChikuGroupCount 調査地区グループ調査地区情報
-     * @param ChosaChikuToroukuCount 調査地区グループ調査地区情報
+     * @param chosaChikuToroukuCount 調査地区グループ調査地区情報
      * @return バリデーション結果
      */
-    public ValidationMessageControlPairs validateForUpdate(int chosaChikuGroupCount, int ChosaChikuToroukuCount) {
+    public ValidationMessageControlPairs validateForUpdate(int chosaChikuGroupCount, int chosaChikuToroukuCount) {
         ValidationMessageControlPairs validPairs = new ValidationMessageControlPairs();
         if (0 < chosaChikuGroupCount) {
             validPairs.add(new ValidationMessageControlPair(new NinteiChosaSchedule8MainValidatisonHandler.IdocheckMessages(
                     UrErrorMessages.削除不可, "調査地区情報が他のDBにて使用されている")));
         }
-        if (0 < ChosaChikuToroukuCount) {
+        if (0 < chosaChikuToroukuCount) {
             validPairs.add(new ValidationMessageControlPair(new NinteiChosaSchedule8MainValidatisonHandler.IdocheckMessages(
                     DbeWarningMessages.既に他のグループで調査地区コードが登録)));
         }

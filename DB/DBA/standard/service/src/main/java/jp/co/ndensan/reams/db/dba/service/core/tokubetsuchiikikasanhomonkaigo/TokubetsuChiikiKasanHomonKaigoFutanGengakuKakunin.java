@@ -13,8 +13,8 @@ import jp.co.ndensan.reams.db.dba.business.report.tokubetsuchiikikasanhomonkaigo
 import jp.co.ndensan.reams.db.dba.business.report.tokubetsuchiikikasanhomonkaigo.TokubetsuChiikiKasanGenmenTaishoShinseishoReport;
 import jp.co.ndensan.reams.db.dba.entity.report.tokubetsuchiikikasanhomonkaigo.TokubetsuChiikiKasanGenmenTaishoShinseishoReportSource;
 import jp.co.ndensan.reams.db.dba.service.core.tokuteifutangendogakushinseisho.TokuteifutanGendogakuShinseisho;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBU;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.kyotsu.GaikokujinSeinengappiHyojihoho;
 import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.kyotsu.NinshoshaDenshikoinshubetsuCode;
 import jp.co.ndensan.reams.ur.urz.business.report.parts.ninshosha.INinshoshaSourceBuilder;
@@ -51,8 +51,8 @@ import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 
 /**
  * 特別地域加算減免・訪問介護等利用者負担減額対象確認申請書Printerです。
- * 
- * @reamsid_L DBA-0540-400  suguangjun 
+ *
+ * @reamsid_L DBA-0540-400 suguangjun
  */
 public class TokubetsuChiikiKasanHomonKaigoFutanGengakuKakunin {
 
@@ -175,7 +175,11 @@ public class TokubetsuChiikiKasanHomonKaigoFutanGengakuKakunin {
 
     private static RString get確認番号(HihokenshaKihonBusiness business) {
         // TODO QA:691,この機能の業務はDBAです。上記テープルはDBDです。業務間呼び出すことができない。
-        return new RString("12345678");
+        RString 確認番号 = RString.EMPTY;
+        if (business != null) {
+            確認番号 = new RString("12");
+        }
+        return 確認番号;
     }
 
     private HihokenshaKihonBusiness get被保険者基本情報(ShikibetsuCode 識別コード, HihokenshaNo 被保険者番号) {

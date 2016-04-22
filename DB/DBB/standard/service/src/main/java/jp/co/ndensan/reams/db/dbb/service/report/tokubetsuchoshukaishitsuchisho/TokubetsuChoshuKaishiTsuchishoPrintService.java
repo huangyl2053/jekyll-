@@ -20,6 +20,7 @@ import jp.co.ndensan.reams.db.dbb.business.report.tokubetsuchoshukaishitsuchisho
 import jp.co.ndensan.reams.db.dbb.business.report.tokubetsuchoshukaishitsuchisho.TokubetsuChoshuKaishiTsuchishoSealerRenchoReport;
 import jp.co.ndensan.reams.db.dbb.business.report.tokubetsuchoshukaishitsuchisho.TokubetsuChoshuKaishiTsuchishoSealerReport;
 import jp.co.ndensan.reams.db.dbb.business.report.tsuchisho.notsu.EditedHonSanteiTsuchiShoKyotsu;
+import jp.co.ndensan.reams.db.dbb.business.report.tsuchisho.notsu.HonSanteiTsuchiShoKyotsu;
 import jp.co.ndensan.reams.db.dbb.entity.report.tokubetsuchoshukaishitsuchisho.TokubetsuChoshuKaishiTsuchishoB52RenchoSource;
 import jp.co.ndensan.reams.db.dbb.entity.report.tokubetsuchoshukaishitsuchisho.TokubetsuChoshuKaishiTsuchishoB52Source;
 import jp.co.ndensan.reams.db.dbb.entity.report.tokubetsuchoshukaishitsuchisho.TokubetsuChoshuKaishiTsuchishoB5RenchoSource;
@@ -33,13 +34,10 @@ import jp.co.ndensan.reams.db.dbz.service.report.parts.kaigotoiawasesaki.KaigoTo
 import jp.co.ndensan.reams.ur.urz.business.core.ninshosha.Ninshosha;
 import jp.co.ndensan.reams.ur.urz.business.report.parts.ninshosha.NinshoshaSourceBuilderFactory;
 import jp.co.ndensan.reams.ur.urz.entity.report.parts.ninshosha.NinshoshaSource;
-import jp.co.ndensan.reams.ur.urz.service.core.association.AssociationFinderFactory;
 import jp.co.ndensan.reams.ur.urz.service.core.ninshosha.INinshoshaManager;
 import jp.co.ndensan.reams.ur.urz.service.core.ninshosha._NinshoshaManager;
 import jp.co.ndensan.reams.uz.uza.biz.GyomuCode;
-import jp.co.ndensan.reams.uz.uza.biz.ReportId;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
-import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.report.IReportProperty;
 import jp.co.ndensan.reams.uz.uza.report.IReportSource;
@@ -58,27 +56,31 @@ import jp.co.ndensan.reams.uz.uza.report.source.breaks.BreakAggregator;
  */
 public class TokubetsuChoshuKaishiTsuchishoPrintService {
 
-    private static final RDate 発行日 = new RDate("20160115");
+    private static final RString 帳票分類ID = new RString("DBB100032");
 
     /**
      * B5横タイプ printメソッド
      *
-     * @param 編集後本算定通知書共通情報 編集後本算定通知書共通情報
-     * @param 宛名連番 宛名連番
-     * @return SourceDataCollection
+     * @param 編集後本算定通知書共通情報 EditedHonSanteiTsuchiShoKyotsu
+     * @param 宛名連番 RString
+     * @param 本算定通知書情報 HonSanteiTsuchiShoKyotsu
+     * @return 特別徴収開始通知書帳票
      */
     public SourceDataCollection printB5横タイプ(
             EditedHonSanteiTsuchiShoKyotsu 編集後本算定通知書共通情報,
-            RString 宛名連番) {
+            RString 宛名連番,
+            HonSanteiTsuchiShoKyotsu 本算定通知書情報) {
         TokubetsuChoshuKaishiTsuchishoB5Property property
                 = new TokubetsuChoshuKaishiTsuchishoB5Property();
         try (ReportManager reportManager = new ReportManager()) {
             try (ReportAssembler<TokubetsuChoshuKaishiTsuchishoB5Source> assembler = createAssembler(property, reportManager)) {
                 INinshoshaManager manager = new _NinshoshaManager();
-                Ninshosha 認証者 = manager.get帳票認証者(GyomuCode.DB介護保険, new RString("DBB100032"));
-                NinshoshaSource sourceBuilder = NinshoshaSourceBuilderFactory.createInstance(認証者,
-                        AssociationFinderFactory.createInstance().getAssociation(), assembler.getImageFolderPath(),
-                        発行日).buildSource();
+                Ninshosha 認証者 = manager.get帳票認証者(GyomuCode.DB介護保険, 帳票分類ID);
+                NinshoshaSource sourceBuilder = NinshoshaSourceBuilderFactory.createInstance(
+                        認証者,
+                        本算定通知書情報.get地方公共団体(),
+                        assembler.getImageFolderPath(),
+                        本算定通知書情報.get発行日()).buildSource();
                 ReportSourceWriter<TokubetsuChoshuKaishiTsuchishoB5Source> reportSourceWriter
                         = new ReportSourceWriter(assembler);
                 new TokubetsuChoshuKaishiTsuchishoB5Report(編集後本算定通知書共通情報, 宛名連番, sourceBuilder).
@@ -91,22 +93,26 @@ public class TokubetsuChoshuKaishiTsuchishoPrintService {
     /**
      * B5横タイプ連帳 printメソッド
      *
-     * @param 編集後本算定通知書共通情報 編集後本算定通知書共通情報
-     * @param 宛名連番 宛名連番
-     * @return SourceDataCollection
+     * @param 編集後本算定通知書共通情報 EditedHonSanteiTsuchiShoKyotsu
+     * @param 宛名連番 RString
+     * @param 本算定通知書情報 HonSanteiTsuchiShoKyotsu
+     * @return 特別徴収開始通知書帳票
      */
     public SourceDataCollection printB5横タイプ連帳(
             EditedHonSanteiTsuchiShoKyotsu 編集後本算定通知書共通情報,
-            RString 宛名連番) {
+            RString 宛名連番,
+            HonSanteiTsuchiShoKyotsu 本算定通知書情報) {
         TokubetsuChoshuKaishiTsuchishoB5RenchoProperty property
                 = new TokubetsuChoshuKaishiTsuchishoB5RenchoProperty();
         try (ReportManager reportManager = new ReportManager()) {
             try (ReportAssembler<TokubetsuChoshuKaishiTsuchishoB5RenchoSource> assembler = createAssembler(property, reportManager)) {
                 INinshoshaManager manager = new _NinshoshaManager();
-                Ninshosha 認証者 = manager.get帳票認証者(GyomuCode.DB介護保険, new RString("DBB100033"));
-                NinshoshaSource sourceBuilder = NinshoshaSourceBuilderFactory.createInstance(認証者,
-                        AssociationFinderFactory.createInstance().getAssociation(), assembler.getImageFolderPath(),
-                        発行日).buildSource();
+                Ninshosha 認証者 = manager.get帳票認証者(GyomuCode.DB介護保険, 帳票分類ID);
+                NinshoshaSource sourceBuilder = NinshoshaSourceBuilderFactory.createInstance(
+                        認証者,
+                        本算定通知書情報.get地方公共団体(),
+                        assembler.getImageFolderPath(),
+                        本算定通知書情報.get発行日()).buildSource();
                 ReportSourceWriter<TokubetsuChoshuKaishiTsuchishoB5RenchoSource> reportSourceWriter
                         = new ReportSourceWriter(assembler);
                 new TokubetsuChoshuKaishiTsuchishoB5RenchoReport(編集後本算定通知書共通情報, 宛名連番, sourceBuilder).
@@ -120,20 +126,24 @@ public class TokubetsuChoshuKaishiTsuchishoPrintService {
     /**
      * シーラタイプ printメソッド
      *
-     * @param 編集後本算定通知書共通情報 編集後本算定通知書共通情報
-     * @return SourceDataCollection
+     * @param 編集後本算定通知書共通情報 EditedHonSanteiTsuchiShoKyotsu
+     * @param 本算定通知書情報 HonSanteiTsuchiShoKyotsu
+     * @return 特別徴収開始通知書帳票
      */
     public SourceDataCollection printシーラタイプ(
-            EditedHonSanteiTsuchiShoKyotsu 編集後本算定通知書共通情報) {
+            EditedHonSanteiTsuchiShoKyotsu 編集後本算定通知書共通情報,
+            HonSanteiTsuchiShoKyotsu 本算定通知書情報) {
         TokubetsuChoshuKaishiTsuchishoSealerProperty property
                 = new TokubetsuChoshuKaishiTsuchishoSealerProperty();
         try (ReportManager reportManager = new ReportManager()) {
             try (ReportAssembler<TokubetsuChoshuKaishiTsuchishoSealerSource> assembler = createAssembler(property, reportManager)) {
                 INinshoshaManager manager = new _NinshoshaManager();
-                Ninshosha 認証者 = manager.get帳票認証者(GyomuCode.DB介護保険, new RString("DBB100034"));
-                NinshoshaSource sourceBuilder = NinshoshaSourceBuilderFactory.createInstance(認証者,
-                        AssociationFinderFactory.createInstance().getAssociation(), assembler.getImageFolderPath(),
-                        new RDate("20160115")).buildSource();
+                Ninshosha 認証者 = manager.get帳票認証者(GyomuCode.DB介護保険, 帳票分類ID);
+                NinshoshaSource sourceBuilder = NinshoshaSourceBuilderFactory.createInstance(
+                        認証者,
+                        本算定通知書情報.get地方公共団体(),
+                        assembler.getImageFolderPath(),
+                        本算定通知書情報.get発行日()).buildSource();
                 ReportSourceWriter<TokubetsuChoshuKaishiTsuchishoSealerSource> reportSourceWriter
                         = new ReportSourceWriter(assembler);
                 new TokubetsuChoshuKaishiTsuchishoSealerReport(編集後本算定通知書共通情報, sourceBuilder).
@@ -146,20 +156,24 @@ public class TokubetsuChoshuKaishiTsuchishoPrintService {
     /**
      * printシーラタイプ連帳 printメソッド
      *
-     * @param 編集後本算定通知書共通情報 編集後本算定通知書共通情報
-     * @return SourceDataCollection
+     * @param 編集後本算定通知書共通情報 EditedHonSanteiTsuchiShoKyotsu
+     * @param 本算定通知書情報 HonSanteiTsuchiShoKyotsu
+     * @return 特別徴収開始通知書帳票
      */
     public SourceDataCollection printシーラタイプ連帳(
-            EditedHonSanteiTsuchiShoKyotsu 編集後本算定通知書共通情報) {
+            EditedHonSanteiTsuchiShoKyotsu 編集後本算定通知書共通情報,
+            HonSanteiTsuchiShoKyotsu 本算定通知書情報) {
         TokubetsuChoshuKaishiTsuchishoSealerRenchoProperty property
                 = new TokubetsuChoshuKaishiTsuchishoSealerRenchoProperty();
         try (ReportManager reportManager = new ReportManager()) {
             try (ReportAssembler<TokubetsuChoshuKaishiTsuchishoSealerRenchoSource> assembler = createAssembler(property, reportManager)) {
                 INinshoshaManager manager = new _NinshoshaManager();
-                Ninshosha 認証者 = manager.get帳票認証者(GyomuCode.DB介護保険, new RString("DBB100035"));
-                NinshoshaSource sourceBuilder = NinshoshaSourceBuilderFactory.createInstance(認証者,
-                        AssociationFinderFactory.createInstance().getAssociation(), assembler.getImageFolderPath(),
-                        発行日).buildSource();
+                Ninshosha 認証者 = manager.get帳票認証者(GyomuCode.DB介護保険, 帳票分類ID);
+                NinshoshaSource sourceBuilder = NinshoshaSourceBuilderFactory.createInstance(
+                        認証者,
+                        本算定通知書情報.get地方公共団体(),
+                        assembler.getImageFolderPath(),
+                        本算定通知書情報.get発行日()).buildSource();
                 ReportSourceWriter<TokubetsuChoshuKaishiTsuchishoSealerRenchoSource> reportSourceWriter
                         = new ReportSourceWriter(assembler);
                 new TokubetsuChoshuKaishiTsuchishoSealerRenchoReport(編集後本算定通知書共通情報, sourceBuilder).
@@ -173,22 +187,26 @@ public class TokubetsuChoshuKaishiTsuchishoPrintService {
     /**
      * B5横タイプ2 printメソッド
      *
-     * @param 編集後本算定通知書共通情報 編集後本算定通知書共通情報
-     * @param 宛名連番 宛名連番
-     * @return SourceDataCollection
+     * @param 編集後本算定通知書共通情報 EditedHonSanteiTsuchiShoKyotsu
+     * @param 宛名連番 RString
+     * @param 本算定通知書情報 HonSanteiTsuchiShoKyotsu
+     * @return 特別徴収開始通知書帳票
      */
     public SourceDataCollection printB5横タイプ2(
             EditedHonSanteiTsuchiShoKyotsu 編集後本算定通知書共通情報,
-            RString 宛名連番) {
+            RString 宛名連番,
+            HonSanteiTsuchiShoKyotsu 本算定通知書情報) {
         TokubetsuChoshuKaishiTsuchishoB52Property property
                 = new TokubetsuChoshuKaishiTsuchishoB52Property();
         try (ReportManager reportManager = new ReportManager()) {
             try (ReportAssembler<TokubetsuChoshuKaishiTsuchishoB52Source> assembler = createAssembler(property, reportManager)) {
                 INinshoshaManager manager = new _NinshoshaManager();
-                Ninshosha 認証者 = manager.get帳票認証者(GyomuCode.DB介護保険, new RString("DBB100036"));
-                NinshoshaSource sourceBuilder = NinshoshaSourceBuilderFactory.createInstance(認証者,
-                        AssociationFinderFactory.createInstance().getAssociation(), assembler.getImageFolderPath(),
-                        発行日).buildSource();
+                Ninshosha 認証者 = manager.get帳票認証者(GyomuCode.DB介護保険, 帳票分類ID);
+                NinshoshaSource sourceBuilder = NinshoshaSourceBuilderFactory.createInstance(
+                        認証者,
+                        本算定通知書情報.get地方公共団体(),
+                        assembler.getImageFolderPath(),
+                        本算定通知書情報.get発行日()).buildSource();
                 ReportSourceWriter<TokubetsuChoshuKaishiTsuchishoB52Source> reportSourceWriter
                         = new ReportSourceWriter(assembler);
                 new TokubetsuChoshuKaishiTsuchishoB52Report(編集後本算定通知書共通情報, 宛名連番, sourceBuilder).
@@ -202,22 +220,26 @@ public class TokubetsuChoshuKaishiTsuchishoPrintService {
     /**
      * B5横タイプ2連帳 printメソッド
      *
-     * @param 編集後本算定通知書共通情報 編集後本算定通知書共通情報
-     * @param 宛名連番 宛名連番
-     * @return SourceDataCollection
+     * @param 編集後本算定通知書共通情報 EditedHonSanteiTsuchiShoKyotsu
+     * @param 宛名連番 RString
+     * @param 本算定通知書情報 HonSanteiTsuchiShoKyotsu
+     * @return 特別徴収開始通知書帳票
      */
     public SourceDataCollection printB5横タイプ2連帳(
             EditedHonSanteiTsuchiShoKyotsu 編集後本算定通知書共通情報,
-            RString 宛名連番) {
+            RString 宛名連番,
+            HonSanteiTsuchiShoKyotsu 本算定通知書情報) {
         TokubetsuChoshuKaishiTsuchishoB52RenchoProperty property
                 = new TokubetsuChoshuKaishiTsuchishoB52RenchoProperty();
         try (ReportManager reportManager = new ReportManager()) {
             try (ReportAssembler<TokubetsuChoshuKaishiTsuchishoB52RenchoSource> assembler = createAssembler(property, reportManager)) {
                 INinshoshaManager manager = new _NinshoshaManager();
-                Ninshosha 認証者 = manager.get帳票認証者(GyomuCode.DB介護保険, new RString("DBB100037"));
-                NinshoshaSource sourceBuilder = NinshoshaSourceBuilderFactory.createInstance(認証者,
-                        AssociationFinderFactory.createInstance().getAssociation(), assembler.getImageFolderPath(),
-                        発行日).buildSource();
+                Ninshosha 認証者 = manager.get帳票認証者(GyomuCode.DB介護保険, 帳票分類ID);
+                NinshoshaSource sourceBuilder = NinshoshaSourceBuilderFactory.createInstance(
+                        認証者,
+                        本算定通知書情報.get地方公共団体(),
+                        assembler.getImageFolderPath(),
+                        本算定通知書情報.get発行日()).buildSource();
                 ReportSourceWriter<TokubetsuChoshuKaishiTsuchishoB52RenchoSource> reportSourceWriter
                         = new ReportSourceWriter(assembler);
                 new TokubetsuChoshuKaishiTsuchishoB52RenchoReport(編集後本算定通知書共通情報, 宛名連番, sourceBuilder).
@@ -231,24 +253,28 @@ public class TokubetsuChoshuKaishiTsuchishoPrintService {
     /**
      * printA4縦 printメソッド
      *
-     * @param 編集後本算定通知書共通情報 編集後本算定通知書共通情報
-     * @param 通知書定型文 通知書定型文
-     * @return SourceDataCollection
+     * @param 編集後本算定通知書共通情報 EditedHonSanteiTsuchiShoKyotsu
+     * @param 通知書定型文 RString
+     * @param 本算定通知書情報 HonSanteiTsuchiShoKyotsu
+     * @return 特別徴収開始通知書帳票
      */
     public SourceDataCollection printA4縦(
             EditedHonSanteiTsuchiShoKyotsu 編集後本算定通知書共通情報,
-            RString 通知書定型文) {
+            RString 通知書定型文,
+            HonSanteiTsuchiShoKyotsu 本算定通知書情報) {
         TokubetsuChoshuKaishiTsuchishoOverlayA4TateProperty property
                 = new TokubetsuChoshuKaishiTsuchishoOverlayA4TateProperty();
         try (ReportManager reportManager = new ReportManager()) {
             try (ReportAssembler<TokubetsuChoshuKaishiTsuchishoOverlayA4TateSource> assembler = createAssembler(property, reportManager)) {
                 INinshoshaManager manager = new _NinshoshaManager();
-                Ninshosha 認証者 = manager.get帳票認証者(GyomuCode.DB介護保険, new RString("DBB100038"));
-                NinshoshaSource sourceBuilder = NinshoshaSourceBuilderFactory.createInstance(認証者,
-                        AssociationFinderFactory.createInstance().getAssociation(), assembler.getImageFolderPath(),
-                        発行日).buildSource();
+                Ninshosha 認証者 = manager.get帳票認証者(GyomuCode.DB介護保険, 帳票分類ID);
+                NinshoshaSource sourceBuilder = NinshoshaSourceBuilderFactory.createInstance(
+                        認証者,
+                        本算定通知書情報.get地方公共団体(),
+                        assembler.getImageFolderPath(),
+                        本算定通知書情報.get発行日()).buildSource();
                 IKaigoToiawasesakiSourceBuilder 介護問合せ先ソースビルダー
-                        = KaigoToiawasesakiSourceBuilderCreator.create(SubGyomuCode.DBB介護賦課, new ReportId("DBB100038"));
+                        = KaigoToiawasesakiSourceBuilderCreator.create(SubGyomuCode.DBB介護賦課, 本算定通知書情報.get帳票分類ID());
                 CompKaigoToiawasesakiSource toiawasesakiSource = 介護問合せ先ソースビルダー.buildSource();
                 ReportSourceWriter<TokubetsuChoshuKaishiTsuchishoOverlayA4TateSource> reportSourceWriter
                         = new ReportSourceWriter(assembler);
