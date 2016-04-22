@@ -136,8 +136,8 @@ public class RiyoshaFutangakuGengakuHandler {
             div.getRiyoshaFutangakuGengakuShinseiDetail().setTitle(承認情報);
             CommonButtonHolder.setAdditionalTextByCommonButtonFieldName(BTNUPDATE_FIELDNAME, 承認情報を.toString());
             承認情報エリア状態(承認する_KEY, true);
-            div.getBtnConfirm().setVisible(false);
-            div.getBtnShinseiKakutei().setVisible(false);
+            div.getBtnConfirm().setDisplayNone(true);
+            div.getBtnShinseiKakutei().setDisplayNone(true);
         }
 
         ViewStateHolder.put(Dbd1020001Keys.新規申請の履歴番号, 0);
@@ -156,9 +156,10 @@ public class RiyoshaFutangakuGengakuHandler {
         RiyoshaFutangakuGengaku 該当DB申請 = ViewStateHolder.get(Dbd1020001Keys.該当DB申請, RiyoshaFutangakuGengaku.class);
         RiyoshaFutangakuGengakuViewState 該当申請のViewState = ViewStateHolder.get(Dbd1020001Keys.該当申請のViewState, RiyoshaFutangakuGengakuViewState.class);
 
+        HihokenshaNo 被保険者番号 = ViewStateHolder.get(ViewStateKeys.被保険者番号, HihokenshaNo.class);
         ShoKisaiHokenshaNo 証記載保険者番号 = null;
         int 履歴番号;
-        EntityDataState state = EntityDataState.Unchanged;
+        EntityDataState state;
         GemmenGengakuShinsei gemmenGengakuShinsei;
         RiyoshaFutangakuGengakuBuilder builder;
         if (該当DB申請 != null) {
@@ -171,12 +172,17 @@ public class RiyoshaFutangakuGengakuHandler {
             } else {
                 state = EntityDataState.Unchanged;
             }
-
-            gemmenGengakuShinsei = 該当DB申請.getGemmenGengakuShinseiList().get(0);
+            if (該当DB申請.getGemmenGengakuShinseiList().size() > 0) {
+                gemmenGengakuShinsei = 該当DB申請.getGemmenGengakuShinseiList().get(0);
+            } else {
+                Integer 新規申請の履歴番号 = ViewStateHolder.get(Dbd1020001Keys.新規申請の履歴番号, Integer.class);
+                履歴番号 = 新規申請の履歴番号 - 1;
+                ViewStateHolder.put(Dbd1020001Keys.新規申請の履歴番号, 履歴番号);
+                gemmenGengakuShinsei = new GemmenGengakuShinsei(証記載保険者番号, 被保険者番号, GemmenGengakuShurui.利用者負担額減額.code(), 履歴番号);
+            }
             builder = 該当DB申請.createBuilderForEdit();
         } else {
             state = EntityDataState.Added;
-            HihokenshaNo 被保険者番号 = ViewStateHolder.get(ViewStateKeys.被保険者番号, HihokenshaNo.class);
             証記載保険者番号 = get証記載保険者番号(div.getTxtShinseiYmd().getValue());
 
             if (該当申請のViewState != null) {
@@ -209,9 +215,9 @@ public class RiyoshaFutangakuGengakuHandler {
 
         RString 旧措置 = div.getDdlKyusochiKubun().getSelectedKey();
         RString 決定区分 = div.getRadKetteiKubun().getSelectedKey();
-        RString 決定区分コード = RString.EMPTY;
-        RString 決定区分TXT = RString.EMPTY;
-        HokenKyufuRitsu 給付率 = HokenKyufuRitsu.ZERO;
+        RString 決定区分コード;
+        RString 決定区分TXT;
+        HokenKyufuRitsu 給付率;
         FlexibleDate 適用開始年月日 = FlexibleDate.EMPTY;
         FlexibleDate 適用終了年月日 = FlexibleDate.EMPTY;
         RString 非承認理由 = RString.EMPTY;
@@ -300,7 +306,7 @@ public class RiyoshaFutangakuGengakuHandler {
         div.getDdlShinseiIchiran().setDataSource(newRowList);
         入力情報をクリア();
         承認情報エリア状態(承認する_KEY, true);
-        div.getBtnShinseiKakutei().setVisible(true);
+        div.getBtnConfirm().setDisplayNone(true);
     }
 
     /**
@@ -316,9 +322,10 @@ public class RiyoshaFutangakuGengakuHandler {
         RiyoshaFutangakuGengaku 該当DB申請 = ViewStateHolder.get(Dbd1020001Keys.該当DB申請, RiyoshaFutangakuGengaku.class);
         RiyoshaFutangakuGengakuViewState 該当申請のViewState = ViewStateHolder.get(Dbd1020001Keys.該当申請のViewState, RiyoshaFutangakuGengakuViewState.class);
 
-        ShoKisaiHokenshaNo 証記載保険者番号 = null;
+        HihokenshaNo 被保険者番号 = ViewStateHolder.get(ViewStateKeys.被保険者番号, HihokenshaNo.class);
+        ShoKisaiHokenshaNo 証記載保険者番号;
         int 履歴番号;
-        EntityDataState state = EntityDataState.Unchanged;
+        EntityDataState state;
         GemmenGengakuShinsei gemmenGengakuShinsei;
         RiyoshaFutangakuGengakuBuilder builder;
 
@@ -333,11 +340,17 @@ public class RiyoshaFutangakuGengakuHandler {
                 state = EntityDataState.Unchanged;
             }
 
-            gemmenGengakuShinsei = 該当DB申請.getGemmenGengakuShinseiList().get(0);
+            if (該当DB申請.getGemmenGengakuShinseiList().size() > 0) {
+                gemmenGengakuShinsei = 該当DB申請.getGemmenGengakuShinseiList().get(0);
+            } else {
+                Integer 新規申請の履歴番号 = ViewStateHolder.get(Dbd1020001Keys.新規申請の履歴番号, Integer.class);
+                履歴番号 = 新規申請の履歴番号 - 1;
+                ViewStateHolder.put(Dbd1020001Keys.新規申請の履歴番号, 履歴番号);
+                gemmenGengakuShinsei = new GemmenGengakuShinsei(証記載保険者番号, 被保険者番号, GemmenGengakuShurui.利用者負担額減額.code(), 履歴番号);
+            }
             builder = 該当DB申請.createBuilderForEdit();
         } else {
             state = EntityDataState.Added;
-            HihokenshaNo 被保険者番号 = ViewStateHolder.get(ViewStateKeys.被保険者番号, HihokenshaNo.class);
             証記載保険者番号 = get証記載保険者番号(div.getTxtShinseiYmd().getValue());
 
             if (該当申請のViewState != null) {
@@ -431,8 +444,7 @@ public class RiyoshaFutangakuGengakuHandler {
             div.getRadKetteiKubun().setSelectedKey(承認する_KEY);
             div.getTxtKettaiYmd().setValue(new FlexibleDate(RDate.getNowDate().toDateString()));
             承認情報エリア状態(承認する_KEY, true);
-            div.getBtnShinseiKakutei().setVisible(false);
-            div.getBtnConfirm().setVisible(true);
+            div.getBtnConfirm().setDisplayNone(false);
         }
     }
 
@@ -501,12 +513,10 @@ public class RiyoshaFutangakuGengakuHandler {
 
         if (ResponseHolder.getMenuID().equals(申請メニュー)) {
             申請情報エリ状態(true);
-            div.getBtnShinseiKakutei().setVisible(true);
-            div.getBtnConfirm().setVisible(false);
+            div.getBtnShinseiKakutei().setDisplayNone(false);
         } else if (ResponseHolder.getMenuID().equals(承認メニュー)) {
             承認情報エリア状態(決定区分RadInx, false);
-            div.getBtnShinseiKakutei().setVisible(false);
-            div.getBtnConfirm().setVisible(true);
+            div.getBtnConfirm().setDisplayNone(false);
         }
     }
 
@@ -572,8 +582,8 @@ public class RiyoshaFutangakuGengakuHandler {
         div.getTxtKyufuRitsu().setDisabled(true);
         div.getBtnHiShoninRiyu().setDisabled(true);
         div.getTxtHiShoninRiyu().setDisabled(true);
-        div.getBtnShinseiKakutei().setVisible(true);
-        div.getBtnConfirm().setVisible(is確定ボタン表示);
+        div.getBtnShinseiKakutei().setDisplayNone(!is確定ボタン表示);
+        div.getBtnConfirm().setDisplayNone(true);
     }
 
     /**
@@ -760,27 +770,35 @@ public class RiyoshaFutangakuGengakuHandler {
     private ShinseiJoho 減免減額申請共有子Divの設定() {
         RiyoshaFutangakuGengakuViewState joho = ViewStateHolder.get(Dbd1020001Keys.該当申請のViewState, RiyoshaFutangakuGengakuViewState.class);
         ShinseiTodokedeDaikoKubunCode 申請届出代行区分 = null;
-        if (joho.getRiyoshaFutangakuGengaku().getGemmenGengakuShinseiList().get(0).get申請届出代行区分() != null) {
-            申請届出代行区分 = ShinseiTodokedeDaikoKubunCode.toValue(joho.getRiyoshaFutangakuGengaku().getGemmenGengakuShinseiList().get(0).get申請届出代行区分());
-        }
-        AtenaMeisho 申請届出者氏名 = joho.getRiyoshaFutangakuGengaku().getGemmenGengakuShinseiList().get(0).get申請届出者氏名();
-        AtenaKanaMeisho 申請届出者氏名カナ = joho.getRiyoshaFutangakuGengaku().getGemmenGengakuShinseiList().get(0).get申請届出者氏名カナ();
-        RString 申請届出者続柄 = joho.getRiyoshaFutangakuGengaku().getGemmenGengakuShinseiList().get(0).get申請届出者続柄();
-
+        AtenaMeisho 申請届出者氏名 = null;
+        AtenaKanaMeisho 申請届出者氏名カナ = null;
+        RString 申請届出者続柄 = RString.EMPTY;
+        YubinNo 申請届出者郵便番号 = null;
+        AtenaJusho 申請届出者住所 = null;
+        TelNo 申請届出者電話番号 = null;
         JigyoshaNo 申請届出代行事業者番号 = null;
-        if (joho.getRiyoshaFutangakuGengaku().getGemmenGengakuShinseiList().get(0).get申請届出代行事業者番号() != null) {
-            joho.getRiyoshaFutangakuGengaku().getGemmenGengakuShinseiList().get(0).get申請届出代行事業者番号();
-        }
         JigyoshaKubun 事業者区分 = null;
-        if (joho.getRiyoshaFutangakuGengaku().getGemmenGengakuShinseiList().get(0).get事業者区分() != null) {
-            事業者区分 = JigyoshaKubun.toValue(joho.getRiyoshaFutangakuGengaku().getGemmenGengakuShinseiList().get(0).get事業者区分());
-        }
-        YubinNo 申請届出者郵便番号 = joho.getRiyoshaFutangakuGengaku().getGemmenGengakuShinseiList().get(0).get申請届出者郵便番号();
-        AtenaJusho 申請届出者住所 = joho.getRiyoshaFutangakuGengaku().getGemmenGengakuShinseiList().get(0).get申請届出者住所();
-        TelNo 申請届出者電話番号 = joho.getRiyoshaFutangakuGengaku().getGemmenGengakuShinseiList().get(0).get申請届出者電話番号();
 
+        if (joho.getRiyoshaFutangakuGengaku().getGemmenGengakuShinseiList().size() > 0) {
+            if (joho.getRiyoshaFutangakuGengaku().getGemmenGengakuShinseiList().get(0).get申請届出代行区分() != null) {
+                申請届出代行区分 = ShinseiTodokedeDaikoKubunCode.toValue(joho.getRiyoshaFutangakuGengaku().getGemmenGengakuShinseiList().get(0).get申請届出代行区分());
+            }
+            申請届出者氏名 = joho.getRiyoshaFutangakuGengaku().getGemmenGengakuShinseiList().get(0).get申請届出者氏名();
+            申請届出者氏名カナ = joho.getRiyoshaFutangakuGengaku().getGemmenGengakuShinseiList().get(0).get申請届出者氏名カナ();
+            申請届出者続柄 = joho.getRiyoshaFutangakuGengaku().getGemmenGengakuShinseiList().get(0).get申請届出者続柄();
+            if (joho.getRiyoshaFutangakuGengaku().getGemmenGengakuShinseiList().get(0).get申請届出代行事業者番号() != null) {
+                申請届出代行事業者番号 = joho.getRiyoshaFutangakuGengaku().getGemmenGengakuShinseiList().get(0).get申請届出代行事業者番号();
+            }
+            if (joho.getRiyoshaFutangakuGengaku().getGemmenGengakuShinseiList().get(0).get事業者区分() != null) {
+                事業者区分 = JigyoshaKubun.toValue(joho.getRiyoshaFutangakuGengaku().getGemmenGengakuShinseiList().get(0).get事業者区分());
+            }
+            申請届出者郵便番号 = joho.getRiyoshaFutangakuGengaku().getGemmenGengakuShinseiList().get(0).get申請届出者郵便番号();
+            申請届出者住所 = joho.getRiyoshaFutangakuGengaku().getGemmenGengakuShinseiList().get(0).get申請届出者住所();
+            申請届出者電話番号 = joho.getRiyoshaFutangakuGengaku().getGemmenGengakuShinseiList().get(0).get申請届出者電話番号();
+        }
         return new ShinseiJoho(申請届出代行区分,
                 申請届出者氏名, 申請届出者氏名カナ, 申請届出者続柄, 申請届出代行事業者番号, 事業者区分, 申請届出者郵便番号, 申請届出者住所, 申請届出者電話番号);
+
     }
 
     private boolean 申請情報_変更あり(RiyoshaFutangakuGengaku 該当DB申請) {
@@ -830,7 +848,12 @@ public class RiyoshaFutangakuGengakuHandler {
     }
 
     private boolean is減免減額申請共有子Div等しい(RiyoshaFutangakuGengaku 該当DB申請) {
-        GemmenGengakuShinsei gemmenGengakuShinsei = 該当DB申請.getGemmenGengakuShinseiList().get(0);
+        GemmenGengakuShinsei gemmenGengakuShinsei;
+        if (該当DB申請.getGemmenGengakuShinseiList().size() > 0) {
+            gemmenGengakuShinsei = 該当DB申請.getGemmenGengakuShinseiList().get(0);
+        } else {
+            gemmenGengakuShinsei = new GemmenGengakuShinsei(ShoKisaiHokenshaNo.EMPTY, HihokenshaNo.EMPTY, GemmenGengakuShurui.利用者負担額減額.code(), 0);
+        }
 
         RString 申請届出代行区分page = get申請届出代行区分page();
 

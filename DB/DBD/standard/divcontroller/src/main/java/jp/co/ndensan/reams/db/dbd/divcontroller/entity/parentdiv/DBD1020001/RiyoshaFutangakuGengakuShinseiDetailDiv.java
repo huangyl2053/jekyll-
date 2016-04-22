@@ -30,12 +30,8 @@ public class RiyoshaFutangakuGengakuShinseiDetailDiv extends Panel {
     private TextBoxMultiLine txtShinseiRiyu;
     @JsonProperty("KetteiNaiyo")
     private KetteiNaiyoDiv KetteiNaiyo;
-    @JsonProperty("btnShinseiKakutei")
-    private Button btnShinseiKakutei;
-    @JsonProperty("btnConfirm")
-    private Button btnConfirm;
-    @JsonProperty("btnBackShinseiIchirai")
-    private Button btnBackShinseiIchirai;
+    @JsonProperty("ccdJohoAreaButton")
+    private ccdJohoAreaButtonDiv ccdJohoAreaButton;
     @JsonProperty("ccdShinseiJoho")
     private GemmenGengakuShinseiDiv ccdShinseiJoho;
 
@@ -100,57 +96,21 @@ public class RiyoshaFutangakuGengakuShinseiDetailDiv extends Panel {
     }
 
     /*
-     * getbtnShinseiKakutei
-     * @return btnShinseiKakutei
+     * getccdJohoAreaButton
+     * @return ccdJohoAreaButton
      */
-    @JsonProperty("btnShinseiKakutei")
-    public Button getBtnShinseiKakutei() {
-        return btnShinseiKakutei;
+    @JsonProperty("ccdJohoAreaButton")
+    public ccdJohoAreaButtonDiv getCcdJohoAreaButton() {
+        return ccdJohoAreaButton;
     }
 
     /*
-     * setbtnShinseiKakutei
-     * @param btnShinseiKakutei btnShinseiKakutei
+     * setccdJohoAreaButton
+     * @param ccdJohoAreaButton ccdJohoAreaButton
      */
-    @JsonProperty("btnShinseiKakutei")
-    public void setBtnShinseiKakutei(Button btnShinseiKakutei) {
-        this.btnShinseiKakutei = btnShinseiKakutei;
-    }
-
-    /*
-     * getbtnConfirm
-     * @return btnConfirm
-     */
-    @JsonProperty("btnConfirm")
-    public Button getBtnConfirm() {
-        return btnConfirm;
-    }
-
-    /*
-     * setbtnConfirm
-     * @param btnConfirm btnConfirm
-     */
-    @JsonProperty("btnConfirm")
-    public void setBtnConfirm(Button btnConfirm) {
-        this.btnConfirm = btnConfirm;
-    }
-
-    /*
-     * getbtnBackShinseiIchirai
-     * @return btnBackShinseiIchirai
-     */
-    @JsonProperty("btnBackShinseiIchirai")
-    public Button getBtnBackShinseiIchirai() {
-        return btnBackShinseiIchirai;
-    }
-
-    /*
-     * setbtnBackShinseiIchirai
-     * @param btnBackShinseiIchirai btnBackShinseiIchirai
-     */
-    @JsonProperty("btnBackShinseiIchirai")
-    public void setBtnBackShinseiIchirai(Button btnBackShinseiIchirai) {
-        this.btnBackShinseiIchirai = btnBackShinseiIchirai;
+    @JsonProperty("ccdJohoAreaButton")
+    public void setCcdJohoAreaButton(ccdJohoAreaButtonDiv ccdJohoAreaButton) {
+        this.ccdJohoAreaButton = ccdJohoAreaButton;
     }
 
     /*
@@ -243,6 +203,36 @@ public class RiyoshaFutangakuGengakuShinseiDetailDiv extends Panel {
     @JsonIgnore
     public void  setTxtHiShoninRiyu(TextBoxMultiLine txtHiShoninRiyu) {
         this.getKetteiNaiyo().setTxtHiShoninRiyu(txtHiShoninRiyu);
+    }
+
+    @JsonIgnore
+    public Button getBtnShinseiKakutei() {
+        return this.getCcdJohoAreaButton().getBtnShinseiKakutei();
+    }
+
+    @JsonIgnore
+    public void  setBtnShinseiKakutei(Button btnShinseiKakutei) {
+        this.getCcdJohoAreaButton().setBtnShinseiKakutei(btnShinseiKakutei);
+    }
+
+    @JsonIgnore
+    public Button getBtnBackShinseiIchirai() {
+        return this.getCcdJohoAreaButton().getBtnBackShinseiIchirai();
+    }
+
+    @JsonIgnore
+    public void  setBtnBackShinseiIchirai(Button btnBackShinseiIchirai) {
+        this.getCcdJohoAreaButton().setBtnBackShinseiIchirai(btnBackShinseiIchirai);
+    }
+
+    @JsonIgnore
+    public Button getBtnConfirm() {
+        return this.getCcdJohoAreaButton().getBtnConfirm();
+    }
+
+    @JsonIgnore
+    public void  setBtnConfirm(Button btnConfirm) {
+        this.getCcdJohoAreaButton().setBtnConfirm(btnConfirm);
     }
 
     // </editor-fold>

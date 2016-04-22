@@ -150,8 +150,8 @@ public class RiyoshaFutangakuGengakuPanel {
      */
     public ResponseData<RiyoshaFutangakuGengakuPanelDiv> onClick_btnBackShinseiIchirai(RiyoshaFutangakuGengakuPanelDiv div) {
         div.getDdlShinseiIchiran().setDisabled(false);
-        div.getBtnShinseiKakutei().setVisible(false);
-        div.getBtnConfirm().setVisible(false);
+        div.getBtnShinseiKakutei().setDisplayNone(true);
+        div.getBtnConfirm().setDisplayNone(true);
         getHandler(div).入力情報をクリア();
         return ResponseData.of(div).setState(DBD1020001StateName.一覧);
     }
@@ -348,8 +348,10 @@ public class RiyoshaFutangakuGengakuPanel {
 
             保存処理();
             前排他キーの解除();
-            div.getCcdKanryoMessage().setMessage(
-                    new RString(UrInformationMessages.正常終了.getMessage().replace("処理").evaluate()), RString.EMPTY, RString.EMPTY, true);
+            div.getCcdKanryoMessage().setSuccessMessage(new RString(UrInformationMessages.保存終了.getMessage().evaluate()));
+        } else if (new RString(UrQuestionMessages.保存の確認.getMessage().getCode())
+                .equals(ResponseHolder.getMessageCode()) && ResponseHolder.getButtonType() == MessageDialogSelectedResult.No) {
+            return ResponseData.of(div).respond();
         }
         return ResponseData.of(div).setState(DBD1020001StateName.完了メッセージ);
     }
@@ -448,7 +450,7 @@ public class RiyoshaFutangakuGengakuPanel {
             minRirekiNo = 1;
         }
 
-        int tmpRirekiNo = 0;
+        int tmpRirekiNo;
         RiyoshaFutangakuGengakuViewState joho１;
         RiyoshaFutangakuGengakuViewState joho２;
         size = not削除List.size();
@@ -535,7 +537,14 @@ public class RiyoshaFutangakuGengakuPanel {
             builder.set適用終了年月日(FlexibleDate.EMPTY);
         }
 
-        GemmenGengakuShinseiBuilder gemmenGengakuShinseiBuilder = dbObject.getGemmenGengakuShinseiList().get(0).createBuilderForEdit();
+        GemmenGengakuShinseiBuilder gemmenGengakuShinseiBuilder;
+        if (dbObject.getGemmenGengakuShinseiList().size() > 0) {
+            gemmenGengakuShinseiBuilder = dbObject.getGemmenGengakuShinseiList().get(0).createBuilderForEdit();
+        } else {
+            gemmenGengakuShinseiBuilder = new GemmenGengakuShinsei(joho.get証記載保険者番号(), joho.get被保険者番号(),
+                    GemmenGengakuShurui.利用者負担額減額.getコード(), joho.get履歴番号()).createBuilderForEdit();
+        }
+
         GemmenGengakuShinsei gemmenGengakuShinsei = joho.getGemmenGengakuShinseiList().get(0);
         if (gemmenGengakuShinsei.get事業者区分() != null && !空白KEY.equals(gemmenGengakuShinsei.get事業者区分())) {
             gemmenGengakuShinseiBuilder.set事業者区分(gemmenGengakuShinsei.get事業者区分());
@@ -593,37 +602,40 @@ public class RiyoshaFutangakuGengakuPanel {
             builder.set非承認理由(joho.get非承認理由());
         }
 
-        GemmenGengakuShinsei gemmenGengakuShinsei = new GemmenGengakuShinsei(joho.get証記載保険者番号(), joho.get被保険者番号(), GemmenGengakuShurui.利用者負担額減額.getコード(), joho.get履歴番号());
-        GemmenGengakuShinseiBuilder gemmenGengakuShinseiBuilder = gemmenGengakuShinsei.createBuilderForEdit();
-        if (gemmenGengakuShinsei.get事業者区分() != null && !空白KEY.equals(gemmenGengakuShinsei.get事業者区分())) {
-            gemmenGengakuShinseiBuilder.set事業者区分(gemmenGengakuShinsei.get事業者区分());
+        GemmenGengakuShinsei pageGemmenGengakuShinsei = joho.getGemmenGengakuShinseiList().get(0);
+        GemmenGengakuShinsei newPemmenGengakuShinsei = new GemmenGengakuShinsei(joho.get証記載保険者番号(),
+                joho.get被保険者番号(), GemmenGengakuShurui.利用者負担額減額.getコード(), joho.get履歴番号());
+
+        GemmenGengakuShinseiBuilder gemmenGengakuShinseiBuilder = newPemmenGengakuShinsei.createBuilderForEdit();
+        if (pageGemmenGengakuShinsei.get事業者区分() != null && !空白KEY.equals(pageGemmenGengakuShinsei.get事業者区分())) {
+            gemmenGengakuShinseiBuilder.set事業者区分(pageGemmenGengakuShinsei.get事業者区分());
         }
-        if (gemmenGengakuShinsei.get申請届出代行事業者番号() != null && !gemmenGengakuShinsei.get申請届出代行事業者番号().isEmpty()) {
-            gemmenGengakuShinseiBuilder.set申請届出代行事業者番号(gemmenGengakuShinsei.get申請届出代行事業者番号());
+        if (pageGemmenGengakuShinsei.get申請届出代行事業者番号() != null && !pageGemmenGengakuShinsei.get申請届出代行事業者番号().isEmpty()) {
+            gemmenGengakuShinseiBuilder.set申請届出代行事業者番号(pageGemmenGengakuShinsei.get申請届出代行事業者番号());
         }
-        if (gemmenGengakuShinsei.get申請届出代行区分() != null && !空白KEY.equals(gemmenGengakuShinsei.get申請届出代行区分())) {
-            gemmenGengakuShinseiBuilder.set申請届出代行区分(gemmenGengakuShinsei.get申請届出代行区分());
+        if (pageGemmenGengakuShinsei.get申請届出代行区分() != null && !空白KEY.equals(pageGemmenGengakuShinsei.get申請届出代行区分())) {
+            gemmenGengakuShinseiBuilder.set申請届出代行区分(pageGemmenGengakuShinsei.get申請届出代行区分());
         }
-        if (gemmenGengakuShinsei.get申請届出者住所() != null && !gemmenGengakuShinsei.get申請届出者住所().isEmpty()) {
-            gemmenGengakuShinseiBuilder.set申請届出者住所(gemmenGengakuShinsei.get申請届出者住所());
+        if (pageGemmenGengakuShinsei.get申請届出者住所() != null && !pageGemmenGengakuShinsei.get申請届出者住所().isEmpty()) {
+            gemmenGengakuShinseiBuilder.set申請届出者住所(pageGemmenGengakuShinsei.get申請届出者住所());
         }
-        if (gemmenGengakuShinsei.get申請届出者氏名() != null && !gemmenGengakuShinsei.get申請届出者氏名().isEmpty()) {
-            gemmenGengakuShinseiBuilder.set申請届出者氏名(gemmenGengakuShinsei.get申請届出者氏名());
+        if (pageGemmenGengakuShinsei.get申請届出者氏名() != null && !pageGemmenGengakuShinsei.get申請届出者氏名().isEmpty()) {
+            gemmenGengakuShinseiBuilder.set申請届出者氏名(pageGemmenGengakuShinsei.get申請届出者氏名());
         }
-        if (gemmenGengakuShinsei.get申請届出者氏名カナ() != null && !gemmenGengakuShinsei.get申請届出者氏名カナ().isEmpty()) {
-            gemmenGengakuShinseiBuilder.set申請届出者氏名カナ(gemmenGengakuShinsei.get申請届出者氏名カナ());
+        if (pageGemmenGengakuShinsei.get申請届出者氏名カナ() != null && !pageGemmenGengakuShinsei.get申請届出者氏名カナ().isEmpty()) {
+            gemmenGengakuShinseiBuilder.set申請届出者氏名カナ(pageGemmenGengakuShinsei.get申請届出者氏名カナ());
         }
-        if (gemmenGengakuShinsei.get申請届出者続柄() != null && !gemmenGengakuShinsei.get申請届出者続柄().isEmpty()) {
-            gemmenGengakuShinseiBuilder.set申請届出者続柄(gemmenGengakuShinsei.get申請届出者続柄());
+        if (pageGemmenGengakuShinsei.get申請届出者続柄() != null && !pageGemmenGengakuShinsei.get申請届出者続柄().isEmpty()) {
+            gemmenGengakuShinseiBuilder.set申請届出者続柄(pageGemmenGengakuShinsei.get申請届出者続柄());
         }
-        if (gemmenGengakuShinsei.get申請届出者郵便番号() != null && !gemmenGengakuShinsei.get申請届出者郵便番号().isEmpty()) {
-            gemmenGengakuShinseiBuilder.set申請届出者郵便番号(gemmenGengakuShinsei.get申請届出者郵便番号());
+        if (pageGemmenGengakuShinsei.get申請届出者郵便番号() != null && !pageGemmenGengakuShinsei.get申請届出者郵便番号().isEmpty()) {
+            gemmenGengakuShinseiBuilder.set申請届出者郵便番号(pageGemmenGengakuShinsei.get申請届出者郵便番号());
         }
-        if (gemmenGengakuShinsei.get申請届出者電話番号() != null && !gemmenGengakuShinsei.get申請届出者電話番号().isEmpty()) {
-            gemmenGengakuShinseiBuilder.set申請届出者電話番号(gemmenGengakuShinsei.get申請届出者電話番号());
+        if (pageGemmenGengakuShinsei.get申請届出者電話番号() != null && !pageGemmenGengakuShinsei.get申請届出者電話番号().isEmpty()) {
+            gemmenGengakuShinseiBuilder.set申請届出者電話番号(pageGemmenGengakuShinsei.get申請届出者電話番号());
         }
-        gemmenGengakuShinsei = gemmenGengakuShinseiBuilder.build();
-        builder.setGemmenGengakuShinsei(gemmenGengakuShinsei);
+        newPemmenGengakuShinsei = gemmenGengakuShinseiBuilder.build();
+        builder.setGemmenGengakuShinsei(newPemmenGengakuShinsei);
         object = builder.build();
         manager.save利用者負担額減額(object);
     }

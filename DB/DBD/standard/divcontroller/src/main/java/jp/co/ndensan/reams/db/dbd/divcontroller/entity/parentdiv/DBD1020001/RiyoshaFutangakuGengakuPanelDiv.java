@@ -40,10 +40,10 @@ public class RiyoshaFutangakuGengakuPanelDiv extends Panel {
     private RiyoshaFutangakuGengakuShinseiListDiv RiyoshaFutangakuGengakuShinseiList;
     @JsonProperty("RiyoshaFutangakuGengakuShinseiDetail")
     private RiyoshaFutangakuGengakuShinseiDetailDiv RiyoshaFutangakuGengakuShinseiDetail;
-    @JsonProperty("ccdKanryoMessage")
-    private KaigoKanryoMessageDiv ccdKanryoMessage;
     @JsonProperty("ccdKaigoKihon")
     private KaigoShikakuKihonDiv ccdKaigoKihon;
+    @JsonProperty("ccdKanryoMessage")
+    private KaigoKanryoMessageDiv ccdKanryoMessage;
     @JsonProperty("ccdAtenaInfo")
     private KaigoAtenaInfoDiv ccdAtenaInfo;
     @JsonProperty("hihokenshaNo")
@@ -134,21 +134,21 @@ public class RiyoshaFutangakuGengakuPanelDiv extends Panel {
     }
 
     /*
-     * getccdKanryoMessage
-     * @return ccdKanryoMessage
-     */
-    @JsonProperty("ccdKanryoMessage")
-    public IKaigoKanryoMessageDiv getCcdKanryoMessage() {
-        return ccdKanryoMessage;
-    }
-
-    /*
      * getccdKaigoKihon
      * @return ccdKaigoKihon
      */
     @JsonProperty("ccdKaigoKihon")
     public IKaigoShikakuKihonDiv getCcdKaigoKihon() {
         return ccdKaigoKihon;
+    }
+
+    /*
+     * getccdKanryoMessage
+     * @return ccdKanryoMessage
+     */
+    @JsonProperty("ccdKanryoMessage")
+    public IKaigoKanryoMessageDiv getCcdKanryoMessage() {
+        return ccdKanryoMessage;
     }
 
     /*
@@ -396,33 +396,43 @@ public class RiyoshaFutangakuGengakuPanelDiv extends Panel {
     }
 
     @JsonIgnore
+    public ccdJohoAreaButtonDiv getCcdJohoAreaButton() {
+        return this.getRiyoshaFutangakuGengakuShinseiDetail().getCcdJohoAreaButton();
+    }
+
+    @JsonIgnore
+    public void setCcdJohoAreaButton(ccdJohoAreaButtonDiv ccdJohoAreaButton) {
+        this.getRiyoshaFutangakuGengakuShinseiDetail().setCcdJohoAreaButton(ccdJohoAreaButton);
+    }
+
+    @JsonIgnore
     public Button getBtnShinseiKakutei() {
-        return this.getRiyoshaFutangakuGengakuShinseiDetail().getBtnShinseiKakutei();
+        return this.getRiyoshaFutangakuGengakuShinseiDetail().getCcdJohoAreaButton().getBtnShinseiKakutei();
     }
 
     @JsonIgnore
     public void setBtnShinseiKakutei(Button btnShinseiKakutei) {
-        this.getRiyoshaFutangakuGengakuShinseiDetail().setBtnShinseiKakutei(btnShinseiKakutei);
-    }
-
-    @JsonIgnore
-    public Button getBtnConfirm() {
-        return this.getRiyoshaFutangakuGengakuShinseiDetail().getBtnConfirm();
-    }
-
-    @JsonIgnore
-    public void setBtnConfirm(Button btnConfirm) {
-        this.getRiyoshaFutangakuGengakuShinseiDetail().setBtnConfirm(btnConfirm);
+        this.getRiyoshaFutangakuGengakuShinseiDetail().getCcdJohoAreaButton().setBtnShinseiKakutei(btnShinseiKakutei);
     }
 
     @JsonIgnore
     public Button getBtnBackShinseiIchirai() {
-        return this.getRiyoshaFutangakuGengakuShinseiDetail().getBtnBackShinseiIchirai();
+        return this.getRiyoshaFutangakuGengakuShinseiDetail().getCcdJohoAreaButton().getBtnBackShinseiIchirai();
     }
 
     @JsonIgnore
     public void setBtnBackShinseiIchirai(Button btnBackShinseiIchirai) {
-        this.getRiyoshaFutangakuGengakuShinseiDetail().setBtnBackShinseiIchirai(btnBackShinseiIchirai);
+        this.getRiyoshaFutangakuGengakuShinseiDetail().getCcdJohoAreaButton().setBtnBackShinseiIchirai(btnBackShinseiIchirai);
+    }
+
+    @JsonIgnore
+    public Button getBtnConfirm() {
+        return this.getRiyoshaFutangakuGengakuShinseiDetail().getCcdJohoAreaButton().getBtnConfirm();
+    }
+
+    @JsonIgnore
+    public void setBtnConfirm(Button btnConfirm) {
+        this.getRiyoshaFutangakuGengakuShinseiDetail().getCcdJohoAreaButton().setBtnConfirm(btnConfirm);
     }
 
     @JsonIgnore
