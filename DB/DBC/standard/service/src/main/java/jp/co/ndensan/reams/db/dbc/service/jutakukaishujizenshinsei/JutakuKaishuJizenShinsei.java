@@ -44,7 +44,9 @@ import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ServiceShur
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShoKisaiHokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.message.DbxErrorMessages;
 import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT7060KaigoJigyoshaEntity;
+import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT7130KaigoServiceShuruiEntity;
 import jp.co.ndensan.reams.db.dbx.persistence.db.basic.DbT7060KaigoJigyoshaDac;
+import jp.co.ndensan.reams.db.dbx.persistence.db.basic.DbT7130KaigoServiceShuruiDac;
 import jp.co.ndensan.reams.db.dbx.service.ShichosonSecurityJoho;
 import jp.co.ndensan.reams.db.dbx.service.core.dbbusinessconfig.DbBusinessConifg;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT1001HihokenshaDaichoEntity;
@@ -85,6 +87,7 @@ public class JutakuKaishuJizenShinsei {
     private final DbT4021ShiharaiHohoHenkoDac hohoHenkoDac;
     private final DbT4014RiyoshaFutangakuGengakuDac 負担額減額Dac;
     private final DbT7060KaigoJigyoshaDac 介護事業者Dac;
+    private final DbT7130KaigoServiceShuruiDac 介護サービス種類Dac;
     private static final int 区分 = 6;
     private static final RString キー = new RString("hiHokenshaNo");
     private static final RString モード_修正 = new RString("修正");
@@ -119,6 +122,7 @@ public class JutakuKaishuJizenShinsei {
         this.hohoHenkoDac = InstanceProvider.create(DbT4021ShiharaiHohoHenkoDac.class);
         this.負担額減額Dac = InstanceProvider.create(DbT4014RiyoshaFutangakuGengakuDac.class);
         this.介護事業者Dac = InstanceProvider.create(DbT7060KaigoJigyoshaDac.class);
+        this.介護サービス種類Dac = InstanceProvider.create(DbT7130KaigoServiceShuruiDac.class);
 
     }
 
@@ -154,7 +158,8 @@ public class JutakuKaishuJizenShinsei {
             DbT7112ShokanShuruiShikyuGendoGakuDac shuruiShikyuGendoGakuDac,
             DbT4021ShiharaiHohoHenkoDac hohoHenkoDac,
             DbT4014RiyoshaFutangakuGengakuDac 負担額減額Dac,
-            DbT7060KaigoJigyoshaDac 介護事業者Dac) {
+            DbT7060KaigoJigyoshaDac 介護事業者Dac,
+            DbT7130KaigoServiceShuruiDac 介護サービス種類Dac) {
         this.mapperProvider = mapperProvider;
         this.受給者台帳Dac = 受給者台帳Dac;
         this.jutakuKaishuDac = jutakuKaishuDac;
@@ -165,6 +170,7 @@ public class JutakuKaishuJizenShinsei {
         this.hohoHenkoDac = hohoHenkoDac;
         this.負担額減額Dac = 負担額減額Dac;
         this.介護事業者Dac = 介護事業者Dac;
+        this.介護サービス種類Dac = 介護サービス種類Dac;
 
     }
 
@@ -569,5 +575,20 @@ public class JutakuKaishuJizenShinsei {
             return new AtenaMeisho(RString.EMPTY);
         }
         return entity.getJigyoshaName();
+    }
+
+    /**
+     * サーピス種類名称を取得する
+     *
+     * @param サービス種類コード サービス種類コード
+     * @param サービス提供年月 サービス提供年月
+     * @return サーピス種類名称
+     */
+    public RString getServiceShuruiMeisho(ServiceShuruiCode サービス種類コード, FlexibleYearMonth サービス提供年月) {
+        DbT7130KaigoServiceShuruiEntity entity = 介護サービス種類Dac.select給付種類(サービス種類コード, サービス提供年月);
+        if (entity == null) {
+            return RString.EMPTY;
+        }
+        return entity.getServiceShuruiMeisho();
     }
 }

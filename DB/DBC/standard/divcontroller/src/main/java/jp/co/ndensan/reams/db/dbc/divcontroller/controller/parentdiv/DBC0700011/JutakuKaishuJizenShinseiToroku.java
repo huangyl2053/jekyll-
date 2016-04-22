@@ -73,7 +73,7 @@ public class JutakuKaishuJizenShinseiToroku {
         div.getKaigoShikakuKihonShaPanel().getCcdKaigoShikakuKihon().onLoad(識別コード);
 
         // TODO 単体テスト
-//        ViewStateHolder.put(ViewStateKeys.処理モード, new RString("照会"));
+//        ViewStateHolder.put(ViewStateKeys.処理モード, 修正モード);
         JutakuKaishuJizenShinseiTorokuDivHandler handler = getHandler(div);
         RString state = ViewStateHolder.get(ViewStateKeys.処理モード, RString.class);
         if (state != null) {
@@ -396,6 +396,7 @@ public class JutakuKaishuJizenShinseiToroku {
             if (new RString(DbcQuestionMessages.限度額変更確認.getMessage().getCode())
                     .equals(ResponseHolder.getMessageCode())
                     && ResponseHolder.getButtonType() == MessageDialogSelectedResult.No) {
+                div.setHidInputCheckMsgDisplayedFlg(RString.EMPTY);
                 return ResponseData.of(div).respond();
             }
         }
