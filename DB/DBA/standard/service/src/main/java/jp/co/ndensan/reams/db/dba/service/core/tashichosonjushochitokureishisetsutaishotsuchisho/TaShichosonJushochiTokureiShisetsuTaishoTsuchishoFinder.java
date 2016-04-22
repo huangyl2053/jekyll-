@@ -210,8 +210,7 @@ public class TaShichosonJushochiTokureiShisetsuTaishoTsuchishoFinder {
         outEntity.set市町村名(association.get市町村名());
         outEntity.set公印省略(builder.buildSource().koinShoryaku);
 
-        TatokuKanrenChohyoTaishoTsuchishoBusiness business = new TatokuKanrenChohyoTaishoTsuchishoBusiness(outEntity);
-        return business;
+        return new TatokuKanrenChohyoTaishoTsuchishoBusiness(outEntity);
     }
 
     /**
