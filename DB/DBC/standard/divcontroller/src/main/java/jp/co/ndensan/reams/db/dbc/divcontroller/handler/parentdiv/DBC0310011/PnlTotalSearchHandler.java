@@ -8,8 +8,8 @@ package jp.co.ndensan.reams.db.dbc.divcontroller.handler.parentdiv.DBC0310011;
 import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbc.business.core.basic.JuryoininKeiyakuJigyosha;
-import jp.co.ndensan.reams.db.dbc.business.core.basic.ShokanJuryoininKeiyakusha;
 import jp.co.ndensan.reams.db.dbc.business.core.shokanjuryoininkeiyakusha.ShokanJuryoininKeiyakushaParameter;
+import jp.co.ndensan.reams.db.dbc.business.core.shokanjuryoininkeiyakusha.ShokanJuryoininKeiyakushaResult;
 import jp.co.ndensan.reams.db.dbc.definition.core.keiyakuservice.KeiyakuServiceShurui;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0310011.PnlTotalSearchDiv;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0310011.dgKeyakusya_Row;
@@ -159,11 +159,9 @@ public class PnlTotalSearchHandler {
      * @param parameter パラメータ
      * @return List<ShokanJuryoininKeiyakusha>
      */
-    public List<ShokanJuryoininKeiyakusha> get契約者一覧(ShokanJuryoininKeiyakushaParameter parameter) {
+    public List<ShokanJuryoininKeiyakushaResult> get契約者一覧(ShokanJuryoininKeiyakushaParameter parameter) {
         ShokanJuryoininKeiyakushaFinder finder = ShokanJuryoininKeiyakushaFinder.createInstance();
-        // TODO
-//        return finder.getShokanJuryoininKeiyakushaList(parameter);
-        return null;
+        return finder.getShokanJuryoininKeiyakushaList(parameter);
     }
 
     /**
@@ -171,7 +169,7 @@ public class PnlTotalSearchHandler {
      *
      * @param shokanList List<ShokanJuryoininKeiyakusha>
      */
-    public void initializeGrid(List<ShokanJuryoininKeiyakusha> shokanList) {
+    public void initializeGrid(List<ShokanJuryoininKeiyakushaResult> shokanList) {
         div.getPnlSearch().setDisplayNone(true);
         div.getPnlKeiyakusyaList().setDisplayNone(false);
         div.getPnlKeiyakusyaList().getBtnSearchAgain().setDisabled(false);
@@ -182,22 +180,23 @@ public class PnlTotalSearchHandler {
         }
         int maxCount = div.getPnlSearch().getTxtMaxCount().getValue().intValue();
         int count = 0;
-        for (ShokanJuryoininKeiyakusha list : shokanList) {
+        for (ShokanJuryoininKeiyakushaResult list : shokanList) {
             dgKeyakusya_Row row = new dgKeyakusya_Row();
-            row.setTxtKeiyakuNo(list.get契約番号());
-            if (list.get契約サービス種類() != null && !list.get契約サービス種類().isEmpty()) {
-                row.setTxtServiceShurui(KeiyakuServiceShurui.toValue(list.get契約サービス種類()).get名称());
+            row.setTxtKeiyakuNo(list.getEntity().getDbt3078entity().getKeiyakuNo());
+            if (list.getEntity().getDbt3078entity().getKeiyakuServiceShurui() != null
+                    && !list.getEntity().getDbt3078entity().getKeiyakuServiceShurui().isEmpty()) {
+                row.setTxtServiceShurui(KeiyakuServiceShurui
+                        .toValue(list.getEntity().getDbt3078entity().getKeiyakuServiceShurui()).get名称());
             }
-            row.setTxtHihoNo(list.get被保険者番号().getColumnValue());
-            // TODO QA.334(Redmine#:78267)
-            row.setTxtShimei(new RString("宛名"));
-            row.getTxtKeiyakuShenseibi().setValue(new RDate(list.get申請年月日().toString()));
-            if (list.get決定年月日() != null && !list.get決定年月日().isEmpty()) {
-                row.getTxtKeiyakuKeteibi().setValue(new RDate(list.get決定年月日().toString()));
+            row.setTxtHihoNo(list.getEntity().getDbt3078entity().getHihokenshaNo().getColumnValue());
+            row.setTxtShimei(list.getEntity().get氏名().getName().getColumnValue());
+            row.getTxtKeiyakuShenseibi().setValue(new RDate(list.getEntity().getDbt3078entity().getShinseiYMD().toString()));
+            if (list.getEntity().getDbt3078entity().getKetteiYMD() != null
+                    && !list.getEntity().getDbt3078entity().getKetteiYMD().isEmpty()) {
+                row.getTxtKeiyakuKeteibi().setValue(new RDate(list.getEntity().getDbt3078entity().getKetteiYMD().toString()));
             }
-            row.setTxtKeiyakuJigyoshaNo(list.get契約事業者番号());
-            // TODO QA.375(Redmine#:78535)
-            row.setTxtKeiyakuJigyoshamei(new RString("届出者事業者名称"));
+            row.setTxtKeiyakuJigyoshaNo(list.getEntity().getDbt3078entity().getKeiyakuJigyoshaNo());
+            row.setTxtKeiyakuJigyoshamei(list.getEntity().getDbt3077entity().getKeiyakuJigyoshaName().getColumnValue());
             rowList.add(row);
             count = count + 1;
             if (count >= maxCount) {

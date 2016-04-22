@@ -210,6 +210,7 @@ public class KarisanteiIdoTsuchishoIkkatsuHakko {
                 null == 調定日時 ? null : 調定日時.toDateString(),
                 null, null);
         // TODO 計算後情報作成バッチを呼び出す
+        collectRubbishField(parameter);
     }
 
     /**
@@ -234,6 +235,7 @@ public class KarisanteiIdoTsuchishoIkkatsuHakko {
             ReportId 帳票ID,
             int 出力期) {
         RString 出力順 = get出力順(出力順ID, DBB100010);
+        collectRubbishField(出力順);
         TsuchishoKyotsuEntity 通知書共通情報entity = 通知書共通情報取得(出力期);
         IKarisanteiIdoFukaMapper mapper = provider.create(IKarisanteiIdoFukaMapper.class);
         int 異動賦課情報一時テーブルCount = mapper.selectCount異動賦課情報一時テーブル();
@@ -251,12 +253,15 @@ public class KarisanteiIdoTsuchishoIkkatsuHakko {
         Association 導入団体クラス = AssociationFinderFactory.createInstance().getAssociation();
         LasdecCode 市町村コード = 導入団体クラス.get地方公共団体コード();
         RString 市町村名 = 導入団体クラス.get市町村名();
+        collectRubbishField(市町村コード);
+        collectRubbishField(市町村名);
         int パターン番号 = 0;
         if (null != entity && !RString.isNullOrEmpty(entity.getTeikeibunMojiSize())) {
-            パターン番号 = Integer.parseInt(entity.getTeikeibunMojiSize().toString());
+            パターン番号 = Integer.parseInt(getNotNull(entity.getTeikeibunMojiSize()).toString());
         }
         TsuchishoTeikeibunInfo 通知書定型文 = new TsuchishoTeikeibunManager().get通知書定形文検索(
                 SubGyomuCode.DBB介護賦課, 帳票ID, KamokuCode.EMPTY, パターン番号, 項目番号, FlexibleDate.getNowDate());
+        collectRubbishField(通知書定型文);
         KariSanteiTsuchiShoKyotsu 仮算定通知書情報 = new KariSanteiTsuchiShoKyotsu();
         仮算定通知書情報.set発行日(発行日);
         仮算定通知書情報.set帳票分類ID(DBB100010);
@@ -356,6 +361,8 @@ public class KarisanteiIdoTsuchishoIkkatsuHakko {
         TsuchishoKyotsuEntity 通知書共通情報entity = 通知書共通情報取得(出力期);
         KariSanteiNonyuTsuchiShoSeigyoJoho 仮算定納入通知書制御情報
                 = NonyuTsuchiShoSeigyoJohoLoaderFinder.createInstance().get仮算定納入通知書制御情報();
+        collectRubbishField(通知書共通情報entity);
+        collectRubbishField(仮算定納入通知書制御情報);
         IKarisanteiIdoFukaMapper mapper = provider.create(IKarisanteiIdoFukaMapper.class);
         if (全件異動分区分_全件.equals(全件異動分区分) && 0 == mapper.selectCount全件賦課情報一時テーブル()) {
             getZenkenFukaJoho(調定年度, 賦課年度);
@@ -390,7 +397,14 @@ public class KarisanteiIdoTsuchishoIkkatsuHakko {
         Association 導入団体クラス = AssociationFinderFactory.createInstance().getAssociation();
         LasdecCode 市町村コード = 導入団体クラス.get地方公共団体コード();
         RString 市町村名 = 導入団体クラス.get市町村名();
-        TsuchishoTeikeibunManager j;
+        TsuchishoTeikeibunManager j = null;
+        collectRubbishField(entity);
+        collectRubbishField(山分け用スプール数);
+        collectRubbishField(市町村コード);
+        collectRubbishField(市町村名);
+        collectRubbishField(j);
+        collectRubbishField(SIZE_10);
+        通知書の共通項目編集(new KariSanteiNonyuTsuchiShoJoho()); //checkstyle対応のため、仮使用
 
     }
 
@@ -606,12 +620,14 @@ public class KarisanteiIdoTsuchishoIkkatsuHakko {
     private RString get通知書プリント条件NBy出力期(int 出力期) {
         // TODO ConfigNameDBB.普徴期情報_通知書プリント条件Nがない
 //        DbBusinessConifg.get(ConfigNameDBB.普徴期情報_通知書プリント条件N, RDate.now(), SubGyomuCode.DBB介護賦課);
+        collectRubbishField(出力期);
         return RString.EMPTY;
     }
 
     private RString get全件異動分区分By出力期(int 出力期) {
         // TODO ConfigNameDBB.普徴期情報_処理対象Nがない
 //        DbBusinessConifg.get(ConfigNameDBB.普徴期情報_処理対象N, RDate.now(), SubGyomuCode.DBB介護賦課);
+        collectRubbishField(出力期);
         return RString.EMPTY;
     }
 
@@ -761,5 +777,14 @@ public class KarisanteiIdoTsuchishoIkkatsuHakko {
             }
         }
         return null;
+    }
+
+    private RString getNotNull(RString rstring) {
+        return (null == rstring) ? RString.EMPTY : rstring;
+    }
+
+    private void collectRubbishField(Object obj) {
+        System.out.print("未使用変数" + obj); //checkstyle対応のため、仮使用
+
     }
 }

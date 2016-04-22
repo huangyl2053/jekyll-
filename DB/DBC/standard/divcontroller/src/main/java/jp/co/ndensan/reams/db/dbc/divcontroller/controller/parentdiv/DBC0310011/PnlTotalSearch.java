@@ -6,8 +6,8 @@
 package jp.co.ndensan.reams.db.dbc.divcontroller.controller.parentdiv.DBC0310011;
 
 import java.util.List;
-import jp.co.ndensan.reams.db.dbc.business.core.basic.ShokanJuryoininKeiyakusha;
 import jp.co.ndensan.reams.db.dbc.business.core.shokanjuryoininkeiyakusha.ShokanJuryoininKeiyakushaParameter;
+import jp.co.ndensan.reams.db.dbc.business.core.shokanjuryoininkeiyakusha.ShokanJuryoininKeiyakushaResult;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0300011.DBC0300011TransitionEventName;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0310011.DBC0310011TransitionEventName;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0310011.PnlTotalSearchDiv;
@@ -38,6 +38,7 @@ public class PnlTotalSearch {
     private static final RString 修正 = new RString("修正");
     private static final RString 削除 = new RString("削除");
     private static final RString 参照 = new RString("参照");
+    private static final RString 未入力エラー = new RString("検索条件の項目いずれも");
 
     /**
      * コンストラクタです。
@@ -59,14 +60,14 @@ public class PnlTotalSearch {
         ShokanJuryoininKeiyakushaParameter parameter = ViewStateHolder
                 .get(ViewStateKeys.契約者一覧検索キー, ShokanJuryoininKeiyakushaParameter.class);
         if (parameter != null) {
-            List<ShokanJuryoininKeiyakusha> shokanList = getHandler(div).get契約者一覧(parameter);
-            if (shokanList == null || shokanList.isEmpty()) {
+            List<ShokanJuryoininKeiyakushaResult> shokanResultList = getHandler(div).get契約者一覧(parameter);
+            if (shokanResultList == null || shokanResultList.isEmpty()) {
                 return ResponseData.of(div).respond();
             }
             Decimal 最大取得件数 = ViewStateHolder
                     .get(ViewStateKeys.受領委任契約事業者検索最大件数, Decimal.class);
             div.getPnlSearch().getTxtMaxCount().setValue(最大取得件数);
-            return set契約者一覧(div, shokanList);
+            return set契約者一覧(div, shokanResultList);
         }
         return ResponseData.of(div).respond();
     }
@@ -178,9 +179,8 @@ public class PnlTotalSearch {
                 && div.getPnlSearch().getTxtYear().getDomain() == null
                 && div.getPnlSearch().getTxtKeiyakuNo().getValue().isEmpty()) {
             if (!ResponseHolder.isReRequest()) {
-                // TODO QA No.472(Redmine#:79879)
                 throw new ApplicationException(UrWarningMessages.未入力.getMessage()
-                        .replace("検索条件の項目いずれも"));
+                        .replace(未入力エラー.toString()).evaluate());
             }
             return ResponseData.of(div).respond();
         }
@@ -189,8 +189,8 @@ public class PnlTotalSearch {
         ViewStateHolder.put(ViewStateKeys.被保険者名, div.getPnlSearch().getTxtName().getValue());
         ViewStateHolder.put(ViewStateKeys.契約事業者名, div.getPnlSearch().getTxtJigyoshakeiyakuName().getValue());
         ViewStateHolder.put(ViewStateKeys.受領委任契約事業者検索最大件数, div.getPnlSearch().getTxtMaxCount().getValue());
-        List<ShokanJuryoininKeiyakusha> shokanList = getHandler(div).get契約者一覧(parameter);
-        return set契約者一覧(div, shokanList);
+        List<ShokanJuryoininKeiyakushaResult> shokanResultList = getHandler(div).get契約者一覧(parameter);
+        return set契約者一覧(div, shokanResultList);
     }
 
     /**
@@ -254,10 +254,10 @@ public class PnlTotalSearch {
      * @return ResponseData<PnlTotalSearchDiv>
      */
     private ResponseData<PnlTotalSearchDiv> set契約者一覧(PnlTotalSearchDiv div,
-            List<ShokanJuryoininKeiyakusha> shokanList) {
+            List<ShokanJuryoininKeiyakushaResult> shokanResultList) {
         div.getPnlSearch().getDdlKeiyakuServiceShurui().setDataSource(getHandler(div).createDropDownList());
         int maxCount = div.getPnlSearch().getTxtMaxCount().getValue().intValue();
-        if (shokanList != null && shokanList.size() > maxCount) {
+        if (shokanResultList != null && shokanResultList.size() > maxCount) {
             if (!ResponseHolder.isReRequest()) {
                 QuestionMessage message = new QuestionMessage(
                         DbzQuestionMessages.最大表示件数超過確認.getMessage().getCode(),
@@ -267,10 +267,10 @@ public class PnlTotalSearch {
             if (new RString(DbzQuestionMessages.最大表示件数超過確認.getMessage().getCode())
                     .equals(ResponseHolder.getMessageCode())
                     && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
-                getHandler(div).initializeGrid(shokanList);
+                getHandler(div).initializeGrid(shokanResultList);
             }
         } else {
-            getHandler(div).initializeGrid(shokanList);
+            getHandler(div).initializeGrid(shokanResultList);
         }
         return ResponseData.of(div).respond();
     }

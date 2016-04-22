@@ -87,10 +87,8 @@ public class JogaishaTorokuHandler {
         div.getJogaishaTorokuIchiran().getNenreiTotatsh().getDgNenreiTotatshusha().setDataSource(rowList);
         div.getJogaishaTorokuIchiran().getJogaiTaishoIchiran().setDisabled(true);
         LockingKey lockingKey = new LockingKey(new RString("ShikakuShutokuJogaishaToroku"));
-        if (RealInitialLocker.tryGetLock(lockingKey)) {
-            RealInitialLocker.lock(lockingKey);
-        } else {
-            div.getJogaishaTorokuIchiran().setDisabled(true);
+        if (!RealInitialLocker.tryGetLock(lockingKey)) {
+            div.setReadOnly(true);
             throw new ApplicationException(UrErrorMessages.排他_他のユーザが使用中.getMessage());
         }
         アクセスログ();
