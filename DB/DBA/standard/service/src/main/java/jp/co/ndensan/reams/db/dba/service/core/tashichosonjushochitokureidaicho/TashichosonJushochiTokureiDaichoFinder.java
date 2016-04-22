@@ -237,7 +237,7 @@ public class TashichosonJushochiTokureiDaichoFinder {
      * @return 他市町村住所地特例者情報Entityリスト
      */
     public List<OtherAddressInfEntity> get他市町村住所地特例者情報(ShikibetsuCode 識別コード) {
-        RString 保険者種別 = GyomuCode.DB介護保険.getColumnValue();
+        RString 保険者種別 = new RString("08");
         OtherAddressInformationParameter 検索条件
                 = OtherAddressInformationParameter.createParam_ServiceOtherAddressInformation(識別コード, 保険者種別);
         MapperProvider mapperProvider = InstanceProvider.create(MapperProvider.class);
