@@ -6,11 +6,12 @@
 package jp.co.ndensan.reams.db.dbz.business.core.sonotakikanguide;
 
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5914SonotaKikanJohoEntity;
+import jp.co.ndensan.reams.uz.uza.biz.TelNo;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
  * その他機関情報のビジネスクラスです。
- * 
+ *
  * @reamsid_L DBE-3000-050 wangkun
  */
 public class SoNoTaKikanGuide {
@@ -59,9 +60,9 @@ public class SoNoTaKikanGuide {
      * @return 電話番号
      */
     public RString get電話番号() {
-        return entity.getTelNo() == null ? RString.EMPTY : entity.getTelNo().getColumnValue();
+        return entity.getTelNo() == null ? RString.EMPTY : checkTelNo(entity.getTelNo());
     }
-    
+
     /**
      * 調査委託区分を取得します。
      *
@@ -69,5 +70,13 @@ public class SoNoTaKikanGuide {
      */
     public RString get調査委託区分() {
         return entity.getChosaItakuKubun() == null ? RString.EMPTY : entity.getChosaItakuKubun();
+    }
+
+    private RString checkTelNo(TelNo no) {
+        RString telNo = RString.EMPTY;
+        if (no != null && !RString.isNullOrEmpty(no.getColumnValue())) {
+            telNo = no.getColumnValue();
+        }
+        return telNo;
     }
 }
