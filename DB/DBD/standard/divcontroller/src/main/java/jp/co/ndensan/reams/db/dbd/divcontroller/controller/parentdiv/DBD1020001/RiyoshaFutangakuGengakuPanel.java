@@ -32,9 +32,9 @@ import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBU;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HokenKyufuRitsu;
 import jp.co.ndensan.reams.db.dbx.service.core.dbbusinessconfig.DbBusinessConifg;
+import jp.co.ndensan.reams.db.dbz.definition.core.ViewStateKeys;
 import jp.co.ndensan.reams.db.dbz.definition.core.futanwariai.FutanwariaiKubun;
 import jp.co.ndensan.reams.db.dbz.definition.message.DbzInformationMessages;
-import jp.co.ndensan.reams.db.dbz.divcontroller.viewbox.ViewStateKeys;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrInformationMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrQuestionMessages;
 import jp.co.ndensan.reams.uz.uza.biz.GyomuCode;
@@ -387,7 +387,8 @@ public class RiyoshaFutangakuGengakuPanel {
         for (RiyoshaFutangakuGengakuViewState viewState : orderViewStateList) {
             if (EntityDataState.Added == viewState.getState()) {
                 追加List.add(viewState);
-            } else if (EntityDataState.Modified == viewState.getState() && viewState.getShorigoRirekiNo() == viewState.getRiyoshaFutangakuGengaku().get履歴番号()) {
+            } else if (EntityDataState.Modified == viewState.getState()
+                    && viewState.getShorigoRirekiNo() == viewState.getRiyoshaFutangakuGengaku().get履歴番号()) {
                 修正List.add(viewState);
             } else if (viewState.getShorigoRirekiNo() != viewState.getRiyoshaFutangakuGengaku().get履歴番号()) {
                 履歴修正ありList.add(viewState);
