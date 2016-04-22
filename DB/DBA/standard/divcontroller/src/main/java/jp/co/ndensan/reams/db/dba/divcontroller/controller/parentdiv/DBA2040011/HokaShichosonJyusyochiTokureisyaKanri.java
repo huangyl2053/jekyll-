@@ -73,9 +73,7 @@ public class HokaShichosonJyusyochiTokureisyaKanri {
             ValidationMessageControlPairs validationMessages = new ValidationMessageControlPairs();
             validationMessages.add(new ValidationMessageControlPair(TekiyoJogaiTotalErrorMessage.排他_他のユーザが使用中));
             return ResponseData.of(div).addValidationMessages(validationMessages).respond();
-
         }
-
         koshinzen = div.getCddTaJushochiTokureishaKanri().get適用情報一覧();
         if (メニューID_施設入所により適用.equals(menuId) || メニューID_転入転出保留対象者管理.equals(menuId)) {
             return ResponseData.of(div).setState(DBA2040011StateName.追加適用);
