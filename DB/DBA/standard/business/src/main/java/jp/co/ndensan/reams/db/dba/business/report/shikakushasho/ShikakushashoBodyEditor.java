@@ -6,9 +6,9 @@
 package jp.co.ndensan.reams.db.dba.business.report.shikakushasho;
 
 import java.util.List;
-import jp.co.ndensan.reams.db.dba.entity.db.relate.kaigohokenshikakushasho.KyufuseigenDataEntity;
-import jp.co.ndensan.reams.db.dba.entity.db.relate.kaigohokenshikakushasho.NyushoShisetsuDataEntity;
-import jp.co.ndensan.reams.db.dba.entity.db.relate.kaigohokenshikakushasho.ShuruiShikyuGendoKizyunngakuEntity;
+import jp.co.ndensan.reams.db.dba.business.core.kaigohokenshikakushasho.KyufuseigenBusiness;
+import jp.co.ndensan.reams.db.dba.business.core.kaigohokenshikakushasho.NyushoShisetsuBusiness;
+import jp.co.ndensan.reams.db.dba.business.core.kaigohokenshikakushasho.ShuruiShikyuGendoKizyunngakuBusiness;
 import jp.co.ndensan.reams.db.dba.entity.report.shikakushasho.ShikakushashoReportSource;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
@@ -75,8 +75,8 @@ public class ShikakushashoBodyEditor implements IShikakushashoEditor {
         source.kubunShikyuYukoShuryoYMD = item.getKubunShikyuYukoShuryoYMD();
         source.kubunShikyuTaniShurui = item.getKubunShikyuTaniShurui();
         source.kubunShikyuTani = item.getKubunShikyuTani();
-        if (!item.getShuruiShikyuGendoEntity().isEmpty()) {
-            List<ShuruiShikyuGendoKizyunngakuEntity> gakuEntityList = item.getShuruiShikyuGendoEntity();
+        if (!item.getShuruiShikyuGendoBusiness().isEmpty()) {
+            List<ShuruiShikyuGendoKizyunngakuBusiness> gakuEntityList = item.getShuruiShikyuGendoBusiness();
             for (int i = 1; i <= gakuEntityList.size(); i++) {
                 if (i == 1) {
                     source.shuruiShikyuServiceName1 = gakuEntityList.get(0).getServiceShurui();
@@ -111,8 +111,8 @@ public class ShikakushashoBodyEditor implements IShikakushashoEditor {
             }
         }
         source.serviceRyui = item.getServiceRyui();
-        if (!item.getKyufuseigenEntity().isEmpty()) {
-            List<KyufuseigenDataEntity> seigenEntityList = item.getKyufuseigenEntity();
+        if (!item.getKyufuseigenBusiness().isEmpty()) {
+            List<KyufuseigenBusiness> seigenEntityList = item.getKyufuseigenBusiness();
             for (int i = 1; i <= seigenEntityList.size(); i++) {
                 if (i == 1) {
                     source.kyufuseigenNaiyo1 = seigenEntityList.get(0).getKyufuseigenNaiyo();
@@ -150,8 +150,8 @@ public class ShikakushashoBodyEditor implements IShikakushashoEditor {
         source.keikakuTodokedeYMD3 = item.getKeikakuTodokedeYMD3();
         source.keikakuTodokedeYMD3Asutarisuku = item.getKeikakuTodokedeYMD3Asutarisuku();
         source.keikakuTodokedeYMD3Masshosen = item.getKeikakuTodokedeYMD3Masshosen();
-        if (!item.getNyushoShisetsuEntity().isEmpty()) {
-            List<NyushoShisetsuDataEntity> entityList = item.getNyushoShisetsuEntity();
+        if (!item.getNyushoShisetsuBusiness().isEmpty()) {
+            List<NyushoShisetsuBusiness> entityList = item.getNyushoShisetsuBusiness();
             for (int i = 1; i <= entityList.size(); i++) {
                 if (i == 1) {
                     source.nyushoShisetsuShurui1 = entityList.get(0).getNyushoShisetsuShurui();

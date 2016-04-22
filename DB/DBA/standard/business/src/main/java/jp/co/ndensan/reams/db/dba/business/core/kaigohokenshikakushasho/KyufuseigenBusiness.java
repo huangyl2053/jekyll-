@@ -3,22 +3,21 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dba.entity.db.relate.kaigohokenshikakushasho;
+package jp.co.ndensan.reams.db.dba.business.core.kaigohokenshikakushasho;
 
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
- * 介護保険施設等ビジネスです。
+ * 給付制限ビジネスです。
  *
  * @reamsid_L DBU-0490-040 suguangjun
  */
 @lombok.Getter
 @lombok.Setter
 @SuppressWarnings("PMD.UnusedPrivateField")
-public class NyushoShisetsuDataEntity {
+public class KyufuseigenBusiness {
 
-    private RString nyushoShisetsuShurui;
-    private RString nyushoShisetsuName;
-    private RString shisetsuNyushoYMD;
-    private RString shisetsuTaishoYMD;
+    private RString kyufuseigenNaiyo;
+    private RString kyufuseigenKaishiYMD;
+    private RString kyufuseigenShuryoYMD;
 }
