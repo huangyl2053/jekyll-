@@ -574,7 +574,7 @@ public class FukaJoho extends ParentModelBase<FukaJohoIdentifier, DbT2002FukaEnt
      */
     public Decimal get特徴期別金額01() {
 
-        return this.get期別金額(INT_1, ChoshuHohoKibetsu.普通徴収.getコード());
+        return this.get期別金額(INT_1, ChoshuHohoKibetsu.特別徴収.getコード());
     }
 
     /**
@@ -584,7 +584,7 @@ public class FukaJoho extends ParentModelBase<FukaJohoIdentifier, DbT2002FukaEnt
      */
     public Decimal get特徴期別金額02() {
 
-        return this.get期別金額(INT_2, ChoshuHohoKibetsu.普通徴収.getコード());
+        return this.get期別金額(INT_2, ChoshuHohoKibetsu.特別徴収.getコード());
     }
 
     /**
@@ -594,7 +594,7 @@ public class FukaJoho extends ParentModelBase<FukaJohoIdentifier, DbT2002FukaEnt
      */
     public Decimal get特徴期別金額03() {
 
-        return this.get期別金額(INT_3, ChoshuHohoKibetsu.普通徴収.getコード());
+        return this.get期別金額(INT_3, ChoshuHohoKibetsu.特別徴収.getコード());
     }
 
     /**
@@ -604,7 +604,7 @@ public class FukaJoho extends ParentModelBase<FukaJohoIdentifier, DbT2002FukaEnt
      */
     public Decimal get特徴期別金額04() {
 
-        return this.get期別金額(INT_4, ChoshuHohoKibetsu.普通徴収.getコード());
+        return this.get期別金額(INT_4, ChoshuHohoKibetsu.特別徴収.getコード());
     }
 
     /**
@@ -614,7 +614,7 @@ public class FukaJoho extends ParentModelBase<FukaJohoIdentifier, DbT2002FukaEnt
      */
     public Decimal get特徴期別金額05() {
 
-        return this.get期別金額(INT_5, ChoshuHohoKibetsu.普通徴収.getコード());
+        return this.get期別金額(INT_5, ChoshuHohoKibetsu.特別徴収.getコード());
     }
 
     /**
@@ -624,7 +624,7 @@ public class FukaJoho extends ParentModelBase<FukaJohoIdentifier, DbT2002FukaEnt
      */
     public Decimal get特徴期別金額06() {
 
-        return this.get期別金額(INT_6, ChoshuHohoKibetsu.普通徴収.getコード());
+        return this.get期別金額(INT_6, ChoshuHohoKibetsu.特別徴収.getコード());
     }
 
     /**
@@ -634,7 +634,7 @@ public class FukaJoho extends ParentModelBase<FukaJohoIdentifier, DbT2002FukaEnt
      */
     public Decimal get普徴期別金額01() {
 
-        return this.get期別金額(INT_1, ChoshuHohoKibetsu.特別徴収.getコード());
+        return this.get期別金額(INT_1, ChoshuHohoKibetsu.普通徴収.getコード());
     }
 
     /**
@@ -644,7 +644,7 @@ public class FukaJoho extends ParentModelBase<FukaJohoIdentifier, DbT2002FukaEnt
      */
     public Decimal get普徴期別金額02() {
 
-        return this.get期別金額(INT_2, ChoshuHohoKibetsu.特別徴収.getコード());
+        return this.get期別金額(INT_2, ChoshuHohoKibetsu.普通徴収.getコード());
     }
 
     /**
@@ -654,7 +654,7 @@ public class FukaJoho extends ParentModelBase<FukaJohoIdentifier, DbT2002FukaEnt
      */
     public Decimal get普徴期別金額03() {
 
-        return this.get期別金額(INT_3, ChoshuHohoKibetsu.特別徴収.getコード());
+        return this.get期別金額(INT_3, ChoshuHohoKibetsu.普通徴収.getコード());
     }
 
     /**
@@ -664,7 +664,7 @@ public class FukaJoho extends ParentModelBase<FukaJohoIdentifier, DbT2002FukaEnt
      */
     public Decimal get普徴期別金額04() {
 
-        return this.get期別金額(INT_4, ChoshuHohoKibetsu.特別徴収.getコード());
+        return this.get期別金額(INT_4, ChoshuHohoKibetsu.普通徴収.getコード());
     }
 
     /**
@@ -674,7 +674,7 @@ public class FukaJoho extends ParentModelBase<FukaJohoIdentifier, DbT2002FukaEnt
      */
     public Decimal get普徴期別金額05() {
 
-        return this.get期別金額(INT_5, ChoshuHohoKibetsu.特別徴収.getコード());
+        return this.get期別金額(INT_5, ChoshuHohoKibetsu.普通徴収.getコード());
     }
 
     /**
@@ -684,7 +684,7 @@ public class FukaJoho extends ParentModelBase<FukaJohoIdentifier, DbT2002FukaEnt
      */
     public Decimal get普徴期別金額06() {
 
-        return this.get期別金額(INT_6, ChoshuHohoKibetsu.特別徴収.getコード());
+        return this.get期別金額(INT_6, ChoshuHohoKibetsu.普通徴収.getコード());
     }
 
     /**
@@ -694,7 +694,7 @@ public class FukaJoho extends ParentModelBase<FukaJohoIdentifier, DbT2002FukaEnt
      */
     public Decimal get普徴期別金額07() {
 
-        return this.get期別金額(INT_7, ChoshuHohoKibetsu.特別徴収.getコード());
+        return this.get期別金額(INT_7, ChoshuHohoKibetsu.普通徴収.getコード());
     }
 
     /**
@@ -704,7 +704,7 @@ public class FukaJoho extends ParentModelBase<FukaJohoIdentifier, DbT2002FukaEnt
      */
     public Decimal get普徴期別金額08() {
 
-        return this.get期別金額(INT_8, ChoshuHohoKibetsu.特別徴収.getコード());
+        return this.get期別金額(INT_8, ChoshuHohoKibetsu.普通徴収.getコード());
     }
 
     /**
@@ -714,7 +714,7 @@ public class FukaJoho extends ParentModelBase<FukaJohoIdentifier, DbT2002FukaEnt
      */
     public Decimal get普徴期別金額09() {
 
-        return this.get期別金額(INT_9, ChoshuHohoKibetsu.特別徴収.getコード());
+        return this.get期別金額(INT_9, ChoshuHohoKibetsu.普通徴収.getコード());
     }
 
     /**
@@ -724,7 +724,7 @@ public class FukaJoho extends ParentModelBase<FukaJohoIdentifier, DbT2002FukaEnt
      */
     public Decimal get普徴期別金額10() {
 
-        return this.get期別金額(INT_10, ChoshuHohoKibetsu.特別徴収.getコード());
+        return this.get期別金額(INT_10, ChoshuHohoKibetsu.普通徴収.getコード());
     }
 
     /**
@@ -734,7 +734,7 @@ public class FukaJoho extends ParentModelBase<FukaJohoIdentifier, DbT2002FukaEnt
      */
     public Decimal get普徴期別金額11() {
 
-        return this.get期別金額(INT_11, ChoshuHohoKibetsu.特別徴収.getコード());
+        return this.get期別金額(INT_11, ChoshuHohoKibetsu.普通徴収.getコード());
     }
 
     /**
@@ -744,7 +744,7 @@ public class FukaJoho extends ParentModelBase<FukaJohoIdentifier, DbT2002FukaEnt
      */
     public Decimal get普徴期別金額12() {
 
-        return this.get期別金額(INT_12, ChoshuHohoKibetsu.特別徴収.getコード());
+        return this.get期別金額(INT_12, ChoshuHohoKibetsu.普通徴収.getコード());
     }
 
     /**
@@ -754,7 +754,7 @@ public class FukaJoho extends ParentModelBase<FukaJohoIdentifier, DbT2002FukaEnt
      */
     public Decimal get普徴期別金額13() {
 
-        return this.get期別金額(INT_13, ChoshuHohoKibetsu.特別徴収.getコード());
+        return this.get期別金額(INT_13, ChoshuHohoKibetsu.普通徴収.getコード());
     }
 
     /**
@@ -764,7 +764,7 @@ public class FukaJoho extends ParentModelBase<FukaJohoIdentifier, DbT2002FukaEnt
      */
     public Decimal get普徴期別金額14() {
 
-        return this.get期別金額(INT_14, ChoshuHohoKibetsu.特別徴収.getコード());
+        return this.get期別金額(INT_14, ChoshuHohoKibetsu.普通徴収.getコード());
     }
 
     /**
