@@ -284,7 +284,7 @@ public final class JutakuKaishuJizenShinseiTorokuDivHandler {
         SikyuSinseiJyohoParameter param = new SikyuSinseiJyohoParameter();
         if (登録モード.equals(画面モード)) {
             param.setShikibetsuCode(ViewStateHolder.get(ViewStateKeys.識別コード, ShikibetsuCode.class));
-            // TODO QAのNo.XXX 登録モード初期情報の取得方針は確認中
+            // TODO QAのNo.659 登録モード初期情報の取得方針は確認中
 //            param.setHihokenshaNo(data.get被保険者番号());
 //            param.setShikyushinseiServiceYM(data.getサービス提供年月());
 //            param.setShikyushinseiSeiriNo(data.get整理番号());
@@ -708,7 +708,7 @@ public final class JutakuKaishuJizenShinseiTorokuDivHandler {
      * @return チェック結果
      */
     public boolean 改修住所変更による限度額リセットチェック(HihokenshaNo hihokenshaNo) {
-        // TODO ダミー値を設定
+        // TODO QAのNo.660 住宅住所の取得元は確認中
         RString 住宅住所 = div.getKaigoShikakuKihonShaPanel().getTabShinseiContents()
                 .getTabJutakuKaisyuJyoho().getCcdJutakuJizenShinseiDetail().get住宅改修内容一覧().get(0).getTxtJutakuAddress();
         FlexibleYearMonth yearMonth = new FlexibleYearMonth(div.getKaigoShikakuKihonShaPanel()
@@ -1042,7 +1042,7 @@ public final class JutakuKaishuJizenShinseiTorokuDivHandler {
         builder.set申請者郵便番号(div.getKaigoShikakuKihonShaPanel().getShinseishaInfo().getTxtYubinNo().getValue());
         builder.set申請者住所(div.getKaigoShikakuKihonShaPanel().getShinseishaInfo().getTxtAddress().getDomain().value());
         builder.set申請者電話番号(div.getKaigoShikakuKihonShaPanel().getShinseishaInfo().getTxtTelNo().getDomain());
-        //  事業者番号は正常設定できない
+        //  TODO No.669 事業者番号は正常設定できない
         builder.set申請事業者番号(new JigyoshaNo("9"));
 //        builder.set申請事業者番号(new JigyoshaNo(div.getKaigoShikakuKihonShaPanel().getShinseishaInfo()
 //                .getTxtJigyoshaNo().getValue()));
@@ -1055,12 +1055,13 @@ public final class JutakuKaishuJizenShinseiTorokuDivHandler {
                 .getTxtCreatorName().getDomain().value());
         builder.set理由書作成者カナ(div.getKaigoShikakuKihonShaPanel().getJutakuKaishuJizenShinseiReason()
                 .getTxtCreatorKanaName().getDomain().value());
-        //  事業者番号は正常設定できない
+        // TODO No.669 事業者番号は正常設定できない
         builder.set理由書作成事業者番号(new JigyoshaNo("9"));
 //        builder.set理由書作成事業者番号(new JigyoshaNo(div.getKaigoShikakuKihonShaPanel().getJutakuKaishuJizenShinseiReason()
 //                .getTxtCreationJigyoshaNo().getValue()));
         RString 支払方法区分コード = div.getKaigoShikakuKihonShaPanel().getTabKozaJyoho()
                 .getCcdJutakuKaishuJizenShinseiKoza().getShiharaiHoho();
+        // TODO No.678 共有子DIVの選択値は正常取得できない。
 //        builder.set支払方法区分コード(支払方法区分コード);
         if (ShiharaiHohoKubun.窓口払.getコード().equals(支払方法区分コード)) {
             builder.set支払場所(div.getKaigoShikakuKihonShaPanel().getTabKozaJyoho()
@@ -1117,16 +1118,14 @@ public final class JutakuKaishuJizenShinseiTorokuDivHandler {
             builder.set不承認理由(div.getKaigoShikakuKihonShaPanel().getTabShinseiContents().getTabShinsaKakka()
                     .getTxtFushoninReason().getValue());
         }
-        // TODO 疎通のため。コメント化になる。
-//        builder.set給付額等_費用額合計(div.getKaigoShikakuKihonShaPanel().getTabShinseiContents().getTabJutakuKaisyuJyoho()
-//                .getTotalPanel().getTxtHiyoTotalNow().getValue().intValue());
-//        builder.set給付額等_保険対象費用額(div.getKaigoShikakuKihonShaPanel().getTabShinseiContents().getTabJutakuKaisyuJyoho()
-//                .getTotalPanel().getTxtHokenTaishoHiyoNow().getValue().intValue());
-//        builder.set給付額等_利用者自己負担額(div.getKaigoShikakuKihonShaPanel().getTabShinseiContents().getTabJutakuKaisyuJyoho()
-//                .getTotalPanel().getTxtRiyoshaFutanAmountNow().getValue().intValue());
-//        builder.set給付額等_保険給付費額(div.getKaigoShikakuKihonShaPanel().getTabShinseiContents().getTabJutakuKaisyuJyoho()
-//                .getTotalPanel().getTxtHokenKyufuAmountNow().getValue().intValue());
-
+        builder.set給付額等_費用額合計(div.getKaigoShikakuKihonShaPanel().getTabShinseiContents().getTabJutakuKaisyuJyoho()
+                .getTotalPanel().getTxtHiyoTotalNow().getValue().intValue());
+        builder.set給付額等_保険対象費用額(div.getKaigoShikakuKihonShaPanel().getTabShinseiContents().getTabJutakuKaisyuJyoho()
+                .getTotalPanel().getTxtHokenTaishoHiyoNow().getValue().intValue());
+        builder.set給付額等_利用者自己負担額(div.getKaigoShikakuKihonShaPanel().getTabShinseiContents().getTabJutakuKaisyuJyoho()
+                .getTotalPanel().getTxtRiyoshaFutanAmountNow().getValue().intValue());
+        builder.set給付額等_保険給付費額(div.getKaigoShikakuKihonShaPanel().getTabShinseiContents().getTabJutakuKaisyuJyoho()
+                .getTotalPanel().getTxtHokenKyufuAmountNow().getValue().intValue());
         if (div.getKaigoShikakuKihonShaPanel().getTabShinseiContents().getTabShinsaKakka()
                 .getJutakuKaishuJizenShoninKetteiTsuchisho().isIsPublish()) {
             builder.set事前申請決定通知発行日(new FlexibleDate(div.getKaigoShikakuKihonShaPanel().getTabShinseiContents()
@@ -1228,16 +1227,14 @@ public final class JutakuKaishuJizenShinseiTorokuDivHandler {
             builder.set不承認理由(div.getKaigoShikakuKihonShaPanel().getTabShinseiContents().getTabShinsaKakka()
                     .getTxtFushoninReason().getValue());
         }
-        // TODO 疎通のため。コメント化になる。
-//        builder.set給付額等_費用額合計(div.getKaigoShikakuKihonShaPanel().getTabShinseiContents().getTabJutakuKaisyuJyoho()
-//                .getTotalPanel().getTxtHiyoTotalNow().getValue().intValue());
-//        builder.set給付額等_保険対象費用額(div.getKaigoShikakuKihonShaPanel().getTabShinseiContents().getTabJutakuKaisyuJyoho()
-//                .getTotalPanel().getTxtHokenTaishoHiyoNow().getValue().intValue());
-//        builder.set給付額等_利用者自己負担額(div.getKaigoShikakuKihonShaPanel().getTabShinseiContents().getTabJutakuKaisyuJyoho()
-//                .getTotalPanel().getTxtRiyoshaFutanAmountNow().getValue().intValue());
-//        builder.set給付額等_保険給付費額(div.getKaigoShikakuKihonShaPanel().getTabShinseiContents().getTabJutakuKaisyuJyoho()
-//                .getTotalPanel().getTxtHokenKyufuAmountNow().getValue().intValue());
-
+        builder.set給付額等_費用額合計(div.getKaigoShikakuKihonShaPanel().getTabShinseiContents().getTabJutakuKaisyuJyoho()
+                .getTotalPanel().getTxtHiyoTotalNow().getValue().intValue());
+        builder.set給付額等_保険対象費用額(div.getKaigoShikakuKihonShaPanel().getTabShinseiContents().getTabJutakuKaisyuJyoho()
+                .getTotalPanel().getTxtHokenTaishoHiyoNow().getValue().intValue());
+        builder.set給付額等_利用者自己負担額(div.getKaigoShikakuKihonShaPanel().getTabShinseiContents().getTabJutakuKaisyuJyoho()
+                .getTotalPanel().getTxtRiyoshaFutanAmountNow().getValue().intValue());
+        builder.set給付額等_保険給付費額(div.getKaigoShikakuKihonShaPanel().getTabShinseiContents().getTabJutakuKaisyuJyoho()
+                .getTotalPanel().getTxtHokenKyufuAmountNow().getValue().intValue());
         if (div.getKaigoShikakuKihonShaPanel().getTabShinseiContents().getTabShinsaKakka()
                 .getJutakuKaishuJizenShoninKetteiTsuchisho().isIsPublish()) {
             builder.set事前申請決定通知発行日(new FlexibleDate(div.getKaigoShikakuKihonShaPanel().getTabShinseiContents()
