@@ -35,9 +35,26 @@ public interface IHihosyosaiDiv extends ICommonChildDivBaseProperties {
      * @param 枝番 枝番
      * @param 識別コード 識別コード
      * @param 資格取得日 資格取得日
+     * @param 台帳種別 台帳種別
      */
     public void initialize(LasdecCode 市町村コード, RString 導入形態コード, LasdecCode 広住特措置元市町村コード,
-            HihokenshaNo 被保険者番号, FlexibleDate 異動日, RString 枝番, ShikibetsuCode 識別コード, FlexibleDate 資格取得日);
+            HihokenshaNo 被保険者番号, FlexibleDate 異動日, RString 枝番, ShikibetsuCode 識別コード, FlexibleDate 資格取得日, RString 台帳種別);
+
+    /**
+     * 親画面資格変更異動する、被保詳細に初期化を設定します。
+     *
+     * @param 市町村コード 市町村コード
+     * @param 導入形態コード 導入形態コード
+     * @param 広住特措置元市町村コード 広住特措置元市町村コード
+     * @param 被保険者番号 被保険者番号
+     * @param 異動日 異動日
+     * @param 枝番 枝番
+     * @param 識別コード 識別コード
+     * @param 資格取得日 資格取得日
+     * @param 台帳種別 台帳種別
+     */
+    public void initilize(LasdecCode 市町村コード, RString 導入形態コード, LasdecCode 広住特措置元市町村コード,
+            HihokenshaNo 被保険者番号, FlexibleDate 異動日, RString 枝番, ShikibetsuCode 識別コード, FlexibleDate 資格取得日, RString 台帳種別);
 
     /**
      * 変更履歴グリッドのデータを取得します。

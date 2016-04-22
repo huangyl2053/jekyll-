@@ -87,9 +87,11 @@ public class HihosyosaiHandler {
      * @param 枝番 枝番
      * @param 識別コード 識別コード
      * @param 資格取得日 資格取得日
+     * @param 台帳種別 台帳種別
      */
     public void initialize(LasdecCode 市町村コード, RString 導入形態コード, LasdecCode 広住特措置元市町村コード,
-            HihokenshaNo 被保険者番号, FlexibleDate 異動日, RString 枝番, ShikibetsuCode 識別コード, FlexibleDate 資格取得日) {
+            HihokenshaNo 被保険者番号, FlexibleDate 異動日, RString 枝番, ShikibetsuCode 識別コード, FlexibleDate 資格取得日,
+            RString 台帳種別) {
         if (被保険者番号 == null || 被保険者番号.isEmpty() || 識別コード == null || 識別コード.isEmpty() || 資格取得日 == null || 資格取得日.isEmpty()) {
             throw new ApplicationException(UrErrorMessages.対象データなし.getMessage().evaluate());
         }
@@ -124,7 +126,53 @@ public class HihosyosaiHandler {
         div.getCcdJyusyotiTokure().initialize(被保険者番号, 識別コード, 資格取得日);
         // TODO 凌護行　Redmine#:82087回答まち、
 //        div.getCcdShikakuKanrenIdo().initialize(被保険者番号, null, 資格取得日);
-        div.getCcdShisetuNyutaisyo().initialize(識別コード);
+        if (RString.isNullOrEmpty(台帳種別)) {
+            div.getCcdShisetuNyutaisyo().initialize(識別コード);
+        } else {
+            div.getCcdShisetuNyutaisyo().initialize(識別コード, 台帳種別);
+        }
+    }
+
+    /**
+     * 親画面資格変更異動する、被保詳細に初期化を設定します。
+     *
+     * @param 市町村コード 市町村コード
+     * @param 導入形態コード 導入形態コード
+     * @param 広住特措置元市町村コード 広住特措置元市町村コード
+     * @param 被保険者番号 被保険者番号
+     * @param 異動日 異動日
+     * @param 枝番 枝番
+     * @param 識別コード 識別コード
+     * @param 資格取得日 資格取得日
+     * @param 台帳種別 台帳種別
+     */
+    public void initilize(LasdecCode 市町村コード, RString 導入形態コード, LasdecCode 広住特措置元市町村コード,
+            HihokenshaNo 被保険者番号, FlexibleDate 異動日, RString 枝番, ShikibetsuCode 識別コード, FlexibleDate 資格取得日, RString 台帳種別) {
+        if (被保険者番号 == null || 被保険者番号.isEmpty() || 識別コード == null || 識別コード.isEmpty() || 資格取得日 == null || 資格取得日.isEmpty()) {
+            throw new ApplicationException(UrErrorMessages.対象データなし.getMessage().evaluate());
+        }
+        List<KeyValueDataSource> 被保区分情報
+                = HihousyosaiFinder.createInstance().getHihokubunList().records();
+        div.getDdlSyozaiHokensya().setDataSource(get所在保険者());
+        div.getDdlSotimotoHokensya().setDataSource(get所在保険者());
+        div.getDdlSyutokuJiyu().setDataSource(get取得事由());
+        div.getDdlHihokubun().setDataSource(被保区分情報);
+        div.getDdlSosichiJiyu().setDataSource(get喪失事由());
+        表示と非表示();
+        div.getDdlKyuHokensya().setDataSource(get旧保険者(市町村コード, 導入形態コード, 広住特措置元市町村コード));
+        HihokenshaDaicho 得喪情報 = get得喪情報(被保険者番号, 異動日, 枝番);
+        訂正モード(得喪情報);
+        if (得喪情報.getShikakuSoshitsuYMD() != null && !得喪情報.getShikakuSoshitsuYMD().isEmpty()) {
+            div.setDisabled(true);
+        }
+        div.getCcdJyusyotiTokure().initialize(被保険者番号, 識別コード, 資格取得日);
+        // TODO 凌護行　Redmine#:82087回答まち、
+//        div.getCcdShikakuKanrenIdo().initialize(被保険者番号, null, 資格取得日);
+        if (RString.isNullOrEmpty(台帳種別)) {
+            div.getCcdShisetuNyutaisyo().initialize(識別コード);
+        } else {
+            div.getCcdShisetuNyutaisyo().initialize(識別コード, 台帳種別);
+        }
     }
 
     /**
