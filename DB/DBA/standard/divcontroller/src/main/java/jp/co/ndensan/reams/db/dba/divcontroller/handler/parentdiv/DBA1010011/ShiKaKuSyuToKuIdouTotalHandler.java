@@ -16,6 +16,7 @@ import jp.co.ndensan.reams.db.dbz.business.core.HihokenshaDaichoBuilder;
 import jp.co.ndensan.reams.db.dbz.definition.core.shikakuidojiyu.ShikakuShutokuJiyu;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.ShikakuTokusoRireki.dgShikakuShutokuRireki_Row;
 import jp.co.ndensan.reams.db.dbz.divcontroller.viewbox.ViewStateKeys;
+import jp.co.ndensan.reams.db.dbz.service.TaishoshaKey;
 import jp.co.ndensan.reams.db.dbz.service.core.hihokenshanotsukiban.HihokenshanotsukibanFinder;
 import jp.co.ndensan.reams.ua.uax.business.core.dateofbirth.DateOfBirthFactory;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
@@ -69,8 +70,9 @@ public class ShiKaKuSyuToKuIdouTotalHandler {
      */
     public ShiKaKuSyuToKuIdouTotalHandler(ShikakuShutokuIdoTotalDiv div) {
         this.div = div;
-        被保険者番号 = ViewStateHolder.get(ViewStateKeys.被保険者番号, HihokenshaNo.class);
-        識別コード = ViewStateHolder.get(ViewStateKeys.資格取得異動_識別コード, ShikibetsuCode.class);
+        TaishoshaKey key = ViewStateHolder.get(jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys.資格対象者, TaishoshaKey.class);
+        被保険者番号 = key.get被保険者番号();
+        識別コード = key.get識別コード();
     }
 
     /**

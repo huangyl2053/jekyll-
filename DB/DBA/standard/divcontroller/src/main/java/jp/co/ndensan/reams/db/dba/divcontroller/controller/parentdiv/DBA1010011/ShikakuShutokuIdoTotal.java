@@ -58,8 +58,6 @@ public class ShikakuShutokuIdoTotal {
             ValidationMessageControlPairs validationMessages = new ValidationMessageControlPairs();
             validationMessages.add(new ValidationMessageControlPair(ShikakuShutokuIdoTotalErrorMessage.排他_他のユーザが使用中));
             return ResponseData.of(div).addValidationMessages(validationMessages).respond();
-        } else {
-            RealInitialLocker.lock(前排他ロックキー);
         }
         response.data = div;
         return response;
