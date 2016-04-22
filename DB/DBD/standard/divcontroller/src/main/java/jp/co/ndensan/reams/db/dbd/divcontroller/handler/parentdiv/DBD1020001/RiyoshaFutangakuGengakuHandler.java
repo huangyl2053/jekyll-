@@ -28,11 +28,11 @@ import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaN
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HokenKyufuRitsu;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShoKisaiHokenshaNo;
+import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
 import jp.co.ndensan.reams.db.dbx.service.core.hokenshalist.HokenshaListLoader;
 import jp.co.ndensan.reams.db.dbz.business.core.HihokenshaDaicho;
 import jp.co.ndensan.reams.db.dbz.definition.core.enumeratedtype.JigyoshaKubun;
 import jp.co.ndensan.reams.db.dbz.definition.core.enumeratedtype.ShinseiTodokedeDaikoKubunCode;
-import jp.co.ndensan.reams.db.dbz.divcontroller.viewbox.ViewStateKeys;
 import jp.co.ndensan.reams.db.dbz.service.core.basic.HihokenshaDaichoManager;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaJusho;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaKanaMeisho;
@@ -127,13 +127,13 @@ public class RiyoshaFutangakuGengakuHandler {
 
             div.getBtnInputNew().setText(申請情報を追加する);
             div.getRiyoshaFutangakuGengakuShinseiDetail().setTitle(申請情報);
-            CommonButtonHolder.setAdditionalTextByCommonButtonFieldName(BTNUPDATE_FIELDNAME, 申請情報を.toString()); //TODO 実現できない
+            CommonButtonHolder.setAdditionalTextByCommonButtonFieldName(BTNUPDATE_FIELDNAME, 申請情報を.toString());
             申請情報エリ状態(false);
 
         } else if (ResponseHolder.getMenuID().equals(承認メニュー)) {
             div.getBtnInputNew().setText(承認情報を追加する);
             div.getRiyoshaFutangakuGengakuShinseiDetail().setTitle(承認情報);
-            CommonButtonHolder.setAdditionalTextByCommonButtonFieldName(BTNUPDATE_FIELDNAME, 承認情報を.toString()); //TODO 実現できない
+            CommonButtonHolder.setAdditionalTextByCommonButtonFieldName(BTNUPDATE_FIELDNAME, 承認情報を.toString());
             承認情報エリア状態(承認する_KEY, true);
             div.getBtnConfirm().setVisible(false);
             div.getBtnShinseiKakutei().setVisible(false);
@@ -966,7 +966,7 @@ public class RiyoshaFutangakuGengakuHandler {
     }
 
     /**
-     * 申請一覧エリアデータのComparatorです。
+     * 申請一覧エリアデータのComparatorです。（「申請年月日」の降順でソート）
      */
     public static class RiyoshaFutangakuGengakuRowComparator implements Comparator<ddlShinseiIchiran_Row> {
 
