@@ -4,12 +4,11 @@ package jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0600021;
  * このファイルへの変更は、再生成時には損失するため
  * 不正な動作の原因になります。
  */
+
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.commonchilddiv.ShiharaiHohoJyoho.ShiharaiHohoJyoho.IShiharaiHohoJyohoDiv;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.commonchilddiv.ShiharaiHohoJyoho.ShiharaiHohoJyoho.ShiharaiHohoJyohoDiv;
-import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.IKyufugakuSummaryDiv;
-import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.KyufugakuSummaryDiv;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.binding.*;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
@@ -379,8 +378,98 @@ public class YoguKonyuhiShikyuShinseiContentsPanelDiv extends Panel {
      * [ ショートカットの作成 ]
      */
     @JsonIgnore
-    public IKyufugakuSummaryDiv getCcdKyufuGakuSummay() {
-        return this.getPnlSummary().getCcdKyufuGakuSummay();
+    public tpSummaryDiv getTpSummary() {
+        return this.getPnlSummary().getTpSummary();
+    }
+
+    @JsonIgnore
+    public void  setTpSummary(tpSummaryDiv tpSummary) {
+        this.getPnlSummary().setTpSummary(tpSummary);
+    }
+
+    @JsonIgnore
+    public Label getLblShukei() {
+        return this.getPnlSummary().getTpSummary().getLblShukei();
+    }
+
+    @JsonIgnore
+    public Label getLblHiyogakuGokei() {
+        return this.getPnlSummary().getTpSummary().getLblHiyogakuGokei();
+    }
+
+    @JsonIgnore
+    public Label getLblHokenTaishoHiyogakuGokei() {
+        return this.getPnlSummary().getTpSummary().getLblHokenTaishoHiyogakuGokei();
+    }
+
+    @JsonIgnore
+    public Label getLblHokenkyufugakuGokei() {
+        return this.getPnlSummary().getTpSummary().getLblHokenkyufugakuGokei();
+    }
+
+    @JsonIgnore
+    public Label getLblRiyoshaFutangakuGokei() {
+        return this.getPnlSummary().getTpSummary().getLblRiyoshaFutangakuGokei();
+    }
+
+    @JsonIgnore
+    public Label getLblZenkaimadeshiharaikeka() {
+        return this.getPnlSummary().getTpSummary().getLblZenkaimadeshiharaikeka();
+    }
+
+    @JsonIgnore
+    public TextBoxNum getTxtZenkaiHiyogakuGokei() {
+        return this.getPnlSummary().getTpSummary().getTxtZenkaiHiyogakuGokei();
+    }
+
+    @JsonIgnore
+    public TextBoxNum getTxtZenkaiHokenTaishoHiyogakuGokei() {
+        return this.getPnlSummary().getTpSummary().getTxtZenkaiHokenTaishoHiyogakuGokei();
+    }
+
+    @JsonIgnore
+    public TextBoxNum getTxtZenkaiHokenkyufugakuGokei() {
+        return this.getPnlSummary().getTpSummary().getTxtZenkaiHokenkyufugakuGokei();
+    }
+
+    @JsonIgnore
+    public TextBoxNum getTxtZenkaiRiyoshaFutangakuGokei() {
+        return this.getPnlSummary().getTpSummary().getTxtZenkaiRiyoshaFutangakuGokei();
+    }
+
+    @JsonIgnore
+    public Button getBtnKakoFukushiyogukonyuhiKakutei() {
+        return this.getPnlSummary().getTpSummary().getBtnKakoFukushiyogukonyuhiKakutei();
+    }
+
+    @JsonIgnore
+    public Label getLblKonkaiShiharaiJyokyo() {
+        return this.getPnlSummary().getTpSummary().getLblKonkaiShiharaiJyokyo();
+    }
+
+    @JsonIgnore
+    public TextBoxNum getTxtKonkaiHiyogakuGokei() {
+        return this.getPnlSummary().getTpSummary().getTxtKonkaiHiyogakuGokei();
+    }
+
+    @JsonIgnore
+    public TextBoxNum getTxtKonkaiHokenTaishoHiyogakuGokei() {
+        return this.getPnlSummary().getTpSummary().getTxtKonkaiHokenTaishoHiyogakuGokei();
+    }
+
+    @JsonIgnore
+    public TextBoxNum getTxtKonkaiHokenkyufugakuGokei() {
+        return this.getPnlSummary().getTpSummary().getTxtKonkaiHokenkyufugakuGokei();
+    }
+
+    @JsonIgnore
+    public TextBoxNum getTxtKonkaiRiyoshaFutangakuGokei() {
+        return this.getPnlSummary().getTpSummary().getTxtKonkaiRiyoshaFutangakuGokei();
+    }
+
+    @JsonIgnore
+    public Button getBtnGendogakuCheck() {
+        return this.getPnlSummary().getTpSummary().getBtnGendogakuCheck();
     }
 
     @JsonIgnore

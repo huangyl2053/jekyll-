@@ -28,14 +28,12 @@ public class TokubetsuChoshuKaishiTsuchishoOverlayA4TateEditor implements ITokub
     private final CompKaigoToiawasesakiSource toiawasesakiSource;
     private final NinshoshaSource sourceBuilder;
 
-    private static final RString 平成 = new RString("平成");
-    private static final int ZERO = 0;
-    private static final int TWO = 2;
-    private static final int FOUR = 4;
-    private static final int FIVE = 5;
-    private static final int SEVEN = 7;
-    private static final int EIGHT = 8;
-    private static final int TEN = 10;
+    private static final int 定数_0 = 0;
+    private static final int 定数_4 = 4;
+    private static final int 定数_5 = 5;
+    private static final int 定数_7 = 7;
+    private static final int 定数_8 = 8;
+    private static final int 定数_10 = 10;
     private static final RString 特徴期別金額1期 = new RString("1期");
     private static final RString 特徴期別金額2期 = new RString("2期");
     private static final RString 特徴期別金額3期 = new RString("3期");
@@ -83,15 +81,9 @@ public class TokubetsuChoshuKaishiTsuchishoOverlayA4TateEditor implements ITokub
             source.hihokenshaName = 編集後本算定通知書共通情報.get編集後個人().get名称().getName().value();
             source.setainushiName = 編集後本算定通知書共通情報.get編集後個人().get世帯主名().value();
             source.hihokenshaKatagaki = 編集後本算定通知書共通情報.get編集後個人().get方書().value();
-            if (平成.equals(編集後本算定通知書共通情報.get編集後個人().get生年月日().substring(ZERO, TWO))) {
-                source.birthYYYY = 編集後本算定通知書共通情報.get編集後個人().get生年月日().substring(ZERO, FOUR);
-                source.birthMM = 編集後本算定通知書共通情報.get編集後個人().get生年月日().substring(FIVE, SEVEN);
-                source.birthDD = 編集後本算定通知書共通情報.get編集後個人().get生年月日().substring(EIGHT, TEN);
-            } else {
-                source.birthYYYY = 編集後本算定通知書共通情報.get編集後個人().get生年月日().substring(ZERO, FOUR);
-                source.birthMM = 編集後本算定通知書共通情報.get編集後個人().get生年月日().substring(FIVE, SEVEN);
-                source.birthDD = 編集後本算定通知書共通情報.get編集後個人().get生年月日().substring(EIGHT, TEN);
-            }
+            source.birthYYYY = 編集後本算定通知書共通情報.get編集後個人().get生年月日().substring(定数_0, 定数_4);
+            source.birthMM = 編集後本算定通知書共通情報.get編集後個人().get生年月日().substring(定数_5, 定数_7);
+            source.birthDD = 編集後本算定通知書共通情報.get編集後個人().get生年月日().substring(定数_8, 定数_10);
             source.seibetsu = 編集後本算定通知書共通情報.get編集後個人().get性別();
         }
         if (編集後本算定通知書共通情報.get編集後宛先() != null) {

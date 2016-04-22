@@ -206,9 +206,7 @@ public class TaShichosonJushochiTokureiShisetsuHenkoTsuchishoFinder {
         outEntity.set市町村名(association.get市町村名());
         outEntity.set公印省略(iNinshoshaSourceBuilder.buildSource().koinShoryaku);
 
-        TatokuKanrenChohyoHenkoTsuchishoBusiness business = new TatokuKanrenChohyoHenkoTsuchishoBusiness(outEntity);
-
-        return business;
+        return new TatokuKanrenChohyoHenkoTsuchishoBusiness(outEntity);
     }
 
     /**
@@ -334,7 +332,6 @@ public class TaShichosonJushochiTokureiShisetsuHenkoTsuchishoFinder {
         outEntity.set市町村名(association.get市町村名());
         outEntity.set公印省略(builder.buildSource().koinShoryaku);
 
-        TatokuKanrenChohyoRenrakuhyoBusiness business = new TatokuKanrenChohyoRenrakuhyoBusiness(outEntity);
-        return business;
+        return new TatokuKanrenChohyoRenrakuhyoBusiness(outEntity);
     }
 }

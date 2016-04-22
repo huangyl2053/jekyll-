@@ -4,12 +4,11 @@ package jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0600021;
  * このファイルへの変更は、再生成時には損失するため
  * 不正な動作の原因になります。
  */
+
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.commonchilddiv.ShiharaiHohoJyoho.ShiharaiHohoJyoho.IShiharaiHohoJyohoDiv;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.commonchilddiv.ShiharaiHohoJyoho.ShiharaiHohoJyoho.ShiharaiHohoJyohoDiv;
-import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.IKyufugakuSummaryDiv;
-import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.KyufugakuSummaryDiv;
 import jp.co.ndensan.reams.uz.uza.ui.binding.*;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 import jp.co.ndensan.reams.uz.uza.ui.binding.domain.*;
@@ -118,8 +117,98 @@ public class YoguKonyuhiShikyuShinseiPnlTotalDiv extends Panel {
      * [ ショートカットの作成 ]
      */
     @JsonIgnore
-    public IKyufugakuSummaryDiv getCcdKyufuGakuSummay() {
-        return this.getYoguKonyuhiShikyuShinseiContentsPanel().getPnlSummary().getCcdKyufuGakuSummay();
+    public tpSummaryDiv getTpSummary() {
+        return this.getYoguKonyuhiShikyuShinseiContentsPanel().getPnlSummary().getTpSummary();
+    }
+
+    @JsonIgnore
+    public void  setTpSummary(tpSummaryDiv tpSummary) {
+        this.getYoguKonyuhiShikyuShinseiContentsPanel().getPnlSummary().setTpSummary(tpSummary);
+    }
+
+    @JsonIgnore
+    public Label getLblShukei() {
+        return this.getYoguKonyuhiShikyuShinseiContentsPanel().getPnlSummary().getTpSummary().getLblShukei();
+    }
+
+    @JsonIgnore
+    public Label getLblHiyogakuGokei() {
+        return this.getYoguKonyuhiShikyuShinseiContentsPanel().getPnlSummary().getTpSummary().getLblHiyogakuGokei();
+    }
+
+    @JsonIgnore
+    public Label getLblHokenTaishoHiyogakuGokei() {
+        return this.getYoguKonyuhiShikyuShinseiContentsPanel().getPnlSummary().getTpSummary().getLblHokenTaishoHiyogakuGokei();
+    }
+
+    @JsonIgnore
+    public Label getLblHokenkyufugakuGokei() {
+        return this.getYoguKonyuhiShikyuShinseiContentsPanel().getPnlSummary().getTpSummary().getLblHokenkyufugakuGokei();
+    }
+
+    @JsonIgnore
+    public Label getLblRiyoshaFutangakuGokei() {
+        return this.getYoguKonyuhiShikyuShinseiContentsPanel().getPnlSummary().getTpSummary().getLblRiyoshaFutangakuGokei();
+    }
+
+    @JsonIgnore
+    public Label getLblZenkaimadeshiharaikeka() {
+        return this.getYoguKonyuhiShikyuShinseiContentsPanel().getPnlSummary().getTpSummary().getLblZenkaimadeshiharaikeka();
+    }
+
+    @JsonIgnore
+    public TextBoxNum getTxtZenkaiHiyogakuGokei() {
+        return this.getYoguKonyuhiShikyuShinseiContentsPanel().getPnlSummary().getTpSummary().getTxtZenkaiHiyogakuGokei();
+    }
+
+    @JsonIgnore
+    public TextBoxNum getTxtZenkaiHokenTaishoHiyogakuGokei() {
+        return this.getYoguKonyuhiShikyuShinseiContentsPanel().getPnlSummary().getTpSummary().getTxtZenkaiHokenTaishoHiyogakuGokei();
+    }
+
+    @JsonIgnore
+    public TextBoxNum getTxtZenkaiHokenkyufugakuGokei() {
+        return this.getYoguKonyuhiShikyuShinseiContentsPanel().getPnlSummary().getTpSummary().getTxtZenkaiHokenkyufugakuGokei();
+    }
+
+    @JsonIgnore
+    public TextBoxNum getTxtZenkaiRiyoshaFutangakuGokei() {
+        return this.getYoguKonyuhiShikyuShinseiContentsPanel().getPnlSummary().getTpSummary().getTxtZenkaiRiyoshaFutangakuGokei();
+    }
+
+    @JsonIgnore
+    public Button getBtnKakoFukushiyogukonyuhiKakutei() {
+        return this.getYoguKonyuhiShikyuShinseiContentsPanel().getPnlSummary().getTpSummary().getBtnKakoFukushiyogukonyuhiKakutei();
+    }
+
+    @JsonIgnore
+    public Label getLblKonkaiShiharaiJyokyo() {
+        return this.getYoguKonyuhiShikyuShinseiContentsPanel().getPnlSummary().getTpSummary().getLblKonkaiShiharaiJyokyo();
+    }
+
+    @JsonIgnore
+    public TextBoxNum getTxtKonkaiHiyogakuGokei() {
+        return this.getYoguKonyuhiShikyuShinseiContentsPanel().getPnlSummary().getTpSummary().getTxtKonkaiHiyogakuGokei();
+    }
+
+    @JsonIgnore
+    public TextBoxNum getTxtKonkaiHokenTaishoHiyogakuGokei() {
+        return this.getYoguKonyuhiShikyuShinseiContentsPanel().getPnlSummary().getTpSummary().getTxtKonkaiHokenTaishoHiyogakuGokei();
+    }
+
+    @JsonIgnore
+    public TextBoxNum getTxtKonkaiHokenkyufugakuGokei() {
+        return this.getYoguKonyuhiShikyuShinseiContentsPanel().getPnlSummary().getTpSummary().getTxtKonkaiHokenkyufugakuGokei();
+    }
+
+    @JsonIgnore
+    public TextBoxNum getTxtKonkaiRiyoshaFutangakuGokei() {
+        return this.getYoguKonyuhiShikyuShinseiContentsPanel().getPnlSummary().getTpSummary().getTxtKonkaiRiyoshaFutangakuGokei();
+    }
+
+    @JsonIgnore
+    public Button getBtnGendogakuCheck() {
+        return this.getYoguKonyuhiShikyuShinseiContentsPanel().getPnlSummary().getTpSummary().getBtnGendogakuCheck();
     }
 
     @JsonIgnore

@@ -11,20 +11,22 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 public enum ShikakuJutokuKaijoJiyu {
 
     /**
-     * コード:71 名称:自特例転入 略称:定義なし
+     * コード:71 名称:自特例転入 略称:自住所特例者の転入
      */
-    自特例転入("71", "自特例転入"),
+    自特例転入("71", "自特例転入", "自住所特例者の転入"),
     /**
-     * コード:72 名称:自特例解除 略称:定義なし
+     * コード:72 名称:自特例解除 略称:自住所特例者が施設退所外居住
      */
-    自特例解除("72", "自特例解除");
+    自特例解除("72", "自特例解除", "自住所特例者が施設退所外居住");
 
     private final RString code;
     private final RString fullName;
+    private final RString shortName;
 
-    private ShikakuJutokuKaijoJiyu(String code, String fullname) {
+    private ShikakuJutokuKaijoJiyu(String code, String fullname, String shortName) {
         this.code = new RString(code);
         this.fullName = new RString(fullname);
+        this.shortName = new RString(shortName);
     }
 
     /**
@@ -34,6 +36,15 @@ public enum ShikakuJutokuKaijoJiyu {
      */
     public RString getコード() {
         return code;
+    }
+
+    /**
+     * 資格住特解除事由の略称を返します。
+     *
+     * @return 資格住特解除事由の略称
+     */
+    public RString get略称() {
+        return shortName;
     }
 
     /**

@@ -53,8 +53,8 @@ public class TokubetsuChoshuKaishiTsuchishoB52Editor implements ITokubetsuChoshu
     @Override
     public TokubetsuChoshuKaishiTsuchishoB52Source edit(TokubetsuChoshuKaishiTsuchishoB52Source source) {
         source.nendo = 編集後本算定通知書共通情報.get賦課年度().toDateString();
-        source.nendo2 = 編集後本算定通知書共通情報.get賦課年度().toDateString();;
-        source.nendo3 = 編集後本算定通知書共通情報.get賦課年度().toDateString();;
+        source.nendo2 = 編集後本算定通知書共通情報.get賦課年度().toDateString();
+        source.nendo3 = 編集後本算定通知書共通情報.get賦課年度().toDateString();
         source.tsuchishoNo = 編集後本算定通知書共通情報.get通知書番号().value();
         if (編集後本算定通知書共通情報.get編集後個人() != null) {
             source.setaiCode = 編集後本算定通知書共通情報.get編集後個人().get世帯コード().value();
@@ -75,7 +75,7 @@ public class TokubetsuChoshuKaishiTsuchishoB52Editor implements ITokubetsuChoshu
             source.tsukiSu2 = 編集後本算定通知書共通情報.get更正後().get月数_ケ月();
             source.hokenryoRitsu = DecimalFormatter.toコンマ区切りRString(編集後本算定通知書共通情報.get更正後().get保険料率(), 0);
             source.hokenryoGaku = DecimalFormatter.toコンマ区切りRString(編集後本算定通知書共通情報.get更正後().get確定保険料_年額(), 0);
-            source.tsuchibunNendo = 編集後本算定通知書共通情報.get賦課年度().toDateString();;
+            source.tsuchibunNendo = 編集後本算定通知書共通情報.get賦課年度().toDateString();
         }
         source.gekihenHeader = RString.EMPTY;
         source.gekihenMongon = RString.EMPTY;

@@ -14,6 +14,7 @@ import jp.co.ndensan.reams.db.dbz.definition.core.ViewStateKeys;
 import jp.co.ndensan.reams.db.dbz.service.core.iryohokenkanyujokyo.IryohokenKanyuJokyoManager;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.CodeShubetsu;
+import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
@@ -132,21 +133,27 @@ public class IryohokenRirekiHandler {
         Models<IryohokenKanyuJokyoIdentifier, IryohokenKanyuJokyo> 医療保険情報
                 = (Models<IryohokenKanyuJokyoIdentifier, IryohokenKanyuJokyo>) ViewStateHolder.get(
                         ViewStateKeys.医療保険情報, Models.class);
-
         List<IryohokenKanyuJokyo> 医療保険情報更新List = new ArrayList<>();
         for (dgIryohokenIchiran_Row row : 医療保険情報List) {
-            IryohokenKanyuJokyo kanyuJokyo = 医療保険情報.get(new IryohokenKanyuJokyoIdentifier(new ShikibetsuCode(row.getDefaultDataName0()),
-                    row.getDefaultDataName9().getValue().intValue()));
-            IryohokenKanyuJokyoBuilder builder = kanyuJokyo.createBuilderForEdit();
+
             if (状態_追加.equals(row.getDefaultDataName2())) {
+                IryohokenKanyuJokyo kanyuJokyo = new IryohokenKanyuJokyo(new ShikibetsuCode(row.getDefaultDataName0()),
+                        row.getDefaultDataName9().getValue().intValue());
+                IryohokenKanyuJokyoBuilder builder = kanyuJokyo.createBuilderForEdit();
                 builder.set医療保険加入年月日(new FlexibleDate(new RDate(row.getDefaultDataName3().toString()).toDateString()));
                 builder.set医療保険脱退年月日(new FlexibleDate(new RDate(row.getDefaultDataName4().toString()).toDateString()));
                 builder.set医療保険種別コード(row.getDefaultDataName11());
                 builder.set医療保険者番号(row.getDefaultDataName12());
                 builder.set医療保険者名称(row.getDefaultDataName13());
                 builder.set医療保険記号番号(row.getDefaultDataName7());
+                builder.set市町村コード(new LasdecCode(row.getDefaultDataName1()));
                 kanyuJokyo.toEntity().setState(EntityDataState.Added);
+                医療保険情報更新List.add(builder.build());
             } else if (状態_修正.equals(row.getDefaultDataName2())) {
+                IryohokenKanyuJokyo kanyuJokyo = 医療保険情報
+                        .get(new IryohokenKanyuJokyoIdentifier(new ShikibetsuCode(row.getDefaultDataName0()),
+                                        row.getDefaultDataName9().getValue().intValue()));
+                IryohokenKanyuJokyoBuilder builder = kanyuJokyo.createBuilderForEdit();
                 builder.set医療保険加入年月日(new FlexibleDate(new RDate(row.getDefaultDataName3().toString()).toDateString()));
                 builder.set医療保険脱退年月日(new FlexibleDate(new RDate(row.getDefaultDataName4().toString()).toDateString()));
                 builder.set医療保険種別コード(row.getDefaultDataName11());
@@ -154,10 +161,13 @@ public class IryohokenRirekiHandler {
                 builder.set医療保険者名称(row.getDefaultDataName13());
                 builder.set医療保険記号番号(row.getDefaultDataName7());
                 kanyuJokyo.toEntity().setState(EntityDataState.Modified);
+                医療保険情報更新List.add(builder.build());
             } else if (状態_削除.equals(row.getDefaultDataName2())) {
-                kanyuJokyo.toEntity().setState(EntityDataState.Deleted);
+                IryohokenKanyuJokyo kanyuJokyo = 医療保険情報
+                        .get(new IryohokenKanyuJokyoIdentifier(new ShikibetsuCode(row.getDefaultDataName0()),
+                                        row.getDefaultDataName9().getValue().intValue()));
+                医療保険情報更新List.add(kanyuJokyo.deleted());
             }
-            医療保険情報更新List.add(builder.build());
         }
         return IryohokenKanyuJokyoManager.createInstance().saveAllIryoHokenJoho(医療保険情報更新List);
     }

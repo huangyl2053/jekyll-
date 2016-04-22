@@ -21,17 +21,14 @@ import jp.co.ndensan.reams.uz.uza.lang.Separator;
 public class ShujiiIkenshoSakuseiTokusokujoHeadEditor implements IShujiiIkenshoSakuseiTokusokujoEditor {
 
     private final ShujiiIkenshoSakuseiTokusokujoItem headitem;
-    private final int index;
 
     /**
      * インスタンスを生成します。
      *
      * @param headitem {@link ShujiiIkenshoSakuseiTokusokujoItem}
-     * @param index int
      */
-    protected ShujiiIkenshoSakuseiTokusokujoHeadEditor(ShujiiIkenshoSakuseiTokusokujoItem headitem, int index) {
+    protected ShujiiIkenshoSakuseiTokusokujoHeadEditor(ShujiiIkenshoSakuseiTokusokujoItem headitem) {
         this.headitem = headitem;
-        this.index = index;
     }
 
     @Override

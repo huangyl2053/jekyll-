@@ -48,8 +48,6 @@ public class TajutokuIdoTeisei {
             ValidationMessageControlPairs validationMessages = new ValidationMessageControlPairs();
             validationMessages.add(new ValidationMessageControlPair(TajutokuIdoTeiseiErrorMessage.排他_他のユーザが使用中));
             return ResponseData.of(div).addValidationMessages(validationMessages).respond();
-        } else {
-            RealInitialLocker.lock(LOCKINGKEY);
         }
         return ResponseData.of(div).setState(DBA2040021StateName.初期状態);
     }

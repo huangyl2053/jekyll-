@@ -25,6 +25,7 @@ import jp.co.ndensan.reams.uz.uza.lang.ApplicationException;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
+import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.ui.binding.KeyValueDataSource;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
@@ -139,7 +140,7 @@ public class IryohokenRirekiCommonChildDiv {
      */
     public ResponseData<IryohokenRirekiCommonChildDivDiv> onClick_btnIryohokenKakute(IryohokenRirekiCommonChildDivDiv requestDiv) {
 
-        ValidationMessageControlPairs validationMessage = createValidationHandlerOf(requestDiv).種別と保険者番号と保険者名と称記号番号の有効性チェック(requestDiv);
+        ValidationMessageControlPairs validationMessage = createValidationHandlerOf(requestDiv).種別と保険者番号と保険者名と称記号番号の有効性チェック();
         if (validationMessage.iterator().hasNext()) {
             return ResponseData.of(requestDiv).addValidationMessages(validationMessage).respond();
         }
@@ -153,6 +154,16 @@ public class IryohokenRirekiCommonChildDiv {
     }
 
     private void ifelse(IryohokenRirekiCommonChildDivDiv requestDiv) {
+        医療保険情報_識別コード = ViewStateHolder.get(ViewStateKeys.医療保険情報_識別コード, RString.class);
+
+        List<dgIryohokenIchiran_Row> 医療保険情報RiReKiNoSortList = requestDiv.getDgIryohokenIchiran().getDataSource();
+        Collections.sort(医療保険情報RiReKiNoSortList, new RiReKiNoComparator());
+        Decimal riReKiNo = Decimal.ZERO;
+        if (!医療保険情報RiReKiNoSortList.isEmpty()) {
+            riReKiNo = 医療保険情報RiReKiNoSortList.get(医療保険情報RiReKiNoSortList.size() - 1)
+                    .getDefaultDataName9().getValue().add(Decimal.ONE);
+        }
+
         List<dgIryohokenIchiran_Row> list = requestDiv.getDgIryohokenIchiran().getDataSource();
         dgIryohokenIchiran_Row ichiran_Row;
         int count = 0;
@@ -177,8 +188,10 @@ public class IryohokenRirekiCommonChildDiv {
             ichiran_Row.setDefaultDataName12(requestDiv.getPnlIryohokenJoho().getTxtHokensyaKodo().getValue());
             ichiran_Row.setDefaultDataName13(requestDiv.getPnlIryohokenJoho().getTxtHokensyaMeisho().getValue());
 
+            ichiran_Row.getDefaultDataName9().setValue(riReKiNo);
             ichiran_Row.setDefaultDataName0(医療保険情報_識別コード);
             ichiran_Row.setDefaultDataName2(状態_追加);
+            ichiran_Row.setDefaultDataName1(RString.EMPTY);
             list.add(count, ichiran_Row);
             加入日と脱退日の有効性チェック(list, count);
 
@@ -319,9 +332,21 @@ public class IryohokenRirekiCommonChildDiv {
 
     private static class DateComparator implements Comparator<IryohokenRirekiCommonChildDivDate>, Serializable {
 
+        private static final long serialVersionUID = 3893667276202140686L;
+
         @Override
         public int compare(IryohokenRirekiCommonChildDivDate o1, IryohokenRirekiCommonChildDivDate o2) {
             return o1.getDefaultDataName3().compareTo(o2.getDefaultDataName3());
+        }
+    }
+
+    private static class RiReKiNoComparator implements Comparator<dgIryohokenIchiran_Row>, Serializable {
+
+        private static final long serialVersionUID = 644289093934160725L;
+
+        @Override
+        public int compare(dgIryohokenIchiran_Row o1, dgIryohokenIchiran_Row o2) {
+            return o1.getDefaultDataName9().getValue().compareTo(o2.getDefaultDataName9().getValue());
         }
     }
 

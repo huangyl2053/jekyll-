@@ -23,6 +23,8 @@ import jp.co.ndensan.reams.db.dbz.business.core.ShisetsuNyutaishoIdentifier;
 import jp.co.ndensan.reams.db.dbz.business.core.TekiyoJogaisha;
 import jp.co.ndensan.reams.db.dbz.business.core.TekiyoJogaishaIdentifier;
 import jp.co.ndensan.reams.db.dbz.definition.core.ViewStateKeys;
+import jp.co.ndensan.reams.db.dbz.definition.core.jogaiidojiyu.JogaiKaijoJiyu;
+import jp.co.ndensan.reams.db.dbz.definition.core.shikakuidojiyu.ShikakuSoshitsuJiyu;
 import jp.co.ndensan.reams.ua.uax.entity.db.basic.UaFt200FindShikibetsuTaishoEntity;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.CodeShubetsu;
@@ -54,13 +56,12 @@ public class TekiyoJogaiRirekiHandler {
     private static final RString 状態_施設変更 = new RString("施設変更モード");
     private static final RString 状態_訂正履歴 = new RString("訂正履歴モード");
     private static final RString 状態_照会 = new RString("照会モード");
-    private static final RString 除外者解除 = new RString("除外者解除");
-    private static final RString 除外者 = new RString("除外者");
     private static final RString 台帳種別表示無し = new RString("台帳種別表示無し");
     private static final RString 適用除外者 = new RString("適用除外者");
     private static final int PADZERO = 4;
     private static final CodeShubetsu 介護除外適用理由 = new CodeShubetsu("0119");
     private static final CodeShubetsu 介護除外解除理由 = new CodeShubetsu("0123");
+    private static final RString 開始枝番 = new RString("0001");
     private final TekiyoJogaiRirekiDiv div;
 
     /**
@@ -153,11 +154,11 @@ public class TekiyoJogaiRirekiHandler {
             div.getPanelTekiyoJokaiTekiInput().setVisible(false);
             div.getPanelTekiyoJokaiKaiJyoInput().setVisible(false);
             div.getPanelTekiyoInput().setVisible(true);
-            set適用除外者明細エリア_履歴変更(親画面状態);
+            set適用除外者明細エリア_履歴変更();
             div.getBtnInputClear().setVisible(true);
-            div.getBtnInputClear().setDisabled(false);
+            div.getBtnInputClear().setDisabled(true);
             div.getBtnKakutei().setVisible(true);
-            div.getBtnKakutei().setDisabled(false);
+            div.getBtnKakutei().setDisabled(true);
         } else if (状態_照会.equals(親画面状態)) {
             div.getBtnAdd().setVisible(false);
             div.getDatagridTekiyoJogai().getGridSetting().setIsShowSelectButtonColumn(true);
@@ -166,7 +167,7 @@ public class TekiyoJogaiRirekiHandler {
             div.getPanelTekiyoJokaiTekiInput().setVisible(false);
             div.getPanelTekiyoJokaiKaiJyoInput().setVisible(false);
             div.getPanelTekiyoInput().setVisible(true);
-            set適用除外者明細エリア_履歴変更(親画面状態);
+            set適用除外者明細エリア_履歴変更();
             div.getBtnInputClear().setVisible(false);
             div.getBtnKakutei().setVisible(false);
         }
@@ -193,7 +194,7 @@ public class TekiyoJogaiRirekiHandler {
             div.getPanelTekiyoJokaiTekiInput().getCcdShisetsuJoho().setDisabled(false);
             clear適用除外情報入力エリア();
         } else {
-            set適用除外者明細エリア(null, 状態_訂正履歴);
+            set適用除外者明細エリア(null, 親画面状態);
             set適用除外者明細エリア状態();
         }
     }
@@ -240,33 +241,19 @@ public class TekiyoJogaiRirekiHandler {
                         Models.class);
         List<datagridTekiyoJogai_Row> rowList = div.getDatagridTekiyoJogai().getDataSource();
         ShikibetsuCode 識別コード = new ShikibetsuCode(div.getHiddenInputShikibetsuCode());
-        FlexibleDate 異動日 = FlexibleDate.EMPTY;
-        if (div.getDatagridTekiyoJogai().getActiveRow() != null) {
-            異動日 = new FlexibleDate(選択データ.getIdoYMD());
-        }
-        RString 最大枝番;
-        RString 最新履歴番号;
-        RString 枝番;
-        RString 履歴番号;
-        if (rowList != null && !rowList.isEmpty()) {
-            最大枝番 = rowList.get(0).getEdaNo();
-            枝番 = new RString(String.valueOf(Integer.valueOf(最大枝番.toString().trim()) + 1)).padZeroToLeft(PADZERO);
-
-            Collections.sort(rowList, new DateComparatoRrirekiNo());
-            最新履歴番号 = rowList.get(0).getRirekiNo();
-            int rirekiNoMax = 0;
-            if (!RString.isNullOrEmpty(最新履歴番号)) {
-                rirekiNoMax = Integer.parseInt(最新履歴番号.toString());
-            }
-            履歴番号 = new RString(String.valueOf(rirekiNoMax + 1));
-        } else {
+        FlexibleDate 異動日;
+        RString 枝番 = 開始枝番;
+        if (rowList == null || rowList.isEmpty()) {
             rowList = new ArrayList();
-            枝番 = new RString("0001");
-            履歴番号 = new RString("1");
         }
         if (状態_適用登録.equals(画面状態)) {
-            枝番 = new RString("0001");
-            履歴番号 = new RString("1");
+            int 最新履歴番号 = 0;
+            Collections.sort(rowList, new DateComparatoRrirekiNo());
+            if (!RString.isNullOrEmpty(rowList.get(0).getRirekiNo())) {
+                最新履歴番号 = Integer.parseInt(rowList.get(0).getRirekiNo().toString());
+            }
+            RString 履歴番号 = new RString(最新履歴番号 + 1);
+            枝番 = 開始枝番;
             異動日 = new FlexibleDate(div.getPanelTekiyoJokaiTekiInput().getTxtTekiyoDateInput().getValue().toString());
             datagridTekiyoJogai_Row row = new datagridTekiyoJogai_Row();
             row.setRowState(RowState.Added);
@@ -293,48 +280,78 @@ public class TekiyoJogaiRirekiHandler {
             div.getPanelTekiyoJokaiTekiInput().setDisabled(true);
             div.getBtnAdd().setDisabled(true);
         } else if (状態_解除.equals(画面状態) && !rowList.isEmpty()) {
-            枝番 = new RString("0001");
-            履歴番号 = new RString("1");
             datagridTekiyoJogai_Row row = rowList.get(0);
+            枝番 = new RString(Integer.parseInt(row.getEdaNo().trim().toString()) + 1).padZeroToLeft(PADZERO);
+            異動日 = new FlexibleDate(div.getPanelTekiyoJokaiKaiJyoInput().getTxtKaijoDateInput().getValue().toString());
             row.setRowState(RowState.Modified);
             row.getTaiShoDate().setValue(div.getPanelTekiyoJokaiKaiJyoInput().getTxtTaisyoDateInput().getValue());
             row.getKayijoDate().setValue(div.getPanelTekiyoJokaiKaiJyoInput().getTxtKaijoDateInput().getValue());
             row.getKaijoTodokeDate().setValue(div.getPanelTekiyoJokaiKaiJyoInput().getTxtKaijoTododkDateIn().getValue());
             row.setKaijoJiyuCode(div.getPanelTekiyoJokaiKaiJyoInput().getDdlKaijoJiyuInput().getSelectedKey());
             row.setKaijoJiyu(div.getPanelTekiyoJokaiKaiJyoInput().getDdlKaijoJiyuInput().getSelectedValue());
-            row.setHenkougoTekiyoDate(new RString(異動日.toString()));
+            row.setHenkoumaeTekiyoDate(row.getTekiyoDate().getValue().toDateString());
+            row.setHenkoumaeIdoYMD(row.getIdoYMD());
+            row.setHenkoumaeEdaNo(row.getEdaNo());
+            row.setHenkougoTekiyoDate(row.getTekiyoDate().getValue().toDateString());
             row.setHenkougoIdoYMD(new RString(異動日.toString()));
             row.setHenkougoEdaNo(枝番);
-
-            ShisetsuNyutaisho taisho = new ShisetsuNyutaisho(識別コード, Integer.parseInt(履歴番号.toString()));
-            保険施設入退所Model.add(taisho);
             TekiyoJogaisha 適用除外者の識別子
-                    = new TekiyoJogaisha(識別コード, new FlexibleDate(
-                                    div.getPanelTekiyoJokaiKaiJyoInput().getTxtKaijoDateInput().getValue().toString()), 枝番);
+                    = new TekiyoJogaisha(識別コード, 異動日, 枝番);
             適用除外者Model.add(適用除外者の識別子);
             div.getPanelTekiyoJokaiKaiJyoInput().setDisabled(true);
         } else if (状態_訂正履歴.equals(画面状態)) {
             if (状態_修正.equals(div.getStauts())) {
-                if (!RowState.Deleted.equals(選択データ.getRowState())) {
-                    if (RowState.Added.equals(選択データ.getRowState())) {
-                        選択データ.setRowState(選択データ.getRowState());
-                    } else {
-                        選択データ.setRowState(RowState.Modified);
-                    }
-                    選択データ.getTekiyoDate().setValue(div.getPanelTekiyoInput().getTxtTekiyoDate().getValue());
-                    選択データ.getTekiyoTodokeDate().setValue(div.getPanelTekiyoInput().getTxtTekiyoTodokeDate().getValue());
-                    選択データ.setTekiyoJiyuCode(div.getPanelTekiyoInput().getDdlTekiyoJiyu().getSelectedKey());
-                    選択データ.setTekiyoJiyu(div.getPanelTekiyoInput().getDdlTekiyoJiyu().getSelectedValue());
-                    選択データ.getKayijoDate().setValue(div.getPanelTekiyoInput().getTxtKayijoDate().getValue());
-                    選択データ.getKaijoTodokeDate().setValue(div.getPanelTekiyoInput().getTxtKaijoTodokedeDate().getValue());
-                    選択データ.setKaijoJiyuCode(div.getPanelTekiyoInput().getDdlKaijyoJiyu().getSelectedKey());
-                    選択データ.setKaijoJiyu(div.getPanelTekiyoInput().getDdlKaijyoJiyu().getSelectedValue());
-                    TekiyoJogaisha 適用除外者の識別子 = new TekiyoJogaisha(識別コード, 異動日, 枝番);
-                    適用除外者Model.add(適用除外者の識別子);
+                if (RowState.Unchanged.equals(選択データ.getRowState())) {
+                    選択データ.setRowState(RowState.Modified);
                 }
+                RDate 変更後適用日 = div.getPanelTekiyoInput().getTxtTekiyoDate().getValue();
+                RDate 変更後解除日 = div.getPanelTekiyoInput().getTxtKayijoDate().getValue();
+                選択データ.getTekiyoDate().setValue(変更後適用日);
+                選択データ.getTekiyoTodokeDate().setValue(div.getPanelTekiyoInput().getTxtTekiyoTodokeDate().getValue());
+                選択データ.setTekiyoJiyuCode(div.getPanelTekiyoInput().getDdlTekiyoJiyu().getSelectedKey());
+                選択データ.setTekiyoJiyu(div.getPanelTekiyoInput().getDdlTekiyoJiyu().getSelectedValue());
+                選択データ.getKayijoDate().setValue(変更後解除日);
+                選択データ.getKaijoTodokeDate().setValue(div.getPanelTekiyoInput().getTxtKaijoTodokedeDate().getValue());
+                選択データ.setKaijoJiyuCode(div.getPanelTekiyoInput().getDdlKaijyoJiyu().getSelectedKey());
+                選択データ.setIdoJiyuCode(div.getPanelTekiyoInput().getDdlKaijyoJiyu().getSelectedKey());
+                選択データ.setKaijoJiyu(div.getPanelTekiyoInput().getDdlKaijyoJiyu().getSelectedValue());
+                選択データ.setHenkoumaeTekiyoDate(選択データ.getTekiyoDate().getValue().toDateString());
+                選択データ.setHenkoumaeIdoYMD(選択データ.getIdoYMD());
+                選択データ.setHenkoumaeEdaNo(選択データ.getEdaNo());
+                選択データ.setHenkougoTekiyoDate(変更後適用日.toDateString());
+                選択データ.setHenkougoIdoYMD(変更後解除日.toDateString());
+
+                boolean is異動日変更 = false;
+                if (!選択データ.getHenkougoIdoYMD().equals(選択データ.getHenkoumaeIdoYMD())) {
+                    is異動日変更 = true;
+                }
+                for (datagridTekiyoJogai_Row row : rowList) {
+                    if (is異動日変更) {
+                        if (選択データ.getHenkougoIdoYMD().equals(row.getHenkougoIdoYMD())
+                                && 選択データ.getHenkougoTekiyoDate().equals(row.getHenkougoTekiyoDate())) {
+                            枝番 = new RString(Integer.parseInt(row.getHenkougoEdaNo().toString()) + 1).padZeroToLeft(PADZERO);
+                            break;
+                        } else {
+                            枝番 = 開始枝番;
+                        }
+                    } else {
+                        if (選択データ.getHenkougoTekiyoDate().equals(row.getHenkougoTekiyoDate())) {
+                            枝番 = new RString(Integer.parseInt(row.getHenkougoEdaNo().toString()) + 1).padZeroToLeft(PADZERO);
+                            break;
+                        } else {
+                            枝番 = 開始枝番;
+                        }
+                    }
+                }
+                選択データ.setHenkougoEdaNo(枝番);
+                TekiyoJogaisha 適用除外者の識別子 = new TekiyoJogaisha(識別コード, new FlexibleDate(選択データ.getHenkougoIdoYMD()), 枝番);
+                適用除外者Model.add(適用除外者の識別子);
             } else if (状態_追加.equals(div.getStauts())) {
                 datagridTekiyoJogai_Row row = new datagridTekiyoJogai_Row();
+                枝番 = 開始枝番;
                 row.setRowState(RowState.Added);
+                RDate 適用日 = div.getPanelTekiyoInput().getTxtTekiyoDate().getValue();
+                RDate 解除日 = div.getPanelTekiyoInput().getTxtKayijoDate().getValue();
                 row.getTekiyoDate().setValue(div.getPanelTekiyoInput().getTxtTekiyoDate().getValue());
                 row.getTekiyoTodokeDate().setValue(div.getPanelTekiyoInput().getTxtTekiyoTodokeDate().getValue());
                 row.setTekiyoJiyuCode(div.getPanelTekiyoInput().getDdlTekiyoJiyu().getSelectedKey());
@@ -343,11 +360,17 @@ public class TekiyoJogaiRirekiHandler {
                 row.getKaijoTodokeDate().setValue(div.getPanelTekiyoInput().getTxtKaijoTodokedeDate().getValue());
                 row.setKaijoJiyuCode(div.getPanelTekiyoInput().getDdlKaijyoJiyu().getSelectedKey());
                 row.setKaijoJiyu(div.getPanelTekiyoInput().getDdlKaijyoJiyu().getSelectedValue());
-                row.setRirekiNo(履歴番号);
+                row.setIdoYMD(div.getPanelTekiyoInput().getTxtKayijoDate().getValue().toDateString());
+                row.setEdaNo(枝番);
+                row.setHenkoumaeTekiyoDate(適用日.toDateString());
+                row.setHenkoumaeIdoYMD(解除日.toDateString());
+                row.setHenkoumaeEdaNo(枝番);
+                row.setHenkougoTekiyoDate(適用日.toDateString());
+                row.setHenkougoIdoYMD(解除日.toDateString());
+                row.setHenkougoEdaNo(枝番);
                 rowList.add(row);
                 TekiyoJogaisha 適用除外者の識別子
-                        = new TekiyoJogaisha(識別コード, new FlexibleDate(
-                                        div.getPanelTekiyoInput().getTxtKaijoTodokedeDate().getValue().toString()), 枝番);
+                        = new TekiyoJogaisha(識別コード, new FlexibleDate(解除日.toDateString()), 枝番);
                 適用除外者Model.add(適用除外者の識別子);
                 Collections.sort(rowList, new DateComparator());
             } else if (状態_削除.equals(div.getStauts())) {
@@ -355,6 +378,8 @@ public class TekiyoJogaiRirekiHandler {
                     rowList.remove(選択データ);
                 } else {
                     選択データ.setRowState(RowState.Deleted);
+                    異動日 = new FlexibleDate(選択データ.getIdoYMD());
+                    枝番 = 選択データ.getEdaNo();
                     TekiyoJogaisha 適用除外者の識別子 = new TekiyoJogaisha(識別コード, 異動日, 枝番);
                     適用除外者Model.add(適用除外者の識別子);
                 }
@@ -375,6 +400,7 @@ public class TekiyoJogaiRirekiHandler {
      */
     public void onClick_Torikeshi() {
         clear適用除外情報入力エリア();
+        div.getBtnAdd().setDisabled(false);
     }
 
     /**
@@ -384,71 +410,39 @@ public class TekiyoJogaiRirekiHandler {
      */
     public void saveTekiyoJogaisha(ShikibetsuCode 識別コード) {
         List<datagridTekiyoJogai_Row> rowList = div.getDatagridTekiyoJogai().getDataSource();
+        RString 画面状態 = new RString(div.getMode_DisplayMode().toString());
         Models<TekiyoJogaishaIdentifier, TekiyoJogaisha> 適用除外者Model
                 = ViewStateHolder.get(jp.co.ndensan.reams.db.dbz.divcontroller.viewbox.ViewStateKeys.適用除外者管理_適用除外者情報, Models.class);
         Models<ShisetsuNyutaishoIdentifier, ShisetsuNyutaisho> 保険施設入退所Model
                 = ViewStateHolder.get(jp.co.ndensan.reams.db.dbz.divcontroller.viewbox.ViewStateKeys.適用除外者管理_保険施設入退所情報, Models.class);
-
-        RString 枝番;
-        RString 最大枝番 = new RString("0");
-        RString 履歴番号 = new RString("1");
-        int index = 1;
-        if (状態_適用登録.equals(new RString(div.getMode_DisplayMode().toString()))) {
-            Collections.sort(rowList, new DateComparatorTekiyoYMD());
-        }
         for (datagridTekiyoJogai_Row row : rowList) {
-            if (index == 1) {
-                最大枝番 = rowList.get(0).getEdaNo();
-                履歴番号 = rowList.get(0).getRirekiNo();
-            }
-            int intEdaNoMax = Integer.parseInt(最大枝番.toString().trim());
-            枝番 = new RString(String.valueOf(intEdaNoMax + 1)).padZeroToLeft(PADZERO);
-            最大枝番 = 枝番;
-            FlexibleDate 異動日 = new FlexibleDate(row.getIdoYMD());
-            if (new RString("0001").equals(枝番) && index == 1) {
-                枝番 = new RString("0001");
-            }
             if (row.getRowState() == null || RowState.Unchanged.equals(row.getRowState())) {
-                index++;
                 continue;
             }
             FlexibleDate 解除日 = FlexibleDate.EMPTY;
             FlexibleDate 解除届出日 = FlexibleDate.EMPTY;
+            FlexibleDate 変更前異動日 = new FlexibleDate(row.getHenkoumaeIdoYMD());
+            FlexibleDate 変更後異動日 = new FlexibleDate(row.getHenkougoIdoYMD());
+            RString 変更前枝番 = row.getHenkoumaeEdaNo();
+            RString 変更後枝番 = row.getHenkougoEdaNo();
             if (row.getKayijoDate().getValue() != null) {
                 解除日 = new FlexibleDate(row.getKayijoDate().getValue().toString());
             }
             if (row.getKaijoTodokeDate().getValue() != null) {
                 解除届出日 = new FlexibleDate(row.getKaijoTodokeDate().getValue().toString());
             }
-            if (RowState.Added.equals(row.getRowState())) {
-                TekiyoJogaishaIdentifier 適用除外者の識別子
-                        = new TekiyoJogaishaIdentifier(識別コード, 解除日, 枝番);
-                TekiyoJogaishaManager.createInstance().regTekiyoJogaisha(set適用除外者情報(
-                        適用除外者Model.get(適用除外者の識別子), row).toEntity());
-            } else if (RowState.Modified.equals(row.getRowState())) {
-                TekiyoJogaishaManager.createInstance().delTekiyoJogaisha(識別コード, 異動日, row.getEdaNo());
-                TekiyoJogaishaIdentifier 適用除外者の識別子
-                        = new TekiyoJogaishaIdentifier(識別コード, 異動日, 枝番);
-                TekiyoJogaishaManager.createInstance().regTekiyoJogaisha(
-                        set修正状態適用除外者情報(適用除外者Model.get(適用除外者の識別子), row).toEntity());
-            } else if (RowState.Deleted.equals(row.getRowState())) {
-                TekiyoJogaishaManager.createInstance().delTekiyoJogaisha(識別コード, 異動日, row.getEdaNo());
-            } else if (状態_適用登録.equals(new RString(div.getMode_DisplayMode().toString()))) {
+            if (状態_適用登録.equals(画面状態)) {
                 RString 画面喪失 = HihokenshashikakusoshitsuManager.createInstance().shikakuSoshitsuCheck(識別コード, HihokenshaNo.EMPTY);
                 if (DbaErrorMessages.住所地特例として未適用.getMessage().getCode().equals(画面喪失.toString())) {
                     throw new ApplicationException(DbaErrorMessages.住所地特例として未適用.getMessage());
                 }
-                TekiyoJogaishaManager.createInstance().delTekiyoJogaisha(識別コード,
-                        new FlexibleDate(row.getTekiyoDate().getValue().toString()), row.getEdaNo());
+                TekiyoJogaishaManager.createInstance().delTekiyoJogaisha(識別コード, 変更前異動日, 変更前枝番);
                 TekiyoJogaishaIdentifier 適用除外者の識別子
-                        = new TekiyoJogaishaIdentifier(識別コード,
-                                new FlexibleDate(row.getTekiyoDate().getValue().toString()), 枝番);
+                        = new TekiyoJogaishaIdentifier(識別コード, 変更後異動日, 変更後枝番);
                 TekiyoJogaishaManager.createInstance().regTekiyoJogaisha(
                         set適用状態適用除外者情報(適用除外者Model.get(適用除外者の識別子), row).toEntity());
 
-                int rirekiNo = Integer.parseInt(履歴番号.toString());
-                int 最大履歴番号 = rirekiNo + 1;
-                ShisetsuNyutaishoIdentifier taisho = new ShisetsuNyutaishoIdentifier(識別コード, 最大履歴番号);
+                ShisetsuNyutaishoIdentifier taisho = new ShisetsuNyutaishoIdentifier(識別コード, Integer.parseInt(row.getRirekiNo().toString()));
                 TaJushochiTokureisyaKanriManager.createInstance().regShisetsuNyutaisho(
                         set適用状態介護保険施設入退所(保険施設入退所Model.get(taisho), row).toEntity());
 
@@ -457,14 +451,16 @@ public class TekiyoJogaiRirekiHandler {
                     HihokenshashikakusoshitsuManager.createInstance().saveHihokenshaShikakuSoshitsu(
                             識別コード,
                             HihokenshaNo.EMPTY,
-                            new FlexibleDate(row.getTekiyoDate().toString()),
-                            除外者,
-                            new FlexibleDate(row.getTekiyoTodokeDate().toString()));
+                            new FlexibleDate(row.getTekiyoDate().getValue().toDateString()),
+                            ShikakuSoshitsuJiyu.除外者.getコード(),
+                            new FlexibleDate(row.getTekiyoTodokeDate().getValue().toDateString()));
                 }
+                Collections.sort(rowList, new DateComparator());
+                break;
             } else if (状態_解除.equals(new RString(div.getMode_DisplayMode().toString()))) {
-                TekiyoJogaishaManager.createInstance().delTekiyoJogaisha(識別コード, 異動日, row.getEdaNo());
+                TekiyoJogaishaManager.createInstance().delTekiyoJogaisha(識別コード, 変更前異動日, 変更前枝番);
                 TekiyoJogaishaIdentifier 適用除外者の識別子
-                        = new TekiyoJogaishaIdentifier(識別コード, 解除日, 枝番);
+                        = new TekiyoJogaishaIdentifier(識別コード, 変更後異動日, 変更後枝番);
                 TekiyoJogaishaManager.createInstance().regTekiyoJogaisha(
                         set解除状態適用除外者情報(適用除外者Model.get(適用除外者の識別子), row).toEntity());
 
@@ -472,18 +468,28 @@ public class TekiyoJogaiRirekiHandler {
                         識別コード, Integer.getInteger(row.getRirekiNo().toString()));
                 TekiyoJogaishaManager.createInstance().updateKaigoJogaiTokureiTaishoShisetsu(
                         set解除状態介護保険施設入退所(保険施設入退所Model.get(taisho), row).toEntity());
-                if (除外者解除.equals(row.getKaijoJiyu())) {
+                if (JogaiKaijoJiyu.除外者解除.getコード().equals(row.getKaijoJiyuCode())) {
                     TekiyoJogaishaManager.createInstance().saveHihokenshaShutoku(
-                            row.getKaijoJiyu(),
+                            row.getKaijoJiyuCode(),
                             解除日,
                             識別コード,
                             解除届出日);
                 }
+                break;
+            } else if (RowState.Added.equals(row.getRowState())) {
+                TekiyoJogaishaIdentifier 適用除外者の識別子
+                        = new TekiyoJogaishaIdentifier(識別コード, 変更後異動日, 変更後枝番);
+                TekiyoJogaishaManager.createInstance().regTekiyoJogaisha(set適用除外者情報(
+                        適用除外者Model.get(適用除外者の識別子), row).toEntity());
+            } else if (RowState.Modified.equals(row.getRowState())) {
+                TekiyoJogaishaManager.createInstance().delTekiyoJogaisha(識別コード, 変更前異動日, 変更前枝番);
+                TekiyoJogaishaIdentifier 適用除外者の識別子
+                        = new TekiyoJogaishaIdentifier(識別コード, 変更後異動日, 変更後枝番);
+                TekiyoJogaishaManager.createInstance().regTekiyoJogaisha(
+                        set修正状態適用除外者情報(適用除外者Model.get(適用除外者の識別子), row).toEntity());
+            } else if (RowState.Deleted.equals(row.getRowState())) {
+                TekiyoJogaishaManager.createInstance().delTekiyoJogaisha(識別コード, 変更前異動日, 変更前枝番);
             }
-            index++;
-        }
-        if (状態_適用登録.equals(new RString(div.getMode_DisplayMode().toString()))) {
-            Collections.sort(rowList, new DateComparator());
         }
     }
 
@@ -619,6 +625,12 @@ public class TekiyoJogaiRirekiHandler {
             } else {
                 row.setHenkoTsuchiHakkoYMD(RString.EMPTY);
             }
+            row.setHenkoumaeTekiyoDate(new RString(適用除外者情報.get適用年月日().toString()));
+            row.setHenkoumaeIdoYMD(new RString(適用除外者情報.get異動日().toString()));
+            row.setHenkoumaeEdaNo(適用除外者情報.get枝番());
+            row.setHenkougoTekiyoDate(new RString(適用除外者情報.get適用年月日().toString()));
+            row.setHenkougoIdoYMD(new RString(適用除外者情報.get異動日().toString()));
+            row.setHenkougoEdaNo(適用除外者情報.get枝番());
             rowList.add(row);
         }
         div.getDatagridTekiyoJogai().setDataSource(rowList);
@@ -656,7 +668,7 @@ public class TekiyoJogaiRirekiHandler {
             }
             div.getPanelTekiyoInput().getDdlKaijyoJiyu().setSelectedValue(選択されたレコード.getKaijoJiyu());
         } else if (状態_訂正履歴.equals(画面状態)) {
-            set適用除外者明細エリア_履歴変更(画面状態);
+            set適用除外者明細エリア_履歴変更();
             div.getBtnInputClear().setVisible(true);
             div.getBtnInputClear().setDisabled(false);
             div.getBtnKakutei().setVisible(true);
@@ -735,22 +747,13 @@ public class TekiyoJogaiRirekiHandler {
         div.getPanelTekiyoInput().getDdlKaijyoJiyu().setDisabled(true);
     }
 
-    private void set適用除外者明細エリア_履歴変更(RString 画面状態) {
-        if (状態_訂正履歴.equals(画面状態)) {
-            div.getPanelTekiyoInput().getTxtTekiyoDate().setDisabled(false);
-            div.getPanelTekiyoInput().getTxtTekiyoTodokeDate().setDisabled(false);
-            div.getPanelTekiyoInput().getDdlTekiyoJiyu().setDisabled(false);
-            div.getPanelTekiyoInput().getTxtKayijoDate().setDisabled(false);
-            div.getPanelTekiyoInput().getTxtKaijoTodokedeDate().setDisabled(false);
-            div.getPanelTekiyoInput().getDdlKaijyoJiyu().setDisabled(false);
-        } else {
-            div.getPanelTekiyoInput().getTxtTekiyoDate().setDisabled(true);
-            div.getPanelTekiyoInput().getTxtTekiyoTodokeDate().setDisabled(true);
-            div.getPanelTekiyoInput().getDdlTekiyoJiyu().setDisabled(true);
-            div.getPanelTekiyoInput().getTxtKayijoDate().setDisabled(true);
-            div.getPanelTekiyoInput().getTxtKaijoTodokedeDate().setDisabled(true);
-            div.getPanelTekiyoInput().getDdlKaijyoJiyu().setDisabled(true);
-        }
+    private void set適用除外者明細エリア_履歴変更() {
+        div.getPanelTekiyoInput().getTxtTekiyoDate().setDisabled(true);
+        div.getPanelTekiyoInput().getTxtTekiyoTodokeDate().setDisabled(true);
+        div.getPanelTekiyoInput().getDdlTekiyoJiyu().setDisabled(true);
+        div.getPanelTekiyoInput().getTxtKayijoDate().setDisabled(true);
+        div.getPanelTekiyoInput().getTxtKaijoTodokedeDate().setDisabled(true);
+        div.getPanelTekiyoInput().getDdlKaijyoJiyu().setDisabled(true);
         div.getPanelTekiyoInput().getDdlTekiyoJiyu().setDataSource(set適用事由());
         div.getPanelTekiyoInput().getDdlKaijyoJiyu().setDataSource(set解除事由());
         div.getPanelTekiyoInput().getTxtTekiyoDate().clearValue();
@@ -769,7 +772,6 @@ public class TekiyoJogaiRirekiHandler {
             div.getPanelTekiyoJokaiTekiInput().getTxtTkyoTododkDateIn().clearValue();
             div.getPanelTekiyoJokaiTekiInput().getDdlTekiyoJiyuInput().setSelectedValue(RString.EMPTY);
             div.getPanelTekiyoJokaiTekiInput().getCcdShisetsuJoho().clear();
-            div.getBtnAdd().setDisabled(false);
         } else if (状態_解除.equals(画面モード)) {
             div.getPanelTekiyoJokaiKaiJyoInput().getTxtTaisyoDateInput().clearValue();
             div.getPanelTekiyoJokaiKaiJyoInput().getTxtKaijoDateInput().clearValue();
@@ -847,16 +849,16 @@ public class TekiyoJogaiRirekiHandler {
         UaFt200FindShikibetsuTaishoEntity 宛名情報 = get宛名情報();
         FlexibleDate 適用日 = FlexibleDate.EMPTY;
         FlexibleDate 解除日 = FlexibleDate.EMPTY;
-        FlexibleDate 退所日 = FlexibleDate.EMPTY;
+        FlexibleDate 適用届出日 = FlexibleDate.EMPTY;
         FlexibleDate 解除届出日 = FlexibleDate.EMPTY;
         if (row.getTekiyoDate().getValue() != null) {
             適用日 = new FlexibleDate(row.getTekiyoDate().getValue().toDateString());
         }
+        if (row.getTekiyoTodokeDate().getValue() != null) {
+            適用届出日 = new FlexibleDate(row.getTekiyoTodokeDate().getValue().toDateString());
+        }
         if (row.getKayijoDate().getValue() != null) {
             解除日 = new FlexibleDate(row.getKayijoDate().getValue().toDateString());
-        }
-        if (row.getTaiShoDate().getValue() != null) {
-            退所日 = new FlexibleDate(row.getTaiShoDate().getValue().toDateString());
         }
         if (row.getKaijoTodokeDate().getValue() != null) {
             解除届出日 = new FlexibleDate(row.getKaijoTodokeDate().getValue().toDateString());
@@ -869,15 +871,12 @@ public class TekiyoJogaiRirekiHandler {
                 .set市町村コード(宛名情報.getGenLasdecCode())
                 .set適用除外適用事由コード(row.getTekiyoJiyuCode())
                 .set適用年月日(適用日)
-                .set適用届出年月日(退所日)
-                .set適用受付年月日(退所日)
+                .set適用届出年月日(適用届出日)
+                .set適用受付年月日(適用届出日)
                 .set適用除外解除事由コード(row.getKaijoJiyuCode())
                 .set解除年月日(解除日)
                 .set解除届出年月日(解除届出日)
                 .set解除受付年月日(解除届出日)
-                .set入所通知発行日(FlexibleDate.EMPTY)
-                .set退所通知発行日(FlexibleDate.EMPTY)
-                .set変更通知発行日(FlexibleDate.EMPTY)
                 .set論理削除フラグ(false)
                 .build();
     }
@@ -886,31 +885,31 @@ public class TekiyoJogaiRirekiHandler {
             TekiyoJogaisha tekiyoJogaisha,
             datagridTekiyoJogai_Row row) {
         FlexibleDate 適用日 = FlexibleDate.EMPTY;
+        FlexibleDate 適用届出日 = FlexibleDate.EMPTY;
         FlexibleDate 解除日 = FlexibleDate.EMPTY;
-        FlexibleDate 退所日 = FlexibleDate.EMPTY;
         FlexibleDate 解除届出日 = FlexibleDate.EMPTY;
         if (row.getTekiyoDate().getValue() != null) {
             適用日 = new FlexibleDate(row.getTekiyoDate().getValue().toDateString());
         }
+        if (row.getTekiyoTodokeDate().getValue() != null) {
+            適用届出日 = new FlexibleDate(row.getTekiyoTodokeDate().getValue().toDateString());
+        }
         if (row.getKayijoDate().getValue() != null) {
             解除日 = new FlexibleDate(row.getKayijoDate().getValue().toDateString());
-        }
-        if (row.getTaiShoDate().getValue() != null) {
-            退所日 = new FlexibleDate(row.getTaiShoDate().getValue().toDateString());
         }
         if (row.getKaijoTodokeDate().getValue() != null) {
             解除届出日 = new FlexibleDate(row.getKaijoTodokeDate().getValue().toDateString());
         }
         return tekiyoJogaisha.createBuilderForEdit()
                 .set識別コード(tekiyoJogaisha.get識別コード())
-                .set異動日(解除日)
+                .set異動日(tekiyoJogaisha.get異動日())
                 .set枝番(tekiyoJogaisha.get枝番())
                 .set異動事由コード(row.getIdoJiyuCode())
                 .set市町村コード(new LasdecCode(row.getShichosonCode()))
                 .set適用除外適用事由コード(row.getTekiyoJiyuCode())
                 .set適用年月日(適用日)
-                .set適用届出年月日(退所日)
-                .set適用受付年月日(退所日)
+                .set適用届出年月日(適用届出日)
+                .set適用受付年月日(適用届出日)
                 .set適用除外解除事由コード(row.getKaijoJiyuCode())
                 .set解除年月日(解除日)
                 .set解除届出年月日(解除届出日)
@@ -927,12 +926,12 @@ public class TekiyoJogaiRirekiHandler {
             datagridTekiyoJogai_Row row) {
         UaFt200FindShikibetsuTaishoEntity 宛名情報 = get宛名情報();
         FlexibleDate 適用日 = FlexibleDate.EMPTY;
-        FlexibleDate 退所日 = FlexibleDate.EMPTY;
+        FlexibleDate 適用届出日 = FlexibleDate.EMPTY;
         if (row.getTekiyoDate().getValue() != null) {
             適用日 = new FlexibleDate(row.getTekiyoDate().getValue().toDateString());
         }
-        if (row.getTaiShoDate().getValue() != null) {
-            退所日 = new FlexibleDate(row.getTaiShoDate().getValue().toDateString());
+        if (row.getTekiyoTodokeDate().getValue() != null) {
+            適用届出日 = new FlexibleDate(row.getTekiyoTodokeDate().getValue().toDateString());
         }
         return tekiyoJogaisha.createBuilderForEdit()
                 .set識別コード(tekiyoJogaisha.get識別コード())
@@ -942,15 +941,9 @@ public class TekiyoJogaiRirekiHandler {
                 .set市町村コード(宛名情報.getGenLasdecCode())
                 .set適用除外適用事由コード(row.getTekiyoJiyuCode())
                 .set適用年月日(適用日)
-                .set適用届出年月日(退所日)
-                .set適用受付年月日(退所日)
+                .set適用届出年月日(適用届出日)
+                .set適用受付年月日(適用届出日)
                 .set適用除外解除事由コード(row.getKaijoJiyuCode())
-                .set解除年月日(FlexibleDate.EMPTY)
-                .set解除届出年月日(FlexibleDate.EMPTY)
-                .set解除受付年月日(FlexibleDate.EMPTY)
-                .set入所通知発行日(FlexibleDate.EMPTY)
-                .set退所通知発行日(FlexibleDate.EMPTY)
-                .set変更通知発行日(FlexibleDate.EMPTY)
                 .set論理削除フラグ(false)
                 .build();
     }
@@ -959,17 +952,17 @@ public class TekiyoJogaiRirekiHandler {
             TekiyoJogaisha tekiyoJogaisha,
             datagridTekiyoJogai_Row row) {
         FlexibleDate 適用日 = FlexibleDate.EMPTY;
+        FlexibleDate 適用届出日 = FlexibleDate.EMPTY;
         FlexibleDate 解除日 = FlexibleDate.EMPTY;
-        FlexibleDate 退所日 = FlexibleDate.EMPTY;
         FlexibleDate 解除届出日 = FlexibleDate.EMPTY;
         if (row.getTekiyoDate().getValue() != null) {
             適用日 = new FlexibleDate(row.getTekiyoDate().getValue().toDateString());
         }
+        if (row.getTekiyoTodokeDate().getValue() != null) {
+            適用届出日 = new FlexibleDate(row.getTekiyoTodokeDate().getValue().toDateString());
+        }
         if (row.getKayijoDate().getValue() != null) {
             解除日 = new FlexibleDate(row.getKayijoDate().getValue().toDateString());
-        }
-        if (row.getTaiShoDate().getValue() != null) {
-            退所日 = new FlexibleDate(row.getTaiShoDate().getValue().toDateString());
         }
         if (row.getKaijoTodokeDate().getValue() != null) {
             解除届出日 = new FlexibleDate(row.getKaijoTodokeDate().getValue().toDateString());
@@ -982,8 +975,8 @@ public class TekiyoJogaiRirekiHandler {
                 .set市町村コード(new LasdecCode(row.getShichosonCode()))
                 .set適用除外適用事由コード(row.getTekiyoJiyuCode())
                 .set適用年月日(適用日)
-                .set適用届出年月日(退所日)
-                .set適用受付年月日(退所日)
+                .set適用届出年月日(適用届出日)
+                .set適用受付年月日(適用届出日)
                 .set適用除外解除事由コード(row.getKaijoJiyuCode())
                 .set解除年月日(解除日)
                 .set解除届出年月日(解除届出日)
@@ -1003,12 +996,9 @@ public class TekiyoJogaiRirekiHandler {
                 .set市町村コード(宛名情報.getGenLasdecCode())
                 .set台帳種別(new RString("3"))
                 .set入所施設種類(row.getShisetsuShurui())
-                .set入所施設コード(new JigyoshaNo(row.getNyuShoShisetu()))
-                .set入所処理年月日(new FlexibleDate(RDate.getNowDateTime().getDate().toDateString()))
-                .set入所年月日(new FlexibleDate(row.getNyuShoDate().toString()))
-                .set退所年月日(FlexibleDate.EMPTY)
-                .set退所処理年月日(FlexibleDate.EMPTY)
-                .set部屋記号番号(RString.EMPTY)
+                .set入所施設コード(new JigyoshaNo(row.getNyushoShisetsuCode()))
+                .set入所処理年月日(FlexibleDate.getNowDate())
+                .set入所年月日(new FlexibleDate(row.getNyuShoDate().getValue().toDateString()))
                 .build();
     }
 
@@ -1016,8 +1006,8 @@ public class TekiyoJogaiRirekiHandler {
             ShisetsuNyutaisho taisho,
             datagridTekiyoJogai_Row row) {
         return taisho.createBuilderForEdit()
-                .set退所年月日(new FlexibleDate(row.getTaiShoDate().toString()))
-                .set退所処理年月日(new FlexibleDate(RDate.getNowDateTime().getDate().toDateString()))
+                .set退所年月日(new FlexibleDate(row.getTaiShoDate().getValue().toDateString()))
+                .set退所処理年月日(FlexibleDate.getNowDate())
                 .build();
     }
 
@@ -1028,7 +1018,7 @@ public class TekiyoJogaiRirekiHandler {
 
     private static class DateComparator implements Comparator<datagridTekiyoJogai_Row>, Serializable {
 
-        private static final long serialVersionUID = 1L;
+        private static final long serialVersionUID = 5006325486336899667L;
 
         @Override
         public int compare(datagridTekiyoJogai_Row o1, datagridTekiyoJogai_Row o2) {
@@ -1036,15 +1026,9 @@ public class TekiyoJogaiRirekiHandler {
         }
     }
 
-    private static class DateComparatorTekiyoYMD implements Comparator<datagridTekiyoJogai_Row>, Serializable {
-
-        @Override
-        public int compare(datagridTekiyoJogai_Row o1, datagridTekiyoJogai_Row o2) {
-            return o1.getTekiyoDate().getValue().compareTo(o2.getTekiyoDate().getValue());
-        }
-    }
-
     private static class DateComparatoRrirekiNo implements Comparator<datagridTekiyoJogai_Row>, Serializable {
+
+        private static final long serialVersionUID = 6830800829524381370L;
 
         @Override
         public int compare(datagridTekiyoJogai_Row o1, datagridTekiyoJogai_Row o2) {

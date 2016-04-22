@@ -186,7 +186,9 @@ public class TekiyoJogaiRirekiValidationHandler {
                     validPairs.add(new ValidationMessageControlPair(RRVMessages.入所施設の必須チェック));
                 }
             }
-            期間重複チェック(div.getDatagridTekiyoJogai().getDataSource(), 最新の適用情報, validPairs);
+            if (状態_訂正履歴.equals(画面状態)) {
+                期間重複チェック(div.getDatagridTekiyoJogai().getDataSource(), 最新の適用情報, validPairs);
+            }
         }
         return validPairs;
     }

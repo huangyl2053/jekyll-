@@ -11,16 +11,18 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 public enum ShikakuJutokuTekiyoJiyu {
 
     /**
-     * コード:05 名称:自特例適用 略称:定義なし
+     * コード:05 名称:自特例適用 略称:特例者として転出
      */
-    自特例適用("05", "自特例適用");
+    自特例適用("05", "自特例適用", "特例者として転出");
 
     private final RString code;
     private final RString fullName;
+    private final RString shortName;
 
-    private ShikakuJutokuTekiyoJiyu(String code, String fullname) {
+    private ShikakuJutokuTekiyoJiyu(String code, String fullname, String shortName) {
         this.code = new RString(code);
         this.fullName = new RString(fullname);
+        this.shortName = new RString(shortName);
     }
 
     /**
@@ -30,6 +32,15 @@ public enum ShikakuJutokuTekiyoJiyu {
      */
     public RString getコード() {
         return code;
+    }
+
+    /**
+     * 資格住特適用事由の略称を返します。
+     *
+     * @return 資格住特適用事由の略称
+     */
+    public RString get略称() {
+        return shortName;
     }
 
     /**

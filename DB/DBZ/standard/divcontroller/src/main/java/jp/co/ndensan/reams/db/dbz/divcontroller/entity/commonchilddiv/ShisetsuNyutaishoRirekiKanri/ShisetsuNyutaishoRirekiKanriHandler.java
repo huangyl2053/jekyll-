@@ -232,7 +232,7 @@ public class ShisetsuNyutaishoRirekiKanriHandler {
             newRow.setRirekiNo(new RString(Integer.toString(最大履歴番号)));
             listRow.add(newRow);
             ShisetsuNyutaisho 介護保険施設入退所情報 = new ShisetsuNyutaisho(識別コード, 最大履歴番号);
-            施設入退所情報Model.add(追加の処理(介護保険施設入退所情報));
+            施設入退所情報Model.add(追加の処理(介護保険施設入退所情報, newRow));
         } else if (更新.equals(div.getInputMode())) {
             row.getNyushoDate().setValue(div.getShisetsuNyutaishoInput().getTxtNyushoDate().getValue());
             row.getTaishoDate().setValue(div.getShisetsuNyutaishoInput().getTxtTaishoDate().getValue());
@@ -245,7 +245,7 @@ public class ShisetsuNyutaishoRirekiKanriHandler {
                 int 履歴番号 = Integer.parseInt(row.getRirekiNo().toString());
                 ShisetsuNyutaishoIdentifier 介護保険施設入退所の識別子 = new ShisetsuNyutaishoIdentifier(識別コード, 履歴番号);
                 施設入退所情報Model.deleteOrRemove(介護保険施設入退所の識別子);
-                施設入退所情報Model.add(修正の処理(介護保険施設入退所の識別子, 施設入退所情報Model));
+                施設入退所情報Model.add(修正の処理(介護保険施設入退所の識別子, 施設入退所情報Model, row));
             }
         } else if (削除.equals(div.getInputMode())) {
             if (!追加.equals(row.getState())) {
@@ -392,7 +392,8 @@ public class ShisetsuNyutaishoRirekiKanriHandler {
     }
 
     private ShisetsuNyutaisho 追加の処理(
-            ShisetsuNyutaisho 介護保険施設入退所情報) {
+            ShisetsuNyutaisho 介護保険施設入退所情報,
+            dgShisetsuNyutaishoRireki_Row row) {
         Association association = AssociationFinderFactory.createInstance().getAssociation();
         FlexibleDate 入所処理年月日 = FlexibleDate.EMPTY;
         FlexibleDate 退所処理年月日 = FlexibleDate.EMPTY;
@@ -412,10 +413,19 @@ public class ShisetsuNyutaishoRirekiKanriHandler {
             退所年月日 = div.getShisetsuNyutaishoInput().getTxtTaishoDate().getValue();
         }
         if (台帳種別表示機能.equals(new RString(div.getMode_利用().toString()))) {
-            台帳種別 = div.getShisetsuNyutaishoInput().getCcdShisetsuJoho().getDaichoShubetsu();
-        }
-        if (!適用除外者対象機能.equals(new RString(div.getMode_利用().toString()))) {
-            施設種類 = div.getShisetsuNyutaishoInput().getCcdShisetsuJoho().get施設種類();
+            台帳種別 = row.getDaichoShubetsuKey();
+            施設種類 = row.getShisetsuShuruiKey();
+        } else if (被保険者対象機能.equals(new RString(div.getMode_利用().toString()))) {
+            台帳種別 = row.getDaichoShubetsuKey();
+            施設種類 = row.getShisetsuShuruiKey();
+        } else if (他市町村住所地特例者対象機能.equals(new RString(div.getMode_利用().toString()))) {
+            台帳種別 = row.getDaichoShubetsuKey();
+            施設種類 = row.getShisetsuShuruiKey();
+        } else if (適用除外者対象機能.equals(new RString(div.getMode_利用().toString()))) {
+            台帳種別 = row.getDaichoShubetsuKey();
+            施設種類 = row.getShisetsuShuruiKey();
+        } else if (全施設対象機能.equals(new RString(div.getMode_利用().toString()))) {
+            施設種類 = row.getShisetsuShuruiKey();
         }
         if (div.getShisetsuNyutaishoInput().getCcdShisetsuJoho().getNyuryokuShisetsuKodo() != null
                 && !div.getShisetsuNyutaishoInput().getCcdShisetsuJoho().getNyuryokuShisetsuKodo().isEmpty()) {
@@ -434,11 +444,12 @@ public class ShisetsuNyutaishoRirekiKanriHandler {
 
     private ShisetsuNyutaisho 修正の処理(
             ShisetsuNyutaishoIdentifier 介護保険施設入退所の識別子,
-            Models<ShisetsuNyutaishoIdentifier, ShisetsuNyutaisho> 施設入退所情報Model) {
+            Models<ShisetsuNyutaishoIdentifier, ShisetsuNyutaisho> 施設入退所情報Model,
+            dgShisetsuNyutaishoRireki_Row row) {
         FlexibleDate 入所処理年月日;
         FlexibleDate 退所処理年月日;
-        RString 台帳種別;
-        RString 施設種類;
+        RString 台帳種別 = RString.EMPTY;
+        RString 施設種類 = RString.EMPTY;
         JigyoshaNo 施設コード;
         FlexibleDate 入所年月日;
         FlexibleDate 退所年月日;
@@ -456,19 +467,26 @@ public class ShisetsuNyutaishoRirekiKanriHandler {
             施設入退所情報.set退所処理年月日(退所処理年月日).set退所年月日(退所年月日);
         }
         if (台帳種別表示機能.equals(new RString(div.getMode_利用().toString()))) {
-            台帳種別 = div.getShisetsuNyutaishoInput().getCcdShisetsuJoho().getDaichoShubetsu();
-            施設入退所情報.set台帳種別(台帳種別);
-        }
-        if (!適用除外者対象機能.equals(new RString(div.getMode_利用().toString()))) {
-            施設種類 = div.getShisetsuNyutaishoInput().getCcdShisetsuJoho().get施設種類();
-            施設入退所情報.set入所施設種類(施設種類);
+            台帳種別 = row.getDaichoShubetsuKey();
+            施設種類 = row.getShisetsuShuruiKey();
+        } else if (被保険者対象機能.equals(new RString(div.getMode_利用().toString()))) {
+            台帳種別 = row.getDaichoShubetsuKey();
+            施設種類 = row.getShisetsuShuruiKey();
+        } else if (他市町村住所地特例者対象機能.equals(new RString(div.getMode_利用().toString()))) {
+            台帳種別 = row.getDaichoShubetsuKey();
+            施設種類 = row.getShisetsuShuruiKey();
+        } else if (適用除外者対象機能.equals(new RString(div.getMode_利用().toString()))) {
+            台帳種別 = row.getDaichoShubetsuKey();
+            施設種類 = row.getShisetsuShuruiKey();
+        } else if (全施設対象機能.equals(new RString(div.getMode_利用().toString()))) {
+            施設種類 = row.getShisetsuShuruiKey();
         }
         if (div.getShisetsuNyutaishoInput().getCcdShisetsuJoho().getNyuryokuShisetsuKodo() != null
                 && !div.getShisetsuNyutaishoInput().getCcdShisetsuJoho().getNyuryokuShisetsuKodo().isEmpty()) {
             施設コード = new JigyoshaNo(div.getShisetsuNyutaishoInput().getCcdShisetsuJoho().getNyuryokuShisetsuKodo());
             施設入退所情報.set入所施設コード(施設コード);
         }
-        return 施設入退所情報.build();
+        return 施設入退所情報.set台帳種別(台帳種別).set入所施設種類(施設種類).build();
     }
 
     private void 施設入退所情報活性() {
@@ -485,6 +503,7 @@ public class ShisetsuNyutaishoRirekiKanriHandler {
     private void 施設種類(RString 台帳種別, dgShisetsuNyutaishoRireki_Row row) {
         if (DaichoType.適用除外者.getコード().equals(台帳種別)) {
             row.setShisetsuShurui(RString.EMPTY);
+            row.setShisetsuShuruiKey(ShisetsuType.適用除外施設.getコード());
         }
     }
 

@@ -180,8 +180,7 @@ public class KojinJokyoShokaiHandler {
      * @return KojinShinchokuJokyohyoEntity
      */
     public KojinShinchokuJokyohyoJoho setKojinShinchokuJokyohyo(List<KojinJokyoShokai> kojinJokyoShokaiList) {
-        KojinShinchokuJokyohyoJoho shinchokuJokyohyoEntity = getKojinShinchokuJokyohyo(kojinJokyoShokaiList);
-        return shinchokuJokyohyoEntity;
+        return getKojinShinchokuJokyohyo(kojinJokyoShokaiList);
     }
 
     private KojinShinchokuJokyohyoJoho getKojinShinchokuJokyohyo(List<KojinJokyoShokai> kojinJokyoShokaiList) {

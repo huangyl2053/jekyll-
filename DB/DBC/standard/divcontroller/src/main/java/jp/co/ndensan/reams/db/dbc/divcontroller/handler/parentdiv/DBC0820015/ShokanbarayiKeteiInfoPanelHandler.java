@@ -7,7 +7,9 @@ package jp.co.ndensan.reams.db.dbc.divcontroller.handler.parentdiv.DBC0820015;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import jp.co.ndensan.reams.db.dbc.business.core.syokanbaraikettejoho.KetteJoho;
+import jp.co.ndensan.reams.db.dbc.definition.core.shikyufushikyukubun.ShikyuFushikyuKubun;
 import jp.co.ndensan.reams.db.dbc.definition.core.syokanbaraihishikyushinseikette.SyokanbaraihiShikyuShinseiKetteEntity;
 import jp.co.ndensan.reams.db.dbc.definition.core.syokanbaraihishikyushinseikette.SyokanbaraihiShikyuShinseiKetteParameter;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.commonchilddiv.ShokanbaraiketteiJoho.ShokanbaraiketteiJoho.dgSyokanbaraikete_Row;
@@ -32,9 +34,7 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 public class ShokanbarayiKeteiInfoPanelHandler {
 
     private final ShokanbarayiKeteiInfoPanelDiv div;
-    private static final int SIX = 6;
-    private static final RString ONE = new RString("1");
-    private static final RString TWO = new RString("2");
+    private static final int 定数_6 = 6;
 
     /**
      * ShokanbarayiKeteiInfoPanelHandler
@@ -85,31 +85,142 @@ public class ShokanbarayiKeteiInfoPanelHandler {
         ShoukanharaihishinseikensakuParameter paramter = new ShoukanharaihishinseikensakuParameter(
                 ViewStateHolder.get(ViewStateKeys.被保険者番号, HihokenshaNo.class),
                 new FlexibleYearMonth(div.getPanelTwo().getTxtServiceTeikyoYM().getValue().toDateString()
-                        .substring(0, SIX)),
+                        .substring(0, 定数_6)),
                 div.getPanelTwo().getTxtSeiriBango().getValue(), null, null, null, null);
         ViewStateHolder.put(ViewStateKeys.償還払費申請検索キー, paramter);
     }
 
     /**
+     * 決定日 内容の変更を判断する
+     *
+     * @param 決定情報 KetteJoho
+     * @param ketebi FlexibleDate
+     * @return boolean
+     */
+    private Boolean equal決定日(KetteJoho 決定情報, FlexibleDate ketebi) {
+        if (決定情報 != null && ketebi != null) {
+            if (!ketebi.equals(決定情報.getKetteiYMD())) {
+                return true;
+            }
+        } else if ((決定情報 != null && 決定情報.getKetteiYMD() != null && ketebi == null) || (決定情報 == null && ketebi != null)) {
+            return true;
+        }
+        return false;
+    }
+
+    /**
+     * 支給区分 内容の変更を判断する
+     *
+     * @param 決定情報 KetteJoho
+     * @param rdoShikyukubunNew RString
+     * @return boolean
+     */
+    private Boolean equal支給区分(KetteJoho 決定情報, RString rdoShikyukubunNew) {
+        if (決定情報 != null && rdoShikyukubunNew != null) {
+            if (!rdoShikyukubunNew.equals(決定情報.getShikyuHushikyuKetteiKubun())) {
+                return true;
+            }
+        } else if ((決定情報 != null && 決定情報.getShikyuHushikyuKetteiKubun() != null && rdoShikyukubunNew == null)
+                || (決定情報 == null && rdoShikyukubunNew != null)) {
+            return true;
+        }
+        return false;
+    }
+
+    /**
+     * 償還払決定一覧 内容の変更を判断する
+     *
+     * @param rowList List<dgSyokanbaraikete_Row>
+     * @param 償還払決定一覧 Map<RString, Integer>
+     * @return boolean
+     */
+    private Boolean equal償還払決定一覧(List<dgSyokanbaraikete_Row> rowList, Map<RString, Integer> 償還払決定一覧) {
+        for (int i = 0; i < rowList.size(); i++) {
+            if (償還払決定一覧 != null && 償還払決定一覧.get(rowList.get(i).getNo()) != rowList.get(i).getSagakuKingaku().getValue().intValue()) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    /**
+     * 内容の変更を判断する
+     *
+     * @param zogenriyu 増減理由等
+     * @param 決定情報 KetteJoho
+     * @return Boolean
+     */
+    private Boolean equalZogenriyu(RString zogenriyu, KetteJoho 決定情報) {
+        if (zogenriyu == null && 決定情報.getZougenRiyu() == null) {
+            return false;
+        }
+        if (zogenriyu != null && 決定情報.getZougenRiyu() != null) {
+            if (zogenriyu.equals(決定情報.getZougenRiyu())) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    /**
+     * 内容の変更を判断する
+     *
+     * @param fuSyikyuriyu1 不支給理由等①
+     * @param 決定情報 KetteJoho
+     * @return Boolean
+     */
+    private Boolean equalFuSyikyuriyu1(RString fuSyikyuriyu1, KetteJoho 決定情報) {
+        if (fuSyikyuriyu1 == null && 決定情報.getZougenRiyu() == null) {
+            return false;
+        }
+        if (fuSyikyuriyu1 != null && 決定情報.getZougenRiyu() != null) {
+            if (fuSyikyuriyu1.equals(決定情報.getZougenRiyu())) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    /**
+     * 内容の変更を判断する
+     *
+     * @param fushikyuriyu2 不支給理由等②
+     * @param 決定情報 KetteJoho
+     * @return Boolean
+     */
+    private Boolean equalfushikyuriyu2(RString fushikyuriyu2, KetteJoho 決定情報) {
+        if (fushikyuriyu2 == null && 決定情報.getZougenRiyu() == null) {
+            return false;
+        }
+        if (fushikyuriyu2 != null && 決定情報.getZougenRiyu() != null) {
+            if (fushikyuriyu2.equals(決定情報.getZougenRiyu())) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    /**
      * get内容変更状態
      *
-     * @param 償還払決定一覧 償還払決定一覧
-     * @param 決定情報 決定情報
      * @return flag
      */
-    public Boolean get内容変更状態(List<dgSyokanbaraikete_Row> 償還払決定一覧, KetteJoho 決定情報) {
+    public Boolean get内容変更状態() {
+        Map<RString, Integer> 償還払決定一覧 = ViewStateHolder.get(ViewStateKeys.決定情報登録_償還払決定一覧, Map.class);
+        KetteJoho 決定情報 = ViewStateHolder.get(ViewStateKeys.決定情報登録_決定情報, KetteJoho.class);
         boolean flag = false;
-        FlexibleDate ketebi = new FlexibleDate(div.getCcdShokanbaraiketteiJoho().getShokanbaraiketteiJohoDiv().getTxtKetebi()
-                .getValue().toDateString());
-        if (!ketebi.equals(決定情報.getKetteiYMD())) {
+        FlexibleDate ketebi = new FlexibleDate(div.getCcdShokanbaraiketteiJoho().
+                getShokanbaraiketteiJohoDiv().getTxtKetebi().getValue().toDateString());
+        if (equal決定日(決定情報, ketebi)) {
             flag = true;
         }
         RString rdoShikyukubunNew = div.getCcdShokanbaraiketteiJoho().getShokanbaraiketteiJohoDiv().getRdoShikyukubun().getSelectedKey();
-        if (!rdoShikyukubunNew.equals(決定情報.getShikyuHushikyuKetteiKubun())) {
+        if (equal支給区分(決定情報, rdoShikyukubunNew)) {
             flag = true;
-        } else if (決定情報.getShikyuHushikyuKetteiKubun().equals(ONE)) {
+        } else if (決定情報 != null && 決定情報.getShikyuHushikyuKetteiKubun() != null
+                && 決定情報.getShikyuHushikyuKetteiKubun().equals(ShikyuFushikyuKubun.支給.getコード())) {
             RString zogenriyu = div.getCcdShokanbaraiketteiJoho().getShokanbaraiketteiJohoDiv().getTxtZogenriyu().getValue();
-            if (!zogenriyu.equals(決定情報.getZougenRiyu())) {
+            if (equalZogenriyu(zogenriyu, 決定情報)) {
                 flag = true;
             }
             int zogentani = div.getCcdShokanbaraiketteiJoho().getShokanbaraiketteiJohoDiv().getTxtZogentani().getValue().intValue();
@@ -121,21 +232,20 @@ public class ShokanbarayiKeteiInfoPanelHandler {
             if (shiharaikingakugoke != 決定情報.getShiharaiKingaku()) {
                 flag = true;
             }
-        } else if (決定情報.getShikyuHushikyuKetteiKubun().equals(TWO)) {
+        } else if (決定情報 != null && 決定情報.getShikyuHushikyuKetteiKubun() != null
+                && 決定情報.getShikyuHushikyuKetteiKubun().equals(ShikyuFushikyuKubun.不支給.getコード())) {
             RString fuSyikyuriyu1 = div.getCcdShokanbaraiketteiJoho().getShokanbaraiketteiJohoDiv().getTxtFuSyikyuriyu1().getValue();
-            if (!fuSyikyuriyu1.equals(決定情報.getHushikyuRiyu())) {
+            if (equalFuSyikyuriyu1(fuSyikyuriyu1, 決定情報)) {
                 flag = true;
             }
             RString fushikyuriyu2 = div.getCcdShokanbaraiketteiJoho().getShokanbaraiketteiJohoDiv().getTxtFushikyuriyu2().getValue();
-            if (!fushikyuriyu2.equals(決定情報.getKounyuKaishuRireki())) {
+            if (equalfushikyuriyu2(fushikyuriyu2, 決定情報)) {
                 flag = true;
             }
         }
         List<dgSyokanbaraikete_Row> rowList = div.getCcdShokanbaraiketteiJoho().getShokanbaraiketteiJohoDiv().getDgSyokanbaraikete().getDataSource();
-        for (int i = 0; i < rowList.size(); i++) {
-            if (償還払決定一覧.get(i).getSagakuKingaku().getValue().intValue() != rowList.get(i).getSagakuKingaku().getValue().intValue()) {
-                flag = true;
-            }
+        if (equal償還払決定一覧(rowList, 償還払決定一覧)) {
+            flag = true;
         }
         return flag;
     }

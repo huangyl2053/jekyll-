@@ -33,6 +33,7 @@ import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.GyomuBunrui;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShoKisaiHokenshaNo;
+import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
 import jp.co.ndensan.reams.db.dbx.service.core.hokenshalist.HokenshaListLoader;
 import jp.co.ndensan.reams.db.dbz.business.core.HihokenshaDaicho;
 import jp.co.ndensan.reams.db.dbz.definition.core.enumeratedtype.JigyoshaKubun;
@@ -226,7 +227,7 @@ public class DBD1030001Handler {
     }
 
     private ShikibetsuCode get識別コードFromViewState() {
-        ShikibetsuCode 識別コード = ViewStateHolder.get(DBD1030001ViewStateKey.識別コード, ShikibetsuCode.class);
+        ShikibetsuCode 識別コード = ViewStateHolder.get(ViewStateKeys.識別コード, ShikibetsuCode.class);
         if (null == 識別コード) {
             識別コード = ShikibetsuCode.EMPTY;
         }
@@ -234,7 +235,7 @@ public class DBD1030001Handler {
     }
 
     private HihokenshaNo get被保険者番号FromViewState() {
-        HihokenshaNo 被保険者番号 = ViewStateHolder.get(DBD1030001ViewStateKey.被保険者番号, HihokenshaNo.class);
+        HihokenshaNo 被保険者番号 = ViewStateHolder.get(ViewStateKeys.被保険者番号, HihokenshaNo.class);
         if (null == 被保険者番号) {
             被保険者番号 = HihokenshaNo.EMPTY;
         }
@@ -1573,14 +1574,6 @@ public class DBD1030001Handler {
      */
     public enum DBD1030001ViewStateKey {
 
-        /**
-         * 識別コードです。
-         */
-        識別コード,
-        /**
-         * 被保険者番号です。
-         */
-        被保険者番号,
         /**
          * 申請一覧情報です。
          */

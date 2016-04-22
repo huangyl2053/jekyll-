@@ -13,6 +13,7 @@ import jp.co.ndensan.reams.db.dbc.divcontroller.entity.commonchilddiv.Shokanbara
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0600031.PnlKeteiJohoMsgDiv;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
+import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.message.IMessageGettable;
 import jp.co.ndensan.reams.uz.uza.message.IValidationMessage;
@@ -56,7 +57,9 @@ public final class PnlKeteiJohoMsgHandler {
             if (!ketebi.equals(決定情報.getKetteiYMD())) {
                 return true;
             }
-        } else if ((決定情報 != null && 決定情報.getKetteiYMD() != null && ketebi == null) || (決定情報 == null && ketebi != null)) {
+        } else if ((決定情報 != null && 決定情報.getKetteiYMD() != null && ketebi == null)) {
+            return true;
+        } else if (決定情報 == null && ketebi != null && !RDate.getNowDate().equals(new RDate(ketebi.toString()))) {
             return true;
         }
         return false;
@@ -75,7 +78,7 @@ public final class PnlKeteiJohoMsgHandler {
                 return true;
             }
         } else if ((決定情報 != null && 決定情報.getShikyuHushikyuKetteiKubun() != null && rdoShikyukubunNew == null)
-                || (決定情報 == null && rdoShikyukubunNew != null)) {
+                || (決定情報 == null && rdoShikyukubunNew != null && !rdoShikyukubunNew.isEmpty())) {
             return true;
         }
         return false;
@@ -98,6 +101,7 @@ public final class PnlKeteiJohoMsgHandler {
     }
 
     /**
+     * 内容の変更を判断する
      *
      * @param 償還払決定一覧 List<dgSyokanbaraikete_Row>
      * @param 決定情報 KetteJoho
@@ -105,9 +109,11 @@ public final class PnlKeteiJohoMsgHandler {
      */
     public Boolean is内容変更状態(Map<RString, Integer> 償還払決定一覧, KetteJoho 決定情報) {
         boolean flag = false;
-        FlexibleDate ketebi = new FlexibleDate(div.getCcdKetteiList().getShokanbaraiketteiJohoDiv().getTxtKetebi().getValue().toDateString());
-        if (equal決定日(決定情報, ketebi)) {
-            flag = true;
+        if (div.getCcdKetteiList().getShokanbaraiketteiJohoDiv().getTxtKetebi().getValue() != null) {
+            FlexibleDate ketebi = new FlexibleDate(div.getCcdKetteiList().getShokanbaraiketteiJohoDiv().getTxtKetebi().getValue().toDateString());
+            if (equal決定日(決定情報, ketebi)) {
+                flag = true;
+            }
         }
         RString rdoShikyukubunNew = div.getCcdKetteiList().getShokanbaraiketteiJohoDiv().getRdoShikyukubun().getSelectedKey();
         if (equal支給区分(決定情報, rdoShikyukubunNew)) {

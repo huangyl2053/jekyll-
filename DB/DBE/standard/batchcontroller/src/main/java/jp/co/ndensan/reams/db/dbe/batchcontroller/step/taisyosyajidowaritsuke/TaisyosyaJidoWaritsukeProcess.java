@@ -27,6 +27,7 @@ import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
 public class TaisyosyaJidoWaritsukeProcess extends SimpleBatchProcessBase {
 
     private static final RString オブザーバー_機関 = new RString("1");
+    private static final RString 一次判定後 = new RString("1");
     private static final Code 進捗状況_未開催 = new Code("1");
     private TaisyosyaJidoWaritsukeProcessParameter paramter;
     private ITaisyosyaJidoWaritsukeRelateMapper mapper;
@@ -39,7 +40,8 @@ public class TaisyosyaJidoWaritsukeProcess extends SimpleBatchProcessBase {
     @Override
     protected void beforeExecute() {
         mapper = getMapper(ITaisyosyaJidoWaritsukeRelateMapper.class);
-        taisyosya = mapper.selectTaisyosya();
+        taisyosya = mapper.selectTaisyosya(一次判定後.equals(BusinessConfig.get(
+                ConfigNameDBE.マスキングチェックタイミング, SubGyomuCode.DBE認定支援)));
         shinsakaiWaritsukeNinsu = paramter.getShinsakaiWaritsukeNinsu();
         shinsakaiJidoWariateTeiin = paramter.getShinsakaiJidoWariateTeiin();
         shinsakaiKaisaiNo = paramter.getShinsakaiKaisaiNo();
@@ -69,7 +71,7 @@ public class TaisyosyaJidoWaritsukeProcess extends SimpleBatchProcessBase {
                 if (0 < mapper.selectCountShinsakaiWariateIinJoho(parameter)) {
                     continue;
                 }
-                if (0 < mapper.selectCountShinsakaiWariateIinJoho(parameter)) {
+                if (0 < mapper.selectCountShinsakaiIinJogaiJoho(parameter)) {
                     continue;
                 }
                 insert介護認定審査会割付情報(shinsakaiKaisaiNo.get(i), taisyosya.get(j), shinsakaiKaisaiYMD.get(i));

@@ -13,7 +13,10 @@ import jp.co.ndensan.reams.db.dba.divcontroller.entity.parentdiv.DBA2050021.DBA2
 import jp.co.ndensan.reams.db.dba.divcontroller.entity.parentdiv.DBA2050021.TekiyoJogaishaIdoTeiseiDiv;
 import jp.co.ndensan.reams.db.dba.divcontroller.handler.parentdiv.DBA2050021.TekiyoJogaishaIdoTeiseiHandler;
 import jp.co.ndensan.reams.db.dbz.business.core.tekiyojogaishaidoteisei.TekiyoJogaishaIdoTeiseiBusiness;
+import jp.co.ndensan.reams.db.dbz.divcontroller.entity.parentdiv.DBZ0200001.DBZ0200001TransitionEventName;
+import jp.co.ndensan.reams.db.dbz.divcontroller.util.viewstate.ViewStateKey;
 import jp.co.ndensan.reams.db.dbz.divcontroller.viewbox.ViewStateKeys;
+import jp.co.ndensan.reams.db.dbz.service.TaishoshaKey;
 import jp.co.ndensan.reams.db.dbz.service.core.tekiyojogaishaidoteisei.TekiyoJogaishaIdoTeiseiFinder;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrInformationMessages;
@@ -22,6 +25,7 @@ import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.exclusion.LockingKey;
 import jp.co.ndensan.reams.uz.uza.exclusion.RealInitialLocker;
+import jp.co.ndensan.reams.uz.uza.lang.ApplicationException;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.message.IMessageGettable;
@@ -50,8 +54,8 @@ public class TekiyoJogaishaIdoTeisei {
      * @return レスポンス
      */
     public ResponseData onLoad(TekiyoJogaishaIdoTeiseiDiv div) {
-        ShikibetsuCode 識別コード = ViewStateHolder.get(ViewStateKeys.該当者検索_識別コード, ShikibetsuCode.class);
-        new TekiyoJogaishaIdoTeiseiHandler(div).initLoad(識別コード);
+        new TekiyoJogaishaIdoTeiseiHandler(div).initLoad(
+                ViewStateHolder.get(ViewStateKey.資格対象者, TaishoshaKey.class).get識別コード());
         if (!RealInitialLocker.tryGetLock(前排他ロックキー)) {
             div.setReadOnly(true);
             ValidationMessageControlPairs validationMessages = new ValidationMessageControlPairs();
@@ -71,7 +75,7 @@ public class TekiyoJogaishaIdoTeisei {
      */
     public ResponseData onClick_commonButtonBack(TekiyoJogaishaIdoTeiseiDiv div) {
         RealInitialLocker.release(前排他ロックキー);
-        return ResponseData.of(div).forwardWithEventName(DBA2050021TransitionEventName.再検索する).respond();
+        return ResponseData.of(div).forwardWithEventName(DBZ0200001TransitionEventName.終了).respond();
     }
 
     /**
@@ -81,7 +85,9 @@ public class TekiyoJogaishaIdoTeisei {
      * @return レスポンス
      */
     public ResponseData onClick_commonButtonUpdate(TekiyoJogaishaIdoTeiseiDiv div) {
-        is履歴期間重複(div);
+        if (is履歴期間重複(div)) {
+            throw new ApplicationException(UrErrorMessages.期間が不正_追加メッセージあり２.getMessage().replace("適用日", "解除日"));
+        }
         if (!ResponseHolder.isReRequest()) {
             QuestionMessage message = new QuestionMessage(UrQuestionMessages.処理実行の確認.getMessage().getCode(),
                     UrQuestionMessages.処理実行の確認.getMessage().evaluate());
