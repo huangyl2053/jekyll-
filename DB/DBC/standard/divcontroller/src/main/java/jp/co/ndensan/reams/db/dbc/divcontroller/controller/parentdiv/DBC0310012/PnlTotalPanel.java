@@ -297,7 +297,7 @@ public class PnlTotalPanel {
                     .setValue(保険対象費用額.multiply(九割));
             if (利用者自己負担額.add(少数点以下は切れ(保険対象費用額.multiply(九割))).compareTo(保険対象費用額) < 0) {
                 div.getPnlCommon().getPnlDetail().getPnlKyufuhi().getTxtHokenkyufuhiyogaku()
-                        .setValue(保険対象費用額.subtract(少数点以下は切れ(保険対象費用額.multiply(九割))));
+                        .setValue(保険対象費用額.subtract(少数点以下は切れ(保険対象費用額.multiply(一割))));
             }
         }
         return ResponseData.of(div).respond();
