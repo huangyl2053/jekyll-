@@ -119,6 +119,7 @@ public final class JutakuKaishuJizenShinseiTorokuDivHandler {
     private static final RString 個人検索へ戻る = new RString("btnBackToSearch");
     private static final RString 申請一覧へ戻る = new RString("btnBackToResult");
     private static final RString 申請を保存する = new RString("btnSave");
+    private static final RString 非表示用フラグ_TRUE = new RString("true");
 
     private JutakuKaishuJizenShinseiTorokuDivHandler(JutakuKaishuJizenShinseiTorokuDiv div) {
         this.div = div;
@@ -390,6 +391,24 @@ public final class JutakuKaishuJizenShinseiTorokuDivHandler {
                 throw new ApplicationException(DbcErrorMessages.サービス年月と不一致.getMessage()
                         .replace(メッセージ引数_着工日.toString()));
             }
+        }
+    }
+
+    /**
+     * チェックボックスの変更
+     */
+    public void チェックボックスの変更() {
+        KeyValueDataSource 要介護状態区分 = new KeyValueDataSource(要介護状態区分_KEY, 要介護状態区分_VALUE);
+        KeyValueDataSource 住宅住所変更 = new KeyValueDataSource(住宅住所変更_KEY, 住宅住所変更_VALUE);
+        List<KeyValueDataSource> selectedItems = div.getKaigoShikakuKihonShaPanel().getTabShinseiContents()
+                .getTabJutakuKaisyuJyoho().getTotalPanel().getChkResetInfo().getSelectedItems();
+        if (非表示用フラグ_TRUE.equals(div.getHidSandannkaiMsgFlg())
+                && !selectedItems.contains(要介護状態区分)) {
+            div.setHidSandannkaiMsgFlg(RString.EMPTY);
+        }
+        if (非表示用フラグ_TRUE.equals(div.getHidLimitMsgDisplayedFlg())
+                && !selectedItems.contains(住宅住所変更)) {
+            div.setHidLimitMsgDisplayedFlg(RString.EMPTY);
         }
     }
 
