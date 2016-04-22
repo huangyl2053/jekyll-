@@ -90,7 +90,7 @@ public class ValidationHandler {
     public void 回収日がセットになっているかの入力チェック(ValidationMessageControlPairs validPairs) {
         if (shoDiv.getPanelInput().getTxtKaisyuDate().getValue() == null
                 && shoDiv.getPanelInput().getTxaKaishuRiyu().getValue() != null) {
-            validPairs.add(new ValidationMessageControlPair(RRVMessages.Validate回収日, shoDiv.getPanelInput().getDdlKoufuJiyu()));
+            validPairs.add(new ValidationMessageControlPair(RRVMessages.Validate回収日, shoDiv.getPanelInput().getTxaKaishuRiyu()));
         }
     }
 
