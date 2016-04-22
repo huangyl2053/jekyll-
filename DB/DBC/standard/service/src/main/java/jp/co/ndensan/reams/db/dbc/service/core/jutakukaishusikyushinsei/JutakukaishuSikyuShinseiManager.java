@@ -20,6 +20,7 @@ import jp.co.ndensan.reams.db.dbc.business.core.basic.ShokanShinsei;
 import jp.co.ndensan.reams.db.dbc.business.core.basic.ShokanShukei;
 import jp.co.ndensan.reams.db.dbc.business.core.jutakukaishusikyushinsei.JutakukaishuJizenShinseiResult;
 import jp.co.ndensan.reams.db.dbc.business.core.jutakukaishusikyushinsei.JutakukaishuSikyuShinseiResult;
+import jp.co.ndensan.reams.db.dbc.business.core.jutakukaishusikyushinsei.JyutakuGaisyunaiyoListParameter;
 import jp.co.ndensan.reams.db.dbc.business.core.jutakukaishusikyushinsei.UpdSyokanbaraiketeJoho;
 import jp.co.ndensan.reams.db.dbc.definition.core.shikyufushikyukubun.ShikyuFushikyuKubun;
 import jp.co.ndensan.reams.db.dbc.definition.mybatisprm.jutakukaishusikyushinsei.JutakukaishuSikyuShinseiKey;
@@ -54,6 +55,7 @@ import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.ui.binding.RowState;
 import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 import jp.co.ndensan.reams.uz.uza.util.db.SearchResult;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
@@ -72,6 +74,9 @@ public class JutakukaishuSikyuShinseiManager {
     private static final RString 区分_コード1 = new RString("1");
     private static final RString 区分_コード2 = new RString("2");
     private static final RString 区分_コード3 = new RString("3");
+    private static final RString メッセージ_1 = new RString("住宅改修データがありません。");
+    private static final RString メッセージ_2 = new RString("着工日が同一年月を設定してください。");
+    private static final RString メッセージ_3 = new RString("対象住宅住所が同じ住所を設定してください。");
     private final MapperProvider mapperProvider;
     private final DbT3036ShokanHanteiKekkaDac 償還払支給判定結果Dac;
     private final DbT3038ShokanKihonDac 償還払請求基本Dac;
@@ -609,5 +614,39 @@ public class JutakukaishuSikyuShinseiManager {
             給付実績基本情報List.add(new KyufujissekiKihon(entity));
         }
         return 給付実績基本情報List;
+    }
+
+    /**
+     * 住宅改修内容のチェックメソッドです。
+     *
+     * @param parameterList 住宅改修内容一覧
+     * @param 提供着工年月 FlexibleYearMonth
+     * @return 住宅改修内容チェックエラーメッセージ
+     */
+    public RString checkJyutakuGaisyunaiyoList(List<JyutakuGaisyunaiyoListParameter> parameterList,
+            FlexibleYearMonth 提供着工年月) {
+
+        if (parameterList == null || parameterList.isEmpty()) {
+            return メッセージ_1;
+        }
+        List<JyutakuGaisyunaiyoListParameter> tmpList = new ArrayList<>();
+        for (JyutakuGaisyunaiyoListParameter parameter : parameterList) {
+            if (!RowState.Deleted.equals(parameter.get状態())) {
+                tmpList.add(parameter);
+            }
+        }
+        if (tmpList.isEmpty()) {
+            return メッセージ_1;
+        }
+        RString wk対象住宅住所 = tmpList.get(0).get対象住宅住所();
+        for (JyutakuGaisyunaiyoListParameter tmp : tmpList) {
+            if (提供着工年月 != null && 提供着工年月.equals(tmp.get着工年月日().getYearMonth())) {
+                return メッセージ_2;
+            }
+            if (wk対象住宅住所 != null && wk対象住宅住所.equals(tmp.get対象住宅住所())) {
+                return メッセージ_3;
+            }
+        }
+        return RString.EMPTY;
     }
 }
