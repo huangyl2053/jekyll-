@@ -465,7 +465,7 @@ public class TekiyoJogaiRirekiHandler {
                         set解除状態適用除外者情報(適用除外者Model.get(適用除外者の識別子), row).toEntity());
 
                 ShisetsuNyutaishoIdentifier taisho = new ShisetsuNyutaishoIdentifier(
-                        識別コード, Integer.getInteger(row.getRirekiNo().toString()));
+                        識別コード, Integer.parseInt(row.getRirekiNo().toString()));
                 TekiyoJogaishaManager.createInstance().updateKaigoJogaiTokureiTaishoShisetsu(
                         set解除状態介護保険施設入退所(保険施設入退所Model.get(taisho), row).toEntity());
                 if (JogaiKaijoJiyu.除外者解除.getコード().equals(row.getKaijoJiyuCode())) {
