@@ -5,8 +5,8 @@
  */
 package jp.co.ndensan.reams.db.dbb.business.core.fukaatena;
 
-import jp.co.ndensan.reams.db.dbb.business.core.zenkaifuka.ZenkaiFuka;
-import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.IShikibetsuTaisho;
+import jp.co.ndensan.reams.db.dbb.business.core.fukajoho.fukajoho.FukaJoho;
+import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.kojin.IKojin;
 
 /**
  * 賦課の情報-宛名のクラスです。
@@ -18,6 +18,6 @@ import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.IShikibetsuTais
 @SuppressWarnings("PMD.UnusedPrivateField")
 public class FukaAtena {
 
-    private ZenkaiFuka 賦課情報;
-    private IShikibetsuTaisho 宛名;
+    private FukaJoho 賦課情報;
+    private IKojin 宛名;
 }
