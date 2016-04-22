@@ -14,6 +14,7 @@ import jp.co.ndensan.reams.db.dbc.definition.core.shikyushinseishoumu.Shikyushin
 import jp.co.ndensan.reams.db.dbc.definition.core.shoninkubun.ShoninKubun;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0310012.PnlTotalPanelDiv;
 import jp.co.ndensan.reams.db.dbc.divcontroller.viewbox.ViewStateKeys;
+import jp.co.ndensan.reams.db.dbc.divcontroller.viewbox.dbc0310011.PnlTotalSearchParameter;
 import jp.co.ndensan.reams.db.dbc.service.core.shokanjuryoininkeiyakusha.ShokanJuryoininKeiyakushaFinder;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.kaigoshikakukihon.KaigoShikakuKihon.KaigoShikakuKihonDiv;
@@ -29,7 +30,7 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.CommonButtonHolder;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 
 /**
- * 受領委任契約（福祉用具購入費・住宅改修費）登録・追加・修正・照会_登録画面のHandlerクラス
+ * 受領委任契約（福祉用具購入費・住宅改修費）登録・追加・修正・照会_登録画面のHandlerクラスです。
  *
  * @reamsid_L DBC-2130-020 cuilin
  */
@@ -118,16 +119,16 @@ public class PnlTotalPanelHandler {
      * 初期データの設定する
      *
      * @param shokanData ShokanJuryoininKeiyakusha
+     * @param parameter PnlTotalSearchParameter
      */
-    public void set初期データ(ShokanJuryoininKeiyakusha shokanData) {
+    public void set初期データ(ShokanJuryoininKeiyakusha shokanData, PnlTotalSearchParameter parameter) {
         div.getPnlCommon().getPnlDetail().getTxtKeyakushinseuketukebi()
                 .setValue(new RDate(shokanData.get受付年月日().toString()));
         div.getPnlCommon().getPnlDetail().getTxtKeyakushinseibi()
                 .setValue(new RDate(shokanData.get申請年月日().toString()));
         div.getPnlCommon().getPnlDetail().getTxtKeyakujigyosyaNo()
                 .setValue(shokanData.get契約事業者番号());
-        // TODO QA.378(Redmine#:78539)
-        div.getPnlCommon().getPnlDetail().getTxtKeyakujigyosyaName().setValue(new RString("契約事業者名称"));
+        div.getPnlCommon().getPnlDetail().getTxtKeyakujigyosyaName().setValue(parameter.get契約事業者名());
         div.getPnlCommon().getPnlDetail().getDdlKeiyakuServiceType().setSelectedKey(shokanData.get契約サービス種類());
         if (shokanData.get決定年月日() != null && !shokanData.get決定年月日().isEmpty()) {
             div.getPnlCommon().getPnlDetail().getTxtKeyakukettebi()
@@ -159,11 +160,11 @@ public class PnlTotalPanelHandler {
             div.getPnlCommon().getPnlDetail().getPnlHidari().getTxtSyoninchutisyosakuseibi()
                     .setValue(new RDate(shokanData.get承認結果通知書作成日().toString()));
         }
-        if (new RString("1").equals(shokanData.get承認結果通知書再発行区分())) {
+        if (承認通知書再発行区分キー_1.equals(shokanData.get承認結果通知書再発行区分())) {
             List<RString> list = new ArrayList<>();
-            list.add(new RString("1"));
+            list.add(承認通知書再発行区分キー_1);
             div.getPnlCommon().getPnlDetail().getPnlHidari().getChkSaihakoukubun().setSelectedItemsByKey(list);
-        } else if (new RString("0").equals(shokanData.get承認結果通知書再発行区分())) {
+        } else if (承認通知書再発行区分キー_0.equals(shokanData.get承認結果通知書再発行区分())) {
             div.getPnlCommon().getPnlDetail().getPnlHidari().getChkSaihakoukubun()
                     .setSelectedItemsByKey(new ArrayList<RString>());
         }

@@ -18,7 +18,7 @@ import jp.co.ndensan.reams.uz.uza.core.validation.IPredicate;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.math.Decimal;
+import jp.co.ndensan.reams.uz.uza.lang.RStringUtil;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 
@@ -190,16 +190,10 @@ public enum PnlTotalPanelSpec implements IPredicate<PnlTotalPanelDiv> {
         }
 
         public static boolean is金額不整合(PnlTotalPanelDiv div) {
-            Decimal 保険対象費用額 = div.getPnlCommon().getPnlDetail().getPnlKyufuhi().getTxtHokentaisyohiyogaku()
-                    .getValue() == null ? Decimal.ZERO : div.getPnlCommon().getPnlDetail().getPnlKyufuhi()
-                    .getTxtHokentaisyohiyogaku().getValue();
-            Decimal 利用者自己負担額 = div.getPnlCommon().getPnlDetail().getPnlKyufuhi().getTxtRiyosyajikofutangaku()
-                    .getValue() == null ? Decimal.ZERO : div.getPnlCommon().getPnlDetail().getPnlKyufuhi()
-                    .getTxtRiyosyajikofutangaku().getValue();
-            Decimal 保険給付費用額 = div.getPnlCommon().getPnlDetail().getPnlKyufuhi().getTxtHokenkyufuhiyogaku()
-                    .getValue() == null ? Decimal.ZERO : div.getPnlCommon().getPnlDetail().getPnlKyufuhi()
-                    .getTxtHokenkyufuhiyogaku().getValue();
-            return 利用者自己負担額.add(保険給付費用額).compareTo(保険対象費用額) >= 0;
+            return RStringUtil.isAlphabetAndHalfsizeNumberOnly(new RString(div.getPnlCommon().getPnlDetail()
+                    .getPnlKyufuhi().getTxtRiyosyajikofutangaku().getValue().toString()))
+                    && RStringUtil.isAlphabetAndHalfsizeNumberOnly(new RString(div.getPnlCommon().getPnlDetail()
+                                    .getPnlKyufuhi().getTxtHokenkyufuhiyogaku().getValue().toString()));
         }
 
         public static boolean is受領委任契約番号重複(PnlTotalPanelDiv div) {
