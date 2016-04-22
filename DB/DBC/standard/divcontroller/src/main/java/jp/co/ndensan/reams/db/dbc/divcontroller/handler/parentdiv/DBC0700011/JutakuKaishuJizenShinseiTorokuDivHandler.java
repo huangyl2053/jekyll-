@@ -245,8 +245,8 @@ public final class JutakuKaishuJizenShinseiTorokuDivHandler {
                 .setDataSource(shinseishaKubunList);
         div.getKaigoShikakuKihonShaPanel().getShinseishaInfo().getDdlShinseishaKubun()
                 .setSelectedKey(param.get申請者区分());
-//        div.getKaigoShikakuKihonShaPanel().getShinseishaInfo().getTxtShinseiRiyu()
-//                .setValue(param.get申請理由());
+        div.getKaigoShikakuKihonShaPanel().getShinseishaInfo().getTxtShinseiRiyu()
+                .setValue(param.get申請理由());
         div.getKaigoShikakuKihonShaPanel().getShinseishaInfo().getTxtJigyoshaNo()
                 .setValue(param.get事業者番号().value());
         div.getKaigoShikakuKihonShaPanel().getShinseishaInfo().getTxtShinseishaName()
@@ -557,6 +557,11 @@ public final class JutakuKaishuJizenShinseiTorokuDivHandler {
                 .getTabShinsaKakka().getTxtJudgeYMD().getValue().toDateString()));
         parameter.set不承認の理由(div.getKaigoShikakuKihonShaPanel().getTabShinseiContents().getTabShinsaKakka()
                 .getTxtFushoninReason().getValue());
+        ServiceShuruiCode サービス種類コード = data.getサービス種類コード();
+        FlexibleYearMonth サービス提供年月 = data.getサービス提供年月();
+        RString 給付の種類 = JutakuKaishuJizenShinsei.createInstance()
+                .getServiceShuruiMeisho(サービス種類コード, サービス提供年月);
+        parameter.set給付の種類(給付の種類);
         parameter.set作成者氏名(div.getKaigoShikakuKihonShaPanel().getJutakuKaishuJizenShinseiReason()
                 .getTxtCreatorName().getDomain().value());
         parameter.setサービス提供年月(new FlexibleYearMonth(div.getKaigoShikakuKihonShaPanel().getTxtServiceYM()
