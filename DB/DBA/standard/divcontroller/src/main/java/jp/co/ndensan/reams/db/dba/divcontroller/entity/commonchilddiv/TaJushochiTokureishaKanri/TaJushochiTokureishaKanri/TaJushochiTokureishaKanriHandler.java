@@ -59,9 +59,9 @@ public class TaJushochiTokureishaKanriHandler {
     private static final RString 他特例解除 = new RString("01");
     private static final RString 転入 = new RString("01");
     private static final RString 除外者適用 = new RString("01");
-    private static final CodeShubetsu 介護他特適用理由 = new CodeShubetsu("0118");
-    private static final CodeShubetsu 介護他特解除理由 = new CodeShubetsu("0122");
-    private RString 新枝番 = new RString("0001");
+    private static final CodeShubetsu 介護他特適用理由 = new CodeShubetsu("0008");
+    private static final CodeShubetsu 介護他特解除理由 = new CodeShubetsu("0011");
+    private final RString 新枝番 = new RString("0001");
 
     private static final RString 照会モード = new RString("Shokai");
     private static final RString 訂正モード = new RString("Teisei");
