@@ -14,9 +14,11 @@ import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.GyomuBunrui;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.service.core.shichosonsecurity.ShichosonSecurityJohoFinder;
 import jp.co.ndensan.reams.db.dbz.business.core.hihousyosai.HihokenshaDaicho;
+import jp.co.ndensan.reams.db.dbz.business.core.koikizenshichosonjoho.KoikiZenShichosonJoho;
 import jp.co.ndensan.reams.db.dbz.business.core.koseishichosonmaster.koseishichosonmaster.KoseiShichosonMaster;
 import jp.co.ndensan.reams.db.dbz.business.shichoson.Shichoson;
 import jp.co.ndensan.reams.db.dbz.definition.core.shikakukubun.ShikakuKubun;
+import jp.co.ndensan.reams.db.dbz.service.core.basic.koikishichosonjoho.KoikiShichosonJohoFinder;
 import jp.co.ndensan.reams.db.dbz.service.core.hihousyosai.HihousyosaiFinder;
 import jp.co.ndensan.reams.ua.uax.business.core.psm.ShikibetsuTaishoSearchEntityHolder;
 import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.search.IShikibetsuTaishoSearchKey;
@@ -26,10 +28,7 @@ import jp.co.ndensan.reams.ua.uax.definition.core.enumeratedtype.shikibetsutaish
 import jp.co.ndensan.reams.ua.uax.definition.mybatisprm.shikibetsutaisho.IShikibetsuTaishoGyomuHanteiKey;
 import jp.co.ndensan.reams.ua.uax.entity.db.basic.UaFt200FindShikibetsuTaishoEntity;
 import jp.co.ndensan.reams.ua.uax.persistence.db.basic.UaFt200FindShikibetsuTaishoFunctionDac;
-import jp.co.ndensan.reams.ur.urz.business.core.association.Association;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
-import jp.co.ndensan.reams.ur.urz.service.core.association.AssociationFinderFactory;
-import jp.co.ndensan.reams.ur.urz.service.core.association.IAssociationFinder;
 import jp.co.ndensan.reams.uz.uza.biz.CodeShubetsu;
 import jp.co.ndensan.reams.uz.uza.biz.GyomuCode;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
@@ -62,8 +61,8 @@ import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 public class HihosyosaiHandler {
 
     private final RString 合併情報区分 = new RString("1");
-    private final RString 広域市町村 = new RString("1");
-    private final RString 単一市町村 = new RString("2");
+    private final RString 広域保険者 = new RString("1");
+    private final RString 単一保険者 = new RString("2");
     private final CodeShubetsu 取得事由コード種別 = new CodeShubetsu("0007");
     private final CodeShubetsu 喪失事由コード種別 = new CodeShubetsu("0011");
     private final HihosyosaiDiv div;
@@ -108,13 +107,14 @@ public class HihosyosaiHandler {
                 訂正モード(get得喪情報(被保険者番号, 異動日, 枝番));
                 break;
             case toroku:
-                登録モード();
+                登録モード(識別コード);
                 break;
             case teiseitoroku_jyusyoti:
                 div.getDdlKyuHokensya().setDataSource(get旧保険者(市町村コード, 導入形態コード, 広住特措置元市町村コード));
                 訂正モード(get得喪情報(被保険者番号, 異動日, 枝番));
                 break;
             case teiseitoroku_shikaku:
+                div.getTabContainerDetail().setSelectedItem(div.getTabPnlShikaku());
                 div.getDdlKyuHokensya().setDataSource(get旧保険者(市町村コード, 導入形態コード, 広住特措置元市町村コード));
                 訂正モード(get得喪情報(被保険者番号, 異動日, 枝番));
                 break;
@@ -203,42 +203,66 @@ public class HihosyosaiHandler {
         div.getTxtSyoninichiji2().setValue(日期(得喪情報.getLastUpdateTimestamp()));
     }
 
-    private void 登録モード() {
-        if (単一市町村.equals(広域と市町村判断())) {
-            IAssociationFinder finder = AssociationFinderFactory.createInstance();
-            Association association = finder.getAssociation();
-            LasdecCode 市町村コード = association.get地方公共団体コード();
-            KeyValueDataSource keyValue = new KeyValueDataSource();
-            keyValue.setKey(市町村コード.getColumnValue());
-            keyValue.setValue(市町村コード.getColumnValue());
+    private void 登録モード(ShikibetsuCode 識別コード) {
+        LasdecCode 旧地方公共団体コード = LasdecCode.EMPTY;
+        LasdecCode 現地方公共団体コード = LasdecCode.EMPTY;
+        IShikibetsuTaishoGyomuHanteiKey 業務判定キー = ShikibetsuTaishoGyomuHanteiKeyFactory.createInstance(GyomuCode.DB介護保険, KensakuYusenKubun.住登内優先);
+        IShikibetsuTaishoSearchKey 検索キー
+                = new ShikibetsuTaishoSearchKeyBuilder(業務判定キー, true)
+                .set識別コード(識別コード)
+                .build();
+        IPsmCriteria psm = ShikibetsuTaishoSearchEntityHolder.getCriteria(検索キー);
+        List<UaFt200FindShikibetsuTaishoEntity> 宛名PSM = InstanceProvider.create(UaFt200FindShikibetsuTaishoFunctionDac.class).select(psm);
+        if (宛名PSM != null && !宛名PSM.isEmpty()) {
+            旧地方公共団体コード = 宛名PSM.get(0).getKyuLasdecCode();
+            現地方公共団体コード = 宛名PSM.get(0).getGenLasdecCode();
+        }
+        List<KoikiZenShichosonJoho> 市町村情報 = KoikiShichosonJohoFinder.createInstance().koseiShichosonJoho().records();
+        LasdecCode 市町村コード = LasdecCode.EMPTY;
+        if (市町村情報 != null && !市町村情報.isEmpty()) {
+            市町村コード = 市町村情報.get(0).get市町村コード();
+        }
+        if (単一保険者.equals(広域と市町村判断())) {
             List<KeyValueDataSource> keyValueList = new ArrayList<>();
-            keyValueList.add(keyValue);
-            div.getDdlSyozaiHokensya().setDataSource(keyValueList);
-            div.getDdlSyozaiHokensya().setSelectedKey(市町村コード.getColumnValue());
-        } else if (広域市町村.equals(広域と市町村判断())) {
-            IShikibetsuTaishoGyomuHanteiKey 業務判定キー = ShikibetsuTaishoGyomuHanteiKeyFactory.createInstance(GyomuCode.DB介護保険, KensakuYusenKubun.住登内優先);
-            IShikibetsuTaishoSearchKey 検索キー
-                    = new ShikibetsuTaishoSearchKeyBuilder(業務判定キー, true)
-                    .set識別コード(ShikibetsuCode.EMPTY)
-                    .build();
-            IPsmCriteria psm = ShikibetsuTaishoSearchEntityHolder.getCriteria(検索キー);
-            List<UaFt200FindShikibetsuTaishoEntity> 宛名PSM = InstanceProvider.create(UaFt200FindShikibetsuTaishoFunctionDac.class).select(psm);
-            if (宛名PSM != null && !宛名PSM.isEmpty()) {
-                LasdecCode 現地方公共団体コード = 宛名PSM.get(0).getGenLasdecCode();
-                if (現地方公共団体コード != null && !現地方公共団体コード.isEmpty()) {
-                    set所在保険者(現地方公共団体コード.getColumnValue());
-                }
+            if (市町村コード != null && !市町村コード.isEmpty()) {
+                KeyValueDataSource keyValue = new KeyValueDataSource();
+                keyValue.setKey(市町村コード.getColumnValue());
+                keyValue.setValue(市町村コード.getColumnValue());
+                keyValueList.add(keyValue);
+                div.getDdlSyozaiHokensya().setDataSource(keyValueList);
+                div.getDdlSyozaiHokensya().setSelectedKey(市町村コード.getColumnValue());
+            }
+        } else if (広域保険者.equals(広域と市町村判断())) {
+            List<KeyValueDataSource> keyValueList = new ArrayList<>();
+            if (現地方公共団体コード != null && !現地方公共団体コード.isEmpty()) {
+                KeyValueDataSource keyValue = new KeyValueDataSource();
+                keyValue.setKey(現地方公共団体コード.getColumnValue());
+                keyValue.setValue(現地方公共団体コード.getColumnValue());
+                keyValueList.add(keyValue);
+                div.getDdlSyozaiHokensya().setDataSource(keyValueList);
+                div.getDdlSyozaiHokensya().setSelectedKey(現地方公共団体コード.getColumnValue());
+            }
+        }
+        if (is合併市町村()) {
+            List<KeyValueDataSource> keyValueList = new ArrayList<>();
+            if (旧地方公共団体コード != null && !旧地方公共団体コード.isEmpty()) {
+                KeyValueDataSource keyValue = new KeyValueDataSource();
+                keyValue.setKey(旧地方公共団体コード.getColumnValue());
+                keyValue.setValue(旧地方公共団体コード.getColumnValue());
+                keyValueList.add(keyValue);
+                div.getDdlKyuHokensya().setDataSource(keyValueList);
+                div.getDdlKyuHokensya().setSelectedKey(旧地方公共団体コード.getColumnValue());
             }
         }
     }
 
     private void 表示と非表示() {
-        if (単一市町村.equals(広域と市町村判断())) {
+        if (単一保険者.equals(広域と市町村判断())) {
             div.getLblSyozaiHokensya().setVisible(false);
             div.getDdlSyozaiHokensya().setVisible(false);
             div.getLblSotimotoHokensya().setVisible(false);
             div.getDdlSotimotoHokensya().setVisible(false);
-        } else if (広域市町村.equals(広域と市町村判断())) {
+        } else if (広域保険者.equals(広域と市町村判断())) {
             div.getLblSyozaiHokensya().setVisible(true);
             div.getDdlSyozaiHokensya().setVisible(true);
             div.getLblSotimotoHokensya().setVisible(true);
@@ -394,15 +418,15 @@ public class HihosyosaiHandler {
     }
 
     private RString 広域と市町村判断() {
-        ShichosonSecurityJoho 介護導入形態 = ShichosonSecurityJohoFinder.createInstance().getShichosonSecurityJoho(GyomuBunrui.介護認定);
+        ShichosonSecurityJoho 介護導入形態 = ShichosonSecurityJohoFinder.createInstance().getShichosonSecurityJoho(GyomuBunrui.介護事務);
         if (介護導入形態 != null) {
             DonyuKeitaiCode 導入形態コード = 介護導入形態.get導入形態コード();
-            if (導入形態コード != null && 導入形態コード.getCode().length() > 2) {
-                RString 導入形態 = 導入形態コード.getCode().substringEmptyOnError(1, 2);
-                if (広域市町村.equals(導入形態)) {
-                    return 広域市町村;
-                } else if (単一市町村.equals(導入形態)) {
-                    return 単一市町村;
+            if (導入形態コード != null) {
+                if (DonyuKeitaiCode.事務広域.getCode().equals(導入形態コード.getCode())) {
+                    return 広域保険者;
+                } else if (DonyuKeitaiCode.事務単一.getCode().equals(導入形態コード.getCode())
+                        || DonyuKeitaiCode.事務構成市町村.getCode().equals(導入形態コード.getCode())) {
+                    return 単一保険者;
                 }
             }
         }
