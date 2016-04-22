@@ -716,9 +716,6 @@ public class TaJushochiTokureishaKanriHandler {
                 .set解除受付年月日(new FlexibleDate(row.getKaijoTodokedeYMD().getValue().toDateString()))
                 .set措置保険者番号(new ShoKisaiHokenshaNo(row.getSochiHokensha()))
                 .set措置被保険者番号(new HihokenshaNo(row.getSochiHihokenshaNo()))
-                .set他特例連絡票発行年月日(FlexibleDate.EMPTY)
-                .set施設退所通知発行年月日(FlexibleDate.EMPTY)
-                .set施設変更通知発行年月日(FlexibleDate.EMPTY)
                 .set論理削除フラグ(false)
                 .build();
     }
@@ -734,15 +731,8 @@ public class TaJushochiTokureishaKanriHandler {
                 .set適用年月日(new FlexibleDate(row.getTekiyoYMD().getValue().toDateString()))
                 .set適用届出年月日(new FlexibleDate(row.getTekiyoTodokedeYMD().getValue().toDateString()))
                 .set適用受付年月日(new FlexibleDate(row.getTekiyoTodokedeYMD().getValue().toDateString()))
-                .set他市町村住所地特例解除事由コード(RString.EMPTY)
-                .set解除年月日(FlexibleDate.EMPTY)
-                .set解除届出年月日(FlexibleDate.EMPTY)
-                .set解除受付年月日(FlexibleDate.EMPTY)
                 .set措置保険者番号(new ShoKisaiHokenshaNo(row.getSochiHokensha()))
                 .set措置被保険者番号(new HihokenshaNo(row.getSochiHihokenshaNo()))
-                .set他特例連絡票発行年月日(FlexibleDate.EMPTY)
-                .set施設退所通知発行年月日(FlexibleDate.EMPTY)
-                .set施設変更通知発行年月日(FlexibleDate.EMPTY)
                 .set論理削除フラグ(false)
                 .build();
     }
@@ -806,9 +796,6 @@ public class TaJushochiTokureishaKanriHandler {
                 .set入所施設コード(new JigyoshaNo(row.getNyushoShisetsu()))
                 .set入所処理年月日(new FlexibleDate(RDate.getNowDateTime().getDate().toDateString()))
                 .set入所年月日(new FlexibleDate(row.getNyushoYMD().getValue().toString()))
-                .set退所年月日(FlexibleDate.EMPTY)
-                .set退所処理年月日(FlexibleDate.EMPTY)
-                .set部屋記号番号(RString.EMPTY)
                 .build();
     }
 
@@ -952,6 +939,8 @@ public class TaJushochiTokureishaKanriHandler {
 
     private static class DateComparator implements Comparator<dgJushochiTokureiRireki_Row>, Serializable {
 
+        private static final long serialVersionUID = -2802794987962551749L;
+
         @Override
         public int compare(dgJushochiTokureiRireki_Row o1, dgJushochiTokureiRireki_Row o2) {
             return o2.getTekiyoYMD().getValue().
@@ -960,6 +949,8 @@ public class TaJushochiTokureishaKanriHandler {
     }
 
     private static class DateComparatorRirekiNo implements Comparator<dgJushochiTokureiRireki_Row>, Serializable {
+
+        private static final long serialVersionUID = -300796001015547240L;
 
         @Override
         public int compare(dgJushochiTokureiRireki_Row o1, dgJushochiTokureiRireki_Row o2) {
