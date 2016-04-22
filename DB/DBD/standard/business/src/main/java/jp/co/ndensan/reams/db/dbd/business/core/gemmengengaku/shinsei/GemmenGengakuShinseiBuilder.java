@@ -43,6 +43,18 @@ public class GemmenGengakuShinseiBuilder {
     }
 
     /**
+     * 履歴番号を設定します。
+     *
+     * @param 履歴番号 履歴番号
+     * @return {@link GemmenGengakuShinseiBuilder}
+     */
+    public GemmenGengakuShinseiBuilder set履歴番号(int 履歴番号) {
+        requireNonNull(履歴番号, UrSystemErrorMessages.値がnull.getReplacedMessage("履歴番号"));
+        entity.setShinseiRirekiNo(履歴番号);
+        return this;
+    }
+
+    /**
      * 申請届出代行区分を設定します。
      *
      * @param 申請届出代行区分 申請届出代行区分

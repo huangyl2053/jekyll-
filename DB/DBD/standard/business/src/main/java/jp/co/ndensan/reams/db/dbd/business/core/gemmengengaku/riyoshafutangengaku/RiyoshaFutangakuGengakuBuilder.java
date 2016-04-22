@@ -45,6 +45,18 @@ public class RiyoshaFutangakuGengakuBuilder {
     }
 
     /**
+     * 履歴番号を設定します。
+     *
+     * @param 履歴番号 履歴番号
+     * @return {@link RiyoshaFutangakuGengakuBuilder}
+     */
+    public RiyoshaFutangakuGengakuBuilder set履歴番号(int 履歴番号) {
+        requireNonNull(履歴番号, UrSystemErrorMessages.値がnull.getReplacedMessage("履歴番号"));
+        entity.setRirekiNo(履歴番号);
+        return this;
+    }
+
+    /**
      * 旧措置者有無を設定します。
      *
      * @param 旧措置者有無 旧措置者有無
