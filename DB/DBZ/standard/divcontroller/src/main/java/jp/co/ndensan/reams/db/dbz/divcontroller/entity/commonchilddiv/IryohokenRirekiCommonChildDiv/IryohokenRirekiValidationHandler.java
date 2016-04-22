@@ -24,14 +24,25 @@ public class IryohokenRirekiValidationHandler {
     private final IryohokenRirekiCommonChildDivDiv requestDiv;
     private static final RString メッセージ = new RString("種別、保険者番号、保険者名称、記号番号項目はいずれの項目も未入力です");
 
+    /**
+     * コンストラクタです。
+     *
+     * @param requestDiv 画面情報
+     */
     public IryohokenRirekiValidationHandler(IryohokenRirekiCommonChildDivDiv requestDiv) {
         this.requestDiv = requestDiv;
     }
 
-    public ValidationMessageControlPairs 種別と保険者番号と保険者名と称記号番号の有効性チェック(IryohokenRirekiCommonChildDivDiv requestDiv) {
+    /**
+     *
+     * 種別と保険者番号と保険者名と称記号番号のチェック。
+     *
+     * @return ValidationMessageControlPairs チェック結果
+     */
+    public ValidationMessageControlPairs 種別と保険者番号と保険者名と称記号番号の有効性チェック() {
         ValidationMessageControlPairs validPairs = new ValidationMessageControlPairs();
 
-        if (RString.isNullOrEmpty(requestDiv.getPnlIryohokenJoho().getDdlSyubetsu().getSelectedItem())
+        if (RString.isNullOrEmpty(requestDiv.getPnlIryohokenJoho().getDdlSyubetsu().getSelectedKey())
                 && RString.isNullOrEmpty(requestDiv.getPnlIryohokenJoho().getTxtHokensyaKodo().getValue())
                 && RString.isNullOrEmpty(requestDiv.getPnlIryohokenJoho().getTxtHokensyaMeisho().getValue())
                 && RString.isNullOrEmpty(requestDiv.getPnlIryohokenJoho().getTxtKigoBango().getValue())) {
