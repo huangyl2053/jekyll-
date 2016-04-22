@@ -8,7 +8,7 @@ package jp.co.ndensan.reams.db.dbx.definition.core.viewstate;
 /**
  * 介護ののViewStateKeys
  *
- * @reamsid_L DBA-9999-023 wangchao
+ * @reamsid_L DBX-9999-023 wangchao
  */
 public enum ViewStateKeys {
 
