@@ -134,6 +134,17 @@ public class ShoKaishuKirokuKanriJoho {
         return ResponseData.of(div).respond();
     }
 
+    /**
+     * 「完了する」ボタンを押下する。
+     *
+     * @param div 画面情報
+     * @return ResponseData<ShoKaishuKirokuKanriJohoDiv>
+     */
+    public ResponseData<ShoKaishuKirokuKanriJohoDiv> onClick_btnComplete(ShoKaishuKirokuKanriJohoDiv div) {
+        RealInitialLocker.release(LOCKINGKEY);
+        return ResponseData.of(div).respond();
+    }
+
     private void setHozon(ShoKaishuKirokuKanriJohoDiv div) {
         Models<ShoKofuKaishuIdentifier, ShoKofuKaishu> models
                 = ViewStateHolder.get(ViewStateKeys.証交付回収情報, Models.class);
