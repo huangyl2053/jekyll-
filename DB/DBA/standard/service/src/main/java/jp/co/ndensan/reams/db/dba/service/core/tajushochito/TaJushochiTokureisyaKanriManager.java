@@ -190,7 +190,7 @@ public class TaJushochiTokureisyaKanriManager {
         ITaJushochiTokureisyaKanriMapper mapper = mapperProvider.create(ITaJushochiTokureisyaKanriMapper.class);
         TaJushochiTokureisyaKanriParameter parameter
                 = TaJushochiTokureisyaKanriParameter.createParam_TaJushochi(
-                        shikibetsuCode, DaichoType.他市町村住所地特例者.getCode(),
+                        shikibetsuCode, DaichoType.他市町村住所地特例者.getコード(),
                         RString.EMPTY, JigyoshaNo.EMPTY, RString.EMPTY);
         List<TashichosonRelateEntity> entityList = mapper.get他市町村住所地特例(parameter);
         for (TashichosonRelateEntity tashichosonEntity : entityList) {
