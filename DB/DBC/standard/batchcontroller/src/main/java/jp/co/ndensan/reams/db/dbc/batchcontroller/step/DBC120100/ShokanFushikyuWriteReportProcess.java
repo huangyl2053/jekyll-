@@ -8,6 +8,7 @@ package jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC120100;
 import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbc.business.core.shokanfushikyuketteiin.ShokanBaraiFushikyuKetteishaIchiranhyo;
+import jp.co.ndensan.reams.db.dbc.business.core.shokanfushikyuketteiin.ShokanFushikyuKetteiInPageBreak;
 import jp.co.ndensan.reams.db.dbc.business.report.shokanfushikyuketteiin.ShokanFushikyuKetteiInItem;
 import jp.co.ndensan.reams.db.dbc.business.report.shokanfushikyuketteiin.ShokanFushikyuKetteiInReport;
 import jp.co.ndensan.reams.db.dbc.definition.reportid.ReportIdDBC;
@@ -25,8 +26,8 @@ import jp.co.ndensan.reams.uz.uza.batch.process.IBatchReader;
 import jp.co.ndensan.reams.uz.uza.batch.process.InputParameter;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.report.BreakerCatalog;
 import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
+import jp.co.ndensan.reams.uz.uza.report.source.breaks.PageBreaker;
 
 /**
  * 帳票に引き渡す
@@ -87,13 +88,13 @@ public class ShokanFushikyuWriteReportProcess extends BatchKeyBreakBase<ShokanFu
                 }
             }
         }
-        if (改頁項目リスト.isEmpty()) {
-            改頁項目リスト.add(KAI_PAGE_HOKENSHANO);
-        }
+//        if (改頁項目リスト.isEmpty()) {
+//            改頁項目リスト.add(KAI_PAGE_HOKENSHANO);
+//        }
+        PageBreaker<ShokanbaraiFushikyuKetteishaIchiranSource> breaker = new ShokanFushikyuKetteiInPageBreak(改頁項目リスト);
         batchReportWriter = BatchReportFactory.createBatchReportWriter(
                 ReportIdDBC.DBC200022.getReportId().value(), SubGyomuCode.DBC介護給付)
-                .addBreak(new BreakerCatalog<ShokanbaraiFushikyuKetteishaIchiranSource>()
-                        .simplePageBreaker(改頁項目リスト)).create();
+                .addBreak(breaker).create();
         this.reportSourceWriter = new ReportSourceWriter<>(batchReportWriter);
     }
 

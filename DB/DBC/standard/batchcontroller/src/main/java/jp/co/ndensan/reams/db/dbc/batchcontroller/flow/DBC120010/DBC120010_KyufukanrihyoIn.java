@@ -12,7 +12,7 @@ import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC120010.KokuhorenIFUpda
 import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC120010.KyufuKanrihyoDeleteProcess;
 import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC120010.KyufuKanrihyoInBatchRegistFileReadProcess;
 import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC120010.KyufuKanrihyoInBatchRegistTempSaveProcess;
-import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC120010.SharedFileCopy;
+import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC120010.SharedFileCopyProcess;
 import jp.co.ndensan.reams.db.dbc.batchcontroller.step.KyufuKanrihyoInBatchRegistCsvOutputProcess;
 import jp.co.ndensan.reams.db.dbc.batchcontroller.step.KyufuKanrihyoInBatchRegistGetEditInfoProcess;
 import jp.co.ndensan.reams.db.dbc.definition.batchprm.KokuhorenJohoTorikomiBatchParameter;
@@ -53,7 +53,8 @@ public class DBC120010_KyufukanrihyoIn extends BatchFlowBase<KokuhorenJohoToriko
         }
         executeStep(SHAREDFILE_COPY);                      //処理対象の共有ファイルをローカルへコピー
 
-        HashMap<RString, RString> filePathList = getResult(HashMap.class, new RString(SHAREDFILE_COPY), SharedFileCopy.PARAMETER_OUT_FILEPATHLIST);
+        HashMap<RString, RString> filePathList = getResult(HashMap.class, new RString(SHAREDFILE_COPY),
+                SharedFileCopyProcess.PARAMETER_OUT_FILEPATHLIST);
         for (RString filepath : filePathList.values()) {
             runFilePath = filepath;
             executeStep(TEMP_SAVE_PROCESS);                //コピーしてきたCSVを一時テーブルに格納
@@ -92,12 +93,13 @@ public class DBC120010_KyufukanrihyoIn extends BatchFlowBase<KokuhorenJohoToriko
     IBatchFlowCommand sharedFileCopy() {
         Map<RString, Object> processParameter = new HashMap<>();
         // TODO 業務内共通のフォルダが決まっていない
-//        processParameter.put(SharedFileCopy.PARAMETER_IN_FILEPATH, new RString(System.getenv("USERPROFILE").replace('\\', '/') + "/shared/"));
-        processParameter.put(SharedFileCopy.PARAMETER_IN_FILEPATH, new RString("/nfshome/D209007/sharedFiles/DB/"));
-        processParameter.put(SharedFileCopy.PARAMETER_IN_SHAREDNAME, sharedFileKey);
-        processParameter.put(SharedFileCopy.PARAMETER_IN_ICCHIJOKEN, IcchiJoken.前方一致);
+//        processParameter.put(SharedFileCopyProcess.PARAMETER_IN_FILEPATH,
+//        new RString(System.getenv("USERPROFILE").replace('\\', '/') + "/shared/"));
+        processParameter.put(SharedFileCopyProcess.PARAMETER_IN_FILEPATH, new RString("/nfshome/D209007/sharedFiles/DB/"));
+        processParameter.put(SharedFileCopyProcess.PARAMETER_IN_SHAREDNAME, sharedFileKey);
+        processParameter.put(SharedFileCopyProcess.PARAMETER_IN_ICCHIJOKEN, IcchiJoken.前方一致);
 
-        return simpleBatch(SharedFileCopy.class)
+        return simpleBatch(SharedFileCopyProcess.class)
                 .arguments(processParameter)
                 .define();
     }
@@ -146,7 +148,8 @@ public class DBC120010_KyufukanrihyoIn extends BatchFlowBase<KokuhorenJohoToriko
 
     @Step(KOKUHORENIF_UPDATE_RECORD)
     IBatchFlowCommand kokuhorenIFUpdateCtrlRecordProcess() {
-        HashMap<RString, RString> filePathList = getResult(HashMap.class, new RString(SHAREDFILE_COPY), SharedFileCopy.PARAMETER_OUT_FILEPATHLIST);
+        HashMap<RString, RString> filePathList = getResult(HashMap.class, new RString(SHAREDFILE_COPY),
+                SharedFileCopyProcess.PARAMETER_OUT_FILEPATHLIST);
         filePathList.keySet().iterator().next();
         Map<RString, Object> processParameter = new HashMap<>();
         processParameter.put(KokuhorenIFUpdateCtrlRecordProcess.PARAMETER_SHORIYM, getParameter().getShoriYM());

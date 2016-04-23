@@ -28,7 +28,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
  *
  * @author N2810 久保 里史
  */
-public class SharedFileCopy extends SimpleBatchProcessBase {
+public class SharedFileCopyProcess extends SimpleBatchProcessBase {
 
     //パラメータ名
     /**
@@ -55,6 +55,12 @@ public class SharedFileCopy extends SimpleBatchProcessBase {
         PARAMETER_OUT_FILEPATHLIST = new RString("filePathList");
     }
 
+    /**
+     * 拡張子CSV
+     */
+    private final RString 拡張子CSV = new RString("csv");
+    private static final int NUMBER3 = 3;
+
     //パラメータ受取変数
     InputParameter<RString> filePath;
     InputParameter<RString> sharedName;
@@ -62,12 +68,6 @@ public class SharedFileCopy extends SimpleBatchProcessBase {
 
     //パラメータ引渡変数
     OutputParameter<HashMap<RString, RString>> filePathList;
-
-    /**
-     * 拡張子CSV
-     */
-    public final RString 拡張子CSV = new RString("csv");
-    private static final int NUMBER3 = 3;
 
     @Override
     protected void process() {
@@ -108,11 +108,11 @@ public class SharedFileCopy extends SimpleBatchProcessBase {
     }
 
     private FilenameFilter getFileExtensionFilter(String extension) {
-        final String _extension = extension;
+        final RString extension_ = new RString(extension);
         return new FilenameFilter() {
             @Override
             public boolean accept(File file, String name) {
-                boolean ret = name.endsWith(_extension);
+                boolean ret = name.endsWith(extension_.toString());
                 return ret;
             }
         };

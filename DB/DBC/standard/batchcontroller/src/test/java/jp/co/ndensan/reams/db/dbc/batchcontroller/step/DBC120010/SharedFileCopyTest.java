@@ -34,7 +34,7 @@ public class SharedFileCopyTest extends DbcTestDacBase {
         @Test
         public void SharedFileCopyのテスト() {
 //            CreateSharedFile();
-            _StepResult result = BatchProcessTestHelper.execute(SharedFileCopy.class, createBatchParameter(), DbcTestDacBase.sqlSession);
+            _StepResult result = BatchProcessTestHelper.execute(SharedFileCopyProcess.class, createBatchParameter(), DbcTestDacBase.sqlSession);
             List<UzT0885SharedFileEntryEntity> sharedFiles = SharedFile.searchSharedFile(new RString("112%"));
             assertThat(sharedFiles.size(), is(0));
 
@@ -52,9 +52,9 @@ public class SharedFileCopyTest extends DbcTestDacBase {
 
         private HashMap<RString, Object> createBatchParameter() {
             HashMap<RString, Object> processParameter = new HashMap<>();
-            processParameter.put(SharedFileCopy.PARAMETER_IN_FILEPATH, new RString(System.getenv("USERPROFILE").replace('\\', '/') + "/shared/test/"));
-            processParameter.put(SharedFileCopy.PARAMETER_IN_SHAREDNAME, new RString("給付管理票情報"));
-            processParameter.put(SharedFileCopy.PARAMETER_IN_ICCHIJOKEN, IcchiJoken.前方一致);
+            processParameter.put(SharedFileCopyProcess.PARAMETER_IN_FILEPATH, new RString(System.getenv("USERPROFILE").replace('\\', '/') + "/shared/test/"));
+            processParameter.put(SharedFileCopyProcess.PARAMETER_IN_SHAREDNAME, new RString("給付管理票情報"));
+            processParameter.put(SharedFileCopyProcess.PARAMETER_IN_ICCHIJOKEN, IcchiJoken.前方一致);
             return processParameter;
         }
 
