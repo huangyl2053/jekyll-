@@ -92,7 +92,7 @@ public class TekiyoJogaiTotal {
         if (new RString(UrQuestionMessages.処理実行の確認.getMessage().getCode())
                 .equals(ResponseHolder.getMessageCode())
                 && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
-            ShikibetsuCode 識別コード = ViewStateHolder.get(ViewStateKeys.該当者検索_識別コード, ShikibetsuCode.class);
+            ShikibetsuCode 識別コード = ViewStateHolder.get(ViewStateKeys.資格対象者, ShikibetsuCode.class);
             RString menuId = ResponseHolder.getMenuID();
             if (遷移元メニューID_適用.equals(menuId) || 遷移元メニューID_解除.equals(menuId)) {
                 requestDiv.getTekiyoJogaiJohoIchiran().getCcdTekiyoJogaiRireki().saveTekiyoJogaisha(識別コード);
