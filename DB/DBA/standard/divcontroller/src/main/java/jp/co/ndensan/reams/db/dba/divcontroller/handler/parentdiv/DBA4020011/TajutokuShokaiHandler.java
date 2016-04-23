@@ -75,17 +75,17 @@ public class TajutokuShokaiHandler {
         bodyItem.setListUpper_2(business.get適用届出年月日() == null ? RString.EMPTY : business.get適用届出年月日().toDateString());
         bodyItem.setListUpper_3(business.get他市町村住所地特例適用事由コード());
         bodyItem.setListUpper_4(business.get他市町村住所地特例適用事由名称());
-        bodyItem.setListUpper_5(business.get解除年月日() == null ? RString.EMPTY : business.get解除年月日().toDateString());
-        bodyItem.setListUpper_6(business.get解除届出年月日() == null ? RString.EMPTY : business.get解除届出年月日().toDateString());
-        bodyItem.setListUpper_7(business.get他市町村住所地特例解除事由コード());
-        bodyItem.setListUpper_8(business.get他市町村住所地特例解除事由名称());
-        bodyItem.setListLower_1(business.get入所年月日() == null ? RString.EMPTY : business.get入所年月日().toDateString());
-        bodyItem.setListLower_2(business.get退所年月日() == null ? RString.EMPTY : business.get退所年月日().toDateString());
-        bodyItem.setListLower_3(business.get事業者名称() == null ? RString.EMPTY : business.get事業者名称().value());
-        bodyItem.setListLower_4(business.get事業者住所());
-        bodyItem.setListLower_5(business.get電話番号() == null ? RString.EMPTY : business.get電話番号().value());
-        bodyItem.setListLower_6(business.get郵便番号() == null ? RString.EMPTY : business.get郵便番号().value());
-        bodyItem.setListLower_7(business.get保険者名称());
+        bodyItem.setListUpper_5(business.get入所年月日() == null ? RString.EMPTY : business.get入所年月日().toDateString());
+        bodyItem.setListUpper_6(business.get事業者名称() == null ? RString.EMPTY : business.get事業者名称().value());
+        bodyItem.setListUpper_7(business.get電話番号() == null ? RString.EMPTY : business.get電話番号().value());
+        bodyItem.setListUpper_8(business.get保険者名称());
+        bodyItem.setListLower_1(business.get解除年月日() == null ? RString.EMPTY : business.get解除年月日().toDateString());
+        bodyItem.setListLower_2(business.get解除届出年月日() == null ? RString.EMPTY : business.get解除届出年月日().toDateString());
+        bodyItem.setListLower_3(business.get他市町村住所地特例解除事由コード());
+        bodyItem.setListLower_4(business.get他市町村住所地特例解除事由名称());
+        bodyItem.setListLower_5(business.get退所年月日() == null ? RString.EMPTY : business.get退所年月日().toDateString());
+        bodyItem.setListLower_6(business.get事業者住所());
+        bodyItem.setListLower_7(business.get郵便番号() == null ? RString.EMPTY : business.get郵便番号().value());
         bodyItem.setListLower_8(business.get他被保番号() == null ? RString.EMPTY : business.get他被保番号().value());
         bodyItemList.add(bodyItem);
     }
