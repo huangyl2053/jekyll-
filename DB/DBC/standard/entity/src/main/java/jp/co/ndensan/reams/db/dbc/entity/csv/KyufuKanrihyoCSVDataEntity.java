@@ -31,7 +31,7 @@ public class KyufuKanrihyoCSVDataEntity {
     @CsvField(order = 70, name = "保険者番号")
     private RString hokenshaNo;
     @CsvField(order = 80, name = "事業所番号（居宅介護支援事業所）")
-    private RString KyotakuShienJigyoshoNo;
+    private RString kyotakuShienJigyoshoNo;
     @CsvField(order = 90, name = "給付管理票情報作成区分コード")
     private RString kyufukanrihyoSakuseiKubunCode;
     @CsvField(order = 100, name = "給付管理票作成年月日")
@@ -170,7 +170,7 @@ public class KyufuKanrihyoCSVDataEntity {
      * @return KyotakuShienJigyoshoNo
      */
     public RString getKyotakushienjigyoshono() {
-        return KyotakuShienJigyoshoNo;
+        return kyotakuShienJigyoshoNo;
     }
 
     /**
@@ -518,10 +518,10 @@ public class KyufuKanrihyoCSVDataEntity {
     /**
      * setKyotakuShienJigyoshoNo
      *
-     * @param KyotakuShienJigyoshoNo 事業所番号（居宅介護支援事業所）
+     * @param kyotakuShienJigyoshoNo 事業所番号（居宅介護支援事業所）
      */
-    public void setKyotakushienjigyoshono(RString KyotakuShienJigyoshoNo) {
-        this.KyotakuShienJigyoshoNo = KyotakuShienJigyoshoNo;
+    public void setKyotakushienjigyoshono(RString kyotakuShienJigyoshoNo) {
+        this.kyotakuShienJigyoshoNo = kyotakuShienJigyoshoNo;
     }
 
     /**

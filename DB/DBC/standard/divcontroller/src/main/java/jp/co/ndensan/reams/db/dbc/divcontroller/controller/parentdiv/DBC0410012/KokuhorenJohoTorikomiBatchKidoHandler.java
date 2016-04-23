@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbc.divcontroller.controller.DBC0410012;
+package jp.co.ndensan.reams.db.dbc.divcontroller.controller.parentdiv.DBC0410012;
 
 import java.util.Collections;
 import jp.co.ndensan.reams.db.dbc.business.KokuhorenJohoTorikomi;
