@@ -198,21 +198,7 @@ public class RiyoshaFutangakuGengakuHandler {
             }
         }
 
-        GemmenGengakuShinseiBuilder gemmenGengakuShinseiBuilder = gemmenGengakuShinsei.createBuilderForEdit();
-        if (div.getCcdShinseiJoho().get減免減額申請情報().get申請届出代行区分() != null) {
-            gemmenGengakuShinseiBuilder.set申請届出代行区分(div.getCcdShinseiJoho().get減免減額申請情報().get申請届出代行区分().getCode());
-        }
-        gemmenGengakuShinseiBuilder.set申請届出者氏名(div.getCcdShinseiJoho().get減免減額申請情報().get申請届出者氏名());
-        gemmenGengakuShinseiBuilder.set申請届出者氏名カナ(div.getCcdShinseiJoho().get減免減額申請情報().get申請届出者氏名カナ());
-        gemmenGengakuShinseiBuilder.set申請届出者続柄(div.getCcdShinseiJoho().get減免減額申請情報().get申請届出者続柄());
-        gemmenGengakuShinseiBuilder.set申請届出代行事業者番号(div.getCcdShinseiJoho().get減免減額申請情報().get申請届出代行事業者番号());
-        if (div.getCcdShinseiJoho().get減免減額申請情報().get事業者区分() != null) {
-            gemmenGengakuShinseiBuilder.set事業者区分(div.getCcdShinseiJoho().get減免減額申請情報().get事業者区分().getCode());
-        }
-        gemmenGengakuShinseiBuilder.set申請届出者郵便番号(div.getCcdShinseiJoho().get減免減額申請情報().get申請届出者郵便番号());
-        gemmenGengakuShinseiBuilder.set申請届出者住所(div.getCcdShinseiJoho().get減免減額申請情報().get申請届出者住所());
-        gemmenGengakuShinseiBuilder.set申請届出者電話番号(div.getCcdShinseiJoho().get減免減額申請情報().get申請届出者電話番号());
-
+        GemmenGengakuShinseiBuilder gemmenGengakuShinseiBuilder = setGemmenGengakuShinseiBuilderBy入力データ(gemmenGengakuShinsei.createBuilderForEdit());
         RString 旧措置 = div.getDdlKyusochiKubun().getSelectedKey();
         RString 決定区分 = div.getRadKetteiKubun().getSelectedKey();
         RString 決定区分コード;
@@ -257,14 +243,13 @@ public class RiyoshaFutangakuGengakuHandler {
         ViewStateHolder.put(Dbd1020001Keys.利用者負担額減額情報ListのViewState, newViewStateList);
 
         List<ddlShinseiIchiran_Row> pageList = div.getDdlShinseiIchiran().getDataSource();
-        boolean is編集 = false;
+        boolean is新規 = true;
         RString 状態 = RString.EMPTY;
         if (EntityDataState.Added == state) {
             状態 = 追加;
         } else if (EntityDataState.Modified == state) {
             状態 = 修正;
         }
-
         for (ddlShinseiIchiran_Row row : pageList) {
             if (row.getHiddenShoKisaiHokenshaNo().equals(証記載保険者番号.getColumnValue())
                     && row.getHiddenShinseiRirekiNo().equals(new RString(履歴番号))) {
@@ -278,13 +263,11 @@ public class RiyoshaFutangakuGengakuHandler {
                 row.setKyusochishaUmu(KyuSochishaKubun.旧措置.getコード().equals(旧措置));
                 row.getTxtKyufuritsu().setValue(給付率.getColumnValue());
                 row.setShoninShinaiRiyu(非承認理由);
-                is編集 = true;
+                is新規 = false;
             }
         }
-        List<ddlShinseiIchiran_Row> newRowList = new ArrayList<>();
-        if (is編集) {
-            newRowList = pageList;
-        } else {
+        List<ddlShinseiIchiran_Row> newRowList = new ArrayList<>(pageList);
+        if (is新規) {
             ddlShinseiIchiran_Row row = new ddlShinseiIchiran_Row();
             row.setJotai(追加);
             row.getTxtShinseiYMD().setValue(div.getTxtShinseiYmd().getValue());
@@ -300,7 +283,6 @@ public class RiyoshaFutangakuGengakuHandler {
             row.setHiddenShinseiRirekiNo(new RString(履歴番号));
 
             newRowList.add(row);
-            newRowList.addAll(pageList);
         }
         Collections.sort(newRowList, new RiyoshaFutangakuGengakuRowComparator());
         div.getDdlShinseiIchiran().setDataSource(newRowList);
@@ -339,7 +321,6 @@ public class RiyoshaFutangakuGengakuHandler {
             } else {
                 state = EntityDataState.Unchanged;
             }
-
             if (該当DB申請.getGemmenGengakuShinseiList().size() > 0) {
                 gemmenGengakuShinsei = 該当DB申請.getGemmenGengakuShinseiList().get(0);
             } else {
@@ -366,21 +347,7 @@ public class RiyoshaFutangakuGengakuHandler {
             }
         }
 
-        GemmenGengakuShinseiBuilder gemmenGengakuShinseiBuilder = gemmenGengakuShinsei.createBuilderForEdit();
-        if (div.getCcdShinseiJoho().get減免減額申請情報().get申請届出代行区分() != null) {
-            gemmenGengakuShinseiBuilder.set申請届出代行区分(div.getCcdShinseiJoho().get減免減額申請情報().get申請届出代行区分().getCode());
-        }
-        gemmenGengakuShinseiBuilder.set申請届出者氏名(div.getCcdShinseiJoho().get減免減額申請情報().get申請届出者氏名());
-        gemmenGengakuShinseiBuilder.set申請届出者氏名カナ(div.getCcdShinseiJoho().get減免減額申請情報().get申請届出者氏名カナ());
-        gemmenGengakuShinseiBuilder.set申請届出者続柄(div.getCcdShinseiJoho().get減免減額申請情報().get申請届出者続柄());
-        gemmenGengakuShinseiBuilder.set申請届出代行事業者番号(div.getCcdShinseiJoho().get減免減額申請情報().get申請届出代行事業者番号());
-        if (div.getCcdShinseiJoho().get減免減額申請情報().get事業者区分() != null) {
-            gemmenGengakuShinseiBuilder.set事業者区分(div.getCcdShinseiJoho().get減免減額申請情報().get事業者区分().getCode());
-        }
-        gemmenGengakuShinseiBuilder.set申請届出者郵便番号(div.getCcdShinseiJoho().get減免減額申請情報().get申請届出者郵便番号());
-        gemmenGengakuShinseiBuilder.set申請届出者住所(div.getCcdShinseiJoho().get減免減額申請情報().get申請届出者住所());
-        gemmenGengakuShinseiBuilder.set申請届出者電話番号(div.getCcdShinseiJoho().get減免減額申請情報().get申請届出者電話番号());
-
+        GemmenGengakuShinseiBuilder gemmenGengakuShinseiBuilder = setGemmenGengakuShinseiBuilderBy入力データ(gemmenGengakuShinsei.createBuilderForEdit());
         builder.set申請事由(div.getTxtShinseiRiyu().getValue());
         builder.set申請年月日(div.getTxtShinseiYmd().getValue());
         builder.setGemmenGengakuShinsei(gemmenGengakuShinseiBuilder.build());
@@ -396,7 +363,7 @@ public class RiyoshaFutangakuGengakuHandler {
         ViewStateHolder.put(Dbd1020001Keys.利用者負担額減額情報ListのViewState, newViewStateList);
 
         List<ddlShinseiIchiran_Row> pageList = div.getDdlShinseiIchiran().getDataSource();
-        boolean is編集 = false;
+        boolean is新規 = true;
         RString 状態 = RString.EMPTY;
         if (EntityDataState.Added == state) {
             状態 = 追加;
@@ -410,13 +377,11 @@ public class RiyoshaFutangakuGengakuHandler {
                 row.getTxtShinseiYMD().setValue(div.getTxtShinseiYmd().getValue());
                 row.setShinseiRiyu(div.getTxtShinseiRiyu().getValue());
                 row.setJotai(状態);
-                is編集 = true;
+                is新規 = false;
             }
         }
-        List<ddlShinseiIchiran_Row> newRowList = new ArrayList<>();
-        if (is編集) {
-            newRowList = pageList;
-        } else {
+        List<ddlShinseiIchiran_Row> newRowList = new ArrayList<>(pageList);
+        if (is新規) {
             ddlShinseiIchiran_Row row = new ddlShinseiIchiran_Row();
             row.getTxtShinseiYMD().setValue(div.getTxtShinseiYmd().getValue());
             row.setShinseiRiyu(div.getTxtShinseiRiyu().getValue());
@@ -425,7 +390,6 @@ public class RiyoshaFutangakuGengakuHandler {
             row.setHiddenShinseiRirekiNo(new RString(履歴番号));
 
             newRowList.add(row);
-            newRowList.addAll(pageList);
         }
         Collections.sort(newRowList, new RiyoshaFutangakuGengakuRowComparator());
         div.getDdlShinseiIchiran().setDataSource(newRowList);
@@ -756,6 +720,23 @@ public class RiyoshaFutangakuGengakuHandler {
         }
         div.getDdlShinseiIchiran().setDataSource(rowList);
         ViewStateHolder.put(Dbd1020001Keys.利用者負担額減額情報ListのViewState, viewStateList);
+    }
+
+    private GemmenGengakuShinseiBuilder setGemmenGengakuShinseiBuilderBy入力データ(GemmenGengakuShinseiBuilder gemmenGengakuShinseiBuilder) {
+        if (div.getCcdShinseiJoho().get減免減額申請情報().get申請届出代行区分() != null) {
+            gemmenGengakuShinseiBuilder.set申請届出代行区分(div.getCcdShinseiJoho().get減免減額申請情報().get申請届出代行区分().getCode());
+        }
+        gemmenGengakuShinseiBuilder.set申請届出者氏名(div.getCcdShinseiJoho().get減免減額申請情報().get申請届出者氏名());
+        gemmenGengakuShinseiBuilder.set申請届出者氏名カナ(div.getCcdShinseiJoho().get減免減額申請情報().get申請届出者氏名カナ());
+        gemmenGengakuShinseiBuilder.set申請届出者続柄(div.getCcdShinseiJoho().get減免減額申請情報().get申請届出者続柄());
+        gemmenGengakuShinseiBuilder.set申請届出代行事業者番号(div.getCcdShinseiJoho().get減免減額申請情報().get申請届出代行事業者番号());
+        if (div.getCcdShinseiJoho().get減免減額申請情報().get事業者区分() != null) {
+            gemmenGengakuShinseiBuilder.set事業者区分(div.getCcdShinseiJoho().get減免減額申請情報().get事業者区分().getCode());
+        }
+        gemmenGengakuShinseiBuilder.set申請届出者郵便番号(div.getCcdShinseiJoho().get減免減額申請情報().get申請届出者郵便番号());
+        gemmenGengakuShinseiBuilder.set申請届出者住所(div.getCcdShinseiJoho().get減免減額申請情報().get申請届出者住所());
+        gemmenGengakuShinseiBuilder.set申請届出者電話番号(div.getCcdShinseiJoho().get減免減額申請情報().get申請届出者電話番号());
+        return gemmenGengakuShinseiBuilder;
     }
 
     private List<KeyValueDataSource> getDdlKyusochiKubun() {
