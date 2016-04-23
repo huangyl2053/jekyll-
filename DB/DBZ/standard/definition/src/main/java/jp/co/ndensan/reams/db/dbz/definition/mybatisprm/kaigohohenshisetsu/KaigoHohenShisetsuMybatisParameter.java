@@ -24,7 +24,7 @@ public class KaigoHohenShisetsuMybatisParameter {
     private final RString 入所施設種類_住所地特例対象施設 = ShisetsuType.住所地特例対象施設.getコード();
     private final RString 入所施設種類_適用除外施設 = ShisetsuType.適用除外施設.getコード();
     private final RString 事業者種別_住所地特例対象施設 = JigyosyaType.住所地特例対象施設.getコード();
-    private final RString 事業者種別_適用除外施設 = ShisetsuType.適用除外施設.getコード();
+    private final RString 事業者種別_適用除外施設 = JigyosyaType.適用除外施設.getコード();
     private final ShikibetsuCode shikibetsuCode;
     private final RString 台帳種別;
     private boolean 被保険者台帳_他住所地特例者台帳の時_フラグ = false;

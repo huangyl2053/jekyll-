@@ -98,8 +98,8 @@ and open the template in the editor.
                 AND         DbT1005."jigyoshaShubetsu" = #{事業者種別_住所地特例対象施設}
                 AND         DbT1005."yukoKaishiYMD" = ( SELECT MAX(rgdb."DbT1005KaigoJogaiTokureiTaishoShisetsu"."yukoKaishiYMD")
                                                                 FROM  rgdb."DbT1005KaigoJogaiTokureiTaishoShisetsu"
-                                                                WHERE DbT1005."jigyoshaNo" = DbT1004."nyushoShisetsuCode"
-                                                                AND  DbT1005."jigyoshaShubetsu" = DbT1004."nyushoShisetsuShurui")
+                                                                WHERE rgdb."DbT1005KaigoJogaiTokureiTaishoShisetsu"."jigyoshaNo" = DbT1004."nyushoShisetsuCode"
+                                                                AND  rgdb."DbT1005KaigoJogaiTokureiTaishoShisetsu"."jigyoshaShubetsu" = DbT1004."nyushoShisetsuShurui")
             ORDER BY
                 DbT1004."rirekiNo", DbT1004."nyushoYMD")
          UNION
@@ -134,8 +134,8 @@ and open the template in the editor.
                 AND   DbT1005."jigyoshaShubetsu" = #{事業者種別_適用除外施設}
                 AND   DbT1005."yukoKaishiYMD" = ( SELECT MAX(rgdb."DbT1005KaigoJogaiTokureiTaishoShisetsu"."yukoKaishiYMD")
                                                 FROM  rgdb."DbT1005KaigoJogaiTokureiTaishoShisetsu"
-                                                WHERE DbT1005."jigyoshaNo" = DbT1004."nyushoShisetsuCode"
-                                                AND  DbT1005."jigyoshaShubetsu" = DbT1004."nyushoShisetsuShurui")
+                                                WHERE rgdb."DbT1005KaigoJogaiTokureiTaishoShisetsu"."jigyoshaNo" = DbT1004."nyushoShisetsuCode"
+                                                AND  rgdb."DbT1005KaigoJogaiTokureiTaishoShisetsu"."jigyoshaShubetsu" = DbT1004."nyushoShisetsuShurui")
             ORDER BY
                 DbT1004."rirekiNo", DbT1004."nyushoYMD")
     </select>
@@ -195,8 +195,8 @@ and open the template in the editor.
                 AND         DbT1005."jigyoshaShubetsu" = #{事業者種別_住所地特例対象施設}
                 AND         DbT1005."yukoKaishiYMD" = ( SELECT MAX(rgdb."DbT1005KaigoJogaiTokureiTaishoShisetsu"."yukoKaishiYMD")
                                                         FROM  rgdb."DbT1005KaigoJogaiTokureiTaishoShisetsu"
-                                                        WHERE DbT1005."jigyoshaNo" = DbT1004."nyushoShisetsuCode"
-                                                        AND  DbT1005."jigyoshaShubetsu" = DbT1004."nyushoShisetsuShurui")
+                                                        WHERE rgdb."DbT1005KaigoJogaiTokureiTaishoShisetsu"."jigyoshaNo" = DbT1004."nyushoShisetsuCode"
+                                                        AND  rgdb."DbT1005KaigoJogaiTokureiTaishoShisetsu"."jigyoshaShubetsu" = DbT1004."nyushoShisetsuShurui")
             ORDER BY
                 DbT1004."rirekiNo", DbT1004."nyushoYMD")
         </if>
@@ -226,8 +226,8 @@ and open the template in the editor.
                 AND   DbT1005."jigyoshaShubetsu" = #{事業者種別_適用除外施設}
                 AND   DbT1005."yukoKaishiYMD" = ( SELECT MAX(rgdb."DbT1005KaigoJogaiTokureiTaishoShisetsu"."yukoKaishiYMD")
                                                 FROM  rgdb."DbT1005KaigoJogaiTokureiTaishoShisetsu"
-                                                WHERE DbT1005."jigyoshaNo" = DbT1004."nyushoShisetsuCode"
-                                                        AND  DbT1005."jigyoshaShubetsu" = DbT1004."nyushoShisetsuShurui")
+                                                WHERE rgdb."DbT1005KaigoJogaiTokureiTaishoShisetsu"."jigyoshaNo" = DbT1004."nyushoShisetsuCode"
+                                                        AND  rgdb."DbT1005KaigoJogaiTokureiTaishoShisetsu"."jigyoshaShubetsu" = DbT1004."nyushoShisetsuShurui")
             ORDER BY
                 DbT1004."rirekiNo", DbT1004."nyushoYMD")
         </if>
@@ -299,8 +299,8 @@ and open the template in the editor.
             AND         DbT1005."jigyoshaShubetsu" = #{事業者種別_住所地特例対象施設}
             AND         DbT1005."yukoKaishiYMD" = ( SELECT MAX(rgdb."DbT1005KaigoJogaiTokureiTaishoShisetsu"."yukoKaishiYMD")
                                                     FROM  rgdb."DbT1005KaigoJogaiTokureiTaishoShisetsu"
-                                                    WHERE DbT1005."jigyoshaNo" = DbT1004."nyushoShisetsuCode"
-                                                    AND  DbT1005."jigyoshaShubetsu" = DbT1004."nyushoShisetsuShurui")
+                                                    WHERE rgdb."DbT1005KaigoJogaiTokureiTaishoShisetsu"."jigyoshaNo" = DbT1004."nyushoShisetsuCode"
+                                                    AND  rgdb."DbT1005KaigoJogaiTokureiTaishoShisetsu"."jigyoshaShubetsu" = DbT1004."nyushoShisetsuShurui")
         ORDER BY
             DbT1004."rirekiNo", DbT1004."nyushoYMD")
     UNION
@@ -328,8 +328,8 @@ and open the template in the editor.
             AND   DbT1005."jigyoshaShubetsu" = #{事業者種別_適用除外施設}
             AND   DbT1005."yukoKaishiYMD" = ( SELECT MAX(rgdb."DbT1005KaigoJogaiTokureiTaishoShisetsu"."yukoKaishiYMD")
                                             FROM  rgdb."DbT1005KaigoJogaiTokureiTaishoShisetsu"
-                                            WHERE DbT1005."jigyoshaNo" = DbT1004."nyushoShisetsuCode"
-                                            AND  DbT1005."jigyoshaShubetsu" = DbT1004."nyushoShisetsuShurui")
+                                            WHERE rgdb."DbT1005KaigoJogaiTokureiTaishoShisetsu"."jigyoshaNo" = DbT1004."nyushoShisetsuCode"
+                                            AND  rgdb."DbT1005KaigoJogaiTokureiTaishoShisetsu"."jigyoshaShubetsu" = DbT1004."nyushoShisetsuShurui")
         ORDER BY
             DbT1004."rirekiNo", DbT1004."nyushoYMD")
     </select>
@@ -360,8 +360,8 @@ and open the template in the editor.
                     AND         DbT1004."nyushoShisetsuShurui" = #{入所施設種類_介護保険施設}
                     AND         DbT1004."daichoShubetsu" = #{台帳種別}
                     AND         DbT7060."yukoKaishiYMD" = (SELECT MAX(rgdb."DbT7060KaigoJigyosha"."yukoKaishiYMD")
-                    FROM  rgdb."DbT7060KaigoJigyosha"
-                    WHERE rgdb."DbT7060KaigoJigyosha"."jigyoshaNo" =  DbT1004."nyushoShisetsuCode")
+                                                            FROM  rgdb."DbT7060KaigoJigyosha"  
+                                                            WHERE rgdb."DbT7060KaigoJigyosha"."jigyoshaNo" =  DbT1004."nyushoShisetsuCode")
             ORDER BY
                     DbT1004."rirekiNo", DbT1004."nyushoYMD" )
          UNION
@@ -390,8 +390,9 @@ and open the template in the editor.
                 AND         DbT1005."jigyoshaShubetsu" = #{事業者種別_住所地特例対象施設}
                 AND         DbT1005."yukoKaishiYMD" = ( SELECT MAX(rgdb."DbT1005KaigoJogaiTokureiTaishoShisetsu"."yukoKaishiYMD")
                                                         FROM  rgdb."DbT1005KaigoJogaiTokureiTaishoShisetsu"
-                                                        WHERE DbT1005."jigyoshaNo" = DbT1004."nyushoShisetsuCode"
-                                                        AND  DbT1005."jigyoshaShubetsu" = DbT1004."nyushoShisetsuShurui")
+                                                        WHERE 
+                                                               rgdb."DbT1005KaigoJogaiTokureiTaishoShisetsu"."jigyoshaNo" = DbT1004."nyushoShisetsuCode"
+                                                          AND  rgdb."DbT1005KaigoJogaiTokureiTaishoShisetsu"."jigyoshaShubetsu" = DbT1004."nyushoShisetsuShurui")
             ORDER BY
                 DbT1004."rirekiNo", DbT1004."nyushoYMD" )
         </if>
@@ -421,8 +422,8 @@ and open the template in the editor.
                 AND   DbT1005."jigyoshaShubetsu" = #{事業者種別_適用除外施設}
                 AND   DbT1005."yukoKaishiYMD" = ( SELECT MAX(rgdb."DbT1005KaigoJogaiTokureiTaishoShisetsu"."yukoKaishiYMD")
                                                     FROM  rgdb."DbT1005KaigoJogaiTokureiTaishoShisetsu"
-                                                    WHERE DbT1005."jigyoshaNo" = DbT1004."nyushoShisetsuCode"
-                                                    AND  DbT1005."jigyoshaShubetsu" = DbT1004."nyushoShisetsuShurui")
+                                                    WHERE rgdb."DbT1005KaigoJogaiTokureiTaishoShisetsu"."jigyoshaNo" = DbT1004."nyushoShisetsuCode"
+                                                    AND  rgdb."DbT1005KaigoJogaiTokureiTaishoShisetsu"."jigyoshaShubetsu" = DbT1004."nyushoShisetsuShurui")
             ORDER BY
                 DbT1004."rirekiNo", DbT1004."nyushoYMD")
         </if>
