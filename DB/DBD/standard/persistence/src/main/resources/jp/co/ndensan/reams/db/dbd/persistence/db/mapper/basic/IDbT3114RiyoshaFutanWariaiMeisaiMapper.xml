@@ -84,7 +84,7 @@
         AND A."rirekiNo" <![CDATA[<]]> B."rirekiNo"
         )
         AND (A."yukoKaishiYMD" <![CDATA[<=]]> #{基準日} AND A."yukoShuryoYMD" <![CDATA[>=]]> #{基準日})
-        AND A."isDeleted" = false
+        AND A."logicalDeletedFlag" = false
     </select>
 
 </mapper>
