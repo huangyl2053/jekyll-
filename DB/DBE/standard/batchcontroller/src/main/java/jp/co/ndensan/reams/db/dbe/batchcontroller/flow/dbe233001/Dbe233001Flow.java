@@ -11,6 +11,7 @@ import jp.co.ndensan.reams.db.dbe.batchcontroller.step.dbe233001.ShujiiIkenTokus
 import jp.co.ndensan.reams.db.dbe.batchcontroller.step.dbe233001.ShujiiIkenTokusokujoHakkoReportProcess;
 import jp.co.ndensan.reams.db.dbe.batchcontroller.step.dbe233001.ShujiiIkenTokusokujoReportProcess;
 import jp.co.ndensan.reams.db.dbe.batchcontroller.step.dbe233001.ShujiiUpadteDataProcess;
+import jp.co.ndensan.reams.db.dbe.business.report.ninteichosatokusokutaishoshaichiranhyo.NinteiChosaTokusokuTaishoshaIchiranhyoItem;
 import jp.co.ndensan.reams.db.dbe.definition.batchprm.dbe233001.Dbe233001FlowParameter;
 import jp.co.ndensan.reams.db.dbe.definition.batchprm.dbe233001.ShujiiCsvProcessParameter;
 import jp.co.ndensan.reams.db.dbe.definition.batchprm.dbe233001.ShujiiUpdateProcessParameter;
@@ -99,10 +100,12 @@ public class Dbe233001Flow extends BatchFlowBase<Dbe233001FlowParameter> {
 
     private ShujiiCsvProcessParameter createCsvParameter() {
         ShujiiCsvProcessParameter parameter = new ShujiiCsvProcessParameter();
-        List<Object> itemList
-                = getResult(List.class, new RString(主治医意見書督促対象者一覧表の作成), ShujiiIkenTokusokujoHakkoReportProcess.OUT_DATA_LIST);
+        List<NinteiChosaTokusokuTaishoshaIchiranhyoItem> itemList = new ArrayList<>();
+        if (主治医意見書督促対象者一覧表_選択された.equals(getParameter().getTemp_主治医意見書督促対象者一覧表().toString())) {
+            itemList = getResult(List.class, new RString(主治医意見書督促対象者一覧表の作成),
+                    ShujiiIkenTokusokujoHakkoReportProcess.SHUJI_DATA_LIST);
+        }
         parameter.setShujiiItemList(itemList);
-
         return parameter;
     }
 

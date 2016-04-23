@@ -43,6 +43,10 @@ public class ShujiiIkenTokusokujoHakkoReportProcess extends BatchProcessBase<Shu
      * OUT_DATA_LISTです。
      */
     public static final RString OUT_DATA_LIST;
+    /**
+     * SHUJI_DATA_LISTです。
+     */
+    public static final RString SHUJI_DATA_LIST;
     private static final RString MYBATIS_SELECT_ID = new RString(
             "jp.co.ndensan.reams.db.dbe.persistence.db.mapper.relate.dbe233001."
             + "IDbe233001RelateMapper.select主治医意見書督促対象者一覧表ByKey");
@@ -59,8 +63,10 @@ public class ShujiiIkenTokusokujoHakkoReportProcess extends BatchProcessBase<Shu
 
     static {
         OUT_DATA_LIST = new RString("outDataList");
+        SHUJI_DATA_LIST = new RString("shujiDataList");
     }
     private OutputParameter<List<RString>> outDataList;
+    private OutputParameter<List<NinteiChosaTokusokuTaishoshaIchiranhyoItem>> shujiDataList;
     private List<RString> shinseishoKanriNoList;
 
     @Override
@@ -68,6 +74,7 @@ public class ShujiiIkenTokusokujoHakkoReportProcess extends BatchProcessBase<Shu
         itemList = new ArrayList();
         shinseishoKanriNoList = new ArrayList<>();
         outDataList = new OutputParameter<>();
+        shujiDataList = new OutputParameter<>();
         super.initialize();
     }
 
@@ -107,6 +114,7 @@ public class ShujiiIkenTokusokujoHakkoReportProcess extends BatchProcessBase<Shu
         NinteiChosaTokusokuTaishoshaIchiranhyoReport report = NinteiChosaTokusokuTaishoshaIchiranhyoReport.createFrom(itemList);
         report.writeBy(reportSourceWriter);
         outDataList.setValue(shinseishoKanriNoList);
+        shujiDataList.setValue(itemList);
     }
 
     private void set出力条件表() {
