@@ -139,7 +139,7 @@ public class NinteichosaResultEntryMain {
         return repeateData;
     }
 
-    private final class TokkijikoComFactroy {
+    private static final class TokkijikoComFactroy {
 
         private final TokkijikoCom copyOrigin;
 

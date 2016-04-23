@@ -713,9 +713,9 @@ public class NinteichosaIraiEntry {
             this.content.getTokusokuCount().setValue(targetInfo.get督促回数());
         }
 
-        private RString _composeKey(RString value) {
-            return value.equals(RString.EMPTY) ? new RString("0") : value.substring(0, 1);
-        }
+//        private RString _composeKey(RString value) {
+//            return value.equals(RString.EMPTY) ? new RString("0") : value.substring(0, 1);
+//        }
 
         /**
          * 指定の対象者情報に、コントロールの値を反映して返します。
@@ -794,7 +794,7 @@ public class NinteichosaIraiEntry {
                 return this.pablish;
             }
 
-            class _Pablish {
+            static class _Pablish {
 
                 private final NinteichosaIraiEntryTokusokuPublishDiv panel;
 
