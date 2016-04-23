@@ -95,7 +95,6 @@ public class GaikyoTokkiYichiranNyuroku {
      * @param div GaikyoTokkiYichiranNyurokuDiv
      * @return ResponseData<GaikyoTokkiNyurokuDiv>
      */
-    @SuppressWarnings("unchecked")
     public ResponseData<GaikyoTokkiYichiranNyurokuDiv> onBlur_ChosaKomokuNo1(GaikyoTokkiYichiranNyurokuDiv div) {
         GaikyoTokkiYichiranNyurokuHandler handler = new GaikyoTokkiYichiranNyurokuHandler(div);
 
@@ -128,7 +127,6 @@ public class GaikyoTokkiYichiranNyuroku {
      * @param div GaikyoTokkiYichiranNyurokuDiv
      * @return ResponseData<GaikyoTokkiNyurokuDiv>
      */
-    @SuppressWarnings("unchecked")
     public ResponseData<GaikyoTokkiYichiranNyurokuDiv> onBlur_ChosaKomokuNo2(GaikyoTokkiYichiranNyurokuDiv div) {
         GaikyoTokkiYichiranNyurokuHandler handler = new GaikyoTokkiYichiranNyurokuHandler(div);
 
@@ -161,7 +159,6 @@ public class GaikyoTokkiYichiranNyuroku {
      * @param div GaikyoTokkiYichiranNyurokuDiv
      * @return ResponseData<GaikyoTokkiNyurokuDiv>
      */
-    @SuppressWarnings("unchecked")
     public ResponseData<GaikyoTokkiYichiranNyurokuDiv> onBlur_ChosaKomokuNo3(GaikyoTokkiYichiranNyurokuDiv div) {
         GaikyoTokkiYichiranNyurokuHandler handler = new GaikyoTokkiYichiranNyurokuHandler(div);
 
@@ -194,7 +191,6 @@ public class GaikyoTokkiYichiranNyuroku {
      * @param div GaikyoTokkiYichiranNyurokuDiv
      * @return ResponseData<GaikyoTokkiNyurokuDiv>
      */
-    @SuppressWarnings("unchecked")
     public ResponseData<GaikyoTokkiYichiranNyurokuDiv> onBlur_ChosaKomokuNo4(GaikyoTokkiYichiranNyurokuDiv div) {
         GaikyoTokkiYichiranNyurokuHandler handler = new GaikyoTokkiYichiranNyurokuHandler(div);
 
@@ -227,7 +223,6 @@ public class GaikyoTokkiYichiranNyuroku {
      * @param div GaikyoTokkiYichiranNyurokuDiv
      * @return ResponseData<GaikyoTokkiNyurokuDiv>
      */
-    @SuppressWarnings("unchecked")
     public ResponseData<GaikyoTokkiYichiranNyurokuDiv> onBlur_ChosaKomokuNo5(GaikyoTokkiYichiranNyurokuDiv div) {
         GaikyoTokkiYichiranNyurokuHandler handler = new GaikyoTokkiYichiranNyurokuHandler(div);
 
