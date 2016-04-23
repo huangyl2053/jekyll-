@@ -12,7 +12,6 @@ import jp.co.ndensan.reams.db.dbb.entity.db.report.karisanteinonyutsuchishocvska
 import jp.co.ndensan.reams.db.dbz.business.core.kaigosofubutsuatesakisource.KaigoSofubutsuAtesakiSource;
 import jp.co.ndensan.reams.ur.urz.entity.report.sofubutsuatesaki.SofubutsuAtesakiSource;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
 
 /**
  * 保険料納入通知書（仮算定）【コンビニ角公タイプ】CoverのEditorです。
@@ -22,7 +21,6 @@ import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
 public class KarisanteiNonyuTsuchishoCVSKakukoCoverEditor implements IKarisanteiNonyuTsuchishoCVSKakukoCoverEditor {
 
     private final KariSanteiNonyuTsuchiShoJoho item;
-    private ReportSourceWriter<KarisanteiNonyuTsuchishoCVSKakukoSource> reportSourceWriter;
 
     private static final RString HOKENRYO_RITU = new RString("保険料率");
     private static final RString NENGAKU_HOKENRYO = new RString("年額保険料");
