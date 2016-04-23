@@ -1266,7 +1266,7 @@ public final class JutakuKaishuShinseiJyohoTorokuHandler {
         if (更新前データmap.size() != 画面データmap.size()) {
             return true;
         }
-        List<dgGaisyuList_Row> 住宅住所更新前データ = ViewStateHolder.get(
+        List<JutakuGaisuListDataParameter> 住宅住所更新前データ = ViewStateHolder.get(
                 ViewStateKeys.申請情報登録_住宅住所更新前データ, List.class);
         List<dgGaisyuList_Row> 画面住宅住所 = div.getJutakuKaishuShinseiContents().getCcdJutakugaisyunaiyoList()
                 .get住宅改修内容一覧();
@@ -1424,7 +1424,7 @@ public final class JutakuKaishuShinseiJyohoTorokuHandler {
         JutakuGaisuDataParameter 住宅改修データ = ViewStateHolder.get(
                 ViewStateKeys.住宅改修データ_画面メモリ, JutakuGaisuDataParameter.class);
         if (住宅改修データ != null) {
-            List<dgGaisyuList_Row> 住宅改修データdgList = 住宅改修データ.get住宅改修データ();
+            List<JutakuGaisuListDataParameter> 住宅改修データdgList = 住宅改修データ.get住宅改修データ();
             List<dgGaisyuList_Row> gridList = div.getJutakuKaishuShinseiContents().getCcdJutakugaisyunaiyoList()
                     .get住宅改修内容一覧();
             List<RString> 限度額リセット = 住宅改修データ.get限度額リセット();
@@ -1445,7 +1445,7 @@ public final class JutakuKaishuShinseiJyohoTorokuHandler {
         return false;
     }
 
-    private boolean is住宅改修データ変更(List<dgGaisyuList_Row> 住宅改修データdgList, List<dgGaisyuList_Row> gridList) {
+    private boolean is住宅改修データ変更(List<JutakuGaisuListDataParameter> 住宅改修データdgList, List<dgGaisyuList_Row> gridList) {
         for (int i = 0; i < 住宅改修データdgList.size(); i++) {
             if (!住宅改修データdgList.get(i).getTxtJutakuAddress().equals(gridList.get(i).getTxtJutakuAddress())
                     || !住宅改修データdgList.get(i).getTxtJyotai().equals(gridList.get(i).getTxtJyotai())
@@ -1522,7 +1522,7 @@ public final class JutakuKaishuShinseiJyohoTorokuHandler {
             }
         }
         JutakuGaisuDataParameter 住宅改修データ = new JutakuGaisuDataParameter();
-        住宅改修データ.set住宅改修データ(gridList);
+        住宅改修データ.set住宅改修データ(get住宅改修内容一覧データ(gridList));
         ViewStateHolder.put(ViewStateKeys.住宅改修データ_画面メモリ, 住宅改修データ);
     }
 
