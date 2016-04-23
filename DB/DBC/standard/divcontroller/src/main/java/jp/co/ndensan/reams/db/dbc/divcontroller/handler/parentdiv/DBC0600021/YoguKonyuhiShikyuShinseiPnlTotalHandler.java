@@ -172,8 +172,6 @@ public class YoguKonyuhiShikyuShinseiPnlTotalHandler {
      */
     public List<KeyValueDataSource> get保険者(FlexibleYearMonth サービス提供年月) {
         List<KeyValueDataSource> dataSourceList = new ArrayList<>();
-        KeyValueDataSource dataSourceBlank = new KeyValueDataSource(BLANK, RString.EMPTY);
-        dataSourceList.add(dataSourceBlank);
         RString 導入形態 = ShichosonSecurityJoho.getShichosonSecurityJoho(
                 GyomuBunrui.介護事務).get導入形態コード().value();
         FlexibleDate 基準年月 = null;
@@ -960,8 +958,9 @@ public class YoguKonyuhiShikyuShinseiPnlTotalHandler {
             }
         }
         if (null != div.getYoguKonyuhiShikyuShinseiContentsPanel().
-                getTxtTeikyoYM() && div.getYoguKonyuhiShikyuShinseiContentsPanel().
-                getYoguKonyuhiDetailInput().getTxtBuyYMD() != null && !div.getYoguKonyuhiShikyuShinseiContentsPanel()
+                getTxtTeikyoYM().getValue() && div.getYoguKonyuhiShikyuShinseiContentsPanel().
+                getYoguKonyuhiDetailInput().getTxtBuyYMD().getValue() != null && !div.
+                getYoguKonyuhiShikyuShinseiContentsPanel()
                 .getTxtTeikyoYM().getValue().getYearMonth().equals(div.getYoguKonyuhiShikyuShinseiContentsPanel().
                         getYoguKonyuhiDetailInput().getTxtBuyYMD().getValue().getYearMonth())) {
             validPairs.add(new ValidationMessageControlPair(new IdocheckMessages(
@@ -1339,6 +1338,7 @@ public class YoguKonyuhiShikyuShinseiPnlTotalHandler {
                 SubGyomuCode.DBU介護統計報告);
         div.getYoguKonyuhiShikyuShinseiContentsPanel().getTxtKyufuritsu().setValue(new Decimal(給付率.toString()));
         div.getYoguKonyuhiShikyuShinseiContentsPanel().getTxtJigyoshaNo().setValue(NUM3);
+        div.getYoguKonyuhiShikyuShinseiContentsPanel().getTxtJigyoshaNo().setDisabled(false);
         RString 整理番号 = Saiban.get(SubGyomuCode.DBC介護給付, SaibanHanyokeyName.償還整理番号.
                 getコード()).nextString();
         JigyoshaNo 事業者番号 = new JigyoshaNo(NUM3);
