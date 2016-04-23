@@ -5,6 +5,7 @@ import jp.co.ndensan.reams.db.dba.divcontroller.entity.parentdiv.DBA2020011.Shis
 import jp.co.ndensan.reams.db.dba.divcontroller.handler.parentdiv.DBA2020011.ShisetsuNyutaishoIdoHandler;
 import jp.co.ndensan.reams.db.dba.service.core.nyutaishoshakanri.NyutaishoshaKanriFinder;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.ShisetsuNyutaishoRirekiKanri.dgShisetsuNyutaishoRireki_Row;
+import jp.co.ndensan.reams.db.dbz.divcontroller.entity.parentdiv.DBZ0200001.DBZ0200001TransitionEventName;
 import jp.co.ndensan.reams.db.dbz.divcontroller.util.viewstate.ViewStateKey;
 import jp.co.ndensan.reams.db.dbz.service.TaishoshaKey;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
@@ -60,9 +61,10 @@ public class ShisetsuNyutaishoIdo {
      * @param div 施設入退所異動Div
      * @return レスポンス
      */
-    public ResponseData<ShisetsuNyutaishoIdoDiv> onClick_commonButtonBack(ShisetsuNyutaishoIdoDiv div) {
+    public ResponseData onClick_commonButtonBack(ShisetsuNyutaishoIdoDiv div) {
+
         RealInitialLocker.release(前排他ロックキー);
-        return ResponseData.of(div).respond();
+        return ResponseData.of(div).forwardWithEventName(DBZ0200001TransitionEventName.対象者特定).respond();
     }
 
     /**
