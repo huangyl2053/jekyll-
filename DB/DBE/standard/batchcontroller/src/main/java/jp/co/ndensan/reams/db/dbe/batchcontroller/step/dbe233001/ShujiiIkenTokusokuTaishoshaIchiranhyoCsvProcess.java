@@ -42,7 +42,7 @@ public class ShujiiIkenTokusokuTaishoshaIchiranhyoCsvProcess extends BatchProces
     private static final RString タイトル = new RString("督促状発行対象者一覧");
     private static final RString 市町村コード = new RString("市町村コード");
     private static final RString 市町村名称 = new RString("市町村名称");
-    private static final RString No = new RString("No");
+    private static final RString 番号 = new RString("No");
     private static final RString 保険者名 = new RString("保険者名");
     private static final RString 被保険者番号 = new RString("被保険者番号");
     private static final RString 被保険者氏名カナ = new RString("被保険者氏名カナ");
@@ -99,7 +99,7 @@ public class ShujiiIkenTokusokuTaishoshaIchiranhyoCsvProcess extends BatchProces
                 null, null, null, null,
                 null, null, null, null));
         csvWriter.writeLine(new ShujiiIkenTokusokujoCsvEntity(
-                市町村コード, 市町村名称, No, 保険者名, 被保険者番号, 被保険者氏名カナ, 被保険者氏名, 申請日, 督促状発行日,
+                市町村コード, 市町村名称, 番号, 保険者名, 被保険者番号, 被保険者氏名カナ, 被保険者氏名, 申請日, 督促状発行日,
                 氏名, 事業者名称, 事業者住所, 事業者電話番号));
         List<NinteiChosaTokusokuTaishoshaIchiranhyoItem> dataList
                 = (List<NinteiChosaTokusokuTaishoshaIchiranhyoItem>) processParameter.getShujiiItemList();
