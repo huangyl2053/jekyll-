@@ -4,18 +4,22 @@ package jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0600021;
  * このファイルへの変更は、再生成時には損失するため
  * 不正な動作の原因になります。
  */
+
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import jp.co.ndensan.reams.uz.uza.ui.binding.*;
+import jp.co.ndensan.reams.uz.uza.ui.binding.Button;
+import jp.co.ndensan.reams.uz.uza.ui.binding.Label;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TableCell;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TablePanel;
+import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxNum;
 
 /**
- * tpSummary のクラスファイル 
- * 
- * @author 自動生成
+ * tpSummary のクラスファイル
+ *
+ * @reamsid_L DBC-1020-030 quxiaodong
  */
 public class tpSummaryDiv extends TablePanel {
+
     // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
     /*
      * [ private の作成 ]
@@ -461,12 +465,14 @@ public class tpSummaryDiv extends TablePanel {
 
     // </editor-fold>
 }
+
 /**
- * tc11 のクラスファイル 
- * 
+ * tc11 のクラスファイル
+ *
  * @author 自動生成
  */
 class tc11AttpSummary extends TableCell {
+
     // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
     @JsonProperty("lblShukei")
     private Label lblShukei;
@@ -491,12 +497,14 @@ class tc11AttpSummary extends TableCell {
 
     // </editor-fold>
 }
+
 /**
- * tc12 のクラスファイル 
- * 
+ * tc12 のクラスファイル
+ *
  * @author 自動生成
  */
 class tc12AttpSummary extends TableCell {
+
     // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
     @JsonProperty("lblHiyogakuGokei")
     private Label lblHiyogakuGokei;
@@ -521,12 +529,14 @@ class tc12AttpSummary extends TableCell {
 
     // </editor-fold>
 }
+
 /**
- * tc13 のクラスファイル 
- * 
+ * tc13 のクラスファイル
+ *
  * @author 自動生成
  */
 class tc13AttpSummary extends TableCell {
+
     // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
     @JsonProperty("lblHokenTaishoHiyogakuGokei")
     private Label lblHokenTaishoHiyogakuGokei;
@@ -551,12 +561,14 @@ class tc13AttpSummary extends TableCell {
 
     // </editor-fold>
 }
+
 /**
- * tc14 のクラスファイル 
- * 
+ * tc14 のクラスファイル
+ *
  * @author 自動生成
  */
 class tc14AttpSummary extends TableCell {
+
     // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
     @JsonProperty("lblHokenkyufugakuGokei")
     private Label lblHokenkyufugakuGokei;
@@ -581,12 +593,14 @@ class tc14AttpSummary extends TableCell {
 
     // </editor-fold>
 }
+
 /**
- * tc15 のクラスファイル 
- * 
+ * tc15 のクラスファイル
+ *
  * @author 自動生成
  */
 class tc15AttpSummary extends TableCell {
+
     // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
     @JsonProperty("lblRiyoshaFutangakuGokei")
     private Label lblRiyoshaFutangakuGokei;
@@ -611,12 +625,14 @@ class tc15AttpSummary extends TableCell {
 
     // </editor-fold>
 }
+
 /**
- * tc21 のクラスファイル 
- * 
+ * tc21 のクラスファイル
+ *
  * @author 自動生成
  */
 class tc21AttpSummary extends TableCell {
+
     // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
     @JsonProperty("lblZenkaimadeshiharaikeka")
     private Label lblZenkaimadeshiharaikeka;
@@ -641,12 +657,14 @@ class tc21AttpSummary extends TableCell {
 
     // </editor-fold>
 }
+
 /**
- * tc22 のクラスファイル 
- * 
+ * tc22 のクラスファイル
+ *
  * @author 自動生成
  */
 class tc22AttpSummary extends TableCell {
+
     // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
     @JsonProperty("txtZenkaiHiyogakuGokei")
     private TextBoxNum txtZenkaiHiyogakuGokei;
@@ -671,12 +689,14 @@ class tc22AttpSummary extends TableCell {
 
     // </editor-fold>
 }
+
 /**
- * tc23 のクラスファイル 
- * 
+ * tc23 のクラスファイル
+ *
  * @author 自動生成
  */
 class tc23AttpSummary extends TableCell {
+
     // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
     @JsonProperty("txtZenkaiHokenTaishoHiyogakuGokei")
     private TextBoxNum txtZenkaiHokenTaishoHiyogakuGokei;
@@ -701,12 +721,14 @@ class tc23AttpSummary extends TableCell {
 
     // </editor-fold>
 }
+
 /**
- * tc24 のクラスファイル 
- * 
+ * tc24 のクラスファイル
+ *
  * @author 自動生成
  */
 class tc24AttpSummary extends TableCell {
+
     // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
     @JsonProperty("txtZenkaiHokenkyufugakuGokei")
     private TextBoxNum txtZenkaiHokenkyufugakuGokei;
@@ -731,12 +753,14 @@ class tc24AttpSummary extends TableCell {
 
     // </editor-fold>
 }
+
 /**
- * tc25 のクラスファイル 
- * 
+ * tc25 のクラスファイル
+ *
  * @author 自動生成
  */
 class tc25AttpSummary extends TableCell {
+
     // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
     @JsonProperty("txtZenkaiRiyoshaFutangakuGokei")
     private TextBoxNum txtZenkaiRiyoshaFutangakuGokei;
@@ -761,12 +785,14 @@ class tc25AttpSummary extends TableCell {
 
     // </editor-fold>
 }
+
 /**
- * tc26 のクラスファイル 
- * 
+ * tc26 のクラスファイル
+ *
  * @author 自動生成
  */
 class tc26AttpSummary extends TableCell {
+
     // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
     @JsonProperty("btnKakoFukushiyogukonyuhiKakutei")
     private Button btnKakoFukushiyogukonyuhiKakutei;
@@ -791,12 +817,14 @@ class tc26AttpSummary extends TableCell {
 
     // </editor-fold>
 }
+
 /**
- * tc31 のクラスファイル 
- * 
+ * tc31 のクラスファイル
+ *
  * @author 自動生成
  */
 class tc31AttpSummary extends TableCell {
+
     // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
     @JsonProperty("lblKonkaiShiharaiJyokyo")
     private Label lblKonkaiShiharaiJyokyo;
@@ -821,12 +849,14 @@ class tc31AttpSummary extends TableCell {
 
     // </editor-fold>
 }
+
 /**
- * tc32 のクラスファイル 
- * 
+ * tc32 のクラスファイル
+ *
  * @author 自動生成
  */
 class tc32AttpSummary extends TableCell {
+
     // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
     @JsonProperty("txtKonkaiHiyogakuGokei")
     private TextBoxNum txtKonkaiHiyogakuGokei;
@@ -851,12 +881,14 @@ class tc32AttpSummary extends TableCell {
 
     // </editor-fold>
 }
+
 /**
- * tc33 のクラスファイル 
- * 
+ * tc33 のクラスファイル
+ *
  * @author 自動生成
  */
 class tc33AttpSummary extends TableCell {
+
     // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
     @JsonProperty("txtKonkaiHokenTaishoHiyogakuGokei")
     private TextBoxNum txtKonkaiHokenTaishoHiyogakuGokei;
@@ -881,12 +913,14 @@ class tc33AttpSummary extends TableCell {
 
     // </editor-fold>
 }
+
 /**
- * tc34 のクラスファイル 
- * 
+ * tc34 のクラスファイル
+ *
  * @author 自動生成
  */
 class tc34AttpSummary extends TableCell {
+
     // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
     @JsonProperty("txtKonkaiHokenkyufugakuGokei")
     private TextBoxNum txtKonkaiHokenkyufugakuGokei;
@@ -911,12 +945,14 @@ class tc34AttpSummary extends TableCell {
 
     // </editor-fold>
 }
+
 /**
- * tc35 のクラスファイル 
- * 
+ * tc35 のクラスファイル
+ *
  * @author 自動生成
  */
 class tc35AttpSummary extends TableCell {
+
     // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
     @JsonProperty("txtKonkaiRiyoshaFutangakuGokei")
     private TextBoxNum txtKonkaiRiyoshaFutangakuGokei;
@@ -941,12 +977,14 @@ class tc35AttpSummary extends TableCell {
 
     // </editor-fold>
 }
+
 /**
- * tc36 のクラスファイル 
- * 
+ * tc36 のクラスファイル
+ *
  * @author 自動生成
  */
 class tc36AttpSummary extends TableCell {
+
     // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
     @JsonProperty("btnGendogakuCheck")
     private Button btnGendogakuCheck;
