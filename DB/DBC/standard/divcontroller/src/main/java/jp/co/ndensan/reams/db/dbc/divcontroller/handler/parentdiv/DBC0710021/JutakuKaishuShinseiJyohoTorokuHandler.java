@@ -983,7 +983,7 @@ public final class JutakuKaishuShinseiJyohoTorokuHandler {
                     .set申請年月日(new FlexibleDate(申請年月日.toString()))
                     .set申請理由(申請理由).set申請者区分(申請者区分).set申請者氏名(申請者氏名)
                     .set申請者氏名カナ(申請者氏名カナ).set申請者郵便番号(申請者郵便番号)
-                    .set申請者住所(申請者住所.value()).set申請者電話番号(申請者電話番号).set理由書作成日(理由書作成日Save)
+                    .set申請者住所(申請者住所.value()).set理由書作成日(理由書作成日Save)
                     .set理由書作成者(理由書作成者).set理由書作成者カナ(理由書作成者カナ).set支払金額合計(支払金額合計)
                     .set保険対象費用額(保険対象費用額).set保険給付額(保険給付額.intValue())
                     .set送付年月(送付年月).set国保連再送付フラグ(国保連再送付フラグ).set住宅所有者(住宅所有者)

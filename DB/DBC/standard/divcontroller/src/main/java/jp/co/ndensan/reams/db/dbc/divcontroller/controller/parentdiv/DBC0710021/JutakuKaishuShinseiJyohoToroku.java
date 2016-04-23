@@ -595,101 +595,141 @@ public class JutakuKaishuShinseiJyohoToroku {
         boolean 要介護状態３段階変更の判定 = manager.checkYaokaigoJyotaiSandannkai(被保険者番号, 画面提供着工年月);
         List<RString> 要介護状態区分３段階変更チェック = div.getJutakuKaishuShinseiContents()
                 .getJutakuKaishuShinseiResetInfo().getChkResetInfo().getSelectedKeys();
-        if (要介護状態３段階変更の判定 && (要介護状態区分３段階変更チェック.isEmpty()
-                || !要介護状態区分３段階変更チェック.contains(要介護状態区分3段階変更による))) {
-            if (!ResponseHolder.isReRequest()) {
+        boolean 限度額リセット対象 = new RString(DbcQuestionMessages.要介護状態区分変更_限度額リセット対象.getMessage()
+                .getCode()).equals(ResponseHolder.getMessageCode());
+        boolean 限度額リセット対象外 = new RString(DbcQuestionMessages.要介護状態区分変更_限度額リセット対象外.getMessage()
+                .getCode()).equals(ResponseHolder.getMessageCode());
+        boolean 改修住所_限度額リセット対象 = new RString(DbcQuestionMessages.改修住所変更_限度額リセット対象.getMessage()
+                .getCode()).equals(ResponseHolder.getMessageCode());
+        boolean 改修住所_限度額リセット対象外 = new RString(DbcQuestionMessages.改修住所変更_限度額リセット対象外
+                .getMessage().getCode()).equals(ResponseHolder.getMessageCode());
+        boolean 住宅改修限度額確認 = new RString(DbcWarningMessages.住宅改修限度額確認.getMessage().getCode())
+                .equals(ResponseHolder.getMessageCode());
+        if (is要介護状態３段階変更(要介護状態３段階変更の判定, 要介護状態区分３段階変更チェック)) {
+            if (is限度額リセット対象(限度額リセット対象, 改修住所_限度額リセット対象,
+                    改修住所_限度額リセット対象外, 住宅改修限度額確認)) {
                 QuestionMessage message = new QuestionMessage(
                         DbcQuestionMessages.要介護状態区分変更_限度額リセット対象.getMessage().getCode(),
                         DbcQuestionMessages.要介護状態区分変更_限度額リセット対象.getMessage().evaluate());
                 return ResponseData.of(div).addMessage(message).respond();
             }
-            if (new RString(DbcQuestionMessages.要介護状態区分変更_限度額リセット対象.getMessage().getCode()).equals(
-                    ResponseHolder.getMessageCode())
-                    && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
-                要介護状態区分３段階変更チェック.add(要介護状態区分3段階変更による);
-                div.getJutakuKaishuShinseiContents().getJutakuKaishuShinseiResetInfo()
-                        .getChkResetInfo().setSelectedItemsByKey(要介護状態区分３段階変更チェック);
-                return ResponseData.of(div).respond();
-            }
+            to限度額リセット対象(要介護状態区分３段階変更チェック, div, 限度額リセット対象);
         } else if (!要介護状態３段階変更の判定 && (!要介護状態区分３段階変更チェック.isEmpty()
                 && 要介護状態区分３段階変更チェック.contains(要介護状態区分3段階変更による))) {
-            if (!ResponseHolder.isReRequest()) {
+            if (is限度額リセット対象(限度額リセット対象外, 改修住所_限度額リセット対象,
+                    改修住所_限度額リセット対象外, 住宅改修限度額確認)) {
                 QuestionMessage message = new QuestionMessage(
                         DbcQuestionMessages.要介護状態区分変更_限度額リセット対象外.getMessage().getCode(),
                         DbcQuestionMessages.要介護状態区分変更_限度額リセット対象外.getMessage().evaluate());
                 return ResponseData.of(div).addMessage(message).respond();
             }
-            if (new RString(DbcQuestionMessages.要介護状態区分変更_限度額リセット対象外.getMessage().getCode()).equals(
-                    ResponseHolder.getMessageCode())
-                    && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
-                要介護状態区分３段階変更チェック.remove(要介護状態区分3段階変更による);
-                div.getJutakuKaishuShinseiContents().getJutakuKaishuShinseiResetInfo()
-                        .getChkResetInfo().setSelectedItemsByKey(要介護状態区分３段階変更チェック);
-//                return ResponseData.of(div).respond();
-            }
+            to限度額リセット対象外(要介護状態区分３段階変更チェック, div, 限度額リセット対象外);
         }
         List<dgGaisyuList_Row> gridList = div.getJutakuKaishuShinseiContents().getCcdJutakugaisyunaiyoList()
                 .get住宅改修内容一覧();
         JutakuKaishuJyusyoChofukuHanntei chofukuHanntei = JutakuKaishuJyusyoChofukuHanntei.createInstance();
         boolean is改修住所重複 = chofukuHanntei.checkKaishuJyusyoChofukuToroku(被保険者番号,
                 画面提供着工年月, gridList.get(0).getTxtJutakuAddress());
-        if (!is改修住所重複 && (要介護状態区分３段階変更チェック.isEmpty()
-                || !要介護状態区分３段階変更チェック.contains(住宅住所変更による))) {
-            if (!ResponseHolder.isReRequest()) {
+        if (is改修住所変更(is改修住所重複, 要介護状態区分３段階変更チェック)) {
+            if (is改修住所_限度額リセット対象(改修住所_限度額リセット対象, 住宅改修限度額確認)) {
                 QuestionMessage message = new QuestionMessage(
                         DbcQuestionMessages.改修住所変更_限度額リセット対象.getMessage().getCode(),
                         DbcQuestionMessages.改修住所変更_限度額リセット対象.getMessage().evaluate());
                 return ResponseData.of(div).addMessage(message).respond();
             }
-            if (new RString(DbcQuestionMessages.改修住所変更_限度額リセット対象.getMessage().getCode()).equals(
-                    ResponseHolder.getMessageCode())
-                    && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
-                要介護状態区分３段階変更チェック.add(住宅住所変更による);
-                div.getJutakuKaishuShinseiContents().getJutakuKaishuShinseiResetInfo()
-                        .getChkResetInfo().setSelectedItemsByKey(要介護状態区分３段階変更チェック);
-//                return ResponseData.of(div).respond();
-            } else {
-                return ResponseData.of(div).respond();
-            }
+            to改修住所_限度額リセット対象(要介護状態区分３段階変更チェック, div, 改修住所_限度額リセット対象);
         } else if (is改修住所重複 && (!要介護状態区分３段階変更チェック.isEmpty()
                 && 要介護状態区分３段階変更チェック.contains(住宅住所変更による))) {
-            if (!ResponseHolder.isReRequest()) {
+            if (is改修住所_限度額リセット対象(改修住所_限度額リセット対象外, 住宅改修限度額確認)) {
                 QuestionMessage message = new QuestionMessage(
                         DbcQuestionMessages.改修住所変更_限度額リセット対象外.getMessage().getCode(),
                         DbcQuestionMessages.改修住所変更_限度額リセット対象外.getMessage().evaluate());
                 return ResponseData.of(div).addMessage(message).respond();
             }
-            if (new RString(DbcQuestionMessages.改修住所変更_限度額リセット対象外.getMessage().getCode()).equals(
-                    ResponseHolder.getMessageCode())
-                    && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
-                要介護状態区分３段階変更チェック.remove(住宅住所変更による);
-                div.getJutakuKaishuShinseiContents().getJutakuKaishuShinseiResetInfo()
-                        .getChkResetInfo().setSelectedItemsByKey(要介護状態区分３段階変更チェック);
-//                return ResponseData.of(div).respond();
-            } else {
-                return ResponseData.of(div).respond();
-            }
+            to改修住所_限度額リセット対象外(要介護状態区分３段階変更チェック, div, 改修住所_限度額リセット対象外);
         }
         boolean 限度額チェック = handler.is限度額を超えない();
-        if (!限度額チェック) {
-            if (!ResponseHolder.isReRequest()) {
-                QuestionMessage message = new QuestionMessage(
-                        DbcWarningMessages.住宅改修限度額確認.getMessage().getCode(),
-                        DbcWarningMessages.住宅改修限度額確認.getMessage().evaluate());
-                return ResponseData.of(div).addMessage(message).respond();
-            }
-            if (new RString(DbcWarningMessages.住宅改修限度額確認.getMessage().getCode()).equals(
-                    ResponseHolder.getMessageCode())
-                    && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
-                return ResponseData.of(div).respond();
-            }
+        if (is改修住所_限度額リセット対象(限度額チェック, 住宅改修限度額確認)) {
+            QuestionMessage message = new QuestionMessage(
+                    DbcWarningMessages.住宅改修限度額確認.getMessage().getCode(),
+                    DbcWarningMessages.住宅改修限度額確認.getMessage().evaluate());
+            return ResponseData.of(div).addMessage(message).respond();
+        }
+        if (new RString(DbcWarningMessages.住宅改修限度額確認.getMessage().getCode()).equals(
+                ResponseHolder.getMessageCode())
+                && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
+            return ResponseData.of(div).respond();
         }
         handler.支払結果の設定();
-        // 6 確認対象の保存 TODO
         JutakuGaisuDataParameter 住宅改修データ = new JutakuGaisuDataParameter();
         住宅改修データ.set限度額リセット(要介護状態区分３段階変更チェック);
+        住宅改修データ.set住宅改修データ(handler.get住宅改修内容一覧データ(
+                div.getJutakuKaishuShinseiContents().getCcdJutakugaisyunaiyoList().get住宅改修内容一覧()));
         ViewStateHolder.put(ViewStateKeys.住宅改修データ_画面メモリ, 住宅改修データ);
         return ResponseData.of(div).respond();
+    }
+
+    private boolean is改修住所変更(boolean is改修住所重複, List<RString> 要介護状態区分３段階変更チェック) {
+        return !is改修住所重複 && (要介護状態区分３段階変更チェック.isEmpty()
+                || !要介護状態区分３段階変更チェック.contains(住宅住所変更による));
+    }
+
+    private boolean is要介護状態３段階変更(boolean 要介護状態３段階変更の判定, List<RString> 要介護状態区分３段階変更チェック) {
+        return 要介護状態３段階変更の判定 && (要介護状態区分３段階変更チェック.isEmpty()
+                || !要介護状態区分３段階変更チェック.contains(要介護状態区分3段階変更による));
+    }
+
+    private boolean is改修住所_限度額リセット対象(boolean 改修住所_限度額リセット対象, boolean 住宅改修限度額確認) {
+        return !改修住所_限度額リセット対象 && !住宅改修限度額確認;
+    }
+
+    private boolean is限度額リセット対象(boolean 限度額リセット対象,
+            boolean 改修住所_限度額リセット対象,
+            boolean 改修住所_限度額リセット対象外,
+            boolean 住宅改修限度額確認) {
+        return is改修住所_限度額リセット対象(限度額リセット対象, 改修住所_限度額リセット対象)
+                && !改修住所_限度額リセット対象外
+                && !住宅改修限度額確認;
+    }
+
+    private void to改修住所_限度額リセット対象外(List<RString> 要介護状態区分３段階変更チェック,
+            JutakuKaishuShinseiJyohoTorokuDiv div,
+            boolean 改修住所_限度額リセット対象外) {
+        if (改修住所_限度額リセット対象外 && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
+            要介護状態区分３段階変更チェック.remove(住宅住所変更による);
+            div.getJutakuKaishuShinseiContents().getJutakuKaishuShinseiResetInfo()
+                    .getChkResetInfo().setSelectedItemsByKey(要介護状態区分３段階変更チェック);
+        }
+    }
+
+    private void to改修住所_限度額リセット対象(List<RString> 要介護状態区分３段階変更チェック,
+            JutakuKaishuShinseiJyohoTorokuDiv div,
+            boolean 改修住所_限度額リセット対象) {
+        if (改修住所_限度額リセット対象 && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
+            要介護状態区分３段階変更チェック.add(住宅住所変更による);
+            div.getJutakuKaishuShinseiContents().getJutakuKaishuShinseiResetInfo()
+                    .getChkResetInfo().setSelectedItemsByKey(要介護状態区分３段階変更チェック);
+        }
+    }
+
+    private void to限度額リセット対象外(List<RString> 要介護状態区分３段階変更チェック,
+            JutakuKaishuShinseiJyohoTorokuDiv div,
+            boolean 限度額リセット対象外) {
+        if (限度額リセット対象外 && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
+            要介護状態区分３段階変更チェック.remove(要介護状態区分3段階変更による);
+            div.getJutakuKaishuShinseiContents().getJutakuKaishuShinseiResetInfo()
+                    .getChkResetInfo().setSelectedItemsByKey(要介護状態区分３段階変更チェック);
+        }
+    }
+
+    private void to限度額リセット対象(List<RString> 要介護状態区分３段階変更チェック,
+            JutakuKaishuShinseiJyohoTorokuDiv div,
+            boolean 限度額リセット対象) {
+        if (限度額リセット対象 && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
+            要介護状態区分３段階変更チェック.add(要介護状態区分3段階変更による);
+            div.getJutakuKaishuShinseiContents().getJutakuKaishuShinseiResetInfo()
+                    .getChkResetInfo().setSelectedItemsByKey(要介護状態区分３段階変更チェック);
+        }
     }
 
     private JutakuKaishuShinseiJyohoTorokuHandler getHandler(JutakuKaishuShinseiJyohoTorokuDiv div) {
