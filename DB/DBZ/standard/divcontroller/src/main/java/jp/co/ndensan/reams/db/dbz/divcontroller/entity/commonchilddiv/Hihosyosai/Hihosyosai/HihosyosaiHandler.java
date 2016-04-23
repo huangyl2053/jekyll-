@@ -238,7 +238,8 @@ public class HihosyosaiHandler {
         } else {
             div.getTxtSosichiYMD().setDisabled(true);
         }
-        if (得喪情報.getShikakuSoshitsuTodokedeYMD() != null) {
+        if (得喪情報.getShikakuSoshitsuTodokedeYMD() != null
+                && !得喪情報.getShikakuSoshitsuTodokedeYMD().isEmpty()) {
             div.getTxtSosichiTodokedeYMD().setValue(new RDate(得喪情報.getShikakuSoshitsuTodokedeYMD().toString()));
         } else {
             div.getTxtSosichiTodokedeYMD().setDisabled(true);
