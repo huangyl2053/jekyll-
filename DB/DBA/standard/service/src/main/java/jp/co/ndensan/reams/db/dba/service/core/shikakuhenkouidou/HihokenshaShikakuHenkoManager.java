@@ -163,50 +163,28 @@ public class HihokenshaShikakuHenkoManager {
                 DateOfBirthFactory.createInstance(生年月日), JuminJotai.住民, FlexibleDate.MAX, AgeArrivalDay.前日, 変更日);
         RString 年齢 = ageCalculator.get年齢();
         if (FIRST_HIHOKENNSHA.equals(hihokensha.get被保険者区分コード())) {
-            if (new RString(AGE_65).compareTo(年齢) < 1 && ShikakuHenkoJiyu._１号到達 == 変更事由コード) {
+            if (AGE_65 <= Integer.parseInt(年齢.toString()) && ShikakuHenkoJiyu._１号到達 == 変更事由コード) {
                 return DbaErrorMessages._１号被保険者対象外資格変更事由;
             }
-            if (new RString(AGE_65).compareTo(年齢) == 1) {
+            if (AGE_65 == Integer.parseInt(年齢.toString())) {
                 return DbaErrorMessages.変更日１号年齢到達日以前;
             }
         }
         if (SEC_HIHOKENNSHA.equals(hihokensha.get被保険者区分コード())) {
             FlexibleDate age = ageCalculator.get年齢到達日(AGE_65);
-            if (new RString(AGE_65).compareTo(年齢) < 1 && ShikakuHenkoJiyu._１号到達 != 変更事由コード) {
+            if (AGE_65 < Integer.parseInt(年齢.toString()) && ShikakuHenkoJiyu._１号到達 != 変更事由コード) {
                 return DbaErrorMessages.年齢到達変更異動未登録;
             }
-            if (new RString(AGE_65).compareTo(年齢) < 1 && ShikakuHenkoJiyu._１号到達 == 変更事由コード && !変更日.equals(age)) {
+            if (AGE_65 < Integer.parseInt(年齢.toString()) && ShikakuHenkoJiyu._１号到達 == 変更事由コード && !変更日.equals(age)) {
                 return DbaErrorMessages.変更日１号年齢到達日不一致;
             }
-            if (new RString(AGE_65).compareTo(年齢) == 1 && ShikakuHenkoJiyu._１号到達 == 変更事由コード) {
+            if (AGE_65 == Integer.parseInt(年齢.toString()) && ShikakuHenkoJiyu._１号到達 == 変更事由コード) {
                 return DbaErrorMessages.変更日１号年齢到達日不一致;
             }
         }
         if (ShikakuHenkoJiyu.広住特転入 == 変更事由コード || ShikakuHenkoJiyu.広住特居住 == 変更事由コード
                 && !KOIKINAI_JUSHOCHI_FLAG_ARI.equals(hihokensha.get広域内住所地特例フラグ())) {
             return DbaErrorMessages.広域内住所地特例者でない;
-        }
-        return null;
-    }
-
-    /**
-     * 画面変更チェック処理
-     *
-     * @param 識別コード 識別コード
-     * @param 被保険者番号 被保険者番号
-     * @return DbaErrorMessages エラーコード
-     */
-    public DbaErrorMessages shikakuHenkoCheck(ShikibetsuCode 識別コード, HihokenshaNo 被保険者番号) {
-        HihokenshaShutokuJyoho hihokensha = manager.getSaishinDeta(
-                識別コード, 被保険者番号);
-        if (hihokensha == null) {
-            // TODO QA
-            return DbaErrorMessages.他の期間情報との期間重複;
-        }
-        if (hihokensha.get資格取得年月日() != null && !hihokensha.get資格取得年月日().isEmpty()
-                && hihokensha.get資格喪失年月日() != null && !hihokensha.get資格喪失年月日().isEmpty()) {
-            // TODO QA
-            return DbaErrorMessages._１号被保険者対象外資格変更事由;
         }
         return null;
     }
