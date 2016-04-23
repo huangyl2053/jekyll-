@@ -25,7 +25,7 @@ import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaN
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
 import jp.co.ndensan.reams.db.dbz.business.core.HihokenshaDaicho;
 import jp.co.ndensan.reams.db.dbz.business.core.TashichosonJushochiTokurei;
-import jp.co.ndensan.reams.db.dbz.definition.core.enumeratedtype.DaichoType;
+import jp.co.ndensan.reams.db.dbz.definition.core.daichokubun.DaichoType;
 import jp.co.ndensan.reams.db.dbz.definition.core.jigyoshashubetsu.JigyosyaType;
 import jp.co.ndensan.reams.db.dbz.definition.core.shisetsushurui.ShisetsuType;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT1001HihokenshaDaichoEntity;
@@ -115,7 +115,7 @@ public class TaJushochiTokureisyaKanriManager {
         ITaJushochiTokureisyaKanriMapper mapper = mapperProvider.create(ITaJushochiTokureisyaKanriMapper.class);
         TaJushochiTokureisyaKanriParameter parameter
                 = TaJushochiTokureisyaKanriParameter.createParam_TaJushochi(
-                        shikibetsuCode, DaichoType.他市町村住所地特例者.getCode(),
+                        shikibetsuCode, DaichoType.他市町村住所地特例者.getコード(),
                         RString.EMPTY, JigyoshaNo.EMPTY, RString.EMPTY);
         List<TaJushochiTokureisyaKanriRelateEntity> 他市町村住所地特例情報リスト = mapper.selct他市町村住所地特例(parameter);
         List<TaJushochiTokureisyaKanriRelateEntity> 適用情報リスト = new ArrayList<>();
