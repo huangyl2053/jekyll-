@@ -77,6 +77,8 @@ public class JutakuKaishuShinseiJyohoToroku {
     private final RString 住宅住所変更による = new RString("changeAddress");
     private final RString エラー_RPLC_MSG_1 = new RString("受給認定有効期間外の");
     private final RString エラー_RPLC_MSG_2 = new RString("入力");
+    private final RString 領収日_RPLC_MSG = new RString("領収日");
+    private final RString サービス提供年月_RPLC_MSG = new RString("サービス提供年月");
 
     /**
      * 画面ロードメソッドです。
@@ -159,6 +161,11 @@ public class JutakuKaishuShinseiJyohoToroku {
         if (valid.iterator().hasNext()) {
             return ResponseData.of(div).addValidationMessages(valid).respond();
         }
+        ValidationMessageControlPairs valid2 = getJutakuKaishuShinseiJyohoTorokuValidationHandler(
+                div, 画面モード).validate住宅改修内容();
+        if (valid2.iterator().hasNext()) {
+            return ResponseData.of(div).addValidationMessages(valid2).respond();
+        }
         // データ変更確認
         JutakuKaishuShinseiJyohoTorokuHandler handler = getHandler(div);
         if (!handler.is画面データが変更()) {
@@ -178,36 +185,35 @@ public class JutakuKaishuShinseiJyohoToroku {
 
             }
         }
-        RDate 画面提供着工年月 = div.getTxtTeikyoYM().getValue();
-        // 領収日チェック
-        RDate 領収日 = div.getJutakuKaishuShinseiContents().getTxtRyoshuYMD().getValue();
-        if (領収日.getYearMonth().isBeforeOrEquals(画面提供着工年月.getYearMonth())) {
-            if (!ResponseHolder.isReRequest()) {
-                QuestionMessage message = new QuestionMessage(DbzQuestionMessages.判断基準より前の日付.getMessage().getCode(),
-                        DbzQuestionMessages.判断基準より前の日付.getMessage().evaluate());
-                return ResponseData.of(div).addMessage(message).respond();
-            }
-            if (new RString(DbzQuestionMessages.判断基準より前の日付.getMessage().getCode()).equals(
-                    ResponseHolder.getMessageCode())
-                    && ResponseHolder.getButtonType() == MessageDialogSelectedResult.No) {
-                return ResponseData.of(div).respond();
-            }
-        }
-        // is確認対象変更有無チェック TODO
-        JutakuGaisuDataParameter 住宅改修データ = ViewStateHolder.get(
-                ViewStateKeys.住宅改修データ_画面メモリ, JutakuGaisuDataParameter.class);
-        if (住宅改修データ != null) {
-            boolean is確認対象変更有 = handler.is確認対象変更有無チェック(住宅改修データ);
-            if (is確認対象変更有) {
+        if (画面モード_修正.equals(画面モード)) {
+            RDate 画面提供着工年月 = div.getTxtTeikyoYM().getValue();
+            // 領収日チェック
+            RDate 領収日 = div.getJutakuKaishuShinseiContents().getTxtRyoshuYMD().getValue();
+            if (領収日.getYearMonth().isBeforeOrEquals(画面提供着工年月.getYearMonth())) {
                 if (!ResponseHolder.isReRequest()) {
-                    return ResponseData.of(div).addMessage(
-                            DbzInformationMessages.内容変更なしで保存不可.getMessage()).respond();
+                    QuestionMessage message = new QuestionMessage(
+                            DbzQuestionMessages.判断基準より前の日付.getMessage().getCode(),
+                            DbzQuestionMessages.判断基準より前の日付.getMessage().replace(
+                                    領収日_RPLC_MSG.toString(), サービス提供年月_RPLC_MSG.toString()).evaluate());
+                    return ResponseData.of(div).addMessage(message).respond();
                 }
-                if (new RString(DbzInformationMessages.内容変更なしで保存不可.getMessage().getCode()).equals(
+                if (new RString(DbzQuestionMessages.判断基準より前の日付.getMessage().getCode()).equals(
                         ResponseHolder.getMessageCode())
-                        && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
+                        && ResponseHolder.getButtonType() == MessageDialogSelectedResult.No) {
                     return ResponseData.of(div).respond();
                 }
+            }
+        }
+        boolean is確認対象変更有 = handler.is確認対象変更有無チェック();
+        if (is確認対象変更有) {
+            if (!ResponseHolder.isReRequest()) {
+                return ResponseData.of(div).addMessage(
+                        DbzInformationMessages.内容変更なしで保存不可.getMessage()).respond();
+            }
+            if (new RString(DbzInformationMessages.内容変更なしで保存不可.getMessage().getCode()).equals(
+                    ResponseHolder.getMessageCode())
+                    && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
+                return ResponseData.of(div).respond();
             }
         }
         // 操作可否確認
