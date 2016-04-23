@@ -35,7 +35,7 @@ import jp.co.ndensan.reams.uz.uza.lang.Separator;
 public class ShujiiIkenTokusokuTaishoshaIchiranhyoCsvProcess extends BatchProcessBase {
 
     private static final RString MYBATIS_SELECT_ID = new RString(
-            "jp.co.ndensan.reams.db.dbe.persistence.db.mapper.basic.IDbT5301ShujiiIkenshoIraiJohoMapper."
+            "jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT5301ShujiiIkenshoIraiJohoMapper."
             + "getListForProcess");
     private ShujiiCsvProcessParameter processParameter;
     private static final RString ファイル名 = new RString("主治医意見書督促対象者一覧表.csv");
