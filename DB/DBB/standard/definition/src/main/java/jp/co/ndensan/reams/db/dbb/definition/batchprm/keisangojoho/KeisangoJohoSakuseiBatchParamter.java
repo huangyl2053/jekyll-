@@ -28,6 +28,7 @@ public class KeisangoJohoSakuseiBatchParamter extends BatchParameterBase {
     private static final String CHOTEINICHIJI = "choteiNichiji";
     private static final String SAKUSEISHORINAME = "sakuseiShoriName";
     private static final String CHOHYOBUNRUIID = "chohyoBunruiID";
+    private boolean 更新前フラグ;
 
     @BatchParameter(key = CHOTEINENDO, name = "調定年度")
     private RString choteiNendo;
@@ -69,10 +70,11 @@ public class KeisangoJohoSakuseiBatchParamter extends BatchParameterBase {
      * @return KeisangoJohoSakuseiProcessParamter
      */
     public KeisangoJohoSakuseiProcessParamter toKeisangoJohoSakuseiProcessParamter() {
-        return new KeisangoJohoSakuseiProcessParamter(choteiNendo,
+        return KeisangoJohoSakuseiProcessParamter.createKeisangoJohoSakuseiProcessParamter(choteiNendo,
                 fukaNendo,
                 choteiNichiji,
                 sakuseiShoriName,
-                chohyoBunruiID);
+                chohyoBunruiID,
+                更新前フラグ);
     }
 }

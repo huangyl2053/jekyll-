@@ -6,6 +6,7 @@
 package jp.co.ndensan.reams.db.dbb.definition.mybatisprm.keisangojoho;
 
 import jp.co.ndensan.reams.uz.uza.batch.parameter.IMyBatisParameter;
+import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import lombok.Getter;
 
@@ -22,9 +23,9 @@ public final class KeisangoJohoSakuseiMybitisParamter implements IMyBatisParamet
     private final RString choteiNendo;
     private final RString fukaNendo;
     private final RString choteiNichiji;
-    private final RString sakuseiShoriName;
     private final RString chohyoBunruiID;
     private final RString psmTotalShunyu;
+    private final YMDHMS systemDate;
 
     /**
      * コンストラクタです。
@@ -32,24 +33,24 @@ public final class KeisangoJohoSakuseiMybitisParamter implements IMyBatisParamet
      * @param choteiNendo 調定年度
      * @param fukaNendo 賦課年度
      * @param choteiNichiji 調定日時
-     * @param sakuseiShoriName 作成処理名
      * @param chohyoBunruiID 帳票分類ID
      * @param psmTotalShunyu 収入情報取得PSM
+     * @param systemDate システム日時
      * @throws NullPointerException 引数のいずれかが{@code null}の場合
      */
     private KeisangoJohoSakuseiMybitisParamter(
-            RString choteiNendo,
-            RString fukaNendo,
-            RString choteiNichiji,
-            RString sakuseiShoriName,
-            RString chohyoBunruiID,
-            RString psmTotalShunyu) {
-        this.choteiNendo = choteiNendo;
-        this.fukaNendo = fukaNendo;
-        this.choteiNichiji = choteiNichiji;
-        this.sakuseiShoriName = sakuseiShoriName;
-        this.chohyoBunruiID = chohyoBunruiID;
-        this.psmTotalShunyu = psmTotalShunyu;
+            RString 調定年度,
+            RString 賦課年度,
+            RString 調定日時,
+            RString 帳票分類ID,
+            RString 収入情報取得PSM,
+            YMDHMS システム日時) {
+        this.choteiNendo = 調定年度;
+        this.fukaNendo = 賦課年度;
+        this.choteiNichiji = 調定日時;
+        this.chohyoBunruiID = 帳票分類ID;
+        this.psmTotalShunyu = 収入情報取得PSM;
+        this.systemDate = システム日時;
     }
 
     /**
@@ -58,23 +59,23 @@ public final class KeisangoJohoSakuseiMybitisParamter implements IMyBatisParamet
      * @param choteiNendo 調定年度
      * @param fukaNendo 賦課年度
      * @param choteiNichiji 調定日時
-     * @param sakuseiShoriName 作成処理名
      * @param chohyoBunruiID 帳票分類ID
      * @param psmTotalShunyu 収入情報取得PSM
+     * @param systemDate システム日時
      *
      * @return KeisangoJohoSakuseiMybitisParamter
      */
     public static KeisangoJohoSakuseiMybitisParamter createSelectByKeyParam(RString choteiNendo,
             RString fukaNendo,
             RString choteiNichiji,
-            RString sakuseiShoriName,
             RString chohyoBunruiID,
-            RString psmTotalShunyu) {
+            RString psmTotalShunyu,
+            YMDHMS systemDate) {
         return new KeisangoJohoSakuseiMybitisParamter(choteiNendo,
                 fukaNendo,
                 choteiNichiji,
-                sakuseiShoriName,
                 chohyoBunruiID,
-                psmTotalShunyu);
+                psmTotalShunyu,
+                systemDate);
     }
 }
