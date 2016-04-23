@@ -473,11 +473,11 @@ public class ShujiiIkenshoSakuseiIrai {
 //    }
     private ShujiiIkenshoSakuseiRyoSeikyushoItem create主治医意見書作成料請求書(dgShinseishaIchiran_Row row) {
         RString hihokenshaNo = row.getHihokenshaNo().padRight(RString.HALF_SPACE, 数字_10);
-        RString tempP_新規在宅金額 = IkenshoSakuseiRyo._5000.get名称();
+        RString tempP_新規在宅金額 = IkenshoSakuseiRyo.在宅新規.get名称();
         // TODO QA894 Enumファイルにはコード同じな項目存在する
-        RString tempP_新規施設金額 = IkenshoSakuseiRyo._4000.get名称();
-        RString tempP_継続在宅金額 = IkenshoSakuseiRyo._4000.get名称();
-        RString tempP_継続施設金額 = IkenshoSakuseiRyo._3000.get名称();
+        RString tempP_新規施設金額 = IkenshoSakuseiRyo.施設新規.get名称();
+        RString tempP_継続在宅金額 = IkenshoSakuseiRyo.在宅継続.get名称();
+        RString tempP_継続施設金額 = IkenshoSakuseiRyo.施設継続.get名称();
         ShujiiIkenshoSakuseiRyoSeikyushoItem item = new ShujiiIkenshoSakuseiRyoSeikyushoItem();
         item.setGengo(RDate.getNowDate().toDateString());
         item.setHihokenshaName(row.getHokensha());
