@@ -1,11 +1,11 @@
 package jp.co.ndensan.reams.db.dba.divcontroller.controller.parentdiv.DBA2020011;
 
 import jp.co.ndensan.reams.db.dba.divcontroller.entity.parentdiv.DBA2020011.DBA2020011StateName;
+import jp.co.ndensan.reams.db.dba.divcontroller.entity.parentdiv.DBA2020011.DBA2020011TransitionEventName;
 import jp.co.ndensan.reams.db.dba.divcontroller.entity.parentdiv.DBA2020011.ShisetsuNyutaishoIdoDiv;
 import jp.co.ndensan.reams.db.dba.divcontroller.handler.parentdiv.DBA2020011.ShisetsuNyutaishoIdoHandler;
 import jp.co.ndensan.reams.db.dba.service.core.nyutaishoshakanri.NyutaishoshaKanriFinder;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.ShisetsuNyutaishoRirekiKanri.dgShisetsuNyutaishoRireki_Row;
-import jp.co.ndensan.reams.db.dbz.divcontroller.entity.parentdiv.DBZ0200001.DBZ0200001TransitionEventName;
 import jp.co.ndensan.reams.db.dbz.divcontroller.util.viewstate.ViewStateKey;
 import jp.co.ndensan.reams.db.dbz.service.TaishoshaKey;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
@@ -64,7 +64,7 @@ public class ShisetsuNyutaishoIdo {
     public ResponseData onClick_commonButtonBack(ShisetsuNyutaishoIdoDiv div) {
 
         RealInitialLocker.release(前排他ロックキー);
-        return ResponseData.of(div).forwardWithEventName(DBZ0200001TransitionEventName.対象者特定).respond();
+        return ResponseData.of(div).forwardWithEventName(DBA2020011TransitionEventName.検索に戻る).respond();
     }
 
     /**
