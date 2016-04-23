@@ -214,10 +214,10 @@ public class MainPanel {
         RString 氏名漢字 = div.getJutakuKaishuShinseiHihokenshaPanel().getKaigoAtenaInfo().get氏名漢字();
         if (flags) {
             div.getJutakuShikyuShinseiKanryoPanel().getKanryoMessage().setMessage(UrInformationMessages.保存終了,
-                    被保険者番号, 氏名漢字, flags);
+                    被保険者番号, 氏名漢字, true);
         } else {
-            div.getJutakuShikyuShinseiKanryoPanel().getKanryoMessage().setMessage(UrInformationMessages.保存終了,
-                    被保険者番号, 氏名漢字, flags);
+            div.getJutakuShikyuShinseiKanryoPanel().getKanryoMessage().setMessage(UrErrorMessages.異常終了,
+                    被保険者番号, 氏名漢字, false);
         }
     }
 }
