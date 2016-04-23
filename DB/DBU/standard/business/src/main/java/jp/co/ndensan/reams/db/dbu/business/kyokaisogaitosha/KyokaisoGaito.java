@@ -6,12 +6,14 @@
 package jp.co.ndensan.reams.db.dbu.business.kyokaisogaitosha;
 
 import java.util.List;
-import jp.co.ndensan.reams.db.dba.business.core.kyokaisogaitosha.kyokaisogaitosha.KyokaisoGaitosha;
-import jp.co.ndensan.reams.db.dba.business.core.kyokaisogaitosha.kyokaisohokenryodankai.KyokaisoHokenryoDankai;
-import jp.co.ndensan.reams.db.dba.business.core.kyokaisogaitosha.kyokaisosochishinsei.KyokaisoSochiShinsei;
+import jp.co.ndensan.reams.db.dbz.business.core.KyokaisoGaitosha;
+import jp.co.ndensan.reams.db.dbz.business.core.KyokaisoHokenryoDankai;
+import jp.co.ndensan.reams.db.dbz.business.core.KyokaisoSochiShinsei;
 
 /**
  * 境界層該当者情報を管理するビジネスです。
+ *
+ * @reamsid_L DBU-0430-020 linghuhang
  */
 @lombok.Setter
 @lombok.Getter
