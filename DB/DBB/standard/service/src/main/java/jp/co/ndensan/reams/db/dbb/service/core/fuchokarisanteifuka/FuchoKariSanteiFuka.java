@@ -206,7 +206,7 @@ public class FuchoKariSanteiFuka {
             if (DBB100014.equals(帳票分類ID)) {
                 // TODO DBBコンフィグから、納付書の型と連帳区分を取得する。
 //                BusinessConfig.get(ConfigNameDBB.普徴期情報_納付書の型４, RDate.MAX, SubGyomuCode.DBB介護賦課, LasdecCode.EMPTY)
-                RString 設定値 = get設定値(算定期);
+//                RString 設定値 = get設定値(算定期);
                 RString 納入通知書の型 = get納入通知書の型(算定期);
                 RString 普徴期情報_納通連帳区分 = new RString("0");
                 RString 項目名 = get項目名(納入通知書の型);
@@ -229,10 +229,9 @@ public class FuchoKariSanteiFuka {
         return resultList;
     }
 
-    private RString get設定値(RString 算定期) {
-        return 算定期;
-    }
-
+//    private RString get設定値(RString 算定期) {
+//        return 算定期;
+//    }
     private RString get納入通知書の型(RString 算定期) {
         RString 納入通知書の型;
         switch (Integer.valueOf(算定期.toString())) {
