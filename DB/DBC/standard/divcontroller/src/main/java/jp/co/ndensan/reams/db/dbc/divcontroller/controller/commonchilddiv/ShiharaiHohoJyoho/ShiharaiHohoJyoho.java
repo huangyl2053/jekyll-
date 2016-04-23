@@ -172,7 +172,7 @@ public class ShiharaiHohoJyoho {
         getHandler(div).clear受領委任払い();
         SikyuSinseiJyohoParameter 支給申請情報 = ViewStateHolder.get(ViewStateKeys.支給申請情報パラメータ, SikyuSinseiJyohoParameter.class);
         JuryoininKeiyakuJigyosha 受領委任契約事業者 = ShiharaiHohoJyohoFinder.createInstance().
-                getKeiyakuJigyosya(KeiyakushaParameter.
+                getKeiyakuJigyosya(new KeiyakushaParameter(null, null, null, null).
                         createParam(new HihokenshaNo(div.getTxtKeiyakuNo().getValue()),
                                 支給申請情報.getShikyushinseiServiceYM() == null ? FlexibleYearMonth.EMPTY : 支給申請情報.getShikyushinseiServiceYM(),
                                 支給申請情報.getShikyushinseiSeiriNo() == null ? RString.EMPTY : 支給申請情報.getShikyushinseiSeiriNo(),
