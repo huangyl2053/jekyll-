@@ -143,7 +143,7 @@ public class ShikakuSoshitsuIdoTotal {
                 .setValue(row.getSoshitsuDate().getValue());
         div.getShikakuSoshitsuJoho().getShikakuTokusoRirekiMain().getShikakuSoshitsuInput().getTxtShutokuTodokedeDate()
                 .setValue(row.getSoshitsuTodokedeDate().getValue());
-        if (RString.isNullOrEmpty(row.getSoshitsuJiyuKey())) {
+        if (!RString.isNullOrEmpty(row.getSoshitsuJiyuKey())) {
             div.getShikakuSoshitsuJoho().getShikakuTokusoRirekiMain().getShikakuSoshitsuInput().getDdlShikakuShutokuJiyu()
                     .setSelectedKey(row.getSoshitsuJiyuKey());
         }

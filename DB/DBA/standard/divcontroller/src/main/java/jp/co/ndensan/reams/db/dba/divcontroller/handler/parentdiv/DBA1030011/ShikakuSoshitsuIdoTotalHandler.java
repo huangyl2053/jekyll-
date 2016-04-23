@@ -92,6 +92,7 @@ public class ShikakuSoshitsuIdoTotalHandler {
             ViewStateHolder.put(ViewStateKeys.資格喪失異動_状態_被保履歴タブ, 状態_被保履歴タブ);
         }
         setDdlShikakuSoshitsuJiyu();
+        div.getShikakuSoshitsuJoho().getShikakuTokusoRirekiMain().getCcdShikakuTokusoRireki().set追加するボタンの表示状態(true);
     }
 
     /**
