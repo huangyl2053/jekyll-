@@ -447,7 +447,7 @@ public class TekiyoJogaiRirekiHandler {
                         set適用状態介護保険施設入退所(保険施設入退所Model.get(taisho), row).toEntity());
 
                 if (!(DbaErrorMessages.被保険者履歴に期間重複.getMessage().getCode().equals(画面喪失.toString())
-                        && DbaErrorMessages.被保険者履歴に期間重複.getMessage().getCode().equals(画面喪失.toString()))) {
+                        && DbaErrorMessages.他の期間情報との期間重複.getMessage().getCode().equals(画面喪失.toString()))) {
                     HihokenshashikakusoshitsuManager.createInstance().saveHihokenshaShikakuSoshitsu(
                             識別コード,
                             HihokenshaNo.EMPTY,
