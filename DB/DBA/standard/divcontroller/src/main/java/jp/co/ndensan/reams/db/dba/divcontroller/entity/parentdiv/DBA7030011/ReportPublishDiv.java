@@ -1,4 +1,4 @@
-package jp.co.ndensan.reams.db.dba.divcontroller.entity.parentdiv.DBA7010011;
+package jp.co.ndensan.reams.db.dba.divcontroller.entity.parentdiv.DBA7030011;
 /*
  * このコードはツールによって生成されました。
  * このファイルへの変更は、再生成時には損失するため

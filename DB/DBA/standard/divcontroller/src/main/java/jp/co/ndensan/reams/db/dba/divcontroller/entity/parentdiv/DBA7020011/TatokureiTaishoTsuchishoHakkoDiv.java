@@ -1,4 +1,4 @@
-package jp.co.ndensan.reams.db.dba.divcontroller.entity.parentdiv.DBA7010011;
+package jp.co.ndensan.reams.db.dba.divcontroller.entity.parentdiv.DBA7020011;
 /*
  * このコードはツールによって生成されました。
  * このファイルへの変更は、再生成時には損失するため
@@ -12,11 +12,11 @@ import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.kaigoshika
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 
 /**
- * ShikakuKihonJoho のクラスファイル 
+ * TatokureiTaishoTsuchishoHakko のクラスファイル 
  * 
  * @author 自動生成
  */
-public class ShikakuKihonJohoDiv extends Panel {
+public class TatokureiTaishoTsuchishoHakkoDiv extends Panel {
     // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
     /*
      * [ private の作成 ]
@@ -26,10 +26,10 @@ public class ShikakuKihonJohoDiv extends Panel {
      */
     @JsonProperty("TajutokuTekiyoJohoIchiran")
     private TajutokuTekiyoJohoIchiranDiv TajutokuTekiyoJohoIchiran;
-    @JsonProperty("ccdKaigoShikakuJoho")
-    private KaigoShikakuKihonDiv ccdKaigoShikakuJoho;
     @JsonProperty("ccdKaigoAtenaInfo")
     private KaigoAtenaInfoDiv ccdKaigoAtenaInfo;
+    @JsonProperty("ccdKaigoShikakuJoho")
+    private KaigoShikakuKihonDiv ccdKaigoShikakuJoho;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -56,21 +56,21 @@ public class ShikakuKihonJohoDiv extends Panel {
     }
 
     /*
-     * getccdKaigoShikakuJoho
-     * @return ccdKaigoShikakuJoho
-     */
-    @JsonProperty("ccdKaigoShikakuJoho")
-    public IKaigoShikakuKihonDiv getCcdKaigoShikakuJoho() {
-        return ccdKaigoShikakuJoho;
-    }
-
-    /*
      * getccdKaigoAtenaInfo
      * @return ccdKaigoAtenaInfo
      */
     @JsonProperty("ccdKaigoAtenaInfo")
     public IKaigoAtenaInfoDiv getCcdKaigoAtenaInfo() {
         return ccdKaigoAtenaInfo;
+    }
+
+    /*
+     * getccdKaigoShikakuJoho
+     * @return ccdKaigoShikakuJoho
+     */
+    @JsonProperty("ccdKaigoShikakuJoho")
+    public IKaigoShikakuKihonDiv getCcdKaigoShikakuJoho() {
+        return ccdKaigoShikakuJoho;
     }
 
     // </editor-fold>

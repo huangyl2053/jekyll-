@@ -3,19 +3,20 @@ package jp.co.ndensan.reams.db.dba.divcontroller.entity.parentdiv.DBA7010011;
  * このコードはツールによって生成されました。
  * このファイルへの変更は、以下の状況下で不正な動作の原因になったり、
  * コードが再生成されるときに損失したりします。
- * Fri Apr 15 14:48:06 CST 2016 
+ * Fri Apr 22 13:16:12 CST 2016 
  */
 
 
 
-import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.binding.DataRow;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxFlexibleDate;
 
 
 /**
  * dgJushochiTokureiRireki_Row のクラスファイル 
  * 
+ * @author 自動生成
  */
 
 public class dgJushochiTokureiRireki_Row extends DataRow {

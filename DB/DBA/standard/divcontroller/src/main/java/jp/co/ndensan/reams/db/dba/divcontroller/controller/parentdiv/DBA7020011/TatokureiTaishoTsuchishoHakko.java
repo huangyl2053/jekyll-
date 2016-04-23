@@ -1,20 +1,20 @@
-package jp.co.ndensan.reams.db.dba.divcontroller.controller.parentdiv.DBA7010011;
+package jp.co.ndensan.reams.db.dba.divcontroller.controller.parentdiv.DBA7020011;
 
 import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dba.business.core.tajushochitokureisyakanri.TaJushochiTokureisyaKanriMaster;
 import jp.co.ndensan.reams.db.dba.business.core.tajushochitokureisyakanri.TashichosonBusiness;
-import jp.co.ndensan.reams.db.dba.business.core.tashichosonjushochitokureishisetsuhenkotsuchisho.TatokuKanrenChohyoRenrakuhyoBusiness;
+import jp.co.ndensan.reams.db.dba.business.core.tashichosonjushochitokureishisetsutaishotsuchisho.TatokuKanrenChohyoTaishoTsuchishoBusiness;
 import jp.co.ndensan.reams.db.dba.business.core.tatokukanrenchohyoshiji.TatokuKanrenChohyoShijiData;
-import jp.co.ndensan.reams.db.dba.business.report.tashichosonjushochitokureisharenrakuhyo.TashichosonJushochitokureishaRenrakuhyoItem;
+import jp.co.ndensan.reams.db.dba.business.report.shisetsutaishotsuchisho.ShisetsuTaishoTsuchishoItem;
 import jp.co.ndensan.reams.db.dba.definition.reportid.ReportIdDBA;
 import jp.co.ndensan.reams.db.dba.definition.tatokukanrenchohyoshijidata.TatokuKanrenParameter;
-import jp.co.ndensan.reams.db.dba.divcontroller.entity.parentdiv.DBA7010011.ShikakuKihonJohoDiv;
-import jp.co.ndensan.reams.db.dba.divcontroller.handler.parentdiv.DBA7010011.ShikakuKihonJohoHandler;
-import jp.co.ndensan.reams.db.dba.divcontroller.handler.parentdiv.DBA7010011.ShikakuKihonJohoiValidationHandler;
+import jp.co.ndensan.reams.db.dba.divcontroller.entity.parentdiv.DBA7020011.TatokureiTaishoTsuchishoHakkoDiv;
+import jp.co.ndensan.reams.db.dba.divcontroller.handler.parentdiv.DBA7020011.TatokureiTaishoTsuchishoHakkoHandler;
+import jp.co.ndensan.reams.db.dba.divcontroller.handler.parentdiv.DBA7020011.TatokureiTaishoTsuchishoHakkoValidationHandler;
 import jp.co.ndensan.reams.db.dba.service.core.tajushochito.TaJushochiTokureisyaKanriManager;
-import jp.co.ndensan.reams.db.dba.service.core.tashichosonjushochitokureishisetsuhenkotsuchisho.TaShichosonJushochiTokureiShisetsuHenkoTsuchishoFinder;
-import jp.co.ndensan.reams.db.dba.service.report.tashichosonjushochitokureisharenrakuhyo.TashichosonJushochitokureishaRenrakuhyoPrintService;
+import jp.co.ndensan.reams.db.dba.service.core.tashichosonjushochitokureishisetsutaishotsuchisho.TaShichosonJushochiTokureiShisetsuTaishoTsuchishoFinder;
+import jp.co.ndensan.reams.db.dba.service.report.shisetsutaishotsuchisho.ShisetsuTaishoTsuchishoPrintService;
 import jp.co.ndensan.reams.db.dba.service.tashichosonjushochitokureisharenrakuhyo.TashichosonJushochitokureishaRenrakuhyoFinder;
 import jp.co.ndensan.reams.db.dbz.business.core.TashichosonJushochiTokurei;
 import jp.co.ndensan.reams.db.dbz.business.core.TashichosonJushochiTokureiIdentifier;
@@ -43,11 +43,11 @@ import jp.co.ndensan.reams.uz.uza.util.Models;
 import jp.co.ndensan.reams.uz.uza.util.Saiban;
 
 /**
- * 他市町村住所地特例者関連帳票発行のクラスです。
+ * 他特例施設退所通知書発行のクラスです。
  *
  * @reamsid_L DBA-0380-020 houtianpeng
  */
-public class ShikakuKihonJoho {
+public class TatokureiTaishoTsuchishoHakko {
 
     private static final RString 発行ボタン = new RString("btnReportPublish");
     private static final RString 発行チェックボタン = new RString("btnCheck");
@@ -55,16 +55,16 @@ public class ShikakuKihonJoho {
     private static final RString 汎用キー_文書番号 = new RString("文書番号");
 
     /**
-     * 他市町村住所地特例者関連帳票発行を初期化します。
+     * 他特例施設退所通知書発行を初期化します。
      *
-     * @param div ShikakuKihonJohoDiv
-     * @return ResponseData<ShikakuKihonJohoDiv>
+     * @param div TatokureiTaishoTsuchishoHakkoDiv
+     * @return ResponseData<TatokureiTaishoTsuchishoHakkoDiv>
      */
-    public ResponseData<ShikakuKihonJohoDiv> onLoad(ShikakuKihonJohoDiv div) {
+    public ResponseData<TatokureiTaishoTsuchishoHakkoDiv> onLoad(TatokureiTaishoTsuchishoHakkoDiv div) {
 
         ShikibetsuCode 識別コード = ViewStateHolder.get(ViewStateKey.資格対象者, TaishoshaKey.class).get識別コード();
         div.getCcdKaigoAtenaInfo().onLoad(識別コード);
-        div.getCcdKaigoShikakuJoho().onLoad(ViewStateHolder.get(ViewStateKey.資格対象者, TaishoshaKey.class).get被保険者番号());
+//        div.getCcdKaigoShikakuJoho().onLoad(ViewStateHolder.get(ViewStateKey.資格対象者, TaishoshaKey.class).get被保険者番号());
         List<TaJushochiTokureisyaKanriMaster> tekiyoJohoList = get適用情報(ViewStateHolder.get(ViewStateKey.資格対象者, TaishoshaKey.class).get識別コード());
         if (tekiyoJohoList != null && !tekiyoJohoList.isEmpty()) {
             TashichosonBusiness 住所地特例Model = TaJushochiTokureisyaKanriManager.createInstance().get他市町村住所地特例(識別コード);
@@ -73,7 +73,7 @@ public class ShikakuKihonJoho {
             ViewStateHolder.put(ViewStateKeys.他住所地特例者管理_他住所地特例, Models.create(new ArrayList()));
         }
         createHandler(div).適用情報Gridの設定(tekiyoJohoList);
-        createHandler(div).適用情報の名称編集(ReportIdDBA.DBA100007.getReportId());
+        createHandler(div).適用情報の名称編集(ReportIdDBA.DBA100005.getReportId());
         CommonButtonHolder.setDisplayNoneByCommonButtonFieldName(完了ボタン, true);
         CommonButtonHolder.setDisplayNoneByCommonButtonFieldName(発行ボタン, true);
         return ResponseData.of(div).respond();
@@ -82,12 +82,12 @@ public class ShikakuKihonJoho {
     /**
      * 適用情報Grid。
      *
-     * @param div ShikakuKihonJohoDiv
-     * @return ResponseData<ShikakuKihonJohoDiv>
+     * @param div TatokureiTaishoTsuchishoHakkoDiv
+     * @return ResponseData<TatokureiTaishoTsuchishoHakkoDiv>
      */
-    public ResponseData<ShikakuKihonJohoDiv> onClick_dgJushochiTokureiRireki(ShikakuKihonJohoDiv div) {
+    public ResponseData<TatokureiTaishoTsuchishoHakkoDiv> onClick_dgJushochiTokureiRireki(TatokureiTaishoTsuchishoHakkoDiv div) {
 
-        RString 文書番号取得 = get文書番号取得(ReportIdDBA.DBA100007.getReportId());
+        RString 文書番号取得 = get文書番号取得(ReportIdDBA.DBA100005.getReportId());
         createHandler(div).適用情報の編集(文書番号取得);
         return ResponseData.of(div).respond();
     }
@@ -95,12 +95,12 @@ public class ShikakuKihonJoho {
     /**
      * 前回番号取得ボタン。
      *
-     * @param div ShikakuKihonJohoDiv
-     * @return ResponseData<ShikakuKihonJohoDiv>
+     * @param div TatokureiTaishoTsuchishoHakkoDiv
+     * @return ResponseData<TatokureiTaishoTsuchishoHakkoDiv>
      */
-    public ResponseData<ShikakuKihonJohoDiv> onClick_btnZenkaiBango(ShikakuKihonJohoDiv div) {
+    public ResponseData<TatokureiTaishoTsuchishoHakkoDiv> onClick_btnZenkaiBango(TatokureiTaishoTsuchishoHakkoDiv div) {
 
-        RString 文書番号取得 = get文書番号取得(ReportIdDBA.DBA100007.getReportId());
+        RString 文書番号取得 = get文書番号取得(ReportIdDBA.DBA100005.getReportId());
         div.getTajutokuTekiyoJohoIchiran().getReportPublish().getHenshuNaiyo().getTxtBunshoBango().setValue(文書番号取得);
         return ResponseData.of(div).respond();
     }
@@ -108,13 +108,13 @@ public class ShikakuKihonJoho {
     /**
      * 自動付番ボタン。
      *
-     * @param div ShikakuKihonJohoDiv
-     * @return ResponseData<ShikakuKihonJohoDiv>
+     * @param div TatokureiTaishoTsuchishoHakkoDiv
+     * @return ResponseData<TatokureiTaishoTsuchishoHakkoDiv>
      */
-    public ResponseData<ShikakuKihonJohoDiv> onClick_btnJidoFuban(ShikakuKihonJohoDiv div) {
+    public ResponseData<TatokureiTaishoTsuchishoHakkoDiv> onClick_btnJidoFuban(TatokureiTaishoTsuchishoHakkoDiv div) {
         CountedItem countedItem = Saiban.get(SubGyomuCode.DBZ介護共通, 汎用キー_文書番号);
         IBunshoNoFinder bushoFineder = BunshoNoFinderFactory.createInstance();
-        BunshoNo bushoNo = bushoFineder.get文書番号管理(ReportIdDBA.DBA100007.getReportId(), FlexibleDate.getNowDate());
+        BunshoNo bushoNo = bushoFineder.get文書番号管理(ReportIdDBA.DBA100005.getReportId(), FlexibleDate.getNowDate());
         if (bushoNo != null) {
             div.getTajutokuTekiyoJohoIchiran().getReportPublish().
                     getHenshuNaiyo().getTxtBunshoBango().setValue(bushoNo.edit文書番号(countedItem.nextString()));
@@ -125,15 +125,15 @@ public class ShikakuKihonJoho {
     /**
      * 「発行する」ボタン押下の場合、帳票を印刷します。
      *
-     * @param div ShikakuKihonJohoDiv
+     * @param div TatokureiTaishoTsuchishoHakkoDiv
      * @return ResponseData<SourceDataCollection>
      */
-    public ResponseData<SourceDataCollection> btnPrint(ShikakuKihonJohoDiv div) {
+    public ResponseData<SourceDataCollection> btnPrint(TatokureiTaishoTsuchishoHakkoDiv div) {
 
         RString 転入後前の住所 = div.getTajutokuTekiyoJohoIchiran().getReportPublish().
-                getHenshuNaiyo().getChkTennyumaeJushoNoPrint().getSelectedKeys().isEmpty()
+                getHenshuNaiyo().getChkTaishoGonai().getSelectedKeys().isEmpty()
                 ? RString.EMPTY : div.getTajutokuTekiyoJohoIchiran().getReportPublish().
-                getHenshuNaiyo().getChkTennyumaeJushoNoPrint().getSelectedKeys().get(0);
+                getHenshuNaiyo().getChkTaishoGonai().getSelectedKeys().get(0);
         ShikibetsuCode 識別コード = ViewStateHolder.get(ViewStateKey.資格対象者, TaishoshaKey.class).get識別コード();
         Models<TashichosonJushochiTokureiIdentifier, TashichosonJushochiTokurei> 他市町村住所地特例
                 = ViewStateHolder.get(ViewStateKeys.他住所地特例者管理_他住所地特例, Models.class);
@@ -145,20 +145,20 @@ public class ShikakuKihonJoho {
         CommonButtonHolder.setDisplayNoneByCommonButtonFieldName(発行チェックボタン, true);
         CommonButtonHolder.setDisplayNoneByCommonButtonFieldName(発行ボタン, true);
         CommonButtonHolder.setDisplayNoneByCommonButtonFieldName(完了ボタン, false);
-        TatokuKanrenChohyoRenrakuhyoBusiness renrakuhyoBusiness = TaShichosonJushochiTokureiShisetsuHenkoTsuchishoFinder
-                .createInstance().setTatokuKanrenChohyoRenrakuhyo(business);
-        他市町村住所地特例の更新(createHandler(div).他市町村住所地特例連絡票の編集(他市町村住所地特例, 識別コード));
-        return ResponseData.of(new TashichosonJushochitokureishaRenrakuhyoPrintService().
-                print(dba100007_Item(renrakuhyoBusiness))).respond();
+        TatokuKanrenChohyoTaishoTsuchishoBusiness tsuchishoBusiness = TaShichosonJushochiTokureiShisetsuTaishoTsuchishoFinder
+                .createInstance().setTatokuKanrenChohyoTaishoTsuchisho(business);
+        他市町村住所地特例の更新(createHandler(div).他特例施設退所通知書の編集(他市町村住所地特例, 識別コード));
+        return ResponseData.of(new ShisetsuTaishoTsuchishoPrintService().
+                print(dba100005_Item(tsuchishoBusiness))).respond();
     }
 
     /**
      * 「発行する」ボタン押下の場合、帳票を印刷します。
      *
-     * @param div ShikakuKihonJohoDiv
+     * @param div TatokureiTaishoTsuchishoHakkoDiv
      * @return ResponseData<SourceDataCollection>
      */
-    public ResponseData<ShikakuKihonJohoDiv> onClick_btnCheck(ShikakuKihonJohoDiv div) {
+    public ResponseData<TatokureiTaishoTsuchishoHakkoDiv> onClick_btnCheck(TatokureiTaishoTsuchishoHakkoDiv div) {
 
         if (!ResponseHolder.isReRequest()) {
             QuestionMessage message = new QuestionMessage(UrQuestionMessages.処理実行の確認.getMessage().getCode(),
@@ -182,7 +182,7 @@ public class ShikakuKihonJoho {
         TaJushochiTokureisyaKanriManager.createInstance().regTaJushochiTokurei(他市町村住所地特例.toEntity());
     }
 
-    private TatokuKanrenChohyoShijiData 帳票発行指示データ作成(ShikakuKihonJohoDiv div, boolean 住所出力不要フラグ) {
+    private TatokuKanrenChohyoShijiData 帳票発行指示データ作成(TatokureiTaishoTsuchishoHakkoDiv div, boolean 住所出力不要フラグ) {
 
         return TashichosonJushochitokureishaRenrakuhyoFinder.createInstance().
                 setChohyoData(TatokuKanrenParameter.
@@ -210,9 +210,10 @@ public class ShikakuKihonJoho {
                                 div.getTajutokuTekiyoJohoIchiran().getReportPublish().getHenshuNaiyo().get入所日() == null ? FlexibleDate.EMPTY
                                 : new FlexibleDate(div.getTajutokuTekiyoJohoIchiran().getReportPublish().getHenshuNaiyo().get入所日()), 住所出力不要フラグ));
     }
-    private TashichosonJushochitokureishaRenrakuhyoItem dba100007_Item(TatokuKanrenChohyoRenrakuhyoBusiness business) {
 
-        TashichosonJushochitokureishaRenrakuhyoItem item = new TashichosonJushochitokureishaRenrakuhyoItem();
+    private ShisetsuTaishoTsuchishoItem dba100005_Item(TatokuKanrenChohyoTaishoTsuchishoBusiness business) {
+
+        ShisetsuTaishoTsuchishoItem item = new ShisetsuTaishoTsuchishoItem();
         item.setHokenshaYubinNo(business.get保険者郵便番号());
         item.setBunshoNo(business.get文書番号());
         item.setHokenshaJusho(business.get保険者住所());
@@ -221,8 +222,6 @@ public class ShikakuKihonJoho {
         item.setTantoBushoName(business.get担当部署名());
         item.setBarcode(business.getバーコード情報());
         item.setMidashi(business.get見出し());
-        item.setTennyuYMD(business.get転入年月日());
-        item.setNyushoYMD(business.get入所年月日());
         item.setHihokenshaNo1(business.get被保険者番号１());
         item.setHihokenshaNo2(business.get被保険者番号２());
         item.setHihokenshaNo3(business.get被保険者番号３());
@@ -237,8 +236,8 @@ public class ShikakuKihonJoho {
         item.setTaishoshaName(business.get対象者名());
         item.setBirthYMD(business.get誕生日());
         item.setSeibetsu(business.get性別());
-        item.setTennyumaeYubinNo(business.get郵便番号());
-        item.setTennyumaeJusho(business.get住所());
+        item.setTaishogoYubinNo(business.get郵便番号());
+        item.setTaishogoJusho(business.get住所());
         item.setShisetsuName(business.get施設名称());
         item.setShisetsuTelNo(business.get施設電話番号());
         item.setShisetsuFaxNo(business.get施設FAX番号());
@@ -252,11 +251,11 @@ public class ShikakuKihonJoho {
         return ReportUtil.get文書番号(SubGyomuCode.DBA介護資格, reportId, FlexibleDate.getNowDate());
     }
 
-    private ShikakuKihonJohoHandler createHandler(ShikakuKihonJohoDiv div) {
-        return new ShikakuKihonJohoHandler(div);
+    private TatokureiTaishoTsuchishoHakkoHandler createHandler(TatokureiTaishoTsuchishoHakkoDiv div) {
+        return new TatokureiTaishoTsuchishoHakkoHandler(div);
     }
 
-    private ShikakuKihonJohoiValidationHandler createValidationHandler(ShikakuKihonJohoDiv div) {
-        return new ShikakuKihonJohoiValidationHandler(div);
+    private TatokureiTaishoTsuchishoHakkoValidationHandler createValidationHandler(TatokureiTaishoTsuchishoHakkoDiv div) {
+        return new TatokureiTaishoTsuchishoHakkoValidationHandler(div);
     }
 }

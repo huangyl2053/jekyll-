@@ -7,17 +7,17 @@ package jp.co.ndensan.reams.db.dba.divcontroller.entity.parentdiv.DBA7010011;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.PrintContentsSetting.IPrintContentsSettingDiv;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.PrintContentsSetting.PrintContentsSettingDiv;
-import jp.co.ndensan.reams.ur.urz.divcontroller.entity.commonchilddiv.ZenkokuJushoInput.IZenkokuJushoInputDiv;
-import jp.co.ndensan.reams.ur.urz.divcontroller.entity.commonchilddiv.ZenkokuJushoInput.ZenkokuJushoInputDiv;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Button;
 import jp.co.ndensan.reams.uz.uza.ui.binding.CheckBoxList;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TextBox;
+import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxYubinNo;
 
 /**
  * HenshuNaiyo のクラスファイル 
  * 
+ * @author 自動生成
  */
 public class HenshuNaiyoDiv extends Panel {
     // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
@@ -27,18 +27,20 @@ public class HenshuNaiyoDiv extends Panel {
      * コントロール名とフィールド名を取得する
      * private + コントロール名 + フィールド名 の文字列を作成
      */
-    @JsonProperty("txtYakushoMeiOne")
-    private TextBox txtYakushoMeiOne;
+    @JsonProperty("txtYubinNo")
+    private TextBoxYubinNo txtYubinNo;
+    @JsonProperty("txtJusho")
+    private TextBox txtJusho;
+    @JsonProperty("txtYakushoMei")
+    private TextBox txtYakushoMei;
+    @JsonProperty("txtOnchu")
+    private TextBox txtOnchu;
     @JsonProperty("txtTantokamei")
     private TextBox txtTantokamei;
     @JsonProperty("txtSam")
     private TextBox txtSam;
-    @JsonProperty("txtYakushoMeiTwo")
-    private TextBox txtYakushoMeiTwo;
-    @JsonProperty("txtOnchu")
-    private TextBox txtOnchu;
-    @JsonProperty("chkTenNyuGonai")
-    private CheckBoxList chkTenNyuGonai;
+    @JsonProperty("chkTennyumaeJushoNoPrint")
+    private CheckBoxList chkTennyumaeJushoNoPrint;
     @JsonProperty("btnZenkaiBango")
     private Button btnZenkaiBango;
     @JsonProperty("txtBunshoBango")
@@ -47,12 +49,10 @@ public class HenshuNaiyoDiv extends Panel {
     private Button btnJidoFuban;
     @JsonProperty("ccdPrintContentsSetting")
     private PrintContentsSettingDiv ccdPrintContentsSetting;
-    @JsonProperty("ccdZenkokuJushoInput")
-    private ZenkokuJushoInputDiv ccdZenkokuJushoInput;
-    @JsonProperty("他市町村住所地特例異動日")
-    private RString 他市町村住所地特例異動日;
-    @JsonProperty("他市町村住所地特例枝番")
-    private RString 他市町村住所地特例枝番;
+    @JsonProperty("異動日")
+    private RString 異動日;
+    @JsonProperty("枝番")
+    private RString 枝番;
     @JsonProperty("入所日")
     private RString 入所日;
 
@@ -63,21 +63,75 @@ public class HenshuNaiyoDiv extends Panel {
      * フィールド名のGetterとSetter を作成
      */
     /*
-     * gettxtYakushoMeiOne
-     * @return txtYakushoMeiOne
+     * gettxtYubinNo
+     * @return txtYubinNo
      */
-    @JsonProperty("txtYakushoMeiOne")
-    public TextBox getTxtYakushoMeiOne() {
-        return txtYakushoMeiOne;
+    @JsonProperty("txtYubinNo")
+    public TextBoxYubinNo getTxtYubinNo() {
+        return txtYubinNo;
     }
 
     /*
-     * settxtYakushoMeiOne
-     * @param txtYakushoMeiOne txtYakushoMeiOne
+     * settxtYubinNo
+     * @param txtYubinNo txtYubinNo
      */
-    @JsonProperty("txtYakushoMeiOne")
-    public void setTxtYakushoMeiOne(TextBox txtYakushoMeiOne) {
-        this.txtYakushoMeiOne = txtYakushoMeiOne;
+    @JsonProperty("txtYubinNo")
+    public void setTxtYubinNo(TextBoxYubinNo txtYubinNo) {
+        this.txtYubinNo = txtYubinNo;
+    }
+
+    /*
+     * gettxtJusho
+     * @return txtJusho
+     */
+    @JsonProperty("txtJusho")
+    public TextBox getTxtJusho() {
+        return txtJusho;
+    }
+
+    /*
+     * settxtJusho
+     * @param txtJusho txtJusho
+     */
+    @JsonProperty("txtJusho")
+    public void setTxtJusho(TextBox txtJusho) {
+        this.txtJusho = txtJusho;
+    }
+
+    /*
+     * gettxtYakushoMei
+     * @return txtYakushoMei
+     */
+    @JsonProperty("txtYakushoMei")
+    public TextBox getTxtYakushoMei() {
+        return txtYakushoMei;
+    }
+
+    /*
+     * settxtYakushoMei
+     * @param txtYakushoMei txtYakushoMei
+     */
+    @JsonProperty("txtYakushoMei")
+    public void setTxtYakushoMei(TextBox txtYakushoMei) {
+        this.txtYakushoMei = txtYakushoMei;
+    }
+
+    /*
+     * gettxtOnchu
+     * @return txtOnchu
+     */
+    @JsonProperty("txtOnchu")
+    public TextBox getTxtOnchu() {
+        return txtOnchu;
+    }
+
+    /*
+     * settxtOnchu
+     * @param txtOnchu txtOnchu
+     */
+    @JsonProperty("txtOnchu")
+    public void setTxtOnchu(TextBox txtOnchu) {
+        this.txtOnchu = txtOnchu;
     }
 
     /*
@@ -117,57 +171,21 @@ public class HenshuNaiyoDiv extends Panel {
     }
 
     /*
-     * gettxtYakushoMeiTwo
-     * @return txtYakushoMeiTwo
+     * getchkTennyumaeJushoNoPrint
+     * @return chkTennyumaeJushoNoPrint
      */
-    @JsonProperty("txtYakushoMeiTwo")
-    public TextBox getTxtYakushoMeiTwo() {
-        return txtYakushoMeiTwo;
+    @JsonProperty("chkTennyumaeJushoNoPrint")
+    public CheckBoxList getChkTennyumaeJushoNoPrint() {
+        return chkTennyumaeJushoNoPrint;
     }
 
     /*
-     * settxtYakushoMeiTwo
-     * @param txtYakushoMeiTwo txtYakushoMeiTwo
+     * setchkTennyumaeJushoNoPrint
+     * @param chkTennyumaeJushoNoPrint chkTennyumaeJushoNoPrint
      */
-    @JsonProperty("txtYakushoMeiTwo")
-    public void setTxtYakushoMeiTwo(TextBox txtYakushoMeiTwo) {
-        this.txtYakushoMeiTwo = txtYakushoMeiTwo;
-    }
-
-    /*
-     * gettxtOnchu
-     * @return txtOnchu
-     */
-    @JsonProperty("txtOnchu")
-    public TextBox getTxtOnchu() {
-        return txtOnchu;
-    }
-
-    /*
-     * settxtOnchu
-     * @param txtOnchu txtOnchu
-     */
-    @JsonProperty("txtOnchu")
-    public void setTxtOnchu(TextBox txtOnchu) {
-        this.txtOnchu = txtOnchu;
-    }
-
-    /*
-     * getchkTenNyuGonai
-     * @return chkTenNyuGonai
-     */
-    @JsonProperty("chkTenNyuGonai")
-    public CheckBoxList getChkTenNyuGonai() {
-        return chkTenNyuGonai;
-    }
-
-    /*
-     * setchkTenNyuGonai
-     * @param chkTenNyuGonai chkTenNyuGonai
-     */
-    @JsonProperty("chkTenNyuGonai")
-    public void setChkTenNyuGonai(CheckBoxList chkTenNyuGonai) {
-        this.chkTenNyuGonai = chkTenNyuGonai;
+    @JsonProperty("chkTennyumaeJushoNoPrint")
+    public void setChkTennyumaeJushoNoPrint(CheckBoxList chkTennyumaeJushoNoPrint) {
+        this.chkTennyumaeJushoNoPrint = chkTennyumaeJushoNoPrint;
     }
 
     /*
@@ -234,48 +252,39 @@ public class HenshuNaiyoDiv extends Panel {
     }
 
     /*
-     * getccdZenkokuJushoInput
-     * @return ccdZenkokuJushoInput
+     * get異動日
+     * @return 異動日
      */
-    @JsonProperty("ccdZenkokuJushoInput")
-    public IZenkokuJushoInputDiv getCcdZenkokuJushoInput() {
-        return ccdZenkokuJushoInput;
+    @JsonProperty("異動日")
+    public RString get異動日() {
+        return 異動日;
     }
 
     /*
-     * get他市町村住所地特例異動日
-     * @return 他市町村住所地特例異動日
+     * set異動日
+     * @param 異動日 異動日
      */
-    @JsonProperty("他市町村住所地特例異動日")
-    public RString get他市町村住所地特例異動日() {
-        return 他市町村住所地特例異動日;
+    @JsonProperty("異動日")
+    public void set異動日(RString 異動日) {
+        this.異動日 = 異動日;
     }
 
     /*
-     * set他市町村住所地特例異動日
-     * @param 他市町村住所地特例異動日 他市町村住所地特例異動日
+     * get枝番
+     * @return 枝番
      */
-    @JsonProperty("他市町村住所地特例異動日")
-    public void set他市町村住所地特例異動日(RString 他市町村住所地特例異動日) {
-        this.他市町村住所地特例異動日 = 他市町村住所地特例異動日;
+    @JsonProperty("枝番")
+    public RString get枝番() {
+        return 枝番;
     }
 
     /*
-     * get他市町村住所地特例枝番
-     * @return 他市町村住所地特例枝番
+     * set枝番
+     * @param 枝番 枝番
      */
-    @JsonProperty("他市町村住所地特例枝番")
-    public RString get他市町村住所地特例枝番() {
-        return 他市町村住所地特例枝番;
-    }
-
-    /*
-     * set他市町村住所地特例枝番
-     * @param 他市町村住所地特例枝番 他市町村住所地特例枝番
-     */
-    @JsonProperty("他市町村住所地特例枝番")
-    public void set他市町村住所地特例枝番(RString 他市町村住所地特例枝番) {
-        this.他市町村住所地特例枝番 = 他市町村住所地特例枝番;
+    @JsonProperty("枝番")
+    public void set枝番(RString 枝番) {
+        this.枝番 = 枝番;
     }
 
     /*
