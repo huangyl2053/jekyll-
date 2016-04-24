@@ -252,10 +252,6 @@ public class PnlTotalPanelHandler {
                 KeiyakuServiceShurui.予防福祉用具.getコード(), KeiyakuServiceShurui.予防福祉用具.get名称()));
         keiyakuServiceTypeList.add(new KeyValueDataSource(
                 KeiyakuServiceShurui.予防住宅改修.getコード(), KeiyakuServiceShurui.予防住宅改修.get名称()));
-        keiyakuServiceTypeList.add(new KeyValueDataSource(
-                KeiyakuServiceShurui.償還払支給.getコード(), KeiyakuServiceShurui.償還払支給.get名称()));
-        keiyakuServiceTypeList.add(new KeyValueDataSource(
-                KeiyakuServiceShurui.高額給付支給.getコード(), KeiyakuServiceShurui.高額給付支給.get名称()));
         div.getPnlCommon().getPnlDetail().getDdlKeiyakuServiceType().setDataSource(keiyakuServiceTypeList);
 
         List<KeyValueDataSource> rdoList = new ArrayList<>();

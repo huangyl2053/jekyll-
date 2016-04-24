@@ -162,10 +162,6 @@ public class PnlTotalSearchHandler {
                 KeiyakuServiceShurui.予防福祉用具.getコード(), KeiyakuServiceShurui.予防福祉用具.get名称()));
         keiyakuServiceShuruiList.add(new KeyValueDataSource(
                 KeiyakuServiceShurui.予防住宅改修.getコード(), KeiyakuServiceShurui.予防住宅改修.get名称()));
-        keiyakuServiceShuruiList.add(new KeyValueDataSource(
-                KeiyakuServiceShurui.償還払支給.getコード(), KeiyakuServiceShurui.償還払支給.get名称()));
-        keiyakuServiceShuruiList.add(new KeyValueDataSource(
-                KeiyakuServiceShurui.高額給付支給.getコード(), KeiyakuServiceShurui.高額給付支給.get名称()));
         return keiyakuServiceShuruiList;
     }
 
