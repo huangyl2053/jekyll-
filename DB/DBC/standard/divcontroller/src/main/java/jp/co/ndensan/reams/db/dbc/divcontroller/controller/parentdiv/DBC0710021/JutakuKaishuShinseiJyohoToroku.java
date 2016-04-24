@@ -25,9 +25,11 @@ import jp.co.ndensan.reams.db.dbc.service.core.jutakukaishusikyushinsei.Jutakuka
 import jp.co.ndensan.reams.db.dbc.service.core.jutakukaishuyaokaigojyotaisandannkaihantei.JutakuKaishuYaokaigoJyotaiSandannkaiHanteiManager;
 import jp.co.ndensan.reams.db.dbc.service.jutakukaishujizenshinsei.JutakuKaishuJizenShinsei;
 import jp.co.ndensan.reams.db.dbd.definition.enumeratedtype.core.IsKyuSoti;
+import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBC;
 import jp.co.ndensan.reams.db.dbx.definition.core.enumeratedtype.ShisetsuType;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HokenKyufuRitsu;
+import jp.co.ndensan.reams.db.dbx.service.core.dbbusinessconfig.DbBusinessConifg;
 import jp.co.ndensan.reams.db.dbz.business.core.jigyosha.JigyoshaMode;
 import jp.co.ndensan.reams.db.dbz.definition.message.DbzInformationMessages;
 import jp.co.ndensan.reams.db.dbz.definition.message.DbzQuestionMessages;
@@ -35,6 +37,7 @@ import jp.co.ndensan.reams.ur.urz.definition.message.UrInformationMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrQuestionMessages;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
+import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.ApplicationException;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
@@ -55,30 +58,33 @@ import jp.co.ndensan.reams.uz.uza.util.serialization.DataPassingConverter;
  */
 public class JutakuKaishuShinseiJyohoToroku {
 
-    private final RString 画面モード_審査 = new RString("審査モード");
-    private final RString 画面モード_照会 = new RString("照会モード");
-    private final RString モード_照会 = new RString("照会");
-    private final RString 画面モード_削除 = new RString("削除モード");
-    private final RString 画面モード_取消 = new RString("取消モード");
-    private final RString 画面モード_登録 = new RString("登録モード");
-    private final RString 画面モード_修正 = new RString("修正モード");
-    private final RString 画面モード_事前申請 = new RString("事前申請モード");
-    private final RString 画面モード_以外 = new RString("以外");
-    private final Code 非該当 = new Code("01");
-    private final Code 要支援1 = new Code("12");
-    private final Code 要支援2 = new Code("13");
-    private final Code 要支援_経過的要介護 = new Code("11");
-    private final Code 要介護1 = new Code("21");
-    private final Code 要介護2 = new Code("22");
-    private final Code 要介護3 = new Code("23");
-    private final Code 要介護4 = new Code("24");
-    private final Code 要介護5 = new Code("25");
-    private final RString 要介護状態区分3段階変更による = new RString("threeUp");
-    private final RString 住宅住所変更による = new RString("changeAddress");
-    private final RString エラー_RPLC_MSG_1 = new RString("受給認定有効期間外の");
-    private final RString エラー_RPLC_MSG_2 = new RString("入力");
-    private final RString 領収日_RPLC_MSG = new RString("領収日");
-    private final RString サービス提供年月_RPLC_MSG = new RString("サービス提供年月");
+    private static final RString 画面モード_審査 = new RString("審査モード");
+    private static final RString 画面モード_照会 = new RString("照会モード");
+    private static final RString モード_照会 = new RString("照会");
+    private static final RString 画面モード_削除 = new RString("削除モード");
+    private static final RString 画面モード_取消 = new RString("取消モード");
+    private static final RString 画面モード_登録 = new RString("登録モード");
+    private static final RString 画面モード_修正 = new RString("修正モード");
+    private static final RString 画面モード_事前申請 = new RString("事前申請モード");
+    private static final RString 画面モード_以外 = new RString("以外");
+    private static final Code 非該当 = new Code("01");
+    private static final Code 要支援1 = new Code("12");
+    private static final Code 要支援2 = new Code("13");
+    private static final Code 要支援_経過的要介護 = new Code("11");
+    private static final Code 要介護1 = new Code("21");
+    private static final Code 要介護2 = new Code("22");
+    private static final Code 要介護3 = new Code("23");
+    private static final Code 要介護4 = new Code("24");
+    private static final Code 要介護5 = new Code("25");
+    private static final RString 要介護状態区分3段階変更による = new RString("threeUp");
+    private static final RString 住宅住所変更による = new RString("changeAddress");
+    private static final RString エラー_RPLC_MSG_1 = new RString("受給認定有効期間外の");
+    private static final RString エラー_RPLC_MSG_2 = new RString("入力");
+    private static final RString 領収日_RPLC_MSG = new RString("領収日");
+    private static final RString サービス提供年月_RPLC_MSG = new RString("サービス提供年月");
+    private static final RString 給付実績連動_受託なし = new RString("1");
+    private static final RString 給付実績緋連動_受託あり = new RString("2");
+    private static final RString 償還払決定情報を登録 = new RString("償還払決定情報を登録して");
 
     /**
      * 画面ロードメソッドです。
@@ -155,7 +161,7 @@ public class JutakuKaishuShinseiJyohoToroku {
         引き継ぎデータEntity.setサービス提供年月(
                 サービス提供年月 != null ? new FlexibleYearMonth(サービス提供年月.getYearMonth().toDateString()) : null);
         引き継ぎデータEntity.set整理番号(整理番号);
-        // 入力チェック
+
         ValidationMessageControlPairs valid = getJutakuKaishuShinseiJyohoTorokuValidationHandler(
                 div, 画面モード).validate();
         if (valid.iterator().hasNext()) {
@@ -166,129 +172,156 @@ public class JutakuKaishuShinseiJyohoToroku {
         if (valid2.iterator().hasNext()) {
             return ResponseData.of(div).addValidationMessages(valid2).respond();
         }
-        // データ変更確認
+
+        boolean 内容変更 = new RString(DbzQuestionMessages.内容変更なし処理中止確認.getMessage().getCode()).equals(
+                ResponseHolder.getMessageCode());
+        boolean 判断基準 = new RString(DbzQuestionMessages.判断基準より前の日付.getMessage().getCode()).equals(
+                ResponseHolder.getMessageCode());
+        boolean 限度額 = new RString(DbzInformationMessages.不整合内容相違.getMessage().getCode()).equals(
+                ResponseHolder.getMessageCode());
+        boolean 削除の確認 = new RString(UrQuestionMessages.削除の確認.getMessage().getCode()).equals(
+                ResponseHolder.getMessageCode());
+        boolean 保存の確認 = new RString(UrQuestionMessages.削除の確認.getMessage().getCode()).equals(
+                ResponseHolder.getMessageCode());
+        boolean 確認_汎用 = new RString(UrQuestionMessages.確認_汎用.getMessage().getCode()).equals(
+                ResponseHolder.getMessageCode());
         JutakuKaishuShinseiJyohoTorokuHandler handler = getHandler(div);
         if (!handler.is画面データが変更()) {
-            if (!ResponseHolder.isReRequest()) {
+            if (isCheckデータ変更(内容変更, 判断基準, 限度額, 削除の確認, 保存の確認, 確認_汎用)) {
                 QuestionMessage message = new QuestionMessage(
                         DbzQuestionMessages.内容変更なし処理中止確認.getMessage().getCode(),
                         DbzQuestionMessages.内容変更なし処理中止確認.getMessage().evaluate());
                 return ResponseData.of(div).addMessage(message).respond();
             }
-            if (new RString(DbzQuestionMessages.内容変更なし処理中止確認.getMessage().getCode()).equals(
-                    ResponseHolder.getMessageCode())
-                    && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
+            if (内容変更 && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
                 return ResponseData.of(div).respond();
-            } else if (new RString(DbzQuestionMessages.内容変更なし処理中止確認.getMessage().getCode()).equals(
-                    ResponseHolder.getMessageCode())
-                    && ResponseHolder.getButtonType() == MessageDialogSelectedResult.No) {
+            }
+        }
 
+        RDate 画面提供着工年月 = div.getTxtTeikyoYM().getValue();
+        RDate 領収日 = div.getJutakuKaishuShinseiContents().getTxtRyoshuYMD().getValue();
+        if (画面モード_修正.equals(画面モード)
+                && 領収日.getYearMonth().isBeforeOrEquals(画面提供着工年月.getYearMonth())) {
+            if (isCheckFive(判断基準, 限度額, 削除の確認, 保存の確認, 確認_汎用)) {
+                QuestionMessage message = new QuestionMessage(
+                        DbzQuestionMessages.判断基準より前の日付.getMessage().getCode(),
+                        DbzQuestionMessages.判断基準より前の日付.getMessage().replace(
+                                領収日_RPLC_MSG.toString(), サービス提供年月_RPLC_MSG.toString()).evaluate());
+                return ResponseData.of(div).addMessage(message).respond();
+            }
+            if (判断基準 && ResponseHolder.getButtonType() == MessageDialogSelectedResult.No) {
+                return ResponseData.of(div).respond();
             }
         }
-        if (画面モード_修正.equals(画面モード)) {
-            RDate 画面提供着工年月 = div.getTxtTeikyoYM().getValue();
-            // 領収日チェック
-            RDate 領収日 = div.getJutakuKaishuShinseiContents().getTxtRyoshuYMD().getValue();
-            if (領収日.getYearMonth().isBeforeOrEquals(画面提供着工年月.getYearMonth())) {
-                if (!ResponseHolder.isReRequest()) {
-                    QuestionMessage message = new QuestionMessage(
-                            DbzQuestionMessages.判断基準より前の日付.getMessage().getCode(),
-                            DbzQuestionMessages.判断基準より前の日付.getMessage().replace(
-                                    領収日_RPLC_MSG.toString(), サービス提供年月_RPLC_MSG.toString()).evaluate());
-                    return ResponseData.of(div).addMessage(message).respond();
-                }
-                if (new RString(DbzQuestionMessages.判断基準より前の日付.getMessage().getCode()).equals(
-                        ResponseHolder.getMessageCode())
-                        && ResponseHolder.getButtonType() == MessageDialogSelectedResult.No) {
-                    return ResponseData.of(div).respond();
-                }
-            }
-        }
+
         boolean is確認対象変更有 = handler.is確認対象変更有無チェック();
         if (is確認対象変更有) {
-            if (!ResponseHolder.isReRequest()) {
-                return ResponseData.of(div).addMessage(
-                        DbzInformationMessages.内容変更なしで保存不可.getMessage()).respond();
+            if (isCheckFour(限度額, 削除の確認, 保存の確認, 確認_汎用)) {
+                // TODO 限度額チェック前存在しない。
+                return ResponseData.of(div).addMessage(DbzInformationMessages.不整合内容相違.getMessage()).respond();
             }
-            if (new RString(DbzInformationMessages.内容変更なしで保存不可.getMessage().getCode()).equals(
-                    ResponseHolder.getMessageCode())
-                    && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
+            if (限度額 && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
                 return ResponseData.of(div).respond();
             }
         }
-        // 操作可否確認
+        return to内容保存(div, 画面モード, 引き継ぎデータEntity, handler, 削除の確認, 保存の確認, 確認_汎用);
+    }
+
+    private boolean isCheckFour(boolean 限度額, boolean 削除の確認, boolean 保存の確認, boolean 確認_汎用) {
+        return isCheckTow(限度額, 削除の確認) && !保存の確認 && !確認_汎用;
+    }
+
+    private boolean isCheckFive(boolean 判断基準, boolean 限度額, boolean 削除の確認, boolean 保存の確認, boolean 確認_汎用) {
+        return isCheckFour(判断基準, 限度額, 削除の確認, 保存の確認) && !確認_汎用;
+    }
+
+    private boolean isCheckデータ変更(boolean 内容変更, boolean 判断基準, boolean 限度額, boolean 削除の確認, boolean 保存の確認, boolean 確認_汎用) {
+        return isCheckFive(内容変更, 判断基準, 限度額, 削除の確認, 保存の確認) && !確認_汎用;
+    }
+
+    private ResponseData<JutakuKaishuShinseiJyohoTorokuDiv> to内容保存(
+            JutakuKaishuShinseiJyohoTorokuDiv div,
+            RString 画面モード,
+            ShokanharaKeteiJyohoParameter 引き継ぎデータEntity,
+            JutakuKaishuShinseiJyohoTorokuHandler handler,
+            boolean 削除の確認,
+            boolean 保存の確認,
+            boolean 確認_汎用) {
+
         if (画面モード_削除.equals(画面モード)) {
-            if (!ResponseHolder.isReRequest()) {
+            if (isCheckTow(削除の確認, 確認_汎用)) {
                 QuestionMessage message = new QuestionMessage(UrQuestionMessages.削除の確認.getMessage().getCode(),
                         UrQuestionMessages.削除の確認.getMessage().evaluate());
                 return ResponseData.of(div).addMessage(message).respond();
             }
         } else {
-            if (!ResponseHolder.isReRequest()) {
+            if (isCheckTow(保存の確認, 確認_汎用)) {
                 QuestionMessage message = new QuestionMessage(UrQuestionMessages.保存の確認.getMessage().getCode(),
                         UrQuestionMessages.保存の確認.getMessage().evaluate());
                 return ResponseData.of(div).addMessage(message).respond();
             }
         }
-        if ((new RString(UrQuestionMessages.削除の確認.getMessage().getCode()).equals(
-                ResponseHolder.getMessageCode())
-                || new RString(UrQuestionMessages.保存の確認.getMessage().getCode()).equals(
-                        ResponseHolder.getMessageCode()))
-                && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
-            handler.save(引き継ぎデータEntity);
-            if (画面モード_審査.equals(画面モード) || 画面モード_削除.equals(画面モード)
-                    || 画面モード_取消.equals(画面モード)) {
-                div.getJutakuShikyuShinseiKanryoPanel().getKanryoMessage().setMessage(new RString(
-                        UrInformationMessages.保存終了.getMessage().evaluate()),
-                        div.getJutakuKaishuShinseiHihokenshaPanel().getKaigoAtenaInfo().get氏名漢字(),
-                        div.getJutakuKaishuShinseiHihokenshaPanel().getKaigoShikakuKihon().get被保険者番号(), true);
+        if ((削除の確認 || 保存の確認) && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
+            getHandler(div).save(引き継ぎデータEntity);
+        } else {
+            return ResponseData.of(div).respond();
+        }
+        if (is状態Check(画面モード)) {
+            set完了状態(div);
+            return ResponseData.of(div).setState(DBC0710021StateName.KanryoMessage);
+        } else if (is状態CheckTow(画面モード)) {
+            RString 償還 = DbBusinessConifg.get(ConfigNameDBC.国保連共同処理受託区分_償還, RDate.getNowDate(), SubGyomuCode.DBC介護給付);
+            if (給付実績連動_受託なし.equals(償還) && !確認_汎用) {
+                QuestionMessage message = new QuestionMessage(
+                        UrQuestionMessages.確認_汎用.getMessage().getCode(),
+                        UrQuestionMessages.確認_汎用.getMessage().replace(償還払決定情報を登録.toString()).evaluate());
+                return ResponseData.of(div).addMessage(message).respond();
+            } else if (給付実績緋連動_受託あり.equals(償還)) {
+                set完了状態(div);
                 return ResponseData.of(div).setState(DBC0710021StateName.KanryoMessage);
-                // １１．２　画面モードが登録モード、事前申請登録モード
-            } else if (画面モード_登録.equals(画面モード) || 画面モード_事前申請.equals(画面モード)) {
-//                if (給付実績連動_受託なし.equals(償還)) {
-//                    if (!ResponseHolder.isReRequest()) {
-//                        QuestionMessage message = new QuestionMessage(
-//                                DbcQuestionMessages.償還払決定情報登録.getMessage().getCode(),
-//                                DbcQuestionMessages.償還払決定情報登録.getMessage().evaluate());
-//                        return ResponseData.of(div).addMessage(message).respond();
-//                    }
-//                    if (new RString(DbcQuestionMessages.償還払決定情報登録.getMessage().getCode()).equals(
-//                            ResponseHolder.getMessageCode())
-//                            && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
-//                        handler.set画面遷移パラメータ(引き継ぎデータEntity, 画面モード_修正);
-//                        return ResponseData.of(div).forwardWithEventName(DBC0710021TransitionEventName.to償還払決定情報)
-//                                .respond();
-//                    }
-//                    if (new RString(DbcQuestionMessages.償還払決定情報登録.getMessage().getCode()).equals(
-//                            ResponseHolder.getMessageCode())
-//                            && ResponseHolder.getButtonType() == MessageDialogSelectedResult.No) {
-//                        return ResponseData.of(div).setState(DBC0710021StateName.KanryoMessage);
-//                    }
-//                } else if (給付実績連動_受託あり.equals(償還)) {
-//                    return ResponseData.of(div).setState(DBC0710021StateName.KanryoMessage);
-//                }
-                // １１．３　画面モードが修正モード
-            } else if (画面モード_修正.equals(画面モード)) {
-                if (!div.getBtnShokanKetteiJyoho().isDisabled()) {
-//                    if (!ResponseHolder.isReRequest()) {
-//                        QuestionMessage message = new QuestionMessage(
-//                                DbcQuestionMessages.償還払決定情報登録.getMessage().getCode(),
-//                                DbcQuestionMessages.償還払決定情報登録.getMessage().evaluate());
-//                        return ResponseData.of(div).addMessage(message).respond();
-//                    }
-//                    if (new RString(DbcQuestionMessages.償還払決定情報登録.getMessage().getCode()).equals(
-//                            ResponseHolder.getMessageCode())
-//                            && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
-//                        handler.set画面遷移パラメータ(引き継ぎデータEntity, 画面モード);
-//                        return ResponseData.of(div).forwardWithEventName(DBC0710021TransitionEventName.to償還払決定情報)
-//                                .respond();
-//                    }
-                } else {
-                    return ResponseData.of(div).setState(DBC0710021StateName.KanryoMessage);
-                }
+            }
+        } else if (画面モード_修正.equals(画面モード)) {
+            if (isCheckTow(div.getBtnShokanKetteiJyoho().isDisabled(), 確認_汎用)) {
+                QuestionMessage message = new QuestionMessage(
+                        UrQuestionMessages.確認_汎用.getMessage().getCode(),
+                        UrQuestionMessages.確認_汎用.getMessage().replace(償還払決定情報を登録.toString()).evaluate());
+                return ResponseData.of(div).addMessage(message).respond();
+            } else {
+                set完了状態(div);
+                return ResponseData.of(div).setState(DBC0710021StateName.KanryoMessage);
             }
         }
+        if (確認_汎用 && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
+            handler.set画面遷移パラメータ(引き継ぎデータEntity.get識別コード(),
+                    引き継ぎデータEntity.get被保険者番号(), 画面モード_修正);
+            return ResponseData.of(div).forwardWithEventName(DBC0710021TransitionEventName.to償還払決定情報).respond();
+        }
+        if (確認_汎用 && ResponseHolder.getButtonType() == MessageDialogSelectedResult.No) {
+            set完了状態(div);
+            return ResponseData.of(div).setState(DBC0710021StateName.KanryoMessage);
+        }
         return ResponseData.of(div).respond();
+    }
+
+    private boolean is状態CheckTow(RString 画面モード) {
+        return 画面モード_登録.equals(画面モード) || 画面モード_事前申請.equals(画面モード);
+    }
+
+    private boolean is状態Check(RString 画面モード) {
+        return 画面モード_審査.equals(画面モード) || 画面モード_削除.equals(画面モード)
+                || 画面モード_取消.equals(画面モード);
+    }
+
+    private boolean isCheckTow(boolean 削除の確認, boolean 確認_汎用) {
+        return !削除の確認 && !確認_汎用;
+    }
+
+    private void set完了状態(JutakuKaishuShinseiJyohoTorokuDiv div) {
+        div.getJutakuShikyuShinseiKanryoPanel().getKanryoMessage().setMessage(new RString(
+                UrInformationMessages.保存終了.getMessage().evaluate()),
+                div.getJutakuKaishuShinseiHihokenshaPanel().getKaigoShikakuKihon().get被保険者番号(),
+                div.getJutakuKaishuShinseiHihokenshaPanel().getKaigoAtenaInfo().get氏名漢字(),
+                true);
     }
 
     /**

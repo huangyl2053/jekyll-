@@ -68,6 +68,15 @@ public enum JutakuKaishuShinseiJyohoTorokuSpec implements IPredicate<JutakuKaish
                 }
             },
     /**
+     * 証明書入力必須チェック
+     */
+    証明書が入力 {
+                @Override
+                public boolean apply(JutakuKaishuShinseiJyohoTorokuDiv div) {
+                    return SpecHelper.is証明書が入力(div);
+                }
+            },
+    /**
      * 住宅所有者入力必須チェック
      */
     提供着工年月が申請日の年月と一致しない {
@@ -93,6 +102,10 @@ public enum JutakuKaishuShinseiJyohoTorokuSpec implements IPredicate<JutakuKaish
 
         public static boolean is申請日が入力(JutakuKaishuShinseiJyohoTorokuDiv div) {
             return div.getJutakuKaishuShinseiContents().getShinseishaInfo().getTxtShinseiYMD().getValue() != null;
+        }
+
+        public static boolean is証明書が入力(JutakuKaishuShinseiJyohoTorokuDiv div) {
+            return !div.getCommHeadPanel().getDdlSyomeisyo().getSelectedKey().isEmpty();
         }
 
         public static boolean is申請取消事由が入力(JutakuKaishuShinseiJyohoTorokuDiv div) {
