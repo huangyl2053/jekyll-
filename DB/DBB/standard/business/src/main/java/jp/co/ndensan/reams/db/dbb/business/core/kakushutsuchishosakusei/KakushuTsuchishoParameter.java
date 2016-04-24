@@ -7,7 +7,8 @@ package jp.co.ndensan.reams.db.dbb.business.core.kakushutsuchishosakusei;
 
 import java.io.Serializable;
 import java.util.List;
-import jp.co.ndensan.reams.db.dbb.business.core.basic.Fuka;
+import jp.co.ndensan.reams.db.dbb.business.core.fukajoho.fukajoho.FukaJoho;
+import jp.co.ndensan.reams.db.dbx.business.core.kanri.Kitsuki;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
@@ -22,8 +23,8 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 public class KakushuTsuchishoParameter implements Serializable {
 
     private List<RString> 発行する帳票List;
-    private Fuka 賦課の情報_更正前;
-    private Fuka 賦課の情報_更正後;
+    private FukaJoho 賦課の情報_更正前;
+    private FukaJoho 賦課の情報_更正後;
     private FlexibleDate 決定通知書_発行日;
     private RString 決定通知書_文書番号;
     private FlexibleDate 変更通知書_発行日;
@@ -31,6 +32,7 @@ public class KakushuTsuchishoParameter implements Serializable {
     private TyouteiZiyu 調定事由List;
     private FlexibleDate 納入通知書_発行日;
     private RString 納入通知書_出力期;
+    private List<Kitsuki> 納入通知書出力期リスト;
     private RString 納入通知書_出力形式;
     private RString 郵振納付書_出力期;
     private FlexibleDate 特徴開始通知書_発行日;

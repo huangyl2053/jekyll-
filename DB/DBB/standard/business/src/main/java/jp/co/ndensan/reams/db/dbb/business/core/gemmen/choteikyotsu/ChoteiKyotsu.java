@@ -8,7 +8,7 @@ package jp.co.ndensan.reams.db.dbb.business.core.gemmen.choteikyotsu;
 import java.io.Serializable;
 import java.util.Objects;
 import static java.util.Objects.requireNonNull;
-import jp.co.ndensan.reams.ur.urc.entity.db.basic.shuno.chotei.UrT0705ChoteiKyotsuEntity;
+import jp.co.ndensan.reams.db.dbz.entity.db.basic.UrT0705ChoteiKyotsuEntity;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
@@ -208,7 +208,8 @@ public class ChoteiKyotsu extends ModelBase<ChoteiKyotsuIdentifier, UrT0705Chote
     }
 
     /**
-     * 調定共通（介護継承）のみを変更対象とします。<br/> {@link UrT0705ChoteiKyotsuEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば変更状態にします。
+     * 調定共通（介護継承）のみを変更対象とします。<br/>
+     * {@link UrT0705ChoteiKyotsuEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば変更状態にします。
      *
      * @return 変更対象処理実施後の{@link ChoteiKyotsu}
      */
@@ -222,7 +223,8 @@ public class ChoteiKyotsu extends ModelBase<ChoteiKyotsuIdentifier, UrT0705Chote
     }
 
     /**
-     * 保持する調定共通（介護継承）を削除対象とします。<br/> {@link UrT0705ChoteiKyotsuEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば削除状態にします。
+     * 保持する調定共通（介護継承）を削除対象とします。<br/>
+     * {@link UrT0705ChoteiKyotsuEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば削除状態にします。
      *
      * @return 削除対象処理実施後の{@link ChoteiKyotsu}
      */

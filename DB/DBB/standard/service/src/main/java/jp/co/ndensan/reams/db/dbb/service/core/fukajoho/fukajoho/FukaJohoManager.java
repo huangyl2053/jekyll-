@@ -4,7 +4,9 @@
  */
 package jp.co.ndensan.reams.db.dbb.service.core.fukajoho.fukajoho;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dbb.business.core.fukajoho.fukajoho.FukaJoho;
 import jp.co.ndensan.reams.db.dbb.business.core.fukajoho.kibetsu.Kibetsu;
@@ -81,6 +83,46 @@ public class FukaJohoManager {
         }
         relateEntity.initializeMd5ToEntities();
         return new FukaJoho(relateEntity);
+    }
+
+    /**
+     * 主キーに合致する賦課の情報を返します。
+     *
+     * @param parameter 賦課の情報検索条件
+     * @return FukaJoho nullが返る可能性があります。
+     */
+    @Transaction
+    public FukaJoho get前年度賦課の情報(Map<String, Object> parameter) {
+        IFukaJohoRelateMapper mapper = mapperProvider.create(IFukaJohoRelateMapper.class);
+
+        FukaJohoRelateEntity relateEntity = mapper.select前年度賦課の情報ByKey(parameter);
+        if (relateEntity == null) {
+            return null;
+        }
+        relateEntity.initializeMd5ToEntities();
+        return new FukaJoho(relateEntity);
+    }
+
+    /**
+     * 合致する賦課の情報を返します。
+     *
+     * @param parameter 賦課の情報検索条件
+     * @return FukaJoho nullが返る可能性があります。
+     */
+    @Transaction
+    public List<FukaJoho> get賦課の情報(Map<String, Object> parameter) {
+        IFukaJohoRelateMapper mapper = mapperProvider.create(IFukaJohoRelateMapper.class);
+
+        List<FukaJohoRelateEntity> relateEntityList = mapper.get賦課の情報(parameter);
+        if (relateEntityList == null) {
+            return null;
+        }
+        List<FukaJoho> fukajohoList = new ArrayList<>();
+        for (FukaJohoRelateEntity relateEntity : relateEntityList) {
+            relateEntity.initializeMd5ToEntities();
+            fukajohoList.add(new FukaJoho(relateEntity));
+        }
+        return fukajohoList;
     }
 
     /**

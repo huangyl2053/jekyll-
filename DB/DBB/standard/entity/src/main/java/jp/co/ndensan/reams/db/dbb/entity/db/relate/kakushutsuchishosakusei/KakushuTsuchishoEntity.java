@@ -6,6 +6,7 @@
 package jp.co.ndensan.reams.db.dbb.entity.db.relate.kakushutsuchishosakusei;
 
 import java.io.Serializable;
+import java.util.List;
 import jp.co.ndensan.reams.ca.cax.entity.db.relate.TotalShunyuRelateEntity;
 import jp.co.ndensan.reams.db.dbb.entity.db.basic.DbT2001ChoshuHohoEntity;
 import jp.co.ndensan.reams.db.dbb.entity.db.basic.DbT2002FukaEntity;
@@ -24,8 +25,8 @@ import jp.co.ndensan.reams.ua.uax.entity.db.basic.UaFt200FindShikibetsuTaishoEnt
 public class KakushuTsuchishoEntity implements Serializable {
 
     private DbT2002FukaEntity 介護賦課;
-    private DbT2003KibetsuEntity 介護期別;
-    private UrT0705ChoteiKyotsuEntity 調定共通介護継承;
+    private List<DbT2003KibetsuEntity> 介護期別;
+    private List<UrT0705ChoteiKyotsuEntity> 調定共通介護継承;
     private DbT2001ChoshuHohoEntity 介護徴収方法;
     private TotalShunyuRelateEntity 収入情報取得PSM;
     private UaFt200FindShikibetsuTaishoEntity 宛名;

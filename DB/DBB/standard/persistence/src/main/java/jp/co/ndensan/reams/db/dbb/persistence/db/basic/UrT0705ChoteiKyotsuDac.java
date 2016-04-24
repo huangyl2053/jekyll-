@@ -7,9 +7,9 @@ package jp.co.ndensan.reams.db.dbb.persistence.db.basic;
 import java.util.List;
 import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dbx.persistence.db.basic.ISaveable;
-import jp.co.ndensan.reams.ur.urc.entity.db.basic.shuno.chotei.UrT0705ChoteiKyotsu;
-import static jp.co.ndensan.reams.ur.urc.entity.db.basic.shuno.chotei.UrT0705ChoteiKyotsu.choteiId;
-import jp.co.ndensan.reams.ur.urc.entity.db.basic.shuno.chotei.UrT0705ChoteiKyotsuEntity;
+import jp.co.ndensan.reams.db.dbz.entity.db.basic.UrT0705ChoteiKyotsu;
+import static jp.co.ndensan.reams.db.dbz.entity.db.basic.UrT0705ChoteiKyotsu.choteiId;
+import jp.co.ndensan.reams.db.dbz.entity.db.basic.UrT0705ChoteiKyotsuEntity;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.core.mybatis.SqlSession;
 import jp.co.ndensan.reams.uz.uza.util.db.DbAccessorNormalType;
@@ -20,6 +20,8 @@ import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
 
 /**
  * 調定共通（介護継承）のデータアクセスクラスです。
+ *
+ * @reamsid_L DBB-9999-012 xicongwang
  */
 public class UrT0705ChoteiKyotsuDac implements ISaveable<UrT0705ChoteiKyotsuEntity> {
 
