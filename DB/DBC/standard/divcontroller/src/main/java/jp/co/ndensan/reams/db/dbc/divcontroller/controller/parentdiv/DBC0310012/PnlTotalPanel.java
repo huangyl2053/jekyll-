@@ -10,16 +10,18 @@ import jp.co.ndensan.reams.db.dbc.business.core.basic.JuryoininKeiyakuJigyosha;
 import jp.co.ndensan.reams.db.dbc.business.core.basic.ShokanJuryoininKeiyakusha;
 import jp.co.ndensan.reams.db.dbc.definition.core.keiyakuservice.KeiyakuServiceShurui;
 import jp.co.ndensan.reams.db.dbc.definition.core.shoninkubun.ShoninKubun;
-import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0300011.DBC0300011TransitionEventName;
 import static jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0300012.DBC0300012StateName.saved;
+import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0310011.DBC0310011TransitionEventName;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0310012.DBC0310012TransitionEventName;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0310012.PnlTotalPanelDiv;
 import jp.co.ndensan.reams.db.dbc.divcontroller.handler.parentdiv.DBC0310012.PnlTotalPanelHandler;
 import jp.co.ndensan.reams.db.dbc.divcontroller.handler.parentdiv.DBC0310012.PnlTotalPanelValidationHandler;
 import jp.co.ndensan.reams.db.dbc.divcontroller.viewbox.ViewStateKeys;
 import jp.co.ndensan.reams.db.dbc.divcontroller.viewbox.dbc0310011.PnlTotalSearchParameter;
+import jp.co.ndensan.reams.db.dbc.divcontroller.viewbox.dbc0310012.PnlTotalPanelParameter;
 import jp.co.ndensan.reams.db.dbc.service.core.shokanjuryoininkeiyakusha.ShokanJuryoininKeiyakushaFinder;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
+import jp.co.ndensan.reams.db.dbz.service.TaishoshaKey;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrInformationMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrQuestionMessages;
@@ -41,10 +43,10 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
  */
 public class PnlTotalPanel {
 
-    private static final RString 参照 = new RString("参照");
     private static final RString 削除 = new RString("削除");
     private static final RString 登録 = new RString("登録");
     private static final RString 修正 = new RString("修正");
+    private static final RString 事業者検索 = new RString("事業者検索");
     private static final Decimal 一割 = new Decimal(0.1);
     private static final Decimal 九割 = new Decimal(0.9);
     private static final Decimal 番号_0 = new Decimal(0);
@@ -73,9 +75,8 @@ public class PnlTotalPanel {
         RString 状態 = ViewStateHolder.get(ViewStateKeys.処理モード, RString.class);
         getHandler(div).createDropDownList();
         if (登録.equals(状態)) {
-            ShikibetsuCode 識別コード = ViewStateHolder.get(ViewStateKeys.識別コード, ShikibetsuCode.class);
-            div.getPnlCommon().getCcdAtena().onLoad(識別コード);
-            div.getPnlCommon().getCcdKaigoShikakuKihon().setDisabled(false);
+            div.getPnlCommon().getCcdAtena().setDisabled(true);
+            div.getPnlCommon().getCcdKaigoShikakuKihon().setDisabled(true);
             div.getPnlCommon().getPnlDetail().getRdoKettekubun().setDisabled(true);
             div.getPnlCommon().getPnlDetail().getRdoKettekubun().setSelectedKey(ShoninKubun.承認しない.getコード());
             div.getPnlCommon().getPnlDetail().getTxtFusyoninriyu().setDisabled(true);
@@ -89,6 +90,28 @@ public class PnlTotalPanel {
             div.getPnlCommon().getPnlDetail().getPnlFoot().getTxtShikyuumukubun().setDisabled(true);
             div.getPnlCommon().getPnlDetail().getPnlFoot().getTxtServiceYM().setDisabled(true);
             div.getPnlCommon().getPnlDetail().getPnlFoot().getTxtSyokanseriNo().setDisabled(true);
+            // TODO QA No.511(Redmine#80700)
+            TaishoshaKey 引継ぎデータ = ViewStateHolder.get(ViewStateKeys.資格対象者, TaishoshaKey.class);
+            ShikibetsuCode 識別コード = 引継ぎデータ.get識別コード();
+            if (識別コード != null || !識別コード.isEmpty()) {
+                div.getPnlCommon().getCcdAtena().onLoad(識別コード);
+            }
+            HihokenshaNo 被保険者番号 = 引継ぎデータ.get被保険者番号();
+            if (被保険者番号 != null || !被保険者番号.isEmpty()) {
+                div.getPnlCommon().getCcdKaigoShikakuKihon().onLoad(被保険者番号);
+            }
+            RString 画面モード = ViewStateHolder.get(ViewStateKeys.画面モード, RString.class);
+            if (事業者検索.equals(画面モード)) {
+                PnlTotalPanelParameter param = ViewStateHolder
+                        .get(ViewStateKeys.受領委任契約契約者詳細データ, PnlTotalPanelParameter.class);
+                getHandler(div).set登録データ(param);
+                JuryoininKeiyakuJigyosha data = ViewStateHolder
+                        .get(ViewStateKeys.受領委任契約事業者詳細データ, JuryoininKeiyakuJigyosha.class);
+                div.getPnlCommon().getPnlDetail().getTxtKeyakujigyosyaNo().setValue(data.get契約事業者番号());
+                div.getPnlCommon().getPnlDetail().getTxtKeyakujigyosyaName()
+                        .setValue(data.get契約事業者名称() == null || data.get契約事業者名称().isEmpty() ? null
+                                : data.get契約事業者名称().getColumnValue());
+            }
         } else {
             PnlTotalSearchParameter parameter = ViewStateHolder.
                     get(ViewStateKeys.契約者一覧情報, PnlTotalSearchParameter.class);
@@ -108,13 +131,6 @@ public class PnlTotalPanel {
             getHandler(div).set初期データ状態(状態, shokanData.get受付年月日());
             getHandler(div).set初期データ(shokanData, parameter);
         }
-        JuryoininKeiyakuJigyosha data = ViewStateHolder
-                .get(ViewStateKeys.受領委任契約事業者詳細データ, JuryoininKeiyakuJigyosha.class);
-        if (data != null) {
-            div.getPnlCommon().getPnlDetail().getTxtKeyakujigyosyaNo().setValue(data.get契約事業者番号());
-            div.getPnlCommon().getPnlDetail().getTxtKeyakujigyosyaName()
-                    .setValue(new RString(data.get契約事業者名称().toString()));
-        }
         return ResponseData.of(div).respond();
     }
 
@@ -125,7 +141,6 @@ public class PnlTotalPanel {
      * @return ResponseData<PnlTotalPanelDiv>
      */
     public ResponseData<PnlTotalPanelDiv> onBlur_txtKeyakujigyosyaNo(PnlTotalPanelDiv div) {
-        // TODO QA No.473(Redmine#:79880)
         RString 契約事業者番号 = ViewStateHolder.get(ViewStateKeys.契約事業者番号, RString.class);
         RString 契約事業者名 = ViewStateHolder.get(ViewStateKeys.契約事業者名, RString.class);
         if (契約事業者番号 != null) {
@@ -146,12 +161,14 @@ public class PnlTotalPanel {
      */
     public ResponseData<PnlTotalPanelDiv> onClick_txtKeyakujigyosyaNo(PnlTotalPanelDiv div) {
         RString 状態 = ViewStateHolder.get(ViewStateKeys.処理モード, RString.class);
-        if (参照.equals(状態)) {
-            return ResponseData.of(div).respond();
-        } else {
-            // TODO QA No.473(Redmine#:79880)
-            return ResponseData.of(div).forwardWithEventName(DBC0300011TransitionEventName.事業者選択).respond();
+        if (登録.equals(状態)) {
+            PnlTotalPanelParameter parameter = getHandler(div).createParameter();
+            ViewStateHolder.put(ViewStateKeys.受領委任契約契約者詳細データ, parameter);
+            ViewStateHolder.put(ViewStateKeys.画面モード, 事業者検索);
+            // TODO QA No.511(Redmine#80700)
+            return ResponseData.of(div).forwardWithEventName(DBC0310011TransitionEventName.事業者検索).respond();
         }
+        return ResponseData.of(div).respond();
     }
 
     /**
@@ -325,9 +342,11 @@ public class PnlTotalPanel {
                     .equals(ResponseHolder.getMessageCode())
                     && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
                 return ResponseData.of(div).forwardWithEventName(DBC0310012TransitionEventName.検索に戻る).respond();
+            } else {
+                return ResponseData.of(div).respond();
             }
         }
-        return ResponseData.of(div).respond();
+        return ResponseData.of(div).forwardWithEventName(DBC0310012TransitionEventName.検索に戻る).respond();
     }
 
     /**

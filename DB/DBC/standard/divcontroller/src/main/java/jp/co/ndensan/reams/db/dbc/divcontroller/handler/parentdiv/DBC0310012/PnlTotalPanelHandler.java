@@ -15,9 +15,9 @@ import jp.co.ndensan.reams.db.dbc.definition.core.shoninkubun.ShoninKubun;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0310012.PnlTotalPanelDiv;
 import jp.co.ndensan.reams.db.dbc.divcontroller.viewbox.ViewStateKeys;
 import jp.co.ndensan.reams.db.dbc.divcontroller.viewbox.dbc0310011.PnlTotalSearchParameter;
+import jp.co.ndensan.reams.db.dbc.divcontroller.viewbox.dbc0310012.PnlTotalPanelParameter;
 import jp.co.ndensan.reams.db.dbc.service.core.shokanjuryoininkeiyakusha.ShokanJuryoininKeiyakushaFinder;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
-import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.kaigoshikakukihon.KaigoShikakuKihon.KaigoShikakuKihonDiv;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -140,7 +140,7 @@ public class PnlTotalPanelHandler {
             div.getPnlCommon().getPnlDetail().getRdoKettekubun().setSelectedKey(ShoninKubun.承認しない.getコード());
         }
         div.getPnlCommon().getPnlDetail().getTxtFusyoninriyu().setValue(shokanData.get不承認理由());
-        if (!shokanData.get契約番号().isNullOrEmpty()) {
+        if (shokanData.get契約番号() != null && !shokanData.get契約番号().isEmpty()) {
             div.getPnlCommon().getPnlDetail().getPnlHidari()
                     .getDdlYear().setSelectedKey(shokanData.get契約番号().substring(0, 四));
             div.getPnlCommon().getPnlDetail().getPnlHidari()
@@ -196,6 +196,49 @@ public class PnlTotalPanelHandler {
     }
 
     /**
+     * 登録用パラメータの設定する
+     *
+     * @param param PnlTotalPanelParameter
+     */
+    public void set登録データ(PnlTotalPanelParameter param) {
+        if (param == null) {
+            return;
+        }
+        div.getPnlCommon().getPnlDetail().getTxtKeyakushinseuketukebi().setValue(param.get契約申請受付日());
+        div.getPnlCommon().getPnlDetail().getTxtKeyakushinseibi().setValue(param.get契約申請日());
+        div.getPnlCommon().getPnlDetail().getTxtKeyakujigyosyaNo().setValue(param.get契約事業者番号());
+        div.getPnlCommon().getPnlDetail().getTxtKeyakujigyosyaName().setValue(param.get契約事業者名称());
+        div.getPnlCommon().getPnlDetail().getDdlKeiyakuServiceType().setSelectedKey(param.get契約ｻｰﾋﾞｽ種類());
+        div.getPnlCommon().getPnlDetail().getTxtKeyakukettebi().setValue(param.get契約決定日());
+        if (param.get決定区分() != null && !param.get決定区分().isEmpty()) {
+            div.getPnlCommon().getPnlDetail().getRdoKettekubun().setSelectedKey(param.get決定区分());
+        }
+        div.getPnlCommon().getPnlDetail().getTxtFusyoninriyu().setValue(param.get承認しない理由());
+        div.getPnlCommon().getPnlDetail().getPnlHidari().getDdlYear().setSelectedKey(param.get年度());
+        div.getPnlCommon().getPnlDetail().getPnlHidari().getTxtBango1().setValue(param.get番号1());
+        div.getPnlCommon().getPnlDetail().getPnlHidari().getTxtBango2().setValue(param.get番号2());
+        div.getPnlCommon().getPnlDetail().getPnlHidari().getTxtSyoninkikan().setFromValue(param.get承認期間From());
+        div.getPnlCommon().getPnlDetail().getPnlHidari().getTxtSyoninkikan().setToValue(param.get承認期間To());
+        div.getPnlCommon().getPnlDetail().getPnlHidari().getTxtSyoninchutisyosakuseibi().setValue(param.get承認通知書作成日());
+        if (承認通知書再発行区分キー_1.equals(param.get承認結果通知書再発行区分())) {
+            List<RString> list = new ArrayList<>();
+            list.add(承認通知書再発行区分キー_1);
+            div.getPnlCommon().getPnlDetail().getPnlHidari().getChkSaihakoukubun().setSelectedItemsByKey(list);
+        } else if (承認通知書再発行区分キー_0.equals(param.get承認結果通知書再発行区分())) {
+            div.getPnlCommon().getPnlDetail().getPnlHidari().getChkSaihakoukubun()
+                    .setSelectedItemsByKey(new ArrayList<RString>());
+        }
+        div.getPnlCommon().getPnlDetail().getPnlFoot().getTxtShikyuumukubun().setValue(param.get支給申請有無区分());
+        div.getPnlCommon().getPnlDetail().getPnlFoot().getTxtServiceYM().setDomain(param.getサービス提供年月());
+        div.getPnlCommon().getPnlDetail().getPnlFoot().getTxtSyokanseriNo().setValue(param.get償還整理番号());
+        div.getPnlCommon().getPnlDetail().getPnlFoot().getTxtBikou().setValue(param.get備考());
+        div.getPnlCommon().getPnlDetail().getPnlKyufuhi().getTxtHiyogakugokei().setValue(param.get費用額合計());
+        div.getPnlCommon().getPnlDetail().getPnlKyufuhi().getTxtRiyosyajikofutangaku().setValue(param.get利用者自己負担額());
+        div.getPnlCommon().getPnlDetail().getPnlKyufuhi().getTxtHokentaisyohiyogaku().setValue(param.get保険対象費用額());
+        div.getPnlCommon().getPnlDetail().getPnlKyufuhi().getTxtHokenkyufuhiyogaku().setValue(param.get保険給付費用額());
+    }
+
+    /**
      * DropDownListを作成します。
      */
     public void createDropDownList() {
@@ -236,6 +279,42 @@ public class PnlTotalPanelHandler {
     }
 
     /**
+     * パラメータを作成する。
+     *
+     * @return PnlTotalPanelParameter パラメータ
+     */
+    public PnlTotalPanelParameter createParameter() {
+        PnlTotalPanelParameter parameter = new PnlTotalPanelParameter(
+                div.getPnlCommon().getCcdAtena().getShokaiData().getTxtShikibetsuCode().getDomain(),
+                div.getPnlCommon().getCcdKaigoShikakuKihon().get被保険者番号(),
+                div.getPnlCommon().getPnlDetail().getTxtKeyakushinseuketukebi().getValue(),
+                div.getPnlCommon().getPnlDetail().getTxtKeyakushinseibi().getValue(),
+                div.getPnlCommon().getPnlDetail().getTxtKeyakujigyosyaNo().getValue(),
+                div.getPnlCommon().getPnlDetail().getTxtKeyakujigyosyaName().getValue(),
+                div.getPnlCommon().getPnlDetail().getDdlKeiyakuServiceType().getSelectedKey(),
+                div.getPnlCommon().getPnlDetail().getTxtKeyakukettebi().getValue(),
+                div.getPnlCommon().getPnlDetail().getRdoKettekubun().getSelectedKey(),
+                div.getPnlCommon().getPnlDetail().getTxtFusyoninriyu().getValue(),
+                div.getPnlCommon().getPnlDetail().getPnlHidari().getDdlYear().getSelectedKey(),
+                div.getPnlCommon().getPnlDetail().getPnlHidari().getTxtBango1().getValue(),
+                div.getPnlCommon().getPnlDetail().getPnlHidari().getTxtBango2().getValue(),
+                div.getPnlCommon().getPnlDetail().getPnlHidari().getTxtSyoninkikan().getFromValue(),
+                div.getPnlCommon().getPnlDetail().getPnlHidari().getTxtSyoninkikan().getToValue(),
+                div.getPnlCommon().getPnlDetail().getPnlHidari().getTxtSyoninchutisyosakuseibi().getValue(),
+                div.getPnlCommon().getPnlDetail().getPnlHidari().getChkSaihakoukubun()
+                .isAllSelected() ? 承認通知書再発行区分キー_1 : 承認通知書再発行区分キー_0,
+                div.getPnlCommon().getPnlDetail().getPnlFoot().getTxtShikyuumukubun().getValue(),
+                div.getPnlCommon().getPnlDetail().getPnlFoot().getTxtServiceYM().getDomain(),
+                div.getPnlCommon().getPnlDetail().getPnlFoot().getTxtSyokanseriNo().getValue(),
+                div.getPnlCommon().getPnlDetail().getPnlFoot().getTxtBikou().getValue(),
+                div.getPnlCommon().getPnlDetail().getPnlKyufuhi().getTxtHiyogakugokei().getValue(),
+                div.getPnlCommon().getPnlDetail().getPnlKyufuhi().getTxtRiyosyajikofutangaku().getValue(),
+                div.getPnlCommon().getPnlDetail().getPnlKyufuhi().getTxtHokentaisyohiyogaku().getValue(),
+                div.getPnlCommon().getPnlDetail().getPnlKyufuhi().getTxtHokenkyufuhiyogaku().getValue());
+        return parameter;
+    }
+
+    /**
      * 保存処理メソッド
      *
      * @param 状態 状態
@@ -244,9 +323,8 @@ public class PnlTotalPanelHandler {
         ShokanJuryoininKeiyakushaFinder finder = ShokanJuryoininKeiyakushaFinder.createInstance();
         ShokanJuryoininKeiyakusha shokan;
         if (登録.equals(状態)) {
-            KaigoShikakuKihonDiv kaigoDiv = (KaigoShikakuKihonDiv) div.getPnlCommon().getCcdKaigoShikakuKihon();
             shokan = new ShokanJuryoininKeiyakusha(
-                    new HihokenshaNo(kaigoDiv.getTxtHihokenshaNo().getValue()),
+                    new HihokenshaNo(div.getPnlCommon().getCcdKaigoShikakuKihon().get被保険者番号()),
                     new FlexibleDate(div.getPnlCommon().getPnlDetail().getTxtKeyakushinseibi().getValue().toDateString()),
                     div.getPnlCommon().getPnlDetail().getTxtKeyakujigyosyaNo().getValue(),
                     div.getPnlCommon().getPnlDetail().getDdlKeiyakuServiceType().getSelectedKey());
