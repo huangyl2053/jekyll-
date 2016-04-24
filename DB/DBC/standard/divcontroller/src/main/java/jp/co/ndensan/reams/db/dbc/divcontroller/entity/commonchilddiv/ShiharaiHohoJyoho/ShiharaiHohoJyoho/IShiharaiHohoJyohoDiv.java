@@ -22,6 +22,13 @@ public interface IShiharaiHohoJyohoDiv extends ICommonChildDivBaseProperties {
     public RString getShiharaiHoho();
 
     /**
+     * 支払方法を取得します。
+     *
+     * @return RString
+     */
+    public RString getShiharaiHohoRad();
+
+    /**
      * 支払場所を取得します。
      *
      * @return RString
