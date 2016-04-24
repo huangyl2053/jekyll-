@@ -5,6 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbc.divcontroller.controller.parentdiv.DBC0710021;
 
+import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbc.business.core.jutakukaishujizenshinsei.YokaigoNinteiJyoho;
 import jp.co.ndensan.reams.db.dbc.definition.message.DbcErrorMessages;
@@ -27,6 +28,7 @@ import jp.co.ndensan.reams.db.dbc.service.jutakukaishujizenshinsei.JutakuKaishuJ
 import jp.co.ndensan.reams.db.dbd.definition.enumeratedtype.core.IsKyuSoti;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBC;
 import jp.co.ndensan.reams.db.dbx.definition.core.enumeratedtype.ShisetsuType;
+import jp.co.ndensan.reams.db.dbx.definition.core.enumeratedtype.YoKaigoJotaiKubun;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HokenKyufuRitsu;
 import jp.co.ndensan.reams.db.dbx.service.core.dbbusinessconfig.DbBusinessConifg;
@@ -181,7 +183,7 @@ public class JutakuKaishuShinseiJyohoToroku {
                 ResponseHolder.getMessageCode());
         boolean 削除の確認 = new RString(UrQuestionMessages.削除の確認.getMessage().getCode()).equals(
                 ResponseHolder.getMessageCode());
-        boolean 保存の確認 = new RString(UrQuestionMessages.削除の確認.getMessage().getCode()).equals(
+        boolean 保存の確認 = new RString(UrQuestionMessages.保存の確認.getMessage().getCode()).equals(
                 ResponseHolder.getMessageCode());
         boolean 確認_汎用 = new RString(UrQuestionMessages.確認_汎用.getMessage().getCode()).equals(
                 ResponseHolder.getMessageCode());
@@ -501,44 +503,44 @@ public class JutakuKaishuShinseiJyohoToroku {
             YokaigoNinteiJyoho 要介護認定情報 = 住宅改修費事前申請.getYokaigoNinteiJyoho(
                     被保険者番号, サービス提供年月);
             if (要介護認定情報 == null) {
-//                throw new ApplicationException(DbcErrorMessages.受給認定有効期間外で入力不可.getMessage());
-            }
-            if (非該当.equals(要介護認定情報.get要介護認定状態区分コード())) {
-                要介護認定情報.set旧措置者フラグ(IsKyuSoti.旧措置適用.is適用());
-            } else if (要支援_経過的要介護.equals(要介護認定情報.get要介護認定状態区分コード())
-                    || 要支援1.equals(要介護認定情報.get要介護認定状態区分コード())
-                    || 要支援2.equals(要介護認定情報.get要介護認定状態区分コード())
-                    || 要介護1.equals(要介護認定情報.get要介護認定状態区分コード())
-                    || 要介護2.equals(要介護認定情報.get要介護認定状態区分コード())
-                    || 要介護3.equals(要介護認定情報.get要介護認定状態区分コード())
-                    || 要介護4.equals(要介護認定情報.get要介護認定状態区分コード())
-                    || 要介護5.equals(要介護認定情報.get要介護認定状態区分コード())) {
-                boolean 受給認定 = true;
-            } else {
                 throw new ApplicationException(DbcErrorMessages.実行不可.getMessage().replace(
                         エラー_RPLC_MSG_1.toString(), エラー_RPLC_MSG_2.toString()));
             }
-
+            List<RString> 要介護認定状態区分コードリスト = new ArrayList<>();
+            Code 要介護認定状態区分コード = 要介護認定情報.get要介護認定状態区分コード();
+            要介護認定状態区分コードリスト.add(YoKaigoJotaiKubun.非該当.getCode());
+            要介護認定状態区分コードリスト.add(YoKaigoJotaiKubun.要支援_経過的要介護.getCode());
+            要介護認定状態区分コードリスト.add(YoKaigoJotaiKubun.要支援1.getCode());
+            要介護認定状態区分コードリスト.add(YoKaigoJotaiKubun.要支援2.getCode());
+            要介護認定状態区分コードリスト.add(YoKaigoJotaiKubun.要介護1.getCode());
+            要介護認定状態区分コードリスト.add(YoKaigoJotaiKubun.要介護2.getCode());
+            要介護認定状態区分コードリスト.add(YoKaigoJotaiKubun.要介護3.getCode());
+            要介護認定状態区分コードリスト.add(YoKaigoJotaiKubun.要介護4.getCode());
+            要介護認定状態区分コードリスト.add(YoKaigoJotaiKubun.要介護5.getCode());
+            if (!要介護認定状態区分コードリスト.contains(要介護認定状態区分コード.getKey())) {
+                throw new ApplicationException(DbcErrorMessages.実行不可.getMessage().replace(
+                        エラー_RPLC_MSG_1.toString(), エラー_RPLC_MSG_2.toString()));
+            }
+            if (YoKaigoJotaiKubun.非該当.getCode().equals(要介護認定状態区分コード.getKey())) {
+                要介護認定情報.set旧措置者フラグ(IsKyuSoti.旧措置適用.is適用());
+            }
             if (領収日.getYearMonth().equals(画面提供着工年月.getYearMonth())) {
                 return ResponseData.of(div).respond();
-            } else {
-                // TODO
-                if (!ResponseHolder.isReRequest()) {
-                    QuestionMessage message = new QuestionMessage(
-                            DbcQuestionMessages.領収日不一致_提供年月変更確認.getMessage().getCode(),
-                            DbcQuestionMessages.領収日不一致_提供年月変更確認.getMessage().replace(
-                                    領収日.getYearMonth().toString()).evaluate());
-                    return ResponseData.of(div).addMessage(message).respond();
-                }
-                if (new RString(DbcQuestionMessages.領収日不一致_提供年月変更確認.getMessage().getCode()).equals(
-                        ResponseHolder.getMessageCode())
-                        && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
-                    div.getCommHeadPanel().getTxtTeikyoYM().setValue(領収日);
-                } else if (new RString(DbcQuestionMessages.領収日不一致_提供年月変更確認.getMessage().getCode()).equals(
-                        ResponseHolder.getMessageCode())
-                        && ResponseHolder.getButtonType() == MessageDialogSelectedResult.No) {
-                    return ResponseData.of(div).respond();
-                }
+            } else if (!ResponseHolder.isReRequest()) {
+                QuestionMessage message = new QuestionMessage(
+                        DbcQuestionMessages.領収日不一致_提供年月変更確認.getMessage().getCode(),
+                        DbcQuestionMessages.領収日不一致_提供年月変更確認.getMessage().replace(
+                                領収日.getYearMonth().toString()).evaluate());
+                return ResponseData.of(div).addMessage(message).respond();
+            }
+            if (new RString(DbcQuestionMessages.領収日不一致_提供年月変更確認.getMessage().getCode()).equals(
+                    ResponseHolder.getMessageCode())
+                    && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
+                div.getCommHeadPanel().getTxtTeikyoYM().setValue(領収日);
+            } else if (new RString(DbcQuestionMessages.領収日不一致_提供年月変更確認.getMessage().getCode()).equals(
+                    ResponseHolder.getMessageCode())
+                    && ResponseHolder.getButtonType() == MessageDialogSelectedResult.No) {
+                return ResponseData.of(div).respond();
             }
             HokenKyufuRitsu 給付率 = 住宅改修費事前申請.getKyufuritsu(被保険者番号,
                     new FlexibleYearMonth(領収日.getYearMonth().toString()));
