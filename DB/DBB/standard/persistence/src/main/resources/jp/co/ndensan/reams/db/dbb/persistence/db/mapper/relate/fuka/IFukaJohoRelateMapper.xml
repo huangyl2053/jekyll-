@@ -10,7 +10,7 @@
         <include refid="selectFukaJohoRelateEntity" />
     </select>
 
-    <select id="select賦課の情報リストBy主キー1" resultMap="resultMap_FukaJohoRelateEntity" fetchSize="500">
+    <select id="select賦課の情報リストBy主キー1" resultMap="resultMap_FukaInfo" fetchSize="500">
         <include refid="selectFukaJohoRelateEntity" />
     </select>
 
