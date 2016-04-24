@@ -57,12 +57,10 @@ import jp.co.ndensan.reams.db.dbb.definition.core.tsuchisho.notsu.KigotoTsuchish
 import jp.co.ndensan.reams.db.dbb.definition.core.tsuchisho.notsu.SonotaTsuchishoType;
 import jp.co.ndensan.reams.db.dbb.definition.mybatisprm.kakushutsuchishosakusei.KakushuTsuchishoEntityParameter;
 import jp.co.ndensan.reams.db.dbb.definition.reportid.ReportIdDBB;
-import jp.co.ndensan.reams.db.dbb.entity.db.basic.DbT2003KibetsuEntity;
 import jp.co.ndensan.reams.db.dbb.entity.db.basic.DbT2004GemmenEntity;
 import jp.co.ndensan.reams.db.dbb.entity.db.basic.DbT2006ChoshuYuyoEntity;
 import jp.co.ndensan.reams.db.dbb.entity.db.basic.DbT2018RealHakkoRirekiEntity;
 import jp.co.ndensan.reams.db.dbb.entity.db.relate.fukajoho.fukajoho.FukaJohoRelateEntity;
-import jp.co.ndensan.reams.db.dbb.entity.db.relate.fukajoho.kibetsu.KibetsuEntity;
 import jp.co.ndensan.reams.db.dbb.entity.db.relate.kakushutsuchishosakusei.KakushuTsuchishoEntity;
 import jp.co.ndensan.reams.db.dbb.entity.db.relate.kakushutsuchishosakusei.KakushuTsuchishoFindEntity;
 import jp.co.ndensan.reams.db.dbb.entity.db.report.karisanteinonyutsuchishocvskakuko.KarisanteiNonyuTsuchishoCVSKakukoSource;
@@ -100,7 +98,6 @@ import jp.co.ndensan.reams.db.dbz.business.core.basic.ChohyoSeigyoKyotsu;
 import jp.co.ndensan.reams.db.dbz.business.report.parts.kaigotoiawasesaki.IKaigoToiawasesakiSourceBuilder;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7065ChohyoSeigyoKyotsuEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7067ChohyoSeigyoHanyoEntity;
-import jp.co.ndensan.reams.db.dbz.entity.db.basic.UrT0705ChoteiKyotsuEntity;
 import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT7065ChohyoSeigyoKyotsuDac;
 import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT7067ChohyoSeigyoHanyoDac;
 import jp.co.ndensan.reams.db.dbz.service.report.parts.kaigotoiawasesaki.KaigoToiawasesakiSourceBuilderCreator;
@@ -1628,25 +1625,9 @@ public class KakushuTsuchishoSakusei extends KakushuTsuchishoSakuseiFath {
             return null;
         }
         FukaAtena fukaAtena = new FukaAtena();
-        List<KibetsuEntity> 介護期別RelateEntity = new ArrayList<>();
-        List<DbT2003KibetsuEntity> 介護期別List = 更正前後entity.get介護期別();
-        List<UrT0705ChoteiKyotsuEntity> 調定共通介護継承List = 更正前後entity.get調定共通介護継承();
-        for (DbT2003KibetsuEntity 介護期別 : 介護期別List) {
-            KibetsuEntity kibetsuEntity = new KibetsuEntity();
-            kibetsuEntity.set介護期別Entity(介護期別);
-            List<UrT0705ChoteiKyotsuEntity> 調定共通Entity = new ArrayList<>();
-            for (UrT0705ChoteiKyotsuEntity 調定共通介護継承 : 調定共通介護継承List) {
-                if (介護期別.getChoteiId().longValue() == 調定共通介護継承.getChoteiId()) {
-                    調定共通Entity.add(調定共通介護継承);
-                    break;
-                }
-            }
-            kibetsuEntity.set調定共通Entity(調定共通Entity);
-            介護期別RelateEntity.add(kibetsuEntity);
-        }
         FukaJohoRelateEntity entity = new FukaJohoRelateEntity();
         entity.set介護賦課Entity(更正前後entity.get介護賦課());
-        entity.set介護期別RelateEntity(介護期別RelateEntity);
+        entity.set介護期別RelateEntity(更正前後entity.get介護期別RelateEntity());
         FukaJoho fukaJoho = new FukaJoho(entity);
         fukaAtena.set賦課情報(fukaJoho);
         fukaAtena.set宛名(ShikibetsuTaishoFactory.createKojin(更正前後entity.get宛名()));

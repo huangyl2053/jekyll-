@@ -59,12 +59,16 @@
         <id property="介護賦課Entity.tsuchishoNo" column="dbT2002Fuka_tsuchishoNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.TsuchishoNoTypeHandler"/>
         <id property="介護賦課Entity.rirekiNo" column="dbT2002Fuka_rirekiNo" />
         <association property="介護賦課Entity" resultMap="jp.co.ndensan.reams.db.dbb.persistence.db.mapper.basic.IDbT2002FukaMapper.ResultMap_DbT2002FukaEntity"/>
-        <association property="介護期別RelateEntity" 
-                    resultMap="jp.co.ndensan.reams.db.dbb.persistence.db.mapper.basic.IDbT2003KibetsuMapper.ResultMap_DbT2003KibetsuEntity"/>
         <collection property="介護期別RelateEntity" 
-                    ofType="jp.co.ndensan.reams.db.dbz.entity.db.basic.UrT0705ChoteiKyotsuEntity"
-                    resultMap="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IUrT0705ChoteiKyotsuMapper.ResultMap_UrT0705ChoteiKyotsuEntity"/>
+                    resultMap="resultMap_KibetsuEntity"/>
     </resultMap>
+    
+     <resultMap id="resultMap_KibetsuEntity" type="jp.co.ndensan.reams.db.dbb.entity.db.relate.fukajoho.kibetsu.KibetsuEntity" autoMapping="true">
+        <result property="介護期別Entity.choteiId" column="dbT2003Kibetsu_choteiId"/>
+        <association property="介護期別Entity" resultMap="jp.co.ndensan.reams.db.dbb.persistence.db.mapper.basic.IDbT2003KibetsuMapper.ResultMap_DbT2003KibetsuEntity"/>
+        <collection property="調定共通Entity" resultMap="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IUrT0705ChoteiKyotsuMapper.ResultMap_UrT0705ChoteiKyotsuEntity"/>
+    </resultMap>
+    
     <select id="select前年度賦課の情報ByKey" resultMap="resultMap_FukaInfo"
             parameterType="java.util.Map" fetchSize="500">
         SELECT
