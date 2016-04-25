@@ -9,7 +9,7 @@ import jp.co.ndensan.reams.db.dba.divcontroller.entity.parentdiv.DBA2050011.DBA2
 import jp.co.ndensan.reams.db.dba.divcontroller.entity.parentdiv.DBA2050011.DBA2050011TransitionEventName;
 import jp.co.ndensan.reams.db.dba.divcontroller.entity.parentdiv.DBA2050011.TekiyoJogaiTotalDiv;
 import jp.co.ndensan.reams.db.dba.divcontroller.handler.parentdiv.DBA2050011.TekiyoJogaiTotalHandler;
-import jp.co.ndensan.reams.db.dbz.divcontroller.viewbox.ViewStateKeys;
+import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
 import jp.co.ndensan.reams.db.dbz.service.TaishoshaKey;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrInformationMessages;
