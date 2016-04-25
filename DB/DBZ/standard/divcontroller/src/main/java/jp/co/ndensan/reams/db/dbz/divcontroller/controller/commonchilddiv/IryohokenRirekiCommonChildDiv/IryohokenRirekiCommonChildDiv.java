@@ -19,18 +19,14 @@ import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.IryohokenR
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.IryohokenRirekiCommonChildDiv.dgIryohokenIchiran_Row;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.IryohokenRirekiCommonChildDiv.pnlIryohokenJohoDiv;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
-import jp.co.ndensan.reams.uz.uza.biz.CodeShubetsu;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.ApplicationException;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
-import jp.co.ndensan.reams.uz.uza.ui.binding.KeyValueDataSource;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
-import jp.co.ndensan.reams.uz.uza.util.code.CodeMaster;
-import jp.co.ndensan.reams.uz.uza.util.code.entity.UzT0007CodeEntity;
 
 /**
  * 共有子Div「医療保険履歴」のイベントを定義した共有子Divです。
@@ -54,17 +50,9 @@ public class IryohokenRirekiCommonChildDiv {
      */
     public ResponseData<IryohokenRirekiCommonChildDivDiv> onLoad(IryohokenRirekiCommonChildDivDiv requestDiv) {
         ResponseData<IryohokenRirekiCommonChildDivDiv> responseData = new ResponseData<>();
-
-        List<UzT0007CodeEntity> entityList = CodeMaster.getCode(new CodeShubetsu(new RString("0001")));
-        List<KeyValueDataSource> keyvalueList = new ArrayList<>();
-
-        for (UzT0007CodeEntity codeEntity : entityList) {
-            keyvalueList.add(new KeyValueDataSource(codeEntity.getコード().getKey(), codeEntity.getコード名称()));
-        }
         医療保険情報_識別コード = ViewStateHolder.get(ViewStateKeys.医療保険情報_識別コード, RString.class);
         RString mode = ViewStateHolder.get(ViewStateKeys.医療保険情報_モード, RString.class);
         if (!RString.isNullOrEmpty(医療保険情報_識別コード) && !RString.isNullOrEmpty(mode)) {
-            requestDiv.getPnlIryohokenJoho().getDdlSyubetsu().setDataSource(keyvalueList);
             createHandlerOf(requestDiv).initialize(mode, 医療保険情報_識別コード);
         }
         responseData.data = requestDiv;

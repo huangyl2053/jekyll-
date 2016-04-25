@@ -23,6 +23,7 @@ import jp.co.ndensan.reams.uz.uza.util.Models;
 
 /**
  * 老齢福祉年金受給情報共有子Div処理のクラスです。
+ *
  * @reamsid_L DBA-0220-010 dongyabin
  */
 public class RoreiFukushiNenkinShokai {
@@ -61,7 +62,7 @@ public class RoreiFukushiNenkinShokai {
      * @param div 老齢福祉年金情報Div
      * @return ResponseData<RoreiFukushiNenkinShokaiDiv> 老齢福祉年金情報Div
      */
-    public ResponseData<RoreiFukushiNenkinShokaiDiv> onClick_btnDelete(RoreiFukushiNenkinShokaiDiv div) {
+    public ResponseData<RoreiFukushiNenkinShokaiDiv> onClick_DeleteButton(RoreiFukushiNenkinShokaiDiv div) {
         div.getPanelInput().setState(状態_削除);
         getHandler(div).set老齢福祉年金削除ボタン画面表示();
         return ResponseData.of(div).respond();
@@ -94,7 +95,7 @@ public class RoreiFukushiNenkinShokai {
                     && div.getPanelInput().getTxtEndDate().getValue() != null
                     && !div.getPanelInput().getTxtStartDate().getValue().isBeforeOrEquals(div.getPanelInput().getTxtEndDate().getValue())) {
                 ValidationMessageControlPairs validPairs = new ValidationMessageControlPairs();
-                return ResponseData.of(div).addValidationMessages(getHandler(div).addMessage(validPairs, 
+                return ResponseData.of(div).addValidationMessages(getHandler(div).addMessage(validPairs,
                         div.getPanelInput().getTxtStartDate().getValue().toString(),
                         div.getPanelInput().getTxtEndDate().getValue().toString())).
                         respond();

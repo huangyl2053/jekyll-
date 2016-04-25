@@ -8,6 +8,7 @@ package jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.RoreiFuku
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import java.util.HashSet;
+import java.util.Iterator;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbz.business.core.hihokensha.roreifukushinenkinjukyusha.RoreiFukushiNenkinJukyusha;
@@ -35,7 +36,7 @@ import jp.co.ndensan.reams.uz.uza.util.Models;
  */
 public class RoreiFukushiNenkinShokaiDiv extends Panel implements IRoreiFukushiNenkinShokaiDiv {
 
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-01-15_09-59-03">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -299,10 +300,9 @@ public class RoreiFukushiNenkinShokaiDiv extends Panel implements IRoreiFukushiN
     public void click_Save() {
         Models<RoreiFukushiNenkinJukyushaIdentifier, RoreiFukushiNenkinJukyusha> roreiFukushiNenkinJukyusha
                 = ViewStateHolder.get(ViewStateKeys.老齢福祉年金情報_老齢福祉年金情報検索結果一覧, Models.class);
-        for (datagridRireki_Row row : this.getDatagridRireki().getDataSource()) {
-            RoreiFukushiNenkinJukyushaIdentifier id = new RoreiFukushiNenkinJukyushaIdentifier(new ShikibetsuCode(this.getShikibetsuCode()),
-                    new FlexibleDate(row.getStartDate().getValue().toString()));
-            getService().save老齢福祉年金受給者(roreiFukushiNenkinJukyusha.get(id));
+        Iterator<RoreiFukushiNenkinJukyusha> iterater = roreiFukushiNenkinJukyusha.iterator();
+        while (iterater.hasNext()) {
+            getService().save老齢福祉年金受給者(iterater.next());
         }
     }
 

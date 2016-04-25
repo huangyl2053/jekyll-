@@ -16,14 +16,17 @@ import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.CodeShubetsu;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
+import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
+import jp.co.ndensan.reams.uz.uza.ui.binding.KeyValueDataSource;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 import jp.co.ndensan.reams.uz.uza.util.Models;
 import jp.co.ndensan.reams.uz.uza.util.code.CodeMaster;
+import jp.co.ndensan.reams.uz.uza.util.code.entity.UzT0007CodeEntity;
 import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 import jp.co.ndensan.reams.uz.uza.util.db.SearchResult;
 
@@ -61,6 +64,13 @@ public class IryohokenRirekiHandler {
      * @param 識別コード 識別コード
      */
     public void initialize(RString 状態, RString 識別コード) {
+        List<UzT0007CodeEntity> entityList = CodeMaster.getCode(SubGyomuCode.DBA介護資格, new CodeShubetsu(new RString("0001")));
+        List<KeyValueDataSource> keyvalueList = new ArrayList<>();
+        for (UzT0007CodeEntity codeEntity : entityList) {
+            keyvalueList.add(new KeyValueDataSource(codeEntity.getコード().getKey(), codeEntity.getコード名称()));
+        }
+        div.getPnlIryohokenJoho().getDdlSyubetsu().setDataSource(keyvalueList);
+
         SearchResult<IryohokenKanyuJokyo> iryohokenkanyuList = IryohokenKanyuJokyoManager.createInstance().getIryoHokenJohoList(new ShikibetsuCode(識別コード));
         Models<IryohokenKanyuJokyoIdentifier, IryohokenKanyuJokyo> 医療保険情報 = Models.create(iryohokenkanyuList.records());
         ViewStateHolder.put(ViewStateKeys.医療保険情報, 医療保険情報);

@@ -16,8 +16,8 @@ module DBZ {
                 return "onChange_btnUpdate";
             }
 
-            public static onClick_btnDelete(): string {
-                return "onClick_btnDelete";
+            public static onClick_DeleteButton(): string {
+                return "onClick_DeleteButton";
             }
 
             public static onClick_btnSave(): string {

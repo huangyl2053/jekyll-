@@ -12,8 +12,8 @@ var DBZ;
                 return "onChange_btnUpdate";
             };
 
-            Events.onClick_btnDelete = function () {
-                return "onClick_btnDelete";
+            Events.onClick_DeleteButton = function () {
+                return "onClick_DeleteButton";
             };
 
             Events.onClick_btnSave = function () {
